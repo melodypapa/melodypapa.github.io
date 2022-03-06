@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "今日更新 - AUTOSAR CAN 收发器驱动模块"
+title:  "今日更新 - CAN收发器驱动模块"
 date:   2022-03-06 19:10:00 +0800
 categories: jekyll update
 ---
