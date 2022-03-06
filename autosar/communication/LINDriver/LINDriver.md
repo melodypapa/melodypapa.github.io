@@ -368,6 +368,10 @@ Std_ReturnType Lin_WakeupInternal( uint8 Channel )
 Lin_StatusType Lin_GetStatus( uint8 Channel, uint8** Lin_SduPtr )
 ```
 
-# 微信扫一扫，获取更多及时资讯
+<section id="wechat">
 
-![](wechat.png)
+<h4>微信扫一扫，获取更多及时资讯</h4>
+
+<img src="wechat.png" alt="微信扫一扫"/>
+
+</section>

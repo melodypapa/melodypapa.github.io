@@ -360,3 +360,10 @@ void Eth_GetVersionInfo( Std_VersionInfoType* VersionInfoPtr )
 ```
 
 
+<section id="wechat">
+
+<h4>微信扫一扫，获取更多及时资讯</h4>
+
+<img src="wechat.png" alt="微信扫一扫"/>
+
+</section>
