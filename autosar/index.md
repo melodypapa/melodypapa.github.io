@@ -11,7 +11,6 @@ permalink: /autosar/
 
 ## Communication
 
-* [Full CAN vs. Basic CAN](communication/CANDriver/full_can_vs_basic_can.md)
 * [AUTOSAR Mirror (Bus Mirror)](communication/mirror/mirror.md)
 * [AUTOSAR SecOC (Secure Onboard Communication)](communication/SecOC/SecOC.md)
 * [ATUOSAR E2E Transformer](communication/E2ETransformer/E2ETransformer.md)
