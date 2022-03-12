@@ -56,7 +56,7 @@ AUTOSAR提供了基本软件模块的通用规范，对总线镜像模块来说�
 
 下图显示了如何将总线镜像集成到AUTOSAR BSW通信堆栈中：
 
-![AUTOSAR BSW architecture showing the Bus Mirroring module](https://melodypapa.github.io/automotive/AUTOSAR/communication/mirror/2022-01-23-20-02-54.png)
+![AUTOSAR BSW architecture showing the Bus Mirroring module](2022-01-23-20-02-54.png)
 
 **总线镜像模块支持以下镜像场景:**
 * CAN和LIN总线 => CAN总线 
@@ -234,7 +234,7 @@ FlexRay滤波器（**FlexRay filter**）动态添加，可以调用**Mirror_AddF
 ## 5.4. 镜像协议 (Mirroring Protocol)
 总线镜像模块中，镜像协议（Mirroring Protocol）应用于IP、FlexRay和CDD连接的专有网络作为目的总线中。如图所示，在本例中，该协议用于以太网目的总线。
 
-​![Bus Mirroring Serialization Protocol](https://melodypapa.github.io/automotive/AUTOSAR/communication/mirror/2022-01-23-20-19-12.png)
+​![Bus Mirroring Serialization Protocol](2022-01-23-20-19-12.png)
 
 协议由一个协议头（Header）和几个数据项组成。
 
@@ -244,7 +244,7 @@ FlexRay滤波器（**FlexRay filter**）动态添加，可以调用**Mirror_AddF
 
 每个目的帧都有一个协议头，如图所示。
 
-![Bus Mirroring Protocol Header](https://melodypapa.github.io/automotive/AUTOSAR/communication/mirror/2022-01-23-20-20-15.png)
+![Bus Mirroring Protocol Header](2022-01-23-20-20-15.png)
 
 总线镜像目标帧的协议头应按此顺序包含以下字段:
 1. ProtocolVersion
@@ -274,7 +274,7 @@ HeaderTimestamp应该反映数据项收集到目的帧开始的时间。这个�
 
 HeaderTimestamp字段的宽度应为10字节，布局如图所示。HeaderTimestamp字段的元素应按网络字节顺序（MSB优先）进行编码。
 
-​![Layout of HeaderTimestamp](https://melodypapa.github.io/automotive/AUTOSAR/communication/mirror/2022-01-23-20-21-36.png)
+​![Layout of HeaderTimestamp](2022-01-23-20-21-36.png)
 
 #### 5.4.1.4. 数据长度（DataLength）
 
@@ -286,7 +286,7 @@ DataLength字段的宽度应为16位。它应该以网络字节顺序（MSB优�
 
 每个源帧被放置在一个数据项中，如图7所示。
 
-![Bus Mirroring Protocol Data Item](https://melodypapa.github.io/automotive/AUTOSAR/communication/mirror/2022-01-27-16-28-46.png)
+![Bus Mirroring Protocol Data Item](2022-01-27-16-28-46.png)
 
 总线镜像目的帧的数据项应按此顺序包含以下字段：
 
@@ -357,7 +357,7 @@ DataLength字段的宽度应为16位。它应该以网络字节顺序（MSB优�
 
 CAN总线的网络状态（**NetworkStateCAN**）布局如表所示。
 
-![Layout of CAN NetworkState](https://melodypapa.github.io/automotive/AUTOSAR/communication/mirror/2022-01-27-16-58-55.png)
+![Layout of CAN NetworkState](2022-01-27-16-58-55.png)
 
 NetworkStateCAN的第5位应该包含错误被动状态（**Error-Passive state**）。这是一种连续状态，与在同一数据项中报告的源帧无关。也可能在**FrameIDAvailable**和**PayloadAvailable**字段设置为0的数据项中报告。
 当CAN控制器处于错误被动状态（**Error-Passive state**）时，应将无错误状态设置为1。当它处于错误主动（**Error-Active**）或**Bus-Off**状态时，值为0。
@@ -370,7 +370,7 @@ NetworkStateCAN的第0位到底3位，应该包含可以控制器的发送（**T
 
 LIN总线的网络状态（**NetworkStateLIN**）布局如表所示。
 
-![Layout of LIN NetworkState](https://melodypapa.github.io/automotive/AUTOSAR/communication/mirror/2022-01-27-17-08-22.png)
+![Layout of LIN NetworkState](2022-01-27-17-08-22.png)
 
 **NetworkStateLIN**的第5位和第4位目前被保留。它们总是被设为0。
 
@@ -386,7 +386,7 @@ LIN总线的网络状态（**NetworkStateLIN**）布局如表所示。
 
 FlexRay总线的网络状态（**NetworkStateFlexRay**）布局如表所示。
 
-![Layout of FlexRay NetworkState](https://melodypapa.github.io/automotive/AUTOSAR/communication/mirror/2022-01-27-17-18-50.png)
+![Layout of FlexRay NetworkState](2022-01-27-17-18-50.png)
 
 **NetworkStateFlexRay**的第5位应该包含总线同步状态（**Bus Synchronous state**）。这是一种连续状态，与在同一数据项中报告的源帧无关，也可能在**FrameIDAvailable**和**PayloadAvailable**字段设置为0的数据项中报告。当所有连接到总线上的FlexRay控制器都与网络时间同步时，总线同步状态应设置为1。否则设置为0。
 
@@ -410,7 +410,7 @@ FlexRay总线的网络状态（**NetworkStateFlexRay**）布局如表所示。
 
 CAN总线的FrameID布局如表7.6.
 
-![Layout of CAN FrameID](https://melodypapa.github.io/automotive/AUTOSAR/communication/mirror/2022-01-27-20-11-10.png)
+![Layout of CAN FrameID](2022-01-27-20-11-10.png)
 
 **FrameIDCAN**的布局对应于**Mirror_ReportCanFrame**提供的Can_IdType。**FrameIDCAN**字段的宽度应为4字节。
 
@@ -420,7 +420,7 @@ CAN总线的FrameID布局如表7.6.
 
 LIN总线的FrameID布局如表所示
 
-![Layout of LIN FrameID](https://melodypapa.github.io/automotive/AUTOSAR/communication/mirror/2022-01-27-20-18-43.png)
+![Layout of LIN FrameID](2022-01-27-20-18-43.png)
 
 **FrameIDLIN**字段的宽度应为1字节。**FrameIDLIN**的字节0应该包含报告LIN帧的LIN PID。
 
@@ -428,7 +428,7 @@ LIN总线的FrameID布局如表所示
 
 **FlexRay**总线的**FrameID**布局如表所示。
 
-![Layout of FlexRay FrameID](https://melodypapa.github.io/automotive/AUTOSAR/communication/mirror/2022-01-27-20-20-55.png)
+![Layout of FlexRay FrameID](2022-01-27-20-20-55.png)
 
 **FrameIDFlexRay**字段的宽度应为3字节。
 

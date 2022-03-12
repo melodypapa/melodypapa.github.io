@@ -50,34 +50,50 @@ E2E转换器被RTE调用，并且RTE调用是通过由软件组件调用RTE标�
 
 ## 2.1. 输入文档
 
-1. AUTOSAR Layered Software Architecture    **AUTOSAR_EXP_LayeredSoftwareArchitecture.pdf**
-2. AUTOSAR General Requirements on Basic Software Modules **AUTOSAR_SRS_BSWGeneral.pdf**
-3. AUTOSAR General Specification for Basic Software Modules **AUTOSAR_SWS_BSWGeneral.pdf**
-4. AUTOSAR Specification of SW-C End-to-End Communication Protection Library 
-   **AUTOSAR_SWS_E2ELibrary.pdf**
-5. AUTOSAR Specification of RTE 
-   **AUTOSAR_SWS_RTE.pdf**
-6. AUTOSAR Requirements on E2E 
-   **AUTOSAR_RS_E2E.pdf**
-7. AUTOSAR E2E Protocol Specification 
-   **AUTOSAR_PRS_E2EProtocol.pdf**
-8. System Template 
-   **AUTOSAR_TPS_SystemTemplate.pdf**
-9. Specification of ECU Configuration 
-   **AUTOSAR_TPS_ECUConfiguration.pdf**
-10. General Specification of Transformers 
-   **AUTOSAR_ASWS_TransformerGeneral.pdf**
-11. AUTOSAR Glossary 
-   **AUTOSAR_TR_Glossary.pdf**
-12. Software Component Template 
-   **AUTOSAR_TPS_SoftwareComponentTemplate.pdf**
-13. SOME/IP Protocol Specification 
-   **AUTOSAR_PRS_SOMEIPProtocol.pdf**
+[1] AUTOSAR Layered Software Architecture
+> AUTOSAR_EXP_LayeredSoftwareArchitecture.pdf
+
+[2] AUTOSAR General Requirements on Basic Software Modules 
+> AUTOSAR_SRS_BSWGeneral.pdf
+
+[3] AUTOSAR General Specification for Basic Software Modules 
+> AUTOSAR_SWS_BSWGeneral.pdf
+
+[4] AUTOSAR Specification of SW-C End-to-End Communication Protection Library 
+> AUTOSAR_SWS_E2ELibrary.pdf
+
+[5] AUTOSAR Specification of RTE 
+> AUTOSAR_SWS_RTE.pdf
+
+[6] AUTOSAR Requirements on E2E 
+> AUTOSAR_RS_E2E.pdf
+
+[7] AUTOSAR E2E Protocol Specification 
+> AUTOSAR_PRS_E2EProtocol.pdf
+
+[8] System Template 
+> AUTOSAR_TPS_SystemTemplate.pdf
+
+[9] Specification of ECU Configuration 
+> AUTOSAR_TPS_ECUConfiguration.pdf
+
+[10] General Specification of Transformers 
+> AUTOSAR_ASWS_TransformerGeneral.pdf
+
+[11] AUTOSAR Glossary 
+> AUTOSAR_TR_Glossary.pdf
+
+[12] Software Component Template 
+> AUTOSAR_TPS_SoftwareComponentTemplate.pdf
+
+[13] SOME/IP Protocol Specification 
+> AUTOSAR_PRS_SOMEIPProtocol.pdf
 
 ## 2.2. 相关的规范
+
 AUTOSAR提供了转换器通用规范(AUTOSAR_ASWS_TransformerGeneral)[10]，它也适用于E2E转换器。
 
-因此，AUTOSAR_ASWS_TransformerGeneral[10]，应被视为E2E转换器的附加和必需的规格。
+因此AUTOSAR_ASWS_TransformerGeneral[10]，应被视为E2E转换器的附加和必需的规格。
 
 # 3. 对其他模块的依赖关系
 
@@ -118,9 +134,9 @@ E2E转换器函数和结构添加后缀<**transformerId**>。（<**transformerId
 
 ## 4.3. E2E保护
 
-![E2EXf_<transformerId>](2022-02-03-16-57-38.png)
+![E2EXf_transformerId](2022-02-03-16-57-38.png)
 
 ## 4.4. E2E检查
 
-![E2EXf_Inv_<transformerId>](2022-02-03-16-58-53.png)
+![E2EXf_Inv_transformerId](2022-02-03-16-58-53.png)
 
