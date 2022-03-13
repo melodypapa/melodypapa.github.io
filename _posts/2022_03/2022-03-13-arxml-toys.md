@@ -13,6 +13,8 @@ categories: autosar
 
 可以通过https://github.com/melodypapa/arxml_toys下周源码，慢慢有空可以考虑上传到Python的仓库里。
 
+具体的使用说明可以参考github仓库里的readme文件。
+
 说明：
 1. 因为很多时候会复制**ARXML**内容，特别时**Implementation**的内容，这样就造成了UUID的重复，接着**AUTOSAR Builder**会报warning，客户说会影响Matlab的导入（个人每试过）
 2. 时间戳是一个比较烦人的东西，有时候其实内容也没啥修改，就看见一堆时间戳的不同，用版本管理工具比较，一堆的红。在**AUTOSAR Builder**里还没看见有啥选项可以关闭。
