@@ -48,7 +48,7 @@
 [3] General Requirements on Basic Software Modules,
 > AUTOSAR_SRS_BSWGeneral.pdf
 
-[4] General Requirements on SPAL,
+[4] General Requirements on SPAL
 > AUTOSAR_SRS_SPALGeneral.pdf
 
 [5] Requirements on Flash Driver
@@ -92,7 +92,7 @@ AUTOSAR提供了基础软件模块的通用规范[9]，它同样也适用于**Fl
 
 # 6. 功能规格
 
-## 一般设计规则
+## 6.1. 一般设计规则
 
 **FLS**模块应为闪存操作（包括：读/写/擦除）提供异步（**asynchronous**）服务。
 
@@ -100,7 +100,20 @@ AUTOSAR提供了基础软件模块的通用规范[9]，它同样也适用于**Fl
 
 **FLS**模块需负责静态检查所有的静态配置参数是否正确（最迟在编译期间）。
 
-**FLS**模块需将所有可用的闪存区域组合成一个线性地址空间（通过参数**FlsBaseAddress**和**FlsTotalSize**表示）。
+**FLS**模块需将所有可用的闪存区域组成一个线性地址空间（通过参数**FlsBaseAddress**和**FlsTotalSize**表示）。
 
-**FLS**模块需根据闪存区域的物理结构将读取、写入、擦除和比较功能的地址和长度参数作为“虚拟”地址映射到物理地址。
+**FLS**模块需根据闪存区域的物理结构，将读取、写入、擦除和比较函数所使用的地址和长度参数进行虚拟地址（**virtual addresses**）到物理地址（**physical addresses**）的映射转换。只要有关这些地址对齐的限制能被满足，**FLS**模块就可以允许跨越物理闪存区域的边界，进行读取、写入或擦除的作业。**FLS**模块需在内部进行数据缓冲区对齐处理，从而替代对**RAM**缓冲区进行对齐处理。因为传递的指针定义为**uint8***，**FLS**模块而需将指针指向的地址内容看作字节对齐（**byte-aligned**）来处理。
 
+如果一个**ECU**中使用了多个闪存驱动程序实例，则必须为各个实例分配一个唯一的实例**ID**。该实例**ID**应配置为参数**FlsDriverIndex**。如果在ECU中仅使用闪存驱动程序的一个实例，则该实例应将参数**FlsDriverIndex**配置为**0**。
+
+## 6.2. 外置闪存驱动程序（External flash driver）
+
+在外部闪存驱动程序初始化期间，**FLS**模块需根据相应的发布参数，检查外部闪存设备的硬件**ID**。如果发生硬件**ID**不匹配的情况，**FLS**模块需返回错误代码**FLS_E_UNEXPECTED_FLASH_ID**报告给默认错误跟踪器（**DET**），并将**FLS**模块状态设置为**FLS_E_UNINIT**，并且无需再自行初始化了。
+
+所需参数的完整列表已在SPI处理程序/驱动程序软件规范中指定。
+
+## 6.3. 加载、执行和删除闪存访问代码
+
+**技术背景信息：**
+
+基于闪存内存空间分段等技术，可能需要在RAM空间里执行访问闪存硬件的例程（如：内部擦除，写入例程等）。主要原因是在闪存的编程过程中是不允许读取闪存，即：用于代码执行所需的读取指令。

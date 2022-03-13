@@ -52,7 +52,7 @@ AUTOSAR提供了基本软件模块的通用规范，对总线镜像模块来说�
 # 5. 功能规格
 ## 5.1. 概述
 
-总线镜像模块的任务是收集来自几个源总线（**source buses**）的帧，然后将这些帧转发到目标总线（**destination bus**）。转发是严格单向的，从而可以避免消息循环（**message loops**）和阻止入侵场景（**intrusion scenarios**）
+总线镜像模块的任务是收集来自几个源总线（**source bus**）的帧，然后将这些帧转发到目标总线（**destination bus**）。转发是严格单向的，从而可以避免消息循环（**message loops**）和阻止入侵场景（**intrusion scenarios**）
 
 下图显示了如何将总线镜像集成到AUTOSAR BSW通信堆栈中：
 

@@ -18,7 +18,7 @@ permalink: /autosar/
 * [AUTOSAR Socket Adaptor](communication/SoAd/SoAd.md)
 * [AUTOSAR Ethernet Driver](communication/EthernetDriver/EthernetDriver.md)
 * [AUTOSAR LIN Driver](communication/LINDriver/LINDriver.md)
-* [AUTOSAR CAN Driver](communication/CANDriver/CANDriver.md)
+* [AUTOSAR CAN Driver](communication/can_driver)
 * [AUTOSAR CAN Transceiver Driver](communication/CANTransceiverDriver/CANTransceiverDriver.md)
 * [AUTOSAR CAN Interface](communication/CANInterface/CANInterface.md)
 * [AUTOSAR UDP Network Management](communication/UdpNm/UdpNm.md)
