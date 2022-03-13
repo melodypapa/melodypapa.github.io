@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "今日更新 - ARXML小玩具"
-date:   2022-03-12 19:10:00 +0800
+date:   2022-03-13 19:10:00 +0800
 categories: autosar
 ---
 
@@ -11,7 +11,7 @@ categories: autosar
 * 更新ARXML文件里的UUID。
 * 移除ARXML文件里的时间戳。
 
-可以通过https://github.com/melodypapa/arxml_toys下周源码，慢慢有空可以考虑上传到Python的仓库里。
+可以通过[Github链接](https://github.com/melodypapa/arxml_toys)下载源码，慢慢有空会考虑是否打包上传到Python的仓库里。
 
 具体的使用说明可以参考github仓库里的readme文件。
 
