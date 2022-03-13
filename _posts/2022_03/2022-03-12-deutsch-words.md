@@ -22,7 +22,7 @@ categories: deutsch
 
 ## 1.2. 德语
 
-|     | Detusch      |
+|     | Deutsch      |
 | --- | ------------ |
 | 1   | Geschäft     |
 | 2   | Torte        |
