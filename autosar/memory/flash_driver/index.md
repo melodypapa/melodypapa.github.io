@@ -106,13 +106,58 @@ AUTOSAR提供了基础软件模块的通用规范[9]，它同样也适用于**Fl
 
 如果一个**ECU**中使用了多个闪存驱动程序实例，则必须为各个实例分配一个唯一的实例**ID**。该实例**ID**应配置为参数**FlsDriverIndex**。如果在ECU中仅使用闪存驱动程序的一个实例，则该实例应将参数**FlsDriverIndex**配置为**0**。
 
-## 6.2. 外置闪存驱动程序（External flash driver）
+## 6.2. 初始化
+
+初始化会由EcuM调用Fls_Init实现。
+
+![](Figure6_1.png)
+
+## 6.3. 同步机制
+
+在FLS模块中，以下服务操作使用同步机制调用：
+
+* **Fls_GetJobResult**
+* **Fls_GetStatus**
+* **Fls_SetMode**
+
+下面的时序图显示了函数**Fls_GetJobResult**作为该模块的同步操作的示例。同样的顺序也适用于函数**Fls_GetStatus**和**Fls_SetMode**。
+
+![](Figure6_2.png)
+
+## 6.4. 异步机制
+
+在FLS模块中，以下服务操作使用同步机制调用：
+
+* **Fls_Erase**
+* **Fls_Write**
+* **Fls_Read**
+* **Fls_Compare**
+
+以下时序图显示了闪存写入功能作为该模块异步操作的示例（设置了配置选项**FlsAcLoadOnJobStart**）。相同的顺序适用于擦除、读取和比较作业，唯一的区别是对于读取和比较作业，不需要将闪存访问代码加载到**RAM**或从**RAM**中卸载。
+
+![](Figure6_3.png)
+
+## 6.5. 取消正在运行的作业
+
+以下时序图显示了如何取消正在运行的作业的示例。
+
+![](Figure6_4.png)
+
+**注意：**
+**FLS**模块在运行**Fls_MainFunction**调用期间，函数**Fls_Cancel**是不允许调用的。
+
+这是通过以下的任意一种调度配置赖实现的：
+
+1. **NVRAM**管理器和闪存驱动的工作功能是同步的（例如：在一个**Task**中顺序调用）
+2. 调用**Fls_MainFunction**函数的任务，不能被其他**Task**抢占。
+
+## 6.6. 外置闪存驱动程序（External flash driver）
 
 在外部闪存驱动程序初始化期间，**FLS**模块需根据相应的发布参数，检查外部闪存设备的硬件**ID**。如果发生硬件**ID**不匹配的情况，**FLS**模块需返回错误代码**FLS_E_UNEXPECTED_FLASH_ID**报告给默认错误跟踪器（**DET**），并将**FLS**模块状态设置为**FLS_E_UNINIT**，并且无需再自行初始化了。
 
 所需参数的完整列表已在SPI处理程序/驱动程序软件规范中指定。
 
-## 6.3. 加载、执行和卸载闪存访问代码
+## 6.7. 加载、执行和卸载闪存访问代码
 
 **技术背景信息：**
 
@@ -122,7 +167,7 @@ AUTOSAR提供了基础软件模块的通用规范[9]，它同样也适用于**Fl
 
 **FLS**模块的闪存访问例程应仅在必要时，才能禁用中断（**disable interrupt**）并等待擦除/写入命令完成。也就是说，在擦除或者写入时，必须确保没有其他代码被执行。同时，**FLS**模块也需要尽可能地缩短闪存访问代码的执行时间。
 
-### 6.3.1. 加载闪存访问代码
+### 6.7.1. 加载闪存访问代码
 
 如果**FLS**模块配置为在作业开始时需将闪存访问代码加载到**RAM**中，则**FLS**模块的擦除例程应将用于擦除闪存的访问代码，加载到闪存驱动程序配置集中包含的擦除功能指针所指向的**RAM**中的位置。
 
@@ -132,18 +177,15 @@ AUTOSAR提供了基础软件模块的通用规范[9]，它同样也适用于**Fl
 
 **FLS**模块只有在闪存ROM无法执行访问码时，才需将访问代码加载到**RAM**中。
 
-### 6.3.2. 执行闪存访问代码
+### 6.7.2. 执行闪存访问代码
 
 **FLS**模块的主处理程序需执行闪存访问代码程序。
 
 **FLS**模块的主处理例程，应通过**FLS**模块配置集中包含的相应函数指针，访问闪存访问代码例程，无论闪存访问代码例程是否已加载到**RAM**中，或者闪存访问代码可以从闪存的**ROM**中直接执行。
 
-### 6.3.3. 卸载闪存访问代码
+### 6.7.3. 卸载闪存访问代码
 
 擦除或写入作业完成或取消后，如果闪存访问代码（包括：擦除和写入例程）已被闪存驱动程序加载到**RAM**，则**FLS**模块的主处理例程需要把闪存访问代码从**RAM**中卸载。
-
-## 6.4. 初始化
-
 
 
 # 7. 错误处理
@@ -178,5 +220,109 @@ AUTOSAR提供了基础软件模块的通用规范[9]，它同样也适用于**Fl
 
 # 8. API规范
 
+## 8.1. 函数定义
 
+### 8.1.1. Fls_Init
+
+**说明**: 初始化闪存驱动程序。
+
+```C
+void Fls_Init ( const Fls_ConfigType* ConfigPtr )
+```
+
+### 8.1.2. Fls_Erase
+
+**说明**: 擦除闪存扇区。
+
+```C
+Std_ReturnType Fls_Erase ( Fls_AddressType TargetAddress, Fls_LengthType Length )
+```
+
+### 8.1.3. Fls_Write
+
+**说明**: 写入一个或多个完整的闪存页面。
+
+```C
+Std_ReturnType Fls_Write ( Fls_AddressType TargetAddress, const uint8* SourceAddressPtr, Fls_LengthType Length )
+```
+
+### 8.1.4. Fls_Cancel
+
+**说明**: 取消正在进行的作业。
+
+```C
+void Fls_Cancel ( void )
+```
+
+### 8.1.5. Fls_GetStatus
+
+**说明**: 返回驱动程序状态。
+
+```C
+MemIf_StatusType Fls_GetStatus ( void )
+```
+
+### 8.1.6. Fls_GetJobResult
+
+**说明**: 返回上一个作业的结果。
+
+```C
+MemIf_JobResultType Fls_GetJobResult ( void )
+```
+
+### 8.1.7. Fls_Read
+
+**说明**: 从闪存读取。
+
+```C
+Std_ReturnType Fls_Read ( Fls_AddressType SourceAddress, uint8* TargetAddressPtr, Fls_LengthType Length )
+```
+
+### 8.1.8. Fls_Compare
+
+**说明**: 将闪存区域的内容与应用程序数据缓冲区的内容进行比较。
+
+```C
+Std_ReturnType Fls_Compare ( Fls_AddressType SourceAddress, const uint8* TargetAddressPtr, Fls_LengthType Length )
+```
+
+### 8.1.9. Fls_SetMode
+
+**说明**: 设置闪存驱动程序的操作模式。**MEMIF_MODE_SLOW**：缓慢的读取访问/正常的SPI访问。**MEMIF_MODE_FAST**：快速读取访问/SPI突发访问（Burst Access）
+
+```C
+void Fls_SetMode ( MemIf_ModeType Mode )
+```
+
+### 8.1.10. Fls_GetVersionInfo
+
+**说明**: 返回此模块的版本信息。
+
+```C
+void Fls_GetVersionInfo ( Std_VersionInfoType* VersioninfoPtr )
+```
+
+### 8.1.11. Fls_BlankCheck
+
+**说明**: 函数**Fls_BlankCheck**将验证给定的存储区域是否已被擦除，并还未被编程。 该函数应将每个主函数周期的最大检查闪存单元数分别限制为配置值**FlsMaxReadNormalMode**或**FlsMaxReadFastMode**。
+
+```C
+Std_ReturnType Fls_BlankCheck ( Fls_AddressType TargetAddress, Fls_LengthType Length )
+```
+
+### 8.1.12. Fls_MainFunction
+
+**说明**: 执行FLS作业的处理的主函数。
+
+```C
+void Fls_MainFunction ( void )
+```
+
+<section id="wechat">
+
+<h4>微信扫一扫，获取更多及时资讯</h4>
+
+<img src="wechat.png" alt="微信扫一扫"/>
+
+</section>
 
