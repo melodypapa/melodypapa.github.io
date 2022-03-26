@@ -20,7 +20,7 @@ permalink: /autosar/
 * [AUTOSAR Ethernet Driver](communication/EthernetDriver/EthernetDriver.md)
 * [AUTOSAR LIN Driver](communication/LINDriver/LINDriver.md)
 * [AUTOSAR CAN Driver](communication/can_driver)
-* [AUTOSAR CAN Transceiver Driver](communication/CANTransceiverDriver/CANTransceiverDriver.md)
+* [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)
 * [AUTOSAR CAN Interface](communication/can_interface)
 * [AUTOSAR UDP Network Management](communication/UdpNm/UdpNm.md)
 
