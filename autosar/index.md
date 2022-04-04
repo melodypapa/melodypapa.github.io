@@ -35,3 +35,4 @@ permalink: /autosar/
 ## 输入输出（I/O）
 
 * [AUTOSAR ADC（模数转换器驱动）](io/adc_driver/index.md)
+* [AUTOSAR IoHwAb（I/O硬件抽象）](io/iohwab/index.md)
