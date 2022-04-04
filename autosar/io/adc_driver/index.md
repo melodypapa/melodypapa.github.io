@@ -501,7 +501,7 @@ Std_ReturnType Adc_PreparePowerState (
 ```
 ## 7.2. 可配置的接口
 
-### 7.2.1. IoHwAb_AdcNotification<#groupID>
+### 7.2.1. IoHwAb_AdcNotification\<#groupID\>
 
 **说明**: 当**ADC**通道组<#groupID>转换完成后，**ADC**驱动程序会调用此函数。
 
@@ -510,7 +510,7 @@ Std_ReturnType Adc_PreparePowerState (
 void IoHwAb_AdcNotification<#groupID> ( void )
 ```
 
-### 7.2.1. IoHwAb_Adc_NotifyReadyForPowerState<#Mode>
+### 7.2.1. IoHwAb_Adc_NotifyReadyForPowerState\<#Mode\>
 
 **说明**: 当模式**<#Mode>**请求的电源状态准备完成时，**ADC**驱动程序会调用此函数。
 
