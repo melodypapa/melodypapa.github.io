@@ -15,7 +15,7 @@ permalink: /autosar/
 * [AUTOSAR Mirror (Bus Mirror)](communication/mirror/mirror.md)
 * [AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)
 * [ATUOSAR E2E Transformer](communication/e2e_transformer)
-* [AUTOSAR COM Based Transformer](communication/COMBasedTransformer/COMBasedTransformer.md)
+* [AUTOSAR COM Based Transformer](communication/com_based_transformer)
 * [AUTOSAR Socket Adaptor](communication/SoAd/SoAd.md)
 * [AUTOSAR Ethernet Driver](communication/EthernetDriver/EthernetDriver.md)
 * [AUTOSAR LIN Driver](communication/LINDriver/LINDriver.md)
