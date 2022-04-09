@@ -17,7 +17,7 @@ permalink: /autosar/
 * [ATUOSAR E2E Transformer](communication/e2e_transformer)
 * [AUTOSAR COM Based Transformer](communication/com_based_transformer)
 * [AUTOSAR Socket Adaptor](communication/SoAd/SoAd.md)
-* [AUTOSAR Ethernet Driver](communication/EthernetDriver/EthernetDriver.md)
+* [AUTOSAR Ethernet Driver](communication/ethernet_driver)
 * [AUTOSAR LIN Driver](communication/LINDriver/LINDriver.md)
 * [AUTOSAR CAN Driver](communication/can_driver)
 * [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)
