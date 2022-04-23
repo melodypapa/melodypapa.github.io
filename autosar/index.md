@@ -34,5 +34,9 @@ permalink: /autosar/
 
 ## 输入输出（I/O）
 
-* [AUTOSAR ADC（模数转换器驱动）](io/adc_driver/index.md)
-* [AUTOSAR IoHwAb（I/O硬件抽象）](io/iohwab/index.md)
+* [AUTOSAR ADC（模数转换器驱动）](io/adc_driver)
+* [AUTOSAR IoHwAb（I/O硬件抽象）](io/iohwab)
+
+## 模式管理（Mode Management）
+
+* [AUTOSAR EcuM（ECU状态管理器）](mode_management/ecu_state_manager)
