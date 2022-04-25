@@ -249,7 +249,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 图 7.1 显示了灵活的ECU管理器模块各阶段的概览。
 
-![](Figure7-1.png)
+![Figure7-1.png](Figure7-1.png)
 
 **STARTUP**阶段一直需持续到模式管理设施（Mode Management Facilities）正常运行。基本上**STARTUP**阶段包括启动模式管理所需的最少活动：初始化低级驱动程序、启动操作系统和初始化**BSW**调度程序和**BSW**模式管理器模块。类似地**SHUTDOWN**阶段与**STARTUP**阶段相反，是模式管理被去初始化（**de-initialized**）的阶段。
 
@@ -297,7 +297,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 ## 6.2. ECU管理器的结构描述
 
-![](Figure7-2.png)
+![Figure7-2.png](Figure7-2.png)
 
 图7.2说明了ECU 管理器模块与其他基础软件模块接口的关系。在大多数情况下，**ECU**管理器模块只负责初始化。 然而有些模块与ECU管理器模块具有功能关联，这将在以下段落中进行详细解释。
 
@@ -315,7 +315,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 有关**STARTUP**阶段的概述说明，可参见章节**6.1.1**。
 
-![](Figure7-3.png)
+![Figure7-3.png](Figure7-3.png)
 
 图**7.3**显示了**ECU**的启动行为。当**EcuM_Init**被调用后，**ECU**管理器模块开始控制**ECU**启动过程。通过调用**StartOS**，**ECU**管理器模块暂时放弃控制。为了重新获得控制权，**Integrator**需要实现一个自启动的操作系统任务（**OS task**），并调用**EcuM_StartupTwo**作为此任务（**Task**）的第一个操作。
 
@@ -327,7 +327,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 下列**StartPreOS Sequence**的表格，显示了在**StartPreOS**序列中的所有活动，以及它们在**EcuM_Init**中应被执行的顺序。
 
-![](Table7-1.png)
+![Table7-1.png](Table7-1.png)
 
 **注意：**
 
@@ -337,7 +337,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 当功能通过**EcuM_Init**被激活时，**ECU**管理器模块会执行**StartPreOS**序列中的操作，详情可参见**StartPreOS Sequence**表格）。
 
-![](Figure7-4.png)
+![Figure7-4.png](Figure7-4.png)
 
 **StartPreOS**序列旨在让**ECU**为初始化**OS**做好准备，所以执行时间应尽可能短。驱动程序应尽可能在**UP**阶段初始化，并且Callout函数也应保持简短。在此序列期间，中断不应被使用。如果必须使用中断，则**StartPreOS**序列中只允许使用I类（**category I**）的中断。
 
@@ -353,13 +353,13 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 当功能通过**EcuM_StartupTwo**被激活时，**ECU**管理器模块需执行**StartPostOS**序列中的操作，具体内容可参见表7.2。
 
-![](Table7-2.png)
+![Table7-2.png](Table7-2.png)
 
 **注意：**
 
 可选列（Opt.），所有可选的活动都可以通过配置来被激活或关闭。
 
-![](Figure7-5.png)
+![Figure7-5.png](Figure7-5.png)
 
 ### 6.3.4. 驱动程序初始化
 
@@ -381,7 +381,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 表7.3显示了**init block 0**和**init block 1**的一种可能和推荐的活动序列。根据硬件和软件配置，可以添加或移除相关的基础软件模块，当然也可以使用其他活动序列。
 
-![](Table7-3.png)
+![Table7-3.png](Table7-3.png)
 
 ### 6.3.5. BSW 初始化
 
@@ -395,11 +395,11 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 如果在关机阶段发生唤醒事件时，ECU管理器模块应完成关机并在此后立即重新启动。
 
-![](Figure7-7.png)
+![Figure7-7.png](Figure7-7.png)
 
 ### 6.4.1. OffPreOS序列中的活动
 
-![](Table7-4.png)
+![Table7-4.png](Table7-4.png)
 
 在**OffPreOS**序列期间，如果配置参数**EcuMIgnoreWakeupEvValOffPreOS**设置为**true**，只需考虑那些不需要验证的唤醒事件，所有其他的唤醒事件可以忽略。如果配置参数**EcuMIgnoreWakeupEvValOffPreOS**设置为**false**时，不需要验证的唤醒事件和需要验证的挂起唤醒事件都需被考虑到。
 
@@ -409,55 +409,150 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 作为**OffPreOS**期间的最后一项活动，**ECU**管理器模块需调用**ShutdownOS**函数。操作系统会在关机结束时，调用关机钩子（hook）函数。关闭钩子函数会调用**EcuM_Shutdown**来结束关机过程。 **EcuM_Shutdown**不应返回，而是直接关闭ECU或发起复位动作。
 
-![](Figure7-8.png)
+![Figure7-8.png](Figure7-8.png)
 
 ### 6.4.2. OffPostOS序列中的活动
 
-**OffPostOS**序列执行了在操作系统关闭后，达到关机目标的最后步骤。由**EcuM_Shutdown**函数发起此序列。关机目标可以是**ECUM_SHUTDOWN_TARGET_RESET**或**ECUM_SHUTDOWN_TARGET_OFF**，具体的复位方式由复位模式决定。有关详细信息，可参阅章节6.7关机目标。
+**OffPostOS**序列执行了在操作系统关闭后，达到关机目标的最后步骤。由**EcuM_Shutdown**函数发起此序列。关机目标可以是**ECUM_SHUTDOWN_TARGET_RESET**或**ECUM_SHUTDOWN_TARGET_OFF**，具体的复位方式由复位模式决定。有关详细信息，可参阅章节[6.7关机目标](#67-关机目标)
 
-![](Table7-5.png)
+![Table7-5.png](Table7-5.png)
 
-![](Figure7-9.png)
+当关机目标为**RESET**时，**ECU**管理器模块需调用**EcuM_AL_Reset**的Callout函数。当关机目标为**OFF**时，**ECU**管理器模块需调用**EcuM_AL_SwitchOff**的**Callout**函数。
+
+![Figure7-9.png](Figure7-9.png)
 
 ## 6.5. SLEEP阶段
 
-![](Figure7-10.png)
+有关**SLEEP**阶段的概述，可参阅章节[6.1.4 SLEEP阶段](#614-sleep阶段)。可以通过**SLEEP**作为关机目标，调用**EcuM_GoDownHaltPoll**函数来启动**SLEEP**阶段。
+
+使用**SLEEP**作为关机目标的**EcuM_GoDownHaltPoll**函数会启动两种控制流。具体哪种控制流取决于**EcuMSleepModeSuspend**参数所配置的睡眠模式。它们在实现睡眠的机制上的结构是不同。但是它们在准备睡眠和从睡眠恢复过程的顺序却是相同的。
+
+![Figure7-10.png](Figure7-10.png)
+
+同时存在另一个模块，可能是**BswM**，虽然它也可能是另一个**SW-C**。这个模块必须确保在调用**EcuM_GoDownHaltPoll**之前，以及选择了适当的**ECUM_STATE_SLEEP**的关机目标。
 
 ### 6.5.1. GoSleep序列中的活动
 
-![](Figure7-11.png)
+在**GoSleep**的序列中，**ECU**管理器模块需为即将到来的睡眠阶段进行相关的硬件配置，同时为下一个唤醒事件设置**ECU**。
+
+**ECU**管理器模块为了接着的睡眠模式，需进行唤醒源的配置。**ECU**管理器模块会通过在**EcuM_EnableWakeupSources**的Callout函数中，依次为每个在**EcuMWakeupSourceMask**中配置的唤醒源执行相关的设置工作。
+
+与**SHUTDOWN**阶段相比，**ECU**管理器模块在进入**SLEEP**阶段时，不应关闭操作系统。睡眠模式，即**EcuM**的**SLEEP**阶段和**MCU**模式的组合，对操作系统来说应该是透明的。
+
+![Figure7-11.png](Figure7-11.png)
+
+当在多核的**ECU**上运行时，**EcuM**需要为每个内核保留一个专用资源（**RES_AUTOSAR_ECUM**）。该资源会在进入休眠（**Go Sleep**）期间分配。
 
 ### 6.5.2. 停止序列中的活动
 
-![](Figure7-12.png)
+**ECU**管理器模块需在停止微控制器的睡眠模式下执行停止序列（**Halt Sequence**）。在这睡眠模式下，**ECU**管理器模块不执行任何代码。
+
+**ECU**管理器模块应在停止微控制器之前，调用**EcuM_GenerateRamHash**的Callout函数。然后当处理器从停止状态返回后，调用**EcuM_CheckRamHash**的Callout函数。
+
+如果存在多核的情况，且存在从属（**Slave**）的**EcuM**，则此检查动作仅只需在主（**Master**）的**EcuM**上执行。 主**EcuM**从其范围内的所有数据中生成散列。从属**EcuM**的私有数据不在此范围内。
+
+**逻辑依据：**
+
+当**ECU**长时间处于睡眠模式时，**RAM**内存可能会损坏。 因此需检查**RAM**存储器的完整性，以防意外行为的发生。系统设计者可以选择适当的校验和算法来执行检查。
+
+![Figure7-12.png](Figure7-12.png)
+
+**ECU**管理器模块应调用**EcuM_GenerateRamHash**，系统设计人员可以在此Callout函数中进行**RAM**完整性地检查。
 
 ### 6.5.3. 轮询序列中的活动
 
-![](Figure7-13.png)
+睡眠模式下的轮询序列（**Poll Sequence**）可用于检查唤醒源。在轮询序列中，**EcuMWakeupSourcePolling**设置为**True**，**EcuM**需在一个阻塞循环中（**blocking loop**），调用**EcuM_SleepActivity**和**EcuM_CheckWakeupHook**函数，直到有待定（**pending**）或者已验证（**validated**）的唤醒事件被报告。
+
+![Figure7-13.png](Figure7-13.png)
 
 ### 6.5.4. 离开停止或轮询
 
+如果当**ECU**处于停止（**Halt**）或轮询（**Poll**）状态时，发生唤醒了事件。
+
+* 唤醒硬线发生翻转变化（**toggling a wakeup line**）
+* CAN总线上有通讯信号（**communication on a CAN bus**）等
+  
+则**ECU**管理器模块需重新获得控制权，并通过执行唤醒重启序列（**WakeupRestart sequence**）退出睡眠阶段。
+
+可以调用**ISR**来处理唤醒事件，但这取决于硬件和驱动程序的实现。具体可参考章节[6.5.5WakeupRestart序列中的活动](#655-wakeuprestart序列中的活动)
+
+如果**ECU**处于**Halt**或者**Poll**时，发生了不规则事件（**Irregular Events**）
+
+* 硬件复位（**hardware reset**）
+* 电源循环（**power cycle**）
+  
+则**ECU**管理器模块需在**STARTUP**阶段，重新启动**ECU**。
+
 ### 6.5.5. WakeupRestart序列中的活动
 
-![](Table7-6.png)
+![Table7-6.png](Table7-6.png)
 
-![](Figure7-14.png)
+**ECU**管理器模块需调用用于重新初始化驱动程序的**EcuM_AL_DriverRestart**的Callout函数。其中具有唤醒源的驱动程序通常需要重新初始化。有关驱动程序初始化的更多详细信息，可参考章节[6.3.4驱动程序初始化](#634-驱动程序初始化)。
 
-## 6.6. UP Phase
+在重新初始化（**re-initialization**）期间，驱动程序必须检查其一个分配的唤醒源是否是先前被唤醒的原因。如果该测试为真，驱动程序必须调用唤醒被检测到（**wakeup detected**）的回调函数。例如：参见**CAN** 收发器驱动程序规范[12]。而后者必须再调用**EcuM_SetWakeupEvent**函数。
 
-### 6.6.1. Alarm Clock Handling
+驱动程序的实现应该只调用一次唤醒回调。此后它不应再次调用唤醒回调，直到它被显式函数调用重置（**re-armed**）。所以驱动程序必须重置后了，才能再次触发回调。
 
-### 6.6.2. Wakeup Source State Handling
+如果在**WakeupRestart**序列完成时，**ECU**管理器模块具有候选唤醒源的列表，则**ECU**管理器模块应在**EcuM_MainFunction**中验证这些候选唤醒源。可参阅章节[6.6.4 WakeupValidation序列中的活动](#664-wakeupvalidation序列中的活动)
+
+![Figure7-14.png](Figure7-14.png)
+
+如果报告了**WakeupEvent**，**EcuM**需退出睡眠模式。如果所有**WakeupSource**的**CheckWakeupTimer**都已超时，则**EcuM**需转换到**GoSleep**状态，并再次开始让**EcuM**进入睡眠状态（暂停或轮询）。
+
+**注意：**
+
+当**EcuM**由异步**WakeupSource**恢复（**resume**）时，**EcuM**必须执行**WakeRestart**序列，以重新启动主功能，以便建立与使用的硬件（例如：**SPI**）的异步通信。
+
+如果在信号唤醒后，并且相应的**CheckWakeupTimer**也已经超时，没有任何唤醒事件被设置，则**EcuM**需报告运行时错误**ECUM_E_WAKEUP_TIMEOUT**。
+
+## 6.6. UP阶段
+
+在**UP**阶段，**EcuM_MainFunction**会被定期执行。它主要具有三个功能：
+
+* 检查唤醒源是否被唤醒，并在必要时启动唤醒验证。可参阅章节[6.6.4 WakeupValidation序列中的活动](#664-wakeupvalidation序列中的活动)
+* 更新闹钟定时器（**Alarm Clock timer**）
+* 仲裁**RUN**和**POST_RUN**的请求和释放。
+
+### 6.6.1. 闹钟处理
+
+请参阅章节[6.8.2 节 UP阶段的EcuM 时钟时间](#682-ecum时钟时间)，了解更多实现的细节。
+
+当闹钟服务存在时（可参见参数**EcuMAlarmClockPresent**），**EcuM_MainFunction**需更新闹钟定时器。
+
+### 6.6.2. 唤醒源状态处理
+
+唤醒源不仅需在唤醒期间处理，而且与所有其他**EcuM**活动并行处理。相关功能在**EcuM_MainFunction**中运行，通过模式请求（**mode requests**）与**ECU**管理的其余部分完全分离。
+
+唤醒源可以处于以下状态：
+
+| 状态      | 描述                         |
+| --------- | ---------------------------- |
+| NONE      | 唤醒事件未被检测到或已被清除 |
+| PENDING   | 检测到唤醒事件但尚未验证     |
+| VALIDATED | 检测到唤醒事件并成功验证     |
+| EXPIRED   | 检测到唤醒事件但验证失败     |
 
 ![](Table7-7.png)
 
-![](Figure7-15.png)
+下图说明了唤醒源状态和引起状态变化的条件函数之间的关系。此处仅显示两个超级状态**Disabled**和**Validation**以进行说明和更好地理解。
 
-### 6.6.3. Internal Representation of Wakeup States
+![Figure7-15.png](Figure7-15.png)
 
-### 6.6.4. Activities in the WakeupValidation Sequence
+当**ECU**管理器动作导致唤醒源的状态改变时，**ECU**管理器模块应向**BswM**发出模式请求（**mode request**），以将唤醒源的模式更改为新的唤醒源状态。对于这些唤醒源状态的通信，主要使用 **EcuM_WakeupStatusType**类型。
 
-![](Figure7-16.png)
+当**ECU**管理器模块处于**UP**阶段时，唤醒事件通常不会触发状态更改，但是它们会触发停止（**Halt**）和轮询（**Poll**）子阶段的结束。接着**ECU**管理器模块自动执行**WakeupRestart** 序列后，并随后返回到**UP**阶段。此行为需由集成商（**integrator**）在**BswM**中配置规则，以便**ECU**对唤醒事件做出正确反应。因为此反应完全取决于当前**ECU**的状态。
+
+如果唤醒源有效，则**BswM**将**ECU**返回到运行（**RUN**）状态。如果所有唤醒事件都返回到**NONE**或**EXPIRED**，则**BswM**再次为基础软件模块准备**SLEEP**或**OFF**并调用**EcuM_GoDownHaltPoll**。
+
+**总结：**
+
+每个未决事件（**pending event**）都被独立验证（如果已配置），**EcuM**将结果作为模式请求发布到**BswM**，这反过来可以触发**EcuM**中的状态更改。
+
+### 6.6.3. 唤醒状态的内部表示
+
+### 6.6.4. WakeupValidation序列中的活动
+
+![Figure7-16.png](Figure7-16.png)
 
 #### 6.6.4.1. Wakeup of Communication Channels
 
@@ -473,7 +568,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 ### 6.6.7. Wakeup Sources with Integrated Power Control
 
-## 6.7. Shutdown Targets
+## 6.7. 关机目标
 
 ### 6.7.1. Sleep
 
@@ -483,7 +578,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 ### 6.8.1. Alarm Clocks and Users
 
-### 6.8.2. EcuM Clock Time
+### 6.8.2. EcuM时钟时间
 
 #### 6.8.2.1. EcuM Clock Time in the UP Phase
 
@@ -491,7 +586,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 ## 6.9. MultiCore
 
-![](Figure7-17.png)
+![Figure7-17.png](Figure7-17.png)
 
 ### 6.9.1. Master Core
 
@@ -523,4 +618,56 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 ### 6.9.6. SHUTDOWN Phase
 
+#### 6.9.6.1. Master Core SHUTDOWN
 
+![Figure7-23.png](Figure7-23.png)
+
+![Figure7-24.png](Figure7-24.png)
+
+#### 6.9.6.2. Slave Core SHUTDOWN
+
+![Figure7-25.png](Figure7-25.png)
+
+![Figure7-26.png](Figure7-26.png)
+
+### 6.9.7. SLEEP Phase
+
+#### 6.9.7.1. Master Core SLEEP
+
+![Figure7-27.png](Figure7-27.png)
+
+![Figure7-28.png](Figure7-28.png)
+
+![Figure7-29.png](Figure7-29.png)
+
+![Figure7-30.png](Figure7-30.png)
+
+#### 6.9.7.2. Slave Core SLEEP
+
+![Figure7-31.png](Figure7-31.png)
+
+![Figure7-32.png](Figure7-32.png)
+
+![Figure7-33.png](Figure7-33.png)
+
+![Figure7-34.png](Figure7-34.png)
+
+### 6.9.8. Runnables and Entry points
+
+#### 6.9.8.1. Internal behavior
+
+## 6.10. EcuM Mode Handling
+
+![Figure7-35.png](Figure7-35.png)
+
+## 6.11. Advanced Topics
+
+### 6.11.1. Relation to Bootloader
+
+![Figure7-36.png](Figure7-36.png)
+
+### 6.11.2. Relation to Complex Drivers
+
+### 6.11.3. Handling Errors during Startup and Shutdown
+
+## 6.12. ErrorHook
