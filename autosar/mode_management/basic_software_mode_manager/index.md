@@ -1063,9 +1063,9 @@ void BswM_WdgM_RequestPartitionReset (
 )
 ```
 
-## 周期函数
+## 7.2. 周期函数
 
-### 7.1.32. BswM_MainFunction
+### 7.2.1. BswM_MainFunction
 
 **说明**: **BswM**的主函数。
 
