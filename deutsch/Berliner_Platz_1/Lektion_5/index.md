@@ -1,6 +1,6 @@
 <section id="title">Lektion-5 Was darf's sein?</section>
 
-# 1. Matis Laden (1.45)
+# 1. Matis Laden (CD: 1.45)
 
 A: Guten Tag, Frau Beimer.
 
@@ -98,24 +98,21 @@ A: Bring noch einen Liter Milch mit.
 
 A: Keller!
 
-B: Hallo, Oma, hier ist Felix! Danke für das Rezept.
+B: Hallo, Oma, hier ist Felix! Danke für das Rezept. **Es** kommen sieben Leute zum Essen. Was muss ich dann tun?
 
-A: **Es** kommen sieben Leute zum Essen. Was muss ich dann tun?
+A: Nimm einfach die doppelte Menge von allem, dann reicht es sicher. Aber pass beim Würzen auf. （但是在调味时要注意）
 
-B: Nimm einfach die doppelte Menge von allem, dann reicht es sicher. Aber pass beim Würzen auf. （但是在调味时要注意）
+B: Aber Nina mag keine Zucchini ...
 
-A: Aber Nina mag keine Zucchini ...
+A: Dann nimm doch Karotten, **das geht auch**. (这也行)
 
-B: Dann nimm doch Karotten, **das geht auch**. (这也行)
+B: Und was essen wir dazu? (我们就着什么吃呢？)
 
-A: Und was essen wir dazu? (我们就着什么吃呢？)
+A: Mach doch Fisch dazu oder Fleisch.
 
-B: Mach doch Fisch dazu oder Fleisch.
+B: Ich glaube, Lea ist Vegetarierin.
 
-A: Ich glaube, Lea ist Vegetarierin.
-
-B: Mein Gott, Felix, was sind deine Gäste kompliziert! Dann reibst du einfach Käse darüber. (那你就擦些奶酪)
-
-A: Und dann ist es ein Kartoffel-Karotten-Käse-Auflauf!
+A: Mein Gott, Felix, was sind deine Gäste kompliziert! Dann reibst du einfach Käse darüber. (那你就擦些奶酪) Und dann ist es ein Kartoffel-Karotten-Käse-Auflauf!
 
 B: Prima! Tschüs, Oma! Und danke!
+
