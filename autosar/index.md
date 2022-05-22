@@ -31,6 +31,7 @@ permalink: /autosar/
 ## 存储（Memory）
 
 * [AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md)
+* [AUTOSAR NV数据处理指南](memory/nv_data_handling_guideline/index.md)
 
 ## 输入输出（I/O）
 
