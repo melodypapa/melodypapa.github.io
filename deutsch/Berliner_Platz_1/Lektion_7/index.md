@@ -91,3 +91,127 @@ A: Vielen Dank!
 11. ungefähr...Meter：大约...米。
 12. etwas (A) + entlang Präp.: 沿着
 13. vorne rechts：右前方
+
+
+# Frau Lipinskas neue Firma
+
+## Dialog 1
+
+A: Ja, äh, ich bin neu hier, ich ...
+
+B: Ach ja, Frau Lipinska. Gehen Sie bitte zuerst ins Personalbüro.Frau Stern erwartet Sie.
+
+A: Entschuldigung, wo finde ich ...?
+
+B: Im zweiten Stock rechts, da drüben ist der Aufzug.
+
+Note:
+
+1. erwarten:等待，等候
+2. der Stock, - 楼层
+3. das Erdgeschoss 一层，底层
+4. der erste Stock 二楼
+5. der zweite Stock 三层
+
+## Dialog 2
+
+A: Guten Morgen, sind Sie Frau Lipinska?
+
+B: Ja, ich ...
+
+A: Füllen Sie bitte den Personalbogen aus ...
+
+B:
+
+A: Ja, aber, Frau Lipinska, Sie brauchen ein Konto.
+
+A: Wir überweisen das Gehalt immer auf ein Girokonto.
+
+B: Wo kann ich ein Konto eröffnen?
+
+
+A: Hier am Park ist eine Filiale, das ist nicht weit.
+
+A: Nein, sie macht er um 14 Uhr wieder auf. Vielleicht ist ja auch eine Filiale in der Nähe von Ihrer Wohnung.
+
+B: Gut, dann mache ich das später. Wo ist die Kantine. 
+
+A: Im Keller. Sie kommen aus dem Aufzug und dann sehen Sie sie gleich.
+
+Note:
+
+1. aus/füllen vt.填写
+2. der Personalbogen 
+3. das Konto
+4. überweisen
+5. etw.(A) auf etw.(A) überweisen
+6. das Gehalt, Gehälter
+7. das Girokonto
+8. am Park an dem Park
+9. der Filiale, -n
+10. aufmachen
+11. die Kantine, -n
+12. der Keller, -
+
+## Dialog 3
+
+A: Ah, Maria, da bist ud ja. Hier sind Teller und Besteck. Du bestellst da an der Theke und dann gehst du zur Kasse davorne.
+
+C:
+
+B: Ja, fast, Aber ich brauche noch ein Girokonto.
+
+A: Hast du schon eine Monatskarte für die U-Bahn?
+
+B: Nein, wo gibt es die?
+
+A: Hier am Kudamm ist ein Kundenzentrum von der BVG.
+
+## Dialog 4
+
+A: Ich möchte ein Konto eröffnen.
+
+B: Ein Girokonto?
+
+A: 
+
+B: Gern, Haben sie Ihren Ausweis dabei?
+
+A: Ja, bitte, hier ist mein Pass.
+
+B: Danke, Frau Lipinska, Ich notiere Ihre Personalien und kopieren den Ausweis. Wie ist bitte Ihre Adresse?
+
+A: Lessingstraße 17.
+
+B: Ach, das j
+
+A: Ja, zwei Minuten zu Fuß. Das is praktisch.
+
+B: So sehen Sie sich das Formular noch einmal an. Hier sind Ihre Personalien, die Passnummer udn Ihre Adresse. Bitte unterschreiben Sie hier...
+
+Note:
+
+1. da bist du jia.
+2. bestellen
+3. die Theke, -n
+4. die Kasse, -n
+
+## Dialog 5
+
+A: Ich brauche eine Monatskarte für die U-Bahn und den Bus.
+
+B: Wel
+
+A: Was ist Zone?
+
+B: Welcher Tarifbereich? Von wo bis wo fahren Sie?
+
+A: Ich wohne
+
+B: Und wo arbeiten Sie?
+
+A: Im KaDeWe.
+
+B: Das ist in der Stadtmitte. Das Ist Tarifbereich A. Füllen Sie bitte das Formular hier aus.
+
+
