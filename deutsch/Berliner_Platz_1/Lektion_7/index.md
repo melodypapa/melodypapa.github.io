@@ -54,15 +54,48 @@ B: Viel Spaß!
 5. BVG：柏林公交公司。
 6. BVG-Tarif：公交车的架构。
 
-## 1.1. Dialog 3 (CD: 2.4)
+## 1.3. Dialog 3 (CD: 2.4)
 
 A: Kann ich Ihnen helfen?
 
 B: Ja, wir suchen den Winterfeldtplatz.
 
-A: Ja, also, der ist in Schöneberg. Sehen Sie, hier ist der Zoo, und dann sind es noch zwei Stationen mit der U2 bis Nollendorfplatz.
+A: Ja, also, der ist in Schöneberg. Sehen Sie, hier ist der Zoo, und dann sind es noch zwei Stationen mit der U2 bis Nollendorfplatz. Da steigen Sie am besten aus. Dann gehen Sie die Maaßenstraße runter, dann kommen Sie direkt zum Winterfeldtplatz.
 
-## 1.1. Dialog 4 (CD: 2.5)
+B: Wissen Sie auch, wo in Schöneberg die VHS ist?
+
+A: Ja, die ist am Barbarossaplatz. Das ist ganz in der Nähe. Sehen Sie, das ist hier.
+
+B: Vielen Dank. Das finden wir bestimmt.
+
+A: Gern geschehen, viel Glück.
+
+**Note:**
+
+1. aus/steigen：下车，下船。
+2. am besten：固定短语，表示“最好”。
+3. runter/gehen：往下走。（此处只往南走）
+4. VHS: die Volkshochschule
+5. in der Nähe：固定短语，表示“在附件”。
+6. bestimmt: 一定，肯定。
+
+## 1.4. Dialog 4 (CD: 2.5)
+
+A: Bist du das erste Mal in Berlin?
+
+B: Ja, und du?
+
+A: Ich lebe seit 2 Monaten hier, aber ich kenne nur mein Büro in Berlin-Mitte und meine Wohnung in Friedrichshain. Und am Wochenende lerne ich Berlin kennen. Heute mache ich eine Stadtrundfahrt mit dem Fahrrad. Da trifft man nette Leute, lernt die Stadt kennen und macht Sport!
+
+B: Das ist ein guter Tipp. Wie heißt die Organisation?
+
+A: Das weiß ich nicht genau, wir treffen uns an der Kulturbrauerei. Aber hier ist die Internetadresse.
+
+B: Ahh, vielen Dank!
+
+**Note:**
+
+1. die Kulturbrauerei: 文化酿酒厂。
 
 # 2. Wo ist bitte ...? (CD: 2.6)
 
@@ -92,10 +125,9 @@ A: Vielen Dank!
 12. etwas (A) + entlang Präp.: 沿着
 13. vorne rechts：右前方
 
+# 3. Frau Lipinskas neue Firma
 
-# Frau Lipinskas neue Firma
-
-## Dialog 1
+## 3.1. Dialog 1
 
 A: Ja, äh, ich bin neu hier, ich ...
 
@@ -113,7 +145,7 @@ Note:
 4. der erste Stock 二楼
 5. der zweite Stock 三层
 
-## Dialog 2
+## 3.2. Dialog 2
 
 A: Guten Morgen, sind Sie Frau Lipinska?
 
@@ -153,7 +185,7 @@ Note:
 11. die Kantine, -n
 12. der Keller, -
 
-## Dialog 3
+## 3.3. Dialog 3
 
 A: Ah, Maria, da bist ud ja. Hier sind Teller und Besteck. Du bestellst da an der Theke und dann gehst du zur Kasse davorne.
 
@@ -167,7 +199,7 @@ B: Nein, wo gibt es die?
 
 A: Hier am Kudamm ist ein Kundenzentrum von der BVG.
 
-## Dialog 4
+## 3.4. Dialog 4
 
 A: Ich möchte ein Konto eröffnen.
 
@@ -196,7 +228,7 @@ Note:
 3. die Theke, -n
 4. die Kasse, -n
 
-## Dialog 5
+## 3.5. Dialog 5
 
 A: Ich brauche eine Monatskarte für die U-Bahn und den Bus.
 
