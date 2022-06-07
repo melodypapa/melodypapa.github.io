@@ -104,3 +104,88 @@ B: Ja, aber ich brauche das Zimmer.
 **Note:**
 
 1. von Lohmar in die Stadt: 从洛马尔到城里。
+
+# 2. Magdas Wohnung (CD 2.19)
+
+A: Ich habe gerade deine SMS gelesen! Du hast eine Wohnung? Wie hast du denn das gemacht?
+
+B: Eigentlich ganz einfach! Ich habe eine Anzeige im Supermarkt aufgehängt: Hilfe! Ich suche ein Zimmer zur Untermiete. Frau Feldmann hat den Zettel gelesen und sofort angerufen. Sie hatte ein Zimmer frei und ich kann ihre Küche und das Bad im Flur benutzen.
+
+A: Hast du die Wohnung schon gesehen?
+
+B: Gesehen? Am Wochenende haben wir mein Bett und den Schreibtisch geholt und gestern habe ich die erste Nacht in meinem Zimmer geschlafen!
+
+A: Und deine Vermieterin, ist sie nett?
+
+B: Frau Feldmann ist super. Und der Mietvertrag ist auch in Ordnung. Es ist ein Standard-Mietvertrag.
+
+A: Und wie hast du den Umzug gemacht? Hattest du ein Auto?
+
+B: Ja, Marek war da, Er hat ein Auto gemietet. Peter und Tom haben die Kartons und die Möbel getragen und ich habe alles ausgepackt. Es ist fast alles fertig.
+
+A: Und jetzt bist du müde, oder?
+
+B: Ja, aber es war ein toller Tag! Am Abend habe ich gekocht und wir haben Frau Feldmann eingeladen. Wir haben alle zusammen gegessen, Wein getrunken und ganz viele erzählt.
+
+**Note:**
+
+1. eigentlich: 其实，本来。
+2. haben ... frei：...是空着的，是闲置状态。
+3. das Bad im Flur: 走廊上的浴室。
+4. die erste Nacht: 第一晚。
+5. Vermieterin：房东，出租者。
+6. Mietvertrag：租房合同。
+7. in Ordnung sein：有次序，正常。
+8. der Umzug：搬家。
+9. aus/packen：解开（包装好的东西）
+10. erzählen：讲诉，叙述。
+
+# 3. Der Umzug
+
+## 3.1. Bild A
+
+A: Also, hier muss es sein, Borstellstraße 24.
+
+B: Wo ist das Apartment?
+
+A: 
+
+B: Also, los. In zwei Stunden müssen wir fertig sein.
+
+A: Um 12 Uhr haben wir einen Termin in der Rathausstraße.
+
+## 3.2. Bild B
+
+C: Hier ist es. Die Tür ist offen, keiner da.
+
+B: Ist das richtig hier?
+
+D: Klar, das steht auf dem Zettel: Borstellstraße 24, 2. Stock.
+
+B: O.k. Dann an die Arbeit.
+
+## 3.2. Bild C
+
+C: Die Küche geht schnell. Die Schränke sind fast leer.
+
+D: Hermann, hier sind noch Spaghetti.
+
+C: Das nehmen wir alles mit.
+
+D: O.k. Du bist der Chef.
+
+## 3.2. Bild D
+
+D: Ich bleibe im Auto und packe die Sachen ein. Hier ist genug Platz.
+
+B: Hier sind noch zwei Kisten.
+
+D: Gut, alles ist drin, wir können losfahren.
+
+## 3.2. Bild E
+
+E: Was ist denn hier los? Wo sind meine Möbel? Wo ist meine Wohnung? Hilfe...
+
+## 3.2. Bild F
+
+E: Da fährt meine Wohnung! Telefon 66636, äh 33363.
