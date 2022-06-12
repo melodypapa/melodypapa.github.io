@@ -22,6 +22,7 @@ permalink: /autosar/
 * [AUTOSAR CAN Driver](communication/can_driver)
 * [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)
 * [AUTOSAR CAN Interface](communication/can_interface)
+* [AUTOSAR CAN Network Management](communication/can_network_management/index.md)
 * [AUTOSAR UDP Network Management](communication/UdpNm/UdpNm.md)
 
 ## 系统服务
