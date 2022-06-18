@@ -1,33 +1,5 @@
 <section id="title">Lektion-1 Hallo</section>
 
-- [1. Die Kursliste (CD: 1.2)](#1-die-kursliste-cd-12)
-  - [1.1. Dialog 1](#11-dialog-1)
-  - [1.2. Dialog 2](#12-dialog-2)
-- [2. Sie und du (CD: 1.3)](#2-sie-und-du-cd-13)
-  - [2.1. Dialog 1](#21-dialog-1)
-  - [2.2. Dialog 2](#22-dialog-2)
-  - [2.3. Dialog 3](#23-dialog-3)
-- [3. Aussprache: Melodie und Akzent](#3-aussprache-melodie-und-akzent)
-  - [3.1. Dialog 1 (CD: 1.4)](#31-dialog-1-cd-14)
-  - [3.2. Dialog 2 (CD: 1.5)](#32-dialog-2-cd-15)
-- [4. Sich vorstellen](#4-sich-vorstellen)
-  - [4.1. Dialog 1 (CD: 1.6)](#41-dialog-1-cd-16)
-  - [4.2. Dialog 2 (CD: 1.7)](#42-dialog-2-cd-17)
-  - [4.3. Dialog 3 (CD: 1.8)](#43-dialog-3-cd-18)
-- [5. Steckbriefe (CD: 1.9)](#5-steckbriefe-cd-19)
-  - [5.1. Text 1](#51-text-1)
-  - [5.2. Text 2](#52-text-2)
-  - [5.3. Text 3](#53-text-3)
-  - [5.4. Text 4](#54-text-4)
-  - [5.5. Text 5](#55-text-5)
-- [6. Deutschkurs A1 (CD 1.10)](#6-deutschkurs-a1-cd-110)
-- [7. Buchstabieren](#7-buchstabieren)
-  - [7.1. a Hören Sie. Wie heißt die Frau? Kreuzen Sie an.](#71-a-hören-sie-wie-heißt-die-frau-kreuzen-sie-an)
-  - [7.2. c Wie heißen die Personen? Hören Sie und ergänzen Sie die Namen.](#72-c-wie-heißen-die-personen-hören-sie-und-ergänzen-sie-die-namen)
-    - [7.2.1. Dialog 1](#721-dialog-1)
-    - [7.2.2. Dialog 2](#722-dialog-2)
-- [8. Leute aus Deutschland (CD 1.14)](#8-leute-aus-deutschland-cd-114)
-
 # 1. Die Kursliste (CD: 1.2)
 
 ## 1.1. Dialog 1
@@ -97,8 +69,8 @@ B: Ich bin aus Russland. <br/>
 
 ## 4.2. Dialog 2 (CD: 1.7)
 
-A: Guten Tag. Mein Name ist Sanchez. <br/>
-B: Guten Tag. Herr Sanchez. Ich bin Adam Svoboda. <br/>
+A: Guten Tag. Mein Name ist Sánchez. <br/>
+B: Guten Tag. Herr Sánchez. Ich bin Adam Svoboda. <br/>
 A: Woher kommen Sie? <br/>
 B: Aus Pilsen. Und Sie? <br/>
 A: Aus Valencia. <br/>
@@ -106,7 +78,7 @@ A: Aus Valencia. <br/>
 ## 4.3. Dialog 3 (CD: 1.8)
 
 A: Guten Abend. <br/>
-B: Guten Abend, ich bin Markus Schmeling. <b/>
+B: Guten Abend, ich bin Markus Schmeling. <br/>
 A: Entschuldigung, wie is Ihr Name? <br/>
 B: Schmeling, Markus Schmeling. <br/>
 A: Und ich bin Frau Jacob, Irene Jacob. <br/>
@@ -143,7 +115,7 @@ Das ist die Sprache im Iran.  <br/>
 
 ## 5.4. Text 4
 
-Ich heiße Sanchez, Carlos Sanchez. <br/>
+Ich heiße Sánchez, Carlos Sánchez. <br/>
 Ich komme aus Valencia. <br/>
 Valencia ist in Spanien. <br/>
 Ich spreche Spanisch und ein bisschen Französisch. <br/>
@@ -172,9 +144,15 @@ B: Das is Michael Kukan. Er kommt aus Bratislava. <br/>
 A: Aus der Slowakei? <br/>
 B: Genau! Er spricht Slowakisch und Russisch.
 
+**Note:**
+
+1. Slowakei: 斯洛伐克
+2. Slowakisch：斯洛伐克的，斯洛伐克语的。
+3. Bratislava: 布拉迪斯法拉。
+
 # 7. Buchstabieren
 
-## 7.1. a Hören Sie. Wie heißt die Frau? Kreuzen Sie an.
+## 7.1. a Hören Sie. Wie heißt die Frau? Kreuzen Sie an. (CD1.11)
 
 A: Guten Morgen. Wie heißen Sie bitte? <br/>
 B: Kowalska. <br/>
@@ -186,7 +164,7 @@ A: Und wie ist Ihr Vorname?<br/>
 B: Magadalena. M-A-G-D-A-L-E-N-A. <br/>
 A: Danke. Und wo wohnen Sie ... <br/>
 
-## 7.2. c Wie heißen die Personen? Hören Sie und ergänzen Sie die Namen.
+## 7.2. c Wie heißen die Personen? Hören Sie und ergänzen Sie die Namen. (CD1.13)
 
 ### 7.2.1. Dialog 1
 
