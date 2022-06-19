@@ -173,7 +173,7 @@ CAN网络管理（**CanNm**）主要使用CAN接口（**CanIf**[4]）的服务�
 **AUTOSAR CanNm**应包含在模块接口上可见的三种操作模式：
 
 * 网络模式（**Network Mode**）
-* 准备总线睡眠模式（**Prepare Bus-Sleep Mode**）
+* 准备总线休眠模式（**Prepare Bus-Sleep Mode**）
 * 总线睡眠模式（**Bus-Sleep Mode**）
 
 **AUTOSAR CanNm**操作模式的变化需通过回调函数通知上层。当**CanNm_GetState**被调用时，**CanNm**将返回当前的**NM**状态和模式。
@@ -188,7 +188,7 @@ CAN网络管理（**CanNm**）主要使用CAN接口（**CanIf**[4]）的服务�
 
 当从总线睡眠模式（**Bus-Sleep Mode**）进入网络模式（**Network Mode**）时，**CanNm**模块需默认进入重复消息状态（**Repeat Message State**）。
 
-当从准备总线睡眠模式（**Prepare Bus-Sleep Mode**）进入网络模式（**Network Mode**）时，**CanNm**模块需默认进入重复消息状态（**Repeat Message State**）。
+当从准备总线休眠模式（**Prepare Bus-Sleep Mode**）进入网络模式（**Network Mode**）时，**CanNm**模块需默认进入重复消息状态（**Repeat Message State**）。
 
 当进入网络模式时，**CanNm**模块需启动NM超时计时器（**NM-Timeout Timer**），同时通过调用回调函数**Nm_NetworkMode**通知上层新的当前操作模式。
 
@@ -246,7 +246,7 @@ CAN网络管理（**CanNm**）主要使用CAN接口（**CanIf**[4]）的服务�
 
 #### 6.2.1.3. 就绪睡眠状态
 
-就绪睡眠状态（**Ready Sleep State**）确保只要有其他节点保持网络管理集群处于唤醒状态，网络管理集群中的任何节点就会等待进入准备总线睡眠模式。
+就绪睡眠状态（**Ready Sleep State**）确保只要有其他节点保持网络管理集群处于唤醒状态，网络管理集群中的任何节点就会等待进入准备总线休眠模式。
 
 当从重复消息状态（**Repeat Message State**）或正常操作状态（**Normal Operation State**）进入就绪睡眠状态（**Ready Sleep State**）时，**CanNm**模块将停止网络管理**PDU**的传输。
 
@@ -256,7 +256,7 @@ CAN网络管理（**CanNm**）主要使用CAN接口（**CanIf**[4]）的服务�
 
 在某些情况下，如果被动模式被禁用，则需要在就绪睡眠状态（**Ready Sleep State**）下传输**NM PDU**，以保证网络同步关闭。例如：PN关闭消息（PN shutdown messages）的重新传输。
 
-当NM超时计时器在就绪睡眠状态（**Ready Sleep State**）下超时到期，**CanNm**模块将进入准备总线睡眠模式（**Prepare Bus-Sleep Mode**）。
+当NM超时计时器在就绪睡眠状态（**Ready Sleep State**）下超时到期，**CanNm**模块将进入准备总线休眠模式（**Prepare Bus-Sleep Mode**）。
 
 当网络请求时，当前状态为就绪睡眠状态（**Ready Sleep State**）时，**CanNm**模块需进入正常操作状态（**Normal Operation State**）。
 
@@ -264,33 +264,33 @@ CAN网络管理（**CanNm**）主要使用CAN接口（**CanIf**[4]）的服务�
 
 如果**CanNmNodeDetectionEnabled**设置为**TRUE**，并且在就绪睡眠状态（**Ready Sleep State**）下调用**CanNm_RepeatMessageRequest**函数，则**CanNm**模块需进入重复消息状态（**Repeat Message State**），并且CanNm模块需设置重复消息位（**Repeat Message Bit**）。
 
-### 6.2.2. 准备总线睡眠模式
+### 6.2.2. 准备总线休眠模式
 
-准备总线睡眠模式的目的是确保所有节点在进入总线休眠模式之前有时间停止它们的网络活动。在准备总线睡眠模式下，总线活动平静下来(即，为了使所有的tx -buffer为空，传输排队的消息)，最后，在准备总线睡眠模式下，总线上没有活动。
+准备总线休眠模式的目的是确保所有节点在进入总线休眠模式之前有时间停止它们的网络活动。在准备总线休眠模式下，总线活动平静下来(即，为了使所有的tx -buffer为空，传输排队的消息)，最后，在准备总线休眠模式下，总线上没有活动。
 
-当进入准备总线睡眠模式（**Prepare Bus-Sleep Mode**）时，**CanNm**模块将通过调用**Nm_PrepareBusSleepMode**通知上层。
+当进入准备总线休眠模式（**Prepare Bus-Sleep Mode**）时，**CanNm**模块将通过调用**Nm_PrepareBusSleepMode**通知上层。
 
-如果**CanNmStayInPbsEnabled**被禁用，**CanNm**应在由配置参数**CanNmWaitBusSleepTime**确定的可配置时间内保持在准备总线睡眠模式（**Prepare Bus-Sleep Mode**）。当时间超时后，需离开准备总线睡眠模式（**Prepare Bus-Sleep Mode**）并进入总线睡眠模式（**Bus-Sleep Mode**）。
+如果**CanNmStayInPbsEnabled**被禁用，**CanNm**应在由配置参数**CanNmWaitBusSleepTime**确定的可配置时间内保持在准备总线休眠模式（**Prepare Bus-Sleep Mode**）。当时间超时后，需离开准备总线休眠模式（**Prepare Bus-Sleep Mode**）并进入总线睡眠模式（**Bus-Sleep Mode**）。
 
 **注意：**
 
-此需求隐含地包含，如果启用**CanNmStayInPbsEnabled**，**CanNm**将永远不会因为超时而离开，即**CanNm**将一直保持在准备总线睡眠模式（**Prepare Bus-Sleep Mode**），直到**ECU**进入电源关闭或重启。
+此需求隐含地包含，如果启用**CanNmStayInPbsEnabled**，**CanNm**将永远不会因为超时而离开，即**CanNm**将一直保持在准备总线休眠模式（**Prepare Bus-Sleep Mode**），直到**ECU**进入电源关闭或重启。
 
-在准备总线睡眠模式（**Prepare Bus-Sleep Mode**）下成功接收到网络管理**PDU**后，**CanNm**模块需进入网络模式（**Network Mode**）。在默认情况下，**CanNm**模块需进入重复消息状态（**Repeat Message State**）。
+在准备总线休眠模式（**Prepare Bus-Sleep Mode**）下成功接收到网络管理**PDU**后，**CanNm**模块需进入网络模式（**Network Mode**）。在默认情况下，**CanNm**模块需进入重复消息状态（**Repeat Message State**）。
 
-在准备总线睡眠模式（**Prepare Bus-Sleep Mode**）下，当网络被请求后，**CanNm**模块需进入网络模式。并且默认情况下，**CanNm**模块需进入重复消息状态（**Repeat Message State**）。
+在准备总线休眠模式（**Prepare Bus-Sleep Mode**）下，当网络被请求后，**CanNm**模块需进入网络模式。并且默认情况下，**CanNm**模块需进入重复消息状态（**Repeat Message State**）。
 
-在准备总线睡眠模式（**Prepare Bus-Sleep Mode**）下，当网络被请求后，**CanNm**模块已进入网络模式，如果配置参数**CanNmImmediateRestartEnabled**设置为**TRUE**，则**CanNm**模块需传输网络管理**PDU**。
+在准备总线休眠模式（**Prepare Bus-Sleep Mode**）下，当网络被请求后，**CanNm**模块已进入网络模式，如果配置参数**CanNmImmediateRestartEnabled**设置为**TRUE**，则**CanNm**模块需传输网络管理**PDU**。
 
 **理由：**
 
-集群中的其他节点仍处于准备总线睡眠模式（**Prepare Bus-Sleep Mode**）。在上述异常情况下，应避免过渡到总线睡眠模式（**Bus-Sleep Mode**），并且需尽快恢复总线通信。
+集群中的其他节点仍处于准备总线休眠模式（**Prepare Bus-Sleep Mode**）。在上述异常情况下，应避免过渡到总线睡眠模式（**Bus-Sleep Mode**），并且需尽快恢复总线通信。
 
 由于**CanNm**中网络管理**PDU**的传输偏移，第一个处于重复消息状态的网络管理**PDU**的传输可能会显着延迟。为了避免网络延迟重新启动，可以立即请求网络管理**PDU**的传输。
 
 **注意：**
 
-如果**CanNmImmediateRestartEnabled**设置为**TRUE**，并且唤醒硬性（**wake-up line**）被使用，如果所有网络节点在准备总线睡眠模式（**Prepare Bus-Sleep Mode**）下收到网络请求，则会发生网络管理**PDU**突发。
+如果**CanNmImmediateRestartEnabled**设置为**TRUE**，并且唤醒硬性（**wake-up line**）被使用，如果所有网络节点在准备总线休眠模式（**Prepare Bus-Sleep Mode**）下收到网络请求，则会发生网络管理**PDU**突发。
 
 ### 6.2.3. 总线睡眠模式
 
@@ -318,11 +318,11 @@ CAN网络管理（**CanNm**）主要使用CAN接口（**CanIf**[4]）的服务�
 
 为了避免网络和模式管理之间的竞争条件和状态不一致，**CanNm**不会自动执行从总线睡眠模式（**Bus-Sleep Mode**）到网络模式（**Network Mode**）的转换。**CanNm**只会通知必须做出唤醒决策的上层。总线睡眠模式下（**Bus-Sleep Mode**）的网络管理**PDU**接收必须根据**ECU**关闭/启动过程的当前状态进行处理。
 
-如果在总线睡眠模式（**Bus-Sleep Mode**）或者准备总线睡眠模式（**Prepare Bus-Sleep Mode**）下，调用**CanNm_PassiveStartUp**，**CanNm**模块应进入网络模式（**Network Mode**）。同时在默认情况下，**CanNm**模块需进入重复消息状态（**Repeat Message State**）。
+如果在总线睡眠模式（**Bus-Sleep Mode**）或者准备总线休眠模式（**Prepare Bus-Sleep Mode**）下，调用**CanNm_PassiveStartUp**，**CanNm**模块应进入网络模式（**Network Mode**）。同时在默认情况下，**CanNm**模块需进入重复消息状态（**Repeat Message State**）。
 
 **注意：**
 
-在准备总线睡眠模式（**Prepare Bus-Sleep Mode**）和总线睡眠模式（**Bus-Sleep Mode**）中，除非有明确的总线通信请求，一般都假定网络已经被释放。
+在准备总线休眠模式（**Prepare Bus-Sleep Mode**）和总线睡眠模式（**Bus-Sleep Mode**）中，除非有明确的总线通信请求，一般都假定网络已经被释放。
 
 当在总线睡眠模式（**Bus-Sleep Mode**）模式下，网络被再次请求，**CanNm**模块应进入网络模式（**Network Mode**）。同时在默认情况下，**CanNm**模块需进入重复消息状态（**Repeat Message State**）。
 
@@ -384,6 +384,7 @@ CAN网络管理（**CanNm**）主要使用CAN接口（**CanIf**[4]）的服务�
 
 1. 源节点标识符 (**SNI**) 位于第一个字节。
 2. 控制位向量 (**CBV**) 位于第二个字节。
+3. 同时用户数据（**user data**）和部分网络（**partial network**）已被启用。同时用户数据的范围位于：系统字节（**System Bytes**）和**PNC**位向量之间。
 
 ![Figure7_1.png](Figure7_1.png)
 
@@ -398,7 +399,23 @@ CAN网络管理（**CanNm**）主要使用CAN接口（**CanIf**[4]）的服务�
 **注意：**
 
 * 将**CanNmPduCbvPosition**设置为**Off**，意味着在**NM PDU**中没有空间被控制位向量（**CBV**）占用。所有会多一个字节可用于用户数据。
-* 网络管理**PDU**的长度由全局**ECUC**模块中的**PduLength**参数定义。启用的系统字节数和长度之间的差异是用户数据字节的数量。
+* **PNC**位向量的位置可通过相应**NM**通道的**NmPncBitVectorOffset**和**NmPncBitVectorLength**进行配置。**PNC**位向量的位置位于系统字节（**CBV**和**SNI**）之后，并且在**NM-PDU**的**PduLength**内。
+
+未分配给**Nm**系统字节或**PNC**位向量的剩余字节，可以用于用户数据（**User Data**）。
+
+**注意：**
+
+用户数据的使用和位置是可配置的。如果使用了用户数据，则用户数据被放置在**NM-PDU**的**PduLength**内，并且不与系统字节或**PNC**位向量的范围重叠。
+
+如果启用了部分网络功能（即：**CanNmPnEnabled**设置为**TRUE**），并且使用了用户数据，则用户数据范围位于系统字节和**PNC**位向量之间，或者**PNC**位向量和**NM-PDU**的末尾之间。
+
+用户数据范围的长度可以根据以下限制计算：
+* 如果用户数据范围位于系统字节和**PNC**位向量之间，则用户数据范围的长度等于**PNC**位向量偏移量和系统字节长度的差值。
+* 如果用户数据范围位于**PNC**位向量和**NM-PDU**的末尾之间，则用户数据范围的长度等于**NM-PDU**长度与最后一个PNC位向量的字节的位置的差值。
+  
+如果禁用了部分网络功能（即：**CanNmPnEnabled**设置为**FALSE**，并且使用了用户数据，则用户数据范围等于**NM-PDU**长度和系统字节长度的差值。
+
+网络管理**PDU**的长度由全局**ECUC**模块中的**PduLength**参数定义。
 
 下图描述了控制位向量的格式：
 
@@ -411,16 +428,22 @@ CAN网络管理（**CanNm**）主要使用CAN接口（**CanIf**[4]）的服务�
 1. **位 0**：重复消息请求位
     * 0：未请求重复消息状态
     * 1：请求重复消息状态
+2. **位 1**：PN关闭请求位 (PNSR)
+    * 0：NM 消息不包含同步的部分网络关闭请求
+    * 1：NM 消息确实包含至少一个 PNC 的同步部分网络关闭请求
 3. **位 3**：NM协调器休眠位
     * 0：主协调器未请求启动同步关机
     * 1：主协调器请求启动同步关机
 4. **位 4**: 主动唤醒位
     * 0：节点没有唤醒网络（被动唤醒）
     * 1：节点已唤醒网络（主动唤醒）
+5. **位 5**: 部分网络学习位 (PNL)
+    * 0：不请求 PNC 学习
+    * 1：请求 PNC 学习
 6. **位 6**：部分网络信息位 (PNI)
     * 0：NM PDU 不包含部分网络请求信息
     * 1：NM PDU 包含部分网络请求信息
-7. **位 1, 2, 5, 7**：保留用于将来的扩展
+7. **位 2**和**位 7**：保留用于将来的扩展
     * 0：禁用/保留以供将来使用
 
 **注意：**
@@ -429,7 +452,7 @@ CAN网络管理（**CanNm**）主要使用CAN接口（**CanIf**[4]）的服务�
 
 **CanNm**模块需使用配置参数**CanNmNodeId**设置源节点标识符，除非**CanNmPduNidPosition**设置为关闭。
 
-如果**CanNm**由于调用**CanNm_NetworkRequest**（即：主动唤醒）而执行从总线睡眠模式（**Bus Sleep Mode**）或者准备总线睡眠模式（**Prepare Bus Sleep Mode**）到网络模式（**Network Mode**）的状态更改，并且**CanNmActiveWakeupBitEnabled**为**TRUE**，则**CanNm**需在**CBV**中设置**ActiveWakeupBit**。
+如果**CanNm**由于调用**CanNm_NetworkRequest**（即：主动唤醒）而执行从总线睡眠模式（**Bus Sleep Mode**）或者准备总线休眠模式（**Prepare Bus Sleep Mode**）到网络模式（**Network Mode**）的状态更改，并且**CanNmActiveWakeupBitEnabled**为**TRUE**，则**CanNm**需在**CBV**中设置**ActiveWakeupBit**。
 
 如果**CanNm**模块离开网络模式并且**CanNmActiveWakeupBitEnabled**为**TRUE**，则**CanNm**模块需清除**CBV**中的**ActiveWakeupBit**。
 
@@ -528,7 +551,7 @@ CAN网络管理（**CanNm**）主要使用CAN接口（**CanIf**[4]）的服务�
 
 降低总线负载机制需通过参数**CanNmBusLoadReductionEnabled**进行静态配置。
 
-当从总线睡眠模式（**Bus-Sleep Mode**）、准备总线睡眠模式（**Prepare Bus-Sleep Mode**）、正常操作状态（**Normal Operation State**）或就绪睡眠状态（**Ready Sleep State**）进入重复消息状态（**Repeat Message State**）时，**CanNm**模块应停用降低总线负载机制。
+当从总线睡眠模式（**Bus-Sleep Mode**）、准备总线休眠模式（**Prepare Bus-Sleep Mode**）、正常操作状态（**Normal Operation State**）或就绪睡眠状态（**Ready Sleep State**）进入重复消息状态（**Repeat Message State**）时，**CanNm**模块应停用降低总线负载机制。
 
 当从重复消息状态（**Repeat Message State**）或就绪睡眠状态（**Ready Sleep State**）进入正常操作状态（**Normal Operation State**）并且 **CanNmBusLoadReductionEnabled**为**TRUE**，**CanNm**模块需激活降低总线负载机制。
 
@@ -556,7 +579,7 @@ CAN网络管理（**CanNm**）主要使用CAN接口（**CanIf**[4]）的服务�
 
 通过调用**Nm_RemoteSleepCancellation**，**CanNm**通知模块**Nm**模块，集群中的某些节点不再准备好进入睡眠状态，也就是所谓的远程睡眠取消（**Remote Sleep Cancellation**）。
 
-当服务**CanNm_CheckRemoteSleepIndication**被调用，并且当前状态为总线睡眠模式（**Bus-Sleep Mode**）、准备总线睡眠模式（**Prepare Bus-Sleep Mode**）或者重复消息状态（**Repeat Message State**）时，**CanNm**模块不应执行该服务并应返回**E_NOT_OK**。
+当服务**CanNm_CheckRemoteSleepIndication**被调用，并且当前状态为总线睡眠模式（**Bus-Sleep Mode**）、准备总线休眠模式（**Prepare Bus-Sleep Mode**）或者重复消息状态（**Repeat Message State**）时，**CanNm**模块不应执行该服务并应返回**E_NOT_OK**。
 
 ### 6.9.2. 用户数据
 
@@ -682,7 +705,64 @@ CAN网络管理（**CanNm**）主要使用CAN接口（**CanIf**[4]）的服务�
 
 如果**CanNmPnEnabled**为**TRUE**，接收到的**NM-PDU**中的**PNI位**为**0**，并且**CanNmAllNmMessagesKeepAwake**为**FALSE**，则**CanNm**模块需忽略所接收到的**NM-PDU**。
 
+#### 6.11.1.1. 基于NM-PDU的过滤算法（已过时）
+
 如果**CanNmPnEnabled**为**TRUE**，接收到的**NM-PDU**中的**PNI位**为**1**，则**CanNm**模块将按照[第6.11.4章节NM PDU 过滤算法中的描述](#6114-网络管理pdu过滤算法已过时)处理NM-PDU的部分网络信息。
+
+#### 6.11.1.2. 基于PNC位向量
+
+如果**CanNmPnEnabled**为**TRUE**，接收到的**NM-PDU**中的**PNI位**为**1**，**PNSR位**为**0**，则**CanNm**模块将根据部分网络配置从接收到的**NM-PDU**中提取 PNC位向量（**NmPncBitVectorOffset** 和**NmPncBitVectorLength**对应的**NM**通道），并通过调用**Nm_PncBitVectorRxIndication**转发**PNC**位向量。
+
+如果**CanNmPnEnabled**为**TRUE**, 并且**Nm_PncBitVectorRxIndication**已经被调用，则接收到的**NM PDU**仅应在以下某一个条件满足的情况下，考虑进行进一步处理：
+
+* **CanNmAllNmMessagesKeepAwake**设置为**TRUE**
+* **CanNm_ConfirmPnAvailability**尚未被调用。
+* **RelevantPncRequestDetectedPtr**的输出值被设置为**TRUE**
+
+**注意：** 
+
+* 为了让网关在任何类型的**NM-PDU**上保持唤醒，需要设置参数**CanNmAllNmMessagesKeepAwake**。
+* 如果**PN**可用性未被**CanSM**确认，则所有**PNC**请求都被认为是相关的，所以**Nm**在接收到**NM-PDU**时重新启动NM超时计时器。这是允许故障的部分网络依赖硬件（例如：支持**PN**的**CAN**收发器）与其余网络关闭同步所必需的。
+* 如果不是所有消息都应使**ECU**保持唤醒，并且**PN**可用性已经被确认但未检测到相关**PN**信息，则不考虑对**NM PDU**进行进一步处理。
+
+#### 6.11.1.3. 举例
+
+- CanNmPduCbvPosition = 0
+- CanNmPduNidPosition = 1
+- NmPncBitVectorOffset = 4
+- NmPncBitVectorLength = 4
+- Calculated length of user data range = 2
+
+**NM PDU**的字节**2**和字节**3**包含用户数据，**NM PDU**的字节**4**到字节**7**包含**PNC**位向量：
+
+![Figure7-3](Figure7-3.png)
+
+对于此示例，定义了四个**NmPnFilterMaskBytes**。**PN**滤波器掩码的值根据部分网络设计使用。
+
+例如：
+
+- NmPnFilterMaskByteIndex = 0，NmPnFilterMaskByteValue = 0x01
+- NmPnFilterMaskByteIndex = 1，NmPnFilterMaskByteValue = 0x97
+- NmPnFilterMaskByteIndex = 2，NmPnFilterMaskByteValue = 0x00
+- NmPnFilterMaskByteIndex = 3，NmPnFilterMaskByteValue = 0x00
+
+**注意：**
+
+**PNC**位向量的偏移量来自**Nm**模块（**NmPncBitVectorOffset**）。 **PNC**位向量长度则是来自**Nm**模块的每个**NM**通道（**NmPncBitVectorLength**）。PN过滤器掩码（**NmPnFilterMaskByteIndex**和**NmPnFilterMaskByteValue**）位于**Nm**模块中并被使用。
+
+#### 6.11.1.4. 同步PNC关闭
+
+如果**CanNmSynchronizedPncShutdownEnabled**设置为**TRUE**，当接收到**PNI位**和**PNSR位**为**1**的**NM PDU**时，同时由**CanNmComMNetworkHandleRef**配置的**ComMChannel**被主动协调，即**ComMPncGatewayType**设置为**COMM_GATEWAY_TYPE_ACTIVE**，**CanNm**模块需忽略接收到的**NM-PDU**。
+
+此外，**CanNm**模块还需：
+* 向**DET**模块报告运行时错误**CANNM_E_INVALID_PN_SYNC_SHUTDOWN_REQUEST**。
+* 如果**CanNmPnSyncShutdownErrorReactionEnabled**设置为**TRUE**，则最晚在下一个主函数（**Main Function**）调用中请求发送具有当前**PN**信息**NM PDU**。
+
+如果**CanNmSynchronizedPncShutdownEnabled**设置为**TRUE**，则接收到的**NM-PDU**中的**PNI位**需设置为**1**，**PNSR位**也需设置为**1**，**CanNm**模块应根据部分网络配置（即：对应的NM通道的**NmPncBitVectorOffset**和**NmPncBitVectorLength**），从收到的**NM-PDU**中提取**PNC**位向量，并通过调用**Nm_ForwardSynchronizedPncShutdown**转发**PNC**位向量。
+
+**注意：**
+
+仅当请求同步**PNC**关闭时，**PNSR**位才可能设置为**1**。同步的**PNC**关闭需在**PN**拓扑中处理。所以假设所有协调器都启用了同步**PNC**关闭，或者所有协调器都禁用了同步**PNC**关闭。两者的混合会导致非同步的**PNC**关闭。这种情况是需要避免的。
 
 ### 6.11.2. NM PDU的Tx处理
 
@@ -694,17 +774,29 @@ CAN网络管理（**CanNm**）主要使用CAN接口（**CanIf**[4]）的服务�
 
 如果使用部分网络，则必须使用**CBV**。
 
-### 6.11.4. 网络管理PDU过滤算法
+#### 6.11.2.1. 同步PNC关闭
 
-**NM-PDU**过滤算法的目的是丢弃所有收到的与**ECU**无关的**NM-PDU**。如果网络上没有与接收**ECU**相关的**NM-PDU**，则**NM**超时计时器不再重新启动，并且**CanNm**模块在活动总线通信期间更改为准备总线睡眠模式（**Prepare Bus-Sleep Mode**）。
+如果**CanNmPnEnabled**为**TRUE**，则**NM-PDU**未配置为**CanIf**中的触发传输，即：**CanIfTxPduTriggerTransmit**设置为**FALSE**，没有同步**PNC**关闭的请求正待处理，并且NM-PDU必须被传输，**CanNm**模块需按照给定的顺序执行以下操作：
 
-为了区分与**ECU**相关的**NM-PDU**和不相关的**PDU**，**CanNm**评估包含请求**ECU**提供的**PN**请求的**NM**用户数据。**PN**请求信息的每一位代表一个**PN**。
+* 调用**Nm_PncBitVectorTxIndication**(\<NM-channel\>, \<buffer to store the unfiltered PNC bit vector of aggregated internal PNC requests\>) 来指示传输请求和取得内部**PNC**请求。
+* 通过相应**NM**通道的**NmPncBitVectorOffset**和**NmPncBitVectorLength**，将接收到的用于内部**PNC**请求的**PNC**位向量复制到**NM-PDU**。
+* 如果启用了用户数据，则获取可用数据（启用了**CanNmComUserDataSupport**，则从**Com**获取。否则从内部存储中获取）并复制**NM-PDU**的用户数据范围中的数据。
+* 通过调用**CanIf_Transmit**触发**NM-PDU**的传输。
 
-如果**ECU**是某个特定部分网络的一部分。它是静态配置的。如果**ECU**不是请求的部分网络的一部分，则忽略**NM-PDU**。
+如果**CanNmSynchronizedPncShutdownEnabled**为**TRUE**，并且服务**CanNm_RequestSynchronizedPncShutdown**被调用，**CanNm**模块应将每个给定**NM**通道 (**nmChannelHandle**) 的给定**PNC**（**pncId**）存储为一个待处理的同步PNC关闭的请求。
 
-在初始化期间，**CanNm**需在**CanNmPnEnabled**为**TRUE**的所有网络上，禁用**NM-PDU**过滤算法。
+**注意：**
+所有同步**PNC**关闭请求的**PNC**的聚集，作为**PN**关闭消息进行传输（将**CBV**中的**PNSR**位设置为**1**），并在**CanNm_MainFunction**的上下文中异步完成。
 
+### 6.11.3. 内部请求的部分网络集群的处理
 
+所有内部**PNC**请求均由**ComM**维护。**ComM**将每个通道的聚集内部**PNC**请求作为**PNC**位向量转发到**NmIf**。这个**PNC**位向量携带了所谓的内部请求数组IRA（**Internal Request Array**）。每次发送**NM PDU**时，**CanNm**都必须从**NmIf**获取最新的**IRA**。**NmIf**将**IRA**信息提供给**CanNm**，并更新**PNC**重置计时器。即每次发送相关**PNC**时，重新启动**PNC**重置计时器。
+
+**注意：**
+
+对于**CanNmPnEnabled**为**TRUE**的所有已配置**NM**通道，**CanNm**将调用**Nm_PncBitVectorTxIndication**(\<NM-channel\>, \< buffer to store the unfiltered PNC bit vector of the aggregated internal PNC requests\>)，来指示传输并获取当前内部**PNC**请求作为相应配置**NmPncBitVectorLength**的**PNC** 位向量。**CanNm**将接收到的内部**PNC**请求复制到**NM-PDU**的**PNC**位向量字节。
+
+### 6.11.4. 网络管理PDU过滤算法（已过时）
 
 ### 6.11.5. 内部和外部请求的部分网络的聚合（已过时）
 
