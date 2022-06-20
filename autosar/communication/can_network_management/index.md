@@ -282,7 +282,7 @@ CAN网络管理（**CanNm**）主要使用CAN接口（**CanIf**[4]）的服务�
 
 在准备总线睡眠模式（**Prepare Bus-Sleep Mode**）下，当网络被请求后，**CanNm**模块已进入网络模式，如果配置参数**CanNmImmediateRestartEnabled**设置为**TRUE**，则**CanNm**模块需传输网络管理**PDU**。
 
-**理由：**
+**论据：**
 
 集群中的其他节点仍处于准备总线睡眠模式（**Prepare Bus-Sleep Mode**）。在上述异常情况下，应避免过渡到总线睡眠模式（**Bus-Sleep Mode**），并且需尽快恢复总线通信。
 
@@ -314,7 +314,7 @@ CAN网络管理（**CanNm**）主要使用CAN接口（**CanIf**[4]）的服务�
 
 当**CanNm**模块在总线睡眠模式（**Bus-Sleep Mode**）下成功接收到网络管理**PDU**（**CanNm_RxIndication**调用）时，**CanNm**模块将通过调用回调函数**Nm_NetworkStartIndication**通知上层，同时应向**DET**报告错误**CANNM_E_NET_START_IND**。
 
-**理由：**
+**论据：**
 
 为了避免网络和模式管理之间的竞争条件和状态不一致，**CanNm**不会自动执行从总线睡眠模式（**Bus-Sleep Mode**）到网络模式（**Network Mode**）的转换。**CanNm**只会通知必须做出唤醒决策的上层。总线睡眠模式下（**Bus-Sleep Mode**）的网络管理**PDU**接收必须根据**ECU**关闭/启动过程的当前状态进行处理。
 
@@ -461,7 +461,7 @@ CAN网络管理（**CanNm**）主要使用CAN接口（**CanIf**[4]）的服务�
 
 即时传输确认机制用于不想使用**CanIf**的真实确认的系统。
 
-**理由：**
+**论据：**
 
 如果总线访问完全通过离线系统设计工具进行调节，则通知网络管理传输成功的实际传输确认可被视为是多余的。由于最大仲裁时间是已知的，所以在传输请求时间立即提出确认是可以接受的。
 
@@ -694,7 +694,7 @@ CAN网络管理（**CanNm**）主要使用CAN接口（**CanIf**[4]）的服务�
 
 如果使用部分网络，则必须使用**CBV**。
 
-### 6.11.4. 网络管理PDU过滤算法
+### 6.11.3. 网络管理PDU过滤算法
 
 **NM-PDU**过滤算法的目的是丢弃所有收到的与**ECU**无关的**NM-PDU**。如果网络上没有与接收**ECU**相关的**NM-PDU**，则**NM**超时计时器不再重新启动，并且**CanNm**模块在活动总线通信期间更改为准备总线睡眠模式（**Prepare Bus-Sleep Mode**）。
 
@@ -704,13 +704,82 @@ CAN网络管理（**CanNm**）主要使用CAN接口（**CanIf**[4]）的服务�
 
 在初始化期间，**CanNm**需在**CanNmPnEnabled**为**TRUE**的所有网络上，禁用**NM-PDU**过滤算法。
 
+如果**CanSm**调用**CanNm_ConfirmPnAvailability**，**NM-PDU**过滤算法则需在指定的通道上被启用。
+
+**论据：**
+
+这是允许发生故障的**PN**收发器（**PN transceiver**）与其余网络同步关闭所必需的。
+
+**注意：**
+
+如果未启用**NM-PDU**过滤算法，例如：由于**PN**收发器（**PN transceiver**）故障，**CanNm**在接收到**NM-PDU**时会重新启动**NM-Timeout Timer**，从而接着执行正常的关机行为。
+
+**NM-PDU**过滤算法应评估接收到的由**CanNmPnInfoOffset**定义的**NM-PDU**的字节（以字节为单位），从字节**0**开始到**CanNmPnInfoLength**（以字节为单位）。此范围称为**PN**信息范围（**PN Info Range**）。
+
+**PN**信息范围的每一位代表一个部分网络（**Partial Network**）。如果该位设置为**1**，则请求部分网络。如果该位设置为**0**，则没有对该**PN**的请求。
+
+过滤算法应将接收到的**PN**信息与**PN**过滤掩码进行比较（按位进行与操作），以检测是否请求了相关的**PN**。
+
+**PN**过滤器掩码的每一位应具有以下含义：
+* 0：**PN**请求与**ECU**无关。如果在接收到的**NM-PDU**中设置了该位，则**ECU**的通信堆栈不会保持唤醒。
+* 1：**PN**请求与**ECU**相关。如果在接收到的**NM-PDU**中设置了该位，则**ECU**的通信堆栈保持唤醒。
+
+如果在收到的**NM-PDU**中请求了至少一个相关的**PN**，则此**PDU**不应从进一步的**Rx**指示处理中丢弃。
+
+如果在收到的**NM-PDU**中没有请求相关的**PN**，并且**CanNmAllNmMessagesKeepAwake**为**FALSE**，则此**PDU**应从进一步的处理中删除 。
+
+如果在收到的**NM-PDU**中没有请求相关的**PN**，并且**CanNmAllNmMessagesKeepAwake**为**TRUE**，则此**PDU**不应从进一步的**Rx**指示处理中丢弃。
+
+**注意：**
+
+这是使网关在任何类型的**NM-PDU**上保持清醒所必需的。
+
+#### 6.11.3.1. 举例
+
+如下图所示，**NM PDU**只有字节**4**和字节**5**包含PN信息：
+
+* CanNmPnInfoOffset = 4
+* CanNmPnInfoLength = 2
+
+![Figure7-3](Figure7-3.png)
+
+对于此示例，定义了两个**CanNmPnFilterMaskBytes**，例如：
+
+* **CanNmPnFilterMaskByteIndex** = 0，**CanNmPnFilterMaskByteValue** = 0x01
+* **CanNmPnFilterMaskByteIndex** = 1，**CanNmPnFilterMaskByteValue** = 0x97
+
+过滤器算法的动作和结果将是：
+
+![Figure7-4](Figure7-4.png)
+
+由于其中的一个字节包含相关信息，所以该**NM PDU**不会在进一步的**Rx**指示处理中被丢弃。
+
+### 6.11.4. 内部和外部请求的部分网络的聚合
+
+由于部分网络的活动（例如，为了防止错误超时），每个必须切换**I-PDU**组的**ECU**都使用到此功能。。
+
+如果内部或外部请求相应的**PN**，则需打开**I-PDU**组。直到所有对相应**PN**的内部和外部请求都被释放后，才需关闭**I-PDU**组。
+
+切换**I-PDU**组的逻辑是由**ComM**实现。**CanNm**仅提供某个**PN**是否被请求的信息。**COM**模块被用于将数据传输到上层模块。
+
+为了在所有直接连接的**ECU**上同步切换**I-PDU**组，canm需在每个ECU上，同时或者几乎同时，向上层提供请求变更的信息。这就是为什么在每次接收和发送**NM PDU**时，都会重启重置计时器（**Reset timer**）的原因。
+
+内部/外部请求的PN的集合状态称为外部内部请求数组**EIRA**（**External Internal Request Array**）。
+
+如果**CanNmPnEiraCalcEnabled**为**TRUE**，**CanNm**需提供存储在所有相关通道（**CanNmPnEnabled**为**TRUE**的所有**CanNm**通道）上组合的外部和内部请求**PN**的可能性。在初始化时，所有**PN**的值应设置为**0**（未请求）。
+
+如果以下条件都满足，**CanNm**将存储这些**PN**的请求信息（数值为**1**）。
+
+* **CanNmPnEiraCalcEnabled**为**TRUE**。
+* 收到一个**NM-PDU**
+* 在此消息中**PN**已经被请求。即：比特位设置为**1**。
+* 请求的**PN**在配置的**PN**过滤器掩码内设置为**1**。
 
 
-### 6.11.5. 内部和外部请求的部分网络的聚合（已过时）
 
-### 6.11.6. 外部请求的部分网络的聚合（已过时）
+### 6.11.5. 外部请求的部分网络的聚合（已过时）
 
-### 6.11.7. 通过CanNm_NetworkRequest自发传输NM PDU
+### 6.11.6. 通过CanNm_NetworkRequest自发传输NM PDU
 
 ## 6.12. 传输错误处理
 
