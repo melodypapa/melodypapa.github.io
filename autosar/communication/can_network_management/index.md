@@ -1,4 +1,4 @@
-<section id="title">AUTOSAR CAN NM</section>
+<section id="title">AUTOSAR CAN NM（CAN网络管理）</section>
 
 # 1. 简介和功能概述
 
