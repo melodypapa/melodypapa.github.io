@@ -189,6 +189,7 @@ AUTOSAR UdpNm协调算法的主要概念，可以通过以下两个关键需求�
 ## 6.2. 操作模式
 
 **AUTOSAR UdpNm**应包含以下的三种操作模式：
+
 1. 网络模式（**Network Mode**）
 2. 准备总线睡眠模式（**Prepare Bus-Sleep Mode**）
 3. 总线睡眠模式（**Bus-Sleep Mode**）
@@ -198,6 +199,7 @@ AUTOSAR UdpNm协调算法的主要概念，可以通过以下两个关键需求�
 ### 6.2.1. 网络模式（Network Mode）
 
 网络模式应包括三个内部状态：
+
 1. 重复消息状态（**Repeat Message State**） 
 2. 正常运行状态（**Normal Operation State**）
 3. 就绪睡眠状态（**Ready Sleep State**）
