@@ -24,16 +24,17 @@ permalink: /autosar/
 * [AUTOSAR CAN Interface](communication/can_interface)
 * [AUTOSAR CAN Network Management](communication/can_network_management/index.md)
 * [AUTOSAR UDP Network Management](communication/udp_network_management/index.md)
-* [AUTOSAR PDU Router](communication/pdu_router/index.md)
+* [AUTOSAR PDU Router](communication/pdu_router)
 
 ## 系统服务
 
 * [AUTOSAR FiM（功能抑制管理器）](system_services/function_inhibition_manager/index.md)
+* [AUTOSAR TM（时间服务）](system_services/time_service)
 
 ## 存储（Memory）
 
 * [AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md)
-* [AUTOSAR FEE (闪存EEPROM仿真)](memory/flash_eeprom_emulation/index.md)
+* [AUTOSAR FEE (闪存EEPROM仿真）](memory/flash_eeprom_emulation/index.md)
 * [AUTOSAR NV数据处理指南](memory/nv_data_handling_guideline/index.md)
 
 ## 输入输出（I/O）

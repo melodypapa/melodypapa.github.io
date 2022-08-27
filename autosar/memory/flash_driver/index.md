@@ -318,6 +318,51 @@ Std_ReturnType Fls_BlankCheck ( Fls_AddressType TargetAddress, Fls_LengthType Le
 void Fls_MainFunction ( void )
 ```
 
+# 9. 配置规范
+
+## 9.1. FlsGeneral
+
+### 9.1.1. FlsGeneral/FlsAcLoadOnJobStart
+
+每当启动擦除或写入作业时，闪存驱动程序应将闪存访问代码加载到**RAM**，并在该作业完成或取消后卸载（或者覆盖）访问代码。
+
+### 9.1.2. FlsGeneral/FlsBaseAddress
+
+闪存起始地址。 此参数定义读/写/擦除和比较作业的下限。
+
+### 9.1.3. FlsGeneral/FlsBlankCheckApi
+
+编译开关以启用/禁用**Fls_BlankCheck**功能。
+* **true**：支持此API，并提供此功能。
+* **false**：不支持此API，不提供功能。
+
+### 9.1.4. FlsGeneral/FlsCancelApi
+
+编译开关以启用和禁用**Fls_Cancel**函数。
+* **true**：支持此API，并提供此功能。
+* **false**：不支持此API，不提供功能。
+
+### 9.1.5. FlsGeneral/FlsCompareApi
+
+编译开关以启用和禁用**Fls_Compare**函数。
+* **true**：支持此API，并提供此功能。
+* **false**：不支持此API，不提供功能。
+
+### 9.1.6. FlsGeneral/FlsDevErrorDetect
+
+打开或关闭开发错误检测和通知。
+* **true**：启用检测和通知。
+* **false**：检测和通知被禁用。
+
+### 9.1.7. FlsGeneral/FlsDriverIndex
+
+驱动程序的索引，由**FEE**使用。
+
+
+
+
+
+
 <section id="wechat">
 
 <h4>微信扫一扫，获取更多及时资讯</h4>
