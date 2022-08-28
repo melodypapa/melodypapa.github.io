@@ -30,6 +30,7 @@ permalink: /autosar/
 
 * [AUTOSAR FiM（功能抑制管理器）](system_services/function_inhibition_manager/index.md)
 * [AUTOSAR TM（时间服务）](system_services/time_service)
+* [AUTOSAR OS（操作系统）](system_services/operating_system)
 
 ## 存储（Memory）
 
