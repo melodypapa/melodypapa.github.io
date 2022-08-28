@@ -11,19 +11,19 @@
 
 # 2. 目的
 
-EB Tresos Studio是基于Eclispe环境二次开发的一个集成IDE。在扩展性这点上，由于基于Eclipse的生态，所以能力肯定是不容置疑的。
+EB Tresos Studio是基于Eclipse环境二次开发的一个集成IDE。在扩展性这点上，由于基于Eclipse的生态，所以能力肯定是不容置疑的。
 
 它的**Guided Configuration API**提供了对您的EB Tresos Studio定制我们所需要的对话框以及编辑器的能力。通过**Guided Configuration API**，我们可以做到：
 
-1. 数值的自动计算向导。如：计算Handle ID或者某些特定的栏位的数值。
-2. 定义模块数据的编辑，类似于Mem Stack编辑的Sidebar功能
-3. 建立需通过多个步骤配置的向导功能，注意是会跨多个EB Tresos的模块。
+1. 数值的自动计算向导。如：计算**Handle ID**或者某些特定的栏位的数值。
+2. 定义模块数据的编辑，类似于**Mem Stack**编辑的**Sidebar**功能。
+3. 建立需通过多个步骤配置的向导功能，通常是会跨多个**EB Tresos**的模块。
 
 # 3. 名词解释
 
 **Backend**
 
-> 后端扩展了抽象后端类并处理向导的后台功能。在**model-view-controller**概念中，它对应于**controller**。它注意负责整个配置向导的生命周期。
+> 后端扩展了抽象后端类并处理向导的后台功能。在**model-view-controller**概念中，它对应于**controller**。它主要4负责整个配置向导的生命周期。
 
 **Selection context**
 
@@ -35,12 +35,12 @@ EB Tresos Studio是基于Eclispe环境二次开发的一个集成IDE。在扩展
 
 **Push service**
 
-> **Guided Configuration API**为了更新**DataModel**中的数据，提供了一种称为推送服务（**Push service**）的接口，用于用来实现配置向导（**memento**）的数据与 DataModel配置（**DCtxt**）之间的数据交换。推送服务由多个推送事件（**push event**）和多个推送操作（**push operation**）两部分组成。 **Backend**实现发送推送事件，并最终执行相应的推送操作。这些操作用于在通用**DataModel**和**memento**之间进行交换数据。
+> **Guided Configuration API**为了更新**DataModel**中的数据，提供了一种称为推送服务（**Push service**）的接口，用于用来实现配置向导（**memento**）的数据与**DataModel配置（****DCtxt**）之间的数据交换。推送服务由多个推送事件（**push event**）和多个推送操作（**push operation**）两部分组成。 **Backend**实现发送推送事件，并最终执行相应的推送操作。这些操作用于在通用**DataModel**和**memento**之间进行交换数据。
 
 
 # 4. 设计理念
 
-EB Tresos的Guided Configuration设计理念是建立在传统的**MVC**（**model-view-controller**）模式框架上的。
+**EB Tresos**的**Guided Configuration**设计理念是建立在传统的**MVC**（**model-view-controller**）模式框架上的。
 
 ## 4.1. Model
 
