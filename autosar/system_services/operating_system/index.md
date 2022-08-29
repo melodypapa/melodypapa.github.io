@@ -48,64 +48,64 @@
 > 电子控制单元（Electronic Control Unit）
 
 **HW** 
-> Hardware
+> 硬件（**Hardware**）
 
 **ID** 
-> Identifier
+> 标识符（**Identifier**）
 
 **IOC** 
-> Inter OS-Application communicator
+> 操作系统间应用程序通信器（**Inter OS-Application communicator**）
 
 **ISR** 
-> Interrupt Service Routine
+> 中断服务程序（**Interrupt Service Routine**）
 
 **LE** 
-> A locatable entity is a distinct piece of software that has the same effect regardless of which core it is located.
+> 可定位实体（**locatable entity**）是一个不同的软件，无论它位于哪个内核，都具有相同的效果。
 
 **MC** 
-> Multi-Core
+> 多核（**Multi-Core**）
 
 **MCU** 
-> Microcontroller Unit
+> 微控制器单元（**Microcontroller Unit**）
 
 **ME** 
-> Mutual exclusion
+> 互斥（**Mutual exclusion**）
 
 **MPU** 
-> Memory Protection Unit
+> 内存保护单元（**Memory Protection Unit**）
 
 **NMI** 
-> Non maskable interrupt
+> 不可屏蔽中断（**Non maskable interrupt**）
 
 **OIL** 
-> OSEK Implementation Language
+> OSEK 实现语言（**OSEK Implementation Language**）
 
 **OS** 
-> Operating System
+> 操作系统（**Operating System**）
 
 **OSEK/VDX** 
-> Offene Systeme und deren Schnittstellen für die Elektronik im Kraftfahrzeug
+> 用于机动车辆电子设备的开放系统及其接口（**Offene Systeme und deren Schnittstellen für die Elektronik im Kraftfahrzeug**）
 
 **RTE** 
-> Run-Time Environment
+> 运行环境（**Run-Time Environment**）
 
 **RTOS** 
-> Real Time Operating System
+> 实时操作系统（**Real Time Operating System**）
 
 **SC** 
-> Single-Core
+> 单核（**Single-Core**）
 
 **SLA** 
-> Software Layered Architecture
+> 软件分层架构（**Software Layered Architecture**）
 
 **SW** 
-> Software
+> 软件（**Software**）
 
 **SWC** 
-> Software Component
+> 软件组件（**Software Component**）
 
 **SWFRT** 
-> Software FreeRunningTimer
+> 软件自由运行定时器（**Software FreeRunningTimer**）
 
 # 3. 相关文档
 
@@ -226,4 +226,79 @@
 ## 4.6. 限制
 
 ### 4.6.1. 硬件
+
+核心 **AUTOSAR** 操作系统假定可以自由访问由操作系统本身管理的硬件资源，包括但不限于以下硬件：
+
+* 中断控制寄存器（**interrupt control registers**）
+* 处理器状态字（**processor status words**）
+* 堆栈指针（**stack pointers**）
+
+核心操作系统的特定（扩展）特性扩展了对硬件资源的要求。以下列表概述了有硬件需求的功能。如果不使用这些操作系统功能的系统，可以无需关心以下这些硬件需求。
+
+* 内存保护（**Memory Protection**）：依赖硬件内存保护单元。所有具有写入结果的内存访问（例如，具有写入内存位置的副作用的读取）都应被视为写入。
+* 时间保护（**Time Protection**）：用于监控执行时间和到达率的计时器硬件。
+* MCU上的特权和非特权模式（**Privileged and non-privileged modes on the MCU**）：保护操作系统免受由写入操作系统控制的寄存器引起的内部损坏。此模式不得允许操作系统应用程序绕过保护（例如：写入管理内存保护的寄存器、写入处理器状态字等）。特权模式必须在受保护操作系统的完全控制下，该操作系统在内部使用该模式并将控制权从不受信任的操作系统应用程序来回转移到受信任的操作系统应用程序。微处理器必须支持使处理器进入这种特权模式的受控方式。
+* 本地/全局时间同步（**Local/Global Time Synchronization**）：需要一个全局的时间源。
+
+通常处理器中的硬件故障并不会被操作系统检测到。如果发生硬件故障，操作系统的正确运行则将无法被保证。
+
+由特定操作系统实现管理的资源必须在操作系统的适当配置文件中定义。
+
+### 4.6.2. 编程语言
+
+**AUTOSAR** 操作系统的 **API** 被定义为 **C** 函数调用或宏。如果使用其他语言，则必须适应 **C** 接口。
+
+### 4.6.3. 其他
+
+**AUTOSAR** 操作系统不提供动态内存管理服务。
+
+## 4.7. 适用于汽车领域
+
+因为操作系统在大小和可伸缩性方面具有与参见文档[2]的设计相同的设计约束，所以当前的直接适用领域是车身、底盘和动力传动系ECU（**body, chassis and power train ECUs**）。但是没有理由不可以使用此操作系统来实现信息娱乐应用的 **ECU**。
+
+# 5. 对其他模块的依赖
+
+**AUTOSAR** 操作系统对其他模块没有强制依赖，但是：
+
+* 假设操作系统可以直接使用定时器单元来驱动计数器。
+* 如果用户需要直接从全局时间来驱动调度，则全局时间中断是必须的。
+* 如果用户需要将ScheduleTable的处理同步到全局时间，操作系统需要使用 **SyncScheduleTable** 服务来获知全局时间。
+* 本文档中描述的 **IOC** 提供 **OSApplication** 之间的通信。**IOC** 生成基于 **RTE** 生成器生成的配置信息。另一方面，**RTE** 使用 **IOC** 生成的函数来传输数据。
+
+## 5.1. 文件结构
+
+### 5.1.1. 代码文件结构
+
+操作系统模块的代码文件结构不是固定的，除了参考文档[6] **AUTOSAR_SRS_BSWGeneral** 中要求的。
+
+### 5.1.2. 头文件结构
+
+**IOC** 生成器生成一个附加的头文件 **Ioc.h**。**Ioc.h** 的用户应包括 **Ioc.h** 文件。如果 **IOC** 的实现需要额外的头文件，可以自由地包含它们。头文件是自包含的，这意味着它们将包含所有其他需要的头文件。
+
+### 5.1.3. ARTI 文件结构
+
+为了支持基于 **ARTI** 的调试和跟踪，所有带有 **ARTI** 钩子宏（**ARTI hook macros**）的源文件都应包含一个 **arti.h** 文件。该文件连同相应的 **arti.c** 文件将由 **ARTI** 钩子实现者（即：Tracing工具）提供。 在构建最终的可执行文件时，链接器也会拉入已编译的 **arti.c** 文件。 **ARTI** 钩子宏的使用是可配置的。如果操作系统配置为不使用 **ARTI**，则可以省略包含**arti.h**，并且 **ARTI** 钩子宏可以扩展为空的宏。
+
+# 6. 功能规格
+
+## 6.1. 核心操作系统
+
+### 6.1.1. 背景与理由
+
+**OSEK/VDX** 的操作系统[2]广泛用于汽车行业，并已在当代车辆中能被发现的所有类别的 **ECU** 中得到证明。被引入的 **OSEK OS** 的概念已广为人知，汽车行业在基于 **OSEK OS** 的系统工程方面拥有多年积攒的经验。
+
+**OSEK OS** 是一个事件触发的操作系统（**event-triggered operating system**）。这为基于 **AUTOSAR** 的系统的设计和维护提供了高度的灵活性。事件触发为在运行时选择事件以驱动调度提供了自由，例如：角旋转、本地时间源、全局时间源、错误发生等。
+
+由于这些原因，**AUTOSAR OS** 的核心功能需基于 **OSEK OS**。 特别是 **OSEK OS** 提供以下功能来支持 **AUTOSAR** 中的概念：
+
+* 基于固定优先级的调度（**fixed priority-based scheduling**）
+* 处理中断的设施（**facilities for handling interrupts**）
+* 只有优先级高于任务的中断（**only interrupts with higher priority than Tasks**）
+* 对不正确使用操作系统服务的一些保护（**some protection against incorrect use of OS services**）
+* 通过 StartOS 和 StartupHook 的启动界面（**a startup interface through StartOS and the StartupHook**）
+* 通过 ShutdownOS 和 ShutdownHook 的关机接口（**a shutdown interface through ShutdownOS and the ShutdownHook**）
+
+除了这些之外，**OSEK OS**还提供了许多功能。可查阅规范[2]了解详细信息。
+
+基于 **OSEK OS** 的 **AUTOSAR OS** 意味着遗留应用程序（**legacy applications**）可以向后兼容 - 即为 **OSEK OS** 编写的应用程序将可在 **AUTOSAR OS** 上运行。 但是**AUTOSAR OS** 引入的一些功能需求限制了使用现有的部分 **OSEK OS** 功能，并扩展现有的部分 **OSEK OS** 功能。
 
