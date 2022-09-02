@@ -302,3 +302,51 @@
 
 基于 **OSEK OS** 的 **AUTOSAR OS** 意味着遗留应用程序（**legacy applications**）可以向后兼容 - 即为 **OSEK OS** 编写的应用程序将可在 **AUTOSAR OS** 上运行。 但是**AUTOSAR OS** 引入的一些功能需求限制了使用现有的部分 **OSEK OS** 功能，并扩展现有的部分 **OSEK OS** 功能。
 
+## 6.2. 需求
+
+**AUTOSAR** 操作系统模块应提供与 **OSEK OS API** 向后兼容的 **API**。
+
+### 6.2.1. OSEK 操作系统的限制
+
+由于 **OSEK OS** 效率太低，无法为警报回调函数（**alarm callback**）实现时序和内存保护。所以它们在一些特定的可伸缩性类中是不被允许使用的。
+
+**AUTOSAR** 操作系统模块仅允许可扩展性等级1中的警报回调函数。
+
+当系统中仅需要内部通信时，**OSEK OS** 需要根据 **OSEK COM** 规范提供处理Task任务间通信（即：内部通信）的功能。在 **AUTOSAR** 中，内部通信由 **AUTOSAR RTE** 或 **AUTOSAR COM** 提供，至少其中一个将存在于所有 **AUTOSAR ECU**。
+
+当**AUTOSAR OS** 在用于 **AUTOSAR** 系统时，不需要支持内部通信。
+
+如果定义了符号 **LOCALMESSAGESONLY**，则 **OSEK OS** 必须实现内部通信。**AUTOSAR OS** 即使在未定义 **LOCALMESSAGESONLY** 的环境中，确保内部通信始终存在，来弃用实现 **OSEK COM** 功能，并保持与 **OSEK** 规范的兼容性的需要。
+
+**OSEK OS** 有一个称为 **RES_SCHEDULER** 的特殊资源。此资源有**2**个具体方面：
+
+1. 即使未配置，它也始终存在于系统中。这意味着 **RES_SCHEDULER** 始终为操作系统所知。
+2. 它始终具有最高的Task任务优先级。这意味着分配此资源的Task任务不能被其他任务抢占。
+
+由于一些特殊情况总是难以处理。例如：在**RES_SCHEDULER**这种情况下与时序保护有关的情况。所以**AUTOSAR OS** 将 **RES_SCHEDULER** 处理为任何其他资源。这意味着不会自动创建 **RES_SCHEDULER**。
+
+**注意：**
+
+在多核系统上，调度发生在每个内核上。 第6.9.22 章包含有关在此类系统中处理资源的更多信息。
+
+在 **OSEK OS** 中，用户必须用特定的宏（**Macro**）来声明操作系统对象。例如：DeclareTask()等。而 **AUTOSAR OS** 实现不应依赖于此类声明，并且需为了向后兼容提供没有功能的此类宏声明。
+
+### 6.2.2. OSEK OS 中的未定义行为
+
+在许多情况下，**OSEK OS** 的行为是未定义的。这些情况表现了其移植性上的障碍。**AUTOSAR OS** 通过定义所需的行为来收紧 **OSEK OS** 此类规范。
+
+1. 如果在对 **SetRelAlarm** 的调用中，参数**increment**设置为零，则服务应以标准和扩展状态返回 **E_OS_VALUE**。
+2. 对 **StartOS**（用于启动操作系统）的第一次调用不应返回。
+3. 如果调用 **ShutdownOS** 并且 **ShutdownHook** 返回，则操作系统模块需禁用所有中断并进入无限循环。
+
+### OSEK OS 的扩展
+
+操作系统模块应在调用 **StartOS** 之前和调用 **ShutdownOS** 之后提供 **DisableAllInterrupts**、**EnableAllInterrupts**、**SuspendAllInterrupts**、**ResumeAllInterrupts** 服务。
+
+操作系统模块应提供增加软件计数器的能力，作为警报到期时的替代操作。 操作系统模块提供 API 服务 IncrementCounter 来增加软件计数器。
+
+操作系统模块应允许在操作系统启动期间自动启动预配置的绝对警报。
+
+是 OSEK OS 的扩展，它只允许相关警报。
+
+操作系统 API 应在扩展模式下检查所有指针参数是否为 NULL 指针，如果此类参数为 NULL，则以扩展状态返回 E_OS_PARAM_POINTER。
