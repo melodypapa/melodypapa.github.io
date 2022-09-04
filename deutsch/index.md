@@ -13,3 +13,4 @@ permalink: /deutsch/
 * [Lektion 6 - Familienleben](Berliner_Platz_1/Lektion_6)
 * [Lektion 7 - Willkommen in Berlin!](Berliner_Platz_1/Lektion_7/index.md)
 * [Lektion 8 - Zimmer, Küche, Bad](Berliner_Platz_1/Lektion_8/index.md)
+* [Lektion 11 - Das geht dir gut!](Berliner_Platz_1/Lektion_11)
