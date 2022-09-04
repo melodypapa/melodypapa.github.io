@@ -375,3 +375,50 @@
 每个调度表（**ScheduleTable**）都有一个以滴答为单位的持续时间。持续时间从零开始测量，并定义了调度表（**ScheduleTable**）的模数。
 
 在运行时，操作系统模块将遍历调度表（**ScheduleTable**），依次处理每个到期点（**expiry points**）。迭代是被 **OSEK** 计数器（**Counter**）驱动。 因此计数器（**Counter**）的属性会影响可以在调度表（**ScheduleTable**）上配置的内容。
+
+### 6.3.2. 需求
+
+#### 6.3.2.1. 调度表的结构
+
+![Figure7_1](Figure7_1.png)
+
+一个调度表（**ScheduleTable**）至少有一个到期点（**expiry points**）。
+
+一个到期点（**expiry points**）包含一组（可能为空）要激活的任务（**Task**）。
+
+一个到期点（**expiry points**）需包含一组（可能为空）要设置的事件（**Event**）。
+
+一个到期点需包含从调度表（**ScheduleTable**）开始的以滴答（**Ticks**）为单位偏移量。
+
+#### 6.3.2.2. 到期点的限制
+
+真实场景下，因为不存在空的到期点的用例，所以每个到期点都必须定义至少一个动作（**action**）。即：到期点需至少激活一个任务（**Task**）或设置至少一个事件（**Event**）。
+
+因为操作系统需要知道处理到期点的顺序。所以有必要确保调度表（**ScheduleTable**）上的到期点可以完全排序。这是通过强制调度表（**ScheduleTable**）上的每个到期点必须具有唯一偏移量来保证的。给定调度表（**ScheduleTable**）上的每个到期点都需具有唯一的偏移量。
+
+对调度表（**ScheduleTable**）上的到期点的迭代通过 **OSEK** 计数器来驱动。计数器（**Counter**）的特性（包括：**OsCounterMinCycle** 和 **OsCounterMaxAllowedValue**）对到期点偏移量施加约束。
+
+初始的偏移量需为零或在底层计数器的**OsCounterMinCycle** 到 **OsCounterMaxAllowedValue**的范围之间。
+
+类似地，此约束也适用于相邻到期点之间的延迟，以及到调度表（**ScheduleTable**）逻辑结束的延迟。相邻到期点之间的延迟也需底层计数器的**OsCounterMinCycle**到** OsCounterMaxAllowedValue**的范围之间。
+
+#### 6.3.2.3. 处理调度表
+
+操作系统模块需按照偏移量递增的顺序处理调度表（**ScheduleTable**）从初始到期点到最终到期点的每个到期点。
+
+操作系统模块需允许同时处理多个调度表（**ScheduleTable**）。操作系统模块的一个调度表（**ScheduleTable**）应该由一个计数器（**Counter**）来驱动。操作系统模块需在任何给定时间，让每个计数器（**Counter**）能够处理至少一个调度表（**ScheduleTable**）。
+
+操作系统模块需使用滴答（**Ticks**）来计时，以便计数器上的一个滴答值（**Ticks**）能够对应到调度表（**ScheduleTable**）上的一个滴答值（**Ticks**）。
+
+可以在同一到期点（**expiry points**）上激活任务（**Task**）并为同一任务（**Task**）设置一个或多个唯一的事件（**Event**）。在到期点执行的任务（**Task**）激活的顺序和事件（**Event**）设置的顺序可能会导致不同的实现，并表现出不同的行为。例如：激活暂停的任务（**Task**），然后在此任务（**Task**）上事件的设置会执行成功。但如果顺序颠倒，则事件设置会失败。为了防止这种不确定性，有必要在到期点（**expiry points**）执行严格的操作顺序。
+
+如果到期点（**expiry points**）包含激活任务（**Task**）的动作，以及为此任务设置一个或者多个事件，则操作系统模块需在相关事件设置之前先处理此任务的激活。无法对到期点（**expiry points**）的处理顺序做出进一步的假设。
+
+调度表（**ScheduleTable**）始终具有定义的状态，下图说明了非同步调度表（**ScheduleTable**）的不同状态，以及它们之间的转换。
+
+![Figure7_2](Figure7_2.png)
+
+* 如果调度表（**ScheduleTable**）不活动，这意味着操作系统未处理，其状态为 **SCHEDULETABLE_STOPPED**。 
+* 启动了调度表（**ScheduleTable**）后，进入 **SCHEDULETABLE_RUNNING** 状态，操作系统需处理到期点（**expiry points**）。 
+* 如果切换调度表（**ScheduleTable**）的服务被调用，则调度表（**ScheduleTable**）进入 **SCHEDULETABLE_NEXT** 状态，并等待当前执行的调度表（**ScheduleTable**）执行结束。
+
