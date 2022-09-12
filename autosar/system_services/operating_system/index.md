@@ -365,7 +365,7 @@
 
 ### 6.3.1. 背景与理由
 
-可以使用 **OSEK** 计数器（**Counter**）和一系列自动启动的警报（**alarms**）来实现静态定义的任务（**Task**）激活机制。在简单的情况下，这可以通过指定一旦启动就不会被修改的警报（**alarm**）来实现。运行时修改只有在警报之间的相对同步可以保证的情况下才能进行。这通常意味着只有在禁用相关的计数器（**Counter**）滴答中断的时候，才能修改警报。
+可以使用 **OSEK** 计数器（**Counter**）和一系列自动启动的警报（**Alarms**）来实现静态定义的任务（**Task**）激活机制。在简单的情况下，这可以通过指定一旦启动就不会被修改的警报（**Alarm**）来实现。运行时修改只有在警报之间的相对同步可以保证的情况下才能进行。这通常意味着只有在禁用相关的计数器（**Counter**）滴答中断的时候，才能修改警报。
 
 调度表（**ScheduleTables**) 通过提供一组静态定义的到期点（**expiry points**）的封装来解决同步问题。每个到期点定义：
 
@@ -422,3 +422,122 @@
 * 启动了调度表（**ScheduleTable**）后，进入 **SCHEDULETABLE_RUNNING** 状态，操作系统需处理到期点（**expiry points**）。 
 * 如果切换调度表（**ScheduleTable**）的服务被调用，则调度表（**ScheduleTable**）进入 **SCHEDULETABLE_NEXT** 状态，并等待当前执行的调度表（**ScheduleTable**）执行结束。
 
+#### 6.3.2.4. 重复调度表处理
+
+在最终到期点被处理完之后，调度表（**ScheduleTable**）可能会也可能不会再被重复处理。
+
+在这种情况下，允许两种类型的行为：
+
+1. 单次（**single-shot**）：调度表（**ScheduleTable**）依次处理每个到期点，然后处理完最后一个到期点后停止。这对于触发分阶段的动作序列，以响应某些触发器的场景非常有用。
+2. 重复（**repeating**）：调度表（**ScheduleTable**）依次处理每个到期点，处理完最后一个到期点后，循环回到最初的过期点。这对于构建执行重复处理的应用程序，或者需要处理同步驱动程序源的系统的场景非常有用。
+
+重复的调度表（**ScheduleTable**）意味着每个到期点的重复周期，等同于调度表（**ScheduleTable**）的持续时间（**duration**）。
+
+调度表（**ScheduleTable**）必须被配置成单次（**single-shot**）或者重复（**repeating**）的方式。
+
+如果调度表（**ScheduleTable**）是单次的方式，则操作系统模块必须在处理完最后一个到期点后，停止处理调度表（**ScheduleTable**）最终延迟滴答计数（**Final Delay ticks**）。最终延迟滴答计数允许基于底层计数器，数值介于 **0 .. OsCounterMaxAllowedValue** 之间。
+
+如果调度表（**ScheduleTable**）是重复的方式，最终延迟滴答计数的数值也和单次的方式类似，允许基于底层计数器，数值介于 **OsCounterMinCycle .. OsCounterMaxAllowedValue** 范围内。
+
+在处理完最终的到期点之后，如果调度表（**ScheduleTable**）是重复，操作系统将在最终延迟（**Final Delay**）加上初始偏移（**Initial Offset**）滴答计数之后，处理下一个初始的到期点（**Initial Expiry Point**）。
+
+#### 6.3.2.5. 控制 ScheduleTable 处理
+
+应用程序负责开始和停止调度表（**ScheduleTable**）的处理。
+
+操作系统模块提供 **StartScheduleTableAbs** 服务，以便于在底层计数器的绝对值开始（**Start**）点，开始处理调度表（**ScheduleTable**）。即：当底层计数器的值，等于 **Start + InitialOffset** 时，初始的到期点（**Initial Expiry Point**）必须被处理。
+
+操作系统模块提供 **StartScheduleTableRel** 服务，以便于在底层计数器的相对于**Now**值的**Offset**处，开始处理调度表（**ScheduleTable**）。即：当底层计数器的值，等于 **Now + Offset + InitialOffset** 时，初始的到期点（**Initial Expiry Point**）必须被处理。
+
+下图说明了由计数器（**Counter**）驱动的调度表（**ScheduleTable**）的两种不同方法。示例中的模数为 **65536**，即：**OsCounterMaxAllowedValue = 65535**。
+
+![Figure7_3](Figure7_3.png)
+
+操作系统模块提供 **StopScheduleTable**服务，以便于在调度表（**ScheduleTable**）运行的任何时候，立即取消对调度表（**ScheduleTable**）的处理。
+
+如果调度表（**ScheduleTable**）处理在到达最终的到期点（**Final Expiry Point**）之前被取消，并随后重新启动。如果调用 **StartScheduleTableAbs** 或者 **StartScheduleTableRel** 服务，则调度表（**ScheduleTable**）将从开始点被重新启动。
+
+操作系统模块提供 **NextScheduleTable**服务，处理从一个调度表（**ScheduleTable**）切换到另一个调度表（**ScheduleTable**）。
+
+当请求调度表切换时，操作系统会继续处理当前调度表上的到期点。在最终的到期点（**Final Expiry Point**）之后，开始处理被切换到调度表（**ScheduleTable**）之前，将会有一个相当于 最终延迟（**Final Delay**）滴答计数的延迟。初始到期点（**Initial Expiry Point**）并将在初始偏移（**initial offset**）后被处理。
+
+操作系统模块提供 **GetScheduleTableStatus** 服务，用来查询调度表（**ScheduleTable**）的状态。
+
+调度表（**ScheduleTable**）可以被配置为在操作系统模块启动期间自动启动。如 **OSEK OS** 中的任务（**Task**）和警报（**Alarm**）一样。**OSEK OS** 定义了一个特定的顺序：在警报（**Alarm**）自动启动之前，执行任务（**Task**）的自动启动。**AUTOSAR OS** 使用调度表（**ScheduleTable**）扩展了这一点。
+
+操作系统模块需在启动期间，完成任务（**Task**）和警报（**Alarm**）自动启动后，执行调度表（**ScheduleTable**）的自动启动。
+
+## 6.4. 调度表同步
+
+### 6.4.1. 背景与理由
+
+处理调度表（**ScheduleTable**）上的初始到期点（**Initial Expiry Point**）的绝对时间是可以由用户控制。但是如果调度表（**ScheduleTable**）是重复的方式，则不能保证第一次处理初始到期点的绝对计数值与随后处理它的计数值相同。这是因为调度表（**ScheduleTable**）的持续时间不必等于计数器（**Counter**）模数。
+
+在许多情况下，以底层计数器的特定绝对值处理 ScheduleTable 到期点可能很重要，这被称做为同步。
+
+典型用例包括：
+
+* 到期点需与用于电机管理的旋转角度同步。
+* 将计算同步到全局（网络）时基（**Time base**）。请注意，在 **AUTOSAR** 中，操作系统并不提供全局（网络）时间源，原因如下：
+  1. 很多情况下可能不需要全全局时间。
+  2. 其他 **AUTOSAR** 模块，如 **FlexRay**，对操作系统来说是独立提供。
+  3. 如果操作系统需要同步到多个全局（网络）时间源。例如：在两个时间触发网络（**time triggered networks**）之间建立网关（**Gateway**）时，操作系统不可能是唯一全局的时间源。
+
+**AUTOSAR OS** 以两种方式提供对同步的支持：
+
+* 隐式同步（**implicit synchronization**）：驱动调度表（**ScheduleTable**）的计数器（**Counter**），就是需要与之同步的计数器（**Counter**）。这种方式通常是如何实现与时间触发的网络技术（例如：**FlexRay**、**TTP**）的同步。底层硬件管理网络时间同步，并简单地将时间作为输出/比较计时器接口呈现给操作系统。下图7-4展示了具有隐式同步的调度表（**ScheduleTable**）的可能状态。
+* 显式同步（**explicit synchronization**）：调度表（**ScheduleTable**）由操作系统计数器（**Operating System Counter**）驱动，该计数器不是需要同步的计数器。操作系统提供了额外的功能来保持由操作系统计数器驱动的调度表（**ScheduleTable**）处理与同步计数器（**Synchronization Counter**）之间的同步。这通常是与定期广播的全球时间同步的工作原理。下图7-5展示了显式同步的调度表（**ScheduleTable**）的状态。
+
+![Figure7_4](Figure7_4.png)
+
+![Figure7_5](Figure7_5.png)
+
+### 6.4.2. 需求
+
+操作系统模块需提供将调度表（**ScheduleTable**）的处理和已知的计数器（**Counter**）值同步的能力。
+
+#### 6.4.2.1. 隐式同步
+
+操作系统模块不需要为调度表（**ScheduleTable**）的隐式同步提供任何额外的支持。但是有必要限制调度表（**ScheduleTable**）的配置和运行时控制，以便配置的调度表（**ScheduleTable**）上的滴答值（**Tick**）可以与计数器（**Counter**）上的滴答值（**Tick**）对齐。 这要求调度表（**ScheduleTable**）的范围与计数器（**Counter**）的范围相同，即：调度表（**ScheduleTable**）和计数器（**Counter**）交互的要求，保证了每个滴答值（**Tick**）分辨率必须相等。
+
+隐式同步的操作系统模块的调度表（**ScheduleTable**）应具有等于其关联 **OSEK OS** 计数器的 **OsCounterMaxAllowedValue + 1** 的持续时间。
+
+为了同步调度表（**ScheduleTable**）的处理，它必须从一个已知的计数器值开始。这意味着需要隐式同步的调度表（**ScheduleTable**）只能以绝对计数器值启动，而不能以相对计数值启动。操作系统模块应防止隐式同步的调度表（**ScheduleTable**）以相对计数值启动。
+
+当调度表（**ScheduleTable**）以绝对计数器值启动时，当计数器等于服务调用中指定的值加上到期点的偏移量时，将处理每个到期点。常见的用例是确保 调度表（**ScheduleTable**）配置中指定的偏移量对应于底层计数器的绝对值。这可以使用 **StartScheduleTableAbs(Tbl,0)** 轻松实现，如下所示。
+
+![Figure7_6](Figure7_6.png)
+
+#### 6.4.2.2. 显式同步
+
+显式同步的调度表（**ScheduleTable**）需要操作系统模块的额外支持。调度表（**ScheduleTable**）正常情况下，由操作系统模块的计数器驱动，此类计数器被称为驱动计数器（**drive Counter**）。但处理过程需要与不属于操作系统模块的计数器对象的另一种计数器进行同步，此类进行同步的计数器被称为同步计数器（**synchronization Counter**）。
+
+在调度表（**ScheduleTable**）、操作系统模块的计数器和同步计数器之间必须强制执行以下约束：
+
+1. 约束1：显式同步的调度表（**ScheduleTable**）的持续时间不应大于驱动计数器（**drive Counter**）的模数。
+2. 约束2：显式同步的调度表（**ScheduleTable**）的持续时间应等于同步计数器（**synchronization Counter**）的模数。
+3. 约束3：同步计数器（**synchronization Counter**）应与调度表（**ScheduleTable**）相关联的驱动计数器**drive Counter**）具有相同的分辨率。 这意味着调度表（**ScheduleTable**）上的滴答与同步计数器（**synchronization Counter**）上的滴答具有相同的持续时间。
+
+请注意，操作系统模块用户有责任验证其系统是否满足**约束2**和**约束3**。
+
+显式同步的作用是让操作系统模块在同步计数器（**synchronization Counter**）的绝对值等于过期点的偏移量处继续处理每个到期点。这意味着显式同步始终假定调度表（**ScheduleTable**）的名义零必须与同步计数器（**synchronization Counter**）上的绝对值零同步。
+
+为此用户必须告诉操作系统模块同步计数器的值。由于同步计数器（**synchronization Counter**）和调度表（**ScheduleTable**）的模数相同，操作系统模块可以使用这个信息来计算漂移。然后，操作系统模块会自动调整特殊配置的到期点之间的延迟，酌情延迟或提前，以确保保持同步。
+
+##### 6.4.2.2.1. 启动
+
+启动显式同步的调度表（**ScheduleTable**）有两个选项：
+
+1. 异步启动（**Asynchronous start**）：以同步计数器（**synchronization Counter**）的任意值启动调度表（**ScheduleTable**）。
+
+2. 同步启动（**Synchronous start**）：只有在提供了同步计数后，才能在同步计数器（**synchronization Counter**）的绝对值为零处启动 调度表（**ScheduleTable**）。 这可能意味着第一次同步的等待具有不确定性。
+
+异步启动（**Asynchronous start**）由现有的绝对和相对调度表（**ScheduleTable**）启动服务提供。这两个服务都使用驱动计数器（**drive Counter**）而不是同步计数器（**synchronization Counter**）以设置初始到期点的处理的起始点。这允许 ScheduleTable调度表（**ScheduleTable**）在获知同步计数器（**synchronization Counter**）的值之前，就可以开始运行。
+
+同步启动（**Synchronous start**）需要额外的服务，该服务仅在操作系统模块被告知同步计数器（**synchronization Counter**）的数值后，才能启动调度表（**ScheduleTable**）。
+
+操作系统模块提供 **StartScheduleTableSynchron** 服务，来同步启动显式同步的调度表（**ScheduleTable**）。在驱动计数器（**drive Counter**）的 **(Duration - Value) + Initial Offset** 滴答时间过去后，初始到期点（**Initial Expiry Point**）才会被处理。其中 **Value** 是提供给调度表（**ScheduleTable**）的同步计数器（**synchronization Counter**）的绝对值。
+
+如果显式同步的调度表（**ScheduleTable**）是同步启动的，则操作系统模块需要保证在 StartScheduleTableSynchron服务调用返回前，它处于等待（**waiting**）的状态。
+
+##### 6.4.2.2.2. 提供同步计数
