@@ -46,3 +46,82 @@ B: 外套，毛衣，围巾和帽子！不不，我瞎说的！夏天我经常�
 
 A: 你工作的时候穿牛仔裤吗？ <br/>
 B: 不，我总是穿工作裤。
+
+# 3. 111
+
+## 3.1. Dialog A
+
+A: Guten Tag, wo ist die Damenabteilung? <br/>
+C: Im dritten Stock. <br/>
+B: Kann ich Ihnen helfen? <br/>
+A: Ja, ich suche eine Bluse. <br/>
+B: Die Blusen sind da hinten links. <br/>
+A: Danke. Entschuldigung, ich möchte diese Bluse anprobieren. Wo sind die Umkleidekabinen? <br/>
+B: Gleich hier vorne rechts neben dem Spiegel. <br/>
+A: Danke. <br/>
+
+## 3.2. Dialog B
+
+A: Entschuldigung, können Sie mir helfen?
+B: Ja, natürlich. Was kann ich für Sie tun?
+A: Mein Sohn braucht eine Jacke.
+B: Für den Winter?
+A: Ja, schon warm, aber nicht zu warm.
+B: Welche Größe?
+A: Das weiß ich nicht.
+B: Wie groß bist du denn?
+C: 1,43 Meter.
+B: Das ist Kindergröße 140 oder 152. Schauen Sie mal dahinten.
+B: Na, gefällt die die Jacke?
+C: Na ja, äh ...
+A: Ich glaube, sie ist him zu klein.
+B: Hm, ich hätte noch diese hier.
+C: Au ja, die ist super! Megacool!
+A: Ist das hier der Preis? 175 Euro?
+B: Ja, das ist Goretex.
+A: Aber das ist mir viel zu teuer! So viel Geld möchte ich nicht ausgeben.
+
+## 3.3. Dialog C
+
+B: Guten Tag, kann ich Ihnen helfen?
+A: Guten Tag, ich suche einen Anzug.
+B: Etwas "Festliches" oder für Büro?
+A: Eher fürs Büro. Ich bin Buchhalter, wissen Sie und ...
+B: Welche Größe?
+A: Oh, das weiß ich leider nicht.
+C: Du brauchst Größe 52 oder 54, denke ich.
+A: Dann können wir erst mal hier vorne schauen.
+
+
+
+## 3.1. Dialog A
+
+A: 你好，请问女装部在哪里？
+C: 在四楼。
+B: 能帮您做点什么吗？
+A: 我想买一件女式衬衫。
+B：女式衬衫在左后方。
+A：谢谢。不好意思，我想试一下这件衬衫。请问试衣间在哪里?
+B: 就在右前方的镜子旁边。
+
+
+## 3.2. Dialog B
+
+A: 不好意思，请问您可以帮我一下吗？
+B: 当然，我可以为你做什么？
+A: Mein Sohn braucht eine Jacke.
+B: Für den Winter?
+A: Ja, schon warm, aber nicht zu warm.
+B: Welche Größe?
+A: Das weiß ich nicht.
+B: Wie groß bist du denn?
+C: 1,43 Meter.
+B: Das ist Kindergröße 140 oder 152. Schauen Sie mal dahinten.
+B: Na, gefällt die die Jacke?
+C: Na ja, äh ...
+A: Ich glaube, sie ist him zu klein.
+B: Hm, ich hätte noch diese hier.
+C: Au ja, die ist super! Megacool!
+A: Ist das hier der Preis? 175 Euro?
+B: Ja, das ist Goretex.
+A: Aber das ist mir viel zu teuer! So viel Geld möchte ich nicht ausgeben.

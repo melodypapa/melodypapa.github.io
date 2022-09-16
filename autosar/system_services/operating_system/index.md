@@ -237,7 +237,7 @@
 
 * 内存保护（**Memory Protection**）：依赖硬件内存保护单元。所有具有写入结果的内存访问（例如，具有写入内存位置的副作用的读取）都应被视为写入。
 * 时间保护（**Time Protection**）：用于监控执行时间和到达率的计时器硬件。
-* MCU上的特权和非特权模式（**Privileged and non-privileged modes on the MCU**）：保护操作系统免受由写入操作系统控制的寄存器引起的内部损坏。此模式不得允许操作系统应用程序绕过保护（例如：写入管理内存保护的寄存器、写入处理器状态字等）。特权模式必须在受保护操作系统的完全控制下，该操作系统在内部使用该模式并将控制权从不受信任的操作系统应用程序来回转移到受信任的操作系统应用程序。微处理器必须支持使处理器进入这种特权模式的受控方式。
+* MCU上的特权和非特权模式（**Privileged and non-privileged modes on the MCU**）：保护操作系统免受由写入操作系统控制的寄存器引起的内部损坏。此模式不得允许**OS-Applications**绕过保护（例如：写入管理内存保护的寄存器、写入处理器状态字等）。特权模式必须在受保护操作系统的完全控制下，该操作系统在内部使用该模式并将控制权从不受信任的**OS-Applications**来回转移到受信任的**OS-Applications**。微处理器必须支持使处理器进入这种特权模式的受控方式。
 * 本地/全局时间同步（**Local/Global Time Synchronization**）：需要一个全局的时间源。
 
 通常处理器中的硬件故障并不会被操作系统检测到。如果发生硬件故障，操作系统的正确运行则将无法被保证。
@@ -541,3 +541,68 @@
 如果显式同步的调度表（**ScheduleTable**）是同步启动的，则操作系统模块需要保证在 StartScheduleTableSynchron服务调用返回前，它处于等待（**waiting**）的状态。
 
 ##### 6.4.2.2.2. 提供同步计数
+
+##### 6.4.2.2.3. 指定同步界限
+
+#### 6.4.2.3. 执行同步
+
+## 6.5. 堆栈监视设施
+
+### 6.5.1. 背景与理由
+
+在不提供任何内存保护硬件的处理器上，可能仍然需要提供利用可用资源尽力而为（**best effort with available resources**）的方案，提供可检测的内存故障类别。堆栈监视（**Stack monitoring**）将识别任务（**Task**）或 **ISR** 在上下文切换时超出指定堆栈使用的位置。这可能意味着在系统出错（**system being in error**）和检测到故障（**fault being detected**）之间，有相当长的时间。类似地，错误可能在通知故障时已被清除。如：发生上下文切换时堆栈可能小于指定大小的情况。
+
+仅仅监视系统的整个堆栈空间通常是不够的，因为它不一定是正在执行的任务（**Task**）或者 **ISR** 使用的堆栈空间超过了所需的，它可能是被抢占的较低优先级的对象。
+
+通过让操作系统正确识别任务（**Task**）或者**类别 2 ISR**的错误，可以节省大量调试时间。
+
+请注意，对于使用 **MPU** 和可扩展性等级3（**scalability class 3**）或者扩展性等级4（**scalability class 4**）的系统，堆栈溢出可能会在堆栈监控能够检测到故障之前导致内存异常。
+
+### 6.5.2. 需求
+
+操作系统模块应提供堆栈监视，以检测任务（**Task**）和**类别 2 ISR**的可能堆栈故障。
+
+如果堆栈监控检测到堆栈故障并且没有配置 **ProtectionHook**，操作系统模块会调用状态为 **E_OS_STACKFAULT** 的 **ShutdownOS** 服务。
+
+如果堆栈监控检测到堆栈故障并且配置了**ProtectionHook**，则操作系统模块会调用状态为**E_OS_STACKFAULT** 的 **ProtectionHook**函数。
+
+## 6.6. OS-Application
+
+### 6.6.1. 背景与理由
+
+AUTOSAR OS 必须能够支持构成一个内聚功能单元的操作系统对象，包括：任务（**Task**）、ISR、警报（**Alarm**)、调度表（**ScheduleTable**）、计数器（**Counter**）的集合。这个对象集合称为**OS-Application**。
+
+操作系统模块负责调度共享处理器的**OS-Application**之间的可用处理资源。如果**OS-Application**被使用，所有的任务（**Task**）、ISR、警报（**Alarm**)、调度表（**ScheduleTable**）、计数器（**Counter**）必须属于一个**OS-Application**。属于同一个 **OS-Application** 的所有对象都可以相互访问。可以在配置期间授予从其他 **OS-Application** 访问对象的权限。如果可以为其设置事件（**Event**）的任务（**Task**）是可3访问的，则该事件（**Event**）也是可访问的。访问意味着这些操作系统对象被允许作为 **API** 服务的参数。
+
+有两类 **OS-Application**：
+
+1. 受信任的**OS-Applications**：受信任的**OS-Applications**可以在运行时禁用监控或保护功能的情况下运行。它们可以不受限制地访问内存、操作系统模块的 API，并且不需要在运行时强制执行它们的计时行为。当处理器支持时，它们可以在特权模式下运行。操作系统模块假定受信任的**OS-Applications**（和受信任的功能）不会导致与内存相关的保护故障。如果发生此类故障，系统稳定性可能会消失，关闭可能是唯一的选择。
+2. 不受信任的**OS-Applications**：不受信任的**OS-Applications**不允许在运行时禁用监控或保护功能的情况下运行。它们对内存的访问受到限制，对操作系统模块的 API 的访问受到限制，并在运行时强制执行它们的计时行为。当处理器支持时，它们不允许在特权模式下运行。
+
+**AUTOSAR OS**模块本身假设是受信任的。
+
+**AUTOSAR OS**提供了一些服务，为调用者提供有关访问权限（**access rights**）和对象成员资格（**membership of objects**）的信息。这些服务旨在用于检查跨**OS-Application**间调用的访问权限以及参数。
+
+**注意**：资源（**Resource**）对象不属于任何 **OS-Application** ，但对它们的访问权限必须被明确授予。同样的原理也适用于多核系统中的自旋锁。
+
+正在运行的 **OS-Application** 定义为当前运行的任务（**Task**）或 **ISR** 所属的 **OS-Application**。以及在挂钩例程（hook routine）的情况下，导致挂钩例程调用的任务（**Task**）或 **ISR** 定义了正在运行的 **OS-Application**。
+
+![Figure7_9](Figure7_9.png)
+
+**OS-Application** 有一个状态，它定义了其他 **OS-Application** 对其操作系统对象的可访问性范围。每个 **OS-Application** 始终处于以下状态之一：
+
+* **APPLICATION_ACCESSIBLE**：活动且可访问（**Active and accessible**）。操作系统对象可以从其他 **OS-Application** 访问。这是启动时的默认状态。
+* **APPLICATION_RESTARTING**：在重启阶段（Restart phase）。操作系统对象无法被其他 **OS-Application** 访问。在**OS-Application**调用 **AllowAccess** 之前，状态是有效的。
+* **APPLICATION_TERMINATED**：已终止且不可访问（**Terminated and not accessible**）。操作系统对象无法被其他 **OS-Application** 访问。状态不会改变。
+
+下图显示了状态和可能的转换：
+
+![Figure7_10](Figure7_10.png)
+
+### 6.6.2. 需求
+
+操作系统模块应支持 **OS-Application** ，这些**OS-Application**可以是受信任函数（**Trusted Function**）、任务（**Task**）、ISR、警报（**Alarm**）、调度表（**ScheduleTable**）、计数器（**Counter**）、挂钩（用于启动、错误和关闭）的可配置选择。
+
+操作系统模块应支持受信任（**trusted**）和不受信任（**non-trusted**）**OS-Application**的概念。
+
+受信任的**OS-Application**可以向其他（甚至不受信任的）**OS-Application**提供服务。此类服务就是受信任的服务（**trusted services**）。
