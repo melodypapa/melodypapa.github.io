@@ -52,4 +52,4 @@
 
 ## 1.3. 原文出处
 
-https://www.geeksforgeeks.org/write-through-and-write-back-in-cache/
+* [https://www.geeksforgeeks.org/write-through-and-write-back-in-cach](https://www.geeksforgeeks.org/write-through-and-write-back-in-cach)
