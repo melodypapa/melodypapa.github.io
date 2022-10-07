@@ -69,4 +69,4 @@ T<sub>avg</sub> = H<sub>1</sub> * C<sub>1</sub> + (1 – H<sub>1</sub>) * (H<sub
 
 ## 1.4. 原文出处
 
-https://www.geeksforgeeks.org/multilevel-cache-organisation/
+* [https://www.geeksforgeeks.org/multilevel-cache-organisation/](https://www.geeksforgeeks.org/multilevel-cache-organisation)
