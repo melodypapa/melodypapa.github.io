@@ -606,3 +606,164 @@ AUTOSAR OS 必须能够支持构成一个内聚功能单元的操作系统对象
 操作系统模块应支持受信任（**trusted**）和不受信任（**non-trusted**）**OS-Application**的概念。
 
 受信任的**OS-Application**可以向其他（甚至不受信任的）**OS-Application**提供服务。此类服务就是受信任的服务（**trusted services**）。
+
+操作系统模块提供服务 **GetApplicationID** 和 **GetCurrentApplicationID** 来确定当前正在执行的 **OS-Application**（需为每个**OS-Application**分配一个唯一的标识符）。
+
+操作系统模块提供服务 **CheckObjectOwnership** 以确定给定任务（**Task**）、ISR、计数器、警报（**Alarm**)、调度表（**ScheduleTable**）属于哪个**OS-Application**。
+
+操作系统模块提供服务 **CheckObjectAccess** 来确定允许哪些**OS-Application**在 **API** 调用中使用任务（**Task**）、ISR、计数器、警报（**Alarm**)、调度表（**ScheduleTable**）的 ID。
+
+操作系统模块提供服务 **TerminateApplication** 来终止调用任务（**Task**）、类别2 ISR、应用程序特定错误挂钩所属的 **OS-Application**。这是 **TerminateTask** 服务的操作系统应用程序级别变体）
+
+操作系统模块提供服务 **TerminateApplication** 来终止另一个 **OS-Application**，并且如果调用者不属于受信任的 **OS-Application**，则需忽略对该服务的调用。
+
+如果操作系统模块需要终止一个 **OS-Application**，那么它应该：
+
+* 终止此 **OS-Application** 的所有正在运行的（**running**）、就绪的（**ready**）和等待的（**waiting**）任务（**Task**）、ISR；
+* 禁用此 **OS-Application** 的所有中断（**interrupts**）；
+* 停止此 **OS-Application** 的所有活动的警报；
+* 停止此 **OS-Application** 的所有调度表（**ScheduleTable**）。
+
+操作系统模块应阻止受信任或不受信任的 **OS-Application** 访问不属于该 **OS-Application** 的对象，除非这些对象的访问权限由配置明确授予。
+
+操作系统模块提供服务 **GetApplicationState** 来请求 **OS-Application** 的当前状态。
+
+操作系统模块应在调用 **StartOS** 之后和调用任何 **StartupHook** 之前将所有 **OS-Applications** 的状态设置为 **APPLICATION_ACCESSIBLE**。
+
+操作系统模块提供服务 **AllowAccess** 以将 **OS-Application** 的自身状态从 **APPLICATION_RESTARTING** 设置为 **APPLICATION_ACCESSIBLE**。
+
+如果一个 **OS-Application** 被终止。例如：通过服务调用或通过保护挂钩（**protection hook**），并且没有请求重新启动，则操作系统模块应将此 **OS-Application** 的状态设置为 **APPLICATION_TERMINATED**。
+
+如果一个 **OS-Application** 被终止。例如：通过服务调用或通过保护挂钩（**protection hook**），并且请求了重新启动，则操作系统模块应将此 **OS-Application** 的状态设置为 **APPLICATION_RESTARTING**。
+
+操作系统模块应该拒绝其他 **OS-Application** 对不处于 **APPLICATION_ACCESSIBLE** 状态的 **OS-Application** 的操作系统对象（**Operating System objects**）的访问。
+
+如果对一个操作系统对象的服务调用是由另一个 **OS-Application** 拥有的，同时 **OS-Application** 不处于 **APPLICATION_ACCESSIBLE** 状态，那么操作系统模块需返回 **E_OS_ACCESS**。例如：为了正在重新启动的 **OS-Application** 中的任务（**Task**）调用 **ActivateTask**。
+
+## 6.7. 保护设施
+
+保护仅适用于操作系统管理的对象。这意味着：
+
+* 无法在类别1的ISR（**Category 1 ISR**）运行期间提供保护。因为操作系统不知道正在调用任何类别1的ISR（**Category 1 ISR**），所以如果需要任何保护，则必须避免使用类别1的ISR（**Category 1 ISR**）。如果 类别1的中断和 **OS-Application** 一起使用，则所有类别1的ISR（**Category 1 ISR**）必须属于受信任的 **OS-Application**。
+* 无法为在从同一任务（**Task**）或者类别2的ISR（**Category 2 ISR**）的主体调用的函数之间提供保护。
+
+### 6.7.1. 内存保护
+
+#### 6.7.1.1. 背景与理由
+
+内存保护只能在提供硬件支持内存保护的处理器上实现。
+
+内存保护方案基于可执行程序的数据（**data**）、代码（**code**）和堆栈（**stack**）的部分。
+
+**堆栈（Stack）**
+
+一个 **OS-Application** 包含许多任务（**Task**）和 **ISR**。因为根据定义这些对象的堆栈只属于它的所有者对象，所以不需要在对象之间共享堆栈数据，即使这些对象属于同一个 **OS-Application**。
+
+任务（**Task**）和 **ISR** 堆栈的内存保护非常有用，主要有两个原因：
+
+1. 为任务（**Task**）或 **ISR** 提供比堆栈监控更直接的堆栈溢出和下溢检测。
+2. 在 **OS-Application** 的组成部分之间提供保护，例如:满足一些安全约束。
+
+**数据（Data）**
+
+**OS-Applications** 可以有私有数据段，而任务（**Task**）或 **ISR** 也可以有私有数据段。**OS-Applications** 的私有数据部分由属于该 **OS-Applications** 的所有任务（**Task**）或 **ISR** 共享。
+
+**代码（Code）**
+
+代码部分要么是**OS-Application**私有的，要么可以在所有**OS-Application**之间共享（以使用共享库）。在不使用代码保护的情况下，执行不正确的代码最终会导致内存、时序或服务违规。
+
+#### 6.7.1.2. 需求
+
+**数据段和堆栈（Data Sections and Stack）**
+
+操作系统模块应防止不受信任（**non-trusted**）的 **OS-Applications**，对其自己的数据部分和自己的堆栈进行写访问。
+
+操作系统应提供限制受信任（**trusted**）的 **OS-Applications** 写入访问的可能性，就像对不受信任**OS-Applications**所做的那样。
+
+这可以使用 **OsTrustedApplicationWithProtection** 进行配置。
+
+**OS-Application的私有数据**
+
+操作系统模块可能会阻止其他不受信任的**OS-Application**尝试对**OS-Application**的数据部分进行读取访问。
+
+操作系统模块应允许**OS-Application**对该**OS-Application**自己的私有数据部分进行读写访问。
+
+操作系统模块应防止其他不可信的**OS-Application**对**OS-Application**的私有数据部分进行写访问。
+
+**任务/ISR 的私有堆栈**
+
+操作系统模块应允许任务（**Task**）/ **类别2的ISR** 对该任务（**Task**）/ **类别2的ISR**自己的私有堆栈进行读写访问。
+
+操作系统模块可能会阻止所有同一个**OS-Application**中的其他任务（**Task**）/ **ISR** 对非受信任**OS-Application**的任务（**Task**）/**类别2的ISR** 的私有堆栈进行写访问。
+
+操作系统模块应防止从其他非受信任**OS-Application**对当前**OS-Application**的任务（**Task**）/**类别2的ISR** 的所有私有堆栈进行写访问。
+
+**任务/ISR 的私有数据**
+
+操作系统模块应允许（**Task**）/ **类别2的ISR**对该（**Task**）/ **类别2的ISR**自己的私有数据部分进行读写访问。
+
+操作系统模块可能会阻止所有同一 个**OS-Application**中的其他（**Task**）/ **ISR** 对非受信任**OS-Application**的任务（**Task**）/**类别2的ISR** 的私有数据部分的写访问。
+
+操作系统模块应防止从其他非受信任**OS-Application**对当前**OS-Application**的的任务（**Task**）/**类别2的ISR** 的所有私有数据部分进行写访问。
+
+**代码段（Code Sections）**
+
+操作系统模块可以为**OS-Application**提供保护其代码段不被非受信任的**OS-Application**执行的能力。
+
+操作系统模块应提供在所有**OS-Application**可执行的共享库代码部分的能力。
+
+**外围设备（Peripherals）**
+
+如果 **OsTrustedApplicationWithProtection == FALSE**，则操作系统模块需允许受信任的**OS-Application**对外围设备进行读写访问。
+
+操作系统模块应允许非受信任的 **OS-Application** 仅写入其分配的外围设备。（包括：具有写入内存位置的副作用的读取）。
+
+**内存访问冲突（Memory Access Violation）**
+
+如果检测到内存访问违规，操作系统模块需调用 **ProtectionHook**，并返回状态码 **E_OS_PROTECTION_MEMORY** 。
+
+### 6.7.2. 时序保护（Timing Protection）
+
+#### 6.7.2.1. 背景与理由
+
+当一个任务（**Task**）或中断（**Interrupt**）在运行时错过了它的最后期限时，就会发生实时系统中的计时错误。
+
+**AUTOSAR OS** 不提供时序保护的截止时间的监控（**deadline monitoring**）。因为监控截止时间并不能正确识别导致 **AUTOSAR** 系统中时序故障的那个任务（**Task**）或者**ISR**。当截止时间超时的时候，这可能是由于其他非监控的任务（**Task**）或者**ISR**的干扰或者阻塞时间过长，而最终引起了时序的错误。在这种情况下，错误在于这些非监控的不相关的任务（**Task**）或者**ISR**。接着它们通过系统的慢慢扩散，直到任务（**Task**）或者**ISR** 错过了截止时间。所以错过截止时间的任务（**Task**）或者**ISR** 不一定是在在运行时失败的那个任务（**Task**）或者 **ISR**。它只不过是被最早检测到时序的故障。
+
+如果基于通过监控截止时间来识别的是否错过截止时间并采取行动，这可能会使用错误证据来终止了正确的 **OS-Application**，并同时不正确的**OS-Application**依旧被允许继续运行。
+
+这个问题可以通过以下的例子来说明。考虑具有以下配置的系统：
+
+![Table7_1](Table7_1.png)
+
+| 任务Id | 优先级 | 执行时间 | 截止时间 (=任务周期） |
+| ------ | ------ | -------- | --------------------- |
+| A      | 高     | 1        | 5                     |
+| B      | 中等   | 3        | 10                    |
+| C      | 低     | 5        | 15                    |
+
+假设所有任务（**Task**）在时间0都已经准备好运行，接着会执行以下调度，并且所有任务（**Task**）都将满足它们各自的截止时间。
+
+![Figure7_11](Figure7_11.png)
+
+现在考虑任务A（**Task A**）和任务B（**Task B**）行为不正确的情况。下图显示了任务A（**Task A**）和任务B（**Task B**）的执行时间都比指定的时间长，而任务B（**Task B**）的到达时间比指定的时间早 2 个滴答。任务A（**Task A**）和任务B（**Task B**）都按时完成。然而，任务C任务B（**Task C**）行为正确，但由于任务A（**Task A**）和任务B（**Task B**）的执行不正确，它未能在截止时间前完成。这是故障传播。即：系统中不相关部分的故障导致系统中正常运行的部分发生故障。
+
+![Figure7_12](Figure7_12.png)
+
+在 **AUTOSAR OS** 等固定优先级抢占式操作系统中，任务（**Task**）或者**ISR**是否满足其截止时间取决于以下因素：
+
+* 系统中任务（**Task**）和**ISR**的执行时间。
+* 任务（**Task**）和**ISR**因为较低优先级任务（**Task**）和**ISR**锁定共享资源或禁用中断，而遭受的阻塞时间。
+* 系统中任务（**Task**）和**ISR**的到达间隔时间率（**interarrival rate**）。
+
+为了安全和准确的时序保护，操作系统有必要在运行时控制这些因素，以确保任务（**Task**）和**ISR**能够满足它们各自的期限时间。
+
+**AUTOSAR OS** 通过使用执行时间保护（**execution time protection**）来保证以下执行时间的静态配置上限（称为执行预算）来防止 (1) 中的计时错误：
+
+* 任务（**Tasks**）。
+* 类别2的ISR（**Category 2 ISRs**）。
+
+
+
+
+
