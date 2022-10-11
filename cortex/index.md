@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "ARM Cortex"
-permalink: /cortex
+permalink: /cortex/
 ---
 
 # 1. 背景概念
