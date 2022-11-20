@@ -171,7 +171,6 @@
 * **NOT**: 对单个术语的否定，例如：不是周末（**NOT Weekend**）。
 * **AND**: 两个术语的结合，例如：周末和周六（**Weekend AND Saturday**）
 * **OR** : 两个术语的分离，例如：星期一或星期二（**Monday OR Tuesday**）
-* 
 
 但一条需求包含多个术语时，按从左到右评估。优先规则如下：
 
@@ -542,9 +541,40 @@
 
 ##### 6.4.2.2.2. 提供同步计数
 
+操作系统模块必须被告知同步计数器的值。由于调度表（**ScheduleTable**）持续时间等于同步计数器的模数（**modulus**），所以操作系统模块可以使用它来确定调度表时间上的当前计数值与同步计数之间的偏移，并决定是否需要采取所需的动作来实现同步。
+
+操作系统模块需提供服务 *SyncScheduleTable*()（请参阅 **SWS_Os_00199**），来为调度表提供同步计数并启动同步。
+
 ##### 6.4.2.2.3. 指定同步界限
 
+默认情况下，调度表不应在所有到期点（**expiry points**）进行调整。只有通过显式配置才允许进行调整。操作系统模块在可调到期点可以进行的调整范围通过指定以下内容来控制:
+
+* **OsScheduleTableMaxShorten**：可以从到期偏移量中减去的最大值。
+* **OsScheduleTableMaxLengthen**：可以添加到到期点偏移量的最大值。
+
+下图说明了依赖于 **OsScheduleTableMaxShorten** 和 **OsScheduleTableMaxLengthen** 的行为：
+
+![Figure7_7](Figure7_7.png)
+
+到期点应允许配置 **OsScheduleTableMaxShorten**，该 **OsScheduleTableMaxShorten** 定义了可以从到期点偏移量中减去的最大滴答数（**ticks**）。
+
+到期点应允许配置 **OsScheduleTableMaxLengthen**，该 **OsScheduleTableMaxLengthen** 定义可以添加到到期点偏移量的最大滴答数（**ticks**）。
+
+在执行同步同时，必须根据其偏移量定义的总排序来处理计划表上的到期点。这意味着 **OsScheduleTableMaxShorten** 和 **OsScheduleTableMaxLengthen** 的允许值范围必须确保下一个到期点不会延迟到过去或提前到计划表的多个迭代（**iteration**）之后。
+
+到期点的（偏移量 - **OsScheduleTableMaxShorten**）的值应大于该过期点的（偏移量 + **OsCounterMinCycle**）。
+
+**OsScheduleTableMaxLengthen** 的值应小于调度表的持续时间。
+
+到期点的（**OsScheduleTableMaxLengthen** + **delay_from_previous_EP**）的值应小于基础计数器的 **OsCounterMaxAllowedValue** 。
+
+显式同步的调度表允许允许调度表值和同步计数器值之间的一些偏移。此容差可以为零，表示除非值相同，否则不会将计划表视为同步。
+
+调度表需定义精度界限，其值范围为**0**到持续时间（duration）。
+
 #### 6.4.2.3. 执行同步
+
+操作系统模块使用同步计数，通过计算对下一个到期点的延迟的调整，在每个到期点支持（重新）同步计划表。这提供了比在最终到期点执行操作更快的计划表重新同步。
 
 ## 6.5. 堆栈监视设施
 
