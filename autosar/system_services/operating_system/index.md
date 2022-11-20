@@ -576,6 +576,16 @@
 
 操作系统模块使用同步计数，通过计算对下一个到期点的延迟的调整，在每个到期点支持（重新）同步计划表。这提供了比在最终到期点执行操作更快的计划表重新同步。
 
+When a new synchronization count is provided, the Operating System module shall calculate the current deviation between the explicitly synchronized scheduled table and the synchronization count. ⌋ (SRS_Os_11002)
+
+It is meaningless to try and synchronise an explicitly synchronized schedule table before a synchronization count is provided.
+
+The Operating System module shall start to synchronise an explicitly synchronized schedule table after a synchronization count is provided AND shall continue to adjust expiry points until synchronized.
+
+The Operating System module shall set the state of an explicitly synchronized schedule table to “running and synchronous” if the deviation is less than or equal to the configured OsScheduleTblExplicitPrecision threshold.
+
+The Operating System module shall set the state of an explicitly synchronized schedule table to “running” if the deviation is greater than the configured OsScheduleTblExplicitPrecision threshold.
+
 ## 6.5. 堆栈监视设施
 
 ### 6.5.1. 背景与理由
