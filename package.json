@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "serve": "bundle exec jekyll serve"
+    }
+}
