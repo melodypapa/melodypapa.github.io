@@ -47,3 +47,7 @@ permalink: /autosar/
 
 * [AUTOSAR EcuM（ECU状态管理器）](mode_management/ecu_state_manager)
 * [AUTOSAR BswM（基础软件模式管理器）](mode_management/basic_software_mode_manager/index.md)
+
+## 加密（Crypto)
+
+* [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)
