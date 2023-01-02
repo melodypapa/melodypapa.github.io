@@ -477,9 +477,9 @@ Csm_KeySetValid(MyEccKeyId);
 
 结构 **Crypto_JobRedirectionInfoType** 包含哪些密钥元素将用于重定向的信息。提供了一个称为 **redirectionConfig** 的位字段，用于指示重定向哪个输入和/或输出值。
 
-**redirectionConfig** 的值是一个位编码值，用于指示哪个输入和输出缓冲区被重定向。 如果 **redirectionConfig** 的最低有效位（第 1 位 或 0x01）被设置为主输入键并且它的元素被重定向，并且 **inputKeyId** 和 **inputKeyElementId** 的值必须指示用于输入缓冲区的元素而不是 **inputPtr** 及其长度。如果设置了第 **1** 位，则将 **secondaryInputBuffer** 重定向到已设置的辅助输入键，并且必须设置键和键元素。而第 **2** 位用于第三输入键。第 3 位保留供将来使用。
+**redirectionConfig** 的值是一个位编码值，用于指示哪个输入和输出缓冲区被重定向。 如果 **redirectionConfig** 的最低有效位（第 1 位 或 0x01）被设置为主输入键并且它的元素被重定向，并且 **inputKeyId** 和 **inputKeyElementId** 的值必须指示用于输入缓冲区的元素而不是 **inputPtr** 及其长度。如果设置了第 **1** 位，则将 **secondaryInputBuffer** 重定向到已设置的辅助输入键，并且必须设置键和密钥元素。而第 **2** 位用于第三输入键。第 3 位保留供将来使用。
 
-如果第 **4** 位被设置，则 outputPtr 被重定向到输出键的输出键元素。第 **5** 位表示将辅助输出缓冲区重定向到辅助键及其键元素。如果某个位设置为 0，则输入或输出不应重定向到相关的密钥元素。
+如果第 **4** 位被设置，则 outputPtr 被重定向到输出键的输出密钥元素。第 **5** 位表示将辅助输出缓冲区重定向到辅助键及其密钥元素。如果某个位设置为 0，则输入或输出不应重定向到相关的密钥元素。
 
 示例：**00110001** 的 **redirectionConfig** 值表示应从 **inputKeyId** 的 **inputKeyElement** 收集输入，输出缓冲区和辅助输出缓冲区应重定向到 **outputKeyId** 的**outputKeyElement** 和 **secondaryOutputKeyId** 的 **secondaryOutputKeyElement**。
 
@@ -736,7 +736,7 @@ Std_ReturnType Csm_RandomGenerate (
 
 #### 7.8.1.1. Csm_KeyElementSet
 
-**说明**: 将给定的键元素字节设置为由 **keyId** 标识的键。
+**说明**: 将给定的密钥元素字节设置为由 **keyId** 标识的键。
 
 ```C
 Std_ReturnType Csm_KeyElementSet ( 
@@ -795,9 +795,9 @@ Std_ReturnType Csm_KeyElementGet (
 )
 ```
 
-### Key Copying Interface
+### 7.8.4. Key Copying Interface
 
-#### 7.8.3.1. Csm_KeyElementCopy
+#### 7.8.4.1. Csm_KeyElementCopy
 
 **说明**: 此函数将密钥元素从一个密钥复制到目标键。
 
@@ -810,7 +810,7 @@ Std_ReturnType Csm_KeyElementCopy (
 )
 ```
 
-#### 7.8.3.1. Csm_KeyCopy
+#### 7.8.4.2. Csm_KeyCopy
 
 **说明**: 此函数将所有密钥元素从源密钥复制到目标密钥。
 ```C
@@ -820,7 +820,7 @@ Std_ReturnType Csm_KeyCopy (
 )
 ```
 
-#### 7.8.3.1. Csm_KeyElementCopyPartial
+#### 7.8.4.3. Csm_KeyElementCopyPartial
 
 **说明**: 将一个密钥元素复制到同一加密驱动程序中的另一个密钥元素。 keyElementSourceOffset 和 keyElementCopyLength 允许仅将源密钥元素的一部分复制到目标中。目标键的偏移量也用这个函数指定。
 
@@ -833,5 +833,251 @@ Std_ReturnType Csm_KeyElementCopyPartial (
     uint32 keyElementCopyLength, 
     uint32 targetKeyId, 
     uint32 targetKeyElementId 
+)
+```
+
+### 7.8.5. 密钥生成接口
+
+密钥生成接口用于根据密钥元素 **CRYPTO_KE_KEYGENERATE_ALGORITHM** 中定义的算法生成密钥到密钥元素 **CRYPTO_KE_KEYGENERATE_KEY** 中。
+
+密钥将会通过位于密钥元素 **CRYPTO_KE_KEYGENERATE_SEED** 中的随机值生成。
+
+例如：可以使用函数 **Csm_RandomGenerate**() 生成随机值，并且必须在触发密钥生成之前将其存储在 **CRYPTO_KE_KEYGENERATE_SEED** 中。
+
+重要的是要检查随机性的质量及其种子的熵，这取决于所使用的硬件和软件协议栈。随机性对生成的密钥材料的质量有重大影响。
+
+Id 为 **CRYPTO_KE_KEYGENERATE_ALGORITHM** 的密钥元素包含来自 **Crypto_AlgorithmFamilyType** 的类型。例如 **CRYPTO_ALGOFAM_AES**、**CRYPTO_ALGOFAM_RSA** 或 **CRYPTO_ALGOFAM_ED25519**，允许生成一个充分的密钥。作为反例：算法族类型 **CRYPTO_ALGOFAM_SHA2_256** 是不充分的，因为它没有提供应生成什么密钥的提示。
+
+对于密钥元素 **CRYPTO_KE_KEYGENERATE_KEY**，密钥元素配置项 **CryptoKeyElement/CryptoKeyElementFormat** 表示生成密钥的格式。
+
+#### 7.8.5.1. Csm_RandomSeed
+
+**说明**: 为密钥元素 **CRYPTO_KE_RANDOM_SEED** 提供随机种子。
+
+```C
+Std_ReturnType Csm_RandomSeed ( 
+    uint32 keyId, 
+    const uint8* seedPtr, 
+    uint32 seedLength 
+)
+```
+
+#### 7.8.5.2. Csm_KeyGenerate
+
+**说明**: 生成新的密钥材料并将其存储在由 keyId 标识的密钥中。
+
+```C
+Std_ReturnType Csm_KeyGenerate ( 
+    uint32 keyId 
+)
+```
+
+### 7.8.6. 密钥派生接口
+
+在密码学中，密钥派生函数（或 KDF）是一种函数，它从秘密值（**secret value**）或者其他已知信息（例如：**passphrase** 或 **cryptographic key**）中派生出一个或多个秘密密钥（**secret key**）。
+
+通过使用 **Csm_KeyDeriveKey** 接口可以实现受硬件保护的输入键的规范。
+
+#### 7.8.6.1. Csm_KeyDerive
+
+**说明**: 使用由 **keyId** 标识的给定密钥中的密钥元素派生新密钥。给定的密钥包含密码和盐的密钥元素。派生密钥存储在由 **targetCryptoKeyId** 标识的密钥的 **ID** 为 1 的密钥元素中。
+
+```C
+Std_ReturnType Csm_KeyDerive ( 
+    uint32 keyId, 
+    uint32 targetKeyId 
+)
+```
+
+### 7.8.7. 密钥交换接口
+
+各自拥有私人秘密（**private secret**）的两个用户可以使用密钥交换协议来获得公共秘密（**common secret**）。例如：对称密钥算法的密钥，无需告诉对方他们的私人秘密，也没有任何听众能够获得公共秘密或他们的私人秘密。
+
+函数 **Csm_KeyExchangeCalcPubVal**() / **Csm_JobKeyExchangeCalcPubVal**() 和 **Csm_KeyExchangeCalcSecret**() / **Csm_JobKeyExchangeCalcSecret**() 用于支持 Diffie-Hellman (DH) 密钥交换。这允许两个伙伴 **Alice** 和 **Bob** 生成私钥和公钥材料（**private and public key material**），交换公共部分，以便双方最终可以生成一个公共共享秘密（**common shared secret**）。这个共享秘密可以被进一步使用，例如用于数据加密或者 **MAC** 生成的对称数据操作。公钥和私钥材料可以使用基于 **RSA** 或者椭圆曲线（**elliptic-curve diffie-hellman**）算法的基于质数的大数。
+
+**CSM** 密钥交换功能需要一个带有密钥元素的密钥，在加密服务密钥交换行中。密钥元素 **CRYPTO_KE_KEYEXCHANGE_BASE**、**CRYPTO_KE_KEYEXCHANGE_PRIVKEY** 和 **CRYPTO_KE_KEYEXCHANGE_OWNPUBKEY** 用于保存公钥或者私钥材料。这些数值可以是预先定义，并由 **Csm_KeyElementSet**() 后跟 **Csm_KeySetValid**() 设置或生成。
+
+例如：这些键值可以通过 **Csm_KeyGenerate**() 生成，然后调用 **Csm_KeyElementCopy**() 复制到相应的密钥元素，接着在调用 **Csm_KeySetValid**() 使其生效。
+
+具体算法示例如下：
+
+1. 首先 **Alice** 会调用 **Csm_KeyExchangeCalcPubVal**() / **Csm_JobKeyExchangeCalcPubVal**() 函数，并将生产的结果发送给 **Bob**。数据的交换可能需要被签名（**signed**）或者加密（**enncyrpted**），具体方案取决于协议的定义。需要注意，如果 **KeyExchangeCalcPubVal** 被调用时，并不存在有效的密钥材料（如：密钥无效或者基础密钥元素的长度为 0 的情况），**KeyExchangeCalcPubVal** 函数需生成必要的密钥材料并正常继续。
+2. 如有需要，**Bob** 会把收到的 **Alice** 密钥材料保存到相应的密钥元素中。他还将调用 **Csm_KeyExchangeCalcPubVal**() 来生成他需要发送给 **Alice** 的共享值（**shared value**）。接着 **Bob** 可以调用 **Csm_KeyExchangeCalcSecret**() 来生成公共秘密（**common secret**），并将此数值保存到密钥元素 **CRYPTO_KE_KEYEXCHANGE_SHAREDVALUE** 中。
+3. 当 **Alice** 收到 **Bob** 的公开值（**public value**）时，它会调用 **KeyExchangeCalcSecret**() ，并在函数的参数中提供 **Bob** 的值。公共共享秘密（**common shared secret**）通过此函数生成，并保存到密钥元素 **CRYPTO_KE_KEYEXCHANGE_SHAREDVALUE** 中。根据算法的不同，**Bob** 需要将密钥材料发送给 **Alice**，以允许她生成公共共享秘密。
+
+密钥元素 **CRYPTO_KE_KEYEXCHANGE_ALGORITHM** 指定 **Diffie-Hellman** 算法。密钥元素值的类型为 **Crypto_AlgorithmFamily**，例如：基于模数的 DH 的 **CRYPTO_ALGOFAM_DH** 或者 基于 **ECDH(E)** 的 **CRYPTO_ALGOFAM_ED25519**。也可以使用附加密钥元素 **CRYPTO_KE_KEYEXCHANGE_CURVE** 指定附加椭圆曲线参数。
+
+其他密钥元素含义如下：
+
+|                                 | DH(E)          | ECDH(E)         |
+| ------------------------------- | -------------- | --------------- |
+| CRYPTO_KE_KEYEXCHANGE_BASE      | Modulo         | Generator point |
+| CRYPTO_KE_KEYEXCHANGE_PRIVKEY   | Local exponent | Private key     |
+| CRYPTO_KE_KEYEXCHANGE_OWNPUBKEY | Generator      | Public key      |
+
+#### 7.8.7.1. Csm_KeyExchangeCalcPubVal
+
+**说明**: 计算当前用户用于密钥交换的公钥，并将公钥存储在公钥指针指向的内存位置。
+
+```C
+Std_ReturnType Csm_KeyExchangeCalcPubVal ( 
+    uint32 keyId, 
+    uint8* publicValuePtr, 
+    uint32* publicValueLengthPtr 
+)
+```
+
+#### 7.8.7.2. Csm_KeyExchangeCalcSecret
+
+**说明**: 计算共享密钥，用于与由keyId标识的密钥的密钥材料和伙伴公钥进行密钥交换。共享密钥存储为同一密钥中的密钥元素。
+
+```C
+Std_ReturnType Csm_KeyExchangeCalcSecret ( 
+    uint32 keyId, 
+    const uint8* partnerPublicValuePtr, 
+    uint32 partnerPublicValueLength
+)
+```
+
+## 7.9. 加密原语和方案
+
+### 7.9.1. Csm_JobKeySetValid
+
+**说明**: 必要时存储密钥，并将 **keyId** 标识的密钥的密钥状态设置为有效。
+
+```C
+Std_ReturnType Csm_JobKeySetValid ( 
+    uint32 jobId 
+)
+```
+
+### 7.9.2. Csm_JobKeySetInvalid
+
+**说明**: 将密钥状态设置为无效。密钥不能再用于加密操作，直到它再次被设置为有效状态。
+
+```C
+Std_ReturnType Csm_JobKeySetInvalid ( 
+    uint32 jobId
+)
+```
+
+### 7.9.3. Csm_JobRandomSeed
+
+**说明**: 为用于关联随机数生成器的指定密钥提供新种子。
+
+```C
+Std_ReturnType Csm_JobRandomSeed ( 
+    uint32 jobId, 
+    const uint8* seedPtr, 
+    uint32 seedLength 
+)
+```
+
+### 7.9.4. Csm_JobKeyGenerate
+
+**说明**: 生成新的密钥材料并将其存储在由 **keyId** 标识的密钥中。
+
+```C
+Std_ReturnType Csm_JobKeyGenerate ( 
+    uint32 jobId 
+)
+```
+
+### 7.9.5. Csm_JobKeyDerive
+
+**说明**: 使用由 keyId 标识的给定密钥中的密钥元素派生新密钥。给定的密钥包含password和Salt的密钥元素。派生密钥存储在由 **targetCryptoKeyId** 标识的密钥的 ID 为 1 的密钥元素中。
+
+```C
+Std_ReturnType Csm_JobKeyDerive ( 
+    uint32 jobId, 
+    uint32 targetKeyId 
+)
+```
+
+### 7.9.6. Csm_JobKeyExchangeCalcPubVal
+
+**说明**: 计算当前用户用于密钥交换的公钥，并将公钥存储在公钥指针指向的内存位置。
+
+```C
+Std_ReturnType Csm_JobKeyExchangeCalcPubVal ( 
+    uint32 jobId, 
+    uint8* publicValuePtr, 
+    uint32* publicValueLengthPtr 
+)
+```
+
+### 7.9.7. Csm_JobKeyExchangeCalcSecret
+
+**说明**: 计算共享密钥，用于与由keyId标识的密钥的密钥材料和伙伴公钥进行密钥交换。共享密钥存储为同一密钥中的密钥元素。
+
+```C
+Std_ReturnType Csm_JobKeyExchangeCalcSecret ( 
+    uint32 jobId, 
+    const uint8* partnerPublicValuePtr, 
+    uint32 partnerPublicValueLength 
+)
+```
+
+## 7.10. 上下文保存和恢复
+
+### 7.10.1. Csm_SaveContextJob
+
+**说明**: 加密驱动程序将相应加密操作的内部上下文存储到 contextBuffer。
+
+```C
+Std_ReturnType Csm_SaveContextJob ( 
+    uint32 jobId, 
+    uint8* contextBufferPtr, 
+    uint32* contextBufferLengthPtr 
+)
+```
+
+### 7.10.2. Csm_RestoreContextJob
+
+**说明**: 加密驱动程序从 contextBuffer 中提取上下文数据并恢复内部状态，以便此加密服务的进一步加密操作将在获取上下文的确切时间点继续。
+
+```C
+Std_ReturnType Csm_RestoreContextJob ( 
+    uint32 jobId, 
+    uint8* contextBufferPtr, 
+    uint32 contextBufferLength 
+)
+```
+
+## 7.11. 作业取消接口
+
+### 7.11.1. Csm_RestoreContextJob
+
+**说明**: 取消异步或流作业的作业处理。
+
+```C
+Std_ReturnType Csm_CancelJob ( 
+    uint32 job, 
+    Crypto_OperationModeType mode 
+)
+```
+
+## 7.12. 回调通知
+
+### 7.12.1. Csm_CallbackNotification
+
+**说明**: 通知 CSM 作业已完成。 该函数由底层（CRYIF）使用。
+
+```C
+void Csm_CallbackNotification ( 
+    Crypto_JobType* job, 
+    Crypto_ResultType result 
+)
+```
+
+## 7.12. Scheduled 函数
+
+### 7.12.1. Csm_MainFunction
+
+**说明**: 此 **API** 被周期性的调用以处理请求的作业。**Csm_MainFunction** 应检查作业队列以传递给底层 CRYIF。每个已配置的 **CsmMainFunction** 实例应实施一个 Csm_MainFunction_<shortName>。 其中<shortName>是ECU配置中CsmMainFunction配置容器的简称。
+
+```C
+void Csm_MainFunction ( 
+    void 
 )
 ```
