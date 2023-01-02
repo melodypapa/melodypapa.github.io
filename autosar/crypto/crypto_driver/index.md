@@ -171,3 +171,4 @@ AUTOSAR 提供了基本软件通用规范（SWS BSW General）[3]，它对加密
 
 为了支持尚未在规范中建模的加密服务的新功能（在系列和模式的各种枚举中），可以在加密驱动程序中配置自定义特定算法系列和模式。**CryptoPrimitive** 引用这些自定义值以指示加密原语服务、（自定义）系列和（自定义）模式的组合是可能的。**CSM** 作业配置需要引用这些自定义配置项。
 
+A crypto driver that supports algorithm families and algorithm modes beyond the pre-defined ones available in [ECUC_Crypto_00035], [ECUC_Crypto_00036] and/or [ECUC_Crypto_00037] shall define custom specific value algorithm families and algorithm modes through the containers CryptoPrimitiveAlgorithmFamilyCustom and CryptoPrimitiveAlgorithmModeCustom.
