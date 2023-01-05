@@ -1,4 +1,4 @@
-<section id="title">Lektion-1 Hallo</section>
+<section id="title">Lektion-1 Hallo!</section>
 
 # 1. Die Kursliste (CD: 1.2)
 
