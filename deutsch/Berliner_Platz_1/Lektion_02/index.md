@@ -91,3 +91,24 @@ A: Ich komme aus Spanien, aus Valencia. Und Kasimir kommt aus der Ukraine. <br/>
 B: Ja, aus Kiew. Was möchtet ihr trinken? Trinkt ihr Tee? <br/>
 A: Ich nehme lieber Mineralwasser. Was trinkst du, Maria? <br/>
 B: Kaffee natürlich. Mit viel Milch und Zucker, bitte. <br/>
+
+# 4. P21.Übung 6 (Ergänzen Sie 1-10)
+
+1. Trinkst du Tee?
+2. Trinkt ihr Espresso?
+3. Kommt ihr zwei aus Polen?
+4. Beata und Maria sprechen hier nur Deutsch.
+5. Wohnst du hier?
+6. Was machst du in Deutschland?
+7. Du/Sie heißt Maria.
+8. Wir arbeiten als Au-pair-Mädchen.
+9. Kommen Sie aus Italien?
+10. Sprechen/Lernen/Lehren Sie auch Englisch?
+
+# 5. Null bis zwölf (CD 1.20)
+
+|   0   |   1   |   2   |   3   |   4   |   5   |   6   |   7    |   8   |   9   |  10   |  11   |  12   |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :----: | :---: | :---: | :---: | :---: | :---: |
+| null  | eins  | zwei  | drei  | vier  | fünf  | sechs | sieben | acht  | neun  | zehn  |  elf  | zwölf |
+
+# 6. Handynummern - Hören Sue und notieren Sie (CD 1.21)
