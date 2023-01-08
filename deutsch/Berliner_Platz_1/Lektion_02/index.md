@@ -112,3 +112,132 @@ B: Kaffee natürlich. Mit viel Milch und Zucker, bitte. <br/>
 | null  | eins  | zwei  | drei  | vier  | fünf  | sechs | sieben | acht  | neun  | zehn  |  elf  | zwölf |
 
 # 6. Handynummern - Hören Sue und notieren Sie (CD 1.21)
+
+## 6.1. Dialog 1
+
+A: Hast du Telefon? 
+B: Ja, ein Handy.
+A: Wie ist deine Nummer? 
+B: Die Vorwahl ist 0175 und die Telefonnummer 2569138. 
+
+## 6.2. Dialog 2
+
+A: Ich rufe dich heute noch an. 
+B: O.k. Hast du meine Handynummer?
+A: Nein.
+B: Die Vorwahl ist 0173 und die Nummer 9768541.
+
+## 6.3. Answer
+
+Handy 1: 0175 / 2569138
+Handy 2: 0173 / 9768541
+
+**Note:**
+
+1. Nr.1 = Nummer 1, Nr.2 = Number 2
+2. die Vorwahl, -en：（电话）区号
+3. die Wahl, -en → wählen 选择，拨电话号码
+4. die Zahl, -en 数字
+5. an/rufen【可分动词】打电话
+6. dich → du的第四格
+
+# 7. Telefonnummern und Adressen
+
+## 7.1. Fragen Sie und notieren Sie Telefonnummern und Adressen.
+
+### 7.1.1. Dialog 1
+
+A: Wo wohnst du?
+B: In Bremen, Martinistraße 12.
+A: Und die Postleitzahl? 
+B: 28195. 
+A: Hast du Telefon?
+B: Nein, nur ein Handy.
+A: Wie ist deine Handynummer? 
+B: 01 70/89 51 1621.
+
+A: 你住在哪里？
+B: 在不莱梅，Martini大街12号。
+A: 邮政编码是多少？
+B: 28195。（邮政编码）
+A: 你有电话吗？
+B: 没有，只有一部手机。
+A: 你的手机号码是多少？ 
+B: 01 70/89 51 1621。（手机号码）
+
+### 7.1.2. Dialog 2
+
+A: Wie ist deine Telefonnummer?
+B: 45 89 73.
+A: Und die Vorwahl? 
+B: 0421. 
+A: Hast du E-Mail?
+B: Ja. 
+A: Wie ist deine E-Mail-Adresse?
+B: b.hetami@web.de
+
+A: 你的电话号码是多少？ 
+B: 45 89 73。（电话号码）
+A: 区号是多少？
+B: 0421。（区号）
+A: 你有电子邮箱吗？ 
+B: 有。
+A: 你的电子邮箱地址是多少？ 
+B: b.hetami@web.de（邮箱地址）
+
+**Note:**
+
+1. in【介词】在……
+   Ich wohne in + 地名：我住在……
+2. Bremen 不莱梅（德国城市州）
+3. die Straße, -n 街道
+4. die Postleitzahl, -en 邮政编码
+   die Post, -en 邮局，信件
+   leiten【动词】引导，引领
+   die Zahl, -en 数字
+5. die E-Mail, -s 电子邮箱
+6. Ihr 您的
+
+## 7.2. Schreiben Sie die Fragen in der Sie-Form. Spielen Sie.
+
+### 7.2.1. Dialog 1
+
+A: Wo wohnen Sie?
+B: In Bremen, Martinistraße 12.
+A: Und die Postleitzahl?
+B: 28195
+A: Haben Sie Telefon?
+B: Nein, nur ein Handy.
+A: Wie ist Ihre Handynummer?
+B: 01 70 / 89 51 16 21.
+
+### 7.2.2. Dialog 2
+
+A: Wie ist Ihre Telefonnummer?
+B: 45 89 73
+A: Und die Vorwahl?
+B: 0421.
+A: Haben Sie E-Mail?
+B: Ja.
+A: Wie ist Ihre E-Mail-Adresse?
+B: b.hetami@web.de.
+
+# 8. Zahlen von 13 bis 200
+
+## 8.1. 13 - 19
+
+|    13    |    14    |    15    |    16    |    17    |    18    |    19    |
+| :------: | :------: | :------: | :------: | :------: | :------: | :------: |
+| dreizehn | vierzehn | fünfzehn | sechzehn | siebzehn | achtzehn | neunzehn |
+
+## 8.2. 20 - 29
+
+|   20    |      21       |       22       |       23       |       24       |       25       |       26        | ... |
+| :-----: | :-----------: | :------------: | :------------: | :------------: | :------------: | :-------------: | --- |
+| zwanzig | einundzwanzig | zweiundzwanzig | dreiundzwanzig | vierundzwanzig | fünfundzwanzig | sechsundzwanzig | ... |
+
+## 8.3. 30 - 100
+
+|   30    |   40    |   50    |   60    |   70    |   80    |   90    |   100   |
+| :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: |
+| dreißig | vierzig | fünfzig | sechzig | siebzig | achtzig | neunzig | hundert |
