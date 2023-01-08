@@ -38,6 +38,7 @@ permalink: /autosar/
 * [AUTOSAR FEE (闪存EEPROM仿真）](memory/flash_eeprom_emulation)
 * [AUTOSAR NV数据处理指南](memory/nv_data_handling_guideline)
 * [AUTOSAR BndM（非易失性大容量数据管理器）](memory/bulk_nv_data_manager)
+* [AUTOSAR Memory Access（存储访问）](memory/memory_access/)
 
 ## 输入输出（I/O）
 
