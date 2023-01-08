@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "German"
+title: "德语学习"
 permalink: /deutsch/
 ---
 # Deutsch
