@@ -34,9 +34,10 @@ permalink: /autosar/
 
 ## 存储（Memory）
 
-* [AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md)
-* [AUTOSAR FEE (闪存EEPROM仿真）](memory/flash_eeprom_emulation/index.md)
-* [AUTOSAR NV数据处理指南](memory/nv_data_handling_guideline/index.md)
+* [AUTOSAR FLS（闪存驱动程序）](memory/flash_driver)
+* [AUTOSAR FEE (闪存EEPROM仿真）](memory/flash_eeprom_emulation)
+* [AUTOSAR NV数据处理指南](memory/nv_data_handling_guideline)
+* [AUTOSAR BndM（非易失性大容量数据管理器）](memory/bulk_nv_data_manager)
 
 ## 输入输出（I/O）
 
