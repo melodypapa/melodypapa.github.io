@@ -350,3 +350,28 @@ A: 2欧，4欧，6欧……50分……真该死！你有30分吗？<br/>
 5. aus【副词】没电，关机 
 6. am Wochenende 在周末
 7. erreichen【动词】抵达，触达
+
+# 11. Angebote im Supermarkt (CD 1.25)
+
+Im Angebot finden Sie heute: Italienische Salami der Extraklasse, 100 Gramm für nur 1 Euro und 69 Cent. Kaffee trinken – Kaffee genießen. Kaffee Dallmayr Prodomo – So wird Kaffeetrinken zum Genuss. Heute im Angebot für nur 4 Euro 10 die 500-Gramm-Packung. Gesund leben – gesund essen – Milch ist ein Naturprodukt. Bergbauern Milch ist etwas ganz Besonderes! Einen Liter Milch in der umweltfreundlichen Glasflasche finden Sie bei uns heute für nur 1,29. Wasser ist Leben. – In unserer Getränkeabteilung finden Sie heute: Adelholzener Mineralwasser Classic und Sanft für nur 89 Cent der Liter. 
+
+
+在今天的报价中您可以发现：特级意大利香肠，100克只要1欧69分。喝咖啡，享受咖啡。Dallmayr Prodomo咖啡，这样喝咖啡就会成为享受。今日报价：1盒500克，只要4欧10分。 健康生活 – 健康饮食 – 牛奶是一种天然商品。Bergbauern牛奶很特别！1升环保玻璃瓶包装的牛奶在我们这里今天的价格只要1欧29分。 水就是生命。- 在我们的饮品部您今天会发现：Adelholzener矿泉水经典款和柔和款每升只要89分。 
+
+**Note:**
+
+1. das Angebot, -e 产品，商品；报价
+2. der Supermarkt, Supermärkte 超市
+3. die Anzeige, -n 广告
+4. passen zu 搭配
+5. die Ansage, -n 公告
+6. finden【动词】找到，觉得
+7. die Salami 意大利香肠
+8. die Klasse, -n 等级
+9. genießen【动词】享受
+10. wird zum 成为
+11. der Genuss, Genüsse 享受
+12. gesund【形容词】健康的
+13. umweltfreundlich【形容词】环保的
+14. die Abteilung, -en 部门
+
