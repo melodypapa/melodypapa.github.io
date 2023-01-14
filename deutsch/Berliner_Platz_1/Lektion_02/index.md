@@ -388,3 +388,93 @@ Im Angebot finden Sie heute: Italienische Salami der Extraklasse, 100 Gramm für
 |          | ihr        | trinkt  |
 |          | sie        | trinken |
 | Formell  | Sie        | trinken |
+
+* 动词词干以-t, -d, -chn, -ffn结尾的动词，动词变位时先加e。如：antworten.
+* möchten是mögen的第二虚拟式的变位。
+* Die meisten Verben funktionieren wie kommen (大多数动词和kommen的变化一致)
+
+## 12.2. Verbposition - Ja/Nein-Frage und Aussagesatz 
+
+动词位置——一般疑问句和陈述句
+
+|               |        | Position 2 |                   |
+| ------------- | ------ | ---------- | ----------------- |
+| Ja/Nein-Frage | Nimmst | du         | Milch und Zucker? |
+| Aussagesatz   | Ich    | nehme      | nur Milch.        |
+
+# 13. Wie geht's? / Wie geht es Ihnen? (P26 - 1)
+
+你好吗？/您好吗？
+
+## 13.1. Text
+
+1. Sehr gut.
+2. Danke, gut.
+3. Es geht.
+4. Nicht so gut.
+
+## 13.2. Translation
+
+1. 非常好。
+2. 谢谢，不错。
+3. 马马虎虎。
+4. 不怎么好。
+
+# Was möchtest du? / Was möchten Sie? (P26 - 2)
+
+你/您要什么？
+
+## 13.1. Text
+
+1. Was möchtest du? / Was möchten Sie?
+2. Was möchtest du trinken? / Was möchten Sie trinken?
+3. Was nimmst du? / Was nehmen Sie?
+4. Was trinkst du? / Was trinken Sie?
+5. A: Möchtest du Kaffee? B: Ja, gerne. / Nein, lieber Tee. 
+6. Nehmen Sie Milch und Zucker? 
+7. A: Was macht das? / Was kostet das? / Wie viel kostet das? B: Vier Euro fünfzig (Cent). 
+
+## 13.2. Translation
+
+1. 你/您要什么？
+2. 你/您要喝点什么？
+3. 你/您要什么？
+4. 你/您喝什么？
+5. A: 你要咖啡吗？B: 好的，很乐意。/不，我更喜欢茶。
+6. 您要牛奶和糖吗？
+7. A: 这个多少钱？B: 4欧50分。
+
+**Note:**
+
+1. ein Euro achtzig Cent = eins achtzig
+
+# Telefonnummern und Adressen austauschen (P26 - 3)
+
+交换电话号码和地址
+
+## Text
+
+1. Wo wohnst du? / wohnen Sie?
+2. Wie ist die Postleitzahl?
+3. Wie ist deine / Ihre Telefonnummer? 
+4. Hast du / Haben Sie auch ein Handy?
+5. Wie ist deine / Ihre E-Mail-Adresse? 
+6. Ich wohne in Ludwigshafen, Berliner Platz 45. 
+7. (Die PLZ ist ) 67059.
+8. 0621/48 78 92. 
+9. Ja, meine Handynummer ist 0171/96 65 47. 
+10. holgerboehme@netweb.de. 
+
+## Translation
+
+1. 你/您住在哪里？
+2. 邮编是多少？
+3. 你的/您的电话号码是多少？
+4. 你/您也有手机吗？
+5. 你的/您的邮箱地址是多少？
+
+交换电话号码和地址
+
+Note:
+
+1. austauschen【动词】交换，交流
