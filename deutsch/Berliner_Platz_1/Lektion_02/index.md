@@ -375,3 +375,16 @@ Im Angebot finden Sie heute: Italienische Salami der Extraklasse, 100 Gramm für
 13. umweltfreundlich【形容词】环保的
 14. die Abteilung, -en 部门
 
+# 12. Grammatik
+
+## 12.1. Personalpronomen und Konjugation
+
+|          | Infinitive | trinken |
+| -------- | ---------- | ------- |
+| Singular | ich        | trinke  |
+|          | du         | trinkst |
+|          | er/sie/es  | trinkt  |
+| Plural   | wir        | trinken |
+|          | ihr        | trinkt  |
+|          | sie        | trinken |
+| Formell  | Sie        | trinken |
