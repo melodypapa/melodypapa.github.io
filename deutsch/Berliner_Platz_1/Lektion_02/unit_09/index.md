@@ -46,4 +46,28 @@ Was passt? Schreiben Sie die Arbeitsanweisungen zu den Aufgaben.
 3. markieren【动词】做标记。
 
 # 3. Fragen und Bitten im Kurs. Lesen Sie laut. Üben Sie.
+
 课堂的提问和请求。请您大声读并练习。
+
+## 3.1. Text
+
+1. Ich verstehe das nicht.
+2. Erklären Sie bitte das noch einmal.
+3. Wiederholen Sie das bitte.
+4. Sprechen Sie bitte langsamer/lauter. 
+5. Schreiben Sie das Wort bitte an die Tafel. 
+6. Können Sie mir bitte helfen? Ist das richtig? 
+
+## 3.2. Translation
+
+1. 我不理解这个。
+2. 请您再解释一遍。
+3. 请您重复一遍。
+4. 请您说得慢点。/请您说得大声点。
+5. 请您将单词写到黑板上去。
+6. 您能帮助我吗？这个正确吗？
+
+**Note:**
+1. verstehen【动词】理解
+2. noch einmal 再一次
+3. erklären【动词】解释
