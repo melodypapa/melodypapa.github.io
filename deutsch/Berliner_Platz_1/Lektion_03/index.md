@@ -105,3 +105,4 @@ B: Nur 5 €.
 A: Das ist sehr teuer. Der Kuli ist schon alt. 2 €? 
 B: Nein, das ist sehr wenig. Der Kuli ist sehr gut, 3 €. 
 A: O. k. 
+
