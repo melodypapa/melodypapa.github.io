@@ -54,3 +54,7 @@ permalink: /autosar/
 
 * [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)
 * [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)
+
+## 方法和模板
+
+* [AUTOSAR BSWMDT 基础软件模块描述模板](methodology_templates/basic_software_module_description_template)
