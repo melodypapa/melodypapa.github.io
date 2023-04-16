@@ -21,4 +21,5 @@ permalink: /cortex/
 1. [内存模式](m7_processor/arm_architecture_memory_mode)
 2. [系统地址映射](m7_processor/system_address_map)
 3. [ARM Cortex MPU 内存保护单元](m7_processor/protected_memory_system_archi_pmsav7)
-
+4. [ARM 异常模型](m7_processor/exception_model)
+5. [ARM Cortex-M7 指令集](m7_processor/instruction_set)
