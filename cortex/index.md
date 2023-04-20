@@ -23,3 +23,4 @@ permalink: /cortex/
 3. [ARM Cortex MPU 内存保护单元](m7_processor/protected_memory_system_archi_pmsav7)
 4. [ARM 异常模型](m7_processor/exception_model)
 5. [ARM Cortex-M7 指令集](m7_processor/instruction_set)
+6. [ARM Cortex-M7 程序状态寄存器](m7_processor/program_status_register)
