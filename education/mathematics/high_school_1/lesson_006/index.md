@@ -1,4 +1,4 @@
-<section id="title">常用逻辑用语 2</section>
+<section id="title">常用逻辑用语（2）</section>
 
 # 充分条件，必要条件
 
