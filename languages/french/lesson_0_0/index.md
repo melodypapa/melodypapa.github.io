@@ -1,3 +1,5 @@
+<section id="title">Lesson 0</section>
+
 # Lesson 0  
 
 A: Bonjour, monsieur. <br/>
