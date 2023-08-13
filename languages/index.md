@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "语言"
-permalink: /languages
+permalink: /languages/   
 ---
 
 # Deutsch
