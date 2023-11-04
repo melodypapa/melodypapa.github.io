@@ -1,4 +1,4 @@
-# Lesson 0  
+<section id="title">Lesson 0</section>
 
 A: Bonjour, monsieur. <br/>
 B: Bonjour, madame. <br/>
