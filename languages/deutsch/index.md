@@ -1,9 +1,4 @@
----
-layout: page
-title: "德语"
-permalink: /deutsch/
----
-# Deutsch
+<section id="title">Deutsch</section>
 
 ## Berliner Platz I
 
@@ -15,4 +10,3 @@ permalink: /deutsch/
 * [Lektion 7 - Willkommen in Berlin!](Berliner_Platz_1/Lektion_07)
 * [Lektion 8 - Zimmer, Küche, Bad](Berliner_Platz_1/Lektion_08)
 * [Lektion 11 - Das geht dir gut!](Berliner_Platz_1/Lektion_11)
-* 
