@@ -375,3 +375,202 @@ RAM块状态的“**无效**”表示相应**RAM块**的数据区域是无效的
 
 注意：该图未显示**数据集NVRAM块**的物理NV内存布局。 仅显示逻辑结构。
 
+#### 7.1.4.7. NVRAM 管理器 API 配置类
+
+为了能够使 **NvM** 模块适应有限的硬件资源，**NvM** 模块能支持三个不同的 **API** 配置类：
+
+* API配置类3：所有指定的 API 调用都可用。支持最多的功能。
+* API配置类2：一组中间的 API 调用可用。
+* API配置类1：特别是对于硬件资源非常有限的匹配系统设计，此 **API** 配置类仅提供在任何情况下都需要的最少 **API** 调用集。
+
+**API配置类3**需包含以下**API**：
+
+* Type 1:
+  * NvM_SetDataIndex(...)
+  * NvM_GetDataIndex(...)
+  * NvM_SetBlockProtection(...)
+  * NvM_GetErrorStatus(...)
+  * NvM_SetRamBlockStatus(...)
+  * NvM_SetBlockLockStatus()
+* Type 2:
+  * NvM_ReadBlock(...)
+  * NvM_WriteBlock(...)
+  * NvM_RestoreBlockDefaults(...)
+  * NvM_EraseNvBlock(...)
+  * NvM_InvalidateNvBlock(...)
+  * NvM_CancelJobs(...)
+  * NvM_ReadPRAMBlock(...)
+  * NvM_WritePRAMBlock(...)
+  * NvM_RestorePRAMBlockDefaults(...)
+* Type 3:
+  * NvM_ReadAll(...)
+  * NvM_WriteAll(...)
+  * NvM_CancelWriteAll(...)
+  * NvM_ValidateAll(...)
+  * NvM_FirstInitAll(...)
+* Type 4:
+  * NvM_Init(...)
+
+**API配置类2**需包含以下**API**：
+* Type 1:
+  * NvM_SetDataIndex(...)
+  * NvM_GetDataIndex(...)
+  * NvM_GetErrorStatus(...)
+  * NvM_SetRamBlockStatus(...)
+  * NvM_SetBlockLockStatus(...)
+* Type 2:
+  * NvM_ReadBlock(...)
+  * NvM_WriteBlock(...)
+  * NvM_RestoreBlockDefaults(...)
+  * NvM_CancelJobs(...)
+  * NvM_ReadPRAMBlock(...)
+  * NvM_WritePRAMBlock(...)
+  * NvM_RestorePRAMBlockDefaults(...)
+* Type 3:
+  * NvM_ReadAll(...)
+  * NvM_WriteAll(...)
+  * NvM_CancelWriteAll(...)
+  * NvM_ValidatedAll(...)
+* Type 4:
+  * NvM_Init(...)
+
+**API配置类1**应包含以下**API**：
+* Type 1:
+  * NvM_GetErrorStatus(...)
+  * NvM_SetRamBlockStatus(...)
+  * NvM_SetBlockLockStatus(...)
+* Type 2:
+  * –
+* Type 3:
+  * NvM_ReadAll(...)
+  * NvM_WriteAll(...)
+  * NvM_CancelWriteAll(...)
+* Type 4:
+  * NvM_Init(...)
+
+**注意：**
+
+对于**API配置类1**，无需队列支持，同时无法写入即时数据。此外，API调用**NvM_SetRamBlockStatus**仅在由**NvMSetRamBlockStatusApi**配置时才可用。
+
+在**API配置类1**中，不支持块管理类型**NVM_BLOCK_DATASET**。有关类型1..4定义的信息可参阅第8.6章节。
+
+**NvM** 模块应仅包含处理配置的块类型所需的代码。
+
+### 7.1.5. 扫描顺序/优先方案
+
+**NvM** 模块应支持基于优先级的作业处理。通过配置参数 **NvMJobPrioritization**，可启用/禁用基于优先级的作业处理。
+
+**注意：**
+
+有关参数 **NvMJobPrioritization** 的更多信息，请参阅第 10.2.2 章节。
+
+在基于优先级的作业处理顺序的情况下，**NvM** 模块需使用两个队列：
+
+* 用于立即写入（**Immediate Write**）作业。如：碰撞数据（**Crash data**）
+* 另一个用于所有其他作业，包括：立即读取/擦除作业等。
+
+如果通过配置禁用基于优先级的作业处理，则 **NvM** 模块不需支持立即写入作业。在这种情况下，**NvM**模块按 **FCFS** 顺序处理所有作业。
+
+对于任何 **NvM_ReadAll**、**NvM_ValidateAll**、**NvM_FirstInitAll** 和 **NvM_WriteAll** API 的多块请求（**multi block requests**）的作业队列长度都为 1，即仅排队一个多块作业。
+
+**NvM** 模块不得通过其他请求中断源于 **NvM_ReadAll** 请求的作业。
+
+**注意：**
+
+该规则的唯一例外是具有立即优先级的写入作业，它将抢占正在运行的读/写作业。抢占的作业随后需由 **NvM** 模块恢复或者重启。
+
+**NvM** 模块不得通过其他请求中断源于 **NvM_WriteAll** 请求的作业。
+
+**NvM** 模块需对以下的请求进行排队，以便随后执行它们：
+
+* NvM 模块应该对正在进行的 **NvM_ReadAll** 请求期间请求的读取作业进行排队，并随后执行它们。
+* NvM 模块应该对正在进行的 **NvM_WriteAll** 请求期间请求的写入作业进行排队，并随后执行它们。
+* NvM 模块应该对正在进行的 **NvM_ReadAll** 请求期间请求的写入作业进行排队，并随后执行它们。
+* NvM 模块应该对正在进行的 **NvM_WriteAll** 请求期间请求的读取作业进行排队，并随后执行它们。
+
+**注意：**
+
+可以通过调用 **NvM_CancelWriteAll** 来中止 **NvM_WriteAll** 请求。在这种情况下，当前块需被完全处理完成，接着不再有其他块被写入。
+
+**提示：**
+
+如果请求因相关 **NVRAM** 块的完成而变得过时，则应允许将请求出列。
+
+抢占的作业随后应由 **NvM** 模块恢复或者重启，此行为适用于单块请求以及多块请求。
+
+## 7.2. 一般的行为
+
+对于每次异步请求，作业完成后调用方的通知是一个可配置的选项。**NvM** 模块应提供一个回调接口（**callback interface**）。
+
+**提示：**
+
+**NvM** 模块的环境需仅通过 **NvM** 模块来访问非易失性存储器（**non-volatile memory**）。除了**NvM**模块外，其他任何模块不允许直接访问非易失性存储器。
+
+**NvM** 模块仅提供访问 **NVRAM** 和共享内存（**Shared memory**）**RAM** 中的块的隐式方式。这也就意味着 **NvM** 模块将一个或多个块从 **NVRAM** 复制到 **RAM**，反之亦然。应用程序根据给定的限制来直接访问 **RAM** 数据，例如：同步的方式来访问。
+
+如果具有特定 ID 的块尚未排队或当前正在进行中（多任务的限制），**NvM** 模块需将所有异步单块（**single block**）读、写、控制的请求排入队列。
+
+只要不发生队列溢出，**NvM** 模块就可以接受多个异步单块（**single block**）请求。**NvM** 模块应从队列中获取最高优先级请求并按序列化顺序进行处理。
+
+**NvM** 模块需实现隐式机制（**implicit mechanisms**），对 **NV内存**中保存的数据进行一致性/完整性检查。
+
+根据存储软件栈的实现，由**NvM**模块提供的和被调用的回调例程（**callback routines**），可以在中断上下文中调用。
+
+**提示：**
+
+因此 **NvM** 模块中，提供在中断上下文中被调用的例程（**routines**），必须确保其运行时间足够短。
+
+如果在配置时没有可用的默认 **ROM** 数据，或者 **NvMInitBlockCallback** 没有定义回调函数，则应用程序应负责提供默认初始化数据。
+
+**注意：**
+
+在这种情况下，应用程序必须使用 **NvM_GetErrorStatus()** 才能区分首次初始化（**first initialization**）和损坏的数据（**corrupted data**）。具体请参阅 10.2.3 章节。
+
+在处理 **NvM_ReadAll** 期间，**NvM** 模块应能够通过执行校验计算（**a checksum calculation**）来检测损坏的 **RAM数据**。
+
+在处理 **NvM_ReadAll** 期间，**NvM** 模块应能够通过测试管理块（**administrative block**）内数据的有效性（**the validity of a data**）来检测无效 **RAM数据**。
+
+在 **NvM_ReadAll** 的启动阶段（**startup phase**）和正常操作（**normal operation**）期间，如果 **NvM** 模块在 **NV块** 内检测到不可恢复的错误，则 **NvM** 模块应将默认数据（如果已配置）复制到相应的 **RAM块**。
+
+为了使用 **OS服务**（**OS services**），**NvM** 模块需仅使用**BSW调度器**（**BSW scheduler**），而不是直接使用 **OS对象** 和相关 **OS服务**。
+
+**NvM** 模块需为配置有**永久RAM**（**permanent RAM**）或通过API参数传递的RAM的**NVRAM块**的 **RAM块**的所有读取和写入的操作，使用内部镜像作缓冲区。其中RAM的起始地址未与 **NvMBufferAlignmentValue** 对齐。
+
+### 7.2.1. NvM 启动
+
+**NvM_Init** 需由 **BSW模式管理器**（**BSW Mode Manager**）负责调用。
+
+由于 **ECU** 启动时间的严格限制，**NvM_Init** 请求无需包含已配置的 **NVRAM块** 的初始化。
+
+**NvM_Init** 请求不负责触发底层驱动程序和内存硬件抽象层的初始化。这些初始化也需由 **BSW模式管理器** 处理。
+
+**RAM数据块** 的初始化需由另一个 **NvM** 的请求完成，即 **NvM_ReadAll**。**NvM_ReadAll** 也需由 **BSW模式管理器** 负责调用。
+
+使用 **NvM** 模块的软件模块需负责检查 **NvM模块** 启动时产生的全局错误和状态信息下（**global error/status information**）。**BSW模式管理器** 可使用轮询方式 **NvM_GetErrorStatus**（保留块 ID 0），或者通过可配置选项 NvM_MultiBlockCallback 回调函数通知，来获取启动时产生的全局错误和状态信息。如果使用轮询，则需通过全局错误和状态 **NVM_REQ_OK** 或 **NVM_REQ_NOT_OK**（启动期间：**NVM_REQ_PENDING**）检测 **NVRAM** 启动过程的结束。如果选择回调函数进行通知，已分配的 **NVRAM块**处理，则应自动通知软件组件。
+
+
+**注意 1：**
+
+如果为 **NvM_ReadAll** 中处理的每个 **NVRAM块** 都配置了回调函数，则这些回调函数可以被**RTE**启动。例如：**SW-C** 在较早的时间点处理。
+
+**注意 2：**
+
+为了确保 **DEM** 在早期完全运行，即：能将其 **NV数据** 能迅速地恢复到 **RAM**中，需将 **DEM** 相关的 **NVRAM块** 配置为低ID（**low ID**），以便于在 **NvM_ReadAll** 中首先进行处理。
+
+**注意 3：**
+
+有关 **NvM_MultiBlockCallback** 的更多信息，请参阅第 10.2.2 章节。
+
+**NvM** 模块不需要以持久的方式（**in a persistent way**）自动存储当前使用的数据集（**Dataset**）的索引。
+
+软件模块负责的它所负责的所有块的特定错误/状态的检查，可以使用 **NvM_GetErrorStatus** 和特定的 **块ID** 来进行检查，并确定相应 **RAM块** 的有效性。
+
+对于块管理类型为**NVRAM数据集**的所有块，软件模块需负责通过 **NvM_SetDataIndex** 来设置正确的索引位置。例如：当前索引位置可以由软件模块存储/维护在唯一的 **NVRAM块** 中。 软件模块可使用 **NvM_GetDataIndex** 调用，来获取**数据集块**的当前索引位置。
+
+### NvM 关机
+
+基础的关机流程需通过请求 **NvM_WriteAll** 来完成。
+
+**提示：**
+
+**NvM_WriteAll** 需由 **BSW模式管理器**（**BSW Mode Manager**）调用。
