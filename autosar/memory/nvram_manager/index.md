@@ -567,10 +567,154 @@ RAM块状态的“**无效**”表示相应**RAM块**的数据区域是无效的
 
 对于块管理类型为**NVRAM数据集**的所有块，软件模块需负责通过 **NvM_SetDataIndex** 来设置正确的索引位置。例如：当前索引位置可以由软件模块存储/维护在唯一的 **NVRAM块** 中。 软件模块可使用 **NvM_GetDataIndex** 调用，来获取**数据集块**的当前索引位置。
 
-### NvM 关机
+### 7.2.2. NvM 关机
 
 基础的关机流程需通过请求 **NvM_WriteAll** 来完成。
 
 **提示：**
 
 **NvM_WriteAll** 需由 **BSW模式管理器**（**BSW Mode Manager**）调用。
+
+### 7.2.3. 对 NvM 模块的类并行写访问（**Quasi parallel write access**）
+
+**NvM** 模块应使用排队机制（**queuing mechanism**）通过异步接口接收请求。**NvM** 模块应根据请求的优先级串行处理所有请求。
+
+### 7.2.4. NVRAM块一致性检查
+
+**NvM** 模块需提供隐式技术（**implicit techniques**）来检查 **NVRAM块** 的数据一致性。
+
+**NVRAM块**的数据一致性检查需通过其相应 **NV块**的CRC数值重新计算来实现。
+
+数据一致性检查的隐式方式应由内部函数的可配置选项提供。隐式一致性检查应可针对每个**NVRAM块**进行配置，并取决于可配置参数 **NvMBlockUseCrc** 和 **NvMCalcRamBlockCrc**。
+
+**注意：**
+
+有关 **NvMBlockUseCrc** 和 **NvMCalcRamBlockCrc** 的更多信息，请参阅第 10.2.3 章节。
+
+对于 **NvMWriteBlockOnce = TRUE** 的 **NVRAM块**，需启用 **NvMBlockUseCrc**。 对于 **NvMWriteBlockOnce = TRUE** 的 **NVRAM块**，需禁用 **NvMBlockWriteProt**，以便用户能够在 **CRC** 检查失败的情况下将数据写入 **NVRAM块**。
+
+根据可配置参数 **NvMBlockUseCrc** 和 **NvMCalcRamBlockCrc**，**NvM** 模块需为使用的最大的 **CRC** 分配足够的内存。
+
+**提示：**
+
+**NVM** 用户不应该也不需要了解 **RAM块**中数据的CRC内存信息。例如：大小、位置等。
+
+### 7.2.5. 错误恢复
+
+**NvM** 模块需提供错误恢复机制。错误恢复取决于 **NVRAM块管理类型**（**NVRAM block management type**）。
+
+**NvM** 模块需通过加载默认值的方式，为每类 **NVRAM块管理类型**的读取操作提供错误恢复。
+
+**NvM** 模块需通过为 **RAM块** 加载默认值的方式，来为块管理类型 **NVM_BLOCK_REDUNDANT** 的 **NVRAM块** 读取操作提供错误恢复。
+
+无论是何种 **NVRAM块管理类型** ，**NvM** 模块都需通过执行写入重试，来为写入操作提供错误恢复。
+
+在 **RAM块** 的重新验证失败的情况下，**NvM** 模块需在启动时为具有配置的了 **RAM块** CRC 的所有 **NVRAM块** 读取操作提供错误恢复。
+
+### 7.2.6. 使用ROM数据恢复RAM块
+
+**NvM** 模块应提供隐式和显式恢复技术，以便于在 **NV块** 出现不可恢复的数据不一致的情况下, 将 **ROM数据** 恢复到其相应的 **RAM块**。
+
+### 7.2.7. 使用ROM默认数据隐式恢复RAM块
+
+相应NV块的数据内容在隐式恢复期间需保持不变。
+
+当未配置默认数据（即：通过参数 **NvMRomBlockDataAddress** 或 **NvMInitBlockCallback**）时，启动期间（**NvM_ReadAll** 的一部分）**NvM**模块不应通过 **NvM_ReadBlock** 或 **NvM_ReadPRAMBlock** ，为每个 **NVRAM块** 提供隐式恢复。
+
+在以下情况下，在启动期间（**NvM_ReadAll** 的一部分），**NvM_ReadBlock** 和 **NvM_ReadPRAMBlock** 均不需为每个 **NVRAM块** 提供隐式恢复（**implicit recovery**）：
+
+* 配置默认数据，即：通过配置参数 **NvMRomBlockDataAddress** 或 **NvMInitBlockCallback**。
+* **NvM** 模块中的 **永久RAM块**（**Permanent RAM block**）或 **RAM镜像**（**RAM mirror**）的内容（显式同步的情况下）状态有效，且CRC（数据）一致。
+
+在以下情况下，在启动期间（**NvM_ReadAll** 的一部分），**NvM_ReadBlock** 和 **NvM_ReadPRAMBlock** 均不需为每个 **NVRAM块** 提供隐式恢复（**implicit recovery**）：
+
+* 配置默认数据，即：通过配置参数 **NvMRomBlockDataAddress** 或 **NvMInitBlockCallback**。
+* **NvM** 模块中的 **永久RAM块**（**Permanent RAM block**）或 **RAM镜像**（**RAM mirror**）的内容（显式同步的情况下）状态无效，且CRC（数据）不一致。
+* 但从NV中读取尝试成功。
+
+对于以下条件，在启动期间（**NvM_ReadAll** 的一部分），**NvM_ReadBlock** 或 **NvM_ReadPRAMBlock** 需为每个 **NVRAM块** 提供隐式恢复：
+
+* 配置默认数据，即：通过配置参数 **NvMRomBlockDataAddress** 或 **NvMInitBlockCallback**。
+* **NvM** 模块中的 **永久RAM块**（**Permanent RAM block**）或 **RAM镜像**（**RAM mirror**）的内容（显式同步的情况下）状态无效，且CRC（数据）不一致。
+* 从NV中读取尝试依然失败。
+
+在 **NvM_ReadBlock** 或 **NvM_ReadPRAMBlock** 请求 **NVM_BLOCK_NATIVE** 和 **NVM_BLOCK_REDUNDANT** 类型的 **NVRAM块** 期间，需提供隐式恢复。
+
+### 7.2.8. 使用ROM默认数据显式恢复RAM块
+
+对于使用 **ROM块** 数据进行显式恢复，**NvM** 模块需提供函数 **NvM_RestoreBlockDefaults** 和 **NvM_RestorePRAMBlockDefaults** 以便将 **ROM数据** 恢复到其相应的 **RAM 块**。
+
+函数 **NvM_RestoreBlockDefaults** 和 **NvM_RestorePRAMBlockDefaults** 应保持相应 **NV块** 的数据内容不变。
+
+**提示：**
+
+应用程序应在每次需要时使用 **NvM_RestoreBlockDefaults** 或 **NvM_RestorePRAMBlockDefaults** 函数，将 **ROM数据** 恢复到相应的 **RAM块**。
+
+### 7.2.9. 检测到NV块的不完整写入操作
+
+对**NV块**的不完整写入操作的检测，超出了 **NvM** 模块的范围。这部分错误通过内存硬件抽象模块（**memory hardware abstraction**）来处理和检测的。如果引用的 **NV块** 无效或不一致，并且在请求时无法读取，**NvM** 模块期望从内存硬件抽象模块获取信息。**SW-C** 可以使用 **NvM_InvalidateNvBlock** 防止低层模块来传递旧数据。
+
+### 7.2.10. 单个块请求的终止（Termination of a single block request）
+
+NvM 模块提供的所有除了**NvM_CancelWriteAll**外的异步请求，需在相应 **管理块** 中指定的错误/状态字段（**designated error/status field**）中，指示其结果。
+
+可选的配置参数 **NvMSingleBlockCallback** 可通过配置回调函数（**callback**）来通知一个异步单块请求（包括：**NvM_ReadAll**）的终止（**the termination of an asynchronous block request**）。
+
+**注意：**
+
+在与应用程序 **SW-C** 通信时，ECUC 配置参数 **NvMSingleBlockCallback** 需配置为相应的 **Rte_call_\<p\>_\<o\>** API。有关 **NvMSingleBlockCallback** 的更多信息，请参阅第 10.2.3 章节。
+
+### 7.2.11. 多个块请求的终止（Termination of a multi block request）
+
+**NvM** 模块需使用单独的变量来存储异步多块请求的结果，如：**NvM_ReadAll**、**NvM_WriteAll**，包括 **NvM_CancelWriteAll**、**NvM_ValidateAll**。
+
+函数 **NvM_GetErrorStatus** 可通过ID值为0保留块（**a reserved block ID value of 0**），返回异步多块请求（包括：**NvM_CancelWriteAll**）的最新的错误或者状态信息。
+
+多块请求的结果需仅表示公共的错误或者状态信息。
+
+**NvM** 模块提供的多块请求需在每个受影响**管理块**的指定错误或者状态字段中，指示其详细错误或者状态信息。
+
+可选的配置参数 **NvMMultiBlockCallback** 可通过配置回调函数（**callback**）来通知一个异步多块请求的终止。
+
+**注意：**
+
+有关 **NvMMultiBlockCallback** 的更多信息，请参阅第 10.2.2 章节。
+
+### 7.2.12. 异步请求和作业处理的一般处理机制
+
+在每次异步请求中，进行 **CRC** 计算时，如果引用的 **NVRAM块** 长度超过参数 **NvMCrcNumOfBytes** 配置的字节数，**NvM** 模块将分多个步骤来计算 **CRC**。
+
+对于 **CRC** 计算，**NvM** 模块需使用 **CRC** 模块发布的初始值。
+
+多个并发的单块请求需进行排队。
+
+**NvM** 模块需中断异步请求/作业处理，以支持具有立即写优先级（**immediate priority**）的作业（如：碰撞数据）。
+
+如果 **NvM** 模块接受的异步函数调用导致作业队列溢出，则该函数应返回 **E_NOT_OK**。
+
+成功将请求排队后，**NvM** 模块需将相应 **NVRAM块** 的请求结果设置为 **NVM_REQ_PENDING**。
+
+如果 **NvM** 模块已成功处理作业，则应返回 **NVM_REQ_OK** 作为请求结果。
+
+### 7.2.13. NVRAM 块写保护
+
+**NvM** 模块需提供不同类型的可配置写保护。每种写保护只与**NVRAM块**的**NV部分**相关，即：**RAM块**数据可以修改但不能写入NV存储器。
+
+当 **NvMWriteBlockOnce** 为 **FALSE** 时，无论 **NvMBlockWriteProt** 配置的值为 **True** 或者 **False**，都可以使用 **NvM_SetBlockProtection** 函数来启用或者禁用写保护。
+
+当 **NvMWriteBlockOnce** 为 **TRUE** 时，无论 **NvMBlockWriteProt** 配置的值为 **True** 或者 **False**，都不允许使用 **NvM_SetBlockProtection** 函数启用/禁用写保护。
+
+对于配置为 **NvMBlockWriteProt = TRUE** 的所有 **NVRAM块**，**NvM** 模块需启用默认写保护。
+
+**NvM** 模块的环境可以使用 **NvM_SetBlockProtection** 函数来显式的禁用写保护。
+
+对于配置为 **NvMWriteBlockOnce == TRUE** 的 **NVRAM块**，**NvM** 模块只能向关联的 **NV内存** 写入一次，即：在空白的NV设备的情况下。
+
+对于配置为 **NvMWriteBlockOnce == TRUE** 的 **NVRAM块**，**NvM** 模块不允许使用 **NvM_SetBlockProtection** 函数显式的禁用写保护。
+
+对于配置了 **NvMWriteBlockOnce == TRUE** 的 **NVRAM块**，**NvM** 模块需拒绝在第一个读取请求之前，发出任何写入、擦除、数据无效的请求。
+
+**注意：**
+
+如果发生复位，则来自 **NvM管理块**的配置有 **NvMWriteBlockOnce == TRUE** 的块的写保护标志将被清除。为了重新激活保护，必须在处理第一个写入、擦除、数据无效请求之前读取该块，以便仅针对有效且一致的块进行设置写保护。第一个读取请求可以作为单个块请求，或者作为 **NvM_ReadAll** 的一部分来完成。
+
