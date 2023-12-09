@@ -16,7 +16,7 @@ permalink: /languages/
 * [Lektion 7 - Willkommen in Berlin!](deutsch/Berliner_Platz_1/Lektion_07)
 * [Lektion 8 - Zimmer, Küche, Bad](deutsch/Berliner_Platz_1/Lektion_08)
 * [Lektion 11 - Das geht dir gut!](deutsch/Berliner_Platz_1/Lektion_11)
-* 
+
 # 2. Français
 
 ## 2.1. A1

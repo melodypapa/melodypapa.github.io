@@ -375,7 +375,7 @@ RAM块状态的“**无效**”表示相应**RAM块**的数据区域是无效的
 
 注意：该图未显示**数据集NVRAM块**的物理NV内存布局。 仅显示逻辑结构。
 
-#### 7.1.4.7. NVRAM 管理器 API 配置类
+#### 7.1.4.7. 7.1.4.7.**NvM**模块 API 配置类
 
 为了能够使 **NvM** 模块适应有限的硬件资源，**NvM** 模块能支持三个不同的 **API** 配置类：
 
@@ -717,4 +717,347 @@ NvM 模块提供的所有除了**NvM_CancelWriteAll**外的异步请求，需在
 **注意：**
 
 如果发生复位，则来自 **NvM管理块**的配置有 **NvMWriteBlockOnce == TRUE** 的块的写保护标志将被清除。为了重新激活保护，必须在处理第一个写入、擦除、数据无效请求之前读取该块，以便仅针对有效且一致的块进行设置写保护。第一个读取请求可以作为单个块请求，或者作为 **NvM_ReadAll** 的一部分来完成。
+
+### 7.2.14. RAM块数据的验证和修改
+
+本节介绍有关**NvM** 模块的状态位（**status bits**）的内部处理机制的信息。根据不同的 **API** 调用，描述了对**RAM块**状态的影响。下图描述了**RAM块**的状态转换。
+
+![Figure7_8.png](Figure7_8.png)
+
+由于进入和保存状态可以根据多种条件来完成，将它们全部放在上图中会很难理解，所以在下面的子章节中会提供了更详细的解释。因为如上图所示，**INVALID/CHANGED**状态是永远无法进入，所以此状态没有进行任何说明。
+
+初始化后，**RAM块**处于**INVALID/UNCHANGED**状态，直到通过 **NvM_ReadAll** 进行了更新后。更新后状态会转换到**VALID/UNCHANGED**。在这种状态下，**WriteAll**的操作是不被允许的。如果调用 **NvM_SetRamBlockStatus**，则会离开此状态。如果发生**CRC错误**，**RAM块**会被再次更改为**INVALID**状态，然后可以通过隐式或显式错误恢复机制离开此状态。错误恢复后，由于**RAM块**的内容与**NVRAM块**的内容已经不同，此时**RAM块**处于**VALID/CHANGED**状态。
+
+如果在配置中，用于修改**RAM块**状态的 API（如：**NvMSetRamBlockStatusApi** 或 **NvMBlockUseSetRamBlockStatus**）被禁用：
+
+1. 当在把数据写入到相应**NV块**中时，**NvM** 模块需将 **NvM** 模块中的**RAM块**或**RAM镜像**（在显式同步的情况下）视为有效并更改（**VALID/CHANGED**），并。即在 **NvM_WriteAll** 期间，**NvM** 模块需将每个永久 **RAM块**写入到**NVRAM块**。
+2. 当从**NV块**读取数据时，**NvM** 模块需将**RAM块**视为无效（**INVALID**）。即在 **NvM_ReadAll** 期间，**NvM** 模块需将每个进行了相应配置的 **NVRAM块** 加载到 **RAM块**。
+
+如果块读取尝试不成功，应用程序有责任在下一次写入尝试之前提供有效数据。
+
+如果 **RAM块** 成功复制到NV存储器，则**RAM块**状态随后需被设置为**VALID/UNCHANGED**。
+
+#### 7.2.14.1. 有效/未变更 VALID/UNCHANGED 状态
+
+在以下情况下，**RAM块**处于**VALID/UNCHANGED**状态：
+
+1. **RAM块** 的内容与相应 **NVRAM块** 的内容相同。
+2. 虽然应用程序已经访问了**RAM块**，但并未指示 **RAM块** 可能发生变化。
+3. 对于 **数据集NVRAM块**，这些条件适用于上次被处理的实例的 RAM内容。此外，最后一个块操作成功，并且该块没有因请求而失效。
+
+要进入 **VALID/UNCHANGED** 的状态，至少必须发生以下其中一种情况：
+
+1. **NvM_ReadAll** 成功读取块。
+2. **NvM_ReadBlock** 已成功完成该块。
+3. **NvM_WriteBlock** 已成功完成该块。
+4. **NvM_WriteAll** 成功写入块。
+
+在满足以下情况时，**VALID/UNCHANGED** 状态会被继续保留：
+
+1. BlockID的最后一次读取或写入成功（没有错误并且没有检索默认数据）。
+2. 自上次读取或写入以来，应用程序并未指示 **RAM块** 可能发生变化。
+
+#### 7.2.14.2. 有效/已变更 VALID/CHANGED 状态
+
+在以下情况下，**RAM块**处于**VALID/CHANGED**状态：
+
+1. **RAM块** 的内容可能与相应  **NVRAM块** 的内容不同。 
+2. 对于 **数据集NVRAM块**，这些条件适用于上次处理的实例的 RAM 内容。 此外，该块的最后一个操作是成功的，并且该块没有根据请求而失效。 
+3. 块所有者（**Block owner**）可以发出信号通知该块的潜在 RAM 内容已更改，从而导致块状态变为 **VALID/CHANGED**。
+
+要进入 **VALID/CHANGED** 状态，至少必须发生以下的某一种情况：
+
+1. 使用 **TRUE** 为参数，调用了 **NvM_SetRamBlockStatus**。
+2. 调用了 **NvM_WriteBlock**。
+3. 调用了 **NvM_WriteAll** 并会处理了此**RAM块**。
+4. 调用了 **NvM_ReadBlock** 给出默认数据。
+5. 调用了 **NvM_RestoreBlockDefaults** 成功完成，
+6. 调用了 **NvM_ReadAll** 在处理块时，给出默认数据。
+7. 调用了 **NvM_ValidateAll** 成功处理了此**RAM块**
+
+在满足以下情况时，**VALID/CHANGED** 状态会被继续保留：
+
+* **RAM块** 所有者已表明 **RAM块** 可能发生变化。
+* 上次 **RAM块** 数据读取时，无理是采用隐式或者显式（**implicitly or explicitly**），块数据已经恢复为默认值。
+
+#### 7.2.14.3. 无效/未更改 INVALID/UNCHANGED 状态
+
+对于一般的 **NV块** 来说，此状态代表当前数据无效。对于 **DATASET块** 来说，此状态代表着 **NV块** 中最后处理的实例数据无效。
+
+要进入 **INVALID/UNCHANGED** 状态，至少必须发生以下的某一种情况：
+
+1. 使用 **FALSE** 为参数，调用 **NvM_SetRamBlockStatus**。
+2. 调用了**NvM_ReadBlock**后，返回用户请求的数据已失效。
+3. 调用了**NvM_ReadBlock**后，由于**CRC**数据校验失败，提示块数据已损坏。
+4. 调用了**NvM_ReadBlock**后，指示块的**StaticID**错误（如果已配置）。
+5. 调用了**NvM_WriteBlock**, 未能执行成功。
+6. 调用了**NvM_WriteAll**，块写入不成功。
+7. 调用了**NvM_InvalidateNvBlock**，并执行成功。
+8. 调用了**NvM_EraseNvBlock**，并执行成功。
+
+在满足以下情况时，**INVALID/UNCHANGED** 状态会被继续保留：
+
+* 当时块状态未知（早期初始化，直到 ReadAll 或对给定块请求的第一个操作）。
+* 该块被检测为损坏或具有错误的**StaticID**。
+* 对该块的最后一次成功操作是失效。
+* 当前读取失败且无默认数据。
+* 对块的最后一次成功操作是擦除。
+
+### 7.2.15. 应用程序和NvM模块之间的通信和隐式同步（implicit synchronization）
+
+为了最大限度地减少锁定/解锁开销或者使用其他同步方法，应用程序和**NvM**模块之间的通信必须遵循本章节所描述的严格的步骤顺序。这样可以确保了应用程序和**NvM**模块之间的可靠通信，避免**RAM块**中的数据损坏，并保证正确的同步。
+
+此访问模型假设**RAM块**的通信涉及两方：应用程序和**NvM**模块。
+
+如果多个应用程序使用相同的**RAM块**，则**RAM块**的数据完整性并不属于**NvM**模块的工作范畴。在这种情况下，应用程序必须同步其对**RAM块**的访问，并且必须保证在NVRAM操作期间不会发生对**RAM块**的不适当的访问（详细信息见下文）。特别是如果多个应用程序通过使用（不同的）临时**RAM块**共享**NVRAM块**，则应用程序之间的同步会变得更加复杂，并且**NvM**模块也不会处理此问题。如果使用回调作为通知方法，可能会发生以下情况： 尽管该应用程序尚未发起请求，但该应用程序会收到通知。
+
+所有应用程序都必须遵守以下规则。
+
+#### 7.2.15.1. 写入请求（NvM_WriteBlock 或 NvM_WritePRAMBlock）
+
+应用程序在写入请求期间必须遵守以下规则，以实现应用程序和**NVRAM**管理器之间的隐式同步：
+
+1. 应用程序需由**NvM**模块负责数据填充到**RAM块**的写入。
+2. 应用程序需发出**NvM_WriteBlock**或**NvM_WritePRAMBlock**请求后，并将控制权转移到**NvM**模块。
+3. 从这时刻开始，应用程序不应修改**RAM块**，直到收到回调函数的通知或通过轮询得出请求的成功或失败为止。但同时可以读取**RAM块**的内容。
+4. 应用程序可以使用轮询来获取请求的状态，也可以通过异步回调函数获取通知。
+5. **NvM**模块操作完成后，**RAM块**可被再次使用以进行数据的修改。
+
+#### 7.2.15.2. 读取请求（NvM_ReadBlock 或 NvM_ReadPRAMBlock）
+
+应用程序在读取请求期间必须遵守以下规则，以实现应用程序和**NVRAM**管理器之间的隐式同步：
+
+1. 应用程序需提供一个**RAM块**，并由**NvM**模块负责**NVRAM数据**填充此**RAM块**中。
+2. 应用程序发出**NvM_ReadBlock**请求后，并将控制权转移到**NvM**模块。
+3. 从这时刻开始，应用程序不应读取或写入**RAM块**，直到收到回调函数的通知或通过轮询得出请求的成功或失败为止。
+4. 应用程序可以使用轮询来获取请求的状态，也可以通过回调函数获取通知。
+5. **NvM**模块操作完成后，**RAM块**中包含有新数据可供应用程序使用。
+
+#### 7.2.15.3. 恢复默认请求（NvM_RestoreBlockDefaults 和 NvM_RestorePRAMBlockDefaults）
+
+应用程序在恢复默认请求期间必须遵守以下规则，以实现应用程序和**NVRAM**管理器之间的隐式同步：
+
+1. 应用程序需提供一个**RAM块**，并由**NvM**模块负责把**ROM数据**填充此**RAM块**中。
+2. 应用程序发出**NvM_RestoreBlockDefaults**或**NvM_RestorePRAMBlockDefaults**请求后，并将控制权转移到**NvM**模块。
+3. 从这时刻开始，应用程序不应读取或写入**RAM**块，直到收到回调函数的通知或通过轮询得出请求的成功或失败为止。
+4. 应用程序可以使用轮询来获取请求的状态，也可以通过回调函数获取通知。
+5. **NvM**模块操作完成后，**RAM块**会被恢复为**ROM数据**，并可供应用程序使用。
+
+#### 7.2.15.4. 多块读取请求（NvM_ReadAll）
+
+此请求只能在系统启动时，由**BSW模式管理器**（**BswM**）模块触发。该请求将使用启动所需的数据填充所有已配置的**永久RAM块**。
+
+如果请求失败或请求仅部分成功处理，**NvM**会向**DEM**发送此情况信号，并向**BSW模式管理器**返回错误。**DEM**和**BSW模式管理器**必须决定必须采取的进一步措施。这些步骤超出了**NvM**模块的范畴，会在**DEM**和**BSW模式管理器**的规范中定义。
+
+应用程序在多块读取请求期间必须遵守以下规则，以实现应用程序和**NVRAM**管理器之间的隐式同步：
+
+1. 由**BSW模式管理器**发出**NvM_ReadAll**请求后，并将控制权转移到**NvM**模块。
+2. **BSW模式管理器**可以使用轮询来获取请求的状态，也可以通过回调函数获取通知。
+3. 在**NvM_ReadAll**期间，已配置的单块通知回调函数（**single block callback**）将会在**NVRAM块**被完全处理后被调用。这些回调函数使**RTE**能够单独启动每个**SW-C**。
+
+#### 7.2.15.5. 多块写入请求（NvM_WriteAll）
+
+此请求只能在系统关闭时，由**BSW模式管理器**触发。此请求会将所有已修改的**永久RAM块**的内容写入到**NV存储器**。通过仅在**ECU**关闭期间调用此请求，**BSW模式管理器**可以确保在操作结束之前没有任何软件模块能够修改**RAM块**中的数据。这些措施超出了**NvM**模块的范畴，会在**BSW模式管理器**的规范中定义。
+
+应用程序在多块写入请求期间必须遵守以下规则，以实现应用程序和**NVRAM**管理器之间的隐式同步：
+
+1. 由**BSW模式管理器**发出**NvM_WriteAll**请求，并将控制权转移到**NvM**模块。
+2. **BSW模式管理器**可以使用轮询来获取请求的状态，或者可以通过回调函数获取通知。
+
+#### 7.2.15.6. 取消操作 (NvM_CancelWriteAll)
+
+此请求取消待处理的**NvM_WriteAll**请求。此请求是一个异步请求，可以调用它来终止一个挂起（**pending**）的**NvM_WriteAll**请求。
+
+**NvM_CancelWriteAll** 请求只能由**BSW模式管理器**使用。
+
+#### 7.2.15.7. 管理块的修改
+
+出于管理目的，管理块是属于每个配置的**NVRAM块**的一部分（参见第 7.1.3.4 节）。
+
+如果**NVRAM块**有挂起（**pending**）的单块操作，则应用程序不允许调用任何修改管理块的操作，例如：**NvM_SetDataIndex**、**NvM_SetBlockProtection**、**NvM_SetRamBlockStatus**，直到挂起的作业完成。
+
+### 7.2.16. NVRAM 块的正常和扩展运行时准备
+
+本子章节提供了一份简短摘要说明**NVRAM块**的正常和扩展运行时的准备。有关启动期间，**NVRAM块**处理的详细行为在第8.3.3.1章节中指定。
+
+根据两个配置参数**NvMDynamicConfiguration** 和**NvMResistantToChangedSw**，NVRAM管理器在启动期间（即处理请求 NvM_ReadAll() 时）应以不同的方式运行。
+
+如果**NvMDynamicConfiguration**设置为**FALSE**，则**NVRAM**管理器需忽略存储的**配置ID**，并继续**NVRAM块**的正常运行时准备。在这种情况下，需检查**RAM块**的有效性（**validity**）。如果检测到**RAM块**的内容无效（**invalid**），则应检查**NV块**的有效性（**validity**）。检测到有效的**NV块**需被复制到其指定的**RAM块**。如果检测到无效的**NV块**，则需加载默认数据。
+
+如果**NvMDynamicConfiguration**设置为**TRUE**，并且检测到**配置ID**不匹配时，则需对使用**NvMResistantToChangedSw**配置为**FALSE**的那些**NVRAM**块执行扩展运行时的准备。即：在这种情况下，默认数据的加载需与分配的**RAM块**或**NV块**的有效性无关。
+
+### 7.2.17. 应用程序和NvM模块之间的通信和显式同步（explicit synchronization）
+
+与应用程序和 NvM 模块之间的隐式同步[参见第7.2.2.15节](#7215-应用程序和-nvram-管理器之间的通信和隐式同步implicit-synchronization)相反，可以使用一种可选的（即：可配置的）显式同步机制（**explicit synchronization mechanism**）。它是通过NvM模块中的**RAM镜像**（**RAM mirror**）来实现的。应用程序通过**NvM**模块调用的回调例程双向传输数据。
+
+下面简单分析一下这个机制：
+
+主要优点就是应用程序可以更好地控制其数据。因为应用程序负责将一致的数据复制到**NvM**模块的**RAM镜像**中，或者从**NvM**模块的**RAM镜像**读回，所以应用程序知道这时间点。**RAM块**永远不会因为并发访问，而处于不一致状态。
+
+缺点是需要与使用此机制的最大**NVRAM块**具有相同的大小的额外的**RAM**，并且每次操作都需要在两个RAM空间之间进行额外的复制。
+
+如果有一个软件模块可以同步这些应用程序，并且从**NvM**模块的角度来看，它是此**NVRAM块**的所有者，则该机制尤其可以实现不同应用程序之间共享**NVRAM块**。
+
+对于每个**NVRAM块**，都可以通过参数**NvMBlockUseSyncMechanism**配置显式同步机制（**explicit synchronization mechanism**）的使用。
+
+如果没有块配置为使用显式同步机制，**NvM**模块无需分配**RAM镜像**。
+
+如果至少一个块配置为使用显式同步机制，则**NvM**模块需仅分配一个**RAM镜像**。此**RAM镜像**不应超过配置为使用显式同步机制的最长**NVRAM块**的大小。
+
+**NvM**模块需使用内部镜像作为所有读取和写入**NvMBlockUseSyncMechanism == TRUE**的**NVRAM块**的**RAM块**的操作的缓冲区。该缓冲区不应用于其他**NVRAM块**。
+
+**NvM**模块需调用例程**NvMWriteRamBlockToNvCallback**，以便将数据从**RAM块**复制到**NvMBlockUseSyncMechanism == TRUE**的所有**NVRAM块**的镜像。该例程不得用于其他**NVRAM块**。
+
+**NvM**模块需调用例程**NvMReadRamBlockFromNvCallback**，以便将数据从镜像复制到 **NvMBlockUseSyncMechanism == TRUE** 的所有**NVRAM块**的**RAM块**。该例程不得用于其他**NVRAM块**。
+
+在单个块请求期间，如果例程**NvMReadRamBlockFromNvCallback**返回**E_NOT_OK**，则**NvM**模块需重试例程调用**NvMRepeatMirrorOperations**次。此后，单块读取作业应将块特定请求结果设置为**NVM_REQ_NOT_OK**，并向**DEM**报告**NVM_E_REQ_FAILED**。
+
+如果**NvMReadRamBlockFromNvCallback**例程返回**E_NOT_OK**，**NvM**模块需在**NvM_MainFunction**的下一次调用中重试例程调用。
+
+在单个块请求期间，如果例程**NvMWriteRamBlockToNvCallback**返回**E_NOT_OK**，则**NvM**模块需重试例程调用**NvMRepeatMirrorOperations**次。 此后，单块写入作业应将块特定请求结果设置为**NVM_REQ_NOT_OK**，并向**DEM**报告**NVM_E_REQ_FAILED**。
+
+如果**NvMWriteRamBlockToNvCallback**例程返回**E_NOT_OK**，**NvM**模块应在**NvM_MainFunction**的下一次调用中重试例程调用。
+
+在多块请求 (**NvM_WriteAll**) 期间，如果例程**NvMWriteRamBlockToNvCallback**返回**E_NOT_OK**，则**NvM**模块需重试例程调用**NvMRepeatMirrorOperations**次。 此后，函数**NvM_WriteAll**的作业需将块特定请求结果设置为**NVM_REQ_NOT_OK**，并向**DEM**报告**NVM_E_REQ_FAILED**。
+
+在多块请求 (**NvM_ReadAll**) 期间，如果例程**NvMReadRamBlockFromNvCallback**返回**E_NOT_OK**，则**NvM**模块需重试例程调用**NvMRepeatMirrorOperations**次。 此后，函数 **NvM_ReadAll**的作业应将块特定请求结果设置为**NVM_REQ_NOT_OK**，并向**DEM**报告**NVM_E_REQ_FAILED**。
+
+如果块配置了显式同步，则它不应配置**永久RAM映像**（**Permanent RAM image**）。
+
+以下两节阐明了使用显式同步机制时的差异。
+
+####  7.2.17.1. 写入请求（NvM_WriteBlock 或 NvM_WritePRAMBlock）
+
+应用程序在写入请求期间必须遵守以下规则，以实现应用程序和**NVRAM**管理器之间的显式同步：
+
+1. 应用程序需由**NvM**模块负责数据填充到**RAM块**的写入。
+2. 应用程序发出**NvM_WriteBlock**或**NvM_WritePRAMBlock**请求。
+3. 应用程序可以也可能会修改**RAM块**内容，直到**NvM**模块调用例程**NvMWriteRamBlockToNvCallback**。
+4. 如果**NvM**模块调用例程**NvMWriteRamBlockToNvCallback**，则应用程序必须提供**RAM**块的一致的数据副本，并复制到**NvM**模块请求的目的地址。应用程序可以使用返回值**E_NOT_OK**，来表明数据的不一致。**NvM**模块需接受此错误值，并重试**NvMRepeatMirrorOperations**次。如果依然失败，需推迟此请求，并在下一次请求中继续。
+5. 仅当数据被复制到**NvM**模块时才继续：
+6. 从这个时刻开始，应用程序可以再次读写**RAM块**。
+7. 应用程序可以使用轮询来获取请求的状态，也可以通过异步回调例程获取通知。
+   
+**注意：**
+
+如果请求了**NvM_WriteBlock**或**NvM_WritePRAMBlock**，但尚未由**NvM**模块处理，则应用程序可以将多个写入请求合并到一个**RAM块**中的不同位置。如果回调例程 **NvMWriteRamBlockToNvCallback**未被调用，则请求还未被处理。
+
+#### 7.2.17.2. 读取请求（NvM_ReadBlock 或 NvM_ReadPRAMBlock）
+
+应用程序在读取请求期间必须遵守以下规则，以实现应用程序和**NVRAM**管理器之间的显式同步：
+
+1. 应用程序需提供一个**RAM块**，并由**NvM**模块负责**NVRAM数据**填充此**RAM块**中。
+2. 应用程序发出**NvM_ReadBlock**或**NvM_ReadPRAMBlock**请求。
+3. 应用程序可以也可能会修改**RAM块**内容，直到**NvM**模块调用例程**NvMReadRamBlockFromNvCallback**。
+4. 如果**NvM**模块调用例程**NvMReadRamBlockFromNvCallback**，则应用程序需将数据从**NvM**模块指定的目标地址复制到**RAM块**中。应用程序可以使用返回值**E_NOT_OK**来指示数据未被复制，则**NvM**模块将接受此状况，并重试**NvMRepeatMirrorOperations**次。如果情况依然如此，则可推迟此请求，并在下一次请求继续。
+5. 仅当数据已经从**NvM**模块被复制后才继续：
+6. 从这个时刻开始，应用程序可在**RAM块**中查找**NV块**的值。
+7. 应用程序可以使用轮询来获取请求的状态，也可以通过回调例程获取通知。
+
+**注意：**
+
+如果请求了**NvM_ReadBlock**或**NvM_ReadPRAMBlock**，但尚未由**NvM**模块处理，则应用程序可以将多个读取请求组合到一个**NV块**中的不同位置。如果回调例程 **NvMReadRamBlockFromNvCallback**未被调用，则请求不会被处理。
+
+**注意：**
+
+**NvM_RestoreBlockDefaults**和 **NvM_RestorePRAMBlockDefaults**的工作方式与**NvM_ReadBlock**类似。
+
+#### 7.2.17.3. 多块读取请求（NvM_ReadAll）
+
+此请求只能在系统启动时，由**BSW模式管理器**触发。此请求将使用启动所需的数据填充所有已配置的**永久RAM块**。如果请求失败或请求仅部分成功处理，**NvM**会向**DEM**发送此情况信号，并向**BSW模式管理器**返回错误。**DEM**和**BSW模式管理器**必须决定必须采取的进一步措施。这些步骤超出了**NvM**模块的范畴，会在**DEM**和**BSW模式管理器**的规范中定义。
+
+**普通操作：**
+
+1. **BSW模式管理器**发出**NvM_ReadAll**。
+2. **BSW模式管理器**可以使用轮询来获取请求的状态，或者可以通过回调函数获取通知。
+3. 在**NvM_ReadAll**作业期间，如果**Nv块**配置了同步回调**NvM_ReadRamBlockFromNvm**，则**NvM**模块将会调用此回调函数。在此回调函数中，应用程序需将数据从**NvM**模块指定的目标复制到**RAM块**。应用程序可以使用返回值**E_NOT_OK**来表示数据未复制。**NvM**模块将接受此状况，并重试**NvMRepeatMirrorOperations**次，如果情况依然如此，报告读取操作失败。
+4. 从这个时刻开始，如果读取操作成功，应用程序可以在**RAM块**中查找**NV块**值。
+5. 在**NvM_ReadAll**期间，已配置的单块通知回调函数（**single block callback**）将会在**NVRAM块**被完全处理后被调用。这些回调函数使**RTE**能够单独启动每个**SW-C**。
+6. 处理完最后一个块并调用其已配置的单块通知回调函数后，配置的多块通知回调函数（**multi block callback**）将会被调用。
+
+#### 7.2.17.4. 多块写入请求（NvM_WriteAll）
+
+此请求只能在系统关闭时，由**BSW模式管理器**触发。此请求会将所有已修改的**永久RAM块**的内容写入到**NV存储器**。通过仅在**ECU**关闭期间调用此请求，**BSW模式管理器**可以确保在操作结束之前没有任何软件模块能够修改**RAM块**中的数据。这些措施超出了**NvM**模块的范畴，会在**BSW模式管理器**的规范中定义。
+
+**普通操作：**
+
+1. **BSW模式管理器**发出**NvM_WriteAll**请求，将控制权转移到**NvM**模块。
+2. 在**NvM_WriteAll**作业期间，如果**Nv块**配置了同步回调**NvM_WriteRamBlockToNvM**，则**NvM**模块将调用此回调函数。在此回调函数中，应用程序需提供**RAM**块的一致的数据副本，并复制到**NvM**模块请求的目的地址。应用程序可以使用返回值**E_NOT_OK**来表明数据不一致。**NvM**模块将此状况，并重试**NvMRepeatMirrorOperations**次。如果情况依然如此，则报告写入操作失败。
+3. 从这个时刻开始，应用程序可以再次读写**RAM块**。
+4. **BSW模式管理器**可以使用轮询来获取请求的状态，或者可以通过回调函数获取通知。
+
+### 7.2.18. 静态块ID检查
+
+**注意：**
+
+每次将块写入**NV**内存时，**NvM**模块都会存储**NV块**的标头，包括**NV块**中的**静态块ID**（**Static Block ID**）。读取块时，会将其静态块ID与请求的块ID进行比较。这允许检测导致读取错误块的硬件故障。
+
+每次将块写入**NV**内存时，**NvM**模块需存储**块标头**的**静态块ID**字段。
+
+每次从**NV**存储器读取块时，**NvM**模块需检查块标头。
+
+如果**静态块ID**检查失败，则向**DEM**报告故障**NVM_E_WRONG_BLOCK_ID**。
+
+如果**静态块ID** 检查失败，则启动读取错误恢复。
+
+**提示：**
+
+配置期间应进行检查，以确保所有**静态块ID**都是唯一的。
+
+### 7.2.19. 读取重试
+
+如果**NvM**模块在从**NV**内存读取操作期间，检测到**CRC错误**，则应根据**NVM_MAX_NUM_OF_READ_RETRIES**配置，进行一次或多次额外的读取尝试，然后再继续读取**冗余NV块**。
+
+如果**NvM**模块在从**NV**内存读取操作期间，检测到**CRC错误**，则应根据**NVM_MAX_NUM_OF_READ_RETRIES**配置，进行一次或多次额外的读取尝试，然后再继续读取**ROM块**。
+
+如果**NvM**模块在从**NV**内存读取操作期间，检测到**静态块ID**故障，然后按照**NVM_MAX_NUM_OF_READ_RETRIES**配置，进行一次或多次额外的读取尝试，然后再继续读取**冗余NV块**。
+
+如果**NvM**模块在从**NV**内存读取操作期间，检测到**静态块ID**故障，然后根据**NVM_MAX_NUM_OF_READ_RETRIES**配置，进行一次或多次额外的读取尝试，然后再继续读取**ROM块**。
+
+### 7.2.20. 写入验证
+
+当**RAM块**写入**NV**内存时，如果配置了**NVM_WRITE_VERIFICATION**行为，则需立即回读**NV**块并与**RAM块**中的原始内容进行比较。
+
+**RAM块**中的原始内容与回读的块之间的比较需分步进行，以便读取和比较的字节数不大于配置参数**NVM_WRITE_VERIFICATION_DATA_SIZE**指定的值。
+
+如果**RAM块**中的原始内容与回读的内容不同，则需向**DEM**报告生产代码错误**NVM_E_VERIFY_FAILED**。
+
+如果**RAM块**中的原始内容与回读的内容不同，则需按照文档中的规定执行写入重试。
+
+如果回读操作失败，则不应执行读重试。
+
+如果**RAM块**中的原始内容与回读的内容不同，则对于初始写入尝试以及所有配置的重试后依然失败，**NvM**需设置为请求结果**NVM_REQ_NOT_OK**。
+
+### 7.2.21. 比较 NvM 中的 NV 数据
+
+为了避免**NV**存储器中不必要的写入操作，如果特定**RAM块**的**NV**数据在运行时未更新，**NvM**模块提供基于**CRC**的比较机制，可在处理写入作业时应用此机制。
+
+**NvM**模块需提供一个选项，通过实现基于**CRC**的比较机制来跳过未更改数据的写入。
+
+**注意：**
+
+一般来说，存在以下风险：**RAM块**的某些更改内容会导致与初始内容相同的**CRC**，所以如果使用此选项，更新可能会丢失。此选项应仅用于可以容忍此风险的区块。
+
+对于每个**NVRAM块**，如果参数**NvMBlockUseCrc**设置为**true**，则可以通过参数**NvMBlockUseCRCCompMechanism**配置基于**CRC**的比较机制的使用。
+
+### 7.2.22. NvM和BswM交互
+
+当**NvM**需要通知**BswM**有关多块请求状态更改时，需使用 **BswM**的接口函数**BswM_NvM_CurrentJobMode**。
+
+如果**NvMBswMMultiBlockJobStatusInformation**为**true**，则**NvM**无需调用所配置的多块通知回调函数（**multi block callback**）。
+
+当**NvM**需要通知**BswM**有关单个块请求接受（如：待处理）和结果时，需使用**BswM**的接口函数**BswM_NvM_CurrentBlockMode**。
+
+如果**NvMBswMMultiBlockJobStatusInformation**为**true**，则当**NvM**接受了多块操作时，**NvM**需通过使用相关多块请求类型和模式 NVM_REQ_PENDING 调用 BswM_NvM_CurrentJobMode 来通知 BswM 已接受的多块操作处于待处理状态。
+
+如果 NvMBswMMultiBlockJobStatusInformation 为 true，则当多块操作完成或取消时，NvM 应通过使用相关多块请求类型以及作为模式的多块操作的结果调用 BswM_NvM_CurrentJobMode 来通知 BswM 有关多块操作的结果。
+
+如果 NvMBswMBlockStatusInformation 为 true，则当 NvM 接受单块操作时，NvM 应通过使用相关块 ID 和模式 NVM_REQ_PENDING 调用 BswM_NvM_CurrentBlockMode 来通知 BswM 已接受的单块操作处于待处理状态。
+
+如果 NvMBswMBlockStatusInformation 为 true，则当单块操作完成或取消时，NvM 应通过使用相关块 ID 和作为模式的单块操作结果调用 BswM_NvM_CurrentBlockMode 来通知 BswM 有关单块操作的结果。
+
+如果 NvMBswMBlockStatusInformation 为 true 并且 NvM 正在进行多块操作，则对于由于多块操作而处理的每个块，NvM 应通过使用相关块 ID 调用 BswM_NvM_CurrentBlockMode 来通知 BswM 当它开始处理该块时，该块处于挂起状态，并且， 作为模式，NVM_REQ_PENDING。
+
+如果 NvMBswMBlockStatusInformation 为 true 并且 NvM 正在进行多块操作，则对于由于多块操作而处理的每个块，NvM 应在块完成处理时通过调用 BswM_NvM_CurrentBlockMode 和相关
+块 ID 以及作为模式的单个块操作的结果。
 
