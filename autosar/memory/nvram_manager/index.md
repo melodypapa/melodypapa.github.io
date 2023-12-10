@@ -329,7 +329,7 @@ RAM块状态的“**无效**”表示相应**RAM块**的数据区域是无效的
 
 #### 7.1.4.3. NVRAM块描述符表（NVRAM block descriptor table）
 
-要处理的每个**NVRAM块**，可由随后分配的**块ID**（**Block ID**），通过 **NvM** 模块 **API** 进行选择。
+要处理的每个**NVRAM块**，可由随后分配的**Block ID**，通过 **NvM** 模块 **API** 进行选择。
 
 所有与**NVRAM块描述符表**及其在 ROM（闪存）中的地址相关的结构信息，都必须在 **NvM** 模块配置期间生成。
 
@@ -563,7 +563,7 @@ RAM块状态的“**无效**”表示相应**RAM块**的数据区域是无效的
 
 **NvM** 模块不需要以持久的方式（**in a persistent way**）自动存储当前使用的数据集（**Dataset**）的索引。
 
-软件模块负责的它所负责的所有块的特定错误/状态的检查，可以使用 **NvM_GetErrorStatus** 和特定的 **块ID** 来进行检查，并确定相应 **RAM块** 的有效性。
+软件模块负责的它所负责的所有块的特定错误/状态的检查，可以使用 **NvM_GetErrorStatus** 和特定的 **Block ID** 来进行检查，并确定相应 **RAM块** 的有效性。
 
 对于块管理类型为**NVRAM数据集**的所有块，软件模块需负责通过 **NvM_SetDataIndex** 来设置正确的索引位置。例如：当前索引位置可以由软件模块存储/维护在唯一的 **NVRAM块** 中。 软件模块可使用 **NvM_GetDataIndex** 调用，来获取**数据集块**的当前索引位置。
 
@@ -966,7 +966,7 @@ NvM 模块提供的所有除了**NvM_CancelWriteAll**外的异步请求，需在
 
 此请求只能在系统启动时，由**BSW模式管理器**触发。此请求将使用启动所需的数据填充所有已配置的**永久RAM块**。如果请求失败或请求仅部分成功处理，**NvM**会向**DEM**发送此情况信号，并向**BSW模式管理器**返回错误。**DEM**和**BSW模式管理器**必须决定必须采取的进一步措施。这些步骤超出了**NvM**模块的范畴，会在**DEM**和**BSW模式管理器**的规范中定义。
 
-**普通操作：**
+**正常操作：**
 
 1. **BSW模式管理器**发出**NvM_ReadAll**。
 2. **BSW模式管理器**可以使用轮询来获取请求的状态，或者可以通过回调函数获取通知。
@@ -979,7 +979,7 @@ NvM 模块提供的所有除了**NvM_CancelWriteAll**外的异步请求，需在
 
 此请求只能在系统关闭时，由**BSW模式管理器**触发。此请求会将所有已修改的**永久RAM块**的内容写入到**NV存储器**。通过仅在**ECU**关闭期间调用此请求，**BSW模式管理器**可以确保在操作结束之前没有任何软件模块能够修改**RAM块**中的数据。这些措施超出了**NvM**模块的范畴，会在**BSW模式管理器**的规范中定义。
 
-**普通操作：**
+**正常操作：**
 
 1. **BSW模式管理器**发出**NvM_WriteAll**请求，将控制权转移到**NvM**模块。
 2. 在**NvM_WriteAll**作业期间，如果**Nv块**配置了同步回调**NvM_WriteRamBlockToNvM**，则**NvM**模块将调用此回调函数。在此回调函数中，应用程序需提供**RAM**块的一致的数据副本，并复制到**NvM**模块请求的目的地址。应用程序可以使用返回值**E_NOT_OK**来表明数据不一致。**NvM**模块将此状况，并重试**NvMRepeatMirrorOperations**次。如果情况依然如此，则报告写入操作失败。
@@ -990,7 +990,7 @@ NvM 模块提供的所有除了**NvM_CancelWriteAll**外的异步请求，需在
 
 **注意：**
 
-每次将块写入**NV**内存时，**NvM**模块都会存储**NV块**的标头，包括**NV块**中的**静态块ID**（**Static Block ID**）。读取块时，会将其静态块ID与请求的块ID进行比较。这允许检测导致读取错误块的硬件故障。
+每次将块写入**NV**内存时，**NvM**模块都会存储**NV块**的标头，包括**NV块**中的**静态块ID**（**Static Block ID**）。读取块时，会将其静态块ID与请求的**Block ID**进行比较。这允许检测导致读取错误块的硬件故障。
 
 每次将块写入**NV**内存时，**NvM**模块需存储**块标头**的**静态块ID**字段。
 
@@ -1048,16 +1048,86 @@ NvM 模块提供的所有除了**NvM_CancelWriteAll**外的异步请求，需在
 
 当**NvM**需要通知**BswM**有关单个块请求接受（如：待处理）和结果时，需使用**BswM**的接口函数**BswM_NvM_CurrentBlockMode**。
 
-如果**NvMBswMMultiBlockJobStatusInformation**为**true**，则当**NvM**接受了多块操作时，**NvM**需通过使用相关多块请求类型和模式 NVM_REQ_PENDING 调用 BswM_NvM_CurrentJobMode 来通知 BswM 已接受的多块操作处于待处理状态。
+如果**NvMBswMMultiBlockJobStatusInformation**为**true**，则当**NvM**接受了多块操作时，**NvM**需通过使用相关的**多块请求类型**和**NVM_REQ_PENDING模式**为参数，调用 **BswM_NvM_CurrentJobMode**，来通知**BswM**已接受了多块操作，并当前处于待处理状态。
 
-如果 NvMBswMMultiBlockJobStatusInformation 为 true，则当多块操作完成或取消时，NvM 应通过使用相关多块请求类型以及作为模式的多块操作的结果调用 BswM_NvM_CurrentJobMode 来通知 BswM 有关多块操作的结果。
+如果**NvMBswMMultiBlockJobStatusInformation**为**true**，则当多块操作完成或取消时，**NvM**需通过使用相关的**多块请求类型**和**多块操作结果**为参数，调用**BswM_NvM_CurrentJobMode**，来通知**BswM**最终的多块操作的执行结果。
 
-如果 NvMBswMBlockStatusInformation 为 true，则当 NvM 接受单块操作时，NvM 应通过使用相关块 ID 和模式 NVM_REQ_PENDING 调用 BswM_NvM_CurrentBlockMode 来通知 BswM 已接受的单块操作处于待处理状态。
+如果**NvMBswMBlockStatusInformation**为**true**，则当**NvM**接受单块操作时，**NvM**需通过使用相关的**Block ID**和**NVM_REQ_PENDING模式**为参数，调用 **BswM_NvM_CurrentBlockMode**，来通知**BswM**已接受了单块操作，并当前处于待处理状态。
 
-如果 NvMBswMBlockStatusInformation 为 true，则当单块操作完成或取消时，NvM 应通过使用相关块 ID 和作为模式的单块操作结果调用 BswM_NvM_CurrentBlockMode 来通知 BswM 有关单块操作的结果。
+如果**NvMBswMBlockStatusInformation**为**true**，则当单块操作完成或取消时，**NvM**需通过使用相关**Block ID**和**单块操作结果**为参数，调用**BswM_NvM_CurrentBlockMode**，来通知**BswM**有关单块操作的执行结果。
 
-如果 NvMBswMBlockStatusInformation 为 true 并且 NvM 正在进行多块操作，则对于由于多块操作而处理的每个块，NvM 应通过使用相关块 ID 调用 BswM_NvM_CurrentBlockMode 来通知 BswM 当它开始处理该块时，该块处于挂起状态，并且， 作为模式，NVM_REQ_PENDING。
+如果**NvMBswMBlockStatusInformation**为**true**，并且**NvM**正在进行多块操作，则对于由于多块操作而被处理的每个单块，**NvM**需通过使用相关**Block ID**和**NVM_REQ_PENDING模式**为参数，调用 **BswM_NvM_CurrentBlockMode**，来通知**BswM**已开始处理该单块时，并且当前单该块处于挂起状态。
 
-如果 NvMBswMBlockStatusInformation 为 true 并且 NvM 正在进行多块操作，则对于由于多块操作而处理的每个块，NvM 应在块完成处理时通过调用 BswM_NvM_CurrentBlockMode 和相关
-块 ID 以及作为模式的单个块操作的结果。
+如果**NvMBswMBlockStatusInformation**为**true**，并且**NvM**正在进行多块操作，则对于由于多块操作而被处理的每个单块，**NvM**需在单块完成处理时，通过使用相关**Block ID**和**单块操作结果**为参数，调用**BswM_NvM_CurrentBlockMode**, 来通知**BswM**有关单块操作的执行结果。
 
+### 7.2.23. 块锁定时的NvM的行为
+
+因为**NvM_SetBlockLockStatus** API服务只能由**BSW**组件使用，它不会在**SWC**描述中作为服务发布，所以此服务无法通过**RTE**进行访问。
+
+如果使用参数**BlockLocked**为**TRUE**，调用函数**NvM_SetBlockLockStatus**，则**NvM**需保证与**BlockId**标识的**NVRAM**块关联的**NV内容**不会被任何请求修改。如在**NvM_WriteAll** 期间需略过该块。其他请求，如：**NvM_WriteBlock**、**NvM_WritePRAMBlock**、**NvM_InvalidateNvBlock**、**NvM_EraseNvBlock**需被拒绝。
+
+如果使用参数**BlockLocked**为**TRUE**，调用函数**NvM_SetBlockLockStatus**，则**NvM**需保证在下次启动时，在处理**NvM_ReadBlock**或**NvM_ReadPRAMBlock**期间，应从**NV存储器**加载此**NVRAM块**。
+
+如果使用参数**BlockLocked**为**FALSE**，调用函数**NvM_SetBlockLockStatus**，则**NvM**需保证按照**AUTOSAR**的规定正常处理该**NVRAM块**。
+
+使用函数**NvM_SetBlockLockStatus**进行的**BlockLocked**设置，不允许被**NvM_SetRamBlockStatus**或**NvM_SetBlockProtection**更改。
+
+#### 7.2.23.1. 使用案例
+
+通过诊断服务将**NVRAM块**的新数据保存到**NV**内存中。这些数据应在下次**ECU**启动时可供**SW-C**使用，即：它们既不会被来自**SW-C**的请求覆盖，也不会在关闭期间被**永久RAM块**的数据覆盖，如：**NvM_WriteAll**服务。
+
+#### 7.2.23.2. 使用情况（通过 DCM）：
+
+1. **DCM**模块请求**NvM_SetBlockLockStatus**(\<BlockId\>, FALSE)，以便重新启用对此块的写入。（之前执行此过程可能会被锁定）。
+2. **DCM**模块请求**NvM_WriteBlock**(\<blockId\>, \<DataBuffer\>)。
+3. **DCM**模块通过使用**NvM_GetErrorStatus**，轮询写入请求是否完成。
+4. 接受到成功响应 (**NVM_REQ_OK**) 后，**DCM**模块发出**NvM_SetBlockLockStatus**(\<BlockId\>, TRUE)。
+
+### Block Compression
+
+The block data is compressed before it is written to NV memory. The type of compression (block split, compression, delta) is vendor-specific.
+
+The use-case is for larger data blocks with changes of only smaller junks (like drive cycle logging). The goal is that not the whole block needs to be written to NV memory to reduce the overall write-cycles.
+
+The block split would divide the block in multiple sub-blocks and only the changed subblocks would be written. Alternatively, only the changed delta could be written. Anyway, any data compression algorithm could be used.
+
+The drawback is always a higher runtime for writing or reading the data.
+
+![Figure7_9](Figure7_9.png)
+
+In case the NvMBlockUseCompression is set to true, the NvM shall compress the stored data in NV memory.
+
+### Block Ciphering
+
+For security purposes NvM supports synchronous encryption and decryption via CSM module using symmetric 16 byte aligned algorithms, e.g. AES128.
+
+The user always works with plain data, the NV RAM stores the ciphered data: 
+
+* Write data: NvM encrypts the plain user data and then forwards the ciphered data to the device.
+* Read data: NvM reads the ciphered data from device, decrypts the data and finally provides the plain data to the user.
+
+To check the integrity of the ciphered data a CRC can be configured (as usual). NvM will then calculate the CRC over encrypted data and recalculate and check the CRC before decryption: the CRC always matches the ciphered data. 
+
+In case NvMBlockCipheringRef is given, the NvM shall before forwarding the write request to MemIf encrypt the plain data using Csm_Encrypt() with the CSM job given in NvMCsmEncryptionJobReference.
+
+The CRC calculation (if configured) shall be done over the encrypted data.
+
+In case Csm_Encrypt() returns a CRYPTO_E_BUSY, the NvM shall retry to redo the job. After NvMCsmRetryCounter times of retry the NvM shall abort the write job and set the NvM result to NVM_REQ_NOT_OK and signal an error via NvM_JobErrorNotification().
+
+In case Csm_Encrypt() returns any other error than CRYPTO_E_BUSY or CRYPTO_E_OK, the NvM shall abort the write job and set the NvM result to NVM_REQ_NOT_OK and signal an error via NvM_JobErrorNotification().
+
+In case Csm_Encrypt() returns successfully with CRYPTO_E_OK, the NvM shall continue the write job (e.g. with the CRC calculation) with the new length given in NvMNvBlockNVRAMDataLength.
+
+In case of the returned length in resultLengthPtr is different to the NvMNvBlockNVRAMDataLength the development error NVM_E_BLOCK_CHIPHER_LENGTH_MISSMATCH shall be triggerd.
+
+In case NvMBlockCipheringRef is given, the NvM shall before forwarding the read request to application decrypt the stored data using Csm_Decrypt() with the CSM job given in NvMCsmDecryptionJobReference. The CRC check (if configured) shall be done over the encrypted data. If the CRC does not match, NvM will not decrypt the data but abort the job with NVM_REQ_INTEGRITY_FAILED.
+
+In case Csm_Decrypt() returns a CRYPTO_E_BUSY, the NvM shall retry to redo the job. After NvMCsmRetryCounter times of retry the NvM shall abort the read job and set the NvM result to NVM_REQ_NOT_OK and signal an error via NvM_JobErrorNotification().
+
+In case Csm_Decrypt() returns any other error than CRYPTO_E_BUSY or CRYPTO_E_OK, the NvM shall abort the read job and set the NvM result to NVM_REQ_NOT_OK and signal an error via NvM_JobErrorNotification().
+
+In case Csm_Decrypt() returns successfully with CRYPTO_E_OK, the NvM shall continue the read job with the new length given in NvMNvBlock Length.
+
+In case of the returned length in resultLengthPtr is different to the NvMNvBlockLength the development error NVM_E_BLOCK_CHIPHER_LENGTH_MISSMATCH shall be
+triggerd.
+    
