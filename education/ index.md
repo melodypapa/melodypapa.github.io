@@ -19,3 +19,7 @@ permalink: /education/
 * [常用逻辑用语（3）](mathematics/high_school_1/lesson_007/)
 
 ### 1.1.2. 第二单元 
+
+## 1.2. 信息科技
+
+* [算法与程序设计](informatik/chapter2/index.md)
