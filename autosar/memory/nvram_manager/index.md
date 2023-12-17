@@ -1083,7 +1083,7 @@ NvM 模块提供的所有除了**NvM_CancelWriteAll**外的异步请求，需在
 3. **DCM**模块通过使用**NvM_GetErrorStatus**，轮询写入请求是否完成。
 4. 接受到成功响应 (**NVM_REQ_OK**) 后，**DCM**模块发出**NvM_SetBlockLockStatus**(\<BlockId\>, TRUE)。
 
-### Block Compression
+### 7.2.24. Block Compression
 
 The block data is compressed before it is written to NV memory. The type of compression (block split, compression, delta) is vendor-specific.
 
@@ -1097,7 +1097,7 @@ The drawback is always a higher runtime for writing or reading the data.
 
 In case the NvMBlockUseCompression is set to true, the NvM shall compress the stored data in NV memory.
 
-### Block Ciphering
+### 7.2.25. Block Ciphering
 
 For security purposes NvM supports synchronous encryption and decryption via CSM module using symmetric 16 byte aligned algorithms, e.g. AES128.
 
