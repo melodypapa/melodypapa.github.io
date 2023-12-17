@@ -1,6 +1,5 @@
 def question_2():
-    print("Please enter x = ")
-    x = int(input())
+    x = int(input("Please enter x = "))
     i = 0
     m = 0
     k = 1

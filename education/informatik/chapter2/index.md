@@ -23,7 +23,7 @@ if __name__=="__main__":
     question_1()
 ```
 
-# 2. 2 问题2:
+# 2. 问题2:
 
 如下图所示算法，或输入x=3，输出结果是 ________________________。
 
@@ -52,4 +52,29 @@ def question_2():
 
 if __name__=="__main__":
     question_2()
+```
+
+# 3. 问题3:
+
+如下图所示算法，输出结果是 ________________________。
+
+![](question_3.drawio.svg)
+
+## 3.1. Python 代码
+
+```
+def question_3():
+    i = 1
+    s = 1
+    while (True):
+        s = s * i
+        i = i + 3
+        if i > 100:
+            break
+    
+    print("s= %d" % s)
+    print("i= %d" % i)    
+
+if __name__=="__main__":
+    question_3()
 ```
