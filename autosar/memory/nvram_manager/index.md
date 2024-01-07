@@ -1083,51 +1083,331 @@ NvM 模块提供的所有除了**NvM_CancelWriteAll**外的异步请求，需在
 3. **DCM**模块通过使用**NvM_GetErrorStatus**，轮询写入请求是否完成。
 4. 接受到成功响应 (**NVM_REQ_OK**) 后，**DCM**模块发出**NvM_SetBlockLockStatus**(\<BlockId\>, TRUE)。
 
-### 7.2.24. Block Compression
+### 7.2.24. 块压缩
 
-The block data is compressed before it is written to NV memory. The type of compression (block split, compression, delta) is vendor-specific.
+块数据在写入**NV存储器**之前会被压缩。压缩类型特定于供应商的，包括：块分割、压缩、增量。
 
-The use-case is for larger data blocks with changes of only smaller junks (like drive cycle logging). The goal is that not the whole block needs to be written to NV memory to reduce the overall write-cycles.
+该使用用例特别适用于仅更改较小内容的较大的数据块，例如：驾驶周期日志记录。 目标：是不需要将整个块写入 **NV内存**，以减少总体写入周期。
 
-The block split would divide the block in multiple sub-blocks and only the changed subblocks would be written. Alternatively, only the changed delta could be written. Anyway, any data compression algorithm could be used.
+块分割会将块划分为多个子块，并且仅写入更改的子块。或者只写入已改变的增量数据。无论采用哪种方式，可以使用任意的数据压缩算法进行压缩。
 
-The drawback is always a higher runtime for writing or reading the data.
+缺点主要为写入或读取数据的运行时间会较长。
 
 ![Figure7_9](Figure7_9.png)
 
-In case the NvMBlockUseCompression is set to true, the NvM shall compress the stored data in NV memory.
+如果**NvMBlockUseCompression**设置为**true**，**NvM**需压缩**NV内存**中存储的数据。
 
-### 7.2.25. Block Ciphering
+### 7.2.25. 块加密
 
-For security purposes NvM supports synchronous encryption and decryption via CSM module using symmetric 16 byte aligned algorithms, e.g. AES128.
+出于安全目的，**NvM**支持使用16字节对齐对称算法，通过**CSM**模块进行同步的数据加密和解密。算法如：**AES128**。
 
-The user always works with plain data, the NV RAM stores the ciphered data: 
+用户始终使用纯数据，**NVRAM**中存储加密数据：
 
-* Write data: NvM encrypts the plain user data and then forwards the ciphered data to the device.
-* Read data: NvM reads the ciphered data from device, decrypts the data and finally provides the plain data to the user.
+* 写入数据：NvM加密明文用户数据，然后将加密数据存储到设备。
+* 读取数据：NvM从设备读取加密数据，解密数据，最后将明文数据提供给用户。
 
-To check the integrity of the ciphered data a CRC can be configured (as usual). NvM will then calculate the CRC over encrypted data and recalculate and check the CRC before decryption: the CRC always matches the ciphered data. 
+为了检查加密数据的完整性，可以像平时一样配置**CRC**。然后，**NvM**将计算加密数据的**CRC**，并在解密之前重新计算和检查**CRC**，**CRC**需始终与加密数据相匹配。
 
-In case NvMBlockCipheringRef is given, the NvM shall before forwarding the write request to MemIf encrypt the plain data using Csm_Encrypt() with the CSM job given in NvMCsmEncryptionJobReference.
+如果给出了 NvMBlockCipheringRef，NvM 应在将写入请求转发到 MemIf 之前，使用 Csm_Encrypt() 和 NvMCsmEncryptionJobReference 中给出的 CSM 作业对纯数据进行加密。
 
-The CRC calculation (if configured) shall be done over the encrypted data.
+CRC的计算（如果配置）需在加密数据上完成。
 
-In case Csm_Encrypt() returns a CRYPTO_E_BUSY, the NvM shall retry to redo the job. After NvMCsmRetryCounter times of retry the NvM shall abort the write job and set the NvM result to NVM_REQ_NOT_OK and signal an error via NvM_JobErrorNotification().
+#### 7.2.25.1. 块加密
 
-In case Csm_Encrypt() returns any other error than CRYPTO_E_BUSY or CRYPTO_E_OK, the NvM shall abort the write job and set the NvM result to NVM_REQ_NOT_OK and signal an error via NvM_JobErrorNotification().
+如果**Csm_Encrypt**返回**CRYPTO_E_BUSY**，**NvM**需重试加解密作业。在**NvMCsmRetryCounter**次重试失败后，**NvM**需中止写入作业，并将**NvM**结果设置为**NVM_REQ_NOT_OK**，并通过**NvM_JobErrorNotification**发出错误信号。
 
-In case Csm_Encrypt() returns successfully with CRYPTO_E_OK, the NvM shall continue the write job (e.g. with the CRC calculation) with the new length given in NvMNvBlockNVRAMDataLength.
+如果**Csm_Encrypt**返回除了**CRYPTO_E_BUSY**或者**CRYPTO_E_OK**之外的任何其他错误，**NvM**需立即中止写入作业，并将**NvM**结果设置为**NVM_REQ_NOT_OK**，并通过**NvM_JobErrorNotification**发出错误信号。
 
-In case of the returned length in resultLengthPtr is different to the NvMNvBlockNVRAMDataLength the development error NVM_E_BLOCK_CHIPHER_LENGTH_MISSMATCH shall be triggerd.
+如果**Csm_Encrypt**成功操作，并返回**CRYPTO_E_OK** ，**NvM**需使用**NvMNvBlockNVRAMDataLength**中给定的新长度继续写入作业。例如：进行**CRC**计算。
 
-In case NvMBlockCipheringRef is given, the NvM shall before forwarding the read request to application decrypt the stored data using Csm_Decrypt() with the CSM job given in NvMCsmDecryptionJobReference. The CRC check (if configured) shall be done over the encrypted data. If the CRC does not match, NvM will not decrypt the data but abort the job with NVM_REQ_INTEGRITY_FAILED.
+如果**resultLengthPtr**中返回的长度与**NvMNvBlockNVRAMDataLength**不同，则应触发开发错误**NVM_E_BLOCK_CHIPHER_LENGTH_MISSMATCH**。
 
-In case Csm_Decrypt() returns a CRYPTO_E_BUSY, the NvM shall retry to redo the job. After NvMCsmRetryCounter times of retry the NvM shall abort the read job and set the NvM result to NVM_REQ_NOT_OK and signal an error via NvM_JobErrorNotification().
+#### 7.2.25.2. 块解密
 
-In case Csm_Decrypt() returns any other error than CRYPTO_E_BUSY or CRYPTO_E_OK, the NvM shall abort the read job and set the NvM result to NVM_REQ_NOT_OK and signal an error via NvM_JobErrorNotification().
+如果给出了**NvMBlockCipheringRef**，**NvM**需在将读取请求转发给应用程序之前，通过**NvMCsmDecryptionJobReference**中给出的**CSM**作业，使用**Csm_Decrypt**来解密存储的数据。**CRC**检查（如果配置）需针对加密数据进行。如果**CRC**不匹配，**NvM**将不会解密数据，而是以**NVM_REQ_INTEGRITY_FAILED**中止作业。
 
-In case Csm_Decrypt() returns successfully with CRYPTO_E_OK, the NvM shall continue the read job with the new length given in NvMNvBlock Length.
+如果**Csm_Decrypt**返回**CRYPTO_E_BUSY**，**NvM**需重试解密作业。在**NvMCsmRetryCounter**次重试失败后，**NvM**需中止读取作业，并将**NvM**结果设置为**NVM_REQ_NOT_OK**，并通过 **NvM_JobErrorNotification**发出错误信号。
 
-In case of the returned length in resultLengthPtr is different to the NvMNvBlockLength the development error NVM_E_BLOCK_CHIPHER_LENGTH_MISSMATCH shall be
-triggerd.
-    
+如果**Csm_Decrypt**返回除了**CRYPTO_E_BUSY**或者**CRYPTO_E_OK**之外的任何其他错误，**NvM**需立即中止读取作业，并将**NvM**结果设置为**NVM_REQ_NOT_OK**，并通过**NvM_JobErrorNotification**发出错误信号。
+
+如果**Csm_Decrypt**成功操作，并返回**CRYPTO_E_OK** ，**NvM**需使用**NvMNvBlockLength**中给定的新长度继续读取作业。
+
+如果**resultLengthPtr**中返回的长度与**NvMNvBlockLength**不同，则应触发开发错误**NVM_E_BLOCK_CHIPHER_LENGTH_MISSMATCH**。
+
+# 8. API规范
+
+## 8.1. 同步请求函数定义
+ 
+### 8.1.1. NvM_Init
+
+**说明**: 用于重置所有内部变量。
+
+```C
+void NvM_Init (
+  const NvM_ConfigType* ConfigPtr
+)
+```
+
+### 8.1.2. NvM_SetDataIndex
+
+**说明**: 设置数据集NVRAM块（**Dataset NVRAM blocks**）的**DataIndex**。
+
+```C
+Std_ReturnType NvM_SetDataIndex (
+  NvM_BlockIdType BlockId,
+  uint8 DataIndex
+)
+```
+
+### 8.1.3. NvM_GetDataIndex
+
+**说明**: 获取数据集NVRAM块（**Dataset NVRAM blocks**）当前设置的**DataIndex**。
+
+```C
+Std_ReturnType NvM_GetDataIndex (
+  NvM_BlockIdType BlockId,
+  uint8* DataIndexPtr
+)
+```
+
+### 8.1.4. NvM_SetBlockProtection
+
+**说明**: 设置或者重置**NV块**的写保护。
+
+```C
+Std_ReturnType NvM_SetBlockProtection (
+  NvM_BlockIdType BlockId,
+  boolean ProtectionEnabled
+)
+```
+
+### 8.1.5. NvM_GetErrorStatus
+
+**说明**: 读取NvM块相关错误/状态信息。
+
+```C
+Std_ReturnType NvM_GetErrorStatus (
+  NvM_BlockIdType BlockId,
+  NvM_RequestResultType* RequestResultPtr
+)
+```
+
+### 8.1.6. NvM_GetVersionInfo
+
+**说明**: 获取NvM模块的版本信息。
+
+```C
+void NvM_GetVersionInfo (
+Std_VersionInfoType* versioninfo
+)
+```
+
+### 8.1.7. NvM_SetRamBlockStatus
+
+**说明**: 设置**永久RAM块**的**RAM块状态**，或者**NVRAM块**的显式同步状态。
+
+```C
+Std_ReturnType NvM_SetRamBlockStatus (
+  NvM_BlockIdType BlockId,
+  boolean BlockChanged
+)
+```
+
+### 8.1.8. NvM_SetBlockLockStatus
+
+**说明**: 设置**永久RAM块**或**NVRAM块**的显式同步的锁定状态。
+
+```C
+void NvM_SetBlockLockStatus (
+  NvM_BlockIdType BlockId,
+  boolean BlockLocked
+)
+```
+
+### 8.1.9. NvM_CancelJobs
+
+**说明**: 取消**NV块**中所有待处理（**pending**）的作业。
+
+```C
+Std_ReturnType NvM_CancelJobs (
+  NvM_BlockIdType BlockId
+)
+```
+
+## 8.2. 异步单块请求函数说明
+
+### 8.2.1. NvM_ReadBlock
+
+**说明**: 将**NV块**的数据复制到其对应的**RAM块**。
+
+```C
+Std_ReturnType NvM_ReadBlock (
+  NvM_BlockIdType BlockId,
+  void* NvM_DstPtr
+)
+```
+
+### 8.2.2. NvM_WriteBlock
+
+**说明**: 将R**AM块**的数据复制到其对应的**NV块**。
+
+```C
+Std_ReturnType NvM_WriteBlock (
+  NvM_BlockIdType BlockId,
+  const void* NvM_SrcPtr
+)
+```
+
+### 8.2.3. NvM_RestoreBlockDefaults
+
+**说明**: 将默认数据恢复到相应的**RAM块**中。
+
+```C
+Std_ReturnType NvM_RestoreBlockDefaults (
+  NvM_BlockIdType BlockId,
+  void* NvM_DestPtr
+)
+```
+
+### 8.2.4. NvM_EraseNvBlock
+
+**说明**: 擦除**NV块**。
+
+```C
+Std_ReturnType NvM_EraseNvBlock (
+  NvM_BlockIdType BlockId
+)
+```
+
+### 8.2.5. NvM_InvalidateNvBlock
+
+**说明**: 使**NV块**无效。
+
+```C
+Std_ReturnType NvM_InvalidateNvBlock (
+  NvM_BlockIdType BlockId
+)
+```
+
+### 8.2.6. NvM_ReadPRAMBlock
+
+**说明**: 将**NV块**的数据复制到其对应的**永久RAM块**。
+
+```C
+Std_ReturnType NvM_ReadPRAMBlock (
+  NvM_BlockIdType BlockId
+)
+```
+
+### 8.2.7. NvM_WritePRAMBlock
+
+**说明**: 将**永久RAM块**的数据复制到其对应的**NV块**。
+
+```C
+Std_ReturnType NvM_WritePRAMBlock (
+  NvM_BlockIdType BlockId
+)
+```
+
+### 8.2.8. NvM_RestorePRAMBlockDefaults
+
+**说明**: 将默认数据恢复到其对应的**永久RAM块**中。
+
+```C
+Std_ReturnType NvM_RestorePRAMBlockDefaults (
+  NvM_BlockIdType BlockId
+)
+```
+
+## 8.3. 异步多块请求函数说明
+
+### 8.3.1. NvM_ReadAll
+
+**说明**: 发起多块读请求。
+
+```C
+void NvM_ReadAll (
+  void
+)
+```
+
+### 8.3.2. NvM_WriteAll
+
+**说明**: 发起多块写请求。
+
+```C
+void NvM_WriteAll (
+  void
+)
+```
+
+### 8.3.3. NvM_CancelWriteAll
+
+**说明**: 取消正在运行的**NvM_WriteAll**请求。
+
+```C
+void NvM_CancelWriteAll (
+  void
+)
+```
+
+### 8.3.4. NvM_ValidateAll
+
+**说明**: 发起多块验证请求。
+
+```C
+void NvM_ValidateAll (
+  void
+)
+```
+
+### 8.3.5. NvM_FirstInitAll
+
+**说明**: 发起多块优先初始化请求。 该函数的工作并不关心块是否存在于非易失性存储器中，或者在处理它时它是否有效（即未损坏）。
+```C
+void NvM_FirstInitAll (
+  void
+)
+```
+
+## 8.4. 回调通知函数
+
+### 8.4.1. NvM_JobEndNotification
+
+**说明**: 底层内存抽象使用此函数来表示作业结束且没有错误。
+
+```C
+void NvM_JobEndNotification (
+  void
+)
+```
+
+### 8.4.2. NvM_JobErrorNotification
+
+**说明**: 底层内存抽象使用函数来表示作业结束并出现错误。
+
+```C
+void NvM_JobErrorNotification (
+  void
+)
+```
+
+## 8.5. 周期性函数
+
+### 8.4.2. NvM_MainFunction
+
+**说明**: 用于执行**NvM**作业处理的服务。
+
+```C
+void NvM_MainFunction (
+  void
+)
+```
+
+<section id="wechat">
+
+<h4>微信扫一扫，获取更多及时资讯</h4>
+
+<img src="wechat.png" alt="微信扫一扫"/>
+
+</section>
