@@ -28,27 +28,47 @@
 
 # 2. 缩略语
 
-**AddressAndLengthFormatIdentifier:**
-> 地址和长度格式标识符。定义了请求消息中用于**memoryAddress**和**memorySize**参数的字节数。
+**地址和长度格式标识符（AddressAndLengthFormatIdentifier）**
+> 定义了请求消息中用于**memoryAddress**和**memorySize**参数的字节数。
 
-**Application Layer：**
-> 应用层。应用层位于**RTE**之上。在应用层内放置了**AUTOSAR**软件组件。
+**应用层（Application Layer）**
+> 应用层位于**RTE**之上。在应用层里放了**AUTOSAR**的软件组件。
 
-## 相关模块
+**Atomic Sender/Receiver interface**
+> 原子发送者/接收者接口。一个原子发送者/接收者接口，可用于将 **DID** 数据元素分组为一个记录数据元素原型。所有数据元素都可以通过单个读取或写入操作进行读取或写入。
+
+**通道（Channel）**
+> 可以进行数据传输的链接。如果有多个通道，通常会为通道分配某种类型的 ID。
+
+**Concurrent TesterPresent** 
+
+**并发TesterPresent**
+
+一个 UDS 服务 TesterPresent，它设置了 suppressPosRspMsgIndicationBit （3E 80），该 TesterPresent 通过功能寻址接收。它也被称为保持活动逻辑。
+
+**Diagnostic Channel** 
+
+A link at which a data transfer between a diagnostic tool and an ECU can take place. Example: An ECU is connected via
+CAN and the diagnostic channel has an assigned CAN-ID. Diagnostic channels connected to other bus-systems such as MOST,
+FlexRay, LIN, etc. are also possible.
+
+**诊断通道**
+
+诊断工具和ECU之间可以进行数据传输的链路。例如：**ECU**通过**CAN**连接，诊断通道有一个被分配的**CAN-ID**。也可以连接到其他总线系统（如 **MOST**、**FlexRay**或者**LIN**等）的诊断通道。
+
+## 2.1. 相关模块
 AUTOSAR DCM与以下基本软件模块和SW-C有接口和依赖关系:
 ​
-
-
 **Dem**
 > DEM模块提供检索与故障内存相关的所有信息的功能，以便Dcm模块能够通过从故障内存中读取数据来响应测试者的请求。
 
-PduR
-PduR模块提供诊断数据的发送和接收功能。Dcm模块的正常运行，假设PduR接口支持诊断应用层和底层传输层之间为SAP (service Access Point)定义的所有服务原语(参见ISO14229-1[2]，第5章应用层服务)。
+**PduR**
+> **PduR**模块提供诊断数据的发送和接收功能。Dcm模块的正常运行，假设PduR接口支持诊断应用层和底层传输层之间为SAP (service Access Point)定义的所有服务原语(参见ISO14229-1[2]，第5章应用层服务)。
 
-ComM
-ComM模块提供了一些功能，如Dcm模块可以指示“活动”和“非活动”状态，以便进行诊断通信。Dcm模块提供了处理“Full-/ Silent-/ No-Communication”通信需求的功能。此外，如果ComM模块要求，Dcm模块提供启用和禁用诊断通信的功能。（UDS的0x28服务）
+**ComM**
+> ComM模块提供了一些功能，如**Dcm**模块可以指示“活动”和“非活动”状态，以便进行诊断通信。Dcm模块提供了处理 **Full-Communication**、**Silent-Communication** 和 **No-Communication** 通信需求的功能。此外，如果**ComM**模块要求，**Dcm**模块提供启用和禁用诊断通信的功能。（如：**UDS**的**0x28**服务）
 
-SW-C and RTE
+**SW-C** 和 **RTE**
 Dcm模块能够分析接收到的诊断请求数据流。并处理与诊断通信相关的所有功能，如协议处理（protocol handling）和时序（timing）。基于请求的数据流分析结果，Dcm模块负责数据的响应并执行SW-C的例程或I/O的控制。
 如果Dcm模块无法直接处理诊断数据请求时，Dcm会把通过以下方式来转发请求并获得结果数据：
 通过SW-C的port-interface。
