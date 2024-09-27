@@ -2,7 +2,67 @@
 
 # 1. 简介和功能概述
 
+诊断事件管理器 (**Dem**) 服务组件，主要负责处理和存储诊断事件（错误）以及与其相关数据。此外 **Dem** 还需向 **Dcm** 提供故障信息，（例如：从事件内存中读取所有存储的 **DTC**）。**Dem** 也需提供与应用层和其他 **BSW** 模块的接口。
+
+**Dem** 规范文档的基本目标是为汽车制造商和组件供应商定义《诊断故障内存》（**diagnostic fault memory**）通用方法的能力。
+
+本规范定义了 AUTOSAR 基本软件模块诊断事件管理器 (Dem) 的功能、API 和配置。部分内部行为是制造商特定的，并在**限制**一章中进行了详细描述。
+
+# 首字母缩略词和缩写
+
+以下词汇表包含与 **Dem** 模块相关的首字母缩略词和缩写，同时这些词汇表并未包含在【参考文档#4的AUTOSAR 词汇表】中。
+
 # 2. 功能规格
+
+**激活模式1（Activation Mode 1）**
+> 无故障-MIL应闪烁一次。
+
+**激活模式2（Activation Mode 2）**
+> "on-demand-MI" - The MIL shall show blink for two flashes if the OBD system would command an on-demand-MI according to the discriminatory display strategy.
+
+**激活模式3（Activation Mode 3）**
+> "short-MI" - The MIL shall blink for three flashes if the OBD system would command a short-MI according to the discriminatory display strategy.
+
+**激活模式4（Activation Mode 4（**
+> "continuous-MI" - The MIL shall remain continuously ON ("continuous-MI") if the OBD system would command a continuous-MI according to the discriminatory display strategy. Aging Unlearning/deleting of a no longer failed event/DTC after a defined number of operation cycles from event memory.
+
+Aging Counter
+The "Aging Counter" or "Aging Cycle Counter" or "DTC Aging
+Counter" specifies the counter which is used to perform Aging.
+It counts the number of operation cycles until an event/DTC is
+removed from event memory.
+
+Class B1 counter 
+Number of engine hours during which a Class B1 malfunction has
+been Confirmed and TestFailed.
+
+Combined DTC
+Normal DTC, but referenced by multiple events reported by several
+monitors (e.g. ECU Defect, consisting of different HW defects).
+Continuous-MI counter Hours run by the engine while a continuous MI is commanded.
+
+Cumulative Continuous-MI counter
+Number of engine hours during which MI has been continuously
+commanded to be on during its lifetime.
+Debounce counter Internal counter for counter-based debouncing algorithm(s).
+DemComponent / Monitored
+Component
+A monitored component is a part of the system, which is checked
+for proper operation by one or several monitorings. (see chapter
+7.5)
+Dem-internal data value Some data values (e.g. the occurrence counter) are calculated
+by the Dem module itself internally.
+Denominator
+The denominator of a specific monitor m (Denominatorm) is a
+counter indicating the number of vehicle driving events, taking
+into account conditions specific to that specific monitor.
+Dependent / Secondary ECUs Dependent / Secondary (or dep. / sec. ) ECUs are always related
+to a Master or a Primary ECU.
+Directed acyclic graph Dependency graph without circular dependencies.
+Displacement
+Replacing the the most insignificant event memory entry by
+a more significant event memory entry which needs to be
+stored.
 
 ## 2.1. 启动行为
 
