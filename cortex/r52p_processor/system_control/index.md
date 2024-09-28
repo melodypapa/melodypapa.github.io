@@ -1,4 +1,4 @@
-<section id="title">系统控制（**System Control**）</section>
+<section id="title">系统控制（System Control）</section>
 
 本章介绍系统寄存器及其结构和操作。
 

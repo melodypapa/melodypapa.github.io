@@ -1,4 +1,4 @@
-<section id="title">内存系统（**Memory System**）</section>
+<section id="title">内存系统（Memory System）</section>
 
 本章介绍内存系统。
 
@@ -172,3 +172,4 @@
 
 下表显示了数据缓存数据 RAM 组的每个条目的位字段，与缓存大小无关。
 
+![Table8_5](Table8_5.png)
