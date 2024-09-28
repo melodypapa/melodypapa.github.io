@@ -24,3 +24,9 @@ permalink: /cortex/
 4. [ARM 异常模型](m7_processor/exception_model)
 5. [ARM Cortex-M7 指令集](m7_processor/instruction_set)
 6. [ARM Cortex-M7 程序状态寄存器](m7_processor/program_status_register)
+
+# ARM Cortex R52+ 处理器
+
+1. [系统控制（System Control）](r52p_processor/system_control)
+2. [内存系统（Memory System）](r52p_processor/memory_system)
+3. [内存保护单元（Memory Protection Unit）](r52p_processor/memory_protection_unit)

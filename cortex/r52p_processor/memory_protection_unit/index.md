@@ -1,4 +1,4 @@
-<section id="title">内存保护单元（**Memory Protection Unit**）</section>
+<section id="title">内存保护单元（Memory Protection Unit）</section>
 
 本章介绍 **MPU**。
 
