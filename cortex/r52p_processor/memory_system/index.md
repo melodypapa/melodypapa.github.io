@@ -221,7 +221,7 @@ L1指令和数据缓存将来自**Flash接口**或者**AXIM接口**的分配隔�
 
 有关 **EDCCR** 的更多信息，请参阅**外部调试校准控制寄存器**
 
-## 写入流模式（Write streaming mode）
+## 3.4. 写入流模式（Write streaming mode）
 
 根据 **MPU** 编程中配置的分配提示，将缓存行分配给 **L1缓存**。
 
@@ -237,3 +237,72 @@ L1指令和数据缓存将来自**Flash接口**或者**AXIM接口**的分配隔�
 
 在内核检测到已写入指定数量的完整缓存行并切换到写入流模式之前，主接口上可能会观察到超过指定数量的行填充。核心继续处于写入流模式，直到检测到不是完整缓存行的可缓存写入突发，或者当前正在写入总线的同一行中有负载。
 
+# AXIM接口
+
+**AXIM接口**是外部存储器和外设的主要接口。每个内核都有自己的 **AXIM接口**，仅用于从该内核进行访问。
+
+**AXIM接口**实现 **AXI4协议**，具有 **128** 位数据宽度。
+
+**AXIM接口**接收来自**指令端**(**instruction side**)和**数据端**(**data side**)的请求。您可以通过设置 **CPUACTLR.AXIMARBCTL** 来配置在争用(**contention**)情况下，数据或指令访问是否具有最高优先级。**AXIM接口**可以具有总线保护(**bus protection**)。
+
+## AXIM接口属性
+
+本节介绍**AXIM接口**属性。
+
+下表显示了一个内核的**AXI4主接口**(**AXI4 master interface**)属性。
+
+表 8-18：AXI4主接口属性
+
+| 属性         | 值  | 注释                                                                                                                       |
+| ------------ | --- | -------------------------------------------------------------------------------------------------------------------------- |
+| 写入发布能力 | 3   | 每个内核最多可以发布三个写入请求。                                                                                         |
+| 读取发布能力 | 11  | 每个内核可以发布八个未完成的数据端和三个未完成的指令端 AXIM 读取请求。                                                     |
+| 独占线程能力 | 1   | 每个内核可以有一个正在进行的独占访问序列。                                                                                 |
+| 写入 ID 能力 | 3   | 主接口可以为所有活动写入事务同时生成的不同 AXIDMx 值的最大数量。                                                           |
+|              |     | 设备内存可以有多个具有相同 AXI ID 的未完成事务。                                                                           |
+|              |     | 对于普通内存，仅当有多个存储具有相同地址时，存储才会使用相同的 ID。这可以保持存储之间的顺序，否则会产生写后写 (WAW) 风险。 |
+| 写入 ID 宽度 | 3   | -                                                                                                                          |
+| 读取 ID 功能 | 11  | 主接口可同时为所有活动读取事务生成的不同 ARIDMx 值的最大数量。                                                             |
+|              |     | ID 将内存事务的来源编码为 Exclusive62、数据端设备、指令端正常或数据端正常。                                                |
+|              |     | 可以有一个数据端设备请求。普通内存的事务对每个未完成的事务使用唯一的 AXI ID。                                              |
+|              |     | Cortex®-R52+ 处理器将内存的所有设备区域视为永不执行 (XN)，无论 XN 的编程值如何。                                           |
+| 读取 ID 宽度 | 4   | -                                                                                                                          |
+
+**相关信息:**
+**AXIM交易ID**(**AXIM transaction IDs**)
+
+## AXIM接口传输（**AXIM interface transfers**）
+
+**AXIM** 符合 **AXI4规范**，但它不会生成该规范允许的所有**AXI事务**类型。本节介绍 **AXIM** 生成的 AXI事务类型。如果您正在设计一个仅与 Cortex®-R52+ AXIM 配合使用的 AXIS，您可以利用这些限制和接口属性来简化从属设备。
+
+所有WRAP突发都从关键字开始提取完整的缓存行。突发不会跨越缓存行边界。
+
+缓存行填充提取长度始终为 64 字节。
+
+对于**回写式**(**Write Back**)或**直写式**(**Write-Through**)，内部可缓存的传输，支持的传输为以下方式：
+
+* WRAP 4 128 位用于读取传输。
+* INCR 1 8 位、16 位、32 位和 64 位用于写入传输。
+* INCR N (N:1-4) 128 位用于写入传输。
+* INCR 1 8 位、16 位、32 位和 64 位用于独占写入传输。
+
+**注意：**
+
+即使 **MPU** 被编程为回写式(**Write-Back**)或直写式(**Write-Through**)，处理器也可能将某个内存位置视为不可缓存。当缓存被禁用时，可能会发生这种情况。在这种情况下，请参阅下面支持的不可缓存事务传输类型。
+
+**For Non-cacheable transactions:**
+
+• INCR N (N:1-4) 128-bit for data side read transfers.
+• INCR N (N:1-4) 128-bit for write transfers.
+• INCR 1 8-bit, 16-bit, 32-bit, and 64-bit for write transfers.
+• INCR 1 8-bit, 16-bit, 32-bit, 64-bit for data side read transfers.
+• INCR N (N:1-4) 128-bit for instruction side read transfers.
+• INCR 1 8-bit, 16-bit, 32-bit, 64-bit for exclusive write transfers.
+• INCR 1 8-bit, 16-bit, 32-bit, 64-bit for exclusive read transfers.
+
+For Device transactions:
+• INCR 1 8-bit, 16-bit, 32-bit, 64-bit for data side read transfers.
+• INCR N (N:1-4) 128-bit for write transfers.
+• INCR 1 8-bit, 16-bit, 32-bit, and 64-bit for write transfers.
+• INCR 1 8-bit, 16-bit, 32-bit, 64-bit for exclusive read transfers.
+• INCR 1 8-bit, 16-bit, 32-bit, 64-bit for exclusive write transfers.
