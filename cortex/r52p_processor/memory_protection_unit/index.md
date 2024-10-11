@@ -82,35 +82,37 @@ PRBAR.BASE:0b000000 <= address <= PRLAR.LIMIT:0b111111
 
 默认属性是最宽松的，这意味着当与来自 **EL2** 控制的 **MPU** 的任何属性结合时，生成的属性与 **EL2** 控制的 **MPU** 属性相同。这允许 **EL2** 控制的 **MPU** 有效地使 **EL1** 控制的 **MPU** 对来自后台区域中命中的 **EL1** 转换机制的事务透明。当 **HCR.DC=1** 时，来自 **EL0/EL1** 转换机制的所有转换都会执行两阶段 **MPU** 查找，处理器的行为就像设置了 **HCR.VM** 一样。
 
-# 3. Virtualization support
+# 3. 虚拟化支持
 
-To support virtualization, two stages of MPU lookup are performed.
+为了支持虚拟化，需要执行两个阶段的MPU查找(**MPU lookup**)。
 
-Virtualization allows processes running at EL1 and EL0 (typically one or more guest operating systems and their applications) to be managed by processes running at EL2 (typically a single hypervisor).
+虚拟化允许在 **EL1** 和 **EL0** 上运行的进程（通常是一个或者多个客户操作系统及其应用程序）被在 **EL2** 上运行的进程（通常是单个虚拟机管理程序）进行管理。
 
-The EL1-controlled MPU checks transactions from processes running at EL0 or EL1 and is programmed by processes running at EL1 or EL2. The EL2-controlled MPU also checks transactions executed from the EL0/EL1 translation regime when virtualization is enabled, and is programmed by software at EL2. Transactions executed under the EL2 translation regime uses the EL2-controlled MPU only.
+* **EL1** 控制的 **MPU** 检查在 **EL0** 或 **EL1** 上运行的进程的事务，并由在 **EL1** 或 **EL2** 上运行的进程进行编程。
+* 当启用虚拟化时，**EL2** 控制的 **MPU** 还会检查从 **EL0/EL1** 转换机制执行的事务，并由 **EL2** 上的软件进行编程。
+* 在 **EL2** 转换机制下执行的事务仅使用 **EL2** 控制的 **MPU**。
 
-When virtualization is enabled (HCR.VM=1) and the EL2-controlled MPU is enabled (HSCTLR.M=1), transactions permitted by the EL1-controlled MPU are checked by the EL2-controlled MPU as part of a two stage lookup. If both MPUs permit the transaction, memory attributes from stage 1 are combined with attributes from the matching region in stage 2 and the stricter of the two sets of attributes are applied to the transaction.
+当启用虚拟化（**HCR.VM=1**），并且启用 **EL2** 控制的 **MPU**（**HSCTLR.M=1**）时，**EL1** 控制的 **MPU** 允许的事务将由 **EL2** 控制的MPU检查，作为两阶段查找的一部分。如果两个 **MPU** 都允许该事务，则第1阶段的内存属性将与第2阶段中匹配区域的属性相结合，并将两组中更严格的属性应用于该事务。
 
-## 3.1. Combining MPU memory attributes
+## 3.1. 合并MPU内存属性
 
-When a two-stage lookup is performed, the memory type, cacheability, and shareability attributes from each MPU are combined.
+执行两阶段查找时，每个 **MPU** 的内存类型(**memory type**)、可缓存性(**cacheability**)和可共享性(**shareability**)属性会被合并。
 
-**Combining the memory type attribute**
+**合并内存类型属性**
 
-The following table shows how the memory type assignments are combined as part of a two-stage lookup.
+下表显示了内存类型分配如何作为两阶段查找的一部分进行组合。
 
 ![Table9-5](Table9-5.png)
 
-**Combining the cacheability attribute**
+**合并可缓存性属性**
 
-The following table shows how the cacheability assignments are combined as part of a two-stage lookup.
+下表显示了如何将可缓存性分配合并为两阶段查找的一部分。
 
 ![Table9-6](Table9-6.png)
 
-**Combining the shareability attribute**
+**合并可共享性属性**
 
-The following table shows how the shareability assignments are combined as part of a two-stage lookup.
+下表显示了如何将可共享性分配合并为两阶段查找的一部分。
 
 ![Table9-7](Table9-7.png)
 
