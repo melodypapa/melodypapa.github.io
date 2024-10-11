@@ -27,6 +27,7 @@ permalink: /cortex/
 
 # ARM Cortex R52+ 处理器
 
-1. [系统控制（System Control）](r52p_processor/system_control)
-2. [内存系统（Memory System）](r52p_processor/memory_system)
-3. [内存保护单元（Memory Protection Unit）](r52p_processor/memory_protection_unit)
+1. [程序员模型（Programmers Model）](r52p_processor/programmers_model)
+2. [系统控制（System Control）](r52p_processor/system_control)
+3. [内存系统（Memory System）](r52p_processor/memory_system)
+4. [内存保护单元（Memory Protection Unit）](r52p_processor/memory_protection_unit)

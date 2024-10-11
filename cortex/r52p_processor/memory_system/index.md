@@ -30,7 +30,7 @@
 
 **AXIM接口**是外部存储器或设备系统的主要接口。**Flash接口**提供对外部只读存储器控制器（如：闪存）的访问。**LLPP接口**提供对外部外围设备或小型专用存储器系统的访问。**AXIS接口** 提供对 TCM 的外部访问。通过 **AXIS接口** 的访问争夺 TCM 访问周期，因此它们可能会降低 TCM 存储器的确定性。
 
-存储器系统包括一个用于独占访问的本地监视器。可以使用独占加载和存储指令（例如：**LDREX**、**STREX**）来提供进程间同步和信号量。它们可以使用适当的外部存储器监控逻辑提供进程间同步和信号量。有关 Armv8-R AArch32 体系结构配置文件，请参阅补充Armv8的Arm® 体系结构参考手册(**Arm® Architecture Reference Manual Supplement Armv8**)。
+存储器系统包括一个用于独占访问的本地监视器。可以使用独占加载和存储指令（例如：**LDREX**、**STREX**）来提供进程间同步(**inter-process synchronization**)和信号量(**semaphores**)。它们可以使用适当的外部存储器监控逻辑提供进程间同步和信号量。有关 **Armv8-R AArch32** 体系结构配置文件，请参阅补充Armv8的Arm® 体系结构参考手册(**Arm® Architecture Reference Manual Supplement Armv8**)。
 
 所有指令端和数据端访问都在**MPU**定义的内存映射中查找。它在指令端或数据端访问外部存储器之前返回访问权限。如果允许访问，**MPU**将为事务提供内存属性。
 
@@ -235,9 +235,13 @@ L1指令和数据缓存将来自**Flash接口**或者**AXIM接口**的分配隔�
 
 **注意：**
 
-在内核检测到已写入指定数量的完整缓存行并切换到写入流模式之前，主接口上可能会观察到超过指定数量的行填充。核心继续处于写入流模式，直到检测到不是完整缓存行的可缓存写入突发，或者当前正在写入总线的同一行中有负载。
+在内核检测到已写入指定数量的完整缓存行并切换到写入流模式之前，主接口上可能会观察到超过指定数量的行填充。内核继续处于写入流模式，直到检测到不是完整缓存行的可缓存写入突发，或者当前正在写入总线的同一行中有负载。
 
-# AXIM接口
+# 4. 直接访问 L1 缓存
+
+TBD
+
+# 5. AXIM接口
 
 **AXIM接口**是外部存储器和外设的主要接口。每个内核都有自己的 **AXIM接口**，仅用于从该内核进行访问。
 
@@ -245,7 +249,7 @@ L1指令和数据缓存将来自**Flash接口**或者**AXIM接口**的分配隔�
 
 **AXIM接口**接收来自**指令端**(**instruction side**)和**数据端**(**data side**)的请求。您可以通过设置 **CPUACTLR.AXIMARBCTL** 来配置在争用(**contention**)情况下，数据或指令访问是否具有最高优先级。**AXIM接口**可以具有总线保护(**bus protection**)。
 
-## AXIM接口属性
+## 5.1. AXIM接口属性
 
 本节介绍**AXIM接口**属性。
 
@@ -271,7 +275,7 @@ L1指令和数据缓存将来自**Flash接口**或者**AXIM接口**的分配隔�
 **相关信息:**
 **AXIM交易ID**(**AXIM transaction IDs**)
 
-## AXIM接口传输（**AXIM interface transfers**）
+## 5.2. AXIM接口传输（**AXIM interface transfers**）
 
 **AXIM** 符合 **AXI4规范**，但它不会生成该规范允许的所有**AXI事务**类型。本节介绍 **AXIM** 生成的 AXI事务类型。如果您正在设计一个仅与 Cortex®-R52+ AXIM 配合使用的 AXIS，您可以利用这些限制和接口属性来简化从属设备。
 
@@ -306,3 +310,48 @@ For Device transactions:
 • INCR 1 8-bit, 16-bit, 32-bit, and 64-bit for write transfers.
 • INCR 1 8-bit, 16-bit, 32-bit, 64-bit for exclusive read transfers.
 • INCR 1 8-bit, 16-bit, 32-bit, 64-bit for exclusive write transfers.
+
+## 5.3. AXIM data prefetchers
+
+## 5.4. AXIM transaction IDs
+
+## 5.5. AXI privilege information
+
+## 5.6. AXIM QoS and user signals
+
+## 5.7. AXIM interface timeout
+
+# 6. Low-latency peripheral port
+
+# 7. Flash interface
+
+# 8. AXIS interface
+
+# 9. Error detection and handling
+
+# 10. 独占访问
+
+每个内核都有一个支持加载独占(**Load-Exclusive**)指令和存储独占(**Store-Exclusive**)指令的本地独占监视器(**local exclusive monitor**)。
+
+本地监视器使 TCM 或不可共享内存(**Non-shareable memory**)可用于在同一内核上运行的进程之间的信号量(**semaphores**)。本地监视器不适用于通过 AXIS 访问 TCM 的其他内核或外部主控。本地监视器独占粒度大小为**512位 (即:64字节)**。
+
+加载独占指令(**Load-Exclusive instruction**)将**512位**内存区域标记为独占。如果存储独占访问相同的**512**位内存区域，则它会通过本地独占监视器检查，同时独占监视器返回到开放访问状态（**open access state**）。如果存储独占访问标记的**512位**区域之外的地址，则存储独占指令将无法通过独占监视器检查，同时监视器将返回到开放访问状态。
+
+如果在本地独占监视器已经处于独占访问状态时，尝试非独占的存储，则无论访问哪个地址，本地独占监视器状态都不会受到影响。
+
+如果在本地独占监视器已经处于独占访问状态时，执行了加载独占(**Load-Exclusive**)指令，则监视器将保持独占访问状态，但标记的**512位**地址的区域会更新。
+
+本地监视器还充当可共享独占访问(**Shareable exclusive accesses**)的过滤器(**filter**)，然后将其发送到全局独占监视器。可共享内存的加载独占(**Load-Exclusive**)在干净退出时，会设置本地监视器。随后的可共享内存的存储独占(**Store-Exclusive**)在向外部传播之前，会检查本地监视器。如果失败，则不会向外部传播存储，并且存储独占(**Store-Exclusive**)立即退出，并报告独占失败。因为失败的本地独占监视器检查意味着全局独占监视器检查也会失败，所以这种过滤行为是可能的。
+
+因为**Flash接口**(**Flash interface**)是只读的，所以并不支持独占访问。因为**LLPP接口**为32位宽，所以也不支持双字独占(**doubleword exclusives**)。
+
+**AXIM**或者**LLPP**上的外部可共享内存的独占(**Outer Shareable memory**)，作为总线上的独占事务执行，并且需要外部全局独占监视器来支持独占。设备(**Device**)和普通不可缓存内存(**Normal Non-cacheable memory**)被视为外部可共享(**Outer Shareable**)，所以还需要 **AXIM接口** 和 **LLPP接口**上的全局独占监视器(**global exclusive monitor**)来支持独占。
+
+**AXIS接口**不支持独占访问。
+
+# 11. Bus timeouts
+
+# 12. Peripherals memory map
+
+# 13. On-line MBIST
+
