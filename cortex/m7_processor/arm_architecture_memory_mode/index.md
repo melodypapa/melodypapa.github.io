@@ -1,4 +1,4 @@
-<section id="title">ARM的内存模式</section>
+<section id="title">ARM架构的内存模式（Arm Architecture Memory Model）</section>
 
 # 1. Arm架构内存模式介绍
 
@@ -280,7 +280,7 @@ Armv7 定义了一组内存属性，这些属性具有支持系统内存映射�
 * 可以支持未对齐的访问。
 * 在访问目标内存系统之前可以合并访问。
 
-普通内存可以是又读又写的(**read/write**)或者只读的(**read-only**)，同时普通内存区域也可被定义为可共享(**shareable**)或不可共享(**Non-shareable**)。
+普通内存可以是可读可写的类型(**read/write**)，或者是只读的类型(**read-only**)。同时普通内存区域也可被定义为可共享型(**shareable**)，或者不可共享型(**Non-shareable**)。
 
 普通内存类型属性适用于系统中使用的大部分内存。
 
@@ -298,7 +298,7 @@ Armv7 定义了一组内存属性，这些属性具有支持系统内存映射�
 
 对于普通内存区域，不可共享属性标识可能只会被单个处理器访问的普通内存。
 
-标记为不可共享正常的内存区域不需要使缓存的效果对数据或指令访问透明。如果其他观察者共享内存系统，如果缓存的存在可能导致观察者之间通信时出现一致性问题，则软件必须使用缓存维护操作。此缓存维护需求是对确保内存顺序所需的屏障操作的补充。
+标记为不可共享正常的内存区域，不需要使缓存的效果对数据或指令访问透明。如果其他观察者共享内存系统，如果缓存的存在可能导致观察者之间通信时出现一致性问题，则软件必须使用缓存维护操作。此缓存维护需求是对确保内存顺序所需的屏障操作的补充。
 
 对于不可共享的普通内存，加载独占(**Load Exclusive**)和存储独占(**Store Exclusive**)同步原语不考虑多个观察者访问的可能性。
 
@@ -320,7 +320,7 @@ Armv7 定义了一组内存属性，这些属性具有支持系统内存映射�
 
 除了可共享或不可共享之外，普通内存的每个区域都可以标记为以下之一：
 * 直写可缓存(**Write-Through cacheable**)。
-* 可回写高速缓存(**Write-Back cacheable**)，带有一个附加限定符，将其标记为以下之一：
+* 可回写缓存(**Write-Back cacheable**)，带有一个附加限定符，将其标记为以下之一：
   * 回写、写分配(**Write-Back, Write-Allocate**)。
   * 回写，没有写分配(**Write-Back, no Write-Allocate**)。
 * 不可缓存(**Non-cacheable**)。
@@ -330,6 +330,7 @@ Armv7 定义了一组内存属性，这些属性具有支持系统内存映射�
 ### 1.5.5. 设备内存(Device memory)
 
 设备内存类型属性定义了以下含义的内存位置：
+
 1. 对该位置的访问可能会导致副作用
 2. 或者为加载返回的值可能会因执行的加载次数而异。
    
@@ -404,7 +405,62 @@ Armv7 定义了一组内存属性，这些属性具有支持系统内存映射�
 
 ### 1.5.7. 内存访问限制
 
+内存访问有以下限制：
 
+对于任何访问**X**，**X**访问的字节必须全部具有相同的内存类型属性，否则访问行为将无法预测。也就是说，跨越不同内存类型边界的未对齐访问将无法预测。
+
+对于由相同指令生成的任何两个内存访问**X**和**Y**，**X**和**Y**访问的字节必须全部具有相同的内存类型属性，否则结果将无法预测。例如：跨越普通内存和设备内存边界的 **LDC**、**LDM**、**LDRD**、**STC**、**STM**、**STRD**、**VSTM**、**VLDM**、**VPUSH**、**VPOP**、**VLDR** 或 **VSTR** 将无法预测。
+
+生成对设备内存（**Device**）或强排序内存（**Strongly-ordered memory**）的未对齐内存访问的指令将无法预测。
+
+对于生成对设备内存（**Device**）或强排序内存（**Strongly-ordered memory**）的访问的指令，实现不得更改指令伪代码指定的访问顺序。这包括不更改：
+
+* 有多少次访问。
+* 任何特定内存映射外设的访问时间顺序。
+* 每次访问的数据大小和其他属性。
+  
+此外，处理器实现期望任何附加的内存系统能够识别访问的内存类型，并遵守有关访问的数量、时间顺序、数据大小和其他属性的类似限制。
+
+此规则的例外情况如下：
+
+* 处理器实现可以违反此规则，前提是它提供给内存系统的信息能够重建访问的原始数量、时间顺序和其他详细信息。此外，当访问设备或强序内存时，实现必须要求连接的内存系统进行此重建。例如，具有 64 位总线的实现可能会将 LDM 生成的字加载配对为 64 位访问。这是因为指令语义确保 64 位访问始终是从较低地址加载字，然后从较高地址加载字。但是，当访问设备或强序内存时，实现必须允许内存系统解压两个字加载。
+* 任何产生与上述结果无法观察到不同的结果的实现技术都是合法的。
+
+与 **IT** 指令一起使用的 **LDM**、**STM**、**PUSH**、**POP**、**VLDM** 和 **VSTM** 指令如果在执行期间中断，则可以重新启动。重新启动加载或存储指令与设备和强排序内存访问规则不兼容。有关异常模型中与这些指令相关的架构约束的详细信息，请参阅第 B1-543 页的加载多个和存储多个操作中的异常。
+
+加载或存储 **PC** 的任何多访问指令都必须仅访问普通内存。如果指令访问设备或强排序内存，则结果不可预测。
+
+任何指令提取都必须仅访问普通内存。如果它访问设备或强排序内存，则结果不可预测。例如：不得对包含读取敏感设备的内存区域执行指令提取，因为指令提取和显式访问之间没有排序要求。
+
+为了确保正确性，读敏感位置必须标记为不可执行（请参阅第 A3-87 页的指令访问的特权级别访问控制）。
+
+**不匹配的内存属性（Mismatched memory attributes）**
+
+如果对物理内存位置的所有访问，未能使用以下一致定义（**common definition**）属性时，则该位置的访问属性将会不匹配（**mismatched attributes**）:
+
+* 内存类型：强序（**Strongly-ordered**）、设备（**Device**）或者 正常（**Normal**）。
+* 可共享性。
+* 可缓存性：适用于缓存的内部和外部级别（**inner and outer levels of cache**），但不包括任何缓存分配提示（**cache allocation hints**）。
+
+当使用不匹配的属性访问物理内存位置时，以下的规则会被应用：
+
+当使用不匹配的属性访问内存位置时，软件唯一可见的影响是以下一个或多个：
+
+* 对该内存位置的读写的单处理器语义可能会丢失。这意味着：
+  * 执行线程对内存位置的读取可能不会返回该执行线程最近写入该内存位置的值。
+  * 执行线程对内存位置的多次写入（使用不同的内存属性）可能未按程序顺序排序。
+* 当多个执行线程尝试访问内存位置时，可能会失去一致性。
+* 可能会丢失从内存类型派生的属性，请参阅规则 2。
+* 如果多个执行线程尝试使用 Load-Exclusive 或 Store-Exclusive 指令访问具有不同内存属性的位置，则独占监视器状态将变为**UNKNOWN**。
+
+The loss of properties associated with mismatched memory type attributes refers only to the following properties of Strongly-ordered or Device memory, that are additional to the properties of Normal memory:
+• Prohibition of speculative accesses.
+• Preservation of the size of accesses.
+• Preservation of the order of accesses.
+• The guarantee that the write acknowledgement comes from the endpoint of the access. 
+
+If the only memory type mismatch is between Strongly-ordered and Device memory, then the only property that can be lost is: 
+* The guarantee that the write acknowledgement comes from the endpoint of the access.
 
 ## 1.6. 访问权限
 
