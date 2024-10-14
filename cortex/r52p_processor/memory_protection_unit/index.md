@@ -78,13 +78,13 @@ PRBAR.BASE:0b000000 <= address <= PRLAR.LIMIT:0b111111
 
 ![HSCTLR.BR](HSCTLR.BR.png)
 
-### 2.1.1. EL2控制的MPU背景区域，指令访问
+### 2.2.1. EL2控制的MPU背景区域，指令访问
 
 下表显示了用于指令访问的EL2控制的MPU背景区域。
 
 ![Table9-3](Table9-3.png)
 
-### 2.1.2. EL2控制的MPU背景区域，数据访问
+### 2.2.2. EL2控制的MPU背景区域，数据访问
 
 下表显示了用于数据访问的EL2控制的MPU背景区域。
 
@@ -92,9 +92,11 @@ PRBAR.BASE:0b000000 <= address <= PRLAR.LIMIT:0b111111
 
 ## 2.3. 默认缓存能力
 
-启用默认缓存能力 (**HCR.DC=1**) 后，使用 **EL1** 控制的 **MPU** 后台区域的事务将包含：**正常**(**Normal**)、**内部回写**(**Inner Write-Back**)、**外部回写**(**Outer Write-Back**)、**不可共享**(**Non-Shareable**)属性，同时启用**读取分配**(**Read-Allocate**)和**写入分配**(**Write-Allocate**)。当 **HCR.DC=1** 时，在后台区域中命中的指令访问始终可执行。
+启用默认缓存能力 (**HCR.DC=1**) 后，使用 **EL1** 控制的 **MPU** 背景区域的事务将包含：**正常**(**Normal**)、**内部回写**(**Inner Write-Back**)、**外部回写**(**Outer Write-Back**)、**不可共享**(**Non-Shareable**)属性，同时启用**读取分配**(**Read-Allocate**)和**写入分配**(**Write-Allocate**)。当 **HCR.DC=1** 时，在背景区域中命中的指令访问始终可执行。
 
-默认属性是最宽松的，这意味着当与来自 **EL2** 控制的 **MPU** 的任何属性结合时，生成的属性与 **EL2** 控制的 **MPU** 属性相同。这允许 **EL2** 控制的 **MPU** 有效地使 **EL1** 控制的 **MPU** 对来自后台区域中命中的 **EL1** 转换机制的事务透明。当 **HCR.DC=1** 时，来自 **EL0/EL1** 转换机制的所有转换都会执行两阶段 **MPU** 查找，处理器的行为就像设置了 **HCR.VM** 一样。
+![HCR.DC](HCR.DC.png)
+
+默认属性是最宽松的，这意味着当与来自 **EL2** 控制的 **MPU** 的任何属性结合时，生成的属性与 **EL2** 控制的 **MPU** 属性相同。这允许 **EL2** 控制的 **MPU** 有效地使 **EL1** 控制的 **MPU** 对来自背景区域中命中的 **EL1** 转换机制的事务透明。当 **HCR.DC=1** 时，来自 **EL0/EL1** 转换机制的所有转换都会执行两阶段 **MPU** 查找，处理器的行为就像设置了 **HCR.VM** 一样。
 
 # 3. 虚拟化支持
 
@@ -112,91 +114,365 @@ PRBAR.BASE:0b000000 <= address <= PRLAR.LIMIT:0b111111
 
 执行两阶段查找时，每个 **MPU** 的内存类型(**memory type**)、可缓存性(**cacheability**)和可共享性(**shareability**)属性会被合并。
 
-**合并内存类型属性**
+### 3.1.1. 合并内存类型属性
 
 下表显示了内存类型分配如何作为两阶段查找的一部分进行组合。
 
 ![Table9-5](Table9-5.png)
 
-**合并可缓存性属性**
+### 3.1.2. 合并可缓存性属性
 
 下表显示了如何将可缓存性分配合并为两阶段查找的一部分。
 
 ![Table9-6](Table9-6.png)
 
-**合并可共享性属性**
+### 3.1.3. 合并可共享性属性
 
 下表显示了如何将可共享性分配合并为两阶段查找的一部分。
 
 ![Table9-7](Table9-7.png)
 
-# 4. MPU register access
+# 4. MPU寄存器访问
 
-The MPU base and limit registers can be accessed indirectly or directly. 
+可以间接或直接访问MPU基址寄存器（**base registers**）和限制寄存器（**limit registers**）。
 
-**Indirectly**
+## 4.1. 间接访问（Indirectly）
 
-A region is selected by writing to the PRSELR (HPRSELR for EL2 MPU). The selected region is programmed by writing to the PRBAR and PRLAR (HPRBAR and HPRLAR for EL2 MPU). 
+* 对于EL1，通过写入 **PRSELR** 选择 MPU 区域。接着，通过写入 **PRBAR** 和 **PRLAR**来对所选区域的**MPU**编程。
+* 对于EL2，通过写入 **HPRSELR** 选择 MPU 区域。接着，通过写入 **HPRBAR** 和 **HPRLAR**来对所选区域的**MPU**编程。
 
-**Directly**
+## 4.2. 直接访问（Directly）
 
-The base and limit registers, for region n, are directly accessed by encoding the region number into CRm and opcode2 of the following system register access instructions:
+对于MPU区域n，可以通过将区域号编码到以下系统寄存器访问指令的 CRm 和 opcode2 中来直接访问基址寄存器和限制寄存器：
 
-# 5. MPU Register summary
+CRm = 0b1rrr，其中 rrr = region_number[3:1]。
 
-## 5.1. Protection Region Selection Register（PRSELR）
+要访问基址寄存器：
+op2 = 0b000，用于偶数区域。
+op2 = 0b100，用于奇数区域。
 
-The PRSELR indicates, and selects the current EL1-controlled MPU region registers, PRBAR, and PRLAR.
+要访问限制寄存器：
+op2 = 0b001，用于偶数区域。
+op2 = 0b101，用于奇数区域。
 
-**Usage constraints**
 
-This register is accessible as follows:
+### 4.2.1. 写入基址和限制寄存器
+
+**PRBAR0-PRBAR15**
+
+```ARM
+MCR p15, 0, <Rt>, c6, CRm, op2
+```
+
+**PRLAR0-PRLAR15**
+
+```ARM
+MCR p15, 0, <Rt>, c6, CRm, op2
+```
+
+**HPRBAR0-HPRBAR15**
+
+```ARM
+MCR p15, 4, <Rt>, c6, CRm, op2
+```
+
+**HPRLAR0-HPRLAR15**
+
+```ARM
+MCR p15, 4, <Rt>, c6, CRm, op2
+```
+
+**PRBAR16-PRBAR23**
+
+```ARM
+MCR p15, 1, <Rt>, c6, CRm, op2
+```
+
+**PRLAR16-PRLAR23**
+
+```ARM
+MCR p15, 1, <Rt>, c6, CRm, op2
+```
+
+**HPRBAR16-HPRBAR23**
+
+```ARM
+MCR p15, 5, <Rt>，c6，CRm，op2
+```
+
+**HPRLAR16-HPRLAR23**
+
+```ARM
+MCR p15，5，<Rt>，c6，CRm，op2
+```
+
+### 4.2.2. 读取基址和限制寄存器：
+
+**PRBAR0-PRBAR15**
+
+```ARM
+MRC p15, 0, <Rt>, c6, CRm, op2
+```
+
+**PRLAR0-PRLAR15**
+
+```ARM
+MRC p15, 0, <Rt>, c6, CRm, op2
+```
+
+**HPRBAR0-HPRBAR15**
+
+```ARM
+MRC p15, 4, <Rt>, c6, CRm, op2
+```
+
+**HPRLAR0-HPRLAR15**
+
+```ARM
+MRC p15, 4, <Rt>, c6, CRm, op2
+```
+
+**PRBAR16-PRBAR23**
+
+```ARM
+MRC p15, 1, <Rt>, c6, CRm, op2
+```
+
+**PRLAR16-PRLAR23**
+
+```ARM
+MRC p15, 1, <Rt>, c6, CRm, op2
+```
+
+**HPRBAR16-HPRBAR23**
+
+```ARM
+MRC p15, 5, <Rt>, c6, CRm, op2
+```
+
+**HPRLAR16-HPRLAR23**
+
+```ARM
+MRC p15, 5, <Rt>, c6, CRm, op2
+```
+
+# 5. MPU寄存器
+
+## 5.1. 保护区域选择寄存器（PRSELR）
+
+**PRSELR** 选择当前 **EL1**控制的 MPU区域寄存器 **PRBAR** 和 **PRLAR**。
+
+**使用限制**
+
+此寄存器的访问方式如下：
 
 | EL0 | EL1 | EL2 |
 | --- | --- | --- |
 | -   | RW  | RW  |
 
-**Traps and enables**
+**捕获和启用**
 
-The PRSELR is accessible from EL2, and from EL1 when VSCTLR.MSA is 0. 
+**PRSELR** 可从 **EL2** 访问，当 **VSCTLR.MSA** 为 **0** 时，可从 **EL1** 访问。
 
-**Configurations**
+**配置**
 
-This register is available in all build configurations.
+此寄存器在所有构建配置中都可用。
 
-**Attributes**
+**属性**
 
-PRSELR is a 32-bit register.
+**PRSELR** 是一个32位寄存器。
 
-**0 or 16 EL2-controlled MPU regions**
+**0或16个EL2控制的 MPU 区域**
 
-The following figure shows the PRSELR bit assignments if 0 or 16 EL2-controlled MPU regions are implemented.
+下图显示了如果实施了 0 或 16 个 EL2 控制的 MPU 区域，PRSELR 位的分配情况。
 
 ![Figure4_78](Figure4_78.png)
 
-The following table shows the PRSELR bit assignments if 0 or 16 EL2-controlled MPU regions are implemented.
+下表显示了如果实现了 0 或 16 个 EL2 控制的 MPU 区域，PRSELR 位的分配情况。
 
 ![Table4-201](Table4-201.png)
 
-**20 or 24 EL2-controlled MPU regions**
+**20 或 24 个 EL2 控制的 MPU 区域**
 
-The following figure shows the PRSELR bit assignments if 20 or 24 EL2-controlled MPU regions are implemented.
+下图显示了如果实施了 20 或 24 个 EL2 控制的 MPU 区域，PRSELR 位分配情况。
 
 ![Figure4_79](Figure4_79.png)
 
-The following table shows the PRSELR bit assignments if 20 or 24  EL2-controlled MPU regions are implemented.
+下表显示了如果实现了 20 或 24 个 EL2 控制的 MPU 区域，PRSELR 位分配情况。
 
 ![Table4-202](Table4-202.png)
 
-**To access the PRSELR:**
+**访问 PRSELR：**
 
 ```arm
 MRC p15, 0, <Rt>, c6, c2, 1 ; Read PRSELR into Rt
 MCR p15, 0, <Rt>, c6, c2, 1 ; Write Rt to PRSELR
 ```
 
-## 5.2. Protection Region Base Address Register（PRBAR）
+## 5.2. 保护区域基址寄存器（PRBAR）
 
-## 5.3. Protection Region Limit Address Register（PRLAR）
+保护区域基址寄存器指示 **EL1** 控制的 **MPU** 区域的基址，并提供两种访问机制，直接 (**PRBARn**) 和间接 (**PRBAR**)。有关间接访问，另请参阅 [PRSELR](#51-保护区域选择寄存器prselr)。
 
-## 5.4. Hyp Protection Region Base Address Register（）
+**使用限制**
+
+此寄存器的访问方式如下：
+
+| EL0 | EL1 | EL2 |
+| --- | --- | --- |
+| -   | RW  | RW  |
+
+**捕获和启用**
+
+**PRBAR** 可从 **EL2** 访问，当 **VSCTLR.MSA** 为 **0** 时，可从 **EL1** 访问。
+
+**配置**
+
+此寄存器在所有构建配置中都可用。
+
+**属性**
+
+**PRBAR** 和 **PRBARn** 是 32 位寄存器。
+
+下图显示了 **PRBAR** 位分配：
+
+![Figure4_76](Figure4_76.png)
+
+下表显示了 **PRBAR** 位分配：
+
+![Table4_195](Table4_195.png)
+
+下表描述了普通存储器的 SH[1:0] 字段编码。
+
+![Table4_196](Table4_196.png)
+
+下表描述了 EL1 控制的 MPU 的数据访问权限。
+
+![Table4_197](Table4_197.png)
+
+此寄存器重置时为未知值。
+
+**要访问 PRSELR 选择的 PRBAR：**
+
+```arm
+MRC p15, 0, <Rt>, c6, c3, 0 ；将 PRBAR 读入 Rt
+MCR p15, 0, <Rt>, c6, c3, 0 ；将 Rt 写入 PRBAR
+```
+
+可直接访问 PRBAR0 至 PRBAR23。要访问 PRBARn，其中 n 以二进制数表示：
+
+```arm
+MRC p15, 0+nDIV16, <Rt>, c6, c8+n[3:1], 4*n[0] ；将 PRBARn 读入 Rt
+MCR p15, 0+nDIV16, <Rt>, c6, c8+n[3:1], 4*n[0] ；将 Rt 写入 PRBARn
+```
+
+## 5.3. 保护区域限制地址寄存器（PRLAR）
+
+保护区域限制地址寄存器指示 **EL1** 控制的MPU区域的限制地址，并提供两种访问机制，直接（**PRLARn**）和间接（**PRLAR**）。有关间接访问，另请参阅 [PRSELR](#51-保护区域选择寄存器prselr)。
+
+**使用限制**
+
+此寄存器的访问方式如下：
+
+| EL0 | EL1 | EL2 |
+| --- | --- | --- |
+| -   | RW  | RW  |
+
+**捕获和启用**
+
+**PRLAR** 可从 **EL2** 访问，当 **VSCTLR.MSA** 为 **0** 时，可从 **EL1** 访问。
+
+**配置**
+
+此寄存器在所有构建配置中都可用。
+
+**属性**
+
+**PRLAR** 和 **PRLARn** 是32位寄存器。
+
+下图显示了 **PRLAR** 位分配：
+
+![Figure4_77](Figure4_77.png)
+
+下表显示了 **PRLAR** 位分配。
+
+![Table4_199](Table4_199.png)
+
+**要访问 PRLAR：**
+
+```arm
+MRC p15, 0, <Rt>, c6, c3, 1 ; 将 PRLAR 读入 Rt
+MCR p15, 0, <Rt>, c6, c3, 1 ; 将 Rt 写入 PRLAR
+```
+
+可直接访问 **PRLAR0** 至 **PRLAR23**。要访问 **PRLARn**，其中 **n** 以二进制数表示：
+
+```arm
+MRC p15, 0+nDIV16, <Rt>, c6, c8+n[3:1], 4*n[0]+1 ; 将 PRLARn 读入 Rt
+MCR p15, 0+nDIV16, <Rt>, c6, c8+n[3:1], 4*n[0]+1 ; 将 Rt 写入 PRLARn
+```
+
+## 5.4. MPU类型寄存器
+
+MPUIR 表示由 EL1 控制的 MPU 实现的可编程内存区域的数量。
+
+**使用限制**
+
+此寄存器的访问方式如下：
+
+## 5.5. 内存属性间接寄存器 0 和 1 (MAIR0/MAIR1)
+
+**MAIR0** 和 **MAIR1** 提供与保护区域限制地址寄存器中可能的 **AttrIndx** 值相对应的内存属性编码。该寄存器为从 Hyp 模式以外的状态进行的内存访问提供值。
+
+**使用限制**
+
+这些寄存器的访问方式如下：
+
+| EL0 | EL1 | EL2 |
+| --- | --- | --- |
+| -   | RW  | RW  |
+
+捕获和启用
+
+当设置 **HCR.TVM** 时，对这些寄存器的 **EL1** 写访问将被捕获到 **EL2**。当设置 **HCR.TRVM** 时，**EL1** 读访问将被捕获到 **EL2**。当设置 **HSTR.T10** 时，**EL1** 访问将被捕获到 **EL2**。
+
+**配置**
+
+这些寄存器在所有构建配置中都可用。
+
+**属性**
+
+**MAIR0** 和 **MAIR1** 是 32 位寄存器。
+
+下图显示了 MAIR0 和 MAIR1 位分配。
+
+![Figure4_61](Figure4_61.png)
+
+下表显示了 **MAIR0** 和 **MAIR1** 位分配。
+
+![Table4_162](Table4_162.png)
+
+下表显示了 Attr<n>[7:4] 位分配。
+
+![Table4_163](Table4_163.png)
+
+下表显示了 Attr<n>[3:0] 位分配。Attr<n>[3:0] 的编码取决于 Attr<n>[7:4] 的值。
+
+![Table4_164](Table4_164.png)
+
+下表显示了第 174 页表 4-163：Attr<n>[7:4] 位分配和第 174 页表 4-164：Attr<n>[3:0] 位分配中的某些 Attr<n> 编码中使用的 R 和 W 位的编码，分别用于定义读取分配和写入分配策略。
+
+![Table4_165](Table4_165.png)
+
+**要访问 MAIR0：**
+
+```arm
+MRC p15, 0, <Rt>, c10, c2, 0 ；将 MAIR0 读入 Rt
+MCR p15, 0, <Rt>, c10, c2, 0 ；将 Rt 写入 MAIR0
+```
+
+**要访问 MAIR1：**
+
+```arm
+MRC p15, 0, <Rt>, c10, c2, 1 ；将 MAIR1 读入 Rt
+MCR p15, 0, <Rt>, c10, c2, 1 ；将 Rt 写入 MAIR1
+```
