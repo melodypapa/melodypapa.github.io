@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 741" width="100%" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" role="img">
+<title>S32K5 Standby entry: SW1-SW4 phases with dual-core coordination</title>
+<desc>Four software phases driving the S32K5 MCU driver into Standby: peripheral shutdown, application core shutdown, flash low-power handshake with PMC_LASTMILE disable, and main core shutdown, with PD2/PD1/PD0 power state shown per phase.</desc>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text x="40" y="26" font-size="15" font-weight="500" fill="#2C2C2A">Standby 入口：SW1–SW4 四阶段与双核协作</text>
+<text x="40" y="45" font-size="12" fill="#5F5E5A">每阶段由 MCU 驱动 API 承接，应用层只调 API，不直接操作寄存器</text>
+<rect x="40" y="62" width="424" height="119" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<path d="M40 72 a10 10 0 0 1 10 -10 h404 a10 10 0 0 1 10 10 v34 h-424 z" fill="#B5D4F4"/>
+<text x="53" y="84.0" font-size="13" font-weight="500" fill="#042C53" dominant-baseline="central">SW1</text>
+<text x="88" y="84.0" font-size="13" font-weight="500" fill="#042C53" dominant-baseline="central">外设关断 Peripheral Shutdown</text>
+<text x="88" y="99.0" font-size="11" fill="#185FA5" dominant-baseline="central">Mcu_SetMode（外设集）</text>
+<circle cx="57" cy="133.5" r="2" fill="#185FA5"/>
+<text x="68" y="133.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">关停 PD2 外设时钟：CTL_KEY + COFB_CLKEN[REQnz]</text>
+<circle cx="57" cy="152.5" r="2" fill="#185FA5"/>
+<text x="68" y="152.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">一次只关一个 CPE 分区，否则 HardFault</text>
+<rect x="480" y="86.5" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="96.5" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD2 运行</text>
+<rect x="480" y="111.5" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="121.5" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD1 运行</text>
+<rect x="480" y="136.5" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="146.5" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD0 运行</text>
+<rect x="40" y="181" width="424" height="138" rx="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<path d="M40 191 a10 10 0 0 1 10 -10 h404 a10 10 0 0 1 10 10 v34 h-424 z" fill="#CECBF6"/>
+<text x="53" y="203.0" font-size="13" font-weight="500" fill="#26215C" dominant-baseline="central">SW2</text>
+<text x="88" y="203.0" font-size="13" font-weight="500" fill="#26215C" dominant-baseline="central">应用核关断 Application Core Shutdown</text>
+<text x="88" y="218.0" font-size="11" fill="#534AB7" dominant-baseline="central">Mcu_SetMode（CORE_STANDBY）</text>
+<circle cx="57" cy="252.5" r="2" fill="#534AB7"/>
+<text x="68" y="252.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">MU 中断通知 CM4 停止使用 PD2 外设</text>
+<circle cx="57" cy="271.5" r="2" fill="#534AB7"/>
+<text x="68" y="271.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">各核读 WFI 状态，PD2 两核彼此确认</text>
+<circle cx="57" cy="290.5" r="2" fill="#534AB7"/>
+<text x="68" y="290.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">PCFS ramp-down → 关钟 → MC_RGM_PRST</text>
+<rect x="480" y="215.0" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="225.0" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD2 运行</text>
+<rect x="480" y="240.0" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="250.0" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD1 运行</text>
+<rect x="480" y="265.0" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="275.0" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD0 运行</text>
+<rect x="40" y="319" width="424" height="138" rx="10" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<path d="M40 329 a10 10 0 0 1 10 -10 h404 a10 10 0 0 1 10 10 v34 h-424 z" fill="#FAC775"/>
+<text x="53" y="341.0" font-size="13" font-weight="500" fill="#412402" dominant-baseline="central">SW3</text>
+<text x="88" y="341.0" font-size="13" font-weight="500" fill="#412402" dominant-baseline="central">Flash 握手 + 末级稳压器</text>
+<text x="88" y="356.0" font-size="11" fill="#854F0B" dominant-baseline="central">Mcu_InitClock + SOC_PREPARE_STANDBY</text>
+<circle cx="57" cy="390.5" r="2" fill="#854F0B"/>
+<text x="68" y="390.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">等待进行中的 Flash 高压操作结束</text>
+<circle cx="57" cy="409.5" r="2" fill="#854F0B"/>
+<text x="68" y="409.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">系统时钟切 FIRC、关 PLL（PLLDIG 不可用）</text>
+<circle cx="57" cy="428.5" r="2" fill="#854F0B"/>
+<text x="68" y="428.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">关闭 PMC_LASTMILE，否则 Flash 仍耗电</text>
+<rect x="480" y="353.0" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="363.0" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD2 运行</text>
+<rect x="480" y="378.0" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="388.0" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD1 运行</text>
+<rect x="480" y="403.0" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="413.0" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD0 运行</text>
+<rect x="40" y="457" width="424" height="138" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<path d="M40 467 a10 10 0 0 1 10 -10 h404 a10 10 0 0 1 10 10 v34 h-424 z" fill="#9FE1CB"/>
+<text x="53" y="479.0" font-size="13" font-weight="500" fill="#04342C" dominant-baseline="central">SW4</text>
+<text x="88" y="479.0" font-size="13" font-weight="500" fill="#04342C" dominant-baseline="central">主核关断 Main Core Shutdown</text>
+<text x="88" y="494.0" font-size="11" fill="#0F6E56" dominant-baseline="central">Mcu_SetMode（SOC_STANDBY）</text>
+<circle cx="57" cy="528.5" r="2" fill="#0F6E56"/>
+<text x="68" y="528.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">配置 WKPU 唤醒源（内部源仅正极性）</text>
+<circle cx="57" cy="547.5" r="2" fill="#0F6E56"/>
+<text x="68" y="547.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">执行 DSB + ISB 屏障</text>
+<circle cx="57" cy="566.5" r="2" fill="#0F6E56"/>
+<text x="68" y="566.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">写 MODE_CONF[STANDBY] + CTL_KEY 密钥</text>
+<rect x="480" y="491.0" width="160" height="20" rx="5" fill="#F1EFE8" stroke="#888780" stroke-width="0.5"/>
+<text x="560.0" y="501.0" font-size="11" fill="#5F5E5A" text-anchor="middle" dominant-baseline="central">PD2 断电</text>
+<rect x="480" y="516.0" width="160" height="20" rx="5" fill="#F1EFE8" stroke="#888780" stroke-width="0.5"/>
+<text x="560.0" y="526.0" font-size="11" fill="#5F5E5A" text-anchor="middle" dominant-baseline="central">PD1 断电</text>
+<rect x="480" y="541.0" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="551.0" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD0 运行</text>
+<path d="M252.0 182 L252.0 196" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#ar)"/>
+<path d="M252.0 336 L252.0 350" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#ar)"/>
+<path d="M252.0 490 L252.0 504" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="40" y="659" width="424" height="62" rx="10" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="53" y="676" font-size="12" font-weight="500" fill="#2C2C2A" dominant-baseline="central">退出路径（唤醒）</text>
+<text x="53" y="694.0" font-size="11" fill="#5F5E5A" dominant-baseline="central">WKPU 事件 → LPE CM4 断言 EXTWAKE → PD2 上电</text>
+<text x="53" y="709.0" font-size="11" fill="#5F5E5A" dominant-baseline="central">（destructive reset）→ HSE2 BootROM → sBAF → HSE2_FW</text>
+<rect x="480" y="667" width="160" height="20" rx="5" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="560.0" y="677" font-size="11" fill="#042C53" text-anchor="middle" dominant-baseline="central">Mcu_GetResetReason</text>
+<text x="560.0" y="702" font-size="11" fill="#5F5E5A" text-anchor="middle" dominant-baseline="central">判定唤醒源</text>
+</svg>

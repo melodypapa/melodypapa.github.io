@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 779" width="100%" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" role="img">
+<title>S32K5 Standby entry: SW1-SW4 phases with dual-core coordination</title>
+<desc>Four software phases driving the S32K5 MCU driver into Standby: peripheral shutdown, application core shutdown, flash low-power handshake with PMC_LASTMILE disable, and main core shutdown, with PD2/PD1/PD0 power state shown per phase.</desc>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text x="40" y="26" font-size="15" font-weight="500" fill="#2C2C2A">Standby Entry: SW1–SW4 Phases and Dual-Core Coordination</text>
+<text x="40" y="45" font-size="12" fill="#5F5E5A">Each phase is handled by an MCU driver API; the application never touches registers directly</text>
+<rect x="40" y="62" width="424" height="138" rx="10" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<path d="M40 72 a10 10 0 0 1 10 -10 h404 a10 10 0 0 1 10 10 v34 h-424 z" fill="#B5D4F4"/>
+<text x="53" y="84.0" font-size="13" font-weight="500" fill="#042C53" dominant-baseline="central">SW1</text>
+<text x="88" y="84.0" font-size="13" font-weight="500" fill="#042C53" dominant-baseline="central">Peripheral Shutdown</text>
+<text x="88" y="99.0" font-size="11" fill="#185FA5" dominant-baseline="central">Mcu_SetMode (peripheral set)</text>
+<circle cx="57" cy="133.5" r="2" fill="#185FA5"/>
+<text x="68" y="133.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">Disable PD2 peripheral clocks: CTL_KEY +</text>
+<circle cx="57" cy="152.5" r="2" fill="#185FA5"/>
+<text x="68" y="152.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">COFB_CLKEN[REQnz]</text>
+<circle cx="57" cy="171.5" r="2" fill="#185FA5"/>
+<text x="68" y="171.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">Disable one CPE partition at a time, else HardFault</text>
+<rect x="480" y="96.0" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="106.0" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD2 On</text>
+<rect x="480" y="121.0" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="131.0" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD1 On</text>
+<rect x="480" y="146.0" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="156.0" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD0 On</text>
+<rect x="40" y="200" width="424" height="138" rx="10" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<path d="M40 210 a10 10 0 0 1 10 -10 h404 a10 10 0 0 1 10 10 v34 h-424 z" fill="#CECBF6"/>
+<text x="53" y="222.0" font-size="13" font-weight="500" fill="#26215C" dominant-baseline="central">SW2</text>
+<text x="88" y="222.0" font-size="13" font-weight="500" fill="#26215C" dominant-baseline="central">Application Core Shutdown</text>
+<text x="88" y="237.0" font-size="11" fill="#534AB7" dominant-baseline="central">Mcu_SetMode (CORE_STANDBY)</text>
+<circle cx="57" cy="271.5" r="2" fill="#534AB7"/>
+<text x="68" y="271.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">MU interrupt tells CM4 to stop using PD2 peripherals</text>
+<circle cx="57" cy="290.5" r="2" fill="#534AB7"/>
+<text x="68" y="290.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">Each core reads WFI status; PD2 cores confirm each other</text>
+<circle cx="57" cy="309.5" r="2" fill="#534AB7"/>
+<text x="68" y="309.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">PCFS ramp-down, clock off, then MC_RGM_PRST</text>
+<rect x="480" y="234.0" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="244.0" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD2 On</text>
+<rect x="480" y="259.0" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="269.0" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD1 On</text>
+<rect x="480" y="284.0" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="294.0" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD0 On</text>
+<rect x="40" y="338" width="424" height="157" rx="10" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<path d="M40 348 a10 10 0 0 1 10 -10 h404 a10 10 0 0 1 10 10 v34 h-424 z" fill="#FAC775"/>
+<text x="53" y="360.0" font-size="13" font-weight="500" fill="#412402" dominant-baseline="central">SW3</text>
+<text x="88" y="360.0" font-size="13" font-weight="500" fill="#412402" dominant-baseline="central">Flash Handshake + Last-Mile Regulator</text>
+<text x="88" y="375.0" font-size="11" fill="#854F0B" dominant-baseline="central">Mcu_InitClock + SOC_PREPARE_STANDBY</text>
+<circle cx="57" cy="409.5" r="2" fill="#854F0B"/>
+<text x="68" y="409.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">Wait for ongoing flash high-voltage operations to finish</text>
+<circle cx="57" cy="428.5" r="2" fill="#854F0B"/>
+<text x="68" y="428.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">Switch system clock to FIRC, disable PLL (PLLDIG</text>
+<circle cx="57" cy="447.5" r="2" fill="#854F0B"/>
+<text x="68" y="447.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">unavailable)</text>
+<circle cx="57" cy="466.5" r="2" fill="#854F0B"/>
+<text x="68" y="466.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">Disable PMC_LASTMILE, else flash array still draws power</text>
+<rect x="480" y="381.5" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="391.5" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD2 On</text>
+<rect x="480" y="406.5" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="416.5" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD1 On</text>
+<rect x="480" y="431.5" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="441.5" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD0 On</text>
+<rect x="40" y="495" width="424" height="138" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<path d="M40 505 a10 10 0 0 1 10 -10 h404 a10 10 0 0 1 10 10 v34 h-424 z" fill="#9FE1CB"/>
+<text x="53" y="517.0" font-size="13" font-weight="500" fill="#04342C" dominant-baseline="central">SW4</text>
+<text x="88" y="517.0" font-size="13" font-weight="500" fill="#04342C" dominant-baseline="central">Main Core Shutdown</text>
+<text x="88" y="532.0" font-size="11" fill="#0F6E56" dominant-baseline="central">Mcu_SetMode (SOC_STANDBY)</text>
+<circle cx="57" cy="566.5" r="2" fill="#0F6E56"/>
+<text x="68" y="566.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">Configure WKPU wake-up sources (internal: positive only)</text>
+<circle cx="57" cy="585.5" r="2" fill="#0F6E56"/>
+<text x="68" y="585.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">Execute DSB + ISB barriers</text>
+<circle cx="57" cy="604.5" r="2" fill="#0F6E56"/>
+<text x="68" y="604.5" font-size="12" fill="#2C2C2A" dominant-baseline="central">Write MODE_CONF[STANDBY] plus the CTL_KEY sequence</text>
+<rect x="480" y="529.0" width="160" height="20" rx="5" fill="#F1EFE8" stroke="#888780" stroke-width="0.5"/>
+<text x="560.0" y="539.0" font-size="11" fill="#5F5E5A" text-anchor="middle" dominant-baseline="central">PD2 Off</text>
+<rect x="480" y="554.0" width="160" height="20" rx="5" fill="#F1EFE8" stroke="#888780" stroke-width="0.5"/>
+<text x="560.0" y="564.0" font-size="11" fill="#5F5E5A" text-anchor="middle" dominant-baseline="central">PD1 Off</text>
+<rect x="480" y="579.0" width="160" height="20" rx="5" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text x="560.0" y="589.0" font-size="11" fill="#173404" text-anchor="middle" dominant-baseline="central">PD0 On</text>
+<path d="M252.0 201 L252.0 215" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#ar)"/>
+<path d="M252.0 355 L252.0 369" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#ar)"/>
+<path d="M252.0 528 L252.0 542" fill="none" stroke="#888780" stroke-width="1.5" marker-end="url(#ar)"/>
+<rect x="40" y="697" width="424" height="62" rx="10" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="53" y="714" font-size="12" font-weight="500" fill="#2C2C2A" dominant-baseline="central">Exit path (wake-up)</text>
+<text x="53" y="732.0" font-size="11" fill="#5F5E5A" dominant-baseline="central">WKPU event, LPE CM4 asserts EXTWAKE, PD2 powers up</text>
+<text x="53" y="747.0" font-size="11" fill="#5F5E5A" dominant-baseline="central">(destructive reset), HSE2 BootROM, sBAF, HSE2_FW</text>
+<rect x="480" y="705" width="160" height="20" rx="5" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="560.0" y="715" font-size="11" fill="#042C53" text-anchor="middle" dominant-baseline="central">Mcu_GetResetReason</text>
+<text x="560.0" y="740" font-size="11" fill="#5F5E5A" text-anchor="middle" dominant-baseline="central">identify wake source</text>
+</svg>
