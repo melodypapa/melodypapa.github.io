@@ -8,3 +8,4 @@ eb_tresos/safety_os
 eb_tresos/safety_rte
 .DS_Store
 reference
+.workbuddy/memory/*.md
