@@ -50,6 +50,7 @@ permalink: /autosar/
 ## 模式管理（Mode Management）
 
 * [AUTOSAR EcuM（ECU状态管理器）](mode_management/ecu_state_manager)
+* [AUTOSAR 电源状态管理：启动、下电、唤醒与复位流程](power/index.md)
 * [AUTOSAR BswM（基础软件模式管理器）](mode_management/basic_software_mode_manager/index.md)
 
 ## 加密（Crypto)

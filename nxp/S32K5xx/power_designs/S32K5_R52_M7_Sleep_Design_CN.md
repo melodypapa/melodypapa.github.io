@@ -7,7 +7,7 @@ S32K5 的电源域（Power Domain）划分决定了休眠策略的根本约束�
 | 电源域 | 包含内容 | 可独立开关 |
 |---|---|---|
 | **PD0**（Always-On） | PMC、RGM、WKPU、MC_PCU、FRO、SIRC、384KB SRAM 等 | 否（始终供电） |
-| **PD1**（低功耗引擎） | **CM4**、DMA、ADC、LPUART、LPSPI、FTM、STM 等 | 是（可独立于 PD2） |
+| **PD1**（低功耗引擎） | **CM4**、eDMA3、ADC、LPCMP、LPUART、LPSPI、LPI2C、FTM、STM 等 | 是（可独立于 PD2） |
 | **PD2**（全性能域） | **CM7、R52**、MRAM、HSE2 + 所有其他外设 | 是（可独立于 PD1） |
 
 **关键约束**：CM7 和 R52 都位于 **PD2** 中，这意味着——**无法单独让 CM7 休眠而 R52 继续运行，反之亦然**。PD2 要么全上，要么全下。
@@ -57,7 +57,7 @@ PCFS ramp-down（降频到初始频率）
 关停 PD2 外设的时钟（写 CTL_KEY + MC_ME[COFB_CLKEN]）
     |
     v
-切换时钟源到 FRO，关闭 PLL
+切换时钟源到 FIRC，关闭 PLL
     |
     v
 Pad Keeping 配置（可选）
@@ -118,9 +118,9 @@ S32K5 的 **MC_ME** 模块提供了 WFI 状态监测机制，用于多核协调�
 > | 阶段 | 名称 | 驱动 API | 本文对应步骤 |
 > |---|---|---|---|
 > | SW1 | Peripheral Shutdown | `Mcu_SetMode`（外设集） | Step 4.1–4.3 |
-> | SW2 | Application Core Shutdown | 应用核 `Mcu_SetMode(CORE_STANDBY)`；主核 `Mcu_SetMode`（`McuCoreUnderMcuControl` 勾选 + `McuCoreClockEnable` 取消） | Step 4.2–4.3 |
+> | SW2 | Application Core Shutdown | 应用核 `Mcu_SetMode(CORE_STANDBY)`；主核 `Mcu_SetMode`（`McuCoreUnderMcuControl` 勾选 + `McuCoreClockEnable` 取消） | Step 2–3 |
 > | SW3 | Flash 低功耗握手 + PMC_LASTMILE 关闭 | `Mcu_InitClock`、`Mcu_SetMode(SOC_PREPARE_STANDBY)` | Step 4.6 |
-> | SW4 | Main Core Shutdown | `Mcu_SetMode(SOC_STANDBY)`，`McuMainCoreSelect` 选主核 | Step 4.12 |
+> | SW4 | Main Core Shutdown | `Mcu_SetMode(SOC_STANDBY)`，`McuMainCoreSelect` 选主核 | Step 4.8–4.12 |
 >
 > 相关 Tresos/MCAL 配置参数：`McuPowerMode`（`CORE_STANDBY` / `SOC_PREPARE_STANDBY` / `SOC_STANDBY`）、`McuCoreUnderMcuControl`、`McuCoreClockEnable`、`McuMainCoreSelect`。
 
@@ -211,6 +211,8 @@ S32K5 的 **MC_ME** 模块提供了 WFI 状态监测机制，用于多核协调�
 <figcaption style="font-size:0.85em;color:#666">图 1：Standby 入口的 SW1–SW4 四阶段与双核协作（PD 状态示意）</figcaption>
 </figure>
 
+>
+> **注意**：主核时钟必须始终保持使能 —— 若主核由应用自行配置，`McuCoreUnderMcuControl` 取消勾选；否则 `McuCoreUnderMcuControl` 与 `McuCoreClockEnable` 必须同时勾选。
 
 ### Step 1：各 OS 各自完成睡眠前准备
 

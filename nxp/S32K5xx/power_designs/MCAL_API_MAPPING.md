@@ -1,6 +1,6 @@
 # S32K5 MCAL 驱动 API 与休眠设计方案映射分析
 
-**分析对象**：`S32K5_R52_M7_休眠方案_CN.md` / `S32K5_R52_M7_Sleep_Design_EN.md`（已修订版）
+**分析对象**：`S32K5_R52_M7_Sleep_Design_CN.md` / `S32K5_R52_M7_Sleep_Design_EN.md`
 **分析基准**（取自 IMA 知识库「米多papa的知识库 / MCAL」文件夹）
 
 | 文档 | 编号 | 说明 |
@@ -18,7 +18,7 @@
 
 设计文档描述的是**底层寄存器级流程**，而 MCAL MCU 驱动已经把这套流程**封装成了标准 AUTOSAR 服务**。二者关系是：**文档流程 ≈ MCU 驱动内部实现**，绝大多数步骤不需要应用层手写。
 
-但有 **3 个关键缺口**：设计文档完全没提 MCAL 驱动的存在，导致集成时会出现职责空白。详见第四节。
+初版设计文档完全没提 MCAL 驱动的存在，会导致集成时出现职责空白。**该问题已在后续修订中解决**（设计文档第 4 节现已包含 SW1–SW4 四阶段与驱动 API 的映射表）；第四节保留当初的缺口分析记录，所列修订建议**均已落实到设计文档**（状态见第七节清单）。
 
 ---
 
@@ -86,7 +86,7 @@ SWS_Mcu_00148：
 |---|---|---|---|
 | **SW1** | Peripheral Shutdown | `Mcu_SetMode`（外设关断集） | 第 4 节 Step 4.1-4.3 关停 PD2 外设 |
 | **SW2** | Application Core Shutdown | 应用核调 `Mcu_SetMode(CORE_STANDBY)`；主核调 `Mcu_SetMode`（`McuCoreUnderMcuControl` 勾选 + `McuCoreClockEnable` 取消勾选） | 第 4 节 Step 2-3 WFI 协调与关钟 |
-| **SW3** | Flash Low-Power Handshake + PMC_LASTMILE Regulator Disable | `Mcu_InitClock`（切 FIRC、关 PLL）；`Mcu_SetMode(SOC_PREPARE_STANDBY)` | 设计文档**未覆盖**（见缺口 1） |
+| **SW3** | Flash Low-Power Handshake + PMC_LASTMILE Regulator Disable | `Mcu_InitClock`（切 FIRC、关 PLL）；`Mcu_SetMode(SOC_PREPARE_STANDBY)` | 第 4 节 Step 4.6（已落实） |
 | **SW4** | Main Core Shutdown | 配置唤醒 IP；`Mcu_SetMode(SOC_STANDBY)`，`McuMainCoreSelect` 设为执行该转换的核 | 第 4 节 Step 4.7-4.10 请求模式切换 |
 
 ### SW2 的两步握手（与你的设计文档高度一致）
@@ -130,13 +130,15 @@ User Manual 原文：
 | E2 | Very-Low-Speed Run | 750 kHz | — |
 | F | 1:1 模式（CORE_CLK = AXBS_CLK） | — | 仅 Run |
 
+> 📌 **D/E 行大小写说明**：UM §3.6.7 原文即为 "Option D - Low-Speed **RUN** mode (CORE_CLK 48 MHz)" 与 "Option E - Low-Speed **Run** mode (CORE_CLK 3 MHz)"——RUN/Run 大小写不一致是**源文档自身的写法**（2026-10-15 经 ima 原文核对确认），非转录笔误，此处按原文保留。
+
 ---
 
-## 四、设计文档的 3 个集成缺口
+## 四、设计文档的 3 个集成缺口（修订记录，均已落实）
 
 ### 缺口 1：SW3 阶段完全缺失 ⭐ 最重要
 
-**设计文档现状**：第 4 节 Step 4 的 10 步里，**没有 Flash 低功耗握手，也没有 PMC_LASTMILE 稳压器关闭**。
+**修订状态**：第 4 节 Step 4 现已包含 SW3（Step 4.6：挂起/等待 Flash 高压操作结束 → 切换 FIRC 关 PLL → `SOC_PREPARE_STANDBY`，含 **PMC_LASTMILE 关闭**）。以下为当初的缺口分析，修订建议已落实。
 
 **驱动要求**（User Manual §3.6.6.3 原文）：
 
@@ -164,11 +166,11 @@ SW3: Flash 低功耗握手与 PMC_LASTMILE 关闭
 
 > **The EcuM shall ensure that no wakeup interrupt event is lost.** The MCU driver cannot handle wakeup interrupt as it doesn't have any information related to those. It is responsibility of the application to ensure that **no wakeup interrupt occurs before the SoC completes the standby mode transition**.
 
-**SWS_Mcu_00147 的 Note 也要求**：
+**SWS §8.3.9（Mcu_SetMode，位于 SWS_Mcu_00148 之后）的 Note 也要求**：
 
 > The API Mcu_SetMode assumes that **all interrupts are disabled prior the call** of the API by the calling instance. The implementation has to take care that no wakeup interrupt event is lost. This could be achieved by a check whether pending wakeup interrupts already have occurred even if `Mcu_SetMode` has not set the controller to power down mode yet.
 
-**设计文档现状**：第 7 节总结表完全没提中断使能/屏蔽的责任划分，也没提 EcuM。
+**修订状态**：第 7 节总结表现已补充「中断责任」行：请求模式切换前**必须屏蔽所有中断**；**EcuM 负责确保无唤醒中断丢失**（MCU 驱动无法感知）。
 
 **这是一个真实的功能风险**：若在 `Mcu_SetMode` 调用前有唤醒中断 pending，可能丢事件。设计文档第 4 节虽然写了「Requestor Core 先 Disable IRQ」，但**没有说明这是 AUTOSAR 的强制前提，也没有说明唤醒中断的检查责任在 EcuM**。
 
@@ -183,7 +185,7 @@ SW3: Flash 低功耗握手与 PMC_LASTMILE 关闭
 
 > You could use **FXOSC, if enabled, when the 2.5 V supply is available** by appropriate configuration of **PMC's CONFIG[LPM25EN]**.
 
-**设计文档现状**：第 4 节 Step 4.4 只写「切换系统时钟到 FRO，关闭 PLL」，**没提 FIRC / FXOSC 的选择条件，也没提 LPM25EN**。
+**修订状态**：第 4 节 Step 4.4 现已改为「切换系统时钟到 FIRC，关闭 PLL」，并补充 FXOSC + `PMC.CONFIG[LPM25EN]` + 2.5V 供电条件；第 3 节方案一流程图曾残留的 FRO 写法也已同步修正（2026-10-15）。
 
 **结合我上一轮的 RM 核对**，这里有个值得注意的差异：
 - **RM Ch53 §53.3.2.2** 说 LPRUN 下应用需切到「FXOSC, SXOSC, SIRC, FIRC」这些时钟
@@ -224,7 +226,7 @@ SW3: Flash 低功耗握手与 PMC_LASTMILE 关闭
 | 不支持 Design Studio 的示例工程；时钟树频率无法导出到 `McuClockReferencePoint` 表 | 需自定义参考点 | 配置阶段注意 |
 | 多个时钟的频率上下限被设为 0–10 GHz（RM/DS 未提供明确信息） | 频率检查形同虚设 | 时钟配置需人工核对 |
 
-> **5.2 的第二条是硬约束**：`Disable only one CPE partition at a time (PARTITION_CPE_0_INDEX or PARTITION_CPE_1_INDEX)`。你的设计文档第 4 节 Step 4.2 写「关停 PD2 外设时钟」时，若涉及 CPE 分区，**必须按分区逐个关，不能批量关**。
+> **5.2 的第二条是硬约束**：`Disable only one CPE partition at a time (PARTITION_CPE_0_INDEX or PARTITION_CPE_1_INDEX)`。设计文档第 4 节 Step 4.10 现已明确「**一次只关闭一个 CPE 分区**（CPE_0 与 CPE_1 同时禁用会导致 HardFault）」。
 
 ---
 
@@ -248,19 +250,19 @@ SW3: Flash 低功耗握手与 PMC_LASTMILE 关闭
 
 ## 七、建议修订清单（新增）
 
-| 优先级 | 动作 | 依据 |
-|---|---|---|
-| **P0-A** | Step 4 插入 **SW3 阶段**（Flash 高压操作等待 → FIRC 切换关 PLL → `SOC_PREPARE_STANDBY`），含 **PMC_LASTMILE 关闭** | UM §3.6.6.3 |
-| **P0-B** | Step 4.4 时钟切换改为**切 FIRC**（Standby 强制），补 LPM25EN 与 2.5V 条件 | UM §3.6.6 |
-| **P0-C** | 补充「**一次只关一个 CPE 分区**」的硬约束（否则 HardFault） | UM §3.5 |
-| **P1-A** | 总结表增加「**EcuM 负责唤醒中断不丢失**」，并注明 `Mcu_SetMode` 前必须屏蔽所有中断 | UM §3.6.6 Note + SWS_Mcu_00147 |
-| **P1-B** | 唤醒流程补充「PLL 恢复需显式调用 `Mcu_DistributePllClock`」 | UM §3.4, `SWS_Mcu_00056` |
-| **P1-C** | 补 `Mcu_GetResetReason` 用于判定唤醒源 | SWS 服务清单 |
-| **P1-D** | 补 CPE_LLC0/1 选 `PowerOffState` 会 HardFault 的告警 | UM §3.5 |
-| **P1-E** | 补主核时钟必须保持使能的配置约束 | UM §3.6.2 Note |
-| **P2-A** | 说明「设计文档寄存器步骤由驱动内部完成，应用层不应直接操作」 | 综合 |
-| **P2-B** | 建议用 MU 标志位握手替代应用层直接读 WFI 寄存器，避免与驱动冲突 | 综合 |
-| **P2-C** | 时钟失败错误码变体说明（`MCU_E_ISR_CLOCK_FAILURE`） | UM §3.4 |
+| 优先级 | 动作 | 依据 | 状态（2026-10-15 核对） |
+|---|---|---|---|
+| **P0-A** | Step 4 插入 **SW3 阶段**（Flash 高压操作等待 → FIRC 切换关 PLL → `SOC_PREPARE_STANDBY`），含 **PMC_LASTMILE 关闭** | UM §3.6.6.3 | ✅ 已落实（Step 4.6） |
+| **P0-B** | Step 4.4 时钟切换改为**切 FIRC**（Standby 强制），补 LPM25EN 与 2.5V 条件 | UM §3.6.6 | ✅ 已落实（Step 4.4；方案一流程图 FRO 残留已同步修正） |
+| **P0-C** | 补充「**一次只关一个 CPE 分区**」的硬约束（否则 HardFault） | UM §3.5 | ✅ 已落实（Step 4.10 + 警告框） |
+| **P1-A** | 总结表增加「**EcuM 负责唤醒中断不丢失**」，并注明 `Mcu_SetMode` 前必须屏蔽所有中断 | UM §3.6.6 Note + SWS_Mcu_00147 | ✅ 已落实（第 7 节「中断责任」行） |
+| **P1-B** | 唤醒流程补充「PLL 恢复需显式调用 `Mcu_DistributePllClock`」 | UM §3.4, `SWS_Mcu_00056` | ✅ 已落实（第 7 节「PLL 恢复」行） |
+| **P1-C** | 补 `Mcu_GetResetReason` 用于判定唤醒源 | SWS 服务清单 | ✅ 已落实（第 7 节「唤醒源判定」行） |
+| **P1-D** | 补 CPE_LLC0/1 选 `PowerOffState` 会 HardFault 的告警 | UM §3.5 | ✅ 已落实（第 4 节警告框） |
+| **P1-E** | 补主核时钟必须保持使能的配置约束 | UM §3.6.2 Note | ✅ 已落实（CN/EN 图后 Note；CN 版 2026-10-15 补齐） |
+| **P2-A** | 说明「设计文档寄存器步骤由驱动内部完成，应用层不应直接操作」 | 综合 | ✅ 已落实（第 7 节注） |
+| **P2-B** | 建议用 MU 标志位握手替代应用层直接读 WFI 寄存器，避免与驱动冲突 | 综合 | ✅ 已落实（MU + 共享 PD0 SRAM 握手；WFI 查询归驱动） |
+| **P2-C** | 时钟失败错误码变体说明（`MCU_E_ISR_CLOCK_FAILURE`） | UM §3.4 | ⬜ 未落实（低优先级，可选） |
 
 ---
 
@@ -273,6 +275,23 @@ SW3: Flash 低功耗握手与 PMC_LASTMILE 关闭
 - MCU 驱动 UM 告诉你「**这些已经帮你做完了，你只需调这几个 API**」
 
 **两份文档不冲突，是同一件事的两个抽象层级。** 设计文档作为「理解底层机制」的资料保留很有价值；但**编码时应该以 MCU 驱动 API 为准，不要直接照设计文档写寄存器操作**。
+
+---
+
+## 九、ima 原文核实记录（2026-10-15）
+
+针对评审中「未重新对照 ima 原文」的 4 项引用，已回库逐条核对（源文档：ima 知识库内 `RTD_MCU_UM.pdf` = UM85MCUASRR23-11、`AUTOSAR_CP_SWS_MCUDriver.pdf` = AUTOSAR CP R23-11）：
+
+| # | 被核实结论 | 结论 | 原文锚点 |
+|---|---|---|---|
+| 1 | Standby 强制切 FIRC；FXOSC 仅在 2.5V 供电可用时经 `PMC CONFIG[LPM25EN]` 配置使用 | ✅ 准确 | UM §3.6.6 首段原文 |
+| 2 | `Mcu_SetMode` 前必须屏蔽所有中断；EcuM 负责唤醒中断不丢失 | ✅ 准确 | SWS §8.3.9 Note（"assumes that all interrupts are disabled prior the call"）+ UM §3.6.6 Note |
+| 3 | 时钟模式表 D/E 行 "Low-Speed RUN / Run" 大小写不一致 | ✅ 非笔误——UM §3.6.7 原文即如此写法 | UM §3.6.7 Option D/E 原文（见表下注释） |
+| 4 | 时钟失败错误码变体 `MCU_E_ISR_CLOCK_FAILURE` | ✅ 准确 | UM §3.4 偏离表：SWS_Mcu_00053/00257/00258 均标 N/S，Notes 定义该 ISR 变体由 CMU 中断上报 |
+
+顺带核实的其他引用同样全部准确：主核时钟保持使能 Note（UM §3.6.2，与第三节引用逐字一致）；「一次只关一个 CPE 分区」HardFault 约束（UM §3.5 Driver Limitations）；`SWS_Mcu_00056` 的 N/S 描述（UM §3.4：NXP 驱动偏离 SWS——"will change the Mcu hardware / clock switching to PLL is not completed by Mcu_InitClock"，与第六节表格表述一致）。
+
+**结论：本文全部 UM/SWS 引用均可在 ima 知识库原文中溯源，无推测内容。**
 
 ---
 

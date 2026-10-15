@@ -7,7 +7,7 @@ The power domain (PD) division of S32K5 determines the fundamental constraints o
 | Power Domain               | Contents                                           | Independently Switchable        |
 | -------------------------- | -------------------------------------------------- | ------------------------------- |
 | **PD0** (Always-On)        | PMC, RGM, WKPU, MC_PCU, FRO, SIRC, 384KB SRAM, etc. | No (always powered)           |
-| **PD1** (Low-Power Engine) | **CM4**, eDMA3, FTM, LPSPI, LPUART, LPI2C, etc.   | Yes (can be independent of PD2) |
+| **PD1** (Low-Power Engine) | **CM4**, eDMA3, ADC, LPCMP, LPUART, LPSPI, LPI2C, FTM, STM, etc.   | Yes (can be independent of PD2) |
 | **PD2** (Full-Performance) | **CM7, R52**, HSE2, MRAM, FlexCAN, SENT, etc.      | Yes (can be independent of PD1) |
 
 **Key constraint**: Both CM7 and R52 are located in **PD2**, which means you cannot put CM7 to sleep while keeping R52 running, or vice versa. PD2 is either fully powered or fully off.
@@ -57,7 +57,7 @@ Write CTL_KEY key sequence, then disable M7/R52 clocks via MC_ME[COREx_PCONF]
 Shut down PD2 peripheral clocks (write CTL_KEY + MC_ME[COFB_CLKEN])
     |
     v
-Switch clock source to FRO, disable PLL
+Switch clock source to FIRC, disable PLL
     |
     v
 Configure Pad keeping (optional)
@@ -118,9 +118,9 @@ The **MC_ME** module of S32K5 provides a WFI status monitoring mechanism for mul
 > | Phase | Name | Driver API | Corresponding step below |
 > |---|---|---|---|
 > | SW1 | Peripheral Shutdown | `Mcu_SetMode` (peripheral set) | Steps 4.1–4.3 |
-> | SW2 | Application Core Shutdown | app core: `Mcu_SetMode(CORE_STANDBY)`; main core: `Mcu_SetMode` (`McuCoreUnderMcuControl` checked + `McuCoreClockEnable` unchecked) | Steps 4.2–4.3 |
+> | SW2 | Application Core Shutdown | app core: `Mcu_SetMode(CORE_STANDBY)`; main core: `Mcu_SetMode` (`McuCoreUnderMcuControl` checked + `McuCoreClockEnable` unchecked) | Steps 2–3 |
 > | SW3 | Flash Low-Power Handshake + PMC_LASTMILE Disable | `Mcu_InitClock`, `Mcu_SetMode(SOC_PREPARE_STANDBY)` | Step 4.6 |
-> | SW4 | Main Core Shutdown | `Mcu_SetMode(SOC_STANDBY)` with `McuMainCoreSelect` set to the main core | Step 4.12 |
+> | SW4 | Main Core Shutdown | `Mcu_SetMode(SOC_STANDBY)` with `McuMainCoreSelect` set to the main core | Steps 4.8–4.12 |
 >
 > Relevant Tresos/MCAL configuration parameters: `McuPowerMode` (`CORE_STANDBY` / `SOC_PREPARE_STANDBY` / `SOC_STANDBY`), `McuCoreUnderMcuControl`, `McuCoreClockEnable`, `McuMainCoreSelect`.
 
