@@ -73,6 +73,43 @@
 
 ![Figure7-1.png](Figure7-1.png)
 
+```mermaid
+stateDiagram-v2
+    direction TB
+    [*] --> STARTUP
+    state STARTUP {
+        [*] --> StartPreOs
+        StartPreOs --> StartPostOs : OS started
+        StartPostOs --> [*]
+    }
+    STARTUP --> UP : BswM, Os and SchM initialized
+    UP --> SLEEP
+    SLEEP --> UP
+    UP --> SHUTDOWN
+    SHUTDOWN --> STARTUP : Reset if Shutdown Target is RESET
+    state SHUTDOWN {
+        [*] --> OffPreOs
+        OffPreOs --> OffPostOs : SchM and BswM de-initialized; OS will be shutdown
+        OffPostOs --> [*]
+    }
+    SHUTDOWN --> [*] : OFF
+    state SLEEP {
+        [*] --> GoSleep
+        GoSleep --> Poll
+        GoSleep --> Halt
+        Poll --> WakeUpRestart
+        Halt --> WakeUpRestart
+        WakeUpRestart --> [*]
+    }
+    note right of UP : After Sleep the WakeupValidation is started if needed
+    note right of GoSleep : WakeUpSources will be enabled
+    note right of WakeUpRestart : WakeUpSources will be disabled
+```
+
+*（转录自规范 Figure 7.1: Phases of the ECU Manager）*
+
+**阅读说明**：本文所有流程插图均保留规范原图，并在原图下方附上**Mermaid**转录版本——两者内容一致，Mermaid 版本为文本格式，便于检索、复制与后续维护。
+
 各阶段的职责如下：
 
 | 阶段 | 职责描述 |
@@ -83,7 +120,7 @@
 | **SLEEP** | **ECU**节省能量。通常不执行代码但仍有供电，可配置为可唤醒；提供可配置的硬件睡眠模式集合（功耗与重启时间的权衡） |
 | **OFF** | **ECU**下电。仅具有集成电源控制（**integrated power control**）的唤醒源可在此状态唤醒；任何情况下**ECU**必须可启动（如通过复位事件） |
 
-图 4.2 显示了**ECU**管理器模块与**OS**、**BswM**、**RTE**、驱动等周边模块的关系。
+图 4.2 显示了**ECU**管理器模块与**OS**、**BswM**、**RTE**、驱动等周边模块的关系。该图为模块接口关系图，包含约 40 个接口的拓扑连接，结构复杂且以布局为主，不适合用时序图或状态图表达，故保留规范原图。
 
 ![Figure7-2.png](Figure7-2.png)
 
@@ -94,6 +131,40 @@
 图 5.1 显示了**ECU**的启动行为。当通过**EcuM_Init**调用时，**ECU**管理器模块接管**ECU**启动流程；调用**StartOS**时**ECU**管理器暂时交出控制权，集成商（**Integrator**）必须实现一个自动启动的**OS**任务，其第一个动作调用**EcuM_StartupTwo**以重新获得控制权。
 
 ![Figure7-3.png](Figure7-3.png)
+
+```mermaid
+sequenceDiagram
+    participant BM as Boot Menu
+    participant CIC as C Init Code
+    participant OS as «module» Os
+    participant TASK as BSW Task (OS task or cyclic call)
+    participant ECUM as «module» EcuM
+    note over BM: Reset
+    BM->>BM: Reset Vector()
+    activate CIC
+    BM->>CIC: Jump()
+    CIC->>CIC: Set up stack()
+    CIC->>ECUM: EcuM_Init()
+    activate ECUM
+    rect rgb(245, 245, 245)
+    note over ECUM: ref StartPreOS Sequence
+    end
+    ECUM->>OS: StartOS()
+    activate OS
+    OS->>OS: StartupHook()
+    OS->>TASK: ActivateTask
+    activate TASK
+    TASK->>ECUM: EcuM_StartupTwo()
+    rect rgb(245, 245, 245)
+    note over ECUM: ref StartPostOS Sequence
+    end
+    deactivate TASK
+    deactivate OS
+    deactivate ECUM
+    deactivate CIC
+```
+
+*（转录自规范 Figure 7.3: STARTUP Phase）*
 
 **注意**：在**EcuM_Init**被调用之前，**ECU**管理器模块假定**MCU**已完成最小初始化（栈已建立、代码可执行、**C**变量初始化已完成）。
 
@@ -117,18 +188,58 @@
 
 ![Figure7-4.png](Figure7-4.png)
 
+```mermaid
+sequenceDiagram
+    participant ECUM as «module» EcuM
+    participant IC as Integration Code
+    participant MCU as «module» Mcu
+    participant OS as «module» Os
+    ECUM->>IC: EcuM_AL_DriverInitZero()
+    note over IC: Init Block 0
+    ECUM->>IC: EcuM_DeterminePbConfiguration(const EcuM_ConfigType*)
+    activate ECUM
+    ECUM->>ECUM: Check consistency of configuration data()
+    opt Configuration data inconsistent
+        ECUM->>IC: EcuM_ErrorHook(ECUM_E_CONFIGURATION_DATA_INCONSISTENT)
+        note over IC: This call never returns!
+    end
+    deactivate ECUM
+    ECUM->>IC: EcuM_AL_DriverInitOne()
+    note over IC: Init Block 1
+    ECUM->>MCU: Mcu_GetResetReason(Mcu_ResetType)
+    ECUM->>ECUM: Map reset reason to wakeup source()
+    ECUM->>ECUM: EcuM_SelectShutdownTarget(Std_ReturnType, EcuM_ShutdownTargetType, EcuM_ShutdownModeType)
+    ECUM->>IC: EcuM_LoopDetection()
+    ECUM->>OS: StartOS(ECUM_DEFAULT_APP_MODE)
+```
+
+*（转录自规范 Figure 7.4: StartPreOS Sequence）*
+
 ## 5.3 StartPostOS 序列
 
 **OS**启动后，集成代码的任务调用**EcuM_StartupTwo**，**EcuM**继而执行**StartPostOS**序列（图 5.3）：
 
-1. 调用**SchM_Init**初始化**BSW**调度器；
-2. 调用**SchM_Start**启动**BSW**调度器；
-3. 调用**BswM_Init**初始化**BSW**模式管理器；
-4. 调用**SchM_StartTiming**完成**SchM**时序启动。
+1. 调用**SchM_Start**启动**BSW**调度器；
+2. 调用**BswM_Init**初始化**BSW**模式管理器；
+3. 调用**SchM_Init**初始化**BSW**调度器（为**BSW**模块使用的临界区初始化信号量）；
+4. 调用**SchM_StartTiming**启动**SchM**时序（启动**BSW**/**SW-C**的周期性事件）。
 
 此后控制权移交**BswM**，**ECU**进入**UP**阶段。
 
 ![Figure7-5.png](Figure7-5.png)
+
+```mermaid
+sequenceDiagram
+    participant ECUM as «module» EcuM
+    participant SCHM as «module» SchM
+    participant BSWM as «module» BswM
+    ECUM->>SCHM: SchM_Start(): Std_ReturnType
+    ECUM->>BSWM: BswM_Init(const BswM_ConfigType *)
+    ECUM->>SCHM: SchM_Init(const SchM_ConfigType*)
+    ECUM->>SCHM: SchM_StartTiming(const SchM_ConfigType*)
+```
+
+*（转录自规范 Figure 7.5: StartPostOS Sequence）*
 
 ## 5.4 驱动初始化
 
@@ -169,6 +280,33 @@
 
 ![Figure7-7.png](Figure7-7.png)
 
+```mermaid
+sequenceDiagram
+    participant BSWM as «module» BswM
+    participant ECUM as «module» EcuM
+    participant OS as «module» Os
+    participant IC as Integration Code
+    BSWM->>ECUM: EcuM_SelectShutdownTarget(Std_ReturnType, EcuM_ShutdownTargetType, EcuM_ShutdownModeType)
+    BSWM->>ECUM: EcuM_GoDownHaltPoll(Std_ReturnType, EcuM_UserType)
+    activate ECUM
+    rect rgb(245, 245, 245)
+    note over ECUM: ref OffPreOS Sequence
+    end
+    ECUM->>OS: ShutdownOS()
+    activate OS
+    OS->>IC: ShutdownHook()
+    activate IC
+    IC->>ECUM: EcuM_Shutdown()
+    rect rgb(245, 245, 245)
+    note over ECUM: ref OffPostOS Sequence
+    end
+    deactivate IC
+    deactivate OS
+    deactivate ECUM
+```
+
+*（转录自规范 Figure 7.7: SHUTDOWN Phase）*
+
 ## 6.3 OffPreOS 序列
 
 **OffPreOS**序列在**OS**关闭前执行，标准活动顺序如下（表 6.1）：
@@ -191,6 +329,29 @@
 
 ![Figure7-8.png](Figure7-8.png)
 
+```mermaid
+sequenceDiagram
+    participant ECUM as «module» EcuM
+    participant IC as Integration Code
+    participant BSWM as «module» BswM
+    participant SCHM as «module» SchM
+    participant OS as «module» Os
+    ECUM->>IC: EcuM_OnGoOffOne()
+    ECUM->>BSWM: BswM_Deinit()
+    ECUM->>SCHM: SchM_Deinit()
+    alt EcuMIgnoreWakeupEvValOffPreOS is TRUE
+        ECUM->>ECUM: EcuM_GetValidatedWakeupEvents(EcuM_WakeupSourceType)
+    else EcuMIgnoreWakeupEvValOffPreOS is FALSE
+        ECUM->>ECUM: EcuM_GetPendingWakeupEvents(EcuM_WakeupSourceType)
+    end
+    opt Pending wakeup events?
+        ECUM->>ECUM: EcuM_SelectShutdownTarget(Std_ReturnType, EcuM_ShutdownTargetType, EcuM_ShutdownModeType)
+    end
+    ECUM->>OS: ShutdownOS()
+```
+
+*（转录自规范 Figure 7.8: OffPreOS Sequence）*
+
 ## 6.4 OffPostOS 序列
 
 **OffPostOS**序列实现**OS**关闭后到达下电目标的最终步骤，由**EcuM_Shutdown**启动（图 6.3）：
@@ -203,6 +364,20 @@
 
 ![Figure7-9.png](Figure7-9.png)
 
+```mermaid
+sequenceDiagram
+    participant ECUM as «module» EcuM
+    participant IC as Integration Code
+    ECUM->>IC: EcuM_OnGoOffTwo()
+    alt Shutdown Target
+        ECUM->>IC: [Reset] EcuM_AL_Reset(EcuM_ResetType)
+    else Shutdown Target
+        ECUM->>IC: [Off] EcuM_AL_SwitchOff()
+    end
+```
+
+*（转录自规范 Figure 7.9: OffPostOS Sequence）*
+
 # 7. SLEEP 与唤醒流程
 
 ## 7.1 SLEEP 阶段总览
@@ -213,6 +388,34 @@
 
 ![Figure7-10.png](Figure7-10.png)
 
+```mermaid
+sequenceDiagram
+    participant BSWM as «module» BswM
+    participant ECUM as «module» EcuM
+    note over BSWM, ECUM: Halt 与 Poll 在睡眠机制上结构不同，但共享睡眠准备与恢复的序列
+    BSWM->>ECUM: EcuM_SelectShutdownTarget(Std_ReturnType, EcuM_ShutdownTargetType, EcuM_ShutdownModeType)
+    BSWM->>ECUM: EcuM_GoDownHaltPoll(Std_ReturnType, EcuM_UserType)
+    activate ECUM
+    rect rgb(245, 245, 245)
+    note over ECUM: ref GoSleep Sequence
+    end
+    alt EcuM_GoDownHaltPoll called
+        rect rgb(245, 245, 245)
+        note over ECUM: ref Halt Sequence
+        end
+    else EcuM_GoDownHaltPoll called
+        rect rgb(245, 245, 245)
+        note over ECUM: ref Polling Sequence
+        end
+    end
+    rect rgb(245, 245, 245)
+    note over ECUM: ref WakeupRestart Sequence
+    end
+    deactivate ECUM
+```
+
+*（转录自规范 Figure 7.10: SLEEP Phase）*
+
 ## 7.2 GoSleep 序列
 
 在**GoSleep**序列中，**EcuM**为即将到来的睡眠阶段配置硬件，并为下一次唤醒事件设置**ECU**（图 7.2）：
@@ -222,6 +425,23 @@
 
 ![Figure7-11.png](Figure7-11.png)
 
+```mermaid
+sequenceDiagram
+    participant ECUM as «module» EcuM
+    participant IC as Integration Code
+    participant BSWM as «module» :BswM
+    participant OS as «module» Os
+    ECUM->>BSWM: BswM_EcuM_CurrentWakeup(sources, ECUM_WKSTATUS_NONE)
+    activate BSWM
+    deactivate BSWM
+    ECUM->>IC: EcuM_EnableWakeupSources(EcuM_WakeupSourceType)
+    activate IC
+    deactivate IC
+    ECUM->>OS: GetResource(RES_AUTOSAR_ECUM_<core#>)
+```
+
+*（转录自规范 Figure 7.11: GoSleep Sequence）*
+
 ## 7.3 Halt 与 Poll 序列
 
 **Halt**序列（图 7.3）在使微控制器休眠的睡眠模式中执行：
@@ -230,11 +450,71 @@
 * 若**ECU**处于**Halt**或**Poll**时发生不规则事件（硬件复位或电源循环），**EcuM**须在**STARTUP**阶段重启**ECU**；
 * 若调度器未作为资源获取，无法保证**HALT**指令后程序流继续（**ISR Cat 2**发生后会重新调度）。
 
-**Poll**序列（图 7.4）适用于轮询睡眠模式：**EcuM**周期性地调用**EcuM_CheckWakeup**与**EcuM_SleepActivity**，通过**Mcu_SetMode**设置**MCU**模式。
-
 ![Figure7-12.png](Figure7-12.png)
 
+```mermaid
+sequenceDiagram
+    participant ECUM as «module» EcuM
+    participant IC as Integration Code
+    participant OS as «module» Os
+    participant MCU as «module» Mcu
+    participant WS as «module» Wakeup Source
+    participant PWS as «Peripheral» Wakeup Source
+    participant BSWM as «module» :BswM
+    ECUM->>OS: DisableInterruptSource(StatusType, ISRType)
+    ECUM->>IC: EcuM_GenerateRamHash()
+    ECUM->>MCU: Mcu_SetMode(Mcu_ModeType)
+    note over ECUM: HALT（微控制器停止，EcuM 不执行任何代码）
+    PWS->>WS: Interrupt()
+    WS->>ECUM: EcuM_CheckWakeup(EcuM_WakeupSourceType)
+    ECUM->>IC: EcuM_CheckWakeupHook(EcuM_WakeupSourceType)
+    IC->>IC: Activate PLL()
+    IC->>ECUM: EcuM_StartCheckWakeup()
+    IC->>WS: <Module>_CheckWakeup()
+    opt Wakeup handling
+        note over ECUM, WS: [Wakeup detected]
+        WS->>ECUM: EcuM_SetWakeupEvent(EcuM_WakeupSourceType)
+    end
+```
+
+*（转录自规范 Figure 7.12: Halt Sequence）*
+
+**Poll**序列（图 7.4）适用于轮询睡眠模式：**EcuM**周期性地调用**EcuM_CheckWakeup**与**EcuM_SleepActivity**，通过**Mcu_SetMode**设置**MCU**模式。
+
 ![Figure7-13.png](Figure7-13.png)
+
+```mermaid
+sequenceDiagram
+    participant ECUM as «module» EcuM
+    participant IC as Integration Code
+    participant OS as «module» Os
+    participant MCU as «module» Mcu
+    participant WS as «module» Wakeup Source
+    participant BSWM as «module» :BswM
+    ECUM->>OS: DisableAllInterrupts()
+    ECUM->>MCU: Mcu_SetMode(Mcu_ModeType)
+    ECUM->>OS: EnableAllInterrupts()
+    loop WHILE no pending/validated wakeup events
+        note over ECUM: Additional Condition to Loop: While (AlarmClockService Present AND EcuM_AlarmClock only pending event AND Alarm not expired)
+        ECUM->>IC: EcuM_SleepActivity()
+        loop FOR all wakeup sources that need polling
+            ECUM->>IC: EcuM_CheckWakeupHook(EcuM_WakeupSourceType)
+            IC->>WS: <Module>_CheckWakeup()
+            opt Wakeup handling
+                note over ECUM, WS: [Wakeup detected]
+                WS->>ECUM: EcuM_SetWakeupEvent(EcuM_WakeupSourceType)
+            end
+        end
+        ECUM->>ECUM: EcuM_GetPendingWakeupEvents(EcuM_WakeupSourceType)
+    end
+    alt Validation Needed
+        ECUM->>BSWM: [Yes] BswM_EcuM_CurrentWakeup(sources, ECUM_WKSTATUS_PENDING)
+    else Validation Needed
+        ECUM->>BSWM: [No] BswM_EcuM_CurrentWakeup(sources, ECUM_WKSTATUS_VALIDATED)
+    end
+```
+
+*（转录自规范 Figure 7.13: Poll Sequence）*
 
 ## 7.4 WakeupRestart 序列
 
@@ -246,6 +526,24 @@
 
 ![Figure7-14.png](Figure7-14.png)
 
+```mermaid
+sequenceDiagram
+    participant ECUM as «module» EcuM
+    participant IC as Integration Code
+    participant OS as «module» Os
+    participant MCU as «module» Mcu
+    note over ECUM: [SWS_EcuM_04066]
+    ECUM->>OS: DisableAllInterrupts()
+    ECUM->>MCU: Mcu_SetMode(Mcu_ModeType)
+    ECUM->>OS: EnableAllInterrupts()
+    ECUM->>ECUM: EcuM_GetPendingWakeupEvents(EcuM_WakeupSourceType)
+    ECUM->>IC: EcuM_DisableWakeupSources(EcuM_WakeupSourceType)
+    ECUM->>IC: EcuM_AL_DriverRestart()
+    ECUM->>OS: ReleaseResource(RES_AUTOSAR_ECUM_<core#>)
+```
+
+*（转录自规范 Figure 7.14: WakeupRestart Sequence）*
+
 ## 7.5 WakeupValidation（唤醒验证）序列
 
 由于唤醒事件可能无意产生（如**CAN**线上的**EVM**毛刺），**ECU**恢复全面运行前必须验证唤醒。验证机制对所有唤醒源相同：需要验证的唤醒事件由**EcuM_MainFunction**中的验证协议处理，超时时间由配置（**ECUC_EcuM_00148**）定义。验证可由**BSW**中任意一个（但仅一个）合适的模块（驱动、接口、句柄或管理器）通过调用**EcuM_ValidateWakeupEvent**完成。
@@ -253,6 +551,39 @@
 图 7.6 显示了以**CAN**唤醒为例的完整验证序列：**EcuM**启动唤醒源与验证超时，**CanIf**循环检查验证结果——验证成功则调用**EcuM_ValidateWakeupEvent**并通知**ComM**/**BswM**；验证超时则通知**BswM** **ECUM_WKSTATUS_EXPIRED**并停止唤醒源。
 
 ![Figure7-16.png](Figure7-16.png)
+
+```mermaid
+sequenceDiagram
+    participant ECUM as «module» EcuM
+    participant IC as Integration Code
+    participant WS as «module» Wakeup Source
+    participant COMM as «module» ComM
+    participant BSWM as «module» BswM
+    participant CANSM as «module» CanSM
+    ECUM->>ECUM: EcuM_GetPendingWakeupEvents(EcuM_WakeupSourceType)
+    ECUM->>IC: EcuM_StartWakeupSources(EcuM_WakeupSourceType)
+    activate IC
+    IC->>CANSM: CanSM_StartWakeupSource(Std_ReturnType, NetworkHandleType)
+    deactivate IC
+    ECUM->>ECUM: Start validation timeout()
+    loop WHILE no wakeup event has been validated AND timeout not expired
+        ECUM->>IC: EcuM_CheckValidation(EcuM_WakeupSourceType)
+        IC->>WS: <Module>_CheckValidation()
+        opt wakeup validated
+            WS->>ECUM: EcuM_ValidateWakeupEvent(EcuM_WakeupSourceType)
+            ECUM->>COMM: ComM_EcuM_WakeUpIndication(NetworkHandleType)
+            ECUM->>COMM: ComM_EcuM_PNCWakeUpIndication(PNCHandleType)
+            ECUM->>BSWM: BswM_EcuM_CurrentWakeup(Source, ECUM_WKSTATUS_VALIDATED)
+        end
+    end
+    opt No wakeup event was validated
+        ECUM->>BSWM: BswM_EcuM_CurrentWakeup(Source, ECUM_WKSTATUS_EXPIRED)
+        ECUM->>IC: EcuM_StopWakeupSources(EcuM_WakeupSourceType)
+        IC->>CANSM: CanSM_StopWakeupSource(Std_ReturnType, NetworkHandleType)
+    end
+```
+
+*（转录自规范 Figure 7.16: The WakeupValidation Sequence）*
 
 **注意**：**EcuM**从不对以下唤醒源执行验证：**ECUM_WKSOURCE_POWER**、**ECUM_WKSOURCE_RESET**、**ECUM_WKSOURCE_INTERNAL_RESET**、**ECUM_WKSOURCE_INTERNAL_WDG**、**ECUM_WKSOURCE_EXTERNAL_WDG**。
 
@@ -269,6 +600,24 @@
 
 ![Figure7-15.png](Figure7-15.png)
 
+```mermaid
+stateDiagram-v2
+    [*] --> NONE : Power On / Initial
+    state "ECUM_WKSTATUS_NONE<br/>entry / BswM_EcuM_CurrentWakeup(sources, NONE)" as NONE
+    NONE --> PENDING : EcuM_SetWakeupEvent(sources) [With Validation]
+    NONE --> VALIDATED : EcuM_SetWakeupEvent(sources) [No Validation]
+    PENDING --> NONE : EcuM_ClearWakeupEvent(sources)
+    state "Validation（超态）" as Validation {
+        state "ECUM_WKSTATUS_PENDING<br/>entry / BswM_EcuM_CurrentWakeup(sources, PENDING)<br/>entry / EcuM_StartWakeupSources()<br/>do / exec. wakeup validation seq." as PENDING
+        state "ECUM_WKSTATUS_VALIDATED<br/>entry / BswM_EcuM_CurrentWakeup(sources, VALIDATED)<br/>entry / ComM_EcuM_WakeUpIndication()" as VALIDATED
+        state "ECUM_WKSTATUS_EXPIRED<br/>entry / BswM_EcuM_CurrentWakeup(sources, EXPIRED)<br/>entry / EcuM_StopWakeupSources()" as EXPIRED
+        PENDING --> VALIDATED : EcuM_ValidateWakeupEvent()
+        PENDING --> EXPIRED : Timer Expired
+    }
+```
+
+*（转录自规范 Figure 7.15: Wakeup Source States；规范注明 Disabled 与 Validation 两个超态仅为便于理解而绘出）*
+
 ## 7.7 典型唤醒源时序
 
 规范第 9 章给出了各类唤醒源的详细时序。以下收集最典型的几种：
@@ -277,21 +626,254 @@
 
 ![Figure9-1.png](Figure9-1.png)
 
+```mermaid
+sequenceDiagram
+    participant ECUM as «module» EcuM
+    participant IC as Integration Code
+    participant OS as «module» Os
+    participant MCU as «module» Mcu
+    participant GPT as «module» Gpt
+    participant GPTHW as «Peripheral» GPT Hardware
+    rect rgb(235, 245, 255)
+    note over ECUM: GOSLEEP
+    ECUM->>IC: EcuM_EnableWakeupSources(EcuM_WakeupSourceType)
+    IC->>GPT: Gpt_EnableWakeup(Gpt_ChannelType)
+    IC->>GPT: Gpt_StartTimer(Gpt_ChannelType, Gpt_ValueType)
+    IC->>GPT: Gpt_SetMode(Gpt_ModeType)
+    ECUM->>OS: GetResource(RES_AUTOSAR_ECUM_<core#>)
+    end
+    rect rgb(235, 245, 255)
+    note over ECUM: SLEEP
+    ECUM->>OS: DisableAllInterrupts()
+    ECUM->>MCU: Mcu_SetMode(Mcu_ModeType)
+    note over ECUM, MCU: 若调度器未作为资源获取，无法保证 HALT 指令后程序流继续（ISR Cat 2 发生后会重新调度）
+    note over ECUM: HALT
+    end
+    GPTHW->>GPT: Wakeup interrupt()
+    GPT->>ECUM: EcuM_CheckWakeup(EcuM_WakeupSourceType)
+    ECUM->>IC: EcuM_CheckWakeupHook(EcuM_WakeupSourceType)
+    IC->>GPT: Gpt_CheckWakeup(EcuM_WakeupSourceType)
+    GPT->>ECUM: EcuM_SetWakeupEvent(EcuM_WakeupSourceType)
+    GPT-->>GPTHW: Return from interrupt()
+    note over ECUM, MCU: Execution continues after HALT instruction.
+    MCU-->>ECUM: Mcu_SetMode()
+    ECUM->>OS: EnableAllInterrupts()
+    rect rgb(235, 245, 255)
+    note over ECUM: WAKEUP I
+    ECUM->>OS: DisableAllInterrupts()
+    ECUM->>MCU: Mcu_SetMode(Mcu_ModeType)
+    ECUM->>OS: EnableAllInterrupts()
+    ECUM->>IC: EcuM_DisableWakeupSources(EcuM_WakeupSourceType)
+    IC->>GPT: Gpt_DisableWakeup(Gpt_ChannelType)
+    IC->>GPT: Gpt_SetMode(Gpt_ModeType)
+    ECUM->>OS: ReleaseResource(RES_AUTOSAR_ECUM_<core#>)
+    note over ECUM, OS: Release Scheduler resource to allow other tasks to run.
+    end
+```
+
+*（转录自规范 Figure 9.1: GPT wake up by interrupt）*
+
 **GPT 唤醒（轮询方式，图 7.9）**：若**GPT**硬件能够锁存定时器溢出，也可轮询**GPT**获取唤醒事件。
 
 ![Figure9-2.png](Figure9-2.png)
+
+```mermaid
+sequenceDiagram
+    participant ECUM as «module» EcuM
+    participant IC as Integration Code
+    participant OS as «module» Os
+    participant MCU as «module» Mcu
+    participant GPT as «module» Gpt
+    rect rgb(235, 245, 255)
+    note over ECUM: GOSLEEP
+    ECUM->>IC: EcuM_EnableWakeupSources(EcuM_WakeupSourceType)
+    IC->>GPT: Gpt_EnableWakeup(Gpt_ChannelType)
+    IC->>GPT: Gpt_StartTimer(Gpt_ChannelType, Gpt_ValueType)
+    IC->>GPT: Gpt_SetMode(Gpt_ModeType)
+    ECUM->>OS: GetResource(RES_AUTOSAR_ECUM_<core#>)
+    note over ECUM, OS: Acquire the Scheduler to prevent other tasks from running.
+    end
+    rect rgb(235, 245, 255)
+    note over ECUM: SLEEP
+    ECUM->>OS: DisableAllInterrupts()
+    ECUM->>MCU: Mcu_SetMode(Mcu_ModeType)
+    note over ECUM, MCU: Mcu_SetMode() puts the microcontroller in some power saving mode. In this mode software execution continues, but with reduced clock speed.
+    ECUM->>OS: EnableAllInterrupts()
+    loop WHILE no pending/validated events
+        ECUM->>IC: EcuM_SleepActivity()
+        ECUM->>IC: EcuM_CheckWakeupHook(EcuM_WakeupSourceType)
+        IC->>GPT: Gpt_CheckWakeup(EcuM_WakeupSourceType)
+        opt Wakeup detected
+            GPT->>ECUM: EcuM_SetWakeupEvent(EcuM_WakeupSourceType)
+        end
+    end
+    end
+    rect rgb(235, 245, 255)
+    note over ECUM: WAKEUP I
+    ECUM->>OS: DisableAllInterrupts()
+    ECUM->>MCU: Mcu_SetMode(Mcu_ModeType)
+    ECUM->>OS: EnableAllInterrupts()
+    ECUM->>IC: EcuM_DisableWakeupSources(EcuM_WakeupSourceType)
+    IC->>GPT: Gpt_DisableWakeup(Gpt_ChannelType)
+    IC->>GPT: Gpt_SetMode(Gpt_ModeType)
+    ECUM->>OS: ReleaseResource(RES_AUTOSAR_ECUM_<core#>)
+    note over ECUM, OS: Release Scheduler resource to allow other tasks to run.
+    end
+```
+
+*（转录自规范 Figure 9.2: GPT wake up by polling）*
 
 **CAN 收发器唤醒（中断方式，图 7.10）**：**CAN**总线活动引起唤醒，中断通常由**ICU**驱动处理，**CanTrcv**/**CanIf**将事件上报**EcuM**。
 
 ![Figure9-4.png](Figure9-4.png)
 
+```mermaid
+sequenceDiagram
+    participant ECUM as «module» EcuM
+    participant IC as Integration Code
+    participant OS as «module» Os
+    participant MCU as «module» Mcu
+    participant ICU as «module» Icu
+    participant CANIF as «module» CanIf
+    participant CAN as «module» Can
+    participant CANTRCV as «module» CanTrcv
+    participant CANCTRL as «Peripheral» CanController
+    participant ETHHW as «Peripheral» ETH Hardware (PHY)
+    rect rgb(235, 245, 255)
+    note over ECUM: GOSLEEP
+    ECUM->>IC: EcuM_EnableWakeupSources(EcuM_WakeupSourceType)
+    IC->>CANIF: CanIf_SetTrcvWakeupMode(uint8, CanTrcv_TrcvWakeupModeType)
+    CANIF->>CANTRCV: CanTrcv_SetWakeupMode(uint8, CanTrcv_TrcvWakeupModeType)
+    IC->>ICU: Icu_EnableWakeup(Icu_ChannelType)
+    ECUM->>OS: GetResource(uint8)
+    note over ECUM, CANIF: CanSM will have called CanIf_SetControllerMode and CanIf_SetTransceiverMode when going to sleep.
+    end
+    rect rgb(235, 245, 255)
+    note over ECUM: SLEEP
+    ECUM->>OS: DisableAllInterrupts()
+    ECUM->>MCU: Mcu_SetMode(Mcu_ModeType)
+    note over ECUM, MCU: 若调度器未作为资源获取，无法保证 HALT 指令后程序流继续（ISR Cat 2 发生后会重新调度）
+    note over ECUM: HALT
+    end
+    ETHHW->>ICU: Wakeup interrupt()
+    ICU->>ECUM: EcuM_CheckWakeup(EcuM_WakeupSourceType)
+    ECUM->>IC: EcuM_CheckWakeupHook(EcuM_WakeupSourceType)
+    IC->>IC: activate PLL()
+    IC->>CANIF: CanIf_CheckWakeup(EcuM_WakeupSourceType): Std_ReturnType
+    CANIF->>CANTRCV: CanTrcv_CheckWakeup(uint8): Std_ReturnType
+    CANTRCV->>ECUM: EcuM_SetWakeupEvent(EcuM_WakeupSourceType)
+    ICU-->>ETHHW: Return from interrupt()
+    note over ECUM, MCU: Execution continues after HALT instruction.
+    rect rgb(235, 245, 255)
+    note over ECUM: WAKEUP I
+    ECUM->>OS: EnableAllInterrupts()
+    ECUM->>OS: DisableAllInterrupts()
+    ECUM->>MCU: Mcu_SetMode(Mcu_ModeType)
+    ECUM->>OS: EnableAllInterrupts()
+    ECUM->>IC: EcuM_DisableWakeupSources(EcuM_WakeupSourceType)
+    IC->>ICU: Icu_DisableWakeup(Icu_ChannelType)
+    IC->>CANIF: CanIf_SetTrcvWakeupMode(uint8, CanTrcv_TrcvWakeupModeType)
+    CANIF->>CANTRCV: CanTrcv_SetWakeupMode(uint8, CanTrcv_TrcvWakeupModeType)
+    ECUM->>OS: ReleaseResource(uint8)
+    note over ECUM, OS: Release Scheduler resource to allow other tasks to run.
+    end
+```
+
+*（转录自规范 Figure 9.4: CAN transceiver wake up by interrupt）*
+
 **CAN 控制器/收发器唤醒（轮询方式，图 7.11）**：**EcuM**周期调用**EcuM_CheckWakeup**，**CanIf**/**CanTrcv**检查硬件状态。
 
 ![Figure9-6.png](Figure9-6.png)
 
+```mermaid
+sequenceDiagram
+    participant ECUM as «module» EcuM
+    participant IC as Integration Code
+    participant OS as «module» Os
+    participant MCU as «module» Mcu
+    participant ICU as «module» Icu
+    participant CANIF as «module» CanIf
+    participant CAN as «module» Can
+    participant CANTRCV as «module» CanTrcv
+    participant CANCTRL as «Peripheral» CanController
+    participant ETHHW as «Peripheral» ETH Hardware (PHY)
+    rect rgb(235, 245, 255)
+    note over ECUM: GOSLEEP
+    ECUM->>IC: EcuM_EnableWakeupSources(EcuM_WakeupSourceType)
+    ECUM->>OS: GetResource(uint8)
+    note over ECUM, OS: Acquire the Scheduler to prevent other tasks from running.
+    end
+    rect rgb(235, 245, 255)
+    note over ECUM: SLEEP
+    ECUM->>OS: DisableAllInterrupts()
+    ECUM->>MCU: Mcu_SetMode(Mcu_ModeType)
+    note over ECUM, MCU: Mcu_SetMode() puts the microcontroller in some power saving mode. In this mode software execution continues, but with reduced clock speed.
+    ECUM->>OS: EnableAllInterrupts()
+    loop WHILE no pending/validated events
+        ECUM->>IC: EcuM_SleepActivity()
+        ECUM->>IC: EcuM_CheckWakeupHook(EcuM_WakeupSourceType)
+        IC->>CANIF: CanIf_CheckWakeup(EcuM_WakeupSourceType): Std_ReturnType
+        alt WakeupSource parameter of CanIf_CheckWakeup()
+            CANIF->>CAN: [CAN Controller] Can_CheckWakeup(Std_ReturnType, uint8)
+            CAN->>ECUM: EcuM_SetWakeupEvent(EcuM_WakeupSourceType)
+        else WakeupSource parameter of CanIf_CheckWakeup()
+            CANIF->>CANTRCV: [CAN Transceiver] CanTrcv_CheckWakeup(Std_ReturnType, uint8)
+            CANTRCV->>ECUM: EcuM_SetWakeupEvent(EcuM_WakeupSourceType)
+        end
+    end
+    end
+    rect rgb(235, 245, 255)
+    note over ECUM: WAKEUP I
+    ECUM->>OS: DisableAllInterrupts()
+    ECUM->>MCU: Mcu_SetMode(Mcu_ModeType)
+    ECUM->>OS: EnableAllInterrupts()
+    ECUM->>IC: EcuM_DisableWakeupSources(EcuM_WakeupSourceType)
+    ECUM->>OS: ReleaseResource(uint8)
+    note over ECUM, OS: Release Scheduler resource to allow other tasks to run.
+    end
+    note over ECUM: WAKEUP VALIDATION
+```
+
+*（转录自规范 Figure 9.6: CAN controller or transceiver wake up by polling）*
+
 **CAN 唤醒验证（图 7.12）**：检测到唤醒事件后，**CanSM**启动唤醒源，**EcuM**启动验证超时；**CanIf**循环检查验证结果，**CAN**成功验证由正确接收的消息指示。验证成功/超时/未验证的分支处理如图所示。
 
 ![Figure9-7.png](Figure9-7.png)
+
+```mermaid
+sequenceDiagram
+    participant ECUM as «module» EcuM
+    participant IC as Integration Code
+    participant CANSM as «module» CanSM
+    participant MCU as «module» Mcu
+    participant ICU as «module» Icu
+    participant CANIF as «module» CanIf
+    rect rgb(235, 245, 255)
+    note over ECUM: WAKEUP VALIDATION
+    ECUM->>IC: EcuM_StartWakeupSources(EcuM_WakeupSourceType)
+    IC->>CANSM: CanSM_StartWakeupSource(Std_ReturnType, NetworkHandleType)
+    ECUM->>ECUM: Start validation timeout()
+    loop Validate Wakeup Event
+        ECUM->>IC: EcuM_CheckValidation(EcuM_WakeupSourceType)
+        IC->>CANIF: CanIf_CheckValidation(EcuM_WakeupSourceType)
+        alt Check Validation Result
+            CANIF->>ECUM: [SUCCESSFUL VALIDATION] EcuM_ValidateWakeupEvent(EcuM_WakeupSourceType)
+            ECUM->>ECUM: Stop validation timeout()
+            note over ECUM, CANIF: On CAN successful validation is indicated by a correctly received message
+        else Check Validation Result
+            note over ECUM: [NO VALIDATION YET]
+        else Check Validation Result
+            note over ECUM: [VALIDATION TIMEOUT]
+            ECUM->>ECUM: Detect validation timeout()
+        end
+    end
+    ECUM->>IC: EcuM_StopWakeupSources(EcuM_WakeupSourceType)
+    IC->>CANSM: CanSM_StopWakeupSource(Std_ReturnType, NetworkHandleType)
+    end
+    note over ECUM: GOSLEEP
+```
+
+*（转录自规范 Figure 9.7: CAN wake up validation）*
 
 **集成电源控制的唤醒源**：**SLEEP**可由控制**MCU**电源供应的系统芯片实现（如带集成电源的**CAN**收发器，其在应用请求时切断电源、在**CAN**活动时打开电源）。此时对**EcuM**而言**SLEEP**就像**OFF**，被动**CAN**唤醒看起来就像上电复位，**ECU**将在唤醒事件后继续**STARTUP**序列——唤醒验证仍然必要，且系统设计者须负责检查**CAN**收发器的唤醒原因并通过**EcuM_SetWakeupEvent**/**EcuM_ClearWakeupEvent**将信息传递给**EcuM**。
 
@@ -310,6 +892,17 @@
 **Bootloader**、系统供应商**Bootloader**和应用是独立的程序镜像，多数情况下可以分别刷写。从一个镜像进入另一个镜像的唯一方式是通过复位。启动菜单（**Boot Menu**）根据所选的启动目标（**Boot Target**）分支进入相应的镜像（图 8.1）。
 
 ![Figure7-36.png](Figure7-36.png)
+
+```mermaid
+flowchart LR
+    R([Reset]) --> BM([Boot Menu])
+    BM --> DT{Boot Target}
+    DT --> APP([Application])
+    DT --> BL([Bootloader])
+    DT --> SSBL([SS Bootloader])
+```
+
+*（转录自规范 Figure 7.36: Selection of Boot Targets）*
 
 ## 8.3 复位相关模块交互
 
@@ -331,6 +924,39 @@
 
 ![Figure7-18.png](Figure7-18.png)
 
+```mermaid
+sequenceDiagram
+    box Master Core
+        participant BSWM as «module» :BswM
+        participant MECUM as «module» Master: EcuM
+        participant MCOS as «module» Master: McOs
+    end
+    box Slave Core n
+        participant SECUM as «module» Slave n: EcuM
+        participant SSCHM as «module» Slave n: SchM
+        participant SCOS as «module» Slave n: :McOs
+    end
+    BSWM->>MECUM: EcuM_GoDownHaltPoll(Std_ReturnType, EcuM_UserType)
+    activate MECUM
+    note over MECUM: Set a shutdown flag which can be read by all EcuMs of all slave cores
+    note over MECUM: BSW De-Initialization on Master Core
+    loop until all cores done
+        opt resource or spinlock already taken
+            MECUM->>MCOS: GetEvent(Mask)
+        end
+        MECUM->>MCOS: WaitEvent(Mask)
+    end
+    note over MECUM: Unset the shutdown flag
+    MECUM->>MCOS: ShutdownAllCores(StatusType)
+    deactivate MECUM
+    SECUM->>SECUM: EcuM_MainFunction()
+    note over SECUM: BSW De-Initialization on Slave Core
+    note over SECUM: Shutdown flag is read by the slave core
+    SECUM->>SCOS: SetEvent(TaskId, Mask)
+```
+
+*（转录自规范 Figure 7.18: Master / Slave Core Shutdown Synchronization，规范注明此为示例而非强制流程）*
+
 # 10. BswM 配套规则（集成指南）
 
 根据**Guide to Mode Management**，**BswM**的规则（**rules**）和动作列表（**action lists**）配置是项目与**ECU**特定的，AUTOSAR 无法标准化，但规范给出了典型场景的配置指导：
@@ -347,13 +973,13 @@
 
 **分区重启（Reset of partitions）**：某分区出错需重启时，该分区的**BSW**模块须重新初始化；通过**BswMPartitionRestarted**模式请求源确定被重启的分区。
 
-**错误处理**：**EcuM**忽略初始化期间发生的所有类型错误（如初始化函数返回值）——初始化是配置问题（**EcuMDriverInitListZero**、**EcuMDriverInitListOne**、**EcuMDriverRestartList**），无法标准化。**BSW**模块自行负责向**DEM**或**DET**报告初始化错误并采取特殊措施。
+**错误处理**：**EcuM**忽略初始化期间发生的所有类型错误（如初始化函数返回值）——初始化是配置问题（**EcuMDriverInitListZero**、**EcuMDriverInitListOne**、**EcuMDriverInitRestartList**），无法标准化。**BSW**模块自行负责向**DEM**或**DET**报告初始化错误并采取特殊措施。
 
 # 11. 小结
 
 本文档基于**AUTOSAR CP R22-11** **ECU**状态管理器规范及**4.4.0**模式管理指南，整理了标准**ECU**电源状态管理的完整流程：
 
-1. **Startup**：**EcuM_Init**前最小**MCU**初始化 → **StartPreOS**（中断设置、驱动**Init Block 0/1**、配置一致性检查、复位原因获取、默认下电目标选择、启动**OS**）→ **StartPostOS**（**SchM_Init/Start**、**BswM_Init**、**SchM_StartTiming**）→ **BswM**初始化其余**BSW**并启动**RTE** → **UP**阶段。
+1. **Startup**：**EcuM_Init**前最小**MCU**初始化 → **StartPreOS**（中断设置、驱动**Init Block 0/1**、配置一致性检查、复位原因获取、默认下电目标选择、启动**OS**）→ **StartPostOS**（**SchM_Start**、**BswM_Init**、**SchM_Init**、**SchM_StartTiming**）→ **BswM**初始化其余**BSW**并启动**RTE** → **UP**阶段。
 2. **下电**：**BswM**选择下电目标（**OFF**/**SLEEP**/**RESET**）并调用**EcuM_GoDownHaltPoll** → **OffPreOS**（**BswM_Deinit**、**SchM_Deinit**、唤醒事件检查、必要时改设**RESET**目标）→ **ShutdownOS** → **ShutdownHook**调用**EcuM_Shutdown** → **OffPostOS**（**EcuM_AL_SwitchOff**或**EcuM_AL_Reset**）。
 3. **唤醒**：**GoSleep**（使能唤醒源）→ **Halt/Poll**（**RAM**哈希、**Mcu_SetMode**）→ 唤醒事件 → **WakeupRestart**（驱动重启、唤醒回调重新布防）→ **WakeupValidation**（**NONE**→**PENDING**→**VALIDATED**/**EXPIRED**状态机）。
 4. **Reset**：作为下电目标经**OffPostOS**的**EcuM_AL_Reset**执行；支持**Mcu_PerformReset**、**WdgM_PerformReset**、**DIO/SPI**触发等多种复位模态；诊断**ECU**复位由**DCM**经**BswM**协调；启动目标（**Boot Target**）选择依赖复位在**Bootloader**与应用镜像间分支。
