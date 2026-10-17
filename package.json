@@ -1,5 +1,5 @@
 {
     "scripts": {
-        "serve": "bundle exec jekyll serve"
+        "serve": "mkdocs serve"
     }
 }

@@ -1,0 +1,234 @@
+site_name: 米多papa的小屋
+site_description: A slow sparrow should make an early start. Learning a endless life
+site_url: https://melodypapa.github.io/
+repo_url: https://github.com/melodypapa/melodypapa.github.io
+repo_name: melodypapa/melodypapa.github.io
+copyright: Copyright &copy; melodypapa
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: 切换到浅色模式
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: pink
+      toggle:
+        icon: material/weather-sunny
+        name: 切换到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: pink
+      toggle:
+        icon: material/weather-night
+        name: 切换到系统模式
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search
+  - blog:
+      blog_dir: blog
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - tables
+  - admonition
+  - toc:
+      slugify: !!python/name:markdown.extensions.toc.slugify_unicode
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+nav:
+  - 首页: index.md
+  - 博客: blog/index.md
+  - ARM Cortex:
+    - cortex/index.md
+    - "背景概念":
+      - cortex/concept/index.md
+      - cache:
+        - "多级缓存架构（Multilevel Cache Organisation）": cortex/concept/cache/multilevel_cache/index.md
+        - "透写和回写缓存（Write Through and Write Back in Cache）": cortex/concept/cache/write_through_and_back_in_cache/index.md
+      - communication:
+        - "什么是SerDes": cortex/concept/communication/serdes/index.md
+    - m7_processor:
+      - "ARM架构的内存模式（Arm Architecture Memory Model）": cortex/m7_processor/arm_architecture_memory_mode/index.md
+      - "ARM 异常模型（Exception model）": cortex/m7_processor/exception_model/index.md
+      - "Cortex-M7 指令集": cortex/m7_processor/instruction_set/index.md
+      - "嵌套向量中断控制器": cortex/m7_processor/nested_vectored_interrupt_controller/index.md
+      - "Cortex-M7 程序状态寄存器": cortex/m7_processor/program_status_register/index.md
+      - "ARM Cortex MPU 内存保护单元": cortex/m7_processor/protected_memory_system_archi_pmsav7/index.md
+      - "系统地址映射": cortex/m7_processor/system_address_map/index.md
+    - r52p_processor:
+      - "内存保护单元（Memory Protection Unit）": cortex/r52p_processor/memory_protection_unit/index.md
+      - "内存系统（Memory System）": cortex/r52p_processor/memory_system/index.md
+      - "Cortex®-R52+ 程序员模型（Programmers Model）": cortex/r52p_processor/programmers_model/index.md
+      - "系统控制（System Control）": cortex/r52p_processor/system_control/index.md
+  - CP AUTOSAR:
+    - autosar/index.md
+    - communication:
+      - "AUTOSAR CAN Driver（CAN驱动程序）":
+        - autosar/communication/can_driver/index.md
+        - Full-CAN vs. Basic-CAN: autosar/communication/can_driver/full_can_vs_basic_can.md
+      - AUTOSAR CAN Interface: autosar/communication/can_interface/index.md
+      - "AUTOSAR CAN NM（CAN网络管理）":
+        - autosar/communication/can_network_management/index.md
+        - r21_11:
+          - AUTOSAR CAN NM: autosar/communication/can_network_management/r21_11/index_r21_11.md
+      - AUTOSAR CAN Transceiver Driver: autosar/communication/can_transceiver_driver/index.md
+      - AUTOSAR COM Based Transformer: autosar/communication/com_based_transformer/index.md
+      - "Data Distribution Service for Classic Platform（）": autosar/communication/data_distribution service/index.md
+      - "E2E Transformer (E2E转换器)": autosar/communication/e2e_transformer/index.md
+      - "AUTOSAR Ethernet Driver（以太网驱动程序）": autosar/communication/ethernet_driver/index.md
+      - "AUTOSAR Ethernet Interface（以太网接口）": autosar/communication/ethernet_interface/index.md
+      - "AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）": autosar/communication/ethernet_switch_driver/index.md
+      - fvm:
+        - "AUTOSAR FVM (Freshness Value Manager)": autosar/communication/fvm/fvm.md
+      - AUTOSAR LIN Driver: autosar/communication/lin_driver/index.md
+      - "AUTOSAR LinIf (LIN Interface)": autosar/communication/lin_interface/index.md
+      - mirror:
+        - "AUTOSAR Mirror （总线镜像）": autosar/communication/mirror/mirror.md
+      - "AUTOSAR PduR (PDU Router)": autosar/communication/pdu_router/index.md
+      - "AUTOSAR SecOC (Secure Onboard Communication)": autosar/communication/sec_oc/index.md
+      - "AUTOSAR SD (Service Discovery)": autosar/communication/service_discovery/index.md
+      - SoAd:
+        - "AUTOSAR SoAd (Socket Adaptor)": autosar/communication/SoAd/SoAd.md
+      - "AUTOSAR UdpNm (UDP Network Management)": autosar/communication/udp_network_management/index.md
+    - crypto:
+      - "AUTOSAR Crypto Driver（加密驱动程序）": autosar/crypto/crypto_driver/index.md
+      - "AUTOSAR Crypto Service Manager（加密服务管理器）": autosar/crypto/crypto_service_manager/index.md
+    - diagnostics:
+      - "AUTOSAR Diagnostic Communication Manager（诊断通信管理器）": autosar/diagnostics/diagnostic_communication_manager/index.md
+      - "AUTOSAR Diagnostic Event Manager（诊断事件管理器）": autosar/diagnostics/diagnostic_event_manager/index.md
+    - general:
+      - "AUTOSAR ECU State Manager（ECU状态管理器）": autosar/general/platform_types/index.md
+    - io:
+      - "AUTOSAR ADC Driver（模数转换器驱动）": autosar/io/adc_driver/index.md
+      - "AUTOSAR ICU Driver（模数转换器驱动）": autosar/io/icu_driver/index.md
+      - "AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）": autosar/io/iohwab/index.md
+    - memory:
+      - "AUTOSAR BndM（非易失性大容量数据管理器）": autosar/memory/bulk_nv_data_manager/index.md
+      - "AUTOSAR FLS（闪存驱动程序）": autosar/memory/flash_driver/index.md
+      - "AUTOSAR FEE（闪存EEPROM仿真）": autosar/memory/flash_eeprom_emulation/index.md
+      - "AUTOSAR Memory Access（存储访问）": autosar/memory/memory_access/index.md
+      - "AUTOSAR Memory Mapping（AUTOSAR 内存映射）": autosar/memory/memory_mapping/index.md
+      - "NV数据处理指南": autosar/memory/nv_data_handling_guideline/index.md
+      - "AUTOSAR NVM（非易失性存储管理器）": autosar/memory/nvram_manager/index.md
+    - methodology_templates:
+      - "AUTOSAR BSWMDT（基础软件模块描述模板）": autosar/methodology_templates/basic_software_module_description_template/index.md
+    - mode_management:
+      - "AUTOSAR Basic Software Mode Manager（BSW模式管理器）": autosar/mode_management/basic_software_mode_manager/index.md
+      - "AUTOSAR ECU State Manager（ECU状态管理器）": autosar/mode_management/ecu_state_manager/index.md
+      - "模式管理指南（Guide to Mode Management）": autosar/mode_management/guide_to_mode_management/index.md
+    - "AUTOSAR ECU 电源状态管理：启动、下电、唤醒与复位流程": autosar/power/index.md
+    - system_services:
+      - "AUTOSAR FiM（功能禁止管理器）": autosar/system_services/function_inhibition_manager/index.md
+      - "AUTOSAR Operating System（操作系统）": autosar/system_services/operating_system/index.md
+      - "AUTOSAR Time Service（时间服务）": autosar/system_services/time_service/index.md
+    - template:
+      - "1. 一段话总结": autosar/template/generic_structure/index.md
+      - timimg_extension:
+        - "时序扩展规范（Timing Extension）": autosar/template/timimg_extension/indx.md
+  - automotive:
+    - ethernet:
+      - "以太网帧格式": automotive/ethernet/frame_format/index.md
+  - EB Tresos:
+    - eb_tresos/index.md
+    - Guided Configuration: eb_tresos/guided_configuration/index.md
+    - Safety OS: eb_tresos/safety_os/index.md
+    - "工作流 API": eb_tresos/workflow/index.md
+  - NXP:
+    - nxp/index.md
+    - s32g2:
+      - "引导（Boot）": nxp/s32g2/boot/index.md
+      - "Extended Resource Domain Controller (XRDC)": nxp/s32g2/extended_resource_domain_controller/index.md
+      - "Fault Collection and Control Unit (FCCU)": nxp/s32g2/fault_collection_and_control_unit/index.md
+      - "Network-on-Chip (NoC)": nxp/s32g2/network_on_chip/index.md
+      - "周期性中断定时器 (**PIT**)": nxp/s32g2/periodic_interrupt_timer/index.md
+      - "Quad Serial Peripheral Interface (QuadSPI)": nxp/s32g2/quad_serial_peripheral_interface/index.md
+      - "实时时钟 (**RTC**)": nxp/s32g2/real_time_clock/index.md
+      - "复位（**Reset**）": nxp/s32g2/reset/index.md
+      - "信息安全 (**Security**)": nxp/s32g2/security/index.md
+      - "Semaphores2 (SEMA42)": nxp/s32g2/semaphores2/index.md
+      - "系统定时器模块 (**STM**)": nxp/s32g2/system_timer_module/index.md
+    - S32K5xx:
+      - nxp/S32K5xx/index.md
+      - mpu_concept:
+        - "S32K5 MPU 速查表": nxp/S32K5xx/mpu_concept/MPU_Quick_Reference_CN.md
+        - S32K5 MPU Quick Reference: nxp/S32K5xx/mpu_concept/MPU_Quick_Reference_EN.md
+        - "S32K5xx MPU 内存保护单元设计方案（Cortex-M7 + Cortex-R52）": nxp/S32K5xx/mpu_concept/S32K5_R52_M7_MPU_Design_CN.md
+        - "MPU Design for S32K5xx (Cortex-M7 + Cortex-R52)": nxp/S32K5xx/mpu_concept/S32K5_R52_M7_MPU_Design_EN.md
+      - power_designs:
+        - "S32K5 MCAL 驱动 API 与休眠设计方案映射分析": nxp/S32K5xx/power_designs/MCAL_API_MAPPING.md
+        - "R52 和 M7 双核独立 OS 的休眠设计方案": nxp/S32K5xx/power_designs/S32K5_R52_M7_Sleep_Design_CN.md
+        - "Design of Sleep Mode for R52 and M7 (Two Independent OSes)": nxp/S32K5xx/power_designs/S32K5_R52_M7_Sleep_Design_EN.md
+  - "信息安全":
+    - cybersecurity/index.md
+    - concept:
+      - "加密术语": cybersecurity/concept/terms/index.md
+  - "语言":
+    - languages/index.md
+    - Deutsch:
+      - languages/deutsch/index.md
+      - Berliner_Platz_1:
+        - "Lektion-1 Hallo!": languages/deutsch/Berliner_Platz_1/Lektion_01/index.md
+        - "Lektion-2 Wie geht's":
+          - languages/deutsch/Berliner_Platz_1/Lektion_02/index.md
+          - Unit 9 im SuperMarkt: languages/deutsch/Berliner_Platz_1/Lektion_02/unit_09/index.md
+        - "Lektion-2 Was kostet das?": languages/deutsch/Berliner_Platz_1/Lektion_03/index.md
+        - "Lektion-5 Was darf's sein?": languages/deutsch/Berliner_Platz_1/Lektion_05/index.md
+        - Lektion 6 - Familienleben: languages/deutsch/Berliner_Platz_1/Lektion_06/index.md
+        - "Lektion 7 - Willkommen in Berlin!": languages/deutsch/Berliner_Platz_1/Lektion_07/index.md
+        - "Lektion 8 - Zimmer, Küche, Bad": languages/deutsch/Berliner_Platz_1/Lektion_08/index.md
+        - "Lektion 9 - Was ist passiert?": languages/deutsch/Berliner_Platz_1/Lektion_09/index.md
+        - Lektion 10 - Ich arbeite bei...: languages/deutsch/Berliner_Platz_1/Lektion_10/index.md
+        - Lektion 10 - Gesund und fit: languages/deutsch/Berliner_Platz_1/Lektion_11/index.md
+        - "Lektion 13 - Das Steht dir gut!": languages/deutsch/Berliner_Platz_1/Lektion_13/index.md
+      - Berliner_Platz_4:
+        - Lektion 13 - Wer bin ich: languages/deutsch/Berliner_Platz_4/Lektion_37/index.md
+    - French:
+      - languages/french/index.md
+      - Lesson 0: languages/french/lesson_0_0/index.md
+  - linux:
+    - Embedded Linux Concept: linux/embedded_linux/index.md
+  - "教育":
+    - education/index.md
+    - "信息技术":
+      - education/informatik/index.md
+      - "算法与程序设计": education/informatik/chapter2/index.md
+    - mathematics:
+      - greek_alphabet: education/mathematics/greek_alphabet.md
+      - high_school_1:
+        - "集合初步（1）": education/mathematics/high_school_1/lesson_001/index.md
+        - "集合初步（2）": education/mathematics/high_school_1/lesson_002/index.md
+        - "集合初步（3）": education/mathematics/high_school_1/lesson_003/index.md
+        - "集合初步（4）": education/mathematics/high_school_1/lesson_004/index.md
+        - "常用逻辑用语（1）": education/mathematics/high_school_1/lesson_005/index.md
+        - "常用逻辑用语（2）": education/mathematics/high_school_1/lesson_006/index.md
+        - "常用逻辑用语（3）": education/mathematics/high_school_1/lesson_007/index.md
+  - About: about.md
