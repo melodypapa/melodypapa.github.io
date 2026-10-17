@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: "3.x"
           cache: pip
-      - run: pip install mkdocs-material
+      - run: pip install -r requirements.txt
       - run: mkdocs build --strict --site-dir site
       - uses: actions/upload-pages-artifact@v3
         with:
