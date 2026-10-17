@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block site_nav %}
+  {% if nav %}
+    {% if page.meta and page.meta.hide %}
+      {% set hidden = "hidden" if "navigation" in page.meta.hide %}
+    {% endif %}
+    <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" {{ hidden }}>
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          {% include "partials/nav.html" %}
+          <aside class="md-useful-links" aria-label="常用链接">
+            <div class="md-useful-links__title">常用链接</div>
+            <ul>
+              <li><a href="https://www.autosar.org/standards/classic-platform/" target="_blank" rel="noopener">AUTOSAR Classic Platform 规范</a></li>
+              <li><a href="https://www.nxp.com/" target="_blank" rel="noopener">NXP 官网</a></li>
+              <li><a href="https://www.elektrobit.com/" target="_blank" rel="noopener">Elektrobit（EB tresos）</a></li>
+              <li><a href="https://developer.arm.com/documentation/" target="_blank" rel="noopener">ARM Developer 文档</a></li>
+              <li><a href="https://www.infineon.com/" target="_blank" rel="noopener">Infineon（AURIX TC3xx）</a></li>
+              <li><a href="https://github.com/melodypapa/melodypapa.github.io" target="_blank" rel="noopener">本站 GitHub 仓库</a></li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </div>
+    {% if "toc.integrate" not in features %}
+      {% if page.meta and page.meta.hide %}
+        {% set hidden = "hidden" if "toc" in page.meta.hide %}
+      {% endif %}
+      <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" {{ hidden }}>
+        <div class="md-sidebar__scrollwrap">
+          <div class="md-sidebar__inner">
+            {% include "partials/toc.html" %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+{% endblock %}

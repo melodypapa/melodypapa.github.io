@@ -1,0 +1,42 @@
+/* 常用链接 block injected into the primary sidebar (overrides/main.html) */
+
+.md-useful-links {
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-useful-links__title {
+  margin: 0 0 0.4rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--md-default-fg-color--light);
+}
+
+.md-useful-links ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.md-useful-links li {
+  margin: 0.3rem 0;
+}
+
+.md-useful-links a {
+  font-size: 0.72rem;
+  color: var(--md-default-fg-color--light);
+  text-decoration: none;
+}
+
+.md-useful-links a::before {
+  content: "↗";
+  margin-right: 0.3rem;
+  color: var(--md-primary-fg-color);
+}
+
+.md-useful-links a:hover {
+  color: var(--md-accent-fg-color);
+}
