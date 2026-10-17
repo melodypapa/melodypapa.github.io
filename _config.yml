@@ -27,6 +27,16 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
 github_username:  melodypapa
 
+# Pages shown in the header nav (minima lists every titled page when unset)
+header_pages:
+  - about.markdown
+  - autosar/index.md
+  - cortex/index.md
+  - eb_tresos/index.md
+  - cybersecurity/index.md
+  - languages/index.md
+  - "education/ index.md"
+
 # Build settings
 theme: minima
 plugins:
