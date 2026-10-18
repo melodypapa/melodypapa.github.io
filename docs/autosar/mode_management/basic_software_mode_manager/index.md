@@ -773,6 +773,30 @@ DataReceiveEvent AppModeRequestEvent {
 
 **AUTOSAR_EXP_ModemanagementGuide**文档包含了有关以太网交换机端口组切换的**BswM**配置指南。
 
+### 6.8. 服务发现控制
+
+#### 6.8.1. 一般要求
+
+除了请求和查询模式的通用方式之外，**BswM**还提供了一个标准化的接口，供应用层**SW-C**控制服务发现（**Service Discovery**）。
+
+基于**SW-C**描述和**ECUC**的输入，应按照后续各章节的描述生成配置。
+
+生成的输入是具有**ServerServiceOffer**、**ServerEventSubscriptionStatus**、**ClientEventSubscription**和**ClientEventSubscriptionStatus**的**RoleBasedDataAssignment**的端口，以及这些端口对应的**RepresentedPortGroups**。
+
+有关如何对必要的端口及其关系进行建模的详细信息，请参阅模式管理指南（参见相关文档[2]）中第13.6.5节"面向服务的用例"（**Service Oriented Use Cases**）。
+
+配置工具需要完成以下步骤：
+
+1. 分析**SW-C**描述，找出受影响的端口
+2. 分析**ECUC**，推导出服务发现中相关的实体
+3. 创建规则（**Rule**）和动作列表（**ActionList**），以实现由**BswM**提供的期望行为
+4. 为来自服务发现模块的通知创建**BswMModeRequestSources**
+5. 创建作为规则输入所需的**S/R**端口的**BswM**一侧
+6. 创建用于向**SW-C**进行指示的所提供的模式切换（**ModeSwitch**）端口的**BswM**一侧
+7. 基于明确定义的命名规则，在**BswM**、服务**SW-C**与应用**SW-C**之间连接端口
+
+命名模式（**naming patterns**）用于简化**BswM**与**SW-C**之间端口的映射。这些命名模式的设计使得可以对（部分）名称进行匹配。通过尽可能地使用**SW-C**端口的名称，实现了接口的解耦，使**SW-C**无需感知底层的通信细节。
+
 ## 7. API规范
 
 ### 7.1. 函数定义
