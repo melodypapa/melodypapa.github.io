@@ -197,3 +197,99 @@ BswM_CanSM_CurrentState( NetworkHandleType Network, CanSM_BswMCurrentStateType C
    * BswMUserCallout
 2. 由**ModeSwitchInterface**类型化的**PPort**（**BswMSwitchPort**）：对于此类型的每个容器，如果满足某个配置条件（参见**BswM SWS**），**BswM**必须在其服务组件描述中创建一个对应的**PPort**。
 3. 模式声明组原型（**SwitchPort**）：对于此类型的每个容器，如果满足某个配置条件（参见**BswM SWS**），**BswM**必须在其基础软件模块描述中以**providedModeGroup**的角色创建一个对应的模式声明组原型。在这种情况下，**BswM**同样作为模式管理器，但模式机实例由调度管理器维护。
+
+#### 3.2.2. 用伪代码定义的接口
+
+以下各小节用伪代码定义**BswM**的接口。
+
+##### 3.2.2.1. 模式切换和模式请求接口
+
+清单3.1展示了**BswM**配置中模式切换接口的一个示例。其中创建了一个模式声明组和一个模式切换接口。该模式切换接口使用已定义的模式声明组作为原型，其中**exampleModes**是该模式切换接口的短名称。
+
+```
+modeGroup MDG_ApplicationModes { APP_ACTIVE, APP_STARTING, APP_INACTIVE }
+interface modeSwitch MSIF_ApplicationModes { mode MDG_ApplicationModes appMode }
+```
+
+清单3.1：ECU整体模式的模式切换接口
+
+清单3.2以示例的形式展示了与清单3.1的模式切换接口相对应的模式请求接口的配置。基于此**BswM**配置，将创建一个包含模式声明和接口的**Arxml**描述。该**arxml**的摘录如清单3.3所示。
+
+```
+enum ENUM_ApplicationModes{ ModeA, ModeB, ModeC }
+interface senderReceiver exampleModeRequestPort { data ENUM_ApplicationsModes exampleModeRequest }
+```
+
+清单3.2：模式请求接口的声明
+
+```
+<SENDER-RECEIVER-INTERFACE>
+  <SHORT-NAME> exampleModeRequestPort </SHORT-NAME>
+  <IS-SERVICE> false </IS-SERVICE>
+  <DATA-ELEMENTS>
+    <VARIABLE-DATA-PROTOTYPE>
+      <SHORT-NAME> exampleModeRequest </SHORT-NAME>
+      <!--...-->
+      <TYPE-TREF DEST= "APPLICATION-PRIMITIVE-DATA-TYPE" > ENUM_ApplicationModes </TYPE-TREF>
+    </VARIABLE-DATA-PROTOTYPE>
+  </DATA-ELEMENTS>
+</SENDER-RECEIVER-INTERFACE>
+<!--...-->
+<APPLICATION-PRIMITIVE-DATA-TYPE>
+  <SHORT-NAME> ENUM_ApplicationModes </SHORT-NAME>
+  <CATEGORY> VALUE </CATEGORY>
+  <SW-DATA-DEF-PROPS>
+    <SW-DATA-DEF-PROPS-VARIANTS>
+      <SW-DATA-DEF-PROPS-CONDITIONAL>
+        <COMPU-METHOD-REF DEST= "COMPU-METHOD" > ENUM_ApplicationModes_def </COMPU-METHOD-REF>
+      </SW-DATA-DEF-PROPS-CONDITIONAL>
+    </SW-DATA-DEF-PROPS-VARIANTS>
+  </SW-DATA-DEF-PROPS>
+</APPLICATION-PRIMITIVE-DATA-TYPE>
+<!--...-->
+<COMPU-METHOD>
+  <SHORT-NAME> ENUM_ApplicationModes_def </SHORT-NAME>
+  <CATEGORY> TEXTTABLE </CATEGORY>
+  <COMPU-INTERNAL-TO-PHYS>
+    <COMPU-SCALES>
+      <COMPU-SCALE>
+        <LOWER-LIMIT INTERVAL-TYPE= "CLOSED" > 0 </LOWER-LIMIT>
+        <UPPER-LIMIT INTERVAL-TYPE= "CLOSED" > 0 </UPPER-LIMIT>
+        <COMPU-CONST> <VT> ModeA </VT> </COMPU-CONST>
+      </COMPU-SCALE>
+      <COMPU-SCALE>
+        <LOWER-LIMIT INTERVAL-TYPE= "CLOSED" > 1 </LOWER-LIMIT>
+        <UPPER-LIMIT INTERVAL-TYPE= "CLOSED" > 1 </UPPER-LIMIT>
+        <COMPU-CONST> <VT> ModeB </VT> </COMPU-CONST>
+      </COMPU-SCALE>
+      <COMPU-SCALE>
+        <LOWER-LIMIT INTERVAL-TYPE= "CLOSED" > 2 </LOWER-LIMIT>
+        <UPPER-LIMIT INTERVAL-TYPE= "CLOSED" > 2 </UPPER-LIMIT>
+        <COMPU-CONST> <VT> ModeC </VT> </COMPU-CONST>
+      </COMPU-SCALE>
+    </COMPU-SCALES>
+  </COMPU-INTERNAL-TO-PHYS>
+</COMPU-METHOD>
+```
+
+清单3.3：模式请求接口ARXML描述的摘录
+
+每一个发向**BswM**的模式请求都必须被映射到一个受限的取值集合上，这使得集成者可以据此定义仲裁规则。
+
+**ECU**模式可以由**BswM**通过**EcuM_SetState** **API**来设置。
+
+目的：通过此接口，**BswM**设置**EcuM**的当前状态。
+
+```
+Signature: EcuM_SetState(EcuM_StateType State)
+
+Modes:
+modeGroup EcuM_StateType { ECUM_STATE_STARTUP, ECUM_STATE_APP_RUN,
+ECUM_STATE_APP_POST_RUN, ECUM_STATE_SHUTDOWN, ECUM_STATE_SLEEP }
+```
+
+##### 3.2.2.2. 由BswM标准化接口定义的模式请求端口
+
+在**BswM**配置中，必须定义模式请求源。以下的模式请求端口是由**BswM**的**API**隐式定义的。本小节对这些端口接口进行汇总。
+
+下面的模式声明组在**AUTOSAR**规范的相应**SWS**文档中以**C**枚举（**C-Enum**）的形式定义。尽管如此，此处仍以**BswM**配置的形式引用它们，它们作为本文档其余部分的基础。有关模式的定义，请参阅**SWS**文档中对**C**枚举的定义。
