@@ -94,8 +94,16 @@ title: "Full-CAN 与 Basic-CAN 的区别"
 
 <section id="wechat">
 
-<h4>微信扫一扫，获取更多及时资讯</h4>
+<div class="wechat-card">
 
-<img src="wechat.png" alt="微信扫一扫"/>
+<div class="wechat-card__title">
+<h4>微信扫一扫，获取更多及时资讯</h4>
+</div>
+
+<div class="wechat-card__frame">
+<img src="../wechat.png" alt="微信扫一扫"/>
+</div>
+
+</div>
 
 </section>
