@@ -647,3 +647,497 @@ actions checkApp1RequestTrueActions on condition {
 | --- | --- | --- | --- | --- |
 | TrueActionList | CONDITION | - | - | TRIGGERED/CONDITION |
 | FalseActionList | - | TRIGGERED/CONDITION | CONDITION | - |
+
+### 3.3. ECU状态管理
+
+在启动和关闭期间，**BswM**的任务是以与旧版**AUTOSAR**版本中**ECU**管理器（**ECUM**）类似的方式初始化所有基础软件模块。为此，需要定义下面的模式声明组，它向应用软件组件指示**ECU**的整体状态，并用于内部规则仲裁。
+
+```
+modeGroup MDG_EcuMode { ECU_RUN, ECU_APP_RUN, ECU_APP_POST_RUN, ECU_GO_SLEEP,
+                        ECU_GO_OFF_ONE, ECU_SLEEP, ECU_GO_OFF_TWO, ECU_STARTUP_ONE,
+                        ECU_STARTUP_TWO, ECU_RESET_READY }
+interface modeSwitch MSIF_EcuMode { mode MDG_EcuMode ecuMode }
+```
+
+清单3.9：用于ECU整体状态管理的模式声明组
+
+该模式声明组的初始模式为**ECU_STARTUP_ONE**。
+
+#### 3.3.1. ECU模式处理
+
+**ECU**模式处理是在**AUTOSAR 4.2.1**中随"具有灵活状态机的**ECU**状态管理器"和**BSW**模式管理器这两个**BSW**模块引入的。**ECU**状态管理器为**SW-C**提供了一个公共接口，用于请求和释放**RUN**与**POST_RUN**模式。
+
+**ECU**状态管理器（**EcuM**）不包含自己的状态机。它应接收来自**BswM**的状态通知，并将其传播给**RTE**。
+
+**ECU**模式处理提供了以下**API**：
+
+目的：通过此接口，**EcuM**将**ECU**模式的当前模式通知**BswM**。
+
+```
+Signature: BswM_EcuM_CurrentState( EcuM_StateType CurrentState )
+Modes:     modeGroup EcuM_StateType { ECUM_STATE_STARTUP, ECUM_STATE_APP_RUN,
+           ECUM_STATE_APP_POST_RUN, ECUM_STATE_SHUTDOWN, ECUM_STATE_SLEEP }
+```
+
+* **EcuM_CurrentState**：由**EcuM**通过接口**BswM_EcuM_CurrentState()**设置。当**RTE**给出其反馈后，**EcuM**会设置该状态。
+* **RUNRequested**：由**EcuM**根据**RUN**请求协议的结果，通过接口**BswM_EcuM_RequestedState()**设置。
+* **POSTRUNRequested**：由**EcuM**根据**RUN**请求协议的结果，通过接口**BswM_EcuM_RequestedState()**设置。
+
+下面的**BswM**规则展示了**ECU**模式处理中**EcuM**与**BswM**之间交互的一个示例。注意，这些**BswM**规则不足以构成一个完整的系统。还需要更多的**BswM**规则来覆盖例如**NvM**、唤醒处理和诊断等方面。完整示例请参阅3.3.2节。
+
+##### 3.3.1.1. 启动（Startup）
+
+**STARTUP**模式在**RTE**启动期间使用。所有驱动程序初始化完成后，设置**RUN**模式：
+
+```
+rule SwitchToStartup initially false {
+  if (EcuMode == ECUM_STARTUP) {
+    actionlist SwitchToStartup
+  }
+}
+actions SwitchToStartup on condition {
+  custom "EcuM_DriverInitListTwo()"
+  custom "Rte_Start()"
+  custom "EcuM_DriverInitListThree()"
+  custom "ComM_CommunicationAllowed(TRUE)"
+  custom "EcuM_SetState(ECUM_STATE_APP_RUN)"
+}
+```
+
+##### 3.3.1.2. 运行（Running）
+
+当所有**EcuM**用户都释放了**RUN**模式后，**EcuM**将**RUNRequested**模式设置为**RELEASED**。
+
+```
+Rule SwitchToPostRun initially false {
+  if (EcuM_CurrentState==RUN && RUNRequested == RELEASED) {
+    actionlist SwitchToPostRun
+  }
+}
+actions SwitchToPostRun on condition {
+  custom "CommunicationAllowed(FALSE)"
+  custom "EcuM_SetState(ECUM_STATE_APP_POST_RUN)"
+}
+```
+
+**SWC**可以在**POST_RUN**期间请求**RUN**模式。下面的**BswM**规则在至少一个**EcuM**用户请求了**RUN**模式时切换回**RUN**模式。
+
+```
+rule SwitchBackToRunMode initially false {
+  if (EcuM_CurrentState==POST_RUN && RUNRequested == REQUESTED
+      && POSTRUNRequested == RELEASED)
+  {
+    actionlist SwitchBackToRunMode
+  }
+}
+actions SwitchBackToRunMode on condition {
+  custom "ComM_CommunicationAllowed(TRUE)"
+  custom "EcuM_SetState(ECUM_STATE_APP_RUN)"
+}
+```
+
+##### 3.3.1.3. 关机和睡眠（Shutdown and Sleep）
+
+下面的**BswM**规则仅演示了到**SLEEP**模式的切换。
+
+```
+rule SwitchToShutdownMode initially false {
+  if (EcuM_CurrentState==POST_RUN && RUNRequested == RELEASED
+      && POSTRUNRequested == RELEASED)
+  {
+    actionlist SwitchToShutdownMode
+  }
+}
+actions SwitchToShutdownMode on condition {
+  custom "EcuM_SetState(ECUM_STATE_SLEEP)"
+}
+```
+
+注意，对于一个完整运行的系统，还需要更多的**BswM**规则。
+
+#### 3.3.2. ECU模式处理的默认状态
+
+本章描述了一种使用软件组件的方案，这些软件组件的设计目标是与"具有固定状态机的**ECU**状态管理器（**EcuM**）"协同工作——该管理器已不再是当前**AUTOSAR**规范的一部分。尽管如此，这种方法仍被广泛使用，并且受益于标准接口（例如：**RUN**请求协议）。这意味着，这里描述的是一个基于"具有灵活状态机的**EcuM**与**BswM**"的方案，由它实现固定状态机**EcuM**的行为。
+
+图3.1展示了该架构方案的概览。为了使用设计为与"具有固定状态机的**ECU**状态管理器"协同工作的软件组件，必须激活"**ECU**模式处理"选项。实现这种行为不需要所谓的兼容性**SWC**（**Compatibility SWC**）。
+
+图3.1：EcuM Flex中的默认状态使旧SWC得以复用
+
+图3.2描绘了该方案的行为方面。小方框表示固定**EcuM**的状态，绿色方框标出灵活**EcuM**的各个阶段。应用软件只会在**UP**阶段期间察觉到变化。
+
+图3.2：固定EcuM的阶段到灵活EcuM的映射
+
+其结果是，固定**EcuM**在**UP**阶段中的所有状态都必须使用**BswM**以及为此场景引入的软件组件来模拟。该软件组件必须将**BswM**报告的模式映射到固定状态机**EcuM**接口中定义的模式。
+
+##### 3.3.2.1. BswM配置示例
+
+系统设计者必须确保在设置**ECU**状态管理器的状态时，所有前置和后置条件都得到满足。由于**EcuM**应保持灵活，**BswM**切换状态的序列不会进行校验。如果状态切换的序列需要与**EcuMFixed**的序列兼容，系统设计者必须通过**BswM**规则来实现这种行为。
+
+###### 3.3.2.1.1. 启动
+
+在启动阶段，应当初始化与固定**EcuM**相同的**BSW**模块。这通过**BswM**规则实现，这些规则在**EcuM**初始化之后执行并初始化这些模块。已经由灵活**EcuM**初始化的模块由**BswM**跳过。
+
+更改后的**BswM**规则见清单3.10。
+
+```
+rule InitBlockII initially false {
+  if ( EcuMode == MDG_EcuMode.ECU_STARTUP_ONE ) {
+    actionlist InitBlockIITrueActions
+  }
+}
+actions InitBlockIITrueActions on condition {
+  custom "Port_Init(null)"
+  custom "Dio_Init(null)"
+  custom "Adc_Init(null)"
+  custom "Spi_Init(null)"
+  custom "Eep_Init(null)"
+  custom "Fls_Init(null)"
+  custom "NvM_Init(null)"
+  custom "EcuM_SetState(ECU_STARTUP_TWO)"
+  custom "NvM_ReadAll()"
+}
+
+rule NvMReadAllFinished initially false {
+  if ( NvMReadAllJobMode != NVM_REQ_PENDING
+       && EcuMode == MDG_EcuMode.ECU_STARTUP_TWO)
+  {
+    actionlist NvMReadAllFinishedTrueActions
+  }
+}
+actions NvMReadAllFinishedTrueActions on condition {
+  custom "CanTrcv_Init(null)"
+  custom "Can_Init(null)"
+  custom "CanIf_Init(null)"
+  custom "CanSM_Init(null)"
+  custom "CanTp_Init(null)"
+  custom "Lin_Init(null)"
+  custom "LinIf_Init(null)"
+  custom "LinSM_Init(null)"
+  custom "LinTp_Init(null)"
+  custom "FrTrcv_Init(null)"
+  custom "Fr_Init(null)"
+  custom "FrIf_Init(null)"
+  custom "FrSM_Init(null)"
+  custom "FrTp_Init(null)"
+  custom "PduR_Init(null)"
+  custom "CANNM_Init(null)"
+  custom "FrNM_Init(null)"
+  custom "NmIf_Init(null)"
+  custom "IpduM_Init(null)"
+  custom "COM_Init(null)"
+  custom "DCM_Init(null)"
+  custom "StartRte()"
+  custom "ComM_Init(null)"
+  custom "DEM_Init(null)"
+  custom "FIM_Init(null)"
+  custom "EcuM_SetState(ECU_RUN)"
+}
+```
+
+清单3.10：与固定EcuM兼容的启动BswM配置
+
+###### 3.3.2.1.2. 关机
+
+关机机制由清单3.11中的**BswM**配置负责。所列出的规则协调post-run阶段、反初始化各模块，并使**ECU**进入关机或睡眠状态。这些规则执行的**Callout**与固定**EcuM**情况下执行的**EcuM_On\<Mode\>()**相同。
+
+```
+rule checkEcuMCompatibilityModeRequest initially false {
+  if ( EcuMode == MDG_EcuMode.ECU_APP_RUN) {
+    actionlist checkEcuMCompatibilityModeRequestActions
+  }
+}
+actions checkEcuMCompatibilityModeRequestActions on condition {
+  ComMAllowCom MyComM.CanNet1 false
+  custom "EcuM_SetState(ECU_APP_POST_RUN)"
+}
+
+rule GoBackToRun initially false {
+  if ( EcuMode == MDG_EcuMode.ECU_APP_POST_RUN) {
+    actionlist GoBackToRunActions
+  }
+}
+actions GoBackToRunActions on condition {
+  custom "EcuM_SetState(ECU_APP_RUN)"
+}
+
+rule PrepShutdown initially false {
+  if ( ComM_Mode_Channel1 == COMM_NO_COM_REQUEST_PENDING
+       && EcuMode == MDG_EcuMode.ECU_APP_POST_RUN)
+  {
+    actionlist PrepShutdownActions
+  }
+}
+actions PrepShutdownActions on condition {
+  custom "Dem_Shutdown(null)"
+  custom "EcuM_SetState(ECU_GO_SLEEP)"
+  custom "EcuM_SetState(ECU_GO_OFF_ONE)"
+}
+
+rule GoSleep initially false {
+  if ( ComM_Mode_Channel1 == COMM_NO_COM_REQUEST_PENDING
+       && EcuMode == MDG_EcuMode.ECU_GO_SLEEP)
+  {
+    actionlist GoSleepActions
+  }
+}
+actions GoSleepActions on condition {
+  custom "EcuM_SetState(ECU_STARTUP_TWO)"
+  custom "NvM_WriteAll()"
+}
+
+rule GoOff initially false {
+  if ( ComM_Mode_Channel1 == COMM_NO_COM_REQUEST_PENDING
+       && EcuMode == MDG_EcuMode.ECU_GO_OFF_ONE)
+  {
+    actionlist GoOffActions
+  }
+}
+actions GoOffActions on condition {
+  custom "Rte_stop(null)"
+  custom "ComM_DeInit(null)"
+  custom "EcuM_SetState(ECU_GO_OFF_TWO)"
+  custom "NvM_WriteAll()"
+}
+
+rule GoSleepNvMWriteAllFinished initially false {
+  if ( NvMWriteAllJobMode != NVM_REQ_PENDING
+       && EcuMode == MDG_EcuMode.ECU_SLEEP)
+  {
+    actionlist GoSleepNvMWriteAllFinishedActions
+  }
+}
+actions GoSleepNvMWriteAllFinishedActions on condition {
+  custom "EcuM_GoHalt()"
+}
+
+rule GoOff2 initially false {
+  if ( NvMWriteAllJobMode == NVM_BLK_OK
+       && EcuMode == MDG_EcuMode.ECU_GO_OFF_TWO)
+  {
+    actionlist GoOff2Actions
+  }
+}
+actions GoOff2Actions on condition {
+  custom "EcuM_GoDown()"
+}
+```
+
+清单3.11：与固定EcuM兼容的关机BswM配置
+
+###### 3.3.2.1.3. 唤醒
+
+从睡眠模式正确唤醒的功能必须在**BswM**中完整配置。但由于它不需要为向后兼容做任何调整，因此无需进行修改。
+
+#### 3.3.3. 启动（Startup）
+
+**ECUM**启动操作系统，随后其**OS**后序列启动调度管理器（**SchM_Start()**），初始化**BswM**（**BswM_Init()**），然后完成**SchM**的初始化（**SchM_Init()**和**SchM_StartTiming()**）。**BswM**在初始化之后必须注意：所有基础软件模块必需的初始化例程都被调用，并且**RTE**被启动（先**Rte_Start()**，再**Rte_Init()**，最后**Rte_StartTiming()**）。
+
+在此场景中，期望**BswM**具有下面的模式声明组。这个**modeGroup**的用途类似于以前**AUTOSAR**版本中**ECU**状态管理器的状态，用于跟踪**ECU**的当前状态/模式。
+
+规则**InitBlockII**指定了用于访问**NVRAM**的基础驱动程序的初始化，并启动**NvM_ReadAll**。由于**EcuMode**源的**processing**属性设置为**DEFERRED**，每次调用**BswM**主函数时都会评估该规则。第一次运行后，它将**EcuMode**设置为**ECU_STARTUP_TWO**，从而该动作列表永远不会再次被调用。
+
+如果**NvMReadAll**作业完成，将触发**NvMReadAllFinished**规则，该规则启动剩余的初始化，并将**EcuMode**切换为**ECU_RUN**。
+
+```
+rule InitBlockII initially false {
+  if ( EcuMode == MDG_EcuMode.ECU_STARTUP_ONE ) {
+    actionlist InitBlockIIActions
+  }
+}
+actions InitBlockIIActions on condition {
+  custom "Spi_Init(null)"
+  custom "Eep_Init(null)"
+  custom "Fls_Init(null)"
+  custom "NvM_Init(null)"
+  SchMSwitch EcuMode : ECU_STARTUP_TWO
+  custom "NvM_ReadAll()"
+}
+
+rule NvMReadAllFinished initially false {
+  if ( NvMReadAllJobMode == NVM_REQ_OK
+       && EcuMode == MDG_EcuMode.ECU_STARTUP_TWO)
+  {
+    actionlist NvMReadAllFinishedActions
+  }
+}
+actions NvMReadAllFinishedActions on condition {
+  custom "Can_Init(null)"
+  custom "CanIf_Init(null)"
+  custom "CanSM_Init(null)"
+  custom "CanTp_Init(null)"
+  custom "Lin_Init(null)"
+  custom "LinIf_Init(null)"
+  custom "LinSM_Init(null)"
+  custom "LinTp_Init(null)"
+  custom "Fr_Init(null)"
+  custom "FrIf_Init(null)"
+  custom "FrSM_Init(null)"
+  custom "FrTp_Init(null)"
+  custom "PduR_Init(null)"
+  custom "CANNM_Init(null)"
+  custom "FrNM_Init(null)"
+  custom "NmIf_Init(null)"
+  custom "IpduM_Init(null)"
+  custom "COM_Init(null)"
+  custom "DCM_Init(null)"
+  custom "ComM_Init(null)"
+  custom "DEM_Init(null)"
+  custom "StartRte()"
+  SchMSwitch EcuMode : ECU_RUN
+}
+```
+
+清单3.12：用于启动的规则和动作列表
+
+为了确保服务模块中的可运行实体在调用**RTE** **API**函数之前**RTE**已被正确初始化，可以通过模式禁用依赖（**mode disabling dependency**）将这些可运行实体禁用——即在**EcuM**模式**RUN**以外的所有模式下停用这些可运行实体。对于服务器可运行实体（**server runnable**）——它们无法被禁用——在**RTE**未初始化时，**RTE**会忽略传入的客户端-服务器请求。
+
+**RTE**启动后，可运行实体将被启动。此时，保持**ECU**继续运行就是应用的责任了。为此，**BswM**可以例如提供一个如示例3.4所描绘的模式请求端口。在后续阅读中，假定应用软件向**BswM**请求模式**APP1_ACTIVE**。如果该模式被请求，**BswM**就不应关闭**ECU**。
+
+```
+rule checkApp1Request initially false {
+  if ( App1ModeRequest == MDG_ApplicationModes.ModeA
+       && EcuMode == MDG_EcuMode.ECU_RUN)
+  {
+    actionlist checkApp1RequestTrueActions
+  }
+}
+actions checkApp1RequestTrueActions on condition {
+  ComMAllowCom MyComM.CanNet1 true
+  SchMSwitch EcuMode : ECU_RUN
+}
+```
+
+清单3.13：应用运行，使能通信
+
+#### 3.3.4. 运行（Run）
+
+由于**BswM**是一个高度灵活的模块，如何判定**ECU**是否应当关闭在很大程度上取决于集成者。可以设想许多不同的方案。本文档提出一种与**AUTOSAR R3.1**中**ECUM**概念相当类似的方法。其总体概念是：只要至少有一个应用软件组件请求运行状态，**ECU**就保持运行。
+
+应用在某个模式下是否可以被关闭的信息，必须由软件组件的开发者提供。示例3.14展示了一个针对只有单个软件组件的**ECU**的简化规则。如果该软件组件将其模式切换为**INACTIVE**，**BswM**就发起关机序列。
+
+```
+rule checkApp1Request initially false {
+  if ( App1ModeRequest == MDG_ApplicationModes.APP_INACTIVE
+       && EcuMode == MDG_EcuMode.ECU_RUN)
+  {
+    actionlist checkApp1RequestActions
+  }
+}
+actions checkApp1RequestActions on condition {
+  ComMAllowCom ArMmExample.EcuC.MyComM.ComMChannel1 false
+  SchMSwitch EcuMode : ECU_APP_POST_RUN
+}
+```
+
+清单3.14：如果没有应用再想运行，则发起关机
+
+#### 3.3.5. 关机（Shutdown）
+
+在**ECU_APP_POST_RUN**状态中，**BswM**等待所有通道报告不再有待处理的请求。清单3.14中的规则会在**ComM**通道的模式每次发生变化时被触发。如果存在多个**ComM**通道，必须将它们组合成单一表达式。
+
+```
+rule InitiateShutdown initially false {
+  if ( ComM_Mode_Channel1 == COMM_NO_COM_REQUEST_PENDING
+       && EcuMode == MDG_EcuMode.ECU_APP_POST_RUN)
+  {
+    actionlist InitiateShutdownActions
+  }
+}
+actions InitiateShutdownActions on condition {
+  custom "Dem_Shutdown(null)"
+  custom "Rte_Stop()"
+  custom "ComM_DeInit()"
+  SchMSwitch EcuMode : ECU_GO_OFF_ONE
+  custom "NvM_WriteAll()"
+}
+
+rule NvMWriteAllFinished initially false {
+  if ( NvMWriteAllJobMode == NVM_BLK_OK
+       && EcuMode == MDG_EcuMode.ECU_GO_OFF_ONE)
+  {
+    actionlist NvMWriteAllFinishedTrueActions
+  }
+}
+actions NvMWriteAllFinishedTrueActions on condition {
+  custom "EcuM_SelectShutdownCause(ECUM_CAUSE_ECU_STATE)"
+  custom "EcuM_GoDown(MODULE_ID)"
+}
+```
+
+清单3.15：关机序列
+
+注意，在**ECUM**的配置中，必须将**BswM**的模块**ID**作为有效用户添加到**EcuMFlexUserConfig**中。
+
+#### 3.3.6. 睡眠（Sleep）
+
+进入睡眠状态与关机序列3.14类似，只是调用的是**EcuM_GoHalt**或**EcuM_GoPoll**，而不是**EcuM_GoDown**。
+
+#### 3.3.7. 唤醒（Wakeup）
+
+示例3.16展示了一条规则：只有在由**EcuM_WakeupSource**标识的特定唤醒事件已发生时才启动**ECU**；否则**ECU**将立即关闭。
+
+```
+rule InitBlockII initially false {
+  if ( EcuMode == MDG_EcuMode.ECU_STARTUP_ONE
+       && EcuM_WakeupSource == ECUM_WKSTATUS_VALIDATED)
+  {
+    actionlist InitBlockIITrueActions
+  }
+  else {
+    actionlist InitBlockIIFalseActions
+  }
+}
+actions InitBlockIITrueActions on condition {
+  custom "Spi_Init(null)"
+  custom "Eep_Init(null)"
+  custom "Fls_Init(null)"
+  custom "NvM_Init(null)"
+  SchMSwitch EcuMode : ECU_STARTUP_TWO
+  custom "NvM_ReadAll()"
+}
+
+actions InitBlockIIFalseActions on condition {
+  custom "EcuM_GoDown(MODULE_ID)"
+}
+```
+
+清单3.16：带唤醒检查的启动序列
+
+#### 3.3.8. 分区复位
+
+在某个特定分区发生错误并需要重启的情况下，分区到该分区的基础软件模块必须被重新初始化。为了确定哪个分区已被重启，可以利用模式请求源**BswMPartitionRestarted**。
+
+```
+rule InitBlockII initially false {
+  if ( EcuMode == MDG_EcuMode.ECU_STARTUP_ONE ) {
+    actionlist InitBlockIIActions
+  }
+}
+actions InitBlockIIActions on condition {
+  custom "Spi_Init(null)"
+  custom "Eep_Init(null)"
+  custom "Fls_Init(null)"
+  custom "NvM_Init(null)"
+  custom "EcuM_SetState(ECU_STARTUP_TWO)"
+  custom "NvM_ReadAll()"
+}
+
+rule NvMReadAllFinished initially false {
+  if ( NvMReadAllJobMode == NVM_REQ_OK
+       && EcuMode == MDG_EcuMode.ECU_STARTUP_TWO
+       && BSWM_BSW_MODE_REQUEST_API_CALLED(BswMPartitionRestarted) )
+  {
+    actionlist NvMReadAllFinished4PartitionActions
+  }
+}
+actions NvMReadAllFinished4PartitionActions on condition {
+  // 只初始化分区到相应内核的模块，例如：
+  custom "Can_Init(null)"
+  custom "CanIf_Init(null)"
+  custom "CanSM_Init(null)"
+  custom "CanTp_Init(null)"
+  ...
+}
+```
+
+清单3.17：分区复位序列
