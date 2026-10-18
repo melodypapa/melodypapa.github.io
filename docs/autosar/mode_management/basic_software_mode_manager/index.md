@@ -526,11 +526,52 @@ BswM也能够调用用户定义的函数（**user defined functions**），同�
 
 ### 6.5. 错误分类
 
-#### 6.5.1. 运行时错误
+《基础软件模块通用规范》（**General Specification of Basic Software Modules**）的第7.2章"错误处理"详细描述了基础软件的错误处理。其中尤其定义了一个由五种错误类型组成的分类方案，这些错误类型可能出现在**BSW**模块中。
+
+基于此，以下各小节规定了**BswM**模块中相应的特定错误。
+
+#### 6.5.1. 开发错误
+
+**BswM**模块中开发错误（**development errors**）的定义如下表所示：
+
+| 错误类型 | 相关错误代码 | 错误值 |
+| --- | --- | --- |
+| 在初始化之前调用了服务 | **BSWM_E_UNINIT** | 0x01 |
+| 传递了空指针作为参数 | **BSWM_E_NULL_POINTER** | 0x02 |
+| 参数无效（未具体分类） | **BSWM_E_PARAM_INVALID** | 0x03 |
+| 请求用户超出范围 | **BSWM_E_REQ_USER_OUT_OF_RANGE** | 0x04 |
+| 请求的模式超出范围 | **BSWM_E_REQ_MODE_OUT_OF_RANGE** | 0x05 |
+| 提供的配置不一致 | **BSWM_E_PARAM_CONFIG** | 0x06 |
+| 参数指针无效 | **BSWM_E_PARAM_POINTER** | 0x07 |
+| 无效的配置集选择 | **BSWM_E_INIT_FAILED** | 0x08 |
+
+#### 6.5.2. 运行时错误
 
 ![Runtime Error](Error.png)
 
+| 错误类型 | 相关错误代码 | 错误值 |
+| --- | --- | --- |
+| 某个动作返回**E_NOT_OK** | **BSWM_E_ACTION_FAILED** | 0x80..0xFF（由**BswMReportFailRuntimeErrorId**配置） |
+
 当**BswMActionListItem**配置了**BswMReportFailRuntimeErrorId**，如果操作返回**E_NOT_OK**，则**BswM**需向**Det**报告**BSWM_E_ACTION_FAILED**运行时错误。**BSWM_E_ACTION_FAILED**运行时错误中报告的**ErrorId**由**BswMReportFailRuntimeErrorId**中配置的值给出。
+
+由于动作的调用上下文取决于配置（例如：**DEFERRED**或**IMMEDIATE**），**BSWM_E_ACTION_FAILED**运行时错误中报告的**ApiId**未在本规范中定义，可能是特定于实现的。
+
+**BSWM_E_ACTION_FAILED**运行时错误代表了一个**ErrorId**取值范围。该取值范围仅限于运行时错误类型表中给出的值。
+
+**BswM**需拒绝**BswMReportFailRuntimeErrorId**不在运行时错误类型表中为**BSWM_E_ACTION_FAILED**给出的取值范围内的配置。
+
+#### 6.5.3. 瞬态故障
+
+无瞬态故障（**transient faults**）。
+
+#### 6.5.4. 产品错误
+
+无产品错误（**production errors**）。
+
+#### 6.5.5. 扩展产品错误
+
+无扩展产品错误（**extended production errors**）。
 
 ### 6.6. BswM接口和端口
 
@@ -731,6 +772,183 @@ DataReceiveEvent AppModeRequestEvent {
 当前版本的**SWS BswM**支持以太网交换机端口组交换。基于当前请求的**PNC**，**BswM**将**PNC**请求映射到所配置的**EthIfSwitchPortGroup**并调用**EthIf_SwitchPortGroupRequestMode**。如果积累的链路状态已更改，则由**EthIf**模块指示**BswM**模块。积累的链接状态也可用于通知应用程序。这可用于覆盖 **EthIfSwitch**端口组的请求和当前积累的链路状态相互矛盾并且需要启动错误处理的错误场景。
 
 **AUTOSAR_EXP_ModemanagementGuide**文档包含了有关以太网交换机端口组切换的**BswM**配置指南。
+
+### 6.8. 服务发现控制
+
+#### 6.8.1. 一般要求
+
+除了请求和查询模式的通用方式之外，**BswM**还提供了一个标准化的接口，供应用层**SW-C**控制服务发现（**Service Discovery**）。
+
+基于**SW-C**描述和**ECUC**的输入，应按照后续各章节的描述生成配置。
+
+生成的输入是具有**ServerServiceOffer**、**ServerEventSubscriptionStatus**、**ClientEventSubscription**和**ClientEventSubscriptionStatus**的**RoleBasedDataAssignment**的端口，以及这些端口对应的**RepresentedPortGroups**。
+
+有关如何对必要的端口及其关系进行建模的详细信息，请参阅模式管理指南（参见相关文档[2]）中第13.6.5节"面向服务的用例"（**Service Oriented Use Cases**）。
+
+配置工具需要完成以下步骤：
+
+1. 分析**SW-C**描述，找出受影响的端口
+2. 分析**ECUC**，推导出服务发现中相关的实体
+3. 创建规则（**Rule**）和动作列表（**ActionList**），以实现由**BswM**提供的期望行为
+4. 为来自服务发现模块的通知创建**BswMModeRequestSources**
+5. 创建作为规则输入所需的**S/R**端口的**BswM**一侧
+6. 创建用于向**SW-C**进行指示的所提供的模式切换（**ModeSwitch**）端口的**BswM**一侧
+7. 基于明确定义的命名规则，在**BswM**、服务**SW-C**与应用**SW-C**之间连接端口
+
+命名模式（**naming patterns**）用于简化**BswM**与**SW-C**之间端口的映射。这些命名模式的设计使得可以对（部分）名称进行匹配。通过尽可能地使用**SW-C**端口的名称，实现了接口的解耦，使**SW-C**无需感知底层的通信细节。
+
+#### 6.8.2. 客户端服务/事件订阅请求
+
+实现客户端功能的软件组件（**SW-C**）作为模式请求者（**mode requester**），暴露一个由**SenderReceiverInterface**类型化的**PPortPrototype**。通过这种方式，软件组件可以向**BswM**发送模式请求，以订阅（**subscribe**）和停止订阅（**stop subscribe**）特定的事件和方法。
+
+该图展示了在使用（**SomeIP**）服务发现的情况下，构成事件订阅请求的实体链。其中灰色元素为配置的元素。通过评估引用了应用事件（此处的**Ev1**）的端口组引用，可以推导出对应的请求端口（**SWC_P1_Req**）。应用事件与对应**SD**事件（此处的**Eventgroup 1**中的**Ev1**）之间的关系通过**ECU**配置提供。
+
+对于受根据**TPS_SWCT_03504**（软件组件作为客户端订阅事件和方法）的请求端口影响的每个服务实例的事件（组），应创建一个**BswM**规则（**BswMRule**）。该规则的短名称应为该服务实例目标事件（组）的短名称，并加上前缀**ESR_**。
+
+**注意：** **SomeIP**服务发现仅支持事件组。因此，在使用**SomeIP**的情况下，该规则可能覆盖多个事件。
+
+对于受根据**TPS_SWCT_03504**的请求端口影响的每个服务实例，应创建一个**BswM**规则。该规则的短名称应为该目标服务实例的短名称，并加上前缀**SRR_**。
+
+**注意：** 服务请求规则会收集指向同一服务实例的所有请求端口。这样，只要请求了任何事件或方法，就会请求客户端服务。
+
+客户端订阅**SenderReceiverInterface**应按如下方式定义：其中{RuleName}为对应规则的名称，{PortName}为对应**SW-C**端口的短名称。
+
+**注意：** {PortName}足以匹配对应的请求端口。
+
+**注意：** 同一个接口同时用于请求事件和请求客户端服务。
+
+对于根据**TPS_SWCT_03504**的每个请求端口，应创建一个对应的**RPortPrototype**。
+
+属于同一事件（组）的所有请求端口应作为事件订阅规则的输入。
+
+属于同一服务的所有请求端口应作为服务请求规则的输入。
+
+**注意：** 可以从**EcuC**中推导出哪些端口属于同一可请求的实体（例如：**SomeIP-SD**情况下的事件组和/或客户端服务）。
+
+事件订阅规则应按以下方式创建：**BswMRuleInitState** = **FALSE**。如果至少一个关联的请求端口评估为**REQUEST_SERVICE**，则该规则应评估为**TRUE**；如果所有请求端口都评估为**RELEASE_SERVICE**，则该规则应评估为**FALSE**。
+
+客户端服务请求规则应按以下方式创建：**BswMRuleInitState** = **FALSE**。如果至少一个关联的请求端口评估为**REQUEST_SERVICE**，则该规则应评估为**TRUE**；如果所有请求端口都评估为**RELEASE_SERVICE**，则该规则应评估为**FALSE**。
+
+应创建一个动作列表（**Action List**），用于请求包含相应事件/方法的客户端服务。
+
+* 如果使用了（**SomeIP**）服务发现，则需通过**SD**模块的**Sd_ClientServiceSetState()**请求**SD_CLIENT_SERVICE_REQUESTED**。
+
+该动作列表应作为客户端服务请求规则的**TRUE**动作列表。
+
+应创建一个动作列表，用于释放包含相应事件的客户端服务的请求。
+
+* 如果使用了（**SomeIP**）服务发现，则需通过**SD**模块的**Sd_ClientServiceSetState()**请求**SD_CLIENT_SERVICE_RELEASED**。
+
+该动作列表应作为客户端服务请求规则的**FALSE**动作列表。
+
+客户端服务的事件订阅**TRUE**动作列表应始终在该客户端服务的客户端服务请求**TRUE**动作列表之后执行。
+
+**注意：** 如果事件组在其客户端服务被请求之前被请求，服务发现将不会请求该事件组。另一方面，释放客户端服务会隐式地释放所有关联的事件组。
+
+应创建一个动作列表，用于请求订阅相应的事件。
+
+* 如果使用了（**SomeIP**）服务发现，则需通过**SD**模块的**Sd_ConsumedEventGroupSetState()**请求**SD_CONSUMED_EVENTGROUP_REQUESTED**。
+
+该动作列表应作为事件订阅规则的**TRUE**动作列表。
+
+应创建一个动作列表，用于请求取消订阅相应的事件。
+
+* 如果使用了（**SomeIP**）服务发现，则需通过**SD**模块的**Sd_ConsumedEventGroupSetState()**请求**SD_CONSUMED_EVENTGROUP_RELEASED**。
+
+该动作列表应作为事件订阅规则的**FALSE**动作列表。
+
+#### 6.8.3. 客户端服务/事件订阅状态通知
+
+作为客户端且对事件和方法订阅状态感兴趣的软件组件，会暴露一个由**ModeSwitchInterface**类型化的**RPortPrototype**。通过这种方式，软件组件可以由**BswM**通知订阅是否已建立。
+
+客户端服务订阅状态模式切换接口（**Mode Switch Interface**）应按如下方式定义：其中{RuleName}为对应规则的名称，{SwcName_PortName}为对应**SW-C**端口的**SW-C**短名称和端口名称。初始模式应为**RELEASE_SERVICE**。
+
+**注意：** 同一个接口既用于通知事件订阅，也用于指示客户端服务的可用性，具体取决于所涉及的是事件还是服务。
+
+对于根据**TPS_SWCT_03505**（软件组件接收客户端事件和方法订阅状态变化的通知）被任何**RPortPrototype**引用的每个端口组，应创建一个**BswM**规则。其短名称应为**SANR_{端口组的短名称}**。
+
+对于受服务可用性通知规则影响的每个已消费事件组（**Consumed Eventgroup**），应创建一个**BswMModeRequestSource.BswMSdConsumedEventGroupCurrentState**，作为该规则的输入。
+
+对于受服务可用性通知规则影响的每个客户端服务，应创建一个**BswMModeRequestSource.BswMSdClientServiceCurrentState**，作为该规则的输入。
+
+对于根据**TPS_SWCT_03505**被任何**RPortPrototype**引用的每个端口组，应按以下方式创建一个**BswM**规则：**BswMRuleInitState** = **FALSE**。如果所有关联的模式请求源都评估为**SD_CLIENT_SERVICE_AVAILABLE**，且所有关联的模式请求源都评估为**SD_CONSUMED_EVENTGROUP_AVAILABLE**，则该规则应评估为**TRUE**；否则，该规则应评估为**FALSE**。
+
+**注意：** 只有当与端口组关联的所有事件和所有服务都可用时，该端口组才可用。
+
+对于根据**TPS_SWCT_03505**被任何**RPortPrototype**引用的每个端口组，应创建一个对应的**PPortPrototype**（客户端订阅通知端口）。
+
+应创建一个动作列表，通过将客户端订阅通知**PPort**的当前模式设置为**REQUEST_SERVICE**，来执行对相应**SW-C**的通知。该动作列表应作为客户端事件订阅通知规则的**TRUE**动作列表。
+
+应创建一个动作列表，通过将客户端订阅通知**PPort**的当前模式设置为**RELEASE_SERVICE**，来执行对相应**SW-C**的通知。该动作列表应作为客户端事件订阅通知规则的**FALSE**动作列表。
+
+**注意：** 在典型场景中，受影响的是一个客户端服务中的1个事件（或者在只有方法的情况下仅为客户端服务本身）。然而，由于可以将任意数量的事件、方法甚至不同的服务（实例）分组到一个端口组中，因此只有在它们全部可用且已订阅时才会进行指示。
+
+#### 6.8.4. 服务器服务提供请求
+
+实现服务器功能的软件组件作为模式请求者（**mode requester**），暴露一个由**SenderReceiverInterface**类型化的**PPortPrototype**。通过这种方式，软件组件可以向**BswM**发送模式请求，以提供（**offer**）和停止提供（**stop offer**）该服务实例。在**BswM**一侧，使用由相同**SenderReceiverInterface**类型化的**RPortPrototype**来接收模式切换请求。
+
+与客户端用例不同，服务器服务提供只允许由一个端口进行，也就是说，对于一个服务实例，仅支持一个端口。
+
+**约束：** 对于服务实例的每个实例，根据**TPS_SWCT_03502**只允许一个端口。
+
+服务器服务请求**SenderReceiverInterface**应按如下方式定义：其中{RuleName}为对应规则的名称，{PortName}为服务器**SW-C**对应**SW-C**端口的短名称。
+
+**注意：** {PortName}足以匹配对应的请求端口。
+
+对于受根据**TPS_SWCT_03502**的请求端口影响的每个服务实例，应创建一个**BswM**规则。该规则的短名称应为目标服务的短名称，并加上前缀**SOR_**。
+
+对于根据**TPS_SWCT_03502**的每个请求端口，应创建一个对应的**RPortPrototype**。
+
+属于同一服务实例的请求端口应作为服务提供规则的输入。
+
+**注意：** 由于上述约束，每个规则只会创建一个请求端口。
+
+**注意：** 可以从**EcuC**中推导出哪些端口属于同一服务实例。
+
+服务提供规则应按以下方式创建：**BswMRuleInitState** = **FALSE**。如果所有关联的请求端口都评估为**OFFER_SERVICE**，则该规则应评估为**TRUE**；如果至少一个请求端口评估为**STOPOFFER_SERVICE**，则该规则应评估为**FALSE**。
+
+应创建一个动作列表，用于请求提供相应的服务实例。
+
+* 如果使用了（**SomeIP**）服务发现，则需通过**SD**模块的**Sd_ServerServiceSetState()**请求**SD_SERVER_SERVICE_AVAILABLE**。
+
+该动作列表应作为服务提供规则的**TRUE**动作列表。
+
+应创建一个动作列表，用于请求停止提供相应的服务实例。
+
+* 如果使用了（**SomeIP**）服务发现，则需通过**SD**模块的**Sd_ServerServiceSetState()**请求**SD_SERVER_SERVICE_DOWN**。
+
+该动作列表应作为服务提供规则的**FALSE**动作列表。
+
+#### 6.8.5. 服务器服务/事件订阅状态通知
+
+如果没有任何订阅者订阅该服务器实例的事件，那么发送事件或字段通知的服务器实例可能无需生成和发送这些事件。
+
+为了通知服务器实例是否有至少一个订阅者对其事件感兴趣，提供了一个**ModeSwitchInterface**用于接收订阅通知。
+
+作为服务器且对服务实例事件订阅状态感兴趣的软件组件，会暴露一个由**ModeSwitchInterface**类型化的**RPortPrototype**。通过这种方式，软件组件可以由**BswM**通知订阅的变化。
+
+服务器服务订阅状态模式切换接口应按如下方式定义：其中{RuleName}为对应规则的名称，{SwcName_PortName}为对应**SW-C**端口的**SW-C**短名称和端口名称。初始模式应为**RELEASE_SERVICE**。
+
+对于根据**TPS_SWCT_03503**（软件组件接收服务器事件订阅状态变化的通知）被任何**RPortPrototype**引用的每个端口组，应创建一个**BswM**规则。其短名称应为**SESNR_{端口组的短名称}**。
+
+对于根据**TPS_SWCT_03503**的每个通知端口，应创建一个对应的**PPortPrototype**（服务器订阅通知端口）。
+
+对于受服务器事件订阅通知规则影响的每个事件（组），应创建一个**BswMModeRequestSource.BswMSdEventHandlerCurrentState**，作为该规则的输入。
+
+如果属于服务器事件订阅通知规则的至少一个**BswMModeRequestSource**指示**SD_EVENT_HANDLER_REQUESTED**，则对应的服务器订阅通知**PPort**的当前模式应为**REQUEST_SERVICE**；否则，其当前模式应为**RELEASE_SERVICE**。
+
+#### 6.8.6. 配置期端口连接
+
+接口实际类型的定义，特别是给定的命名约定，简化了端口的连接。这意味着工具可以对这些接口和名称进行分析，并基于端口名称自动连接端口。所需的属性在**SW-C**描述设计时通过**ServiceDependency**提供。
+
+这适用于具有以下属性的端口：
+
+* **RoleBasedDataAssignment**设置为**ClientEventSubscription**的**SenderReceiverInterface**
+* **RoleBasedDataAssignment**设置为**ClientEventSubscriptionStatus**的**ModeSwitchInterface**
+* **RoleBasedDataAssignment**设置为**ServerServiceOffer**的**SenderReceiverInterface**
+* **RoleBasedDataAssignment**设置为**ClientEventSubscriptionStatus**的**ModeSwitchInterface**
+
+**注意：** 上述第4项按原文翻译，与第2项相同；结合上下文，其应为**RoleBasedDataAssignment**设置为**ServerServiceSubscriptionStatus**的**ModeSwitchInterface**。
 
 ## 7. API规范
 
@@ -1068,9 +1286,13 @@ void BswM_WdgM_RequestPartitionReset (
 )
 ```
 
-### 7.2. 周期函数
+### 7.2. 回调通知
 
-#### 7.2.1. BswM_MainFunction
+**BswM**中没有回调通知（**call-back notifications**）。
+
+### 7.3. 周期函数
+
+#### 7.3.1. BswM_MainFunction
 
 **说明**: **BswM**的主函数。
 
