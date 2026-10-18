@@ -1538,3 +1538,345 @@ actions J1939DeactivateBroadcastActions on condition {
 ```
 
 清单3.25：实现J1939广播管理的规则
+
+#### 3.4.7. LIN调度表切换
+
+**BswM**能够根据来自应用**SWC**的请求切换**LIN**通道的调度表。
+
+**SWC**以应用模式的形式向**BswM**请求一个**LIN**调度表。切换成功后，**BswM**切换到所请求的模式。
+
+下面展示了这种行为的一个示例。首先，需要一个供应用**SWC**用于请求特定调度表的模式声明组，**LIN**通道将切换到该调度表。
+
+```
+modeGroup MDG_LinScheduleTables { Schedule1, Schedule2 }
+```
+
+**BswM**与**SWC**之间的**SenderReceiverInterface**需要一个包含相同取值的枚举。
+
+```
+enum ENUM_LinScheduleTables { Schedule1, Schedule2 }
+```
+
+在**LIN**调度表设置完成后，需要一个模式切换接口来切换应用模式。
+
+```
+interface modeSwitch LinScheduleMode { mode MDG_LinScheduleTables LinScheduleMode }
+```
+
+还需要一个使用前面定义的枚举的**SenderReceiverInterface**。应用**SWC**可以使用它来请求一个应当引发**LIN**调度表切换的模式。
+
+```
+interface senderReceiver LinChannel1ScheduleTableRequestPort {
+  data ENUM_LinScheduleTables LinScheduleMode
+}
+```
+
+当应用**SWC**请求另一个应用模式时，下面的**BswM**规则会切换**LIN**通道的调度表。
+
+```
+rule LinChannel1Schedule1Request initially false {
+  if (LinChannel1ScheduleTableRequestPort == Schedule1) {
+    LinScheduleSwitch(LinSchedule1)
+  }
+}
+```
+
+下面的**BswM**规则将应用模式切换到应用此前请求的模式。当**LinSM**通知**BswM**发生了一次**LIN**调度表切换时，该规则被触发。
+
+```
+rule LinChannel1Schedule1Switched initially false {
+  if (LinSM_CurrentState == LinSchedule1) {
+    RteSwitch(LinScheduleMode, Schedule1)
+  }
+}
+```
+
+最后是**LIN**调度表**LinSchedule2**对应的规则：
+
+```
+rule LinChannel1Schedule2Request initially false {
+  if (LinChannel1ScheduleTableRequestPort == Schedule2) {
+    LinScheduleSwitch(LinSchedule2)
+  }
+}
+
+rule LinChannel2Schedule1Switched initially false {
+  if (LinSM_CurrentState == Schedule2) {
+    RteSwitch(LinScheduleMode, LinSchedule2)
+  }
+}
+```
+
+#### 3.4.8. 以太网交换机端口组切换
+
+对于以太网交换机端口切换，预期**EthSwtPort**被组合为**EthIfSwitchPortGroup**。**EthIfSwitchPortGroup**可以从系统描述提取（**SystemDescriptionExtract**）中派生。根据建模，每个**EthSwitchPortGroup**被映射到至少一个**PNC**。**EthIfSwitchPortGroup**的切换通过特定的**BswM**规则实现。因此，**ComM**通过**BswM_ComM_CurrentPNCMode**报告**PNC**的当前模式。**PNC**与**EthSwitchPortGroup**之间的映射为**BswM**所知。于是，**BswM**通过以相应的**EthIfSwitchPortGroup**调用**EthIf_SwitchPortGroupRequestMode**，将所报告的**PNC**当前模式转发给**EthIf**。根据给定的端口模式（**ETH_MODE_DOWN**或**ETH_MODE_ACTIVE**），**EthIf**管理对**EthIfSwitchPortGroup**的请求，并决定关闭或打开**EthSwtPort**。
+
+为了说明如何管理**EthIfSwitchPortGroup**的切换，创建以下场景。示例**ECU**配置了两个部分网络（命名为**PNC1**和**PNC2**）和两个对应的**EthIfSwtPortGroup**（命名为**EthIfSwtPortGroup1**和**EthIfSwtPortGroup2**）：
+
+* 如果**PNC1**被请求，则以**EthSwtPortGroup1**和**ETH_MODE_ACTIVE**调用**EthIf_SwitchPortGroupRequestMode**
+* 如果**PNC1**被释放，则以**EthSwtPortGroup1**和**ETH_MODE_DOWN**调用**EthIf_SwitchPortGroupRequestMode**
+* 如果**PNC2**被请求，则以**EthSwtPortGroup2**和**ETH_MODE_ACTIVE**调用**EthIf_SwitchPortGroupRequestMode**
+* 如果**PNC2**被释放，则以**EthSwtPortGroup2**和**ETH_MODE_DOWN**调用**EthIf_SwitchPortGroupRequestMode**
+
+如果一个部分网络被请求，则打开相应的**EthSwtPortGroup**。
+
+```
+rule pnc1requested initially false {
+  if ( PNC1 == COMM_PNC_REQUESTED || PNC1 == COMM_PNC_READY_SLEEP
+       || PNC1 == COMM_PNC_PREPARE_SLEEP ){
+    actionlist pnc1requestedActions
+  }
+}
+actions pnc1requestedActions on condition {
+  EthIfSwitchPortGroupRequestMode {
+    init false
+    enable EthIfSwtPortGroup1
+  }
+}
+
+rule pnc2requested initially false {
+  if ( PNC2 == COMM_PNC_REQUESTED || PNC2 == COMM_PNC_READY_SLEEP
+       || PNC2 == COMM_PNC_PREPARE_SLEEP ){
+    actionlist pnc2requestedActions
+  }
+}
+actions pnc2requestedActions on condition {
+  EthIfSwitchPortGroupRequestMode {
+    init false
+    enable EthIfSwtPortGroup2
+  }
+}
+```
+
+清单3.26：ComM报告切换到COMM_PNC_FULL_COMMUNICATION
+
+如果一个部分网络被释放，则关闭相应的**EthSwtPortGroup**。
+
+```
+rule pnc1released initially false {
+  if ( PNC1 == COMM_PNC_NO_COMMUNICATION) {
+    actionlist pnc1releasedActions
+  }
+}
+actions pnc1releasedActions on condition {
+  EthIfSwitchPortGroupRequestMode {
+    init true
+    disable EthIfSwtPortGroup1
+  }
+}
+
+rule pnc2released initially false {
+  if ( PNC2 == COMM_PNC_NO_COMMUNICATION) {
+    actionlist pnc2releasedActions
+  }
+}
+actions pnc2releasedActions on condition {
+  EthIfSwitchPortGroupRequestMode {
+    init true
+    disable EthIfSwtPortGroup2
+  }
+}
+```
+
+清单3.27：ComM报告COMM_PNC_NO_COMMUNICATION
+
+##### 3.4.8.1. 带唤醒请求的以太网交换机端口组切换
+
+**AUTOSAR**支持对兼容**OA TC10**的以太网硬件通过数据线（**dataline**）进行睡眠/唤醒的处理。结合**PNC**处理和以太网交换机端口组切换，当存在带唤醒请求的活动**PNC**请求时，**ComM**会以**COMM_PNC_REQUESTED_WITH_WAKEUP_REQUEST**向**BswM**发出指示。**BswM**通过以相应的**EthIfSwtPortGroup**和相应的**Eth_ModeType ETH_MODE_ACTIVE_WITH_WAKEUP_REQUEST**调用**EthIf_SwitchPortGroupRequestMode**，将该活动的**PNC**转发给**EthIf**。基于3.4.8节以太网交换机端口组切换中的示例配置，下面的示例展示了带数据线唤醒请求的以太网交换机端口切换：
+
+* 如果**PNC1**被请求，则以**EthSwtPortGroup1**和**ETH_MODE_ACTIVE_WITH_WAKEUP_REQUEST**调用**EthIf_SwitchPortGroupRequestMode**
+* 如果**PNC2**被请求，则以**EthSwtPortGroup2**和**ETH_MODE_ACTIVE_WITH_WAKEUP_REQUEST**调用**EthIf_SwitchPortGroupRequestMode**
+
+如果一个部分网络被请求，且以太网硬件支持并使用了数据线唤醒，则打开相应的**EthSwtPortGroup**，并通过**Eth_ModeType ETH_MODE_ACTIVE_WITH_WAKEUP_REQUEST**报告数据线唤醒请求。
+
+```
+rule pnc1requested_with_wakeup_request initially false {
+  if ( PNC1 == COMM_PNC_REQUESTED_WITH_WAKEUP_REQUEST){
+    actionlist pnc1requested_with_wakeup_request_Actions
+  }
+}
+actions pnc1requested_with_wakeup_request_Actions on condition {
+  EthIfSwitchPortGroupRequestMode {
+    init false
+    enable EthIfSwtPortGroup1
+  }
+}
+
+rule pnc2requested_with_wakeup_request initially false {
+  if ( PNC2 == COMM_PNC_REQUESTED_WITH_WAKEUP_REQUEST){
+    actionlist pnc2requested_with_wakeup_request_Actions
+  }
+}
+actions pnc2requested_with_wakeup_request_Actions on condition {
+  EthIfSwitchPortGroupRequestMode {
+    init false
+    enable EthIfSwtPortGroup1
+  }
+}
+```
+
+清单3.28：ComM报告切换到COMM_PNC_FULL_COMMUNICATION并带有数据线唤醒请求
+
+除了管理**EthIfSwitchPortGroup**切换的请求之外，**EthIf**还监督每个**EthSwitchPortGroup**的累积链路状态。如果**EthIf**检测到**EthIfSwitchPortGroup**累积链路状态的意外变化，它会通过调用受影响**EthIfSwitchPortGroup**的**BswM_EthIf_PortGroupLinkStateChg**来指示这一链路状态变化。该指示可以通过模式切换转发给应用，以便对这类通信错误场景做出反应（例如：以太网交换机端口硬件错误、数据线连接松动等）。
+
+#### 3.4.9. PduR路由路径组切换
+
+**PduR**路由路径组切换用于切换未分配给**COM** **I-PDU**组的**I-PDU**的路由路径（参见3.4.4节"I-PDU组切换"），例如：通过**LdCom**传输的**I-PDU**。**LdCom**不具备**Com**所提供的那种控制**I-PDU**组的能力。
+
+因此，可以通过配置**PduR**路由路径组来控制受影响的**PduR**路由路径（类似于**COM**中的**I-PDU**组）。
+
+**PduR**路由路径组通过以下**API**控制：**PduR_EnableRouting(\<routing path group id\>)**和**PduR_DisableRouting(\<routing path group id\>)**。
+
+这些**API**可以由**BswM**基于特定的**BswM**规则调用。这使得**PduR**路由路径组的切换能够与部分网络结合使用，例如：**ComM**向**BswM**指示当前的**PNC**状态，**BswM**评估相应**BswM**规则的触发条件并触发**BswM**动作（控制**PduR**路由路径组）。
+
+**请注意：**
+
+* 如果需要控制**I-PDU**，建议通过**COM** **I-PDU**组控制**COM**的**I-PDU**，并通过切换**PduR**路由路径组控制其余的**I-PDU**。
+
+以下场景说明如何管理一个**ECU**的**PduR**路由路径组。示例**ECU**具有一个带两个**VLAN**的物理以太网通道和三个部分网络集群。
+
+**VLAN**的模式请求端口命名为**EthSM_Vlan1**和**EthSM_Vlan2**，部分网络集群的请求源命名为**PNC1**、**PNC2**和**PNC3**。**PNC1**的**I-PDU**仅通过**Vlan1**通信；**PNC2**的**I-PDU**通过**Vlan1**和**Vlan2**通信；**PNC3**的**I-PDU**仅通过**Vlan2**通信。当总线状态管理器发出指示时，**BswM**应检查哪些部分网络集群被请求。
+
+```
+rule activeWakeupVlan1 initially false {
+  if ( EthSM_Vlan1 == ETHSM_BSWM_FULL_COMMUNICATION){
+    actionlist activeWakeupVlan1Actions
+  }
+}
+actions activeWakeupVlan1Actions on condition{
+  rule pnc1requested
+  rule pnc2requested
+}
+
+rule activeWakeupVlan2 initially false{
+  if ( EthSM_Vlan2 == ETHSM_BSWM_FULL_COMMUNICATION
+       && PNC2 != PNC_REQUESTED && PNC3 != PNC_REQUESTED )
+  {
+    actionlist activeWakeupVlan2Actions
+  }
+}
+actions activeWakeupVlan2Actions on condition{
+  rule pnc2requested
+  rule pnc3requested
+}
+```
+
+清单3.29：通道上的主动唤醒
+
+如果总线状态管理器报告某个**VLAN**即将离线，**BswM**会禁用相应的**I-PDU**路由路径组。如果该通道是一个部分网络的一部分，则必须禁用整个部分网络。
+
+```
+rule offlineVlan1 initially false {
+  if (EthSM_Vlan1 == ETHSM_BSWM_NO_COMMUNICATION){
+    actionlist offlineVlan1Actions
+  }
+}
+actions offlineVlan1Actions on condition {
+  PduRRoutingPathGroupSwitch{
+    init true
+    disable ArMmExample.EcuC.MyPduR.VLAN1_IPDU_ROUTING_PATHS,
+            ArMmExample.EcuC.MyPduR.PNC1_IPDU_ROUTING_PATHS,
+            ArMmExample.EcuC.MyPduR.PNC2_IPDU_ROUTING_PATHS
+  }
+}
+
+rule offlineVlan2 initially false {
+  if ( EhtSM_Can2 == CANSM_BSWM_NO_COMMUNICATION ) {
+    actionlist offlineVlan2Actions
+  }
+}
+actions offlineVlan2Actions on condition {
+  PduRRoutingPathGroupSwitch {
+    init true
+    disable ArMmExample.EcuC.MyPduR.VLAN2_IPDU_ROUTING_PATHS,
+            ArMmExample.EcuC.MyPduR.PNC2_IPDU_ROUTING_PATHS,
+            ArMmExample.EcuC.MyPduR.PNC3_IPDU_ROUTING_PATHS
+  }
+}
+```
+
+清单3.30：EthSM报告NO_COMMUNICATION
+
+当单个部分网络集群被释放时，代表该网络的**I-PDU**路由路径组必须被禁用。
+
+```
+rule pnc1nocom initially false {
+  if ( PNC1 == PNC_NO_COMMUNICATION ) {
+    actionlist pnc1nocomTrueActions
+  }
+}
+actions pnc1nocomActions on condition {
+  PduRRoutingPathGroupSwitch {
+    init true
+    disable ArMmExample.EcuC.MyPduR.PNC1_IPDU_ROUTING_PATHS
+  }
+}
+
+rule pnc2nocom initially false {
+  if ( PNC2 == PNC_NO_COMMUNICATION ) {
+    actionlist pnc2nocomTrueActions
+  }
+}
+actions pnc2nocomActions on condition {
+  PduRRoutingPathGroupSwitch {
+    init true
+    disable ArMmExample.EcuC.MyPduR.PNC2_IPDU_ROUTING_PATHS
+  }
+}
+
+rule pnc3nocom initially false {
+  if ( PNC3 == PNC_NO_COMMUNICATION ) {
+    actionlist pnc3nocomActions
+  }
+}
+actions pnc3nocomActions on condition {
+  PduRRoutingPathGroupSwitch {
+    init true
+    disable ArMmExample.EcuC.MyPduR.PNC3_IPDU_ROUTING_PATHS
+  }
+}
+```
+
+清单3.31：PNC报告NO_COMMUNICATION
+
+如果一个部分网络集群被请求，则使能相应的**I-PDU**路由路径组。
+
+```
+rule pnc1requested initially false {
+  if ( PNC1 == PNC_REQUESTED || PNC1 == PNC_READY_SLEEP ) {
+    actionlist pnc1requestedActions
+  }
+}
+actions pnc1requestedActions on condition {
+  PduRRoutingPathGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyPduR.PNC1_IPDU_ROUTING_PATHS
+  }
+}
+
+rule pnc2requested initially false {
+  if ( PNC2 == PNC_REQUESTED || PNC2 == PNC_READY_SLEEP ) {
+    actionlist pnc2requestedActions
+  }
+}
+actions pnc2requestedActions on condition {
+  PduRRoutingPathGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyPduR.PNC2_IPDU_ROUTING_PATHS
+  }
+}
+
+rule pnc3requested initially false {
+  if ( PNC3 == PNC_REQUESTED || PNC3 == PNC_READY_SLEEP ) {
+    actionlist pnc3requestedActions
+  }
+}
+actions pnc3requestedActions on condition {
+  PduRRoutingPathGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyPduR.PNC2_IPDU_ROUTING_PATHS
+  }
+}
+```
+
+清单3.32：PNC报告PNC_REQUESTED或PNC_READY_SLEEP
