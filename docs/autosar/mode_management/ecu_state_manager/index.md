@@ -1232,6 +1232,48 @@ InternalBehavior EcuStateManager {
 
 如果**OS**函数调用返回错误代码（**E_OK**除外），则**EcuM**应调用**EcuM_ErrorHook**，错误代码为**ECUM_E_OS_CALL_FAILED**。
 
+### 6.13. 错误分类
+
+文档[6]"基础软件模块通用规范"中的"错误处理"章节详细描述了基础软件的错误处理。其中尤其定义了一个由五种错误类型组成的分类方案，这些错误类型可能出现在**BSW**模块中。
+
+基于此，以下各小节规定了**EcuM**模块中相应的特定错误。
+
+此外，**EcuM**对错误还有一种额外的处理方式，可参见章节[6.12 错误处理](#612-错误处理)。
+
+#### 6.13.1. 开发错误
+
+**EcuM**模块中开发错误（**development errors**）的定义如下表所示：
+
+| 错误类型 | 相关错误代码 | 错误值 |
+| --- | --- | --- |
+| 检测到同一用户的多个请求 | **ECUM_E_MULTIPLE_RUN_REQUESTS** | 由实现分配 |
+| 调用了被配置禁用的函数 | **ECUM_E_SERVICE_DISABLED** | 由实现分配 |
+| 在初始化之前调用了服务 | **ECUM_E_UNINIT** | 由实现分配 |
+| 向**API**传递了未知的唤醒源作为参数 | **ECUM_E_UNKNOWN_WAKEUP_SOURCE** | 由实现分配 |
+| 初始化失败 | **ECUM_E_INIT_FAILED** | 由实现分配 |
+| 作为服务参数传递的状态超出范围（特定参数检查） | **ECUM_E_STATE_PAR_OUT_OF_RANGE** | 由实现分配 |
+| 参数无效（未具体分类） | **ECUM_E_INVALID_PAR** | 由实现分配 |
+| 传递了无效的指针作为参数 | **ECUM_E_PARAM_POINTER** | 由实现分配 |
+| 未找到与所提供用户相匹配的前序请求 | **ECUM_E_MISMATCHED_RUN_RELEASE** | 由实现分配 |
+
+#### 6.13.2. 运行时错误
+
+| 错误类型 | 相关错误代码 | 错误值 |
+| --- | --- | --- |
+| 唤醒后，在给定的时间内未设置唤醒事件（参见**EcuMCheckWakeupTimeout**） | **ECUM_E_WAKEUP_TIMEOUT** | 由实现分配 |
+
+#### 6.13.3. 瞬态故障
+
+无瞬态故障（**transient faults**）。
+
+#### 6.13.4. 产品错误
+
+无产品错误（**production errors**）。
+
+#### 6.13.5. 扩展产品错误
+
+无扩展产品错误（**extended production errors**）。
+
 ## 7. API规范
 
 ### 7.1. 函数定义
