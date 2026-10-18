@@ -1109,9 +1109,13 @@ void BswM_WdgM_RequestPartitionReset (
 )
 ```
 
-### 7.2. 周期函数
+### 7.2. 回调通知
 
-#### 7.2.1. BswM_MainFunction
+**BswM**中没有回调通知（**call-back notifications**）。
+
+### 7.3. 周期函数
+
+#### 7.3.1. BswM_MainFunction
 
 **说明**: **BswM**的主函数。
 
