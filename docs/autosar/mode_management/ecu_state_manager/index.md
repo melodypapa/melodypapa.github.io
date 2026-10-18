@@ -146,12 +146,20 @@ ECU管理器模块（**ECU Manager**）是管理**ECU**状态的基础软件模�
 [12] Specification of CAN Transceiver Driver
 > AUTOSAR_SWS_CANTransceiverDriver
 
+### 3.2. 相关规范
+
+AUTOSAR提供了基础软件模块的通用规范（参见相关文档[6]），它也适用于**ECU**状态管理器。因此，规范[6]应被视为**ECU**状态管理器的附加和必需规范。
+
 ## 4. 约束和假设
 
 ### 4.1. 限制
 
 **ECU**不能总是关闭，即：零功耗（**zero power consumption**）。
 **理由**：关机目标**OFF**只能通过**ECU**特殊硬件来达到。例如：电源保持电路（**a power hold circuit**）。如果此硬件不存在，则AUTOSAR规范建议改为发出复位（**reset**）指令。 但是其他默认行为被允许的。
+
+### 4.2. 适用于汽车领域
+
+**ECU**管理器模块适用于所有汽车域。
 
 ## 5. 对其他模块的依赖
 
