@@ -554,3 +554,96 @@ Example:   request BswMJ1939DcmBroadcastStatus J1939BroadcastStatusChannel1 {
 ```
 
 **注意：** 这是对每个网络所期望的广播状态的通知，由**DM13**触发。
+
+##### 3.2.2.3. 可配置的模式请求端口
+
+除了由**BswM**标准化接口所定义的接口之外，还可以通过配置参数定义额外的模式请求端口。
+
+例如：对于与应用程序的交互，应用软件组件至少需要将其当前状态通知**BswM**。这可以通过定义一个模式请求端口来实现，如清单3.4所示。随后**BswM**会创建一个由**SenderReceiverInterface**类型化的对应**RPort**。
+
+```
+request SwcModeRequest App1ModeRequest {
+  source MSIF_ApplicationModes.appMode
+  processing IMMEDIATE
+  initialValue ModeA
+}
+```
+
+清单3.4：应用模式请求端口
+
+注意，对模式声明组原型的引用可能具有误导性。其含义是：**BswM**会创建一个包含**VariableDataPrototype**的**SenderReceiverInterface**。该**VariableDataPrototype**的**SwDataDefProps**引用一个**CompuMethod**，该**CompuMethod**定义了一个与所引用模式声明组原型相对应的枚举。
+
+```
+request SwcModeNotification App1ModeNotification {
+  source MSIF_ApplicationModes.appMode
+  processing IMMEDIATE
+  initialValue ModeA
+}
+```
+
+清单3.5：应用模式通知
+
+清单3.5展示了模式通知端口的声明。注意，与清单3.4相反，在这种情况下**BswM**将生成一个由**ModeSwitchInterface**类型化的**RPort**。当模式管理器发起模式切换时，**BswM**会通过模式切换通知获得通知。
+
+```
+request BswModeNotification EcuMode {
+  source MSIF_EcuMode.ecuMode
+  processing IMMEDIATE
+  initialValue ECU_STARTUP_ONE
+}
+```
+
+清单3.6：基础软件模式通知
+
+清单3.6展示了一个模式通知端口的声明。如果配置了这样的端口，**BswM**配置工具将创建一个**requiredModeGroup**模式声明组原型，这样当相应的模式管理器通过调用**SchM_Switch** **API**发起模式切换时，**BswM**就会通过调度管理器获得模式切换的通知。
+
+##### 3.2.2.4. 可配置的模式切换端口
+
+**BswM**可以通过配置的**BswMSwitchPort**发送模式切换。对于一个已配置的**BswMSwitchPort**，根据配置（参见**BswM SWS**），**BswM**可以生成**PPortPrototype**、**providedModeGroups**模式声明组原型，或者两者同时生成。清单3.7展示了一个**BswMSwitchPort**的示例。
+
+```
+switchport EcuMode { modeSwitchinterface MSIF_EcuMode }
+```
+
+清单3.7：可配置模式切换端口的示例
+
+#### 3.2.3. BswM行为的配置
+
+**BswM**的行为通过规则和动作列表来指定。规则是一个逻辑表达式，它组合各**ModeRequestTypeMap**的当前值。每条规则的评估结果会导致执行其**true**或**false**动作列表。
+
+**ModeControl**容器包含这些动作列表。一个动作列表可以由一组原子动作、其他"嵌套的"动作列表组成，也可以引用（嵌套的）规则，这些规则会在该动作列表的上下文中被评估。
+
+下面的示例展示了一个简单的规则，它激活专用**CAN**通道的**I-PDU**组。根据此规则，**BswM**必须提供一个名为**Can1_Indication**的**CanSMIndication**类型的模式请求端口。这是一个来自基础软件模块的模式请求，在此例中来自**CAN**状态管理器。在代码中，此模式请求端口对应于[4]中[SWS_BswM_00049]所描述的**API BswM_CanSM_CurrentState**。**source**参数标识此模式请求源端口所属的网络。由**BswM**的配置工具负责为所引用的**ECUC**容器分配**API**所需的正确参数。
+
+该模式请求源端口的初始值为**CAN_SM_BswM_NO_COMMUNICATION**。
+
+**processing immediate**意味着每一条引用此模式请求源端口的规则评估都会被立即处理。每个立即模式请求都会触发引用它的规则的评估。如果此参数在模式请求的情况下配置为**deferred**，那么规则的评估将被推迟到**BswM**主函数的下一次运行。**BswM**不支持对延迟模式请求的排队评估。因此，延迟模式请求具有"最后者最优"（**last-is-best**）语义：只有**BswM**主函数执行之前发出的最后一个模式请求会被使用。
+
+下面的示例展示了一条名为**canIPDUActivation**的仲裁规则。其总体内容不言自明。**initial**参数指定规则评估的初始结果为**false**。
+
+```
+rule checkApp1Request initially false {
+  if ( App1ModeRequest == MDG_ApplicationModes.ModeA
+       && EcuMode == MDG_EcuMode.ECU_RUN)
+  {
+    actionlist checkApp1RequestTrueActions
+  }
+}
+actions checkApp1RequestTrueActions on condition {
+  ComMAllowCom MyComM.CanNet1 true
+  SchMSwitch EcuMode : ECU_RUN
+}
+```
+
+清单3.8：规则示例
+
+在事件发生后，规则在哪个时间点被执行取决于参数**BswMActionListExecution**。要么每次规则被评估且具有相应结果时都执行，要么仅当评估结果与上一次评估相比发生变化时才执行。这分别称为触发执行（**triggered**）和条件执行（**conditional**）。
+
+表3.1概述了在哪些情况下动作列表会被执行或不被执行。触发型动作列表在规则评估结果发生变化时被执行（触发）；条件型动作列表仅取决于评估的当前结果（条件），而不论其是否发生了变化。
+
+表3.1：动作列表的执行取决于参数BswMActionListExecution
+
+| 评估结果（旧）→（新） | true → true | true → false | false → false | false → true |
+| --- | --- | --- | --- | --- |
+| TrueActionList | CONDITION | - | - | TRIGGERED/CONDITION |
+| FalseActionList | - | TRIGGERED/CONDITION | CONDITION | - |
