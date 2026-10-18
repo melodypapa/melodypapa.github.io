@@ -411,7 +411,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 **ECU**管理器配置工具必须对所有**BSW**模块的所有预编译和链接时配置参数计算一个哈希（**hash**）值，并将该值存储在链接时的**ECUM_CONFIGCONSISTENCY_HASH**配置参数中（参见**EcuMConfigConsistencyHash**）。需要哈希值的原因有两个：首先，预编译和链接时参数在运行时是不可访问的；其次，该检查在运行时必须非常高效，比较数百个参数会给**ECU**启动过程带来不可接受的延迟。
 
-**ECU**管理器模块配置工具必须依次将计算出的**ECUM_CONFIGCONSISTENCY_HASH**值放入**EcuM_ConfigType**结构体中包含所有后构建配置参数根节点的字段中。
+**ECU**管理器模块配置工具必须继而将计算出的**ECUM_CONFIGCONSISTENCY_HASH**值放入**EcuM_ConfigType**结构体中包含所有后构建配置参数根节点的字段中。
 
 **ECU**管理器模块需在**EcuM_Init**中检查**EcuM_ConfigType**结构体中的该字段是否等于**ECUM_CONFIGCONSISTENCY_HASH**的值。
 
