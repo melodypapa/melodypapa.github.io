@@ -1,5 +1,5 @@
 ---
-title: "AUTOSAR ICU Driver（模数转换器驱动）"
+title: "AUTOSAR ICU Driver（输入捕获驱动）"
 ---
 
 

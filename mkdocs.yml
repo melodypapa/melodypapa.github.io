@@ -147,9 +147,9 @@ nav:
 
       - "AUTOSAR ECU State Manager（ECU状态管理器）": autosar/general/platform_types/index.md
     - I/O:
-
+      - autosar/io/index.md
       - "AUTOSAR ADC Driver（模数转换器驱动）": autosar/io/adc_driver/index.md
-      - "AUTOSAR ICU Driver（模数转换器驱动）": autosar/io/icu_driver/index.md
+      - "AUTOSAR ICU Driver（输入捕获驱动）": autosar/io/icu_driver/index.md
       - "AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）": autosar/io/iohwab/index.md
     - 存储（Memory）:
 
