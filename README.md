@@ -42,6 +42,50 @@ mkdocs serve
 mkdocs build --strict
 ```
 
+## MkDocs 使用
+
+### 新增页面
+
+1. 在 `docs/` 对应栏目下创建目录与页面，例如 `docs/nxp/s32g2/lpuart/index.md`
+2. 在 `mkdocs.yml` 的 `nav` 中注册该页面——存在未收录的 Markdown 文件时，`mkdocs build --strict` 会因告警而构建失败
+3. 推送到 `master` 后由 Actions 自动构建发布
+
+### 写作规范
+
+- **每个页面有且只有一个一级标题（`#`）**，否则右侧目录（TOC）会显示异常
+- 通过 front-matter 设置页面标题：
+
+  ```yaml
+  ---
+  title: 页面标题
+  ---
+  ```
+
+### 可用的 Markdown 扩展
+
+以下扩展已在 `mkdocs.yml` 的 `markdown_extensions` 中启用，写作时可直接使用：
+
+- **提示框（admonition）**：支持 `note` / `tip` / `warning` / `danger` 等类型
+
+  ```markdown
+  !!! note "提示"
+      这是一个 admonition 提示框。
+  ```
+
+- **Mermaid 图表**：直接书写 `mermaid` 代码块即可渲染（通过 CDN 引入 mermaid 10.9.1，配合 `docs/javascripts/mermaid-init.js` 初始化）
+
+  ````markdown
+  ```mermaid
+  graph LR
+      A[启动] --> B[初始化]
+      B --> C[运行]
+  ```
+  ````
+
+- **表格** 与 **任务列表**（`- [x]` 已完成）
+- **代码复制按钮**：所有代码块右上角自动启用
+- **标题锚点**：各级标题自动生成永久链接，便于页面内跳转与引用
+
 ## 部署
 
 推送到 `master` 分支后，[GitHub Actions](.github/workflows/ci.yml) 会自动执行 `mkdocs build --strict` 并通过 artifact 方式发布到 GitHub Pages，无需手动操作。
