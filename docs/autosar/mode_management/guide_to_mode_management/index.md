@@ -1195,3 +1195,346 @@ actions NvMReadAllFinished4PartitionActions on condition {
 #### 3.4.3. 主函数的调度
 
 由于通信通道或**PNC**的状态变化通常在主处理函数的上下文中处理，因此必须恰当考虑通信和网络管理所涉及模块（**ComM**、**Nm**、**\<Bus\>Nm**）的主处理函数的调度和执行顺序。**ComM**通常结合系统中的事件来协调各项活动，并通过调用相关**API**触发下层所需的动作。系统中需要**ComM**触发特定动作的事件可以是用户的内部请求（对通道或**PNC**的内部请求）、对通道或**PNC**的被动/外部请求，或者在总线上接收到的同步**PNC**关闭报文。外部事件可能由唤醒事件、周期**NM**报文的接收或同步关闭报文引起。**ComM**接收并处理所有内部和外部请求，并触发所需的动作，这些动作将导致通信和网络管理模块状态机的状态变化，进而导致周期**NM**报文或同步关闭报文在总线上的传输。在集成这些模块时，必须考虑到：特定请求的处理在基础软件中是异步完成的（例如：传输请求、来自应用的某些请求），并且特定动作可能在所涉及模块的主处理周期上下文中被解耦处理（例如：**\<Bus\>Nm**中的传输、定时器的处理、状态变化以及向上层的通知）。
+
+#### 3.4.4. I-PDU组切换
+
+对于**I-PDU**组切换，预期**COM**中为每个通道或部分网络存在专用于发出和接收**I-PDU**的**I-PDU**组。**AUTOSAR COM**确保只要包含某个**I-PDU**的至少一个**I-PDU**组处于活动（启动）状态，该**I-PDU**就是活动的。
+
+请注意，**I-PDU**组的处理高度依赖具体项目，某些用例必须在项目范围内加以考虑（例如：使用**\<Bus\>Sm**状态而不是**ComM**模式，或者同时使用**\<Bus\>Sm**状态和**ComM**模式）。
+
+为了说明如何管理一个**ECU**的**I-PDU**，创建以下简化场景来描述其处理方式。示例**ECU**具有两个**CAN**通道和三个部分网络。通道的模式请求端口命名为**ComM_Mode_Channel1**和**ComM_Mode_Channel2**，部分网络的请求源命名为**PNC1**、**PNC2**和**PNC3**。**PNC1**的**I-PDU**仅通过**Channel1**通信；**PNC2**的**I-PDU**通过**Channel1**和**Channel2**通信；**PNC3**的**I-PDU**仅通过**Channel2**通信。本示例中使用的**I-PDU**组在下表中定义。
+
+表3.2：PNC处理的I-PDU组
+
+| I-PDU组 | PNC | 方向 | 通道 |
+| --- | --- | --- | --- |
+| PNC1PDUS_TX | PNC1 | TX | Channel1 |
+| PNC1PDUS_RX | PNC1 | RX | Channel1 |
+| PNC2PDUS_CH1_TX | PNC2 | TX | Channel1 |
+| PNC2PDUS_CH1_RX | PNC2 | RX | Channel1 |
+| PNC2PDUS_CH2_TX | PNC2 | TX | Channel2 |
+| PNC2PDUS_CH2_RX | PNC2 | RX | Channel2 |
+| PNC3PDUS_TX | PNC3 | TX | Channel2 |
+| PNC3PDUS_RX | PNC3 | RX | Channel2 |
+
+表3.3：由通道处理控制的I-PDU组
+
+| I-PDU组 | PNC | 方向 | 通道 |
+| --- | --- | --- | --- |
+| CAN1IPDUS_TX | n/a | TX | Channel1 |
+| CAN1IPDUS_RX | n/a | RX | Channel1 |
+| CAN2IPDUS_TX | n/a | TX | Channel2 |
+| CAN2IPDUS_RX | n/a | RX | Channel2 |
+
+##### 3.4.4.1. 通道相关的I-PDU组处理
+
+如果一个通信通道被请求，则应启动相应的**I-PDU**组。
+
+```
+rule channel1requested initially false {
+  if ( ComM_Mode_Channel1 == COMM_FULL_COMMUNICATION ) {
+    actionlist channel1requestedActions
+  }
+}
+actions channel1requestedActions on condition {
+  PduGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyCom.CAN1IPDUS_TX, ArMmExample.EcuC.MyCom.CAN1IPDUS_RX
+  }
+}
+
+rule channel2requested initially false {
+  if ( ComM_Mode_Channel2 == COMM_FULL_COMMUNICATION ) {
+    actionlist channel2requestedActions
+  }
+}
+actions channel2requestedActions on condition {
+  PduGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyCom.CAN2IPDUS_TX, ArMmExample.EcuC.MyCom.CAN2IPDUS_RX
+  }
+}
+```
+
+清单3.18：ComM报告FULL_COMMUNICATION
+
+如果一个通信通道被释放，且通道状态机进入**COMM_SILENT_COMMUNICATION**，则应停止相应的**TX** **I-PDU**组。
+
+```
+rule channel1silentcom initially false {
+  if ( ComM_Mode_Channel1 == COMM_SILENT_COMMUNICATION ) {
+    actionlist channel1silentcomActions
+  }
+}
+actions channel1silentcomActions on condition {
+  PduGroupSwitch {
+    init true
+    disable ArMmExample.EcuC.MyCom.CAN1IPDUS_TX
+  }
+}
+
+rule channel2silentcom initially false {
+  if ( ComM_Mode_Channel2 == COMM_SILENT_COMMUNICATION ) {
+    actionlist channel2silentcomActions
+  }
+}
+actions channel2silentcomActions on condition {
+  PduGroupSwitch {
+    init true
+    disable ArMmExample.EcuC.MyCom.CAN2IPDUS_TX
+  }
+}
+```
+
+清单3.19：ComM报告SILENT_COMMUNICATION
+
+如果一个通信通道被释放，且通道状态机进入**COMM_NO_COMMUNICATION**，则应停止相应的**RX** **I-PDU**组。
+
+```
+rule channel1nocom initially false {
+  if ( ComM_Mode_Channel1 == COMM_NO_COMMUNICATION ) {
+    actionlist channel1nocomActions
+  }
+}
+actions channel1nocomActions on condition {
+  PduGroupSwitch {
+    init true
+    disable ArMmExample.EcuC.MyCom.CAN1IPDUS_RX
+  }
+}
+
+rule channel2nocom initially false {
+  if ( ComM_Mode_Channel2 == COMM_NO_COMMUNICATION ) {
+    actionlist channel2nocomActions
+  }
+}
+actions channel2nocomActions on condition {
+  PduGroupSwitch {
+    init true
+    disable ArMmExample.EcuC.MyCom.CAN2IPDUS_RX
+  }
+}
+```
+
+清单3.20：ComM报告NO_COMMUNICATION
+
+##### 3.4.4.2. PNC相关的I-PDU组处理
+
+如果一个部分网络被请求（无论是主动还是被动），则应启动相应的**I-PDU**组。
+
+```
+rule pnc1requested initially false {
+  if ( PNC1 == PNC_REQUESTED || PNC1 == PNC_READY_SLEEP ) {
+    actionlist pnc1requestedActions
+  }
+}
+actions pnc1requestedActions on condition {
+  PduGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyCom.PNC1IPDUS_TX, ArMmExample.EcuC.MyCom.PNC1IPDUS_RX
+  }
+}
+
+rule pnc2requested initially false {
+  if ( PNC2 == PNC_REQUESTED || PNC2 == PNC_READY_SLEEP ) {
+    actionlist pnc2requestedActions
+  }
+}
+actions pnc2requestedActions on condition {
+  PduGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyCom.PNC2IPDUS_CH1_TX, ArMmExample.EcuC.MyCom.PNC2IPDUS_CH1_RX,
+           ArMmExample.EcuC.MyCom.PNC2IPDUS_CH2_TX, ArMmExample.EcuC.MyCom.PNC2IPDUS_CH1_RX
+  }
+}
+
+rule pnc3requested initially false {
+  if ( PNC3 == PNC_REQUESTED || PNC3 == PNC_READY_SLEEP ) {
+    actionlist pnc3requestedActions
+  }
+}
+actions pnc3requestedActions on condition {
+  PduGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyCom.PNC3IPDUS_TX, ArMmExample.EcuC.MyCom.PNC3IPDUS_RX
+  }
+}
+```
+
+清单3.21：ComM报告PNC_REQUESTED或PNC_READY_SLEEP
+
+如果一个部分网络被释放，且**PNC**状态机进入**PNC_PREPARE_SLEEP**，则应停用相应**PNC**的截止期限监视（**deadline monitoring**）。在达到**PNC_NO_COMMUNICATION**状态之前，**I-PDU**仍会被传输。
+
+```
+rule pnc1preparesleep initially false {
+  if (PNC1 == PNC_PREPARE_SLEEP) {
+    actionlist pnc1preparesleepActions
+  }
+}
+actions pnc1preparesleepActions on condition {
+  PduGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyCom.PNC1IPDUS_TX, ArMmExample.EcuC.MyCom.PNC1IPDUS_RX
+  }
+  DeadlineMonitoring {
+    disable ArMmExample.EcuC.MyCom.PNC1IPDUS_RX
+  }
+}
+
+rule pnc2preparesleep initially false {
+  if (PNC2 == PNC_PREPARE_SLEEP ) {
+    actionlist pnc2preparesleepActions
+  }
+}
+actions pnc2preparesleepActions on condition {
+  PduGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyCom.PNC2IPDUS_CH1_TX, ArMmExample.EcuC.MyCom.PNC2IPDUS_CH2_RX,
+           ArMmExample.EcuC.MyCom.PNC2IPDUS_CH2_TX, ArMmExample.EcuC.MyCom.PNC2IPDUS_CH2_RX
+  }
+  DeadlineMonitoring {
+    disable ArMmExample.EcuC.MyCom.PNC2IPDUS_CH1_RX, ArMmExample.EcuC.MyCom.PNC2IPDUS_CH2_RX
+  }
+}
+
+rule pnc3preparesleep initially false {
+  if (PNC3 == PNC_PREPARE_SLEEP ) {
+    actionlist pnc3preparesleepActions
+  }
+}
+actions pnc3preparesleepActions on condition {
+  PduGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyCom.PNC3IPDUS_TX, ArMmExample.EcuC.MyCom.PNC3IPDUS_RX
+  }
+  DeadlineMonitoring {
+    disable ArMmExample.EcuC.MyCom.PNC3IPDUS_RX
+  }
+}
+```
+
+清单3.22：ComM报告PNC_PREPARE_SLEEP
+
+如果一个部分网络被释放，且**PNC**状态机进入**PNC_NO_COMMUNICATION**，则应停止相应的**I-PDU**组。
+
+```
+rule pnc1nocom initially false {
+  if ( PNC1 == PNC_NO_COMMUNICATION ) {
+    actionlist pnc1nocomTrueActions
+  }
+}
+actions pnc1nocomTrueActions on condition {
+  PduGroupSwitch {
+    init true
+    disable ArMmExample.EcuC.MyCom.PNC1IPDUS_TX, ArMmExample.EcuC.MyCom.PNC1IPDUS_RX
+  }
+}
+
+rule pnc2nocom initially false {
+  if ( PNC2 == PNC_NO_COMMUNICATION ) {
+    actionlist pnc2nocomTrueActions
+  }
+}
+actions pnc2nocomTrueActions on condition {
+  PduGroupSwitch {
+    init true
+    disable ArMmExample.EcuC.MyCom.PNC2IPDUS_CH1_TX, ArMmExample.EcuC.MyCom.PNC2IPDUS_CH1_RX,
+            ArMmExample.EcuC.MyCom.PNC2IPDUS_CH2_TX, ArMmExample.EcuC.MyCom.PNC2IPDUS_CH2_RX
+  }
+}
+
+rule pnc3nocom initially false {
+  if ( PNC3 == PNC_NO_COMMUNICATION ) {
+    actionlist pnc3nocomTrueActions
+  }
+}
+actions pnc3nocomTrueActions on condition {
+  PduGroupSwitch {
+    init true
+    disable ArMmExample.EcuC.MyCom.PNC3IPDUS_TX, ArMmExample.EcuC.MyCom.PNC3IPDUS_RX
+  }
+}
+```
+
+清单3.23：ComM报告PNC_NO_COMMUNICATION
+
+#### 3.4.5. J1939网络管理
+
+与当前的**AUTOSAR**网络管理不同，**J1939**网络管理的任务不是处理**ECU**的睡眠和唤醒，而是为**ECU**所表示的每个节点分配唯一的地址。
+
+这是通过在启动时发送**AddressClaimed**（**AC**，0x0EE00）参数组来实现的，该报文宣告所期望的地址。如果另一个节点声明了相同的地址并具有更高的优先级，本节点在发送**CannotClaimAddress**参数组（**SA**为空地址的**AC**）后必须进入静默，或者尝试使用其他地址。
+
+为了支持这一用例，**BswM**被扩展为可以通过**API**函数**BswM_J1939Nm_StateChangeNotification()**接受来自**J1939Nm**的状态变化指示（另请参阅3.2.2.2.15节）。
+
+根据网络管理所指示的状态，**BswM**需要切换**COM**的**ComIPduGroup**、**PduR**的**PduRRoutingPathGroup**，以及**J1939Rm**的通用请求处理。
+
+前两个动作通过**BswMPduGroupSwitch**和**BswMPduRouterControl**动作实现。**J1939**请求管理器应使用**BswMJ1939Rm**动作进行切换。
+
+预期**COM**为每个网络提供包含所有本地接收和发送**I-PDU**的**IPDU**组。**PduR**应以相同的方式配置，为每个通道提供用于所有本地接收和发送**I-PDU**的路由路径组，不包括转发给**J1939Rm**的**Request**报文的接收**I-PDU**。
+
+然后，**BswM**必须配置为根据所报告的**NM**状态切换上述**IPDU**组和**PduRRoutingPathGroup**的开启与关闭，以及**J1939**请求管理器的通用请求处理。下面的规则展示了**BswM**根据**NM**状态所执行的动作。
+
+```
+rule J1939_nm_normal_operation initially false {
+  if ( J1939NmState == NM_STATE_NORMAL_OPERATION ) {
+    actionlist J1939NormalOperationActions
+  }
+}
+actions J1939NormalOperationActions on condition {
+  PduGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyCom.J1939IPDUS
+  }
+  PduRoute enable J1939_RoutingPath
+  custom "J1939Rm_SetState(J1939RM_STATE_ONLINE)"
+  custom "Xcp_SetTransmissionMode(CHANNEL1,XCP_TX_ON)"
+}
+
+rule J1939_nm_offline initially false {
+  if ( J1939NmState != NM_STATE_NORMAL_OPERATION ) {
+    actionlist J1939OfflineActions
+  }
+}
+actions J1939OfflineActions on condition {
+  PduGroupSwitch {
+    disable ArMmExample.EcuC.MyCom.J1939IPDUS
+  }
+  PduRoute disable J1939_RoutingPath
+  custom "J1939Rm_SetState(J1939RM_STATE_OFFLINE)"
+  custom "Xcp_SetTransmissionMode(CHANNEL1,XCP_TX_OFF)"
+}
+```
+
+清单3.24：实现J1939网络管理的规则
+
+**注意：** 建议使用**BswMJ1939Rm**动作而不是自定义调用。本清单中使用自定义调用只是因为当前**ARText**版本尚不支持该动作。
+
+#### 3.4.6. J1939诊断模式管理
+
+除了地址分配之外，**BswM**还必须监督**J1939**环境中广播报文的发送。每个**IPDU**组代表一个网络的广播报文（具有**PDU2**格式**PGN**或**PDU1**格式**PGN**以及广播目标地址的**J1939 PG**）。
+
+为此，同样预期**COM**为每个通道包含一个**IPDU**组，其中包含该**ECU**的广播报文。
+
+```
+rule J1939_broadcast_management initially false {
+  if ( BswMJ1939DcmBroadcastStatus == NETWORK_ENABLED) {
+    actionlist J1939ActivateBroadcastActions
+  }
+  else {
+    actionlist J1939DeactivateBroadcastActions
+  }
+}
+actions J1939ActivateBroadcastActions on condition {
+  PduGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyCom.J1939BroadcastIPDUS
+  }
+}
+actions J1939DeactivateBroadcastActions on condition {
+  PduGroupSwitch {
+    disable ArMmExample.EcuC.MyCom.J1939BroadcastIPDUS
+  }
+}
+```
+
+清单3.25：实现J1939广播管理的规则
