@@ -125,3 +125,75 @@ AUTOSAR运行环境（**RTE**）实现了模式的概念。为此，它会为每
 第1至9步可以在每个**CPU**内核上并行执行，分别针对分布在相应内核上的模式用户。第10步只有在对整个模式机实例完成其他步骤后才会执行。尽管如此，某些应用特定的用例可能要求第1至9步具有更高程度的同步，例如：在**OnTransition**可执行实体之前执行所有**OnExit**可执行实体。因此，**RTE**提供了配置同步点（**synchronization points**）的机会（更多细节请参阅[ECUC_Rte_09127]、[ECUC_Rte_09128]和[ECUC_Rte_09129]）。
 
 对于模式用户分布在不同分区上的模式机实例，在分区重启的情况下无法将其重新初始化为默认模式。这会干扰其他仍在运行的分区。因此，处理分区重启唯一适用的策略是将**modeManagerErrorBehavior.errorReactionPolicy**设置为**lastMode**，它规定模式用户保持其最后已知的模式。
+
+## 3. 基础软件模式管理器的配置
+
+**BSW**模式管理器是实现车辆模式管理和应用模式管理概念中驻留在**BSW**部分的模块。它的职责是基于规则对来自应用层软件组件或其他基础软件模块的模式请求进行仲裁，并根据仲裁结果执行动作。
+
+从功能的角度来看，**BswM**负责使基础软件进入这样一种状态：基础软件能够正常运行并满足功能需求。
+
+**BswM**的配置非常依赖于具体项目和**ECU**。因此**AUTOSAR**无法将其标准化。尽管如此，**BswM**实现在特定情况下应以特定方式行为。本章首先介绍**BswM**的总体概念，它在某种程度上是一个由用户描述的规则的执行环境。随后描述**ECU**生命周期中的典型场景，并给出如何配置**BswM**的示例。
+
+### 3.1. 配置和集成BswM的过程
+
+将**BswM**配置并集成到**ECU**项目中的步骤与其他基础软件模块相同。尽管如此，为了更好地理解后续步骤，此处仍对其进行描述。通常需要执行以下操作：
+
+1. 创建模块的**ECUC**配置。对于**BswM**，该配置包含：
+   * 必需的**ModeRequestSources**
+   * 提供的**ModeSwitchPorts**
+   * 对规则和动作列表的描述
+2. 该配置作为模块生成器的输入，生成器会创建：
+   * **AUTOSAR**接口的软件组件描述
+   * 模块的实现（本文档假定**BswM**的实现会在很大程度上被生成）
+3. 最后一步是通过将软件组件的端口与**BswM**对应的端口相连接，将模块集成到**ECU**中。
+
+### 3.2. BswM配置的语义：接口和行为方面
+
+通常，**BswM**可以被看作一个状态机，它由其接口和行为描述定义。该状态机的输入动作是模式请求。每个模式请求在**BswM**的**ECU**配置中被描述为一个**BswMModeRequestSource**。这些模式请求可以是不同的类型（**C** **API**调用、通过**RTE**的模式请求、通过**RTE**的模式通知等），但在内部它们以相同的方式处理。
+
+当一个模式被请求时，该**BswMModeRequestSource**的内部镜像会被更新，并且根据配置会触发一次规则评估，其结果是执行预定义的动作列表。动作列表对动作进行分组。通常，动作是对**RTE**或调度管理器中模式切换的触发，但也存在一些预定义的动作会改变某些基础软件模块的状态。
+
+#### 3.2.1. BswM的接口
+
+接口由**BswMModeRequestSource**和**BswMActionListItem**配置容器定义。
+
+##### 3.2.1.1. 模式请求
+
+**BswMModeRequestSource**是一个选择容器（**ChoiceContainer**），可以是以下几种类型：
+
+1. 在**BswM**规范中定义的**C** **API**。基础软件模块可以直接调用**BswM**的**C** **API**，**BswM**会将其在内部转换为模式请求。例如：对**API**
+
+```c
+BswM_CanSM_CurrentState( NetworkHandleType Network, CanSM_BswMCurrentStateType CurrentState )
+```
+
+的调用，需要根据标识事件发生通道的参数**Network**映射到不同的模式请求端口。参数**CurrentState**则包含被请求的模式。由**BswM**标准化接口定义的模式请求将在3.2.2.2节中更详细地描述。
+
+2. 由**SenderReceiverInterface**类型化的**RPort**（**BswMSwcModeRequest**）：对于此类型的每个容器，**BswM**必须在其服务组件描述中创建一个对应的**RPort**。
+3. 由**ModeSwitchInterface**类型化的**RPort**（**BswMSwcModeNotification**）：对于此类型的每个容器，**BswM**必须在其服务组件描述中创建一个对应的**RPort**。由于它由**ModeSwitchInterface**类型化，**BswM**作为该模式机实例的模式用户，会在模式管理器执行**rte_switch**时获得通知。
+4. 模式声明组原型（**BswMBswModeNotification**）：对于此类型的每个容器，**BswM**必须在其基础软件模块描述中以**ModeDeclarationGroupPrototype**的角色创建一个对应的模式声明组原型。在这种情况下，**BswM**同样作为模式用户，但模式机实例由调度管理器维护。因此，当模式管理器（例如：另一个基础软件模块）执行**SchM_Switch**调用时，**BswM**会获得通知。
+
+##### 3.2.1.2. 可用动作
+
+**BswMActionListItem**可以是以下几种类型：
+
+1. 来自其他**BswM**模块的**C** **API**，它们在动作列表执行期间被直接调用：
+   * BswMComMAllowCom
+   * BswMComMModeLimitation
+   * BswMComMModeSwitch
+   * BswMDeadlineMonitoringControl
+   * BswMEcuMGoDown
+   * BswMEcuMSelectShutdownTarget
+   * BswMEcuMStateSwitch
+   * BswMJ1939Rm
+   * BswMLinScheduleSwitch
+   * BswMNMControl
+   * BswMPduGroupSwitch
+   * BswMPduRouterControl
+   * BswMRteSwitch
+   * BswMSchMSwitch
+   * BswMSwitchIPduMode
+   * BswMTriggerIPduSend
+   * BswMUserCallout
+2. 由**ModeSwitchInterface**类型化的**PPort**（**BswMSwitchPort**）：对于此类型的每个容器，如果满足某个配置条件（参见**BswM SWS**），**BswM**必须在其服务组件描述中创建一个对应的**PPort**。
+3. 模式声明组原型（**SwitchPort**）：对于此类型的每个容器，如果满足某个配置条件（参见**BswM SWS**），**BswM**必须在其基础软件模块描述中以**providedModeGroup**的角色创建一个对应的模式声明组原型。在这种情况下，**BswM**同样作为模式管理器，但模式机实例由调度管理器维护。
