@@ -857,6 +857,32 @@ DataReceiveEvent AppModeRequestEvent {
 
 该动作列表应作为事件订阅规则的**FALSE**动作列表。
 
+#### 6.8.3. 客户端服务/事件订阅状态通知
+
+作为客户端且对事件和方法订阅状态感兴趣的软件组件，会暴露一个由**ModeSwitchInterface**类型化的**RPortPrototype**。通过这种方式，软件组件可以由**BswM**通知订阅是否已建立。
+
+客户端服务订阅状态模式切换接口（**Mode Switch Interface**）应按如下方式定义：其中{RuleName}为对应规则的名称，{SwcName_PortName}为对应**SW-C**端口的**SW-C**短名称和端口名称。初始模式应为**RELEASE_SERVICE**。
+
+**注意：** 同一个接口既用于通知事件订阅，也用于指示客户端服务的可用性，具体取决于所涉及的是事件还是服务。
+
+对于根据**TPS_SWCT_03505**（软件组件接收客户端事件和方法订阅状态变化的通知）被任何**RPortPrototype**引用的每个端口组，应创建一个**BswM**规则。其短名称应为**SANR_{端口组的短名称}**。
+
+对于受服务可用性通知规则影响的每个已消费事件组（**Consumed Eventgroup**），应创建一个**BswMModeRequestSource.BswMSdConsumedEventGroupCurrentState**，作为该规则的输入。
+
+对于受服务可用性通知规则影响的每个客户端服务，应创建一个**BswMModeRequestSource.BswMSdClientServiceCurrentState**，作为该规则的输入。
+
+对于根据**TPS_SWCT_03505**被任何**RPortPrototype**引用的每个端口组，应按以下方式创建一个**BswM**规则：**BswMRuleInitState** = **FALSE**。如果所有关联的模式请求源都评估为**SD_CLIENT_SERVICE_AVAILABLE**，且所有关联的模式请求源都评估为**SD_CONSUMED_EVENTGROUP_AVAILABLE**，则该规则应评估为**TRUE**；否则，该规则应评估为**FALSE**。
+
+**注意：** 只有当与端口组关联的所有事件和所有服务都可用时，该端口组才可用。
+
+对于根据**TPS_SWCT_03505**被任何**RPortPrototype**引用的每个端口组，应创建一个对应的**PPortPrototype**（客户端订阅通知端口）。
+
+应创建一个动作列表，通过将客户端订阅通知**PPort**的当前模式设置为**REQUEST_SERVICE**，来执行对相应**SW-C**的通知。该动作列表应作为客户端事件订阅通知规则的**TRUE**动作列表。
+
+应创建一个动作列表，通过将客户端订阅通知**PPort**的当前模式设置为**RELEASE_SERVICE**，来执行对相应**SW-C**的通知。该动作列表应作为客户端事件订阅通知规则的**FALSE**动作列表。
+
+**注意：** 在典型场景中，受影响的是一个客户端服务中的1个事件（或者在只有方法的情况下仅为客户端服务本身）。然而，由于可以将任意数量的事件、方法甚至不同的服务（实例）分组到一个端口组中，因此只有在它们全部可用且已订阅时才会进行指示。
+
 ## 7. API规范
 
 ### 7.1. 函数定义
