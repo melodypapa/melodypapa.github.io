@@ -107,7 +107,7 @@ nav:
 
       - "AUTOSAR CAN Driver（CAN驱动程序）":
         - autosar/communication/can_driver/index.md
-        - Full-CAN vs. Basic-CAN: autosar/communication/can_driver/full_can_vs_basic_can.md
+        - "Full-CAN 与 Basic-CAN 的区别": autosar/communication/can_driver/full_can_vs_basic_can.md
       - AUTOSAR CAN Interface: autosar/communication/can_interface/index.md
       - "AUTOSAR CAN NM（CAN网络管理）":
         - autosar/communication/can_network_management/index.md
