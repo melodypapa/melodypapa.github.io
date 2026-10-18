@@ -526,11 +526,52 @@ BswM也能够调用用户定义的函数（**user defined functions**），同�
 
 ### 6.5. 错误分类
 
-#### 6.5.1. 运行时错误
+《基础软件模块通用规范》（**General Specification of Basic Software Modules**）的第7.2章"错误处理"详细描述了基础软件的错误处理。其中尤其定义了一个由五种错误类型组成的分类方案，这些错误类型可能出现在**BSW**模块中。
+
+基于此，以下各小节规定了**BswM**模块中相应的特定错误。
+
+#### 6.5.1. 开发错误
+
+**BswM**模块中开发错误（**development errors**）的定义如下表所示：
+
+| 错误类型 | 相关错误代码 | 错误值 |
+| --- | --- | --- |
+| 在初始化之前调用了服务 | **BSWM_E_UNINIT** | 0x01 |
+| 传递了空指针作为参数 | **BSWM_E_NULL_POINTER** | 0x02 |
+| 参数无效（未具体分类） | **BSWM_E_PARAM_INVALID** | 0x03 |
+| 请求用户超出范围 | **BSWM_E_REQ_USER_OUT_OF_RANGE** | 0x04 |
+| 请求的模式超出范围 | **BSWM_E_REQ_MODE_OUT_OF_RANGE** | 0x05 |
+| 提供的配置不一致 | **BSWM_E_PARAM_CONFIG** | 0x06 |
+| 参数指针无效 | **BSWM_E_PARAM_POINTER** | 0x07 |
+| 无效的配置集选择 | **BSWM_E_INIT_FAILED** | 0x08 |
+
+#### 6.5.2. 运行时错误
 
 ![Runtime Error](Error.png)
 
+| 错误类型 | 相关错误代码 | 错误值 |
+| --- | --- | --- |
+| 某个动作返回**E_NOT_OK** | **BSWM_E_ACTION_FAILED** | 0x80..0xFF（由**BswMReportFailRuntimeErrorId**配置） |
+
 当**BswMActionListItem**配置了**BswMReportFailRuntimeErrorId**，如果操作返回**E_NOT_OK**，则**BswM**需向**Det**报告**BSWM_E_ACTION_FAILED**运行时错误。**BSWM_E_ACTION_FAILED**运行时错误中报告的**ErrorId**由**BswMReportFailRuntimeErrorId**中配置的值给出。
+
+由于动作的调用上下文取决于配置（例如：**DEFERRED**或**IMMEDIATE**），**BSWM_E_ACTION_FAILED**运行时错误中报告的**ApiId**未在本规范中定义，可能是特定于实现的。
+
+**BSWM_E_ACTION_FAILED**运行时错误代表了一个**ErrorId**取值范围。该取值范围仅限于运行时错误类型表中给出的值。
+
+**BswM**需拒绝**BswMReportFailRuntimeErrorId**不在运行时错误类型表中为**BSWM_E_ACTION_FAILED**给出的取值范围内的配置。
+
+#### 6.5.3. 瞬态故障
+
+无瞬态故障（**transient faults**）。
+
+#### 6.5.4. 产品错误
+
+无产品错误（**production errors**）。
+
+#### 6.5.5. 扩展产品错误
+
+无扩展产品错误（**extended production errors**）。
 
 ### 6.6. BswM接口和端口
 
