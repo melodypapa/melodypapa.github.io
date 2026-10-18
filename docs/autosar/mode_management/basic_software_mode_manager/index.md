@@ -919,6 +919,37 @@ DataReceiveEvent AppModeRequestEvent {
 
 该动作列表应作为服务提供规则的**FALSE**动作列表。
 
+#### 6.8.5. 服务器服务/事件订阅状态通知
+
+如果没有任何订阅者订阅该服务器实例的事件，那么发送事件或字段通知的服务器实例可能无需生成和发送这些事件。
+
+为了通知服务器实例是否有至少一个订阅者对其事件感兴趣，提供了一个**ModeSwitchInterface**用于接收订阅通知。
+
+作为服务器且对服务实例事件订阅状态感兴趣的软件组件，会暴露一个由**ModeSwitchInterface**类型化的**RPortPrototype**。通过这种方式，软件组件可以由**BswM**通知订阅的变化。
+
+服务器服务订阅状态模式切换接口应按如下方式定义：其中{RuleName}为对应规则的名称，{SwcName_PortName}为对应**SW-C**端口的**SW-C**短名称和端口名称。初始模式应为**RELEASE_SERVICE**。
+
+对于根据**TPS_SWCT_03503**（软件组件接收服务器事件订阅状态变化的通知）被任何**RPortPrototype**引用的每个端口组，应创建一个**BswM**规则。其短名称应为**SESNR_{端口组的短名称}**。
+
+对于根据**TPS_SWCT_03503**的每个通知端口，应创建一个对应的**PPortPrototype**（服务器订阅通知端口）。
+
+对于受服务器事件订阅通知规则影响的每个事件（组），应创建一个**BswMModeRequestSource.BswMSdEventHandlerCurrentState**，作为该规则的输入。
+
+如果属于服务器事件订阅通知规则的至少一个**BswMModeRequestSource**指示**SD_EVENT_HANDLER_REQUESTED**，则对应的服务器订阅通知**PPort**的当前模式应为**REQUEST_SERVICE**；否则，其当前模式应为**RELEASE_SERVICE**。
+
+#### 6.8.6. 配置期端口连接
+
+接口实际类型的定义，特别是给定的命名约定，简化了端口的连接。这意味着工具可以对这些接口和名称进行分析，并基于端口名称自动连接端口。所需的属性在**SW-C**描述设计时通过**ServiceDependency**提供。
+
+这适用于具有以下属性的端口：
+
+* **RoleBasedDataAssignment**设置为**ClientEventSubscription**的**SenderReceiverInterface**
+* **RoleBasedDataAssignment**设置为**ClientEventSubscriptionStatus**的**ModeSwitchInterface**
+* **RoleBasedDataAssignment**设置为**ServerServiceOffer**的**SenderReceiverInterface**
+* **RoleBasedDataAssignment**设置为**ClientEventSubscriptionStatus**的**ModeSwitchInterface**
+
+**注意：** 上述第4项按原文翻译，与第2项相同；结合上下文，其应为**RoleBasedDataAssignment**设置为**ServerServiceSubscriptionStatus**的**ModeSwitchInterface**。
+
 ## 7. API规范
 
 ### 7.1. 函数定义
