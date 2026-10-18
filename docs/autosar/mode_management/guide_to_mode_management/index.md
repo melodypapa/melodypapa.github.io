@@ -293,3 +293,264 @@ ECUM_STATE_APP_POST_RUN, ECUM_STATE_SHUTDOWN, ECUM_STATE_SLEEP }
 在**BswM**配置中，必须定义模式请求源。以下的模式请求端口是由**BswM**的**API**隐式定义的。本小节对这些端口接口进行汇总。
 
 下面的模式声明组在**AUTOSAR**规范的相应**SWS**文档中以**C**枚举（**C-Enum**）的形式定义。尽管如此，此处仍以**BswM**配置的形式引用它们，它们作为本文档其余部分的基础。有关模式的定义，请参阅**SWS**文档中对**C**枚举的定义。
+
+###### 3.2.2.2.1. BswMComMIndication
+
+目的：由**ComM**调用的函数，用于指示其当前状态。
+
+```
+Signature: void BswM_ComM_CurrentMode( NetworkHandleType Network, ComM_ModeType RequestedMode )
+Modes:     modeGroup ComM_ModeType
+Example:   request ComMIndication ComM_Mode_Channel1 {
+             processing IMMEDIATE
+             initialValue COMM_NO_COM_NO_PENDING_REQUEST
+             source MyComM.ComMChannel1
+           }
+```
+
+**注意：** 对于由**Network**参数标识的每个**ComM**通道，都必须创建一次此模式请求源。
+
+###### 3.2.2.2.2. BswMComMPncRequest
+
+目的：由**ComM**调用的函数，用于指示部分网络（**partial network**）的当前状态。
+
+```
+Signature: void BswM_ComM_CurrentPNCMode( PNCHandleType PNC, ComM_PncModeType CurrentPncMode )
+Modes:     modeGroup ComM_PncModeType
+Example:   request ComMPncRequest PNC1 {
+             processing IMMEDIATE
+             initialValue PNC_NO_COMMUNICATION
+             source MyComM.ComMPnc1
+           }
+           request ComMPncRequest PNC2 {
+             processing IMMEDIATE
+             initialValue PNC_NO_COMMUNICATION
+             source MyComM.ComMPnc2
+           }
+           request ComMPncRequest PNC3 {
+             processing IMMEDIATE
+             initialValue PNC_NO_COMMUNICATION
+             source MyComM.ComMPnc3
+           }
+```
+
+**注意：** 对于每个部分网络，都必须创建一次此模式请求源。
+
+###### 3.2.2.2.3. BswMDcmComModeRequest
+
+目的：由**DCM**调用的函数，用于指示**CommunicationControl**的当前状态。
+
+```
+Signature: void BswM_Dcm_CommunicationMode_CurrentState( NetworkHandleType Network, Dcm_CommunicationModeType RequestedMode )
+Modes:     modeGroup Dcm_CommunicationModeType
+Example:   request DcmComModeRequest BswM_Dcm_CommunicationMode_CurrentState {
+             processing IMMEDIATE
+             initialValue DCM_ENABLE_RX_TX_NORM
+             network "network1"
+           }
+```
+
+###### 3.2.2.2.4. BswMCanSMIndication
+
+目的：由**CanSM**调用的函数，用于指示其当前状态。
+
+```
+Signature: void BswM_CanSM_CurrentState( NetworkHandleType Network, CanSM_BswMCurrentStateType CurrentState )
+Modes:     modeGroup CanSM_BswMCurrentStateType
+Example:   request CanSMIndication CanSM_Can1 {
+             processing IMMEDIATE
+             initialValue CANSM_BSWM_NO_COMMUNICATION
+             source MyComM.CanNet1
+           }
+           request CanSMIndication CanSM_Can2 {
+             processing IMMEDIATE
+             initialValue CANSM_BSWM_NO_COMMUNICATION
+             source MyComM.CanNet2
+           }
+```
+
+**注意：** 对于每个**CAN**通道，都必须创建一次此模式请求源。
+
+###### 3.2.2.2.5. BswMEthSMIndication
+
+目的：由**EthSM**调用的函数，用于指示其当前状态。
+
+```
+Signature: void BswM_EthSM_CurrentState( NetworkHandleType Network, EthSM_NetworkModeStateType CurrentState )
+Modes:     modeGroup EthSM_NetworkModeStateType
+Example:   request EthSMIndication EthSM_Network1 {
+             processing IMMEDIATE
+             initialValue ETHSM_NO_COMMUNICATION
+             source MyComM.EthSmNetwork
+           }
+```
+
+**注意：** 对于每个以太网通道，都必须创建一次此模式请求源。
+
+###### 3.2.2.2.6. BswMFrSMIndication
+
+目的：由**FrSM**调用的函数，用于指示其当前状态。
+
+```
+Signature: void BswM_FrSM_CurrentState( NetworkHandleType Network, FrSM_BswM_StateType CurrentState )
+Modes:     modeGroup FrSM_BswM_StateType
+Example:   request FrSMIndication FrSM_BswM_StateType {
+             processing IMMEDIATE
+             initialValue FRSM_BSWM_READY
+             source MyComM.EthSmNetwork
+           }
+```
+
+**注意：** 对于每个**FlexRay**集群（**cluster**），都必须创建一次此模式请求源。
+
+###### 3.2.2.2.7. BswMLinSMIndication
+
+目的：由**LinSM**调用的函数，用于指示其当前状态。
+
+```
+Signature: void BswM_LinSM_CurrentState( NetworkHandleType Network, LinSM_ModeType CurrentState )
+Modes:     modeGroup LinSM_ModeType
+Example:   request LinSMIndication LinSM_CurrentState {
+             processing IMMEDIATE
+             initialValue LINSM_NO_COM
+             source MyComM.LinSMChannel
+           }
+```
+
+**注意：** 对于每个**LIN**通道，都必须创建一次此模式请求源。
+
+###### 3.2.2.2.8. BswMEcuMRequestedState
+
+目的：**EcuM**通过此接口基于**RUN**请求协议的结果向**BswM**请求一个状态。
+
+```
+Signature:  BswM_EcuM_RequestState( EcuM_StateType State, EcuM_RunStatusType CurrentStatus)
+Modes:      modeGroup EcuM_StateType { ECUM_STATE_APP_RUN, ECUM_STATE_APP_POST_RUN }
+Parameter:  EcuM_RunStatusType { ECUM_RUNSTATUS_UNKNOWN, ECUM_RUNSTATUS_REQUESTED,
+            ECUM_RUNSTATUS_RELEASED }
+```
+
+###### 3.2.2.2.9. BswMEcuMCurrentState
+
+```
+Signature: BswM_EcuM_CurrentState(EcuM_StateType CurrentState)
+```
+
+###### 3.2.2.2.10. BswMEcuMWakeupSource
+
+目的：由**EcuM**调用的函数，用于指示唤醒源的当前状态。
+
+```
+Signature: void BswM_EcuM_CurrentWakeup( EcuM_WakeupSourceType source, EcuM_WakeupStatusType state )
+Modes:     modeGroup EcuM_WakeupStatusType
+Example:   request EcuMWakeupSource EcuM_WakeupSource {
+             processing IMMEDIATE
+             initialValue ECUM_WKSTATUS_NONE
+             source MyEcuM.EcuMWakeupSource1
+           }
+```
+
+**注意：** 对于每个唤醒源，都必须创建一次此模式请求源。
+
+###### 3.2.2.2.11. BswMLinScheduleIndication
+
+目的：由**LinSM**调用的函数，用于指示特定**LIN**通道当前活动的调度表。
+
+```
+Signature: void BswM_LinSM_CurrentSchedule( NetworkHandleType Network, LinIf_SchHandleType CurrentSchedule )
+```
+
+所报告的模式取决于**LIN**状态管理器中配置的调度表。
+
+```
+Example: request LinScheduleIndication LinSM1_CurrentSchedule {
+           processing IMMEDIATE
+           initialValue TBD
+           source MyLinSM.LinSMChannel
+         }
+```
+
+###### 3.2.2.2.12. BswMLinTpModeRequest
+
+目的：由**LinTP**调用的函数，用于为相应的**LIN**通道请求模式。**LinTp_Mode**主要与应当使用的**LIN**调度表相关。
+
+```
+Signature: void BswM_LinTp_RequestMode( NetworkHandleType Network, LinTp_Mode LinTpRequestedMode )
+Modes:     modeGroup LinTp_Mode
+Example:   request LinTpModeRequest LinTp_Mode {
+             processing IMMEDIATE
+             initialValue LINTP_APPLICATIVE_SCHEDULE
+             source MyLinIF.config0.LinIFChannel
+           }
+```
+
+###### 3.2.2.2.13. BswMNvMJobModeIndication
+
+目的：指示多块作业（**multiblock job**）的当前状态。该作业通过**BswMNvmService**标识，例如：**0x0c**表示**NvmReadAll**，**0x0d**表示**NvmWriteAll**。
+
+```
+Signature: void BswM_NvM_CurrentJobMode( uint8 ServiceId, NvM_RequestResultType CurrentJobMode )
+Modes:     modeGroup NvM_RequestResultType
+Example:   request NvMJobModeIndication NvMWriteAllJobMode {
+             service WriteAll
+             initialValue NVM_BLK_NOT_OK
+             processing IMMEDIATE
+           }
+           request NvMJobModeIndication NvMReadAllJobMode {
+             service ReadAll
+             initialValue NVM_BLK_NOT_OK
+             processing IMMEDIATE
+           }
+```
+
+###### 3.2.2.2.14. BswMNvMRequest
+
+目的：通过此模式请求源，**NvM**指示指定数据块的当前状态。
+
+```
+Signature: void BswM_NvM_CurrentBlockMode( NvM_BlockIdType Block, NvM_RequestResultType CurrentBlockMode )
+Modes:     modeGroup NvM_RequestResultType
+```
+
+###### 3.2.2.2.15. BswMJ1939NmIndication
+
+```
+Signature: void BswM_J1939Nm_StateChangeNotification( NetworkHandleType nmNetworkHandle, uint8 Node, Nm_StateType nmCurrentState )
+Modes:     modeGroup Nm_StateType
+Example:   request BswMJ1939NmIndication J1939NmState {
+             network "Channel1"
+             node "Node1"
+             initialValue NM_STATE_UNINIT
+             processing IMMEDIATE
+           }
+```
+
+**注意：** 对于由**J1939**网络管理所管理的每个通道，都必须配置此模式请求源。目前**ARText**不支持这种类型的模式请求源。
+
+###### 3.2.2.2.16. BswMWdgMRequestPartitionReset
+
+```
+Signature: void BswM_WdgM_RequestPartitionReset( ApplicationType Application )
+Modes:     modeGroup WdgM_PartitionResetType
+Example:   request WdgMRequestPartitionReset WdgM_RequestResetPart1 {
+             processing IMMEDIATE
+             initialValue WDGM_PARTITION_RESET_NOTREQUESTED
+             source MyEcuC.eCucPartition
+           }
+```
+
+**注意：** 对于每个可由看门狗管理器模块请求重置的分区，都必须创建一次此模式请求源。
+
+###### 3.2.2.2.17. BswMJ1939DcmBroadcastStatus
+
+```
+Signature: void BswM_J1939DcmBroadcastStatus( uint16 networkMask )
+Modes:     modeGroup J1939DcmBroadcastStatusType
+Example:   request BswMJ1939DcmBroadcastStatus J1939BroadcastStatusChannel1 {
+             processing IMMEDIATE
+             initialValue NETWORK_DISABLED
+             source MyComM.CanNet1
+           }
+```
+
+**注意：** 这是对每个网络所期望的广播状态的通知，由**DM13**触发。
