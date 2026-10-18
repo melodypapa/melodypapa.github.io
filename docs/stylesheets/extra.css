@@ -40,3 +40,197 @@
 .md-useful-links a:hover {
   color: var(--md-accent-fg-color);
 }
+
+/* ============================================================
+   Style B · 极简学术风（Minimal Academic）
+   移植自公众号排版方案 B：
+   - 衬线标题（Georgia / Noto Serif SC / 宋体）
+   - booktabs 三线表（顶线 2px / 栏目线 1px / 行细线 / 底线 2px）
+   - 正文首行缩进 2em（中文书籍惯例）
+   - 术语 blockquote = 词条释义（酒红竖线 + 灰墨）
+   - 藏青 #1c3d5a + 酒红 #8b2635 双色系
+   ============================================================ */
+
+/* ---- 调色板（浅色：藏青主色 / 酒红强调 / 暖灰墨） ---- */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #1c3d5a;
+  --md-primary-fg-color--light: #2f5b85;
+  --md-primary-fg-color--dark: #142c44;
+  --md-primary-bg-color: #ffffff;
+  --md-primary-bg-color--light: #eef2f7;
+
+  --md-accent-fg-color: #8b2635;
+  --md-accent-fg-color--transparent: rgba(139, 38, 53, 0.12);
+  --md-accent-bg-color: #ffffff;
+  --md-accent-bg-color--light: #f7eeee;
+
+  --md-default-fg-color: #26231e;
+  --md-default-fg-color--light: #5c554a;
+  --md-default-fg-color--lighter: #8a8578;
+  --md-default-fg-color--lightest: #d8dee4;
+
+  --md-typeset-a-color: #1c3d5a;
+  --md-typeset-mark-color: rgba(139, 38, 53, 0.15);
+  --md-typeset-table-color: #e5dfd4;
+  --md-typeset-table-color--light: rgba(229, 223, 212, 0.5);
+}
+
+/* ---- 调色板（深色：深夜蓝 / 柔酒红 / 暖浅灰） ---- */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #33567c;
+  --md-primary-fg-color--light: #4a6f9c;
+  --md-primary-fg-color--dark: #24466b;
+  --md-primary-bg-color: #ffffff;
+  --md-primary-bg-color--light: #dce4ee;
+
+  --md-accent-fg-color: #d98a96;
+  --md-accent-fg-color--transparent: rgba(217, 138, 150, 0.15);
+  --md-accent-bg-color: #ffffff;
+  --md-accent-bg-color--light: #3d2a2e;
+
+  --md-typeset-a-color: #a9c6e0;
+  --md-typeset-table-color: #4a463f;
+  --md-typeset-table-color--light: rgba(217, 211, 202, 0.2);
+}
+
+/* ---- 衬线标题（正文区 h1-h4） ---- */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6 {
+  font-family: Georgia, "Noto Serif SC", "Source Han Serif SC", "Songti SC", SimSun, serif;
+  font-weight: 700;
+  color: var(--md-default-fg-color);
+  letter-spacing: 0.01em;
+}
+
+/* h2 下加细分隔线（对应风格 B 的章节细rule） */
+.md-typeset h2 {
+  border-bottom: 1px solid var(--md-typeset-table-color);
+  padding-bottom: 0.3em;
+}
+
+/* ---- 正文首行缩进（仅直接子段落，不影响列表/表格/提示块） ---- */
+.md-typeset > p {
+  text-indent: 2em;
+}
+
+/* ---- booktabs 三线表 ---- */
+.md-typeset table:not([class]) {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.md-typeset table:not([class]) th {
+  background: transparent;
+  border: none;
+  border-top: 2px solid var(--md-default-fg-color);
+  border-bottom: 1px solid var(--md-default-fg-color);
+  font-family: Georgia, "Noto Serif SC", "Songti SC", SimSun, serif;
+  font-weight: 700;
+  color: var(--md-default-fg-color);
+  padding: 0.5em 0.85em;
+}
+
+.md-typeset table:not([class]) td {
+  border: none;
+  border-bottom: 1px solid var(--md-typeset-table-color);
+  padding: 0.5em 0.85em;
+}
+
+.md-typeset table:not([class]) tbody tr:last-child td {
+  border-bottom: 2px solid var(--md-default-fg-color);
+}
+
+/* 首列作行题（风格 B 的「对比项」列加粗） */
+.md-typeset table:not([class]) td:first-child {
+  font-weight: 600;
+}
+
+/* 去掉 Material 默认 hover 底色，保持纸面干净 */
+.md-typeset table:not([class]) tbody tr:hover {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* ---- 术语释义 blockquote（缩略语词条） ---- */
+.md-typeset blockquote {
+  border-left: 2px solid var(--md-accent-fg-color);
+  background: transparent;
+  color: var(--md-default-fg-color--light);
+  margin-left: 2em;
+  padding-left: 1em;
+}
+
+.md-typeset blockquote p {
+  text-indent: 0;
+}
+
+/* ---- 分隔线：细暖灰线 ---- */
+.md-typeset hr {
+  border: none;
+  border-top: 1px solid var(--md-typeset-table-color);
+}
+
+/* ---- 微信页脚 · 模版卡片（colophon 落款卡） ---- */
+.md-typeset #wechat {
+  text-align: center;
+  margin-top: 3em;
+  padding-top: 1.6em;
+  border-top: 1px solid var(--md-typeset-table-color);
+}
+
+.wechat-card {
+  display: inline-block;
+  padding: 1.4em 2.2em 1.2em;
+  border: 1px solid var(--md-typeset-table-color);
+  border-radius: 6px;
+}
+
+/* 标题两侧酒红细线（书末 colophon 装饰） */
+.wechat-card__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9em;
+}
+
+.wechat-card__title::before,
+.wechat-card__title::after {
+  content: "";
+  width: 2.2em;
+  border-top: 1px solid var(--md-accent-fg-color);
+}
+
+.md-typeset #wechat .wechat-card__title h4 {
+  margin: 0;
+  font-size: 0.8em;
+  font-weight: 400;
+  color: var(--md-default-fg-color--light);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* 二维码画框：白底保证深色模式下扫码对比度 */
+.wechat-card__frame {
+  display: inline-block;
+  margin-top: 1em;
+  padding: 0.45em;
+  border: 1px solid var(--md-typeset-table-color);
+  border-radius: 4px;
+  background: #ffffff;
+}
+
+.md-typeset #wechat .wechat-card__frame img {
+  display: block;
+  width: 120px;
+  height: auto;
+}
+
+/* 旧版式兜底（尚未升级为模版卡片的页面）：直接子图限宽 */
+.md-typeset #wechat > img {
+  max-width: 140px;
+}
