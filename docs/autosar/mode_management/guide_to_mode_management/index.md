@@ -24,7 +24,7 @@ title: "模式管理指南（Guide to Mode Management）"
 
 ## 2. 总体机制和概念
 
-本章节概述了模式的概念已经**AUTOSAR**中有关状态的简短定义。术语模式和状态的定义可以在第**5.1**章节中找到。模式可以看作是已一个分区（**Partition**）为范围的当前状态。它是一个全局变量，由**RTE**的调度管理器分别维护。可能的模式在**ModeDeclarationGroups**中定义。具体语法的定义可参考AUTOSAR软件组件模板[1]中定义。
+本章节概述了模式的概念已经**AUTOSAR**中有关状态的简短定义。术语模式和状态的定义可以在第**4.1**章节中找到。模式可以看作是已一个分区（**Partition**）为范围的当前状态。它是一个全局变量，由**RTE**的调度管理器分别维护。可能的模式在**ModeDeclarationGroups**中定义。具体语法的定义可参考AUTOSAR软件组件模板[1]中定义。
 
 模式可以用于不同的目的：
 
@@ -2270,3 +2270,46 @@ interface modeSwitch MSIF_DcmResponseOnEvent{
 
 1. 当配置者使用内存保护时，跨分区模式请求/指示所涉及的内存段（例如**BswM**内部的状态标志）需要配置为允许此类跨分区访问。
 2. 配置为**IMMEDIATE**处理的跨分区模式请求/指示也可能触发立即执行的动作列表。所产生的动作将在调用者的上下文中执行（例如：另一个分区中的**BSW**模块）。对于这类**IMMEDIATE**跨分区模式请求/指示，同样需要考虑"分区间动作"一章中所述的问题。
+
+## 4. 缩略语和术语
+
+### 4.1. 技术术语
+
+本文档中使用的所有技术术语——除此处列出的术语之外——均可在**AUTOSAR**官方术语表[6]或软件组件模板规范[1]中找到。
+
+| 术语 | 描述 |
+| --- | --- |
+| 模式（mode） | 模式是车辆中运行的、与特定实体、某个应用或整车相关的各种状态机（不仅是**ECU**状态管理器）的某一组状态 |
+| 状态（state） | 状态是其所属**BSW**组件内部的，对应用不可见。因此它们仅被**BSW**的内部状态机使用。**ECU**状态管理器内部的状态构成各个阶段，并因此对模式进行处理 |
+| 阶段（phase） | **ECU**管理器动作和事件的逻辑或时间上的组合，例如：**STARTUP**、**UP**、**SHUTDOWN**、**SLEEP**等。阶段可以由子阶段组成，子阶段通常被称为序列（**sequence**），如果它们的存在主要是为了将执行的动作序列组合成逻辑单元。此处的阶段不是**AUTOSAR**方法论中的阶段 |
+| 模式切换端口（mode switch port） | 用于接收（或发送）模式切换通知的端口。为此，模式切换端口由**ModeSwitchInterface**类型化 |
+| 模式请求接口（mode request interface） | 一种**AUTOSAR SenderReceiverInterface**，它在**VariableDataPrototype**中携带被请求的模式 |
+| 模式用户（mode user） | 通过**SwcModeSwitchEvent**、**BswModeSwitchEvent**，或仅通过读取模式的当前状态而依赖于模式的**AUTOSAR SW-C**或**AUTOSAR**基础软件模块称为模式用户。模式用户通过拥有一个required（接收）模式切换端口或一个**requiredModeGroup**模式声明组原型来定义。另请参阅第2章 |
+| 模式管理器（mode manager） | 进入和离开模式由模式管理器发起。模式管理器通过拥有一个provide（提供）模式切换端口或一个**providedModeGroup**模式声明组原型来定义。模式管理器可以是应用模式管理器，也可以是提供包括模式切换在内的服务的基础软件模块（如**ECU**状态管理器）。另请参阅第2.2节 |
+| 应用模式管理器（application mode manager） | 应用模式管理器是提供模式切换服务的**AUTOSAR**软件组件。应用模式管理器的模式不必是标准化的 |
+| 模式请求（mode request） | 使用**SenderReceiverInterface**从模式用户向模式管理器传递模式请求的通信称为模式请求 |
+| 模式切换通知（mode switch notification） | 使用**ModeSwitchInterface**或**providedModeGroup**/**requiredModeGroup**模式声明组原型，从模式管理器向模式用户传递模式切换的通信称为模式切换通知 |
+| 模式机实例（mode machine instance） | 模式机或模式声明组的实例由模式管理器的模式声明组原型定义。由于模式切换不是瞬时执行的，**RTE**或基础软件调度器必须维护自己的状态。对于每个模式管理器的模式声明组原型，**RTE**或基础软件调度器都有一个状态机。该状态机称为模式机实例。对于同一模式管理器的模式声明组原型的所有模式用户，**RTE**和基础软件调度器使用同一个模式机实例。另请参阅第2.2节 |
+| 公共模式机实例（common mode machine instance） | "公共模式机实例"是由**BSW**模块和**SW-C**共享的一种特殊的"模式机实例"：如果在软件组件端口中实例化的模式声明组原型与**BSW**模块的模式声明组原型同步（**synchronizedModeGroup**），则**RTE**生成器只创建一个模式机实例 |
+| 模式禁用依赖（Mode Disabling Dependency） | 启动**RunnableEntity**或基础软件可调度实体（**Basic Software Schedulable Entity**）的**RTEEvent**或**BswEvent**可以包含一个引用模式声明的**disabledMode**或**disabledInMode**关联。该关联在本文档中称为模式禁用依赖（**ModeDisablingDependency**） |
+| 模式禁用依赖的可执行实体（mode disabling dependent ExecutableEntity） | 模式禁用依赖的**RunnableEntity**或基础软件可调度实体由带有模式禁用依赖的**RTEEvent**或**BswEvent**触发。当相应的模式禁用处于活动状态时，**RTE**和基础软件调度器阻止通过该**RTEEvent**/**BswEvent**启动这些**RunnableEntity**或基础软件可调度实体。另请参阅第2.2节 |
+| 模式禁用（mode disabling） | 当"模式禁用"处于活动状态时，**RTE**和基础软件调度器会禁用模式禁用依赖的可执行实体的启动。"模式禁用"在模式禁用依赖所引用的模式期间，以及进入和离开该模式的转换期间处于活动状态。另请参阅第2.2节 |
+| OnEntry可执行实体（OnEntry ExecutableEntity） | 由带有**ModeActivationKind**为**entry**的**SwcModeSwitchEvent**或**BswModeSwitchEvent**触发的**RunnableEntity**或基础软件可调度实体，在进入模式时被触发。它被称为**OnEntry**可执行实体。另请参阅第2.2节 |
+| OnExit可执行实体（OnExit ExecutableEntity） | 由带有**ModeActivationKind**为**exit**的**SwcModeSwitchEvent**或**BswModeSwitchEvent**触发的**RunnableEntity**或基础软件可调度实体，在退出模式时被触发。它被称为**OnExit**可执行实体。另请参阅第2.2节 |
+| OnTransition可执行实体（OnTransition ExecutableEntity） | 由带有**ModeActivationKind**为**transition**的**SwcModeSwitchEvent**或**BswModeSwitchEvent**触发的**RunnableEntity**或基础软件可调度实体，在两个指定模式之间的转换时被触发。它被称为**OnTransition**可执行实体。另请参阅第2.2节 |
+| 模式切换确认可执行实体（mode switch acknowledge ExecutableEntity） | 由连接到模式管理器模式声明组原型的**SwcModeSwitchEvent**或**BswModeSwitchedAckEvent**触发的**RunnableEntity**或基础软件可调度实体。它被称为模式切换确认可执行实体。另请参阅第2.2节 |
+| 服务器可运行实体（server runnable） | 由**OperationInvokedEvent**触发的服务器。它具有介于可运行实体和函数调用之间的混合行为。在某些情况下，**RTE**可以将客户端-服务器通信实现为简单的函数调用 |
+| 可运行实体激活（runnable activation） | 可运行实体的激活与导致该可运行实体执行的**RTEEvent**相关联。它被定义为该**RTEEvent**所指的事件。例如：对于定时事件，当定时器到期时激活相应的可运行实体；对于数据接收事件，当**RTE**接收到数据时激活该可运行实体 |
+| 基础软件可调度实体激活（Basic Software Schedulable Entity activation） | 基础软件可调度实体的激活定义为包含该实体的任务的激活，并最终包括设置一个标志，告知任务中的胶水代码（**glue code**）应执行哪个基础软件可调度实体 |
+| 可运行实体启动（Runnable start） | 可运行实体的启动是指在已启动的任务中调用实现该可运行实体的**C**函数 |
+| 基础软件可调度实体启动（Basic Software Schedulable Entity start） | 基础软件可调度实体的启动是指在已启动的任务中调用实现该基础软件可调度实体的**C**函数 |
+| 触发源（Trigger Source） | 触发源管理特定的触发器，并在触发器被触发时通知**RTE**或基础软件调度器。触发源拥有专用的提供触发端口和/或**releasedTrigger**触发器，用于与触发接收器通信 |
+| 触发接收器（Trigger Sink） | 触发接收器在特定触发器被触发时依赖可运行实体或基础软件可调度实体的激活。触发接收器拥有专用的require触发端口和/或**requiredTrigger**触发器，用于与触发源通信 |
+| 触发端口（Trigger port） | 由**TriggerInterface**类型化的**PortPrototype** |
+| 被触发的可执行实体（triggered ExecutableEntity） | 至少由一个**ExternalTriggerOccurredEvent**/**BswExternalTriggerOccurredEvent**或**InternalTriggerOccurredEvent**/**BswInternalTriggerOccurredEvent**触发的可运行实体或基础软件可调度实体。在特定情况下，触发事件通信或可运行实体间触发由**RTE**或基础软件调度器实现为触发方对被触发可执行实体的直接函数调用 |
+| 被触发的可运行实体（triggered runnable） | 至少由一个**ExternalTriggerOccurredEvent**或**InternalTriggerOccurredEvent**触发的可运行实体。在特定情况下，触发事件通信或可运行实体间触发由**RTE**实现为触发方可运行实体对被触发可运行实体的直接函数调用 |
+| 被触发的基础软件可调度实体（triggered Basic Software Schedulable Entity） | 至少由一个**BswExternalTriggerOccurredEvent**或**BswInternalTriggerOccurredEvent**触发的基础软件可调度实体。在特定情况下，触发事件通信或基础软件可调度实体间触发由基础软件调度器实现为触发方可执行实体对被触发可执行实体的直接函数调用 |
+| 执行实例（execution-instance） | 可执行实体的执行实例是就可并发执行而言，可执行实体的一个实例或调用上下文 |
+| ECU间通信（inter-ECU communication） | **ECU**之间的通信（通常使用**COM**）在本文档中称为**ECU**间通信 |
+| 分区间通信（inter-partition communication） | 同一**ECU**内不同分区（由不同的**OS**应用表示）之间的通信在本文档中称为分区间通信。它通常涉及**OS**机制的使用，例如**IOC**或受信任函数调用。这些分区可以位于不同的内核上，或使用**ECU**的不同内存段 |
+| 分区内通信（intra-partition communication） | 同一**ECU**同一分区内的通信称为分区内通信。在这种情况下，**RTE**可以使用内部缓冲区和队列进行通信 |
