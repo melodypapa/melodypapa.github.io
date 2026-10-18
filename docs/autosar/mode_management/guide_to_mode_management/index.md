@@ -1923,3 +1923,350 @@ actions pnc3requestedActions on condition {
 图3.6展示了生成的配置可能的样子的一个示例。所有白色的框都预期由配置工具生成。
 
 图3.6：生成的BswM配置示例
+
+### 3.5. 诊断
+
+从**AUTOSAR 4.0.3**版本开始，**DCM**是所有诊断用例的总体模式管理器。**BswM**负责相应地改变其他基础软件模块的状态。
+
+#### 3.5.1. 诊断会话控制
+
+对于会话控制，**SWS_DiagnosticCommunicationManager**[5]中的[SWS_Dcm_00777]定义了下面的模式声明组作为**providedModeGroup**。
+
+**注意：** 模式名称和取值源自**DCM**的配置。本指南仅展示一个示例。
+
+```
+modeGroup DcmDiagnosticSessionControl { DefaultSession, ProgrammingSession,
+  ExtendedDiagnosticSession, SafetySystemDiagnosticSession, AllSessionLevel }
+interface modeSwitch MSIF_DcmDiagnosticSessionControl {
+  mode DcmDiagnosticSessionControl diagnosticSessionControl
+}
+```
+
+清单3.33：DCM会话控制服务的模式组
+
+作为模式管理器的**DCM**可以将 会话控制服务的当前模式通知其他**BSW**模块，并在需要时将基础软件设置为相应的模式。清单3.34展示了对应的模式切换接口。
+
+注意，同一个接口也可以用于将当前诊断会话通知应用软件。
+
+```
+request BswModeNotification DiagnosticSessionControl {
+  source MSIF_DcmDiagnosticSessionControl.diagnosticSessionControl
+  processing IMMEDIATE
+  initialValue DefaultSession
+}
+```
+
+清单3.34：DCM会话控制服务的模式请求端口
+
+#### 3.5.2. ECU复位
+
+在**ECU**复位的情况下，**DCM**与**BswM**之间的交互更为复杂。《诊断通信管理器规范》[5]为此定义了清单3.35所述的接口。通过此接口，**DCM**向**BswM**发出信号：
+
+1. 使**ECU**准备好执行特定的复位。
+2. 显式地执行该复位。
+
+```
+modeGroup DcmEcuReset{ NONE, HARD, KEYONOFF, SOFT, JUMPTOBOOTLOADER,
+                       JUMPTOSYSSUPPLIERBOOTLOADER, EXECUTE }
+interface modeSwitch MSIF_DcmEcuReset { mode DcmEcuReset ecureset }
+```
+
+清单3.35：ECU复位诊断服务的模式切换接口
+
+[SWS_Dcm_00373]规定：在接收到**UDS**服务请求（其子功能不是**enableRapidPowerShutDown**（0x04）或**disableRapidPowerShutDown**（0x05））时，**DCM**模块应将模式声明组原型**DcmEcuReset**切换为接收到的**resetType**。在请求该模式切换后，**DCM**会触发开始发送肯定响应报文。
+
+根据[SWS_Dcm_00594]，在肯定响应的发送确认（调用**Dcm_TpTxConfirmation**）时，**DCM**模块应触发模式声明组原型**DcmEcuReset**到**EXECUTE**的模式切换。通过这最后一次模式切换，**DCM**请求**BswM**最终关闭**ECU**并执行复位。
+
+清单3.36描绘了**DCM**中规定的不同复位场景如何在**DCM**中进行配置。注意，在本文档的运行示例中，整体的**EcuMode**用于向**DCM**发出**ECU**已准备好复位的信号。根据诊断服务的不同，**DCM**应等待该确认，或者立即切换到**EXECUTE**模式——这将使**BswM**调用**EcuM_GoDown**。
+
+```
+rule DcmEcuResetHard initially false {
+  if ( DcmEcuResetMode == DcmEcuReset.HARD) {
+    actionlist DcmEcuResetHardActions
+  }
+}
+actions DcmEcuResetHardActions on condition {
+  custom "EcuM_SelectShutdownTarget(ECU_RESET, ECUM_RESET_IO)"
+  custom "EcuM_SelectShutdownCause(ECUM_CAUSE_DCM)"
+  SchMSwitch EcuMode : ECU_RESET_READY
+}
+
+rule DcmEcuResetKeyOnOff initially false {
+  if ( DcmEcuResetMode == DcmEcuReset.KEYONOFF) {
+    actionlist DcmEcuResetKeyOnOffActions
+  }
+}
+actions DcmEcuResetKeyOnOffActions on condition {
+  custom "EcuM_SelectShutdownTarget(ECU_RESET,ECUM_RESET_IO)"
+  custom "EcuM_SelectShutdownCause(ECUM_CAUSE_DCM)"
+  SchMSwitch EcuMode : ECU_RESET_READY
+}
+
+rule DcmEcuResetSoft initially false {
+  if ( DcmEcuResetMode == DcmEcuReset.SOFT) {
+    actionlist DcmEcuResetSoftActions
+  }
+}
+actions DcmEcuResetSoftActions on condition {
+  custom "EcuM_SelectShutdownTarget(ECU_RESET, ECUM_RESET_MCU)"
+  custom "EcuM_SelectShutdownCause(ECUM_CAUSE_DCM)"
+  SchMSwitch EcuMode : ECU_RESET_READY
+}
+
+rule DcmEcuResetBootLoader initially false {
+  if ( DcmEcuResetMode == DcmEcuReset.JUMPTOBOOTLOADER) {
+    actionlist DcmEcuResetBootLoaderActions
+  }
+}
+actions DcmEcuResetBootLoaderActions on condition {
+  custom "EcuM_SelectShutdownTarget(ECU_RESET, ECUM_RESET_MCU)"
+  custom "EcuM_SelectShutdownCause(ECUM_CAUSE_DCM)"
+  custom "EcuM_SelectBootTarget(ECUM_BOOT_TARGET_OEM_BOOTLOADER)"
+  SchMSwitch EcuMode : ECU_RESET_READY
+}
+
+rule DcmEcuResetSupplierBootloader initially false {
+  if ( DcmEcuResetMode == DcmEcuReset.JUMPTOSYSSUPPLIERBOOTLOADER ) {
+    actionlist DcmEcuResetSupplierBootloaderActions
+  }
+}
+actions DcmEcuResetSupplierBootloaderActions on condition {
+  custom "EcuM_SelectShutdownTarget(ECU_RESET, ECUM_RESET_MCU)"
+  custom "EcuM_SelectShutdownCause(ECUM_CAUSE_DCM)"
+  custom "EcuM_SelectBootTarget(ECUM_BOOT_TARGET_SYS_BOOTLOADER)"
+  SchMSwitch EcuMode : ECU_RESET_READY
+}
+
+rule DcmEcuReset initially false {
+  if ( DcmEcuResetMode == DcmEcuReset.EXECUTE ) {
+    actionlist DcmEcuResetActions
+  }
+}
+actions DcmEcuResetActions on condition {
+  custom "EcuM_GoDown(MODULE_ID)"
+}
+```
+
+清单3.36：实现不同复位场景的规则集
+
+#### 3.5.3. 快速断电关闭
+
+在接收到带有子功能**enableRapidPowerShutdown**（0x04）或**disableRapidPowerShutdown**（0x05）的**UDS**服务请求时，**DCM**模块会触发模式声明组原型**DcmRapidPowerShutDown**到**ENABLE_RAPIDPOWERSHUTDOWN**或**DISABLE_RAPIDPOWERSHUTDOWN**的模式切换。
+
+在大多数用例中，该信息由应用解析以减少超限时间。不过，如果**BswM**需要实现不同的关机序列，也可以将它提供给**BswM**（清单3.37）。
+
+```
+modeGroup DcmRapidPowerShutDown { ENABLE_RAPIDPOWERSHUTDOWN, DISABLE_RAPIDPOWERSHUTDOWN }
+interface modeSwitch MSIF_RapidPowerShutdown {
+  mode DcmRapidPowerShutDown powerShutDown
+}
+```
+
+清单3.37：快速断电关闭的模式切换接口
+
+#### 3.5.4. 通信控制诊断服务
+
+如果**DCM**向**BswM**报告进入了某个指定的通信控制模式，**BswM**必须使能或停用相应的**IPDU**组，如清单3.38所示。
+
+```
+rule communicationcontrol1 initially false on condition {
+  if (Dcm_Communication_Control_CAN1 == DCM_ENABLE_RX_TX_NORM ) {
+    actionlist communicationcontrol_DCM_ENABLE_RX_TX_NORM
+  }
+}
+actions communicationcontrol_DCM_ENABLE_RX_TX_NORM on trigger {
+  PduGroupSwitch { init true enable ArMmExample.EcuC.MyCom.CAN1IPDUS }
+}
+//----------------------------------------------------------------
+rule communicationcontrol2 initially false on condition {
+  if (Dcm_Communication_Control_CAN1 == DCM_ENABLE_RX_DISABLE_TX_NORM ) {
+    actionlist communicationcontrol_DCM_ENABLE_RX_DISABLE_TX_NORM
+  }
+}
+actions communicationcontrol_DCM_ENABLE_RX_DISABLE_TX_NORM on trigger {
+  PduGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyCom.CAN1RXIPDUS
+    disable ArMmExample.EcuC.MyCom.CAN1TXIPDUS
+  }
+}
+//----------------------------------------------------------------
+rule communicationcontrol3 initially false on condition {
+  if (Dcm_Communication_Control_CAN1 == DCM_DISABLE_RX_ENABLE_TX_NORM ) {
+    actionlist communicationcontrol_DCM_DISABLE_RX_ENABLE_TX_NORM
+  }
+}
+actions communicationcontrol_DCM_DISABLE_RX_ENABLE_TX_NORM on trigger {
+  PduGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyCom.CAN1TXIPDUS
+    disable ArMmExample.EcuC.MyCom.CAN1RXIPDUS
+  }
+}
+//----------------------------------------------------------------
+rule communicationcontrol5 initially false on condition {
+  if (Dcm_Communication_Control_CAN1 == DCM_DISABLE_RX_TX_NORMAL ) {
+    actionlist communicationcontrol_DCM_DISABLE_RX_TX_NORMAL
+  }
+}
+actions communicationcontrol_DCM_DISABLE_RX_TX_NORMAL on trigger {
+  PduGroupSwitch { init true disable ArMmExample.EcuC.MyCom.CAN1IPDUS }
+}
+//----------------------------------------------------------------
+rule communicationcontrol6 initially false on condition {
+  if (Dcm_Communication_Control_CAN1 == DCM_ENABLE_RX_TX_NM ) {
+    actionlist communicationcontrol_DCM_ENABLE_RX_TX_NM
+  }
+}
+actions communicationcontrol_DCM_ENABLE_RX_TX_NM on trigger {
+  PduGroupSwitch { init true enable ArMmExample.EcuC.MyCom.CAN1NMIPDUS }
+}
+//----------------------------------------------------------------
+rule communicationcontrol7 initially false on condition {
+  if (Dcm_Communication_Control_CAN1 == DCM_ENABLE_RX_DISABLE_TX_NM ) {
+    actionlist communicationcontrol_DCM_ENABLE_RX_DISABLE_TX_NM
+  }
+}
+actions communicationcontrol_DCM_ENABLE_RX_DISABLE_TX_NM on trigger {
+  PduGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyCom.CAN1NMRXIPDUS
+    disable ArMmExample.EcuC.MyCom.CAN1NMTXIPDUS
+  }
+}
+//----------------------------------------------------------------
+rule communicationcontrol8 initially false on condition {
+  if (Dcm_Communication_Control_CAN1 == DCM_DISABLE_RX_ENABLE_TX_NM ) {
+    actionlist communicationcontrol_DCM_DISABLE_RX_ENABLE_TX_NM
+  }
+}
+actions communicationcontrol_DCM_DISABLE_RX_ENABLE_TX_NM on trigger {
+  PduGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyCom.CAN1NMTXIPDUS
+    disable ArMmExample.EcuC.MyCom.CAN1NMRXIPDUS
+  }
+}
+//----------------------------------------------------------------
+rule communicationcontrol9 initially false on condition {
+  if (Dcm_Communication_Control_CAN1 == DCM_DISABLE_RX_TX_NM ) {
+    actionlist communicationcontrol_DCM_DISABLE_RX_TX_NM
+  }
+}
+actions communicationcontrol_DCM_DISABLE_RX_TX_NM on trigger {
+  PduGroupSwitch {
+    init true
+    disable ArMmExample.EcuC.MyCom.CAN1NMRXIPDUS, ArMmExample.EcuC.MyCom.CAN1NMTXIPDUS
+  }
+}
+//----------------------------------------------------------------
+rule communicationcontrol10 initially false on condition {
+  if (Dcm_Communication_Control_CAN1 == DCM_ENABLE_RX_TX_NORM_NM ) {
+    actionlist communicationcontrol_DCM_ENABLE_RX_TX_NORM_NM
+  }
+}
+actions communicationcontrol_DCM_ENABLE_RX_TX_NORM_NM on trigger {
+  PduGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyCom.CAN1NMRXIPDUS, ArMmExample.EcuC.MyCom.CAN1NMTXIPDUS
+  }
+}
+//----------------------------------------------------------------
+rule communicationcontrol11 initially false on condition {
+  if (Dcm_Communication_Control_CAN1 == DCM_ENABLE_RX_DISABLE_TX_NORM_NM ) {
+    actionlist communicationcontrol_DCM_ENABLE_RX_DISABLE_TX_NORM_NM
+  }
+}
+actions communicationcontrol_DCM_ENABLE_RX_DISABLE_TX_NORM_NM on trigger {
+  PduGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyCom.CAN1NMRXIPDUS, ArMmExample.EcuC.MyCom.CAN1RXIPDUS
+    disable ArMmExample.EcuC.MyCom.CAN1NMTXIPDUS, ArMmExample.EcuC.MyCom.CAN1TXIPDUS
+  }
+}
+//----------------------------------------------------------------
+rule communicationcontrol12 initially false on condition {
+  if (Dcm_Communication_Control_CAN1 == DCM_DISABLE_RX_ENABLE_TX_NORM_NM ) {
+    actionlist communicationcontrol_DCM_DISABLE_RX_ENABLE_TX_NORM_NM
+  }
+}
+actions communicationcontrol_DCM_DISABLE_RX_ENABLE_TX_NORM_NM on trigger {
+  PduGroupSwitch {
+    init true
+    enable ArMmExample.EcuC.MyCom.CAN1NMTXIPDUS, ArMmExample.EcuC.MyCom.CAN1TXIPDUS
+    disable ArMmExample.EcuC.MyCom.CAN1NMRXIPDUS, ArMmExample.EcuC.MyCom.CAN1RXIPDUS
+  }
+}
+//----------------------------------------------------------------
+rule communicationcontrol13 initially false on condition {
+  if (Dcm_Communication_Control_CAN1 == DCM_DISABLE_RX_TX_NORM_NM ) {
+    actionlist communicationcontrol_DCM_DISABLE_RX_TX_NORM_NM
+  }
+}
+actions communicationcontrol_DCM_DISABLE_RX_TX_NORM_NM on trigger {
+  PduGroupSwitch {
+    init true
+    disable ArMmExample.EcuC.MyCom.CAN1NMTXIPDUS, ArMmExample.EcuC.MyCom.CAN1TXIPDUS,
+            ArMmExample.EcuC.MyCom.CAN1NMRXIPDUS, ArMmExample.EcuC.MyCom.CAN1RXIPDUS
+  }
+}
+//----------------------------------------------------------------
+```
+
+清单3.38：通信控制诊断服务的BswM规则
+
+#### 3.5.5. 控制DTC设置
+
+```
+modeGroup DcmControlDTCSetting { ENABLEDTCSETTING, DISABLEDTCSETTING }
+interface modeSwitch MSIF_DcmControlDtcSetting {
+  mode DcmControlDTCSetting dtcSetting
+}
+```
+
+清单3.39：DTC设置控制的模式切换接口
+
+#### 3.5.6. Roe状态
+
+**DCM**会通过模式声明组原型**DcmResponseOnEvent_\<RoeEventID\>**的模式切换，将每个已配置**Roe**事件的**Roe**当前状态切换为**EVENT_STARTED**、**EVENT_STOPPED**和**EVENT_CLEARED**。该信息主要对于需要与**DCM**交互的应用是必需的，例如事件需要从外部触发的情况。
+
+```
+ModeGroup DcmResponseOnEvent_<RoeEventID> { EVENT_STARTED, EVENT_STOPPED, EVENT_CLEARED }
+interface modeSwitch MSIF_DcmResponseOnEvent{
+  mode DcmResponseOnEvent currentMode
+}
+```
+
+清单3.40：Roe状态的模式切换接口
+
+### 3.6. 多核ECU上BswM之间的交互
+
+本章描述与在多分区**ECU**中使用**BswM**相关的配置和集成指南。
+
+**BswM**主要与功能集群的状态管理器交互（例如与**ComM**），因此应当在同一分区上本地可用，以尽可能限制跨核通信。
+
+因此，**BswM**可以分布在多个包含**BSW**模块的分区上。这些相互独立的**BswM**拥有分区特定的配置集。不同分区本地**BswM**实例之间的同步可以通过**BswM**服务组件之间普通的模式通信（模式请求、模式切换）来完成。
+
+如果**ECU**的某个分区中包含运行于其中的**BSW**模块，那么该分区也会有一个分区本地的**BswM**。
+
+分区本地的**BswM**负责其分区内**BSW**模块的完整初始化。由于初始化序列很大程度上取决于模块在不同分区中的分布，这对所有分区本地**BswM**的配置有很大影响。
+
+每个分区本地的**BswM**负责协调其分区内运行的**BSW**模块的初始化。
+
+**BswM**的每个实例随后会负责分区本地**BSW**模块的正确初始化和去初始化，从而可以实现以下场景：
+
+* **启动**：**OS**启动后，每个**EcuM**会将控制权交给分区本地的**BswM**，由它负责其他分区本地**BSW**模块的初始化。随后，分区本地的**BswM**向运行在其他分区中的**BswM**实例发出该分区已就绪的信号。该信号传递通过**BswM**服务组件之间普通的模式通信完成。
+* **关机**：分区本地的**BswM**通过其模式请求源判断是否可以关机。如果可以，它会向运行在其他分区中的**BswM**实例发出其当前状态的信号。该信号传递通过**BswM**服务组件之间普通的模式通信完成。位于**Master EcuM**所在分区内的**BswM**随后可以据此信息决定是否发起**ECU**的关机。
+* **去初始化**：**Master EcuM**运行所在分区上的**BswM**可以向其他**BswM**发出想要关闭**ECU**的信号。该信号传递通过**BswM**服务组件之间普通的模式通信完成。其他**BswM**随后可以对其分区内的模块进行去初始化，以实现干净的关机。
+* **分区重启**：如果一个分区被重启，本地的**BswM**会向其他**BswM**实例发出它处于重启模式的信号。该信号传递通过**BswM**服务组件之间普通的模式通信完成。随后，其他**BswM**可以判定本地应用是否需要被通知或可能需要重启，以及如何将它们与新启动的分区同步。
+
+### 3.7. 分区间动作
+
+**BswM**没有实现任何机制来阻止执行影响驻留在另一个分区上的模块的动作。**BswM**的配置者在配置**BswM**动作时需要意识到这一点。通常，**BswM**可以安全地执行影响其自身分区的动作，但在配置影响另一个分区的**BswM**动作时，配置者必须给予特别考虑。在配置跨分区动作时，必须注意确保跨分区动作（在实现上是对另一个分区的函数调用）能够安全执行，而不会危及系统性能或稳定性。必要时，函数的实现者需要说明其使用上的限制（例如："未准备好在启用内存保护的情况下被跨分区调用"）。配置跨分区动作时，配置者尤其需要考虑以下问题：内存保护、分区的停止/重启，以及被调用方（即动作的接收方）所在分区的恰当准备。
+
+### 3.8. 分区间请求/指示
+
+如果**BswM**集成在多分区**ECU**中，模式请求和/或模式指示可能会跨分区边界发送到**BswM**。对于通过**RTE**跨分区的模式请求/指示（例如**BswMSwcModeRequest**），配置者无需就系统稳定性或数据一致性做特殊考虑，**RTE**会处理这种跨分区模式请求/指示的通信。但是，如果跨分区的模式请求/指示直接来自**BSW**模块（例如**BswMComMIndication**）或来自通用源（例如**BswMGenericRequest**），配置者必须做特殊考虑，例如：
+
+1. 当配置者使用内存保护时，跨分区模式请求/指示所涉及的内存段（例如**BswM**内部的状态标志）需要配置为允许此类跨分区访问。
+2. 配置为**IMMEDIATE**处理的跨分区模式请求/指示也可能触发立即执行的动作列表。所产生的动作将在调用者的上下文中执行（例如：另一个分区中的**BSW**模块）。对于这类**IMMEDIATE**跨分区模式请求/指示，同样需要考虑"分区间动作"一章中所述的问题。
