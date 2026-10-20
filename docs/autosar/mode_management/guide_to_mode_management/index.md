@@ -2313,3 +2313,4 @@ interface modeSwitch MSIF_DcmResponseOnEvent{
 | ECU间通信（inter-ECU communication） | **ECU**之间的通信（通常使用**COM**）在本文档中称为**ECU**间通信 |
 | 分区间通信（inter-partition communication） | 同一**ECU**内不同分区（由不同的**OS**应用表示）之间的通信在本文档中称为分区间通信。它通常涉及**OS**机制的使用，例如**IOC**或受信任函数调用。这些分区可以位于不同的内核上，或使用**ECU**的不同内存段 |
 | 分区内通信（intra-partition communication） | 同一**ECU**同一分区内的通信称为分区内通信。在这种情况下，**RTE**可以使用内部缓冲区和队列进行通信 |
+| ECU内通信（intra-ECU communication） | 同一**ECU**内的通信在本文档中称为**ECU**内通信。它是分区间通信和分区内通信的超集 |
