@@ -112,11 +112,6 @@
   padding-bottom: 0.3em;
 }
 
-/* ---- 正文首行缩进（仅直接子段落，不影响列表/表格/提示块） ---- */
-.md-typeset > p {
-  text-indent: 2em;
-}
-
 /* ---- booktabs 三线表 ---- */
 .md-typeset table:not([class]) {
   border: none;
@@ -163,10 +158,6 @@
   color: var(--md-default-fg-color--light);
   margin-left: 2em;
   padding-left: 1em;
-}
-
-.md-typeset blockquote p {
-  text-indent: 0;
 }
 
 /* ---- 分隔线：细暖灰线 ---- */
