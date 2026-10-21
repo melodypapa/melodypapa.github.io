@@ -777,6 +777,8 @@ DataReceiveEvent AppModeRequestEvent {
 
 除了请求和查询模式的通用方式之外，**BswM**还提供了一个标准化的接口，供应用层**SW-C**控制服务发现（**Service Discovery**）。
 
+![Figure7-6](Figure7-6.png)
+
 基于**SW-C**描述和**ECUC**的输入，应按照后续各章节的描述生成配置。
 
 生成的输入是具有**ServerServiceOffer**、**ServerEventSubscriptionStatus**、**ClientEventSubscription**和**ClientEventSubscriptionStatus**的**RoleBasedDataAssignment**的端口，以及这些端口对应的**RepresentedPortGroups**。
@@ -798,6 +800,8 @@ DataReceiveEvent AppModeRequestEvent {
 #### 6.8.2. 客户端服务/事件订阅请求
 
 实现客户端功能的软件组件（**SW-C**）作为模式请求者（**mode requester**），暴露一个由**SenderReceiverInterface**类型化的**PPortPrototype**。通过这种方式，软件组件可以向**BswM**发送模式请求，以订阅（**subscribe**）和停止订阅（**stop subscribe**）特定的事件和方法。
+
+![Figure7-7](Figure7-7.png)
 
 该图展示了在使用（**SomeIP**）服务发现的情况下，构成事件订阅请求的实体链。其中灰色元素为配置的元素。通过评估引用了应用事件（此处的**Ev1**）的端口组引用，可以推导出对应的请求端口（**SWC_P1_Req**）。应用事件与对应**SD**事件（此处的**Eventgroup 1**中的**Ev1**）之间的关系通过**ECU**配置提供。
 

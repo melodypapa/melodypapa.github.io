@@ -37,6 +37,8 @@ AUTOSAR软件组件模板[1]定义了一种用于描述**AUTOSAR**中模式的�
 
 模式声明组（**ModeDeclarationGroup**）将多个模式声明分组在一起，其方式类似于枚举（**enumeration**）将字面量（**literal**）分组。在上面的示例中，模式声明组可以是**ECUMODE**。对于每个模式声明组，都必须定义一个初始模式（**InitialMode**），该初始模式在启动时被赋值给该变量。图2.1展示了**AUTOSAR**元模型（**Metamodel**）中模式声明、模式声明组和可执行实体之间关系的摘录。
 
+![Figure2-1](Figure2-1.png)
+
 图2.1：有关模式的元模型摘录
 
 ### 2.2. 模式管理器和模式用户
@@ -48,6 +50,8 @@ AUTOSAR软件组件模板[1]定义了一种用于描述**AUTOSAR**中模式的�
 AUTOSAR运行环境（**RTE**）实现了模式的概念。为此，它会为每个原子软件组件（**Atomic Software Component**）的模式声明组原型（**ModeDeclarationGroupPrototype**）创建一个所谓的模式机实例（**ModeMachineInstance**）。模式机实例是一个状态机，其状态由相应模式声明组的模式声明定义。
 
 图2.2描绘了模式声明组原型、模式管理器和模式用户之间的交互。注意，模式用户的模式切换端口并不是直接连接到模式管理器对应的**PPortPrototype**，而是连接到**RTE**的模式机实例。理解**RTE**内部模式切换的机制时，这一点非常重要。
+
+![Figure2-2](Figure2-2.png)
 
 图2.2：RTE为每个ModeDeclarationGroupPrototype实例化一个ModeMachineInstance
 
@@ -71,6 +75,8 @@ AUTOSAR运行环境（**RTE**）实现了模式的概念。为此，它会为每
 #### 2.5.1. 模式切换
 
 与软件组件之间或软件组件与基础软件模块之间的所有其他通信一样，模式通过端口原型（**PortPrototype**）进行通信。每个端口原型都必须由端口接口（**PortInterface**）类型化。在模式通信的情况下，存在所谓的模式切换接口（**mode switch interface**），它们是端口接口。如图2.3所示。每个模式切换接口都有且只有一个模式声明组原型，该原型由多个模式声明组成。任何一个模式声明都表示模式声明组中的一个模式，其中之一被定义为初始模式。
+
+![Figure2-3](Figure2-3.png)
 
 图2.3：模式切换接口
 
@@ -101,11 +107,15 @@ AUTOSAR运行环境（**RTE**）实现了模式的概念。为此，它会为每
 
 对于应用软件和**RTE**而言，**ServiceProxySoftwareComponentType**的行为类似于一个"普通的"**AtomicSwComponentType**，但它实际上是一个**AUTOSAR**服务的代理。这意味着一方面，它必须通过服务端口与它所代表的**ECU**本地的**ServiceSwComponentType**通信；另一方面，它必须向**ApplicationSwComponentType**提供相应的端口原型。在元模型中，除了类不同之外，**ServiceProxySwComponentType**与**ApplicationSwComponentType**没有区别。作为代理满足语义所施加的限制是实现者的责任。**ServiceProxySwComponentType**与**ApplicationSwComponentType**的主要区别在于系统层面：**ServiceProxySwComponentType**的一个原型可以被映射到多个**ECU**，即使它在**VFB**系统中只出现一次，因为这样的原型在每个**ECU**上都是必需的，在那里它需要寻址一个本地的**ServiceSwComponentType**。由此导致的结果是，**ServiceProxySwComponentType**只能通过网络接收信号，而不能发送信号（另请参阅[1]）。
 
+![Figure2-4](Figure2-4.png)
+
 图2.4：通过ServiceProxySwComponent的通信
 
 #### 2.5.5. 多核ECU上的模式通信
 
 **RTE**能够在**ECU**的不同分区之间同步模式机实例。这使得这样的配置成为可能：一个提供端口的模式声明组原型可以连接到来自多个分区的接收端口的模式声明组原型。因此，一个模式声明组原型的模式用户可以分布在多个分区上。
+
+![Figure2-5](Figure2-5.png)
 
 图2.5：示例配置
 
@@ -761,9 +771,13 @@ actions SwitchToShutdownMode on condition {
 
 图3.1展示了该架构方案的概览。为了使用设计为与"具有固定状态机的**ECU**状态管理器"协同工作的软件组件，必须激活"**ECU**模式处理"选项。实现这种行为不需要所谓的兼容性**SWC**（**Compatibility SWC**）。
 
+![Figure3-1](Figure3-1.png)
+
 图3.1：EcuM Flex中的默认状态使旧SWC得以复用
 
 图3.2描绘了该方案的行为方面。小方框表示固定**EcuM**的状态，绿色方框标出灵活**EcuM**的各个阶段。应用软件只会在**UP**阶段期间察觉到变化。
+
+![Figure3-2](Figure3-2.png)
 
 图3.2：固定EcuM的阶段到灵活EcuM的映射
 
@@ -1893,11 +1907,15 @@ actions pnc3requestedActions on condition {
 
 图3.3展示了标准化服务发现控制所涉及实体的概览。
 
+![Figure3-3](Figure3-3.png)
+
 图3.3：服务发现控制流概览
 
 为了能够使用服务发现控制的标准手段，在设计应用**SWC**时就必须将其纳入考虑。
 
 虽然必须在设计时就知道需要哪些用例，但实际的接口对它们将应用于哪种**SOA**技术完全无关。
+
+![Figure3-4](Figure3-4.png)
 
 图3.4：BswM交互中涉及端口连接的示例
 
@@ -1914,6 +1932,8 @@ actions pnc3requestedActions on condition {
 
 到实际载荷端口（即：事件/方法）的映射，通过在**RepresentedPortGroup**中引用与此请求/通知相关的所有事件/方法端口来提供。
 
+![Figure3-5](Figure3-5.png)
+
 图3.5：模式请求端口与对应事件/方法（载荷数据）之间的映射
 
 该映射在设计时完成。映射的粒度可以选择为1:1、为整个服务实例使用一个请求端口，或介于两者之间的任何形式。在使用**Some-IP**服务发现的情况下，例如：可以将其设定为与事件到事件组的映射相匹配。因此，**BswM**规则会据此处理，当一个**SWC**端口映射到多于一个事件/方法时，相应的规则和动作列表将实现"最高者胜出"（**highest wins**，针对请求）和"最低者胜出"（**lowest wins**，针对返回的指示）。
@@ -1921,6 +1941,8 @@ actions pnc3requestedActions on condition {
 由于构建这些**BswM**规则所需的全部信息都可以通过**EcuExtract**和**EcuC**获得，配置工具可以生成完整的**BswM**配置，构建相应的请求和通知行为。更多细节请参阅[4]《基础软件模式管理器规范》。必要规则和动作列表的生成在[4]的第7.8.2–7.8.5章中描述。
 
 图3.6展示了生成的配置可能的样子的一个示例。所有白色的框都预期由配置工具生成。
+
+![Figure3-6](Figure3-6.png)
 
 图3.6：生成的BswM配置示例
 
