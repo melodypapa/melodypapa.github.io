@@ -669,6 +669,54 @@ void IoHwAb_PreparePowerState<#Mode> ( void )
 void IoHwAb_EnterPowerState<#Mode> ( void )
 ```
 
+## 7. 序列图
+
+> 以下序列图按 **AUTOSAR_SWS_IOHardwareAbstraction**（R22-11）第 9 章绘制。
+
+### 7.1. ECU 信号提供示例（ADC 转换）
+
+本序列图解释了 5.5.8 节（规范 7.5.2.5）给出的示例。在此示例中，传感器/执行器组件（**Sensor / Actuator Component**）是客户端，**I/O**硬件抽象是服务器。
+
+传感器/执行器组件请求 **af_pressure** 信号的新值，该信号是**I/O**硬件抽象级别上的一个**ECU**信号。**ADC**转换结束后，来自**MCAL**驱动程序的通知被转换为发往传感器/执行器组件的**RTE**事件，随后该组件即可对 **af_pressure** 信号缓冲区中的值执行同步读取。
+
+```mermaid
+sequenceDiagram
+    participant SWC as Sensor / Actuator Component
+    participant I as IoHwAb
+    participant A as Adc
+    participant U as ADC Conversion Unit
+    participant E as EcuM
+    E->>A: Adc_Init(const Adc_ConfigType*)
+    A-->>E: Adc_Init()
+    E->>I: IoHwAb_Init<Init_Id>(const IoHwAb<Init_Id>_ConfigType*)
+    I-->>E: IoHwAb_Init<Init_Id>()
+    I->>A: Adc_EnableGroupNotification(Adc_GroupType)
+    A-->>I: Adc_EnableGroupNotification()
+    SWC->>I: IoHwAb_GetVoltage(af_pressure)
+    I->>A: Adc_StartGroupConversion(Adc_GroupType)
+    A->>U: start conversion()
+    U-->>A: Interrupt()
+    A->>I: IoHwAb_Adc_Notification_Group1()
+    I->>A: Adc_OnDemandReadChannel(Adc_ChannelType): Adc_ValueType
+    A-->>I: Adc_OnDemandReadChannel()
+    I->>I: SetRTEEvent()
+    I-->>SWC: IoHwAb_ReadVoltage(af_pressure, &buffer)
+    SWC->>I: IoHwAb_ReadVoltage()
+```
+
+**注意：**
+
+* **ADC**转换单元（**ADC Conversion Unit**）包含通道组 1（**Group 1**）：通道 1（**Channel 1**）与通道 2（**Channel 2**），且通知机制（**notification mechanism**）已激活。
+* API **IoHwAb_GetVoltage**(af_pressure) 与 **IoHwAb_ReadVoltage**(af_pressure, &buffer) 并非规范定义的接口，仅用于本示例。
+* 本图旨在展示可运行实体（**runnables**），并不表示服务器端口到可运行实体的映射关系。
+
+### 7.2. 低功耗模式下设置 ADC 与 PWM（电源状态转换）
+
+应用程序请求进入低功耗模式时，将 **ADC** 与 **PWM** 设置为低功耗电源状态的序列图已在本译文的 5.7 节给出：
+
+* **异步电源状态转换**：见 5.7.1（规范 Figure 9-2.1）。其中，`<MSN>_PreparePowerState` API 返回的那一刻，准备过程即已启动并在后台运行，由 `<MSN>_Main_PowerStateTransitionManager` API 驱动；**IoHwAbs_PollForResults** 仅表示 **IoHwAbs** 的一个周期性可运行实体，用于检查所有通知是否均已发出，若是则激活电源状态转换的第二阶段（电源状态设置）；该回调由 **MCAL_B_Main_PowerStateTransitionManager** 调用，**MCAL_A** 同样如此。
+* **同步电源状态转换**：见 5.7.2（规范 Figure 9-3.2）。其中外设被配置为同步电源状态转换，即准备阶段 API 返回时准备过程即告完成，外设已可立即设置新的电源状态。
+
 <section id="wechat">
 
 <h4>微信扫一扫，获取更多及时资讯</h4>
