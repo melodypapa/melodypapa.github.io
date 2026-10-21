@@ -143,8 +143,12 @@ nav:
     - I/O:
       - autosar/io/index.md
       - "Adc": autosar/io/adc_driver/index.md
+      - "Dio": autosar/io/dio_driver/index.md
       - "Icu": autosar/io/icu_driver/index.md
       - "IoHwAb": autosar/io/iohwab/index.md
+      - "Ocu": autosar/io/ocu_driver/index.md
+      - "Port": autosar/io/port_driver/index.md
+      - "Pwm": autosar/io/pwm_driver/index.md
     - 存储（Memory）:
 
       - "BndM": autosar/memory/bulk_nv_data_manager/index.md
