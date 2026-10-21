@@ -34,6 +34,9 @@ title: "AUTOSAR Basic Software Mode Manager（BSW模式管理器）"
 **ECU** 
 > 电子控制单元（**Electronic Control Unit**）
 
+**RTE**
+> 运行时环境（**Real Time Environment**）
+
 **SWC/SW-C**
 > 软件组件（**Software Component**）
 
@@ -56,11 +59,11 @@ title: "AUTOSAR Basic Software Mode Manager（BSW模式管理器）"
 [4] Requirements on Mode Management
 > AUTOSAR_SRS_ModeManagement
 
-[5] Specification of Basic Software Mode Manager
-> AUTOSAR_SWS_BSWModeManager
-
-[6] Specification of RTE Software
+[5] Specification of RTE Software
 > AUTOSAR_SWS_RTE
+
+[6] Software Component Template
+> AUTOSAR_TPS_SoftwareComponentTemplate
 
 ### 3.2. 相关规范
 
@@ -92,71 +95,65 @@ title: "AUTOSAR Basic Software Mode Manager（BSW模式管理器）"
 
 **EcuM Flex**可以向**BswM**指示其唤醒源的状态。当使用**ECU**模式处理时，**BswM**可以设置**EcuM Flex**的状态，并根据**RUN**请求协议接收某些模式的状态。
 
-### 5.3. WdgM
-
-（此节内容已过时）。
-
-**WdgM**可以通过**BswM_WdgM_RequestPartitionReset API**向**BswM**请求分区重置相关操作。**WdgM**分区重置请求的配置是通过**BswMWdgMRequestPartitionReset**模式请求源完成的。
-
-### 5.4. ComM
+### 5.3. ComM
 
 来自**ComM**的模式切换指示（**Mode Switch Indications**）可以通过**BswM**进一步传播到**SW-C**。
 
 **BswM**可以通过**ComMUsers**向**ComM**请求通信模式。
 
-### 5.5. COM
+### 5.4. COM
 
 **COM**中I-PDU组（**I-PDU Group**）的处理由**BswM**执行。作为I-PDU组启动/停止的一部分，**BswM**可以将包含的信号值重置为其相应的初始化值。
 
 同时**BswM**处理**COM**中信号截止期限监视（**deadline monitoring**）的启用和禁用。**BswM**也可以触发**I-PDU**的传输。
 
-### 5.6. PduR
+### 5.5. PduR
 
 **BswM**可以启用和禁用**PDU Router**的**I-PDU**路由组的路由功能。
 
-### 5.7. CanSM
+### 5.6. CanSM
 
 来自**CanSM**的模式切换指示可以通过**BswM**进一步传播到**SW-C**。
 
-### 5.8. LinSM
+### 5.7. LinSM
 
 **BswM**协调**LinSM**中LIN调度表（**LIN Schedule Tables**）的切换，和**COM**中相应I-PDU组的启动和停止。
 
 来自**LinSM**的模式切换指示可以通过**BswM**进一步传播到**SW-C**。
 
-### 5.9. LinTP
+### 5.8. LinTP
 
 LIN传输协议（**LIN Transport Protocol**）作为**LinIf**一部分的，会向**BswM**请求模式，以确保在**LinTp**操作期间，正确的LIN调度表（**LIN Schedule Table**）处于活动状态。
 
-### 5.10. FrSM
+### 5.9. FrSM
 
 来自**FrSM**的模式切换指示可以通过**BswM**进一步传播到**SW-C**。
 
 **FlexRay**单槽模式（**Single Slot Mode**）的使用，由**BswM**的请求，**FrSM**控制。FlexRay软件栈的发送能力可以由**BswM**通过**FrSM**调用**FrSM_SetEcuPassive API**来控制。
 
-### 5.11. EthSM
+### 5.10. EthSM
 
 来自**EthSM**的模式切换指示可以通过**BswM**进一步传播到**SW-C**。
 
-### 5.12. DCM
+### 5.11. DCM
 
-**DCM**模块会根据所接收到的诊断请求，向**BswM**执行相应地模式请求。
+**DCM**模块会根据所接收到的诊断请求，向**BswM**执行相应的模式请求。
 
 示例：**DCM**可以发送禁止正常通信（**Disable Normal Communication**）请求。在此模式下，**BswM**将关闭相应的**I-PDU**组和**NM PDU**。
 
-### 5.13. J1939Dcm
+### 5.12. J1939Dcm
 
-**J1939Dcm**会向**BswM**报告通信状态变化，以便再进一步把状态传播到**SW-C**。**BswM**可以通过**J1939Dcm_SetState**改变**J1939Dcm**的状态。
+**J1939Dcm**会向**BswM**报告通信状态变化，以便进一步把状态传播到**SW-C**。**BswM**可以通过**J1939Dcm_SetState**改变**J1939Dcm**的状态。
 
-### 5.14. J1939Nm
+### 5.13. J1939Nm
 
 **J1939Nm**可以通过**BswM_J1939Nm_StateChangeNotification**提供状态指示（**state indication**）。
 
-### 5.15. J1939Rm
+### 5.14. J1939Rm
 
 **BswM**通过**J1939Rm_SetState**可以改变**J1939Rm**的状态。
 
-### 5.16. NM Interface
+### 5.15. NM Interface
 
 **BswM**将使用**Nm_EnableCommunication**和**Nm_DisableCommunication**来控制基于当前模式的**NM**通信。
 
@@ -164,17 +161,17 @@ LIN传输协议（**LIN Transport Protocol**）作为**LinIf**一部分的，会
 
 **Nm**模块可以使用**BswM_Nm_CarWakeUpIndication**来指示整车被唤醒。
 
-### 5.17. NvM
+### 5.16. NvM
 
-**NvM**模块通过NvM回调函数的集成代码（**integration code**）向**BswM**报告NvM数据块的状态。**BswM**具有NvM在启动和关闭期间，读取和写入所有数据块的操作。
+**NvM**模块通过注册为NvM回调的集成代码（**integration code**）向**BswM**报告NvM数据块的状态。**BswM**具有使**NvM**在启动和关机期间读取和写入所有数据块的动作。
 
-### 5.18. OS
+### 5.17. OS
 
-**BswM**所需的操作系统功能是需特定于实现的。
+**BswM**所需的操作系统功能是实现特定的。
 
-### 5.19. Sd
+### 5.18. Sd
 
-**BswM**通过以下得API从**Sd**模块接收状态指示。 
+**BswM**通过以下API从**Sd**模块接收状态指示（示例参见章节7.1函数定义）： 
 
 * **BswM_Sd_ClientServiceCurrentState**
 * **BswM_Sd_ConsumedEventGroupCurrentState**
@@ -182,13 +179,13 @@ LIN传输协议（**LIN Transport Protocol**）作为**LinIf**一部分的，会
 
 这些来自**Sd**的状态指示，可以配置为**BswMModeRequestSources**。
 
-### 5.20. File structure
+### 5.19. File structure
 
 **BswM**可以使用未在本规范中明确定义的**AUTOSAR BSW**模块中的接口。
 
 ## 6. 功能规格
 
-**BSW**模式管理器得基本功能的操作，可以描述为两个不同的任务：
+**BSW**模式管理器的基本功能的操作，可以描述为两个不同的任务：
 
 * 模式仲裁（**Mode Arbitration**）
 * 模式控制（**Mode Control**）
@@ -228,7 +225,7 @@ LIN传输协议（**LIN Transport Protocol**）作为**LinIf**一部分的，会
 
 如果条件关联了一个**BswMEventRequestPort**，则条件将验证请求端口是**SET**还是**CLEAR**了。 
 
-**BswMEventRequestPort**事件请求与模式请求的不同，在于请求者不向**BswM**发送请求的模式/值，也就没有模式条件供**BswM**评估。甚至**BswM**只能评估事件的接收情况。
+**BswMEventRequestPort**事件请求与模式请求的不同，在于请求者不向**BswM**发送请求的模式/值，也就没有模式条件供**BswM**评估。而是**BswM**只能评估事件的接收情况。
 
 当请求者发送/调用事件时，**BswMEventRequestPort**将处于**SET**状态。**BswM**可以稍后通过执行**BswMClearEventRequest**动作将**BswMEventRequestPort**置于**CLEAR**状态。下图展示了具有两个条件的示例规则。规则和可用逻辑操作集被定义为ECU配置的一部分。
 
@@ -251,7 +248,7 @@ LIN传输协议（**LIN Transport Protocol**）作为**LinIf**一部分的，会
 #### 6.1.3. 模式仲裁的需求
 
 如上所述，**BswM**接受模式请求和模式指示作为模式仲裁的输入。模式请求通常来自于应用程序**SW-C**，但也可能来自于其他**BSW**模块，例如：**DCM**。 
-而模式指示总是由其他**BSW**模块发出，例如：不同的总线特定状态管理器、**EcuM**和**WdgM**。在本文档中，通用术语模式仲裁请求（**mode arbitration
+而模式指示总是由其他**BSW**模块发出，例如：不同的总线特定状态管理器和**EcuM**。在本文档中，通用术语模式仲裁请求（**mode arbitration
 request**）即可对应于模式指示（**mode indication**），也可对应于模式请求（**mode request**）。
 
 **BswM**需根据以下的输入，执行模式仲裁。
@@ -272,7 +269,7 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 
 **注意：**
 
-禁止将规则评估的结果用作其他规则评估的输入，主要为zui大程度的满足了现有的**BswM**配置容器的结构。
+禁止将规则评估的结果用作其他规则评估的输入。这主要是因为逻辑表达式可配置的输入项排除了先前规则评估的结果，从而在最大程度上满足了现有的**BswM**配置容器的结构。
 
 作为评估**BswM**仲裁规则的结果而被调用的动作，只能在动作列表的上下文中被调用。
 
@@ -311,9 +308,9 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 
 使用至少一个延迟模式条件的所有规则，需在每次执行**BswM**主函数（**main function**）期间进行评估。
 
-**BswM**需推迟在其主函数处理期间所收到的模式仲裁请求，直到主函数完成。任何此类推迟的即时请求（**IMMEDIATE request**）都应在**BswM**主函数退出之前直接被处理。任何此类推迟的延迟请求（**DEFERRED request**）请求都应在下一个后续的**BswM**主函数中被处理。
+**BswM**需推迟在其主函数处理期间所收到的模式仲裁请求，直到主函数完成。任何此类推迟的立即请求（**IMMEDIATE request**）都应在**BswM**主函数退出之前直接被处理。任何此类推迟的延迟请求（**DEFERRED request**）请求都应在下一个后续的**BswM**主函数中被处理。
 
-**BswM**需推迟在处理**IMMEDIATE**请求期间收到的模式仲裁请求，直到此请求处理完成。任何此类推迟的即时请求（**IMMEDIATE request**）应在处理原始即时请求（**original IMMEDIATE request**）之后直接被处理。任何此类推迟的延迟请求（**DEFERRED request**）都应在下一个后续的**BswM**主函数中被处理。
+**BswM**需推迟在处理**IMMEDIATE**请求期间收到的模式仲裁请求，直到此请求处理完成。任何此类推迟的立即请求（**IMMEDIATE request**）应在处理原始立即请求（**original IMMEDIATE request**）之后直接被处理。任何此类推迟的延迟请求（**DEFERRED request**）都应在下一个后续的**BswM**主函数中被处理。
 
 **BswM**实现可以选择使用保护机制（**protection mechanisms**），例如：独占区（**Exclusive Area**），以保证动作的执行或者**BswM**主函数中的执行不会被任何其他更高优先级的任务中断。
 
@@ -347,11 +344,11 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 
 动作列表中的动作（**action**）可以是以下的三种类型：
 
-1. 调用其他**BSW**模块或者**RTE**模块。 预定义的动作可参考章节[6.2.4-可用操作](#624-可用操作)中所罗列的。
+1. 调用其他**BSW**模块或者**RTE**模块。 预定义的动作可参考章节[6.2.4-可用动作](#624-可用动作)中所罗列的。
 2. 链接要包含在执行中的其他动作列表。
 3. 模式仲裁规则（**Mode arbitration rules**）。这些规则将在执行相应的动作列表时被评估。通过这种方式就获得了规则的层次结构（**a hierarchy of rules**）。
 
-因为**BswM**不需要存储或响应任何**BSW**模块执行动作的特定返回值，所以**BSW**中的不同状态管理器（**different state managers**）将它们的当前状态作为模式仲裁的输入提示给**BswM**模块。
+因为**BswM**不需要存储或响应对其所执行动作中任何**BSW**模块特定的返回值，因此，**BSW**中不同的状态管理器（**different state managers**）将它们当前的状态指示给**BswM**，用作模式仲裁的输入。
 
 但是，如果错误（**E_NOT_OK**）被返回，**BswM**可以发出**DET**运行时错误，并可以取消当前执行的动作列表。
 
@@ -373,7 +370,7 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 1. 模式请求者**SW-C**通过其发送端口（**Sender Port**）请求模式A。**RTE**分发请求，**BswM**通过接收端口接收（**Receiver Port**）到此请求。
 2. **BswM**根据接收到的模式仲裁请求或在执行BswM主函数期间周期地评估这些规则。
 3. 根据所选择的执行方式，执行相应的动作列表。具体细节可参见[章节6.2.3触发和条件动作列表](#623-触发和条件动作列表)。
-4. 在执行动作列表时，**BswM**可以发出一个或多个对**RTE Switch API**[6]的调用，来通知受影响的**SW-C**仲裁结果。任何**SW-C**，尤其是模式请求者都可以注册以接收模式切换指示。
+4. 在执行动作列表时，**BswM**可以发出一个或多个对**RTE Switch API**[5]的调用，来通知受影响的**SW-C**仲裁结果。任何**SW-C**，尤其是模式请求者都可以注册以接收模式切换指示。
 
 **注意：**
 
@@ -391,7 +388,7 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 
 同时一个动作列表也可以包含指向**BswM**需在当前动作列表执行范围内所需评估的模式仲裁规则的链接。如果指定的动作列表中包含了模式仲裁规则，则由该评估产生的任何动作列表的执行都应由**BswM**在继续执行原动作列表之前执行。
 
-如果使用了级联动作列表（**cascaded action lists**），即包含对其他规则或动作列表的引用，则动作列表结构可以包含多达七个层次级别。
+如果使用了级联动作列表（**cascaded action lists**），即包含对其他规则或动作列表的引用，则动作列表结构可以包含多达七个层级。
 
 **注意：**
 
@@ -403,7 +400,7 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 
 在模式仲裁期间，如果一个顶级动作列表被多个规则触发，这会导致在模式控制期间只有单个触发执行了该动作列表的。它仅适用于顶级动作列表，并不适用于嵌套规则和嵌套动作列表，原因在于它们在父动作列表中的顺序是由用户自定义的。
 
-在模式控制期间，如果要执行多个顶级动作列表，则执行顺序应**BswMActionListPriority**的设置从高到底。在**BswMActionListPriority**相同的情况下，执行顺序是任意的。对于不是顶级动作列表的动作列表，需忽略**BswMActionListPriority**。
+在模式控制期间，如果要执行多个顶级动作列表，则执行顺序应**BswMActionListPriority**的设置从高到低。在**BswMActionListPriority**相同的情况下，执行顺序是任意的。对于不是顶级动作列表的动作列表，需忽略**BswMActionListPriority**。
 
 如果没有**BswMActionListPriority**的动作列表应被解释为**BswMActionListPriority**等于**0**。
 
@@ -449,8 +446,8 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 * BswMEthIfStartAllPorts
 * BswMEthIfSwitchPortGroupRequestMode
 * BswMFrSMAllSlots 
-* BswMIdsMBlockState
-* BswMJ1939DcmState
+* BswMIdsMBlockStateChangeRequest
+* BswMJ1939DcmStateSwitch
 * BswMJ1939RmStateSwitch
 * BswMLinScheduleSwitch
 * BswMNMControl
@@ -465,6 +462,7 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 * BswMSdConsumedEventGroupModeRequest
 * BswMSdServerServiceModeRequest
 * BswMSdServiceGroupSwitch
+* BswMSetFirewallState
 * BswMSwitchIPduMode
 * BswMTimerControl
 * BswMTriggerIPduSend
@@ -488,14 +486,14 @@ BswM也能够调用用户定义的函数（**user defined functions**），同�
 
 有时需要延迟某个特定的操作（**specific actions**）或等待进一步的模式控制（**mode controls**）。出于这个原因，**BswM**添加了定时器处理（**Timer handling**）。
 
-一个定时器总是包含两部分构成：
+一个定时器总是由两部分构成：
 
 1. 一个作为**BswMModeRequestSource**的**BswMTimer**。
 2. 一个控制此**BswMTimer**的相应动作（可参见**BswMTimerControl**配置参数）
 
 **BswMTimer**的数值包括：**BSWM_TIMER_STOPPED**、**BSWM_TIMER_STARTED**、**BSWM_TIMER_EXPIRED**。
    
-定时器的操作只能在**BswMTimerControl**动作的上下文环境中控制。同时**BswMTimer**的值可以被**BswM**中所配置的其他规则进行评估，并以此触发动作列表。外部接口（**external interface**）是无法来控制或者操作此定时器的。
+定时器的操作只能在**BswMTimerControl**动作的上下文环境中控制。同时**BswMTimer**的值可以被**BswM**中所配置的其他规则进行评估，并以此触发动作列表。没有外部接口（**external interface**）来控制或者操作此定时器。
 
 每个**BswMTimer**在初始化期间，都是停止状态，也就是说**BswMTimer**的初始值需为**BSWM_TIMER_STOPPED**。
 
@@ -577,14 +575,14 @@ BswM也能够调用用户定义的函数（**user defined functions**），同�
 
 本章节描述了BswM提供的**AUTOSAR**接口（**Interface**）和端口（**Port**）。
 
-请注意，**RTE**两侧的端口都是需要地：
+请注意，**RTE**两侧的端口都是必需的：
 
 1. **BswM**服务的**SW-C**描述将定义**RTE**下方的端口。
 2. 每个使用该服务的AUTOSAR的**SW-C**必须在其自己的**SW-C**描述中包含它的服务端口。 
    
 这些端口需使用相同的接口，并且必须连接到BswM的端口上，以便**RTE**可以生成适当的**ID**和所需的符号。
 
-当**SW-C**向**BswM**模块请求模式，**SW-C**需提供了一个发送端口（**Sender Port**），此端口需定义为一个的特殊**SenderReceiverInterface**模式请求接口（**Mode Request Interface**），接口定义必须包含了一个数据元素（**data element**）。 **BswM**模块中对应的接收器端口（**Receiver Port**）在章节[6.6.1](#661-模式请求端口)中描述。数据元素的类型需与对应模式的模式声明组（**Mode Declaration Group**）中的模式声明（**Mode Declarations**）类型相同，具有相同的数值。因为数据元素的**ImplementationDataType**需映射到**Mode Declaration Group**。
+当**SW-C**向**BswM**模块请求模式，**SW-C**需提供一个发送端口（**Sender Port**），此端口需定义为一个特殊的**SenderReceiverInterface**模式请求接口（**Mode Request Interface**），接口定义必须包含一个数据元素（**data element**）。 **BswM**模块中对应的接收器端口（**Receiver Port**）在章节[6.6.1](#661-模式请求端口)中描述。数据元素的类型需与对应模式的模式声明组（**Mode Declaration Group**）中的模式声明（**Mode Declarations**）类型相同，具有相同的数值。因为数据元素的**ImplementationDataType**需映射到**Mode Declaration Group**。
 
 因为**SW-C**也可能需要知道**BswM**的仲裁结果，所以请求模式的**SW-C**也可以是一个模式用户（**a mode user**）。此类**SW-C**有一个模式切换端口（**Mode Switch Port**），模式切换端口被定义为一个模式切换接口（**Mode Switch Interface**）的**R-Port**，模式切换接口（**Mode Switch Interface**）也包含一个数据元素（**data element**）。这个数据元素的类型就是模式声明组（**Mode Declaration Group**）本身。
 
@@ -598,7 +596,7 @@ BswM也能够调用用户定义的函数（**user defined functions**），同�
 
 在请求**SW-C**的上下文环境中，定义了模式请求端口（**Mode Request Port**），包括发送方（**Sender**）和接收方（**Receiver**）。**Bsw**模式管理器的配置会参考了此端口的定义。
 
-举例：一个**SW-C**定义了一个应用模式**AppModeType**，一个对应的**AppModeRequestType**和一个将这两种类型相互映射的**AppModeTypeMap**的例子
+举例：一个**SW-C**定义了一个应用模式**AppModeType**，一个对应的**AppModeRequestType**和一个将这两种类型相互映射的**AppModeTypeMap**
 
 ```
 ModeDeclarationGroup AppModeType {
@@ -733,7 +731,7 @@ SchM_Mode_modeNotificationPort_{ArbName}_{ModeName}_currentMode( &<variable>, &<
 
 #### 6.6.4. 组件类型和内部行为
 
-**BSW**模式管理器是一个服务组件（**Service Component**），它为**ECU**本地的模式请求提供服务。**BSW**模式管理器的**ServiceComponentType**声明了所有上述所有端口和一些内部行为（**Internal Behavior**）。
+**BSW**模式管理器是一个服务组件（**Service Component**），它为**ECU**本地的模式请求提供服务。**BSW**模式管理器的**ServiceComponentType**声明了上述所有端口和一些内部行为（**Internal Behavior**）。
 
 ```
 ServiceComponentType BswM {
@@ -1061,7 +1059,7 @@ void BswM_EcuM_CurrentWakeup (
 
 #### 7.1.11. BswM_EcuM_RequestedState
 
-**说明**: 函数被**EcuM**模块调用，用于通知运行请求协议（**Run Request Protocol**）的当前状态。。
+**说明**: 函数被**EcuM**模块调用，用于通知运行请求协议（**Run Request Protocol**）的当前状态。
 
 ```C
 void BswM_EcuM_RequestedState (
