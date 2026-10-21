@@ -134,7 +134,7 @@ nav:
       - "Crypto": autosar/crypto/crypto_driver/index.md
       - "Csm": autosar/crypto/crypto_service_manager/index.md
     - 诊断（Diagnostics）:
-
+      - autosar/diagnostics/index.md
       - "Dcm": autosar/diagnostics/diagnostic_communication_manager/index.md
       - "Dem": autosar/diagnostics/diagnostic_event_manager/index.md
     - 通用（General）:
