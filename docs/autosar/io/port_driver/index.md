@@ -29,9 +29,9 @@ title: "AUTOSAR Port Driver（端口驱动）"
 
 下图标识了**PORT**驱动程序的功能，以及**PORT**驱动程序和**DIO**驱动程序在**MCAL**软件层中的结构[1]。
 
-![Figure1-1](Figure1-1.png)
+![Figure1-1.png](Figure1-1.png)
 
-## 2. 缩略语和缩写
+## 2. 缩略语
 
 下表总结了**PORT**驱动程序中使用的表述。
 
@@ -141,7 +141,7 @@ AUTOSAR_CP_SWS_MCUDriver
 
 #### 7.1.1. 背景与原理
 
-[SWS_Port_00001] **PORT**驱动程序模块应初始化微控制器的整个端口结构。
+**PORT**驱动程序模块应初始化微控制器的整个端口结构。
 
 注意：定义端口和端口引脚的配置顺序是配置工具的任务。
 
@@ -149,18 +149,18 @@ AUTOSAR_CP_SWS_MCUDriver
 
 ##### 7.1.2.1. 端口引脚属性的配置
 
-[SWS_Port_00004] **PORT**驱动程序模块应允许为每个端口和端口引脚配置不同的功能，例如**ADC**、**SPI**、**DIO**等。
+**PORT**驱动程序模块应允许为每个端口和端口引脚配置不同的功能，例如**ADC**、**SPI**、**DIO**等。
 
 端口（即整个端口或单个端口引脚）的配置取决于微控制器。
 
-[SWS_Port_00079] **PORT**驱动程序模块应为**MCU**端口/端口引脚提供以下附加配置：
+**PORT**驱动程序模块应为**MCU**端口/端口引脚提供以下附加配置：
 
 * 引脚方向（输入/输出）
 * 引脚电平初始值
 * 引脚方向是否可在运行时更改（是/否）。
 * 端口模式是否可在运行时更改。
 
-[SWS_Port_00081] **PORT**驱动程序模块应为**MCU**端口和端口引脚提供一些可选配置（如果硬件支持）：
+**PORT**驱动程序模块应为**MCU**端口和端口引脚提供一些可选配置（如果硬件支持）：
 
 * 斜率（Slew rate）控制
 * 内部上拉的激活
@@ -168,35 +168,35 @@ AUTOSAR_CP_SWS_MCUDriver
 * 引脚驱动模式（推挽/开漏）。
 * 回读支持的类型（引脚电平、输出寄存器值）。
 
-[SWS_Port_00082] **PORT**驱动程序模块不应提供配置引脚电平反转的功能。应设置默认值（即不反转）。
+**PORT**驱动程序模块不应提供配置引脚电平反转的功能。应设置默认值（即不反转）。
 
 注意：**I/O**硬件抽象层应执行电平反转。
 
 ##### 7.1.2.2. 切换端口引脚方向
 
-[SWS_Port_00137] 对于使用配置工具配置为可更改的端口引脚，**PORT**驱动程序应允许用户在运行时更改端口引脚的方向。
+对于使用配置工具配置为可更改的端口引脚，**PORT**驱动程序应允许用户在运行时更改端口引脚的方向。
 
-[SWS_Port_00138] 如果**MCU**端口控制硬件提供用于在端口引脚上设置输出电平的输出锁存器，切换端口引脚方向不应改变此输出锁存器中设置的电平。
+如果**MCU**端口控制硬件提供用于在端口引脚上设置输出电平的输出锁存器，切换端口引脚方向不应改变此输出锁存器中设置的电平。
 
 ##### 7.1.2.3. 刷新端口方向
 
-[SWS_Port_00066] 为了在微控制器上刷新端口，**PORT**驱动程序应允许用户刷新那些方向由配置设置且不能动态更改的端口引脚的方向。
+为了在微控制器上刷新端口，**PORT**驱动程序应允许用户刷新那些方向由配置设置且不能动态更改的端口引脚的方向。
 
 ##### 7.1.2.4. 未使用的端口和端口引脚的配置
 
-[SWS_Port_00005] **PORT**驱动程序模块应将所有未使用（既不用作**GPIO**也不用作特殊用途**IO**）的端口和端口引脚配置为由**PORT**驱动程序模块配置设置为确定的状态。
+**PORT**驱动程序模块应将所有未使用（既不用作**GPIO**也不用作特殊用途**IO**）的端口和端口引脚配置为由**PORT**驱动程序模块配置设置为确定的状态。
 
 ##### 7.1.2.5. 符号名称的配置
 
-[SWS_Port_00006] **PORT**驱动程序模块的用户应配置**MCU**端口引脚的符号名称。
+**PORT**驱动程序模块的用户应配置**MCU**端口引脚的符号名称。
 
-[SWS_Port_00207] 单个端口引脚的这些符号名称（例如**PORT_A_PIN_0**）应在配置工具中定义。
+单个端口引脚的这些符号名称（例如**PORT_A_PIN_0**）应在配置工具中定义。
 
-[SWS_Port_00208] **PORT**驱动程序模块的实现者应通过文件**Port.h**发布这些符号名称。
+**PORT**驱动程序模块的实现者应通过文件**Port.h**发布这些符号名称。
 
 ##### 7.1.2.6. 端口访问的原子性
 
-[SWS_Port_00075] **PORT**驱动程序模块应提供对所有端口和端口引脚的原子访问。
+**PORT**驱动程序模块应提供对所有端口和端口引脚的原子访问。
 
 注意：
 
@@ -215,8 +215,6 @@ AUTOSAR_CP_SWS_MCUDriver
 详情请参阅[4]（**SWS BSW General**）中第 5.1.8 章"Version Check"。
 
 ### 7.2. 错误分类
-
-[SWS_Port_00051] **Port**模块中开发错误的定义
 
 | 错误类型 | 相关错误代码 | 错误值 |
 |---|---|---|
@@ -246,11 +244,11 @@ AUTOSAR_CP_SWS_MCUDriver
 
 ### 7.3. API 参数检查
 
-[SWS_Port_00077] 如果启用了开发错误检测，**Port**驱动程序模块应按参数传递的顺序检查函数参数，如果一项检查失败则跳过后续的参数检查。
+如果启用了开发错误检测，**Port**驱动程序模块应按参数传递的顺序检查函数参数，如果一项检查失败则跳过后续的参数检查。
 
 示例：对于函数**Port_SetPinDirection**，传递的第一个参数是引脚**ID**。此参数应标识**MCU**端口的相关端口引脚。传递的第二个参数对应于要在端口引脚上更改的方向。
 
-[SWS_Port_00087] 如果启用了开发错误检测且**Port**驱动程序模块检测到错误，应跳过所需功能，请求的服务应直接返回，不执行任何动作。
+如果启用了开发错误检测且**Port**驱动程序模块检测到错误，应跳过所需功能，请求的服务应直接返回，不执行任何动作。
 
 参见下表，了解每个函数报告的**Det**错误列表。
 
@@ -271,73 +269,51 @@ AUTOSAR_CP_SWS_MCUDriver
 
 本章列出了从以下模块包含的所有类型：
 
-[SWS_Port_00129] **Port**模块的导入数据类型定义
+**Port**模块的导入数据类型定义
 
 | 模块 | 头文件 | 导入的类型 |
 |---|---|---|
-| Std_Types.h | Std_ReturnType | Std |
-| Std_Types.h | Std_VersionInfoType | |
+| Std | Std_Types.h | Std_ReturnType |
+| Std | Std_Types.h | Std_VersionInfoType |
 
 ### 8.2. 类型定义
 
 #### 8.2.1. Port_ConfigType
 
-[SWS_Port_00228] 数据类型**Port_ConfigType**的定义
-
-| 名称 | Port_ConfigType |
-|---|---|
-| 类型 | Structure |
-| 硬件相关结构元素 | 类型 –。注释：初始化数据结构的内容特定于微控制器。 |
-| 描述 | 包含本模块初始化数据的外部数据结构的类型。可通过**Port.h**获得 |
+结构类型。初始化数据结构的内容特定于微控制器。包含本模块初始化数据的外部数据结构的类型。可通过**Port.h**获得。
 
 #### 8.2.2. Port_PinType
 
-[SWS_Port_00229] 数据类型**Port_PinType**的定义
+类型，派生自 uint。范围为：0 - <端口引脚数量>：应覆盖所有可用的端口引脚。该类型应为特定**MCU**平台选择（最佳性能）。端口引脚符号名称的数据类型。可通过**Port.h**获得。
 
-| 名称 | Port_PinType |
-|---|---|
-| 类型 | Type |
-| 派生自 | uint |
-| 范围 | 0 - <端口引脚数量>：应覆盖所有可用的端口引脚。该类型应为特定**MCU**平台选择（最佳性能）。 |
-| 描述 | 端口引脚符号名称的数据类型。可通过**Port.h**获得 |
+**Port_PinType**类型应用于端口引脚的符号名称。
 
-[SWS_Port_00013] **Port_PinType**类型应用于端口引脚的符号名称。
-
-[SWS_Port_00219] **Port_PinType**类型应为**uint8**、**uint16**或**uint32**，基于特定**MCU**平台。
+**Port_PinType**类型应为**uint8**、**uint16**或**uint32**，基于特定**MCU**平台。
 
 注意：用户应使用配置工具提供的符号名称。
 
 #### 8.2.3. Port_PinDirectionType
 
-[SWS_Port_00230] 数据类型**Port_PinDirectionType**的定义
+枚举类型，取值范围：
 
-| 名称 | Port_PinDirectionType |
-|---|---|
-| 类型 | Enumeration |
-| PORT_PIN_IN | 0x00，将端口引脚设置为输入。范围 |
-| PORT_PIN_OUT | 0x01，将端口引脚设置为输出。 |
-| 描述 | 端口引脚可能的方向。可通过**Port.h**获得 |
+* **PORT_PIN_IN**（0x00）：将端口引脚设置为输入。
+* **PORT_PIN_OUT**（0x01）：将端口引脚设置为输出。
 
-[SWS_Port_00046] **Port_PinDirectionType**是定义端口引脚方向的类型。
+端口引脚可能的方向。可通过**Port.h**获得。
 
-[SWS_Port_00220] **Port_PinDirectionType**应为枚举类型，其范围为**PORT_PIN_IN**和**PORT_PIN_OUT**。
+**Port_PinDirectionType**是定义端口引脚方向的类型。
+
+**Port_PinDirectionType**应为枚举类型，其范围为**PORT_PIN_IN**和**PORT_PIN_OUT**。
 
 #### 8.2.4. Port_PinModeType
 
-[SWS_Port_00231] 数据类型**Port_PinModeType**的定义
+类型，派生自 uint。范围为：实现特定 —— 由于一个引脚上应可配置多个端口引脚模式，范围应由实现确定。不同的端口引脚模式。可通过**Port.h**获得。
 
-| 名称 | Port_PinModeType |
-|---|---|
-| 类型 | Type |
-| 派生自 | uint |
-| 范围 | 实现特定 —— 由于一个引脚上应可配置多个端口引脚模式，范围应由实现确定。 |
-| 描述 | 不同的端口引脚模式。可通过**Port.h**获得 |
+端口引脚应可配置多个端口引脚模式（**Port_PinModeType**类型）。
 
-[SWS_Port_00124] 端口引脚应可配置多个端口引脚模式（**Port_PinModeType**类型）。
+**Port_PinModeType**类型应与函数调用**Port_SetPinMode**一起使用。
 
-[SWS_Port_00212] **Port_PinModeType**类型应与函数调用**Port_SetPinMode**一起使用。
-
-[SWS_Port_00221] **Port_PinModeType**类型应为**uint8**、**uint16**或**uint32**。
+**Port_PinModeType**类型应为**uint8**、**uint16**或**uint32**。
 
 ### 8.3. 函数定义
 
@@ -345,57 +321,45 @@ AUTOSAR_CP_SWS_MCUDriver
 
 #### 8.3.1. Port_Init
 
-[SWS_Port_00140] **API**函数**Port_Init**的定义
-
-| 服务名称 | Port_Init |
-|---|---|
-| 语法 | void Port_Init (const Port_ConfigType * ConfigPtr) |
-| 服务 ID [十六进制] | 0x00 |
-| 同步/异步 | 同步 |
-| 可重入性 | 不可重入 |
-| 参数（in） | ConfigPtr：指向配置集的指针 |
-| 参数（inout） | 无 |
-| 参数（out） | 无 |
-| 返回值 | 无 |
-| 描述 | 初始化**Port**驱动程序模块。可通过**Port.h**获得 |
+**说明**: 初始化**Port**驱动程序模块。可通过**Port.h**获得。本服务为同步调用，不可重入。参数 ConfigPtr（in）：指向配置集的指针。
 
 ```C
-void Port_Init ( const Port_ConfigType * ConfigPtr )
+void Port_Init (const Port_ConfigType * ConfigPtr)
 ```
 
-[SWS_Port_00041] 函数**Port_Init**应使用参数**ConfigPtr**指向的配置集初始化所有端口和端口引脚。
+函数**Port_Init**应使用参数**ConfigPtr**指向的配置集初始化所有端口和端口引脚。
 
-[SWS_Port_00078] **Port**驱动程序模块的环境应首先调用函数**Port_Init**以初始化端口供使用。
+**Port**驱动程序模块的环境应首先调用函数**Port_Init**以初始化端口供使用。
 
-[SWS_Port_00213] 如果未首先调用**Port_Init**函数，则无法对**MCU**端口和端口引脚执行任何操作。
+如果未首先调用**Port_Init**函数，则无法对**MCU**端口和端口引脚执行任何操作。
 
-[SWS_Port_00042] 函数**Port_Init**应初始化所有已配置的资源。
+函数**Port_Init**应初始化所有已配置的资源。
 
 函数**Port_Init**应遵循以下关于控制器寄存器初始化的规则。
 
-* [SWS_Port_00113] 如果硬件只允许寄存器的一次使用，则实现该功能的驱动模块负责初始化该寄存器。
-* [SWS_Port_00214] 如果寄存器可以影响多个硬件模块且它是**I/O**寄存器，则它应由此**PORT**驱动程序初始化。
-* [SWS_Port_00215] 如果寄存器可以影响多个硬件模块且它不是**I/O**寄存器，则它应由**MCU**驱动程序[8]初始化。
-* [SWS_Port_00217] 需要在复位后直接初始化的单次可写寄存器应由启动代码初始化。
-* [SWS_Port_00218] 所有其他未提及的寄存器应由启动代码初始化。
+* 如果硬件只允许寄存器的一次使用，则实现该功能的驱动模块负责初始化该寄存器。
+* 如果寄存器可以影响多个硬件模块且它是**I/O**寄存器，则它应由此**PORT**驱动程序初始化。
+* 如果寄存器可以影响多个硬件模块且它不是**I/O**寄存器，则它应由**MCU**驱动程序[8]初始化。
+* 需要在复位后直接初始化的单次可写寄存器应由启动代码初始化。
+* 所有其他未提及的寄存器应由启动代码初始化。
 
-[SWS_Port_00043] 函数**Port_Init**应避免在受影响的端口引脚上产生毛刺和尖峰。
+函数**Port_Init**应避免在受影响的端口引脚上产生毛刺和尖峰。
 
-[SWS_Port_00071] **Port**驱动程序模块的环境应在复位后调用函数**Port_Init**，以重新配置**MCU**的端口和端口引脚。
+**Port**驱动程序模块的环境应在复位后调用函数**Port_Init**，以重新配置**MCU**的端口和端口引脚。
 
-[SWS_Port_00002] 函数**Port_Init**应将**PORT**驱动程序模块使用的所有变量初始化为初始状态。
+函数**Port_Init**应将**PORT**驱动程序模块使用的所有变量初始化为初始状态。
 
-[SWS_Port_00003] **Port**驱动程序模块的环境也可以使用函数**Port_Init**来初始化驱动程序软件，并根据传递给此函数的配置集将端口和端口引脚重新初始化为另一个已配置状态。
+**Port**驱动程序模块的环境也可以使用函数**Port_Init**来初始化驱动程序软件，并根据传递给此函数的配置集将端口和端口引脚重新初始化为另一个已配置状态。
 
 注意：在某些情况下，**MCU**端口控制硬件提供输出锁存器，用于在可用作**DIO**端口引脚的端口引脚上设置输出电平。
 
-[SWS_Port_00055] 函数**Port_Init**应在将端口引脚方向设置为输出之前，将端口引脚输出锁存器设置为默认电平（在配置期间定义）。
+函数**Port_Init**应在将端口引脚方向设置为输出之前，将端口引脚输出锁存器设置为默认电平（在配置期间定义）。
 
-需求[SWS_Port_00055]确保当端口引脚被设置为输出端口引脚时，默认电平立即输出到端口引脚上。
+应确保当端口引脚被设置为输出端口引脚时，默认电平立即输出到端口引脚上。
 
 示例：在某些**MCU**上，上电复位后，可配置为**DIO**的端口引脚将被配置为输入引脚。如果端口引脚所需的配置是输出引脚，则函数**Port_Init**应确保在将端口引脚功能从输入切换到输出之前设置默认电平。
 
-[SWS_Port_00121] 函数**Port_Init**应始终具有一个指针作为参数，即使对于配置变体**VARIANT-PRE-COMPILE**，也不会给出配置集。在这种情况下，**Port**驱动程序模块的环境应向函数**Port_Init**传递**NULL**指针。
+函数**Port_Init**应始终具有一个指针作为参数，即使对于配置变体**VARIANT-PRE-COMPILE**，也不会给出配置集。在这种情况下，**Port**驱动程序模块的环境应向函数**Port_Init**传递**NULL**指针。
 
 **Port**驱动程序模块的环境不应在运行操作期间调用函数**Port_Init**。这仅在**PORT**模块有多个调用者时适用。
 
@@ -403,105 +367,57 @@ void Port_Init ( const Port_ConfigType * ConfigPtr )
 
 #### 8.3.2. Port_SetPinDirection
 
-[SWS_Port_00141] **API**函数**Port_SetPinDirection**的定义
-
-| 服务名称 | Port_SetPinDirection |
-|---|---|
-| 语法 | void Port_SetPinDirection (Port_PinType Pin, Port_PinDirectionType Direction) |
-| 服务 ID [十六进制] | 0x01 |
-| 同步/异步 | 同步 |
-| 可重入性 | 可重入 |
-| 参数（in） | Pin：端口引脚 ID 编号；Direction：端口引脚方向 |
-| 参数（inout） | 无 |
-| 参数（out） | 无 |
-| 返回值 | 无 |
-| 描述 | 设置端口引脚方向。可通过**Port.h**获得 |
+**说明**: 设置端口引脚方向。可通过**Port.h**获得。本服务为同步调用，可重入。参数 Pin（in）：端口引脚 ID 编号。参数 Direction（in）：端口引脚方向。
 
 ```C
-void Port_SetPinDirection ( Port_PinType Pin, Port_PinDirectionType Direction )
+void Port_SetPinDirection (Port_PinType Pin, Port_PinDirectionType Direction)
 ```
 
-[SWS_Port_00063] 函数**Port_SetPinDirection**应在运行时设置端口引脚方向。
+函数**Port_SetPinDirection**应在运行时设置端口引脚方向。
 
-[SWS_Port_00054] 如果访问独立于端口的不同引脚，函数**Port_SetPinDirection**应是可重入的。
+如果访问独立于端口的不同引脚，函数**Port_SetPinDirection**应是可重入的。
 
-[SWS_Port_00086] 只有当预编译参数**PortSetPinDirectionApi**设置为**TRUE**时，函数**Port_SetPinDirection**才可提供给用户使用。如果设置为**FALSE**，则函数**Port_SetPinDirection**不可用。
+只有当预编译参数**PortSetPinDirectionApi**设置为**TRUE**时，函数**Port_SetPinDirection**才可提供给用户使用。如果设置为**FALSE**，则函数**Port_SetPinDirection**不可用。
 
 **Port_SetPinDirection**的配置：所有端口和端口引脚应由配置工具配置。参见**PORT117**。
 
 #### 8.3.3. Port_RefreshPortDirection
 
-[SWS_Port_00142] **API**函数**Port_RefreshPortDirection**的定义
-
-| 服务名称 | Port_RefreshPortDirection |
-|---|---|
-| 语法 | void Port_RefreshPortDirection (void) |
-| 服务 ID [十六进制] | 0x02 |
-| 同步/异步 | 同步 |
-| 可重入性 | 不可重入 |
-| 参数（in） | 无 |
-| 参数（inout） | 无 |
-| 参数（out） | 无 |
-| 返回值 | 无 |
-| 描述 | 刷新端口方向。可通过**Port.h**获得 |
+**说明**: 刷新端口方向。可通过**Port.h**获得。本服务为同步调用，不可重入。
 
 ```C
-void Port_RefreshPortDirection ( void )
+void Port_RefreshPortDirection (void)
 ```
 
-[SWS_Port_00060] 函数**Port_RefreshPortDirection**应将所有已配置端口的方向刷新为配置的方向（**PortPinDirection**）。
+函数**Port_RefreshPortDirection**应将所有已配置端口的方向刷新为配置的方向（**PortPinDirection**）。
 
-[SWS_Port_00061] 函数**Port_RefreshPortDirection**应将那些配置为"引脚方向可在运行时更改"的端口引脚排除在刷新之外。
+函数**Port_RefreshPortDirection**应将那些配置为"引脚方向可在运行时更改"的端口引脚排除在刷新之外。
 
 配置工具应为每个配置的端口引脚提供名称。
 
 #### 8.3.4. Port_GetVersionInfo
 
-[SWS_Port_00143] **API**函数**Port_GetVersionInfo**的定义
-
-| 服务名称 | Port_GetVersionInfo |
-|---|---|
-| 语法 | void Port_GetVersionInfo (Std_VersionInfoType* versioninfo) |
-| 服务 ID [十六进制] | 0x03 |
-| 同步/异步 | 同步 |
-| 可重入性 | 可重入 |
-| 参数（in） | 无 |
-| 参数（inout） | 无 |
-| 参数（out） | versioninfo：指向存储本模块版本信息位置的指针 |
-| 返回值 | 无 |
-| 描述 | 返回本模块的版本信息。可通过**Port.h**获得 |
+**说明**: 返回本模块的版本信息。可通过**Port.h**获得。本服务为同步调用，可重入。参数 versioninfo（out）：指向存储本模块版本信息位置的指针。
 
 ```C
-void Port_GetVersionInfo ( Std_VersionInfoType* versioninfo )
+void Port_GetVersionInfo (Std_VersionInfoType* versioninfo)
 ```
 
-[SWS_Port_00225] 如果启用了**Det**，应检查参数**versioninfo**是否为**NULL**。如果值为**NULL**指针，应报告错误**PORT_E_PARAM_POINTER**。
+如果启用了**Det**，应检查参数**versioninfo**是否为**NULL**。如果值为**NULL**指针，应报告错误**PORT_E_PARAM_POINTER**。
 
 #### 8.3.5. Port_SetPinMode
 
-[SWS_Port_00145] **API**函数**Port_SetPinMode**的定义
-
-| 服务名称 | Port_SetPinMode |
-|---|---|
-| 语法 | void Port_SetPinMode (Port_PinType Pin, Port_PinModeType Mode) |
-| 服务 ID [十六进制] | 0x04 |
-| 同步/异步 | 同步 |
-| 可重入性 | 可重入 |
-| 参数（in） | Pin：端口引脚 ID 编号；Mode：要在端口引脚上设置的新端口引脚模式 |
-| 参数（inout） | 无 |
-| 参数（out） | 无 |
-| 返回值 | 无 |
-| 描述 | 设置端口引脚模式。可通过**Port.h**获得 |
+**说明**: 设置端口引脚模式。可通过**Port.h**获得。本服务为同步调用，可重入。参数 Pin（in）：端口引脚 ID 编号。参数 Mode（in）：要在端口引脚上设置的新端口引脚模式。
 
 ```C
-void Port_SetPinMode ( Port_PinType Pin, Port_PinModeType Mode )
+void Port_SetPinMode (Port_PinType Pin, Port_PinModeType Mode)
 ```
 
-[SWS_Port_00125] 函数**Port_SetPinMode**应在运行时设置引用引脚的端口引脚模式。
+函数**Port_SetPinMode**应在运行时设置引用引脚的端口引脚模式。
 
-[SWS_Port_00128] 如果访问独立于端口的不同引脚，函数**Port_SetPinMode**应是可重入的。
+如果访问独立于端口的不同引脚，函数**Port_SetPinMode**应是可重入的。
 
-[SWS_Port_00223] 如果启用了**Det**，当参数**PortPinModeChangeable**设置为**FALSE**时，函数**Port_SetPinMode**应报告**PORT_E_MODE_UNCHANGEABLE**错误并直接返回，不执行任何其他动作。
+如果启用了**Det**，当参数**PortPinModeChangeable**设置为**FALSE**时，函数**Port_SetPinMode**应报告**PORT_E_MODE_UNCHANGEABLE**错误并直接返回，不执行任何其他动作。
 
 **Port_SetPinMode**的配置：所有端口和端口引脚应由配置工具配置。参见**PORT117**。
 
@@ -525,8 +441,6 @@ void Port_SetPinMode ( Port_PinType Pin, Port_PinModeType Mode )
 
 本章定义了为实现模块的可选功能而需要的所有接口。
 
-[SWS_Port_00146] **Port**模块中可选接口的定义
-
 | API 函数 | 头文件 | 描述 |
 |---|---|---|
 | Det_ReportError | Det.h | 报告开发错误的服务 |
@@ -539,19 +453,19 @@ void Port_SetPinMode ( Port_PinType Pin, Port_PinModeType Mode )
 
 ### 9.1. 端口的整体配置
 
-![Figure9-1](Figure9-1.png)
+![Figure9-1.png](Figure9-1.png)
 
 ### 9.2. 设置端口引脚的方向
 
-![Figure9-2](Figure9-2.png)
+![Figure9-2.png](Figure9-2.png)
 
 ### 9.3. 刷新所有端口引脚的方向
 
-![Figure9-3](Figure9-3.png)
+![Figure9-3.png](Figure9-3.png)
 
 ### 9.4. 更改端口引脚的模式
 
-![Figure9-4](Figure9-4.png)
+![Figure9-4.png](Figure9-4.png)
 
 ## 10. 配置规范
 
@@ -571,7 +485,7 @@ void Port_SetPinMode ( Port_PinType Pin, Port_PinModeType Mode )
 
 以下章节总结了所有配置参数。参数的详细含义见第 7 章和第 8 章。
 
-[SWS_Port_00232] **PORT**模块应拒绝实现不支持的包含分区映射的配置。
+**PORT**模块应拒绝实现不支持的包含分区映射的配置。
 
 #### 10.2.1. PortConfigSet
 
@@ -607,7 +521,7 @@ void Port_SetPinMode ( Port_PinType Pin, Port_PinModeType Mode )
 | PortConfigSet | 1 | 此容器包含**AUTOSAR Port**模块的配置参数和子容器。 |
 | PortGeneral | 1 | **PORT**驱动程序的模块范围配置参数。 |
 
-![Figure10-1](Figure10-1.png)
+![Figure10-1.png](Figure10-1.png)
 
 #### 10.2.3. PortContainer
 
@@ -642,7 +556,7 @@ void Port_SetPinMode ( Port_PinType Pin, Port_PinModeType Mode )
 |---|---|---|
 | PortPin | 1..* | 单个端口引脚的配置。 |
 
-![Figure10-2](Figure10-2.png)
+![Figure10-2.png](Figure10-2.png)
 
 #### 10.2.4. PortGeneral
 
@@ -737,7 +651,7 @@ void Port_SetPinMode ( Port_PinType Pin, Port_PinModeType Mode )
 
 顶层**Port**驱动程序容器持有应用于**PORT**配置的参数。
 
-![Figure10-3](Figure10-3.png)
+![Figure10-3.png](Figure10-3.png)
 
 #### 10.2.5. PortPin
 
@@ -880,13 +794,13 @@ void Port_SetPinMode ( Port_PinType Pin, Port_PinModeType Mode )
 
 无包含的容器。
 
-![Figure10-4](Figure10-4.png)
+![Figure10-4.png](Figure10-4.png)
 
 ### 10.3. 约束
 
-[SWS_Port_CONSTR_00233] **PortPinEcucPartitionRef**引用的**ECUC**分区应是**PortEcucPartitionRef**引用的**ECUC**分区的子集。
+**PortPinEcucPartitionRef**引用的**ECUC**分区应是**PortEcucPartitionRef**引用的**ECUC**分区的子集。
 
-[SWS_Port_CONSTR_00234] 如果**PortEcucPartitionRef**引用一个或多个**ECUC**分区，**PortPinEcucPartitionRef**应具有大于零的多重性，并同样引用这些**ECUC**分区中的一个或多个。
+如果**PortEcucPartitionRef**引用一个或多个**ECUC**分区，**PortPinEcucPartitionRef**应具有大于零的多重性，并同样引用这些**ECUC**分区中的一个或多个。
 
 ### 10.4. 发布信息
 
@@ -894,7 +808,7 @@ void Port_SetPinMode ( Port_PinType Pin, Port_PinModeType Mode )
 
 ## A. 不适用的需求
 
-[SWS_Port_NA_00227] 这些需求不适用于本规范。（涉及**SRS_BSW_00005**、**SRS_BSW_00006**、**SRS_BSW_00007**、**SRS_BSW_00010**、**SRS_BSW_00160**、**SRS_BSW_00161**、**SRS_BSW_00162**、**SRS_BSW_00164**、**SRS_BSW_00167**、**SRS_BSW_00168**、**SRS_BSW_00170**、**SRS_BSW_00172**、**SRS_BSW_00307**、**SRS_BSW_00308**、**SRS_BSW_00309**、**SRS_BSW_00321**、**SRS_BSW_00325**、**SRS_BSW_00328**、**SRS_BSW_00330**、**SRS_BSW_00331**、**SRS_BSW_00333**、**SRS_BSW_00334**、**SRS_BSW_00335**、**SRS_BSW_00336**、**SRS_BSW_00341**、**SRS_BSW_00342**、**SRS_BSW_00343**、**SRS_BSW_00344**、**SRS_BSW_00347**、**SRS_BSW_00357**、**SRS_BSW_00359**、**SRS_BSW_00360**、**SRS_SPAL_12463**、**SRS_SPAL_12462**、**SRS_SPAL_12265**、**SRS_SPAL_12092**、**SRS_SPAL_12078**、**SRS_SPAL_12077**、**SRS_SPAL_12067**、**SRS_SPAL_12064**、**SRS_SPAL_12129**、**SRS_SPAL_12075**、**SRS_SPAL_12063**、**SRS_SPAL_12169**、**SRS_SPAL_00157**、**SRS_SPAL_12069**、**SRS_SPAL_12068**、**SRS_SPAL_12267**、**SRS_SPAL_12056**、**SRS_BSW_00440**、**SRS_BSW_00439**、**SRS_BSW_00437**、**SRS_BSW_00433**、**SRS_BSW_00432**、**SRS_BSW_00429**、**SRS_BSW_00428**、**SRS_BSW_00427**、**SRS_BSW_00426**、**SRS_BSW_00425**、**SRS_BSW_00424**、**SRS_BSW_00423**、**SRS_BSW_00419**、**SRS_BSW_00417**、**SRS_BSW_00416**、**SRS_BSW_00413**、**SRS_BSW_00398**、**SRS_BSW_00395**、**SRS_BSW_00378**、**SRS_BSW_00377**、**SRS_BSW_00375**、**SRS_BSW_00373**）
+这些需求不适用于本规范。（涉及**SRS_BSW_00005**、**SRS_BSW_00006**、**SRS_BSW_00007**、**SRS_BSW_00010**、**SRS_BSW_00160**、**SRS_BSW_00161**、**SRS_BSW_00162**、**SRS_BSW_00164**、**SRS_BSW_00167**、**SRS_BSW_00168**、**SRS_BSW_00170**、**SRS_BSW_00172**、**SRS_BSW_00307**、**SRS_BSW_00308**、**SRS_BSW_00309**、**SRS_BSW_00321**、**SRS_BSW_00325**、**SRS_BSW_00328**、**SRS_BSW_00330**、**SRS_BSW_00331**、**SRS_BSW_00333**、**SRS_BSW_00334**、**SRS_BSW_00335**、**SRS_BSW_00336**、**SRS_BSW_00341**、**SRS_BSW_00342**、**SRS_BSW_00343**、**SRS_BSW_00344**、**SRS_BSW_00347**、**SRS_BSW_00357**、**SRS_BSW_00359**、**SRS_BSW_00360**、**SRS_SPAL_12463**、**SRS_SPAL_12462**、**SRS_SPAL_12265**、**SRS_SPAL_12092**、**SRS_SPAL_12078**、**SRS_SPAL_12077**、**SRS_SPAL_12067**、**SRS_SPAL_12064**、**SRS_SPAL_12129**、**SRS_SPAL_12075**、**SRS_SPAL_12063**、**SRS_SPAL_12169**、**SRS_SPAL_00157**、**SRS_SPAL_12069**、**SRS_SPAL_12068**、**SRS_SPAL_12267**、**SRS_SPAL_12056**、**SRS_BSW_00440**、**SRS_BSW_00439**、**SRS_BSW_00437**、**SRS_BSW_00433**、**SRS_BSW_00432**、**SRS_BSW_00429**、**SRS_BSW_00428**、**SRS_BSW_00427**、**SRS_BSW_00426**、**SRS_BSW_00425**、**SRS_BSW_00424**、**SRS_BSW_00423**、**SRS_BSW_00419**、**SRS_BSW_00417**、**SRS_BSW_00416**、**SRS_BSW_00413**、**SRS_BSW_00398**、**SRS_BSW_00395**、**SRS_BSW_00378**、**SRS_BSW_00377**、**SRS_BSW_00375**、**SRS_BSW_00373**）
 
 ## B. AUTOSAR 可追踪条目的变更历史
 
@@ -930,3 +844,11 @@ void Port_SetPinMode ( Port_PinType Pin, Port_PinModeType Mode )
 #### B.1.6. R23-11 中删除的约束
 
 无。
+
+<section id="wechat">
+
+<h4>微信扫一扫，获取更多及时资讯</h4>
+
+<img src="wechat.png" alt="微信扫一扫"/>
+
+</section>
