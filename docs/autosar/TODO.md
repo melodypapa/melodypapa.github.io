@@ -4,6 +4,27 @@
 > 状态：✅ 符合 Type A · 🔶 已翻译待对齐 · ⚠️ 部分翻译 · ⛔ 空壳 · ❌ 缺失 · 📖 指南/专题（豁免骨架）
 > 基准：R23-11（`~/Workspace/autosar_standard/markdown/`）· 最后更新：2026-10-23
 
+## 待办清单
+
+**补深（现有文章）**
+
+- [ ] 6 篇 ⚠️ 只缺「API 规范」一章：pdu_router、can_interface、crypto_driver、ethernet_interface、lin_interface、operating_system
+- [ ] 其余 11 篇 ⚠️ 补齐各自缺失章节（com_based_transformer、data_distribution、e2e_transformer、sec_oc、SoAd、mirror、dem、iohwab、fee、memory_access、dcm）
+- [ ] 4 篇 ⛔ 空壳全量翻译：ethernet_switch_driver、service_discovery、memory_mapping、platform_types（platform_types 需同修 front-matter 标题与 nav 标签）
+- [ ] 12 篇 🔶 对齐 Type A：icu/iohwab 删「时序图」章；flash_driver/time_service 删「配置规范」章；nvram 删「需求追踪」章并改「功能说明」；can_driver 专题章去留决策；其余旧译名统一为 STANDARD.md 用词
+- [ ] 卫生修复：udp_network_management 微信页脚改 `<h4>`；dem 编号断档；`data_distribution service` 目录改名去空格；SoAd/mirror 改 index.md 布局；`timimg_extension/indx.md` 拼写（需同改 nav）
+
+**补广（新文章）**
+
+- [ ] 通信主干：Com、CanSM、CanTp、TcpIp、Nm、EthSM、IpduM、SomeIpXf/SomeIpTp
+- [ ] 系统服务：ComM、Det（篇幅小，先做 Det）
+- [ ] 全局时间簇：StbM + CanTSyn/EthTSyn/FrTSyn
+- [ ] MCAL：Mcu、Gpt、CorTst
+- [ ] 存储收尾：Ea、Eep
+- [ ] 库：Crc、E2E
+- [ ] 安全：WdgM、WdgIf、Wdg
+- [ ] 落地页补全：crypto、memory、system_services、general、methodology_templates
+
 ## 概览
 
 | 状态 | 数量 | 说明 |
