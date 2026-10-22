@@ -573,7 +573,7 @@ void Pwm_EnableNotification (
 Std_ReturnType Pwm_SetPowerState (Pwm_PowerStateRequestResultType* Result)
 ```
 
-此**API**配置**HW**以进入给定的电源状态。启用此转换的所有预备动作（例如将所有通道设置为**IDLE**状态、注销所有通知等）必须已由负责的**SWC**（例如**IoHwAbs**）采取。
+此**API**配置**HW**以进入给定的电源状态。启用此转换的所有预备动作（例如将所有通道设置为**IDLE**状态、注销所有通知等）必须已由负责的**SWC**（例如**IoHwAb**）采取。
 
 此**API**不应执行预备性的隐式电源状态更改（即如果无法从当前电源状态到达请求的电源状态，则不应执行中间电源状态更改，请求应被拒绝）。
 
@@ -691,7 +691,7 @@ void Pwm_Main_PowerTransitionManager (void)
 
 调度速率应由**Pwm MainSchedulePeriod**定义并且是可变的，因为仅在请求了转换时才需要调用该函数。
 
-此**API**还应仅在选择了异步模式时，向最终注册的用户（**IoHwAbs**）发出回调通知（如已配置）。
+此**API**还应仅在选择了异步模式时，向最终注册的用户（**IoHwAb**）发出回调通知（如已配置）。
 
 如果**PWM**模块未初始化，此函数应直接返回，不进行任何进一步处理。这是为了避免处理未初始化的变量。不应输入开发错误，因为此条件可以在启动阶段轻松验证（初始化完成前启动的任务）。
 
@@ -743,9 +743,9 @@ void Pwm_Notification_\<#Channel\> (void)
 void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 ```
 
-如果**PWM**驱动程序配置为支持具有异步转换的电源状态管理，应调用此**API**以向**IoHwAbs**模块发出电源转换准备阶段完成的信号。
+如果**PWM**驱动程序配置为支持具有异步转换的电源状态管理，应调用此**API**以向**IoHwAb**模块发出电源转换准备阶段完成的信号。
 
-这是一个回调，此**API**应在**IoHwAbs**组件中实现。
+这是一个回调，此**API**应在**IoHwAb**组件中实现。
 
 ### 8.7. API 参数检查
 
@@ -1000,7 +1000,7 @@ void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 | 参数名称 | PwmPowerStateReadyCbkRef |
 |---|---|
 | 父容器 | PwmPowerStateConfig |
-| 描述 | 此参数的每个实例包含对**CDD**或**IoHwAbs**组件中定义的电源模式回调的引用。 |
+| 描述 | 此参数的每个实例包含对**CDD**或**IoHwAb**组件中定义的电源模式回调的引用。 |
 | 多重性 | 1 |
 | 类型 | EcucFunctionNameDef |
 | 默认值 | -- |

@@ -308,7 +308,7 @@ title: "AUTOSAR ICU Driver（输入捕获驱动）"
 
 #### 7.3.1. Icu_Init
 
-**说明**: 初始化驱动。用**ConfigPtr**参数所引用结构中的值初始化已配置硬件的所有相关寄存器（含清除挂起的中断标志）。初始化后：所有通知被禁用、所有通道的唤醒能力被禁用、所有已用**ICU**通道状态置为**ICU_IDLE**、模块模式置为**ICU_MODE_NORMAL**。若开发错误检测使能且驱动与硬件已初始化时调用本函数，则上报开发错误**ICU_E_ALREADY_INITIALIZED**并不做任何动作返回。本函数不可重入。
+**说明**: 初始化驱动。用**ConfigPtr**参数所引用结构中的值初始化已配置硬件的所有相关寄存器（含清除挂起的中断标志）。初始化后：所有通知被禁用、所有通道的唤醒能力被禁用、所有已用**ICU**通道状态置为**ICU_IDLE**、模块模式置为**ICU_MODE_NORMAL**。若开发错误检测使能且驱动与硬件已初始化时调用本函数，则上报开发错误**ICU_E_ALREADY_INITIALIZED**并不做任何动作返回。本函数不可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_Init ( const Icu_ConfigType* ConfigPtr )
@@ -316,7 +316,7 @@ void Icu_Init ( const Icu_ConfigType* ConfigPtr )
 
 #### 7.3.2. Icu_DeInit
 
-**说明**: 将**ICU**模块去初始化：把配置使用的外设状态设置为与上电复位后相同（只读寄存器除外），仅影响静态配置和/或上次**Icu_Init()**传入的运行时配置所分配的外设；禁用所有已用中断和通知。重新初始化**ICU**模块需先执行**Icu_DeInit()**再执行**Icu_Init()**。本函数可通过配置参数**IcuDeInitApi**进行编译期/运行期**ON/OFF**配置，不可重入。
+**说明**: 将**ICU**模块去初始化：把配置使用的外设状态设置为与上电复位后相同（只读寄存器除外），仅影响静态配置和/或上次**Icu_Init()**传入的运行时配置所分配的外设；禁用所有已用中断和通知。重新初始化**ICU**模块需先执行**Icu_DeInit()**再执行**Icu_Init()**。本函数可通过配置参数**IcuDeInitApi**进行编译期/运行期**ON/OFF**配置，不可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_DeInit ( void )
@@ -324,7 +324,7 @@ void Icu_DeInit ( void )
 
 #### 7.3.3. Icu_SetMode
 
-**说明**: 将**ICU**模块设置为给定模式（**ICU_MODE_NORMAL**或**ICU_MODE_SLEEP**），影响各**ICU**通道的功能，因此模块模式切换必须与**ECU**整体状态兼容。本函数可通过配置参数**IcuSetModeApi**进行编译期**ON/OFF**配置，不可重入。若开发错误检测使能且**Mode**参数超出配置允许范围，则上报**ICU_E_PARAM_MODE**。
+**说明**: 将**ICU**模块设置为给定模式（**ICU_MODE_NORMAL**或**ICU_MODE_SLEEP**），影响各**ICU**通道的功能，因此模块模式切换必须与**ECU**整体状态兼容。本函数可通过配置参数**IcuSetModeApi**进行编译期**ON/OFF**配置，不可重入。若开发错误检测使能且**Mode**参数超出配置允许范围，则上报**ICU_E_PARAM_MODE**。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_SetMode ( Icu_ModeType Mode )
@@ -332,7 +332,7 @@ void Icu_SetMode ( Icu_ModeType Mode )
 
 #### 7.3.4. Icu_DisableWakeup
 
-**说明**: 禁用单个**ICU**通道的唤醒能力，仅对静态配置为唤醒能力（**wakeup capable**）为真的通道有效。本函数所做设置仅在设置**ICU_MODE_SLEEP**后相关。可通过配置参数**IcuDisableWakeupApi**进行编译期**ON/OFF**配置，可重入。
+**说明**: 禁用单个**ICU**通道的唤醒能力，仅对静态配置为唤醒能力（**wakeup capable**）为真的通道有效。本函数所做设置仅在设置**ICU_MODE_SLEEP**后相关。可通过配置参数**IcuDisableWakeupApi**进行编译期**ON/OFF**配置，可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_DisableWakeup ( Icu_ChannelType Channel )
@@ -340,7 +340,7 @@ void Icu_DisableWakeup ( Icu_ChannelType Channel )
 
 #### 7.3.5. Icu_EnableWakeup
 
-**说明**: 重新使能给定**ICU**通道的唤醒能力，仅对静态配置为唤醒能力为真的通道可行；需再调用请求**ICU_MODE_SLEEP**的**Icu_SetMode**方使选择生效。可通过配置参数**IcuEnableWakeupApi**进行编译期**ON/OFF**配置，可重入。
+**说明**: 重新使能给定**ICU**通道的唤醒能力，仅对静态配置为唤醒能力为真的通道可行；需再调用请求**ICU_MODE_SLEEP**的**Icu_SetMode**方使选择生效。可通过配置参数**IcuEnableWakeupApi**进行编译期**ON/OFF**配置，可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_EnableWakeup ( Icu_ChannelType Channel )
@@ -348,7 +348,7 @@ void Icu_EnableWakeup ( Icu_ChannelType Channel )
 
 #### 7.3.6. Icu_CheckWakeup
 
-**说明**: 检查某个唤醒能力**ICU**通道是否为唤醒事件的源，若为有效的**ICU**通道唤醒事件，则调用**ECU**状态管理器服务**EcuM_SetWakeupEvent**。仅当**IcuReportWakeupSource**静态配置为可用时本函数才可行。可通过配置参数**IcuWakeupFunctionalityApi**进行编译期**ON/OFF**配置，可重入（限于**ICU050**）。
+**说明**: 检查某个唤醒能力**ICU**通道是否为唤醒事件的源，若为有效的**ICU**通道唤醒事件，则调用**ECU**状态管理器服务**EcuM_SetWakeupEvent**。仅当**IcuReportWakeupSource**静态配置为可用时本函数才可行。可通过配置参数**IcuWakeupFunctionalityApi**进行编译期**ON/OFF**配置，可重入（限于**ICU050**）。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_CheckWakeup ( EcuM_WakeupSourceType WakeupSource )
@@ -356,7 +356,7 @@ void Icu_CheckWakeup ( EcuM_WakeupSourceType WakeupSource )
 
 #### 7.3.7. Icu_SetActivationCondition
 
-**说明**: 为给定通道设置激活边沿（**ICU_RISING_EDGE**/**ICU_FALLING_EDGE**/**ICU_BOTH_EDGES**，若硬件支持），支持配置为**ICU_MODE_SIGNAL_EDGE_DETECT**、**ICU_MODE_TIMESTAMP**、**ICU_MODE_EDGE_COUNTER**测量模式的通道，并将给定通道状态复位为**ICU_IDLE**。可重入。
+**说明**: 为给定通道设置激活边沿（**ICU_RISING_EDGE**/**ICU_FALLING_EDGE**/**ICU_BOTH_EDGES**，若硬件支持），支持配置为**ICU_MODE_SIGNAL_EDGE_DETECT**、**ICU_MODE_TIMESTAMP**、**ICU_MODE_EDGE_COUNTER**测量模式的通道，并将给定通道状态复位为**ICU_IDLE**。可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_SetActivationCondition ( 
@@ -365,7 +365,7 @@ void Icu_SetActivationCondition (
 
 #### 7.3.8. Icu_DisableNotification
 
-**说明**: 禁用给定通道的通知。可重入。
+**说明**: 禁用给定通道的通知。可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_DisableNotification ( Icu_ChannelType Channel )
@@ -373,7 +373,7 @@ void Icu_DisableNotification ( Icu_ChannelType Channel )
 
 #### 7.3.9. Icu_EnableNotification
 
-**说明**: 使能给定通道的通知。可重入。
+**说明**: 使能给定通道的通知。可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_EnableNotification ( Icu_ChannelType Channel )
@@ -381,7 +381,7 @@ void Icu_EnableNotification ( Icu_ChannelType Channel )
 
 #### 7.3.10. Icu_GetInputState
 
-**说明**: 返回**ICU**输入的状态。仅支持配置为**ICU_MODE_SIGNAL_EDGE_DETECT**或**ICU_MODE_SIGNAL_MEASUREMENT**测量模式的通道。检测到激活边沿时对边沿检测通道返回**ICU_ACTIVE**；对于信号测量，通道应直到测量完成且驱动能提供输入信号有用信息时才置为**ICU_ACTIVE**。一旦返回**ICU_ACTIVE**，存储的状态即置为**ICU_IDLE**直至检测到下一个边沿。可通过配置参数**IcuGetInputStateApi**进行编译期**ON/OFF**配置，可重入。
+**说明**: 返回**ICU**输入的状态。仅支持配置为**ICU_MODE_SIGNAL_EDGE_DETECT**或**ICU_MODE_SIGNAL_MEASUREMENT**测量模式的通道。检测到激活边沿时对边沿检测通道返回**ICU_ACTIVE**；对于信号测量，通道应直到测量完成且驱动能提供输入信号有用信息时才置为**ICU_ACTIVE**。一旦返回**ICU_ACTIVE**，存储的状态即置为**ICU_IDLE**直至检测到下一个边沿。可通过配置参数**IcuGetInputStateApi**进行编译期**ON/OFF**配置，可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 Icu_InputStateType Icu_GetInputState ( Icu_ChannelType Channel )
@@ -389,7 +389,7 @@ Icu_InputStateType Icu_GetInputState ( Icu_ChannelType Channel )
 
 #### 7.3.11. Icu_StartTimestamp
 
-**说明**: 从缓冲区起始处开始在边沿上捕获定时器值到外部缓冲区。捕获边沿由服务**Icu_SetActivationCondition()**激活（上升/下降/双边沿）。若配置环形缓冲区处理，到达缓冲区末尾时从起始处重新开始；若配置线性缓冲区处理，到达末尾时停止捕获。仅在配置了通知函数、通知已通过**Icu_EnableNotification()**使能、**NotifyInterval**大于"0"且已捕获**NotifyInterval**指定数量的事件时，才调用通知函数。本函数仅在**ICU_MODE_TIMESTAMP**测量模式下可用，可通过配置参数**ICU_TIMESTAMP_API**进行编译期**ON/OFF**配置，异步，可重入。
+**说明**: 从缓冲区起始处开始在边沿上捕获定时器值到外部缓冲区。捕获边沿由服务**Icu_SetActivationCondition()**激活（上升/下降/双边沿）。若配置环形缓冲区处理，到达缓冲区末尾时从起始处重新开始；若配置线性缓冲区处理，到达末尾时停止捕获。仅在配置了通知函数、通知已通过**Icu_EnableNotification()**使能、**NotifyInterval**大于"0"且已捕获**NotifyInterval**指定数量的事件时，才调用通知函数。本函数仅在**ICU_MODE_TIMESTAMP**测量模式下可用，可通过配置参数**ICU_TIMESTAMP_API**进行编译期**ON/OFF**配置，可重入。本服务为异步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_StartTimestamp ( 
@@ -399,7 +399,7 @@ void Icu_StartTimestamp (
 
 #### 7.3.12. Icu_StopTimestamp
 
-**说明**: 停止给定通道的时间戳测量。仅在**ICU_MODE_TIMESTAMP**测量模式下可用，可通过配置参数**IcuTimestampApi**进行编译期**ON/OFF**配置。生产模式下通道未激活（未启动或已停止）时不返回错误。可重入。
+**说明**: 停止给定通道的时间戳测量。仅在**ICU_MODE_TIMESTAMP**测量模式下可用，可通过配置参数**IcuTimestampApi**进行编译期**ON/OFF**配置。生产模式下通道未激活（未启动或已停止）时不返回错误。可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_StopTimestamp ( Icu_ChannelType Channel )
@@ -407,7 +407,7 @@ void Icu_StopTimestamp ( Icu_ChannelType Channel )
 
 #### 7.3.13. Icu_GetTimestampIndex
 
-**说明**: 读取给定通道的时间戳索引，即下一个待写入位置的索引。在调用**Icu_StartTimestamp()**之前（无缓冲区定义）调用本服务返回"0"。仅在**ICU_MODE_TIMESTAMP**测量模式下可用，可通过配置参数**IcuTimestampApi**进行编译期**ON/OFF**配置，可重入。
+**说明**: 读取给定通道的时间戳索引，即下一个待写入位置的索引。在调用**Icu_StartTimestamp()**之前（无缓冲区定义）调用本服务返回"0"。仅在**ICU_MODE_TIMESTAMP**测量模式下可用，可通过配置参数**IcuTimestampApi**进行编译期**ON/OFF**配置，可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 Icu_IndexType Icu_GetTimestampIndex ( Icu_ChannelType Channel )
@@ -415,7 +415,7 @@ Icu_IndexType Icu_GetTimestampIndex ( Icu_ChannelType Channel )
 
 #### 7.3.14. Icu_ResetEdgeCount
 
-**说明**: 将计得的边沿数值复位为零。可通过配置参数**ICU_EDGE_COUNT_API**进行编译期**ON/OFF**配置，可重入。
+**说明**: 将计得的边沿数值复位为零。可通过配置参数**ICU_EDGE_COUNT_API**进行编译期**ON/OFF**配置，可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_ResetEdgeCount ( Icu_ChannelType Channel )
@@ -423,7 +423,7 @@ void Icu_ResetEdgeCount ( Icu_ChannelType Channel )
 
 #### 7.3.15. Icu_EnableEdgeCount
 
-**说明**: 使能给定通道的边沿计数（本服务自身不做实际计数），仅计数配置的边沿（上升/下降/双边沿，即**Icu_Init()**后的默认边沿或**Icu_SetActivationCondition()**设置的边沿）。对**Edge Counter**测量模式下的每个**ICU**通道可用，可通过配置参数**ICU_EDGE_COUNT_API**进行编译期**ON/OFF**配置，可重入。
+**说明**: 使能给定通道的边沿计数（本服务自身不做实际计数），仅计数配置的边沿（上升/下降/双边沿，即**Icu_Init()**后的默认边沿或**Icu_SetActivationCondition()**设置的边沿）。对**Edge Counter**测量模式下的每个**ICU**通道可用，可通过配置参数**ICU_EDGE_COUNT_API**进行编译期**ON/OFF**配置，可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_EnableEdgeCount ( Icu_ChannelType Channel )
@@ -431,7 +431,7 @@ void Icu_EnableEdgeCount ( Icu_ChannelType Channel )
 
 #### 7.3.16. Icu_EnableEdgeDetection
 
-**说明**: 使能/重新使能给定通道的边沿检测，仅检测配置的边沿（上升/下降/双边沿）。对**Edge Detection**测量模式下的每个**ICU**通道可用，可通过配置参数**IcuEdgeDetectApi**进行编译期**ON/OFF**配置，可重入。
+**说明**: 使能/重新使能给定通道的边沿检测，仅检测配置的边沿（上升/下降/双边沿）。对**Edge Detection**测量模式下的每个**ICU**通道可用，可通过配置参数**IcuEdgeDetectApi**进行编译期**ON/OFF**配置，可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_EnableEdgeDetection ( Icu_ChannelType Channel )
@@ -439,7 +439,7 @@ void Icu_EnableEdgeDetection ( Icu_ChannelType Channel )
 
 #### 7.3.17. Icu_DisableEdgeDetection
 
-**说明**: 禁用给定通道的边沿检测。可通过配置参数**IcuEdgeDetectApi**进行编译期**ON/OFF**配置，可重入。
+**说明**: 禁用给定通道的边沿检测。可通过配置参数**IcuEdgeDetectApi**进行编译期**ON/OFF**配置，可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_DisableEdgeDetection ( Icu_ChannelType Channel )
@@ -447,7 +447,7 @@ void Icu_DisableEdgeDetection ( Icu_ChannelType Channel )
 
 #### 7.3.18. Icu_DisableEdgeCount
 
-**说明**: 禁用给定通道的边沿计数（复位边沿计数器请使用服务**Icu_ResetEdgeCount()**）。可通过配置参数**IcuEdgeCountApi**进行编译期**ON/OFF**配置，可重入。
+**说明**: 禁用给定通道的边沿计数（复位边沿计数器请使用服务**Icu_ResetEdgeCount()**）。可通过配置参数**IcuEdgeCountApi**进行编译期**ON/OFF**配置，可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_DisableEdgeCount ( Icu_ChannelType Channel )
@@ -455,7 +455,7 @@ void Icu_DisableEdgeCount ( Icu_ChannelType Channel )
 
 #### 7.3.19. Icu_GetEdgeNumbers
 
-**说明**: 读取自上次调用**Icu_ResetEdgeCount()**以来计得的边沿数量。可通过配置参数**ICU_EDGE_COUNT_API**进行编译期**ON/OFF**配置，可重入。
+**说明**: 读取自上次调用**Icu_ResetEdgeCount()**以来计得的边沿数量。可通过配置参数**ICU_EDGE_COUNT_API**进行编译期**ON/OFF**配置，可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 Icu_EdgeNumberType Icu_GetEdgeNumbers ( Icu_ChannelType Channel )
@@ -463,7 +463,7 @@ Icu_EdgeNumberType Icu_GetEdgeNumbers ( Icu_ChannelType Channel )
 
 #### 7.3.20. Icu_StartSignalMeasurement
 
-**说明**: 从调用本服务后最先出现的配置默认起始边沿开始，启动信号测量，并将给定通道状态复位为**ICU_IDLE**。仅在**ICU_MODE_SIGNAL_MEASUREMENT**测量模式下可用，可通过配置参数**IcuSignalMeasurementApi**进行编译期**ON/OFF**配置，异步，可重入。
+**说明**: 从调用本服务后最先出现的配置默认起始边沿开始，启动信号测量，并将给定通道状态复位为**ICU_IDLE**。仅在**ICU_MODE_SIGNAL_MEASUREMENT**测量模式下可用，可通过配置参数**IcuSignalMeasurementApi**进行编译期**ON/OFF**配置，可重入。本服务为异步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_StartSignalMeasurement ( Icu_ChannelType Channel )
@@ -471,7 +471,7 @@ void Icu_StartSignalMeasurement ( Icu_ChannelType Channel )
 
 #### 7.3.21. Icu_StopSignalMeasurement
 
-**说明**: 停止给定通道的信号测量。仅在**ICU_MODE_SIGNAL_MEASUREMENT**测量模式下可用，可通过配置参数**IcuSignalMeasurementApi**进行编译期**ON/OFF**配置，可重入。
+**说明**: 停止给定通道的信号测量。仅在**ICU_MODE_SIGNAL_MEASUREMENT**测量模式下可用，可通过配置参数**IcuSignalMeasurementApi**进行编译期**ON/OFF**配置，可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_StopSignalMeasurement ( Icu_ChannelType Channel )
@@ -479,7 +479,7 @@ void Icu_StopSignalMeasurement ( Icu_ChannelType Channel )
 
 #### 7.3.22. Icu_GetTimeElapsed
 
-**说明**: 读取给定通道经过的时间，具体取决于通道所配置的测量模式与测量属性：低电平时间（下降沿与相邻上升沿之间）、高电平时间（上升沿与相邻下降沿之间）或周期时间（相邻上升沿或下降沿之间，周期起始边沿可配置）。尚未捕获到请求的时间、捕获正在进行未完成、或已返回过的捕获值被再次读取时返回"0"。可通过配置参数**IcuGetTimeElapsedApi**进行编译期**ON/OFF**配置，可重入。
+**说明**: 读取给定通道经过的时间，具体取决于通道所配置的测量模式与测量属性：低电平时间（下降沿与相邻上升沿之间）、高电平时间（上升沿与相邻下降沿之间）或周期时间（相邻上升沿或下降沿之间，周期起始边沿可配置）。尚未捕获到请求的时间、捕获正在进行未完成、或已返回过的捕获值被再次读取时返回"0"。可通过配置参数**IcuGetTimeElapsedApi**进行编译期**ON/OFF**配置，可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 Icu_ValueType Icu_GetTimeElapsed ( Icu_ChannelType Channel )
@@ -487,7 +487,7 @@ Icu_ValueType Icu_GetTimeElapsed ( Icu_ChannelType Channel )
 
 #### 7.3.23. Icu_GetDutyCycleValues
 
-**说明**: 为给定**ICU**通道读取一致的有效时间与周期时间（配置为"Signal Measurement, Duty Cycle Values"测量模式时），结果（高电平时间与周期时间）写入**DutyCycleValues**指向的缓冲区。尚未捕获到一致的有效/周期时间、捕获正在进行未完成、或已返回过的值被再次读取时返回"0"。可通过配置参数**IcuGetDutyCycleValuesApi**进行编译期**ON/OFF**配置，可重入。
+**说明**: 为给定**ICU**通道读取一致的有效时间与周期时间（配置为"Signal Measurement, Duty Cycle Values"测量模式时），结果（高电平时间与周期时间）写入**DutyCycleValues**指向的缓冲区。尚未捕获到一致的有效/周期时间、捕获正在进行未完成、或已返回过的值被再次读取时返回"0"。可通过配置参数**IcuGetDutyCycleValuesApi**进行编译期**ON/OFF**配置，可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_GetDutyCycleValues ( 
@@ -496,7 +496,7 @@ void Icu_GetDutyCycleValues (
 
 #### 7.3.24. Icu_GetVersionInfo
 
-**说明**: 返回本模块的版本信息（写入**versioninfo**指向的位置）。若开发错误检测使能且**versioninfo**参数为**NULL**，则上报开发错误**ICU_E_PARAM_VINFO**。可重入。
+**说明**: 返回本模块的版本信息（写入**versioninfo**指向的位置）。若开发错误检测使能且**versioninfo**参数为**NULL**，则上报开发错误**ICU_E_PARAM_VINFO**。可重入。本服务为同步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_GetVersionInfo ( Std_VersionInfoType* versioninfo )
@@ -504,7 +504,7 @@ void Icu_GetVersionInfo ( Std_VersionInfoType* versioninfo )
 
 #### 7.3.25. Icu_DisableNotificationAsync
 
-**说明**: 异步禁用给定通道的通知。异步，可重入（限于**ICU050**）。
+**说明**: 禁用给定通道的通知。可重入（限于**ICU050**）。本服务为异步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_DisableNotificationAsync ( Icu_ChannelType Channel )
@@ -512,7 +512,7 @@ void Icu_DisableNotificationAsync ( Icu_ChannelType Channel )
 
 #### 7.3.26. Icu_EnableNotificationAsync
 
-**说明**: 异步使能给定通道的通知。异步，可重入（限于**ICU050**）。
+**说明**: 使能给定通道的通知。可重入（限于**ICU050**）。本服务为异步调用，可通过**Icu.h**获得。
 
 ```C
 void Icu_EnableNotificationAsync ( Icu_ChannelType Channel )
@@ -556,7 +556,7 @@ void Icu_EnableNotificationAsync ( Icu_ChannelType Channel )
 
 **Icu_SignalNotification_\<Channel\>**
 
-**说明**: 根据最近一次**Icu_EnableNotification**的调用，当请求的信号边沿（上升/下降/双边沿）出现时（每个边沿一次）调用此通知函数。
+**说明**: 根据最近一次**Icu_EnableNotification**的调用，当请求的信号边沿（上升/下降/双边沿）出现时（每个边沿一次）调用此通知函数。可通过**Icu_Externals.h**获得。本服务为同步调用。
 
 ```C
 void Icu_SignalNotification_<Channel> ( void )
@@ -564,7 +564,7 @@ void Icu_SignalNotification_<Channel> ( void )
 
 **Icu_TimestampNotification_\<Channel\>**
 
-**说明**: 当已获取到请求数量的时间戳（**Notification interval > 0**）且通知已通过**Icu_EnableNotification()**使能时，调用此通知函数。该通知依赖预处理开关**IcuTimestampApi**。
+**说明**: 当已获取到请求数量的时间戳（**Notification interval > 0**）且通知已通过**Icu_EnableNotification()**使能时，调用此通知函数。该通知依赖预处理开关**IcuTimestampApi**。可通过**Icu_Externals.h**获得。本服务为同步调用。
 
 ```C
 void Icu_TimestampNotification_<Channel> ( void )

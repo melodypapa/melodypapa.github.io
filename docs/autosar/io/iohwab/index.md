@@ -458,7 +458,7 @@ StdReturnType Rte_Call_<p>_<o>(<parameters>)
 
 下图讲述了**I/O**硬件抽象模块设计的电源状态转换，实现将**ADC**和**PWM**设置为低功耗模式的状态。
 
-其中外设配置为异步电源状态转换。在收到准备电源状态的请求后，外围设备的驱动程序向调用者**IoHwAbs**发出通知，通知它已准备好转换到新的电源状态。
+其中外设配置为异步电源状态转换。在收到准备电源状态的请求后，外围设备的驱动程序向调用者**IoHwAb**发出通知，通知它已准备好转换到新的电源状态。
 
 ![Figure9_2_1.png](Figure9_2_1.png)
 
@@ -532,9 +532,9 @@ ECU 硬件有一个功率级ASIC。所有ECU引脚都需在**I/O**硬件抽象�
 1. 应用程序电源模式管理器（**Application Power Mode Manager**）向**BswM**发出模式请求，希望能切换到低功耗模式（**LowPowerMode**）。
 2. **BswM**评估请求。如果所有先决条件都满足，则向**Power Mode Manager**和传感器SWC（**Sensor SWC**）发出模式切换。
 3. 传感器SWC停止读取传感数据，即不再向**IoHwAb**请求任何**Get**操作。
-4. **IoHwAbs**模块从ADC模块注销通知（**notification**），并最终停止周期性的硬件采集。
-5. **IoHwAbs**发送命令让外部传感器硬件进入低功耗模式或将其关闭。
-6. **IoHwAbs**调用低功耗模式准备的Callout函数，接着会调用低功耗模式设置Callout函数，并按配置中定义获得与请求的应用低功耗模式（**LowPowerMode**）相关的 ADC的电源状态。
+4. **IoHwAb**模块从ADC模块注销通知（**notification**），并最终停止周期性的硬件采集。
+5. **IoHwAb**发送命令让外部传感器硬件进入低功耗模式或将其关闭。
+6. **IoHwAb**调用低功耗模式准备的Callout函数，接着会调用低功耗模式设置Callout函数，并按配置中定义获得与请求的应用低功耗模式（**LowPowerMode**）相关的 ADC的电源状态。
    
 通过引入更细粒度的模式请求并对确认和开关作出反应，可以逐步控制该过程。
 
@@ -546,7 +546,7 @@ ECU 硬件有一个功率级ASIC。所有ECU引脚都需在**I/O**硬件抽象�
 
 #### 6.1.1. IoHwAb_Init\<Init_Id\>
 
-**说明**: 初始化所有**IO**硬件抽象软件或者是**IO**硬件抽象的一部分。
+**说明**: 初始化所有**IO**硬件抽象软件或者是**IO**硬件抽象的一部分。可通过**IoHwAb.h**获得。本服务为同步调用，不可重入。参数 ConfigPtr（in）：指向所选配置集的指针。无返回值。
 
 ```C
 void IoHwAb_Init<Init_Id> ( 
@@ -555,7 +555,7 @@ void IoHwAb_Init<Init_Id> (
 
 #### 6.1.2. IoHwAb_GetVersionInfo
 
-**说明**: 返回此模块的版本信息。
+**说明**: 返回此模块的版本信息。可通过**IoHwAb.h**获得。本服务为同步调用，可重入。参数 versioninfo（out）：指向存储该**IO**硬件抽象实现版本信息的位置的指针。无返回值。
 
 ```C
 void IoHwAb_GetVersionInfo ( 
@@ -564,15 +564,15 @@ void IoHwAb_GetVersionInfo (
 
 #### 6.1.3. IoHwAb_AdcNotification\<#groupID\>
 
-**说明**: 当组 \<#groupID\> 的组转换完成时将由**ADC**驱动程序调用。
+**说明**: 当组 \<#groupID\> 的组转换完成时将由**ADC**驱动程序调用。可通过**IoHwAb_Adc.h**获得。本服务为同步调用，不可重入。无参数，无返回值。
 
 ```C
 void IoHwAb_AdcNotification<#groupID> ( void )
 ```
 
-#### 6.1.4. IoHwAb_Pwm_Notification\<#channel\>
+#### 6.1.4. IoHwAb_PwmNotification\<#channel\>
 
-**说明**: 当通道 \<#channel\> 上出现信号边沿时，将由**PWM**驱动程序调用。。
+**说明**: 当通道 \<#channel\> 上出现信号边沿时，将由**PWM**驱动程序调用。可通过**IoHwAb_Pwm.h**获得。本服务为同步调用，不可重入。无参数，无返回值。
 
 ```C
 void IoHwAb_PwmNotification<#channel> ( void )
@@ -580,7 +580,7 @@ void IoHwAb_PwmNotification<#channel> ( void )
 
 #### 6.1.5. IoHwAb_IcuNotification\<#channel\>
 
-**说明**: 当通道 \<#channel\> 上出现信号边沿时，将由**ICU**驱动程序调用。
+**说明**: 当通道 \<#channel\> 上出现信号边沿时，将由**ICU**驱动程序调用。可通过**IoHwAb_Icu.h**获得。本服务为同步调用，不可重入。无参数，无返回值。
 
 ```C
 void IoHwAb_IcuNotification<#channel> ( void )
@@ -588,31 +588,31 @@ void IoHwAb_IcuNotification<#channel> ( void )
 
 #### 6.1.6. IoHwAb_GptNotification\<#channel\>
 
-**说明**: 当通道 \<#channel\> 上的计时器值到期时，将由**GPT**驱动程序调用。
+**说明**: 当通道 \<#channel\> 上的计时器值到期时，将由**GPT**驱动程序调用。可通过**IoHwAb_Gpt.h**获得。本服务为同步调用，不可重入。无参数，无返回值。
 
 ```C
-void void IoHwAb_GptNotification<#channel> ( void )
+void IoHwAb_GptNotification<#channel> ( void )
 ```
 
 #### 6.1.7. IoHwAb_OcuNotification\<#channel\>
 
-**说明**: 当阈值的当前值与通道\<#channel\>上的阈值匹配时，将由**OCU**驱动程序调用。
+**说明**: 当阈值的当前值与通道\<#channel\>上的阈值匹配时，将由**OCU**驱动程序调用。可通过**IoHwAb_Ocu.h**获得。本服务为同步调用，不可重入。无参数，无返回值。
 
 ```C
 void IoHwAb_OcuNotification<#channel> ( void )
 ```
 
-#### 6.1.8. IoHwAb_Pwm_NotifyReadyForPowerState\<#MODE\>
+#### 6.1.8. IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\>
 
-**说明**: 当模式 \<#Mode\> 的请求电源状态准备完成时，**PWM**驱动程序将调用**API**。
+**说明**: 当模式 \<#Mode\> 的请求电源状态准备完成时，**PWM**驱动程序将调用本**API**。可通过**IoHwAb_Pwm.h**获得。本服务为同步调用，不可重入。无参数，无返回值。
 
 ```C
 void IoHwAb_Pwm_NotifyReadyForPowerState<#Mode> ( void )
 ```
 
-#### 6.1.9. IoHwAb_Adc_NotifyReadyForPowerState\<#MODE\>
+#### 6.1.9. IoHwAb_Adc_NotifyReadyForPowerState\<#Mode\>
 
-**说明**: 当为模式 \<#Mode\> 请求的电源状态准备完成时，**ADC**驱动程序应调用**API**。
+**说明**: 当为模式 \<#Mode\> 请求的电源状态准备完成时，**ADC**驱动程序将调用本**API**。可通过**IoHwAb_Adc.h**获得。本服务为同步调用，不可重入。无参数，无返回值。
 
 ```C
 void IoHwAb_Adc_NotifyReadyForPowerState<#Mode> ( void )
@@ -620,7 +620,7 @@ void IoHwAb_Adc_NotifyReadyForPowerState<#Mode> ( void )
 
 #### 6.1.10. IoHwAb_Dcm_\<EcuSignalName\>
 
-**说明**: 此函数提供**DCM**模块对某个**ECU**信号的控制访问，其中\<EcuSignalname\>是**ECU**信号的符号名称。通过此函数可以进行**ECU**信号锁定（**locked**）和解锁（**unlocked**）。锁定代表将**ECU**信号冻结（**freeze**）为当前值、配置的默认值或者参数Signal给出的值。
+**说明**: 此函数提供**DCM**模块对某个**ECU**信号的控制访问，其中\<EcuSignalName\>是**ECU**信号的符号名称。通过此函数可以进行**ECU**信号锁定（**locked**）和解锁（**unlocked**）。锁定代表将**ECU**信号冻结（**freeze**）为当前值、配置的默认值或者参数 signal 给出的值。可通过**IoHwAb_Dcm.h**获得。本服务为同步调用。参数 action（in）：**IOHWAB_RETURNCONTROLTOECU**——解锁信号；**IOHWAB_RESETTODEFAULT**——锁定信号并设置为配置的默认值；**IOHWAB_FREEZECURRENTSTATE**——锁定信号为当前值；**IOHWAB_SHORTTERMADJUSTMENT**——锁定信号并调整为**DCM**模块给定的值。参数 signal（in）：用于将信号调整到的值（仅用于"短期调整"）。无返回值。
 
 ```C
 void IoHwAb_Dcm_<EcuSignalName> ( 
@@ -629,24 +629,24 @@ void IoHwAb_Dcm_<EcuSignalName> (
 
 #### 6.1.11. IoHwAb_Dcm_Read\<EcuSignalName\>
 
-**说明**: 该函数提供**DCM**模块对某个**ECU**信号的读取访问,（其中\<EcuSignalname\>是**ECU**信号的符号名称。
+**说明**: 该函数提供**DCM**模块对某个**ECU**信号的读取访问，其中\<EcuSignalName\>是**ECU**信号的符号名称。可通过**IoHwAb_Dcm.h**获得。本服务为同步调用。参数 signal（out）：指向存储当前信号值的变量的指针。无返回值。
 
 ```C
 void IoHwAb_Dcm_Read<EcuSignalName> (
      <EcuSignalDataType>* signal )
 ```
 
-#### 6.1.12. IoHwAb_PreparePowerState\<#MODE\>
+#### 6.1.12. IoHwAb_PreparePowerState\<#Mode\>
 
-**说明**: 函数需由**IoHwAb**调用，为转换到给定的电源状态做准备工作。此函数的目的是封装所有操作，以便使硬件为预定义的电源模式做好准备，将应用程序电源定义与硬件电源状态分离。
+**说明**: 函数需由**IoHwAb**调用，为转换到给定的电源状态做准备工作。此函数的目的是封装所有操作，以便使硬件为预定义的电源模式做好准备，将应用程序电源定义与硬件电源状态分离。可通过**IoHwAb.h**获得。本服务为同步调用，不可重入。无参数，无返回值。本**API**为可配置 callout，须按配置为每个待管理的电源模式定义一次；此 callout 在**IoHwAb SWC**的上下文中执行，意味着它可以完全访问**MCAL**。
 
 ```C
 void IoHwAb_PreparePowerState<#Mode> ( void )
 ```
 
-#### 6.1.13. IoHwAb_EnterPowerState\<#MODE\>
+#### 6.1.13. IoHwAb_EnterPowerState\<#Mode\>
 
-**说明**: 函数需由**IoHwAb**调用，以便有效地进入由函数IoHwAb_PreparePowerState\<#Mode\>准备的电源状态。 此函数的目的是封装所有操作，以便将硬件设置为对应于预定义电源模式的电源状态，从而将应用程序电源定义与硬件电源状态分离。
+**说明**: 函数需由**IoHwAb**调用，以便有效地进入由函数**IoHwAb_PreparePowerState\<#Mode\>**准备的电源状态。此函数的目的是封装所有操作，以便将硬件设置为对应于预定义电源模式的电源状态，从而将应用程序电源定义与硬件电源状态分离。可通过**IoHwAb.h**获得。本服务为异步调用，不可重入。无参数，无返回值。本**API**为可配置 callout，须按配置为每个待管理的电源模式定义一次；此 callout 在**IoHwAb SWC**的上下文中执行，意味着它可以完全访问**MCAL**。
 
 ```C
 void IoHwAb_EnterPowerState<#Mode> ( void )
@@ -697,7 +697,7 @@ sequenceDiagram
 
 应用程序请求进入低功耗模式时，将 **ADC** 与 **PWM** 设置为低功耗电源状态的时序图已在本译文的 5.7 节给出：
 
-* **异步电源状态转换**：见 5.7.1（规范 Figure 9-2.1）。其中，`<MSN>_PreparePowerState` API 返回的那一刻，准备过程即已启动并在后台运行，由 `<MSN>_Main_PowerStateTransitionManager` API 驱动；**IoHwAbs_PollForResults** 仅表示 **IoHwAbs** 的一个周期性可运行实体，用于检查所有通知是否均已发出，若是则激活电源状态转换的第二阶段（电源状态设置）；该回调由 **MCAL_B_Main_PowerStateTransitionManager** 调用，**MCAL_A** 同样如此。
+* **异步电源状态转换**：见 5.7.1（规范 Figure 9-2.1）。其中，`<MSN>_PreparePowerState` API 返回的那一刻，准备过程即已启动并在后台运行，由 `<MSN>_Main_PowerStateTransitionManager` API 驱动；**IoHwAb_PollForResults** 仅表示 **IoHwAb** 的一个周期性可运行实体，用于检查所有通知是否均已发出，若是则激活电源状态转换的第二阶段（电源状态设置）；该回调由 **MCAL_B_Main_PowerStateTransitionManager** 调用，**MCAL_A** 同样如此。
 * **同步电源状态转换**：见 5.7.2（规范 Figure 9-3.2）。其中外设被配置为同步电源状态转换，即准备阶段 API 返回时准备过程即告完成，外设已可立即设置新的电源状态。
 
 <section id="wechat">
