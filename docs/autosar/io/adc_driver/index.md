@@ -2,9 +2,6 @@
 title: "AUTOSAR ADC Driver（模数转换器驱动）"
 ---
 
-
-
-
 ## 1. 简介和功能概述
 
 本文介绍了**AUTOSAR**基础软件模块**ADC**驱动程序的功能、**API**和配置。**ADC**驱动程序的目标是逐次逼近**ADC**硬件数值。但**Delta Sigma ADC**转换用例超出了AUTOSAR ADC驱动的范畴。
@@ -149,18 +146,18 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 #### 6.1.1. 初始化
 
-![](Figure12.png)
+![Figure12.png](Figure12.png)
 
 #### 6.1.2. 去初始化
 
-![](Figure13.png)
+![Figure13.png](Figure13.png)
 
 #### 6.1.3. 转换模式
 
 **ADC**模块支持以下转换模式：
 
-1. **ADC**模块需为所有**ADC**通道组，提供一次性转换模式（**One-shot Conversion**）的支持。 一次性转换意味着为正在转换的组配置的每个通道都执行一次转换。![](Figure14.png)
-2. **ADC**模块需为所有带有触发源软件的**ADC**通道组，提供连续转换模式（**Continuous Conversion**）的支持。连续转换是指一次ADC转换完成后，一直重复整个**ADC**通道组的转换。组内各个**ADC**通道的转换以及整个**ADC**通道组的重复不需要执行任何额外的触发事件。根据硬件和软件功能，可以顺序或并行转换**ADC**通道组内的各个通道。![](Figure15.png)
+1. **ADC**模块需为所有**ADC**通道组，提供一次性转换模式（**One-shot Conversion**）的支持。 一次性转换意味着为正在转换的组配置的每个通道都执行一次转换。![Figure14.png](Figure14.png)
+2. **ADC**模块需为所有带有触发源软件的**ADC**通道组，提供连续转换模式（**Continuous Conversion**）的支持。连续转换是指一次ADC转换完成后，一直重复整个**ADC**通道组的转换。组内各个**ADC**通道的转换以及整个**ADC**通道组的重复不需要执行任何额外的触发事件。根据硬件和软件功能，可以顺序或并行转换**ADC**通道组内的各个通道。![Figure15.png](Figure15.png)
 
 #### 6.1.4. 触发源（Trigger Source）
 **ADC**模块需支持以下启动条件或触发源：
@@ -168,7 +165,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 * **ADC**模块需支持所有转换模式的启动条件的软件**API**调用（**Software API Call**）。触发源的软件API调用是指ADC通道组的转换由ADC模块提供的服务来启动或者停止。
 * **ADC**模块需支持在**One-Shot**转换模式中配置的**ADC**通道组的启动条件的硬件事件（**Hardware Event**）。触发源的硬件事件意味着**ADC**通道组的转换可以由硬件事件启动。（例如：定时器的超时事件，或者输入线上检测到一个边沿跳变）
 
-![](Figure16.png)
+![Figure16.png](Figure16.png)
 
 **ADC**模块应允许为每个**ADC**通道组配置一个触发源。
 
@@ -179,7 +176,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 * **ADC**模块需支持使用API函数**Adc_GetStreamLastPointer**来访问结果。调用 **Adc_GetStreamLastPointer**会告知用户最新一轮的**ADC**通道组转换结果在结果缓冲区中的位置以及结果缓冲区中有效转换结果的数量。结果缓冲区是应用程序提供的外部缓冲区。此函数可用于**ADC**通道组的两种类型，通过配置**Streaming Access Mode**和**Single Access Mode**进行配置。同时**Single Access Mode**的处理等于**Streaming Access Mode**的**Streaming Counter**等于**1**的情况。
 * 如果**API**函数的生成是静态配置的，**ADC**模块需支持使用API函数 **Adc_ReadGroup**来访问结果。调用**Adc_ReadGroup**将最近一轮转换的**ADC**通道组转换结果复制到应用程序缓冲区，其起始地址指定为**Adc_ReadGroup**的API参数。此函数可用于**ADC**通道组的两种类型，通过配置**Streaming Access Mode**和**Single Access Mode**进行配置。
 
-![](Figure17.png)
+![Figure17.png](Figure17.png)
 
 **ADC**模块需保证每次完成转换的返回结果值的一致性。
 
@@ -210,11 +207,11 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 **ADC**模块需支持静态配置选项以禁用优先级机制。同时**ADC**模块需支持静态配置选项以启用**ADC_PRIORITY_HW_SW**优先级机制，即同时使用硬件和软件优先级机制。如果硬件不提供硬件优先级机制，则纯软件的优先级机制会被实施。
 
-![](Figure23.png)
+![Figure23.png](Figure23.png)
 
 如果硬件支持优先级机制，**ADC**模块应支持静态配置选项**ADC_PRIORITY_HW**启用仅使用硬件优先级机制的优先级机制。如果选择了硬件优先机制，则具有软件触发源的**ADC**通道组也会使用硬件优先级机制中获得优先权配置。
 
-![](Figure19.png)
+![Figure19.png](Figure19.png)
 
 如果支持并选择了硬件优先级机制，**ADC**模块应允许将配置的优先级（**0-255**）映射到可用的硬件优先级。**ADC**模块的具体实现有关可用硬件优先级的限制以及可用硬件优先级到**ADC**通道组优先级的可能映射。
 
@@ -226,17 +223,17 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 如果优先级机制未激活，并且静态配置参数**AdcEnableQueuing**设置为**ON**，则 **ADC**模块会支持转换请求的队列功能，并应以先到先服务（**first come first served**）的顺序为软件组提供服务。软件转换请求存储的队列中需由软件实现或由硬件支持。
 
-![](Figure18.png)
+![Figure18.png](Figure18.png)
 
 如果队列机制激活（优先机制激活或队列显式激活），**ADC**模块需为每个**ADC**通道组的每个软件转换请求，最多在软件队列中存储一次。**ADC**模块应仅存储每个**ADC**通道组的一个转换请求，而不是多个请求。原因就是避免高优先级长期转换阻塞硬件的情况。
 
-![](Figure20.png)
+![Figure20.png](Figure20.png)
 
 在启用硬件触发请求情况下，通过**API**函数**Adc_EnableHardwareTrigger**生成的请求不应存储在任何队列中。
 
 在硬件触发转换请求的情况下，硬件优先级机制需被使用。
 
-![](Figure22.png)
+![Figure22.png](Figure22.png)
 
 如果**ADC**通道组可以被隐式停止，当**ADC**通道组状态为**ADC_IDLE**或**ADC_STREAM_COMPLETED**，这时**ADC**模块则被允许存储同一**ADC**通道组的额外软件转换请求。
 
@@ -319,7 +316,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 #### 6.3.1. 配置
 
-![](Figure7_1_1.png)
+![Figure7_1_1.png](Figure7_1_1.png)
 
 * 示例配置由三个**ADC**通道组组成。第1个**ADC**通道组由2个通道组成，第2个**ADC**通道组和第3个**ADC**通道组各由一个通道组成。
 * 对于组1和组2，配置了组访问模式**ADC_ACCESS_MODE_STREAMING**。组3的组访问模式配置为**ADC_ACCESS_MODE_SINGLE**。
@@ -327,13 +324,13 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 #### 6.3.2. 初始化
 
-![](Figure7_1_2.png)
+![Figure7_1_2.png](Figure7_1_2.png)
 
 用户必须为**ADC**通道组结果提供应用程序结果缓冲区。每组都需要一个缓冲区。如果选择流模式（**ADC_ACCESS_MODE_STREAMING**）的访问模式，缓冲区大小取决于组通道的数量、组访问模式以及流模式采样的数量。在开始**ADC**通道组转换之前，用户必须使用**API**函数 **Adc_SetupResultBuffer**初始化**ADC**通道组结果指针，该函数将**ADC**通道组结果指针初始化为指向特定的应用程序结果缓冲区。
 
 #### 6.3.3. Adc_GetStreamLastPointer的用法
 
-![](Figure7_1_3.png)
+![Figure7_1_3.png](Figure7_1_3.png)
 
 **ADC**驱动程序将**ADC**通道组**G1**、**G2**和**G3**的转换结果存储在相应的结果缓冲区数组**G1_ResultBuffer**、**G2_ResultBuffer**和**G3_ResultBuffer**中。**ADC**驱动程序并不支持通过**ADC**的**API**函数直接访问**ADC**硬件结果寄存器。
 
@@ -343,17 +340,15 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 **G2_SamplePtr**和**G3_SamplePtr**也对齐，在调用**Adc_GetStreamLastPointer**后，指向对应**ADC**通道组的的第一个组通道的最新结果。因为这两个**ADC**通道组只有一个频道。**G2_SamplePtr**指向**G2_CH2**结果之一（即：最新结果）。**ADC**通道组，因为配置为单一访问模式，所以**G3_SamplePtr**始终指向**G3_CH3**。
 
-
 **Adc_GetStreamLastPointer**会返回存储在应用程序结果缓冲区中，每个通道的有效采样数（即：完整的组转换次数）。如果返回值等于配置参数流采样个数（**number of streaming samples**），则流缓冲区中的所有转换结果都有效。如果返回值为 0，则流缓冲区中没有可用的转换结果（采样数据的指针将对齐为**NULL**）。
 
 为了使**Adc_GetStreamLastPointer**将采样数据指针（**G1_SamplePtr**、**G2_SamplePtr**和**G3_SamplePtr**）指向最新的通道结果，**API**被定义为将指针传递给结果指针而不是结果指针本身。
 
 #### 6.3.4. Adc_ReadGroup的用法
 
-![](Figure7_1_4.png)
+![Figure7_1_4.png](Figure7_1_4.png)
 
 如果可选的API函数**Adc_ReadGroup**被启用，则用户必须为每个选定的**ADC**通道组提供额外的缓冲区，这些缓冲区可以保存一轮**ADC**通道组转换的结果。调用**Adc_ReadGroup**将最新结果从应用程序结果缓冲区复制到应用程序读取组缓冲区。 在示例中，一个应用程序读取缓冲区（**G2_G3_ReadBuffer**）被用于**ADC**通道组**G2**和**G3**。
-
 
 ### 6.4. 电源状态管理
 
@@ -541,7 +536,6 @@ Std_ReturnType Adc_PreparePowerState (
 
 **说明**: 当**ADC**通道组<#groupID>转换完成后，**ADC**驱动程序会调用此函数。
 
-
 ```C
 void IoHwAb_AdcNotification<#groupID> ( void )
 ```
@@ -561,5 +555,4 @@ void IoHwAb_Adc_NotifyReadyForPowerState<#Mode> ( void )
 <img src="wechat.png" alt="微信扫一扫"/>
 
 </section>
-
 

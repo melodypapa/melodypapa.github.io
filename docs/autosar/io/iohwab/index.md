@@ -2,9 +2,6 @@
 title: "AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）"
 ---
 
-
-
-
 ## 1. 简介和功能概述
 
 本文介绍了**AUTOSAR**基础软件**I/O**硬件抽象（**I/O Hardware Abstraction**）的功能和配置。**I/O**硬件抽象是**ECU**抽象层（**ECU Abstraction Layer**）的一部分。
@@ -27,7 +24,7 @@ title: "AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）"
 * 提供**C**语言的**API**的定义
 * 为每个**ECU**信号提供特定的形式化。此信息可在（车身域、动力总成、底盘域）的标准化的通过功能数据中找到。 
 
-## 2. 缩略语及术语
+## 2. 缩略语
 
 ### 2.1. 缩略语
 
@@ -190,11 +187,11 @@ title: "AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）"
 
 注意，**I/O**硬件抽象模块并非为了抽象**GPT**功能，而是使用**GPT**功能来执行自己的功能。下图显示了**I/O**硬件抽象模块与**GPT**驱动程序的接口，**GPT**驱动程序是**MCAL**的一部分。
 
-![](Figure5_1.png)
+![Figure5_1.png](Figure5_1.png)
 
 #### 4.1.2. 与MCAL驱动程序的接口摘要
 
-![](Figure5_1_1.png)
+![Figure5_1_1.png](Figure5_1_1.png)
 
 * **I/O**硬件抽象调用**ADC**驱动程序的**API**
 * **I/O**硬件抽象接收来自**ADC**驱动程序的通知。
@@ -214,7 +211,7 @@ title: "AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）"
 * 通过**SPI**连接外部**ADC**驱动程序。
 * 通过**SPI**连接在ASIC设备上的**I/O**驱动程序。
 
-![](Figure5_2.png)
+![Figure5_2.png](Figure5_2.png)
 
 ### 4.3. 与系统服务的接口
 
@@ -224,7 +221,7 @@ title: "AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）"
 * **DET**：默认错误跟踪器
 * **BSW**调度程序
 
-![](Figure5_3.png)
+![Figure5_3.png](Figure5_3.png)
 
 ### 4.4. 与DCM的接口
 
@@ -237,7 +234,7 @@ title: "AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）"
 
 **I/O**硬件抽象作为**ECU**抽象的一部分，被定义为集成代码。
 
-![](Figure7_1.png)
+![Figure7_1.png](Figure7_1.png)
 
 #### 5.1.1. 背景
 
@@ -265,7 +262,7 @@ title: "AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）"
 
 ECU信号的概念来自于保证硬件平台互换性（**interchangeability of hardware platforms**）的必要性。
 
-![](Figure7_2.png)
+![Figure7_2.png](Figure7_2.png)
 
 #### 5.2.2. 需求说明
 
@@ -401,12 +398,11 @@ StdReturnType Rte_Call_<p>_<o>(<parameters>)
 
 以下示例展示了**ADC**转换的调度示例。
 
-![](Figure7_3.png)
+![Figure7_3.png](Figure7_3.png)
 
 **I/O**硬件抽象提供了两个**P-port**。范例中的软件组件接口是**af_pressure**。
 
 **ECU**状态管理器能够触发**BswModuleEntry**来初始化**ADC**驱动程序，通过使用**Adc_ConfigType**结构调用**Adc_Init**函数。
-
 
 软件组件获取**af_pressure**值，步骤如下：
 
@@ -419,13 +415,13 @@ StdReturnType Rte_Call_<p>_<o>(<parameters>)
 
 以下是示例的时序图：
 
-![](Figure7_3_1.png)
+![Figure7_3_1.png](Figure7_3_1.png)
 
 #### 5.5.9. 调度示例2 - 同步调度
 
 以下示例展示了用于设置一个连接到**SMART**电源的灯的调度。
 
-![](Figure7_4.png)
+![Figure7_4.png](Figure7_4.png)
 
 因为**SMART**电源通过**SPI**总线连接到微控制器，所以专用代码需使用**SPI**处理程序。
 
@@ -464,13 +460,13 @@ StdReturnType Rte_Call_<p>_<o>(<parameters>)
 
 其中外设配置为异步电源状态转换。在收到准备电源状态的请求后，外围设备的驱动程序向调用者**IoHwAbs**发出通知，通知它已准备好转换到新的电源状态。
 
-![](Figure9_2_1.png)
+![Figure9_2_1.png](Figure9_2_1.png)
 
 #### 5.7.2. 同步电源状态转换
 
 下图展示了一个同步转换，即：外围设备能够立即完成状态的转换，无需实现一个异步等待的过程。
 
-![](Figure9_2_2.png)
+![Figure9_2_2.png](Figure9_2_2.png)
 
 ### 5.8. 具体示例
 
@@ -478,7 +474,7 @@ StdReturnType Rte_Call_<p>_<o>(<parameters>)
 
 此示例来自于一个供电的**ECU**的例子。
 
-![](Figure7_5.png)
+![Figure7_5.png](Figure7_5.png)
 
 此**ECU**包含多个数字输入信号（DI）:
 * 第一组是控制机械开关的慢速数字输入信号
@@ -498,13 +494,13 @@ OEM客户需求如下：
 应用程序会每**10**毫秒运行一次，并读取开关的去抖后的数字输入数值和诊断信息的反馈。
 
 AUTOSAR架构上的分解：
-![](Figure7_5_1.png)
+![Figure7_5_1.png](Figure7_5_1.png)
 
 #### 5.8.2. 示例2 - 故障监测
 
 在本示例中，首先需定义一个信号用于输出的诊断，它是基于**I/O**硬件抽象级别的诊断属性来定义。所以一个输入信号会用于执行相关输出诊断的反馈。
 
-![](Figure7_6.png)
+![Figure7_6.png](Figure7_6.png)
 
 当**I/O**硬件抽象要求定位一个输出时，并调用Dio_WriteChannel，通道反馈的读取是通过配置为ECU输入引脚完成的。
 
@@ -522,7 +518,7 @@ ECU 硬件有一个功率级ASIC。所有ECU引脚都需在**I/O**硬件抽象�
 
 功率级驱动程序（**Power Stage Driver**）提供了所有输出的视图。它会调用**PWM**、**DIO**驱动程序以及SPI处理程序的服务。从软件组件的角度来看，信号抽象使所有这些输出都可见，信号需映射到端口上。同时功率级驱动程序是可配置的。
 
-![](Figure7_7.png)
+![Figure7_7.png](Figure7_7.png)
 
 **诊断：**
 每个故障都可以在功率级的级别上检测到。诊断数据流会通过**SPI**通信，传送到功率级驱动程序。接着通过**S/R**接口，将诊断结果提供给所有的软件组件。
@@ -542,7 +538,7 @@ ECU 硬件有一个功率级ASIC。所有ECU引脚都需在**I/O**硬件抽象�
    
 通过引入更细粒度的模式请求并对确认和开关作出反应，可以逐步控制该过程。
 
-![](Figure7_8.png)
+![Figure7_8.png](Figure7_8.png)
 
 ## 6. API规范
 
@@ -551,7 +547,6 @@ ECU 硬件有一个功率级ASIC。所有ECU引脚都需在**I/O**硬件抽象�
 #### 6.1.1. IoHwAb_Init\<Init_Id\>
 
 **说明**: 初始化所有**IO**硬件抽象软件或者是**IO**硬件抽象的一部分。
-
 
 ```C
 void IoHwAb_Init<Init_Id> ( 
@@ -562,7 +557,6 @@ void IoHwAb_Init<Init_Id> (
 
 **说明**: 返回此模块的版本信息。
 
-
 ```C
 void IoHwAb_GetVersionInfo ( 
     Std_VersionInfoType* versioninfo )
@@ -572,7 +566,6 @@ void IoHwAb_GetVersionInfo (
 
 **说明**: 当组 \<#groupID\> 的组转换完成时将由**ADC**驱动程序调用。
 
-
 ```C
 void IoHwAb_AdcNotification<#groupID> ( void )
 ```
@@ -580,7 +573,6 @@ void IoHwAb_AdcNotification<#groupID> ( void )
 #### 6.1.4. IoHwAb_Pwm_Notification\<#channel\>
 
 **说明**: 当通道 \<#channel\> 上出现信号边沿时，将由**PWM**驱动程序调用。。
-
 
 ```C
 void IoHwAb_PwmNotification<#channel> ( void )
@@ -590,7 +582,6 @@ void IoHwAb_PwmNotification<#channel> ( void )
 
 **说明**: 当通道 \<#channel\> 上出现信号边沿时，将由**ICU**驱动程序调用。
 
-
 ```C
 void IoHwAb_IcuNotification<#channel> ( void )
 ```
@@ -598,7 +589,6 @@ void IoHwAb_IcuNotification<#channel> ( void )
 #### 6.1.6. IoHwAb_GptNotification\<#channel\>
 
 **说明**: 当通道 \<#channel\> 上的计时器值到期时，将由**GPT**驱动程序调用。
-
 
 ```C
 void void IoHwAb_GptNotification<#channel> ( void )
@@ -608,7 +598,6 @@ void void IoHwAb_GptNotification<#channel> ( void )
 
 **说明**: 当阈值的当前值与通道\<#channel\>上的阈值匹配时，将由**OCU**驱动程序调用。
 
-
 ```C
 void IoHwAb_OcuNotification<#channel> ( void )
 ```
@@ -616,7 +605,6 @@ void IoHwAb_OcuNotification<#channel> ( void )
 #### 6.1.8. IoHwAb_Pwm_NotifyReadyForPowerState\<#MODE\>
 
 **说明**: 当模式 \<#Mode\> 的请求电源状态准备完成时，**PWM**驱动程序将调用**API**。
-
 
 ```C
 void IoHwAb_Pwm_NotifyReadyForPowerState<#Mode> ( void )
@@ -626,7 +614,6 @@ void IoHwAb_Pwm_NotifyReadyForPowerState<#Mode> ( void )
 
 **说明**: 当为模式 \<#Mode\> 请求的电源状态准备完成时，**ADC**驱动程序应调用**API**。
 
-
 ```C
 void IoHwAb_Adc_NotifyReadyForPowerState<#Mode> ( void )
 ```
@@ -634,7 +621,6 @@ void IoHwAb_Adc_NotifyReadyForPowerState<#Mode> ( void )
 #### 6.1.10. IoHwAb_Dcm_\<EcuSignalName\>
 
 **说明**: 此函数提供**DCM**模块对某个**ECU**信号的控制访问，其中\<EcuSignalname\>是**ECU**信号的符号名称。通过此函数可以进行**ECU**信号锁定（**locked**）和解锁（**unlocked**）。锁定代表将**ECU**信号冻结（**freeze**）为当前值、配置的默认值或者参数Signal给出的值。
-
 
 ```C
 void IoHwAb_Dcm_<EcuSignalName> ( 
@@ -645,7 +631,6 @@ void IoHwAb_Dcm_<EcuSignalName> (
 
 **说明**: 该函数提供**DCM**模块对某个**ECU**信号的读取访问,（其中\<EcuSignalname\>是**ECU**信号的符号名称。
 
-
 ```C
 void IoHwAb_Dcm_Read<EcuSignalName> (
      <EcuSignalDataType>* signal )
@@ -655,7 +640,6 @@ void IoHwAb_Dcm_Read<EcuSignalName> (
 
 **说明**: 函数需由**IoHwAb**调用，为转换到给定的电源状态做准备工作。此函数的目的是封装所有操作，以便使硬件为预定义的电源模式做好准备，将应用程序电源定义与硬件电源状态分离。
 
-
 ```C
 void IoHwAb_PreparePowerState<#Mode> ( void )
 ```
@@ -664,18 +648,17 @@ void IoHwAb_PreparePowerState<#Mode> ( void )
 
 **说明**: 函数需由**IoHwAb**调用，以便有效地进入由函数IoHwAb_PreparePowerState\<#Mode\>准备的电源状态。 此函数的目的是封装所有操作，以便将硬件设置为对应于预定义电源模式的电源状态，从而将应用程序电源定义与硬件电源状态分离。
 
-
 ```C
 void IoHwAb_EnterPowerState<#Mode> ( void )
 ```
 
-## 7. 序列图
+## 7. 时序图
 
-> 以下序列图按 **AUTOSAR_SWS_IOHardwareAbstraction**（R22-11）第 9 章绘制。
+> 以下时序图按 **AUTOSAR_SWS_IOHardwareAbstraction**（R22-11）第 9 章绘制。
 
 ### 7.1. ECU 信号提供示例（ADC 转换）
 
-本序列图解释了 5.5.8 节（规范 7.5.2.5）给出的示例。在此示例中，传感器/执行器组件（**Sensor / Actuator Component**）是客户端，**I/O**硬件抽象是服务器。
+本时序图解释了 5.5.8 节（规范 7.5.2.5）给出的示例。在此示例中，传感器/执行器组件（**Sensor / Actuator Component**）是客户端，**I/O**硬件抽象是服务器。
 
 传感器/执行器组件请求 **af_pressure** 信号的新值，该信号是**I/O**硬件抽象级别上的一个**ECU**信号。**ADC**转换结束后，来自**MCAL**驱动程序的通知被转换为发往传感器/执行器组件的**RTE**事件，随后该组件即可对 **af_pressure** 信号缓冲区中的值执行同步读取。
 
@@ -712,7 +695,7 @@ sequenceDiagram
 
 ### 7.2. 低功耗模式下设置 ADC 与 PWM（电源状态转换）
 
-应用程序请求进入低功耗模式时，将 **ADC** 与 **PWM** 设置为低功耗电源状态的序列图已在本译文的 5.7 节给出：
+应用程序请求进入低功耗模式时，将 **ADC** 与 **PWM** 设置为低功耗电源状态的时序图已在本译文的 5.7 节给出：
 
 * **异步电源状态转换**：见 5.7.1（规范 Figure 9-2.1）。其中，`<MSN>_PreparePowerState` API 返回的那一刻，准备过程即已启动并在后台运行，由 `<MSN>_Main_PowerStateTransitionManager` API 驱动；**IoHwAbs_PollForResults** 仅表示 **IoHwAbs** 的一个周期性可运行实体，用于检查所有通知是否均已发出，若是则激活电源状态转换的第二阶段（电源状态设置）；该回调由 **MCAL_B_Main_PowerStateTransitionManager** 调用，**MCAL_A** 同样如此。
 * **同步电源状态转换**：见 5.7.2（规范 Figure 9-3.2）。其中外设被配置为同步电源状态转换，即准备阶段 API 返回时准备过程即告完成，外设已可立即设置新的电源状态。

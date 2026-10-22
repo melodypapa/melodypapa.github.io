@@ -23,9 +23,9 @@ title: "AUTOSAR OCU Driver（输出比较单元驱动）"
 
 "output"（输出）是比较匹配时实际执行的动作。
 
-![Figure1-1](Figure1-1.png)
+![Figure1-1.png](Figure1-1.png)
 
-## 2. 缩略语和缩写
+## 2. 缩略语
 
 下表包含 [1, AUTOSAR 术语表] 中未包含的、与**OCU**驱动模块相关的缩略语和缩写。局部作用域的缩略语和缩写出现在下表中；全局作用域的包含在**AUTOSAR**术语表中。
 
@@ -91,13 +91,13 @@ AUTOSAR_CP_TR_BSWModuleList
 
 我们假设将运行本驱动程序的硬件具有如下计数器抽象模型（以八位计数器为例）。
 
-![Figure4-1](Figure4-1.png)
+![Figure4-1.png](Figure4-1.png)
 
 最小值为 0，最大值为 255。计数器超过最大值时重载为 0，即它具有 256 个计数步进。
 
 由于计数量化，将计数器内容与阈值比较时可能出现两种情况：比较可以在进入计数器某个状态时发生，也可以在退出某个状态时发生，如下图所示。
 
-![Figure4-2](Figure4-2.png)
+![Figure4-2.png](Figure4-2.png)
 
 本驱动程序的预期行为是在进入阈值所代表的状态时完成比较。
 
@@ -135,7 +135,7 @@ AUTOSAR_CP_TR_BSWModuleList
 
 #### 5.5.1. 代码文件结构
 
-[SWS_Ocu_00001] 代码文件结构不应完全在本规范中定义。在这一点上应指出，代码文件结构应包含以下文件：
+代码文件结构不应完全在本规范中定义。在这一点上应指出，代码文件结构应包含以下文件：
 
 * Ocu_Lcfg.c - 用于链接时间可配置参数
 * Ocu_PBcfg.c - 用于构建后可配置参数
@@ -144,9 +144,9 @@ AUTOSAR_CP_TR_BSWModuleList
 
 #### 5.5.2. 头文件结构
 
-[SWS_Ocu_00006] Ocu.c 应包含 Ocu.h 和 Det.h。
+Ocu.c 应包含 Ocu.h 和 Det.h。
 
-## 6. 需求追踪
+## 6. 需求可追溯性
 
 下表引用 <CITATIONS_OF_CONTRIBUTED_DOCUMENTS> 中规定的要求，并链接到这些要求的满足情况。
 
@@ -219,7 +219,7 @@ AUTOSAR_CP_TR_BSWModuleList
 
 **OCU**通道由两个主要元素组成：自由运行计数器和比较阈值。这些元素共同作用以生成用户所需的动作。自由运行计数器可以由硬件或软件提供，而阈值是由用户设置的值。然后每次计数器增加一个单位时，将阈值与计数器的当前内容进行比较。
 
-![Figure7-1](Figure7-1.png)
+![Figure7-1.png](Figure7-1.png)
 
 驱动程序每次计数器增加一个单位时比较这两个值。相等时，可以执行两种不同类型的动作：
 
@@ -237,7 +237,7 @@ AUTOSAR_CP_TR_BSWModuleList
 
 输出比较通道的状态和状态转换如下图所示。
 
-![Figure7-2](Figure7-2.png)
+![Figure7-2.png](Figure7-2.png)
 
 **Ocu**通道具有上图所示的简单状态图。驱动程序的所有通道都通过**API Ocu_Init()**一次性初始化。没有单独初始化每个通道的**API**。
 
@@ -249,7 +249,7 @@ AUTOSAR_CP_TR_BSWModuleList
 
 应避免不兼容文件的集成。最低实现是在 **.c** 文件内检查头文件的版本（**.c** 和 **.h** 文件的版本号必须相同）。
 
-[SWS_Ocu_00012] **OCU**驱动应执行模块间检查以避免不兼容文件的集成。被包含的导入文件应通过预处理指令进行检查。
+**OCU**驱动应执行模块间检查以避免不兼容文件的集成。被包含的导入文件应通过预处理指令进行检查。
 
 应验证以下版本号：
 
@@ -266,7 +266,7 @@ AUTOSAR_CP_TR_BSWModuleList
 
 #### 7.3.2. 需求
 
-[SWS_Ocu_00013] **OCU**驱动**API**服务中使用的所有时间单位都应为 **tick**。
+**OCU**驱动**API**服务中使用的所有时间单位都应为 **tick**。
 
 ### 7.4. 错误分类
 
@@ -274,13 +274,11 @@ AUTOSAR_CP_TR_BSWModuleList
 
 在此基础上，以下各节规定在相应小节中安排的特定错误。
 
-[SWS_Ocu_00016] 以下错误应由**OCU**驱动根据其构建版本（开发/生产模式）检测。
+以下错误应由**OCU**驱动根据其构建版本（开发/生产模式）检测。
 
 #### 7.4.1. 开发错误
 
-[SWS_Ocu_00015] 开发错误值的类型为 **uint8**。
-
-[SWS_Ocu_91001] **Ocu**模块中开发错误的定义
+开发错误值的类型为 **uint8**。
 
 | 错误类型 | 相关错误码 | 错误值 |
 |---|---|---|
@@ -294,11 +292,9 @@ AUTOSAR_CP_TR_BSWModuleList
 | 对没有关联输出引脚的通道调用**Ocu_SetPinState()**或**Ocu_SetPinAction()** | OCU_E_PARAM_NO_PIN | 0x0A |
 | **OCU**初始化失败，例如所选的配置集不存在 | OCU_E_INIT_FAILED | 0x0B |
 
-[SWS_Ocu_00017] 由于特定实现和/或特定硬件属性而检测到的其他错误，应添加到**OCU**器件特定实现规范中。分类和枚举应与上面列出的错误兼容。
+由于特定实现和/或特定硬件属性而检测到的其他错误，应添加到**OCU**器件特定实现规范中。分类和枚举应与上面列出的错误兼容。
 
 #### 7.4.2. 运行时错误
-
-[SWS_Ocu_91002] **Ocu**模块中运行时错误的定义
 
 | 错误类型 | 相关错误码 | 错误值 |
 |---|---|---|
@@ -318,33 +314,31 @@ AUTOSAR_CP_TR_BSWModuleList
 
 ### 7.5. 错误检测
 
-[SWS_Ocu_00018] 开发错误的检测可在预编译时配置（开/关）。开关**OcuDevErrorDetectApi**应激活或停用所有开发错误的检测。
+开发错误的检测可在预编译时配置（开/关）。开关**OcuDevErrorDetectApi**应激活或停用所有开发错误的检测。
 
-[SWS_Ocu_00019] 如果开关**OcuDevErrorDetectApi**启用，则启用**API**参数检查。被检测错误的详细描述可在错误分类章节和**API**规范章节中找到。
+如果开关**OcuDevErrorDetectApi**启用，则启用**API**参数检查。被检测错误的详细描述可在错误分类章节和**API**规范章节中找到。
 
-[SWS_Ocu_00020] 生产错误的检测不能关闭。
+生产错误的检测不能关闭。
 
 ### 7.6. 错误通知
 
-[SWS_Ocu_00021] 如果设置了预处理器开关**OcuDevErrorDetectApi**，检测到的开发错误应通过默认错误跟踪器（**DET**）的服务**Det_ReportError**上报。
+如果设置了预处理器开关**OcuDevErrorDetectApi**，检测到的开发错误应通过默认错误跟踪器（**DET**）的服务**Det_ReportError**上报。
 
 ### 7.7. 调试支持
 
-[SWS_Ocu_00023] 每个需由**AUTOSAR**调试访问的变量应定义为全局变量。
+每个需由**AUTOSAR**调试访问的变量应定义为全局变量。
 
-[SWS_Ocu_00024] 所有需调试变量的类型定义应可通过头文件**Ocu.h**访问。
+所有需调试变量的类型定义应可通过头文件**Ocu.h**访问。
 
-[SWS_Ocu_00025] 头文件中变量的声明应使得可以通过 **C** 的 "**sizeof**" 计算变量大小。
+头文件中变量的声明应使得可以通过 **C** 的 "**sizeof**" 计算变量大小。
 
-[SWS_Ocu_00026] 可用于调试的变量应在相应的**OCU**驱动描述中说明。
+可用于调试的变量应在相应的**OCU**驱动描述中说明。
 
-## 8. API 规范
+## 8. API规范
 
-### 8.1. 导入类型
+### 8.1. 导入的类型
 
 本章列出从以下文件包含的所有类型。
-
-[SWS_Ocu_00027] **Ocu**模块导入数据类型的定义
 
 | 模块 | 头文件 | 导入类型 |
 |---|---|---|
@@ -355,372 +349,236 @@ AUTOSAR_CP_TR_BSWModuleList
 
 #### 8.2.1. Ocu_ChannelType
 
-[SWS_Ocu_00028] 数据类型**Ocu_ChannelType**的定义
-
-| 名称 | Ocu_ChannelType |
-|---|---|
-| 类型 | 类型（Type） |
-| 派生自 | **uint** |
-| 范围 | 8 / 16 / 32 位 - 这是实现特定的，但并非类型内的所有值都有效。应选择该类型以在特定微控制器平台上获得最高效的实现。 |
-| 描述 | **OCU**通道的数字标识符。可通过**Ocu.h**获得 |
+类型，派生自 **uint**。范围为：8 / 16 / 32 位 - 这是实现特定的，但并非类型内的所有值都有效。应选择该类型以在特定微控制器平台上获得最高效的实现。**OCU**通道的数字标识符。可通过**Ocu.h**获得。
 
 #### 8.2.2. Ocu_ValueType
 
-[SWS_Ocu_00029] 数据类型**Ocu_ValueType**的定义
-
-| 名称 | Ocu_ValueType |
-|---|---|
-| 类型 | 类型（Type） |
-| 派生自 | **uint** |
-| 范围 | 8 / 16 / 32 位 - 这是实现特定的，但并非类型内的所有值都有效。应选择该类型以在特定微控制器平台上获得最高效的实现。 |
-| 描述 | 用于读取计数器和写入阈值值的类型（以 tick 数为单位）。可通过**Ocu.h**获得 |
+类型，派生自 **uint**。范围为：8 / 16 / 32 位 - 这是实现特定的，但并非类型内的所有值都有效。应选择该类型以在特定微控制器平台上获得最高效的实现。用于读取计数器和写入阈值值的类型（以 tick 数为单位）。可通过**Ocu.h**获得。
 
 #### 8.2.3. Ocu_PinStateType
 
-[SWS_Ocu_00031] 数据类型**Ocu_PinStateType**的定义
+枚举类型，取值范围：
 
-| 名称 | Ocu_PinStateType |
-|---|---|
-| 类型 | 枚举（Enumeration） |
-| 范围 | **OCU_HIGH** 0x00：与**OCU**通道关联的引脚处于高电平。<br>**OCU_LOW** 0x01：与**OCU**通道关联的引脚处于低电平。 |
-| 描述 | 链接到**OCU**通道的引脚的输出状态。可通过**Ocu.h**获得 |
+* **OCU_HIGH**（0x00）：与**OCU**通道关联的引脚处于高电平。
+* **OCU_LOW**（0x01）：与**OCU**通道关联的引脚处于低电平。
+
+链接到**OCU**通道的引脚的输出状态。可通过**Ocu.h**获得。
 
 #### 8.2.4. Ocu_PinActionType
 
-[SWS_Ocu_00032] 数据类型**Ocu_PinActionType**的定义
+枚举类型，取值范围：
 
-| 名称 | Ocu_PinActionType |
-|---|---|
-| 类型 | 枚举（Enumeration） |
-| 范围 | **OCU_SET_HIGH** 0x00：通道引脚将在比较匹配时被置高。<br>**OCU_SET_LOW** 0x01：通道引脚将在比较匹配时被置低。<br>**OCU_TOGGLE** 0x02：通道引脚将在比较匹配时被设置为当前电平的相反电平。<br>**OCU_DISABLE** 0x03：通道引脚将在比较匹配时保持当前电平。 |
-| 描述 | 由硬件自动执行（如果支持）的、对附加到**OCU**通道的引脚的动作。可通过**Ocu.h**获得 |
+* **OCU_SET_HIGH**（0x00）：通道引脚将在比较匹配时被置高。
+* **OCU_SET_LOW**（0x01）：通道引脚将在比较匹配时被置低。
+* **OCU_TOGGLE**（0x02）：通道引脚将在比较匹配时被设置为当前电平的相反电平。
+* **OCU_DISABLE**（0x03）：通道引脚将在比较匹配时保持当前电平。
+
+由硬件自动执行（如果支持）的、对附加到**OCU**通道的引脚的动作。可通过**Ocu.h**获得。
 
 #### 8.2.5. Ocu_ConfigType
 
-[SWS_Ocu_00033] 数据类型**Ocu_ConfigType**的定义
-
-| 名称 | Ocu_ConfigType |
-|---|---|
-| 类型 | 结构体（Structure） |
-| 元素 | 硬件相关 |
-| 注释 | 初始化数据结构的内容是硬件特定的。 |
-| 描述 | 这是包含**OCU**驱动初始化数据的数据结构的类型。可通过**Ocu.h**获得 |
+结构类型。硬件相关。初始化数据结构的内容是硬件特定的。这是包含**OCU**驱动初始化数据的数据结构的类型。可通过**Ocu.h**获得。
 
 #### 8.2.6. Ocu_ReturnType
 
-[SWS_Ocu_00138] 数据类型**Ocu_ReturnType**的定义
+枚举类型，取值范围：
 
-| 名称 | Ocu_ReturnType |
-|---|---|
-| 类型 | 枚举（Enumeration） |
-| 范围 | **OCU_CM_IN_REF_INTERVAL** 0x00：比较匹配将在当前参考区间内发生。<br>**OCU_CM_OUT_REF_INTERVAL** 0x01：比较匹配不会在当前参考区间内发生。 |
-| 描述 | 设置新阈值值后的返回信息。可通过**Ocu.h**获得 |
+* **OCU_CM_IN_REF_INTERVAL**（0x00）：比较匹配将在当前参考区间内发生。
+* **OCU_CM_OUT_REF_INTERVAL**（0x01）：比较匹配不会在当前参考区间内发生。
+
+设置新阈值值后的返回信息。可通过**Ocu.h**获得。
 
 ### 8.3. 函数定义
 
 #### 8.3.1. Ocu_Init
 
-[SWS_Ocu_00035] **API**函数**Ocu_Init**的定义
-
-| 服务名称 | Ocu_Init |
-|---|---|
-| 语法 | void Ocu_Init ( const Ocu_ConfigType* ConfigPtr ) |
-| 服务 ID [十六进制] | 0x00 |
-| 同步/异步 | 同步 |
-| 可重入性 | 不可重入 |
-| 参数（in） | ConfigPtr：指向配置集的指针 |
-| 参数（inout） | 无 |
-| 参数（out） | 无 |
-| 返回值 | 无 |
-| 描述 | **OCU**初始化服务。可通过**Ocu.h**获得 |
+**说明**: **OCU**初始化服务。可通过**Ocu.h**获得。本服务为同步调用，不可重入。参数 ConfigPtr（in）：指向配置集的指针。
 
 ```C
-void Ocu_Init (
-  const Ocu_ConfigType* ConfigPtr
-)
+void Ocu_Init ( const Ocu_ConfigType* ConfigPtr )
 ```
 
-[SWS_Ocu_00036] **Ocu_Init**函数应根据**ConfigPtr**引用的配置集，初始化所有内部变量和所使用的微控制器**Ocu**结构。
+**Ocu_Init**函数应根据**ConfigPtr**引用的配置集，初始化所有内部变量和所使用的微控制器**Ocu**结构。
 
 注意：所有通道都由**API Ocu_Init**一次性初始化。没有单独初始化每个通道的**API**。
 
-[SWS_Ocu_00010] 如果**OCU**单元的自由运行计数器可被其他定时器模块使用，则**Ocu**驱动不得启动或停止该自由运行计数器。
+如果**OCU**单元的自由运行计数器可被其他定时器模块使用，则**Ocu**驱动不得启动或停止该自由运行计数器。
 
-[SWS_Ocu_00011] **API Ocu_Init**应启动所有由本驱动独占使用的自由运行计数器。
+**API Ocu_Init**应启动所有由本驱动独占使用的自由运行计数器。
 
-[SWS_Ocu_00037] **Ocu_Init**函数应只初始化配置的资源，不得触及配置文件中未配置的资源。
+**Ocu_Init**函数应只初始化配置的资源，不得触及配置文件中未配置的资源。
 
 关于控制器寄存器初始化的以下规则适用于本驱动实现：
 
-* [SWS_Ocu_00038] 如果硬件只允许寄存器的一种用法（寄存器专用于**OCU**资源），则**OCU**驱动负责初始化该寄存器。
+* 如果硬件只允许寄存器的一种用法（寄存器专用于**OCU**资源），则**OCU**驱动负责初始化该寄存器。
 * 注意 1：如果寄存器可以影响多个硬件模块且不是 **I/O** 寄存器，则应由**MCU**驱动初始化。
 * 注意 2：需要在复位后立即初始化的一次性可写寄存器，应由启动代码初始化。
 * 注意 3：所有其他寄存器应由启动代码初始化。
 * 注意 4：如果寄存器可以影响多个硬件模块且是 **I/O** 寄存器，应由**PORT**驱动初始化。
 
-[SWS_Ocu_00043] 如果为**OCU**驱动启用了开发错误检测，且在**OCU**驱动和硬件已初始化时调用**Ocu_Init**函数，则**Ocu_Init**函数应上报开发错误**OCU_E_ALREADY_INITIALIZED**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测，且在**OCU**驱动和硬件已初始化时调用**Ocu_Init**函数，则**Ocu_Init**函数应上报开发错误**OCU_E_ALREADY_INITIALIZED**并不做任何动作地返回。
 
-[SWS_Ocu_00044] 通过执行**Ocu_Init**函数重新初始化**OCU**驱动，需要事先通过执行**Ocu_DeInit**函数进行反初始化。
+通过执行**Ocu_Init**函数重新初始化**OCU**驱动，需要事先通过执行**Ocu_DeInit**函数进行反初始化。
 
 #### 8.3.2. Ocu_DeInit
 
-[SWS_Ocu_00045] **API**函数**Ocu_DeInit**的定义
-
-| 服务名称 | Ocu_DeInit |
-|---|---|
-| 语法 | void Ocu_DeInit ( void ) |
-| 服务 ID [十六进制] | 0x01 |
-| 同步/异步 | 同步 |
-| 可重入性 | 不可重入 |
-| 参数（in） | 无 |
-| 参数（inout） | 无 |
-| 参数（out） | 无 |
-| 返回值 | 无 |
-| 描述 | 此函数反初始化**OCU**模块。可通过**Ocu.h**获得 |
+**说明**: 此函数反初始化**OCU**模块。可通过**Ocu.h**获得。本服务为同步调用，不可重入。
 
 ```C
-void Ocu_DeInit (
-  void
-)
+void Ocu_DeInit ( void )
 ```
 
-[SWS_Ocu_00046] **Ocu_DeInit**函数应将**Ocu_Init**初始化的**OCU**变量和寄存器反初始化到与上电复位状态相当的状态。不可写寄存器的值除外。
+**Ocu_DeInit**函数应将**Ocu_Init**初始化的**OCU**变量和寄存器反初始化到与上电复位状态相当的状态。不可写寄存器的值除外。
 
 注意：硬件设计应负责确保该状态不会导致微控制器中的未定义行为。
 
-[SWS_Ocu_00047] **Ocu_DeInit**函数应禁用所有使用的中断和通知。
+**Ocu_DeInit**函数应禁用所有使用的中断和通知。
 
-[SWS_Ocu_00048] **Ocu_DeInit**函数应只影响由静态配置和/或先前**Ocu_Init()**调用传递的运行时配置集分配的外设。
+**Ocu_DeInit**函数应只影响由静态配置和/或先前**Ocu_Init()**调用传递的运行时配置集分配的外设。
 
-[SWS_Ocu_00136] **API Ocu_DeInit**应停止所有由本驱动独占使用的自由运行计数器。
+**API Ocu_DeInit**应停止所有由本驱动独占使用的自由运行计数器。
 
 注意：为防止反初始化期间的未定义行为，用户必须在调用**API Ocu_DeInit**之前停止所有**RUNNING**状态的通道（通过调用**Ocu_StopChannel**函数）。因此有下面的需求。
 
-[SWS_Ocu_00137] 如果为**OCU**驱动启用了开发错误检测：如果调用**Ocu_DeInit**函数时仍有通道处于**RUNNING**状态，则函数应上报开发错误 "**OCU_E_PARAM_INVALID_STATE**" 并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果调用**Ocu_DeInit**函数时仍有通道处于**RUNNING**状态，则函数应上报开发错误 "**OCU_E_PARAM_INVALID_STATE**" 并不做任何动作地返回。
 
-[SWS_Ocu_00049] **Ocu_DeInit**函数应可通过配置参数**OcuDeInitApi {OCU_DE_INIT_API}**在预编译时配置开/关。
+**Ocu_DeInit**函数应可通过配置参数**OcuDeInitApi {OCU_DE_INIT_API}**在预编译时配置开/关。
 
-[SWS_Ocu_00050] 如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_DeInit**函数应上报错误**OCU_E_UNINIT**。
+如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_DeInit**函数应上报错误**OCU_E_UNINIT**。
 
 #### 8.3.3. Ocu_StartChannel
 
-[SWS_Ocu_00051] **API**函数**Ocu_StartChannel**的定义
-
-| 服务名称 | Ocu_StartChannel |
-|---|---|
-| 语法 | Std_ReturnType Ocu_StartChannel ( Ocu_ChannelType ChannelNumber ) |
-| 服务 ID [十六进制] | 0x02 |
-| 同步/异步 | 同步 |
-| 可重入性 | 对不同通道号可重入 |
-| 参数（in） | ChannelNumber：**OCU**的数字标识符 |
-| 参数（inout） | 无 |
-| 参数（out） | 无 |
-| 返回值 | **Std_ReturnType**：**E_OK** 表示通道已启动；**E_NOT_OK** 表示通道未启动 |
-| 描述 | 启动**OCU**通道的服务。可通过**Ocu.h**获得 |
+**说明**: 启动**OCU**通道的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**的数字标识符。返回值：**Std_ReturnType**，**E_OK** 表示通道已启动；**E_NOT_OK** 表示通道未启动。
 
 ```C
-Std_ReturnType Ocu_StartChannel (
-  Ocu_ChannelType ChannelNumber
-)
+Std_ReturnType Ocu_StartChannel ( Ocu_ChannelType ChannelNumber )
 ```
 
-[SWS_Ocu_00052] **Ocu_StartChannel**函数应通过允许执行所有配置的比较匹配动作来启动**OCU**通道。
+**Ocu_StartChannel**函数应通过允许执行所有配置的比较匹配动作来启动**OCU**通道。
 
-[SWS_Ocu_00053] **Ocu_StartChannel**函数在针对不同通道调用时应可重入。
+**Ocu_StartChannel**函数在针对不同通道调用时应可重入。
 
-[SWS_Ocu_00054] 如果**Ocu_StartChannel**函数已成功执行，所选通道的状态应设置为 "**RUNNING**"。
+如果**Ocu_StartChannel**函数已成功执行，所选通道的状态应设置为 "**RUNNING**"。
 
-[SWS_Ocu_00055] 如果对处于 "**RUNNING**" 状态的通道调用**Ocu_StartChannel**函数，则函数应上报错误**OCU_E_BUSY**并不做任何动作地返回。
+如果对处于 "**RUNNING**" 状态的通道调用**Ocu_StartChannel**函数，则函数应上报错误**OCU_E_BUSY**并不做任何动作地返回。
 
-[SWS_Ocu_00056] 如果为**OCU**驱动启用了开发错误检测：如果参数**ChannelNumber**无效（不在配置规定的范围内），**Ocu_StartChannel**函数应上报错误**OCU_E_PARAM_INVALID_CHANNEL**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果参数**ChannelNumber**无效（不在配置规定的范围内），**Ocu_StartChannel**函数应上报错误**OCU_E_PARAM_INVALID_CHANNEL**并不做任何动作地返回。
 
-[SWS_Ocu_00057] 如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_StartChannel**函数应上报错误**OCU_E_UNINIT**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_StartChannel**函数应上报错误**OCU_E_UNINIT**并不做任何动作地返回。
 
 #### 8.3.4. Ocu_StopChannel
 
-[SWS_Ocu_00058] **API**函数**Ocu_StopChannel**的定义
-
-| 服务名称 | Ocu_StopChannel |
-|---|---|
-| 语法 | void Ocu_StopChannel ( Ocu_ChannelType ChannelNumber ) |
-| 服务 ID [十六进制] | 0x03 |
-| 同步/异步 | 同步 |
-| 可重入性 | 对不同通道号可重入 |
-| 参数（in） | ChannelNumber：**OCU**的数字标识符 |
-| 参数（inout） | 无 |
-| 参数（out） | 无 |
-| 返回值 | 无 |
-| 描述 | 停止**OCU**通道的服务。可通过**Ocu.h**获得 |
+**说明**: 停止**OCU**通道的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**的数字标识符。
 
 ```C
-void Ocu_StopChannel (
-  Ocu_ChannelType ChannelNumber
-)
+void Ocu_StopChannel ( Ocu_ChannelType ChannelNumber )
 ```
 
-[SWS_Ocu_00059] **Ocu_StopChannel**函数应通过停止此通道配置的比较匹配动作来停止**OCU**通道。
+**Ocu_StopChannel**函数应通过停止此通道配置的比较匹配动作来停止**OCU**通道。
 
-[SWS_Ocu_00060] **Ocu_StopChannel**函数不得停止与通道关联的自由运行计数器。
+**Ocu_StopChannel**函数不得停止与通道关联的自由运行计数器。
 
 注意：这是因为一个自由运行计数器可以与多个**Ocu**通道关联。因此，停止该计数器将损害其他通道的运行。
 
-[SWS_Ocu_00061] **Ocu_StopChannel**函数在针对不同通道调用时应可重入。
+**Ocu_StopChannel**函数在针对不同通道调用时应可重入。
 
-[SWS_Ocu_00062] 如果**Ocu_StopChannel**函数成功执行，所选通道的状态应设置为 "**STOPPED**"。
+如果**Ocu_StopChannel**函数成功执行，所选通道的状态应设置为 "**STOPPED**"。
 
-[SWS_Ocu_00063] 如果对处于 "**STOPPED**" 状态的通道调用**Ocu_StopChannel**函数，则函数应不做任何动作地离开（不改变通道状态），且不应上报开发错误。
+如果对处于 "**STOPPED**" 状态的通道调用**Ocu_StopChannel**函数，则函数应不做任何动作地离开（不改变通道状态），且不应上报开发错误。
 
-[SWS_Ocu_00064] 如果为**OCU**驱动启用了开发错误检测：如果参数**ChannelNumber**无效（不在配置规定的范围内），**Ocu_StopChannel**函数应上报错误**OCU_E_PARAM_INVALID_CHANNEL**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果参数**ChannelNumber**无效（不在配置规定的范围内），**Ocu_StopChannel**函数应上报错误**OCU_E_PARAM_INVALID_CHANNEL**并不做任何动作地返回。
 
-[SWS_Ocu_00065] 如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_StopChannel**函数应上报错误**OCU_E_UNINIT**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_StopChannel**函数应上报错误**OCU_E_UNINIT**并不做任何动作地返回。
 
 #### 8.3.5. Ocu_SetPinState
 
-[SWS_Ocu_00066] **API**函数**Ocu_SetPinState**的定义
-
-| 服务名称 | Ocu_SetPinState |
-|---|---|
-| 语法 | void Ocu_SetPinState ( Ocu_ChannelType ChannelNumber, Ocu_PinStateType PinState ) |
-| 服务 ID [十六进制] | 0x04 |
-| 同步/异步 | 同步 |
-| 可重入性 | 对不同通道号可重入 |
-| 参数（in） | ChannelNumber：**OCU**的数字标识符<br>PinState：**OCU_LOW**、**OCU_HIGH** |
-| 参数（inout） | 无 |
-| 参数（out） | 无 |
-| 返回值 | 无 |
-| 描述 | 立即设置与**OCU**通道关联的引脚电平的服务。可通过**Ocu.h**获得 |
+**说明**: 立即设置与**OCU**通道关联的引脚电平的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**的数字标识符。参数 PinState（in）：**OCU_LOW**、**OCU_HIGH**。
 
 ```C
-void Ocu_SetPinState (
-  Ocu_ChannelType ChannelNumber,
-  Ocu_PinStateType PinState
-)
+void Ocu_SetPinState ( Ocu_ChannelType ChannelNumber, Ocu_PinStateType PinState )
 ```
 
-[SWS_Ocu_00067] **Ocu_SetPinState**函数应将与通道关联的引脚设置为**PinState**指示的电平。
+**Ocu_SetPinState**函数应将与通道关联的引脚设置为**PinState**指示的电平。
 
-[SWS_Ocu_00068] **Ocu_SetPinState**函数在针对不同通道调用时应可重入。
+**Ocu_SetPinState**函数在针对不同通道调用时应可重入。
 
-[SWS_Ocu_00069] **Ocu_SetPinState**函数应仅在通道不处于**RUNNING**状态时使用。
+**Ocu_SetPinState**函数应仅在通道不处于**RUNNING**状态时使用。
 
 注意：先前的需求也意味着应可以通过此**API**改变**STOPPED**状态通道的状态。
 
-[SWS_Ocu_00070] **Ocu_SetPinState**函数应可通过配置参数**OcuSetPinStateApi {OCU_SET_PIN_STATE_API}**在预编译时配置开/关。
+**Ocu_SetPinState**函数应可通过配置参数**OcuSetPinStateApi {OCU_SET_PIN_STATE_API}**在预编译时配置开/关。
 
-[SWS_Ocu_00071] 如果为**OCU**驱动启用了开发错误检测：如果参数**ChannelNumber**无效（不在配置规定的范围内），**Ocu_SetPinState**函数应上报错误**OCU_E_PARAM_INVALID_CHANNEL**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果参数**ChannelNumber**无效（不在配置规定的范围内），**Ocu_SetPinState**函数应上报错误**OCU_E_PARAM_INVALID_CHANNEL**并不做任何动作地返回。
 
-[SWS_Ocu_00072] 如果为**OCU**驱动启用了开发错误检测：如果引脚未与通道关联（未在通道配置中定义），**Ocu_SetPinState**函数应上报错误**OCU_E_PARAM_NO_PIN**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果引脚未与通道关联（未在通道配置中定义），**Ocu_SetPinState**函数应上报错误**OCU_E_PARAM_NO_PIN**并不做任何动作地返回。
 
-[SWS_Ocu_00073] 如果为**OCU**驱动启用了开发错误检测：如果参数**PinState**无效（不在配置规定的范围内），**Ocu_SetPinState**函数应上报错误**OCU_E_PARAM_INVALID_STATE**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果参数**PinState**无效（不在配置规定的范围内），**Ocu_SetPinState**函数应上报错误**OCU_E_PARAM_INVALID_STATE**并不做任何动作地返回。
 
-[SWS_Ocu_00074] 如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_SetPinState**函数应上报错误**OCU_E_UNINIT**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_SetPinState**函数应上报错误**OCU_E_UNINIT**并不做任何动作地返回。
 
-[SWS_Ocu_00075] 如果为**OCU**驱动启用了开发错误检测：如果通道处于**RUNNING**状态，**Ocu_SetPinState**函数应上报错误**OCU_E_PARAM_INVALID_STATE**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果通道处于**RUNNING**状态，**Ocu_SetPinState**函数应上报错误**OCU_E_PARAM_INVALID_STATE**并不做任何动作地返回。
 
 #### 8.3.6. Ocu_SetPinAction
 
-[SWS_Ocu_00076] **API**函数**Ocu_SetPinAction**的定义
-
-| 服务名称 | Ocu_SetPinAction |
-|---|---|
-| 语法 | void Ocu_SetPinAction ( Ocu_ChannelType ChannelNumber, Ocu_PinActionType PinAction ) |
-| 服务 ID [十六进制] | 0x05 |
-| 同步/异步 | 同步 |
-| 可重入性 | 对不同通道号可重入 |
-| 参数（in） | ChannelNumber：**OCU**的数字标识符<br>PinAction：**OCU_SET_LOW**、**OCU_SET_HIGH**、**OCU_TOGGLE**、**OCU_DISABLE** |
-| 参数（inout） | 无 |
-| 参数（out） | 无 |
-| 返回值 | 无 |
-| 描述 | 告知驱动程序比较匹配时硬件（如果支持）应自动执行什么动作的服务。可通过**Ocu.h**获得 |
+**说明**: 告知驱动程序比较匹配时硬件（如果支持）应自动执行什么动作的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**的数字标识符。参数 PinAction（in）：**OCU_SET_LOW**、**OCU_SET_HIGH**、**OCU_TOGGLE**、**OCU_DISABLE**。
 
 ```C
-void Ocu_SetPinAction (
-  Ocu_ChannelType ChannelNumber,
-  Ocu_PinActionType PinAction
-)
+void Ocu_SetPinAction ( Ocu_ChannelType ChannelNumber, Ocu_PinActionType PinAction )
 ```
 
-[SWS_Ocu_00077] **Ocu_SetPinAction**函数应设置硬件在相应**OCU**通道的下一次比较匹配时自动执行的动作。
+**Ocu_SetPinAction**函数应设置硬件在相应**OCU**通道的下一次比较匹配时自动执行的动作。
 
-[SWS_Ocu_00078] **Ocu_SetPinAction**函数在针对不同通道调用时应可重入。
+**Ocu_SetPinAction**函数在针对不同通道调用时应可重入。
 
-[SWS_Ocu_00079] **Ocu_SetPinAction**函数应可通过配置参数**OcuSetPinActionApi {OCU_SET_PIN_ACTION_API}**在预编译时配置开/关。
+**Ocu_SetPinAction**函数应可通过配置参数**OcuSetPinActionApi {OCU_SET_PIN_ACTION_API}**在预编译时配置开/关。
 
-[SWS_Ocu_00080] 如果为**OCU**驱动启用了开发错误检测：如果参数**ChannelNumber**无效（不在配置规定的范围内），**Ocu_SetPinAction**函数应上报错误**OCU_E_PARAM_INVALID_CHANNEL**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果参数**ChannelNumber**无效（不在配置规定的范围内），**Ocu_SetPinAction**函数应上报错误**OCU_E_PARAM_INVALID_CHANNEL**并不做任何动作地返回。
 
-[SWS_Ocu_00081] 如果为**OCU**驱动启用了开发错误检测：如果引脚未与通道关联（未在通道配置中定义），**Ocu_SetPinAction**函数应上报错误**OCU_E_PARAM_NO_PIN**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果引脚未与通道关联（未在通道配置中定义），**Ocu_SetPinAction**函数应上报错误**OCU_E_PARAM_NO_PIN**并不做任何动作地返回。
 
-[SWS_Ocu_00082] 如果为**OCU**驱动启用了开发错误检测：如果参数**PinAction**无效（不在类型规定的范围内），**Ocu_SetPinAction**函数应上报错误**OCU_E_PARAM_INVALID_ACTION**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果参数**PinAction**无效（不在类型规定的范围内），**Ocu_SetPinAction**函数应上报错误**OCU_E_PARAM_INVALID_ACTION**并不做任何动作地返回。
 
-[SWS_Ocu_00083] 如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_SetPinAction**函数应上报错误**OCU_E_UNINIT**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_SetPinAction**函数应上报错误**OCU_E_UNINIT**并不做任何动作地返回。
 
-[SWS_Ocu_00084] 如果引脚与通道关联；比较匹配时应对此引脚执行相关动作。
+如果引脚与通道关联；比较匹配时应对此引脚执行相关动作。
 
 #### 8.3.7. Ocu_GetCounter
 
-[SWS_Ocu_00085] **API**函数**Ocu_GetCounter**的定义
-
-| 服务名称 | Ocu_GetCounter |
-|---|---|
-| 语法 | Ocu_ValueType Ocu_GetCounter ( Ocu_ChannelType ChannelNumber ) |
-| 服务 ID [十六进制] | 0x06 |
-| 同步/异步 | 同步 |
-| 可重入性 | 可重入 |
-| 参数（in） | ChannelNumber：**OCU**通道的数字标识符 |
-| 参数（inout） | 无 |
-| 参数（out） | 无 |
-| 返回值 | **Ocu_ValueType**：以 tick 为单位的计数器内容 |
-| 描述 | 读取计数器当前值的服务。可通过**Ocu.h**获得 |
+**说明**: 读取计数器当前值的服务。可通过**Ocu.h**获得。本服务为同步调用，可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。返回值：**Ocu_ValueType**，以 tick 为单位的计数器内容。
 
 ```C
-Ocu_ValueType Ocu_GetCounter (
-  Ocu_ChannelType ChannelNumber
-)
+Ocu_ValueType Ocu_GetCounter ( Ocu_ChannelType ChannelNumber )
 ```
 
-[SWS_Ocu_00086] **Ocu_GetCounter**函数应读取并返回**ChannelNumber**指示的通道的计数器值。
+**Ocu_GetCounter**函数应读取并返回**ChannelNumber**指示的通道的计数器值。
 
-[SWS_Ocu_00087] **Ocu_GetCounter**函数应可重入。
+**Ocu_GetCounter**函数应可重入。
 
-[SWS_Ocu_00088] **Ocu_GetCounter**函数应可通过配置参数**OcuGetCounterApi {OCU_GET_COUNTER_API}**在预编译时配置开/关。
+**Ocu_GetCounter**函数应可通过配置参数**OcuGetCounterApi {OCU_GET_COUNTER_API}**在预编译时配置开/关。
 
-[SWS_Ocu_00089] 如果为**OCU**驱动启用了开发错误检测：如果参数**ChannelNumber**无效（不在配置规定的范围内），**Ocu_GetCounter**函数应上报错误**OCU_E_PARAM_INVALID_CHANNEL**并返回值 "**0**"。
+如果为**OCU**驱动启用了开发错误检测：如果参数**ChannelNumber**无效（不在配置规定的范围内），**Ocu_GetCounter**函数应上报错误**OCU_E_PARAM_INVALID_CHANNEL**并返回值 "**0**"。
 
-[SWS_Ocu_00090] 如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，则**Ocu_GetCounterValue**函数应上报错误**OCU_E_UNINIT**并返回值 "**0**"。
+如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，则**Ocu_GetCounterValue**函数应上报错误**OCU_E_UNINIT**并返回值 "**0**"。
 
 #### 8.3.8. Ocu_SetAbsoluteThreshold
 
-[SWS_Ocu_00091] **API**函数**Ocu_SetAbsoluteThreshold**的定义
-
-| 服务名称 | Ocu_SetAbsoluteThreshold |
-|---|---|
-| 语法 | Ocu_ReturnType Ocu_SetAbsoluteThreshold ( Ocu_ChannelType ChannelNumber, Ocu_ValueType ReferenceValue, Ocu_ValueType AbsoluteValue ) |
-| 服务 ID [十六进制] | 0x07 |
-| 同步/异步 | 同步 |
-| 可重入性 | 对不同通道号可重入 |
-| 参数（in） | ChannelNumber：**OCU**通道的数字标识符<br>ReferenceValue：由上层给出的值，用作确定是否在函数退出之前调用通知的基础<br>AbsoluteValue：与计数器内容比较的值。此值以 tick 为单位 |
-| 参数（inout） | 无 |
-| 参数（out） | 无 |
-| 返回值 | **Ocu_ReturnType**：告知调用者设置新阈值值后，比较匹配是否将在当前参考区间内发生（或已经发生） |
-| 描述 | 使用绝对输入数据设置通道阈值值的服务。可通过**Ocu.h**获得 |
+**说明**: 使用绝对输入数据设置通道阈值值的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。参数 ReferenceValue（in）：由上层给出的值，用作确定是否在函数退出之前调用通知的基础。参数 AbsoluteValue（in）：与计数器内容比较的值。此值以 tick 为单位。返回值：**Ocu_ReturnType**，告知调用者设置新阈值值后，比较匹配是否将在当前参考区间内发生（或已经发生）。
 
 ```C
 Ocu_ReturnType Ocu_SetAbsoluteThreshold (
-  Ocu_ChannelType ChannelNumber,
-  Ocu_ValueType ReferenceValue,
-  Ocu_ValueType AbsoluteValue
+    Ocu_ChannelType ChannelNumber, Ocu_ValueType ReferenceValue, Ocu_ValueType AbsoluteValue
 )
 ```
 
-[SWS_Ocu_00092] **Ocu_SetAbsoluteThreshold**函数应将通道阈值（比较值）设置为**AbsoluteValue**给出的值。
+**Ocu_SetAbsoluteThreshold**函数应将通道阈值（比较值）设置为**AbsoluteValue**给出的值。
 
-[SWS_Ocu_00093] **Ocu_SetAbsoluteThreshold**函数在针对不同通道调用时应可重入。
+**Ocu_SetAbsoluteThreshold**函数在针对不同通道调用时应可重入。
 
-[SWS_Ocu_00094] **Ocu_SetAbsoluteThreshold**函数应可通过配置参数**OcuSetAbsoluteThresholdApi {OCU_SET_ABSOLUTE_THRESHOLD_API}**在预编译时配置开/关。
+**Ocu_SetAbsoluteThreshold**函数应可通过配置参数**OcuSetAbsoluteThresholdApi {OCU_SET_ABSOLUTE_THRESHOLD_API}**在预编译时配置开/关。
 
-[SWS_Ocu_00095] 如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_SetAbsoluteThreshold**函数应上报错误**OCU_E_UNINIT**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_SetAbsoluteThreshold**函数应上报错误**OCU_E_UNINIT**并不做任何动作地返回。
 
-[SWS_Ocu_00096] 如果为**OCU**驱动启用了开发错误检测：如果参数**ChannelNumber**无效（不在配置规定的范围内），**Ocu_SetAbsoluteThreshold**函数应上报错误**OCU_E_PARAM_INVALID_CHANNEL**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果参数**ChannelNumber**无效（不在配置规定的范围内），**Ocu_SetAbsoluteThreshold**函数应上报错误**OCU_E_PARAM_INVALID_CHANNEL**并不做任何动作地返回。
 
 注意：**ReferenceValue**是来自上层的信息。通过**ReferenceValue**与**AbsoluteValue**的组合，提供了一个区间（定义为 "**Reference Interval**"，下图中的绿色区域），以考虑计数器连续运行的事实，以及调用者请求更新比较阈值与此阈值实际修改之间可能存在延迟。
 
@@ -733,11 +591,11 @@ Ocu_ReturnType Ocu_SetAbsoluteThreshold (
 
 * 情况 1：阈值实际上在目标比较匹配发生之前写入。
 
-![Figure8-1](Figure8-1.png)
+![Figure8-1.png](Figure8-1.png)
 
 * 情况 2：阈值在目标比较匹配发生之后写入。
 
-![Figure8-2](Figure8-2.png)
+![Figure8-2.png](Figure8-2.png)
 
 **Reference Interval**考虑计数器可能的翻转（**rollover**），如下图所示。
 
@@ -745,7 +603,7 @@ Ocu_ReturnType Ocu_SetAbsoluteThreshold (
 
 以从 0 运行到 255 的计数器为例。
 
-![Figure8-3](Figure8-3.png)
+![Figure8-3.png](Figure8-3.png)
 
 作为上述情况的结果，驱动程序的预期行为如下。
 
@@ -756,34 +614,21 @@ Ocu_ReturnType Ocu_SetAbsoluteThreshold (
 
 此状态将帮助调用者（应用程序）决定如何进行。
 
-[SWS_Ocu_00098] 设置新阈值值后，**API Ocu_SetAbsoluteThreshold**应返回一个状态，告知调用者设置新阈值值后，比较匹配是否将在当前参考区间内发生（或已经发生）。
+设置新阈值值后，**API Ocu_SetAbsoluteThreshold**应返回一个状态，告知调用者设置新阈值值后，比较匹配是否将在当前参考区间内发生（或已经发生）。
 
 对于先前调用**API Ocu_SetAbsoluteThreshold**期间写入的阈值，驱动程序的预期行为如下：先前写入的阈值值被当前调用擦除。
 
 注意：由于实时行为，先前写入的阈值值仍可能产生比较匹配；即在**API**被调用之后、但阈值值尚未实际更改之前。
 
-[SWS_Ocu_00097] 在实际设置新阈值值时，上次调用此**API**期间写入的先前阈值值不再产生比较匹配。
+在实际设置新阈值值时，上次调用此**API**期间写入的先前阈值值不再产生比较匹配。
 
 #### 8.3.9. Ocu_SetRelativeThreshold
 
-[SWS_Ocu_00100] **API**函数**Ocu_SetRelativeThreshold**的定义
-
-| 服务名称 | Ocu_SetRelativeThreshold |
-|---|---|
-| 语法 | Ocu_ReturnType Ocu_SetRelativeThreshold ( Ocu_ChannelType ChannelNumber, Ocu_ValueType RelativeValue ) |
-| 服务 ID [十六进制] | 0x08 |
-| 同步/异步 | 同步 |
-| 可重入性 | 对不同通道号可重入 |
-| 参数（in） | ChannelNumber：**OCU**通道的数字标识符<br>RelativeValue：用于计算新阈值的值 |
-| 参数（inout） | 无 |
-| 参数（out） | 无 |
-| 返回值 | **Ocu_ReturnType**：告知调用者设置新阈值值后，比较匹配是否将在当前参考区间内发生（或已经发生） |
-| 描述 | 相对于计数器当前值设置通道阈值值的服务。可通过**Ocu.h**获得 |
+**说明**: 相对于计数器当前值设置通道阈值值的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。参数 RelativeValue（in）：用于计算新阈值的值。返回值：**Ocu_ReturnType**，告知调用者设置新阈值值后，比较匹配是否将在当前参考区间内发生（或已经发生）。
 
 ```C
 Ocu_ReturnType Ocu_SetRelativeThreshold (
-  Ocu_ChannelType ChannelNumber,
-  Ocu_ValueType RelativeValue
+    Ocu_ChannelType ChannelNumber, Ocu_ValueType RelativeValue
 )
 ```
 
@@ -799,127 +644,85 @@ NewThresholdValue = ReadValue + RelativeValue;
 
 示例**Ocu_SetRelativeThreshold(1,5);**
 
-![Figure8-4](Figure8-4.png)
+![Figure8-4.png](Figure8-4.png)
 
 注意：与**API Ocu_SetAbsoluteThreshold**一样，计数器的可能翻转也包含在参考区间中，如下图所示。示例**Ocu_SetRelativeThreshold(1,20)**，**ReadValue**等于 253。因此，此**API**的行为类似于**Ocu_SetAbsoluteThreshold**，故有下面的需求。
 
-![Figure8-5](Figure8-5.png)
+![Figure8-5.png](Figure8-5.png)
 
-[SWS_Ocu_00101] **Ocu_SetRelativeThreshold**函数应在进入函数时将**RelativeValue**加到计数器值上，以计算相对于计数器的新阈值。
+**Ocu_SetRelativeThreshold**函数应在进入函数时将**RelativeValue**加到计数器值上，以计算相对于计数器的新阈值。
 
-[SWS_Ocu_00106] 设置新阈值值后，**API Ocu_SetRelativeThreshold**应返回一个状态，告知调用者设置新阈值值后，比较匹配是否将在当前参考区间内发生（或已经发生）。
+设置新阈值值后，**API Ocu_SetRelativeThreshold**应返回一个状态，告知调用者设置新阈值值后，比较匹配是否将在当前参考区间内发生（或已经发生）。
 
-[SWS_Ocu_00107] 在实际设置新阈值值（绝对或相对）时，先前阈值值不再产生比较匹配。
+在实际设置新阈值值（绝对或相对）时，先前阈值值不再产生比较匹配。
 
-[SWS_Ocu_00102] **API Ocu_SetAbsoluteThreshold**在针对不同通道调用时应可重入。
+**API Ocu_SetAbsoluteThreshold**在针对不同通道调用时应可重入。
 
-[SWS_Ocu_00103] **Ocu_SetRelativeThreshold**函数应可通过配置参数**OcuSetRelativeThresholdApi {OCU_SET_RELATIVE_THRESHOLD_API}**在预编译时配置开/关。
+**Ocu_SetRelativeThreshold**函数应可通过配置参数**OcuSetRelativeThresholdApi {OCU_SET_RELATIVE_THRESHOLD_API}**在预编译时配置开/关。
 
-[SWS_Ocu_00104] 如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_SetRelativeThreshold**函数应上报错误**OCU_E_UNINIT**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_SetRelativeThreshold**函数应上报错误**OCU_E_UNINIT**并不做任何动作地返回。
 
-[SWS_Ocu_00105] 如果为**OCU**驱动启用了开发错误检测：如果参数**ChannelNumber**无效（不在配置规定的范围内），**Ocu_SetRelativeThreshold**函数应上报错误**OCU_E_PARAM_INVALID_CHANNEL**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果参数**ChannelNumber**无效（不在配置规定的范围内），**Ocu_SetRelativeThreshold**函数应上报错误**OCU_E_PARAM_INVALID_CHANNEL**并不做任何动作地返回。
 
 #### 8.3.10. Ocu_DisableNotification
 
-[SWS_Ocu_00108] **API**函数**Ocu_DisableNotification**的定义
-
-| 服务名称 | Ocu_DisableNotification |
-|---|---|
-| 语法 | void Ocu_DisableNotification ( Ocu_ChannelType ChannelNumber ) |
-| 服务 ID [十六进制] | 0x0a |
-| 同步/异步 | 同步 |
-| 可重入性 | 对不同通道号可重入 |
-| 参数（in） | ChannelNumber：**OCU**通道的数字标识符 |
-| 参数（inout） | 无 |
-| 参数（out） | 无 |
-| 返回值 | 无 |
-| 描述 | 此服务用于禁用来自**OCU**通道的通知。可通过**Ocu.h**获得 |
+**说明**: 此服务用于禁用来自**OCU**通道的通知。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。
 
 ```C
-void Ocu_DisableNotification (
-  Ocu_ChannelType ChannelNumber
-)
+void Ocu_DisableNotification ( Ocu_ChannelType ChannelNumber )
 ```
 
-[SWS_Ocu_00109] **Ocu_DisableNotification**函数应禁用**OCU**比较匹配通知。
+**Ocu_DisableNotification**函数应禁用**OCU**比较匹配通知。
 
-[SWS_Ocu_00110] **Ocu_DisableNotification**函数在针对不同通道调用时应可重入。
+**Ocu_DisableNotification**函数在针对不同通道调用时应可重入。
 
-[SWS_Ocu_00111] **Ocu_DisableNotification**函数应可通过配置参数**OcuNotificationSupported {OCU_NOTIFICATION_SUPPORTED}**在预编译时配置开/关。
+**Ocu_DisableNotification**函数应可通过配置参数**OcuNotificationSupported {OCU_NOTIFICATION_SUPPORTED}**在预编译时配置开/关。
 
-[SWS_Ocu_00112] 如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_DisableNotification**函数应上报错误**OCU_E_UNINIT**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_DisableNotification**函数应上报错误**OCU_E_UNINIT**并不做任何动作地返回。
 
-[SWS_Ocu_00113] 如果为**OCU**驱动启用了开发错误检测：如果参数**Channel**无效（不在配置规定的范围内），**Ocu_DisableNotification**函数应上报错误**OCU_E_PARAM_INVALID_CHANNEL**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果参数**Channel**无效（不在配置规定的范围内），**Ocu_DisableNotification**函数应上报错误**OCU_E_PARAM_INVALID_CHANNEL**并不做任何动作地返回。
 
-[SWS_Ocu_00114] 如果为**OCU**驱动启用了开发错误检测：如果通知函数是**NULL**指针，**Ocu_DisableNotification**函数应上报错误**OCU_E_NO_VALID_NOTIF**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果通知函数是**NULL**指针，**Ocu_DisableNotification**函数应上报错误**OCU_E_NO_VALID_NOTIF**并不做任何动作地返回。
 
 #### 8.3.11. Ocu_EnableNotification
 
-[SWS_Ocu_00115] **API**函数**Ocu_EnableNotification**的定义
-
-| 服务名称 | Ocu_EnableNotification |
-|---|---|
-| 语法 | void Ocu_EnableNotification ( Ocu_ChannelType ChannelNumber ) |
-| 服务 ID [十六进制] | 0x0b |
-| 同步/异步 | 同步 |
-| 可重入性 | 对不同通道号可重入 |
-| 参数（in） | ChannelNumber：**OCU**通道的数字标识符 |
-| 参数（inout） | 无 |
-| 参数（out） | 无 |
-| 返回值 | 无 |
-| 描述 | 此服务用于启用来自**OCU**通道的通知。可通过**Ocu.h**获得 |
+**说明**: 此服务用于启用来自**OCU**通道的通知。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。
 
 ```C
-void Ocu_EnableNotification (
-  Ocu_ChannelType ChannelNumber
-)
+void Ocu_EnableNotification ( Ocu_ChannelType ChannelNumber )
 ```
 
-[SWS_Ocu_00116] **Ocu_EnableNotification**函数应启用被索引通道的**OCU**比较匹配通知。
+**Ocu_EnableNotification**函数应启用被索引通道的**OCU**比较匹配通知。
 
-[SWS_Ocu_00117] **Ocu_EnableNotification**函数在针对不同通道调用时应可重入。
+**Ocu_EnableNotification**函数在针对不同通道调用时应可重入。
 
-[SWS_Ocu_00118] **Ocu_EnableNotification**函数应可通过配置参数**OcuNotificationSupported {OCU_NOTIFICATION_SUPPORTED}**在预编译时配置开/关。
+**Ocu_EnableNotification**函数应可通过配置参数**OcuNotificationSupported {OCU_NOTIFICATION_SUPPORTED}**在预编译时配置开/关。
 
-[SWS_Ocu_00119] 如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_EnableNotification**函数应上报错误**OCU_E_UNINIT**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_EnableNotification**函数应上报错误**OCU_E_UNINIT**并不做任何动作地返回。
 
-[SWS_Ocu_00120] 如果为**OCU**驱动启用了开发错误检测：如果参数**Channel**无效（不在配置规定的范围内），**Ocu_EnableNotification**函数应上报错误**OCU_E_PARAM_INVALID_CHANNEL**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果参数**Channel**无效（不在配置规定的范围内），**Ocu_EnableNotification**函数应上报错误**OCU_E_PARAM_INVALID_CHANNEL**并不做任何动作地返回。
 
-[SWS_Ocu_00121] 如果为**OCU**驱动启用了开发错误检测：如果通知函数是**NULL**指针，**Ocu_EnableNotification**函数应上报错误**OCU_E_NO_VALID_NOTIF**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测：如果通知函数是**NULL**指针，**Ocu_EnableNotification**函数应上报错误**OCU_E_NO_VALID_NOTIF**并不做任何动作地返回。
 
 #### 8.3.12. Ocu_GetVersionInfo
 
-[SWS_Ocu_00122] **API**函数**Ocu_GetVersionInfo**的定义
-
-| 服务名称 | Ocu_GetVersionInfo |
-|---|---|
-| 语法 | void Ocu_GetVersionInfo ( Std_VersionInfoType* versioninfo ) |
-| 服务 ID [十六进制] | 0x09 |
-| 同步/异步 | 同步 |
-| 可重入性 | 可重入 |
-| 参数（in） | 无 |
-| 参数（inout） | 无 |
-| 参数（out） | versioninfo：指向存储此模块版本信息位置的指针 |
-| 返回值 | 无 |
-| 描述 | 此服务返回此模块的版本信息。可通过**Ocu.h**获得 |
+**说明**: 此服务返回此模块的版本信息。可通过**Ocu.h**获得。本服务为同步调用，可重入。参数 versioninfo（out）：指向存储此模块版本信息位置的指针。
 
 ```C
-void Ocu_GetVersionInfo (
-  Std_VersionInfoType* versioninfo
-)
+void Ocu_GetVersionInfo ( Std_VersionInfoType* versioninfo )
 ```
 
-[SWS_Ocu_00123] **Ocu_GetVersionInfo**函数应返回此模块的版本信息。版本信息包括：
+**Ocu_GetVersionInfo**函数应返回此模块的版本信息。版本信息包括：
 
 * 模块 **ID**
 * 供应商 **ID**
 * 供应商特定版本号
 
-[SWS_Ocu_00124] **Ocu_GetVersionInfo**函数应可通过配置参数**OcuVersionInfoApi {OCU_VERSION_INFO_API}**在预编译时配置开/关。
+**Ocu_GetVersionInfo**函数应可通过配置参数**OcuVersionInfoApi {OCU_VERSION_INFO_API}**在预编译时配置开/关。
 
-[SWS_Ocu_00125] 如果**Ocu_GetVersionInfo**的调用者和被调用者的源代码都可用；**OCU**驱动应将**Ocu_GetVersionInfo**实现为定义在模块头文件中的宏。
+如果**Ocu_GetVersionInfo**的调用者和被调用者的源代码都可用；**OCU**驱动应将**Ocu_GetVersionInfo**实现为定义在模块头文件中的宏。
 
-[SWS_Ocu_00126] 如果为**OCU**驱动启用了开发错误检测，且参数**versioninfo**是空指针，**Ocu_GetVersionInfo**函数应上报开发错误**OCU_E_PARAM_POINTER**并不做任何动作地返回。
+如果为**OCU**驱动启用了开发错误检测，且参数**versioninfo**是空指针，**Ocu_GetVersionInfo**函数应上报开发错误**OCU_E_PARAM_POINTER**并不做任何动作地返回。
 
 ### 8.4. 回调通知
 
@@ -941,8 +744,6 @@ void Ocu_GetVersionInfo (
 
 本节定义为满足模块可选功能而需要的所有接口。
 
-[SWS_Ocu_00127] **Ocu**模块中可选接口的定义
-
 | API 函数 | 头文件 | 描述 |
 |---|---|---|
 | Det_ReportError | Det.h | 上报开发错误的服务 |
@@ -951,56 +752,43 @@ void Ocu_GetVersionInfo (
 
 本节列出目标函数可配置的所有接口。目标函数通常是回调函数。此类接口的名称不固定，因为它们是可配置的。
 
-[SWS_Ocu_00128] 可配置接口**Ocu_Notification_<Channel>**的定义
-
-| 服务名称 | Ocu_Notification_<Channel> |
-|---|---|
-| 语法 | void Ocu_Notification_<Channel> ( void ) |
-| 同步/异步 | 同步 |
-| 可重入性 | 此**API**调用的可重入性取决于用户代码 |
-| 参数（in） | 无 |
-| 参数（inout） | 无 |
-| 参数（out） | 无 |
-| 返回值 | 无 |
-| 描述 | 当关联通道上发生比较匹配时调用此通知函数。可通过 <none> 获得 |
+**说明**: 当关联通道上发生比较匹配时调用此通知函数。可通过 <none> 获得。本服务为同步调用；此**API**调用的可重入性取决于用户代码。
 
 ```C
-void Ocu_Notification_<Channel> (
-  void
-)
+void Ocu_Notification_<Channel> ( void )
 ```
 
 通知原型**Ocu_Notification_<channel#>**是上层提供、由用户实现的用于通知回调的函数。
 
-[SWS_Ocu_00129] 如果通道 <Channel#> 上发生比较匹配，**OCU**驱动应根据该通道最近一次**Ocu_EnableNotification**/**Ocu_DisableNotification**的调用情况，调用函数**Ocu_Notification_<Channel#>**。
+如果通道 <Channel#> 上发生比较匹配，**OCU**驱动应根据该通道最近一次**Ocu_EnableNotification**/**Ocu_DisableNotification**的调用情况，调用函数**Ocu_Notification_<Channel#>**。
 
-[SWS_Ocu_00130] **OCU**驱动应复位（如果硬件需要）与通知**Ocu_Notification_<Channel#>**关联的中断标志。
+**OCU**驱动应复位（如果硬件需要）与通知**Ocu_Notification_<Channel#>**关联的中断标志。
 
-[SWS_Ocu_00132] 如果为通知回调配置了**NULL**指针，则不应执行任何回调。
+如果为通知回调配置了**NULL**指针，则不应执行任何回调。
 
-[SWS_Ocu_00133] 当通知机制被禁用时，**OCU**驱动不应发出任何通知。
+当通知机制被禁用时，**OCU**驱动不应发出任何通知。
 
 ## 9. 时序图
 
 ### 9.1. 初始化
 
-![Figure9-1](Figure9-1.png)
+![Figure9-1.png](Figure9-1.png)
 
 ### 9.2. 反初始化
 
-![Figure9-2](Figure9-2.png)
+![Figure9-2.png](Figure9-2.png)
 
 ### 9.3. 使用 Ocu 通知
 
-![Figure9-3](Figure9-3.png)
+![Figure9-3.png](Figure9-3.png)
 
 ### 9.4. Ocu_SetPinState
 
-![Figure9-4](Figure9-4.png)
+![Figure9-4.png](Figure9-4.png)
 
 ### 9.5. Ocu_SetPinAction
 
-![Figure9-5](Figure9-5.png)
+![Figure9-5.png](Figure9-5.png)
 
 ### 9.6. 设置新的比较阈值
 
@@ -1075,7 +863,7 @@ Post Build - 规定配置参数是否应为配置类 Post Build
 
 以下章节总结所有配置参数。参数的详细含义见第 7 章和第 8 章。
 
-[SWS_Ocu_00170] **OCU**模块应拒绝具有实现不支持的分区映射的配置。
+**OCU**模块应拒绝具有实现不支持的分区映射的配置。
 
 #### 10.2.1. Ocu
 
@@ -1095,11 +883,11 @@ Post Build - 规定配置参数是否应为配置类 Post Build
 | OcuConfigurationOfOptionalApis | 1 | 可选**API**的配置。 |
 | OcuGeneral | 1 | 此容器包含**OCU**驱动的模块范围配置参数。 |
 
-![Figure10-1](Figure10-1.png)
+![Figure10-1.png](Figure10-1.png)
 
 #### 10.2.2. OcuGeneral
 
-[SWS_Ocu_CONSTR_00001] **OcuKernelEcucPartitionRef**引用的**ECUC**分区应是**OcuEcucPartitionRef**引用的**ECUC**分区的子集。
+**OcuKernelEcucPartitionRef**引用的**ECUC**分区应是**OcuEcucPartitionRef**引用的**ECUC**分区的子集。
 
 **SWS 条目** [ECUC_Ocu_00137]
 
@@ -1153,9 +941,9 @@ Post Build - 规定配置参数是否应为配置类 Post Build
 
 无包含的容器
 
-[SWS_Ocu_CONSTR_00004] 如果**OcuEcucPartitionRef**引用一个或多个**ECUC**分区，则**OcuKernelEcucPartitionRef**的多重性应为一，并同样引用这些**ECUC**分区之一。
+如果**OcuEcucPartitionRef**引用一个或多个**ECUC**分区，则**OcuKernelEcucPartitionRef**的多重性应为一，并同样引用这些**ECUC**分区之一。
 
-![Figure10-2](Figure10-2.png)
+![Figure10-2.png](Figure10-2.png)
 
 #### 10.2.3. OcuConfigurationOfOptionalApis
 
@@ -1274,7 +1062,7 @@ Post Build - 规定配置参数是否应为配置类 Post Build
 
 无包含的容器
 
-![Figure10-3](Figure10-3.png)
+![Figure10-3.png](Figure10-3.png)
 
 #### 10.2.4. OcuConfigSet
 
@@ -1497,11 +1285,11 @@ Post Build - 规定配置参数是否应为配置类 Post Build
 
 无包含的容器
 
-[SWS_Ocu_CONSTR_00002] **OcuChannelEcucPartitionRef**引用的**ECUC**分区应是**OcuEcucPartitionRef**引用的**ECUC**分区的子集。
+**OcuChannelEcucPartitionRef**引用的**ECUC**分区应是**OcuEcucPartitionRef**引用的**ECUC**分区的子集。
 
-[SWS_Ocu_CONSTR_00005] 如果**OcuEcucPartitionRef**引用一个或多个**ECUC**分区，则**OcuKernelEcucPartitionRef**的多重性应为一，并同样引用这些**ECUC**分区之一。
+如果**OcuEcucPartitionRef**引用一个或多个**ECUC**分区，则**OcuKernelEcucPartitionRef**的多重性应为一，并同样引用这些**ECUC**分区之一。
 
-![Figure10-4](Figure10-4.png)
+![Figure10-4.png](Figure10-4.png)
 
 #### 10.2.6. OcuHWSpecificSettings
 
@@ -1546,19 +1334,19 @@ Post Build - 规定配置参数是否应为配置类 Post Build
 
 无包含的容器
 
-![Figure10-5](Figure10-5.png)
+![Figure10-5.png](Figure10-5.png)
 
 ### 10.3. 发布信息
 
 详情请参阅**SWS_BSWGeneral**中第 10.3 章 "Published Information"。
 
-[SWS_Ocu_00169] 基础软件模块通用要求 [5] 中**SRS_BSW_00402**所要求的标准化公共发布参数，应在此模块的头文件中发布，并需要在**BSW**模块描述中提供。相应的模块缩写可在基础软件模块列表 [6] 中找到。
+基础软件模块通用要求 [5] 中**SRS_BSW_00402**所要求的标准化公共发布参数，应在此模块的头文件中发布，并需要在**BSW**模块描述中提供。相应的模块缩写可在基础软件模块列表 [6] 中找到。
 
 其他模块特定的发布参数（如适用）列在附录第 A 章中。
 
 ## A. 不适用的需求
 
-[SWS_Ocu_NA_00156] 这些要求不适用于本规范。
+这些要求不适用于本规范。
 
 (SRS_BSW_00159, SRS_BSW_00167, SRS_BSW_00170, SRS_BSW_00383, SRS_BSW_00375, SRS_BSW_00416, SRS_BSW_00168, SRS_BSW_00423, SRS_BSW_00424, SRS_BSW_00425, SRS_BSW_00426, SRS_BSW_00427, SRS_BSW_00428, SRS_BSW_00429, SRS_BSW_00432, SRS_BSW_00433, SRS_BSW_00417, SRS_BSW_00161, SRS_BSW_00162, SRS_BSW_00005, SRS_BSW_00415, SRS_BSW_00164, SRS_BSW_00325, SRS_BSW_00342, SRS_BSW_00160, SRS_BSW_00007, SRS_BSW_00300, SRS_BSW_00413, SRS_BSW_00347, SRS_BSW_00305, SRS_BSW_00307, SRS_BSW_00310, SRS_BSW_00373, SRS_BSW_00327, SRS_BSW_00335, SRS_BSW_00350, SRS_BSW_00408, SRS_BSW_00410, SRS_BSW_00348, SRS_BSW_00353, SRS_BSW_00301, SRS_BSW_00302, SRS_BSW_00328, SRS_BSW_00312, SRS_BSW_00006, SRS_BSW_00357, SRS_BSW_00377, SRS_BSW_00304, SRS_BSW_00378, SRS_BSW_00306, SRS_BSW_00308, SRS_BSW_00309, SRS_BSW_00358, SRS_BSW_00414, SRS_BSW_00359, SRS_BSW_00360, SRS_BSW_00330, SRS_BSW_00331, SRS_BSW_00009, SRS_BSW_00401, SRS_BSW_00172, SRS_BSW_00010, SRS_BSW_00333, SRS_BSW_00003, SRS_BSW_00341, SRS_BSW_00334, SRS_SPAL_12267, SRS_SPAL_12461, SRS_SPAL_12462, SRS_SPAL_12463, SRS_SPAL_12068, SRS_SPAL_12069, SRS_SPAL_12169, SRS_SPAL_12075, SRS_SPAL_12064, SRS_SPAL_12067, SRS_SPAL_12077, SRS_SPAL_12078, SRS_SPAL_12092, SRS_SPAL_12265)
 
@@ -1574,3 +1362,11 @@ Post Build - 规定配置参数是否应为配置类 Post Build
 | B.1.4 | R23-11 中新增的约束：无 |
 | B.1.5 | R23-11 中变更的约束：无 |
 | B.1.6 | R23-11 中删除的约束：无 |
+
+<section id="wechat">
+
+<h4>微信扫一扫，获取更多及时资讯</h4>
+
+<img src="wechat.png" alt="微信扫一扫"/>
+
+</section>

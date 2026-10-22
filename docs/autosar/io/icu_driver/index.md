@@ -2,8 +2,6 @@
 title: "AUTOSAR ICU Driver（输入捕获驱动）"
 ---
 
-
-
 ## 1. 简介和功能概述
 
 本文介绍了**AUTOSAR**基础软件模块**ICU**驱动程序的功能、**API**和配置。
@@ -572,9 +570,9 @@ void Icu_SignalNotification_<Channel> ( void )
 void Icu_TimestampNotification_<Channel> ( void )
 ```
 
-## 8. 序列图
+## 8. 时序图
 
-> 以下序列图按 **AUTOSAR_SWS_ICUDriver**（R22-11）第 9 章绘制，参与方包括**ICU**用户（如软件组件）、**Icu**驱动、**EcuM**（**ECU**状态管理器）、**ICU**输入通道、硬件/应用缓冲区及中断服务程序（**ISR**）。
+> 以下时序图按 **AUTOSAR_SWS_ICUDriver**（R22-11）第 9 章绘制，参与方包括**ICU**用户（如软件组件）、**Icu**驱动、**EcuM**（**ECU**状态管理器）、**ICU**输入通道、硬件/应用缓冲区及中断服务程序（**ISR**）。
 
 ### 8.1. Icu_Init
 
@@ -605,7 +603,7 @@ sequenceDiagram
 
 ### 8.3. Check Wakeup Events
 
-**ICU**的唤醒事件检查序列图见**ECU**状态管理器规范 [10]（AUTOSAR_SWS_ECUStateManager.pdf），本文档不重复给出。
+**ICU**的唤醒事件检查时序图见**ECU**状态管理器规范 [10]（AUTOSAR_SWS_ECUStateManager.pdf），本文档不重复给出。
 
 ### 8.4. Icu_SetMode
 
