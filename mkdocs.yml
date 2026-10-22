@@ -52,9 +52,10 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js
   - javascripts/mermaid-init.js
 
-# 写作标准文档仅入库存档，不发布到站点
+# 写作标准与进度文件仅入库存档，不发布到站点
 exclude_docs: |
   autosar/STANDARD.md
+  autosar/TODO.md
 
 markdown_extensions:
   - attr_list
