@@ -146,76 +146,9 @@ AUTOSAR_CP_TR_BSWModuleList
 
 Ocu.c 应包含 Ocu.h 和 Det.h。
 
-## 6. 需求可追溯性
+## 6. 功能规格
 
-下表引用 <CITATIONS_OF_CONTRIBUTED_DOCUMENTS> 中规定的要求，并链接到这些要求的满足情况。
-
-请注意，如果特定要求的 "Satisfied by" 列为空，则表示本文档不满足该要求。
-
-| 要求 | 描述 | Satisfied by |
-|---|---|---|
-| [SRS_BSW_00003] | 所有软件模块应提供版本和标识信息 | [SWS_Ocu_00169] |
-| [SRS_BSW_00004] | 所有基础 **SW** 模块应对所有导入包含文件的版本执行预处理检查 | [SWS_Ocu_00012] |
-| [SRS_BSW_00101] | 基础软件模块应能在单独的初始化函数中初始化变量和硬件 | [SWS_Ocu_00035] [SWS_Ocu_00036] |
-| [SRS_BSW_00171] | **ECU**中不需要的基础 **SW** 组件的可选功能应在预编译时可配置 | [SWS_Ocu_00049] [SWS_Ocu_00070] [SWS_Ocu_00079] [SWS_Ocu_00088] [SWS_Ocu_00094] [SWS_Ocu_00103] [SWS_Ocu_00111] [SWS_Ocu_00118] |
-| [SRS_BSW_00312] | 共享代码应可重入 | [SWS_Ocu_00053] [SWS_Ocu_00061] [SWS_Ocu_00068] [SWS_Ocu_00078] [SWS_Ocu_00087] [SWS_Ocu_00093] [SWS_Ocu_00102] [SWS_Ocu_00110] [SWS_Ocu_00117] |
-| [SRS_BSW_00314] | 所有内部驱动模块应将中断帧定义与服务例程分离 | [SWS_Ocu_00001] |
-| [SRS_BSW_00318] | 每个**AUTOSAR**基础软件模块文件应在头文件中提供版本号 | [SWS_Ocu_00169] |
-| [SRS_BSW_00323] | 所有**AUTOSAR**基础软件模块应检查传入**API**参数的有效性 | [SWS_Ocu_00016] [SWS_Ocu_00056] [SWS_Ocu_00064] [SWS_Ocu_00071] [SWS_Ocu_00072] [SWS_Ocu_00073] [SWS_Ocu_00075] [SWS_Ocu_00080] [SWS_Ocu_00081] [SWS_Ocu_00082] [SWS_Ocu_00089] [SWS_Ocu_00096] [SWS_Ocu_00105] [SWS_Ocu_00113] [SWS_Ocu_00114] [SWS_Ocu_00120] [SWS_Ocu_00121] [SWS_Ocu_00126] |
-| [SRS_BSW_00327] | 错误值命名约定 | [SWS_Ocu_00016] |
-| [SRS_BSW_00331] | 所有基础软件模块应严格分离错误和状态信息 | [SWS_Ocu_00016] |
-| [SRS_BSW_00336] | 基础 **SW** 模块应能关闭 | [SWS_Ocu_00046] |
-| [SRS_BSW_00337] | 开发错误分类 | [SWS_Ocu_00015] [SWS_Ocu_00016] [SWS_Ocu_00017] [SWS_Ocu_00127] [SWS_Ocu_91001] |
-| [SRS_BSW_00339] | 生产相关错误状态的报告 | [SWS_Ocu_00017] [SWS_Ocu_00019] [SWS_Ocu_00020] [SWS_Ocu_00021] |
-| [SRS_BSW_00343] | 基础 **SW** 模块的规范和配置的时间单位最好为物理时间单位 | [SWS_Ocu_00013] |
-| [SRS_BSW_00344] | **BSW**模块应支持链接时间配置 | [SWS_Ocu_00035] [SWS_Ocu_00036] |
-| [SRS_BSW_00345] | **BSW**模块应支持预编译配置 | [SWS_Ocu_00035] |
-| [SRS_BSW_00346] | 所有**AUTOSAR**基础软件模块应至少提供一组基本模块文件 | [SWS_Ocu_00001] |
-| [SRS_BSW_00357] | 应为**API**调用的成功/失败定义标准返回类型 | [SWS_Ocu_00027] |
-| [SRS_BSW_00359] | 所有**AUTOSAR**基础软件模块回调函数应尽量避免非 **void** 的返回类型 | [SWS_Ocu_00128] |
-| [SRS_BSW_00360] | **AUTOSAR**基础软件模块回调函数允许带参数 | [SWS_Ocu_00128] |
-| [SRS_BSW_00369] | 所有**AUTOSAR**基础软件模块不得通过**API**返回特定开发错误码 | [SWS_Ocu_00018] [SWS_Ocu_00019] [SWS_Ocu_00127] |
-| [SRS_BSW_00377] | 基础软件模块可以返回模块特定类型 | [SWS_Ocu_00138] |
-| [SRS_BSW_00385] | 列出可能的错误通知 | [SWS_Ocu_00016] [SWS_Ocu_00017] [SWS_Ocu_91001] [SWS_Ocu_91002] |
-| [SRS_BSW_00386] | **BSW**应规定检测错误的配置和条件 | [SWS_Ocu_00016] [SWS_Ocu_00017] [SWS_Ocu_00018] [SWS_Ocu_00019] [SWS_Ocu_00043] [SWS_Ocu_00050] [SWS_Ocu_00056] [SWS_Ocu_00057] [SWS_Ocu_00064] [SWS_Ocu_00065] [SWS_Ocu_00071] [SWS_Ocu_00072] [SWS_Ocu_00073] [SWS_Ocu_00074] [SWS_Ocu_00075] [SWS_Ocu_00080] [SWS_Ocu_00081] [SWS_Ocu_00082] [SWS_Ocu_00083] [SWS_Ocu_00089] [SWS_Ocu_00090] [SWS_Ocu_00095] [SWS_Ocu_00096] [SWS_Ocu_00104] [SWS_Ocu_00105] [SWS_Ocu_00112] [SWS_Ocu_00113] [SWS_Ocu_00114] [SWS_Ocu_00119] [SWS_Ocu_00120] [SWS_Ocu_00121] [SWS_Ocu_00126] |
-| [SRS_BSW_00402] | 每个模块应提供版本信息 | [SWS_Ocu_00169] |
-| [SRS_BSW_00404] | **BSW**模块应支持构建后配置 | [SWS_Ocu_00036] |
-| [SRS_BSW_00405] | **BSW**模块应支持多配置集 | [SWS_Ocu_00033] [SWS_Ocu_00035] |
-| [SRS_BSW_00406] | 表示**BSW**模块是否已初始化的静态状态变量应在调用任何**BSW**模块**API**之前以值 0 初始化 | [SWS_Ocu_00043] [SWS_Ocu_00050] [SWS_Ocu_00055] [SWS_Ocu_00057] [SWS_Ocu_00065] [SWS_Ocu_00074] [SWS_Ocu_00083] [SWS_Ocu_00090] [SWS_Ocu_00095] [SWS_Ocu_00104] [SWS_Ocu_00112] [SWS_Ocu_00119] |
-| [SRS_BSW_00407] | 每个**BSW**模块应提供读取专用模块实现版本信息的功能 | [SWS_Ocu_00122] [SWS_Ocu_00123] [SWS_Ocu_00124] |
-| [SRS_BSW_00411] | 所有**AUTOSAR**基础软件模块应对**API**的存在性启用/禁用应用命名规则 | [SWS_Ocu_00124] |
-| [SRS_BSW_00415] | 专为一个模块提供的接口应分离到专用头文件中 | [SWS_Ocu_00006] [SWS_Ocu_00024] |
-| [SRS_BSW_00419] | 如果预编译时间配置参数实现为 **const**，应放置到单独的 **c** 文件中 | [SWS_Ocu_00001] |
-| [SRS_BSW_00438] | 配置数据应在结构中定义 | [SWS_Ocu_00033] |
-| [SRS_BSW_00447] | 标准化实现**AUTOSAR**服务的**BSW**模块的包含文件结构 | [SWS_Ocu_00006] |
-| [SRS_BSW_00456] | 应定义头文件以协调**BSW**模块 | [SWS_Ocu_00006] |
-| [SRS_BSW_00482] | 获取版本信息功能应遵循命名规则 | [SWS_Ocu_00027] [SWS_Ocu_00122] |
-| [SRS_BSW_00487] | 模块初始化的错误应遵循命名规则 | [SWS_Ocu_91001] |
-| [SRS_Ocu_00002] | **OCU**驱动应支持以下每通道基本静态配置 | [SWS_Ocu_00028] [SWS_Ocu_00033] [SWS_Ocu_00133] |
-| [SRS_Ocu_00005] | **OCU**驱动应提供反初始化**OCU**驱动的功能 | [SWS_Ocu_00044] [SWS_Ocu_00045] [SWS_Ocu_00048] |
-| [SRS_Ocu_00006] | **OCU**驱动应在计数器当前值与阈值匹配时为**OCU**通道提供通知 | [SWS_Ocu_00133] |
-| [SRS_Ocu_00007] | **OCU**驱动应允许在运行时启用/禁用**OCU**通道的通知 | [SWS_Ocu_00108] [SWS_Ocu_00109] [SWS_Ocu_00115] [SWS_Ocu_00116] [SWS_Ocu_00133] |
-| [SRS_Ocu_00008] | **OCU**驱动应提供启动和停止通道的服务 | [SWS_Ocu_00051] [SWS_Ocu_00052] [SWS_Ocu_00058] [SWS_Ocu_00059] [SWS_Ocu_00060] |
-| [SRS_Ocu_00009] | **OCU**驱动应提供读取计数器值的同步服务 | [SWS_Ocu_00085] [SWS_Ocu_00086] |
-| [SRS_Ocu_00010] | **OCU**驱动应提供修改通道阈值值的服务 | [SWS_Ocu_00091] [SWS_Ocu_00092] [SWS_Ocu_00100] [SWS_Ocu_00101] |
-| [SRS_Ocu_00011] | **OCU**驱动应提供同步服务以设置附加到通道的输出引脚的状态 | [SWS_Ocu_00031] [SWS_Ocu_00066] [SWS_Ocu_00067] |
-| [SRS_Ocu_00012] | **OCU**驱动应提供服务以设置比较匹配时附加到通道的引脚将执行的动作 | [SWS_Ocu_00032] [SWS_Ocu_00076] [SWS_Ocu_00077] |
-| [SRS_SPAL_00157] | **AUTOSAR**基础软件的所有驱动和处理程序应实现驱动和处理程序的通知机制 | [SWS_Ocu_00128] [SWS_Ocu_00129] |
-| [SRS_SPAL_12056] | 所有驱动模块应允许通知机制的静态配置 | [SWS_Ocu_00132] |
-| [SRS_SPAL_12057] | 所有驱动模块应实现初始化接口 | [SWS_Ocu_00036] [SWS_Ocu_00037] [SWS_Ocu_00039] [SWS_Ocu_00040] |
-| [SRS_SPAL_12063] | 所有驱动模块应只支持原始值模式 | [SWS_Ocu_00029] |
-| [SRS_SPAL_12125] | 所有驱动模块应只初始化配置的资源 | [SWS_Ocu_00010] [SWS_Ocu_00011] [SWS_Ocu_00037] [SWS_Ocu_00136] |
-| [SRS_SPAL_12129] | **ISR**应负责复位中断标志并调用相应的通知函数 | [SWS_Ocu_00130] |
-| [SRS_SPAL_12163] | 所有驱动模块应实现反初始化接口 | [SWS_Ocu_00046] [SWS_Ocu_00047] |
-| [SRS_SPAL_12263] | 所有驱动模块的实现应允许在链接时间配置特定模块参数类型 | [SWS_Ocu_00033] |
-| [SRS_SPAL_12448] | 所有驱动模块在开发错误检测后应具有特定行为 | [SWS_Ocu_00043] [SWS_Ocu_00050] [SWS_Ocu_00055] [SWS_Ocu_00056] [SWS_Ocu_00057] [SWS_Ocu_00064] [SWS_Ocu_00065] [SWS_Ocu_00071] [SWS_Ocu_00072] [SWS_Ocu_00073] [SWS_Ocu_00074] [SWS_Ocu_00075] [SWS_Ocu_00080] [SWS_Ocu_00081] [SWS_Ocu_00082] [SWS_Ocu_00083] [SWS_Ocu_00089] [SWS_Ocu_00090] [SWS_Ocu_00095] [SWS_Ocu_00096] [SWS_Ocu_00104] [SWS_Ocu_00105] [SWS_Ocu_00112] [SWS_Ocu_00113] [SWS_Ocu_00114] [SWS_Ocu_00119] [SWS_Ocu_00120] [SWS_Ocu_00121] [SWS_Ocu_00126] |
-| [SRS_SPAL_12461] | 关于控制器寄存器初始化的特定规则应适用于所有驱动实现 | [SWS_Ocu_00038] |
-
-表 6.1：需求追踪（**Requirements Tracing**）
-
-## 7. 功能规格
-
-### 7.1. 一般行为
+### 6.1. 一般行为
 
 **OCU**通道由两个主要元素组成：自由运行计数器和比较阈值。这些元素共同作用以生成用户所需的动作。自由运行计数器可以由硬件或软件提供，而阈值是由用户设置的值。然后每次计数器增加一个单位时，将阈值与计数器的当前内容进行比较。
 
@@ -243,9 +176,9 @@ Ocu.c 应包含 Ocu.h 和 Det.h。
 
 根据硬件架构，与**Ocu**通道绑定的硬件可能由**OCU**单元或微控制器中的任何其他定时器模块管理。
 
-### 7.2. 版本检查
+### 6.2. 版本检查
 
-#### 7.2.1. 背景和原理
+#### 6.2.1. 背景和原理
 
 应避免不兼容文件的集成。最低实现是在 **.c** 文件内检查头文件的版本（**.c** 和 **.h** 文件的版本号必须相同）。
 
@@ -258,17 +191,17 @@ Ocu.c 应包含 Ocu.h 和 Det.h。
 
 其中 <MODULENAME> 是提供**OCU**驱动所包含头文件的外部（其他）模块的模块短名。如果这些值与期望值不一致，应报告错误。
 
-### 7.3. 时间单位 Tick
+### 6.3. 时间单位 Tick
 
-#### 7.3.1. 背景和原理
+#### 6.3.1. 背景和原理
 
 要从寄存器值获取时间，需要知道振荡器频率、预分频器以及整个系统时钟的一些其他设置。由于这些设置是在**MCU**和/或其他模块中完成的，因此无法计算此类时间。因此，时间与 tick 之间的转换应是上层的一部分。
 
-#### 7.3.2. 需求
+#### 6.3.2. 需求
 
 **OCU**驱动**API**服务中使用的所有时间单位都应为 **tick**。
 
-### 7.4. 错误分类
+### 6.4. 错误分类
 
 基础软件模块通用规范 [2] 的 "**Error Handling**" 一节详细描述了基础软件的错误处理。最重要的是，它构成了一个包含**BSW**模块中可能发生的五种错误类型的分类方案。
 
@@ -276,7 +209,7 @@ Ocu.c 应包含 Ocu.h 和 Det.h。
 
 以下错误应由**OCU**驱动根据其构建版本（开发/生产模式）检测。
 
-#### 7.4.1. 开发错误
+#### 6.4.1. 开发错误
 
 开发错误值的类型为 **uint8**。
 
@@ -294,25 +227,25 @@ Ocu.c 应包含 Ocu.h 和 Det.h。
 
 由于特定实现和/或特定硬件属性而检测到的其他错误，应添加到**OCU**器件特定实现规范中。分类和枚举应与上面列出的错误兼容。
 
-#### 7.4.2. 运行时错误
+#### 6.4.2. 运行时错误
 
 | 错误类型 | 相关错误码 | 错误值 |
 |---|---|---|
 | 对处于**RUNNING**状态的通道调用**API Ocu_StartChannel()** | OCU_E_BUSY | 0x09 |
 
-#### 7.4.3. 瞬态故障
+#### 6.4.3. 瞬态故障
 
 无瞬态故障。
 
-#### 7.4.4. 生产错误
+#### 6.4.4. 生产错误
 
 无生产错误。
 
-#### 7.4.5. 扩展生产错误
+#### 6.4.5. 扩展生产错误
 
 无扩展生产错误。
 
-### 7.5. 错误检测
+### 6.5. 错误检测
 
 开发错误的检测可在预编译时配置（开/关）。开关**OcuDevErrorDetectApi**应激活或停用所有开发错误的检测。
 
@@ -320,11 +253,11 @@ Ocu.c 应包含 Ocu.h 和 Det.h。
 
 生产错误的检测不能关闭。
 
-### 7.6. 错误通知
+### 6.6. 错误通知
 
 如果设置了预处理器开关**OcuDevErrorDetectApi**，检测到的开发错误应通过默认错误跟踪器（**DET**）的服务**Det_ReportError**上报。
 
-### 7.7. 调试支持
+### 6.7. 调试支持
 
 每个需由**AUTOSAR**调试访问的变量应定义为全局变量。
 
@@ -334,9 +267,9 @@ Ocu.c 应包含 Ocu.h 和 Det.h。
 
 可用于调试的变量应在相应的**OCU**驱动描述中说明。
 
-## 8. API规范
+## 7. API规范
 
-### 8.1. 导入的类型
+### 7.1. 导入的类型
 
 本章列出从以下文件包含的所有类型。
 
@@ -345,17 +278,17 @@ Ocu.c 应包含 Ocu.h 和 Det.h。
 | Std | Std_Types.h | Std_ReturnType |
 | Std | Std_Types.h | Std_VersionInfoType |
 
-### 8.2. 类型定义
+### 7.2. 类型定义
 
-#### 8.2.1. Ocu_ChannelType
+#### 7.2.1. Ocu_ChannelType
 
 类型，派生自 **uint**。范围为：8 / 16 / 32 位 - 这是实现特定的，但并非类型内的所有值都有效。应选择该类型以在特定微控制器平台上获得最高效的实现。**OCU**通道的数字标识符。可通过**Ocu.h**获得。
 
-#### 8.2.2. Ocu_ValueType
+#### 7.2.2. Ocu_ValueType
 
 类型，派生自 **uint**。范围为：8 / 16 / 32 位 - 这是实现特定的，但并非类型内的所有值都有效。应选择该类型以在特定微控制器平台上获得最高效的实现。用于读取计数器和写入阈值值的类型（以 tick 数为单位）。可通过**Ocu.h**获得。
 
-#### 8.2.3. Ocu_PinStateType
+#### 7.2.3. Ocu_PinStateType
 
 枚举类型，取值范围：
 
@@ -364,7 +297,7 @@ Ocu.c 应包含 Ocu.h 和 Det.h。
 
 链接到**OCU**通道的引脚的输出状态。可通过**Ocu.h**获得。
 
-#### 8.2.4. Ocu_PinActionType
+#### 7.2.4. Ocu_PinActionType
 
 枚举类型，取值范围：
 
@@ -375,11 +308,11 @@ Ocu.c 应包含 Ocu.h 和 Det.h。
 
 由硬件自动执行（如果支持）的、对附加到**OCU**通道的引脚的动作。可通过**Ocu.h**获得。
 
-#### 8.2.5. Ocu_ConfigType
+#### 7.2.5. Ocu_ConfigType
 
 结构类型。硬件相关。初始化数据结构的内容是硬件特定的。这是包含**OCU**驱动初始化数据的数据结构的类型。可通过**Ocu.h**获得。
 
-#### 8.2.6. Ocu_ReturnType
+#### 7.2.6. Ocu_ReturnType
 
 枚举类型，取值范围：
 
@@ -388,9 +321,9 @@ Ocu.c 应包含 Ocu.h 和 Det.h。
 
 设置新阈值值后的返回信息。可通过**Ocu.h**获得。
 
-### 8.3. 函数定义
+### 7.3. 函数定义
 
-#### 8.3.1. Ocu_Init
+#### 7.3.1. Ocu_Init
 
 **说明**: **OCU**初始化服务。可通过**Ocu.h**获得。本服务为同步调用，不可重入。参数 ConfigPtr（in）：指向配置集的指针。
 
@@ -420,7 +353,7 @@ void Ocu_Init ( const Ocu_ConfigType* ConfigPtr )
 
 通过执行**Ocu_Init**函数重新初始化**OCU**驱动，需要事先通过执行**Ocu_DeInit**函数进行反初始化。
 
-#### 8.3.2. Ocu_DeInit
+#### 7.3.2. Ocu_DeInit
 
 **说明**: 此函数反初始化**OCU**模块。可通过**Ocu.h**获得。本服务为同步调用，不可重入。
 
@@ -446,7 +379,7 @@ void Ocu_DeInit ( void )
 
 如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_DeInit**函数应上报错误**OCU_E_UNINIT**。
 
-#### 8.3.3. Ocu_StartChannel
+#### 7.3.3. Ocu_StartChannel
 
 **说明**: 启动**OCU**通道的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**的数字标识符。返回值：**Std_ReturnType**，**E_OK** 表示通道已启动；**E_NOT_OK** 表示通道未启动。
 
@@ -466,7 +399,7 @@ Std_ReturnType Ocu_StartChannel ( Ocu_ChannelType ChannelNumber )
 
 如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_StartChannel**函数应上报错误**OCU_E_UNINIT**并不做任何动作地返回。
 
-#### 8.3.4. Ocu_StopChannel
+#### 7.3.4. Ocu_StopChannel
 
 **说明**: 停止**OCU**通道的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**的数字标识符。
 
@@ -490,7 +423,7 @@ void Ocu_StopChannel ( Ocu_ChannelType ChannelNumber )
 
 如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，**Ocu_StopChannel**函数应上报错误**OCU_E_UNINIT**并不做任何动作地返回。
 
-#### 8.3.5. Ocu_SetPinState
+#### 7.3.5. Ocu_SetPinState
 
 **说明**: 立即设置与**OCU**通道关联的引脚电平的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**的数字标识符。参数 PinState（in）：**OCU_LOW**、**OCU_HIGH**。
 
@@ -518,7 +451,7 @@ void Ocu_SetPinState ( Ocu_ChannelType ChannelNumber, Ocu_PinStateType PinState 
 
 如果为**OCU**驱动启用了开发错误检测：如果通道处于**RUNNING**状态，**Ocu_SetPinState**函数应上报错误**OCU_E_PARAM_INVALID_STATE**并不做任何动作地返回。
 
-#### 8.3.6. Ocu_SetPinAction
+#### 7.3.6. Ocu_SetPinAction
 
 **说明**: 告知驱动程序比较匹配时硬件（如果支持）应自动执行什么动作的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**的数字标识符。参数 PinAction（in）：**OCU_SET_LOW**、**OCU_SET_HIGH**、**OCU_TOGGLE**、**OCU_DISABLE**。
 
@@ -542,7 +475,7 @@ void Ocu_SetPinAction ( Ocu_ChannelType ChannelNumber, Ocu_PinActionType PinActi
 
 如果引脚与通道关联；比较匹配时应对此引脚执行相关动作。
 
-#### 8.3.7. Ocu_GetCounter
+#### 7.3.7. Ocu_GetCounter
 
 **说明**: 读取计数器当前值的服务。可通过**Ocu.h**获得。本服务为同步调用，可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。返回值：**Ocu_ValueType**，以 tick 为单位的计数器内容。
 
@@ -560,7 +493,7 @@ Ocu_ValueType Ocu_GetCounter ( Ocu_ChannelType ChannelNumber )
 
 如果为**OCU**驱动启用了开发错误检测：如果驱动未初始化，则**Ocu_GetCounterValue**函数应上报错误**OCU_E_UNINIT**并返回值 "**0**"。
 
-#### 8.3.8. Ocu_SetAbsoluteThreshold
+#### 7.3.8. Ocu_SetAbsoluteThreshold
 
 **说明**: 使用绝对输入数据设置通道阈值值的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。参数 ReferenceValue（in）：由上层给出的值，用作确定是否在函数退出之前调用通知的基础。参数 AbsoluteValue（in）：与计数器内容比较的值。此值以 tick 为单位。返回值：**Ocu_ReturnType**，告知调用者设置新阈值值后，比较匹配是否将在当前参考区间内发生（或已经发生）。
 
@@ -622,7 +555,7 @@ Ocu_ReturnType Ocu_SetAbsoluteThreshold (
 
 在实际设置新阈值值时，上次调用此**API**期间写入的先前阈值值不再产生比较匹配。
 
-#### 8.3.9. Ocu_SetRelativeThreshold
+#### 7.3.9. Ocu_SetRelativeThreshold
 
 **说明**: 相对于计数器当前值设置通道阈值值的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。参数 RelativeValue（in）：用于计算新阈值的值。返回值：**Ocu_ReturnType**，告知调用者设置新阈值值后，比较匹配是否将在当前参考区间内发生（或已经发生）。
 
@@ -664,7 +597,7 @@ NewThresholdValue = ReadValue + RelativeValue;
 
 如果为**OCU**驱动启用了开发错误检测：如果参数**ChannelNumber**无效（不在配置规定的范围内），**Ocu_SetRelativeThreshold**函数应上报错误**OCU_E_PARAM_INVALID_CHANNEL**并不做任何动作地返回。
 
-#### 8.3.10. Ocu_DisableNotification
+#### 7.3.10. Ocu_DisableNotification
 
 **说明**: 此服务用于禁用来自**OCU**通道的通知。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。
 
@@ -684,7 +617,7 @@ void Ocu_DisableNotification ( Ocu_ChannelType ChannelNumber )
 
 如果为**OCU**驱动启用了开发错误检测：如果通知函数是**NULL**指针，**Ocu_DisableNotification**函数应上报错误**OCU_E_NO_VALID_NOTIF**并不做任何动作地返回。
 
-#### 8.3.11. Ocu_EnableNotification
+#### 7.3.11. Ocu_EnableNotification
 
 **说明**: 此服务用于启用来自**OCU**通道的通知。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。
 
@@ -704,7 +637,7 @@ void Ocu_EnableNotification ( Ocu_ChannelType ChannelNumber )
 
 如果为**OCU**驱动启用了开发错误检测：如果通知函数是**NULL**指针，**Ocu_EnableNotification**函数应上报错误**OCU_E_NO_VALID_NOTIF**并不做任何动作地返回。
 
-#### 8.3.12. Ocu_GetVersionInfo
+#### 7.3.12. Ocu_GetVersionInfo
 
 **说明**: 此服务返回此模块的版本信息。可通过**Ocu.h**获得。本服务为同步调用，可重入。参数 versioninfo（out）：指向存储此模块版本信息位置的指针。
 
@@ -724,23 +657,23 @@ void Ocu_GetVersionInfo ( Std_VersionInfoType* versioninfo )
 
 如果为**OCU**驱动启用了开发错误检测，且参数**versioninfo**是空指针，**Ocu_GetVersionInfo**函数应上报开发错误**OCU_E_PARAM_POINTER**并不做任何动作地返回。
 
-### 8.4. 回调通知
+### 7.4. 回调通知
 
 由于**OCU**驱动位于最低架构层的模块，它不为更低层模块提供任何回调函数。
 
-### 8.5. 调度函数
+### 7.5. 调度函数
 
 **OCU**驱动仅提供同步服务，因此不需要任何调度函数。
 
-### 8.6. 预期接口
+### 7.6. 预期接口
 
 本章列出需要从其他模块获得的所有接口。
 
-#### 8.6.1. 强制接口
+#### 7.6.1. 强制接口
 
 本模块不需要任何强制接口。
 
-#### 8.6.2. 可选接口
+#### 7.6.2. 可选接口
 
 本节定义为满足模块可选功能而需要的所有接口。
 
@@ -748,7 +681,7 @@ void Ocu_GetVersionInfo ( Std_VersionInfoType* versioninfo )
 |---|---|---|
 | Det_ReportError | Det.h | 上报开发错误的服务 |
 
-#### 8.6.3. 可配置接口
+#### 7.6.3. 可配置接口
 
 本节列出目标函数可配置的所有接口。目标函数通常是回调函数。此类接口的名称不固定，因为它们是可配置的。
 
@@ -767,601 +700,6 @@ void Ocu_Notification_<Channel> ( void )
 如果为通知回调配置了**NULL**指针，则不应执行任何回调。
 
 当通知机制被禁用时，**OCU**驱动不应发出任何通知。
-
-## 9. 时序图
-
-### 9.1. 初始化
-
-![Figure9-1.png](Figure9-1.png)
-
-### 9.2. 反初始化
-
-![Figure9-2.png](Figure9-2.png)
-
-### 9.3. 使用 Ocu 通知
-
-![Figure9-3.png](Figure9-3.png)
-
-### 9.4. Ocu_SetPinState
-
-![Figure9-4.png](Figure9-4.png)
-
-### 9.5. Ocu_SetPinAction
-
-![Figure9-5.png](Figure9-5.png)
-
-### 9.6. 设置新的比较阈值
-
-参见 8.3.8（**Ocu_SetAbsoluteThreshold**）和 8.3.9（**Ocu_SetRelativeThreshold**）章节。
-
-## 10. 配置规范
-
-总体而言，本章定义配置参数以及它们到容器的聚集。为了支持规范，第 10.1 章描述基础知识。它还规定了一个你应使用的参数规范模板（表格）。我们打算将第 10.1 章保留在规范中以保证理解。
-
-第 10.2 章规定模块**OCU**驱动程序的结构（容器）和参数。
-
-第 10.3 章规定模块**OCU**驱动程序的发布信息。
-
-### 10.1. 如何阅读本章
-
-详情请参阅**SWS_BSWGeneral**中第 10.1 章 "Introduction to configuration specification"。
-
-除本节外，强烈建议阅读以下文档：
-
-* **AUTOSAR**分层软件架构 [4]
-* **AUTOSAR ECU**配置规范 [3]
-
-本文档详细描述**AUTOSAR**配置方法论和**AUTOSAR**配置元模型。
-
-以下只是该主题的简要概述，它不会取代**ECU**配置规范文档。
-
-#### 10.1.1. 配置和配置参数
-
-配置参数定义模块实现通用部分（一个或多个）的可变性。这意味着，在系统和/或**ECU**配置期间，只有通用或可配置的模块实现可以适应所使用的环境（软件/硬件）。
-
-参数的配置可以在软件过程的不同时间点实现：编译时间之前、链接时间之前或构建时间之后。在下文中，应使用术语 "配置类"（配置类）（参数的）来指代特定的配置时间点。
-
-#### 10.1.2. 容器
-
-容器构造配置参数的集合。这意味着：
-
-* 所有配置参数都保存在容器中。
-* （子）容器可以引用（子）容器。可以为这些引用指定多重性。多重性随后定义所包含参数的可能实例数量。
-
-#### 10.1.3. 配置参数规范模板
-
-以下表格由三个部分组成：
-
-* 常规部分
-* 配置参数部分
-* 包含/引用容器部分
-
-预编译时间 - 规定配置参数是否应为配置类预编译时间
-
-| 标签 | 描述 |
-|---|---|
-| x | 配置参数应为配置类预编译时间。 |
-| -- | 配置参数绝不应为配置类预编译时间。 |
-
-链接时间 - 规定配置参数是否应为配置类链接时间
-
-| 标签 | 描述 |
-|---|---|
-| x | 配置参数应为配置类链接时间。 |
-| -- | 配置参数绝不应为配置类链接时间。 |
-
-Post Build - 规定配置参数是否应为配置类 Post Build
-
-| 标签 | 描述 |
-|---|---|
-| x | 配置参数应为配置类 Post Build，且不需要特定实现。 |
-| L 可加载 | 配置参数应为配置类 Post Build，且**ECU**中只存在一组配置参数集。 |
-| M 多个 | 配置参数应为配置类 Post Build，并通过向模块初始化函数传递专用指针从多组参数中选出。 |
-| -- | 配置参数绝不应为配置类 Post Build。 |
-
-### 10.2. 容器和配置参数
-
-以下章节总结所有配置参数。参数的详细含义见第 7 章和第 8 章。
-
-**OCU**模块应拒绝具有实现不支持的分区映射的配置。
-
-#### 10.2.1. Ocu
-
-**SWS 条目** [ECUC_Ocu_00136]
-
-| 模块名称 | Ocu |
-|---|---|
-| 描述 | **Ocu**（**Output Compare Unit**，输出比较单元）模块的配置。 |
-| Post-Build 变体支持 | true |
-| 支持的配置变体 | VARIANT-POST-BUILD, VARIANT-PRE-COMPILE |
-
-包含的容器
-
-| 容器名称 | 多重性 | 范围/依赖 |
-|---|---|---|
-| OcuConfigSet | 1 | 此容器是配置集的基础，包含配置的**OCU**通道。这样，可以为构建后过程定义不同的配置集。 |
-| OcuConfigurationOfOptionalApis | 1 | 可选**API**的配置。 |
-| OcuGeneral | 1 | 此容器包含**OCU**驱动的模块范围配置参数。 |
-
-![Figure10-1.png](Figure10-1.png)
-
-#### 10.2.2. OcuGeneral
-
-**OcuKernelEcucPartitionRef**引用的**ECUC**分区应是**OcuEcucPartitionRef**引用的**ECUC**分区的子集。
-
-**SWS 条目** [ECUC_Ocu_00137]
-
-| 容器名称 | OcuGeneral |
-|---|---|
-| 父容器 | Ocu |
-| 描述 | 此容器包含**OCU**驱动的模块范围配置参数。 |
-
-配置参数
-
-**SWS 条目** [ECUC_Ocu_00138]
-
-| 参数名称 | OcuDevErrorDetect |
-|---|---|
-| 父容器 | OcuGeneral |
-| 描述 | 打开或关闭开发错误检测和通知。• true：启用检测和通知。• false：禁用检测和通知。 |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | false |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Ocu_00167]
-
-| 参数名称 | OcuEcucPartitionRef |
-|---|---|
-| 父容器 | OcuGeneral |
-| 描述 | 将**OCU**驱动映射到零个或多个**ECUC**分区，以使驱动**API**在相应分区中可用。 |
-| 多重性 | 0..* |
-| 类型 | 对 EcucPartition 的引用 |
-| Post-Build 变体多重性 | true |
-| Post-Build 变体值 | true |
-| 多重性配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: ECU |
-
-**SWS 条目** [ECUC_Ocu_00168]
-
-| 参数名称 | OcuKernelEcucPartitionRef |
-|---|---|
-| 父容器 | OcuGeneral |
-| 描述 | 将**OCU**内核映射到零个或一个**ECUC**分区，以将驱动内核分配给某个核心。所引用的**ECUC**分区是**OCU**驱动所映射到的**ECUC**分区的子集。 |
-| 多重性 | 0..1 |
-| 类型 | 对 EcucPartition 的引用 |
-| Post-Build 变体多重性 | true |
-| Post-Build 变体值 | true |
-| 多重性配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: ECU |
-
-无包含的容器
-
-如果**OcuEcucPartitionRef**引用一个或多个**ECUC**分区，则**OcuKernelEcucPartitionRef**的多重性应为一，并同样引用这些**ECUC**分区之一。
-
-![Figure10-2.png](Figure10-2.png)
-
-#### 10.2.3. OcuConfigurationOfOptionalApis
-
-**SWS 条目** [ECUC_Ocu_00139]
-
-| 容器名称 | OcuConfigurationOfOptionalApis |
-|---|---|
-| 父容器 | Ocu |
-| 描述 | 可选**API**的配置。 |
-
-配置参数
-
-**SWS 条目** [ECUC_Ocu_00140]
-
-| 参数名称 | OcuDeInitApi |
-|---|---|
-| 父容器 | OcuConfigurationOfOptionalApis |
-| 描述 | 从代码中添加/移除服务**Ocu_DeInit()**。 |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Ocu_00141]
-
-| 参数名称 | OcuGetCounterApi |
-|---|---|
-| 父容器 | OcuConfigurationOfOptionalApis |
-| 描述 | 从代码中添加/移除服务**Ocu_GetCounter()**。 |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Ocu_00142]
-
-| 参数名称 | OcuNotificationSupported |
-|---|---|
-| 父容器 | OcuConfigurationOfOptionalApis |
-| 描述 | 从代码中添加/移除服务**Ocu_EnableNotification()**和**Ocu_DisableNotification()**。 |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Ocu_00143]
-
-| 参数名称 | OcuSetAbsoluteThresholdApi |
-|---|---|
-| 父容器 | OcuConfigurationOfOptionalApis |
-| 描述 | 从代码中添加/移除服务**Ocu_SetAbsoluteThreshold()**。 |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Ocu_00144]
-
-| 参数名称 | OcuSetPinActionApi |
-|---|---|
-| 父容器 | OcuConfigurationOfOptionalApis |
-| 描述 | 从代码中添加/移除服务**Ocu_SetPinAction()**。 |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Ocu_00145]
-
-| 参数名称 | OcuSetPinStateApi |
-|---|---|
-| 父容器 | OcuConfigurationOfOptionalApis |
-| 描述 | 从代码中添加/移除服务**Ocu_SetPinState()**。 |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Ocu_00146]
-
-| 参数名称 | OcuSetRelativeThresholdApi |
-|---|---|
-| 父容器 | OcuConfigurationOfOptionalApis |
-| 描述 | 从代码中添加/移除服务**Ocu_SetRelativeThreshold()**。 |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Ocu_00147]
-
-| 参数名称 | OcuVersionInfoApi |
-|---|---|
-| 父容器 | OcuConfigurationOfOptionalApis |
-| 描述 | 指示支持**Ocu_GetVersionInfo()**的开关。 |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | false |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-无包含的容器
-
-![Figure10-3.png](Figure10-3.png)
-
-#### 10.2.4. OcuConfigSet
-
-**SWS 条目** [ECUC_Ocu_00148]
-
-| 容器名称 | OcuConfigSet |
-|---|---|
-| 父容器 | Ocu |
-| 描述 | 此容器是配置集的基础，包含配置的**OCU**通道。这样，可以为构建后过程定义不同的配置集。 |
-
-配置参数
-
-**SWS 条目** [ECUC_Ocu_00149]
-
-| 参数名称 | OcuCountdirection |
-|---|---|
-| 父容器 | OcuConfigSet |
-| 描述 | 此参数指示整个**OCU**驱动的计数方向。 |
-| 多重性 | 0..1 |
-| 类型 | EcucEnumerationParamDef |
-| 范围 | **OCU_DOWNCOUNTING**：**OCU**计数器将从最大值向最小值计数。<br>**OCU_UPCOUNTING**：**OCU**计数器将从最小值向最大值计数。 |
-| 默认值 | OCU_UPCOUNTING |
-| Post-Build 变体多重性 | true |
-| Post-Build 变体值 | true |
-| 多重性配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 值配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 范围/依赖 | scope: local |
-
-包含的容器
-
-| 容器名称 | 多重性 | 范围/依赖 |
-|---|---|---|
-| OcuChannel | 1..* | 单个**OCU**通道的配置。 |
-| OcuHWSpecificSettings | 0..* | 此容器包含**Ocu**特定参数，用于选择时钟源并在硬件支持时设置可选预分频器。实现由供应商特定定义。 |
-
-#### 10.2.5. OcuChannel
-
-**SWS 条目** [ECUC_Ocu_00150]
-
-| 容器名称 | OcuChannel |
-|---|---|
-| 父容器 | OcuConfigSet |
-| 描述 | 单个**OCU**通道的配置。 |
-
-配置参数
-
-**SWS 条目** [ECUC_Ocu_00151]
-
-| 参数名称 | OcuAssignedHardwareChannel |
-|---|---|
-| 父容器 | OcuChannel |
-| 描述 | 分配给此逻辑通道的物理硬件通道。 |
-| 多重性 | 1 |
-| 类型 | EcucIntegerParamDef |
-| 范围 | 0 .. 255 |
-| 默认值 | -- |
-| Post-Build 变体值 | true |
-| 值配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Ocu_00152]
-
-| 参数名称 | OcuChannelId |
-|---|---|
-| 父容器 | OcuChannel |
-| 描述 | **OCU**通道的通道 **ID**。此值将分配给从**OcuChannel**容器短名派生的符号名。它定义通道到物理**OCU**硬件通道的分配。 |
-| 多重性 | 1 |
-| 类型 | EcucIntegerParamDef（为此参数生成符号名） |
-| 范围 | 0 .. 65535 |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Ocu_00153]
-
-| 参数名称 | OcuChannelTickDuration |
-|---|---|
-| 父容器 | OcuChannel |
-| 描述 | 指定使通道计数器增加一（即一个计数器 tick）所需的输入时钟边沿（上升沿或下降沿）数量。取值范围取决于所使用的硬件，并非所有值都相关。 |
-| 多重性 | 1 |
-| 类型 | EcucIntegerParamDef |
-| 范围 | 1 .. 32768 |
-| 默认值 | -- |
-| Post-Build 变体值 | true |
-| 值配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Ocu_00154]
-
-| 参数名称 | OcuDefaultThreshold |
-|---|---|
-| 父容器 | OcuChannel |
-| 描述 | 用于初始化的比较阈值。 |
-| 多重性 | 1 |
-| 类型 | EcucIntegerParamDef |
-| 范围 | 0 .. 4294967295 |
-| 默认值 | -- |
-| Post-Build 变体值 | true |
-| 值配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Ocu_00155]
-
-| 参数名称 | OcuHardwareTriggeredAdc |
-|---|---|
-| 父容器 | OcuChannel |
-| 描述 | 此参数用于在硬件支持时允许**OCU**通道在比较匹配时触发**ADC**通道。参数值表示要触发的**ADC**物理通道。 |
-| 多重性 | 0..1 |
-| 类型 | EcucIntegerParamDef |
-| 范围 | 0 .. 255 |
-| 默认值 | 0 |
-| Post-Build 变体多重性 | true |
-| Post-Build 变体值 | true |
-| 多重性配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 值配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Ocu_00156]
-
-| 参数名称 | OcuHardwareTriggeredDMA |
-|---|---|
-| 父容器 | OcuChannel |
-| 描述 | 此参数用于在硬件支持时允许**OCU**通道在比较匹配时触发**DMA**通道。参数值表示要触发的**DMA**物理通道。 |
-| 多重性 | 0..1 |
-| 类型 | EcucIntegerParamDef |
-| 范围 | 0 .. 255 |
-| 默认值 | 0 |
-| Post-Build 变体多重性 | true |
-| Post-Build 变体值 | true |
-| 多重性配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 值配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Ocu_00157]
-
-| 参数名称 | OcuMaxCounterValue |
-|---|---|
-| 父容器 | OcuChannel |
-| 描述 | **OCU**通道计数器能够计数的最大 tick 值。 |
-| 多重性 | 1 |
-| 类型 | EcucIntegerParamDef |
-| 范围 | 1 .. 4294967295 |
-| 默认值 | -- |
-| Post-Build 变体值 | true |
-| 值配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Ocu_00158]
-
-| 参数名称 | OcuNotification |
-|---|---|
-| 父容器 | OcuChannel |
-| 描述 | 指向回调函数的函数指针的定义。 |
-| 多重性 | 0..1 |
-| 类型 | EcucFunctionNameDef |
-| 默认值 | -- |
-| 正则表达式 | -- |
-| Post-Build 变体多重性 | true |
-| Post-Build 变体值 | true |
-| 多重性配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 值配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Ocu_00160]
-
-| 参数名称 | OcuOutputPinDefaultState |
-|---|---|
-| 父容器 | OcuChannel |
-| 描述 | 参数**OcuOutputPinDefaultState**表示与通道关联的引脚在初始化后应被设置的状态。 |
-| 多重性 | 0..1 |
-| 类型 | EcucEnumerationParamDef |
-| 范围 | **OCU_HIGH**：请求时**OCU**通道输出引脚将被设置为高（3 或 5 V）。<br>**OCU_LOW**：请求时**OCU**通道输出引脚将被设置为低（0 V）。 |
-| Post-Build 变体多重性 | true |
-| Post-Build 变体值 | true |
-| 多重性配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 值配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Ocu_00159]
-
-| 参数名称 | OcuOutputPinUsed |
-|---|---|
-| 父容器 | OcuChannel |
-| 描述 | 关于此通道上输出引脚使用情况的信息。true：通道使用输出引脚。false：通道不使用输出引脚。 |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Ocu_00169]
-
-| 参数名称 | OcuChannelEcucPartitionRef |
-|---|---|
-| 父容器 | OcuChannel |
-| 描述 | 将**OCU**通道映射到零个或多个**ECUC**分区，以限制对此通道的访问。所引用的**ECUC**分区是**OCU**驱动所映射到的**ECUC**分区的子集。 |
-| 多重性 | 0..* |
-| 类型 | 对 EcucPartition 的引用 |
-| Post-Build 变体多重性 | true |
-| Post-Build 变体值 | true |
-| 多重性配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: ECU |
-
-**SWS 条目** [ECUC_Ocu_00170]
-
-| 参数名称 | OcuHWSpecificSettingsRef |
-|---|---|
-| 父容器 | OcuChannel |
-| 描述 | 对**OcuChannel**所使用的**OcuHWSpecificSettings**的引用。 |
-| 多重性 | 0..1 |
-| 类型 | 对 OcuHWSpecificSettings 的引用 |
-| Post-Build 变体多重性 | true |
-| Post-Build 变体值 | true |
-| 多重性配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-无包含的容器
-
-**OcuChannelEcucPartitionRef**引用的**ECUC**分区应是**OcuEcucPartitionRef**引用的**ECUC**分区的子集。
-
-如果**OcuEcucPartitionRef**引用一个或多个**ECUC**分区，则**OcuKernelEcucPartitionRef**的多重性应为一，并同样引用这些**ECUC**分区之一。
-
-![Figure10-4.png](Figure10-4.png)
-
-#### 10.2.6. OcuHWSpecificSettings
-
-**SWS 条目** [ECUC_Ocu_00164]
-
-| 容器名称 | OcuHWSpecificSettings |
-|---|---|
-| 父容器 | OcuConfigSet |
-| 描述 | 此容器包含**Ocu**特定参数，用于选择时钟源并在硬件支持时设置可选预分频器。实现由供应商特定定义。 |
-
-配置参数
-
-**SWS 条目** [ECUC_Ocu_00165]
-
-| 参数名称 | OcuClockSource |
-|---|---|
-| 父容器 | OcuHWSpecificSettings |
-| 描述 | **OCU**驱动特定的时钟输入，可在硬件提供不同时钟源时静态配置以选择不同的时钟源。枚举字面量由供应商特定定义。 |
-| 多重性 | 0..1 |
-| 类型 | EcucEnumerationParamDef |
-| 范围 | -- |
-| Post-Build 变体多重性 | true |
-| Post-Build 变体值 | true |
-| 多重性配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 值配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Ocu_00166]
-
-| 参数名称 | OcuPrescale |
-|---|---|
-| 父容器 | OcuHWSpecificSettings |
-| 描述 | 可选的**OCU**驱动特定时钟预分频因子，如果硬件支持。实现由供应商特定定义。 |
-| 多重性 | 0..1 |
-| 类型 | EcucEnumerationParamDef |
-| 范围 | -- |
-| Post-Build 变体多重性 | true |
-| Post-Build 变体值 | true |
-| 多重性配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 值配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 范围/依赖 | scope: local |
-
-无包含的容器
-
-![Figure10-5.png](Figure10-5.png)
-
-### 10.3. 发布信息
-
-详情请参阅**SWS_BSWGeneral**中第 10.3 章 "Published Information"。
-
-基础软件模块通用要求 [5] 中**SRS_BSW_00402**所要求的标准化公共发布参数，应在此模块的头文件中发布，并需要在**BSW**模块描述中提供。相应的模块缩写可在基础软件模块列表 [6] 中找到。
-
-其他模块特定的发布参数（如适用）列在附录第 A 章中。
-
-## A. 不适用的需求
-
-这些要求不适用于本规范。
-
-(SRS_BSW_00159, SRS_BSW_00167, SRS_BSW_00170, SRS_BSW_00383, SRS_BSW_00375, SRS_BSW_00416, SRS_BSW_00168, SRS_BSW_00423, SRS_BSW_00424, SRS_BSW_00425, SRS_BSW_00426, SRS_BSW_00427, SRS_BSW_00428, SRS_BSW_00429, SRS_BSW_00432, SRS_BSW_00433, SRS_BSW_00417, SRS_BSW_00161, SRS_BSW_00162, SRS_BSW_00005, SRS_BSW_00415, SRS_BSW_00164, SRS_BSW_00325, SRS_BSW_00342, SRS_BSW_00160, SRS_BSW_00007, SRS_BSW_00300, SRS_BSW_00413, SRS_BSW_00347, SRS_BSW_00305, SRS_BSW_00307, SRS_BSW_00310, SRS_BSW_00373, SRS_BSW_00327, SRS_BSW_00335, SRS_BSW_00350, SRS_BSW_00408, SRS_BSW_00410, SRS_BSW_00348, SRS_BSW_00353, SRS_BSW_00301, SRS_BSW_00302, SRS_BSW_00328, SRS_BSW_00312, SRS_BSW_00006, SRS_BSW_00357, SRS_BSW_00377, SRS_BSW_00304, SRS_BSW_00378, SRS_BSW_00306, SRS_BSW_00308, SRS_BSW_00309, SRS_BSW_00358, SRS_BSW_00414, SRS_BSW_00359, SRS_BSW_00360, SRS_BSW_00330, SRS_BSW_00331, SRS_BSW_00009, SRS_BSW_00401, SRS_BSW_00172, SRS_BSW_00010, SRS_BSW_00333, SRS_BSW_00003, SRS_BSW_00341, SRS_BSW_00334, SRS_SPAL_12267, SRS_SPAL_12461, SRS_SPAL_12462, SRS_SPAL_12463, SRS_SPAL_12068, SRS_SPAL_12069, SRS_SPAL_12169, SRS_SPAL_12075, SRS_SPAL_12064, SRS_SPAL_12067, SRS_SPAL_12077, SRS_SPAL_12078, SRS_SPAL_12092, SRS_SPAL_12265)
-
-## B. AUTOSAR 可追溯项的变更历史
-
-### B.1. 根据 AUTOSAR 发布 R23-11 的本文档可追溯项历史
-
-| 章节 | 内容 |
-|---|---|
-| B.1.1 | R23-11 中新增的规范项：无 |
-| B.1.2 | R23-11 中变更的规范项：无 |
-| B.1.3 | R23-11 中删除的规范项：无 |
-| B.1.4 | R23-11 中新增的约束：无 |
-| B.1.5 | R23-11 中变更的约束：无 |
-| B.1.6 | R23-11 中删除的约束：无 |
 
 <section id="wechat">
 
