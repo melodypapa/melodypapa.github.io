@@ -146,13 +146,9 @@ DDS模块使用PDU路由器（参考文献[5]）作为中间层模块。
 
 为了支持安全功能，**Dds** 需使用 **CRC库**（参考文献[9]）。**Dds** 需要 **Crc_CalculateCRC32** 或 **Crc_CalculateCRC64** API 来计算要添加到要发送的消息或检查接收的消息的 **CRC**。
 
-## 6. 需求追溯
+## 6. 功能规格
 
-略
-
-## 7. 功能规格
-
-### 7.1. 概述
+### 6.1. 概述
 
 **DDS模块** 实现了 **DDS** 通信的所有接口逻辑（实体管理、QoS等）和 **DDSI-RTPS** 标准层（参考文献[6]）。它是一个成熟的中间件，由以下的功能组成：
 
@@ -179,7 +175,7 @@ DDS模块使用PDU路由器（参考文献[5]）作为中间层模块。
 
 ![Figure_7_1](Figure_7_1.png)
 
-#### 7.1.1. QoS管理
+#### 6.1.1. QoS管理
 
 **DDS BSW** 可以支持 **QoS** 策略的子集（甚至是空的）。没有强制实施的 QoS。实际支持哪种 **QoS** 策略是特定于供应商的。
 
@@ -197,7 +193,7 @@ DDS模块使用PDU路由器（参考文献[5]）作为中间层模块。
 
 ![Figure_7_2](Figure_7_2.png)
 
-#### 7.1.2. Security Mechanisms
+#### 6.1.2. Security Mechanisms
 
 Opening up a communication path between AP and CP, and even between CP and non-AUTOSAR platforms, could involve security risks, so it may require the usage of some security mechanisms.
 
@@ -213,7 +209,7 @@ For the above mentioned purposes, the DDS Cryptographic Plugin is used, which of
 
 ![Figure_7_3](Figure_7_3.png)
 
-#### 7.1.3. Safety Mechanisms
+#### 6.1.3. Safety Mechanisms
 
 According to ISO 26262, there is a set of faults that can be considered on communication link between senders and receivers executed in different software partitions or
 ECUs.
@@ -229,13 +225,13 @@ The following is a list of possible faults, as defined in [12], to be addressed 
 * **Corruption of information, asymmetric information sent from a sender to multiple receivers (effective only for resulting invalid CRC):** rtpsMessageChecksum under HeaderExtension submessage ([RTPS 2.5 or higher]). In absence of this feature, [11] also provides message integrity verification built into its message authentication protocol. For CRC calculation, the AUTOSAR CRC library is used.
 * **Notification of these fault conditions errors:** In case of any communication errors or faults (even timeout errors), the Dds BSW should notify the Det module. Specific safety-related error codes are detailed into subsection 7.2.3
 
-### 7.2. General Requirements
+### 6.2. General Requirements
 
 Inside the same DDS Domain Participant, topic names shall be unique according to [1].
 
 Topic name uniqueness: During validation of the configuration, a validation error shall be raised if different DdsTopics belonging to the same DdsDomainParticipant share the same name.
 
-#### 7.2.1. Communication requirements
+#### 6.2.1. Communication requirements
 
 ###### 7.2.1.1. Serialization requirements
 
