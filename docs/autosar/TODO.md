@@ -15,6 +15,7 @@
 - [ ] IO 分区 ✅ 文章标题用词对齐（DIO 已于 2026-10-24 完成，同类偏差仍在）：port/pwm 4.2「对汽车域的适用性」、adc/icu 4.2「适用车型域」→「汽车域的适用性」；ocu 3.1「输入文档与相关标准和规范」→「输入文件」
 - [ ] 4.2「适用于汽车领域」→「汽车域的适用性」（STANDARD.md 2026-10-24 定名）：bswm、ecu_state_manager、crypto_driver、crypto_service_manager、memory_access、data_distribution；「对汽车领域的适用性」：ethernet_driver、can_interface；「汽车领域的适用性」：nvram_manager
 - [ ] *Scheduled functions* 统一为「调度函数」（STANDARD.md 2026-10-24 定名）：bswm 7.3 / can_network_management 7.3「周期函数」、crypto_service_manager 7.12「Scheduled 函数」
+- [ ] 缩略语章统一为「粗体术语 + 引用块」+ 行集对齐（STANDARD.md §1，2026-10-24 普查 20:6）：格式 — dio/port/pwm/ocu/lin_driver/udp_network_management 6 篇现为 GFM 表格；行集（对照 R23-11 源逐行核对）— adc 补回 API/HW/SW、恢复 DEM→DET 源序、Conversion Mode 合回一条（18 行→16 条），ocu 补 MCU 行（14→13），lin_driver 缺 14 行（40→26），udp_network_management 缺 14 行（26→12）；icu 已核对一致（12:12）
 - [ ] 卫生修复：udp_network_management 微信页脚改 `<h4>`；dem 编号断档；`data_distribution service` 目录改名去空格；SoAd/mirror 改 index.md 布局；`timimg_extension/indx.md` 拼写（需同改 nav）
 
 **补广（新文章）**

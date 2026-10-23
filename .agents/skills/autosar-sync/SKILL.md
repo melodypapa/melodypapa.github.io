@@ -123,6 +123,18 @@ at the top of `TODO.md` instead.
 - Pseudo-code listings stay verbatim in code fences (reconstruct the
   PDF-extraction garbling into readable formatting); prose is translated;
   figures are omitted.
+- **缩略语章（ch.2）格式**：源文档的缩略语表改排为「粗体术语行 + `>` 引用块释义」——
+  **不保留 GFM 表格**，即使源是表格且每条释义都只有一行（站内曾 20 篇引用块 vs 6 篇表格
+  分裂，表格在长释义下不可读）。细则：
+  - 术语行 = 源 Abbreviation/Acronym 单元格**逐字加粗**，含括号别名
+    （`**ADC Result Buffer**（**ADC Streaming Buffer**，**ADC Stream Buffer**）`式）；
+  - 纯缩写词的释义写 `中文全称（**English Full Name**）`；术语条目译描述句，英文术语加粗；
+    `[n]` 引用标记丢弃；源行内的 Note 译为释义内的 `**注意：**` 段；
+  - **行集与行序与源表严格一致**：一条不多不少、不拆分（源一行 *Conversion Mode* 讲两种
+    模式就译成一条）、不重排、不删"看起来太通用"的行（adc_driver 曾丢 API/HW/SW 三条、
+    DET/DEM 对调、一行拆二，✅ 评级下无人察觉）；
+  - 源有散文导语句则译出保留，"the following table"式措辞随格式改为"以下"；源只有表题
+    （Table 2.1）则不造导语句。
 - Chapter numbering stays stable; when insertion forces a renumber, grep for
   inbound anchor links first and fix them in the same commit.
 
@@ -151,6 +163,9 @@ before every commit, the second is evidence for the Step 7 confirmation.
    -relative), removed pages cleaned in the same commit; renamed or renumbered
    headings — grep inbound `](…#…)` links site-wide and fix them in the same
    commit.
+5. 缩略语章：`sed -n '/^## 2\. 缩略语/,/^## 3\./p' <article>` 切片内 `^| ` 行数
+   必须为 0（禁表格）；`^\*\*[^*]+\*\*$` 术语行条数 == 源表数据行数（逐行核对行集与
+   行序 — 该章在长会话中最易漂移：adc_driver 曾 18 源行译成 16 条而通过所有检查）。
 
 **Phase B — automation-blind checks** (presented at the Step 7 gate as
 evidence, not asserted):
@@ -229,3 +244,4 @@ open.
 | Batch-checking todo items at the end of the run | The list shows progress the work doesn't have; an unverified item hides until the PR review or never | Tick each item in the file the moment its verification passes (Step 4) |
 | Finishing on the strict build alone — or opening the PR before the Step 7 gate | The build is blind to coverage, fidelity and wording; the user reviews a PR that was never confirmed | Phase A ≠ done; present Phase A + Phase B evidence and wait for confirmation, then commit/PR (Step 7) |
 | Writing "confirmation deferred" / `确认待补` on a todo item | Creates a backlog of rows whose real state nobody knows | Capture the confirmation when given, or leave the item `[ ]` (Step 7) |
+| Letting the 缩略语 chapter drift on format or row set (2026-10-24 finding: 6 articles render it as a table, adc_driver dropped API/HW/SW + reordered DET/DEM + split Conversion Mode — 18 source rows became 16 entries, all under ✅ status) | Site-wide format split; silent content loss in the one chapter whose rows are pure lookups | Step 5 缩略语 rules; Phase A check 5 makes table-vs-blockquote and row count mechanical. Baseline tests (2026-10-24) show fresh agents comply — the drift happens in long loaded sessions, which is exactly why the check must be a grep, not judgment |
