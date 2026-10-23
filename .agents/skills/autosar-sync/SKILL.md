@@ -73,27 +73,45 @@ site convention and reading them can break the API pipeline.
 ## Step 4 — Generate the work todo list
 
 Before writing anything, turn the gap analysis into a **concrete checkbox todo
-list** and show it to the user. Two sources feed it:
+list**. Three sources feed it:
 
 - **The rule**: expand `docs/autosar/STANDARD.md` into a per-article checklist
   — 7-chapter skeleton, canonical chapter wording, no forbidden chapters, no
   requirement IDs, front-matter title only, footer pattern, nav registration.
 - **The progress**: the article's current row in `docs/autosar/TODO.md` plus
   the gap-analysis results.
+- **The decisions**: anything the user decides mid-run (a wording choice, a
+  scope cut, a source-release fallback) is appended to the file the moment it
+  is given.
 
-Emit it as checkbox items ordered by risk/effort, e.g.
-`- [ ] 补齐第 7 章 API 规范（17 个函数）`、`- [ ] 第 2 章标题改为「缩略语」`.
+**Output contract:** the todo list is the run's *first deliverable* and a
+**persistent reference document — never conversation-only**. A todo that
+lives only in chat dies with the session and takes the coverage decisions and
+mid-run user decisions with it. Write it before any translation editing, to
+`docs/autosar/sync-todo/<module>.md` for a repo run (`todo.md` alongside the
+outputs for a workspace/eval run); commit it in the same PR as the article and
+keep it after the run as the audit trail. Format, template and resume rule:
+read `references/todo-format.md`. In short:
 
-**Output contract:** the todo list is the run's *first deliverable*, emitted
-before any translation editing. For file-based work, save it as `todo.md`
-alongside the outputs (or post it to the user) and get a check-off for every
-item as it passes verification. Observed failure when this step is skipped
-(iteration-1 baseline): the agent translated end-to-end and only surfaced its
-plan afterwards, as prose — coverage decisions were never reviewable before
-the work was done. The todo list drives translation, and its final state is
-recorded in `docs/autosar/TODO.md` (Step 7). For a full-program run
-(inventory or batch sync), extend the program-level 待办清单 at the top of
-`TODO.md` instead.
+- One verifiable action per checkbox line, ordered by risk/effort
+  (`- [ ] 补齐第 7 章 API 规范（17 个函数）`, not `- [ ] 完善文章`).
+- The checkbox line is the action only; findings, evidence and decisions go on
+  a `- Note:` bullet under it — a long markup-heavy line breaks the exact-line
+  toggle, and a failed toggle then gets "recorded" out-of-band instead of in
+  the row.
+- Tick an item **in the file the moment it passes verification** — never
+  batch-check at the end, never tick because a later step re-verifies it.
+- A file for the article already exists ⇒ **resume**: take the first `[ ]`
+  item; do not re-run the gap analysis or re-ask recorded decisions.
+- All items `[x]` + the `docs/autosar/TODO.md` row updated (Step 7) = the run
+  is finished. Never declare it finished while a `[ ]` item exists.
+
+Observed failures when this contract is skipped: the iteration-1 baseline run
+translated end-to-end and only surfaced its plan afterwards, as prose —
+coverage decisions were never reviewable before the work was done; the DIO run
+(2026-10-24) posted its todo to chat and never saved the file. For a
+full-program run (inventory or batch sync), extend the program-level 待办清单
+at the top of `TODO.md` instead.
 
 ## Step 5 — Translate in place
 
@@ -108,27 +126,84 @@ recorded in `docs/autosar/TODO.md` (Step 7). For a full-program run
 - Chapter numbering stays stable; when insertion forces a renumber, grep for
   inbound anchor links first and fix them in the same commit.
 
-## Step 6 — Repo workflow
+## Step 6 — Verify (two-phase gate), then repo workflow
 
-1. `gh issue create` (tracking) → `git switch -c feature/<topic> origin/master`.
-2. Gate before every commit: `mkdocs build --strict` via the venv recipe in
-   the repo `AGENTS.md`; zero WARNINGs expected (pre-existing INFO anchor
-   notices are fine).
-3. Commit per article (`docs: translate/complete <module> from <source doc>`),
-   `Closes #N` in commit + PR body.
-4. New pages must be registered in `mkdocs.yml` nav (paths are `docs/`-relative)
+The strict build is necessary, not sufficient: it is blind to wording,
+coverage and fidelity. The gate therefore has two phases — the first is run
+before every commit, the second is evidence for the Step 7 confirmation.
+
+**Phase A — mechanical checks** (scriptable; stop on any failure):
+
+1. `mkdocs build --strict` via the venv recipe in the repo `AGENTS.md`: exit 0,
+   **zero WARNINGs** (pre-existing INFO anchor notices are fine).
+2. Heading audit: `grep '^## '` on the article equals the STANDARD.md §1
+   skeleton with §2 wording, numbered `1.`–`7.` only; `###`/`####` numbering
+   is continuous (no 断档); no `## 8.`, lettered appendix, or forbidden chapter
+   title (需求可追溯性 / 需求追踪 / 时序图 / 配置规范) anywhere. **Before renaming
+   a heading to a STANDARD.md term, grep that heading across `docs/autosar`** —
+   if the standard and the site majority disagree, it is a user decision
+   (record it; update STANDARD.md in the same PR), not a silent rename.
+3. Hygiene greps: no `^# ` in the body; no requirement IDs
+   (`\[[A-Z][A-Za-z]*_[A-Za-z0-9]*_[0-9]+\]`) and no `{DRAFT}`; a WeChat
+   footer, if present, is `<section id="wechat">` + `<h4>`, never a markdown
+   heading.
+4. Nav and anchors: new pages registered in `mkdocs.yml` (paths `docs/`
+   -relative), removed pages cleaned in the same commit; renamed or renumbered
+   headings — grep inbound `](…#…)` links site-wide and fix them in the same
+   commit.
+
+**Phase B — automation-blind checks** (presented at the Step 7 gate as
+evidence, not asserted):
+
+- Coverage map: every translatable source `##` section ↔ an article section;
+  the forbidden source chapters listed as deliberate omissions.
+- Fidelity: doubtful passages verified against the **SWS** (not SRS);
+  pseudo-code verbatim in fences; figures omitted or local PNGs only.
+- Scope discipline: existing translated content untouched, gaps filled in
+  place, chapter numbering stable.
+- Decisions applied: every mid-run user decision in the todo file's 决策记录 is
+  reflected in the article (and in STANDARD.md when a canonical term changed).
+
+**Repo workflow:**
+
+1. `gh issue create` (tracking) → `git switch -c feature/<topic> origin/master`
+   — **before the first edit**, so every change lands on the branch.
+2. Commit per article (`docs: translate/complete <module> from <source doc>`),
+   `Closes #N` in commit + PR body, naming the source release used. The PR is
+   opened only after the Step 7 confirmation.
+3. New pages must be registered in `mkdocs.yml` nav (paths are `docs/`-relative)
    or the strict build fails. Removal of pages requires nav cleanup in the
    same commit.
 
-## Step 7 — Maintain the progress file
+## Step 7 — Confirm, then maintain the progress file
 
-Every sync run ends by updating `docs/autosar/TODO.md` in the same PR: flip the
-touched article's status, refresh its source-release note, and update the
-`最后更新` date. Format spec and status definitions: read
-`references/progress-file.md`. The TODO file is the running work queue for the
-whole translation program — coverage questions should be answered from it (or
-by regenerating it) rather than by re-inventing an inventory. If it has drifted
-badly from reality, regenerate the affected sections with a fresh gap analysis.
+**Confirmation gate — before the final commit and the PR.** Present to the
+user, in one message: the todo file's current state (every item and its
+note), the Phase A results, the Phase B coverage map and deviations, and the
+proposed `docs/autosar/TODO.md` status row with its source-release note. Wait
+for explicit confirmation. Passing Phase A alone never finishes a run — the
+gate exists precisely for what the build cannot see. A decision the user
+already gave mid-run settles *that item*, not the gate. On any objection: fix,
+re-run Phase A, re-present. Never write `确认待补` / "confirmation deferred" in
+the todo file — capture the confirmation when it is given, or keep the item
+open.
+
+**After confirmation, finish in this order:**
+
+1. Update `docs/autosar/TODO.md` in the same PR: flip the touched article's
+   status, refresh its source-release note, update the `最后更新` date. Format
+   and status definitions: `references/progress-file.md`. The TODO file is the
+   running work queue for the whole translation program — coverage questions
+   are answered from it (or by regenerating it), never by re-inventing an
+   inventory; if it has drifted badly, regenerate the affected sections from a
+   fresh gap analysis.
+2. Commit (article + todo file + TODO.md), push, open the PR, then record the
+   commit hash and PR link on the todo file's 收尾 note (an immediate follow-up
+   commit is fine). No item is `[x]` before its verification passed; no item
+   stays `[ ]` past this point.
+3. Report and stop: changes, decisions, deviations, PR link. All items `[x]` =
+   run finished. Anything still `[ ]` → say exactly what remains; never report
+   the run as finished with an open item.
 
 ## Repository quirks that burn you
 
@@ -150,3 +225,7 @@ badly from reality, regenerate the affected sections with a fresh gap analysis.
 | Flagging STANDARD.md-forbidden chapters as "missing" | False work items on compliant articles | Step 3 compliance rule: omissions the standard mandates are compliance |
 | Taking the SRS wording as ground truth | "Fixing" faithful SWS translations into errors | Step 4 + source-resolution.md |
 | Renaming a heading to STANDARD.md's listed term when most of the site uses a different one (DIO run: STANDARD listed 周期函数, 7 articles used 调度函数 — user kept 调度函数) | Churn in the wrong direction; the standard itself was stale | Before aligning wording, `grep` the heading across `docs/autosar`; if STANDARD.md and the site majority disagree, put the choice in the todo list as a user decision and update STANDARD.md in the same PR |
+| Posting the todo list to chat instead of writing the todo file (DIO run, 2026-10-24) | The run's decisions and tick state die with the session; nothing to resume from, nothing to audit | Step 4 output contract + `references/todo-format.md` — the file is the todo, chat is a copy |
+| Batch-checking todo items at the end of the run | The list shows progress the work doesn't have; an unverified item hides until the PR review or never | Tick each item in the file the moment its verification passes (Step 4) |
+| Finishing on the strict build alone — or opening the PR before the Step 7 gate | The build is blind to coverage, fidelity and wording; the user reviews a PR that was never confirmed | Phase A ≠ done; present Phase A + Phase B evidence and wait for confirmation, then commit/PR (Step 7) |
+| Writing "confirmation deferred" / `确认待补` on a todo item | Creates a backlog of rows whose real state nobody knows | Capture the confirmation when given, or leave the item `[ ]` (Step 7) |

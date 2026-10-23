@@ -56,6 +56,7 @@ extra_javascript:
 exclude_docs: |
   autosar/STANDARD.md
   autosar/TODO.md
+  autosar/sync-todo/
 
 markdown_extensions:
   - attr_list

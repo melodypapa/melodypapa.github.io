@@ -40,20 +40,26 @@ build (`exclude_docs` in `mkdocs.yml`), and is maintained by this skill.
 ## Work todo lists (per-run)
 
 Besides the persistent status sections, the skill generates an **actionable
-checkbox todo list** for every run (Step 4 of SKILL.md). Program-level pending
-work lives in the `## 待办清单` section at the top of `TODO.md` as `- [ ]`
-items; per-article work todos for the current run are presented to the user
-and ticked off as items pass verification.
+checkbox todo list** for every run (Step 4 of SKILL.md), written to a
+**persistent per-run file** — `docs/autosar/sync-todo/<module>.md` for a repo
+run, `todo.md` alongside the outputs for a workspace run — never only to chat.
+Format, template, resume and tick rules: `references/todo-format.md`.
+Program-level pending work lives in the `## 待办清单` section at the top of
+`TODO.md` as `- [ ]` items.
 
 Rules for todo items:
 
 - One verifiable action per item (`补齐第 7 章 API 规范（17 个函数）`, not
   `完善文章`).
 - Derive items from three sources: STANDARD.md rule checklist, the article's
-  current row in this file, and the fresh gap analysis.
+  current row in this file, and the fresh gap analysis — plus mid-run user
+  decisions, appended to the file's 决策记录 when given.
 - Ticked items in `## 待办清单` get removed (or archived) once the
   corresponding status row has been updated — a work item is done only when
   its status row says so.
+- The two files are linked: a status row flips (Step 7) only after the run's
+  todo file has every item `[x]` and the Step 7 user confirmation was given;
+  the finished todo file is kept as the evidence behind the row.
 
 ## Status definitions
 
