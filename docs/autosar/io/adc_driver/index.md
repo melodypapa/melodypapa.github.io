@@ -132,54 +132,9 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 **PORT**模块主要负责配置**ADC**模块使用的端口引脚。包括：模拟输入引脚（**analogue input pin**）和外部触发引脚（**external trigger pin**）。
 
-## 6. 需求可追溯性
+## 6. 功能规格
 
-本章列出**AUTOSAR**需求（**SRS**）到**ADC**驱动程序需求（**SWS**）的追溯关系。
-
-| 需求 | 描述 | 满足需求 |
-|---|---|---|
-| [SRS_Adc_12280] | ADC 驱动应允许为每个 ADC 通道组配置特定的结果访问模式 | [SWS_Adc_00140] [SWS_Adc_00382] [SWS_Adc_00383] |
-| [SRS_Adc_12283] | ADC 驱动应掩掉转换结果中不属于 ADC 数值的信息位 | [SWS_Adc_00122] |
-| [SRS_Adc_12291] | ADC 驱动应提供服务以查询 ADC 通道组的状态 | [SWS_Adc_00219] [SWS_Adc_00220] [SWS_Adc_00221] [SWS_Adc_00222] [SWS_Adc_00224] [SWS_Adc_00226] [SWS_Adc_00325] [SWS_Adc_00326] [SWS_Adc_00327] [SWS_Adc_00328] [SWS_Adc_00329] [SWS_Adc_00330] [SWS_Adc_00331] |
-| [SRS_Adc_12292] | 若 ADC 提供有符号数值，ADC 驱动应将符号位置于返回值的 MSB | [SWS_Adc_00113] [SWS_Adc_00214] |
-| [SRS_Adc_12307] | ADC 驱动应支持每个通道特定的基础静态配置 | [SWS_Adc_00099] |
-| [SRS_Adc_12317] | ADC 驱动应提供通知函数，以告知调用者某通道组转换的结束 | [SWS_Adc_00104] [SWS_Adc_00155] [SWS_Adc_00156] [SWS_Adc_00157] |
-| [SRS_Adc_12318] | ADC 驱动应提供服务以单独启用和禁用每个通知函数 | [SWS_Adc_00057] [SWS_Adc_00058] [SWS_Adc_00077] [SWS_Adc_00156] [SWS_Adc_00157] |
-| [SRS_Adc_12364] | ADC 驱动应提供服务以为所有转换模式启动和停止 ADC 通道组的转换 | [SWS_Adc_00060] [SWS_Adc_00061] [SWS_Adc_00145] [SWS_Adc_00146] [SWS_Adc_00157] [SWS_Adc_00356] [SWS_Adc_00357] [SWS_Adc_00385] [SWS_Adc_00386] |
-| [SRS_Adc_12447] | ADC 驱动应允许将属于同一 ADC 硬件单元的 ADC 通道分组 | [SWS_Adc_00090] [SWS_Adc_00091] [SWS_Adc_00098] [SWS_Adc_00099] [SWS_Adc_00100] [SWS_Adc_00101] [SWS_Adc_00104] [SWS_Adc_00277] [SWS_Adc_00280] |
-| [SRS_Adc_12802] | ADC 驱动应（为流式访问模式）提供服务以识别通道组最新的采样及可用采样数 | [SWS_Adc_00214] [SWS_Adc_00216] [SWS_Adc_00219] |
-| [SRS_Adc_12817] | ADC 驱动应允许为每个 ADC 通道组静态配置恰好一个触发源 | [SWS_Adc_00146] [SWS_Adc_00279] [SWS_Adc_00283] [SWS_Adc_00356] [SWS_Adc_00357] |
-| [SRS_Adc_12818] | ADC 驱动应允许将一个 ADC 通道分配给多个 ADC 通道组 | [SWS_Adc_00092] |
-| [SRS_Adc_12819] | ADC 驱动应提供同步服务以读取所选通道组最近的有效转换结果 | [SWS_Adc_00113] [SWS_Adc_00122] [SWS_Adc_00318] |
-| [SRS_Adc_12820] | ADC 驱动应允许为每个通道组配置优先级级别 | [SWS_Adc_00288] [SWS_Adc_00289] [SWS_Adc_00310] [SWS_Adc_00340] [SWS_Adc_00341] |
-| [SRS_Adc_12822] | 包含通道组转换结果的结构体应以统一的维度生成 | [SWS_Adc_00320] |
-| [SRS_Adc_12823] | ADC 驱动应提供服务为每个通道组启用和禁用硬件触发 | [SWS_Adc_00114] [SWS_Adc_00116] [SWS_Adc_00144] [SWS_Adc_00273] [SWS_Adc_00281] [SWS_Adc_00282] |
-| [SRS_Adc_12824] | 结果对齐应可在右对齐与左对齐之间配置 | [SWS_Adc_00113] |
-| [SRS_Adc_12825] | 配置为流式访问模式的通道组的转换结果应返回至具有固定元素数量的缓冲区 | [SWS_Adc_00319] |
-| [SRS_BSW_00101] | 基础软件模块应能够在单独的初始化函数中初始化变量和硬件 | [SWS_Adc_00054] |
-| [SRS_BSW_00171] | ECU 中不需要的基础软件组件的可选功能应可在预编译期配置 | [SWS_Adc_00120] [SWS_Adc_00121] [SWS_Adc_00228] [SWS_Adc_00259] [SWS_Adc_00260] [SWS_Adc_00265] [SWS_Adc_00266] |
-| [SRS_BSW_00323] | 所有 AUTOSAR 基础软件模块应检查传入的 API 参数的有效性 | [SWS_Adc_00125] [SWS_Adc_00126] [SWS_Adc_00128] [SWS_Adc_00129] [SWS_Adc_00131] [SWS_Adc_00152] [SWS_Adc_00225] [SWS_Adc_00241] |
-| [SRS_BSW_00335] | 状态值命名约定 | [SWS_Adc_00221] [SWS_Adc_00222] [SWS_Adc_00224] |
-| [SRS_BSW_00336] | 基础软件模块应能够关闭 | [SWS_Adc_00111] |
-| [SRS_BSW_00359] | 所有 AUTOSAR 基础软件模块回调函数应尽可能避免 void 以外的返回类型 | [SWS_Adc_00082] |
-| [SRS_BSW_00360] | AUTOSAR 基础软件模块回调函数允许带有参数 | [SWS_Adc_00082] |
-| [SRS_BSW_00386] | BSW 应规定检测错误的配置和条件 | [SWS_Adc_00107] [SWS_Adc_00125] [SWS_Adc_00126] [SWS_Adc_00128] [SWS_Adc_00129] [SWS_Adc_00131] [SWS_Adc_00133] [SWS_Adc_00136] [SWS_Adc_00137] [SWS_Adc_00152] [SWS_Adc_00154] [SWS_Adc_00164] [SWS_Adc_00165] [SWS_Adc_00166] [SWS_Adc_00218] [SWS_Adc_00225] [SWS_Adc_00241] |
-| [SRS_BSW_00405] | BSW 模块应支持多个配置集 | [SWS_Adc_00054] |
-| [SRS_BSW_00406] | 在调用 BSW 模块的任何 API 之前，表示 BSW 模块是否已初始化的静态状态变量应以值 0 初始化 | [SWS_Adc_00107] [SWS_Adc_00154] [SWS_Adc_00294] [SWS_Adc_00295] [SWS_Adc_00297] [SWS_Adc_00298] [SWS_Adc_00299] [SWS_Adc_00300] [SWS_Adc_00301] [SWS_Adc_00302] |
-| [SRS_BSW_00414] | 初始化函数应将指向配置结构的指针作为唯一参数 | [SWS_Adc_00054] |
-| [SRS_SPAL_00157] | AUTOSAR 基础软件的所有驱动和处理程序应实现驱动和处理程序的通知机制 | [SWS_Adc_00057] [SWS_Adc_00058] [SWS_Adc_00082] [SWS_Adc_00083] [SWS_Adc_00104] |
-| [SRS_SPAL_12056] | 所有驱动模块应允许通知机制的静态配置 | [SWS_Adc_00080] [SWS_Adc_00084] [SWS_Adc_00085] |
-| [SRS_SPAL_12057] | 所有驱动模块应实现初始化接口 | [SWS_Adc_00054] |
-| [SRS_SPAL_12063] | 所有驱动模块应仅支持原始值模式 | [SWS_Adc_00113] |
-| [SRS_SPAL_12125] | 所有驱动模块应仅初始化已配置的资源 | [SWS_Adc_00056] |
-| [SRS_SPAL_12129] | ISR 应负责复位中断标志并调用相应的通知函数 | [SWS_Adc_00078] |
-| [SRS_SPAL_12163] | 所有驱动模块应实现去初始化接口 | [SWS_Adc_00110] [SWS_Adc_00111] |
-| [SRS_SPAL_12448] | 所有驱动模块在开发错误检测后应具有特定的行为 | [SWS_Adc_00107] [SWS_Adc_00125] [SWS_Adc_00126] [SWS_Adc_00128] [SWS_Adc_00129] [SWS_Adc_00131] [SWS_Adc_00133] [SWS_Adc_00136] [SWS_Adc_00137] [SWS_Adc_00152] [SWS_Adc_00154] [SWS_Adc_00164] [SWS_Adc_00165] [SWS_Adc_00166] [SWS_Adc_00225] [SWS_Adc_00241] |
-| [SRS_SPAL_12461] | 所有驱动实现应适用关于控制器寄存器初始化的特定规则 | [SWS_Adc_00054] [SWS_Adc_00246] [SWS_Adc_00247] [SWS_Adc_00248] [SWS_Adc_00249] [SWS_Adc_00250] |
-
-## 7. 功能规格
-
-### 7.1. 一般行为
+### 6.1. 一般行为
 
 **ADC**模块可以允许将一个或多个**ADC**通道（**ADC channel**）分组为所谓的**ADC**通道组（**ADC Channel group**）。也即是说**ADC**模块的配置应使得一个**ADC**通道组包含至少一个**ADC**通道。
 
@@ -193,22 +148,22 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 对于每个**ADC**通道组，支持以下基础静态配置：组符号名、通知开关、回调通知函数、所配置使用的通道列表、组触发源以及组转换模式。此外，在配置期可为每个**ADC**通道组定义用于存储采样结果的缓冲区，即数据缓冲区指针（转换结果的目标地址）与**ADC**数值个数。
 
-#### 7.1.1. 初始化
+#### 6.1.1. 初始化
 
 ![Figure12.png](Figure12.png)
 
-#### 7.1.2. 去初始化
+#### 6.1.2. 去初始化
 
 ![Figure13.png](Figure13.png)
 
-#### 7.1.3. 转换模式
+#### 6.1.3. 转换模式
 
 **ADC**模块支持以下转换模式：
 
 1. **ADC**模块需为所有**ADC**通道组，提供一次性转换模式（**One-shot Conversion**）的支持。 一次性转换意味着为正在转换的组配置的每个通道都执行一次转换。![Figure14.png](Figure14.png)
 2. **ADC**模块需为所有带有触发源软件的**ADC**通道组，提供连续转换模式（**Continuous Conversion**）的支持。连续转换是指一次ADC转换完成后，一直重复整个**ADC**通道组的转换。组内各个**ADC**通道的转换以及整个**ADC**通道组的重复不需要执行任何额外的触发事件。根据硬件和软件功能，可以顺序或并行转换**ADC**通道组内的各个通道。![Figure15.png](Figure15.png)
 
-#### 7.1.4. 触发源（Trigger Source）
+#### 6.1.4. 触发源（Trigger Source）
 **ADC**模块需支持以下启动条件或触发源：
 
 * **ADC**模块需支持所有转换模式的启动条件的软件**API**调用（**Software API Call**）。触发源的软件API调用是指ADC通道组的转换由ADC模块提供的服务来启动或者停止。
@@ -218,7 +173,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 **ADC**模块应允许为每个**ADC**通道组配置一个触发源。
 
-#### 7.1.5. 数据访问模式
+#### 6.1.5. 数据访问模式
 
 **ADC**模块需支持以下结果访问模式：
 
@@ -242,7 +197,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 对于流式访问模式（**Streaming Access Mode**），结果缓冲区的处理支持两种方式：线性缓冲区（**linear buffer**），即当流缓冲区已满（采样数达到配置的数量）时，**ADC**驱动停止转换；环形缓冲区（**ring buffer**），即到达流缓冲区末尾后回绕（**wrap around**），转换继续进行。
 
-#### 7.1.6. 优先级
+#### 6.1.6. 优先级
 
 **ADC**模块需允许为每个**ADC**通道组配置优先级。这意味着优先级机制，在软件中实施，或者在可用的情况下由硬件支持。具有触发源硬件的**ADC**通道组，始终使用硬件优先级机制进行优先级排序。
 
@@ -286,11 +241,11 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 如果**ADC**通道组可以被隐式停止，当**ADC**通道组状态为**ADC_IDLE**或**ADC_STREAM_COMPLETED**，这时**ADC**模块则被允许存储同一**ADC**通道组的额外软件转换请求。
 
-#### 7.1.7. 通知（Notification）
+#### 6.1.7. 通知（Notification）
 
 如果通知功能被配置并启用，当被请求**ADC**通道组的所有通道的转换完成后，**ADC**模块会调用此**ADC**通道组通知（**group notification**）函数。
 
-#### 7.1.8. 重入和完整性
+#### 6.1.8. 重入和完整性
 
 对于不同的ADC通道组，**ADC**模块函数是可以支持可重入的。此要求应适用于除了以下的所有API函数：
 
@@ -311,7 +266,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 在运行时，如果在不同的**Task**或者**ISR**中，对于同一个**ADC**通道组的多次调用，则**ADC**模块无需检查数据的完整性，但**ADC**模块的用户需确保数据的完整性。
 
-#### 7.1.9. 限制检查
+#### 6.1.9. 限制检查
 
 **ADC**模块需允许为**ADC**通道配置限制检查。
 
@@ -323,7 +278,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 如果选择了带硬件触发源的一次性（**one-shot**）转换模式，并且对**ADC**的通道启用了限制检查，则**ADC**驱动模块需忽略不在配置范围内的**ADC**转换结果，并等待硬件触发源再次发出下一次的转换。
 
-#### 7.1.10. 转换结果的表示与处理
+#### 6.1.10. 转换结果的表示与处理
 
 **ADC**驱动需从转换结果中掩掉不属于**ADC**数值本身的信息位。如果适用，函数**Adc_ReadGroup**需掩掉转换所提供的、但不属于转换结果本身的所有信息位或诊断位。
 
@@ -331,7 +286,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 包含通道组转换结果的结构体需以统一的维度（位数）生成，并按属于任意通道组的位宽最大的通道进行裁剪。这是因为同一通道组内各通道的结果值位宽可能不同（例如**8**位、**12**位等）。
 
-### 7.2. 转换处理和交互
+### 6.2. 转换处理和交互
 
 **ADC**模块一次只能转换每个**ADC**硬件单元（**ADC HW Unit**）的一个**ADC**通道组。**ADC**模块不支持在同一个**ADC**硬件单元上，不同的**ADC**通道组的同时转换。
 
@@ -345,25 +300,25 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 ![figure7_3.png](figure7_3.png)
 
-#### 7.2.1. 示例1（多通道/连续转换）
+#### 6.2.1. 示例1（多通道/连续转换）
 
 **ADC**通道组包含通道（**CH0**、**CH1**、**CH2**、**CH3** 和 **CH4**），并配置为连续转换模式。当完成每次扫描后，会调用通知（如果启用）。 然后自动开始新一轮扫描。
 
-#### 7.2.2. 示例2（多通道/One-Shot）
+#### 6.2.2. 示例2（多通道/One-Shot）
 
 **ADC**通道组包含通道（**CH0**、**CH1**、**CH2**、**CH3** 和 **CH4**），并配置为**One-Shot**转换模式。当完成扫描后，会调用通知（如果启用）。
 
-#### 7.2.3. 示例3（单通道/连续转换）
+#### 6.2.3. 示例3（单通道/连续转换）
 
 **ADC**通道组包含通道（**CH3**）并配置为连续转换模式。当完成每次扫描后，将调用通知（如果启用）。然后自动开始新一轮的扫描。
 
-#### 7.2.4. 示例4（单通道/One-Shot）
+#### 6.2.4. 示例4（单通道/One-Shot）
 
 **ADC**通道组包含通道（**CH4**）并配置为**One-Shot**转换模式。当完成扫描后，会调用通知（如果启用）。
 
-### 7.3. ADC 缓冲区访问模式示例
+### 6.3. ADC 缓冲区访问模式示例
 
-#### 7.3.1. 配置
+#### 6.3.1. 配置
 
 ![Figure7_1_1.png](Figure7_1_1.png)
 
@@ -371,13 +326,13 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 * 对于组1和组2，配置了组访问模式**ADC_ACCESS_MODE_STREAMING**。组3的组访问模式配置为**ADC_ACCESS_MODE_SINGLE**。
 * **ADC**驱动程序将组1到组3的转换结果存储在三个应用程序缓冲区中，通过三个配置的 **ADC_RESULT_POINTER**访问：包括**G1_ResultPtr**、**G2_ResultPtr**和**G3_ResultPtr**。
 
-#### 7.3.2. 初始化
+#### 6.3.2. 初始化
 
 ![Figure7_1_2.png](Figure7_1_2.png)
 
 用户必须为**ADC**通道组结果提供应用程序结果缓冲区。每组都需要一个缓冲区。如果选择流模式（**ADC_ACCESS_MODE_STREAMING**）的访问模式，缓冲区大小取决于组通道的数量、组访问模式以及流模式采样的数量。在开始**ADC**通道组转换之前，用户必须使用**API**函数 **Adc_SetupResultBuffer**初始化**ADC**通道组结果指针，该函数将**ADC**通道组结果指针初始化为指向特定的应用程序结果缓冲区。
 
-#### 7.3.3. Adc_GetStreamLastPointer的用法
+#### 6.3.3. Adc_GetStreamLastPointer的用法
 
 ![Figure7_1_3.png](Figure7_1_3.png)
 
@@ -393,13 +348,13 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 为了使**Adc_GetStreamLastPointer**将采样数据指针（**G1_SamplePtr**、**G2_SamplePtr**和**G3_SamplePtr**）指向最新的通道结果，**API**被定义为将指针传递给结果指针而不是结果指针本身。
 
-#### 7.3.4. Adc_ReadGroup的用法
+#### 6.3.4. Adc_ReadGroup的用法
 
 ![Figure7_1_4.png](Figure7_1_4.png)
 
 如果可选的API函数**Adc_ReadGroup**被启用，则用户必须为每个选定的**ADC**通道组提供额外的缓冲区，这些缓冲区可以保存一轮**ADC**通道组转换的结果。调用**Adc_ReadGroup**将最新结果从应用程序结果缓冲区复制到应用程序读取组缓冲区。 在示例中，一个应用程序读取缓冲区（**G2_G3_ReadBuffer**）被用于**ADC**通道组**G2**和**G3**。
 
-### 7.4. 电源状态管理
+### 6.4. 电源状态管理
 
 当配置参数**AdcLowPowerStatesSupport**设置为**TRUE**时，**ADC**驱动需支持电源状态切换及其**API**。此时需生成**Adc_PreparePowerState**、**Adc_SetPowerState**、**Adc_GetCurrentPowerState**和**Adc_GetTargetPowerState**这几个**API**函数，用于管理电源状态切换并获取相关信息。
 
@@ -411,11 +366,11 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 **ADC**驱动需支持同步和异步两种电源状态切换方式，取决于配置参数**AdcPowerStateAsynchTransitionMode**的取值。当该参数设置为**FALSE**时，准备过程和设置过程在各自**API**返回时即视为完成；设置为**TRUE**时，准备过程在请求发出后于后台进行，并在完成时通过通知（**IoHwAb_Adc_NotifyReadyForPowerState**）告知注册的**SWC**。
 
-### 7.5. 错误分类
+### 6.5. 错误分类
 
 **SWS_BSWGeneral**文档第 7.x 章"错误处理"详细描述了基础软件的错误处理，并构成了包含五类可能出现在**BSW**模块中的错误类型的分类方案。在此基础上，以下各小节规定本模块的特定错误。
 
-#### 7.5.1. 开发错误
+#### 6.5.1. 开发错误
 
 | 错误类型 | 相关错误码 | 错误值 |
 |---|---|---|
@@ -430,7 +385,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 | API 以不支持的电源状态请求被调用。 | ADE_E_POWER_STATE_NOT_SUPPORTED | 0x1B |
 | **ADC** 未为请求的目标电源状态做准备。 | ADC_E_PERIPHERAL_NOT_PREPARED | 0x1D |
 
-#### 7.5.2. 运行时错误
+#### 6.5.2. 运行时错误
 
 | 错误类型 | 相关错误码 | 错误值 |
 |---|---|---|
@@ -439,42 +394,42 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 | API 调用时一个或多个 **ADC** 组不处于 **IDLE** 状态。 | ADC_E_NOT_DISENGAGED | 0x1A |
 | 无法达到请求的电源状态。 | ADC_E_TRANSITION_NOT_POSSIBLE | 0x1C |
 
-#### 7.5.3. 瞬时故障
+#### 6.5.3. 瞬时故障
 
 无。
 
-#### 7.5.4. 生产错误
+#### 6.5.4. 生产错误
 
 无。
 
-#### 7.5.5. 扩展生产错误
+#### 6.5.5. 扩展生产错误
 
 无。
 
-## 8. API规范
+## 7. API规范
 
-### 8.1. 导入的类型
+### 7.1. 导入的类型
 
 | 模块 | 头文件 | 导入类型 |
 |---|---|---|
 | Std | Std_Types.h | Std_ReturnType |
 | Std | Std_Types.h | Std_VersionInfoType |
 
-### 8.2. 类型定义
+### 7.2. 类型定义
 
-#### 8.2.1. Adc_ConfigType
+#### 7.2.1. Adc_ConfigType
 
 **说明**: 结构类型，包含初始化**ADC**驱动程序和**ADC**硬件单元所需的配置参数集合。可通过**Adc.h**获得。
 
-#### 8.2.2. Adc_ChannelType
+#### 7.2.2. Adc_ChannelType
 
 **说明**: 类型，派生自**uint**。**ADC**通道的数字**ID**。此类型的范围是**µC**特定的，须由供应商描述。可通过**Adc.h**获得。
 
-#### 8.2.3. Adc_GroupType
+#### 7.2.3. Adc_GroupType
 
 **说明**: 类型，派生自**uint**。**ADC**通道组的数字**ID**。此类型的范围是**µC**特定的，须由供应商描述。可通过**Adc.h**获得。
 
-#### 8.2.4. Adc_ValueGroupType
+#### 7.2.4. Adc_ValueGroupType
 
 **说明**: 类型，派生自**int**。用于读取通道组转换后数值的类型（原始值，不做进一步缩放，按预编译开关**ADC_RESULT_ALIGNMENT**进行对齐）。此类型为实现特定。可通过**Adc.h**获得。
 
@@ -486,23 +441,23 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 **注意：** 只有当所有**ADC**组的所有**ADC**通道都具有**8**位分辨率时，**Adc_ValueGroupType**才可被配置为**8**位数据类型。
 
-#### 8.2.5. Adc_PrescaleType
+#### 7.2.5. Adc_PrescaleType
 
 **说明**: 类型，派生自**uint**。时钟预分频器因子的类型（此类型不是**API**类型）。此类型的范围是**µC**特定的，须由供应商描述。可通过**Adc.h**获得。
 
-#### 8.2.6. Adc_ConversionTimeType
+#### 7.2.6. Adc_ConversionTimeType
 
 **说明**: 类型，派生自**uint**。转换时间的类型，即将采样的模拟值转换为数字表示所需的时间（此类型不是**API**类型）。此类型的范围是**µC**特定的，须由供应商描述。可通过**Adc.h**获得。
 
-#### 8.2.7. Adc_SamplingTimeType
+#### 7.2.7. Adc_SamplingTimeType
 
 **说明**: 类型，派生自**uint**。采样时间的类型，即对值进行采样的时间（以时钟周期计）（此类型不是**API**类型）。此类型的范围是**µC**特定的，须由供应商描述。可通过**Adc.h**获得。
 
-#### 8.2.8. Adc_ResolutionType
+#### 7.2.8. Adc_ResolutionType
 
 **说明**: 类型，派生自**uint8**。通道分辨率的类型，以位数表示（此类型不是**API**类型）。此类型的范围是**µC**特定的，须由供应商描述。可通过**Adc.h**获得。
 
-#### 8.2.9. Adc_StatusType
+#### 7.2.9. Adc_StatusType
 
 **说明**: 枚举类型，取值范围：
 
@@ -513,7 +468,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 所请求**ADC**通道组转换的当前状态。可通过**Adc.h**获得。
 
-#### 8.2.10. Adc_TriggerSourceType
+#### 7.2.10. Adc_TriggerSourceType
 
 **说明**: 枚举类型，取值范围：
 
@@ -522,7 +477,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 用于配置**ADC**通道组触发源的类型。可通过**Adc.h**获得。
 
-#### 8.2.11. Adc_GroupConvModeType
+#### 7.2.11. Adc_GroupConvModeType
 
 **说明**: 枚举类型，取值范围：
 
@@ -531,19 +486,19 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 用于配置**ADC**通道组转换模式的类型。可通过**Adc.h**获得。
 
-#### 8.2.12. Adc_GroupPriorityType
+#### 7.2.12. Adc_GroupPriorityType
 
 **说明**: 类型，派生自**uint8**，范围为**0..255**。通道的优先级级别，最低优先级为**0**。可通过**Adc.h**获得。
 
-#### 8.2.13. Adc_GroupDefType
+#### 7.2.13. Adc_GroupDefType
 
 **说明**: 类型，派生自**implementation_specific**。用于将通道分配给通道组的类型（此类型不是**API**类型）。可通过**Adc.h**获得。
 
-#### 8.2.14. Adc_StreamNumSampleType
+#### 7.2.14. Adc_StreamNumSampleType
 
 **说明**: 类型，派生自**uint**。用于配置流式访问模式下组转换次数的类型（在单一访问模式下，该参数为**1**）。此类型的范围是**µC**特定的，须由供应商描述。可通过**Adc.h**获得。
 
-#### 8.2.15. Adc_StreamBufferModeType
+#### 7.2.15. Adc_StreamBufferModeType
 
 **说明**: 枚举类型，取值范围：
 
@@ -552,7 +507,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 用于配置流式访问模式缓冲区类型的类型。可通过**Adc.h**获得。
 
-#### 8.2.16. Adc_GroupAccessModeType
+#### 7.2.16. Adc_GroupAccessModeType
 
 **说明**: 枚举类型，取值范围：
 
@@ -561,7 +516,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 用于配置组转换结果访问模式的类型。可通过**Adc.h**获得。
 
-#### 8.2.17. Adc_HwTriggerSignalType
+#### 7.2.17. Adc_HwTriggerSignalType
 
 **说明**: 枚举类型，取值范围：
 
@@ -571,11 +526,11 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 用于配置驱动程序应对硬件触发信号的哪个边沿作出反应（即启动转换）的类型（仅当**ADC**硬件支持时）。可通过**Adc.h**获得。
 
-#### 8.2.18. Adc_HwTriggerTimerType
+#### 7.2.18. Adc_HwTriggerTimerType
 
 **说明**: 类型，派生自**uint**。**ADC**模块嵌入式定时器重载值的类型（仅当**ADC**硬件支持时）。此类型的范围是**µC**特定的，须由供应商描述。可通过**Adc.h**获得。
 
-#### 8.2.19. Adc_PriorityImplementationType
+#### 7.2.19. Adc_PriorityImplementationType
 
 **说明**: 枚举类型，取值范围：
 
@@ -585,7 +540,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 用于配置优先级机制的类型。可通过**Adc.h**获得。
 
-#### 8.2.20. Adc_GroupReplacementType
+#### 7.2.20. Adc_GroupReplacementType
 
 **说明**: 枚举类型，取值范围：
 
@@ -594,7 +549,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 **ADC**组转换被更高优先级组中断时，在**ADC**组级别使用的替换机制。可通过**Adc.h**获得。
 
-#### 8.2.21. Adc_ChannelRangeSelectType
+#### 7.2.21. Adc_ChannelRangeSelectType
 
 **说明**: 枚举类型，取值范围：
 
@@ -608,7 +563,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 在限制检查激活的情况下：定义相对于**AdcChannelLowLimit**和**AdcChannelHighLimit**所定义的边界，哪些转换值会被纳入考虑。可通过**Adc.h**获得。
 
-#### 8.2.22. Adc_ResultAlignmentType
+#### 7.2.22. Adc_ResultAlignmentType
 
 **说明**: 枚举类型，取值范围：
 
@@ -617,7 +572,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 用于**ADC**原始结果在**ADC**结果缓冲区中对齐（左/右对齐）的类型。可通过**Adc.h**获得。
 
-#### 8.2.23. Adc_PowerStateType
+#### 7.2.23. Adc_PowerStateType
 
 **说明**: 枚举类型，取值范围：
 
@@ -626,7 +581,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 当前激活或设为目标电源状态的电源状态。可通过**Adc.h**获得。
 
-#### 8.2.24. Adc_PowerStateRequestResultType
+#### 7.2.24. Adc_PowerStateRequestResultType
 
 **说明**: 枚举类型，取值范围：
 
@@ -639,9 +594,9 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 与电源状态切换相关的请求结果。可通过**Adc.h**获得。
 
-### 8.3. 函数定义
+### 7.3. 函数定义
 
-#### 8.3.1. Adc_Init
+#### 7.3.1. Adc_Init
 
 **说明**: 初始化**ADC**硬件单元和驱动程序。可通过**Adc.h**获得。本服务为同步调用，不可重入。参数 ConfigPtr（in）：指向**Variant PB**配置集的指针（**Variant PC**要求为**NULL_PTR**）。
 
@@ -667,7 +622,7 @@ void Adc_Init ( const Adc_ConfigType* ConfigPtr )
 
 如果启用了**ADC**模块的开发错误检测：当**ADC**驱动程序和硬件已初始化时调用本函数，**Adc_Init**应上报开发错误**ADC_E_ALREADY_INITIALIZED**并不做任何动作返回。
 
-#### 8.3.2. Adc_SetupResultBuffer
+#### 7.3.2. Adc_SetupResultBuffer
 
 **说明**: 使用组特定的结果缓冲区起始地址初始化**ADC**驱动，转换结果将存储在该缓冲区中。应用程序必须确保**DataBufferPtr**所指向的应用程序缓冲区能够容纳指定组的全部转换结果。复位后、启动组转换之前，必须使用**Adc_SetupResultBuffer**进行初始化。可通过**Adc.h**获得。本服务为异步调用，可重入。参数 Group（in）：所请求**ADC**通道组的数字**ID**。参数 DataBufferPtr（in）：指向结果数据缓冲区的指针。返回值：**Std_ReturnType**，**E_OK**表示结果缓冲区指针已正确初始化；**E_NOT_OK**表示操作失败或发生开发错误。
 
@@ -687,7 +642,7 @@ Std_ReturnType Adc_SetupResultBuffer ( Adc_GroupType Group, Adc_ValueGroupType* 
 
 如果启用了**ADC**模块的开发错误检测：在初始化驱动程序之前调用时，函数**Adc_SetupResultBuffer**应上报开发错误**ADC_E_UNINIT**。
 
-#### 8.3.3. Adc_DeInit
+#### 7.3.3. Adc_DeInit
 
 **说明**: 将所有**ADC**硬件单元恢复到与其上电复位状态相当的状态。不可写寄存器的值不包括在内。硬件设计需保证此状态不会导致**µC**中的未定义活动。可通过**Adc.h**获得。本服务为同步调用，不可重入。
 
@@ -705,7 +660,7 @@ void Adc_DeInit ( void )
 
 若调用时模块尚未初始化，**Adc_DeInit**应上报开发错误**ADC_E_UNINIT**。
 
-#### 8.3.4. Adc_StartGroupConversion
+#### 7.3.4. Adc_StartGroupConversion
 
 **说明**: 启动所请求**ADC**通道组所有通道的转换。根据组的配置，启动一次性或连续转换。可通过**Adc.h**获得。本服务为异步调用，可重入。参数 Group（in）：所请求**ADC**通道组的数字**ID**。
 
@@ -727,7 +682,7 @@ void Adc_StartGroupConversion ( Adc_GroupType Group )
 
 若启用了开发错误检测且通道组不存在，函数**Adc_StartGroupConversion**应上报开发错误**ADC_E_PARAM_GROUP**。
 
-#### 8.3.5. Adc_StopGroupConversion
+#### 7.3.5. Adc_StopGroupConversion
 
 **说明**: 停止所请求**ADC**通道组的转换。可通过**Adc.h**获得。本服务为同步调用，可重入。参数 Group（in）：所请求**ADC**通道组的数字**ID**。
 
@@ -743,7 +698,7 @@ void Adc_StopGroupConversion ( Adc_GroupType Group )
 
 在软件触发模式下，函数**Adc_StopGroupConversion**应在启用排队且队列中存有启动/重启请求时，从队列中移除该组的启动/重启请求。
 
-#### 8.3.6. Adc_ReadGroup
+#### 7.3.6. Adc_ReadGroup
 
 **说明**: 读取所请求组最近一轮已完成转换的组转换结果，并将通道值从**DataBufferPtr**地址开始存储。组通道值按通道号升序存储（与配置了流式访问时结果缓冲区的存储布局相反）。可通过**Adc.h**获得。本服务为同步调用，可重入。参数 Group（in）：所请求**ADC**通道组的数字**ID**。参数 DataBufferPtr（out）：所选组所有通道的**ADC**结果存储在指针所指向的数据缓冲区中。返回值：**Std_ReturnType**，**E_OK**表示结果可用并已写入数据缓冲区；**E_NOT_OK**表示无可用结果或发生开发错误。
 
@@ -759,7 +714,7 @@ Std_ReturnType Adc_ReadGroup ( Adc_GroupType Group, Adc_ValueGroupType* DataBuff
 
 若**Adc_GetGroupStatus**返回**ADC_STREAM_COMPLETED**，应触发状态转换到**ADC_BUSY**（针对连续转换模式——单一访问模式或环形流缓冲区模式——以及单一访问模式或环形流缓冲区模式下的硬件触发组）。
 
-#### 8.3.7. Adc_EnableHardwareTrigger
+#### 7.3.7. Adc_EnableHardwareTrigger
 
 **说明**: 为所请求**ADC**通道组启用硬件触发。可通过**Adc.h**获得。本服务为异步调用，可重入。参数 Group（in）：所请求**ADC**通道组的数字**ID**。
 
@@ -773,7 +728,7 @@ void Adc_EnableHardwareTrigger ( Adc_GroupType Group )
 
 若调用时模块尚未初始化，函数**Adc_EnableHardwareTrigger**应上报开发错误**ADC_E_UNINIT**。
 
-#### 8.3.8. Adc_DisableHardwareTrigger
+#### 7.3.8. Adc_DisableHardwareTrigger
 
 **说明**: 为所请求**ADC**通道组禁用硬件触发。可通过**Adc.h**获得。本服务为异步调用，可重入。参数 Group（in）：所请求**ADC**通道组的数字**ID**。
 
@@ -787,7 +742,7 @@ void Adc_DisableHardwareTrigger ( Adc_GroupType Group )
 
 若调用时模块尚未初始化，函数**Adc_DisableHardwareTrigger**应上报开发错误**ADC_E_UNINIT**。
 
-#### 8.3.9. Adc_EnableGroupNotification
+#### 7.3.9. Adc_EnableGroupNotification
 
 **说明**: 为所请求**ADC**通道组启用通知机制。可通过**Adc.h**获得。本服务为异步调用，可重入。参数 Group（in）：所请求**ADC**通道组的数字**ID**。
 
@@ -799,7 +754,7 @@ void Adc_EnableGroupNotification ( Adc_GroupType Group )
 
 若调用时模块尚未初始化，函数**Adc_EnableGroupNotification**应上报开发错误**ADC_E_UNINIT**。
 
-#### 8.3.10. Adc_DisableGroupNotification
+#### 7.3.10. Adc_DisableGroupNotification
 
 **说明**: 为所请求**ADC**通道组禁用通知机制。可通过**Adc.h**获得。本服务为异步调用，可重入。参数 Group（in）：所请求**ADC**通道组的数字**ID**。
 
@@ -811,7 +766,7 @@ void Adc_DisableGroupNotification ( Adc_GroupType Group )
 
 若调用时模块尚未初始化，函数**Adc_DisableGroupNotification**应上报开发错误**ADC_E_UNINIT**。
 
-#### 8.3.11. Adc_GetGroupStatus
+#### 7.3.11. Adc_GetGroupStatus
 
 **说明**: 返回所请求**ADC**通道组的转换状态。可通过**Adc.h**获得。本服务为同步调用，可重入。参数 Group（in）：所请求**ADC**通道组的数字**ID**。返回值：**Adc_StatusType**，所请求组的转换状态。
 
@@ -823,7 +778,7 @@ Adc_StatusType Adc_GetGroupStatus ( Adc_GroupType Group )
 
 若调用时模块尚未初始化，函数**Adc_GetGroupStatus**应上报开发错误**ADC_E_UNINIT**并返回**ADC_IDLE**。
 
-#### 8.3.12. Adc_GetStreamLastPointer
+#### 7.3.12. Adc_GetStreamLastPointer
 
 **说明**: 返回存储在结果缓冲区中每通道的有效采样数。读取一个指向组结果缓冲区中某个位置的指针。借助该指针位置，可访问最近一轮已完成转换的所有组通道的结果。借助该指针和返回值，可访问所有有效的组转换结果（用户必须考虑结果缓冲区的布局）。可通过**Adc.h**获得。本服务为同步调用，可重入。参数 Group（in）：所请求**ADC**通道组的数字**ID**。参数 PtrToSamplePtr（out）：指向结果缓冲区指针的指针。返回值：**Adc_StreamNumSampleType**，每通道的有效采样数。
 
@@ -835,7 +790,7 @@ Adc_StreamNumSampleType Adc_GetStreamLastPointer ( Adc_GroupType Group, Adc_Valu
 
 若调用时模块尚未初始化，函数**Adc_GetStreamLastPointer**应上报开发错误**ADC_E_UNINIT**。
 
-#### 8.3.13. Adc_GetVersionInfo
+#### 7.3.13. Adc_GetVersionInfo
 
 **说明**: 返回此模块的版本信息。可通过**Adc.h**获得。本服务为同步调用，可重入。参数 versioninfo（out）：指向存储此模块版本信息位置的指针。
 
@@ -845,7 +800,7 @@ void Adc_GetVersionInfo ( Std_VersionInfoType* versioninfo )
 
 函数**Adc_GetVersionInfo**应返回此模块的版本信息。
 
-#### 8.3.14. Adc_SetPowerState
+#### 7.3.14. Adc_SetPowerState
 
 **说明**: 此**API**配置**Adc**模块，使其进入已准备的电源状态（从预定义的一组已配置电源状态中选择）。可通过**Adc.h**获得。本服务为同步调用，不可重入。参数 Result（out）：若**API**返回**E_OK**：**ADC_SERVICE_ACCEPTED**表示电源状态切换已执行；若**API**返回**E_NOT_OK**：**ADC_NOT_INIT**表示**ADC**模块未初始化、**ADC_SEQUENCE_ERROR**表示**API**调用顺序错误、**ADC_HW_FAILURE**表示硬件模块故障、**ADC_POWER_STATE_NOT_SUPP**表示不支持请求的电源状态、**ADC_TRANS_NOT_POSSIBLE**表示无法直接切换。返回值：**Std_ReturnType**，**E_OK**表示电源模式已切换；**E_NOT_OK**表示请求被拒绝。
 
@@ -863,7 +818,7 @@ Std_ReturnType Adc_SetPowerState ( Adc_PowerStateRequestResultType* Result )
 
 若无法从当前电源状态直接到达请求的电源状态，应上报运行时错误**ADC_E_TRANSITION_NOT_POSSIBLE**。到达目标电源状态所需的所有异步操作均可在**Adc_Main_PowerTransitionManager**的上下文中于后台执行。
 
-#### 8.3.15. Adc_GetCurrentPowerState
+#### 7.3.15. Adc_GetCurrentPowerState
 
 **说明**: 此**API**返回**ADC**硬件单元的当前电源状态。可通过**Adc.h**获得。本服务为同步调用，不可重入。参数 CurrentPowerState（inout）：**ADC**硬件单元的当前电源模式通过此参数返回。参数 Result（out）：若**API**返回**E_OK**：**ADC_SERVICE_ACCEPTED**表示已返回当前电源模式；若**API**返回**E_NOT_OK**：**ADC_NOT_INIT**表示**ADC**模块未初始化。返回值：**Std_ReturnType**，**E_OK**表示模式可读取；**E_NOT_OK**表示服务被拒绝。
 
@@ -873,7 +828,7 @@ Std_ReturnType Adc_GetCurrentPowerState ( Adc_PowerStateType* CurrentPowerState,
 
 此**API**返回**ADC**硬件单元的当前电源状态。
 
-#### 8.3.16. Adc_GetTargetPowerState
+#### 7.3.16. Adc_GetTargetPowerState
 
 **说明**: 此**API**返回**ADC**硬件单元的目标电源状态。可通过**Adc.h**获得。本服务为同步调用，不可重入。参数 TargetPowerState（inout）：**ADC**硬件单元的目标电源模式通过此参数返回。参数 Result（out）：若**API**返回**E_OK**：**ADC_SERVICE_ACCEPTED**表示已返回目标电源模式；若**API**返回**E_NOT_OK**：**ADC_NOT_INIT**表示**ADC**模块未初始化。返回值：**Std_ReturnType**，**E_OK**表示模式可读取；**E_NOT_OK**表示服务被拒绝。
 
@@ -883,7 +838,7 @@ Std_ReturnType Adc_GetTargetPowerState ( Adc_PowerStateType* TargetPowerState, A
 
 此**API**返回**ADC**硬件单元的目标电源状态。
 
-#### 8.3.17. Adc_PreparePowerState
+#### 7.3.17. Adc_PreparePowerState
 
 **说明**: 此**API**启动允许**ADC**硬件模块进入请求电源状态所需的过程。外设能否运行取决于电源状态和硬件特性，集成人员应了解这些特性，是否使用外设由其负责。可通过**Adc.h**获得。本服务为同步调用，不可重入。参数 PowerState（in）：打算达到的目标电源状态。参数 Result（out）：若**API**返回**E_OK**：**ADC_SERVICE_ACCEPTED**表示**ADC**模块电源状态准备已启动；若**API**返回**E_NOT_OK**：**ADC_NOT_INIT**表示**ADC**模块未初始化。返回值：**Std_ReturnType**，**E_OK**表示准备过程已启动；**E_NOT_OK**表示服务被拒绝。
 
@@ -901,13 +856,13 @@ Std_ReturnType Adc_PreparePowerState ( Adc_PowerStateType PowerState, Adc_PowerS
 
 若无法从当前电源状态直接到达请求的电源状态，应上报运行时错误**ADC_E_TRANSITION_NOT_POSSIBLE**。到达目标电源状态所需的所有异步操作均可在**Adc_Main_PowerTransitionManager**的上下文中于后台执行。
 
-### 8.4. 回调通知
+### 7.4. 回调通知
 
 由于**ADC**驱动是位于最底层架构层的模块，它不向下层模块提供任何回调函数。
 
-### 8.5. 调度函数
+### 7.5. 调度函数
 
-#### 8.5.1. Adc_Main_PowerTransitionManager
+#### 7.5.1. Adc_Main_PowerTransitionManager
 
 **说明**: 此**API**被周期性调用，监督电源状态切换，检查模块的就绪状态并发出回调**IoHwAb_Adc_NotifyReadyForPowerState\<Mode\>**（见**AdcPowerStateReadyCbkRef**配置参数）。可通过**SchM_Adc.h**获得。
 
@@ -923,11 +878,11 @@ void Adc_Main_PowerTransitionManager ( void )
 
 若**ADC**模块未初始化，此函数应直接返回而不做任何进一步处理。这是为了避免处理未初始化的变量。由于该条件可在启动阶段轻松验证（初始化完成前启动的任务），因此不上报**DET**错误。理由：启动阶段可能出现**OS**已调度任务（调用主函数）而某些模块尚未初始化的情况。这不是真正的错误条件，尽管需要处理（即不执行直接返回）。尽管转换状态监视功能是强制的，但此**API**的实现是可选的，即如果硬件允许以其他方式传递通知并监视转换状态，则可跳过此函数的实现。
 
-### 8.6. 期望接口
+### 7.6. 期望接口
 
 本章列出需要从其他模块获取的所有接口。
 
-#### 8.6.1. 强制接口
+#### 7.6.1. 强制接口
 
 本章定义履行模块核心功能所需的所有接口。
 
@@ -935,7 +890,7 @@ void Adc_Main_PowerTransitionManager ( void )
 |---|---|---|
 | Det_ReportRuntimeError | Det.h | 上报运行时错误的服务。若配置了回调（**callout**），则应调用该回调。 |
 
-#### 8.6.2. 可选接口
+#### 7.6.2. 可选接口
 
 本章定义履行模块可选功能所需的所有接口。
 
@@ -943,7 +898,7 @@ void Adc_Main_PowerTransitionManager ( void )
 |---|---|---|
 | Det_ReportError | Det.h | 上报开发错误的服务。 |
 
-#### 8.6.3. 可配置接口
+#### 7.6.3. 可配置接口
 
 本章列出目标函数可被配置的所有接口。目标函数通常是回调函数。这类接口的名称不固定，因为它们是可配置的。
 
@@ -951,7 +906,7 @@ void Adc_Main_PowerTransitionManager ( void )
 
 **注意：** 通知函数**IoHwAb_Adc_Notification_\<GroupID\>**运行于中断上下文中。用户需负责使这些函数的代码保持合理简短。组通知函数的名称是可配置的（见**ADC402**）。
 
-##### 8.6.3.1. IoHwAb_AdcNotification\<#groupID\>
+##### 7.6.3.1. IoHwAb_AdcNotification\<#groupID\>
 
 **说明**: 当组**\<#groupID\>**的转换完成时，**ADC**驱动程序会调用此函数。可通过**IoHwAb_Adc.h**获得。本服务为同步调用，不可重入。
 
@@ -971,7 +926,7 @@ void IoHwAb_AdcNotification<#groupID> ( void )
 
 回调通知应可配置为配置结构体内指向用户定义函数的指针。所有可用的通道组，其回调函数必须在模块配置阶段声明。
 
-##### 8.6.3.2. IoHwAb_Adc_NotifyReadyForPowerState\<#Mode\>
+##### 7.6.3.2. IoHwAb_Adc_NotifyReadyForPowerState\<#Mode\>
 
 **说明**: 当模式**\<#Mode\>**请求的电源状态准备完成时，**ADC**驱动程序会调用此函数。可通过**IoHwAb_Adc.h**获得。本服务为同步调用，不可重入。
 
@@ -980,258 +935,6 @@ void IoHwAb_Adc_NotifyReadyForPowerState<#Mode> ( void )
 ```
 
 若配置参数**AdcPowerStateAsynchTransitionMode**设置为**TRUE**，**ADC**驱动应在**Adc_PreparePowerState**准备过程完成时，向注册的用户发出此通知。
-
-## 9. 时序图
-
-本章的时序图描述了**ADC**驱动程序在各种使用场景下的典型交互过程。
-
-### 9.1. ADC 驱动的初始化
-
-![Figure9.1.png](Figure9.1.png)
-
-### 9.2. ADC 驱动的去初始化
-
-![Figure9.2.png](Figure9.2.png)
-
-### 9.3. 软件触发的一次性转换（无通知）
-
-![Figure9.3.png](Figure9.3.png)
-
-本场景中，**ADC**通道组配置为：组 1 包含通道 1 与通道 2，采用一次性转换模式（**One-Shot Conversion Mode**）与单一访问模式（**Single Access Mode**）。用户调用**Adc_StartGroupConversion**启动转换后，通过循环调用**Adc_GetGroupStatus**等待**ADC_BUSY**状态结束；转换完成后再次查询得到**ADC_STREAM_COMPLETED**，最后调用**Adc_ReadGroup**读取结果。
-
-### 9.4. 软件触发的连续转换（带通知）
-
-![Figure9.4.png](Figure9.4.png)
-
-本场景中，用户先启用组通知，再启动连续转换。每轮转换完成后**ADC**驱动发出**Adc_Notification_Group_1**通知，用户可在通知中调用**Adc_ReadGroup**读取结果，最后调用**Adc_StopGroupConversion**停止转换。
-
-### 9.5. 硬件触发的一次性转换（带通知）
-
-![Figure9.5.png](Figure9.5.png)
-
-本场景中，用户启用组通知与硬件触发。硬件触发事件到来后启动转换，转换完成发出通知；通知禁用期间发生的事件不会补发通知，再次禁用通知后停止硬件触发。
-
-### 9.6. 硬件触发的一次性转换——线性流式
-
-![Figure9.6.png](Figure9.6.png)
-
-本场景中，组配置为硬件触发、一次性转换、线性流式缓冲区（**m=2**，即 2 轮组结果存入缓冲区）。第一轮结果写入缓冲区后发出通知；缓冲区填满后硬件触发自动禁用，通知仍保持使能。
-
-### 9.7. 无优先级机制——无排队
-
-![Figure9.7.png](Figure9.7.png)
-
-本场景中，优先级机制配置为**NONE**、排队配置为**OFF**。在转换进行中再次请求启动转换、或启用硬件触发时，将向**DET**上报运行时错误**ADC_E_BUSY**。
-
-### 9.8. 无优先级机制——软件排队
-
-![Figure9.8.png](Figure9.8.png)
-
-本场景中，优先级机制配置为**NONE**、排队配置为**ON**。高优先级组的转换请求可存入软件队列，在前一组转换完成后按先到先服务顺序处理。
-
-### 9.9. 硬件/软件优先级机制——软件排队
-
-![Figure9.9.png](Figure9.9.png)
-
-本场景中，优先级机制配置为**HW_SW**、排队使用**SW**队列。组 1 优先级高于组 2，组 2 转换可被组 1 中止/挂起，并在组 1 完成后重启/恢复。
-
-### 9.10. 硬件优先级机制——硬件排队
-
-![Figure9.10.png](Figure9.10.png)
-
-本场景中，优先级机制配置为**HW**，排队使用**HW**队列。被中止/挂起的软件组转换在硬件组转换完成后重新启动/恢复。
-
-### 9.11. 硬件/软件优先级机制——硬件/软件排队
-
-![Figure9.11.png](Figure9.11.png)
-
-本场景中，优先级机制配置为**HW_SW**，硬件与软件队列同时使用。组 3 与组 4 通过**SW**队列优先化，组 1 与组 2 通过**HW**队列优先化。
-
-## 10. 配置规范
-
-本章定义配置参数及其到容器的聚类。第 10.1 节描述基础概念并规定参数描述所用表格的模板；第 10.2 节规定**ADC**驱动程序的结构（容器）与参数；第 10.3 节规定**ADC**驱动程序的发布信息。
-
-### 10.1. 如何阅读本章
-
-详情请参阅**SWS_BSWGeneral**中第 10.1 章"配置规范简介"。
-
-### 10.2. 容器和配置参数
-
-以下各节汇总所有配置参数，参数的详细含义见第 7 章与第 8 章。
-
-#### 10.2.1. Adc
-
-SWS 项 [ECUC_Adc_00462]
-
-| 属性 | 值 |
-|---|---|
-| 容器名称 | Adc |
-| 描述 | **Adc**（模数转换）模块的配置。 |
-| 后构建变体支持 | true |
-| 支持的配置变体 | VARIANT-POST-BUILD, VARIANT-PRE-COMPILE |
-
-包含的容器：
-
-| 容器名称 | 多重度 | 范围/依赖 |
-|---|---|---|
-| AdcConfigSet | 1 | 此容器包含 AUTOSAR Adc 模块的配置参数和子容器。 |
-| AdcGeneral | 1 | ADC 驱动程序模块的一般配置（参数）。 |
-| AdcPublishedInformation | 1 | "Common"发布信息未覆盖的附加发布参数。注意这些参数具有"PUBLISHED-INFORMATION"配置类设置，因为它们是发布信息。 |
-
-#### 10.2.2. AdcGeneral
-
-SWS 项 [ECUC_Adc_00027]
-
-| 属性 | 值 |
-|---|---|
-| 容器名称 | AdcGeneral |
-| 父容器 | Adc |
-| 描述 | ADC 驱动程序模块的一般配置（参数）。 |
-
-配置参数：
-
-| 参数名称 | 多重度 | 类型 | 默认值 | 描述 |
-|---|---|---|---|---|
-| AdcDeInitApi | 1 | EcucBooleanParamDef | – | 在代码中添加/移除服务**Adc_DeInit()**。true：可使用**Adc_DeInit()**；false：不可使用**Adc_DeInit()**。 |
-| AdcDevErrorDetect | 1 | EcucBooleanParamDef | false | 开关开发错误检测与通知。true：启用检测和通知；false：禁用检测和通知。 |
-| AdcEnableLimitCheck | 1 | EcucBooleanParamDef | – | 启用或禁用**ADC**驱动中的限制检查功能。 |
-| AdcEnableQueuing | 1 | EcucBooleanParamDef | – | 确定在优先级机制禁用时排队机制是否激活。注意：若优先级机制激活，排队机制始终激活。 |
-| AdcEnableStartStopGroupApi | 1 | EcucBooleanParamDef | – | 在代码中添加/移除服务**Adc_StartGroupConversion()**和**Adc_StopGroupConversion()**。true：可使用；false：不可使用。 |
-| AdcGrpNotifCapability | 1 | EcucBooleanParamDef | – | 确定组通知机制（启用和禁用通知的函数）是否可用。 |
-| AdcHwTriggerApi | 1 | EcucBooleanParamDef | – | 在代码中添加/移除服务**Adc_EnableHardwareTrigger()**和**Adc_DisableHardwareTrigger()**。true：可使用；false：不可使用。 |
-| AdcLowPowerStatesSupport | 0..1 | EcucBooleanParamDef | false | 在代码中添加/移除所有电源状态管理相关的**API**（**Adc_SetPowerState**、**Adc_GetCurrentPowerState**、**Adc_GetTargetPowerState**、**Adc_PreparePowerState**、**Adc_Main_PowerTransitionManager**）。 |
-| AdcPowerStateAsynchTransitionMode | 0..1 | EcucBooleanParamDef | false | 启用/禁用**ADC**驱动对异步电源状态切换的支持。 |
-| AdcPriorityImplementation | 1 | EcucEnumerationParamDef | – | 确定是否提供优先级机制用于转换请求的优先化，以及提供何种优先级机制（实现类型：**Adc_PriorityImplementationType**）。 |
-| AdcReadGroupApi | 1 | EcucBooleanParamDef | – | 在代码中添加/移除服务**Adc_ReadGroup()**。true：可使用**Adc_ReadGroup()**；false：不可使用。 |
-| AdcResultAlignment | 1 | EcucEnumerationParamDef | – | **ADC**原始结果在**ADC**结果缓冲区中的对齐方式（左/右对齐）。实现类型：**Adc_ResultAlignmentType**。 |
-| AdcVersionInfoApi | 1 | EcucBooleanParamDef | false | 在代码中添加/移除服务**Adc_GetVersionInfo()**。true：可使用；false：不可使用。 |
-| AdcEcucPartitionRef | 0..* | Reference | – | 将**ADC**驱动映射到零个或多个**ECUC**分区，使驱动**API**在相应分区中可用。 |
-| AdcKernelEcucPartitionRef | 0..1 | Reference | – | 将**ADC**内核映射到零个或一个**ECUC**分区，将驱动内核分配给特定内核。 |
-
-#### 10.2.3. AdcPowerStateConfig
-
-SWS 项 [ECUC_Adc_00459]
-
-| 属性 | 值 |
-|---|---|
-| 容器名称 | AdcPowerStateConfig |
-| 父容器 | AdcGeneral |
-| 描述 | 该参数的每个实例定义一个电源状态，以及达到该电源状态时要调用的回调。 |
-
-配置参数：
-
-| 参数名称 | 多重度 | 类型 | 默认值 | 范围 | 描述 |
-|---|---|---|---|---|---|
-| AdcPowerState | 1 | EcucIntegerParamDef | – | 0..18446744073709551615 | 该参数的每个实例描述**ADC**硬件支持的一种不同电源状态。 |
-| AdcPowerStateReadyCbkRef | 1 | EcucFunctionNameDef | – | – | 该参数的每个实例包含对**CDD**或**IoHwAb**组件中所定义电源模式回调的引用。 |
-
-#### 10.2.4. AdcConfigSet
-
-SWS 项 [ECUC_Adc_00390]
-
-| 属性 | 值 |
-|---|---|
-| 容器名称 | AdcConfigSet |
-| 父容器 | Adc |
-| 描述 | 此容器包含 AUTOSAR Adc 模块的配置参数和子容器。 |
-
-包含的容器：
-
-| 容器名称 | 多重度 | 范围/依赖 |
-|---|---|---|
-| AdcHwUnit | 1..* | 此容器包含取决于通道分组的驱动程序配置（参数）。此容器可包含标准化模块定义中未定义的硬件特定参数，须在供应商特定模块定义中添加。 |
-
-#### 10.2.5. AdcChannel
-
-SWS 项 [SWS_Adc_CONSTR_00002]：**AdcGroupEcucPartitionRef**所引用的**ECUC**分区应是**AdcEcucPartitionRef**所引用**ECUC**分区的子集。
-
-**AdcGroup 容器**（SWS 项 [ECUC_Adc_00028]，父容器 AdcHwUnit）：此容器包含组配置（参数）。
-
-| 参数名称 | 多重度 | 类型 | 默认值 | 范围 | 描述 |
-|---|---|---|---|---|---|
-| AdcGroupAccessMode | 1 | EcucEnumerationParamDef | – | – | 组转换结果的访问模式类型。实现类型：**Adc_GroupAccessModeType**。 |
-| AdcGroupConversionMode | 1 | EcucEnumerationParamDef | – | – | 驱动支持的转换模式类型。实现类型：**Adc_GroupConvModeType**。 |
-| AdcGroupId | 1 | EcucIntegerParamDef | – | 0..1023 | 组的数字**ID**。该参数是在**API**上使用的符号名，允许上层访问组数据。 |
-| AdcGroupPriority | 0..1 | EcucIntegerParamDef | – | 0..255 | **AdcGroup**的优先级级别。实现类型：**Adc_GroupPriorityType**。 |
-| AdcGroupReplacement | 0..1 | EcucEnumerationParamDef | – | – | 组转换被更高优先级组中断时，在**ADC**组级别使用的替换机制。 |
-| AdcGroupTriggSrc | 1 | EcucEnumerationParamDef | – | – | 启动组转换的源事件类型。实现类型：**Adc_TriggerSourceType**。 |
-| AdcHwTrigSignal | 0..1 | EcucEnumerationParamDef | – | – | 配置驱动程序应对硬件触发信号的哪个边沿作出反应（即启动转换）（仅当**ADC**硬件支持时）。实现类型：**Adc_HwTriggerSignalType**。 |
-| AdcHwTrigTimer | 0..1 | EcucIntegerParamDef | – | 0..18446744073709551615 | **ADC**模块嵌入式定时器的重载值（仅当**ADC**硬件支持时）。实现类型：**Adc_HwTriggerTimerType**。 |
-| AdcNotification | 0..1 | EcucFunctionNameDef | – | – | 每个组的回调函数。 |
-| AdcStreamingBufferMode | 1 | EcucEnumerationParamDef | – | – | 将流式缓冲区配置为"线性缓冲区"（即流缓冲区满时**ADC**驱动停止转换）或"环形缓冲区"（即**ADC**驱动回绕继续转换）。实现类型：**Adc_StreamBufferModeType**。 |
-| AdcStreamingNumSamples | 1 | EcucIntegerParamDef | 1 | 1..255 | 流式访问模式下每通道采集的**ADC**值数量。注意：单一访问模式下该参数为**1**。 |
-| AdcGroupDefinition | 1..* | Reference | – | – | 将**AdcChannels**分配给**AdcGroups**。实现类型：**Adc_GroupDefType**。 |
-| AdcGroupEcucPartitionRef | 0..* | Reference | – | – | 将**ADC**通道组映射到零个或多个**ECUC**分区，以限制对该通道组的访问。 |
-
-**AdcChannel 容器**（SWS 项 [ECUC_Adc_00268]，父容器 AdcHwUnit）：此容器包含取决于硬件能力的通道配置（参数）。该数据结构的组织可能包含对微控制器的依赖，因此留给实现者及其配置位置决定。注意：由于一个**AdcChannel**可属于多个**AdcGroups**，此容器不作为**AdcGroup**的子容器实现，而是作为**AdcHwUnit**的子容器。
-
-| 参数名称 | 多重度 | 类型 | 默认值 | 范围 | 描述 |
-|---|---|---|---|---|---|
-| AdcChannelConvTime | 0..1 | EcucIntegerParamDef | – | 0..18446744073709551615 | 转换时间的配置，即模拟值被转换为数字表示所需的时间（以时钟周期计），按通道配置（若硬件支持）。实现类型：**Adc_ConversionTimeType**。 |
-| AdcChannelHighLimit | 0..1 | EcucIntegerParamDef | – | 0..18446744073709551615 | 上限——用于限制检查。 |
-| AdcChannelId | 1 | EcucIntegerParamDef | – | 0..1024 | 该参数定义通道到物理**ADC**硬件通道的分配。实现类型：**Adc_ChannelType**。 |
-| AdcChannelLimitCheck | 0..1 | EcucBooleanParamDef | – | – | 启用或禁用**ADC**通道的限制检查。 |
-| AdcChannelLowLimit | 0..1 | EcucIntegerParamDef | – | 0..18446744073709551615 | 下限——用于限制检查。 |
-| AdcChannelRangeSelect | 0..1 | EcucEnumerationParamDef | – | – | 在限制检查激活的情况下：定义相对于**AdcChannelLowLimit**和**AdcChannelHighLimit**所定义的边界，哪些转换值会被纳入考虑。 |
-| AdcChannelRefVoltsrcHigh | 0..1 | EcucEnumerationParamDef | – | – | 每个通道的上参考电压源。枚举字面量由供应商特定定义。 |
-| AdcChannelRefVoltsrcLow | 0..1 | EcucEnumerationParamDef | – | – | 每个通道的下参考电压源。枚举字面量由供应商特定定义。 |
-| AdcChannelResolution | 0..1 | EcucIntegerParamDef | – | 1..63 | 以位数表示的通道分辨率。实现类型：**Adc_ResolutionType**。 |
-| AdcChannelSampTime | 0..1 | EcucIntegerParamDef | – | 0..18446744073709551615 | 采样时间的配置，即对值进行采样的时间（以时钟周期计），按通道配置。 |
-
-#### 10.2.6. AdcHwUnit
-
-| 属性 | 值 |
-|---|---|
-| 容器名称 | AdcHwUnit |
-| 父容器 | AdcConfigSet |
-| 描述 | 此容器包含取决于通道分组的驱动程序配置（参数）。此容器可包含标准化模块定义中未定义的硬件特定参数，须在供应商特定模块定义中添加。 |
-
-配置参数：
-
-| 参数名称 | 多重度 | 类型 | 默认值 | 范围 | 描述 |
-|---|---|---|---|---|---|
-| AdcClockSource | 0..1 | EcucEnumerationParamDef | – | – | **ADC**模块转换单元特定的时钟输入，可静态配置以选择不同的时钟源。 |
-| AdcHwUnitId | 1 | EcucEnumerationParamDef | – | – | 硬件单元的数字**ID**。该符号名允许访问硬件单元数据。 |
-| AdcPrescale | 0..1 | EcucIntegerParamDef | – | 0..65535 | 可选的**ADC**模块特定时钟预分频因子（若硬件支持）。实现类型：**Adc_PrescaleType**。 |
-
-包含的容器：
-
-| 容器名称 | 多重度 | 范围/依赖 |
-|---|---|---|
-| AdcChannel | 1..* | 此容器包含取决于硬件能力的通道配置（参数）。该数据结构的组织可能包含对微控制器的依赖，因此留给实现者及其配置位置决定。注意：由于一个**AdcChannel**可属于多个**AdcGroups**，此容器不作为**AdcGroup**的子容器实现，而是作为**AdcHwUnit**的子容器。 |
-| AdcGroup | 1..* | 此容器包含组配置（参数）。 |
-
-**ADC**驱动应支持一个或多个同类型的**ADC**硬件单元。**ADC**硬件单元的选择通过配置容器**AdcHwUnit**完成。
-
-### 10.3. 发布信息
-
-详情请参阅**SWS_BSWGeneral**中第 10.3 章"发布信息"。
-
-#### 10.3.1. AdcPublishedInformation
-
-SWS 项 [ECUC_Adc_00030]
-
-| 属性 | 值 |
-|---|---|
-| 容器名称 | AdcPublishedInformation |
-| 父容器 | Adc |
-| 描述 | "Common"发布信息未覆盖的附加发布参数。注意这些参数具有"PUBLISHED-INFORMATION"配置类设置，因为它们是发布信息。 |
-
-配置参数：
-
-| 参数名称 | 多重度 | 类型 | 默认值 | 描述 |
-|---|---|---|---|---|
-| AdcChannelValueSigned | 1 | EcucBooleanParamDef | – | **ADC**驱动的结果值是否带有符号信息（true）或不带（false）。若结果应被解释为有符号值，则适用**C**语言规则。 |
-| AdcGroupFirstChannelFixed | 1 | EcucBooleanParamDef | – | **ADC**通道组的第一个通道是否可配置（false）或被固定（true）为由**ADC**硬件单元确定的值。 |
-| AdcMaxChannelResolution | 1 | EcucIntegerParamDef | – | 最大通道分辨率（位数）（不规定精度）。范围 1..63。 |
-
-### 10.4. 符号名的配置
-
-供上层使用的**ADC**通道与**ADC**通道组的符号名应由配置工具定义，并定义在模块的配置头文件中。
-
-## A. 不适用的需求
-
-以下需求不适用于本规范 [SWS_Adc_NA_00460]：[SRS_BSW_00344]、[SRS_BSW_00167]、[SRS_BSW_00170]、[SRS_BSW_00398]、[SRS_BSW_00375]、[SRS_BSW_00416]、[SRS_BSW_00168]、[SRS_BSW_00423]、[SRS_BSW_00424]、[SRS_BSW_00425]、[SRS_BSW_00426]、[SRS_BSW_00427]、[SRS_BSW_00428]、[SRS_BSW_00429]、[SRS_BSW_00432]、[SRS_BSW_00433]、[SRS_BSW_00417]、[SRS_BSW_00161]、[SRS_BSW_00162]、[SRS_BSW_00005]、[SRS_BSW_00164]、[SRS_BSW_00325]、[SRS_BSW_00342]、[SRS_BSW_00343]、[SRS_BSW_00160]、[SRS_BSW_00007]、[SRS_BSW_00413]、[SRS_BSW_00347]、[SRS_BSW_00307]、[SRS_BSW_00373]、[SRS_BSW_00301]、[SRS_BSW_00302]、[SRS_BSW_00328]、[SRS_BSW_00312]、[SRS_BSW_00006]、[SRS_BSW_00357]、[SRS_BSW_00306]、[SRS_BSW_00308]、[SRS_BSW_00330]、[SRS_BSW_00009]、[SRS_BSW_00010]、[SRS_BSW_00341]、[SRS_BSW_00334]、[SRS_SPAL_12267]、[SRS_SPAL_12463]、[SRS_SPAL_12068]、[SRS_SPAL_12069]、[SRS_SPAL_12169]、[SRS_SPAL_12064]、[SRS_SPAL_12067]、[SRS_SPAL_12077]、[SRS_SPAL_12078]、[SRS_SPAL_12092]、[SRS_SPAL_12265]。
 
 <section id="wechat">
 

@@ -111,43 +111,9 @@ AUTOSAR_CP_SWS_BSWGeneral.pdf
 
 **Pwm_Irq.c**应包含**Pwm.h**。
 
-## 6. 需求可追溯性
+## 6. 功能规格
 
-| 需求 | 描述 | 满足项 |
-|---|---|---|
-| SRS_BSW_00101 | 基础软件模块应能够在单独的初始化函数中初始化变量和硬件 | SWS_Pwm_00007 |
-| SRS_BSW_00171 | **ECU**中不需要的基础**SW**组件的可选功能应在预编译时可配置 | SWS_Pwm_10080, SWS_Pwm_10082, SWS_Pwm_10083, SWS_Pwm_10084, SWS_Pwm_10085, SWS_Pwm_20080, SWS_Pwm_20082, SWS_Pwm_20083, SWS_Pwm_20084, SWS_Pwm_20085 |
-| SRS_BSW_00314 | 所有内部驱动模块应将中断帧定义与服务例程分离 | SWS_Pwm_00065 |
-| SRS_BSW_00323 | 所有**AUTOSAR**基础软件模块应检查传入的**API**参数的有效性 | SWS_Pwm_00045, SWS_Pwm_00047, SWS_Pwm_00117, SWS_Pwm_10051, SWS_Pwm_20051, SWS_Pwm_30051 |
-| SRS_BSW_00336 | 基础**SW**模块应能够关闭 | SWS_Pwm_00010 |
-| SRS_BSW_00337 | 开发错误分类 | SWS_Pwm_20002, SWS_Pwm_30002, SWS_Pwm_40002, SWS_Pwm_50002 |
-| SRS_BSW_00343 | 基础**SW**模块的规范和配置时间单位最好采用物理时间单位 | SWS_Pwm_00070 |
-| SRS_BSW_00346 | 所有**AUTOSAR**基础软件模块应至少提供一组基本模块文件 | SWS_Pwm_00065 |
-| SRS_BSW_00385 | 列出可能的错误通知 | SWS_Pwm_20002, SWS_Pwm_30002, SWS_Pwm_40002, SWS_Pwm_50002 |
-| SRS_BSW_00386 | **BSW**应规定检测错误的配置和条件 | SWS_Pwm_00045, SWS_Pwm_00047, SWS_Pwm_00117, SWS_Pwm_10051, SWS_Pwm_20002, SWS_Pwm_20051, SWS_Pwm_30002, SWS_Pwm_30051, SWS_Pwm_40002, SWS_Pwm_50002 |
-| SRS_BSW_00406 | 表示**BSW**模块是否已初始化的静态状态变量，在调用该**BSW**模块的任何**API**之前应以值 0 初始化 | SWS_Pwm_00117 |
-| SRS_Pwm_12293 | **PWM**驱动程序应允许**PWM**通道属性的静态配置 | SWS_Pwm_00197 |
-| SRS_Pwm_12295 | **PWM**驱动程序应提供设置所选通道占空比的服务 | SWS_Pwm_00013 |
-| SRS_Pwm_12297 | **PWM**驱动程序应提供设置所选通道周期的服务 | SWS_Pwm_00019 |
-| SRS_Pwm_12299 | **PWM**驱动程序应允许在运行时启用/禁用**PWM**边沿通知 | SWS_Pwm_00023, SWS_Pwm_00024 |
-| SRS_Pwm_12358 | **PWM**驱动程序应能够立即将所选通道的输出设置为给定状态 | SWS_Pwm_00021 |
-| SRS_Pwm_12378 | **PWM**驱动程序应能够为**PWM**信号的每个边沿分配通知 | SWS_Pwm_00023, SWS_Pwm_00024, SWS_Pwm_00197 |
-| SRS_Pwm_12381 | 通过对**PWM**驱动程序去初始化，应停止所有**PWM**通道 | SWS_Pwm_00010 |
-| SRS_Pwm_12382 | **PWM**驱动程序应等待信号周期结束以更新**PWM**信号的占空比 | SWS_Pwm_00017 |
-| SRS_Pwm_12383 | **PWM**驱动程序应提供 16 位接口来设置占空比 | SWS_Pwm_00058 |
-| SRS_Pwm_12385 | **PWM**驱动程序应提供获取**PWM**通道输出状态的服务 | SWS_Pwm_00022 |
-| SRS_Pwm_12386 | **PWM**驱动程序不应涵盖在通用**I/O**上的**PWM**模拟 | SWS_Pwm_00001 |
-| SRS_Pwm_12389 | **PWM**驱动程序应只允许某些**PWM**通道频率的静态配置 | SWS_Pwm_00041 |
-| SRS_Pwm_12459 | **PWM**驱动程序应提供占空比的缩放方案 | SWS_Pwm_00059 |
-| SRS_SPAL_00157 | **AUTOSAR**基础软件的所有驱动和处理程序应实现驱动和处理程序的通知机制 | SWS_Pwm_00025 |
-| SRS_SPAL_12057 | 所有驱动模块应实现初始化接口 | SWS_Pwm_00007, SWS_Pwm_00052, SWS_Pwm_00062, SWS_Pwm_10009, SWS_Pwm_20009, SWS_Pwm_30009 |
-| SRS_SPAL_12125 | 所有驱动模块应仅初始化已配置的资源 | SWS_Pwm_00062 |
-| SRS_SPAL_12129 | **ISR**应负责复位中断标志并调用相应的通知函数 | SWS_Pwm_00026 |
-| SRS_SPAL_12163 | 所有驱动模块应实现去初始化接口 | SWS_Pwm_00010, SWS_Pwm_00011, SWS_Pwm_00012 |
-
-## 7. 功能规格
-
-### 7.1. 一般行为
+### 6.1. 一般行为
 
 **PWM**模块的所有函数（除**Pwm_Init**、**Pwm_DeInit**和**Pwm_GetVersionInfo**外）对于不同的**PWM**通道编号应是可重入的。
 
@@ -155,23 +121,23 @@ AUTOSAR_CP_SWS_BSWGeneral.pdf
 
 如果在运行时不同的任务或**ISR**中对同一**PWM**通道进行多次函数调用，**Pwm**模块的用户应确保完整性。
 
-### 7.2. 时间单位 Ticks
+### 6.2. 时间单位 Ticks
 
-#### 7.2.1. 背景与原理
+#### 6.2.1. 背景与原理
 
 为了从寄存器值中获得时间，有必要知道振荡器频率、预分频器等。由于这些设置是在**MCU**和/或其他模块中进行的，因此无法计算此类时间。
 
 因此，时间与**ticks**之间的转换应是上层的一部分。
 
-#### 7.2.2. 需求
+#### 6.2.2. 需求
 
 **PWM**模块的**API**服务中使用的所有时间单位都应是**ticks**单位。
 
-### 7.3. 硬件低功耗状态的支持和管理
+### 6.3. 硬件低功耗状态的支持和管理
 
 某些**PWM HW**模块允许被设置为某些可降低功耗的运行模式，代价可能是更慢的反应时间、更低的性能或完全不可用。每个**PWM**模块可以支持一种或多种低功耗运行模式，其中全功率模式始终存在并在启动时默认设置。
 
-#### 7.3.1. 背景
+#### 6.3.1. 背景
 
 **PWM**驱动程序提供电源状态控制**API**和后台处理机制，以处理异步电源状态更改过程（即请求后不会立即完成、而需要一些较长操作的电源状态更改）。
 
@@ -181,7 +147,7 @@ AUTOSAR_CP_SWS_BSWGeneral.pdf
 
 **PWM**模块应将电源控制能力作为可选功能支持。本模块既不强制只使用启用了电源控制的**MCU**，也不强制配置相同的**MCU**。相反，它在供应商支持的情况下提出了一种处理电源状态的方法。
 
-#### 7.3.2. 需求
+#### 6.3.2. 需求
 
 当相应的配置参数**PwmLowPowerStatesSupport**设置为**TRUE**时，**PwmDriver**应支持电源状态更改及其**API**。
 
@@ -207,7 +173,7 @@ AUTOSAR_CP_SWS_BSWGeneral.pdf
 
 如果配置参数**PwmPowerStateAsynchTransitionMode**设置为**TRUE**，准备过程应在相应**API**返回后在后台继续，并通过配置的回调通知其完成。
 
-### 7.4. 占空比分辨率和缩放
+### 6.4. 占空比分辨率和缩放
 
 占空比参数的宽度为 16 位。
 
@@ -222,13 +188,13 @@ AUTOSAR_CP_SWS_BSWGeneral.pdf
 AbsoluteDutyCycle = ((uint32)AbsolutePeriodTime * RelativeDutyCycle) >> 15;
 ```
 
-### 7.5. 版本检查
+### 6.5. 版本检查
 
 详情请参阅**SWS_BSWGeneral**中第 5.1.8 章"Version Check"。
 
-### 7.6. 错误分类
+### 6.6. 错误分类
 
-#### 7.6.1. 开发错误
+#### 6.6.1. 开发错误
 
 | 错误类型 | 相关错误代码 | 错误值 |
 |---|---|---|
@@ -258,7 +224,7 @@ AbsoluteDutyCycle = ((uint32)AbsolutePeriodTime * RelativeDutyCycle) >> 15;
 
 有关错误检测的更多详情，请参阅**API**参数检查一章。
 
-#### 7.6.2. 运行时错误
+#### 6.6.2. 运行时错误
 
 | 错误类型 | 相关错误代码 | 错误值 |
 |---|---|---|
@@ -266,21 +232,21 @@ AbsoluteDutyCycle = ((uint32)AbsolutePeriodTime * RelativeDutyCycle) >> 15;
 
 当调用此**API**时一个或多个**HW**通道（如适用）处于不同于**IDLE**（或类似非运行状态）的状态，和/或仍有为**HW**模块通道注册的通知，**API**应报告运行时错误**PWM_E_NOT_DISENGAGED**。
 
-#### 7.6.3. 瞬态故障
+#### 6.6.3. 瞬态故障
 
 没有瞬态故障。
 
-#### 7.6.4. 生产错误
+#### 6.6.4. 生产错误
 
 没有生产错误。
 
-#### 7.6.5. 扩展生产错误
+#### 6.6.5. 扩展生产错误
 
 没有扩展生产错误。
 
-## 8. API规范
+## 7. API规范
 
-### 8.1. 导入的类型
+### 7.1. 导入的类型
 
 本章列出了从其他模块包含的所有类型。
 
@@ -289,17 +255,17 @@ AbsoluteDutyCycle = ((uint32)AbsolutePeriodTime * RelativeDutyCycle) >> 15;
 | Std | Std_Types.h | Std_ReturnType |
 | Std | Std_Types.h | Std_VersionInfoType |
 
-### 8.2. 类型定义
+### 7.2. 类型定义
 
-#### 8.2.1. Pwm_ChannelType
+#### 7.2.1. Pwm_ChannelType
 
 类型，派生自 uint。范围为：8..32 位 —— 这是实现特定的，但并非所有值在该类型内都有效。应选择此类型以在特定微控制器平台上具有最高效的实现。**PWM**通道的数字标识符。可通过**Pwm.h**获得。
 
-#### 8.2.2. Pwm_PeriodType
+#### 7.2.2. Pwm_PeriodType
 
 类型，派生自 uint。范围为：8..32 位 —— 实现特定。应选择此类型以在特定微控制器平台上具有最高效的实现。**PWM**通道周期的定义。可通过**Pwm.h**获得。
 
-#### 8.2.3. Pwm_OutputStateType
+#### 7.2.3. Pwm_OutputStateType
 
 枚举类型，取值范围：
 
@@ -308,7 +274,7 @@ AbsoluteDutyCycle = ((uint32)AbsolutePeriodTime * RelativeDutyCycle) >> 15;
 
 **PWM**通道的输出状态。可通过**Pwm.h**获得。
 
-#### 8.2.4. Pwm_EdgeNotificationType
+#### 7.2.4. Pwm_EdgeNotificationType
 
 枚举类型，取值范围：
 
@@ -318,7 +284,7 @@ AbsoluteDutyCycle = ((uint32)AbsolutePeriodTime * RelativeDutyCycle) >> 15;
 
 **PWM**通道边沿通知类型的定义。可通过**Pwm.h**获得。
 
-#### 8.2.5. Pwm_ChannelClassType
+#### 7.2.5. Pwm_ChannelClassType
 
 枚举类型，取值范围：
 
@@ -328,11 +294,11 @@ AbsoluteDutyCycle = ((uint32)AbsolutePeriodTime * RelativeDutyCycle) >> 15;
 
 定义**PWM**通道的类。可通过**Pwm.h**获得。
 
-#### 8.2.6. Pwm_ConfigType
+#### 7.2.6. Pwm_ConfigType
 
 结构类型。硬件相关结构。初始化数据结构的内容是硬件特定的。这是包含**PWM**驱动程序初始化数据的数据结构类型。可通过**Pwm.h**获得。
 
-#### 8.2.7. Pwm_PowerStateRequestResultType
+#### 7.2.7. Pwm_PowerStateRequestResultType
 
 枚举类型，取值范围：
 
@@ -345,7 +311,7 @@ AbsoluteDutyCycle = ((uint32)AbsolutePeriodTime * RelativeDutyCycle) >> 15;
 
 与电源状态转换相关的请求的结果。可通过**Pwm.h**获得。
 
-#### 8.2.8. Pwm_PowerStateType
+#### 7.2.8. Pwm_PowerStateType
 
 枚举类型，取值范围：
 
@@ -372,9 +338,9 @@ AbsoluteDutyCycle = ((uint32)AbsolutePeriodTime * RelativeDutyCycle) >> 15;
 * 相移的参考通道
 * 微控制器特定的通道属性
 
-### 8.3. 函数定义
+### 7.3. 函数定义
 
-#### 8.3.1. Pwm_Init
+#### 7.3.1. Pwm_Init
 
 **说明**: **PWM**初始化服务。可通过**Pwm.h**获得。本服务为同步调用，不可重入。参数 ConfigPtr（in）：指向配置集的指针。
 
@@ -407,7 +373,7 @@ void Pwm_Init (const Pwm_ConfigType* ConfigPtr)
 
 关于错误检测，相关需求适用于函数**Pwm_Init**。
 
-#### 8.3.2. Pwm_DeInit
+#### 7.3.2. Pwm_DeInit
 
 **说明**: **PWM**去初始化服务。可通过**Pwm.h**获得。本服务为同步调用，不可重入。
 
@@ -427,7 +393,7 @@ void Pwm_DeInit (void)
 
 关于错误检测，相关需求适用于函数**Pwm_DeInit**。
 
-#### 8.3.3. Pwm_SetDutyCycle
+#### 7.3.3. Pwm_SetDutyCycle
 
 **说明**: 设置**PWM**通道占空比的服务。可通过**Pwm.h**获得。本服务为异步调用；对不同通道编号可重入。参数 ChannelNumber（in）：**PWM**的数字标识符。参数 DutyCycle（in）：最小值=0x0000，最大值=0x8000。
 
@@ -457,7 +423,7 @@ void Pwm_SetDutyCycle (Pwm_ChannelType ChannelNumber, uint16 DutyCycle)
 
 函数**Pwm_SetDutyCycle**应可通过配置参数**PwmSetDutyCycle {PWM_SET_DUTY_CYCLE_API}**配置开/关。
 
-#### 8.3.4. Pwm_SetPeriodAndDuty
+#### 7.3.4. Pwm_SetPeriodAndDuty
 
 **说明**: 设置**PWM**通道周期和占空比的服务。可通过**Pwm.h**获得。本服务为异步调用；对不同通道编号可重入。参数 ChannelNumber（in）：**PWM**的数字标识符。参数 Period（in）：**PWM**信号的周期。参数 DutyCycle（in）：最小值=0x0000，最大值=0x8000。
 
@@ -485,7 +451,7 @@ void Pwm_SetPeriodAndDuty (
 
 如果周期设置为零，则占空比的设置无关紧要。在这种情况下，输出应为零（零百分比占空比）。
 
-#### 8.3.5. Pwm_SetOutputToIdle
+#### 7.3.5. Pwm_SetOutputToIdle
 
 **说明**: 将**PWM**输出设置为配置的空闲状态的服务。可通过**Pwm.h**获得。本服务为异步调用；对不同通道编号可重入。参数 ChannelNumber（in）：**PWM**的数字标识符。
 
@@ -507,7 +473,7 @@ void Pwm_SetOutputToIdle (Pwm_ChannelType ChannelNumber)
 
 调用函数**Pwm_SetOutputToIdle**后，固定周期类型通道应只使用**API Pwm_SetDutyCycle()**重新激活，以用旧周期激活**PWM**通道。
 
-#### 8.3.6. Pwm_GetOutputState
+#### 7.3.6. Pwm_GetOutputState
 
 **说明**: 读取**PWM**输出信号内部状态的服务。可通过**Pwm.h**获得。本服务为同步调用；对不同通道编号可重入。参数 ChannelNumber（in）：**PWM**的数字标识符。返回值：Pwm_OutputStateType，PWM_HIGH 表示**PWM**输出状态为高；PWM_LOW 表示**PWM**输出状态为低。
 
@@ -529,7 +495,7 @@ Pwm_OutputStateType Pwm_GetOutputState (Pwm_ChannelType ChannelNumber)
 
 如果在模块初始化之前或以无效通道调用**Pwm_GetOutputState**，它应返回**PWM_LOW**。
 
-#### 8.3.7. Pwm_DisableNotification
+#### 7.3.7. Pwm_DisableNotification
 
 **说明**: 禁用**PWM**信号边沿通知的服务。可通过**Pwm.h**获得。本服务为异步调用；对不同通道编号可重入。参数 ChannelNumber（in）：**PWM**的数字标识符。
 
@@ -545,7 +511,7 @@ void Pwm_DisableNotification (Pwm_ChannelType ChannelNumber)
 
 关于错误检测，相关需求适用于函数**Pwm_DisableNotification**。
 
-#### 8.3.8. Pwm_EnableNotification
+#### 7.3.8. Pwm_EnableNotification
 
 **说明**: 根据通知参数启用**PWM**信号边沿通知的服务。可通过**Pwm.h**获得。本服务为异步调用；对不同通道编号可重入。参数 ChannelNumber（in）：**PWM**的数字标识符。参数 Notification（in）：通知类型**PWM_RISING_EDGE**或**PWM_FALLING_EDGE**或**PWM_BOTH_EDGES**。
 
@@ -565,7 +531,7 @@ void Pwm_EnableNotification (
 
 关于错误检测，相关需求适用于函数**Pwm_EnableNotification**。
 
-#### 8.3.9. Pwm_SetPowerState
+#### 7.3.9. Pwm_SetPowerState
 
 **说明**: 此**API**配置**Pwm**模块，使其进入已准备的电源状态（从预定义的一组已配置电源状态中选择）。可通过**Pwm.h**获得。本服务为同步调用，不可重入。参数 Result（out）：如果**API**返回**E_OK**：**PWM_SERVICE_ACCEPTED**：电源状态更改已执行。如果**API**返回**E_NOT_OK**：**PWM_NOT_INIT**：**PWM**模块未初始化。**PWM_SEQUENCE_ERROR**：**API**调用顺序错误。**PWM_HW_FAILURE**：**HW**模块有故障，使其无法进入所需的电源状态。返回值：Std_ReturnType，**E_OK**：电源模式已更改；**E_NOT_OK**：请求被拒绝。
 
@@ -599,7 +565,7 @@ Std_ReturnType Pwm_SetPowerState (Pwm_PowerStateRequestResultType* Result)
 
 如果**HW**单元先前未通过使用**API Pwm_PreparePowerState()**为目标电源状态做准备，**API**应报告开发错误**PWM_E_PERIPHERAL_NOT_PREPARED**。
 
-#### 8.3.10. Pwm_GetCurrentPowerState
+#### 7.3.10. Pwm_GetCurrentPowerState
 
 **说明**: 此**API**返回**PWM HW**单元的当前电源状态。可通过**Pwm.h**获得。本服务为同步调用，不可重入。参数 CurrentPowerState（out）：在此参数中返回**PWM HW**单元的当前电源模式。Result：如果**API**返回**E_OK**：**PWM_SERVICE_ACCEPTED**：返回了当前电源模式。如果**API**返回**E_NOT_OK**：**PWM_NOT_INIT**：**PWM**模块未初始化。返回值：Std_ReturnType，**E_OK**：模式可读取；**E_NOT_OK**：服务被拒绝。
 
@@ -615,7 +581,7 @@ Std_ReturnType Pwm_GetCurrentPowerState (
 
 如果此**API**在初始化**HW**单元之前被调用，**API**应报告开发错误**PWM_E_UNINIT**。
 
-#### 8.3.11. Pwm_GetTargetPowerState
+#### 7.3.11. Pwm_GetTargetPowerState
 
 **说明**: 此**API**返回**PWM HW**单元的目标电源状态。可通过**Pwm.h**获得。本服务为同步调用，不可重入。参数 TargetPowerState（out）：在此参数中返回**PWM HW**单元的目标电源模式。Result：如果**API**返回**E_OK**：**PWM_SERVICE_ACCEPTED**：返回了目标电源模式。如果**API**返回**E_NOT_OK**：**PWM_NOT_INIT**：**PWM**模块未初始化。返回值：Std_ReturnType，**E_OK**：模式可读取；**E_NOT_OK**：服务被拒绝。
 
@@ -633,7 +599,7 @@ Std_ReturnType Pwm_GetTargetPowerState (
 
 如果此**API**在初始化**HW**单元之前被调用，**API**应报告开发错误**PWM_E_UNINIT**。
 
-#### 8.3.12. Pwm_PreparePowerState
+#### 7.3.12. Pwm_PreparePowerState
 
 **说明**: 此**API**启动允许**PWM HW**模块进入请求的电源状态所需的过程。可通过**Pwm.h**获得。本服务为同步调用，不可重入。参数 PowerState（in）：打算达到的目标电源状态。参数 Result（out）：如果**API**返回**E_OK**：**PWM_SERVICE_ACCEPTED**：**PWM**模块电源状态准备已启动。如果**API**返回**E_NOT_OK**：**PWM_NOT_INIT**：**PWM**模块未初始化。**PWM_SEQUENCE_ERROR**：**API**调用顺序错误（当前电源状态 = 目标电源状态）。**PWM_POWER_STATE_NOT_SUPP**：**PWM**模块不支持请求的电源状态。**PWM_TRANS_NOT_POSSIBLE**：**PWM**模块无法从当前电源状态直接转换到请求的电源状态，或**HW**外设仍忙。返回值：Std_ReturnType，**E_OK**：准备过程已启动；**E_NOT_OK**：服务被拒绝。
 
@@ -661,7 +627,7 @@ Std_ReturnType Pwm_PreparePowerState (
 
 达到目标电源状态所需的所有异步操作都可以在**Pwm_Main_PowerTransitionManager**的上下文中在后台执行。
 
-#### 8.3.13. Pwm_GetVersionInfo
+#### 7.3.13. Pwm_GetVersionInfo
 
 **说明**: 返回本模块版本信息的服务。可通过**Pwm.h**获得。本服务为同步调用，可重入。参数 versioninfo（out）：指向存储本模块版本信息位置的指针。
 
@@ -669,17 +635,17 @@ Std_ReturnType Pwm_PreparePowerState (
 void Pwm_GetVersionInfo (Std_VersionInfoType* versioninfo)
 ```
 
-### 8.4. 回调通知
+### 7.4. 回调通知
 
 由于**PWM**驱动程序是架构最底层的模块，它不为下层模块提供任何回调函数。
 
-### 8.5. 调度函数
+### 7.5. 调度函数
 
 **PWM**驱动程序提供的所有服务都是同步性质的，异步电源转换管理除外（如果如此配置）。
 
 如果配置了同步电源转换管理，则不生成调度**API**。
 
-#### 8.5.1. Pwm_Main_PowerTransitionManager
+#### 7.5.1. Pwm_Main_PowerTransitionManager
 
 **说明**: 此**API**被周期性调用，监督电源状态转换，检查模块的就绪状态并发出回调**IoHwAb_Pwm_NotifyReadyForPowerState\<Mode\>**（参见**PwmPowerStateReadyCbkRef**配置参数）。可通过**SchM_Pwm.h**获得。
 
@@ -699,17 +665,17 @@ void Pwm_Main_PowerTransitionManager (void)
 
 尽管转换状态监视功能是强制的，但此**API**的实现是可选的，这意味着如果**HW**允许通过其他方式传递通知并监视转换状态，则可以跳过此函数的实现。
 
-### 8.6. 期望接口
+### 7.6. 期望接口
 
 本章列出了需要从其他模块获得的所有接口。
 
-#### 8.6.1. 强制接口
+#### 7.6.1. 强制接口
 
 本章定义了为实现模块核心功能而需要的所有接口。
 
 由于本模块是**MCAL**层的一部分，它直接访问微控制器寄存器，因此不需要任何下层接口。
 
-#### 8.6.2. 可选接口
+#### 7.6.2. 可选接口
 
 本章定义了为实现模块可选功能而需要的所有接口。
 
@@ -717,7 +683,7 @@ void Pwm_Main_PowerTransitionManager (void)
 |---|---|---|
 | Det_ReportError | Det.h | 报告开发错误的服务 |
 
-#### 8.6.3. 可配置接口
+#### 7.6.3. 可配置接口
 
 本章列出了目标函数可被配置的所有接口。目标函数通常是回调函数。这类接口的名称不固定，因为它们是可配置的。
 
@@ -747,7 +713,7 @@ void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 
 这是一个回调，此**API**应在**IoHwAb**组件中实现。
 
-### 8.7. API 参数检查
+### 7.7. API 参数检查
 
 如果为**Pwm**模块启用了开发错误检测并发生了开发错误，则相应的**PWM**函数应向默认错误跟踪器报告错误。
 
@@ -758,514 +724,6 @@ void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 如果为**Pwm**模块启用了开发错误检测：**API Pwm_SetPeriodAndDuty()**应检查给定的**PWM**通道是否为通道类类型**PWM_VARIABLE_PERIOD**。如果不是，应引发开发错误**PWM_E_PERIOD_UNCHANGEABLE**。
 
 如果为**Pwm**模块启用了开发错误检测：**PWM**函数应检查参数**ChannelNumber**，如果参数**ChannelNumber**无效，应引发开发错误**PWM_E_PARAM_CHANNEL**。
-
-## 9. 时序图
-
-### 9.1. 初始化
-
-![Figure2.png](Figure2.png)
-
-### 9.2. 去初始化
-
-![Figure3.png](Figure3.png)
-
-### 9.3. 设置占空比
-
-![Figure4.png](Figure4.png)
-
-### 9.4. 设置周期和占空比
-
-![Figure5.png](Figure5.png)
-
-### 9.5. 将 PWM 输出设置为空闲
-
-![Figure6.png](Figure6.png)
-
-### 9.6. 获取 PWM 输出状态
-
-![Figure7.png](Figure7.png)
-
-### 9.7. 使用 PWM 通知
-
-![Figure8.png](Figure8.png)
-
-## 10. 配置规范
-
-总体而言，本章定义配置参数以及它们到容器的聚集。为了支持规范，第 10.1 章描述基础知识。它还规定了一个你应使用的参数规范模板（表格）。我们打算将第 10.1 章保留在规范中以保证理解。
-
-第 10.2 章规定模块**PWM**驱动程序的结构（容器）和参数。
-
-第 10.3 章规定模块**PWM**驱动程序的发布信息。
-
-### 10.1. 如何阅读本章
-
-详情请参阅**SWS_BSWGeneral**中第 10.1 章"Introduction to configuration specification"。
-
-### 10.2. 容器和配置参数
-
-以下章节总结了所有配置参数。参数的详细含义见功能规格和**API**规范章节。
-
-**PWM**模块应拒绝实现不支持的包含分区映射的配置。
-
-#### 10.2.1. Pwm
-
-**SWS 条目** [ECUC_Pwm_00148]
-
-| 模块名称 | Pwm |
-|---|---|
-| 描述 | **Pwm**（脉冲宽度调制）模块的配置。 |
-| Post-Build 变体支持 | true |
-| 支持的配置变体 | VARIANT-POST-BUILD, VARIANT-PRE-COMPILE |
-
-包含的容器
-
-| 容器名称 | 多重性 | 范围/依赖 |
-|---|---|---|
-| PwmChannelConfigSet | 1 | 此容器包含**AUTOSAR Pwm**模块的配置参数和子容器。 |
-| PwmConfigurationOfOptApiServices | 1 | -- |
-| PwmGeneral | 1 | -- |
-
-#### 10.2.2. PwmGeneral
-
-**SWS 条目** [ECUC_Pwm_00004]
-
-| 容器名称 | PwmGeneral |
-|---|---|
-| 父容器 | Pwm |
-| 描述 | -- |
-
-配置参数
-
-**SWS 条目** [ECUC_Pwm_00131]
-
-| 参数名称 | PwmDevErrorDetect |
-|---|---|
-| 父容器 | PwmGeneral |
-| 描述 | 打开或关闭开发错误检测和通知。• true：启用检测和通知。• false：禁用检测和通知。 |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | false |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Pwm_00132]
-
-| 参数名称 | PwmDutycycleUpdatedEndperiod |
-|---|---|
-| 父容器 | PwmGeneral |
-| 描述 | 用于启用在当前周期结束时更新占空比参数的开关。**TRUE**：占空比的更新在当前生成波形周期结束时完成（当前波形完成）。**FALSE**：占空比的更新立即完成（服务调用后立即，当前波形被截断）。 |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Pwm_00139]
-
-| 参数名称 | PwmIndex |
-|---|---|
-| 父容器 | PwmGeneral |
-| 描述 | 指定此模块实例的**InstanceId**。如果只存在一个实例，其**ID**应为 0。 |
-| 多重性 | 1 |
-| 类型 | EcucIntegerParamDef |
-| 范围 | 0 .. 4294967295 |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Pwm_00142]
-
-| 参数名称 | PwmLowPowerStatesSupport |
-|---|---|
-| 父容器 | PwmGeneral |
-| 描述 | 添加/移除所有电源状态管理相关的**API**（**PWM_SetPowerState**、**PWM_GetCurrentPowerState**、**PWM_GetTargetPowerState**、**PWM_PreparePowerState**、**PWM_Main_PowerTransitionManager**），指示**HW**是否提供低功耗状态管理。 |
-| 多重性 | 0..1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | false |
-| Post-Build 变体多重性 | false |
-| Post-Build 变体值 | false |
-| 多重性配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Pwm_00133]
-
-| 参数名称 | PwmNotificationSupported |
-|---|---|
-| 父容器 | PwmGeneral |
-| 描述 | 指示支持通知的开关。 |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Pwm_00134]
-
-| 参数名称 | PwmPeriodUpdatedEndperiod |
-|---|---|
-| 父容器 | PwmGeneral |
-| 描述 | 用于启用在当前周期结束时更新周期参数的开关。**TRUE**：周期/占空比的更新在当前生成波形周期结束时完成（当前波形完成）。**FALSE**：周期/占空比的更新立即完成（服务调用后立即，当前波形被截断）。 |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Pwm_00143]
-
-| 参数名称 | PwmPowerStateAsynchTransitionMode |
-|---|---|
-| 父容器 | PwmGeneral |
-| 描述 | 启用/禁用**PWM**驱动程序对异步电源状态转换的支持。 |
-| 多重性 | 0..1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | false |
-| Post-Build 变体多重性 | false |
-| Post-Build 变体值 | false |
-| 多重性配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local；依赖：仅当参数**PwmLowPowerStatesSupport**设置为**true**时才应配置此参数。 |
-
-**SWS 条目** [ECUC_Pwm_00149]
-
-| 参数名称 | PwmEcucPartitionRef |
-|---|---|
-| 父容器 | PwmGeneral |
-| 描述 | 将**PWM**驱动程序映射到零个或多个**ECUC**分区，以使驱动程序**API**在相应分区中可用。 |
-| 多重性 | 0..* |
-| 类型 | 对 EcucPartition 的引用 |
-| Post-Build 变体多重性 | true |
-| Post-Build 变体值 | true |
-| 多重性配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: ECU |
-
-**SWS 条目** [ECUC_Pwm_00150]
-
-| 参数名称 | PwmKernelEcucPartitionRef |
-|---|---|
-| 父容器 | PwmGeneral |
-| 描述 | 将**PWM**内核映射到零个或一个**ECUC**分区，以将驱动程序内核分配给某个核心。引用的**ECUC**分区是**PWM**驱动程序所映射到的**ECUC**分区的子集。 |
-| 多重性 | 0..1 |
-| 类型 | 对 EcucPartition 的引用 |
-| Post-Build 变体多重性 | true |
-| Post-Build 变体值 | true |
-| 多重性配置类 | 预编译时间 X（所有变体） |
-| 值配置类 | 链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: ECU |
-
-包含的容器
-
-| 容器名称 | 多重性 | 范围/依赖 |
-|---|---|---|
-| PwmPowerStateConfig | 0..* | 此参数的每个实例定义一个电源状态以及到达该电源状态时要调用的回调。 |
-
-**PwmKernelEcucPartitionRef**引用的**ECUC**分区应是**PwmEcucPartitionRef**引用的**ECUC**分区的子集。
-
-如果**PwmEcucPartitionRef**引用一个或多个**ECUC**分区，**PwmKernelEcucPartitionRef**应具有为 1 的多重性，并同样引用这些**ECUC**分区中的一个。
-
-#### 10.2.3. PwmPowerStateConfig
-
-**SWS 条目** [ECUC_Pwm_00144]
-
-| 容器名称 | PwmPowerStateConfig |
-|---|---|
-| 父容器 | PwmGeneral |
-| 描述 | 此参数的每个实例定义一个电源状态以及到达该电源状态时要调用的回调。 |
-
-配置参数
-
-**SWS 条目** [ECUC_Pwm_00146]
-
-| 参数名称 | PwmPowerState |
-|---|---|
-| 父容器 | PwmPowerStateConfig |
-| 描述 | 此参数的每个实例描述**PWM HW**支持的不同电源状态。它应由**HW**供应商定义并由**PWMDriver**用于引用将**PWM HW**模块设置为所引用电源状态的特定**HW**配置。至少应始终配置对应于全功率状态的电源模式。 |
-| 多重性 | 1 |
-| 类型 | EcucIntegerParamDef（为此参数生成符号名称） |
-| 范围 | 0 .. 18446744073709551615 |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local；依赖：仅当参数**PwmLowPowerStatesSupport**设置为**true**时才应配置此参数。 |
-
-**SWS 条目** [ECUC_Pwm_00145]
-
-| 参数名称 | PwmPowerStateReadyCbkRef |
-|---|---|
-| 父容器 | PwmPowerStateConfig |
-| 描述 | 此参数的每个实例包含对**CDD**或**IoHwAb**组件中定义的电源模式回调的引用。 |
-| 多重性 | 1 |
-| 类型 | EcucFunctionNameDef |
-| 默认值 | -- |
-| 正则表达式 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local；依赖：仅当参数**PwmLowPowerStatesSupport**设置为**true**时才应配置此参数。 |
-
-无包含的容器。
-
-#### 10.2.4. PwmChannel
-
-**SWS 条目** [ECUC_Pwm_00027]
-
-| 容器名称 | PwmChannel |
-|---|---|
-| 父容器 | PwmChannelConfigSet |
-| 描述 | 单个**PWM**通道的配置。 |
-
-配置参数
-
-**SWS 条目** [ECUC_Pwm_00136]
-
-| 参数名称 | PwmChannelClass |
-|---|---|
-| 父容器 | PwmChannel |
-| 描述 | **PWM**通道的类。实现类型：**Pwm_ChannelClassType** |
-| 多重性 | 0..1 |
-| 类型 | EcucEnumerationParamDef |
-| 范围 | PWM_FIXED_PERIOD：只能更改占空比。PWM_FIXED_PERIOD_SHIFTED：只能更改占空比。周期是移位的（仅当硬件支持时）。PWM_VARIABLE_PERIOD：占空比和周期都可以更改。 |
-| Post-Build 变体多重性 | true |
-| Post-Build 变体值 | true |
-| 多重性配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 值配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Pwm_00137]
-
-| 参数名称 | PwmChannelId |
-|---|---|
-| 父容器 | PwmChannel |
-| 描述 | **PWM**通道的通道**ID**。此值将分配给从**PwmChannel**容器短名称派生的符号名称。 |
-| 多重性 | 1 |
-| 类型 | EcucIntegerParamDef（为此参数生成符号名称） |
-| 范围 | 0 .. 4294967295 |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Pwm_00138]
-
-| 参数名称 | PwmDutycycleDefault |
-|---|---|
-| 父容器 | PwmChannel |
-| 描述 | 用于初始化的占空比值。0 表示 0%，0x8000 表示 100%。 |
-| 多重性 | 1 |
-| 类型 | EcucIntegerParamDef |
-| 范围 | 0 .. 32768 |
-| 默认值 | -- |
-| Post-Build 变体值 | true |
-| 值配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Pwm_00122]
-
-| 参数名称 | PwmIdleState |
-|---|---|
-| 父容器 | PwmChannel |
-| 描述 | 参数**PWM_IDLE_STATE**表示信号停止后**PWM**的输出状态（例如调用**Pwm_SetOutputToIdle**）。 |
-| 多重性 | 1 |
-| 类型 | EcucEnumerationParamDef |
-| 范围 | PWM_HIGH：**PWM**通道输出在空闲状态将设置为高（3 或 5 V）。PWM_LOW：**PWM**通道输出在空闲状态将设置为低（0 V）。 |
-| Post-Build 变体值 | true |
-| 值配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Pwm_00123]
-
-| 参数名称 | PwmNotification |
-|---|---|
-| 父容器 | PwmChannel |
-| 描述 | 回调函数的定义。 |
-| 多重性 | 0..1 |
-| 类型 | EcucFunctionNameDef |
-| 默认值 | "NULL" |
-| 正则表达式 | -- |
-| Post-Build 变体多重性 | true |
-| Post-Build 变体值 | true |
-| 多重性配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 值配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Pwm_00124]
-
-| 参数名称 | PwmPeriodDefault |
-|---|---|
-| 父容器 | PwmChannel |
-| 描述 | 用于初始化的周期值（以秒为单位）。 |
-| 多重性 | 1 |
-| 类型 | EcucFloatParamDef |
-| 范围 | [0 .. INF] |
-| 默认值 | -- |
-| Post-Build 变体值 | true |
-| 值配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Pwm_00125]
-
-| 参数名称 | PwmPolarity |
-|---|---|
-| 父容器 | PwmChannel |
-| 描述 | 定义每个**PWM**通道的起始极性。 |
-| 多重性 | 1 |
-| 类型 | EcucEnumerationParamDef |
-| 范围 | PWM_HIGH：**PWM**通道输出在周期开始时为高，达到占空比计数时变低。PWM_LOW：**PWM**通道输出在周期开始时为低，达到占空比计数时变高。 |
-| Post-Build 变体值 | true |
-| 值配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Pwm_00151]
-
-| 参数名称 | PwmChannelEcucPartitionRef |
-|---|---|
-| 父容器 | PwmChannel |
-| 描述 | 将**PWM**通道映射到零个或多个**ECUC**分区，以限制对此通道的访问。引用的**ECUC**分区是**PWM**驱动程序所映射到的**ECUC**分区的子集。 |
-| 多重性 | 0..* |
-| 类型 | 对 EcucPartition 的引用 |
-| Post-Build 变体多重性 | true |
-| Post-Build 变体值 | true |
-| 多重性配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: ECU |
-
-**SWS 条目** [ECUC_Pwm_00147]
-
-| 参数名称 | PwmMcuClockReferencePoint |
-|---|---|
-| 父容器 | PwmChannel |
-| 描述 | 此参数包含对**McuClockReferencePoint**的引用。 |
-| 多重性 | 1 |
-| 类型 | 对 McuClockReferencePoint 的引用 |
-| Post-Build 变体值 | true |
-| 值配置类 | 预编译时间 X（VARIANT-PRE-COMPILE）；链接时间 --；Post-build 时间 X（VARIANT-POST-BUILD） |
-| 范围/依赖 | scope: ECU |
-
-无包含的容器。
-
-如果**PwmEcucPartitionRef**引用一个或多个**ECUC**分区，**PwmChannelEcucPartitionRef**应具有大于零的多重性，并同样引用这些**ECUC**分区中的一个或多个。
-
-#### 10.2.5. PwmChannelConfigSet
-
-**SWS 条目** [ECUC_Pwm_00140]
-
-| 容器名称 | PwmChannelConfigSet |
-|---|---|
-| 父容器 | Pwm |
-| 描述 | 此容器包含**AUTOSAR Pwm**模块的配置参数和子容器。 |
-
-配置参数
-
-包含的容器
-
-| 容器名称 | 多重性 | 范围/依赖 |
-|---|---|---|
-| PwmChannel | 1..* | 单个**PWM**通道的配置。 |
-
-#### 10.2.6. PwmConfigurationOfOptApiServices
-
-**SWS 条目** [ECUC_Pwm_00126]
-
-| 容器名称 | PwmConfigurationOfOptApiServices |
-|---|---|
-| 父容器 | Pwm |
-| 描述 | -- |
-
-配置参数
-
-**SWS 条目** [ECUC_Pwm_00141]
-
-| 参数名称 | PwmDeInitApi |
-|---|---|
-| 父容器 | PwmConfigurationOfOptApiServices |
-| 描述 | 从代码中添加/移除服务**Pwm_DeInit()**。 |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Pwm_00127]
-
-| 参数名称 | PwmGetOutputState |
-|---|---|
-| 父容器 | PwmConfigurationOfOptApiServices |
-| 描述 | -- |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Pwm_00128]
-
-| 参数名称 | PwmSetDutyCycle |
-|---|---|
-| 父容器 | PwmConfigurationOfOptApiServices |
-| 描述 | -- |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Pwm_00129]
-
-| 参数名称 | PwmSetOutputToIdle |
-|---|---|
-| 父容器 | PwmConfigurationOfOptApiServices |
-| 描述 | -- |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Pwm_00130]
-
-| 参数名称 | PwmSetPeriodAndDuty |
-|---|---|
-| 父容器 | PwmConfigurationOfOptApiServices |
-| 描述 | -- |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | -- |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-**SWS 条目** [ECUC_Pwm_00135]
-
-| 参数名称 | PwmVersionInfoApi |
-|---|---|
-| 父容器 | PwmConfigurationOfOptApiServices |
-| 描述 | 指示支持**Pwm_GetVersionInfo**的开关。 |
-| 多重性 | 1 |
-| 类型 | EcucBooleanParamDef |
-| 默认值 | false |
-| Post-Build 变体值 | false |
-| 值配置类 | 预编译时间 X（所有变体）；链接时间 --；Post-build 时间 -- |
-| 范围/依赖 | scope: local |
-
-无包含的容器。
-
-### 10.3. 发布信息
-
-详情请参阅**SWS_BSWGeneral**中第 10.3 章"Published Information"。
-
-## 11. 不适用的需求
-
-这些需求不适用于本规范。（涉及**SRS_BSW_00159**、**SRS_BSW_00167**、**SRS_BSW_00170**、**SRS_BSW_00419**、**SRS_BSW_00383**、**SRS_BSW_00375**、**SRS_BSW_00416**、**SRS_BSW_00168**、**SRS_BSW_00423**、**SRS_BSW_00424**、**SRS_BSW_00425**、**SRS_BSW_00426**、**SRS_BSW_00427**、**SRS_BSW_00428**、**SRS_BSW_00429**、**SRS_BSW_00432**、**SRS_BSW_00433**、**SRS_BSW_00417**、**SRS_BSW_00161**、**SRS_BSW_00162**、**SRS_BSW_00005**、**SRS_BSW_00415**、**SRS_BSW_00164**、**SRS_BSW_00325**、**SRS_BSW_00342**、**SRS_BSW_00160**、**SRS_BSW_00007**、**SRS_BSW_00300**、**SRS_BSW_00413**、**SRS_BSW_00347**、**SRS_BSW_00305**、**SRS_BSW_00307**、**SRS_BSW_00310**、**SRS_BSW_00373**、**SRS_BSW_00327**、**SRS_BSW_00335**、**SRS_BSW_00350**、**SRS_BSW_00408**、**SRS_BSW_00410**、**SRS_BSW_00348**、**SRS_BSW_00353**、**SRS_BSW_00301**、**SRS_BSW_00302**、**SRS_BSW_00328**、**SRS_BSW_00312**、**SRS_BSW_00006**、**SRS_BSW_00357**、**SRS_BSW_00377**、**SRS_BSW_00304**、**SRS_BSW_00378**、**SRS_BSW_00306**、**SRS_BSW_00308**、**SRS_BSW_00309**、**SRS_BSW_00358**、**SRS_BSW_00414**、**SRS_BSW_00359**、**SRS_BSW_00360**、**SRS_BSW_00330**、**SRS_BSW_00331**、**SRS_BSW_00009**、**SRS_BSW_00401**、**SRS_BSW_00172**、**SRS_BSW_00010**、**SRS_BSW_00333**、**SRS_BSW_00003**、**SRS_BSW_00341**、**SRS_BSW_00334**、**SRS_SPAL_12267**、**SRS_SPAL_12461**、**SRS_SPAL_12462**、**SRS_SPAL_12463**、**SRS_SPAL_12068**、**SRS_SPAL_12069**、**SRS_SPAL_12169**、**SRS_SPAL_12075**、**SRS_SPAL_12064**、**SRS_SPAL_12067**、**SRS_SPAL_12077**、**SRS_SPAL_12078**、**SRS_SPAL_12092**、**SRS_SPAL_12265**、**SRS_Pwm_12379**）
 
 <section id="wechat">
 

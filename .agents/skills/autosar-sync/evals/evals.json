@@ -1,0 +1,91 @@
+{
+  "skill_name": "autosar-sync",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "帮我盘点一下 docs/autosar/ 里的文章对 AUTOSAR 标准的覆盖情况：以 R23-11 的标准文档为基准，列出哪些 SWS 规范还没有对应的文章。把盘点报告存成 markdown。只读分析，不要改任何文件，不要 git 操作。",
+      "expected_output": "A coverage report listing R23-11 SWS docs vs existing docs/autosar/ articles with concrete missing-article candidates",
+      "files": [],
+      "assertions": [
+        {
+          "text": "报告基于 R23-11 markdown 源（引用 ~/Workspace/autosar_standard 路径或列出其中的规范文档名）",
+          "check": "report mentions the R23-11 markdown source path or ≥40 spec names from it"
+        },
+        {
+          "text": "列出至少 5 个具体的缺失文章候选（如 SoAd、CanSM、Dcm、Dem、LdCom 等）",
+          "check": "≥5 spec names explicitly listed as lacking an article"
+        },
+        {
+          "text": "未把已有文章对应的模块误报为缺失（如 ADC/ICU/DIO/PWM/Port/OCU/BswM/EcuM）",
+          "check": "no existing module claimed as missing"
+        },
+        {
+          "text": "指明所用源版本（R23-11）",
+          "check": "R23-11 stated as the baseline"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "把 AUTOSAR 标准文档 AUTOSAR_CP_SWS_StandardTypes（R23-11）翻译成我们站点的文章（对应 docs/autosar/general/platform_types/），按仓库里 docs/autosar/STANDARD.md 的结构标准来。把产出的文章写到指定输出目录的 index.md，不要修改仓库里的文件，也不要做任何 git 操作。",
+      "expected_output": "A complete Chinese Type A article (7-chapter skeleton) for StandardTypes",
+      "files": [],
+      "assertions": [
+        {
+          "text": "恰好 7 个一级章节，顺序与用词符合 Type A：简介和功能概述/缩略语/相关文档/约束和假设/对其他模块的依赖/功能规格/API规范",
+          "check": "grep '^## ' yields exactly the 7 canonical chapters in order"
+        },
+        {
+          "text": "front-matter 含 title 且正文无 '#' 一级标题",
+          "check": "starts with --- title: --- and no line starts with '# '"
+        },
+        {
+          "text": "正文无 [SWS_*]/[SRS_*] 需求编号",
+          "check": "no requirement-ID brackets"
+        },
+        {
+          "text": "API 函数条目使用 **说明**: 加 C 代码块",
+          "check": "API entries have 说明 + fenced C blocks"
+        },
+        {
+          "text": "无 需求可追溯性/时序图/配置规范 章节及字母附录",
+          "check": "no forbidden chapters"
+        },
+        {
+          "text": "正文为中文",
+          "check": "prose is Chinese"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "检查一下 docs/autosar/io/adc_driver 这篇文章和它的 R23-11 标准源文档（AUTOSAR_CP_SWS_ADCDriver）是否同步，把差距报告写到指定输出目录 report.md。除非有实质性缺口，否则不要修改任何文件，不要 git 操作。",
+      "expected_output": "A gap report; intentional Type A omissions recognized as compliant; no repo modifications",
+      "files": [],
+      "assertions": [
+        {
+          "text": "仅产出报告：仓库内被 git 跟踪的文件没有任何修改",
+          "check": "git status shows no tracked-file modifications after the run"
+        },
+        {
+          "text": "未把 Type A 有意省略的章节（需求可追溯性/时序图/配置规范/附录）当作差距或建议补写",
+          "check": "report does not recommend adding forbidden chapters"
+        },
+        {
+          "text": "指明对照的源文档与版本（R23-11 SWS_ADCDriver）",
+          "check": "report states the source doc and release"
+        },
+        {
+          "text": "如报告了缺口，均为真实内容差异",
+          "check": "spot-check cited gaps exist in the SWS"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "把 AUTOSAR 标准文档 AUTOSAR_CP_SWS_StandardTypes（R23-11）翻译成我们站点的文章（对应 docs/autosar/general/platform_types/）。把最终文章写到指定输出目录的 index.md，过程中生成的待办清单写到 todo.md。不要修改仓库里的文件，也不要做任何 git 操作。",
+      "expected_output": "todo.md with rule-derived checkbox items emitted before translation + Type A index.md",
+      "files": []
+    }
+  ]
+}
