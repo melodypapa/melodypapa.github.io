@@ -6,8 +6,15 @@
 
 ## Queue
 
-- [x] dio_driver（SWS_DIODriver · R23-11 markdown · 2026-10-24 完成 · commit de11d8a/493ed12 · PR #53）
-  - Note: 审计 trail 见 [dio_driver.md](dio_driver.md)（v3 前的按篇 todo 格式实例）
+- [ ] dio_driver（SWS_DIODriver · R23-11 markdown · 🔁 重开：缩略语章表格 → 引用块）
+  - Note: 2026-10-24 完成 3.1/4.2/6.7/7.4 对齐（commit de11d8a/493ed12 · PR #53）；同日缩略语普查发现 §2 仍为 GFM 表格（行集 15:15 一致）→ 按 STANDARD.md §1 改排引用块
+  - Note: 重开 2026-10-24 缩略语章格式
+  - [x] Step 1 — 源定位 + 差距分析（源 §2 表 15 行；文行集 15:15；缺口 = 格式）
+  - [x] Step 2 — 就地翻译/补齐（表格 → 15 条粗体术语+引用块，源序；英文全称加粗；导语"下表"→"以下"）
+  - [x] Step 3 — Phase A 机械检查（表格行 0、术语行 15、源序一致、无 h1/需求号、strict build 0 WARNING）
+  - [x] Step 4 — Phase B 覆盖映射 + 忠实度（15↔15 同序；内容沿用已核对译文，仅版式）
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
 - [ ] port_driver（SWS_PortDriver · R23-11 markdown · ✅ 仅余对齐）
   - Note: 缩略语章现为 GFM 表格 → 引用块（行集 7:7 已核对一致）；4.2「对汽车域的适用性」→「汽车域的适用性」
   - [ ] Step 1 — 源定位 + 差距分析

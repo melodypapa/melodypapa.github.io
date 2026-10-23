@@ -24,25 +24,52 @@ title: "AUTOSAR DIO Driver（数字输入输出驱动）"
 
 ## 2. 缩略语
 
-下表包含了与**DIO**驱动程序模块相关、且未包含在[1] AUTOSAR术语表中的缩略语和缩写。
+以下为与**DIO**驱动程序模块相关、且未包含在[1] AUTOSAR术语表中的缩略语和缩写。
 
-| 缩写/首字母缩写 | 描述 |
-|---|---|
-| DIO channel | 表示单个通用数字输入/输出引脚 |
-| DIO port | 表示由硬件分组在一起的多个**DIO**通道（通常由一个硬件寄存器控制）。示例：Freescale HC08 的 Port A（8 位） |
-| DIO channel group | 表示由逻辑组表示的多个相邻**DIO**通道。一个**DIO**通道组应属于一个**DIO**端口。示例：8 位端口中寻址复用器的端口引脚 2..6 |
-| Physical Level (Input) | 两种可能的状态：**LOW** / **HIGH**。位值'0'表示**LOW**，位值'1'表示**HIGH**。 |
-| Physical Level (Output) | 两种可能的状态：**LOW** / **HIGH**。位值'0'表示**LOW**，位值'1'表示**HIGH**。 |
-| LSB | 最低有效位（Least Significant Bit） |
-| MSB | 最高有效位（Most Significant Bit） |
-| DIO | 数字输入输出（Digital Input Output） |
-| ID | 标识符（Identifier） |
-| ADC | 模数转换器（Analog to Digital Converter） |
-| SPI | 串行外设接口（Serial Peripheral Interface） |
-| PWM | 脉冲宽度调制（Pulse Width Modulation） |
-| ICU | 输入捕获单元（Input Capture Unit） |
-| DET | 默认错误跟踪器（Default Error Tracer） |
-| DEM | 诊断事件管理器（Diagnostic Event Manager） |
+**DIO channel**
+> 表示单个通用数字输入/输出引脚。
+
+**DIO port**
+> 表示由硬件分组在一起的多个**DIO**通道（通常由一个硬件寄存器控制）。示例：Freescale HC08 的 Port A（8 位）。
+
+**DIO channel group**
+> 表示由逻辑组表示的多个相邻**DIO**通道。一个**DIO**通道组应属于一个**DIO**端口。示例：8 位端口中寻址复用器的端口引脚 2..6。
+
+**Physical Level (Input)**
+> 两种可能的状态：**LOW** / **HIGH**。位值'0'表示**LOW**，位值'1'表示**HIGH**。
+
+**Physical Level (Output)**
+> 两种可能的状态：**LOW** / **HIGH**。位值'0'表示**LOW**，位值'1'表示**HIGH**。
+
+**LSB**
+> 最低有效位（**Least Significant Bit**）。
+
+**MSB**
+> 最高有效位（**Most Significant Bit**）。
+
+**DIO**
+> 数字输入输出（**Digital Input Output**）。
+
+**ID**
+> 标识符（**Identifier**）。
+
+**ADC**
+> 模数转换器（**Analog to Digital Converter**）。
+
+**SPI**
+> 串行外设接口（**Serial Peripheral Interface**）。
+
+**PWM**
+> 脉冲宽度调制（**Pulse Width Modulation**）。
+
+**ICU**
+> 输入捕获单元（**Input Capture Unit**）。
+
+**DET**
+> 默认错误跟踪器（**Default Error Tracer**）。
+
+**DEM**
+> 诊断事件管理器（**Diagnostic Event Manager**）。
 
 ## 3. 相关文档
 
