@@ -1,0 +1,279 @@
+# Sync todo: Group communication--2 — 通信分区 — 其余缺失规范（38 篇）
+
+基准：R23-11 · 生成：2026-10-24 · 队列序 = 行序
+（恢复 = 第一个仍为 `[ ]` 的行；全部 `[x]` = 批次完成）
+步骤图例：① 源定位+差距分析 · ② 就地翻译/补齐 · ③ Phase A 机械检查 · ④ Phase B 证据 · ⑤ 用户确认门 · ⑥ TODO.md 行+提交
+
+## Queue
+
+全部 ❌ 新文章；多数为 FlexRay/J1939/V2X 等低频总线，译序可按需调整。
+- [ ] spi（SWS_SPIHandlerDriver · R23-11 markdown · ❌ 新文章，缩写 Spi）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] ldcom（SWS_LargeDataCOM · R23-11 markdown · ❌ 新文章，缩写 LdCom）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] lsdu（SWS_LSduRouter · R23-11 markdown · ❌ 新文章，缩写 LsDu）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] dlt（SWS_DiagnosticLogAndTrace · R23-11 markdown · ❌ 新文章，缩写 Dlt）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] doip（SWS_DiagnosticOverIP · R23-11 markdown · ❌ 新文章，缩写 DoIp）
+  - Note: 缩写歧义（DoIp），目录名入 Step 1 与用户确认
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] xcp（SWS_XCP · R23-11 markdown · ❌ 新文章，缩写 XCP）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] canxl_driver（SWS_CANXLDriver · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] canxl_transceiver_driver（SWS_CANXLTransceiverDriver · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] eth_trcv（SWS_EthernetTransceiverDriver · R23-11 markdown · ❌ 新文章，缩写 EthTrcv）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] wlan_driver（SWS_WirelessEthernetDriver · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] wlan_transceiver_driver（SWS_WirelessEthernetTransceiverDriver · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] flexray_driver（SWS_FlexRayDriver · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] flexray_interface（SWS_FlexRayInterface · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] flexray_nm（SWS_FlexRayNetworkManagement · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] flexray_sm（SWS_FlexRayStateManager · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] flexray_trcv（SWS_FlexRayTransceiverDriver · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] flexray_ar_tp（SWS_FlexRayARTransportLayer · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] flexray_iso_tp（SWS_FlexRayISOTransportLayer · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] linsm（SWS_LINStateManager · R23-11 markdown · ❌ 新文章，缩写 LinSM）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] lintrcv（SWS_LINTransceiverDriver · R23-11 markdown · ❌ 新文章，缩写 LinTrcv）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] ttcan_driver（SWS_TTCANDriver · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] ttcan_interface（SWS_TTCANInterface · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] j1939nm（SWS_SAEJ1939NetworkManagement · R23-11 markdown · ❌ 新文章，缩写 J1939Nm）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] j1939rm（SWS_SAEJ1939RequestManager · R23-11 markdown · ❌ 新文章，缩写 J1939Rm）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] j1939tp（SWS_SAEJ1939TransportLayer · R23-11 markdown · ❌ 新文章，缩写 J1939Tp）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] ieee1722tp（SWS_IEEE1722TransportLayer · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] macsec（SWS_MACsecKeyAgreement · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] cellularv2x_driver（SWS_CellularV2XDriver · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] chargingmanager（SWS_ChargingManager · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] chinesev2x_mgmt（SWS_ChineseV2XManagement · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] chinesev2x_msg（SWS_ChineseV2XMessage · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] chinesev2x_net（SWS_ChineseV2XNetwork · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] chinesev2x_sec（SWS_ChineseV2XSecurity · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] v2x_basictp（SWS_V2XBasicTransport · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] v2x_datamgr（SWS_V2XDataManager · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] v2x_facilities（SWS_V2XFacilities · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] v2x_geonet（SWS_V2XGeoNetworking · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] v2x_mgmt（SWS_V2XManagement · R23-11 markdown · ❌ 新文章）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+
+## Not queued（有意跳过）
+- （无）

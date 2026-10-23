@@ -84,34 +84,35 @@ list**. Three sources feed it:
   scope cut, a source-release fallback) is appended to the file the moment it
   is given.
 
-**Output contract:** the todo list is the run's *first deliverable* and a
-**persistent reference document — never conversation-only**. A todo that
-lives only in chat dies with the session and takes the coverage decisions and
-mid-run user decisions with it. Write it before any translation editing, to
-`docs/autosar/sync-todo/<module>.md` for a repo run (`todo.md` alongside the
-outputs for a workspace/eval run); commit it in the same PR as the article and
-keep it after the run as the audit trail. Format, template and resume rule:
-read `references/todo-format.md`. In short:
+**Output contract:** the program's todo is the **persistent batch queue** in
+`docs/autosar/sync-todo/` — `Group-<section>.md` files, one row per document,
+each row carrying a 6-step sub-checklist; `index.md` orders the batches
+(`todo.md` alongside the outputs for a workspace/eval run). A run consumes
+**one row**: take the first `[ ]` row of the named (or next unfinished) batch,
+append run findings to its `- Note:` bullets, tick each step the moment it
+passes, flip the row `[x]` with the commit hash (Step 7). If the user names an
+article with no queue row, add the row to the right batch file first. Format,
+row template and rules: read `references/todo-format.md`. In short:
 
-- One verifiable action per checkbox line, ordered by risk/effort
-  (`- [ ] 补齐第 7 章 API 规范（17 个函数）`, not `- [ ] 完善文章`).
-- The checkbox line is the action only; findings, evidence and decisions go on
-  a `- Note:` bullet under it — a long markup-heavy line breaks the exact-line
-  toggle, and a failed toggle then gets "recorded" out-of-band instead of in
-  the row.
-- Tick an item **in the file the moment it passes verification** — never
+- The parenthetical is the short fixed fields only; findings, evidence and
+  decisions go on `- Note:` bullets under the row — a long markup-heavy
+  checkbox line breaks the exact-line toggle, and a failed toggle then gets
+  "recorded" out-of-band instead of in the row.
+- Tick a step **in the file the moment it passes verification** — never
   batch-check at the end, never tick because a later step re-verifies it.
-- A file for the article already exists ⇒ **resume**: take the first `[ ]`
-  item; do not re-run the gap analysis or re-ask recorded decisions.
-- All items `[x]` + the `docs/autosar/TODO.md` row updated (Step 7) = the run
-  is finished. Never declare it finished while a `[ ]` item exists.
+- A queue row exists for the article ⇒ **resume**: take the first `[ ]` row;
+  do not re-derive scope from TODO.md or re-ask decisions already in Notes.
+- The row `[x]` + its 6 step boxes `[x]` + the `docs/autosar/TODO.md` row
+  updated (Step 7) = the run is finished. Never declare it finished with any
+  `[ ]` left in the row.
 
 Observed failures when this contract is skipped: the iteration-1 baseline run
 translated end-to-end and only surfaced its plan afterwards, as prose —
 coverage decisions were never reviewable before the work was done; the DIO run
-(2026-10-24) posted its todo to chat and never saved the file. For a
-full-program run (inventory or batch sync), extend the program-level 待办清单
-at the top of `TODO.md` instead.
+(2026-10-24) posted its todo to chat and never saved a file. The full-program
+queue (`docs/autosar/sync-todo/`, generated 2026-10-24 from the R23-11
+inventory) is the "translate one by one" backbone; `TODO.md`'s 待办清单 keeps
+program-level fixes outside single-article runs (wording sweeps, hygiene).
 
 ## Step 5 — Translate in place
 
@@ -176,7 +177,7 @@ evidence, not asserted):
   pseudo-code verbatim in fences; figures omitted or local PNGs only.
 - Scope discipline: existing translated content untouched, gaps filled in
   place, chapter numbering stable.
-- Decisions applied: every mid-run user decision in the todo file's 决策记录 is
+- Decisions applied: every mid-run user decision in the queue row's Notes is
   reflected in the article (and in STANDARD.md when a canonical term changed).
 
 **Repo workflow:**
@@ -193,32 +194,33 @@ evidence, not asserted):
 ## Step 7 — Confirm, then maintain the progress file
 
 **Confirmation gate — before the final commit and the PR.** Present to the
-user, in one message: the todo file's current state (every item and its
-note), the Phase A results, the Phase B coverage map and deviations, and the
-proposed `docs/autosar/TODO.md` status row with its source-release note. Wait
+user, in one message: the queue row's current state (steps + Notes), the
+Phase A results, the Phase B coverage map and deviations, and the proposed
+`docs/autosar/TODO.md` status row with its source-release note. Wait
 for explicit confirmation. Passing Phase A alone never finishes a run — the
 gate exists precisely for what the build cannot see. A decision the user
 already gave mid-run settles *that item*, not the gate. On any objection: fix,
 re-run Phase A, re-present. Never write `确认待补` / "confirmation deferred" in
-the todo file — capture the confirmation when it is given, or keep the item
+the queue row — capture the confirmation when it is given, or keep the step
 open.
 
 **After confirmation, finish in this order:**
 
 1. Update `docs/autosar/TODO.md` in the same PR: flip the touched article's
    status, refresh its source-release note, update the `最后更新` date. Format
-   and status definitions: `references/progress-file.md`. The TODO file is the
-   running work queue for the whole translation program — coverage questions
-   are answered from it (or by regenerating it), never by re-inventing an
-   inventory; if it has drifted badly, regenerate the affected sections from a
-   fresh gap analysis.
-2. Commit (article + todo file + TODO.md), push, open the PR, then record the
-   commit hash and PR link on the todo file's 收尾 note (an immediate follow-up
-   commit is fine). No item is `[x]` before its verification passed; no item
-   stays `[ ]` past this point.
-3. Report and stop: changes, decisions, deviations, PR link. All items `[x]` =
-   run finished. Anything still `[ ]` → say exactly what remains; never report
-   the run as finished with an open item.
+   and status definitions: `references/progress-file.md`. TODO.md is the
+   status ledger of the whole program (the execution queue is
+   `docs/autosar/sync-todo/`) — coverage questions are answered from them (or
+   by regenerating them), never by re-inventing an inventory; if a section has
+   drifted badly, regenerate it from a fresh gap analysis.
+2. Commit (article + queue file + TODO.md), push, open the PR, then record the
+   commit hash and PR link on the row's Step 6 note and flip the row `[x]`
+   (an immediate follow-up commit is fine). No step is `[x]` before its
+   verification passed; no step stays `[ ]` past this point.
+3. Report and stop: changes, decisions, deviations, PR link. All 6 steps `[x]`
+   = run finished — tell the user which row is next (or that the batch is
+   complete). Anything still `[ ]` → say exactly what remains; never report
+   the run as finished with an open step.
 
 ## Repository quirks that burn you
 

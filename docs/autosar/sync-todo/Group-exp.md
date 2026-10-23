@@ -1,0 +1,154 @@
+# Sync todo: Group exp — 缺失 EXP 指南（20 篇）
+
+基准：R23-11 · 生成：2026-10-24 · 队列序 = 行序
+（恢复 = 第一个仍为 `[ ]` 的行；全部 `[x]` = 批次完成）
+步骤图例：① 源定位+差距分析 · ② 就地翻译/补齐 · ③ Phase A 机械检查 · ④ Phase B 证据 · ⑤ 用户确认门 · ⑥ TODO.md 行+提交
+> EXP 指南**豁免 Type A 骨架**（STANDARD.md §7），但翻译/验证/确认流程相同；分区归属按 Category 列，落地页缺失时入 Step 1 提案。源文档名以 R23-11 树实查为准（AUTOSAR_EXP_*，个别无 CP_ 前缀）。
+
+## Queue
+
+- [ ] exp layered_software_architecture（AUTOSAR_EXP_LayeredSoftwareArchitecture · General · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] exp vfb（AUTOSAR_EXP_VFB · General · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] exp bsw_distribution_guide（AUTOSAR_EXP_BSWDistributionGuide · BSWGeneral · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] exp application_level_error_handling（AUTOSAR_EXP_ApplicationLevelErrorHandling · BSWGeneral · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] exp error_description（AUTOSAR_EXP_ErrorDescription · BSWGeneral · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] exp cdd_design_and_integration（AUTOSAR_EXP_CDDDesignAndIntegration · BSWGeneral · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] exp utilization_of_crypto_services（AUTOSAR_EXP_UtilizationOfCryptoServices · Crypto · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] exp macro_encapsulation_of_interpolation_calls（AUTOSAR_EXP_MacroEncapsulationofInterpolationCalls · Libraries · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] exp firmware_over_the_air（AUTOSAR_EXP_FirmwareOverTheAir · Memory · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] exp adas_vmc（AUTOSAR_EXP_ADASVehicleMotionControl · ApplicationInterfaces（名称以源树为准） · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] exp body_and_comfort（AUTOSAR_EXP_BodyAndComfort · ApplicationInterfaces · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] exp chassis（AUTOSAR_EXP_Chassis · ApplicationInterfaces · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] exp hmi（AUTOSAR_EXP_HMI · ApplicationInterfaces · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] exp occupant_safety（AUTOSAR_EXP_OccupantSafety · ApplicationInterfaces · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] exp powertrain（AUTOSAR_EXP_Powertrain · ApplicationInterfaces · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] exp user_guide（AUTOSAR_EXP_UserGuide · ApplicationInterfaces（待 Step 1 确认确切文档名） · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] exp arti（AUTOSAR_EXP_ARTI · SWArch · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] exp functional_safety_measures（AUTOSAR_EXP_FunctionalSafetyMeasures · Safety · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] exp safety_use_case（AUTOSAR_EXP_SafetyUseCase · Safety · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] exp sw_cluster_design_and_integration（AUTOSAR_EXP_SwClusterDesignAndIntegration · SystemServices · ❌ 新文章 · 📖 豁免骨架）
+  - [ ] Step 1 — 源定位 + 差距分析
+  - [ ] Step 2 — 就地翻译/补齐
+  - [ ] Step 3 — Phase A 机械检查
+  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - [ ] Step 5 — 用户确认门
+  - [ ] Step 6 — TODO.md 行 + 提交/PR
+
+## Not queued（有意跳过）
+- 📄 methodology_templates/basic_software_mode_manager 模板 — TPS_BSWModuleDescriptionTemplate（现有文章，豁免）
+- 📖 template/（generic_structure、timimg_extension）— 模板示例（不同步）
+- 📖 power/ — 自拟专题（无独立规范）
