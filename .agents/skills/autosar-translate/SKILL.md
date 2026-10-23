@@ -1,5 +1,5 @@
 ---
-name: autosar-sync
+name: autosar-translate
 description: >
   Use when working on the AUTOSAR articles of the melodypapa.github.io MkDocs
   site: translating, completing, updating, verifying, or inventorying any

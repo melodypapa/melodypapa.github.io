@@ -1,6 +1,6 @@
 # AUTOSAR 文章翻译进度
 
-> 由 autosar-sync 技能按 [STANDARD.md](STANDARD.md) 维护；每次同步后更新对应条目与「最后更新」。
+> 由 autosar-translate 技能按 [STANDARD.md](STANDARD.md) 维护；每次同步后更新对应条目与「最后更新」。
 > 状态：✅ 符合 Type A · 🔶 已翻译待对齐 · ⚠️ 部分翻译 · ⛔ 空壳 · ❌ 缺失 · 📖 指南/专题（豁免骨架）
 > 基准：R23-11（`~/Workspace/autosar_standard/markdown/`）· 最后更新：2026-10-24
 
