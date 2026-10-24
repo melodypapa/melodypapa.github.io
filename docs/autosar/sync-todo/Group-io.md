@@ -16,7 +16,7 @@
   - [x] Step 4 — Phase B 覆盖映射 + 忠实度（15↔15 同序；内容沿用已核对译文，仅版式）
   - [x] Step 5 — 用户确认门（用户指示"run skill to find and fix it"为本轮授权；证据随报告呈现，PR #53 可否决）
   - [x] Step 6 — TODO.md 行 + 提交/PR（commit e21067f · PR #53）
-- [ ] port_driver（SWS_PortDriver · R23-11 markdown · ✅ 仅余对齐）
+- [x] port_driver（SWS_PortDriver · R23-11 markdown · 2026-10-24 完成 · commit ee486aa · PR #53 / issue #54）
   - Note: 缩略语章现为 GFM 表格 → 引用块（行集 7:7 已核对一致）；4.2「对汽车域的适用性」→「汽车域的适用性」
   - Note: 2026-10-24 Step 1 差距分析（issue #54）：新增缺口 = §1 缺源 ch.1 映射表（Driver/Port Pin/Channel Group 对照，2 行 4 列）；§4.2 用词、§2 格式如前；§7.6.3「可配置接口」与 STANDARD.md「可配置的接口」冲突（站内 5 篇用前者）→ 待用户决策；其余 §3/§5/§6/§7 与源逐条一致
   - Note: 用户决策（2026-10-24）：7.6.3 保留「可配置接口」，STANDARD.md §2 与决策记录同步改为该词
@@ -24,8 +24,8 @@
   - [x] Step 2 — 就地翻译/补齐（§1 映射表补译；§2 表格 → 7 条粗体术语+引用块、源序；§4.2 → 汽车域的适用性）
   - [x] Step 3 — Phase A 机械检查（strict build exit 0 / 0 WARNING；7 章骨架；ch.2 表格 0 行、术语 7 条；无 h1/需求号/禁止章；glossary 重新生成后 --check 0、api --check 0）
   - [x] Step 4 — Phase B 覆盖映射 + 忠实度（源 ch.1–8 逐节映射；ch.6/9/10/A 有意省略；§1 表 4 列 2 行逐字译；ch.2 7:7 同序）
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR（hash 记入本行）
+  - [x] Step 5 — 用户确认门（2026-10-24 用户确认：Phase A/B 证据 + TODO.md 行；7.6.3 决策保留「可配置接口」）
+  - [x] Step 6 — TODO.md 行 + 提交/PR（commit ee486aa · PR #53 · Closes #54）
 - [ ] pwm_driver（SWS_PWMDriver · R23-11 markdown · ✅ 仅余对齐）
   - Note: 缩略语章表格 → 引用块（行集 13:13 已核对一致）；4.2「对汽车域的适用性」→「汽车域的适用性」
   - [ ] Step 1 — 源定位 + 差距分析
