@@ -87,6 +87,8 @@
 
 ## general
 
+- 📖 [AUTOSAR 术语表（TR Glossary）](general/tr_glossary/) — AUTOSAR_FO_TR_Glossary（Foundation · R23-11）（2026-10-24 翻译中：ch.2 缩略语 206 条 ✅；ch.4 术语定义 343 条分批进行；内容并入术语表页）
+
 - ⛔ [platform_types](../general/platform_types/) — SWS_StandardTypes (stub; front-matter title wrongly says ECU State Manager, nav label needs the same fix)
 
 ❌ Missing (3): SWS_BSWGeneral, SWS_PlatformTypes (a separate document from StandardTypes), SWS_CommunicationStackTypes

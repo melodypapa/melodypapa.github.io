@@ -1,0 +1,2731 @@
+{
+ "_comment": "TR glossary translation workfile — source extraction (English fields from the R23-11 markdown) + the translator's zh filled during each translation batch. NOT a build input: the 术语表 page is manually extended during translation runs (user decision 2026-10-24); this file records the extraction + translation state. L-PDU: the source carries a near-duplicate row, merged in translation.",
+ "source_doc": "AUTOSAR_FO_TR_Glossary",
+ "release": "R23-11",
+ "source_path": "~/Workspace/autosar_standard/markdown/Foundation/Releases/R23-11/General/AUTOSAR_FO_TR_Glossary.md",
+ "article": "docs/autosar/general/tr_glossary/index.md",
+ "acronyms": [
+  {
+   "term": "AA",
+   "en": "Adaptive Application",
+   "zh": "自适应应用（**Adaptive Application**）"
+  },
+  {
+   "term": "ABC",
+   "en": "Abstract Base Class",
+   "zh": "抽象基类（**Abstract Base Class**）"
+  },
+  {
+   "term": "ABI",
+   "en": "Application Binary Interface",
+   "zh": "应用二进制接口（**Application Binary Interface**）"
+  },
+  {
+   "term": "ADC",
+   "en": "Analog Digital Converter",
+   "zh": "模数转换器（**Analog Digital Converter**）"
+  },
+  {
+   "term": "AES",
+   "en": "Advanced Encryption Standard",
+   "zh": "高级加密标准（**Advanced Encryption Standard**）"
+  },
+  {
+   "term": "AMM",
+   "en": "Application Mode Management",
+   "zh": "应用模式管理（**Application Mode Management**）"
+  },
+  {
+   "term": "AP",
+   "en": "AUTOSAR Adaptive Platform",
+   "zh": "AUTOSAR 自适应平台（**AUTOSAR Adaptive Platform**）"
+  },
+  {
+   "term": "API",
+   "en": "Application Programming Interface",
+   "zh": "应用编程接口（**Application Programming Interface**）"
+  },
+  {
+   "term": "ARA",
+   "en": "AUTOSAR Runtime for Adaptive Applications",
+   "zh": "自适应应用 AUTOSAR 运行时（**AUTOSAR Runtime for Adaptive Applications**）"
+  },
+  {
+   "term": "ARP",
+   "en": "Address Resolution Protocol",
+   "zh": "地址解析协议（**Address Resolution Protocol**）"
+  },
+  {
+   "term": "ARTI",
+   "en": "AUTOSAR Run-Time Interface",
+   "zh": "AUTOSAR 运行时接口（**AUTOSAR Run-Time Interface**）"
+  },
+  {
+   "term": "ARXML",
+   "en": "AUTOSAR XML",
+   "zh": "AUTOSAR XML（**AUTOSAR XML**）"
+  },
+  {
+   "term": "ASAM",
+   "en": "Association for Standardization of Automation and Measuring systems",
+   "zh": "自动化与测量系统标准化协会（**Association for Standardization of Automation and Measuring systems**）"
+  },
+  {
+   "term": "ASD",
+   "en": "Abstract System Description",
+   "zh": "抽象系统描述（**Abstract System Description**）"
+  },
+  {
+   "term": "ASIL",
+   "en": "Automotive Safety Integrity Levels",
+   "zh": "汽车安全完整性等级（**Automotive Safety Integrity Levels**）"
+  },
+  {
+   "term": "ASW",
+   "en": "Application SoftWare",
+   "zh": "应用软件（**Application SoftWare**）"
+  },
+  {
+   "term": "ATP",
+   "en": "AUTOSAR Template Profile",
+   "zh": "AUTOSAR 模板_profile_（**AUTOSAR Template Profile**）"
+  },
+  {
+   "term": "ATS",
+   "en": "Acceptance Test Suite",
+   "zh": "验收测试套件（**Acceptance Test Suite**）"
+  },
+  {
+   "term": "AUTOSAR",
+   "en": "AUTomotive Open System Architecture",
+   "zh": "AUTomotive Open System Architecture（汽车开放系统架构）"
+  },
+  {
+   "term": "BFx",
+   "en": "Bitfield functions for fixed point",
+   "zh": "定点位域函数（**Bitfield functions for fixed point**）"
+  },
+  {
+   "term": "BSW",
+   "en": "Basic Software",
+   "zh": "基础软件（**Basic Software**）"
+  },
+  {
+   "term": "BIST",
+   "en": "Built-In Self Tests",
+   "zh": "内建自测试（**Built-In Self Tests**）"
+  },
+  {
+   "term": "BSWM",
+   "en": "Basic SoftWare Mode manager",
+   "zh": "基础软件模式管理器（**Basic SoftWare Mode manager**）"
+  },
+  {
+   "term": "BSWMD",
+   "en": "Basic SoftWare Module Description",
+   "zh": "基础软件模块描述（**Basic SoftWare Module Description**）"
+  },
+  {
+   "term": "CAN",
+   "en": "Controller Area Network",
+   "zh": "控制器局域网（**Controller Area Network**）"
+  },
+  {
+   "term": "CC",
+   "en": "Communication Controller",
+   "zh": "通信控制器（**Communication Controller**）"
+  },
+  {
+   "term": "CCF",
+   "en": "Common Cause Failure",
+   "zh": "共因失效（**Common Cause Failure**）"
+  },
+  {
+   "term": "CDD",
+   "en": "Complex Driver",
+   "zh": "复杂设备驱动（**Complex Driver**）"
+  },
+  {
+   "term": "CP",
+   "en": "Classic Platform",
+   "zh": "经典平台（**Classic Platform**）"
+  },
+  {
+   "term": "COM",
+   "en": "COmmunication Management",
+   "zh": "通信管理（**COmmunication Management**）"
+  },
+  {
+   "term": "CPU",
+   "en": "Central Processing Unit",
+   "zh": "中央处理单元（**Central Processing Unit**）"
+  },
+  {
+   "term": "CRC",
+   "en": "Cyclic Redundancy Check",
+   "zh": "循环冗余校验（**Cyclic Redundancy Check**）"
+  },
+  {
+   "term": "DAC",
+   "en": "Digital to Analog Converter",
+   "zh": "数模转换器（**Digital to Analog Converter**）"
+  },
+  {
+   "term": "DDS",
+   "en": "Data Distribution Service",
+   "zh": "数据分发服务（**Data Distribution Service**）"
+  },
+  {
+   "term": "DEM",
+   "en": "Diagnostic Event Manager",
+   "zh": "诊断事件管理器（**Diagnostic Event Manager**）"
+  },
+  {
+   "term": "DES",
+   "en": "Data Encryption Standard",
+   "zh": "数据加密标准（**Data Encryption Standard**）"
+  },
+  {
+   "term": "DET",
+   "en": "Development Error Tracer",
+   "zh": "开发错误跟踪器（**Development Error Tracer**）"
+  },
+  {
+   "term": "DEXT",
+   "en": "Diagnostic EXTract",
+   "zh": "诊断提取（**Diagnostic EXTract**）"
+  },
+  {
+   "term": "DHCP",
+   "en": "Dynamic Host Configuration Protocol",
+   "zh": "动态主机配置协议（**Dynamic Host Configuration Protocol**）"
+  },
+  {
+   "term": "DIO",
+   "en": "Digital Input/Output",
+   "zh": "数字输入/输出（**Digital Input/Output**）"
+  },
+  {
+   "term": "DLC",
+   "en": "Data Length Code",
+   "zh": "数据长度码（**Data Length Code**）"
+  },
+  {
+   "term": "DM",
+   "en": "Diagnostic Manager",
+   "zh": "诊断管理器（**Diagnostic Manager**）"
+  },
+  {
+   "term": "DoIP",
+   "en": "Diagnostics over Internet Protocol",
+   "zh": "基于互联网协议的诊断（**Diagnostics over Internet Protocol**）"
+  },
+  {
+   "term": "DoS",
+   "en": "Denial of Service",
+   "zh": "拒绝服务（**Denial of Service**）"
+  },
+  {
+   "term": "DSL",
+   "en": "Domain Specific Language",
+   "zh": "领域特定语言（**Domain Specific Language**）"
+  },
+  {
+   "term": "DTC",
+   "en": "Diagnostic Trouble Code",
+   "zh": "诊断故障码（**Diagnostic Trouble Code**）"
+  },
+  {
+   "term": "DTD",
+   "en": "Document Type Definition",
+   "zh": "文档类型定义（**Document Type Definition**）"
+  },
+  {
+   "term": "E2E",
+   "en": "End to End",
+   "zh": "端到端（**End to End**）"
+  },
+  {
+   "term": "ECU",
+   "en": "Electronic Control Unit",
+   "zh": "电子控制单元（**Electronic Control Unit**）"
+  },
+  {
+   "term": "ECB",
+   "en": "Electronic Code Book",
+   "zh": "电子密码本（**Electronic Code Book**）"
+  },
+  {
+   "term": "ECC",
+   "en": "Elliptic Curve Cryptography",
+   "zh": "椭圆曲线密码学（**Elliptic Curve Cryptography**）"
+  },
+  {
+   "term": "ECDSA",
+   "en": "Elliptic Curve Digital Signature Algorithm",
+   "zh": "椭圆曲线数字签名算法（**Elliptic Curve Digital Signature Algorithm**）"
+  },
+  {
+   "term": "ECIES",
+   "en": "Elliptic Curve Integrated Encryption Scheme",
+   "zh": "椭圆曲线集成加密方案（**Elliptic Curve Integrated Encryption Scheme**）"
+  },
+  {
+   "term": "EDDSA",
+   "en": "Edwards-Curve Digital Signature Algorithm",
+   "zh": "爱德华曲线数字签名算法（**Edwards-Curve Digital Signature Algorithm**）"
+  },
+  {
+   "term": "EEC",
+   "en": "Executable Entity Cluster",
+   "zh": "可执行实体簇（**Executable Entity Cluster**）"
+  },
+  {
+   "term": "EEPROM",
+   "en": "Electrically Erasable Programmable Read-Only Memory",
+   "zh": "电可擦除可编程只读存储器（**Electrically Erasable Programmable Read-Only Memory**）"
+  },
+  {
+   "term": "EM",
+   "en": "Execution Management",
+   "zh": "执行管理（**Execution Management**）"
+  },
+  {
+   "term": "EOC",
+   "en": "Execution Order Constraint",
+   "zh": "执行顺序约束（**Execution Order Constraint**）"
+  },
+  {
+   "term": "EOCEERG",
+   "en": "Execution Order Constraint Executable Entity Reference Group",
+   "zh": "执行顺序约束可执行实体引用组（**Execution Order Constraint Executable Entity Reference Group**）"
+  },
+  {
+   "term": "FC",
+   "en": "Functional Cluster",
+   "zh": "功能簇（**Functional Cluster**）"
+  },
+  {
+   "term": "FIFO",
+   "en": "First In First Out",
+   "zh": "先进先出（**First In First Out**）"
+  },
+  {
+   "term": "FIBEX",
+   "en": "Field Bus Exchange Format",
+   "zh": "现场总线交换格式（**Field Bus Exchange Format**）"
+  },
+  {
+   "term": "FO",
+   "en": "(AUTOSAR) FOundation",
+   "zh": "（AUTOSAR）基础（**(AUTOSAR) FOundation**）"
+  },
+  {
+   "term": "FOTA",
+   "en": "Firmware Over The Air",
+   "zh": "固件远程升级（**Firmware Over The Air**）"
+  },
+  {
+   "term": "FPU",
+   "en": "Floating Point Unit",
+   "zh": "浮点运算单元（**Floating Point Unit**）"
+  },
+  {
+   "term": "FQDN",
+   "en": "Fully-Qualified Domain Name",
+   "zh": "全限定域名（**Fully-Qualified Domain Name**）"
+  },
+  {
+   "term": "FW",
+   "en": "Fire Wire",
+   "zh": "火线接口（**Fire Wire**）"
+  },
+  {
+   "term": "GCM",
+   "en": "Galios/Counter Mode",
+   "zh": "伽罗瓦/计数器模式（**Galios/Counter Mode**）"
+  },
+  {
+   "term": "GENIVI",
+   "en": "GENeva In-Vehicle Infotainment",
+   "zh": "日内瓦车载信息娱乐联盟（**GENeva In-Vehicle Infotainment**）"
+  },
+  {
+   "term": "GPT",
+   "en": "General Purpose Timer",
+   "zh": "通用定时器（**General Purpose Timer**）"
+  },
+  {
+   "term": "GSM",
+   "en": "Global System for Mobile Communication",
+   "zh": "全球移动通信系统（**Global System for Mobile Communication**）"
+  },
+  {
+   "term": "HMAC",
+   "en": "Hash-based Message Authentication Code",
+   "zh": "基于哈希的消息认证码（**Hash-based Message Authentication Code**）"
+  },
+  {
+   "term": "HTMSS",
+   "en": "Hardware Test Management Start-up & Shutdown",
+   "zh": "硬件测试管理启动与关闭（**Hardware Test Management Start-up & Shutdown**）"
+  },
+  {
+   "term": "HTTP",
+   "en": "Hypertext Transport Protocol",
+   "zh": "超文本传输协议（**Hypertext Transport Protocol**）"
+  },
+  {
+   "term": "HW",
+   "en": "Hardware",
+   "zh": "硬件（**Hardware**）"
+  },
+  {
+   "term": "I-PDU",
+   "en": "Interaction Layer Protocol Data Unit",
+   "zh": "交互层协议数据单元（**Interaction Layer Protocol Data Unit**）"
+  },
+  {
+   "term": "ICC",
+   "en": "Implementation Conformance Class",
+   "zh": "实现一致性等级（**Implementation Conformance Class**）"
+  },
+  {
+   "term": "ICMP",
+   "en": "Internet Control Message Protocol",
+   "zh": "互联网控制报文协议（**Internet Control Message Protocol**）"
+  },
+  {
+   "term": "ICOM",
+   "en": "Intelligent COMmunication controller",
+   "zh": "智能通信控制器（**Intelligent COMmunication controller**）"
+  },
+  {
+   "term": "ICU",
+   "en": "Input Capture Unit",
+   "zh": "输入捕获单元（**Input Capture Unit**）"
+  },
+  {
+   "term": "ICV",
+   "en": "Integrity Check Value",
+   "zh": "完整性校验值（**Integrity Check Value**）"
+  },
+  {
+   "term": "ID",
+   "en": "IDentifier",
+   "zh": "标识符（**IDentifier**）"
+  },
+  {
+   "term": "IDL",
+   "en": "Interface Description Language",
+   "zh": "接口描述语言（**Interface Description Language**）"
+  },
+  {
+   "term": "IEC",
+   "en": "International Electrotechnical Commission",
+   "zh": "国际电工委员会（**International Electrotechnical Commission**）"
+  },
+  {
+   "term": "IFI",
+   "en": "Interpolation Floating point",
+   "zh": "浮点插值（**Interpolation Floating point**）"
+  },
+  {
+   "term": "IFx",
+   "en": "Interpolation Fixed point",
+   "zh": "定点插值（**Interpolation Fixed point**）"
+  },
+  {
+   "term": "IO",
+   "en": "Input/ Output",
+   "zh": "输入/输出（**Input/ Output**）"
+  },
+  {
+   "term": "IP",
+   "en": "Internet Protocol",
+   "zh": "互联网协议（**Internet Protocol**）"
+  },
+  {
+   "term": "ISO",
+   "en": "International Standardization Organization",
+   "zh": "国际标准化组织（**International Standardization Organization**）"
+  },
+  {
+   "term": "ISR",
+   "en": "Interrupt Service Routine",
+   "zh": "中断服务例程（**Interrupt Service Routine**）"
+  },
+  {
+   "term": "JSON",
+   "en": "JavaScript Object Notation",
+   "zh": "JSON（**JavaScript Object Notation**）"
+  },
+  {
+   "term": "LAN",
+   "en": "Local Area Network",
+   "zh": "局域网（**Local Area Network**）"
+  },
+  {
+   "term": "LBAP",
+   "en": "Language Binding for the Adaptive Platform",
+   "zh": "自适应平台语言绑定（**Language Binding for the Adaptive Platform**）"
+  },
+  {
+   "term": "L-PDU",
+   "en": "Protocol Data Unit of the data Link layer",
+   "zh": "数据链路层协议数据单元（**Protocol Data Unit of the data Link layer**）"
+  },
+  {
+   "term": "L-SDU",
+   "en": "SDU of the data Link layer",
+   "zh": "数据链路层服务数据单元（**SDU of the data Link layer**）"
+  },
+  {
+   "term": "LET",
+   "en": "Logical Execution Time",
+   "zh": "逻辑执行时间（**Logical Execution Time**）"
+  },
+  {
+   "term": "LIFO",
+   "en": "Last In First Out",
+   "zh": "后进先出（**Last In First Out**）"
+  },
+  {
+   "term": "LIN",
+   "en": "Local Interconnected Network",
+   "zh": "局部互联网络（**Local Interconnected Network**）"
+  },
+  {
+   "term": "L-PDU",
+   "en": "Link Layer Protocol Data Unit",
+   "zh": "数据链路层协议数据单元（**Protocol Data Unit of the data Link layer**）"
+  },
+  {
+   "term": "LT",
+   "en": "Log and Trace",
+   "zh": "日志与追踪（**Log and Trace**）"
+  },
+  {
+   "term": "LSB",
+   "en": "Least Significant Bit",
+   "zh": "最低有效位（**Least Significant Bit**）"
+  },
+  {
+   "term": "MAC",
+   "en": "Media Access Control",
+   "zh": "媒体访问控制（**Media Access Control**）"
+  },
+  {
+   "term": "MAC",
+   "en": "Message Authentication Code",
+   "zh": "消息认证码（**Message Authentication Code**）"
+  },
+  {
+   "term": "mC",
+   "en": "MicroController",
+   "zh": "微控制器（**MicroController**）"
+  },
+  {
+   "term": "MCAL",
+   "en": "Microcontroller Abstraction Layer",
+   "zh": "微控制器抽象层（**Microcontroller Abstraction Layer**）"
+  },
+  {
+   "term": "MCU",
+   "en": "Micro Controller Unit",
+   "zh": "微控制器单元（**Micro Controller Unit**）"
+  },
+  {
+   "term": "MD",
+   "en": "Message Digest",
+   "zh": "消息摘要（**Message Digest**）"
+  },
+  {
+   "term": "ME",
+   "en": "Mappable Element",
+   "zh": "可映射元素（**Mappable Element**）"
+  },
+  {
+   "term": "MFI",
+   "en": "Mathematical Floating point",
+   "zh": "数学浮点（**Mathematical Floating point**）"
+  },
+  {
+   "term": "MFx",
+   "en": "Math - Fixed Point",
+   "zh": "定点数学（**Math - Fixed Point**）"
+  },
+  {
+   "term": "MIPS",
+   "en": "Million Instructions Per Second",
+   "zh": "每秒百万条指令（**Million Instructions Per Second**）"
+  },
+  {
+   "term": "MMU",
+   "en": "Memory Management Unit",
+   "zh": "内存管理单元（**Memory Management Unit**）"
+  },
+  {
+   "term": "MMI",
+   "en": "Man Machine Interface",
+   "zh": "人机接口（**Man Machine Interface**）"
+  },
+  {
+   "term": "MOST",
+   "en": "Media Oriented Systems Transport",
+   "zh": "面向媒体的系统传输（**Media Oriented Systems Transport**）"
+  },
+  {
+   "term": "mP",
+   "en": "MicroProcessor",
+   "zh": "微处理器（**MicroProcessor**）"
+  },
+  {
+   "term": "MPU",
+   "en": "Memory Protection Unit",
+   "zh": "内存保护单元（**Memory Protection Unit**）"
+  },
+  {
+   "term": "MSB",
+   "en": "Most Significant Bit",
+   "zh": "最高有效位（**Most Significant Bit**）"
+  },
+  {
+   "term": "MSTP",
+   "en": "Micro-controller Specific Test Package",
+   "zh": "微控制器专用测试包（**Micro-controller Specific Test Package**）"
+  },
+  {
+   "term": "MTU",
+   "en": "Maximum Transmission Unit",
+   "zh": "最大传输单元（**Maximum Transmission Unit**）"
+  },
+  {
+   "term": "NM",
+   "en": "Network Management",
+   "zh": "网络管理（**Network Management**）"
+  },
+  {
+   "term": "N-PDU",
+   "en": "Protocol Data Unit of the Network layer (transport protocols)",
+   "zh": "网络层协议数据单元（传输协议）（**Protocol Data Unit of the Network layer (transport protocols)**）"
+  },
+  {
+   "term": "N-SDU",
+   "en": "SDU of the Network layer (transport protocols)",
+   "zh": "网络层服务数据单元（传输协议）（**SDU of the Network layer (transport protocols)**）"
+  },
+  {
+   "term": "NVRAM",
+   "en": "Non-Volatile Random Access Memory",
+   "zh": "非易失性随机访问存储器（**Non-Volatile Random Access Memory**）"
+  },
+  {
+   "term": "OBD",
+   "en": "On-Board Diagnostic",
+   "zh": "车载诊断（**On-Board Diagnostic**）"
+  },
+  {
+   "term": "OEM",
+   "en": "Original Equipment Manufacturer",
+   "zh": "原始设备制造商（**Original Equipment Manufacturer**）"
+  },
+  {
+   "term": "OIL",
+   "en": "ISO 17356-6 (OSEK/VDX Implementation Language)",
+   "zh": "ISO 17356-6（OSEK/VDX 实现语言）（**ISO 17356-6 (OSEK/VDX Implementation Language)**）"
+  },
+  {
+   "term": "OS",
+   "en": "Operating System",
+   "zh": "操作系统（**Operating System**）"
+  },
+  {
+   "term": "OSEK",
+   "en": "Open Systems and the Corresponding Interfaces for Automotive Electronics",
+   "zh": "汽车电子开放系统及对应接口（**Open Systems and the Corresponding Interfaces for Automotive Electronics**）"
+  },
+  {
+   "term": "PCI",
+   "en": "Protocol Control Information",
+   "zh": "协议控制信息（**Protocol Control Information**）"
+  },
+  {
+   "term": "PDEP",
+   "en": "Profile of Data Exchange Point",
+   "zh": "数据交换点_profile_（**Profile of Data Exchange Point**）"
+  },
+  {
+   "term": "PDU",
+   "en": "Protocol Data Unit Platform Health",
+   "zh": "交互层协议数据单元（**Interaction Layer Protocol Data Unit**）"
+  },
+  {
+   "term": "PHM",
+   "en": "Management",
+   "zh": "平台健康管理（**Platform Health Management**）"
+  },
+  {
+   "term": "PKCS",
+   "en": "Public Key Cryptography Standards",
+   "zh": "公钥密码学标准（**Public Key Cryptography Standards**）"
+  },
+  {
+   "term": "POSIX",
+   "en": "Portable Operating System Interface",
+   "zh": "可移植操作系统接口（**Portable Operating System Interface**）"
+  },
+  {
+   "term": "PS",
+   "en": "Product Supplier",
+   "zh": "产品供应商（**Product Supplier**）"
+  },
+  {
+   "term": "PSK",
+   "en": "Pre-Shared Key",
+   "zh": "预共享密钥（**Pre-Shared Key**）"
+  },
+  {
+   "term": "PWM",
+   "en": "Pulse Width Modulation",
+   "zh": "脉冲宽度调制（**Pulse Width Modulation**）"
+  },
+  {
+   "term": "RAM",
+   "en": "Random Access Memory",
+   "zh": "随机访问存储器（**Random Access Memory**）"
+  },
+  {
+   "term": "RDG",
+   "en": "Runnable Dependency Graph",
+   "zh": "可运行实体依赖图（**Runnable Dependency Graph**）"
+  },
+  {
+   "term": "REST",
+   "en": "Representational State Transfer",
+   "zh": "表述性状态转移（**Representational State Transfer**）"
+  },
+  {
+   "term": "RfC",
+   "en": "Request for Change",
+   "zh": "变更请求（**Request for Change**）"
+  },
+  {
+   "term": "ROM",
+   "en": "Read-Only Memory",
+   "zh": "只读存储器（**Read-Only Memory**）"
+  },
+  {
+   "term": "RP",
+   "en": "Rapid Prototyping",
+   "zh": "快速原型（**Rapid Prototyping**）"
+  },
+  {
+   "term": "RPC",
+   "en": "Remote Procedure Call",
+   "zh": "远程过程调用（**Remote Procedure Call**）"
+  },
+  {
+   "term": "RSA",
+   "en": "Cryptographic approach according to Rivest, Shamir, and Adleman",
+   "zh": "按 Rivest、Shamir 和 Adleman 的密码学方法（**Cryptographic approach according to Rivest, Shamir, and Adleman**）"
+  },
+  {
+   "term": "RTE",
+   "en": "Runtime Environment",
+   "zh": "运行时环境（**Runtime Environment**）"
+  },
+  {
+   "term": "SAE",
+   "en": "Society of Automotive Engineers",
+   "zh": "汽车工程师学会（**Society of Automotive Engineers**）"
+  },
+  {
+   "term": "SD",
+   "en": "Service Discovery",
+   "zh": "服务发现（**Service Discovery**）"
+  },
+  {
+   "term": "SDG",
+   "en": "Special Data Group",
+   "zh": "特殊数据组（**Special Data Group**）"
+  },
+  {
+   "term": "SDU",
+   "en": "Service Data Unit",
+   "zh": "服务数据单元（**Service Data Unit**）"
+  },
+  {
+   "term": "SHA",
+   "en": "Secure Hash Algorithm",
+   "zh": "安全哈希算法（**Secure Hash Algorithm**）"
+  },
+  {
+   "term": "SHM",
+   "en": "System Health Monitoring",
+   "zh": "系统健康监控（**System Health Monitoring**）"
+  },
+  {
+   "term": "SIL",
+   "en": "Safety Integrity Level",
+   "zh": "安全完整性等级（**Safety Integrity Level**）"
+  },
+  {
+   "term": "SL-LET",
+   "en": "System Level Logical Execution Time",
+   "zh": "系统级逻辑执行时间（**System Level Logical Execution Time**）"
+  },
+  {
+   "term": "SM",
+   "en": "State Management",
+   "zh": "状态管理（**State Management**）"
+  },
+  {
+   "term": "SOA",
+   "en": "Service Oriented Architecture",
+   "zh": "面向服务的架构（**Service Oriented Architecture**）"
+  },
+  {
+   "term": "SOME/IP",
+   "en": "Scalable service-Oriented MiddlewarE over IP",
+   "zh": "基于 IP 的可扩展面向服务中间件（**Scalable service-Oriented MiddlewarE over IP**）"
+  },
+  {
+   "term": "SP",
+   "en": "Synchronization Point",
+   "zh": "同步点（**Synchronization Point**）"
+  },
+  {
+   "term": "SPEM",
+   "en": "Software & Systems Process Engineering Meta-model",
+   "zh": "软件与系统过程工程元模型（**Software & Systems Process Engineering Meta-model**）"
+  },
+  {
+   "term": "SPI",
+   "en": "Serial Peripheral Interface",
+   "zh": "串行外设接口（**Serial Peripheral Interface**）"
+  },
+  {
+   "term": "SST",
+   "en": "Signal-Service Translation",
+   "zh": "信号-服务转换（**Signal-Service Translation**）"
+  },
+  {
+   "term": "SW",
+   "en": "Software",
+   "zh": "软件（**Software**）"
+  },
+  {
+   "term": "SW-C",
+   "en": "Software Component",
+   "zh": "软件组件（**Software Component**）"
+  },
+  {
+   "term": "SWCT / SWC-T",
+   "en": "Software Component Template",
+   "zh": "软件组件模板（**Software Component Template**）"
+  },
+  {
+   "term": "SWS",
+   "en": "Software Specification",
+   "zh": "软件规格说明（**Software Specification**）"
+  },
+  {
+   "term": "SYST / SYS-T",
+   "en": "System Template",
+   "zh": "系统模板（**System Template**）"
+  },
+  {
+   "term": "TC",
+   "en": "Timed Communication",
+   "zh": "定时通信（**Timed Communication**）"
+  },
+  {
+   "term": "TC",
+   "en": "Test Case",
+   "zh": "测试用例（**Test Case**）"
+  },
+  {
+   "term": "TCP",
+   "en": "Transmission Control Protocol",
+   "zh": "传输控制协议（**Transmission Control Protocol**）"
+  },
+  {
+   "term": "TD",
+   "en": "Timing Description",
+   "zh": "时序描述（**Timing Description**）"
+  },
+  {
+   "term": "TIMEX",
+   "en": "TIMing EXTensions",
+   "zh": "时序扩展（**TIMing EXTensions**）"
+  },
+  {
+   "term": "TLS",
+   "en": "Transport Layer Security",
+   "zh": "传输层安全（**Transport Layer Security**）"
+  },
+  {
+   "term": "TLV",
+   "en": "Tag Length Value",
+   "zh": "标签-长度-值（**Tag Length Value**）"
+  },
+  {
+   "term": "TP",
+   "en": "Transport Protocol",
+   "zh": "传输协议（**Transport Protocol**）"
+  },
+  {
+   "term": "TSN",
+   "en": "Time sensitive network",
+   "zh": "时间敏感网络（**Time sensitive network**）"
+  },
+  {
+   "term": "TTCAN",
+   "en": "Time Triggered CAN",
+   "zh": "时间触发 CAN（**Time Triggered CAN**）"
+  },
+  {
+   "term": "TTL",
+   "en": "Time To Live Time Triggered",
+   "zh": "生存时间（**Time To Live**）"
+  },
+  {
+   "term": "TTP",
+   "en": "Protocol",
+   "zh": "时间触发协议（**Time Triggered Protocol**）"
+  },
+  {
+   "term": "UDP",
+   "en": "User (Universal) Datagram Protocol",
+   "zh": "用户（通用）数据报协议（**User (Universal) Datagram Protocol**）"
+  },
+  {
+   "term": "UDS",
+   "en": "Unified Diagnostic Services",
+   "zh": "统一诊断服务（**Unified Diagnostic Services**）"
+  },
+  {
+   "term": "UDPNM",
+   "en": "UDP Network Management",
+   "zh": "UDP 网络管理（**UDP Network Management**）"
+  },
+  {
+   "term": "UML",
+   "en": "Unified Modeling Language",
+   "zh": "统一建模语言（**Unified Modeling Language**）"
+  },
+  {
+   "term": "URI",
+   "en": "Uniform Resource Identifier",
+   "zh": "统一资源标识符（**Uniform Resource Identifier**）"
+  },
+  {
+   "term": "URL",
+   "en": "Uniform Resource Locator",
+   "zh": "统一资源定位符（**Uniform Resource Locator**）"
+  },
+  {
+   "term": "USB",
+   "en": "Universal Serial Bus",
+   "zh": "通用串行总线（**Universal Serial Bus**）"
+  },
+  {
+   "term": "UTF",
+   "en": "Universal coded character set Transformation Format",
+   "zh": "通用编码字符集转换格式（**Universal coded character set Transformation Format**）"
+  },
+  {
+   "term": "UUID",
+   "en": "Universally Unique Identifier",
+   "zh": "通用唯一标识符（**Universally Unique Identifier**）"
+  },
+  {
+   "term": "VFB",
+   "en": "Virtual Functional Bus",
+   "zh": "虚拟功能总线（**Virtual Functional Bus**）"
+  },
+  {
+   "term": "V2X",
+   "en": "Vehicle-To-Everything",
+   "zh": "车联万物（**Vehicle-To-Everything**）"
+  },
+  {
+   "term": "VLAN",
+   "en": "Virtual Local Area Network",
+   "zh": "虚拟局域网（**Virtual Local Area Network**）"
+  },
+  {
+   "term": "VSA",
+   "en": "Variable Size Array",
+   "zh": "变长数组（**Variable Size Array**）"
+  },
+  {
+   "term": "VSM",
+   "en": "Vehicle State Manager",
+   "zh": "车辆状态管理器（**Vehicle State Manager**）"
+  },
+  {
+   "term": "VISS",
+   "en": "Vehicle Information Service Specification",
+   "zh": "车辆信息服务规范（**Vehicle Information Service Specification**）"
+  },
+  {
+   "term": "VMM",
+   "en": "Vehicle Mode Management",
+   "zh": "车辆模式管理（**Vehicle Mode Management**）"
+  },
+  {
+   "term": "WCET",
+   "en": "Worst Case Execution Time",
+   "zh": "最坏情况执行时间（**Worst Case Execution Time**）"
+  },
+  {
+   "term": "WCRT",
+   "en": "Worst Case Response time",
+   "zh": "最坏情况响应时间（**Worst Case Response time**）"
+  },
+  {
+   "term": "W3C",
+   "en": "World Wide Web Consortium",
+   "zh": "万维网联盟（**World Wide Web Consortium**）"
+  },
+  {
+   "term": "XCP",
+   "en": "Universal Calibration Protocol",
+   "zh": "通用标定协议（**Universal Calibration Protocol**）"
+  },
+  {
+   "term": "XML",
+   "en": "Extensible Markup Language",
+   "zh": "可扩展标记语言（**Extensible Markup Language**）"
+  },
+  {
+   "term": "XP",
+   "en": "Abstract Platform",
+   "zh": "抽象平台（**Abstract Platform**）"
+  },
+  {
+   "term": "XSD",
+   "en": "XML Schema Definition",
+   "zh": "XML 模式定义（**XML Schema Definition**）"
+  }
+ ],
+ "terms": {
+  "Abstract Platform": {
+   "num": "1",
+   "en_definition": "A Software Platform defined by AUTOSAR for the definition of functional level communications independent of Classic / Adaptive / Offboard deployments.",
+   "zh": "AUTOSAR 定义的一种软件平台，用于以独立于经典平台（Classic）/ 自适应平台（Adaptive）/ 离板（Offboard）部署方式的方式定义功能级通信。"
+  },
+  "Acceptance Test Suite": {
+   "num": "2",
+   "en_definition": "A test case description used in the context of Acceptance Testing",
+   "zh": "在验收测试（**Acceptance Testing**）语境中使用的一种测试用例描述。"
+  },
+  "Access Control Decision": {
+   "num": "3",
+   "en_definition": "The Access Control Decision is a Boolean value indicating if the requested operation is permitted or not. It is based on the identity of the caller and the 'Access Control Policy'",
+   "zh": "访问控制判定是一个布尔值，指示所请求的操作是否被允许。它基于调用者的身份以及\"访问控制策略\"（**Access Control Policy**）。"
+  },
+  "Access Control Policy": {
+   "num": "4",
+   "en_definition": "Access Control Policies are bound to the targets of calls (i.e. Service interfaces) and are used to express what 'Identity Information' is necessary to access those interfaces.",
+   "zh": "访问控制策略绑定到调用的目标（即服务接口），用于表达访问这些接口需要何种\"身份信息\"（**Identity Information**）。"
+  },
+  "Adaptability": {
+   "num": "5",
+   "en_definition": "Adaptability is the ability of a system to adjust itself to changed circumstances in its environment in order to continue to provide the intended functionality.",
+   "zh": "适应性是系统调整自身以应对其环境变化、从而继续提供预期功能的能力。"
+  },
+  "Adaptive Application": {
+   "num": "6",
+   "en_definition": "Software that follows the Adaptive AUTOSAR specifications and therefore can be deployed onto an Adaptive Platform instance. It consists of its implementation, operational data (e.g. map data) and its meta-data given by the Application Design Model. An Adaptive Application contains at least one executable. In order to be deployable on different Adaptive Platforms, it only uses ARA programming interfaces.",
+   "zh": "遵循自适应 AUTOSAR 规范、因而可部署到自适应平台实例上的软件。它由其实现、运行数据（如地图数据）以及由应用设计模型给出的元数据组成。自适应应用至少包含一个可执行文件。为了能部署到不同的自适应平台上，它只使用 ARA 编程接口。"
+  },
+  "Adaptive Platform Foundation": {
+   "num": "7",
+   "en_definition": "Part of an Adaptive Platform implementation, which provides standardized platform functionality to Applications via software interfaces (APIs).",
+   "zh": "自适应平台实现的一部分，通过软件接口（API）向应用提供标准化的平台功能。"
+  },
+  "Adaptive Platform Services": {
+   "num": "8",
+   "en_definition": "Standard platform services that is provided by an application which is part of AUTOSAR platform implementation.",
+   "zh": "由属于 AUTOSAR 平台实现一部分的应用所提供的标准平台服务。"
+  },
+  "Application": {
+   "num": "9",
+   "en_definition": "A software (or program) that is specified to the solution of a problem of an end user requiring information processing for its solution. The 'Software Configuration' of a software entity.",
+   "zh": "为解决需要信息处理的最终用户问题而规定的软件（或程序）。一个软件实体的\"软件配置\"（**Software Configuration**）。"
+  },
+  "Application Interface": {
+   "num": "10",
+   "en_definition": "A 'Port Interface' used by a 'Software Component' as specified in the software component template.",
+   "zh": "软件组件模板中所规定的、由\"软件组件\"（**Software Component**）使用的\"端口接口\"（**Port Interface**）。"
+  },
+  "Application Programming Interface": {
+   "num": "11",
+   "en_definition": "An Application Programming Interface (API) is the prescribed method of a specific software part by which a programmer writing a program can make requests to that software part.",
+   "zh": "应用编程接口（API）是特定软件部分的既定方法，编写程序的程序员通过它可以向该软件部分发出请求。"
+  },
+  "Application Software Component": {
+   "num": "12",
+   "en_definition": "An Application Software Component is a specific 'Software Component' which realizes a defined functionality on application level and runs on the AUTOSAR infrastructure. It communicates only through the AUTOSAR Runtime Environment.",
+   "zh": "应用软件组件是一种特定的\"软件组件\"，它在应用层实现已定义的功能并运行于 AUTOSAR 基础设施之上。它只通过 AUTOSAR 运行时环境进行通信。"
+  },
+  "Architecture": {
+   "num": "13",
+   "en_definition": "The fundamental organization of a system embodied in its components, their static and dynamic relationships to each other, and to the environment, and the principles guiding its design and evolution.",
+   "zh": "体系结构是系统的基本组织方式，体现在其组件、组件之间及其与环境的静态与动态关系、以及指导其设计与演化的原则之中。"
+  },
+  "Artifact": {
+   "num": "14",
+   "en_definition": "This is a Work Product Definition that provides a description and definition for tangible work product types. Artifacts may be composed of other artifacts. At a high level, an artifact is represented as a single conceptual file.",
+   "zh": "制品是一种工作产品定义（**Work Product Definition**），为有形的工作产品类型提供描述与定义。制品可以由其他制品组成。在高层次上，制品表示为单个概念性文件。"
+  },
+  "ASIL Decomposition": {
+   "num": "15",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]) ID 1.7",
+   "zh": null
+  },
+  "Asserted Property": {
+   "num": "16",
+   "en_definition": "A property or quality of a design entity (e.g. SW component or system) is asserted, if the design entity guarantees that this property or quality is fulfilled.",
+   "zh": null
+  },
+  "Assessment": {
+   "num": "17",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.4",
+   "zh": null
+  },
+  "Asset": {
+   "num": "18",
+   "en_definition": "An item that has been designed for use in multiple contexts.",
+   "zh": null
+  },
+  "Asynchronous Communication": {
+   "num": "19",
+   "en_definition": "Asynchronous communication does not block the sending software entity. The sending software entity continues its operation without getting a response from the communication partner(s).",
+   "zh": null
+  },
+  "Asynchronous Function": {
+   "num": "20",
+   "en_definition": "A 'Function' is called asynchronous if the described functionality is not guaranteed to be completed the moment the function returns to the caller.",
+   "zh": null
+  },
+  "Atomic Software Component": {
+   "num": "21",
+   "en_definition": "Non-composed Software-Component.",
+   "zh": null
+  },
+  "Audit": {
+   "num": "22",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.5",
+   "zh": null
+  },
+  "Authenticity": {
+   "num": "23",
+   "en_definition": "The property that data originated from its purported source.",
+   "zh": null
+  },
+  "Automotive Safety Integrity Levels": {
+   "num": "24",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.7",
+   "zh": null
+  },
+  "AUTOSAR Adaptive Platform": {
+   "num": "25",
+   "en_definition": "An adaptive computing platform standardized by AUTOSAR. In a narrow term, it refers to its specification. In a broad term, it may refer to an instance of Adaptive Platform implementation.",
+   "zh": null
+  },
+  "AUTOSAR Application Interface": {
+   "num": "26",
+   "en_definition": "A set of Blueprints ('Blueprint') which are standardized by AUTOSAR and which can be used for creating AUTOSAR Interfaces ('AUTOSAR Interface') of an 'Application'. AUTOSAR interfaces that are derived from Standardized Blueprints ('Standardized AUTOSAR Blueprint') are Standardized AUTOSAR Interfaces ('Standardized AUTOSAR Interface').",
+   "zh": null
+  },
+  "AUTOSAR Authoring Tool": {
+   "num": "27",
+   "en_definition": "An AUTOSAR Tool used to create and modify AUTOSAR XML descriptions ('AUTOSAR XML description').",
+   "zh": null
+  },
+  "AUTOSAR Blueprint": {
+   "num": "28",
+   "en_definition": "An AUTOSAR Blueprint is a 'Blueprint' for an AUTOSAR element. It also includes that it is specified within the AUTOSAR project which attributes are mandatory to be specified for the blueprint of a specific class of AUTOSAR element types as well as how to derive an AUTOSAR object from that blueprint.",
+   "zh": null
+  },
+  "AUTOSAR Converter Tool": {
+   "num": "29",
+   "en_definition": "An AUTOSAR Tool used to create AUTOSAR XML files by converting information from other AUTOSAR XML files.",
+   "zh": null
+  },
+  "AUTOSAR Definition": {
+   "num": "30",
+   "en_definition": "This is the definition of parameters which can have values. One could say that the parameter values are instances of the definitions. But in the meta-model hierarchy of AUTOSAR, definitions are also instances of the meta-model and therefore considered as a description.",
+   "zh": null
+  },
+  "AUTOSAR Interface": {
+   "num": "31",
+   "en_definition": "The AUTOSAR Interface of a software component refers to the collection of all Ports ('Port') of that component through which it interacts with other components.",
+   "zh": null
+  },
+  "AUTOSAR Meta-model": {
+   "num": "32",
+   "en_definition": "The AUTOSAR meta-model is a UML2.0 model that defines the language for describing AUTOSAR systems and related artifacts.",
+   "zh": null
+  },
+  "AUTOSAR Model": {
+   "num": "33",
+   "en_definition": "This is an instance of the AUTOSAR meta-model. The AUTOSAR Model represents aspects suitable to the intended use according to the AUTOSAR methodology.",
+   "zh": null
+  },
+  "AUTOSAR Partial Model": {
+   "num": "34",
+   "en_definition": "In AUTOSAR, the possible partitioning of models is marked in the meta-model by <<atp Splitable>>. One partial model is represented in an 'AUTOSAR XML description' by one file. The partial model does not need to fulfill all semantic constraints applicable to an AUTOSAR model.",
+   "zh": null
+  },
+  "AUTOSAR Processor Tool": {
+   "num": "35",
+   "en_definition": "An AUTOSAR Tool used to create non-AUTOSAR files by processing information from AUTOSAR XML files.",
+   "zh": null
+  },
+  "AUTOSAR Runtime for Adaptive Applications": {
+   "num": "36",
+   "en_definition": "A set of standard application interfaces provided by Functional Clusters, which belong to either Adaptive Platform Foundation or Adaptive Platform Services.",
+   "zh": null
+  },
+  "AUTOSAR Run-Time Interface": {
+   "num": "37",
+   "en_definition": "The AUTOSAR Run-Time Interface shall define an interface between build tools and debugging/ tracing tools.",
+   "zh": null
+  },
+  "AUTOSAR Service": {
+   "num": "38",
+   "en_definition": "The term service is used in the layered software architecture to denote the highest layer of the AUTOSAR software architecture that interacts with the application. The term service is used in the meaning defined by the service-oriented architecture. This meaning has the strongest relation to the usage of the term service on the AUTOSAR adaptive platform. The term service is also used to describe the handling of diagnostic services, e.g.UDS service ReadDataByIdentifier, for the communication between a diagnostic tester and a diagnostic stack on an (AUTOSAR) ECU.",
+   "zh": null
+  },
+  "AUTOSAR Software": {
+   "num": "39",
+   "en_definition": "Application Software or Basic/Platform Software developed according to the AUTOSAR standard",
+   "zh": null
+  },
+  "AUTOSAR Tool": {
+   "num": "40",
+   "en_definition": "This is a software tool which supports one or more tasks defined as AUTOSAR tasks in the methodology. Depending on the supported tasks, an AUTOSAR tool can act as an 'AUTOSAR Authoring Tool', an 'AUTOSAR Converter Tool', an 'AUTOSAR Processor Tool' or as a combination of those.",
+   "zh": null
+  },
+  "AUTOSAR XML description": {
+   "num": "41",
+   "en_definition": "In AUTOSAR this is a serialized AUTOSAR model. In fact an AUTOSAR XML description is the XML representation of an 'AUTOSAR Model'. The AUTOSAR XML description can consist of several files. Each individual file represents an 'AUTOSAR Partial Model' and must validate successfully against the 'AUTOSAR XML Schema'.",
+   "zh": null
+  },
+  "AUTOSAR XML Schema": {
+   "num": "42",
+   "en_definition": "The AUTOSAR XML Schema is an XML language definition for exchanging AUTOSAR Models ('AUTOSAR Model') and descriptions.",
+   "zh": null
+  },
+  "Availability": {
+   "num": "43",
+   "en_definition": "1. Availability is the ability of the system to perform a function A completely according to its specification. 2. The ratio of the total time the system is performing a function A (according to 1) during a given interval to the length of the interval. Alternative: The probability that the system is performing the function A at a specified time t 3. In a degraded mode the system has the ability to perform a subset B of A if full A is not available. In this case, the functionality B is available.",
+   "zh": null
+  },
+  "Basic Software": {
+   "num": "44",
+   "en_definition": "The Basic Software (BSW) provides the infrastructural (schematic dependent and schematic independent) functionalities of an 'Electronic Control Unit'. It consists of 'Integration Code' and 'Standard Software'.",
+   "zh": null
+  },
+  "Basic Software Module": {
+   "num": "45",
+   "en_definition": "A collection of software files (code and description) that define a certain basic software functionality present on an 'Electronic Control Unit'.",
+   "zh": null
+  },
+  "Bit Position": {
+   "num": "46",
+   "en_definition": "In AUTOSAR the bit position N within an I-PDU denotes the bit I, with I = N modulo 8, within the byte J, with J = N / 8. The byte J and bit position I is interpreted in accordance to the definition in ISO 17356-4 (OSEK/VDX Communication).",
+   "zh": null
+  },
+  "Blueprint": {
+   "num": "47",
+   "en_definition": "This is a model from which other models can be derived by copy and refinement. Note that in contrast to meta-model resp. types, this process is not an instantiation.",
+   "zh": null
+  },
+  "Bulk Data": {
+   "num": "48",
+   "en_definition": "\"Bulk Data\" is a set of data such big in size, that standard mechanisms used to handle smaller data sets become inconvenient. This implies that bulk data in a software system are modeled, stored, accessed and transported by different mechanisms than smaller data sets.",
+   "zh": null
+  },
+  "Bus Mirroring": {
+   "num": "49",
+   "en_definition": "Forwarding information from an internal vehicle bus to an external bus, e.g. the diagnostic connector.",
+   "zh": null
+  },
+  "Bus Wake-Up": {
+   "num": "50",
+   "en_definition": "A bus wake-up is caused by a specific wake pulse on the bus defined within the specification of the dedicated communication standard (e.g. CAN, LIN, FR). A bus wake-up initiates that the transceiver and controller leave their energy saving mode and enter normal mode to start bus communication again.",
+   "zh": null
+  },
+  "Bypassing": {
+   "num": "51",
+   "en_definition": "The experimental incorporation of new functionality within an ECU image.",
+   "zh": null
+  },
+  "Calibration": {
+   "num": "52",
+   "en_definition": "Calibration is the adjustment of parameters of SW-Components realizing the control functionality (namely parameters of AUTOSAR SW-Cs, ECU abstraction or 'Complex Driver'.",
+   "zh": null
+  },
+  "Call Point": {
+   "num": "53",
+   "en_definition": "A point in a 'Software Component' where the SW-C enforce an execution entity ('Entry Point') in another SW-C.",
+   "zh": null
+  },
+  "Callback": {
+   "num": "54",
+   "en_definition": "Functionality that is defined by an AUTOSAR module so that lower-level modules (i.e. lower in the Layered Software Architecture) can provide notification as required (e.g. when certain events occur or asynchronous processing completes).",
+   "zh": null
+  },
+  "Callout": {
+   "num": "55",
+   "en_definition": "Function stubs that the system designer can replace with code to add functionality to a module which could not be specified by AUTOSAR.",
+   "zh": null
+  },
+  "Can XL": {
+   "num": "56",
+   "en_definition": "CAN XL specifies a protocol and physical layer with higher data rate and clearer separation of concerns, that builds on CAN 2.0/FD and features tunneling of Ethernet frames.",
+   "zh": null
+  },
+  "Cascaded Switch": {
+   "num": "57",
+   "en_definition": "A Cascaded Switch is an Ethernet switch that exists of at least two Ethernet switches: a master switch and a slave switch. The master switch and the slave switch are connected by uplink ports.",
+   "zh": null
+  },
+  "Cascading Failure": {
+   "num": "58",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.13",
+   "zh": null
+  },
+  "Category 1 Interrupt": {
+   "num": "59",
+   "en_definition": "Category 1 (Cat1) Interrupts are supported by the OS but their code is only allowed to call a very small subset of OS functions. Furthermore they can bypass the OS. The code of Category 1 Interrupts depends (normally) on the used compiler and microcontroller. Category 1 Interrupts are not allowed to use the ISR() macro. Category 1 Interrupts need to implement/establish their own Interrupt Frame. Nevertheless they have to be configured in order to be included in the Interrupt Vector Table.",
+   "zh": null
+  },
+  "Category 2 Interrupt": {
+   "num": "60",
+   "en_definition": "Category 2 (Cat2) Interrupts are supported by the OS and their code can call a subset of OS functions. The definition of the Cat2 Interrupt must use the ISR() macro in order to be recognized by the OS. The Interrupt Frame of a Category 2 Interrupt is managed by the OS.",
+   "zh": null
+  },
+  "Causality of Transmission": {
+   "num": "61",
+   "en_definition": "Transmit order of PDUs with the same identifier (instances of PDUs) from a source network is preserved in the destination network.",
+   "zh": null
+  },
+  "Classic Platform": {
+   "num": "62",
+   "en_definition": "Software Platform defined by AUTOSAR for deeply embedded systems and Application Software with high demands regarding predictability, safety and responsivness.",
+   "zh": null
+  },
+  "Client": {
+   "num": "63",
+   "en_definition": "Software entity which uses services of a 'Server'.",
+   "zh": null
+  },
+  "Client-Server Communication": {
+   "num": "64",
+   "en_definition": "A specific form of communication in a possibly distributed system in which software entities act as Clients, Servers or both, where 1...n clients are requesting services via a specific protocol from typically one server.",
+   "zh": null
+  },
+  "Client-Server Interface": {
+   "num": "65",
+   "en_definition": "The client-server interface is a special kind of 'Port Interface' used for the case of Client-Server Communication. The client-server interface defines the operations that are provided by the 'Server' and that can be used by the 'Client'.",
+   "zh": null
+  },
+  "Cluster Signal": {
+   "num": "66",
+   "en_definition": "A cluster signal represents the aggregating system signal on one specific communication cluster. Cluster signals can be defined independently of frames. This allows a development methodology where the signals are defined first, and are assigned to frames in a later stage.",
+   "zh": null
+  },
+  "Code Generator": {
+   "num": "67",
+   "en_definition": "The Code Generator consumes complete and correctly formed XML for a BSW module and generates code and data that configures the module.",
+   "zh": null
+  },
+  "Code Variant Coding": {
+   "num": "68",
+   "en_definition": "Adaptation of SW by selection of functional alternatives according to external requirements",
+   "zh": null
+  },
+  "Common Cause Failure": {
+   "num": "69",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.14",
+   "zh": null
+  },
+  "Communication Attribute": {
+   "num": "70",
+   "en_definition": "Communication attributes define, according to the development phase, behavioral as well as implementation aspects of the AUTOSAR communication patterns.",
+   "zh": null
+  },
+  "Complex Driver": {
+   "num": "71",
+   "en_definition": "A software entity not standardized by AUTOSAR that can access or be accessed via 'AUTOSAR Interface' and/ or 'Basic Software Module' APIs.",
+   "zh": null
+  },
+  "Composition": {
+   "num": "72",
+   "en_definition": "An AUTOSAR Composition encapsulates a collaboration of Software Components ('Software Component'), thereby hiding detail and allowing the creation of higher abstraction levels. Through Delegation Connectors ('Connector') a Composition explicitly specifies, which Ports ('Port') of the internal components are visible from the outside. AUTOSAR Compositions are a type of Components, e.g. they can be part of further compositions.",
+   "zh": null
+  },
+  "Compositionality": {
+   "num": "73",
+   "en_definition": "Compositionality is given when the behavior of a software component or subsystem of a system is independent of the overall system load and configuration.",
+   "zh": null
+  },
+  "Conditioned Signal": {
+   "num": "74",
+   "en_definition": "The conditioned signal is the internal electrical representation of the electrical signal within the ECU. It is delivered to the processor and represented in voltage and time (or, in case of logical signals, by high or low level).",
+   "zh": null
+  },
+  "Confidentiality": {
+   "num": "75",
+   "en_definition": "The property that data or information is not made available or disclosed to unauthorized persons or processes.",
+   "zh": null
+  },
+  "Configuration": {
+   "num": "76",
+   "en_definition": "The arrangement of hardware and/or software elements in a system.",
+   "zh": null
+  },
+  "Confirmation": {
+   "num": "77",
+   "en_definition": "Service primitive defined in the ISO/OSI Reference model ([17]). With the 'confirmation' service primitive a service provider informs a service user about the result of a preceding service request of the service user.",
+   "zh": null
+  },
+  "Connector": {
+   "num": "78",
+   "en_definition": "A connector connects Ports ('Port') of Software Components ('Software Component') and represents the flow of information between those ports.",
+   "zh": null
+  },
+  "Control Flow": {
+   "num": "79",
+   "en_definition": "The directed transmission of information between multiple entities, directly resulting in a state change of the receiving entity.",
+   "zh": null
+  },
+  "Coordinate": {
+   "num": "80",
+   "en_definition": "To control and harmonize two or more events or operations to act in an organized and predictable way.",
+   "zh": null
+  },
+  "Data": {
+   "num": "81",
+   "en_definition": "A reinterpretable representation of information in a formalized manner suitable for communication, interpretation or processing.",
+   "zh": null
+  },
+  "Data Element": {
+   "num": "82",
+   "en_definition": "Data elements are declared within the context of a 'Sender-Receiver Interface'. They serve as the data units that are exchanged between sender and receiver.",
+   "zh": null
+  },
+  "Data Flow": {
+   "num": "83",
+   "en_definition": "The directed transmission of Data between multiple entities. The transmissioned data are not directly related to a state change at the receiver side.",
+   "zh": null
+  },
+  "Data Variant Coding": {
+   "num": "84",
+   "en_definition": "Adaptation of SW by setup of certain characteristic data according to external requirements.",
+   "zh": null
+  },
+  "Deadline": {
+   "num": "85",
+   "en_definition": "The point in time when an execution of an entity must be finished.",
+   "zh": null
+  },
+  "Debugging": {
+   "num": "86",
+   "en_definition": "Debugging is the process of gathering information in case of a software problem. The information is used to analyze the software problem.",
+   "zh": null
+  },
+  "Dependability": {
+   "num": "87",
+   "en_definition": "Dependability is defined as the trustworthiness of a computer system such that reliance can justifiable be placed on the service it delivers.",
+   "zh": null
+  },
+  "Dependent Failure": {
+   "num": "88",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.22",
+   "zh": null
+  },
+  "Diagnostic Coverage": {
+   "num": "89",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.25",
+   "zh": null
+  },
+  "Diagnostic Event": {
+   "num": "90",
+   "en_definition": "A diagnostic event defines the atomic unit that can be handled by the DEM module. The status of a diagnostic event represents the result of a monitor. The DEM receives the result of a monitor from SW-C via the RTE or other BSW modules.",
+   "zh": null
+  },
+  "Diversity": {
+   "num": "91",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.28",
+   "zh": null
+  },
+  "Dynamic PDU": {
+   "num": "92",
+   "en_definition": "'Protocol Data Unit' with dynamic identifier.",
+   "zh": null
+  },
+  "Dynamic Routing": {
+   "num": "93",
+   "en_definition": "The routing of signals or Protocol Data Units ('Protocol Data Unit') in a gateway can be changed throughout operation without change of the operation mode of the gateway.",
+   "zh": null
+  },
+  "E2E Profile": {
+   "num": "94",
+   "en_definition": "A functional and complete description of a specific communication stack in terms of data structures, services, behavioral state-machines, error handling. E2E Profiles are defined in AUTOSAR E2E Library. An E2E Profile is configurable by runtime parameters. A specific set of runtime parameters is called E2E profile variant. In order to reach interoperability, the application developers should use the E2E profile variants defined in the E2E library.",
+   "zh": null
+  },
+  "E2E Protection Alive Counter": {
+   "num": "95",
+   "en_definition": "An Alive Counter is a counter which is incremented in every transmission request. The counter value is checked at the receiver side, whether it changes at all, but not if the counter was incremented correctly.",
+   "zh": null
+  },
+  "E2E Protection Sequence Counter": {
+   "num": "96",
+   "en_definition": "A Sequence Counter is a counter which is incremented in every transmission request. The value of the counter value is checked at the receiver side for each message, whether it was incremented correctly.",
+   "zh": null
+  },
+  "ECU Abstraction Layer": {
+   "num": "97",
+   "en_definition": "The ECU Abstraction Layer is located above the 'Microcontroller Abstraction Layer' and abstracts from the ECU schematic. It is implemented for a specific ECU and offers an API for access to peripherals and devices regardless of their location (onchip/offchip) and their connection to the microcontroller (port pins, type of interface). Task: Make higher software layers independent of the ECU hardware layout.",
+   "zh": null
+  },
+  "ECU Configuration": {
+   "num": "98",
+   "en_definition": "Activity of integrating and configuring one ECU's software.",
+   "zh": null
+  },
+  "ECU Configuration Description": {
+   "num": "99",
+   "en_definition": "Output of the ECU Configuration activity containing the values of configuration parameters and references.",
+   "zh": null
+  },
+  "ECU HW": {
+   "num": "100",
+   "en_definition": "A container term for any combination of AP Machines and CP ECUs. In general terms, an ECU-HW is typically abstracted/independent from physical or virtual realization and does not convey any HW-Housing i.e. multiple physical ECU-HWs or a physical ECU-HW providing multiple virtual ECU-HWs (unless otherwise stated).",
+   "zh": null
+  },
+  "ECU Instance": {
+   "num": "101",
+   "en_definition": "An ECU Instance represents a single instantiation of a Classic Platform stack, that may run on physical ECU-HW (without hypervisor) or on virtual ECU-HW (with hypervisor).",
+   "zh": null
+  },
+  "Electrical Signal": {
+   "num": "102",
+   "en_definition": "The electrical signal is the electrical representation of Technical Signals ('Technical Signal'). Electrical signals can only be represented in voltage, current and time",
+   "zh": null
+  },
+  "Electronic Control Unit": {
+   "num": "103",
+   "en_definition": "Embedded computer system consisting of at least one CPU and corresponding peripherals which are placed in one housing.",
+   "zh": null
+  },
+  "Empty Function": {
+   "num": "104",
+   "en_definition": "Any C function defined by an AUTOSAR specification which does not implement or alter behavior required to accomplish the assigned functional responsibility.",
+   "zh": null
+  },
+  "Entry Point": {
+   "num": "105",
+   "en_definition": "A point in a 'Software Component' where an execution entity of the SW-C begins.",
+   "zh": null
+  },
+  "Error": {
+   "num": "106",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.36",
+   "zh": null
+  },
+  "Error Detection Rate": {
+   "num": "107",
+   "en_definition": "Ratio between detected lost/faulty words/symbols/blocks, divided by the total number of symbols/ words/blocks sent.",
+   "zh": null
+  },
+  "Ethernet Switch Port Groups": {
+   "num": "108",
+   "en_definition": "Ethernet Switch Port groups are Ethernet switch ports of an Ethernet switch which are grouped to so called port groups. Ethernet Switch Port groups are only relevant for the host ECU. Ethernet Switch Port Groups are derived from the model per VLAN and per PNC. The host port is participating in all port groups. A Ethernet Switch Port Group could be a mix of internal and external ports.",
+   "zh": null
+  },
+  "Event": {
+   "num": "109",
+   "en_definition": "State change of a hardware and/or software entity.",
+   "zh": null
+  },
+  "Event Message (SOME/IP)": {
+   "num": "110",
+   "en_definition": "Event - a message sent by an ECU implementing a service instance to an ECU using this service instance (Publish/Subscribe).",
+   "zh": null
+  },
+  "Executable": {
+   "num": "111",
+   "en_definition": "Part of an application which consists of either a file containing executable code with a defined entry point and suitable for the platform instance as the target of deployment (deployment time) or software code which is ready to be integrated for a specific platform.",
+   "zh": null
+  },
+  "Executable Entity Cluster": {
+   "num": "112",
+   "en_definition": "A set of Executable Entities (EEs) and a reference to a set of Execution Order Constraints (EOCs) between these EEs. The Executable Entity Cluster is formed for the purpose of mapping EEs to LET intervals and to tasks. Several EECs may be mapped to the same LET interval.",
+   "zh": null
+  },
+  "Execution Order Constraint": {
+   "num": "113",
+   "en_definition": "Defines the execution order between instances of Executable Entities (EEs) within the same LET interval.",
+   "zh": null
+  },
+  "Execution Time": {
+   "num": "114",
+   "en_definition": "The time during which a program is actually executing, or more precisely during which a certain thread of execution is active.",
+   "zh": null
+  },
+  "Exit Point": {
+   "num": "115",
+   "en_definition": "A point in a 'Software Component' where an execution entity of the SW-C ends.",
+   "zh": null
+  },
+  "External Port": {
+   "num": "116",
+   "en_definition": "External Ports are ports of an automotive Ethernet switch used to communicate over an Ethernet physical connection with other ECUs (e.g. 100BASE-TX, 100BASE-T1).",
+   "zh": null
+  },
+  "Fail-operational": {
+   "num": "117",
+   "en_definition": "Property of a system or functional unit. Describes the ability of a system or functional unit to continue normal operation at its output interfaces despite the presence of hardware or software faults.",
+   "zh": null
+  },
+  "Fail-safe": {
+   "num": "118",
+   "en_definition": "Property of a system or functional unit. In case of a fault the system or functional unit transits to a safe state.",
+   "zh": null
+  },
+  "Fail-silent": {
+   "num": "119",
+   "en_definition": "Fail-silent is a property of a system in which no output is produced in the presence of a fault. In automotive domain, fail-silent systems are usually only used if the next hierarchical system level provides a safe-state.",
+   "zh": null
+  },
+  "Failure Mode": {
+   "num": "120",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.40",
+   "zh": null
+  },
+  "Failure": {
+   "num": "121",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.39",
+   "zh": null
+  },
+  "Failure Rate": {
+   "num": "122",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.41",
+   "zh": null
+  },
+  "Fault": {
+   "num": "123",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.42",
+   "zh": null
+  },
+  "Fault Detection": {
+   "num": "124",
+   "en_definition": "The action of monitoring errors and setting fault states to specific values is called fault detection.",
+   "zh": null
+  },
+  "Fault Reaction": {
+   "num": "125",
+   "en_definition": "In case of a Failure of a SW-C there is a specific action to be carried out. This action is called \"Fault Reaction\".",
+   "zh": null
+  },
+  "Fault Reaction Time": {
+   "num": "126",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.44",
+   "zh": null
+  },
+  "Fault Tolerance": {
+   "num": "127",
+   "en_definition": "Ability to deliver the specified functionality in the presence of one or more specified faults.",
+   "zh": null
+  },
+  "Fault Tolerant Time Interval": {
+   "num": "128",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.45",
+   "zh": null
+  },
+  "Feature": {
+   "num": "129",
+   "en_definition": "A Feature is a notable characteristic of a system.",
+   "zh": null
+  },
+  "Firewall": {
+   "num": "130",
+   "en_definition": "Functional element that inspects and filters network traffic based on firewall rules.",
+   "zh": null
+  },
+  "Flag": {
+   "num": "131",
+   "en_definition": "A piece of data that can take on one of two values indicating whether a logical condition is true or false.",
+   "zh": null
+  },
+  "FlexRay": {
+   "num": "132",
+   "en_definition": "Automotive time-triggered and fault-tolerant network communication protocol that is standardized in the ISO 17458 ([29]) and provides options for deterministic data that arrives in a predictable time frame as well as dynamic event-driven data.",
+   "zh": null
+  },
+  "Foundation": {
+   "num": "133",
+   "en_definition": "Foundation contains the generic artifacts that are common for Adaptive Platform and Classic Platform to ensure compatibility between: • Classic- and Adaptive Platform • Non-AUTOSAR platforms to AUTOSAR platforms In AUTOSAR the particular realization of those generic artifacts is described in Adaptive Platform and Classic Platform and may differ.",
+   "zh": null
+  },
+  "Frame": {
+   "num": "134",
+   "en_definition": "Data unit according to the data link protocol specifying the arrangement and meaning of bits or bit fields in the sequence of transfer across the transfer medium.",
+   "zh": null
+  },
+  "Frame PDU": {
+   "num": "135",
+   "en_definition": "A PDU that fits into 1 frame instance e.g. it does not need to be fragmented across more than 1 frame for transmission over a network.",
+   "zh": null
+  },
+  "Freedom from Interference": {
+   "num": "136",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.49",
+   "zh": null
+  },
+  "Freshness": {
+   "num": "137",
+   "en_definition": "Data Freshness implies that the data is recent and it ensures that replayed messages in a replay attack are detected.",
+   "zh": null
+  },
+  "Function": {
+   "num": "138",
+   "en_definition": "1. A task, action or activity that must be accomplished to achieve a desired outcome. 2. A part of programming code that is invoked by other parts of the program to fulfill a desired purpose. 3. In mathematics, a function is an association between two sets of values in which each element of one set has one assigned element in the other set so that any element selected becomes the independent variable and its associated element is the dependent variable.",
+   "zh": null
+  },
+  "Functional Cluster": {
+   "num": "139",
+   "en_definition": "Set of requirements grouped by the aspect they refer to.",
+   "zh": null
+  },
+  "Functional Network": {
+   "num": "140",
+   "en_definition": "A logical structure of interconnections between defined functional parts of Features.",
+   "zh": null
+  },
+  "Functional Safety Concept": {
+   "num": "141",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.52",
+   "zh": null
+  },
+  "Functional Safety Requirement": {
+   "num": "142",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.53",
+   "zh": null
+  },
+  "Functional Unit": {
+   "num": "143",
+   "en_definition": "An entity of software or hardware, or both, capable of accomplishing a specified purpose.",
+   "zh": null
+  },
+  "Functionality": {
+   "num": "144",
+   "en_definition": "Functionality comprises User-visible and User-non-visible functional aspects of a system.",
+   "zh": null
+  },
+  "Gateway": {
+   "num": "145",
+   "en_definition": "A gateway is functionality within a Classic Platform ECU that performs a frame or signal mapping function between two communication systems. Communication system in this context means e.g. a CAN system or one channel of a FlexRay system.",
+   "zh": null
+  },
+  "Gateway ECU": {
+   "num": "146",
+   "en_definition": "A gateway ECU is an 'Electronic Control Unit' that is connected to two or more communication channels, and performs gateway functionality.",
+   "zh": null
+  },
+  "Graceful Degradation": {
+   "num": "147",
+   "en_definition": "Graceful Degradation: The system continues to operate in the presence of errors, accepting a partial degradation of functionality or performance during recovery or repair. Found in the literature also as \"fail soft\".",
+   "zh": null
+  },
+  "Hardware Abstraction Layer": {
+   "num": "148",
+   "en_definition": "A hardware abstraction layer is a software layer that serves as an abstraction layer between the physical hardware and its software. It allows to access the hardware resources through programming interfaces.",
+   "zh": null
+  },
+  "Hardware Connection": {
+   "num": "149",
+   "en_definition": "HW Connections are used to describe the connection of Hardware Elements ('Hardware Element') among each other. It defines/characterizes the interrelationship among HW Elements (for abstract modeling). The Hardware Ports ('Hardware Port') of HW Elements serve as connection points for this purpose.",
+   "zh": null
+  },
+  "Hardware Element": {
+   "num": "150",
+   "en_definition": "The HW Element is the main describing element of an 'Electronic Control Unit'. It provides Hardware Ports ('Hardware Port') for being interconnected among each others. A generic HW Element specifies definitions valid for all specific HW Elements.",
+   "zh": null
+  },
+  "Hardware Interrupt": {
+   "num": "151",
+   "en_definition": "Interrupt triggered by HW event",
+   "zh": null
+  },
+  "Hardware Port": {
+   "num": "152",
+   "en_definition": "The HW port exposes functionality to the exterior of the 'Hardware Element'. HW elements can be connected via 'Hardware Connection'. It defines a connection Endpoint for the HW Element.",
+   "zh": null
+  },
+  "Health Indicator": {
+   "num": "153",
+   "en_definition": "Health Indicators (HIs) are an evaluation metric of current system performance with regard to safety requirement",
+   "zh": null
+  },
+  "Hook": {
+   "num": "154",
+   "en_definition": "An intervention point within ECU software for the exchange of data.",
+   "zh": null
+  },
+  "Host ECU": {
+   "num": "155",
+   "en_definition": "A Host ECU is a ECU that controls one or more automotive Ethernet switches (e.g. switch on / off the Ethernet switch and its ports, read and write the Ethernet switch configuration). For this purpose the host ECU is connected to the Ethernet switch over a common control interface (e.g. SPI, MDIO). The host ecu also take part in the network communication. For this purpose the host ecu is connected by a data interface (e.g. MII) to a specific Ethernet switch port (host port).It transmits and receives Ethernet frames.",
+   "zh": null
+  },
+  "Host Port": {
+   "num": "156",
+   "en_definition": "A host port is a port of an automotive Ethernet switch where the data interface (e.g. MII) of the 'Host ECU' is connected to. The host port could either be an internal port or an external port. The host port has a special role from the perspective of the software. (see link accumulation and port groups)",
+   "zh": null
+  },
+  "Hypervisor": {
+   "num": "157",
+   "en_definition": "Low-level software that provides and manages several virtual machines in one physical machine. Maybe an independent software or contained as an OS functionality.",
+   "zh": null
+  },
+  "Identity and Access Management (IAM)": {
+   "num": "158",
+   "en_definition": "IAM is about managing access rights of Adaptive Applications to interfaces of the Adaptive Platform Foundation and Services.",
+   "zh": null
+  },
+  "Identity Information": {
+   "num": "159",
+   "en_definition": "The access control is decided / enforced upon the identity information which represents properties of the Adaptive Applications.",
+   "zh": null
+  },
+  "Implementation Conformance Class 1 (ICC1)": {
+   "num": "160",
+   "en_definition": "An ICC1 cluster offers a 'Software Component Interface' and/or 'Network Interface'. The 'Software Component Interface' and 'Network Interface' of an ICC1 cluster provide the functional behavior as specified in the AUTOSAR specifications on ICC3 level.",
+   "zh": null
+  },
+  "Implementation Conformance Class 2 (ICC2)": {
+   "num": "161",
+   "en_definition": "ICC2 clusters logically related ICC3 Basic Software (BSW) modules (2...N modules). The number of Cluster Features in an ICC2 cluster is a subset of the union of the number of features of the clustered ICC3 modules.",
+   "zh": null
+  },
+  "Implementation Conformance Class 3 (ICC3)": {
+   "num": "162",
+   "en_definition": "For ICC3 the AUTOSAR BSW consists of BSW modules as defined in the Basic Software Module List, including the RTE. ICC3 is the highest level of granularity.",
+   "zh": null
+  },
+  "Independence": {
+   "num": "163",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.61",
+   "zh": null
+  },
+  "Independent Failures": {
+   "num": "164",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.62",
+   "zh": null
+  },
+  "Indication": {
+   "num": "165",
+   "en_definition": "Service primitive defined in the ISO/OSI Reference Model ([17]). With the service primitive 'indication' a service provider informs a service user about the occurrence of either an internal event or a service request issued by another service user.",
+   "zh": null
+  },
+  "Integration": {
+   "num": "166",
+   "en_definition": "The progressive assembling of system components into the whole system.",
+   "zh": null
+  },
+  "Integration Code": {
+   "num": "167",
+   "en_definition": "Code that the Integrator needs to add to an AUTOSAR System, to adapt non-standardized functionalities. Examples are Callouts ('Callout') of the ECU State Manager and Callbacks ('Callback') of various other Basic Software Modules.",
+   "zh": null
+  },
+  "Integrity": {
+   "num": "168",
+   "en_definition": "The property that data or information have not been altered or destroyed in an unauthorized manner.",
+   "zh": null
+  },
+  "Integrity Check Value": {
+   "num": "169",
+   "en_definition": "The result of a cryptographic function used to ensure that unauthorized modifications of a message are detected.",
+   "zh": null
+  },
+  "Interface": {
+   "num": "170",
+   "en_definition": "A shared boundary between two Functional Units ('Functional Unit') defined by various characteristics pertaining to the functions, physical interconnections, signal exchanges, and other characteristics, as appropriate.",
+   "zh": null
+  },
+  "Intermediate PNC Coordinator": {
+   "num": "171",
+   "en_definition": "An intermediate PNC (Partial Network Cluster) coordinator is located beneath a 'Top-level PNC Coordinator' or a further intermediate PNC coordinator and above a PNC leaf nodes ('PNC Leaf Node') or a further intermediate PNC coordinator within a PNC network. The intermediate PNC coordinator forwards received PNC requests and own PNC requests to its 'Top-level PNC Coordinator'. An intermediate PNC coordinator processes a received PN shutdown message immediately, forwards it to its subordinated ECUs (either a further intermediate PNC coordinator or a PNC leaf nodes), releases the indicated PNCs and resets the PN reset timer(s) for those PNCs.",
+   "zh": null
+  },
+  "Internal Port": {
+   "num": "172",
+   "en_definition": "Internal Ports are ports of an automotive Ethernet switch used for local communication (Host ECU or cascaded switch)",
+   "zh": null
+  },
+  "Interrupt Frames": {
+   "num": "173",
+   "en_definition": "An interrupt frame is the code which handles the entering/leaving of (C written) interrupt service routines. This code is microcontroller specific and often written in assembly language. Interrupt frames are typically generated by the OS generation tool.",
+   "zh": null
+  },
+  "Interrupt Handler": {
+   "num": "174",
+   "en_definition": "In the case of a Category 2 interrupt, the ISR is synonymous with Interrupt Handler. In the case of Category 1 interrupt the Interrupt Handler is the function called by the hardware interrupt vector. In both cases the Interrupt handler is the user code that is normally a part of the BSW module. So the Interrupt Handler is a user level piece of code.",
+   "zh": null
+  },
+  "Interrupt Service Routine": {
+   "num": "175",
+   "en_definition": "A software routine called in case of an 'Interrupt'.",
+   "zh": null
+  },
+  "Interrupt Vector Table": {
+   "num": "176",
+   "en_definition": "An interrupt vector table is a table of interrupt vectors that associates the Interrupt Service Routine with the corresponding interrupt request (typically by an array of jumps or similar mechanisms).",
+   "zh": null
+  },
+  "Interrupt": {
+   "num": "177",
+   "en_definition": "Event that enforces the processor to change its state. This interruption causes the normal sequence of instructions to be stopped. Once an interrupt occurred, the running software entity is suspended and an 'Interrupt Service Routine' (the one dedicated to this interrupt) is called.",
+   "zh": null
+  },
+  "Intrusion Detection System": {
+   "num": "178",
+   "en_definition": "A system that is responsible for detecting, recording and reporting security events.",
+   "zh": null
+  },
+  "Invalid Flag": {
+   "num": "179",
+   "en_definition": "For a signal in a PDU an optional invalid flag can be added to the PDU payload layout. This flag indicates the validity of other signals in the payload. In case the invalid flag of a signal is set to true in a PDU instance, the respective signal in the payload of the PDU instance does not contain a valid signal value.",
+   "zh": null
+  },
+  "Invalid Value of Signal": {
+   "num": "180",
+   "en_definition": "For a signal in a PDU an optional invalid value can be defined.",
+   "zh": null
+  },
+  "I-PDU": {
+   "num": "181",
+   "en_definition": "Interaction Layer Protocol Data Unit Collection of messages for transfer between nodes in a network. At the sending node the Interaction Layer (IL) is responsible for packing messages into an I-PDU and then sending it to the Data Link Layer (DLL) for transmission. At the receiving node the DLL passes each I-PDU to the IL which then unpacks the messages sending their contents to the application.",
+   "zh": null
+  },
+  "Life Cycle": {
+   "num": "182",
+   "en_definition": "The course of development/evolutionary stages of a model element during its life time.",
+   "zh": null
+  },
+  "LIN Bus Idle": {
+   "num": "183",
+   "en_definition": "Bus Idle is defined as no transition between recessive and dominant bit values on the LIN bus.",
+   "zh": null
+  },
+  "Link State Accumulation": {
+   "num": "184",
+   "en_definition": "The link state of a certain switch port group is accumulated by embracing the link state of each port that is part of the port group. The rule how to embracing the link state is specified in the Ethernet Interface.",
+   "zh": null
+  },
+  "Link Time Configuration": {
+   "num": "185",
+   "en_definition": "The configuration of the SW module is done until link time.",
+   "zh": null
+  },
+  "Logical Execution Time": {
+   "num": "186",
+   "en_definition": "Is a fixed time interval. Input data is read at the beginning of this interval and output data is written at the end of the interval. Processing of the data is limited within the time interval.",
+   "zh": null
+  },
+  "Log and Trace": {
+   "num": "187",
+   "en_definition": "Log and Trace provides interfaces for applications to forward logging and tracing information onto the communication bus, the console, or to the file system.",
+   "zh": null
+  },
+  "Logging": {
+   "num": "188",
+   "en_definition": "Logging is the activity of collecting information about arbitrary, not necessarily correlated events within a system during runtime.",
+   "zh": null
+  },
+  "Machine": {
+   "num": "189",
+   "en_definition": "A Machine is a single instantiation of an Adaptive Platform stack, that may run on physical ECU-HW (without hypervisor) or on virtual ECU-HW (with hypervisor).",
+   "zh": null
+  },
+  "Manifest": {
+   "num": "190",
+   "en_definition": "A Manifest represents a piece of AUTOSAR model description that is created to support the configuration of an AUTOSAR Adaptive Platform product and which is uploaded to the AUTOSAR Adaptive Platform product, potentially in combination with other artifacts (like binary files) that contain executable code to which the Manifest applies.",
+   "zh": null
+  },
+  "Mappable Element": {
+   "num": "191",
+   "en_definition": "A mappable element is a part of a MCAL module which can be assigned to a partition via a reference parameter in the Base Software Module Description of the module. Mappable elements allow the formal description on how MCAL modules are available respectively- distributed on partitions (and thus cores).",
+   "zh": null
+  },
+  "Mapping": {
+   "num": "192",
+   "en_definition": "Mapping designates the distribution of elements in the logical view to elements in the physical view.",
+   "zh": null
+  },
+  "Master Switch": {
+   "num": "193",
+   "en_definition": "A Master Switch is an Ethernet switch where the host port is located.",
+   "zh": null
+  },
+  "MCAL Signal": {
+   "num": "194",
+   "en_definition": "The MCAL signal is the software representation of the 'Conditioned Signal'. It is provided by the microcontroller abstraction layer (MCAL) and is further processed by the ECU abstraction.",
+   "zh": null
+  },
+  "Meta-data": {
+   "num": "195",
+   "en_definition": "Meta-data is data about data",
+   "zh": null
+  },
+  "MetaDataItem": {
+   "num": "196",
+   "en_definition": "Defined item of Meta-data for a 'Protocol Data Unit' e.g. a diagnostic address, a MAC address, a CAN ID, or a J1939 node address.",
+   "zh": null
+  },
+  "Microcontroller": {
+   "num": "197",
+   "en_definition": "Hardware element that integrates computing and communication resources as well as peripheral circuits in a single chip, including memories.",
+   "zh": null
+  },
+  "Microcontroller Abstraction Layer": {
+   "num": "198",
+   "en_definition": "Software layer containing drivers to enable the access of onchip peripheral devices of a microcontroller and offchip memory mapped peripheral devices by a defined 'Application Programming Interface'. Task: make higher software layers independent of the microcontroller.",
+   "zh": null
+  },
+  "Mistake": {
+   "num": "199",
+   "en_definition": "Human error",
+   "zh": null
+  },
+  "Mode": {
+   "num": "200",
+   "en_definition": "A Mode is a certain set of states of the various state machines that are running in the vehicle that are relevant to a particular entity, e.g. a SW-C, a BSW module, an application or a whole vehicle. In its lifetime, an entity changes between a set of mutually exclusive Modes. These changes are triggered by environmental data, e.g. signal reception, operation invocation.",
+   "zh": null
+  },
+  "Multimedia Stream": {
+   "num": "201",
+   "en_definition": "A consistent sequence of digital data versus time which is suited as input for devices which transfer these data into a continuous visible or audible impression to humans. When transferred over a physical link, multimedia stream data typically are produced at the same rate (by the data source), as they are consumed (by the data sinks).",
+   "zh": null
+  },
+  "Multiplexed PDU": {
+   "num": "202",
+   "en_definition": "A multiplexed PDU is a PDU with a configurable number of different payload layouts.",
+   "zh": null
+  },
+  "Network": {
+   "num": "203",
+   "en_definition": "Communication infrastructure between AUTOSAR ECUs/Machines.",
+   "zh": null
+  },
+  "Network Interface": {
+   "num": "204",
+   "en_definition": "A Network Interface is the sum of all interfaces offered by the 'Basic Software' towards its connected network.",
+   "zh": null
+  },
+  "NM Coordination Cluster": {
+   "num": "205",
+   "en_definition": "A discrete set of NM Channels on which shutdown is coordinated.",
+   "zh": null
+  },
+  "NM Coordinator": {
+   "num": "206",
+   "en_definition": "A functionality of the Generic NM Interface which allows coordination of network sleep for multiple NM Channels.",
+   "zh": null
+  },
+  "Non-repudiation": {
+   "num": "207",
+   "en_definition": "Concept that is used in information security that assures that the sender of information is provided with proof of delivery and the recipient is provided with proof of the sender's identity, so neither can later deny having processed the information.",
+   "zh": null
+  },
+  "Notification": {
+   "num": "208",
+   "en_definition": "Informing a software entity about a state change of a hardware and/or software entity which has occurred.",
+   "zh": null
+  },
+  "Onboard Security Event": {
+   "num": "209",
+   "en_definition": "Analog to ISO/IEC 27000:2018 ([44]) an onboard security event (SEv) is the identified occurrence of an onboard system, service or network state indicating a possible breach of information security policy or failure of controls, or a previously unknown situation that can be security relevant.",
+   "zh": null
+  },
+  "OS Application": {
+   "num": "210",
+   "en_definition": "A block of software including tasks, interrupts, hooks and user services that form a cohesive functional unit.",
+   "zh": null
+  },
+  "OS Event": {
+   "num": "211",
+   "en_definition": "The event mechanism • is a means of synchronization • is only provided for extended tasks • initiates state transitions of tasks to and from the waiting state.",
+   "zh": null
+  },
+  "Partitioning": {
+   "num": "212",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.85",
+   "zh": null
+  },
+  "Protocol Control Information": {
+   "num": "213",
+   "en_definition": "Information which is needed to pass a 'Service Data Unit' from one instance of a specific protocol layer to another instance. E.g. it contains source and target information.",
+   "zh": null
+  },
+  "Protocol Data Unit": {
+   "num": "214",
+   "en_definition": "The Protocol Data Unit (PDU) contains 'Service Data Unit' and 'Protocol Control Information'.",
+   "zh": null
+  },
+  "PDU Meta-Data": {
+   "num": "215",
+   "en_definition": "Additional data of a 'Protocol Data Unit', which is not part of the payload.",
+   "zh": null
+  },
+  "PDU Timeout": {
+   "num": "216",
+   "en_definition": "Maximum time between the receptions of two instances of one PDU is exceeded.",
+   "zh": null
+  },
+  "Performance": {
+   "num": "217",
+   "en_definition": "Performance is a set of measurable characteristics (e.g. time, memory, resources usage, power consumption, etc.) which may be used to compare different system, SW element, algorithm, etc. implementations.",
+   "zh": null
+  },
+  "Peripheral Hardware": {
+   "num": "218",
+   "en_definition": "Hardware devices integrated in micro-controller architecture to interact with the environment.",
+   "zh": null
+  },
+  "Personalization": {
+   "num": "219",
+   "en_definition": "User-specific and memorized adjustment of SW data or selection of functional alternatives.",
+   "zh": null
+  },
+  "Plausibility": {
+   "num": "220",
+   "en_definition": "Runtime Plausibility check is a method to verify during runtime if inputs for a computation/ algorithm or results of a computation/algorithm are reasonable against corresponding values of a simplified reference model.",
+   "zh": null
+  },
+  "PNC Leaf Node": {
+   "num": "221",
+   "en_definition": "A PNC leaf node is located beneath a 'Top-level PNC Coordinator' or 'Intermediate PNC Coordinator'. A PNC leaf node represents the lowest level within the hierarchy of a PN topology. A PNC leaf node does not coordinate PNC request across its local communication channels. It receives and transmits Nm frames with PN information, but it does not forward received PNC requests to other local communication channels. A PNC leaf node processes PN shutdown messages as usual Nm frames with PN information.",
+   "zh": null
+  },
+  "PN shutdown message": {
+   "num": "222",
+   "en_definition": "A 'Top-level PNC Coordinator' transmits the PN shutdown messages to indicate a PNC shutdown. A PN shutdown message is a NM message where the PNSR bit (resides in the control bit vector) and all PNC bits (resides in the PN info) which are indicated for a synchronized shutdown set to '1'. A receiving 'Intermediate PNC Coordinator' has to process the PN shutdown message immediately, reset the PN reset timer and forward the PN information as fast as possible to ensure a synchronized shutdown of the affected PNCs at nearly the same point in time. A 'PNC Leaf Node' acts independently of the PNSR bit and resets the PN reset timer.",
+   "zh": null
+  },
+  "Policy Decision Point (PDP)": {
+   "num": "223",
+   "en_definition": "The PDP represents the logic in which the access control decision is made. It determines if the application is allowed to perform the requested task.",
+   "zh": null
+  },
+  "Policy Enforcement Point (PEP)": {
+   "num": "224",
+   "en_definition": "The PEP represents the logic in which the 'Access Control Decision' is enforced. It communicates directly with the corresponding 'Policy Decision Point (PDP)' to receive the 'Access Control Decision'.",
+   "zh": null
+  },
+  "Port": {
+   "num": "225",
+   "en_definition": "A port belongs to a 'Software Component' and is the interaction point between the component and other components. The interaction between specific ports of specific components is modeled using Connectors ('Connector'). A port can either be a 'Provide Port' or an 'Require Port'.",
+   "zh": null
+  },
+  "Port Interface": {
+   "num": "226",
+   "en_definition": "A Port Interface characterizes the information provided or required by a 'Port' of a 'Software Component'.",
+   "zh": null
+  },
+  "Post-build Time Configuration": {
+   "num": "227",
+   "en_definition": "The configuration of the SW module is possible after building the SW module.",
+   "zh": null
+  },
+  "Post-build Hooking": {
+   "num": "228",
+   "en_definition": "The insertion of Hooks to facilitate Rapid Prototyping support into a (complete) ECU hex image.",
+   "zh": null
+  },
+  "Pre-build Hooking": {
+   "num": "229",
+   "en_definition": "The insertion of Hooks to facilitate Rapid Prototyping support into software source prior to creating an ECU hex image.",
+   "zh": null
+  },
+  "Pre-Compile Time Configuration": {
+   "num": "230",
+   "en_definition": "The configuration of the SW module is done at source code level and will be effective after compile time.",
+   "zh": null
+  },
+  "Predictabiliy": {
+   "num": "231",
+   "en_definition": "Predictability is the degree to which a correct prediction or forecast of a system's state / behavior can be made either qualitatively or quantitatively.",
+   "zh": null
+  },
+  "Pretended Networking": {
+   "num": "232",
+   "en_definition": "Method to reduce energy consumption in an existing active network without changing network infrastructure.",
+   "zh": null
+  },
+  "Private Interface": {
+   "num": "233",
+   "en_definition": "A private interface is an interface within the 'Basic Software' of AUTOSAR which is neither standardized nor defined within AUTOSAR.",
+   "zh": null
+  },
+  "Probability of Failure": {
+   "num": "234",
+   "en_definition": "Probability of the occurrence of a failure in a system or functional unit.",
+   "zh": null
+  },
+  "Procedure Call": {
+   "num": "235",
+   "en_definition": "A simple statement that provides the actual parameters for and invokes the execution of a procedure (software function).",
+   "zh": null
+  },
+  "Process": {
+   "num": "236",
+   "en_definition": "An executable unit managed by an operating system scheduler that has its own name space and resources (including memory) protected against use from other processes.",
+   "zh": null
+  },
+  "Processed Manifest": {
+   "num": "237",
+   "en_definition": "A Processed Manifest is a Manifest that is stored in the implementation specific format on the AUTOSAR Adaptive Platform product. Usually this is done in combination with other artifacts (like binary files) that contain executable code to which the Manifest applies.",
+   "zh": null
+  },
+  "Profiling": {
+   "num": "238",
+   "en_definition": "Profiling refers to the process of evaluating 'Performance'.",
+   "zh": null
+  },
+  "Proven In Use Argument": {
+   "num": "239",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.90",
+   "zh": null
+  },
+  "Provide Port": {
+   "num": "240",
+   "en_definition": "Specific 'Port' providing Data or providing a service of a Server.",
+   "zh": null
+  },
+  "Rapid Prototyping": {
+   "num": "241",
+   "en_definition": "The experimental incorporation of new functionality.",
+   "zh": null
+  },
+  "Rapid Prototyping Memory Interface": {
+   "num": "242",
+   "en_definition": "The memory access pattern necessary for 'Rapid Prototyping Tool'.",
+   "zh": null
+  },
+  "Rapid Prototyping Tool": {
+   "num": "243",
+   "en_definition": "Software and/ or hardware tools to support 'Rapid Prototyping'.",
+   "zh": null
+  },
+  "Rate Conversion": {
+   "num": "244",
+   "en_definition": "Operation to change the timing between two transmissions of the same PduId on one physical Network.",
+   "zh": null
+  },
+  "Raw Data Stream": {
+   "num": "245",
+   "en_definition": "A Raw Data Stream is a collection of data that is unprocessed, basically a series of bytes without any information on how to interpret it.",
+   "zh": null
+  },
+  "Recovery": {
+   "num": "246",
+   "en_definition": "Returning to intended functionality after fault detection without violating the safety goals.",
+   "zh": null
+  },
+  "Redundancy": {
+   "num": "247",
+   "en_definition": "Existence of means in addition to the means that would be sufficient for an element to perform a required function or to represent information. Hardware element redundancy includes replicated or additional hardware means added to the system to support fault tolerance. Software element redundancy includes the additional SW units and/or data used to support fault tolerance.",
+   "zh": null
+  },
+  "Reentrancy": {
+   "num": "248",
+   "en_definition": "In AUTOSAR a Function is called reentrant if it can be interrupted in the middle of its execution and then safely called again (\"re-entered\") before its previous invocations complete execution. AUTOSAR differs between • (full) reentrancy • non reentrancy and • conditional reentrancy.",
+   "zh": null
+  },
+  "Reliability": {
+   "num": "249",
+   "en_definition": "Probability of a system or functional unit to perform as expected under specified conditions within a time interval.",
+   "zh": null
+  },
+  "Relocatability": {
+   "num": "250",
+   "en_definition": "Capability of a software part being executed on different hardware environments without changing the code of the software part.",
+   "zh": null
+  },
+  "Require Port": {
+   "num": "251",
+   "en_definition": "Specific 'Port' requiring Data or requiring a service of a server.",
+   "zh": null
+  },
+  "Required Property": {
+   "num": "252",
+   "en_definition": "A required property or quality of a design entity (e.g. SW component or system) is a property or quality which has to be fulfilled by the environment of this design entity.",
+   "zh": null
+  },
+  "Residual Error Rate": {
+   "num": "253",
+   "en_definition": "The ratio of the number of bits, unit elements, or blocks incorrectly received and undetected, to the total number of bits, unit elements, characters, or blocks sent.",
+   "zh": null
+  },
+  "Resource": {
+   "num": "254",
+   "en_definition": "A resource is a required but limited hardware entity of an 'Electronic Control Unit', which in general can be accessed concurrently, but not simultaneously, by multiple software entities.",
+   "zh": null
+  },
+  "Resource-Management": {
+   "num": "255",
+   "en_definition": "Entity which controls the use of Resources ('Resource').",
+   "zh": null
+  },
+  "Response Time": {
+   "num": "256",
+   "en_definition": "Time between receiving a stimulus and delivering an appropriate response or reaction.",
+   "zh": null
+  },
+  "Risk": {
+   "num": "257",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.99",
+   "zh": null
+  },
+  "Robustness": {
+   "num": "258",
+   "en_definition": "Ability of a system or functional unit to perform as expected also under unexpected conditions.",
+   "zh": null
+  },
+  "RTE Event": {
+   "num": "259",
+   "en_definition": "An RTE Event encompasses all possible situations that can trigger execution of a 'Runnable Entity' by the RTE. Thus they can address timing, data sending and receiving, invoking operations, call server returning, mode switching, or external events. RTE Events can either activate a runnable entity or wake-up a runnable entity at its waitpoints.",
+   "zh": null
+  },
+  "Runnable Entity": {
+   "num": "260",
+   "en_definition": "A Runnable Entity is a part of an 'Atomic Software Component' which can be executed and scheduled independently from the other Runnable Entities of this Atomic Software-Component. It is described by a sequence of instructions that can be started by the RTE. Each runnable entity is associated with exactly one Entry Point.",
+   "zh": null
+  },
+  "SAE J1939": {
+   "num": "261",
+   "en_definition": "SAE J1939 is a vehicle bus standard created by the SAE (Society of Automotive Engineers, a USA standards body) for car and heavy duty truck industries.",
+   "zh": null
+  },
+  "Safe State": {
+   "num": "262",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.102",
+   "zh": null
+  },
+  "Safety": {
+   "num": "263",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.103",
+   "zh": null
+  },
+  "Safety Analysis": {
+   "num": "264",
+   "en_definition": "The objective of safety analyses is to examine the consequences of faults and failures on items and elements considering their functions, behaviour and design.",
+   "zh": null
+  },
+  "Safety Case": {
+   "num": "265",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.106",
+   "zh": null
+  },
+  "Safety Goal": {
+   "num": "266",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.108",
+   "zh": null
+  },
+  "Safety Measure": {
+   "num": "267",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.110",
+   "zh": null
+  },
+  "Safety Mechanism": {
+   "num": "268",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.111",
+   "zh": null
+  },
+  "Safety Protocol": {
+   "num": "269",
+   "en_definition": "A communication protocol defining the necessary mechanisms to ensure the integrity of transmitted data and to detect any communication related error.",
+   "zh": null
+  },
+  "Sample Application": {
+   "num": "270",
+   "en_definition": "Defined system used for evaluation purposes.",
+   "zh": null
+  },
+  "Scalability": {
+   "num": "271",
+   "en_definition": "The degree to which assets can be adapted to specific target environments for various defined measures.",
+   "zh": null
+  },
+  "Scheduler": {
+   "num": "272",
+   "en_definition": "The scheduler handles the scheduling of the tasks/runnable entities ('Task' / 'Runnable Entity') according to the priority and scheduling policy (pre-defined or configurable). It has the responsibility to decide during run-time when which task can run on on the CPU of the ECU.",
+   "zh": null
+  },
+  "Service Data Unit": {
+   "num": "273",
+   "en_definition": "Service Data Unit is the data passed by an upper layer, with the request to transmit the data. It is as well the data, which is extracted after reception by the lower layer and passed to the upper layer.",
+   "zh": null
+  },
+  "Security": {
+   "num": "274",
+   "en_definition": "Protection of data, software entities or resources from accidental or malicious acts.",
+   "zh": null
+  },
+  "Secure Channel": {
+   "num": "275",
+   "en_definition": "A secure channel is a communication channel between two parties. A secure channel shall at least provide integrity and authenticity of the communication. It shall provide means to authenticate at least one participant of the communication. It may provide means to mutually authenticate both participants of the communication. A secure channel may additionally provide the confidentiality of the communication.",
+   "zh": null
+  },
+  "Security Event": {
+   "num": "276",
+   "en_definition": "An event which is related to the security of the ECU and should be reported for later analysis.",
+   "zh": null
+  },
+  "Sender-Receiver Communication": {
+   "num": "277",
+   "en_definition": "A communication pattern which offers asyncronous distribution of information where a sender communicates information to one or more receivers, or a receiver receives information from one or several senders.",
+   "zh": null
+  },
+  "Sender-Receiver Interface": {
+   "num": "278",
+   "en_definition": "A sender-receiver interface is a special kind of 'Port Interface' for the case of 'Sender-Receiver Communication'. The sender-receiver interface defines the data-elements which are sent by a sending component (which has a p-port providing the sender-receiver interface) or received by a receiving component (which has an r-port requiring the sender-receiver interface).",
+   "zh": null
+  },
+  "Sensor/Actuator SW-Component": {
+   "num": "279",
+   "en_definition": "'Software Component' dedicated to the control of a sensor or actuator.",
+   "zh": null
+  },
+  "Server": {
+   "num": "280",
+   "en_definition": "Software entity which provides services for Clients",
+   "zh": null
+  },
+  "Service": {
+   "num": "281",
+   "en_definition": "A service is a type of operation that has a published specification of interface and behavior, involving a contract between the provider of the capability and the potential clients.",
+   "zh": null
+  },
+  "Service Discovery": {
+   "num": "282",
+   "en_definition": "Generic functionality provided by the Communication Management to Applications that allows Applications at runtime to find locally or remotely available Service Instances providing the requested service.",
+   "zh": null
+  },
+  "Service Instance": {
+   "num": "283",
+   "en_definition": "The properties of a service instance are described by a specific service interface. A service instance has a unique identity.",
+   "zh": null
+  },
+  "Service Interface": {
+   "num": "284",
+   "en_definition": "A service interface is a special kind of port interface (see Port Interface) used in the Adaptive platform. It defines both data elements for event based communication and operations that are provided by the service provider and that can be used by the service requester.",
+   "zh": null
+  },
+  "Service Oriented Communication": {
+   "num": "285",
+   "en_definition": "Communication, for which communication partners are generally not defined during design time, but dynamically discovered and bound during runtime.",
+   "zh": null
+  },
+  "Service Port": {
+   "num": "286",
+   "en_definition": "Special kind of a 'Port' of a 'Atomic Software Component' used to describe service communication.",
+   "zh": null
+  },
+  "Service Proxy": {
+   "num": "287",
+   "en_definition": "A facade that represents a specific service on code level from the perspective of the service consumer providing methods for all functionalities offered by the represented service.",
+   "zh": null
+  },
+  "Service Skeleton": {
+   "num": "288",
+   "en_definition": "A representation of a specific service on code level from the perspective of the service implementation, which provides functionalities according to the service definition and allows to connect the service implementation to the Communication Management transport layer, so that the service implementation can be contacted by service consumers.",
+   "zh": null
+  },
+  "Services Layer": {
+   "num": "289",
+   "en_definition": "The Services Layer is the highest layer of the Basic Software which also applies for its relevance for the application software: while access to I/O signals is covered by the Hardware Abstraction Layer, the Services Layer offers Operating system services Vehicle network communication and management services Memory services (NVRAM management) Diagnosis Services (including KWP2000 interface and error memory) ECU state management Task: Provide basic services for application and basic software modules",
+   "zh": null
+  },
+  "Signal Service Translation": {
+   "num": "290",
+   "en_definition": "Signal Service Translation is the standardized way to map the definition of signal-based communication to service-oriented communication, and vice versa.",
+   "zh": null
+  },
+  "Slave Switch": {
+   "num": "291",
+   "en_definition": "A Slave Switch is an Ethernet switch which is connected to a master switch by uplink ports",
+   "zh": null
+  },
+  "Software Cluster (Adaptive Platform)": {
+   "num": "292",
+   "en_definition": "An Adaptive Platform Software Cluster groups all AUTOSAR artifacts which are relevant for deployment on an Adaptive Platform Machine. The content of a Software Cluster is dependent on the category and \"may\" (but is not limited to) contain artifacts such as: • Adaptive Platform Applications (Executables) • Adaptive Platform Functional Clusters (Modules) • Manifests • Persistent Storage Databases • Platform libraries, e.g. Transformers, Cryptographics • Bootloader",
+   "zh": null
+  },
+  "Software Component": {
+   "num": "293",
+   "en_definition": "Software-Components are architectural elements that provide and/or require interfaces and are connected to each other through the Virtual Function Bus to fulfill architectural responsibilities.",
+   "zh": null
+  },
+  "Software Component Interface": {
+   "num": "294",
+   "en_definition": "A SoftWare-Component Interface (SW-CI) is the sum of all interfaces offered by the 'Basic Software' towards the 'Software Component'.",
+   "zh": null
+  },
+  "Software Configuration": {
+   "num": "295",
+   "en_definition": "The arrangement of software elements in a SW system.",
+   "zh": null
+  },
+  "Software Interrupt": {
+   "num": "296",
+   "en_definition": "Interrupt triggered by SW event.",
+   "zh": null
+  },
+  "Software Package": {
+   "num": "297",
+   "en_definition": "Unit for deployment of software onto Adaptive AUTOSAR Platform instances containing zero or more executables and the meta-data to install and execute it on the Machine.",
+   "zh": null
+  },
+  "Software Platform": {
+   "num": "298",
+   "en_definition": "Software environment on which application software is executed.",
+   "zh": null
+  },
+  "Software Signal": {
+   "num": "299",
+   "en_definition": "A Software Signal is an asynchronous event transmitted between one process and another.",
+   "zh": null
+  },
+  "Software Unit": {
+   "num": "300",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.125",
+   "zh": null
+  },
+  "Special Periphery Access": {
+   "num": "301",
+   "en_definition": "Special functions to standard peripheral devices or special peripherals.",
+   "zh": null
+  },
+  "Standard Periphery Access": {
+   "num": "302",
+   "en_definition": "Standard functions to typical standard peripheral devices that are available on an ECU (most microcontroller integrated) used in automotive embedded applications.",
+   "zh": null
+  },
+  "Standard Software": {
+   "num": "303",
+   "en_definition": "Standard Software is software which provides schematic independent infrastructural functionalities on an ECU. It contains only Standardized AUTOSAR Interfaces ('Standardized AUTOSAR Interface'), Standardized Interfaces ('Standardized Interface') and/or Private Interfaces ('Private Interface').",
+   "zh": null
+  },
+  "Standardized AUTOSAR Blueprint": {
+   "num": "304",
+   "en_definition": "A Standardized AUTOSAR Blueprint is a 'Blueprint' standardized within the AUTOSAR project. Its derived objects are considered as being standardized within the AUTOSAR project as well.",
+   "zh": null
+  },
+  "Standardized AUTOSAR Interface": {
+   "num": "305",
+   "en_definition": "This is an AUTOSAR Interface which is standardized within the AUTOSAR project.",
+   "zh": null
+  },
+  "Standardized Blueprint": {
+   "num": "306",
+   "en_definition": "A 'Blueprint' is called a Standardized Blueprint if the derived objects are considered as being standardized as well. It also includes that additionally concrete standardized rules exist how to specify the blueprint as well as how to derive an object from that blueprint. This is typically not done for a specific blueprint but for all blueprints of the same class.",
+   "zh": null
+  },
+  "Standardized Interface": {
+   "num": "307",
+   "en_definition": "A software interface is called Standardized Interface if a concrete standardized API exists.",
+   "zh": null
+  },
+  "Static Configuration": {
+   "num": "308",
+   "en_definition": "A setup where the routing configuration cannot be changed during normal operation of the gateway.",
+   "zh": null
+  },
+  "Synchronization Points": {
+   "num": "309",
+   "en_definition": "Used to synchronize the execution of EEs of different tasks that execute within the same LET interval. A synchronization point realizes the execution order of EEs that belong to different EECs.",
+   "zh": null
+  },
+  "Synchronize": {
+   "num": "310",
+   "en_definition": "To make two or more events or operations to occur at the same predefined moment in time.",
+   "zh": null
+  },
+  "Synchronous Communication": {
+   "num": "311",
+   "en_definition": "A communication is synchronous when the calling software entity is blocked until the called operation is evaluated. The calling software entity continues its operation by getting the result.",
+   "zh": null
+  },
+  "Synchronous Function": {
+   "num": "312",
+   "en_definition": "A function is called synchronous if the described functionality is guaranteed to be completed the moment the function returns to the caller.",
+   "zh": null
+  },
+  "System": {
+   "num": "313",
+   "en_definition": "Representation of software related parts in a vehicle and their means to communicate with each other.",
+   "zh": null
+  },
+  "System Constraint": {
+   "num": "314",
+   "en_definition": "Boundary conditions that restrict the Design-Freedom of the (cars E/E-) System.",
+   "zh": null
+  },
+  "System Health Monitor": {
+   "num": "315",
+   "en_definition": "System Health Monitor (SHM) analyzes the health of subsystems.",
+   "zh": null
+  },
+  "System Signal": {
+   "num": "316",
+   "en_definition": "The system signal represents the communication system's view of data exchanged between SW components which reside on different ECUs. The system signals allow to represent this communication in a flattened structure, with (at least) one system signal defined for each data element sent or received by a SW component instance. If data has to be sent over gateways, there is still only one system signal representing this data. The representation of the data on the individual communication systems is done by the cluster signals.",
+   "zh": null
+  },
+  "Systematic Fault": {
+   "num": "317",
+   "en_definition": "See ISO-DIS-26262-Part-1 ([7]), ID 1.131",
+   "zh": null
+  },
+  "Task": {
+   "num": "318",
+   "en_definition": "A Task is the smallest schedulable unit managed by the OS. The OS decides when which task can run on the CPU of the ECU.",
+   "zh": null
+  },
+  "Technical Signal": {
+   "num": "319",
+   "en_definition": "The technical signal is the physical value of an external event coupled to an AUTOSAR system. Technical signals are represented in SI units (e.g. pressure in PA).",
+   "zh": null
+  },
+  "Timed Communication": {
+   "num": "320",
+   "en_definition": "Implicit communication with logical publication at the end of a LET interval and logical read at the beginning of a LET interval. Access to the timed communication buffer is available for all EEs that reference the LET interval through EECs.",
+   "zh": null
+  },
+  "Timeout": {
+   "num": "321",
+   "en_definition": "Notification with respect to deadline violation of an event or task (e.g. while working on/with information: receiving, sending, processing, etc.).",
+   "zh": null
+  },
+  "Top-level PNC Coordinator": {
+   "num": "322",
+   "en_definition": "The top-level PNC (Partial Network Cluster) coordinator is the topmost coordinator in a PN topology, the single root of the directed acyclic graph forming the logical partial network cluster for particular PNCs. The top-level PNC coordinator is responsible for the coordinated shutdown of all PNC members, because it is the only node which has the full overview of the states of all PNCs. Only the PNC top-level coordinator is allowed to send a PN shutdown messages. Note that for different PNCs it is possible to have different top-level PNC coordinators. For the same PNC only one top-level coordinator is supported.",
+   "zh": null
+  },
+  "Tracing": {
+   "num": "323",
+   "en_definition": "Tracing is the activity of recording a program's observable state and execution path within the system over a certain period of time.",
+   "zh": null
+  },
+  "Uplink Port": {
+   "num": "324",
+   "en_definition": "A Uplink Port is a port of an automotive Ethernet switch which is connected to another Ethernet automotive switch (cascaded switch). A Uplink Port could either be an internal port or an external port. One Uplink Port is connected to another Uplink Port. The Uplink Port has a special role from the perspective of the software.",
+   "zh": null
+  },
+  "Use Case": {
+   "num": "325",
+   "en_definition": "A use case defines a list of actions defining the interactions between actors and a system to achieve a goal.",
+   "zh": null
+  },
+  "Validation": {
+   "num": "326",
+   "en_definition": "Confirmation by examination and provisions of objective evidence that the particular requirements for a specific intended use are fulfilled.",
+   "zh": null
+  },
+  "Variability": {
+   "num": "327",
+   "en_definition": "Variability of a system is its quality to describe a set of variants. These variants are characterized by variant specific property settings and / or selections.",
+   "zh": null
+  },
+  "Variant": {
+   "num": "328",
+   "en_definition": "A system variant is a concrete realization of a system, so that all its properties have been set respectively selected. The software system has no variability anymore with respect to the binding time.",
+   "zh": null
+  },
+  "Variant Coding": {
+   "num": "329",
+   "en_definition": "Adaptation of SW by selection of functional alternatives according to external requirements (e.g. country-dependent or legal restrictions).",
+   "zh": null
+  },
+  "Variation Binding": {
+   "num": "330",
+   "en_definition": "A variant is the result of a variation binding process that resolves the variability of the system by assigning particular values/selections to all the system's properties.",
+   "zh": null
+  },
+  "Variation Binding Time": {
+   "num": "331",
+   "en_definition": "The variation binding time determines the step in the methodology at which the variability given by a set of variable properties is resolved.",
+   "zh": null
+  },
+  "Variation Point": {
+   "num": "332",
+   "en_definition": "A variation point indicates that a property is subject to variation. Furthermore, it is associated with a condition and a binding time which define the system context for the selection / setting of a concrete variant.",
+   "zh": null
+  },
+  "Vehicle State Manager": {
+   "num": "333",
+   "en_definition": "An OEM specific application that controls vehicle level state and interacts with various entities in the vehicle system.",
+   "zh": null
+  },
+  "Vehicle Variant": {
+   "num": "334",
+   "en_definition": "A vehicle variant is a fully characterized product and a subset of the artifacts of the product line.",
+   "zh": null
+  },
+  "Vendor ID": {
+   "num": "335",
+   "en_definition": "A vendor ID is a unique identification of the vendor of a software component. All basic software modules ('Basic Software Module') conforming to the AUTOSAR standard shall provide a readable vendor ID.",
+   "zh": null
+  },
+  "Verification": {
+   "num": "336",
+   "en_definition": "Confirmation by examination and provisions of objective evidence that specified requirements have been fulfilled.",
+   "zh": null
+  },
+  "VFB View": {
+   "num": "337",
+   "en_definition": "The VFB View describes systems or subsystems in the car independently of these resources; in other words, independently of: • what kind of and how many ECUs are present in the car • on what ECUs the entities in the VFB-View run • how the ECUs are interconnected: what kind of network technology (CAN, LIN, ...) and what kind of topology (presence of gateways) is used",
+   "zh": null
+  },
+  "Virtual Functional Bus": {
+   "num": "338",
+   "en_definition": "The Virtual Functional Bus is an abstraction of the communication between Atomic Software Components ('Atomic Software Component') and AUTOSAR Services ('AUTOSAR Service'). This abstraction is such that specification of the communication mechanisms is independent from the concrete technology chosen to realize the communication.",
+   "zh": null
+  },
+  "Virtual Integration": {
+   "num": "339",
+   "en_definition": "The simulated, modeled and/or calculated (not real) combination of software entities forming a 'System'.",
+   "zh": null
+  },
+  "Virtualization": {
+   "num": "340",
+   "en_definition": "Virtualization is a mechanism which hides the physical characteristics of a computing platform from the users, presenting instead another abstract computing platform. It can be used to fulfill functional safety requirements like availability, partitioning, resource conflict management, recovery etc.",
+   "zh": null
+  },
+  "Wake-up and Sleep on Dataline": {
+   "num": "341",
+   "en_definition": "Wake-up request or sleep request which is transmitted over a dataline of an Automotive Ethernet switched network.",
+   "zh": null
+  },
+  "Worst Case Execution Time": {
+   "num": "342",
+   "en_definition": "Maximum possible time during which a program is actually executing",
+   "zh": null
+  },
+  "Worst Case Response Time": {
+   "num": "343",
+   "en_definition": "Maximum possible time between receiving a stimulus and delivering an appropriate response or reaction.",
+   "zh": null
+  }
+ }
+}
