@@ -740,6 +740,425 @@ void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 
 如果为**Pwm**模块启用了开发错误检测：**PWM**函数应检查参数**ChannelNumber**，如果参数**ChannelNumber**无效，应引发开发错误**PWM_E_PARAM_CHANNEL**。
 
+## 8. 配置规范
+
+总体而言，本章定义配置参数及其到**容器**（container）的聚类组织。为支持本规范，第 8.1 章描述相关基础知识，并规定参数规范所应使用的模板（表格）。我们有意将第 8.1 章保留在规范中，以保证可理解性。
+
+第 8.2 章规定 **PWM** 驱动模块的结构（容器）与参数。
+
+第 8.3 章规定 **PWM** 驱动模块的发布信息。
+
+### 8.1. 如何阅读本章
+
+详情请参阅 SWS_BSWGeneral 中的第 10.1 章 "Introduction to configuration specification"（配置规范导论）。
+
+### 8.2. 容器与配置参数
+
+以下各节汇总所有配置参数。各参数的详细含义见第 6 章和第 7 章。
+
+**PWM** 模块应拒绝实现所不支持的、带有分区映射的配置。
+
+#### 8.2.1. Pwm
+
+| SWS 条目 |  |
+|---|---|
+| 模块名称 | Pwm |
+| 描述 | PWM（脉冲宽度调制）模块的配置。 |
+| Post-Build 变体支持 | true |
+| 支持的配置变体 | VARIANT-POST-BUILD, VARIANT-PRE-COMPILE |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| PwmChannelConfigSet | 1 | 此容器包含 AUTOSAR **Pwm** 模块的配置参数与子容器。 |
+| PwmConfigurationOfOptApiServices | 1 | 可选 API 服务的配置。 |
+
+#### 8.2.2. PwmGeneral
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | PwmGeneral |
+| 父容器 | Pwm |
+| 描述 | -- |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmDevErrorDetect |
+| 父容器 | PwmGeneral |
+| 描述 | 开启或关闭开发错误检测与通知（true：启用检测与通知；false：禁用检测与通知）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmDutycycleUpdatedEndperiod |
+| 父容器 | PwmGeneral |
+| 描述 | 启用在当前周期结束时更新占空比参数的开关（TRUE：占空比的更新在当前生成波形的周期结束时进行（当前波形执行完毕）；FALSE：立即更新周期/占空比（服务调用后立即执行，当前波形被切断））。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | -- |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmIndex |
+| 父容器 | PwmGeneral |
+| 描述 | 规定此模块实例的 InstanceId。若只存在一个实例，其 Id 应为 0。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 4294967295 |
+| 默认值 | -- |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmLowPowerStatesSupport |
+| 父容器 | PwmGeneral |
+| 描述 | 添加/移除所有电源状态管理相关 API（Pwm_SetPowerState、Pwm_GetCurrentPowerState、Pwm_GetTargetPowerState、Pwm_PreparePowerState、Pwm_Main_PowerTransitionManager），指示硬件是否提供低电源状态管理。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmNotificationSupported |
+| 父容器 | PwmGeneral |
+| 描述 | 指示是否支持通知的开关。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | -- |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmPeriodUpdatedEndperiod |
+| 父容器 | PwmGeneral |
+| 描述 | 启用在当前周期结束时更新周期参数的开关（TRUE：周期/占空比的更新在当前生成波形的周期结束时进行（当前波形执行完毕）；FALSE：立即更新周期/占空比（服务调用后立即执行，当前波形被切断））。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | -- |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmPowerStateAsynchTransitionMode |
+| 父容器 | PwmGeneral |
+| 描述 | 启用/禁用 PWM 驱动对异步电源状态转换的支持。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local 依赖：仅当参数 PwmLowPowerStatesSupport 设为 true 时才应配置此参数。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmEcucPartitionRef |
+| 父容器 | PwmGeneral |
+| 描述 | 将 PWM 驱动映射到零个或多个 ECUC 分区，以使驱动 API 在相应分区中可用。 |
+| 多重性 | 0..* |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmKernelEcucPartitionRef |
+| 父容器 | PwmGeneral |
+| 描述 | 将 PWM 内核映射到零个或一个 ECUC 分区，以将驱动内核分配到某个特定内核。所引用的 ECUC 分区是 PWM 驱动所映射到的 ECUC 分区的子集。 |
+| 多重性 | 0..1 |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| 容器名称 | 多重性 |
+|---|---|
+| PwmPowerStateConfig | 0..* |
+
+PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所引用的 ECUC 分区的子集。
+
+若 PwmEcucPartitionRef 引用一个或多个 ECUC 分区，则 PwmKernelEcucPartitionRef 的多重性应为一，并且也应引用这些 ECUC 分区之一。
+
+#### 8.2.3. PwmPowerStateConfig
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | PwmPowerStateConfig |
+| 父容器 | PwmGeneral |
+| 描述 | 此参数的每个实例定义一个电源状态，以及到达该电源状态时应调用的回调。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmPowerState |
+| 父容器 | PwmPowerStateConfig |
+| 描述 | 此参数的每个实例描述 PWM 硬件所支持的一个不同电源状态。它应由硬件供应商定义，并由 PWM 驱动用于引用将 PWM 硬件模块置于所述电源状态的特定硬件配置。至少应始终配置对应于满功率状态的电源模式。 |
+| 默认值 | -- |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local 依赖：仅当参数 PwmLowPowerStatesSupport 设为 true 时才应配置此参数。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmPowerStateReadyCbkRef |
+| 父容器 | PwmPowerStateConfig |
+| 描述 | 此参数的每个实例包含对 CDD 或 IoHwAbs 组件中定义的电源模式回调的引用。 |
+| 多重性 | 1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | -- |
+| 正则表达式 | -- |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local 依赖：仅当参数 PwmLowPowerStatesSupport 设为 true 时才应配置此参数。 |
+
+#### 8.2.4. PwmChannel
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | PwmChannel |
+| 父容器 | PwmChannelConfigSet |
+| 描述 | 单个 PWM 通道的配置。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmChannelClass |
+| 父容器 | PwmChannel |
+| 描述 | PWM 通道的类别。实现类型：Pwm_ChannelClassType。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | PWM_FIXED_PERIOD |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmChannelId |
+| 父容器 | PwmChannel |
+| 描述 | PWM 通道的通道 ID。该值将赋给由 PwmChannel 容器短名派生的符号名。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名） |
+| 范围 | 0 .. 4294967295 |
+| 默认值 | -- |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmDutycycleDefault |
+| 父容器 | PwmChannel |
+| 描述 | 初始化时使用的占空比值（0 表示 0%，0x8000 表示 100%）。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 32768 |
+| 默认值 | -- |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmIdleState |
+| 父容器 | PwmChannel |
+| 描述 | 参数 PWM_IDLE_STATE 表示信号停止后（例如调用 Pwm_SetOutputToIdle）PWM 的输出状态。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | PWM_HIGH；PWM_LOW |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmNotification |
+| 父容器 | PwmChannel |
+| 描述 | 回调函数的定义。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | "NULL" |
+| 正则表达式 | -- |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmPeriodDefault |
+| 父容器 | PwmChannel |
+| 描述 | 初始化时使用的周期值（单位：秒）。 |
+| 多重性 | 1 |
+| 类型 | EcucFloatParamDef |
+| 范围 | [0 .. INF] |
+| 默认值 | -- |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmPolarity |
+| 父容器 | PwmChannel |
+| 描述 | 定义每个 PWM 通道的起始极性。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | PWM_HIGH |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmChannelEcucPartitionRef |
+| 父容器 | PwmChannel |
+| 描述 | 将一个 PWM 通道映射到零个或多个 ECUC 分区，以限制对该通道的访问。所引用的 ECUC 分区是 PWM 驱动所映射到的 ECUC 分区的子集。 |
+| 多重性 | 0..* |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmMcuClockReferencePoint |
+| 父容器 | PwmChannel |
+| 描述 | 此参数包含对 McuClockReferencePoint 的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 McuClockReferencePoint 的引用 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+无包含的容器。
+
+若 PwmEcucPartitionRef 引用一个或多个 ECUC 分区，则 PwmChannelEcucPartitionRef 的多重性应大于零，并且也应引用这些 ECUC 分区中的一个或多个。
+
+#### 8.2.5. PwmChannelConfigSet
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | PwmChannelConfigSet |
+| 父容器 | Pwm |
+| 描述 | 此容器包含 AUTOSAR **Pwm** 模块的配置参数与子容器。 |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| PwmChannel | 1..* | 单个 PWM 通道的配置。 |
+
+#### 8.2.6. PwmConfigurationOfOptApiServices
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | PwmConfigurationOfOptApiServices |
+| 父容器 | Pwm |
+| 描述 | -- |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmDeInitApi |
+| 父容器 | PwmConfigurationOfOptApiServices |
+| 描述 | 在代码中添加/移除 Pwm_DeInit() 服务。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | -- |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmGetOutputState |
+| 父容器 | PwmConfigurationOfOptApiServices |
+| 描述 | -- |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | -- |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmSetDutyCycle |
+| 父容器 | PwmConfigurationOfOptApiServices |
+| 描述 | -- |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | -- |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmSetOutputToIdle |
+| 父容器 | PwmConfigurationOfOptApiServices |
+| 描述 | -- |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | -- |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmSetPeriodAndDuty |
+| 父容器 | PwmConfigurationOfOptApiServices |
+| 描述 | -- |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | -- |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PwmVersionInfoApi |
+| 父容器 | PwmConfigurationOfOptApiServices |
+| 描述 | 指示是否支持 Pwm_GetVersionInfo 的开关。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+### 8.3. 发布信息
+
+详情请参阅 SWS_BSWGeneral 中的第 10.3 章 "Published Information"（发布信息）。
+
 <section id="wechat">
 
 <h4>微信扫一扫，获取更多及时资讯</h4>
