@@ -37,6 +37,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 5 — User confirmation gate (2026-10-24 confirmed: Phase A/B evidence + TODO.md row; §7.2.8 decision = delete PWM_FULL_POWER (0x00))
   - [x] Step 6 — TODO.md row + commit/PR (commit 1b5e44b · PR #57 · Closes #56)
 - [ ] ocu_driver (SWS_OCUDriver · R23-11 markdown · ✅ alignment + row set)
+  - Note: STANDARD.md lifted the 配置规范 ban (2026-10-24) — if the source has ch.10 Configuration specification, it translates as the optional article `## 8. 配置规范` (skill Step 5 config-spec rules); measure it in Step 1
   - Note: acronym chapter table → blockquotes, restore the MCU row (source 14 rows → article 13 entries), drop the "Term definition:" pseudo-row; 3.1 "输入文档与相关标准和规范" → "输入文件"
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
@@ -45,6 +46,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] icu_driver (SWS_ICUDriver · R23-11 markdown · 🔶 alignment)
+  - Note: STANDARD.md lifted the 配置规范 ban (2026-10-24) — if the source has ch.10 Configuration specification, it translates as the optional article `## 8. 配置规范` (skill Step 5 config-spec rules); measure it in Step 1
   - Note: delete the forbidden "时序图" chapter; 4.2 "适用车型域" → "汽车域的适用性"; acronym row set 12:12 already verified
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
@@ -53,6 +55,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] adc_driver (SWS_ADCDriver · R23-11 markdown · ✅ alignment + deep completion)
+  - Note: STANDARD.md lifted the 配置规范 ban (2026-10-24) — if the source has ch.10 Configuration specification, it translates as the optional article `## 8. 配置规范` (skill Step 5 config-spec rules); measure it in Step 1
   - Note: acronym row-set repair — source 18 rows → article 16 entries: restore API/HW/SW, restore the DEM→DET source order, merge Conversion Mode back into one entry, keep aliases on the term line (ADC Result Buffer (…,…)); 4.2 "适用车型域" → "汽车域的适用性"; deep completion (gaps measured by eval-2): ~78 SWS requirement texts in the API chapter untranslated, §3.1 stale 13-item list to be replaced by the two R23-11 items, §7.4.1 Background untranslated
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
@@ -61,6 +64,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] iohwab (SWS_IOHardwareAbstraction · R23-11 markdown · ⚠️ gaps)
+  - Note: STANDARD.md lifted the 配置规范 ban (2026-10-24) — if the source has ch.10 Configuration specification, it translates as the optional article `## 8. 配置规范` (skill Step 5 config-spec rules); measure it in Step 1
   - Note: missing "约束和假设" chapter; delete the forbidden "时序图" chapter; 3.1 is already "输入文件"
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

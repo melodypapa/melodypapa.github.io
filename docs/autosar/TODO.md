@@ -12,7 +12,7 @@
 - [ ] 6 ⚠️ articles missing only the 「API规范」 chapter: pdu_router, can_interface, crypto_driver, ethernet_interface, lin_interface, operating_system
 - [ ] The other 11 ⚠️ articles: complete their respective missing chapters (com_based_transformer, data_distribution, e2e_transformer, sec_oc, SoAd, mirror, dem, iohwab, fee, memory_access, dcm)
 - [ ] 4 ⛔ stubs: full translation (ethernet_switch_driver, service_discovery, memory_mapping, platform_types — platform_types also needs its front-matter title and nav label fixed in the same change)
-- [ ] 12 🔶 articles: align to Type A — icu/iohwab drop the 「时序图」 chapter; flash_driver/time_service drop the 「配置规范」 chapter; nvram drops the 「需求追踪」 chapter and fixes 「功能说明」; decide the fate of can_driver's topic chapters; unify remaining legacy wording to STANDARD.md terms
+- [ ] 12 🔶 articles: align to Type A — icu/iohwab drop the 「时序图」 chapter; flash_driver/time_service translate their legacy 「配置规范」 chapters in place (allowed since 2026-10-24; source ch.10 → article `## 8. 配置规范`); nvram drops the 「需求追踪」 chapter and fixes 「功能说明」; decide the fate of can_driver's topic chapters; unify remaining legacy wording to STANDARD.md terms
 - [ ] IO section ✅ articles' heading-wording alignment (DIO/Port/PWM done 2026-10-24; same-class deviations remain): adc/icu 4.2 「适用车型域」→「汽车域的适用性」; ocu 3.1 「输入文档与相关标准和规范」→「输入文件」
 - [ ] 4.2 「适用于汽车领域」→「汽车域的适用性」 (named in STANDARD.md 2026-10-24): bswm, ecu_state_manager, crypto_driver, crypto_service_manager, memory_access, data_distribution; 「对汽车领域的适用性」: ethernet_driver, can_interface; 「汽车领域的适用性」: nvram_manager
 - [ ] *Scheduled functions* unified to 「调度函数」 (named in STANDARD.md 2026-10-24): bswm 7.3 / can_network_management 7.3 「周期函数」, crypto_service_manager 7.12 「Scheduled 函数」
@@ -102,7 +102,7 @@
 ## memory
 
 - 🔶 [BndM](bulk_nv_data_manager/) — SWS_BulkNvDataManager (ch.1 is "介绍和功能概述")
-- 🔶 [Flash 驱动](flash_driver/) — SWS_FlashDriver (contains "错误处理" + the forbidden "配置规范" chapter)
+- 🔶 [Flash 驱动](flash_driver/) — SWS_FlashDriver (contains "错误处理"; carries a legacy 「配置规范」 chapter — allowed since 2026-10-24, align per the config-spec rules)
 - 🔶 [NvM](nvram_manager/) — SWS_NVRAMManager (contains the forbidden "需求追踪" chapter; "功能说明" legacy wording)
 - ⚠️ [Fee](flash_eeprom_emulation/) — SWS_FlashEEPROMEmulation (missing constraints/dependencies)
 - ⚠️ [MemIf 存储访问](memory_access/) — SWS_MemoryAccess (missing 「API规范」)
@@ -120,7 +120,7 @@
 ## system_services
 
 - 🔶 [FiM](function_inhibition_manager/) — SWS_FunctionInhibitionManager ("功能规范" legacy wording)
-- 🔶 [时间服务](time_service/) — SWS_TimeService (contains the forbidden "配置规范" chapter; ch.2 legacy wording)
+- 🔶 [时间服务](time_service/) — SWS_TimeService (carries a legacy 「配置规范」 chapter — allowed since 2026-10-24, align per the config-spec rules; ch.2 legacy wording)
 - ⚠️ [OS](operating_system/) — SWS_OS (missing 「API规范」; source ~12k lines)
 
 ❌ Missing (4): SWS_COMManager (ComM), SWS_DefaultErrorTracer (Det), SWS_HWTestManager, SWS_SoftwareClusterConnection (SwCluC)
