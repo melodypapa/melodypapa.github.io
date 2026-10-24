@@ -136,6 +136,23 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
     DET/DEM 对调、一行拆二，✅ 评级下无人察觉）；
   - 源有散文导语句则译出保留，"the following table"式措辞随格式改为"以下"；源只有表题
     （Table 2.1）则不造导语句。
+- **API 章（文章 §7 ↔ 源 ch.8）同步细则**——类型、函数、期望接口都要逐条对源，不许只数章节数：
+  - **覆盖 1:1**：源 `## 8.2.x` 每个类型 ↔ `#### 7.2.x`，源 `## 8.3.x` 每个函数 ↔
+    `#### 7.3.x`，名称与顺序一致（Phase A check 7 的脚本把关数量/名称/顺序；
+    PWM run 基线：8 类型 13 函数全对齐）；
+  - **函数条目**：C 签名照抄源 Syntax 行进代码围栏；服务表字段按站内惯例折进
+    `**说明**`（同步/异步、可重入性、in/out 参数、返回值、可通过 `<X>.h` 获得）；
+    函数下的**每条源需求块译成一段，同序**——看似重复的句子可能是两条不同需求
+    （PWM 的 *pre compile time configurable* `10xx` 与 *configurable … {MACRO}* `20xx`
+    是两条，不得去重合并）；
+  - **类型表逐格核对**：Kind / Derived from / Range（值 + 十六进制 + 描述）/
+    Description / Available via 与源表一格一格对。两个已踩过的坑：Range 串行
+    （PWM 7.2.1 曾把邻居 Pwm_PeriodType 的 "8..32 bit" 抄到 Pwm_ChannelType 上，
+    源 Range 实为 `- -`）；**新发布版才有的行**（PWM 7.2.8 的 `PWM_FULL_POWER (0x00)`
+    R23-11 源表没有、R25-11 才入表）——此类内容不一致一律记入队列行 Note 请用户决策，
+    不得擅自保留或删除；
+  - 8.1 ↔ §7.1（导入类型表行集一致）、8.4/8.5/8.6.1–8.6.3/8.7 ↔
+    §7.4–§7.7（回调/调度/期望接口含可配置回调/API 参数检查）同属本条覆盖。
 - Chapter numbering stays stable; when insertion forces a renumber, grep for
   inbound anchor links first and fix them in the same commit.
 
@@ -208,12 +225,28 @@ before every commit, the second is evidence for the Step 8 confirmation.
 6. Derived indexes: both `gen_glossary.py --check` and `gen_api_list.py
    --check` exit 0 — the committed `glossary.md` / `api_reference.md` match
    the articles and front-matter (regenerate per Step 6 if stale).
+7. API-chapter sync: `python
+   .agents/skills/autosar-translate/scripts/check_api_sync.py <source.md>
+   <article>` exits 0 — source 8.2.x/8.3.x heading names, counts and order
+   match the article's 7.2.x/7.3.x, and the `**说明**` block count in §7.3
+   equals the function count. The script is a tripwire for missing, renamed,
+   reordered or untranslatable entries (baseline 2026-10-24: all six IO
+   articles pass); prose fidelity inside an entry stays Phase B work.
 
 **Phase B — automation-blind checks** (presented at the Step 8 gate as
 evidence, not asserted):
 
 - Coverage map: every translatable source `##` section ↔ an article section;
   the forbidden source chapters listed as deliberate omissions.
+- Terminology: ch.2 row set and order checked **cell by cell** against the
+  source tables — the Phase A term-line count alone can pass with reordered
+  or renamed rows (that is how adc_driver's 18→16 drift hid under a ✅).
+- Types and functions: type tables compared value + hex + description per
+  Range row; every function's requirement texts mapped one-to-one (look-alike
+  but distinct requirements kept separate — PWM `10xx`/`20xx`); content
+  mismatches against the source release (neighbor-copied ranges, rows that
+  only exist in a newer release) are **user decisions** recorded in the queue
+  row, never silent fixes.
 - Fidelity: doubtful passages verified against the **SWS** (not SRS);
   pseudo-code verbatim in fences; figures omitted or local PNGs only.
 - Scope discipline: existing translated content untouched, gaps filled in
@@ -289,3 +322,4 @@ open.
 | Finishing on the strict build alone — or opening the PR before the Step 8 gate | The build is blind to coverage, fidelity and wording; the user reviews a PR that was never confirmed | Phase A ≠ done; present Phase A + Phase B evidence and wait for confirmation, then commit/PR (Step 8) |
 | Writing "confirmation deferred" / `确认待补` on a todo item | Creates a backlog of rows whose real state nobody knows | Capture the confirmation when given, or leave the item `[ ]` (Step 8) |
 | Letting the 缩略语 chapter drift on format or row set (2026-10-24 finding: 6 articles render it as a table, adc_driver dropped API/HW/SW + reordered DET/DEM + split Conversion Mode — 18 source rows became 16 entries, all under ✅ status) | Site-wide format split; silent content loss in the one chapter whose rows are pure lookups | Step 5 缩略语 rules; Phase A check 5 makes table-vs-blockquote and row count mechanical. Baseline tests (2026-10-24) show fresh agents comply — the drift happens in long loaded sessions, which is exactly why the check must be a grep, not judgment |
+| Trusting the API chapter's shape without checking it entry by entry (PWM run 2026-10-24: ✅-rated article carried `Pwm_ChannelType` with the neighbor type's "8..32 bit" range, and a `PWM_FULL_POWER (0x00)` row that R23-11 does not define — it only exists from R25-11 on) | Silent infidelity in the chapter readers use as a lookup reference; a wrong Range or an unsourced enum value is indistinguishable from the standard to a site reader | Step 5 API 章 rules: cell-by-cell type-table read; per-requirement function text mapping; Phase A check 7 `check_api_sync.py` for count/name/order; content-vs-source mismatches go to the user as decisions |
