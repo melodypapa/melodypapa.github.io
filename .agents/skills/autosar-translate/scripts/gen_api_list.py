@@ -80,7 +80,8 @@ def article_index():
         text = p.read_text(encoding="utf-8")
         m = re.search(r"^spec:\s*(\S+)", text, re.M)
         if m:
-            label = p.parent.name if p.name == "index.md" else p.stem
+            tm = re.search(r'^title:\s*"?(.+?)"?\s*$', text, re.M)
+            label = tm.group(1) if tm else (p.parent.name if p.name == "index.md" else p.stem)
             idx[m.group(1)] = (label, p.relative_to(DOCS).as_posix())
     return idx
 

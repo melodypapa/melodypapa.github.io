@@ -52,7 +52,11 @@ def iter_articles():
 
 
 def article_label(p: Path) -> str:
-    return p.parent.name if p.name == "index.md" else p.stem
+    """Document title from front-matter (user preference: link text is the
+    document title, never the directory/file identifier); stem as fallback."""
+    text = p.read_text(encoding="utf-8")
+    m = re.search(r'^title:\s*"?(.+?)"?\s*$', text, re.M)
+    return m.group(1) if m else (p.parent.name if p.name == "index.md" else p.stem)
 
 
 def rel_link(p: Path) -> str:
