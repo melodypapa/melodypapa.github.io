@@ -72,7 +72,7 @@ release: R23-11
 > 从最小值（分别为最大值）运行到最大值（分别为最小值）的计数器，并在到达最大值（分别为最小值）后自动从最小值（分别为最大值）重新开始。
 
 **Reference Interval**
-> 由**Ocu_SetAbsoluteThreshold** **API**的调用者给出的区间（以 tick 为单位），并用作计算返回信息的基础。
+> 由[**Ocu_SetAbsoluteThreshold**](#738-ocu_setabsolutethreshold) **API**的调用者给出的区间（以 tick 为单位），并用作计算返回信息的基础。
 
 ## 3. 相关文档
 
@@ -106,7 +106,7 @@ AUTOSAR_CP_TR_BSWModuleList
 
 **时钟**：该驱动程序不支持时钟的动态更改。由于系统时钟完全由**MCU**模块管理，系统时钟设置的任何动态更改都会影响本模块。该模块不在睡眠模式下运行。
 
-**资源**：资源的分配完全由软件或硬件单方面进行，以避免共享资源问题。例如：使用**API Ocu_SetPinState**。不能对处于**RUNNING**状态的通道调用该**API**来改变引脚状态，否则可能在硬件在比较匹配时自动设置的状态与**API**设置的状态之间产生冲突。
+**资源**：资源的分配完全由软件或硬件单方面进行，以避免共享资源问题。例如：使用**API [Ocu_SetPinState](#735-ocu_setpinstate)**。不能对处于**RUNNING**状态的通道调用该**API**来改变引脚状态，否则可能在硬件在比较匹配时自动设置的状态与**API**设置的状态之间产生冲突。
 
 **计数和比较**：我们假设将运行本驱动程序的硬件具有如下计数器抽象模型（以八位计数器为例）。
 
@@ -191,7 +191,7 @@ Ocu.c 应包含 Ocu.h 和 Det.h。
 
 ![Figure7-2.png](Figure7-2.png)
 
-**Ocu**通道具有上图所示的简单状态图。驱动程序的所有通道都通过**API Ocu_Init()**一次性初始化。没有单独初始化每个通道的**API**。
+**Ocu**通道具有上图所示的简单状态图。驱动程序的所有通道都通过**API [Ocu_Init](#731-ocu_init)()**一次性初始化。没有单独初始化每个通道的**API**。
 
 根据硬件架构，与**Ocu**通道绑定的硬件可能由**OCU**单元或微控制器中的任何其他定时器模块管理。
 
@@ -234,14 +234,14 @@ Ocu.c 应包含 Ocu.h 和 Det.h。
 
 | 错误类型 | 相关错误码 | 错误值 |
 |---|---|---|
-| 除**Ocu_GetVersionInfo()**和**Ocu_Init()**外的**API**服务在模块未初始化时被使用 | OCU_E_UNINIT | 0x02 |
+| 除**[Ocu_GetVersionInfo](#7312-ocu_getversioninfo)()**和**[Ocu_Init](#731-ocu_init)()**外的**API**服务在模块未初始化时被使用 | OCU_E_UNINIT | 0x02 |
 | **API**服务使用了无效的通道标识符 | OCU_E_PARAM_INVALID_CHANNEL | 0x03 |
-| **API Ocu_SetPinState()** 以无效的引脚状态调用，或在通道处于**RUNNING**状态时调用 | OCU_E_PARAM_INVALID_STATE | 0x04 |
-| **API Ocu_SetPinAction()** 以无效的引脚动作调用 | OCU_E_PARAM_INVALID_ACTION | 0x05 |
-| 在配置了**NULL**指针作为通知函数的通道上使用**Ocu_DisableNotification()**或**Ocu_EnableNotification()** | OCU_E_NO_VALID_NOTIF | 0x06 |
-| **OCU**驱动已初始化时调用**API Ocu_Init()** | OCU_E_ALREADY_INITIALIZED | 0x07 |
-| **API Ocu_GetVersionInfo()** 以**NULL**参数调用 | OCU_E_PARAM_POINTER | 0x08 |
-| 对没有关联输出引脚的通道调用**Ocu_SetPinState()**或**Ocu_SetPinAction()** | OCU_E_PARAM_NO_PIN | 0x0A |
+| **API [Ocu_SetPinState](#735-ocu_setpinstate)()** 以无效的引脚状态调用，或在通道处于**RUNNING**状态时调用 | OCU_E_PARAM_INVALID_STATE | 0x04 |
+| **API [Ocu_SetPinAction](#736-ocu_setpinaction)()** 以无效的引脚动作调用 | OCU_E_PARAM_INVALID_ACTION | 0x05 |
+| 在配置了**NULL**指针作为通知函数的通道上使用**[Ocu_DisableNotification](#7310-ocu_disablenotification)()**或**[Ocu_EnableNotification](#7311-ocu_enablenotification)()** | OCU_E_NO_VALID_NOTIF | 0x06 |
+| **OCU**驱动已初始化时调用**API [Ocu_Init](#731-ocu_init)()** | OCU_E_ALREADY_INITIALIZED | 0x07 |
+| **API [Ocu_GetVersionInfo](#7312-ocu_getversioninfo)()** 以**NULL**参数调用 | OCU_E_PARAM_POINTER | 0x08 |
+| 对没有关联输出引脚的通道调用**[Ocu_SetPinState](#735-ocu_setpinstate)()**或**[Ocu_SetPinAction](#736-ocu_setpinaction)()** | OCU_E_PARAM_NO_PIN | 0x0A |
 | **OCU**初始化失败，例如所选的配置集不存在 | OCU_E_INIT_FAILED | 0x0B |
 
 由于特定实现和/或特定硬件属性而检测到的其他错误，应添加到**OCU**器件特定实现规范中。分类和枚举应与上面列出的错误兼容。
@@ -250,7 +250,7 @@ Ocu.c 应包含 Ocu.h 和 Det.h。
 
 | 错误类型 | 相关错误码 | 错误值 |
 |---|---|---|
-| 对处于**RUNNING**状态的通道调用**API Ocu_StartChannel()** | OCU_E_BUSY | 0x09 |
+| 对处于**RUNNING**状态的通道调用**API [Ocu_StartChannel](#733-ocu_startchannel)()** | OCU_E_BUSY | 0x09 |
 
 #### 6.4.3. 瞬态故障
 
@@ -370,7 +370,7 @@ void Ocu_Init ( const Ocu_ConfigType* ConfigPtr )
 
 如果为**OCU**驱动启用了开发错误检测，且在**OCU**驱动和硬件已初始化时调用**Ocu_Init**函数，则**Ocu_Init**函数应上报开发错误**OCU_E_ALREADY_INITIALIZED**并不做任何动作地返回。
 
-通过执行**Ocu_Init**函数重新初始化**OCU**驱动，需要事先通过执行**Ocu_DeInit**函数进行反初始化。
+通过执行**Ocu_Init**函数重新初始化**OCU**驱动，需要事先通过执行[**Ocu_DeInit**](#732-ocu_deinit)函数进行反初始化。
 
 #### 7.3.2. Ocu_DeInit
 
@@ -380,17 +380,17 @@ void Ocu_Init ( const Ocu_ConfigType* ConfigPtr )
 void Ocu_DeInit ( void )
 ```
 
-**Ocu_DeInit**函数应将**Ocu_Init**初始化的**OCU**变量和寄存器反初始化到与上电复位状态相当的状态。不可写寄存器的值除外。
+**Ocu_DeInit**函数应将[**Ocu_Init**](#731-ocu_init)初始化的**OCU**变量和寄存器反初始化到与上电复位状态相当的状态。不可写寄存器的值除外。
 
 注意：硬件设计应负责确保该状态不会导致微控制器中的未定义行为。
 
 **Ocu_DeInit**函数应禁用所有使用的中断和通知。
 
-**Ocu_DeInit**函数应只影响由静态配置和/或先前**Ocu_Init()**调用传递的运行时配置集分配的外设。
+**Ocu_DeInit**函数应只影响由静态配置和/或先前**[Ocu_Init](#731-ocu_init)()**调用传递的运行时配置集分配的外设。
 
 **API Ocu_DeInit**应停止所有由本驱动独占使用的自由运行计数器。
 
-注意：为防止反初始化期间的未定义行为，用户必须在调用**API Ocu_DeInit**之前停止所有**RUNNING**状态的通道（通过调用**Ocu_StopChannel**函数）。因此有下面的需求。
+注意：为防止反初始化期间的未定义行为，用户必须在调用**API Ocu_DeInit**之前停止所有**RUNNING**状态的通道（通过调用[**Ocu_StopChannel**](#734-ocu_stopchannel)函数）。因此有下面的需求。
 
 如果为**OCU**驱动启用了开发错误检测：如果调用**Ocu_DeInit**函数时仍有通道处于**RUNNING**状态，则函数应上报开发错误 "**OCU_E_PARAM_INVALID_STATE**" 并不做任何动作地返回。
 
@@ -496,7 +496,7 @@ void Ocu_SetPinAction ( Ocu_ChannelType ChannelNumber, Ocu_PinActionType PinActi
 
 #### 7.3.7. Ocu_GetCounter
 
-**说明**: 读取计数器当前值的服务。可通过**Ocu.h**获得。本服务为同步调用，可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。返回值：**Ocu_ValueType**，以 tick 为单位的计数器内容。
+**说明**: 读取计数器当前值的服务。可通过**Ocu.h**获得。本服务为同步调用，可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。返回值：[**Ocu_ValueType**](#722-ocu_valuetype)，以 tick 为单位的计数器内容。
 
 ```C
 Ocu_ValueType Ocu_GetCounter ( Ocu_ChannelType ChannelNumber )
@@ -514,7 +514,7 @@ Ocu_ValueType Ocu_GetCounter ( Ocu_ChannelType ChannelNumber )
 
 #### 7.3.8. Ocu_SetAbsoluteThreshold
 
-**说明**: 使用绝对输入数据设置通道阈值值的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。参数 ReferenceValue（in）：由上层给出的值，用作确定是否在函数退出之前调用通知的基础。参数 AbsoluteValue（in）：与计数器内容比较的值。此值以 tick 为单位。返回值：**Ocu_ReturnType**，告知调用者设置新阈值值后，比较匹配是否将在当前参考区间内发生（或已经发生）。
+**说明**: 使用绝对输入数据设置通道阈值值的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。参数 ReferenceValue（in）：由上层给出的值，用作确定是否在函数退出之前调用通知的基础。参数 AbsoluteValue（in）：与计数器内容比较的值。此值以 tick 为单位。返回值：[**Ocu_ReturnType**](#726-ocu_returntype)，告知调用者设置新阈值值后，比较匹配是否将在当前参考区间内发生（或已经发生）。
 
 ```C
 Ocu_ReturnType Ocu_SetAbsoluteThreshold (
@@ -576,7 +576,7 @@ Ocu_ReturnType Ocu_SetAbsoluteThreshold (
 
 #### 7.3.9. Ocu_SetRelativeThreshold
 
-**说明**: 相对于计数器当前值设置通道阈值值的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。参数 RelativeValue（in）：用于计算新阈值的值。返回值：**Ocu_ReturnType**，告知调用者设置新阈值值后，比较匹配是否将在当前参考区间内发生（或已经发生）。
+**说明**: 相对于计数器当前值设置通道阈值值的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。参数 RelativeValue（in）：用于计算新阈值的值。返回值：[**Ocu_ReturnType**](#726-ocu_returntype)，告知调用者设置新阈值值后，比较匹配是否将在当前参考区间内发生（或已经发生）。
 
 ```C
 Ocu_ReturnType Ocu_SetRelativeThreshold (
@@ -592,13 +592,13 @@ Ocu_ReturnType Ocu_SetRelativeThreshold (
 NewThresholdValue = ReadValue + RelativeValue;
 ```
 
-其余行为则与**API Ocu_SetAbsoluteThreshold**相同，其中参考值现在为**ReadValue**，参考区间位于**ReadValue**与新编程的阈值（**NewThresholdValue**）之间，如下图所示。
+其余行为则与**API [Ocu_SetAbsoluteThreshold](#738-ocu_setabsolutethreshold)**相同，其中参考值现在为**ReadValue**，参考区间位于**ReadValue**与新编程的阈值（**NewThresholdValue**）之间，如下图所示。
 
 示例**Ocu_SetRelativeThreshold(1,5);**
 
 ![Figure8-4.png](Figure8-4.png)
 
-注意：与**API Ocu_SetAbsoluteThreshold**一样，计数器的可能翻转也包含在参考区间中，如下图所示。示例**Ocu_SetRelativeThreshold(1,20)**，**ReadValue**等于 253。因此，此**API**的行为类似于**Ocu_SetAbsoluteThreshold**，故有下面的需求。
+注意：与**API [Ocu_SetAbsoluteThreshold](#738-ocu_setabsolutethreshold)**一样，计数器的可能翻转也包含在参考区间中，如下图所示。示例**Ocu_SetRelativeThreshold(1,20)**，**ReadValue**等于 253。因此，此**API**的行为类似于[**Ocu_SetAbsoluteThreshold**](#738-ocu_setabsolutethreshold)，故有下面的需求。
 
 ![Figure8-5.png](Figure8-5.png)
 
@@ -608,7 +608,7 @@ NewThresholdValue = ReadValue + RelativeValue;
 
 在实际设置新阈值值（绝对或相对）时，先前阈值值不再产生比较匹配。
 
-**API Ocu_SetAbsoluteThreshold**在针对不同通道调用时应可重入。
+**API [Ocu_SetAbsoluteThreshold](#738-ocu_setabsolutethreshold)**在针对不同通道调用时应可重入。
 
 **Ocu_SetRelativeThreshold**函数应可通过配置参数**OcuSetRelativeThresholdApi {OCU_SET_RELATIVE_THRESHOLD_API}**在预编译时配置开/关。
 
@@ -712,7 +712,7 @@ void Ocu_Notification_<Channel> ( void )
 
 通知原型**Ocu_Notification_<channel#>**是上层提供、由用户实现的用于通知回调的函数。
 
-如果通道 <Channel#> 上发生比较匹配，**OCU**驱动应根据该通道最近一次**Ocu_EnableNotification**/**Ocu_DisableNotification**的调用情况，调用函数**Ocu_Notification_<Channel#>**。
+如果通道 <Channel#> 上发生比较匹配，**OCU**驱动应根据该通道最近一次[**Ocu_EnableNotification**](#7311-ocu_enablenotification)/[**Ocu_DisableNotification**](#7310-ocu_disablenotification)的调用情况，调用函数**Ocu_Notification_<Channel#>**。
 
 **OCU**驱动应复位（如果硬件需要）与通知**Ocu_Notification_<Channel#>**关联的中断标志。
 
