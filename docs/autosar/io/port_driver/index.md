@@ -437,6 +437,269 @@ void Port_SetPinMode (Port_PinType Pin, Port_PinModeType Mode)
 
 无
 
+## 8. 配置规范
+
+总体而言，本章定义配置参数及其到**容器**（container）的聚类组织。为支持本规范，第 8.1 章描述相关基础知识，并规定参数规范所应使用的模板（表格）。我们有意将第 8.1 章保留在规范中，以保证可理解性。
+
+第 8.2 章规定 **PORT** 模块的结构（容器）与参数。
+
+第 8.4 章规定 **PORT** 模块的发布信息。
+
+### 8.1. 如何阅读本章
+
+详情请参阅 [4] 中的第 10.1 章 "Introduction to configuration specification"（配置规范导论）。
+
+### 8.2. 容器与配置参数
+
+以下各节汇总所有配置参数。各参数的详细含义见第 6 章和第 7 章。
+
+**PORT** 模块应拒绝实现所不支持的、带有分区映射的配置。
+
+#### 8.2.1. PortConfigSet
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | PortConfigSet |
+| 父容器 | Port |
+| 描述 | 此容器包含 AUTOSAR **Port** 模块的配置参数与子容器。 |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| PortContainer | 1..* | 收集 PortPin 的容器。 |
+
+#### 8.2.2. Port
+
+| SWS 条目 |  |
+|---|---|
+| 模块名称 | Port |
+| 描述 | Port 模块的配置。 |
+| Post-Build 变体支持 | true |
+| 支持的配置变体 | VARIANT-POST-BUILD, VARIANT-PRE-COMPILE |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| PortConfigSet | 1 | 此容器包含 AUTOSAR **Port** 模块的配置参数与子容器。 |
+| PortGeneral | 1 | **PORT** 驱动的模块级配置参数。 |
+
+#### 8.2.3. PortContainer
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | PortContainer |
+| 父容器 | PortConfigSet |
+| 描述 | 收集 PortPin 的容器。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PortNumberOfPortPins |
+| 父容器 | PortContainer |
+| 描述 | 所指定 PortPin 的数量。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 1 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+
+| 容器名称 | 多重性 |
+|---|---|
+| PortPin | 1..* |
+
+#### 8.2.4. PortGeneral
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | PortGeneral |
+| 父容器 | Port |
+| 描述 | **PORT** 驱动的模块级配置参数。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PortDevErrorDetect |
+| 父容器 | PortGeneral |
+| 描述 | 开启或关闭开发错误检测与通知（true：启用检测与通知；false：禁用检测与通知）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PortSetPinDirectionApi |
+| 父容器 | PortGeneral |
+| 描述 | 启用/禁用 Port_SetPinDirection() 函数的预处理器开关（TRUE：启用 —— Port_SetPinDirection() 函数可用；FALSE：禁用 —— Port_SetPinDirection() 函数不可用）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PortSetPinModeApi |
+| 父容器 | PortGeneral |
+| 描述 | 启用/禁用 Port_SetPinMode() 函数的预处理器开关（true：启用 —— Port_SetPinMode() 函数可用；false：禁用 —— Port_SetPinMode() 函数不可用）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PortVersionInfoApi |
+| 父容器 | PortGeneral |
+| 描述 | 启用/禁用读取模块版本信息的 API 的预处理器开关（true：版本信息 API 启用；false：版本信息 API 禁用）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PortEcucPartitionRef |
+| 父容器 | PortGeneral |
+| 描述 | 将 Port 驱动映射到零个或多个 ECUC 分区，以使模块 API 在该分区中可用。 |
+| 多重性 | 0..* |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+无包含的容器。
+
+顶层 **Port** 驱动容器包含适用于 **PORT** 配置的参数。
+
+#### 8.2.5. PortPin
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | PortPin |
+| 父容器 | PortContainer |
+| 描述 | 单个端口引脚的配置。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PortPinDirection |
+| 父容器 | PortPin |
+| 描述 | 引脚的初始方向（IN 或 OUT）。如果方向不可更改，则此处配置的值是固定的。方向必须与引脚模式匹配。例如：ADC 使用的引脚必须配置为输入端口。实现类型：Port_PinDirectionType。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | PORT_PIN_IN（端口引脚方向设为输入）；PORT_PIN_OUT（端口引脚方向设为输出） |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：x |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PortPinDirectionChangeable |
+| 父容器 | PortPin |
+| 描述 | 指示端口引脚的方向在运行期间是否可更改的参数（true：启用端口引脚方向可更改；false：禁用端口引脚方向可更改）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PortPinId |
+| 父容器 | PortPin |
+| 描述 | 端口引脚容器所属端口的引脚 ID。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 1 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PortPinInitialMode |
+| 父容器 | PortPin |
+| 描述 | 供 Port_Init() 函数使用的、模式列表中的端口引脚模式。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | PORT_PIN_MODE_ADC（ADC 使用的端口引脚）；PORT_PIN_MODE_CAN（CAN 使用的端口引脚）；PORT_PIN_MODE_DIO（配置为 DIO 的端口引脚，应在 DIO 驱动的控制下使用）；PORT_PIN_MODE_DIO_GPT（配置为 DIO 的端口引脚，应在通用定时器驱动的控制下使用）；PORT_PIN_MODE_DIO_WDG（配置为 DIO 的端口引脚，应在看门狗驱动的控制下使用）；PORT_PIN_MODE_FLEXRAY（FlexRay 使用的端口引脚）；PORT_PIN_MODE_ICU（ICU 使用的端口引脚）；PORT_PIN_MODE_LIN（LIN 使用的端口引脚）；PORT_PIN_MODE_MEM（在存储驱动控制下用于外部存储器的端口引脚）；PORT_PIN_MODE_PWM（PWM 使用的端口引脚）；PORT_PIN_MODE_SPI（SPI 使用的端口引脚） |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：x |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PortPinLevelValue |
+| 父容器 | PortPin |
+| 描述 | 端口引脚列表中的端口引脚电平值。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | PORT_PIN_LEVEL_HIGH（端口引脚电平为高）；PORT_PIN_LEVEL_LOW（端口引脚电平为低） |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：x |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PortPinMode |
+| 父容器 | PortPin |
+| 描述 | 模式列表中的端口引脚模式。注意：默认允许多于一个模式，这样例如可以将 DIO 与 ICU 等其他模式组合。 |
+| 多重性 | 1..* |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | PORT_PIN_MODE_ADC（ADC 使用的端口引脚）；PORT_PIN_MODE_CAN（CAN 使用的端口引脚）；PORT_PIN_MODE_DIO（配置为 DIO 的端口引脚，应在 DIO 驱动的控制下使用）；PORT_PIN_MODE_DIO_GPT（配置为 DIO 的端口引脚，应在通用定时器驱动的控制下使用）；PORT_PIN_MODE_DIO_WDG（配置为 DIO 的端口引脚，应在看门狗驱动的控制下使用）；PORT_PIN_MODE_FLEXRAY（FlexRay 使用的端口引脚）；PORT_PIN_MODE_ICU（ICU 使用的端口引脚）；PORT_PIN_MODE_LIN（LIN 使用的端口引脚）；PORT_PIN_MODE_MEM（在存储驱动控制下用于外部存储器的端口引脚）；PORT_PIN_MODE_PWM（PWM 使用的端口引脚）；PORT_PIN_MODE_SPI（SPI 使用的端口引脚） |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：x |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：x |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PortPinModeChangeable |
+| 父容器 | PortPin |
+| 描述 | 指示端口引脚的模式在运行期间是否可更改的参数（True：允许端口引脚模式可更改；False：不允许端口引脚模式可更改）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | PortPinEcucPartitionRef |
+| 父容器 | PortPin |
+| 描述 | 将 Port 引脚映射到零个或多个 ECUC 分区。所引用的 ECUC 分区是 Port 驱动所映射到的 ECUC 分区的子集。 |
+| 多重性 | 0..* |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+### 8.3. 约束
+
+PortPinEcucPartitionRef 所引用的 ECUC 分区应是 PortEcucPartitionRef 所引用的 ECUC 分区的子集。
+
+若 PortEcucPartitionRef 引用一个或多个 ECUC 分区，则 PortPinEcucPartitionRef 的多重性应大于零，并且也应引用这些 ECUC 分区中的一个或多个。
+
+### 8.4. 发布信息
+
+详情请参阅 [4] 中的第 10.3 章 "Published Information"（发布信息）。
+
 <section id="wechat">
 
 <h4>微信扫一扫，获取更多及时资讯</h4>
