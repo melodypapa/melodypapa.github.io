@@ -47,6 +47,7 @@ One source chapter uses exactly one rendering site-wide:
 - No source requirement IDs (`[SWS_Adc_00122]` and the like); `{DRAFT}` markers are dropped
 - Notes/tips use `**注意：**` / `**提示：**` paragraphs; tables use GFM tables; images are local PNGs inside the article directory
 - WeChat QR-code footer (where an article has one): `<section id="wechat">` + `<h4>` + image, **never** a Markdown heading (it would pollute the TOC)
+- Links resolve before commit: internal `…md` / `#…` targets verified in the build (a missing same-page anchor surfaces only as INFO — check the build output explicitly); external URLs curl-checked (2xx/3xx pass; a 4xx from a known anti-bot host is verified manually in a browser, never auto-removed); links come only from the source document or the site itself — no invented references
 
 ## 5. Translation principles
 
