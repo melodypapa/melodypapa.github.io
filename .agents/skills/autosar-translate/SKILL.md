@@ -111,7 +111,7 @@ translated end-to-end and only surfaced its plan afterwards, as prose —
 coverage decisions were never reviewable before the work was done; the DIO run
 (2026-10-24) posted its todo to chat and never saved a file. The full-program
 queue (`docs/autosar/sync-todo/`, generated 2026-10-24 from the R23-11
-inventory) is the "translate one by one" backbone; `TODO.md`'s 待办清单 keeps
+inventory) is the "translate one by one" backbone; `TODO.md`'s Backlog keeps
 program-level fixes outside single-article runs (wording sweeps, hygiene).
 
 ## Step 5 — Translate in place
@@ -124,35 +124,57 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
 - Pseudo-code listings stay verbatim in code fences (reconstruct the
   PDF-extraction garbling into readable formatting); prose is translated;
   figures are omitted.
-- **缩略语章（ch.2）格式**：源文档的缩略语表改排为「粗体术语行 + `>` 引用块释义」——
-  **不保留 GFM 表格**，即使源是表格且每条释义都只有一行（站内曾 20 篇引用块 vs 6 篇表格
-  分裂，表格在长释义下不可读）。细则：
-  - 术语行 = 源 Abbreviation/Acronym 单元格**逐字加粗**，含括号别名
-    （`**ADC Result Buffer**（**ADC Streaming Buffer**，**ADC Stream Buffer**）`式）；
-  - 纯缩写词的释义写 `中文全称（**English Full Name**）`；术语条目译描述句，英文术语加粗；
-    `[n]` 引用标记丢弃；源行内的 Note 译为释义内的 `**注意：**` 段；
-  - **行集与行序与源表严格一致**：一条不多不少、不拆分（源一行 *Conversion Mode* 讲两种
-    模式就译成一条）、不重排、不删"看起来太通用"的行（adc_driver 曾丢 API/HW/SW 三条、
-    DET/DEM 对调、一行拆二，✅ 评级下无人察觉）；
-  - 源有散文导语句则译出保留，"the following table"式措辞随格式改为"以下"；源只有表题
-    （Table 2.1）则不造导语句。
-- **API 章（文章 §7 ↔ 源 ch.8）同步细则**——类型、函数、期望接口都要逐条对源，不许只数章节数：
-  - **覆盖 1:1**：源 `## 8.2.x` 每个类型 ↔ `#### 7.2.x`，源 `## 8.3.x` 每个函数 ↔
-    `#### 7.3.x`，名称与顺序一致（Phase A check 7 的脚本把关数量/名称/顺序；
-    PWM run 基线：8 类型 13 函数全对齐）；
-  - **函数条目**：C 签名照抄源 Syntax 行进代码围栏；服务表字段按站内惯例折进
-    `**说明**`（同步/异步、可重入性、in/out 参数、返回值、可通过 `<X>.h` 获得）；
-    函数下的**每条源需求块译成一段，同序**——看似重复的句子可能是两条不同需求
-    （PWM 的 *pre compile time configurable* `10xx` 与 *configurable … {MACRO}* `20xx`
-    是两条，不得去重合并）；
-  - **类型表逐格核对**：Kind / Derived from / Range（值 + 十六进制 + 描述）/
-    Description / Available via 与源表一格一格对。两个已踩过的坑：Range 串行
-    （PWM 7.2.1 曾把邻居 Pwm_PeriodType 的 "8..32 bit" 抄到 Pwm_ChannelType 上，
-    源 Range 实为 `- -`）；**新发布版才有的行**（PWM 7.2.8 的 `PWM_FULL_POWER (0x00)`
-    R23-11 源表没有、R25-11 才入表）——此类内容不一致一律记入队列行 Note 请用户决策，
-    不得擅自保留或删除；
-  - 8.1 ↔ §7.1（导入类型表行集一致）、8.4/8.5/8.6.1–8.6.3/8.7 ↔
-    §7.4–§7.7（回调/调度/期望接口含可配置回调/API 参数检查）同属本条覆盖。
+- **Acronym chapter (ch.2) format**: the source's acronym table is reflowed
+  into 「粗体术语行 + `>` 引用块释义」 (bold term line + `>` blockquote
+  definition) — **never keep a GFM table**, even when the source is a table
+  and every definition is one line (the site was once split 20 blockquote
+  articles vs 6 tables; tables are unreadable with long definitions).
+  Sub-rules:
+  - Term line = the source Abbreviation/Acronym cell **bolded verbatim**,
+    including bracketed aliases (the
+    `**ADC Result Buffer**（**ADC Streaming Buffer**，**ADC Stream Buffer**）`
+    pattern);
+  - A pure acronym's definition reads `中文全称（**English Full Name**）` —
+    the Chinese full name with the English full name bolded; term entries
+    translate the description sentence, English terms bolded; `[n]`
+    reference markers are dropped; an in-row source Note becomes a
+    `**注意：**` paragraph inside the definition;
+  - **Row set and row order strictly match the source table**: not one entry
+    more or fewer, no splitting (if the source covers two modes in one
+    *Conversion Mode* row, it stays one entry), no reordering, no dropping
+    rows that "look too generic" (adc_driver once lost API/HW/SW, swapped
+    DET/DEM, split one row in two — undetected under a ✅ status);
+  - If the source has a prose intro sentence, translate and keep it;
+    "the following table" wording becomes "以下" with the new format; if the
+    source has only a table caption (Table 2.1), invent no intro sentence.
+- **API chapter (article §7 ↔ source ch.8) sync sub-rules** — types,
+  functions and expected interfaces are all checked against the source item
+  by item; counting chapters is not enough:
+  - **Coverage 1:1**: every source `## 8.2.x` type ↔ `#### 7.2.x`, every
+    source `## 8.3.x` function ↔ `#### 7.3.x`, names and order identical
+    (the Phase A check 7 script gates count/name/order; PWM run baseline:
+    8 types and 13 functions all aligned);
+  - **Function entries**: the C signature is copied verbatim from the
+    source's Syntax line into the code fence; the service-table fields are
+    folded into `**说明**` per site convention (sync/async, re-entrancy,
+    in/out parameters, return value, available via `<X>.h`);
+    **every source requirement block under a function becomes one paragraph,
+    in order** — look-alike duplicate sentences may be two distinct
+    requirements (PWM's *pre compile time configurable* `10xx` vs
+    *configurable … {MACRO}* `20xx` are two; never deduplicate or merge);
+  - **Type tables checked cell by cell**: Kind / Derived from / Range
+    (value + hex + description) / Description / Available via matched
+    against the source cell by cell. Two pits already stepped in: ranges
+    shifted by one row (PWM 7.2.1 carried the neighbor Pwm_PeriodType's
+    "8..32 bit" on Pwm_ChannelType; the source Range was actually `- -`);
+    and **rows that exist only in a newer release** (PWM 7.2.8's
+    `PWM_FULL_POWER (0x00)` is absent from the R23-11 source table and only
+    enters in R25-11) — such content mismatches always go to the queue row's
+    Notes as user decisions, never silently kept or deleted;
+  - 8.1 ↔ §7.1 (imported-type table row set identical) and
+    8.4/8.5/8.6.1–8.6.3/8.7 ↔ §7.4–§7.7 (callbacks/scheduled/expected
+    interfaces incl. configurable callbacks/API parameter checks) fall under
+    the same rule.
 - Chapter numbering stays stable; when insertion forces a renumber, grep for
   inbound anchor links first and fix them in the same commit.
 
@@ -162,7 +184,7 @@ Two files under `docs/autosar/` are **pure derivations** — regenerate and
 commit them in the same PR whenever their input changed; **never hand-edit
 them**.
 
-1. **术语表 `glossary.md`** — every ch.2 term across all articles, A–Z,
+1. **Glossary `glossary.md`** — every ch.2 term across all articles, A–Z,
    deduplicated per module, each definition attributed to its source article
    with the document and release (front-matter `spec:` / `release:`).
    Regenerate after any 缩略语 chapter edit:
@@ -170,7 +192,7 @@ them**.
    Read its report: a `! article: ch.2 present but no entries parsed` line is
    a drift signal (that ch.2 is prose or intro-only — fix the article, don't
    silence the line); `(table — 待改排)` flags a legacy GFM-table ch.2.
-2. **API 清单 `api_reference.md`** — every type (8.2) and function (8.3)
+2. **API reference `api_reference.md`** — every type (8.2) and function (8.3)
    defined in chapter 8 of every R23-11 SWS document, A–Z, each entry naming
    its document and release and linking to the site article when one exists.
    Regenerate after any front-matter `spec:` change or article addition:
@@ -197,7 +219,7 @@ before every commit, the second is evidence for the Step 8 confirmation.
    **zero WARNINGs** (pre-existing INFO anchor notices are fine).
 2. Heading audit: `grep '^## '` on the article equals the STANDARD.md §1
    skeleton with §2 wording, numbered `1.`–`7.` only; `###`/`####` numbering
-   is continuous (no 断档); no `## 8.`, lettered appendix, or forbidden chapter
+   is continuous (no numbering gaps); no `## 8.`, lettered appendix, or forbidden chapter
    title (需求可追溯性 / 需求追踪 / 时序图 / 配置规范) anywhere. **Before renaming
    a heading to a STANDARD.md term, grep that heading across `docs/autosar`** —
    if the standard and the site majority disagree, it is a user decision
@@ -218,10 +240,13 @@ before every commit, the second is evidence for the Step 8 confirmation.
    -relative), removed pages cleaned in the same commit; renamed or renumbered
    headings — grep inbound `](…#…)` links site-wide and fix them in the same
    commit.
-5. 缩略语章：`sed -n '/^## 2\. 缩略语/,/^## 3\./p' <article>` 切片内 `^| ` 行数
-   必须为 0（禁表格）；`^\*\*[^*]+\*\*\s*$` 术语行条数 == 源表数据行数（逐行核对行集与
-   行序 — 该章在长会话中最易漂移：adc_driver 曾 18 源行译成 16 条而通过所有检查；
-   术语行允许尾随空格 — bswm/ethernet_interface 等多篇文章的行尾都有空格）。
+5. Acronym chapter: inside the `sed -n '/^## 2\. 缩略语/,/^## 3\./p' <article>`
+   slice the `^| ` line count must be 0 (tables forbidden); the
+   `^\*\*[^*]+\*\*\s*$` term-line count == the source table's data-row count
+   (check row set and order line by line — this chapter drifts most easily in
+   long sessions: adc_driver once turned 18 source rows into 16 entries and
+   passed every check; term lines may carry trailing whitespace —
+   bswm/ethernet_interface and several other articles have it).
 6. Derived indexes: both `gen_glossary.py --check` and `gen_api_list.py
    --check` exit 0 — the committed `glossary.md` / `api_reference.md` match
    the articles and front-matter (regenerate per Step 6 if stale).
@@ -232,6 +257,26 @@ before every commit, the second is evidence for the Step 8 confirmation.
    equals the function count. The script is a tripwire for missing, renamed,
    reordered or untranslatable entries (baseline 2026-10-24: all six IO
    articles pass); prose fidelity inside an entry stays Phase B work.
+8. Link audit: every link in the article must resolve — nothing else in the
+   gate catches link rot.
+   - Internal `](…*.md*)` targets exist, and the strict build output shows no
+     "no such anchor" notice for this article — missing same-page anchors are
+     INFO-level and do **not** fail `--strict`, so grep the build output
+     explicitly (a literal `#xxx` placeholder survived as INFO in
+     `eb_tresos/safety_os`).
+   - External `](http…)` URLs **and plain-text URLs from the source**
+     (blockquote/reference lines are links too):
+     `curl -sIL -o /dev/null -w '%{http_code}' --max-time 15` each — 2xx/3xx
+     pass; 4xx/5xx/timeout fails. Retry once with a browser UA before
+     declaring failure (the 2026-10-24 first audit misread a live port.de URL
+     as dead from one timed-out probe). Anti-bot hosts (iso.org, weixin)
+     403/302 curl: verify manually in a browser and record the outcome —
+     never delete a link for being curl-blocked, never wave a 404/500 through
+     as "probably fine". Prefer the smallest **verified** fix — same path on
+     https (OMG DDS/1.4: http 500 → https 200), or the publisher's current
+     URL for the same document, checked in a browser; record it in TODO.md's
+     Backlog, never guess a replacement (the 2026-10-24 audit nearly wrote an
+     ieeexplore MACsec link into an 802.1AS article — different document).
 
 **Phase B — automation-blind checks** (presented at the Step 8 gate as
 evidence, not asserted):
@@ -253,6 +298,29 @@ evidence, not asserted):
   place, chapter numbering stable.
 - Decisions applied: every mid-run user decision in the queue row's Notes is
   reflected in the article (and in STANDARD.md when a canonical term changed).
+- Potential links: the PDF→markdown conversion lost the source's internal
+  hyperlinks, so translations cite things that could be links but aren't.
+  Classes (all observed in real articles):
+  - Intra-article: constant/type mentions → their ch.7.2 definition
+    (Icu_SetMode's 说明 cites **ICU_MODE_SIGNAL_EDGE_DETECT** → §7.2.10;
+    a signature's `Icu_ModeType` → §7.2.1); function mentions → their
+    `#### 7.3.x` heading (§7.2.9's type description cites
+    **Icu_GetEdgeNumbers()**);
+    `参见下表` → the table below; prose `[n]` → the §3.1 entry
+    (iohwab: 参见参考文档[9]).
+  - Cross-article: module names (Det/Dem/CanIf…) whose site article exists.
+  - Un-linked plain-text source URLs (see Phase A check 8).
+  - **Not linkable — record, don't link**: the target lives in a Type
+    A-forbidden chapter (config parameters — port_driver 参见**PORT117**,
+    pwm 参见**PwmPowerStateReadyCbkRef** → 配置规范) or an omitted
+    sequence-diagram chapter. Keep as prose; list under deliberate omissions;
+    never half-link.
+  Detection is mechanical: `grep -n '参见\|参考\|详见'` + prose `\[n\]`
+  markers; per-module identifier prefixes (`ICU_[A-Z_]*`, `Icu_[A-Za-z]*`)
+  mentioned outside their ch.7.2 definition lines. Candidates go into the
+  Phase B evidence; adding links is a user decision (queue in TODO.md's
+  Backlog), never a silent addition — intra-article links are restoration of
+  the source's own hyperlinks, the easiest case to approve.
 
 **Repo workflow:**
 
@@ -281,7 +349,8 @@ open.
 **After confirmation, finish in this order:**
 
 1. Update `docs/autosar/TODO.md` in the same PR: flip the touched article's
-   status, refresh its source-release note, update the `最后更新` date. Format
+   status, refresh its source-release note, update the `Last updated` date.
+   Format
    and status definitions: `references/progress-file.md`. TODO.md is the
    status ledger of the whole program (the execution queue is
    `docs/autosar/sync-todo/`) — coverage questions are answered from them (or
@@ -321,5 +390,5 @@ open.
 | Batch-checking todo items at the end of the run | The list shows progress the work doesn't have; an unverified item hides until the PR review or never | Tick each item in the file the moment its verification passes (Step 4) |
 | Finishing on the strict build alone — or opening the PR before the Step 8 gate | The build is blind to coverage, fidelity and wording; the user reviews a PR that was never confirmed | Phase A ≠ done; present Phase A + Phase B evidence and wait for confirmation, then commit/PR (Step 8) |
 | Writing "confirmation deferred" / `确认待补` on a todo item | Creates a backlog of rows whose real state nobody knows | Capture the confirmation when given, or leave the item `[ ]` (Step 8) |
-| Letting the 缩略语 chapter drift on format or row set (2026-10-24 finding: 6 articles render it as a table, adc_driver dropped API/HW/SW + reordered DET/DEM + split Conversion Mode — 18 source rows became 16 entries, all under ✅ status) | Site-wide format split; silent content loss in the one chapter whose rows are pure lookups | Step 5 缩略语 rules; Phase A check 5 makes table-vs-blockquote and row count mechanical. Baseline tests (2026-10-24) show fresh agents comply — the drift happens in long loaded sessions, which is exactly why the check must be a grep, not judgment |
-| Trusting the API chapter's shape without checking it entry by entry (PWM run 2026-10-24: ✅-rated article carried `Pwm_ChannelType` with the neighbor type's "8..32 bit" range, and a `PWM_FULL_POWER (0x00)` row that R23-11 does not define — it only exists from R25-11 on) | Silent infidelity in the chapter readers use as a lookup reference; a wrong Range or an unsourced enum value is indistinguishable from the standard to a site reader | Step 5 API 章 rules: cell-by-cell type-table read; per-requirement function text mapping; Phase A check 7 `check_api_sync.py` for count/name/order; content-vs-source mismatches go to the user as decisions |
+| Letting the 缩略语 chapter drift on format or row set (2026-10-24 finding: 6 articles render it as a table, adc_driver dropped API/HW/SW + reordered DET/DEM + split Conversion Mode — 18 source rows became 16 entries, all under ✅ status) | Site-wide format split; silent content loss in the one chapter whose rows are pure lookups | Step 5 acronym-chapter rules; Phase A check 5 makes table-vs-blockquote and row count mechanical. Baseline tests (2026-10-24) show fresh agents comply — the drift happens in long loaded sessions, which is exactly why the check must be a grep, not judgment |
+| Trusting the API chapter's shape without checking it entry by entry (PWM run 2026-10-24: ✅-rated article carried `Pwm_ChannelType` with the neighbor type's "8..32 bit" range, and a `PWM_FULL_POWER (0x00)` row that R23-11 does not define — it only exists from R25-11 on) | Silent infidelity in the chapter readers use as a lookup reference; a wrong Range or an unsourced enum value is indistinguishable from the standard to a site reader | Step 5 API-chapter rules: cell-by-cell type-table read; per-requirement function text mapping; Phase A check 7 `check_api_sync.py` for count/name/order; content-vs-source mismatches go to the user as decisions |
