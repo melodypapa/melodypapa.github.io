@@ -514,6 +514,272 @@ void Dio_MaskedWritePort (
 |---|---|---|
 | Det_ReportError | Det.h | 报告开发错误的服务 |
 
+## 8. 配置规范
+
+本章定义配置参数及其到**容器**（container）的聚类组织。
+
+### 8.1. 容器与配置参数
+
+以下各节汇总所有配置参数。
+
+**DIO** 模块应拒绝实现所不支持的、带有分区映射的配置。
+
+#### 8.1.1. 变体
+
+实现至少应支持以下变体之一：VARIANT-PRE-COMPILE、VARIANT-LINK-TIME。
+
+#### 8.1.2. Dio
+
+| SWS 条目 |  |
+|---|---|
+| 模块名称 | Dio |
+| 描述 | Dio（数字输入输出）模块的配置。 |
+| Post-Build 变体支持 | false |
+| 支持的配置变体 | VARIANT-LINK-TIME, VARIANT-PRE-COMPILE |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DioConfig | 1 | 此容器包含 AUTOSAR **DIO** 模块的配置参数与子容器。 |
+| DioGeneral | 1 | **DIO** 模块通用配置参数。 |
+
+#### 8.1.3. DioGeneral
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | DioGeneral |
+| 父容器 | Dio |
+| 描述 | **DIO** 模块通用配置参数。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | DioDevErrorDetect |
+| 父容器 | DioGeneral |
+| 描述 | 开启或关闭开发错误检测与通知（true：启用检测与通知；false：禁用检测与通知）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | DioFlipChannelApi |
+| 父容器 | DioGeneral |
+| 描述 | 在代码中添加/移除 Dio_FlipChannel() 服务。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | DioMaskedWritePortApi |
+| 父容器 | DioGeneral |
+| 描述 | 在代码中添加/移除 Dio_MaskedWritePort() 服务。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | DioVersionInfoApi |
+| 父容器 | DioGeneral |
+| 描述 | 在代码中添加/移除 Dio_GetVersionInfo() 服务。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | DioEcucPartitionRef |
+| 父容器 | DioGeneral |
+| 描述 | 将 DIO 驱动映射到零个或多个 ECUC 分区，以使模块 API 在该分区中可用。 |
+| 多重性 | 0..* |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+#### 8.1.4. DioPort
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | DioPort |
+| 父容器 | DioConfig |
+| 描述 | 单个 DIO 端口的配置，由通道和可能的通道组组成。注意：此容器定义未显式定义符号名参数；取而代之，容器的短名将在 ECU 配置描述中用于指定该端口的符号名。 |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DioChannel | 0..* | 单个 DIO 通道的配置。 |
+| DioChannelGroup | 0..* | DIO 通道组的定义与配置。通道组用逻辑组表示多个相邻的 DIO 通道。注意：此容器定义未显式定义符号名参数；取而代之，容器的短名将在 ECU 配置描述中用于指定该通道组的符号名。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | DioPortId |
+| 父容器 | DioPort |
+| 描述 | DIO 端口的数字标识符。并非所有 MCU 端口都可用于 DIO，因此所有 ID 的列表中可能存在"空洞"。该值将赋给 DIO 端口符号名（即 DioPort 容器的 SHORT-NAME）。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 4294967295 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | DioPortEcucPartitionRef |
+| 父容器 | DioPort |
+| 描述 | 将 DIO 端口映射到零个或多个 ECUC 分区。所引用的 ECUC 分区是 DIO 驱动所映射到的 ECUC 分区的子集。 |
+| 多重性 | 0..* |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+DioPortEcucPartitionRef 所引用的 ECUC 分区应是 DioEcucPartitionRef 所引用的 ECUC 分区的子集。
+
+若 DioEcucPartitionRef 引用一个或多个 ECUC 分区，则 DioPortEcucPartitionRef 的多重性应大于零，并且也应引用这些 ECUC 分区中的一个或多个。
+
+#### 8.1.5. DioChannel
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | DioChannel |
+| 父容器 | DioPort |
+| 描述 | 单个 DIO 通道的配置。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | DioChannelId |
+| 父容器 | DioChannel |
+| 描述 | DIO 通道的通道 ID。该值将赋给符号名。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名） |
+| 范围 | 0 .. 4294967295 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | DioChannelEcucPartitionRef |
+| 父容器 | DioChannel |
+| 描述 | 将一个 DIO 通道映射到零个或多个 ECUC 分区。所引用的 ECUC 分区是相关 DIO 端口所映射到的 ECUC 分区的子集。 |
+| 多重性 | 0..* |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+无包含的容器。
+
+DioChannelEcucPartitionRef 所引用的 ECUC 分区应是 DioPortEcucPartitionRef 所引用的 ECUC 分区的子集。
+
+若 DioEcucPartitionRef 引用一个或多个 ECUC 分区，则 DioChannelEcucPartitionRef 的多重性应大于零，并且也应引用这些 ECUC 分区中的一个或多个。
+
+#### 8.1.6. DioChannelGroup
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | DioChannelGroup |
+| 父容器 | DioPort |
+| 描述 | DIO 通道组的定义与配置。通道组用逻辑组表示多个相邻的 DIO 通道。注意：此容器定义未显式定义符号名参数；取而代之，容器的短名将在 ECU 配置描述中用于指定该通道组的符号名。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | DioChannelGroupIdentification |
+| 父容器 | DioChannelGroup |
+| 描述 | DIO 通道组在 DIO API 中通过指向数据结构（Dio_ChannelGroupType 类型）的指针来标识。该数据结构包含通道组信息。此参数包含需插入调用模块 API 调用中的代码片段，以取得内存中保存通道组信息的变量的地址。示例值："&MyDioGroup1" 或 "&MyDioGroupArray[0]"。 |
+| 多重性 | 1 |
+| 类型 | EcucStringParamDef（为此参数生成符号名） |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | DioPortMask |
+| 父容器 | DioChannelGroup |
+| 描述 | 定义通道组位置的掩码。通道应由同一端口上的相邻位组成。数据类型取决于端口宽度。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 4294967295 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | DioPortOffset |
+| 父容器 | DioChannelGroup |
+| 描述 | 通道组在端口上的位置，从 LSB 起计。该值可由 DioPortMask 推导。计算公式 = DioPortMask 中首个置 '1' 的位的位置，从 LSB 起计。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 31 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：x；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | DioChannelGroupEcucPartitionRef |
+| 父容器 | DioChannelGroup |
+| 描述 | 将一个 DIO 通道组映射到零个或多个 ECUC 分区。所引用的 ECUC 分区是相关 DIO 端口所映射到的 ECUC 分区的子集。 |
+| 多重性 | 0..* |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+无包含的容器。
+
+DioChannelGroupEcucPartitionRef 所引用的 ECUC 分区应是 DioPortEcucPartitionRef 所引用的 ECUC 分区的子集。
+
+若 DioPortEcucPartitionRef 引用一个或多个 ECUC 分区，则 DioChannelGroupEcucPartitionRef 的多重性应大于零，并且也应引用这些 ECUC 分区中的一个或多个。
+
+#### 8.1.7. DioConfig
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | DioConfig |
+| 父容器 | Dio |
+| 描述 | 此容器包含 AUTOSAR **DIO** 模块的配置参数与子容器。 |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DioPort | 1..* | 单个 DIO 端口的配置，由通道和可能的通道组组成。注意：此容器定义未显式定义符号名参数；取而代之，容器的短名将在 ECU 配置描述中用于指定该端口的符号名。 |
+
+### 8.2. 发布信息
+
+详情请参阅 SWS_BSWGeneral 中的第 10.3 章 "Published Information"（发布信息）。
+
 <section id="wechat">
 
 <h4>微信扫一扫，获取更多及时资讯</h4>
