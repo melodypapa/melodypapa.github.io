@@ -6,7 +6,10 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 
 ## Queue
 
-- [x] dio_driver (SWS_DIODriver · R23-11 markdown · done 2026-10-24 incl. reopen for acronym reformat · commits de11d8a/493ed12/e21067f · PR #53)
+- [x] dio_driver (SWS_DIODriver · R23-11 markdown · done 2026-10-24 incl. reopen for acronym reformat · commits de11d8a/493ed12/e21067f · PR #53 · 🔁 reopen commits de11d8a/493ed12/e21067f + a5e12c2)
+  - Note: 🔁 reopen 2026-10-24 (rule-update audit): source ch.10 Configuration specification (360 lines) was deliberately omitted pre-ban; now translates as `## 8. 配置规范` per the lifted 配置规范 ban — this reopen covers ch.10 only
+  - Note: 🔁 reopen run 2026-10-24 (issue #62, commit a5e12c2): ch.10 → `## 8. 配置规范` translated (8.1 容器与配置参数 + 8.1.1 变体 + containers 8.1.2-8.1.7 Dio/DioGeneral/DioPort/DioChannel/DioChannelGroup/DioConfig with 10 param tables + 3 included-container tables + 6 partition constraints; 8.2 发布信息; IDs dropped, merged cells collapsed; DioPortOffset keeps its Link-time x — consistent with VARIANT-LINK-TIME; truncated calculationFormula reconstructed minimally — flagged). Phase A: strict build 0 WARNING; headings ## 1-8; ch.2 15:15 unchanged; no requirement IDs/links
+  - Note: 2026-10-24 rule-update audit: dio — source ch.10 Configuration specification (360 lines) deliberately omitted pre-ban → now a gap under the lifted 配置规范 ban (2026-10-24); reopen decision pending
   - Note: 2026-10-24 finished the 3.1/4.2/6.7/7.4 alignment (commits de11d8a/493ed12 · PR #53); the same-day acronym census found §2 still a GFM table (row set 15:15 identical) → reformatted as blockquotes per STANDARD.md §1
   - Note: reopen 2026-10-24 for the acronym-chapter format → finished in commit e21067f; the earlier per-article audit trail is [dio_driver.md](dio_driver.md)
   - Note: 2026-10-24 review (user named dio): source ch.1–8 checked chapter by chapter, no gaps; acronyms 15:15 in source order; `gen_glossary/gen_api_list --check` both exit 0 → no edits, no reopen. The newer R25-11 source differs structurally (7.1.2 expanded, 7.6.3 Transient Faults removed) — following a newer release needs its own reopen row
@@ -16,7 +19,10 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity (15↔15 same order; content reuses the already-verified translation, layout only)
   - [x] Step 5 — User confirmation gate (user instruction "run skill to find and fix it" authorised this run; evidence presented in the report, PR #53 could veto)
   - [x] Step 6 — TODO.md row + commit/PR (commit e21067f · PR #53)
-- [x] port_driver (SWS_PortDriver · R23-11 markdown · done 2026-10-24 · commit ee486aa · PR #53 / issue #54)
+- [x] port_driver (SWS_PortDriver · R23-11 markdown · done 2026-10-24 · commit ee486aa · PR #53 / issue #54 · 🔁 reopen commits ee486aa + e2a1e4a)
+  - Note: 🔁 reopen 2026-10-24 (rule-update audit): source ch.10 Configuration specification (424 lines) was deliberately omitted pre-ban; now translates as `## 8. 配置规范` per the lifted 配置规范 ban — this reopen covers ch.10 only
+  - Note: 🔁 reopen run 2026-10-24 (issue #62): ch.10 → `## 8. 配置规范` translated (8.1 如何阅读本章 / 8.2 容器与配置参数 (PortConfigSet→PortPin, 9 param tables incl. the 11-literal PortPinMode list) / 8.3 约束 (own Constraints section) / 8.4 发布信息; two source-truncated tables (PortVersionInfoApi, PortPinId) recovered from PDF spillover fragments — flagged). Phase A: strict build 0 WARNING; headings ## 1-8; ch.2 unchanged; no requirement IDs/links
+  - Note: 2026-10-24 rule-update audit: port — source ch.10 Configuration specification (424 lines) deliberately omitted pre-ban → now a gap; reopen decision pending
   - Note: acronym chapter was a GFM table → blockquotes (row set 7:7 verified); 4.2 "对汽车域的适用性" → "汽车域的适用性"
   - Note: 2026-10-24 Step 1 gap analysis (issue #54): new gap = §1 missing the source ch.1 mapping table (Driver / Port Pin / Channel Group, 2 rows × 4 columns); §4.2 wording and §2 format as noted; §7.6.3 "可配置接口" conflicted with STANDARD.md's "可配置的接口" (5 site articles use the former) → user decision; the rest of §3/§5/§6/§7 matches the source item by item
   - Note: user decision (2026-10-24): keep "可配置接口" in 7.6.3; STANDARD.md §2 and its decision log updated to that term
@@ -26,7 +32,10 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity (source ch.1–8 mapped section by section; ch.6/9/10/A deliberately omitted; §1 table translated 4 columns × 2 rows verbatim; ch.2 7:7 same order)
   - [x] Step 5 — User confirmation gate (2026-10-24 confirmed: Phase A/B evidence + TODO.md row; 7.6.3 decision keeps "可配置接口")
   - [x] Step 6 — TODO.md row + commit/PR (commit ee486aa · PR #53 · Closes #54)
-- [x] pwm_driver (SWS_PWMDriver · R23-11 markdown · done 2026-10-24 · commit 1b5e44b · PR #57 / issue #56)
+- [x] pwm_driver (SWS_PWMDriver · R23-11 markdown · done 2026-10-24 · commit 1b5e44b · PR #57 / issue #56 · 🔁 reopen commits 1b5e44b + d8e6e56)
+  - Note: 🔁 reopen 2026-10-24 (rule-update audit): source ch.10 Configuration specification (567 lines) was deliberately omitted pre-ban; now translates as `## 8. 配置规范` per the lifted 配置规范 ban — this reopen covers ch.10 only
+  - Note: 🔁 reopen run 2026-10-24 (issue #62): ch.10 → `## 8. 配置规范` translated (8.1-8.3 with containers Pwm/PwmGeneral/PwmPowerStateConfig/PwmChannel/PwmChannelConfigSet/PwmConfigurationOfOptApiServices, 20 param tables; truncated boolean descriptions reconstructed to standard phrasing per the garbled-text policy (PwmDevErrorDetect, PwmDutycycleUpdatedEndperiod — flagged); '--' placeholders kept verbatim; hyphenated container name normalized; rows missing from the source (PwmPowerState M/Type, PwmChannelClass full literal list) not invented — flagged). Phase A: strict build 0 WARNING; headings ## 1-8; ch.2 unchanged; no requirement IDs/links
+  - Note: 2026-10-24 rule-update audit: pwm — source ch.10 Configuration specification (567 lines) deliberately omitted pre-ban → now a gap; reopen decision pending
   - Note: acronym chapter table → blockquotes (row set 13:13 verified); 4.2 "对汽车域的适用性" → "汽车域的适用性"
   - Note: 2026-10-24 Step 1 gap analysis (issue #56): the source ch.2 has **12** data rows (6 acronyms + 6 abbreviations), not 13 — the earlier 13:13 note counted a header; §2 is still a GFM table → convert to blockquotes; §4.2 heading is a §2 forbidden variant; §7.2.1 Pwm_ChannelType wrongly carries "8..32 位" (source Range is `- -`; 8..32 bit belongs to Pwm_PeriodType); §7.2.8 Pwm_PowerStateType carries a PWM_FULL_POWER (0x00) row absent from the R23-11 table (it exists in R25-11) → user decision; §1/§3–§7 otherwise match the source section by section
   - Note: user decision (2026-10-24, issue #56): delete the §7.2.8 `PWM_FULL_POWER（0x00）` bullet — strict R23-11 alignment (the value is only defined from R25-11 on)
@@ -39,10 +48,12 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 - [ ] ocu_driver (SWS_OCUDriver · R23-11 markdown · ✅ alignment + row set)
   - Note: STANDARD.md lifted the 配置规范 ban (2026-10-24) — if the source has ch.10 Configuration specification, it translates as the optional article `## 8. 配置规范` (skill Step 5 config-spec rules); measure it in Step 1
   - Note: acronym chapter table → blockquotes, restore the MCU row (source 14 rows → article 13 entries), drop the "Term definition:" pseudo-row; 3.1 "输入文档与相关标准和规范" → "输入文件"
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-24 Step 1 (issue #61): source 2419 lines; verified §2 = 13 data rows (9 acronyms incl. the duplicate MCU + 4 terms; "Term definition:" is a table header); §4 finding — article had 4.1 假设/4.2 限制/4.3 对汽车领域的适用性 vs skeleton 4.1 限制/4.2 汽车域的适用性 (no aligned precedent: adc/port/pwm/dio sources lack Assumptions); ch.10 = 810 lines, 32 SWS Item tables, 6 containers + 10.3 Published Information
+  - Note: DECISION TO RATIFY at Step 5: source 4.1 Assumptions folded into the 约束和假设 chapter intro (bolded lead-ins 时钟/资源/计数和比较, both figures kept); 限制→4.1, 适用性→4.2 汽车域的适用性 — alternative would need a STANDARD.md amendment for a third §4 subsection
+  - [x] Step 1 — Source resolution + gap analysis (issue #61)
+  - [x] Step 2 — In-place translation/completion (§3.1 renamed; §2 → 13 blockquote entries in source order, duplicate MCU restored, 术语定义 lead-in kept; §4 restructured; new §8. 配置规范: 10.1 + 8.1.1-8.1.3 legend tables, containers 8.2.1-8.2.6 with 26 parameter tables + 3 included-container tables, 8.3 发布信息; [SWS_*/ECUC_*] IDs dropped, merged cells collapsed, config-class rows collapsed per class with applicability marks)
+  - [x] Step 3 — Phase A mechanical checks (strict build 0 WARNING; headings exactly ## 1-8 with ## 8. 配置规范; ch.2 0 table rows, 13 term lines == 13 source rows; no h1/requirement IDs; renamed headings have no inbound anchor links; glossary regenerated + --check 0; api --check 0; check 8 link audit: article has zero links, images only)
+  - [x] Step 4 — Phase B coverage map + fidelity (source ch.1-8 ↔ §1-§7 pre-existing ✅ untouched; ch.9 时序图 omitted (forbidden); ch.10 → §8 mapped section by section incl. all 10.2.x containers and 10.3; appendices A/B omitted (forbidden); UML-dump/figure-caption PDF garbage omitted; OcuMaxCounterValue's truncated source sentence reconstructed minimally — flagged for gate; OcuChannel param order kept as source (ECUC_00160 before 00159))
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] icu_driver (SWS_ICUDriver · R23-11 markdown · 🔶 alignment)
