@@ -1,27 +1,27 @@
-# Sync todo: Group security — 信息安全分区（整区新建）
+# Sync todo: Group security — security section (new section)
 
-基准：R23-11 · 生成：2026-10-24 · 队列序 = 行序
-（恢复 = 第一个仍为 `[ ]` 的行；全部 `[x]` = 批次完成）
-步骤图例：① 源定位+差距分析 · ② 就地翻译/补齐 · ③ Phase A 机械检查 · ④ Phase B 证据 · ⑤ 用户确认门 · ⑥ TODO.md 行+提交
-> 本批次需先建分区落地页 `docs/autosar/security/index.md`（STANDARD.md §6 格式）并注册 nav — 并入首行 Step 2。
+Base: R23-11 · Generated: 2026-10-24 · Queue order = row order
+(Resume = the first row still `[ ]`; all `[x]` = batch complete)
+Steps: ① source resolution + gap analysis · ② in-place translation/completion · ③ Phase A mechanical checks · ④ Phase B evidence · ⑤ user confirmation gate · ⑥ TODO.md row + commit
+> This batch must first create the section landing page `docs/autosar/security/index.md` (STANDARD.md §6 format) and register it in the nav — folded into the first row's Step 2.
 
 ## Queue
 
-- [ ] firewall（SWS_Firewall · R23-11 markdown · ❌ 新文章）
-  - Note: 首行运行同建 `security/` 落地页 + nav 注册
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] idsm（SWS_IntrusionDetectionSystemManager · R23-11 markdown · ❌ 新文章，缩写 IdsM）
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] firewall (SWS_Firewall · R23-11 markdown · ❌ new article)
+  - Note: the first run also creates the `security/` landing page + nav registration
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] idsm (SWS_IntrusionDetectionSystemManager · R23-11 markdown · ❌ new article, short name IdsM)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
 
-## Not queued（有意跳过）
-- （无）
+## Not queued (deliberately skipped)
+- (none)

@@ -1,42 +1,42 @@
-# Sync todo: Group general — 通用/基础规范
+# Sync todo: Group general — general/base specifications
 
-基准：R23-11 · 生成：2026-10-24 · 队列序 = 行序
-（恢复 = 第一个仍为 `[ ]` 的行；全部 `[x]` = 批次完成）
-步骤图例：① 源定位+差距分析 · ② 就地翻译/补齐 · ③ Phase A 机械检查 · ④ Phase B 证据 · ⑤ 用户确认门 · ⑥ TODO.md 行+提交
+Base: R23-11 · Generated: 2026-10-24 · Queue order = row order
+(Resume = the first row still `[ ]`; all `[x]` = batch complete)
+Steps: ① source resolution + gap analysis · ② in-place translation/completion · ③ Phase A mechanical checks · ④ Phase B evidence · ⑤ user confirmation gate · ⑥ TODO.md row + commit
 
 ## Queue
 
-- [ ] platform_types（SWS_StandardTypes · R23-11 markdown · ⛔ 空壳全译 + 修标题）
-  - Note: 空壳（9 行）全量翻译；**front-matter 标题误写为 "ECU State Manager"，nav 标签与真 EcuM 重复 — 修复须同改 `mkdocs.yml` nav**（AGENTS.md 已记）
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐（标题 + nav 同改）
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] bsw_general（SWS_BSWGeneral · R23-11 markdown · ❌ 新文章）
-  - Note: 基础软件模块通用规范 — 所有模块文章的 [2] 号输入文件，全局基础，宜早译；目录 `general/bsw_general/`（命名按 mapping.md 小写蛇形）
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] platform_types_2（SWS_PlatformTypes · R23-11 markdown · ❌ 新文章）
-  - Note: 与 SWS_StandardTypes 是两份不同文档（TODO.md 已注明）；目录名与 platform_types 区分（建议 `platform_types_std/` 或以 Step 1 定，必要时提案给用户）
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] communication_stack_types（SWS_CommunicationStackTypes · R23-11 markdown · ❌ 新文章）
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] platform_types (SWS_StandardTypes · R23-11 markdown · ⛔ stub — full translation + title fix)
+  - Note: 9-line stub, translate in full; **the front-matter title is wrongly "ECU State Manager" and the nav label collides with the real EcuM — the fix must also change the `mkdocs.yml` nav** (recorded in AGENTS.md)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion (title + nav changed together)
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] bsw_general (SWS_BSWGeneral · R23-11 markdown · ❌ new article)
+  - Note: general specification of Basic Software modules — input document [2] of every module article, global foundation, worth translating early; directory `general/bsw_general/` (naming per mapping.md, lowercase snake_case)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] platform_types_2 (SWS_PlatformTypes · R23-11 markdown · ❌ new article)
+  - Note: a different document from SWS_StandardTypes (noted in TODO.md); directory must not collide with platform_types (suggest `platform_types_std/`, or decide in Step 1 and propose to the user if unclear)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] communication_stack_types (SWS_CommunicationStackTypes · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
 
-## Not queued（有意跳过）
-- （无）
+## Not queued (deliberately skipped)
+- (none)

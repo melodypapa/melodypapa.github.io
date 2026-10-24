@@ -1,233 +1,233 @@
-# Sync todo: Group communication- — 通信分区 — 现有文章收尾 + 通信主干
+# Sync todo: Group communication — communication section — existing articles + backbone
 
-基准：R23-11 · 生成：2026-10-24 · 队列序 = 行序
-（恢复 = 第一个仍为 `[ ]` 的行；全部 `[x]` = 批次完成）
-步骤图例：① 源定位+差距分析 · ② 就地翻译/补齐 · ③ Phase A 机械检查 · ④ Phase B 证据 · ⑤ 用户确认门 · ⑥ TODO.md 行+提交
+Base: R23-11 · Generated: 2026-10-24 · Queue order = row order
+(Resume = the first row still `[ ]`; all `[x]` = batch complete)
+Steps: ① source resolution + gap analysis · ② in-place translation/completion · ③ Phase A mechanical checks · ④ Phase B evidence · ⑤ user confirmation gate · ⑥ TODO.md row + commit
 
 ## Queue
 
-"现有文章"各行先补齐/对齐（缺口见行 Note），再译主干 9 篇。已有落地页 communication/。
+The "existing article" rows are completed/aligned first (gaps in each row's Note), then the 9 backbone documents are translated. The landing page `communication/` already exists.
 
-- [ ] can_network_management（SWS_CANNetworkManagement · R23-11 markdown · ✅ 仅余对齐）
-  - Note: 7.3「周期函数」→「调度函数」
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] udp_network_management（SWS_UDPNetworkManagement · R23-11 markdown · ✅ 对齐）
-  - Note: 微信页脚 `##` → `<section id="wechat">`+`<h4>`；缩略语章表格 → 引用块并补行集（源 26 → 文 12）
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] can_driver（SWS_CANDriver · R23-11 markdown · 🔶 对齐）
-  - Note: 专题章（术语/优先级反转/CAN 硬件单元）去留 — 用户决策项；缩略语引用块 ✓
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] can_transceiver_driver（SWS_CANTransceiverDriver · R23-11 markdown · 🔶 对齐）
-  - Note: 第 1 章「介绍」→「简介和功能概述」
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] ethernet_driver（SWS_EthernetDriver · R23-11 markdown · 🔶 对齐）
-  - Note: 旧译名统一；4.2「对汽车领域的适用性」→「汽车域的适用性」
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] lin_driver（SWS_LINDriver · R23-11 markdown · 🔶 对齐）
-  - Note: 旧译名统一；缩略语章表格 → 引用块并补行集（源 40 → 文 26，缺 14 行）
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] can_interface（SWS_CANInterface · R23-11 markdown · ⚠️ 补 API 章）
-  - Note: "6 篇只缺 API"之一；4.2「对汽车领域的适用性」→「汽车域的适用性」
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] pdu_router（SWS_PDURouter · R23-11 markdown · ⚠️ 补 API 章）
-  - Note: "6 篇只缺 API"之一
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] ethernet_interface（SWS_EthernetInterface · R23-11 markdown · ⚠️ 补 API 章）
-  - Note: "6 篇只缺 API"之一
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] lin_interface（SWS_LINInterface · R23-11 markdown · ⚠️ 补 API 章）
-  - Note: "6 篇只缺 API"之一
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] com_based_transformer（SWS_COMBasedTransformer · R23-11 markdown · ⚠️ 补齐）
-  - Note: 缺缩略语/依赖章；4.2「基于COM的转换器规范」小节结构以源为准核对；缺「约束和假设」（TODO 已记）
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] e2e_transformer（SWS_E2ETransformer · R23-11 markdown · ⚠️ 补齐）
-  - Note: 缺缩略语/约束/API 章
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] data_distribution（SWS_DataDistributionService · R23-11 markdown · ⚠️ 补 API 章）
-  - Note: 目录 `data_distribution service/` 含空格 — 改名 `data_distribution/` 需同改 nav（同一提交）
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] sec_oc（SWS_SecureOnboardCommunication · R23-11 markdown · ⚠️ 补齐）
-  - Note: 缺相关文档/API 章；第 3/4 章顺序对调（约束 before 依赖）需按源归位
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] soad（SWS_SocketAdaptor · R23-11 markdown · ⚠️ 补齐 + 改布局）
-  - Note: 缺缩略语；目录 `SoAd/` 大写、文件 SoAd.md 非 index.md — 改 index.md 布局需同改 nav
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] mirror（SWS_BusMirroring · R23-11 markdown · ⚠️ 补齐 + 改布局）
-  - Note: 缺缩略语/API；文件 mirror.md 非 index.md — 改布局需同改 nav
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] ethernet_switch_driver（SWS_EthernetSwitchDriver · R23-11 markdown · ⛔ 空壳全译）
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] service_discovery（SWS_ServiceDiscovery · R23-11 markdown · ⛔ 空壳全译）
-  - Note: 缩写 Sd
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] can_network_management (SWS_CANNetworkManagement · R23-11 markdown · ✅ alignment only)
+  - Note: 7.3 "周期函数" → "调度函数"
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] udp_network_management (SWS_UDPNetworkManagement · R23-11 markdown · ✅ alignment)
+  - Note: WeChat footer `##` → `<section id="wechat">`+`<h4>`; acronym chapter table → blockquotes and restore the row set (source 26 → article 12)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] can_driver (SWS_CANDriver · R23-11 markdown · 🔶 alignment)
+  - Note: bespoke chapters (术语 / 优先级反转 / CAN 硬件单元) — keep-or-drop is a user decision; acronym blockquotes ✓
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] can_transceiver_driver (SWS_CANTransceiverDriver · R23-11 markdown · 🔶 alignment)
+  - Note: ch.1 "介绍" → "简介和功能概述"
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] ethernet_driver (SWS_EthernetDriver · R23-11 markdown · 🔶 alignment)
+  - Note: unify legacy heading terms; 4.2 "对汽车领域的适用性" → "汽车域的适用性"
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] lin_driver (SWS_LINDriver · R23-11 markdown · 🔶 alignment)
+  - Note: unify legacy heading terms; acronym chapter table → blockquotes and restore the row set (source 40 → article 26, 14 rows missing)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] can_interface (SWS_CANInterface · R23-11 markdown · ⚠️ missing API chapter)
+  - Note: one of the "6 articles missing only the API chapter"; 4.2 "对汽车领域的适用性" → "汽车域的适用性"
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] pdu_router (SWS_PDURouter · R23-11 markdown · ⚠️ missing API chapter)
+  - Note: one of the "6 articles missing only the API chapter"
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] ethernet_interface (SWS_EthernetInterface · R23-11 markdown · ⚠️ missing API chapter)
+  - Note: one of the "6 articles missing only the API chapter"
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] lin_interface (SWS_LINInterface · R23-11 markdown · ⚠️ missing API chapter)
+  - Note: one of the "6 articles missing only the API chapter"
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] com_based_transformer (SWS_COMBasedTransformer · R23-11 markdown · ⚠️ gaps)
+  - Note: missing acronym/dependency chapters; the 4.2 subsection structure ("基于COM的转换器规范") must be checked against the source; missing "约束和假设" (tracked in TODO.md)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] e2e_transformer (SWS_E2ETransformer · R23-11 markdown · ⚠️ gaps)
+  - Note: missing acronym/constraints/API chapters
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] data_distribution (SWS_DataDistributionService · R23-11 markdown · ⚠️ missing API chapter)
+  - Note: directory `data_distribution service/` contains a space — renaming to `data_distribution/` requires the nav change in the same commit
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] sec_oc (SWS_SecureOnboardCommunication · R23-11 markdown · ⚠️ gaps)
+  - Note: missing related-documentation/API chapters; ch.3/4 are swapped (constraints before dependencies) — restore the source order
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] soad (SWS_SocketAdaptor · R23-11 markdown · ⚠️ gaps + layout change)
+  - Note: missing acronyms; directory `SoAd/` is capitalised and the file is SoAd.md, not index.md — switching to the index.md layout requires the nav change in the same commit
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] mirror (SWS_BusMirroring · R23-11 markdown · ⚠️ gaps + layout change)
+  - Note: missing acronyms/API; the file is mirror.md, not index.md — switching layout requires the nav change in the same commit
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] ethernet_switch_driver (SWS_EthernetSwitchDriver · R23-11 markdown · ⛔ stub — full translation)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] service_discovery (SWS_ServiceDiscovery · R23-11 markdown · ⛔ stub — full translation)
+  - Note: short name Sd
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
 
-- [ ] com（SWS_COM · R23-11 markdown · ❌ 新文章，缩写 Com）
-  - Note: 通信主干 #1
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] cansm（SWS_CANStateManager · R23-11 markdown · ❌ 新文章，缩写 CanSM）
-  - Note: 通信主干
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] cantp（SWS_CANTransportLayer · R23-11 markdown · ❌ 新文章，缩写 CanTp）
-  - Note: 通信主干
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] tcpip（SWS_TcpIp · R23-11 markdown · ❌ 新文章，缩写 TcpIp）
-  - Note: 通信主干
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] nm（SWS_NetworkManagementInterface · R23-11 markdown · ❌ 新文章，缩写 Nm）
-  - Note: 通信主干
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] ethsm（SWS_EthernetStateManager · R23-11 markdown · ❌ 新文章，缩写 EthSM）
-  - Note: 通信主干
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] ipdum（SWS_IPDUMultiplexer · R23-11 markdown · ❌ 新文章，缩写 IpduM）
-  - Note: 通信主干
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] someipxf（SWS_SOMEIPTransformer · R23-11 markdown · ❌ 新文章，缩写 SomeIpXf）
-  - Note: 通信主干
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] someiptp（SWS_SOMEIPTransportProtocol · R23-11 markdown · ❌ 新文章，缩写 SomeIpTp）
-  - Note: 通信主干
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] com (SWS_COM · R23-11 markdown · ❌ new article, short name Com)
+  - Note: backbone #1
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] cansm (SWS_CANStateManager · R23-11 markdown · ❌ new article, short name CanSM)
+  - Note: backbone
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] cantp (SWS_CANTransportLayer · R23-11 markdown · ❌ new article, short name CanTp)
+  - Note: backbone
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] tcpip (SWS_TcpIp · R23-11 markdown · ❌ new article, short name TcpIp)
+  - Note: backbone
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] nm (SWS_NetworkManagementInterface · R23-11 markdown · ❌ new article, short name Nm)
+  - Note: backbone
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] ethsm (SWS_EthernetStateManager · R23-11 markdown · ❌ new article, short name EthSM)
+  - Note: backbone
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] ipdum (SWS_IPDUMultiplexer · R23-11 markdown · ❌ new article, short name IpduM)
+  - Note: backbone
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] someipxf (SWS_SOMEIPTransformer · R23-11 markdown · ❌ new article, short name SomeIpXf)
+  - Note: backbone
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] someiptp (SWS_SOMEIPTransportProtocol · R23-11 markdown · ❌ new article, short name SomeIpTp)
+  - Note: backbone
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
 
-## Not queued（有意跳过）
-- 📖 fvm/fvm.md — SecOC 附录 A 派生专题（无独立规范）
-- 📖 can_driver/full_can_vs_basic_can.md — 专题子页
-- 📖 can_network_management/r21_11/ — R21-11 历史快照
-> 主干 9 篇译序建议：Com → CanTp → CanSM → Nm → TcpIp → EthSM → IpduM → SomeIpXf → SomeIpTp
-> （CanSM/Nm/EthSM 依赖 CanIf/CanNm 等已译文档的术语，源文档相互引用多，遇到跨文档引用先核对已译文章用词。）
+## Not queued (deliberately skipped)
+- 📖 fvm/fvm.md — topic article derived from SecOC appendix A (no standalone specification)
+- 📖 can_driver/full_can_vs_basic_can.md — topic sub-page
+- 📖 can_network_management/r21_11/ — R21-11 historical snapshot
+> Suggested backbone order: Com → CanTp → CanSM → Nm → TcpIp → EthSM → IpduM → SomeIpXf → SomeIpTp
+> (CanSM/Nm/EthSM depend on terminology already translated in CanIf/CanNm; the sources cross-reference heavily — check existing article wording before translating a cross-reference.)

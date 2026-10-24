@@ -1,41 +1,41 @@
-# Sync todo: Group globaltime — 全局时间簇（整区新建）
+# Sync todo: Group globaltime — global time cluster (new section)
 
-基准：R23-11 · 生成：2026-10-24 · 队列序 = 行序
-（恢复 = 第一个仍为 `[ ]` 的行；全部 `[x]` = 批次完成）
-步骤图例：① 源定位+差距分析 · ② 就地翻译/补齐 · ③ Phase A 机械检查 · ④ Phase B 证据 · ⑤ 用户确认门 · ⑥ TODO.md 行+提交
-> 本批次需先建分区落地页 `docs/autosar/globaltime/index.md`（STANDARD.md §6 格式）并注册 nav — 并入首行 Step 2。
+Base: R23-11 · Generated: 2026-10-24 · Queue order = row order
+(Resume = the first row still `[ ]`; all `[x]` = batch complete)
+Steps: ① source resolution + gap analysis · ② in-place translation/completion · ③ Phase A mechanical checks · ④ Phase B evidence · ⑤ user confirmation gate · ⑥ TODO.md row + commit
+> This batch must first create the section landing page `docs/autosar/globaltime/index.md` (STANDARD.md §6 format) and register it in the nav — folded into the first row's Step 2.
 
 ## Queue
 
-- [ ] stbm（SWS_SynchronizedTimeBaseManager · R23-11 markdown · ❌ 新文章，缩写 StbM）
-  - Note: 首行运行同建 `globaltime/` 落地页 + nav 注册
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] can_tsyn（SWS_TimeSyncOverCAN · R23-11 markdown · ❌ 新文章，缩写 CanTSyn）
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] eth_tsyn（SWS_TimeSyncOverEthernet · R23-11 markdown · ❌ 新文章，缩写 EthTSyn）
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] fr_tsyn（SWS_TimeSyncOverFlexRay · R23-11 markdown · ❌ 新文章，缩写 FrTSyn）
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] stbm (SWS_SynchronizedTimeBaseManager · R23-11 markdown · ❌ new article, short name StbM)
+  - Note: the first run also creates the `globaltime/` landing page + nav registration
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] can_tsyn (SWS_TimeSyncOverCAN · R23-11 markdown · ❌ new article, short name CanTSyn)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] eth_tsyn (SWS_TimeSyncOverEthernet · R23-11 markdown · ❌ new article, short name EthTSyn)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] fr_tsyn (SWS_TimeSyncOverFlexRay · R23-11 markdown · ❌ new article, short name FrTSyn)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
 
-## Not queued（有意跳过）
-- （无）
+## Not queued (deliberately skipped)
+- (none)

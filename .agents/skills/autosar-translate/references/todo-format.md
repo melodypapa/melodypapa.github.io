@@ -17,8 +17,8 @@ in the same PR as the article.
 
 ```
 docs/autosar/sync-todo/
-  index.md            # 批次顺序 + 计数 + 恢复规则
-  Group-io.md         # 每分区/主题一个批次文件
+  index.md            # batch order + counts + resume rules
+  Group-io.md         # one batch file per section/topic
   Group-general.md
   ...
   Group-exp.md
@@ -32,36 +32,46 @@ decisions already in the row's Notes.
 ## Row format
 
 ```markdown
-- [ ] <article-dir-or-slug>（SWS_<Name> · R23-11 markdown · <状态/缺口>）
+- [ ] <article-dir-or-slug> (<SWS_Name> · R23-11 markdown · <status/gap>)
   - Note: <known gaps — from TODO.md row + prior audits; run findings appended>
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
 ```
 
-- The parenthetical carries the short fixed fields only: 规范名 · 源 · 状态
-  标签（✅ 仅余对齐 / ⚠️ 补齐 / ⛔ 空壳全译 / ❌ 新文章 / 📖 豁免骨架）。
+- The parenthetical carries the short fixed fields only: specification name ·
+  source · status tag (✅ alignment only / ⚠️ gaps / ⛔ stub — full
+  translation / ❌ new article / 📖 skeleton-exempt).
 - **Findings, counts and decisions go on `- Note:` bullets under the row**,
   never on the checkbox line — long markup-heavy lines break the exact-line
   toggle (the py-armodel Group 4 incident). A line past ~200 characters is a
   violation to split before touching the row.
 - One verifiable action per step; **tick in the file the moment a step
   passes** — never batch at the end. A legitimately N/A step is ticked with
-  the reason (`- [x] Step 4 — … (N/A: 纯对齐无新增内容)`), not deleted.
+  the reason (`- [x] Step 4 — … (N/A: pure alignment, no new content)`), not
+  deleted.
 - Step 6's note records the commit hash and PR link. The row flips `[ ]` →
   `[x]` only then — **no `[x]` before the commit exists** (py-armodel Rule
   0017.2).
-- **重开**: to redo a finished row (new release, drift, user request), reset
-  it to `[ ]` with `- Note: 重开 <原因> <日期>` — never delete the finished
-  state.
-- **Not queued** section per file records deliberate exclusions (豁免 📖/📄
-  articles, 专题/历史快照) so a resumed session never re-flags them.
+- **Reopen**: to redo a finished row (new release, drift, user request), reset
+  it to `[ ]` with `- Note: reopen <reason> <date>` — never delete the
+  finished state.
+- The **Not queued** section per file records deliberate exclusions (exempt 📖/📄
+  articles, topic articles/historical snapshots) so a resumed session never
+  re-flags them.
 - **Never work around a failed row edit** with a side section ("已确认",
-  "批量确认") elsewhere in the file — fix the row shape (split the long
-  line), then flip the row in place.
+  "batch confirmation") elsewhere in the file — fix the row shape (split the
+  long line), then flip the row in place.
+
+## Language
+
+Queue files are written in **English** (headings, prose, Notes, step labels).
+Quoted Chinese strings are allowed only when they name a Chinese article
+heading or a site-canonical term — e.g. `4.2 "对汽车域的适用性" → "汽车域的适用性"` —
+because those strings are the article content, not queue prose.
 
 ## Historical format
 

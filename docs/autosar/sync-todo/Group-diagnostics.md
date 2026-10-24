@@ -1,34 +1,34 @@
-# Sync todo: Group diagnostics — 诊断分区
+# Sync todo: Group diagnostics — diagnostics section
 
-基准：R23-11 · 生成：2026-10-24 · 队列序 = 行序
-（恢复 = 第一个仍为 `[ ]` 的行；全部 `[x]` = 批次完成）
-步骤图例：① 源定位+差距分析 · ② 就地翻译/补齐 · ③ Phase A 机械检查 · ④ Phase B 证据 · ⑤ 用户确认门 · ⑥ TODO.md 行+提交
+Base: R23-11 · Generated: 2026-10-24 · Queue order = row order
+(Resume = the first row still `[ ]`; all `[x]` = batch complete)
+Steps: ① source resolution + gap analysis · ② in-place translation/completion · ③ Phase A mechanical checks · ④ Phase B evidence · ⑤ user confirmation gate · ⑥ TODO.md row + commit
 
 ## Queue
 
-- [ ] diagnostic_event_manager（SWS_DiagnosticEventManager · R23-11 markdown · ⚠️ 补齐）
-  - Note: 缺约束/依赖/API 章；有未编号标题断档（dem 编号断档，TODO 待办已记）
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] j1939dcm（SWS_SAEJ1939DiagnosticCommunicationManager · R23-11 markdown · ❌ 新文章）
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
-- [ ] diagnostic_communication_manager（SWS_DiagnosticCommunicationManager · R23-11 markdown · ⚠️ 源 2.4 万行，巨型殿后）
-  - Note: 现仅简介+缩略语；按 SKILL.md Step 3 先呈分章计划（建议按 7 章骨架分多次运行）
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐
-  - [ ] Step 3 — Phase A 机械检查
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
-  - [ ] Step 5 — 用户确认门
-  - [ ] Step 6 — TODO.md 行 + 提交/PR
+- [ ] diagnostic_event_manager (SWS_DiagnosticEventManager · R23-11 markdown · ⚠️ gaps)
+  - Note: missing constraints/dependencies/API chapters; unnumbered heading break (dem numbering gap, already tracked in TODO.md)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] j1939dcm (SWS_SAEJ1939DiagnosticCommunicationManager · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] diagnostic_communication_manager (SWS_DiagnosticCommunicationManager · R23-11 markdown · ⚠️ 24k-line source, giant — last)
+  - Note: currently only the introduction + acronyms; present a chapter-by-chapter plan first per SKILL.md Step 3 (suggest splitting the 7-chapter skeleton across several runs)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
 
-## Not queued（有意跳过）
-- （无）
+## Not queued (deliberately skipped)
+- (none)
