@@ -13,10 +13,10 @@
 - [ ] 其余 11 篇 ⚠️ 补齐各自缺失章节（com_based_transformer、data_distribution、e2e_transformer、sec_oc、SoAd、mirror、dem、iohwab、fee、memory_access、dcm）
 - [ ] 4 篇 ⛔ 空壳全量翻译：ethernet_switch_driver、service_discovery、memory_mapping、platform_types（platform_types 需同修 front-matter 标题与 nav 标签）
 - [ ] 12 篇 🔶 对齐 Type A：icu/iohwab 删「时序图」章；flash_driver/time_service 删「配置规范」章；nvram 删「需求追踪」章并改「功能说明」；can_driver 专题章去留决策；其余旧译名统一为 STANDARD.md 用词
-- [ ] IO 分区 ✅ 文章标题用词对齐（DIO/Port 已于 2026-10-24 完成，同类偏差仍在）：pwm 4.2「对汽车域的适用性」、adc/icu 4.2「适用车型域」→「汽车域的适用性」；ocu 3.1「输入文档与相关标准和规范」→「输入文件」
+- [ ] IO 分区 ✅ 文章标题用词对齐（DIO/Port/PWM 已于 2026-10-24 完成，同类偏差仍在）：adc/icu 4.2「适用车型域」→「汽车域的适用性」；ocu 3.1「输入文档与相关标准和规范」→「输入文件」
 - [ ] 4.2「适用于汽车领域」→「汽车域的适用性」（STANDARD.md 2026-10-24 定名）：bswm、ecu_state_manager、crypto_driver、crypto_service_manager、memory_access、data_distribution；「对汽车领域的适用性」：ethernet_driver、can_interface；「汽车领域的适用性」：nvram_manager
 - [ ] *Scheduled functions* 统一为「调度函数」（STANDARD.md 2026-10-24 定名）：bswm 7.3 / can_network_management 7.3「周期函数」、crypto_service_manager 7.12「Scheduled 函数」
-- [ ] 缩略语章统一为「粗体术语 + 引用块」+ 行集对齐（STANDARD.md §1，2026-10-24 普查 20:6）：格式 — dio/port ✅（2026-10-24 改排）/pwm/ocu/lin_driver/udp_network_management 4 篇现为 GFM 表格；行集（对照 R23-11 源逐行核对）— adc 补回 API/HW/SW、恢复 DEM→DET 源序、Conversion Mode 合回一条（18 行→16 条），ocu 补 MCU 行（14→13），lin_driver 缺 14 行（40→26），udp_network_management 缺 14 行（26→12）；icu 已核对一致（12:12）
+- [ ] 缩略语章统一为「粗体术语 + 引用块」+ 行集对齐（STANDARD.md §1，2026-10-24 普查 21:5）：格式 — dio/port/pwm ✅（2026-10-24 改排）；ocu/lin_driver/udp_network_management 3 篇现为 GFM 表格；行集（对照 R23-11 源逐行核对）— adc 补回 API/HW/SW、恢复 DEM→DET 源序、Conversion Mode 合回一条（18 行→16 条），ocu 补 MCU 行（14→13），lin_driver 缺 14 行（40→26），udp_network_management 缺 14 行（26→12）；icu 已核对一致（12:12）
 - [ ] 卫生修复：udp_network_management 微信页脚改 `<h4>`；dem 编号断档；`data_distribution service` 目录改名去空格；SoAd/mirror 改 index.md 布局；`timimg_extension/indx.md` 拼写（需同改 nav）
 
 **补广（新文章）**
@@ -94,7 +94,7 @@
 - ✅ [DIO 驱动](io/dio_driver/) — SWS_DIODriver（2026-10-24 对齐用词 3.1/4.2 + 缩略语章改排引用块；内容与 R23-11 源逐章一致）
 - ✅ [OCU 驱动](io/ocu_driver/) — SWS_OCUDriver（待对齐用词：3.1「输入文档与相关标准和规范」）
 - ✅ [Port 驱动](io/port_driver/) — SWS_PortDriver（2026-10-24：补译源 ch.1 映射表、§2 缩略语改排引用块、4.2「汽车域的适用性」；内容与 R23-11 源逐章一致）
-- ✅ [PWM 驱动](io/pwm_driver/) — SWS_PWMDriver（待对齐用词：4.2「对汽车域的适用性」）
+- ✅ [PWM 驱动](io/pwm_driver/) — SWS_PWMDriver（2026-10-24：缩略语章改排引用块（12:12 源序）、4.2「汽车域的适用性」、删 §7.2.8 源表外的 PWM_FULL_POWER（0x00）行（用户决策 #56）；内容与 R23-11 源逐章一致）
 - 🔶 [ICU 驱动](io/icu_driver/) — SWS_ICUDriver（含禁止章"时序图"；待对齐用词：4.2「适用车型域」）
 - ⚠️ [I/O 硬件抽象](io/iohwab/) — SWS_IOHardwareAbstraction（缺约束和假设；含禁止章"时序图"）
 

@@ -18,27 +18,41 @@ release: R23-11
 
 **AUTOSAR**术语表中未包含的局部作用域的缩略语和缩写，必须出现在局部术语表中。
 
-缩略语：
+**PWM Channel**
+> 链接到硬件**PWM**的数字标识符。
 
-| 缩略语 | 描述 |
-|---|---|
-| PWM Channel | 链接到硬件**PWM**的数字标识符。 |
-| PWM Output State | 定义**PWM**信号的输出状态。可以是：高、低。 |
-| PWM Idle State | 空闲状态表示调用**Pwm_SetOutputToIdle**或**Pwm_DeInit**后**PWM**通道的输出状态。 |
-| PWM Polarity | 定义每个**PWM**通道的起始输出状态。 |
-| PWM Duty cycle | 定义与周期相关的起始电平（可以为高或低）的百分比。 |
-| PWM period | 定义**PWM**信号的周期。 |
+**PWM Output State**
+> 定义**PWM**信号的输出状态。可以是：高、低。
 
-缩写：
+**PWM Idle State**
+> 空闲状态表示调用**Pwm_SetOutputToIdle**或**Pwm_DeInit**后**PWM**通道的输出状态。
 
-| 缩写 | 描述 |
-|---|---|
-| PWM | 脉冲宽度调制（Pulse Width Modulation）。 |
-| DEM | 诊断事件管理器（Diagnostic Event Manager）。 |
-| DET | 默认错误跟踪器（Default Error Tracer）。 |
-| MCU | 微控制器单元（Microcontroller Unit）。 |
-| PLL | 锁相环（Phase Locked Loop）。 |
-| ISR | 中断服务例程（Interrupt Service Routine）。 |
+**PWM Polarity**
+> 定义每个**PWM**通道的起始输出状态。
+
+**PWM Duty cycle**
+> 定义与周期相关的起始电平（可以为高或低）的百分比。
+
+**PWM period**
+> 定义**PWM**信号的周期。
+
+**PWM**
+> 脉冲宽度调制（**Pulse Width Modulation**）
+
+**DEM**
+> 诊断事件管理器（**Diagnostic Event Manager**）
+
+**DET**
+> 默认错误跟踪器（**Default Error Tracer**）
+
+**MCU**
+> 微控制器单元（**Microcontroller Unit**）
+
+**PLL**
+> 锁相环（**Phase Locked Loop**）
+
+**ISR**
+> 中断服务例程（**Interrupt Service Routine**）
 
 ## 3. 相关文档
 
@@ -85,7 +99,7 @@ AUTOSAR_CP_SWS_BSWGeneral.pdf
 
 电源状态控制**API**只有在**MCAL**驱动程序拥有完整的底层**HW**外设（即该**HW**外设不被其他**MCAL**模块访问）时才能实现。
 
-### 4.2. 对汽车域的适用性
+### 4.2. 汽车域的适用性
 
 无限制。
 
@@ -109,7 +123,7 @@ AUTOSAR_CP_SWS_BSWGeneral.pdf
 
 #### 5.1.2. 头文件结构
 
-**Pwm.c**应包含**Pwm.h**、**Det.h**和。
+**Pwm.c**应包含**Pwm.h**和**Det.h**。
 
 **Pwm_Irq.c**应包含**Pwm.h**。
 
@@ -261,7 +275,7 @@ AbsoluteDutyCycle = ((uint32)AbsolutePeriodTime * RelativeDutyCycle) >> 15;
 
 #### 7.2.1. Pwm_ChannelType
 
-类型，派生自 uint。范围为：8..32 位 —— 这是实现特定的，但并非所有值在该类型内都有效。应选择此类型以在特定微控制器平台上具有最高效的实现。**PWM**通道的数字标识符。可通过**Pwm.h**获得。
+类型，派生自 uint。范围为：这是实现特定的，但并非所有值在该类型内都有效。应选择此类型以在特定微控制器平台上具有最高效的实现。**PWM**通道的数字标识符。可通过**Pwm.h**获得。
 
 #### 7.2.2. Pwm_PeriodType
 
@@ -318,7 +332,6 @@ AbsoluteDutyCycle = ((uint32)AbsolutePeriodTime * RelativeDutyCycle) >> 15;
 枚举类型，取值范围：
 
 * 1..255 —— 功耗递减的电源模式。
-* **PWM_FULL_POWER**（0x00）：全功率。
 
 当前激活或设置为目标电源状态的电源状态。可通过**Pwm.h**获得。
 

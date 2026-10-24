@@ -4,7 +4,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 本页汇总各 AUTOSAR 模块文章第 2 章「缩略语」中的全部术语，按字母排序，便于查找。**由脚本自动生成，请勿手工编辑**——修改应在对应文章的第 2 章进行，然后重新生成（`python .agents/skills/autosar-translate/scripts/gen_glossary.py`）。同一术语在不同模块中的释义若有差异，分条列出并标注来源。
 
-共 **257** 个术语，来自 **24** 篇文章。
+共 **256** 个术语，来自 **24** 篇文章。
 
 ## A
 
@@ -513,7 +513,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 两种可能的状态：**LOW**/**HIGH** — 来源：[port_driver](io/port_driver/index.md)（SWS_PortDriver · R23-11）
 
 **PLL**
-> 锁相环（Phase Locked Loop）。 — 来源：[pwm_driver](io/pwm_driver/index.md)（SWS_PWMDriver · R23-11）
+> 锁相环（**Phase Locked Loop**） — 来源：[pwm_driver](io/pwm_driver/index.md)（SWS_PWMDriver · R23-11）
 
 **PNC**
 > 部分网络集群（**Partial Network Cluster**） — 来源：[can_network_management](communication/can_network_management/index.md)（SWS_CANNetworkManagement · R23-11）
@@ -833,9 +833,6 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 **管理块（Administrative Block）**
 > “管理块”是“基本存储对象”。它驻留在 **RAM** 中。“**管理块**”是“**NVRAM块**”的强制部分。 — 来源：[nvram_manager](memory/nvram_manager/index.md)（SWS_NVRAMManager · R23-11）
-
-**缩写**
-> 描述 — 来源：[pwm_driver](io/pwm_driver/index.md)（SWS_PWMDriver · R23-11）
 
 **虚拟地址（Virtual address）**
 > 虚拟地址是由16位逻辑块号和逻辑块内的16位偏移量组成的地址. — 来源：[flash_eeprom_emulation](memory/flash_eeprom_emulation/index.md)（SWS_FlashEEPROMEmulation · R23-11）
