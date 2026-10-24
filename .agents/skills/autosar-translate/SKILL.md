@@ -240,6 +240,12 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
   article; `[n] AUTOSAR 术语表` → the site glossary page); EXTERNAL class =
   needs a curated official URL before it can become a link (check 8 then
   applies). Both are user decisions recorded with the census.
+- **Link text is the document title, never a directory/file identifier**
+  (user preference 2026-10-24): gen_glossary/gen_api_list read the article's
+  front-matter `title:` for 来源/article links (stem only as fallback);
+  hand-written links follow the same rule — `[ADC 驱动](io/adc_driver/)`,
+  not `[adc_driver](…)`.
+
   Everything cross-article or anchor-less stays a reported candidate (user
   decision, queue in TODO.md's Backlog) — never silently added, and never
   silently *not counted*: the census is a Phase A output (check 9).
