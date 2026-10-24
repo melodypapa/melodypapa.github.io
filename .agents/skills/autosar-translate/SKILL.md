@@ -260,10 +260,14 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
 2026-10-24).
 
 1. **Glossary `glossary.md`** — **manually extended during translation
-   runs** (user decision 2026-10-24, superseding the script scan): when an
-   article or TR batch is translated, the run adds that article's/batch's
-   terms to the page by hand, A–Z placed, with 来源 attribution (document
-   title as link text, spec + release). Terms are extracted from the SOURCE
+   runs** (user decisions 2026-10-24/25, superseding the script scan): when
+   an article or TR batch is translated, the run adds that article's/batch's
+   terms to the page by hand with 来源 attribution (document title as link
+   text, spec + release). **Page format (2026-10-25): flat alphabetical** —
+   `## <letter>` sections, all entries A–Z across documents (no
+   per-document sections, no methodology prose on the page); each entry =
+   `**Term**` + one definition line + one 「来源：」 line per contributing
+   document. Terms are extracted from the SOURCE
    during translation — never machine-extracted from the translated article
    afterwards; `gen_glossary.py` is retired. **One term is translated once**
    (user rule 2026-10-24): the same term appearing in another document is NOT
