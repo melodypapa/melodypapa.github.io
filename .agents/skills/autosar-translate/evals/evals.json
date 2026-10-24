@@ -130,6 +130,34 @@
           "check": "no file edits, no git commands"
         }
       ]
+    },
+    {
+      "id": 6,
+      "prompt": "对 docs/autosar/crypto/crypto_service_manager/index.md 做 Phase A 链接审计：列出文中全部链接（站内 .md/# 锚点 + 外部 http），逐个核查 —— 站内目标是否存在、外链 curl 可访问性（用 --max-time，浏览器 UA，必要时重试一次），以及「潜在链接」（§3.1/§3.2 中命名了站内已有文章的模块、仍是纯文本的 URL）。把审计结果写到指定输出目录 link-report.md，不要修改仓库里的任何文件，也不要做 git 操作。",
+      "expected_output": "link-report.md: every link classified and verified (internal targets exist; external URLs with HTTP codes, anti-bot 4xx marked verify-manually not dead; potential links listed as candidates, none added)",
+      "files": [],
+      "assertions": [
+        {
+          "text": "外链逐个给出 HTTP 状态（含 §3.2 的 rfc5639 / rfc6637 两个 IETF 链接），2xx/3xx 判通过",
+          "check": "report shows per-URL status codes for the article's external links (rfc5639, rfc6637)"
+        },
+        {
+          "text": "无站内链接时明确说明（本文为纯文本翻译，无 .md/# 链接）",
+          "check": "internal-link section states explicitly that the article has none (or verifies those it has)"
+        },
+        {
+          "text": "潜在链接列为候选（如 §3.1 的 AUTOSAR_EXP_LayeredSoftwareArchitecture 条目），未静默加链",
+          "check": "potential-link candidates listed as candidates; article not modified"
+        },
+        {
+          "text": "对 4xx/超时的结论区分「反爬拦截需人工」与「确认失效」，无一刀切删除建议",
+          "check": "blocked-vs-dead distinction present; no blanket removal recommendation"
+        },
+        {
+          "text": "仅产出报告，仓库文件无修改",
+          "check": "git status shows no tracked-file modifications after the run"
+        }
+      ]
     }
   ]
 }
