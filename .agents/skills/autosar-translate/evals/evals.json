@@ -86,6 +86,26 @@
       "prompt": "把 AUTOSAR 标准文档 AUTOSAR_CP_SWS_StandardTypes（R23-11）翻译成我们站点的文章（对应 docs/autosar/general/platform_types/）。把最终文章写到指定输出目录的 index.md，过程中生成的待办清单写到 todo.md。不要修改仓库里的文件，也不要做任何 git 操作。",
       "expected_output": "todo.md with rule-derived checkbox items emitted before translation + Type A index.md",
       "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "把 AUTOSAR 标准文档 AUTOSAR_CP_SWS_CANDriver（R23-11）的 §8.6.3 Configurable Interfaces 一节翻译成中文，用于 docs/autosar/ 的 Type A 文章（文章尚不存在，只翻这一节），按仓库里 docs/autosar/STANDARD.md §2 的章节标题用词来。把结果写到指定输出目录的 section.md，不要修改仓库里的文件，也不要做任何 git 操作。",
+      "expected_output": "section.md with the translated §8.6.3, heading using the §2 canonical term 可配置接口",
+      "files": [],
+      "assertions": [
+        {
+          "text": "标题为 `#### 8.6.3. 可配置接口`（§2 定名，issue #54；不用 可配置的接口）",
+          "check": "heading line is exactly `#### 8.6.3. 可配置接口`"
+        },
+        {
+          "text": "全文无被禁变体 可配置的接口",
+          "check": "grep 可配置的接口 returns 0 hits"
+        },
+        {
+          "text": "正文为中文、CanIf 加粗、不含图片引用",
+          "check": "Chinese prose, **CanIf** bolded, no image links"
+        }
+      ]
     }
   ]
 }

@@ -185,6 +185,14 @@ before every commit, the second is evidence for the Step 8 confirmation.
    a heading to a STANDARD.md term, grep that heading across `docs/autosar`** —
    if the standard and the site majority disagree, it is a user decision
    (record it; update STANDARD.md in the same PR), not a silent rename.
+   Then sweep §2's `不用` variants mechanically: for every variant STANDARD.md
+   §2 forbids (`可配置的接口`, `周期函数`, `适用于汽车领域`, …),
+   `grep -nE '^#+.*VARIANT'` on the article must return 0 hits (canonical:
+   `可配置接口`, `调度函数`, `汽车域的适用性`). §2 governs chapter heading
+   wording (章节标题用词), so
+   scope the grep to heading lines — faithful prose is not in scope. A stale
+   §2 line is exactly how a rejected wording re-enters a new article — the
+   grep, not judgment, is what catches it.
 3. Hygiene greps: no `^# ` in the body; no requirement IDs
    (`\[[A-Z][A-Za-z]*_[A-Za-z0-9]*_[0-9]+\]`) and no `{DRAFT}`; a WeChat
    footer, if present, is `<section id="wechat">` + `<h4>`, never a markdown
@@ -275,6 +283,7 @@ open.
 | Flagging STANDARD.md-forbidden chapters as "missing" | False work items on compliant articles | Step 3 compliance rule: omissions the standard mandates are compliance |
 | Taking the SRS wording as ground truth | "Fixing" faithful SWS translations into errors | Step 4 + source-resolution.md |
 | Renaming a heading to STANDARD.md's listed term when most of the site uses a different one (DIO run: STANDARD listed 周期函数, 7 articles used 调度函数 — user kept 调度函数) | Churn in the wrong direction; the standard itself was stale | Before aligning wording, `grep` the heading across `docs/autosar`; if STANDARD.md and the site majority disagree, put the choice in the todo list as a user decision and update STANDARD.md in the same PR |
+| Translating *Configurable Interfaces* as `可配置的接口` because the pre-2026-10-24 §2 listed it (baseline test 2026-10-24: an agent handed the old §2 line reproduced the rejected heading verbatim, while agents given no wording guidance naturally wrote `可配置接口` — the danger is the stale authority, not free translation) | New articles silently diverge from the canonical term — the site's 5 IO articles all read `可配置接口` (user decision 2026-10-24, issue #54; STANDARD.md §2 updated in the same PR) | Phase A check 2's §2 `不用` sweep: grep every forbidden variant on the article to 0 hits |
 | Posting the todo list to chat instead of writing the todo file (DIO run, 2026-10-24) | The run's decisions and tick state die with the session; nothing to resume from, nothing to audit | Step 4 output contract + `references/todo-format.md` — the file is the todo, chat is a copy |
 | Batch-checking todo items at the end of the run | The list shows progress the work doesn't have; an unverified item hides until the PR review or never | Tick each item in the file the moment its verification passes (Step 4) |
 | Finishing on the strict build alone — or opening the PR before the Step 8 gate | The build is blind to coverage, fidelity and wording; the user reviews a PR that was never confirmed | Phase A ≠ done; present Phase A + Phase B evidence and wait for confirmation, then commit/PR (Step 8) |
