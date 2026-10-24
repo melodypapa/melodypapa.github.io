@@ -413,20 +413,13 @@ evidence, not asserted):
 
 **Repo workflow:**
 
-1. **Automation levels** (codified 2026-10-25): the tracking issue and the
-   feature branch are created **automatically at run start** (issue →
-   `git switch -c feature/<topic>` off current master — before the first
-   edit, so every change lands on the branch). **Commits are automatic** as
-   work completes — per article, per batch, per tranche — each with the
-   strict-build gate. The **PR is created automatically** in either of two
-   cases: (a) after the Step 8 confirmation gate closes the run's content,
-   or (b) at the user's explicit request mid-run — an **incremental PR**
-   marked in-progress in its body ("Part of #N"), which keeps receiving
-   follow-up commits until the gate. The gate itself is never skipped: a
-   run is finished only through Step 8, whether or not a PR already exists.
-2. Commit messages: `docs: translate/complete <module> from <source doc>`
-   style; `Closes #N` in commit + PR body, naming the source release used.
-3. New pages must be registered in `mkdocs.yml` nav (paths are `docs/`-relative)
+1. **Git/PR/issue mechanics are external to this skill** (user decision
+   2026-10-25): the user provides dedicated git instruments — the skill does
+   not prescribe how branches, commits, issues or PRs are created. Only the
+   gate ordering matters here: content work happens before the Step 8
+   confirmation, and the queue row records whatever identifiers the
+   instruments return (commit hash, PR link).
+2. New pages must be registered in `mkdocs.yml` nav (paths are `docs/`-relative)
    or the strict build fails. Removal of pages requires nav cleanup in the
    same commit.
 
