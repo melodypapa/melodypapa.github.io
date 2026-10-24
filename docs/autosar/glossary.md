@@ -133,7 +133,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > Communication Manager — 来源：[can_transceiver_driver](communication/can_transceiver_driver/index.md)（SWS_CANTransceiverDriver · R23-11）
 > ComM模块提供了一些功能，如**Dcm**模块可以指示“活动”和“非活动”状态，以便进行诊断通信。Dcm模块提供了处理 **Full-Communication**、**Silent-Communication** 和 **No-Communication** 通信需求的功能。此外，如果**ComM**模块要求，**Dcm**模块提供启用和禁用诊断通信的功能。（如：**UDS**的**0x28**服务） — 来源：[diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md)（SWS_DiagnosticCommunicationManager · R23-11）
 
-**Compare threshold（比较阈值）**
+**Compare threshold**
 > 每次计数器增加一个单位时与计数器内容相比较的目标值。 — 来源：[ocu_driver](io/ocu_driver/index.md)（SWS_OCUDriver · R23-11）
 
 **Continuous Conversion Mode**
@@ -270,7 +270,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **FOTA**
 > 固件远程升级（**Firmware Over The Air**），通过无线通信进行固件远程更新。 — 来源：[memory_access](memory/memory_access/index.md)（SWS_MemoryAccess · R23-11）
 
-**Free running counter（自由运行计数器）**
+**Free running counter**
 > 从最小值（分别为最大值）运行到最大值（分别为最小值）的计数器，并在到达最大值（分别为最小值）后自动从最小值（分别为最大值）重新开始。 — 来源：[ocu_driver](io/ocu_driver/index.md)（SWS_OCUDriver · R23-11）
 
 **Functionality**
@@ -463,7 +463,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **OCU**
 > 输出比较单元（**Output Compare Unit**） — 来源：[ocu_driver](io/ocu_driver/index.md)（SWS_OCUDriver · R23-11）
 
-**OCU channel（OCU 通道）**
+**OCU channel**
 > 表示一个逻辑实体，由自由运行计数器、比较阈值以及作为比较过程结果而执行的动作组成。 — 来源：[ocu_driver](io/ocu_driver/index.md)（SWS_OCUDriver · R23-11）
 
 **OEM**
@@ -580,7 +580,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Read Page**
 > 读取页面（**Read Page**）是指存储设备的最小可读单位（以字节为单位）。因为一些存储设备技术的访问必须考虑到物理分段（**physical segmentation**），所以并非所有存储设备技术都可以按字节访问。该术语定义了一次访问中需要读取页面最小的大小。 — 来源：[memory_access](memory/memory_access/index.md)（SWS_MemoryAccess · R23-11）
 
-**Reference Interval（参考区间）**
+**Reference Interval**
 > 由**Ocu_SetAbsoluteThreshold** **API**的调用者给出的区间（以 tick 为单位），并用作计算返回信息的基础。 — 来源：[ocu_driver](io/ocu_driver/index.md)（SWS_OCUDriver · R23-11）
 
 **Resolution**

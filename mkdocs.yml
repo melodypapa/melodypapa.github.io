@@ -169,13 +169,13 @@ nav:
     - 方法论与模板:
 
       - "BSWMDT": autosar/methodology_templates/basic_software_module_description_template/index.md
-    - 模式管理（Mode Management）:
+    - 模式管理:
       - autosar/mode_management/index.md
       - "BswM": autosar/mode_management/basic_software_mode_manager/index.md
       - "EcuM": autosar/mode_management/ecu_state_manager/index.md
       - "模式管理指南": autosar/mode_management/guide_to_mode_management/index.md
     - "电源状态管理": autosar/power/index.md
-    - 系统服务（System Services）:
+    - 系统服务:
 
       - "FiM": autosar/system_services/function_inhibition_manager/index.md
       - "Os": autosar/system_services/operating_system/index.md

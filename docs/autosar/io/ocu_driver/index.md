@@ -29,31 +29,54 @@ release: R23-11
 
 ## 2. 缩略语
 
-下表包含 [1, AUTOSAR 术语表] 中未包含的、与**OCU**驱动模块相关的缩略语和缩写。局部作用域的缩略语和缩写出现在下表中；全局作用域的包含在**AUTOSAR**术语表中。
+以下术语表包含与**OCU**驱动模块相关、且未包含在 [1] AUTOSAR 术语表中的缩略语和缩写。
 
-| 缩略语/缩写 | 描述 |
-|---|---|
-| OCU | 输出比较单元（**Output Compare Unit**） |
-| DMA | 直接内存访问（**Direct Memory Access**） |
-| MCAL | 微控制器抽象层（**Microcontroller Abstraction Layer**） |
-| MCU | 微控制器单元（**Microcontroller Unit**） |
-| DEM | 诊断事件管理器（**Diagnostic Event Manager**） |
-| DET | 默认错误跟踪器（**Default Error Tracer**） |
-| SPAL | 标准外设抽象层（**Standard Peripheral Abstraction Layer**） |
-| ISR | 中断服务例程（**Interrupt Service Routine**） |
+局部作用域的缩略语和缩写出现在以下术语表中；全局作用域的包含在**AUTOSAR**术语表中。
+
+**OCU**
+> 输出比较单元（**Output Compare Unit**）
+
+**DMA**
+> 直接内存访问（**Direct Memory Access**）
+
+**MCAL**
+> 微控制器抽象层（**Microcontroller Abstraction Layer**）
+
+**MCU**
+> 微控制器单元（**Microcontroller Unit**）
+
+**DEM**
+> 诊断事件管理器（**Diagnostic Event Manager**）
+
+**DET**
+> 默认错误跟踪器（**Default Error Tracer**）
+
+**SPAL**
+> 标准外设抽象层（**Standard Peripheral Abstraction Layer**）
+
+**MCU**
+> 微控制器单元（**Microcontroller Unit**）
+
+**ISR**
+> 中断服务例程（**Interrupt Service Routine**）
 
 术语定义：
 
-| 术语 | 描述 |
-|---|---|
-| OCU channel（OCU 通道） | 表示一个逻辑实体，由自由运行计数器、比较阈值以及作为比较过程结果而执行的动作组成。 |
-| Compare threshold（比较阈值） | 每次计数器增加一个单位时与计数器内容相比较的目标值。 |
-| Free running counter（自由运行计数器） | 从最小值（分别为最大值）运行到最大值（分别为最小值）的计数器，并在到达最大值（分别为最小值）后自动从最小值（分别为最大值）重新开始。 |
-| Reference Interval（参考区间） | 由**Ocu_SetAbsoluteThreshold** **API**的调用者给出的区间（以 tick 为单位），并用作计算返回信息的基础。 |
+**OCU channel**
+> 表示一个逻辑实体，由自由运行计数器、比较阈值以及作为比较过程结果而执行的动作组成。
+
+**Compare threshold**
+> 每次计数器增加一个单位时与计数器内容相比较的目标值。
+
+**Free running counter**
+> 从最小值（分别为最大值）运行到最大值（分别为最小值）的计数器，并在到达最大值（分别为最小值）后自动从最小值（分别为最大值）重新开始。
+
+**Reference Interval**
+> 由**Ocu_SetAbsoluteThreshold** **API**的调用者给出的区间（以 tick 为单位），并用作计算返回信息的基础。
 
 ## 3. 相关文档
 
-### 3.1. 输入文档与相关标准和规范
+### 3.1. 输入文件
 
 [1] Glossary
 AUTOSAR_FO_TR_Glossary
@@ -79,19 +102,13 @@ AUTOSAR_CP_TR_BSWModuleList
 
 ## 4. 约束和假设
 
-### 4.1. 假设
+**OCU**驱动程序工作所依据的假设如下。
 
-#### 4.1.1. 时钟
+**时钟**：该驱动程序不支持时钟的动态更改。由于系统时钟完全由**MCU**模块管理，系统时钟设置的任何动态更改都会影响本模块。该模块不在睡眠模式下运行。
 
-该驱动程序不支持时钟的动态更改。由于系统时钟完全由**MCU**模块管理，系统时钟设置的任何动态更改都会影响本模块。该模块不在睡眠模式下运行。
+**资源**：资源的分配完全由软件或硬件单方面进行，以避免共享资源问题。例如：使用**API Ocu_SetPinState**。不能对处于**RUNNING**状态的通道调用该**API**来改变引脚状态，否则可能在硬件在比较匹配时自动设置的状态与**API**设置的状态之间产生冲突。
 
-#### 4.1.2. 资源
-
-资源的分配完全由软件或硬件单方面进行，以避免共享资源问题。例如：使用**API Ocu_SetPinState**。不能对处于**RUNNING**状态的通道调用该**API**来改变引脚状态，否则可能在硬件在比较匹配时自动设置的状态与**API**设置的状态之间产生冲突。
-
-#### 4.1.3. 计数和比较
-
-我们假设将运行本驱动程序的硬件具有如下计数器抽象模型（以八位计数器为例）。
+**计数和比较**：我们假设将运行本驱动程序的硬件具有如下计数器抽象模型（以八位计数器为例）。
 
 ![Figure4-1.png](Figure4-1.png)
 
@@ -103,11 +120,11 @@ AUTOSAR_CP_TR_BSWModuleList
 
 本驱动程序的预期行为是在进入阈值所代表的状态时完成比较。
 
-### 4.2. 限制
+### 4.1. 限制
 
 无限制。
 
-### 4.3. 对汽车领域的适用性
+### 4.2. 汽车域的适用性
 
 无限制。
 
@@ -702,6 +719,503 @@ void Ocu_Notification_<Channel> ( void )
 如果为通知回调配置了**NULL**指针，则不应执行任何回调。
 
 当通知机制被禁用时，**OCU**驱动不应发出任何通知。
+
+## 8. 配置规范
+
+总体而言，本章定义配置参数及其到**容器**（container）的聚类组织。为支持本规范，第 8.1 章描述相关基础知识，并规定参数规范所应使用的模板（表格）。我们有意将第 8.1 章保留在规范中，以保证可理解性。
+
+第 8.2 章规定**OCU**模块的结构（容器）与参数。
+
+第 8.3 章规定**OCU**模块的发布信息。
+
+### 8.1. 如何阅读本章
+
+详情请参阅 SWS_BSWGeneral 中的第 10.1 章 "Introduction to configuration specification"（配置规范导论）。
+
+除本节外，强烈建议阅读以下文档：
+
+* AUTOSAR 分层软件架构 [4]
+* AUTOSAR ECU 配置规范 [3]
+
+这些文档详细描述了 AUTOSAR 配置方法论与 AUTOSAR 配置元模型。
+
+以下仅是对该主题的简要概述，不能取代 ECU 配置规范文档。
+
+#### 8.1.1. 配置与配置参数
+
+配置参数定义模块实现的通用部分的可变性。这意味着只有通用的或可配置的模块实现才能在系统和/或 ECU 配置期间适配使用中的环境（软件/硬件）。
+
+参数的配置可以在软件过程中的不同时间点完成：编译前（before compile time）、链接前（before link time）或构建后（after build time）。下文使用术语"（参数的）配置类"（configuration class）指代特定的配置时间点。
+
+#### 8.1.2. 容器
+
+容器对配置参数的集合进行结构化。这意味着：
+
+* 所有配置参数都保存在容器中。
+
+* （子）容器可以引用（子）容器。可以为这些引用分配多重性。该多重性定义了所包含参数的可能实例数量。
+
+#### 8.1.3. 配置参数的规格模板
+
+以下表格由三个部分组成：
+
+* 通用部分（general section）
+* 配置参数部分（configuration parameter section）
+* 包含/引用容器部分（the section of included/referenced containers）
+
+Pre-compile time —— 规定该配置参数是否属于 Pre-compile time 配置类。
+
+| 标记 | 描述 |
+|---|---|
+| x | 该配置参数属于 Pre-compile time 配置类。 |
+| - | 该配置参数绝不属于 Pre-compile time 配置类。 |
+
+Link time —— 规定该配置参数是否属于 Link time 配置类。
+
+| 标记 | 描述 |
+|---|---|
+| x | 该配置参数属于 Link time 配置类。 |
+| - | 该配置参数绝不属于 Link time 配置类。 |
+
+Post Build —— 规定该配置参数是否属于 Post Build 配置类。
+
+| 标记 | 描述 |
+|---|---|
+| x | 该配置参数属于 Post Build 配置类，且不需要特定实现。 |
+| L | Loadable —— 该配置参数属于 Post Build 配置类，且 ECU 中仅驻留一个配置参数集。 |
+| M | Multiple —— 该配置参数属于 Post Build 配置类，通过向模块的初始化函数传递专用指针从多个参数集中选择。 |
+| - | 该配置参数绝不属于 Post Build 配置类。 |
+
+### 8.2. 容器与配置参数
+
+以下各节汇总所有配置参数。各参数的详细含义见第 6 章和第 7 章。
+
+OCU 模块应拒绝实现所不支持的、带有分区映射的配置。
+
+#### 8.2.1. Ocu
+
+| SWS 条目 |  |
+|---|---|
+| 模块名称 | Ocu |
+| 描述 | OCU（输出比较单元）模块的配置。 |
+| Post-Build 变体支持 | true |
+| 支持的配置变体 | VARIANT-POST-BUILD, VARIANT-PRE-COMPILE |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| OcuConfigSet | 1 | 此容器是配置集（Configuration Set）的基础，其中包含已配置的 OCU 通道。这样，可以为 Post-Build 流程定义不同的配置集。 |
+| OcuConfigurationOfOptionalApis | 1 | 可选 API 的配置。 |
+| OcuGeneral | 1 | 此容器包含 OCU 驱动的模块级配置参数。 |
+
+#### 8.2.2. OcuGeneral
+
+OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所引用的 ECUC 分区的子集。
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | OcuGeneral |
+| 父容器 | Ocu |
+| 描述 | 此容器包含 OCU 驱动的模块级配置参数。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuDevErrorDetect |
+| 父容器 | OcuGeneral |
+| 描述 | 开启或关闭开发错误检测与通知（true：启用检测与通知；false：禁用检测与通知）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuEcucPartitionRef |
+| 父容器 | OcuGeneral |
+| 描述 | 将 OCU 驱动映射到零个或多个 ECUC 分区，以使驱动 API 在相应分区中可用。 |
+| 多重性 | 0..* |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuKernelEcucPartitionRef |
+| 父容器 | OcuGeneral |
+| 描述 | 将 OCU 内核映射到零个或一个 ECUC 分区，以将驱动内核分配到某个特定内核。所引用的 ECUC 分区是 OCU 驱动所映射到的 ECUC 分区的子集。 |
+| 多重性 | 0..1 |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+无包含的容器。
+
+若 OcuEcucPartitionRef 引用一个或多个 ECUC 分区，则 OcuKernelEcucPartitionRef 的多重性应为一，并且也应引用这些 ECUC 分区之一。
+
+#### 8.2.3. OcuConfigurationOfOptionalApis
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | OcuConfigurationOfOptionalApis |
+| 父容器 | Ocu |
+| 描述 | 可选 API 的配置。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuDeInitApi |
+| 父容器 | OcuConfigurationOfOptionalApis |
+| 描述 | 在代码中添加/移除 Ocu_DeInit() 服务。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuGetCounterApi |
+| 父容器 | OcuConfigurationOfOptionalApis |
+| 描述 | 在代码中添加/移除 Ocu_GetCounter() 服务。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuNotificationSupported |
+| 父容器 | OcuConfigurationOfOptionalApis |
+| 描述 | 在代码中添加/移除 Ocu_EnableNotification() 与 Ocu_DisableNotification() 服务。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuSetAbsoluteThresholdApi |
+| 父容器 | OcuConfigurationOfOptionalApis |
+| 描述 | 在代码中添加/移除 Ocu_SetAbsoluteThreshold() 服务。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuSetPinActionApi |
+| 父容器 | OcuConfigurationOfOptionalApis |
+| 描述 | 在代码中添加/移除 Ocu_SetPinAction() 服务。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuSetPinStateApi |
+| 父容器 | OcuConfigurationOfOptionalApis |
+| 描述 | 在代码中添加/移除 Ocu_SetPinState() 服务。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuSetRelativeThresholdApi |
+| 父容器 | OcuConfigurationOfOptionalApis |
+| 描述 | 在代码中添加/移除 Ocu_SetRelativeThreshold() 服务。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuVersionInfoApi |
+| 父容器 | OcuConfigurationOfOptionalApis |
+| 描述 | 指示是否支持 Ocu_GetVersionInfo() 的开关。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 8.2.4. OcuConfigSet
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | OcuConfigSet |
+| 父容器 | Ocu |
+| 描述 | 此容器是配置集（Configuration Set）的基础，其中包含已配置的 OCU 通道。这样，可以为 Post-Build 流程定义不同的配置集。 |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| OcuChannel | 1..* | 单个 OCU 通道的配置。 |
+| OcuHWSpecificSettings | 0..* | 此容器包含用于选择时钟源以及（在硬件支持时）设置可选预分频器的 OCU 专用参数。实现由供应商具体定义。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuCountdirection |
+| 父容器 | OcuConfigSet |
+| 描述 | 此参数指示整个 OCU 驱动的计数方向。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | OCU_DOWNCOUNTING：OCU 计数器将从最大值向最小值计数；OCU_UPCOUNTING：OCU 计数器将从最小值向最大值计数 |
+| 默认值 | OCU_UPCOUNTING |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+#### 8.2.5. OcuChannel
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | OcuChannel |
+| 父容器 | OcuConfigSet |
+| 描述 | 单个 OCU 通道的配置。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuAssignedHardwareChannel |
+| 父容器 | OcuChannel |
+| 描述 | 分配给该逻辑通道的物理硬件通道。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuChannelId |
+| 父容器 | OcuChannel |
+| 描述 | OCU 通道的通道 ID。该值将赋给由 OcuChannel 容器短名派生的符号名。它定义该通道到物理 OCU 硬件通道的分配。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名） |
+| 范围 | 0 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuChannelTickDuration |
+| 父容器 | OcuChannel |
+| 描述 | 规定通道计数器加一（即一个计数 tick）所需的输入时钟边沿（上升沿或下降沿）数量。取值范围取决于所使用的硬件，并非所有值都适用。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 1 .. 32768 |
+| 默认值 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuDefaultThreshold |
+| 父容器 | OcuChannel |
+| 描述 | 初始化时使用的比较阈值。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 4294967295 |
+| 默认值 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuHardwareTriggeredAdc |
+| 父容器 | OcuChannel |
+| 描述 | 此参数用于在硬件支持的情况下，允许 OCU 通道在比较匹配时触发一个 ADC 通道。参数值表示要触发的 ADC 物理通道。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 255 |
+| 默认值 | 0 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuHardwareTriggeredDMA |
+| 父容器 | OcuChannel |
+| 描述 | 此参数用于在硬件支持的情况下，允许 OCU 通道在比较匹配时触发一个 DMA 通道。参数值表示要触发的 DMA 物理通道。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 255 |
+| 默认值 | 0 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuMaxCounterValue |
+| 父容器 | OcuChannel |
+| 描述 | 计数器以 tick 为单位的最大值。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 1 .. 4294967295 |
+| 默认值 | - |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuNotification |
+| 父容器 | OcuChannel |
+| 描述 | 指向回调函数的函数指针的定义。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuOutputPinDefaultState |
+| 父容器 | OcuChannel |
+| 描述 | 参数 OcuOutputPinDefaultState 表示通道关联的引脚在初始化后应被置成的状态。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | OCU_HIGH |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuOutputPinUsed |
+| 父容器 | OcuChannel |
+| 描述 | 关于该通道上输出引脚使用情况的信息（true：该通道使用输出引脚；false：该通道不使用输出引脚）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuChannelEcucPartitionRef |
+| 父容器 | OcuChannel |
+| 描述 | 将一个 OCU 通道映射到零个或多个 ECUC 分区，以限制对该通道的访问。所引用的 ECUC 分区是 OCU 驱动所映射到的 ECUC 分区的子集。 |
+| 多重性 | 0..* |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuHWSpecificSettingsRef |
+| 父容器 | OcuChannel |
+| 描述 | 对 OcuChannel 所使用的 OcuHWSpecificSettings 的引用。 |
+| 多重性 | 0..1 |
+| 类型 | 对 OcuHWSpecificSettings 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+OcuChannelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所引用的 ECUC 分区的子集。
+
+若 OcuEcucPartitionRef 引用一个或多个 ECUC 分区，则 OcuKernelEcucPartitionRef 的多重性应为一，并且也应引用这些 ECUC 分区之一。
+
+#### 8.2.6. OcuHWSpecificSettings
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | OcuHWSpecificSettings |
+| 父容器 | OcuConfigSet |
+| 描述 | 此容器包含用于选择时钟源以及（在硬件支持时）设置可选预分频器的 OCU 专用参数。实现由供应商具体定义。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuClockSource |
+| 父容器 | OcuHWSpecificSettings |
+| 描述 | 单元的 OCU 驱动专用时钟输入可以被静态配置，以在硬件提供时选择不同的时钟源。枚举字面量由供应商具体定义。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | OcuPrescale |
+| 父容器 | OcuHWSpecificSettings |
+| 描述 | 可选的 OCU 驱动专用时钟预分频因子（如果硬件支持）。实现由供应商具体定义。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+### 8.3. 发布信息
+
+详情请参阅 SWS_BSWGeneral 中的第 10.3 章 "Published Information"（发布信息）。
+
+按《基础软件模块通用需求》 [5] 中 SRS_BSW_00402 的要求，标准化的通用发布参数应发布于本模块的头文件中，并需要在 BSW 模块描述中提供。相应的模块缩写可在《基础软件模块列表》 [6] 中找到。
+
+如适用，模块专用的附加发布参数列于附录 A 章。
 
 <section id="wechat">
 
