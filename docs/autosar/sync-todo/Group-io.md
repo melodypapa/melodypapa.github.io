@@ -83,6 +83,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR (commit 3d8dd12/625d437 · PR #76 · Closes #75)
+  - Note: 2026-10-24 术语表 manual-model rollout (user-directed): the page was rebuilt from blank — ADC's 18 ch.2 terms added manually as this run's contribution, in a per-document section mirroring the source's own order (结构同原文档，不按字母重排). Future runs add their article's terms the same way.
 - [ ] iohwab (SWS_IOHardwareAbstraction · R23-11 markdown · ⚠️ gaps)
   - Note: STANDARD.md lifted the 配置规范 ban (2026-10-24) — if the source has ch.10 Configuration specification, it translates as the optional article `## 8. 配置规范` (skill Step 5 config-spec rules); measure it in Step 1
   - Note: missing "约束和假设" chapter; keep the "时序图" chapter — sequence diagrams allowed since 2026-10-24 (user decision, issue #64); 3.1 is already "输入文件"
