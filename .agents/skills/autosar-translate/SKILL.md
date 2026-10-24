@@ -241,7 +241,7 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
   needs a curated official URL before it can become a link (check 8 then
   applies). Both are user decisions recorded with the census.
 - **Link text is the document title, never a directory/file identifier**
-  (user preference 2026-10-24): gen_glossary/gen_api_list read the article's
+  (user preference 2026-10-24): gen_api_list reads the article's
   front-matter `title:` for 来源/article links (stem only as fallback);
   hand-written links follow the same rule — `[ADC 驱动](io/adc_driver/)`,
   not `[adc_driver](…)`.
@@ -254,26 +254,22 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
 
 ## Step 6 — Regenerate the derived indexes (glossary + API list)
 
-Two files under `docs/autosar/` are **pure derivations** — regenerate and
-commit them in the same PR whenever their input changed; **never hand-edit
-them**.
+`api_reference.md` is a **pure derivation** (regenerate via
+`gen_api_list.py` when its source data changed); `glossary.md` is
+**manually extended during translation runs** (see below — user decision
+2026-10-24).
 
-1. **Glossary `glossary.md`** — every ch.2 term across all articles, A–Z,
-   deduplicated per module, each definition attributed to its source article
-   with the document and release (front-matter `spec:` / `release:`).
-   Regenerate after any 缩略语 chapter edit:
-   `python .agents/skills/autosar-translate/scripts/gen_glossary.py`.
-   **Two ingestion paths** (user decision 2026-10-24): ordinary articles are
-   parsed from their ch.2; the Foundation TR glossary (`general/tr_glossary`)
-   is **never re-parsed from the translated article** — its entries come from
-   `scripts/tr_glossary.json`, built **from the source markdown** (English
-   fields for ALL 343 terms + acronym rows, zh=None). Each translation batch
-   fills zh for its terms as it translates them (extract during translation,
-   never extract from the current translation afterwards); zh=null entries
-   stay out of the 术语表 until their batch lands.
-   Read its report: a `! article: ch.2 present but no entries parsed` line is
-   a drift signal (that ch.2 is prose or intro-only — fix the article, don't
-   silence the line); `(table — 待改排)` flags a legacy GFM-table ch.2.
+1. **Glossary `glossary.md`** — **manually extended during translation
+   runs** (user decision 2026-10-24, superseding the script scan): when an
+   article or TR batch is translated, the run adds that article's/batch's
+   terms to the page by hand, A–Z placed, with 来源 attribution (document
+   title as link text, spec + release). Terms are extracted from the SOURCE
+   during translation — never machine-extracted from the translated article
+   afterwards; `gen_glossary.py` is retired. Same term with differing
+   definitions across modules: list each definition with its own source. The
+   Foundation TR glossary's translation state is tracked in
+   `scripts/tr_glossary.json` (source-extraction workfile, not a build
+   input).
 2. **API reference `api_reference.md`** — every type (8.2) and function (8.3)
    defined in chapter 8 of every R23-11 SWS document, A–Z, each entry naming
    its document and release and linking to the site article when one exists.
@@ -333,9 +329,9 @@ before every commit, the second is evidence for the Step 8 confirmation.
    long sessions: adc_driver once turned 18 source rows into 16 entries and
    passed every check; term lines may carry trailing whitespace —
    bswm/ethernet_interface and several other articles have it).
-6. Derived indexes: both `gen_glossary.py --check` and `gen_api_list.py
-   --check` exit 0 — the committed `glossary.md` / `api_reference.md` match
-   the articles and front-matter (regenerate per Step 6 if stale).
+6. Derived indexes: `gen_api_list.py --check` exits 0. Glossary: the run's
+   own terms are present in `glossary.md` (grep spot-check) — the page is
+   manually extended in the same commit that translates them.
 7. API-chapter sync: `python
    .agents/skills/autosar-translate/scripts/check_api_sync.py <source.md>
    <article>` exits 0 — source 8.2.x/8.3.x heading names, counts and order

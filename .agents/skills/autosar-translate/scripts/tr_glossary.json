@@ -1,5 +1,5 @@
 {
- "_comment": "TR glossary extraction — built FROM THE SOURCE document (English fields from the R23-11 markdown). zh is filled only during a translation batch (extract the term while translating); gen_glossary ingests this file and never parses the translated article. zh=null entries are not yet translated and stay out of the 术语表 until their batch lands.",
+ "_comment": "TR glossary translation workfile — source extraction (English fields from the R23-11 markdown) + the translator's zh filled during each translation batch. NOT a build input: the 术语表 page is manually extended during translation runs (user decision 2026-10-24); this file records the extraction + translation state. L-PDU: the source carries a near-duplicate row, merged in translation.",
  "source_doc": "AUTOSAR_FO_TR_Glossary",
  "release": "R23-11",
  "source_path": "~/Workspace/autosar_standard/markdown/Foundation/Releases/R23-11/General/AUTOSAR_FO_TR_Glossary.md",
@@ -518,7 +518,7 @@
   {
    "term": "MAC",
    "en": "Message Authentication Code",
-   "zh": "媒体访问控制（**Media Access Control**）"
+   "zh": "消息认证码（**Message Authentication Code**）"
   },
   {
    "term": "mC",
@@ -658,7 +658,7 @@
   {
    "term": "PDU",
    "en": "Protocol Data Unit Platform Health",
-   "zh": "协议数据单元（**Protocol Data Unit**）"
+   "zh": "交互层协议数据单元（**Interaction Layer Protocol Data Unit**）"
   },
   {
    "term": "PHM",
@@ -843,7 +843,7 @@
   {
    "term": "TC",
    "en": "Test Case",
-   "zh": "定时通信（**Timed Communication**）"
+   "zh": "测试用例（**Test Case**）"
   },
   {
    "term": "TCP",
