@@ -39,7 +39,7 @@ release: R23-11
 **RTE**
 > 运行时环境（**Real Time Environment**）
 
-**SWC/SW-C**
+**SWC / SW-C**
 > 软件组件（**Software Component**）
 
 **SWCD**
@@ -79,7 +79,7 @@ release: R23-11
 
 在一个分区（**Partition**）内最多可以使用一个**BSW**模式管理器实例。
 
-### 4.2. 适用于汽车领域
+### 4.2. 汽车域的适用性
 
 **BSW**模式管理器适用于所有汽车域。
 
@@ -1294,7 +1294,7 @@ void BswM_WdgM_RequestPartitionReset (
 
 **BswM**中没有回调通知（**call-back notifications**）。
 
-### 7.3. 周期函数
+### 7.3. 调度函数
 
 #### 7.3.1. BswM_MainFunction
 
@@ -1305,6 +1305,20 @@ void BswM_MainFunction (
     void
 )
 ```
+
+## 8. 时序图
+
+### 8.1. BswM 的推迟操作
+
+![Figure9-1.png](Figure9-1.png)
+
+图 9.1：BswM 的推迟操作
+
+### 8.2. BswM 的立即操作
+
+![Figure9-2.png](Figure9-2.png)
+
+图 9.2：BswM 的立即操作
 
 <section id="wechat">
 
