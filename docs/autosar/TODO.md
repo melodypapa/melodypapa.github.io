@@ -12,12 +12,14 @@
 - [ ] 6 ⚠️ articles missing only the 「API规范」 chapter: pdu_router, can_interface, crypto_driver, ethernet_interface, lin_interface, operating_system
 - [ ] The other 11 ⚠️ articles: complete their respective missing chapters (com_based_transformer, data_distribution, e2e_transformer, sec_oc, SoAd, mirror, dem, iohwab, fee, memory_access, dcm)
 - [ ] 4 ⛔ stubs: full translation (ethernet_switch_driver, service_discovery, memory_mapping, platform_types — platform_types also needs its front-matter title and nav label fixed in the same change)
-- [ ] 12 🔶 articles: align to Type A — icu/iohwab drop the 「时序图」 chapter; flash_driver/time_service translate their legacy 「配置规范」 chapters in place (allowed since 2026-10-24; source ch.10 → article `## 8. 配置规范`); nvram drops the 「需求追踪」 chapter and fixes 「功能说明」; decide the fate of can_driver's topic chapters; unify remaining legacy wording to STANDARD.md terms
+- [ ] 12 🔶 articles: align to Type A — flash_driver/time_service translate their legacy 「配置规范」 chapters in place (allowed since 2026-10-24; source ch.10 → article `## 8. 配置规范`); nvram drops the 「需求追踪」 chapter and fixes 「功能说明」; decide the fate of can_driver's topic chapters; unify remaining legacy wording to STANDARD.md terms
+- [ ] IO section ✅ articles' heading-wording alignment (DIO/Port/PWM/OCU/ICU done 2026-10-24; same-class deviations remain): adc 4.2 「适用车型域」→「汽车域的适用性」
 - [ ] 4.2 「适用于汽车领域」→「汽车域的适用性」 (named in STANDARD.md 2026-10-24): bswm, ecu_state_manager, crypto_driver, crypto_service_manager, memory_access, data_distribution; 「对汽车领域的适用性」: ethernet_driver, can_interface; 「汽车领域的适用性」: nvram_manager
 - [ ] *Scheduled functions* unified to 「调度函数」 (named in STANDARD.md 2026-10-24): bswm 7.3 / can_network_management 7.3 「周期函数」, crypto_service_manager 7.12 「Scheduled 函数」
-- [ ] Acronym chapters unified to 「粗体术语 + 引用块」 + row-set alignment (STANDARD.md §1; 2026-10-24 census 21:5): format — dio/port/pwm/ocu/adc ✅ (reflowed 2026-10-24); lin_driver/udp_network_management — 2 articles still GFM tables; row sets (check line by line against the R23-11 sources) — lin_driver missing 14 rows (40→26), udp_network_management missing 14 rows (26→12); icu verified equal (12:12); adc restored to 18:18 in source order (2026-10-24)
+- [ ] Acronym chapters unified to 「粗体术语 + 引用块」 + row-set alignment (STANDARD.md §1; 2026-10-24 census 21:5): format — dio/port/pwm ✅ (reflowed 2026-10-24); lin_driver/udp_network_management — 2 articles still GFM tables; row sets (check line by line against the R23-11 sources) — adc restore API/HW/SW, DEM→DET source order, re-merge Conversion Mode into one entry (18 rows→16), lin_driver missing 14 rows (40→26), udp_network_management missing 14 rows (26→12); icu verified equal (12:12)
 - [ ] Hygiene fixes: udp_network_management WeChat footer → `<h4>`; dem numbering gap; rename the `data_distribution service` directory to drop the space; SoAd/mirror → index.md layout; `timimg_extension/indx.md` spelling (nav change in the same commit)
-- [ ] ch.10 → `## 8. 配置规范` for pre-ban articles whose R23-11 source has a Configuration specification (rule lifted 2026-10-24): io — dio/port/pwm ✅ (2026-10-24, issue #62), ocu ✅ (issue #61), adc ✅ (issue #75); remaining: audit every non-io ✅/🔶 article program-wide (bswm, ecu, crypto_*, memory_*, mode_management, system_services …); icu/adc/iohwab rows already scope it in Group-io
+- [ ] BswM ch.10 → `## 9. 配置规范` (rule-lift follow-up, issue #71): 91 containers across ~3600 source lines (10.2.1–10.2.90) — dedicated run needed; bswm alignment + 时序图 lands first
+- [ ] ch.10 → `## 8. 配置规范` for pre-ban articles whose R23-11 source has a Configuration specification (rule lifted 2026-10-24): io — dio/port/pwm ✅ (2026-10-24, issue #62), ocu ✅ (issue #61); remaining: audit every non-io ✅/🔶 article program-wide (bswm, ecu, crypto_*, memory_*, mode_management, system_services …); icu/adc/iohwab rows already scope it in Group-io
 - [ ] Link-audit fixes (2026-10-24 first site-wide external-URL curl; rule in STANDARD.md §4 / skill Phase A check 8): ethernet_driver §3.2 IEEE `getieee802` PDF 403 (directory retired; verify the ieeexplore number for 802.1AS-2011 in a browser before re-linking — note ethernet_interface's ieeexplore 8585421 is 802.1AE MACsec, a different document); data_distribution §3 OMG `DDS/1.4` http 500 (https same path 200 → upgrade to https); `https://www.iso.org` 403 (likely anti-bot, verify in a browser before acting); port.de timed out once then returned 200 on retry (lesson recorded in check 8: retry before declaring a link dead)
 
 **Fill breadth (new articles)**
@@ -35,8 +37,8 @@
 
 | Status | Count | Note |
 | --- | ---: | --- |
-| ✅ Type A-compliant | 9 | ready to use |
-| 🔶 Translated pending alignment | 11 | seven chapters present; legacy wording |
+| ✅ Type A-compliant | 10 | ready to use |
+| 🔶 Translated pending alignment | 10 | seven chapters present; legacy wording / forbidden-chapter residue |
 | ⚠️ Partial | 17 | missing ≥1 chapter (most miss the 「API规范」 chapter) |
 | ⛔ Stub | 4 | 9–19 lines only |
 | ❌ Missing (SWS) | 86 | R23-11 has 127 SWS docs in total; 41 covered (32.3%) |
@@ -91,13 +93,13 @@
 
 ## io
 
-- ✅ [ADC 驱动](io/adc_driver/) — SWS_ADCDriver (2026-10-24 realigned to R23-11: ch.2 rebuilt to the source's 18 rows in source order (API/HW/SW restored, DEM→DET order, *Conversion Mode* re-merged, aliases on the term line), §3.1 replaced with the source's single input document, 4.2 「汽车域的适用性」; API chapter deep-completed (10 functions, ~50 requirement texts); ch.9 → `## 8. 时序图`; ch.10 → `## 9. 配置规范` (46 params, 68 class rows verified))
-- ✅ [DIO 驱动](io/dio_driver/) — SWS_DIODriver (2026-10-24 aligned 3.1/4.2 wording + acronym chapter reflowed to blockquotes; content matches the R23-11 source chapter by chapter; ch.10 → `## 8. 配置规范` translated 2026-10-24, issue #62)
-- ✅ [OCU 驱动](io/ocu_driver/) — SWS_OCUDriver (pending wording alignment: 3.1 「输入文档与相关标准和规范」)
+- ✅ [ADC 驱动](io/adc_driver/) — SWS_ADCDriver (pending wording alignment: 4.2 「适用车型域」)
+- ✅ [DIO 驱动](io/dio_driver/) — SWS_DIODriver (2026-10-24 aligned 3.1/4.2 wording + acronym chapter reflowed to blockquotes; ch.10 → `## 9. 配置规范` translated (issue #62); ch.9 → `## 8. 时序图` translated + §9 config-class cells repaired 2026-10-24 (issue #65))
+- ✅ [OCU 驱动](io/ocu_driver/) — SWS_OCUDriver (2026-10-24: 3.1 「输入文件」, §2 acronyms reflowed to blockquotes (13:13, source order incl. the duplicate MCU), source 4.1 Assumptions folded into the §4 intro (user decision); ch.10 → `## 9. 配置规范` translated (issue #61), §9 config-class cells repaired (issue #64); ch.9 → `## 8. 时序图` translated 2026-10-24 per the lifted sequence-diagram ban)
 - ✅ [Port 驱动](io/port_driver/) — SWS_PortDriver (2026-10-24: translated the source ch.1 mapping table, §2 acronyms reflowed to blockquotes, 4.2 「汽车域的适用性」; content matches the R23-11 source chapter by chapter; ch.10 → `## 8. 配置规范` translated 2026-10-24, issue #62)
-- ✅ [PWM 驱动](io/pwm_driver/) — SWS_PWMDriver (2026-10-24: acronym chapter reflowed to blockquotes (12:12, source order), 4.2 「汽车域的适用性」, removed the §7.2.8 `PWM_FULL_POWER (0x00)` row absent from the source table (user decision, issue #56); content matches the R23-11 source chapter by chapter; ch.10 → `## 8. 配置规范` translated 2026-10-24, issue #62)
-- 🔶 [ICU 驱动](io/icu_driver/) — SWS_ICUDriver (contains the forbidden "时序图" chapter; pending wording alignment: 4.2 「适用车型域」)
-- ⚠️ [I/O 硬件抽象](io/iohwab/) — SWS_IOHardwareAbstraction (missing 约束和假设; contains the forbidden "时序图" chapter)
+- ✅ [PWM 驱动](io/pwm_driver/) — SWS_PWMDriver (2026-10-24: acronym chapter reflowed to blockquotes (12:12, source order), 4.2 「汽车域的适用性」, removed the §7.2.8 `PWM_FULL_POWER (0x00)` row absent from the source table (user decision, issue #56); content matches the R23-11 source chapter by chapter; ch.10 → `## 8. 配置规范` translated 2026-10-24, issue #62; §8 config-class cells repaired 2026-10-24 (Post-build X + variant annotations restored, issue #64))
+- ✅ [ICU 驱动](io/icu_driver/) — SWS_ICUDriver (2026-10-24 realigned to R23-11: 4.2 「汽车域的适用性」, 3.2/3.3 renamed to the site pattern; ## 8. 时序图 kept per the lifted ban; ## 9. 配置规范 translated (28 params); front-matter release R22-11 → R23-11 + glossary regenerated)
+- ⚠️ [I/O 硬件抽象](io/iohwab/) — SWS_IOHardwareAbstraction (missing 约束和假设; its 时序图 chapter is kept per the 2026-10-24 sequence-diagram rule lift)
 
 ## memory
 
@@ -113,8 +115,8 @@
 
 ## mode_management
 
-- ✅ [BswM](basic_software_mode_manager/) — SWS_BSWModeManager (pending wording alignment: 4.2 「适用于汽车领域」, 7.3 「周期函数」→「调度函数」)
-- 🔶 [EcuM](ecu_state_manager/) — SWS_ECUStateManager (ch.2 is "定义和缩写"; 4.2 「适用于汽车领域」)
+- ✅ [BswM](basic_software_mode_manager/) — SWS_BSWModeManager (2026-10-24: 4.2 → 「汽车域的适用性」, 7.3 → 「调度函数」, new ## 8. 时序图 (2 figures); ch.10 → `## 9. 配置规范` pending — 91 containers, issue #71)
+- ✅ [EcuM](ecu_state_manager/) — SWS_ECUStateManager (2026-10-24: ch.2 → 缩略语 flattened to 23 entries in source order, §4.2 → 汽车域的适用性, new ## 8. 时序图 (16 figures) + ## 9. 配置规范 (~40 parameter tables); content matches the R23-11 source chapter by chapter)
 - 📖 [模式管理指南](guide_to_mode_management/) — EXP_ModeManagementGuide (exempt)
 
 ## system_services

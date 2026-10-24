@@ -72,7 +72,7 @@ release: R23-11
 > 从最小值（分别为最大值）运行到最大值（分别为最小值）的计数器，并在到达最大值（分别为最小值）后自动从最小值（分别为最大值）重新开始。
 
 **Reference Interval**
-> 由**Ocu_SetAbsoluteThreshold** **API**的调用者给出的区间（以 tick 为单位），并用作计算返回信息的基础。
+> 由[**Ocu_SetAbsoluteThreshold**](#738-ocu_setabsolutethreshold) **API**的调用者给出的区间（以 tick 为单位），并用作计算返回信息的基础。
 
 ## 3. 相关文档
 
@@ -106,7 +106,7 @@ AUTOSAR_CP_TR_BSWModuleList
 
 **时钟**：该驱动程序不支持时钟的动态更改。由于系统时钟完全由**MCU**模块管理，系统时钟设置的任何动态更改都会影响本模块。该模块不在睡眠模式下运行。
 
-**资源**：资源的分配完全由软件或硬件单方面进行，以避免共享资源问题。例如：使用**API Ocu_SetPinState**。不能对处于**RUNNING**状态的通道调用该**API**来改变引脚状态，否则可能在硬件在比较匹配时自动设置的状态与**API**设置的状态之间产生冲突。
+**资源**：资源的分配完全由软件或硬件单方面进行，以避免共享资源问题。例如：使用**API [Ocu_SetPinState](#735-ocu_setpinstate)**。不能对处于**RUNNING**状态的通道调用该**API**来改变引脚状态，否则可能在硬件在比较匹配时自动设置的状态与**API**设置的状态之间产生冲突。
 
 **计数和比较**：我们假设将运行本驱动程序的硬件具有如下计数器抽象模型（以八位计数器为例）。
 
@@ -191,7 +191,7 @@ Ocu.c 应包含 Ocu.h 和 Det.h。
 
 ![Figure7-2.png](Figure7-2.png)
 
-**Ocu**通道具有上图所示的简单状态图。驱动程序的所有通道都通过**API Ocu_Init()**一次性初始化。没有单独初始化每个通道的**API**。
+**Ocu**通道具有上图所示的简单状态图。驱动程序的所有通道都通过**API [Ocu_Init](#731-ocu_init)()**一次性初始化。没有单独初始化每个通道的**API**。
 
 根据硬件架构，与**Ocu**通道绑定的硬件可能由**OCU**单元或微控制器中的任何其他定时器模块管理。
 
@@ -234,14 +234,14 @@ Ocu.c 应包含 Ocu.h 和 Det.h。
 
 | 错误类型 | 相关错误码 | 错误值 |
 |---|---|---|
-| 除**Ocu_GetVersionInfo()**和**Ocu_Init()**外的**API**服务在模块未初始化时被使用 | OCU_E_UNINIT | 0x02 |
+| 除**[Ocu_GetVersionInfo](#7312-ocu_getversioninfo)()**和**[Ocu_Init](#731-ocu_init)()**外的**API**服务在模块未初始化时被使用 | OCU_E_UNINIT | 0x02 |
 | **API**服务使用了无效的通道标识符 | OCU_E_PARAM_INVALID_CHANNEL | 0x03 |
-| **API Ocu_SetPinState()** 以无效的引脚状态调用，或在通道处于**RUNNING**状态时调用 | OCU_E_PARAM_INVALID_STATE | 0x04 |
-| **API Ocu_SetPinAction()** 以无效的引脚动作调用 | OCU_E_PARAM_INVALID_ACTION | 0x05 |
-| 在配置了**NULL**指针作为通知函数的通道上使用**Ocu_DisableNotification()**或**Ocu_EnableNotification()** | OCU_E_NO_VALID_NOTIF | 0x06 |
-| **OCU**驱动已初始化时调用**API Ocu_Init()** | OCU_E_ALREADY_INITIALIZED | 0x07 |
-| **API Ocu_GetVersionInfo()** 以**NULL**参数调用 | OCU_E_PARAM_POINTER | 0x08 |
-| 对没有关联输出引脚的通道调用**Ocu_SetPinState()**或**Ocu_SetPinAction()** | OCU_E_PARAM_NO_PIN | 0x0A |
+| **API [Ocu_SetPinState](#735-ocu_setpinstate)()** 以无效的引脚状态调用，或在通道处于**RUNNING**状态时调用 | OCU_E_PARAM_INVALID_STATE | 0x04 |
+| **API [Ocu_SetPinAction](#736-ocu_setpinaction)()** 以无效的引脚动作调用 | OCU_E_PARAM_INVALID_ACTION | 0x05 |
+| 在配置了**NULL**指针作为通知函数的通道上使用**[Ocu_DisableNotification](#7310-ocu_disablenotification)()**或**[Ocu_EnableNotification](#7311-ocu_enablenotification)()** | OCU_E_NO_VALID_NOTIF | 0x06 |
+| **OCU**驱动已初始化时调用**API [Ocu_Init](#731-ocu_init)()** | OCU_E_ALREADY_INITIALIZED | 0x07 |
+| **API [Ocu_GetVersionInfo](#7312-ocu_getversioninfo)()** 以**NULL**参数调用 | OCU_E_PARAM_POINTER | 0x08 |
+| 对没有关联输出引脚的通道调用**[Ocu_SetPinState](#735-ocu_setpinstate)()**或**[Ocu_SetPinAction](#736-ocu_setpinaction)()** | OCU_E_PARAM_NO_PIN | 0x0A |
 | **OCU**初始化失败，例如所选的配置集不存在 | OCU_E_INIT_FAILED | 0x0B |
 
 由于特定实现和/或特定硬件属性而检测到的其他错误，应添加到**OCU**器件特定实现规范中。分类和枚举应与上面列出的错误兼容。
@@ -250,7 +250,7 @@ Ocu.c 应包含 Ocu.h 和 Det.h。
 
 | 错误类型 | 相关错误码 | 错误值 |
 |---|---|---|
-| 对处于**RUNNING**状态的通道调用**API Ocu_StartChannel()** | OCU_E_BUSY | 0x09 |
+| 对处于**RUNNING**状态的通道调用**API [Ocu_StartChannel](#733-ocu_startchannel)()** | OCU_E_BUSY | 0x09 |
 
 #### 6.4.3. 瞬态故障
 
@@ -370,7 +370,7 @@ void Ocu_Init ( const Ocu_ConfigType* ConfigPtr )
 
 如果为**OCU**驱动启用了开发错误检测，且在**OCU**驱动和硬件已初始化时调用**Ocu_Init**函数，则**Ocu_Init**函数应上报开发错误**OCU_E_ALREADY_INITIALIZED**并不做任何动作地返回。
 
-通过执行**Ocu_Init**函数重新初始化**OCU**驱动，需要事先通过执行**Ocu_DeInit**函数进行反初始化。
+通过执行**Ocu_Init**函数重新初始化**OCU**驱动，需要事先通过执行[**Ocu_DeInit**](#732-ocu_deinit)函数进行反初始化。
 
 #### 7.3.2. Ocu_DeInit
 
@@ -380,17 +380,17 @@ void Ocu_Init ( const Ocu_ConfigType* ConfigPtr )
 void Ocu_DeInit ( void )
 ```
 
-**Ocu_DeInit**函数应将**Ocu_Init**初始化的**OCU**变量和寄存器反初始化到与上电复位状态相当的状态。不可写寄存器的值除外。
+**Ocu_DeInit**函数应将[**Ocu_Init**](#731-ocu_init)初始化的**OCU**变量和寄存器反初始化到与上电复位状态相当的状态。不可写寄存器的值除外。
 
 注意：硬件设计应负责确保该状态不会导致微控制器中的未定义行为。
 
 **Ocu_DeInit**函数应禁用所有使用的中断和通知。
 
-**Ocu_DeInit**函数应只影响由静态配置和/或先前**Ocu_Init()**调用传递的运行时配置集分配的外设。
+**Ocu_DeInit**函数应只影响由静态配置和/或先前**[Ocu_Init](#731-ocu_init)()**调用传递的运行时配置集分配的外设。
 
 **API Ocu_DeInit**应停止所有由本驱动独占使用的自由运行计数器。
 
-注意：为防止反初始化期间的未定义行为，用户必须在调用**API Ocu_DeInit**之前停止所有**RUNNING**状态的通道（通过调用**Ocu_StopChannel**函数）。因此有下面的需求。
+注意：为防止反初始化期间的未定义行为，用户必须在调用**API Ocu_DeInit**之前停止所有**RUNNING**状态的通道（通过调用[**Ocu_StopChannel**](#734-ocu_stopchannel)函数）。因此有下面的需求。
 
 如果为**OCU**驱动启用了开发错误检测：如果调用**Ocu_DeInit**函数时仍有通道处于**RUNNING**状态，则函数应上报开发错误 "**OCU_E_PARAM_INVALID_STATE**" 并不做任何动作地返回。
 
@@ -496,7 +496,7 @@ void Ocu_SetPinAction ( Ocu_ChannelType ChannelNumber, Ocu_PinActionType PinActi
 
 #### 7.3.7. Ocu_GetCounter
 
-**说明**: 读取计数器当前值的服务。可通过**Ocu.h**获得。本服务为同步调用，可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。返回值：**Ocu_ValueType**，以 tick 为单位的计数器内容。
+**说明**: 读取计数器当前值的服务。可通过**Ocu.h**获得。本服务为同步调用，可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。返回值：[**Ocu_ValueType**](#722-ocu_valuetype)，以 tick 为单位的计数器内容。
 
 ```C
 Ocu_ValueType Ocu_GetCounter ( Ocu_ChannelType ChannelNumber )
@@ -514,7 +514,7 @@ Ocu_ValueType Ocu_GetCounter ( Ocu_ChannelType ChannelNumber )
 
 #### 7.3.8. Ocu_SetAbsoluteThreshold
 
-**说明**: 使用绝对输入数据设置通道阈值值的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。参数 ReferenceValue（in）：由上层给出的值，用作确定是否在函数退出之前调用通知的基础。参数 AbsoluteValue（in）：与计数器内容比较的值。此值以 tick 为单位。返回值：**Ocu_ReturnType**，告知调用者设置新阈值值后，比较匹配是否将在当前参考区间内发生（或已经发生）。
+**说明**: 使用绝对输入数据设置通道阈值值的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。参数 ReferenceValue（in）：由上层给出的值，用作确定是否在函数退出之前调用通知的基础。参数 AbsoluteValue（in）：与计数器内容比较的值。此值以 tick 为单位。返回值：[**Ocu_ReturnType**](#726-ocu_returntype)，告知调用者设置新阈值值后，比较匹配是否将在当前参考区间内发生（或已经发生）。
 
 ```C
 Ocu_ReturnType Ocu_SetAbsoluteThreshold (
@@ -576,7 +576,7 @@ Ocu_ReturnType Ocu_SetAbsoluteThreshold (
 
 #### 7.3.9. Ocu_SetRelativeThreshold
 
-**说明**: 相对于计数器当前值设置通道阈值值的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。参数 RelativeValue（in）：用于计算新阈值的值。返回值：**Ocu_ReturnType**，告知调用者设置新阈值值后，比较匹配是否将在当前参考区间内发生（或已经发生）。
+**说明**: 相对于计数器当前值设置通道阈值值的服务。可通过**Ocu.h**获得。本服务为同步调用；对不同通道号可重入。参数 ChannelNumber（in）：**OCU**通道的数字标识符。参数 RelativeValue（in）：用于计算新阈值的值。返回值：[**Ocu_ReturnType**](#726-ocu_returntype)，告知调用者设置新阈值值后，比较匹配是否将在当前参考区间内发生（或已经发生）。
 
 ```C
 Ocu_ReturnType Ocu_SetRelativeThreshold (
@@ -592,13 +592,13 @@ Ocu_ReturnType Ocu_SetRelativeThreshold (
 NewThresholdValue = ReadValue + RelativeValue;
 ```
 
-其余行为则与**API Ocu_SetAbsoluteThreshold**相同，其中参考值现在为**ReadValue**，参考区间位于**ReadValue**与新编程的阈值（**NewThresholdValue**）之间，如下图所示。
+其余行为则与**API [Ocu_SetAbsoluteThreshold](#738-ocu_setabsolutethreshold)**相同，其中参考值现在为**ReadValue**，参考区间位于**ReadValue**与新编程的阈值（**NewThresholdValue**）之间，如下图所示。
 
 示例**Ocu_SetRelativeThreshold(1,5);**
 
 ![Figure8-4.png](Figure8-4.png)
 
-注意：与**API Ocu_SetAbsoluteThreshold**一样，计数器的可能翻转也包含在参考区间中，如下图所示。示例**Ocu_SetRelativeThreshold(1,20)**，**ReadValue**等于 253。因此，此**API**的行为类似于**Ocu_SetAbsoluteThreshold**，故有下面的需求。
+注意：与**API [Ocu_SetAbsoluteThreshold](#738-ocu_setabsolutethreshold)**一样，计数器的可能翻转也包含在参考区间中，如下图所示。示例**Ocu_SetRelativeThreshold(1,20)**，**ReadValue**等于 253。因此，此**API**的行为类似于[**Ocu_SetAbsoluteThreshold**](#738-ocu_setabsolutethreshold)，故有下面的需求。
 
 ![Figure8-5.png](Figure8-5.png)
 
@@ -608,7 +608,7 @@ NewThresholdValue = ReadValue + RelativeValue;
 
 在实际设置新阈值值（绝对或相对）时，先前阈值值不再产生比较匹配。
 
-**API Ocu_SetAbsoluteThreshold**在针对不同通道调用时应可重入。
+**API [Ocu_SetAbsoluteThreshold](#738-ocu_setabsolutethreshold)**在针对不同通道调用时应可重入。
 
 **Ocu_SetRelativeThreshold**函数应可通过配置参数**OcuSetRelativeThresholdApi {OCU_SET_RELATIVE_THRESHOLD_API}**在预编译时配置开/关。
 
@@ -712,7 +712,7 @@ void Ocu_Notification_<Channel> ( void )
 
 通知原型**Ocu_Notification_<channel#>**是上层提供、由用户实现的用于通知回调的函数。
 
-如果通道 <Channel#> 上发生比较匹配，**OCU**驱动应根据该通道最近一次**Ocu_EnableNotification**/**Ocu_DisableNotification**的调用情况，调用函数**Ocu_Notification_<Channel#>**。
+如果通道 <Channel#> 上发生比较匹配，**OCU**驱动应根据该通道最近一次[**Ocu_EnableNotification**](#7311-ocu_enablenotification)/[**Ocu_DisableNotification**](#7310-ocu_disablenotification)的调用情况，调用函数**Ocu_Notification_<Channel#>**。
 
 **OCU**驱动应复位（如果硬件需要）与通知**Ocu_Notification_<Channel#>**关联的中断标志。
 
@@ -720,15 +720,55 @@ void Ocu_Notification_<Channel> ( void )
 
 当通知机制被禁用时，**OCU**驱动不应发出任何通知。
 
-## 8. 配置规范
+## 8. 时序图
 
-总体而言，本章定义配置参数及其到**容器**（container）的聚类组织。为支持本规范，第 8.1 章描述相关基础知识，并规定参数规范所应使用的模板（表格）。我们有意将第 8.1 章保留在规范中，以保证可理解性。
+### 8.1. 初始化
 
-第 8.2 章规定**OCU**模块的结构（容器）与参数。
+* **OCU**驱动初始化。
+* 所使用的硬件按照引用的配置结构进行配置。
+* 所有通知均被禁用。
+* 所有已使用的中断均被禁用。
 
-第 8.3 章规定**OCU**模块的发布信息。
+![Figure9-1.png](Figure9-1.png)
 
-### 8.1. 如何阅读本章
+### 8.2. 反初始化
+
+* **OCU**驱动反初始化。
+* 所有通知均被禁用。
+* 所有已使用的中断均被禁用。
+* 硬件设计应负责确保该状态不会导致微控制器中的未定义活动。
+
+![Figure9-2.png](Figure9-2.png)
+
+### 8.3. 使用 Ocu 通知
+
+上层不会收到关于此比较匹配的通知。
+
+![Figure9-3.png](Figure9-3.png)
+
+### 8.4. Ocu_SetPinState
+
+![Figure9-4.png](Figure9-4.png)
+
+### 8.5. Ocu_SetPinAction
+
+![Figure9-5.png](Figure9-5.png)
+
+### 8.6. 设置新的比较阈值
+
+关于新比较阈值的设置，参见 **Ocu_SetAbsoluteThreshold**（第 7.3.8 节）和 **Ocu_SetRelativeThreshold**（第 7.3.9 节）。
+
+引脚电平仅在比较匹配时由硬件更改。
+
+## 9. 配置规范
+
+总体而言，本章定义配置参数及其到**容器**（container）的聚类组织。为支持本规范，第 9.1 章描述相关基础知识，并规定参数规范所应使用的模板（表格）。我们有意将第 9.1 章保留在规范中，以保证可理解性。
+
+第 9.2 章规定**OCU**模块的结构（容器）与参数。
+
+第 9.3 章规定**OCU**模块的发布信息。
+
+### 9.1. 如何阅读本章
 
 详情请参阅 SWS_BSWGeneral 中的第 10.1 章 "Introduction to configuration specification"（配置规范导论）。
 
@@ -741,13 +781,13 @@ void Ocu_Notification_<Channel> ( void )
 
 以下仅是对该主题的简要概述，不能取代 ECU 配置规范文档。
 
-#### 8.1.1. 配置与配置参数
+#### 9.1.1. 配置与配置参数
 
 配置参数定义模块实现的通用部分的可变性。这意味着只有通用的或可配置的模块实现才能在系统和/或 ECU 配置期间适配使用中的环境（软件/硬件）。
 
 参数的配置可以在软件过程中的不同时间点完成：编译前（before compile time）、链接前（before link time）或构建后（after build time）。下文使用术语"（参数的）配置类"（configuration class）指代特定的配置时间点。
 
-#### 8.1.2. 容器
+#### 9.1.2. 容器
 
 容器对配置参数的集合进行结构化。这意味着：
 
@@ -755,7 +795,7 @@ void Ocu_Notification_<Channel> ( void )
 
 * （子）容器可以引用（子）容器。可以为这些引用分配多重性。该多重性定义了所包含参数的可能实例数量。
 
-#### 8.1.3. 配置参数的规格模板
+#### 9.1.3. 配置参数的规格模板
 
 以下表格由三个部分组成：
 
@@ -786,13 +826,13 @@ Post Build —— 规定该配置参数是否属于 Post Build 配置类。
 | M | Multiple —— 该配置参数属于 Post Build 配置类，通过向模块的初始化函数传递专用指针从多个参数集中选择。 |
 | - | 该配置参数绝不属于 Post Build 配置类。 |
 
-### 8.2. 容器与配置参数
+### 9.2. 容器与配置参数
 
 以下各节汇总所有配置参数。各参数的详细含义见第 6 章和第 7 章。
 
 OCU 模块应拒绝实现所不支持的、带有分区映射的配置。
 
-#### 8.2.1. Ocu
+#### 9.2.1. Ocu
 
 | SWS 条目 |  |
 |---|---|
@@ -807,7 +847,7 @@ OCU 模块应拒绝实现所不支持的、带有分区映射的配置。
 | OcuConfigurationOfOptionalApis | 1 | 可选 API 的配置。 |
 | OcuGeneral | 1 | 此容器包含 OCU 驱动的模块级配置参数。 |
 
-#### 8.2.2. OcuGeneral
+#### 9.2.2. OcuGeneral
 
 OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所引用的 ECUC 分区的子集。
 
@@ -860,7 +900,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 
 若 OcuEcucPartitionRef 引用一个或多个 ECUC 分区，则 OcuKernelEcucPartitionRef 的多重性应为一，并且也应引用这些 ECUC 分区之一。
 
-#### 8.2.3. OcuConfigurationOfOptionalApis
+#### 9.2.3. OcuConfigurationOfOptionalApis
 
 | SWS 条目 |  |
 |---|---|
@@ -878,7 +918,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -890,7 +930,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -902,7 +942,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -914,7 +954,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -926,7 +966,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -938,7 +978,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -950,7 +990,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -962,12 +1002,12 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | false |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 无包含的容器。
 
-#### 8.2.4. OcuConfigSet
+#### 9.2.4. OcuConfigSet
 
 | SWS 条目 |  |
 |---|---|
@@ -996,7 +1036,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
-#### 8.2.5. OcuChannel
+#### 9.2.5. OcuChannel
 
 | SWS 条目 |  |
 |---|---|
@@ -1015,7 +1055,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 范围 | 0 .. 255 |
 | 默认值 | - |
 | Post-Build 变体值 | true |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1028,7 +1068,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 范围 | 0 .. 65535 |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1041,7 +1081,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 范围 | 1 .. 32768 |
 | 默认值 | - |
 | Post-Build 变体值 | true |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1054,7 +1094,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 范围 | 0 .. 4294967295 |
 | 默认值 | - |
 | Post-Build 变体值 | true |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1068,8 +1108,8 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 默认值 | 0 |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1083,8 +1123,8 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 默认值 | 0 |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1096,6 +1136,9 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucIntegerParamDef |
 | 范围 | 1 .. 4294967295 |
 | 默认值 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
 |---|---|
@@ -1108,8 +1151,8 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 正则表达式 | - |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1119,11 +1162,11 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 描述 | 参数 OcuOutputPinDefaultState 表示通道关联的引脚在初始化后应被置成的状态。 |
 | 多重性 | 0..1 |
 | 类型 | EcucEnumerationParamDef |
-| 范围 | OCU_HIGH |
+| 范围 | OCU_HIGH：请求时，OCU 通道输出引脚将被置为高电平（3 或 5 V）；OCU_LOW：请求时，OCU 通道输出引脚将被置为低电平（0 V） |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1135,7 +1178,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1170,7 +1213,7 @@ OcuChannelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef �
 
 若 OcuEcucPartitionRef 引用一个或多个 ECUC 分区，则 OcuKernelEcucPartitionRef 的多重性应为一，并且也应引用这些 ECUC 分区之一。
 
-#### 8.2.6. OcuHWSpecificSettings
+#### 9.2.6. OcuHWSpecificSettings
 
 | SWS 条目 |  |
 |---|---|
@@ -1189,8 +1232,8 @@ OcuChannelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef �
 | 范围 | - |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1203,13 +1246,13 @@ OcuChannelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef �
 | 范围 | - |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 无包含的容器。
 
-### 8.3. 发布信息
+### 9.3. 发布信息
 
 详情请参阅 SWS_BSWGeneral 中的第 10.3 章 "Published Information"（发布信息）。
 

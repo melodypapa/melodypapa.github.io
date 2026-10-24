@@ -11,3 +11,4 @@ reference
 .workbuddy/memory/*.md
 .zcode/
 site/
+__pycache__/

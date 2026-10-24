@@ -25,7 +25,7 @@ release: R23-11
 > 定义**PWM**信号的输出状态。可以是：高、低。
 
 **PWM Idle State**
-> 空闲状态表示调用**Pwm_SetOutputToIdle**或**Pwm_DeInit**后**PWM**通道的输出状态。
+> 空闲状态表示调用[**Pwm_SetOutputToIdle**](#735-pwm_setoutputtoidle)或[**Pwm_DeInit**](#732-pwm_deinit)后**PWM**通道的输出状态。
 
 **PWM Polarity**
 > 定义每个**PWM**通道的起始输出状态。
@@ -131,7 +131,7 @@ AUTOSAR_CP_SWS_BSWGeneral.pdf
 
 ### 6.1. 一般行为
 
-**PWM**模块的所有函数（除**Pwm_Init**、**Pwm_DeInit**和**Pwm_GetVersionInfo**外）对于不同的**PWM**通道编号应是可重入的。
+**PWM**模块的所有函数（除[**Pwm_Init**](#731-pwm_init)、[**Pwm_DeInit**](#732-pwm_deinit)和[**Pwm_GetVersionInfo**](#7313-pwm_getversioninfo)外）对于不同的**PWM**通道编号应是可重入的。
 
 为了保持简单的模块实现，模块不必执行相关检查。
 
@@ -167,17 +167,17 @@ AUTOSAR_CP_SWS_BSWGeneral.pdf
 
 当相应的配置参数**PwmLowPowerStatesSupport**设置为**TRUE**时，**PwmDriver**应支持电源状态更改及其**API**。
 
-如果参数**PwmLowPowerStatesSupport**启用，则应生成**API Pwm_PreparePowerState**、**Pwm_SetPowerState**、**Pwm_GetCurrentPowerState**、**Pwm_GetTargetPowerState**，并应使用它们来管理和获取电源状态转换的信息。
+如果参数**PwmLowPowerStatesSupport**启用，则应生成**API [Pwm_PreparePowerState](#7312-pwm_preparepowerstate)**、[**Pwm_SetPowerState**](#739-pwm_setpowerstate)、[**Pwm_GetCurrentPowerState**](#7310-pwm_getcurrentpowerstate)、[**Pwm_GetTargetPowerState**](#7311-pwm_gettargetpowerstate)，并应使用它们来管理和获取电源状态转换的信息。
 
-**API Pwm_GetTargetPowerState**和**Pwm_GetCurrentPowerState**应分别用于收集请求的**Pwm**电源状态和目标**Pwm**电源状态的信息。
+**API [Pwm_GetTargetPowerState](#7311-pwm_gettargetpowerstate)**和[**Pwm_GetCurrentPowerState**](#7310-pwm_getcurrentpowerstate)应分别用于收集请求的**Pwm**电源状态和目标**Pwm**电源状态的信息。
 
-**API Pwm_PreparePowerState**应用于启动电源状态转换。
+**API [Pwm_PreparePowerState](#7312-pwm_preparepowerstate)**应用于启动电源状态转换。
 
-在完成电源状态的准备后，应使用**API Pwm_SetPowerState**来达到**Pwm**模块请求的电源状态。
+在完成电源状态的准备后，应使用**API [Pwm_SetPowerState](#739-pwm_setpowerstate)**来达到**Pwm**模块请求的电源状态。
 
-为了避免不一致的电源状态条件，某些**API**（**Pwm_SetPowerState**、**Pwm_PreparePowerState**）必须以给定的顺序调用，否则将存储错误（如果启用了**DET**跟踪）并中断动作。**Pwm**驱动程序跟踪调用序列。
+为了避免不一致的电源状态条件，某些**API**（[**Pwm_SetPowerState**](#739-pwm_setpowerstate)、[**Pwm_PreparePowerState**](#7312-pwm_preparepowerstate)）必须以给定的顺序调用，否则将存储错误（如果启用了**DET**跟踪）并中断动作。**Pwm**驱动程序跟踪调用序列。
 
-**Pwm**驱动程序应跟踪**API Pwm_SetPowerState**和**Pwm_PreparePowerState**的调用顺序。如果在调用第二个**API**之前调用了第一个**API**，应存储**DET**条目且不执行该动作。
+**Pwm**驱动程序应跟踪**API [Pwm_SetPowerState](#739-pwm_setpowerstate)**和[**Pwm_PreparePowerState**](#7312-pwm_preparepowerstate)的调用顺序。如果在调用第二个**API**之前调用了第一个**API**，应存储**DET**条目且不执行该动作。
 
 如果参数**PwmLowPowerStatesSupport**设置为**TRUE**，**Pwm**模块应跟踪当前和目标电源状态。
 
@@ -214,15 +214,15 @@ AbsoluteDutyCycle = ((uint32)AbsolutePeriodTime * RelativeDutyCycle) >> 15;
 
 | 错误类型 | 相关错误代码 | 错误值 |
 |---|---|---|
-| **API Pwm_Init**服务以错误参数调用 | PWM_E_INIT_FAILED | 0x10 |
+| **API [Pwm_Init](#731-pwm_init)**服务以错误参数调用 | PWM_E_INIT_FAILED | 0x10 |
 | 未经模块初始化使用**API**服务 | PWM_E_UNINIT | 0x11 |
 | 使用无效的通道标识符的**API**服务 | PWM_E_PARAM_CHANNEL | 0x12 |
 | 在配置为固定周期的**PWM**通道上使用未授权的**PWM**服务 | PWM_E_PERIOD_UNCHANGEABLE | 0x13 |
-| 在**PWM**驱动程序已初始化时调用**API Pwm_Init**服务 | PWM_E_ALREADY_INITIALIZED | 0x14 |
-| **API Pwm_GetVersionInfo**以**NULL**参数调用。 | PWM_E_PARAM_POINTER | 0x15 |
+| 在**PWM**驱动程序已初始化时调用**API [Pwm_Init](#731-pwm_init)**服务 | PWM_E_ALREADY_INITIALIZED | 0x14 |
+| **API [Pwm_GetVersionInfo](#7313-pwm_getversioninfo)**以**NULL**参数调用。 | PWM_E_PARAM_POINTER | 0x15 |
 | **PWM**模块不支持请求的电源状态。 | PWM_E_POWER_STATE_NOT_SUPPORTED | 0x17 |
 | 从当前电源状态无法到达请求的电源状态 | PWM_E_TRANSITION_NOT_POSSIBLE | 0x18 |
-| 调用**API Pwm_SetPowerState**之前未调用**API Pwm_PreparePowerState**。 | PWM_E_PERIPHERAL_NOT_PREPARED | 0x19 |
+| 调用**API [Pwm_SetPowerState](#739-pwm_setpowerstate)**之前未调用**API [Pwm_PreparePowerState](#7312-pwm_preparepowerstate)**。 | PWM_E_PERIPHERAL_NOT_PREPARED | 0x19 |
 
 当**API**服务未经模块初始化而使用时，**PWM**驱动程序模块应报告开发错误"PWM_E_UNINIT (0x11)"。
 
@@ -230,13 +230,13 @@ AbsoluteDutyCycle = ((uint32)AbsolutePeriodTime * RelativeDutyCycle) >> 15;
 
 在配置为固定周期的**PWM**通道上使用未授权的**PWM**服务时，**PWM**驱动程序模块应报告开发错误"PWM_E_PERIOD_UNCHANGEABLE (0x13)"。
 
-当**API Pwm_Init**服务在**PWM**驱动程序已初始化时被调用，**PWM**驱动程序模块应报告开发错误"PWM_E_ALREADY_INITIALIZED(0x14)"。
+当**API [Pwm_Init](#731-pwm_init)**服务在**PWM**驱动程序已初始化时被调用，**PWM**驱动程序模块应报告开发错误"PWM_E_ALREADY_INITIALIZED(0x14)"。
 
 如果此**API**以不支持的电源状态调用，或外设完全不支持低功耗状态，**API**应报告开发错误**PWM_E_POWER_STATE_NOT_SUPPORTED**。
 
 如果无法从当前电源状态直接到达请求的电源状态，**API**应报告开发错误**PWM_E_TRANSITION_NOT_POSSIBLE**。
 
-如果**HW**单元先前未通过使用**API Pwm_PreparePowerState()**为目标电源状态做准备，**API**应报告开发错误**PWM_E_PERIPHERAL_NOT_PREPARED**。
+如果**HW**单元先前未通过使用**API [Pwm_PreparePowerState](#7312-pwm_preparepowerstate)()**为目标电源状态做准备，**API**应报告开发错误**PWM_E_PERIPHERAL_NOT_PREPARED**。
 
 有关错误检测的更多详情，请参阅**API**参数检查一章。
 
@@ -244,7 +244,7 @@ AbsoluteDutyCycle = ((uint32)AbsolutePeriodTime * RelativeDutyCycle) >> 15;
 
 | 错误类型 | 相关错误代码 | 错误值 |
 |---|---|---|
-| 在**PWM**模块仍在使用时调用**API Pwm_SetPowerState**。 | PWM_E_NOT_DISENGAGED | 0x16 |
+| 在**PWM**模块仍在使用时调用**API [Pwm_SetPowerState](#739-pwm_setpowerstate)**。 | PWM_E_NOT_DISENGAGED | 0x16 |
 
 当调用此**API**时一个或多个**HW**通道（如适用）处于不同于**IDLE**（或类似非运行状态）的状态，和/或仍有为**HW**模块通道注册的通知，**API**应报告运行时错误**PWM_E_NOT_DISENGAGED**。
 
@@ -376,7 +376,7 @@ void Pwm_Init (const Pwm_ConfigType* ConfigPtr)
 
 函数**Pwm_Init**应禁用所有通知。
 
-原因是这些通知的用户可能尚未准备好。他们可以调用**Pwm_EnableNotification**来启动通知。
+原因是这些通知的用户可能尚未准备好。他们可以调用[**Pwm_EnableNotification**](#738-pwm_enablenotification)来启动通知。
 
 **Pwm**模块的用户不应在运行操作期间调用函数**Pwm_Init**。
 
@@ -384,7 +384,7 @@ void Pwm_Init (const Pwm_ConfigType* ConfigPtr)
 
 如果启用了开发错误检测，在**PWM**驱动程序和硬件已初始化时调用例程**Pwm_Init**将导致开发错误**PWM_E_ALREADY_INITIALIZED**。所需功能应保持不执行任何动作。
 
-通过执行**Pwm_Init()**函数重新初始化**Pwm**驱动程序需要先通过执行**Pwm_DeInit()**进行去初始化。
+通过执行**Pwm_Init()**函数重新初始化**Pwm**驱动程序需要先通过执行**[Pwm_DeInit](#732-pwm_deinit)()**进行去初始化。
 
 关于错误检测，相关需求适用于函数**Pwm_Init**。
 
@@ -482,15 +482,15 @@ void Pwm_SetOutputToIdle (Pwm_ChannelType ChannelNumber)
 
 函数**Pwm_SetOutputToIdle**应可通过配置参数**PwmSetOutputToIdle {PWM_SET_OUTPUT_TO_IDLE_API}**配置开/关。
 
-调用函数**Pwm_SetOutputToIdle**后，可变周期类型通道应使用**API Pwm_SetPeriodAndDuty()**重新激活，以用新传递的周期激活**PWM**通道。
+调用函数**Pwm_SetOutputToIdle**后，可变周期类型通道应使用**API [Pwm_SetPeriodAndDuty](#734-pwm_setperiodandduty)()**重新激活，以用新传递的周期激活**PWM**通道。
 
-调用函数**Pwm_SetOutputToIdle**后，通道应使用**API Pwm_SetDutyCycle()**重新激活，以用旧周期激活**PWM**通道。
+调用函数**Pwm_SetOutputToIdle**后，通道应使用**API [Pwm_SetDutyCycle](#733-pwm_setdutycycle)()**重新激活，以用旧周期激活**PWM**通道。
 
-调用函数**Pwm_SetOutputToIdle**后，固定周期类型通道应只使用**API Pwm_SetDutyCycle()**重新激活，以用旧周期激活**PWM**通道。
+调用函数**Pwm_SetOutputToIdle**后，固定周期类型通道应只使用**API [Pwm_SetDutyCycle](#733-pwm_setdutycycle)()**重新激活，以用旧周期激活**PWM**通道。
 
 #### 7.3.6. Pwm_GetOutputState
 
-**说明**: 读取**PWM**输出信号内部状态的服务。可通过**Pwm.h**获得。本服务为同步调用；对不同通道编号可重入。参数 ChannelNumber（in）：**PWM**的数字标识符。返回值：Pwm_OutputStateType，PWM_HIGH 表示**PWM**输出状态为高；PWM_LOW 表示**PWM**输出状态为低。
+**说明**: 读取**PWM**输出信号内部状态的服务。可通过**Pwm.h**获得。本服务为同步调用；对不同通道编号可重入。参数 ChannelNumber（in）：**PWM**的数字标识符。返回值：[Pwm_OutputStateType](#723-pwm_outputstatetype)，PWM_HIGH 表示**PWM**输出状态为高；PWM_LOW 表示**PWM**输出状态为低。
 
 ```C
 Pwm_OutputStateType Pwm_GetOutputState (Pwm_ChannelType ChannelNumber)
@@ -560,7 +560,7 @@ Std_ReturnType Pwm_SetPowerState (Pwm_PowerStateRequestResultType* Result)
 
 如果目标电源状态与当前电源状态相同，则不执行任何动作，**API**立即以**E_OK**结果返回。
 
-如果请求正常电源状态，**API**应引用**Pwm_Init**使用的相同容器中包含的必要参数。
+如果请求正常电源状态，**API**应引用[**Pwm_Init**](#731-pwm_init)使用的相同容器中包含的必要参数。
 
 不应对正常（即全功率）电源模式使用单独的容器或硬编码数据，以避免初始化阶段使用的初始化参数与电源状态更改期间使用的参数之间出现错位。
 
@@ -578,7 +578,7 @@ Std_ReturnType Pwm_SetPowerState (Pwm_PowerStateRequestResultType* Result)
 
 如果无法从当前电源状态直接到达请求的电源状态，**API**应报告开发错误**PWM_E_TRANSITION_NOT_POSSIBLE**。
 
-如果**HW**单元先前未通过使用**API Pwm_PreparePowerState()**为目标电源状态做准备，**API**应报告开发错误**PWM_E_PERIPHERAL_NOT_PREPARED**。
+如果**HW**单元先前未通过使用**API [Pwm_PreparePowerState](#7312-pwm_preparepowerstate)()**为目标电源状态做准备，**API**应报告开发错误**PWM_E_PERIPHERAL_NOT_PREPARED**。
 
 #### 7.3.10. Pwm_GetCurrentPowerState
 
@@ -668,7 +668,7 @@ void Pwm_GetVersionInfo (Std_VersionInfoType* versioninfo)
 void Pwm_Main_PowerTransitionManager (void)
 ```
 
-此**API**执行完成**Pwm_PreparePowerState()**请求的电源状态转换所需的任何非即时动作。
+此**API**执行完成**[Pwm_PreparePowerState](#7312-pwm_preparepowerstate)()**请求的电源状态转换所需的任何非即时动作。
 
 调度速率应由**Pwm MainSchedulePeriod**定义并且是可变的，因为仅在请求了转换时才需要调用该函数。
 
@@ -702,19 +702,19 @@ void Pwm_Main_PowerTransitionManager (void)
 
 本章列出了目标函数可被配置的所有接口。目标函数通常是回调函数。这类接口的名称不固定，因为它们是可配置的。
 
-**说明**: **Pwm**模块应根据对通道**\<#Channel\>**最后一次**Pwm_EnableNotification**的调用调用函数**Pwm_Notification_\<#Channel\>**。可通过**Pwm_Externals.h**获得。本服务为同步调用；取决于**PWM**用户的实现。
+**说明**: **Pwm**模块应根据对通道**\<#Channel\>**最后一次[**Pwm_EnableNotification**](#738-pwm_enablenotification)的调用调用函数**Pwm_Notification_\<#Channel\>**。可通过**Pwm_Externals.h**获得。本服务为同步调用；取决于**PWM**用户的实现。
 
 ```C
 void Pwm_Notification_\<#Channel\> (void)
 ```
 
-**Pwm**模块应根据对通道**\<#Channel\>**最后一次**Pwm_EnableNotification**和**Pwm_DisableNotification**的调用调用函数**Pwm_Notification_\<#Channel\>**。
+**Pwm**模块应根据对通道**\<#Channel\>**最后一次[**Pwm_EnableNotification**](#738-pwm_enablenotification)和[**Pwm_DisableNotification**](#737-pwm_disablenotification)的调用调用函数**Pwm_Notification_\<#Channel\>**。
 
 **Pwm**模块应复位与通知**Pwm_Notification_\<#Channel\>**关联的中断标志。
 
-只有当配置参数**PwmNotificationSupported**为**ON**时，**Pwm**模块才应提供**Pwm_EnableNotification**的功能。
+只有当配置参数**PwmNotificationSupported**为**ON**时，**Pwm**模块才应提供[**Pwm_EnableNotification**](#738-pwm_enablenotification)的功能。
 
-只有当配置参数**PwmNotificationSupported**为**ON**时，**Pwm**模块才应提供**Pwm_DisableNotification**的功能。
+只有当配置参数**PwmNotificationSupported**为**ON**时，**Pwm**模块才应提供[**Pwm_DisableNotification**](#737-pwm_disablenotification)的功能。
 
 只有当配置参数**PwmNotificationSupported**为**ON**时，**Pwm**模块才应复位与通知关联的中断标志。
 
@@ -734,9 +734,9 @@ void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 
 如果为**Pwm**模块启用了开发错误检测并发生了开发错误，则相应的**PWM**函数应跳过所需功能，以避免数据或硬件寄存器的损坏，不执行任何动作而离开函数。
 
-如果为**Pwm**模块启用了开发错误检测：如果在调用**Pwm_Init**之前调用任何函数（**Pwm_Init**除外），被调用的函数应引发开发错误**PWM_E_UNINIT**。
+如果为**Pwm**模块启用了开发错误检测：如果在调用[**Pwm_Init**](#731-pwm_init)之前调用任何函数（[**Pwm_Init**](#731-pwm_init)除外），被调用的函数应引发开发错误**PWM_E_UNINIT**。
 
-如果为**Pwm**模块启用了开发错误检测：**API Pwm_SetPeriodAndDuty()**应检查给定的**PWM**通道是否为通道类类型**PWM_VARIABLE_PERIOD**。如果不是，应引发开发错误**PWM_E_PERIOD_UNCHANGEABLE**。
+如果为**Pwm**模块启用了开发错误检测：**API [Pwm_SetPeriodAndDuty](#734-pwm_setperiodandduty)()**应检查给定的**PWM**通道是否为通道类类型**PWM_VARIABLE_PERIOD**。如果不是，应引发开发错误**PWM_E_PERIOD_UNCHANGEABLE**。
 
 如果为**Pwm**模块启用了开发错误检测：**PWM**函数应检查参数**ChannelNumber**，如果参数**ChannelNumber**无效，应引发开发错误**PWM_E_PARAM_CHANNEL**。
 
@@ -790,7 +790,7 @@ void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 | 类型 | EcucBooleanParamDef |
 | 默认值 | false |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -802,7 +802,7 @@ void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 | 类型 | EcucBooleanParamDef |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -815,7 +815,7 @@ void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 | 范围 | 0 .. 4294967295 |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -827,8 +827,8 @@ void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 | 类型 | EcucBooleanParamDef |
 | 默认值 | false |
 | Post-Build 变体值 | false |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -840,7 +840,7 @@ void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 | 类型 | EcucBooleanParamDef |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -852,7 +852,7 @@ void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 | 类型 | EcucBooleanParamDef |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -891,8 +891,8 @@ void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 | 类型 | 对 EcucPartition 的引用 |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: ECU |
 
 | 容器名称 | 多重性 |
@@ -919,7 +919,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 描述 | 此参数的每个实例描述 PWM 硬件所支持的一个不同电源状态。它应由硬件供应商定义，并由 PWM 驱动用于引用将 PWM 硬件模块置于所述电源状态的特定硬件配置。至少应始终配置对应于满功率状态的电源模式。 |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local 依赖：仅当参数 PwmLowPowerStatesSupport 设为 true 时才应配置此参数。 |
 
 | SWS 条目 |  |
@@ -932,7 +932,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 默认值 | -- |
 | 正则表达式 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local 依赖：仅当参数 PwmLowPowerStatesSupport 设为 true 时才应配置此参数。 |
 
 #### 8.2.4. PwmChannel
@@ -954,8 +954,8 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 范围 | PWM_FIXED_PERIOD |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -968,7 +968,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 范围 | 0 .. 4294967295 |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 
 | SWS 条目 |  |
 |---|---|
@@ -980,7 +980,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 范围 | 0 .. 32768 |
 | 默认值 | -- |
 | Post-Build 变体值 | true |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -992,7 +992,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 类型 | EcucEnumerationParamDef |
 | 范围 | PWM_HIGH；PWM_LOW |
 | Post-Build 变体值 | true |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 
 | SWS 条目 |  |
 |---|---|
@@ -1005,8 +1005,8 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 正则表达式 | -- |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1019,7 +1019,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 范围 | [0 .. INF] |
 | 默认值 | -- |
 | Post-Build 变体值 | true |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 
 | SWS 条目 |  |
 |---|---|
@@ -1030,7 +1030,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 类型 | EcucEnumerationParamDef |
 | 范围 | PWM_HIGH |
 | Post-Build 变体值 | true |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1042,8 +1042,8 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 类型 | 对 EcucPartition 的引用 |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: ECU |
 
 | SWS 条目 |  |
@@ -1054,7 +1054,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 多重性 | 1 |
 | 类型 | 对 McuClockReferencePoint 的引用 |
 | Post-Build 变体值 | true |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: ECU |
 
 无包含的容器。
@@ -1092,7 +1092,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1104,7 +1104,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1116,7 +1116,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1128,7 +1128,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1140,7 +1140,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1152,7 +1152,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | false |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 ### 8.3. 发布信息
