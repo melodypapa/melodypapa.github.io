@@ -169,7 +169,7 @@ def build() -> tuple[str, list[str]]:
     trj = Path(__file__).parent / "tr_glossary.json"
     tr = json.loads(trj.read_text(encoding="utf-8"))
     tr_src_label = None
-    tr_path = DOCS / tr["article"]
+    tr_path = DOCS / tr["article"].removeprefix("docs/autosar/")
     if tr_path.exists():
         tr_src_label = article_label(tr_path)
         n_tr = len(tr["acronyms"]) + len(tr["terms"])
@@ -180,7 +180,7 @@ def build() -> tuple[str, list[str]]:
         if t_["display"].count("**") < 2:
             t_["display"] = f"**{term}**"
         d = t_["defs"].setdefault(norm_def(zh), {"text": zh, "src": []})
-        tr_link = tr["article"].removeprefix("docs/")  # glossary links are docs-relative
+        tr_link = tr["article"].removeprefix("docs/autosar/")  # glossary links are relative to docs/autosar/
         src = (tr_src_label or tr["source_doc"], tr_link, tr["source_doc"].removeprefix("AUTOSAR_FO_"), tr["release"])
         if src not in d["src"]:
             d["src"].append(src)
