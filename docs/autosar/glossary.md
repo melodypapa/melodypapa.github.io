@@ -720,7 +720,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 软件组件（**SoftWare Component**） — 来源：[iohwab](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
 > 软件组件（**Software Component**） — 来源：[operating_system](system_services/operating_system/index.md)（SWS_OperatingSystem · R23-11）
 
-**SWC/SW-C**
+**SWC / SW-C**
 > 软件组件（**Software Component**） — 来源：[basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md)（SWS_BSWModeManager · R23-11）
 
 **SWCD**
