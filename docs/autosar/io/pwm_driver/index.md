@@ -790,7 +790,7 @@ void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 | 类型 | EcucBooleanParamDef |
 | 默认值 | false |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -802,7 +802,7 @@ void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 | 类型 | EcucBooleanParamDef |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -815,7 +815,7 @@ void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 | 范围 | 0 .. 4294967295 |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -827,8 +827,8 @@ void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 | 类型 | EcucBooleanParamDef |
 | 默认值 | false |
 | Post-Build 变体值 | false |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -840,7 +840,7 @@ void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 | 类型 | EcucBooleanParamDef |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -852,7 +852,7 @@ void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 | 类型 | EcucBooleanParamDef |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -891,8 +891,8 @@ void IoHwAb_Pwm_NotifyReadyForPowerState\<#Mode\> (void)
 | 类型 | 对 EcucPartition 的引用 |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: ECU |
 
 | 容器名称 | 多重性 |
@@ -919,7 +919,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 描述 | 此参数的每个实例描述 PWM 硬件所支持的一个不同电源状态。它应由硬件供应商定义，并由 PWM 驱动用于引用将 PWM 硬件模块置于所述电源状态的特定硬件配置。至少应始终配置对应于满功率状态的电源模式。 |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local 依赖：仅当参数 PwmLowPowerStatesSupport 设为 true 时才应配置此参数。 |
 
 | SWS 条目 |  |
@@ -932,7 +932,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 默认值 | -- |
 | 正则表达式 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local 依赖：仅当参数 PwmLowPowerStatesSupport 设为 true 时才应配置此参数。 |
 
 #### 8.2.4. PwmChannel
@@ -954,8 +954,8 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 范围 | PWM_FIXED_PERIOD |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -968,7 +968,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 范围 | 0 .. 4294967295 |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 
 | SWS 条目 |  |
 |---|---|
@@ -980,7 +980,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 范围 | 0 .. 32768 |
 | 默认值 | -- |
 | Post-Build 变体值 | true |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -992,7 +992,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 类型 | EcucEnumerationParamDef |
 | 范围 | PWM_HIGH；PWM_LOW |
 | Post-Build 变体值 | true |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 
 | SWS 条目 |  |
 |---|---|
@@ -1005,8 +1005,8 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 正则表达式 | -- |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1019,7 +1019,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 范围 | [0 .. INF] |
 | 默认值 | -- |
 | Post-Build 变体值 | true |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 
 | SWS 条目 |  |
 |---|---|
@@ -1030,7 +1030,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 类型 | EcucEnumerationParamDef |
 | 范围 | PWM_HIGH |
 | Post-Build 变体值 | true |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1042,8 +1042,8 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 类型 | 对 EcucPartition 的引用 |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: ECU |
 
 | SWS 条目 |  |
@@ -1054,7 +1054,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 多重性 | 1 |
 | 类型 | 对 McuClockReferencePoint 的引用 |
 | Post-Build 变体值 | true |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: ECU |
 
 无包含的容器。
@@ -1092,7 +1092,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1104,7 +1104,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1116,7 +1116,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1128,7 +1128,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1140,7 +1140,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | -- |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1152,7 +1152,7 @@ PwmKernelEcucPartitionRef 所引用的 ECUC 分区应是 PwmEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | false |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 ### 8.3. 发布信息
