@@ -263,6 +263,12 @@ them**.
    with the document and release (front-matter `spec:` / `release:`).
    Regenerate after any 缩略语 chapter edit:
    `python .agents/skills/autosar-translate/scripts/gen_glossary.py`.
+   **Two ingestion paths** (user decision 2026-10-24): ordinary articles are
+   parsed from their ch.2; the Foundation TR glossary (`general/tr_glossary`)
+   is **never re-parsed from the translated article** — its entries come from
+   `scripts/tr_glossary.json`, a source-driven extraction that is appended
+   **during each translation batch** (extract the term from the source while
+   translating; never extract from the current translation afterwards).
    Read its report: a `! article: ch.2 present but no entries parsed` line is
    a drift signal (that ch.2 is prose or intro-only — fix the article, don't
    silence the line); `(table — 待改排)` flags a legacy GFM-table ch.2.

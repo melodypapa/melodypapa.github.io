@@ -17,6 +17,7 @@ Parsed shapes (STANDARD.md §1 ch.2 form first; legacy GFM table as fallback):
 """
 from __future__ import annotations
 
+import json
 import re
 import sys
 from collections import OrderedDict
@@ -43,6 +44,11 @@ def iter_articles():
     hard requirement: every glossary entry must name its document and release."""
     for p in sorted(DOCS.rglob("*.md")):
         if p.name in SKIP_FILES or SKIP_DIRS & set(p.parts):
+            continue
+        if p.parent.name == "tr_glossary":
+            # the Foundation TR glossary is ingested from tr_glossary.json
+            # (source-driven extraction during translation) — never by
+            # re-parsing the translated article (user decision 2026-10-24)
             continue
         text = p.read_text(encoding="utf-8")
         spec = front_field(text, "spec")
@@ -157,6 +163,30 @@ def build() -> tuple[str, list[str]]:
             src = (article_label(p), rel_link(p), spec_disp, release)
             if src not in d["src"]:
                 d["src"].append(src)
+
+    # Foundation TR glossary — source-driven extraction (updated during each
+    # translation batch), never parsed from the translated article
+    trj = Path(__file__).parent / "tr_glossary.json"
+    tr = json.loads(trj.read_text(encoding="utf-8"))
+    tr_src_label = None
+    tr_path = DOCS / tr["article"]
+    if tr_path.exists():
+        tr_src_label = article_label(tr_path)
+        n_tr = len(tr["acronyms"]) + len(tr["terms"])
+        report.append(f"  {n_tr:3d} {tr['source_doc']} (tr_glossary.json — source extraction)")
+    def add_tr(term, zh):
+        k = term.lower()
+        t_ = terms.setdefault(k, {"display": f"**{term}**", "defs": OrderedDict()})
+        if t_["display"].count("**") < 2:
+            t_["display"] = f"**{term}**"
+        d = t_["defs"].setdefault(norm_def(zh), {"text": zh, "src": []})
+        src = (tr_src_label or tr["source_doc"], tr["article"], tr["source_doc"].removeprefix("AUTOSAR_FO_"), tr["release"])
+        if src not in d["src"]:
+            d["src"].append(src)
+    for a in tr["acronyms"]:
+        add_tr(a["term"], a["zh"])
+    for name, v in tr["terms"].items():
+        add_tr(name, v["zh"])
 
     out = [
         "---",
