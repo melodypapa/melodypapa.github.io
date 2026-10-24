@@ -625,3 +625,143 @@ release: R23-11
 | 参考 | <定义的参考> |
 
 ## 4. 术语定义
+
+### 4.1. Abstract Platform
+
+| 定义 | AUTOSAR 定义的一种软件平台，用于以独立于经典平台（Classic）/ 自适应平台（Adaptive）/ 离板（Offboard）部署方式的方式定义功能级通信。 |
+|---|---|
+| 发起者 | 系统设计（**System Design**） |
+| 进一步说明 | 抽象平台只存在于方法论与建模意义上，并不是一个物理可部署的平台。在 AUTOSAR 经典平台与 AUTOSAR 自适应平台的语境下，功能级通信指的是 VFB 级通信。 |
+| 备注 | - |
+| 示例 | - |
+| 参考 | - |
+
+### 4.2. Acceptance Test Suite
+
+| 定义 | 在验收测试（**Acceptance Testing**）语境中使用的一种测试用例描述。 |
+|---|---|
+| 发起者 | 验收测试（**Acceptance Testing**） |
+| 进一步说明 | ISO 9646 区分抽象测试套件与可执行测试套件。对 AUTOSAR 而言，前者对应验收测试规格，后者对应测试实现或验收测试套件。 |
+| 备注 | - |
+| 示例 | - |
+| 参考 | [1]，第 1、2、4 部分 |
+
+### 4.3. Access Control Decision
+
+| 定义 | 访问控制判定是一个布尔值，指示所请求的操作是否被允许。它基于调用者的身份以及"访问控制策略"（**Access Control Policy**）。 |
+|---|---|
+| 发起者 | 安全（**Security**） |
+| 进一步说明 | 在 IAM 的情形中，"调用者"是一个自适应应用。 |
+| 备注 | - |
+| 示例 | - |
+| 参考 | - |
+
+### 4.4. Access Control Policy
+
+| 定义 | 访问控制策略绑定到调用的目标（即服务接口），用于表达访问这些接口需要何种"身份信息"（**Identity Information**）。 |
+|---|---|
+| 发起者 | 安全（**Security**） |
+| 进一步说明 | 策略可以通过配置/建模提供，也可以通过静态预编程的方式写入 PDP。 |
+| 备注 | - |
+| 示例 | - |
+| 参考 | - |
+
+### 4.5. Adaptability
+
+| 定义 | 适应性是系统调整自身以应对其环境变化、从而继续提供预期功能的能力。 |
+|---|---|
+| 发起者 | 安全（**Safety**） |
+| 进一步说明 | 应当区分系统/车辆环境中的变化（"运行时适应性"）与使用软件架构（如 AUTOSAR）的开发环境中的变化（"设计时可预测性"）。 |
+| 备注 | - |
+| 示例 | - |
+| 参考 | • Antonio Carlos Schneider Beck, Carlos Arthur Lang Lisboa, Luigi Carro (eds.), Adaptable Embedded Systems, Springer Science & Business Media, 27 Nov 2012 • Twan Basten, Roelof Hamberg, Frans Reckers, Jacques Verriet, Model-Based Design of Adaptive Embedded Systems, Springer Science & Business Media, 15 Mar 2013 |
+
+### 4.6. Adaptive Application
+
+| 定义 | 遵循自适应 AUTOSAR 规范、因而可部署到自适应平台实例上的软件。它由其实现、运行数据（如地图数据）以及由应用设计模型给出的元数据组成。自适应应用至少包含一个可执行文件。为了能部署到不同的自适应平台上，它只使用 ARA 编程接口。 |
+|---|---|
+| 发起者 | 执行管理（**Execution Management**） |
+| 进一步说明 | 自适应应用通常比经典平台的 SW-C 粒度更粗。它们只使用自适应平台 API，可以提供并使用服务。它们由一个或多个具有已定义入口点的可执行文件、字节码或库实现，并且可以由多个部分组成（如库、数据文件）。 |
+| 备注 | 自适应平台的目标是使自适应应用在不同的自适应平台实现之间至少达到源代码级的可移植性，并可能达到目标代码级的可移植性。 |
+| 示例 | - |
+| 参考 | - |
+
+### 4.7. Adaptive Platform Foundation
+
+| 定义 | 自适应平台实现的一部分，通过软件接口（API）向应用提供标准化的平台功能。 |
+|---|---|
+| 发起者 | 软件与架构（**Software and Architecture**） |
+| 进一步说明 | 自适应平台基础包括核心系统功能，如 OS、执行管理器（**Execution Manager**）、通信管理（**Communication Management**）和持久化（**Persistency**）。 |
+| 备注 | 自适应平台的目标是使自适应应用在不同的自适应平台实现之间至少达到源代码级的可移植性，并可能达到目标代码级的可移植性。 |
+| 示例 | - |
+| 参考 | - |
+
+### 4.8. Adaptive Platform Services
+
+| 定义 | 由属于 AUTOSAR 平台实现一部分的应用所提供的标准平台服务。 |
+|---|---|
+| 发起者 | 通信（**Communication**） |
+| 进一步说明 | - |
+| 备注 | - |
+| 示例 | - |
+| 参考 | - |
+
+### 4.9. Application
+
+| 定义 | 为解决需要信息处理的最终用户问题而规定的软件（或程序）。一个软件实体的"软件配置"（**Software Configuration**）。 |
+|---|---|
+| 发起者 | 软件与架构（**Software and Architecture**） |
+| 进一步说明 | 关于定义的第 1 点：在 AUTOSAR 中，应用软件位于 AUTOSAR RTE（RunTimeEnvironment）之上。 |
+| 备注 | 定义 1 是 AUTOSAR 中"应用"的默认含义；若指的是定义 2，则必须显式说明。 |
+| 示例 | - |
+| 参考 | [2] |
+
+### 4.10. Application Interface
+
+| 定义 | 软件组件模板中所规定的、由"软件组件"（**Software Component**）使用的"端口接口"（**Port Interface**）。 |
+|---|---|
+| 发起者 | 软件与架构（**Software and Architecture**） |
+| 进一步说明 | - |
+| 备注 | - |
+| 示例 | - |
+| 参考 | [3] |
+
+### 4.11. Application Programming Interface
+
+| 定义 | 应用编程接口（API）是特定软件部分的既定方法，编写程序的程序员通过它可以向该软件部分发出请求。 |
+|---|---|
+| 发起者 | 软件与架构（**Software and Architecture**） |
+| 进一步说明 | - |
+| 备注 | - |
+| 示例 | [4]（OSEK/VDX 操作系统） |
+| 参考 | - |
+
+### 4.12. Application Software Component
+
+| 定义 | 应用软件组件是一种特定的"软件组件"，它在应用层实现已定义的功能并运行于 AUTOSAR 基础设施之上。它只通过 AUTOSAR 运行时环境进行通信。 |
+|---|---|
+| 发起者 | 软件与架构（**Software and Architecture**） |
+| 进一步说明 | 应用软件组件位于 AUTOSAR 运行时环境"之上"。 |
+| 备注 | - |
+| 示例 | - |
+| 参考 | - |
+
+### 4.13. Architecture
+
+| 定义 | 体系结构是系统的基本组织方式，体现在其组件、组件之间及其与环境的静态与动态关系、以及指导其设计与演化的原则之中。 |
+|---|---|
+| 发起者 | 软件与架构（**Software and Architecture**） |
+| 进一步说明 | - |
+| 备注 | 在 [5] 的定义中加入了"静态与动态"。 |
+| 示例 | - |
+| 参考 | [6], [5] |
+
+### 4.14. Artifact
+
+| 定义 | 制品是一种工作产品定义（**Work Product Definition**），为有形的工作产品类型提供描述与定义。制品可以由其他制品组成。在高层次上，制品表示为单个概念性文件。 |
+|---|---|
+| 发起者 | 方法论与模板（**Methodology and Templates**） |
+| 进一步说明 | - |
+| 备注 | - |
+| 示例 | - |
+| 参考 | - |
