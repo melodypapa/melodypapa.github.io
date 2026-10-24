@@ -18,7 +18,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 采集时间 = 采样时间（**Sample Time**）+ 转换时间（**Conversion Time**） — 来源：[adc_driver](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 
 **Active Time**
-> 取决于被捕获信号的起始边沿：起始边沿为下降沿时，**Active Time** = **Low Time**；起始边沿为上升沿时，**Active Time** = **High Time**；起始边沿为双边沿时，若先出现上升沿则 **Active Time** = **High Time**，若先出现下降沿则 **Active Time** = **Low Time**。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R22-11）
+> 取决于被捕获信号的起始边沿：起始边沿为下降沿时，**Active Time** = **Low Time**；起始边沿为上升沿时，**Active Time** = **High Time**；起始边沿为双边沿时，若先出现上升沿则 **Active Time** = **High Time**，若先出现下降沿则 **Active Time** = **Low Time**。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R23-11）
 
 **ADC**
 > 模数转换器（**Analogue Digital Converter**） — 来源：[adc_driver](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
@@ -166,14 +166,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DEM**
 > Diagnostic Event Manager — 来源：[can_transceiver_driver](communication/can_transceiver_driver/index.md)（SWS_CANTransceiverDriver · R23-11）、[function_inhibition_manager](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager · R23-11）
 > DEM模块提供检索与故障内存相关的所有信息的功能，以便Dcm模块能够通过从故障内存中读取数据来响应测试者的请求。 — 来源：[diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md)（SWS_DiagnosticCommunicationManager · R23-11）
-> 诊断事件管理器（**Diagnostic Event Manager**）。 — 来源：[adc_driver](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）、[dio_driver](io/dio_driver/index.md)（SWS_DIODriver · R23-11）、[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R22-11）、[ocu_driver](io/ocu_driver/index.md)（SWS_OCUDriver · R23-11）、[port_driver](io/port_driver/index.md)（SWS_PortDriver · R23-11）、[pwm_driver](io/pwm_driver/index.md)（SWS_PWMDriver · R23-11）、[flash_driver](memory/flash_driver/index.md)（SWS_FlashDriver · R23-11）、[basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md)（SWS_BSWModeManager · R23-11）
+> 诊断事件管理器（**Diagnostic Event Manager**）。 — 来源：[adc_driver](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）、[dio_driver](io/dio_driver/index.md)（SWS_DIODriver · R23-11）、[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R23-11）、[ocu_driver](io/ocu_driver/index.md)（SWS_OCUDriver · R23-11）、[port_driver](io/port_driver/index.md)（SWS_PortDriver · R23-11）、[pwm_driver](io/pwm_driver/index.md)（SWS_PWMDriver · R23-11）、[flash_driver](memory/flash_driver/index.md)（SWS_FlashDriver · R23-11）、[basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md)（SWS_BSWModeManager · R23-11）
 
 **DET**
 > Default Error Tracer — 来源：[can_transceiver_driver](communication/can_transceiver_driver/index.md)（SWS_CANTransceiverDriver · R23-11）
 > Default Error Tracer：默认错误跟踪器 — 来源：[crypto_driver](crypto/crypto_driver/index.md)（SWS_CryptoDriver · R23-11）
 > Default Error Tracer，默认错误跟踪器 — 来源：[crypto_service_manager](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager · R23-11）
 > 默认错误跟踪器（**Default Error Tracer**），实现报告开发错误的模块。 — 来源：[adc_driver](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）、[flash_driver](memory/flash_driver/index.md)（SWS_FlashDriver · R23-11）
-> 默认错误跟踪器（**Default Error Tracer**）。 — 来源：[dio_driver](io/dio_driver/index.md)（SWS_DIODriver · R23-11）、[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R22-11）、[iohwab](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）、[ocu_driver](io/ocu_driver/index.md)（SWS_OCUDriver · R23-11）、[port_driver](io/port_driver/index.md)（SWS_PortDriver · R23-11）、[pwm_driver](io/pwm_driver/index.md)（SWS_PWMDriver · R23-11）、[basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md)（SWS_BSWModeManager · R23-11）
+> 默认错误跟踪器（**Default Error Tracer**）。 — 来源：[dio_driver](io/dio_driver/index.md)（SWS_DIODriver · R23-11）、[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R23-11）、[iohwab](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）、[ocu_driver](io/ocu_driver/index.md)（SWS_OCUDriver · R23-11）、[port_driver](io/port_driver/index.md)（SWS_PortDriver · R23-11）、[pwm_driver](io/pwm_driver/index.md)（SWS_PWMDriver · R23-11）、[basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md)（SWS_BSWModeManager · R23-11）
 
 **DIO**
 > Digital Input Output (SPAL module) — 来源：[can_transceiver_driver](communication/can_transceiver_driver/index.md)（SWS_CANTransceiverDriver · R23-11）
@@ -217,7 +217,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 **EcuM**
 > ECU State Manager — 来源：[can_transceiver_driver](communication/can_transceiver_driver/index.md)（SWS_CANTransceiverDriver · R23-11）
-> **ECU**状态管理器（**ECU State Manager**）。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R22-11）
+> **ECU**状态管理器（**ECU State Manager**）。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R23-11）
 
 **EEPROM**
 > 电可擦除可编程ROM（**Electrically Erasable and Programmable ROM**）。 — 来源：[flash_eeprom_emulation](memory/flash_eeprom_emulation/index.md)（SWS_FlashEEPROMEmulation · R23-11）
@@ -229,7 +229,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 电信号（**Electrical Signal**）代表**ECU**引脚上的物理信号。 — 来源：[iohwab](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
 
 **Enumeration**
-> 枚举。在**C**语言中可以是**enum**或**#define**。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R22-11）
+> 枚举。在**C**语言中可以是**enum**或**#define**。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R23-11）
 
 **ERA**
 > 外部请求数组（**External Request Array**） — 来源：[can_network_management](communication/can_network_management/index.md)（SWS_CANNetworkManagement · R23-11）
@@ -304,19 +304,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 **ICU**
 > 输入捕获单元（**Input Capture Unit**）。 — 来源：[dio_driver](io/dio_driver/index.md)（SWS_DIODriver · R23-11）
-> 输入捕获单元（**Input Capture Unit**），而非重症监护室（Intensive Care Unit）。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R22-11）
+> 输入捕获单元（**Input Capture Unit**），而非重症监护室（Intensive Care Unit）。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R23-11）
 
 **ICU Channel**
-> 表示绑定到一个输入信号、并为所配置测量模式提供硬件资源的逻辑**ICU**实体。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R22-11）
+> 表示绑定到一个输入信号、并为所配置测量模式提供硬件资源的逻辑**ICU**实体。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R23-11）
 
 **ICU State**
-> **ICU**通道的逻辑输入状态，可以是**ICU_ACTIVE**或**ICU_IDLE**。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R22-11）
+> **ICU**通道的逻辑输入状态，可以是**ICU_ACTIVE**或**ICU_IDLE**。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R23-11）
 
 **ICU_ACTIVE**
-> **ICU**通道的输入状态，表示已检测到激活边沿。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R22-11）
+> **ICU**通道的输入状态，表示已检测到激活边沿。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R23-11）
 
 **ICU_IDLE**
-> **ICU**通道的输入状态，表示自上次调用**Icu_GetInputState()**或**Icu_Init()**以来未检测到激活边沿。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R22-11）
+> **ICU**通道的输入状态，表示自上次调用**Icu_GetInputState()**或**Icu_Init()**以来未检测到激活边沿。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R23-11）
 
 **ID**
 > 标识符（**Identifier**）。 — 来源：[dio_driver](io/dio_driver/index.md)（SWS_DIODriver · R23-11）、[operating_system](system_services/operating_system/index.md)（SWS_OperatingSystem · R23-11）
@@ -704,7 +704,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > ECU信号的符号名称（**Symbolic name**）在**I/O**硬件抽象模块中是用来建立链接的。（包括：功能、引脚等） — 来源：[iohwab](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
 
 **Symbolic name for a channel**
-> 通道的符号名，是用名称对句柄的替代。通过该句柄可以在配置结构中找到每个通道及其相关属性。在**C**语言中可通过**#define**和**enum**实现。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R22-11）
+> 通道的符号名，是用名称对句柄的替代。通过该句柄可以在配置结构中找到每个通道及其相关属性。在**C**语言中可通过**#define**和**enum**实现。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R23-11）
 
 ## T
 
@@ -737,7 +737,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 ## W
 
 **Wakeup event**
-> 唤醒事件被理解为将导致本驱动唤醒的边沿模式。但某个模式是否有效不由本驱动判定，而应由上层判定。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R22-11）
+> 唤醒事件被理解为将导致本驱动唤醒的边沿模式。但某个模式是否有效不由本驱动判定，而应由上层判定。 — 来源：[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R23-11）
 
 **WEth**
 > Wireless Ethernet Driver，无线以太网驱动程序。 — 来源：[ethernet_interface](communication/ethernet_interface/index.md)（SWS_EthernetInterface · R23-11）
