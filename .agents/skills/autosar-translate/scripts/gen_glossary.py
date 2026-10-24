@@ -180,7 +180,8 @@ def build() -> tuple[str, list[str]]:
         if t_["display"].count("**") < 2:
             t_["display"] = f"**{term}**"
         d = t_["defs"].setdefault(norm_def(zh), {"text": zh, "src": []})
-        src = (tr_src_label or tr["source_doc"], tr["article"], tr["source_doc"].removeprefix("AUTOSAR_FO_"), tr["release"])
+        tr_link = tr["article"].removeprefix("docs/")  # glossary links are docs-relative
+        src = (tr_src_label or tr["source_doc"], tr_link, tr["source_doc"].removeprefix("AUTOSAR_FO_"), tr["release"])
         if src not in d["src"]:
             d["src"].append(src)
     for a in tr["acronyms"]:
