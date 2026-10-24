@@ -720,15 +720,55 @@ void Ocu_Notification_<Channel> ( void )
 
 当通知机制被禁用时，**OCU**驱动不应发出任何通知。
 
-## 8. 配置规范
+## 8. 时序图
 
-总体而言，本章定义配置参数及其到**容器**（container）的聚类组织。为支持本规范，第 8.1 章描述相关基础知识，并规定参数规范所应使用的模板（表格）。我们有意将第 8.1 章保留在规范中，以保证可理解性。
+### 8.1. 初始化
 
-第 8.2 章规定**OCU**模块的结构（容器）与参数。
+* **OCU**驱动初始化。
+* 所使用的硬件按照引用的配置结构进行配置。
+* 所有通知均被禁用。
+* 所有已使用的中断均被禁用。
 
-第 8.3 章规定**OCU**模块的发布信息。
+![Figure9-1.png](Figure9-1.png)
 
-### 8.1. 如何阅读本章
+### 8.2. 反初始化
+
+* **OCU**驱动反初始化。
+* 所有通知均被禁用。
+* 所有已使用的中断均被禁用。
+* 硬件设计应负责确保该状态不会导致微控制器中的未定义活动。
+
+![Figure9-2.png](Figure9-2.png)
+
+### 8.3. 使用 Ocu 通知
+
+上层不会收到关于此比较匹配的通知。
+
+![Figure9-3.png](Figure9-3.png)
+
+### 8.4. Ocu_SetPinState
+
+![Figure9-4.png](Figure9-4.png)
+
+### 8.5. Ocu_SetPinAction
+
+![Figure9-5.png](Figure9-5.png)
+
+### 8.6. 设置新的比较阈值
+
+关于新比较阈值的设置，参见 **Ocu_SetAbsoluteThreshold**（第 7.3.8 节）和 **Ocu_SetRelativeThreshold**（第 7.3.9 节）。
+
+引脚电平仅在比较匹配时由硬件更改。
+
+## 9. 配置规范
+
+总体而言，本章定义配置参数及其到**容器**（container）的聚类组织。为支持本规范，第 9.1 章描述相关基础知识，并规定参数规范所应使用的模板（表格）。我们有意将第 9.1 章保留在规范中，以保证可理解性。
+
+第 9.2 章规定**OCU**模块的结构（容器）与参数。
+
+第 9.3 章规定**OCU**模块的发布信息。
+
+### 9.1. 如何阅读本章
 
 详情请参阅 SWS_BSWGeneral 中的第 10.1 章 "Introduction to configuration specification"（配置规范导论）。
 
@@ -741,13 +781,13 @@ void Ocu_Notification_<Channel> ( void )
 
 以下仅是对该主题的简要概述，不能取代 ECU 配置规范文档。
 
-#### 8.1.1. 配置与配置参数
+#### 9.1.1. 配置与配置参数
 
 配置参数定义模块实现的通用部分的可变性。这意味着只有通用的或可配置的模块实现才能在系统和/或 ECU 配置期间适配使用中的环境（软件/硬件）。
 
 参数的配置可以在软件过程中的不同时间点完成：编译前（before compile time）、链接前（before link time）或构建后（after build time）。下文使用术语"（参数的）配置类"（configuration class）指代特定的配置时间点。
 
-#### 8.1.2. 容器
+#### 9.1.2. 容器
 
 容器对配置参数的集合进行结构化。这意味着：
 
@@ -755,7 +795,7 @@ void Ocu_Notification_<Channel> ( void )
 
 * （子）容器可以引用（子）容器。可以为这些引用分配多重性。该多重性定义了所包含参数的可能实例数量。
 
-#### 8.1.3. 配置参数的规格模板
+#### 9.1.3. 配置参数的规格模板
 
 以下表格由三个部分组成：
 
@@ -786,13 +826,13 @@ Post Build —— 规定该配置参数是否属于 Post Build 配置类。
 | M | Multiple —— 该配置参数属于 Post Build 配置类，通过向模块的初始化函数传递专用指针从多个参数集中选择。 |
 | - | 该配置参数绝不属于 Post Build 配置类。 |
 
-### 8.2. 容器与配置参数
+### 9.2. 容器与配置参数
 
 以下各节汇总所有配置参数。各参数的详细含义见第 6 章和第 7 章。
 
 OCU 模块应拒绝实现所不支持的、带有分区映射的配置。
 
-#### 8.2.1. Ocu
+#### 9.2.1. Ocu
 
 | SWS 条目 |  |
 |---|---|
@@ -807,7 +847,7 @@ OCU 模块应拒绝实现所不支持的、带有分区映射的配置。
 | OcuConfigurationOfOptionalApis | 1 | 可选 API 的配置。 |
 | OcuGeneral | 1 | 此容器包含 OCU 驱动的模块级配置参数。 |
 
-#### 8.2.2. OcuGeneral
+#### 9.2.2. OcuGeneral
 
 OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所引用的 ECUC 分区的子集。
 
@@ -860,7 +900,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 
 若 OcuEcucPartitionRef 引用一个或多个 ECUC 分区，则 OcuKernelEcucPartitionRef 的多重性应为一，并且也应引用这些 ECUC 分区之一。
 
-#### 8.2.3. OcuConfigurationOfOptionalApis
+#### 9.2.3. OcuConfigurationOfOptionalApis
 
 | SWS 条目 |  |
 |---|---|
@@ -878,7 +918,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -890,7 +930,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -902,7 +942,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -914,7 +954,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -926,7 +966,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -938,7 +978,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -950,7 +990,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -962,12 +1002,12 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | false |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 无包含的容器。
 
-#### 8.2.4. OcuConfigSet
+#### 9.2.4. OcuConfigSet
 
 | SWS 条目 |  |
 |---|---|
@@ -996,7 +1036,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
-#### 8.2.5. OcuChannel
+#### 9.2.5. OcuChannel
 
 | SWS 条目 |  |
 |---|---|
@@ -1015,7 +1055,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 范围 | 0 .. 255 |
 | 默认值 | - |
 | Post-Build 变体值 | true |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1028,7 +1068,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 范围 | 0 .. 65535 |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1041,7 +1081,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 范围 | 1 .. 32768 |
 | 默认值 | - |
 | Post-Build 变体值 | true |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1054,7 +1094,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 范围 | 0 .. 4294967295 |
 | 默认值 | - |
 | Post-Build 变体值 | true |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1068,8 +1108,8 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 默认值 | 0 |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1083,8 +1123,8 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 默认值 | 0 |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1096,6 +1136,9 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucIntegerParamDef |
 | 范围 | 1 .. 4294967295 |
 | 默认值 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
 |---|---|
@@ -1108,8 +1151,8 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 正则表达式 | - |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1119,11 +1162,11 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 描述 | 参数 OcuOutputPinDefaultState 表示通道关联的引脚在初始化后应被置成的状态。 |
 | 多重性 | 0..1 |
 | 类型 | EcucEnumerationParamDef |
-| 范围 | OCU_HIGH |
+| 范围 | OCU_HIGH：请求时，OCU 通道输出引脚将被置为高电平（3 或 5 V）；OCU_LOW：请求时，OCU 通道输出引脚将被置为低电平（0 V） |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1135,7 +1178,7 @@ OcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef 所
 | 类型 | EcucBooleanParamDef |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1170,7 +1213,7 @@ OcuChannelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef �
 
 若 OcuEcucPartitionRef 引用一个或多个 ECUC 分区，则 OcuKernelEcucPartitionRef 的多重性应为一，并且也应引用这些 ECUC 分区之一。
 
-#### 8.2.6. OcuHWSpecificSettings
+#### 9.2.6. OcuHWSpecificSettings
 
 | SWS 条目 |  |
 |---|---|
@@ -1189,8 +1232,8 @@ OcuChannelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef �
 | 范围 | - |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -1203,13 +1246,13 @@ OcuChannelEcucPartitionRef 所引用的 ECUC 分区应是 OcuEcucPartitionRef �
 | 范围 | - |
 | Post-Build 变体多重性 | true |
 | Post-Build 变体值 | true |
-| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 作用域/依赖 | scope: local |
 
 无包含的容器。
 
-### 8.3. 发布信息
+### 9.3. 发布信息
 
 详情请参阅 SWS_BSWGeneral 中的第 10.3 章 "Published Information"（发布信息）。
 

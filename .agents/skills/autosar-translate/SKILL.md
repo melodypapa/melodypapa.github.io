@@ -60,11 +60,14 @@ Compare the article's `## ` headings against the source chapter list:
   positions where the source has them).
 - **Complete** → report alignment status; do not rewrite content that already
   exists. If the article intentionally omits chapters that `STANDARD.md`
-  forbids (tracing, sequence diagrams, appendices), that is compliance, not a
-  gap. The 配置规范 chapter is **no longer forbidden** (2026-10-24): when the
-  source has ch.10 and the queue row's scope includes it, its absence in the
-  article is now a gap — it translates as `## 8. 配置规范` (Step 5
-  config-spec rules).
+  forbids (requirement tracing, lettered appendices), that is compliance, not
+  a gap. Two chapters are **no longer forbidden** (both user decisions,
+  2026-10-24): the 配置规范 chapter — when the source has ch.10 and the queue
+  row's scope includes it, its absence in the article is a gap; it translates
+  as `## 8. 配置规范`, or `## 9. 配置规范` when a 时序图 chapter is also
+  present (Step 5 config-spec rules). The 时序图 chapter — when the source
+  has ch.9, its absence is a gap; it translates as `## 8. 时序图` (Step 5
+  sequence-diagram rules).
 
 For sources longer than ~2000 lines, present the sync plan and get user
 confirmation before translating — a full SWS can be an entire session of work.
@@ -178,9 +181,29 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
     8.4/8.5/8.6.1–8.6.3/8.7 ↔ §7.4–§7.7 (callbacks/scheduled/expected
     interfaces incl. configurable callbacks/API parameter checks) fall under
     the same rule.
-- **配置规范 chapter (source ch.10 → article `## 8. 配置规范`, optional)** —
+- **时序图 chapter (source ch.9 → article `## 8. 时序图`, optional)** —
+  present iff the source document has a *Sequence diagrams* chapter; source
+  9.x renumbers to 8.x; the chapter sits between §7 and the 配置规范
+  chapter (renumbering 配置规范 to `## 9.` when both are present — grep for
+  inbound anchor links first). Rules:
+  - translate the source's prose sentences faithfully; the PDF→markdown
+    conversion spills UML diagram chrome into the text (lifeline/message
+    labels like `Ocu_Notification_<Channel>()`, `«module»` box labels,
+    `Ocu\_Delnit()` typos) — drop that chrome, keep the prose;
+  - render each diagram per the site figure convention: the extracted local
+    PNG (`![Figure9-1.png](Figure9-1.png)`) when the article directory has
+    one — matching the rest of the article — or a mermaid `sequenceDiagram`
+    redraw per icu_driver's chapter when no PNG exists (icu's intro
+    blockquote naming the source chapter and release is the precedent);
+  - source figure captions ("Figure 9.1: …") are not repeated as text — the
+    site references figures without captions;
+  - a subsection whose only content is a cross-reference (e.g. ocu 9.6 →
+    source 8.3.8/8.3.9) translates the reference renumbered to the article's
+    own chapters (→ §7.3.8/§7.3.9); a potential intra-article link is a
+    Phase B candidate, not a silent addition.
+- **配置规范 chapter (source ch.10 → article `## 8. 配置规范`, or `## 9. 配置规范` when a 时序图 chapter precedes it, optional)** —
   present iff the source document has a configuration specification; source
-  10.x renumbers to 8.x. Terminology (site majority, baseline-tested
+  10.x renumbers to 8.x (no 时序图 chapter) or 9.x (with 时序图). Terminology (site majority, baseline-tested
   2026-10-24): *Configuration specification* → 配置规范; *Containers and
   configuration parameters* → 容器与配置参数; *container* → 容器
   (*configuration container* → 配置容器); *Container Name* → 容器名称;
@@ -246,9 +269,11 @@ before every commit, the second is evidence for the Step 8 confirmation.
 2. Heading audit: `grep '^## '` on the article equals the STANDARD.md §1
    skeleton with §2 wording, numbered `1.`–`7.` only; `###`/`####` numbering
    is continuous (no numbering gaps); no lettered appendix, and no forbidden
-   chapter title (需求可追溯性 / 需求追踪 / 时序图) anywhere; `## 8.` is
-   allowed only as `## 8. 配置规范` (optional — only when the source has
-   ch.10). **Before renaming
+   chapter title (需求可追溯性 / 需求追踪) anywhere; `## 8.` is
+   allowed only as `## 8. 时序图` and `## 9.` only as `## 9. 配置规范`
+   (both optional — only when the source has ch.9 / ch.10; when only one
+   optional chapter is present it takes the lower number).
+   **Before renaming
    a heading to a STANDARD.md term, grep that heading across `docs/autosar`** —
    if the standard and the site majority disagree, it is a user decision
    (record it; update STANDARD.md in the same PR), not a silent rename.
@@ -407,7 +432,7 @@ open.
 
 | Mistake | Consequence | Counter |
 | --- | --- | --- |
-| Skipping Step 0, trusting an older article's structure | Forbidden-chapter residue (时序图/需求追踪) and legacy wording spread — the pre-standard IO articles did exactly this | STANDARD.md is read first, always |
+| Skipping Step 0, trusting an older article's structure | Forbidden-chapter residue (需求追踪) and legacy wording spread — the pre-standard IO articles did exactly this | STANDARD.md is read first, always |
 | Translating before emitting the todo list | Coverage decisions unreviewable until the work is done | Step 4 output contract |
 | Opening figure files (`Figure*.png`) during gap analysis | Pipeline/API image errors | Text-only rule in Step 3 |
 | Flagging STANDARD.md-forbidden chapters as "missing" | False work items on compliant articles | Step 3 compliance rule: omissions the standard mandates are compliance |
