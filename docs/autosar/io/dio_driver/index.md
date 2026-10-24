@@ -514,21 +514,33 @@ void Dio_MaskedWritePort (
 |---|---|---|
 | Det_ReportError | Det.h | 报告开发错误的服务 |
 
-## 8. 配置规范
+## 8. 时序图
+
+下图展示了调用 **Dio_ReadChannel** 和 **Dio_WriteChannel** 服务时的时序，展示的是正常操作模式。由于第 7.3 章中定义的所有其他服务具有完全相同的同步行为，本文档有意不再提供其他时序图。
+
+### 8.1. 读取数字 I/O 的值
+
+![Figure9-1.png](Figure9-1.png)
+
+### 8.2. 写入数字 I/O 的值
+
+![Figure9-2.png](Figure9-2.png)
+
+## 9. 配置规范
 
 本章定义配置参数及其到**容器**（container）的聚类组织。
 
-### 8.1. 容器与配置参数
+### 9.1. 容器与配置参数
 
 以下各节汇总所有配置参数。
 
 **DIO** 模块应拒绝实现所不支持的、带有分区映射的配置。
 
-#### 8.1.1. 变体
+#### 9.1.1. 变体
 
 实现至少应支持以下变体之一：VARIANT-PRE-COMPILE、VARIANT-LINK-TIME。
 
-#### 8.1.2. Dio
+#### 9.1.2. Dio
 
 | SWS 条目 |  |
 |---|---|
@@ -542,7 +554,7 @@ void Dio_MaskedWritePort (
 | DioConfig | 1 | 此容器包含 AUTOSAR **DIO** 模块的配置参数与子容器。 |
 | DioGeneral | 1 | **DIO** 模块通用配置参数。 |
 
-#### 8.1.3. DioGeneral
+#### 9.1.3. DioGeneral
 
 | SWS 条目 |  |
 |---|---|
@@ -560,7 +572,7 @@ void Dio_MaskedWritePort (
 | 类型 | EcucBooleanParamDef |
 | 默认值 | false |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -572,7 +584,7 @@ void Dio_MaskedWritePort (
 | 类型 | EcucBooleanParamDef |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -584,7 +596,7 @@ void Dio_MaskedWritePort (
 | 类型 | EcucBooleanParamDef |
 | 默认值 | false |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -596,7 +608,7 @@ void Dio_MaskedWritePort (
 | 类型 | EcucBooleanParamDef |
 | 默认值 | false |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -612,7 +624,7 @@ void Dio_MaskedWritePort (
 | 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: ECU |
 
-#### 8.1.4. DioPort
+#### 9.1.4. DioPort
 
 | SWS 条目 |  |
 |---|---|
@@ -636,7 +648,7 @@ void Dio_MaskedWritePort (
 | 范围 | 0 .. 4294967295 |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 
 | SWS 条目 |  |
 |---|---|
@@ -655,7 +667,7 @@ DioPortEcucPartitionRef 所引用的 ECUC 分区应是 DioEcucPartitionRef 所�
 
 若 DioEcucPartitionRef 引用一个或多个 ECUC 分区，则 DioPortEcucPartitionRef 的多重性应大于零，并且也应引用这些 ECUC 分区中的一个或多个。
 
-#### 8.1.5. DioChannel
+#### 9.1.5. DioChannel
 
 | SWS 条目 |  |
 |---|---|
@@ -674,7 +686,7 @@ DioPortEcucPartitionRef 所引用的 ECUC 分区应是 DioEcucPartitionRef 所�
 | 范围 | 0 .. 4294967295 |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: ECU |
 
 | SWS 条目 |  |
@@ -696,7 +708,7 @@ DioChannelEcucPartitionRef 所引用的 ECUC 分区应是 DioPortEcucPartitionRe
 
 若 DioEcucPartitionRef 引用一个或多个 ECUC 分区，则 DioChannelEcucPartitionRef 的多重性应大于零，并且也应引用这些 ECUC 分区中的一个或多个。
 
-#### 8.1.6. DioChannelGroup
+#### 9.1.6. DioChannelGroup
 
 | SWS 条目 |  |
 |---|---|
@@ -715,7 +727,7 @@ DioChannelEcucPartitionRef 所引用的 ECUC 分区应是 DioPortEcucPartitionRe
 | 默认值 | - |
 | 正则表达式 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: ECU |
 
 | SWS 条目 |  |
@@ -728,7 +740,7 @@ DioChannelEcucPartitionRef 所引用的 ECUC 分区应是 DioPortEcucPartitionRe
 | 范围 | 0 .. 4294967295 |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：x（VARIANT-LINK-TIME）；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -741,7 +753,7 @@ DioChannelEcucPartitionRef 所引用的 ECUC 分区应是 DioPortEcucPartitionRe
 | 范围 | 0 .. 31 |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：x；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：x（VARIANT-LINK-TIME）；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -763,7 +775,7 @@ DioChannelGroupEcucPartitionRef 所引用的 ECUC 分区应是 DioPortEcucPartit
 
 若 DioPortEcucPartitionRef 引用一个或多个 ECUC 分区，则 DioChannelGroupEcucPartitionRef 的多重性应大于零，并且也应引用这些 ECUC 分区中的一个或多个。
 
-#### 8.1.7. DioConfig
+#### 9.1.7. DioConfig
 
 | SWS 条目 |  |
 |---|---|
@@ -776,7 +788,7 @@ DioChannelGroupEcucPartitionRef 所引用的 ECUC 分区应是 DioPortEcucPartit
 |---|---|---|
 | DioPort | 1..* | 单个 DIO 端口的配置，由通道和可能的通道组组成。注意：此容器定义未显式定义符号名参数；取而代之，容器的短名将在 ECU 配置描述中用于指定该端口的符号名。 |
 
-### 8.2. 发布信息
+### 9.2. 发布信息
 
 详情请参阅 SWS_BSWGeneral 中的第 10.3 章 "Published Information"（发布信息）。
 
