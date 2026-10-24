@@ -1,7 +1,7 @@
 ---
 title: "AUTOSAR ICU Driver（输入捕获驱动）"
 spec: AUTOSAR_CP_SWS_ICUDriver
-release: R22-11
+release: R23-11
 ---
 
 ## 1. 简介和功能概述
@@ -96,11 +96,11 @@ release: R22-11
 [12] General Specification of Basic Software Modules
 > AUTOSAR_SWS_BSWGeneral.pdf
 
-### 3.2. 相关规范
+### 3.2. 相关标准和规范
 
 [13] IEC 7498-1 The Basic Model, IEC Norm, 1994
 
-### 3.3. 相关规格说明
+### 3.3. 相关规范
 
 **AUTOSAR**提供了基础软件模块的通用规范 [12] （**SWS BSW General**），该规范同样适用于**ICU**驱动程序。因此，**SWS BSW General**应被视为**ICU**驱动程序的附加和必需规范。
 
@@ -110,7 +110,7 @@ release: R22-11
 
 无限制。
 
-### 4.2. 适用车型域
+### 4.2. 汽车域的适用性
 
 无限制。
 
@@ -1102,6 +1102,494 @@ sequenceDiagram
     D-->>U: Icu_SignalNotification_Channel(void)
     D-->>U: return()
 ```
+
+## 9. 配置规范
+
+总体而言，本章定义配置参数及其到**容器**（container）的聚类组织。为支持本规范，第 9.1 章描述相关基础知识，并规定参数规范所应使用的模板（表格）。我们有意将第 9.1 章保留在规范中，以保证可理解性。
+
+第 9.2 章规定**ICU**模块的结构（容器）与参数。
+
+第 9.3 章规定**ICU**模块的发布信息。
+
+### 9.1. 如何阅读本章
+
+详情请参阅 SWS_BSWGeneral 中的第 10.1 章 "Introduction to configuration specification"（配置规范导论）。
+
+### 9.2. 容器与配置参数
+
+以下各节汇总所有配置参数。各参数的详细含义见第 6 章和第 7 章。
+
+**ICU** 模块应拒绝实现所不支持的、带有分区映射的配置。
+
+#### 9.2.1. Icu
+
+| SWS 条目 |  |
+|---|---|
+| 模块名称 | Icu |
+| 描述 | **Icu**（**Input Capture Unit**，输入捕获单元）模块的配置。 |
+| Post-Build 变体支持 | true |
+| 支持的配置变体 | VARIANT-POST-BUILD, VARIANT-PRE-COMPILE |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| IcuConfigSet | 1 | 此容器包含 AUTOSAR **Icu** 模块的配置参数与子容器。 |
+| IcuGeneral | 1 | 常规 **ICU** 参数的配置。 |
+| IcuOptionalApis | 1 | 此容器包含用于配置 **ICU** 驱动可选 API 服务的所有配置开关。 |
+
+#### 9.2.2. IcuGeneral
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | IcuGeneral |
+| 父容器 | Icu |
+| 描述 | 常规 **ICU** 参数的配置。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuDevErrorDetect |
+| 父容器 | IcuGeneral |
+| 描述 | 开启或关闭开发错误检测与通知（true：启用检测与通知；false：禁用检测与通知）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuReportWakeupSource |
+| 父容器 | IcuGeneral |
+| 描述 | 唤醒源上报开关（true：上报唤醒源；false：不上报唤醒源）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuEcucPartitionRef |
+| 父容器 | IcuGeneral |
+| 描述 | 将 **ICU** 驱动映射到零个或多个 ECUC 分区，以使驱动 API 在相应分区中可用。 |
+| 多重性 | 0..* |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuKernelEcucPartitionRef |
+| 父容器 | IcuGeneral |
+| 描述 | 将 **ICU** 内核映射到零个或一个 ECUC 分区，以将驱动内核分配到某个特定内核。所引用的 ECUC 分区是 **ICU** 驱动所映射到的 ECUC 分区的子集。 |
+| 多重性 | 0..1 |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+无包含的容器。
+
+IcuKernelEcucPartitionRef 所引用的 ECUC 分区应是 IcuEcucPartitionRef 所引用的 ECUC 分区的子集。
+
+若 IcuEcucPartitionRef 引用一个或多个 ECUC 分区，则 IcuKernelEcucPartitionRef 的多重性应为一，并且也应引用这些 ECUC 分区之一。
+
+#### 9.2.3. IcuOptionalApis
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | IcuOptionalApis |
+| 父容器 | Icu |
+| 描述 | 此容器包含用于配置 **ICU** 驱动可选 API 服务的所有配置开关。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuDeInitApi |
+| 父容器 | IcuOptionalApis |
+| 描述 | 在代码中添加/移除 Icu_DeInit() 服务（true：可以使用 Icu_DeInit()；false：不可使用 Icu_DeInit()）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuDisableWakeupApi |
+| 父容器 | IcuOptionalApis |
+| 描述 | 在代码中添加/移除 Icu_DisableWakeup() 服务（true：可以使用 Icu_DisableWakeup()；false：不可使用 Icu_DisableWakeup()）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuEdgeCountApi |
+| 父容器 | IcuOptionalApis |
+| 描述 | 在代码中添加/移除以下服务：Icu_ResetEdgeCount()、Icu_GetEdgeNumbers()、Icu_EnableEdgeCount()、Icu_DisableEdgeCount()（true：可以使用这些服务；false：不可使用这些服务）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuEdgeDetectApi |
+| 父容器 | IcuOptionalApis |
+| 描述 | 在代码中添加/移除与边沿检测功能相关的服务：Icu_EnableEdgeDetection() 和 Icu_DisableEdgeDetection()（true：可以使用这些服务；false：不可使用这些服务）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuEnableWakeupApi |
+| 父容器 | IcuOptionalApis |
+| 描述 | 在代码中添加/移除 Icu_EnableWakeup() 服务（true：可以使用 Icu_EnableWakeup()；false：不可使用 Icu_EnableWakeup()）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuGetDutyCycleValuesApi |
+| 父容器 | IcuOptionalApis |
+| 描述 | 在代码中添加/移除 Icu_GetDutyCycleValues() 服务（true：可以使用 Icu_GetDutyCycleValues()；false：不可使用 Icu_GetDutyCycleValues()）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local dependency: 若 IcuSignalMeasurementApi 为 false，则此开关也应设为 false |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuGetInputStateApi |
+| 父容器 | IcuOptionalApis |
+| 描述 | 在代码中添加/移除 Icu_GetInputState() 服务（true：可以使用 Icu_GetInputState()；false：不可使用 Icu_GetInputState()）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuGetTimeElapsedApi |
+| 父容器 | IcuOptionalApis |
+| 描述 | 在代码中添加/移除 Icu_GetTimeElapsed() 服务（true：可以使用 Icu_GetTimeElapsed()；false：不可使用 Icu_GetTimeElapsed()）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local dependency: 若 IcuSignalMeasurementApi 为 false，则此开关也应设为 false |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuGetVersionInfoApi |
+| 父容器 | IcuOptionalApis |
+| 描述 | 在代码中添加/移除 Icu_GetVersionInfo() 服务（true：可以使用 Icu_GetVersionInfo()；false：不可使用 Icu_GetVersionInfo()）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuSetModeApi |
+| 父容器 | IcuOptionalApis |
+| 描述 | 在代码中添加/移除 Icu_SetMode() 服务（true：可以使用 Icu_SetMode()；false：不可使用 Icu_SetMode()）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuSignalMeasurementApi |
+| 父容器 | IcuOptionalApis |
+| 描述 | 在代码中添加/移除 Icu_StartSignalMeasurement() 和 Icu_StopSignalMeasurement() 服务（true：可以使用这些服务；false：不可使用这些服务）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuTimestampApi |
+| 父容器 | IcuOptionalApis |
+| 描述 | 在代码中添加/移除下列所有与时间戳功能相关的服务：Icu_StartTimestamp()、Icu_StopTimestamp()、Icu_GetTimestampIndex() 等（true：可以使用这些服务；false：不可使用这些服务）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuWakeupFunctionalityApi |
+| 父容器 | IcuOptionalApis |
+| 描述 | 在代码中添加/移除 Icu_CheckWakeup() 服务（true：可以使用 Icu_CheckWakeup()；false：不可使用 Icu_CheckWakeup()）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.4. IcuChannel
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | IcuChannel |
+| 父容器 | IcuConfigSet |
+| 描述 | 单个 **ICU** 通道的配置。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuChannelId |
+| 父容器 | IcuChannel |
+| 描述 | **ICU** 通道的通道 ID。该值将赋给由 IcuChannel 容器短名派生的符号名。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名） |
+| 范围 | 0 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuDefaultStartEdge |
+| 父容器 | IcuChannel |
+| 描述 | 默认边沿（**Condition()**）。当测量模式设置为 "IcuSignalMeasurement"、"DutyCycle" 或 "Period" 时，此处配置的边沿为周期起始边沿。实现类型：**Icu_ActivationType** |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | ICU_BOTH_EDGES：默认使用两个边沿；ICU_FALLING_EDGE：默认使用下降沿；ICU_RISING_EDGE：默认使用上升沿 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuMeasurementMode |
+| 父容器 | IcuChannel |
+| 描述 | 配置此通道的测量模式。实现类型：**Icu_MeasurementModeType** |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | ICU_MODE_EDGE_COUNTER：该通道用于对通过调用服务 **Icu_SetActivationCondition()** 所配置的边沿进行计数。支持此模式的 API 服务有：**Icu_EnableEdgeCount()**、**Icu_DisableEdgeCount()**、**Icu_GetEdgeNumbers()**、**Icu_ResetEdgeCount()**；ICU_MODE_SIGNAL_EDGE_DETECT：该通道用于检测通过调用服务 **Icu_SetActivationCondition()** 所配置的边沿。支持此模式的 API 服务有：**Icu_EnableNotification()**、**Icu_DisableNotification()**、**Icu_GetInputState()**；ICU_MODE_SIGNAL_MEASUREMENT：该通道用于测量各个可配置边沿之间的不同时间。周期起始边沿的配置由配置完成，且在运行期间不可更改。支持此模式的 API 服务有：**Icu_GetTimeElapsed()**、**Icu_GetDutyCycleValues()**、**Icu_GetInputState()**。仅当 **IcuGetDutyCycleValuesApi** 或 **IcuGetTimeElapsedApi** 至少有一个设置为 "true" 时，才能配置此模式；ICU_MODE_TIMESTAMP：该通道用于捕获通过调用服务 **Icu_SetActivationCondition()** 所配置的边沿上的定时器值。支持此模式的 API 服务有：**Icu_StartTimestamp()**、**Icu_StopTimestamp()**、**Icu_GetTimestampIndex()** |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local dependency: 可用的测量模式取决于启用/禁用可选 API 服务的预处理器开关 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuWakeupCapability |
+| 父容器 | IcuChannel |
+| 描述 | 关于此通道唤醒能力的信息（true：通道具有唤醒能力；false：通道不具有唤醒能力）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuChannelEcucPartitionRef |
+| 父容器 | IcuChannel |
+| 描述 | 将一个 **ICU** 通道映射到零个或多个 ECUC 分区，以限制对该通道的访问。所引用的 ECUC 分区是 **ICU** 驱动所映射到的 ECUC 分区的子集。 |
+| 多重性 | 0..* |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| IcuSignalEdgeDetection | 0..1 | 当测量模式为 "IcuSignalEdgeDetection" 时，此容器包含相应的配置（参数）。 |
+| IcuSignalMeasurement | 0..1 | 当测量模式为 "IcuSignalMeasurement" 时，此容器包含相应的配置（参数）。 |
+| IcuTimestampMeasurement | 0..1 | 当测量模式为 "IcuTimestamp" 时，此容器包含相应的配置（参数）。 |
+| IcuWakeup | 0..1 | 此容器包含配置唤醒能力通道所需的配置（参数）。 |
+
+IcuChannelEcucPartitionRef 所引用的 ECUC 分区应是 IcuEcucPartitionRef 所引用的 ECUC 分区的子集。
+
+若 IcuEcucPartitionRef 引用一个或多个 ECUC 分区，则 IcuChannelEcucPartitionRef 的多重性应大于一，并且也应引用这些 ECUC 分区中的一个或多个。
+
+#### 9.2.5. IcuSignalEdgeDetection
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | IcuSignalEdgeDetection |
+| 父容器 | IcuChannel |
+| 描述 | 当测量模式为 "IcuSignalEdgeDetection" 时，此容器包含相应的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuSignalNotification |
+| 父容器 | IcuSignalEdgeDetection |
+| 描述 | 信号通知的通知函数。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local dependency: IcuMeasurementMode |
+
+无包含的容器。
+
+#### 9.2.6. IcuSignalMeasurement
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | IcuSignalMeasurement |
+| 父容器 | IcuChannel |
+| 描述 | 当测量模式为 "IcuSignalMeasurement" 时，此容器包含相应的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuSignalMeasurementProperty |
+| 父容器 | IcuSignalMeasurement |
+| 描述 | 配置模式为 "IcuSignalMeasurement" 时可测量的属性。此属性在运行期间不可更改。实现类型：**Icu_SignalMeasurementPropertyType** |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | ICU_DUTY_CYCLE：该通道配置为读取计算占空比所需的值（连贯的激活时间与周期时间）；ICU_HIGH_TIME：该通道配置为读取信号高电平经过的时间；ICU_LOW_TIME：该通道配置为读取信号低电平经过的时间；ICU_PERIOD_TIME：该通道配置为读取信号周期经过的时间 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local dependency: IcuMeasurementMode, IcuGetDutyCycleValuesApi, IcuGetTimeElapsedApi |
+
+无包含的容器。
+
+#### 9.2.7. IcuTimestampMeasurement
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | IcuTimestampMeasurement |
+| 父容器 | IcuChannel |
+| 描述 | 当测量模式为 "IcuTimestamp" 时，此容器包含相应的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuTimestampMeasurementProperty |
+| 父容器 | IcuTimestampMeasurement |
+| 描述 | 配置模式为 "Timestamp" 时缓冲区的处理方式。实现类型：**Icu_TimestampBufferType** |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | ICU_CIRCULAR_BUFFER：到达缓冲区末尾后，从缓冲区开头重新开始；ICU_LINEAR_BUFFER：缓冲区仅填充一次 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local dependency: IcuMeasurementMode |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuTimestampNotification |
+| 父容器 | IcuTimestampMeasurement |
+| 描述 | 已获取所请求数量的时间戳（通知间隔 > 0）时的通知函数。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local dependency: IcuTimestampApi |
+
+无包含的容器。
+
+#### 9.2.8. IcuWakeup
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | IcuWakeup |
+| 父容器 | IcuChannel |
+| 描述 | 此容器包含配置唤醒能力通道所需的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuChannelWakeupInfo |
+| 父容器 | IcuWakeup |
+| 描述 | 若唤醒能力为 true，则所引用的唤醒源将传输至 **ECU** 状态管理器（**EcuM**）。实现类型：对 **EcuM_WakeupSourceType** 的符号名引用 |
+| 多重性 | 0..1 |
+| 类型 | 对 EcuMWakeupSource 的符号名引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local dependency: IcuWakeupCapability 和 IcuReportWakeupSource |
+
+无包含的容器。
+
+#### 9.2.9. IcuConfigSet
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | IcuConfigSet |
+| 父容器 | Icu |
+| 描述 | 此容器包含 AUTOSAR **Icu** 模块的配置参数与子容器。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | IcuMaxChannel |
+| 父容器 | IcuConfigSet |
+| 描述 | 此参数包含配置期间由工具配置的 **Icu** 通道。实现类型：**Icu_ChannelType** |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| IcuChannel | 1..* | 单个 **ICU** 通道的配置。 |
+
+### 9.3. 发布信息
+
+**ICU** 驱动应说明需要哪些其他模块（及其版本）。此说明应由实现者提供。
 
 <section id="wechat">
 
