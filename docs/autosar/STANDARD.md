@@ -67,6 +67,7 @@ Each section's `index.md` (e.g. `docs/autosar/io/index.md`) does not follow the 
 
 The following articles are guide/topic-type and **do not** follow the module skeleton (intentional — do not "fix" them):
 
+- `general/tr_glossary` (Foundation TR reference — glossary structure: 简介/缩略语/如何阅读本文档/术语定义; ch.4 terms are `### 4.x. <Term>` + definition tables)
 - `mode_management/guide_to_mode_management` (EXP guide structure)
 - `memory/nv_data_handling_guideline` (guide structure)
 - `power` (topic article, custom 11 chapters)
