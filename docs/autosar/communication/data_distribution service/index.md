@@ -1,5 +1,7 @@
 ---
 title: "Data Distribution Service for Classic Platform（）"
+spec: AUTOSAR_CP_SWS_DataDistribution
+release: R23-11
 ---
 
 

@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR SecOC (Secure Onboard Communication)"
+spec: AUTOSAR_CP_SWS_SecOc
+release: R23-11
 ---
 
 

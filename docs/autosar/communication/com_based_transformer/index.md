@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR COM Based Transformer"
+spec: AUTOSAR_CP_SWS_COMBasedTransformer
+release: R23-11
 ---
 
 

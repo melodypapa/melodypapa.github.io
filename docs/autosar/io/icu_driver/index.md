@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR ICU Driver（输入捕获驱动）"
+spec: AUTOSAR_CP_SWS_ICUDriver
+release: R22-11
 ---
 
 ## 1. 简介和功能概述

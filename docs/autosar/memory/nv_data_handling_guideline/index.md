@@ -1,5 +1,7 @@
 ---
 title: "NV数据处理指南"
+spec: AUTOSAR_CP_EXP_NVDataHandlingGuideline
+release: R23-11
 ---
 
 

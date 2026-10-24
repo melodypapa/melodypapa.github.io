@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR FEE（闪存EEPROM仿真）"
+spec: AUTOSAR_CP_SWS_FlashEEPROMEmulation
+release: R23-11
 ---
 
 

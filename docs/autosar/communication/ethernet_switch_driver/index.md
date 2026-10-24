@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）"
+spec: AUTOSAR_CP_SWS_EthernetSwitchDriver
+release: R23-11
 ---
 
 

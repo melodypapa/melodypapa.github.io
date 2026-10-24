@@ -56,6 +56,7 @@ extra_javascript:
 exclude_docs: |
   autosar/STANDARD.md
   autosar/TODO.md
+  autosar/sync-todo/
 
 markdown_extensions:
   - attr_list
@@ -108,6 +109,8 @@ nav:
       - "系统控制（System Control）": cortex/r52p_processor/system_control/index.md
   - CP AUTOSAR:
     - autosar/index.md
+    - "术语表": autosar/glossary.md
+    - "API 清单": autosar/api_reference.md
     - 通信:
       - autosar/communication/index.md
       - "CAN Driver":

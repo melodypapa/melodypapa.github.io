@@ -21,7 +21,7 @@ build (`exclude_docs` in `mkdocs.yml`), and is maintained by this skill.
 ```markdown
 # AUTOSAR 文章翻译进度
 
-> 由 autosar-sync 技能按 [STANDARD.md](STANDARD.md) 维护；每次同步后更新对应条目与「最后更新」。
+> 由 autosar-translate 技能按 [STANDARD.md](STANDARD.md) 维护；每次同步后更新对应条目与「最后更新」。
 > 状态：✅ 符合 Type A · 🔶 已翻译待对齐 · ⚠️ 部分翻译 · ⛔ 空壳 · ❌ 缺失 · 📖 指南/专题（豁免骨架）
 > 基准：R23-11 · 最后更新：YYYY-MM-DD
 
@@ -39,21 +39,27 @@ build (`exclude_docs` in `mkdocs.yml`), and is maintained by this skill.
 
 ## Work todo lists (per-run)
 
-Besides the persistent status sections, the skill generates an **actionable
-checkbox todo list** for every run (Step 4 of SKILL.md). Program-level pending
-work lives in the `## 待办清单` section at the top of `TODO.md` as `- [ ]`
-items; per-article work todos for the current run are presented to the user
-and ticked off as items pass verification.
+The execution queue is the **persistent batch-queue files** in
+`docs/autosar/sync-todo/` (`Group-<section>.md`, one row per document with a
+6-step sub-checklist; `index.md` orders batches) — one row consumed per run,
+never conversation-only (`todo.md` alongside the outputs for a workspace run).
+Format, row template, resume and tick rules: `references/todo-format.md`.
+Program-level fixes outside single-article runs (wording sweeps, hygiene)
+live in the `## 待办清单` section at the top of `TODO.md` as `- [ ]` items.
 
-Rules for todo items:
+Rules for queue rows:
 
-- One verifiable action per item (`补齐第 7 章 API 规范（17 个函数）`, not
-  `完善文章`).
-- Derive items from three sources: STANDARD.md rule checklist, the article's
-  current row in this file, and the fresh gap analysis.
+- One verifiable action per step; findings and decisions on `- Note:` bullets
+  under the row, appended when they happen.
+- A row's inputs: STANDARD.md rule checklist, the article's current row in
+  this file, and the fresh gap analysis — plus mid-run user decisions.
 - Ticked items in `## 待办清单` get removed (or archived) once the
   corresponding status row has been updated — a work item is done only when
   its status row says so.
+- The two files are linked: a status row flips (Step 8) only after the queue
+  row's 6 steps are `[x]` and the Step 8 user confirmation was given; the
+  flipped queue row (with commit hash + PR link) is the evidence behind the
+  status row.
 
 ## Status definitions
 

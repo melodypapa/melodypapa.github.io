@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR DIO Driver（数字输入输出驱动）"
+spec: AUTOSAR_CP_SWS_DIODriver
+release: R23-11
 ---
 
 ## 1. 简介和功能概述
@@ -24,29 +26,56 @@ title: "AUTOSAR DIO Driver（数字输入输出驱动）"
 
 ## 2. 缩略语
 
-下表包含了与**DIO**驱动程序模块相关、且未包含在[1] AUTOSAR术语表中的缩略语和缩写。
+以下为与**DIO**驱动程序模块相关、且未包含在[1] AUTOSAR术语表中的缩略语和缩写。
 
-| 缩写/首字母缩写 | 描述 |
-|---|---|
-| DIO channel | 表示单个通用数字输入/输出引脚 |
-| DIO port | 表示由硬件分组在一起的多个**DIO**通道（通常由一个硬件寄存器控制）。示例：Freescale HC08 的 Port A（8 位） |
-| DIO channel group | 表示由逻辑组表示的多个相邻**DIO**通道。一个**DIO**通道组应属于一个**DIO**端口。示例：8 位端口中寻址复用器的端口引脚 2..6 |
-| Physical Level (Input) | 两种可能的状态：**LOW** / **HIGH**。位值'0'表示**LOW**，位值'1'表示**HIGH**。 |
-| Physical Level (Output) | 两种可能的状态：**LOW** / **HIGH**。位值'0'表示**LOW**，位值'1'表示**HIGH**。 |
-| LSB | 最低有效位（Least Significant Bit） |
-| MSB | 最高有效位（Most Significant Bit） |
-| DIO | 数字输入输出（Digital Input Output） |
-| ID | 标识符（Identifier） |
-| ADC | 模数转换器（Analog to Digital Converter） |
-| SPI | 串行外设接口（Serial Peripheral Interface） |
-| PWM | 脉冲宽度调制（Pulse Width Modulation） |
-| ICU | 输入捕获单元（Input Capture Unit） |
-| DET | 默认错误跟踪器（Default Error Tracer） |
-| DEM | 诊断事件管理器（Diagnostic Event Manager） |
+**DIO channel**
+> 表示单个通用数字输入/输出引脚。
+
+**DIO port**
+> 表示由硬件分组在一起的多个**DIO**通道（通常由一个硬件寄存器控制）。示例：Freescale HC08 的 Port A（8 位）。
+
+**DIO channel group**
+> 表示由逻辑组表示的多个相邻**DIO**通道。一个**DIO**通道组应属于一个**DIO**端口。示例：8 位端口中寻址复用器的端口引脚 2..6。
+
+**Physical Level (Input)**
+> 两种可能的状态：**LOW** / **HIGH**。位值'0'表示**LOW**，位值'1'表示**HIGH**。
+
+**Physical Level (Output)**
+> 两种可能的状态：**LOW** / **HIGH**。位值'0'表示**LOW**，位值'1'表示**HIGH**。
+
+**LSB**
+> 最低有效位（**Least Significant Bit**）。
+
+**MSB**
+> 最高有效位（**Most Significant Bit**）。
+
+**DIO**
+> 数字输入输出（**Digital Input Output**）。
+
+**ID**
+> 标识符（**Identifier**）。
+
+**ADC**
+> 模数转换器（**Analog to Digital Converter**）。
+
+**SPI**
+> 串行外设接口（**Serial Peripheral Interface**）。
+
+**PWM**
+> 脉冲宽度调制（**Pulse Width Modulation**）。
+
+**ICU**
+> 输入捕获单元（**Input Capture Unit**）。
+
+**DET**
+> 默认错误跟踪器（**Default Error Tracer**）。
+
+**DEM**
+> 诊断事件管理器（**Diagnostic Event Manager**）。
 
 ## 3. 相关文档
 
-### 3.1. 输入文件和相关标准与规范
+### 3.1. 输入文件
 
 [1] Glossary
 AUTOSAR_FO_TR_Glossary
@@ -66,7 +95,7 @@ AUTOSAR_CP_SWS_BSWGeneral
 
 无限制。
 
-### 4.2. 对汽车域的适用性
+### 4.2. 汽车域的适用性
 
 无限制。
 
@@ -257,7 +286,7 @@ AUTOSAR_CP_SWS_BSWGeneral
 
 ### 6.7. 安全事件
 
-无。
+本模块不报告安全事件。
 
 ## 7. API规范
 
@@ -459,7 +488,7 @@ void Dio_MaskedWritePort (
 
 ### 7.4. 回调通知
 
-本章列出了**Dio**模块提供给下层层的所有函数。
+本章列出了**Dio**模块提供给下层的所有函数。
 
 **Dio**模块不提供任何回调通知。与**Dio**模块功能相关的回调在其他模块（**ICU**驱动程序和/或复杂驱动程序）中实现。
 

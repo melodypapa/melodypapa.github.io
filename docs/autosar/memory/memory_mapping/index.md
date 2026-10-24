@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR Memory Mapping（AUTOSAR 内存映射）"
+spec: AUTOSAR_CP_SWS_MemoryMapping
+release: R23-11
 ---
 
 

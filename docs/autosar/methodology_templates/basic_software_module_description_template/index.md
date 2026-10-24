@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR BSWMDT（基础软件模块描述模板）"
+spec: AUTOSAR_CP_TPS_BSWModuleDescriptionTemplate
+release: R23-11
 ---
 
 

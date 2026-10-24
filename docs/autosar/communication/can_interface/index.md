@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR CAN Interface"
+spec: AUTOSAR_CP_SWS_CANInterface
+release: R23-11
 ---
 
 

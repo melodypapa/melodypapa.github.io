@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR UdpNm (UDP Network Management)"
+spec: AUTOSAR_CP_SWS_UDPNetworkManagement
+release: R23-11
 ---
 
 

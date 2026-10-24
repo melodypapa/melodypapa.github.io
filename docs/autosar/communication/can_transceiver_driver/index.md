@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR CAN Transceiver Driver"
+spec: AUTOSAR_CP_SWS_CANTransceiverDriver
+release: R23-11
 ---
 
 

@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR Basic Software Mode Manager（BSW模式管理器）"
+spec: AUTOSAR_CP_SWS_BSWModeManager
+release: R23-11
 ---
 
 

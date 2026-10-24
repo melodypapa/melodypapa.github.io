@@ -1,0 +1,280 @@
+# Sync todo: Group communication-2 — communication section — remaining missing documents (38)
+
+Base: R23-11 · Generated: 2026-10-24 · Queue order = row order
+(Resume = the first row still `[ ]`; all `[x]` = batch complete)
+Steps: ① source resolution + gap analysis · ② in-place translation/completion · ③ Phase A mechanical checks · ④ Phase B evidence · ⑤ user confirmation gate · ⑥ TODO.md row + commit
+
+## Queue
+
+All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the order can be adjusted as needed.
+
+- [ ] spi (SWS_SPIHandlerDriver · R23-11 markdown · ❌ new article, short name Spi)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] ldcom (SWS_LargeDataCOM · R23-11 markdown · ❌ new article, short name LdCom)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] lsdu (SWS_LSduRouter · R23-11 markdown · ❌ new article, short name LsDu)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] dlt (SWS_DiagnosticLogAndTrace · R23-11 markdown · ❌ new article, short name Dlt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] doip (SWS_DiagnosticOverIP · R23-11 markdown · ❌ new article, short name DoIp)
+  - Note: acronym-ambiguous (DoIp) — directory name decided with the user in Step 1
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] xcp (SWS_XCP · R23-11 markdown · ❌ new article, short name XCP)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] canxl_driver (SWS_CANXLDriver · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] canxl_transceiver_driver (SWS_CANXLTransceiverDriver · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] eth_trcv (SWS_EthernetTransceiverDriver · R23-11 markdown · ❌ new article, short name EthTrcv)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] wlan_driver (SWS_WirelessEthernetDriver · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] wlan_transceiver_driver (SWS_WirelessEthernetTransceiverDriver · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] flexray_driver (SWS_FlexRayDriver · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] flexray_interface (SWS_FlexRayInterface · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] flexray_nm (SWS_FlexRayNetworkManagement · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] flexray_sm (SWS_FlexRayStateManager · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] flexray_trcv (SWS_FlexRayTransceiverDriver · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] flexray_ar_tp (SWS_FlexRayARTransportLayer · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] flexray_iso_tp (SWS_FlexRayISOTransportLayer · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] linsm (SWS_LINStateManager · R23-11 markdown · ❌ new article, short name LinSM)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] lintrcv (SWS_LINTransceiverDriver · R23-11 markdown · ❌ new article, short name LinTrcv)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] ttcan_driver (SWS_TTCANDriver · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] ttcan_interface (SWS_TTCANInterface · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] j1939nm (SWS_SAEJ1939NetworkManagement · R23-11 markdown · ❌ new article, short name J1939Nm)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] j1939rm (SWS_SAEJ1939RequestManager · R23-11 markdown · ❌ new article, short name J1939Rm)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] j1939tp (SWS_SAEJ1939TransportLayer · R23-11 markdown · ❌ new article, short name J1939Tp)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] ieee1722tp (SWS_IEEE1722TransportLayer · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] macsec (SWS_MACsecKeyAgreement · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] cellularv2x_driver (SWS_CellularV2XDriver · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] chargingmanager (SWS_ChargingManager · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] chinesev2x_mgmt (SWS_ChineseV2XManagement · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] chinesev2x_msg (SWS_ChineseV2XMessage · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] chinesev2x_net (SWS_ChineseV2XNetwork · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] chinesev2x_sec (SWS_ChineseV2XSecurity · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] v2x_basictp (SWS_V2XBasicTransport · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] v2x_datamgr (SWS_V2XDataManager · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] v2x_facilities (SWS_V2XFacilities · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] v2x_geonet (SWS_V2XGeoNetworking · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] v2x_mgmt (SWS_V2XManagement · R23-11 markdown · ❌ new article)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+
+## Not queued (deliberately skipped)
+- (none)

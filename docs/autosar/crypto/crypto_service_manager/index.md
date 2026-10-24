@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR Crypto Service Manager（加密服务管理器）"
+spec: AUTOSAR_CP_SWS_CryptoServiceManager
+release: R23-11
 ---
 
 

@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR Operating System（操作系统）"
+spec: AUTOSAR_CP_SWS_OperatingSystem
+release: R23-11
 ---
 
 

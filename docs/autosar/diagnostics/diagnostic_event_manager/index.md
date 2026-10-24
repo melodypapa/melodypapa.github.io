@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR Diagnostic Event Manager（诊断事件管理器）"
+spec: AUTOSAR_CP_SWS_DiagnosticEventManager
+release: R23-11
 ---
 
 

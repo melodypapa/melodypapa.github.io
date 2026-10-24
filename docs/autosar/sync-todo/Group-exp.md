@@ -1,0 +1,154 @@
+# Sync todo: Group exp — missing EXP guides (20)
+
+Base: R23-11 · Generated: 2026-10-24 · Queue order = row order
+(Resume = the first row still `[ ]`; all `[x]` = batch complete)
+Steps: ① source resolution + gap analysis · ② in-place translation/completion · ③ Phase A mechanical checks · ④ Phase B evidence · ⑤ user confirmation gate · ⑥ TODO.md row + commit
+> EXP guides are **exempt from the Type A skeleton** (STANDARD.md §7), but the translation/verification/confirmation flow is identical; section placement follows the Category column, and a missing landing page becomes a Step 1 proposal. Source document names must be verified against the R23-11 tree (`AUTOSAR_EXP_*`, a few without the `CP_` prefix).
+
+## Queue
+
+- [ ] exp layered_software_architecture (AUTOSAR_EXP_LayeredSoftwareArchitecture · General · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] exp vfb (AUTOSAR_EXP_VFB · General · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] exp bsw_distribution_guide (AUTOSAR_EXP_BSWDistributionGuide · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] exp application_level_error_handling (AUTOSAR_EXP_ApplicationLevelErrorHandling · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] exp error_description (AUTOSAR_EXP_ErrorDescription · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] exp cdd_design_and_integration (AUTOSAR_EXP_CDDDesignAndIntegration · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] exp utilization_of_crypto_services (AUTOSAR_EXP_UtilizationOfCryptoServices · Crypto · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] exp macro_encapsulation_of_interpolation_calls (AUTOSAR_EXP_MacroEncapsulationofInterpolationCalls · Libraries · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] exp firmware_over_the_air (AUTOSAR_EXP_FirmwareOverTheAir · Memory · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] exp adas_vmc (AUTOSAR_EXP_ADASVehicleMotionControl · ApplicationInterfaces (name per the source tree) · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] exp body_and_comfort (AUTOSAR_EXP_BodyAndComfort · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] exp chassis (AUTOSAR_EXP_Chassis · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] exp hmi (AUTOSAR_EXP_HMI · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] exp occupant_safety (AUTOSAR_EXP_OccupantSafety · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] exp powertrain (AUTOSAR_EXP_Powertrain · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] exp user_guide (AUTOSAR_EXP_UserGuide · ApplicationInterfaces (exact document name to confirm in Step 1) · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] exp arti (AUTOSAR_EXP_ARTI · SWArch · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] exp functional_safety_measures (AUTOSAR_EXP_FunctionalSafetyMeasures · Safety · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] exp safety_use_case (AUTOSAR_EXP_SafetyUseCase · Safety · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] exp sw_cluster_design_and_integration (AUTOSAR_EXP_SwClusterDesignAndIntegration · SystemServices · ❌ new article · 📖 skeleton-exempt)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+
+## Not queued (deliberately skipped)
+- 📄 methodology_templates/basic_software_mode_manager template — TPS_BSWModuleDescriptionTemplate (existing article, exempt)
+- 📖 template/ (generic_structure, timimg_extension) — template examples (not synced)
+- 📖 power/ — bespoke topic article (no standalone specification)

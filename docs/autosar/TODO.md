@@ -1,8 +1,9 @@
 # AUTOSAR 文章翻译进度
 
-> 由 autosar-sync 技能按 [STANDARD.md](STANDARD.md) 维护；每次同步后更新对应条目与「最后更新」。
+> 由 autosar-translate 技能按 [STANDARD.md](STANDARD.md) 维护；每次同步后更新对应条目与「最后更新」。
+> 执行队列（一篇一篇译的行序清单）：[sync-todo/index.md](sync-todo/index.md) — 本文件是状态台账，队列是执行序。
 > 状态：✅ 符合 Type A · 🔶 已翻译待对齐 · ⚠️ 部分翻译 · ⛔ 空壳 · ❌ 缺失 · 📖 指南/专题（豁免骨架）
-> 基准：R23-11（`~/Workspace/autosar_standard/markdown/`）· 最后更新：2026-10-23
+> 基准：R23-11（`~/Workspace/autosar_standard/markdown/`）· 最后更新：2026-10-24
 
 ## 待办清单
 
@@ -12,6 +13,10 @@
 - [ ] 其余 11 篇 ⚠️ 补齐各自缺失章节（com_based_transformer、data_distribution、e2e_transformer、sec_oc、SoAd、mirror、dem、iohwab、fee、memory_access、dcm）
 - [ ] 4 篇 ⛔ 空壳全量翻译：ethernet_switch_driver、service_discovery、memory_mapping、platform_types（platform_types 需同修 front-matter 标题与 nav 标签）
 - [ ] 12 篇 🔶 对齐 Type A：icu/iohwab 删「时序图」章；flash_driver/time_service 删「配置规范」章；nvram 删「需求追踪」章并改「功能说明」；can_driver 专题章去留决策；其余旧译名统一为 STANDARD.md 用词
+- [ ] IO 分区 ✅ 文章标题用词对齐（DIO/Port 已于 2026-10-24 完成，同类偏差仍在）：pwm 4.2「对汽车域的适用性」、adc/icu 4.2「适用车型域」→「汽车域的适用性」；ocu 3.1「输入文档与相关标准和规范」→「输入文件」
+- [ ] 4.2「适用于汽车领域」→「汽车域的适用性」（STANDARD.md 2026-10-24 定名）：bswm、ecu_state_manager、crypto_driver、crypto_service_manager、memory_access、data_distribution；「对汽车领域的适用性」：ethernet_driver、can_interface；「汽车领域的适用性」：nvram_manager
+- [ ] *Scheduled functions* 统一为「调度函数」（STANDARD.md 2026-10-24 定名）：bswm 7.3 / can_network_management 7.3「周期函数」、crypto_service_manager 7.12「Scheduled 函数」
+- [ ] 缩略语章统一为「粗体术语 + 引用块」+ 行集对齐（STANDARD.md §1，2026-10-24 普查 20:6）：格式 — dio/port ✅（2026-10-24 改排）/pwm/ocu/lin_driver/udp_network_management 4 篇现为 GFM 表格；行集（对照 R23-11 源逐行核对）— adc 补回 API/HW/SW、恢复 DEM→DET 源序、Conversion Mode 合回一条（18 行→16 条），ocu 补 MCU 行（14→13），lin_driver 缺 14 行（40→26），udp_network_management 缺 14 行（26→12）；icu 已核对一致（12:12）
 - [ ] 卫生修复：udp_network_management 微信页脚改 `<h4>`；dem 编号断档；`data_distribution service` 目录改名去空格；SoAd/mirror 改 index.md 布局；`timimg_extension/indx.md` 拼写（需同改 nav）
 
 **补广（新文章）**
@@ -39,7 +44,7 @@
 
 ## communication
 
-- ✅ [CAN 网络管理](can_network_management/) — SWS_CANNetworkManagement
+- ✅ [CAN 网络管理](can_network_management/) — SWS_CANNetworkManagement（待对齐用词：7.3「周期函数」→「调度函数」）
 - ✅ [UDP 网络管理](udp_network_management/) — SWS_UDPNetworkManagement → 待修：微信页脚误用 `##` 标题
 - 🔶 [CAN 驱动](can_driver/) — SWS_CANDriver（专题章"术语/优先级反转/CAN 硬件单元"+旧译名）
 - 🔶 [CAN 收发器驱动](can_transceiver_driver/) — SWS_CANTransceiverDriver（第 1 章"介绍"）
@@ -65,7 +70,7 @@
 
 ## crypto
 
-- ✅ [Csm 加密服务管理器](crypto_service_manager/) — SWS_CryptoServiceManager
+- ✅ [Csm 加密服务管理器](crypto_service_manager/) — SWS_CryptoServiceManager（待对齐用词：4.2「适用于汽车领域」、7.12「Scheduled 函数」→「调度函数」）
 - ⚠️ [Crypto 驱动](crypto_driver/) — SWS_CryptoDriver（缺 API 规范）
 
 ❌ 缺失（2）：SWS_CryptoInterface（CryIf）、SWS_KeyManager（KeyM）
@@ -85,8 +90,12 @@
 
 ## io
 
-- ✅ [ADC 驱动](io/adc_driver/)、[DIO 驱动](io/dio_driver/)、[OCU 驱动](io/ocu_driver/)、[Port 驱动](io/port_driver/)、[PWM 驱动](io/pwm_driver/) — 各对应 SWS_\<Name\>Driver
-- 🔶 [ICU 驱动](io/icu_driver/) — SWS_ICUDriver（含禁止章"时序图"）
+- ✅ [ADC 驱动](io/adc_driver/) — SWS_ADCDriver（待对齐用词：4.2「适用车型域」）
+- ✅ [DIO 驱动](io/dio_driver/) — SWS_DIODriver（2026-10-24 对齐用词 3.1/4.2 + 缩略语章改排引用块；内容与 R23-11 源逐章一致）
+- ✅ [OCU 驱动](io/ocu_driver/) — SWS_OCUDriver（待对齐用词：3.1「输入文档与相关标准和规范」）
+- ✅ [Port 驱动](io/port_driver/) — SWS_PortDriver（2026-10-24：补译源 ch.1 映射表、§2 缩略语改排引用块、4.2「汽车域的适用性」；内容与 R23-11 源逐章一致）
+- ✅ [PWM 驱动](io/pwm_driver/) — SWS_PWMDriver（待对齐用词：4.2「对汽车域的适用性」）
+- 🔶 [ICU 驱动](io/icu_driver/) — SWS_ICUDriver（含禁止章"时序图"；待对齐用词：4.2「适用车型域」）
 - ⚠️ [I/O 硬件抽象](io/iohwab/) — SWS_IOHardwareAbstraction（缺约束和假设；含禁止章"时序图"）
 
 ## memory
@@ -103,8 +112,8 @@
 
 ## mode_management
 
-- ✅ [BswM](basic_software_mode_manager/) — SWS_BSWModeManager
-- 🔶 [EcuM](ecu_state_manager/) — SWS_ECUStateManager（第 2 章"定义和缩写"）
+- ✅ [BswM](basic_software_mode_manager/) — SWS_BSWModeManager（待对齐用词：4.2「适用于汽车领域」、7.3「周期函数」→「调度函数」）
+- 🔶 [EcuM](ecu_state_manager/) — SWS_ECUStateManager（第 2 章"定义和缩写"；4.2「适用于汽车领域」）
 - 📖 [模式管理指南](guide_to_mode_management/) — EXP_ModeManagementGuide（豁免）
 
 ## system_services

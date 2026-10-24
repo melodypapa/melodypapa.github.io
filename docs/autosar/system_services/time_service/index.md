@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR Time Service（时间服务）"
+spec: AUTOSAR_CP_SWS_TimeService
+release: R23-11
 ---
 
 
