@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR Memory Access（存储访问）"
+spec: AUTOSAR_CP_SWS_MemoryAccess
+release: R23-11
 ---
 
 

@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR PduR (PDU Router)"
+spec: AUTOSAR_CP_SWS_PduR
+release: R23-11
 ---
 
 

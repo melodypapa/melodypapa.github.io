@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR FLS（闪存驱动程序）"
+spec: AUTOSAR_CP_SWS_FlashDriver
+release: R23-11
 ---
 
 

@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR LIN Driver"
+spec: AUTOSAR_CP_SWS_LINDriver
+release: R23-11
 ---
 
 

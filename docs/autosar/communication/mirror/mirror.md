@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR Mirror （总线镜像）"
+spec: AUTOSAR_CP_SWS_BusMirroring
+release: R23-11
 ---
 
 

@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR SD (Service Discovery)"
+spec: AUTOSAR_CP_SWS_ServiceDiscovery
+release: R23-11
 ---
 
 

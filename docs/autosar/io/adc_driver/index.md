@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR ADC Driver（模数转换器驱动）"
+spec: AUTOSAR_CP_SWS_ADCDriver
+release: R23-11
 ---
 
 ## 1. 简介和功能概述

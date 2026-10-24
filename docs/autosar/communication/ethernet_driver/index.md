@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR Ethernet Driver（以太网驱动程序）"
+spec: AUTOSAR_CP_SWS_EthernetDriver
+release: R23-11
 ---
 
 

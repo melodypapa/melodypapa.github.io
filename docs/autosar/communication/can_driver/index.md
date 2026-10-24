@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR CAN Driver（CAN驱动程序）"
+spec: AUTOSAR_CP_SWS_CANDriver
+release: R23-11
 ---
 
 

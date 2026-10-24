@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR BndM（非易失性大容量数据管理器）"
+spec: AUTOSAR_CP_SWS_BulkNvDataManager
+release: R23-11
 ---
 
 

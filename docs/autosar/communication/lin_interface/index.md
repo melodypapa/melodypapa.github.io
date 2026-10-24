@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR LinIf (LIN Interface)"
+spec: AUTOSAR_CP_SWS_LINInterface
+release: R23-11
 ---
 
 

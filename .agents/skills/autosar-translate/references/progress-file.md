@@ -56,8 +56,8 @@ Rules for queue rows:
 - Ticked items in `## 待办清单` get removed (or archived) once the
   corresponding status row has been updated — a work item is done only when
   its status row says so.
-- The two files are linked: a status row flips (Step 7) only after the queue
-  row's 6 steps are `[x]` and the Step 7 user confirmation was given; the
+- The two files are linked: a status row flips (Step 8) only after the queue
+  row's 6 steps are `[x]` and the Step 8 user confirmation was given; the
   flipped queue row (with commit hash + PR link) is the evidence behind the
   status row.
 

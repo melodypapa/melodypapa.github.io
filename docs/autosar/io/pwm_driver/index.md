@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR PWM Driver（脉冲宽度调制驱动）"
+spec: AUTOSAR_CP_SWS_PWMDriver
+release: R23-11
 ---
 
 ## 1. 简介和功能概述

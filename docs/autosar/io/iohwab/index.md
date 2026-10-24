@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）"
+spec: AUTOSAR_CP_SWS_IOHardwareAbstraction
+release: R23-11
 ---
 
 ## 1. 简介和功能概述

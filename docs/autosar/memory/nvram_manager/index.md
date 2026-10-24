@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR NVM（非易失性存储管理器）"
+spec: AUTOSAR_CP_SWS_NVRAMManager
+release: R23-11
 ---
 
 

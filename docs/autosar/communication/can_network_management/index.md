@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR CAN NM（CAN网络管理）"
+spec: AUTOSAR_CP_SWS_CANNetworkManagement
+release: R23-11
 ---
 
 

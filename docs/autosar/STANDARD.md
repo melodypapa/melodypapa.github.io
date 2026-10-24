@@ -67,3 +67,4 @@
 - `power`（专题文章，自定义 11 章）
 - `methodology_templates/basic_software_module_description_template`、`template/`（模板/方法论类）
 - `docs/autosar/glossary.md`（术语表 — 由 `.agents/skills/autosar-translate/scripts/gen_glossary.py` 从各文章第 2 章汇总生成，勿手编；文章第 2 章变更后重新生成）
+- `docs/autosar/api_reference.md`（API 清单 — 由 `.agents/skills/autosar-translate/scripts/gen_api_list.py` 从 R23-11 源文档第 8 章提取生成，勿手编；front-matter `spec:`/`release:` 变更后重新生成）

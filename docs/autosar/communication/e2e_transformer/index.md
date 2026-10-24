@@ -1,5 +1,7 @@
 ---
 title: "E2E Transformer (E2E转换器)"
+spec: AUTOSAR_CP_SWS_E2ETransformer
+release: R23-11
 ---
 
 

@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR DIO Driver（数字输入输出驱动）"
+spec: AUTOSAR_CP_SWS_DIODriver
+release: R23-11
 ---
 
 ## 1. 简介和功能概述

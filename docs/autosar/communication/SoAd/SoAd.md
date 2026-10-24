@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR SoAd (Socket Adaptor)"
+spec: AUTOSAR_CP_SWS_SocketAdaptor
+release: R23-11
 ---
 
 

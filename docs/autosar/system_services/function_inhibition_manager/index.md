@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR FiM（功能禁止管理器）"
+spec: AUTOSAR_CP_SWS_FunctionInhibitionManager
+release: R23-11
 ---
 
 

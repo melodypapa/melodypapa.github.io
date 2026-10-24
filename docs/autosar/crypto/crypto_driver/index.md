@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR Crypto Driver（加密驱动程序）"
+spec: AUTOSAR_CP_SWS_CryptoDriver
+release: R23-11
 ---
 
 

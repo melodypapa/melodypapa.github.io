@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR Diagnostic Communication Manager（诊断通信管理器）"
+spec: AUTOSAR_CP_SWS_DiagnosticCommunicationManager
+release: R23-11
 ---
 
 

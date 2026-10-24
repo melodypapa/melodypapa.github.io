@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR OCU Driver（输出比较单元驱动）"
+spec: AUTOSAR_CP_SWS_OCUDriver
+release: R23-11
 ---
 
 ## 1. 简介和功能概述

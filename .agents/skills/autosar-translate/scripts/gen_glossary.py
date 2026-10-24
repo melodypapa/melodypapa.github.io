@@ -33,11 +33,22 @@ TERM_RE = re.compile(r"^\*\*(.+?)\*\*(.*)$")
 TABLE_ROW_RE = re.compile(r"^\|\s*(.+?)\s*\|\s*(.+?)\s*\|\s*$")
 
 
+def front_field(text, field):
+    m = re.search(rf"^{field}:\s*(.+?)\s*$", text, re.M)
+    return m.group(1).strip() if m else None
+
+
 def iter_articles():
+    """Yield (path, spec, release) for mapped articles only — provenance is a
+    hard requirement: every glossary entry must name its document and release."""
     for p in sorted(DOCS.rglob("*.md")):
         if p.name in SKIP_FILES or SKIP_DIRS & set(p.parts):
             continue
-        yield p
+        text = p.read_text(encoding="utf-8")
+        spec = front_field(text, "spec")
+        if not spec:
+            continue
+        yield p, spec, front_field(text, "release") or "R23-11"
 
 
 def article_label(p: Path) -> str:
@@ -116,7 +127,7 @@ def build() -> tuple[str, list[str]]:
     terms: "OrderedDict[str, dict]" = OrderedDict()
     report = []
     n_articles = 0
-    for p in iter_articles():
+    for p, spec, release in iter_articles():
         text = p.read_text(encoding="utf-8")
         m = CH2_RE.search(text)
         if not m:
@@ -130,6 +141,7 @@ def build() -> tuple[str, list[str]]:
         n_articles += 1
         flag = "  (table — 待改排)" if fmt == "table" else ""
         report.append(f"  {len(entries):3d} {rel_link(p)}{flag}")
+        spec_disp = spec.removeprefix("AUTOSAR_CP_")
         for key, display, definition in entries:
             k = key.lower()
             t = terms.setdefault(k, {"display": display, "defs": OrderedDict()})
@@ -138,7 +150,7 @@ def build() -> tuple[str, list[str]]:
             d = t["defs"].setdefault(norm_def(definition), {"text": definition, "src": []})
             if definition.count("**") > d["text"].count("**"):
                 d["text"] = definition
-            src = (article_label(p), rel_link(p))
+            src = (article_label(p), rel_link(p), spec_disp, release)
             if src not in d["src"]:
                 d["src"].append(src)
 
@@ -164,7 +176,7 @@ def build() -> tuple[str, list[str]]:
             out += [f"## {letter if letter != '#' else '其他'}", ""]
         out.append(t["display"])
         for d in t["defs"].values():
-            srcs = "、".join(f"[{lbl}]({lnk})" for lbl, lnk in d["src"])
+            srcs = "、".join(f"[{lbl}]({lnk})（{sp} · {rl}）" for lbl, lnk, sp, rl in d["src"])
             out.append(f"> {d['text']} — 来源：{srcs}")
         out.append("")
     return "\n".join(out).rstrip() + "\n", report

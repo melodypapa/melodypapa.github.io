@@ -90,7 +90,7 @@ each row carrying a 6-step sub-checklist; `index.md` orders the batches
 (`todo.md` alongside the outputs for a workspace/eval run). A run consumes
 **one row**: take the first `[ ]` row of the named (or next unfinished) batch,
 append run findings to its `- Note:` bullets, tick each step the moment it
-passes, flip the row `[x]` with the commit hash (Step 7). If the user names an
+passes, flip the row `[x]` with the commit hash (Step 8). If the user names an
 article with no queue row, add the row to the right batch file first. Format,
 row template and rules: read `references/todo-format.md`. In short:
 
@@ -103,7 +103,7 @@ row template and rules: read `references/todo-format.md`. In short:
 - A queue row exists for the article ⇒ **resume**: take the first `[ ]` row;
   do not re-derive scope from TODO.md or re-ask decisions already in Notes.
 - The row `[x]` + its 6 step boxes `[x]` + the `docs/autosar/TODO.md` row
-  updated (Step 7) = the run is finished. Never declare it finished with any
+  updated (Step 8) = the run is finished. Never declare it finished with any
   `[ ]` left in the row.
 
 Observed failures when this contract is skipped: the iteration-1 baseline run
@@ -139,25 +139,40 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
 - Chapter numbering stays stable; when insertion forces a renumber, grep for
   inbound anchor links first and fix them in the same commit.
 
-## Step 5b — Regenerate the site glossary
+## Step 6 — Regenerate the derived indexes (glossary + API list)
 
-Every ch.2 term change feeds the site-wide terminology index. After any edit
-to a 缩略语 chapter, run
-`python .agents/skills/autosar-translate/scripts/gen_glossary.py` to
-regenerate `docs/autosar/glossary.md` — an A–Z index of every term across all
-articles, deduplicated per module with each definition attributed to its
-source articles — and commit it in the same PR. **Never hand-edit
-`glossary.md`**; fix the article's ch.2 and regenerate. Read the script's
-report: a `! article: ch.2 present but no entries parsed` line is a drift
-signal (that ch.2 is prose or intro-only — fix the article, don't silence the
-line), and `(table — 待改排)` flags articles whose ch.2 still uses the legacy
-GFM table.
+Two files under `docs/autosar/` are **pure derivations** — regenerate and
+commit them in the same PR whenever their input changed; **never hand-edit
+them**.
 
-## Step 6 — Verify (two-phase gate), then repo workflow
+1. **术语表 `glossary.md`** — every ch.2 term across all articles, A–Z,
+   deduplicated per module, each definition attributed to its source article
+   with the document and release (front-matter `spec:` / `release:`).
+   Regenerate after any 缩略语 chapter edit:
+   `python .agents/skills/autosar-translate/scripts/gen_glossary.py`.
+   Read its report: a `! article: ch.2 present but no entries parsed` line is
+   a drift signal (that ch.2 is prose or intro-only — fix the article, don't
+   silence the line); `(table — 待改排)` flags a legacy GFM-table ch.2.
+2. **API 清单 `api_reference.md`** — every type (8.2) and function (8.3)
+   defined in chapter 8 of every R23-11 SWS document, A–Z, each entry naming
+   its document and release and linking to the site article when one exists.
+   Regenerate after any front-matter `spec:` change or article addition:
+   `python .agents/skills/autosar-translate/scripts/gen_api_list.py`. Its
+   `!` lines (ch.8 present but nothing parsed — 7 known docs, all untranslated,
+   e.g. the interpolation libraries' "routines definitions" structure) are
+   recorded limitations, not errors to silence.
+
+Every mapped article carries front-matter `spec:` (source document) and
+`release:` (AUTOSAR release actually translated from) — set at article
+creation/alignment (seeded from `references/mapping.md`; icu_driver is
+`R22-11` until its Group-io realignment). An article without `spec:` is
+invisible to both indexes.
+
+## Step 7 — Verify (two-phase gate), then repo workflow
 
 The strict build is necessary, not sufficient: it is blind to wording,
 coverage and fidelity. The gate therefore has two phases — the first is run
-before every commit, the second is evidence for the Step 7 confirmation.
+before every commit, the second is evidence for the Step 8 confirmation.
 
 **Phase A — mechanical checks** (scriptable; stop on any failure):
 
@@ -182,11 +197,11 @@ before every commit, the second is evidence for the Step 7 confirmation.
    必须为 0（禁表格）；`^\*\*[^*]+\*\*\s*$` 术语行条数 == 源表数据行数（逐行核对行集与
    行序 — 该章在长会话中最易漂移：adc_driver 曾 18 源行译成 16 条而通过所有检查；
    术语行允许尾随空格 — bswm/ethernet_interface 等多篇文章的行尾都有空格）。
-6. Glossary: `python .agents/skills/autosar-translate/scripts/gen_glossary.py
-   --check` exits 0 — the committed `docs/autosar/glossary.md` matches the
-   articles' ch.2 content (regenerate per Step 5b if stale).
+6. Derived indexes: both `gen_glossary.py --check` and `gen_api_list.py
+   --check` exit 0 — the committed `glossary.md` / `api_reference.md` match
+   the articles and front-matter (regenerate per Step 6 if stale).
 
-**Phase B — automation-blind checks** (presented at the Step 7 gate as
+**Phase B — automation-blind checks** (presented at the Step 8 gate as
 evidence, not asserted):
 
 - Coverage map: every translatable source `##` section ↔ an article section;
@@ -204,12 +219,12 @@ evidence, not asserted):
    — **before the first edit**, so every change lands on the branch.
 2. Commit per article (`docs: translate/complete <module> from <source doc>`),
    `Closes #N` in commit + PR body, naming the source release used. The PR is
-   opened only after the Step 7 confirmation.
+   opened only after the Step 8 confirmation.
 3. New pages must be registered in `mkdocs.yml` nav (paths are `docs/`-relative)
    or the strict build fails. Removal of pages requires nav cleanup in the
    same commit.
 
-## Step 7 — Confirm, then maintain the progress file
+## Step 8 — Confirm, then maintain the progress file
 
 **Confirmation gate — before the final commit and the PR.** Present to the
 user, in one message: the queue row's current state (steps + Notes), the
@@ -262,6 +277,6 @@ open.
 | Renaming a heading to STANDARD.md's listed term when most of the site uses a different one (DIO run: STANDARD listed 周期函数, 7 articles used 调度函数 — user kept 调度函数) | Churn in the wrong direction; the standard itself was stale | Before aligning wording, `grep` the heading across `docs/autosar`; if STANDARD.md and the site majority disagree, put the choice in the todo list as a user decision and update STANDARD.md in the same PR |
 | Posting the todo list to chat instead of writing the todo file (DIO run, 2026-10-24) | The run's decisions and tick state die with the session; nothing to resume from, nothing to audit | Step 4 output contract + `references/todo-format.md` — the file is the todo, chat is a copy |
 | Batch-checking todo items at the end of the run | The list shows progress the work doesn't have; an unverified item hides until the PR review or never | Tick each item in the file the moment its verification passes (Step 4) |
-| Finishing on the strict build alone — or opening the PR before the Step 7 gate | The build is blind to coverage, fidelity and wording; the user reviews a PR that was never confirmed | Phase A ≠ done; present Phase A + Phase B evidence and wait for confirmation, then commit/PR (Step 7) |
-| Writing "confirmation deferred" / `确认待补` on a todo item | Creates a backlog of rows whose real state nobody knows | Capture the confirmation when given, or leave the item `[ ]` (Step 7) |
+| Finishing on the strict build alone — or opening the PR before the Step 8 gate | The build is blind to coverage, fidelity and wording; the user reviews a PR that was never confirmed | Phase A ≠ done; present Phase A + Phase B evidence and wait for confirmation, then commit/PR (Step 8) |
+| Writing "confirmation deferred" / `确认待补` on a todo item | Creates a backlog of rows whose real state nobody knows | Capture the confirmation when given, or leave the item `[ ]` (Step 8) |
 | Letting the 缩略语 chapter drift on format or row set (2026-10-24 finding: 6 articles render it as a table, adc_driver dropped API/HW/SW + reordered DET/DEM + split Conversion Mode — 18 source rows became 16 entries, all under ✅ status) | Site-wide format split; silent content loss in the one chapter whose rows are pure lookups | Step 5 缩略语 rules; Phase A check 5 makes table-vs-blockquote and row count mechanical. Baseline tests (2026-10-24) show fresh agents comply — the drift happens in long loaded sessions, which is exactly why the check must be a grep, not judgment |

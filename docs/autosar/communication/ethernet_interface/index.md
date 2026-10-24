@@ -1,5 +1,7 @@
 ---
 title: "AUTOSAR Ethernet Interface（以太网接口）"
+spec: AUTOSAR_CP_SWS_EthernetInterface
+release: R23-11
 ---
 
 
