@@ -1,70 +1,70 @@
-# AUTOSAR 文章结构标准（Type A）
+# AUTOSAR Article Structure Standard (Type A)
 
-> 适用范围：`docs/autosar/` 下的**模块文章**（对各 AUTOSAR 规范文档的中文翻译）。
-> 不适用于：分区落地页（见下）、指南/EXP 类文章、以及 `docs/autosar/` 之外的目录（`nxp/`、`eb_tresos/` 等）。
-> 本文件不参与站点构建（见 `mkdocs.yml` 的 `exclude_docs`），仅供写作与评审参照。
-> 决策记录：2026-10-23 由站点作者确定；转换历史见 PR #51（issue #50）。2026-10-24：源章节 *Scheduled functions* 定名「调度函数」（原列为「周期函数」）、*Applicability to car domains* 定名「汽车域的适用性」（原列「适用于汽车领域」）；见 issue #52。2026-10-24：源章节 *Configurable Interfaces* 定名「可配置接口」（原列「可配置的接口」；站内 5 篇 IO 文章均用前者）；见 issue #54。
+> Scope: **module articles** under `docs/autosar/` (Chinese translations of AUTOSAR specification documents).
+> Not applicable to: section landing pages (see below), guide/EXP-type articles, and directories outside `docs/autosar/` (`nxp/`, `eb_tresos/`, etc.).
+> This file takes no part in the site build (see `exclude_docs` in `mkdocs.yml`); it exists for writing and review reference only.
+> Decision record: established by the site author on 2026-10-23; conversion history in PR #51 (issue #50). 2026-10-24: source chapter *Scheduled functions* named 「调度函数」 (previously listed 「周期函数」) and *Applicability to car domains* named 「汽车域的适用性」 (previously listed 「适用于汽车领域」); see issue #52. 2026-10-24: source chapter *Configurable Interfaces* named 「可配置接口」 (previously listed 「可配置的接口」; all 5 IO articles on the site use the former); see issue #54.
 
-## 1. 章节骨架（必须）
+## 1. Chapter skeleton (mandatory)
 
-每篇模块文章必须且只能包含以下七个一级章节，编号连续、标题用词精确匹配：
+Every module article must contain exactly the following seven top-level chapters — numbering continuous, heading wording matching precisely:
 
-| # | 章节 | 内容 |
+| # | Chapter | Content |
 | --- | --- | --- |
-| 1 | `## 1. 简介和功能概述` | 模块概述（SWS Functional Overview 的翻译） |
-| 2 | `## 2. 缩略语` | 粗体术语 + 引用块释义（不用 GFM 表格，源表亦改排）；行集与行序与源表一致 |
-| 3 | `## 3. 相关文档` | `### 3.1. 输入文件`（`[n]` + 文件名列表）、`### 3.2. 相关规范` |
-| 4 | `## 4. 约束和假设` | `### 4.1. 限制`、`### 4.2. 适用于汽车领域` |
-| 5 | `## 5. 对其他模块的依赖` | 每个依赖模块一个 `###` |
-| 6 | `## 6. 功能规格` | 功能规格正文，`###`/`####` 级子节 |
-| 7 | `## 7. API规范` | 见第 3 节 |
+| 1 | `## 1. 简介和功能概述` | Module overview (translation of the SWS Functional Overview) |
+| 2 | `## 2. 缩略语` | Bold term + blockquote definition (no GFM table; the source table is reflowed too); row set and row order identical to the source table |
+| 3 | `## 3. 相关文档` | `### 3.1. 输入文件` (`[n]` + file-name list), `### 3.2. 相关规范` |
+| 4 | `## 4. 约束和假设` | `### 4.1. 限制`, `### 4.2. 汽车域的适用性` |
+| 5 | `## 5. 对其他模块的依赖` | One `###` per dependent module |
+| 6 | `## 6. 功能规格` | Functional specification body, `###`/`####` sub-sections |
+| 7 | `## 7. API规范` | See section 3 below |
 
-**禁止出现的章节**：需求可追溯性 / 需求追踪、时序图、配置规范、字母编号附录（`## A.` / `## B.`）、以及任何第 8 章及以后的内容。
+**Forbidden chapters**: requirement traceability (需求可追溯性 / 需求追踪), sequence diagrams (时序图), configuration specification (配置规范), letter-numbered appendices (`## A.` / `## B.`), and any chapter 8 or later content.
 
-## 2. 章节标题用词（统一写法）
+## 2. Chapter heading wording (canonical)
 
-同一源章节全站只用一种译法：
+One source chapter uses exactly one rendering site-wide:
 
-- ✅ `简介和功能概述`（不用 介绍 / 概述 / 介绍和功能概述）
-- ✅ `缩略语`（不用 术语 / 缩写词和术语 / 首字母缩略词和缩写 / 定义和缩写）
-- ✅ `相关文档`（不用 相关的文档）
-- ✅ `约束和假设` → `限制` / `汽车域的适用性`（不用 适用于汽车领域 / 适用车型域 / 对汽车域的适用性）
+- ✅ `简介和功能概述` (not 介绍 / 概述 / 介绍和功能概述)
+- ✅ `缩略语` (not 术语 / 缩写词和术语 / 首字母缩略词和缩写 / 定义和缩写)
+- ✅ `相关文档` (not 相关的文档)
+- ✅ `约束和假设` → `限制` / `汽车域的适用性` (not 适用于汽车领域 / 适用车型域 / 对汽车域的适用性)
 - ✅ `对其他模块的依赖`
-- ✅ `功能规格`（不用 功能规范 / 功能说明）
-- ✅ `API规范` → `函数定义` / `调度函数`（不用 周期函数 / Scheduled 函数）/ `回调通知` / `可配置接口`（不用 可配置的接口）/ `期望接口`
+- ✅ `功能规格` (not 功能规范 / 功能说明)
+- ✅ `API规范` → `函数定义` / `调度函数` (not 周期函数 / Scheduled 函数) / `回调通知` / `可配置接口` (not 可配置的接口) / `期望接口`
 
-## 3. API 章节内部结构
+## 3. API chapter internal structure
 
-- 每个函数：`#### 7.1.x. 函数名` + `**说明**: …` + ```C 签名代码块
-- 按源文档分组：`### 7.1. 函数定义`、`### 7.2. 调度函数`、`### 7.3. 回调通知` 等（存在才写）
-- 无回调时写明：`**BswM**中没有回调通知。` 式的一句话，不省略章节
+- Per function: `#### 7.1.x. <function name>` + `**说明**: …` + a ```C signature code block
+- Grouped as in the source document: `### 7.1. 函数定义`, `### 7.2. 调度函数`, `### 7.3. 回调通知`, etc. (write a group only if the source has it)
+- When there are no callbacks, state it in one sentence such as `**BswM**中没有回调通知。` — never omit the chapter
 
-## 4. 格式规则
+## 4. Formatting rules
 
-- **front-matter `title` 是页面唯一的 h1 来源**——正文禁止出现 `# ` 一级标题（Material 目录会错乱）
-- 标题编号 `## N. 标题`（数字 + 间隔点）；标题级别 = 数字层级 + 2（`x.y` → `###`，`x.y.z` → `####`，以此类推）
-- 英文术语加粗（`**BswM**`）；代码标识符不翻译（`Sd_ClientServiceSetState()`）
-- 不写源文档需求编号（`[SWS_Adc_00122]` 之类）；`{DRAFT}` 标记丢弃
-- 提示用 `**注意：**` / `**提示：**` 段落；表格用 GFM 表格；图片用文章目录内的本地 PNG
-- 微信二维码页脚（如文章带有）：`<section id="wechat">` + `<h4>` + 图片，**不得**用 Markdown 标题（会污染 TOC）
+- **The front-matter `title` is the page's only h1 source** — `# ` level-1 headings are forbidden in the body (they break the Material TOC)
+- Heading numbering `## N. <标题>` (digit + trailing dot); heading level = numeric depth + 2 (`x.y` → `###`, `x.y.z` → `####`, and so on)
+- Bold English terms (`**BswM**`); code identifiers stay untranslated (`Sd_ClientServiceSetState()`)
+- No source requirement IDs (`[SWS_Adc_00122]` and the like); `{DRAFT}` markers are dropped
+- Notes/tips use `**注意：**` / `**提示：**` paragraphs; tables use GFM tables; images are local PNGs inside the article directory
+- WeChat QR-code footer (where an article has one): `<section id="wechat">` + `<h4>` + image, **never** a Markdown heading (it would pollute the TOC)
 
-## 5. 翻译原则
+## 5. Translation principles
 
-- 文章是对标准文档（SWS/EXP）的**忠实翻译**：不重构、不写成自己的综述
-- 判断译文对错前，先核对 `~/Workspace/autosar_standard/markdown/Classic_Platform/Releases/<版本>/` 下的 **SWS**（结构来源）；SRS 与 SWS 措辞可能不同
-- 缺失内容按标准原文就地翻译补入，位置与源文档对应，沿用现有格式；章节编号保持稳定
+- Articles are **faithful translations** of the standard documents (SWS/EXP): no restructuring, no turning them into your own survey
+- Before judging a translation right or wrong, check the **SWS** (the structural source) under `~/Workspace/autosar_standard/markdown/Classic_Platform/Releases/<release>/`; the SRS and the SWS wording can genuinely differ
+- Missing content is translated in place from the standard's original text, inserted at the position the source document has it, following the existing format; chapter numbering stays stable
 
-## 6. 分区落地页（index 页）
+## 6. Section landing pages (index pages)
 
-各分区 `index.md`（如 `docs/autosar/io/index.md`）不适用上述骨架，使用固定格式：front-matter 标题 + 一段导语 + `## 文章` 链接列表 + `## 相关内容` 交叉链接；在 `mkdocs.yml` 中注册为所属分区的首个无标签条目（`navigation.indexes`）。
+Each section's `index.md` (e.g. `docs/autosar/io/index.md`) does not follow the skeleton above; it uses a fixed format: front-matter title + one intro paragraph + a `## 文章` link list + `## 相关内容` cross-links; register it in `mkdocs.yml` as the first unlabeled entry under its section (`navigation.indexes`).
 
-## 7. 豁免清单
+## 7. Exemption list
 
-以下文章为指南/专题类型，**不适用**模块骨架（有意为之，勿"修正"）：
+The following articles are guide/topic-type and **do not** follow the module skeleton (intentional — do not "fix" them):
 
-- `mode_management/guide_to_mode_management`（EXP 指南结构）
-- `memory/nv_data_handling_guideline`（指南结构）
-- `power`（专题文章，自定义 11 章）
-- `methodology_templates/basic_software_module_description_template`、`template/`（模板/方法论类）
-- `docs/autosar/glossary.md`（术语表 — 由 `.agents/skills/autosar-translate/scripts/gen_glossary.py` 从各文章第 2 章汇总生成，勿手编；文章第 2 章变更后重新生成）
-- `docs/autosar/api_reference.md`（API 清单 — 由 `.agents/skills/autosar-translate/scripts/gen_api_list.py` 从 R23-11 源文档第 8 章提取生成，勿手编；front-matter `spec:`/`release:` 变更后重新生成）
+- `mode_management/guide_to_mode_management` (EXP guide structure)
+- `memory/nv_data_handling_guideline` (guide structure)
+- `power` (topic article, custom 11 chapters)
+- `methodology_templates/basic_software_module_description_template`, `template/` (template/methodology type)
+- `docs/autosar/glossary.md` (glossary — generated by `.agents/skills/autosar-translate/scripts/gen_glossary.py` from every article's chapter 2; never hand-edit; regenerate after any article's ch.2 changes)
+- `docs/autosar/api_reference.md` (API list — generated by `.agents/skills/autosar-translate/scripts/gen_api_list.py` from chapter 8 of the R23-11 source documents; never hand-edit; regenerate after front-matter `spec:`/`release:` changes)
