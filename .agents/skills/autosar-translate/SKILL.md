@@ -413,12 +413,13 @@ evidence, not asserted):
 
 **Repo workflow:**
 
-1. `gh issue create` (tracking) → `git switch -c feature/<topic> origin/master`
-   — **before the first edit**, so every change lands on the branch.
-2. Commit per article (`docs: translate/complete <module> from <source doc>`),
-   `Closes #N` in commit + PR body, naming the source release used. The PR is
-   opened only after the Step 8 confirmation.
-3. New pages must be registered in `mkdocs.yml` nav (paths are `docs/`-relative)
+1. **Git/PR/issue mechanics are external to this skill** (user decision
+   2026-10-25): the user provides dedicated git instruments — the skill does
+   not prescribe how branches, commits, issues or PRs are created. Only the
+   gate ordering matters here: content work happens before the Step 8
+   confirmation, and the queue row records whatever identifiers the
+   instruments return (commit hash, PR link).
+2. New pages must be registered in `mkdocs.yml` nav (paths are `docs/`-relative)
    or the strict build fails. Removal of pages requires nav cleanup in the
    same commit.
 
