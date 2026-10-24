@@ -378,7 +378,16 @@ before every commit, the second is evidence for the Step 8 confirmation.
 evidence, not asserted):
 
 - Coverage map: every translatable source `##` section ↔ an article section;
-  the forbidden source chapters listed as deliberate omissions.
+  the forbidden source chapters listed as deliberate omissions. **Internal
+  structure of pre-existing chapters is part of the map** (adc lesson
+  2026-10-25): a realignment must verify that already-translated chapters
+  follow the source release's own sub-section convention (e.g. R23-11's
+  *Background & Rationale* / *Requirements* split inside functional-spec
+  subsections) — chapter-level heading equality hides a legacy topical
+  layout underneath. **Diagrams embedded in non-forbidden chapters are
+  chapter content and translate with it**: state diagrams inside the
+  functional-spec chapter (e.g. ADC 7.3) belong to §6 — only the traceability
+  and appendix chapters are exempt.
 - Terminology: ch.2 row set and order checked **cell by cell** against the
   source tables — the Phase A term-line count alone can pass with reordered
   or renamed rows (that is how adc_driver's 18→16 drift hid under a ✅).
@@ -489,4 +498,5 @@ open.
 | Writing "confirmation deferred" / `确认待补` on a todo item | Creates a backlog of rows whose real state nobody knows | Capture the confirmation when given, or leave the item `[ ]` (Step 8) |
 | Letting the 缩略语 chapter drift on format or row set (2026-10-24 finding: 6 articles render it as a table, adc_driver dropped API/HW/SW + reordered DET/DEM + split Conversion Mode — 18 source rows became 16 entries, all under ✅ status) | Site-wide format split; silent content loss in the one chapter whose rows are pure lookups | Step 5 acronym-chapter rules; Phase A check 5 makes table-vs-blockquote and row count mechanical. Baseline tests (2026-10-24) show fresh agents comply — the drift happens in long loaded sessions, which is exactly why the check must be a grep, not judgment |
 | Trusting the API chapter's shape without checking it entry by entry (PWM run 2026-10-24: ✅-rated article carried `Pwm_ChannelType` with the neighbor type's "8..32 bit" range, and a `PWM_FULL_POWER (0x00)` row that R23-11 does not define — it only exists from R25-11 on) | Silent infidelity in the chapter readers use as a lookup reference; a wrong Range or an unsourced enum value is indistinguishable from the standard to a site reader | Step 5 API-chapter rules: cell-by-cell type-table read; per-requirement function text mapping; Phase A check 7 `check_api_sync.py` for count/name/order; content-vs-source mismatches go to the user as decisions |
+| Realigning only the measurable chapters (ch.2/§3/API/new ch.8-9) and leaving a pre-existing §6 with legacy internal structure — the ADC article carried a topical 6.1.x layout under R23-11's Background-&-Rationale/Requirements convention, and its source 7.3 State Diagrams were never translated (found 2026-10-25) | The chapter-level coverage map passes while the body diverges from the source's structure; embedded diagram chapters get skipped as "figures" | Phase B: internal-structure verification per pre-existing chapter (see Coverage map); a realignment that cannot verify internal structure says so in its gate evidence |
 | Writing a rule as Phase B prose without a mechanical trigger (potential-links lived as a Phase B bullet for six runs — dio/port/pwm/ocu/icu/ecu/bswm — and was never executed once; its own "user decision" semantics made doing nothing always compliant) | Codified rules that only a gate presentation could surface get dropped when presentations lengthen; the omission is invisible in a deviations-framing | Any new rule gets (a) a tick-box in the step it executes in, and/or (b) a mechanical counter whose zero-output is explicit. Test rules at RUN level ("did a full sync execute it?"), not comprehension level |

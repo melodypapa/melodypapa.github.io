@@ -108,6 +108,23 @@ AUTOSAR 提供了基础软件模块的通用规范 [1] ，此文档也适用于*
 
 ### 6.1. 一般行为
 
+#### 6.1.1. 背景与原理
+
+下表列出了 **ADC** 用户可能需要的功能，以及 **ADC** 模块提供这些功能的方式。此外，该表还给出了一种可能的实现，以及这些功能到商用微控制器（C16x）能力的映射。
+
+表 7.1：One-shot 与 Continuous 转换的不同可能性
+
+| 期望功能 | **ADC** 驱动功能 | 示例：C16x 衍生产品的表述 |
+|---|---|---|
+| 仅需要一个通道的一次转换结果。 | 软件触发的一次性转换，被转换的通道组恰好由一个通道组成。 | 固定通道、单次转换、软件触发。 |
+| 一个通道的周期性转换。 | 硬件触发的一次性转换，被转换的通道组恰好由一个通道组成。 | 固定通道、单次转换、硬件触发。 |
+| 一个通道的重复转换。 | 连续转换，被转换的通道组恰好由一个通道组成。 | 固定通道、连续转换。 |
+| 组内每个通道各一次转换结果。 | 软件触发的一次性转换，被转换的通道组由多于一个通道组成。 | 自动扫描、单次转换、软件触发。 |
+| 组内每个通道的周期性转换。 | 硬件触发的一次性转换，被转换的通道组由多于一个通道组成。 | 自动扫描、单次转换、硬件触发。 |
+| 组内每个通道的重复转换。 | 连续转换，被转换的通道组由多于一个通道组成。 | 自动扫描、连续转换。 |
+
+#### 6.1.2. 需求
+
 **ADC**模块可以允许将一个或多个**ADC**通道（**ADC channel**）分组为所谓的**ADC**通道组（**ADC Channel group**）。也即是说**ADC**模块的配置应使得一个**ADC**通道组包含至少一个**ADC**通道。
 
 如果启用了全局限制检查功能并且为**ADC**通道启用了特定于通道的限制检查，则 **ADC**模块的配置应使**ADC**通道组仅包含一个**ADC**通道。
@@ -120,22 +137,19 @@ AUTOSAR 提供了基础软件模块的通用规范 [1] ，此文档也适用于*
 
 对于每个**ADC**通道组，支持以下基础静态配置：组符号名、通知开关、回调通知函数、所配置使用的通道列表、组触发源以及组转换模式。此外，在配置期可为每个**ADC**通道组定义用于存储采样结果的缓冲区，即数据缓冲区指针（转换结果的目标地址）与**ADC**数值个数。
 
-#### 6.1.1. 初始化
-
 ![Figure12.png](Figure12.png)
-
-#### 6.1.2. 去初始化
 
 ![Figure13.png](Figure13.png)
 
-#### 6.1.3. 转换模式
+**ADC**模块支持以下转换模式：
 
 **ADC**模块支持以下转换模式：
 
 1. **ADC**模块需为所有**ADC**通道组，提供一次性转换模式（**One-shot Conversion**）的支持。 一次性转换意味着为正在转换的组配置的每个通道都执行一次转换。![Figure14.png](Figure14.png)
 2. **ADC**模块需为所有带有触发源软件的**ADC**通道组，提供连续转换模式（**Continuous Conversion**）的支持。连续转换是指一次ADC转换完成后，一直重复整个**ADC**通道组的转换。组内各个**ADC**通道的转换以及整个**ADC**通道组的重复不需要执行任何额外的触发事件。根据硬件和软件功能，可以顺序或并行转换**ADC**通道组内的各个通道。![Figure15.png](Figure15.png)
 
-#### 6.1.4. 触发源（Trigger Source）
+**ADC**模块需支持以下启动条件或触发源：
+
 **ADC**模块需支持以下启动条件或触发源：
 
 * **ADC**模块需支持所有转换模式的启动条件的软件**API**调用（**Software API Call**）。触发源的软件API调用是指ADC通道组的转换由ADC模块提供的服务来启动或者停止。
@@ -145,12 +159,12 @@ AUTOSAR 提供了基础软件模块的通用规范 [1] ，此文档也适用于*
 
 **ADC**模块应允许为每个**ADC**通道组配置一个触发源。
 
-#### 6.1.5. 数据访问模式
+**ADC**模块需支持以下结果访问模式：
 
 **ADC**模块需支持以下结果访问模式：
 
-* **ADC**模块需支持使用API函数**Adc_GetStreamLastPointer**来访问结果。调用 **Adc_GetStreamLastPointer**会告知用户最新一轮的**ADC**通道组转换结果在结果缓冲区中的位置以及结果缓冲区中有效转换结果的数量。结果缓冲区是应用程序提供的外部缓冲区。此函数可用于**ADC**通道组的两种类型，通过配置**Streaming Access Mode**和**Single Access Mode**进行配置。同时**Single Access Mode**的处理等于**Streaming Access Mode**的**Streaming Counter**等于**1**的情况。
-* 如果**API**函数的生成是静态配置的，**ADC**模块需支持使用API函数 **Adc_ReadGroup**来访问结果。调用**Adc_ReadGroup**将最近一轮转换的**ADC**通道组转换结果复制到应用程序缓冲区，其起始地址指定为**Adc_ReadGroup**的API参数。此函数可用于**ADC**通道组的两种类型，通过配置**Streaming Access Mode**和**Single Access Mode**进行配置。
+* **ADC**模块需支持使用API函数[**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer)来访问结果。调用 [**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer)会告知用户最新一轮的**ADC**通道组转换结果在结果缓冲区中的位置以及结果缓冲区中有效转换结果的数量。结果缓冲区是应用程序提供的外部缓冲区。此函数可用于**ADC**通道组的两种类型，通过配置**Streaming Access Mode**和**Single Access Mode**进行配置。同时**Single Access Mode**的处理等于**Streaming Access Mode**的**Streaming Counter**等于**1**的情况。
+* 如果**API**函数的生成是静态配置的，**ADC**模块需支持使用API函数 [**Adc_ReadGroup**](#736-adc_readgroup)来访问结果。调用[**Adc_ReadGroup**](#736-adc_readgroup)将最近一轮转换的**ADC**通道组转换结果复制到应用程序缓冲区，其起始地址指定为[**Adc_ReadGroup**](#736-adc_readgroup)的API参数。此函数可用于**ADC**通道组的两种类型，通过配置**Streaming Access Mode**和**Single Access Mode**进行配置。
 
 ![Figure17.png](Figure17.png)
 
@@ -161,15 +175,13 @@ AUTOSAR 提供了基础软件模块的通用规范 [1] ，此文档也适用于*
 **ADC**通道组结果的一致性在应用端可以通过以下方法获得：
 
 * 使用**ADC**通道组通知机制（**group notification mechanism**）
-* 通过**API**函数**Adc_GetGroupStatus**轮询获取。
+* 通过**API**函数[**Adc_GetGroupStatus**](#7311-adc_getgroupstatus)轮询获取。
 
-在任何情况下，新的结果数据都必须在被覆盖之前从结果缓冲区中读出（例如：通过 **Adc_ReadGroup**）。如果函数**Adc_GetGroupStatus**报告状态**ADC_STREAM_COMPLETED**, 并且同一**ADC**通道组的转换仍在进行中（因连续转换或硬件触发转换激活），则上层用户需负责在**ADC**驱动程序覆盖结果缓冲区之前，读取**ADC**通道组结果缓冲区中的结果。
+在任何情况下，新的结果数据都必须在被覆盖之前从结果缓冲区中读出（例如：通过 [**Adc_ReadGroup**](#736-adc_readgroup)）。如果函数[**Adc_GetGroupStatus**](#7311-adc_getgroupstatus)报告状态**ADC_STREAM_COMPLETED**, 并且同一**ADC**通道组的转换仍在进行中（因连续转换或硬件触发转换激活），则上层用户需负责在**ADC**驱动程序覆盖结果缓冲区之前，读取**ADC**通道组结果缓冲区中的结果。
 
-**ADC**模块的环境应确保在请求转换结果之前，被请求的**ADC**通道组的转换已经完成。如果被请求的**ADC**通道组没有完成转换（例如：因为用户停止了**ADC**通道组的转换），ADC模块返回的值将是任意的。（如：**Adc_GetStreamLastPointer**将返回**0**并读取值为**NULL_PTR**，而**Adc_ReadGroup**将返回**E_NOT_OK**）。
+**ADC**模块的环境应确保在请求转换结果之前，被请求的**ADC**通道组的转换已经完成。如果被请求的**ADC**通道组没有完成转换（例如：因为用户停止了**ADC**通道组的转换），ADC模块返回的值将是任意的。（如：[**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer)将返回**0**并读取值为**NULL_PTR**，而[**Adc_ReadGroup**](#736-adc_readgroup)将返回**E_NOT_OK**）。
 
 对于流式访问模式（**Streaming Access Mode**），结果缓冲区的处理支持两种方式：线性缓冲区（**linear buffer**），即当流缓冲区已满（采样数达到配置的数量）时，**ADC**驱动停止转换；环形缓冲区（**ring buffer**），即到达流缓冲区末尾后回绕（**wrap around**），转换继续进行。
-
-#### 6.1.6. 优先级
 
 **ADC**模块需允许为每个**ADC**通道组配置优先级。这意味着优先级机制，在软件中实施，或者在可用的情况下由硬件支持。具有触发源硬件的**ADC**通道组，始终使用硬件优先级机制进行优先级排序。
 
@@ -205,7 +217,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [1] ，此文档也适用于*
 
 ![Figure20.png](Figure20.png)
 
-在启用硬件触发请求情况下，通过**API**函数**Adc_EnableHardwareTrigger**生成的请求不应存储在任何队列中。
+在启用硬件触发请求情况下，通过**API**函数[**Adc_EnableHardwareTrigger**](#737-adc_enablehardwaretrigger)生成的请求不应存储在任何队列中。
 
 在硬件触发转换请求的情况下，硬件优先级机制需被使用。
 
@@ -213,32 +225,26 @@ AUTOSAR 提供了基础软件模块的通用规范 [1] ，此文档也适用于*
 
 如果**ADC**通道组可以被隐式停止，当**ADC**通道组状态为**ADC_IDLE**或**ADC_STREAM_COMPLETED**，这时**ADC**模块则被允许存储同一**ADC**通道组的额外软件转换请求。
 
-#### 6.1.7. 通知（Notification）
-
 如果通知功能被配置并启用，当被请求**ADC**通道组的所有通道的转换完成后，**ADC**模块会调用此**ADC**通道组通知（**group notification**）函数。
-
-#### 6.1.8. 重入和完整性
 
 对于不同的ADC通道组，**ADC**模块函数是可以支持可重入的。此要求应适用于除了以下的所有API函数：
 
-* **Adc_Init**
-* **Adc_DeInit**
-* **Adc_GetVersionInfo**
-* **Adc_SetPowerState**
-* **Adc_GetTargetPowerState**
-* **Adc_GetCurrentPowerState**
-* **Adc_PreparePowerState**
+* [**Adc_Init**](#731-adc_init)
+* [**Adc_DeInit**](#733-adc_deinit)
+* [**Adc_GetVersionInfo**](#7313-adc_getversioninfo)
+* [**Adc_SetPowerState**](#7314-adc_setpowerstate)
+* [**Adc_GetTargetPowerState**](#7316-adc_gettargetpowerstate)
+* [**Adc_GetCurrentPowerState**](#7315-adc_getcurrentpowerstate)
+* [**Adc_PreparePowerState**](#7317-adc_preparepowerstate)
 
 **API**函数的可重入性，必须由调用者来关注是否同时使用了同一个**ADC**通道组的情况。
 
-简单的读取调用，如**Adc_ReadGroup**和**Adc_GetGroupStatus**的实现，即使这些函数是为相同的**ADC**通道组调用，也需支持是可重入的。是否使用适当的保护机制（例如：禁用和启用中断）取决于代码实现。
+简单的读取调用，如[**Adc_ReadGroup**](#736-adc_readgroup)和[**Adc_GetGroupStatus**](#7311-adc_getgroupstatus)的实现，即使这些函数是为相同的**ADC**通道组调用，也需支持是可重入的。是否使用适当的保护机制（例如：禁用和启用中断）取决于代码实现。
 
 **注意：**
-调用**Adc_ReadGroup**可以隐式更改组状态。
+调用[**Adc_ReadGroup**](#736-adc_readgroup)可以隐式更改组状态。
 
 在运行时，如果在不同的**Task**或者**ISR**中，对于同一个**ADC**通道组的多次调用，则**ADC**模块无需检查数据的完整性，但**ADC**模块的用户需确保数据的完整性。
-
-#### 6.1.9. 限制检查
 
 **ADC**模块需允许为**ADC**通道配置限制检查。
 
@@ -246,19 +252,73 @@ AUTOSAR 提供了基础软件模块的通用规范 [1] ，此文档也适用于*
 
 如果选择了带软件触发源的一次性（**one-shot**）转换模式，并且对**ADC**的通道启用了限制检查，则 **ADC**驱动模块需忽略不在配置范围内的**ADC**转换结果，并且包含此**ADC**通道的**ADC**通道组，需仍旧保持**ADC_BUSY**的状态。
 
-在重新发出新的一次性（**one-shot**）转换软件触发之前，必须使用**Adc_StopGroupConversion()**将**ADC**通道组状态设置为**ADC_IDLE**。
+在重新发出新的一次性（**one-shot**）转换软件触发之前，必须使用**[Adc_StopGroupConversion](#735-adc_stopgroupconversion)()**将**ADC**通道组状态设置为**ADC_IDLE**。
 
 如果选择了带硬件触发源的一次性（**one-shot**）转换模式，并且对**ADC**的通道启用了限制检查，则**ADC**驱动模块需忽略不在配置范围内的**ADC**转换结果，并等待硬件触发源再次发出下一次的转换。
 
-#### 6.1.10. 转换结果的表示与处理
+**ADC**驱动需从转换结果中掩掉不属于**ADC**数值本身的信息位。如果适用，函数[**Adc_ReadGroup**](#736-adc_readgroup)需掩掉转换所提供的、但不属于转换结果本身的所有信息位或诊断位。
 
-**ADC**驱动需从转换结果中掩掉不属于**ADC**数值本身的信息位。如果适用，函数**Adc_ReadGroup**需掩掉转换所提供的、但不属于转换结果本身的所有信息位或诊断位。
-
-**Adc_ReadGroup**需读取原始转换值，不进行进一步的缩放。读取的数值需按配置参数**ADC_RESULT_ALIGNMENT**的设置进行对齐，可选择右对齐或左对齐。如果**ADC**提供有符号数值，**ADC**驱动需将符号位置于返回值的最高有效位（**MSB**）。
+[**Adc_ReadGroup**](#736-adc_readgroup)需读取原始转换值，不进行进一步的缩放。读取的数值需按配置参数**ADC_RESULT_ALIGNMENT**的设置进行对齐，可选择右对齐或左对齐。如果**ADC**提供有符号数值，**ADC**驱动需将符号位置于返回值的最高有效位（**MSB**）。
 
 包含通道组转换结果的结构体需以统一的维度（位数）生成，并按属于任意通道组的位宽最大的通道进行裁剪。这是因为同一通道组内各通道的结果值位宽可能不同（例如**8**位、**12**位等）。
 
+#### 6.1.3. ADC 缓冲区访问模式示例
+
+#### 6.1.3.1. 配置
+
+![Figure7_1_1.png](Figure7_1_1.png)
+
+* 示例配置由三个**ADC**通道组组成。第1个**ADC**通道组由2个通道组成，第2个**ADC**通道组和第3个**ADC**通道组各由一个通道组成。
+* 对于组1和组2，配置了组访问模式**ADC_ACCESS_MODE_STREAMING**。组3的组访问模式配置为**ADC_ACCESS_MODE_SINGLE**。
+* **ADC**驱动程序将组1到组3的转换结果存储在三个应用程序缓冲区中，通过三个配置的 **ADC_RESULT_POINTER**访问：包括**G1_ResultPtr**、**G2_ResultPtr**和**G3_ResultPtr**。
+
+#### 6.1.3.2. 初始化
+
+![Figure7_1_2.png](Figure7_1_2.png)
+
+用户必须为**ADC**通道组结果提供应用程序结果缓冲区。每组都需要一个缓冲区。如果选择流模式（**ADC_ACCESS_MODE_STREAMING**）的访问模式，缓冲区大小取决于组通道的数量、组访问模式以及流模式采样的数量。在开始**ADC**通道组转换之前，用户必须使用**API**函数 [**Adc_SetupResultBuffer**](#732-adc_setupresultbuffer)初始化**ADC**通道组结果指针，该函数将**ADC**通道组结果指针初始化为指向特定的应用程序结果缓冲区。
+
+#### 6.1.3.3. Adc_GetStreamLastPointer的用法
+
+![Figure7_1_3.png](Figure7_1_3.png)
+
+**ADC**驱动程序将**ADC**通道组**G1**、**G2**和**G3**的转换结果存储在相应的结果缓冲区数组**G1_ResultBuffer**、**G2_ResultBuffer**和**G3_ResultBuffer**中。**ADC**驱动程序并不支持通过**ADC**的**API**函数直接访问**ADC**硬件结果寄存器。
+
+**ADC**用户定义了三个指针**G1_SamplePtr**、**G2_SamplePtr**和**G3_SamplePtr**。在调用[**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer)后，这些指针分别指向 **ADC**应用程序结果缓冲区。
+
+准确地说，指针**G1_SamplePtr**在调用[**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer)后，指向最新完成的一轮AD转换后的最新的**G1_CH0**的结果（其中**G1_CH0**是**G1**组定义中的第一个通道）。应用程序结果缓冲区布局如上图所示。组1的应用程序结果缓冲区中保存了3份**G1_CH0**的流结果（**streaming result**），也保存了3份**G1_CH1** 的流结果。了解应用程序结果缓冲区布局后，用户可以访问最新一轮转换的所有**ADC**通道组的组内通道的结果。
+
+**G2_SamplePtr**和**G3_SamplePtr**也对齐，在调用[**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer)后，指向对应**ADC**通道组的的第一个组通道的最新结果。因为这两个**ADC**通道组只有一个频道。**G2_SamplePtr**指向**G2_CH2**结果之一（即：最新结果）。**ADC**通道组，因为配置为单一访问模式，所以**G3_SamplePtr**始终指向**G3_CH3**。
+
+[**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer)会返回存储在应用程序结果缓冲区中，每个通道的有效采样数（即：完整的组转换次数）。如果返回值等于配置参数流采样个数（**number of streaming samples**），则流缓冲区中的所有转换结果都有效。如果返回值为 0，则流缓冲区中没有可用的转换结果（采样数据的指针将对齐为**NULL**）。
+
+为了使[**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer)将采样数据指针（**G1_SamplePtr**、**G2_SamplePtr**和**G3_SamplePtr**）指向最新的通道结果，**API**被定义为将指针传递给结果指针而不是结果指针本身。
+
+#### 6.1.3.4. Adc_ReadGroup的用法
+
+![Figure7_1_4.png](Figure7_1_4.png)
+
+如果可选的API函数[**Adc_ReadGroup**](#736-adc_readgroup)被启用，则用户必须为每个选定的**ADC**通道组提供额外的缓冲区，这些缓冲区可以保存一轮**ADC**通道组转换的结果。调用[**Adc_ReadGroup**](#736-adc_readgroup)将最新结果从应用程序结果缓冲区复制到应用程序读取组缓冲区。 在示例中，一个应用程序读取缓冲区（**G2_G3_ReadBuffer**）被用于**ADC**通道组**G2**和**G3**。
 ### 6.2. 转换处理和交互
+
+#### 6.2.1. 背景与原理
+
+以下示例规定了通道转换的顺序，具体取决于通道组和转换类型：
+
+* **示例1（多通道/连续转换）**
+**ADC**通道组包含通道（**CH0**、**CH1**、**CH2**、**CH3** 和 **CH4**），并配置为连续转换模式。当完成每次扫描后，会调用通知（如果启用）。 然后自动开始新一轮扫描。
+
+* **示例2（多通道/One-Shot）**
+**ADC**通道组包含通道（**CH0**、**CH1**、**CH2**、**CH3** 和 **CH4**），并配置为**One-Shot**转换模式。当完成扫描后，会调用通知（如果启用）。
+
+* **示例3（单通道/连续转换）**
+**ADC**通道组包含通道（**CH3**）并配置为连续转换模式。当完成每次扫描后，将调用通知（如果启用）。然后自动开始新一轮的扫描。
+
+* **示例4（单通道/One-Shot）**
+**ADC**通道组包含通道（**CH4**）并配置为**One-Shot**转换模式。当完成扫描后，会调用通知（如果启用）。
+![figure7_3.png](figure7_3.png)
+
+#### 6.2.2. 需求
 
 **ADC**模块一次只能转换每个**ADC**硬件单元（**ADC HW Unit**）的一个**ADC**通道组。**ADC**模块不支持在同一个**ADC**硬件单元上，不同的**ADC**通道组的同时转换。
 
@@ -270,71 +330,67 @@ AUTOSAR 提供了基础软件模块的通用规范 [1] ，此文档也适用于*
 
 为了请求转换两个组之间共享的通道，**ADC**用户必须停止包含指定通道的第一组的转换，然后才能开始包含指定通道的第二组的转换。
 
-![figure7_3.png](figure7_3.png)
+### 6.3. 状态图
 
-#### 6.2.1. 示例1（多通道/连续转换）
+**ADC**模块具有一个状态机，如下图所示。这些状态是通道组特定的，而非模块特定的。这些状态图展示了**ADC**通道组所有可能的配置选项。状态迁移取决于**ADC**通道组的配置。
 
-**ADC**通道组包含通道（**CH0**、**CH1**、**CH2**、**CH3** 和 **CH4**），并配置为连续转换模式。当完成每次扫描后，会调用通知（如果启用）。 然后自动开始新一轮扫描。
+#### 6.3.1. One-Shot/连续组转换模式的状态图
 
-#### 6.2.2. 示例2（多通道/One-Shot）
+![Figure7_4.png](Figure7_4.png)
 
-**ADC**通道组包含通道（**CH0**、**CH1**、**CH2**、**CH3** 和 **CH4**），并配置为**One-Shot**转换模式。当完成扫描后，会调用通知（如果启用）。
+图 7.4：One-Shot/连续组转换模式状态图
 
-#### 6.2.3. 示例3（单通道/连续转换）
+#### 6.3.2. One-Shot组转换模式中HW/SW触发的状态图
 
-**ADC**通道组包含通道（**CH3**）并配置为连续转换模式。当完成每次扫描后，将调用通知（如果启用）。然后自动开始新一轮的扫描。
+![Figure7_5.png](Figure7_5.png)
 
-#### 6.2.4. 示例4（单通道/One-Shot）
+图 7.5：One-Shot组转换模式中HW/SW触发的状态图
 
-**ADC**通道组包含通道（**CH4**）并配置为**One-Shot**转换模式。当完成扫描后，会调用通知（如果启用）。
+#### 6.3.3. SW触发连续转换模式的状态图
 
-### 6.3. ADC 缓冲区访问模式示例
+![Figure7_6.png](Figure7_6.png)
 
-#### 6.3.1. 配置
+图 7.6：SW触发连续转换模式的状态图
 
-![Figure7_1_1.png](Figure7_1_1.png)
+#### 6.3.4. One-Shot转换模式、软件触发源、单一访问模式的状态图
 
-* 示例配置由三个**ADC**通道组组成。第1个**ADC**通道组由2个通道组成，第2个**ADC**通道组和第3个**ADC**通道组各由一个通道组成。
-* 对于组1和组2，配置了组访问模式**ADC_ACCESS_MODE_STREAMING**。组3的组访问模式配置为**ADC_ACCESS_MODE_SINGLE**。
-* **ADC**驱动程序将组1到组3的转换结果存储在三个应用程序缓冲区中，通过三个配置的 **ADC_RESULT_POINTER**访问：包括**G1_ResultPtr**、**G2_ResultPtr**和**G3_ResultPtr**。
+![Figure7_7.png](Figure7_7.png)
 
-#### 6.3.2. 初始化
+图 7.7：One-Shot、软件触发、单一访问模式的状态图
 
-![Figure7_1_2.png](Figure7_1_2.png)
+#### 6.3.5. One-Shot转换、硬件触发源、单一访问模式的状态图
 
-用户必须为**ADC**通道组结果提供应用程序结果缓冲区。每组都需要一个缓冲区。如果选择流模式（**ADC_ACCESS_MODE_STREAMING**）的访问模式，缓冲区大小取决于组通道的数量、组访问模式以及流模式采样的数量。在开始**ADC**通道组转换之前，用户必须使用**API**函数 **Adc_SetupResultBuffer**初始化**ADC**通道组结果指针，该函数将**ADC**通道组结果指针初始化为指向特定的应用程序结果缓冲区。
+![Figure7_8.png](Figure7_8.png)
 
-#### 6.3.3. Adc_GetStreamLastPointer的用法
+图 7.8：One-Shot、硬件触发、单一访问模式的状态图
 
-![Figure7_1_3.png](Figure7_1_3.png)
+#### 6.3.6. One-Shot转换模式、硬件触发源、线性和环形流访问模式的状态图
 
-**ADC**驱动程序将**ADC**通道组**G1**、**G2**和**G3**的转换结果存储在相应的结果缓冲区数组**G1_ResultBuffer**、**G2_ResultBuffer**和**G3_ResultBuffer**中。**ADC**驱动程序并不支持通过**ADC**的**API**函数直接访问**ADC**硬件结果寄存器。
+![Figure7_9.png](Figure7_9.png)
 
-**ADC**用户定义了三个指针**G1_SamplePtr**、**G2_SamplePtr**和**G3_SamplePtr**。在调用**Adc_GetStreamLastPointer**后，这些指针分别指向 **ADC**应用程序结果缓冲区。
+图 7.9：One-Shot、硬件触发、流访问模式的状态图
 
-准确地说，指针**G1_SamplePtr**在调用**Adc_GetStreamLastPointer**后，指向最新完成的一轮AD转换后的最新的**G1_CH0**的结果（其中**G1_CH0**是**G1**组定义中的第一个通道）。应用程序结果缓冲区布局如上图所示。组1的应用程序结果缓冲区中保存了3份**G1_CH0**的流结果（**streaming result**），也保存了3份**G1_CH1** 的流结果。了解应用程序结果缓冲区布局后，用户可以访问最新一轮转换的所有**ADC**通道组的组内通道的结果。
+#### 6.3.7. 连续转换模式、软件触发源、单一访问模式的状态图
 
-**G2_SamplePtr**和**G3_SamplePtr**也对齐，在调用**Adc_GetStreamLastPointer**后，指向对应**ADC**通道组的的第一个组通道的最新结果。因为这两个**ADC**通道组只有一个频道。**G2_SamplePtr**指向**G2_CH2**结果之一（即：最新结果）。**ADC**通道组，因为配置为单一访问模式，所以**G3_SamplePtr**始终指向**G3_CH3**。
+![Figure7_10.png](Figure7_10.png)
 
-**Adc_GetStreamLastPointer**会返回存储在应用程序结果缓冲区中，每个通道的有效采样数（即：完整的组转换次数）。如果返回值等于配置参数流采样个数（**number of streaming samples**），则流缓冲区中的所有转换结果都有效。如果返回值为 0，则流缓冲区中没有可用的转换结果（采样数据的指针将对齐为**NULL**）。
+图 7.10：连续转换、软件触发、单一访问模式的状态图
 
-为了使**Adc_GetStreamLastPointer**将采样数据指针（**G1_SamplePtr**、**G2_SamplePtr**和**G3_SamplePtr**）指向最新的通道结果，**API**被定义为将指针传递给结果指针而不是结果指针本身。
+#### 6.3.8. 连续转换模式、软件触发源、线性和环形流访问模式的状态图
 
-#### 6.3.4. Adc_ReadGroup的用法
+![Figure7_11.png](Figure7_11.png)
 
-![Figure7_1_4.png](Figure7_1_4.png)
-
-如果可选的API函数**Adc_ReadGroup**被启用，则用户必须为每个选定的**ADC**通道组提供额外的缓冲区，这些缓冲区可以保存一轮**ADC**通道组转换的结果。调用**Adc_ReadGroup**将最新结果从应用程序结果缓冲区复制到应用程序读取组缓冲区。 在示例中，一个应用程序读取缓冲区（**G2_G3_ReadBuffer**）被用于**ADC**通道组**G2**和**G3**。
+图 7.11：连续转换、软件触发、流访问模式的状态图
 
 ### 6.4. 电源状态管理
 
-当配置参数**AdcLowPowerStatesSupport**设置为**TRUE**时，**ADC**驱动需支持电源状态切换及其**API**。此时需生成**Adc_PreparePowerState**、**Adc_SetPowerState**、**Adc_GetCurrentPowerState**和**Adc_GetTargetPowerState**这几个**API**函数，用于管理电源状态切换并获取相关信息。
+当配置参数**AdcLowPowerStatesSupport**设置为**TRUE**时，**ADC**驱动需支持电源状态切换及其**API**。此时需生成[**Adc_PreparePowerState**](#7317-adc_preparepowerstate)、[**Adc_SetPowerState**](#7314-adc_setpowerstate)、[**Adc_GetCurrentPowerState**](#7315-adc_getcurrentpowerstate)和[**Adc_GetTargetPowerState**](#7316-adc_gettargetpowerstate)这几个**API**函数，用于管理电源状态切换并获取相关信息。
 
 **ADC**驱动需将电源状态切换序列分为两个阶段：准备阶段（进行初步的配置更改，以允许硬件外设进入目标电源状态）和设置阶段（实际使能有效的电源状态）。
 
-**API**函数**Adc_PreparePowerState**用于启动电源状态切换。在通过**Adc_PreparePowerState**完成针对某个电源状态的准备后，再使用**Adc_SetPowerState**使**ADC**模块进入所请求的电源状态。为避免出现不连贯的电源状态，部分**API**（**Adc_SetPowerState**、**Adc_PreparePowerState**）必须按给定的顺序调用，否则会存储错误（若使能**DET**跟踪）并中断该动作。**ADC**驱动需跟踪**Adc_SetPowerState**与**Adc_PreparePowerState**的调用顺序：若**Adc_SetPowerState**在**Adc_PreparePowerState**之前被调用，则需存储**DET**条目，且不执行该动作。
+**API**函数[**Adc_PreparePowerState**](#7317-adc_preparepowerstate)用于启动电源状态切换。在通过[**Adc_PreparePowerState**](#7317-adc_preparepowerstate)完成针对某个电源状态的准备后，再使用[**Adc_SetPowerState**](#7314-adc_setpowerstate)使**ADC**模块进入所请求的电源状态。为避免出现不连贯的电源状态，部分**API**（[**Adc_SetPowerState**](#7314-adc_setpowerstate)、[**Adc_PreparePowerState**](#7317-adc_preparepowerstate)）必须按给定的顺序调用，否则会存储错误（若使能**DET**跟踪）并中断该动作。**ADC**驱动需跟踪[**Adc_SetPowerState**](#7314-adc_setpowerstate)与[**Adc_PreparePowerState**](#7317-adc_preparepowerstate)的调用顺序：若[**Adc_SetPowerState**](#7314-adc_setpowerstate)在[**Adc_PreparePowerState**](#7317-adc_preparepowerstate)之前被调用，则需存储**DET**条目，且不执行该动作。
 
-**Adc_GetTargetPowerState**与**Adc_GetCurrentPowerState**分别用于获取所请求（目标）的与当前的**ADC**电源状态。**ADC**模块需跟踪当前电源状态与目标电源状态。当**AdcLowPowerStatesSupport**设置为**TRUE**时，初始化完成后模块的电源状态始终为**ADC_FULL_POWER**。
+[**Adc_GetTargetPowerState**](#7316-adc_gettargetpowerstate)与[**Adc_GetCurrentPowerState**](#7315-adc_getcurrentpowerstate)分别用于获取所请求（目标）的与当前的**ADC**电源状态。**ADC**模块需跟踪当前电源状态与目标电源状态。当**AdcLowPowerStatesSupport**设置为**TRUE**时，初始化完成后模块的电源状态始终为**ADC_FULL_POWER**。
 
 **ADC**驱动需支持同步和异步两种电源状态切换方式，取决于配置参数**AdcPowerStateAsynchTransitionMode**的取值。当该参数设置为**FALSE**时，准备过程和设置过程在各自**API**返回时即视为完成；设置为**TRUE**时，准备过程在请求发出后于后台进行，并在完成时通过通知（**IoHwAb_Adc_NotifyReadyForPowerState**）告知注册的**SWC**。
 
@@ -642,7 +698,7 @@ void Adc_StartGroupConversion ( Adc_GroupType Group )
 
 函数**Adc_StartGroupConversion**应启动所请求**ADC**通道组所有通道的转换。根据组的配置，启动一次性或连续转换。
 
-调用**Adc_StartGroupConversion**后，转换结果的存储始终从**Adc_SetupResultBuffer**配置的结果缓冲区基地址开始。
+调用**Adc_StartGroupConversion**后，转换结果的存储始终从[**Adc_SetupResultBuffer**](#732-adc_setupresultbuffer)配置的结果缓冲区基地址开始。
 
 调用**Adc_StartGroupConversion**不会为该组启用通知机制（需通过单独的**API**调用完成）。
 
@@ -686,11 +742,11 @@ void Adc_StopGroupConversion ( Adc_GroupType Group )
 
 若调用时该组处于 **ADC_IDLE** 状态，函数**Adc_StopGroupConversion**应上报运行时错误 **ADC_E_IDLE**。
 
-**注意：** 对于隐式停止的组（转换模式为单次转换的组，或使用线性流式缓冲模式的组），其状态保持为 **ADC_STREAM_COMPLETED**，直至通过 **Adc_ReadGroup** 或 **Adc_GetStreamLastPointer** **API** 函数访问结果，或直至通过 **Adc_StopGroupConversion** **API** 显式停止该组。
+**注意：** 对于隐式停止的组（转换模式为单次转换的组，或使用线性流式缓冲模式的组），其状态保持为 **ADC_STREAM_COMPLETED**，直至通过 [**Adc_ReadGroup**](#736-adc_readgroup) 或 [**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer) **API** 函数访问结果，或直至通过 **Adc_StopGroupConversion** **API** 显式停止该组。
 
 若启用了**ADC**模块的开发错误检测：若在初始化模块之前调用，函数**Adc_StopGroupConversion**应上报开发错误 **ADC_E_UNINIT** 并返回，不执行任何动作。
 
-**注意：** 所有通过 **Adc_StartGroupConversion** 启动的组，在再次启动之前也应通过 **Adc_StopGroupConversion** 停止，以将组状态重置为 **ADC_IDLE**。该规则的例外是因所选转换模式（线性缓冲且使用流式访问模式，或单次转换模式且使用单一访问模式）而被隐式停止的组——这些组在状态为 **ADC_STREAM_COMPLETED** 时也可再次启动。
+**注意：** 所有通过 [**Adc_StartGroupConversion**](#734-adc_startgroupconversion) 启动的组，在再次启动之前也应通过 **Adc_StopGroupConversion** 停止，以将组状态重置为 **ADC_IDLE**。该规则的例外是因所选转换模式（线性缓冲且使用流式访问模式，或单次转换模式且使用单一访问模式）而被隐式停止的组——这些组在状态为 **ADC_STREAM_COMPLETED** 时也可再次启动。
 
 #### 7.3.6. Adc_ReadGroup
 
@@ -706,7 +762,7 @@ Std_ReturnType Adc_ReadGroup ( Adc_GroupType Group, Adc_ValueGroupType* DataBuff
 
 **Adc_ReadGroup**应掩掉转换所提供的、但不属于转换结果本身的信息位或诊断位。
 
-若**Adc_GetGroupStatus**返回**ADC_STREAM_COMPLETED**，应触发状态转换到**ADC_BUSY**（针对连续转换模式——单一访问模式或环形流缓冲区模式——以及单一访问模式或环形流缓冲区模式下的硬件触发组）。
+若[**Adc_GetGroupStatus**](#7311-adc_getgroupstatus)返回**ADC_STREAM_COMPLETED**，应触发状态转换到**ADC_BUSY**（针对连续转换模式——单一访问模式或环形流缓冲区模式——以及单一访问模式或环形流缓冲区模式下的硬件触发组）。
 
 #### 7.3.7. Adc_EnableHardwareTrigger
 
@@ -722,7 +778,7 @@ void Adc_EnableHardwareTrigger ( Adc_GroupType Group )
 
 触发源为硬件的组在通过**Adc_EnableHardwareTrigger**启用触发后，应在每次发生触发事件时执行该组的通道转换。
 
-函数**Adc_EnableHardwareTrigger**应复位内部的组结果缓冲区指针，即调用**Adc_EnableHardwareTrigger**后，转换结果存储始终从通过 **Adc_SetupResultBuffer** 配置的结果缓冲区基地址开始。
+函数**Adc_EnableHardwareTrigger**应复位内部的组结果缓冲区指针，即调用**Adc_EnableHardwareTrigger**后，转换结果存储始终从通过 [**Adc_SetupResultBuffer**](#732-adc_setupresultbuffer) 配置的结果缓冲区基地址开始。
 
 **ADC**模块的环境应保证同一**HW Unit**上不发生并发转换（不同硬件触发同时发生）。
 
@@ -748,7 +804,7 @@ void Adc_EnableHardwareTrigger ( Adc_GroupType Group )
 
 若启用了**ADC**模块的开发错误检测：若在初始化驱动之前调用，函数**Adc_EnableHardwareTrigger**应上报开发错误 **ADC_E_UNINIT** 并返回，不执行任何动作。
 
-若启用了**ADC**模块的开发错误检测：若在通过 **Adc_SetupResultBuffer** 函数初始化结果缓冲区指针之前调用，函数**Adc_EnableHardwareTrigger**应上报开发错误 **ADC_E_BUFFER_UNINIT**。
+若启用了**ADC**模块的开发错误检测：若在通过 [**Adc_SetupResultBuffer**](#732-adc_setupresultbuffer) 函数初始化结果缓冲区指针之前调用，函数**Adc_EnableHardwareTrigger**应上报开发错误 **ADC_E_BUFFER_UNINIT**。
 
 #### 7.3.8. Adc_DisableHardwareTrigger
 
@@ -780,11 +836,11 @@ void Adc_DisableHardwareTrigger ( Adc_GroupType Group )
 
 **注意：** 配置为连续转换模式的软件组应改为上报开发错误 **ADC_E_WRONG_TRIGG_SRC**。
 
-若该组未处于启用状态（此前未调用**Adc_EnableHardwareTrigger**），函数**Adc_DisableHardwareTrigger**应上报运行时错误 **ADC_E_IDLE**。
+若该组未处于启用状态（此前未调用[**Adc_EnableHardwareTrigger**](#737-adc_enablehardwaretrigger)），函数**Adc_DisableHardwareTrigger**应上报运行时错误 **ADC_E_IDLE**。
 
 若启用了**ADC**模块的开发错误检测：若在初始化**ADC**模块之前调用，**Adc_DisableHardwareTrigger**应上报开发错误 **ADC_E_UNINIT** 并返回，不执行任何动作。
 
-**注意：** 所有通过 **Adc_EnableHardwareTrigger** 启用的组，在再次启用之前也应通过 **Adc_DisableHardwareTrigger** 禁用，即使这些组因所选转换模式（线性缓冲且使用流式访问模式）而被隐式停止。
+**注意：** 所有通过 [**Adc_EnableHardwareTrigger**](#737-adc_enablehardwaretrigger) 启用的组，在再次启用之前也应通过 **Adc_DisableHardwareTrigger** 禁用，即使这些组因所选转换模式（线性缓冲且使用流式访问模式）而被隐式停止。
 
 #### 7.3.9. Adc_EnableGroupNotification
 
@@ -818,7 +874,7 @@ void Adc_DisableGroupNotification ( Adc_GroupType Group )
 
 #### 7.3.11. Adc_GetGroupStatus
 
-**说明**: 返回所请求**ADC**通道组的转换状态。可通过**Adc.h**获得。本服务为同步调用，可重入。参数 Group（in）：所请求**ADC**通道组的数字**ID**。返回值：**Adc_StatusType**，所请求组的转换状态。
+**说明**: 返回所请求**ADC**通道组的转换状态。可通过**Adc.h**获得。本服务为同步调用，可重入。参数 Group（in）：所请求**ADC**通道组的数字**ID**。返回值：[**Adc_StatusType**](#729-adc_statustype)，所请求组的转换状态。
 
 ```C
 Adc_StatusType Adc_GetGroupStatus ( Adc_GroupType Group )
@@ -829,32 +885,32 @@ Adc_StatusType Adc_GetGroupStatus ( Adc_GroupType Group )
 函数**Adc_GetGroupStatus**应返回 **ADC_IDLE**：
 
 * 在所请求组的转换开始之前调用 **Adc_GetGroupStatus**。
-* 对于触发源为软件的组：在通过 **Adc_StopGroupConversion** 停止转换之后调用 **Adc_GetGroupStatus**。
-* 在连续组转换模式且使用线性流式访问模式时：在调用 **Adc_GetStreamLastPointer** 之后调用 **Adc_GetGroupStatus**（调用 **Adc_GetStreamLastPointer** 时组处于 **ADC_STREAM_COMPLETED** 状态）。
-* 在连续组转换模式且使用线性流式访问模式时：在调用 **Adc_ReadGroup** 之后调用 **Adc_GetGroupStatus**（调用 **Adc_ReadGroup** 时组处于 **ADC_STREAM_COMPLETED** 状态）。
-* 在单次转换（one-shot）软件触发模式下：在调用 **Adc_GetStreamLastPointer** 之后调用 **Adc_GetGroupStatus**。
-* 在单次转换（one-shot）软件触发模式下：在调用 **Adc_ReadGroup** 之后调用 **Adc_GetGroupStatus**。
-* 对于触发源为硬件的组：在调用 **Adc_DisableHardwareTrigger** 之后调用 **Adc_GetGroupStatus**。
-* 对于触发源为硬件且使用线性流式访问模式的组：在调用 **Adc_GetStreamLastPointer** 之后调用 **Adc_GetGroupStatus**（调用 **Adc_GetStreamLastPointer** 时组处于 **ADC_STREAM_COMPLETED** 状态）。
-* 对于触发源为硬件且使用线性流式访问模式的组：在调用 **Adc_ReadGroup** 之后调用 **Adc_GetGroupStatus**（调用 **Adc_ReadGroup** 时组处于 **ADC_STREAM_COMPLETED** 状态）。
+* 对于触发源为软件的组：在通过 [**Adc_StopGroupConversion**](#735-adc_stopgroupconversion) 停止转换之后调用 **Adc_GetGroupStatus**。
+* 在连续组转换模式且使用线性流式访问模式时：在调用 [**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer) 之后调用 **Adc_GetGroupStatus**（调用 [**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer) 时组处于 **ADC_STREAM_COMPLETED** 状态）。
+* 在连续组转换模式且使用线性流式访问模式时：在调用 [**Adc_ReadGroup**](#736-adc_readgroup) 之后调用 **Adc_GetGroupStatus**（调用 [**Adc_ReadGroup**](#736-adc_readgroup) 时组处于 **ADC_STREAM_COMPLETED** 状态）。
+* 在单次转换（one-shot）软件触发模式下：在调用 [**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer) 之后调用 **Adc_GetGroupStatus**。
+* 在单次转换（one-shot）软件触发模式下：在调用 [**Adc_ReadGroup**](#736-adc_readgroup) 之后调用 **Adc_GetGroupStatus**。
+* 对于触发源为硬件的组：在调用 [**Adc_DisableHardwareTrigger**](#738-adc_disablehardwaretrigger) 之后调用 **Adc_GetGroupStatus**。
+* 对于触发源为硬件且使用线性流式访问模式的组：在调用 [**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer) 之后调用 **Adc_GetGroupStatus**（调用 [**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer) 时组处于 **ADC_STREAM_COMPLETED** 状态）。
+* 对于触发源为硬件且使用线性流式访问模式的组：在调用 [**Adc_ReadGroup**](#736-adc_readgroup) 之后调用 **Adc_GetGroupStatus**（调用 [**Adc_ReadGroup**](#736-adc_readgroup) 时组处于 **ADC_STREAM_COMPLETED** 状态）。
 
 函数**Adc_GetGroupStatus**应返回 **ADC_BUSY**：
 
 * 在所请求组的第一轮转换仍在进行中时调用（连续转换模式）。
 * 在为具有**HW**触发源的组启用触发之后。
-* 在为具有软件触发源的组调用 **Adc_StartGroupConversion** 之后。
-* 在连续组转换模式且使用单一访问模式时：在调用 **Adc_GetStreamLastPointer** 之后调用 **Adc_GetGroupStatus**。
-* 在连续组转换模式且使用单一访问模式时：在调用 **Adc_ReadGroup** 之后调用 **Adc_GetGroupStatus**。
-* 在连续组转换模式且使用循环流式访问模式时：在调用 **Adc_GetStreamLastPointer** 之后调用 **Adc_GetGroupStatus**。
-* 在连续组转换模式且使用循环流式访问模式时：在调用 **Adc_ReadGroup** 之后调用 **Adc_GetGroupStatus**。
-* 在连续组转换模式且使用线性流式访问模式时：在调用 **Adc_GetStreamLastPointer** 之后调用 **Adc_GetGroupStatus**（调用 **Adc_GetStreamLastPointer** 时组处于 **ADC_COMPLETED** 状态）。
-* 在连续组转换模式且使用线性流式访问模式时：在调用 **Adc_ReadGroup** 之后调用 **Adc_GetGroupStatus**（调用 **Adc_ReadGroup** 时组处于 **ADC_COMPLETED** 状态）。
-* 在单次转换（one-shot）**HW**转换模式且使用单一访问模式时：在调用 **Adc_GetStreamLastPointer** 之后调用 **Adc_GetGroupStatus**。
-* 在单次转换（one-shot）**HW**转换模式且使用单一访问模式时：在调用 **Adc_ReadGroup** 之后调用 **Adc_GetGroupStatus**。
-* 在单次转换（one-shot）**HW**转换模式且使用循环流式访问模式时：在调用 **Adc_GetStreamLastPointer** 之后调用 **Adc_GetGroupStatus**。
-* 在单次转换（one-shot）**HW**转换模式且使用循环流式访问模式时：在调用 **Adc_ReadGroup** 之后调用 **Adc_GetGroupStatus**。
-* 在单次转换（one-shot）**HW**转换模式且使用线性流式访问模式时：在调用 **Adc_GetStreamLastPointer** 之后调用 **Adc_GetGroupStatus**（调用 **Adc_GetStreamLastPointer** 时组处于 **ADC_COMPLETED** 状态）。
-* 在单次转换（one-shot）**HW**转换模式且使用线性流式访问模式时：在调用 **Adc_ReadGroup** 之后调用 **Adc_GetGroupStatus**（调用 **Adc_ReadGroup** 时组处于 **ADC_COMPLETED** 状态）。
+* 在为具有软件触发源的组调用 [**Adc_StartGroupConversion**](#734-adc_startgroupconversion) 之后。
+* 在连续组转换模式且使用单一访问模式时：在调用 [**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer) 之后调用 **Adc_GetGroupStatus**。
+* 在连续组转换模式且使用单一访问模式时：在调用 [**Adc_ReadGroup**](#736-adc_readgroup) 之后调用 **Adc_GetGroupStatus**。
+* 在连续组转换模式且使用循环流式访问模式时：在调用 [**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer) 之后调用 **Adc_GetGroupStatus**。
+* 在连续组转换模式且使用循环流式访问模式时：在调用 [**Adc_ReadGroup**](#736-adc_readgroup) 之后调用 **Adc_GetGroupStatus**。
+* 在连续组转换模式且使用线性流式访问模式时：在调用 [**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer) 之后调用 **Adc_GetGroupStatus**（调用 [**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer) 时组处于 **ADC_COMPLETED** 状态）。
+* 在连续组转换模式且使用线性流式访问模式时：在调用 [**Adc_ReadGroup**](#736-adc_readgroup) 之后调用 **Adc_GetGroupStatus**（调用 [**Adc_ReadGroup**](#736-adc_readgroup) 时组处于 **ADC_COMPLETED** 状态）。
+* 在单次转换（one-shot）**HW**转换模式且使用单一访问模式时：在调用 [**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer) 之后调用 **Adc_GetGroupStatus**。
+* 在单次转换（one-shot）**HW**转换模式且使用单一访问模式时：在调用 [**Adc_ReadGroup**](#736-adc_readgroup) 之后调用 **Adc_GetGroupStatus**。
+* 在单次转换（one-shot）**HW**转换模式且使用循环流式访问模式时：在调用 [**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer) 之后调用 **Adc_GetGroupStatus**。
+* 在单次转换（one-shot）**HW**转换模式且使用循环流式访问模式时：在调用 [**Adc_ReadGroup**](#736-adc_readgroup) 之后调用 **Adc_GetGroupStatus**。
+* 在单次转换（one-shot）**HW**转换模式且使用线性流式访问模式时：在调用 [**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer) 之后调用 **Adc_GetGroupStatus**（调用 [**Adc_GetStreamLastPointer**](#7312-adc_getstreamlastpointer) 时组处于 **ADC_COMPLETED** 状态）。
+* 在单次转换（one-shot）**HW**转换模式且使用线性流式访问模式时：在调用 [**Adc_ReadGroup**](#736-adc_readgroup) 之后调用 **Adc_GetGroupStatus**（调用 [**Adc_ReadGroup**](#736-adc_readgroup) 时组处于 **ADC_COMPLETED** 状态）。
 
 函数**Adc_GetGroupStatus**应返回 **ADC_COMPLETED**：
 
@@ -877,7 +933,7 @@ Adc_StatusType Adc_GetGroupStatus ( Adc_GroupType Group )
 
 #### 7.3.12. Adc_GetStreamLastPointer
 
-**说明**: 返回存储在结果缓冲区中每通道的有效采样数。读取一个指向组结果缓冲区中某个位置的指针。借助该指针位置，可访问最近一轮已完成转换的所有组通道的结果。借助该指针和返回值，可访问所有有效的组转换结果（用户必须考虑结果缓冲区的布局）。可通过**Adc.h**获得。本服务为同步调用，可重入。参数 Group（in）：所请求**ADC**通道组的数字**ID**。参数 PtrToSamplePtr（out）：指向结果缓冲区指针的指针。返回值：**Adc_StreamNumSampleType**，每通道的有效采样数。
+**说明**: 返回存储在结果缓冲区中每通道的有效采样数。读取一个指向组结果缓冲区中某个位置的指针。借助该指针位置，可访问最近一轮已完成转换的所有组通道的结果。借助该指针和返回值，可访问所有有效的组转换结果（用户必须考虑结果缓冲区的布局）。可通过**Adc.h**获得。本服务为同步调用，可重入。参数 Group（in）：所请求**ADC**通道组的数字**ID**。参数 PtrToSamplePtr（out）：指向结果缓冲区指针的指针。返回值：[**Adc_StreamNumSampleType**](#7214-adc_streamnumsampletype)，每通道的有效采样数。
 
 ```C
 Adc_StreamNumSampleType Adc_GetStreamLastPointer ( Adc_GroupType Group, Adc_ValueGroupType** PtrToSamplePtr )
@@ -895,7 +951,7 @@ Adc_StreamNumSampleType Adc_GetStreamLastPointer ( Adc_GroupType Group, Adc_Valu
 
 若调用时组状态为 **ADC_BUSY**（该组的转换正在进行中），函数**Adc_GetStreamLastPointer**应将作为参数传入的指针（**PtrToSamplePtr**）设置为 **NULL** 并返回 0。
 
-**ADC**模块的环境应通过检查 **Adc_GetGroupStatus** 的返回值来保证已读取数据的一致性。
+**ADC**模块的环境应通过检查 [**Adc_GetGroupStatus**](#7311-adc_getgroupstatus) 的返回值来保证已读取数据的一致性。
 
 若调用时组状态为 **ADC_STREAM_COMPLETED**，则函数**Adc_GetStreamLastPointer**应触发向 **ADC_BUSY** 的状态转换——适用于连续转换模式（单一访问模式或循环流式缓冲区模式），以及处于单一访问模式或循环流式访问模式的硬件触发组。
 
@@ -933,7 +989,7 @@ Std_ReturnType Adc_SetPowerState ( Adc_PowerStateRequestResultType* Result )
 
 若目标电源状态与当前电源状态相同，则不执行任何动作，**API**立即以**E_OK**结果返回。
 
-若请求的是正常电源状态，该**API**应引用 **Adc_Init** 所使用的相同容器中的必要参数。
+若请求的是正常电源状态，该**API**应引用 [**Adc_Init**](#731-adc_init) 所使用的相同容器中的必要参数。
 
 **注意：** 正常（即完整）电源模式不得使用单独的容器或硬编码数据，以避免初始化阶段所用的参数与电源状态切换期间所用的参数之间出现不一致。
 
@@ -949,7 +1005,7 @@ Std_ReturnType Adc_SetPowerState ( Adc_PowerStateRequestResultType* Result )
 
 该**API**应上报运行时错误 **ADC_E_TRANSITION_NOT_POSSIBLE**——当所请求的电源状态无法从当前电源状态直接达到时。
 
-若激活了开发错误报告：若**HW**单元此前未通过 **Adc_PreparePowerState()** **API**针对目标电源状态进行准备，该**API**应上报**DET**错误**ADC_E_PERIPHERAL_NOT_PREPARED**。
+若激活了开发错误报告：若**HW**单元此前未通过 **[Adc_PreparePowerState](#7317-adc_preparepowerstate)()** **API**针对目标电源状态进行准备，该**API**应上报**DET**错误**ADC_E_PERIPHERAL_NOT_PREPARED**。
 
 若无法从当前电源状态直接到达请求的电源状态，应上报运行时错误**ADC_E_TRANSITION_NOT_POSSIBLE**。到达目标电源状态所需的所有异步操作均可在**Adc_Main_PowerTransitionManager**的上下文中于后台执行。
 
@@ -1015,7 +1071,7 @@ Std_ReturnType Adc_PreparePowerState ( Adc_PowerStateType PowerState, Adc_PowerS
 void Adc_Main_PowerTransitionManager ( void )
 ```
 
-此**API**执行为完成**Adc_PreparePowerState()**请求的电源状态切换所需的任何非即时动作。
+此**API**执行为完成**[Adc_PreparePowerState](#7317-adc_preparepowerstate)()**请求的电源状态切换所需的任何非即时动作。
 
 调度速率应由**AdcMainSchedulePeriod**定义且应是可变的，因为仅在请求了切换时才需要调用该函数。
 
@@ -1079,7 +1135,7 @@ void IoHwAb_AdcNotification<#groupID> ( void )
 void IoHwAb_Adc_NotifyReadyForPowerState<#Mode> ( void )
 ```
 
-若配置参数**AdcPowerStateAsynchTransitionMode**设置为**TRUE**，**ADC**驱动应在**Adc_PreparePowerState**准备过程完成时，向注册的用户发出此通知。
+若配置参数**AdcPowerStateAsynchTransitionMode**设置为**TRUE**，**ADC**驱动应在[**Adc_PreparePowerState**](#7317-adc_preparepowerstate)准备过程完成时，向注册的用户发出此通知。
 
 ## 8. 时序图
 
