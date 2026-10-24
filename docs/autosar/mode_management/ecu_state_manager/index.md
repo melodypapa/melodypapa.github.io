@@ -39,9 +39,9 @@ ECU管理器模块（**ECU Manager**）是管理**ECU**状态的基础软件模�
 
 如果进行了相应的配置，灵活的**ECU**管理模块可以向后兼容以前的ECU管理模块的版本。有关兼容性配置的更多信息，可参阅模式管理指南（**Guide to Mode Management**）[4]。
 
-## 2. 定义和缩写
+## 2. 缩略语
 
-### 2.1. 定义
+本章定义对**ECU**管理器具有特殊意义的术语以及相关模块的缩写。
 
 **Callback**
 > 参见术语表[5]。
@@ -76,43 +76,41 @@ ECU管理器模块（**ECU Manager**）是管理**ECU**状态的基础软件模�
 **Wakeup Source**
 > 处理唤醒事件的外围设备或**ECU**组件称为唤醒源（**Wakeup Source**）。
 
-### 2.2. 缩写
-
 **BswM**
-> 基础软件模式管理器（Basic Software Mode Manager）
+> 基础软件模式管理器（**Basic Software Mode Manager**）
 
-**Dem** 
-> Diagnostic Event Manager
+**Dem**
+> 诊断事件管理器（**Diagnostic Event Manager**）
 
-**Det** 
-> Default Error Tracer
+**Det**
+> 默认错误跟踪器（**Default Error Tracer**）
 
-**EcuM** 
-> ECU Manager
+**EcuM**
+> ECU 管理器（**ECU Manager**）
 
-**Gpt** 
-> General Purpose Timer
+**Gpt**
+> 通用定时器（**General Purpose Timer**）
 
-**Icu** 
-> Input Capture Unit
+**Icu**
+> 输入捕获单元（**Input Capture Unit**）
 
-**ISR** 
-> Interrupt Service Routine
+**ISR**
+> 中断服务例程（**Interrupt Service Routine**）
 
-**Mcu** 
-> Microcontroller Unit
+**Mcu**
+> 微控制器单元（**Microcontroller Unit**）
 
-**NVRAM** 
-> Non-volatile random access memory
+**NVRAM**
+> 非易失性随机访问存储器（**Non-volatile random access memory**）
 
-**Os** 
-> Operating System
+**Os**
+> 操作系统（**Operating System**）
 
-**Rte** 
-> Runtime Environment
+**Rte**
+> 运行时环境（**Runtime Environment**）
 
-**VFB** 
-> Virtual Function Bus
+**VFB**
+> 虚拟功能总线（**Virtual Function Bus**）
 
 ## 3. 相关文档
 
@@ -162,7 +160,7 @@ AUTOSAR提供了基础软件模块的通用规范（参见相关文档[6]），�
 **ECU**不能总是关闭，即：零功耗（**zero power consumption**）。
 **理由**：关机目标**OFF**只能通过**ECU**特殊硬件来达到。例如：电源保持电路（**a power hold circuit**）。如果此硬件不存在，则AUTOSAR规范建议改为发出复位（**reset**）指令。 但是其他默认行为被允许的。
 
-### 4.2. 适用于汽车领域
+### 4.2. 汽车域的适用性
 
 **ECU**管理器模块适用于所有汽车域。
 
@@ -1846,6 +1844,942 @@ void EcuM_MainFunction (
     void
 )
 ```
+
+## 8. 时序图
+
+### 8.1. 状态序列
+
+展示 ECU 管理器模块在各种状态下行为的时序图包含在规格正文的流程中。以下列表列出本规范中出现的所有时序图。
+
+* 图 7.3 —— STARTUP 阶段
+* 图 7.4 —— StartPreOS 序列
+* 图 7.5 —— StartPostOS 序列
+* 图 7.7 —— SHUTDOWN 阶段
+* 图 7.8 —— OffPreOS 序列
+* 图 7.9 —— OffPostOS 序列
+* 图 7.10 —— SLEEP 阶段
+* 图 7.11 —— GoSleep 序列
+* 图 7.12 —— Halt 序列
+* 图 7.13 —— Poll 序列
+* 图 7.14 —— WakeupRestart 序列
+* 图 7.16 —— WakeupValidation 序列
+
+### 8.2. 唤醒序列
+
+唤醒序列展示多个模块如何协作使 ECU 进入睡眠状态，从而在唤醒事件发生时能够唤醒并启动 ECU。
+
+#### 8.2.1. GPT 唤醒序列
+
+通用定时器（**GPT**）是可能的唤醒源之一。通常在 ECU 进入睡眠前启动 GPT，硬件定时器在到期时产生中断。该中断唤醒微控制器，并执行 GPT 模块中的中断处理程序。它通知 ECU 状态管理器模块发生了 GPT 唤醒。为了区分引起唤醒的不同 GPT 通道，集成者可以为每个 GPT 通道分配不同的唤醒源标识符。图 9.1 展示了相应的调用序列。
+
+![Figure9-1.png](Figure9-1.png)
+
+图 9.1：GPT 中断唤醒
+
+如果 GPT 硬件能够锁存定时器溢出，也可以如图 9.2 所示通过轮询 GPT 来检测唤醒。
+
+![Figure9-2.png](Figure9-2.png)
+
+图 9.2：GPT 轮询唤醒
+
+#### 8.2.2. ICU 唤醒序列
+
+输入捕获单元（**ICU**）是另一种唤醒源。与 GPT 不同，ICU 驱动本身并不是唤醒源，它只是处理唤醒中断的模块。因此，只有唤醒源的驱动程序才能判断自己是否该为此次唤醒负责。这就使得 EcuM_CheckWakeupHook 有必要去询问真正的唤醒源模块。为了知道该询问哪个模块，ICU 必须把唤醒源标识符传递给 EcuM_CheckWakeup。对于共享中断，集成代码可能需要在 EcuM_CheckWakeupHook 中检查多个唤醒源。为此，ICU 必须把可能引起该中断的所有唤醒源的标识符都传递给 EcuM_CheckWakeup。注意，EcuM_WakeupSourceType（见 7.2.3 节 EcuM_WakeupSourceType）为每个唤醒源包含一个位，因此一次调用可以传递多个唤醒源。图 9.3 展示了由此产生的调用序列。由于 ICU 只负责处理唤醒中断，对 ICU 进行轮询并无意义；若要轮询，必须如图 38 所示直接检查唤醒源。
+
+![Figure9-3.png](Figure9-3.png)
+
+图 9.3：ICU 中断唤醒
+
+#### 8.2.3. CAN 唤醒序列
+
+在 CAN 上，收发器或通信控制器都可以通过中断或轮询检测唤醒。唤醒源标识符应在收发器与控制器之间共享，因为 ECU 状态管理器模块只需要知道是哪个网络被唤醒，并将其传递给通信管理器模块。
+
+在中断或共享中断的情况下，无法确定是哪个具体的唤醒源（CAN 控制器、CAN 收发器、LIN 控制器等）检测到了唤醒。因此集成者必须把 EcuM_CheckWakeup(wakeupSource) 所导出的 wakeupSource —— 它可以代表一个共享中断或仅代表一个中断通道 —— 分配给传递给 CanIf_CheckWakeup(WakeupSource) 的具体唤醒源。所以这里 EcuM_CheckWakeup() 的参数 wakeupSource 可能与 CanIf_CheckWakeup 的 WakeupSource 不同，也可能相同，取决于硬件拓扑以及 EcuM_CheckWakeupHook 集成代码的实现。
+
+在 CanIf_CheckWakeup(WakeupSource) 期间，CAN 接口模块（CanIf）会检查是否有设备（CAN 通信控制器或收发器）配置为 "WakeupSource" 的值。如果有，则通过相应的设备驱动模块检查该设备是否发生唤醒。若设备检测到唤醒，设备驱动通过 EcuM_SetWakeupEvent(sources) 通知 EcuM。参数 "sources" 被设置为该设备上配置的值，即调用 CanIf_CheckWakeup() 时所用的值。
+
+多个设备可能配置了相同的唤醒源值。但如果设备连接到不同的总线介质且可被唤醒，则应将它们配置为不同的唤醒源。
+
+以下 CAN 唤醒序列部分是可选的，因为"集成代码"没有规格规定。例如在 EcuM_CheckWakeup() 期间是否调用 CanIf 检查唤醒源，属于实现特定。
+
+![Figure9-4.png](Figure9-4.png)
+
+图 9.4：CAN 收发器中断唤醒
+
+图 9.4 展示了 CAN 收发器经中断的唤醒。该中断通常按 8.2.2 节所述由 ICU 驱动处理。
+
+CAN 控制器的中断唤醒与 GPT 唤醒类似：中断处理程序与 CheckWakeup 功能都封装在 CAN 驱动模块内，如图 9.5 所示。
+
+![Figure9-5.png](Figure9-5.png)
+
+图 9.5：CAN 控制器中断唤醒
+
+CAN 收发器和控制器都可以轮询唤醒。ECU 状态管理器模块会定期检查 CAN 接口模块，后者根据传递给 CAN 接口模块的唤醒源参数，向 CAN 驱动模块或 CAN 收发器驱动模块询问，如图 9.6 所示。
+
+![Figure9-6.png](Figure9-6.png)
+
+图 9.6：CAN 控制器或收发器轮询唤醒
+
+在通过中断或轮询检测到来自 CAN 收发器或控制器的唤醒事件之后，可以对唤醒事件进行验证。
+
+这通过在 EcuM_StartWakeupSources 中打开相应的 CAN 收发器和控制器来完成。需要哪些 EcuM_StartWakeupSource 集成代码中的函数调用，取决于所使用的 CAN 收发器和控制器。图 9.7 中以 CAN 状态管理器模块给出的、启动和停止唤醒源所需的函数调用为例。
+
+注意：尽管控制器和收发器已被打开，CAN 接口模块（CanIf）不会向任何上层模块转发 CAN 报文。
+
+只有当 CanIf 的相应 PDU 通道模式被设为 "Online" 时，它才会转发 CAN 报文。
+
+CanIf 识别到成功接收至少一条报文后，将其记录为一次成功的验证。验证期间，ECU 状态管理器模块会在集成代码 EcuM_CheckValidation 中定期检查 CanIf。
+
+验证成功后，ECU 状态管理器模块将通过通信管理器模块继续 CAN 网络的正常启动；否则，它将在 EcuM_StopWakeupSources 中关闭 CAN 控制器和收发器并重新进入睡眠。
+
+由此产生的序列如图 9.7 所示。
+
+![Figure9-7.png](Figure9-7.png)
+
+图 9.7：CAN 唤醒验证
+
+#### 8.2.4. LIN 唤醒序列
+
+图 9.8 展示了 LIN 收发器经中断的唤醒。该中断通常按 8.2.2 节所述由 ICU 驱动处理。
+
+![Figure9-8.png](Figure9-8.png)
+
+图 9.8：LIN 收发器中断唤醒
+
+如图 9.9 所示，LIN 控制器的中断唤醒与 CAN 控制器的中断唤醒类似：两种情况下驱动模块都封装了中断处理程序。
+
+![Figure9-9.png](Figure9-9.png)
+
+图 9.9：LIN 控制器中断唤醒
+
+LIN 收发器和控制器都可以轮询唤醒。ECU 状态管理器模块会定期检查 LIN 接口模块，后者根据情况向 LIN 驱动模块或 LIN 收发器驱动模块询问，如图 9.10 所示。
+
+![Figure9-10.png](Figure9-10.png)
+
+图 9.10：LIN 控制器或收发器轮询唤醒
+
+注意：LIN 不需要唤醒验证。
+
+#### 8.2.5. FlexRay 唤醒序列
+
+对于 FlexRay，唤醒只能经由 FlexRay 收发器进行。FlexRay 集群的两个不同通道各有一个收发器。它们被视为属于同一网络，因此两个通道应只配置一个唤醒源标识符。图 9.11 展示了 FlexRay 收发器经中断的唤醒。该中断通常按 8.2.2 节所述由 ICU 驱动处理。
+
+![Figure9-11.png](Figure9-11.png)
+
+图 9.11：FlexRay 收发器中断唤醒
+
+注意在 EcuM_CheckWakeupHook 中需要分别调用 FrIf_WakeupByTransceiver 两次，每个 FlexRay 通道一次。
+
+![Figure9-12.png](Figure9-12.png)
+
+#### 8.2.6. 以太网唤醒序列
+
+在采用符合 OA TC10 的以太网硬件的以太网交换网络中，所使用的以太网硬件（PHY）可以检测到唤醒。对于维护以太网交换机的主机 ECU，建议使用按需轮询来检查以太网硬件通知的唤醒，因为检查所有受影响的 EthSwtPort 可能耗时，无法在中断内完成检查。因此，中断只表示至少一个以太网交换机端口检测到了唤醒；在中断上下文中，受影响的 EthTrcv 被标记为在 EthTrcv_MainFunction 中异步检查。
+
+每个 EthTrcv 应拥有自己的唤醒源，以区分唤醒到达了哪个 EthSwtPort。如果 EthSwtPort 例如被分配给相同的 PNC，唤醒源可以共享。
+
+以下以太网唤醒序列部分是可选的，因为"集成代码"没有规格规定。例如在 EcuM_CheckWakeupHook 期间是否调用 EthIf 检查唤醒源，属于实现特定。
+
+![Figure9-13.png](Figure9-13.png)
+
+图 9.13：主机 ECU（维护以太网交换机的 ECU）的被动唤醒（第 1 部分）
+
+![Figure9-14.png](Figure9-14.png)
+
+图 9.14：主机 ECU（维护以太网交换机的 ECU）的被动唤醒（第 2 部分）
+
+单个以太网 ECU（不维护以太网交换机的 ECU）可以选择通过中断或轮询来检测唤醒。与主机 ECU 的区别在于，它不需要检查数量庞大的以太网交换机端口。
+
+![Figure9-15.png](Figure9-15.png)
+
+图 9.15：单个 ECU（不维护以太网交换机的 ECU）的被动唤醒（第 1 部分）
+
+![Figure9-16.png](Figure9-16.png)
+
+图 9.16：单个 ECU（不维护以太网交换机的 ECU）的被动唤醒（第 2 部分）
+
+## 9. 配置规范
+
+总体而言，本章定义配置参数及其到**容器**（container）的聚类组织。
+
+第 9.1 章和第 9.2 章规定 ECU 管理器模块的结构（容器）与参数。
+
+第 9.3 章规定 ECU 状态管理器模块的发布信息。
+
+### 9.1. 通用容器与配置参数
+
+以下各节汇总所有配置参数。各参数的详细含义见第 6 章和第 7 章。
+
+以下容器包含对 BSW 模块初始化结构的多种引用。NULL 应是有效的引用，表示"无可用配置数据"，但仅当被初始化的 BSW 模块的实现支持时才如此。
+
+#### 9.1.1. EcuM
+
+| SWS 条目 |  |
+|---|---|
+| 模块名称 | EcuM |
+| 描述 | EcuM（ECU 状态管理器）模块的配置。 |
+| Post-Build 变体支持 | true |
+| 支持的配置变体 | VARIANT-POST-BUILD, VARIANT-PRE-COMPILE |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| EcuMConfiguration | 1 | 此容器包含 ECU 状态管理器的配置（参数）。 |
+| EcuMFlexGeneral | 0..1 | 此容器保存 EcuMFlex 的通用、编译前配置参数。仅当实现了 EcuMFlex 时适用。 |
+| EcuMGeneral | 1 | 此容器保存通用的编译前配置参数。 |
+
+#### 9.1.2. EcuMGeneral
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | EcuMGeneral |
+| 父容器 | EcuM |
+| 描述 | 此容器保存通用的编译前配置参数。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMDevErrorDetect |
+| 父容器 | EcuMGeneral |
+| 描述 | 开启或关闭开发错误检测与通知（true：启用检测与通知；false：禁用检测与通知）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMMainFunctionPeriod |
+| 父容器 | EcuMGeneral |
+| 描述 | 此参数定义 EcuM_MainFunction 的调度周期。单位：[s]。 |
+| 多重性 | 1 |
+| 类型 | EcucFloatParamDef |
+| 范围 | ]0 .. INF[ |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMVersionInfoApi |
+| 父容器 | EcuMGeneral |
+| 描述 | 开启或关闭版本信息 API。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+#### 9.1.3. EcuMConfiguration
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | EcuMConfiguration |
+| 父容器 | EcuM |
+| 描述 | 此容器包含 ECU 状态管理器的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| EcuMCommonConfiguration | 1 | 此容器包含 ECU 状态管理器的通用配置（参数）。 |
+| EcuMFlexConfiguration | 0..1 | 此容器包含 ECU 状态管理器的 EcuMFlex 配置（参数）。 |
+
+#### 9.1.4. EcuMCommonConfiguration
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | EcuMCommonConfiguration |
+| 父容器 | EcuMConfiguration |
+| 描述 | 此容器包含 ECU 状态管理器的通用配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMConfigConsistencyHash |
+| 父容器 | EcuMCommonConfiguration |
+| 描述 | 在编译前和链接时配置阶段，会对所有 BSW 模块的全部编译前与链接时参数生成一个哈希值。在 Post-Build 阶段，会对全部编译前与链接时参数生成哈希值（位于 EcucParamConfContainerDef 实例或子容器中、在 Post-Build 配置时引入的参数除外）。两个哈希值相互比较，用于检查整个配置的一致性。注意：在不使用 Post-Build 配置的系统中可以省略此参数。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 18446744073709551615 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMIgnoreWakeupEvValOffPreOS |
+| 父容器 | EcuMCommonConfiguration |
+| 描述 | 定义 OffPreOS 中必须考虑的唤醒事件（true：仅考虑无需验证的唤醒事件；false：无需验证的唤醒事件与待决的唤醒事件都要考虑）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMDefaultAppMode |
+| 父容器 | EcuMCommonConfiguration |
+| 描述 | ECU 复位解除后加载的默认应用模式。 |
+| 多重性 | 1 |
+| 类型 | 对 OsAppMode 的符号名引用 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMOSResource |
+| 父容器 | EcuMCommonConfiguration |
+| 描述 | 此参数是对一个 OS 资源的引用，用于使 ECU 进入睡眠模式。多核情况下每个内核应拥有自己的 OsResource。 |
+| 多重性 | 1..* |
+| 类型 | 对 OsResource 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| EcuMDefaultShutdownTarget | 1 | 此容器描述 EcuM 应选择的默认关机目标。实际关机目标可被 EcuM_SelectShutdownTarget 服务覆盖。 |
+
+#### 9.1.5. EcuMDefaultShutdownTarget
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | EcuMDefaultShutdownTarget |
+| 父容器 | EcuMCommonConfiguration |
+| 描述 | 此容器描述 EcuM 应选择的默认关机目标。实际关机目标可被 EcuM_SelectShutdownTarget 服务覆盖。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMDefaultShutdownTarget |
+| 父容器 | EcuMDefaultShutdownTarget |
+| 描述 | 此参数描述 ECU 复位解除时所选择的默认关机目标的状态部分。若选择了 EcuMShutdownTargetSleep，则参数 EcuMDefaultSleepModeRef 选择具体的睡眠模式。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | EcuMShutdownTargetOff；EcuMShutdownTargetReset；EcuMShutdownTargetSleep |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMDefaultResetModeRef |
+| 父容器 | EcuMDefaultShutdownTarget |
+| 描述 | 若默认关机目标是复位，此参数选择默认复位模式。 |
+| 多重性 | 0..1 |
+| 类型 | 对 EcuMResetMode 的符号名引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMDefaultSleepModeRef |
+| 父容器 | EcuMDefaultShutdownTarget |
+| 描述 | 若 EcuMDefaultShutdownTarget 为 EcuMShutdownTargetSleep，此参数选择默认睡眠模式；否则此参数可被忽略。 |
+| 多重性 | 0..1 |
+| 类型 | 对 EcuMSleepMode 的符号名引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+
+#### 9.1.6. EcuMDriverInitListOne
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | EcuMDriverInitListOne |
+| 父容器 | EcuMCommonConfiguration |
+| 描述 | 初始化块 I 的容器。此容器保存待初始化模块的列表，列表中的每个模块按列表顺序被调用进行初始化。此列表中的所有模块都在 OS 启动之前初始化，因此不需要 OS 支持。 |
+| Post-Build 变体多重性 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 |
+|---|---|
+| EcuMDriverInitItem | 1..* |
+
+#### 9.1.7. EcuMDriverInitListZero
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | EcuMDriverInitListZero |
+| 父容器 | EcuMCommonConfiguration |
+| 描述 | 初始化块 0 的容器。此容器保存待初始化模块的列表，列表中的每个模块按列表顺序被调用进行初始化。 |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 |
+|---|---|
+| EcuMDriverInitItem | 1..* |
+
+#### 9.1.8. EcuMDriverRestartList
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | EcuMDriverRestartList |
+| 父容器 | EcuMCommonConfiguration |
+| 描述 | 待初始化模块的列表。 |
+| Post-Build 变体多重性 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 |
+|---|---|
+| EcuMDriverInitItem | 1..* |
+
+#### 9.1.9. EcuMDriverInitItem
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | EcuMDriverInitItem |
+| 父容器 | EcuMDriverInitListBswM, EcuMDriverInitListOne, EcuMDriverInitListZero, EcuMDriverRestartList |
+| 描述 | 这些容器描述驱动初始化列表中的条目。属性：requiresIndex=true。 |
+| Post-Build 变体多重性 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMModuleParameter |
+| 父容器 | EcuMDriverInitItem |
+| 描述 | 函数原型及传递给该函数的参数的定义。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMModuleService |
+| 父容器 | EcuMDriverInitItem |
+| 描述 | 为初始化该模块而调用的服务，例如 Init、PreInit、Start 等。若未定义，默认取 "Init"。 |
+| 多重性 | 0..1 |
+| 类型 | EcucStringParamDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMEcucCoreDefinitionRef |
+| 父容器 | EcuMDriverInitItem |
+| 描述 | 该引用表示 EcuM AUTOSAR 服务应在其上提供的内核。 |
+| 多重性 | 0..1 |
+| 类型 | 对 EcucCoreDefinition 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMModuleRef |
+| 父容器 | EcuMDriverInitItem |
+| 描述 | 对将由 EcuM 初始化的模块实例配置的外部引用。 |
+| 多重性 | 1 |
+| 类型 | 对 ECUC-MODULE-CONFIGURATION-VALUES 的外部引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.1.10. EcuMSleepMode
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | EcuMSleepMode |
+| 父容器 | EcuMCommonConfiguration |
+| 描述 | 这些容器描述已配置的睡眠模式。 |
+| Post-Build 变体多重性 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMSleepModeId |
+| 父容器 | EcuMSleepMode |
+| 描述 | 此 ID 在诸如 EcuM_SelectShutdownTarget 之类的服务中标识该睡眠模式。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名） |
+| 范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMSleepModeSuspend |
+| 父容器 | EcuMSleepMode |
+| 描述 | 若 CPU 在该睡眠模式下被挂起、暂停或断电，则此标志置为 true；若 CPU 在该睡眠模式下继续运行，则必须置为 false。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMSleepModeMcuModeRef |
+| 父容器 | EcuMSleepMode |
+| 描述 | 此参数是对该睡眠模式对应 MCU 模式的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 McuModeSettingConf 的符号名引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMWakeupSourceMask |
+| 父容器 | EcuMSleepMode |
+| 描述 | 这些参数是对该睡眠模式下应启用的唤醒源的引用。 |
+| 多重性 | 1..* |
+| 类型 | 对 EcuMWakeupSource 的符号名引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+#### 9.1.11. EcuMWakeupSource
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | EcuMWakeupSource |
+| 父容器 | EcuMCommonConfiguration |
+| 描述 | 这些容器描述已配置的唤醒源。 |
+| Post-Build 变体多重性 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMCheckWakeupTimeout |
+| 父容器 | EcuMWakeupSource |
+| 描述 | 此参数是 EcuM 在唤醒源检查以异步方式完成（CheckWakeupTimer）时延迟 ECU 关机的时间的初始值。单位为秒。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFloatParamDef |
+| 范围 | [0 .. 10] |
+| 默认值 | 0 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMValidationTimeout |
+| 父容器 | EcuMWakeupSource |
+| 描述 | 验证超时（ECU 状态管理器等待唤醒事件验证的时长）可以针对每个唤醒源独立定义。超时以秒为单位。若未实例化该超时，则没有验证流程，ECU 管理器不应验证该唤醒源。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFloatParamDef |
+| 范围 | [0 .. INF] |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMWakeupSourceId |
+| 父容器 | EcuMWakeupSource |
+| 描述 | 此参数定义该唤醒源的标识符。前五个位是 EcuM_WakeupSourceType 的保留值。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名） |
+| 范围 | 5 .. 31 |
+| 默认值 | - |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMWakeupSourcePolling |
+| 父容器 | EcuMWakeupSource |
+| 描述 | 此参数描述该唤醒源是否需要轮询。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMComMChannelRef |
+| 父容器 | EcuMWakeupSource |
+| 描述 | 此参数可引用通信管理器中定义的多个网络（通道）。无引用表示该唤醒源不是通信通道。 |
+| 多重性 | 0..* |
+| 类型 | 对 ComMChannel 的符号名引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMComMPNCRef |
+| 父容器 | EcuMWakeupSource |
+| 描述 | 这是对通信管理器中定义的一个或多个 PNC 的引用。无引用表示该唤醒源未分配给部分网络。 |
+| 多重性 | 0..* |
+| 类型 | 对 ComMPnc 的符号名引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMResetReasonRef |
+| 父容器 | EcuMWakeupSource |
+| 描述 | 此参数描述把 MCU 驱动检测到的复位原因映射到唤醒源。 |
+| 多重性 | 0..* |
+| 类型 | 对 McuResetReasonConf 的符号名引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+### 9.2. EcuM-Flex 容器与配置参数
+
+#### 9.2.1. EcuMFlexGeneral
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | EcuMFlexGeneral |
+| 父容器 | EcuM |
+| 描述 | 此容器保存 EcuMFlex 的通用、编译前配置参数。仅当实现了 EcuMFlex 时适用。 |
+| Post-Build 变体多重性 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMAlarmClockPresent |
+| 父容器 | EcuMFlexGeneral |
+| 描述 | 此标志指示可选的闹钟（AlarmClock）功能是否存在。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMModeHandling |
+| 父容器 | EcuMFlexGeneral |
+| 描述 | 若为 false，则不执行运行请求协议（Run Request Protocol）。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMResetLoopDetection |
+| 父容器 | EcuMFlexGeneral |
+| 描述 | 若为 false，则不执行复位循环检测。若此配置参数存在且设为 true，则在 EcuM 启动期间（StartPreOS 期间）会调用 callout "EcuM_LoopDetection"。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMSetProgrammableInterrupts |
+| 父容器 | EcuMFlexGeneral |
+| 描述 | 若此配置参数存在且设为 true，则在 EcuM 启动期间（StartPreOS 期间）会调用 callout "EcuM_AL_SetProgrammableInterrupts"。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMAlarmWakeupSource |
+| 父容器 | EcuMFlexGeneral |
+| 描述 | 此参数描述对 EcuM 闹钟所使用的 EcuMWakeupSource 的引用。 |
+| 多重性 | 0..1 |
+| 类型 | 对 EcuMWakeupSource 的符号名引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+#### 9.2.2. EcuMFlexConfiguration
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | EcuMFlexConfiguration |
+| 父容器 | EcuMConfiguration |
+| 描述 | 此容器包含 ECU 状态管理器的 EcuMFlex 配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMNormalMcuModeRef |
+| 父容器 | EcuMFlexConfiguration |
+| 描述 | 此参数是对睡眠后应恢复的正常 MCU 模式的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 McuModeSettingConf 的符号名引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMPartitionRef |
+| 父容器 | EcuMFlexConfiguration |
+| 描述 | 该引用表示 EcuM 应运行所在的分区。注意：在多核 ECU 上此引用是强制性的。 |
+| 多重性 | 0..* |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| EcuMAlarmClock | 0..* | 这些容器描述已配置的闹钟。这些容器的名称允许为一个闹钟指定符号名。 |
+| EcuMDriverInitListBswM | 0..* | 此容器保存将由 BswM 初始化的模块列表。 |
+| EcuMFlexUserConfig | 1..256 | 这些容器描述引用使用 EcuMFlex 接口的软件组件或系统中其他适当实体所需的标识符。 |
+| EcuMGoDownAllowedUsers | 0..1 | 此容器描述允许调用 EcuM_GoDown API 的用户的集合。 |
+| EcuMResetMode | 1..256 | 这些容器描述已配置的复位模式。 |
+| EcuMSetClockAllowedUsers | 0..1 | 此容器描述允许调用 EcuM_SetClock API 的用户的集合。 |
+| EcuMShutdownCause | 1..256 | 这些容器描述已配置的关机或复位原因。 |
+
+#### 9.2.3. EcuMAlarmClock
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | EcuMAlarmClock |
+| 父容器 | EcuMFlexConfiguration |
+| 描述 | 这些容器描述已配置的闹钟。这些容器的名称允许为一个闹钟指定符号名。 |
+| Post-Build 变体多重性 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMAlarmClockId |
+| 父容器 | EcuMAlarmClock |
+| 描述 | 此 ID 标识该闹钟。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名） |
+| 范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMAlarmClockTimeOut |
+| 父容器 | EcuMAlarmClock |
+| 描述 | 此参数允许为该闹钟定义一个超时。 |
+| 多重性 | 1 |
+| 类型 | EcucFloatParamDef |
+| 范围 | [0 .. INF] |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMAlarmClockUser |
+| 父容器 | EcuMAlarmClock |
+| 描述 | 此参数允许把闹钟分配给一个用户。 |
+| 多重性 | 1 |
+| 类型 | 对 EcuMFlexUserConfig 的符号名引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.4. EcuMFlexUserConfig
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | EcuMFlexUserConfig |
+| 父容器 | EcuMFlexConfiguration |
+| 描述 | 这些容器描述引用使用 EcuMFlex 接口的软件组件或系统中其他适当实体所需的标识符。 |
+| Post-Build 变体多重性 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMFlexUser |
+| 父容器 | EcuMFlexUserConfig |
+| 描述 | 用于标识一个用户的参数。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名） |
+| 范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMFlexEcucPartitionRef |
+| 父容器 | EcuMFlexUserConfig |
+| 描述 | 表示 EcuM 的用户在哪个 "EcucPartition" 中执行。 |
+| 多重性 | 0..1 |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+#### 9.2.5. EcuMDriverInitListBswM
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | EcuMDriverInitListBswM |
+| 父容器 | EcuMFlexConfiguration |
+| 描述 | 此容器保存将由 BswM 初始化的模块列表。 |
+| Post-Build 变体多重性 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 |
+|---|---|
+| EcuMDriverInitItem | 1..* |
+
+#### 9.2.6. EcuMGoDownAllowedUsers
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | EcuMGoDownAllowedUsers |
+| 父容器 | EcuMFlexConfiguration |
+| 描述 | 此容器描述允许调用 EcuM_GoDown API 的用户的集合。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMGoDownAllowedUserRef |
+| 父容器 | EcuMGoDownAllowedUsers |
+| 描述 | 这是对一个被允许的用户的引用。 |
+| 多重性 | 1..* |
+| 类型 | 对 EcuMFlexUserConfig 的符号名引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.7. EcuMResetMode
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | EcuMResetMode |
+| 父容器 | EcuMFlexConfiguration |
+| 描述 | 这些容器描述已配置的复位模式。这些容器的名称允许为不同的复位模式指定以下符号名之一：ECUM_RESET_MCU、ECUM_RESET_WDG、ECUM_RESET_IO。 |
+| Post-Build 变体多重性 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMResetModeId |
+| 父容器 | EcuMResetMode |
+| 描述 | 此 ID 在诸如 EcuM_SelectShutdownTarget 之类的服务中标识该复位模式。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名） |
+| 范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.8. EcuMShutdownCause
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | EcuMShutdownCause |
+| 父容器 | EcuMFlexConfiguration |
+| 描述 | 这些容器描述已配置的关机或复位原因。这些容器的名称允许为不同的关机原因指定以下符号名之一：ECUM_CAUSE_ECU_STATE（ECU 状态机进入关机状态）、ECUM_CAUSE_WDGM（WdgM 检测到故障）、ECUM_CAUSE_DCM（Dcm 请求关机），以及来自配置的值。 |
+| Post-Build 变体多重性 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMShutdownCauseId |
+| 父容器 | EcuMShutdownCause |
+| 描述 | 此 ID 标识该关机原因。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名） |
+| 范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+
+#### 9.2.9. EcuMSetClockAllowedUsers
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | EcuMSetClockAllowedUsers |
+| 父容器 | EcuMFlexConfiguration |
+| 描述 | 此容器描述允许调用 EcuM_SetClock API 的用户的集合。 |
+| Post-Build 变体多重性 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | EcuMSetClockAllowedUserRef |
+| 父容器 | EcuMSetClockAllowedUsers |
+| 描述 | 这些参数描述对允许调用 EcuM_SetClock API 的用户的引用。 |
+| 多重性 | 1..* |
+| 类型 | 对 EcuMFlexUserConfig 的符号名引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+### 9.3. 发布信息
+
+目前除 SWS BSW General 中规定的内容外，不存在其他发布信息。
 
 <section id="wechat">
 

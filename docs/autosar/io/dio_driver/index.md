@@ -203,27 +203,27 @@ AUTOSAR_CP_SWS_BSWGeneral
 
 ##### 6.4.2.1. DIO 通道写服务
 
-**Dio_WriteChannel**函数应将单个**DIO**通道的电平设置为**STD_HIGH**或**STD_LOW**。
+[**Dio_WriteChannel**](#732-dio_writechannel)函数应将单个**DIO**通道的电平设置为**STD_HIGH**或**STD_LOW**。
 
 ##### 6.4.2.2. DIO 端口写服务
 
-**Dio_WritePort**函数应同时设置所有输出通道的电平。位值'0'将相应通道设置为物理**STD_LOW**，位值'1'将相应通道设置为物理**STD_HIGH**。
+[**Dio_WritePort**](#734-dio_writeport)函数应同时设置所有输出通道的电平。位值'0'将相应通道设置为物理**STD_LOW**，位值'1'将相应通道设置为物理**STD_HIGH**。
 
-**Dio_WritePort**函数应确保该端口输入通道的功能不受影响。
+[**Dio_WritePort**](#734-dio_writeport)函数应确保该端口输入通道的功能不受影响。
 
 ##### 6.4.2.3. DIO 通道组写服务
 
-**Dio_WriteChannelGroup**函数应同时设置相邻的**DIO**通道子集（通道组）的电平。位值'0'将相应通道设置为物理**STD_LOW**，位值'1'将相应通道设置为物理**STD_HIGH**。
+[**Dio_WriteChannelGroup**](#736-dio_writechannelgroup)函数应同时设置相邻的**DIO**通道子集（通道组）的电平。位值'0'将相应通道设置为物理**STD_LOW**，位值'1'将相应通道设置为物理**STD_HIGH**。
 
 ##### 6.4.2.4. DIO 掩码端口写服务
 
-**Dio_MaskedWritePort**函数应同时设置所选输出通道的电平。
+[**Dio_MaskedWritePort**](#739-dio_maskedwriteport)函数应同时设置所选输出通道的电平。
 
 **Mask**参数指定选择哪些位：位值'0'表示未选择相应通道，位值'1'表示选择了相应通道。
 
 **Level**参数指定物理电平：位值'0'将相应通道设置为物理**STD_LOW**，位值'1'将相应通道设置为物理**STD_HIGH**。
 
-**Dio_MaskedWritePort**函数应确保该端口输入通道的功能不受影响。
+[**Dio_MaskedWritePort**](#739-dio_maskedwriteport)函数应确保该端口输入通道的功能不受影响。
 
 ### 6.5. DIO 读服务
 
@@ -237,15 +237,15 @@ AUTOSAR_CP_SWS_BSWGeneral
 
 ##### 6.5.2.1. DIO 通道读服务
 
-**Dio_ReadChannel**函数应读取单个**DIO**通道的电平。
+[**Dio_ReadChannel**](#731-dio_readchannel)函数应读取单个**DIO**通道的电平。
 
 ##### 6.5.2.2. DIO 端口读服务
 
-**Dio_ReadPort**函数应读取一个端口的所有通道的电平。位值'0'表示相应通道为物理**STD_LOW**，位值'1'表示相应通道为物理**STD_HIGH**。
+[**Dio_ReadPort**](#733-dio_readport)函数应读取一个端口的所有通道的电平。位值'0'表示相应通道为物理**STD_LOW**，位值'1'表示相应通道为物理**STD_HIGH**。
 
 ##### 6.5.2.3. DIO 通道组读服务
 
-**Dio_ReadChannelGroup**函数应读取一个**DIO**通道组的电平。位值'0'表示相应通道为物理**STD_LOW**，位值'1'表示相应通道为物理**STD_HIGH**。
+[**Dio_ReadChannelGroup**](#735-dio_readchannelgroup)函数应读取一个**DIO**通道组的电平。位值'0'表示相应通道为物理**STD_LOW**，位值'1'表示相应通道为物理**STD_HIGH**。
 
 ##### 6.5.2.4. 输出引脚的回读
 
@@ -331,7 +331,7 @@ AUTOSAR_CP_SWS_BSWGeneral
 
 * **mask**（uint8/16/32）：定义通道组位置的掩码元素。
 * **offset**（uint8）：此元素应为通道组在端口上的位置，从**LSB**开始计数。
-* **port**（Dio_PortType）：应为定义通道组的端口。
+* **port**（[Dio_PortType](#722-dio_porttype)）：应为定义通道组的端口。
 
 **Dio_ChannelGroupType**是用于定义通道组的类型，通道组由端口内多个相邻通道组成。
 
@@ -358,7 +358,7 @@ AUTOSAR_CP_SWS_BSWGeneral
 
 #### 7.3.1. Dio_ReadChannel
 
-**说明**: 返回指定**DIO**通道的值。可通过**Dio.h**获得。本服务为同步调用，可重入。参数 ChannelId（in）：**DIO**通道的**ID**。返回值：Dio_LevelType，**STD_HIGH** 表示相应引脚的物理电平为**STD_HIGH**；**STD_LOW** 表示相应引脚的物理电平为**STD_LOW**。
+**说明**: 返回指定**DIO**通道的值。可通过**Dio.h**获得。本服务为同步调用，可重入。参数 ChannelId（in）：**DIO**通道的**ID**。返回值：[Dio_LevelType](#724-dio_leveltype)，**STD_HIGH** 表示相应引脚的物理电平为**STD_HIGH**；**STD_LOW** 表示相应引脚的物理电平为**STD_LOW**。
 
 ```C
 Dio_LevelType Dio_ReadChannel (Dio_ChannelType ChannelId)
@@ -366,7 +366,7 @@ Dio_LevelType Dio_ReadChannel (Dio_ChannelType ChannelId)
 
 **Dio_ReadChannel**函数应返回指定**DIO**通道的值。关于**Dio_ReadChannel**函数的返回值，相关需求适用。此外，相关需求适用于**Dio_ReadChannel**函数。
 
-如果启用了开发错误检测，服务**Dio_ReadChannel**、**Dio_WriteChannel**和**Dio_FlipChannel**应检查"**ChannelId**"参数在当前配置内是否有效。如果"**ChannelId**"参数无效，函数应向**DET**报告错误代码**DIO_E_PARAM_INVALID_CHANNEL_ID**。
+如果启用了开发错误检测，服务**Dio_ReadChannel**、[**Dio_WriteChannel**](#732-dio_writechannel)和[**Dio_FlipChannel**](#738-dio_flipchannel)应检查"**ChannelId**"参数在当前配置内是否有效。如果"**ChannelId**"参数无效，函数应向**DET**报告错误代码**DIO_E_PARAM_INVALID_CHANNEL_ID**。
 
 #### 7.3.2. Dio_WriteChannel
 
@@ -384,7 +384,7 @@ void Dio_WriteChannel (Dio_ChannelType ChannelId, Dio_LevelType Level)
 
 #### 7.3.3. Dio_ReadPort
 
-**说明**: 返回该端口所有通道的电平。可通过**Dio.h**获得。本服务为同步调用，可重入。参数 PortId（in）：**DIO**端口的**ID**。返回值：Dio_PortLevelType，该端口所有通道的电平。
+**说明**: 返回该端口所有通道的电平。可通过**Dio.h**获得。本服务为同步调用，可重入。参数 PortId（in）：**DIO**端口的**ID**。返回值：[Dio_PortLevelType](#725-dio_portleveltype)，该端口所有通道的电平。
 
 ```C
 Dio_PortLevelType Dio_ReadPort (Dio_PortType PortId)
@@ -392,9 +392,9 @@ Dio_PortLevelType Dio_ReadPort (Dio_PortType PortId)
 
 **Dio_ReadPort**函数应返回该端口所有通道的电平。
 
-当使用**Dio_ReadPort**函数读取小于**Dio_PortLevelType**的端口时，函数应将对应于未定义端口引脚的位设置为 0。此外，相关需求适用于**Dio_ReadPort**函数。
+当使用**Dio_ReadPort**函数读取小于[**Dio_PortLevelType**](#725-dio_portleveltype)的端口时，函数应将对应于未定义端口引脚的位设置为 0。此外，相关需求适用于**Dio_ReadPort**函数。
 
-如果启用了开发错误检测，函数**Dio_ReadPort**、**Dio_WritePort**和**Dio_MaskedWritePort**应检查"**PortId**"参数在当前配置内是否有效。如果"**PortId**"参数无效，函数应向**DET**报告错误代码**DIO_E_PARAM_INVALID_PORT_ID**。
+如果启用了开发错误检测，函数**Dio_ReadPort**、[**Dio_WritePort**](#734-dio_writeport)和[**Dio_MaskedWritePort**](#739-dio_maskedwriteport)应检查"**PortId**"参数在当前配置内是否有效。如果"**PortId**"参数无效，函数应向**DET**报告错误代码**DIO_E_PARAM_INVALID_PORT_ID**。
 
 #### 7.3.4. Dio_WritePort
 
@@ -408,13 +408,13 @@ void Dio_WritePort (Dio_PortType PortId, Dio_PortLevelType Level)
 
 当调用**Dio_WritePort**函数时，配置为输入的**DIO**通道应保持不变。
 
-当使用**Dio_WritePort**函数写入小于**Dio_PortLevelType**的端口时，函数应忽略**MSB**。
+当使用**Dio_WritePort**函数写入小于[**Dio_PortLevelType**](#725-dio_portleveltype)的端口时，函数应忽略**MSB**。
 
 **Dio_WritePort**函数不应对该端口内配置为输入通道的通道产生影响。此外，相关需求适用于**Dio_WritePort**函数。
 
 #### 7.3.5. Dio_ReadChannelGroup
 
-**说明**: 此服务读取端口相邻位的子集。可通过**Dio.h**获得。本服务为同步调用，可重入。参数 ChannelGroupIdPtr（in）：指向**ChannelGroup**的指针。返回值：Dio_PortLevelType，端口相邻位子集的电平。
+**说明**: 此服务读取端口相邻位的子集。可通过**Dio.h**获得。本服务为同步调用，可重入。参数 ChannelGroupIdPtr（in）：指向**ChannelGroup**的指针。返回值：[Dio_PortLevelType](#725-dio_portleveltype)，端口相邻位子集的电平。
 
 ```C
 Dio_PortLevelType Dio_ReadChannelGroup (const Dio_ChannelGroupType * ChannelGroupIdPtr)
@@ -426,7 +426,7 @@ Dio_PortLevelType Dio_ReadChannelGroup (const Dio_ChannelGroupType * ChannelGrou
 
 **Dio_ReadChannelGroup**函数应进行移位，使函数读取的值与**LSB**对齐。此外，相关需求适用于**Dio_ReadChannelGroup**函数。
 
-如果启用了开发错误检测，函数**Dio_ReadChannelGroup**和**Dio_WriteChannelGroup**应检查"**ChannelGroupIdPtr**"参数在当前配置内是否有效。如果"**ChannelGroupIdPtr**"参数无效，函数应向**DET**报告错误代码**DIO_E_PARAM_INVALID_GROUP**。
+如果启用了开发错误检测，函数**Dio_ReadChannelGroup**和[**Dio_WriteChannelGroup**](#736-dio_writechannelgroup)应检查"**ChannelGroupIdPtr**"参数在当前配置内是否有效。如果"**ChannelGroupIdPtr**"参数无效，函数应向**DET**报告错误代码**DIO_E_PARAM_INVALID_GROUP**。
 
 #### 7.3.6. Dio_WriteChannelGroup
 
@@ -458,7 +458,7 @@ void Dio_GetVersionInfo (Std_VersionInfoType* VersionInfo)
 
 #### 7.3.8. Dio_FlipChannel
 
-**说明**: 翻转（从 1 到 0 或从 0 到 1）通道电平并返回翻转后通道电平的服务。可通过**Dio.h**获得。本服务为同步调用，可重入。参数 ChannelId（in）：**DIO**通道的**ID**。返回值：Dio_LevelType，**STD_HIGH** 表示相应引脚的物理电平为**STD_HIGH**；**STD_LOW** 表示相应引脚的物理电平为**STD_LOW**。
+**说明**: 翻转（从 1 到 0 或从 0 到 1）通道电平并返回翻转后通道电平的服务。可通过**Dio.h**获得。本服务为同步调用，可重入。参数 ChannelId（in）：**DIO**通道的**ID**。返回值：[Dio_LevelType](#724-dio_leveltype)，**STD_HIGH** 表示相应引脚的物理电平为**STD_HIGH**；**STD_LOW** 表示相应引脚的物理电平为**STD_LOW**。
 
 ```C
 Dio_LevelType Dio_FlipChannel (Dio_ChannelType ChannelId)
@@ -484,7 +484,7 @@ void Dio_MaskedWritePort (
 
 当调用**Dio_MaskedWritePort**函数时，配置为输入的**DIO**通道应保持不变。
 
-当使用**Dio_MaskedWritePort**函数写入小于**Dio_PortLevelType**的端口时，函数应忽略**MSB**。
+当使用**Dio_MaskedWritePort**函数写入小于[**Dio_PortLevelType**](#725-dio_portleveltype)的端口时，函数应忽略**MSB**。
 
 ### 7.4. 回调通知
 
@@ -514,21 +514,33 @@ void Dio_MaskedWritePort (
 |---|---|---|
 | Det_ReportError | Det.h | 报告开发错误的服务 |
 
-## 8. 配置规范
+## 8. 时序图
+
+下图展示了调用 **Dio_ReadChannel** 和 **Dio_WriteChannel** 服务时的时序，展示的是正常操作模式。由于第 7.3 章中定义的所有其他服务具有完全相同的同步行为，本文档有意不再提供其他时序图。
+
+### 8.1. 读取数字 I/O 的值
+
+![Figure9-1.png](Figure9-1.png)
+
+### 8.2. 写入数字 I/O 的值
+
+![Figure9-2.png](Figure9-2.png)
+
+## 9. 配置规范
 
 本章定义配置参数及其到**容器**（container）的聚类组织。
 
-### 8.1. 容器与配置参数
+### 9.1. 容器与配置参数
 
 以下各节汇总所有配置参数。
 
 **DIO** 模块应拒绝实现所不支持的、带有分区映射的配置。
 
-#### 8.1.1. 变体
+#### 9.1.1. 变体
 
 实现至少应支持以下变体之一：VARIANT-PRE-COMPILE、VARIANT-LINK-TIME。
 
-#### 8.1.2. Dio
+#### 9.1.2. Dio
 
 | SWS 条目 |  |
 |---|---|
@@ -542,7 +554,7 @@ void Dio_MaskedWritePort (
 | DioConfig | 1 | 此容器包含 AUTOSAR **DIO** 模块的配置参数与子容器。 |
 | DioGeneral | 1 | **DIO** 模块通用配置参数。 |
 
-#### 8.1.3. DioGeneral
+#### 9.1.3. DioGeneral
 
 | SWS 条目 |  |
 |---|---|
@@ -560,7 +572,7 @@ void Dio_MaskedWritePort (
 | 类型 | EcucBooleanParamDef |
 | 默认值 | false |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -572,7 +584,7 @@ void Dio_MaskedWritePort (
 | 类型 | EcucBooleanParamDef |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -584,7 +596,7 @@ void Dio_MaskedWritePort (
 | 类型 | EcucBooleanParamDef |
 | 默认值 | false |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -596,7 +608,7 @@ void Dio_MaskedWritePort (
 | 类型 | EcucBooleanParamDef |
 | 默认值 | false |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -612,7 +624,7 @@ void Dio_MaskedWritePort (
 | 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: ECU |
 
-#### 8.1.4. DioPort
+#### 9.1.4. DioPort
 
 | SWS 条目 |  |
 |---|---|
@@ -636,7 +648,7 @@ void Dio_MaskedWritePort (
 | 范围 | 0 .. 4294967295 |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 
 | SWS 条目 |  |
 |---|---|
@@ -655,7 +667,7 @@ DioPortEcucPartitionRef 所引用的 ECUC 分区应是 DioEcucPartitionRef 所�
 
 若 DioEcucPartitionRef 引用一个或多个 ECUC 分区，则 DioPortEcucPartitionRef 的多重性应大于零，并且也应引用这些 ECUC 分区中的一个或多个。
 
-#### 8.1.5. DioChannel
+#### 9.1.5. DioChannel
 
 | SWS 条目 |  |
 |---|---|
@@ -674,7 +686,7 @@ DioPortEcucPartitionRef 所引用的 ECUC 分区应是 DioEcucPartitionRef 所�
 | 范围 | 0 .. 4294967295 |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: ECU |
 
 | SWS 条目 |  |
@@ -696,7 +708,7 @@ DioChannelEcucPartitionRef 所引用的 ECUC 分区应是 DioPortEcucPartitionRe
 
 若 DioEcucPartitionRef 引用一个或多个 ECUC 分区，则 DioChannelEcucPartitionRef 的多重性应大于零，并且也应引用这些 ECUC 分区中的一个或多个。
 
-#### 8.1.6. DioChannelGroup
+#### 9.1.6. DioChannelGroup
 
 | SWS 条目 |  |
 |---|---|
@@ -715,7 +727,7 @@ DioChannelEcucPartitionRef 所引用的 ECUC 分区应是 DioPortEcucPartitionRe
 | 默认值 | - |
 | 正则表达式 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: ECU |
 
 | SWS 条目 |  |
@@ -728,7 +740,7 @@ DioChannelEcucPartitionRef 所引用的 ECUC 分区应是 DioPortEcucPartitionRe
 | 范围 | 0 .. 4294967295 |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：x（VARIANT-LINK-TIME）；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -741,7 +753,7 @@ DioChannelEcucPartitionRef 所引用的 ECUC 分区应是 DioPortEcucPartitionRe
 | 范围 | 0 .. 31 |
 | 默认值 | - |
 | Post-Build 变体值 | false |
-| 值配置类 | Pre-compile time：x；Link time：x；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：x（VARIANT-LINK-TIME）；Post-build time：- |
 | 作用域/依赖 | scope: local |
 
 | SWS 条目 |  |
@@ -763,7 +775,7 @@ DioChannelGroupEcucPartitionRef 所引用的 ECUC 分区应是 DioPortEcucPartit
 
 若 DioPortEcucPartitionRef 引用一个或多个 ECUC 分区，则 DioChannelGroupEcucPartitionRef 的多重性应大于零，并且也应引用这些 ECUC 分区中的一个或多个。
 
-#### 8.1.7. DioConfig
+#### 9.1.7. DioConfig
 
 | SWS 条目 |  |
 |---|---|
@@ -776,7 +788,7 @@ DioChannelGroupEcucPartitionRef 所引用的 ECUC 分区应是 DioPortEcucPartit
 |---|---|---|
 | DioPort | 1..* | 单个 DIO 端口的配置，由通道和可能的通道组组成。注意：此容器定义未显式定义符号名参数；取而代之，容器的短名将在 ECU 配置描述中用于指定该端口的符号名。 |
 
-### 8.2. 发布信息
+### 9.2. 发布信息
 
 详情请参阅 SWS_BSWGeneral 中的第 10.3 章 "Published Information"（发布信息）。
 

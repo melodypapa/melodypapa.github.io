@@ -60,11 +60,14 @@ Compare the article's `## ` headings against the source chapter list:
   positions where the source has them).
 - **Complete** → report alignment status; do not rewrite content that already
   exists. If the article intentionally omits chapters that `STANDARD.md`
-  forbids (tracing, sequence diagrams, appendices), that is compliance, not a
-  gap. The 配置规范 chapter is **no longer forbidden** (2026-10-24): when the
-  source has ch.10 and the queue row's scope includes it, its absence in the
-  article is now a gap — it translates as `## 8. 配置规范` (Step 5
-  config-spec rules).
+  forbids (requirement tracing, lettered appendices), that is compliance, not
+  a gap. Two chapters are **no longer forbidden** (both user decisions,
+  2026-10-24): the 配置规范 chapter — when the source has ch.10 and the queue
+  row's scope includes it, its absence in the article is a gap; it translates
+  as `## 8. 配置规范`, or `## 9. 配置规范` when a 时序图 chapter is also
+  present (Step 5 config-spec rules). The 时序图 chapter — when the source
+  has ch.9, its absence is a gap; it translates as `## 8. 时序图` (Step 5
+  sequence-diagram rules).
 
 For sources longer than ~2000 lines, present the sync plan and get user
 confirmation before translating — a full SWS can be an entire session of work.
@@ -178,9 +181,29 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
     8.4/8.5/8.6.1–8.6.3/8.7 ↔ §7.4–§7.7 (callbacks/scheduled/expected
     interfaces incl. configurable callbacks/API parameter checks) fall under
     the same rule.
-- **配置规范 chapter (source ch.10 → article `## 8. 配置规范`, optional)** —
+- **时序图 chapter (source ch.9 → article `## 8. 时序图`, optional)** —
+  present iff the source document has a *Sequence diagrams* chapter; source
+  9.x renumbers to 8.x; the chapter sits between §7 and the 配置规范
+  chapter (renumbering 配置规范 to `## 9.` when both are present — grep for
+  inbound anchor links first). Rules:
+  - translate the source's prose sentences faithfully; the PDF→markdown
+    conversion spills UML diagram chrome into the text (lifeline/message
+    labels like `Ocu_Notification_<Channel>()`, `«module»` box labels,
+    `Ocu\_Delnit()` typos) — drop that chrome, keep the prose;
+  - render each diagram per the site figure convention: the extracted local
+    PNG (`![Figure9-1.png](Figure9-1.png)`) when the article directory has
+    one — matching the rest of the article — or a mermaid `sequenceDiagram`
+    redraw per icu_driver's chapter when no PNG exists (icu's intro
+    blockquote naming the source chapter and release is the precedent);
+  - source figure captions ("Figure 9.1: …") are not repeated as text — the
+    site references figures without captions;
+  - a subsection whose only content is a cross-reference (e.g. ocu 9.6 →
+    source 8.3.8/8.3.9) translates the reference renumbered to the article's
+    own chapters (→ §7.3.8/§7.3.9); a potential intra-article link is a
+    Phase B candidate, not a silent addition.
+- **配置规范 chapter (source ch.10 → article `## 8. 配置规范`, or `## 9. 配置规范` when a 时序图 chapter precedes it, optional)** —
   present iff the source document has a configuration specification; source
-  10.x renumbers to 8.x. Terminology (site majority, baseline-tested
+  10.x renumbers to 8.x (no 时序图 chapter) or 9.x (with 时序图). Terminology (site majority, baseline-tested
   2026-10-24): *Configuration specification* → 配置规范; *Containers and
   configuration parameters* → 容器与配置参数; *container* → 容器
   (*configuration container* → 配置容器); *Container Name* → 容器名称;
@@ -201,6 +224,25 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
   - flash_driver/time_service carry legacy flattened per-parameter headings
     from the pre-Type A era — do not copy that layout into new translations;
     their chapters get aligned when their rows run.
+- **Potential links are applied during translation, not merely detected** — the
+  intra-article class is restoration of the source PDF's own hyperlinks:
+  identifier mentions (types/constants defined in §7.2, functions defined in
+  §7.3.x) link to their defining headings; 参见/详见 references link to their
+  targets when an anchor exists. Use
+  `.agents/skills/autosar-translate/scripts/link_candidates.py --apply <article>`.
+- **Citation markers `[n]` mean "Related documentation, entry n"** — a
+  two-hop reference: citation → §3.1 entry → an external document or a page
+  on this site. `link_candidates.py --list` resolves every citation to its
+  document and classifies by the entry's `AUTOSAR_*` doc id — **never by
+  title substring** ("Requirements on Port Driver" is SRS_PortDriver, not
+  the site's Port article). SITE class = the document's article/page exists
+  here, linkable now (e.g. EcuM citing the BswM spec → the site's BswM
+  article; `[n] AUTOSAR 术语表` → the site glossary page); EXTERNAL class =
+  needs a curated official URL before it can become a link (check 8 then
+  applies). Both are user decisions recorded with the census.
+  Everything cross-article or anchor-less stays a reported candidate (user
+  decision, queue in TODO.md's Backlog) — never silently added, and never
+  silently *not counted*: the census is a Phase A output (check 9).
 - Chapter numbering stays stable; when insertion forces a renumber, grep for
   inbound anchor links first and fix them in the same commit.
 
@@ -246,9 +288,11 @@ before every commit, the second is evidence for the Step 8 confirmation.
 2. Heading audit: `grep '^## '` on the article equals the STANDARD.md §1
    skeleton with §2 wording, numbered `1.`–`7.` only; `###`/`####` numbering
    is continuous (no numbering gaps); no lettered appendix, and no forbidden
-   chapter title (需求可追溯性 / 需求追踪 / 时序图) anywhere; `## 8.` is
-   allowed only as `## 8. 配置规范` (optional — only when the source has
-   ch.10). **Before renaming
+   chapter title (需求可追溯性 / 需求追踪) anywhere; `## 8.` is
+   allowed only as `## 8. 时序图` and `## 9.` only as `## 9. 配置规范`
+   (both optional — only when the source has ch.9 / ch.10; when only one
+   optional chapter is present it takes the lower number).
+   **Before renaming
    a heading to a STANDARD.md term, grep that heading across `docs/autosar`** —
    if the standard and the site majority disagree, it is a user decision
    (record it; update STANDARD.md in the same PR), not a silent rename.
@@ -305,6 +349,13 @@ before every commit, the second is evidence for the Step 8 confirmation.
      URL for the same document, checked in a browser; record it in TODO.md's
      Backlog, never guess a replacement (the 2026-10-24 audit nearly wrote an
      ieeexplore MACsec link into an 802.1AS article — different document).
+
+9. Potential-links census (mechanical): run
+   `scripts/link_candidates.py --list <article>` and RECORD the counts
+   (identifier mentions, 参见/详见 refs, prose `[n]` markers) in the gate
+   evidence. An explicit "0 candidates" is a valid result; **silence is a
+   failed gate**. This rule failed to activate for six runs when it lived
+   only in Phase B prose — the counter exists so that cannot recur.
 
 **Phase B — automation-blind checks** (presented at the Step 8 gate as
 evidence, not asserted):
@@ -407,7 +458,7 @@ open.
 
 | Mistake | Consequence | Counter |
 | --- | --- | --- |
-| Skipping Step 0, trusting an older article's structure | Forbidden-chapter residue (时序图/需求追踪) and legacy wording spread — the pre-standard IO articles did exactly this | STANDARD.md is read first, always |
+| Skipping Step 0, trusting an older article's structure | Forbidden-chapter residue (需求追踪) and legacy wording spread — the pre-standard IO articles did exactly this | STANDARD.md is read first, always |
 | Translating before emitting the todo list | Coverage decisions unreviewable until the work is done | Step 4 output contract |
 | Opening figure files (`Figure*.png`) during gap analysis | Pipeline/API image errors | Text-only rule in Step 3 |
 | Flagging STANDARD.md-forbidden chapters as "missing" | False work items on compliant articles | Step 3 compliance rule: omissions the standard mandates are compliance |
@@ -420,3 +471,4 @@ open.
 | Writing "confirmation deferred" / `确认待补` on a todo item | Creates a backlog of rows whose real state nobody knows | Capture the confirmation when given, or leave the item `[ ]` (Step 8) |
 | Letting the 缩略语 chapter drift on format or row set (2026-10-24 finding: 6 articles render it as a table, adc_driver dropped API/HW/SW + reordered DET/DEM + split Conversion Mode — 18 source rows became 16 entries, all under ✅ status) | Site-wide format split; silent content loss in the one chapter whose rows are pure lookups | Step 5 acronym-chapter rules; Phase A check 5 makes table-vs-blockquote and row count mechanical. Baseline tests (2026-10-24) show fresh agents comply — the drift happens in long loaded sessions, which is exactly why the check must be a grep, not judgment |
 | Trusting the API chapter's shape without checking it entry by entry (PWM run 2026-10-24: ✅-rated article carried `Pwm_ChannelType` with the neighbor type's "8..32 bit" range, and a `PWM_FULL_POWER (0x00)` row that R23-11 does not define — it only exists from R25-11 on) | Silent infidelity in the chapter readers use as a lookup reference; a wrong Range or an unsourced enum value is indistinguishable from the standard to a site reader | Step 5 API-chapter rules: cell-by-cell type-table read; per-requirement function text mapping; Phase A check 7 `check_api_sync.py` for count/name/order; content-vs-source mismatches go to the user as decisions |
+| Writing a rule as Phase B prose without a mechanical trigger (potential-links lived as a Phase B bullet for six runs — dio/port/pwm/ocu/icu/ecu/bswm — and was never executed once; its own "user decision" semantics made doing nothing always compliant) | Codified rules that only a gate presentation could surface get dropped when presentations lengthen; the omission is invisible in a deviations-framing | Any new rule gets (a) a tick-box in the step it executes in, and/or (b) a mechanical counter whose zero-output is explicit. Test rules at RUN level ("did a full sync execute it?"), not comprehension level |

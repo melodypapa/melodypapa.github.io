@@ -208,9 +208,9 @@ AUTOSAR_CP_SWS_MCUDriver
 |---|---|---|
 | 请求的端口引脚 ID 无效 | PORT_E_PARAM_PIN | 0x0A |
 | 端口引脚未配置为可更改 | PORT_E_DIRECTION_UNCHANGEABLE | 0x0B |
-| **API Port_Init**服务以错误参数调用 | PORT_E_INIT_FAILED | 0x0C |
-| 当模式不可更改时调用**API Port_SetPinMode**服务 | PORT_E_PARAM_INVALID_MODE | 0x0D |
-| 当模式不可更改时调用**API Port_SetPinMode**服务 | PORT_E_MODE_UNCHANGEABLE | 0x0E |
+| **API [Port_Init](#731-port_init)**服务以错误参数调用 | PORT_E_INIT_FAILED | 0x0C |
+| 当模式不可更改时调用**API [Port_SetPinMode](#735-port_setpinmode)**服务 | PORT_E_PARAM_INVALID_MODE | 0x0D |
+| 当模式不可更改时调用**API [Port_SetPinMode](#735-port_setpinmode)**服务 | PORT_E_MODE_UNCHANGEABLE | 0x0E |
 | 未经模块初始化调用**API**服务 | PORT_E_UNINIT | 0x0F |
 | 以空指针调用**API** | PORT_E_PARAM_POINTER | 0x10 |
 
@@ -234,7 +234,7 @@ AUTOSAR_CP_SWS_MCUDriver
 
 如果启用了开发错误检测，**Port**驱动程序模块应按参数传递的顺序检查函数参数，如果一项检查失败则跳过后续的参数检查。
 
-示例：对于函数**Port_SetPinDirection**，传递的第一个参数是引脚**ID**。此参数应标识**MCU**端口的相关端口引脚。传递的第二个参数对应于要在端口引脚上更改的方向。
+示例：对于函数[**Port_SetPinDirection**](#732-port_setpindirection)，传递的第一个参数是引脚**ID**。此参数应标识**MCU**端口的相关端口引脚。传递的第二个参数对应于要在端口引脚上更改的方向。
 
 如果启用了开发错误检测且**Port**驱动程序模块检测到错误，应跳过所需功能，请求的服务应直接返回，不执行任何动作。
 
@@ -242,14 +242,14 @@ AUTOSAR_CP_SWS_MCUDriver
 
 | 函数 | 错误条件 | 相关错误值 |
 |---|---|---|
-| Port_SetPinDirection | 传入的端口引脚 ID 不正确 | PORT_E_PARAM_PIN |
-| Port_SetPinDirection | 端口引脚未配置为可更改 | PORT_E_DIRECTION_UNCHANGEABLE |
-| Port_Init | Port_Init 服务以错误参数调用。 | PORT_E_INIT_FAILED |
-| Port_SetPinMode | 传入的端口引脚 ID 不正确 | PORT_E_PARAM_PIN |
-| Port_SetPinMode | 传入的端口引脚模式无效 | PORT_E_PARAM_INVALID_MODE |
-| Port_SetPinMode | 当模式不可更改时调用**Port_SetPinMode**服务 | PORT_E_MODE_UNCHANGEABLE |
-| Port_SetPinDirection, Port_SetPinMode, Port_RefreshPortDirection | 在模块初始化之前调用**API**服务 | PORT_E_UNINIT |
-| Port_GetVersionInfo | 以空指针参数调用**API** | PORT_E_PARAM_POINTER |
+| [Port_SetPinDirection](#732-port_setpindirection) | 传入的端口引脚 ID 不正确 | PORT_E_PARAM_PIN |
+| [Port_SetPinDirection](#732-port_setpindirection) | 端口引脚未配置为可更改 | PORT_E_DIRECTION_UNCHANGEABLE |
+| [Port_Init](#731-port_init) | [Port_Init](#731-port_init) 服务以错误参数调用。 | PORT_E_INIT_FAILED |
+| [Port_SetPinMode](#735-port_setpinmode) | 传入的端口引脚 ID 不正确 | PORT_E_PARAM_PIN |
+| [Port_SetPinMode](#735-port_setpinmode) | 传入的端口引脚模式无效 | PORT_E_PARAM_INVALID_MODE |
+| [Port_SetPinMode](#735-port_setpinmode) | 当模式不可更改时调用[**Port_SetPinMode**](#735-port_setpinmode)服务 | PORT_E_MODE_UNCHANGEABLE |
+| [Port_SetPinDirection](#732-port_setpindirection), [Port_SetPinMode](#735-port_setpinmode), [Port_RefreshPortDirection](#733-port_refreshportdirection) | 在模块初始化之前调用**API**服务 | PORT_E_UNINIT |
+| [Port_GetVersionInfo](#734-port_getversioninfo) | 以空指针参数调用**API** | PORT_E_PARAM_POINTER |
 
 ## 7. API规范
 
@@ -299,7 +299,7 @@ AUTOSAR_CP_SWS_MCUDriver
 
 端口引脚应可配置多个端口引脚模式（**Port_PinModeType**类型）。
 
-**Port_PinModeType**类型应与函数调用**Port_SetPinMode**一起使用。
+**Port_PinModeType**类型应与函数调用[**Port_SetPinMode**](#735-port_setpinmode)一起使用。
 
 **Port_PinModeType**类型应为**uint8**、**uint16**或**uint32**。
 

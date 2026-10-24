@@ -39,7 +39,7 @@ release: R23-11
 **RTE**
 > 运行时环境（**Real Time Environment**）
 
-**SWC/SW-C**
+**SWC / SW-C**
 > 软件组件（**Software Component**）
 
 **SWCD**
@@ -79,7 +79,7 @@ release: R23-11
 
 在一个分区（**Partition**）内最多可以使用一个**BSW**模式管理器实例。
 
-### 4.2. 适用于汽车领域
+### 4.2. 汽车域的适用性
 
 **BSW**模式管理器适用于所有汽车域。
 
@@ -503,13 +503,13 @@ BswM也能够调用用户定义的函数（**user defined functions**），同�
 
 注意：定时器只能通过 BswMTimerAction 动作重新加载（不可能自动重新加载）。
 
-每个**BswMTimer**处于**BSWM_TIMER_STARTED**模式时，需在**BswM_MainFunction**中递减定时器的计数（需按**BswM_MainFunction**的周期时间）。
+每个**BswMTimer**处于**BSWM_TIMER_STARTED**模式时，需在[**BswM_MainFunction**](#731-bswm_mainfunction)中递减定时器的计数（需按[**BswM_MainFunction**](#731-bswm_mainfunction)的周期时间）。
 
 **注意：**
 
-**BswMTimer**分辨率（**resolution**）需是**BswM_MainFunction**周期时间的倍数。此外**BswMTimer**的准确性取决于**BswM_MainFunction**的准确性。
+**BswMTimer**分辨率（**resolution**）需是[**BswM_MainFunction**](#731-bswm_mainfunction)周期时间的倍数。此外**BswMTimer**的准确性取决于[**BswM_MainFunction**](#731-bswm_mainfunction)的准确性。
 
-如果处于**BSWM_TIMER_STARTED**模式的**BswMTimer**时间到期时，则**BswMTimer**模式需更改为**BSWM_TIMER_EXPIRED**，接着**BswMTimer**模式需在同一个**BswM_MainFunction**的周期中进行仲裁。
+如果处于**BSWM_TIMER_STARTED**模式的**BswMTimer**时间到期时，则**BswMTimer**模式需更改为**BSWM_TIMER_EXPIRED**，接着**BswMTimer**模式需在同一个[**BswM_MainFunction**](#731-bswm_mainfunction)的周期中进行仲裁。
 
 **BSWM_TIMER_STOP**的**BswMTimerAction**动作需立即停止引用的**BswMTimer**（通过：**BswMTimerRef**）并将其模式更改为**BSWM_TIMER_STOPPED**。
 
@@ -744,7 +744,7 @@ ServiceComponentType BswM {
 };
 ```
 
-内部行为（**Internal Behavior**）依赖于相关的模式请求端口的参数**BswMRequestProcessing**。 对于**BSWM_DEFERRED**，因为**BSWM**模式管理器在其**BswM_MainFunction**中循环读取请求，所以**RTE**不会执行任何特殊操作。相比之下，对于**BSWM_IMMEDIATE**，因为**RTE**必须立即触发模式仲裁，所以**BSW**模式管理器需要注册一个触发模式仲裁的触发函数。对于上面的示例，模式请求的立即处理将需要在**BSW**模式管理器的内部行为中进行以下声明：
+内部行为（**Internal Behavior**）依赖于相关的模式请求端口的参数**BswMRequestProcessing**。 对于**BSWM_DEFERRED**，因为**BSWM**模式管理器在其[**BswM_MainFunction**](#731-bswm_mainfunction)中循环读取请求，所以**RTE**不会执行任何特殊操作。相比之下，对于**BSWM_IMMEDIATE**，因为**RTE**必须立即触发模式仲裁，所以**BSW**模式管理器需要注册一个触发模式仲裁的触发函数。对于上面的示例，模式请求的立即处理将需要在**BSW**模式管理器的内部行为中进行以下声明：
 
 ```
 RunnableEntity ModeArbitrationRunnable {
@@ -1294,7 +1294,7 @@ void BswM_WdgM_RequestPartitionReset (
 
 **BswM**中没有回调通知（**call-back notifications**）。
 
-### 7.3. 周期函数
+### 7.3. 调度函数
 
 #### 7.3.1. BswM_MainFunction
 
@@ -1305,6 +1305,20 @@ void BswM_MainFunction (
     void
 )
 ```
+
+## 8. 时序图
+
+### 8.1. BswM 的推迟操作
+
+![Figure9-1.png](Figure9-1.png)
+
+图 9.1：BswM 的推迟操作
+
+### 8.2. BswM 的立即操作
+
+![Figure9-2.png](Figure9-2.png)
+
+图 9.2：BswM 的立即操作
 
 <section id="wechat">
 
