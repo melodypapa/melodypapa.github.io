@@ -26,7 +26,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity (source ch.1–8 mapped section by section; ch.6/9/10/A deliberately omitted; §1 table translated 4 columns × 2 rows verbatim; ch.2 7:7 same order)
   - [x] Step 5 — User confirmation gate (2026-10-24 confirmed: Phase A/B evidence + TODO.md row; 7.6.3 decision keeps "可配置接口")
   - [x] Step 6 — TODO.md row + commit/PR (commit ee486aa · PR #53 · Closes #54)
-- [ ] pwm_driver (SWS_PWMDriver · R23-11 markdown · ✅ alignment only)
+- [x] pwm_driver (SWS_PWMDriver · R23-11 markdown · done 2026-10-24 · commit 1b5e44b · PR #57 / issue #56)
   - Note: acronym chapter table → blockquotes (row set 13:13 verified); 4.2 "对汽车域的适用性" → "汽车域的适用性"
   - Note: 2026-10-24 Step 1 gap analysis (issue #56): the source ch.2 has **12** data rows (6 acronyms + 6 abbreviations), not 13 — the earlier 13:13 note counted a header; §2 is still a GFM table → convert to blockquotes; §4.2 heading is a §2 forbidden variant; §7.2.1 Pwm_ChannelType wrongly carries "8..32 位" (source Range is `- -`; 8..32 bit belongs to Pwm_PeriodType); §7.2.8 Pwm_PowerStateType carries a PWM_FULL_POWER (0x00) row absent from the R23-11 table (it exists in R25-11) → user decision; §1/§3–§7 otherwise match the source section by section
   - Note: user decision (2026-10-24, issue #56): delete the §7.2.8 `PWM_FULL_POWER（0x00）` bullet — strict R23-11 alignment (the value is only defined from R25-11 on)
@@ -35,7 +35,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks (strict build exit 0 / 0 WARNING; 7-chapter skeleton; ch.2 zero table rows, 12 term lines + 12 blockquotes; no h1/requirement IDs/forbidden heading variants; §3.1–7.7 numbering continuous; 4.2 rename has no inbound anchor links; glossary regenerated + `--check` 0, api `--check` 0)
   - [x] Step 4 — Phase B coverage map + fidelity (source ch.1–8 ↔ §1–§7 section by section; ch.6 requirements tracing / ch.9 sequence diagrams / ch.10 configuration specification / ch.11 not-applicable requirements deliberately omitted; the "duplicated" configurable On/Off sentences in §7.3.2–7.3.8 are two distinct source requirements — pre-compile-time (10xx) + configurable (20xx) with macro; §5.1.2 source-garbled "Pwm.h, Det.h and ." reconstructed as "Pwm.h和Det.h"; §7.2.1/§7.2.8 fidelity fixes as decided)
   - [x] Step 5 — User confirmation gate (2026-10-24 confirmed: Phase A/B evidence + TODO.md row; §7.2.8 decision = delete PWM_FULL_POWER (0x00))
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR (commit 1b5e44b · PR #57 · Closes #56)
 - [ ] ocu_driver (SWS_OCUDriver · R23-11 markdown · ✅ alignment + row set)
   - Note: acronym chapter table → blockquotes, restore the MCU row (source 14 rows → article 13 entries), drop the "Term definition:" pseudo-row; 3.1 "输入文档与相关标准和规范" → "输入文件"
   - [ ] Step 1 — Source resolution + gap analysis
