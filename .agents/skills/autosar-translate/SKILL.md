@@ -230,6 +230,16 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
   §7.3.x) link to their defining headings; 参见/详见 references link to their
   targets when an anchor exists. Use
   `.agents/skills/autosar-translate/scripts/link_candidates.py --apply <article>`.
+- **Citation markers `[n]` mean "Related documentation, entry n"** — a
+  two-hop reference: citation → §3.1 entry → an external document or a page
+  on this site. `link_candidates.py --list` resolves every citation to its
+  document and classifies by the entry's `AUTOSAR_*` doc id — **never by
+  title substring** ("Requirements on Port Driver" is SRS_PortDriver, not
+  the site's Port article). SITE class = the document's article/page exists
+  here, linkable now (e.g. EcuM citing the BswM spec → the site's BswM
+  article; `[n] AUTOSAR 术语表` → the site glossary page); EXTERNAL class =
+  needs a curated official URL before it can become a link (check 8 then
+  applies). Both are user decisions recorded with the census.
   Everything cross-article or anchor-less stays a reported candidate (user
   decision, queue in TODO.md's Backlog) — never silently added, and never
   silently *not counted*: the census is a Phase A output (check 9).

@@ -89,7 +89,69 @@ def collect(article: str):
     return lines, headings, defs, section_range
 
 
+
+# --- semantic pattern catalog (2026-10-24, corpus survey) -------------------
+# [n] in prose == "Related documentation, entry n" — a two-hop reference:
+#   citation -> §3.1 entry n -> external document OR a site article/page.
+# Classification is by the entry's AUTOSAR_CP_* document id (NEVER by title
+# substring: "Requirements on Port Driver" (SRS_PortDriver) is NOT the site's
+# Port article). SITE targets exist on this site; EXTERNAL needs a curated
+# official URL before it can become a link (check 8 then applies).
+DOC_TARGETS = {
+    "swsbswmodemanager": ("SITE", "BswM article", "../basic_software_mode_manager/"),
+    "swsecustatemanager": ("SITE", "EcuM article", "../ecu_state_manager/"),
+    "expmodemanagementguide": ("SITE", "Mode-management guide", "../guide_to_mode_management/"),
+    "swsdiodriver": ("SITE", "DIO article", "../dio_driver/"),
+    "swsportdriver": ("SITE", "PORT article", "../port_driver/"),
+    "swspwmdriver": ("SITE", "PWM article", "../pwm_driver/"),
+    "swsocudriver": ("SITE", "OCU article", "../ocu_driver/"),
+    "swsicudriver": ("SITE", "ICU article", "../icu_driver/"),
+    "swsadcdriver": ("SITE", "ADC article", "../adc_driver/"),
+    "swsbswgeneral": ("EXTERNAL", "SWS_BSWGeneral", None),
+    "tpsecuconfiguration": ("EXTERNAL", "TPS_ECUConfiguration", None),
+    "explayeredsoftwarearchitecture": ("EXTERNAL", "EXP_LayeredSoftwareArchitecture", None),
+    "swsrte": ("EXTERNAL", "SWS_RTE", None),
+    "expvfb": ("EXTERNAL", "EXP_VFB", None),
+    "srsbswgeneral": ("EXTERNAL", "SRS_BSWGeneral", None),
+    "swsmcudriver": ("EXTERNAL", "SWS_MCUDriver", None),
+    "swscantransceiverdriver": ("EXTERNAL", "SWS_CANTransceiverDriver", None),
+    "swssoftwarecomponenttemplate": ("EXTERNAL", "SWCT", None),
+    "trgbswmoduledocumentlist": ("EXTERNAL", "TR_BSWModuleList", None),
+    "trbswmoduledocumentlist": ("EXTERNAL", "TR_BSWModuleList", None),
+    "swsbswmodulelist": ("EXTERNAL", "TR_BSWModuleList", None),
+}
+
+
+def classify_doc(title: str, docid: str = ""):
+    if title and re.sub(r"[^a-z]", "", title.lower()) == "glossary":
+        return ("SITE", "site glossary", "/autosar/glossary/")
+    key = re.sub(r"[^a-z]", "", docid.lower())
+    key = key.replace("autosar", "", 1)
+    if key.startswith("cp"):
+        key = key[2:]
+    if key in DOC_TARGETS:
+        return DOC_TARGETS[key]
+    return ("EXTERNAL", None, None)
+
+
+def parse_entries31(article: str):
+    t = article
+    sec = re.search(r"### 3\.1\..*?(?=### 3\.2)", t, re.S)
+    entries = {}
+    if sec:
+        blocks = re.split(r"(?=^\[\d+\])", sec.group(0), flags=re.M)
+        for b in blocks:
+            m = re.match(r"^\[(\d+)\]\s+(.+)$", b, re.M)
+            if not m:
+                continue
+            n, title = m.group(1), m.group(2).strip()
+            d = re.search(r"(AUTOSAR_[A-Z]+_[A-Za-z]+)", b)
+            entries[n] = (title, d.group(1) if d else "")
+    return entries
+
+
 def census(article: str):
+    entries31 = parse_entries31(article)
     lines, headings, defs, _ = collect(article)
     fence = False
     stop = None
@@ -98,6 +160,7 @@ def census(article: str):
             stop = i
             break
     id_lines = can_lines = n_lines = 0
+    resolutions = {}
     for i, ln in enumerate(lines):
         if ln.startswith("```"):
             fence = not fence
@@ -111,11 +174,22 @@ def census(article: str):
             id_lines += 1
         if re.search(r"参见|参考|详见", ln):
             can_lines += 1
-        if re.search(r"(?<!\])\[\d+(?:,\s*\d+)*\](?!\()", ln):
+        for m in re.finditer(r"(?<!\])\[(\d+)(?:,\s*[^\]]+)?\](?!\()", ln):
             n_lines += 1
+            n = m.group(1)
+            ent = entries31.get(n)
+            if ent:
+                title, docid = ent
+                cls, label, target = classify_doc(title, docid)
+                resolutions.setdefault((n, title[:40], cls, label or "?"), 0)
+                resolutions[(n, title[:40], cls, label or "?")] += 1
     print(f"identifier-mention lines: {id_lines}")
     print(f"参见/参考/详见 lines (candidates): {can_lines}")
-    print(f"prose [n] marker lines (candidates): {n_lines}")
+    print(f"prose [n] citation lines: {n_lines}")
+    if resolutions:
+        print("  [n] resolutions (entry -> document -> class):")
+        for (n, title, cls, label), cnt in sorted(resolutions.items(), key=lambda x: int(x[0][0])):
+            print(f"    [{n}] {title} -> {cls}:{label} x{cnt}")
 
 
 def apply_links(article: str):
