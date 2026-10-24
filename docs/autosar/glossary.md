@@ -166,16 +166,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DEM**
 > Diagnostic Event Manager — 来源：[can_transceiver_driver](communication/can_transceiver_driver/index.md)（SWS_CANTransceiverDriver · R23-11）、[function_inhibition_manager](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager · R23-11）
 > DEM模块提供检索与故障内存相关的所有信息的功能，以便Dcm模块能够通过从故障内存中读取数据来响应测试者的请求。 — 来源：[diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md)（SWS_DiagnosticCommunicationManager · R23-11）
-> 诊断事件管理器（**Diagnostic Event Manager**）。 — 来源：[adc_driver](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）、[dio_driver](io/dio_driver/index.md)（SWS_DIODriver · R23-11）、[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R22-11）、[ocu_driver](io/ocu_driver/index.md)（SWS_OCUDriver · R23-11）、[pwm_driver](io/pwm_driver/index.md)（SWS_PWMDriver · R23-11）、[flash_driver](memory/flash_driver/index.md)（SWS_FlashDriver · R23-11）、[basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md)（SWS_BSWModeManager · R23-11）
-> 诊断事件管理器（Diagnostic Event Manager）[2] — 来源：[port_driver](io/port_driver/index.md)（SWS_PortDriver · R23-11）
+> 诊断事件管理器（**Diagnostic Event Manager**）。 — 来源：[adc_driver](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）、[dio_driver](io/dio_driver/index.md)（SWS_DIODriver · R23-11）、[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R22-11）、[ocu_driver](io/ocu_driver/index.md)（SWS_OCUDriver · R23-11）、[port_driver](io/port_driver/index.md)（SWS_PortDriver · R23-11）、[pwm_driver](io/pwm_driver/index.md)（SWS_PWMDriver · R23-11）、[flash_driver](memory/flash_driver/index.md)（SWS_FlashDriver · R23-11）、[basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md)（SWS_BSWModeManager · R23-11）
 
 **DET**
 > Default Error Tracer — 来源：[can_transceiver_driver](communication/can_transceiver_driver/index.md)（SWS_CANTransceiverDriver · R23-11）
 > Default Error Tracer：默认错误跟踪器 — 来源：[crypto_driver](crypto/crypto_driver/index.md)（SWS_CryptoDriver · R23-11）
 > Default Error Tracer，默认错误跟踪器 — 来源：[crypto_service_manager](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager · R23-11）
 > 默认错误跟踪器（**Default Error Tracer**），实现报告开发错误的模块。 — 来源：[adc_driver](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）、[flash_driver](memory/flash_driver/index.md)（SWS_FlashDriver · R23-11）
-> 默认错误跟踪器（**Default Error Tracer**）。 — 来源：[dio_driver](io/dio_driver/index.md)（SWS_DIODriver · R23-11）、[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R22-11）、[iohwab](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）、[ocu_driver](io/ocu_driver/index.md)（SWS_OCUDriver · R23-11）、[pwm_driver](io/pwm_driver/index.md)（SWS_PWMDriver · R23-11）、[basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md)（SWS_BSWModeManager · R23-11）
-> 默认错误跟踪器（Default Error Tracer）[3] — 来源：[port_driver](io/port_driver/index.md)（SWS_PortDriver · R23-11）
+> 默认错误跟踪器（**Default Error Tracer**）。 — 来源：[dio_driver](io/dio_driver/index.md)（SWS_DIODriver · R23-11）、[icu_driver](io/icu_driver/index.md)（SWS_ICUDriver · R22-11）、[iohwab](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）、[ocu_driver](io/ocu_driver/index.md)（SWS_OCUDriver · R23-11）、[port_driver](io/port_driver/index.md)（SWS_PortDriver · R23-11）、[pwm_driver](io/pwm_driver/index.md)（SWS_PWMDriver · R23-11）、[basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md)（SWS_BSWModeManager · R23-11）
 
 **DIO**
 > Digital Input Output (SPAL module) — 来源：[can_transceiver_driver](communication/can_transceiver_driver/index.md)（SWS_CANTransceiverDriver · R23-11）
@@ -379,7 +377,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 **MCU**
 > 微控制器单元（**Microcontroller Unit**） — 来源：[adc_driver](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）、[ocu_driver](io/ocu_driver/index.md)（SWS_OCUDriver · R23-11）、[pwm_driver](io/pwm_driver/index.md)（SWS_PWMDriver · R23-11）、[operating_system](system_services/operating_system/index.md)（SWS_OperatingSystem · R23-11）
-> 微控制器单元（MicroController Unit） — 来源：[port_driver](io/port_driver/index.md)（SWS_PortDriver · R23-11）
+> 微控制器单元（**MicroController Unit**） — 来源：[port_driver](io/port_driver/index.md)（SWS_PortDriver · R23-11）
 
 **ME**
 > 互斥（**Mutual exclusion**） — 来源：[operating_system](system_services/operating_system/index.md)（SWS_OperatingSystem · R23-11）

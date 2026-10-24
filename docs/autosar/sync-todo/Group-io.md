@@ -9,6 +9,7 @@
 - [x] dio_driver（SWS_DIODriver · R23-11 markdown · 2026-10-24 完成（含重开缩略语改排）· commit de11d8a/493ed12/e21067f · PR #53）
   - Note: 2026-10-24 完成 3.1/4.2/6.7/7.4 对齐（commit de11d8a/493ed12 · PR #53）；同日缩略语普查发现 §2 仍为 GFM 表格（行集 15:15 一致）→ 按 STANDARD.md §1 改排引用块
   - Note: 重开 2026-10-24 缩略语章格式 → 已完成 commit e21067f；早期按篇 todo 审计 trail 见 [dio_driver.md](dio_driver.md)
+  - Note: 2026-10-24 复核（用户点名 dio）：源 ch.1–8 逐章对照无缺口，缩略语 15:15 同序，`gen_glossary/gen_api_list --check` 均 exit 0 → 不改动、不开重开；新版本 R25-11 源结构有别（7.1.2 扩写、7.6.3 Transient Faults 撤除），如跟进发布版需另起重开行
   - [x] Step 1 — 源定位 + 差距分析（源 §2 表 15 行；文行集 15:15；缺口 = 格式）
   - [x] Step 2 — 就地翻译/补齐（表格 → 15 条粗体术语+引用块，源序；英文全称加粗；导语"下表"→"以下"）
   - [x] Step 3 — Phase A 机械检查（表格行 0、术语行 15、源序一致、无 h1/需求号、strict build 0 WARNING）
@@ -17,10 +18,12 @@
   - [x] Step 6 — TODO.md 行 + 提交/PR（commit e21067f · PR #53）
 - [ ] port_driver（SWS_PortDriver · R23-11 markdown · ✅ 仅余对齐）
   - Note: 缩略语章现为 GFM 表格 → 引用块（行集 7:7 已核对一致）；4.2「对汽车域的适用性」→「汽车域的适用性」
-  - [ ] Step 1 — 源定位 + 差距分析
-  - [ ] Step 2 — 就地翻译/补齐（缩略语改排 + 4.2 标题）
-  - [ ] Step 3 — Phase A 机械检查（strict build 0 WARNING）
-  - [ ] Step 4 — Phase B 覆盖映射 + 忠实度
+  - Note: 2026-10-24 Step 1 差距分析（issue #54）：新增缺口 = §1 缺源 ch.1 映射表（Driver/Port Pin/Channel Group 对照，2 行 4 列）；§4.2 用词、§2 格式如前；§7.6.3「可配置接口」与 STANDARD.md「可配置的接口」冲突（站内 5 篇用前者）→ 待用户决策；其余 §3/§5/§6/§7 与源逐条一致
+  - Note: 用户决策（2026-10-24）：7.6.3 保留「可配置接口」，STANDARD.md §2 与决策记录同步改为该词
+  - [x] Step 1 — 源定位 + 差距分析
+  - [x] Step 2 — 就地翻译/补齐（§1 映射表补译；§2 表格 → 7 条粗体术语+引用块、源序；§4.2 → 汽车域的适用性）
+  - [x] Step 3 — Phase A 机械检查（strict build exit 0 / 0 WARNING；7 章骨架；ch.2 表格 0 行、术语 7 条；无 h1/需求号/禁止章；glossary 重新生成后 --check 0、api --check 0）
+  - [x] Step 4 — Phase B 覆盖映射 + 忠实度（源 ch.1–8 逐节映射；ch.6/9/10/A 有意省略；§1 表 4 列 2 行逐字译；ch.2 7:7 同序）
   - [ ] Step 5 — 用户确认门
   - [ ] Step 6 — TODO.md 行 + 提交/PR（hash 记入本行）
 - [ ] pwm_driver（SWS_PWMDriver · R23-11 markdown · ✅ 仅余对齐）

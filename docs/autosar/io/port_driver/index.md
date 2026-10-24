@@ -31,21 +31,37 @@ release: R23-11
 
 下图标识了**PORT**驱动程序的功能，以及**PORT**驱动程序和**DIO**驱动程序在**MCAL**软件层中的结构[1]。
 
+| 驱动程序 | 端口引脚的名称 | 同一端口上相邻引脚子集的名称 | 整个端口的名称 |
+|---|---|---|---|
+| **DIO** 驱动 | 通道 | 通道组 | 端口 |
+| **PORT** 驱动 | 端口引脚 | - | 端口 |
+
 ![Figure1-1.png](Figure1-1.png)
 
 ## 2. 缩略语
 
-下表总结了**PORT**驱动程序中使用的表述。
+以下总结了**PORT**驱动程序中使用的表述。
 
-| 缩写/首字母缩写 | 描述 |
-|---|---|
-| DEM | 诊断事件管理器（Diagnostic Event Manager）[2] |
-| DET | 默认错误跟踪器（Default Error Tracer）[3] |
-| MCU | 微控制器单元（MicroController Unit） |
-| Port Pin | 表示**MCU**器件上单个可配置的输入或输出引脚。 |
-| Port | 表示**MCU**器件上整个可配置的端口。 |
-| Physical Level (Input) | 两种可能的状态：**LOW**/**HIGH** |
-| Physical Level (Output) | 两种可能的状态：**LOW**/**HIGH** |
+**DEM**
+> 诊断事件管理器（**Diagnostic Event Manager**）
+
+**DET**
+> 默认错误跟踪器（**Default Error Tracer**）
+
+**MCU**
+> 微控制器单元（**MicroController Unit**）
+
+**Port Pin**
+> 表示**MCU**器件上单个可配置的输入或输出引脚。
+
+**Port**
+> 表示**MCU**器件上整个可配置的端口。
+
+**Physical Level (Input)**
+> 两种可能的状态：**LOW**/**HIGH**
+
+**Physical Level (Output)**
+> 两种可能的状态：**LOW**/**HIGH**
 
 ## 3. 相关文档
 
@@ -93,7 +109,7 @@ AUTOSAR_CP_SWS_MCUDriver
 
 * 用户有责任确保同一系统中不同的实体不会并行访问同一端口/端口引脚，例如两个任务配置同一端口、两个任务配置同一引脚，或两个任务配置同一端口上的不同引脚。
 
-### 4.2. 对汽车域的适用性
+### 4.2. 汽车域的适用性
 
 无限制
 
