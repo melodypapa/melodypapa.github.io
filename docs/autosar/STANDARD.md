@@ -3,11 +3,11 @@
 > Scope: **module articles** under `docs/autosar/` (Chinese translations of AUTOSAR specification documents).
 > Not applicable to: section landing pages (see below), guide/EXP-type articles, and directories outside `docs/autosar/` (`nxp/`, `eb_tresos/`, etc.).
 > This file takes no part in the site build (see `exclude_docs` in `mkdocs.yml`); it exists for writing and review reference only.
-> Decision record: established by the site author on 2026-10-23; conversion history in PR #51 (issue #50). 2026-10-24: source chapter *Scheduled functions* named 「调度函数」 (previously listed 「周期函数」) and *Applicability to car domains* named 「汽车域的适用性」 (previously listed 「适用于汽车领域」); see issue #52. 2026-10-24: source chapter *Configurable Interfaces* named 「可配置接口」 (previously listed 「可配置的接口」; all 5 IO articles on the site use the former); see issue #54.
+> Decision record: established by the site author on 2026-10-23; conversion history in PR #51 (issue #50). 2026-10-24: source chapter *Scheduled functions* named 「调度函数」 (previously listed 「周期函数」) and *Applicability to car domains* named 「汽车域的适用性」 (previously listed 「适用于汽车领域」); see issue #52. 2026-10-24: source chapter *Configurable Interfaces* named 「可配置接口」 (previously listed 「可配置的接口」; all 5 IO articles on the site use the former); see issue #54. 2026-10-24: the 配置规范 ban lifted (user decision) — the source's ch.10 *Configuration specification* translates as the optional article chapter `## 8. 配置规范` when present; see the config-spec rules in the autosar-translate skill (Step 5).
 
 ## 1. Chapter skeleton (mandatory)
 
-Every module article must contain exactly the following seven top-level chapters — numbering continuous, heading wording matching precisely:
+Every module article must contain the following seven core top-level chapters — numbering continuous, heading wording matching precisely — plus the optional chapter 8 when the source document has a configuration specification:
 
 | # | Chapter | Content |
 | --- | --- | --- |
@@ -18,8 +18,9 @@ Every module article must contain exactly the following seven top-level chapters
 | 5 | `## 5. 对其他模块的依赖` | One `###` per dependent module |
 | 6 | `## 6. 功能规格` | Functional specification body, `###`/`####` sub-sections |
 | 7 | `## 7. API规范` | See section 3 below |
+| 8 | `## 8. 配置规范` *(optional)* | Translation of the source ch.10 *Configuration specification* — present iff the source document has it; source 10.x renumbered to 8.x; see the skill's config-spec rules |
 
-**Forbidden chapters**: requirement traceability (需求可追溯性 / 需求追踪), sequence diagrams (时序图), configuration specification (配置规范), letter-numbered appendices (`## A.` / `## B.`), and any chapter 8 or later content.
+**Forbidden chapters**: requirement traceability (需求可追溯性 / 需求追踪), sequence diagrams (时序图), letter-numbered appendices (`## A.` / `## B.`), and any content beyond `## 8. 配置规范`.
 
 ## 2. Chapter heading wording (canonical)
 
@@ -32,6 +33,7 @@ One source chapter uses exactly one rendering site-wide:
 - ✅ `对其他模块的依赖`
 - ✅ `功能规格` (not 功能规范 / 功能说明)
 - ✅ `API规范` → `函数定义` / `调度函数` (not 周期函数 / Scheduled 函数) / `回调通知` / `可配置接口` (not 可配置的接口) / `期望接口`
+- ✅ `配置规范` (Configuration specification — the optional ch.8 title; source 10.x → 8.x)
 
 ## 3. API chapter internal structure
 

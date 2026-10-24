@@ -60,8 +60,11 @@ Compare the article's `## ` headings against the source chapter list:
   positions where the source has them).
 - **Complete** → report alignment status; do not rewrite content that already
   exists. If the article intentionally omits chapters that `STANDARD.md`
-  forbids (tracing, sequence diagrams, config specs, appendices), that is
-  compliance, not a gap.
+  forbids (tracing, sequence diagrams, appendices), that is compliance, not a
+  gap. The 配置规范 chapter is **no longer forbidden** (2026-10-24): when the
+  source has ch.10 and the queue row's scope includes it, its absence in the
+  article is now a gap — it translates as `## 8. 配置规范` (Step 5
+  config-spec rules).
 
 For sources longer than ~2000 lines, present the sync plan and get user
 confirmation before translating — a full SWS can be an entire session of work.
@@ -175,6 +178,29 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
     8.4/8.5/8.6.1–8.6.3/8.7 ↔ §7.4–§7.7 (callbacks/scheduled/expected
     interfaces incl. configurable callbacks/API parameter checks) fall under
     the same rule.
+- **配置规范 chapter (source ch.10 → article `## 8. 配置规范`, optional)** —
+  present iff the source document has a configuration specification; source
+  10.x renumbers to 8.x. Terminology (site majority, baseline-tested
+  2026-10-24): *Configuration specification* → 配置规范; *Containers and
+  configuration parameters* → 容器与配置参数; *container* → 容器
+  (*configuration container* → 配置容器); *Container Name* → 容器名称;
+  *Parent Container* → 父容器; *Included Containers* → 包含的容器;
+  *Multiplicity* → 多重性; *configuration parameter* → 配置参数;
+  *Parameter Name* → 参数名称; *Scope / Dependency* → 作用域/依赖;
+  *published information* → 发布信息. Structure rules:
+  - translate the source tables faithfully as GFM tables; normalize the
+    PDF merged-cell artifacts (a value repeated across collapsed columns —
+    IDs, headers — collapses to one column);
+  - bracketed `[SWS_*]` and `[ECUC_*]` IDs are dropped per the hygiene rule;
+    parameter/container NAMES (`AdcDeInitApi`, `AdcGeneral`) are code
+    identifiers — never translated, kept verbatim in cells and headings;
+  - boolean descriptions keep true/false and render per the site pattern
+    `* **true**：…` / `* **false**：…` when the source lists them separately;
+  - the chapter's internal cross-references are renumbered to the article's
+    own chapters (source ch.7 → §6, ch.8 → §7);
+  - flash_driver/time_service carry legacy flattened per-parameter headings
+    from the pre-Type A era — do not copy that layout into new translations;
+    their chapters get aligned when their rows run.
 - Chapter numbering stays stable; when insertion forces a renumber, grep for
   inbound anchor links first and fix them in the same commit.
 
@@ -219,8 +245,10 @@ before every commit, the second is evidence for the Step 8 confirmation.
    **zero WARNINGs** (pre-existing INFO anchor notices are fine).
 2. Heading audit: `grep '^## '` on the article equals the STANDARD.md §1
    skeleton with §2 wording, numbered `1.`–`7.` only; `###`/`####` numbering
-   is continuous (no numbering gaps); no `## 8.`, lettered appendix, or forbidden chapter
-   title (需求可追溯性 / 需求追踪 / 时序图 / 配置规范) anywhere. **Before renaming
+   is continuous (no numbering gaps); no lettered appendix, and no forbidden
+   chapter title (需求可追溯性 / 需求追踪 / 时序图) anywhere; `## 8.` is
+   allowed only as `## 8. 配置规范` (optional — only when the source has
+   ch.10). **Before renaming
    a heading to a STANDARD.md term, grep that heading across `docs/autosar`** —
    if the standard and the site majority disagree, it is a user decision
    (record it; update STANDARD.md in the same PR), not a silent rename.
@@ -379,7 +407,7 @@ open.
 
 | Mistake | Consequence | Counter |
 | --- | --- | --- |
-| Skipping Step 0, trusting an older article's structure | Forbidden-chapter residue (时序图/配置规范/需求追踪) and legacy wording spread — the pre-standard IO articles did exactly this | STANDARD.md is read first, always |
+| Skipping Step 0, trusting an older article's structure | Forbidden-chapter residue (时序图/需求追踪) and legacy wording spread — the pre-standard IO articles did exactly this | STANDARD.md is read first, always |
 | Translating before emitting the todo list | Coverage decisions unreviewable until the work is done | Step 4 output contract |
 | Opening figure files (`Figure*.png`) during gap analysis | Pipeline/API image errors | Text-only rule in Step 3 |
 | Flagging STANDARD.md-forbidden chapters as "missing" | False work items on compliant articles | Step 3 compliance rule: omissions the standard mandates are compliance |
