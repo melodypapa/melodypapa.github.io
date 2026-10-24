@@ -66,3 +66,4 @@
 - `memory/nv_data_handling_guideline`（指南结构）
 - `power`（专题文章，自定义 11 章）
 - `methodology_templates/basic_software_module_description_template`、`template/`（模板/方法论类）
+- `docs/autosar/glossary.md`（术语表 — 由 `.agents/skills/autosar-translate/scripts/gen_glossary.py` 从各文章第 2 章汇总生成，勿手编；文章第 2 章变更后重新生成）

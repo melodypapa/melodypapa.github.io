@@ -139,6 +139,20 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
 - Chapter numbering stays stable; when insertion forces a renumber, grep for
   inbound anchor links first and fix them in the same commit.
 
+## Step 5b — Regenerate the site glossary
+
+Every ch.2 term change feeds the site-wide terminology index. After any edit
+to a 缩略语 chapter, run
+`python .agents/skills/autosar-translate/scripts/gen_glossary.py` to
+regenerate `docs/autosar/glossary.md` — an A–Z index of every term across all
+articles, deduplicated per module with each definition attributed to its
+source articles — and commit it in the same PR. **Never hand-edit
+`glossary.md`**; fix the article's ch.2 and regenerate. Read the script's
+report: a `! article: ch.2 present but no entries parsed` line is a drift
+signal (that ch.2 is prose or intro-only — fix the article, don't silence the
+line), and `(table — 待改排)` flags articles whose ch.2 still uses the legacy
+GFM table.
+
 ## Step 6 — Verify (two-phase gate), then repo workflow
 
 The strict build is necessary, not sufficient: it is blind to wording,
@@ -165,8 +179,12 @@ before every commit, the second is evidence for the Step 7 confirmation.
    headings — grep inbound `](…#…)` links site-wide and fix them in the same
    commit.
 5. 缩略语章：`sed -n '/^## 2\. 缩略语/,/^## 3\./p' <article>` 切片内 `^| ` 行数
-   必须为 0（禁表格）；`^\*\*[^*]+\*\*$` 术语行条数 == 源表数据行数（逐行核对行集与
-   行序 — 该章在长会话中最易漂移：adc_driver 曾 18 源行译成 16 条而通过所有检查）。
+   必须为 0（禁表格）；`^\*\*[^*]+\*\*\s*$` 术语行条数 == 源表数据行数（逐行核对行集与
+   行序 — 该章在长会话中最易漂移：adc_driver 曾 18 源行译成 16 条而通过所有检查；
+   术语行允许尾随空格 — bswm/ethernet_interface 等多篇文章的行尾都有空格）。
+6. Glossary: `python .agents/skills/autosar-translate/scripts/gen_glossary.py
+   --check` exits 0 — the committed `docs/autosar/glossary.md` matches the
+   articles' ch.2 content (regenerate per Step 5b if stale).
 
 **Phase B — automation-blind checks** (presented at the Step 7 gate as
 evidence, not asserted):

@@ -109,6 +109,7 @@ nav:
       - "系统控制（System Control）": cortex/r52p_processor/system_control/index.md
   - CP AUTOSAR:
     - autosar/index.md
+    - "术语表": autosar/glossary.md
     - 通信:
       - autosar/communication/index.md
       - "CAN Driver":
