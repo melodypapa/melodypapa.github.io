@@ -36,8 +36,8 @@
 
 | Status | Count | Note |
 | --- | ---: | --- |
-| ✅ Type A-compliant | 8 | ready to use |
-| 🔶 Translated pending alignment | 12 | seven chapters present; legacy wording / forbidden-chapter residue |
+| ✅ Type A-compliant | 9 | ready to use |
+| 🔶 Translated pending alignment | 11 | seven chapters present; legacy wording / forbidden-chapter residue |
 | ⚠️ Partial | 17 | missing ≥1 chapter (most miss the 「API规范」 chapter) |
 | ⛔ Stub | 4 | 9–19 lines only |
 | ❌ Missing (SWS) | 86 | R23-11 has 127 SWS docs in total; 41 covered (32.3%) |
@@ -115,7 +115,7 @@
 ## mode_management
 
 - ✅ [BswM](basic_software_mode_manager/) — SWS_BSWModeManager (pending wording alignment: 4.2 「适用于汽车领域」, 7.3 「周期函数」→「调度函数」)
-- 🔶 [EcuM](ecu_state_manager/) — SWS_ECUStateManager (ch.2 is "定义和缩写"; 4.2 「适用于汽车领域」)
+- ✅ [EcuM](ecu_state_manager/) — SWS_ECUStateManager (2026-10-24: ch.2 → 缩略语 flattened to 23 entries in source order, §4.2 → 汽车域的适用性, new ## 8. 时序图 (16 figures) + ## 9. 配置规范 (~40 parameter tables); content matches the R23-11 source chapter by chapter)
 - 📖 [模式管理指南](guide_to_mode_management/) — EXP_ModeManagementGuide (exempt)
 
 ## system_services

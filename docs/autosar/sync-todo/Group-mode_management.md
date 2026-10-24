@@ -12,9 +12,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] ecu_state_manager (SWS_ECUStateManager · R23-11 markdown · 🔶 alignment)
+  - [x] Step 5 — User confirmation gate (2026-10-24 confirmed)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 37ee564 + bookkeeping · PR #70)
+- [x] ecu_state_manager (SWS_ECUStateManager · R23-11 markdown · 🔶 alignment · commit 37ee564 · PR #70)
   - Note: ch.2 "定义和缩写" → "缩略语"; 4.2 "适用于汽车领域" → "汽车域的适用性"
   - Note: 2026-10-24 Step 1 (issue #69, worktree run): source 5866 lines (ModeManagement/, not SystemServices/); gaps = ch.2 (11 defs + 12 abbrevs), 4.2 wording, new ## 8. 时序图 (ch.9, ~200 lines, 16 figures) + ## 9. 配置规范 (ch.10, 1267 lines, ~17 containers / ~40 params); full scope user-confirmed at the Step 1 gate
   - Note: figure forensics — 40 distinct ch.9 images, 24 are page decorations (~8KB) vs 16 diagrams (>100KB); exactly 16 captions → 1:1 mapping, size filter + visual spot-check (Fig 9.5 embedded caption); 12 of 8.1's figures already in the article as Figure7-*.png
