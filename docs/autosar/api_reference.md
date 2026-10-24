@@ -15,127 +15,127 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_OS · R23-11
 
 **Adc_ChannelRangeSelectType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_ChannelType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_ConfigType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_ConversionTimeType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_DeInit**
-> 函数 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 函数 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_DisableGroupNotification**
-> 函数 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 函数 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_DisableHardwareTrigger**
-> 函数 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 函数 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_EnableGroupNotification**
-> 函数 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 函数 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_EnableHardwareTrigger**
-> 函数 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 函数 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_GetCurrentPowerState**
-> 函数 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 函数 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_GetGroupStatus**
-> 函数 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 函数 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_GetStreamLastPointer**
-> 函数 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 函数 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_GetTargetPowerState**
-> 函数 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 函数 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_GetVersionInfo**
-> 函数 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 函数 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_GroupAccessModeType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_GroupConvModeType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_GroupDefType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_GroupPriorityType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_GroupReplacementType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_GroupType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_HwTriggerSignalType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_HwTriggerTimerType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_Init**
-> 函数 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 函数 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_PowerStateRequestResultType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_PowerStateType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_PreparePowerState**
-> 函数 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 函数 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_PrescaleType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_PriorityImplementationType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_ReadGroup**
-> 函数 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 函数 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_ResolutionType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_ResultAlignmentType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_SamplingTimeType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_SetPowerState**
-> 函数 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 函数 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_SetupResultBuffer**
-> 函数 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 函数 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_StartGroupConversion**
-> 函数 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 函数 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_StatusType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_StopGroupConversion**
-> 函数 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 函数 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_StreamBufferModeType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_StreamNumSampleType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_TriggerSourceType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Adc_ValueGroupType**
-> 类型 · [adc_driver](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
+> 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
 **Additions**
 > 函数 · 未翻译 · SWS_EFXLibrary · R23-11
@@ -290,136 +290,136 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_BSWMulticoreLibrary · R23-11
 
 **BndM_BlockIdType**
-> 类型 · [bulk_nv_data_manager](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
+> 类型 · [AUTOSAR BndM（非易失性大容量数据管理器）](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
 **BndM_ConfigType**
-> 类型 · [bulk_nv_data_manager](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
+> 类型 · [AUTOSAR BndM（非易失性大容量数据管理器）](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
 **BndM_GetBlockPtr**
-> 函数 · [bulk_nv_data_manager](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
+> 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
 **BndM_GetVersionInfo**
-> 函数 · [bulk_nv_data_manager](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
+> 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
 **BndM_Init**
-> 函数 · [bulk_nv_data_manager](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
+> 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
 **BndM_Result**
-> 类型 · [bulk_nv_data_manager](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
+> 类型 · [AUTOSAR BndM（非易失性大容量数据管理器）](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
 **BndM_WriteBlock**
-> 函数 · [bulk_nv_data_manager](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
+> 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
 **BndM_WriteCancel**
-> 函数 · [bulk_nv_data_manager](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
+> 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
 **BndM_WriteFinalize**
-> 函数 · [bulk_nv_data_manager](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
+> 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
 **BndM_WriteStart**
-> 函数 · [bulk_nv_data_manager](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
+> 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
 **boolean**
 > 类型 · 未翻译 · SWS_PlatformTypes · R23-11
 
 **BswM_BswMPartitionRestarted**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_CanSM_CurrentState**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_ComM_CurrentMode**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_ComM_CurrentPNCMode**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_ComM_InitiateReset**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_ConfigType**
-> 类型 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 类型 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_Dcm_ApplicationUpdated**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_Dcm_CommunicationMode_CurrentState**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_Deinit**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_EcuM_CurrentState**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_EcuM_CurrentWakeup**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_EcuM_RequestedState**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_EthIf_PortGroupLinkStateChg**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_EthSM_CurrentState**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_FrSM_CurrentState**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_GetVersionInfo**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_Init**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_J1939DcmBroadcastStatus**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_J1939Nm_StateChangeNotification**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_LinSM_CurrentSchedule**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_LinSM_CurrentState**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_LinTp_RequestMode**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_ModeType**
-> 类型 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 类型 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_Nm_CarWakeUpIndication**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_Nm_StateChangeNotification**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_NvM_CurrentBlockMode**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_NvM_CurrentJobMode**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_RequestMode**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_Sd_ClientServiceCurrentState**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_Sd_ConsumedEventGroupCurrentState**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_Sd_EventHandlerCurrentState**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_SoAd_SoConModeChg**
-> 函数 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BswM_UserType**
-> 类型 · [basic_software_mode_manager](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+> 类型 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BufReq_ReturnType**
 > 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
@@ -430,76 +430,76 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_OS · R23-11
 
 **Can_CheckWakeup**
-> 函数 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_ConfigType**
-> 类型 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 类型 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_ControllerStateType**
-> 类型 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 类型 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_DeInit**
-> 函数 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_DisableControllerInterrupts**
-> 函数 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_EnableControllerInterrupts**
-> 函数 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_EnableEgressTimeStamp**
-> 函数 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_ErrorStateType**
-> 类型 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 类型 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_ErrorType**
-> 类型 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 类型 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_GetControllerErrorState**
-> 函数 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_GetControllerMode**
-> 函数 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_GetControllerTxErrorCounter**
-> 函数 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_GetCurrentTime**
-> 函数 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_GetEgressTimeStamp**
-> 函数 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_GetIngressTimeStamp**
-> 函数 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_GetVersionInfo**
-> 函数 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_HwHandleType**
-> 类型 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 类型 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_HwType**
-> 类型 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 类型 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_IdType**
-> 类型 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 类型 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_Init**
-> 函数 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_PduType**
-> 类型 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 类型 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_SetBaudrate**
-> 函数 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_SetControllerMode**
-> 函数 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_TimeStampType**
-> 类型 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 类型 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **Can_TTErrorLevelEnumType**
 > 类型 · 未翻译 · SWS_TTCANDriver · R23-11
@@ -556,109 +556,109 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_TTCANDriver · R23-11
 
 **Can_Write**
-> 函数 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **canGetControllerRxErrorCounter**
-> 函数 · [can_driver](communication/can_driver/index.md) · SWS_CANDriver · R23-11
+> 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
 **CanIf_CheckTrcvWakeFlag**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_CheckValidation**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_CheckWakeup**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_ClearTrcvWufFlag**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_ConfigType**
-> 类型 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 类型 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_DeInit**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_EnableBusMirroring**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_EnableEgressTimeStamp**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_GetControllerErrorState**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_GetControllerMode**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_GetControllerRxErrorCounter**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_GetControllerTxErrorCounter**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_GetCurrentTime**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_GetEgressTimeStamp**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_GetIngressTimeStamp**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_GetPduMode**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_GetTrcvMode**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_GetTrcvWakeupReason**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_GetTxConfirmationState**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_GetVersionInfo**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_Init**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_NotifStatusType**
-> 类型 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 类型 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_PduModeType**
-> 类型 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 类型 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_ReadRxNotifStatus**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_ReadRxPduData**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_ReadTxNotifStatus**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_SetBaudrate**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_SetControllerMode**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_SetDynamicTxId**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_SetPduMode**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_SetTrcvMode**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_SetTrcvWakeupMode**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_Transmit**
-> 函数 · [can_interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
+> 函数 · [AUTOSAR CAN Interface](communication/can_interface/index.md) · SWS_CANInterface · R23-11
 
 **CanIf_TTErrorLevelEnumType**
 > 类型 · 未翻译 · SWS_TTCANInterface · R23-11
@@ -721,73 +721,73 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_TTCANInterface · R23-11
 
 **CanNm_ActivateTxPnShutdownMsg**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_CheckRemoteSleepIndication**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_ConfigType**
-> 类型 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 类型 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_DeactivateTxPnShutdownMsg**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_DeInit**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_DisableCommunication**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_EnableCommunication**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_GetLocalNodeIdentifier**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_GetNodeIdentifier**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_GetPduData**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_GetState**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_GetUserData**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_GetVersionInfo**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_Init**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_NetworkRelease**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_NetworkRequest**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_PassiveStartUp**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_PnLearningRequest**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_RepeatMessageRequest**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_RequestBusSynchronization**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_SetSleepReadyBit**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_SetUserData**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanNm_Transmit**
-> 函数 · [can_network_management](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
+> 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanSM_BswMCurrentStateType**
 > 类型 · 未翻译 · SWS_CANStateManager · R23-11
@@ -847,46 +847,46 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_CANTransportLayer · R23-11
 
 **CanTrcv_CheckWakeFlag**
-> 函数 · [can_transceiver_driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
 
 **CanTrcv_CheckWakeup**
-> 函数 · [can_transceiver_driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
 
 **CanTrcv_ClearTrcvTimeoutFlag**
-> 函数 · [can_transceiver_driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
 
 **CanTrcv_ClearTrcvWufFlag**
-> 函数 · [can_transceiver_driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
 
 **CanTrcv_DeInit**
-> 函数 · [can_transceiver_driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
 
 **CanTrcv_GetBusWuReason**
-> 函数 · [can_transceiver_driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
 
 **CanTrcv_GetOpMode**
-> 函数 · [can_transceiver_driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
 
 **CanTrcv_GetTrcvSystemData**
-> 函数 · [can_transceiver_driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
 
 **CanTrcv_Init**
-> 函数 · [can_transceiver_driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
 
 **CanTrcv_ReadTrcvSilenceFlag**
-> 函数 · [can_transceiver_driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
 
 **CanTrcv_ReadTrcvTimeoutFlag**
-> 函数 · [can_transceiver_driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
 
 **CanTrcv_SetOpMode**
-> 函数 · [can_transceiver_driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
 
 **CanTrcv_SetPNActivationState**
-> 函数 · [can_transceiver_driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
 
 **CanTrcv_VersionInfo**
-> 函数 · [can_transceiver_driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
 
 **CanTSyn_ConfigType**
 > 类型 · 未翻译 · SWS_TimeSyncOverCAN · R23-11
@@ -1300,13 +1300,13 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_COMManager · R23-11
 
 **ComXf_DeInit**
-> 函数 · [com_based_transformer](communication/com_based_transformer/index.md) · SWS_COMBasedTransformer · R23-11
+> 函数 · [AUTOSAR COM Based Transformer](communication/com_based_transformer/index.md) · SWS_COMBasedTransformer · R23-11
 
 **ComXf_GetVersionInfo**
-> 函数 · [com_based_transformer](communication/com_based_transformer/index.md) · SWS_COMBasedTransformer · R23-11
+> 函数 · [AUTOSAR COM Based Transformer](communication/com_based_transformer/index.md) · SWS_COMBasedTransformer · R23-11
 
 **ComXf_Init**
-> 函数 · [com_based_transformer](communication/com_based_transformer/index.md) · SWS_COMBasedTransformer · R23-11
+> 函数 · [AUTOSAR COM Based Transformer](communication/com_based_transformer/index.md) · SWS_COMBasedTransformer · R23-11
 
 **ConfigType**
 > 类型 · 未翻译 · SWS_Firewall · R23-11
@@ -1384,181 +1384,181 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_CryptoInterface · R23-11
 
 **Crypto_AlgorithmFamilyType**
-> 类型 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Crypto_AlgorithmInfoType**
-> 类型 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Crypto_AlgorithmModeType**
-> 类型 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Crypto_CancelJob**
-> 函数 · [crypto_driver](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+> 函数 · [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
 
 **Crypto_ConfigType**
-> 类型 · [crypto_driver](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+> 类型 · [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
 
 **Crypto_GetVersionInfo**
-> 函数 · [crypto_driver](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+> 函数 · [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
 
 **Crypto_Init**
-> 函数 · [crypto_driver](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+> 函数 · [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
 
 **Crypto_InputOutputRedirectionConfigType**
-> 类型 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Crypto_JobPrimitiveInfoType**
-> 类型 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Crypto_JobPrimitiveInputOutputType**
-> 类型 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Crypto_JobRedirectionInfoType**
-> 类型 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Crypto_JobStateType**
-> 类型 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Crypto_JobType**
-> 类型 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Crypto_KeyCopy**
-> 函数 · [crypto_driver](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+> 函数 · [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
 
 **Crypto_KeyDerive**
-> 函数 · [crypto_driver](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+> 函数 · [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
 
 **Crypto_KeyElementCopy**
-> 函数 · [crypto_driver](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+> 函数 · [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
 
 **Crypto_KeyElementCopyPartial**
-> 函数 · [crypto_driver](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+> 函数 · [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
 
 **Crypto_KeyElementGet**
-> 函数 · [crypto_driver](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+> 函数 · [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
 
 **Crypto_KeyElementIdsGet**
-> 函数 · [crypto_driver](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+> 函数 · [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
 
 **Crypto_KeyElementSet**
-> 函数 · [crypto_driver](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+> 函数 · [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
 
 **Crypto_KeyExchangeCalcPubVal**
-> 函数 · [crypto_driver](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+> 函数 · [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
 
 **Crypto_KeyExchangeCalcSecret**
-> 函数 · [crypto_driver](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+> 函数 · [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
 
 **Crypto_KeyGenerate**
-> 函数 · [crypto_driver](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+> 函数 · [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
 
 **Crypto_KeyGetStatus**
-> 函数 · [crypto_driver](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+> 函数 · [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
 
 **Crypto_KeySetInvalid**
-> 函数 · [crypto_driver](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+> 函数 · [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
 
 **Crypto_KeySetValid**
-> 函数 · [crypto_driver](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+> 函数 · [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
 
 **Crypto_PrimitiveInfoType**
-> 类型 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Crypto_ProcessingType**
-> 类型 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Crypto_ProcessJob**
-> 函数 · [crypto_driver](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+> 函数 · [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
 
 **Crypto_RandomSeed**
-> 函数 · [crypto_driver](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+> 函数 · [AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
 
 **Crypto_ServiceInfoType**
-> 类型 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_AEADDecrypt**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_AEADEncrypt**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_CallbackNotification**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_CancelJob**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_ConfigType**
-> 类型 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_Decrypt**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_Encrypt**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_GetVersionInfo**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_Hash**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_Init**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_JobKeyDerive**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_JobKeyExchangeCalcPubVal**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_JobKeyExchangeCalcSecret**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_JobKeyGenerate**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_JobKeySetInvalid**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_JobKeySetValid**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_JobRandomSeed**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_KeyCopy**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_KeyElementCopy**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_KeyElementCopyPartial**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_MacGenerate**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_MacVerify**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_MainFunction**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_RandomGenerate**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_RestoreContextJob**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_SaveContextJob**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_SignatureGenerate**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **Csm_SignatureVerify**
-> 函数 · [crypto_service_manager](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **CV2x_BufCV2xPC5RxParamIdType**
 > 类型 · 未翻译 · SWS_CellularV2XDriver · R23-11
@@ -1614,73 +1614,73 @@ title: "AUTOSAR API 清单（函数与类型）"
 ## D
 
 **Dcm_BndMWriteBlockFinish**
-> 函数 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_CommunicationModeType**
-> 类型 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_ConfigType**
-> 类型 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_DemTriggerOnDTCStatus**
-> 函数 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_EcuStartModeType**
-> 类型 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_ExtendedOpStatusType**
-> 类型 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_GetSecurityLevel**
-> 函数 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_GetSesCtrlType**
-> 函数 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_GetVersionInfo**
-> 函数 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_GetVin**
-> 函数 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_IdContextType**
-> 类型 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_Init**
-> 函数 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_MsgAddInfoType**
-> 类型 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_MsgContextType**
-> 类型 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_MsgItemType**
-> 类型 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_MsgLenType**
-> 类型 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_MsgType**
-> 类型 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_ProgConditionsType**
-> 类型 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_ResetToDefaultSession**
-> 函数 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_ReturnReadMemoryType**
-> 类型 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_ReturnWriteMemoryType**
-> 类型 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_SetDeauthenticatedRole**
-> 函数 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dcm_StatusType**
-> 类型 · [diagnostic_communication_manager](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dds_ConfigType**
 > 类型 · 未翻译 · SWS_DataDistributionService · R23-11
@@ -1695,424 +1695,424 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_DataDistributionService · R23-11
 
 **Dem_ClearDTC**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_ClearPrestoredFreezeFrame**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_ComponentIdType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_ConfigType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DcmGetAvailableOBDMIDs**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DcmGetDTCOfOBDFreezeFrame**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DcmGetDTRData**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DcmGetInfoTypeValue08**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DcmGetInfoTypeValue0B**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DcmGetInfoTypeValue79**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DcmGetNumTIDsOfOBDMID**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DcmReadDataOfOBDFreezeFrame**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DcmReadDataOfPID01**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DcmReadDataOfPID1C**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DcmReadDataOfPID21**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DcmReadDataOfPID30**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DcmReadDataOfPID31**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DcmReadDataOfPID41**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DcmReadDataOfPID4D**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DcmReadDataOfPID4E**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DcmReadDataOfPID91**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DcmReadDataOfPIDF501**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DebounceResetStatusType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DebouncingStateType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DisableDTCRecordUpdate**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DisableDTCSetting**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DTCFormatType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DTCKindType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DTCOriginType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DTCRequestType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DTCSeverityType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DTCTranslationFormatType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_DTRControlType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_EnableDTCRecordUpdate**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_EnableDTCSetting**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_EventIdType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_EventOBDReadinessGroupType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_EventStatusType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetB1Counter**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetComponentFailed**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetCycleQualified**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetDataOfPID21**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetDebouncingOfEvent**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetDTCByOccurrenceTime**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetDTCOfEvent**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetDTCSelectionResult**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetDTCSelectionResultForClearDTC**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetDTCSeverityAvailabilityMask**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetDTCStatusAvailabilityMask**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetDTCSuppression**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetEventAvailable**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetEventExtendedDataRecordEx**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetEventFreezeFrameDataEx**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetEventMemoryOverflow**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetEventUdsStatus**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetFaultDetectionCounter**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetFunctionalUnitOfDTC**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetIndicatorStatus**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetIUMPRDenCondition**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetMonitorStatus**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetNextExtendedDataRecord**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetNextFilteredDTC**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetNextFilteredDTCAndFDC**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetNextFilteredDTCAndSeverity**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetNextFilteredRecord**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetNextFreezeFrameData**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetNumberOfEventMemoryEntries**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetNumberOfFilteredDTC**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetNumberOfFreezeFrameRecords**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetSeverityOfDTC**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetSizeOfExtendedDataRecordSelection**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetSizeOfFreezeFrameSelection**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetStatusOfDTC**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetTranslationType**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_GetVersionInfo**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_IndicatorStatusType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_Init**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_InitMonitorReasonType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_IumprDenomCondIdType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_IumprDenomCondStatusType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmClearDTC**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmDiagnosticReadiness1Type**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmDiagnosticReadiness2Type**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmDiagnosticReadiness3Type**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmDTCStatusFilterType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmFirstDTCwithLampStatus**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmGetNextDTCwithLampStatus**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmGetNextFilteredDTC**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmGetNextFilteredRatio**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmGetNextFreezeFrame**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmGetNextSPNInFreezeFrame**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmGetNumberOfFilteredDTC**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmLampStatusType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmReadDiagnosticReadiness1**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmReadDiagnosticReadiness2**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmReadDiagnosticReadiness3**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmSetClearFilterType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmSetDTCFilter**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmSetFreezeFrameFilter**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmSetFreezeFrameFilterType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_J1939DcmSetRatioFilter**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_MonitorDataType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_MonitorStatusType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_PreInit**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_PrestoreFreezeFrame**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_RatioIdType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_ReadDataOfPID01**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_RepIUMPRDenRelease**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_RepIUMPRFaultDetect**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_ResetEventDebounceStatus**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_ResetEventStatus**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_ResetMonitorStatus**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_RestartOperationCycle**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SelectDTC**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SelectExtendedDataRecord**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SelectFreezeFrameData**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetComponentAvailable**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetCycleQualified**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetDataOfPID21**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetDataOfPID31**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetDataOfPID4D**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetDataOfPID4E**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetDTCFilter**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetDTCFilterByExtendedDataRecordNumber**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetDTCFilterByReadinessGroup**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetDTCSuppression**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetDTR**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetEnableCondition**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetEventAvailable**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetEventConfirmationThresholdCounter**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetEventDisabled**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetEventStatus**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetEventStatusWithMonitorData**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetFreezeFrameRecordFilter**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetIUMPRDenCondition**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetPtoStatus**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetStorageCondition**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_SetWIRStatus**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_Shutdown**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Dem_UdsStatusByteType**
-> 类型 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Det_ConfigType**
 > 类型 · 未翻译 · SWS_DefaultErrorTracer · R23-11
@@ -2136,46 +2136,46 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_DefaultErrorTracer · R23-11
 
 **Dio_ChannelGroupType**
-> 类型 · [dio_driver](io/dio_driver/index.md) · SWS_DIODriver · R23-11
+> 类型 · [AUTOSAR DIO Driver（数字输入输出驱动）](io/dio_driver/index.md) · SWS_DIODriver · R23-11
 
 **Dio_ChannelType**
-> 类型 · [dio_driver](io/dio_driver/index.md) · SWS_DIODriver · R23-11
+> 类型 · [AUTOSAR DIO Driver（数字输入输出驱动）](io/dio_driver/index.md) · SWS_DIODriver · R23-11
 
 **Dio_FlipChannel**
-> 函数 · [dio_driver](io/dio_driver/index.md) · SWS_DIODriver · R23-11
+> 函数 · [AUTOSAR DIO Driver（数字输入输出驱动）](io/dio_driver/index.md) · SWS_DIODriver · R23-11
 
 **Dio_GetVersionInfo**
-> 函数 · [dio_driver](io/dio_driver/index.md) · SWS_DIODriver · R23-11
+> 函数 · [AUTOSAR DIO Driver（数字输入输出驱动）](io/dio_driver/index.md) · SWS_DIODriver · R23-11
 
 **Dio_LevelType**
-> 类型 · [dio_driver](io/dio_driver/index.md) · SWS_DIODriver · R23-11
+> 类型 · [AUTOSAR DIO Driver（数字输入输出驱动）](io/dio_driver/index.md) · SWS_DIODriver · R23-11
 
 **Dio_MaskedWritePort**
-> 函数 · [dio_driver](io/dio_driver/index.md) · SWS_DIODriver · R23-11
+> 函数 · [AUTOSAR DIO Driver（数字输入输出驱动）](io/dio_driver/index.md) · SWS_DIODriver · R23-11
 
 **Dio_PortLevelType**
-> 类型 · [dio_driver](io/dio_driver/index.md) · SWS_DIODriver · R23-11
+> 类型 · [AUTOSAR DIO Driver（数字输入输出驱动）](io/dio_driver/index.md) · SWS_DIODriver · R23-11
 
 **Dio_PortType**
-> 类型 · [dio_driver](io/dio_driver/index.md) · SWS_DIODriver · R23-11
+> 类型 · [AUTOSAR DIO Driver（数字输入输出驱动）](io/dio_driver/index.md) · SWS_DIODriver · R23-11
 
 **Dio_ReadChannel**
-> 函数 · [dio_driver](io/dio_driver/index.md) · SWS_DIODriver · R23-11
+> 函数 · [AUTOSAR DIO Driver（数字输入输出驱动）](io/dio_driver/index.md) · SWS_DIODriver · R23-11
 
 **Dio_ReadChannelGroup**
-> 函数 · [dio_driver](io/dio_driver/index.md) · SWS_DIODriver · R23-11
+> 函数 · [AUTOSAR DIO Driver（数字输入输出驱动）](io/dio_driver/index.md) · SWS_DIODriver · R23-11
 
 **Dio_ReadPort**
-> 函数 · [dio_driver](io/dio_driver/index.md) · SWS_DIODriver · R23-11
+> 函数 · [AUTOSAR DIO Driver（数字输入输出驱动）](io/dio_driver/index.md) · SWS_DIODriver · R23-11
 
 **Dio_WriteChannel**
-> 函数 · [dio_driver](io/dio_driver/index.md) · SWS_DIODriver · R23-11
+> 函数 · [AUTOSAR DIO Driver（数字输入输出驱动）](io/dio_driver/index.md) · SWS_DIODriver · R23-11
 
 **Dio_WriteChannelGroup**
-> 函数 · [dio_driver](io/dio_driver/index.md) · SWS_DIODriver · R23-11
+> 函数 · [AUTOSAR DIO Driver（数字输入输出驱动）](io/dio_driver/index.md) · SWS_DIODriver · R23-11
 
 **Dio_WritePort**
-> 函数 · [dio_driver](io/dio_driver/index.md) · SWS_DIODriver · R23-11
+> 函数 · [AUTOSAR DIO Driver（数字输入输出驱动）](io/dio_driver/index.md) · SWS_DIODriver · R23-11
 
 **DisableInterruptSource**
 > 函数 · 未翻译 · SWS_OS · R23-11
@@ -2480,19 +2480,19 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_E2ELibrary · R23-11
 
 **E2EXf_ConfigType**
-> 类型 · [e2e_transformer](communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
+> 类型 · [E2E Transformer (E2E转换器)](communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
 
 **E2EXf_CSTransactionHandleType**
-> 类型 · [e2e_transformer](communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
+> 类型 · [E2E Transformer (E2E转换器)](communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
 
 **E2EXf_DeInit**
-> 函数 · [e2e_transformer](communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
+> 函数 · [E2E Transformer (E2E转换器)](communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
 
 **E2EXf_GetVersionInfo**
-> 函数 · [e2e_transformer](communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
+> 函数 · [E2E Transformer (E2E转换器)](communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
 
 **E2EXf_Init**
-> 函数 · [e2e_transformer](communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
+> 函数 · [E2E Transformer (E2E转换器)](communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
 
 **Ea_Cancel**
 > 函数 · 未翻译 · SWS_EEPROMAbstraction · R23-11
@@ -2522,106 +2522,106 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_EEPROMAbstraction · R23-11
 
 **EcuM_AbortWakeupAlarm**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_CheckWakeup**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_ClearWakeupEvent**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_ConfigType**
-> 类型 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_GetBootTarget**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_GetCurrentTime**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_GetExpiredWakeupEvents**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_GetLastShutdownTarget**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_GetPendingWakeupEvents**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_GetShutdownCause**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_GetShutdownTarget**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_GetValidatedWakeupEvents**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_GetVersionInfo**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_GetWakeupTime**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_GoDownHaltPoll**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_Init**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_ReleasePOST_RUN**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_ReleaseRUN**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_RequestPOST_RUN**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_RequestRUN**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_ResetType**
-> 类型 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_RunStatusType**
-> 类型 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_SelectBootTarget**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_SelectShutdownCause**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_SelectShutdownTarget**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_SetAbsWakeupAlarm**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_SetClock**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_SetRelWakeupAlarm**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_SetState**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_Shutdown**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_StartupTwo**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_StateType**
-> 类型 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_WakeupSourceType**
-> 类型 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **EcuM_WakeupStatusType**
-> 类型 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **Eep_AddressType**
 > 类型 · 未翻译 · SWS_EEPROMDriver · R23-11
@@ -2675,538 +2675,538 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_OS · R23-11
 
 **Eth_BufIdxType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_ConfigType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_CounterType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_DataType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_EnableEgressTimeStamp**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_FilterActionType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_FrameType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_GetControllerMode**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_GetCounterValues**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_GetCurrentTime**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_GetCurrentTimeTuple**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_GetEgressTimeStamp**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_GetIngressTimeStamp**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_GetPhcTime**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_GetPhysAddr**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_GetRxStats**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_GetSpiStatus**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_GetTxErrorCounterValues**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_GetTxStats**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_GetVersionInfo**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_ImmediateTransmit**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_Init**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_MacVlanType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_ModeType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_ProvideTxBuffer**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_RateDeviationStatusType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_RateDeviationType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_RateRatioType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_ReadMii**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_Receive**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_ReleaseRxBuffer**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_RxStatsType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_RxStatusType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_SetControllerMode**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_SetPhcCorrection**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_SetPhcTime**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_SetPhysAddr**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_SetPpsSignalMode**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_SpiStatusType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_StateType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_TimeIntDiffType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_TimeStampQualType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_TimeStampType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_Transmit**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_TxConfirmation**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_TxErrorCounterValuesType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_TxStatsType**
-> 类型 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_UpdatePhysAddrFilter**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **Eth_WriteMii**
-> 函数 · [ethernet_driver](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
 
 **EthIf_CheckWakeup**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_ClearSwitchPortSignalQuality**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_ClearTrcvSignalQuality**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_ConfigType**
-> 类型 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 类型 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_DeletePortMirrorConfiguration**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_EnableEgressTimeStamp**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_EthGetSpiStatus**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetAndResetMeasurementData**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetArlTable**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetBufCV2xPC5RxParams**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetBufCV2xPC5TxParams**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetBufWRxParams**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetBufWTxParams**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetCableDiagnosticsResult**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetChanCV2xPC5TxParams**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetChanRxParams**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetControllerMode**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetCtrlIdxList**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetCurrentTime**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetCurrentTimeTuple**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetEgressTimeStamp**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetIngressTimeStamp**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetPhcTime**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetPhyIdentifier**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetPhysAddr**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetPhyWakeupReason**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetPortCableDiagnosticsResult**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetPortMacAddr**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetPortMirrorState**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetRxMgmtObject**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetStreamHandleIdxStatistics**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetSwitchIdentifier**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetSwitchPortIdentifier**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetSwitchPortMode**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetSwitchPortSignalQuality**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetSwitchPortWakeupReason**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetTransceiverMode**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetTrcvSignalQuality**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetTxMgmtObject**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetVersionInfo**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_GetVlanId**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_ImmediateTransmit**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_Init**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_MacSecAddRxSa**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_MacSecAddRxSaNotification**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_MacSecAddTxSa**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_MacSecAddTxSaNotification**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_MacSecDeleteRxSa**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_MacSecDeleteTxSa**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_MacSecGetMacSecStats**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_MacSecGetMacSecStatsNotification**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_MacSecGetTxSaNextPn**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_MacSecInitRxSc**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_MacSecOperational**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_MacSecResetRxSc**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_MacSecSetControlledPortEnabled**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_MacSecUpdateRxSa**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_MacSecUpdateSecY**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_MacSecUpdateSecYNotification**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_MacSecUpdateTxSa**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_MeasurementIdxType**
-> 类型 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 类型 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_ProvideTxBuffer**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_ReadPortMirrorConfiguration**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_ReleaseRxBuffer**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_ResetConfiguration**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_RunCableDiagnostic**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_RunPortCableDiagnostic**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetBufCV2xPC5TxParams**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetBufWTxParams**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetChanRxParams**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetChanTxParams**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetControllerMode**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetForwardingMode**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetPhcCorrection**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetPhcTime**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetPhyLoopbackMode**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetPhysAddr**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetPhyTestMode**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetPhyTxMode**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetPortLoopbackMode**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetPortMirrorState**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetPortTestMode**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetPortTxMode**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetPpsSignalMode**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetRadioParams**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetStreamHandleIdxConfiguration**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SetSwitchMgmtInfo**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SignalQualityResultType**
-> 类型 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 类型 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_StartAllPorts**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_StoreConfiguration**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchEnableTimeStamping**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchGetCfgDataInfo**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchGetCfgDataRaw**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchMacSecAddRxSa**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchMacSecAddRxSaNotification**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchMacSecAddTxSa**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchMacSecAddTxSaNotification**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchMacSecDeleteRxSa**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchMacSecDeleteTxSa**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchMacSecGetMacSecStats**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchMacSecGetMacSecStatsNotification**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchMacSecGetTxSaNextPn**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchMacSecInitRxSc**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchMacSecOperational**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchMacSecResetRxSc**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchMacSecSetControlledPortEnabled**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchMacSecUpdateRxSa**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchMacSecUpdateSecY**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchMacSecUpdateSecYNotification**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchMacSecUpdateTxSa**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchPortGetBaudRate**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchPortGetCounterValues**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchPortGetDuplexMode**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchPortGetLinkState**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchPortGetMacLearningMode**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchPortGetMaxFIFOBufferFillLevel**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchPortGetRxStats**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchPortGetTxErrorCounterValues**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchPortGetTxStats**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchPortGroupIdxType**
-> 类型 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 类型 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_SwitchPortGroupRequestMode**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_TransceiverGetBaudRate**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_TransceiverGetDuplexMode**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_TransceiverGetLinkState**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_TransceiverGetMacMethod**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_Transmit**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_UpdatePhysAddrFilter**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_VerifyConfig**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthIf_WritePortMirrorConfiguration**
-> 函数 · [ethernet_interface](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
+> 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthSM_GetCurrentComMode**
 > 函数 · 未翻译 · SWS_EthernetStateManager · R23-11
@@ -3224,256 +3224,256 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_EthernetStateManager · R23-11
 
 **EthSwt_CheckWakeup**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_ConfigType**
-> 类型 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_DeletePortMirrorConfiguration**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_EnableVlan**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_EthRxFinishedIndication**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_EthRxProcessFrame**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_EthTxAdaptBufferLength**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_EthTxFinishedIndication**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_EthTxPrepareFrame**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_EthTxProcessFrame**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_ExtractStreamHandleIdx**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetArlTable**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetBaudRate**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetCfgDataInfo**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetCfgDataRaw**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetCounterValues**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetDuplexMode**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetLinkState**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetMacLearningMode**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetMaxFIFOBufferFillLevel**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetPortCableDiagnosticsResult**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetPortIdentifier**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetPortMacAddr**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetPortMirrorState**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetPortSignalQuality**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetRxMgmtObject**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetRxStats**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetStreamHandleIdxStatistics**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetSwitchIdentifier**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetSwitchPortMode**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetSwitchPortWakeupReason**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetSwitchReg**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetTxErrorCounterValues**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetTxMgmtObject**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetTxStats**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_GetVersionInfo**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_Init**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MacLearningType**
-> 类型 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MacSecAddRxSa**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MacSecAddRxSaNotification**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MacSecAddTxSa**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MacSecAddTxSaNotification**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MacSecDeleteRxSa**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MacSecDeleteTxSa**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MacSecGetMacSecStats**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MacSecGetMacSecStatsNotification**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MacSecGetTxSaNextPn**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MacSecInitRxSc**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MacSecResetRxSc**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MacSecSetControlledPortEnabled**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MacSecUpdateRxSa**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MacSecUpdateSecY**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MacSecUpdateSecYNotification**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MacSecUpdateTxSa**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_Mgmt_ObjectType**
-> 类型 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MgmtInfoType**
-> 类型 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MgmtObjectValidType**
-> 类型 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_MgmtOwner**
-> 类型 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_NvmSingleBlockCallback**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_PortEnableTimeStamp**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_PortLinkStateRequest**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_PortMirrorCfgType**
-> 类型 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_PortMirrorStateType**
-> 类型 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_ReadPortMirrorConfiguration**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_ReadTrcvRegister**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_ResetConfiguration**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_ReturnType**
-> 类型 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_RunPortCableDiagnostic**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_SetForwardingMode**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_SetMacLearningMode**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_SetMgmtInfo**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_SetPortLoopbackMode**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_SetPortMirrorState**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_SetPortTestMode**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_SetPortTxMode**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_SetStreamHandleIdxConfiguration**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_SetSwitchPortMode**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_SetSwitchReg**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_StartSwitchPortAutoNegotiation**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_StateType**
-> 类型 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_StoreConfiguration**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_VerifyConfig**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_WritePortMirrorConfiguration**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthSwt_WriteTrcvRegister**
-> 函数 · [ethernet_switch_driver](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthTrcv_BaudRateType**
 > 类型 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
@@ -3622,52 +3622,52 @@ title: "AUTOSAR API 清单（函数与类型）"
 ## F
 
 **Fee_Cancel**
-> 函数 · [flash_eeprom_emulation](memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
+> 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
 **Fee_EraseImmediateBlock**
-> 函数 · [flash_eeprom_emulation](memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
+> 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
 **Fee_GetJobResult**
-> 函数 · [flash_eeprom_emulation](memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
+> 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
 **Fee_GetStatus**
-> 函数 · [flash_eeprom_emulation](memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
+> 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
 **Fee_GetVersionInfo**
-> 函数 · [flash_eeprom_emulation](memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
+> 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
 **Fee_Init**
-> 函数 · [flash_eeprom_emulation](memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
+> 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
 **Fee_InvalidateBlock**
-> 函数 · [flash_eeprom_emulation](memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
+> 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
 **Fee_Read**
-> 函数 · [flash_eeprom_emulation](memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
+> 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
 **Fee_Write**
-> 函数 · [flash_eeprom_emulation](memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
+> 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
 **FiM_ConfigType**
-> 类型 · [function_inhibition_manager](system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11
+> 类型 · [AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11
 
 **FiM_DemInit**
-> 函数 · [function_inhibition_manager](system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11
+> 函数 · [AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11
 
 **FiM_DemTriggerOnMonitorStatus**
-> 函数 · [function_inhibition_manager](system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11
+> 函数 · [AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11
 
 **FiM_GetFunctionPermission**
-> 函数 · [function_inhibition_manager](system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11
+> 函数 · [AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11
 
 **FiM_GetVersionInfo**
-> 函数 · [function_inhibition_manager](system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11
+> 函数 · [AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11
 
 **FiM_Init**
-> 函数 · [function_inhibition_manager](system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11
+> 函数 · [AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11
 
 **FiM_MainFunction**
-> 函数 · [function_inhibition_manager](system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11
+> 函数 · [AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11
 
 **float32**
 > 类型 · 未翻译 · SWS_PlatformTypes · R23-11
@@ -3676,46 +3676,46 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_PlatformTypes · R23-11
 
 **Fls_AddressType**
-> 类型 · [flash_driver](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+> 类型 · [AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
 **Fls_BlankCheck**
-> 函数 · [flash_driver](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+> 函数 · [AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
 **Fls_Cancel**
-> 函数 · [flash_driver](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+> 函数 · [AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
 **Fls_Compare**
-> 函数 · [flash_driver](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+> 函数 · [AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
 **Fls_ConfigType**
-> 类型 · [flash_driver](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+> 类型 · [AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
 **Fls_Erase**
-> 函数 · [flash_driver](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+> 函数 · [AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
 **Fls_GetJobResult**
-> 函数 · [flash_driver](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+> 函数 · [AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
 **Fls_GetStatus**
-> 函数 · [flash_driver](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+> 函数 · [AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
 **Fls_GetVersionInfo**
-> 函数 · [flash_driver](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+> 函数 · [AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
 **Fls_Init**
-> 函数 · [flash_driver](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+> 函数 · [AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
 **Fls_LengthType**
-> 类型 · [flash_driver](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+> 类型 · [AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
 **Fls_Read**
-> 函数 · [flash_driver](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+> 函数 · [AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
 **Fls_SetMode**
-> 函数 · [flash_driver](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+> 函数 · [AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
 **Fls_Write**
-> 函数 · [flash_driver](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+> 函数 · [AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
 **FlsTst_Abort**
 > 函数 · 未翻译 · SWS_FlashTest · R23-11
@@ -4197,10 +4197,10 @@ title: "AUTOSAR API 清单（函数与类型）"
 ## G
 
 **General**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 > 函数 · 未翻译 · SWS_TcpIp · R23-11
 > 函数 · 未翻译 · SWS_KeyManager · R23-11
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **GetApplicationID**
 > 函数 · 未翻译 · SWS_OS · R23-11
@@ -4327,118 +4327,118 @@ title: "AUTOSAR API 清单（函数与类型）"
 ## I
 
 **Icu_ActivationType**
-> 类型 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 类型 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_ChannelType**
-> 类型 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 类型 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_CheckWakeup**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_ConfigType**
-> 类型 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 类型 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_DeInit**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_DisableEdgeCount**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_DisableEdgeDetection**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_DisableNotification**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_DisableNotificationAsync**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_DisableWakeup**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_DutyCycleType**
-> 类型 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 类型 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_EdgeNumberType**
-> 类型 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 类型 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_EnableEdgeCount**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_EnableEdgeDetection**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_EnableNotification**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_EnableNotificationAsync**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_EnableWakeup**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_GetDutyCycleValues**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_GetEdgeNumbers**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_GetInputState**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_GetTimeElapsed**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_GetTimestampIndex**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_GetVersionInfo**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_IndexType**
-> 类型 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 类型 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_Init**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_InputStateType**
-> 类型 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 类型 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_MeasurementModeType**
-> 类型 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 类型 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_ModeType**
-> 类型 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 类型 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_ResetEdgeCount**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_SetActivationCondition**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_SetMode**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_SignalMeasurementPropertyType**
-> 类型 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 类型 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_StartSignalMeasurement**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_StartTimestamp**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_StopSignalMeasurement**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_StopTimestamp**
-> 函数 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_TimestampBufferType**
-> 类型 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 类型 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **Icu_ValueType**
-> 类型 · [icu_driver](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+> 类型 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **IdleModeType**
 > 类型 · 未翻译 · SWS_OS · R23-11
@@ -4585,7 +4585,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_Firewall · R23-11
 
 **IoHwAb_GetVersionInfo**
-> 函数 · [iohwab](io/iohwab/index.md) · SWS_IOHardwareAbstraction · R23-11
+> 函数 · [AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md) · SWS_IOHardwareAbstraction · R23-11
 
 **IpduM_ConfigType**
 > 类型 · 未翻译 · SWS_IPDUMultiplexer · R23-11
@@ -4798,61 +4798,61 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_LargeDataCOM · R23-11
 
 **Lin_CheckWakeup**
-> 函数 · [lin_driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
+> 函数 · [AUTOSAR LIN Driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
 
 **Lin_ConfigType**
-> 类型 · [lin_driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
+> 类型 · [AUTOSAR LIN Driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
 
 **Lin_FrameCsModelType**
-> 类型 · [lin_driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
+> 类型 · [AUTOSAR LIN Driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
 
 **Lin_FrameDlType**
-> 类型 · [lin_driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
+> 类型 · [AUTOSAR LIN Driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
 
 **Lin_FramePidType**
-> 类型 · [lin_driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
+> 类型 · [AUTOSAR LIN Driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
 
 **Lin_FrameResponseType**
-> 类型 · [lin_driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
+> 类型 · [AUTOSAR LIN Driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
 
 **Lin_GetStatus**
-> 函数 · [lin_driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
+> 函数 · [AUTOSAR LIN Driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
 
 **Lin_GetVersionInfo**
-> 函数 · [lin_driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
+> 函数 · [AUTOSAR LIN Driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
 
 **Lin_GoToSleep**
-> 函数 · [lin_driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
+> 函数 · [AUTOSAR LIN Driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
 
 **Lin_GoToSleepInternal**
-> 函数 · [lin_driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
+> 函数 · [AUTOSAR LIN Driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
 
 **Lin_Init**
-> 函数 · [lin_driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
+> 函数 · [AUTOSAR LIN Driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
 
 **Lin_PduType**
-> 类型 · [lin_driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
+> 类型 · [AUTOSAR LIN Driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
 
 **Lin_SendFrame**
-> 函数 · [lin_driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
+> 函数 · [AUTOSAR LIN Driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
 
 **Lin_SlaveErrorType**
-> 类型 · [lin_driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
+> 类型 · [AUTOSAR LIN Driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
 
 **Lin_StatusType**
-> 类型 · [lin_driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
+> 类型 · [AUTOSAR LIN Driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
 
 **Lin_Wakeup**
-> 函数 · [lin_driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
+> 函数 · [AUTOSAR LIN Driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
 
 **Lin_WakeupInternal**
-> 函数 · [lin_driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
+> 函数 · [AUTOSAR LIN Driver](communication/lin_driver/index.md) · SWS_LINDriver · R23-11
 
 **LinIf_ConfigType**
-> 类型 · [lin_interface](communication/lin_interface/index.md) · SWS_LINInterface · R23-11
+> 类型 · [AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md) · SWS_LINInterface · R23-11
 
 **LinIf_SchHandleType**
-> 类型 · [lin_interface](communication/lin_interface/index.md) · SWS_LINInterface · R23-11
+> 类型 · [AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md) · SWS_LINInterface · R23-11
 
 **LinSM_ConfigType**
 > 类型 · 未翻译 · SWS_LINStateManager · R23-11
@@ -4861,10 +4861,10 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_LINStateManager · R23-11
 
 **LinTp_ConfigType**
-> 类型 · [lin_interface](communication/lin_interface/index.md) · SWS_LINInterface · R23-11
+> 类型 · [AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md) · SWS_LINInterface · R23-11
 
 **LinTp_Mode**
-> 类型 · [lin_interface](communication/lin_interface/index.md) · SWS_LINInterface · R23-11
+> 类型 · [AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md) · SWS_LINInterface · R23-11
 
 **LinTrcv_CheckWakeup**
 > 函数 · 未翻译 · SWS_LINTransceiverDriver · R23-11
@@ -5034,154 +5034,154 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_MemoryDriver · R23-11
 
 **MemAcc_ActivateMem**
-> 函数 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 函数 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_AddressAreaIdType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_AddressType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_BlankCheck**
-> 函数 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 函数 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_Cancel**
-> 函数 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 函数 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_Compare**
-> 函数 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 函数 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_ConfigType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_DataType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_DeactivateMem**
-> 函数 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 函数 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_DeInit**
-> 函数 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 函数 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_Erase**
-> 函数 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 函数 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_GetJobInfo**
-> 函数 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 函数 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_GetJobResult**
-> 函数 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 函数 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_GetJobStatus**
-> 函数 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 函数 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_GetMemoryInfo**
-> 函数 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 函数 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_GetProcessedLength**
-> 函数 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 函数 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_GetVersionInfo**
-> 函数 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 函数 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_HwIdType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_HwSpecificService**
-> 函数 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 函数 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_Init**
-> 函数 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 函数 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_JobInfoType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_JobResultType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_JobStatusType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_JobType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_LengthType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemAddressType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemBinaryHeaderType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemBlankCheckFuncType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemConfigType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemDataType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemDeInitFuncType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemEraseFuncType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemGetJobResultFuncType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemHwServiceIdType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemHwSpecificServiceFuncType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemInitFuncType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemInstanceIdType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemJobResultType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemLengthType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemMainFuncType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemoryInfoType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemPropagateErrorFuncType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemReadFuncType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemResumeFuncType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemSuspendFuncType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_MemWriteFuncType**
-> 类型 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 类型 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_Read**
-> 函数 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 函数 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_ReleaseLock**
-> 函数 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 函数 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_RequestLock**
-> 函数 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 函数 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemAcc_Write**
-> 函数 · [memory_access](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+> 函数 · [AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
 **MemIf_Cancel**
 > 函数 · 未翻译 · SWS_MemoryAbstractionInterface · R23-11
@@ -5220,76 +5220,76 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_OS · R23-11
 
 **Mirror_AddCanMaskFilter**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_AddCanRangeFilter**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_AddFlexRayFilter**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_AddLinMaskFilter**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_AddLinRangeFilter**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_ConfigType**
-> 类型 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 类型 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_DeInit**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_GetDestNetwork**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_GetNetworkHandle**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_GetNetworkId**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_GetNetworkType**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_GetStaticFilterState**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_GetVersionInfo**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_Init**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **MIRROR_INVALID_NETWORK**
-> 类型 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 类型 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_IsMirrorActive**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_IsSourceNetworkStarted**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_Offline**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_RemoveFilter**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_SetStaticFilterState**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_StartSourceNetwork**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_StopSourceNetwork**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_SwitchDestNetwork**
-> 函数 · [mirror](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Miscellaneous**
-> 函数 · [ecu_state_manager](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **Mka_ConfidentialityOffsetType**
 > 类型 · 未翻译 · SWS_MACsecKeyAgreement · R23-11
@@ -5444,73 +5444,73 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_NetworkManagementInterface · R23-11
 
 **NvM_CancelJobs**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_CancelWriteAll**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_ConfigType**
-> 类型 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 类型 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_EraseNvBlock**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_FirstInitAll**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_GetDataIndex**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_GetErrorStatus**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_GetVersionInfo**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_Init**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_InvalidateNvBlock**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_MultiBlockRequestType**
-> 类型 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 类型 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_ReadAll**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_ReadBlock**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_ReadPRAMBlock**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_RestoreBlockDefaults**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_RestorePRAMBlockDefaults**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_SetBlockProtection**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_SetDataIndex**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_SetRamBlockStatus**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_ValidateAll**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_WriteAll**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_WriteBlock**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **NvM_WritePRAMBlock**
-> 函数 · [nvram_manager](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 ## O
 
@@ -5521,58 +5521,58 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_OS · R23-11
 
 **Ocu_ChannelType**
-> 类型 · [ocu_driver](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
+> 类型 · [AUTOSAR OCU Driver（输出比较单元驱动）](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
 **Ocu_ConfigType**
-> 类型 · [ocu_driver](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
+> 类型 · [AUTOSAR OCU Driver（输出比较单元驱动）](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
 **Ocu_DeInit**
-> 函数 · [ocu_driver](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
+> 函数 · [AUTOSAR OCU Driver（输出比较单元驱动）](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
 **Ocu_DisableNotification**
-> 函数 · [ocu_driver](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
+> 函数 · [AUTOSAR OCU Driver（输出比较单元驱动）](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
 **Ocu_EnableNotification**
-> 函数 · [ocu_driver](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
+> 函数 · [AUTOSAR OCU Driver（输出比较单元驱动）](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
 **Ocu_GetCounter**
-> 函数 · [ocu_driver](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
+> 函数 · [AUTOSAR OCU Driver（输出比较单元驱动）](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
 **Ocu_GetVersionInfo**
-> 函数 · [ocu_driver](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
+> 函数 · [AUTOSAR OCU Driver（输出比较单元驱动）](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
 **Ocu_Init**
-> 函数 · [ocu_driver](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
+> 函数 · [AUTOSAR OCU Driver（输出比较单元驱动）](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
 **Ocu_PinActionType**
-> 类型 · [ocu_driver](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
+> 类型 · [AUTOSAR OCU Driver（输出比较单元驱动）](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
 **Ocu_PinStateType**
-> 类型 · [ocu_driver](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
+> 类型 · [AUTOSAR OCU Driver（输出比较单元驱动）](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
 **Ocu_ReturnType**
-> 类型 · [ocu_driver](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
+> 类型 · [AUTOSAR OCU Driver（输出比较单元驱动）](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
 **Ocu_SetAbsoluteThreshold**
-> 函数 · [ocu_driver](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
+> 函数 · [AUTOSAR OCU Driver（输出比较单元驱动）](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
 **Ocu_SetPinAction**
-> 函数 · [ocu_driver](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
+> 函数 · [AUTOSAR OCU Driver（输出比较单元驱动）](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
 **Ocu_SetPinState**
-> 函数 · [ocu_driver](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
+> 函数 · [AUTOSAR OCU Driver（输出比较单元驱动）](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
 **Ocu_SetRelativeThreshold**
-> 函数 · [ocu_driver](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
+> 函数 · [AUTOSAR OCU Driver（输出比较单元驱动）](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
 **Ocu_StartChannel**
-> 函数 · [ocu_driver](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
+> 函数 · [AUTOSAR OCU Driver（输出比较单元驱动）](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
 **Ocu_StopChannel**
-> 函数 · [ocu_driver](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
+> 函数 · [AUTOSAR OCU Driver（输出比较单元驱动）](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
 **Ocu_ValueType**
-> 类型 · [ocu_driver](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
+> 类型 · [AUTOSAR OCU Driver（输出比较单元驱动）](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
 ## P
 
@@ -5619,31 +5619,31 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
 
 **Port_ConfigType**
-> 类型 · [port_driver](io/port_driver/index.md) · SWS_PortDriver · R23-11
+> 类型 · [AUTOSAR Port Driver（端口驱动）](io/port_driver/index.md) · SWS_PortDriver · R23-11
 
 **Port_GetVersionInfo**
-> 函数 · [port_driver](io/port_driver/index.md) · SWS_PortDriver · R23-11
+> 函数 · [AUTOSAR Port Driver（端口驱动）](io/port_driver/index.md) · SWS_PortDriver · R23-11
 
 **Port_Init**
-> 函数 · [port_driver](io/port_driver/index.md) · SWS_PortDriver · R23-11
+> 函数 · [AUTOSAR Port Driver（端口驱动）](io/port_driver/index.md) · SWS_PortDriver · R23-11
 
 **Port_PinDirectionType**
-> 类型 · [port_driver](io/port_driver/index.md) · SWS_PortDriver · R23-11
+> 类型 · [AUTOSAR Port Driver（端口驱动）](io/port_driver/index.md) · SWS_PortDriver · R23-11
 
 **Port_PinModeType**
-> 类型 · [port_driver](io/port_driver/index.md) · SWS_PortDriver · R23-11
+> 类型 · [AUTOSAR Port Driver（端口驱动）](io/port_driver/index.md) · SWS_PortDriver · R23-11
 
 **Port_PinType**
-> 类型 · [port_driver](io/port_driver/index.md) · SWS_PortDriver · R23-11
+> 类型 · [AUTOSAR Port Driver（端口驱动）](io/port_driver/index.md) · SWS_PortDriver · R23-11
 
 **Port_RefreshPortDirection**
-> 函数 · [port_driver](io/port_driver/index.md) · SWS_PortDriver · R23-11
+> 函数 · [AUTOSAR Port Driver（端口驱动）](io/port_driver/index.md) · SWS_PortDriver · R23-11
 
 **Port_SetPinDirection**
-> 函数 · [port_driver](io/port_driver/index.md) · SWS_PortDriver · R23-11
+> 函数 · [AUTOSAR Port Driver（端口驱动）](io/port_driver/index.md) · SWS_PortDriver · R23-11
 
 **Port_SetPinMode**
-> 函数 · [port_driver](io/port_driver/index.md) · SWS_PortDriver · R23-11
+> 函数 · [AUTOSAR Port Driver（端口驱动）](io/port_driver/index.md) · SWS_PortDriver · R23-11
 
 **ProtectionReturnType**
 > 类型 · 未翻译 · SWS_OS · R23-11
@@ -5652,64 +5652,64 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_SoftwareClusterConnection · R23-11
 
 **Pwm_ChannelType**
-> 类型 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 类型 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 **Pwm_ConfigType**
-> 类型 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 类型 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 **Pwm_DeInit**
-> 函数 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 函数 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 **Pwm_DisableNotification**
-> 函数 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 函数 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 **Pwm_EdgeNotificationType**
-> 类型 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 类型 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 **Pwm_EnableNotification**
-> 函数 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 函数 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 **Pwm_GetCurrentPowerState**
-> 函数 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 函数 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 **Pwm_GetOutputState**
-> 函数 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 函数 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 **Pwm_GetTargetPowerState**
-> 函数 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 函数 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 **Pwm_GetVersionInfo**
-> 函数 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 函数 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 **Pwm_Init**
-> 函数 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 函数 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 **Pwm_OutputStateType**
-> 类型 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 类型 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 **Pwm_PeriodType**
-> 类型 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 类型 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 **Pwm_PowerStateRequestResultType**
-> 类型 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 类型 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 **Pwm_PowerStateType**
-> 类型 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 类型 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 **Pwm_PreparePowerState**
-> 函数 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 函数 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 **Pwm_SetDutyCycle**
-> 函数 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 函数 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 **Pwm_SetOutputToIdle**
-> 函数 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 函数 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 **Pwm_SetPeriodAndDuty**
-> 函数 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 函数 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 **Pwm_SetPowerState**
-> 函数 · [pwm_driver](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
+> 函数 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 ## R
 
@@ -5723,7 +5723,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_OS · R23-11
 
 **Reporting**
-> 函数 · [diagnostic_event_manager](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **RestartType**
 > 类型 · 未翻译 · SWS_OS · R23-11
@@ -5743,67 +5743,67 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_OS · R23-11
 
 **Sd_AclPolicyCheck**
-> 函数 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_AclUpdate**
-> 函数 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ClientServiceCurrentStateType**
-> 类型 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ClientServiceSetState**
-> 函数 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ClientServiceSetStateType**
-> 类型 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ConfigOptionStringType**
-> 类型 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ConfigType**
-> 类型 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ConsumedEventGroupCurrentStateType**
-> 类型 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ConsumedEventGroupSetState**
-> 函数 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ConsumedEventGroupSetStateType**
-> 类型 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_EventHandlerCurrentStateType**
-> 类型 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_GetVersionInfo**
-> 函数 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_Init**
-> 函数 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_LocalIpAddrAssignmentChg**
-> 函数 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ServerServiceSetState**
-> 函数 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ServerServiceSetStateType**
-> 类型 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ServiceAclUpdateType**
-> 类型 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ServiceGroupIdType**
-> 类型 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ServiceGroupStart**
-> 函数 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ServiceGroupStop**
-> 函数 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_SoConModeChg**
-> 函数 · [service_discovery](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **SecOC_ConfigType**
 > 类型 · 未翻译 · SWS_SecureOnboardCommunication · R23-11
@@ -5872,106 +5872,106 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_PlatformTypes · R23-11
 
 **SoAd_CloseSoCon**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_ConfigType**
-> 类型 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 类型 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_DisableRouting**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_DisableSpecificRouting**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_EnableRouting**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_EnableSpecificRouting**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_GetAndResetMeasurementData**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_GetLocalAddr**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_GetPhysAddr**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_GetRemoteAddr**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_GetSoConId**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_GetSoConMode**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_GetVersionInfo**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_IfRoutingGroupTransmit**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_IfSpecificRoutingGroupTransmit**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_IfTransmit**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_Init**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_IsConnectionReady**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_MeasurementIdxType**
-> 类型 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 类型 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_OpenSoCon**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_ReadDhcpHostNameOption**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_ReleaseIpAddrAssignment**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_ReleaseRemoteAddr**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_RequestIpAddrAssignment**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_RoutingGroupIdType**
-> 类型 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 类型 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_SetRemoteAddr**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_SetUniqueRemoteAddr**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_SoConIdType**
-> 类型 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 类型 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_SoConModeType**
-> 类型 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 类型 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_TpCancelReceive**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_TpCancelTransmit**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_TpChangeParameter**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_TpTransmit**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_WriteDhcpHostNameOption**
-> 函数 · [SoAd](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 
 **SomeIpTp_GetVersionInfo**
 > 函数 · 未翻译 · SWS_SOMEIPTransportProtocol · R23-11
@@ -6169,25 +6169,25 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
 
 **Std_ExtractProtocolHeaderFieldsType**
-> 类型 · [platform_types](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_MessageResultType**
-> 类型 · [platform_types](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_MessageTypeType**
-> 类型 · [platform_types](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_ReturnType**
-> 类型 · [platform_types](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_TransformerError**
-> 类型 · [platform_types](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_TransformerForwardCode**
-> 类型 · [platform_types](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_VersionInfoType**
-> 类型 · [platform_types](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
 
 **StopScheduleTable**
 > 函数 · 未翻译 · SWS_OS · R23-11
@@ -6387,76 +6387,76 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
 
 **Tm_BusyWait1us16bit**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_BusyWait1us24bit**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_BusyWait1us32bit**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_GetTimeSpan100us32bit**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_GetTimeSpan1us16bit**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_GetTimeSpan1us24bit**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_GetTimeSpan1us32bit**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_GetVersionInfo**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_PredefTimer100us32bitType**
-> 类型 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 类型 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_PredefTimer1us16bitType**
-> 类型 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 类型 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_PredefTimer1us24bitType**
-> 类型 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 类型 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_PredefTimer1us32bitType**
-> 类型 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 类型 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_ResetTimer100us32bit**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_ResetTimer1us16bit**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_ResetTimer1us24bit**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_ResetTimer1us32bit**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_ShiftTimer100us32bit**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_ShiftTimer1us16bit**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_ShiftTimer1us24bit**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_ShiftTimer1us32bit**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_SyncTimer100us32bit**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_SyncTimer1us16bit**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_SyncTimer1us24bit**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **Tm_SyncTimer1us32bit**
-> 函数 · [time_service](system_services/time_service/index.md) · SWS_TimeService · R23-11
+> 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **TpDataStateType**
 > 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
@@ -6482,76 +6482,76 @@ title: "AUTOSAR API 清单（函数与类型）"
 ## U
 
 **UdpNm_ActivateTxPnShutdownMsg**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_CheckRemoteSleepIndication**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_ConfigType**
-> 类型 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 类型 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_DeactivateTxPnShutdownMsg**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_DisableCommunication**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_EnableCommunication**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_GetLocalNodeIdentifier**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_GetNodeIdentifier**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_GetPduData**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_GetState**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_GetUserData**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_GetVersionInfo**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_Init**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_NetworkRelease**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_NetworkRequest**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_PassiveStartUp**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_PduPositionType**
-> 类型 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 类型 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_PnLearningRequest**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_RepeatMessageIndication**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_RepeatMessageRequest**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_RequestBusSynchronization**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_SetSleepReadyBit**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_SetUserData**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **UdpNm_Transmit**
-> 函数 · [udp_network_management](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
+> 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **uint16**
 > 类型 · 未翻译 · SWS_PlatformTypes · R23-11
