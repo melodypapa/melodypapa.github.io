@@ -4,7 +4,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 本页汇总各 AUTOSAR 模块文章第 2 章「缩略语」中的全部术语，按字母排序，便于查找。**由脚本自动生成，请勿手工编辑**——修改应在对应文章的第 2 章进行，然后重新生成（`python .agents/skills/autosar-translate/scripts/gen_glossary.py`）。同一术语在不同模块中的释义若有差异，分条列出并标注来源。
 
-共 **256** 个术语，来自 **24** 篇文章。
+共 **255** 个术语，来自 **24** 篇文章。
 
 ## A
 
@@ -36,8 +36,8 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ADC Module**
 > ADC的基础软件模块ADC驱动模块（**ADC Driver**） — 来源：[adc_driver](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 
-**ADC Result Buffer**
-> 也称为**ADC Streaming Buffer**或者**ADC Stream Buffer**。**ADC**驱动程序的用户必须为每个组提供一个缓冲区。如果选择流式访问模式（**streaming access mode**），此缓冲区可以保存同一组通道的多个样本。如果选择单一访问模式（**Single Access Mode**），每个组通道的一个样本将保存在缓冲区中。 — 来源：[adc_driver](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
+**ADC Result Buffer**（**ADC Streaming Buffer**，**ADC Stream Buffer**）
+> **ADC**驱动程序的用户必须为每个组提供一个缓冲区。如果选择流式访问模式（**streaming access mode**），此缓冲区可以保存同一组通道的多个样本。如果选择单一访问模式（**Single Access Mode**），每个组通道的一个样本将保存在缓冲区中。 — 来源：[adc_driver](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 
 **Address Area**
 > 地址区（Address Area）是指逻辑地址空间中连续的存储区域。通常多个物理存储扇区组合到一个逻辑地址区域。 — 来源：[memory_access](memory/memory_access/index.md)（SWS_MemoryAccess · R23-11）
@@ -46,6 +46,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > Authenticated Encryption with Associated Data，具有关联数据的经过身份验证的加密。 — 来源：[crypto_service_manager](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager · R23-11）
 
 **API**
+> 应用编程接口（**Application Programming Interface**） — 来源：[adc_driver](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 > 应用程序接口（**Application Programming Interface**） — 来源：[operating_system](system_services/operating_system/index.md)（SWS_OperatingSystem · R23-11）
 
 **AR**
@@ -136,8 +137,8 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Compare threshold**
 > 每次计数器增加一个单位时与计数器内容相比较的目标值。 — 来源：[ocu_driver](io/ocu_driver/index.md)（SWS_OCUDriver · R23-11）
 
-**Continuous Conversion Mode**
-> 连续转换模式是指**ADC**通道组的转换在软件**API**调用后连续执行，结果写入分配的结果缓冲区。转换本身是自动运行的（硬件/中断控制）。连续转换的停止可以通过软件**API**调用来实现。 — 来源：[adc_driver](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
+**Conversion Mode**
+> One-Shot：**ADC**通道组的转换在触发后执行一次，结果写入所分配的结果缓冲区。触发可以是软件**API**调用或硬件事件。Continuous：**ADC**通道组的转换在软件**API**调用（启动）后连续执行，结果写入所分配的结果缓冲区。转换本身自动运行（由硬件/中断控制）。连续转换可通过软件**API**调用（停止）停止。 — 来源：[adc_driver](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 
 **Conversion Time**
 > 转换时间是指将采样的模拟值转换为数值所需的时间。 — 来源：[adc_driver](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
@@ -289,7 +290,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **HW**
 > Hardware：硬件 — 来源：[crypto_driver](crypto/crypto_driver/index.md)（SWS_CryptoDriver · R23-11）
 > Hardware，硬件 — 来源：[crypto_service_manager](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager · R23-11）
-> 硬件（**Hardware**） — 来源：[operating_system](system_services/operating_system/index.md)（SWS_OperatingSystem · R23-11）
+> 硬件（**Hardware**） — 来源：[adc_driver](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）、[operating_system](system_services/operating_system/index.md)（SWS_OperatingSystem · R23-11）
 
 ## I
 
@@ -471,9 +472,6 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 **OIL**
 > OSEK 实现语言（**OSEK Implementation Language**） — 来源：[operating_system](system_services/operating_system/index.md)（SWS_OperatingSystem · R23-11）
-
-**One-Shot Conversion Mode**
-> One-Shot转换模式是指**ADC**通道组的转换在触发后执行一次，并将结果写入分配的结果缓冲区。触发可以是软件**API**调用或硬件事件。 — 来源：[adc_driver](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 
 **OS**
 > 操作系统（**Operating System**） — 来源：[operating_system](system_services/operating_system/index.md)（SWS_OperatingSystem · R23-11）
@@ -682,7 +680,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SW**
 > Software：软件 — 来源：[crypto_driver](crypto/crypto_driver/index.md)（SWS_CryptoDriver · R23-11）
 > Software，软件 — 来源：[crypto_service_manager](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager · R23-11）
-> 软件（**Software**） — 来源：[operating_system](system_services/operating_system/index.md)（SWS_OperatingSystem · R23-11）
+> 软件（**Software**） — 来源：[adc_driver](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）、[operating_system](system_services/operating_system/index.md)（SWS_OperatingSystem · R23-11）
 
 **SW-C**
 > 软件组件（**Software Component**） — 来源：[nv_data_handling_guideline](memory/nv_data_handling_guideline/index.md)（EXP_NVDataHandlingGuideline · R23-11）

@@ -14,17 +14,26 @@ release: R23-11
 
 ## 2. 缩略语
 
-**DET**
-> 默认错误跟踪器（**Default Error Tracer**），实现报告开发错误的模块。
-
 **DEM**
 > 诊断事件管理器（**Diagnostic Event Manager**）。
+
+**DET**
+> 默认错误跟踪器（**Default Error Tracer**），实现报告开发错误的模块。
 
 **ADC**
 > 模数转换器（**Analogue Digital Converter**）
 
 **MCU**
 > 微控制器单元（**Microcontroller Unit**）
+
+**API**
+> 应用编程接口（**Application Programming Interface**）
+
+**HW**
+> 硬件（**Hardware**）
+
+**SW**
+> 软件（**Software**）
 
 **ADC HW Unit**
 > 微控制器的输入电子设备，包括执行模拟到数字转换所需的所有部件。
@@ -38,8 +47,8 @@ release: R23-11
 **ADC Channel Group**
 > **ADC**通道组是指由一组**ADC**通道链接到同一个**ADC**硬件单元（**ADC HW Unit**）。例如：一个采样保持器（**Sample & Hold**）和一个**A/D**转换器。整个组的转换由一个触发源触发。
 
-**ADC Result Buffer**
-> 也称为**ADC Streaming Buffer**或者**ADC Stream Buffer**。**ADC**驱动程序的用户必须为每个组提供一个缓冲区。如果选择流式访问模式（**streaming access mode**），此缓冲区可以保存同一组通道的多个样本。如果选择单一访问模式（**Single Access Mode**），每个组通道的一个样本将保存在缓冲区中。
+**ADC Result Buffer**（**ADC Streaming Buffer**，**ADC Stream Buffer**）
+> **ADC**驱动程序的用户必须为每个组提供一个缓冲区。如果选择流式访问模式（**streaming access mode**），此缓冲区可以保存同一组通道的多个样本。如果选择单一访问模式（**Single Access Mode**），每个组通道的一个样本将保存在缓冲区中。
 
 **Software Trigger**
 > 软件触发是一个软件**API**调用，用于启动转换一个**ADC**通道组或一系列连续**ADC**通道组转换的。
@@ -47,11 +56,8 @@ release: R23-11
 **Hardware Trigger**
 > 硬件触发是**ADC**内部触发信号，用于启动ADC通道组的一次转换。**ADC**硬件触发在ADC硬件内部生成（例如：基于**ADC**定时器或触发沿信号）。触发硬件是强耦合或者直接集成在**ADC**的硬件中。当检测到硬件触发后，无需软件即可启动**ADC**通道组转换。**注意：**即使**ADC**硬件不支持硬件触发，也可以通过软件触发结合**GPT/ICU**驱动程序来实现类似的行为。（例如：在GPT定时器通知函数中，启动软件触发的**ADC**通道组的转换）
 
-**One-Shot Conversion Mode**
-> One-Shot转换模式是指**ADC**通道组的转换在触发后执行一次，并将结果写入分配的结果缓冲区。触发可以是软件**API**调用或硬件事件。
-
-**Continuous Conversion Mode**
-> 连续转换模式是指**ADC**通道组的转换在软件**API**调用后连续执行，结果写入分配的结果缓冲区。转换本身是自动运行的（硬件/中断控制）。连续转换的停止可以通过软件**API**调用来实现。
+**Conversion Mode**
+> One-Shot：**ADC**通道组的转换在触发后执行一次，结果写入所分配的结果缓冲区。触发可以是软件**API**调用或硬件事件。Continuous：**ADC**通道组的转换在软件**API**调用（启动）后连续执行，结果写入所分配的结果缓冲区。转换本身自动运行（由硬件/中断控制）。连续转换可通过软件**API**调用（停止）停止。
 
 **Sampling Time, Sample Time**
 > 采样时间是指对模拟值进行采样的时间（例如：加载电容器，……）
@@ -66,48 +72,12 @@ release: R23-11
 
 ### 3.1. 输入文件
 
-[1] General Requirements on Basic Software Modules
-> AUTOSAR_SRS_BSWGeneral.pdf
-
-[2] General Requirements on SPAL
-> AUTOSAR_SRS_SPALGeneral.pdf
-
-[3] Specification of Standard Types
-> AUTOSAR_SWS_StandardTypes.pdf
-
-[4] List of Basic Software Modules
-> AUTOSAR_TR_BSWModuleList.pdf
-
-[5] Specification of Diagnostic Event Manager
-> AUTOSAR_SWS_DiagnosticEventManager.pdf
-
-[6] Specification of Default Error Tracer
-> AUTOSAR_SWS_DefaultErrorTracer.pdf
-
-[7] Requirements on ADC Driver
-> AUTOSAR_SRS_ADCDriver.pdf
-
-[8] Specification of ECU Configuration
-> AUTOSAR_TPS_ECUConfiguration.pdf
-
-[9] Layered Software Architecture
-> AUTOSAR_EXP_LayeredSoftwareArchitecture.pdf
-
-[10] Specification of ECU State Manager
-> AUTOSAR_SWS_ECUStateManager.pdf
-
-[11] Specification of I/O Hardware Abstraction
-> AUTOSAR_SWS_IOHardwareAbstraction.pdf
-
-[12] Basic Software Module Description Template
-> AUTOSAR_TPS_BSWModuleDescriptionTemplate.pdf
-
-[13] General Specification of Basic Software Modules
-> AUTOSAR_SWS_BSWGeneral.pdf
+[1] General Specification of Basic Software Modules
+> AUTOSAR_CP_SWS_BSWGeneral
 
 ### 3.2. 相关规范
 
-AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于**ADC**驱动程序。因此，规范基础软件模块的通用规范 [13] 应被视为**ADC**驱动器的附加和必需规范。
+AUTOSAR 提供了基础软件模块的通用规范 [1] ，此文档也适用于**ADC**驱动程序。因此，规范基础软件模块的通用规范 [1] 应被视为**ADC**驱动器的附加和必需规范。
 
 ## 4. 约束和假设
 
@@ -115,7 +85,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [13] ，此文档也适用于
 
 仅当**MCAL**驱动程序拥有完整的底层硬件外围设备（即：硬件外围设备不被其他 **MCAL**模块访问）时，电源状态控制**API**才可被实现。
 
-### 4.2. 适用车型域
+### 4.2. 汽车域的适用性
 
 无限制。
 
@@ -700,6 +670,28 @@ void Adc_StopGroupConversion ( Adc_GroupType Group )
 
 在软件触发模式下，函数**Adc_StopGroupConversion**应在启用排队且队列中存有启动/重启请求时，从队列中移除该组的启动/重启请求。
 
+函数**Adc_StopGroupConversion**应自动为所请求的组禁用组通知。
+
+**注意：** 隐式停止的组在调用 **Adc_StopGroupConversion** 之前不得禁用组通知。
+
+函数**Adc_StopGroupConversion**应将组状态设置为 **ADC_IDLE**。
+
+**ADC**模块的环境应仅对配置为软件触发源的组调用**Adc_StopGroupConversion**函数。
+
+函数**Adc_StopGroupConversion**应可通过配置参数 **AdcEnableStartStopGroupApi** 在预编译时配置为开/关。
+
+若启用了**ADC**模块的开发错误检测：若组**ID**不存在，函数**Adc_StopGroupConversion**应上报开发错误 **ADC_E_PARAM_GROUP** 并返回，不执行任何动作。
+
+若启用了**ADC**模块的开发错误检测：若该组的触发源配置为硬件，函数**Adc_StopGroupConversion**应上报开发错误 **ADC_E_WRONG_TRIGG_SRC** 并返回，不执行任何动作。
+
+若调用时该组处于 **ADC_IDLE** 状态，函数**Adc_StopGroupConversion**应上报运行时错误 **ADC_E_IDLE**。
+
+**注意：** 对于隐式停止的组（转换模式为单次转换的组，或使用线性流式缓冲模式的组），其状态保持为 **ADC_STREAM_COMPLETED**，直至通过 **Adc_ReadGroup** 或 **Adc_GetStreamLastPointer** **API** 函数访问结果，或直至通过 **Adc_StopGroupConversion** **API** 显式停止该组。
+
+若启用了**ADC**模块的开发错误检测：若在初始化模块之前调用，函数**Adc_StopGroupConversion**应上报开发错误 **ADC_E_UNINIT** 并返回，不执行任何动作。
+
+**注意：** 所有通过 **Adc_StartGroupConversion** 启动的组，在再次启动之前也应通过 **Adc_StopGroupConversion** 停止，以将组状态重置为 **ADC_IDLE**。该规则的例外是因所选转换模式（线性缓冲且使用流式访问模式，或单次转换模式且使用单一访问模式）而被隐式停止的组——这些组在状态为 **ADC_STREAM_COMPLETED** 时也可再次启动。
+
 #### 7.3.6. Adc_ReadGroup
 
 **说明**: 读取所请求组最近一轮已完成转换的组转换结果，并将通道值从**DataBufferPtr**地址开始存储。组通道值按通道号升序存储（与配置了流式访问时结果缓冲区的存储布局相反）。可通过**Adc.h**获得。本服务为同步调用，可重入。参数 Group（in）：所请求**ADC**通道组的数字**ID**。参数 DataBufferPtr（out）：所选组所有通道的**ADC**结果存储在指针所指向的数据缓冲区中。返回值：**Std_ReturnType**，**E_OK**表示结果可用并已写入数据缓冲区；**E_NOT_OK**表示无可用结果或发生开发错误。
@@ -726,9 +718,37 @@ void Adc_EnableHardwareTrigger ( Adc_GroupType Group )
 
 函数**Adc_EnableHardwareTrigger**应为所请求**ADC**通道组启用硬件触发。
 
-若调用时组不处于**ADC_IDLE**状态，函数**Adc_EnableHardwareTrigger**应上报运行时错误**ADC_E_BUSY**。
+**注意：** **Adc_EnableHardwareTrigger**仅可用于由**ADC**硬件控制的**ADC**内部触发源。
 
-若调用时模块尚未初始化，函数**Adc_EnableHardwareTrigger**应上报开发错误**ADC_E_UNINIT**。
+触发源为硬件的组在通过**Adc_EnableHardwareTrigger**启用触发后，应在每次发生触发事件时执行该组的通道转换。
+
+函数**Adc_EnableHardwareTrigger**应复位内部的组结果缓冲区指针，即调用**Adc_EnableHardwareTrigger**后，转换结果存储始终从通过 **Adc_SetupResultBuffer** 配置的结果缓冲区基地址开始。
+
+**ADC**模块的环境应保证同一**HW Unit**上不发生并发转换（不同硬件触发同时发生）。
+
+**注意：** 之所以要求上述约束，是因为**ADC**模块在同一时刻只能处理每个**HW Unit**的一个组转换请求。发生并发**HW**转换请求时，由**HW**优先级机制控制转换顺序。
+
+**ADC**模块的环境应仅对配置为硬件触发模式的组（见 **AdcGroupTriggSrc**）调用**Adc_EnableHardwareTrigger**函数。
+
+函数**Adc_EnableHardwareTrigger**应可通过配置参数 **AdcHwTriggerApi** 在预编译时配置为开/关。
+
+若优先级机制被禁用且排队被禁用：当存在触发源为软件且状态不处于 **ADC_IDLE** 的组时，函数**Adc_EnableHardwareTrigger**应上报运行时错误 **ADC_E_BUSY**。
+
+若该组的**HW**触发已处于启用状态，函数**Adc_EnableHardwareTrigger**应上报运行时错误 **ADC_E_BUSY**。
+
+若已启用的**HW**触发数量已达可用上限（取决于器件与实现），函数**Adc_EnableHardwareTrigger**应上报运行时错误 **ADC_E_BUSY**。
+
+若启用了**ADC**模块的开发错误检测：若通道组**ID**无效，函数**Adc_EnableHardwareTrigger**应上报开发错误 **ADC_E_PARAM_GROUP** 并返回，不执行任何动作。
+
+若启用了**ADC**模块的开发错误检测：若该组配置为软件**API**触发模式，函数**Adc_EnableHardwareTrigger**应上报开发错误 **ADC_E_WRONG_TRIGG_SRC** 并返回，不执行任何动作。
+
+若启用了**ADC**模块的开发错误检测：若**HW**组被错误地配置为连续转换模式，函数**Adc_EnableHardwareTrigger**应上报开发错误 **ADC_E_WRONG_CONV_MODE** 并返回，不执行任何动作。
+
+**注意：** 配置为连续转换模式的软件组应改为上报开发错误 **ADC_E_WRONG_TRIGG_SRC**。
+
+若启用了**ADC**模块的开发错误检测：若在初始化驱动之前调用，函数**Adc_EnableHardwareTrigger**应上报开发错误 **ADC_E_UNINIT** 并返回，不执行任何动作。
+
+若启用了**ADC**模块的开发错误检测：若在通过 **Adc_SetupResultBuffer** 函数初始化结果缓冲区指针之前调用，函数**Adc_EnableHardwareTrigger**应上报开发错误 **ADC_E_BUFFER_UNINIT**。
 
 #### 7.3.8. Adc_DisableHardwareTrigger
 
@@ -740,9 +760,31 @@ void Adc_DisableHardwareTrigger ( Adc_GroupType Group )
 
 函数**Adc_DisableHardwareTrigger**应为所请求**ADC**通道组禁用硬件触发。
 
-若调用时组不处于**ADC_IDLE**状态，函数**Adc_DisableHardwareTrigger**应上报运行时错误**ADC_E_BUSY**。
+函数**Adc_DisableHardwareTrigger**应在启用排队时，从队列中移除所请求**ADC**通道组的任何启动/重启请求。
 
-若调用时模块尚未初始化，函数**Adc_DisableHardwareTrigger**应上报开发错误**ADC_E_UNINIT**。
+函数**Adc_DisableHardwareTrigger**应中止正在进行的转换（如适用，即硬件支持）。
+
+若已启用，函数**Adc_DisableHardwareTrigger**应为所请求的组禁用通知机制。
+
+函数**Adc_DisableHardwareTrigger**应将组状态设置为 **ADC_IDLE**。
+
+**ADC**模块的环境应仅对配置为硬件触发模式的组（见 **AdcGroupTriggSrc**）调用**Adc_DisableHardwareTrigger**函数。
+
+函数**Adc_DisableHardwareTrigger**应可通过配置参数 **AdcHwTriggerApi** 在预编译时配置为开/关。
+
+若启用了**ADC**模块的开发错误检测：若通道组**ID**不存在，函数**Adc_DisableHardwareTrigger**应上报开发错误 **ADC_E_PARAM_GROUP** 并返回，不执行任何动作。
+
+若启用了**ADC**模块的开发错误检测：若该组配置为软件**API**触发模式，函数**Adc_DisableHardwareTrigger**应上报开发错误 **ADC_E_WRONG_TRIGG_SRC** 并返回，不执行任何动作。
+
+若启用了**ADC**模块的开发错误检测：若**HW**组被错误地配置为连续转换模式，函数**Adc_DisableHardwareTrigger**应上报开发错误 **ADC_E_WRONG_CONV_MODE** 并返回，不执行任何动作。
+
+**注意：** 配置为连续转换模式的软件组应改为上报开发错误 **ADC_E_WRONG_TRIGG_SRC**。
+
+若该组未处于启用状态（此前未调用**Adc_EnableHardwareTrigger**），函数**Adc_DisableHardwareTrigger**应上报运行时错误 **ADC_E_IDLE**。
+
+若启用了**ADC**模块的开发错误检测：若在初始化**ADC**模块之前调用，**Adc_DisableHardwareTrigger**应上报开发错误 **ADC_E_UNINIT** 并返回，不执行任何动作。
+
+**注意：** 所有通过 **Adc_EnableHardwareTrigger** 启用的组，在再次启用之前也应通过 **Adc_DisableHardwareTrigger** 禁用，即使这些组因所选转换模式（线性缓冲且使用流式访问模式）而被隐式停止。
 
 #### 7.3.9. Adc_EnableGroupNotification
 
@@ -754,7 +796,13 @@ void Adc_EnableGroupNotification ( Adc_GroupType Group )
 
 函数**Adc_EnableGroupNotification**应为所请求**ADC**通道组启用通知机制。
 
-若调用时模块尚未初始化，函数**Adc_EnableGroupNotification**应上报开发错误**ADC_E_UNINIT**。
+函数**Adc_EnableGroupNotification**应可通过配置参数 **AdcGrpNotifCapability** 在预编译时配置为开/关。
+
+若启用了**ADC**模块的开发错误检测：若通道组**ID**不存在，函数**Adc_EnableGroupNotification**应上报开发错误 **ADC_E_PARAM_GROUP** 并返回，不执行任何动作。
+
+若启用了**ADC**模块的开发错误检测：若组通知函数指针为 **NULL**，函数**Adc_EnableGroupNotification**应上报开发错误 **ADC_E_NOTIF_CAPABILITY** 并返回，不执行任何动作。
+
+若启用了**ADC**模块的开发错误检测：若在初始化**ADC**模块之前调用，**Adc_EnableGroupNotification**应上报开发错误 **ADC_E_UNINIT** 并返回，不执行任何动作。
 
 #### 7.3.10. Adc_DisableGroupNotification
 
@@ -778,7 +826,54 @@ Adc_StatusType Adc_GetGroupStatus ( Adc_GroupType Group )
 
 函数**Adc_GetGroupStatus**应返回所请求**ADC**通道组的转换状态。
 
-若调用时模块尚未初始化，函数**Adc_GetGroupStatus**应上报开发错误**ADC_E_UNINIT**并返回**ADC_IDLE**。
+函数**Adc_GetGroupStatus**应返回 **ADC_IDLE**：
+
+* 在所请求组的转换开始之前调用 **Adc_GetGroupStatus**。
+* 对于触发源为软件的组：在通过 **Adc_StopGroupConversion** 停止转换之后调用 **Adc_GetGroupStatus**。
+* 在连续组转换模式且使用线性流式访问模式时：在调用 **Adc_GetStreamLastPointer** 之后调用 **Adc_GetGroupStatus**（调用 **Adc_GetStreamLastPointer** 时组处于 **ADC_STREAM_COMPLETED** 状态）。
+* 在连续组转换模式且使用线性流式访问模式时：在调用 **Adc_ReadGroup** 之后调用 **Adc_GetGroupStatus**（调用 **Adc_ReadGroup** 时组处于 **ADC_STREAM_COMPLETED** 状态）。
+* 在单次转换（one-shot）软件触发模式下：在调用 **Adc_GetStreamLastPointer** 之后调用 **Adc_GetGroupStatus**。
+* 在单次转换（one-shot）软件触发模式下：在调用 **Adc_ReadGroup** 之后调用 **Adc_GetGroupStatus**。
+* 对于触发源为硬件的组：在调用 **Adc_DisableHardwareTrigger** 之后调用 **Adc_GetGroupStatus**。
+* 对于触发源为硬件且使用线性流式访问模式的组：在调用 **Adc_GetStreamLastPointer** 之后调用 **Adc_GetGroupStatus**（调用 **Adc_GetStreamLastPointer** 时组处于 **ADC_STREAM_COMPLETED** 状态）。
+* 对于触发源为硬件且使用线性流式访问模式的组：在调用 **Adc_ReadGroup** 之后调用 **Adc_GetGroupStatus**（调用 **Adc_ReadGroup** 时组处于 **ADC_STREAM_COMPLETED** 状态）。
+
+函数**Adc_GetGroupStatus**应返回 **ADC_BUSY**：
+
+* 在所请求组的第一轮转换仍在进行中时调用（连续转换模式）。
+* 在为具有**HW**触发源的组启用触发之后。
+* 在为具有软件触发源的组调用 **Adc_StartGroupConversion** 之后。
+* 在连续组转换模式且使用单一访问模式时：在调用 **Adc_GetStreamLastPointer** 之后调用 **Adc_GetGroupStatus**。
+* 在连续组转换模式且使用单一访问模式时：在调用 **Adc_ReadGroup** 之后调用 **Adc_GetGroupStatus**。
+* 在连续组转换模式且使用循环流式访问模式时：在调用 **Adc_GetStreamLastPointer** 之后调用 **Adc_GetGroupStatus**。
+* 在连续组转换模式且使用循环流式访问模式时：在调用 **Adc_ReadGroup** 之后调用 **Adc_GetGroupStatus**。
+* 在连续组转换模式且使用线性流式访问模式时：在调用 **Adc_GetStreamLastPointer** 之后调用 **Adc_GetGroupStatus**（调用 **Adc_GetStreamLastPointer** 时组处于 **ADC_COMPLETED** 状态）。
+* 在连续组转换模式且使用线性流式访问模式时：在调用 **Adc_ReadGroup** 之后调用 **Adc_GetGroupStatus**（调用 **Adc_ReadGroup** 时组处于 **ADC_COMPLETED** 状态）。
+* 在单次转换（one-shot）**HW**转换模式且使用单一访问模式时：在调用 **Adc_GetStreamLastPointer** 之后调用 **Adc_GetGroupStatus**。
+* 在单次转换（one-shot）**HW**转换模式且使用单一访问模式时：在调用 **Adc_ReadGroup** 之后调用 **Adc_GetGroupStatus**。
+* 在单次转换（one-shot）**HW**转换模式且使用循环流式访问模式时：在调用 **Adc_GetStreamLastPointer** 之后调用 **Adc_GetGroupStatus**。
+* 在单次转换（one-shot）**HW**转换模式且使用循环流式访问模式时：在调用 **Adc_ReadGroup** 之后调用 **Adc_GetGroupStatus**。
+* 在单次转换（one-shot）**HW**转换模式且使用线性流式访问模式时：在调用 **Adc_GetStreamLastPointer** 之后调用 **Adc_GetGroupStatus**（调用 **Adc_GetStreamLastPointer** 时组处于 **ADC_COMPLETED** 状态）。
+* 在单次转换（one-shot）**HW**转换模式且使用线性流式访问模式时：在调用 **Adc_ReadGroup** 之后调用 **Adc_GetGroupStatus**（调用 **Adc_ReadGroup** 时组处于 **ADC_COMPLETED** 状态）。
+
+函数**Adc_GetGroupStatus**应返回 **ADC_COMPLETED**：
+
+* 在所请求组的一轮转换（非最后一轮）完成之后调用。
+
+函数**Adc_GetGroupStatus**应返回 **ADC_STREAM_COMPLETED**：
+
+* 在单一访问模式下，一轮转换完成之后调用。
+* 在流式访问模式下，所请求组的转换轮数全部完成（即流式缓冲区被完全填满）之后调用。
+
+函数**Adc_GetGroupStatus**应通过使用原子指令对状态数据提供原子访问。
+
+为保证返回的值一致，假定**ADC**组转换总是由软件在开始状态轮询之前成功启动（对于**HW**组则为成功启用）。
+
+若启用了**ADC**模块的开发错误检测：若通道组**ID**不存在，函数**Adc_GetGroupStatus**应上报开发错误 **ADC_E_PARAM_GROUP** 并返回 **ADC_IDLE**，不执行任何动作。
+
+若启用了**ADC**模块的开发错误检测：若在初始化**ADC**模块之前调用，函数**Adc_GetGroupStatus**应上报开发错误 **ADC_E_UNINIT** 并返回 **ADC_IDLE**，不执行任何动作。
+
+对于被中止/挂起的组，排队中该组的状态保持与中止/挂起之前相同。
 
 #### 7.3.12. Adc_GetStreamLastPointer
 
@@ -788,9 +883,31 @@ Adc_StatusType Adc_GetGroupStatus ( Adc_GroupType Group )
 Adc_StreamNumSampleType Adc_GetStreamLastPointer ( Adc_GroupType Group, Adc_ValueGroupType** PtrToSamplePtr )
 ```
 
-函数**Adc_GetStreamLastPointer**应返回每通道的有效采样数。
+函数**Adc_GetStreamLastPointer**应将作为参数传入的指针（**PtrToSamplePtr**）指向**ADC**结果缓冲区中最后一轮已完成转换的首个组通道的最新结果。
 
-若调用时模块尚未初始化，函数**Adc_GetStreamLastPointer**应上报开发错误**ADC_E_UNINIT**。
+**ADC**驱动存储在**ADC**结果缓冲区中的所有值均不再缩放，并应按照配置参数 **ADC_RESULT_ALIGNMENT** 的设置进行对齐。
+
+函数**Adc_GetStreamLastPointer**应返回存储在**ADC**结果缓冲区中的每通道有效采样数。
+
+**注意：** 当组处于 **ADC_COMPLETED** 或 **ADC_STREAM_COMPLETED** 状态时，有效采样位于**ADC**结果缓冲区中。在 **ADC_BUSY** 或 **ADC_IDLE** 状态下返回数值 0。
+
+**注意：** 对于配置为单一访问模式的组，若结果缓冲区中存储了有效采样，则返回值为 1。
+
+若调用时组状态为 **ADC_BUSY**（该组的转换正在进行中），函数**Adc_GetStreamLastPointer**应将作为参数传入的指针（**PtrToSamplePtr**）设置为 **NULL** 并返回 0。
+
+**ADC**模块的环境应通过检查 **Adc_GetGroupStatus** 的返回值来保证已读取数据的一致性。
+
+若调用时组状态为 **ADC_STREAM_COMPLETED**，则函数**Adc_GetStreamLastPointer**应触发向 **ADC_BUSY** 的状态转换——适用于连续转换模式（单一访问模式或循环流式缓冲区模式），以及处于单一访问模式或循环流式访问模式的硬件触发组。
+
+若调用时组状态为 **ADC_STREAM_COMPLETED**，则函数**Adc_GetStreamLastPointer**应触发向 **ADC_IDLE** 的状态转换——适用于自动停止转换的软件转换模式（线性访问模式下的流式缓冲区，或单一访问模式下的单次转换模式），以及与线性流式访问模式组合使用的硬件触发转换模式。
+
+若调用时组状态为 **ADC_COMPLETED**，则函数**Adc_GetStreamLastPointer**应触发向 **ADC_BUSY** 的状态转换。
+
+若调用时组状态为 **ADC_IDLE** 且该组的转换尚未开始（无先前转换的结果可用），函数**Adc_GetStreamLastPointer**应上报运行时错误 **ADC_E_IDLE**。
+
+若启用了**ADC**模块的开发错误检测：若组**ID**不存在，函数**Adc_GetStreamLastPointer**应上报开发错误 **ADC_E_PARAM_GROUP**，将作为参数传入的指针（**PtrToSamplePtr**）设置为 **NULL** 并返回 0，不执行任何进一步动作。
+
+若启用了**ADC**模块的开发错误检测：若在初始化驱动之前调用，函数**Adc_GetStreamLastPointer**应上报开发错误 **ADC_E_UNINIT**，将作为参数传入的指针（**PtrToSamplePtr**）设置为 **NULL** 并返回 0，不执行任何进一步动作。
 
 #### 7.3.13. Adc_GetVersionInfo
 
@@ -812,11 +929,27 @@ Std_ReturnType Adc_SetPowerState ( Adc_PowerStateRequestResultType* Result )
 
 此**API**配置**Adc**模块，使其进入已准备的电源状态（从预定义的一组已配置电源状态中选择）。
 
-若目标电源状态与当前电源状态相同，则不执行任何动作，**API**立即以**E_OK**结果返回。前提条件的责任由环境承担。
+此**API**配置硬件以进入先前已准备的电源状态。所有为使该转换成为可能而采取的前期动作（例如将所有通道设置为 **IDLE** 状态、注销所有通知等）必须已由负责的软件组件（例如 **IoHwAbs**）完成。该**API**不得执行前期的、隐式的电源状态更改（即：若从当前状态无法达到所请求的电源状态，则不执行任何中间电源状态更改，并拒绝该请求）。
+
+若目标电源状态与当前电源状态相同，则不执行任何动作，**API**立即以**E_OK**结果返回。
+
+若请求的是正常电源状态，该**API**应引用 **Adc_Init** 所使用的相同容器中的必要参数。
+
+**注意：** 正常（即完整）电源模式不得使用单独的容器或硬编码数据，以避免初始化阶段所用的参数与电源状态切换期间所用的参数之间出现不一致。
+
+对于其他电源状态，在此**API**的上下文中仅应执行与电源状态切换相关的重新配置（即：该**API**不能用于向**Adc**模块施加全新的配置）。任何与电源状态切换无严格关联的其他重新配置都不应发生。
+
+该**API**应引用与所请求电源状态相关的配置容器，以导出该状态的某些特定特性（例如对电源状态的支持）。
 
 若激活了开发错误报告：在硬件单元初始化之前调用本**API**，应上报**DET**错误**ADC_E_UNINIT**。
 
+该**API**应上报运行时错误 **ADC_E_NOT_DISENGAGED**——当一个或多个**HW**通道（在适用时）处于非 **IDLE** 状态（或类似的非运行状态），和/或**HW**模块的通道仍注册有通知时。
+
 若激活了开发错误报告：以不支持的电源状态调用本**API**或外设完全不支持低功耗状态时，应上报**DET**错误**ADC_E_POWER_STATE_NOT_SUPPORTED**。
+
+该**API**应上报运行时错误 **ADC_E_TRANSITION_NOT_POSSIBLE**——当所请求的电源状态无法从当前电源状态直接达到时。
+
+若激活了开发错误报告：若**HW**单元此前未通过 **Adc_PreparePowerState()** **API**针对目标电源状态进行准备，该**API**应上报**DET**错误**ADC_E_PERIPHERAL_NOT_PREPARED**。
 
 若无法从当前电源状态直接到达请求的电源状态，应上报运行时错误**ADC_E_TRANSITION_NOT_POSSIBLE**。到达目标电源状态所需的所有异步操作均可在**Adc_Main_PowerTransitionManager**的上下文中于后台执行。
 
@@ -830,6 +963,8 @@ Std_ReturnType Adc_GetCurrentPowerState ( Adc_PowerStateType* CurrentPowerState,
 
 此**API**返回**ADC**硬件单元的当前电源状态。
 
+若激活了开发错误报告：在硬件单元初始化之前调用本**API**，应上报**DET**错误**ADC_E_UNINIT**。
+
 #### 7.3.16. Adc_GetTargetPowerState
 
 **说明**: 此**API**返回**ADC**硬件单元的目标电源状态。可通过**Adc.h**获得。本服务为同步调用，不可重入。参数 TargetPowerState（inout）：**ADC**硬件单元的目标电源模式通过此参数返回。参数 Result（out）：若**API**返回**E_OK**：**ADC_SERVICE_ACCEPTED**表示已返回目标电源模式；若**API**返回**E_NOT_OK**：**ADC_NOT_INIT**表示**ADC**模块未初始化。返回值：**Std_ReturnType**，**E_OK**表示模式可读取；**E_NOT_OK**表示服务被拒绝。
@@ -838,7 +973,9 @@ Std_ReturnType Adc_GetCurrentPowerState ( Adc_PowerStateType* CurrentPowerState,
 Std_ReturnType Adc_GetTargetPowerState ( Adc_PowerStateType* TargetPowerState, Adc_PowerStateRequestResultType* Result )
 ```
 
-此**API**返回**ADC**硬件单元的目标电源状态。
+此**API**返回**ADC**硬件单元的目标电源状态。若未正在进行状态切换，该目标电源状态应与当前电源状态一致。除**HW**故障情况外，该**API**视为始终成功。
+
+若激活了开发错误报告：在硬件单元初始化之前调用本**API**，应上报**DET**错误**ADC_E_UNINIT**。
 
 #### 7.3.17. Adc_PreparePowerState
 
@@ -848,11 +985,17 @@ Std_ReturnType Adc_GetTargetPowerState ( Adc_PowerStateType* TargetPowerState, A
 Std_ReturnType Adc_PreparePowerState ( Adc_PowerStateType PowerState, Adc_PowerStateRequestResultType* Result )
 ```
 
-此**API**启动使硬件模块能够进入目标电源状态所需的所有动作。
+此**API**启动使硬件模块能够进入目标电源状态所需的所有动作。外设能否运行取决于电源状态与**HW**特性。这些属性应被集成人员了解，是否使用该外设由其负责。
 
 若目标电源状态与当前电源状态相同，则不执行任何动作，**API**立即以**E_OK**结果返回。前提条件的责任由环境承担。
 
 若激活了开发错误报告：在硬件单元初始化之前调用本**API**，应上报**DET**错误**ADC_E_UNINIT**。
+
+若激活了开发错误报告：请求了不支持的电源状态或外设完全不支持低功耗状态时，应上报**DET**错误**ADC_E_POWER_STATE_NOT_SUPPORTED**。
+
+该**API**应上报运行时错误 **ADC_E_TRANSITION_NOT_POSSIBLE**——当所请求的电源状态无法从当前电源状态直接达到时。
+
+为达到目标电源状态所需的所有异步操作，均可在 **Adc_Main_PowerTransitionManager** 的上下文中于后台执行。
 
 若激活了开发错误报告：以不支持的电源状态调用本**API**或外设完全不支持低功耗状态时，应上报**DET**错误**ADC_E_POWER_STATE_NOT_SUPPORTED**。
 
@@ -937,6 +1080,792 @@ void IoHwAb_Adc_NotifyReadyForPowerState<#Mode> ( void )
 ```
 
 若配置参数**AdcPowerStateAsynchTransitionMode**设置为**TRUE**，**ADC**驱动应在**Adc_PreparePowerState**准备过程完成时，向注册的用户发出此通知。
+
+## 8. 时序图
+
+### 8.1. ADC 驱动初始化
+
+![Figure9.1.png](Figure9.1.png)
+
+### 8.2. ADC 驱动反初始化
+
+![Figure9.2.png](Figure9.2.png)
+
+### 8.3. 软件触发的单次转换（无通知）
+
+![Figure9.3.png](Figure9.3.png)
+
+### 8.4. 软件触发的连续转换（有通知）
+
+![Figure9.4.png](Figure9.4.png)
+
+### 8.5. 硬件触发的单次转换（有通知）
+
+![Figure9.5.png](Figure9.5.png)
+
+### 8.6. 硬件触发的单次转换——线性流式
+
+![Figure9.6.png](Figure9.6.png)
+
+### 8.7. 无优先级机制——无排队
+
+![Figure9.7.png](Figure9.7.png)
+
+### 8.8. 无优先级机制——软件排队
+
+![Figure9.8.png](Figure9.8.png)
+
+### 8.9. 硬件/软件优先级机制——软件排队
+
+![Figure9.9.png](Figure9.9.png)
+
+### 8.10. 硬件优先级机制——硬件排队
+
+![Figure9.10.png](Figure9.10.png)
+
+### 8.11. 硬件/软件优先级机制——硬件/软件排队
+
+![Figure9.11.png](Figure9.11.png)
+
+## 9. 配置规范
+
+总体而言，本章定义配置参数及其到**容器**（container）的聚类组织。为支持本规范，第 9.1 章描述相关基础知识，并规定参数规范所应使用的模板（表格）。我们有意将第 9.1 章保留在规范中，以保证可理解性。
+
+第 9.2 章规定**ADC**模块的结构（容器）与参数。
+
+第 9.3 章规定**ADC**模块的发布信息。
+
+第 9.4 章规定符号名的配置。
+
+### 9.1. 如何阅读本章
+
+详情请参阅 SWS_BSWGeneral 中的第 10.1 章 "Introduction to configuration specification"（配置规范导论）。
+
+### 9.2. 容器与配置参数
+
+以下各节汇总所有配置参数。各参数的详细含义见第 6 章和第 7 章。
+
+**ADC** 模块应拒绝实现所不支持的、带有分区映射的配置。
+
+#### 9.2.1. Adc
+
+| SWS 条目 |  |
+|---|---|
+| 模块名称 | Adc |
+| 描述 | **Adc**（**Analog Digital Conversion**，模数转换）模块的配置。 |
+| Post-Build 变体支持 | true |
+| 支持的配置变体 | VARIANT-POST-BUILD, VARIANT-PRE-COMPILE |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| AdcConfigSet | 1 | 此容器包含 AUTOSAR **Adc** 模块的配置参数与子容器。 |
+| AdcGeneral | 1 | **ADC** 驱动软件模块的通用配置（参数）。 |
+| AdcPublishedInformation | 1 | 不属于“通用”发布信息的附加发布参数。注意：这些参数具有“PUBLISHED-INFORMATION”配置类设置，因为它们是发布信息。 |
+
+#### 9.2.2. AdcGeneral
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | AdcGeneral |
+| 父容器 | Adc |
+| 描述 | **ADC** 驱动软件模块的通用配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcDeInitApi |
+| 父容器 | AdcGeneral |
+| 描述 | 在代码中添加/移除 Adc_DeInit() 服务（true：可以使用 Adc_DeInit()；false：不可使用 Adc_DeInit()）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcDevErrorDetect |
+| 父容器 | AdcGeneral |
+| 描述 | 开启或关闭开发错误检测与通知（true：启用检测与通知；false：禁用检测与通知）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcEnableLimitCheck |
+| 父容器 | AdcGeneral |
+| 描述 | 启用或禁用 **ADC** 驱动中的限值检查功能。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcEnableQueuing |
+| 父容器 | AdcGeneral |
+| 描述 | 确定在优先级机制被禁用时排队机制是否生效。**注意：** 若启用优先级机制，则排队机制始终生效，参数 **ADC_ENABLE_QUEUING** 不被评估（true：启用；false：禁用）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local dependency: AdcPriorityImplementation：仅对优先级实现 **ADC_PRIORITY_NONE** 评估该参数。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcEnableStartStopGroupApi |
+| 父容器 | AdcGeneral |
+| 描述 | 在代码中添加/移除 Adc_StartGroupConversion() 和 Adc_StopGroupConversion() 服务（true：可以使用这些服务；false：不可使用这些服务）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcGrpNotifCapability |
+| 父容器 | AdcGeneral |
+| 描述 | 确定运行时是否可用组通知机制（用于启用和禁用通知的函数）（true：启用；false：禁用）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcHwTriggerApi |
+| 父容器 | AdcGeneral |
+| 描述 | 在代码中添加/移除 Adc_EnableHardwareTrigger() 和 Adc_DisableHardwareTrigger() 服务（true：可以使用这些服务；false：不可使用这些服务）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcLowPowerStatesSupport |
+| 父容器 | AdcGeneral |
+| 描述 | 在代码中添加/移除所有与电源状态管理相关的 **API**（Adc_SetPowerState、Adc_GetCurrentPowerState、Adc_GetTargetPowerState、Adc_PreparePowerState、Adc_Main_PowerTransitionManager），指示**硬件**是否提供低功耗状态管理。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcPowerStateAsynchTransitionMode |
+| 父容器 | AdcGeneral |
+| 描述 | 启用/禁用 **ADC** 驱动对异步电源状态切换的支持。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local dependency: 仅当参数 AdcLowPowerStatesSupport 设置为 true 时才可配置该参数。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcPriorityImplementation |
+| 父容器 | AdcGeneral |
+| 描述 | 确定是否提供用于对转换请求进行优先化的优先级机制，若提供，则确定优先化机制的类型。该选择适用于触发源为软件和触发源为硬件的组。可选择两种优先化机制。硬件优先化机制（AdcPriorityHw）使用 **ADC** 硬件特性来对软件转换请求以及触发源为硬件的组的硬件触发信号进行优先化。硬件与软件混合优先化机制（AdcPriorityHwSw）使用 **ADC** 硬件特性对触发源为硬件的组的 **ADC** 硬件触发进行优先化，并对触发源为软件的组使用软件实现的优先化机制。软件触发组的组优先级通常配置为低于硬件触发组的组优先级。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | ADC_PRIORITY_HW：仅提供硬件优先化机制；ADC_PRIORITY_HW_SW：提供硬件与软件优先化机制；ADC_PRIORITY_NONE：不提供优先化机制 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcReadGroupApi |
+| 父容器 | AdcGeneral |
+| 描述 | 在代码中添加/移除 Adc_ReadGroup() 服务（true：可以使用 Adc_ReadGroup()；false：不可使用 Adc_ReadGroup()）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcResultAlignment |
+| 父容器 | AdcGeneral |
+| 描述 | **ADC** 原始结果在 **ADC** 结果缓冲区中的对齐方式（左对齐/右对齐）。实现类型：**Adc_ResultAlignmentType** |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | ADC_ALIGN_LEFT：左对齐；ADC_ALIGN_RIGHT：右对齐 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcVersionInfoApi |
+| 父容器 | AdcGeneral |
+| 描述 | 在代码中添加/移除 Adc_GetVersionInfo() 服务（true：可以使用 Adc_GetVersionInfo()；false：不可使用 Adc_GetVersionInfo()）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcEcucPartitionRef |
+| 父容器 | AdcGeneral |
+| 描述 | 将 **ADC** 驱动映射到零个或多个 ECUC 分区，以使驱动 API 在相应分区中可用。 |
+| 多重性 | 0..* |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcKernelEcucPartitionRef |
+| 父容器 | AdcGeneral |
+| 描述 | 将 **ADC** 内核映射到零个或一个 ECUC 分区，以将驱动内核分配到某个特定内核。所引用的 ECUC 分区是 **ADC** 驱动所映射到的 ECUC 分区的子集。 |
+| 多重性 | 0..1 |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| AdcPowerStateConfig | 0..* | 每个实例定义一个电源状态，以及达到该电源状态时所要调用的回调。 |
+
+AdcKernelEcucPartitionRef 所引用的 ECUC 分区应是 AdcEcucPartitionRef 所引用的 ECUC 分区的子集。
+
+若 AdcEcucPartitionRef 引用一个或多个 ECUC 分区，则 AdcKernelEcucPartitionRef 的多重性应为一，并且也应引用这些 ECUC 分区之一。
+
+#### 9.2.3. AdcPowerStateConfig
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | AdcPowerStateConfig |
+| 父容器 | AdcGeneral |
+| 描述 | 每个实例定义一个电源状态，以及达到该电源状态时所要调用的回调。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcPowerState |
+| 父容器 | AdcPowerStateConfig |
+| 描述 | 每个实例描述 **ADC** **硬件**支持的一种不同电源状态。它应由**硬件**供应商定义，并由 **ADC** 驱动用于引用将 **ADC** **硬件**模块置于所引用电源状态的特定**硬件**配置。至少应始终配置与完整电源状态相对应的电源模式。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名） |
+| 范围 | 0 .. 18446744073709551615 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local dependency: 仅当参数 AdcLowPowerStatesSupport 设置为 true 时才可配置该参数。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcPowerStateReadyCbkRef |
+| 父容器 | AdcPowerStateConfig |
+| 描述 | 每个实例包含对在 CDD 或 IoHwAbs 组件中定义的电源模式回调的引用。 |
+| 多重性 | 1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local dependency: 仅当参数 AdcLowPowerStatesSupport 设置为 true 时才可配置该参数。 |
+
+无包含的容器。
+
+#### 9.2.4. AdcConfigSet
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | AdcConfigSet |
+| 父容器 | Adc |
+| 描述 | 此容器包含 AUTOSAR **Adc** 模块的配置参数与子容器。 |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| AdcHwUnit | 1..* | 此容器包含取决于通道分组的驱动配置（参数）。此容器可包含标准模块定义中未定义的**硬件**特定参数。这些参数必须在供应商特定模块定义中添加。 |
+
+#### 9.2.5. AdcGroup
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | AdcGroup |
+| 父容器 | AdcHwUnit |
+| 描述 | 此容器包含组配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcGroupAccessMode |
+| 父容器 | AdcGroup |
+| 描述 | 组转换结果的访问模式类型。实现类型：**Adc_GroupAccessModeType** |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | ADC_ACCESS_MODE_SINGLE：单一值访问模式；ADC_ACCESS_MODE_STREAMING：流式访问模式 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local dependency: AdcGroupTriggSrc / AdcGroupConvMode：流式访问模式不适用于软件触发源的单次转换模式。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcGroupConversionMode |
+| 父容器 | AdcGroup |
+| 描述 | 驱动支持的转换模式类型。实现类型：**Adc_GroupConvModeType** |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | ADC_CONV_MODE_CONTINUOUS：**ADC** 通道组的转换在软件 **API** 调用（启动）后连续执行。转换本身自动运行（无需额外的软件或硬件触发）；ADC_CONV_MODE_ONESHOT：**ADC** 通道组的转换在触发后执行一次。 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local dependency: AdcGroupTriggSrc：连续转换模式仅适用于软件触发的组。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcGroupId |
+| 父容器 | AdcGroup |
+| 描述 | 组的数字**ID**。该参数是 **API** 上使用的符号名，该符号名允许访问通道组数据。该值将赋给由 AdcGroup 容器短名派生的符号名。实现类型：**Adc_GroupType** |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名） |
+| 范围 | 0 .. 1023 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcGroupPriority |
+| 父容器 | AdcGroup |
+| 描述 | AdcGroup 的优先级级别。实现类型：**Adc_GroupPriorityType** |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local dependency: ADC_PRIORITY_IMPLEMENTATION |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcGroupReplacement |
+| 父容器 | AdcGroup |
+| 描述 | 替换机制，在组转换被更高优先级的组打断时于 **ADC** 组层级使用。实现类型：**Adc_GroupReplacementType** |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | ADC_GROUP_REPL_ABORT_RESTART：若某组被更高优先级的组打断，则在组层级使用中止/重启机制。在更高优先级组的转换完成后，将重新开始被打断组的完整转换轮次（所有组通道）。若该组配置为流式访问模式，则仅丢弃被打断转换轮次的结果。已写入结果缓冲区的先前转换轮次的结果不受影响；ADC_GROUP_REPL_SUSPEND_RESUME：若某组被更高优先级的组打断，则在组层级使用挂起/恢复机制。在更高优先级组的转换完成后，完成被打断组的转换轮次（所有组通道的转换）。若该组配置为流式访问模式，则仅丢弃被打断转换轮次的结果。已写入结果缓冲区的先前转换轮次的结果不受影响。 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcGroupTriggSrc |
+| 父容器 | AdcGroup |
+| 描述 | 启动组转换的源事件类型。实现类型：**Adc_TriggerSourceType** |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | ADC_TRIGG_SRC_HW：组由硬件事件触发；ADC_TRIGG_SRC_SW：组由软件 **API** 调用触发。 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local dependency: AdcGroupConvMode：硬件触发源不适用于连续转换模式。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcHwTrigSignal |
+| 父容器 | AdcGroup |
+| 描述 | 配置驱动应响应**硬件**触发信号的哪个边沿（即启动转换）（仅当 **ADC** **硬件**支持时）。实现类型：**Adc_HwTriggerSignalType** |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | ADC_HW_TRIG_BOTH_EDGES：对**硬件**触发信号的两个边沿都响应（仅当 **ADC** **硬件**支持时）；ADC_HW_TRIG_FALLING_EDGE：对**硬件**触发信号的下降沿响应（仅当 **ADC** **硬件**支持时）；ADC_HW_TRIG_RISING_EDGE：对**硬件**触发信号的上升沿响应（仅当 **ADC** **硬件**支持时）。 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local dependency: AdcTriggSrcHw：仅当该组配置为由硬件事件触发时有效。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcHwTrigTimer |
+| 父容器 | AdcGroup |
+| 描述 | **ADC** 模块内嵌定时器的重装值（仅当 **ADC** **硬件**支持时）。实现类型：**Adc_HwTriggerTimerType** |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 18446744073709551615 |
+| 默认值 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local dependency: AdcTriggSrcHw：仅当该组配置为由硬件事件触发时有效。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcNotification |
+| 父容器 | AdcGroup |
+| 描述 | 每个组的回调函数。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local dependency: 仅在配置了通知能力时该参数才可用。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcStreamingBufferMode |
+| 父容器 | AdcGroup |
+| 描述 | 将流式缓冲区配置为“线性缓冲区”（即 **ADC** 驱动在流式缓冲区填满后立即停止转换）或“环形缓冲区”（到达流式缓冲区末尾时回绕）。实现类型：**Adc_StreamBufferModeType** |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | ADC_STREAM_BUFFER_CIRCULAR：即使流式缓冲区已满（已达到样本数），**ADC** 驱动仍继续转换，通过流式缓冲区自身回绕；ADC_STREAM_BUFFER_LINEAR：流式缓冲区一满（已达到样本数），**ADC** 驱动即停止转换。 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local dependency: AdcGroupAccessMode：仅对流式访问模式有效。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcStreamingNumSamples |
+| 父容器 | AdcGroup |
+| 描述 | 流式访问模式下每通道要采集的 **ADC** 值数量。**注意：** 在单一访问模式下该参数取值为 1，因为每通道仅处理一个样本。实现类型：**Adc_StreamNumSampleType** |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 1 .. 255 |
+| 默认值 | 1 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local dependency: AdcGroupAccessMode：仅对流式访问模式有效。在单一访问模式下该参数取值为 1，因为每通道仅处理一个样本。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcGroupDefinition |
+| 父容器 | AdcGroup |
+| 描述 | **ADC** 通道到 **ADC** 组的分配。实现类型：**Adc_GroupDefType** |
+| 多重性 | 1..* |
+| 类型 | 对 AdcChannel 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcGroupEcucPartitionRef |
+| 父容器 | AdcGroup |
+| 描述 | 将一个 **ADC** 通道组映射到零个或多个 ECUC 分区，以限制对该通道组的访问。所引用的 ECUC 分区是 **ADC** 驱动所映射到的 ECUC 分区的子集。 |
+| 多重性 | 0..* |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+无包含的容器。
+
+一个组的所有通道共享相同的组配置（通道可具有不同的通道特定配置）。
+
+#### 9.2.6. AdcChannel
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | AdcChannel |
+| 父容器 | AdcHwUnit |
+| 描述 | 此容器包含取决于**硬件**能力的通道配置（参数）。该数据结构的组织方式可能包含对微控制器的依赖，因此这留给实现者决定，其位置也留给配置决定。**注意：** 由于一个 **AdcChannel** 可以是多个 **AdcGroup** 的组成部分，因此该容器不作为 AdcGroup 的子容器实现，而是作为 AdcHwUnit 的子容器。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcChannelConvTime |
+| 父容器 | AdcChannel |
+| 描述 | 转换时间的配置，即每个通道中将模拟值转换为数字表示所需的时间（以时钟周期计），若**硬件**支持。实现类型：**Adc_ConversionTimeType** |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 18446744073709551615 |
+| 默认值 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcChannelHighLimit |
+| 父容器 | AdcChannel |
+| 描述 | 高限值——用于限值检查。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 18446744073709551615 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local dependency: AdcEnableLimitCheck：若未全局启用限值检查，则不可用。AdcChannelLimitCheck：若未启用通道特定限值检查，则不可用。AdcChannelLowLimit：应大于或等于 AdcChannelLowLimit。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcChannelId |
+| 父容器 | AdcChannel |
+| 描述 | 该参数定义通道到物理 **ADC** **硬件**通道的分配。实现类型：**Adc_ChannelType** |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 1024 |
+| 默认值 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcChannelLimitCheck |
+| 父容器 | AdcChannel |
+| 描述 | 启用或禁用某个 **ADC** 通道的限值检查。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local dependency: AdcEnableLimitCheck：若未全局启用限值检查，则不可用。AdcGroupDefinition：启用了限值检查功能的 **ADC** 通道必须分配到恰好由一个启用限值检查的 **ADC** 通道组成的 **ADC** 组。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcChannelLowLimit |
+| 父容器 | AdcChannel |
+| 描述 | 低限值——用于限值检查。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 18446744073709551615 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local dependency: AdcEnableLimitCheck：若未全局启用限值检查，则不可用。AdcChannelLimitCheck：若未启用通道特定限值检查，则不可用。AdcChannelHighLimit：应小于或等于 AdcChannelHighLimit。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcChannelRangeSelect |
+| 父容器 | AdcChannel |
+| 描述 | 在限值检查激活时：定义要考虑哪些转换值，范围由 AdcChannelLowLimit 和 AdcChannelHighLimit 界定。实现类型：**Adc_ChannelRangeSelectType** |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | ADC_RANGE_ALWAYS：完整范围——与通道限值设置无关；ADC_RANGE_BETWEEN：低限值与高限值之间的范围——包含高限值；ADC_RANGE_NOT_BETWEEN：高限值之上或低限值之下的范围——包含低限值；ADC_RANGE_NOT_OVER_HIGH：高限值之下的范围——包含高限值；ADC_RANGE_NOT_UNDER_LOW：低限值之上的范围；ADC_RANGE_OVER_HIGH：高限值之上的范围；ADC_RANGE_UNDER_LOW：限值之下的范围——包含低限值。 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local dependency: AdcEnableLimitCheck：若未全局启用限值检查，则不可用。AdcChannelLimitCheck：若未启用通道特定限值检查，则不可用。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcChannelRefVoltsrcHigh |
+| 父容器 | AdcChannel |
+| 描述 | 每个通道的上参考电压源。枚举字面量由供应商具体定义。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcChannelRefVoltsrcLow |
+| 父容器 | AdcChannel |
+| 描述 | 每个通道的下参考电压源。枚举字面量由供应商具体定义。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcChannelResolution |
+| 父容器 | AdcChannel |
+| 描述 | 通道分辨率（以位为单位）。实现类型：**Adc_ResolutionType** |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 1 .. 63 |
+| 默认值 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local dependency: AdcMaxChannelResolution：实际分辨率应小于或等于最大分辨率。 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcChannelSampTime |
+| 父容器 | AdcChannel |
+| 描述 | 采样时间的配置，即每个通道中对值进行采样所需的时间（以时钟周期计），若**硬件**支持。实现类型：**Adc_SamplingTimeType** |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 18446744073709551615 |
+| 默认值 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+#### 9.2.7. AdcHwUnit
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | AdcHwUnit |
+| 父容器 | AdcConfigSet |
+| 描述 | 此容器包含取决于通道分组的驱动配置（参数）。此容器可包含标准模块定义中未定义的**硬件**特定参数。这些参数必须在供应商特定模块定义中添加。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcClockSource |
+| 父容器 | AdcHwUnit |
+| 描述 | 可静态配置转换单元的 **ADC** 模块特定时钟输入，以在**硬件**提供时选择不同的时钟源。枚举字面量由供应商具体定义。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcHwUnitId |
+| 父容器 | AdcHwUnit |
+| 描述 | **描述：** **HW Unit** 的数字**ID**。该符号名允许访问 **HW Unit** 数据。枚举字面量由供应商具体定义。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcPrescale |
+| 父容器 | AdcHwUnit |
+| 描述 | 可选的 **ADC** 模块特定时钟预分频因子，若**硬件**支持。实现类型：**Adc_PrescaleType** |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| AdcChannel | 1..* | 此容器包含取决于**硬件**能力的通道配置（参数）。 |
+| AdcGroup | 1..* | 此容器包含组配置（参数）。 |
+
+**ADC** 驱动应支持一个或多个同类型的 **ADC** **HW Unit**。**ADC HW Unit** 的选择通过配置容器 AdcHwUnit 完成。
+
+### 9.3. 发布信息
+
+详情请参阅 SWS_BSWGeneral 中的第 10.3 章 "Published Information"（发布信息）。
+
+#### 9.3.1. AdcPublishedInformation
+
+| SWS 条目 |  |
+|---|---|
+| 容器名称 | AdcPublishedInformation |
+| 父容器 | Adc |
+| 描述 | 不属于“通用”发布信息的附加发布参数。注意：这些参数具有“PUBLISHED-INFORMATION”配置类设置，因为它们是发布信息。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcChannelValueSigned |
+| 父容器 | AdcPublishedInformation |
+| 描述 | **ADC** 驱动的结果值是否带符号信息的信息（true 带符号，false 不带符号）。若结果应解释为有符号值，则应适用 C 语言规则。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Published Information：x（All Variants） |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcGroupFirstChannelFixed |
+| 父容器 | AdcPublishedInformation |
+| 描述 | **ADC** 通道组的首个通道是否可配置（false），或固定（true）为由 **ADC** **HW Unit** 确定的值。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Published Information：x（All Variants） |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 |  |
+|---|---|
+| 参数名称 | AdcMaxChannelResolution |
+| 父容器 | AdcPublishedInformation |
+| 描述 | 最大通道分辨率（以位为单位，不表示精度）。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 1 .. 63 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Published Information：x（All Variants） |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+### 9.4. 符号名的配置
+
+供上层使用的 **ADC** 通道和 **ADC** 通道组的符号名应由配置器定义。它们应在模块的配置头文件中定义。
 
 <section id="wechat">
 
