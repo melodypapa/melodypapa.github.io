@@ -106,6 +106,30 @@
           "check": "Chinese prose, **CanIf** bolded, no image links"
         }
       ]
+    },
+    {
+      "id": 5,
+      "prompt": "用 autosar-translate 技能的 API 章同步检查：对 docs/autosar/io/pwm_driver/index.md 与其 R23-11 源（~/Workspace/autosar_standard/markdown/Classic_Platform/Releases/R23-11/IO/AUTOSAR_CP_SWS_PWMDriver.md）运行 scripts/check_api_sync.py，报告类型/函数的数量、名称、顺序是否一致以及 **说明** 段数是否等于函数数。不要修改仓库里的任何文件，也不要做 git 操作。",
+      "expected_output": "script run reported with exit 0 and 'API sync: OK'; counts quoted (8.2.x=8 vs 7.2.x=8, 8.3.x=13 vs 7.3.x=13, **说明**=13 == functions=13); no files modified",
+      "files": [],
+      "assertions": [
+        {
+          "text": "运行了 scripts/check_api_sync.py，参数为 PWM 的 R23-11 源与 pwm_driver/index.md",
+          "check": "tool call runs check_api_sync.py with the SWS_PWMDriver source path and the pwm_driver article path"
+        },
+        {
+          "text": "报告 exit 0 / 'API sync: OK'（数量、名称、顺序一致）",
+          "check": "output states the check passed (exit 0, API sync OK)"
+        },
+        {
+          "text": "引用具体计数：类型 8:8、函数 13:13、**说明** 13 == 函数 13",
+          "check": "report quotes 8/8 types, 13/13 functions, 13 **说明** blocks"
+        },
+        {
+          "text": "未修改仓库文件、未做 git 操作",
+          "check": "no file edits, no git commands"
+        }
+      ]
     }
   ]
 }
