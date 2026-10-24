@@ -265,8 +265,11 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
    terms to the page by hand, A–Z placed, with 来源 attribution (document
    title as link text, spec + release). Terms are extracted from the SOURCE
    during translation — never machine-extracted from the translated article
-   afterwards; `gen_glossary.py` is retired. Same term with differing
-   definitions across modules: list each definition with its own source. The
+   afterwards; `gen_glossary.py` is retired. **One term is translated once**
+   (user rule 2026-10-24): the same term appearing in another document is NOT
+   re-translated — keep the one definition and append that document on its
+   own 「来源：」 line; a substantively different definition is a user
+   decision, never a silent second line. The
    Foundation TR glossary's translation state is tracked in
    `scripts/tr_glossary.json` (source-extraction workfile, not a build
    input).
