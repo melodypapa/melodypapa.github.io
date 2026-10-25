@@ -3,7 +3,7 @@
 > Maintained by the autosar-translate skill per [STANDARD.md](STANDARD.md); update the touched entry and the `Last updated` date after every sync.
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-10-24
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-10-25
 
 ## Backlog
 
@@ -16,11 +16,13 @@
 - [ ] IO section ✅ articles' heading-wording alignment (DIO/Port/PWM/OCU/ICU done 2026-10-24; same-class deviations remain): adc 4.2 「适用车型域」→「汽车域的适用性」
 - [ ] 4.2 「适用于汽车领域」→「汽车域的适用性」 (named in STANDARD.md 2026-10-24): bswm, ecu_state_manager, crypto_driver, crypto_service_manager, memory_access, data_distribution; 「对汽车领域的适用性」: ethernet_driver, can_interface; 「汽车领域的适用性」: nvram_manager
 - [ ] *Scheduled functions* unified to 「调度函数」 (named in STANDARD.md 2026-10-24): bswm 7.3 / can_network_management 7.3 「周期函数」, crypto_service_manager 7.12 「Scheduled 函数」
+- [ ] §3.1 translated in full as 「输入文件和相关标准与规范」 (direct translation, named in STANDARD.md 2026-10-25 — the short form 「输入文件」 is no longer canonical): dio ✅ (2026-10-25); remaining — exact 「输入文件」: adc, crypto_driver, crypto_service_manager, ecu_state_manager, ethernet_interface, can_transceiver_driver, can_network_management (+ r21_11 snapshot), udp_network_management, flash_driver, flash_eeprom_emulation, iohwab, pwm, port, icu, ocu, lin_interface, function_inhibition_manager, time_service; 「输入文件及相关标准规范」: bulk_nv_data_manager, memory_access, nvram_manager; 「输入文件及相关标准和规范」: bswm, pdu_router, operating_system
 - [ ] Acronym chapters unified to 「粗体术语 + 引用块」 + row-set alignment (STANDARD.md §1; 2026-10-24 census 21:5): format — dio/port/pwm ✅ (reflowed 2026-10-24); lin_driver/udp_network_management — 2 articles still GFM tables; row sets (check line by line against the R23-11 sources) — adc restore API/HW/SW, DEM→DET source order, re-merge Conversion Mode into one entry (18 rows→16), lin_driver missing 14 rows (40→26), udp_network_management missing 14 rows (26→12); icu verified equal (12:12)
 - [ ] Hygiene fixes: udp_network_management WeChat footer → `<h4>`; dem numbering gap; rename the `data_distribution service` directory to drop the space; SoAd/mirror → index.md layout; `timimg_extension/indx.md` spelling (nav change in the same commit)
 - [ ] BswM ch.10 → `## 9. 配置规范` (rule-lift follow-up, issue #71): 91 containers across ~3600 source lines (10.2.1–10.2.90) — dedicated run needed; bswm alignment + 时序图 lands first
 - [ ] ch.10 → `## 8. 配置规范` for pre-ban articles whose R23-11 source has a Configuration specification (rule lifted 2026-10-24): io — dio/port/pwm ✅ (2026-10-24, issue #62), ocu ✅ (issue #61); remaining: audit every non-io ✅/🔶 article program-wide (bswm, ecu, crypto_*, memory_*, mode_management, system_services …); icu/adc/iohwab rows already scope it in Group-io
 - [ ] Link-audit fixes (2026-10-24 first site-wide external-URL curl; rule in STANDARD.md §4 / skill Phase A check 8): ethernet_driver §3.2 IEEE `getieee802` PDF 403 (directory retired; verify the ieeexplore number for 802.1AS-2011 in a browser before re-linking — note ethernet_interface's ieeexplore 8585421 is 802.1AE MACsec, a different document); data_distribution §3 OMG `DDS/1.4` http 500 (https same path 200 → upgrade to https); `https://www.iso.org` 403 (likely anti-bot, verify in a browser before acting); port.de timed out once then returned 200 on retry (lesson recorded in check 8: retry before declaring a link dead)
+- [ ] DIO potential-link decisions (improved census 2026-10-25, report-only classes — apply is a user decision): 10 × PORT-driver module mentions (§1/§5.1/§6 prose, rendered **PORT**/**Port**) → `../port_driver/`; [1] Glossary → site glossary (§2 intro; SITE class); [2] SWS_BSWGeneral → EXTERNAL, needs a curated official URL (cited in §3.2 and §6.6 intro); 11 × STD_HIGH/STD_LOW mentions stay prose (no corpus precedent for enum-value links); Det ×6 mentions unlinked — no Det article yet (see fill-breadth below)
 
 **Fill breadth (new articles)**
 

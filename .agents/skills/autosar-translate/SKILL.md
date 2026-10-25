@@ -226,10 +226,14 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
     their chapters get aligned when their rows run.
 - **Potential links are applied during translation, not merely detected** — the
   intra-article class is restoration of the source PDF's own hyperlinks:
-  identifier mentions (types/constants defined in §7.2, functions defined in
-  §7.3.x) link to their defining headings; 参见/详见 references link to their
-  targets when an anchor exists. Use
-  `.agents/skills/autosar-translate/scripts/link_candidates.py --apply <article>`.
+  identifier mentions (types defined in §7.2, functions defined in §7.3.x,
+  development-error codes defined in the §6.6.x tables) link to their defining
+  headings; §7.2 constant bullets (STD_HIGH, ICU_MODE_* enum/mode values) and
+  参见/详见 references stay candidates for a user decision — no corpus article
+  links constants (audited 2026-10-25). Use
+  `.agents/skills/autosar-translate/scripts/link_candidates.py --apply
+  <article>` (idempotent — re-running changes 0 lines; scans through 时序图
+  prose, stops before 配置规范 whose tables are definitional).
 - **Citation markers `[n]` mean "Related documentation, entry n"** — a
   two-hop reference: citation → §3.1 entry → an external document or a page
   on this site. `link_candidates.py --list` resolves every citation to its
@@ -314,9 +318,9 @@ before every commit, the second is evidence for the Step 8 confirmation.
    if the standard and the site majority disagree, it is a user decision
    (record it; update STANDARD.md in the same PR), not a silent rename.
    Then sweep §2's `不用` variants mechanically: for every variant STANDARD.md
-   §2 forbids (`可配置的接口`, `周期函数`, `适用于汽车领域`, …),
+   §2 forbids (`可配置的接口`, `周期函数`, `适用于汽车领域`, `输入文件`, …),
    `grep -nE '^#+.*VARIANT'` on the article must return 0 hits (canonical:
-   `可配置接口`, `调度函数`, `汽车域的适用性`). §2 governs chapter heading
+   `可配置接口`, `调度函数`, `汽车域的适用性`, `输入文件和相关标准与规范`). §2 governs chapter heading
    wording (章节标题用词), so
    scope the grep to heading lines — faithful prose is not in scope. A stale
    §2 line is exactly how a rejected wording re-enters a new article — the
@@ -368,11 +372,19 @@ before every commit, the second is evidence for the Step 8 confirmation.
      ieeexplore MACsec link into an 802.1AS article — different document).
 
 9. Potential-links census (mechanical): run
-   `scripts/link_candidates.py --list <article>` and RECORD the counts
-   (identifier mentions, 参见/详见 refs, prose `[n]` markers) in the gate
-   evidence. An explicit "0 candidates" is a valid result; **silence is a
-   failed gate**. This rule failed to activate for six runs when it lived
-   only in Phase B prose — the counter exists so that cannot recur.
+   `scripts/link_candidates.py --list <article>` and RECORD the counts in the
+   gate evidence: identifier mentions by chapter (applied class: types §7.2.x,
+   functions §7.3.x, dev-error codes §6.6.x — scanned through 时序图 prose,
+   counted but never applied inside 配置规范 tables), §7.2 constant-bullet
+   mentions (report-only), 参见/详见 refs, prose `[n]` citations (§3.1 registry
+   lines excluded) with their SITE/EXTERNAL resolutions, and cross-article
+   module mentions (case-insensitive — articles render "Port Driver" as
+   **PORT**/**Port**; §2 acronym term lines skipped). An explicit "0
+   candidates" is a valid result; **silence is a failed gate**. This rule
+   failed to activate for six runs when it lived only in Phase B prose — the
+   counter exists so that cannot recur. `--apply` writes only the applied
+   class; verify idempotency with a second run (0 lines changed) before
+   committing.
 
 **Phase B — automation-blind checks** (presented at the Step 8 gate as
 evidence, not asserted):
@@ -491,6 +503,7 @@ open.
 | Flagging STANDARD.md-forbidden chapters as "missing" | False work items on compliant articles | Step 3 compliance rule: omissions the standard mandates are compliance |
 | Taking the SRS wording as ground truth | "Fixing" faithful SWS translations into errors | Step 4 + source-resolution.md |
 | Renaming a heading to STANDARD.md's listed term when most of the site uses a different one (DIO run: STANDARD listed 周期函数, 7 articles used 调度函数 — user kept 调度函数) | Churn in the wrong direction; the standard itself was stale | Before aligning wording, `grep` the heading across `docs/autosar`; if STANDARD.md and the site majority disagree, put the choice in the todo list as a user decision and update STANDARD.md in the same PR |
+| Shortening a source heading to fit the canonical list (DIO §3.1: *Input documents & related standards and norms* renamed 「输入文件」 per the then-canonical; user reverted 2026-10-25 to the direct translation 「输入文件和相关标准与规范」 — STANDARD.md updated in the same change) | The canonical list ends up codifying the drift it was meant to prevent — headings drift away from the source wording, site-wide | Headings are direct translations of the source headings; a source heading longer than the §2 rendering is translated in full, never shortened |
 | Translating *Configurable Interfaces* as `可配置的接口` because the pre-2026-10-24 §2 listed it (baseline test 2026-10-24: an agent handed the old §2 line reproduced the rejected heading verbatim, while agents given no wording guidance naturally wrote `可配置接口` — the danger is the stale authority, not free translation) | New articles silently diverge from the canonical term — the site's 5 IO articles all read `可配置接口` (user decision 2026-10-24, issue #54; STANDARD.md §2 updated in the same PR) | Phase A check 2's §2 `不用` sweep: grep every forbidden variant on the article to 0 hits |
 | Posting the todo list to chat instead of writing the todo file (DIO run, 2026-10-24) | The run's decisions and tick state die with the session; nothing to resume from, nothing to audit | Step 4 output contract + `references/todo-format.md` — the file is the todo, chat is a copy |
 | Batch-checking todo items at the end of the run | The list shows progress the work doesn't have; an unverified item hides until the PR review or never | Tick each item in the file the moment its verification passes (Step 4) |
