@@ -3,7 +3,7 @@
 > Maintained by the autosar-translate skill per [STANDARD.md](STANDARD.md); update the touched entry and the `Last updated` date after every sync.
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-10-25
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-10-26
 
 ## Backlog
 
@@ -30,7 +30,7 @@
 - [ ] Communication backbone: Com, CanSM, CanTp, TcpIp, Nm, EthSM, IpduM, SomeIpXf/SomeIpTp
 - [ ] System services: ComM, Det (small; Det first)
 - [ ] Global time cluster: StbM + CanTSyn/EthTSyn/FrTSyn
-- [ ] MCAL: Mcu, Gpt, CorTst
+- [ ] MCAL: Gpt, CorTst
 - [ ] Storage wrap-up: Ea, Eep
 - [ ] Libraries: Crc, E2E
 - [ ] Safety: WdgM, WdgIf, Wdg
@@ -40,11 +40,11 @@
 
 | Status | Count | Note |
 | --- | ---: | --- |
-| ✅ Type A-compliant | 10 | ready to use |
+| ✅ Type A-compliant | 11 | ready to use |
 | 🔶 Translated pending alignment | 10 | seven chapters present; legacy wording / forbidden-chapter residue |
 | ⚠️ Partial | 17 | missing ≥1 chapter (most miss the 「API规范」 chapter) |
 | ⛔ Stub | 4 | 9–19 lines only |
-| ❌ Missing (SWS) | 86 | R23-11 has 127 SWS docs in total; 41 covered (32.3%) |
+| ❌ Missing (SWS) | 85 | R23-11 has 127 SWS docs in total; 42 covered (33.1%) |
 | ❌ Missing (EXP) | 20 | R23-11 has 22 EXP docs in total; 2 covered |
 | 📖 Guide/topic | 8 | exempt from the Type A skeleton |
 
@@ -106,6 +106,12 @@
 - ✅ [ICU 驱动](io/icu_driver/) — SWS_ICUDriver (2026-10-24 realigned to R23-11: 4.2 「汽车域的适用性」, 3.2/3.3 renamed to the site pattern; ## 8. 时序图 kept per the lifted ban; ## 9. 配置规范 translated (28 params); front-matter release R22-11 → R23-11 + glossary regenerated)
 - ⚠️ [I/O 硬件抽象](io/iohwab/) — SWS_IOHardwareAbstraction (missing 约束和假设; its 时序图 chapter is kept per the 2026-10-24 sequence-diagram rule lift)
 
+## mcal
+
+- ✅ [MCU 驱动](mcal/mcu_driver/) — SWS_MCUDriver (2026-10-26 full Type A translation from R23-11: new article + new MCAL section landing page + nav; ch.6 traceability dropped per mandate; ch.9 → `## 8. 时序图` (4 figures), ch.10 → `## 9. 配置规范` (10 containers, SWS 条目 cells filled with [ECUC_Mcu_*] per EcuM style); first inline cross-article prose links — Dem/Port)
+
+❌ Missing (2): SWS_GPTDriver (Gpt), SWS_CoreTest
+
 ## memory
 
 - 🔶 [BndM](bulk_nv_data_manager/) — SWS_BulkNvDataManager (ch.1 is "介绍和功能概述")
@@ -141,7 +147,7 @@
 
 - **GlobalTime (4)**: SWS_SynchronizedTimeBaseManager (StbM), SWS_TimeSyncOverCAN (CanTSyn), SWS_TimeSyncOverEthernet (EthTSyn), SWS_TimeSyncOverFlexRay (FrTSyn)
 - **Libraries (9)**: SWS_CRCLibrary (Crc), SWS_E2ELibrary (E2E), SWS_BFXLibrary (Bfx), SWS_BSWMulticoreLibrary (Bmc), SWS_MFLLibrary (Mfl), SWS_MFXLibrary (Mfx), SWS_IFLLibrary (Ifl), SWS_IFXLibrary (Ifx), SWS_EFXLibrary (Efx)
-- **MCAL (3)**: SWS_MCUDriver (Mcu), SWS_GPTDriver (Gpt), SWS_CoreTest
+- **MCAL (2)**: SWS_GPTDriver (Gpt), SWS_CoreTest
 - **RTE / SWArch (2)**: SWS_RTE, SWS_ARTI
 - **Safety (3)**: SWS_WatchdogManager (WdgM), SWS_WatchdogInterface (WdgIf), SWS_WatchdogDriver (Wdg)
 - **Security (2)**: SWS_Firewall, SWS_IntrusionDetectionSystemManager (IdsM)
