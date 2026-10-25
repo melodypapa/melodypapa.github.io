@@ -120,7 +120,7 @@
 ## mode_management
 
 - ✅ [BswM](basic_software_mode_manager/) — SWS_BSWModeManager (2026-10-24: 4.2 → 「汽车域的适用性」, 7.3 → 「调度函数」, new ## 8. 时序图 (2 figures); ch.10 → `## 9. 配置规范` pending — 91 containers, issue #71)
-- ✅ [EcuM](ecu_state_manager/) — SWS_ECUStateManager (2026-10-24: ch.2 → 缩略语 flattened to 23 entries in source order, §4.2 → 汽车域的适用性, new ## 8. 时序图 (16 figures) + ## 9. 配置规范 (~40 parameter tables); content matches the R23-11 source chapter by chapter)
+- ✅ [EcuM](ecu_state_manager/) — SWS_ECUStateManager (2026-10-24: §4.2 → 汽车域的适用性, ## 8. 时序图 (16 figures) + ## 9. 配置规范 (~40 parameter tables); 2026-10-25 completion: ch.2 → 定义和缩略语 (2.1 定义 + 2.2 缩略语, mirrors the source split), new ## 已知限制, ## 7 completed with 7.1 导入的类型 / 7.2 类型定义 / 7.7 期望接口 / 7.8 端口接口规范 (source 8.1/8.2/8.7/8.8 had been missing), 调度表函数 → 调度函数, appendix B 可追溯项变更历史, §3.1 → 输入文件和相关标准与规范)
 - 📖 [模式管理指南](guide_to_mode_management/) — EXP_ModeManagementGuide (exempt)
 
 ## system_services

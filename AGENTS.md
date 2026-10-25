@@ -39,6 +39,7 @@ Pre-existing INFO-level anchor notices in build output are known and do not fail
 ## Git workflow
 
 - Convention: feature branch (`feature/<topic>`) + tracking issue + PR; commits `docs:` / `feat:` / `fix:` with `Closes #N`. Use heredocs for multi-line `gh issue/pr create` bodies.
+- **Issue and PR titles + bodies are written in English** (user rule, 2026-10-25). Chinese stays in the diff and in quoted content identifiers (chapter names like `## 2. 定义和缩略语`, article text) — describe the work around them in English. PR/issue content rules: lead with a summary, group changes per area (article / skill+script / other), and end with a verification list including the strict-build result.
 - GitHub auto-deletes merged remote branches; delete merged local branches with `git branch -d`.
 - `github.com` over HTTPS is intermittently flaky (fetch/push timeouts). Use the SSH URL `git@github.com:melodypapa/melodypapa.github.io.git` for git transport; the `gh` CLI (api.github.com) always works.
 - A failed fetch can leave `refs/remotes/origin/master` broken; repair with `git update-ref refs/remotes/origin/master <sha>`.

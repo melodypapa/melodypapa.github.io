@@ -3,7 +3,7 @@
 > Scope: **module articles** under `docs/autosar/` (Chinese translations of AUTOSAR specification documents).
 > Not applicable to: section landing pages (see below), guide/EXP-type articles, and directories outside `docs/autosar/` (`nxp/`, `eb_tresos/`, etc.).
 > This file takes no part in the site build (see `exclude_docs` in `mkdocs.yml`); it exists for writing and review reference only.
-> Decision record: established by the site author on 2026-10-23; conversion history in PR #51 (issue #50). 2026-10-24: source chapter *Scheduled functions* named 「调度函数」 (previously listed 「周期函数」) and *Applicability to car domains* named 「汽车域的适用性」 (previously listed 「适用于汽车领域」); see issue #52. 2026-10-24: source chapter *Configurable Interfaces* named 「可配置接口」 (previously listed 「可配置的接口」; all 5 IO articles on the site use the former); see issue #54. 2026-10-24: the 配置规范 ban lifted (user decision) — the source's ch.10 *Configuration specification* translates as the optional article chapter `## 8. 配置规范` when present; see the config-spec rules in the autosar-translate skill (Step 5). 2026-10-24: sequence diagrams allowed (user decision) — the source's ch.9 *Sequence diagrams* translates as the optional article chapter `## 8. 时序图` when present, and 配置规范 shifts to `## 9.` when both are present. 2026-10-25: chapter headings are direct translations of their source headings — §3.1 renamed 「输入文件」→「输入文件和相关标准与规范」 (*Input documents & related standards and norms* translated in full, never shortened; site-wide realignment queued in TODO.md).
+> Decision record: established by the site author on 2026-10-23; conversion history in PR #51 (issue #50). 2026-10-24: source chapter *Scheduled functions* named 「调度函数」 (previously listed 「周期函数」) and *Applicability to car domains* named 「汽车域的适用性」 (previously listed 「适用于汽车领域」); see issue #52. 2026-10-24: source chapter *Configurable Interfaces* named 「可配置接口」 (previously listed 「可配置的接口」; all 5 IO articles on the site use the former); see issue #54. 2026-10-24: the 配置规范 ban lifted (user decision) — the source's ch.10 *Configuration specification* translates as the optional article chapter `## 8. 配置规范` when present; see the config-spec rules in the autosar-translate skill (Step 5). 2026-10-24: sequence diagrams allowed (user decision) — the source's ch.9 *Sequence diagrams* translates as the optional article chapter `## 8. 时序图` when present, and 配置规范 shifts to `## 9.` when both are present. 2026-10-25: chapter headings are direct translations of their source headings — §3.1 renamed 「输入文件」→「输入文件和相关标准与规范」 (*Input documents & related standards and norms* translated in full, never shortened; site-wide realignment queued in TODO.md). 2026-10-25 (EcuM completion): the droppable set is exactly two — requirement tracing and appendix A; everything else translates (Known Limitations → unnumbered 已知限制, appendix B with verbatim item-ID fences, port-interface chapters, all content diagrams); ch.2 mirrors the source's Definitions/Abbreviations split.
 
 ## 1. Chapter skeleton (mandatory)
 
@@ -12,7 +12,7 @@ Every module article must contain the following seven core top-level chapters �
 | # | Chapter | Content |
 | --- | --- | --- |
 | 1 | `## 1. 简介和功能概述` | Module overview (translation of the SWS Functional Overview) |
-| 2 | `## 2. 缩略语` | Bold term + blockquote definition (no GFM table; the source table is reflowed too); row set and row order identical to the source table |
+| 2 | `## 2. 缩略语` *(or `## 2. 定义和缩略语` when the source ch.2 is *Definitions and Abbreviations*)* | Bold term + blockquote definition (no GFM table; the source table is reflowed too); subsections mirror the source ch.2 (`### 2.1. 定义` / `### 2.2. 缩略语` when the source has Definitions); row set and row order identical to the source tables |
 | 3 | `## 3. 相关文档` | `### 3.1. 输入文件和相关标准与规范` (`[n]` + file-name list), `### 3.2. 相关规范` |
 | 4 | `## 4. 约束和假设` | `### 4.1. 限制`, `### 4.2. 汽车域的适用性` |
 | 5 | `## 5. 对其他模块的依赖` | One `###` per dependent module |
@@ -21,14 +21,14 @@ Every module article must contain the following seven core top-level chapters �
 | 8 | `## 8. 时序图` *(optional)* | Translation of the source ch.9 *Sequence diagrams* — present iff the source document has it; source 9.x renumbered to 8.x; figures per the site figure convention (local PNG, or a mermaid `sequenceDiagram` redraw per icu_driver when no PNG exists) |
 | 9 | `## 9. 配置规范` *(optional)* | Translation of the source ch.10 *Configuration specification* — present iff the source document has it; source 10.x renumbered to 8.x when no 时序图 chapter is present, else 9.x; see the skill's config-spec rules |
 
-**Forbidden chapters**: requirement traceability (需求可追溯性 / 需求追踪), letter-numbered appendices (`## A.` / `## B.`), and any content beyond the optional chapters above (at most `## 9. 配置规范`).
+**Droppable content — the complete list (user decision 2026-10-25, EcuM completion)**: requirement traceability (需求可追溯性 / 需求追踪) and appendix A (*Not applicable requirements*). **Every other source section translates**, including: pre-chapters such as *Known Limitations* (→ unnumbered `## 已知限制` before §1), appendix B (*Change history of AUTOSAR traceable items* → `## B. AUTOSAR 可追溯项变更历史`, added/changed/deleted item-ID lists kept verbatim in code fences — the one sanctioned place requirement IDs remain, as data; "none" → 无), expected/port-interface chapters, and every content diagram of a translated chapter (deduplicated by content hash; the converter's repeated page-decoration images are dropped).
 
 ## 2. Chapter heading wording (canonical)
 
 One source chapter uses exactly one rendering site-wide:
 
 - ✅ `简介和功能概述` (not 介绍 / 概述 / 介绍和功能概述)
-- ✅ `缩略语` (not 术语 / 缩写词和术语 / 首字母缩略词和缩写 / 定义和缩写)
+- ✅ `缩略语` (not 术语 / 缩写词和术语 / 首字母缩略词和缩写 / 定义和缩写); when the source ch.2 is *Definitions and Abbreviations*: `定义和缩略语` → `定义` / `缩略语` (EcuM precedent, 2026-10-25)
 - ✅ `相关文档` → `输入文件和相关标准与规范` / `相关规范` (not `输入文件` — the source heading *Input documents & related standards and norms* is translated in full / not 相关的文档)
 - ✅ `约束和假设` → `限制` / `汽车域的适用性` (not 适用于汽车领域 / 适用车型域 / 对汽车域的适用性)
 - ✅ `对其他模块的依赖`
