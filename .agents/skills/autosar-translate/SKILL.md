@@ -246,11 +246,17 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
     their chapters get aligned when their rows run.
 - **Potential links are applied during translation, not merely detected** — the
   intra-article class is restoration of the source PDF's own hyperlinks:
-  identifier mentions (types defined in §7.2, functions defined in §7.3.x,
-  development-error codes defined in the §6.6.x tables) link to their defining
-  headings; §7.2 constant bullets (STD_HIGH, ICU_MODE_* enum/mode values) and
+  identifier mentions (types/functions link to their defining ch.7 heading —
+  any heading at ANY level under §7.2–7.5 whose title is the identifier
+  itself: dio/adc `#### 7.2.x. Adc_ConfigType` flat, EcuM
+  `###### 7.3.1.1 EcuM_GetVersionInfo` grouped; Chinese group titles like
+  通用 are never link targets) and development-error codes (link to their
+  错误-titled §6 section's anchor — DIO/PWM 6.6.x 开发错误, EcuM 6.12/6.13,
+  ADC 6.5); §7.2 constant bullets
+  (STD_HIGH, ICU_MODE_* enum/mode values) and
   参见/详见 references stay candidates for a user decision — no corpus article
-  links constants (audited 2026-10-25). Use
+  links constants (audited 2026-10-25). The census excludes the article's own
+  module from cross-article mentions (a self-link is never a candidate). Use
   `.agents/skills/autosar-translate/scripts/link_candidates.py --apply
   <article>` (idempotent — re-running changes 0 lines; scans through 时序图
   prose, stops before 配置规范 whose tables are definitional).

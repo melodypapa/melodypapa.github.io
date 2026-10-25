@@ -32,6 +32,7 @@ Report-only classes (user decisions, never auto-added): §7.2 constant bullets
 2026-10-25), 参见/参考/详见 lines, prose `[n]` citations (§3.1 registry lines
 are excluded from the count), cross-article module mentions.
 """
+import os
 import re
 import sys
 
@@ -214,7 +215,7 @@ def config_start(lines, headings):
     return None
 
 
-def census(article: str):
+def census(article: str, self_dir: str = ""):
     entries31 = parse_entries31(article)
     lines, headings, defs, _, consts = collect(article)
     fm_end = front_matter_end(lines)
@@ -259,6 +260,12 @@ def census(article: str):
         if re.match(r"^\*\*[^*]+\*\*\s*$", ln):
             continue  # §2 acronym term line — a definition, not a mention
         for mod, (status, target) in MODULE_LINKS.items():
+            # an article never links to itself: drop the module whose target
+            # directory IS the article's own directory (EcuM x87 in the EcuM
+            # article was census noise, fixed 2026-10-25)
+            if (self_dir and target
+                    and os.path.normpath(os.path.join(self_dir, target)) == os.path.normpath(self_dir)):
+                continue
             if re.search(rf"(?<![A-Za-z0-9_]){re.escape(mod)}(?![A-Za-z0-9_])", ln, re.IGNORECASE):
                 modules.setdefault((mod, status, target), 0)
                 modules[(mod, status, target)] += 1
@@ -349,7 +356,7 @@ if __name__ == "__main__":
     mode, path = sys.argv[1], sys.argv[2]
     article = open(path).read()
     if mode == "--list":
-        census(article)
+        census(article, self_dir=os.path.dirname(os.path.abspath(path)))
     elif mode == "--apply":
         out = apply_links(article)
         open(path, "w").write(out)
