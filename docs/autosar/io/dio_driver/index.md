@@ -75,7 +75,7 @@ release: R23-11
 
 ## 3. 相关文档
 
-### 3.1. 输入文件
+### 3.1. 输入文件和相关标准与规范
 
 [1] Glossary
 AUTOSAR_FO_TR_Glossary
@@ -366,7 +366,7 @@ Dio_LevelType Dio_ReadChannel (Dio_ChannelType ChannelId)
 
 **Dio_ReadChannel**函数应返回指定**DIO**通道的值。关于**Dio_ReadChannel**函数的返回值，相关需求适用。此外，相关需求适用于**Dio_ReadChannel**函数。
 
-如果启用了开发错误检测，服务**Dio_ReadChannel**、[**Dio_WriteChannel**](#732-dio_writechannel)和[**Dio_FlipChannel**](#738-dio_flipchannel)应检查"**ChannelId**"参数在当前配置内是否有效。如果"**ChannelId**"参数无效，函数应向**DET**报告错误代码**DIO_E_PARAM_INVALID_CHANNEL_ID**。
+如果启用了开发错误检测，服务**Dio_ReadChannel**、[**Dio_WriteChannel**](#732-dio_writechannel)和[**Dio_FlipChannel**](#738-dio_flipchannel)应检查"**ChannelId**"参数在当前配置内是否有效。如果"**ChannelId**"参数无效，函数应向**DET**报告错误代码[**DIO_E_PARAM_INVALID_CHANNEL_ID**](#661-开发错误)。
 
 #### 7.3.2. Dio_WriteChannel
 
@@ -394,7 +394,7 @@ Dio_PortLevelType Dio_ReadPort (Dio_PortType PortId)
 
 当使用**Dio_ReadPort**函数读取小于[**Dio_PortLevelType**](#725-dio_portleveltype)的端口时，函数应将对应于未定义端口引脚的位设置为 0。此外，相关需求适用于**Dio_ReadPort**函数。
 
-如果启用了开发错误检测，函数**Dio_ReadPort**、[**Dio_WritePort**](#734-dio_writeport)和[**Dio_MaskedWritePort**](#739-dio_maskedwriteport)应检查"**PortId**"参数在当前配置内是否有效。如果"**PortId**"参数无效，函数应向**DET**报告错误代码**DIO_E_PARAM_INVALID_PORT_ID**。
+如果启用了开发错误检测，函数**Dio_ReadPort**、[**Dio_WritePort**](#734-dio_writeport)和[**Dio_MaskedWritePort**](#739-dio_maskedwriteport)应检查"**PortId**"参数在当前配置内是否有效。如果"**PortId**"参数无效，函数应向**DET**报告错误代码[**DIO_E_PARAM_INVALID_PORT_ID**](#661-开发错误)。
 
 #### 7.3.4. Dio_WritePort
 
@@ -426,7 +426,7 @@ Dio_PortLevelType Dio_ReadChannelGroup (const Dio_ChannelGroupType * ChannelGrou
 
 **Dio_ReadChannelGroup**函数应进行移位，使函数读取的值与**LSB**对齐。此外，相关需求适用于**Dio_ReadChannelGroup**函数。
 
-如果启用了开发错误检测，函数**Dio_ReadChannelGroup**和[**Dio_WriteChannelGroup**](#736-dio_writechannelgroup)应检查"**ChannelGroupIdPtr**"参数在当前配置内是否有效。如果"**ChannelGroupIdPtr**"参数无效，函数应向**DET**报告错误代码**DIO_E_PARAM_INVALID_GROUP**。
+如果启用了开发错误检测，函数**Dio_ReadChannelGroup**和[**Dio_WriteChannelGroup**](#736-dio_writechannelgroup)应检查"**ChannelGroupIdPtr**"参数在当前配置内是否有效。如果"**ChannelGroupIdPtr**"参数无效，函数应向**DET**报告错误代码[**DIO_E_PARAM_INVALID_GROUP**](#661-开发错误)。
 
 #### 7.3.6. Dio_WriteChannelGroup
 
@@ -454,7 +454,7 @@ void Dio_WriteChannelGroup (
 void Dio_GetVersionInfo (Std_VersionInfoType* VersionInfo)
 ```
 
-如果为**DIO**驱动程序模块启用了**DET**，当参数为**NULL**指针时，函数**Dio_GetVersionInfo**应引发**DIO_E_PARAM_POINTER**并直接返回，不执行任何动作。
+如果为**DIO**驱动程序模块启用了**DET**，当参数为**NULL**指针时，函数**Dio_GetVersionInfo**应引发[**DIO_E_PARAM_POINTER**](#661-开发错误)并直接返回，不执行任何动作。
 
 #### 7.3.8. Dio_FlipChannel
 
@@ -516,7 +516,7 @@ void Dio_MaskedWritePort (
 
 ## 8. 时序图
 
-下图展示了调用 **Dio_ReadChannel** 和 **Dio_WriteChannel** 服务时的时序，展示的是正常操作模式。由于第 7.3 章中定义的所有其他服务具有完全相同的同步行为，本文档有意不再提供其他时序图。
+下图展示了调用 [**Dio_ReadChannel**](#731-dio_readchannel) 和 [**Dio_WriteChannel**](#732-dio_writechannel) 服务时的时序，展示的是正常操作模式。由于第 7.3 章中定义的所有其他服务具有完全相同的同步行为，本文档有意不再提供其他时序图。
 
 ### 8.1. 读取数字 I/O 的值
 

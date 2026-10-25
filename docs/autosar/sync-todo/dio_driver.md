@@ -6,11 +6,11 @@ Generated: 2026-10-24 · Issue: #52
 
 ## Rule checks (STANDARD.md expanded)
 - [x] Seven-chapter skeleton complete, numbering 1–7 continuous
-- [x] No forbidden chapters (source ch.6 requirements tracing / ch.9 sequence diagrams / ch.10 configuration specification / appendix A all omitted as required)
+- [x] Forbidden chapters omitted (source ch.6 Requirements Tracing, appendix A) — ch.9/ch.10 were translated back in later per the lifted bans: `## 8. 时序图` (reopen #65) and `## 9. 配置规范` (reopen #62, commits a5e12c2/04a009f)
 - [x] front-matter title is the only h1; no `# ` in the body; no `[SWS_Dio_xxxxx]` requirement IDs left
 - [x] WeChat footer `<section id="wechat">` + `<h4>`; nav registered
-- [x] §3.1 heading "输入文件和相关标准与规范" → "输入文件"
-  - Note: STANDARD.md §1 canonical; 12 site articles use "输入文件", DIO was the variant
+- [x] §3.1 heading is the direct translation "输入文件和相关标准与规范" (reverted 2026-10-25)
+  - Note: had been renamed to "输入文件" per the then-canonical STANDARD.md §1; user decision 2026-10-25 — translate the source heading directly → STANDARD.md §1/§2 updated, "输入文件" now a forbidden variant
 - [x] §4.2 heading changed to "汽车域的适用性"
   - Note: first changed to STANDARD.md's then-listed "适用于汽车领域"; the user settled on "汽车域的适用性" during PR review → STANDARD.md §2 updated accordingly (commit 493ed12)
 - [x] §7.5 heading kept as "调度函数"
@@ -38,7 +38,9 @@ Generated: 2026-10-24 · Issue: #52
 ## Decision log (append-only)
 - 2026-10-24 user: *Scheduled functions* named "调度函数" (not "周期函数") → STANDARD.md §2/§3, BswM/CanNm/Csm queued
 - 2026-10-24 user: *Applicability to car domains* named "汽车域的适用性" (not "适用于汽车领域") → STANDARD.md §2, 9 variant articles queued
+- 2026-10-25 user: §3.1 heading reverted to the direct translation "输入文件和相关标准与规范" (no canonical renames — headings translate the source directly) → STANDARD.md §1/§2 + skill updated; site-wide realignment queued in TODO.md Backlog
+- 2026-10-25 session: stale rule-check line corrected — `## 8. 时序图` / `## 9. 配置规范` were re-added by reopens #62/#65 (commits a5e12c2/04a009f) after this file was completed
 
 ## Out of scope (deliberately skipped)
-- Source ch.6 Requirements Tracing / ch.9 Sequence diagrams / ch.10 Configuration specification / appendix A — STANDARD.md-forbidden chapters, omitted as required
+- Source ch.6 Requirements Tracing / appendix A — STANDARD.md-forbidden chapters, omitted as required (ch.9 → `## 8. 时序图` and ch.10 → `## 9. 配置规范` were translated in afterwards — see reopens #62/#65)
 - The same wording deviations in port/pwm/adc/icu/ocu/bswm/cannm/csm — outside the DIO scope, tracked in the TODO.md todo list
