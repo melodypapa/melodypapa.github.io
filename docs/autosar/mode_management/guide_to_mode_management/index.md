@@ -7,15 +7,37 @@ release: R23-11
 
 
 
+## 参考文献
+
+[1] Software Component Template
+> AUTOSAR_CP_TPS_SoftwareComponentTemplate
+
+[2] Meta Model
+> AUTOSAR_FO_MMOD_MetaModel
+
+[3] Basic Software Module Description Template
+> AUTOSAR_CP_TPS_BSWModuleDescriptionTemplate
+
+[4] Specification of Basic Software Mode Manager
+> AUTOSAR_CP_SWS_BSWModeManager
+
+[5] Specification of Diagnostic Communication Manager
+> AUTOSAR_CP_SWS_DiagnosticCommunicationManager
+
+[6] Glossary
+> AUTOSAR_FO_TR_Glossary
+
 ## 1. 介绍
 
-本文档主要是针对**AUTOSAR 4.0.3**及以后版本的模式管理的通用介绍。主要目的是为**AUTOSAR**的用户和开发人员提供基于示例的**AUTOSAR**模式管理不同方面的详细概述。概述会和相关示例相结合的一起解释。本文档中的代码清单可以被视为**ECU**配置的相关示例。
+本文档主要是针对**AUTOSAR 4.0.3**及以后版本的模式管理的通用介绍。主要目的是为**AUTOSAR**的用户和开发人员提供基于示例的**AUTOSAR**模式管理不同方面的详细概述。概述会和相关示例相结合的一起解释。本文档中的代码清单共同构成了一个示例**ECU**（**sample ECU**）的配置。
 
-在第**2**章节会解释了基础的模式管理概念，例如：模式概述，模式切换的实现，模式管理器和模式用户的这些角色等。其次介绍了应用程序模式管理（**Application Mode management**）与基础软件模式管理（**Basic Software Mode management**）密切相关的依赖关系。
+第**2**章节解释了基础的模式管理概念，例如：模式概述，模式切换的实现，模式管理器和模式用户的这些角色等。其次介绍了应用程序模式管理（**Application Mode management**）与基础软件模式管理（**Basic Software Mode management**）密切相关的依赖关系。
 
 **BswM**是**AUTOSAR R4.0**中的中央模式管理模块（**central mode management module**），它是高度可配置的。如何实现这种配置是第3章节的主题。
 
-由于本主题的复杂性和广泛范围，仍有一些用例尚未在此处详细描述。
+### 1.1. 后续工作
+
+由于本主题的复杂性和广泛范围，仍有一些用例尚未在此处详细描述。这些问题将在后续版本中进一步完善（**These issues will be enhanced in further releases**）。
 
 * **ECU**作为网关
 * **FlexRay**的通信管理（**Communication management for FlexRay**）
@@ -26,7 +48,7 @@ release: R23-11
 
 ## 2. 总体机制和概念
 
-本章节概述了模式的概念以及**AUTOSAR**中有关状态的简短定义。术语模式和状态的定义可以在第**4.1**章节中找到。模式可以看作是一个**ECU**范围的全局变量的当前状态（在**R4.0**中，该范围限于单个分区（**Partition**））。它由**RTE**或调度管理器维护。可能的模式在**ModeDeclarationGroups**中定义。具体语法的定义可参考AUTOSAR软件组件模板[1]中定义。
+本章节概述了模式的概念以及**AUTOSAR**中有关状态的简短定义。术语模式和状态的定义可以在第**4.1**章节中找到。模式可以看作是一个**ECU**范围的全局变量的当前状态（在**R4.0**中，该范围限于单个分区（**Partition**））。它由**RTE**或调度管理器维护。一个模式可能的取值（**possible assignments**）在**ModeDeclarationGroups**中定义，而**ModeDeclarationGroups**定义于**AUTOSAR**软件组件模板[1]中。
 
 模式可以用于不同的目的：
 
@@ -37,7 +59,7 @@ release: R23-11
 
 AUTOSAR软件组件模板[1]定义了一种用于描述**AUTOSAR**中模式的通用机制。模式通过模式声明（**ModeDeclaration**）来定义。一个模式声明表示全局变量当前状态的一种可能取值。例如：在**ECU**状态管理中，可能存在**STARTUP**、**RUN**、**POST_RUN**、**SLEEP**等模式声明。
 
-模式声明组（**ModeDeclarationGroup**）将多个模式声明分组在一起，其方式类似于枚举（**enumeration**）将字面量（**literal**）分组。在上面的示例中，模式声明组可以是**ECUMODE**。对于每个模式声明组，都必须定义一个初始模式（**InitialMode**），该初始模式在启动时被赋值给该变量。图2.1展示了**AUTOSAR**元模型（**Metamodel**）中模式声明、模式声明组和可执行实体之间关系的摘录。
+模式声明组（**ModeDeclarationGroup**）将多个模式声明分组在一起，其方式类似于枚举（**enumeration**）将字面量（**literal**）分组。在上面的示例中，模式声明组可以是**ECUMODE**。对于每个模式声明组，都必须定义一个初始模式（**InitialMode**），该初始模式在启动时被赋值给该变量。图2.1展示了**AUTOSAR**元模型（**Metamodel**）[2]中模式声明、模式声明组和可执行实体之间关系的摘录。
 
 ![Figure2-1](Figure2-1.png)
 
@@ -623,7 +645,7 @@ switchport EcuMode { modeSwitchinterface MSIF_EcuMode }
 
 **BswM**的行为通过规则和动作列表来指定。规则是一个逻辑表达式，它组合各**ModeRequestTypeMap**的当前值。每条规则的评估结果会导致执行其**true**或**false**动作列表。
 
-**ModeControl**容器包含这些动作列表。一个动作列表可以由一组原子动作、其他"嵌套的"动作列表组成，也可以引用（嵌套的）规则，这些规则会在该动作列表的上下文中被评估。
+**ModeControlContainer**容器包含这些动作列表。一个动作列表可以由一组原子动作、其他"嵌套的"动作列表组成，也可以引用（嵌套的）规则，这些规则会在该动作列表的上下文中被评估。
 
 下面的示例展示了一个简单的规则，它激活专用**CAN**通道的**I-PDU**组。根据此规则，**BswM**必须提供一个名为**Can1_Indication**的**CanSMIndication**类型的模式请求端口。这是一个来自基础软件模块的模式请求，在此例中来自**CAN**状态管理器。在代码中，此模式请求端口对应于[4]中[SWS_BswM_00049]所描述的**API BswM_CanSM_CurrentState**。**source**参数标识此模式请求源端口所属的网络。由**BswM**的配置工具负责为所引用的**ECUC**容器分配**API**所需的正确参数。
 
@@ -1897,6 +1919,8 @@ actions pnc3requestedActions on condition {
 
 清单3.32：PNC报告PNC_REQUESTED或PNC_READY_SLEEP
 
+> 译注：清单3.32中规则 **pnc3requested** 的动作启用了 **PNC2_IPDU_ROUTING_PATHS**——这是R23-11官方PDF转markdown源文档中的提取讹误（规则体被插图分割），按上下文应为 **PNC3_IPDU_ROUTING_PATHS**。此处保留源文档原文并加注说明。
+
 #### 3.4.10. 服务发现控制
 
 **AUTOSAR**提供了一种由应用软件组件控制面向服务通信的标准方式。它利用**BswM**进行模式管理的通用手段。
@@ -1925,7 +1949,7 @@ actions pnc3requestedActions on condition {
 
 该端口将用于与服务发现交互这一事实，通过将**ServiceNeedsKind**设置为**BswMgrNeeds**来表达。
 
-交互的类型由**RoleBasedDataAssignment**决定，它可以是一下几种之一：
+交互的类型由**RoleBasedDataAssignment**决定，它可以是以下几种之一：
 
 * **ClientEventSubscription**
 * **ClientEventSubscriptionStatus**
@@ -1968,7 +1992,7 @@ interface modeSwitch MSIF_DcmDiagnosticSessionControl {
 
 清单3.33：DCM会话控制服务的模式组
 
-作为模式管理器的**DCM**可以将 会话控制服务的当前模式通知其他**BSW**模块，并在需要时将基础软件设置为相应的模式。清单3.34展示了对应的模式切换接口。
+作为模式管理器的**DCM**可以将会话控制服务的当前模式通知其他**BSW**模块，并在需要时将基础软件设置为相应的模式。清单3.34展示了对应的模式切换接口。
 
 注意，同一个接口也可以用于将当前诊断会话通知应用软件。
 
@@ -2286,7 +2310,7 @@ interface modeSwitch MSIF_DcmResponseOnEvent{
 
 ### 3.7. 分区间动作
 
-**BswM**没有实现任何机制来阻止执行影响驻留在另一个分区上的模块的动作。**BswM**的配置者在配置**BswM**动作时需要意识到这一点。通常，**BswM**可以安全地执行影响其自身分区的动作，但在配置影响另一个分区的**BswM**动作时，配置者必须给予特别考虑。在配置跨分区动作时，必须注意确保跨分区动作（在实现上是对另一个分区的函数调用）能够安全执行，而不会危及系统性能或稳定性。必要时，函数的实现者需要说明其使用上的限制（例如："未准备好在启用内存保护的情况下被跨分区调用"）。配置跨分区动作时，配置者尤其需要考虑以下问题：内存保护、分区的停止/重启，以及被调用方（即动作的接收方）所在分区的恰当准备。
+**BswM**没有实现任何机制来阻止执行影响驻留在另一个分区上的模块的动作。**BswM**的配置者在配置**BswM**动作时需要意识到这一点。通常，**BswM**可以安全地执行影响其自身分区的动作，但在配置影响另一个分区的**BswM**动作时，配置者必须给予特别考虑。在配置跨分区动作时，必须注意确保跨分区动作（在实现上是对另一个分区的函数调用）能够安全执行，而不会危及系统性能或稳定性。必要时，函数的实现者需要说明其使用上的限制（例如："未准备好在启用内存保护的情况下被跨分区调用"）。除其他事项外（**Among other things**），配置跨分区动作时，配置者需要考虑以下问题：内存保护、分区的停止/重启，以及被调用方（即动作的接收方）所在分区的恰当准备。
 
 ### 3.8. 分区间请求/指示
 
