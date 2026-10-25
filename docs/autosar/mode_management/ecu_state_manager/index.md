@@ -375,7 +375,19 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 下列**StartPreOS Sequence**的表格，显示了在**StartPreOS**序列中的所有活动，以及它们在[**EcuM_Init**](#7322-ecum_init)中应被执行的顺序。
 
-![Table7-1.png](Table7-1.png)
+表7.1：StartPreOS 序列（**StartPreOS Sequence**）
+
+| 初始化活动 | 说明 | 可选 |
+|---|---|---|
+| Callout [**EcuM_AL_SetProgrammableInterrupts**](#7521-ecum_al_setprogrammableinterrupts) | 在具有可编程中断优先级的**ECU**上，必须在**OS**启动之前设置这些优先级。 | yes |
+| Callout [**EcuM_AL_DriverInitZero**](#7522-ecum_al_driverinitzero) | 初始化块0。此Callout只允许初始化不使用**post-build**配置参数的**BSW**模块。此Callout不仅可以包含驱动程序初始化，还可以包含任何类型的**OS**前低级别初始化代码。可参见章节[6.3.5 驱动程序初始化](#635-驱动程序初始化)。 | yes |
+| Callout [**EcuM_DeterminePbConfiguration**](#7523-ecum_determinepbconfiguration) | 此Callout应返回一个指向完全初始化的[**EcuM_ConfigType**](#721-ecum_configtype)结构体的指针，其中包含**ECU**管理器模块及所有其他**BSW**模块的**post-build**配置数据。 | no |
+| 检查配置数据的一致性 | 如果检查失败，则调用[**EcuM_ErrorHook**](#7511-ecum_errorhook)。一致性检查的详细信息可参见章节[6.3.4 配置一致性检查](#634-配置一致性检查)。 | no |
+| Callout [**EcuM_AL_DriverInitOne**](#7524-ecum_al_driverinitone) | 初始化块I。此Callout不仅可以包含驱动程序初始化，还可以包含任何类型的**OS**前低级别初始化代码。可参见章节[6.3.5 驱动程序初始化](#635-驱动程序初始化)。 | yes |
+| 获取复位原因 | 复位原因通过调用**Mcu_GetResetReason**并按**EcuMWakeupSource**配置容器定义的映射关系推导得出。可参见章节[7.4.1.1 EcuM_SetWakeupEvent](#7411-ecum_setwakeupevent)和[7.3.5.4 EcuM_GetValidatedWakeupEvents](#7354-ecum_getvalidatedwakeupevents)。 | no |
+| 选择默认关机目标 | 可参见第**6.7**章关机目标中的[SWS_EcuM_02181]。 | no |
+| Callout [**EcuM_LoopDetection**](#7525-ecum_loopdetection) | 如果启用了环路检测（**Loop Detection**），则每次启动时都会调用此Callout。 | yes |
+| 启动**OS** | 启动**AUTOSAR OS**，参见[SWS_EcuM_02603]。 | no |
 
 **注意：**
 
@@ -403,7 +415,14 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 当功能通过[**EcuM_StartupTwo**](#7323-ecum_startuptwo)被激活时，**ECU**管理器模块需执行**StartPostOS**序列中的操作，具体内容可参见表7.2。
 
-![Table7-2.png](Table7-2.png)
+表7.2：StartPostOS 序列（**StartPostOS Sequence**）
+
+| 初始化活动 | 说明 | 可选 |
+|---|---|---|
+| 启动**BSW**调度程序 | | no |
+| 初始化**BSW**模式管理器 | | no |
+| 初始化**BSW**调度程序 | 初始化**BSW**模块使用的临界区（**critical sections**）信号量 | no |
+| 启动调度程序时序（**Scheduler Timing**） | 为**BSW**/**SWC**启动周期性事件 | no |
 
 **注意：**
 
@@ -478,7 +497,25 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 表7.3显示了**init block 0**和**init block 1**的一种可能和推荐的活动序列。根据硬件和软件配置，可以添加或移除相关的基础软件模块，当然也可以使用其他活动序列。
 
-![Table7-3.png](Table7-3.png)
+表7.3：驱动程序初始化细节，示例配置（**Driver Initialization Details, Sample Configuration**）
+
+| 推荐的初始化块 | 初始化活动 | 说明 |
+|---|---|---|
+| 初始化块0<sup>4</sup> | 默认错误跟踪器（**Default Error Tracer**） | 此模块应当始终是第一个被初始化的模块，以便其他模块能够报告开发错误。 |
+| 初始化块0 | 诊断事件管理器（**Diagnostic Event Manager**） | 预初始化（**Pre-Initialization**） |
+| 初始化块0 | 访问**post-build**配置数据所需的任何驱动程序 | 这些驱动程序不得依赖于**post-build**配置或**OS**特性。 |
+| 初始化块I<sup>5</sup> | **MCU**驱动 | |
+| 初始化块I | **Port**驱动 | |
+| 初始化块I | 通用定时器（**General Purpose Timer**） | |
+| 初始化块I | 看门狗驱动（**Watchdog Driver**） | 仅内部看门狗；外部看门狗可能需要**SPI** |
+| 初始化块I | 看门狗管理器（**Watchdog Manager**） | |
+| 初始化块I | **ADC**驱动 | |
+| 初始化块I | **ICU**驱动 | |
+| 初始化块I | **PWM**驱动 | |
+| 初始化块I | **OCU**驱动 | |
+
+> 4 初始化块0中的驱动程序列在**EcuMDriverInitListZero**配置容器中。
+> 5 初始化块I中的驱动程序列在**EcuMDriverInitListOne**配置容器中。
 
 #### 6.3.6. BSW 初始化
 
@@ -496,7 +533,15 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 #### 6.4.1. OffPreOS序列中的活动
 
-![Table7-4.png](Table7-4.png)
+表7.4：OffPreOS 序列（**OffPreOS Sequence**）
+
+| 关机活动 | 说明 | 可选 |
+|---|---|---|
+| 去初始化**BSW**模式管理器 | | no |
+| 去初始化**BSW**调度程序 | | no |
+| 检查唤醒事件。根据**EcuMIgnoreWakeupEvValOffPreOS**的配置，将考虑所有待定的唤醒事件，或仅考虑关机期间已验证的唤醒事件。 | 其目的是检测关机期间发生的唤醒事件 | no |
+| 如果唤醒事件待定，则将**RESET**设置为关机目标（将使用**EcuMDefaultResetModeRef**的默认复位模式） | 仅在检测到待定唤醒事件以允许立即启动时，才应执行此动作 | no |
+| **ShutdownOS** | 此**OS**任务中的最后一项操作 | no |
 
 在**OffPreOS**序列期间，如果配置参数**EcuMIgnoreWakeupEvValOffPreOS**设置为**true**，只需考虑那些不需要验证的唤醒事件，所有其他的唤醒事件可以忽略。如果配置参数**EcuMIgnoreWakeupEvValOffPreOS**设置为**false**时，不需要验证的唤醒事件和需要验证的待定唤醒事件都需被考虑到。
 
@@ -512,7 +557,11 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 **OffPostOS**序列执行了在操作系统关闭后，达到关机目标的最后步骤。由[**EcuM_Shutdown**](#7324-ecum_shutdown)函数发起此序列。关机目标可以是**ECUM_SHUTDOWN_TARGET_RESET**或**ECUM_SHUTDOWN_TARGET_OFF**，具体的复位方式由复位模式决定。有关详细信息，可参阅章节[6.7关机目标](#67-关机目标)
 
-![Table7-5.png](Table7-5.png)
+表7.5：OffPostOS 序列（**OffPostOS Sequence**）
+
+| 关机活动 | 说明 | 可选 |
+|---|---|---|
+| Callout [**EcuM_OnGoOffTwo**](#7532-ecum_ongoofftwo)；Callout [**EcuM_AL_Reset**](#7534-ecum_al_reset)或Callout [**EcuM_AL_SwitchOff**](#7533-ecum_al_switchoff) | 取决于所选的关机目标（**RESET**或**OFF**） | no |
 
 当关机目标为**RESET**时，**ECU**管理器模块需调用[**EcuM_AL_Reset**](#7534-ecum_al_reset)的Callout函数。当关机目标为**OFF**时，**ECU**管理器模块需调用[**EcuM_AL_SwitchOff**](#7533-ecum_al_switchoff)的**Callout**函数。
 
@@ -586,7 +635,15 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 #### 6.5.5. WakeupRestart序列中的活动
 
-![Table7-6.png](Table7-6.png)
+表7.6：唤醒重启活动（**Wakeup Restart activities**）
+
+| 唤醒活动 | 说明 | 可选 |
+|---|---|---|
+| 恢复**MCU**正常模式 | 所选的**MCU**模式在配置参数**EcuMNormalMcuModeRef**中配置 | |
+| 获取待定的唤醒源 | | |
+| Callout [**EcuM_DisableWakeupSources**](#7547-ecum_disablewakeupsources) | 禁用当前待定的唤醒源，但保持其他唤醒源处于武装（**armed**）状态，以便后续仍可唤醒。 | |
+| Callout [**EcuM_AL_DriverRestart**](#7548-ecum_al_driverrestart) | 初始化需要重新启动的驱动程序 | |
+| 解锁调度程序 | 从此点开始，所有其他任务可以再次运行。 | |
 
 **ECU**管理器模块需调用用于重新初始化驱动程序的[**EcuM_AL_DriverRestart**](#7548-ecum_al_driverrestart)的Callout函数。其中具有唤醒源的驱动程序通常需要重新初始化。有关驱动程序初始化的更多详细信息，可参考章节[6.3.5驱动程序初始化](#635-驱动程序初始化)。
 
@@ -1216,8 +1273,6 @@ InternalBehavior EcuStateManager {
 | SLEEP    | 当没有**RUN**和**POST_RUN**请求存在，且关机目标设置为**SLEEP**时，**EcuM**请求**SLEEP**模式。       |
 | SHUTDOWN | 当没有**RUN**和**POST_RUN**请求存在，且关机目标设置为**SHUTDOWN**时，**EcuM**请求**SHUTDOWN**模式。 |
 
-![Table7-8.png](Table7-8.png)
-
 **EcuM**需通过调用接口**BswM_EcuM_CurrentState\([EcuM_StateType](#726-ecum_statetype) State\)**通知**BswM**当前状态。当**RTE**通过确认端口给出反馈时，**EcuM**将设置一个新的状态。
 
 ### 6.11. 高级主题
@@ -1254,8 +1309,6 @@ InternalBehavior EcuStateManager {
 | 唤醒期间的**RAM**检查失败          | ECUM_E_RAM_CHECK_FAILED                | 由实现分配 |
 | **Postbuild**配置数据不一致        | ECUM_E_CONFIGURATION_DATA_INCONSISTENT | 由实现分配 |
 | 用于报告操作系统调用问题的错误代码 | ECUM_E_OS_CALL_FAILED                  | 由实现分配 |
-
-![Table7-9.png](Table7-9.png)
 
 **EcuM**需假定[**EcuM_ErrorHook**](#7511-ecum_errorhook)不会返回（集成商的代码）。
 
