@@ -143,6 +143,8 @@ DOC_TARGETS = {
     "trgbswmoduledocumentlist": ("EXTERNAL", "TR_BSWModuleList", None),
     "trbswmoduledocumentlist": ("EXTERNAL", "TR_BSWModuleList", None),
     "swsbswmodulelist": ("EXTERNAL", "TR_BSWModuleList", None),
+    "trbswmodulelist": ("EXTERNAL", "TR_BSWModuleList", None),
+    "trgbswmodulelist": ("EXTERNAL", "TR_BSWModuleList", None),
 }
 
 # Cross-article module mentions (report-only class). Status reflects the site
@@ -156,10 +158,19 @@ MODULE_LINKS = {
     "EcuM": ("SITE", "../ecu_state_manager/"),
     "BswM": ("SITE", "../basic_software_mode_manager/"),
     "Det": ("NO-ARTICLE", None),
-    "DEM": ("NO-ARTICLE", None),
+    "DEM": ("SITE", "../../diagnostics/diagnostic_event_manager/"),
     "CanIf": ("NO-ARTICLE", None),
     "Mcu": ("NO-ARTICLE", None),
-    "NvM": ("NO-ARTICLE", None),
+    "NvM": ("SITE", "../../memory/nvram_manager/"),
+    "Dcm": ("SITE", "../../diagnostics/diagnostic_communication_manager/"),
+    "SoAd": ("SITE", "../../communication/SoAd/SoAd/"),
+    "ComM": ("NO-ARTICLE", None),
+    "CanSM": ("NO-ARTICLE", None),
+    "LinSM": ("NO-ARTICLE", None),
+    "FrSM": ("NO-ARTICLE", None),
+    "EthSM": ("NO-ARTICLE", None),
+    "Sd": ("NO-ARTICLE", None),
+    "Nm": ("NO-ARTICLE", None),
 }
 
 
@@ -185,7 +196,7 @@ def parse_entries31(article: str):
             if not m:
                 continue
             n, title = m.group(1), m.group(2).strip()
-            d = re.search(r"(AUTOSAR_[A-Z]+_[A-Za-z]+)", b)
+            d = re.search(r"(AUTOSAR_[A-Za-z0-9]+(?:_[A-Za-z0-9]+)+)", b)
             entries[n] = (title, d.group(1) if d else "")
     return entries
 
