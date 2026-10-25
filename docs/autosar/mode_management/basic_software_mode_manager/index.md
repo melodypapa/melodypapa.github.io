@@ -50,22 +50,22 @@ release: R23-11
 ### 3.1. 输入文件及相关标准和规范
 
 [1] General Specification of Basic Software Modules
-> AUTOSAR_SWS_BSWGeneral
+> AUTOSAR_CP_SWS_BSWGeneral
 
 [2] Guide to Mode Management
-> AUTOSAR_EXP_ModeManagementGuide
+> AUTOSAR_CP_EXP_ModeManagementGuide
 
 [3] General Requirements on Basic Software Modules
-> AUTOSAR_SRS_BSWGeneral
+> AUTOSAR_CP_SRS_BSWGeneral
 
 [4] Requirements on Mode Management
-> AUTOSAR_SRS_ModeManagement
+> AUTOSAR_CP_SRS_ModeManagement
 
 [5] Specification of RTE Software
-> AUTOSAR_SWS_RTE
+> AUTOSAR_CP_SWS_RTE
 
 [6] Software Component Template
-> AUTOSAR_TPS_SoftwareComponentTemplate
+> AUTOSAR_CP_TPS_SoftwareComponentTemplate
 
 ### 3.2. 相关规范
 
@@ -99,7 +99,7 @@ release: R23-11
 
 ### 5.3. ComM
 
-来自**ComM**的模式切换指示（**Mode Switch Indications**）可以通过**BswM**进一步传播到**SW-C**。
+来自**ComM**的模式切换指示（**Mode Switch Indications**）经由**BswM**进一步传播到**SW-C**。
 
 **BswM**可以通过**ComMUsers**向**ComM**请求通信模式。
 
@@ -115,13 +115,13 @@ release: R23-11
 
 ### 5.6. CanSM
 
-来自**CanSM**的模式切换指示可以通过**BswM**进一步传播到**SW-C**。
+来自**CanSM**的模式切换指示经由**BswM**进一步传播到**SW-C**。
 
 ### 5.7. LinSM
 
 **BswM**协调**LinSM**中LIN调度表（**LIN Schedule Tables**）的切换，和**COM**中相应I-PDU组的启动和停止。
 
-来自**LinSM**的模式切换指示可以通过**BswM**进一步传播到**SW-C**。
+来自**LinSM**的模式切换指示经由**BswM**进一步传播到**SW-C**。
 
 ### 5.8. LinTP
 
@@ -129,13 +129,13 @@ LIN传输协议（**LIN Transport Protocol**）作为**LinIf**一部分的，会
 
 ### 5.9. FrSM
 
-来自**FrSM**的模式切换指示可以通过**BswM**进一步传播到**SW-C**。
+来自**FrSM**的模式切换指示经由**BswM**进一步传播到**SW-C**。
 
 **FlexRay**单槽模式（**Single Slot Mode**）的使用，由**BswM**的请求，**FrSM**控制。FlexRay软件栈的发送能力可以由**BswM**通过**FrSM**调用**FrSM_SetEcuPassive API**来控制。
 
 ### 5.10. EthSM
 
-来自**EthSM**的模式切换指示可以通过**BswM**进一步传播到**SW-C**。
+来自**EthSM**的模式切换指示经由**BswM**进一步传播到**SW-C**。
 
 ### 5.11. DCM
 
@@ -149,7 +149,7 @@ LIN传输协议（**LIN Transport Protocol**）作为**LinIf**一部分的，会
 
 ### 5.13. J1939Nm
 
-**J1939Nm**可以通过**BswM_J1939Nm_StateChangeNotification**提供状态指示（**state indication**）。
+**J1939Nm**可以通过[**BswM_J1939Nm_StateChangeNotification**](#7318-bswm_j1939nm_statechangenotification)提供状态指示（**state indication**）。
 
 ### 5.14. J1939Rm
 
@@ -161,7 +161,7 @@ LIN传输协议（**LIN Transport Protocol**）作为**LinIf**一部分的，会
 
 示例：在禁用正常通信（**Disable Normal Communication**）模式下，**BswM**需要禁止相应网络管理通道上的网络管理通信。
 
-**Nm**模块可以使用**BswM_Nm_CarWakeUpIndication**来指示整车被唤醒。
+**Nm**模块可以使用[**BswM_Nm_CarWakeUpIndication**](#7322-bswm_nm_carwakeupindication)来指示整车被唤醒。
 
 ### 5.16. NvM
 
@@ -173,15 +173,9 @@ LIN传输协议（**LIN Transport Protocol**）作为**LinIf**一部分的，会
 
 ### 5.18. Sd
 
-**BswM**通过以下API从**Sd**模块接收状态指示（示例参见章节7.1函数定义）： 
+**BswM**通过**Sd**导出的多个**API**（**several exported APIs**，示例参见章节[7.3 函数定义](#73-函数定义)）从**Sd**模块接收状态指示。这些来自**Sd**的状态指示，可以配置为**BswMModeRequestSources**。
 
-* **BswM_Sd_ClientServiceCurrentState**
-* **BswM_Sd_ConsumedEventGroupCurrentState**
-* **BswM_Sd_EventHandlerCurrentState**
-
-这些来自**Sd**的状态指示，可以配置为**BswMModeRequestSources**。
-
-### 5.19. File structure
+### 5.19. 文件结构
 
 **BswM**可以使用未在本规范中明确定义的**AUTOSAR BSW**模块中的接口。
 
@@ -229,7 +223,7 @@ LIN传输协议（**LIN Transport Protocol**）作为**LinIf**一部分的，会
 
 **BswMEventRequestPort**事件请求与模式请求的不同，在于请求者不向**BswM**发送请求的模式/值，也就没有模式条件供**BswM**评估。而是**BswM**只能评估事件的接收情况。
 
-当请求者发送/调用事件时，**BswMEventRequestPort**将处于**SET**状态。**BswM**可以稍后通过执行**BswMClearEventRequest**动作将**BswMEventRequestPort**置于**CLEAR**状态。下图展示了具有两个条件的示例规则。规则和可用逻辑操作集被定义为ECU配置的一部分。
+当请求者发送/调用事件时，**BswMEventRequestPort**将处于**SET**状态。**BswM**可以稍后通过执行**BswMClearEventRequest**动作将**BswMEventRequestPort**置于**CLEAR**状态。下图展示了具有两个条件的示例规则。规则和可用逻辑操作集被定义为**ECU**配置的一部分（在第**10.2**章中描述）。
 
 ![Figure7-1](Figure7-1.png)
 
@@ -243,7 +237,7 @@ LIN传输协议（**LIN Transport Protocol**）作为**LinIf**一部分的，会
 * 如果**BswMEventRequestPort**处于**SET**状态，则**BswMModeCondition**应评估为**FALSE**。
 * 如果**BswMEventRequestPort**处于**CLEAR**状态，则**BswMModeCondition**应评估为**TRUE**。
 
-当**BswM**在配置的**BswMEventRequestPort**上接收到事件时，（例如：**BswM_ComM_InitiateReset**被**ComM**调用），**BswMEventRequestPort**需被置于**SET**状态。
+当**BswM**在配置的**BswMEventRequestPort**上接收到事件时，（例如：[**BswM_ComM_InitiateReset**](#735-bswm_comm_initiatereset)被**ComM**调用），**BswMEventRequestPort**需被置于**SET**状态。
 
 当在**BswMEventRequestPort**上执行**BswMClearEventRequest**动作，则**BswMEventRequestPort**需被置于**CLEAR**状态。
 
@@ -282,7 +276,7 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 1. 在模式请求/指示的上下文环境中立即执行，
 2. 推迟到BswM的周期主函数中执行。
 
-在调用者的上下文环境中执行立即（**immediate**）请求。系统集成者有责任确保动作列表（**action list**）的执行不会危及系统性能（**performance**）或一致性（**consistency**）。特别是，调用者可能在中断的环境中运行，则有关在中断环境中使用系统函数的限制必须被考虑。
+在调用者的上下文环境中执行立即（**immediate**）请求。系统集成者有责任确保动作列表（**action list**）的执行不会危及系统性能（**performance**）或一致性（**consistency**）。特别是，如果调用者正在（或可能）在中断的环境中运行（**(or may run)** in interrupt context），则有关在中断环境中使用系统函数的限制必须被考虑。
 
 下图展示了立即操作和延迟操作之间的区别。
 
@@ -310,11 +304,11 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 
 使用至少一个延迟模式条件的所有规则，需在每次执行**BswM**主函数（**main function**）期间进行评估。
 
-**BswM**需推迟在其主函数处理期间所收到的模式仲裁请求，直到主函数完成。任何此类推迟的立即请求（**IMMEDIATE request**）都应在**BswM**主函数退出之前直接被处理。任何此类推迟的延迟请求（**DEFERRED request**）请求都应在下一个后续的**BswM**主函数中被处理。
+**BswM**需推迟在其主函数处理期间所收到的模式仲裁请求，直到主函数完成。任何此类推迟的立即请求（**IMMEDIATE request**）都应在**BswM**主函数退出之前直接被处理。任何此类推迟的请求（**DEFERRED request**）都应在下一个后续的**BswM**主函数中被处理。
 
 **BswM**需推迟在处理**IMMEDIATE**请求期间收到的模式仲裁请求，直到此请求处理完成。任何此类推迟的立即请求（**IMMEDIATE request**）应在处理原始立即请求（**original IMMEDIATE request**）之后直接被处理。任何此类推迟的延迟请求（**DEFERRED request**）都应在下一个后续的**BswM**主函数中被处理。
 
-**BswM**实现可以选择使用保护机制（**protection mechanisms**），例如：独占区（**Exclusive Area**），以保证动作的执行或者**BswM**主函数中的执行不会被任何其他更高优先级的任务中断。
+**BswM**实现可以选择使用保护机制（**protection mechanisms**），例如：独占区（**Exclusive Area**），以保证动作的执行或者**BswM**主函数中的执行不会被任何其他任务（**any other task**，例如一个更高优先级的任务）中断。
 
 **端口更新的术语说明：**
 
@@ -332,7 +326,7 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 
 每个**BswMModeRequestPort**初始化后的初始值可以由配置容器**BswMModeInitValue**控制。
 
-在定义**BswMModeInitValue**的情况下，**BswM**应在**BswM**被初始化时，使用**BswMBswModeInitValue**或者**BswMCompuScaleModeValue**的值来初始化相应的**BswMModeRequestSource**。对于单个的**BswMModeInitValue**，**BswM**需拒绝同时包含**BswMBswModeInitValue**和**BswMCompuScaleModeValue**的配置。该初始化值将用于仲裁规则，直到相应的模式仲裁请求已被更新，例如：每次调用**BswM_RequestMode**都需更新**GenericRequest**模式。
+在定义**BswMModeInitValue**的情况下，**BswM**应在**BswM**被初始化时，使用**BswMBswModeInitValue**或者**BswMCompuScaleModeValue**的值来初始化相应的**BswMModeRequestSource**。对于单个的**BswMModeInitValue**，**BswM**需拒绝同时包含**BswMBswModeInitValue**和**BswMCompuScaleModeValue**的配置。该初始化值将用于仲裁规则，直到相应的模式仲裁请求已被更新，例如：每次调用[**BswM_RequestMode**](#7326-bswm_requestmode)都需更新**GenericRequest**模式。
 
 **注意：**
 
@@ -352,18 +346,18 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 
 因为**BswM**不需要存储或响应对其所执行动作中任何**BSW**模块特定的返回值，因此，**BSW**中不同的状态管理器（**different state managers**）将它们当前的状态指示给**BswM**，用作模式仲裁的输入。
 
-但是，如果错误（**E_NOT_OK**）被返回，**BswM**可以发出**DET**运行时错误，并可以取消当前执行的动作列表。
+但是，如果错误（**E_NOT_OK**）被返回，**BswM**可以发出**DET**运行时错误，和/或取消当前执行的动作列表。
 
 ![Figure7-2](Figure7-2.png)
 
-如上图7-2所示，**BswM**可能包含多个动作列表（**Action List**），一个动作列表（**Action List**）可以容纳多个动作（**Action**）。为了减少动作列表的总数，动作列表应该可以被级联。
+如上图7-2所示，**BswM**可能包含多个动作列表（**Action List**），一个动作列表（**Action List**）可以容纳多个动作（**Action**）。为了减少动作列表的总数，应可以级联动作列表（**it shall be possible to cascade them**）。
 
 动作列表的元素可以是:
 1. 一个具体动作（**a concrete action**）
 2. 一个对另一个动作列表的引用（**a reference to another action list**）
 3. 一个模式仲裁需要执行的规则（**a rule to be executed by the mode arbitration**）。
    
-所以需要有一个标志连接到每个动作列表条目，说明它的类型：动作（**action**）/ 参考（**reference**）/ 规则（**rule**）。包含具体行动的列表与包含引用的列表，或者甚至混合列表的列表，它们的激活方式之间是没有区别。
+所以需要有一个标志连接到每个动作列表条目，说明它的类型：动作（**action**）/ 参考（**reference**）/ 规则（**rule**）。包含具体动作的列表与包含引用的列表、甚至混合列表的列表，它们的激活方式之间应没有区别（**there shall be no difference**）。
 
 #### 6.2.1. 模式处理循环
 
@@ -376,7 +370,7 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 
 **注意：**
 
-模式请求者只能从本地**BswM**接收模式切换指示。对于来自本地代理**SW-C**发出的其他**ECU**的请求也同样适用。
+模式请求者只能从本地**BswM**接收模式切换指示。对于源自另一个**ECU**、但由本地代理**SW-C**（**local proxy SW-C**）代为发出的请求也同样适用。
 
 ![Figure7-3](Figure7-3.png)
 
@@ -400,9 +394,9 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 
 一个顶级规则（**top-level rule**）是指并不嵌套在动作列表中的规则。一个顶级动作列表（**top-level action list**）是一种由顶级规则直接执行的动作列表，它不嵌套在另一个动作列表中。 
 
-在模式仲裁期间，如果一个顶级动作列表被多个规则触发，这会导致在模式控制期间只有单个触发执行了该动作列表的。它仅适用于顶级动作列表，并不适用于嵌套规则和嵌套动作列表，原因在于它们在父动作列表中的顺序是由用户自定义的。
+在模式仲裁期间，如果一个顶级动作列表被多个规则触发，这会导致在模式控制期间只有单个触发执行了该动作列表的。它仅适用于顶级动作列表，并不适用于嵌套规则和嵌套动作列表，原因在于它们在父动作列表中的顺序是由用户自定义的，并且应当被遵循（**and should be respected**）。
 
-在模式控制期间，如果要执行多个顶级动作列表，则执行顺序应**BswMActionListPriority**的设置从高到低。在**BswMActionListPriority**相同的情况下，执行顺序是任意的。对于不是顶级动作列表的动作列表，需忽略**BswMActionListPriority**。
+在模式控制期间，如果要执行多个顶级动作列表，则执行顺序应按照**BswMActionListPriority**的设置从最高值执行到最低值（**start with the highest BswMActionListPriority and continue to the lowest**）。在**BswMActionListPriority**相同的情况下，执行顺序是任意的。对于不是顶级动作列表的动作列表，需忽略**BswMActionListPriority**。
 
 如果没有**BswMActionListPriority**的动作列表应被解释为**BswMActionListPriority**等于**0**。
 
@@ -493,7 +487,7 @@ BswM也能够调用用户定义的函数（**user defined functions**），同�
 1. 一个作为**BswMModeRequestSource**的**BswMTimer**。
 2. 一个控制此**BswMTimer**的相应动作（可参见**BswMTimerControl**配置参数）
 
-**BswMTimer**的数值包括：**BSWM_TIMER_STOPPED**、**BSWM_TIMER_STARTED**、**BSWM_TIMER_EXPIRED**。
+**BswMTimer**的值例如（**e.g.**）为：**BSWM_TIMER_STOPPED**、**BSWM_TIMER_STARTED**、**BSWM_TIMER_EXPIRED**。
    
 定时器的操作只能在**BswMTimerControl**动作的上下文环境中控制。同时**BswMTimer**的值可以被**BswM**中所配置的其他规则进行评估，并以此触发动作列表。没有外部接口（**external interface**）来控制或者操作此定时器。
 
@@ -503,20 +497,20 @@ BswM也能够调用用户定义的函数（**user defined functions**），同�
 
 注意：定时器只能通过 BswMTimerAction 动作重新加载（不可能自动重新加载）。
 
-每个**BswMTimer**处于**BSWM_TIMER_STARTED**模式时，需在[**BswM_MainFunction**](#731-bswm_mainfunction)中递减定时器的计数（需按[**BswM_MainFunction**](#731-bswm_mainfunction)的周期时间）。
+每个**BswMTimer**处于**BSWM_TIMER_STARTED**模式时，需在[**BswM_MainFunction**](#751-bswm_mainfunction)中递减定时器的计数（需按[**BswM_MainFunction**](#751-bswm_mainfunction)的周期时间）。
 
 **注意：**
 
-**BswMTimer**分辨率（**resolution**）需是[**BswM_MainFunction**](#731-bswm_mainfunction)周期时间的倍数。此外**BswMTimer**的准确性取决于[**BswM_MainFunction**](#731-bswm_mainfunction)的准确性。
+**BswMTimer**分辨率（**resolution**）需是[**BswM_MainFunction**](#751-bswm_mainfunction)周期时间的倍数。此外**BswMTimer**的准确性取决于[**BswM_MainFunction**](#751-bswm_mainfunction)的准确性。
 
-如果处于**BSWM_TIMER_STARTED**模式的**BswMTimer**时间到期时，则**BswMTimer**模式需更改为**BSWM_TIMER_EXPIRED**，接着**BswMTimer**模式需在同一个[**BswM_MainFunction**](#731-bswm_mainfunction)的周期中进行仲裁。
+如果处于**BSWM_TIMER_STARTED**模式的**BswMTimer**时间到期时，则**BswMTimer**模式需更改为**BSWM_TIMER_EXPIRED**，接着**BswMTimer**模式需在同一个[**BswM_MainFunction**](#751-bswm_mainfunction)的周期中进行仲裁。
 
 **BSWM_TIMER_STOP**的**BswMTimerAction**动作需立即停止引用的**BswMTimer**（通过：**BswMTimerRef**）并将其模式更改为**BSWM_TIMER_STOPPED**。
 
 与**BswMTimer**相关的**BswMRequestProcessing**（例如：**IMMEDIATE**、**DEFERRED**）配置会被**BswM**忽略。**BswM**会始终将**BswMTimer**的处理视为**DEFERRED**，并在**BswM**主函数期间进行仲裁。
 
 注意：
-在**BswM_TIMER_EXPIRED**模式下的**BswMTimer**不会被**BswM**自动设置为**BSWM_TIMER_STOPPED**。为了将**BswMTimer**从**BSWM_TIMER_EXPIRED**转换到另一种模式，用户需要配置一个动作（**Action**）。如果没有配置任何动作使**BswMTimer**退出**BSWM_TIMER_EXPIRED**模式，那么**BswMTimer**将在接下来的**BswM**主函数周期中继续被仲裁为**BSWM_TIMER_EXPIRED**。
+在**BSWM_TIMER_EXPIRED**模式下的**BswMTimer**不会被**BswM**自动设置为**BSWM_TIMER_STOPPED**。为了将**BswMTimer**从**BSWM_TIMER_EXPIRED**转换到另一种模式，用户需要配置一个动作（**Action**）。如果没有配置任何动作使**BswMTimer**退出**BSWM_TIMER_EXPIRED**模式，那么**BswMTimer**将在接下来的**BswM**主函数周期中继续被仲裁为**BSWM_TIMER_EXPIRED**。
 
 ### 6.4. 多分区支持
 
@@ -633,13 +627,13 @@ ModeRequestTypeMap AppModeTypeMap {
 命名为应用程序模式管理器（**Application Mode Manager**）的**SW-C**包含了两个端口：
 
 1. 一个模式请求端口（**Mode Request Port**）的**P-Port**。
-2. 一个模式切换（**Mode Switch**）的**R-Port**。（命名为**modeSwitchPort**以区别于模式切换**P-Port**）。 
+2. 一个模式切换（**Mode Switch**）的**R-Port**。（命名为**modeNotificationPort**，以区别于模式切换**P-Port**）。 
 
-第一个模式请求端口是请求更改应用程序模式，而第二个模式切换端口是在**BswM**执行模式更改时用来接收通知。应用程序模式管理器的模式请求端口（**modeRequestPort**）连接到相应的**BSW**模式管理器的模式请求端口。由于这是正常的发送方/接收方通信（**Sender/Receiver communication**），所以应用程序模式管理器可以连接到多个**BSW**模式管理器，即使在远程**ECU**上也是如此。
+第一个模式请求端口是请求更改应用程序模式，而第二个模式切换端口是在**BswM**执行模式更改时用来接收通知。应用程序模式管理器的模式请求端口（**modeRequestPort0**）连接到相应的**BSW**模式管理器的模式请求端口。由于这是正常的发送方/接收方通信（**Sender/Receiver communication**），所以应用程序模式管理器可以连接到多个**BSW**模式管理器，即使在远程**ECU**上也是如此。
 
 为了切换应用模式，**Bsw**模式管理器有一个模式切换端口（**modeSwitchPort_\{Name\}**），通过本地**RTE**实现。
 
-当**RTE**执行模式切换时，它会通知所有通过模式切换**R-Ports**连接到提供端口的连接实体，包括：BSW模块（**BSW Modules**）或**SW-C**。以下示例展示了应用程序模式管理器（**Application Mode Manager**）、其他与模式相关的应用程序部分（**Application Part**）和**BSW**模式管理器自身（注意它的名称为**modeSwitchPort_\{Name\}**，但端口类型为模式切换端口）。所有这些连接也是本地的。
+当**RTE**执行模式切换时，它会通知所有通过模式切换**R-Ports**连接到提供端口的连接实体，包括：BSW模块（**BSW Modules**）或**SW-C**。以下示例展示了应用程序模式管理器（**Application Mode Manager**）、其他与模式相关的应用程序部分（**Application Part**）和**BSW**模式管理器自身（注意它的名称为**modeNotificationPort_\{Name\}**，但端口类型为模式切换端口）。所有这些连接也是本地的。
 
 图7-5显示基于**SW-C**的应用程序模式管理器（在 AUTOSAR R3.1 和更早版本中使用）直接切换应用程序模式，而不向**BSW**模式管理器请求它。
 
@@ -744,7 +738,7 @@ ServiceComponentType BswM {
 };
 ```
 
-内部行为（**Internal Behavior**）依赖于相关的模式请求端口的参数**BswMRequestProcessing**。 对于**BSWM_DEFERRED**，因为**BSWM**模式管理器在其[**BswM_MainFunction**](#731-bswm_mainfunction)中循环读取请求，所以**RTE**不会执行任何特殊操作。相比之下，对于**BSWM_IMMEDIATE**，因为**RTE**必须立即触发模式仲裁，所以**BSW**模式管理器需要注册一个触发模式仲裁的触发函数。对于上面的示例，模式请求的立即处理将需要在**BSW**模式管理器的内部行为中进行以下声明：
+内部行为（**Internal Behavior**）依赖于相关的模式请求端口的参数**BswMRequestProcessing**。 对于**BSWM_DEFERRED**，因为**BSWM**模式管理器在其[**BswM_MainFunction**](#751-bswm_mainfunction)中循环读取请求，所以**RTE**不会执行任何特殊操作。相比之下，对于**BSWM_IMMEDIATE**，因为**RTE**必须立即触发模式仲裁，所以**BSW**模式管理器需要注册一个触发模式仲裁的触发函数。对于上面的示例，模式请求的立即处理将需要在**BSW**模式管理器的内部行为中进行以下声明：
 
 ```
 RunnableEntity ModeArbitrationRunnable {
@@ -815,13 +809,13 @@ DataReceiveEvent AppModeRequestEvent {
 
 **注意：** 服务请求规则会收集指向同一服务实例的所有请求端口。这样，只要请求了任何事件或方法，就会请求客户端服务。
 
-客户端订阅**SenderReceiverInterface**应按如下方式定义：其中{RuleName}为对应规则的名称，{PortName}为对应**SW-C**端口的短名称。
+客户端订阅**SenderReceiverInterface**应按照[SWS_BSwM_91010]（见章节[7.7.5.1 S/R接口 ClientServiceRequest](#7751-s/r接口-clientservicerequest)）中定义的方式定义：其中{RuleName}为对应规则的名称，{PortName}为对应**SW-C**端口的短名称。
 
 **注意：** {PortName}足以匹配对应的请求端口。
 
 **注意：** 同一个接口同时用于请求事件和请求客户端服务。
 
-对于根据**TPS_SWCT_03504**的每个请求端口，应创建一个对应的**RPortPrototype**。
+对于根据**TPS_SWCT_03504**的每个请求端口，应按照[SWS_BSwM_91007]（见章节[7.7.2.4 S/R端口 BswM_ClientServiceRequest](#7724-s/r端口-bswm_clientservicerequest)）创建一个对应的**RPortPrototype**。
 
 属于同一事件（组）的所有请求端口应作为事件订阅规则的输入。
 
@@ -865,9 +859,9 @@ DataReceiveEvent AppModeRequestEvent {
 
 作为客户端且对事件和方法订阅状态感兴趣的软件组件，会暴露一个由**ModeSwitchInterface**类型化的**RPortPrototype**。通过这种方式，软件组件可以由**BswM**通知订阅是否已建立。
 
-客户端服务订阅状态模式切换接口（**Mode Switch Interface**）应按如下方式定义：其中{RuleName}为对应规则的名称，{SwcName_PortName}为对应**SW-C**端口的**SW-C**短名称和端口名称。初始模式应为**RELEASE_SERVICE**。
+客户端服务订阅状态模式切换接口（**Mode Switch Interface**）应按照[SWS_BSwM_91016]（见章节[7.7.4.1 模式切换接口 ClientServiceSubscriptionState](#7741-模式切换接口-clientservicesubscriptionstate)）定义：其中{RuleName}为对应规则的名称，{SwcName_PortName}为对应**SW-C**端口的**SW-C**短名称和端口名称。初始模式应为**RELEASE_SERVICE**。
 
-**注意：** 同一个接口既用于通知事件订阅，也用于指示客户端服务的可用性，具体取决于所涉及的是事件还是服务。
+**注意：** 同一个接口既用于通知事件订阅，也用于指示客户端服务的可用性，具体取决于是否有事件受到影响（**depending on whether events are affected**）。
 
 对于根据**TPS_SWCT_03505**（软件组件接收客户端事件和方法订阅状态变化的通知）被任何**RPortPrototype**引用的每个端口组，应创建一个**BswM**规则。其短名称应为**SANR_{端口组的短名称}**。
 
@@ -879,7 +873,7 @@ DataReceiveEvent AppModeRequestEvent {
 
 **注意：** 只有当与端口组关联的所有事件和所有服务都可用时，该端口组才可用。
 
-对于根据**TPS_SWCT_03505**被任何**RPortPrototype**引用的每个端口组，应创建一个对应的**PPortPrototype**（客户端订阅通知端口）。
+对于根据**TPS_SWCT_03505**被任何**RPortPrototype**引用的每个端口组，应按照[SWS_BSwM_91015]（见章节[7.7.2.6 模式切换端口 BswM_ClientServiceSubscriptionState](#7726-模式切换端口-bswm_clientservicesubscriptionstate)）创建一个对应的**PPortPrototype**（客户端订阅通知端口）。
 
 应创建一个动作列表，通过将客户端订阅通知**PPort**的当前模式设置为**REQUEST_SERVICE**，来执行对相应**SW-C**的通知。该动作列表应作为客户端事件订阅通知规则的**TRUE**动作列表。
 
@@ -895,13 +889,13 @@ DataReceiveEvent AppModeRequestEvent {
 
 **约束：** 对于服务实例的每个实例，根据**TPS_SWCT_03502**只允许一个端口。
 
-服务器服务请求**SenderReceiverInterface**应按如下方式定义：其中{RuleName}为对应规则的名称，{PortName}为服务器**SW-C**对应**SW-C**端口的短名称。
+服务器服务请求**SenderReceiverInterface**应按照[SWS_BSwM_91009]（见章节[7.7.5.2 S/R接口 ServerServiceRequest](#7752-s/r接口-serverservicerequest)）定义：其中{RuleName}为对应规则的名称，{PortName}为服务器**SW-C**对应**SW-C**端口的短名称。
 
 **注意：** {PortName}足以匹配对应的请求端口。
 
 对于受根据**TPS_SWCT_03502**的请求端口影响的每个服务实例，应创建一个**BswM**规则。该规则的短名称应为目标服务的短名称，并加上前缀**SOR_**。
 
-对于根据**TPS_SWCT_03502**的每个请求端口，应创建一个对应的**RPortPrototype**。
+对于根据**TPS_SWCT_03502**的每个请求端口，应按照[SWS_BSwM_91011]（见章节[7.7.2.5 S/R端口 BswM_ServerServiceRequest](#7725-s/r端口-bswm_serverservicerequest)）创建一个对应的**RPortPrototype**。
 
 属于同一服务实例的请求端口应作为服务提供规则的输入。
 
@@ -931,11 +925,11 @@ DataReceiveEvent AppModeRequestEvent {
 
 作为服务器且对服务实例事件订阅状态感兴趣的软件组件，会暴露一个由**ModeSwitchInterface**类型化的**RPortPrototype**。通过这种方式，软件组件可以由**BswM**通知订阅的变化。
 
-服务器服务订阅状态模式切换接口应按如下方式定义：其中{RuleName}为对应规则的名称，{SwcName_PortName}为对应**SW-C**端口的**SW-C**短名称和端口名称。初始模式应为**RELEASE_SERVICE**。
+服务器服务订阅状态模式切换接口应按照[SWS_BSwM_91013]（见章节[7.7.4.2 模式切换接口 ServerServiceSubscriptionState](#7742-模式切换接口-serverservicesubscriptionstate)）定义：其中{RuleName}为对应规则的名称，{SwcName_PortName}为对应**SW-C**端口的**SW-C**短名称和端口名称。初始模式应为**RELEASE_SERVICE**。
 
 对于根据**TPS_SWCT_03503**（软件组件接收服务器事件订阅状态变化的通知）被任何**RPortPrototype**引用的每个端口组，应创建一个**BswM**规则。其短名称应为**SESNR_{端口组的短名称}**。
 
-对于根据**TPS_SWCT_03503**的每个通知端口，应创建一个对应的**PPortPrototype**（服务器订阅通知端口）。
+对于根据**TPS_SWCT_03503**的每个通知端口，应按照[SWS_BSwM_91012]（见章节[7.7.2.7 模式切换端口 BswM_ServerServiceSubscriptionState](#7727-模式切换端口-bswm_serverservicesubscriptionstate)）创建一个对应的**PPortPrototype**（服务器订阅通知端口）。
 
 对于受服务器事件订阅通知规则影响的每个事件（组），应创建一个**BswMModeRequestSource.BswMSdEventHandlerCurrentState**，作为该规则的输入。
 
@@ -956,9 +950,91 @@ DataReceiveEvent AppModeRequestEvent {
 
 ## 7. API规范
 
-### 7.1. 函数定义
+### 7.1. 导入的类型
 
-#### 7.1.1. BswM_BswMPartitionRestarted
+**BSW**模式管理器应仅使用**SWS_BswM_00001**中列出的导入类型。
+
+| 所属模块 | 头文件 | 导入的类型 |
+|---|---|---|
+| CanSM | CanSM.h | CanSM_BswMCurrentStateType |
+| Com | Com.h | Com_IpduGroupIdType |
+| ComM | ComM.h | ComM_InitStatusType |
+| ComM | ComM.h | ComM_PncModeType |
+| ComM | Rte_ComM_Type.h | ComM_InhibitionStatusType |
+| ComM | Rte_ComM_Type.h | ComM_ModeType |
+| ComM | Rte_ComM_Type.h | ComM_UserHandleType |
+| ComStack_Types | ComStack_Types.h | NetworkHandleType |
+| ComStack_Types | ComStack_Types.h | PNCHandleType |
+| ComStack_Types | ComStack_Types.h | PduIdType |
+| Dcm | Dcm.h | Dcm_CommunicationModeType |
+| EcuM | EcuM.h | EcuM_RunStatusType |
+| EcuM | EcuM.h | EcuM_StateType |
+| EcuM | EcuM.h | EcuM_WakeupSourceType |
+| EcuM | EcuM.h | EcuM_WakeupStatusType |
+| EcuM | Rte_EcuM_Type.h | EcuM_UserType |
+| Eth | Eth_GeneralTypes.h | Eth_ModeType |
+| EthIf | EthIf.h | EthIf_SwitchPortGroupIdxType |
+| EthSM | EthSM.h | EthSM_NetworkModeStateType |
+| EthTrcv | Eth_GeneralTypes.h | EthTrcv_LinkStateType |
+| FrSM | FrSM.h | FrSM_BswM_StateType |
+| IdsM | IdsM_Filters_Types.h | IdsM_Filters_BlockStateType |
+| J1939Dcm | J1939Dcm.h | J1939Dcm_StateType |
+| J1939Rm | J1939Rm.h | J1939Rm_StateType |
+| LinIf | LinIf.h | LinIf_SchHandleType |
+| LinIf | LinIf.h | LinTp_Mode |
+| LinSM | LinSM.h | LinSM_ModeType |
+| Os | Os.h | CoreIdType |
+| Nm | NmStack_types.h | Nm_StateType |
+| NvM | NvM.h | NvM_MultiBlockRequestType |
+| NvM | Rte_NvM_Type.h | NvM_BlockIdType |
+| NvM | Rte_NvM_Type.h | NvM_RequestResultType |
+| Os | Os.h | IdleModeType |
+| Os | Os.h | StatusType |
+| Sd | Sd.h | Sd_ClientServiceCurrentStateType |
+| SoAd | SoAd.h | SoAd_SoConIdType |
+| SoAd | SoAd.h | SoAd_SoConModeType |
+| Std | Std_Types.h | Std_ReturnType |
+| Std | Std_Types.h | Std_VersionInfoType |
+
+### 7.2. 类型定义
+
+本节中定义的以下数据类型应用于本规范中定义的函数。
+
+#### 7.2.1. BswM_ConfigType
+
+| 名称 | BswM_ConfigType |
+|---|---|
+| 类别 | 结构体（**Structure**） |
+| 成员 | 类型：- |
+| 成员 | 注释：该结构体的内容取决于所选的配置变体。 |
+| 描述 | 该结构体包含**BSW**模式管理器的所有**post-build**可配置参数。指向此结构体的指针会传递给**BSW**模式管理器的初始化函数，用于配置。 |
+| 可通过 | **BswM.h**获得 |
+
+结构体**BswM_ConfigType**应包含**BSW**模式管理器的所有**post-build**可配置参数。该结构体的确切内容取决于所选的配置变体。
+
+#### 7.2.2. BswM_ModeType
+
+| 名称 | BswM_ModeType |
+|---|---|
+| 类别 | 类型（**Type**） |
+| 派生自 | **uint16** |
+| 范围 | 0-65535 |
+| 描述 | 该类型标识可向**BswM**请求的模式 |
+| 可通过 | **BswM.h**获得 |
+
+#### 7.2.3. BswM_UserType
+
+| 名称 | BswM_UserType |
+|---|---|
+| 类别 | 类型（**Type**） |
+| 派生自 | **uint16** |
+| 范围 | 0-65535 |
+| 描述 | 该类型标识向**BswM**发出模式请求的**BswM**用户 |
+| 可通过 | **BswM.h**获得 |
+
+### 7.3. 函数定义
+
+#### 7.3.1. BswM_BswMPartitionRestarted
 
 **说明**: 如果包含**BswM**的分区已经被重新启动，函数则被**Restart Task**调用。
 
@@ -968,7 +1044,7 @@ void BswM_BswMPartitionRestarted (
 )
 ```
 
-#### 7.1.2. BswM_CanSM_CurrentState
+#### 7.3.2. BswM_CanSM_CurrentState
 
 **说明**: 函数被**CanSM**模块调用，用于指示**CanSM**当前状态。
 
@@ -979,7 +1055,11 @@ void BswM_CanSM_CurrentState (
 )
 ```
 
-#### 7.1.3. BswM_ComM_CurrentMode
+如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略状态指示（**state indication**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+如果 **BswMDevErrorDetect** 开关已启用，应检查参数 **CurrentState** 是否处于允许的范围内。发生错误时，**BswM** 应忽略状态指示（**state indication**），并以值 **[**BSWM_E_REQ_MODE_OUT_OF_RANGE**](#651-开发错误)** 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+#### 7.3.3. BswM_ComM_CurrentMode
 
 **说明**: 函数被**ComM**模块调用，用于指示**ComM**通道的当前通信模式。
 
@@ -990,7 +1070,11 @@ void BswM_ComM_CurrentMode (
 )
 ```
 
-#### 7.1.4. BswM_ComM_CurrentPNCMode
+如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+如果 **BswMDevErrorDetect** 开关已启用，应检查参数 **RequestedMode** 是否处于允许的范围内。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以值 **[**BSWM_E_REQ_MODE_OUT_OF_RANGE**](#651-开发错误)** 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+#### 7.3.4. BswM_ComM_CurrentPNCMode
 
 **说明**: 函数被**ComM**模块调用，用于指示**PNC**的当前模式。
 
@@ -1001,7 +1085,11 @@ void BswM_ComM_CurrentPNCMode (
 )
 ```
 
-#### 7.1.5. BswM_ComM_InitiateReset
+如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+如果 **BswMDevErrorDetect** 开关已启用，应检查参数 **CurrentPncMode** 是否处于允许的范围内。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以值 **[**BSWM_E_REQ_MODE_OUT_OF_RANGE**](#651-开发错误)** 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+#### 7.3.5. BswM_ComM_InitiateReset
 
 **说明**: 函数被**ComM**模块调用，用于发出关闭信号。
 
@@ -1011,7 +1099,7 @@ void BswM_ComM_InitiateReset (
 )
 ```
 
-#### 7.1.6. BswM_Dcm_ApplicationUpdated
+#### 7.3.6. BswM_Dcm_ApplicationUpdated
 
 **说明**: 函数被**DCM**模块调用，用于报告更新的应用程序。
 
@@ -1021,7 +1109,9 @@ void BswM_Dcm_ApplicationUpdated (
 )
 ```
 
-#### 7.1.7. BswM_Dcm_CommunicationMode_CurrentState
+如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+#### 7.3.7. BswM_Dcm_CommunicationMode_CurrentState
 
 **说明**: 函数被**DCM**模块调用，用于通知**BswM**通信模式的当前状态。
 
@@ -1032,7 +1122,15 @@ void BswM_Dcm_CommunicationMode_CurrentState (
 )
 ```
 
-#### 7.1.8. BswM_Deinit
+此函数的行为应使用配置容器 **BswMDcmComModeRequest** 进行配置，其中配置参数 **BswMDcmComMChannelRef** 与此函数的参数 **Network** 相关联。
+
+如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+如果 **BswMDevErrorDetect** 开关已启用，应检查参数 **RequestedMode** 是否处于允许的范围内。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以值 **[**BSWM_E_REQ_MODE_OUT_OF_RANGE**](#651-开发错误)** 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+**CDD**实现提示：所有可能触发 **PDU** 发送的 **AUTOSAR** **BSW**模块都提供一个用于启用/禁用发送的 API。为了在相应的诊断请求中禁用整个通信，使用通信协议的**CDD**模块同样提供这样一个 API 是有意义的。这些函数可以在链接到此函数的已配置动作列表中被调用。
+
+#### 7.3.8. BswM_Deinit
 
 **说明**: 去初始化**BSW**模式管理器。
 
@@ -1042,7 +1140,9 @@ void BswM_Deinit (
 )
 ```
 
-#### 7.1.9. BswM_EcuM_CurrentState
+在调用 **BswM_Deinit** 之后，即使发出了任何模式请求或调用了**BswM**主函数，**BswM** 也不应再执行任何模式处理。
+
+#### 7.3.9. BswM_EcuM_CurrentState
 
 **说明**: 函数被**EcuM**模块调用，用于指示当前的**ECU**操作模式。
 
@@ -1052,7 +1152,11 @@ void BswM_EcuM_CurrentState (
 )
 ```
 
-#### 7.1.10. BswM_EcuM_CurrentWakeup
+如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+如果 **BswMDevErrorDetect** 开关已启用，应检查参数 **CurrentState** 是否处于允许的范围内。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以值 **[**BSWM_E_REQ_MODE_OUT_OF_RANGE**](#651-开发错误)** 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+#### 7.3.10. BswM_EcuM_CurrentWakeup
 
 **说明**: 函数被**EcuM**模块调用，用于指示唤醒源的当前状态。
 
@@ -1063,7 +1167,11 @@ void BswM_EcuM_CurrentWakeup (
 )
 ```
 
-#### 7.1.11. BswM_EcuM_RequestedState
+如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+如果 **BswMDevErrorDetect** 开关已启用，应检查参数 **state** 是否处于允许的范围内。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以值 **[**BSWM_E_REQ_MODE_OUT_OF_RANGE**](#651-开发错误)** 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+#### 7.3.11. BswM_EcuM_RequestedState
 
 **说明**: 函数被**EcuM**模块调用，用于通知运行请求协议（**Run Request Protocol**）的当前状态。
 
@@ -1074,9 +1182,15 @@ void BswM_EcuM_RequestedState (
 )
 ```
 
-#### 7.1.12. BswM_EthIf_PortGroupLinkStateChg
+如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
 
-**说明**: 函数被**EthIf**模块调用，用于指示某个以太网交换机端口组（**Ethernet switch port group**）的链路状态变化
+如果 **BswMDevErrorDetect** 开关已启用，应检查参数 **State** 是否处于允许的范围内。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以值 **[**BSWM_E_REQ_MODE_OUT_OF_RANGE**](#651-开发错误)** 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+如果 **BswMDevErrorDetect** 开关已启用，应检查参数 **CurrentStatus** 是否处于允许的范围内。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以值 **[**BSWM_E_REQ_MODE_OUT_OF_RANGE**](#651-开发错误)** 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+#### 7.3.12. BswM_EthIf_PortGroupLinkStateChg
+
+**说明**: 函数被**EthIf**模块调用，用于指示某个以太网交换机端口组（**Ethernet switch port group**）的链路状态变化。
 
 ```C
 void BswM_EthIf_PortGroupLinkStateChg (
@@ -1085,7 +1199,11 @@ void BswM_EthIf_PortGroupLinkStateChg (
 )
 ```
 
-#### 7.1.13. BswM_EthSM_CurrentState
+如果 **BswMDevErrorDetect** 开关已启用，例程 **BswM_EthIf_PortGroupLinkStateChg** 应检查**BSW**模式管理器是否已初始化。如果**BswM**尚未初始化，**BswM** 应忽略该模式请求，并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告。
+
+如果 **BswMDevErrorDetect** 开关已启用，**BswM_EthIf_PortGroupLinkStateChg** 的参数应被检查是否处于允许的范围内。发生错误时，**BswM** 应忽略该模式请求，并以值 [**BSWM_E_REQ_MODE_OUT_OF_RANGE**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告。
+
+#### 7.3.13. BswM_EthSM_CurrentState
 
 **说明**: 函数被**EthSM**模块调用，用于指示**EthSM**当前状态。
 
@@ -1096,7 +1214,11 @@ void BswM_EthSM_CurrentState (
 )
 ```
 
-#### 7.1.14. BswM_FrSM_CurrentState
+如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略状态指示（**state indication**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+如果 **BswMDevErrorDetect** 开关已启用，应检查参数 **CurrentState** 是否处于允许的范围内。发生错误时，**BswM** 应忽略状态指示（**state indication**），并以值 **[**BSWM_E_REQ_MODE_OUT_OF_RANGE**](#651-开发错误)** 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+#### 7.3.14. BswM_FrSM_CurrentState
 
 **说明**: 函数被**FrSM**模块调用，用于指示**FrSM**当前状态。
 
@@ -1107,7 +1229,11 @@ void BswM_FrSM_CurrentState (
 )
 ```
 
-#### 7.1.15. BswM_GetVersionInfo
+如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略状态指示（**state indication**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+如果 **BswMDevErrorDetect** 开关已启用，应检查参数 **CurrentState** 是否处于允许的范围内。发生错误时，**BswM** 应忽略状态指示（**state indication**），并以值 **[**BSWM_E_REQ_MODE_OUT_OF_RANGE**](#651-开发错误)** 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+#### 7.3.15. BswM_GetVersionInfo
 
 **说明**: 返回**BswM**模块的版本信息。
 
@@ -1117,7 +1243,7 @@ void BswM_GetVersionInfo (
 )
 ```
 
-#### 7.1.16. BswM_Init
+#### 7.3.16. BswM_Init
 
 **说明**: 初始化**BSW**模式管理器。
 
@@ -1127,7 +1253,17 @@ void BswM_Init (
 )
 ```
 
-#### 7.1.17. BswM_J1939DcmBroadcastStatus
+**BswM_Init** API 的可重入性被设置为"条件可重入（**Conditionally reentrant**）"，以支持 **BswM** 被实例化在多个分区中的实现（例如在单核系统中使用多个**BSW**分区，或在多核系统中）。
+
+该例程初始化**BSW**模式管理器。此例程执行完毕后，**BSW**模式管理器即可对传入的模式请求进行仲裁。
+
+该例程应初始化**BSW**模式管理器的所有模块全局变量。
+
+**BswM_Init** 在可被调用之前，应仅要求**OS**和**SchM**已被初始化。
+
+如果 **BswMDevErrorDetect** 开关已启用，应检查给定配置集的内容是否处于允许的边界内。如果检测到错误，则不应执行**BSW**模式管理器的初始化，并应以 [**BSWM_E_PARAM_CONFIG**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+#### 7.3.17. BswM_J1939DcmBroadcastStatus
 
 **说明**: 此**API**告诉**BswM**可用网络的所需通信状态。该状态通常通过**COM I-PDU Group Switch**激活。
 
@@ -1137,7 +1273,9 @@ void BswM_J1939DcmBroadcastStatus (
 )
 ```
 
-#### 7.1.18. BswM_J1939Nm_StateChangeNotification
+**BswM_J1939DcmBroadcastStatus** 的参数 **NetworkMask** 是一个位掩码，其位位置与由 **BswMJ1939DcmBroadcastStatus.BswMJ1939DcmChannelRef** 参数所引用的 **ComMChannel.ComMChannelId** 相对应。对于规则处理，**BswM** 应使用 **NetworkMask** 中位于被引用的 **ComMChannel.ComMChannelId** 所配置位置上的位的值（0 或 1）。
+
+#### 7.3.18. BswM_J1939Nm_StateChangeNotification
 
 **说明**: J1939Nm状态更改后，通知当前的J1939Nm状态。
 
@@ -1149,7 +1287,7 @@ void BswM_J1939Nm_StateChangeNotification (
 )
 ```
 
-#### 7.1.19. BswM_LinSM_CurrentSchedule
+#### 7.3.19. BswM_LinSM_CurrentSchedule
 
 **说明**: 函数被**LinSM**模块调用，用于指示特定**LIN**通道的当前活动调度表。
 
@@ -1160,7 +1298,9 @@ void BswM_LinSM_CurrentSchedule (
 )
 ```
 
-#### 7.1.20. BswM_LinSM_CurrentState
+如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略调度表指示（**schedule indication**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+#### 7.3.20. BswM_LinSM_CurrentState
 
 **说明**: 函数被**LinSM**模块调用，用于指示**LinSM**当前状态。
 
@@ -1171,7 +1311,11 @@ void BswM_LinSM_CurrentState (
 )
 ```
 
-#### 7.1.21. BswM_LinTp_RequestMode
+如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略状态指示（**state indication**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+如果 **BswMDevErrorDetect** 开关已启用，应检查参数 **CurrentState** 是否处于允许的范围内。发生错误时，**BswM** 应忽略状态指示（**state indication**），并以值 **[**BSWM_E_REQ_MODE_OUT_OF_RANGE**](#651-开发错误)** 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+#### 7.3.21. BswM_LinTp_RequestMode
 
 **说明**: 函数被**LinTP**模块调用，用于请求相应**LIN**通道的模式。与**LinTp_Mode**相关的**LIN**调度表需被使用。
 
@@ -1182,7 +1326,11 @@ void BswM_LinTp_RequestMode (
 )
 ```
 
-#### 7.1.22. BswM_Nm_CarWakeUpIndication
+如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+如果 **BswMDevErrorDetect** 开关已启用，应检查参数 **LinTpRequestedMode** 是否处于允许的范围内。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以值 **[**BSWM_E_REQ_MODE_OUT_OF_RANGE**](#651-开发错误)** 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+#### 7.3.22. BswM_Nm_CarWakeUpIndication
 
 **说明**: 函数被**Nm**模块调用，用于指示整车被唤醒。
 
@@ -1192,7 +1340,7 @@ void BswM_Nm_CarWakeUpIndication (
 )
 ```
 
-#### 7.1.23. BswM_Nm_StateChangeNotification
+#### 7.3.23. BswM_Nm_StateChangeNotification
 
 **说明**: **Nm**状态更改后，当前**Nm**状态的通知。
 
@@ -1203,7 +1351,7 @@ void BswM_Nm_StateChangeNotification (
 )
 ```
 
-#### 7.1.24. BswM_NvM_CurrentBlockMode
+#### 7.3.24. BswM_NvM_CurrentBlockMode
 
 **说明**: 函数被**NvM**模块调用，用于指示**NvM Block**的当前块模式（**block mode**）。
 
@@ -1214,7 +1362,11 @@ void BswM_NvM_CurrentBlockMode (
 )
 ```
 
-#### 7.1.25. BswM_NvM_CurrentJobMode
+如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略块模式指示（**block mode indication**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+如果 **BswMDevErrorDetect** 开关已启用，应检查参数 **CurrentBlockMode** 是否处于允许的范围内。发生错误时，**BswM** 应忽略块模式指示（**block mode indication**），并以值 **[**BSWM_E_REQ_MODE_OUT_OF_RANGE**](#651-开发错误)** 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+#### 7.3.25. BswM_NvM_CurrentJobMode
 
 **说明**: 函数被**NvM**模块调用，用于通知**BswM**多块作业（**multi block job**）的当前状态。
 
@@ -1225,7 +1377,11 @@ void BswM_NvM_CurrentJobMode (
 )
 ```
 
-#### 7.1.26. BswM_RequestMode
+如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略作业模式指示（**job mode indication**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+如果 **BswMDevErrorDetect** 开关已启用，应检查参数 **MultiBlockRequest** 是否处于允许的范围内。发生错误时，**BswM** 应忽略作业模式指示（**job mode indication**），并以值 **[**BSWM_E_REQ_MODE_OUT_OF_RANGE**](#651-开发错误)** 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+#### 7.3.26. BswM_RequestMode
 
 **说明**: 对请求模式（**request mode**）的通用函数调用（**Generic function call**）。该功能只能由没有特定模式请求接口的其他的**BSW**模块使用。
 
@@ -1236,7 +1392,13 @@ void BswM_RequestMode (
 )
 ```
 
-#### 7.1.27. BswM_Sd_ClientServiceCurrentState
+如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+如果 **BswMDevErrorDetect** 开关已启用，应检查参数 **requested_mode** 是否处于允许的范围内。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以值 **[**BSWM_E_REQ_MODE_OUT_OF_RANGE**](#651-开发错误)** 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+如果 **BswMDevErrorDetect** 开关已启用，应检查参数 **requesting_user** 是否处于允许的范围内。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以值 **[**BSWM_E_REQ_USER_OUT_OF_RANGE**](#651-开发错误)** 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+#### 7.3.27. BswM_Sd_ClientServiceCurrentState
 
 **说明**: 函数被**Sd**模块调用，用于指示客户端服务的当前状态（可用/关闭）。
 
@@ -1247,7 +1409,11 @@ void BswM_Sd_ClientServiceCurrentState (
 )
 ```
 
-#### 7.1.28. BswM_Sd_ConsumedEventGroupCurrentState
+如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+如果 **BswMDevErrorDetect** 开关已启用，应检查参数 **CurrentClientState** 是否处于允许的范围内。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以值 **[**BSWM_E_REQ_MODE_OUT_OF_RANGE**](#651-开发错误)** 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+#### 7.3.28. BswM_Sd_ConsumedEventGroupCurrentState
 
 **说明**: 函数被**Sd**模块调用，用于指示**Consumed Eventgroup**的当前状态（可用/关闭）。
 
@@ -1258,7 +1424,11 @@ void BswM_Sd_ConsumedEventGroupCurrentState (
 )
 ```
 
-#### 7.1.29. BswM_Sd_EventHandlerCurrentState
+如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+如果 **BswMDevErrorDetect** 开关已启用，应检查参数 **ConsumedEventGroupState** 是否处于允许的范围内。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以值 **[**BSWM_E_REQ_MODE_OUT_OF_RANGE**](#651-开发错误)** 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+#### 7.3.29. BswM_Sd_EventHandlerCurrentState
 
 **说明**: 函数被**Sd**模块调用，用于指示**EventHandler**的当前状态（已请求/已释放）。
 
@@ -1269,7 +1439,11 @@ void BswM_Sd_EventHandlerCurrentState (
 )
 ```
 
-#### 7.1.30. BswM_SoAd_SoConModeChg
+如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+如果 **BswMDevErrorDetect** 开关已启用，应检查参数 **EventHandlerStatus** 是否处于允许的范围内。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以值 **[**BSWM_E_REQ_MODE_OUT_OF_RANGE**](#651-开发错误)** 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+#### 7.3.30. BswM_SoAd_SoConModeChg
 
 **说明**: 函数被**SoAd**模块调用，用于通知套接字连接的状态变化。
 
@@ -1280,23 +1454,15 @@ void BswM_SoAd_SoConModeChg (
 )
 ```
 
-#### 7.1.31. BswM_WdgM_RequestPartitionReset（OBSOLETE）
-
-**说明**: 函数被**WdgM**模块调用，用于请求分区重置的函数。
-
-```C
-void BswM_WdgM_RequestPartitionReset (
-    ApplicationType Application
-)
-```
-
-### 7.2. 回调通知
+### 7.4. 回调通知
 
 **BswM**中没有回调通知（**call-back notifications**）。
 
-### 7.3. 调度函数
+### 7.5. 调度函数
 
-#### 7.3.1. BswM_MainFunction
+这些函数由基础软件调度程序（**Basic Software Scheduler**）直接调用。以下函数应没有返回值且没有参数。所有函数均不可重入。
+
+#### 7.5.1. BswM_MainFunction
 
 **说明**: **BswM**的主函数。
 
@@ -1305,6 +1471,259 @@ void BswM_MainFunction (
     void
 )
 ```
+
+### 7.6. 期望接口
+
+本章列出从其他模块所需的所有接口。
+
+本章定义了实现本模块核心功能所需的所有接口。
+
+#### 7.6.1. 强制接口
+
+| API 函数 | 头文件 | 描述 |
+|---|---|---|
+| 无强制接口。 | | |
+
+#### 7.6.2. 可选接口
+
+| API 函数 | 头文件 | 描述 |
+|---|---|---|
+| Com_DisableReceptionDM | Com.h | 禁用给定 I-PDU 组内各 I-PDU 的接收超时监控（**deadline monitoring**）。 |
+| Com_EnableReceptionDM | Com.h | 启用给定 I-PDU 组内各 I-PDU 的接收超时监控。 |
+| Com_IpduGroupStart | Com.h | 启动一个预配置的 I-PDU 组。例如，在调用 **Com_IpduGroupStart**() 之后，周期 I-PDU 将被周期性地发送。若 **Initialize** 为 **true**，则 I-PDU 组中的所有 I-PDU 应在该组启动之前被（重新）初始化，即它们的行为应如同 **COM** 启动之后一样，例如滤波器对象的旧值（**old_value**）和信号组的影子缓冲区（**shadow buffers**）必须被（重新）初始化。 |
+| Com_IpduGroupStop | Com.h | 停止一个预配置的 I-PDU 组。例如，在调用 **Com_IpduGroupStop**() 之后，周期 I-PDU 将被停止发送。 |
+| Com_SwitchIpduTxMode | Com.h | 服务 **Com_SwitchIpduTxMode** 将 **PduId** 所引用 I-PDU 的传输模式设置为 **Mode**。如果传输模式发生改变，新模式应立即生效（见 **SWS_Com_00239**）。如果所请求的传输模式对该 I-PDU 而言已经处于激活状态，则该调用没有任何效果。 |
+| ComM_GetCurrentComMode | ComM.h | 查询当前通信模式的函数。**ComM** 应使用总线状态管理器（**Bus State Managers**）的相应接口来获取网络的当前通信模式（调用总线状态管理器 API：<Bus>SM_GetCurrentComMode(...)）。 |
+| ComM_GetInhibitionStatus | ComM.h | 返回一个 **ComM** 通道的禁止状态（**inhibition status**）。 |
+| ComM_GetMaxComMode | ComM.h | 查询对应用户所允许的最大通信模式的函数。 |
+| ComM_GetRequestedComMode | ComM.h | 查询对应用户当前已请求的通信模式的函数。 |
+| ComM_GetStatus | ComM.h | 返回 **AUTOSAR** 通信管理器的初始化状态。在调用 **ComM_DeInit**() 之后，**ComM** 的状态应为 **COMM_UNINIT**，并且需要重新调用 **ComM_Init**，以确保 **ComM** 将其内部状态机重启为默认值。 |
+| ComM_GetVersionInfo | ComM.h | 该函数返回本模块的版本信息。 |
+| ComM_LimitChannelToNoComMode | ComM.h | 更改通道的禁止状态，使其从 **COMM_NO_COMMUNICATION** 变为更高的通信模式。（另请参见 **ComM_LimitECUToNoComMode**，功能相同，但作用于所有通道） |
+| ComM_LimitECUToNoComMode | ComM.h | 更改 **ECU**（即所有通道）的禁止状态，使其从 **COMM_NO_COMMUNICATION** 变为更高的通信模式。（另请参见 **ComM_LimitChannelToNoComMode**，功能相同，但作用于特定通道） |
+| ComM_PreventWakeUp | ComM.h | 更改对应通道的 **COMM_NO_WAKEUP** 禁止状态。 |
+| ComM_ReadInhibitCounter | ComM.h | 该函数返回被拒绝的 **COMM_FULL_COMMUNICATION** 用户请求的数量。 |
+| ComM_RequestComMode | ComM.h | 由用户请求通信模式。注意：以下模式不是有效的用户请求，因为它们被用作内部模式：**COMM_SILENT_COMMUNICATION**（该模式用于关机时的同步）、**COMM_FULL_COMMUNICATION_WITH_WAKEUP_REQUEST**（该模式在 **ComM** 通道状态机内部使用，当所用硬件支持该特性（例如与 **OA TC10** 兼容的以太网硬件）时，用于触发下层在网络上请求唤醒）。以下模式是有效的用户请求：**COMM_NO_COMMUNICATION**、**COMM_FULL_COMMUNICATION**。由于 **ComM** 通信禁止，通信请求也可能被释放。 |
+| ComM_ResetInhibitCounter | ComM.h | 该函数复位被禁止的 **COMM_FULL_COMMUNICATION** 请求计数器。 |
+| ComM_SetECUGroupClassification | ComM.h | 更改 **ECU** 组分类（**ECU Group Classification**）状态（见第10.2.2章）。 |
+| ControlIdle | Os.h | 该 API 允许调用者选择在 **OS** 空闲时间（例如没有激活的**任务**/**ISR**时）执行的空闲模式动作。它可用于实现节能。实际的空闲模式取决于硬件，未被标准化。每个内核的默认空闲模式为 **IDLE_NO_HALT**。 |
+| Det_ReportError | Det.h | 报告开发错误的服务。 |
+| EcuM_AL_DriverInitBswM_<x> | EcuM.h | 该回调应提供由**BSW**模式管理器调用的**BSW**模块初始化。 |
+| EcuM_GoDownHaltPoll | EcuM.h | 根据先前选择的关机目标，指示**ECU**状态管理器模块进入睡眠、复位或关闭模式。 |
+| EcuM_SetState | EcuM.h | 由**BswM**调用的函数，用于通知状态切换。 |
+| EthIf_StartAllPorts | EthIf.h | 请求将所有已配置且受影响的 **EthSwt** 端口设置为 **ETH_MODE_ACTIVE**。 |
+| EthIf_SwitchPortGroupRequestMode | EthIf.h | 为 **EthIfSwtPortGroup** 请求一个模式。该调用应通过为端口组所引用的所有 **EthSwtPort** 调用 **EthSwt_SetSwitchPortMode** 而转发给 **EthSwt**。 |
+| FrSM_AllSlots | FrSM.h | 该 API 函数可用于离开 **KeySlot Only** 模式。 |
+| FrSM_SetEcuPassive | FrSM.h | 该 API 函数可用于将 **ECU** 的所有 **FlexRay** 集群设置为只接收模式。 |
+| Fw_SetFirewallState（草案） | Fw.h | **BswM** 调用该函数以指示 **ECU** 状态变化。标签：atp.Status=draft |
+| IdsM_BswM_StateChanged | IdsM_Cbk.h | **BswM** 调用该回调函数以指示 **ECU** 状态变化。 |
+| J1939Dcm_SetState | J1939Dcm.h | 将 **J1939Dcm** 的通信状态更改为离线或在线。 |
+| J1939Rm_SetState | J1939Rm.h | 将 **J1939Rm** 的通信状态更改为离线（仅支持 **AC** 请求）或在线。 |
+| LinSM_ScheduleRequest | LinSM.h | 上层请求更改一个 **LIN** 网络上的时调度表（**schedule table**）。 |
+| Nm_DisableCommunication | Nm.h | 禁用 **NM** **PDU** 的发送能力。为此，当 **NmBusType** 未设置为 **NM_BUSNM_LOCALNM** 时，应调用 <Bus>Nm_DisableCommunication（例如，当通道配置为 **CAN** 时，会调用 **CanNm_DisableCommunication** 函数）。 |
+| Nm_EnableCommunication | Nm.h | 启用 **NM** **PDU** 的发送能力。为此，当 **NmBusType** 未设置为 **NM_BUSNM_LOCALNM** 时，应调用 <Bus>Nm_EnableCommunication（例如，当通道配置为 **CAN** 时，会调用 **CanNm_EnableCommunication** 函数）。 |
+| Sd_ServiceGroupStart | Sd.h | 启动一个预配置的 **SdServiceGroup**。例如，在调用 **Sd_ServiceGroupStart**() 之后，对于 **SdServiceGroup** 中尚未被请求的所有服务器服务，将向外发送 **OfferService** 条目。 |
+| Sd_ServiceGroupStop | Sd.h | 停止一个预配置的 **SdServiceGroup**。例如，在调用 **Sd_ServiceGroupStop**() 之后，对于 **SdServiceGroup** 中未被另一个 **SdServiceGroup** 请求的所有服务器服务，将向外发送 **StopOfferService** 条目。 |
+
+### 7.7. 服务接口
+
+#### 7.7.1. 本章的范围
+
+本章定义了基础软件模式管理器服务（**BswM**）的 **AUTOSAR** 接口。本节中的定义被解释为 **ECU** 的内部接口。
+
+#### 7.7.2. 端口
+
+###### 7.7.2.1. BswM_modeNotificationPort
+
+| 名称 | modeNotificationPort_{ArbName}_{ModeName} |
+|---|---|
+| 类别 | 所需端口（**RequiredPort**） |
+| 接口引用 | {ecuc(BswM/BswMConfig/BswMArbitration/BswMModeRequestPort/BswMModeRequestSource/BswMSwcModeNotification.BswMSwcModeNotificationModeDeclarationGroupPrototypeRef)}.parent |
+| 描述 | - |
+| 变体 | ArbName = {ecuc(BswM/BswMConfig/BswMArbitration.SHORT-NAME)}；ModeName = {ecuc(BswM/BswMConfig/BswMArbitration/BswMModeRequestPort/BswMModeRequestSource/BswMSwcModeNotification.SHORT-NAME)} |
+
+如果 **BswMDevErrorDetect** 开关已启用，**BswM_modeNotificationPort** 应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略该通知，并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
+
+###### 7.7.2.2. BswM_modeRequestPort
+
+| 名称 | modeRequestPort_{ArbName}_{ReqName} |
+|---|---|
+| 类别 | 所需端口（**RequiredPort**） |
+| 接口引用 | {ecuc(BswM/BswMConfig/BswMArbitration/BswMModeRequestPort.BswMModeRequestSource.BswMSwcModeRequest.BswMSwcModeRequestVariableDataPrototypeRef)}.parent |
+| 描述 | - |
+| 变体 | ArbName = {ecuc(BswM/BswMConfig/BswMArbitration.SHORT-NAME)}；ReqName = {ecuc(BswM/BswMConfig/BswMArbitration/BswMModeRequestPort.SHORT-NAME)} |
+
+###### 7.7.2.3. BswM_modeSwitchPort
+
+| 名称 | modeSwitchPort_{ModConName}_{SwitchName} |
+|---|---|
+| 类别 | 提供端口（**ProvidedPort**） |
+| 接口引用 | {ecuc(BswM/BswMConfig/BswMModeControl/BswMSwitchPort.BswMModeSwitchInterfaceRef)} |
+| 描述 | - |
+| 变体 | {ecuc(BswM/BswMConfig/BswMModeControl/BswMSwitchPort.BswMModeSwitchInterfaceRef} != NULL；ModConName = {ecuc(BswM/BswMConfig/BswMModeControl.SHORT-NAME)}；SwitchName = {ecuc(BswM/BswMConfig/BswMModeControl/BswMSwitchPort.SHORT-NAME)} |
+
+###### 7.7.2.4. S/R端口 BswM_ClientServiceRequest
+
+| 名称 | ClientServiceRequest_{ArbName}_{PortName}（草案） |
+|---|---|
+| 类别 | 所需端口（**RequiredPort**） |
+| 接口 | ClientServiceRequest_{ArbName}_{PortName} |
+| 描述 | 如 **SWS_BswM_00290** 所述的 **RPort** |
+| 变体 | - |
+
+###### 7.7.2.5. S/R端口 BswM_ServerServiceRequest
+
+| 名称 | ServerServiceRequest_{ArbName}_{PortName} |
+|---|---|
+| 类别 | 所需端口（**RequiredPort**） |
+| 接口 | ServerServiceRequest_{ArbName}_{PortName} |
+| 描述 | 如 **SWS_BswM_00310** 所述的 **RPort** |
+| 变体 | - |
+
+###### 7.7.2.6. 模式切换端口 BswM_ClientServiceSubscriptionState
+
+| 名称 | ClientServiceSubscriptionState_{RuleName}_{SwcName_PortName} |
+|---|---|
+| 类别 | 提供端口（**ProvidedPort**） |
+| 接口 | ClientServiceSubscriptionState |
+| 描述 | 指示给定 **SWC** 和端口所提供的客户端服务的订阅状态的模式切换端口 |
+| 变体 | {RuleName}；{SwcName_PortName} |
+
+###### 7.7.2.7. 模式切换端口 BswM_ServerServiceSubscriptionState
+
+| 名称 | ServerServiceSubscriptionState_{RuleName}_{SwcName_PortName} |
+|---|---|
+| 类别 | 提供端口（**ProvidedPort**） |
+| 接口 | ServerServiceSubscriptionState |
+| 描述 | 指示给定 **SWC** 和端口所提供的服务器服务的订阅状态的模式切换端口 |
+| 变体 | {RuleName}；{SwcName_PortName} |
+
+#### 7.7.3. 模式声明组
+
+###### 7.7.3.1. 模式声明组 MDG_ClientServiceSubscriptionState
+
+| 名称 | MDG_ClientServiceSubscriptionState |
+|---|---|
+| 类别 | 模式声明组（**ModeDeclarationGroup**） |
+| 分类 | **ALPHABETIC_ORDER** |
+| 初始模式 | **RELEASE_SERVICE** |
+| 转换值 | - |
+| 模式 | **RELEASE_SERVICE** |
+| 模式 | **REQUEST_SERVICE** |
+| 描述 | - |
+
+###### 7.7.3.2. 模式声明组 MDG_ServerServiceSubscriptionState
+
+| 名称 | MDG_ServerServiceSubscriptionState |
+|---|---|
+| 类别 | 模式声明组（**ModeDeclarationGroup**） |
+| 分类 | **ALPHABETIC_ORDER** |
+| 初始模式 | **RELEASE_SERVICE** |
+| 转换值 | - |
+| 模式 | **RELEASE_SERVICE** |
+| 模式 | **REQUEST_SERVICE** |
+| 描述 | - |
+
+#### 7.7.4. 模式切换接口
+
+###### 7.7.4.1. 模式切换接口 ClientServiceSubscriptionState
+
+| 名称 | ClientServiceSubscriptionState |
+|---|---|
+| 注释 | 模式 **MDG_ClientServiceSubscriptionState appMode** |
+| IsService | **true** |
+| 变体 | - |
+| 模式组 | **MDG_ClientServiceSubscriptionState** |
+
+###### 7.7.4.2. 模式切换接口 ServerServiceSubscriptionState
+
+| 名称 | ServerServiceSubscriptionState |
+|---|---|
+| 注释 | 模式 **MDG_ServerServiceSubscriptionState appMode** |
+| IsService | **true** |
+| 变体 | - |
+| 模式组 | **MDG_ServerServiceSubscriptionState** |
+
+#### 7.7.5. S/R接口
+
+###### 7.7.5.1. S/R接口 ClientServiceRequest
+
+| 名称 | ClientServiceRequest_{ArbName}_{PortName}（草案） |
+|---|---|
+| 注释 | 用于请求服务/事件订阅的接口 |
+| IsService | **true** |
+| 变体 | {ArbName}_{PortName} |
+| 数据元素 | **ClientServiceSetStateRequest** |
+| 数据元素 | 类型：**BswM_ClientModeRequestEnum** |
+| 数据元素 | 变体：- |
+
+###### 7.7.5.2. S/R接口 ServerServiceRequest
+
+| 名称 | ServerServiceRequest_{ArbName}_{PortName}（草案） |
+|---|---|
+| 注释 | 用于提供服务的接口 |
+| IsService | **true** |
+| 变体 | {ArbName}_{PortName} |
+| 数据元素 | **ServerServiceSetStateRequest** |
+| 数据元素 | 类型：**BswM_OfferModeEnum** |
+| 数据元素 | 变体：- |
+
+#### 7.7.6. 枚举
+
+###### 7.7.6.1. BswM_ClientModeRequestEnum
+
+| 名称 | BswM_ClientModeRequestEnum（草案） |
+|---|---|
+| 类别 | 枚举（**Enumeration**） |
+| 范围 | **RELEASE_SERVICE**：0x00，服务/订阅已释放；**REQUEST_SERVICE**：0x01，服务/订阅已请求/激活 |
+| 描述 | 用于请求订阅以及查询订阅状态的枚举 |
+| 变体 | - |
+| 可通过 | **BswM.h**获得 |
+
+###### 7.7.6.2. BswM_OfferModeEnum
+
+| 名称 | BswM_OfferModeEnum（草案） |
+|---|---|
+| 类别 | 枚举（**Enumeration**） |
+| 范围 | **STOPOFFER_SERVICE**：0x00，不提供服务；**OFFER_SERVICE**：0x01，提供服务 |
+| 描述 | 用于提供服务的枚举。标签：atp.Status=draft |
+| 变体 | - |
+| 可通过 | **BswM.h**获得 |
+
+### 7.8. API与请求端口的映射
+
+下表描述了当某个 **API** 被调用时应触发哪个请求端口。此外，它还描述了哪些配置参数与相应 **API** 调用的参数相关联。
+
+| API | 请求端口 | API / 配置参数对 |
+|---|---|---|
+| [BswM_BswMPartitionRestarted](#731-bswm_bswmpartitionrestarted) | BswMPartitionRestarted | - |
+| [BswM_CanSM_CurrentState](#732-bswm_cansm_currentstate) | BswMCanSMIndication | Network / BswMCanSMChannelRef |
+| [BswM_ComM_CurrentMode](#733-bswm_comm_currentmode) | BswMComMIndication | Network / BswMComMChannelRef |
+| [BswM_ComM_CurrentPNCMode](#734-bswm_comm_currentpncmode) | BswMComMPncRequest | PNC / BswMComMPncRef |
+| [BswM_ComM_InitiateReset](#735-bswm_comm_initiatereset) | BswMComMInitiateReset | - |
+| [BswM_Dcm_ApplicationUpdated](#736-bswm_dcm_applicationupdated) | BswMDcmApplicationUpdatedIndication | - |
+| [BswM_Dcm_CommunicationMode_CurrentState](#737-bswm_dcm_communicationmode_currentstate) | BswMDcmComModeRequest | Network / BswMDcmComMChannelRef |
+| [BswM_EcuM_CurrentState](#739-bswm_ecum_currentstate) | BswMEcuMIndication | - |
+| [BswM_EcuM_CurrentWakeup](#7310-bswm_ecum_currentwakeup) | BswMEcuMWakeupSource | source / BswMEcuMWakeupSrcRef |
+| [BswM_EcuM_RequestedState](#7311-bswm_ecum_requestedstate) | BswMEcuMRUNRequestIndication | State / BswMEcuMRUNRequestProtocolPort |
+| [BswM_EthIf_PortGroupLinkStateChg](#7312-bswm_ethif_portgrouplinkstatechg) | BswMEthIfPortGroupLinkStateChg | PortGroupIdx / BswMEthIfSwitchPortGroupRef |
+| [BswM_EthSM_CurrentState](#7313-bswm_ethsm_currentstate) | BswMEthSMIndication | Network / BswMEthSMChannelRef |
+| [BswM_FrSM_CurrentState](#7314-bswm_frsm_currentstate) | BswMFrSMIndication | Network / BswMFrSMChannelRef |
+| [BswM_J1939DcmBroadcastStatus](#7317-bswm_j1939dcmbroadcaststatus) | BswMJ1939DcmBroadcastStatus | NetworkMask / BswMJ1939DcmChannelRef |
+| [BswM_J1939Nm_StateChangeNotification](#7318-bswm_j1939nm_statechangenotification) | BswMJ1939NmIndication | Network / BswMJ1939NmChannelRef；Node / BswMJ1939NmNodeRef |
+| [BswM_LinSM_CurrentSchedule](#7319-bswm_linsm_currentschedule) | BswMLinScheduleIndication | Network / BswMLinSMChannelRef |
+| [BswM_LinSM_CurrentState](#7320-bswm_linsm_currentstate) | BswMLinSMIndication | Network / BswMLinSMChannelRef |
+| [BswM_LinTp_RequestMode](#7321-bswm_lintp_requestmode) | BswMLinTpModeRequest | Network / BswMLinTpChannelRef |
+| [BswM_Nm_CarWakeUpIndication](#7322-bswm_nm_carwakeupindication) | BswMNmCarWakeUpIndication | - |
+| [BswM_Nm_StateChangeNotification](#7323-bswm_nm_statechangenotification) | BswMNmStateChangeNotification | Network / BswMNmChannelRef |
+| [BswM_NvM_CurrentBlockMode](#7324-bswm_nvm_currentblockmode) | BswMNvMRequest | Block / BswMNvMBlockRef |
+| [BswM_NvM_CurrentJobMode](#7325-bswm_nvm_currentjobmode) | BswMNvMJobModeIndication | MultiBlockRequest / BswMNvmService |
+| [BswM_RequestMode](#7326-bswm_requestmode) | BswMGenericRequest | requesting_user / BswMModeRequesterId |
+| [BswM_Sd_ClientServiceCurrentState](#7327-bswm_sd_clientservicecurrentstate) | BswMSdClientServiceCurrentState | SdClientServiceHandleId / BswMSdClientMethodsRef |
+| [BswM_Sd_ConsumedEventGroupCurrentState](#7328-bswm_sd_consumedeventgroupcurrentstate) | BswMSdConsumedEventGroupCurrentState | SdConsumedEventGroupHandleId / BswMSdConsumedEventGroupRef |
+| [BswM_Sd_EventHandlerCurrentState](#7329-bswm_sd_eventhandlercurrentstate) | BswMSdEventHandlerCurrentState | SdEventHandlerHandleId / BswMSdEventHandlerRef |
+
+表7.1：**API**与请求端口的映射：该表描述了当某个 **API** 被调用时应触发哪个请求端口。此外，它还描述了哪些配置参数与相应 **API** 调用的参数相关联。
 
 ## 8. 时序图
 
