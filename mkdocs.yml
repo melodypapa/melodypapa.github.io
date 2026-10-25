@@ -160,6 +160,7 @@ nav:
       - "Pwm": autosar/io/pwm_driver/index.md
     - MCAL:
       - autosar/mcal/index.md
+      - "Gpt": autosar/mcal/gpt_driver/index.md
       - "Mcu": autosar/mcal/mcu_driver/index.md
     - 存储（Memory）:
 

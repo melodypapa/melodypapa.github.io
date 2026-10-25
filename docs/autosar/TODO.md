@@ -30,7 +30,7 @@
 - [ ] Communication backbone: Com, CanSM, CanTp, TcpIp, Nm, EthSM, IpduM, SomeIpXf/SomeIpTp
 - [ ] System services: ComM, Det (small; Det first)
 - [ ] Global time cluster: StbM + CanTSyn/EthTSyn/FrTSyn
-- [ ] MCAL: Gpt, CorTst
+- [ ] MCAL: CorTst
 - [ ] Storage wrap-up: Ea, Eep
 - [ ] Libraries: Crc, E2E
 - [ ] Safety: WdgM, WdgIf, Wdg
@@ -40,11 +40,11 @@
 
 | Status | Count | Note |
 | --- | ---: | --- |
-| ✅ Type A-compliant | 11 | ready to use |
+| ✅ Type A-compliant | 12 | ready to use |
 | 🔶 Translated pending alignment | 10 | seven chapters present; legacy wording / forbidden-chapter residue |
 | ⚠️ Partial | 17 | missing ≥1 chapter (most miss the 「API规范」 chapter) |
 | ⛔ Stub | 4 | 9–19 lines only |
-| ❌ Missing (SWS) | 85 | R23-11 has 127 SWS docs in total; 42 covered (33.1%) |
+| ❌ Missing (SWS) | 84 | R23-11 has 127 SWS docs in total; 43 covered (33.9%) |
 | ❌ Missing (EXP) | 20 | R23-11 has 22 EXP docs in total; 2 covered |
 | 📖 Guide/topic | 8 | exempt from the Type A skeleton |
 
@@ -109,8 +109,9 @@
 ## mcal
 
 - ✅ [MCU 驱动](mcal/mcu_driver/) — SWS_MCUDriver (2026-10-26 full Type A translation from R23-11: new article + new MCAL section landing page + nav; ch.6 traceability dropped per mandate; ch.9 → `## 8. 时序图` (4 figures), ch.10 → `## 9. 配置规范` (10 containers, SWS 条目 cells filled with [ECUC_Mcu_*] per EcuM style); first inline cross-article prose links — Dem/Port)
+- ✅ [GPT 驱动](mcal/gpt_driver/) — SWS_GPTDriver (2026-10-26 full Type A translation from R23-11: ch.6 tracing + appendix A dropped per mandate; ch.7 state diagrams → §6 (5 figures); ch.9 → `## 8. 时序图` (4 figures); ch.10 → `## 9. 配置规范` (7 containers); first real use of the 可配置接口 chapter 8.6.3; one source typo corrected — GptWakeupConfiguration included-cell → 唤醒通知 per gate decision)
 
-❌ Missing (2): SWS_GPTDriver (Gpt), SWS_CoreTest
+❌ Missing (1): SWS_CoreTest
 
 ## memory
 
@@ -147,7 +148,6 @@
 
 - **GlobalTime (4)**: SWS_SynchronizedTimeBaseManager (StbM), SWS_TimeSyncOverCAN (CanTSyn), SWS_TimeSyncOverEthernet (EthTSyn), SWS_TimeSyncOverFlexRay (FrTSyn)
 - **Libraries (9)**: SWS_CRCLibrary (Crc), SWS_E2ELibrary (E2E), SWS_BFXLibrary (Bfx), SWS_BSWMulticoreLibrary (Bmc), SWS_MFLLibrary (Mfl), SWS_MFXLibrary (Mfx), SWS_IFLLibrary (Ifl), SWS_IFXLibrary (Ifx), SWS_EFXLibrary (Efx)
-- **MCAL (2)**: SWS_GPTDriver (Gpt), SWS_CoreTest
 - **RTE / SWArch (2)**: SWS_RTE, SWS_ARTI
 - **Safety (3)**: SWS_WatchdogManager (WdgM), SWS_WatchdogInterface (WdgIf), SWS_WatchdogDriver (Wdg)
 - **Security (2)**: SWS_Firewall, SWS_IntrusionDetectionSystemManager (IdsM)

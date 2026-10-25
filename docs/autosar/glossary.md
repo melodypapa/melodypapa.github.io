@@ -38,6 +38,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 应用编程接口（**Application Programming Interface**）
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 
+## B
+
+**BSW**
+> 基础软件（**Basic Software**）
+> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
+
 ## C
 
 **Conversion Mode**
@@ -59,6 +65,23 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 默认错误跟踪器（**Default Error Tracer**），实现报告开发错误的模块。
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 > 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver · R23-11）
+> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
+
+## E
+
+**ECU**
+> 电子控制单元（**Electronic Control Unit**）
+> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
+
+## G
+
+**GPT**
+> 通用定时器（**General Purpose Timer**）
+> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
+
+**GPT Predef Timer**
+> **GPT Predef Timer** 是 **GPT** 驱动程序提供的自由运行递增计数器。哪些 **GPT Predef Timer** 可用取决于硬件（时钟、硬件定时器、预分频器、定时器寄存器宽度等）和配置。**GPT Predef Timer** 具有预定义的物理时间单位和范围。
+> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
 
 ## H
 
@@ -70,12 +93,31 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 硬件（**Hardware**）
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 
+## I
+
+**ICU**
+> 输入捕获单元（**Input Capture Unit**）
+> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
+
 ## M
 
 **MCU**
 > 微控制器单元（**Microcontroller Unit**）
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 > 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver · R23-11）
+> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
+
+## N
+
+**NOP, nop**
+> 空操作（**Null Operation**）
+> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
+
+## O
+
+**OS**
+> 操作系统（**Operating System**）
+> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
 
 ## S
 
@@ -94,6 +136,20 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SW**
 > 软件（**Software**）
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
+
+## T
+
+**Target time**
+> 目标时间：到达该值时应有某事发生。其行为取决于配置和已启用的功能。
+> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
+
+**Tick**
+> 定义定时器分辨率，即定时器一次递增的持续时间。
+> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
+
+**Timer channel**
+> 表示分配给一个定时器硬件的逻辑定时器实体。
+> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
 
 ## U
 

@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **644** 个类型、**1658** 个函数，来自 **120** 份文档（其中 **38** 份已有站内文章）。
+共 **644** 个类型、**1658** 个函数，来自 **120** 份文档（其中 **39** 份已有站内文章）。
 
 ## A
 
@@ -4236,61 +4236,61 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_Firewall · R23-11
 
 **Gpt_ChannelType**
-> 类型 · 未翻译 · SWS_GPTDriver · R23-11
+> 类型 · [AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
 **Gpt_CheckWakeup**
-> 函数 · 未翻译 · SWS_GPTDriver · R23-11
+> 函数 · [AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
 **Gpt_ConfigType**
-> 类型 · 未翻译 · SWS_GPTDriver · R23-11
+> 类型 · [AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
 **Gpt_DeInit**
-> 函数 · 未翻译 · SWS_GPTDriver · R23-11
+> 函数 · [AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
 **Gpt_DisableNotification**
-> 函数 · 未翻译 · SWS_GPTDriver · R23-11
+> 函数 · [AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
 **Gpt_DisableWakeup**
-> 函数 · 未翻译 · SWS_GPTDriver · R23-11
+> 函数 · [AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
 **Gpt_EnableNotification**
-> 函数 · 未翻译 · SWS_GPTDriver · R23-11
+> 函数 · [AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
 **Gpt_EnableWakeup**
-> 函数 · 未翻译 · SWS_GPTDriver · R23-11
+> 函数 · [AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
 **Gpt_GetPredefTimerValue**
-> 函数 · 未翻译 · SWS_GPTDriver · R23-11
+> 函数 · [AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
 **Gpt_GetTimeElapsed**
-> 函数 · 未翻译 · SWS_GPTDriver · R23-11
+> 函数 · [AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
 **Gpt_GetTimeRemaining**
-> 函数 · 未翻译 · SWS_GPTDriver · R23-11
+> 函数 · [AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
 **Gpt_GetVersionInfo**
-> 函数 · 未翻译 · SWS_GPTDriver · R23-11
+> 函数 · [AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
 **Gpt_Init**
-> 函数 · 未翻译 · SWS_GPTDriver · R23-11
+> 函数 · [AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
 **Gpt_ModeType**
-> 类型 · 未翻译 · SWS_GPTDriver · R23-11
+> 类型 · [AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
 **Gpt_PredefTimerType**
-> 类型 · 未翻译 · SWS_GPTDriver · R23-11
+> 类型 · [AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
 **Gpt_SetMode**
-> 函数 · 未翻译 · SWS_GPTDriver · R23-11
+> 函数 · [AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
 **Gpt_StartTimer**
-> 函数 · 未翻译 · SWS_GPTDriver · R23-11
+> 函数 · [AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
 **Gpt_StopTimer**
-> 函数 · 未翻译 · SWS_GPTDriver · R23-11
+> 函数 · [AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
 **Gpt_ValueType**
-> 类型 · 未翻译 · SWS_GPTDriver · R23-11
+> 类型 · [AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
 ## H
 
