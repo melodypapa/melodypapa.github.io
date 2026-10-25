@@ -4,15 +4,15 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **644** 个类型、**1658** 个函数，来自 **120** 份文档（其中 **36** 份已有站内文章）。
+共 **644** 个类型、**1658** 个函数，来自 **120** 份文档（其中 **38** 份已有站内文章）。
 
 ## A
 
 **AccessType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **ActivateTaskAsyn**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **Adc_ChannelRangeSelectType**
 > 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md) · SWS_ADCDriver · R23-11
@@ -141,19 +141,19 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_EFXLibrary · R23-11
 
 **AllowAccess**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **AND**
 > 函数 · 未翻译 · SWS_SoftwareClusterConnection · R23-11
 
 **ApplicationStateRefType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **ApplicationStateType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **AreaIdType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **Arti_GetVersionInfo**
 > 函数 · 未翻译 · SWS_ARTI · R23-11
@@ -427,7 +427,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 ## C
 
 **CallTrustedFunction**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **Can_CheckWakeup**
 > 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md) · SWS_CANDriver · R23-11
@@ -991,16 +991,16 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
 
 **CheckISRMemoryAccess**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **CheckObjectAccess**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **CheckObjectOwnership**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **CheckTaskMemoryAccess**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **ChrgM_ConfigType**
 > 类型 · 未翻译 · SWS_ChargingManager · R23-11
@@ -1012,7 +1012,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_ChargingManager · R23-11
 
 **ClearPendingInterrupt**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **CnV2x_CbrType**
 > 类型 · 未翻译 · SWS_ChineseV2XNetwork · R23-11
@@ -1315,10 +1315,10 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_PlatformTypes · R23-11
 
 **ControlIdle**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **CoreIdType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **CorTst_Abort**
 > 函数 · 未翻译 · SWS_CoreTest · R23-11
@@ -2178,7 +2178,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR DIO Driver（数字输入输出驱动）](io/dio_driver/index.md) · SWS_DIODriver · R23-11
 
 **DisableInterruptSource**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **Division**
 > 函数 · 未翻译 · SWS_EFXLibrary · R23-11
@@ -2672,7 +2672,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_EFXLibrary · R23-11
 
 **EnableInterruptSource**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **Eth_BufIdxType**
 > 类型 · [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md) · SWS_EthernetDriver · R23-11
@@ -4203,34 +4203,34 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **GetApplicationID**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **GetApplicationState**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **GetCoreID**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **GetCounterValue**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **GetCurrentApplicationID**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **GetElapsedValue**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **GetISRID**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **GetNumberOfActivatedCores**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **GetScheduleTableStatus**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **GetSpinlock**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **GetVersionInfo**
 > 函数 · 未翻译 · SWS_Firewall · R23-11
@@ -4441,7 +4441,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · [AUTOSAR ICU Driver（输入捕获驱动）](io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
 **IdleModeType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **IdsM_ConfigType**
 > 类型 · 未翻译 · SWS_IntrusionDetectionSystemManager · R23-11
@@ -4573,7 +4573,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_IEEE1722TransportLayer · R23-11
 
 **IncrementCounter**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **Init**
 > 函数 · 未翻译 · SWS_Firewall · R23-11
@@ -4600,10 +4600,10 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_IPDUMultiplexer · R23-11
 
 **isOsStarted**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **ISRType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 ## J
 
@@ -4923,61 +4923,61 @@ title: "AUTOSAR API 清单（函数与类型）"
 ## M
 
 **Mcu_ClockType**
-> 类型 · 未翻译 · SWS_MCUDriver · R23-11
+> 类型 · [AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **Mcu_ConfigType**
-> 类型 · 未翻译 · SWS_MCUDriver · R23-11
+> 类型 · [AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **Mcu_DistributePllClock**
-> 函数 · 未翻译 · SWS_MCUDriver · R23-11
+> 函数 · [AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **Mcu_GetPllStatus**
-> 函数 · 未翻译 · SWS_MCUDriver · R23-11
+> 函数 · [AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **Mcu_GetRamState**
-> 函数 · 未翻译 · SWS_MCUDriver · R23-11
+> 函数 · [AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **Mcu_GetResetRawValue**
-> 函数 · 未翻译 · SWS_MCUDriver · R23-11
+> 函数 · [AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **Mcu_GetResetReason**
-> 函数 · 未翻译 · SWS_MCUDriver · R23-11
+> 函数 · [AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **Mcu_GetVersionInfo**
-> 函数 · 未翻译 · SWS_MCUDriver · R23-11
+> 函数 · [AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **Mcu_Init**
-> 函数 · 未翻译 · SWS_MCUDriver · R23-11
+> 函数 · [AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **Mcu_InitClock**
-> 函数 · 未翻译 · SWS_MCUDriver · R23-11
+> 函数 · [AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **Mcu_InitRamSection**
-> 函数 · 未翻译 · SWS_MCUDriver · R23-11
+> 函数 · [AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **Mcu_ModeType**
-> 类型 · 未翻译 · SWS_MCUDriver · R23-11
+> 类型 · [AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **Mcu_PerformReset**
-> 函数 · 未翻译 · SWS_MCUDriver · R23-11
+> 函数 · [AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **Mcu_PllStatusType**
-> 类型 · 未翻译 · SWS_MCUDriver · R23-11
+> 类型 · [AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **Mcu_RamSectionType**
-> 类型 · 未翻译 · SWS_MCUDriver · R23-11
+> 类型 · [AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **Mcu_RamStateType**
-> 类型 · 未翻译 · SWS_MCUDriver · R23-11
+> 类型 · [AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **Mcu_RawResetType**
-> 类型 · 未翻译 · SWS_MCUDriver · R23-11
+> 类型 · [AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **Mcu_ResetType**
-> 类型 · 未翻译 · SWS_MCUDriver · R23-11
+> 类型 · [AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **Mcu_SetMode**
-> 函数 · 未翻译 · SWS_MCUDriver · R23-11
+> 函数 · [AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **Mem_AddressType**
 > 类型 · 未翻译 · SWS_MemoryDriver · R23-11
@@ -5214,10 +5214,10 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_MemoryAbstractionInterface · R23-11
 
 **MemorySizeType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **MemoryStartAddressType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **Mirror_AddCanMaskFilter**
 > 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
@@ -5375,7 +5375,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
 
 **NextScheduleTable**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **Nm_BusNmType**
 > 类型 · 未翻译 · SWS_NetworkManagementInterface · R23-11
@@ -5515,10 +5515,10 @@ title: "AUTOSAR API 清单（函数与类型）"
 ## O
 
 **ObjectAccessType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **ObjectTypeType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **Ocu_ChannelType**
 > 类型 · [AUTOSAR OCU Driver（输出比较单元驱动）](io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
@@ -5613,7 +5613,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_PDURouter · R23-11
 
 **PhysicalTimeType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **PNCHandleType**
 > 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
@@ -5646,7 +5646,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR Port Driver（端口驱动）](io/port_driver/index.md) · SWS_PortDriver · R23-11
 
 **ProtectionReturnType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **ProxyModules**
 > 类型 · 未翻译 · SWS_SoftwareClusterConnection · R23-11
@@ -5720,13 +5720,13 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_RAMTest · R23-11
 
 **ReleaseSpinlock**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **Reporting**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **RestartType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **RetryInfoType**
 > 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
@@ -5734,13 +5734,13 @@ title: "AUTOSAR API 清单（函数与类型）"
 ## S
 
 **ScheduleTableStatusRefType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **ScheduleTableStatusType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **ScheduleTableType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **Sd_AclPolicyCheck**
 > 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
@@ -5839,16 +5839,16 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_SecureOnboardCommunication · R23-11
 
 **SetEventAsyn**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **SetFirewallState**
 > 函数 · 未翻译 · SWS_Firewall · R23-11
 
 **SetScheduleTableAsync**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **ShutdownAllCores**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **sint16**
 > 类型 · 未翻译 · SWS_PlatformTypes · R23-11
@@ -6034,19 +6034,19 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
 
 **SpinlockIdType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **StartCore**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **StartScheduleTableAbs**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **StartScheduleTableRel**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **StartScheduleTableSynchron**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **StbM_BusGetCurrentTime**
 > 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
@@ -6190,7 +6190,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
 
 **StopScheduleTable**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **Subtractions**
 > 函数 · 未翻译 · SWS_EFXLibrary · R23-11
@@ -6286,7 +6286,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_SoftwareClusterConnection · R23-11
 
 **SyncScheduleTable**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 ## T
 
@@ -6375,7 +6375,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_TcpIp · R23-11
 
 **TerminateApplication**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **TimeStampQualType**
 > 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
@@ -6468,16 +6468,16 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_TcpIp · R23-11
 
 **TrustedFunctionIndexType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **TrustedFunctionParameterRefType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **TryToGetSpinlock**
-> 函数 · 未翻译 · SWS_OS · R23-11
+> 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **TryToGetSpinlockType**
-> 类型 · 未翻译 · SWS_OS · R23-11
+> 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 ## U
 
