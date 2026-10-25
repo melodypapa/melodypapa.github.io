@@ -123,6 +123,7 @@ def collect(article: str):
 # official URL before it can become a link (check 8 then applies).
 DOC_TARGETS = {
     "swsbswmodemanager": ("SITE", "BswM article", "../basic_software_mode_manager/"),
+    "swsdiagnosticcommunicationmanager": ("SITE", "Dcm article", "../../diagnostics/diagnostic_communication_manager/"),
     "swsecustatemanager": ("SITE", "EcuM article", "../ecu_state_manager/"),
     "expmodemanagementguide": ("SITE", "Mode-management guide", "../guide_to_mode_management/"),
     "swsdiodriver": ("SITE", "DIO article", "../dio_driver/"),
@@ -133,6 +134,8 @@ DOC_TARGETS = {
     "swsadcdriver": ("SITE", "ADC article", "../adc_driver/"),
     "swsbswgeneral": ("EXTERNAL", "SWS_BSWGeneral", None),
     "tpsecuconfiguration": ("EXTERNAL", "TPS_ECUConfiguration", None),
+    "tpssoftwarecomponenttemplate": ("EXTERNAL", "TPS_SWCT", None),
+    "tpmbswmoduledescriptiontemplate": ("EXTERNAL", "TPS_BSWModuleDescriptionTemplate", None),
     "explayeredsoftwarearchitecture": ("EXTERNAL", "EXP_LayeredSoftwareArchitecture", None),
     "swsrte": ("EXTERNAL", "SWS_RTE", None),
     "expvfb": ("EXTERNAL", "EXP_VFB", None),
@@ -186,8 +189,19 @@ def classify_doc(title: str, docid: str = ""):
     return ("EXTERNAL", None, None)
 
 
-def parse_entries31(article: str):
+def _registry_sec(article: str):
+    # §3.1 registry (SWS articles) or an unnumbered 参考文献 section (EXP
+    # guides) — both carry the [n] Title / > DOCID registry format. A §3.1
+    # only qualifies if it actually holds [n] entries (guide chapters number
+    # their sections 3.1 too, e.g. EXP_ModeManagementGuide's process steps).
     sec = re.search(r"### 3\.1\..*?(?=### 3\.2)", article, re.S)
+    if not (sec and re.search(r"^\[\d+\]\s", sec.group(0), re.M)):
+        sec = re.search(r"## 参考文献\n.*?(?=\n## )", article, re.S)
+    return sec
+
+
+def parse_entries31(article: str):
+    sec = _registry_sec(article)
     entries = {}
     if sec:
         blocks = re.split(r"(?=^\[\d+\])", sec.group(0), flags=re.M)
@@ -202,7 +216,7 @@ def parse_entries31(article: str):
 
 
 def entries31_span(article: str):
-    sec = re.search(r"### 3\.1\..*?(?=### 3\.2)", article, re.S)
+    sec = _registry_sec(article)
     if not sec:
         return None
     start = len(article[:article.index(sec.group(0))].splitlines())
