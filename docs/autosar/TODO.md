@@ -9,6 +9,7 @@
 
 **Fill depth (existing articles)**
 
+- [ ] 2026-10-25 tables-as-images retired (STANDARD.md §4 decision — source tables translate as GFM tables): 6 `![Table*.png]` refs remain — bswm 1 (Table7-1 BswMRuleInitState), dcm 1, data_distribution 1, time_service 2, operating_system 1; EcuM ✅ (all 7 translated/deleted 2026-10-25)
 - [ ] 6 ⚠️ articles missing only the 「API规范」 chapter: pdu_router, can_interface, crypto_driver, ethernet_interface, lin_interface, operating_system
 - [ ] The other 11 ⚠️ articles: complete their respective missing chapters (com_based_transformer, data_distribution, e2e_transformer, sec_oc, SoAd, mirror, dem, iohwab, fee, memory_access, dcm)
 - [ ] 4 ⛔ stubs: full translation (ethernet_switch_driver, service_discovery, memory_mapping, platform_types — platform_types also needs its front-matter title and nav label fixed in the same change)

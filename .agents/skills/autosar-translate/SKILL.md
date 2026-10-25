@@ -215,6 +215,27 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
     refs" were really 21 diagrams + deco); copy each content artifact into
     the article directory (`Figure<N>-<k>.png` by source chapter) and
     reference it wherever the source has it.
+- **Source tables translate as markdown tables, never as images** (user
+  decision 2026-10-25, EcuM StartPreOS table request): the old
+  tables-as-images convention (`Table7-1.png`) is retired — every content
+  table of the source (sequence tables, init-block listings, error tables,
+  state tables) renders as a GFM table in the article. Format:
+  - caption line above the table, source numbering kept: 表7.1：StartPreOS
+    序列（**StartPreOS Sequence**） — bilingual when the source name is a
+    proper-noun table name; footnote markers (<sup>N</sup>) carry over and
+    the footnote text follows the table as `> N …` blockquotes;
+  - header row = the source's second header line (the spanning first header
+    like "StartPreOS Sequence | StartPreOS Sequence | StartPreOS Sequence"
+    is PDF chrome, dropped): e.g. 初始化活动 | 说明 | 可选;
+  - **row set, row order and cell values strictly match the source** (same
+    standard as the acronym rule); empty cells stay empty;
+  - cross-references inside cells link to the article's own anchors
+    (renumbered: source 7.3.5 → §6.3.5) and callout/function names link to
+    their API headings; SWS-ID-only refs (See [SWS_EcuM_02181]) stay prose
+    with the section named;
+  - Phase A check: no `![Table*.png]` image refs remain in the article; the
+    old `Table*.png` files become unreferenced (delete or leave — their
+    removal is not part of the translation step).
 - **Appendix B (*Change history of AUTOSAR traceable items*) translates as
   `## B. AUTOSAR 可追溯项变更历史`** after the last content chapter: one `###`
   per release, `####` added/changed/deleted sub-sections, the item-ID lists
