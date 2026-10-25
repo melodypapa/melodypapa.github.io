@@ -9,11 +9,19 @@ Usage:
   link_candidates.py --apply <article.md>   # apply intra-article links
 
 Applied class (restoration of the source PDF's own hyperlinks):
-  - type mentions      (#### 7.2.x headings) -> that heading's anchor
+  - type mentions      (7.2.x headings) -> that heading's anchor
   - constant mentions  (bold bullets inside a 7.2.x section) -> its anchor
-  - error-code mentions (DIO_E_*-style codes in the §6.6.x development-error
-    tables) -> that 6.6.x heading's anchor
-  - function mentions  (#### 7.3.x headings) -> that heading's anchor
+  - error-code mentions (X_E_Y-style codes in the 错误-titled §6 subsections'
+    tables — DIO/PWM 6.6.x 开发错误, EcuM 6.12/6.13) -> that section's anchor
+  - function mentions  (7.3.x headings) -> that heading's anchor; callbacks
+    (7.4.x) and callouts (7.5.x) too
+
+Function/type entries are headings whose title is a plain ASCII identifier.
+This handles BOTH API-chapter layouts: one-function-per-####-heading (PWM,
+DIO, ...) and grouped #### groups with the functions at ###### level (EcuM
+7.3.1 通用 -> 7.3.1.1 EcuM_GetVersionInfo). A Chinese group title (通用,
+状态管理, ...) is not an identifier and is never a link target — a previous
+version matched those and tried to link every occurrence of the word.
 Scan region for --apply: front matter .. the chapter BEFORE 配置规范 — the
 config-spec tables are definitional context (parameter cells define, not
 mention). 时序图 prose is ordinary prose and is scanned since the chapter's
@@ -30,6 +38,10 @@ import sys
 CONFIG_TITLE = "配置规范"  # --apply stops before this chapter (definitional tables)
 
 MD_LINK = re.compile(r"\[[^\]]*\]\([^)]*\)")
+
+# A heading title that is a plain ASCII code identifier (types, functions,
+# callbacks, callouts) — as opposed to a Chinese group/section title.
+IDENT = re.compile(r"[A-Za-z][A-Za-z0-9_]*")
 
 
 def slug_of(num: str, title: str) -> str:
@@ -60,14 +72,17 @@ def collect(article: str):
     ends = {h[0]: (headings[idx + 1][0] if idx + 1 < len(headings) else len(lines))
             for idx, h in enumerate(headings)}
     enc72 = None  # enclosing 7.2.x section (constant bullets)
-    enc66 = None  # enclosing 6.6.x section (development-error tables)
+    enc_err = None  # enclosing 错误-titled §6 section (error-classification tables)
 
-    # types and functions from #### headings; record each one's section range
+    # types, functions, callbacks and callouts from identifier-titled headings
+    # at any level (grouped layout: #### group -> ###### entry, EcuM-style;
+    # flat layout: #### entry, PWM-style — the IDENT filter accepts both)
     for (i, lvl, num, title, slug) in headings:
         if lvl == 4:
             section_range[title] = (i, ends[i])
-            if num.startswith("7.2.") or num.startswith("7.3."):
-                defs[title] = slug
+        if re.match(r"7\.[2-5]\.", num) and IDENT.fullmatch(title):
+            defs[title] = slug
+            section_range[title] = (i, ends[i])
 
     for i, ln in enumerate(lines):
         if i in heading_at:
@@ -76,10 +91,11 @@ def collect(article: str):
                 enc72 = h[4]
             elif h[1] <= 3:
                 enc72 = None
-            if h[1] == 4 and h[2].startswith("6.6."):
-                enc66 = h[4]
-            elif h[1] <= 4:
-                enc66 = None
+            if h[1] <= 4:
+                if h[2].startswith("6.") and "错误" in h[3]:
+                    enc_err = h[4]
+                else:
+                    enc_err = None
             continue
         m = re.match(r"^\s*\*\s+\*\*([A-Za-z][A-Za-z0-9_]+)\*\*", ln)
         if m and enc72:
@@ -88,16 +104,12 @@ def collect(article: str):
             if re.fullmatch(r"[A-Z][A-Z0-9_]+", name):
                 consts.setdefault(name, enc72)  # uppercase = enum/mode value
             # lowercase bullets are parameter names, not constants — ignored
-        if enc66 and ln.lstrip().startswith("|"):
+        if enc_err and ln.lstrip().startswith("|"):
             for tok in re.findall(r"\b[A-Z][A-Z0-9]*_E_[A-Z0-9_]+\b", ln):
                 if tok not in defs:
-                    defs[tok] = enc66
-
-    # error codes' own defining section = the 6.6.x section that contains them
-    for (i, lvl, num, title, slug) in headings:
-        if lvl == 4 and num.startswith("6.6."):
-            for tok in [t for t, a in defs.items() if a == slug]:
-                section_range.setdefault(tok, (i, ends[i]))
+                    defs[tok] = enc_err
+                    hl = heading_by_slug[enc_err][0]
+                    section_range.setdefault(tok, (hl, ends[hl]))
     return lines, headings, defs, section_range, consts
 
 
