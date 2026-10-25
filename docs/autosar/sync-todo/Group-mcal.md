@@ -7,7 +7,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 
 ## Queue
 
-- [ ] mcu (SWS_MCUDriver · R23-11 markdown · ❌ new article, short name Mcu)
+- [x] mcu (SWS_MCUDriver · R23-11 markdown · ❌ new article, short name Mcu) — DONE 2026-10-26: issue #103 · commit 2f0e714 · PR #104
   - Note: the first run also creates the `mcal/` landing page + nav registration
   - Note (S1): source `~/Workspace/autosar_standard/markdown/Classic_Platform/Releases/R23-11/MCAL/AUTOSAR_CP_SWS_MCUDriver.md` (1504 lines); new article `docs/autosar/mcal/mcu_driver/index.md` (io-series naming). Source shape: ch.1 (with unnumbered "MCU driver Features:" list) · ch.2 5 acronym rows · ch.3.1 12 input docs · ch.5 5.1 Start-up code / 5.2 File structure · ch.6 traceability (DROPPED) · ch.7 → §6 (7.1 General Behavior 7.1.1/7.1.2(.1–.3), 7.2 Error classification 7.2.1–.5 with 7.2.5.1) · ch.8 → §7 (8.1 imported 4 rows, 8.2 8 types, 8.3 11 functions, 8.4/8.5 none, 8.6.1 mandatory Dem_SetEventStatus + 8.6.2 optional Det_ReportError, 8.7 API parameter checking → §7.7 per pwm precedent) · ch.9 → §8 时序图 (4 diagrams) · ch.10 → §9 配置规范 (10.1 folded into §9 intro per DIO/EcuM shape, 10.2.1–.10 → 9.1.1–9.1.10, 10.3 → 9.2). No Known Limitations chapter, no appendices in source (file ends at 10.3)
   - Note (S1): figures = Figure1-1 (scope, image_000008), Figure9-1..9-4 (sequence diagrams, images 38/40/41/43); hash `27f731f4…` = page deco (dropped), `3914732…`/`0d4253…` = TOC/mid-page chrome (dropped)
@@ -22,8 +22,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note (decision, 2026-10-26 gate): SWS 条目 cells FILLED with [ECUC_Mcu_*] per user "change it" — EcuM style extended to this article (30 cells: 1 module + 9 container + 20 param tables, IDs mapped by source table); DIO/ADC stay empty-cell (legacy) — a corpus-wide sweep would be its own Backlog item; Phase A check 3 scoped accordingly: bracketed IDs allowed ONLY in `| SWS 条目 | [ECUC_Mcu_*] |` rows (verified 0 hits elsewhere; same exception class as EcuM PR #94); strict build re-run exit 0, no WARNINGs
   - Note (decision, 2026-10-26 gate): cross-article links ADDED per user "add the link" — first corpus instance of inline cross-article links in article prose: §6.2 「[诊断事件管理器（**DEM**）规范](../../diagnostics/diagnostic_event_manager/index.md)（见[6]）」 and §7.3.1 rule 2 「[**PORT** 驱动程序](../../io/port_driver/index.md)」; scope = prose mentions only (§2 acronym term line skipped per census rule; table cells stay plain per house convention — DIO keeps even error-code cells unlinked); path form uses explicit index.md (site convention; bare `path/` triggered mkdocs "unrecognized relative link" INFOs); [12] BSWGeneral citation stays prose (EXTERNAL — no site article); strict build re-run exit 0, no WARNINGs, no mcu notices; --apply still idempotent (cross-article links outside the script's applied class)
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 5 — User confirmation gate (confirmed 2026-10-26; two gate decisions executed mid-gate: SWS 条目 cells filled, Dem/Port cross-article links added)
+  - [x] Step 6 — TODO.md row + commit/PR (issue #103 · commit 2f0e714 · PR #104)
 - [ ] gpt (SWS_GPTDriver · R23-11 markdown · ❌ new article, short name Gpt)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
