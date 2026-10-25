@@ -30,7 +30,6 @@
 - [ ] Communication backbone: Com, CanSM, CanTp, TcpIp, Nm, EthSM, IpduM, SomeIpXf/SomeIpTp
 - [ ] System services: ComM, Det (small; Det first)
 - [ ] Global time cluster: StbM + CanTSyn/EthTSyn/FrTSyn
-- [ ] MCAL: CorTst
 - [ ] Storage wrap-up: Ea, Eep
 - [ ] Libraries: Crc, E2E
 - [ ] Safety: WdgM, WdgIf, Wdg
@@ -40,11 +39,11 @@
 
 | Status | Count | Note |
 | --- | ---: | --- |
-| ✅ Type A-compliant | 12 | ready to use |
+| ✅ Type A-compliant | 13 | ready to use |
 | 🔶 Translated pending alignment | 10 | seven chapters present; legacy wording / forbidden-chapter residue |
 | ⚠️ Partial | 17 | missing ≥1 chapter (most miss the 「API规范」 chapter) |
 | ⛔ Stub | 4 | 9–19 lines only |
-| ❌ Missing (SWS) | 84 | R23-11 has 127 SWS docs in total; 43 covered (33.9%) |
+| ❌ Missing (SWS) | 83 | R23-11 has 127 SWS docs in total; 44 covered (34.6%) |
 | ❌ Missing (EXP) | 20 | R23-11 has 22 EXP docs in total; 2 covered |
 | 📖 Guide/topic | 8 | exempt from the Type A skeleton |
 
@@ -110,8 +109,7 @@
 
 - ✅ [MCU 驱动](mcal/mcu_driver/) — SWS_MCUDriver (2026-10-26 full Type A translation from R23-11: new article + new MCAL section landing page + nav; ch.6 traceability dropped per mandate; ch.9 → `## 8. 时序图` (4 figures), ch.10 → `## 9. 配置规范` (10 containers, SWS 条目 cells filled with [ECUC_Mcu_*] per EcuM style); first inline cross-article prose links — Dem/Port)
 - ✅ [GPT 驱动](mcal/gpt_driver/) — SWS_GPTDriver (2026-10-26 full Type A translation from R23-11: ch.6 tracing + appendix A dropped per mandate; ch.7 state diagrams → §6 (5 figures); ch.9 → `## 8. 时序图` (4 figures); ch.10 → `## 9. 配置规范` (7 containers); first real use of the 可配置接口 chapter 8.6.3; one source typo corrected — GptWakeupConfiguration included-cell → 唤醒通知 per gate decision)
-
-❌ Missing (1): SWS_CoreTest
+- ✅ [CoreTest 内核测试](mcal/core_test/) — SWS_CoreTest (2026-10-26 full Type A translation from R23-11: ch.6 + ch.11 dropped per mandate; source 8.2/8.3/10.2.x unnumbered headings numbered by PDF-TOC order; ch.9 → `## 8. 时序图` (4 figures); ch.10 → `## 9. 配置规范` (7 containers); check_api_sync N/A — one of the 7 known `!` unparseable sources, verified manually against the R22-11 PDF)
 
 ## memory
 
