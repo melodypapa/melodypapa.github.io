@@ -151,7 +151,24 @@
   box-shadow: none;
 }
 
-/* ---- 术语释义 blockquote（缩略语词条） ---- */
+/* ---- 链接可辨识性：正文链接始终带下划线（2026-10-25 用户决策） ----
+   浅色方案里链接色（藏青 #1c3d5a）与正文色（#26231e）过于接近，
+   且 Material 默认仅 hover 才显示下划线，链接难以与加粗文本区分。
+   解决：正文区（.md-typeset）链接持续显示 45% 透明度的细下划线，
+   hover 时加重为实线。下划线颜色跟随文字色（currentColor），
+   浅色/深色两套方案自动适配；侧边栏「常用链接」在 .md-typeset 之外，不受影响。 */
+.md-typeset a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+}
+
+.md-typeset a:hover {
+  text-decoration-color: currentColor;
+}
+
+/* 术语释义 blockquote（缩略语词条） ---- */
 .md-typeset blockquote {
   border-left: 2px solid var(--md-accent-fg-color);
   background: transparent;
