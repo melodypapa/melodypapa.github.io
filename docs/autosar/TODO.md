@@ -3,7 +3,7 @@
 > Maintained by the autosar-translate skill per [STANDARD.md](STANDARD.md); update the touched entry and the `Last updated` date after every sync.
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-10-26
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-10-27
 
 ## Backlog
 
@@ -101,7 +101,7 @@
 
 - 📖 [AUTOSAR 术语表（TR Glossary）](foundation/general/tr_glossary/) — AUTOSAR_FO_TR_Glossary（Foundation · R23-11）（2026-10-24 翻译中：ch.2 缩略语 206 条 ✅；ch.4 术语定义 343 条分批进行；内容并入术语表页）
 
-- ⛔ [platform_types](../general/platform_types/) — SWS_StandardTypes (stub; front-matter title wrongly says ECU State Manager, nav label needs the same fix)
+- ✅ [Standard Types](../general/standard_types/) — SWS_StandardTypes (2026-10-27 full Type A translation from R23-11 replacing the 9-line stub: title fixed from the wrong "ECU State Manager" + mkdocs.yml nav label "EcuM" → "Standard Types"; §7 API = 7 type definitions + 5 symbol definitions + 函数定义 不适用, prose folds + literal bullets per the mcu/gpt style, Table 8.1 error codes as GFM; §8/§9 = 不适用 per source ch.9/10; appendix B 需求历史 with verbatim item-ID fences; Figure8-1 bit-layout extracted; source ch.5 "Software Architecture" → §5 软件架构 direct translation, empty 5.1 kept)
 
 ❌ Missing (3): SWS_BSWGeneral, SWS_PlatformTypes (a separate document from StandardTypes), SWS_CommunicationStackTypes
 
