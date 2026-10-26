@@ -5,7 +5,7 @@ Compares, for one document pair:
   - source chapter 8.2.x type headings   <-> article section 7.2.x headings
   - source chapter 8.3.x function headings <-> article section 7.3.x headings
     (count, names and order; source names may carry PDF-extraction
-     backslash-escaped underscores, which are normalized away)
+     backslash-escaped underscores and HTML entities, which are normalized away)
   - the number of `**说明**` blocks in the article's 7.3 chapter against the
     number of functions
 
@@ -27,13 +27,19 @@ from pathlib import Path
 # with fence junk ("## ⌋ () 8.2.5  Pwm\_ChannelClassType"), so match anywhere
 # in the line; only lines starting with '#' are scanned (keeps ToC tables out).
 # The lookbehind avoids matching the "8" of "18.3.2" style chapter numbers.
-SRC_RE = re.compile(r"(?:^|[^0-9.])8\.([23])\.(\d+)\s+\**\s*([A-Za-z][A-Za-z0-9_\\]*)")
+SRC_RE = re.compile(r"(?:^|[^0-9.])8\.([23])\.(\d+)\s+\**\s*([A-Za-z][A-Za-z0-9_\\&;<>]*)")
 ART_RE = re.compile(r"^####\s+7\.([23])\.(\d+)\.\s+(.+?)\s*$")
 
 
 def norm(name: str) -> str:
-    """Normalize a heading name: drop extraction backslashes and spaces."""
-    return name.replace("\\", "").replace(" ", "")
+    r"""Normalize a heading name: drop extraction backslashes and spaces,
+    decode PDF-conversion HTML entities so source names like
+    ``IoHwAb&lt;Init\_Id&gt;\_ConfigType`` compare equal to the article's
+    ``IoHwAb<Init_Id>_ConfigType``."""
+    name = name.replace("\\", "").replace(" ", "")
+    for ent, ch in (("&lt;", "<"), ("&gt;", ">"), ("&amp;", "&")):
+        name = name.replace(ent, ch)
+    return name
 
 
 def source_entries(text: str, chap: str) -> list[str]:
