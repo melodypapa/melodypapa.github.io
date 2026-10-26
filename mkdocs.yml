@@ -120,10 +120,7 @@ nav:
         - "Can": autosar/communication/can_driver/index.md
         - "Full-CAN 与 Basic-CAN 的区别": autosar/communication/can_driver/full_can_vs_basic_can.md
       - "CanIf": autosar/communication/can_interface/index.md
-      - "CanNm":
-        - "CAN NM": autosar/communication/can_network_management/index.md
-        - "R21-11 规范":
-          - "CAN NM": autosar/communication/can_network_management/r21_11/index_r21_11.md
+      - "CanNm": autosar/communication/can_network_management/index.md
       - "CanTrcv": autosar/communication/can_transceiver_driver/index.md
       - "ComXf": autosar/communication/com_based_transformer/index.md
       - "DDS": autosar/communication/data_distribution service/index.md
