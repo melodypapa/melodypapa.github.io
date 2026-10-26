@@ -108,7 +108,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Phase B potential-links census — applied: 22 prose [n] → [\[n\]](#ref-n) with §3.1 registry anchors (idempotent re-run 0 lines; 0 UNRESOLVED) + 2 IoHwAb_PreparePowerState\<#Mode\> mentions → #771-iohwab_preparepowerstatemode (script collects clean-identifier defs only, placeholder-titled defs are outside its filter). Report-only, NOT applied: 0 §7.2 constant bullets; 8 参见/参考 lines; cross-article mentions PORT×15 (mostly 91003/91005 table cells — stay plain per precedent), Dcm×8, EcuM×2, BswM×2, Port Driver×1, Det×2 (no article yet — next queue row) + Mcu×1 (known MODULE_LINKS gap — article exists at mcal/mcu_driver)
   - Note: script changes on this branch — check_api_sync.py decodes PDF-conversion HTML entities in source headings (fixes the IoHwAb<Init_Id>_ConfigType truncation; corpus-level, 5-article regression clean); link_candidates.py citation form synced to the 2026-10-27 bracket-preserving decision (same fix the main tree carries uncommitted)
   - [x] Step 5 — User confirmation gate (N/A per user instruction 2026-10-27 "no confirmed one by one" — the per-row confirmation gate is waived for the one-by-one worktree workflow; full Phase A/B evidence recorded in these Notes and reviewable in the PR)
-  - [x] Step 6 — TODO.md row + commit/PR (branch feature/iohwab-sync, worktree melodypapa.worktrees/iohwab · PR recorded after push)
+  - [x] Step 6 — TODO.md row + commit/PR (commits 72a103c + d4bc9fd · PR #120)
 
 ## Not queued (deliberately skipped)
 - (none — all 7 IO SWS documents are queued)
