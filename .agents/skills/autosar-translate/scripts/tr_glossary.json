@@ -3,7 +3,7 @@
  "source_doc": "AUTOSAR_FO_TR_Glossary",
  "release": "R23-11",
  "source_path": "~/Workspace/autosar_standard/markdown/Foundation/Releases/R23-11/General/AUTOSAR_FO_TR_Glossary.md",
- "article": "docs/autosar/general/tr_glossary/index.md",
+ "article": "docs/autosar/foundation/general/tr_glossary/index.md",
  "acronyms": [
   {
    "term": "AA",

@@ -41,7 +41,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 ## Not queued (deliberately skipped)
 - (none)
 - [ ] tr_glossary (AUTOSAR_FO_TR_Glossary · Foundation R23-11 markdown · 📖 reference doc, user-named run #78)
-  - Note: 4646 source lines: ch.2.1 = 206 acronym rows; ch.4 = 343 definition terms (6-row tables). Article = docs/autosar/general/tr_glossary/ (TR reference structure, §7 exemption). 术语表 mechanism (user decision 2026-10-24): entries come from `scripts/tr_glossary.json` — extracted from the SOURCE during each translation batch; gen_glossary never re-parses the translated article. Tranche 1 + ch.4 batch 1 seeded. Tranches committed per batch.
+  - Note: 4646 source lines: ch.2.1 = 206 acronym rows; ch.4 = 343 definition terms (6-row tables). Article = docs/autosar/foundation/general/tr_glossary/ (TR reference structure, §7 exemption). 术语表 mechanism (user decision 2026-10-24): entries come from `scripts/tr_glossary.json` — extracted from the SOURCE during each translation batch; gen_glossary never re-parses the translated article. Tranche 1 + ch.4 batch 1 seeded. Tranches committed per batch.
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion (tranches)
   - [ ] Step 3 — Phase A mechanical checks

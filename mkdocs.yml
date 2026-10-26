@@ -110,8 +110,10 @@ nav:
   - CP AUTOSAR:
     - autosar/index.md
     - "术语表": autosar/glossary.md
-    - "AUTOSAR 术语表（TR Glossary）": autosar/general/tr_glossary/index.md
     - "API 清单": autosar/api_reference.md
+    - 基础:
+      - 通用:
+        - "AUTOSAR 术语表（TR Glossary）": autosar/foundation/general/tr_glossary/index.md
     - 通信:
       - autosar/communication/index.md
       - "CAN Driver":
@@ -140,6 +142,7 @@ nav:
       - "UdpNm": autosar/communication/udp_network_management/index.md
     - 加密（Crypto）:
 
+      - autosar/crypto/index.md
       - "Crypto": autosar/crypto/crypto_driver/index.md
       - "Csm": autosar/crypto/crypto_service_manager/index.md
     - 诊断（Diagnostics）:
@@ -163,8 +166,9 @@ nav:
       - "CorTst": autosar/mcal/core_test/index.md
       - "Gpt": autosar/mcal/gpt_driver/index.md
       - "Mcu": autosar/mcal/mcu_driver/index.md
-    - 存储（Memory）:
+    - 存储:
 
+      - autosar/memory/index.md
       - "BndM": autosar/memory/bulk_nv_data_manager/index.md
       - "Fls": autosar/memory/flash_driver/index.md
       - "Fee": autosar/memory/flash_eeprom_emulation/index.md
