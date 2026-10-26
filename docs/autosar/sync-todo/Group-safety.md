@@ -22,12 +22,13 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: figures — 35 content diagrams copied as `Figure7-1..12`, `Figure8-1..3`, `Figure9-1`, `Figure10-1..17`, `FigureA-1..2`; source ch.1 has **no** content diagram (the PDF list-of-figures starts at *Overview of Watchdog Manager Supervision* = source Figure 7.1) — the three small strips in ch.1 are decoration
   - Note: `| SWS 条目 |` cells filled with the ECUC id (MCU/GPT/CoreTest/EcuM precedent, 2026-10-26 batch) rather than left empty (ICU/DIO/OCU/PORT/PWM/OS) — decided by the most recent site practice; recorded here so the next run is consistent
   - Note: Phase A check 9 census (recorded, not silent) — applied class: 176 identifier-mention lines (functions 159 / error codes 30 / type 1) across §4·§6·§7·§9; `--apply` inserted the intra-article links and the `[n]` citation links (4 citations + 9 registry anchors, applied with the citation-linking rule added by the parallel RTE session) and is idempotent (2nd run = 0 lines); report-only: 0 §7.2 constant bullets, 35 参见/参考/详见 lines, prose `[n]` hop-2 resolutions ([1] IEC 61508 + [2] ISO 26262 EXTERNAL, [3] SWS_BSWGeneral EXTERNAL, [4] EcuM SITE, [8] SWS_MCUDriver EXTERNAL, [9] SWS_RTE EXTERNAL), cross-article module mentions (Mcu ×14 no article, DEM ×6 SITE, Det ×2 no article, EcuM ×1 SITE, BswM ×1 SITE) — the cross-article and hop-2 classes stay unlinked (user decision, queued in TODO.md's Backlog)
+  - Note: **2026-10-26 delivery** — committed on `feature/watchdog-manager` (worktree off origin/master 3f59e79; commit **fdbffbb**) → **issue #117**, PR pending. Working-tree note: a parallel session merged its RTE work (PR #116) mid-run and reset `mkdocs.yml`; the safety nav entry was re-applied on top of the merged master before the commit
   - [x] Step 1 — Source resolution + gap analysis
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 5 — User confirmation gate
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] wdgif (SWS_WatchdogInterface · R23-11 markdown · ❌ new article, short name WdgIf)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
