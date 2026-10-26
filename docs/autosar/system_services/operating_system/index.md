@@ -754,15 +754,30 @@ release: R23-11
 
 操作系统模块使用同步计数，通过计算对下一个到期点的延迟的调整，在每个到期点支持（重新）同步计划表。这提供了比在最终到期点执行操作更快的计划表重新同步。
 
-When a new synchronization count is provided, the Operating System module shall calculate the current deviation between the explicitly synchronized scheduled table and the synchronization count. ⌋ (SRS_Os_11002)
+当提供新的同步计数时，操作系统模块应计算显式同步的调度表（**ScheduleTable**）与同步计数之间的当前偏差。
 
-It is meaningless to try and synchronise an explicitly synchronized schedule table before a synchronization count is provided.
+在提供同步计数之前，尝试同步一个显式同步的调度表是没有意义的。
 
-The Operating System module shall start to synchronise an explicitly synchronized schedule table after a synchronization count is provided AND shall continue to adjust expiry points until synchronized.
+在提供同步计数之后，操作系统模块应开始同步一个显式同步的调度表，并应持续调整到期点直至同步完成。
 
-The Operating System module shall set the state of an explicitly synchronized schedule table to “running and synchronous” if the deviation is less than or equal to the configured OsScheduleTblExplicitPrecision threshold.
+如果偏差小于或等于所配置的 OsScheduleTblExplicitPrecision 阈值，操作系统模块应将显式同步的调度表的状态设置为"运行且同步"（**running and synchronous**）。
 
-The Operating System module shall set the state of an explicitly synchronized schedule table to “running” if the deviation is greater than the configured OsScheduleTblExplicitPrecision threshold.
+如果偏差大于所配置的 OsScheduleTblExplicitPrecision 阈值，操作系统模块应将显式同步的调度表的状态设置为"运行"（**running**）。
+
+如果偏差非零，且下一个到期点是可调整的，且调度表落后于同步计数器（TableTicksAheadOfSyncCounter &lt;= TableTicksBehindOfSyncCounter），则 OS 应将下一个到期点设置为从当前到期点起延迟 min(MaxShorten, Deviation) 个滴答后到期。
+
+如果偏差非零，且下一个到期点是可调整的，且调度表超前于同步计数器（TableTicksAheadOfSyncCounter &gt; TableTicksBehindOfSyncCounter），则 OS 应将下一个到期点设置为从当前到期点起延迟 delay + min(MaxLengthen, Deviation) 个滴答后到期。
+
+图 7.8 展示了调度表（**ScheduleTable**）的显式同步。它假设以下条件：
+
+* EP1-3 的 OsScheduleTableMaxLengthen = 2
+* EP1-3 的 OsScheduleTableMaxShorten = 1
+
+![Figure7_8](Figure7_8.png)
+
+操作系统模块提供服务 **SetScheduleTableAsync**（参见 [SWS_Os_00422]），用于取消在调度表（**ScheduleTable**）的可调整到期点上正在执行的同步。
+
+操作系统模块提供服务 **GetScheduleTableStatus**（参见 [SWS_Os_00227]），用于查询调度表的状态（也包括与同步有关的状态）。
 
 ### 6.5. 堆栈监视设施
 
@@ -1344,6 +1359,8 @@ OSEK OS 已经通过服务调用返回的状态码提供了一些服务保护，
 如果 **ProtectionHook** 是以 **E_OS_PROTECTION_ARRIVAL** 被调用的，则唯一有效的返回值是 **PRO_IGNORE** 或 **PRO_SHUTDOWN**<sup>2</sup>。返回其他值将导致调用 **ShutdownOS**。
 
 > 2 之所以如此，是因为被监视的任务（**Task**）不一定处于活动状态（并且例如无法被终止），而且激活的调用者可能才是真正的问题所在。
+
+如果 **ProtectionHook** 返回 **PRO_IGNORE**，且 **ProtectionHook** 并非以 **E_OS_PROTECTION_ARRIVAL** 被调用，则操作系统模块应调用 **ShutdownOS**。
 
 如果 **ProtectionHook** 返回 **PRO_TERMINATETASKISR**，并且没有任务（**Task**）或 ISR 可以与该错误相关联，则操作系统模块将强制终止正在运行的 **OS-Application**。如果连 **OS-Application** 也无法被指派，则调用 **ShutdownOS**。
 
@@ -2790,9 +2807,9 @@ OS 应创建 **AR_CP_OS_SPINLOCK** 类的事件，以允许跟踪 OS 自旋锁�
 
 以下常量在多核环境中可用。
 
-枚举类型。范围为：**DONOTCARE**。内核的 AppMode。可通过**Os.h**获得。
+**AppModeType**：枚举类型。范围为：**DONOTCARE**。内核的 AppMode。可通过**Os.h**获得。
 
-类型，派生自标量（**scalar**）。范围为：1..65535。内核的总数。可通过**Os.h**获得。
+**TotalNumberOfCores**：类型，派生自标量（**scalar**）。范围为：1..65535。内核的总数。可通过**Os.h**获得。
 
 其他常量见第 6.15 节和[2]。
 
