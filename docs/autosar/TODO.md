@@ -3,7 +3,7 @@
 > Maintained by the autosar-translate skill per [STANDARD.md](STANDARD.md); update the touched entry and the `Last updated` date after every sync.
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-10-26
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-10-27
 
 ## Backlog
 
@@ -15,6 +15,8 @@
 
 - [ ] glossary.md: add the OS article's 46 §2.1 术语表 terms with 来源 attribution (one-term-once rule — check existing entries first); deferred because a parallel session was actively editing glossary.md during the run
 - [ ] prose `[n]` citation link decisions for operating_system (census 2026-10-26): [3] Glossary → site glossary ×2 (SITE class); [1] SRS_OS, [2] ISO 17356-3, [4] SWS_BSWGeneral, [5] EXP_VFB, [6] SRS_BSWGeneral, [7] ISO 17356-6 → EXTERNAL class, need curated official URLs (check 8) before linking
+
+- [x] ~~communication/index.md dead link~~ — fixed in this run (2026-10-27): the leftover link to can_network_management/r21_11 (page removed in 3e2fa4c) was deleted, clearing the strict-build WARNING
 
 **Fill depth (existing articles)**
 
@@ -42,7 +44,7 @@
 - [ ] Global time cluster: StbM + CanTSyn/EthTSyn/FrTSyn
 - [ ] Storage wrap-up: Ea, Eep
 - [ ] Libraries: Crc, E2E
-- [ ] Safety: WdgIf, Wdg
+- [x] ~~Safety: WdgIf, Wdg~~ — done 2026-10-27 (wdgif + wdg run)
 - [ ] Landing pages to add: crypto, memory, system_services, general, methodology_templates
 
 ## Overview
@@ -150,6 +152,8 @@
 ## safety
 
 - ✅ [WdgM 看门狗管理器](safety/watchdog_manager/index.md) — SWS_WatchdogManager (2026-10-26 full Type A translation from R23-11: new article + new safety section landing page + nav; ch.6 Requirements Tracing dropped per mandate, src ch.B *Not applicable requirements* dropped (the second droppable item); src ch.7 → §6 功能规格 (12 diagrams), src ch.8 → §7 API规范 (1 type + 10 functions + 期望接口 + 服务接口), src ch.9 → §8 时序图, src ch.10 → §9 配置规范 (21 containers, SWS 条目 cells filled with [ECUC_WdgM_*]); src annex A → §10 存活监督算法示例实现 (numbered continuation, 7 formulas restored from the R22-11 PDF); 35 figures; glossary.md extended by 36 terms + 6 来源 lines)
+- ✅ [WdgIf 看门狗接口](safety/watchdog_interface/index.md) — SWS_WatchdogInterface (2026-10-27 full Type A translation from R23-11: new article + nav `"WdgIf"` + safety landing row; src ch.7 → §6 功能规格 (2 dev errors WDGIF_E_PARAM_DEVICE/POINTER), src ch.8 → §7 API规范 (1 type WdgIf_ModeType + 3 functions + 2 implementation-hint code fences), src ch.9 → §8 时序图 (bare cross-ref to the watchdog driver spec), src ch.10 → §9 配置规范 (3 containers, SWS 条目 cells filled with [ECUC_WdgIf_*]); 1 figure (Figure10-1 config tree); no glossary additions — source ch.2 is a no-local-acronyms note; WdgIf_SetMode error-code section links to the wdg article once both merged)
+- ✅ [Wdg 看门狗驱动](safety/watchdog_driver/index.md) — SWS_WatchdogDriver (2026-10-27 full Type A translation from R23-11: new article + nav `"Wdg"` + safety landing row; src ch.7 → §6 功能规格 (5 subsections incl. 触发概念以支持窗口看门狗; 扩展生产错误 WDG_E_MODE_FAILED / WDG_E_DISABLE_REJECTED after mcu_driver house), src ch.8 → §7 API规范 (1 type Wdg_ConfigType + 4 functions), src ch.9 → §8 时序图 (Figure9-1/9-2), src ch.10 → §9 配置规范 (faithful source order incl. module table at the end + 9.2.2 WdgSettingsFast group; 17 ECUC tables with [ECUC_Wdg_*] cells); garbled WdgMaxTimeout description restored from the R22-11 PDF p.38; src app. B → ## B. fence-style per EcuM precedent; src ch.7.4 「(see Figure 2)」 kept as prose — Figure 2 absent in R22-11 PDF too; glossary.md +6 terms (DIP/Fast-Mode/Off-Mode/Slow-Mode/SPI/WDG) + DEM/DET 来源 lines)
 
 ## methodology_templates / template
 
@@ -161,7 +165,7 @@
 - **GlobalTime (4)**: SWS_SynchronizedTimeBaseManager (StbM), SWS_TimeSyncOverCAN (CanTSyn), SWS_TimeSyncOverEthernet (EthTSyn), SWS_TimeSyncOverFlexRay (FrTSyn)
 - **Libraries (9)**: SWS_CRCLibrary (Crc), SWS_E2ELibrary (E2E), SWS_BFXLibrary (Bfx), SWS_BSWMulticoreLibrary (Bmc), SWS_MFLLibrary (Mfl), SWS_MFXLibrary (Mfx), SWS_IFLLibrary (Ifl), SWS_IFXLibrary (Ifx), SWS_EFXLibrary (Efx)
 - **RTE / SWArch (2)**: SWS_RTE, SWS_ARTI
-- **Safety (2)**: SWS_WatchdogInterface (WdgIf), SWS_WatchdogDriver (Wdg)
+- ~~**Safety (2)**: SWS_WatchdogInterface (WdgIf), SWS_WatchdogDriver (Wdg)~~ — both translated 2026-10-27
 - **Security (2)**: SWS_Firewall, SWS_IntrusionDetectionSystemManager (IdsM)
 
 ## Missing EXP guides (20)

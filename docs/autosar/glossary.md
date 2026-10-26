@@ -133,6 +133,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 > 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver · R23-11）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
+> 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
 
 **DET**
 > 默认错误跟踪器（**Default Error Tracer**），实现报告开发错误的模块。
@@ -141,6 +142,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver · R23-11）
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
+> 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
+
+**DIP**
+> 数字输入/输出（**Digital Input/Output**）
+> 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
 
 ## E
 
@@ -174,6 +180,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 ## F
 
+
+**Fast-Mode**
+> 对看门狗硬件的触发必须以较短的超时期限完成。例如，该模式可用于 **ECU** 的正常运行。例如，看门狗硬件被配置为窗口模式（触发看门狗必须发生在超时期限内的特定最小/最大边界中）且超时期限为 5 毫秒。
+> 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
 
 **Failed Supervision Reference Cycle**
 > 一个**监督参考周期**，其结束时刻检测到**存活计数器**与**期望存活指示**数量之间存在偏差（包括容差）。
@@ -297,6 +307,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 ## O
 
 
+**Off-Mode**
+> 看门狗硬件被禁用/关闭。这样做可能是为了关闭整个 **ECU**，而不遭受仍在运行的外部看门狗的周期性复位。对于安全关键系统，该模式可能不被允许。在这种情况下，必须将 **Wdg** 模块配置为禁止切换到此模式。
+> 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
+
 **OS**
 > 操作系统（**Operating System**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
@@ -338,9 +352,17 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 特殊功能寄存器（**Special Function Register**），**MCU** 寄存器
 > 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver · R23-11）
 
+**Slow-Mode**
+> 对看门狗硬件的触发可以以较长的超时期限完成。例如，该模式可用于系统启动/初始化阶段。例如，看门狗硬件被配置为翻转模式（对触发的时间点没有约束）且超时期限为 20 毫秒。
+> 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
+
 **Software Trigger**
 > 软件触发是一个软件**API**调用，用于启动转换一个**ADC**通道组或一系列连续**ADC**通道组转换的。
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
+
+**SPI**
+> 串行外设接口（**Serial Peripheral Interface**）
+> 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
 
 **SRC**
 > 监督参考周期（**Supervision Reference Cycle**）
@@ -402,6 +424,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 微控制器（**Microcontroller**）
 > 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver · R23-11）
 ## W
+
+**WDG**
+> 看门狗（**Watchdog**，模块特定前缀）
+> 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
 
 **WdgM**
 > 看门狗管理器（**Watchdog Manager**）

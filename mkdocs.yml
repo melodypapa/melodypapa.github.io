@@ -190,6 +190,8 @@ nav:
     - 安全（Safety）:
       - autosar/safety/index.md
       - "WdgM": autosar/safety/watchdog_manager/index.md
+      - "WdgIf": autosar/safety/watchdog_interface/index.md
+      - "Wdg": autosar/safety/watchdog_driver/index.md
     - RTE:
 
       - "RTE": autosar/rte/index.md
