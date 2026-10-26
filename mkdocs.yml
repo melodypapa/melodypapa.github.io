@@ -110,8 +110,10 @@ nav:
   - CP AUTOSAR:
     - autosar/index.md
     - "术语表": autosar/glossary.md
-    - "AUTOSAR 术语表（TR Glossary）": autosar/general/tr_glossary/index.md
     - "API 清单": autosar/api_reference.md
+    - 基础:
+      - 通用:
+        - "AUTOSAR 术语表（TR Glossary）": autosar/foundation/general/tr_glossary/index.md
     - 通信:
       - autosar/communication/index.md
       - "CAN Driver":
