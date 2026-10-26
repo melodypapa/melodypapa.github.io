@@ -6,6 +6,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## A
 
+
 **Acquisition Time**
 > 采集时间 = 采样时间（**Sample Time**）+ 转换时间（**Conversion Time**）
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
@@ -34,6 +35,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > **ADC**驱动程序的用户必须为每个组提供一个缓冲区。如果选择流式访问模式（**streaming access mode**），此缓冲区可以保存同一组通道的多个样本。如果选择单一访问模式（**Single Access Mode**），每个组通道的一个样本将保存在缓冲区中。
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 
+**AI**
+> 存活指示（**Alive Indication**）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**Alive Counter**
+> **WdgM** 中在**检查点**上下文内的独立数据资源，用于跟踪和处理该**检查点**的**存活指示**数量。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**Alive Indication**
+> 由**被监督实体**的**检查点**提供的指示，用于向**WdgM** 标识其存活状态。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**Alive Supervision**
+> 一种监督，用于检查**被监督实体**的执行是否足够频繁且不过于频繁（包括容差）。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
 **API**
 > 应用编程接口（**Application Programming Interface**）
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
@@ -42,6 +59,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 原子序列是一段不得被中断的测试。
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
 ## B
+
 
 **Background test**
 > 后台测试由 **SW** 调度器/**RTOS** 周期性调用。
@@ -53,12 +71,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 **BSW**
 > 基础软件（**Basic Software**）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
+
+**BswM**
+> 基础软件模式管理器（**Basic Software Mode Manager**）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 ## C
+
 
 **Caller/calling entity**
 > 调用者/调用实体位于较高的 **AUTOSAR** 或 **ISO** 层。它是 **API** 调用的用户。
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
+
+**Checkpoint**
+> **被监督实体**控制流中的一个点，在该处向**WdgM** 报告活动。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 
 **Conversion Mode**
 > One-Shot：**ADC**通道组的转换在触发后执行一次，结果写入所分配的结果缓冲区。触发可以是软件**API**调用或硬件事件。Continuous：**ADC**通道组的转换在软件**API**调用（启动）后连续执行，结果写入所分配的结果缓冲区。转换本身自动运行（由硬件/中断控制）。连续转换可通过软件**API**调用（停止）停止。
@@ -76,20 +104,39 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 中央处理器（**Central Processing Unit**）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
 
+**Cross-Cluster External Graph**
+> 一种特殊的**外部图**，在集群式软件架构下跨越多个**软件集群**（**Software Cluster**）。其配置依赖于模式（由**宿主软件集群**（**Host Software Cluster**）控制），并且另外具有专门的配置结构。注意：单个**软件集群**内的**外部图**可以在不使用集群式软件架构专门配置结构的情况下建模。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
 **CSUM/Checksum/signature**
 > 测试执行结果的数值表示。
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
 
 ## D
 
+
+**Deadline End Checkpoint**（**Deadline Stop Checkpoint**）
+> 为其配置了**截止时间监督**、并且是某个特定**截止时间监督**终点的**检查点**。一个**检查点**可以同时是**截止时间起始检查点**和**截止时间结束检查点**——即当**截止时间监督**被串联时。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**Deadline Start Checkpoint**
+> 为其配置了**截止时间监督**、并且是某个特定**截止时间监督**起点的**检查点**。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**Deadline Supervision**
+> 一种监督，用于检查两个**检查点**之间的执行时间是否小于给定的执行时间上限。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
 **DEM**
 > 诊断事件管理器（**Diagnostic Event Manager**）。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 > 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver · R23-11）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
 
 **DET**
 > 默认错误跟踪器（**Default Error Tracer**），实现报告开发错误的模块。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 > 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver · R23-11）
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
@@ -97,20 +144,55 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## E
 
+
+**EAI**
+> 期望存活指示（**Expected Alive Indications**）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
 **ECU**
 > 电子控制单元（**Electronic Control Unit**）
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
 
+**EcuM**
+> **ECU** 状态管理器（**ECU State Manager**）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**Expired Supervision Cycle**
+> 一个**监督周期**，其中**存活监督**已失败其两个升级步骤（**存活计数器**失败的**期望存活指示**数量（包括容差）超过允许的失败参考周期次数）。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
 **External device**
 > 物理外部实体；例如另一个微控制器。
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
+
+**External Graph**
+> 可能涉及多于一个**被监督实体**的**图**。其配置依赖于模式。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**External Transition**
+> **外部转换**是两个**检查点**之间的**转换**，其中这两个**检查点**属于不同的**被监督实体**。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 ## F
+
+
+**Failed Supervision Reference Cycle**
+> 一个**监督参考周期**，其结束时刻检测到**存活计数器**与**期望存活指示**数量之间存在偏差（包括容差）。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**FiM**
+> 功能抑制管理器（**Function Inhibition Manager**）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 
 **Foreground test**
 > 前台测试是同步测试，不得被中断。它通过用户应用程序调用。
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
 
 ## G
+
+
+**Global Supervision Status**
+> 汇总所有**被监督实体****局部监督状态**的状态。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 
 **Golden (Ref.) Value**
 > 用于与先前计算出的测试结果值进行比较的参考值（例如校验和/签名）。
@@ -127,7 +209,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **GPT Predef Timer**
 > **GPT Predef Timer** 是 **GPT** 驱动程序提供的自由运行递增计数器。哪些 **GPT Predef Timer** 可用取决于硬件（时钟、硬件定时器、预分频器、定时器寄存器宽度等）和配置。**GPT Predef Timer** 具有预定义的物理时间单位和范围。
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
+
+**Graph**
+> 控制流图（**Control Flow Graph**）。一组通过**转换**相连的**检查点**，其中至少有一个**检查点**是**初始检查点**。在该**图**的任意两个**检查点**之间都存在一条（通过**转换**的）路径。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 ## H
+
 
 **Hardware Trigger**
 > 硬件触发是**ADC**内部触发信号，用于启动ADC通道组的一次转换。**ADC**硬件触发在ADC硬件内部生成（例如：基于**ADC**定时器或触发沿信号）。触发硬件是强耦合或者直接集成在**ADC**的硬件中。当检测到硬件触发后，无需软件即可启动**ADC**通道组转换。**注意：**即使**ADC**硬件不支持硬件触发，也可以通过软件触发结合**GPT/ICU**驱动程序来实现类似的行为。（例如：在GPT定时器通知函数中，启动软件触发的**ADC**通道组的转换）
@@ -135,18 +222,33 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 **HW**
 > 硬件（**Hardware**）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 
 ## I
+
 
 **ICU**
 > 输入捕获单元（**Input Capture Unit**）
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
 
+**ID**
+> 标识符（**Identifier**）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**Internal Graph**
+> 不跨越若干**被监督实体**的**图**。其配置与模式无关，并且可以通过禁用对应的**被监督实体**而被禁用。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**Internal Transition**
+> **内部转换**是同一个**被监督实体**内两个**检查点**之间的**转换**。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
 **IRQ**
 > 中断请求（**Interrupt Request**）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
 ## L
+
 
 **L1**
 > 第一级存储器（**1st level memory**）
@@ -156,7 +258,15 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 第二级存储器（**2nd level memory**）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
 
+**Local Supervision Status**
+> 表示单个**被监督实体**当前存活监督结果的状态。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**Logical Supervision**
+> 一种对软件的在线监督，用于检查软件（**被监督实体**或一组**被监督实体**）是否按程序员（即已开发的代码）定义的顺序执行。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 ## M
+
 
 **MCAL**
 > 微机抽象层（**Microcomputer Abstraction Layer**）
@@ -164,15 +274,21 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 **MCU**
 > 微控制器单元（**Microcontroller Unit**）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 > 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver · R23-11）
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
 
+**Mode**
+> 模式是车辆中运行的各个状态机的特定状态集合，这些状态与某个特定实体相关，例如 **SW-C**、**BSW** 模块、应用或整个车辆。在其生命周期内，一个实体在一组互斥的模式之间切换。这些切换由环境数据触发，例如信号接收、操作调用。在**看门狗管理器**的上下文中，一个模式由一组配置选项定义。被监督的**被监督实体**集合可以随模式而变化。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
 **MPU**
 > 内存保护单元（**Memory Protection Unit**）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
 ## N
+
 
 **NOP, nop**
 > 空操作（**Null Operation**）
@@ -180,11 +296,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## O
 
+
 **OS**
 > 操作系统（**Operating System**）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
 
 ## P
+
 
 **Partial test**
 > 部分测试定义为一个或多个「硬件资源」的测试。（部分测试是可中断的，因为它在后台模式下执行。）
@@ -192,15 +311,28 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## R
 
+
 **Resource**
 > 「硬件资源」是 **CoreTest** 驱动程序用户可以选择的最小单元（实例）。它可以在一个或多个原子序列中被测试。它是执行特定功能（例如 **IRQ** 控制器）的内核内部单元。
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
 
+**RTE**
+> 运行时环境（**Runtime Environment**）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 ## S
+
 
 **Sampling Time, Sample Time**
 > 采样时间是指对模拟值进行采样的时间（例如：加载电容器，……）
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
+
+**SC**
+> 监督周期（**Supervision Cycle**）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**SE**
+> 被监督实体（**Supervised Entity**）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 
 **SFR**
 > 特殊功能寄存器（**Special Function Register**），**MCU** 寄存器
@@ -210,11 +342,39 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 软件触发是一个软件**API**调用，用于启动转换一个**ADC**通道组或一系列连续**ADC**通道组转换的。
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 
+**SRC**
+> 监督参考周期（**Supervision Reference Cycle**）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**Supervised Entity**
+> 被纳入**WdgM** 监督的软件实体。每个**被监督实体**恰好具有一个标识符。**被监督实体**表示软件组件类型或基础软件模块某个实例内的一组**检查点**。在一个软件组件类型或基础软件模块的实例中，可以有零个、一个或多个**被监督实体**。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**Supervised Entity Identifier**
+> 在一个应用内唯一标识某个**被监督实体**的**标识符**。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**Supervision Counter**
+> 在**被监督实体**上下文内的独立数据资源，由**WdgM** 在每个**监督周期**期间更新，并被**存活监督**算法用于执行对已计数**存活指示**的检查。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**Supervision Cycle**
+> **WdgM****监督参考周期**的时基，在其中执行周期性的**存活监督**。它同时也是更新**全局监督状态**以及执行由此产生的恢复动作的间隔。这在所属 **WdgM** 的主函数每次被调用时完成，并且依赖于模式（在切换模式时可能变化）。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**Supervision Reference Cycle**
+> **存活监督**用于执行已计数**存活指示**检查所使用的**监督周期**数量（对每个**被监督实体**分别确定），并且依赖于模式。
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
 **SW**
 > 软件（**Software**）
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 
+**SW-C**
+> 软件组件（**Software Component**）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 ## T
+
 
 **Target time**
 > 目标时间：到达该值时应有某事发生。其行为取决于配置和已启用的功能。
@@ -237,6 +397,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
 ## U
 
+
 **uC**
 > 微控制器（**Microcontroller**）
 > 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver · R23-11）
+## W
+
+**WdgM**
+> 看门狗管理器（**Watchdog Manager**）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）

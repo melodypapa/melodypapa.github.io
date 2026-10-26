@@ -39,15 +39,33 @@ IDENT_RE = re.compile(r"^[A-Za-z][A-Za-z0-9_]*$")
 
 
 def section_items(region, title_re):
-    """Every `## ` heading strictly inside the `8.x <title matching title_re>`
-    section — the next numbered `## 8…` heading of same-or-shallower level
-    ends it. Found by TITLE, never by fixed number: the numbering differs per
+    """Every `## ` heading belonging to the `8.x <title matching title_re>`
+    section.
+
+    Membership is decided by the heading's OWN numeric prefix when it has
+    one: a heading numbered `8.3.1` belongs to the `8.3` section even when
+    the PDF conversion placed it *before* that section's own heading (WdgM:
+    `## 8.3.1 WdgM_Init` precedes `## 8.3 Function definitions`, so the
+    positional scan filed it under 8.2 and dropped it from 8.3). Headings
+    without a numeric prefix keep the positional rule — the conversion
+    dropped the numbers in some documents (CoreTest).
+
+    Found by TITLE, never by fixed number: the numbering differs per
     document (Det: types in 8.1.2/functions in 8.1.3; TcpIp: functions in
     8.4), inner headings may carry no numeric prefix at all (CoreTest — the
     PDF conversion dropped them), and the section title itself varies
     (BFX: "Bit functions definitions")."""
     heads = [(m.group(1).split("."), m.group(2), m.start()) for m in HEAD_RE.finditer(region)]
     allh = [(m.start(), m.group(1)) for m in re.finditer(r"^##\s+(.+?)\s*$", region, re.M)]
+    numbered = {start: ".".join(lvl) for lvl, _title, start in heads}
+    # the two API sections' own numbers, so a heading can be attributed to
+    # the section it is numbered under rather than to the one it sits in
+    secnum = {}
+    for lvl, title, _start in heads:
+        if re.search(r"types?\s+definitions", title, re.I):
+            secnum.setdefault("types", ".".join(lvl))
+        if re.search(r"functions?\s+definitions", title, re.I):
+            secnum.setdefault("funcs", ".".join(lvl))
     for i, (lvl, title, start) in enumerate(heads):
         if not title_re.search(title):
             continue
@@ -56,13 +74,27 @@ def section_items(region, title_re):
             if len(lvl2) <= len(lvl):
                 end = start2
                 break
+        prefix = ".".join(lvl)
+        kind = "types" if re.search(r"types?\s+definitions", title, re.I) else "funcs"
+        other = secnum.get("funcs" if kind == "types" else "types")
         items = []
         for pos, txt in allh:
             if pos <= start or pos >= end:
                 continue
-            txt = re.sub(r"^8(?:\.\d+)*\s+", "", txt)
-            items.append(txt)
-        return items
+            num = numbered.get(pos)
+            if num and other and num.startswith(other + "."):
+                continue  # owned by the sibling section
+            items.append((pos, txt))
+        # headings this section owns that the conversion placed before it
+        for pos, txt in allh:
+            num = numbered.get(pos)
+            if not num or not num.startswith(prefix + "."):
+                continue
+            if start <= pos < end:
+                continue  # already collected
+            items.append((pos, txt))
+        items.sort(key=lambda it: it[0])
+        return [re.sub(r"^8(?:\.\d+)*\s+", "", txt) for _pos, txt in items]
     return None
 
 

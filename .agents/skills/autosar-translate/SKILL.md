@@ -271,19 +271,34 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
   any heading at ANY level under §7.2–7.5 whose title is the identifier
   itself: dio/adc `#### 7.2.x. Adc_ConfigType` flat, EcuM
   `###### 7.3.1.1 EcuM_GetVersionInfo` grouped; Chinese group titles like
-  通用 are never link targets) and development-error codes (link to their
+  通用 are never link targets), development-error codes (link to their
   错误-titled §6 section's anchor — DIO/PWM 6.6.x 开发错误, EcuM 6.12/6.13,
-  ADC 6.5); §7.2 constant bullets
+  ADC 6.5), and prose citation markers `[n]` (link to the §3.1 entry's own
+  anchor — next bullet, user decision 2026-10-26); §7.2 constant bullets
   (STD_HIGH, ICU_MODE_* enum/mode values) and
   参见/详见 references stay candidates for a user decision — no corpus article
   links constants (audited 2026-10-25). The census excludes the article's own
   module from cross-article mentions (a self-link is never a candidate). Use
   `.agents/skills/autosar-translate/scripts/link_candidates.py --apply
-  <article>` (idempotent — re-running changes 0 lines; scans through 时序图
-  prose, stops before 配置规范 whose tables are definitional).
+  <article>` (idempotent — re-running changes 0 lines; identifier/error-code
+  links scan through 时序图 prose and stop before 配置规范 whose tables are
+  definitional; citation-marker links scan the whole article).
 - **Citation markers `[n]` mean "Related documentation, entry n"** — a
   two-hop reference: citation → §3.1 entry → an external document or a page
-  on this site. `link_candidates.py --list` resolves every citation to its
+  on this site. **Hop 1 is an applied class (user decision 2026-10-26)**: the
+  marker itself links to the §3.1 entry, restoring the source PDF's own
+  citation hyperlink — `--apply` prefixes every registry entry line with an
+  invisible anchor (`<a id="ref-n"></a>`) and converts prose `[n]` to
+  `[n](#ref-n)`, but ONLY for numbers the registry defines. Three things
+  never convert: a number the registry does not define (UNRESOLVED — source
+  typo, e.g. EcuM's `[23]`; leave as prose, a 译者注 is a user decision), a
+  number whose surrounding prose names a DIFFERENT document than the entry
+  (SWS_EcuM cites "ECU Configuration [5]" while §3.1 [5] is Glossary —
+  re-apply with `--ref-skip 5` and record the decision in the queue row),
+  and `**译者注：**` lines (translator prose, never source citations). The
+  census reports UNRESOLVED and UNLINKED numbers with their inline context so
+  both cases are caught before apply is trusted. Hop 2 stays a report-only
+  user decision: `link_candidates.py --list` resolves every citation to its
   document and classifies by the entry's `AUTOSAR_*` doc id — **never by
   title substring** ("Requirements on Port Driver" is SRS_PortDriver, not
   the site's Port article). SITE class = the document's article/page exists
@@ -362,7 +377,10 @@ before every commit, the second is evidence for the Step 8 confirmation.
    as the 可追溯项变更历史 appendix; `## 8.` is
    allowed only as `## 8. 时序图` and `## 9.` only as `## 9. 配置规范`
    (both optional — only when the source has ch.9 / ch.10; when only one
-   optional chapter is present it takes the lower number).
+   optional chapter is present it takes the lower number); a **numbered
+   continuation** `## 10.`+ is allowed when the source has a chapter 11+ or a
+   content annex that is not the droppable NA-requirements appendix
+   (STANDARD.md §1) — its heading is a direct translation of the source title.
    **Before renaming
    a heading to a STANDARD.md term, grep that heading across `docs/autosar`** —
    if the standard and the site majority disagree, it is a user decision
@@ -426,8 +444,14 @@ before every commit, the second is evidence for the Step 8 confirmation.
    gate evidence: identifier mentions by chapter (applied class: types §7.2.x,
    functions §7.3.x, dev-error codes §6.6.x — scanned through 时序图 prose,
    counted but never applied inside 配置规范 tables), §7.2 constant-bullet
-   mentions (report-only), 参见/详见 refs, prose `[n]` citations (§3.1 registry
-   lines excluded) with their SITE/EXTERNAL resolutions, and cross-article
+   mentions (report-only), 参见/详见 refs, prose `[n]` citations (whole
+   article; registry lines, 译者注 lines and code excluded) split into
+   already-linked / UNLINKED-resolved with inline context (verify each
+   context names the entry's own document before trusting apply — a
+   document-name mismatch re-runs apply with `--ref-skip n`) / UNRESOLVED
+   (number not in the §3.1 registry — source typo, never link, record it and
+   consider a 译者注), with their SITE/EXTERNAL two-hop resolutions, and
+   cross-article
    module mentions (case-insensitive — articles render "Port Driver" as
    **PORT**/**Port**; §2 acronym term lines skipped). An explicit "0
    candidates" is a valid result; **silence is a failed gate**. This rule
@@ -474,7 +498,9 @@ evidence, not asserted):
     `#### 7.3.x` heading (§7.2.9's type description cites
     **Icu_GetEdgeNumbers()**);
     `参见下表` → the table below; prose `[n]` → the §3.1 entry
-    (iohwab: 参见参考文档[9]).
+    (iohwab: 参见参考文档[9]) — the `[n]` class is applied since
+    2026-10-26 (`<a id="ref-n">` + `[n](#ref-n)`); source-typo numbers and
+    document-name mismatches stay prose (see Step 5).
   - Cross-article: module names (Det/Dem/CanIf…) whose site article exists.
   - Un-linked plain-text source URLs (see Phase A check 8).
   - **Not linkable — record, don't link**: the target lives in a Type

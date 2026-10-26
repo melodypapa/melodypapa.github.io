@@ -7,6 +7,10 @@
 
 ## Backlog
 
+**TODO.md Overview count table drift (measured 2026-10-26)**
+
+- [ ] The status-count table above does not match the per-section rows it summarizes: the rows hold 16 ✅ / 9 🔶 / 16 ⚠️ / 4 ⛔ / 7 📖, the table claims 14 / 10 / 17 / 4 / 8. The ✅ / ❌ counts were maintained per run (each new article bumps ✅ and lowers ❌ Missing), but the OS sync (ca7ecda) and the RTE run added rows without touching the table. Regenerate the table from the rows — a program-level fix, deliberately not folded into a single-article run.
+
 **OS follow-up PR (user decision 2026-10-26 — deferred from the full-sync PR)**
 
 - [ ] glossary.md: add the OS article's 46 §2.1 术语表 terms with 来源 attribution (one-term-once rule — check existing entries first); deferred because a parallel session was actively editing glossary.md during the run
@@ -28,6 +32,7 @@
 - [ ] BswM ch.10 → `## 9. 配置规范` (rule-lift follow-up, issue #71): 91 containers across ~3600 source lines (10.2.1–10.2.90) — dedicated run needed; bswm alignment + 时序图 lands first
 - [ ] ch.10 → `## 8. 配置规范` for pre-ban articles whose R23-11 source has a Configuration specification (rule lifted 2026-10-24): io — dio/port/pwm ✅ (2026-10-24, issue #62), ocu ✅ (issue #61); remaining: audit every non-io ✅/🔶 article program-wide (bswm, ecu, crypto_*, memory_*, mode_management, system_services …); icu/adc/iohwab rows already scope it in Group-io
 - [ ] Link-audit fixes (2026-10-24 first site-wide external-URL curl; rule in STANDARD.md §4 / skill Phase A check 8): ethernet_driver §3.2 IEEE `getieee802` PDF 403 (directory retired; verify the ieeexplore number for 802.1AS-2011 in a browser before re-linking — note ethernet_interface's ieeexplore 8585421 is 802.1AE MACsec, a different document); data_distribution §3 OMG `DDS/1.4` http 500 (https same path 200 → upgrade to https); `https://www.iso.org` 403 (likely anti-bot, verify in a browser before acting); port.de timed out once then returned 200 on retry (lesson recorded in check 8: retry before declaring a link dead)
+- [ ] WdgM potential-link decisions (census 2026-10-26, report-only classes — apply is a user decision): cross-article module mentions — DEM ×6 → `../../diagnostics/diagnostic_event_manager/`, EcuM ×1 → `../ecu_state_manager/`, BswM ×1 → `../basic_software_mode_manager/` (Mcu ×14 and Det ×2 have no article yet); prose `[n]` citations — [4] *ECU 状态管理器规范* → SITE (EcuM article), [3] *基础软件模块通用规范* ×4 / [8] *MCU 驱动规范* / [9] *RTE 软件规范* / [1] IEC 61508 / [2] ISO 26262 → EXTERNAL, need curated official URLs (check 8) before linking
 - [ ] DIO potential-link decisions (improved census 2026-10-25, report-only classes — apply is a user decision): 10 × PORT-driver module mentions (§1/§5.1/§6 prose, rendered **PORT**/**Port**) → `../port_driver/`; [1] Glossary → site glossary (§2 intro; SITE class); [2] SWS_BSWGeneral → EXTERNAL, needs a curated official URL (cited in §3.2 and §6.6 intro); 11 × STD_HIGH/STD_LOW mentions stay prose (no corpus precedent for enum-value links); Det ×6 mentions unlinked — no Det article yet (see fill-breadth below)
 
 **Fill breadth (new articles)**
@@ -37,18 +42,18 @@
 - [ ] Global time cluster: StbM + CanTSyn/EthTSyn/FrTSyn
 - [ ] Storage wrap-up: Ea, Eep
 - [ ] Libraries: Crc, E2E
-- [ ] Safety: WdgM, WdgIf, Wdg
+- [ ] Safety: WdgIf, Wdg
 - [ ] Landing pages to add: crypto, memory, system_services, general, methodology_templates
 
 ## Overview
 
 | Status | Count | Note |
 | --- | ---: | --- |
-| ✅ Type A-compliant | 13 | ready to use |
+| ✅ Type A-compliant | 14 | ready to use |
 | 🔶 Translated pending alignment | 10 | seven chapters present; legacy wording / forbidden-chapter residue |
 | ⚠️ Partial | 17 | missing ≥1 chapter (most miss the 「API规范」 chapter) |
 | ⛔ Stub | 4 | 9–19 lines only |
-| ❌ Missing (SWS) | 83 | R23-11 has 127 SWS docs in total; 44 covered (34.6%) |
+| ❌ Missing (SWS) | 82 | R23-11 has 127 SWS docs in total; 45 covered (35.4%) |
 | ❌ Missing (EXP) | 20 | R23-11 has 22 EXP docs in total; 2 covered |
 | 📖 Guide/topic | 8 | exempt from the Type A skeleton |
 
@@ -142,6 +147,10 @@
 
 ❌ Missing (4): SWS_COMManager (ComM), SWS_DefaultErrorTracer (Det), SWS_HWTestManager, SWS_SoftwareClusterConnection (SwCluC)
 
+## safety
+
+- ✅ [WdgM 看门狗管理器](safety/watchdog_manager/index.md) — SWS_WatchdogManager (2026-10-26 full Type A translation from R23-11: new article + new safety section landing page + nav; ch.6 Requirements Tracing dropped per mandate, src ch.B *Not applicable requirements* dropped (the second droppable item); src ch.7 → §6 功能规格 (12 diagrams), src ch.8 → §7 API规范 (1 type + 10 functions + 期望接口 + 服务接口), src ch.9 → §8 时序图, src ch.10 → §9 配置规范 (21 containers, SWS 条目 cells filled with [ECUC_WdgM_*]); src annex A → §10 存活监督算法示例实现 (numbered continuation, 7 formulas restored from the R22-11 PDF); 35 figures; glossary.md extended by 36 terms + 6 来源 lines)
+
 ## methodology_templates / template
 
 - 📄 [BSW 模块描述模板](../methodology_templates/basic_software_module_description_template/) — TPS_BSWModuleDescriptionTemplate (exempt)
@@ -152,7 +161,7 @@
 - **GlobalTime (4)**: SWS_SynchronizedTimeBaseManager (StbM), SWS_TimeSyncOverCAN (CanTSyn), SWS_TimeSyncOverEthernet (EthTSyn), SWS_TimeSyncOverFlexRay (FrTSyn)
 - **Libraries (9)**: SWS_CRCLibrary (Crc), SWS_E2ELibrary (E2E), SWS_BFXLibrary (Bfx), SWS_BSWMulticoreLibrary (Bmc), SWS_MFLLibrary (Mfl), SWS_MFXLibrary (Mfx), SWS_IFLLibrary (Ifl), SWS_IFXLibrary (Ifx), SWS_EFXLibrary (Efx)
 - **RTE / SWArch (2)**: SWS_RTE, SWS_ARTI
-- **Safety (3)**: SWS_WatchdogManager (WdgM), SWS_WatchdogInterface (WdgIf), SWS_WatchdogDriver (Wdg)
+- **Safety (2)**: SWS_WatchdogInterface (WdgIf), SWS_WatchdogDriver (Wdg)
 - **Security (2)**: SWS_Firewall, SWS_IntrusionDetectionSystemManager (IdsM)
 
 ## Missing EXP guides (20)

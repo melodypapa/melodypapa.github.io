@@ -9,12 +9,23 @@ Usage:
   link_candidates.py --apply <article.md>   # apply intra-article links
 
 Applied class (restoration of the source PDF's own hyperlinks):
-  - type mentions      (7.2.x headings) -> that heading's anchor
+  - type mentions      (identifier-titled ch.7 headings) -> that heading's
+    anchor
   - constant mentions  (bold bullets inside a 7.2.x section) -> its anchor
   - error-code mentions (X_E_Y-style codes in the 错误-titled §6 subsections'
     tables — DIO/PWM 6.6.x 开发错误, EcuM 6.12/6.13) -> that section's anchor
-  - function mentions  (7.3.x headings) -> that heading's anchor; callbacks
-    (7.4.x) and callouts (7.5.x) too
+  - function mentions  (identifier-titled ch.7 headings — functions,
+    callbacks, callouts, scheduled functions, port interfaces) -> that
+    heading's anchor
+  - prose citation markers [n] -> the §3.1 registry entry's own anchor
+    (`<a id="ref-n"></a>` + `[n](#ref-n)`, user decision 2026-10-26):
+    restores the source PDF's citation hyperlink. Only numbers the registry
+    defines convert; the WHOLE article is scanned (a citation is a citation
+    everywhere — no 配置规范 stop), but headings, code fences, inline code,
+    registry lines and **译者注：** lines never convert. --ref-skip n,n
+    exempts user-approved mismatch numbers (census context names a different
+    document than the entry title, e.g. "ECU Configuration [5]" vs entry [5]
+    Glossary in SWS_EcuM).
 
 Function/type entries are headings whose title is a plain ASCII identifier.
 This handles BOTH API-chapter layouts: one-function-per-####-heading (PWM,
@@ -29,14 +40,21 @@ mention). 时序图 prose is ordinary prose and is scanned since the chapter's
 idempotent — existing markdown links are masked, never re-wrapped.
 Report-only classes (user decisions, never auto-added): §7.2 constant bullets
 (STD_HIGH, ICU_MODE_* — no corpus article links enum/mode values, audited
-2026-10-25), 参见/参考/详见 lines, prose `[n]` citations (§3.1 registry lines
-are excluded from the count), cross-article module mentions.
+2026-10-25), 参见/参考/详见 lines, the citation two-hop resolution (entry ->
+document -> SITE/EXTERNAL class), cross-article module mentions. The census
+also reports UNRESOLVED citation numbers (not in the §3.1 registry — source
+typos like EcuM's [23], never linked, 译者注 is a user decision) and UNLINKED
+resolved ones (context shown so a document-name mismatch is caught).
 """
 import os
 import re
 import sys
 
 CONFIG_TITLE = "配置规范"  # --apply stops before this chapter (definitional tables)
+
+# Registry entry line: optional invisible #ref-n anchor prefix + "[n] Title"
+# (the prefix is what --apply adds; census/parse must tolerate both states)
+REF_ANCHOR = r'(?:<a id="ref-\d+"></a>)?'
 
 MD_LINK = re.compile(r"\[[^\]]*\]\([^)]*\)")
 
@@ -75,13 +93,20 @@ def collect(article: str):
     enc72 = None  # enclosing 7.2.x section (constant bullets)
     enc_err = None  # enclosing 错误-titled §6 section (error-classification tables)
 
-    # types, functions, callbacks and callouts from identifier-titled headings
-    # at any level (grouped layout: #### group -> ###### entry, EcuM-style;
-    # flat layout: #### entry, PWM-style — the IDENT filter accepts both)
+    # types, functions, callbacks, callouts, scheduled functions and port
+    # interfaces from identifier-titled headings ANYWHERE in ch.7 (the API
+    # chapter — its layout varies: MCAL/I-O articles 7.2–7.5 classic, the
+    # EcuM house shape adds 7.6 调度函数 (EcuM_MainFunction) and 7.7/7.8
+    # interfaces, BswM puts port interfaces at 7.7.2.x. The IDENT.fullmatch
+    # guard — NOT a section range — is the filter: Chinese-titled groups
+    # (通用, 期望接口) and suffixed titles (EcuM_ShutdownTarget端口接口)
+    # never become targets). Any heading level (grouped layout:
+    # #### group -> ###### entry, EcuM-style; flat layout: #### entry,
+    # PWM-style — the IDENT filter accepts both)
     for (i, lvl, num, title, slug) in headings:
         if lvl == 4:
             section_range[title] = (i, ends[i])
-        if re.match(r"7\.[2-5]\.", num) and IDENT.fullmatch(title):
+        if re.match(r"7\.", num) and IDENT.fullmatch(title):
             defs[title] = slug
             section_range[title] = (i, ends[i])
 
@@ -194,8 +219,9 @@ def _registry_sec(article: str):
     # guides) — both carry the [n] Title / > DOCID registry format. A §3.1
     # only qualifies if it actually holds [n] entries (guide chapters number
     # their sections 3.1 too, e.g. EXP_ModeManagementGuide's process steps).
+    # Entry lines may carry the invisible #ref-n anchor prefix --apply adds.
     sec = re.search(r"### 3\.1\..*?(?=### 3\.2)", article, re.S)
-    if not (sec and re.search(r"^\[\d+\]\s", sec.group(0), re.M)):
+    if not (sec and re.search(rf"^{REF_ANCHOR}\[\d+\]\s", sec.group(0), re.M)):
         sec = re.search(r"## 参考文献\n.*?(?=\n## )", article, re.S)
     return sec
 
@@ -204,9 +230,9 @@ def parse_entries31(article: str):
     sec = _registry_sec(article)
     entries = {}
     if sec:
-        blocks = re.split(r"(?=^\[\d+\])", sec.group(0), flags=re.M)
+        blocks = re.split(rf"(?=^{REF_ANCHOR}\[\d+\])", sec.group(0), flags=re.M)
         for b in blocks:
-            m = re.match(r"^\[(\d+)\]\s+(.+)$", b, re.M)
+            m = re.match(rf"^{REF_ANCHOR}\[(\d+)\]\s+(.+)$", b, re.M)
             if not m:
                 continue
             n, title = m.group(1), m.group(2).strip()
@@ -240,6 +266,59 @@ def config_start(lines, headings):
     return None
 
 
+def add_registry_anchors(lines, entries31):
+    """Prefix every §3.1 registry entry line with its invisible #ref-n anchor
+    (idempotent — a line already carrying id="ref-n" is left alone)."""
+    if not entries31:
+        return 0
+    span = entries31_span("\n".join(lines))
+    if not span:
+        return 0
+    added = 0
+    for i in range(span[0], span[1]):
+        m = re.match(rf"^{REF_ANCHOR}\[(\d+)\]\s", lines[i])
+        if m and f'id="ref-{m.group(1)}"' not in lines[i]:
+            lines[i] = f'<a id="ref-{m.group(1)}"></a>' + lines[i]
+            added += 1
+    return added
+
+
+def convert_citation_links(lines, entries31, ref_skip=frozenset()):
+    """[n] -> [n](#ref-n) for every number the registry defines. Whole
+    article (unlike identifiers, a citation is a citation everywhere), but
+    never in headings (a link would change the Material slug), code fences,
+    inline code, the registry itself, or **译者注：** lines; --ref-skip
+    exempts user-approved document-name mismatches."""
+    if not entries31:
+        return 0
+    span = entries31_span("\n".join(lines))
+    fm_end = front_matter_end(lines)
+    fence = False
+    changed = 0
+
+    def sub(m):
+        nonlocal changed
+        n = m.group(1)
+        if n in ref_skip or n not in entries31:
+            return m.group(0)
+        changed += 1
+        return f"[{n}](#ref-{n})"
+
+    for i, ln in enumerate(lines):
+        if ln.startswith("```"):
+            fence = not fence
+            continue
+        if (fence or ln.startswith("#") or i < fm_end
+                or (span and span[0] <= i < span[1])
+                or ln.lstrip().startswith("**译者注：**")):
+            continue
+        segs = re.split(r"(`[^`]*`)", ln)  # odd indices = inline code
+        lines[i] = "".join(
+            seg if si % 2 else re.sub(r"\[(\d+)\](?!\()", sub, seg)
+            for si, seg in enumerate(segs))
+    return changed
+
+
 def census(article: str, self_dir: str = ""):
     entries31 = parse_entries31(article)
     lines, headings, defs, _, consts = collect(article)
@@ -251,9 +330,12 @@ def census(article: str, self_dir: str = ""):
     id_by_name = {}
     can_lines = 0
     n_lines = 0
+    n_linked = 0
+    tn_lines = 0
+    unresolved = []
+    unlinked_resolved = []
     resolutions = {}
     modules = {}
-    cfg = config_start(lines, headings)
     for i, ln in enumerate(lines):
         if ln.startswith("```"):
             fence = not fence
@@ -272,16 +354,30 @@ def census(article: str, self_dir: str = ""):
         if re.search(r"参见|参考|详见", ln):
             can_lines += 1
         in31 = sec31_span and sec31_span[0] <= i < sec31_span[1]
-        if not in31 and (cfg is None or i < cfg):
-            for m2 in re.finditer(r"(?<!\])\[(\d+)(?:,\s*[^\]]+)?\](?!\()", ln):
-                n_lines += 1
-                n = m2.group(1)
-                ent = entries31.get(n)
-                if ent:
-                    title, docid = ent
-                    cls, label, target = classify_doc(title, docid)
-                    resolutions.setdefault((n, title[:40], cls, label or "?"), 0)
-                    resolutions[(n, title[:40], cls, label or "?")] += 1
+        if not in31:
+            # linked markers are those --apply already converted (idempotency
+            # view); the whole article counts (no 配置规范 stop — a citation
+            # is a citation everywhere)
+            n_linked += len(re.findall(r"\[(\d+)\]\(#ref-\d+\)", ln))
+            if ln.lstrip().startswith("**译者注：**"):
+                tn_lines += 1
+            else:
+                # no (?<!]) lookbehind: adjacent citation pairs ([19][4], the
+                # RTE article) must BOTH convert; reference-style links
+                # [text][1] do not exist in the corpus (audited 2026-10-26)
+                for m2 in re.finditer(r"\[(\d+)(?:,\s*[^\]]+)?\](?!\()", ln):
+                    n_lines += 1
+                    n = m2.group(1)
+                    ctx = ln[max(0, m2.start() - 24):m2.end()].strip()
+                    ent = entries31.get(n)
+                    if ent:
+                        title, docid = ent
+                        cls, label, target = classify_doc(title, docid)
+                        resolutions.setdefault((n, title[:40], cls, label or "?"), 0)
+                        resolutions[(n, title[:40], cls, label or "?")] += 1
+                        unlinked_resolved.append((i + 1, n, ctx))
+                    else:
+                        unresolved.append((i + 1, n, ctx))
         if re.match(r"^\*\*[^*]+\*\*\s*$", ln):
             continue  # §2 acronym term line — a definition, not a mention
         for mod, (status, target) in MODULE_LINKS.items():
@@ -306,7 +402,19 @@ def census(article: str, self_dir: str = ""):
     print(f"== §7.2 constant-bullet mentions (report-only): {const_hits}"
           + ("; per name: " + ", ".join(f"{n} x{sum(1 for ln in lines if re.search(rf'(?<![A-Za-z0-9_]){re.escape(n)}(?![A-Za-z0-9_])', ln))}" for n in sorted(consts)) if consts else ""))
     print(f"== 参见/参考/详见 lines (report-only): {can_lines}")
-    print(f"== prose [n] citations excl. §3.1 registry (report-only): {n_lines}")
+    print("== prose [n] citations (registry/fences/译者注 excluded, whole article) ==")
+    print(f"  linked to #ref-n: {n_linked}; unlinked: {n_lines}"
+          f" ({len(unresolved)} unresolved); 译者注 lines skipped: {tn_lines}")
+    if unresolved:
+        print("  UNRESOLVED numbers — not in the §3.1 registry: source-typo")
+        print("  candidates, NEVER link; a 译者注 is a user decision:")
+        for ln_no, n, ctx in unresolved:
+            print(f"    L{ln_no} [{n}] …{ctx}")
+    if unlinked_resolved:
+        print("  UNLINKED resolved — --apply converts these; verify the context")
+        print("  names the entry's own document (mismatch => --ref-skip):")
+        for ln_no, n, ctx in unlinked_resolved:
+            print(f"    L{ln_no} [{n}] …{ctx}")
     if resolutions:
         print("  [n] resolutions (entry -> document -> class):")
         for (n, title, cls, label), cnt in sorted(resolutions.items(), key=lambda x: int(x[0][0])):
@@ -319,8 +427,9 @@ def census(article: str, self_dir: str = ""):
         print("    0 candidates")
 
 
-def apply_links(article: str):
+def apply_links(article: str, ref_skip=frozenset()):
     lines, headings, defs, section_range, _ = collect(article)
+    entries31 = parse_entries31(article)
     fm_end = front_matter_end(lines)
     stop = config_start(lines, headings)
     names = sorted(defs, key=len, reverse=True)
@@ -362,28 +471,45 @@ def apply_links(article: str):
         if ln != orig:
             lines[i] = ln
             changed += 1
+    anchors_added = add_registry_anchors(lines, entries31)
+    cites = convert_citation_links(lines, entries31, ref_skip)
     out_text = "\n".join(lines) + "\n"
-    # verify anchors
+    # verify anchors — heading slugs AND raw HTML ids (the #ref-n targets)
     anchors = set(h[4] for h in headings)
+    anchors |= set(re.findall(r'id="([^"]+)"', out_text))
     bad = [a for a in re.findall(r"\]\(#([^)]+)\)", out_text) if a not in anchors]
     if bad:
         print(f"UNRESOLVED ANCHORS: {sorted(set(bad))}")
         sys.exit(1)
-    print(f"lines changed: {changed}; all link anchors resolve"
+    print(f"lines changed: {changed}; citation links added: {cites}; "
+          f"registry anchors added: {anchors_added}; all link anchors resolve"
+          + (f"; ref-skip: {','.join(sorted(ref_skip))}" if ref_skip else "")
           + (f"; stopped before line {stop + 1} (配置规范)" if stop is not None else ""))
     return out_text
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
+    args = sys.argv[1:]
+    mode = path = None
+    ref_skip = set()
+    i = 0
+    while i < len(args):
+        if args[i] == "--ref-skip":
+            i += 1
+            ref_skip |= {s.strip() for s in args[i].split(",") if s.strip()}
+        elif args[i] in ("--list", "--apply"):
+            mode = args[i]
+        else:
+            path = args[i]
+        i += 1
+    if not mode or not path:
         print(__doc__)
         sys.exit(2)
-    mode, path = sys.argv[1], sys.argv[2]
     article = open(path).read()
     if mode == "--list":
         census(article, self_dir=os.path.dirname(os.path.abspath(path)))
     elif mode == "--apply":
-        out = apply_links(article)
+        out = apply_links(article, ref_skip=ref_skip)
         open(path, "w").write(out)
     else:
         print(__doc__)
