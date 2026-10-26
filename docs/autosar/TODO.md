@@ -7,10 +7,15 @@
 
 ## Backlog
 
+**OS follow-up PR (user decision 2026-10-26 — deferred from the full-sync PR)**
+
+- [ ] glossary.md: add the OS article's 46 §2.1 术语表 terms with 来源 attribution (one-term-once rule — check existing entries first); deferred because a parallel session was actively editing glossary.md during the run
+- [ ] prose `[n]` citation link decisions for operating_system (census 2026-10-26): [3] Glossary → site glossary ×2 (SITE class); [1] SRS_OS, [2] ISO 17356-3, [4] SWS_BSWGeneral, [5] EXP_VFB, [6] SRS_BSWGeneral, [7] ISO 17356-6 → EXTERNAL class, need curated official URLs (check 8) before linking
+
 **Fill depth (existing articles)**
 
-- [ ] 2026-10-25 tables-as-images retired (STANDARD.md §4 decision — source tables translate as GFM tables): 6 `![Table*.png]` refs remain — bswm 1 (Table7-1 BswMRuleInitState), dcm 1, data_distribution 1, time_service 2, operating_system 1; EcuM ✅ (all 7 translated/deleted 2026-10-25)
-- [ ] 6 ⚠️ articles missing only the 「API规范」 chapter: pdu_router, can_interface, crypto_driver, ethernet_interface, lin_interface, operating_system
+- [ ] 2026-10-25 tables-as-images retired (STANDARD.md §4 decision — source tables translate as GFM tables): 5 `![Table*.png]` refs remain — bswm 1 (Table7-1 BswMRuleInitState), dcm 1, data_distribution 1, time_service 2; EcuM ✅ (all 7 translated/deleted 2026-10-25), operating_system ✅ (Table7_1 deleted 2026-10-26, GFM table already present)
+- [ ] 5 ⚠️ articles missing only the 「API规范」 chapter: pdu_router, can_interface, crypto_driver, ethernet_interface, lin_interface (operating_system ✅ 2026-10-26)
 - [ ] The other 11 ⚠️ articles: complete their respective missing chapters (com_based_transformer, data_distribution, e2e_transformer, sec_oc, SoAd, mirror, dem, iohwab, fee, memory_access, dcm)
 - [ ] 4 ⛔ stubs: full translation (ethernet_switch_driver, service_discovery, memory_mapping, platform_types — platform_types also needs its front-matter title and nav label fixed in the same change)
 - [ ] 12 🔶 articles: align to Type A — flash_driver/time_service translate their legacy 「配置规范」 chapters in place (allowed since 2026-10-24; source ch.10 → article `## 8. 配置规范`); nvram drops the 「需求追踪」 chapter and fixes 「功能说明」; decide the fate of can_driver's topic chapters; unify remaining legacy wording to STANDARD.md terms
@@ -133,7 +138,7 @@
 
 - 🔶 [FiM](function_inhibition_manager/) — SWS_FunctionInhibitionManager ("功能规范" legacy wording)
 - 🔶 [时间服务](time_service/) — SWS_TimeService (carries a legacy 「配置规范」 chapter — allowed since 2026-10-24, align per the config-spec rules; ch.2 legacy wording)
-- ⚠️ [OS](operating_system/) — SWS_OS (missing 「API规范」; source ~12k lines)
+- ✅ [OS](operating_system/) — SWS_OS · R23-11 (2026-10-26 full sync: §2.1 术语表 46 terms added, ch.7 completed to source end (7.7.2–7.17 incl. multi-core/IOC/ARTI), new ## 7. API规范 (22 types + 39 functions + IOC/期望接口/钩子/服务接口), ## 8. 时序图 (8 figures), ## 9. 配置规范 (Os×35 + IOC×5 + ARTI×20 containers + 发布信息), ## 10–13 (生成/应用说明/服务/展望 — ch.11–14 顺延 per user decision), ## B. 约束和规格项的历史; §3.1 realigned to source's 11-entry list; spec: → AUTOSAR_CP_SWS_OS; Table7_1.png retired; 55 figures; glossary.md OS terms pending — parallel-session conflict)
 
 ❌ Missing (4): SWS_COMManager (ComM), SWS_DefaultErrorTracer (Det), SWS_HWTestManager, SWS_SoftwareClusterConnection (SwCluC)
 
