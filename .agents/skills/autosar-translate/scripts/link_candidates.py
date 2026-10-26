@@ -18,7 +18,8 @@ Applied class (restoration of the source PDF's own hyperlinks):
     callbacks, callouts, scheduled functions, port interfaces) -> that
     heading's anchor
   - prose citation markers [n] -> the §3.1 registry entry's own anchor
-    (`<a id="ref-n"></a>` + `[n](#ref-n)`, user decision 2026-10-26):
+    (`<a id="ref-n"></a>` + `[\\[n\\]](#ref-n)`, user decision 2026-10-27 —
+    brackets stay visible: the plain `[n](#ref-n)` form rendered as bare n):
     restores the source PDF's citation hyperlink. Only numbers the registry
     defines convert; the WHOLE article is scanned (a citation is a citation
     everywhere — no 配置规范 stop), but headings, code fences, inline code,
@@ -284,7 +285,8 @@ def add_registry_anchors(lines, entries31):
 
 
 def convert_citation_links(lines, entries31, ref_skip=frozenset()):
-    """[n] -> [n](#ref-n) for every number the registry defines. Whole
+    """[n] -> [\\[n\\]](#ref-n) (brackets kept visible) for every number the
+    registry defines. Whole
     article (unlike identifiers, a citation is a citation everywhere), but
     never in headings (a link would change the Material slug), code fences,
     inline code, the registry itself, or **译者注：** lines; --ref-skip
@@ -302,7 +304,8 @@ def convert_citation_links(lines, entries31, ref_skip=frozenset()):
         if n in ref_skip or n not in entries31:
             return m.group(0)
         changed += 1
-        return f"[{n}](#ref-{n})"
+        # escaped brackets in the link text keep the source's visible [n]
+        return f"[\\[{n}\\]](#ref-{n})"
 
     for i, ln in enumerate(lines):
         if ln.startswith("```"):
@@ -358,7 +361,11 @@ def census(article: str, self_dir: str = ""):
             # linked markers are those --apply already converted (idempotency
             # view); the whole article counts (no 配置规范 stop — a citation
             # is a citation everywhere)
-            n_linked += len(re.findall(r"\[(\d+)\]\(#ref-\d+\)", ln))
+            # tolerate both link forms: legacy bare [7](#ref-7) and the
+            # bracket-preserving [\[7\]](#ref-7) (2026-10-27 migration) — the
+            # trailing \]? is the markdown link's own outer closing bracket,
+            # present only in the new form
+            n_linked += len(re.findall(r"\\?\[(\d+)\\?\]\]?\(#ref-\d+\)", ln))
             if ln.lstrip().startswith("**译者注：**"):
                 tn_lines += 1
             else:

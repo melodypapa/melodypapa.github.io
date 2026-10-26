@@ -7,6 +7,8 @@ title: "安全（Safety）"
 ## 文章
 
 * [AUTOSAR Watchdog Manager（看门狗管理器）](watchdog_manager/index.md)
+* [AUTOSAR Watchdog Interface（看门狗接口）](watchdog_interface/index.md)
+* [AUTOSAR Watchdog Driver（看门狗驱动）](watchdog_driver/index.md)
 
 ## 相关内容
 
