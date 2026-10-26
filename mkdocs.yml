@@ -190,6 +190,9 @@ nav:
       - "FiM": autosar/system_services/function_inhibition_manager/index.md
       - "Os": autosar/system_services/operating_system/index.md
       - "Time Service": autosar/system_services/time_service/index.md
+    - 安全（Safety）:
+      - autosar/safety/index.md
+      - "WdgM": autosar/safety/watchdog_manager/index.md
     - RTE:
 
       - "RTE": autosar/rte/index.md

@@ -13,7 +13,7 @@ release: R23-11
 
 ## 1. 简介和功能概述
 
-ECU管理器模块（**ECU Manager**）是管理**ECU**状态共性方面（**common aspects**）的基础软件模块（可参见[1]）。具体来说，ECU管理器模块负责：
+ECU管理器模块（**ECU Manager**）是管理**ECU**状态共性方面（**common aspects**）的基础软件模块（可参见[1](#ref-1)）。具体来说，ECU管理器模块负责：
 
 * 初始化和去初始化**OS**、**SchM**和**BswM**以及一些基础软件驱动模块。
 * 在被请求时（**when requested**）将**ECU**配置为**SLEEP**和**SHUTDOWN**状态。
@@ -30,8 +30,8 @@ ECU管理器模块（**ECU Manager**）是管理**ECU**状态共性方面（**co
 
 灵活的**ECU**管理采用以下模块提供的通用模式管理工具：
 
-* **RTE**和**BSW**调度器模块[2]现在合并为一个模块：该模块支持可自由配置的**BSW**和应用程序模式及其模式切换工具。
-* **BSW**模式管理器模块[3]：该模块实施可配置的规则和操作列表，以评估切换**ECU**模式的条件并实施必要的操作。
+* **RTE**和**BSW**调度器模块[2](#ref-2)现在合并为一个模块：该模块支持可自由配置的**BSW**和应用程序模式及其模式切换工具。
+* **BSW**模式管理器模块[3](#ref-3)：该模块实施可配置的规则和操作列表，以评估切换**ECU**模式的条件并实施必要的操作。
 
 因此，通过灵活的**ECU**管理，大多数**ECU**状态已经不在**ECU**管理器模块中实现。通常来说，当通用模式管理工具在以下情况下不可用时，**ECU**管理器模块会接管控制：
 
@@ -43,7 +43,7 @@ ECU管理器模块（**ECU Manager**）是管理**ECU**状态共性方面（**co
 
 ### 1.1. 向后兼容以前的ECU管理器模块版本
 
-如果进行了相应的配置，灵活的**ECU**管理模块可以向后兼容以前的ECU管理器模块的版本。有关兼容性配置的更多信息，可参阅模式管理指南（**Guide to Mode Management**）[4]。
+如果进行了相应的配置，灵活的**ECU**管理模块可以向后兼容以前的ECU管理器模块的版本。有关兼容性配置的更多信息，可参阅模式管理指南（**Guide to Mode Management**）[4](#ref-4)。
 
 ## 2. 定义和缩略语
 
@@ -52,13 +52,13 @@ ECU管理器模块（**ECU Manager**）是管理**ECU**状态共性方面（**co
 ### 2.1. 定义
 
 **Callback**
-> 参见术语表[5]。
+> 参见术语表[5](#ref-5)。
 
 **Callout**
 > **Callout**是指系统设计人员可以使用代码替换的一种Stub函数，通常在配置时进行替换，用于为**ECU**管理器模块增加功能（**add functionality**）。**Callout**分为两类。一类提供**ECU**管理器模块的强制性功能，并充当硬件抽象层。另一类提供可选功能。
 
 **Integration Code**
-> 参见术语表[5]。
+> 参见术语表[5](#ref-5)。
 
 **Mode**
 > 模式（**Mode**）是指在车辆中运行过程中各种状态机的某组特定的状态。它不只和**ECU**管理器模块相关。同时并与特定实体、应用程序或整个车辆相关。
@@ -126,42 +126,42 @@ ECU管理器模块（**ECU Manager**）是管理**ECU**状态共性方面（**co
 
 ### 3.1. 输入文件和相关标准与规范
 
-[1] List of Basic Software Modules
+<a id="ref-1"></a>[1] List of Basic Software Modules
 > AUTOSAR_CP_TR_BSWModuleList
 
-[2] Specification of RTE Software
+<a id="ref-2"></a>[2] Specification of RTE Software
 > AUTOSAR_CP_SWS_RTE
 
-[3] Specification of Basic Software Mode Manager
+<a id="ref-3"></a>[3] Specification of Basic Software Mode Manager
 > AUTOSAR_CP_SWS_BSWModeManager
 
-[4] Guide to Mode Management
+<a id="ref-4"></a>[4] Guide to Mode Management
 > AUTOSAR_CP_EXP_ModeManagementGuide
 
-[5] Glossary
+<a id="ref-5"></a>[5] Glossary
 > AUTOSAR_FO_TR_Glossary
 
-[6] General Specification of Basic Software Modules
+<a id="ref-6"></a>[6] General Specification of Basic Software Modules
 > AUTOSAR_CP_SWS_BSWGeneral
 
-[7] Virtual Functional Bus
+<a id="ref-7"></a>[7] Virtual Functional Bus
 > AUTOSAR_CP_EXP_VFB
 
-[8] General Requirements on Basic Software Modules
+<a id="ref-8"></a>[8] General Requirements on Basic Software Modules
 > AUTOSAR_CP_SRS_BSWGeneral
 
-[9] Requirements on Mode Management
+<a id="ref-9"></a>[9] Requirements on Mode Management
 > AUTOSAR_CP_SRS_ModeManagement
 
-[10] Specification of MCU Driver
+<a id="ref-10"></a>[10] Specification of MCU Driver
 > AUTOSAR_CP_SWS_MCUDriver
 
-[11] Specification of CAN Transceiver Driver
+<a id="ref-11"></a>[11] Specification of CAN Transceiver Driver
 > AUTOSAR_CP_SWS_CANTransceiverDriver
 
 ### 3.2. 相关规范
 
-AUTOSAR提供了基础软件模块的通用规范（参见相关文档[6]），它也适用于**ECU**状态管理器。因此，规范[6]应被视为**ECU**状态管理器的附加和必需规范。
+AUTOSAR提供了基础软件模块的通用规范（参见相关文档[6](#ref-6)），它也适用于**ECU**状态管理器。因此，规范[6](#ref-6)应被视为**ECU**状态管理器的附加和必需规范。
 
 ## 4. 约束和假设
 
@@ -198,7 +198,7 @@ AUTOSAR提供了基础软件模块的通用规范（参见相关文档[6]），�
 
 基本上协议如下：
 
-驱动程序必须调用[**EcuM_SetWakeupEvent**](#7411-ecum_setwakeupevent)来通知**ECU**管理器模块，已检测到待定的唤醒事件。驱动程序不仅需要在**ECU**在睡眠阶段，等待唤醒事件时调用[**EcuM_SetWakeupEvent**](#7411-ecum_setwakeupevent)，同时在驱动程序初始化阶段以及**EcuM_MainFunction**运行的正常操作期间，也是同样需要调用[**EcuM_SetWakeupEvent**](#7411-ecum_setwakeupevent)。
+驱动程序必须调用[**EcuM_SetWakeupEvent**](#7411-ecum_setwakeupevent)来通知**ECU**管理器模块，已检测到待定的唤醒事件。驱动程序不仅需要在**ECU**在睡眠阶段，等待唤醒事件时调用[**EcuM_SetWakeupEvent**](#7411-ecum_setwakeupevent)，同时在驱动程序初始化阶段以及[**EcuM_MainFunction**](#761-ecum_mainfunction)运行的正常操作期间，也是同样需要调用[**EcuM_SetWakeupEvent**](#7411-ecum_setwakeupevent)。
 
 驱动程序必须提供一个显式函数来使唤醒源进入睡眠状态。此功能应将唤醒源置于节能（**energy saving**）、惰性的操作模式，并重新装载（**rearm**）唤醒通知机制。
 
@@ -218,14 +218,14 @@ AUTOSAR提供了基础软件模块的通用规范（参见相关文档[6]），�
 
 ### 5.4. BSW 调度程序
 
-**ECU**管理器模块负责初始化**BSW**调度程序。同时**ECU**管理器模块也包含**EcuM_MainFunction**，此接口函数会被定期调度，用于评估唤醒请求并且更新闹钟。
+**ECU**管理器模块负责初始化**BSW**调度程序。同时**ECU**管理器模块也包含[**EcuM_MainFunction**](#761-ecum_mainfunction)，此接口函数会被定期调度，用于评估唤醒请求并且更新闹钟。
 
 ### 5.5. BSW 模式管理器
 
 **ECU**状态通常（**generally**）通过**AUTOSAR**模式来实现，**BSW**模式管理器负责监控**ECU**中的变化，并酌情影响**ECU**状态机的相应变化。
 
-* 有关**AUTOSAR**模式管理的讨论，请参阅虚拟功能总线规范（**Specification of the Virtual Function Bus**）[7]，
-* 有关**ECU**状态机实现细节的指南，以及如何通过配置**BSW**模式管理器以实现**ECU**的状态机，请参阅模式管理指南（**Guide to Mode Management**）[4]，
+* 有关**AUTOSAR**模式管理的讨论，请参阅虚拟功能总线规范（**Specification of the Virtual Function Bus**）[7](#ref-7)，
+* 有关**ECU**状态机实现细节的指南，以及如何通过配置**BSW**模式管理器以实现**ECU**的状态机，请参阅模式管理指南（**Guide to Mode Management**）[4](#ref-4)，
 
 **BSW**模式管理器只能在模式管理运行后才能管理**ECU**的状态机。也就是说，在**SchM**被初始化之后，直到**SchM**被去初始化或者停止。**ECU**管理器模块会在 
 **BSW**模式管理器不工作后接管**ECU**的控制。
@@ -273,7 +273,7 @@ ECU 管理器模块需处理以下**ECU**范围的属性：
 
 当使用**ECU**模式处理时，标准状态**RUN**和**POST_RUN**由**RUN**请求协议（**RUN Request Protocol**）经仲裁后，传播到**BswM**模块。系统设计人员在通过**BswM actions**设置**EcuM**模式时，必须确保各个状态的先决条件已被满足。请注意**BSW**和**SW-C**都不能依赖某些**ECU**模式或者状态，尽管以前版本的**BSW**在很大程度上不依赖它们。
 
-本文档仅指定保留在**ECU**管理器模块中的功能。有关**ECU**状态管理的完整图景，可参阅其他相关模块的规范，如：**RTE**和**BSW**调度器模块[2]和**BSW**模式管理器模块[3]。有关**ECU**状态和相关**BSW**模块之间交互的一些示例用例，可参阅模式管理指南[4]。
+本文档仅指定保留在**ECU**管理器模块中的功能。有关**ECU**状态管理的完整图景，可参阅其他相关模块的规范，如：**RTE**和**BSW**调度器模块[2](#ref-2)和**BSW**模式管理器模块[3](#ref-3)。有关**ECU**状态和相关**BSW**模块之间交互的一些示例用例，可参阅模式管理指南[4](#ref-4)。
 
 ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup sources**）的状态。 设置/清除/验证唤醒事件的**API**接口保持不变，但显着区别是这些API采用回调的方式。
 
@@ -323,7 +323,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 因此就**ECU**管理器模块而言，**BSW**和**SW-C**会一直运行，直到它们准备好，让**ECU**关闭或进入睡眠状态。
 
-有关如何设计模式驱动的**ECU**管理以及相应地配置**BSW**模式管理器的指导，可参阅模式管理指南[4]。
+有关如何设计模式驱动的**ECU**管理以及相应地配置**BSW**模式管理器的指导，可参阅模式管理指南[4](#ref-4)。
 
 #### 6.1.3. SHUTDOWN阶段
 
@@ -393,7 +393,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 可选列（Opt.）：可选的活动可以通过配置开启或关闭。详细信息可参见第**9.1**章通用容器与配置参数。
 
-**ECU**管理器模块需记住复位原因转换产生的唤醒源，可参见**StartPreOS Sequence**表格。同时唤醒源必须由**EcuM_MainFunction**进行验证，可参见章节**6.6.4**的 **WakeupValidation**序列中的活动。
+**ECU**管理器模块需记住复位原因转换产生的唤醒源，可参见**StartPreOS Sequence**表格。同时唤醒源必须由[**EcuM_MainFunction**](#761-ecum_mainfunction)进行验证，可参见章节**6.6.4**的 **WakeupValidation**序列中的活动。
 
 当功能通过[**EcuM_Init**](#7322-ecum_init)被激活时，**ECU**管理器模块会执行**StartPreOS**序列中的操作，详情可参见**StartPreOS Sequence**表格）。
 
@@ -405,7 +405,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 驱动程序和硬件抽象模块的初始化不是由**ECU**管理器来严格定义的。但**ECU**管理器提供了两个Callout函数[**EcuM_AL_DriverInitZero**](#7522-ecum_al_driverinitzero)和[**EcuM_AL_DriverInitOne**](#7524-ecum_al_driverinitone)来定义初始化块 **0**和**1**。这些初始化块包含了与**StartPreOS**序列相关的初始化活动。
 
-**MCU_Init**并不提供完整的**MCU**的初始化。此外与硬件相关的步骤必须被执行，并且必须在系统设计时被定义。这些步骤应该在[**EcuM_AL_DriverInitZero**](#7522-ecum_al_driverinitzero)或者[**EcuM_AL_DriverInitOne**](#7524-ecum_al_driverinitone)两个Callout函数中进行。详细信息可在MCU驱动程序规范[10]中找到。
+**MCU_Init**并不提供完整的**MCU**的初始化。此外与硬件相关的步骤必须被执行，并且必须在系统设计时被定义。这些步骤应该在[**EcuM_AL_DriverInitZero**](#7522-ecum_al_driverinitzero)或者[**EcuM_AL_DriverInitOne**](#7524-ecum_al_driverinitone)两个Callout函数中进行。详细信息可在MCU驱动程序规范[10](#ref-10)中找到。
 
 **ECU**管理器模块需使用配置的默认关机目标（通过**EcuMDefaultShutdownTarget**配置）来调用[**EcuM_GetValidatedWakeupEvents**](#7354-ecum_getvalidatedwakeupevents)接口。具体内容可参阅章节**6.7**关机目标（**Shutdown Targets**）的内容。
 
@@ -647,11 +647,11 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 **ECU**管理器模块需调用用于重新初始化驱动程序的[**EcuM_AL_DriverRestart**](#7548-ecum_al_driverrestart)的Callout函数。其中具有唤醒源的驱动程序通常需要重新初始化。有关驱动程序初始化的更多详细信息，可参考章节[6.3.5驱动程序初始化](#635-驱动程序初始化)。
 
-在重新初始化（**re-initialization**）期间，驱动程序必须检查其一个分配的唤醒源是否是先前被唤醒的原因。如果该测试为真，驱动程序必须调用唤醒被检测到（**wakeup detected**）的回调函数。例如：参见**CAN** 收发器驱动程序规范[11]。而后者必须再调用[**EcuM_SetWakeupEvent**](#7411-ecum_setwakeupevent)函数。
+在重新初始化（**re-initialization**）期间，驱动程序必须检查其一个分配的唤醒源是否是先前被唤醒的原因。如果该测试为真，驱动程序必须调用唤醒被检测到（**wakeup detected**）的回调函数。例如：参见**CAN** 收发器驱动程序规范[11](#ref-11)。而后者必须再调用[**EcuM_SetWakeupEvent**](#7411-ecum_setwakeupevent)函数。
 
 驱动程序的实现应该只调用一次唤醒回调。此后它不应再次调用唤醒回调，直到它被显式函数调用重新使能（**re-armed**）。所以驱动程序必须被重新使能后，才能再次触发回调。
 
-如果在**WakeupRestart**序列完成时，**ECU**管理器模块具有候选唤醒源的列表，则**ECU**管理器模块应在**EcuM_MainFunction**中验证这些候选唤醒源。可参阅章节[6.6.4 WakeupValidation序列中的活动](#664-wakeupvalidation序列中的活动)
+如果在**WakeupRestart**序列完成时，**ECU**管理器模块具有候选唤醒源的列表，则**ECU**管理器模块应在[**EcuM_MainFunction**](#761-ecum_mainfunction)中验证这些候选唤醒源。可参阅章节[6.6.4 WakeupValidation序列中的活动](#664-wakeupvalidation序列中的活动)
 
 ![Figure7-14.png](Figure7-14.png)
 
@@ -665,7 +665,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 ### 6.6. UP阶段
 
-在**UP**阶段，**EcuM_MainFunction**会被定期执行。它主要具有三个功能：
+在**UP**阶段，[**EcuM_MainFunction**](#761-ecum_mainfunction)会被定期执行。它主要具有三个功能：
 
 * 检查唤醒源是否被唤醒，并在必要时启动唤醒验证。可参阅章节[6.6.4 WakeupValidation序列中的活动](#664-wakeupvalidation序列中的活动)
 * 更新闹钟定时器（**Alarm Clock timer**）
@@ -675,11 +675,11 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 请参阅章节[6.8.2 节 UP阶段的EcuM 时钟时间](#682-ecum时钟时间)，了解更多实现的细节。
 
-当闹钟服务存在时（可参见参数**EcuMAlarmClockPresent**），**EcuM_MainFunction**需更新闹钟定时器。
+当闹钟服务存在时（可参见参数**EcuMAlarmClockPresent**），[**EcuM_MainFunction**](#761-ecum_mainfunction)需更新闹钟定时器。
 
 #### 6.6.2. 唤醒源状态处理
 
-唤醒源不仅需在唤醒期间处理，而且与所有其他**EcuM**活动并行处理。相关功能在**EcuM_MainFunction**中运行，通过模式请求（**mode requests**）与**ECU**管理的其余部分完全分离。
+唤醒源不仅需在唤醒期间处理，而且与所有其他**EcuM**活动并行处理。相关功能在[**EcuM_MainFunction**](#761-ecum_mainfunction)中运行，通过模式请求（**mode requests**）与**ECU**管理的其余部分完全分离。
 
 唤醒源可以处于以下状态：
 
@@ -739,7 +739,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 **实现提示：**
 
-由于**SchM**将在**StartPostOS**和**WakeupRestart**序列的末尾运行，所以**EcuM_MainFunction**可能会在验证此唤醒源时，与其相关的软件栈（**Stack**）还未被初始化。集成商（**integrator**）应配置适当的模式以指示软件栈不可用，并且相应地禁用**EcuM_MainFunction**（详情可参见文档[2]）。
+由于**SchM**将在**StartPostOS**和**WakeupRestart**序列的末尾运行，所以[**EcuM_MainFunction**](#761-ecum_mainfunction)可能会在验证此唤醒源时，与其相关的软件栈（**Stack**）还未被初始化。集成商（**integrator**）应配置适当的模式以指示软件栈不可用，并且相应地禁用[**EcuM_MainFunction**](#761-ecum_mainfunction)（详情可参见文档[2](#ref-2)）。
 
 ![Figure7-16.png](Figure7-16.png)
 
@@ -751,7 +751,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 代码实现中如果只提供一个定时器其实也是足够的。当报告新的唤醒事件时，该定时器会被延长到最长的超时时间。
 
-当待定唤醒事件的验证超时后，**EcuM_MainFunction**需设置内部到期唤醒事件变量中事件集合的相关bit位。请参见章节[6.6.3 唤醒状态的内部表示](#663-唤醒状态的内部表示)。同时**EcuM_MainFunction**需调用**BswM_EcuM_CurrentWakeup**，并使用[**EcuM_WakeupSourceType**](#723-ecum_wakeupsourcetype)位掩码参数，将对应于唤醒事件集的位和状态值参数设置为**ECUM_WKSTATUS_EXPIRED**。
+当待定唤醒事件的验证超时后，[**EcuM_MainFunction**](#761-ecum_mainfunction)需设置内部到期唤醒事件变量中事件集合的相关bit位。请参见章节[6.6.3 唤醒状态的内部表示](#663-唤醒状态的内部表示)。同时[**EcuM_MainFunction**](#761-ecum_mainfunction)需调用**BswM_EcuM_CurrentWakeup**，并使用[**EcuM_WakeupSourceType**](#723-ecum_wakeupsourcetype)位掩码参数，将对应于唤醒事件集的位和状态值参数设置为**ECUM_WKSTATUS_EXPIRED**。
 
 **BswM**需配置为通过**EcuM**的模式切换请求（**mode switch requests**）来监视唤醒验证，EcuM负责验证唤醒源或等待计时器的超时。如果最后一次验证，没有通过验证的情况下超时，则**BswM**需认为唤醒验证失败。如果有任意一个待定唤醒源被验证通过，那么整个验证需视为已通过。
 
@@ -847,7 +847,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 可以确定关机目标的时间不一定是关闭的开始。由于**BswM**现在控制着大多数**ECU**资源，所以它将确定应该设置关机目标的时间点，并通过直接或间接地方式设置它。因此BswM必须确保在调用[**EcuM_GoDownHaltPoll**](#7321-ecum_godownhaltpoll)之前，将关机目标的默认值更改为**ECUM_STATE_SLEEP**。
 
-在以前版本的**ECU**管理器模块中，因为在**ECU**中实现的睡眠模式取决于**ECU**的能力，所以睡眠目标需被特殊处理。这些睡眠模式取决于硬件，通常在时钟设置或硬件提供的其他低功耗特性方面有所不同。这些不同的功能可以通过**MCU**驱动程序，作为所谓的**MCU**模式访问（可参见文档[10]）。
+在以前版本的**ECU**管理器模块中，因为在**ECU**中实现的睡眠模式取决于**ECU**的能力，所以睡眠目标需被特殊处理。这些睡眠模式取决于硬件，通常在时钟设置或硬件提供的其他低功耗特性方面有所不同。这些不同的功能可以通过**MCU**驱动程序，作为所谓的**MCU**模式访问（可参见文档[10](#ref-10)）。
 
 同时还有多种复位执行的方式，这些方式通过不同的模块控制或触发：
 
@@ -926,7 +926,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 ###### 6.8.2.1. **UP**阶段的**EcuM**时钟时间
 
-**EcuM_MainFunction**在**UP**阶段需累加**EcuM**时钟数。它使用标准的操作系统机制（闹钟/计数器）来推导它的时间。但必须注意计数器和**EcuM**时间的粒度不同，**EcuM**时间是以秒为单位。
+[**EcuM_MainFunction**](#761-ecum_mainfunction)在**UP**阶段需累加**EcuM**时钟数。它使用标准的操作系统机制（闹钟/计数器）来推导它的时间。但必须注意计数器和**EcuM**时间的粒度不同，**EcuM**时间是以秒为单位。
 
 ###### 6.8.2.2. **SLEEP**阶段的**EcuM**时钟时间
 
@@ -1015,7 +1015,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 #### 6.9.4. UP阶段
 
-从硬件的角度来看，唤醒中断可能发生在所有内核上。整个**ECU**会被唤醒，接着在此内核上运行的**EcuM**处理唤醒事件。所以**EcuM_MainFunction**需在所有**EcuM**实例中运行。**ECU**管理器模块的每个实例都应处理其负责内核的唤醒事件。
+从硬件的角度来看，唤醒中断可能发生在所有内核上。整个**ECU**会被唤醒，接着在此内核上运行的**EcuM**处理唤醒事件。所以[**EcuM_MainFunction**](#761-ecum_mainfunction)需在所有**EcuM**实例中运行。**ECU**管理器模块的每个实例都应处理其负责内核的唤醒事件。
 
 与单核情况一样，**BswM**模块负责控制**ECU**资源，确定本地内核可以断电或停止，以及在移交控制给内核的**EcuM**之前，对相关的应用程序和**BSW**进行去初始化操作。
 
@@ -1318,7 +1318,7 @@ InternalBehavior EcuStateManager {
 
 ### 6.13. 错误分类
 
-文档[6]"基础软件模块通用规范"中的"错误处理"章节详细描述了基础软件的错误处理。其中尤其定义了一个由五种错误类型组成的分类方案，这些错误类型可能出现在**BSW**模块中。
+文档[6](#ref-6)"基础软件模块通用规范"中的"错误处理"章节详细描述了基础软件的错误处理。其中尤其定义了一个由五种错误类型组成的分类方案，这些错误类型可能出现在**BSW**模块中。
 
 基于此，以下各小节规定了**EcuM**模块中相应的特定错误。
 
@@ -2495,7 +2495,7 @@ void EcuM_AL_DriverInitBswM_<x> ( void )
 
 ##### 7.8.3.1. 总体方法
 
-想要使用闹钟（**alarm clock**）的**SW-C**必须请求客户端-服务器接口**EcuM_AlarmClock**。**EcuM_AlarmClock**接口使用端口定义的参数值（**port-defined argument values**）来标识管理其闹钟的用户。关于端口定义的参数值的描述，请参见RTE规范[2]。
+想要使用闹钟（**alarm clock**）的**SW-C**必须请求客户端-服务器接口**EcuM_AlarmClock**。**EcuM_AlarmClock**接口使用端口定义的参数值（**port-defined argument values**）来标识管理其闹钟的用户。关于端口定义的参数值的描述，请参见RTE规范[2](#ref-2)。
 
 ##### 7.8.3.2. 服务接口
 
@@ -2620,7 +2620,7 @@ void EcuM_AL_DriverInitBswM_<x> ( void )
 
 ##### 7.8.5.1. 总体方法
 
-需要保持**ECU**存活（**keep alive**）或需要在**ECU**关闭之前执行任何操作的**SW-C**应要求（**require**）客户端-服务器接口（**client-server interface**）**EcuM_StateRequest**。该接口使用端口定义的参数值（**port-defined argument values**）来标识请求模式的用户。端口定义的参数值的说明参见RTE规范[2]。
+需要保持**ECU**存活（**keep alive**）或需要在**ECU**关闭之前执行任何操作的**SW-C**应要求（**require**）客户端-服务器接口（**client-server interface**）**EcuM_StateRequest**。该接口使用端口定义的参数值（**port-defined argument values**）来标识请求模式的用户。端口定义的参数值的说明参见RTE规范[2](#ref-2)。
 
 ##### 7.8.5.2. 数据类型
 
