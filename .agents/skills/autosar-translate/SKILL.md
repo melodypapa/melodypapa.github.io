@@ -293,7 +293,9 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
   marker itself links to the §3.1 entry, restoring the source PDF's own
   citation hyperlink — `--apply` prefixes every registry entry line with an
   invisible anchor (`<a id="ref-n"></a>`) and converts prose `[n]` to
-  `[n](#ref-n)`, but ONLY for numbers the registry defines. Three things
+  `[\[n\]](#ref-n)` (brackets kept visible in the rendered link — user
+  decision 2026-10-27; the earlier plain `[n](#ref-n)` form rendered as bare
+  n and was migrated), but ONLY for numbers the registry defines. Three things
   never convert: a number the registry does not define (UNRESOLVED — source
   typo, e.g. EcuM's `[23]`; leave as prose, a 译者注 is a user decision), a
   number whose surrounding prose names a DIFFERENT document than the entry
@@ -507,7 +509,8 @@ evidence, not asserted):
     the old rule only scanned §7.2–7.5);
     `参见下表` → the table below; prose `[n]` → the §3.1 entry
     (iohwab: 参见参考文档[9]) — the `[n]` class is applied since
-    2026-10-26 (`<a id="ref-n">` + `[n](#ref-n)`); source-typo numbers and
+    2026-10-26 (`<a id="ref-n">` + `[\[n\]](#ref-n)`, bracket-preserving
+    since 2026-10-27); source-typo numbers and
     document-name mismatches stay prose (see Step 5).
   - Cross-article: module names (Det/Dem/CanIf…) whose site article exists.
   - Un-linked plain-text source URLs (see Phase A check 8).
