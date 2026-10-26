@@ -190,6 +190,9 @@ nav:
       - "FiM": autosar/system_services/function_inhibition_manager/index.md
       - "Os": autosar/system_services/operating_system/index.md
       - "Time Service": autosar/system_services/time_service/index.md
+    - RTE:
+
+      - "RTE": autosar/rte/index.md
     - 模板:
 
       - "1. 一段话总结": autosar/template/generic_structure/index.md
