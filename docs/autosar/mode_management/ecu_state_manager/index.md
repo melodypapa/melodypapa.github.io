@@ -198,7 +198,7 @@ AUTOSAR提供了基础软件模块的通用规范（参见相关文档[6](#ref-6
 
 基本上协议如下：
 
-驱动程序必须调用[**EcuM_SetWakeupEvent**](#7411-ecum_setwakeupevent)来通知**ECU**管理器模块，已检测到待定的唤醒事件。驱动程序不仅需要在**ECU**在睡眠阶段，等待唤醒事件时调用[**EcuM_SetWakeupEvent**](#7411-ecum_setwakeupevent)，同时在驱动程序初始化阶段以及**EcuM_MainFunction**运行的正常操作期间，也是同样需要调用[**EcuM_SetWakeupEvent**](#7411-ecum_setwakeupevent)。
+驱动程序必须调用[**EcuM_SetWakeupEvent**](#7411-ecum_setwakeupevent)来通知**ECU**管理器模块，已检测到待定的唤醒事件。驱动程序不仅需要在**ECU**在睡眠阶段，等待唤醒事件时调用[**EcuM_SetWakeupEvent**](#7411-ecum_setwakeupevent)，同时在驱动程序初始化阶段以及[**EcuM_MainFunction**](#761-ecum_mainfunction)运行的正常操作期间，也是同样需要调用[**EcuM_SetWakeupEvent**](#7411-ecum_setwakeupevent)。
 
 驱动程序必须提供一个显式函数来使唤醒源进入睡眠状态。此功能应将唤醒源置于节能（**energy saving**）、惰性的操作模式，并重新装载（**rearm**）唤醒通知机制。
 
@@ -218,7 +218,7 @@ AUTOSAR提供了基础软件模块的通用规范（参见相关文档[6](#ref-6
 
 ### 5.4. BSW 调度程序
 
-**ECU**管理器模块负责初始化**BSW**调度程序。同时**ECU**管理器模块也包含**EcuM_MainFunction**，此接口函数会被定期调度，用于评估唤醒请求并且更新闹钟。
+**ECU**管理器模块负责初始化**BSW**调度程序。同时**ECU**管理器模块也包含[**EcuM_MainFunction**](#761-ecum_mainfunction)，此接口函数会被定期调度，用于评估唤醒请求并且更新闹钟。
 
 ### 5.5. BSW 模式管理器
 
@@ -393,7 +393,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 可选列（Opt.）：可选的活动可以通过配置开启或关闭。详细信息可参见第**9.1**章通用容器与配置参数。
 
-**ECU**管理器模块需记住复位原因转换产生的唤醒源，可参见**StartPreOS Sequence**表格。同时唤醒源必须由**EcuM_MainFunction**进行验证，可参见章节**6.6.4**的 **WakeupValidation**序列中的活动。
+**ECU**管理器模块需记住复位原因转换产生的唤醒源，可参见**StartPreOS Sequence**表格。同时唤醒源必须由[**EcuM_MainFunction**](#761-ecum_mainfunction)进行验证，可参见章节**6.6.4**的 **WakeupValidation**序列中的活动。
 
 当功能通过[**EcuM_Init**](#7322-ecum_init)被激活时，**ECU**管理器模块会执行**StartPreOS**序列中的操作，详情可参见**StartPreOS Sequence**表格）。
 
@@ -651,7 +651,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 驱动程序的实现应该只调用一次唤醒回调。此后它不应再次调用唤醒回调，直到它被显式函数调用重新使能（**re-armed**）。所以驱动程序必须被重新使能后，才能再次触发回调。
 
-如果在**WakeupRestart**序列完成时，**ECU**管理器模块具有候选唤醒源的列表，则**ECU**管理器模块应在**EcuM_MainFunction**中验证这些候选唤醒源。可参阅章节[6.6.4 WakeupValidation序列中的活动](#664-wakeupvalidation序列中的活动)
+如果在**WakeupRestart**序列完成时，**ECU**管理器模块具有候选唤醒源的列表，则**ECU**管理器模块应在[**EcuM_MainFunction**](#761-ecum_mainfunction)中验证这些候选唤醒源。可参阅章节[6.6.4 WakeupValidation序列中的活动](#664-wakeupvalidation序列中的活动)
 
 ![Figure7-14.png](Figure7-14.png)
 
@@ -665,7 +665,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 ### 6.6. UP阶段
 
-在**UP**阶段，**EcuM_MainFunction**会被定期执行。它主要具有三个功能：
+在**UP**阶段，[**EcuM_MainFunction**](#761-ecum_mainfunction)会被定期执行。它主要具有三个功能：
 
 * 检查唤醒源是否被唤醒，并在必要时启动唤醒验证。可参阅章节[6.6.4 WakeupValidation序列中的活动](#664-wakeupvalidation序列中的活动)
 * 更新闹钟定时器（**Alarm Clock timer**）
@@ -675,11 +675,11 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 请参阅章节[6.8.2 节 UP阶段的EcuM 时钟时间](#682-ecum时钟时间)，了解更多实现的细节。
 
-当闹钟服务存在时（可参见参数**EcuMAlarmClockPresent**），**EcuM_MainFunction**需更新闹钟定时器。
+当闹钟服务存在时（可参见参数**EcuMAlarmClockPresent**），[**EcuM_MainFunction**](#761-ecum_mainfunction)需更新闹钟定时器。
 
 #### 6.6.2. 唤醒源状态处理
 
-唤醒源不仅需在唤醒期间处理，而且与所有其他**EcuM**活动并行处理。相关功能在**EcuM_MainFunction**中运行，通过模式请求（**mode requests**）与**ECU**管理的其余部分完全分离。
+唤醒源不仅需在唤醒期间处理，而且与所有其他**EcuM**活动并行处理。相关功能在[**EcuM_MainFunction**](#761-ecum_mainfunction)中运行，通过模式请求（**mode requests**）与**ECU**管理的其余部分完全分离。
 
 唤醒源可以处于以下状态：
 
@@ -739,7 +739,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 **实现提示：**
 
-由于**SchM**将在**StartPostOS**和**WakeupRestart**序列的末尾运行，所以**EcuM_MainFunction**可能会在验证此唤醒源时，与其相关的软件栈（**Stack**）还未被初始化。集成商（**integrator**）应配置适当的模式以指示软件栈不可用，并且相应地禁用**EcuM_MainFunction**（详情可参见文档[2](#ref-2)）。
+由于**SchM**将在**StartPostOS**和**WakeupRestart**序列的末尾运行，所以[**EcuM_MainFunction**](#761-ecum_mainfunction)可能会在验证此唤醒源时，与其相关的软件栈（**Stack**）还未被初始化。集成商（**integrator**）应配置适当的模式以指示软件栈不可用，并且相应地禁用[**EcuM_MainFunction**](#761-ecum_mainfunction)（详情可参见文档[2](#ref-2)）。
 
 ![Figure7-16.png](Figure7-16.png)
 
@@ -751,7 +751,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 代码实现中如果只提供一个定时器其实也是足够的。当报告新的唤醒事件时，该定时器会被延长到最长的超时时间。
 
-当待定唤醒事件的验证超时后，**EcuM_MainFunction**需设置内部到期唤醒事件变量中事件集合的相关bit位。请参见章节[6.6.3 唤醒状态的内部表示](#663-唤醒状态的内部表示)。同时**EcuM_MainFunction**需调用**BswM_EcuM_CurrentWakeup**，并使用[**EcuM_WakeupSourceType**](#723-ecum_wakeupsourcetype)位掩码参数，将对应于唤醒事件集的位和状态值参数设置为**ECUM_WKSTATUS_EXPIRED**。
+当待定唤醒事件的验证超时后，[**EcuM_MainFunction**](#761-ecum_mainfunction)需设置内部到期唤醒事件变量中事件集合的相关bit位。请参见章节[6.6.3 唤醒状态的内部表示](#663-唤醒状态的内部表示)。同时[**EcuM_MainFunction**](#761-ecum_mainfunction)需调用**BswM_EcuM_CurrentWakeup**，并使用[**EcuM_WakeupSourceType**](#723-ecum_wakeupsourcetype)位掩码参数，将对应于唤醒事件集的位和状态值参数设置为**ECUM_WKSTATUS_EXPIRED**。
 
 **BswM**需配置为通过**EcuM**的模式切换请求（**mode switch requests**）来监视唤醒验证，EcuM负责验证唤醒源或等待计时器的超时。如果最后一次验证，没有通过验证的情况下超时，则**BswM**需认为唤醒验证失败。如果有任意一个待定唤醒源被验证通过，那么整个验证需视为已通过。
 
@@ -926,7 +926,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 ###### 6.8.2.1. **UP**阶段的**EcuM**时钟时间
 
-**EcuM_MainFunction**在**UP**阶段需累加**EcuM**时钟数。它使用标准的操作系统机制（闹钟/计数器）来推导它的时间。但必须注意计数器和**EcuM**时间的粒度不同，**EcuM**时间是以秒为单位。
+[**EcuM_MainFunction**](#761-ecum_mainfunction)在**UP**阶段需累加**EcuM**时钟数。它使用标准的操作系统机制（闹钟/计数器）来推导它的时间。但必须注意计数器和**EcuM**时间的粒度不同，**EcuM**时间是以秒为单位。
 
 ###### 6.8.2.2. **SLEEP**阶段的**EcuM**时钟时间
 
@@ -1015,7 +1015,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 #### 6.9.4. UP阶段
 
-从硬件的角度来看，唤醒中断可能发生在所有内核上。整个**ECU**会被唤醒，接着在此内核上运行的**EcuM**处理唤醒事件。所以**EcuM_MainFunction**需在所有**EcuM**实例中运行。**ECU**管理器模块的每个实例都应处理其负责内核的唤醒事件。
+从硬件的角度来看，唤醒中断可能发生在所有内核上。整个**ECU**会被唤醒，接着在此内核上运行的**EcuM**处理唤醒事件。所以[**EcuM_MainFunction**](#761-ecum_mainfunction)需在所有**EcuM**实例中运行。**ECU**管理器模块的每个实例都应处理其负责内核的唤醒事件。
 
 与单核情况一样，**BswM**模块负责控制**ECU**资源，确定本地内核可以断电或停止，以及在移交控制给内核的**EcuM**之前，对相关的应用程序和**BSW**进行去初始化操作。
 

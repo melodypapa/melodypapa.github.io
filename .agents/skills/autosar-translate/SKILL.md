@@ -268,10 +268,14 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
 - **Potential links are applied during translation, not merely detected** — the
   intra-article class is restoration of the source PDF's own hyperlinks:
   identifier mentions (types/functions link to their defining ch.7 heading —
-  any heading at ANY level under §7.2–7.5 whose title is the identifier
-  itself: dio/adc `#### 7.2.x. Adc_ConfigType` flat, EcuM
-  `###### 7.3.1.1 EcuM_GetVersionInfo` grouped; Chinese group titles like
-  通用 are never link targets), development-error codes (link to their
+  an identifier-titled heading at ANY level ANYWHERE in ch.7, the API
+  chapter: dio/adc `#### 7.2.x. Adc_ConfigType` flat, EcuM
+  `###### 7.3.1.1 EcuM_GetVersionInfo` grouped, EcuM's scheduled function
+  `#### 7.6.1. EcuM_MainFunction`, BswM's `###### 7.7.2.1
+  BswM_modeNotificationPort` port interfaces. The identifier-title guard —
+  NOT a section range — is the filter: Chinese group titles like 通用 and
+  suffixed titles like `EcuM_ShutdownTarget端口接口` are never link targets),
+  development-error codes (link to their
   错误-titled §6 section's anchor — DIO/PWM 6.6.x 开发错误, EcuM 6.12/6.13,
   ADC 6.5), and prose citation markers `[n]` (link to the §3.1 entry's own
   anchor — next bullet, user decision 2026-10-26); §7.2 constant bullets
@@ -441,9 +445,11 @@ before every commit, the second is evidence for the Step 8 confirmation.
 
 9. Potential-links census (mechanical): run
    `scripts/link_candidates.py --list <article>` and RECORD the counts in the
-   gate evidence: identifier mentions by chapter (applied class: types §7.2.x,
-   functions §7.3.x, dev-error codes §6.6.x — scanned through 时序图 prose,
-   counted but never applied inside 配置规范 tables), §7.2 constant-bullet
+   gate evidence: identifier mentions by chapter (applied class:
+   identifier-titled ch.7 headings — types, functions, callbacks, callouts,
+   scheduled functions, port interfaces; scanned through 时序图 prose,
+   counted but never applied inside 配置规范 tables), dev-error codes §6.6.x
+   (applied class, 错误-titled §6 sections), §7.2 constant-bullet
    mentions (report-only), 参见/详见 refs, prose `[n]` citations (whole
    article; registry lines, 译者注 lines and code excluded) split into
    already-linked / UNLINKED-resolved with inline context (verify each
@@ -495,8 +501,10 @@ evidence, not asserted):
   - Intra-article: constant/type mentions → their ch.7.2 definition
     (Icu_SetMode's 说明 cites **ICU_MODE_SIGNAL_EDGE_DETECT** → §7.2.10;
     a signature's `Icu_ModeType` → §7.2.1); function mentions → their
-    `#### 7.3.x` heading (§7.2.9's type description cites
-    **Icu_GetEdgeNumbers()**);
+    defining ch.7 heading at any level (§7.2.9's type description cites
+    **Icu_GetEdgeNumbers()**; EcuM's scheduled function
+    **EcuM_MainFunction** → `#### 7.6.1`, missed until 2026-10-26 because
+    the old rule only scanned §7.2–7.5);
     `参见下表` → the table below; prose `[n]` → the §3.1 entry
     (iohwab: 参见参考文档[9]) — the `[n]` class is applied since
     2026-10-26 (`<a id="ref-n">` + `[n](#ref-n)`); source-typo numbers and
