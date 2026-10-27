@@ -384,6 +384,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 输入/输出硬件抽象（**Input/Output Hardware Abstraction**）
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
 
+**int**
+> 整数（**Integer**）
+> 来源：[AUTOSAR Platform Types（平台类型）](general/platform_types/index.md)（SWS_PlatformTypes · R23-11）
+
 **IRQ**
 > 中断请求（**Interrupt Request**）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
@@ -562,9 +566,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 监督周期（**Supervision Cycle**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 
+**Rollover mechanism**
+> 下面的示例序列被称为"回绕"（**rollover**）：一个无符号字符（**unsigned char**）的值为 255；将其加 1；结果为 0。
+> 来源：[AUTOSAR Platform Types（平台类型）](general/platform_types/index.md)（SWS_PlatformTypes · R23-11）
+
 **SDU**
 > 服务数据单元（**Service Data Unit**）——**PDU** 的载荷。
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes · R23-11）
+> 来源：[AUTOSAR Platform Types（平台类型）](general/platform_types/index.md)（SWS_PlatformTypes · R23-11）
 
 **SE**
 > 被监督实体（**Supervised Entity**）

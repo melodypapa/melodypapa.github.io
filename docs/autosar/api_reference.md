@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **44** 份已有站内文章）。
+共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **45** 份已有站内文章）。
 
 ## A
 
@@ -320,7 +320,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
 **boolean**
-> 类型 · 未翻译 · SWS_PlatformTypes · R23-11
+> 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 **BswM_BswMPartitionRestarted**
 > 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
@@ -1312,7 +1312,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_Firewall · R23-11
 
 **ConstVoidPtr**
-> 类型 · 未翻译 · SWS_PlatformTypes · R23-11
+> 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 **ControlIdle**
 > 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
@@ -3670,10 +3670,10 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11
 
 **float32**
-> 类型 · 未翻译 · SWS_PlatformTypes · R23-11
+> 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 **float64**
-> 类型 · 未翻译 · SWS_PlatformTypes · R23-11
+> 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 **Fls_AddressType**
 > 类型 · [AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
@@ -5851,25 +5851,25 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **sint16**
-> 类型 · 未翻译 · SWS_PlatformTypes · R23-11
+> 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 **sint16_least**
-> 类型 · 未翻译 · SWS_PlatformTypes · R23-11
+> 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 **sint32**
-> 类型 · 未翻译 · SWS_PlatformTypes · R23-11
+> 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 **sint32_least**
-> 类型 · 未翻译 · SWS_PlatformTypes · R23-11
+> 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 **sint64**
-> 类型 · 未翻译 · SWS_PlatformTypes · R23-11
+> 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 **sint8**
-> 类型 · 未翻译 · SWS_PlatformTypes · R23-11
+> 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 **sint8_least**
-> 类型 · 未翻译 · SWS_PlatformTypes · R23-11
+> 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 **SoAd_CloseSoCon**
 > 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
@@ -6554,25 +6554,25 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md) · SWS_UDPNetworkManagement · R23-11
 
 **uint16**
-> 类型 · 未翻译 · SWS_PlatformTypes · R23-11
+> 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 **uint16_least**
-> 类型 · 未翻译 · SWS_PlatformTypes · R23-11
+> 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 **uint32**
-> 类型 · 未翻译 · SWS_PlatformTypes · R23-11
+> 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 **uint32_least**
-> 类型 · 未翻译 · SWS_PlatformTypes · R23-11
+> 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 **uint64**
-> 类型 · 未翻译 · SWS_PlatformTypes · R23-11
+> 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 **uint8**
-> 类型 · 未翻译 · SWS_PlatformTypes · R23-11
+> 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 **uint8_least**
-> 类型 · 未翻译 · SWS_PlatformTypes · R23-11
+> 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 ## V
 
@@ -6748,7 +6748,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_V2XManagement · R23-11
 
 **VoidPtr**
-> 类型 · 未翻译 · SWS_PlatformTypes · R23-11
+> 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 ## W
 
