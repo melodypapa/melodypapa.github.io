@@ -52,11 +52,11 @@
 
 | Status | Count | Note |
 | --- | ---: | --- |
-| ✅ Type A-compliant | 16 | ready to use |
+| ✅ Type A-compliant | 17 | ready to use |
 | 🔶 Translated pending alignment | 10 | seven chapters present; legacy wording / forbidden-chapter residue |
 | ⚠️ Partial | 16 | missing ≥1 chapter (most miss the 「API规范」 chapter) |
 | ⛔ Stub | 4 | 9–19 lines only |
-| ❌ Missing (SWS) | 81 | R23-11 has 127 SWS docs in total; 46 covered (36.2%) |
+| ❌ Missing (SWS) | 80 | R23-11 has 127 SWS docs in total; 47 covered (37.0%) |
 | ❌ Missing (EXP) | 20 | R23-11 has 22 EXP docs in total; 2 covered |
 | 📖 Guide/topic | 8 | exempt from the Type A skeleton |
 
@@ -147,6 +147,7 @@
 
 ## system_services
 
+- ✅ [Default Error Tracer（默认错误跟踪器）](default_error_tracer/) — SWS_DefaultErrorTracer (new article 2026-10-28, full Type A: 1 entry ch.2, §5.1 文件结构, §6 初始化/错误钩子/错误报告/错误分类, §7 API (1 type/6 functions/3 configurable callouts) + 服务接口 (DETService CSI + Det_<Name> 端口), §8 时序图 7 figures, §9 6 containers + 双 10.3/10.4 发布信息 (source quirk, both translated), appendix B 需求历史 with R22-11/R23-11 ID fences; identifier/citation links applied)
 - 🔶 [FiM](function_inhibition_manager/) — SWS_FunctionInhibitionManager ("功能规范" legacy wording)
 - 🔶 [时间服务](time_service/) — SWS_TimeService (carries a legacy 「配置规范」 chapter — allowed since 2026-10-24, align per the config-spec rules; ch.2 legacy wording)
 - ✅ [OS](operating_system/) — SWS_OS · R23-11 (2026-10-26 full sync: §2.1 术语表 46 terms added, ch.7 completed to source end (7.7.2–7.17 incl. multi-core/IOC/ARTI), new ## 7. API规范 (22 types + 39 functions + IOC/期望接口/钩子/服务接口), ## 8. 时序图 (8 figures), ## 9. 配置规范 (Os×35 + IOC×5 + ARTI×20 containers + 发布信息), ## 10–13 (生成/应用说明/服务/展望 — ch.11–14 顺延 per user decision), ## B. 约束和规格项的历史; §3.1 realigned to source's 11-entry list; spec: → AUTOSAR_CP_SWS_OS; Table7_1.png retired; 55 figures; glossary.md OS terms pending — parallel-session conflict)

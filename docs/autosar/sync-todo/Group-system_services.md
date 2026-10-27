@@ -6,13 +6,15 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 
 ## Queue
 
-- [ ] det (SWS_DefaultErrorTracer · R23-11 markdown · ❌ new article, small — do first)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] det (SWS_DefaultErrorTracer · R23-11 markdown · ❌ new article, small — do first)
+  - Note: translated MANUALLY 2026-10-28 (provider concurrency cap blocked all subagent dispatches; small doc). Source 1196 lines; article `system_services/default_error_tracer/` 655 lines. Shape: ch.2 1 entry · 3.1 [1]–[4] full-form heading · 5.1 文件结构 (SWS_Det_00037) · ch.6 traceability DROPPED · ch.7 → §6 (6.1 初始化, 6.2 错误钩子 (00207 tail completed from the R22-11 PDF: "…notify each received error report by calling the configured error hook(s)"), 6.3 错误报告, 6.4 版本信息, 6.5 错误分类 + 6.5.1–6.5.5) · ch.8 → §7 (8.1 API nested as 7.1 API → 7.1.1 导入的类型/7.1.2 类型定义/7.1.3 函数定义 6 entries/7.1.4 期望接口/7.1.5 调出函数/可配置接口 3 callout entries; 8.2 服务接口 → 7.2 with DETService CSI + Det_<Name> port in the EcuM house table shape, Mapped-to-API cells linked) · ch.9 → §8 (Figure9_1–9_7; captions not repeated) · ch.10 → §9 (6 containers; source has BOTH 10.3 and 10.4 "Published Information" — PDF-TOC-confirmed source quirk, translated faithfully as 9.2/9.3) · appendix B "History of Requirements" → `## B. 需求历史` (direct title; R22-11/R23-11 added/changed/deleted ID lists in fences, none → 无); appendix A DROPPED. Figures: 8 content images (49486b49 Figure9_1, 03013129/579d7211/3516f3af/6658d788/082dc0a2/23c83d3f Figure9_2–9_7, 37405aba Figure10_1); all other hashes deco
+  - Note: Phase A — strict build exit 0 / 0 WARNING / no default_error_tracer notices; numbered headings continuous §1–§9 (+ unnumbered ## B.); hygiene 0 h1/{DRAFT}/`\<`/glyph/chrome; SWS ids only inside the appendix-B fences; ECUC ids only in SWS 条目 cells; ch.2 1 term line = 1 source row; 8 figure refs resolve; 说明 blocks 9 = 6 API functions + 3 configurable callouts; gen_api_list regenerated (Det 1 type + 6 functions SITE-linked, --check 0); census: identifier mentions 76 lines (§6 20 / §7 29 / §9 23), chapter refs 3 linked, citations 3/3 converted + 4 anchors ([1] glossary SITE-class two-hop, user decision pending), 0 UNRESOLVED, idempotent re-run 0 lines. Census quirk recorded: cross-article module mentions report "Det → NO-ARTICLE ×43" because the exclusion matches the directory slug, not the module short name — same class as the Mcu×107 self-hit gap (Backlog)
+  - [x] Step 1 — Source resolution + gap analysis (R23-11 source 1196 ln; no release fallback)
+  - [x] Step 2 — In-place translation/completion (new article, manual)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (src ch.1–5→§1–§5, ch.7→§6, ch.8→§7, ch.9→§8, ch.10→§9, B→B section by section; ch.6+A dropped; 00207 PDF completion; source quirks kept: GetVersionInfo null-pointer wording "is returned", 10.3/10.4 duplication)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-crypto-sync · commit recorded in the follow-up row edit)
 - [ ] function_inhibition_manager (SWS_FunctionInhibitionManager · R23-11 markdown · 🔶 alignment)
   - Note: legacy heading "功能规范" → "功能规格"
   - [ ] Step 1 — Source resolution + gap analysis
