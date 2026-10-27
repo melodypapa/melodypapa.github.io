@@ -32,12 +32,17 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity (evidence above)
   - [x] Step 5 — User confirmation gate (N/A per user instruction 2026-10-27 — commit first, batched confirmation list at the end of the run; the §3 registry realignment is the one decision flagged for that list)
   - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-crypto-sync · commit 8b73b6f, 2026-10-27; PR opened for the whole batch after the user's batched confirmation) (SWS_CryptoInterface · R23-11 markdown · ❌ new article, short name CryIf)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] cryif (SWS_CryptoInterface · R23-11 markdown · ❌ new article, short name CryIf)
+  - Note: Step 1 (2026-10-27) — source `Crypto/AUTOSAR_CP_SWS_CryptoInterface.md` (R23-11) 1315 lines; directory `crypto/crypto_interface/` (full-name convention like crypto_driver/crypto_service_manager; nav label "CryIf"). Shape: ch.2 9 acronyms + 2.1 Glossary 12 terms (page-split table rejoined; Operation and Processing are one entry each with bullets) · 3.1 "Input documents" (literal heading → 输入文件, [1]–[7]) / 3.2 Related standards and norms ([8]) / 3.3 Related specification · 4.1/4.2 · ch.5 + 5.1/5.1.1 · ch.6 traceability DROPPED · ch.7 → §6 (7.1 Multicore, 7.2 error classification, 7.3 error detection) · ch.8 → §7 (8.1, 8.2 2 types, 8.3 18 functions in 5 groups incl. 8.3.2.2 Dispatch Key IDs prose, 8.4 1 callback, 8.5 expected interfaces; NO scheduled-functions chapter) · ch.9 "N/A." → §8 不适用 · ch.10 → §9 (10.1.1 Variants + 4 containers, 10.2 published) · no appendix. Conversion hazards: many 8.3.x heading lines lost/merged and ids embedded in headings; CryIf_KeyElementCopy/CopyPartial service tables flattened to prose lines (rebuilt from the R22-11 PDF)
+  - Note: figures — 5 content images (ab4e173f Figure 7.1 layered view; 4 uncaptioned ch.10 container UMLs ae38bbb0/b40d629f/5dc8bf03/755797db → Figure10_1–10_4 by order; Figure10_1 is the CryIf module UML, placed at the end of 9.1.2 per the PDF page)
+  - Note: Step 3 evidence — strict build exit 0 / 0 WARNING / no crypto_interface notices; headings §1–§9 continuous (script-checked); hygiene 0 h1/{DRAFT}/`\<`/glyph/chrome/requirement ids, [ECUC_CryIf_*] only in SWS 条目 cells; ch.2 slice 0 table rows, 21 term lines = 9 + 12 source rows; 5 figure refs resolve; nav + crypto landing page updated; gen_api_list regenerated (CryIf 2 types + 18 functions now SITE-linked, --check 0); check_api_sync artifact class (grouped 8.3.x) — manual 19↔19 identifiers (18 functions + callback) identical names/order, 19 说明 blocks; census: identifier mentions 102 lines (§6 8 / §7 78 / §9 16), chapter refs 5 (1 linked; UNRESOLVED "SHE 1.1" = version number), citations 6/6 prose converted + 7 registry anchors ([8] flagged UNRESOLVED is the §3.2 registry line itself, not a citation), constant bullets 27 report-only, Det ×58 NO-ARTICLE; two-hop [4] CryptoDriver / [5] Csm EXTERNAL:? although both articles exist — same DOC_TARGETS gap as the crypto_driver row; idempotent re-run 0 lines
+  - Note: Step 4 — coverage map src ch.1–5 → §1–§5, ch.7 → §6, ch.8 → §7, ch.9 → §8, ch.10 → §9 section by section; agent reconstructions from the R22-11 PDF reported (2 flattened service tables, lost `(` in 2 syntax lines, CryIf_ConfigType comment, 00141/00143 "to DET in development mode" wording, CryIfVersionInfoApi "False:" branch); R23-11-authoritative differences kept (ProcessJob no longer lists CRYPTO_E_QUEUE_FULL); source typos kept verbatim (`Crypto_<vi>_<ai__KeyElementdsIdGet()` in 00120 — PDF-confirmed; `algorithmmode`); ch.2 intro sentence omitted to match the Crypto Driver article's ch.2 style. Glossary: 19 来源 appends + 2 new terms (Primitive, Processing)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion (new article 781 lines)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (evidence above)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction 2026-10-27 — commit first, batched confirmation at the end of the run)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-crypto-sync · commit c2cba4b, 2026-10-27)
 - [ ] keym (SWS_KeyManager · R23-11 markdown · ❌ new article, short name KeyM)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

@@ -52,6 +52,8 @@
 | SWS_DiagnosticCommunicationManager (Dcm) | `diagnostics/diagnostic_communication_manager` |
 | SWS_DiagnosticEventManager (Dem) | `diagnostics/diagnostic_event_manager` |
 | SWS_CryptoDriver | `crypto/crypto_driver` |
+| SWS_CryptoInterface (CryIf) | `crypto/crypto_interface` |
+| SWS_KeyManager (KeyM) | `crypto/key_manager` |
 | SWS_CryptoServiceManager (Csm) | `crypto/crypto_service_manager` |
 | SWS_FlashDriver (Fls) | `memory/flash_driver` |
 | SWS_FlashEEPROMEmulation (Fee) | `memory/flash_eeprom_emulation` |
