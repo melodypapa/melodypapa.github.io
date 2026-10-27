@@ -151,13 +151,20 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
   - [x] Step 6 — TODO.md row + commit/PR
-- [ ] exp body_and_comfort (AUTOSAR_EXP_BodyAndComfort · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] exp body_and_comfort (AUTOSAR_CP_EXP_AIBodyAndComfort · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
+  - Note: numbered prose EXP document, ch.1–6 mirrored; ch.4 = 16 functional decompositions (wiper, mirror, interior light, seat, central locking, exterior light, ATWS, horn, defrost, terminal clamp, immobilizer, seat climatization, PASE, RKE, convertible, body sensors); PASE/BodySensors port tables translated as GFM
+  - Note: figure-inlining UML port-name chrome dropped (extensive in this conversion); 42 content figures placed, unused copies removed
+  - Note: citation registry N/A (references ch.6.1 lists [1] RTE only, no [n] prose citations to a registry); cross-article mentions report-only
+  - Note: branch self-contained: also carries the AI landing page + nav group (adas_vmc PR carries its own entries; trivial line-level merge expected)
+  - Note: glossary +3 (ATWS, RKE, PASE)
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] exp chassis (AUTOSAR_EXP_Chassis · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

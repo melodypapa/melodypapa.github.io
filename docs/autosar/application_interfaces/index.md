@@ -7,6 +7,7 @@ AUTOSAR 为各汽车域（底盘、动力总成、车身与舒适、乘员与行
 ## 文章
 
 - [ADAS 与车辆运动控制接口](adas_vmc/index.md)
+- [车身与舒适域应用接口](body_and_comfort/index.md)
 
 ## 相关内容
 
