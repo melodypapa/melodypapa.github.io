@@ -17,7 +17,7 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 3 — Phase A mechanical checks (evidence above)
   - [x] Step 4 — Phase B coverage map + fidelity (src ch.1–5→§1–§5, ch.7→§6, ch.8→§7, ch.9→§8, ch.10→§9, ch.12→§10; ch.6 + ch.11 dropped; the 3-level scalability structure and IB/EB split verified section by section)
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
-  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-crypto-sync · commit recorded in the follow-up row edit)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-crypto-sync · PR #141 (Closes issue #140))
 - [ ] ldcom (SWS_LargeDataCOM · R23-11 markdown · ❌ new article, short name LdCom)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
