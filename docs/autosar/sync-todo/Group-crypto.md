@@ -15,7 +15,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity (alignment-only: existing content untouched except the 3 heading lines; no coverage re-derivation; legacy-API-chapter observation recorded above)
   - [x] Step 5 — User confirmation gate (N/A per user instruction 2026-10-27 "no confirmed one by one" — per-row gate waived; evidence in Notes and the PR)
   - [x] Step 6 — TODO.md row + commit/PR (branch feature/crypto-service-manager-sync · PR #133, merged 2026-10-27 as 82efc13; row flipped by the Group-crypto batch run 2026-10-27)
-- [ ] crypto_driver (SWS_CryptoDriver · R23-11 markdown · ⚠️ missing API chapter)
+- [x] crypto_driver (SWS_CryptoDriver · R23-11 markdown · ⚠️ missing API chapter)
   - Note: missing "API 规范" chapter (one of the "6 articles missing only the API chapter" in TODO.md); 4.2 "适用于汽车领域" → "汽车域的适用性"
   - Note: Step 1 measured 2026-10-27 — the ⚠️ tag understated the gap: source `Crypto/AUTOSAR_CP_SWS_CryptoDriver.md` (R23-11) 3398 lines; the 180-line article stopped inside source 7.1.1 (one untranslated English requirement as its last paragraph). Missing: 7.1.1-tail/7.1.2/7.1.3, all of 7.2 (7.2.1–7.2.7 incl. key formats + crypto profiles), 7.3–7.5, ch.8 entirely (2 types, 20 functions in 5 groups, 4 NvBlock callbacks, 1 scheduled function, expected interfaces), ch.9 ("n/a" → `## 8. 时序图` 不适用), ch.10 (16 containers → `## 9. 配置规范`), 5.1/5.1.1 file structure. No appendix B, no Known-Limitations chapter in source; ch.6 Requirements Tracing dropped (forbidden)
   - Note: release drift in the EXISTING head — §3.1 carried an older release's 11-entry registry ([1] Layered SW Architecture … [8] Glossary …) while R23-11 has 6 entries ([1] SWS_CryptoInterface … [6] TR_SecureHardwareExtensions) and ch.7/8 prose cites those numbers; kept numbering would mis-link every new [n] → §3 realigned to the R23-11 source (3.1 = 6 entries, 3.2 = BSW General sentence + the 7 external standards as a list; old 3.2/3.3 split removed), §1 and §5 citations renumbered [4]→[1], [5]→[2]. Decision recorded for the batch confirmation
@@ -31,7 +31,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks (evidence above)
   - [x] Step 4 — Phase B coverage map + fidelity (evidence above)
   - [x] Step 5 — User confirmation gate (N/A per user instruction 2026-10-27 — commit first, batched confirmation list at the end of the run; the §3 registry realignment is the one decision flagged for that list)
-  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-crypto-sync · commit recorded below) (SWS_CryptoInterface · R23-11 markdown · ❌ new article, short name CryIf)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-crypto-sync · commit 8b73b6f, 2026-10-27; PR opened for the whole batch after the user's batched confirmation) (SWS_CryptoInterface · R23-11 markdown · ❌ new article, short name CryIf)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
