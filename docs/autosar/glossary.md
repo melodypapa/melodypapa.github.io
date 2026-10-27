@@ -287,6 +287,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **External Transition**
 > **外部转换**是两个**检查点**之间的**转换**，其中这两个**检查点**属于不同的**被监督实体**。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+**FDIR**
+> 故障检测、隔离与恢复（**Fault Detection, Isolation and Recovery**）。系统运行期间处理故障的过程：检测→隔离→恢复。
+> 来源：[应用层错误处理](general/application_level_error_handling/index.md)（AUTOSAR_CP_EXP_ApplicationLevelErrorHandling · R23-11）
+
 ## F
 
 
@@ -309,6 +313,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **FOTA**
 > 固件远程升级（**Firmware Over The Air**），通过无线通信进行固件远程更新。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
+
+**Fault**
+> 故障。系统的瞬态或永久性变化，使其完整性偏离预期的正确完整性；被激活并传播后成为错误（error）。
+> 来源：[应用层错误处理](general/application_level_error_handling/index.md)（AUTOSAR_CP_EXP_ApplicationLevelErrorHandling · R23-11）
+
+**Error**
+> 错误。系统中的错误（软）状态，即该状态不同于若故障不存在时系统应有的状态；传播越过系统屏障即转变为失效（failure）。
+> 来源：[应用层错误处理](general/application_level_error_handling/index.md)（AUTOSAR_CP_EXP_ApplicationLevelErrorHandling · R23-11）
+
+**Failure**
+> 失效。错误传播越过系统屏障、对系统环境可见后的结果：系统不再提供其规定的功能。
+> 来源：[应用层错误处理](general/application_level_error_handling/index.md)（AUTOSAR_CP_EXP_ApplicationLevelErrorHandling · R23-11）
 
 ## G
 
