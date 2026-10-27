@@ -105,8 +105,9 @@
 - 📖 [AUTOSAR 术语表（TR Glossary）](foundation/general/tr_glossary/) — AUTOSAR_FO_TR_Glossary（Foundation · R23-11）（2026-10-24 翻译中：ch.2 缩略语 206 条 ✅；ch.4 术语定义 343 条分批进行；内容并入术语表页）
 
 - ✅ [Standard Types](../general/standard_types/) — SWS_StandardTypes (2026-10-27 full Type A translation from R23-11 replacing the 9-line stub: title fixed from the wrong "ECU State Manager" + mkdocs.yml nav label "EcuM" → "Standard Types"; §7 API = 7 type definitions + 5 symbol definitions + 函数定义 不适用, prose folds + literal bullets per the mcu/gpt style, Table 8.1 error codes as GFM; §8/§9 = 不适用 per source ch.9/10; appendix B 需求历史 with verbatim item-ID fences; Figure8-1 bit-layout extracted; source ch.5 "Software Architecture" → §5 软件架构 direct translation, empty 5.1 kept)
+- ✅ [ComStack Types 通信栈类型](general/communication_stack_types/index.md) — SWS_CommunicationStackTypes (2026-10-27 full Type A translation from R23-11: new article + nav `"ComStack Types"`; ch.6 Requirements Tracing + appendix A dropped per mandate; ch.2 two tables → 13 blockquote entries (incl. the long OSEK/VDX row); ch.7 → §6 功能规格 (3 general reqs + 6.2 错误分类 5×"none" + 6.3 安全事件); ch.8 → §7 API规范 (14 types 7.1.1–7.1.14, 8.2 不适用 → §7.2); ch.9 不适用 → §8 时序图; ch.10 → §9 配置规范 (9.1 发布信息); 0 figures — all source images are page-chrome strips; glossary +13 terms incl. an API 来源 line)
 
-❌ Missing (3): SWS_BSWGeneral, SWS_PlatformTypes (a separate document from StandardTypes), SWS_CommunicationStackTypes
+❌ Missing (2): SWS_BSWGeneral, SWS_PlatformTypes (a separate document from StandardTypes)
 
 ## io
 
