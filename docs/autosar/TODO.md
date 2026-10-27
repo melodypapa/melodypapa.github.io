@@ -3,7 +3,7 @@
 > Maintained by the autosar-translate skill per [STANDARD.md](STANDARD.md); update the touched entry and the `Last updated` date after every sync.
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-10-27
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-10-28
 
 ## Backlog
 
@@ -172,9 +172,11 @@
 - ~~**Safety (2)**: SWS_WatchdogInterface (WdgIf), SWS_WatchdogDriver (Wdg)~~ — both translated 2026-10-27
 - **Security (2)**: SWS_Firewall, SWS_IntrusionDetectionSystemManager (IdsM)
 
-## Missing EXP guides (20)
+## Missing EXP guides (19)
 
-ApplicationInterfaces 7 (ADAS/VMC, BodyAndComfort, Chassis, HMI, OccupantSafety, Powertrain, UserGuide), BSWGeneral 4 (ApplicationLevelErrorHandling, BSWDistributionGuide, CDDDesignAndIntegration, ErrorDescription), Crypto 1 (UtilizationOfCryptoServices), General 2 (LayeredSoftwareArchitecture, VFB), Libraries 1 (MacroEncapsulationofInterpolationCalls), Memory 1 (FirmwareOverTheAir), SWArch 1 (ARTI), Safety 2 (FunctionalSafetyMeasures, SafetyUseCase), SystemServices 1 (SwClusterDesignAndIntegration)
+Translated 2026-10-28: LayeredSoftwareArchitecture → [general/layered_software_architecture](general/layered_software_architecture/) (📖 guide).
+
+ApplicationInterfaces 7 (ADAS/VMC, BodyAndComfort, Chassis, HMI, OccupantSafety, Powertrain, UserGuide), BSWGeneral 4 (ApplicationLevelErrorHandling, BSWDistributionGuide, CDDDesignAndIntegration, ErrorDescription), Crypto 1 (UtilizationOfCryptoServices), General 1 (VFB), Libraries 1 (MacroEncapsulationofInterpolationCalls), Memory 1 (FirmwareOverTheAir), SWArch 1 (ARTI), Safety 2 (FunctionalSafetyMeasures, SafetyUseCase), SystemServices 1 (SwClusterDesignAndIntegration)
 
 ## Suggested priority (2026-10-23 snapshot)
 

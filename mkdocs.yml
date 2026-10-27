@@ -152,6 +152,7 @@ nav:
       - "Standard Types": autosar/general/standard_types/index.md
       - "Platform Types": autosar/general/platform_types/index.md
       - "ComStack Types": autosar/general/communication_stack_types/index.md
+      - "分层软件架构": autosar/general/layered_software_architecture/index.md
     - I/O:
       - autosar/io/index.md
       - "Adc": autosar/io/adc_driver/index.md
