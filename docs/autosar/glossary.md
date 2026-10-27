@@ -379,6 +379,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 硬件安全模块（**Hardware Security Module**），专用安全 **MCU** 的内核。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
 
+**IFX**
+> 定点插值库（**Fixed Point Interpolation Routines**）的模块 ID 前缀；整数插值例程名称以 Ifx 开头。
+> 来源：[插值调用宏封装](libraries/macro_encapsulation_of_interpolation_calls/index.md)（AUTOSAR_CP_EXP_MacroEncapsulationofInterpolationCalls · R23-11）
+
+**IFL**
+> 浮点插值库（**Floating Point Interpolation Routines**）的模块 ID 前缀；浮点插值例程名称以 Ifl 开头。
+> 来源：[插值调用宏封装](libraries/macro_encapsulation_of_interpolation_calls/index.md)（AUTOSAR_CP_EXP_MacroEncapsulationofInterpolationCalls · R23-11）
+
 **HW**
 > 硬件（**Hardware**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
