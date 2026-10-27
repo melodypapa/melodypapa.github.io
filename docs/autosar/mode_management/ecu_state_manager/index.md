@@ -13,7 +13,7 @@ release: R23-11
 
 ## 1. 简介和功能概述
 
-ECU管理器模块（**ECU Manager**）是管理**ECU**状态共性方面（**common aspects**）的基础软件模块（可参见[1](#ref-1)）。具体来说，ECU管理器模块负责：
+ECU管理器模块（**ECU Manager**）是管理**ECU**状态共性方面（**common aspects**）的基础软件模块（可参见[\[1\]](#ref-1)）。具体来说，ECU管理器模块负责：
 
 * 初始化和去初始化**OS**、**SchM**和**BswM**以及一些基础软件驱动模块。
 * 在被请求时（**when requested**）将**ECU**配置为**SLEEP**和**SHUTDOWN**状态。
@@ -30,8 +30,8 @@ ECU管理器模块（**ECU Manager**）是管理**ECU**状态共性方面（**co
 
 灵活的**ECU**管理采用以下模块提供的通用模式管理工具：
 
-* **RTE**和**BSW**调度器模块[2](#ref-2)现在合并为一个模块：该模块支持可自由配置的**BSW**和应用程序模式及其模式切换工具。
-* **BSW**模式管理器模块[3](#ref-3)：该模块实施可配置的规则和操作列表，以评估切换**ECU**模式的条件并实施必要的操作。
+* **RTE**和**BSW**调度器模块[\[2\]](#ref-2)现在合并为一个模块：该模块支持可自由配置的**BSW**和应用程序模式及其模式切换工具。
+* **BSW**模式管理器模块[\[3\]](#ref-3)：该模块实施可配置的规则和操作列表，以评估切换**ECU**模式的条件并实施必要的操作。
 
 因此，通过灵活的**ECU**管理，大多数**ECU**状态已经不在**ECU**管理器模块中实现。通常来说，当通用模式管理工具在以下情况下不可用时，**ECU**管理器模块会接管控制：
 
@@ -43,7 +43,7 @@ ECU管理器模块（**ECU Manager**）是管理**ECU**状态共性方面（**co
 
 ### 1.1. 向后兼容以前的ECU管理器模块版本
 
-如果进行了相应的配置，灵活的**ECU**管理模块可以向后兼容以前的ECU管理器模块的版本。有关兼容性配置的更多信息，可参阅模式管理指南（**Guide to Mode Management**）[4](#ref-4)。
+如果进行了相应的配置，灵活的**ECU**管理模块可以向后兼容以前的ECU管理器模块的版本。有关兼容性配置的更多信息，可参阅模式管理指南（**Guide to Mode Management**）[\[4\]](#ref-4)。
 
 ## 2. 定义和缩略语
 
@@ -52,13 +52,13 @@ ECU管理器模块（**ECU Manager**）是管理**ECU**状态共性方面（**co
 ### 2.1. 定义
 
 **Callback**
-> 参见术语表[5](#ref-5)。
+> 参见术语表[\[5\]](#ref-5)。
 
 **Callout**
 > **Callout**是指系统设计人员可以使用代码替换的一种Stub函数，通常在配置时进行替换，用于为**ECU**管理器模块增加功能（**add functionality**）。**Callout**分为两类。一类提供**ECU**管理器模块的强制性功能，并充当硬件抽象层。另一类提供可选功能。
 
 **Integration Code**
-> 参见术语表[5](#ref-5)。
+> 参见术语表[\[5\]](#ref-5)。
 
 **Mode**
 > 模式（**Mode**）是指在车辆中运行过程中各种状态机的某组特定的状态。它不只和**ECU**管理器模块相关。同时并与特定实体、应用程序或整个车辆相关。
@@ -161,7 +161,7 @@ ECU管理器模块（**ECU Manager**）是管理**ECU**状态共性方面（**co
 
 ### 3.2. 相关规范
 
-AUTOSAR提供了基础软件模块的通用规范（参见相关文档[6](#ref-6)），它也适用于**ECU**状态管理器。因此，规范[6](#ref-6)应被视为**ECU**状态管理器的附加和必需规范。
+AUTOSAR提供了基础软件模块的通用规范（参见相关文档[\[6\]](#ref-6)），它也适用于**ECU**状态管理器。因此，规范[\[6\]](#ref-6)应被视为**ECU**状态管理器的附加和必需规范。
 
 ## 4. 约束和假设
 
@@ -188,7 +188,7 @@ AUTOSAR提供了基础软件模块的通用规范（参见相关文档[6](#ref-6
 
 **BSW**驱动程序可能相互依赖。一个典型的例子是看门狗驱动，它需要**SPI**驱动来访问外部看门狗。这意味着一方面，驱动程序可能是堆叠的，与**ECU**管理器模块无关。另一方面，一些被调用模块必须在调用模块的初始化之前已被初始化。
 
-系统设计者需负责在配置时，在**EcuMDriverInitListZero**、**EcuMDriverInitListOne**、**EcuMDriverRestartList**和**EcuMDriverInitListBswM**中定义初始化顺序。
+系统设计者需负责在配置时，在[**EcuMDriverInitListZero**](#917-ecumdriverinitlistzero)、[**EcuMDriverInitListOne**](#916-ecumdriverinitlistone)、[**EcuMDriverRestartList**](#918-ecumdriverrestartlist)和[**EcuMDriverInitListBswM**](#925-ecumdriverinitlistbswm)中定义初始化顺序。
 
 ### 5.2. 具有唤醒功能的外设
 
@@ -224,8 +224,8 @@ AUTOSAR提供了基础软件模块的通用规范（参见相关文档[6](#ref-6
 
 **ECU**状态通常（**generally**）通过**AUTOSAR**模式来实现，**BSW**模式管理器负责监控**ECU**中的变化，并酌情影响**ECU**状态机的相应变化。
 
-* 有关**AUTOSAR**模式管理的讨论，请参阅虚拟功能总线规范（**Specification of the Virtual Function Bus**）[7](#ref-7)，
-* 有关**ECU**状态机实现细节的指南，以及如何通过配置**BSW**模式管理器以实现**ECU**的状态机，请参阅模式管理指南（**Guide to Mode Management**）[4](#ref-4)，
+* 有关**AUTOSAR**模式管理的讨论，请参阅虚拟功能总线规范（**Specification of the Virtual Function Bus**）[\[7\]](#ref-7)，
+* 有关**ECU**状态机实现细节的指南，以及如何通过配置**BSW**模式管理器以实现**ECU**的状态机，请参阅模式管理指南（**Guide to Mode Management**）[\[4\]](#ref-4)，
 
 **BSW**模式管理器只能在模式管理运行后才能管理**ECU**的状态机。也就是说，在**SchM**被初始化之后，直到**SchM**被去初始化或者停止。**ECU**管理器模块会在 
 **BSW**模式管理器不工作后接管**ECU**的控制。
@@ -273,7 +273,7 @@ ECU 管理器模块需处理以下**ECU**范围的属性：
 
 当使用**ECU**模式处理时，标准状态**RUN**和**POST_RUN**由**RUN**请求协议（**RUN Request Protocol**）经仲裁后，传播到**BswM**模块。系统设计人员在通过**BswM actions**设置**EcuM**模式时，必须确保各个状态的先决条件已被满足。请注意**BSW**和**SW-C**都不能依赖某些**ECU**模式或者状态，尽管以前版本的**BSW**在很大程度上不依赖它们。
 
-本文档仅指定保留在**ECU**管理器模块中的功能。有关**ECU**状态管理的完整图景，可参阅其他相关模块的规范，如：**RTE**和**BSW**调度器模块[2](#ref-2)和**BSW**模式管理器模块[3](#ref-3)。有关**ECU**状态和相关**BSW**模块之间交互的一些示例用例，可参阅模式管理指南[4](#ref-4)。
+本文档仅指定保留在**ECU**管理器模块中的功能。有关**ECU**状态管理的完整图景，可参阅其他相关模块的规范，如：**RTE**和**BSW**调度器模块[\[2\]](#ref-2)和**BSW**模式管理器模块[\[3\]](#ref-3)。有关**ECU**状态和相关**BSW**模块之间交互的一些示例用例，可参阅模式管理指南[\[4\]](#ref-4)。
 
 ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup sources**）的状态。 设置/清除/验证唤醒事件的**API**接口保持不变，但显着区别是这些API采用回调的方式。
 
@@ -306,7 +306,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 #### 6.1.1. STARTUP阶段
 
-**STARTUP**阶段的目的是将基础软件模块初始化到通用模式管理设施（**Generic Mode Management facilities**）可操作的点。 有关初始化的更多详细信息，可参见第**6.3**章。
+**STARTUP**阶段的目的是将基础软件模块初始化到通用模式管理设施（**Generic Mode Management facilities**）可操作的点。 有关初始化的更多详细信息，可参见第[**6.3**](#63-startup阶段)章。
 
 #### 6.1.2. UP阶段
 
@@ -323,7 +323,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 因此就**ECU**管理器模块而言，**BSW**和**SW-C**会一直运行，直到它们准备好，让**ECU**关闭或进入睡眠状态。
 
-有关如何设计模式驱动的**ECU**管理以及相应地配置**BSW**模式管理器的指导，可参阅模式管理指南[4](#ref-4)。
+有关如何设计模式驱动的**ECU**管理以及相应地配置**BSW**模式管理器的指导，可参阅模式管理指南[\[4\]](#ref-4)。
 
 #### 6.1.3. SHUTDOWN阶段
 
@@ -335,7 +335,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 > 1 有些**ECU**设计实际上确实需要执行代码来实现**SLEEP**状态（以及唤醒能力）。对于这类**ECU**，时钟速度通常会大幅降低。它们可以通过**SLEEP**状态内的一个小循环来实现。
 
-**ECU**管理器模块唤醒**ECU**，以响应预期或非预期的唤醒事件。由于非预期的唤醒事件需要被忽略，**ECU**管理器模块提供了一个协议来验证唤醒事件。该协议指定了处理唤醒源的驱动程序和**ECU**管理器之间的协作过程（可参见第**6.6.4**节）。
+**ECU**管理器模块唤醒**ECU**，以响应预期或非预期的唤醒事件。由于非预期的唤醒事件需要被忽略，**ECU**管理器模块提供了一个协议来验证唤醒事件。该协议指定了处理唤醒源的驱动程序和**ECU**管理器之间的协作过程（可参见第[**6.6.4**](#664-wakeupvalidation序列中的活动)节）。
 
 #### 6.1.5. OFF阶段
 
@@ -353,7 +353,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 > 2 确切地说，“初始化”也可以指去初始化（**de-initialization**）。
 
-操作系统也需经过**ECU**管理器模块进行初始化和关闭。在操作系统初始化之后，**ECU**管理器模块在将控制权交给**BswM**之前，一些额外的初始化步骤需被执行。在操作系统关闭之前，**BswM**会立即（**immediately**）将执行控制权交还给**ECU**管理器模块。详细信息可参考章节6.3启动（**STARTUP**）和 6.4 关闭（**SHUTDOWN**）。
+操作系统也需经过**ECU**管理器模块进行初始化和关闭。在操作系统初始化之后，**ECU**管理器模块在将控制权交给**BswM**之前，一些额外的初始化步骤需被执行。在操作系统关闭之前，**BswM**会立即（**immediately**）将执行控制权交还给**ECU**管理器模块。详细信息可参考章节[6.3](#63-startup阶段)启动（**STARTUP**）和 [6.4](#64-shutdown阶段) 关闭（**SHUTDOWN**）。
 
 #### 6.2.2. 软件组件
 
@@ -361,7 +361,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 ### 6.3. STARTUP阶段
 
-有关**STARTUP**阶段的概述说明，可参见章节**6.1.1**。
+有关**STARTUP**阶段的概述说明，可参见章节[**6.1.1**](#611-startup阶段)。
 
 ![Figure7-3.png](Figure7-3.png)
 
@@ -384,16 +384,16 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 | Callout [**EcuM_DeterminePbConfiguration**](#7523-ecum_determinepbconfiguration) | 此Callout应返回一个指向完全初始化的[**EcuM_ConfigType**](#721-ecum_configtype)结构体的指针，其中包含**ECU**管理器模块及所有其他**BSW**模块的**post-build**配置数据。 | no |
 | 检查配置数据的一致性 | 如果检查失败，则调用[**EcuM_ErrorHook**](#7511-ecum_errorhook)。一致性检查的详细信息可参见章节[6.3.4 配置一致性检查](#634-配置一致性检查)。 | no |
 | Callout [**EcuM_AL_DriverInitOne**](#7524-ecum_al_driverinitone) | 初始化块I。此Callout不仅可以包含驱动程序初始化，还可以包含任何类型的**OS**前低级别初始化代码。可参见章节[6.3.5 驱动程序初始化](#635-驱动程序初始化)。 | yes |
-| 获取复位原因 | 复位原因通过调用**Mcu_GetResetReason**并按**EcuMWakeupSource**配置容器定义的映射关系推导得出。可参见章节[7.4.1.1 EcuM_SetWakeupEvent](#7411-ecum_setwakeupevent)和[7.3.5.4 EcuM_GetValidatedWakeupEvents](#7354-ecum_getvalidatedwakeupevents)。 | no |
-| 选择默认关机目标 | 可参见第**6.7**章关机目标中的[SWS_EcuM_02181]。 | no |
+| 获取复位原因 | 复位原因通过调用**Mcu_GetResetReason**并按[**EcuMWakeupSource**](#9111-ecumwakeupsource)配置容器定义的映射关系推导得出。可参见章节[7.4.1.1 EcuM_SetWakeupEvent](#7411-ecum_setwakeupevent)和[7.3.5.4 EcuM_GetValidatedWakeupEvents](#7354-ecum_getvalidatedwakeupevents)。 | no |
+| 选择默认关机目标 | 可参见第[**6.7**](#67-关机目标)章关机目标中的[SWS_EcuM_02181]。 | no |
 | Callout [**EcuM_LoopDetection**](#7525-ecum_loopdetection) | 如果启用了环路检测（**Loop Detection**），则每次启动时都会调用此Callout。 | yes |
 | 启动**OS** | 启动**AUTOSAR OS**，参见[SWS_EcuM_02603]。 | no |
 
 **注意：**
 
-可选列（Opt.）：可选的活动可以通过配置开启或关闭。详细信息可参见第**9.1**章通用容器与配置参数。
+可选列（Opt.）：可选的活动可以通过配置开启或关闭。详细信息可参见第[**9.1**](#91-通用容器与配置参数)章通用容器与配置参数。
 
-**ECU**管理器模块需记住复位原因转换产生的唤醒源，可参见**StartPreOS Sequence**表格。同时唤醒源必须由[**EcuM_MainFunction**](#761-ecum_mainfunction)进行验证，可参见章节**6.6.4**的 **WakeupValidation**序列中的活动。
+**ECU**管理器模块需记住复位原因转换产生的唤醒源，可参见**StartPreOS Sequence**表格。同时唤醒源必须由[**EcuM_MainFunction**](#761-ecum_mainfunction)进行验证，可参见章节[**6.6.4**](#664-wakeupvalidation序列中的活动)的 **WakeupValidation**序列中的活动。
 
 当功能通过[**EcuM_Init**](#7322-ecum_init)被激活时，**ECU**管理器模块会执行**StartPreOS**序列中的操作，详情可参见**StartPreOS Sequence**表格）。
 
@@ -405,9 +405,9 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 驱动程序和硬件抽象模块的初始化不是由**ECU**管理器来严格定义的。但**ECU**管理器提供了两个Callout函数[**EcuM_AL_DriverInitZero**](#7522-ecum_al_driverinitzero)和[**EcuM_AL_DriverInitOne**](#7524-ecum_al_driverinitone)来定义初始化块 **0**和**1**。这些初始化块包含了与**StartPreOS**序列相关的初始化活动。
 
-**MCU_Init**并不提供完整的**MCU**的初始化。此外与硬件相关的步骤必须被执行，并且必须在系统设计时被定义。这些步骤应该在[**EcuM_AL_DriverInitZero**](#7522-ecum_al_driverinitzero)或者[**EcuM_AL_DriverInitOne**](#7524-ecum_al_driverinitone)两个Callout函数中进行。详细信息可在MCU驱动程序规范[10](#ref-10)中找到。
+**MCU_Init**并不提供完整的**MCU**的初始化。此外与硬件相关的步骤必须被执行，并且必须在系统设计时被定义。这些步骤应该在[**EcuM_AL_DriverInitZero**](#7522-ecum_al_driverinitzero)或者[**EcuM_AL_DriverInitOne**](#7524-ecum_al_driverinitone)两个Callout函数中进行。详细信息可在MCU驱动程序规范[\[10\]](#ref-10)中找到。
 
-**ECU**管理器模块需使用配置的默认关机目标（通过**EcuMDefaultShutdownTarget**配置）来调用[**EcuM_GetValidatedWakeupEvents**](#7354-ecum_getvalidatedwakeupevents)接口。具体内容可参阅章节**6.7**关机目标（**Shutdown Targets**）的内容。
+**ECU**管理器模块需使用配置的默认关机目标（通过[**EcuMDefaultShutdownTarget**](#915-ecumdefaultshutdowntarget)配置）来调用[**EcuM_GetValidatedWakeupEvents**](#7354-ecum_getvalidatedwakeupevents)接口。具体内容可参阅章节[**6.7**](#67-关机目标)关机目标（**Shutdown Targets**）的内容。
 
 **StartPreOS**序列需为启动操作系统，初始化所需的所有基础软件模块。
 
@@ -426,7 +426,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 **注意：**
 
-可选列（Opt.）：可选的活动可以通过配置开启或关闭。详细信息可参见第**9.1**章通用容器与配置参数。
+可选列（Opt.）：可选的活动可以通过配置开启或关闭。详细信息可参见第[**9.1**](#91-通用容器与配置参数)章通用容器与配置参数。
 
 ![Figure7-5.png](Figure7-5.png)
 
@@ -485,15 +485,15 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 本章节适用于那些**AUTOSAR**基础软件的驱动程序，不包括**SchM**和**BswM**，它们的初始化和重新初始化都是由**ECU**管理器模块处理，而不是**BswM**模块处理的。
 
-**ECU**管理器模块的配置需指定**init block 0**和**init block 1**内的初始化调用顺序。具体参见**EcuMDriverInitListZero**和**EcuMDriverInitListOne**。
+**ECU**管理器模块的配置需指定**init block 0**和**init block 1**内的初始化调用顺序。具体参见[**EcuMDriverInitListZero**](#917-ecumdriverinitlistzero)和[**EcuMDriverInitListOne**](#916-ecumdriverinitlistone)。
 
 **ECU**管理器模块需使用从驱动程序的**EcuMModuleService**配置容器中派生的参数，来调用每个驱动程序的初始化（**init**）函数。
 
-对于**WakeupRestart**期间的重新初始化，integrator需使用**EcuMDriverRestartList**，将重新启动块（**restart block**）集成到[**EcuM_AL_DriverRestart**](#7548-ecum_al_driverrestart)的集成代码中。
+对于**WakeupRestart**期间的重新初始化，integrator需使用[**EcuMDriverRestartList**](#918-ecumdriverrestartlist)，将重新启动块（**restart block**）集成到[**EcuM_AL_DriverRestart**](#7548-ecum_al_driverrestart)的集成代码中。
 
-**EcuMDriverRestartList**接口可能包含用作唤醒源的驱动程序。[**EcuM_AL_DriverRestart**](#7548-ecum_al_driverrestart)需重新启动这些驱动程序唤醒检测（**wakeup detected**）回调函数的触发机制。可参阅章节[6.5.5](#655-wakeuprestart序列中的活动)的**WakeupRestart**序列中的活动。
+[**EcuMDriverRestartList**](#918-ecumdriverrestartlist)接口可能包含用作唤醒源的驱动程序。[**EcuM_AL_DriverRestart**](#7548-ecum_al_driverrestart)需重新启动这些驱动程序唤醒检测（**wakeup detected**）回调函数的触发机制。可参阅章节[6.5.5](#655-wakeuprestart序列中的活动)的**WakeupRestart**序列中的活动。
 
-**ECU**管理器模块需按照与**init block 0**和**init block 1**的组合列表相同的顺序初始化**EcuMDriverRestartList**中的驱动程序。通常**EcuMDriverRestartList**只会包含**init block 0**和**init block 1**驱动程序组合列表的子集。
+**ECU**管理器模块需按照与**init block 0**和**init block 1**的组合列表相同的顺序初始化[**EcuMDriverRestartList**](#918-ecumdriverrestartlist)中的驱动程序。通常[**EcuMDriverRestartList**](#918-ecumdriverrestartlist)只会包含**init block 0**和**init block 1**驱动程序组合列表的子集。
 
 表7.3显示了**init block 0**和**init block 1**的一种可能和推荐的活动序列。根据硬件和软件配置，可以添加或移除相关的基础软件模块，当然也可以使用其他活动序列。
 
@@ -514,14 +514,14 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 | 初始化块I | **PWM**驱动 | |
 | 初始化块I | **OCU**驱动 | |
 
-> 4 初始化块0中的驱动程序列在**EcuMDriverInitListZero**配置容器中。
-> 5 初始化块I中的驱动程序列在**EcuMDriverInitListOne**配置容器中。
+> 4 初始化块0中的驱动程序列在[**EcuMDriverInitListZero**](#917-ecumdriverinitlistzero)配置容器中。
+> 5 初始化块I中的驱动程序列在[**EcuMDriverInitListOne**](#916-ecumdriverinitlistone)配置容器中。
 
 #### 6.3.6. BSW 初始化
 
-其余的**BSW**模块由**BSW**模式管理器初始化：**BSW**模式管理器使用由已配置的初始化函数列表（**EcuMDriverInitListBswM**）创建的**ECU**管理器的一个已配置函数（**EcuMDriverInitCalloutName**）。
+其余的**BSW**模块由**BSW**模式管理器初始化：**BSW**模式管理器使用由已配置的初始化函数列表（[**EcuMDriverInitListBswM**](#925-ecumdriverinitlistbswm)）创建的**ECU**管理器的一个已配置函数（**EcuMDriverInitCalloutName**）。
 
-**ECU**管理器模块的配置应指定**BSW**初始化函数中的初始化调用顺序（可参见：**EcuMDriverInitListBswM**）。
+**ECU**管理器模块的配置应指定**BSW**初始化函数中的初始化调用顺序（可参见：[**EcuMDriverInitListBswM**](#925-ecumdriverinitlistbswm)）。
 
 ### 6.4. SHUTDOWN阶段
 
@@ -647,7 +647,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 **ECU**管理器模块需调用用于重新初始化驱动程序的[**EcuM_AL_DriverRestart**](#7548-ecum_al_driverrestart)的Callout函数。其中具有唤醒源的驱动程序通常需要重新初始化。有关驱动程序初始化的更多详细信息，可参考章节[6.3.5驱动程序初始化](#635-驱动程序初始化)。
 
-在重新初始化（**re-initialization**）期间，驱动程序必须检查其一个分配的唤醒源是否是先前被唤醒的原因。如果该测试为真，驱动程序必须调用唤醒被检测到（**wakeup detected**）的回调函数。例如：参见**CAN** 收发器驱动程序规范[11](#ref-11)。而后者必须再调用[**EcuM_SetWakeupEvent**](#7411-ecum_setwakeupevent)函数。
+在重新初始化（**re-initialization**）期间，驱动程序必须检查其一个分配的唤醒源是否是先前被唤醒的原因。如果该测试为真，驱动程序必须调用唤醒被检测到（**wakeup detected**）的回调函数。例如：参见**CAN** 收发器驱动程序规范[\[11\]](#ref-11)。而后者必须再调用[**EcuM_SetWakeupEvent**](#7411-ecum_setwakeupevent)函数。
 
 驱动程序的实现应该只调用一次唤醒回调。此后它不应再次调用唤醒回调，直到它被显式函数调用重新使能（**re-armed**）。所以驱动程序必须被重新使能后，才能再次触发回调。
 
@@ -739,7 +739,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 **实现提示：**
 
-由于**SchM**将在**StartPostOS**和**WakeupRestart**序列的末尾运行，所以[**EcuM_MainFunction**](#761-ecum_mainfunction)可能会在验证此唤醒源时，与其相关的软件栈（**Stack**）还未被初始化。集成商（**integrator**）应配置适当的模式以指示软件栈不可用，并且相应地禁用[**EcuM_MainFunction**](#761-ecum_mainfunction)（详情可参见文档[2](#ref-2)）。
+由于**SchM**将在**StartPostOS**和**WakeupRestart**序列的末尾运行，所以[**EcuM_MainFunction**](#761-ecum_mainfunction)可能会在验证此唤醒源时，与其相关的软件栈（**Stack**）还未被初始化。集成商（**integrator**）应配置适当的模式以指示软件栈不可用，并且相应地禁用[**EcuM_MainFunction**](#761-ecum_mainfunction)（详情可参见文档[\[2\]](#ref-2)）。
 
 ![Figure7-16.png](Figure7-16.png)
 
@@ -796,7 +796,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 同时，驱动程序需在其初始化函数中，启用回调函数的调用。
 
-**EcuMWakeupSource**分区分配（**partition assignment**）需能被所引用的模块配置所识别。
+[**EcuMWakeupSource**](#9111-ecumwakeupsource)分区分配（**partition assignment**）需能被所引用的模块配置所识别。
 
 **注意：**
 
@@ -847,7 +847,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 可以确定关机目标的时间不一定是关闭的开始。由于**BswM**现在控制着大多数**ECU**资源，所以它将确定应该设置关机目标的时间点，并通过直接或间接地方式设置它。因此BswM必须确保在调用[**EcuM_GoDownHaltPoll**](#7321-ecum_godownhaltpoll)之前，将关机目标的默认值更改为**ECUM_STATE_SLEEP**。
 
-在以前版本的**ECU**管理器模块中，因为在**ECU**中实现的睡眠模式取决于**ECU**的能力，所以睡眠目标需被特殊处理。这些睡眠模式取决于硬件，通常在时钟设置或硬件提供的其他低功耗特性方面有所不同。这些不同的功能可以通过**MCU**驱动程序，作为所谓的**MCU**模式访问（可参见文档[10](#ref-10)）。
+在以前版本的**ECU**管理器模块中，因为在**ECU**中实现的睡眠模式取决于**ECU**的能力，所以睡眠目标需被特殊处理。这些睡眠模式取决于硬件，通常在时钟设置或硬件提供的其他低功耗特性方面有所不同。这些不同的功能可以通过**MCU**驱动程序，作为所谓的**MCU**模式访问（可参见文档[\[10\]](#ref-10)）。
 
 同时还有多种复位执行的方式，这些方式通过不同的模块控制或触发：
 
@@ -861,11 +861,11 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 在**SLEEP**阶段，任何唤醒事件都不应该被错过。如果在**Go Sleep**序列中发生了唤醒事件，则不应进入**Halt**或者**Poll**序列。
 
-**ECU**管理器模块可以定义一组可配置的睡眠模式（具体请参阅**EcuMSleepMode**），其中每个模式本身都是关机目标。**ECU**管理器模块需允许将**MCU**睡眠模式映射到**ECU**的睡眠模式，并允许将它们作为关机目标来处理。以Sleep作为关机目标，需将使所有的内核（**cores**）都进入睡眠状态。
+**ECU**管理器模块可以定义一组可配置的睡眠模式（具体请参阅[**EcuMSleepMode**](#9110-ecumsleepmode)），其中每个模式本身都是关机目标。**ECU**管理器模块需允许将**MCU**睡眠模式映射到**ECU**的睡眠模式，并允许将它们作为关机目标来处理。以Sleep作为关机目标，需将使所有的内核（**cores**）都进入睡眠状态。
 
 #### 6.7.2. Reset
 
-**ECU**管理器模块需定义一组可配置的复位模式（具体可参见：**EcuMResetMode**和[**EcuM_ResetType**](#725-ecum_resettype)），其中每种模式本身都是一个关机目标。该集合将至少包含以下几个目标：
+**ECU**管理器模块需定义一组可配置的复位模式（具体可参见：[**EcuMResetMode**](#927-ecumresetmode)和[**EcuM_ResetType**](#725-ecum_resettype)），其中每种模式本身都是一个关机目标。该集合将至少包含以下几个目标：
 
 * **ECUM_RESET_MCU**: 通过调用**MCU_PerformReset**
 * **ECUM_RESET_WDG**: 通过调用**WdgM_PerformReset**
@@ -873,7 +873,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 **ECU**管理器模块需允许为复位目标定义别名（参见：**EcuM180_Conf**）。
 
-**ECU**管理器模块需定义一组可配置的复位原因（参见：**EcuMShutdownCause**和**EcuM_ShutdownCauseType**）。该集合应至少包含以下目标：
+**ECU**管理器模块需定义一组可配置的复位原因（参见：[**EcuMShutdownCause**](#928-ecumshutdowncause)和**EcuM_ShutdownCauseType**）。该集合应至少包含以下目标：
 
 * **ECUM_CAUSE_ECU_STATE**：**ECU**状态机进入关机状态
 * **ECUM_CAUSE_WDGM**：**WdgM**检测到故障
@@ -908,13 +908,13 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 #### 6.8.1. 闹钟和用户
 
-**SW-C**和**BSW**模块可以各自维护一个用户闹钟（**user alarm clock**）。每个用户闹钟（请参阅：**EcuMAlarmClock**）都与一个**EcuMAlarmClockUser**相关联，该**EcuMAlarmClockUser**用来标识相应的**SW-C**或**BSW**模块。
+**SW-C**和**BSW**模块可以各自维护一个用户闹钟（**user alarm clock**）。每个用户闹钟（请参阅：[**EcuMAlarmClock**](#923-ecumalarmclock)）都与一个**EcuMAlarmClockUser**相关联，该**EcuMAlarmClockUser**用来标识相应的**SW-C**或**BSW**模块。
 
 每个**EcuM**用户最多拥有一个用户闹钟。**EcuM**用户不得设置其他用户的闹钟值。
 
 **ECU**管理器模块需始终将主闹钟值设置为最早的用户闹钟值。这也意味着，当**EcuM**用户发起中止其用户闹钟时，此用户闹钟会决定当前主闹钟值值，**ECU**管理器模块需将主闹钟值设置为下一个最早的用户闹钟值。
 
-只有授权的**EcuM**用户才能设置**EcuM**时钟时间（请参阅：**EcuMSetClockAllowedUsers**）。
+只有授权的**EcuM**用户才能设置**EcuM**时钟时间（请参阅：[**EcuMSetClockAllowedUsers**](#929-ecumsetclockallowedusers)）。
 
 **逻辑依据：**
 
@@ -932,9 +932,9 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 
 根据选择的睡眠模式（参数：**EcuMSleepModeSuspend** ），有两种方法可以在睡眠期间累加**EcuM**时钟数。
 
-在停止序列中（请参阅: 6.5.2 停止序列中的活动），**GPT**驱动程序必须放在**GPT_MODE_SLEEP**中，以便只配置那些时间基数所需的计时器通道。它还需要**GPT**使用**Gpt_EnableWakeup API**来启用基于定时器的唤醒通道。最好将**Gpt_StartTimer API**设置为**1**秒。但如果无法设置此数值，则**EcuM**将需要更频繁地唤醒，以积累多个定时器唤醒，只有在时间累计**1**秒后，时钟才能增加**1**。
+在停止序列中（请参阅: [6.5.2](#652-停止序列中的活动) 停止序列中的活动），**GPT**驱动程序必须放在**GPT_MODE_SLEEP**中，以便只配置那些时间基数所需的计时器通道。它还需要**GPT**使用**Gpt_EnableWakeup API**来启用基于定时器的唤醒通道。最好将**Gpt_StartTimer API**设置为**1**秒。但如果无法设置此数值，则**EcuM**将需要更频繁地唤醒，以积累多个定时器唤醒，只有在时间累计**1**秒后，时钟才能增加**1**。
 
-在轮询序列中（请参阅: 6.5.3 轮询序列中的活动），**EcuM**的时钟可以在[**EcuM_SleepActivity**](#7543-ecum_sleepactivity)函数被调用期间，使用[**EcuM_SetClock**](#7366-ecum_setclock)函数定期更新。假设时间概念仍然可用。只有在时间累计**1**秒后，时钟才能增加**1**。
+在轮询序列中（请参阅: [6.5.3](#653-轮询序列中的活动) 轮询序列中的活动），**EcuM**的时钟可以在[**EcuM_SleepActivity**](#7543-ecum_sleepactivity)函数被调用期间，使用[**EcuM_SetClock**](#7366-ecum_setclock)函数定期更新。假设时间概念仍然可用。只有在时间累计**1**秒后，时钟才能增加**1**。
 
 在睡眠期间，累加**EcuM**时钟数的两种情况下，**ECU**管理器模块必须评估主闹钟是否已超时。如果是这样，**BswM**将发起完全启动（**full startup**）或者再次将**ECU**设置为睡眠状态。
 
@@ -993,7 +993,7 @@ ECU管理器模块采用与过去相同的方式来管理唤醒源（**wakeup so
 1. 启动所有**从ECU管理器模块**的关机请求，
 2. 必须等到所有模块都去初始化它们负责的**BSW**模块并成功关机动作。
 
-**主ECU管理器模块**设置了一个可以被所有**从模块**读取的关机标志。**EcuM**为每个已配置的**从内核**激活随后的任务。**从模块**在其主程序中读取标志信息，并在请求时进行关机操作。任务（**Task**）的名称为**EcuM_SlaveCore\<X\>_Task**，其中**X**是一个数字。该任务需要由集成商（**integrator**）配置。由于主内核使用了一个**EcuMFlexPartionRef**，所以需要激活的任务数可以通过将**EcuMPartitionRef**的实例数减一进行计算。
+**主ECU管理器模块**设置了一个可以被所有**从模块**读取的关机标志。**EcuM**为每个已配置的**从内核**激活随后的任务。**从模块**在其主程序中读取标志信息，并在请求时进行关机操作。任务（**Task**）的名称为**EcuM_SlaveCore&lt;X&gt;_Task**，其中**X**是一个数字。该任务需要由集成商（**integrator**）配置。由于主内核使用了一个**EcuMFlexPartionRef**，所以需要激活的任务数可以通过将**EcuMPartitionRef**的实例数减一进行计算。
 
 **示例：**
 
@@ -1296,7 +1296,7 @@ InternalBehavior EcuStateManager {
 
 **ECU**管理器模块需忽略初始化期间发生的所有类型的错误。例如：初始化函数返回的值。
 
-因为初始化是一个配置问题（参见：**EcuMDriverInitListZero**、**EcuMDriverInitListOne**和**EcuMDriverRestartList**），所以无法标准化。
+因为初始化是一个配置问题（参见：[**EcuMDriverInitListZero**](#917-ecumdriverinitlistzero)、[**EcuMDriverInitListOne**](#916-ecumdriverinitlistone)和[**EcuMDriverRestartList**](#918-ecumdriverrestartlist)），所以无法标准化。
 
 **BSW**模块负责将其初始化期间发生的错误，直接报告给**DEM**模块或**DET**模块，如其 SWS 中所指定的那样。**ECU**管理器模块不报告错误。**BSW**模块还负责采取任何特殊措施来应对初始化期间发生的错误。
 
@@ -1318,7 +1318,7 @@ InternalBehavior EcuStateManager {
 
 ### 6.13. 错误分类
 
-文档[6](#ref-6)"基础软件模块通用规范"中的"错误处理"章节详细描述了基础软件的错误处理。其中尤其定义了一个由五种错误类型组成的分类方案，这些错误类型可能出现在**BSW**模块中。
+文档[\[6\]](#ref-6)"基础软件模块通用规范"中的"错误处理"章节详细描述了基础软件的错误处理。其中尤其定义了一个由五种错误类型组成的分类方案，这些错误类型可能出现在**BSW**模块中。
 
 基于此，以下各小节规定了**EcuM**模块中相应的特定错误。
 
@@ -1460,7 +1460,7 @@ ECU管理器模块应按照**EcuM_RunStatusType**中所列的内容，向**BswM*
 
 对于预定义唤醒源之外的附加唤醒源，应通过配置将其逐一分配到位域的位置5到31。位分配应由配置工具完成。
 
-**EcuMWakeupSource**容器中的**EcuMWakeupSourceId**字段应定义该唤醒源在**EcuM_WakeupSourceType**位域的所有实例中所对应的位置。
+[**EcuMWakeupSource**](#9111-ecumwakeupsource)容器中的**EcuMWakeupSourceId**字段应定义该唤醒源在**EcuM_WakeupSourceType**位域的所有实例中所对应的位置。
 
 #### 7.2.4. EcuM_WakeupStatusType
 
@@ -1662,7 +1662,7 @@ Std_ReturnType EcuM_SelectShutdownTarget (
 
 **EcuM_SelectShutdownTarget**函数应将关机目标设置为**shutdownTarget**参数的值。
 
-**EcuM_SelectShutdownTarget**函数的**mode**参数应是睡眠模式或复位模式的标识符。**mode**参数仅在**target**参数等于**ECUM_SHUTDOWN_TARGET_SLEEP**或**ECUM_SHUTDOWN_TARGET_RESET**时才被使用。在所有其他情况下，它应被忽略。只有在配置时定义、并存储在**EcuMCommonConfiguration**容器中的睡眠或复位模式才允许作为参数。
+**EcuM_SelectShutdownTarget**函数的**mode**参数应是睡眠模式或复位模式的标识符。**mode**参数仅在**target**参数等于**ECUM_SHUTDOWN_TARGET_SLEEP**或**ECUM_SHUTDOWN_TARGET_RESET**时才被使用。在所有其他情况下，它应被忽略。只有在配置时定义、并存储在[**EcuMCommonConfiguration**](#914-ecumcommonconfiguration)容器中的睡眠或复位模式才允许作为参数。
 
 **EcuM_SelectShutdownTarget**不应发起任何设置活动，而只应存储该值，以供**SHUTDOWN**或**SLEEP**阶段后续使用。
 
@@ -1945,7 +1945,7 @@ void EcuM_ValidateWakeupEvent (
 
 **EcuM_ValidateWakeupEvent**应以**sources**参数和状态值**ECUM_WKSTATUS_VALIDATED**调用**BswM_EcuM_CurrentWakeup**。
 
-如果对应唤醒源在**EcuMWakeupSource**配置容器中的**EcuMComMChannelRef**参数已配置，则**EcuM_ValidateWakeupEvent**应为每个唤醒事件调用**ComM_EcuM_WakeUpIndication**。
+如果对应唤醒源在[**EcuMWakeupSource**](#9111-ecumwakeupsource)配置容器中的**EcuMComMChannelRef**参数已配置，则**EcuM_ValidateWakeupEvent**应为每个唤醒事件调用**ComM_EcuM_WakeUpIndication**。
 
 如果**EcuMDevErrorDetect**已启用，且**sources**参数包含一个未知（未配置）的唤醒源，**EcuM_ValidateWakeupEvent**应忽略该调用，并向**Det**报告[**ECUM_E_UNKNOWN_WAKEUP_SOURCE**](#6131-开发错误)。
 
@@ -1955,7 +1955,7 @@ void EcuM_ValidateWakeupEvent (
 
 对于与通信通道相对应的源（见上文的**EcuMComMChannelRef**要求），**EcuM_ValidateWakeupEvent**在任何**ECU**阶段都应具有完整效果。
 
-如果对应唤醒源在**EcuMWakeupSource**配置容器中至少配置了一个**EcuMComMPNCRef**参数，则**EcuM_ValidateWakeupEvent**应为每个唤醒事件和每个被引用的**PNC**调用**ComM_EcuM_PNCWakeUpIndication**。
+如果对应唤醒源在[**EcuMWakeupSource**](#9111-ecumwakeupsource)配置容器中至少配置了一个**EcuMComMPNCRef**参数，则**EcuM_ValidateWakeupEvent**应为每个唤醒事件和每个被引用的**PNC**调用**ComM_EcuM_PNCWakeUpIndication**。
 
 ### 7.5. Callout函数
 
@@ -2001,7 +2001,7 @@ void EcuM_AL_DriverInitZero (
 
 **ECU**管理器模块在Pre-**OS**序列的早期调用**EcuM_AL_DriverInitZero**（可参见章节[6.3.2 StartPreOS 序列中的活动](#632-startpreos-序列中的活动)）。
 
-**ECU**管理器模块配置工具必须根据**EcuMDriverInitListZero**配置容器中定义的模块序列，生成**EcuM_AL_DriverInitZero** Callout的默认实现。另请参阅章节[6.3.5 驱动程序初始化](#635-驱动程序初始化)。
+**ECU**管理器模块配置工具必须根据[**EcuMDriverInitListZero**](#917-ecumdriverinitlistzero)配置容器中定义的模块序列，生成**EcuM_AL_DriverInitZero** Callout的默认实现。另请参阅章节[6.3.5 驱动程序初始化](#635-驱动程序初始化)。
 
 ###### 7.5.2.3. EcuM_DeterminePbConfiguration
 
@@ -2027,7 +2027,7 @@ void EcuM_AL_DriverInitOne (
 
 **ECU**管理器模块在Pre-**OS**序列中调用**EcuM_AL_DriverInitOne**（可参见章节[6.3.2 StartPreOS 序列中的活动](#632-startpreos-序列中的活动)）。
 
-**ECU**管理器模块配置工具必须根据**EcuMDriverInitListOne**配置容器中定义的模块序列，生成**EcuM_AL_DriverInitOne** Callout的默认实现。另请参阅章节[6.3.5 驱动程序初始化](#635-驱动程序初始化)。
+**ECU**管理器模块配置工具必须根据[**EcuMDriverInitListOne**](#916-ecumdriverinitlistone)配置容器中定义的模块序列，生成**EcuM_AL_DriverInitOne** Callout的默认实现。另请参阅章节[6.3.5 驱动程序初始化](#635-驱动程序初始化)。
 
 除驱动程序初始化外，在此块中还应考虑以下初始化序列：按照**AUTOSAR_SWS_Mcu_Driver**第**9.1**章进行**MCU**初始化。
 
@@ -2105,7 +2105,7 @@ void EcuM_EnableWakeupSources (
 
 **ECU**管理器模块在**GoSleep**序列中调用**EcuM_EnableWakeupSources**（可参见章节[6.5.1 GoSleep序列中的活动](#651-gosleep序列中的活动)）。
 
-**ECU**管理器模块应从为当前睡眠模式配置的**EcuMWakeupSource**位域中，派生出要启用的唤醒源（并用作**wakeupSource**参数）。
+**ECU**管理器模块应从为当前睡眠模式配置的[**EcuMWakeupSource**](#9111-ecumwakeupsource)位域中，派生出要启用的唤醒源（并用作**wakeupSource**参数）。
 
 ###### 7.5.4.2. EcuM_GenerateRamHash
 
@@ -2204,7 +2204,7 @@ void EcuM_AL_DriverRestart (
 
 **ECU**管理器模块在**WakeupRestart**序列中调用**EcuM_AL_DriverRestart**（可参见章节[6.5.5 WakeupRestart序列中的活动](#655-wakeuprestart序列中的活动)）。
 
-**ECU**管理器模块配置工具应根据**EcuMDriverRestartList**配置容器中定义的模块序列，生成**EcuM_AL_DriverRestart** Callout的默认实现。另请参阅章节[6.3.5 驱动程序初始化](#635-驱动程序初始化)。
+**ECU**管理器模块配置工具应根据[**EcuMDriverRestartList**](#918-ecumdriverrestartlist)配置容器中定义的模块序列，生成**EcuM_AL_DriverRestart** Callout的默认实现。另请参阅章节[6.3.5 驱动程序初始化](#635-驱动程序初始化)。
 
 #### 7.5.5. UP阶段的Callout函数
 
@@ -2338,7 +2338,7 @@ void EcuM_MainFunction (
 
 ##### 7.7.2.1. STARTUP阶段的回调函数
 
-**EcuM_AL_DriverInitBswM_\<x\>**回调函数的定义：
+**EcuM_AL_DriverInitBswM_&lt;x&gt;**回调函数的定义：
 
 **说明**: 此回调函数应提供由**BSW**模式管理器调用的**BSW**模块初始化。服务ID [十六进制]：0x28。本服务为同步调用，不可重入。输入参数：无；输入输出参数：无；输出参数：无；返回值：无。可通过**EcuM.h**获得。
 
@@ -2346,9 +2346,9 @@ void EcuM_MainFunction (
 void EcuM_AL_DriverInitBswM_<x> ( void )
 ```
 
-**EcuM_AL_DriverInitBswM_\<x\>**回调函数在初始化期间由**BSW**模式管理器调用。**ECU**管理器模块的配置工具必须根据**EcuMDriverInitListBswM**配置容器中定义的模块序列，生成**EcuM_AL_DriverInitBswM_\<x\>**回调函数的默认实现。
+**EcuM_AL_DriverInitBswM_&lt;x&gt;**回调函数在初始化期间由**BSW**模式管理器调用。**ECU**管理器模块的配置工具必须根据[**EcuMDriverInitListBswM**](#925-ecumdriverinitlistbswm)配置容器中定义的模块序列，生成**EcuM_AL_DriverInitBswM_&lt;x&gt;**回调函数的默认实现。
 
-应为每个已配置的**EcuMDriverInitListBswM**生成**EcuM_AL_DriverInitBswM_\<x\>**。所生成函数的名称应为**EcuM_AL_DriverInitBswM_\<x\>**，其中**\<x\>**代表**EcuMDriverInitListBswM**容器的短名称（**short name**）。
+应为每个已配置的[**EcuMDriverInitListBswM**](#925-ecumdriverinitlistbswm)生成**EcuM_AL_DriverInitBswM_&lt;x&gt;**。所生成函数的名称应为**EcuM_AL_DriverInitBswM_&lt;x&gt;**，其中**&lt;x&gt;**代表[**EcuMDriverInitListBswM**](#925-ecumdriverinitlistbswm)容器的短名称（**short name**）。
 
 
 ### 7.8. 端口接口规范
@@ -2495,7 +2495,7 @@ void EcuM_AL_DriverInitBswM_<x> ( void )
 
 ##### 7.8.3.1. 总体方法
 
-想要使用闹钟（**alarm clock**）的**SW-C**必须请求客户端-服务器接口**EcuM_AlarmClock**。**EcuM_AlarmClock**接口使用端口定义的参数值（**port-defined argument values**）来标识管理其闹钟的用户。关于端口定义的参数值的描述，请参见RTE规范[2](#ref-2)。
+想要使用闹钟（**alarm clock**）的**SW-C**必须请求客户端-服务器接口**EcuM_AlarmClock**。**EcuM_AlarmClock**接口使用端口定义的参数值（**port-defined argument values**）来标识管理其闹钟的用户。关于端口定义的参数值的描述，请参见RTE规范[\[2\]](#ref-2)。
 
 ##### 7.8.3.2. 服务接口
 
@@ -2506,7 +2506,7 @@ void EcuM_AL_DriverInitBswM_<x> ( void )
 | 名称 | EcuM_AlarmClock |
 | 注释 | 想要使用闹钟的**SW-C**必须使用客户端-服务器接口EcuM_AlarmClock |
 | IsService | true |
-| 变体 | {ecuc(EcuM/EcuMFlexGeneral/EcuMAlarmClockPresent)} == True |
+| 变体 | {ecuc(EcuM/[EcuMFlexGeneral](#921-ecumflexgeneral)/EcuMAlarmClockPresent)} == True |
 | 可能的错误 | E_OK：操作成功<br>E_NOT_OK：操作失败<br>ECUM_E_EARLIER_ACTIVE：已设置了一个更早的闹钟<br>ECUM_E_PAST：所期望的时间点已经过去<br>ECUM_E_NOT_ACTIVE：未找到处于活动状态的闹钟 |
 
 
@@ -2620,7 +2620,7 @@ void EcuM_AL_DriverInitBswM_<x> ( void )
 
 ##### 7.8.5.1. 总体方法
 
-需要保持**ECU**存活（**keep alive**）或需要在**ECU**关闭之前执行任何操作的**SW-C**应要求（**require**）客户端-服务器接口（**client-server interface**）**EcuM_StateRequest**。该接口使用端口定义的参数值（**port-defined argument values**）来标识请求模式的用户。端口定义的参数值的说明参见RTE规范[2](#ref-2)。
+需要保持**ECU**存活（**keep alive**）或需要在**ECU**关闭之前执行任何操作的**SW-C**应要求（**require**）客户端-服务器接口（**client-server interface**）**EcuM_StateRequest**。该接口使用端口定义的参数值（**port-defined argument values**）来标识请求模式的用户。端口定义的参数值的说明参见RTE规范[\[2\]](#ref-2)。
 
 ##### 7.8.5.2. 数据类型
 
@@ -2732,7 +2732,7 @@ ModeSwitchInterface **EcuM_CurrentMode**的定义：
 | 种类（Kind） | 提供端口（ProvidedPort） |
 | 接口（Interface） | EcuM_ShutdownTarget |
 | 描述（Description） | 为**SW-C**提供选择新关机目标（**shutdown target**）和查询当前关机目标的接口。 |
-| 变体（Variation） | UserName = {ecuc(EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMFlexUserConfig/EcuMFlexUser.SHORT-NAME)} |
+| 变体（Variation） | UserName = {ecuc(EcuM/[EcuMConfiguration](#913-ecumconfiguration)/[EcuMFlexConfiguration](#922-ecumflexconfiguration)/[EcuMFlexUserConfig](#924-ecumflexuserconfig)/EcuMFlexUser.SHORT-NAME)} |
 
 
 **EcuM模块提供的端口BootTarget_{UserName}的定义**：
@@ -2742,7 +2742,7 @@ ModeSwitchInterface **EcuM_CurrentMode**的定义：
 | 种类（Kind） | 提供端口（ProvidedPort） |
 | 接口（Interface） | EcuM_BootTarget |
 | 描述（Description） | 为**SW-C**提供选择新引导目标（**boot target**）和查询当前引导目标的接口。 |
-| 变体（Variation） | UserName = {ecuc(EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMFlexUserConfig/EcuMFlexUser.SHORT-NAME)} |
+| 变体（Variation） | UserName = {ecuc(EcuM/[EcuMConfiguration](#913-ecumconfiguration)/[EcuMFlexConfiguration](#922-ecumflexconfiguration)/[EcuMFlexUserConfig](#924-ecumflexuserconfig)/EcuMFlexUser.SHORT-NAME)} |
 
 **EcuM模块提供的端口AlarmClock_{UserName}的定义**：
 
@@ -2752,8 +2752,8 @@ ModeSwitchInterface **EcuM_CurrentMode**的定义：
 | 接口（Interface） | EcuM_AlarmClock |
 | 描述（Description） | 向**SW-C**提供一个闹钟（**alarm clock**）。EcuM_AlarmClock端口使用端口定义的参数值来标识管理其闹钟的用户。 |
 | 端口定义的参数值（Port Defined Argument Value(s)）— 类型（Type） | EcuM_UserType |
-| 端口定义的参数值（Port Defined Argument Value(s)）— 值（Value） | {ecuc(EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMFlexUserConfig/EcuMFlexUser.value)} |
-| 变体（Variation） | {ecuc(EcuM/EcuMFlexGeneral/EcuMAlarmClockPresent)} == true；UserName = {ecuc(EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMAlarmClock.SHORT-NAME)} |
+| 端口定义的参数值（Port Defined Argument Value(s)）— 值（Value） | {ecuc(EcuM/[EcuMConfiguration](#913-ecumconfiguration)/[EcuMFlexConfiguration](#922-ecumflexconfiguration)/[EcuMFlexUserConfig](#924-ecumflexuserconfig)/EcuMFlexUser.value)} |
+| 变体（Variation） | {ecuc(EcuM/[EcuMFlexGeneral](#921-ecumflexgeneral)/EcuMAlarmClockPresent)} == true；UserName = {ecuc(EcuM/[EcuMConfiguration](#913-ecumconfiguration)/[EcuMFlexConfiguration](#922-ecumflexconfiguration)/[EcuMAlarmClock](#923-ecumalarmclock).SHORT-NAME)} |
 
 **EcuM模块提供的端口time的定义**：
 
@@ -2772,8 +2772,8 @@ ModeSwitchInterface **EcuM_CurrentMode**的定义：
 | 接口（Interface） | EcuM_StateRequest |
 | 描述（Description） | 为**SW-C**提供请求**ECU**状态（**ECU state**）变更的接口。该端口使用端口定义的参数值来标识用户。 |
 | 端口定义的参数值（Port Defined Argument Value(s)）— 类型（Type） | EcuM_UserType |
-| 端口定义的参数值（Port Defined Argument Value(s)）— 值（Value） | {ecuc(EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMFlexUserConfig/EcuMFlexUser.value)} |
-| 变体（Variation） | UserName = {ecuc(EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMFlexUserConfig/EcuMFlexUser.SHORT-NAME)} |
+| 端口定义的参数值（Port Defined Argument Value(s)）— 值（Value） | {ecuc(EcuM/[EcuMConfiguration](#913-ecumconfiguration)/[EcuMFlexConfiguration](#922-ecumflexconfiguration)/[EcuMFlexUserConfig](#924-ecumflexuserconfig)/EcuMFlexUser.value)} |
+| 变体（Variation） | UserName = {ecuc(EcuM/[EcuMConfiguration](#913-ecumconfiguration)/[EcuMFlexConfiguration](#922-ecumflexconfiguration)/[EcuMFlexUserConfig](#924-ecumflexuserconfig)/EcuMFlexUser.SHORT-NAME)} |
 
 
 **EcuM模块提供的端口currentMode的定义**：
@@ -2841,8 +2841,8 @@ ModeSwitchInterface **EcuM_CurrentMode**的定义：
 |---|---|
 | 种类（Kind） | Type |
 | 派生自（Derived from） | uint16 |
-| 取值范围（Range） | {ecuc(EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMResetMode.SHORT-NAME)}：{256 + ecuc(EcuM/EcuMConfiguration/EcuMFlexConfiguration/EcuMResetMode.EcuMResetModeId)} — 配置的复位模式（**Reset Modes**） |
-| 取值范围（Range） | {ecuc(EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMSleepMode.SHORT-NAME)}：{ecuc(EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMSleepMode.EcuMSleepModeId)} — 配置的睡眠模式（**Sleep Modes**） |
+| 取值范围（Range） | {ecuc(EcuM/[EcuMConfiguration](#913-ecumconfiguration)/[EcuMFlexConfiguration](#922-ecumflexconfiguration)/[EcuMResetMode](#927-ecumresetmode).SHORT-NAME)}：{256 + ecuc(EcuM/[EcuMConfiguration](#913-ecumconfiguration)/[EcuMFlexConfiguration](#922-ecumflexconfiguration)/[EcuMResetMode](#927-ecumresetmode).EcuMResetModeId)} — 配置的复位模式（**Reset Modes**） |
+| 取值范围（Range） | {ecuc(EcuM/[EcuMConfiguration](#913-ecumconfiguration)/[EcuMCommonConfiguration](#914-ecumcommonconfiguration)/[EcuMSleepMode](#9110-ecumsleepmode).SHORT-NAME)}：{ecuc(EcuM/[EcuMConfiguration](#913-ecumconfiguration)/[EcuMCommonConfiguration](#914-ecumcommonconfiguration)/[EcuMSleepMode](#9110-ecumsleepmode).EcuMSleepModeId)} — 配置的睡眠模式（**Sleep Modes**） |
 | 描述（Description） | 此数据类型表示**ECU**管理器模块的模式。 |
 | 变体（Variation） | - |
 | 提供途径（Available via） | Rte_EcuM_Type.h |
@@ -2909,7 +2909,7 @@ ModeSwitchInterface **EcuM_CurrentMode**的定义：
 
 #### 8.2.2. ICU 唤醒序列
 
-输入捕获单元（**ICU**）是另一种唤醒源。与 GPT 不同，ICU 驱动本身并不是唤醒源，它只是处理唤醒中断的模块。因此，只有唤醒源的驱动程序才能判断自己是否该为此次唤醒负责。这就使得 [EcuM_CheckWakeupHook](#7545-ecum_checkwakeuphook) 有必要去询问真正的唤醒源模块。为了知道该询问哪个模块，ICU 必须把唤醒源标识符传递给 [EcuM_CheckWakeup](#7351-ecum_checkwakeup)。对于共享中断，集成代码可能需要在 [EcuM_CheckWakeupHook](#7545-ecum_checkwakeuphook) 中检查多个唤醒源。为此，ICU 必须把可能引起该中断的所有唤醒源的标识符都传递给 [EcuM_CheckWakeup](#7351-ecum_checkwakeup)。注意，[EcuM_WakeupSourceType](#723-ecum_wakeupsourcetype)（见 7.2.3 节 [EcuM_WakeupSourceType](#723-ecum_wakeupsourcetype)）为每个唤醒源包含一个位，因此一次调用可以传递多个唤醒源。图 9.3 展示了由此产生的调用序列。由于 ICU 只负责处理唤醒中断，对 ICU 进行轮询并无意义；若要轮询，必须如图 38 所示直接检查唤醒源。
+输入捕获单元（**ICU**）是另一种唤醒源。与 GPT 不同，ICU 驱动本身并不是唤醒源，它只是处理唤醒中断的模块。因此，只有唤醒源的驱动程序才能判断自己是否该为此次唤醒负责。这就使得 [EcuM_CheckWakeupHook](#7545-ecum_checkwakeuphook) 有必要去询问真正的唤醒源模块。为了知道该询问哪个模块，ICU 必须把唤醒源标识符传递给 [EcuM_CheckWakeup](#7351-ecum_checkwakeup)。对于共享中断，集成代码可能需要在 [EcuM_CheckWakeupHook](#7545-ecum_checkwakeuphook) 中检查多个唤醒源。为此，ICU 必须把可能引起该中断的所有唤醒源的标识符都传递给 [EcuM_CheckWakeup](#7351-ecum_checkwakeup)。注意，[EcuM_WakeupSourceType](#723-ecum_wakeupsourcetype)（见 [7.2.3](#723-ecum_wakeupsourcetype) 节 [EcuM_WakeupSourceType](#723-ecum_wakeupsourcetype)）为每个唤醒源包含一个位，因此一次调用可以传递多个唤醒源。图 9.3 展示了由此产生的调用序列。由于 ICU 只负责处理唤醒中断，对 ICU 进行轮询并无意义；若要轮询，必须如图 38 所示直接检查唤醒源。
 
 ![Figure9-3.png](Figure9-3.png)
 
@@ -2931,7 +2931,7 @@ ModeSwitchInterface **EcuM_CurrentMode**的定义：
 
 图 9.4：CAN 收发器中断唤醒
 
-图 9.4 展示了 CAN 收发器经中断的唤醒。该中断通常按 8.2.2 节所述由 ICU 驱动处理。
+图 9.4 展示了 CAN 收发器经中断的唤醒。该中断通常按 [8.2.2](#822-icu-唤醒序列) 节所述由 ICU 驱动处理。
 
 CAN 控制器的中断唤醒与 GPT 唤醒类似：中断处理程序与 CheckWakeup 功能都封装在 CAN 驱动模块内，如图 9.5 所示。
 
@@ -2965,7 +2965,7 @@ CanIf 识别到成功接收至少一条报文后，将其记录为一次成功�
 
 #### 8.2.4. LIN 唤醒序列
 
-图 9.8 展示了 LIN 收发器经中断的唤醒。该中断通常按 8.2.2 节所述由 ICU 驱动处理。
+图 9.8 展示了 LIN 收发器经中断的唤醒。该中断通常按 [8.2.2](#822-icu-唤醒序列) 节所述由 ICU 驱动处理。
 
 ![Figure9-8.png](Figure9-8.png)
 
@@ -2987,7 +2987,7 @@ LIN 收发器和控制器都可以轮询唤醒。ECU 状态管理器模块会定
 
 #### 8.2.5. FlexRay 唤醒序列
 
-对于 FlexRay，唤醒只能经由 FlexRay 收发器进行。FlexRay 集群的两个不同通道各有一个收发器。它们被视为属于同一网络，因此两个通道应只配置一个唤醒源标识符。图 9.11 展示了 FlexRay 收发器经中断的唤醒。该中断通常按 8.2.2 节所述由 ICU 驱动处理。
+对于 FlexRay，唤醒只能经由 FlexRay 收发器进行。FlexRay 集群的两个不同通道各有一个收发器。它们被视为属于同一网络，因此两个通道应只配置一个唤醒源标识符。图 9.11 展示了 FlexRay 收发器经中断的唤醒。该中断通常按 [8.2.2](#822-icu-唤醒序列) 节所述由 ICU 驱动处理。
 
 ![Figure9-11.png](Figure9-11.png)
 

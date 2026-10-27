@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **41** 份已有站内文章）。
+共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **43** 份已有站内文章）。
 
 ## A
 
@@ -6169,25 +6169,25 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
 
 **Std_ExtractProtocolHeaderFieldsType**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_MessageResultType**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_MessageTypeType**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_ReturnType**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_TransformerError**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_TransformerForwardCode**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_VersionInfoType**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **StopScheduleTable**
 > 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
@@ -6753,31 +6753,31 @@ title: "AUTOSAR API 清单（函数与类型）"
 ## W
 
 **Wdg_ConfigType**
-> 类型 · 未翻译 · SWS_WatchdogDriver · R23-11
+> 类型 · [AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md) · SWS_WatchdogDriver · R23-11
 
 **Wdg_GetVersionInfo**
-> 函数 · 未翻译 · SWS_WatchdogDriver · R23-11
+> 函数 · [AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md) · SWS_WatchdogDriver · R23-11
 
 **Wdg_Init**
-> 函数 · 未翻译 · SWS_WatchdogDriver · R23-11
+> 函数 · [AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md) · SWS_WatchdogDriver · R23-11
 
 **Wdg_SetMode**
-> 函数 · 未翻译 · SWS_WatchdogDriver · R23-11
+> 函数 · [AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md) · SWS_WatchdogDriver · R23-11
 
 **Wdg_SetTriggerCondition**
-> 函数 · 未翻译 · SWS_WatchdogDriver · R23-11
+> 函数 · [AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md) · SWS_WatchdogDriver · R23-11
 
 **WdgIf_GetVersionInfo**
-> 函数 · 未翻译 · SWS_WatchdogInterface · R23-11
+> 函数 · [AUTOSAR Watchdog Interface（看门狗接口）](safety/watchdog_interface/index.md) · SWS_WatchdogInterface · R23-11
 
 **WdgIf_ModeType**
-> 类型 · 未翻译 · SWS_WatchdogInterface · R23-11
+> 类型 · [AUTOSAR Watchdog Interface（看门狗接口）](safety/watchdog_interface/index.md) · SWS_WatchdogInterface · R23-11
 
 **WdgIf_SetMode**
-> 函数 · 未翻译 · SWS_WatchdogInterface · R23-11
+> 函数 · [AUTOSAR Watchdog Interface（看门狗接口）](safety/watchdog_interface/index.md) · SWS_WatchdogInterface · R23-11
 
 **WdgIf_SetTriggerCondition**
-> 函数 · 未翻译 · SWS_WatchdogInterface · R23-11
+> 函数 · [AUTOSAR Watchdog Interface（看门狗接口）](safety/watchdog_interface/index.md) · SWS_WatchdogInterface · R23-11
 
 **WdgM_CheckpointReached**
 > 函数 · [AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md) · SWS_WatchdogManager · R23-11

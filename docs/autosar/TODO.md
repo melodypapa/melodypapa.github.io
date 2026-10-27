@@ -16,6 +16,8 @@
 - [ ] glossary.md: add the OS article's 46 §2.1 术语表 terms with 来源 attribution (one-term-once rule — check existing entries first); deferred because a parallel session was actively editing glossary.md during the run
 - [ ] prose `[n]` citation link decisions for operating_system (census 2026-10-26): [3] Glossary → site glossary ×2 (SITE class); [1] SRS_OS, [2] ISO 17356-3, [4] SWS_BSWGeneral, [5] EXP_VFB, [6] SRS_BSWGeneral, [7] ISO 17356-6 → EXTERNAL class, need curated official URLs (check 8) before linking
 
+- [x] ~~communication/index.md dead link~~ — fixed in this run (2026-10-27): the leftover link to can_network_management/r21_11 (page removed in 3e2fa4c) was deleted, clearing the strict-build WARNING
+
 **Fill depth (existing articles)**
 
 - [ ] 2026-10-25 tables-as-images retired (STANDARD.md §4 decision — source tables translate as GFM tables): 5 `![Table*.png]` refs remain — bswm 1 (Table7-1 BswMRuleInitState), dcm 1, data_distribution 1, time_service 2; EcuM ✅ (all 7 translated/deleted 2026-10-25), operating_system ✅ (Table7_1 deleted 2026-10-26, GFM table already present)
@@ -34,6 +36,7 @@
 - [ ] Link-audit fixes (2026-10-24 first site-wide external-URL curl; rule in STANDARD.md §4 / skill Phase A check 8): ethernet_driver §3.2 IEEE `getieee802` PDF 403 (directory retired; verify the ieeexplore number for 802.1AS-2011 in a browser before re-linking — note ethernet_interface's ieeexplore 8585421 is 802.1AE MACsec, a different document); data_distribution §3 OMG `DDS/1.4` http 500 (https same path 200 → upgrade to https); `https://www.iso.org` 403 (likely anti-bot, verify in a browser before acting); port.de timed out once then returned 200 on retry (lesson recorded in check 8: retry before declaring a link dead)
 - [ ] WdgM potential-link decisions (census 2026-10-26, report-only classes — apply is a user decision): cross-article module mentions — DEM ×6 → `../../diagnostics/diagnostic_event_manager/`, EcuM ×1 → `../ecu_state_manager/`, BswM ×1 → `../basic_software_mode_manager/` (Mcu ×14 and Det ×2 have no article yet); prose `[n]` citations — [4] *ECU 状态管理器规范* → SITE (EcuM article), [3] *基础软件模块通用规范* ×4 / [8] *MCU 驱动规范* / [9] *RTE 软件规范* / [1] IEC 61508 / [2] ISO 26262 → EXTERNAL, need curated official URLs (check 8) before linking
 - [ ] DIO potential-link decisions (improved census 2026-10-25, report-only classes — apply is a user decision): 10 × PORT-driver module mentions (§1/§5.1/§6 prose, rendered **PORT**/**Port**) → `../port_driver/`; [1] Glossary → site glossary (§2 intro; SITE class); [2] SWS_BSWGeneral → EXTERNAL, needs a curated official URL (cited in §3.2 and §6.6 intro); 11 × STD_HIGH/STD_LOW mentions stay prose (no corpus precedent for enum-value links); Det ×6 mentions unlinked — no Det article yet (see fill-breadth below)
+- [ ] Angle-bracket placeholder sweep (2026-10-27, STANDARD.md §4 + skill Phase A check 3): replace the broken `\<…\>` escaping with HTML entities `&lt;…&gt;` corpus-wide — python-markdown consumes `\>` but not `\<`, so every rendered `\<X\>` shows a stray `\` (found via `EcuM_SlaveCore\<X\>_Task`; EcuM article already fixed, 7 occurrences). Remaining 15 files / ~122 occurrences — iohwab ×53 (grew from ×23 when the R23-11 realignment PR #120 landed), pdu_router ×23, crypto_service_manager ×11, guide_to_mode_management ×9, pwm ×7, adc ×6, nvram ×4, gpt ×2, icu ×2, ethernet_interface ×2, com_based_transformer ×2, udp_nm/sec_oc/lin/SoAd ×1 each; **17 are in headings** (iohwab 6.1.x API names, com_based_transformer 5.x, udp_nm 7.3.1) — changing heading text changes Material slugs, so grep inbound `](…#…)` anchors site-wide and fix them in the same commit; never touch occurrences inside code fences/inline code
 
 **Fill breadth (new articles)**
 
@@ -42,7 +45,7 @@
 - [ ] Global time cluster: StbM + CanTSyn/EthTSyn/FrTSyn
 - [ ] Storage wrap-up: Ea, Eep
 - [ ] Libraries: Crc, E2E
-- [ ] Safety: WdgIf, Wdg
+- [x] ~~Safety: WdgIf, Wdg~~ — done 2026-10-27 (wdgif + wdg run)
 - [ ] Landing pages to add: crypto, memory, system_services, general, methodology_templates
 
 ## Overview
@@ -101,7 +104,7 @@
 
 - 📖 [AUTOSAR 术语表（TR Glossary）](foundation/general/tr_glossary/) — AUTOSAR_FO_TR_Glossary（Foundation · R23-11）（2026-10-24 翻译中：ch.2 缩略语 206 条 ✅；ch.4 术语定义 343 条分批进行；内容并入术语表页）
 
-- ⛔ [platform_types](../general/platform_types/) — SWS_StandardTypes (stub; front-matter title wrongly says ECU State Manager, nav label needs the same fix)
+- ✅ [Standard Types](../general/standard_types/) — SWS_StandardTypes (2026-10-27 full Type A translation from R23-11 replacing the 9-line stub: title fixed from the wrong "ECU State Manager" + mkdocs.yml nav label "EcuM" → "Standard Types"; §7 API = 7 type definitions + 5 symbol definitions + 函数定义 不适用, prose folds + literal bullets per the mcu/gpt style, Table 8.1 error codes as GFM; §8/§9 = 不适用 per source ch.9/10; appendix B 需求历史 with verbatim item-ID fences; Figure8-1 bit-layout extracted; source ch.5 "Software Architecture" → §5 软件架构 direct translation, empty 5.1 kept)
 
 ❌ Missing (3): SWS_BSWGeneral, SWS_PlatformTypes (a separate document from StandardTypes), SWS_CommunicationStackTypes
 
@@ -150,6 +153,8 @@
 ## safety
 
 - ✅ [WdgM 看门狗管理器](safety/watchdog_manager/index.md) — SWS_WatchdogManager (2026-10-26 full Type A translation from R23-11: new article + new safety section landing page + nav; ch.6 Requirements Tracing dropped per mandate, src ch.B *Not applicable requirements* dropped (the second droppable item); src ch.7 → §6 功能规格 (12 diagrams), src ch.8 → §7 API规范 (1 type + 10 functions + 期望接口 + 服务接口), src ch.9 → §8 时序图, src ch.10 → §9 配置规范 (21 containers, SWS 条目 cells filled with [ECUC_WdgM_*]); src annex A → §10 存活监督算法示例实现 (numbered continuation, 7 formulas restored from the R22-11 PDF); 35 figures; glossary.md extended by 36 terms + 6 来源 lines)
+- ✅ [WdgIf 看门狗接口](safety/watchdog_interface/index.md) — SWS_WatchdogInterface (2026-10-27 full Type A translation from R23-11: new article + nav `"WdgIf"` + safety landing row; src ch.7 → §6 功能规格 (2 dev errors WDGIF_E_PARAM_DEVICE/POINTER), src ch.8 → §7 API规范 (1 type WdgIf_ModeType + 3 functions + 2 implementation-hint code fences), src ch.9 → §8 时序图 (bare cross-ref to the watchdog driver spec), src ch.10 → §9 配置规范 (3 containers, SWS 条目 cells filled with [ECUC_WdgIf_*]); 1 figure (Figure10-1 config tree); no glossary additions — source ch.2 is a no-local-acronyms note; WdgIf_SetMode error-code section links to the wdg article once both merged)
+- ✅ [Wdg 看门狗驱动](safety/watchdog_driver/index.md) — SWS_WatchdogDriver (2026-10-27 full Type A translation from R23-11: new article + nav `"Wdg"` + safety landing row; src ch.7 → §6 功能规格 (5 subsections incl. 触发概念以支持窗口看门狗; 扩展生产错误 WDG_E_MODE_FAILED / WDG_E_DISABLE_REJECTED after mcu_driver house), src ch.8 → §7 API规范 (1 type Wdg_ConfigType + 4 functions), src ch.9 → §8 时序图 (Figure9-1/9-2), src ch.10 → §9 配置规范 (faithful source order incl. module table at the end + 9.2.2 WdgSettingsFast group; 17 ECUC tables with [ECUC_Wdg_*] cells); garbled WdgMaxTimeout description restored from the R22-11 PDF p.38; src app. B → ## B. fence-style per EcuM precedent; src ch.7.4 「(see Figure 2)」 kept as prose — Figure 2 absent in R22-11 PDF too; glossary.md +6 terms (DIP/Fast-Mode/Off-Mode/Slow-Mode/SPI/WDG) + DEM/DET 来源 lines)
 
 ## methodology_templates / template
 
@@ -161,7 +166,7 @@
 - **GlobalTime (4)**: SWS_SynchronizedTimeBaseManager (StbM), SWS_TimeSyncOverCAN (CanTSyn), SWS_TimeSyncOverEthernet (EthTSyn), SWS_TimeSyncOverFlexRay (FrTSyn)
 - **Libraries (9)**: SWS_CRCLibrary (Crc), SWS_E2ELibrary (E2E), SWS_BFXLibrary (Bfx), SWS_BSWMulticoreLibrary (Bmc), SWS_MFLLibrary (Mfl), SWS_MFXLibrary (Mfx), SWS_IFLLibrary (Ifl), SWS_IFXLibrary (Ifx), SWS_EFXLibrary (Efx)
 - **RTE / SWArch (2)**: SWS_RTE, SWS_ARTI
-- **Safety (2)**: SWS_WatchdogInterface (WdgIf), SWS_WatchdogDriver (Wdg)
+- ~~**Safety (2)**: SWS_WatchdogInterface (WdgIf), SWS_WatchdogDriver (Wdg)~~ — both translated 2026-10-27
 - **Security (2)**: SWS_Firewall, SWS_IntrusionDetectionSystemManager (IdsM)
 
 ## Missing EXP guides (20)
