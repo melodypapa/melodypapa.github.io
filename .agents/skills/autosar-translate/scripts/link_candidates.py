@@ -7,6 +7,13 @@ skill. See SKILL.md Step 5 "Potential links" and Phase A check 9.
 Usage:
   link_candidates.py --list <article.md>    # census only (no modification)
   link_candidates.py --apply <article.md>   # apply intra-article links
+  link_candidates.py --list --pdf [<source.pdf>|auto] <article.md>
+      # + PDF ground-truth section: the source PDF's own hyperlinks (LaTeX
+      # hyperref named destinations) read back with PyMuPDF — authoritative
+      # [n] -> document map, link targets the article has no anchor for,
+      # per-target link counts source vs article. Report-only; `auto` (or a
+      # bare --pdf) resolves the PDF from the front-matter spec/release under
+      # $AUTOSAR_STD_ROOT (default ~/Workspace/autosar_standard).
 
 Applied class (restoration of the source PDF's own hyperlinks):
   - type mentions      (identifier-titled ch.7 headings) -> that heading's
@@ -627,9 +634,412 @@ def apply_links(article: str, ref_skip=frozenset()):
     return out_text
 
 
+# --- PDF ground truth (--pdf, report-only) -----------------------------------
+# The applied classes above RESTORE the source PDF's own hyperlinks by
+# inference from the article. The source PDF carries them as LaTeX hyperref
+# named destinations whose NAME encodes the class — cite.KEY, ARApi:Name,
+# ARDataType:Name, AREcucContainer:Container[:Param], ARCSInterface:If:Code,
+# SWS_<Mod>_<id>, SRS_*, section.N.M / figure.N.M / table.N.M, Hfootnote.N —
+# and the markdown conversion drops every one of them (EcuM: 1,602
+# annotations, 0 external URLs, 0 survive in the .md). --pdf reads them back
+# as ground truth for the census: the authoritative [n] -> document map (by
+# cite KEY, not by title matching), which source link targets the article has
+# NO anchor for, and per-target link counts source vs article. Report-only
+# (user decision 2026-10-27): nothing here applies a link — any new applied
+# class (figure captions, config parameters, requirement ids) stays a user
+# decision recorded in the queue row.
+
+AUTOSAR_STD_ROOT = os.environ.get(
+    "AUTOSAR_STD_ROOT", os.path.expanduser("~/Workspace/autosar_standard"))
+
+# Source outline L1 chapter title -> article `## N.` title (Type A skeleton).
+# None = the chapter is dropped by Type A — its links are EXCLUDED, not
+# reported as gaps: ch.6 Requirements Tracing (需求可追溯性) and appendix A
+# Not applicable requirements (user decision 2026-10-25). Appendix B
+# (change history) is kept as `## B.`.
+PDF_CHAPTERS = [
+    (r"introduction", r"简介"),
+    (r"definitions|abbreviations|acronyms", r"定义|缩略语"),
+    (r"related documentation", r"相关文档"),
+    (r"constraints", r"约束"),
+    (r"dependencies", r"依赖"),
+    (r"requirements? trac", None),
+    (r"functional specification", r"功能规格"),
+    (r"api specification", r"API"),
+    (r"sequence (?:charts|diagrams)", r"时序图"),
+    (r"configuration specification", r"配置规范"),
+    (r"not applicable requirements", None),
+    (r"change history", r"变更历史"),
+]
+
+PDF_DEST = re.compile(
+    r"^(?:(?P<cite>cite\.(?P<key>.+))"
+    r"|(?P<ar>AR(?P<kind>[A-Za-z]+):(?P<rest>.+))"
+    r"|(?P<req>(?P<reqkind>SWS|SRS|ECUC)_[A-Za-z0-9]+_(?:NA_)?\d+)"
+    r"|(?P<sec>(?:chapter|section|subsection|subsubsection|paragraph)\.(?P<secnum>[A-Z0-9.]+))"
+    r"|(?P<cap>(?P<capkind>figure|table)\.(?P<capnum>[A-Z0-9.]+))"
+    r"|(?P<fn>Hfootnote\.\d+)"
+    r"|(?P<ext>(?:uri|file):.*))$")
+
+
+def pdf_source_path(article: str, arg: str):
+    """Explicit .pdf path, or 'auto': the front-matter spec/release resolve to
+    <AUTOSAR_STD_ROOT>/*/Releases/<release>/*/<spec>.pdf (Classic_Platform
+    and Foundation share that layout)."""
+    if arg and arg != "auto":
+        return arg if os.path.exists(arg) else None
+    import glob
+    lines = article.splitlines()
+    fm = "\n".join(lines[:front_matter_end(lines)])
+    spec = re.search(r"^spec:\s*(\S+)", fm, re.M)
+    rel = re.search(r"^release:\s*(\S+)", fm, re.M)
+    if not (spec and rel):
+        return None
+    hits = glob.glob(os.path.join(AUTOSAR_STD_ROOT, "*", "Releases",
+                                  rel.group(1), "*", spec.group(1) + ".pdf"))
+    return sorted(hits)[0] if hits else None
+
+
+def extract_pdf_links(pdf_path: str):
+    """All link annotations: [{page, text, dest}], outline [(lvl, title,
+    page)], page_count — or None when PyMuPDF is not importable. A
+    hyphen-wrapped identifier (EcuMDriver- / RestartList) and an
+    empty-text neighbour are two annotations for ONE link: merged when the
+    previous annotation on the page has the same destination."""
+    try:
+        import pymupdf
+    except ImportError:
+        try:
+            import fitz as pymupdf  # PyMuPDF < 1.24 import name
+        except ImportError:
+            return None
+    doc = pymupdf.open(pdf_path)
+    links = []
+    for pno in range(doc.page_count):
+        page = doc[pno]
+        for ln in page.get_links():
+            kind = ln.get("kind")
+            if kind == pymupdf.LINK_URI:
+                dest = "uri:" + (ln.get("uri") or "")
+            elif kind in (pymupdf.LINK_GOTOR, pymupdf.LINK_LAUNCH):
+                dest = "file:" + (ln.get("file") or "")
+            else:
+                dest = ln.get("nameddest") or ln.get("name") or ""
+            rect = pymupdf.Rect(ln["from"])
+            text = page.get_textbox(rect + (-1, -1, 1, 1)).strip().replace("\n", " ")
+            prev = links[-1] if links else None
+            if (prev and prev["page"] == pno + 1 and prev["dest"] == dest
+                    and (prev["text"].endswith("-") or not prev["text"] or not text)):
+                prev["text"] = (prev["text"].rstrip("-") + text) if prev["text"] else text
+                continue
+            links.append({"page": pno + 1, "text": text, "dest": dest})
+    outline = [(lvl, title, page) for (lvl, title, page) in doc.get_toc()]
+    return links, outline, doc.page_count
+
+
+def pdf_chapter_map(outline, lines, headings, page_count):
+    """Source outline L1 chapters -> [{num, title, pages:(first, last),
+    article: chapter number or None, reason}]. Mapping is by TITLE (the Type A
+    skeleton table), never by position — a dropped chapter shifts every later
+    number (EcuM source ch.7 Functional -> article §6)."""
+    art = [(num.rstrip("."), title) for (_i, lvl, num, title, _s) in headings if lvl == 2]
+    for ln in lines:  # lettered appendices — collect()'s heading regex needs a digit
+        m = re.match(r"^## ([A-Z])\.\s+(.+?)\s*$", ln)
+        if m:
+            art.append((m.group(1), m.group(2)))
+    l1 = [(t, p) for (lvl, t, p) in outline if lvl == 1]
+    chapters = []
+    for idx, (title, page) in enumerate(l1):
+        m = re.match(r"^([0-9]+|[A-Z])\s+(.*)$", title.strip())
+        num, name = (m.group(1), m.group(2)) if m else ("", title)
+        last = (l1[idx + 1][1] - 1) if idx + 1 < len(l1) else page_count
+        entry = {"num": num, "title": name, "pages": (page, last), "article": None, "reason": ""}
+        pat = next((a for (s, a) in PDF_CHAPTERS if re.search(s, name, re.I)), "")
+        if pat is None:
+            entry["reason"] = "dropped by Type A"
+        elif pat == "":
+            entry["reason"] = "unmapped title (links counted, numbers not mapped)"
+        else:
+            hit = next((n for (n, t) in art if re.search(pat, t)), None)
+            if hit is None and num.isalpha():
+                hit = next((n for (n, _t) in art if n == num), None)
+            if hit is None:
+                entry["reason"] = "article has no such chapter"
+            else:
+                entry["article"] = hit
+        chapters.append(entry)
+    return chapters
+
+
+def pdf_census(article: str, pdf_arg: str):
+    pdf_path = pdf_source_path(article, pdf_arg)
+    print(f"== PDF ground truth (report-only) ==")
+    if not pdf_path:
+        print(f"  source PDF not found ({pdf_arg}); front-matter spec/release"
+              f" resolve under {AUTOSAR_STD_ROOT}/*/Releases/<release>/*/")
+        return
+    got = extract_pdf_links(pdf_path)
+    if got is None:
+        print("  PyMuPDF not importable — `python3 -m pip install pymupdf` (the"
+              " mkdocs venv does not carry it; system python3 does)")
+        return
+    links, outline, page_count = got
+    lines, headings, defs, _, _ = collect(article)
+    sec_nums = sec_num_map(headings)
+    entries31 = parse_entries31(article)
+    chapters = pdf_chapter_map(outline, lines, headings, page_count)
+    print(f"  {pdf_path}")
+    print(f"  annotations: {len(links)} (after merging hyphen-wrapped/empty-text halves)")
+
+    body_start = chapters[0]["pages"][0] if chapters else 1
+    ch_of_page = {}
+    for ch in chapters:
+        for p in range(ch["pages"][0], ch["pages"][1] + 1):
+            ch_of_page[p] = ch
+    ch_map = {ch["num"]: ch["article"] for ch in chapters if ch["article"]}
+    cfg_src = next((ch for ch in chapters if re.search(r"configuration specification", ch["title"], re.I)), None)
+    cfg_first_page = cfg_src["pages"][0] if cfg_src else page_count + 1
+    print("  chapter map (source -> article): "
+          + ", ".join(f"{ch['num']}->{ch['article']}" for ch in chapters if ch["article"]))
+    dropped = [ch for ch in chapters if not ch["article"]]
+    if dropped:
+        print("  excluded source chapters: "
+              + "; ".join(f"{ch['num']} {ch['title'][:28]} pp.{ch['pages'][0]}-{ch['pages'][1]} ({ch['reason']})"
+                          for ch in dropped))
+
+    front = [l for l in links if l["page"] < body_start]
+    kept, excluded = [], []
+    for l in links:
+        if l["page"] < body_start:
+            continue
+        ch = ch_of_page.get(l["page"])
+        (kept if (ch is None or ch["article"] or "unmapped" in ch["reason"]) else excluded).append(l)
+    print(f"  front matter (TOC) links skipped: {len(front)}; excluded-chapter links: {len(excluded)}; "
+          f"body links analysed: {len(kept)}")
+
+    # --- caption inventory (captions keep SOURCE numbering: 图7.1 under §6) --
+    caps = set()
+    for ln in lines:
+        m = re.match(r"^\**\s*(图|表)\s*(\d+)[.\-](\d+)", ln)
+        if m:
+            caps.add(("figure" if m.group(1) == "图" else "table", f"{m.group(2)}.{m.group(3)}"))
+
+    def present(name):
+        return re.search(rf"(?<![A-Za-z0-9_]){re.escape(name)}(?![A-Za-z0-9_])", article) is not None
+
+    def art_num(src_num: str):
+        head, _, tail = src_num.partition(".")
+        a = ch_map.get(head)
+        return (a + ("." + tail if tail else "")) if a else None
+
+    cites = {}        # key -> Counter of [n] texts
+    cite_count = {}   # key -> links
+    ids = {}          # (class, name) -> [pre-config links, in-config links]
+    secs = {}         # src number -> count
+    capsrc = {}       # (kind, num) -> count
+    reqs = {}         # reqkind -> {id: count}
+    fns = 0
+    ext = []
+    other = {}
+    for l in kept:
+        m = PDF_DEST.match(l["dest"])
+        if not m:
+            other[l["dest"]] = other.get(l["dest"], 0) + 1
+            continue
+        if m.group("cite"):
+            key = m.group("key")
+            cite_count[key] = cite_count.get(key, 0) + 1
+            n = re.search(r"\[(\d+)\]", l["text"])
+            if n:
+                cites.setdefault(key, {})
+                cites[key][n.group(1)] = cites[key].get(n.group(1), 0) + 1
+        elif m.group("ar"):
+            kind, parts = m.group("kind"), m.group("rest").split(":")
+            if kind == "EcucContainer":
+                cls, name = (("config parameter", parts[1]) if len(parts) > 1 else ("config container", parts[0]))
+            elif kind == "Api":
+                cls, name = "function", parts[0]
+            elif kind == "DataType":
+                cls, name = "type", parts[0]
+            elif kind == "CSInterface":
+                cls, name = (("port-interface error code", parts[-1]) if len(parts) > 1
+                             else ("port interface", parts[0]))
+            elif kind == "ErrorCode":
+                cls, name = "development-error code", parts[-1]
+            else:
+                cls, name = f"AR{kind}", parts[-1]
+            slot = ids.setdefault((cls, name), [0, 0])
+            slot[1 if l["page"] >= cfg_first_page else 0] += 1
+        elif m.group("req"):
+            ch = ch_of_page.get(l["page"])
+            region = "appendix" if (ch and ch["num"].isalpha()) else "body"
+            d = reqs.setdefault((m.group("reqkind"), region), {})
+            d[m.group("req")] = d.get(m.group("req"), 0) + 1
+        elif m.group("sec"):
+            secs[m.group("secnum")] = secs.get(m.group("secnum"), 0) + 1
+        elif m.group("cap"):
+            k = (m.group("capkind"), m.group("capnum"))
+            capsrc[k] = capsrc.get(k, 0) + 1
+        elif m.group("fn"):
+            fns += 1
+        elif m.group("ext"):
+            ext.append(l)
+
+    # --- citations: authoritative numbering by cite KEY --------------------
+    print("  -- citations (cite.KEY = authoritative [n] -> document) --")
+    def norm(s):
+        s = re.sub(r"[^a-z0-9]", "", s.lower())
+        s = re.sub(r"^autosar", "", s)
+        return re.sub(r"^(cp|fo|ap)", "", s)
+    art_cite = {}  # n -> prose occurrences (linked or not; registry/fences/headings/译者注 excluded)
+    span = entries31_span(article)
+    fm_end = front_matter_end(lines)
+    fence = False
+    for i, ln in enumerate(lines):
+        if ln.startswith("```"):
+            fence = not fence
+            continue
+        if (fence or ln.startswith("#") or i < fm_end or (span and span[0] <= i < span[1])
+                or ln.lstrip().startswith("**译者注：**")):
+            continue
+        for m2 in re.finditer(r"\\?\[(\d+)(?:,\s*[^\]]+)?\\?\]", ln):
+            art_cite[m2.group(1)] = art_cite.get(m2.group(1), 0) + 1
+    seen_n = set()
+    for key, cnt in sorted(cite_count.items(), key=lambda kv: -kv[1]):
+        votes = cites.get(key, {})
+        inferred = ""
+        if votes:
+            n = max(votes, key=votes.get)
+        else:
+            # the link rectangle missed the bracket digits (Glossary citations
+            # inside ch.2 tables) — infer n from the registry entry whose doc
+            # id matches the cite key, flagged as inferred
+            n = next((k for k, (_t, d) in entries31.items() if d and norm(d) == norm(key)), "?")
+            inferred = " (n inferred from the registry doc id)" if n != "?" else ""
+        seen_n.add(n)
+        docid = "AUTOSAR_" + key.replace("-", "_")
+        cls, label, _t = classify_doc(key.rsplit("-", 1)[-1], docid)
+        ent = entries31.get(n)
+        if ent is None:
+            verdict = "registry has NO entry [%s]" % n
+        elif ent[1]:
+            verdict = "registry MATCH" if norm(ent[1]) == norm(key) else f"registry MISMATCH ({ent[1]})"
+        else:
+            verdict = "registry entry carries no doc id (unverified)"
+        print(f"    [{n}] {key} -> {cls}:{label or docid} | source x{cnt}, article prose x{art_cite.get(n, 0)}"
+              f" | {verdict}{inferred}")
+    extra = sorted((n for n in art_cite if n not in seen_n), key=int)
+    if extra:
+        print("    article-only numbers (no cite link in the source): "
+              + ", ".join(f"[{n}] x{art_cite[n]}" for n in extra))
+
+    # --- identifier classes: anchor resolution + count diff ----------------
+    print("  -- identifier link targets (resolution against the article's defs) --")
+    cfg_start = config_start(lines, headings)
+    module_container = next(
+        (title for (i, _lvl, _num, title, _slug) in headings
+         if cfg_start is not None and i >= cfg_start and IDENT.fullmatch(title)), None)
+    mentions = {}  # name -> occurrences in non-heading lines (code fences included)
+    fence = False
+    for ln in lines:
+        if ln.startswith("```"):
+            fence = not fence
+            continue
+        if ln.startswith("#"):
+            continue
+        for (_cls, name) in ids:
+            if name in ln and re.search(rf"(?<![A-Za-z0-9_]){re.escape(name)}(?![A-Za-z0-9_])", ln):
+                mentions[name] = mentions.get(name, 0) + 1
+    by_cls = {}
+    for (cls, name), (pre, cfg) in ids.items():
+        by_cls.setdefault(cls, []).append((name, pre, cfg))
+    fewer_mentions = []
+    by_rule = 0
+    for cls in ("function", "type", "development-error code", "config container",
+                "config parameter", "port interface", "port-interface error code"):
+        rows = by_cls.pop(cls, None)
+        if not rows:
+            continue
+        module = [r for r in rows if r[0] == module_container]
+        rows = [r for r in rows if r[0] != module_container]
+        anchored = [r for r in rows if r[0] in defs]
+        anchorless = [r for r in rows if r[0] not in defs and present(r[0])]
+        absent = [r for r in rows if r[0] not in defs and not present(r[0])]
+        total = sum(p + c for (_n, p, c) in rows)
+        print(f"    {cls}: {total} links -> {len(rows)} targets; anchored {len(anchored)},"
+              f" anchor-less {len(anchorless)}, absent {len(absent)}"
+              + (f"; + module-named top container {module[0][0]} x{module[0][1] + module[0][2]}"
+                 " (never a target, by rule)" if module else ""))
+        if anchorless:
+            print("      anchor-less (present in the article, no identifier-titled heading — report-only): "
+                  + ", ".join(f"{n} x{p + c}" for (n, p, c) in sorted(anchorless, key=lambda r: -(r[1] + r[2]))))
+        if absent:
+            print("      ABSENT from the article (content check): "
+                  + ", ".join(f"{n} x{p + c}" for (n, p, c) in sorted(absent, key=lambda r: -(r[1] + r[2]))))
+        for (name, pre, cfg) in anchored:
+            art_links = len(re.findall(rf"\]\(#{re.escape(defs[name])}\)", article))
+            if pre > mentions.get(name, 0):
+                fewer_mentions.append((name, pre, mentions.get(name, 0), art_links))
+            elif pre > art_links:
+                by_rule += 1
+    for cls, rows in sorted(by_cls.items()):
+        print(f"    {cls}: {sum(p + c for (_n, p, c) in rows)} links -> "
+              + ", ".join(f"{n}{'' if n in defs else ' (no anchor)'}" for (n, _p, _c) in rows[:8]))
+    print(f"    count diff (pre-配置规范 source links vs article): {by_rule} anchored targets have"
+          " fewer article LINKS than source links but at least as many MENTIONS (code fences /")
+    print("    own defining section — unlinked by rule, nothing to do); targets with fewer")
+    print("    MENTIONS than source links (translation dropped a mention, or a mention sits in")
+    print("    a heading — content check):" + ("" if fewer_mentions else " none"))
+    for (name, pre, ment, art_links) in sorted(fewer_mentions, key=lambda r: -(r[1] - r[2]))[:15]:
+        print(f"      {name}: source {pre} vs article mentions {ment} (links {art_links})")
+
+    # --- section / caption refs -------------------------------------------
+    res = unres = 0
+    unres_list = []
+    for num, cnt in secs.items():
+        a = art_num(num)
+        if a and a in sec_nums:
+            res += cnt
+        else:
+            unres += cnt
+            unres_list.append(f"{num}->{a or '?'}")
+    print(f"  -- section refs: {res} resolve to an article heading via the chapter map, {unres} do not"
+          + (f" ({', '.join(sorted(set(unres_list))[:12])})" if unres_list else ""))
+    have = [k for k in capsrc if k in caps or (art_num(k[1]) and (k[0], art_num(k[1])) in caps)]
+    miss = sorted(k for k in capsrc if k not in have)
+    print(f"  -- figure/table refs: {sum(capsrc.values())} links -> {len(capsrc)} captions;"
+          f" {len(have)} captions exist in the article (anchor-less by rule — report-only),"
+          f" {len(miss)} have no caption")
+    if miss:
+        print("      no caption (dropped figure, or a caption the article lacks — content check): "
+              + ", ".join(f"{k[0]} {k[1]}" for k in miss))
+
+    # --- requirement ids / footnotes / external ------------------------------
+    body_end = next((i for i, ln in enumerate(lines) if re.match(r"^## [A-Z]\.", ln)), len(lines))
+    for (rk, region), d in sorted(reqs.items()):
+        total = sum(d.values())
+        if rk == "SRS":
+            print(f"  -- SRS refs ({region}): {total} links -> {len(d)} ids; target the Requirements"
+                  " Tracing chapter, dropped by Type A (dead class)")
+            continue
+        text = "\n".join(lines[:body_end] if region == "body" else lines[body_end:])
+        hits = sum(len(re.findall(rf"\[{re.escape(rid)}\]", text)) for rid in d)
+        print(f"  -- {rk} requirement-id refs ({region}): {total} links -> {len(d)} ids; the article's"
+              f" {region} carries {hits} bracketed mentions of them; no requirement anchor class"
+              " exists (report-only)")
+    if fns:
+        print(f"  -- footnote refs: {fns} links; article <sup> markers: "
+              f"{len(re.findall(r'<sup>\d+</sup>', article))} (anchor-less — report-only)")
+    if ext:
+        print(f"  -- EXTERNAL links in the source: {len(ext)} (check 8 applies): "
+              + ", ".join(sorted({l['dest'] for l in ext}))[:300])
+    if other:
+        print("  -- other destinations: " + ", ".join(f"{k} x{v}" for k, v in sorted(other.items(), key=lambda kv: -kv[1])[:10]))
+
+
 if __name__ == "__main__":
     args = sys.argv[1:]
-    mode = path = None
+    mode = path = pdf_arg = None
     ref_skip = set()
     i = 0
     while i < len(args):
@@ -638,6 +1048,14 @@ if __name__ == "__main__":
             ref_skip |= {s.strip() for s in args[i].split(",") if s.strip()}
         elif args[i] in ("--list", "--apply"):
             mode = args[i]
+        elif args[i] == "--pdf":
+            # optional value: an explicit .pdf path or "auto" (front-matter
+            # spec/release lookup); a bare --pdf means auto
+            if i + 1 < len(args) and (args[i + 1].lower().endswith(".pdf") or args[i + 1] == "auto"):
+                i += 1
+                pdf_arg = args[i]
+            else:
+                pdf_arg = "auto"
         else:
             path = args[i]
         i += 1
@@ -647,9 +1065,13 @@ if __name__ == "__main__":
     article = open(path).read()
     if mode == "--list":
         census(article, self_dir=os.path.dirname(os.path.abspath(path)))
+        if pdf_arg:
+            pdf_census(article, pdf_arg)
     elif mode == "--apply":
         out = apply_links(article, ref_skip=ref_skip)
         open(path, "w").write(out)
+        if pdf_arg:
+            print("(--pdf is report-only; run --list --pdf for the ground-truth census)")
     else:
         print(__doc__)
         sys.exit(2)

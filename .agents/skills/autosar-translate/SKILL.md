@@ -310,6 +310,37 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
   <article>` (idempotent — re-running changes 0 lines; identifier/error-code
   links scan through 时序图 prose and stop before 配置规范 whose tables are
   definitional; citation-marker links scan the whole article).
+- **The source PDF is the ground truth for potential links (user decision
+  2026-10-27)** — the applied classes above restore hyperlinks the source PDF
+  carries as LaTeX hyperref named destinations whose NAME encodes the class
+  (`cite.FO-TR-Glossary`, `ARApi:EcuM_Init`, `ARDataType:…`,
+  `AREcucContainer:Container[:Param]`, `ARErrorCode:…`,
+  `ARCSInterface:If:Code`, `SWS_<Mod>_<id>`, `SRS_*`, `section.N.M`,
+  `figure.N.M`, `Hfootnote.N`); the markdown conversion drops every one of
+  them (EcuM: 1,602 annotations, 0 external URLs, 0 survive in the `.md`).
+  `link_candidates.py --list --pdf [auto|<source.pdf>] <article>` reads them
+  back with PyMuPDF (system `python3`, not the mkdocs venv; `auto` resolves
+  `$AUTOSAR_STD_ROOT/*/Releases/<release>/*/<spec>.pdf` from the front
+  matter) and appends a **report-only** census block: (a) the authoritative
+  `[n]`→document map by cite KEY — a `registry MISMATCH` is a §3.1
+  numbering/doc-id error to FIX, never a `--ref-skip` case (`--ref-skip`
+  stays for prose that names a *different* document than the entry, EcuM's
+  "ECU Configuration [5]"); the article-only list surfaces source typos
+  (EcuM `[23]`); (b) which source link targets the article has NO anchor
+  for: anchor-less = present but no identifier-titled heading (EcuM's six
+  §8.8 service-interface data types living in `§7.8.x.2 数据类型` tables, 42
+  source links; config parameters; port-interface codes), ABSENT = content
+  check; (c) a per-target count diff — fewer article MENTIONS than source
+  links is a content check, fewer LINKS with equal mentions is by rule (code
+  fences, own defining section); (d) section refs through the TITLE-based
+  source→article chapter map (the dropped ch.6 / appendix A shift every later
+  number — never map by position); (e) figure/table refs whose caption the
+  article lacks (dropped figures: EcuM 图7.15/7.17, 表7.9); (f) requirement-id
+  / SRS / footnote counts (dead or anchor-less classes). Nothing in that
+  block applies a link — figure captions, config parameters, requirement ids
+  and port-interface codes become applied classes only by a user decision
+  recorded in the queue row, and the module-named top container and 配置规范
+  tables stay excluded exactly as in `--apply`.
 - **Citation markers `[n]` mean "Related documentation, entry n"** — a
   two-hop reference: citation → §3.1 entry → an external document or a page
   on this site. **Hop 1 is an applied class (user decision 2026-10-26)**: the
@@ -494,7 +525,15 @@ before every commit, the second is evidence for the Step 8 confirmation.
    failed to activate for six runs when it lived only in Phase B prose — the
    counter exists so that cannot recur. `--apply` writes only the applied
    class; verify idempotency with a second run (0 lines changed) before
-   committing.
+   committing. **When the source PDF is at hand (every R23-11 SWS row —
+   `~/Workspace/autosar_standard/Classic_Platform/Releases/R23-11/`), run
+   `--list --pdf <article>` as well and record the PDF ground-truth block**:
+   `registry MATCH` on every cited `[n]` (a MISMATCH is a §3.1 fix, not a
+   `--ref-skip`), the anchor-less and ABSENT target lists, the count-diff
+   content checks and the no-caption figures/tables. ABSENT targets,
+   fewer-MENTIONS targets and no-caption figures are Phase A findings to
+   resolve or explain before the gate; anchor-less targets go to the queue
+   row as reported candidates (user decision 2026-10-27).
 
 **Phase B — automation-blind checks** (presented at the Step 8 gate as
 evidence, not asserted):
@@ -628,3 +667,4 @@ open.
 | Trusting the API chapter's shape without checking it entry by entry (PWM run 2026-10-24: ✅-rated article carried `Pwm_ChannelType` with the neighbor type's "8..32 bit" range, and a `PWM_FULL_POWER (0x00)` row that R23-11 does not define — it only exists from R25-11 on) | Silent infidelity in the chapter readers use as a lookup reference; a wrong Range or an unsourced enum value is indistinguishable from the standard to a site reader | Step 5 API-chapter rules: cell-by-cell type-table read; per-requirement function text mapping; Phase A check 7 `check_api_sync.py` for count/name/order; content-vs-source mismatches go to the user as decisions |
 | Realigning only the measurable chapters (ch.2/§3/API/new ch.8-9) and leaving a pre-existing §6 with legacy internal structure — the ADC article carried a topical 6.1.x layout under R23-11's Background-&-Rationale/Requirements convention, and its source 7.3 State Diagrams were never translated (found 2026-10-25) | The chapter-level coverage map passes while the body diverges from the source's structure; embedded diagram chapters get skipped as "figures" | Phase B: internal-structure verification per pre-existing chapter (see Coverage map); a realignment that cannot verify internal structure says so in its gate evidence |
 | Writing a rule as Phase B prose without a mechanical trigger (potential-links lived as a Phase B bullet for six runs — dio/port/pwm/ocu/icu/ecu/bswm — and was never executed once; its own "user decision" semantics made doing nothing always compliant) | Codified rules that only a gate presentation could surface get dropped when presentations lengthen; the omission is invisible in a deviations-framing | Any new rule gets (a) a tick-box in the step it executes in, and/or (b) a mechanical counter whose zero-output is explicit. Test rules at RUN level ("did a full sync execute it?"), not comprehension level |
+| Trusting the article-side link inference as complete (2026-10-27 EcuM analysis: six §8.8 service-interface data types with 42 source hyperlinks had no anchor and were invisible to every census because the defs collection only sees identifier-titled headings; the same census found 图7.15/7.17 and 表7.9 referenced but captionless) | Silent under-linking and dropped-figure gaps that no article-only check can detect — the heuristic can only confirm what the article already contains | Check 9 runs `--list --pdf` whenever the source PDF exists: the PDF's own named destinations are the ground truth; anchor-less/ABSENT targets and no-caption figures are reported per run (report-only — new applied classes remain user decisions) |
