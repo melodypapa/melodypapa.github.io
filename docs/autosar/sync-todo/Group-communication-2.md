@@ -8,13 +8,16 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 
 All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the order can be adjusted as needed.
 
-- [ ] spi (SWS_SPIHandlerDriver · R23-11 markdown · ❌ new article, short name Spi)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] spi (SWS_SPIHandlerDriver · R23-11 markdown · ❌ new article, short name Spi)
+  - Note: translated MANUALLY 2026-10-28 (no-subagent rule). Source 3009 lines; article `communication/spi_handler_driver/` 2048 lines. Directory = full-name convention (spi_handler_driver), nav label "Spi". Shape: ch.2 6 acronyms + 2.1 缩写 (EB/IB/ID) + 2.2 定义 (Channel/Job/Sequence/Data frame) · 3.1 "Input documents" → 输入文件 [1]–[14] / 3.2 不相关 / 3.3 · ch.6 traceability DROPPED · ch.7 → §6 (7.1 总览 with LEVEL 0/1/2, 7.2 一般行为 + 7.2.1 通道缓冲 + 7.2.2–7.2.5 level behaviours + 7.2.4.1/2, 7.3 调度建议, 7.4 错误分类 + 6.4.5.1 SPI_E_HARDWARE_ERROR per the extended-production-error table format) · ch.8 → §7 (8.1; 8.2 11 types; 8.3 14 functions — 8.3.10 Spi_GetVersionInfo's heading was lost in the conversion and recovered from the "## Note:" region; 8.4 无回调; 8.5 Spi_MainFunction_Handling; 8.6 期望接口 + 8.6.3 configurable interfaces Spi_JobEndNotification/Spi_SeqEndNotification as function-pointer entries; 8.7 错误检测 7.7.1–7.7.3) · ch.9 → §8 (12 figures; 21 subsections; the config-example tables per subsection kept as GFM) · ch.10 → §9 (10.1 folded into intro; 10 containers incl. SpiEcucPartitionRef/SpiKernelEcucPartitionRef partition params; Figure10_1–10_7; 10.4 配置概念 → 9.3 with Figure10_8) · ch.11 NA DROPPED · ch.12 Appendix → `## 10. 附录` (numbered continuation; the example table reconstructed from the R22-11 PDF — the conversion carries only a fragment in text, rest as an image 46aba32b, dropped)
+  - Note: garbled config cells completed from the R22-11 PDF: SpiDevErrorDetect (column-shuffled), SpiBaudrate ("communication baudrate…from Hz up to MHz"), SpiCsIdentifier ("symbolic name to identify the Chip Select allocated to this Job"); source truncations kept with ……: Spi_JobType table tail, SPI_BUSY/SEQ descriptions cut mid-sentence in the source, 7.1 intro tail, SpiCsSelection dependency cell tail, EB/IB dependency cells, 2 Job/Seq result-value descriptions, Spi_MainFunction intro, appendix lead sentence, 6.2.3/6.2.4 result-notification tails
+  - Note: Phase A — strict build exit 0 / 0 WARNING / no spi notices; numbered headings continuous §1–§10 (script-checked); hygiene 0 h1/{DRAFT}/`\<`/glyph/chrome, ECUC ids only in SWS 条目 cells (one prose mention converted to a section reference), SWS ids 0; 22 figure refs resolve; 说明 blocks 17 = 14 functions + 2 configurable + MainFunction; gen_api_list regenerated (Spi 11 types + 14 functions SITE-linked, --check 0); nav "Spi" + communication landing page updated; glossary +7 new terms (IB, EB, CS, MISO, MOSI, Sequence, Data frame) + 4 来源 appends (Channel/Job from the crypto section's one-term-once rule, DET, DEM); census/--apply: 19 chapter-ref links + 5 citation links + 14 anchors, idempotent re-run 0 lines
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion (new article, manual)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (src ch.1–5→§1–§5, ch.7→§6, ch.8→§7, ch.9→§8, ch.10→§9, ch.12→§10; ch.6 + ch.11 dropped; the 3-level scalability structure and IB/EB split verified section by section)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-crypto-sync · commit recorded in the follow-up row edit)
 - [ ] ldcom (SWS_LargeDataCOM · R23-11 markdown · ❌ new article, short name LdCom)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

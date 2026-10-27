@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **48** 份已有站内文章）。
+共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **49** 份已有站内文章）。
 
 ## A
 
@@ -5995,43 +5995,43 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_SOMEIPTransformer · R23-11
 
 **Spi_AsyncTransmit**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_Cancel**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_DeInit**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_GetHWUnitStatus**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_GetJobResult**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_GetSequenceResult**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_GetStatus**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_Init**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_ReadIB**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_SetAsyncMode**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_SetupEB**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_SyncTransmit**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_WriteIB**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **SpinlockIdType**
 > 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11

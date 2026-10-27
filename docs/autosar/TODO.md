@@ -52,16 +52,17 @@
 
 | Status | Count | Note |
 | --- | ---: | --- |
-| ✅ Type A-compliant | 20 | ready to use |
+| ✅ Type A-compliant | 21 | ready to use |
 | 🔶 Translated pending alignment | 8 | seven chapters present; legacy wording / forbidden-chapter residue |
 | ⚠️ Partial | 16 | missing ≥1 chapter (most miss the 「API规范」 chapter) |
 | ⛔ Stub | 4 | 9–19 lines only |
-| ❌ Missing (SWS) | 79 | R23-11 has 127 SWS docs in total; 48 covered (37.8%) |
+| ❌ Missing (SWS) | 78 | R23-11 has 127 SWS docs in total; 49 covered (38.6%) |
 | ❌ Missing (EXP) | 20 | R23-11 has 22 EXP docs in total; 2 covered |
 | 📖 Guide/topic | 8 | exempt from the Type A skeleton |
 
 ## communication
 
+- ✅ [SPI Handler/Driver（SPI 处理器/驱动程序）](spi_handler_driver/) — SWS_SPIHandlerDriver (new article 2026-10-28, full Type A: ch.2 3 缩写+4 定义, §6 三级可扩展功能/IB-EB/错误分类, §7 11 types/14 functions/2 configurable callbacks/错误检测, §8 时序图 12 figures, §9 10 containers + 配置概念, §10 附录 example table; 22 figures; links applied)
 - ✅ [CAN 网络管理](can_network_management/) — SWS_CANNetworkManagement (pending wording alignment: 7.3 「周期函数」→「调度函数」)
 - ✅ [UDP 网络管理](udp_network_management/) — SWS_UDPNetworkManagement → to fix: WeChat footer wrongly uses a `##` heading
 - 🔶 [CAN 驱动](can_driver/) — SWS_CANDriver (topic chapters "术语/优先级反转/CAN 硬件单元" + legacy wording)
@@ -84,7 +85,7 @@
 - 📖 [Full-CAN vs Basic-CAN](can_driver/full_can_vs_basic_can.md) — topic subpage
 - 📖 [CanNm R21-11 历史版](can_network_management/r21_11/index_r21_11.md) — historical snapshot
 
-❌ Missing (47): SWS_COM (Com), SWS_CANStateManager (CanSM), SWS_CANTransportLayer (CanTp), SWS_CANXLDriver, SWS_CANXLTransceiverDriver, SWS_TcpIp (TcpIp), SWS_SOMEIPTransformer (SomeIpXf), SWS_SOMEIPTransportProtocol (SomeIpTp), SWS_IPDUMultiplexer (IpduM), SWS_LargeDataCOM (LdCom), SWS_LSduRouter (LsDu), SWS_DiagnosticLogAndTrace (Dlt), SWS_DiagnosticOverIP (DoIp), SWS_XCP (XCP), SWS_SPIHandlerDriver (Spi), SWS_EthernetStateManager (EthSM), SWS_EthernetTransceiverDriver (EthTrcv), SWS_WirelessEthernetDriver, SWS_WirelessEthernetTransceiverDriver, SWS_NetworkManagementInterface (Nm), SWS_FlexRayDriver, SWS_FlexRayInterface, SWS_FlexRayNetworkManagement, SWS_FlexRayStateManager, SWS_FlexRayTransceiverDriver, SWS_FlexRayARTransportLayer, SWS_FlexRayISOTransportLayer, SWS_LINStateManager (LinSM), SWS_LINTransceiverDriver (LinTrcv), SWS_TTCANDriver, SWS_TTCANInterface, SWS_SAEJ1939NetworkManagement (J1939Nm), SWS_SAEJ1939RequestManager (J1939Rm), SWS_SAEJ1939TransportLayer (J1939Tp), SWS_IEEE1722TransportLayer, SWS_MACsecKeyAgreement, SWS_CellularV2XDriver, SWS_ChargingManager, SWS_ChineseV2XManagement, SWS_ChineseV2XMessage, SWS_ChineseV2XNetwork, SWS_ChineseV2XSecurity, SWS_V2XBasicTransport, SWS_V2XDataManager, SWS_V2XFacilities, SWS_V2XGeoNetworking, SWS_V2XManagement
+❌ Missing (46): SWS_COM (Com), SWS_CANStateManager (CanSM), SWS_CANTransportLayer (CanTp), SWS_CANXLDriver, SWS_CANXLTransceiverDriver, SWS_TcpIp (TcpIp), SWS_SOMEIPTransformer (SomeIpXf), SWS_SOMEIPTransportProtocol (SomeIpTp), SWS_IPDUMultiplexer (IpduM), SWS_LargeDataCOM (LdCom), SWS_LSduRouter (LsDu), SWS_DiagnosticLogAndTrace (Dlt), SWS_DiagnosticOverIP (DoIp), SWS_XCP (XCP), SWS_EthernetStateManager (EthSM), SWS_EthernetTransceiverDriver (EthTrcv), SWS_WirelessEthernetDriver, SWS_WirelessEthernetTransceiverDriver, SWS_NetworkManagementInterface (Nm), SWS_FlexRayDriver, SWS_FlexRayInterface, SWS_FlexRayNetworkManagement, SWS_FlexRayStateManager, SWS_FlexRayTransceiverDriver, SWS_FlexRayARTransportLayer, SWS_FlexRayISOTransportLayer, SWS_LINStateManager (LinSM), SWS_LINTransceiverDriver (LinTrcv), SWS_TTCANDriver, SWS_TTCANInterface, SWS_SAEJ1939NetworkManagement (J1939Nm), SWS_SAEJ1939RequestManager (J1939Rm), SWS_SAEJ1939TransportLayer (J1939Tp), SWS_IEEE1722TransportLayer, SWS_MACsecKeyAgreement, SWS_CellularV2XDriver, SWS_ChargingManager, SWS_ChineseV2XManagement, SWS_ChineseV2XMessage, SWS_ChineseV2XNetwork, SWS_ChineseV2XSecurity, SWS_V2XBasicTransport, SWS_V2XDataManager, SWS_V2XFacilities, SWS_V2XGeoNetworking, SWS_V2XManagement
 
 ## crypto
 
