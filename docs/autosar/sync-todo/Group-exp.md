@@ -85,13 +85,19 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
   - [x] Step 6 — TODO.md row + commit/PR
-- [ ] exp cdd_design_and_integration (AUTOSAR_EXP_CDDDesignAndIntegration · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] exp cdd_design_and_integration (AUTOSAR_CP_EXP_CDDDesignAndIntegrationGuideline · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
+  - Note: numbered prose EXP document, chapters 1–7 mirrored (CDD intro, design recommendations, per-module interfacing, multi-core, MCAL CDD)
+  - Note: references registry = ch.4 §4.1 (numbered differently from §3.1) — link_candidates.py _registry_sec extended: any x.1 subsection titled 输入文件 holding [n] entries now qualifies (script fix rides this branch)
+  - Note: census: 28 prose [n] citations linked (20 registry entries), 1 chapter ref, idempotent; cross-article mentions report-only (batch gate)
+  - Note: glossary +1 (CDD)
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] exp utilization_of_crypto_services (AUTOSAR_EXP_UtilizationOfCryptoServices · Crypto · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

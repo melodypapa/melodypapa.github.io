@@ -344,6 +344,14 @@ def _registry_sec(article: str):
     if not (sec and re.search(rf"^{REF_ANCHOR}\[\d+\]\s", sec.group(0), re.M)):
         # the 参考文献 section may be the article's last section (VFB ch.13 "References")
         sec = re.search(r"## 参考文献\n.*?(?=\n## |\Z)", article, re.S)
+    if not (sec and re.search(rf"^{REF_ANCHOR}\[\d+\]\s", sec.group(0), re.M)):
+        # EXP guides may number their input-documents registry differently
+        # (CDD guideline: ch.4 -> "### 4.1. 输入文件和相关标准与规范") — accept
+        # any x.1 subsection titled 输入文件 that actually holds [n] entries.
+        for m in re.finditer(r"### \d+\.1\.[^\n]*输入文件[^\n]*\n.*?(?=\n## )", article, re.S):
+            if re.search(rf"^{REF_ANCHOR}\[\d+\]\s", m.group(0), re.M):
+                sec = m
+                break
     return sec
 
 
