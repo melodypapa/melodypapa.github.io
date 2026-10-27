@@ -6169,25 +6169,25 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
 
 **Std_ExtractProtocolHeaderFieldsType**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_MessageResultType**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_MessageTypeType**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_ReturnType**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_TransformerError**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_TransformerForwardCode**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_VersionInfoType**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **StopScheduleTable**
 > 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
