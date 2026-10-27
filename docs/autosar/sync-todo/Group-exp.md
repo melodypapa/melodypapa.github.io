@@ -44,13 +44,20 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp bsw_distribution_guide (AUTOSAR_EXP_BSWDistributionGuide · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] exp bsw_distribution_guide (AUTOSAR_CP_EXP_BSWDistributionGuide · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
+  - Note: numbered prose EXP document, chapters 1–6 mirrored directly (2.x deep tree: multi-core BSW, MCAL distribution, Com-Stack/Crypto-Stack distribution, safety partitioning, outlook, glossary)
+  - Note: references chapter unnumbered `## 参考文献` (VFB precedent) so the [n] registry works; entries converted to plain [n]/>docid format (list-marker form is not parsed by the registry)
+  - Note: census: 17 chapter-number refs applied (idempotent); 6 prose [n] citations linked (5 registry entries); cross-article mentions report-only (EcuM/NvM/BswM/Dem SITE-class — batch gate); --pdf: 137 annotations, 1 article-only [1]
+  - Note: external URL https://www.iso.org ([3] ISO 26262) — known anti-bot 403 Backlog case, kept as plain text
+  - Note: glossary +2 (Master, Satellite)
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] exp application_level_error_handling (AUTOSAR_EXP_ApplicationLevelErrorHandling · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
