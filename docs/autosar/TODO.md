@@ -63,7 +63,7 @@
 
 ## communication
 
-- ✅ [CAN 网络管理](can_network_management/) — SWS_CANNetworkManagement (pending wording alignment: 7.3 「周期函数」→「调度函数」)
+- ✅ [CAN 网络管理](can_network_management/) — SWS_CANNetworkManagement (R23-11 realigned 2026-10-28: full §3.1 registry, §5/§6.11/§6.14–6.18/§7 completion, new §8 时序图/§9 配置规范/§10 示例)
 - ✅ [UDP 网络管理](udp_network_management/) — SWS_UDPNetworkManagement → to fix: WeChat footer wrongly uses a `##` heading
 - 🔶 [CAN 驱动](can_driver/) — SWS_CANDriver (topic chapters "术语/优先级反转/CAN 硬件单元" + legacy wording)
 - 🔶 [CAN 收发器驱动](can_transceiver_driver/) — SWS_CANTransceiverDriver (ch.1 is "介绍")
