@@ -92,7 +92,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks (evidence above)
   - [x] Step 4 — Phase B coverage map + fidelity (src ch.1–5→§1–§5, ch.7→§6, ch.8→§7, ch.9→§8, ch.10→§9, B→B section by section; ch.6 Requirements Tracing + appendix A dropped; the source's unnumbered 10.2.x headings numbered by PDF-TOC order; nested KeyMCertificateCustomService rendered as ##### 9.1.3.1.)
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end)
-  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-crypto-sync · commit recorded in the follow-up row edit)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-crypto-sync · commit 6e52dca, 2026-10-28; batch complete 4/4)
 
 ## Not queued (deliberately skipped)
 - (none)
