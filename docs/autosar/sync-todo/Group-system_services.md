@@ -25,14 +25,16 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity (src ch.1–5→§1–§5, ch.7→§6, ch.8→§7, ch.9→§8, ch.10→§9, B→B; ch.6 traceability + appendix A dropped; 5.1.1 re-leveled to ####; ch.1's 6 truncated lead sentences NOT repaired this run — they are pre-existing §1 prose, PDF recovery queued in the row note for a follow-up)
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end)
   - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-crypto-sync · commit recorded in the follow-up row edit)
-- [ ] time_service (SWS_TimeService · R23-11 markdown · 🔶 alignment)
-  - Note: delete the forbidden "配置规范" chapter; legacy ch.2 heading → "缩略语"
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] time_service (SWS_TimeService · R23-11 markdown · 🔶 alignment)
+  - Note: Step 1 (2026-10-28) — the row's original notes are STALE: (a) "delete the forbidden 配置规范 chapter" predates the 2026-10-24 ban lift — the source HAS ch.10 (Tm + TmGeneral) and TODO.md's corrected note (align per the config-spec rules) is followed; (b) "ch.2 heading → 缩略语" predates the 2026-10-25 direct-translation rule — the source heading is literally "Acronyms, abbreviations and terms", so the article's 「首字母缩略词、缩略语和术语」 IS the direct translation and was KEPT. The article (919 ln) also carried: an 11-entry pre-R23-11 §3.1 registry ([1] BSWModuleList … [11] GPT Driver + [12] IEC) vs R23-11's 4 entries — in-body citations [11]/[8] renumbered; 4.1 was 限制 while the source has 4.1 Assumptions/4.2 Limitations/4.3 Applicability; 6.4 had only 2 of 5 error classes and no intro; 7.4 Version check missing; §7 flat API without 导入的类型/类型定义/期望接口; no 时序图 chapter (source ch.9, Figure 9.1 = 15bdda33); legacy per-parameter 配置规范 chapter (superseded); Table3.png = source Table 7.1 as an image (tables-rule violation) and Table3_1.png a duplicate of an already-GFM table
+  - Note: Step 2 (manual) — §3 realigned (registry 4 entries, 3.2 相关标准与规范 removed as release drift, 3.3→3.2 相关规范); §4 restructured (4.1 假设 无假设 / 4.2 限制 with renumbered 4.2.1–4.2.3 / 4.3 汽车域的适用性 无限制); §5.1 heading "GPT。" → "GPT"; §6.4 completed (00063 intro + GFM tables incl. 00030 sentence + 6.4.3–6.4.5) + 6.5 版本检查; Table 7.1 → GFM with caption 表7.1 + duplicate image ref dropped; §7 realigned (7.1 导入的类型 3 rows, 7.2 4 type entries, existing 20 flat function entries renumbered 7.3.1–7.3.20 = source 8.3's flat shape, 7.4 回调通知 无 / 7.5 调度函数 无 / 7.6 期望接口 mandatory 2 + optional 1 + configurable None with the 8.6.3 intro completed from the R22-11 PDF "…because they are configurable"); ## 8. 时序图 (Figure9_1.png copied, caption dropped); ## 9. 配置规范 rebuilt in the container-table house style (Tm 00008 + TmGeneral 00001 with 6 params incl. TmVersionInfoApi description completed per source, Figure10_1.png copied) + 9.2 发布信息; ## B AUTOSAR 可追溯项变更历史 (B.1.1–B.1.3 all 无); legacy per-param ## 8 chapter deleted (superseded)
+  - Note: Phase A — strict build exit 0 / 0 WARNING (the one time_service INFO anchor from link_candidates' full-width-paren slug was hand-fixed to the Material slug); numbered headings continuous; 20 说明 blocks = 20 functions; ch.2 5 term lines; figure refs resolve (2 new + legacy figure1_1/2/3/4); glossary +4 terms (Time Service Predef Timer, Timer instance, Reference time, nop) + GPT Predef Timer 来源 append; census/--apply: 6 chapter refs + 4 citations converted, idempotent 0 lines
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion (article 919 → ~1,060 lines)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (src ch.1–5→§1–§5, ch.7→§6, ch.8→§7, ch.9→§8, ch.10→§9, B→B; ch.6 traceability + appendix A dropped)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-crypto-sync · commit recorded in the follow-up row edit)
 - [ ] comm (SWS_COMManager · R23-11 markdown · ❌ new article, short name ComM)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

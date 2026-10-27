@@ -52,8 +52,8 @@
 
 | Status | Count | Note |
 | --- | ---: | --- |
-| ✅ Type A-compliant | 19 | ready to use |
-| 🔶 Translated pending alignment | 9 | seven chapters present; legacy wording / forbidden-chapter residue |
+| ✅ Type A-compliant | 20 | ready to use |
+| 🔶 Translated pending alignment | 8 | seven chapters present; legacy wording / forbidden-chapter residue |
 | ⚠️ Partial | 16 | missing ≥1 chapter (most miss the 「API规范」 chapter) |
 | ⛔ Stub | 4 | 9–19 lines only |
 | ❌ Missing (SWS) | 79 | R23-11 has 127 SWS docs in total; 48 covered (37.8%) |
@@ -148,7 +148,7 @@
 
 - ✅ [Default Error Tracer（默认错误跟踪器）](default_error_tracer/) — SWS_DefaultErrorTracer (new article 2026-10-28, full Type A: 1 entry ch.2, §5.1 文件结构, §6 初始化/错误钩子/错误报告/错误分类, §7 API (1 type/6 functions/3 configurable callouts) + 服务接口 (DETService CSI + Det_<Name> 端口), §8 时序图 7 figures, §9 6 containers + 双 10.3/10.4 发布信息 (source quirk, both translated), appendix B 需求历史 with R22-11/R23-11 ID fences; identifier/citation links applied)
 - ✅ [FiM（功能禁止管理器）](function_inhibition_manager/) — SWS_FunctionInhibitionManager (2026-10-28 realignment+completion: 功能规格 heading, 4.2 汽车域的适用性, §5 realigned to source ch.5 (bullets + 5.1 需求/5.1.1 用例), §7 API realigned to source ch.8 groups (导入的类型/FiM_ConfigType/3 interface groups with all requirement bodies/回调/调度/期望接口) + §7.4 服务接口 (2 CSIs, FiM_FunctionIdType, 2 ports, internal behavior), 6.5 错误分类 + 6.6 配置约束 added, §8 时序图 (figures moved from §6 to their source positions + 9.2 prose), §9 配置规范 6 containers + Figure10_1–10_4 config overviews, appendix B; 9 citation links; legacy ECUC_FiM_00037 prose mention kept)
-- 🔶 [时间服务](time_service/) — SWS_TimeService (carries a legacy 「配置规范」 chapter — allowed since 2026-10-24, align per the config-spec rules; ch.2 legacy wording)
+- ✅ [时间服务](time_service/) — SWS_TimeService (2026-10-28 realignment+completion: §3 registry realigned to R23-11's 4 entries ([11]/[8] prose citations renumbered, stale [12]-[16] standards removed — release drift); 4.1 假设/4.2 限制 (renumbered)/4.3 汽车域的适用性; 6.4 got the 00063 intro + 6.4.3–6.4.5 + GFM error tables; 6.5 版本检查; Table 7.1 Predef-Timer characteristics converted from Table3.png to GFM (tables rule; Table3_1.png was a duplicate of an existing GFM table — dropped); §7 API realigned (7.1 导入的类型, 7.2 4 type entries, flat 7.3.1–7.3.20 kept = source 8.3 shape, 7.4 回调通知 无, 7.5 调度函数 无, 7.6 期望接口 2+1+None); ## 8. 时序图 (Figure9_1) + ## 9. 配置规范 (legacy per-param chapter replaced by the container-table house style, Tm+TmGeneral 6 params, Figure10_1) + appendix B; ch.2 heading 首字母缩略词、缩略语和术语 KEPT as the direct translation of the source heading (stale queue note wanted 缩略语 — decision recorded)
 - ✅ [OS](operating_system/) — SWS_OS · R23-11 (2026-10-26 full sync: §2.1 术语表 46 terms added, ch.7 completed to source end (7.7.2–7.17 incl. multi-core/IOC/ARTI), new ## 7. API规范 (22 types + 39 functions + IOC/期望接口/钩子/服务接口), ## 8. 时序图 (8 figures), ## 9. 配置规范 (Os×35 + IOC×5 + ARTI×20 containers + 发布信息), ## 10–13 (生成/应用说明/服务/展望 — ch.11–14 顺延 per user decision), ## B. 约束和规格项的历史; §3.1 realigned to source's 11-entry list; spec: → AUTOSAR_CP_SWS_OS; Table7_1.png retired; 55 figures; glossary.md OS terms pending — parallel-session conflict)
 
 ❌ Missing (4): SWS_COMManager (ComM), SWS_DefaultErrorTracer (Det), SWS_HWTestManager, SWS_SoftwareClusterConnection (SwCluC)
