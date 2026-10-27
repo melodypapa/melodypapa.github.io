@@ -144,6 +144,7 @@ nav:
       - "Crypto": autosar/crypto/crypto_driver/index.md
       - "CryIf": autosar/crypto/crypto_interface/index.md
       - "Csm": autosar/crypto/crypto_service_manager/index.md
+      - "KeyM": autosar/crypto/key_manager/index.md
     - 诊断（Diagnostics）:
       - autosar/diagnostics/index.md
       - "Dcm": autosar/diagnostics/diagnostic_communication_manager/index.md
