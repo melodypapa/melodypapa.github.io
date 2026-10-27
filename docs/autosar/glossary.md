@@ -115,6 +115,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 基础软件模式管理器（**Basic Software Mode Manager**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 
+**Bus Off**
+> CAN 总线的错误状态：CAN 控制器因错误计数达到上限而与总线脱离。CAN 状态管理器（CanSM）通过 Bus Off 恢复状态机进行恢复。
+> 来源：[错误描述](general/error_description/index.md)（AUTOSAR_CP_EXP_ErrorDescription · R23-11）
+
 **BSWMD**
 > 基础软件模块描述（**Basic Software Module Description**）
 > 来源：[AUTOSAR BSW General（基础软件模块通用规范）](general/bsw_general/index.md)（SWS_BSWGeneral · R23-11）
