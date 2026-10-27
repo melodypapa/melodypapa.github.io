@@ -41,7 +41,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A per user instruction 2026-10-27 "no confirmed one by one" — per-row gate waived; evidence in Notes)
-  - [x] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR (commit faa0806 on feature/comm-stack-types-sync; no push/PR — parent session handles GitHub)
 
 ## Not queued (deliberately skipped)
 - (none)
