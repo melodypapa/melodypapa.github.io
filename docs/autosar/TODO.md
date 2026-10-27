@@ -24,7 +24,7 @@
 - [ ] 5 ⚠️ articles missing only the 「API规范」 chapter: pdu_router, can_interface, crypto_driver, ethernet_interface, lin_interface (operating_system ✅ 2026-10-26)
 - [ ] The other 9 ⚠️ articles: complete their respective missing chapters (com_based_transformer, data_distribution, e2e_transformer, sec_oc, SoAd, mirror, dem, fee, dcm) — iohwab ✅ 2026-10-27; memory_access ✅ 2026-10-27
 - [ ] 4 ⛔ stubs: full translation (ethernet_switch_driver, service_discovery, memory_mapping, platform_types — platform_types also needs its front-matter title and nav label fixed in the same change)
-- [ ] 12 🔶 articles: align to Type A — flash_driver/time_service translate their legacy 「配置规范」 chapters in place (allowed since 2026-10-24; source ch.10 → article `## 8. 配置规范`); nvram drops the 「需求追踪」 chapter and fixes 「功能说明」; decide the fate of can_driver's topic chapters; unify remaining legacy wording to STANDARD.md terms
+- [ ] 12 🔶 articles: align to Type A — flash_driver/time_service translate their legacy 「配置规范」 chapters in place (allowed since 2026-10-24; source ch.10 → article `## 8. 配置规范`); nvram drops the 「需求追踪」 chapter and fixes 「功能说明」; unify remaining legacy wording to STANDARD.md terms
 - [ ] IO section ✅ articles' heading-wording alignment (DIO/Port/PWM/OCU/ICU done 2026-10-24; same-class deviations remain): adc 4.2 「适用车型域」→「汽车域的适用性」
 - [ ] 4.2 「适用于汽车领域」→「汽车域的适用性」 (named in STANDARD.md 2026-10-24): bswm, ecu_state_manager, crypto_driver, crypto_service_manager, data_distribution; 「对汽车领域的适用性」: ethernet_driver, can_interface; 「汽车领域的适用性」: nvram_manager
 - [ ] *Scheduled functions* unified to 「调度函数」 (named in STANDARD.md 2026-10-24): bswm 7.3 / can_network_management 7.3 「周期函数」, crypto_service_manager 7.12 「Scheduled 函数」
@@ -65,7 +65,7 @@
 
 - ✅ [CAN 网络管理](can_network_management/) — SWS_CANNetworkManagement (R23-11 realigned 2026-10-28: full §3.1 registry, §5/§6.11/§6.14–6.18/§7 completion, new §8 时序图/§9 配置规范/§10 示例)
 - ✅ [UDP 网络管理](udp_network_management/) — SWS_UDPNetworkManagement (R23-11 realigned 2026-10-28: footer fixed, ch.2/§3 rebuild, §5/§6.8/§6.10–6.17/§7 completion, new §8 时序图和转换表/§9 配置规范, appendix B)
-- 🔶 [CAN 驱动](can_driver/) — SWS_CANDriver (topic chapters "术语/优先级反转/CAN 硬件单元" + legacy wording)
+- ✅ [CAN 驱动](can_driver/) — SWS_CANDriver (R23-11 realigned 2026-10-28: former topic chapters folded into §2.1/2.2 per R23-11 structure; full §5–§9 completion)
 - 🔶 [CAN 收发器驱动](can_transceiver_driver/) — SWS_CANTransceiverDriver (ch.1 is "介绍")
 - 🔶 [以太网驱动](ethernet_driver/) — SWS_EthernetDriver (legacy wording)
 - 🔶 [LIN 驱动](lin_driver/) — SWS_LINDriver (legacy wording)

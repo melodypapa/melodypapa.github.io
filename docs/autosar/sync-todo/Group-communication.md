@@ -29,10 +29,11 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] can_driver (SWS_CANDriver · R23-11 markdown · 🔶 alignment)
   - Note: bespoke chapters (术语 / 优先级反转 / CAN 硬件单元) — keep-or-drop is a user decision; acronym blockquotes ✓
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-28 run — the keep-or-drop decision DISSOLVED: R23-11 puts Priority Inversion and CAN Hardware Unit as §2.1/§2.2 of the acronyms chapter; the article's bespoke ch.3/ch.4 moved there (content preserved incl. figures). ch.2 table → blockquotes (16 acronym rows + source order, added ISR/MCAL); §3 registry rebuilt to R23-11 9 entries (legacy 17+4-entry list + ISO/CiA standard entries dropped — R23-11 has NO input-documents chapter, 3.1 = Related specification only, direct translation 「相关规范」); §4.2 renamed; §5 renumbered + 5.1 静态配置/5.5 文件结构 added; §6 renumbered 8.x→6.x, 6.3.6/6.3.7 swapped to source order, new 6.8 selective wakeup, 6.12 error classification (7.12.1–7.12.6), 6.13 CAN FD rewritten to R23-11 text, new 6.14 CAN XL, 6.15 error reporting; §7 rebuilt (10 types, 17 functions in source's 3 service groups, callout, 5 scheduled — source's stray 8.4.2 placed as 7.4.2, unnamed 8.5.1 flattened, source's draft-tagged time-stamp APIs translated without {DRAFT}); §8 时序图 (both subsections = cross-refs, renumbered); §9 配置规范 (20 containers incl. CanTT*/CanXL*, SWS 条目 cells filled). check_api_sync = documented N/A (first grouped-function chapter: script counts source 8.3 group headings as functions); manual verification: 17 source functions (8.3.1.1-.3, 8.3.2.1-.13, 8.3.3.1) ↔ article 7.3.x in order, 10 types ✓, 17 **说明** blocks ✓. link_candidates --apply: 128 lines, idempotent. http://www.can-cia.org curl-checked 200. Steps 5/6 post-commit per user instruction
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] can_transceiver_driver (SWS_CANTransceiverDriver · R23-11 markdown · 🔶 alignment)
