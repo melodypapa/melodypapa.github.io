@@ -30,7 +30,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A per user instruction 2026-10-27 "no confirmed one by one" — per-row gate waived; evidence recorded in Notes and the PR)
-  - [x] Step 6 — TODO.md row + commit/PR (commit b0d9179 on feature/bsw-general-sync; no PR — parent session handles GitHub)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 2bc57c2 on feature/bsw-general-sync; no PR — parent session handles GitHub)
 - [ ] platform_types_2 (SWS_PlatformTypes · R23-11 markdown · ❌ new article)
   - Note: a different document from SWS_StandardTypes (noted in TODO.md); directory must not collide with platform_types (suggest `platform_types_std/`, or decide in Step 1 and propose to the user if unclear)
   - [ ] Step 1 — Source resolution + gap analysis
