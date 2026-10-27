@@ -98,13 +98,19 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
   - [x] Step 6 — TODO.md row + commit/PR
-- [ ] exp utilization_of_crypto_services (AUTOSAR_EXP_UtilizationOfCryptoServices · Crypto · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] exp utilization_of_crypto_services (AUTOSAR_CP_EXP_UtilizationOfCryptoServices · Crypto · ❌ new article · 📖 skeleton-exempt)
+  - Note: numbered prose EXP document, chapters 1–6 mirrored (crypto stack overview, usage aspects, MAC example); source has no Known-Limitations content (1.3 = 无限制, kept)
+  - Note: ch.2 terms table had a duplicated description column (conversion chrome) — collapsed to one column, row set kept
+  - Note: census: 9 prose [n] citations linked (4 registry entries), 1 chapter ref, idempotent; cross-article mentions report-only (CSM/CRYIF/CRYPTO intra-stack — no links, all same-stack)
+  - Note: glossary +3 (Crypto Driver Object, Crypto Primitive, Job)
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] exp macro_encapsulation_of_interpolation_calls (AUTOSAR_EXP_MacroEncapsulationofInterpolationCalls · Libraries · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

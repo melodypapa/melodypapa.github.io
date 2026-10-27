@@ -142,6 +142,7 @@ nav:
       - autosar/crypto/index.md
       - "Crypto": autosar/crypto/crypto_driver/index.md
       - "Csm": autosar/crypto/crypto_service_manager/index.md
+      - "加密服务使用指南": autosar/crypto/utilization_of_crypto_services/index.md
     - 诊断（Diagnostics）:
       - autosar/diagnostics/index.md
       - "Dcm": autosar/diagnostics/diagnostic_communication_manager/index.md
