@@ -12,7 +12,15 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 
 **Accuracy**
-> 精度（**Accuracy**）取决于用于采样或者生成的硬件外围设备。如：**ADC**转换器可以是 8/10/12/16 位转换器
+> 精度（**Accuracy**）取决于用于采样或者生成的硬件外围设备。如：**AEB**
+> 自主紧急制动（**Autonomous Emergency Braking**）。
+> 来源：[ADAS 与车辆运动控制接口](application_interfaces/adas_vmc/index.md)（AUTOSAR_CP_EXP_AIADASAndVMC · R23-11）
+
+**ACC**
+> 自适应巡航控制（**Adaptive Cruise Control**）。
+> 来源：[ADAS 与车辆运动控制接口](application_interfaces/adas_vmc/index.md)（AUTOSAR_CP_EXP_AIADASAndVMC · R23-11）
+
+**ADC**转换器可以是 8/10/12/16 位转换器
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
 
 **Acquisition Time**
@@ -455,6 +463,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 作业请求（**Job Request**）是指上层模块对地址区的存储访问请求。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
 
+**LKA**
+> 车道保持辅助（**Lane Keep Assist**）。
+> 来源：[ADAS 与车辆运动控制接口](application_interfaces/adas_vmc/index.md)（AUTOSAR_CP_EXP_AIADASAndVMC · R23-11）
+
 ## L
 
 
@@ -795,6 +807,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver · R23-11）
 ## V
 
+
+**VMC**
+> 车辆运动控制（**Vehicle Motion Control**）。
+> 来源：[ADAS 与车辆运动控制接口](application_interfaces/adas_vmc/index.md)（AUTOSAR_CP_EXP_AIADASAndVMC · R23-11）
 
 **VFB**
 > 虚拟功能总线（**Virtual Functional Bus**）。AUTOSAR 中允许组件相互交互的通信机制；应用被建模为相互连接的组件的组合，组件经由端口与端口接口交互。

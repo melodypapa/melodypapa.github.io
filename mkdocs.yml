@@ -201,9 +201,15 @@ nav:
     - RTE:
 
       - "RTE": autosar/rte/index.md
+<<<<<<< HEAD
     - 库（Libraries）:
       - autosar/libraries/index.md
       - "插值调用宏封装": autosar/libraries/macro_encapsulation_of_interpolation_calls/index.md
+=======
+    - 应用接口（Application Interfaces）:
+      - autosar/application_interfaces/index.md
+      - "ADAS 与车辆运动控制接口": autosar/application_interfaces/adas_vmc/index.md
+>>>>>>> 6d6e8d7 (docs: add ADAS/VMC interface guide + application interfaces section (R23-11))
     - 模板:
 
       - "1. 一段话总结": autosar/template/generic_structure/index.md
