@@ -20,10 +20,11 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] udp_network_management (SWS_UDPNetworkManagement · R23-11 markdown · ✅ alignment)
   - Note: WeChat footer `##` → `<section id="wechat">`+`<h4>`; acronym chapter table → blockquotes and restore the row set (source 26 → article 12)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-28 run — footer fixed; ch.2 rebuilt flat (15 acronyms + 10 terms = 25 entries; census note said 26, actual table rows 25); §3.1 rebuilt to R23-11 10 entries (legacy 25-entry pre-R23-11 list + legacy §3.2 相关标准和规范 [24][25] dropped — not in R23-11, user veto possible at gate); §4.2 汽车域的适用性 added (source N/A); §5.1/5.1.1/5.2 added; legacy 250-node paragraph in §4.1 kept (absent from R23-11, pending user decision); §6 completed: new 6.8.6 Internal Requested Clusters (legacy filter/EIRA/ERA 6.8.3-6.8.5 kept pending decision, can_driver precedent), new 6.10 API功能需求, 6.12 错误分类 (7.12.1-7.12.5), 6.13, 6.14, 6.15 版本检查, 6.16 参数检查, 6.17 安全事件 (车辆唤醒 6.10→6.11); §7 rebuilt house shape 7.1-7.8: imported types (incl. Std_Types list), 2 types, 22 entries in 函数定义 (incl. source 8.3.22 UdpNm_RepeatMessageIndication — a callback the source numbers under ch.8, kept in place), SoAdIfTriggerTransmit renamed from legacy TriggerTransmit, callbacks 3, scheduled (7.5.1 <Instance Id> with &lt;&gt;), expected/service interfaces, 7.8 UML状态图 (source 8.8, Figure8_1.png from artifacts 863x1041); new §8 时序图和转换表 (source ch.9 title, 9.2 = transition table + figure); new §9 配置规范 (source ch.10, 24+14 params, SWS 条目 cells filled per EcuM/Mcu precedent); new ## B appendix (R23-11 added/changed/deleted items in code fences; source's duplicated 10.2 intro paragraph translated once). link_candidates --apply: 36 lines, idempotent; PDF census registry MATCH on all [n]; appendix B SWS ids live in code fences (sanctioned data exception). Steps 5/6 post-commit per user instruction
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] can_driver (SWS_CANDriver · R23-11 markdown · 🔶 alignment)
