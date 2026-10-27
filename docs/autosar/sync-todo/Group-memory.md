@@ -6,7 +6,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 
 ## Queue
 
-- [ ] memory_access (SWS_MemoryAccess · R23-11 markdown · ⚠️ missing API chapter)
+- [x] memory_access (SWS_MemoryAccess · R23-11 markdown · ✅ Type A complete)
   - Note: missing "API 规范" chapter (one of the "6 articles missing only the API chapter"); 3.1 "输入文件及相关标准规范" → "输入文件"; 4.2 "适用于汽车领域" → "汽车域的适用性"
   - Note: step 1 run 2026-10-27 — source confirmed `E:\Workspace\autosar_standard\markdown\...\Memory\AUTOSAR_CP_SWS_MemoryAccess.md` (R23-11 markdown, 2616 lines). Scope is MUCH bigger than the queue note: the article is a stub stoppping empty at §6.3.2 — source 7.3.2 content + 7.3.3–7.6.5 (ch.7), ch.8 (API, 31 types + 19 functions + 调度/期望/服务接口), ch.9 (7 sequence diagrams), ch.10 (配置规范, 3 containers), appendix "A Change history" are ALL missing. Also: source ch.6 Requirements Tracing + source appendix "B Not applicable requirements" = droppable (mandated); source appendix "A Change history of AUTOSAR traceable items" translates as `## B. AUTOSAR 可追溯项变更历史` (content-class match; bsw_general precedent). Stale note fixed: §3.1 per STANDARD 2026-10-25 renders 「输入文件和相关标准与规范」 (queue's "输入文件" is pre-standard wording).
   - Note: ch.1 heading is 「介绍和功能概述」 (forbidden → 简介和功能概述); §3.2 相关规范 missing (source 3.2 = SWS BSW General paragraph); §6 intro missing source sentence "API defined in ch.8 / configuration in ch.10".
@@ -23,13 +23,13 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Phase A ch.2 fidelity check against R23-11 source table: 7 acronyms + 10 terms in exact source order; Read Page absent in official R23-11 PDF (removed in this release). Added all 17 terms to `docs/autosar/glossary.md` with article/source attribution. HSM definition punctuation normalized to a full stop.
   - Note: step 4 Phase B coverage/fidelity passed 2026-10-27 — source ch.1–5 map to article §§1–5 (including §2.1 Physical Segmentation); source ch.6 Requirements Tracing and appendix B Not applicable requirements omitted per Type A rule. Source ch.7 maps completely to article §6: 7.1–7.6.5 and nested 7.3.1–7.3.8.2 / 7.4.1–7.4.2 / 7.5.1–7.5.3 / 7.6.1–7.6.5; its Figure 7.1 is retained. Source ch.8 maps to §7 (31 types, 19 functions, imported types, callback/scheduled/expected/service interfaces); ch.9 maps to §8 (all 7 diagrams); ch.10 maps to §9 (reading guidance, all containers/parameters, published information). Source appendix A Change history maps to article appendix B.1/B.2 per site convention. Markdown/PDF artifacts recovered/retained as detailed above; no additional coverage deviation found.
   - Note: step 5 confirmation received 2026-10-27 — user approved the completed sync and requested a commit.
-  - Note: step 6 — tracking issue #130 created; TODO.md status row is updated; content commit `702c88d` created. User requested a commit only; push/PR are not authorized, so this step remains open pending the PR workflow.
+  - Note: step 6 — TODO.md status row updated; issue #130; PR #131: https://github.com/melodypapa/melodypapa.github.io/pull/131; content commit `702c88d` and queue-record commit `afacc02` are on `feature/memory-access-sync`.
   - [x] Step 1 — Source resolution + gap analysis
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] memory_mapping (SWS_MemoryMapping · R23-11 markdown · ⛔ stub — full translation)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
