@@ -52,11 +52,11 @@
 
 | Status | Count | Note |
 | --- | ---: | --- |
-| ✅ Type A-compliant | 15 | ready to use |
+| ✅ Type A-compliant | 16 | ready to use |
 | 🔶 Translated pending alignment | 10 | seven chapters present; legacy wording / forbidden-chapter residue |
 | ⚠️ Partial | 16 | missing ≥1 chapter (most miss the 「API规范」 chapter) |
 | ⛔ Stub | 4 | 9–19 lines only |
-| ❌ Missing (SWS) | 82 | R23-11 has 127 SWS docs in total; 45 covered (35.4%) |
+| ❌ Missing (SWS) | 81 | R23-11 has 127 SWS docs in total; 46 covered (36.2%) |
 | ❌ Missing (EXP) | 20 | R23-11 has 22 EXP docs in total; 2 covered |
 | 📖 Guide/topic | 8 | exempt from the Type A skeleton |
 
@@ -89,9 +89,10 @@
 ## crypto
 
 - ✅ [Csm 加密服务管理器](crypto_service_manager/) — SWS_CryptoServiceManager (2026-10-27 wording alignment: 4.2 「汽车域的适用性」, 7.12 duplicate number fixed — Scheduled 函数 → 7.13 调度函数 (7.13.1 Csm_MainFunction); citation-marker anchors + identifier links applied; observation: API chapter still legacy-structured vs source ch.8 — realignment candidate for a future row)
+- ✅ [CryIf 加密接口](crypto_interface/) — SWS_CryptoInterface (new article 2026-10-27, full Type A: ch.2 9 acronyms + 12 terms, §6 多核/错误分类/错误检测, §7 2 types/18 functions in the source's 5 groups/1 callback/expected interfaces, §8 不适用 (source N/A), §9 5 containers incl. 变体; 5 figures; identifier/citation links applied)
 - ✅ [Crypto 驱动](crypto_driver/) — SWS_CryptoDriver (2026-10-27 full R23-11 completion: the ⚠️ tag understated the gap — article stopped inside source 7.1.1; translated 7.1.2–7.5, ch.8 API (2 types/19 functions/4 NvBlock callbacks/MainFunction/expected interfaces), ch.9 n/a → §8 不适用, ch.10 16 containers → §9; §3 registry realigned to the R23-11 six entries; 17 figures; identifier/chapter-ref/citation links applied)
 
-❌ Missing (2): SWS_CryptoInterface (CryIf), SWS_KeyManager (KeyM)
+❌ Missing (1): SWS_KeyManager (KeyM)
 
 ## diagnostics
 
