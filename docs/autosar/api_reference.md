@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **43** 份已有站内文章）。
+共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **44** 份已有站内文章）。
 
 ## A
 
@@ -422,7 +422,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **BufReq_ReturnType**
-> 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
+> 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 
 ## C
 
@@ -988,7 +988,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_CANXLTransceiverDriver · R23-11
 
 **CbkHandleIdType**
-> 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
+> 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 
 **CheckISRMemoryAccess**
 > 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
@@ -4900,7 +4900,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_LINTransceiverDriver · R23-11
 
 **ListElemStructType**
-> 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
+> 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 
 **LSduR_GetConfigurationId**
 > 函数 · 未翻译 · SWS_LSduRouter · R23-11
@@ -5372,7 +5372,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 ## N
 
 **NetworkHandleType**
-> 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
+> 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 
 **NextScheduleTable**
 > 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
@@ -5577,13 +5577,13 @@ title: "AUTOSAR API 清单（函数与类型）"
 ## P
 
 **PduIdType**
-> 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
+> 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 
 **PduInfoType**
-> 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
+> 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 
 **PduLengthType**
-> 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
+> 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 
 **PduR_DisableRouting**
 > 函数 · 未翻译 · SWS_PDURouter · R23-11
@@ -5616,7 +5616,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **PNCHandleType**
-> 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
+> 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 
 **Port_ConfigType**
 > 类型 · [AUTOSAR Port Driver（端口驱动）](io/port_driver/index.md) · SWS_PortDriver · R23-11
@@ -5729,7 +5729,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **RetryInfoType**
-> 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
+> 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 
 ## S
 
@@ -6169,25 +6169,25 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
 
 **Std_ExtractProtocolHeaderFieldsType**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_MessageResultType**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_MessageTypeType**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_ReturnType**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_TransformerError**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_TransformerForwardCode**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **Std_VersionInfoType**
-> 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](general/platform_types/index.md) · SWS_StandardTypes · R23-11
+> 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
 **StopScheduleTable**
 > 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
@@ -6378,13 +6378,13 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **TimeStampQualType**
-> 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
+> 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 
 **TimeStampType**
-> 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
+> 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 
 **TimeTupleType**
-> 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
+> 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 
 **Tm_BusyWait1us16bit**
 > 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
@@ -6459,10 +6459,10 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **TpDataStateType**
-> 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
+> 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 
 **TPParameterType**
-> 类型 · 未翻译 · SWS_CommunicationStackTypes · R23-11
+> 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 
 **Transmission**
 > 函数 · 未翻译 · SWS_TcpIp · R23-11

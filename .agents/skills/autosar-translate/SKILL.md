@@ -275,6 +275,29 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
   BswM_modeNotificationPort` port interfaces. The identifier-title guard —
   NOT a section range — is the filter: Chinese group titles like 通用 and
   suffixed titles like `EcuM_ShutdownTarget端口接口` are never link targets),
+  config-container mentions (identifier-titled headings inside the 配置规范
+  chapter — `EcuMDriverInitListZero` is §9.1.7, not ch.7, and its pre-ch.9
+  参见 mentions must still link; user decision 2026-10-27. The chapter's
+  FIRST identifier-titled heading is the module-named top container
+  (`#### 9.1.1. EcuM`, `#### 9.1.1. Gpt`, `#### 9.1.1. Mcu`) and is NEVER a
+  target — it is the module NAME, not a container mention, and an article
+  never links its own module name. --apply still stops at 配置规范, so only
+  pre-config-chapter prose converts; the config tables stay definitional.
+  A same-named ch.7 heading always wins over the config heading),
+  chapter-number refs (可参见第**6.3**章 / 章节**6.1.1** / 可参考章节6.3启动…和
+  6.4 关闭 — link text is the number token with its bold markers:
+  第[**6.3**](#63-startup阶段)章, matching the hand-written
+  [6.6.4 WakeupValidation序列中的活动](#664-…) convention; user decision
+  2026-10-27. A ref is 第N章/第N节/章节N or a dotted number followed by CJK
+  text, AND only converts when a heading with that number exists. Never a
+  ref: figure/table numbers (图 9.5 所示, 表 7.3 — captions carry no anchor
+  and 表7.x would collide with the §7.x API sections), bare-integer 第N part
+  numbers (第1部分 in figure captions), identifier tails (B.2.2), decimals
+  followed by ASCII units (3.3 V), and a number whose preceding window names
+  another AUTOSAR document (按照AUTOSAR_SWS_Mcu_Driver第9.1章 is the MCU
+  driver's §9.1, not this article's). A number no heading carries
+  (EcuM's 参见7.9节多核 — source renumbering artifact) is census-reported
+  UNRESOLVED and never linked; a 译者注/fix is a user decision),
   development-error codes (link to their
   错误-titled §6 section's anchor — DIO/PWM 6.6.x 开发错误, EcuM 6.12/6.13,
   ADC 6.5), and prose citation markers `[n]` (link to the §3.1 entry's own
@@ -402,7 +425,9 @@ before every commit, the second is evidence for the Step 8 confirmation.
 3. Hygiene greps: no `^# ` in the body; no requirement IDs
    (`\[[A-Z][A-Za-z]*_[A-Za-z0-9]*_[0-9]+\]`) and no `{DRAFT}`; a WeChat
    footer, if present, is `<section id="wechat">` + `<h4>`, never a markdown
-   heading.
+   heading; angle-bracket placeholders (`<X>`, `<Service>`, `<#channel>`)
+   render as `&lt;…&gt;` — `grep -c '\\<' <article>` must be 0 (the
+   `\<…\>` form renders a stray backslash on this site, STANDARD.md §4).
 4. Nav and anchors: new pages registered in `mkdocs.yml` (paths `docs/`
    -relative), removed pages cleaned in the same commit; renamed or renumbered
    headings — grep inbound `](…#…)` links site-wide and fix them in the same
@@ -449,8 +474,11 @@ before every commit, the second is evidence for the Step 8 confirmation.
    `scripts/link_candidates.py --list <article>` and RECORD the counts in the
    gate evidence: identifier mentions by chapter (applied class:
    identifier-titled ch.7 headings — types, functions, callbacks, callouts,
-   scheduled functions, port interfaces; scanned through 时序图 prose,
-   counted but never applied inside 配置规范 tables), dev-error codes §6.6.x
+   scheduled functions, port interfaces — PLUS identifier-titled 配置规范
+   container headings with the module-named top container excluded; scanned
+   through 时序图 prose, counted but never applied inside 配置规范 tables),
+   chapter-number refs (applied class, with their UNRESOLVED list — numbers
+   no heading carries), dev-error codes §6.6.x
    (applied class, 错误-titled §6 sections), §7.2 constant-bullet
    mentions (report-only), 参见/详见 refs, prose `[n]` citations (whole
    article; registry lines, 译者注 lines and code excluded) split into

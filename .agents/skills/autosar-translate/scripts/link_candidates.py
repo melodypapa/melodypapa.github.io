@@ -17,6 +17,24 @@ Applied class (restoration of the source PDF's own hyperlinks):
   - function mentions  (identifier-titled ch.7 headings — functions,
     callbacks, callouts, scheduled functions, port interfaces) -> that
     heading's anchor
+  - container mentions (identifier-titled headings inside the 配置规范
+    chapter — config containers like EcuMDriverInitListZero referenced via
+    参见 in earlier prose; user decision 2026-10-27). The chapter's FIRST
+    identifier-titled heading is the module-named top container (EcuM §9.1.1,
+    Gpt, Mcu) and is NEVER a target — prose says it dozens of times as the
+    module name, and an article never links its own module name (same
+    principle as the census's cross-article self-exclusion). --apply still
+    stops at the 配置规范 chapter, so only pre-config-chapter prose converts;
+    the config tables stay definitional. A same-named ch.7 heading (API
+    type/function) always wins over the config heading (first definition
+    wins; ch.7 precedes in article order).
+  - chapter-number refs (第**6.3**章 / 章节**6.1.1** / 章节6.3启动 … 6.4 关闭)
+    -> that section heading's anchor, link text = the number token with its
+    bold markers (第[**6.3**](#63-startup阶段)章), matching the hand-written
+    [6.6.4 WakeupValidation序列中的活动](#664-…) convention (user decision
+    2026-10-27). Figure refs (图 9.5) never qualify; a number no heading
+    carries (renumbering artifact like EcuM's 7.9节多核) is census-reported
+    and never linked.
   - prose citation markers [n] -> the §3.1 registry entry's own anchor
     (`<a id="ref-n"></a>` + `[\\[n\\]](#ref-n)`, user decision 2026-10-27 —
     brackets stay visible: the plain `[n](#ref-n)` form rendered as bare n):
@@ -63,6 +81,76 @@ MD_LINK = re.compile(r"\[[^\]]*\]\([^)]*\)")
 # callbacks, callouts) — as opposed to a Chinese group/section title.
 IDENT = re.compile(r"[A-Za-z][A-Za-z0-9_]*")
 
+# Chapter-number mention: a dotted section number, optionally bolded
+# (第**6.3**章). Which occurrences are refs is decided by chref_spans().
+CHREF_NUM = re.compile(r"(\*\*)?(\d+(?:\.\d+)*)(\*\*)?")
+
+
+def sec_num_map(headings):
+    """Section number (6.3, 9.1.7) -> heading slug. First wins."""
+    m = {}
+    for (_i, _lvl, num, _title, slug) in headings:
+        m.setdefault(num.rstrip("."), slug)
+    return m
+
+
+def chref_spans(seg: str):
+    """(start, end, number) of chapter-number mentions in a text segment.
+
+    A ref is: 第N章 / 第N节 / N章 / N节 / 章节N (the 章/节 marker makes even a
+    bare integer unambiguous), or a DOTTED number followed by CJK text (the
+    章节6.3启动（STARTUP）和 6.4 关闭（SHUTDOWN） form — no marker, the CJK
+    tail is what separates it from decimal units like 3.3 V). Figure AND
+    table refs (图 9.5 所示, 表 7.3 — 图 9.1 collides with the real §9.1
+    heading and EcuM's 表7.x collide with the §7.x API sections) and
+    identifier tails (B.2.2, X_2.3) never qualify — captions carry no
+    anchor, so a table ref has nothing to link anyway. A bare 第N (第1部分,
+    figure-caption part numbers) is NOT a ref unless N is dotted or carries
+    a 章/节 suffix, and a number whose preceding text names another AUTOSAR
+    document (按照AUTOSAR_SWS_Mcu_Driver第9.1章 — that is the MCU driver's
+    §9.1, not this article's) never qualifies. Resolution against actual
+    heading numbers is the caller's job — an unmatched number (source
+    renumbering artifact like EcuM's 7.9节) is census-reported, never linked."""
+    out = []
+    for m in CHREF_NUM.finditer(seg):
+        num = m.group(2)
+        pre, post = seg[:m.start()], seg[m.end():]
+        if re.search(r"章节\s*$", pre) or re.match(r"\s*[章节]", post):
+            pass
+        elif re.search(r"第\s*$", pre) and ("." in num or re.match(r"\s*[章节]", post)):
+            pass
+        elif ("." in num
+              and re.search(r"[A-Za-z0-9_.]\s*$", pre) is None
+              and re.search(r"(?:图|表)\s*$", pre) is None
+              and re.match(r"\s*[\u4e00-\u9fff]", post)
+              and re.match(r"\s*(?:天|毫秒|微秒|秒|分钟|小时|位|字节|倍|年|月)",
+                           post) is None):  # a decimal + unit (4.9 天), not a ref
+            pass
+        else:
+            continue
+        if re.search(r"(?:SWS|SRS|EXP|TPS|TR)_[A-Za-z0-9_]+", pre[-60:]):
+            continue  # another document's chapter number (id anywhere in the
+            # preceding window — connectors like 第/规范 may sit between)
+        out.append((m.start(), m.end(), num))
+    return out
+
+
+def link_chrefs(seg: str, sec_nums: dict) -> str:
+    """Wrap resolved chapter-number mentions: 第**6.3**章 ->
+    第[**6.3**](#63-startup阶段)章 (bold markers kept in the link text,
+    matching the hand-written [**IOC**](#75-ioc) convention)."""
+    out = []
+    pos = 0
+    for (s, e, num) in chref_spans(seg):
+        anchor = sec_nums.get(num)
+        if not anchor:
+            continue
+        out.append(seg[pos:s])
+        out.append(f"[{seg[s:e]}](#{anchor})")
+        pos = e
+    out.append(seg[pos:])
+    return "".join(out)
+
 
 def slug_of(num: str, title: str) -> str:
     # Material/uslugify behaviour observed on this site: dots stripped from the
@@ -104,12 +192,26 @@ def collect(article: str):
     # never become targets). Any heading level (grouped layout:
     # #### group -> ###### entry, EcuM-style; flat layout: #### entry,
     # PWM-style — the IDENT filter accepts both)
+    # PLUS config containers: identifier-titled headings from the 配置规范
+    # chapter on (EcuMDriverInitListZero is §9.1.7, not ch.7 — without this
+    # its five pre-ch.9 参见 mentions were invisible to the census, fixed
+    # 2026-10-27). The config chapter's first identifier-titled heading is
+    # the module-named top container (EcuM/Gpt/Mcu) — excluded, it is the
+    # module NAME, not a container mention (EcuM §9.1.1). First definition
+    # wins, so a ch.7 heading keeps precedence over a same-named config one.
+    cfg_start = config_start(lines, headings)
+    module_container = next(
+        (title for (i, _lvl, _num, title, _slug) in headings
+         if cfg_start is not None and i >= cfg_start and IDENT.fullmatch(title)),
+        None)
     for (i, lvl, num, title, slug) in headings:
         if lvl == 4:
             section_range[title] = (i, ends[i])
-        if re.match(r"7\.", num) and IDENT.fullmatch(title):
-            defs[title] = slug
-            section_range[title] = (i, ends[i])
+        if IDENT.fullmatch(title) and title != module_container:
+            if (re.match(r"7\.", num) or (cfg_start is not None and i >= cfg_start)) \
+                    and title not in defs:
+                defs[title] = slug
+                section_range[title] = (i, ends[i])
 
     for i, ln in enumerate(lines):
         if i in heading_at:
@@ -330,6 +432,7 @@ def convert_citation_links(lines, entries31, ref_skip=frozenset()):
 def census(article: str, self_dir: str = ""):
     entries31 = parse_entries31(article)
     lines, headings, defs, _, consts = collect(article)
+    sec_nums = sec_num_map(headings)
     fm_end = front_matter_end(lines)
     sec31_span = entries31_span(article)
     fence = False
@@ -337,6 +440,8 @@ def census(article: str, self_dir: str = ""):
     id_by_chapter = {}
     id_by_name = {}
     can_lines = 0
+    chref_count = 0
+    chref_unresolved = []
     n_lines = 0
     n_linked = 0
     tn_lines = 0
@@ -359,6 +464,13 @@ def census(article: str, self_dir: str = ""):
             id_by_chapter[chapter] = id_by_chapter.get(chapter, 0) + 1
             for n in hits:
                 id_by_name[n] = id_by_name.get(n, 0) + 1
+        if not ln.lstrip().startswith("**译者注：**"):
+            for (_s, _e, num) in chref_spans(ln):
+                if sec_nums.get(num):
+                    chref_count += 1
+                else:
+                    chref_unresolved.append(
+                        (i + 1, num, ln[max(0, ln.find(num) - 20):ln.find(num) + len(num) + 12].strip()))
         if re.search(r"参见|参考|详见", ln):
             can_lines += 1
         in31 = sec31_span and sec31_span[0] <= i < sec31_span[1]
@@ -414,6 +526,12 @@ def census(article: str, self_dir: str = ""):
     print(f"== §7.2 constant-bullet mentions (report-only): {const_hits}"
           + ("; per name: " + ", ".join(f"{n} x{sum(1 for ln in lines if re.search(rf'(?<![A-Za-z0-9_]){re.escape(n)}(?![A-Za-z0-9_])', ln))}" for n in sorted(consts)) if consts else ""))
     print(f"== 参见/参考/详见 lines (report-only): {can_lines}")
+    print(f"== chapter-number refs (applied class): {chref_count}")
+    if chref_unresolved:
+        print("  UNRESOLVED — no heading carries that number (source renumbering")
+        print("  artifact; NEVER link, a 译者注/fix is a user decision):")
+        for ln_no, num, ctx in chref_unresolved:
+            print(f"    L{ln_no} [{num}] …{ctx}")
     print("== prose [n] citations (registry/fences/译者注 excluded, whole article) ==")
     print(f"  linked to #ref-n: {n_linked}; unlinked: {n_lines}"
           f" ({len(unresolved)} unresolved); 译者注 lines skipped: {tn_lines}")
@@ -441,11 +559,13 @@ def census(article: str, self_dir: str = ""):
 
 def apply_links(article: str, ref_skip=frozenset()):
     lines, headings, defs, section_range, _ = collect(article)
+    sec_nums = sec_num_map(headings)
     entries31 = parse_entries31(article)
     fm_end = front_matter_end(lines)
     stop = config_start(lines, headings)
     names = sorted(defs, key=len, reverse=True)
     changed = 0
+    chref_changed = 0
     fence = False
     for i, ln in enumerate(lines):
         if ln.startswith("```"):
@@ -470,6 +590,12 @@ def apply_links(article: str, ref_skip=frozenset()):
             if is_link or not seg:
                 out.append(seg)
                 continue
+            # chapter numbers first (they never contain identifiers, and the
+            # identifier pass below never matches digits — no re-wrap either way)
+            new_seg = link_chrefs(seg, sec_nums)
+            if new_seg != seg:
+                chref_changed += 1
+            seg = new_seg
             for n in names:
                 if n not in seg:
                     continue
@@ -493,7 +619,8 @@ def apply_links(article: str, ref_skip=frozenset()):
     if bad:
         print(f"UNRESOLVED ANCHORS: {sorted(set(bad))}")
         sys.exit(1)
-    print(f"lines changed: {changed}; citation links added: {cites}; "
+    print(f"lines changed: {changed}; chapter-ref links added: {chref_changed}; "
+          f"citation links added: {cites}; "
           f"registry anchors added: {anchors_added}; all link anchors resolve"
           + (f"; ref-skip: {','.join(sorted(ref_skip))}" if ref_skip else "")
           + (f"; stopped before line {stop + 1} (配置规范)" if stop is not None else ""))
