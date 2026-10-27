@@ -92,55 +92,55 @@ release: R23-11
 
 ### 3.1. 输入文件
 
-[1] List of Basic Software Modules
+<a id="ref-1"></a>[1] List of Basic Software Modules
 > AUTOSAR_TR_BSWModuleList.pdf
 
-[2] Layered Software Architecture
+<a id="ref-2"></a>[2] Layered Software Architecture
 > AUTOSAR_EXP_LayeredSoftwareArchitecture.pdf
 
-[3] General Requirements on Basic Software Modules
+<a id="ref-3"></a>[3] General Requirements on Basic Software Modules
 > AUTOSAR_SRS_BSWGeneral.pdf
 
-[4] Specification of RTE Software
+<a id="ref-4"></a>[4] Specification of RTE Software
 > AUTOSAR_SWS_RTE.pdf
 
-[5] Specification of BSW Scheduler
+<a id="ref-5"></a>[5] Specification of BSW Scheduler
 > AUTOSAR_SWS_Scheduler.pdf
 
-[6] Specification of ECU Configuration
+<a id="ref-6"></a>[6] Specification of ECU Configuration
 > AUTOSAR_TPS_ECUConfiguration.pdf
 
-[7] Specification of Memory Mapping
+<a id="ref-7"></a>[7] Specification of Memory Mapping
 > AUTOSAR_SWS_MemoryMapping.pdf
 
-[8] Specification of Default Error Tracer
+<a id="ref-8"></a>[8] Specification of Default Error Tracer
 > AUTOSAR_SWS_DefaultErrorTracer.doc.pdf
 
-[9] Specification of Diagnostic Event Manager
+<a id="ref-9"></a>[9] Specification of Diagnostic Event Manager
 > AUTOSAR_SWS_DiagnosticEventManager.pdf
 
-[10] Specification of ECU State Manager
+<a id="ref-10"></a>[10] Specification of ECU State Manager
 > AUTOSAR_SWS_ECUStateManager.pdf
 
-[11] Specification of C Implementation Rules
+<a id="ref-11"></a>[11] Specification of C Implementation Rules
 > AUTOSAR_TR_CImplementationRules.pdf
 
-[12] Specification of Standard Types
+<a id="ref-12"></a>[12] Specification of Standard Types
 > AUTOSAR_SWS_StandardTypes.pdf
 
-[13] AUTOSAR Glossary
+<a id="ref-13"></a>[13] AUTOSAR Glossary
 > AUTOSAR_TR_Glossary.pdf
 
-[14] Requirements on the Crypto Stack
+<a id="ref-14"></a>[14] Requirements on the Crypto Stack
 > AUTOSAR_SRS_CryptoStack.pdf
 
-[15] Specification of the Crypto Interface
+<a id="ref-15"></a>[15] Specification of the Crypto Interface
 > AUTOSAR_SWS_CryptoInterface.pdf
 
-[16] Specification of the Crypto Driver
+<a id="ref-16"></a>[16] Specification of the Crypto Driver
 > AUTOSAR_SWS_CryptoDriver.pdf
 
-[17] General Specification of Basic Software Modules
+<a id="ref-17"></a>[17] General Specification of Basic Software Modules
 > AUTOSAR_SWS_BSWGeneral.pdf
 
 ### 3.2. 相关标准规范
@@ -161,7 +161,7 @@ AUTOSAR 提供了基本软件模块的通用规范（SWS BSW General），对加
 
 CSM 的某些类型定义以前缀 **CRYPTO_** 开头，这将违反 **SRS_BSW_00305**。这在 **4.3.1** 版中得到协调。尽管如此，由于 [constr_1050] 第1部分的限制，端口仍然被认为是兼容的。
 
-### 4.2. 适用于汽车领域
+### 4.2. 汽车域的适用性
 
 N/A
 
@@ -218,7 +218,7 @@ N/A
 
 如果请求 **CSM** 模块的服务，同时 **CSM** 作业需要排队，并且队列已满，则应拒绝作业请求，并返回错误 **CRYPTO_E_BUSY**。
 
-如果配置了异步接口，CSM 模块应提供一个主函数 **Csm_MainFunction**()，该函数被循环调用以通过状态机控制作业的处理。
+如果配置了异步接口，CSM 模块应提供一个主函数 [**Csm_MainFunction**](#7131-csm_mainfunction)()，该函数被循环调用以通过状态机控制作业的处理。
 
 #### 6.2.1. 普通操作
 
@@ -281,7 +281,7 @@ N/A
 
 ### 6.3. CSM模块启动
 
-**Csm_Init**() 请求不负责触发底层 **CRYIF** 的初始化。假定底层 **CRYIF** 将由任何适当的实体（例如：BswM）初始化。
+[**Csm_Init**](#711-csm_init)() 请求不负责触发底层 **CRYIF** 的初始化。假定底层 **CRYIF** 将由任何适当的实体（例如：BswM）初始化。
 
 使用 **CSM** 模块的软件组件应负责检查 **CSM** 模块启动产生的全局错误和状态信息。
 
@@ -360,7 +360,7 @@ Note: The CryIf is responsible to transform these IDs to the corresponding key I
 
 **CSM** 作业进行排队可以在配置参数 **CsmQueues** 进行配置。同时 **CsmQueues** 需根据配置的作业优先级对作业进行排序。作业优先级数值越大表明作业的优先级越高。
 
-只有在保证作业结构的数据一致性的情况下，才能将服务操作加入队列。当将具有相同 jobID 的服务添加到队列时，应特别考虑这一点。例如：调用 Csm_SignatureVerify()，随后调用Csm_SaveContextJob()的情况。如果不能保证这一点，服务操作将返回 **E_BUSY**。
+只有在保证作业结构的数据一致性的情况下，才能将服务操作加入队列。当将具有相同 jobID 的服务添加到队列时，应特别考虑这一点。例如：调用 [Csm_SignatureVerify](#762-csm_signatureverify)()，随后调用[Csm_SaveContextJob](#7101-csm_savecontextjob)()的情况。如果不能保证这一点，服务操作将返回 **E_BUSY**。
 
 如果具有相同JobID的服务可以被添加到队列中，则这些服务的执行顺序应与传入服务操作请求的顺序相对应。即符合先进先出的顺序。
 
@@ -368,7 +368,7 @@ Csm_\<Service\>() 函数的行为需如下图所示。
 
 ![SWS_Csm_01041](SWS_Csm_01041.png)
 
-因为对于同步作业处理来说，队列排队可能用途不大。所以如果选择了同步作业处理，则建议把队列大小设定为 **0**。 但是，如果通道同时支持同步和异步作业，则队列排队机制还是有使用的必要。在 **Csm_MainFunction**() 中，可以将排队的作业传递给给 **CRYIF** 模块。
+因为对于同步作业处理来说，队列排队可能用途不大。所以如果选择了同步作业处理，则建议把队列大小设定为 **0**。 但是，如果通道同时支持同步和异步作业，则队列排队机制还是有使用的必要。在 [**Csm_MainFunction**](#7131-csm_mainfunction)() 中，可以将排队的作业传递给给 **CRYIF** 模块。
 
 如果当前作业的状态为活动状态，**CSM** 需假设映射的加密驱动程序实例当前正在处理该作业。当调用者希望继续操作（例如：使用 **UPDATE** 操作提供更多数据），加密驱动程序实例中必须执行合理性地检查（**plausibility check**）。
 
@@ -415,7 +415,7 @@ Csm_\<Service\>() 函数的行为需如下图所示。
 
 密钥元素索引可以由供应商进行扩展。
 
-对于包含加密密钥材料的每个密钥元素，所提供密钥的格式应在用于数据交换的配置中指定。例如：对于 Csm_KeyElementGet() 或 Csm_KeyElementSet()。特定加密驱动程序支持的密钥格式是加密驱动程序附带的预配置信息的一部分。
+对于包含加密密钥材料的每个密钥元素，所提供密钥的格式应在用于数据交换的配置中指定。例如：对于 [Csm_KeyElementGet](#7831-csm_keyelementget)() 或 [Csm_KeyElementSet](#7811-csm_keyelementset)()。特定加密驱动程序支持的密钥格式是加密驱动程序附带的预配置信息的一部分。
 
 可以使用以下密钥格式：
 
@@ -496,14 +496,14 @@ Csm_KeySetValid(MyEccKeyId);
 
 同时密钥元素数据不受任何影响。也就是说密钥元素不属于上下文数据的一部分。而且在必要时必须由密钥元素接口进行单独的设置或读取。
 
-在调用 **Csm_SaveContextJob**() 或 **Csm_RestoreContextJob**() 时，**CSM** 需检查相关作业当前是否处于活动状态。
+在调用 [**Csm_SaveContextJob**](#7101-csm_savecontextjob)() 或 [**Csm_RestoreContextJob**](#7102-csm_restorecontextjob)() 时，**CSM** 需检查相关作业当前是否处于活动状态。
 
 * 如果作业处于活动状态，操作需按照规范继续下去。
 * 如果作业处于空闲状态，函数需立即返回 **E_NOT_OK**。
 
-在调用 **Csm_SaveContextJob**() 或 **Csm_RestoreContextJob**() 时，**CSM** 应检查相关作业当前是否正在积极处理数据。这意味着 **CSM** 已将与此作业相关的操作安排提交给了驱动程序，并正在等待处理响应。在这种情况下，函数需立即返回 **E_NOT_OK**。
+在调用 [**Csm_SaveContextJob**](#7101-csm_savecontextjob)() 或 [**Csm_RestoreContextJob**](#7102-csm_restorecontextjob)() 时，**CSM** 应检查相关作业当前是否正在积极处理数据。这意味着 **CSM** 已将与此作业相关的操作安排提交给了驱动程序，并正在等待处理响应。在这种情况下，函数需立即返回 **E_NOT_OK**。
 
-在调用 **Csm_SaveContextJob**() 或 **Csm_RestoreContextJob**() 时，**CSM** 应检查作业是否引用 **CsmPrimitive**、**CsmHash**、**CsmEncrypt**、**CsmEncryptAEAD**、**CsmDecryptAEAD**、**CsmDecrypt**、**CsmMacGenerate**、**CsmMacVerify**、**CsmSignatureGenerate** 或 **CsmSignatureVerify**。 如果是，操作应按规定继续。否则，不应执行该操作，并且当 **CsmDevErrorDetect** 设定为 **true** 时，需将 **CSM_E_SERVICE_TYPE** 报告给 **DET**。
+在调用 [**Csm_SaveContextJob**](#7101-csm_savecontextjob)() 或 [**Csm_RestoreContextJob**](#7102-csm_restorecontextjob)() 时，**CSM** 应检查作业是否引用 **CsmPrimitive**、**CsmHash**、**CsmEncrypt**、**CsmEncryptAEAD**、**CsmDecryptAEAD**、**CsmDecrypt**、**CsmMacGenerate**、**CsmMacVerify**、**CsmSignatureGenerate** 或 **CsmSignatureVerify**。 如果是，操作应按规定继续。否则，不应执行该操作，并且当 **CsmDevErrorDetect** 设定为 **true** 时，需将 **CSM_E_SERVICE_TYPE** 报告给 **DET**。
 
 ### 6.8. 多核系统
 
@@ -849,7 +849,7 @@ Std_ReturnType Csm_KeyElementCopyPartial (
 
 密钥将会通过位于密钥元素 **CRYPTO_KE_KEYGENERATE_SEED** 中的随机值生成。
 
-例如：可以使用函数 **Csm_RandomGenerate**() 生成随机值，并且必须在触发密钥生成之前将其存储在 **CRYPTO_KE_KEYGENERATE_SEED** 中。
+例如：可以使用函数 [**Csm_RandomGenerate**](#771-csm_randomgenerate)() 生成随机值，并且必须在触发密钥生成之前将其存储在 **CRYPTO_KE_KEYGENERATE_SEED** 中。
 
 重要的是要检查随机性的质量及其种子的熵，这取决于所使用的硬件和软件协议栈。随机性对生成的密钥材料的质量有重大影响。
 
@@ -900,16 +900,16 @@ Std_ReturnType Csm_KeyDerive (
 
 各自拥有私人秘密（**private secret**）的两个用户可以使用密钥交换协议来获得公共秘密（**common secret**）。例如：对称密钥算法的密钥，无需告诉对方他们的私人秘密，也没有任何听众能够获得公共秘密或他们的私人秘密。
 
-函数 **Csm_KeyExchangeCalcPubVal**() / **Csm_JobKeyExchangeCalcPubVal**() 和 **Csm_KeyExchangeCalcSecret**() / **Csm_JobKeyExchangeCalcSecret**() 用于支持 Diffie-Hellman (DH) 密钥交换。这允许两个伙伴 **Alice** 和 **Bob** 生成私钥和公钥材料（**private and public key material**），交换公共部分，以便双方最终可以生成一个公共共享秘密（**common shared secret**）。这个共享秘密可以被进一步使用，例如用于数据加密或者 **MAC** 生成的对称数据操作。公钥和私钥材料可以使用基于 **RSA** 或者椭圆曲线（**elliptic-curve diffie-hellman**）算法的基于质数的大数。
+函数 [**Csm_KeyExchangeCalcPubVal**](#7871-csm_keyexchangecalcpubval)() / [**Csm_JobKeyExchangeCalcPubVal**](#796-csm_jobkeyexchangecalcpubval)() 和 [**Csm_KeyExchangeCalcSecret**](#7872-csm_keyexchangecalcsecret)() / [**Csm_JobKeyExchangeCalcSecret**](#797-csm_jobkeyexchangecalcsecret)() 用于支持 Diffie-Hellman (DH) 密钥交换。这允许两个伙伴 **Alice** 和 **Bob** 生成私钥和公钥材料（**private and public key material**），交换公共部分，以便双方最终可以生成一个公共共享秘密（**common shared secret**）。这个共享秘密可以被进一步使用，例如用于数据加密或者 **MAC** 生成的对称数据操作。公钥和私钥材料可以使用基于 **RSA** 或者椭圆曲线（**elliptic-curve diffie-hellman**）算法的基于质数的大数。
 
-**CSM** 密钥交换功能需要一个带有密钥元素的密钥，在加密服务密钥交换行中。密钥元素 **CRYPTO_KE_KEYEXCHANGE_BASE**、**CRYPTO_KE_KEYEXCHANGE_PRIVKEY** 和 **CRYPTO_KE_KEYEXCHANGE_OWNPUBKEY** 用于保存公钥或者私钥材料。这些数值可以是预先定义，并由 **Csm_KeyElementSet**() 后跟 **Csm_KeySetValid**() 设置或生成。
+**CSM** 密钥交换功能需要一个带有密钥元素的密钥，在加密服务密钥交换行中。密钥元素 **CRYPTO_KE_KEYEXCHANGE_BASE**、**CRYPTO_KE_KEYEXCHANGE_PRIVKEY** 和 **CRYPTO_KE_KEYEXCHANGE_OWNPUBKEY** 用于保存公钥或者私钥材料。这些数值可以是预先定义，并由 [**Csm_KeyElementSet**](#7811-csm_keyelementset)() 后跟 [**Csm_KeySetValid**](#7812-csm_keysetvalid)() 设置或生成。
 
-例如：这些键值可以通过 **Csm_KeyGenerate**() 生成，然后调用 **Csm_KeyElementCopy**() 复制到相应的密钥元素，接着在调用 **Csm_KeySetValid**() 使其生效。
+例如：这些键值可以通过 [**Csm_KeyGenerate**](#7852-csm_keygenerate)() 生成，然后调用 [**Csm_KeyElementCopy**](#7841-csm_keyelementcopy)() 复制到相应的密钥元素，接着在调用 [**Csm_KeySetValid**](#7812-csm_keysetvalid)() 使其生效。
 
 具体算法示例如下：
 
-1. 首先 **Alice** 会调用 **Csm_KeyExchangeCalcPubVal**() / **Csm_JobKeyExchangeCalcPubVal**() 函数，并将生产的结果发送给 **Bob**。数据的交换可能需要被签名（**signed**）或者加密（**enncyrpted**），具体方案取决于协议的定义。需要注意，如果 **KeyExchangeCalcPubVal** 被调用时，并不存在有效的密钥材料（如：密钥无效或者基础密钥元素的长度为 0 的情况），**KeyExchangeCalcPubVal** 函数需生成必要的密钥材料并正常继续。
-2. 如有需要，**Bob** 会把收到的 **Alice** 密钥材料保存到相应的密钥元素中。他还将调用 **Csm_KeyExchangeCalcPubVal**() 来生成他需要发送给 **Alice** 的共享值（**shared value**）。接着 **Bob** 可以调用 **Csm_KeyExchangeCalcSecret**() 来生成公共秘密（**common secret**），并将此数值保存到密钥元素 **CRYPTO_KE_KEYEXCHANGE_SHAREDVALUE** 中。
+1. 首先 **Alice** 会调用 [**Csm_KeyExchangeCalcPubVal**](#7871-csm_keyexchangecalcpubval)() / [**Csm_JobKeyExchangeCalcPubVal**](#796-csm_jobkeyexchangecalcpubval)() 函数，并将生产的结果发送给 **Bob**。数据的交换可能需要被签名（**signed**）或者加密（**enncyrpted**），具体方案取决于协议的定义。需要注意，如果 **KeyExchangeCalcPubVal** 被调用时，并不存在有效的密钥材料（如：密钥无效或者基础密钥元素的长度为 0 的情况），**KeyExchangeCalcPubVal** 函数需生成必要的密钥材料并正常继续。
+2. 如有需要，**Bob** 会把收到的 **Alice** 密钥材料保存到相应的密钥元素中。他还将调用 [**Csm_KeyExchangeCalcPubVal**](#7871-csm_keyexchangecalcpubval)() 来生成他需要发送给 **Alice** 的共享值（**shared value**）。接着 **Bob** 可以调用 [**Csm_KeyExchangeCalcSecret**](#7872-csm_keyexchangecalcsecret)() 来生成公共秘密（**common secret**），并将此数值保存到密钥元素 **CRYPTO_KE_KEYEXCHANGE_SHAREDVALUE** 中。
 3. 当 **Alice** 收到 **Bob** 的公开值（**public value**）时，它会调用 **KeyExchangeCalcSecret**() ，并在函数的参数中提供 **Bob** 的值。公共共享秘密（**common shared secret**）通过此函数生成，并保存到密钥元素 **CRYPTO_KE_KEYEXCHANGE_SHAREDVALUE** 中。根据算法的不同，**Bob** 需要将密钥材料发送给 **Alice**，以允许她生成公共共享秘密。
 
 密钥元素 **CRYPTO_KE_KEYEXCHANGE_ALGORITHM** 指定 **Diffie-Hellman** 算法。密钥元素值的类型为 **Crypto_AlgorithmFamily**，例如：基于模数的 DH 的 **CRYPTO_ALGOFAM_DH** 或者 基于 **ECDH(E)** 的 **CRYPTO_ALGOFAM_ED25519**。也可以使用附加密钥元素 **CRYPTO_KE_KEYEXCHANGE_CURVE** 指定附加椭圆曲线参数。
@@ -1077,9 +1077,9 @@ void Csm_CallbackNotification (
 )
 ```
 
-### 7.12. Scheduled 函数
+### 7.13. 调度函数
 
-#### 7.12.1. Csm_MainFunction
+#### 7.13.1. Csm_MainFunction
 
 **说明**: 此 **API** 被周期性的调用以处理请求的作业。**Csm_MainFunction** 应检查作业队列以传递给底层 CRYIF。每个已配置的 **CsmMainFunction** 实例应实施一个 Csm_MainFunction_<shortName>。 其中<shortName>是ECU配置中CsmMainFunction配置容器的简称。
 

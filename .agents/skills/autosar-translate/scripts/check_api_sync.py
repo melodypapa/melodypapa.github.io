@@ -27,16 +27,8 @@ from pathlib import Path
 # with fence junk ("## ⌋ () 8.2.5  Pwm\_ChannelClassType"), so match anywhere
 # in the line; only lines starting with '#' are scanned (keeps ToC tables out).
 # The lookbehind avoids matching the "8" of "18.3.2" style chapter numbers.
-# The optional third group covers grouped function chapters where the source
-# numbers functions as four-deep headings (8.3.1.x Synchronous / 8.3.2.x
-# Asynchronous, e.g. MemAcc) and the article mirrors that grouping as
-# #### 7.3.1. 同步函数 / ##### 7.3.1.x entries (EcuM precedent). In grouped
-# mode only the four-segment headings are entries; the three-segment
-# Synchronous/Asynchronous group headings are excluded.
-SRC_RE = re.compile(
-    r"(?:^|[^0-9.])8\.([23])\.(\d+)(?:\.(\d+))?\s+\**\s*([A-Za-z][A-Za-z0-9_\\&;<>]*)"
-)
-ART_RE = re.compile(r"^#{4,6}\s+7\.([23])\.(\d+)(?:\.(\d+))?\.\s+(.+?)\s*$")
+SRC_RE = re.compile(r"(?:^|[^0-9.])8\.([23])\.(\d+)\s+\**\s*([A-Za-z][A-Za-z0-9_\\&;<>]*)")
+ART_RE = re.compile(r"^####\s+7\.([23])\.(\d+)\.\s+(.+?)\s*$")
 
 
 def norm(name: str) -> str:
@@ -50,42 +42,30 @@ def norm(name: str) -> str:
     return name
 
 
-def collect(lines, key_re, immut_key):
-    """Scan heading lines for API entries and return them as ordered names.
-
-    Grouped mode is entered per chapter when ANY matching heading carries a
-    third (x.y.z) numeric segment; then only three-deep headings (7.3.1.x)
-    are entries and two-deep headings (7.3.1 同步函数) are group chrome.
-    Flat mode collects the two-deep headings as today.
-    """
-    hits_by_chap: dict[str, list] = {k: [] for k in ("2", "3")}
-    for line in lines:
+def source_entries(text: str, chap: str) -> list[str]:
+    found: list[str] = []
+    for line in text.splitlines():
         if not line.startswith("#"):
             continue
-        for m in key_re.finditer(line):
-            chap, sub = m.group(1), m.group(3)
-            hits_by_chap[chap].append((sub, m.group(immut_key)))
-    found_by_chap: dict[str, list[str]] = {}
-    for chap, hits in hits_by_chap.items():
-        grouped = any(sub is not None for sub, _ in hits)
-        found: list[str] = []
-        for sub, name in hits:
-            if grouped and sub is None:
-                continue  # group chrome (Synchronous/Asynchronous ...)
-            if (not grouped) and sub is not None:
-                continue  # grouped entry under a flat-mode chapter
-            if not found or found[-1] != norm(name):  # dedupe merged-heading repeats
-                found.append(norm(name))
-        found_by_chap[chap] = found
-    return found_by_chap
+        hits = list(SRC_RE.finditer(line))
+        if not hits:
+            continue
+        m = hits[-1]
+        if m.group(1) != chap:
+            continue
+        name = norm(m.group(3))
+        if not found or found[-1] != name:  # dedupe merged-heading repeats
+            found.append(name)
+    return found
 
 
-def source_entries(text: str) -> dict:
-    return collect(text.splitlines(), SRC_RE, 4)
-
-
-def article_entries(text: str) -> dict:
-    return collect(text.splitlines(), ART_RE, 4)
+def article_entries(text: str, chap: str) -> list[str]:
+    found: list[str] = []
+    for line in text.splitlines():
+        m = ART_RE.match(line)
+        if m and m.group(1) == chap:
+            found.append(norm(m.group(3)))
+    return found
 
 
 def slice_section(text: str, start_re: str, end_re: str) -> str:
@@ -133,20 +113,20 @@ def main() -> int:
 
     problems: list[str] = []
 
-    for srcchap, artchap, label in (("2", "2", "types"), ("3", "3", "functions")):
-        src = source_entries(src_text)[srcchap]
-        art = article_entries(art_text)[artchap]
+    for chap, art_chap, label in (("2", "2", "types"), ("3", "3", "functions")):
+        src = source_entries(src_text, chap)
+        art = article_entries(art_text, art_chap)
         print(
-            f"{label:9s}: source 8.{srcchap}.x = {len(src):2d} | article 7.{artchap}.x = {len(art):2d}"
+            f"{label:9s}: source 8.{chap}.x = {len(src):2d} | article 7.{art_chap}.x = {len(art):2d}"
         )
         if not src and art:
             problems.append(
-                f"  {label}: source chapter 8.{srcchap} parsed as empty while the "
+                f"  {label}: source chapter 8.{chap} parsed as empty while the "
                 "article has entries — check for an unparseable source structure "
                 "(see gen_api_list.py's known `!` documents) before overriding"
             )
         problems.extend(diff_names(src, art, label))
-        if srcchap == "3":
+        if chap == "3":
             body = slice_section(art_text, r"^### 7\.3\.", r"^### 7\.[4-9]\.")
             shuoming = len(re.findall(r"^\*\*说明\*\*", body, re.M))
             print(f"**说明** blocks in §7.3 = {shuoming} (functions = {len(art)})")

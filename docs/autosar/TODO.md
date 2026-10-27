@@ -88,7 +88,7 @@
 
 ## crypto
 
-- ✅ [Csm 加密服务管理器](crypto_service_manager/) — SWS_CryptoServiceManager (pending wording alignment: 4.2 「适用于汽车领域」, 7.12 「Scheduled 函数」→「调度函数」)
+- ✅ [Csm 加密服务管理器](crypto_service_manager/) — SWS_CryptoServiceManager (2026-10-27 wording alignment: 4.2 「汽车域的适用性」, 7.12 duplicate number fixed — Scheduled 函数 → 7.13 调度函数 (7.13.1 Csm_MainFunction); citation-marker anchors + identifier links applied; observation: API chapter still legacy-structured vs source ch.8 — realignment candidate for a future row)
 - ⚠️ [Crypto 驱动](crypto_driver/) — SWS_CryptoDriver (missing 「API规范」)
 
 ❌ Missing (2): SWS_CryptoInterface (CryIf), SWS_KeyManager (KeyM)
