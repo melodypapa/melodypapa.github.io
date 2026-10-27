@@ -112,6 +112,7 @@ nav:
     - "术语表": autosar/glossary.md
     - "API 清单": autosar/api_reference.md
     - 基础:
+      - autosar/foundation/index.md
       - 通用:
         - "AUTOSAR 术语表（TR Glossary）": autosar/foundation/general/tr_glossary/index.md
     - 通信:
@@ -147,7 +148,7 @@ nav:
       - "Dcm": autosar/diagnostics/diagnostic_communication_manager/index.md
       - "Dem": autosar/diagnostics/diagnostic_event_manager/index.md
     - 通用（General）:
-
+      - autosar/general/index.md
       - "BSW General": autosar/general/bsw_general/index.md
       - "Standard Types": autosar/general/standard_types/index.md
       - "Platform Types": autosar/general/platform_types/index.md
@@ -177,7 +178,7 @@ nav:
       - "NV数据处理指南": autosar/memory/nv_data_handling_guideline/index.md
       - "NvM": autosar/memory/nvram_manager/index.md
     - 方法论与模板:
-
+      - autosar/methodology_templates/index.md
       - "BSWMDT": autosar/methodology_templates/basic_software_module_description_template/index.md
     - 模式管理:
       - autosar/mode_management/index.md
@@ -186,7 +187,7 @@ nav:
       - "模式管理指南": autosar/mode_management/guide_to_mode_management/index.md
     - "电源状态管理": autosar/power/index.md
     - 系统服务:
-
+      - autosar/system_services/index.md
       - "FiM": autosar/system_services/function_inhibition_manager/index.md
       - "Os": autosar/system_services/operating_system/index.md
       - "Time Service": autosar/system_services/time_service/index.md
@@ -199,7 +200,7 @@ nav:
 
       - "RTE": autosar/rte/index.md
     - 模板:
-
+      - autosar/template/index.md
       - "1. 一段话总结": autosar/template/generic_structure/index.md
       - 时序扩展（Timing Extension）:
 
