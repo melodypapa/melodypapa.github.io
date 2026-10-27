@@ -522,6 +522,7 @@ RTE 没有为 DEM 提供特定的功能。
 | 反应 | SWC 可以决定重新发送请求、记录或忽略该错误。 |
 | 报告 | N/A |
 | 恢复 | SWC 可以决定重新发送请求。 |
+
 ## 6. 与 NVRAM 相关的错误
 
 ### 6.1. 概览
@@ -882,6 +883,7 @@ RTE 没有为 DEM 提供特定的功能。
 ###### 6.2.6.2.6 应用软件组件
 
 | 检测 | 如果错误处理策略的设计需要，SWC 可以按两种不同的方式设计：它以连接到 NVM 的客户端端口上的 GetErrorStatus 操作轮询作业状态；它提供附加到 NvMNotifyJobFinished 服务器端口的服务器可运行体，该可运行体应由 NVM 调用。见 AUTOSAR_CP_SWS_NVRAMManager.pdf 的 13.3.1.3 节「Port Interface」、13.3.2 节「Ports and Port Interface for Notifications」 |
+
 #### 6.2.7 EEPROM 擦除作业错误
 
 ##### 6.2.7.1 摘要
