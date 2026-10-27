@@ -178,6 +178,7 @@ nav:
       - "MemMap": autosar/memory/memory_mapping/index.md
       - "NV数据处理指南": autosar/memory/nv_data_handling_guideline/index.md
       - "NvM": autosar/memory/nvram_manager/index.md
+      - "固件远程升级指南（FOTA）": autosar/memory/firmware_over_the_air/index.md
     - 方法论与模板:
 
       - "BSWMDT": autosar/methodology_templates/basic_software_module_description_template/index.md

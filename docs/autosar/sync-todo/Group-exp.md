@@ -124,13 +124,19 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
   - [x] Step 6 — TODO.md row + commit/PR
-- [ ] exp firmware_over_the_air (AUTOSAR_EXP_FirmwareOverTheAir · Memory · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] exp firmware_over_the_air (AUTOSAR_CP_EXP_FirmwareOverTheAir · Memory · ❌ new article · 📖 skeleton-exempt)
+  - Note: numbered prose EXP document, chapters 1–6 mirrored (motivation, memory-stack prerequisites, terminology incl. FOTA process phases, detailed technical solution with FOTA Handler CDD + Dcm interaction + migration, sequence charts); source ch.6 "Appendix" = reference list — rendered unnumbered `## 参考文献` per VFB precedent so the [n] registry works
+  - Note: UML/state-machine text chrome around figures dropped (sd 1.1_FOTA_Init, stm labels etc.); 7 figures placed (Figure01–07)
+  - Note: census: 27 chapter refs applied; 1 UNRESOLVED (7.3.4.16.3 = external Dcm SWS section, correctly prose); 11 prose [n] citations linked (7 registry entries); cross-article mentions report-only (NvM/Dcm — batch gate)
+  - Note: glossary: FOTA +来源 line (one-term-once), +OTA new
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] exp adas_vmc (AUTOSAR_EXP_ADASVehicleMotionControl · ApplicationInterfaces (name per the source tree) · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

@@ -329,6 +329,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **FOTA**
 > 固件远程升级（**Firmware Over The Air**），通过无线通信进行固件远程更新。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
+> 来源：[固件远程升级指南（FOTA）](memory/firmware_over_the_air/index.md)（AUTOSAR_CP_EXP_FirmwareOverTheAir · R23-11）
 
 **Fault**
 > 故障。系统的瞬态或永久性变化，使其完整性偏离预期的正确完整性；被激活并传播后成为错误（error）。
