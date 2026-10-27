@@ -325,6 +325,11 @@ def _registry_sec(article: str):
     # Entry lines may carry the invisible #ref-n anchor prefix --apply adds.
     sec = re.search(r"### 3\.1\..*?(?=### 3\.2)", article, re.S)
     if not (sec and re.search(rf"^{REF_ANCHOR}\[\d+\]\s", sec.group(0), re.M)):
+        # §3.1 without a §3.2 (sources whose ch.3 has no "Related
+        # specifications" section, e.g. SWS_BSWGeneral): end the slice at
+        # the next chapter heading instead.
+        sec = re.search(r"### 3\.1\..*?(?=\n## )", article, re.S)
+    if not (sec and re.search(rf"^{REF_ANCHOR}\[\d+\]\s", sec.group(0), re.M)):
         sec = re.search(r"## 参考文献\n.*?(?=\n## )", article, re.S)
     return sec
 

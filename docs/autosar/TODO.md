@@ -106,8 +106,9 @@
 
 - ✅ [Standard Types](../general/standard_types/) — SWS_StandardTypes (2026-10-27 full Type A translation from R23-11 replacing the 9-line stub: title fixed from the wrong "ECU State Manager" + mkdocs.yml nav label "EcuM" → "Standard Types"; §7 API = 7 type definitions + 5 symbol definitions + 函数定义 不适用, prose folds + literal bullets per the mcu/gpt style, Table 8.1 error codes as GFM; §8/§9 = 不适用 per source ch.9/10; appendix B 需求历史 with verbatim item-ID fences; Figure8-1 bit-layout extracted; source ch.5 "Software Architecture" → §5 软件架构 direct translation, empty 5.1 kept)
 - ✅ [ComStack Types 通信栈类型](general/communication_stack_types/index.md) — SWS_CommunicationStackTypes (2026-10-27 full Type A translation from R23-11: new article + nav `"ComStack Types"`; ch.6 Requirements Tracing + appendix A dropped per mandate; ch.2 two tables → 13 blockquote entries (incl. the long OSEK/VDX row); ch.7 → §6 功能规格 (3 general reqs + 6.2 错误分类 5×"none" + 6.3 安全事件); ch.8 → §7 API规范 (14 types 7.1.1–7.1.14, 8.2 不适用 → §7.2); ch.9 不适用 → §8 时序图; ch.10 → §9 配置规范 (9.1 发布信息); 0 figures — all source images are page-chrome strips; glossary +13 terms incl. an API 来源 line)
+- ✅ [BSW General（基础软件模块通用规范）](general/bsw_general/) — SWS_BSWGeneral (2026-10-27 full Type A translation from R23-11: new article — the foundation document cited as an input document by every module article; ch.6 Requirements Tracing dropped per mandate; source appendix "A Change History" is a change-history annex (not the droppable NA-requirements appendix) and translates as `## B. AUTOSAR 可追溯项变更历史` with item-ID lists verbatim in fences; ch.9 → `## 8. 时序图` (one-sentence chapter per source); ch.10 → `## 9. 配置规范` (template tables, no containers); 1 content figure; OS-services table (66 rows) kept as parsed from R23-11; check_api_sync 0==0)
 
-❌ Missing (2): SWS_BSWGeneral, SWS_PlatformTypes (a separate document from StandardTypes)
+❌ Missing (1): SWS_PlatformTypes (a separate document from StandardTypes)
 
 ## io
 

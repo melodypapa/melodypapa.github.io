@@ -148,6 +148,7 @@ nav:
       - "Dem": autosar/diagnostics/diagnostic_event_manager/index.md
     - 通用（General）:
 
+      - "BSW General": autosar/general/bsw_general/index.md
       - "Standard Types": autosar/general/standard_types/index.md
       - "ComStack Types": autosar/general/communication_stack_types/index.md
     - I/O:
