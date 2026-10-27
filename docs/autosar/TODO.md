@@ -103,9 +103,11 @@
 
 - 📖 [AUTOSAR 术语表（TR Glossary）](foundation/general/tr_glossary/) — AUTOSAR_FO_TR_Glossary（Foundation · R23-11）（2026-10-24 翻译中：ch.2 缩略语 206 条 ✅；ch.4 术语定义 343 条分批进行；内容并入术语表页）
 
+- ✅ [BSW General（基础软件模块通用规范）](general/bsw_general/) — SWS_BSWGeneral (2026-10-27 full Type A translation from R23-11: new article — the foundation document cited as an input document by every module article; ch.6 Requirements Tracing dropped per mandate; source appendix "A Change History" is a change-history annex (not the droppable NA-requirements appendix) and translates as `## B. AUTOSAR 可追溯项变更历史` with item-ID lists verbatim in fences; ch.9 → `## 8. 时序图` (one-sentence chapter per source); ch.10 → `## 9. 配置规范` (template tables, no containers); 1 content figure; OS-services table (66 rows) kept as parsed from R23-11; check_api_sync 0==0)
+
 - ⛔ [platform_types](../general/platform_types/) — SWS_StandardTypes (stub; front-matter title wrongly says ECU State Manager, nav label needs the same fix)
 
-❌ Missing (3): SWS_BSWGeneral, SWS_PlatformTypes (a separate document from StandardTypes), SWS_CommunicationStackTypes
+❌ Missing (2): SWS_PlatformTypes (a separate document from StandardTypes), SWS_CommunicationStackTypes
 
 ## io
 
