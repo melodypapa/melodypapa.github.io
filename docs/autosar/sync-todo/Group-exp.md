@@ -277,11 +277,17 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp sw_cluster_design_and_integration (AUTOSAR_EXP_SwClusterDesignAndIntegration · SystemServices · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: source document is AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline.md (11,250 lines, largest EXP doc); article at system_services/sw_cluster_design_and_integration/ (~8,370 lines)
+  - Note: chapters 1–6 + appendices A–D mirrored; 6 content figures; ch.5 C examples (Examples 5.1–5.9) re-indented from the line-numbered conversion, verbatim content
+  - Note: appendix A (21 ARXML listing files, ~7,900 source lines) emitted as xml code fences by script: chrome (page headers/footers/glyph/image refs) stripped, entities un-escaped, line order preserved — the conversion carries line-ordering artifacts in long listings; 译者注 at the appendix points to the Concept-670 supplementary folder as the authoritative source (user verification reminder at batch gate)
+  - Note: appendices B (meta classes, ~30 tables) / C (ECUC params) / D (C-API, incl. SwCluC_BManif_GetHandle service table) extracted mechanically with duplicate-column collapse; row labels + identifiers translated; ~336 long English description cells KEPT IN ENGLISH with a 译者注 — **user decision at batch gate: approve retention + Backlog translation pass, or request full translation now**
+  - Note: prose [1]–[7] citations linked manually to `<a id="ref-n">` anchors in §3; iso.org kept plain text (anti-bot Backlog); [SWS_SwCluC_00050]/[SWS_SwCluC_00056] kept in prose (source-inline SWS ids, EXP class)
+  - Note: glossary +6 (SwClu, SwCluC, Binary Object, Binary Manifest, Proxy Module, LET); check_api_sync N/A; gen_api_list --check clean; strict build 0 WARNING / 0 anchor notices for this article
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
   - [ ] Step 6 — TODO.md row + commit/PR
 
 ## Not queued (deliberately skipped)

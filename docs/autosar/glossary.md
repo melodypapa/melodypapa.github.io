@@ -144,6 +144,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 制动辅助（**Brake Assist**）
 > 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
 
+**Binary Manifest**
+> 软件集群的二进制对象的定义良好的接口，提供资源的元信息与访问此类资源的句柄（**Binary Manifest**）
+> 来源：[软件集群设计与集成指南](system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline · R23-11）
+
+**Binary Object**
+> 一组文件的集合，包含在编程到目标 ECU 之前不会再被修改的二进制可执行代码与数据（**Binary Object**）
+> 来源：[软件集群设计与集成指南](system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline · R23-11）
+
 **BIST**
 > 内建自测试（**Built in Self Test**）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
@@ -761,6 +769,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 发光二极管（**Light Emitting Diode**）
 > 来源：[HMI/多媒体/远程信息处理域应用接口](application_interfaces/hmi/index.md)（AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics · R23-11）
 
+**LET**
+> 逻辑执行时间——通过抽象物理执行来确保稳定软件行为的概念（**Logical Execution Time**）
+> 来源：[软件集群设计与集成指南](system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline · R23-11）
+
 **LKA**
 > 车道保持辅助（**Lane Keep Assist**）。
 > 来源：[ADAS 与车辆运动控制接口](application_interfaces/adas_vmc/index.md)（AUTOSAR_CP_EXP_AIADASAndVMC · R23-11）
@@ -1043,6 +1055,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface · R23-11）
 
 
+**Proxy Module**
+> 替代应用软件集群中一个 BSW 模块的模块，拆分为高代理与低代理（**Proxy Module**）
+> 来源：[软件集群设计与集成指南](system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline · R23-11）
+
 **PTC**
 > 动力总成协调器（**Powertrain Coordinator**）
 > 来源：[动力总成（发动机）域应用接口](application_interfaces/powertrain/index.md)（AUTOSAR_CP_EXP_AIPowertrain · R23-11）
@@ -1274,6 +1290,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SWCD**
 > 软件组件描述（**Software Component Description**）
 > 来源：[AUTOSAR BSW General（基础软件模块通用规范）](general/bsw_general/index.md)（SWS_BSWGeneral · R23-11）
+
+**SwClu**
+> 软件集群——将在一台机器上部署软件相关的所有 AUTOSAR 产物分组在一起的独立构建单元（**Software Cluster**）
+> 来源：[软件集群设计与集成指南](system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline · R23-11）
+
+**SwCluC**
+> 软件集群连接（**Software Cluster Connection**）
+> 来源：[软件集群设计与集成指南](system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline · R23-11）
 
 **SWCo**
 > 软件组合（**Software Composition**）
