@@ -10,6 +10,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## A
 
+**ABS**
+> 防抱死制动系统（**Antilock Braking System**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
 **Accuracy**
 > 精度（**Accuracy**）取决于用于采样或者生成的硬件外围设备。如：**ADC**转换器可以是 8/10/12/16 位转换器
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
@@ -108,6 +112,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 存储 **Bank** 是一组扇区批次（**Sector Batch**）的集合。如果存储技术支持按扇区分段，则存储 **Bank** 是不允许边读边写操作的扇区批次组实例。对于闪存设备，**Bank** 通常映射到单独的闪存控制器。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
 
+**BAS**
+> 制动辅助（**Brake Assist**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
 **BIST**
 > 内建自测试（**Built in Self Test**）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
@@ -119,6 +127,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ATWS**
 > 防盗警告系统（**Anti-Theft Warning System**）。可借助光学与声学信号警示未授权进入尝试、并可防止发动机被起动的防盗系统。
 > 来源：[车身与舒适域应用接口](application_interfaces/body_and_comfort/index.md)（AUTOSAR_CP_EXP_AIBodyAndComfort · R23-11）
+
+**BRWS**
+> 基本后轮转向（**Basic Rear Wheel Steering**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**BSAS**
+> 基本转向角叠加（**Basic Steering Angle Superposition**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**BSTS**
+> 基本转向力矩叠加（**Basic Steering Torque Superposition**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
 
 **BSW**
 > 基础软件（**Basic Software**）
@@ -174,6 +194,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > **Callout**是一种函数**Stub**。主要在配置时进行填写，目的是向提供**Callout**函数的模块添加功能。
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
 
+**CBC**
+> 弯道制动控制（**Cornering Brake Control**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
 **CDD**
 > 复杂设备驱动程序（**Complex Device Driver**）。
 > 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver · R23-11）
@@ -196,6 +220,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Checkpoint**
 > **被监督实体**控制流中的一个点，在该处向**WdgM** 报告活动。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**CoG**
+> 重心（**Center of Gravity**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
 
 **Com**
 > 通信（**Communication**）
@@ -268,6 +296,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## D
 
+**DAS**
+> 驾驶辅助系统（**Driver Assistance System**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
 **Data frame**
 > 数据帧：**SPI** 总线上与 SpiDataWidth 相关的位的物理帧。
 > 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver · R23-11）
@@ -315,6 +347,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 数字输入/输出（**Digital Input/Output**）
 > 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
 
+**DTC**
+> 拖滞力矩调节（**Regulation of the Drag Torque**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
 ## E
 
 **EAI**
@@ -324,6 +360,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **EB**
 > 外部缓冲通道（**Externally buffered channels**）：包含待传输数据的缓冲区位于 SPI 处理器/驱动程序之外。
 > 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver · R23-11）
+
+**EBD**
+> 制动力分配（**Electronic Brake Force Distribution**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
 
 **ECC**
 > 纠错码（**Error Correction Code**）
@@ -358,6 +398,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > （拉丁语）exempli gratia =（英语）for example，即「例如」。
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes · R23-11）
 
+**EPB**
+> 电子驻车制动（**Electronic Parking Brake**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**ESC**
+> 电子稳定控制（**Electronic Stability Control**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
 **i.e.**
 > （拉丁语）id est =（英语）that is，即「也就是说」。
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes · R23-11）
@@ -388,6 +436,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[应用层错误处理](general/application_level_error_handling/index.md)（AUTOSAR_CP_EXP_ApplicationLevelErrorHandling · R23-11）
 
 ## F
+
+**FA**
+> 前轴（**Front Axle**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
 
 **Fast-Mode**
 > 对看门狗硬件的触发必须以较短的超时期限完成。例如，该模式可用于 **ECU** 的正常运行。例如，看门狗硬件被配置为窗口模式（触发看门狗必须发生在超时期限内的特定最小/最大边界中）且超时期限为 5 毫秒。
@@ -463,6 +515,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Hardware Trigger**
 > 硬件触发是**ADC**内部触发信号，用于启动ADC通道组的一次转换。**ADC**硬件触发在ADC硬件内部生成（例如：基于**ADC**定时器或触发沿信号）。触发硬件是强耦合或者直接集成在**ADC**的硬件中。当检测到硬件触发后，无需软件即可启动**ADC**通道组转换。**注意：**即使**ADC**硬件不支持硬件触发，也可以通过软件触发结合**GPT/ICU**驱动程序来实现类似的行为。（例如：在GPT定时器通知函数中，启动软件触发的**ADC**通道组的转换）
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
+
+**HDC**
+> 坡道缓降控制（**Hill Decent Control**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**HHC**
+> 坡道起步控制（**Hill Hold Control**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
 
 **HSM**
 > 硬件安全模块（**Hardware Security Module**），专用安全 **MCU** 的内核。
@@ -712,6 +772,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 空操作（**Null Operation**）
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
 
+**NVH**
+> 噪声、振动、平顺性（**Noise, Vibration, Harshness**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
 **NVRAM**
 > 非易失性 RAM（**Non-Volatile RAM**）
 > 来源：[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping · R23-11）
@@ -816,6 +880,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 
 ## R
+
+**RA**
+> 后轴（**Rear Axle**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**RSC**
+> 侧翻稳定控制（**Roll Stability Control**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
 
 **Runnable**
 > 可运行体。原子软件组件实现中的一段可由 RTE 启动的指令序列；在任务的上下文中运行。
@@ -944,9 +1016,17 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 串行外设接口（**Serial Peripheral Interface**）
 > 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
 
+**SR**
+> 态势识别（**Situation Recognition**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
 **SRC**
 > 监督参考周期（**Supervision Reference Cycle**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**SSM**
+> 静止管理（**Stand Still Manager/Management**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
 
 **Sub Address Area**
 > 子地址区（**Sub Address Area**）是指逻辑地址空间中的连续存储区域，并映射到一个存储设备的一个扇区批次（**Sector Batch**）。
@@ -1010,6 +1090,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 目标时间：到达该值时应有某事发生。其行为取决于配置和已启用的功能。
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
 
+**TCS**
+> 牵引力控制系统（**Traction Control System**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
 **test interval**
 > **CoreTest** 测试间隔：在配置为构成一个完整内核测试的硬件资源上（后台模式下执行的）所有部分测试的总和。
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
@@ -1050,6 +1134,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## V
 
+
+**VGR**
+> 可变传动比（**Variable Gear Ratio**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**VLC**
+> 车辆纵向控制（**Vehicle Longitudinal Control**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**VM**
+> 车辆模型（**Vehicle Model**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
 
 **VMC**
 > 车辆运动控制（**Vehicle Motion Control**）。
@@ -1094,3 +1190,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **XML**
 > 可扩展标记语言（**eXtensible Markup Language**）
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
+
+## Y
+
+**YRC**
+> 横摆角速度控制（**Yaw Rate Control**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）

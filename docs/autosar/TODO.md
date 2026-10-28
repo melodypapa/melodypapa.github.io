@@ -3,7 +3,7 @@
 > Maintained by the autosar-translate skill per [STANDARD.md](STANDARD.md); update the touched entry and the `Last updated` date after every sync.
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-10-28
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-10-29
 
 ## Backlog
 
@@ -62,7 +62,7 @@
 | ⚠️ Partial | 16 | missing ≥1 chapter (most miss the 「API规范」 chapter) |
 | ⛔ Stub | 4 | 9–19 lines only |
 | ❌ Missing (SWS) | 78 | R23-11 has 127 SWS docs in total; 49 covered (38.6%) |
-| ❌ Missing (EXP) | 20 | R23-11 has 22 EXP docs in total; 2 covered |
+| ❌ Missing (EXP) | 19 | R23-11 has 22 EXP docs in total; 3 covered |
 | 📖 Guide/topic | 8 | exempt from the Type A skeleton |
 
 ## communication
@@ -178,11 +178,13 @@
 - ~~**Safety (2)**: SWS_WatchdogInterface (WdgIf), SWS_WatchdogDriver (Wdg)~~ — both translated 2026-10-27
 - **Security (2)**: SWS_Firewall, SWS_IntrusionDetectionSystemManager (IdsM)
 
-## Missing EXP guides (19)
+## Missing EXP guides (18)
 
 Translated 2026-10-28: LayeredSoftwareArchitecture → [general/layered_software_architecture](general/layered_software_architecture/) (📖 guide).
 
-ApplicationInterfaces 5 (Chassis, HMI, OccupantSafety, Powertrain, UserGuide), BSWGeneral 0, General 1 (VFB), SWArch 1 (ARTI), Safety 2 (FunctionalSafetyMeasures, SafetyUseCase), SystemServices 1 (SwClusterDesignAndIntegration)
+ApplicationInterfaces 4 (HMI, OccupantSafety, Powertrain, UserGuide), BSWGeneral 0, General 1 (VFB), SWArch 1 (ARTI), Safety 2 (FunctionalSafetyMeasures, SafetyUseCase), SystemServices 1 (SwClusterDesignAndIntegration)
+
+Translated 2026-10-29: AIChassis → [application_interfaces/chassis](application_interfaces/chassis/) (📖 guide).
 
 ## Suggested priority (2026-10-23 snapshot)
 

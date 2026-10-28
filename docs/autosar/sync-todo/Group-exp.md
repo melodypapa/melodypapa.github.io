@@ -39,13 +39,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
   - Note: PR #157 (Closes #146); post-rebase article commit f60d11a on feature/exp-layered_software_architecture; stacked PR chain merged in row order
   - [x] Step 6 — TODO.md row + commit/PR
-- [ ] exp vfb (AUTOSAR_EXP_VFB · General · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] exp vfb (AUTOSAR_EXP_VFB · General · ❌ new article · 📖 skeleton-exempt)
+  - Note: duplicate row — the R23-11 VFB guide is AUTOSAR_CP_EXP_VFB, translated by the completed row at the top of this file (PR #158); the non-CP name AUTOSAR_EXP_VFB exists only in R22-11 (older release of the same document, not this batch's base). Nothing to translate; resolution recorded for the batch confirmation gate.
+  - [x] Step 1 — Source resolution + gap analysis (N/A: duplicate row, no R23-11 source beyond the completed CP_EXP_VFB)
+  - [x] Step 2 — In-place translation/completion (N/A: article already live)
+  - [x] Step 3 — Phase A mechanical checks (N/A: no content change)
+  - [x] Step 4 — Phase B coverage map + fidelity (N/A: no content change)
+  - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
+  - [x] Step 6 — TODO.md row + commit/PR (N/A: no TODO.md change — row already ✅ via PR #158)
 - [x] exp bsw_distribution_guide (AUTOSAR_CP_EXP_BSWDistributionGuide · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
   - Note: numbered prose EXP document, chapters 1–6 mirrored directly (2.x deep tree: multi-core BSW, MCAL distribution, Com-Stack/Crypto-Stack distribution, safety partitioning, outlook, glossary)
   - Note: references chapter unnumbered `## 参考文献` (VFB precedent) so the [n] registry works; entries converted to plain [n]/>docid format (list-marker form is not parsed by the registry)
@@ -177,11 +178,19 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: PR #167 (Closes #156); post-rebase article commit 9055f25 on feature/exp-body_and_comfort; stacked PR chain merged in row order
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] exp chassis (AUTOSAR_EXP_Chassis · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: source document is AUTOSAR_CP_EXP_AIChassis.md (queue name "Chassis" = AIChassis in R23-11); article at application_interfaces/chassis/ (landing page + nav entry already existed from adas_vmc)
+  - Note: chapters 1–5 mirrored; PDF→markdown chrome (interleaved diagram text, page-break glyph markers, change-history tables, Contents) dropped; 25 content figures placed (Figure01–25, content-hash dedupe, 8 recurring deco strips ≤36px dropped); source figure captions not repeated as text
+  - Note: table 2.1 (ACC object list) restructured per cluster — the page-scrambled trailing rows (LaneProblty..DstMaxForFolwCtrl) verified to belong to ObjDataRlvForFolwCtrl1 via the source PDF layout + R22-11 conversion; table 4.3's 4th column header verified as ONE cell ("Switchable spring Body level actuator") against the PDF
+  - Note: prose [n] citations linked manually to `<a id="ref-n">` anchors in §2.4 (15 markers) — script gap: link_candidates `_registry_sec` does not recognize a 「参考文档」-titled registry section (only 输入文件 x.1 / 参考文献), so --apply can't convert this shape; census shows the 5 anchor lines as false-positive UNRESOLVED
+  - Note: source typo kept verbatim: Table 2.2 "TCS | Transaction Control System" (ch.4 body itself defines TCS as Traction Control System) — user decision at batch gate; iso.org URLs kept plain text (known anti-bot Backlog case)
+  - Note: "Decision:" fragment cluster after §2.2.1.3.11 dropped as Figure 2.2 diagram chrome (interleaved box labels Keyword: St/Mod etc.) — batch-gate verification reminder
+  - Note: glossary +25 (ABS..YRC incl. new Y letter section); check_api_sync N/A (EXP guide); gen_api_list --check clean; strict build 0 WARNING / 0 anchor notices
+  - Note: cross-article report-only: [5] VFB → site VFB article (SITE class, batch gate); 4 参见 lines report-only
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp hmi (AUTOSAR_EXP_HMI · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis
