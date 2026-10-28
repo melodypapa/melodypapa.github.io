@@ -165,6 +165,9 @@ def slug_of(num: str, title: str) -> str:
     num = num.rstrip(".")
     num = num.replace(".", "")
     title = title.strip().lower()
+    # Material/uslugify strips CJK/fullwidth punctuation (「」（） etc.) from
+    # slugs — the old code kept them and produced dead anchors (VFB 3.8/3.10).
+    title = re.sub(r"[\u3000-\u303f\uff00-\uffef「」『』（）·：；！？]", "", title)
     title = re.sub(r"\s+", "-", title)
     return f"{num}-{title}"
 
@@ -337,7 +340,8 @@ def _registry_sec(article: str):
         # the next chapter heading instead.
         sec = re.search(r"### 3\.1\..*?(?=\n## )", article, re.S)
     if not (sec and re.search(rf"^{REF_ANCHOR}\[\d+\]\s", sec.group(0), re.M)):
-        sec = re.search(r"## 参考文献\n.*?(?=\n## )", article, re.S)
+        # the 参考文献 section may be the article's last section (VFB ch.13 "References")
+        sec = re.search(r"## 参考文献\n.*?(?=\n## |\Z)", article, re.S)
     return sec
 
 

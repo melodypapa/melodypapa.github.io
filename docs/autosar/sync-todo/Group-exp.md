@@ -7,6 +7,21 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 
 ## Queue
 
+- [x] exp vfb (AUTOSAR_CP_EXP_VFB · General · ❌ new article · 📖 skeleton-exempt)
+  - Note: prose EXP document with numbered chapters 1–13, mirrored directly; source Specification Items ([EXP_VFB_XXXXX] markers) translated with the ID brackets dropped (corpus no-requirement-IDs rule) — decision for batch gate
+  - Note: §3.3.1 port-type items — each item's single Port-Icon recovered from the source PDF by position (the md conversion shifted icons across item blocks); icons copied as PortIcon1–34.png, 2 missing item illustrations (Application/Service SWC) extracted as Illus_*.png
+  - Note: references chapter kept unnumbered `## 参考文献` (guide_to_mode_management precedent) so the [n] citation registry works — source ch.13 numbering dropped for the registry (decision for batch gate)
+  - Note: script fixes in this branch — link_candidates.py: (a) _registry_sec matches a 参考文献 section at end-of-file (was: only mid-article); (b) slug_of strips CJK/fullwidth punctuation like Material (「」（） stayed in slugs and produced 2 dead anchors)
+  - Note: census: 25 chapter-number refs applied (2 UNRESOLVED: 3.4.1/3.3.1 — headings exist but the script's slug did not match; verified and left prose); 38 prose [n] citations linked to the registry (15 entries); cross-article mentions report-only (batch gate)
+  - Note: glossary +6 terms (Assembly Connector, Port-Interface, Prototype, Runnable, VFB, Variation Point)
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [x] exp layered_software_architecture (AUTOSAR_CP_EXP_LayeredSoftwareArchitecture · General · ❌ new article · 📖 skeleton-exempt)
   - Note: source is a 183-page slide deck — R23-11 conversion flattens every slide title to `##`; the article's numbered structure (## 1. Architecture with 1.1–1.8, ## 2. Configuration, ## 3. Integration and Runtime Aspects with 3.1–3.10) is taken from the deck's own master TOC slide (PDF p8); slides become unnumbered #### sub-headings merged into their TOC sections
   - Note: doc-meta chrome dropped (change-history tables, disclaimer, TOC slides) per guide_to_mode_management precedent
