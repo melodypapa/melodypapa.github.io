@@ -241,11 +241,16 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp arti (AUTOSAR_EXP_ARTI · SWArch · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: source document is AUTOSAR_CP_EXP_ARTI.md; article at sw_arch/arti/ — also creates the NEW sw_arch/ section (landing page + nav group 「SW 架构（SW Architecture）」 after RTE)
+  - Note: chapters 1–9 mirrored (unnumbered Known Limitations rendered as `## 已知限制` — content "No known limitations yet." is a real sentence, not a None. placeholder); 5 content figures (state diagrams + Ecuc class diagrams; one 897×118 code-page sliver and one 304×18 strip dropped as deco)
+  - Note: listings 3.1–3.4, 4.1–4.2, 6.1–6.5, 7.1–7.6 reconstructed from the PDF-conversion fragments (line-number stripping, entity un-escaping, XML re-indentation); the Example 4.1 XML block reassembled from scrambled fragments; listing 7.2's trailing stray `*/` kept with a 译者注
+  - Note: prose [1]–[4] citations linked manually to `<a id="ref-n">` anchors in §9.1.1; SWS_OS/RTE articles exist on site (SITE-class hop-2 — batch-gate decision)
+  - Note: glossary +2 (ARTI, ORTI); check_api_sync N/A; gen_api_list --check clean
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp functional_safety_measures (AUTOSAR_EXP_FunctionalSafetyMeasures · Safety · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis

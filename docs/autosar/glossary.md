@@ -102,6 +102,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
 > 来源：[AUTOSAR Standard Types（标准类型）](general/standard_types/index.md)（SWS_StandardTypes · R23-11）
 
+**ARTI**
+> AUTOSAR 运行时接口——用于调试与跟踪嵌入式系统运行时行为的一组标准（**AUTOSAR Run-Time Interface**）
+> 来源：[AUTOSAR 运行时接口（ARTI）](sw_arch/arti/index.md)（AUTOSAR_CP_EXP_ARTI · R23-11）
+
 **arxml**
 > .arxml——AUTOSAR 可扩展标记语言文件（**AUTOSAR Extensible Markup Language File**）
 > 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
@@ -886,6 +890,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ORA**
 > 乘员约束激活（**Occupant Restraint Activation**）
 > 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**ORTI**
+> OSEK 运行时接口——针对 OSEK 平台将跟踪工具对 OS 内部的访问标准化的标准（**OSEK Run-Time Interface**）
+> 来源：[AUTOSAR 运行时接口（ARTI）](sw_arch/arti/index.md)（AUTOSAR_CP_EXP_ARTI · R23-11）
 
 **OSEK/VDX**
 > 1993 年 5 月，**OSEK** 作为德国汽车工业的一个联合项目创立，旨在为车辆内分布式控制单元的开放式架构建立一个行业标准。**OSEK** 是德语术语「Offene Systeme und deren Schnittstellen für die Elektronik im Kraftfahrzeug」（英语：Open Systems and the Corresponding Interfaces for Automotive Electronics）的缩写。初始项目合作伙伴为 **BMW**、**Bosch**、**Daimler Chrysler**、**Opel**、**Siemens**、**VW** 以及作为协调方的卡尔斯鲁厄大学 **IIIT**。法国汽车制造商 **PSA** 和 **Renault** 于 1994 年加入 **OSEK**，引入了他们的 **VDX**（**Vehicle Distributed eXecutive**）方案——法国汽车工业内的一个类似项目。在 1995 年 10 月的第一次研讨会上，**OSEK/VDX** 小组展示了 **OSEK** 与 **VDX** 之间协调一致的规范成果。1997 年 10 月第 2 届国际 **OSEK/VDX** 研讨会之后，发布了规范的第二版。

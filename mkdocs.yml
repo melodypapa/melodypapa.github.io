@@ -206,6 +206,9 @@ nav:
     - RTE:
 
       - "RTE": autosar/rte/index.md
+    - SW 架构（SW Architecture）:
+      - autosar/sw_arch/index.md
+      - "AUTOSAR 运行时接口（ARTI）": autosar/sw_arch/arti/index.md
     - 应用接口（Application Interfaces）:
       - autosar/application_interfaces/index.md
       - "ADAS 与车辆运动控制接口": autosar/application_interfaces/adas_vmc/index.md
