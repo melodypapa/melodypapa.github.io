@@ -56,13 +56,15 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [x] Step 6 — TODO.md row + commit/PR — commit recorded below
+  - [x] Step 6 — TODO.md row + commit/PR — commit f915d45 (branch feature/group-communication-sync)
 - [ ] ethernet_interface (SWS_EthernetInterface · R23-11 markdown · ⚠️ missing API chapter)
   - Note: one of the "6 articles missing only the API chapter"
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-29 gap analysis — the ⚠️ understates the gap: the ⚠️ understates it; real gaps vs R23-11: no 已知限制 chapter; §2 intro sentence missing + OA TC10 entry kept a [5] citation marker (dropped per acronym rule); §3.1 legacy 输入文件 heading + pre-R23-11 20-entry registry → R23-11 23 entries (old 17/18/19/20 = EthSwt/WEthTrcv/CV2x/MACsec now 20/21/22/23; new 15/17/18/19 enter prose); §3.2 heading 相关规格→相关规范; §4.1 局限性→限制, §4.2 汽车领域的适用性→汽车域的适用性, §5 对其他模块的依赖关系→对其他模块的依赖, §6 功能规范→功能规格 (no inbound anchors); §6 missing source 7.1.11 (frame/PDU communication incl. Reception/Transmission requirement bodies, PDU state handling, metadata, ingress queues) / 7.1.12–7.1.16 (Global Time, WEth, CV2X, MACsec, Firewall) / 7.2 安全事件 (4-event table) / 7.3 错误分类 (dev 9 rows, runtime 1, transient/production/extended none); §7 wholly missing (8.1 63-row imported types incl. draft/obsolete annotations, 8.2 4 types, 8.3 125 functions, 8.4 8 callbacks, 8.5 5 scheduled, 8.6 期望接口 0 mandatory/53 optional/3 configurable); source ch.9 → new §8 时序图 13 figures; source ch.10 → new §9 配置规范 15 containers; appendix A droppable; appendix B → new ## B.
+  - Note: 2026-10-29 completion run — legacy 3 `\<…\>` placeholders converted to `&lt;…&gt;` (sweep row in TODO.md updated); status annotations "(draft)"/"(obsolete)" in service-table cells dropped as PDF chrome of the atp.Status tags, recorded here as a decision; source-faithful oddities kept verbatim: 7.3.21's duplicate timeQualPtr/timeStampPtr check ×2, 7.3.31's BufIdx check ×3, 7.3.89's "GetChanCV2xPC5TxParams 读接收方向" description, 9.2.4 EthIfCtrlMtu truncated source cell marked 「源文档此处截断」; EthIf_GetSwitchIdentifier return-value cell empty in source; Figures 9-1..9-13 + 10-1..10-10 extracted (cad1600a/f5f4bf49/31a8ee06/8c27c74a/a133f680 deco hashes dropped — a133f680 7.9KB joins the deco cluster); Figure 9.11 source caption is itself broken ("and Partial Network Cluster") — heading uses the section title. Phase A: strict build exit 0, 0 WARNING, no ethernet_interface INFO; heading audit ✓ (已知限制 before §1, B. appendix, no forbidden variants); hygiene ✓; acronym 17 term lines = 17 source rows ✓; check_api_sync OK (4 types/125 functions/125 说明 blocks); gen_api_list --check up to date; link_candidates --apply: 346 lines (10 chapter-ref + 35 citation links + registry anchors), idempotent on re-run; census: cross-article mentions EthSM/Det/Nm NO-ARTICLE, BswM/PORT/EcuM SITE report-only; comma-form citation "[20, 以太网交换机驱动程序规范]" and legacy "[参考文献**16**，…]" form unconvertible by apply (known open case) — left as prose; glossary extension skipped (batch-level pending item, rows 1–4 also skipped). Steps 5/6 per user instruction: commit first, combined confirmation after
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] lin_interface (SWS_LINInterface · R23-11 markdown · ⚠️ missing API chapter)
