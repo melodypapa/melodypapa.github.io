@@ -28,6 +28,7 @@ title: "通信（Communication）"
 * [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](ethernet_switch_driver/index.md)
 * [AUTOSAR SoAd (Socket Adaptor)](SoAd/SoAd.md)
 * [AUTOSAR UdpNm (UDP Network Management)](udp_network_management/index.md)
+* [AUTOSAR XCP（通用校准协议）](xcp/index.md)
 
 ### 数据处理与安全
 

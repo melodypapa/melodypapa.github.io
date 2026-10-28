@@ -142,6 +142,7 @@ nav:
       - "SD": autosar/communication/service_discovery/index.md
       - "Spi": autosar/communication/spi_handler_driver/index.md
       - "SoAd": autosar/communication/SoAd/SoAd.md
+      - "Xcp": autosar/communication/xcp/index.md
       - "UdpNm": autosar/communication/udp_network_management/index.md
     - 加密（Crypto）:
 

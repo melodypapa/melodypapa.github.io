@@ -61,13 +61,16 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (19 content figures embedded; deco dropped)
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
   - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync; hash in the batched report)
-- [ ] xcp (SWS_XCP · R23-11 markdown · ❌ new article, short name XCP)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] xcp (SWS_XCP · R23-11 markdown · ❌ new article, short name XCP)
+  - Note: article `communication/xcp/`, nav label "Xcp". Shape: ch.2 32 acronyms · ch.6 dropped · ch.7 → §6 (6.1–6.3 XCP on CAN/FlexRay/Ethernet, 6.4 通用需求, 6.5 错误分类 dev table (source-typo error code CP_E_INVALID_PDUID kept verbatim), 6.6 版本检查, 6.7 安全事件; Figure7_1 architecture diagram) · ch.8 → §7 (2 types incl. Xcp_TransmissionModeType — source heading carries stray-space artifact "Xcp_Transmission Mode Type"; 3 functions; 3 callbacks with <Lo> placeholder entities; MainFunction; 7.6.1 强制接口 "There are no mandatory interfaces." table → sentence; 7.6.2 可选接口 8 rows; 7.6.3 可配置接口 prose only) · ch.9 → §8 (6 figures) · ch.10 → §9 (15 containers 9.1.1–9.1.15, XcpPdu choice container, figures 10.1–10.6) · ch.A "Not applicable requirements" dropped (droppable set) · ch.B → B (B.1.1 R22-11 78 ids + B.2.1 R23-11 79 ids recovered from the markdown text lists)
+  - Note: Phase A — strict build exit 0 / 0 WARNING; headings §1–§9 + B; hygiene 0; acronym 32 rows = source 32 rows, no tables; check_api_sync flags one name: source 8.2.2 heading artifact "Xcp_Transmission Mode Type" — 2/2 types and 3/3 functions match after artifact normalization, recorded as N/A-with-explanation; gen_api_list regenerated (XCP 2 types + 3 functions SITE-linked, --check 0); census --apply: 6 links + 1 chapter-ref + 33 citation links + 11 registry anchors, idempotent
+  - Note: glossary +22 new terms (A2L, ASAM, CAN, CanIf, CTO, DAQ, DTO, FrIf, LPDU, MCD, MISRA, ODT, RAM, ROM, SchM, SRS, STIM, SWS, TS, UDP/IP, URL, XCP), no appends needed
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion (new article, main session per no-subagent rule)
+  - [x] Step 3 — Phase A mechanical checks (evidence above; one artifact-normalized name)
+  - [x] Step 4 — Phase B coverage map + fidelity (13 content figures embedded; deco dropped)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync; hash in the batched report)
 - [ ] canxl_driver (SWS_CANXLDriver · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

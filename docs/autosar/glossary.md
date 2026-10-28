@@ -90,6 +90,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ARP**
 > Address Resolution Protocol —— 地址解析协议。
 > 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
+**ASAM**
+> 自动化与测量系统标准化协会（**Association for Standardization of Automation and Measuring Systems**）。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
 **ASN.1**
 > 抽象语法标记一号（**Abstract Syntax Notation One**）：一种描述数据结构的标准记法，常与 DER 编码规则一起用于证书等密码学数据的编码。
@@ -106,6 +109,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **AUTOSAR**
 > 汽车开放系统架构（**AUTomotive Open System ARchitecture**）
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
+**A2L**
+> ASAM 2MC 语言文件的文件扩展名（**File Extension for an ASAM 2MC Language File**）。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
 ## B
 
@@ -182,6 +188,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Callout**
 > **Callout**是一种函数**Stub**。主要在配置时进行填写，目的是向提供**Callout**函数的模块添加功能。
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
+**CAN**
+> Controller Area Network —— 控制器局域网。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
+**CanIf**
+> CAN Interface —— CAN 接口。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
 **CDD**
 > 复杂设备驱动程序（**Complex Device Driver**）。
@@ -275,6 +287,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CTID**
 > Context ID —— 上下文 ID。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
+**CTO**
+> Command Transfer Object —— 命令传输对象。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
 **CVC**
 > 卡片可验证证书（**Card Verifiable Certificate**）。
@@ -344,6 +359,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DHCP**
 > Diagnostic Host Configuration Protocol —— 诊断主机配置协议。
 > 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
+**DAQ**
+> Data AcQuisition, Data AcQuisition Packet —— 数据采集，数据采集包。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
+**DTO**
+> Data Transfer Object —— 数据传输对象。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
 ## E
 
@@ -453,6 +474,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 固件远程升级（**Firmware Over The Air**），通过无线通信进行固件远程更新。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
 > 来源：[固件远程升级指南（FOTA）](memory/firmware_over_the_air/index.md)（AUTOSAR_CP_EXP_FirmwareOverTheAir · R23-11）
+**FrIf**
+> FlexRay Interface —— FlexRay 接口。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
 **Functionality**
 > 功能：涵盖系统用户可见和用户不可见的功能方面（见 [2]）。在 **FiM** 上下文中，一个功能可以由一个或多个可运行实体的全部或部分内容、以同一组许可/禁止条件构成。
@@ -706,6 +730,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Lower Layer Modules（Lo）**
 > 位于 L-SDU Router 之下的模块。该层包括以太网通信接口模块。
 > 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
+**LPDU**
+> Data Link Layer PDU —— 数据链路层 PDU。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
 ## M
 
@@ -737,6 +764,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Message ID**
 > 用于表征消息自身所传输信息的 ID；唯一地标识一种日志或跟踪消息，并在开发或配置时静态固定。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
+**MCD**
+> Measurement Calibration and Diagnostics —— 测量、标定与诊断。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
+**MISRA**
+> 汽车工业软件可靠性协会（**Motor Industry Software Reliability Association**）。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
 **MCAL**
 > 微机抽象层（**Microcomputer Abstraction Layer**）
@@ -846,6 +879,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **OBDII**
 > 排放相关车载诊断（**Emission-related On-board Diagnostics**）。
 > 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager · R23-11）
+**ODT**
+> Object Descriptor Table —— 对象描述表。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
 **Off-Mode**
 > 看门狗硬件被禁用/关闭。这样做可能是为了关闭整个 **ECU**，而不遭受仍在运行的外部看门狗的周期性复位。对于安全关键系统，该模式可能不被允许。在这种情况下，必须将 **Wdg** 模块配置为禁止切换到此模式。
@@ -973,6 +1009,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **RKE**
 > 遥控无钥匙进入（**Remote Keyless Entry**）。设计用于远程锁定或解锁汽车进入的系统；单向广播无线电波，实现加密与滚动码算法。
 > 来源：[车身与舒适域应用接口](application_interfaces/body_and_comfort/index.md)（AUTOSAR_CP_EXP_AIBodyAndComfort · R23-11）
+**RAM**
+> Random Access Memory —— 随机访问存储器。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
+**ROM**
+> Read Only Memory —— 只读存储器。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
 ## S
 
@@ -989,6 +1031,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Session ID**
 > 一个日志或跟踪会话的标识编号。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
+**SchM**
+> Schedule Manager —— 调度管理器。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
 **Sampling rate**
 > 采样率（**Sampling rate**）是获得信号值所需的时间段。
@@ -1079,6 +1124,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **STMS**
 > Timestamp —— 时间戳。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
+**SRS**
+> Software Requirements Specification —— 软件需求规范。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
+**STIM**
+> Data Stimulation packet —— 数据激励包。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
 **Sub Address Area**
 > 子地址区（**Sub Address Area**）是指逻辑地址空间中的连续存储区域，并映射到一个存储设备的一个扇区批次（**Sector Batch**）。
@@ -1122,6 +1173,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SWCD**
 > 软件组件描述（**Software Component Description**）
 > 来源：[AUTOSAR BSW General（基础软件模块通用规范）](general/bsw_general/index.md)（SWS_BSWGeneral · R23-11）
+**SWS**
+> Software Specification —— 软件规范。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
 **Symbolic name**
 > ECU信号的符号名称（**Symbolic name**）在**I/O**硬件抽象模块中是用来建立链接的。（包括：功能、引脚等）
@@ -1181,6 +1235,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Trace status**
 > 提供是否应发送跟踪消息的信息。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
+**TS**
+> Time Stamp —— 时间戳。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
 ## U
 
@@ -1190,6 +1247,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **UDP**
 > User Datagram Protocol —— 用户数据报协议。
 > 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
+**UDP/IP**
+> User Datagram Protocol / Internet Protocol —— 用户数据报协议/互联网协议。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
 **UDS**
 > 统一诊断服务（**Unified Diagnostic Services**）。
@@ -1203,6 +1263,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **UEH**
 > Use Extended Header —— 使用扩展头。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
+**URL**
+> Uniform Resource Locator —— 统一资源定位符。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
 ## V
 
@@ -1264,6 +1327,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **X.509**
 > 定义公钥证书格式的 **ITU-T** 标准。
 > 来源：[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager · R23-11）
+**XCP**
+> Universal Calibration Protocol —— 通用校准协议。
+> 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
 **XML**
 > 可扩展标记语言（**eXtensible Markup Language**）
