@@ -561,6 +561,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 内存分配关键字（**Memory Allocation Key Word**）
 > 来源：[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping · R23-11）
 
+**Master**
+> 主。分布式 BSW 模块中协调卫星请求、并可过滤或监控进入的卫星请求的部分。
+> 来源：[BSW 分布指南](general/bsw_distribution_guide/index.md)（AUTOSAR_CP_EXP_BSWDistributionGuide · R23-11）
+
 **MCAL**
 > 微机抽象层（**Microcomputer Abstraction Layer**）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
@@ -778,6 +782,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
 
 ## S
+
+
+**Satellite**
+> 卫星。分布式 BSW 模块的一部分；主与卫星之间的工作分配是实现特定的，卫星一般不能在没有主的情况下工作。
+> 来源：[BSW 分布指南](general/bsw_distribution_guide/index.md)（AUTOSAR_CP_EXP_BSWDistributionGuide · R23-11）
+
 
 **Sampling rate**
 > 采样率（**Sampling rate**）是获得信号值所需的时间段。

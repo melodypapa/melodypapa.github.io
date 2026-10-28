@@ -167,7 +167,7 @@ def slug_of(num: str, title: str) -> str:
     title = title.strip().lower()
     # Material/uslugify strips CJK/fullwidth punctuation (「」（） etc.) from
     # slugs — the old code kept them and produced dead anchors (VFB 3.8/3.10).
-    title = re.sub(r"[\u3000-\u303f\uff00-\uffef「」『』（）·：；！？]", "", title)
+    title = re.sub(r"[\u3000-\u303f\uff00-\uffef「」『』（）·：；！？/]", "", title)
     title = re.sub(r"\s+", "-", title)
     return f"{num}-{title}"
 
