@@ -133,6 +133,7 @@ nav:
       - "LdCom": autosar/communication/large_data_com/index.md
       - "Lin": autosar/communication/lin_driver/index.md
       - "LinIf": autosar/communication/lin_interface/index.md
+      - "LsDu": autosar/communication/lsdu_router/index.md
       - "Mirror": autosar/communication/mirror/mirror.md
       - "PduR": autosar/communication/pdu_router/index.md
       - "SecOC": autosar/communication/sec_oc/index.md

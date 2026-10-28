@@ -32,6 +32,7 @@ title: "通信（Communication）"
 ### 数据处理与安全
 
 * [AUTOSAR Large Data COM（大数据 COM）](large_data_com/index.md)
+* [AUTOSAR L-SDU Router（链路层 SDU 路由模块）](lsdu_router/index.md)
 * [AUTOSAR PduR (PDU Router)](pdu_router/index.md)
 * [AUTOSAR COM Based Transformer](com_based_transformer/index.md)
 * [E2E Transformer (E2E转换器)](e2e_transformer/index.md)

@@ -268,6 +268,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## D
 
+**&lt;DstLo&gt;**
+> 作为 L-SDU 目标的下层通信接口模块。DstLo 可以是一对多。
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
+
 **Data frame**
 > 数据帧：**SPI** 总线上与 SpiDataWidth 相关的位的物理帧。
 > 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver · R23-11）
@@ -493,6 +497,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **I-PDU**
 > 交互层 **PDU**（**Interaction Layer PDU**）。在 **AUTOSAR** 中，交互层等价于通信服务层。
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes · R23-11）
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
+**I-PDU ID**
+> I-PDU 标识符（**I-PDU Identifier**）。
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
 
 **IB**
 > 内部缓冲通道（**Internally buffered channels**）：包含待传输数据的缓冲区位于 SPI 处理器/驱动程序之内。
@@ -595,9 +603,26 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## L
 
+**&lt;Lo&gt;**
+> 下层通信接口模块。
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
+
 **L-PDU**
 > 数据链路层 **PDU**（**Data Link Layer PDU**）。在 **AUTOSAR** 中，数据链路层等价于通信硬件抽象和微控制器抽象层。
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes · R23-11）
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
+**L-PDU ID**
+> L-PDU 标识符（**L-PDU Identifier**）。
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
+**L-SDU**
+> 链路层服务数据单元（**Data link layer service data unit**）。一个 L-SDU 由数据（缓冲区）、长度、L-SDU ID 以及可能经由元数据传输的 L-PDU 特定信息组成。
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
+**L-SDU ID**
+> L-SDU 标识符（**L-SDU identifier**）。
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
+**L-SDU Router**
+> 在模块之间传输 L-SDU 的模块。L-SDU Router 模块可用于内部路由目的。
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
 
 **L1**
 > 第一级存储器（**1st level memory**）
@@ -618,6 +643,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Logical Supervision**
 > 一种对软件的在线监督，用于检查软件（**被监督实体**或一组**被监督实体**）是否按程序员（即已开发的代码）定义的顺序执行。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+**Lower Layer Modules（Lo）**
+> 位于 L-SDU Router 之下的模块。该层包括以太网通信接口模块。
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
 
 ## M
 
@@ -790,6 +818,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes · R23-11）
 > 来源：[分层软件架构（Layered Software Architecture）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture · R23-11）
 > 来源：[虚拟功能总线（VFB）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB · R23-11）
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
 
 **PNC**
 > 部分网络集群（**Partial Network Cluster**）。一组系统信号，用于支持分布在车辆网络多个 ECU 上的一个或多个车辆功能；表示把一组总线映射到一个或多个虚拟功能集群（VFC）的系统视图。
@@ -860,6 +889,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## S
 
+**&lt;SrcLo&gt;**
+> 作为 L-SDU 源的下层通信接口模块。SrcLo 始终只有一个。
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
+
 **Satellite**
 > 卫星。分布式 BSW 模块的一部分；主与卫星之间的工作分配是实现特定的，卫星一般不能在没有主的情况下工作。
 > 来源：[BSW 分布指南](general/bsw_distribution_guide/index.md)（AUTOSAR_CP_EXP_BSWDistributionGuide · R23-11）
@@ -886,6 +919,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Platform Types（平台类型）](general/platform_types/index.md)（SWS_PlatformTypes · R23-11）
 > 来源：[分层软件架构（Layered Software Architecture）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture · R23-11）
 > 来源：[虚拟功能总线（VFB）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB · R23-11）
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
 
 **SE**
 > 被监督实体（**Supervised Entity**）
@@ -1049,6 +1083,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **UDS**
 > 统一诊断服务（**Unified Diagnostic Services**）。
 > 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager · R23-11）
+**&lt;Up&gt;**
+> 上层通信接口模块。
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
+**Upper Layer Modules（Up）**
+> 位于 L-SDU Router 之上的模块。该层通常包括 **IEEE1722Tp**。
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
 
 ## V
 

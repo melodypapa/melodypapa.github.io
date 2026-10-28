@@ -29,13 +29,17 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (evidence above)
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
   - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync; hash in the batched report)
-- [ ] lsdu (SWS_LSduRouter · R23-11 markdown · ❌ new article, short name LsDu)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] lsdu (SWS_LSduRouter · R23-11 markdown · ❌ new article, short name LsDu)
+  - Note: article `communication/lsdu_router/` (directory lsdu_router, nav label "LsDu" per this row; the source text itself names the module LSduR — identifiers kept verbatim). Shape: Known Limitations "- No content" → omitted per the 2026-10-28 placeholder rule · ch.1 → §1 (1.1–1.3, figures 1.1/1.2) · ch.2 → §2 15 rows incl. <SrcLo>/<DstLo>/<Lo>/<Up> entity term lines · 3.1 registry + 3.2 相关规范 · ch.5 → §5 (5.1.1/5.1.2, 5.2 版本检查) · ch.6 dropped · ch.7 → §6 (6.1 L-SDU 处理 with 6.1.1.1/6.1.2.1 groups; source depth-5 headings 7.1.2.1.1/.2 rendered as ###### with full numbers — h7 unsupported, recorded deviation; 6.2 零成本运行, 6.3 状态管理 + Figure7_2, 6.4 复杂驱动交互, 6.7 error tables incl. runtime table) · ch.8 → §7 (grouped 7.3.1 通用函数 / 7.3.2 上层可配置接口 / 7.3.3 下层可配置接口; 9 functions; 7.2.1 PBConfigType prose-style) · ch.9 → §8 (2 figures) · ch.10 → §9 (10.1 folded, 10.1.1 → 9.1 变体, 5 containers with sub-container tables inline; scope: ECU withAuto = true cells) · ch.A dropped · ch.B → B (B.1.1 added-items list was an IMAGE in the markdown conversion — 57 item IDs recovered verbatim from the R23-11 PDF page 52)
+  - Note: source typos kept verbatim and reported: 7.7.4 says "The IEEE1722Tp module does not define production errors" (copy-paste, context is LSduR), 8.2.3 intro says the state type "is returned by the LSduR_GetConfigurationId API" (copy-paste from 8.2.2); source typo CORRECTED: LSduR_GetVersionInfo Syntax "Std_VersionInfoType versionInfo" → `Std_VersionInfoType* versionInfo` (Parameters(out) says pointer; gpt source-typo-correction precedent)
+  - Note: Phase A — strict build exit 0 / 0 WARNING; headings §1–§9 + B; hygiene 0; acronym 15 rows = source 15 rows, no tables; check_api_sync = N/A (source 8.3.x are group headings, functions live at 8.3.x.y — script shape unsupported, RTE/CoreTest precedent): manual name/order verification 9/9 exact match incl. <User:Up>/<User:Lo> entities; gen_api_list regenerated (LSduR 3 types + 9 functions SITE-linked, --check 0); census --apply: 16 links + 3 chapter-refs + 4 citation links + 8 registry anchors, idempotent; comma-form [n, 文档名] unlinked per open limitation
+  - Note: glossary +11 new terms (I-PDU ID, L-PDU ID, L-SDU, L-SDU ID, L-SDU Router, Lower/Upper Layer Modules, <SrcLo>/<DstLo>/<Lo>/<Up>) + 4 来源 appends (PDU/I-PDU/L-PDU/SDU one-term-once)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion (new article, main session per no-subagent rule)
+  - [x] Step 3 — Phase A mechanical checks (evidence above; check_api_sync N/A with manual substitute)
+  - [x] Step 4 — Phase B coverage map + fidelity (10 content figures embedded; deco dropped; source typos listed above)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync; hash in the batched report)
 - [ ] dlt (SWS_DiagnosticLogAndTrace · R23-11 markdown · ❌ new article, short name Dlt)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

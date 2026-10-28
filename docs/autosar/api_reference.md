@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **50** 份已有站内文章）。
+共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **51** 份已有站内文章）。
 
 ## A
 
@@ -4903,22 +4903,22 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 
 **LSduR_GetConfigurationId**
-> 函数 · 未翻译 · SWS_LSduRouter · R23-11
+> 函数 · [AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md) · SWS_LSduRouter · R23-11
 
 **LSduR_GetVersionInfo**
-> 函数 · 未翻译 · SWS_LSduRouter · R23-11
+> 函数 · [AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md) · SWS_LSduRouter · R23-11
 
 **LSduR_Init**
-> 函数 · 未翻译 · SWS_LSduRouter · R23-11
+> 函数 · [AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md) · SWS_LSduRouter · R23-11
 
 **LSduR_PBConfigIdType**
-> 类型 · 未翻译 · SWS_LSduRouter · R23-11
+> 类型 · [AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md) · SWS_LSduRouter · R23-11
 
 **LSduR_PBConfigType**
-> 类型 · 未翻译 · SWS_LSduRouter · R23-11
+> 类型 · [AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md) · SWS_LSduRouter · R23-11
 
 **LSduR_StateType**
-> 类型 · 未翻译 · SWS_LSduRouter · R23-11
+> 类型 · [AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md) · SWS_LSduRouter · R23-11
 
 ## M
 
