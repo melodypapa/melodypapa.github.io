@@ -146,6 +146,7 @@ nav:
       - "CryIf": autosar/crypto/crypto_interface/index.md
       - "Csm": autosar/crypto/crypto_service_manager/index.md
       - "KeyM": autosar/crypto/key_manager/index.md
+      - "加密服务使用指南": autosar/crypto/utilization_of_crypto_services/index.md
     - 诊断（Diagnostics）:
       - autosar/diagnostics/index.md
       - "Dcm": autosar/diagnostics/diagnostic_communication_manager/index.md
@@ -156,6 +157,7 @@ nav:
       - "Standard Types": autosar/general/standard_types/index.md
       - "Platform Types": autosar/general/platform_types/index.md
       - "ComStack Types": autosar/general/communication_stack_types/index.md
+      - "分层软件架构": autosar/general/layered_software_architecture/index.md
     - I/O:
       - autosar/io/index.md
       - "Adc": autosar/io/adc_driver/index.md
@@ -180,6 +182,7 @@ nav:
       - "MemMap": autosar/memory/memory_mapping/index.md
       - "NV数据处理指南": autosar/memory/nv_data_handling_guideline/index.md
       - "NvM": autosar/memory/nvram_manager/index.md
+      - "固件远程升级指南（FOTA）": autosar/memory/firmware_over_the_air/index.md
     - 方法论与模板:
       - autosar/methodology_templates/index.md
       - "BSWMDT": autosar/methodology_templates/basic_software_module_description_template/index.md
@@ -203,6 +206,13 @@ nav:
     - RTE:
 
       - "RTE": autosar/rte/index.md
+    - 应用接口（Application Interfaces）:
+      - autosar/application_interfaces/index.md
+      - "ADAS 与车辆运动控制接口": autosar/application_interfaces/adas_vmc/index.md
+      - "车身与舒适域应用接口": autosar/application_interfaces/body_and_comfort/index.md
+    - 库（Libraries）:
+      - autosar/libraries/index.md
+      - "插值调用宏封装": autosar/libraries/macro_encapsulation_of_interpolation_calls/index.md
     - 模板:
       - autosar/template/index.md
       - "1. 一段话总结": autosar/template/generic_structure/index.md

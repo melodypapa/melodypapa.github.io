@@ -4,11 +4,24 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 本页汇总各 AUTOSAR 模块文章以及 AUTOSAR TR 术语表（Foundation）的术语，按字母排序。
 
+**Assembly Connector**
+> 组装连接器。在 VFB 层级把一个组件的 RPort/PRPort 与另一个组件的 PPort/PRPort 连接起来的连接器；恰好连接一个提供端口与一个要求端口。
+> 来源：[虚拟功能总线（VFB）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB · R23-11）
+
 ## A
 
 **Accuracy**
 > 精度（**Accuracy**）取决于用于采样或者生成的硬件外围设备。如：**ADC**转换器可以是 8/10/12/16 位转换器
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
+
+**AEB**
+> 自主紧急制动（**Autonomous Emergency Braking**）。
+> 来源：[ADAS 与车辆运动控制接口](application_interfaces/adas_vmc/index.md)（AUTOSAR_CP_EXP_AIADASAndVMC · R23-11）
+
+**ACC**
+> 自适应巡航控制（**Adaptive Cruise Control**）。
+> 来源：[ADAS 与车辆运动控制接口](application_interfaces/adas_vmc/index.md)（AUTOSAR_CP_EXP_AIADASAndVMC · R23-11）
+
 
 **Acquisition Time**
 > 采集时间 = 采样时间（**Sample Time**）+ 转换时间（**Conversion Time**）
@@ -103,9 +116,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 大容量非易失性数据管理器（**Bulk Non-Volatile Data Manager**）
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
 
+**ATWS**
+> 防盗警告系统（**Anti-Theft Warning System**）。可借助光学与声学信号警示未授权进入尝试、并可防止发动机被起动的防盗系统。
+> 来源：[车身与舒适域应用接口](application_interfaces/body_and_comfort/index.md)（AUTOSAR_CP_EXP_AIBodyAndComfort · R23-11）
+
 **BSW**
 > 基础软件（**Basic Software**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+> 来源：[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping · R23-11）
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
 
@@ -117,10 +135,26 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 基础软件模式管理器（**Basic Software Mode Manager**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 
+**Bus Off**
+> CAN 总线的错误状态：CAN 控制器因错误计数达到上限而与总线脱离。CAN 状态管理器（CanSM）通过 Bus Off 恢复状态机进行恢复。
+> 来源：[错误描述](general/error_description/index.md)（AUTOSAR_CP_EXP_ErrorDescription · R23-11）
+
 **BSWMD**
 > 基础软件模块描述（**Basic Software Module Description**）
 > 来源：[AUTOSAR BSW General（基础软件模块通用规范）](general/bsw_general/index.md)（SWS_BSWGeneral · R23-11）
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
+
+**CDD**
+> 复杂驱动（**Complex Driver**）。未被 AUTOSAR 标准化的软件实体，可以访问 AUTOSAR 接口和/或基础软件模块 API，或经由它们被访问；位于分层软件架构的复杂驱动层。
+> 来源：[CDD 设计与集成指南](general/cdd_design_and_integration/index.md)（AUTOSAR_CP_EXP_CDDDesignAndIntegrationGuideline · R23-11）
+
+**Crypto Primitive**
+> 加密原语。在加密驱动对象中实现的一个已配置加密算法的实例。
+> 来源：[加密服务使用指南](crypto/utilization_of_crypto_services/index.md)（AUTOSAR_CP_EXP_UtilizationOfCryptoServices · R23-11）
+
+**Crypto Driver Object**
+> 加密驱动对象。一个加密驱动实现一个或多个加密驱动对象；每个对象可提供不同加密原语，且只有一个工作区（同一时刻只能执行一个加密原语）。
+> 来源：[加密服务使用指南](crypto/utilization_of_crypto_services/index.md)（AUTOSAR_CP_EXP_UtilizationOfCryptoServices · R23-11）
 
 ## C
 
@@ -347,6 +381,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **External Transition**
 > **外部转换**是两个**检查点**之间的**转换**，其中这两个**检查点**属于不同的**被监督实体**。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+> 来源：[应用层错误处理](general/application_level_error_handling/index.md)
+
+**FDIR**
+> 故障检测、隔离与恢复（**Fault Detection, Isolation and Recovery**）。系统运行期间处理故障的过程：检测→隔离→恢复。
+> 来源：[应用层错误处理](general/application_level_error_handling/index.md)（AUTOSAR_CP_EXP_ApplicationLevelErrorHandling · R23-11）
 
 ## F
 
@@ -374,11 +413,23 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **FOTA**
 > 固件远程升级（**Firmware Over The Air**），通过无线通信进行固件远程更新。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
+> 来源：[固件远程升级指南（FOTA）](memory/firmware_over_the_air/index.md)（AUTOSAR_CP_EXP_FirmwareOverTheAir · R23-11）
 
 **Functionality**
 > 功能：涵盖系统用户可见和用户不可见的功能方面（见 [2]）。在 **FiM** 上下文中，一个功能可以由一个或多个可运行实体的全部或部分内容、以同一组许可/禁止条件构成。
 > 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager · R23-11）
 
+**Fault**
+> 故障。系统的瞬态或永久性变化，使其完整性偏离预期的正确完整性；被激活并传播后成为错误（error）。
+> 来源：[应用层错误处理](general/application_level_error_handling/index.md)（AUTOSAR_CP_EXP_ApplicationLevelErrorHandling · R23-11）
+
+**Error**
+> 错误。系统中的错误（软）状态，即该状态不同于若故障不存在时系统应有的状态；传播越过系统屏障即转变为失效（failure）。
+> 来源：[应用层错误处理](general/application_level_error_handling/index.md)（AUTOSAR_CP_EXP_ApplicationLevelErrorHandling · R23-11）
+
+**Failure**
+> 失效。错误传播越过系统屏障、对系统环境可见后的结果：系统不再提供其规定的功能。
+> 来源：[应用层错误处理](general/application_level_error_handling/index.md)（AUTOSAR_CP_EXP_ApplicationLevelErrorHandling · R23-11）
 
 ## G
 
@@ -419,6 +470,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver · R23-11）
 > 来源：[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface · R23-11）
 
+**IFX**
+> 定点插值库（**Fixed Point Interpolation Routines**）的模块 ID 前缀；整数插值例程名称以 Ifx 开头。
+> 来源：[插值调用宏封装](libraries/macro_encapsulation_of_interpolation_calls/index.md)（AUTOSAR_CP_EXP_MacroEncapsulationofInterpolationCalls · R23-11）
+
+**IFL**
+> 浮点插值库（**Floating Point Interpolation Routines**）的模块 ID 前缀；浮点插值例程名称以 Ifl 开头。
+> 来源：[插值调用宏封装](libraries/macro_encapsulation_of_interpolation_calls/index.md)（AUTOSAR_CP_EXP_MacroEncapsulationofInterpolationCalls · R23-11）
+
 **HW**
 > 硬件（**Hardware**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
@@ -436,6 +495,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **IB**
 > 内部缓冲通道（**Internally buffered channels**）：包含待传输数据的缓冲区位于 SPI 处理器/驱动程序之内。
 > 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver · R23-11）
+
+**ICC**
+> 实现一致性等级（**Implementation Conformance Class**）。AUTOSAR 对基础软件实现合规程度的分级（ICC1–ICC3）：ICC3 要求逐模块符合 AUTOSAR 规范，ICC2 允许项目定义的集群，ICC1 为专有基础软件（对外行为仍须符合 ICC3 模块规范）。
+> 来源：[分层软件架构（Layered Software Architecture）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture · R23-11）
 
 **ICU**
 > 输入捕获单元（**Input Capture Unit**）
@@ -484,11 +547,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ISR**
 > 中断服务程序（**Interrupt Service Routine**）
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
+> 来源：[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping · R23-11）
 
 **IUMPR**
 > 在使用中的监控性能比（**In-Use-Monitor Performance Ratio**）。
 > 来源：[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager · R23-11）
 
+
+**Job**
+> 作业。一个已配置的加密原语与一个被引用的密钥的组合；不包含实际密钥数据本身。
+> 来源：[加密服务使用指南](crypto/utilization_of_crypto_services/index.md)（AUTOSAR_CP_EXP_UtilizationOfCryptoServices · R23-11）
 
 ## J
 
@@ -537,6 +605,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 第二级存储器（**2nd level memory**）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
 
+**LKA**
+> 车道保持辅助（**Lane Keep Assist**）。
+> 来源：[ADAS 与车辆运动控制接口](application_interfaces/adas_vmc/index.md)（AUTOSAR_CP_EXP_AIADASAndVMC · R23-11）
+
 **Local Supervision Status**
 > 表示单个**被监督实体**当前存活监督结果的状态。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
@@ -546,6 +618,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 
 ## M
+
+**MAKW**
+> 内存分配关键字（**Memory Allocation Key Word**）
+> 来源：[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping · R23-11）
+
+**Master**
+> 主。分布式 BSW 模块中协调卫星请求、并可过滤或监控进入的卫星请求的部分。
+> 来源：[BSW 分布指南](general/bsw_distribution_guide/index.md)（AUTOSAR_CP_EXP_BSWDistributionGuide · R23-11）
 
 **MCAL**
 > 微机抽象层（**Microcomputer Abstraction Layer**）
@@ -613,6 +693,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 内存保护单元（**Memory Protection Unit**）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
 
+
+
+**Master**
+> 主。分布式 BSW 模块中协调卫星请求、并可过滤或监控进入的卫星请求的部分。
+> 来源：[BSW 分布指南](general/bsw_distribution_guide/index.md)（AUTOSAR_CP_EXP_BSWDistributionGuide · R23-11）
 ## N
 
 **N-PDU**
@@ -626,6 +711,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **NOP, nop**
 > 空操作（**Null Operation**）
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
+
+**NVRAM**
+> 非易失性 RAM（**Non-Volatile RAM**）
+> 来源：[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping · R23-11）
 
 **OSEK/VDX**
 > 汽车电子开放系统及其接口（**Offene Systeme und deren Schnittstellen fuer die Elektronik im Kraftfahrzeug**）
@@ -674,13 +763,35 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 通过聚合访问存储页面来提高性能。在存储设备技术支持物理分段的情况下，一些存储设备可以提供一次读取或写入多个页面的优化访问方式。页面突发（**Page Burst**）表示用于访问优化的存储页面聚合。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
 
+**Port-Interface**
+> 端口接口。定义提供或要求该接口的端口必须履行的契约；AUTOSAR 支持客户端-服务器、发送者-接收者、参数、非易失性数据、触发与模式切换六种端口接口。
+> 来源：[虚拟功能总线（VFB）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB · R23-11）
+
+**Prototype**
+> 原型。组件类型在一个组合（Composition）中的使用；组合经由相互连接的原型定义。
+> 来源：[虚拟功能总线（VFB）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB · R23-11）
+
+**PASE**
+> 无源进入（**Passive Entry**）。帮助用户无需物理使用钥匙即可进入汽车的锁定系统。
+> 来源：[车身与舒适域应用接口](application_interfaces/body_and_comfort/index.md)（AUTOSAR_CP_EXP_AIBodyAndComfort · R23-11）
+
 **Partial test**
 > 部分测试定义为一个或多个「硬件资源」的测试。（部分测试是可中断的，因为它在后台模式下执行。）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
 
+**PCI**
+> 协议控制信息（**Protocol Control Information**）。把一个 SDU 从协议层的一个实例传递到另一个实例所需的信息，例如源与目标信息。PCI 由发送侧的协议层添加，在接收侧移除。PDU 包含 SDU 和 PCI。
+> 来源：[分层软件架构（Layered Software Architecture）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture · R23-11）
+
 **PDU**
 > 协议数据单元（**Protocol Data Unit**）
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes · R23-11）
+> 来源：[分层软件架构（Layered Software Architecture）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture · R23-11）
+> 来源：[虚拟功能总线（VFB）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB · R23-11）
+
+**PNC**
+> 部分网络集群（**Partial Network Cluster**）。一组系统信号，用于支持分布在车辆网络多个 ECU 上的一个或多个车辆功能；表示把一组总线映射到一个或多个虚拟功能集群（VFC）的系统视图。
+> 来源：[分层软件架构（Layered Software Architecture）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture · R23-11）
 
 **Permission state**
 > 许可状态：包含由其 **FID** 表示的功能是否可以执行的信息。该状态由 **FiM** 基于已报告的事件控制。
@@ -705,6 +816,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 
 ## R
+
+**Runnable**
+> 可运行体。原子软件组件实现中的一段可由 RTE 启动的指令序列；在任务的上下文中运行。
+> 来源：[虚拟功能总线（VFB）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB · R23-11）
+
+
 
 **Range**
 > 范围（**Range**）在这里是一个功能范围（**functional range**），而不是电气范围（**electrical range**）。所有范围都用于功能的需要或者诊断的检测。对于模拟**ECU**信号，可以定义上下限值 [lowerLimit...upperLimit]（电压、电流）。对于电阻信号和时序信号（周期）的特殊情况，下限值（**lowerLimit**）不能为负。
@@ -735,7 +852,15 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 并行读写（**Read While Write**）。指存储设备在一个存储 **Bank** 中执行读取操作，同时在另一个存储 **Bank** 中执行写入或擦除操作的能力。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
 
+**RKE**
+> 遥控无钥匙进入（**Remote Keyless Entry**）。设计用于远程锁定或解锁汽车进入的系统；单向广播无线电波，实现加密与滚动码算法。
+> 来源：[车身与舒适域应用接口](application_interfaces/body_and_comfort/index.md)（AUTOSAR_CP_EXP_AIBodyAndComfort · R23-11）
+
 ## S
+
+**Satellite**
+> 卫星。分布式 BSW 模块的一部分；主与卫星之间的工作分配是实现特定的，卫星一般不能在没有主的情况下工作。
+> 来源：[BSW 分布指南](general/bsw_distribution_guide/index.md)（AUTOSAR_CP_EXP_BSWDistributionGuide · R23-11）
 
 **Sampling rate**
 > 采样率（**Sampling rate**）是获得信号值所需的时间段。
@@ -757,6 +882,8 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 服务数据单元（**Service Data Unit**）——**PDU** 的载荷。
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes · R23-11）
 > 来源：[AUTOSAR Platform Types（平台类型）](general/platform_types/index.md)（SWS_PlatformTypes · R23-11）
+> 来源：[分层软件架构（Layered Software Architecture）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture · R23-11）
+> 来源：[虚拟功能总线（VFB）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB · R23-11）
 
 **SE**
 > 被监督实体（**Supervised Entity**）
@@ -872,6 +999,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 标准（**Standard**）
 > 来源：[AUTOSAR Standard Types（标准类型）](general/standard_types/index.md)（SWS_StandardTypes · R23-11）
 
+
+
+**Satellite**
+> 卫星。分布式 BSW 模块的一部分；主与卫星之间的工作分配是实现特定的，卫星一般不能在没有主的情况下工作。
+> 来源：[BSW 分布指南](general/bsw_distribution_guide/index.md)（AUTOSAR_CP_EXP_BSWDistributionGuide · R23-11）
 ## T
 
 **Target time**
@@ -916,6 +1048,24 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 统一诊断服务（**Unified Diagnostic Services**）。
 > 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager · R23-11）
 
+## V
+
+
+**VMC**
+> 车辆运动控制（**Vehicle Motion Control**）。
+> 来源：[ADAS 与车辆运动控制接口](application_interfaces/adas_vmc/index.md)（AUTOSAR_CP_EXP_AIADASAndVMC · R23-11）
+
+**VFB**
+> 虚拟功能总线（**Virtual Functional Bus**）。AUTOSAR 中允许组件相互交互的通信机制；应用被建模为相互连接的组件的组合，组件经由端口与端口接口交互。
+> 来源：[虚拟功能总线（VFB）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB · R23-11）
+
+**Variation Point**
+> 变体点。设计中在 2 个或更多变体之间给出选择的位置；必须做出选择的时间称为最晚绑定时间。
+> 来源：[虚拟功能总线（VFB）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB · R23-11）
+
+**VFC**
+> 虚拟功能集群（**Virtual Function Cluster**）。把实现一个或多个车辆功能所需的 SW 组件之间端口层面的通信分组；逻辑视图，允许可复用的、独立于总线/ECU 的设计。在部分组网（Partial Networking）中，VFC 映射到一个或多个部分网络集群（PNC）。
+> 来源：[分层软件架构（Layered Software Architecture）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture · R23-11）
 
 ## W
 

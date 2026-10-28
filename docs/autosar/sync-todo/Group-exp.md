@@ -7,13 +7,38 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 
 ## Queue
 
-- [ ] exp layered_software_architecture (AUTOSAR_EXP_LayeredSoftwareArchitecture · General · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] exp vfb (AUTOSAR_CP_EXP_VFB · General · ❌ new article · 📖 skeleton-exempt)
+  - Note: prose EXP document with numbered chapters 1–13, mirrored directly; source Specification Items ([EXP_VFB_XXXXX] markers) translated with the ID brackets dropped (corpus no-requirement-IDs rule) — decision for batch gate
+  - Note: §3.3.1 port-type items — each item's single Port-Icon recovered from the source PDF by position (the md conversion shifted icons across item blocks); icons copied as PortIcon1–34.png, 2 missing item illustrations (Application/Service SWC) extracted as Illus_*.png
+  - Note: references chapter kept unnumbered `## 参考文献` (guide_to_mode_management precedent) so the [n] citation registry works — source ch.13 numbering dropped for the registry (decision for batch gate)
+  - Note: script fixes in this branch — link_candidates.py: (a) _registry_sec matches a 参考文献 section at end-of-file (was: only mid-article); (b) slug_of strips CJK/fullwidth punctuation like Material (「」（） stayed in slugs and produced 2 dead anchors)
+  - Note: census: 25 chapter-number refs applied (2 UNRESOLVED: 3.4.1/3.3.1 — headings exist but the script's slug did not match; verified and left prose); 38 prose [n] citations linked to the registry (15 entries); cross-article mentions report-only (batch gate)
+  - Note: glossary +6 terms (Assembly Connector, Port-Interface, Prototype, Runnable, VFB, Variation Point)
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #158 (Closes #147); post-rebase article commit d6cf2ec on feature/exp-vfb; stacked PR chain merged in row order
+  - [x] Step 6 — TODO.md row + commit/PR
+- [x] exp layered_software_architecture (AUTOSAR_CP_EXP_LayeredSoftwareArchitecture · General · ❌ new article · 📖 skeleton-exempt)
+  - Note: source is a 183-page slide deck — R23-11 conversion flattens every slide title to `##`; the article's numbered structure (## 1. Architecture with 1.1–1.8, ## 2. Configuration, ## 3. Integration and Runtime Aspects with 3.1–3.10) is taken from the deck's own master TOC slide (PDF p8); slides become unnumbered #### sub-headings merged into their TOC sections
+  - Note: doc-meta chrome dropped (change-history tables, disclaimer, TOC slides) per guide_to_mode_management precedent
+  - Note: figures — 144 content diagrams copied as Figure01–140.png (content-hash dedupe), 213 deco refs dropped (4 recurring strips + ~25 inline icons ≤90px); Layer Interaction Matrix and the memory-modules table + PDU/SDU naming table were glyph-garbled or column-shifted in the conversion — marks/cells recovered from the source PDF pages 80/86/96 (✓/✗/Δ transcribed visually)
+  - Note: source has the Memory Hardware Abstraction slide twice (2nd with draft marker) — merged into one section, both example figures kept
+  - Note: census (--list): identifier links 0 (no API chapter); 1 chapter-number ref applied (3.4 节); 6 参见 lines report-only; prose [2] at config-classes list is a list reference, not a citation — left prose (UNRESOLVED by design); cross-article mentions report-only (BswM/EcuM/NvM/SoAd/Dem/Dcm SITE-class candidates — batch-gate decision); --pdf: source PDF has 0 annotations (slide deck), nothing to restore
+  - Note: glossary +6 terms (PCI, PNC, ICC, VFC new; PDU/SDU +来源 line)
+  - Note: check_api_sync N/A (EXP guide, no API chapter); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #157 (Closes #146); post-rebase article commit f60d11a on feature/exp-layered_software_architecture; stacked PR chain merged in row order
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] exp vfb (AUTOSAR_EXP_VFB · General · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
@@ -21,69 +46,136 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp bsw_distribution_guide (AUTOSAR_EXP_BSWDistributionGuide · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp application_level_error_handling (AUTOSAR_EXP_ApplicationLevelErrorHandling · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp error_description (AUTOSAR_EXP_ErrorDescription · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp cdd_design_and_integration (AUTOSAR_EXP_CDDDesignAndIntegration · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp utilization_of_crypto_services (AUTOSAR_EXP_UtilizationOfCryptoServices · Crypto · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp macro_encapsulation_of_interpolation_calls (AUTOSAR_EXP_MacroEncapsulationofInterpolationCalls · Libraries · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp firmware_over_the_air (AUTOSAR_EXP_FirmwareOverTheAir · Memory · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp adas_vmc (AUTOSAR_EXP_ADASVehicleMotionControl · ApplicationInterfaces (name per the source tree) · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp body_and_comfort (AUTOSAR_EXP_BodyAndComfort · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] exp bsw_distribution_guide (AUTOSAR_CP_EXP_BSWDistributionGuide · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
+  - Note: numbered prose EXP document, chapters 1–6 mirrored directly (2.x deep tree: multi-core BSW, MCAL distribution, Com-Stack/Crypto-Stack distribution, safety partitioning, outlook, glossary)
+  - Note: references chapter unnumbered `## 参考文献` (VFB precedent) so the [n] registry works; entries converted to plain [n]/>docid format (list-marker form is not parsed by the registry)
+  - Note: census: 17 chapter-number refs applied (idempotent); 6 prose [n] citations linked (5 registry entries); cross-article mentions report-only (EcuM/NvM/BswM/Dem SITE-class — batch gate); --pdf: 137 annotations, 1 article-only [1]
+  - Note: external URL https://www.iso.org ([3] ISO 26262) — known anti-bot 403 Backlog case, kept as plain text
+  - Note: glossary +2 (Master, Satellite)
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #159 (Closes #148); post-rebase article commit 668adfc on feature/exp-bsw_distribution_guide; stacked PR chain merged in row order
+  - [x] Step 6 — TODO.md row + commit/PR
+- [x] exp application_level_error_handling (AUTOSAR_CP_EXP_ApplicationLevelErrorHandling · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
+  - Note: numbered prose EXP document, chapters 1–7 mirrored directly; ch.5 = 13 error-handling mechanisms each with Description/Applicability-matrix/AUTOSAR-References tables; ch.6 mapping tables; ch.7 partition terminate/restart
+  - Note: references live in ch.3 §3.1 as [n]/>docid registry (SWS-article pattern) — 22 entries, 61 prose [n] citations linked incl. those inside the AUTOSAR-References tables (renders [4] linked; batch-gate decision)
+  - Note: census: 61 citations linked, idempotent; cross-article mentions report-only (DEM/BswM/ComM/EcuM SITE-class — batch gate); --pdf not run (source PDF exists at Safety path — TODO note: run at next touch)
+  - Note: glossary +4 (FDIR, Fault, Error, Failure)
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #160 (Closes #149); post-rebase article commit 52d4d5c on feature/exp-application_level_error_handling; stacked PR chain merged in row order
+  - [x] Step 6 — TODO.md row + commit/PR
+- [x] exp error_description (AUTOSAR_CP_EXP_ErrorDescription · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
+  - Note: numbered prose EXP document, chapters 1–6 mirrored; ch.4 generic DEM-reporting mechanism, ch.5 CAN-stack errors (Bus Off, controller timeout, 6 signal errors), ch.6 NVRAM-stack errors (9 driver-level + 2 abstraction-level + 5 NVM-level); every error = summary + figure + per-module 检测/反应/报告/恢复 tables
+  - Note: no document-reference chapter in the source (no [n] citations) — citation registry N/A; SWS/ECUC ids kept verbatim in table cells per corpus convention
+  - Note: figure caption→image pairing verified per caption (the conversion alternates image-before/after caption); 17 figures placed (Figure01–28, content-hash dedupe)
+  - Note: census: 9 chapter-number refs applied, idempotent; 50 identifier-mention lines in §6 are error-code mentions inside definitional tables (not linked — no 错误-titled section, tables definitional); cross-article mentions report-only (DEM ×57, NvM ×38 SITE-class — batch gate)
+  - Note: glossary +1 (Bus Off)
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #161 (Closes #150); post-rebase article commit 9088a60 on feature/exp-error_description; stacked PR chain merged in row order
+  - [x] Step 6 — TODO.md row + commit/PR
+- [x] exp cdd_design_and_integration (AUTOSAR_CP_EXP_CDDDesignAndIntegrationGuideline · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
+  - Note: numbered prose EXP document, chapters 1–7 mirrored (CDD intro, design recommendations, per-module interfacing, multi-core, MCAL CDD)
+  - Note: references registry = ch.4 §4.1 (numbered differently from §3.1) — link_candidates.py _registry_sec extended: any x.1 subsection titled 输入文件 holding [n] entries now qualifies (script fix rides this branch)
+  - Note: census: 28 prose [n] citations linked (20 registry entries), 1 chapter ref, idempotent; cross-article mentions report-only (batch gate)
+  - Note: glossary +1 (CDD)
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #162 (Closes #151); post-rebase article commit 4e5d294 on feature/exp-cdd_design_and_integration; stacked PR chain merged in row order
+  - [x] Step 6 — TODO.md row + commit/PR
+- [x] exp utilization_of_crypto_services (AUTOSAR_CP_EXP_UtilizationOfCryptoServices · Crypto · ❌ new article · 📖 skeleton-exempt)
+  - Note: numbered prose EXP document, chapters 1–6 mirrored (crypto stack overview, usage aspects, MAC example); source has no Known-Limitations content (1.3 = 无限制, kept)
+  - Note: ch.2 terms table had a duplicated description column (conversion chrome) — collapsed to one column, row set kept
+  - Note: census: 9 prose [n] citations linked (4 registry entries), 1 chapter ref, idempotent; cross-article mentions report-only (CSM/CRYIF/CRYPTO intra-stack — no links, all same-stack)
+  - Note: glossary +3 (Crypto Driver Object, Crypto Primitive, Job)
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #163 (Closes #152); post-rebase article commit bcbaf51 on feature/exp-utilization_of_crypto_services; stacked PR chain merged in row order
+  - [x] Step 6 — TODO.md row + commit/PR
+- [x] exp macro_encapsulation_of_interpolation_calls (AUTOSAR_CP_EXP_MacroEncapsulationofInterpolationCalls · Libraries · ❌ new article · 📖 skeleton-exempt)
+  - Note: numbered prose EXP document, chapters 1–7 mirrored; also creates the NEW libraries/ section (landing page docs/autosar/libraries/index.md + nav group 库（Libraries） before 模板) — first row of the libraries section per Group-libraries convention
+  - Note: 7.2.1 artifact table had a triple-duplicated description column (conversion chrome) — collapsed; page-decoration text between slides dropped (UML chrome)
+  - Note: census: 6 chapter-number refs applied, idempotent; citation registry 2.1/2.2 lists have no [n] prose citations (0 linked); cross-article mentions report-only (DEM ×1)
+  - Note: glossary +2 (IFX, IFL)
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #164 (Closes #153); post-rebase article commit f385e42 on feature/exp-macro_encapsulation_of_interpolation_calls; stacked PR chain merged in row order
+  - [x] Step 6 — TODO.md row + commit/PR
+- [x] exp firmware_over_the_air (AUTOSAR_CP_EXP_FirmwareOverTheAir · Memory · ❌ new article · 📖 skeleton-exempt)
+  - Note: numbered prose EXP document, chapters 1–6 mirrored (motivation, memory-stack prerequisites, terminology incl. FOTA process phases, detailed technical solution with FOTA Handler CDD + Dcm interaction + migration, sequence charts); source ch.6 "Appendix" = reference list — rendered unnumbered `## 参考文献` per VFB precedent so the [n] registry works
+  - Note: UML/state-machine text chrome around figures dropped (sd 1.1_FOTA_Init, stm labels etc.); 7 figures placed (Figure01–07)
+  - Note: census: 27 chapter refs applied; 1 UNRESOLVED (7.3.4.16.3 = external Dcm SWS section, correctly prose); 11 prose [n] citations linked (7 registry entries); cross-article mentions report-only (NvM/Dcm — batch gate)
+  - Note: glossary: FOTA +来源 line (one-term-once), +OTA new
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #165 (Closes #154); post-rebase article commit 30ee49d on feature/exp-firmware_over_the_air; stacked PR chain merged in row order
+  - [x] Step 6 — TODO.md row + commit/PR
+- [x] exp adas_vmc (AUTOSAR_CP_EXP_AIADASAndVMC · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
+  - Note: source file is AUTOSAR_CP_EXP_AIADASAndVMC.md (queue's "ADASVehicleMotionControl" = AIADASAndVMC); also creates the NEW application_interfaces/ section (landing page + nav group 应用接口（Application Interfaces） after RTE)
+  - Note: **USER DECISION NEEDED (batch gate):** Appendix B interface list (~200 rows, Figures 6.4–6.11) is OCR-garbled in the R23-11 conversion (mixed CJK chrome, broken rows). Reconstructed best-effort GFM tables with a 译者注; cell values flagged with \* must be verified against the source PDF before production use. Full PDF verification deferred as too large for this run.
+  - Note: chapters 1–6 mirrored; tables 4.1–4.5, 6.4–6.11 translated as GFM; UML chrome dropped; 29 figures placed (Figure01–29)
+  - Note: census: 4 chapter refs applied, idempotent; 13 prose [n] citations UNRESOLVED (no registry — this source cites documents inline as [1, AUTOSAR_EXP_AIChassis] style, left prose per rule); cross-article mentions report-only
+  - Note: glossary +4 (ACC, AEB, LKA, VMC)
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #166 (Closes #155); post-rebase article commit a8f5273 on feature/exp-adas_vmc; stacked PR chain merged in row order
+  - [x] Step 6 — TODO.md row + commit/PR
+- [x] exp body_and_comfort (AUTOSAR_CP_EXP_AIBodyAndComfort · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
+  - Note: numbered prose EXP document, ch.1–6 mirrored; ch.4 = 16 functional decompositions (wiper, mirror, interior light, seat, central locking, exterior light, ATWS, horn, defrost, terminal clamp, immobilizer, seat climatization, PASE, RKE, convertible, body sensors); PASE/BodySensors port tables translated as GFM
+  - Note: figure-inlining UML port-name chrome dropped (extensive in this conversion); 42 content figures placed, unused copies removed
+  - Note: citation registry N/A (references ch.6.1 lists [1] RTE only, no [n] prose citations to a registry); cross-article mentions report-only
+  - Note: branch self-contained: also carries the AI landing page + nav group (adas_vmc PR carries its own entries; trivial line-level merge expected)
+  - Note: glossary +3 (ATWS, RKE, PASE)
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #167 (Closes #156); post-rebase article commit 9055f25 on feature/exp-body_and_comfort; stacked PR chain merged in row order
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] exp chassis (AUTOSAR_EXP_Chassis · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
