@@ -178,9 +178,11 @@ def slug_of(num: str, title: str) -> str:
     num = num.rstrip(".")
     num = num.replace(".", "")
     title = title.strip().lower()
-    # Material/uslugify strips CJK/fullwidth punctuation (「」（） etc.) from
-    # slugs — the old code kept them and produced dead anchors (VFB 3.8/3.10).
-    title = re.sub(r"[\u3000-\u303f\uff00-\uffef「」『』（）·：；！？/]", "", title)
+    # Material/uslugify keeps word chars (letters, digits, '_', CJK), spaces ->
+    # '-', and strips all punctuation — incl. CJK/fullwidth punctuation, '/',
+    # '——', '[UC2]' brackets. The old code kept some of them and produced
+    # dead anchors (VFB 3.8/3.10, BSW 3.2.4, ALEH 7.2/7.2.2).
+    title = re.sub(r"[^\w\s\-]", "", title)
     title = re.sub(r"\s+", "-", title)
     return f"{num}-{title}"
 

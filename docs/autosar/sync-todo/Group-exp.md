@@ -58,13 +58,19 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
   - [x] Step 6 — TODO.md row + commit/PR
-- [ ] exp application_level_error_handling (AUTOSAR_EXP_ApplicationLevelErrorHandling · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] exp application_level_error_handling (AUTOSAR_CP_EXP_ApplicationLevelErrorHandling · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
+  - Note: numbered prose EXP document, chapters 1–7 mirrored directly; ch.5 = 13 error-handling mechanisms each with Description/Applicability-matrix/AUTOSAR-References tables; ch.6 mapping tables; ch.7 partition terminate/restart
+  - Note: references live in ch.3 §3.1 as [n]/>docid registry (SWS-article pattern) — 22 entries, 61 prose [n] citations linked incl. those inside the AUTOSAR-References tables (renders [4] linked; batch-gate decision)
+  - Note: census: 61 citations linked, idempotent; cross-article mentions report-only (DEM/BswM/ComM/EcuM SITE-class — batch gate); --pdf not run (source PDF exists at Safety path — TODO note: run at next touch)
+  - Note: glossary +4 (FDIR, Fault, Error, Failure)
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] exp error_description (AUTOSAR_EXP_ErrorDescription · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
