@@ -391,6 +391,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 数字输入/输出（**Digital Input/Output**）
 > 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
 
+**DRL**
+> 日间行车灯（**Daytime Running Light**）
+> 来源：[安全用例](safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase · R23-11）
+
 **DTC**
 > 拖滞力矩调节（**Regulation of the Drag Torque**）
 > 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
@@ -510,6 +514,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 > 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager · R23-11）
 
+**FLM**
+> 前灯管理（**Front Light Management**）
+> 来源：[安全用例](safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase · R23-11）
+
 **Foreground test**
 > 前台测试是同步测试，不得被中断。它通过用户应用程序调用。
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
@@ -518,6 +526,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 固件远程升级（**Firmware Over The Air**），通过无线通信进行固件远程更新。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
 > 来源：[固件远程升级指南（FOTA）](memory/firmware_over_the_air/index.md)（AUTOSAR_CP_EXP_FirmwareOverTheAir · R23-11）
+
+**FSC**
+> 功能安全概念（**Functional Safety Concept**）
+> 来源：[安全用例](safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase · R23-11）
+
+**FTT**
+> 故障容忍时间（德语「Fehlertoleranzzeit」）（**Fault Tolerance Time**）
+> 来源：[安全用例](safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase · R23-11）
 
 **FTTI**
 > 故障容忍时间间隔（**Fault Tolerant Time Interval**）
@@ -737,6 +753,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 第二级存储器（**2nd level memory**）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
 
+**LB**
+> 近光功能（德语「Abblendlicht」）（**Low Beam**）
+> 来源：[安全用例](safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase · R23-11）
+
 **LED**
 > 发光二极管（**Light Emitting Diode**）
 > 来源：[HMI/多媒体/远程信息处理域应用接口](application_interfaces/hmi/index.md)（AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics · R23-11）
@@ -752,6 +772,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Logical Supervision**
 > 一种对软件的在线监督，用于检查软件（**被监督实体**或一组**被监督实体**）是否按程序员（即已开发的代码）定义的顺序执行。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**LS**
+> 灯光开关（**Light Switch**）
+> 来源：[安全用例](safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase · R23-11）
 
 ## M
 

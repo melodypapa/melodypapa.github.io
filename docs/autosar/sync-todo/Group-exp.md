@@ -265,11 +265,16 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp safety_use_case (AUTOSAR_EXP_SafetyUseCase · Safety · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: source document is AUTOSAR_CP_EXP_SafetyUseCase.md; article at safety/safety_use_case/
+  - Note: chapters 1–9 mirrored (ch.9 图/表目录 rendered as lists); 10 content figures (the 913×58 back-matter sliver dropped)
+  - Note: the 23 analysis tables (5.2–5.24) extracted mechanically from the page-split fragments (two were headed as list items "- 5.3.N Analysis" in the conversion) with an 8-column GFM shape; long Safety-Measures/AUTOSAR-Mechanism cells truncated by the conversion marked with ……〔转换截断〕 and a 译者注 at §5.3 top (adas_vmc Appendix-B class — PDF verification deferred); heading numbering in the source skips no sections but 5.3.12 appears as a list item
+  - Note: iso.org URL kept plain text (anti-bot Backlog); [n] prose citations: [1]–[4] linked to §8.1 anchors; source-internal "[1, ISO 26262]" comma-form occurrences left prose (open comma-form question)
+  - Note: glossary +6 (DRL, FLM, FSC, FTT, LB, LS); check_api_sync N/A; gen_api_list --check clean
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp sw_cluster_design_and_integration (AUTOSAR_EXP_SwClusterDesignAndIntegration · SystemServices · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis
