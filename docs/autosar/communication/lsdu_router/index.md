@@ -414,7 +414,7 @@ LSduR 模块没有定义扩展生产错误。
 
 本章列出从下列文件中包含的所有类型。
 
-表7.1：模块 **LSduR** 导入的数据类型（**Definition of imported datatypes of module LSduR**）
+**LSduR**模块的导入数据类型定义
 
 | 模块 | 头文件 | 导入的类型 |
 |---|---|---|
@@ -562,7 +562,7 @@ L-SDU Router 模块被建模为一个可以与不同上层和下层模块接口�
 
 L-SDU Router 不需要强制接口。所需的 API 函数取决于配置。
 
-表7.2：模块 **LSduR** 中的强制接口（**Definition of mandatory interfaces in module LSduR**）
+**LSduR**模块中的强制接口定义
 
 | API 函数 | 头文件 | 描述 |
 |---|---|---|
@@ -572,7 +572,7 @@ L-SDU Router 不需要强制接口。所需的 API 函数取决于配置。
 
 本节定义实现模块可选功能所需的所有接口。
 
-表7.3：模块 **LSduR** 中的可选接口（**Definition of optional interfaces in module LSduR**）
+**LSduR**模块中的可选接口定义
 
 | API 函数 | 头文件 | 描述 |
 |---|---|---|

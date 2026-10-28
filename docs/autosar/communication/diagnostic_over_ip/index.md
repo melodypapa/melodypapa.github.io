@@ -896,7 +896,7 @@ Socket Adaptor 是 **TCP/IP** 协议栈 [\[3\]](#ref-3) 的接口模块，后者
 
 #### 6.6.1. 开发错误
 
-表6.1：模块 DoIP 开发错误的定义（**Definiton of development errors in module DoIP**）
+**DoIP**模块开发错误的定义
 
 | 错误类型 | 相关错误代码 | 错误值 |
 |---|---|---|
@@ -928,7 +928,7 @@ Socket Adaptor 是 **TCP/IP** 协议栈 [\[3\]](#ref-3) 的接口模块，后者
 
 **DoIP** 模块应从给定模块导入以下类型。
 
-表7.15：模块 **DoIP** 导入的数据类型（**Definition of imported datatypes of module DoIP**）
+**DoIP**模块的导入数据类型定义
 
 | 模块 | 头文件 | 导入的类型 |
 |---|---|---|
@@ -1234,7 +1234,7 @@ DoIP_MainFunction() 的调用周期由配置参数 DoIPMainFunctionPeriod 确定
 
 本章定义实现模块核心功能所需的所有接口。
 
-表7.16：模块 **DoIP** 中的强制接口（**Definition of mandatory interfaces in module DoIP**）
+**DoIP**模块中的强制接口定义
 
 | API 函数 | 头文件 | 描述 |
 |---|---|---|
@@ -1259,7 +1259,7 @@ DoIP_MainFunction() 的调用周期由配置参数 DoIPMainFunctionPeriod 确定
 
 本章定义 **DoIP** 模块实现其可选功能所需的所有接口。
 
-表7.17：模块 **DoIP** 中的可选接口（**Definition of optional interfaces in module DoIP**）
+**DoIP**模块中的可选接口定义
 
 | API 函数 | 头文件 | 描述 |
 |---|---|---|
@@ -1326,7 +1326,7 @@ Std_ReturnType <User>_DoIPGetFurtherActionByteCallback ( DoIP_FurtherActionByteT
 
 应基于 **DoIP** 模块的配置提供一个 ShortName 为 DoIP 的 DoIP 服务组件（Service Component）。
 
-表7.18：ClientServerInterface CallbackGetPowerMode 的定义（**Definition of ClientServerInterface CallbackGetPowerMode**）
+ClientServerInterface CallbackGetPowerMode 的定义
 
 | SWS 条目 | [SWS_DoIP_00054] 所定义的接口 |
 |---|---|
@@ -1345,7 +1345,7 @@ Std_ReturnType <User>_DoIPGetFurtherActionByteCallback ( DoIP_FurtherActionByteT
 | 参数 PowerStateReady | 类型：DoIP_PowerStateType；方向：OUT；注释：-；变体：- |
 | 可能的错误 | E_OK E_NOT_OK |
 
-表7.19：ClientServerInterface {Name}_RoutingActivation 的定义（**Definition of ClientServerInterface {Name}_RoutingActivation**）
+ClientServerInterface {Name}_RoutingActivation 的定义
 
 | SWS 条目 | [SWS_DoIP_00055] 所定义的接口 |
 |---|---|
@@ -1377,7 +1377,7 @@ Std_ReturnType <User>_DoIPGetFurtherActionByteCallback ( DoIP_FurtherActionByteT
 | 参数 ConfirmedResData | 类型：ConfirmationResDataType_{Name}；方向：OUT；注释：-；变体：DoIPRoutingActivationConfirmationResLength > 0，Name = [DoIPRoutingActivation](#9223-doiproutingactivation) 容器的 SHORT-NAME |
 | 可能的错误 | E_OK E_NOT_OK |
 
-表7.20：ClientServerInterface CallbackTriggerGIDSynchronization 的定义（**Definition of ClientServerInterface CallbackTriggerGIDSynchronization**）
+ClientServerInterface CallbackTriggerGIDSynchronization 的定义
 
 | SWS 条目 | [SWS_DoIP_00056] 所定义的接口 |
 |---|---|
@@ -1395,7 +1395,7 @@ Std_ReturnType <User>_DoIPGetFurtherActionByteCallback ( DoIP_FurtherActionByteT
 | 变体 | - |
 | 可能的错误 | E_OK E_NOT_OK |
 
-表7.21：ClientServerInterface CallbackGetGID 的定义（**Definition of ClientServerInterface CallbackGetGID**）
+ClientServerInterface CallbackGetGID 的定义
 
 | SWS 条目 | [SWS_DoIP_00057] 所定义的接口 |
 |---|---|
@@ -1414,7 +1414,7 @@ Std_ReturnType <User>_DoIPGetFurtherActionByteCallback ( DoIP_FurtherActionByteT
 | 参数 Data | 类型：uint8；方向：OUT；注释：-；变体：- |
 | 可能的错误 | E_OK E_NOT_OK |
 
-表7.22：ClientServerInterface CallbackGetFurtherActionByte 的定义（**Definition of ClientServerInterface CallbackGetFurtherActionByte**）
+ClientServerInterface CallbackGetFurtherActionByte 的定义
 
 | SWS 条目 | [SWS_DoIP_00290] 所定义的接口 |
 |---|---|
@@ -1433,7 +1433,7 @@ Std_ReturnType <User>_DoIPGetFurtherActionByteCallback ( DoIP_FurtherActionByteT
 | 参数 FurtherActionByte | 类型：DoIP_FurtherActionByteType；方向：OUT；注释：-；变体：- |
 | 可能的错误 | E_OK E_NOT_OK |
 
-表7.23：模块 **DoIP** 需要的端口 CBGetPowerMode（**Definition of Port CBGetPowerMode required by module DoIP**）
+模块 **DoIP** 需要的端口 CBGetPowerMode 的定义
 
 | 名称 | CBGetPowerMode |
 |---|---|
@@ -1441,7 +1441,7 @@ Std_ReturnType <User>_DoIPGetFurtherActionByteCallback ( DoIP_FurtherActionByteT
 | 描述 | - |
 | 变体（Variation） | {ecuc(DoIP/[DoIPGeneral](#922-doipgeneral)/[DoIPPowerModeCallback](#924-doippowermodecallback)/DoIPPowerModeDirect)} == NULL |
 
-表7.24：模块 **DoIP** 需要的端口 CB{Name}RoutingActivation（**Definition of Port CB{Name}RoutingActivation required by module DoIP**）
+模块 **DoIP** 需要的端口 CB{Name}RoutingActivation 的定义
 
 | 名称 | CB{Name}RoutingActivation |
 |---|---|
@@ -1449,7 +1449,7 @@ Std_ReturnType <User>_DoIPGetFurtherActionByteCallback ( DoIP_FurtherActionByteT
 | 描述 | - |
 | 变体（Variation） | Name = [DoIPRoutingActivation](#9223-doiproutingactivation) 容器的 SHORT-NAME |
 
-表7.25：模块 **DoIP** 需要的端口 CBTriggerGIDSynchronization（**Definition of Port CBTriggerGIDSynchronization required by module DoIP**）
+模块 **DoIP** 需要的端口 CBTriggerGIDSynchronization 的定义
 
 | 名称 | CBTriggerGIDSynchronization |
 |---|---|
@@ -1457,7 +1457,7 @@ Std_ReturnType <User>_DoIPGetFurtherActionByteCallback ( DoIP_FurtherActionByteT
 | 描述 | - |
 | 变体（Variation） | 配置了 [DoIPTriggerGidSyncCallback](#925-doiptriggergidsynccallback) 容器、未配置直接的 C 回调函数（DoIPTriggerGidSyncDirect 为空）且 DoIPVinGidMaster == TRUE |
 
-表7.26：模块 **DoIP** 需要的端口 CBGetGID（**Definition of Port CBGetGID required by module DoIP**）
+模块 **DoIP** 需要的端口 CBGetGID 的定义
 
 | 名称 | CBGetGID |
 |---|---|
@@ -1465,7 +1465,7 @@ Std_ReturnType <User>_DoIPGetFurtherActionByteCallback ( DoIP_FurtherActionByteT
 | 描述 | - |
 | 变体（Variation） | 配置了 [DoIPGetGidCallback](#923-doipgetgidcallback) 容器，且未配置直接的 C 回调函数（DoIPGetGidDirect 为空） |
 
-表7.27：模块 **DoIP** 需要的端口 CBGetfurtherActionByte_{DoIPInterface_short_name}（**Definition of Port CBGetfurtherActionByte_{DoIPInterface_short_name} required by module DoIP**）
+模块 **DoIP** 需要的端口 CBGetfurtherActionByte_{DoIPInterface_short_name} 的定义
 
 | 名称 | CBGetfurtherActionByte*_{DoIPInterface_short_name}* |
 |---|---|

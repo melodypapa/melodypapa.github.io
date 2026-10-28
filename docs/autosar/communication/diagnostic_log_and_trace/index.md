@@ -224,7 +224,7 @@ RTE [\[6\]](#ref-6)（包括 **VFB** 和 **BSW** 调度器）用于与 **SW-C** 
 
 **Dlt** 协议规定了所有类型的 **Dlt** 命令，它们由唯一的 Service ID 标识。**Dlt** 命令用于在运行时修改 **Dlt** 模块的行为，例如获取当前 **Dlt** 配置的信息或更改过滤设置。
 
-表6.1：支持的 Service ID 到 Dlt 命令名称的映射（**Supported Service ID to Dlt Command Name mapping**）
+**Dlt**支持的 Service ID 到 Dlt 命令名称的映射
 
 | Service ID | Dlt 命令名称 | 描述 |
 |---|---|---|
@@ -869,7 +869,7 @@ Dlt 控制消息「BufferOverflowNotification」的参数 overflowCounter 应设
 
 本节列出从下列模块导入的所有类型。
 
-表7.2：模块 **Dlt** 导入的数据类型（**Definition of imported datatypes of module Dlt**）
+**Dlt**模块的导入数据类型定义
 
 | 模块 | 头文件 | 导入的类型 |
 |---|---|---|
@@ -1245,7 +1245,7 @@ Dlt_TxFunction 应检查指示发生了缓冲区溢出的标志的状态：
 
 本模块依赖以下接口：
 
-表7.3：模块 **Dlt** 中的强制接口（**Definition of mandatory interfaces in module Dlt**）
+**Dlt**模块中的强制接口定义
 
 | API 函数 | 头文件 | 描述 |
 |---|---|---|
@@ -1257,7 +1257,7 @@ Dlt_TxFunction 应检查指示发生了缓冲区溢出的标志的状态：
 
 本模块依赖以下可选接口：
 
-表7.4：模块 **Dlt** 中的可选接口（**Definition of optional interfaces in module Dlt**）
+**Dlt**模块中的可选接口定义
 
 | API 函数 | 头文件 | 描述 |
 |---|---|---|
@@ -1274,7 +1274,7 @@ Dlt_TxFunction 应检查指示发生了缓冲区溢出的标志的状态：
 
 本节定义所有可配置的外部接口。
 
-表7.5：可配置接口 Dlt_InjectCall_&lt;SESSION&gt;（**Definition of configurable interface Dlt_InjectCall_&lt;SESSION&gt;**）
+可配置接口 Dlt_InjectCall_&lt;SESSION&gt; 的定义
 
 | 服务名称 | Dlt_InjectCall_&lt;SESSION&gt; |
 |---|---|
@@ -1298,7 +1298,7 @@ Dlt_TxFunction 应检查指示发生了缓冲区溢出的标志的状态：
 
 ##### 7.7.1.1. DltControlService
 
-表7.6：ClientServerInterface DltControlService 的定义（**Definition of ClientServerInterface DltControlService**）
+ClientServerInterface DltControlService 的定义
 
 | SWS 条目 | [SWS_Dlt_00772] 所定义的接口 |
 |---|---|
@@ -1450,7 +1450,7 @@ Dlt_TxFunction 应检查指示发生了缓冲区溢出的标志的状态：
 
 ##### 7.7.1.2. InjectionCallback
 
-表7.7：ClientServerInterface InjectionCallback 的定义（**Definition of ClientServerInterface InjectionCallback**）
+ClientServerInterface InjectionCallback 的定义
 
 | SWS 条目 | [SWS_Dlt_00498] 所定义的接口 |
 |---|---|
@@ -1475,7 +1475,7 @@ Dlt_TxFunction 应检查指示发生了缓冲区溢出的标志的状态：
 
 ##### 7.7.1.3. LogTraceSessionControl
 
-表7.8：ClientServerInterface LogTraceSessionControl 的定义（**Definition of ClientServerInterface LogTraceSessionControl**）
+ClientServerInterface LogTraceSessionControl 的定义
 
 | SWS 条目 | [SWS_Dlt_00496] 所定义的接口 |
 |---|---|
@@ -1508,7 +1508,7 @@ Dlt_TxFunction 应检查指示发生了缓冲区溢出的标志的状态：
 
 ##### 7.7.1.4. DltSwcMessageService
 
-表7.9：ClientServerInterface DltSwcMessageService 的定义（**Definition of ClientServerInterface DltSwcMessageService**）
+ClientServerInterface DltSwcMessageService 的定义
 
 | SWS 条目 | [SWS_Dlt_00495] 所定义的接口 |
 |---|---|
@@ -1673,7 +1673,7 @@ Dlt_TxFunction 应检查指示发生了缓冲区溢出的标志的状态：
 
 ##### 7.7.3.1. Dlt_ControlService
 
-表7.10：模块 **Dlt** 提供的端口 ControlService（**Definition of Port ControlService provided by module Dlt**）
+模块 **Dlt** 提供的端口 ControlService 的定义
 
 | 名称 | ControlService |
 |---|---|
@@ -1683,7 +1683,7 @@ Dlt_TxFunction 应检查指示发生了缓冲区溢出的标志的状态：
 
 ##### 7.7.3.2. Dlt_InjectCallback_{SW-C}
 
-表7.11：模块 **Dlt** 需要的端口 InjectCallback_{SW-C}（**Definition of Port InjectCallback_{SW-C} required by module Dlt**）
+模块 **Dlt** 需要的端口 InjectCallback_{SW-C} 的定义
 
 | 名称 | InjectCallback_{SW-C} |
 |---|---|
@@ -1693,7 +1693,7 @@ Dlt_TxFunction 应检查指示发生了缓冲区溢出的标志的状态：
 
 ##### 7.7.3.3. Dlt_SessionControlCallback_{SW-C}
 
-表7.12：模块 **Dlt** 需要的端口 SessionControlCallback_{SW-C}（**Definition of Port SessionControlCallback_{SW-C} required by module Dlt**）
+模块 **Dlt** 需要的端口 SessionControlCallback_{SW-C} 的定义
 
 | 名称 | SessionControlCallback_{SW-C} |
 |---|---|
@@ -1703,7 +1703,7 @@ Dlt_TxFunction 应检查指示发生了缓冲区溢出的标志的状态：
 
 ##### 7.7.3.4. Dlt_SwcMessageService_{SW-C}
 
-表7.13：模块 **Dlt** 提供的端口 SwcMessageService_{SW-C}（**Definition of Port SwcMessageService_{SW-C} provided by module Dlt**）
+模块 **Dlt** 提供的端口 SwcMessageService_{SW-C} 的定义
 
 | 名称 | SwcMessageService_{SW-C} |
 |---|---|

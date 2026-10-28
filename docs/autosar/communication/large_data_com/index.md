@@ -146,7 +146,7 @@ AUTOSAR **LdCom** 模块应提供 API 函数 [LdCom_DeInit](#732-ldcom_deinit) �
 
 表 6.1 给出了本文档中使用的 API 名称到 ECUC 参数的映射，该 ECUC 参数包含为每个信号配置的实际 API 名称。LdCom 用户回调句柄 Id（LdComUserCbkHandleId）参数标识对应的 Signal/PDU。
 
-表6.1：API 到参数的映射（**API to Parameter mapping**）
+表7.1：API 到参数的映射（**API to Parameter mapping**）
 
 | API 名称 | ECUC 参数 |
 |---|---|
@@ -223,7 +223,7 @@ AUTOSAR **LdCom** 模块应提供 API 函数 [LdCom_DeInit](#732-ldcom_deinit) �
 
 #### 6.6.1. 开发错误
 
-表6.2：开发错误类型（**Development Error Types**）
+表7.2：开发错误类型（**Development Error Types**）
 
 | 错误类型 | 相关错误代码 | 值 [hex] |
 |---|---|---|
@@ -255,7 +255,7 @@ AUTOSAR **LdCom** 模块应提供 API 函数 [LdCom_DeInit](#732-ldcom_deinit) �
 
 本章列出从下列文件中包含的所有类型。
 
-表7.1：模块 **LdCom** 导入的数据类型（**Definition of imported datatypes of module LdCom**）
+**LdCom**模块的导入数据类型定义
 
 | 模块 | 头文件 | 导入的类型 |
 |---|---|---|
@@ -414,7 +414,7 @@ LdCom_TriggerTransmit 仅在至少一个 [LdComIPdu](#914-ldcomipdu) 配置了 L
 
 本节定义实现模块可选功能所需的所有接口。
 
-表7.2：模块 **LdCom** 中的可选接口（**Definition of optional interfaces in module LdCom**）
+**LdCom**模块中的可选接口定义
 
 | API 函数 | 头文件 | 描述 |
 |---|---|---|
