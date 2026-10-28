@@ -21,14 +21,14 @@
 **Fill depth (existing articles)**
 
 - [ ] 2026-10-25 tables-as-images retired (STANDARD.md §4 decision — source tables translate as GFM tables): 5 `![Table*.png]` refs remain — bswm 1 (Table7-1 BswMRuleInitState), dcm 1, data_distribution 1, time_service 2; EcuM ✅ (all 7 translated/deleted 2026-10-25), operating_system ✅ (Table7_1 deleted 2026-10-26, GFM table already present)
-- [ ] 5 ⚠️ articles missing only the 「API规范」 chapter: pdu_router, can_interface, crypto_driver, ethernet_interface, lin_interface (operating_system ✅ 2026-10-26)
+- [ ] 4 ⚠️ articles missing only the 「API规范」 chapter: pdu_router, can_interface, ethernet_interface, lin_interface (operating_system ✅ 2026-10-26; crypto_driver ✅ 2026-10-27 — its real gap was source 7.1.2–ch.10, not just the API chapter)
 - [ ] The other 9 ⚠️ articles: complete their respective missing chapters (com_based_transformer, data_distribution, e2e_transformer, sec_oc, SoAd, mirror, dem, fee, dcm) — iohwab ✅ 2026-10-27; memory_access ✅ 2026-10-27
 - [ ] 4 ⛔ stubs: full translation (ethernet_switch_driver, service_discovery, memory_mapping, platform_types — platform_types also needs its front-matter title and nav label fixed in the same change)
 - [ ] 12 🔶 articles: align to Type A — flash_driver/time_service translate their legacy 「配置规范」 chapters in place (allowed since 2026-10-24; source ch.10 → article `## 8. 配置规范`); nvram drops the 「需求追踪」 chapter and fixes 「功能说明」; unify remaining legacy wording to STANDARD.md terms
 - [ ] IO section ✅ articles' heading-wording alignment (DIO/Port/PWM/OCU/ICU done 2026-10-24; same-class deviations remain): adc 4.2 「适用车型域」→「汽车域的适用性」
-- [ ] 4.2 「适用于汽车领域」→「汽车域的适用性」 (named in STANDARD.md 2026-10-24): bswm, ecu_state_manager, crypto_driver, crypto_service_manager, data_distribution; 「对汽车领域的适用性」: ethernet_driver, can_interface; 「汽车领域的适用性」: nvram_manager
-- [ ] *Scheduled functions* unified to 「调度函数」 (named in STANDARD.md 2026-10-24): bswm 7.3 / can_network_management 7.3 「周期函数」, crypto_service_manager 7.12 「Scheduled 函数」
-- [ ] §3.1 translated in full as 「输入文件和相关标准与规范」 (direct translation, named in STANDARD.md 2026-10-25 — the short form 「输入文件」 is no longer canonical): dio ✅ (2026-10-25); remaining — exact 「输入文件」: adc, crypto_driver, crypto_service_manager, ecu_state_manager, ethernet_interface, can_transceiver_driver, can_network_management (+ r21_11 snapshot), udp_network_management, flash_driver, flash_eeprom_emulation, pwm, port, icu, ocu, lin_interface, function_inhibition_manager, time_service; — iohwab removed 2026-10-27: its R23-11 source 3.1 heading is literally "Input documents", so 「输入文件」 IS the direct translation and stays 「输入文件及相关标准规范」: bulk_nv_data_manager, nvram_manager; 「输入文件及相关标准和规范」: bswm, pdu_router, operating_system
+- [ ] 4.2 「适用于汽车领域」→「汽车域的适用性」 (named in STANDARD.md 2026-10-24): bswm, ecu_state_manager, data_distribution (crypto_driver + crypto_service_manager ✅ 2026-10-27); 「对汽车领域的适用性」: ethernet_driver, can_interface; 「汽车领域的适用性」: nvram_manager
+- [ ] *Scheduled functions* unified to 「调度函数」 (named in STANDARD.md 2026-10-24): bswm 7.3, crypto_service_manager 7.12 「Scheduled 函数」; can_network_management ✅ (2026-10-28, now 7.5)
+- [ ] §3.1 translated in full as 「输入文件和相关标准与规范」 (direct translation, named in STANDARD.md 2026-10-25 — the short form 「输入文件」 is no longer canonical): dio ✅ (2026-10-25); remaining — exact 「输入文件」: adc, crypto_service_manager, ecu_state_manager, ethernet_interface, can_transceiver_driver, can_network_management (+ r21_11 snapshot), udp_network_management, flash_driver, flash_eeprom_emulation, pwm, port, icu, ocu, lin_interface, function_inhibition_manager, time_service; — iohwab removed 2026-10-27: its R23-11 source 3.1 heading is literally "Input documents", so 「输入文件」 IS the direct translation and stays 「输入文件及相关标准规范」: bulk_nv_data_manager, nvram_manager; 「输入文件及相关标准和规范」: bswm, pdu_router, operating_system
 - [ ] Acronym chapters unified to 「粗体术语 + 引用块」 + row-set alignment (STANDARD.md §1; 2026-10-24 census 21:5): format — dio/port/pwm ✅ (reflowed 2026-10-24); lin_driver — 1 article still GFM tables; row sets (check line by line against the R23-11 sources) — adc restore API/HW/SW, DEM→DET source order, re-merge Conversion Mode into one entry (18 rows→16), lin_driver missing 14 rows (40→26); udp_network_management ✅ (2026-10-28, 25 entries); icu verified equal (12:12)
 - [ ] Hygiene fixes: udp_network_management WeChat footer → `<h4>` ✅ (2026-10-28); dem numbering gap; rename the `data_distribution service` directory to drop the space; SoAd/mirror → index.md layout; `timimg_extension/indx.md` spelling (nav change in the same commit)
 - [ ] BswM ch.10 → `## 9. 配置规范` (rule-lift follow-up, issue #71): 91 containers across ~3600 source lines (10.2.1–10.2.90) — dedicated run needed; bswm alignment + 时序图 lands first
@@ -47,22 +47,23 @@
 - [ ] Storage wrap-up: Ea, Eep
 - [ ] Libraries: Crc, E2E
 - [x] ~~Safety: WdgIf, Wdg~~ — done 2026-10-27 (wdgif + wdg run)
-- [ ] Landing pages to add: crypto, memory, system_services, general, methodology_templates
+- [x] ~~Landing pages to add: crypto, memory, system_services, general, methodology_templates~~ — all present 2026-10-27 (general, system_services, methodology_templates plus foundation and template added in the Group-crypto batch run; crypto/memory earlier)
 
 ## Overview
 
 | Status | Count | Note |
 | --- | ---: | --- |
-| ✅ Type A-compliant | 14 | ready to use |
-| 🔶 Translated pending alignment | 10 | seven chapters present; legacy wording / forbidden-chapter residue |
-| ⚠️ Partial | 17 | missing ≥1 chapter (most miss the 「API规范」 chapter) |
+| ✅ Type A-compliant | 21 | ready to use |
+| 🔶 Translated pending alignment | 8 | seven chapters present; legacy wording / forbidden-chapter residue |
+| ⚠️ Partial | 16 | missing ≥1 chapter (most miss the 「API规范」 chapter) |
 | ⛔ Stub | 4 | 9–19 lines only |
-| ❌ Missing (SWS) | 82 | R23-11 has 127 SWS docs in total; 45 covered (35.4%) |
+| ❌ Missing (SWS) | 78 | R23-11 has 127 SWS docs in total; 49 covered (38.6%) |
 | ❌ Missing (EXP) | 20 | R23-11 has 22 EXP docs in total; 2 covered |
 | 📖 Guide/topic | 8 | exempt from the Type A skeleton |
 
 ## communication
 
+- ✅ [SPI Handler/Driver（SPI 处理器/驱动程序）](spi_handler_driver/) — SWS_SPIHandlerDriver (new article 2026-10-28, full Type A: ch.2 3 缩写+4 定义, §6 三级可扩展功能/IB-EB/错误分类, §7 11 types/14 functions/2 configurable callbacks/错误检测, §8 时序图 12 figures, §9 10 containers + 配置概念, §10 附录 example table; 22 figures; links applied)
 - ✅ [CAN 网络管理](can_network_management/) — SWS_CANNetworkManagement (R23-11 realigned 2026-10-28: full §3.1 registry, §5/§6.11/§6.14–6.18/§7 completion, new §8 时序图/§9 配置规范/§10 示例)
 - ✅ [UDP 网络管理](udp_network_management/) — SWS_UDPNetworkManagement (R23-11 realigned 2026-10-28: footer fixed, ch.2/§3 rebuild, §5/§6.8/§6.10–6.17/§7 completion, new §8 时序图和转换表/§9 配置规范, appendix B)
 - ✅ [CAN 驱动](can_driver/) — SWS_CANDriver (R23-11 realigned 2026-10-28: former topic chapters folded into §2.1/2.2 per R23-11 structure; full §5–§9 completion)
@@ -85,14 +86,14 @@
 - 📖 [Full-CAN vs Basic-CAN](can_driver/full_can_vs_basic_can.md) — topic subpage
 - 📖 [CanNm R21-11 历史版](can_network_management/r21_11/index_r21_11.md) — historical snapshot
 
-❌ Missing (47): SWS_COM (Com), SWS_CANStateManager (CanSM), SWS_CANTransportLayer (CanTp), SWS_CANXLDriver, SWS_CANXLTransceiverDriver, SWS_TcpIp (TcpIp), SWS_SOMEIPTransformer (SomeIpXf), SWS_SOMEIPTransportProtocol (SomeIpTp), SWS_IPDUMultiplexer (IpduM), SWS_LargeDataCOM (LdCom), SWS_LSduRouter (LsDu), SWS_DiagnosticLogAndTrace (Dlt), SWS_DiagnosticOverIP (DoIp), SWS_XCP (XCP), SWS_SPIHandlerDriver (Spi), SWS_EthernetStateManager (EthSM), SWS_EthernetTransceiverDriver (EthTrcv), SWS_WirelessEthernetDriver, SWS_WirelessEthernetTransceiverDriver, SWS_NetworkManagementInterface (Nm), SWS_FlexRayDriver, SWS_FlexRayInterface, SWS_FlexRayNetworkManagement, SWS_FlexRayStateManager, SWS_FlexRayTransceiverDriver, SWS_FlexRayARTransportLayer, SWS_FlexRayISOTransportLayer, SWS_LINStateManager (LinSM), SWS_LINTransceiverDriver (LinTrcv), SWS_TTCANDriver, SWS_TTCANInterface, SWS_SAEJ1939NetworkManagement (J1939Nm), SWS_SAEJ1939RequestManager (J1939Rm), SWS_SAEJ1939TransportLayer (J1939Tp), SWS_IEEE1722TransportLayer, SWS_MACsecKeyAgreement, SWS_CellularV2XDriver, SWS_ChargingManager, SWS_ChineseV2XManagement, SWS_ChineseV2XMessage, SWS_ChineseV2XNetwork, SWS_ChineseV2XSecurity, SWS_V2XBasicTransport, SWS_V2XDataManager, SWS_V2XFacilities, SWS_V2XGeoNetworking, SWS_V2XManagement
+❌ Missing (46): SWS_COM (Com), SWS_CANStateManager (CanSM), SWS_CANTransportLayer (CanTp), SWS_CANXLDriver, SWS_CANXLTransceiverDriver, SWS_TcpIp (TcpIp), SWS_SOMEIPTransformer (SomeIpXf), SWS_SOMEIPTransportProtocol (SomeIpTp), SWS_IPDUMultiplexer (IpduM), SWS_LargeDataCOM (LdCom), SWS_LSduRouter (LsDu), SWS_DiagnosticLogAndTrace (Dlt), SWS_DiagnosticOverIP (DoIp), SWS_XCP (XCP), SWS_EthernetStateManager (EthSM), SWS_EthernetTransceiverDriver (EthTrcv), SWS_WirelessEthernetDriver, SWS_WirelessEthernetTransceiverDriver, SWS_NetworkManagementInterface (Nm), SWS_FlexRayDriver, SWS_FlexRayInterface, SWS_FlexRayNetworkManagement, SWS_FlexRayStateManager, SWS_FlexRayTransceiverDriver, SWS_FlexRayARTransportLayer, SWS_FlexRayISOTransportLayer, SWS_LINStateManager (LinSM), SWS_LINTransceiverDriver (LinTrcv), SWS_TTCANDriver, SWS_TTCANInterface, SWS_SAEJ1939NetworkManagement (J1939Nm), SWS_SAEJ1939RequestManager (J1939Rm), SWS_SAEJ1939TransportLayer (J1939Tp), SWS_IEEE1722TransportLayer, SWS_MACsecKeyAgreement, SWS_CellularV2XDriver, SWS_ChargingManager, SWS_ChineseV2XManagement, SWS_ChineseV2XMessage, SWS_ChineseV2XNetwork, SWS_ChineseV2XSecurity, SWS_V2XBasicTransport, SWS_V2XDataManager, SWS_V2XFacilities, SWS_V2XGeoNetworking, SWS_V2XManagement
 
 ## crypto
 
 - ✅ [Csm 加密服务管理器](crypto_service_manager/) — SWS_CryptoServiceManager (2026-10-27 wording alignment: 4.2 「汽车域的适用性」, 7.12 duplicate number fixed — Scheduled 函数 → 7.13 调度函数 (7.13.1 Csm_MainFunction); citation-marker anchors + identifier links applied; observation: API chapter still legacy-structured vs source ch.8 — realignment candidate for a future row)
-- ⚠️ [Crypto 驱动](crypto_driver/) — SWS_CryptoDriver (missing 「API规范」)
-
-❌ Missing (2): SWS_CryptoInterface (CryIf), SWS_KeyManager (KeyM)
+- ✅ [KeyM 密钥管理器](key_manager/) — SWS_KeyManager (new article 2026-10-28, full Type A: 已知限制 无, ch.2 7 entries, §3 [1]–[9], §5 三依赖小节, §6 加密密钥/证书子模块/自定义处理/安全事件/错误分类, §7 6 types/20 functions in 3 groups/2 scheduled/11 configurable interfaces + §7.8 服务接口 (10 data types, 8 C/S interfaces, 8 ports, EcuM house tables), §8 时序图 5 figures, §9 15 containers, appendix B 规范条目历史 as GFM tables with ids as data; 20 figures; links applied)
+- ✅ [CryIf 加密接口](crypto_interface/) — SWS_CryptoInterface (new article 2026-10-27, full Type A: ch.2 9 acronyms + 12 terms, §6 多核/错误分类/错误检测, §7 2 types/18 functions in the source's 5 groups/1 callback/expected interfaces, §8 不适用 (source N/A), §9 5 containers incl. 变体; 5 figures; identifier/citation links applied)
+- ✅ [Crypto 驱动](crypto_driver/) — SWS_CryptoDriver (2026-10-27 full R23-11 completion: the ⚠️ tag understated the gap — article stopped inside source 7.1.1; translated 7.1.2–7.5, ch.8 API (2 types/19 functions/4 NvBlock callbacks/MainFunction/expected interfaces), ch.9 n/a → §8 不适用, ch.10 16 containers → §9; §3 registry realigned to the R23-11 six entries; 17 figures; identifier/chapter-ref/citation links applied)
 
 ## diagnostics
 
@@ -147,8 +148,9 @@
 
 ## system_services
 
-- 🔶 [FiM](function_inhibition_manager/) — SWS_FunctionInhibitionManager ("功能规范" legacy wording)
-- 🔶 [时间服务](time_service/) — SWS_TimeService (carries a legacy 「配置规范」 chapter — allowed since 2026-10-24, align per the config-spec rules; ch.2 legacy wording)
+- ✅ [Default Error Tracer（默认错误跟踪器）](default_error_tracer/) — SWS_DefaultErrorTracer (new article 2026-10-28, full Type A: 1 entry ch.2, §5.1 文件结构, §6 初始化/错误钩子/错误报告/错误分类, §7 API (1 type/6 functions/3 configurable callouts) + 服务接口 (DETService CSI + Det_<Name> 端口), §8 时序图 7 figures, §9 6 containers + 双 10.3/10.4 发布信息 (source quirk, both translated), appendix B 需求历史 with R22-11/R23-11 ID fences; identifier/citation links applied)
+- ✅ [FiM（功能禁止管理器）](function_inhibition_manager/) — SWS_FunctionInhibitionManager (2026-10-28 realignment+completion: 功能规格 heading, 4.2 汽车域的适用性, §5 realigned to source ch.5 (bullets + 5.1 需求/5.1.1 用例), §7 API realigned to source ch.8 groups (导入的类型/FiM_ConfigType/3 interface groups with all requirement bodies/回调/调度/期望接口) + §7.4 服务接口 (2 CSIs, FiM_FunctionIdType, 2 ports, internal behavior), 6.5 错误分类 + 6.6 配置约束 added, §8 时序图 (figures moved from §6 to their source positions + 9.2 prose), §9 配置规范 6 containers + Figure10_1–10_4 config overviews, appendix B; 9 citation links; legacy ECUC_FiM_00037 prose mention kept)
+- ✅ [时间服务](time_service/) — SWS_TimeService (2026-10-28 realignment+completion: §3 registry realigned to R23-11's 4 entries ([11]/[8] prose citations renumbered, stale [12]-[16] standards removed — release drift); 4.1 假设/4.2 限制 (renumbered)/4.3 汽车域的适用性; 6.4 got the 00063 intro + 6.4.3–6.4.5 + GFM error tables; 6.5 版本检查; Table 7.1 Predef-Timer characteristics converted from Table3.png to GFM (tables rule; Table3_1.png was a duplicate of an existing GFM table — dropped); §7 API realigned (7.1 导入的类型, 7.2 4 type entries, flat 7.3.1–7.3.20 kept = source 8.3 shape, 7.4 回调通知 无, 7.5 调度函数 无, 7.6 期望接口 2+1+None); ## 8. 时序图 (Figure9_1) + ## 9. 配置规范 (legacy per-param chapter replaced by the container-table house style, Tm+TmGeneral 6 params, Figure10_1) + appendix B; ch.2 heading 首字母缩略词、缩略语和术语 KEPT as the direct translation of the source heading (stale queue note wanted 缩略语 — decision recorded)
 - ✅ [OS](operating_system/) — SWS_OS · R23-11 (2026-10-26 full sync: §2.1 术语表 46 terms added, ch.7 completed to source end (7.7.2–7.17 incl. multi-core/IOC/ARTI), new ## 7. API规范 (22 types + 39 functions + IOC/期望接口/钩子/服务接口), ## 8. 时序图 (8 figures), ## 9. 配置规范 (Os×35 + IOC×5 + ARTI×20 containers + 发布信息), ## 10–13 (生成/应用说明/服务/展望 — ch.11–14 顺延 per user decision), ## B. 约束和规格项的历史; §3.1 realigned to source's 11-entry list; spec: → AUTOSAR_CP_SWS_OS; Table7_1.png retired; 55 figures; glossary.md OS terms pending — parallel-session conflict)
 
 ❌ Missing (4): SWS_COMManager (ComM), SWS_DefaultErrorTracer (Det), SWS_HWTestManager, SWS_SoftwareClusterConnection (SwCluC)
