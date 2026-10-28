@@ -79,10 +79,12 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 6 — TODO.md row + commit/PR — commit aad6b21 (branch feature/group-communication-sync)
 - [ ] com_based_transformer (SWS_COMBasedTransformer · R23-11 markdown · ⚠️ gaps)
   - Note: missing acronym/dependency chapters; the 4.2 subsection structure ("基于COM的转换器规范") must be checked against the source; missing "约束和假设" (tracked in TODO.md)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-29 gap analysis — article was legacy-structured (章节 flat, no 缩略语/依赖, API = bare signatures). Real gaps vs R23-11: ch.2 one-sentence no-terms statement; §3 = source 3.1 「输入文件」 (source heading is literally "Input documents" — iohwab precedent, NOT renamed) 8 entries + 3.2 相关标准和规范 (Not applicable → 不适用) + 3.3 相关规范; §4.1 限制/§4.2 汽车域的适用性 split; §5 依赖 + 5.1 文件结构; §6 = old ch.4 renumbered + missing SWS_ComXf_00036 gaps-filler content already present + 6.2 错误分类 (dev errors 4 rows with <MIP>_ placeholders, runtime/transient/production/extended none); §7 rebuilt (8.1 one-sentence no-imported-types + Module-Interlink-Headers paragraph, 8.2 ComXf_ConfigType, 8.3 5 functions with 说明+requirement bodies incl. transformerChain/where-lists, 8.4/8.5/8.6 one-sentence statements); §8 时序图 = source ch.9 one-sentence statement (no applicable diagrams); §9 配置规范 = source ch.10 5 requirements; source annexes are LETTERED CONTENT annexes (rte precedent): A 引用的元类 (11 meta-class tables), B 使用的ECU配置 (6 containers/37 duplicated Com params + Figure B.1), C 约束和规格项的历史 (R4.2.1–R23-11, ID lists in fences); blog-era PNGs (2022-02-*.png) replaced by source artifacts Figure7-1..4 + FigureB-1
+  - Note: 2026-10-29 completion run — Phase A: strict build exit 0, 0 WARNING, no com_based_transformer INFO; heading audit ✓ (A./B./C. lettered annexes per rte precedent); forbidden-variant sweep 0 hits; hygiene ✓ (0 legacy escapes, no {DRAFT}); check_api_sync = documented N/A (source 8.2 type table carries no "Definition of datatype" SWS-ID heading — script's parser sees ch.8.2 as empty; manual verification: 1 type ↔ 7.2.1, 5 functions ↔ 7.3.1-.5 in source order, 5 **说明** blocks ✓); gen_api_list --check up to date; link_candidates --apply: 23 citation links, idempotent; truncated source cells marked 「源文档此处截断」; glossary extension skipped (batch-level pending item). Steps 5/6 per user instruction: commit first, combined confirmation after
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] e2e_transformer (SWS_E2ETransformer · R23-11 markdown · ⚠️ gaps)

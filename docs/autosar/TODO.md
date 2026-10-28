@@ -26,7 +26,7 @@
 
 - [ ] 2026-10-25 tables-as-images retired (STANDARD.md §4 decision — source tables translate as GFM tables): 5 `![Table*.png]` refs remain — bswm 1 (Table7-1 BswMRuleInitState), dcm 1, data_distribution 1, time_service 2; EcuM ✅ (all 7 translated/deleted 2026-10-25), operating_system ✅ (Table7_1 deleted 2026-10-26, GFM table already present)
 - [ ] 1 ⚠️ article missing only the 「API规范」 chapter: can_interface (operating_system ✅ 2026-10-26; crypto_driver ✅ 2026-10-27 — its real gap was source 7.1.2–ch.10, not just the API chapter; pdu_router ✅ 2026-10-28 — its real gap was §5.5 through §10 plus appendix B; ethernet_interface ✅ 2026-10-28 — its real gap was §6.1.11–ch.10 plus appendix B, not just the API chapter)
-- [ ] The other 9 ⚠️ articles: complete their respective missing chapters (com_based_transformer, data_distribution, e2e_transformer, sec_oc, SoAd, mirror, dem, fee, dcm) — iohwab ✅ 2026-10-27; memory_access ✅ 2026-10-27
+- [ ] The other 8 ⚠️ articles: complete their respective missing chapters (data_distribution, e2e_transformer, sec_oc, SoAd, mirror, dem, fee, dcm) — iohwab ✅ 2026-10-27; memory_access ✅ 2026-10-27
 - [ ] 3 ⛔ stubs: full translation (ethernet_switch_driver, service_discovery, platform_types — platform_types also needs its front-matter title and nav label fixed in the same change); memory_mapping ✅ 2026-10-28
 - [ ] 12 🔶 articles: align to Type A — flash_driver/time_service translate their legacy 「配置规范」 chapters in place (allowed since 2026-10-24; source ch.10 → article `## 8. 配置规范`); nvram drops the 「需求追踪」 chapter and fixes 「功能说明」; unify remaining legacy wording to STANDARD.md terms
 - [ ] IO section ✅ articles' heading-wording alignment (DIO/Port/PWM/OCU/ICU done 2026-10-24; same-class deviations remain): adc 4.2 「适用车型域」→「汽车域的适用性」
@@ -80,7 +80,7 @@
 - 🔶 [以太网驱动](ethernet_driver/) — SWS_EthernetDriver (legacy wording)
 - 🔶 [LIN 驱动](lin_driver/) — SWS_LINDriver (legacy wording)
 - ⚠️ [CAN 接口](can_interface/) — SWS_CANInterface (missing 「API规范」)
-- ⚠️ [COM 基转换器](com_based_transformer/) — SWS_COMBasedTransformer (missing 缩略语/dependencies)
+- ✅ [COM 基转换器](com_based_transformer/) — SWS_COMBasedTransformer (R23-11 realigned 2026-10-29: §2 缩略语 added (one-sentence no-terms statement per source), §3 rebuilt to 8-entry registry + 输入文件 heading (source-literal) + 3.2 不适用, §4.1/§4.2 split, §5 依赖 + 5.1 文件结构 added, §6 renumbered + 6.2 错误分类, §7 API rebuilt with 说明 + requirement bodies (1 type/5 functions/no callbacks), §8 时序图 one-sentence statement, §9 配置规范 5 requirements, blog-era PNGs replaced by source figures 7-1..7-4, ## A. 引用的元类 (11 meta-class tables), ## B. 使用的ECU配置 (6 containers/37 COM params), ## C. 约束和规格项的历史 (R4.2.1–R23-11))
 - ⚠️ [数据分发服务](data_distribution%20service/) — SWS_DataDistributionService (missing 「API规范」; directory name contains a space, pending rename)
 - ⚠️ [E2E 转换器](e2e_transformer/) — SWS_E2ETransformer (missing 缩略语/constraints/API)
 - ✅ [以太网接口](ethernet_interface/) — SWS_EthernetInterface (R23-11 realigned 2026-10-28: 已知限制 chapter, §2 intro sentence, §3.1 rebuilt to R23-11 23-entry registry + canonical heading, canonical §4/§5/§6 headings, §6 completed 6.1.11–6.1.16/6.2 安全事件/6.3 错误分类, new §7 API规范 (63 imported types/4 types/125 functions/8 callbacks/5 scheduled/期望接口), §8 时序图 13 figures, §9 配置规范 15 containers 10 figures, `## B.` 可追溯项变更历史)
