@@ -66,7 +66,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit a08b183 (branch feature/group-communication-sync)
 - [ ] lin_interface (SWS_LINInterface · R23-11 markdown · ⚠️ missing API chapter)
   - Note: one of the "6 articles missing only the API chapter"
   - [ ] Step 1 — Source resolution + gap analysis
