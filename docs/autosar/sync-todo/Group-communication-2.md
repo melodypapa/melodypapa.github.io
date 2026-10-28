@@ -18,13 +18,17 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (src ch.1–5→§1–§5, ch.7→§6, ch.8→§7, ch.9→§8, ch.10→§9, ch.12→§10; ch.6 + ch.11 dropped; the 3-level scalability structure and IB/EB split verified section by section)
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
   - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-crypto-sync · PR #141 (Closes issue #140))
-- [ ] ldcom (SWS_LargeDataCOM · R23-11 markdown · ❌ new article, short name LdCom)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] ldcom (SWS_LargeDataCOM · R23-11 markdown · ❌ new article, short name LdCom)
+  - Note: article `communication/large_data_com/` (full-name directory convention, nav label "LdCom", landing-page 数据处理与安全 group). Shape: ch.2 2 acronyms (DEM/DET, 来源 lines appended to existing glossary entries) · ch.6 dropped · ch.7 → §6 (6.3 总体 carries 表6.1 API到参数映射 rebuilt from the page-broken 2-fragment source table; 6.4/6.5 IF/TP; 6.6.1 表6.2 dev errors; 6.6.2–6.6.5 no-error sentences) · ch.8 → §7 (7.1 9 imported types; 7.2.1 LdCom_ConfigType prose-style; 7.3 4 functions; 7.4 8 callbacks with full service-table folding; 7.5 调度函数 None → sentence; 7.6.1 强制接口 None → sentence; 7.6.3 8 configurable interfaces; 7.7 服务接口 None → sentence) · ch.9 → §8 (5 figures) · ch.10 → §9 (9 containers, 值配置类 with VARIANT scopes, callback-type Range rows folded into the cell; LdComUserCallbackType LDCOM_TX_TRIGGER_TRANSMIT row carries the source's own duplicated TX_CONFIRMATION description — kept verbatim as a source typo) · ch.A dropped · ch.B → appendix B
+  - Note: page-break-truncated table cells (8.4.1/8.4.3/8.4.8 Description) completed from the same source's sibling configurable-interface entries (91001/91003/91007 carry the identical sentences in full); "(draft)"/{DRAFT}/"Tags: atp.Status=draft" dropped as chrome; PDF-hyphenation artifacts (Ld-Com_Init, LdCo-mUser, TpRxIndicationshall) reconstructed; §3.1 registry reformatted to the [n] Title + > doc-id house format (script recognized it only in that shape)
+  - Note: Phase A — strict build exit 0 / 0 WARNING; headings §1–§9 + B continuous; hygiene 0 h1/{DRAFT}/\</requirement-ids; acronym 2 rows = source 2 rows, no tables; check_api_sync 1 type/4 functions OK; gen_api_list regenerated (LdCom 1 type + 4 functions SITE-linked, --check 0); census --apply: 24 identifier/chapter-ref links + 3 citation links + 11 registry anchors, idempotent re-run 0 lines; comma-form citations [n, 文档名] (7) stay prose — known open apply limitation; [6]/[10] EXTERNAL:? = known DOC_TARGETS gaps (report-only)
+  - Note: Phase B — coverage map: ch.1→§1, 2→§2, 3→§3, 4→§4, 5→§5, 7→§6, 8→§7, 9→§8, 10→§9, B→B; ch.6 + A dropped (compliance); all 11 content figures embedded (5+6, deco/≤345px chrome dropped by hash+size triage); §3.1 comma-form [n, 文档名] left unlinked pending the user's comma-form decision
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion (new article, main session per no-subagent rule)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (evidence above)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync; hash in the batched report)
 - [ ] lsdu (SWS_LSduRouter · R23-11 markdown · ❌ new article, short name LsDu)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

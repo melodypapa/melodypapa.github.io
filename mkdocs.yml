@@ -130,6 +130,7 @@ nav:
       - "EthIf": autosar/communication/ethernet_interface/index.md
       - "EthSwt": autosar/communication/ethernet_switch_driver/index.md
       - "FvM": autosar/communication/fvm/fvm.md
+      - "LdCom": autosar/communication/large_data_com/index.md
       - "Lin": autosar/communication/lin_driver/index.md
       - "LinIf": autosar/communication/lin_interface/index.md
       - "Mirror": autosar/communication/mirror/mirror.md
