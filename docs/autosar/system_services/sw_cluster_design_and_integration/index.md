@@ -6669,45 +6669,45 @@ glyph[triangle]
 ```
 
 
-> **译者注：** 附录 B–D 为引用性参考表，分别复述元模型、ECUC 配置定义与 RTE/OS 的 API 内容。本版本中表格的结构、行标签与标识符已翻译，较长的英文描述单元格保留英文原文，待后续专门的翻译批次处理（已排队 Backlog，批次门待决策）。
+> **译者注：** 附录 B–D 为引用性参考表，分别复述元模型、ECUC 配置定义与 RTE/OS 的 API 内容。表格已整体翻译；元属性尾注（Stereotypes: / Tags: / InstanceRef implemented by: 等）与标识符按 AUTOSAR 惯例保留原文。
 
 ## B 引用的元类（Referenced Meta Classes）
 
 | 类 | AbstractAccessPoint (abstract) |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::SwcInternalBehavior::AccessCount |  |  |  |
-| 说明 | Abstract class indicating an access point from an ExecutableEntity. |  |  |  |
+| 说明 | 表示来自可执行实体的访问点的抽象类。 |  |  |  |
 | 基类 | ARObject , AtpClassifier , AtpFeature , AtpStructureElement , Identifiable , MultilanguageReferrable , Referrable |  |  |  |
 | 子类 | AsynchronousServerCallResultPoint, ExternalTriggeringPointIdent, InternalTriggeringPoint, ModeAccess PointIdent, ModeSwitchPoint, ParameterAccess, ServerCallPoint , VariableAccess |  |  |  |
 | 被聚合于 | AtpClassifier .atpFeature |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| returnValue Provision | RteApiReturnValue ProvisionEnum | 0..1 | attr | This attribute controls the provision of return values for RTE APIs that correspond to the enclosing access point. |
+| returnValue Provision | RteApiReturnValue ProvisionEnum | 0..1 | attr | 该属性控制与外层访问点对应的 RTE API 的返回值提供。 |
 
 
 | 类 | BswExternalTriggerOccurredEvent |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::BswModuleTemplate::BswBehavior |  |  |  |
-| 说明 | A BswEvent resulting from a trigger released by another module or cluster. |  |  |  |
+| 说明 | 由另一个模块或集群释放的触发器引发的 BswEvent。 |  |  |  |
 | 基类 | ARObject , AbstractEvent , BswEvent , BswScheduleEvent , Identifiable , MultilanguageReferrable , Referrable |  |  |  |
 | 被聚合于 | BswInternalBehavior.event |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| trigger | Trigger | 0..1 | ref | The trigger associated with this event. The trigger is external to this module. |
+| trigger | Trigger | 0..1 | ref | 与该事件关联的触发器。该触发器位于本模块之外。 |
 
 
 | 类 | BswInternalTriggerOccurredEvent |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::BswModuleTemplate::BswBehavior |  |  |  |
-| 说明 | A BswEvent, which can happen sporadically. The event is activated by explicit calls from the module to the BSW Scheduler. The main purpose for such an event is to cause a context switch, e.g. from an ISR context into a task context. Activation and switching are handled within the same module or cluster only. |  |  |  |
+| 说明 | 可以偶发发生的 BswEvent。该事件由模块对 BSW 调度器的显式调用激活。这类事件的主要目的是引发上下文切换，例如从 ISR 上下文切换到任务上下文。激活与切换只在同一模块或集群内处理。 |  |  |  |
 | 基类 | ARObject , AbstractEvent , BswEvent , BswScheduleEvent , Identifiable , MultilanguageReferrable , Referrable |  |  |  |
 | 被聚合于 | BswInternalBehavior.event |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| eventSource | BswInternalTriggering Point | 0..1 | ref | The activation point is the source of this event. |
+| eventSource | BswInternalTriggering Point | 0..1 | ref | 激活点是该事件的来源。 |
 
 
 | 类 | BswModeSwitchEvent |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::BswModuleTemplate::BswBehavior |  |  |  |
-| 说明 | A BswEvent resulting from a mode switch. |  |  |  |
+| 说明 | 由模式切换引发的 BswEvent。 |  |  |  |
 | 基类 | ARObject , AbstractEvent , BswEvent , BswScheduleEvent , Identifiable , MultilanguageReferrable Referrable |  |  |  |
 | 被聚合于 | BswInternalBehavior.event |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
@@ -6715,68 +6715,68 @@ glyph[triangle]
 
 | 类 | BswModeSwitchEvent |  |  |  |
 | --- | --- | --- | --- | --- |
-| activation | ModeActivationKind | 0..1 | attr | Kind of activation w.r.t. to the referred mode. |
-| mode (ordered) | ModeDeclaration | 0..2 | iref | Reference to one or two Modes that initiate the Mode Switch Event. InstanceRef implemented by: ModeInBswModule DescriptionInstanceRef |
+| activation | ModeActivationKind | 0..1 | attr | 相对于所引用模式的激活种类。 |
+| mode (ordered) | ModeDeclaration | 0..2 | iref | 对引发模式切换事件的一个或两个模式的引用。实例引用由 ModeInBswModuleDescriptionInstanceRef 实现。 |
 
 
 | 类 | BswModuleDescription |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::BswModuleTemplate::BswOverview |  |  |  |
-| 说明 | Root element for the description of a single BSW module or BSW cluster. In case it describes a BSW module, the short name of this element equals the name of the BSW module. Tags: atp.recommendedPackage=BswModuleDescriptions |  |  |  |
+| 说明 | 用于描述单个 BSW 模块或 BSW 集群的根元素。当它描述一个 BSW 模块时，该元素的短名称等于该 BSW 模块的名称。 |  |  |  |
 | 基类 | ARElement , ARObject , AtpBlueprint , AtpBlueprintable , AtpClassifier , AtpFeature , AtpStructureElement , CollectableElement , Identifiable , MultilanguageReferrable , PackageableElement , Referrable |  |  |  |
 | 被聚合于 | ARPackage.element, AtpClassifier .atpFeature |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| bswModule Dependency | BswModuleDependency | * | aggr | Describes the dependency to another BSW module. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=bswModuleDependency.shortName, bsw ModuleDependency.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=20 |
-| bswModule Documentation | SwComponent Documentation | 0..1 | aggr | This adds a documentation to the BSW module. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=bswModuleDocumentation, bswModule Documentation.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=6 |
-| expectedEntry | BswModuleEntry | * | ref | Indicates an entry which is required by this module. Replacement of outgoingCallback / requiredEntry. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=expectedEntry.bswModuleEntry, expected Entry.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
-| implemented Entry | BswModuleEntry | * | ref | Specifies an entry provided by this module which can be called by other modules. This includes "main" functions, interrupt routines, and callbacks. Replacement of providedEntry / expectedCallback. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=implementedEntry.bswModuleEntry, implementedEntry.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| bswModule Dependency | BswModuleDependency | * | aggr | 描述对另一个 BSW 模块的依赖。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=bswModuleDependency.shortName, bsw ModuleDependency.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=20 |
+| bswModule Documentation | SwComponent Documentation | 0..1 | aggr | 这为 BSW 模块添加一份文档。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=bswModuleDocumentation, bswModule Documentation.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=6 |
+| expectedEntry | BswModuleEntry | * | ref | 指示本模块所需要的一个入口。outgoingCallback / requiredEntry 的替代。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=expectedEntry.bswModuleEntry, expected Entry.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| implemented Entry | BswModuleEntry | * | ref | 规定本模块提供的、可被其他模块调用的一个入口。这包括「main」函数、中断例程与回调。providedEntry / expectedCallback 的替代。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=implementedEntry.bswModuleEntry, implementedEntry.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
 
 
 | 类 | BswModuleDescription |  |  |  |
 | --- | --- | --- | --- | --- |
-| internalBehavior | BswInternalBehavior | * | aggr | The various BswInternalBehaviors associated with a Bsw ModuleDescription can be distributed over several physical files. Therefore the aggregation is <<atp Splitable>>. Stereotypes: atpSplitable Tags: atp.Splitkey=internalBehavior.shortName xml.sequenceOffset=65 |
-| moduleId | PositiveInteger | 0..1 | attr | Refers to the BSW Module Identifier defined by the AUTOSAR standard. For non-standardized modules, a proprietary identifier can be optionally chosen. Tags: xml.sequenceOffset=5 |
-| providedClient ServerEntry | BswModuleClientServer Entry | * | aggr | Specifies that this module provides a client server entry which can be called from another partition or core.This entry is declared locally to this context and will be connected to the requiredClientServerEntry of another or the same module via the configuration of the BSW Scheduler. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=providedClientServerEntry.shortName, providedClientServerEntry.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=45 |
-| providedData | VariableDataPrototype | * | aggr | Specifies a data prototype provided by this module in order to be read from another partition or core.The providedData is declared locally to this context and will be connected to the requiredData of another or the same module via the configuration of the BSW Scheduler. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=providedData.shortName, provided Data.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=55 |
-| providedMode Group | ModeDeclarationGroup Prototype | * | aggr | A set of modes which is owned and provided by this module or cluster. It can be connected to the required ModeGroups of other modules or clusters via the configuration of the BswScheduler. It can also be synchronized with modes provided via ports by an associated ServiceSwComponentType, EcuAbstraction SwComponentType or ComplexDeviceDriverSw ComponentType. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=providedModeGroup.shortName, provided ModeGroup.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=25 |
+| internalBehavior | BswInternalBehavior | * | aggr | 与 BSW 模块描述关联的各个 BswInternalBehavior 可以分布在若干物理文件上。因此该聚合是 <<atpSplitable>>。 Stereotypes: atpSplitable Tags: atp.Splitkey=internalBehavior.shortName xml.sequenceOffset=65 |
+| moduleId | PositiveInteger | 0..1 | attr | 引用由 AUTOSAR 标准定义的 BSW 模块标识符。对于未标准化的模块，可以选择性地使用专有标识符。 Tags: xml.sequenceOffset=5 |
+| providedClient ServerEntry | BswModuleClientServer Entry | * | aggr | 规定本模块提供一个可从另一个分区或核心调用的客户端-服务器入口。 该入口在本地声明于此上下文，并将通过 BSW 调度器的配置连接到另一个或同一模块的 requiredClientServerEntry。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=providedClientServerEntry.shortName, providedClientServerEntry.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=45 |
+| providedData | VariableDataPrototype | * | aggr | 规定本模块提供的一个数据原型，以便从另一个分区或核心读取。 providedData 在本地声明于此上下文，并将通过 BSW 调度器的配置连接到另一个或同一模块的 requiredData。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=providedData.shortName, provided Data.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=55 |
+| providedMode Group | ModeDeclarationGroup Prototype | * | aggr | 由本模块或集群拥有并提供的一组模式。它可以通过 BswScheduler 的配置连接到其他模块或集群的 requiredModeGroup。它还可以与关联的 ServiceSwComponentType、EcuAbstractionSwComponentType 或 ComplexDeviceDriverSwComponentType 经由端口提供的模式同步。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=providedModeGroup.shortName, provided ModeGroup.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=25 |
 
 
 | 类 | BswModuleDescription |  |  |  |
 | --- | --- | --- | --- | --- |
-| releasedTrigger | Trigger | * | aggr | A Trigger released by this module or cluster. It can be connected to the requiredTriggers of other modules or clusters via the configuration of the BswScheduler. It can also be synchronized with Triggers provided via ports by an associated ServiceSwComponentType, Ecu AbstractionSwComponentType or ComplexDeviceDriver SwComponentType. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=releasedTrigger.shortName, released Trigger.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=35 |
-| requiredClient ServerEntry | BswModuleClientServer Entry | * | aggr | Specifies that this module requires a client server entry which can be implemented on another partition or core.This entry is declared locally to this context and will be connected to the providedClientServerEntry of another or the same module via the configuration of the BSW Scheduler. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=requiredClientServerEntry.shortName, requiredClientServerEntry.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=50 |
-| requiredData | VariableDataPrototype | * | aggr | Specifies a data prototype required by this module in oder to be provided from another partition or core.The required Data is declared locally to this context and will be connected to the providedData of another or the same module via the configuration of the BswScheduler. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=requiredData.shortName, required Data.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=60 |
-| requiredMode Group | ModeDeclarationGroup Prototype | * | aggr | Specifies that this module or cluster depends on a certain mode group. The requiredModeGroup is local to this context and will be connected to the providedModeGroup of another module or cluster via the configuration of the BswScheduler. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=requiredModeGroup.shortName, required ModeGroup.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
-| requiredTrigger | Trigger | * | aggr | Specifies that this module or cluster reacts upon an external trigger.This requiredTrigger is declared locally to this context and will be connected to the providedTrigger of another module or cluster via the configuration of the BswScheduler. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=requiredTrigger.shortName, required Trigger.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=40 |
+| releasedTrigger | Trigger | * | aggr | 由本模块或集群释放的触发器。它可以通过 BswScheduler 的配置连接到其他模块或集群的 requiredTrigger。它还可以与关联的 ServiceSwComponentType、EcuAbstractionSwComponentType 或 ComplexDeviceDriverSwComponentType 经由端口提供的触发器同步。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=releasedTrigger.shortName, released Trigger.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=35 |
+| requiredClient ServerEntry | BswModuleClientServer Entry | * | aggr | 规定本模块需要一个可在另一个分区或核心上实现的客户端-服务器入口。 该入口在本地声明于此上下文，并将通过 BSW 调度器的配置连接到另一个或同一模块的 providedClientServerEntry。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=requiredClientServerEntry.shortName, requiredClientServerEntry.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=50 |
+| requiredData | VariableDataPrototype | * | aggr | 规定本模块所需要的一个数据原型，以便由另一个分区或核心提供。 requiredData 在本地声明于此上下文，并将通过 BswScheduler 的配置连接到另一个或同一模块的 providedData。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=requiredData.shortName, required Data.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=60 |
+| requiredMode Group | ModeDeclarationGroup Prototype | * | aggr | 规定本模块或集群依赖于某个模式组。 requiredModeGroup 对此上下文是本地的，并将通过 BswScheduler 的配置连接到另一个模块或集群的 providedModeGroup。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=requiredModeGroup.shortName, required ModeGroup.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| requiredTrigger | Trigger | * | aggr | 规定本模块或集群对外部触发器作出反应。 requiredTrigger 在本地声明于此上下文，并将通过 BswScheduler 的配置连接到另一个模块或集群的 providedTrigger。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=requiredTrigger.shortName, required Trigger.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=40 |
 
 
 | 类 | BswModuleEntity (abstract) |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::BswModuleTemplate::BswBehavior |  |  |  |
-| 说明 | Specifies the smallest code fragment which can be described for a BSW module or cluster within AUTOSAR. |  |  |  |
+| 说明 | 规定在 AUTOSAR 内可以为 BSW 模块或集群描述的最小代码片段。 |  |  |  |
 | 基类 | ARObject , ExecutableEntity , Identifiable , MultilanguageReferrable , Referrable |  |  |  |
 | 子类 | BswCalledEntity, BswInterruptEntity, BswSchedulableEntity |  |  |  |
 | 被聚合于 | BswInternalBehavior.entity |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| accessedMode Group | ModeDeclarationGroup Prototype | * | ref | A mode group which is accessed via API call by this entity. It shall be a ModeDeclarationGroupPrototype required by this module or cluster. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=accessedModeGroup.modeDeclaration GroupPrototype, accessedModeGroup.variation Point.shortLabel vh.latestBindingTime=preCompileTime |
-| activationPoint | BswInternalTriggering Point | * | ref | Activation point used by the module entity to activate one or more internal triggers. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=activationPoint.bswInternalTriggeringPoint, activationPoint.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
-| callPoint | BswModuleCallPoint | * | aggr | A call point used in the code of this entity. The variability of this association is especially targeted at debug scenarios: It is possible to have one variant calling into the AUTOSAR debug module and another one which doesn't. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=callPoint.shortName, callPoint.variation Point.shortLabel vh.latestBindingTime=preCompileTime |
-| dataReceive Point | BswVariableAccess | * | aggr | The data is received via the BSW Scheduler. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=dataReceivePoint.shortName, dataReceive Point.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
-| dataSendPoint | BswVariableAccess | * | aggr | The data is sent via the BSW Scheduler. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=dataSendPoint.shortName, dataSend Point.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
-| implemented Entry | BswModuleEntry | 0..1 | ref | The entry which is implemented by this module entity. |
-| issuedTrigger | Trigger | * | ref | A trigger issued by this entity via BSW Scheduler API call. It shall be a BswTrigger released (i.e. owned) by this module or cluster. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=issuedTrigger.trigger, issuedTrigger.variation Point.shortLabel vh.latestBindingTime=preCompileTime |
+| accessedMode Group | ModeDeclarationGroup Prototype | * | ref | 由该实体经由 API 调用访问的模式组。它应是本模块或集群所需要的一个 ModeDeclarationGroupPrototype。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=accessedModeGroup.modeDeclaration GroupPrototype, accessedModeGroup.variation Point.shortLabel vh.latestBindingTime=preCompileTime |
+| activationPoint | BswInternalTriggering Point | * | ref | 模块实体用于激活一个或多个内部触发器的激活点。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=activationPoint.bswInternalTriggeringPoint, activationPoint.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| callPoint | BswModuleCallPoint | * | aggr | 该实体代码中使用的调用点。该关联的变体性尤其面向调试场景：可以让一个变体调用 AUTOSAR 调试模块，而另一个变体不调用。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=callPoint.shortName, callPoint.variation Point.shortLabel vh.latestBindingTime=preCompileTime |
+| dataReceive Point | BswVariableAccess | * | aggr | 数据经由 BSW 调度器接收。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=dataReceivePoint.shortName, dataReceive Point.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| dataSendPoint | BswVariableAccess | * | aggr | 数据经由 BSW 调度器发送。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=dataSendPoint.shortName, dataSend Point.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| implemented Entry | BswModuleEntry | 0..1 | ref | 由该模块实体实现的入口。 |
+| issuedTrigger | Trigger | * | ref | 该实体经由 BSW 调度器 API 调用发出的触发器。它应是本模块或集群释放（即拥有）的一个 BswTrigger。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=issuedTrigger.trigger, issuedTrigger.variation Point.shortLabel vh.latestBindingTime=preCompileTime |
 
 
 | 类 | BswModuleEntity (abstract) |  |  |  |
 | --- | --- | --- | --- | --- |
-| managedMode Group | ModeDeclarationGroup Prototype | * | ref | A mode group which is managed by this entity. It shall be a ModeDeclarationGroupPrototype provided by this module or cluster. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=managedModeGroup.modeDeclaration GroupPrototype, managedModeGroup.variation Point.shortLabel vh.latestBindingTime=preCompileTime |
-| schedulerName Prefix | BswSchedulerName Prefix | 0..1 | ref | A prefix to be used in generated names for the Bsw ModuleScheduler in the context of this BswModuleEntity, for example entry point prototypes, macros for dealing with exclusive areas, header file names. Details are defined in the SWS RTE. The prefix supersedes default rules for the prefix of those names. |
+| managedMode Group | ModeDeclarationGroup Prototype | * | ref | 由该实体管理的模式组。它应是本模块或集群提供的一个 ModeDeclarationGroupPrototype。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=managedModeGroup.modeDeclaration GroupPrototype, managedModeGroup.variation Point.shortLabel vh.latestBindingTime=preCompileTime |
+| schedulerName Prefix | BswSchedulerName Prefix | 0..1 | ref | 在该 BswModuleEntity 的语境下，用于为 BSW 模块调度器生成名称的前缀，例如入口点原型、处理独占区的宏、头文件名。细节在 SWS RTE 中定义。该前缀取代这些名称前缀的默认规则。 |
 
 
 | 类 | BswSchedulableEntity |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::BswModuleTemplate::BswBehavior |  |  |  |
-| 说明 | BSW module entity, which is designed for control by the BSW Scheduler. It may for example implement a so-called "main" function. |  |  |  |
+| 说明 | 为 BSW 调度器控制而设计的 BSW 模块实体。例如，它可以实现所谓的「main」函数。 |  |  |  |
 | 基类 | ARObject , BswModuleEntity , ExecutableEntity , Identifiable , MultilanguageReferrable , Referrable |  |  |  |
 | 被聚合于 | BswInternalBehavior.entity |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
@@ -6785,64 +6785,64 @@ glyph[triangle]
 | 类 | BswVariableAccess |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::BswModuleTemplate::BswBehavior |  |  |  |
-| 说明 | The presence of a BswVariableAccess implies that a BswModuleEntity needs access to a VariableData Prototype via the BSW Scheduler. The kind of access is specified by the role in which the class is used. |  |  |  |
+| 说明 | BswVariableAccess 的存在意味着 BswModuleEntity 需要经由 BSW 调度器访问一个 VariableDataPrototype。访问的种类由该类被使用的角色规定。 |  |  |  |
 | 基类 | ARObject , Referrable |  |  |  |
 | 被聚合于 | BswModuleEntity .dataReceivePoint, BswModuleEntity .dataSendPoint |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| accessed Variable | VariableDataPrototype | 0..1 | ref | The data accessed via the BSW Scheduler. |
-| context Limitation | BswDistinguished Partition | * | ref | The existence of this reference indicates that the variable is received resp. sent only in the context of the referred BswDistinguishedPartitions. |
+| accessed Variable | VariableDataPrototype | 0..1 | ref | 经由 BSW 调度器访问的数据。 |
+| context Limitation | BswDistinguished Partition | * | ref | 该引用的存在表示该变量只在所引用的 BswDistinguishedPartition 的上下文中被接收或发送。 |
 
 
 | 类 | ClientServerInterface |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::PortInterface |  |  |  |
-| 说明 | A client/server interface declares a number of operations that can be invoked on a server by a client. Tags: atp.recommendedPackage=PortInterfaces |  |  |  |
+| 说明 | 客户端/服务器接口声明若干可以由客户端在服务器上调用的操作。 Tags: atp.recommendedPackage=PortInterfaces |  |  |  |
 | 基类 | ARElement , ARObject , AtpBlueprint , AtpBlueprintable , AtpClassifier , AtpType , CollectableElement , Identifiable , MultilanguageReferrable , PackageableElement , PortInterface , Referrable |  |  |  |
 | 被聚合于 | ARPackage.element |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| operation | ClientServerOperation | * | aggr | ClientServerOperation(s) of this ClientServerInterface. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=operation.shortName, operation.variation Point.shortLabel vh.latestBindingTime=blueprintDerivationTime |
-| possibleError | ApplicationError | * | aggr | Application errors that are defined as part of this interface. |
+| operation | ClientServerOperation | * | aggr | 该 ClientServerInterface 的 ClientServerOperation。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=operation.shortName, operation.variation Point.shortLabel vh.latestBindingTime=blueprintDerivationTime |
+| possibleError | ApplicationError | * | aggr | 作为该接口一部分定义的应用错误。 |
 
 
 | 类 | CompositionSwComponentType |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::Composition |  |  |  |
-| 说明 | A CompositionSwComponentType aggregates SwComponentPrototype s (that in turn are typed by SwComponentTypes ) as well as SwConnector s for primarily connecting SwComponentPrototype s among each others and towards the surface of the CompositionSwComponentType . By this means, a hierarchical structures of software-components can be created. Tags: atp.recommendedPackage=SwComponentTypes |  |  |  |
+| 说明 | CompositionSwComponentType 聚合 SwComponentPrototype（它们又由 SwComponentType 类型化）以及 SwConnector，主要用于将 SwComponentPrototype 彼此连接并连接到 CompositionSwComponentType 的表面。借助这种方式，可以创建软件组件的层次化结构。 Tags: atp.recommendedPackage=SwComponentTypes |  |  |  |
 | 基类 | ARElement , ARObject , AtpBlueprint , AtpBlueprintable , AtpClassifier , AtpType , CollectableElement , Identifiable , MultilanguageReferrable , PackageableElement , Referrable , SwComponentType |  |  |  |
 | 被聚合于 | ARPackage.element |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| component | SwComponent Prototype | * | aggr | The instantiated components that are part of this composition. The aggregation of SwComponentPrototype is subject to variability with the purpose to support the conditional existence of a SwComponentPrototype . Please be aware: if the conditional existence of SwComponentPrototype s is resolved post-build, the deselected SwComponentPrototype s are still contained in the ECUs build but the instances are inactive in that they are not scheduled by the RTE. The aggregation is marked as atpSplitable in order to allow the addition of service components to the ECU extract during the ECU integration. The use case for having 0 components owned by the CompositionSwComponentType could be to deliver an empty CompositionSwComponentType to e.g. a supplier for filling the internal structure. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=component.shortName, component.variation Point.shortLabel vh.latestBindingTime=postBuild |
+| component | SwComponent Prototype | * | aggr | 作为该组合一部分的实例化组件。 SwComponentPrototype 的聚合受变体性支配，以支持 SwComponentPrototype 的条件性存在。 请注意：如果 SwComponentPrototype 的条件性存在以 post-build 方式解决，被取消选择的 SwComponentPrototype 仍然包含在 ECU 的构建中，但实例是不活动的，因为它们不被 RTE 调度。 该聚合被标记为 atpSplitable，以便允许在 ECU 集成期间向 ECU 提取中添加服务组件。 让 CompositionSwComponentType 拥有 0 个组件的用例可能是：向例如供应商交付一个空的 CompositionSwComponentType 以填充内部结构。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=component.shortName, component.variation Point.shortLabel vh.latestBindingTime=postBuild |
 
 
 | 类 | CompositionSwComponentType |  |  |  |
 | --- | --- | --- | --- | --- |
-| connector | SwConnector | * | aggr | SwConnector s have the principal ability to establish a connection among PortPrototype s. They can have many roles in the context of a CompositionSwComponentType . Details are refined by subclasses. The aggregation of SwConnector s is subject to variability with the purpose to support variant data flow. The aggregation is marked as atpSplitable in order to allow the extension of the ECU extract with AssemblySwConnector s between ApplicationSwComponentType s and ServiceSwComponentType s during the ECU integration. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=connector.shortName, connector.variation Point.shortLabel vh.latestBindingTime=postBuild |
-| constantValue Mapping | ConstantSpecification MappingSet | * | ref | Reference to the ConstantSpecificationMapping to be applied for initValues of PPortComSpec s and RPortComSpec . Stereotypes: atpSplitable Tags: atp.Splitkey=constantValueMapping |
-| dataType Mapping | DataTypeMappingSet | * | ref | Reference to the DataTypeMappingSet to be applied for the used ApplicationDataType s in PortInterface s. Background: when developing subsystems it may happen that ApplicationDataType s are used on the surface of CompositionSwComponentType s. In this case it would be reasonable to be able to also provide the intended mapping to the ImplementationDataType s. However, this mapping shall be informal and not technically binding for the implementors mainly because the RTE generator is not concerned about the CompositionSwComponentType s. Rationale: if the mapping of ApplicationDataType s on the delegated and inner PortPrototype matches then the mapping to ImplementationDataType s is not impacting compatibility. Stereotypes: atpSplitable Tags: atp.Splitkey=dataTypeMapping |
-| instantiation RTEEventProps | InstantiationRTEEvent Props | * | aggr | This allows to define instantiation specific properties for RTE Events, in particular for instance specific scheduling. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=instantiationRTEEventProps.shortLabel, instantiationRTEEventProps.variationPoint.shortLabel vh.latestBindingTime=codeGenerationTime |
+| connector | SwConnector | * | aggr | SwConnector 具有在端口原型之间建立连接的基本能力。在 CompositionSwComponentType 的语境中它们可以扮演多种角色。细节由子类细化。 SwConnector 的聚合受变体性支配，以支持变体数据流。 该聚合被标记为 atpSplitable，以便允许在 ECU 集成期间，用应用软件组件类型与服务软件组件类型之间的 AssemblySwConnector 扩展 ECU 提取。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=connector.shortName, connector.variation Point.shortLabel vh.latestBindingTime=postBuild |
+| constantValue Mapping | ConstantSpecification MappingSet | * | ref | 对要应用于 PPortComSpec 与 RPortComSpec 的 initValue 的 ConstantSpecificationMapping 的引用。 Stereotypes: atpSplitable Tags: atp.Splitkey=constantValueMapping |
+| dataType Mapping | DataTypeMappingSet | * | ref | 对要应用于端口接口中所使用 ApplicationDataType 的 DataTypeMappingSet 的引用。 背景：在开发子系统时，ApplicationDataType 可能被用在 CompositionSwComponentType 的表面上。 在这种情况下，能够同时提供到 ImplementationDataType 的预期映射是合理的。 不过，该映射应是非正式的、对实现者在技术上无约束力的，主要因为 RTE 生成器不关心 CompositionSwComponentType。 理由：如果委托端口与内部端口原型上的 ApplicationDataType 映射一致，那么到 ImplementationDataType 的映射就不会影响兼容性。 Stereotypes: atpSplitable Tags: atp.Splitkey=dataTypeMapping |
+| instantiation RTEEventProps | InstantiationRTEEvent Props | * | aggr | 这允许为 RTE 事件定义实例化特定的属性，尤其是实例特定的调度。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=instantiationRTEEventProps.shortLabel, instantiationRTEEventProps.variationPoint.shortLabel vh.latestBindingTime=codeGenerationTime |
 
 
 | 类 | CompositionSwComponentType |  |  |  |
 | --- | --- | --- | --- | --- |
-| physical Dimension Mapping | PhysicalDimension MappingSet | 0..1 | ref | This reference identifies the PhysicalDimensionMappingSet that is applicable in the context of the enclosing CompositionSwComponentType . The PhysicalDimensionMapping s contained in the PhysicalDimensionMappingSet shall be taken into account for the assessment of the compatibility of PhysicalDimension s in the context of creation of a PortInterfaceMapping in the scope of the CompositionSwComponentType . |
+| physical Dimension Mapping | PhysicalDimension MappingSet | 0..1 | ref | 该引用标识在外层 CompositionSwComponentType 语境下适用的 PhysicalDimensionMappingSet。 在 CompositionSwComponentType 范围内创建 PortInterfaceMapping 的语境下，评估物理量纲的兼容性时应考虑 PhysicalDimensionMappingSet 中包含的 PhysicalDimensionMapping。 |
 
 
 | 类 | CpSoftwareCluster |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SystemTemplate::SoftwareCluster |  |  |  |
-| 说明 | This meta class provides the ability to define a CP Software Cluster. Each CP Software Cluster can be integrated and build individually. It defines the sub-set of hierarchical tree(s) of Software Components belonging to this CP Software Cluster. Resources required or provided by this CP Software Cluster are given in the according mappings. Tags: atp.recommendedPackage=CpSoftwareClusters |  |  |  |
+| 说明 | 该元类提供定义 CP 软件集群的能力。每个 CP 软件集群都可以单独集成与构建。它定义属于该 CP 软件集群的软件组件层次树的子集。该 CP 软件集群需要或提供的资源在相应的映射中给出。 Tags: atp.recommendedPackage=CpSoftwareClusters |  |  |  |
 | 基类 | ARElement , ARObject , CollectableElement , Identifiable , MultilanguageReferrable , Packageable Element , Referrable |  |  |  |
 | 被聚合于 | ARPackage.element |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| softwareCluster Id | PositiveInteger | 0..1 | attr | This attribute represents the value of the id of the corresponding CP software cluster. |
-| swComponent Assignment | SwComponent PrototypeAssignment | * | aggr | This is the collection of SwComponentPrototype Assignments Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=swComponentAssignment, swComponent Assignment.variationPoint.shortLabel vh.latestBindingTime=postBuild |
-| swComposition | CompositionSw ComponentType | * | ref | Software Components in the context of a CompositionSw ComponentType belonging to this CP Software Cluster. This reference can be used to describe the belonging SWCs when the CP Software Cluster is described out of the context of a System, e.g. reusable CP Software Cluster. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=swComposition.compositionSwComponent Type, swComposition.variationPoint.shortLabel vh.latestBindingTime=systemDesignTime |
+| softwareCluster Id | PositiveInteger | 0..1 | attr | 该属性表示相应 CP 软件集群的 id 值。 |
+| swComponent Assignment | SwComponent PrototypeAssignment | * | aggr | 这是 SwComponentPrototype 分配的集合。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=swComponentAssignment, swComponent Assignment.variationPoint.shortLabel vh.latestBindingTime=postBuild |
+| swComposition | CompositionSw ComponentType | * | ref | 属于该 CP 软件集群的组合软件组件类型语境下的软件组件。 当在系统上下文之外描述 CP 软件集群（例如可复用的 CP 软件集群）时，该引用可用于描述所属的 SWC。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=swComposition.compositionSwComponent Type, swComposition.variationPoint.shortLabel vh.latestBindingTime=systemDesignTime |
 
 
 | 类 | CpSoftwareClusterCommunicationResource |
 | --- | --- |
 | 包 | M2::AUTOSARTemplates::SystemTemplate::SoftwareCluster |
-| 说明 | Represents a single resource required or provided by a CP Software Cluster which relates to the port based communication on VFB level. |
+| 说明 | 表示 CP 软件集群需要或提供的、与 VFB 层级基于端口的通信相关的单个资源。 |
 | 基类 | ARObject , CpSoftwareClusterResource , Identifiable , MultilanguageReferrable , Referrable |
 | 被聚合于 | CpSoftwareClusterResourcePool.resource |
 
@@ -6850,92 +6850,92 @@ glyph[triangle]
 | 类 | CpSoftwareClusterCommunicationResource |  |  |  |
 | --- | --- | --- | --- | --- |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| communication ResourceProps | CpSoftwareCluster Communication ResourceProps | 0..1 | aggr | This aggregation supports the further qualification of the enclosing CpSoftwareClusterCommunicationRecource by means of additional attributes depending on the nature of the CpSoftwareClusterCommunicationRecource. |
+| communication ResourceProps | CpSoftwareCluster Communication ResourceProps | 0..1 | aggr | 该聚合通过取决于 CpSoftwareClusterCommunicationRecource 性质的附加属性，支持对外层 CpSoftwareClusterCommunicationRecource 的进一步限定。 |
 
 
 | 类 | CpSoftwareClusterResource (abstract) |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SystemTemplate::SoftwareCluster |  |  |  |
-| 说明 | Represents a single resource required or provided by a CP Software Cluster. Tags: atp.recommendedPackage=Resources |  |  |  |
+| 说明 | 表示 CP 软件集群需要或提供的单个资源。 Tags: atp.recommendedPackage=Resources |  |  |  |
 | 基类 | ARObject , Identifiable , MultilanguageReferrable , Referrable |  |  |  |
 | 子类 | CpSoftwareClusterCommunicationResource, CpSoftwareClusterServiceResource |  |  |  |
 | 被聚合于 | CpSoftwareClusterResourcePool.resource |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| dependent Resource | RoleBasedResource Dependency | * | aggr | Link to a resource which depends on this resource to implement them. |
-| globalResource Id | PositiveInteger | 0..1 | attr | A unique identifiers per resource used for the connection process. The identifier is required to be unique in the scope of a single machine. If software clusters are designed to be reused on multiple machines the uniqueness requirements applies for all the intended machines. |
-| isMandatory | Boolean | 0..1 | attr | This attribute indicates, that the resource is mandatory to operate the Software Cluster. If the resource is not provided on the machine the connection process of any Software Cluster requiring this resource gets aborted. |
+| dependent Resource | RoleBasedResource Dependency | * | aggr | 指向为实现它们而依赖本资源的资源的链接。 |
+| globalResource Id | PositiveInteger | 0..1 | attr | 用于连接过程的每个资源的唯一标识符。该标识符要求在单台机器的范围内唯一。如果软件集群被设计为在多台机器上复用，则唯一性要求适用于所有目标机器。 |
+| isMandatory | Boolean | 0..1 | attr | 该属性指示：该资源是运行软件集群所强制必需的。如果机器上未提供该资源，任何需要该资源的软件集群的连接过程都会被中止。 |
 
 
 | 类 | DataMapping (abstract) |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SystemTemplate::DataMapping |  |  |  |
-| 说明 | Mapping of port elements (data elements and parameters) to frames and signals. |  |  |  |
+| 说明 | 端口元素（数据元素与参数）到帧与信号的映射。 |  |  |  |
 | 基类 | ARObject |  |  |  |
 | 子类 | ClientServerToSignalMapping, SenderReceiverCompositeElementToSignalMapping, SenderReceiverTo SignalGroupMapping, SenderReceiverToSignalMapping, TriggerToSignalMapping |  |  |  |
 | 被聚合于 | SystemMapping.dataMapping |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| introduction | DocumentationBlock | 0..1 | aggr | This represents introductory documentation about the data mapping. |
+| introduction | DocumentationBlock | 0..1 | aggr | 这表示关于数据映射的介绍性文档。 |
 
 
 | 类 | EcuInstance |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SystemTemplate::Fibex::FibexCore::CoreTopology |  |  |  |
-| 说明 | ECUInstances are used to define the ECUs used in the topology. The type of the ECU is defined by a reference to an ECU specified with the ECU resource description. |  |  |  |
+| 说明 | ECUInstance 用于定义拓扑中使用的 ECU。ECU 的类型通过对 ECU 资源描述中所规定 ECU 的引用来定义。 |  |  |  |
 |  | Tags: atp.recommendedPackage=EcuInstances |  |  |  |
 | 基类 | ARObject , CollectableElement , FibexElement , Identifiable , MultilanguageReferrable , Packageable Element , Referrable |  |  |  |
 | Aggregated by Attribute | ARPackage.element Type | 多重性 | 种类 | 说明 |
-| associatedCom IPduGroup | ISignalIPduGroup | * | ref | With this reference it is possible to identify which ISignal IPduGroups are applicable for which Communication Connector/ ECU. Only top level ISignalIPduGroups shall be referenced by an EcuInstance. If an ISignalIPduGroup contains other ISignalIPduGroups than these contained ISignalIPdu Groups shall not be referenced by the EcuInstance. Contained ISignalIPduGroups are associated to an Ecu Instance via the top level ISignalIPduGroup. |
-| associated Consumed Provided ServiceInstance Group | ConsumedProvided ServiceInstanceGroup | * | ref | With this reference it is possible to identify which ConsumedProvidedServiceInstanceGroups are applicable for which ECUInstance. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=associatedConsumedProvidedService InstanceGroup.consumedProvidedServiceInstanceGroup, associatedConsumedProvidedServiceInstance Group.variationPoint.shortLabel |
-| associatedPdur IPduGroup | PdurIPduGroup | * | ref | With this reference it is possible to identify which PduR IPdu Groups are applicable for which Communication Connector/ ECU. |
-| channel Synchronous Wakeup | Boolean | 0..1 | attr | If this parameter is available and set to true, then all available channels will be woken up as soon as at least one channel wakeup occurs. If PNCs are configured, then all PNCs will be requested upon a channel wakeup. |
-| clientIdRange | ClientIdRange | 0..1 | aggr | Restriction of the Client Identifier for this Ecu to an allowed range of numerical values. The Client Identifier of the transaction handle is generated by the client RTE for inter-Ecu Client/Server communication. |
-| com Configuration GwTimeBase | TimeValue | 0..1 | attr | The period between successive calls to Com_Main FunctionRouteSignals of the AUTOSAR COM module in seconds. |
-| com ConfigurationRx TimeBase | TimeValue | 0..1 | attr | The period between successive calls to Com_Main FunctionRx of the AUTOSAR COM module in seconds. |
-| com ConfigurationTx TimeBase | TimeValue | 0..1 | attr | The period between successive calls to Com_Main FunctionTx of the AUTOSAR COM module in seconds. |
-| comEnable MDTForCyclic Transmission | Boolean | 0..1 | attr | Enables for the Com module of this EcuInstance the minimum delay time monitoring for cyclic and repeated transmissions (TransmissionModeTiming has cyclic Timing assigned or eventControlledTiming with numberOf Repetitions > 0). |
-| commController | Communication Controller | * | aggr | CommunicationControllers of the ECU. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=commController.shortName, comm Controller.variationPoint.shortLabel vh.latestBindingTime=postBuild |
+| associatedCom IPduGroup | ISignalIPduGroup | * | ref | 借助该引用可以识别哪些 ISignalIPduGroup 适用于哪个通信连接器/ECU。 只有顶层 ISignalIPduGroup 才应被 EcuInstance 引用。 如果一个 ISignalIPduGroup 包含其他 ISignalIPduGroup，则这些被包含的 ISignalIPduGroup 不应被 EcuInstance 引用。 被包含的 ISignalIPduGroup 经由顶层 ISignalIPduGroup 关联到 EcuInstance。 |
+| associated Consumed Provided ServiceInstance Group | ConsumedProvided ServiceInstanceGroup | * | ref | 借助该引用可以识别哪些 ConsumedProvidedServiceInstanceGroup 适用于哪个 EcuInstance。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=associatedConsumedProvidedService InstanceGroup.consumedProvidedServiceInstanceGroup, associatedConsumedProvidedServiceInstance Group.variationPoint.shortLabel |
+| associatedPdur IPduGroup | PdurIPduGroup | * | ref | 借助该引用可以识别哪些 PduR IPduGroup 适用于哪个通信连接器/ECU。 |
+| channel Synchronous Wakeup | Boolean | 0..1 | attr | 如果该参数可用且设置为 true，那么一旦发生至少一个通道唤醒，所有可用通道都会被唤醒。如果配置了 PNC，那么通道唤醒时会请求所有 PNC。 |
+| clientIdRange | ClientIdRange | 0..1 | aggr | 将本 ECU 的客户端标识符限制到允许的数值范围。事务句柄的客户端标识符由客户端 RTE 为 ECU 间客户端/服务器通信生成。 |
+| com Configuration GwTimeBase | TimeValue | 0..1 | attr | 对 AUTOSAR COM 模块 Com_MainFunctionRouteSignals 相继调用之间的周期，单位为秒。 |
+| com ConfigurationRx TimeBase | TimeValue | 0..1 | attr | 对 AUTOSAR COM 模块 Com_MainFunctionRx 相继调用之间的周期，单位为秒。 |
+| com ConfigurationTx TimeBase | TimeValue | 0..1 | attr | 对 AUTOSAR COM 模块 Com_MainFunctionTx 相继调用之间的周期，单位为秒。 |
+| comEnable MDTForCyclic Transmission | Boolean | 0..1 | attr | 为本 EcuInstance 的 Com 模块启用对周期性与重复传输的最小延迟时间监控（TransmissionModeTiming 分配了 cyclicTiming，或 eventControlledTiming 的 numberOfRepetitions > 0）。 |
+| commController | Communication Controller | * | aggr | ECU 的通信控制器。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=commController.shortName, comm Controller.variationPoint.shortLabel vh.latestBindingTime=postBuild |
 
 
 | 类 | EcuInstance |  |  |  |
 | --- | --- | --- | --- | --- |
-| connector | Communication Connector | * | aggr | All channels controlled by a single controller. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=connector.shortName, connector.variation Point.shortLabel vh.latestBindingTime=postBuild |
-| dltConfig | DltConfig | 0..1 | aggr | Describes the Dlt configuration on this EcuInstance. |
+| connector | Communication Connector | * | aggr | 由单个控制器控制的所有通道。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=connector.shortName, connector.variation Point.shortLabel vh.latestBindingTime=postBuild |
+| dltConfig | DltConfig | 0..1 | aggr | 描述本 EcuInstance 上的 Dlt 配置。 |
 | doIpConfig | DoIpConfig | 0..1 | aggr | DoIp configuration on this EcuInstance. Tags: atp.Status=draft |
-| ecuTaskProxy | OsTaskProxy | * | ref | Reference to OsTaskProxies assigned to the Ecu Instance. Stereotypes: atpSplitable Tags: atp.Splitkey=ecuTaskProxy |
-| ethSwitchPort Group Derivation | Boolean | 0..1 | attr | Defines whether the derivation of SwitchPortGroups based on VLAN and/or CouplingPort.pncMapping shall be performed for this EcuInstance. If not defined the derivation shall not be done. |
-| firewallRule | StateDependentFirewall | * | ref | Firewall rules defined in the context of an EcuInstance. Tags: atp.Status=candidate |
-| partition | EcuPartition | * | aggr | Optional definition of Partitions within an Ecu. |
-| pncNmRequest | Boolean | 0..1 | attr | Defines if this EcuInstance shall request Nm on all its PhysicalChannels which have Nm variant set to FULL each time a PNC is requested. |
-| pncPrepare SleepTimer | TimeValue | 0..1 | attr | Time in seconds the PNC state machine shall wait in PNC_PREPARE_SLEEP. |
-| pnc Synchronous Wakeup | Boolean | 0..1 | attr | If this parameter is available and set to true then all available PNCs will be woken up as soon as a channel wakeup occurs. This is ensured by adding all PNCs to all channel wakeup sources during upstream mapping. |
-| pnResetTime | TimeValue | 0..1 | attr | Specifies the runtime of the reset timer in seconds. This reset time is valid for the reset of PN requests in the EIRA and in the ERA. |
-| sleepMode Supported | Boolean | 0..1 | attr | Specifies whether the ECU instance may be put to a "low power mode" • true: sleep mode is supported • false: sleep mode is not supported Note: This flag may only be set to "true" if the feature is |
+| ecuTaskProxy | OsTaskProxy | * | ref | 对分配给该 EcuInstance 的 OsTaskProxy 的引用。 Stereotypes: atpSplitable Tags: atp.Splitkey=ecuTaskProxy |
+| ethSwitchPort Group Derivation | Boolean | 0..1 | attr | 定义是否为本 EcuInstance 执行基于 VLAN 和/或 CouplingPort.pncMapping 的 SwitchPortGroup 推导。若未定义，则不执行推导。 |
+| firewallRule | StateDependentFirewall | * | ref | 在 EcuInstance 语境下定义的防火墙规则。 Tags: atp.Status=candidate |
+| partition | EcuPartition | * | aggr | ECU 内分区的可选定义。 |
+| pncNmRequest | Boolean | 0..1 | attr | 定义每当请求一个 PNC 时，本 EcuInstance 是否应在其所有 Nm 变体设为 FULL 的物理通道上请求 Nm。 |
+| pncPrepare SleepTimer | TimeValue | 0..1 | attr | PNC 状态机应在 PNC_PREPARE_SLEEP 中等待的时间，单位为秒。 |
+| pnc Synchronous Wakeup | Boolean | 0..1 | attr | 如果该参数可用且设置为 true，那么一旦发生通道唤醒，所有可用 PNC 都会被唤醒。这通过在上行映射期间将所有 PNC 加入所有通道唤醒源来保证。 |
+| pnResetTime | TimeValue | 0..1 | attr | 规定复位定时器的运行时间，单位为秒。该复位时间对 EIRA 与 ERA 中 PN 请求的复位有效。 |
+| sleepMode Supported | Boolean | 0..1 | attr | 规定该 ECU 实例是否可以进入「低功耗模式」 • true：支持休眠模式 • false：不支持休眠模式。注意：仅当该特性〔存在时〕……此标志才可以设置为「true」〔转换截断〕 |
 | tcpIpIcmpProps | EthTcpIpIcmpProps | 0..1 | ref | EcuInstance specific ICMP (Internet Control Message Protocol) attributes |
 | tcpIpProps | EthTcpIpProps | 0..1 | ref | EcuInstance specific TcpIp Stack attributes. |
-| v2xSupported | V2xSupportEnum | 0..1 | attr | This attribute is used to control the existence of the V2X stack on the given EcuInstance. |
-| wakeUpOver BusSupported | Boolean | 0..1 | attr | Driver support for wakeup over Bus. |
+| v2xSupported | V2xSupportEnum | 0..1 | attr | 该属性用于控制给定 EcuInstance 上 V2X 协议栈的存在性。 |
+| wakeUpOver BusSupported | Boolean | 0..1 | attr | 驱动对经总线唤醒的支持。 |
 
 
 | 类 | ExecutableEntity (abstract) |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::CommonStructure::InternalBehavior |  |  |  |
-| 说明 | Abstraction of executable code. |  |  |  |
+| 说明 | 可执行代码的抽象。 |  |  |  |
 | 基类 | ARObject , Identifiable , MultilanguageReferrable , Referrable |  |  |  |
 | 子类 | BswModuleEntity , RunnableEntity |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| activation Reason | ExecutableEntity ActivationReason | * | aggr | If the ExecutableEntity provides at least one activation Reason element the RTE resp. BSW Scheduler shall provide means to read the activation vector of this executable entity execution. If no activationReason element is provided the feature of being able to determine the activating RTEEvent is disabled for this ExecutableEntity. |
-| canEnter | ExclusiveArea | * | ref | This means that the executable entity can enter/leave the referenced exclusive area through explicit API calls. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=canEnter.exclusiveArea, canEnter.variation Point.shortLabel vh.latestBindingTime=preCompileTime |
-| exclusiveArea NestingOrder | ExclusiveAreaNesting Order | * | ref | This represents the set of ExclusiveAreaNestingOrders recognized by this ExecutableEntity. |
-| minimumStart Interval | TimeValue | 0..1 | attr | Specifies the time in seconds by which two consecutive starts of an ExecutableEntity are guaranteed to be separated. |
-| reentrancyLevel | ReentrancyLevelEnum | 0..1 | attr | The reentrancy level of this ExecutableEntity. See the documentation of the enumeration type ReentrancyLevel Enum for details. Please note that nonReentrant interfaces can have also reentrant or multicoreReentrant implementations, and reentrant interfaces can also have multicoreReentrant implementations. |
-| runsInside | ExclusiveArea | * | ref | The executable entity runs completely inside the referenced exclusive area. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=runsInside.exclusiveArea, runs Inside.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
-| swAddrMethod | SwAddrMethod | 0..1 | ref | Addressing method related to this code entity. Via an association to the same SwAddrMethod, it can be specified that several code entities (even of different modules or components) shall be located in the same memory without already specifying the memory section itself. |
+| activation Reason | ExecutableEntity ActivationReason | * | aggr | 如果可执行实体提供至少一个 activationReason 元素，RTE 或 BSW 调度器应提供读取该可执行实体执行的激活向量的手段。如果未提供 activationReason 元素，则该可执行实体的「确定激活 RTEEvent」特性被禁用。 |
+| canEnter | ExclusiveArea | * | ref | 这意味着可执行实体可以通过显式 API 调用进入/离开被引用的独占区。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=canEnter.exclusiveArea, canEnter.variation Point.shortLabel vh.latestBindingTime=preCompileTime |
+| exclusiveArea NestingOrder | ExclusiveAreaNesting Order | * | ref | 这表示该可执行实体识别的 ExclusiveAreaNestingOrder 集合。 |
+| minimumStart Interval | TimeValue | 0..1 | attr | 规定保证可执行实体两次相继启动之间分隔的时间，单位为秒。 |
+| reentrancyLevel | ReentrancyLevelEnum | 0..1 | attr | 该可执行实体的可重入级别。细节参见枚举类型 ReentrancyLevelEnum 的文档。请注意：nonReentrant 接口也可以有 reentrant 或 multicoreReentrant 实现，reentrant 接口也可以有 multicoreReentrant 实现。 |
+| runsInside | ExclusiveArea | * | ref | 可执行实体完全在被引用的独占区内运行。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=runsInside.exclusiveArea, runs Inside.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| swAddrMethod | SwAddrMethod | 0..1 | ref | 与该代码实体相关的寻址方法。通过与同一 SwAddrMethod 的关联，可以规定若干代码实体（甚至来自不同模块或组件）应位于同一内存中，而无需预先规定内存段本身。 |
 
 
 | 类 | ExternalTriggerOccurredEvent |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::SwcInternalBehavior::RTEEvents |  |  |  |
-| 说明 | This event is raised when the referenced Trigger has occurred. |  |  |  |
+| 说明 | 当被引用的触发器发生时引发该事件。 |  |  |  |
 | 基类 | ARObject , AbstractEvent , AtpClassifier , AtpFeature , AtpStructureElement , Identifiable , Multilanguage Referrable , RTEEvent , Referrable |  |  |  |
 | 被聚合于 | AtpClassifier .atpFeature, SwcInternalBehavior.event |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
@@ -6949,18 +6949,18 @@ glyph[triangle]
 | 类 | ExternalTriggeringPoint |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::SwcInternalBehavior::Trigger |  |  |  |
-| 说明 | If a RunnableEntity owns an ExternalTriggeringPoint it is entitled to raise an ExternalTriggerOccurred Event. |  |  |  |
+| 说明 | 如果 RunnableEntity 拥有一个 ExternalTriggeringPoint，它有权引发一个 ExternalTriggerOccurredEvent。 |  |  |  |
 | 基类 | ARObject |  |  |  |
 | 被聚合于 | RunnableEntity.externalTriggeringPoint |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| ident | ExternalTriggeringPoint Ident | 0..1 | aggr | The aggregation in the role ident provides the ability to make the ExternalTriggeringPoint identifiable. From the semantical point of view, the ExternalTriggering Point is considered a first-class Identifiable and therefore the aggregation in the role ident shall always exist (until it may be possible to let ModeAccessPoint directly inherit from Identifiable). Stereotypes: atpIdentityContributor Tags: xml.sequenceOffset=-100 |
-| trigger | Trigger | 0..1 | iref | The trigger taken for the ExternalTriggeringPoint. Tags: xml.namePlural=TRIGGER-IREF xml.roleElement=false xml.roleWrapperElement=true xml.typeElement=true xml.typeWrapperElement=false InstanceRef implemented by: PTriggerInAtomicSwc TypeInstanceRef |
+| ident | ExternalTriggeringPoint Ident | 0..1 | aggr | 角色 ident 中的聚合提供了使 ExternalTriggeringPoint 可被标识的能力。 从语义的角度看，ExternalTriggeringPoint 被视为第一类可标识元素，因此角色 ident 中的聚合应始终存在（直到 ModeAccessPoint 可以直接继承自 Identifiable 为止）。 Stereotypes: atpIdentityContributor Tags: xml.sequenceOffset=-100 |
+| trigger | Trigger | 0..1 | iref | 该 ExternalTriggeringPoint 所采用的触发器。 Tags: xml.namePlural=TRIGGER-IREF xml.roleElement=false xml.roleWrapperElement=true xml.typeElement=true xml.typeWrapperElement=false InstanceRef implemented by: PTriggerInAtomicSwc TypeInstanceRef |
 
 
 | 类 | InternalBehavior (abstract) |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::CommonStructure::InternalBehavior |  |  |  |
-| 说明 | Common base class (abstract) for the internal behavior of both software components and basic software modules/clusters. |  |  |  |
+| 说明 | 软件组件与基础软件模块/集群内部行为的公共基类（抽象）。 |  |  |  |
 | 基类 | ARObject , AtpClassifier , AtpFeature , AtpStructureElement , Identifiable , MultilanguageReferrable Referrable |  |  |  |
 | 子类 | BswInternalBehavior, SwcInternalBehavior |  |  |  |
 | 被聚合于 | AtpClassifier .atpFeature |  |  |  |
@@ -6969,22 +6969,22 @@ glyph[triangle]
 
 | 类 | InternalBehavior (abstract) |  |  |  |
 | --- | --- | --- | --- | --- |
-| constant Memory | ParameterData Prototype | * | aggr | Describes a read only memory object containing characteristic value(s) implemented by this Internal Behavior. The shortName of ParameterDataPrototype has to be equal to the 'C' identifier of the described constant. The characteristic value(s) might be shared between Sw ComponentPrototypes of the same SwComponentType. The aggregation of constantMemory is subject to variability with the purpose to support variability in the software component or module implementations. Typically different algorithms in the implementation are requiring different number of memory objects. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=constantMemory.shortName, constant Memory.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
-| constantValue Mapping | ConstantSpecification MappingSet | * | ref | Reference to the ConstantSpecificationMapping to be applied for the particular InternalBehavior Stereotypes: atpSplitable Tags: atp.Splitkey=constantValueMapping |
-| dataType Mapping | DataTypeMappingSet | * | ref | Reference to the DataTypeMapping to be applied for the particular InternalBehavior Stereotypes: atpSplitable Tags: atp.Splitkey=dataTypeMapping |
-| exclusiveArea | ExclusiveArea | * | aggr | This specifies an ExclusiveArea for this InternalBehavior. The exclusiveArea is local to the component resp. module. The aggregation of ExclusiveAreas is subject to variability. Note: the number of ExclusiveAreas might vary due to the conditional existence of RunnableEntities or BswModuleEntities. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=exclusiveArea.shortName, exclusive Area.variationPoint.shortLabel |
-| exclusiveArea NestingOrder | ExclusiveAreaNesting Order | * | aggr | This represents the set of ExclusiveAreaNestingOrder owned by the InternalBehavior. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=exclusiveAreaNestingOrder.shortName, exclusiveAreaNestingOrder.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| constant Memory | ParameterData Prototype | * | aggr | 描述包含由该内部行为实现的标定值的只读内存对象。 ParameterDataPrototype 的短名称必须等于所述常量的 C 标识符。 标定值可以在同一软件组件类型的 SwComponentPrototype 之间共享。 constantMemory 的聚合受变体性支配，以支持软件组件或模块实现中的变体性。通常，实现中的不同算法需要不同数量的内存对象。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=constantMemory.shortName, constant Memory.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| constantValue Mapping | ConstantSpecification MappingSet | * | ref | 对要应用于该特定内部行为的 ConstantSpecificationMapping 的引用 Stereotypes: atpSplitable Tags: atp.Splitkey=constantValueMapping |
+| dataType Mapping | DataTypeMappingSet | * | ref | 对要应用于该特定内部行为的 DataTypeMapping 的引用 Stereotypes: atpSplitable Tags: atp.Splitkey=dataTypeMapping |
+| exclusiveArea | ExclusiveArea | * | aggr | 这为该内部行为规定一个独占区。独占区对组件或模块是本地的。 独占区的聚合受变体性支配。注意：由于 RunnableEntity 或 BswModuleEntity 的条件性存在，独占区的数量可能变化。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=exclusiveArea.shortName, exclusive Area.variationPoint.shortLabel |
+| exclusiveArea NestingOrder | ExclusiveAreaNesting Order | * | aggr | 这表示该内部行为拥有的 ExclusiveAreaNestingOrder 集合。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=exclusiveAreaNestingOrder.shortName, exclusiveAreaNestingOrder.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
 
 
 | 类 | InternalBehavior (abstract) |  |  |  |
 | --- | --- | --- | --- | --- |
-| staticMemory | VariableDataPrototype | * | aggr | Describes a read and writeable static memory object representing measurerment variables implemented by this software component. The term "static" is used in the meaning of "non-temporary" and does not necessarily specify a linker encapsulation. This kind of memory is only supported if supportsMultipleInstantiation is FALSE. The shortName of the VariableDataPrototype has to be equal with the 'C' identifier of the described variable. The aggregation of staticMemory is subject to variability with the purpose to support variability in the software component's implementations. Typically different algorithms in the implementation are requiring different number of memory objects. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=staticMemory.shortName, static Memory.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| staticMemory | VariableDataPrototype | * | aggr | 描述表示该软件组件实现的测量变量的可读写静态内存对象。 术语「static」在「非临时」的意义上使用，并不一定规定链接器封装。 仅当 supportsMultipleInstantiation 为 FALSE 时才支持这类内存。 VariableDataPrototype 的短名称必须等于所述变量的 C 标识符。 staticMemory 的聚合受变体性支配，以支持软件组件实现中的变体性。通常，实现中的不同算法需要不同数量的内存对象。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=staticMemory.shortName, static Memory.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
 
 
 | 类 | InternalTriggerOccurredEvent |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::SwcInternalBehavior::RTEEvents |  |  |  |
-| 说明 | This event is raised when the referenced InternalTriggeringPoint has occurred. |  |  |  |
+| 说明 | 当被引用的 InternalTriggeringPoint 发生时引发该事件。 |  |  |  |
 | 基类 | ARObject , AbstractEvent , AtpClassifier , AtpFeature , AtpStructureElement , Identifiable , Multilanguage Referrable , RTEEvent , Referrable |  |  |  |
 | 被聚合于 | AtpClassifier .atpFeature, SwcInternalBehavior.event |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
@@ -6994,43 +6994,43 @@ glyph[triangle]
 | 类 | ModeAccessPoint |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::SwcInternalBehavior::ModeDeclarationGroup |  |  |  |
-| 说明 | A ModeAccessPoint is required by a RunnableEntity owned by a Mode Manager or Mode User. Its semantics implies the ability to access the current mode (provided by the RTE) of a ModeDeclaration GroupPrototype's ModeDeclarationGroup. |  |  |  |
+| 说明 | 模式管理器或模式用户拥有的 RunnableEntity 需要一个 ModeAccessPoint。其语义意味着能够访问模式声明组原型的模式声明组的当前模式（由 RTE 提供）。 |  |  |  |
 | 基类 | ARObject |  |  |  |
 | 被聚合于 | RunnableEntity.modeAccessPoint |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| ident | ModeAccessPointIdent | 0..1 | aggr | The aggregation in the role ident provides the ability to make the ModeAccessPoint identifiable. From the semantical point of view, the ModeAccessPoint is considered a first-class Identifiable and therefore the aggregation in the role ident shall always exist (until it may be possible to let ModeAccessPoint directly inherit from Identifiable). Stereotypes: atpIdentityContributor Tags: xml.sequenceOffset=-100 |
+| ident | ModeAccessPointIdent | 0..1 | aggr | 角色 ident 中的聚合提供了使 ModeAccessPoint 可被标识的能力。 从语义的角度看，ModeAccessPoint 被视为第一类可标识元素，因此角色 ident 中的聚合应始终存在（直到 ModeAccessPoint 可以直接继承自 Identifiable 为止）。 Stereotypes: atpIdentityContributor Tags: xml.sequenceOffset=-100 |
 
 
 | 类 | ModeAccessPoint |  |  |  |
 | --- | --- | --- | --- | --- |
-| modeGroup | ModeDeclarationGroup Prototype | 0..1 | iref | The mode declaration group that is accessed by this runnable. Tags: xml.typeElement=true InstanceRef implemented by: ModeGroupInAtomicSwc InstanceRef |
+| modeGroup | ModeDeclarationGroup Prototype | 0..1 | iref | 该 runnable 访问的模式声明组。 Tags: xml.typeElement=true InstanceRef implemented by: ModeGroupInAtomicSwc InstanceRef |
 
 
 | 类 | ModeDeclarationGroupPrototype |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::CommonStructure::ModeDeclaration |  |  |  |
-| 说明 | The ModeDeclarationGroupPrototype specifies a set of Modes (ModeDeclarationGroup) which is provided or required in the given context. |  |  |  |
+| 说明 | ModeDeclarationGroupPrototype 规定在给定上下文中被提供或被需要的一组模式（ModeDeclarationGroup）。 |  |  |  |
 | 基类 | ARObject , AtpFeature , AtpPrototype , Identifiable , MultilanguageReferrable , Referrable |  |  |  |
 | 被聚合于 | AtpClassifier .atpFeature, BswModuleDescription.providedModeGroup, BswModuleDescription.required ModeGroup, FirewallStateSwitchInterface.firewallStateMachine, FunctionGroupSet.functionGroup, Mode SwitchInterface.modeGroup, Process.processStateMachine, StateManagementStateNotification.state Machine |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| swCalibration Access | SwCalibrationAccess Enum | 0..1 | attr | This allows for specifying whether or not the enclosing ModeDeclarationGroupPrototype can be measured at run-time. |
-| type | ModeDeclarationGroup | 0..1 | tref | The "collection of ModeDeclarations" ( = ModeDeclaration Group) supported by a component Stereotypes: isOfType |
+| swCalibration Access | SwCalibrationAccess Enum | 0..1 | attr | 这允许规定外层的 ModeDeclarationGroupPrototype 是否可以在运行时被测量。 |
+| type | ModeDeclarationGroup | 0..1 | tref | 组件支持的「模式声明的集合」（= ModeDeclarationGroup）。 Stereotypes: isOfType |
 
 
 | 类 | ModeSwitchInterface |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::PortInterface |  |  |  |
-| 说明 | A mode switch interface declares a ModeDeclarationGroupPrototype to be sent and received. Tags: atp.recommendedPackage=PortInterfaces |  |  |  |
+| 说明 | 模式切换接口声明一个要发送与接收的 ModeDeclarationGroupPrototype。 Tags: atp.recommendedPackage=PortInterfaces |  |  |  |
 | 基类 | ARElement , ARObject , AtpBlueprint , AtpBlueprintable , AtpClassifier , AtpType , CollectableElement , Identifiable , MultilanguageReferrable , PackageableElement , PortInterface , Referrable |  |  |  |
 | 被聚合于 | ARPackage.element |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| modeGroup | ModeDeclarationGroup Prototype | 0..1 | aggr | The ModeDeclarationGroupPrototype of this mode interface. |
+| modeGroup | ModeDeclarationGroup Prototype | 0..1 | aggr | 该模式接口的 ModeDeclarationGroupPrototype。 |
 
 
 | 类 | ModeSwitchPoint |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::SwcInternalBehavior::ModeDeclarationGroup |  |  |  |
-| 说明 | A ModeSwitchPoint is required by a RunnableEntity owned a Mode Manager. Its semantics implies ability to initiate a mode switch. |  |  |  |
+| 说明 | 模式管理器拥有的 RunnableEntity 需要一个 ModeSwitchPoint。其语义意味着能够发起一次模式切换。 |  |  |  |
 | 基类 | ARObject , AbstractAccessPoint , AtpClassifier , AtpFeature , AtpStructureElement , Identifiable , MultilanguageReferrable , Referrable |  |  |  |
 | 被聚合于 | AtpClassifier .atpFeature, RunnableEntity.modeSwitchPoint |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
@@ -7038,24 +7038,24 @@ glyph[triangle]
 
 | 类 | ModeSwitchPoint |  |  |  |
 | --- | --- | --- | --- | --- |
-| modeGroup | ModeDeclarationGroup Prototype | 0..1 | iref | The mode declaration group that is switched by this runnable. InstanceRef implemented by: PModeGroupInAtomic SwcInstanceRef |
+| modeGroup | ModeDeclarationGroup Prototype | 0..1 | iref | 由该 runnable 切换的模式声明组。 InstanceRef implemented by: PModeGroupInAtomic SwcInstanceRef |
 
 
 | 类 | NonqueuedSenderComSpec |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::Communication |  |  |  |
-| 说明 | Communication attributes for non-queued sender/receiver communication (sender side) |  |  |  |
+| 说明 | 非排队发送/接收通信的通信属性（发送方） |  |  |  |
 | 基类 | ARObject , PPortComSpec , SenderComSpec |  |  |  |
 | 被聚合于 | AbstractProvidedPortPrototype .providedComSpec, PortPrototypeBlueprint.providedComSpec |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| dataFilter | DataFilter | 0..1 | aggr | The applicable filter algorithm for filtering the value of the corresponding dataElement. |
-| initValue | ValueSpecification | 0..1 | aggr | Initial value to be sent if sender component is not yet fully initialized, but receiver needs data already. |
+| dataFilter | DataFilter | 0..1 | aggr | 用于过滤相应数据元素值的适用过滤算法。 |
+| initValue | ValueSpecification | 0..1 | aggr | 在发送组件尚未完全初始化但接收器已经需要数据时发送的初始值。 |
 
 
 | 类 | PPortPrototype |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::Components |  |  |  |
-| 说明 | Component port providing a certain port interface. |  |  |  |
+| 说明 | 提供某个端口接口的组件端口。 |  |  |  |
 | 基类 | ARObject , AbstractProvidedPortPrototype , AtpBlueprintable , AtpFeature , AtpPrototype , Identifiable , MultilanguageReferrable , PortPrototype , Referrable |  |  |  |
 | 被聚合于 | AtpClassifier .atpFeature, SwComponentType .port |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
@@ -7065,187 +7065,187 @@ glyph[triangle]
 | 类 | ParameterAccess |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::SwcInternalBehavior::DataElements |  |  |  |
-| 说明 | The presence of a ParameterAccess implies that a RunnableEntity needs access to a ParameterData Prototype. |  |  |  |
+| 说明 | ParameterAccess 的存在意味着 RunnableEntity 需要访问一个 ParameterDataPrototype。 |  |  |  |
 | 基类 | ARObject , AbstractAccessPoint , AtpClassifier , AtpFeature , AtpStructureElement , Identifiable , MultilanguageReferrable , Referrable |  |  |  |
 | 被聚合于 | AtpClassifier .atpFeature, RunnableEntity.parameterAccess |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| accessed Parameter | AutosarParameterRef | 0..1 | aggr | Reference to the accessed calibration parameter. |
-| swDataDef Props | SwDataDefProps | 0..1 | aggr | This allows denote instance and access specific properties, mainly input values and common axis. Stereotypes: atpSplitable Tags: atp.Splitkey=swDataDefProps |
+| accessed Parameter | AutosarParameterRef | 0..1 | aggr | 对被访问标定参数的引用。 |
+| swDataDef Props | SwDataDefProps | 0..1 | aggr | 这允许表示实例与访问特定的属性，主要是输入值与公共坐标轴。 Stereotypes: atpSplitable Tags: atp.Splitkey=swDataDefProps |
 
 
 | 类 | ParameterDataPrototype |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::Datatype::DataPrototypes |  |  |  |
-| 说明 | A ParameterDataPrototype represents a formalized generic piece of information that is typically immutable by the application software layer, but mutable by measurement and calibration tools. ParameterDataPrototype is used in various contexts and the specific context gives the otherwise generic ParameterDataPrototype a dedicated semantics. |  |  |  |
+| 说明 | ParameterDataPrototype 表示一个形式化的通用信息片段，它通常不可被应用软件层修改，但可被测量与标定工具修改。ParameterDataPrototype 用于多种语境，特定语境为 otherwise 通用的 ParameterDataPrototype 赋予专门的语义。 |  |  |  |
 | 基类 | ARObject , AtpFeature , AtpPrototype , AutosarDataPrototype , DataPrototype , Identifiable , Multilanguage Referrable , Referrable |  |  |  |
 | 被聚合于 | AtpClassifier .atpFeature, BswInternalBehavior.perInstanceParameter, InternalBehavior .constant Memory, NvBlockDescriptor.romBlock, ParameterInterface.parameter, SwcInternalBehavior.perInstance Parameter, SwcInternalBehavior.sharedParameter |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| initValue | ValueSpecification | 0..1 | aggr | Specifies initial value(s) of the ParameterDataPrototype |
+| initValue | ValueSpecification | 0..1 | aggr | 规定 ParameterDataPrototype 的初始值。 |
 
 
 | 类 | PortElementToCommunicationResourceMapping |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SystemTemplate |  |  |  |
-| 说明 | This meta class maps a communication resource to CP Software Clusters. In this case the kind of Port Prototype specified whether the Software Cluster has to provide or to require the resource. |  |  |  |
+| 说明 | 该元类将通信资源映射到 CP 软件集群。在这种情况下，端口原型的种类规定软件集群必须提供还是需要该资源。 |  |  |  |
 | 基类 | ARObject , Identifiable , MultilanguageReferrable , Referrable |  |  |  |
 | 被聚合于 | CpSoftwareClusterMappingSet.portElementToComResourceMapping, SystemMapping.portElementTo ComResourceMapping |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| clientServer Operation | ClientServerOperation | 0..1 | iref | ClientServerOperation instance qualifying the communication resource InstanceRef implemented by: OperationInSystem InstanceRef |
-| communication Resource | CpSoftwareCluster Communication Resource | 0..1 | ref | Communication resource for which the mapping applies. |
-| mode Declaration GroupPrototype | ModeDeclarationGroup Prototype | 0..1 | iref | ModeDeclarationGroupPrototype instance qualifying the communication resource InstanceRef implemented by: ModeDeclarationGroup PrototypeInSystemInstanceRef |
-| parameterData Prototype | ParameterData Prototype | 0..1 | iref | ParameterDataPrototype instance qualifying the communication resource. InstanceRef implemented by: ParameterDataPrototype InSystemInstanceRef |
-| trigger | Trigger | 0..1 | iref | Trigger instance qualifying the communication resource. InstanceRef implemented by: TriggerInSystemInstance Ref |
-| variableData Prototype | VariableDataPrototype | 0..1 | iref | VariableDataPrototype instance qualifying the communication resource InstanceRef implemented by: VariableDataPrototypeIn SystemInstanceRef |
+| clientServer Operation | ClientServerOperation | 0..1 | iref | 限定该通信资源的 ClientServerOperation 实例 InstanceRef implemented by: OperationInSystem InstanceRef |
+| communication Resource | CpSoftwareCluster Communication Resource | 0..1 | ref | 该映射适用的通信资源。 |
+| mode Declaration GroupPrototype | ModeDeclarationGroup Prototype | 0..1 | iref | 限定该通信资源的 ModeDeclarationGroupPrototype 实例 InstanceRef implemented by: ModeDeclarationGroup PrototypeInSystemInstanceRef |
+| parameterData Prototype | ParameterData Prototype | 0..1 | iref | 限定该通信资源的 ParameterDataPrototype 实例。 InstanceRef implemented by: ParameterDataPrototype InSystemInstanceRef |
+| trigger | Trigger | 0..1 | iref | 限定该通信资源的触发器实例。 InstanceRef implemented by: TriggerInSystemInstance Ref |
+| variableData Prototype | VariableDataPrototype | 0..1 | iref | 限定该通信资源的 VariableDataPrototype 实例 InstanceRef implemented by: VariableDataPrototypeIn SystemInstanceRef |
 
 
 | 类 | PortInterface (abstract) |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::PortInterface |  |  |  |
-| 说明 | Abstract base class for an interface that is either provided or required by a port of a software component. |  |  |  |
+| 说明 | 由软件组件的端口提供或需要的接口的抽象基类。 |  |  |  |
 | 基类 | ARElement , ARObject , AtpBlueprint , AtpBlueprintable , AtpClassifier , AtpType , CollectableElement , Identifiable , MultilanguageReferrable , PackageableElement , Referrable |  |  |  |
 | 子类 | ClientServerInterface, DataInterface , ModeSwitchInterface, TriggerInterface |  |  |  |
 | 被聚合于 | ARPackage.element |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| isService | Boolean | 0..1 | attr | This flag is set if the PortInterface is to be used for communication between an • ApplicationSwComponentType or • ServiceProxySwComponentType or • SensorActuatorSwComponentType or • ComplexDeviceDriverSwComponentType • ServiceSwComponentType • EcuAbstractionSwComponentType and a ServiceSwComponentType (namely an AUTOSAR Service) located on the same ECU. Otherwise the flag is not set. Stereotypes: atpVariation Tags: vh.latestBindingTime=blueprintDerivationTime |
-| serviceKind | ServiceProviderEnum | 0..1 | attr | This attribute provides further details about the nature of the applied service. |
+| isService | Boolean | 0..1 | attr | 如果该端口接口要用于以下组件与位于同一 ECU 上的 ServiceSwComponentType（即 AUTOSAR 服务）之间的通信，则设置该标志： • ApplicationSwComponentType、• ServiceProxySwComponentType、• SensorActuatorSwComponentType、• ComplexDeviceDriverSwComponentType、• ServiceSwComponentType 或 • EcuAbstractionSwComponentType，与位于同一 ECU 上的 ServiceSwComponentType（即 AUTOSAR 服务）之间。否则不设置该标志。 Stereotypes: atpVariation Tags: vh.latestBindingTime=blueprintDerivationTime |
+| serviceKind | ServiceProviderEnum | 0..1 | attr | 该属性提供关于所应用服务性质的进一步细节。 |
 
 
 | 类 | PortPrototype (abstract) |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::Components |  |  |  |
-| 说明 | Base class for the ports of an AUTOSAR software component. The aggregation of PortPrototypes is subject to variability with the purpose to support the conditional existence of ports. |  |  |  |
+| 说明 | AUTOSAR 软件组件端口的基类。端口原型的聚合受变体性支配，以支持端口的条件性存在。 |  |  |  |
 | 基类 | ARObject , AtpBlueprintable , AtpFeature , AtpPrototype , Identifiable , MultilanguageReferrable , Referrable |  |  |  |
 | 子类 | AbstractProvidedPortPrototype , AbstractRequiredPortPrototype |  |  |  |
 | 被聚合于 | AtpClassifier .atpFeature, SwComponentType .port |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| clientServer Annotation | ClientServerAnnotation | * | aggr | Annotation of this PortPrototype with respect to client/ server communication. |
+| clientServer Annotation | ClientServerAnnotation | * | aggr | 该端口原型关于客户端/服务器通信的注解。 |
 | delegatedPort Annotation | DelegatedPort Annotation | 0..1 | aggr | Annotations on this delegated port. |
 | ioHwAbstraction Server Annotation | IoHwAbstractionServer Annotation | * | aggr | Annotations on this IO Hardware Abstraction port. |
 | modePort Annotation | ModePortAnnotation | * | aggr | Annotations on this mode port. |
 | nvDataPort Annotation | NvDataPortAnnotation | * | aggr | Annotations on this non voilatile data port. |
 | parameterPort Annotation | ParameterPort Annotation | * | aggr | Annotations on this parameter port. |
-| senderReceiver Annotation | SenderReceiver Annotation | * | aggr | Collection of annotations of this ports sender/receiver communication. |
+| senderReceiver Annotation | SenderReceiver Annotation | * | aggr | 该端口发送/接收通信注解的集合。 |
 | triggerPort Annotation | TriggerPortAnnotation | * | aggr | Annotations on this trigger port. |
 
 
 | 类 | RunnableEntity |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::SwcInternalBehavior |  |  |  |
-| 说明 | A RunnableEntity represents the smallest code-fragment that is provided by an AtomicSwComponent Type and are executed under control of the RTE. RunnableEntities are for instance set up to respond to data reception or operation invocation on a server. |  |  |  |
+| 说明 | RunnableEntity 表示由原子软件组件类型提供的、在 RTE 控制下执行的最小代码片段。RunnableEntity 例如被设置为响应数据接收或服务器上的操作调用。 |  |  |  |
 | 基类 | ARObject , AtpClassifier , AtpFeature , AtpStructureElement , ExecutableEntity , Identifiable , Multilanguage Referrable , Referrable |  |  |  |
 | 被聚合于 | AtpClassifier .atpFeature, SwcInternalBehavior.runnable |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| argument (ordered) | RunnableEntity Argument | * | aggr | This represents the formal definition of a an argument to a RunnableEntity. |
-| asynchronous ServerCall ResultPoint | AsynchronousServer CallResultPoint | * | aggr | The server call result point admits a runnable to fetch the result of an asynchronous server call. The aggregation of AsynchronousServerCallResultPoint is subject to variability with the purpose to support the conditional existence of client server PortPrototypes and the variant existence of server call result points in the implementation. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=asynchronousServerCallResultPoint.short Name, asynchronousServerCallResultPoint.variation Point.shortLabel vh.latestBindingTime=preCompileTime |
-| canBeInvoked Concurrently | Boolean | 0..1 | attr | If the value of this attribute is set to "true" the enclosing RunnableEntity can be invoked concurrently (even for one instance of the corresponding AtomicSwComponent Type). This implies that it is the responsibility of the implementation of the RunnableEntity to take care of this form of concurrency. |
-| dataRead Access | VariableAccess | * | aggr | RunnableEntity has implicit read access to dataElement of a sender-receiver PortPrototype or nv data of a nv data PortPrototype. The aggregation of dataReadAccess is subject to variability with the purpose to support the conditional existence of sender receiver ports or the variant existence of dataReadAccess in the implementation. Stereotypes: atpSplitable; atpVariation Tags: |
-| dataReceive PointBy Argument | VariableAccess | * | aggr | vh.latestBindingTime=preCompileTime RunnableEntity has explicit read access to dataElement of a sender-receiver PortPrototype or nv data of a nv data PortPrototype. The result is passed back to the application by means of an argument in the function signature. The aggregation of dataReceivePointByArgument is subject to variability with the purpose to support the conditional existence of sender receiver PortPrototype or the variant existence of data receive points in the implementation. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=dataReceivePointByArgument.shortName, dataReceivePointByArgument.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| argument (ordered) | RunnableEntity Argument | * | aggr | 这表示 RunnableEntity 参数的形式化定义。 |
+| asynchronous ServerCall ResultPoint | AsynchronousServer CallResultPoint | * | aggr | 服务器调用结果点允许 runnable 获取异步服务器调用的结果。 AsynchronousServerCallResultPoint 的聚合受变体性支配，以支持客户端-服务器端口原型的条件性存在或实现中服务器调用结果点的变体存在。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=asynchronousServerCallResultPoint.short Name, asynchronousServerCallResultPoint.variation Point.shortLabel vh.latestBindingTime=preCompileTime |
+| canBeInvoked Concurrently | Boolean | 0..1 | attr | 如果该属性的值设置为「true」，外层的 RunnableEntity 可以被并发调用（即使对于相应原子软件组件类型的一个实例也是如此）。这意味着处理这种并发形式是 RunnableEntity 实现的责任。 |
+| dataRead Access | VariableAccess | * | aggr | RunnableEntity 对发送-接收端口原型的数据元素或 NvData 端口原型的 NvData 具有隐式读取访问。 dataReadAccess 的聚合受变体性支配，以支持发送-接收端口的条件性存在或实现中 dataReadAccess 的变体存在。 Stereotypes: atpSplitable; atpVariation Tags: |
+| dataReceive PointBy Argument | VariableAccess | * | aggr | vh.latestBindingTime=preCompileTime RunnableEntity 对发送-接收端口原型的数据元素或 NvData 端口原型的 NvData 具有显式读取访问。 结果通过函数签名中的参数传回应用。 dataReceivePointByArgument 的聚合受变体性支配，以支持发送-接收端口原型的条件性存在或实现中数据接收点的变体存在。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=dataReceivePointByArgument.shortName, dataReceivePointByArgument.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
 
 
 | 类 | RunnableEntity |  |  |  |
 | --- | --- | --- | --- | --- |
-| dataReceive PointByValue | VariableAccess | * | aggr | RunnableEntity has explicit read access to dataElement of a sender-receiver PortPrototype or nv data of a nv data PortPrototype. The result is passed back to the application by means of the return value. The aggregation of dataReceivePointBy Value is subject to variability with the purpose to support the conditional existence of sender receiver ports or the variant existence of data receive points in the implementation. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=dataReceivePointByValue.shortName, data ReceivePointByValue.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
-| dataSendPoint | VariableAccess | * | aggr | RunnableEntity has explicit write access to dataElement of a sender-receiver PortPrototype or nv data of a nv data PortPrototype. The aggregation of dataSendPoint is subject to variability with the purpose to support the conditional existence of sender receiver PortPrototype or the variant existence of data send points in the implementation. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=dataSendPoint.shortName, dataSend Point.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
-| dataWrite Access | VariableAccess | * | aggr | RunnableEntity has implicit write access to dataElement of a sender-receiver PortPrototype or nv data of a nv data PortPrototype. The aggregation of dataWriteAccess is subject to variability with the purpose to support the conditional existence of sender receiver ports or the variant existence of dataWriteAccess in the implementation. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=dataWriteAccess.shortName, dataWrite Access.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
-| external TriggeringPoint | ExternalTriggeringPoint | * | aggr | The aggregation of ExternalTriggeringPoint is subject to variability with the purpose to support the conditional existence of trigger ports or the variant existence of external triggering points in the implementation. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=externalTriggeringPoint.ident.shortName, externalTriggeringPoint.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
-| internal TriggeringPoint | InternalTriggeringPoint | * | aggr | The aggregation of InternalTriggeringPoint is subject to variability with the purpose to support the variant existence of internal triggering points in the implementation. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=internalTriggeringPoint.shortName, internal TriggeringPoint.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| dataReceive PointByValue | VariableAccess | * | aggr | RunnableEntity 对发送-接收端口原型的数据元素或 NvData 端口原型的 NvData 具有显式读取访问。 结果通过返回值传回应用。 dataReceivePointByValue 的聚合受变体性支配，以支持发送-接收端口的条件性存在或实现中数据接收点的变体存在。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=dataReceivePointByValue.shortName, data ReceivePointByValue.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| dataSendPoint | VariableAccess | * | aggr | RunnableEntity has explicit write access to dataElement of a sender-receiver PortPrototype or nv data of a nv data PortPrototype. dataSendPoint 的聚合受变体性支配，以支持发送-接收端口原型的条件性存在或实现中数据发送点的变体存在。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=dataSendPoint.shortName, dataSend Point.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| dataWrite Access | VariableAccess | * | aggr | RunnableEntity has implicit write access to dataElement of a sender-receiver PortPrototype or nv data of a nv data PortPrototype. dataWriteAccess 的聚合受变体性支配，以支持发送-接收端口的条件性存在或实现中 dataWriteAccess 的变体存在。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=dataWriteAccess.shortName, dataWrite Access.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| external TriggeringPoint | ExternalTriggeringPoint | * | aggr | ExternalTriggeringPoint 的聚合受变体性支配，以支持触发端口的条件性存在或实现中外部触发点的变体存在。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=externalTriggeringPoint.ident.shortName, externalTriggeringPoint.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| internal TriggeringPoint | InternalTriggeringPoint | * | aggr | InternalTriggeringPoint 的聚合受变体性支配，以支持实现中内部触发点的变体存在。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=internalTriggeringPoint.shortName, internal TriggeringPoint.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
 
 
 | 类 | RunnableEntity |  |  |  |
 | --- | --- | --- | --- | --- |
-| modeAccess Point | ModeAccessPoint | * | aggr | The runnable has a mode access point. The aggregation of ModeAccessPoint is subject to variability with the purpose to support the conditional existence of mode ports or the variant existence of mode access points in the implementation. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=modeAccessPoint.ident.shortName, mode AccessPoint.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
-| modeSwitch Point | ModeSwitchPoint | * | aggr | The runnable has a mode switch point. The aggregation of ModeSwitchPoint is subject to variability with the purpose to support the conditional existence of mode ports or the variant existence of mode switch points in the implementation. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=modeSwitchPoint.shortName, modeSwitch Point.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
-| parameter Access | ParameterAccess | * | aggr | The presence of a ParameterAccess implies that a RunnableEntity needs read only access to a Parameter DataPrototype which may either be local or within a Port Prototype. The aggregation of ParameterAccess is subject to variability with the purpose to support the conditional existence of parameter ports and component local parameters as well as the variant existence of Parameter Access (points) in the implementation. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=parameterAccess.shortName, parameter Access.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
-| readLocal Variable | VariableAccess | * | aggr | The presence of a readLocalVariable implies that a RunnableEntity needs read access to a VariableData Prototype in the role of implicitInterRunnableVariable or explicitInterRunnableVariable. The aggregation of readLocalVariable is subject to variability with the purpose to support the conditional existence of implicitInterRunnableVariable and explicit InterRunnableVariable or the variant existence of read LocalVariable (points) in the implementation. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=readLocalVariable.shortName, readLocal Variable.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
-| serverCallPoint | ServerCallPoint | * | aggr | The RunnableEntity has a ServerCallPoint. The aggregation of ServerCallPoint is subject to variability with the purpose to support the conditional existence of client server PortPrototypes or the variant existence of server call points in the implementation. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=serverCallPoint.shortName, serverCall Point.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| modeAccess Point | ModeAccessPoint | * | aggr | 该 runnable 有一个模式访问点。 ModeAccessPoint 的聚合受变体性支配，以支持模式端口的条件性存在或实现中模式访问点的变体存在。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=modeAccessPoint.ident.shortName, mode AccessPoint.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| modeSwitch Point | ModeSwitchPoint | * | aggr | 该 runnable 有一个模式切换点。 ModeSwitchPoint 的聚合受变体性支配，以支持模式端口的条件性存在或实现中模式切换点的变体存在。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=modeSwitchPoint.shortName, modeSwitch Point.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| parameter Access | ParameterAccess | * | aggr | ParameterAccess 的存在意味着 RunnableEntity 需要对一个 ParameterDataPrototype 的只读访问，后者可以是组件本地的，也可以位于端口原型内。 ParameterAccess 的聚合受变体性支配，以支持参数端口与组件本地参数的条件性存在，以及实现中 ParameterAccess（点）的变体存在。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=parameterAccess.shortName, parameter Access.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| readLocal Variable | VariableAccess | * | aggr | readLocalVariable 的存在意味着 RunnableEntity 需要以 implicitInterRunnableVariable 或 explicitInterRunnableVariable 角色对一个 VariableDataPrototype 的读取访问。 readLocalVariable 的聚合受变体性支配，以支持 implicitInterRunnableVariable 与 explicitInterRunnableVariable 的条件性存在，或实现中 readLocalVariable（点）的变体存在。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=readLocalVariable.shortName, readLocal Variable.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| serverCallPoint | ServerCallPoint | * | aggr | 该 RunnableEntity 有一个 ServerCallPoint。 ServerCallPoint 的聚合受变体性支配，以支持客户端-服务器端口原型的条件性存在或实现中服务器调用点的变体存在。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=serverCallPoint.shortName, serverCall Point.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
 
 
 | 类 | RunnableEntity |  |  |  |
 | --- | --- | --- | --- | --- |
-| symbol | CIdentifier | 0..1 | attr | The symbol describing this RunnableEntity's entry point. This is considered the API of the RunnableEntity and is required during the RTE contract phase. |
-| waitPoint | WaitPoint | * | aggr | The WaitPoint associated with the RunnableEntity. |
-| writtenLocal Variable | VariableAccess | * | aggr | The presence of a writtenLocalVariable implies that a RunnableEntity needs write access to a VariableData Prototype in the role of implicitInterRunnableVariable or explicitInterRunnableVariable. The aggregation of writtenLocalVariable is subject to variability with the purpose to support the conditional existence of implicitInterRunnableVariable and explicit InterRunnableVariable or the variant existence of written LocalVariable (points) in the implementation. Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=writtenLocalVariable.shortName, written LocalVariable.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| symbol | CIdentifier | 0..1 | attr | 描述该 RunnableEntity 入口点的符号。它被视为 RunnableEntity 的 API，在 RTE 契约阶段需要。 |
+| waitPoint | WaitPoint | * | aggr | 与该 RunnableEntity 关联的 WaitPoint。 |
+| writtenLocal Variable | VariableAccess | * | aggr | writtenLocalVariable 的存在意味着 RunnableEntity 需要以 implicitInterRunnableVariable 或 explicitInterRunnableVariable 角色对一个 VariableDataPrototype 的写入访问。 writtenLocalVariable 的聚合受变体性支配，以支持 implicitInterRunnableVariable 与 explicitInterRunnableVariable 的条件性存在，或实现中 writtenLocalVariable（点）的变体存在。 Stereotypes: atpSplitable; atpVariation Tags: atp.Splitkey=writtenLocalVariable.shortName, written LocalVariable.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
 
 
 | 类 | SenderReceiverInterface |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::PortInterface |  |  |  |
-| 说明 | A sender/receiver interface declares a number of data elements to be sent and received. Tags: atp.recommendedPackage=PortInterfaces |  |  |  |
+| 说明 | 发送/接收接口声明若干要发送与接收的数据元素。 Tags: atp.recommendedPackage=PortInterfaces |  |  |  |
 | 基类 | ARElement , ARObject , AtpBlueprint , AtpBlueprintable , AtpClassifier , AtpType , CollectableElement , DataInterface , Identifiable , MultilanguageReferrable , PackageableElement , PortInterface , Referrable |  |  |  |
 | 被聚合于 | ARPackage.element |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| dataElement | VariableDataPrototype | * | aggr | The data elements of this SenderReceiverInterface. |
-| invalidation Policy | InvalidationPolicy | * | aggr | InvalidationPolicy for a particular dataElement |
-| metaDataItem Set | MetaDataItemSet | * | aggr | This aggregation defines fixed sets of meta-data items associated with dataElements of the enclosing Sender ReceiverInterface |
+| dataElement | VariableDataPrototype | * | aggr | 该 SenderReceiverInterface 的数据元素。 |
+| invalidation Policy | InvalidationPolicy | * | aggr | 特定数据元素的失效策略（InvalidationPolicy） |
+| metaDataItem Set | MetaDataItemSet | * | aggr | 该聚合定义与外层发送/接收接口的数据元素关联的固定元数据项集合。 |
 
 
 | 类 | ServerCallPoint (abstract) |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::SwcInternalBehavior::ServerCall |  |  |  |
-| 说明 | If a RunnableEntity owns a ServerCallPoint it is entitled to invoke a particular ClientServerOperation of a specific RPortPrototype of the corresponding AtomicSwComponentType |  |  |  |
+| 说明 | 如果 RunnableEntity 拥有一个 ServerCallPoint，它有权调用相应原子软件组件类型的特定 RPortPrototype 的某个 ClientServerOperation。 |  |  |  |
 | 基类 | ARObject , AbstractAccessPoint , AtpClassifier , AtpFeature , AtpStructureElement , Identifiable , MultilanguageReferrable , Referrable |  |  |  |
 | 子类 | AsynchronousServerCallPoint, SynchronousServerCallPoint |  |  |  |
 | 被聚合于 | AtpClassifier .atpFeature, RunnableEntity.serverCallPoint |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| operation | ClientServerOperation | 0..1 | iref | The operation that is called by this runnable. InstanceRef implemented by: ROperationInAtomicSwc InstanceRef |
+| operation | ClientServerOperation | 0..1 | iref | 由该 runnable 调用的操作。 InstanceRef implemented by: ROperationInAtomicSwc InstanceRef |
 
 
 | 类 | ServerCallPoint (abstract) |  |  |  |
 | --- | --- | --- | --- | --- |
-| timeout | TimeValue | 0..1 | attr | Time in seconds before the server call times out and returns with an error message. It depends on the call type (synchronous or asynchronous) how this is reported. |
+| timeout | TimeValue | 0..1 | attr | 服务器调用超时并返回错误消息之前的时间，单位为秒。如何报告取决于调用类型（同步或异步）。 |
 
 
 | 类 | SwcModeSwitchEvent |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::SwcInternalBehavior::RTEEvents |  |  |  |
-| 说明 | This event is raised when the specified mode change occurs. |  |  |  |
+| 说明 | 当指定的模式变更发生时引发该事件。 |  |  |  |
 | 基类 | ARObject , AbstractEvent , AtpClassifier , AtpFeature , AtpStructureElement , Identifiable , Multilanguage Referrable , RTEEvent , Referrable |  |  |  |
 | 被聚合于 | AtpClassifier .atpFeature, SwcInternalBehavior.event |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| activation | ModeActivationKind | 0..1 | attr | Specifies if the event is raised on entering or exiting a specific mode or is raised on the transition between two modes. |
-| mode (ordered) | ModeDeclaration | 0..2 | iref | The referenced mode or the transition between two modes raises this SwcModeSwitchEvent. InstanceRef implemented by: RModeInAtomicSwc InstanceRef |
+| activation | ModeActivationKind | 0..1 | attr | 规定事件是在进入或退出某个特定模式时引发，还是在两个模式之间的迁移时引发。 |
+| mode (ordered) | ModeDeclaration | 0..2 | iref | 被引用的模式或两个模式之间的迁移引发该 SwcModeSwitchEvent。 InstanceRef implemented by: RModeInAtomicSwc InstanceRef |
 
 
 | 类 | Trigger |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::CommonStructure::TriggerDeclaration |  |  |  |
-| 说明 | A trigger which is provided (i.e. released) or required (i.e. used to activate something) in the given context. |  |  |  |
+| 说明 | 在给定上下文中被提供（即释放）或被需要（即用于激活某物）的触发器。 |  |  |  |
 | 基类 | ARObject , AtpClassifier , AtpFeature , AtpStructureElement , Identifiable , MultilanguageReferrable , Referrable |  |  |  |
 | 被聚合于 | AtpClassifier .atpFeature, BswModuleDescription.releasedTrigger, BswModuleDescription.required Trigger, ServiceInterface.trigger, TriggerInterface.trigger |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| swImplPolicy | SwImplPolicyEnum | 0..1 | attr | This attribute, when set to value queued, allows for a queued processing of Triggers. |
-| triggerPeriod | MultidimensionalTime | 0..1 | aggr | Optional definition of a period in case of a periodically (time or angle) driven external trigger. |
+| swImplPolicy | SwImplPolicyEnum | 0..1 | attr | 该属性在设置为值 queued 时，允许对触发器进行排队处理。 |
+| triggerPeriod | MultidimensionalTime | 0..1 | aggr | 在周期性（按时间或角度）驱动的外部触发器的情况下，周期的可选定义。 |
 
 
 | 类 | TriggerInterface |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::PortInterface |  |  |  |
-| 说明 | A trigger interface declares a number of triggers that can be sent by an trigger source. Tags: atp.recommendedPackage=PortInterfaces |  |  |  |
+| 说明 | 触发器接口声明若干可以由触发源发送的触发器。 Tags: atp.recommendedPackage=PortInterfaces |  |  |  |
 | 基类 | ARElement , ARObject , AtpBlueprint , AtpBlueprintable , AtpClassifier , AtpType , CollectableElement , Identifiable , MultilanguageReferrable , PackageableElement , PortInterface , Referrable |  |  |  |
 | 被聚合于 | ARPackage.element |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| trigger | Trigger | * | aggr | The Trigger of this trigger interface. |
+| trigger | Trigger | * | aggr | 该触发器接口的触发器。 |
 
 
 | 类 | VariableAccess |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::SwcInternalBehavior::DataElements |  |  |  |
-| 说明 | The presence of a VariableAccess implies that a RunnableEntity needs access to a VariableData Prototype. The kind of access is specified by the role in which the class is used. |  |  |  |
+| 说明 | VariableAccess 的存在意味着 RunnableEntity 需要访问一个 VariableDataPrototype。访问的种类由该类被使用的角色规定。 |  |  |  |
 | 基类 | ARObject , AbstractAccessPoint , AtpClassifier , AtpFeature , AtpStructureElement , Identifiable , MultilanguageReferrable , Referrable |  |  |  |
 | 被聚合于 | AtpClassifier .atpFeature, ReceiverComSpec .replaceWith, RunnableEntity.dataReadAccess, Runnable Entity.dataReceivePointByArgument, RunnableEntity.dataReceivePointByValue, RunnableEntity.data SendPoint, RunnableEntity.dataWriteAccess, RunnableEntity.readLocalVariable, RunnableEntity.written LocalVariable |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| accessed Variable | AutosarVariableRef | 0..1 | aggr | This denotes the accessed variable. |
-| scope | VariableAccessScope Enum | 0..1 | attr | This attribute allows for constraining the scope of the corresponding communication. For example, it possible to express whether the communication is intended to cross the boundary of an ECU or whether it is intended not to cross the boundary of a single partition. |
+| accessed Variable | AutosarVariableRef | 0..1 | aggr | 这表示被访问的变量。 |
+| scope | VariableAccessScope Enum | 0..1 | attr | 该属性允许约束相应通信的范围。 例如，可以表达通信是否预期跨越 ECU 边界，或者是否预期不跨越单个分区的边界。 |
 
 
 | 类 | VariableDataPrototype |  |  |  |
 | --- | --- | --- | --- | --- |
 | 包 | M2::AUTOSARTemplates::SWComponentTemplate::Datatype::DataPrototypes |  |  |  |
-| 说明 | A VariableDataPrototype represents a formalized generic piece of information that is typically mutable by the application software layer. VariableDataPrototype is used in various contexts and the specific context gives the otherwise generic VariableDataPrototype a dedicated semantics. |  |  |  |
+| 说明 | VariableDataPrototype 表示一个形式化的通用信息片段，它通常可被应用软件层修改。VariableDataPrototype 用于多种语境，特定语境为 otherwise 通用的 VariableDataPrototype 赋予专门的语义。 |  |  |  |
 | 基类 | ARObject , AtpFeature , AtpPrototype , AutosarDataPrototype , DataPrototype , Identifiable , Multilanguage Referrable , Referrable |  |  |  |
 | 被聚合于 | ApplicationInterface.indication, AtpClassifier .atpFeature, BswInternalBehavior.arTypedPerInstance Memory, BswModuleDescription.providedData, BswModuleDescription.requiredData, BulkNvData Descriptor.bulkNvBlock, InternalBehavior .staticMemory, NvBlockDescriptor.ramBlock, NvDataInterface. nvData, SenderReceiverInterface.dataElement, ServiceInterface.event, SwcInternalBehavior.arTypedPer InstanceMemory, SwcInternalBehavior.explicitInterRunnableVariable, SwcInternalBehavior.implicitInter RunnableVariable |  |  |  |
 | 属性 | 类型 | 多重性 | 种类 | 说明 |
-| initValue | ValueSpecification | 0..1 | aggr | Specifies initial value(s) of the VariableDataPrototype |
+| initValue | ValueSpecification | 0..1 | aggr | 规定 VariableDataPrototype 的初始值。 |
 
 
 
@@ -7256,7 +7256,7 @@ glyph[triangle]
 | 参数名称 | BswMNestedExecutionOnly |  |  |
 | --- | --- | --- | --- |
 | Parent Container | BswMRule |  |  |
-| 描述 | This parameter defines for its related Rule if the Rule is an Independent rule or a Subordinate rule; false: an Independent rule, i.e. to be evaluated each time applicable (both as standalone Rule driven by its own BswMModeRequestSource and when referenced by another Rule). true: a Subordinated rule, to be evaluated ONLY as a result of being referenced in one or more Action Lists. |  |  |
+| 描述 | 该参数为其相关规则定义该规则是独立规则还是从属规则； true：从属规则，只作为被一个或多个动作列表引用的结果而求值。false：独立规则，即每次适用时都求值（既作为由自身 BswMModeRequestSource 驱动的独立规则，也在被另一条规则引用时求值）。 true：从属规则，只作为被一个或多个动作列表引用的结果而求值。 |  |  |
 | 多重性 | 1 |  |  |
 | 类型 | EcucBooleanParamDef |  |  |
 | Default value | false |  |  |
@@ -7275,9 +7275,9 @@ glyph[triangle]
 | 参数名称 | BswMRuleExpressionRef |  |  |
 | --- | --- | --- | --- |
 | Parent Container | BswMRule |  |  |
-| 描述 | This is a reference to the logical expression that is evaluated for each rule. |  |  |
+| 描述 | 这是对为每条规则求值的逻辑表达式的引用。 |  |  |
 | 多重性 | 1 |  |  |
-| 类型 | Reference to BswMLogicalExpression |  |  |
+| 类型 | 对 BswMLogicalExpression 的引用 |  |  |
 | Post-Build Variant Value | false |  |  |
 | Value Configuration Class | Pre-compile time | X | VARIANT-PRE-COMPILE |
 | Value Configuration Class | Link time | X | VARIANT-LINK-TIME, VARIANT-POST-BUILD |
@@ -7288,9 +7288,9 @@ glyph[triangle]
 | 参数名称 | BswMRuleFalseActionList |  |  |
 | --- | --- | --- | --- |
 | Parent Container | BswMRule |  |  |
-| 描述 | This is a reference to the action list that shall be executed when the rule is evaluated to False |  |  |
+| 描述 | 这是对当规则被求值为 False 时应执行的动作列表的引用 |  |  |
 | 多重性 | 0..1 |  |  |
-| 类型 | Reference to BswMActionList |  |  |
+| 类型 | 对 BswMActionList 的引用 |  |  |
 | Post-Build Variant Multiplicity | true |  |  |
 | Post-Build Variant Value | true |  |  |
 | Multiplicity Configuration Class | Pre-compile time | X | VARIANT-PRE-COMPILE |
@@ -7303,9 +7303,9 @@ glyph[triangle]
 | 参数名称 | BswMRuleTrueActionList |  |  |
 | --- | --- | --- | --- |
 | Parent Container | BswMRule |  |  |
-| 描述 | This is a reference to the action list that shall be executed when the rule is evaluated to True |  |  |
+| 描述 | 这是对当规则被求值为 True 时应执行的动作列表的引用 |  |  |
 | 多重性 | 0..1 |  |  |
-| 类型 | Reference to BswMActionList |  |  |
+| 类型 | 对 BswMActionList 的引用 |  |  |
 | Post-Build Variant Multiplicity | true |  |  |
 | Post-Build Variant Value | true |  |  |
 | Multiplicity Configuration Class | Pre-compile time | X | VARIANT-PRE-COMPILE |
@@ -7322,15 +7322,15 @@ glyph[triangle]
 | 参数名称 | BswMLogicalOperator |
 | --- | --- |
 | Parent Container | BswMLogicalExpression |
-| 描述 | This parameter specifies the logical operator to be used in the logical expression. If the logical operator is set to something other than BSWM_NOT, and the expression only consists of a single condition, then this parameter will have no effect. |
+| 描述 | 该参数规定要在逻辑表达式中使用的逻辑运算符。如果逻辑运算符设置为 BSWM_NOT 以外的值，且表达式只包含单个条件，则该参数不起作用。 |
 
 
 | 参数名称 | BswMArgumentRef |  |  |
 | --- | --- | --- | --- |
 | Parent Container | BswMLogicalExpression |  |  |
-| 描述 | This is a choice reference either to a mode condition or a sub-expression. In case the BswMLogicalExpression.BswMLogicalOperator equals BSWM_NAND only two operands are supported. In case the BswMLogicalExpression.BswMLogical Operator equals BSWM_NOT only one operand is supported. |  |  |
+| 描述 | 这是对模式条件或子表达式的选择引用。当 BswMLogicalExpression.BswMLogicalOperator 等于 BSWM_NAND 时，只支持两个操作数。当 BswMLogicalExpression.BswMLogicalOperator 等于 BSWM_NOT 时，只支持一个操作数。 |  |  |
 | 多重性 | 1..* |  |  |
-| 类型 | Choice reference to [ BswMLogicalExpression, BswMModeCondition ] |  |  |
+| 类型 | 对 [BswMLogicalExpression、BswMModeCondition] 的选择引用 |  |  |
 | Post-Build Variant Multiplicity | false |  |  |
 | Post-Build Variant Value | false |  |  |
 | Multiplicity Configuration Class | Pre-compile time | X | VARIANT-PRE-COMPILE |
@@ -7347,7 +7347,7 @@ glyph[triangle]
 | 参数名称 | BswMRequestProcessing |  |  |
 | --- | --- | --- | --- |
 | Parent Container | BswMModeRequestPort |  |  |
-| 描述 | This parameter defines if the processing of the mode arbitration shall be done immediately when a mode request is received or if it shall be deferred to the processing of the main function of BswM. |  |  |
+| 描述 | 该参数定义模式仲裁的处理是在收到模式请求时立即执行，还是推迟到 BswM 主函数的处理中执行。 |  |  |
 | 多重性 | 1 |  |  |
 | 类型 | EcucEnumerationParamDef |  |  |
 | 取值范围 | BSWM_DEFERRED | - |  |
@@ -7364,11 +7364,11 @@ glyph[triangle]
 | 参数名称 | BswMActionListExecution |  |  |
 | --- | --- | --- | --- |
 | Parent Container | BswMActionList |  |  |
-| 描述 | This parameter controls if the corresponding action list shall be executed every time the rule is evaluated or only when the result of the evaluation changes. This parameter does not have an effect when this action list is executed within another action list. |  |  |
+| 描述 | 该参数控制相应动作列表是每次规则被求值时都执行，还是仅在求值结果变化时执行。当该动作列表在另一个动作列表内执行时，该参数不起作用。 |  |  |
 | 多重性 | 1 |  |  |
 | 类型 | EcucEnumerationParamDef |  |  |
-| 取值范围 | BSWM_CONDITION | Action list shall be executed every time the rule is evaluated. |  |
-| 取值范围 | BSWM_TRIGGER | Action list shall be executed every time the result of the evaluation changes. |  |
+| 取值范围 | BSWM_CONDITION | 动作列表应在每次规则被求值时执行。 |  |
+| 取值范围 | BSWM_TRIGGER | 动作列表应在求值结果每次变化时执行。 |  |
 | Post-Build Variant Value | false |  |  |
 | Value Configuration Class | Pre-compile time | X | VARIANT-PRE-COMPILE |
 | Value Configuration Class | Link time | X | VARIANT-LINK-TIME, VARIANT-POST-BUILD |
@@ -7379,7 +7379,7 @@ glyph[triangle]
 | 参数名称 | BswMActionListPriority |  |  |
 | --- | --- | --- | --- |
 | Parent Container | BswMActionList |  |  |
-| 描述 | This controls the order of execution, in the case when multiple action lists are executed during a single mode control cycle. Highest priority action list will be executed first. Zero (0) is lowest priority, and 255 is highest priority. |  |  |
+| 描述 | 当单个模式控制周期内执行多个动作列表时，该参数控制执行顺序。最高优先级的动作列表最先执行。零（0）是最低优先级，255 是最高优先级。 |  |  |
 | 多重性 | 0..1 |  |  |
 | 类型 | EcucIntegerParamDef |  |  |
 | 取值范围 | 0 .. 255 |  |  |
@@ -7398,9 +7398,9 @@ glyph[triangle]
 | 参数名称 | BswMModeSwitchInterfaceRef |  |  |
 | --- | --- | --- | --- |
 | Parent Container | BswMSwitchPort |  |  |
-| 描述 | Reference to the ModeSwitchInterface from which the BswM will generate a PPort Prototype. |  |  |
+| 描述 | 对 BswM 将从中生成 P 端口原型的 ModeSwitchInterface 的引用。 |  |  |
 | 多重性 | 0..1 |  |  |
-| 类型 | Foreign reference to MODE-SWITCH-INTERFACE |  |  |
+| 类型 | 对 MODE-SWITCH-INTERFACE 的外部引用 |  |  |
 | Post-Build Variant Value | false |  |  |
 | Value Configuration Class | Pre-compile time | X | VARIANT-PRE-COMPILE |
 | Value Configuration Class | Link time | X | VARIANT-LINK-TIME, VARIANT-POST-BUILD |
@@ -7411,9 +7411,9 @@ glyph[triangle]
 | 参数名称 | BswMSchMModeDeclarationGroupRef |  |  |
 | --- | --- | --- | --- |
 | Parent Container | BswMSwitchPort |  |  |
-| 描述 | Reference to the ModeDeclarationGroup from which the BswM will generate a Mode DeclarationGroupPrototype. |  |  |
+| 描述 | 对 BswM 将从中生成 ModeDeclarationGroupPrototype 的 ModeDeclarationGroup 的引用。 |  |  |
 | 多重性 | 0..1 |  |  |
-| 类型 | Foreign reference to MODE-DECLARATION-GROUP |  |  |
+| 类型 | 对 MODE-DECLARATION-GROUP 的外部引用 |  |  |
 | Post-Build Variant Value | false |  |  |
 | Value Configuration Class | Pre-compile time | X | VARIANT-PRE-COMPILE |
 | Value Configuration Class | Link time | X | VARIANT-LINK-TIME, VARIANT-POST-BUILD |
@@ -7433,11 +7433,11 @@ glyph[triangle]
 | 参数名称 | MemMapSupportedMemoryAllocationKeywordPolicy |  |  |
 | --- | --- | --- | --- |
 | Parent Container | MemMapAddressingModeSet |  |  |
-| 描述 | This constrains the usage of this addressing mode set for Generic Mappings to swAddr Methods. The attribute MemoryAllocationKeywordPolicy of a swAddrMethod mapped via Mem MapGenericMapping to this MemMapAddressingModeSet shall be equal to one of the configured MemMapSupportedMemoryAllocationKeywordPolicy's |  |  |
+| 描述 | 这约束了将本寻址模式集用于通用映射到 swAddrMethod 的方式。经由 MemMapGenericMapping 映射到本 MemMapAddressingModeSet 的 swAddrMethod 的 MemoryAllocationKeywordPolicy 属性应等于已配置的 MemMapSupportedMemoryAllocationKeywordPolicy 之一。 |  |  |
 | 多重性 | 0..* |  |  |
 | 类型 | EcucEnumerationParamDef |  |  |
-| 取值范围 | MEMMAP_ALLOCATION_ KEYWORD_POLICY_ADDR_ METHOD_SHORT_NAME | The Memory Allocation Keyword is build with the short name of the SwAddrMethod. This is the default value if the atttribute does not exist in the SwAddrMethod. |  |
-| 取值范围 | MEMMAP_ALLOCATION_ KEYWORD_POLICY_ADDR_ METHOD_SHORT_NAME_AND_ ALIGNMENT | The Memory Allocation Keyword is build with the the short name of the SwAddrMethod and the alignment attribute of the MemorySection. This requests a separation of objects in memory dependent from the alignment and is not applicable for RunnableEntitys and Bsw SchedulableEntitys. |  |
+| 取值范围 | MEMMAP_ALLOCATION_ KEYWORD_POLICY_ADDR_ METHOD_SHORT_NAME | 内存分配关键字由 SwAddrMethod 的短名称构建。如果该属性在 SwAddrMethod 中不存在，这是默认值。 |  |
+| 取值范围 | MEMMAP_ALLOCATION_ KEYWORD_POLICY_ADDR_ METHOD_SHORT_NAME_AND_ ALIGNMENT | 内存分配关键字由 SwAddrMethod 的短名称与内存段的 alignment 属性构建。这要求对象在内存中按对齐分离，且不适用于 RunnableEntity 与 BswSchedulableEntity。 |  |
 | Post-Build Variant Multiplicity | false |  |  |
 | Post-Build Variant Value | false |  |  |
 | Multiplicity Configuration Class | Pre-compile time | X | All Variants |
@@ -7452,7 +7452,7 @@ glyph[triangle]
 | 参数名称 | MemMapSupportedSectionInitializationPolicy |  |
 | --- | --- | --- |
 | Parent Container | MemMapAddressingModeSet |  |
-| 描述 | This constrains the usage of this addressing mode set for Generic Mappings to swAddr Methods. The sectionIntializationPolicy attribute value of a swAddrMethod mapped via MemMap GenericMapping to this MemMapAddressingModeSet shall be equal to one of the configured MemMapSupportedSectionIntializationPolicy's. Please note that SectionInitializationPolicyType describes the intended initialization of MemorySections. The following values are standardized in AUTOSAR Methodology (see chapter 7.2.1): • INIT • CLEARED • POWER-ON-CLEARED Note: The values NO-INIT and POWER-ON-INIT are still supported but deprecated and will be removed in one of the next releases. Note: The values are defined similar to the representation of enumeration types in the XML schema to ensure backward compatibility. |  |
+| 描述 | 这约束了将本寻址模式集用于通用映射到 swAddrMethod 的方式。经由 MemMapGenericMapping 映射到本 MemMapAddressingModeSet 的 swAddrMethod 的 sectionIntializationPolicy 属性值应等于已配置的 MemMapSupportedSectionIntializationPolicy 之一。 请注意 SectionInitializationPolicyType 描述内存段的预期初始化方式。 以下值在 AUTOSAR 方法论中标准化（见第 7.2.1 章）： • INIT • CLEARED • POWER-ON-CLEARED 注意：值 NO-INIT 与 POWER-ON-INIT 仍受支持但已废弃，将在后续某个版本中移除。 注意：这些值的定义类似于 XML 模式中枚举类型的表示，以确保向后兼容。 |  |
 | 多重性 | 0..* |  |
 | 类型 | EcucStringParamDef |  |
 | Default value | - |  |
@@ -7471,13 +7471,13 @@ glyph[triangle]
 | 参数名称 | MemMapSupportedSectionType |  |
 | --- | --- | --- |
 | Parent Container | MemMapAddressingModeSet |  |
-| 描述 | This constrains the usage of this addressing mode set for Generic Mappings to swAddr Methods. The attribute sectionType of a swAddrMethod mapped via MemMapGenericMapping or MemMapSectionSpecificMapping to this MemMapAddressingModeSet shall be equal to one of the configured MemMapSupportedSectionType's. |  |
+| 描述 | 这约束了将本寻址模式集用于通用映射到 swAddrMethod 的方式。经由 MemMapGenericMapping 或 MemMapSectionSpecificMapping 映射到本 MemMapAddressingModeSet 的 swAddrMethod 的 sectionType 属性应等于已配置的 MemMapSupportedSectionType 之一。 |  |
 | 多重性 | 0..* |  |
 | 类型 | EcucEnumerationParamDef |  |
-| 取值范围 | MEMMAP_SECTION_TYPE_ CAL_PRM | To be used for calibratable constants of ECU-functions. |
-| 取值范围 | MEMMAP_SECTION_TYPE_ CODE | To be used for mapping code to application block, boot block, external flash etc. |
-| 取值范围 | MEMMAP_SECTION_TYPE_ CONFIG_DATA | Constants with attributes that show that they reside in one segment for module configuration. |
-| 取值范围 | MEMMAP_SECTION_TYPE_ CONST | To be used for global or static constants. |
+| 取值范围 | MEMMAP_SECTION_TYPE_ CAL_PRM | 用于 ECU 功能的可标定常量。 |
+| 取值范围 | MEMMAP_SECTION_TYPE_ CODE | 用于将代码映射到应用块、引导块、外部闪存等。 |
+| 取值范围 | MEMMAP_SECTION_TYPE_ CONFIG_DATA | 带有表明其驻留在模块配置的一个段中的属性的常量。 |
+| 取值范围 | MEMMAP_SECTION_TYPE_ CONST | 用于全局或静态常量。 |
 
 
 ### C.3 Ecuc
@@ -7487,13 +7487,13 @@ glyph[triangle]
 | 参数名称 | EcucDefaultBswPartition |
 | --- | --- |
 | Parent Container | EcucPartition |
-| 描述 | Denotes the default BSW partition. This partition will host all BSW Modules, which are not explicitly mapped to a different partition. For partitions other than the default BSW partition this parameter can be omitted. |
+| 描述 | 表示默认 BSW 分区。该分区将承载所有未显式映射到不同分区的 BSW 模块。对于默认 BSW 分区以外的分区，可以省略该参数。 |
 
 
 | 参数名称 | EcucPartitionId |  |  |
 | --- | --- | --- | --- |
 | Parent Container | EcucPartition |  |  |
-| 描述 | ID of the partition. |  |  |
+| 描述 | 分区的 ID。 |  |  |
 | 多重性 | 1 |  |  |
 | 类型 | EcucIntegerParamDef |  |  |
 | 取值范围 | 0 .. 65535 |  |  |
@@ -7508,7 +7508,7 @@ glyph[triangle]
 | 参数名称 | PartitionCanBeRestarted |  |  |
 | --- | --- | --- | --- |
 | Parent Container | EcucPartition |  |  |
-| 描述 | Specifies the requirement whether the Partition can be restarted. If set to true all software executing in this partition shall be capable of handling a restart. |  |  |
+| 描述 | 规定分区是否可以重启的需求。如果设置为 true，则在该分区中执行的所有软件都应能够处理重启。 |  |  |
 | 多重性 | 1 |  |  |
 | 类型 | EcucBooleanParamDef |  |  |
 | Default value | - |  |  |
@@ -7522,15 +7522,15 @@ glyph[triangle]
 | 参数名称 | EcucEcuPartitionRef |
 | --- | --- |
 | Parent Container | EcucPartition |
-| 描述 | Reference to the EcuPartition to define the link to the partition described in the System description. Tags: atp.Status=draft |
+| 描述 | 对 EcuPartition 的引用，用于定义到系统描述中所述分区的链接。 Tags: atp.Status=draft |
 
 
 | 参数名称 | EcucPartitionBswModuleDistinguishedPartition |  |
 | --- | --- | --- |
 | Parent Container | EcucPartition |  |
-| 描述 | This maps the abstract partition of the Bsw Module to a concrete Partition existing in the ECU. |  |
+| 描述 | 这将 BSW 模块的抽象分区映射到 ECU 中存在的具体分区。 |  |
 | 多重性 | 0..* |  |
-| 类型 | Foreign reference to BSW-DISTINGUISHED-PARTITION |  |
+| 类型 | 对 BSW-DISTINGUISHED-PARTITION 的外部引用 |  |
 | Post-Build Variant Multiplicity | false |  |
 | Post-Build Variant Value | false |  |
 | Multiplicity Configuration Class | Pre-compile time | All Variants |
@@ -7545,9 +7545,9 @@ glyph[triangle]
 | 参数名称 | EcucPartitionCoreRef |  |
 | --- | --- | --- |
 | Parent Container | EcucPartition |  |
-| 描述 | Reference to the core definition. This reference is used to describe to which core the EcucPartition is bound. |  |
+| 描述 | 对核心定义的引用。该引用用于描述 EcucPartition 绑定到哪个核心。 |  |
 | 多重性 | 1 |  |
-| 类型 | Reference to EcucCoreDefinition |  |
+| 类型 | 对 EcucCoreDefinition 的引用 |  |
 | Post-Build Variant Multiplicity | false |  |
 | Post-Build Variant Value | false |  |
 | Multiplicity Configuration Class | Pre-compile time | X |
@@ -7571,9 +7571,9 @@ glyph[triangle]
 | 参数名称 | OsAlarmAccessingApplication |  |
 | --- | --- | --- |
 | Parent Container | OsAlarm |  |
-| 描述 | Reference to applications which have an access to this object. |  |
+| 描述 | 对有权访问该对象的应用（OS-Application）的引用。 |  |
 | 多重性 | 0..* |  |
-| 类型 | Reference to OsApplication |  |
+| 类型 | 对 OsApplication 的引用 |  |
 | Post-Build Variant Multiplicity | false |  |
 | Post-Build Variant Value | false |  |
 | Multiplicity Configuration Class | Pre-compile time | X |
@@ -7588,9 +7588,9 @@ glyph[triangle]
 | 参数名称 | OsAlarmCounterRef |  |  |
 | --- | --- | --- | --- |
 | Parent Container | OsAlarm |  |  |
-| 描述 | Reference to the assigned counter for that alarm |  |  |
+| 描述 | 对该报警所分配计数器的引用 |  |  |
 | 多重性 | 1 |  |  |
-| 类型 | Reference to OsCounter |  |  |
+| 类型 | 对 OsCounter 的引用 |  |  |
 | Post-Build Variant Value | false |  |  |
 | Value Configuration Class | Pre-compile time | X | All Variants |
 | Value Configuration Class | Link time | - |  |
@@ -7603,7 +7603,7 @@ glyph[triangle]
 | 参数名称 | OsTrusted |  |  |
 | --- | --- | --- | --- |
 | Parent Container | OsApplication |  |  |
-| 描述 | Parameter to specify if an OS-Application is trusted or not. true: OS-Application is trusted false: OS-Application is not trusted (default) |  |  |
+| 描述 | 规定 OS-Application 是否可信的参数。 true：OS-Application 可信。false：OS-Application 不可信（默认）。 |  |  |
 | 多重性 | 1 |  |  |
 | 类型 | EcucBooleanParamDef |  |  |
 | Default value | false |  |  |
@@ -7616,7 +7616,7 @@ glyph[triangle]
 | 参数名称 | OsTrustedApplicationDelayTimingViolationCall |  |  |
 | --- | --- | --- | --- |
 | Parent Container | OsApplication |  |  |
-| 描述 | Parameter to specify if a timing violation which occurs within an trusted OS-Application is raised immediately of if it is delayed until the current task returns to the calling OS-Application (return of CallTrustedFunction) true: violation / call to ProtectionHook() is delayed false: timing violation cause an immediate call to the ProtectionHook(). |  |  |
+| 描述 | 规定发生在可信 OS-Application 内的时序违规是立即引发，还是推迟到当前任务返回调用方 OS-Application（CallTrustedFunction 返回）时才引发。 true：违规/对 ProtectionHook() 的调用被延迟。false：时序违规导致立即调用 ProtectionHook()。 |  |  |
 | 多重性 | 1 |  |  |
 | 类型 | EcucBooleanParamDef |  |  |
 | Default value | true |  |  |
@@ -7630,7 +7630,7 @@ glyph[triangle]
 | 参数名称 | OsTrustedApplicationWithProtection |  |  |
 | --- | --- | --- | --- |
 | Parent Container | OsApplication |  |  |
-| 描述 | Parameter to specify if a trusted OS-Application is executed with memory protection or not. true: OS-Application runs within a protected environment. This means that write access is limited. false: OS-Application has full write access (default) |  |  |
+| 描述 | 规定可信 OS-Application 是否在内存保护下执行的参数。 true：OS-Application 在受保护的环境中运行。这意味着写访问受限。false：OS-Application 拥有完全的写访问权限（默认）。 |  |  |
 | 多重性 | 1 |  |  |
 | 类型 | EcucBooleanParamDef |  |  |
 | Default value | false |  |  |
@@ -7644,9 +7644,9 @@ glyph[triangle]
 | 参数名称 | OsAppAlarmRef |  |  |
 | --- | --- | --- | --- |
 | Parent Container | OsApplication |  |  |
-| 描述 | Specifies the OsAlarms that belong to the OsApplication. |  |  |
+| 描述 | 规定属于该 OsApplication 的 OsAlarm。 |  |  |
 | 多重性 | 0..* |  |  |
-| 类型 | Reference to OsAlarm |  |  |
+| 类型 | 对 OsAlarm 的引用 |  |  |
 | Post-Build Variant Multiplicity | false |  |  |
 | Post-Build Variant Value | false |  |  |
 | Multiplicity Configuration Class | Pre-compile time | X | All Variants |
@@ -7659,9 +7659,9 @@ glyph[triangle]
 | 参数名称 | OsAppCounterRef |  |
 | --- | --- | --- |
 | Parent Container | OsApplication |  |
-| 描述 | References the OsCounters that belong to the OsApplication. |  |
+| 描述 | 引用属于该 OsApplication 的 OsCounter。 |  |
 | 多重性 | 0..* |  |
-| 类型 | Reference to OsCounter |  |
+| 类型 | 对 OsCounter 的引用 |  |
 | Post-Build Variant Multiplicity | false |  |
 | Post-Build Variant Value | false |  |
 | Multiplicity Configuration Class | Pre-compile time | All Variants |
@@ -7676,9 +7676,9 @@ glyph[triangle]
 | 参数名称 | OsAppEcucPartitionRef |  |
 | --- | --- | --- |
 | Parent Container | OsApplication |  |
-| 描述 | Denotes which "EcucPartition" is implemented by this "OSApplication". |  |
+| 描述 | 表示该「OSApplication」实现哪个「EcucPartition」。 |  |
 | 多重性 | 1 |  |
-| 类型 | Reference to EcucPartition |  |
+| 类型 | 对 EcucPartition 的引用 |  |
 | Post-Build Variant Multiplicity | false |  |
 | Post-Build Variant Value | false |  |
 | Multiplicity Configuration Class | Pre-compile time | All Variants |
@@ -7693,9 +7693,9 @@ glyph[triangle]
 | 参数名称 | OsAppIsrRef |  |  |
 | --- | --- | --- | --- |
 | Parent Container | OsApplication |  |  |
-| 描述 | references which OsIsrs belong to the OsApplication |  |  |
+| 描述 | 引用哪些 OsIsr 属于该 OsApplication |  |  |
 | 多重性 | 0..* |  |  |
-| 类型 | Reference to OsIsr |  |  |
+| 类型 | 对 OsIsr 的引用 |  |  |
 | Post-Build Variant Multiplicity | false |  |  |
 | Post-Build Variant Value | false |  |  |
 | Multiplicity Configuration Class | Pre-compile time | X | All Variants |
@@ -7706,9 +7706,9 @@ glyph[triangle]
 | 参数名称 | OsAppScheduleTableRef |  |
 | --- | --- | --- |
 | Parent Container | OsApplication |  |
-| 描述 | References the OsScheduleTables that belong to the OsApplication. |  |
+| 描述 | 引用属于该 OsApplication 的 OsScheduleTable。 |  |
 | 多重性 | 0..* |  |
-| 类型 | Reference to OsScheduleTable |  |
+| 类型 | 对 OsScheduleTable 的引用 |  |
 | Post-Build Variant Multiplicity | false |  |
 | Post-Build Variant Value | false |  |
 | Multiplicity Configuration Class | Pre-compile time | X |
@@ -7723,9 +7723,9 @@ glyph[triangle]
 | 参数名称 | OsAppTaskRef |  |
 | --- | --- | --- |
 | Parent Container | OsApplication |  |
-| 描述 | references which OsTasks belong to the OsApplication |  |
+| 描述 | 引用哪些 OsTask 属于该 OsApplication |  |
 | 多重性 | 0..* |  |
-| 类型 | Reference to OsTask |  |
+| 类型 | 对 OsTask 的引用 |  |
 | Post-Build Variant Multiplicity | false |  |
 | Post-Build Variant Value | false |  |
 | Multiplicity Configuration Class | Pre-compile time | X |
@@ -7740,9 +7740,9 @@ glyph[triangle]
 | 参数名称 | OsMemoryMappingCodeLocationRef |  |  |
 | --- | --- | --- | --- |
 | Parent Container | OsApplication |  |  |
-| 描述 | Reference to the memory mapping containing details about the section where the code is placed. |  |  |
+| 描述 | 对包含代码放置位置所在段详情的内存映射的引用。 |  |  |
 | 多重性 | 0..1 |  |  |
-| 类型 | Foreign reference to SW-ADDR-METHOD |  |  |
+| 类型 | 对 SW-ADDR-METHOD 的外部引用 |  |  |
 | Post-Build Variant Value | false |  |  |
 | Value Configuration Class | Pre-compile time | X | All Variants |
 
@@ -7750,9 +7750,9 @@ glyph[triangle]
 | 参数名称 | OsRestartTask |  |
 | --- | --- | --- |
 | Parent Container | OsApplication |  |
-| 描述 | Optionally one task of an OS-Application may be defined as Restart Task. Multiplicity = 1: Restart Task is activated by the Operating System if the protection hook requests it. Multiplicity = 0: No task is automatically started after a protection error happened. |  |
+| 描述 | 可选地将 OS-Application 的一个任务定义为重启任务（Restart Task）。 多重性 = 1：如果保护钩子要求，操作系统将激活重启任务。多重性 = 0：保护错误发生后不会自动启动任何任务。 |  |
 | 多重性 | 0..1 |  |
-| 类型 | Reference to OsTask |  |
+| 类型 | 对 OsTask 的引用 |  |
 | Post-Build Variant Multiplicity | false |  |
 | Post-Build Variant Value | false |  |
 | Multiplicity Configuration Class | Pre-compile time | X |
@@ -7761,7 +7761,7 @@ glyph[triangle]
 | Value Configuration Class | Pre-compile time | X |
 | Value Configuration Class | Link time | - |
 | Value Configuration Class | Post-build time | - |
-| Scope / Dependency | scope: ECU dependency: Required for scalability class 3 and 4. |  |
+| Scope / Dependency | 范围：ECU。依赖性：可扩展性类别 3 与 4 需要。 |  |
 
 
 ### C.4.3 OsCounter
@@ -7769,7 +7769,7 @@ glyph[triangle]
 | 参数名称 | OsCounterMaxAllowedValue |
 | --- | --- |
 | Parent Container | OsCounter |
-| 描述 | Maximum possible allowed value of the system counter in ticks. |
+| 描述 | 系统计数器以 tick 计的最大允许值。 |
 | 多重性 | 1 |
 | 类型 | EcucIntegerParamDef |
 
@@ -7777,7 +7777,7 @@ glyph[triangle]
 | 参数名称 | OsCounterMinCycle |  |  |
 | --- | --- | --- | --- |
 | Parent Container | OsCounter |  |  |
-| 描述 | The MINCYCLE attribute specifies the minimum allowed number of counter ticks for a cyclic alarm linked to the counter. |  |  |
+| 描述 | MINCYCLE 属性规定链接到该计数器的周期性报警所允许的最小计数器 tick 数。 |  |  |
 | 多重性 | 1 |  |  |
 | 类型 | EcucIntegerParamDef |  |  |
 | 取值范围 | 1 .. 18446744073709551615 |  |  |
@@ -7792,7 +7792,7 @@ glyph[triangle]
 | 参数名称 | OsCounterTicksPerBase |  |  |
 | --- | --- | --- | --- |
 | Parent Container | OsCounter |  |  |
-| 描述 | The TICKSPERBASE attribute specifies the number of ticks required to reach a counterspecific unit. The interpretation is implementation-specific. |  |  |
+| 描述 | TICKSPERBASE 属性规定达到计数器特定单位所需的 tick 数。其解释由实现决定。 |  |  |
 | 多重性 | 1 |  |  |
 | 类型 | EcucIntegerParamDef |  |  |
 | 取值范围 | 1 .. 4294967295 |  |  |
@@ -7807,17 +7807,17 @@ glyph[triangle]
 | 参数名称 | OsCounterType |  |
 | --- | --- | --- |
 | Parent Container | OsCounter |  |
-| 描述 | This parameter contains the natural type or unit of the counter. |  |
+| 描述 | 该参数包含计数器的自然类型或单位。 |  |
 | 多重性 | 1 |  |
 | 类型 | EcucEnumerationParamDef |  |
-| 取值范围 | HARDWARE | This counter is driven by some hardware e.g. a hardware timer unit. |
-| 取值范围 | SOFTWARE | The counter is driven by some software which calls the IncrementCounter service. |
+| 取值范围 | HARDWARE | 该计数器由某些硬件驱动，例如硬件定时器单元。 |
+| 取值范围 | SOFTWARE | 该计数器由调用 IncrementCounter 服务的某些软件驱动。 |
 
 
 | 参数名称 | OsSecondsPerTick |  |
 | --- | --- | --- |
 | Parent Container | OsCounter |  |
-| 描述 | Time of one counter tick in seconds. |  |
+| 描述 | 一个计数器 tick 的时间，单位为秒。 |  |
 | 多重性 | 0..1 |  |
 | 类型 | EcucFloatParamDef |  |
 | 取值范围 | [0 .. INF] |  |
@@ -7836,9 +7836,9 @@ glyph[triangle]
 | 参数名称 | OsCounterAccessingApplication |  |
 | --- | --- | --- |
 | Parent Container | OsCounter |  |
-| 描述 | Reference to applications which have an access to this object. |  |
+| 描述 | 对有权访问该对象的应用（OS-Application）的引用。 |  |
 | 多重性 | 0..* |  |
-| 类型 | Reference to OsApplication |  |
+| 类型 | 对 OsApplication 的引用 |  |
 | Post-Build Variant Multiplicity | false |  |
 | Post-Build Variant Value | false |  |
 | Multiplicity Configuration Class | Pre-compile time | X |
@@ -7855,7 +7855,7 @@ glyph[triangle]
 | 参数名称 | OsEventMask |  |
 | --- | --- | --- |
 | Parent Container | OsEvent |  |
-| 描述 | If event mask would be set to AUTO in OIL, this parameter should be omitted here. |  |
+| 描述 | 如果事件掩码在 OIL 中被设置为 AUTO，则此处应省略该参数。 |  |
 | 多重性 | 0..1 |  |
 | 类型 | EcucIntegerParamDef |  |
 | 取值范围 | 0 .. 18446744073709551615 |  |
@@ -7876,7 +7876,7 @@ glyph[triangle]
 | 参数名称 | OsScheduleTableDuration |  |  |
 | --- | --- | --- | --- |
 | Parent Container | OsScheduleTable |  |  |
-| 描述 | This parameter defines the modulus of the schedule table (in ticks). |  |  |
+| 描述 | 该参数定义调度表的模数（以 tick 计）。 |  |  |
 | 多重性 | 1 |  |  |
 | 类型 | EcucIntegerParamDef |  |  |
 | 取值范围 | 0 .. 18446744073709551615 |  |  |
@@ -7891,7 +7891,7 @@ glyph[triangle]
 | 参数名称 | OsScheduleTableRepeating |  |  |
 | --- | --- | --- | --- |
 | Parent Container | OsScheduleTable |  |  |
-| 描述 | true: first expiry point on the schedule table shall be processed at final expiry point delay ticks after the final expiry point is processed. false: the schedule table processing stops when the final expiry point is processed. |  |  |
+| 描述 | true：在终止到期点被处理之后，调度表上的第一个到期点应在终止到期点延迟 tick 处被处理。false：当终止到期点被处理时，调度表的处理停止。 |  |  |
 | 多重性 | 1 |  |  |
 | 类型 | EcucBooleanParamDef |  |  |
 | Default value | - |  |  |
@@ -7905,9 +7905,9 @@ glyph[triangle]
 | 参数名称 | OsScheduleTableCounterRef |  |  |
 | --- | --- | --- | --- |
 | Parent Container | OsScheduleTable |  |  |
-| 描述 | This parameter contains a reference to the counter which drives the schedule table. |  |  |
+| 描述 | 该参数包含对驱动调度表的计数器的引用。 |  |  |
 | 多重性 | 1 |  |  |
-| 类型 | Reference to OsCounter |  |  |
+| 类型 | 对 OsCounter 的引用 |  |  |
 | Post-Build Variant Value | false |  |  |
 | Value Configuration Class | Pre-compile time | X | All Variants |
 | Value Configuration Class | Link time | - |  |
@@ -7917,9 +7917,9 @@ glyph[triangle]
 | 参数名称 | OsSchTblAccessingApplication |  |
 | --- | --- | --- |
 | Parent Container | OsScheduleTable |  |
-| 描述 | Reference to applications which have an access to this object. |  |
+| 描述 | 对有权访问该对象的应用（OS-Application）的引用。 |  |
 | 多重性 | 0..* |  |
-| 类型 | Reference to OsApplication |  |
+| 类型 | 对 OsApplication 的引用 |  |
 | Post-Build Variant Multiplicity | false |  |
 | Post-Build Variant Value | false |  |
 | Multiplicity Configuration Class | Pre-compile time | All Variants |
@@ -7936,7 +7936,7 @@ glyph[triangle]
 | 参数名称 | OsScheduleTblExpPointOffset |  |
 | --- | --- | --- |
 | Parent Container | OsScheduleTableExpiryPoint |  |
-| 描述 | The offset from zero (in ticks) |  |
+| 描述 | 自零起的偏移（以 tick 计） |  |
 | 多重性 | 1 |  |
 | 类型 | EcucIntegerParamDef |  |
 |  | 0 .. 18446744073709551615 | 取值范围 |
@@ -7948,7 +7948,7 @@ glyph[triangle]
 | 参数名称 | OsTaskActivation |  |  |
 | --- | --- | --- | --- |
 | Parent Container | OsTask |  |  |
-| 描述 | This attribute defines the maximum number of queued activation requests for the task. A value equal to "1" means that at any time only a single activation is permitted for this task. Note that the value must be a natural number starting at 1. |  |  |
+| 描述 | 该属性定义该任务排队的最大激活请求数。 值等于「1」意味着任何时候该任务只允许单次激活。注意该值必须是从 1 开始的自然数。 |  |  |
 | 多重性 | 1 |  |  |
 | 类型 | EcucIntegerParamDef |  |  |
 | 取值范围 | 1 .. 4294967295 |  |  |
@@ -7968,7 +7968,7 @@ glyph[triangle]
 | 参数名称 | OsTaskPriority |  |  |
 | --- | --- | --- | --- |
 | Parent Container | OsTask |  |  |
-| 描述 | The priority of a task is defined by the value of this attribute. This value has to be understood as a relative value, i.e. the values show only the relative ordering of the tasks. ISO 17356-3 defines the lowest priority as zero (0); larger values correspond to higher priorities. |  |  |
+| 描述 | 任务的优先级由该属性的值定义。 该值必须被理解为相对值，即这些值只表示任务之间的相对顺序。ISO 17356-3 将最低优先级定义为零（0）；更大的值对应更高的优先级。 |  |  |
 | 多重性 | 1 |  |  |
 | 类型 | EcucIntegerParamDef |  |  |
 | 取值范围 | 0 .. 4294967295 |  |  |
@@ -7983,19 +7983,19 @@ glyph[triangle]
 | 参数名称 | OsTaskSchedule |  |
 | --- | --- | --- |
 | Parent Container | OsTask |  |
-| 描述 | The OsTaskSchedule attribute defines the preemptability of the task. If this attribute is set to NON, no internal resources may be assigned to this task. |  |
+| 描述 | OsTaskSchedule 属性定义任务的可抢占性。如果该属性设置为 NON，则不能为该任务分配内部资源。 |  |
 | 多重性 | 1 |  |
 | 类型 | EcucEnumerationParamDef |  |
-| 取值范围 | FULL | Task is preemptable. |
-| 取值范围 | NON | Task is not preemptable. |
+| 取值范围 | FULL | 任务可抢占。 |
+| 取值范围 | NON | 任务不可抢占。 |
 
 
 | 参数名称 | OsMemoryMappingCodeLocationRef |  |  |
 | --- | --- | --- | --- |
 | Parent Container | OsTask |  |  |
-| 描述 | Reference to the memory mapping containing details about the section where the code is placed. |  |  |
+| 描述 | 对包含代码放置位置所在段详情的内存映射的引用。 |  |  |
 | 多重性 | 0..1 |  |  |
-| 类型 | Foreign reference to SW-ADDR-METHOD |  |  |
+| 类型 | 对 SW-ADDR-METHOD 的外部引用 |  |  |
 | Post-Build Variant Value | false |  |  |
 | Value Configuration Class | Pre-compile time | X | All Variants |
 | Value Configuration Class | Link time | - |  |
@@ -8006,9 +8006,9 @@ glyph[triangle]
 | 参数名称 | OsTaskAccessingApplication |  |
 | --- | --- | --- |
 | Parent Container | OsTask |  |
-| 描述 | Reference to applications which have an access to this object. |  |
+| 描述 | 对有权访问该对象的应用（OS-Application）的引用。 |  |
 | 多重性 | 0..* |  |
-| 类型 | Reference to OsApplication |  |
+| 类型 | 对 OsApplication 的引用 |  |
 | Post-Build Variant Multiplicity | false |  |
 | Post-Build Variant Value | false |  |
 | Multiplicity Configuration Class | Pre-compile time | X |
@@ -8023,9 +8023,9 @@ glyph[triangle]
 | 参数名称 | OsTaskEventRef |  |  |
 | --- | --- | --- | --- |
 | Parent Container | OsTask |  |  |
-| 描述 | This reference defines the list of events the extended task may react on. |  |  |
+| 描述 | 该引用定义扩展任务可以响应的事件列表。 |  |  |
 | 多重性 | 0..* |  |  |
-| 类型 | Reference to OsEvent |  |  |
+| 类型 | 对 OsEvent 的引用 |  |  |
 | Post-Build Variant Multiplicity | false |  |  |
 | Post-Build Variant Value | false |  |  |
 | Multiplicity Configuration Class | Pre-compile time | X | All Variants |
@@ -8037,9 +8037,9 @@ glyph[triangle]
 | 参数名称 | OsTaskResourceRef |  |
 | --- | --- | --- |
 | Parent Container | OsTask |  |
-| 描述 | This reference defines a list of resources accessed by this task. |  |
+| 描述 | 该引用定义该任务访问的资源列表。 |  |
 | 多重性 | 0..* |  |
-| 类型 | Reference to OsResource |  |
+| 类型 | 对 OsResource 的引用 |  |
 | Post-Build Variant Multiplicity | false |  |
 | Post-Build Variant Value | false |  |
 | Multiplicity Configuration Class | Pre-compile time | All Variants |
@@ -8083,7 +8083,7 @@ glyph[triangle]
 | 输入参数 | 无 |  |
 | 输入/输出参数 | 无 |  |
 | 输出参数 | 无 |  |
-| 返回值 | Std_ReturnType | RTE_E_OK : No error occurred. RTE_E_LIMIT : An internal limit has been exceeded. The allocation of a required resource has failed. |
+| 返回值 | Std_ReturnType | RTE_E_OK：未发生错误。RTE_E_LIMIT：已超过内部限制。所需资源的分配失败。 |
 | 描述 | Rte_Start is intended to allocate and initialize system resources and communication resources used by the RTE. |  |
 | 可通过……获得 | Rte.h |  |
 
@@ -8101,8 +8101,8 @@ glyph[triangle]
 | 输入参数 | 无 |  |
 | 输入/输出参数 | 无 |  |
 | 输出参数 | 无 |  |
-| 返回值 | boolean | The return value is used to indicate if the data has been updated or not. |
-| 描述 | The Rte_Rips_DataIsUpdated API provides access to the update flag for an explicit receiver |  |
+| 返回值 | boolean | 返回值用于指示数据是否已被更新。 |
+| 描述 | Rte_Rips_DataIsUpdated API 为显式接收者提供对更新标志的访问。 |  |
 | 可通过……获得 | Rte_Rips_<PlugIn>_<SwcBswI>.h |  |
 
 
@@ -8117,7 +8117,7 @@ glyph[triangle]
 | 输入参数 | 无 |  |
 | 输入/输出参数 | 无 |  |
 | 输出参数 | 无 |  |
-| 返回值 | <return> | Return value provides access to the data value of the Variable DataPrototype. For details of the <return> value definition see section 5.2.6.6. |
+| 返回值 | <return> | 返回值提供对 VariableDataPrototype 数据值的访问。 &lt;return&gt; 值定义的细节见 5.2.6.6 节。 |
 | 描述 | Rte_Rips_DRead Performs an "explicit" read on a sender-receiver communication data element typed by a primitive data type. |  |
 | 可通过……获得 | Rte_Rips_<PlugIn>_<SwcBswI>.h |  |
 
@@ -8133,8 +8133,8 @@ glyph[triangle]
 | 输入参数 | 无 |  |
 | 输入/输出参数 | 无 |  |
 | 输出参数 | 无 |  |
-| 返回值 | boolean | The return value is used to indicate if the Runnable shall be activated or not. |
-| 描述 | The Rte_Rips_DataIsUpdated_EventActivation API indicates the RTE to activate the Runnable Entity triggered by DataReceivedEvent when the related VariableDataPrototype has been updated |  |
+| 返回值 | boolean | 返回值用于指示是否应激活 Runnable。 |
+| 描述 | Rte_Rips_DataIsUpdated_EventActivation API 指示 RTE：当相关 VariableDataPrototype 已被更新时，激活由 DataReceivedEvent 触发的 Runnable 实体。 |  |
 | 可通过……获得 | Rte_Rips_<PlugIn>.h |  |
 
 
@@ -8149,8 +8149,8 @@ glyph[triangle]
 | 输入参数 | 无 |  |
 | 输入/输出参数 | 无 |  |
 | 输出参数 | 无 |  |
-| 返回值 | Std_ReturnType | The return value is used to pass error notifications. |
-| 描述 | The Rte_Rips_Feedback API provides access to acknowledgment notifications for explicit and implicit sender-receiver communication and to pass error notification to senders in a Software Cluster |  |
+| 返回值 | Std_ReturnType | 返回值用于传递错误通知。 |
+| 描述 | Rte_Rips_Feedback API 为显式与隐式发送-接收通信提供对接收确认通知的访问，并在软件集群中向发送者传递错误通知。 |  |
 | 可通过……获得 | Rte_Rips_<PlugIn>_<SwcBswI>.h |  |
 
 
@@ -8162,20 +8162,20 @@ glyph[triangle]
 | 服务 ID [hex] | 0xEC |  |
 | 同步/异步 | 同步 |  |
 | 可重入性 | 可重入 |  |
-| 输入参数 | <data_1> | The Rte_Rips_Invoke API includes zero or more IN, IN/OUT and OUT parameters according SWS_Rte_01102 and none in case of triggers |
-| 输入/输出参数 | ... | The Rte_Rips_Invoke API includes zero or more IN, IN/OUT and OUT parameters according SWS_Rte_01102 and none in case of triggers |
-| 输出参数 | <data_n> | The Rte_Rips_Invoke API includes zero or more IN, IN/OUT and OUT parameters according SWS_Rte_01102 and none in case of triggers |
-| 输出参数 | transformerError | The OUT parameter transformerError contains the transformer error which occurred during execution of the transformer chain. |
-| 返回值 | Std_ReturnType | The return value is used to indicate communication errors. |
+| 输入参数 | <data_1> | Rte_Rips_Invoke API 依照 SWS_Rte_01102 包含零个或多个 IN、IN/OUT 与 OUT 参数，对触发器则没有参数。 |
+| 输入/输出参数 | ... | Rte_Rips_Invoke API 依照 SWS_Rte_01102 包含零个或多个 IN、IN/OUT 与 OUT 参数，对触发器则没有参数。 |
+| 输出参数 | <data_n> | Rte_Rips_Invoke API 依照 SWS_Rte_01102 包含零个或多个 IN、IN/OUT 与 OUT 参数，对触发器则没有参数。 |
+| 输出参数 | transformerError | OUT 参数 transformerError 包含在转换器链执行期间发生的转换器错误。 |
+| 返回值 | Std_ReturnType | 返回值用于指示通信错误。 |
 | 描述 | Rte_Rips_Invoke performs a transformer or cross cluster invocation for clients or trigger sources. |  |
 | 可通过……获得 | Rte_Rips_<PlugIn>_<SwcBswI>.h |  |
 
 
 ### D.1.2.6 Rte_Rips_InvocationHandler
 
-| 服务名称 | <name of the Invocation Handler> |
+| 服务名称 | <调用处理器的名称> |
 | --- | --- |
-| 语法 | void <name of the Invocation Handler> ( void ) |
+| 语法 | void <调用处理器的名称> ( void ) |
 | 服务 ID [hex] | 0xEE |
 | 同步/异步 | 同步 |
 | 可重入性 | Conditional Reentrant |
@@ -8183,7 +8183,7 @@ glyph[triangle]
 | 输入/输出参数 | 无 |
 | 输出参数 | 无 |
 | 返回值 | 无 |
-| 描述 | Performs invocation of server runnables, hard error runnables, ASCR runnables and triggered runnables via a transformer". |
+| 描述 | 经由转换器执行服务器 runnable、硬错误 runnable、ASCR runnable 与被触发 runnable 的调用。 |
 | 可通过……获得 | Rte_Rips_<PlugIn>.h |
 
 
@@ -8198,8 +8198,8 @@ glyph[triangle]
 | 输入参数 | 无 |  |
 | 输入/输出参数 | 无 |  |
 | 输出参数 | 无 |  |
-| 返回值 | <return> | For primitive data types, the Rte_Rips_Prm API returns the parameter value. For composite data types, the Rte_Rips_Prm API returns a reference (in C, a pointer) to the constant parameter. |
-| 描述 | The Rte_Rips_Prm API provides access to a parameter provided by another Software Cluster |  |
+| 返回值 | <return> | 对原始数据类型，Rte_Rips_Prm API 返回参数值。对组合数据类型，Rte_Rips_Prm API 返回对常量参数的引用（C 中为指针）。 |
+| 描述 | Rte_Rips_Prm API 提供对由另一个软件集群提供的参数的访问。 |  |
 | 可通过……获得 | Rte_Rips_<PlugIn>_<SwcBswI>.h |  |
 
 
@@ -8213,9 +8213,9 @@ glyph[triangle]
 | 可重入性 | 可重入 |  |
 | 输入参数 | 无 |  |
 | 输入/输出参数 | 无 |  |
-| 输出参数 | <data> | The OUT parameter <data> pass back the received data. |
-| 输出参数 | transformerError | The OUT parameter transformerError contains the transformer error which occurred during execution of the transformer chain. |
-| 返回值 | Std_ReturnType | The return value is used to indicate communication errors. |
+| 输出参数 | <data> | OUT 参数 <data> 传回接收到的数据。 |
+| 输出参数 | transformerError | OUT 参数 transformerError 包含在转换器链执行期间发生的转换器错误。 |
+| 返回值 | Std_ReturnType | 返回值用于指示通信错误。 |
 | 描述 | Rte_Rips_Read Performs an "explicit" read on a sender-receiver communication data element. |  |
 | 可通过……获得 | Rte_Rips_<PlugIn>_<SwcBswI>.h |  |
 
@@ -8229,10 +8229,10 @@ glyph[triangle]
 | 同步/异步 | 同步 |  |
 | 可重入性 | 可重入 |  |
 | 输入参数 | 无 |  |
-| 输入/输出参数 | <param_1> | The Rte_Rips_ReturnResult API includes zero or more IN/OUT and OUT parameters according SWS_Rte_01111. |
-| 输出参数 | <param_n> | The Rte_Rips_ReturnResult API includes zero or more IN/OUT and OUT parameters according SWS_Rte_01111. |
-| 输出参数 | transformerError | The OUT parameter transformerError contains the transformer error which occurred during execution of the transformer chain. |
-| 返回值 | Std_ReturnType | The return value is used to indicate communication errors |
+| 输入/输出参数 | <param_1> | Rte_Rips_ReturnResult API 依照 SWS_Rte_01111 包含零个或多个 IN/OUT 与 OUT 参数。 |
+| 输出参数 | <param_n> | Rte_Rips_ReturnResult API 依照 SWS_Rte_01111 包含零个或多个 IN/OUT 与 OUT 参数。 |
+| 输出参数 | transformerError | OUT 参数 transformerError 包含在转换器链执行期间发生的转换器错误。 |
+| 返回值 | Std_ReturnType | 返回值用于指示通信错误。 |
 | 描述 | Rte_Rips_ReturnResult get the server results of a performed a transformer or cross cluster invocation for clients. |  |
 | 可通过……获得 | Rte_Rips_<PlugIn>_<SwcBswI>.h |  |
 
@@ -8317,7 +8317,7 @@ glyph[triangle]
 | 输入参数 | 无 |  |
 | 输入/输出参数 | 无 |  |
 | 输出参数 | 无 |  |
-| 返回值 | Rte_Rips_Switch NotificationStatusType | The return value is used indicate the status of the dequeue operation in a mode queue |
+| 返回值 | Rte_Rips_Switch NotificationStatusType | 返回值用于指示模式队列中出队操作的状态。 |
 | 描述 | Rte_Rips_DequeueModeSwitch dequeues a mode switch notification from the mode queue when it is called after the last on-entry ExecutableEntity terminated. |  |
 | 可通过……获得 | Rte_Buffers.h |  |
 
@@ -8343,10 +8343,10 @@ glyph[triangle]
 | 服务 ID [hex] | 0xEB |  |
 | 同步/异步 | 同步 |  |
 | 可重入性 | 可重入 |  |
-| 输入参数 | <data> | The IN parameter <data> pass the received data. |
+| 输入参数 | <data> | IN 参数 <data> 传入接收到的数据。 |
 | 输入/输出参数 | 无 |  |
-| 输出参数 | transformerError | The OUT parameter transformerError contains the transformer error which occurred during execution of the transformer chain. |
-| 返回值 | Std_ReturnType | The return value is used to indicate communication errors. |
+| 输出参数 | transformerError | OUT 参数 transformerError 包含在转换器链执行期间发生的转换器错误。 |
+| 返回值 | Std_ReturnType | 返回值用于指示通信错误。 |
 | 描述 | Rte_Rips_Write Performs an "explicit" write on a sender-receiver communication data element. |  |
 | 可通过……获得 | Rte_Rips_<PlugIn>_<SwcBswI>.h |  |
 
