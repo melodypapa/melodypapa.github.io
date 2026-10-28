@@ -220,19 +220,35 @@ def collect(article: str):
     # PLUS config containers: identifier-titled headings from the 配置规范
     # chapter on (EcuMDriverInitListZero is §9.1.7, not ch.7 — without this
     # its five pre-ch.9 参见 mentions were invisible to the census, fixed
-    # 2026-10-27). The config chapter's first identifier-titled heading is
-    # the module-named top container (EcuM/Gpt/Mcu) — excluded, it is the
-    # module NAME, not a container mention (EcuM §9.1.1). First definition
+    # 2026-10-27). Module-named top containers are excluded — they are the
+    # module NAME, not a container mention (EcuM §9.1.1). The first
+    # identifier-titled config heading covers the single-module layout
+    # (EcuM/Gpt/Mcu); documents with TWO config modules (LIN Interface:
+    # §9.3.1 LinIf + §9.4.1 LinTp, fixed 2026-10-29) need the title itself
+    # checked: a config heading whose title is a ch.7 identifier PREFIX
+    # (`LinTp_` of LinTp_Init) is a module name and never a target, while a
+    # real container (EcuMDriverInitListZero — no ch.7 identifier starts
+    # with `EcuMDriverInitListZero_`) stays linkable. First definition
     # wins, so a ch.7 heading keeps precedence over a same-named config one.
     cfg_start = config_start(lines, headings)
+    api_titles = set(title for (_i, _lvl, num, title, _slug) in headings
+                     if re.match(r"7\.", num) and IDENT.fullmatch(title))
     module_container = next(
         (title for (i, _lvl, _num, title, _slug) in headings
          if cfg_start is not None and i >= cfg_start and IDENT.fullmatch(title)),
         None)
+
+    def is_module_named(title):
+        if title == module_container:
+            return True
+        # a config heading titled like an API namespace (LinIf, LinTp) is
+        # that document's module name, wherever the config chapter puts it
+        return any(t.startswith(title + "_") for t in api_titles)
+
     for (i, lvl, num, title, slug) in headings:
         if lvl == 4:
             section_range[title] = (i, ends[i])
-        if IDENT.fullmatch(title) and title != module_container:
+        if IDENT.fullmatch(title) and not is_module_named(title):
             if (re.match(r"7\.", num) or (cfg_start is not None and i >= cfg_start)) \
                     and title not in defs:
                 defs[title] = slug
@@ -408,6 +424,19 @@ def config_start(lines, headings):
     return None
 
 
+def acronym_span(headings):
+    """(start_line, end_line_exclusive) of the §2 acronym chapter. Term lines
+    define — they never mention — so identifier/error-code scans skip the
+    whole region (2026-10-29: the old bare `**Term**` regex missed term lines
+    with a parenthetical like `**LIN TP**（**LinTp**）` and apply wrapped the
+    parenthetical). None when the article has no §2 chapter."""
+    for idx, (i, lvl, num, title, slug) in enumerate(headings):
+        if lvl == 2 and re.match(r"2\.", num):
+            end = headings[idx + 1][0] if idx + 1 < len(headings) else None
+            return (i, end)
+    return None
+
+
 def add_registry_anchors(lines, entries31):
     """Prefix every §3.1 registry entry line with its invisible #ref-n anchor
     (idempotent — a line already carrying id="ref-n" is left alone)."""
@@ -483,6 +512,7 @@ def census(article: str, self_dir: str = ""):
     unlinked_resolved = []
     resolutions = {}
     modules = {}
+    acro = acronym_span(headings)
     for i, ln in enumerate(lines):
         if ln.startswith("```"):
             fence = not fence
@@ -493,11 +523,16 @@ def census(article: str, self_dir: str = ""):
             continue
         if fence or ln.startswith(("#", "---")) or i < fm_end:
             continue
-        hits = [n for n in defs if re.search(rf"(?<![A-Za-z0-9_]){re.escape(n)}(?![A-Za-z0-9_])", ln)]
-        if hits:
-            id_by_chapter[chapter] = id_by_chapter.get(chapter, 0) + 1
-            for n in hits:
-                id_by_name[n] = id_by_name.get(n, 0) + 1
+        # §2 term lines define — the region is excluded from identifier
+        # mentions (2026-10-29; the old bare-term-line regex missed term
+        # lines carrying a parenthetical)
+        in_acro = acro and acro[0] <= i < (acro[1] if acro[1] else len(lines))
+        if not in_acro:
+            hits = [n for n in defs if re.search(rf"(?<![A-Za-z0-9_]){re.escape(n)}(?![A-Za-z0-9_])", ln)]
+            if hits:
+                id_by_chapter[chapter] = id_by_chapter.get(chapter, 0) + 1
+                for n in hits:
+                    id_by_name[n] = id_by_name.get(n, 0) + 1
         if not ln.lstrip().startswith("**译者注：**"):
             for (_s, _e, num) in chref_spans(ln):
                 if sec_nums.get(num):
@@ -536,8 +571,8 @@ def census(article: str, self_dir: str = ""):
                         unlinked_resolved.append((i + 1, n, ctx))
                     else:
                         unresolved.append((i + 1, n, ctx))
-        if re.match(r"^\*\*[^*]+\*\*\s*$", ln):
-            continue  # §2 acronym term line — a definition, not a mention
+        if in_acro:
+            continue  # §2 region: definitions only — no module mentions either
         for mod, (status, target) in MODULE_LINKS.items():
             # an article never links to itself: drop the module whose target
             # directory IS the article's own directory (EcuM x87 in the EcuM
@@ -597,6 +632,7 @@ def apply_links(article: str, ref_skip=frozenset()):
     entries31 = parse_entries31(article)
     fm_end = front_matter_end(lines)
     stop = config_start(lines, headings)
+    acro = acronym_span(headings)
     names = sorted(defs, key=len, reverse=True)
     changed = 0
     chref_changed = 0
@@ -607,6 +643,10 @@ def apply_links(article: str, ref_skip=frozenset()):
             continue
         if fence or ln.startswith("#") or i < fm_end or (stop is not None and i >= stop):
             continue
+        # §2 term lines are definitions — identifiers there are never linked
+        # (a term line's parenthetical like `**LIN TP**（**LinTp**）` is not a
+        # mention; fixed 2026-10-29)
+        in_acro = acro and acro[0] <= i < (acro[1] if acro[1] else len(lines))
         orig = ln
         # split into existing-link and free segments; substitute only in free
         # segments so re-running never double-wraps a link (idempotency)
@@ -630,6 +670,9 @@ def apply_links(article: str, ref_skip=frozenset()):
             if new_seg != seg:
                 chref_changed += 1
             seg = new_seg
+            if in_acro:
+                out.append(seg)
+                continue
             for n in names:
                 if n not in seg:
                     continue
