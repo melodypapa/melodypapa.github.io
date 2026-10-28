@@ -87,6 +87,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Application ID**
 > 一个应用/**SW-C** 的缩写，标识一条日志和跟踪消息所来自的应用/**SW-C**；由四个 8 位 ASCII 字符组成。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
+**ARP**
+> Address Resolution Protocol —— 地址解析协议。
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
 
 **ASN.1**
 > 抽象语法标记一号（**Abstract Syntax Notation One**）：一种描述数据结构的标准记法，常与 DER 编码规则一起用于证书等密码学数据的编码。
@@ -338,6 +341,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Dlt User**
 > 一个 **Dlt** 用户代表一个生成的 **Dlt** 消息的来源。可能的用户是 **SW-C**、RTE（用于 **VFB** 跟踪）、**DEM** 或 **DET**。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
+**DHCP**
+> Diagnostic Host Configuration Protocol —— 诊断主机配置协议。
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
 
 ## E
 
@@ -387,6 +393,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **External client**
 > 一种控制、监视和存储使用 **Dlt** 模块的 ECU 所提供的日志/跟踪消息的工具。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
+**EID**
+> Entity identifier —— 实体标识符。
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
 
 **i.e.**
 > （拉丁语）id est =（英语）that is，即「也就是说」。
@@ -487,6 +496,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Graph**
 > 控制流图（**Control Flow Graph**）。一组通过**转换**相连的**检查点**，其中至少有一个**检查点**是**初始检查点**。在该**图**的任意两个**检查点**之间都存在一条（通过**转换**的）路径。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+**GID**
+> Group identifier —— 组标识符。
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
 
 ## H
 
@@ -533,6 +545,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ICC**
 > 实现一致性等级（**Implementation Conformance Class**）。AUTOSAR 对基础软件实现合规程度的分级（ICC1–ICC3）：ICC3 要求逐模块符合 AUTOSAR 规范，ICC2 允许项目定义的集群，ICC1 为专有基础软件（对外行为仍须符合 ICC3 模块规范）。
 > 来源：[分层软件架构（Layered Software Architecture）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture · R23-11）
+**ICMP**
+> Internet Control Message Protocol —— 互联网控制消息协议。
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
+**IP**
+> Internet Protocol —— 互联网协议。
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
 
 **ICU**
 > 输入捕获单元（**Input Capture Unit**）
@@ -573,6 +591,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **int**
 > 整数（**Integer**）
 > 来源：[AUTOSAR Platform Types（平台类型）](general/platform_types/index.md)（SWS_PlatformTypes · R23-11）
+**IPv4**
+> Internet Protocol version 4 —— 互联网协议第 4 版。
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
+**IPv6**
+> Internet Protocol version 6 —— 互联网协议第 6 版。
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
 
 **IRQ**
 > 中断请求（**Interrupt Request**）
@@ -1117,6 +1141,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Target time**
 > 目标时间：到达该值时应有某事发生。其行为取决于配置和已启用的功能。
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
+**TCP/IP**
+> 计算机网络中使用的一族通信协议。
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
+**TCP**
+> Transmission Control Protocol —— 传输控制协议。
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
 
 **test interval**
 > **CoreTest** 测试间隔：在配置为构成一个完整内核测试的硬件资源上（后台模式下执行的）所有部分测试的总和。
@@ -1157,6 +1187,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **uC**
 > 微控制器（**Microcontroller**）
 > 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver · R23-11）
+**UDP**
+> User Datagram Protocol —— 用户数据报协议。
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
 
 **UDS**
 > 统一诊断服务（**Unified Diagnostic Services**）。
@@ -1195,6 +1228,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **VERS**
 > Version Number —— 版本号。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
+**VIN**
+> Vehicle Identification Number —— 车辆识别码。
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
 
 ## W
 

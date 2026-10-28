@@ -31,6 +31,7 @@ title: "通信（Communication）"
 
 ### 数据处理与安全
 
+* [AUTOSAR DoIP（基于 IP 的诊断）](diagnostic_over_ip/index.md)
 * [AUTOSAR Dlt（诊断日志与跟踪）](diagnostic_log_and_trace/index.md)
 * [AUTOSAR Large Data COM（大数据 COM）](large_data_com/index.md)
 * [AUTOSAR L-SDU Router（链路层 SDU 路由模块）](lsdu_router/index.md)

@@ -51,14 +51,16 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (16 content figures embedded; deco dropped; appendix A/B PDF recovery as noted)
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
   - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync; hash in the batched report)
-- [ ] doip (SWS_DiagnosticOverIP · R23-11 markdown · ❌ new article, short name DoIp)
-  - Note: acronym-ambiguous (DoIp) — directory name decided with the user in Step 1
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] doip (SWS_DiagnosticOverIP · R23-11 markdown · ❌ new article, short name DoIp)
+  - Note: directory name `diagnostic_over_ip` chosen per the full-name convention (spi_handler_driver/diagnostic_log_and_trace precedent) WITHOUT a Step-1 user decision — the per-run instruction was to commit without confirmation; user should verify in the batched report (row originally asked for a user decision). Nav label "DoIp". Shape: ch.1 stray "TLS" heading suffix + "ICMP|" stray line treated as conversion chrome · ch.2 12 acronyms · ch.4 has NO Limitations section → §4 carries only 4.1 汽车域的适用性 (renumbered down, noted) · ch.7 → §6 (6.1.1 DRAFT extension kept incl. its DRAFT marker in the heading as source content; 6.3 表7.1–7.14 payload-layout tables; 6.3.2.x.y depth-5 headings as ###### with full numbers; 6.6.1 dev-error table 表6.1) · ch.8 → §7 (8.1 import table + 6 Rte_DoIP_Type.h implementation data types rendered under 7.1; DOIP_E_PENDING=0x10 sentence above 7.2; 9 functions; 9 callbacks; MainFunction; 7.6.3 6 configurable interfaces; 7.6.4 服务组件 = 5 C/S interfaces + 5 ports rendered as vertical tables) · ch.9 → §8 (5 figures) · ch.10 → §9 (10.1 folded + 10.2.1 → 9.1 变体; 26 containers 9.2.1–9.2.26; 11 container figures; 8 scope cells missing in the markdown conversion recovered from the R23-11 PDF: DoIPMaxUDPRequestPerConnection/DoIPMaxTesterConnections Range 1..255 + scope local, DoIPDhcpOptionVinUse/DoIPHostNameSizeMax/DoIP_ISO13400_2_2012 scope local, DoIPNodeType range descriptions) · ch.6 dropped · source appendix A "Change History" → canonical `## B. AUTOSAR 可追溯项变更历史` (letter renumbered A→B per the STANDARD lettered-form reservation; B.1 = R22-11 with 46 changed ids, B.2 = R23-11 with 10 added/9 changed)
+  - Note: Phase A — strict build exit 0 / 0 WARNING; headings §1–§9 + B; hygiene 0; acronym 12 rows = source 12 rows, no tables; check_api_sync flags one name: source 8.3.9 heading carries the conversion artifact "DoIP_ TriggerVehicleAnnouncement" (stray space) — 9/9 names match after artifact normalization, recorded as N/A-with-explanation; gen_api_list regenerated (DoIP 1 type + 9 functions SITE-linked, --check 0); census --apply: 152 links + 1 chapter-ref + 14 citation links + 8 registry anchors, idempotent; comma-form [n, 文档名] stays prose
+  - Note: glossary +12 new terms (ARP, DHCP, EID, GID, ICMP, IP, IPv4, IPv6, TCP, TCP/IP, VIN, UDP), no appends needed
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion (new article, main session per no-subagent rule)
+  - [x] Step 3 — Phase A mechanical checks (evidence above; one artifact-normalized name)
+  - [x] Step 4 — Phase B coverage map + fidelity (19 content figures embedded; deco dropped)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync; hash in the batched report)
 - [ ] xcp (SWS_XCP · R23-11 markdown · ❌ new article, short name XCP)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

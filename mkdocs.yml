@@ -126,6 +126,7 @@ nav:
       - "ComXf": autosar/communication/com_based_transformer/index.md
       - "DDS": autosar/communication/data_distribution service/index.md
       - "Dlt": autosar/communication/diagnostic_log_and_trace/index.md
+      - "DoIp": autosar/communication/diagnostic_over_ip/index.md
       - "E2EXf": autosar/communication/e2e_transformer/index.md
       - "Eth": autosar/communication/ethernet_driver/index.md
       - "EthIf": autosar/communication/ethernet_interface/index.md
