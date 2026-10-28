@@ -89,10 +89,12 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 6 — TODO.md row + commit/PR — commit 3562899 (branch feature/group-communication-sync)
 - [ ] e2e_transformer (SWS_E2ETransformer · R23-11 markdown · ⚠️ gaps)
   - Note: missing acronym/constraints/API chapters
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-29 gap analysis — article was legacy (概述/相关的文档/依赖关系/功能规范 flat, API wholly missing, 1,49 lines vs 1,856 src). Real gaps: ch.2 缩略语 (9 terms) wholly missing; §3 legacy pre-R23-11 13-entry registry → R23-11 10 entries, headings 相关的文档→相关文档 + 输入文档→输入文件和相关标准与规范; §4 约束和假设 missing (4.1 限制 + 4.2 汽车域的适用性); §5 +5.1 支持的配置变体; §6 = source ch.7 (7.1 supported RTE functions + 7.2 naming already present in legacy; +7.3 配置 3 stages with 7.3.1-7.3.3, 7.4 generated structure types, 7.5 static initialization (per-profile P01/P02/P04-family/P05/P11/P22/SM init lists), 7.6 runtime init, 7.7 normal operation (7.7.1 in/out-of-place, 7.7.2 protect flow: 7.7.2.1 overview + 7.7.2.2-.11 detail subsections, 7.7.3 check flow: 7.7.3.1-.9, 7.7.4 de-init), 7.8 错误分类 dev 4 rows + runtime 2 + transient/production none + extended per [2]); §7 API wholly missing (8.1 68-row imported types, 8.2 E2EXf_ConfigType + E2EXf_CSTransactionHandleType, 8.3 5 functions, 8.4/8.5 one-sentence, 8.6 期望接口 66 mandatory + optional/configurable None); ch.9 → §8 时序图 10 figures; ch.10 → §9 配置规范 (5-requirement statement); appendix A droppable; ## B 变更历史 (B.1 empty, B.2 added none/changed 12/deleted 8 in fences); blog-era PNGs (2022-02-03-*.png) replaced by source figures 7-1..7-26 + 9-1..9-10
+  - Note: 2026-10-29 completion run — Phase A: strict build exit 0, 0 WARNING, no e2e_transformer INFO; heading audit ✓; forbidden-variant sweep 0 hits; hygiene ✓; acronym 9 term lines = 9 source rows ✓; check_api_sync OK (2 types/5 functions/5 说明); imported types verified cell-by-cell vs source (68 rows — fixed 2 drift rows E2E_P11DataIDMode + Std_* tail block); gen_api_list --check up to date; link_candidates --apply: 32 lines (24 chapter-ref + 6 citation), idempotent; truncated source cells marked 「源文档此处截断」; glossary extension skipped (batch-level pending item). Steps 5/6 per user instruction: commit first, combined confirmation after
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] data_distribution (SWS_DataDistributionService · R23-11 markdown · ⚠️ missing API chapter)
