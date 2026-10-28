@@ -400,6 +400,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **FOTA**
 > 固件远程升级（**Firmware Over The Air**），通过无线通信进行固件远程更新。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
+> 来源：[固件远程升级指南（FOTA）](memory/firmware_over_the_air/index.md)（AUTOSAR_CP_EXP_FirmwareOverTheAir · R23-11）
 
 **Functionality**
 > 功能：涵盖系统用户可见和用户不可见的功能方面（见 [2]）。在 **FiM** 上下文中，一个功能可以由一个或多个可运行实体的全部或部分内容、以同一组许可/禁止条件构成。
