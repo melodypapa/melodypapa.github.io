@@ -106,6 +106,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **BSW**
 > 基础软件（**Basic Software**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+> 来源：[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping · R23-11）
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
 
@@ -484,6 +485,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ISR**
 > 中断服务程序（**Interrupt Service Routine**）
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
+> 来源：[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping · R23-11）
 
 **IUMPR**
 > 在使用中的监控性能比（**In-Use-Monitor Performance Ratio**）。
@@ -546,6 +548,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 
 ## M
+
+**MAKW**
+> 内存分配关键字（**Memory Allocation Key Word**）
+> 来源：[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping · R23-11）
 
 **MCAL**
 > 微机抽象层（**Microcomputer Abstraction Layer**）
@@ -626,6 +632,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **NOP, nop**
 > 空操作（**Null Operation**）
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
+
+**NVRAM**
+> 非易失性 RAM（**Non-Volatile RAM**）
+> 来源：[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping · R23-11）
 
 **OSEK/VDX**
 > 汽车电子开放系统及其接口（**Offene Systeme und deren Schnittstellen fuer die Elektronik im Kraftfahrzeug**）
