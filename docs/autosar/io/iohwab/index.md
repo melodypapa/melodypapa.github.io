@@ -205,11 +205,8 @@ release: R23-11
 <a id="ref-22"></a>[22] Specification of OCU Driver
 > AUTOSAR_SWS_OCUDriver.doc
 
-### 3.2. 相关标准和规范
 
-无
-
-### 3.3. 相关规范
+### 3.2. 相关规范
 
 **AUTOSAR**标准提供了基础软件模块的通用规范 [\[21\]](#ref-21))，此文档也适用于**IO** 硬件抽象模块。因此规范[\[21\]](#ref-21))也应被视为**IO**硬件抽象的附加和必需的规范。
 
@@ -972,9 +969,6 @@ void IoHwAb_EnterPowerState<#Mode> ( void )
 | Det_ReportError | Det.h | 报告开发错误的服务。 |
 | EcuM_SetWakeupEvent | EcuM.h | 设置唤醒事件。 |
 
-#### 7.8.3. 作业结束通知
-
-无
 
 ## 8. 时序图
 

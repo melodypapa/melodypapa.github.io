@@ -118,10 +118,7 @@ AUTOSAR 提供了基础软件模块通用规范（SWS BSW General）[\[3\]](#ref
 
 ## 4. 约束和假设
 
-### 4.1. 限制
-不适用
-
-### 4.2. 汽车域的适用性
+### 4.1. 汽车域的适用性
 
 当信息安全功能被使能后，加密驱动程序模块可应用于所有域的应用程序。
 
@@ -166,25 +163,25 @@ AUTOSAR 提供了基础软件模块通用规范（SWS BSW General）[\[3\]](#ref
 
 加密驱动程序包含一个或多个加密驱动程序对象，每个对象都支持一种或多种加密原语服务。算法系列（**family**）和模式（**mode**）提供了有关如何操作加密原语服务的详细信息。例如：加密原语服务 **Encrypt** 支持系列 **AES** 和模式 **CBC**。需要通过设置次级系列值（**secondary family values**）来进一步改进。
 
-加密驱动程序对象的 [**CryptoPrimitive**](#9112-cryptoprimitive) 配置定义了加密原语服务的可能选项。从上面的示例中，驱动程序可以支持 **AES** 算法的 **CBC** 或 **ECB** 模式。有时这被称为特定加密原语服务的驱动程序的能力（capabilities），所以如果适用于加密服务原语，则 [**CryptoPrimitive**](#9112-cryptoprimitive) 可以配置多个算法系列和模式值。
+加密驱动程序对象的 [**CryptoPrimitive**](#8112-cryptoprimitive) 配置定义了加密原语服务的可能选项。从上面的示例中，驱动程序可以支持 **AES** 算法的 **CBC** 或 **ECB** 模式。有时这被称为特定加密原语服务的驱动程序的能力（capabilities），所以如果适用于加密服务原语，则 [**CryptoPrimitive**](#8112-cryptoprimitive) 可以配置多个算法系列和模式值。
 
-**CSM** 的作业配置包含对 **CsmPrimitive** 的引用。此 **CsmPrimitive** 的相应 **Config** 部分还定义了系列和模式，但其重复数设定为 1，以唯一标识作业应使用何种系列和模式组合。至少，关联的加密驱动程序对象必须包含支持配置的 [**CryptoPrimitive**](#9112-cryptoprimitive)。 这应在配置级别确保并至少在运行时检查。
+**CSM** 的作业配置包含对 **CsmPrimitive** 的引用。此 **CsmPrimitive** 的相应 **Config** 部分还定义了系列和模式，但其重复数设定为 1，以唯一标识作业应使用何种系列和模式组合。至少，关联的加密驱动程序对象必须包含支持配置的 [**CryptoPrimitive**](#8112-cryptoprimitive)。 这应在配置级别确保并至少在运行时检查。
 
-为了支持尚未在规范中建模的加密服务的新功能（在系列和模式的各种枚举中），可以在加密驱动程序中配置自定义特定算法系列和模式。[**CryptoPrimitive**](#9112-cryptoprimitive) 引用这些自定义值以指示加密原语服务、（自定义）系列和（自定义）模式的组合是可能的。**CSM** 作业配置需要引用这些自定义配置项。
+为了支持尚未在规范中建模的加密服务的新功能（在系列和模式的各种枚举中），可以在加密驱动程序中配置自定义特定算法系列和模式。[**CryptoPrimitive**](#8112-cryptoprimitive) 引用这些自定义值以指示加密原语服务、（自定义）系列和（自定义）模式的组合是可能的。**CSM** 作业配置需要引用这些自定义配置项。
 
-如果加密驱动程序支持的算法家族和算法模式超出了预定义的范围，则应通过容器 [CryptoPrimitiveAlgorithmFamilyCustom](#9113-cryptoprimitivealgorithmfamilycustom) 和 [CryptoPrimitiveAlgorithmModeCustom](#9114-cryptoprimitivealgorithmmodecustom) 定义自定义的算法家族取值和算法模式取值。
+如果加密驱动程序支持的算法家族和算法模式超出了预定义的范围，则应通过容器 [CryptoPrimitiveAlgorithmFamilyCustom](#8113-cryptoprimitivealgorithmfamilycustom) 和 [CryptoPrimitiveAlgorithmModeCustom](#8114-cryptoprimitivealgorithmmodecustom) 定义自定义的算法家族取值和算法模式取值。
 
-[CryptoPrimitiveAlgorithmModeCustom](#9114-cryptoprimitivealgorithmmodecustom)/CryptoPrimitiveAlgorithmModeCustomId 以及 [CryptoPrimitiveAlgorithmFamilyCustom](#9113-cryptoprimitivealgorithmfamilycustom)/CryptoPrimitiveAlgorithmFamilyCustomId 应使用 128..254 的保留取值范围。
+[CryptoPrimitiveAlgorithmModeCustom](#8114-cryptoprimitivealgorithmmodecustom)/CryptoPrimitiveAlgorithmModeCustomId 以及 [CryptoPrimitiveAlgorithmFamilyCustom](#8113-cryptoprimitivealgorithmfamilycustom)/CryptoPrimitiveAlgorithmFamilyCustomId 应使用 128..254 的保留取值范围。
 
-一个 [CryptoPrimitive](#9112-cryptoprimitive) 应定义一个 CryptoPrimitiveService，并且只要多个项的所有排列组合均可被支持，就可以为 CryptoPrimitiveAlgorithmFamily、CryptoPrimitiveAlgorithmMode、CryptoPrimitiveAlgorithmSecondaryFamily、CryptoPrimitiveAlgorithmFamilyCustomRef 和 CryptoPrimitiveAlgorithmModeCustomRef 各定义一个或多个项。否则，必须为该 CryptoPrimitiveService 定义更多的 [CryptoPrimitive](#9112-cryptoprimitive)。
+一个 [CryptoPrimitive](#8112-cryptoprimitive) 应定义一个 CryptoPrimitiveService，并且只要多个项的所有排列组合均可被支持，就可以为 CryptoPrimitiveAlgorithmFamily、CryptoPrimitiveAlgorithmMode、CryptoPrimitiveAlgorithmSecondaryFamily、CryptoPrimitiveAlgorithmFamilyCustomRef 和 CryptoPrimitiveAlgorithmModeCustomRef 各定义一个或多个项。否则，必须为该 CryptoPrimitiveService 定义更多的 [CryptoPrimitive](#8112-cryptoprimitive)。
 
 **示例：**
 
-加密原语服务 **ENCRYPT** 可以按所有排列组合支持 **AES** 和 **3DES** 与模式 **ECB** 和 **CBC** 的组合（AES-CBC、AES-ECB、3DES-CBC 和 3DES-ECB）。但是，同时支持 **AES** 和 **RSA** 系列项以及 **CBC** 模式的加密原语服务 **ENCRYPT** 是无效的，因为 **RSA**-CBC 并不能被合理地支持。在这种情况下，必须为 **RSA** 定义一个新的 [CryptoPrimitive](#9112-cryptoprimitive)。
+加密原语服务 **ENCRYPT** 可以按所有排列组合支持 **AES** 和 **3DES** 与模式 **ECB** 和 **CBC** 的组合（AES-CBC、AES-ECB、3DES-CBC 和 3DES-ECB）。但是，同时支持 **AES** 和 **RSA** 系列项以及 **CBC** 模式的加密原语服务 **ENCRYPT** 是无效的，因为 **RSA**-CBC 并不能被合理地支持。在这种情况下，必须为 **RSA** 定义一个新的 [CryptoPrimitive](#8112-cryptoprimitive)。
 
 #### 6.1.2. 加密能力
 
-加密驱动程序的能力（capabilities）可以分为两大主题：密钥存储和所支持的算法。所支持的算法可以通过创建新的 [CryptoPrimitive](#9112-cryptoprimitive) 容器（例如 MacGenerate）来预配置。在该容器中，供应商可以指定加密驱动程序例如仅能执行 **CMAC**。在这种情况下，一个配置示例如下：
+加密驱动程序的能力（capabilities）可以分为两大主题：密钥存储和所支持的算法。所支持的算法可以通过创建新的 [CryptoPrimitive](#8112-cryptoprimitive) 容器（例如 MacGenerate）来预配置。在该容器中，供应商可以指定加密驱动程序例如仅能执行 **CMAC**。在这种情况下，一个配置示例如下：
 
 ```
 CryptoPrimitiveAlgorithmFamily = CRYPTO_ALGOFAM_AES
@@ -199,7 +196,7 @@ CryptoPrimitiveService = MacGenerate
 
 #### 6.1.3. 可用密钥
 
-加密驱动程序所提供的密钥也可以被预配置。一个 [CryptoKey](#916-cryptokey) 容器引用特定的 [CryptoKeyType](#9110-cryptokeytype)。[CryptoKeyType](#9110-cryptokeytype) 提供了这样的信息：引用该 [CryptoKeyType](#9110-cryptokeytype) 的 [CryptoKey](#916-cryptokey) 中包含哪些密钥元素。
+加密驱动程序所提供的密钥也可以被预配置。一个 [CryptoKey](#816-cryptokey) 容器引用特定的 [CryptoKeyType](#8110-cryptokeytype)。[CryptoKeyType](#8110-cryptokeytype) 提供了这样的信息：引用该 [CryptoKeyType](#8110-cryptokeytype) 的 [CryptoKey](#816-cryptokey) 中包含哪些密钥元素。
 
 供应商还预配置密钥元素，以定义：
 
@@ -244,9 +241,9 @@ CryptoPrimitiveService = MacGenerate
 - CryptoKeyElement_KeyExchange_PrivKey
 - CryptoKeyElement_KeyExchange_SharedValue
 
-当需要使用类型为 CryptoKeyType_KeyExchange_Ed25519 的 [CryptoKey](#916-cryptokey) 执行密钥交换时，加密驱动程序根据存储在密钥元素 CRYPTO_KE_KEYEXCHANGE_ALGORITHM 中的值即可得知：应使用 **Ed25519** 作为底层加密原语。
+当需要使用类型为 CryptoKeyType_KeyExchange_Ed25519 的 [CryptoKey](#816-cryptokey) 执行密钥交换时，加密驱动程序根据存储在密钥元素 CRYPTO_KE_KEYEXCHANGE_ALGORITHM 中的值即可得知：应使用 **Ed25519** 作为底层加密原语。
 
-如果一个密钥要用于不止一个原语，例如 KeyExchange 和 **AES**-Encrypt-CBC，则可以用所需的元素对 [CryptoKeyType](#9110-cryptokeytype) 进行扩展：
+如果一个密钥要用于不止一个原语，例如 KeyExchange 和 **AES**-Encrypt-CBC，则可以用所需的元素对 [CryptoKeyType](#8110-cryptokeytype) 进行扩展：
 
 **CryptoKeyType_KeyExchange_Cipher_combined**
 
@@ -259,7 +256,7 @@ CryptoPrimitiveService = MacGenerate
     - ID = 1
 - CryptoKeyElement_Cipher_IV
 
-请注意，CryptoKeyElement_KeyExchange_SharedValue 的 id 被设置为 1。当使用 [CryptoKeyType](#9110-cryptokeytype) 为 CryptoKeyType_KeyExchange_Cipher_combined 的密钥调用加密（encrypt）服务时，密钥交换的共享值会自动用作加密密钥。
+请注意，CryptoKeyElement_KeyExchange_SharedValue 的 id 被设置为 1。当使用 [CryptoKeyType](#8110-cryptokeytype) 为 CryptoKeyType_KeyExchange_Cipher_combined 的密钥调用加密（encrypt）服务时，密钥交换的共享值会自动用作加密密钥。
 
 ### 6.2. 一般行为
 
@@ -373,7 +370,7 @@ CryptoPrimitiveService = MacGenerate
 
 密钥元素的示例包括：密钥材料本身、初始化向量、用于随机数生成的种子状态，或 **SHE** 标准的证明。
 
-每个密钥元素都定义有用于读访问或写访问的访问权限。访问权限本身由在 [CryptoKeyElement](#918-cryptokeyelement) 配置中带有指定取值的枚举来定义。这些枚举的整数值经过精心选择，使得为密钥元素分配某个访问权限时，也会衍生出更多的访问权限。取值越低，访问权限越高。这样便可以通过数值轻松地将所分配的取值与所需的访问权限进行比较。
+每个密钥元素都定义有用于读访问或写访问的访问权限。访问权限本身由在 [CryptoKeyElement](#818-cryptokeyelement) 配置中带有指定取值的枚举来定义。这些枚举的整数值经过精心选择，使得为密钥元素分配某个访问权限时，也会衍生出更多的访问权限。取值越低，访问权限越高。这样便可以通过数值轻松地将所分配的取值与所需的访问权限进行比较。
 
 **示例：**如果某个密钥元素具有访问权限 CRYPTO_RA_INTERNAL_COPY=2，则该权限也适用于 CRYPTO_RA_ENCRYPTED=1 和 CRYPTO_RA_ALLOWED=0，因为这两个权限所分配的枚举取值都更低，因此在访问权限的等级排序中处于更低的位置。
 
@@ -417,7 +414,7 @@ CryptoPrimitiveService = MacGenerate
 
 一个示例是：通过密钥管理接口生成一个密钥，随后在诸如 MacGenerate 之类的原语中使用同一密钥。
 
-密钥元素可能不会被完整写入。在某些情况下，存储在密钥元素中的数据大小可以是可变的，例如非对称密钥元素。加密驱动程序应存储实际写入的数据大小，以供内部使用以及通过 [Crypto_KeyElementGet](#73421-crypto_keyelementget) 导出该元素之用。密钥元素是否允许不被完整地读取或写入，可以通过 [CryptoKeyElement](#918-cryptokeyelement) 容器中的参数 CryptoKeyElementAllowPartialAccess 进行配置。
+密钥元素可能不会被完整写入。在某些情况下，存储在密钥元素中的数据大小可以是可变的，例如非对称密钥元素。加密驱动程序应存储实际写入的数据大小，以供内部使用以及通过 [Crypto_KeyElementGet](#73421-crypto_keyelementget) 导出该元素之用。密钥元素是否允许不被完整地读取或写入，可以通过 [CryptoKeyElement](#818-cryptokeyelement) 容器中的参数 CryptoKeyElementAllowPartialAccess 进行配置。
 
 #### 6.2.5. 密钥格式
 
@@ -467,7 +464,7 @@ KeyMaterial ::= OCTET STRING
 
 **AlgorithmIdentifier**：通过其对象标识符（**OID**）标识格式的值。
 
-带标识的公钥材料按照 **RFC5280** 第 [4.1](#41-限制) 节的规定。具有格式说明符 CRYPTO_KE_FORMAT_BIN_IDENT_PUBLICKEY 的密钥材料需要遵循以下格式规范：
+带标识的公钥材料按照 **RFC5280** 第 4.1 节的规定。具有格式说明符 CRYPTO_KE_FORMAT_BIN_IDENT_PUBLICKEY 的密钥材料需要遵循以下格式规范：
 
 ```
 SubjectPublicKeyInfo ::= SEQUENCE
@@ -533,7 +530,7 @@ RSAPublicKey ::= SEQUENCE {
 
 对于 CRYPTO_KE_FORMAT_BIN_IDENT_PUBLICKEY 格式的 **RSA** 公钥，「subjectPublicKey BIT STRING」被定义为「RSAPublicKey」。
 
-**解释：**考虑到 **RFC5280** 第 [4.1](#41-限制) 节，**SubjectPublicKeyInfo** 直接采用上述定义。因此，CRYPTO_KE_FORMAT_BIN_IDENT_PUBLICKEY 的密钥类型对应 **SubjectPublicKeyInfo**，而 CRYPTO_KE_FORMAT_BIN_RSA_PUBLICKEY 对应该定义中的 subjectPublicKey。
+**解释：**考虑到 **RFC5280** 第 4.1 节，**SubjectPublicKeyInfo** 直接采用上述定义。因此，CRYPTO_KE_FORMAT_BIN_IDENT_PUBLICKEY 的密钥类型对应 **SubjectPublicKeyInfo**，而 CRYPTO_KE_FORMAT_BIN_RSA_PUBLICKEY 对应该定义中的 subjectPublicKey。
 
 **RSA** 密钥的算法标识符的值应为 1.2.840.113549.1.1.1。这对应于 **ASN.1** 编码的 OID 值「2A 86 48 86 F7 0D 01 01 01」。每当需要 **RSA** 的 **AlgorithmIdentifier** 时，都应提供此 OID。换句话说，当密钥具有 CRYPTO_KE_FORMAT_BIN_IDENT_PRIVATEKEY_PKCS8 或 CRYPTO_KE_FORMAT_BIN_IDENT_PUBLICKEY 格式并用于 **RSA** 时，**AlgorithmIdentifier** 必须具有该值。
 
@@ -605,15 +602,15 @@ ED25519 私钥 = 种子 K(32) | X(32)。
 
 **理由：**特别是当密钥的各密钥元素与同一密钥的一个或多个其他密钥元素存在相互依赖关系时，在设置密钥元素时立即写入存在密钥本身不一致的风险。此外，通过 KEYSETVALID 显式发起该操作使加密驱动程序能够检查所有元素的一致性和相互依赖性，如果检查失败则拒绝存储。另外，更新一个密钥的多个元素将导致对 **NVM** 的一次写操作，而不是对每个密钥元素各写多次，这可以减少对 **NVM** 的写操作总数。
 
-在 KEYSETVALID 操作时，加密驱动程序将通过调用 NvM_SetRamBlockStatus() 来发起向 **NVM** 写入数据块。当配置 [**CryptoNvBlock**](#9116-cryptonvblock)/**CryptoNvBlockProcessing** 设置为 DEFERRED 时，这是典型操作。如果 [CryptoNvBlock](#9116-cryptonvblock)/CryptoNvBlockProcessing 设置为 IMMEDIATE，则加密驱动程序除了调用 NvM_SetRamBlockStatus() 之外，还会在其后立即调用 NvM_WriteBlock()。这将触发 **NV RAM** 块立即写入非易失性存储器。
+在 KEYSETVALID 操作时，加密驱动程序将通过调用 NvM_SetRamBlockStatus() 来发起向 **NVM** 写入数据块。当配置 [**CryptoNvBlock**](#8116-cryptonvblock)/**CryptoNvBlockProcessing** 设置为 DEFERRED 时，这是典型操作。如果 [CryptoNvBlock](#8116-cryptonvblock)/CryptoNvBlockProcessing 设置为 IMMEDIATE，则加密驱动程序除了调用 NvM_SetRamBlockStatus() 之外，还会在其后立即调用 NvM_WriteBlock()。这将触发 **NV RAM** 块立即写入非易失性存储器。
 
 **注意：**为了正常运行，建议将 **NVM** 的参数 NvMBlockUseSetRamBlockStatus 和 NvMSelectBlockForReadAll 设置为 TRUE。如果 CryptoNvBlockProcessing 设置为 DEFERRED，则 NvMSelectBlockForWriteAll 应设置为 TRUE。
 
-如果对 **NVM** 服务的调用（NvM_SetRamBlockStatus() 或 NvM_WriteBlock()）返回 E_NOT_OK，或者回调函数 Crypto_&lt;vi&gt;_&lt;ai&gt;_NvBlock_Callback_&lt;NvBlock&gt;（参见第[7.4](#74-回调通知)章）通过 Nvm_RequestResultType 指示块写操作已失败，则应向 **DET** 报告运行时错误 [CRYPTO_E_RE_NVM_ACCESS_FAILED](#632-运行时错误)。此外，应在下一次执行 [Crypto_MainFunction](#751-crypto_mainfunction) 时再次请求该服务调用。重试次数可以通过参数 [**CryptoNvBlock**](#9116-cryptonvblock)/**CryptoNvBlockFailedRetries** 进行限制。
+如果对 **NVM** 服务的调用（NvM_SetRamBlockStatus() 或 NvM_WriteBlock()）返回 E_NOT_OK，或者回调函数 Crypto_&lt;vi&gt;_&lt;ai&gt;_NvBlock_Callback_&lt;NvBlock&gt;（参见第[7.4](#74-回调通知)章）通过 Nvm_RequestResultType 指示块写操作已失败，则应向 **DET** 报告运行时错误 [CRYPTO_E_RE_NVM_ACCESS_FAILED](#632-运行时错误)。此外，应在下一次执行 [Crypto_MainFunction](#751-crypto_mainfunction) 时再次请求该服务调用。重试次数可以通过参数 [**CryptoNvBlock**](#8116-cryptonvblock)/**CryptoNvBlockFailedRetries** 进行限制。
 
 如果一个密钥当前正在 **NV RAM** 块中更新且尚未由 **NVM** 写入，则应通过 [Crypto_KeyGetStatus](#73431-crypto_keygetstatus) 接口在密钥状态中以 CRYPTO_KEYSTATUS_UPDATE_IN_PROGRESS 反映该情况。
 
-对于每个已配置的 [**CryptoNvBlock**](#9116-cryptonvblock)，加密驱动程序应提供一组单独的 Crypto_&lt;vi&gt;_&lt;ai&gt;_NvBlock_xxx_&lt;NvBlock&gt;() 函数（xxx 指 Init、ReadFrom、WriteTo 和 Callback）（参见第[7.4](#74-回调通知)章）。[**CryptoNvBlock**](#9116-cryptonvblock) 容器的短名称替换标记 &lt;NvBlock&gt;。标记 &lt;vi&gt; 和 &lt;ai&gt; 按相应规定替换。这些函数应被设置为 **NvmBlockDescriptor** 相应字段中的回调。
+对于每个已配置的 [**CryptoNvBlock**](#8116-cryptonvblock)，加密驱动程序应提供一组单独的 Crypto_&lt;vi&gt;_&lt;ai&gt;_NvBlock_xxx_&lt;NvBlock&gt;() 函数（xxx 指 Init、ReadFrom、WriteTo 和 Callback）（参见第[7.4](#74-回调通知)章）。[**CryptoNvBlock**](#8116-cryptonvblock) 容器的短名称替换标记 &lt;NvBlock&gt;。标记 &lt;vi&gt; 和 &lt;ai&gt; 按相应规定替换。这些函数应被设置为 **NvmBlockDescriptor** 相应字段中的回调。
 
 ##### 6.2.6.2. 从 NVM 读取密钥
 
@@ -942,7 +939,7 @@ Std_ReturnType Crypto_ProcessJob ( uint32 objectId, Crypto_JobType* job )
 
 如果处理服务请求需要长度信息（无论是变量还是指针），但所指示的长度值为零，且**加密驱动程序**的开发错误检测已启用，则 **Crypto_ProcessJob** 函数应向 **DET** 报告 [CRYPTO_E_PARAM_VALUE](#631-开发错误) 并返回 E_NOT_OK。
 
-如果 job->jobPrimitiveInputOutput->mode 被设置为 CRYPTO_OPERATIONMODE_SAVE_CONTEXT 或 CRYPTO_OPERATIONMODE_RESTORE_CONTEXT，**加密驱动程序**应检查 [CryptoPrimitive](#9112-cryptoprimitive)/CryptoPrimitiveSupportContext 是否被设置为 TRUE。如果不是，函数应返回 E_NOT_OK。
+如果 job->jobPrimitiveInputOutput->mode 被设置为 CRYPTO_OPERATIONMODE_SAVE_CONTEXT 或 CRYPTO_OPERATIONMODE_RESTORE_CONTEXT，**加密驱动程序**应检查 [CryptoPrimitive](#8112-cryptoprimitive)/CryptoPrimitiveSupportContext 是否被设置为 TRUE。如果不是，函数应返回 E_NOT_OK。
 
 如果在调用**加密驱动程序**时 job->jobPrimitiveInputOutput->mode 被设置为 CRYPTO_OPERATIONMODE_SAVE_CONTEXT，则首先应检查通过 job->outputLengthPtr 提供的 job->outputPtr 的长度，确认是否能够存储所有与上下文相关的数据。如果不能，函数应返回 E_NOT_OK。
 
@@ -1067,7 +1064,7 @@ Std_ReturnType Crypto_CancelJob ( uint32 objectId, Crypto_JobType* job )
 Std_ReturnType Crypto_KeyElementSet ( uint32 cryptoKeyId, uint32 keyElementId, const uint8* keyPtr, uint32 keyLength )
 ```
 
-仅当 [CryptoKeyElement](#918-cryptokeyelement)/CryptoKeyElementWriteAccess 设置为 CRYPTO_WA_ALLOWED 或 CRYPTO_WA_ENCRYPTED 时，加密驱动程序才应执行此操作。
+仅当 [CryptoKeyElement](#818-cryptokeyelement)/CryptoKeyElementWriteAccess 设置为 CRYPTO_WA_ALLOWED 或 CRYPTO_WA_ENCRYPTED 时，加密驱动程序才应执行此操作。
 
 **注意：**如果密钥元素引用的是 **SHE** 密钥，建议将 CryptoKeyElementWriteAccess 设置为 CRYPTO_WA_ENCRYPTED。密钥本身必须以 M1M2M3 格式的 **SHE** 密钥形式提供。
 
@@ -1121,7 +1118,7 @@ Std_ReturnType Crypto_KeySetInvalid ( uint32 cryptoKeyId )
 Std_ReturnType Crypto_KeyElementGet ( uint32 cryptoKeyId, uint32 keyElementId, uint8* resultPtr, uint32* resultLengthPtr )
 ```
 
-仅当 [CryptoKeyElement](#918-cryptokeyelement)/CryptoKeyElementReadAccess 设置为 CRYPTO_RA_ALLOWED 或 CRYPTO_RA_ENCRYPTED 时，加密驱动程序才应执行此操作。
+仅当 [CryptoKeyElement](#818-cryptokeyelement)/CryptoKeyElementReadAccess 设置为 CRYPTO_RA_ALLOWED 或 CRYPTO_RA_ENCRYPTED 时，加密驱动程序才应执行此操作。
 
 **注意：**无法从 **SHE** 硬件中读取密钥，除非它是 **SHE** RAM 密钥（RAM-Key）。在这种情况下，读取该 **SHE** 密钥将得到 M1M2M3。此时应将密钥元素设置为 CRYPTO_RA_ENCRYPTED。
 
@@ -1349,7 +1346,7 @@ Std_ReturnType Crypto_CustomSync ( uint32 dispatchId, uint32 keyId, uint32 keyEl
 
 #### 7.4.1. Crypto_NvBlock_Init_&lt;NvBlock&gt;
 
-**说明**: 此函数将由**NVM**调用。加密驱动程序的任务是初始化 **NVRAM** 块。生成的函数名应设置为与 NvmBlockDescriptor 关联的容器：`{[CryptoNvBlock](#9116-cryptonvblock)/CryptoNvBlockDescriptorRef}/NvmInitBlockCallback}/NvmInitBlockCallbackFnc`。可通过**Crypto_cfg.h**获得。本回调函数为同步调用，不可重入。参数 initBlockRequest（in）：请求类型。返回值：Std_ReturnType，E_OK：回调函数已成功处理；其他任何值：回调函数处理不成功。
+**说明**: 此函数将由**NVM**调用。加密驱动程序的任务是初始化 **NVRAM** 块。生成的函数名应设置为与 NvmBlockDescriptor 关联的容器：`{[CryptoNvBlock](#8116-cryptonvblock)/CryptoNvBlockDescriptorRef}/NvmInitBlockCallback}/NvmInitBlockCallbackFnc`。可通过**Crypto_cfg.h**获得。本回调函数为同步调用，不可重入。参数 initBlockRequest（in）：请求类型。返回值：Std_ReturnType，E_OK：回调函数已成功处理；其他任何值：回调函数处理不成功。
 
 ```C
 Std_ReturnType Crypto_<vi>_<ai>_NvBlock_Init_<NvBlock> ( NvM_InitBlockRequestType initBlockRequest )
@@ -1357,7 +1354,7 @@ Std_ReturnType Crypto_<vi>_<ai>_NvBlock_Init_<NvBlock> ( NvM_InitBlockRequestTyp
 
 #### 7.4.2. Crypto_NvBlock_ReadFrom_&lt;NvBlock&gt;
 
-**说明**: 此函数由**NVM**调用，让加密驱动程序将密钥数据从 **NVM** RAM 块的镜像复制到加密驱动程序的内部 RAM 缓冲区中。生成的函数名应设置为与 NvmBlockDescriptor 关联的容器：`{[CryptoNvBlock](#9116-cryptonvblock)/{CryptoNvBlockDescriptorRef} / NvMReadRamBlockFromNvCallback`。可通过**Crypto_cfg.h**获得。本回调函数为同步调用，不可重入。参数 NvmBuffer（in）：保存可从中读取数据的缓冲区的地址。返回值：Std_ReturnType，E_OK：回调函数已成功处理；其他任何值：回调函数处理不成功。
+**说明**: 此函数由**NVM**调用，让加密驱动程序将密钥数据从 **NVM** RAM 块的镜像复制到加密驱动程序的内部 RAM 缓冲区中。生成的函数名应设置为与 NvmBlockDescriptor 关联的容器：`{[CryptoNvBlock](#8116-cryptonvblock)/{CryptoNvBlockDescriptorRef} / NvMReadRamBlockFromNvCallback`。可通过**Crypto_cfg.h**获得。本回调函数为同步调用，不可重入。参数 NvmBuffer（in）：保存可从中读取数据的缓冲区的地址。返回值：Std_ReturnType，E_OK：回调函数已成功处理；其他任何值：回调函数处理不成功。
 
 ```C
 Std_ReturnType Crypto_<vi>_<ai>_NvBlock_ReadFrom_<NvBlock> ( const void* NvmBuffer )
@@ -1365,7 +1362,7 @@ Std_ReturnType Crypto_<vi>_<ai>_NvBlock_ReadFrom_<NvBlock> ( const void* NvmBuff
 
 #### 7.4.3. Crypto_NvBlock_WriteTo_&lt;NvBlock&gt;
 
-**说明**: 此函数由**NVM**调用，让加密驱动程序在数据写入 **NVM** 之前不久，将内部密钥元素数据复制到 **NVM** RAM 块的镜像中。生成的函数名应设置为与 NvmBlockDescriptor 关联的容器：`{[CryptoNvBlock](#9116-cryptonvblock)/{CryptoNvBlockDescriptorRef} / NvMWriteRamBlockToNvCallback`。可通过**Crypto_cfg.h**获得。本回调函数为同步调用，不可重入。无输入参数。参数 NvmBuffer（out）：保存数据应写入到的缓冲区的地址。返回值：Std_ReturnType，E_OK：回调函数已成功处理；其他任何值：回调函数处理不成功。
+**说明**: 此函数由**NVM**调用，让加密驱动程序在数据写入 **NVM** 之前不久，将内部密钥元素数据复制到 **NVM** RAM 块的镜像中。生成的函数名应设置为与 NvmBlockDescriptor 关联的容器：`{[CryptoNvBlock](#8116-cryptonvblock)/{CryptoNvBlockDescriptorRef} / NvMWriteRamBlockToNvCallback`。可通过**Crypto_cfg.h**获得。本回调函数为同步调用，不可重入。无输入参数。参数 NvmBuffer（out）：保存数据应写入到的缓冲区的地址。返回值：Std_ReturnType，E_OK：回调函数已成功处理；其他任何值：回调函数处理不成功。
 
 ```C
 Std_ReturnType Crypto_<vi>_<ai>_NvBlock_WriteTo_<NvBlock> ( void* NvmBuffer )
@@ -1373,7 +1370,7 @@ Std_ReturnType Crypto_<vi>_<ai>_NvBlock_WriteTo_<NvBlock> ( void* NvmBuffer )
 
 #### 7.4.4. Crypto_NvBlock_Callback_&lt;NvBlock&gt;
 
-**说明**: 此函数由**NVM**调用，用于通知加密驱动程序一个异步单块请求已经完成。生成的函数名应设置为与 NvmBlockDescriptor 关联的容器：`{[CryptoNvBlock](#9116-cryptonvblock)/{CryptoNvBlockDescriptorRef} /NvmSingleBlockCallback}/NvmSingleBlockCallbackFnc`。可通过**Crypto_cfg.h**获得。本回调函数为同步调用，不可重入。参数 BlockRequest（in）：先前已处理的块作业的请求类型（读、写等）。参数 JobResult（in）：先前已处理的块作业的请求结果。返回值：Std_ReturnType，E_OK：回调函数已成功处理；其他任何值：回调函数处理不成功。
+**说明**: 此函数由**NVM**调用，用于通知加密驱动程序一个异步单块请求已经完成。生成的函数名应设置为与 NvmBlockDescriptor 关联的容器：`{[CryptoNvBlock](#8116-cryptonvblock)/{CryptoNvBlockDescriptorRef} /NvmSingleBlockCallback}/NvmSingleBlockCallbackFnc`。可通过**Crypto_cfg.h**获得。本回调函数为同步调用，不可重入。参数 BlockRequest（in）：先前已处理的块作业的请求类型（读、写等）。参数 JobResult（in）：先前已处理的块作业的请求结果。返回值：Std_ReturnType，E_OK：回调函数已成功处理；其他任何值：回调函数处理不成功。
 
 ```C
 Std_ReturnType Crypto_<vi>_<ai>_NvBlock_Callback_<NvBlock> ( NvM_BlockRequestType BlockRequest, NvM_RequestResultType JobResult )
@@ -1417,11 +1414,7 @@ void Crypto_MainFunction ( void )
 | NvM_SetRamBlockStatus | NvM.h | 用于设置永久性 RAM 块的 RAM 块状态或 **NVRAM** 块显式同步状态的服务。 |
 | NvM_WriteBlock | NvM.h | 用于将 RAM 块的数据复制到其对应 NV 块的服务。 |
 
-## 8. 时序图
-
-不适用。
-
-## 9. 配置规范
+## 8. 配置规范
 
 总体而言，本章定义配置参数及其到**容器**（container）的聚类组织。为支持本规范，本章描述基础知识，并规定了应用于参数规范的模板（表）。我们有意将这些内容保留在规范中以保证可理解性。
 
@@ -1431,13 +1424,13 @@ void Crypto_MainFunction ( void )
 
 第 9.2 章规定模块 Crypto 的发布信息。
 
-### 9.1. 容器与配置参数
+### 8.1. 容器与配置参数
 
 以下各节汇总所有配置参数。各参数的详细含义见第 6 章和第 7 章。
 
 **注意：**配置容器中的 Id 应连续、无间隙，并且应从零开始。
 
-#### 9.1.1. Crypto
+#### 8.1.1. Crypto
 
 | SWS 条目 | [ECUC_Crypto_00001] |
 |---|---|
@@ -1458,7 +1451,7 @@ void Crypto_MainFunction ( void )
 
 ![Figure10_1.png](Figure10_1.png)
 
-#### 9.1.2. CryptoGeneral
+#### 8.1.2. CryptoGeneral
 
 | SWS 条目 | [ECUC_Crypto_00002] |
 |---|---|
@@ -1540,7 +1533,7 @@ void Crypto_MainFunction ( void )
 
 ![Figure10_2.png](Figure10_2.png)
 
-#### 9.1.3. CryptoDriverObjects
+#### 8.1.3. CryptoDriverObjects
 
 | SWS 条目 | [ECUC_Crypto_00003] |
 |---|---|
@@ -1557,7 +1550,7 @@ void Crypto_MainFunction ( void )
 
 ![Figure10_3.png](Figure10_3.png)
 
-#### 9.1.4. CryptoDriverObject
+#### 8.1.4. CryptoDriverObject
 
 | SWS 条目 | [ECUC_Crypto_00008] |
 |---|---|
@@ -1650,7 +1643,7 @@ CryptoDriverObjectEcucPartitionRef 所引用的 ECUC 分区应为 CryptoEcucPart
 
 如果 CryptoEcucPartitionRef 引用了一个或多个 ECUC 分区，则 CryptoDriverObjectEcucPartitionRef 的多重性应大于零，并且也应引用这些 ECUC 分区中的一个或多个。
 
-#### 9.1.5. CryptoKeys
+#### 8.1.5. CryptoKeys
 
 | SWS 条目 | [ECUC_Crypto_00004] |
 |---|---|
@@ -1665,7 +1658,7 @@ CryptoDriverObjectEcucPartitionRef 所引用的 ECUC 分区应为 CryptoEcucPart
 
 ![Figure10_4.png](Figure10_4.png)
 
-#### 9.1.6. CryptoKey
+#### 8.1.6. CryptoKey
 
 | SWS 条目 | [ECUC_Crypto_00011] |
 |---|---|
@@ -1717,7 +1710,7 @@ CryptoDriverObjectEcucPartitionRef 所引用的 ECUC 分区应为 CryptoEcucPart
 
 无包含的容器。
 
-#### 9.1.7. CryptoKeyElements
+#### 8.1.7. CryptoKeyElements
 
 | SWS 条目 | [ECUC_Crypto_00005] |
 |---|---|
@@ -1732,7 +1725,7 @@ CryptoDriverObjectEcucPartitionRef 所引用的 ECUC 分区应为 CryptoEcucPart
 
 ![Figure10_5.png](Figure10_5.png)
 
-#### 9.1.8. CryptoKeyElement
+#### 8.1.8. CryptoKeyElement
 
 | SWS 条目 | [ECUC_Crypto_00014] |
 |---|---|
@@ -1846,7 +1839,7 @@ CryptoDriverObjectEcucPartitionRef 所引用的 ECUC 分区应为 CryptoEcucPart
 
 无包含的容器。
 
-#### 9.1.9. CryptoKeyTypes
+#### 8.1.9. CryptoKeyTypes
 
 | SWS 条目 | [ECUC_Crypto_00017] |
 |---|---|
@@ -1863,7 +1856,7 @@ CryptoDriverObjectEcucPartitionRef 所引用的 ECUC 分区应为 CryptoEcucPart
 
 ![Figure10_6.png](Figure10_6.png)
 
-#### 9.1.10. CryptoKeyType
+#### 8.1.10. CryptoKeyType
 
 | SWS 条目 | [ECUC_Crypto_00030] |
 |---|---|
@@ -1885,7 +1878,7 @@ CryptoDriverObjectEcucPartitionRef 所引用的 ECUC 分区应为 CryptoEcucPart
 
 无包含的容器。
 
-#### 9.1.11. CryptoPrimitives
+#### 8.1.11. CryptoPrimitives
 
 | SWS 条目 | [ECUC_Crypto_00032] |
 |---|---|
@@ -1902,7 +1895,7 @@ CryptoDriverObjectEcucPartitionRef 所引用的 ECUC 分区应为 CryptoEcucPart
 
 ![Figure10_7](Figure10_7.png)
 
-#### 9.1.12. CryptoPrimitive
+#### 8.1.12. CryptoPrimitive
 
 | SWS 条目 | [ECUC_Crypto_00033] |
 |---|---|
@@ -2011,7 +2004,7 @@ CryptoDriverObjectEcucPartitionRef 所引用的 ECUC 分区应为 CryptoEcucPart
 
 ![Figure10_8](Figure10_8.png)
 
-#### 9.1.13. CryptoPrimitiveAlgorithmFamilyCustom
+#### 8.1.13. CryptoPrimitiveAlgorithmFamilyCustom
 
 | SWS 条目 | [ECUC_Crypto_00046] |
 |---|---|
@@ -2035,7 +2028,7 @@ CryptoDriverObjectEcucPartitionRef 所引用的 ECUC 分区应为 CryptoEcucPart
 
 无包含的容器。
 
-#### 9.1.14. CryptoPrimitiveAlgorithmModeCustom
+#### 8.1.14. CryptoPrimitiveAlgorithmModeCustom
 
 | SWS 条目 | [ECUC_Crypto_00048] |
 |---|---|
@@ -2067,7 +2060,7 @@ CryptoDriverObjectEcucPartitionRef 所引用的 ECUC 分区应为 CryptoEcucPart
 
 ![Figure10_12](Figure10_12.png)
 
-#### 9.1.15. CryptoNvStorage
+#### 8.1.15. CryptoNvStorage
 
 | SWS 条目 | [ECUC_Crypto_00054] |
 |---|---|
@@ -2082,7 +2075,7 @@ CryptoDriverObjectEcucPartitionRef 所引用的 ECUC 分区应为 CryptoEcucPart
 
 ![Figure10_13](Figure10_13.png)
 
-#### 9.1.16. CryptoNvBlock
+#### 8.1.16. CryptoNvBlock
 
 | SWS 条目 | [ECUC_Crypto_00055] |
 |---|---|
@@ -2129,7 +2122,7 @@ CryptoDriverObjectEcucPartitionRef 所引用的 ECUC 分区应为 CryptoEcucPart
 
 无包含的容器。
 
-### 9.2. 发布信息
+### 8.2. 发布信息
 
 发布信息包含由软件模块实现者所定义的数据，这些数据在模块适配（即配置）到实际硬件/软件环境时不会改变。因此，其中包含版本和制造商信息。
 

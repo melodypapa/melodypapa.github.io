@@ -633,27 +633,23 @@ void CryIf_CallbackNotification ( Crypto_JobType* job, Crypto_ResultType result 
 |---|---|---|
 | Det_ReportError | Det.h | 报告开发错误的服务。 |
 
-## 8. 时序图
-
-不适用。
-
-## 9. 配置规范
+## 8. 配置规范
 
 第 9.1 章规定模块 **CRYIF** 的结构（容器）和参数。
 
 第 9.2 章规定模块 **CRYIF** 的附加发布信息。
 
-### 9.1. 容器与配置参数
+### 8.1. 容器与配置参数
 
 以下各节汇总所有配置参数。各参数的详细含义见第 6 章和第 7 章。
 
 **注意：**配置容器中的 ID 应连续、无间隙，并且应从零开始。
 
-#### 9.1.1. 变体
+#### 8.1.1. 变体
 
 有关详情，请参阅 SWS_BSWGeneral 中的第 10.1.2 章「Variants」（变体）。
 
-#### 9.1.2. CryIf
+#### 8.1.2. CryIf
 
 | SWS 条目 | [ECUC_CryIf_00001] |
 |---|---|
@@ -669,7 +665,7 @@ void CryIf_CallbackNotification ( Crypto_JobType* job, Crypto_ResultType result 
 
 ![Figure10_1](Figure10_1.png)
 
-#### 9.1.3. CryIfGeneral
+#### 8.1.3. CryIfGeneral
 
 | SWS 条目 | [ECUC_CryIf_00009] |
 |---|---|
@@ -702,7 +698,7 @@ void CryIf_CallbackNotification ( Crypto_JobType* job, Crypto_ResultType result 
 
 ![Figure10_2](Figure10_2.png)
 
-#### 9.1.4. CryIfChannel
+#### 8.1.4. CryIfChannel
 
 | SWS 条目 | [ECUC_CryIf_00002] |
 |---|---|
@@ -739,7 +735,7 @@ void CryIf_CallbackNotification ( Crypto_JobType* job, Crypto_ResultType result 
 
 ![Figure10_3](Figure10_3.png)
 
-#### 9.1.5. CryIfKey
+#### 8.1.5. CryIfKey
 
 | SWS 条目 | [ECUC_CryIf_00003] |
 |---|---|
@@ -774,7 +770,7 @@ void CryIf_CallbackNotification ( Crypto_JobType* job, Crypto_ResultType result 
 
 ![Figure10_4](Figure10_4.png)
 
-### 9.2. 发布信息
+### 8.2. 发布信息
 
 发布信息包含由软件模块实现者定义的数据，当模块适配（即配置）到实际硬件/软件环境时，这些数据不会改变。因此，它包含版本和制造商信息。
 

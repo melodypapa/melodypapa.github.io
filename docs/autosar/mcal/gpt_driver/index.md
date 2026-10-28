@@ -678,15 +678,12 @@ Std_ReturnType Gpt_GetPredefTimerValue (Gpt_PredefTimerType PredefTimer, uint32*
 
 由于**GPT**是一个驱动模块，它不向下层模块提供任何回调函数。
 
-### 7.5. 调度函数
 
-无。
-
-### 7.6. 期望接口
+### 7.5. 期望接口
 
 本章列出了**Gpt**模块需要从其他模块获得的所有接口。
 
-#### 7.6.1. 强制接口
+#### 7.5.1. 强制接口
 
 **注意：**本节定义了实现模块核心功能所需的所有接口。
 
@@ -694,7 +691,7 @@ Std_ReturnType Gpt_GetPredefTimerValue (Gpt_PredefTimerType PredefTimer, uint32*
 |---|---|
 | Det_ReportRuntimeError | 报告运行时错误的服务。 |
 
-#### 7.6.2. 可选接口
+#### 7.5.2. 可选接口
 
 本节定义了为实现模块的可选功能所需的所有接口。
 
@@ -708,7 +705,7 @@ Std_ReturnType Gpt_GetPredefTimerValue (Gpt_PredefTimerType PredefTimer, uint32*
 
 提供唤醒事件的**ISR**应负责复位中断标志（如果硬件需要）。
 
-#### 7.6.3. 可配置接口
+#### 7.5.3. 可配置接口
 
 本节列出了目标函数可配置的所有接口。目标函数通常是回调函数。此类接口的名称不固定，因为它们是可配置的。
 
@@ -736,7 +733,7 @@ void Gpt_Notification_<channel> (void)
 
 对于所有可用通道，回调函数须由配置工具声明。
 
-### 7.7. 错误检测
+### 7.6. 错误检测
 
 如果启用了 GptDevErrorDetect 开关：当发生开发错误时，相应的**GPT**函数应跳过期望的功能（不做任何动作即离开服务）。
 

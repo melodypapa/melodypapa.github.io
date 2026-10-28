@@ -114,11 +114,8 @@ release: R23-11
 
 ### 5.1. 文件结构
 
-#### 5.1.1. 代码文件结构
 
-不适用。
-
-#### 5.1.2. 头文件结构
+#### 5.1.1. 头文件结构
 
 如果任何 **BSW** 模块描述中把某个依赖描述为 `requiredArtifact.[DependencyOnArtifact](#116-dependencyonartifact).category = MEMMAP`，则内存映射必须提供一个 **BSW** 内存映射头文件。此时，**BSW** 内存映射头文件的文件名由 **BSW** 模块描述中 `requiredArtifact.[DependencyOnArtifact](#116-dependencyonartifact).artifactDescriptor.shortLabel` 属性值定义。
 
@@ -167,7 +164,7 @@ release: R23-11
 
 内存映射文件名对基础软件模块应为 `{Mip}_MemMap.h`，对软件组件应为 `{componentTypeName}_MemMap.h`，其中 `{Mip}` 是模块实现前缀，`{componentTypeName}` 是软件组件类型的名称。
 
-**注意：**`{Mip}` 的信息取自相关 **BSW** 模块的基础软件模块描述，如 [5.1.2](#512-头文件结构) 节所述。
+**注意：**`{Mip}` 的信息取自相关 **BSW** 模块的基础软件模块描述，如 [5.1.1](#511-头文件结构) 节所述。
 
 如果编译器/链接器不需要特定命令来实现 **SWS** 内存映射的功能，则内存分配关键字定义可以未定义而不产生进一步影响。
 
@@ -181,7 +178,7 @@ release: R23-11
 3 #endif
 ```
 
-如 [5.1.2](#512-头文件结构) 节所述，文件的数量取决于输入配置中 [**SwComponentType**](#1121-swcomponenttype) 的数量。为了确定 [**MemorySection**](#1114-memorysection) 的数量，必须已知适用的 [**SwcImplementation**](#1122-swcimplementation)。在 **AUTOSAR** 环境中，这些通过 [**SystemMapping**](#1125-systemmapping) 中的 [**SwcToImplMapping**](#1124-swctoimplmapping) 以及/或者 **RteSwComponentType** 容器中的 **ECU** 配置值 **RteImplementationRef** 来描述。
+如 [5.1.1](#511-头文件结构) 节所述，文件的数量取决于输入配置中 [**SwComponentType**](#1121-swcomponenttype) 的数量。为了确定 [**MemorySection**](#1114-memorysection) 的数量，必须已知适用的 [**SwcImplementation**](#1122-swcimplementation)。在 **AUTOSAR** 环境中，这些通过 [**SystemMapping**](#1125-systemmapping) 中的 [**SwcToImplMapping**](#1124-swctoimplmapping) 以及/或者 **RteSwComponentType** 容器中的 **ECU** 配置值 **RteImplementationRef** 来描述。
 
 已知 [**SwcImplementation**](#1122-swcimplementation) 也就提供了必须为 [6.2.2](#622-对内存映射头文件的要求) 节识别的 [**MemorySection**](#1114-memorysection) 的数量。关于 [**SwcImplementation**](#1122-swcimplementation) 内容的更多细节，请参阅文档 [\[4\]](#ref-4) 和 [\[5\]](#ref-5)。
 
@@ -593,7 +590,7 @@ release: R23-11
 </MEMORY-SECTION>
 ```
 
-这使集成者既可以用 [**MemMapGenericMapping**](#925-memmapgenericmapping) 的方式配置所有内存段相同，又可以用 [**MemMapSectionSpecificMapping**](#926-memmapsectionspecificmapping) 的方式单独处理特殊情况。另请参见 [6.3.4](#634-回调段) 节的示例。
+这使集成者既可以用 [**MemMapGenericMapping**](#825-memmapgenericmapping) 的方式配置所有内存段相同，又可以用 [**MemMapSectionSpecificMapping**](#826-memmapsectionspecificmapping) 的方式单独处理特殊情况。另请参见 [6.3.4](#634-回调段) 节的示例。
 
 #### 6.2.2. 对内存映射头文件的要求
 
@@ -603,15 +600,15 @@ release: R23-11
 
 如果 [**BswImplementation**](#114-bswimplementation) **未**包含 `requiredArtifact.[DependencyOnArtifact](#116-dependencyonartifact).category = MEMMAP` 的 [**DependencyOnArtifact**](#116-dependencyonartifact)，则在 [**BswImplementation**](#114-bswimplementation) 中定义的所有 [**MemorySection**](#1114-memorysection) 都属于 `{Mip}_MemMap.h` 内存映射头文件。
 
-**注意：**另请参见 [5.1.2](#512-头文件结构) 节。
+**注意：**另请参见 [5.1.1](#511-头文件结构) 节。
 
 如果 [**BswImplementation**](#114-bswimplementation) 包含恰好一个 `requiredArtifact.[DependencyOnArtifact](#116-dependencyonartifact).category = MEMMAP` 的 [**DependencyOnArtifact**](#116-dependencyonartifact)，则在 [**BswImplementation**](#114-bswimplementation) 中定义的所有 [**MemorySection**](#1114-memorysection) 都属于由该 [**DependencyOnArtifact**](#116-dependencyonartifact) 的 `requiredArtifact.artifactDescriptor.shortLabel` 属性所定义的内存映射头文件。
 
-**注意：**另请参见 [5.1.2](#512-头文件结构) 节。
+**注意：**另请参见 [5.1.1](#511-头文件结构) 节。
 
 如果 [**BswImplementation**](#114-bswimplementation) 包含恰好一个 `requiredArtifact.[DependencyOnArtifact](#116-dependencyonartifact).category = MEMMAP` 的 [**DependencyOnArtifact**](#116-dependencyonartifact)，则在 [**BswImplementation**](#114-bswimplementation) 中定义并与相同 [**SectionNamePrefix**](#1118-sectionnameprefix) 相关联的所有 [**MemorySection**](#1114-memorysection) 都属于由该 [**DependencyOnArtifact**](#116-dependencyonartifact) 的 `requiredArtifact.artifactDescriptor.shortLabel` 属性所定义的内存映射头文件，其中该 [**DependencyOnArtifact**](#116-dependencyonartifact) 由带有 `implementedIn` 引用的 [**SectionNamePrefix**](#1118-sectionnameprefix) 引用。
 
-在这种情况下，[**BswImplementation**](#114-bswimplementation) 可以包含多个 `requiredArtifact.[DependencyOnArtifact](#116-dependencyonartifact).category = MEMMAP` 的 [**DependencyOnArtifact**](#116-dependencyonartifact)。这用于描述带有一个 [**BswModuleDescription**](#115-bswmoduledescription) 的 **ICC2** 集群。**注意：**另请参见 [5.1.2](#512-头文件结构) 节。
+在这种情况下，[**BswImplementation**](#114-bswimplementation) 可以包含多个 `requiredArtifact.[DependencyOnArtifact](#116-dependencyonartifact).category = MEMMAP` 的 [**DependencyOnArtifact**](#116-dependencyonartifact)。这用于描述带有一个 [**BswModuleDescription**](#115-bswmoduledescription) 的 **ICC2** 集群。**注意：**另请参见 [5.1.1](#511-头文件结构) 节。
 
 软件组件类型特定的内存映射头文件 `{componentTypeName}_MemMap.h` 应支持用于开始和停止段的内存分配关键字，以覆盖与该软件组件类型相关联的 [**SwcImplementation**](#1122-swcimplementation) 中定义的每一个 [**MemorySection**](#1114-memorysection)。
 
@@ -771,7 +768,7 @@ release: R23-11
 
 ![Figure7_2](Figure7_2.png)
 
-借助 [**MemMapGenericMapping**](#925-memmapgenericmapping) “CNF_SEC_CODE”，内存映射被配置为：所有引用 [**SwAddrMethod**](#1119-swaddrmethod) “CODE” 的模块特定（抽象）内存段都使用 [**MemMapAddressingModeSet**](#922-memmapaddressingmodeset) “CODE_INTERNAL”。[**MemMapAddressingModeSet**](#922-memmapaddressingmodeset) “CODE_INTERNAL” 通过使用相关的内存分配关键字，定义了开始和停止将代码映射到特定链接器段所需的适当语句。
+借助 [**MemMapGenericMapping**](#825-memmapgenericmapping) “CNF_SEC_CODE”，内存映射被配置为：所有引用 [**SwAddrMethod**](#1119-swaddrmethod) “CODE” 的模块特定（抽象）内存段都使用 [**MemMapAddressingModeSet**](#822-memmapaddressingmodeset) “CODE_INTERNAL”。[**MemMapAddressingModeSet**](#822-memmapaddressingmodeset) “CODE_INTERNAL” 通过使用相关的内存分配关键字，定义了开始和停止将代码映射到特定链接器段所需的适当语句。
 
 借助内存分配头文件中这些信息，可以为软件组件生成如下内容：
 
@@ -813,11 +810,11 @@ release: R23-11
 
 ![Figure7_5](Figure7_5.png)
 
-内存映射的 **ECU** 配置定义了 [**MemMapAddressingModeSet**](#922-memmapaddressingmodeset) “VAR_NEAR_INIT”。它支持 sectionType = var、sectionInitializationPolicy = “INIT” 和 memoryAllocationKeywordPolicy = addrMethodShortNameAndAlignment。在本示例中，针对对齐方式 8 和 16（**MemMapAlignmentSelector** = 8 和 **MemMapAlignmentSelector** = 16）展示了 [**MemMapAddressingMode**](#923-memmapaddressingmode)。
+内存映射的 **ECU** 配置定义了 [**MemMapAddressingModeSet**](#822-memmapaddressingmodeset) “VAR_NEAR_INIT”。它支持 sectionType = var、sectionInitializationPolicy = “INIT” 和 memoryAllocationKeywordPolicy = addrMethodShortNameAndAlignment。在本示例中，针对对齐方式 8 和 16（**MemMapAlignmentSelector** = 8 和 **MemMapAlignmentSelector** = 16）展示了 [**MemMapAddressingMode**](#823-memmapaddressingmode)。
 
 ![Figure7_6](Figure7_6.png)
 
-借助 [**MemMapGenericMapping**](#925-memmapgenericmapping) “CNF_VAR_FAST_INIT”，内存映射被配置为：所有引用 [**SwAddrMethod**](#1119-swaddrmethod) “VAR_FAST_INIT” 的模块特定（抽象）内存段都使用 [**MemMapAddressingModeSet**](#922-memmapaddressingmodeset) “VAR_NEAR_INIT”。[**MemMapAddressingModeSet**](#922-memmapaddressingmodeset) “VAR_NEAR_INIT” 通过使用相关的内存分配关键字，定义了开始和停止将具有不同对齐方式（在本示例中为 8 和 16）的变量映射到特定链接器段所需的适当语句。
+借助 [**MemMapGenericMapping**](#825-memmapgenericmapping) “CNF_VAR_FAST_INIT”，内存映射被配置为：所有引用 [**SwAddrMethod**](#1119-swaddrmethod) “VAR_FAST_INIT” 的模块特定（抽象）内存段都使用 [**MemMapAddressingModeSet**](#822-memmapaddressingmodeset) “VAR_NEAR_INIT”。[**MemMapAddressingModeSet**](#822-memmapaddressingmodeset) “VAR_NEAR_INIT” 通过使用相关的内存分配关键字，定义了开始和停止将具有不同对齐方式（在本示例中为 8 和 16）的变量映射到特定链接器段所需的适当语句。
 
 借助内存分配头文件中这些信息，可以为 **BSW** 生成如下内容：
 
@@ -911,7 +908,7 @@ release: R23-11
 7 #ifdef COM_STOP_SEC_CALLOUT_CODE_COM_RXIPDUCALLOUT
 ```
 
-尽管如此，两个内存段的实现是相同的，因为两者都引用相同的 [**SwAddrMethod**](#1119-swaddrmethod)，并且 **MemMap** 模块是使用 [**MemMapGenericMapping**](#925-memmapgenericmapping) 配置的。
+尽管如此，两个内存段的实现是相同的，因为两者都引用相同的 [**SwAddrMethod**](#1119-swaddrmethod)，并且 **MemMap** 模块是使用 [**MemMapGenericMapping**](#825-memmapgenericmapping) 配置的。
 
 #### 6.3.5. 可分配内存部分
 
@@ -945,27 +942,23 @@ release: R23-11
 19 #ifdef ADC_AUTOSCANKERNEL_STOP_SEC_VAR_INIT_QM_LOCAL_16
 ```
 
-尽管如此，两个内存段的实现是相同的，因为两者都引用相同的 [**SwAddrMethod**](#1119-swaddrmethod)，并且 **MemMap** 模块是使用 [**MemMapGenericMapping**](#925-memmapgenericmapping) 配置的。
+尽管如此，两个内存段的实现是相同的，因为两者都引用相同的 [**SwAddrMethod**](#1119-swaddrmethod)，并且 **MemMap** 模块是使用 [**MemMapGenericMapping**](#825-memmapgenericmapping) 配置的。
 
 ## 7. API规范
 
 不适用。
 
-## 8. 时序图
+## 8. 配置规范
 
-不适用。
-
-## 9. 配置规范
-
-### 9.1. 如何阅读本章
+### 8.1. 如何阅读本章
 
 详情请参阅 **SWS_BSWGeneral**（[\[2\]](#ref-2)）第 10.1 章「配置规范简介」（**Introduction to configuration specification**）。
 
-### 9.2. 容器与配置参数
+### 8.2. 容器与配置参数
 
 以下各节汇总所有配置参数。各参数的详细含义见第 6 章。
 
-#### 9.2.1. MemMap
+#### 8.2.1. MemMap
 
 | SWS 条目 | [ECUC_MemMap_00001] |
 |---|---|
@@ -981,7 +974,7 @@ release: R23-11
 
 ![Figure10_1](Figure10_1.png)
 
-#### 9.2.2. MemMapAddressingModeSet
+#### 8.2.2. MemMapAddressingModeSet
 
 | SWS 条目 | [ECUC_MemMap_00002] |
 |---|---|
@@ -1060,7 +1053,7 @@ release: R23-11
 |---|---|---|
 | MemMapAddressingMode | 1..* | 定义一种寻址模式，其中包含一组实现段开始和停止的 #pragma 语句。 |
 
-#### 9.2.3. MemMapAddressingMode
+#### 8.2.3. MemMapAddressingMode
 
 | SWS 条目 | [ECUC_MemMap_00003] |
 |---|---|
@@ -1112,7 +1105,7 @@ release: R23-11
 
 无包含的容器。
 
-#### 9.2.4. MemMapAllocation
+#### 8.2.4. MemMapAllocation
 
 | SWS 条目 | [ECUC_MemMap_00010] |
 |---|---|
@@ -1129,7 +1122,7 @@ release: R23-11
 
 ![Figure10_3](Figure10_3.png)
 
-#### 9.2.5. MemMapGenericMapping
+#### 8.2.5. MemMapGenericMapping
 
 | SWS 条目 | [ECUC_MemMap_00011] |
 |---|---|
@@ -1173,7 +1166,7 @@ release: R23-11
 
 无包含的容器。
 
-#### 9.2.6. MemMapSectionSpecificMapping
+#### 8.2.6. MemMapSectionSpecificMapping
 
 | SWS 条目 | [ECUC_MemMap_00014] |
 |---|---|
@@ -1206,7 +1199,7 @@ release: R23-11
 
 无包含的容器。
 
-#### 9.2.7. MemMapMappingSelector
+#### 8.2.7. MemMapMappingSelector
 
 | SWS 条目 | [ECUC_MemMap_00021] |
 |---|---|
@@ -1230,7 +1223,7 @@ release: R23-11
 
 无包含的容器。
 
-### 9.3. 发布信息
+### 8.3. 发布信息
 
 详情请参阅 **SWS_BSWGeneral**（[\[2\]](#ref-2)）第 10.3 章「发布信息」（**Published Information**）。
 

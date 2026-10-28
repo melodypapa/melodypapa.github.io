@@ -325,17 +325,8 @@ typedef unsigned char StatusType; /* OSEK compliance */
 
 宏定义（**Define**）。范围：void指针。说明：实现应提供 **NULL_PTR** 宏定义，其定义为指向零的void指针。
 
-### 7.3. 函数定义
 
-不适用。
 
-## 8. 时序图
-
-不适用。
-
-## 9. 配置规范
-
-不适用。
 
 ## B. 需求历史
 
