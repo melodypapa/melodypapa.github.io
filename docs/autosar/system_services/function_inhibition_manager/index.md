@@ -44,16 +44,16 @@ release: R23-11
 > 功能禁止管理器（**Function Inhibition Manager**）
 
 **Functionality**
-> 功能组（**Functionality**）包括系统用户可见和用户不可见的功能（**Function**）方面[2]。除此之外，在**FiM**上下文中， 功能组可以由具有相同允许/禁止条件集的一个、几个或部分可运行实体的内容构建。 通过**FiM**，这些功能组的抑制可以通过标定（**calibration**）进行配置甚至修改。每个功能组都由一个唯一的**FunctionId**表示。 与具有特定调度条件的可运行实体相比，功能组的特征在于一组特定的禁止条件。
+> 功能组（**Functionality**）包括系统用户可见和用户不可见的功能（**Function**）方面[\[2\]](#ref-2)。除此之外，在**FiM**上下文中， 功能组可以由具有相同允许/禁止条件集的一个、几个或部分可运行实体的内容构建。 通过**FiM**，这些功能组的抑制可以通过标定（**calibration**）进行配置甚至修改。每个功能组都由一个唯一的**FunctionId**表示。 与具有特定调度条件的可运行实体相比，功能组的特征在于一组特定的禁止条件。
 
 **Inhibition Condition**
-> 禁止条件（Inhibition Condition）是指由一个**FID**、一个禁止掩码（**Inhibition Mask**）和一个Dem事件（**Dem event**）/ 组件（**Component**）的状态之间的关系。（参见**FiMInhibitionConfiguration**）
+> 禁止条件（Inhibition Condition）是指由一个**FID**、一个禁止掩码（**Inhibition Mask**）和一个Dem事件（**Dem event**）/ 组件（**Component**）的状态之间的关系。（参见[**FiMInhibitionConfiguration**](#915-fiminhibitionconfiguration)）
 
 **MIL**
 > 故障指示灯（**Malfunction Indication Light**）
 
 **Monitoring function**
-> 软件组件的一部分。一种监测并最终检测某个传感器或者执行器故障的机制，也可以是一种合理性检查。它报告SW-C的内部处理的事件状态，或者其他基础软件模块（BSW）的返回值的进一步处理的事件状态。（参见 AUTOSAR_SWS_DiagnosticEventManager[3]）
+> 软件组件的一部分。一种监测并最终检测某个传感器或者执行器故障的机制，也可以是一种合理性检查。它报告SW-C的内部处理的事件状态，或者其他基础软件模块（BSW）的返回值的进一步处理的事件状态。（参见 AUTOSAR_SWS_DiagnosticEventManager[\[3\]](#ref-3)）
 
 **NVRAM**
 > 非易失性存储器（**Non volatile Memory**）
@@ -83,25 +83,25 @@ release: R23-11
 
 ### 3.1. 输入文件
 
-[1] General Specification of Basic Software Modules
-> AUTOSAR_SWS_BSWGeneral
+<a id="ref-1"></a>[1] General Specification of Basic Software Modules
+> AUTOSAR_CP_SWS_BSWGeneral
 
-[2] Glossary
-> AUTOSAR_TR_Glossary
+<a id="ref-2"></a>[2] Glossary
+> AUTOSAR_FO_TR_Glossary
 
-[3] Specification of Diagnostic Event Manager
-> AUTOSAR_SWS_DiagnosticEventManager
+<a id="ref-3"></a>[3] Specification of Diagnostic Event Manager
+> AUTOSAR_CP_SWS_DiagnosticEventManager
 
-[4] Requirements on Function Inhibition Manager
-> AUTOSAR_SRS_FunctionInhibitionManager
+<a id="ref-4"></a>[4] Requirements on Function Inhibition Manager
+> AUTOSAR_CP_SRS_FunctionInhibitionManager
 
-[5] Virtual Functional Bus
-> AUTOSAR_EXP_VFB
+<a id="ref-5"></a>[5] Virtual Functional Bus
+> AUTOSAR_CP_EXP_VFB
 
-[6] Software Component Template
-> AUTOSAR_TPS_SoftwareComponentTemplate
+<a id="ref-6"></a>[6] Software Component Template
+> AUTOSAR_CP_TPS_SoftwareComponentTemplate
 
-### 3.2. 相关标准和规范
+### 3.2. 相关标准与规范
 
 [13] IEC 7498-1 The Basic Model, IEC Norm, 1994
 
@@ -115,7 +115,7 @@ seq.
 
 ### 3.3. 相关规范
 
-AUTOSAR提供了基础软件模块的通用规范 [1]，也适用于功能禁止管理器。因此，规范[1]应被视为功能禁止管理器的附加和必需规范。
+AUTOSAR提供了基础软件模块的通用规范 [\[1\]](#ref-1)，也适用于功能禁止管理器。因此，规范[\[1\]](#ref-1)应被视为功能禁止管理器的附加和必需规范。
 
 ## 4. 约束和假设
 
@@ -129,7 +129,7 @@ AUTOSAR提供了基础软件模块的通用规范 [1]，也适用于功能禁止
 
 **FiM**不支持**FID**之间的相互依赖性。这意味着一个**FID**不会影响另一个**FID**。
 
-### 4.2. 汽车领域的适用性
+### 4.2. 汽车域的适用性
 
 FiM旨在满足当ECU检测到故障时对系统响应的集中处理的设计要求。例如：开路或者短路。 因此，**FiM**的直接适用领域目前是车身、底盘和动力总成的ECU。 当然，也不能理解为 **FiM**无法适用于其他汽车领域的ECU，例如：信息娱乐系统。
 
@@ -143,31 +143,28 @@ FiM旨在满足当ECU检测到故障时对系统响应的集中处理的设计�
 
 功能禁止管理器（**FiM**）和诊断事件管理器（**Dem**）、具有**FID**接口的软件组件 （**SW-C**）、ECU状态管理器（**EcuM**）、**RTE**和支持被FiM抑制功能的BSW模块。
 
-### 5.1. Dem
+**AUTOSAR** 功能禁止管理器（**FiM**）与诊断事件管理器（**Dem**）、具有 **FID** 接口的软件组件（**SW-C**）、**ECU** 状态管理器、**RTE** 以及应被 **FiM** 禁止的 **BSW** 模块存在接口和依赖关系。
 
-诊断事件管理器（**Dem**）负责处理检测到的故障。这些故障可以表示为事件并由监控功能报告。 **Dem**模块负责在监视的状态发生变化时，通知并更新功能禁止管理器（**FiM**），并根据分配的依赖关系来停止或释放相关功能组。
+* 诊断事件管理器（**Dem**）负责处理检测到的故障。这些故障可以表示为事件并由监控功能报告。**Dem**模块负责在监视的状态发生变化时，通知并更新功能禁止管理器（**FiM**），并根据分配的依赖关系来停止或释放相关功能组。
+* 具有 **FID** 接口的软件组件（**SW-C**）在 **FiM** 模块处查询由 **FID** 标识的相关功能组的执行权限。查询的 **FID** 需要由软件组件提供。
+* ECU状态管理器（**EcuM**）负责BSW组件的基本初始化和去初始化。
+* 应被 **FiM** 禁止的 **BSW** 模块需要使用 **FiM** 接口请求允许。因此这些BSW模块必须也使用软件模块（**SW-Cs**）类似的模板，在实现配置时提供相应的配置数据（**EventID** - **FID** - **Inhibition Mask**之间的关系）。 BSW 模块的接口处理对应于 SW 组件的接口处理。
+* **RTE**实现了**BSW**的调度机制，例如：为**ECU**中所使用的每个**BSW**模块分配优先级和内存保护机制。
 
-### 5.2. 具有FID接口的软件模块
+### 5.1. 需求
 
-这些软件模块需要通过**FID**标识在**FiM**模块查询相关功能组的执行权限。查询的**FID**需要由软件模块提供。
+本规范的需求有以下三个来源：
 
-### 5.3. EcuM
+* **FiM** 服务功能的需求在 [\[4\]](#ref-4) 中规定。为了对服务的 **VFB** 视图进行建模，必须将 **VFB** 规范 [\[5\]](#ref-5) 中关于 **AUTOSAR** 服务的那一章视为附加需求。
+* 关于 **SW-C** 属性的形式化描述，[\[6\]](#ref-6) 给出了相关需求。
 
-ECU状态管理器（**EcuM**）负责BSW组件的基本初始化和去初始化。
-
-### 5.4. BSW相关模块
-
-被要求**FiM**禁止的BSW相关模块需要使用**FiM**接口请求允许。因此这些BSW模块必须也使用软件模块（**SW-Cs**）类似的模板，在实现配置时提供相应的配置数据（**EventID** - **FID** - **Inhibition Mask**之间的关系）。 BSW 模块的接口处理对应于 SW 组件的接口处理。
-
-### 5.5. RTE
-
-**RTE**实现了**BSW**的调度机制，例如：为**ECU**中所使用的每个**BSW**模块分配优先级和内存保护机制。
+#### 5.1.1. 用例
 
 对于每个**ECU**来说，通常会使用一个**FiM**服务实例和多个使用该服务的原子软件组件（**Atomic Software Component**）实例。在AUTOSAR 规范中，这些原子软件组件被称为客户端（**client**）。
 
 此外，还有一些基础软件（**BSW**），它们要么控制**FiM**（例如：用于初始化和关机的 ECU状态管理器），要么就是需要查询**FiM**以获取执行权限的信息。
 
-## 6. 功能规范
+## 6. 功能规格
 
 ### 6.1. 背景和理由
 
@@ -189,7 +186,7 @@ ECU状态管理器（**EcuM**）负责BSW组件的基本初始化和去初始化
 
 受监控组件（**Monitored Component**）作为一种标识符，是**Dem**模块提供标识特定受监控的组件，包括：硬件组件或者信号。受监控组件的**FAILED**状态代表所有被分配的监控功能和从其他**Dem**模块继承的故障信息的结果。
 
-#### 6.2.4.  汇总事件
+#### 6.2.4. 汇总事件
 
 **FiM**配置可以支持汇总事件。汇总事件（**Summarized Event**）由多个单个诊断事件组成。
 
@@ -201,9 +198,9 @@ ECU状态管理器（**EcuM**）负责BSW组件的基本初始化和去初始化
 
 例如：一个汇总事件可以用来表达某个传感器故障的所有错误条件的组合。
 
-传感器X具有多个诊断功能。包括：短接到地、短接到电源和开路故障，分别用**X_SCG**、**X_SCB**和**X_OC**表示。当出现故障时，将禁用**FID_0**、**FID_1**、...、**FID_N**的功能。如果直接配置，则需要3 * N个**FiMInhibitionConfiguration**配置容器，包含**FIM_INH_EVENT_ID** = **X_SCG/SCB/OC**和**FIM_INH_FUNCTION_ID** = **FID_0/.../N**。
+传感器X具有多个诊断功能。包括：短接到地、短接到电源和开路故障，分别用**X_SCG**、**X_SCB**和**X_OC**表示。当出现故障时，将禁用**FID_0**、**FID_1**、...、**FID_N**的功能。如果直接配置，则需要3 * N个[**FiMInhibitionConfiguration**](#915-fiminhibitionconfiguration)配置容器，包含**FIM_INH_EVENT_ID** = **X_SCG/SCB/OC**和**FIM_INH_FUNCTION_ID** = **FID_0/.../N**。
 
-通过使用汇总事件配置（**FiMSummaryEvent**），可以将一组事件选择为**FiMInhSumRef**，并将其重用于多个抑制配置，最终以达到简化配置的目的。
+通过使用汇总事件配置（[**FiMSummaryEvent**](#916-fimsummaryevent)），可以将一组事件选择为**FiMInhSumRef**，并将其重用于多个抑制配置，最终以达到简化配置的目的。
 
 #### 6.2.5. 功能标识符
 
@@ -234,7 +231,7 @@ FID许可状态（**Function Identifier permission state**）包含由**FID**表
 如上所述，一种可能的实现是在状态变量中提供许可状态。另一种方法是基于底层依赖关系，在查询时计算许可状态。
 
 **提示：**
-如果许可状态存储在状态变量中，它们对于每个**FID**是唯一的。SW组件可以通过**FiM_GetFunctionPermission**来获取状态。
+如果许可状态存储在状态变量中，它们对于每个**FID**是唯一的。SW组件可以通过[**FiM_GetFunctionPermission**](#7321-fim_getfunctionpermission)来获取状态。
 
 如果实现是使用状态变量来获得**FID**的许可状态，则在ECU的开发阶段，为了跟踪目的，可以使用标定系统读取此状态变量。
 
@@ -249,15 +246,13 @@ FID许可状态（**Function Identifier permission state**）包含由**FID**表
 **Dem**和**Fim**的初始化应始终遵循以下顺序：
 1. **Dem_PreInit**
 2. 非易失性存储器（**Non-volatile memory**）数据必须可用。
-3. **FiM_Init**完成设置内部变量。 在**FiM_Init**之后，其实**Fim**模块还未准备好可以使用。
-4. **Dem_Init**：做内部DEM初始化，最后使用**FiM_DemInit**初始化**FIM**模块。
+3. [**FiM_Init**](#7311-fim_init)完成设置内部变量。 在[**FiM_Init**](#7311-fim_init)之后，其实**Fim**模块还未准备好可以使用。
+4. **Dem_Init**：做内部DEM初始化，最后使用[**FiM_DemInit**](#7333-fim_deminit)初始化**FIM**模块。
 
 **注意：**
 从第4步开始，**Dem**和**Fim**最终被初始化并准备好可以使用。
 
-如果在**FiM**初始化之前，调用了**FiM_GetFunctionPermission**，则**FiM**会返回 **E_NOT_OK**。
-
-![](figure9_1.png)
+如果在**FiM**初始化之前，调用了[**FiM_GetFunctionPermission**](#7321-fim_getfunctionpermission)，则**FiM**会返回 **E_NOT_OK**。
 
 #### 6.3.2. **FiM**数据结构
 
@@ -287,28 +282,26 @@ FID许可状态（**Function Identifier permission state**）包含由**FID**表
 
 功能禁止管理器需使用软件组件提供的**FID**-**EventID**-**Inhibition Masks**关系来确定所有已配置**FID**的许可状态。
 
-在需报告事件的监控状态发生变化时，并启用了**DemTriggerFiMReports**，则**Dem**通过API函数**FiM_DemTriggerOnMonitorStatus**通知**FiM**监控状态已经变化。
+在需报告事件的监控状态发生变化时，并启用了**DemTriggerFiMReports**，则**Dem**通过API函数[**FiM_DemTriggerOnMonitorStatus**](#7331-fim_demtriggeronmonitorstatus)通知**FiM**监控状态已经变化。
 
 在收到有关监视器状态（**Monitor Status**）更改的通知后，**FiM**模块可以通过API函数**Dem_GetMonitorStatus**重新计算功能禁止。
 
 **注意：**
-从功能实现的角度来说，禁止/释放条件的同步更新可以在**FiM_MainFunction**函数里或在其他函数中实现。
+从功能实现的角度来说，禁止/释放条件的同步更新可以在[**FiM_MainFunction**](#7351-fim_mainfunction)函数里或在其他函数中实现。
 
 FiM模块的实现高度依赖于应用程序的要求（例如：时序上的要求）。如果应用程序需要快速响应，则**FiM**必须足够快地提供**FID**信息，以允许触发**limp-home**的功能。
 
-**FiM_DemTriggerOnMonitorStatus**函数仅在每个**FID**的状态变量被保存时才相关。 当没有状态被保存时，并且每次权限状态被查询时都会计算，则**FiM_DemTriggerOnMonitorStatus**应无任何效果。
+[**FiM_DemTriggerOnMonitorStatus**](#7331-fim_demtriggeronmonitorstatus)函数仅在每个**FID**的状态变量被保存时才相关。 当没有状态被保存时，并且每次权限状态被查询时都会计算，则[**FiM_DemTriggerOnMonitorStatus**](#7331-fim_demtriggeronmonitorstatus)应无任何效果。
 
 如下图所示，当单个**EventId**和**FID**关联计算时，首先左侧的监视器状态（**Dem_EventStatusExtendedType**）会由**Dem**模块负责报告，接着报告的状态需要和**EventId**配置的掩码的Bit位进行依次地比较。
 
 ![](figure7_3.png)
 
-每个**FID**会被分配一个禁止计数器（**Inhibition Counter**）。此禁止计数器包含当前禁止的**EventId**的数量。计算是周期性执行的（可通过**Dem_GetMonitorStatus**读取监控状态）。当状态和掩码匹配时，则禁止计数器会增加，否则禁止计数器不会更新。此算法同时适用于**FiM_GetFunctionPermission**函数（如果必须根据查询计算权限状态）和 **FiM_MainFunction**函数。
+每个**FID**会被分配一个禁止计数器（**Inhibition Counter**）。此禁止计数器包含当前禁止的**EventId**的数量。计算是周期性执行的（可通过**Dem_GetMonitorStatus**读取监控状态）。当状态和掩码匹配时，则禁止计数器会增加，否则禁止计数器不会更新。此算法同时适用于[**FiM_GetFunctionPermission**](#7321-fim_getfunctionpermission)函数（如果必须根据查询计算权限状态）和 [**FiM_MainFunction**](#7351-fim_mainfunction)函数。
 
-在监视器状态变化的触发中，当前禁止事件ID（**Inhibiting EventId**）存储的禁止计数器，将会被用于许可状态的计算。当**FiM_DemTriggerOnMonitorStatus**报告了监视器状态变化，需执行以下操作：
+在监视器状态变化的触发中，当前禁止事件ID（**Inhibiting EventId**）存储的禁止计数器，将会被用于许可状态的计算。当[**FiM_DemTriggerOnMonitorStatus**](#7331-fim_demtriggeronmonitorstatus)报告了监视器状态变化，需执行以下操作：
 1. 如果**EventId**的状态变化导致释放状态（**released state**），即掩码与监视器状态不匹配，则禁止计数器需要递减。
 2. 如果**EventId**的状态变化导致禁止状态（**inhibited state**），即掩码与监视器状态匹配，则禁止计数器需要递增。
-
-![](figure9_2.png)
 
 如果禁止计数器大于0，则**FID**许可状态应设置为**FALSE**，否则**FID**许可状态应设置为**TRUE**。
 
@@ -322,7 +315,7 @@ FiM模块的实现高度依赖于应用程序的要求（例如：时序上的�
 
 如果**FIM**配置为周期性轮询状态，则**FIM**需调用**Dem_GetComponentFailed**来获取组件的当前**FAILED**状态。
 
-如果**FIM**配置为基于**eventStatus**（即：**FiMCyclicEventEvaluation**）触发，则**FIM**应通过提供函数**FiM_DemTriggerOnComponentStatus**来接受**Dem**模块的状态变化信息。
+如果**FIM**配置为基于**eventStatus**（即：**FiMCyclicEventEvaluation**）触发，则**FIM**应通过提供函数[**FiM_DemTriggerOnComponentStatus**](#7332-fim_demtriggeroncomponentstatus)来接受**Dem**模块的状态变化信息。
 
 #### 6.3.4. 软件组件和FiM之间的交互
 
@@ -337,7 +330,7 @@ FiM模块的实现高度依赖于应用程序的要求（例如：时序上的�
 
 **FiM**模块需确保通过同步响应传入的权限查询能立即控制相关功能。**FiM**模块需通过将许可状态存储为状态变量，或者通过在权限查询时评估事件的状态。
 
-如果使用接口**FiM_SetFunctionAvailable**将功能（即：FID）设置为不可用，则其权限状态**FiM_GetFunctionPermission**会始终返回**FALSE**。
+如果使用接口[**FiM_SetFunctionAvailable**](#7322-fim_setfunctionavailable)将功能（即：FID）设置为不可用，则其权限状态[**FiM_GetFunctionPermission**](#7321-fim_getfunctionpermission)会始终返回**FALSE**。
 
 #### 6.3.5. FiM的应用示例
 
@@ -361,18 +354,78 @@ FiM模块的实现高度依赖于应用程序的要求（例如：时序上的�
 **Dem**模块可以通过以下的方式计算**IUMPR**:
 
 * FiM配置。
-* 使用指定**FID**来调用**FiM_GetFunctionPermission**函数。
+* 使用指定**FID**来调用[**FiM_GetFunctionPermission**](#7321-fim_getfunctionpermission)函数。
   
 **注意：**
 **FiM**不提供特殊的**OBD II** 功能，但使用现有的**OBD II**机制。
 
+### 6.5. 错误分类
+
+文档[\[1\]](#ref-1)《基础软件模块通用规范》的第 7.x 章「错误处理」详细描述了基础软件的错误处理。最重要的是，它构成了一个由可能发生在**BSW**模块中的五种错误类型组成的分类方案。
+
+在此基础上，以下章节规定了在下面各小节中安排的特定错误。
+
+#### 6.5.1. 开发错误
+
+| 错误类型 | 相关错误代码 | 错误值 |
+|---|---|---|
+| 在 **FiM** 模块完全初始化之前或 **FiM** 模块关闭之后调用 **API** 函数 | FIM_E_UNINIT | 0x01 |
+| 以错误的 **FID** 调用 [FiM_GetFunctionPermission](#7321-fim_getfunctionpermission) | FIM_E_FID_OUT_OF_RANGE | 0x02 |
+| **Dem** 使用无效的 **EventId** 调用 **FiM** | FIM_E_EVENTID_OUT_OF_RANGE | 0x03 |
+| 以 **NULL** 指针调用 **API**。 | FIM_E_PARAM_POINTER | 0x04 |
+| 无效的配置集选择 | FIM_E_INIT_FAILED | 0x05 |
+
+#### 6.5.2. 运行时错误
+
+没有运行时错误。
+
+#### 6.5.3. 瞬态故障
+
+没有瞬态故障。
+
+#### 6.5.4. 生产错误
+
+没有生产错误。
+
+#### 6.5.5. 扩展生产错误
+
+没有扩展生产错误。
+
+### 6.6. 配置约束
+
+对于每个已配置的 [FiMInhibitionConfiguration](#915-fiminhibitionconfiguration)，至少应配置 FiMInhSumRef 或 FiMInhEventRef 或 FiMInhComponentRef 之一。
+
 ## 7. API规范
 
-### 7.1. 函数定义
+### 7.1. 导入的类型
 
-#### 7.1.1. FiM_Init
+在本章中，列出了从以下文件包含的所有类型：
 
-**说明**: 此服务初始化**FIM**。
+**FiM**模块的导入数据类型定义
+
+| 模块 | 头文件 | 导入的类型 |
+|---|---|---|
+| Dem | Dem.h | Dem_ComponentIdType |
+| Dem | Rte_Dem_Type.h | Dem_EventIdType |
+| Dem | Rte_Dem_Type.h | Dem_MonitorStatusType |
+| Std | Std_Types.h | Std_ReturnType |
+| Std | Std_Types.h | Std_VersionInfoType |
+
+### 7.2. 类型定义
+
+#### 7.2.1. FiM_ConfigType
+
+结构类型。元素：-。该类型为 **FIM** 的 Post-Build 参数定义了一个数据结构。在初始化时，**FIM** 会获得一个指向该类型结构的指针，以访问其配置数据，这些数据是初始化所必需的。可通过**FiM.h**获得。
+
+### 7.3. 函数定义
+
+以下是提供给上层模块的函数列表。
+
+#### 7.3.1. 接口 ECU状态管理器 &lt;-&gt; FiM
+
+##### 7.3.1.1. FiM_Init
+
+**说明**: 此服务初始化**FIM**。可通过**FiM.h**获得。本服务为同步调用，不可重入。参数 FiMConfigPtr（in）：-。
 
 ```C
 void FiM_Init (
@@ -380,9 +433,19 @@ void FiM_Init (
 )
 ```
 
-#### 7.1.2. FiM_GetFunctionPermission
+如果开发错误检测被开启，则当 **FiM** 模块尚未成功完成初始化且检测到不允许的访问时，应向 **DET** 报告错误。
 
-**说明**: 此服务将权限状态报告给功能组。
+表示 **FiM** 是否已初始化的静态状态变量应在调用 **FiM** 的任何 **API** 之前初始化为 0。FiM_Init 应将该静态状态变量设置为不等于 0 的值。
+
+为了快速恢复许可状态，建议：如果 **Dem** 和 **FiM** 作为一个集群实现，**Dem** 应提供对监视器状态信息的直接访问。在这种情况下，**FiM** 需要了解 **Dem** 数据结构的知识。
+
+**注意：**在关闭（shutdown）期间没有显式的动作。由于许可状态直接依赖于监视器状态信息，因此在 **ECU** 关闭之前许可状态保持有效。
+
+#### 7.3.2. 接口 软件组件 &lt;-&gt; FiM
+
+##### 7.3.2.1. FiM_GetFunctionPermission
+
+**说明**: 此服务将权限状态报告给功能组。可通过**FiM.h**获得。本服务为同步调用，可重入。参数 FID（in）：通过分配的 **FID** 标识一个功能。FunctionId 在 **FIM** 中配置。最小值：1（0：表示无功能）。最大值：结果大小取决于实现。参数 Permission（out）：**TRUE**：**FID** 有运行的许可；**FALSE**：**FID** 没有运行的许可，即不应被执行。返回值：Std_ReturnType，E_OK：请求被接受；E_NOT_OK：请求未被接受，即 **FIM** 的初始化尚未完成。
 
 ```C
 Std_ReturnType FiM_GetFunctionPermission (
@@ -391,9 +454,17 @@ Std_ReturnType FiM_GetFunctionPermission (
 )
 ```
 
-#### 7.1.3. FiM_SetFunctionAvailable
+软件组件和 **BSW** 应使用函数 FiM_GetFunctionPermission 来查询执行由相应 **FID** 表示的某个功能的许可。
 
-**说明**: 该服务设置功能的可用性。 该功能仅在**FiMAvailabilitySupport**配置为 **True**时可用。
+函数 FiM_GetFunctionPermission 应同步地返回返回值，以便软件组件中的底层控制和执行代码能够直接使用该信息。
+
+如果 **FiM** 模块的开发错误检测被启用：函数 FiM_GetFunctionPermission 应对 **FID** 范围执行合理性检查。如果 **FID** 超出范围，该函数应引发开发错误 [FIM_E_FID_OUT_OF_RANGE](#651-开发错误)。
+
+如果 **FiM** 模块的开发错误检测被启用：函数 FiM_GetFunctionPermission 应检查 **FiM** 模块的初始化是否已完成。如果该函数检测到初始化未完成，则应引发开发错误 [FIM_E_UNINIT](#651-开发错误)。
+
+##### 7.3.2.2. FiM_SetFunctionAvailable
+
+**说明**: 该服务设置功能的可用性。 该功能仅在**FiMAvailabilitySupport**配置为 **True**时可用。可通过**FiM.h**获得。本服务为同步调用，可重入。参数 FID（in）：通过分配的 **FID** 标识一个功能。参数 Availability（in）：所请求 **FID** 的许可：**TRUE**：功能可用；**FALSE**：功能不可用。返回值：Std_ReturnType，E_OK：请求被接受；E_NOT_OK：请求未被接受（例如：给出了无效的 **FID**）。
 
 ```C
 Std_ReturnType FiM_SetFunctionAvailable (
@@ -402,9 +473,11 @@ Std_ReturnType FiM_SetFunctionAvailable (
 )
 ```
 
-#### 7.1.4. FiM_DemTriggerOnMonitorStatus
+#### 7.3.3. 接口 Dem &lt;-&gt; FiM
 
-**说明**: 该服务由**Dem**调用，以通知**Fim**监视器状态更改。
+##### 7.3.3.1. FiM_DemTriggerOnMonitorStatus
+
+**说明**: 该服务由**Dem**调用，以通知**Fim**监视器状态更改。可通过**FiM_Dem.h**获得。本服务为同步调用，可重入。参数 EventId（in）：通过分配的事件编号标识一个事件。事件编号在 **DEM** 中配置。最小值：1（0：表示无事件）。最大值：**Dem** 配置中的事件数量。
 
 ```C
 void FiM_DemTriggerOnMonitorStatus (
@@ -412,9 +485,13 @@ void FiM_DemTriggerOnMonitorStatus (
 )
 ```
 
-#### 7.1.5. FiM_DemTriggerOnComponentStatus
+如果 **FiM** 模块的开发错误检测被启用：函数 FiM_DemTriggerOnMonitorStatus 应对 **EventId** 执行合理性检查。如果请求的 **EventId** 在 **Dem** 配置中不存在，则应引发开发错误 [FIM_E_EVENTID_OUT_OF_RANGE](#651-开发错误)。
 
-**说明**: 该服务触发组件失败状态的变化。
+如果 **FiM** 模块的开发错误检测被启用：函数 FiM_DemTriggerOnMonitorStatus 应检查 **FiM** 的初始化是否完成。如果该函数检测到初始化未完成，则应引发开发错误 [FIM_E_UNINIT](#651-开发错误)。
+
+##### 7.3.3.2. FiM_DemTriggerOnComponentStatus
+
+**说明**: 该服务触发组件失败状态的变化。可通过**FiM_Dem.h**获得。本服务为同步调用，不可重入。参数 ComponentId（in）：标识一个 **DemComponent**。参数 ComponentFailedStatus（in）：组件的新的 **FAILED** 状态。
 
 ```C
 void FiM_DemTriggerOnComponentStatus (
@@ -423,9 +500,9 @@ void FiM_DemTriggerOnComponentStatus (
 )
 ```
 
-#### 7.1.6. FiM_DemInit
+##### 7.3.3.3. FiM_DemInit
 
-**说明**: 此服务重新初始化**FIM**。
+**说明**: 此服务重新初始化**FIM**。可通过**FiM_Dem.h**获得。本服务为同步调用，不可重入。
 
 ```C
 void FiM_DemInit (
@@ -433,9 +510,13 @@ void FiM_DemInit (
 )
 ```
 
-#### 7.1.7. FiM_GetVersionInfo
+函数 FiM_DemInit 应计算所有 **FID** 的许可状态。
 
-**说明**: 该服务返回该模块的版本信息。
+函数 FiM_DemInit 应通过函数 Dem_GetMonitorStatus 访问 **EventId** 状态，并通过 Dem_GetComponentFailed 访问组件信息。
+
+##### 7.3.3.4. FiM_GetVersionInfo
+
+**说明**: 该服务返回该模块的版本信息。可通过**FiM.h**获得。本服务为同步调用，可重入。参数 versioninfo（out）：指向存储本模块版本信息的位置的指针。
 
 ```C
 void FiM_GetVersionInfo (
@@ -443,15 +524,524 @@ void FiM_GetVersionInfo (
 )
 ```
 
-#### 7.1.8. FiM_MainFunction
+#### 7.3.4. 回调通知
 
-**说明**: 该服务由基础软件模块调度程序直接调用。
+本章列出由 **FiM** 模块提供、由下层模块使用的所有函数。
+
+未规定任何回调通知。
+
+#### 7.3.5. 调度函数
+
+本章列出由 **FiM** 模块提供、由基础软件模块调度程序直接调用的所有函数。
+
+##### 7.3.5.1. FiM_MainFunction
+
+**说明**: 该服务由基础软件模块调度程序直接调用。可通过**SchM_FiM.h**获得。服务 ID 0x05。
 
 ```C
 void FiM_MainFunction (
     void
 )
 ```
+
+许可状态的评估可以在事件变化时执行，也可以周期性地执行。
+
+如果 **FiM** 模块轮询监视器状态（如配置参数 FiMEventUpdateTriggeredByDem = FALSE 所定义）并决定以周期性方式进行，则应使用 FiM_MainFunction 来计算所有 **FID** 的许可状态。
+
+如果 Dem_GetMonitorStatus 返回 E_NOT_OK，则 **FIM** 在其禁止掩码计算中不应考虑该事件。
+
+**FiM** 应使用禁止掩码对所有 **EventId** 的实际 **EventIds** 状态信息进行周期性评估，然后计算相应的 **FID** 许可状态。**FiM** 应通过 **RTE** 操作 Dem_GetMonitorStatus 访问监视器状态。
+
+#### 7.3.6. 期望接口
+
+本章列出 **FiM** 模块需要从其他模块获得的所有函数。
+
+##### 7.3.6.1. 强制接口
+
+本章定义实现该模块核心功能所需的所有接口。
+
+| API 函数 | 头文件 | 描述 |
+|---|---|---|
+| Dem_GetMonitorStatus | Dem.h | 获取事件的当前监视器状态。 |
+| SchM_ActMainFunction_FiM | &lt;none&gt; | 调用 SchM_ActMainFunction 函数以触发相应主处理函数的激活。 |
+
+##### 7.3.6.2. 可选接口
+
+本章定义实现该模块可选功能所需的所有接口。
+
+| API 函数 | 头文件 | 描述 |
+|---|---|---|
+| Det_ReportError | Det.h | 报告开发错误的服务。 |
+
+### 7.4. 服务接口
+
+本章规定通过 **VFB** 操作 **FiM** 功能所需的端口和端口接口。
+
+#### 7.4.1. 客户端-服务器接口
+
+##### 7.4.1.1. FiM_FunctionInhibition
+
+使用 **SW-C** 模板的概念，该接口定义如下：
+
+客户端-服务器接口 **FunctionInhibition** 的定义
+
+| 名称 | FunctionInhibition |
+|---|---|
+| 注释 | 软件组件可以使用该服务来查询执行由某个 **FID** 表示的某个功能的许可。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK |
+| 可能的错误 | 1：E_NOT_OK |
+
+**操作** GetFunctionPermission
+
+| 注释 | 获取相应 **FID** 的许可状态。 |
+|---|---|
+| 映射到的API | [FiM_GetFunctionPermission](#7321-fim_getfunctionpermission) |
+| 变体 | - |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+| 参数 | 类型 | 方向 | 描述 |
+|---|---|---|---|
+| Permission | boolean | OUT | 所请求 **FID** 的许可。**TRUE**：**FID** 有运行的许可；**FALSE**：**FID** 没有运行的许可，即不应被执行。 |
+
+##### 7.4.1.2. FiM_ControlFunctionAvailable
+
+使用 **SW-C** 模板的概念，该接口定义如下：
+
+客户端-服务器接口 **ControlFunctionAvailable** 的定义
+
+| 名称 | ControlFunctionAvailable |
+|---|---|
+| 注释 | 软件组件可以使用该服务来设置某个功能的可用性。 |
+| IsService | true |
+| 变体 | ({ecuc(FiM/[FiMGeneral](#912-fimgeneral)/FiMAvailabilitySupport)} == True) |
+| 可能的错误 | 0：操作成功 |
+| 可能的错误 | 1：操作失败 |
+
+**操作** SetFunctionAvailable
+
+| 注释 | 设置某个功能的可用性。 |
+|---|---|
+| 映射到的API | [FiM_SetFunctionAvailable](#7322-fim_setfunctionavailable) |
+| 变体 | - |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+| 参数 | 类型 | 方向 | 描述 |
+|---|---|---|---|
+| Availability | boolean | IN | 所请求 **FID** 的许可：**TRUE**：功能可用；**FALSE**：功能不可用。 |
+
+#### 7.4.2. 实现数据类型
+
+##### 7.4.2.1. FiM_FunctionIdType
+
+实现数据类型 **FiM_FunctionIdType** 的定义
+
+| 名称 | FiM_FunctionIdType |
+|---|---|
+| 种类 | Type，派生自 Basetype uint16 / uint8（取决于平台） |
+| 范围 | 0..255、0..65535 - 功能的标识符。可配置，大小取决于系统复杂度。注：并非所有编号都有效。**FIM** 数据生成工具应只分配有效的值。 |
+| 描述 | FunctionID 的类型 |
+| 变体 | - |
+| 可通过 | Rte_FiM_Type.h |
+
+#### 7.4.3. 端口
+
+端口 **Func_&lt;Name&gt;** 的定义
+
+| 名称 | Func_&lt;Name&gt; |
+|---|---|
+| 种类 | ProvidedPort |
+| 接口 | FunctionInhibition |
+| 描述 | 客户端可以就特定功能的执行许可查询 **FiM**。表示这些功能的 **FID** 并不被客户端 **SW-C** 直接使用，而是使用「端口定义参数值」机制自动分配 **FID**。 |
+| 端口定义参数 | 类型 [FiM_FunctionIdType](#7421-fim_functionidtype)，值 {ecuc(FiM/[FiMConfigSet](#913-fimconfigset)/[FiMFID](#914-fimfid)/FiMFunctionId.value)} |
+| 变体 | Name = {ecuc(FiM/[FiMConfigSet](#913-fimconfigset)/[FiMFID](#914-fimfid).SHORT-NAME)} |
+
+端口 **Control_&lt;Name&gt;** 的定义
+
+| 名称 | Control_&lt;Name&gt; |
+|---|---|
+| 种类 | ProvidedPort |
+| 接口 | ControlFunctionAvailable |
+| 描述 | 客户端可以设置特定功能的可用性。 |
+| 端口定义参数 | 类型 [FiM_FunctionIdType](#7421-fim_functionidtype)，值 {ecuc(FiM/[FiMConfigSet](#913-fimconfigset)/[FiMFID](#914-fimfid)/FiMFunctionId.value)} |
+| 变体 | ({ecuc(FiM/[FiMGeneral](#912-fimgeneral)/FiMAvailabilitySupport)} == True)；Name = {ecuc(FiM/[FiMConfigSet](#913-fimconfigset)/[FiMFID](#914-fimfid).SHORT-NAME)} |
+
+#### 7.4.4. 内部行为
+
+**FiM** 服务的内部行为（InternalBehavior）仅由本地 **RTE** 看到。除了将功能标识符定义为端口定义参数之外，内部行为还必须指定操作所调用的可运行实体：
+
+```
+Internal Behavior FiM { // definition of associated operation-invoked RTE-events not shown
+                        // (it is done in the same way as for any SWC type)
+  // section "runnable entities":
+  RunnableEntity GetFunctionPermission symbol "FiMGetFunctionPermission" canbeInvokedConcurrently { … }
+}
+```
+
+## 8. 时序图
+
+### 8.1. FiM 的初始化时序
+
+![Figure9_1](figure9_1.png)
+
+### 8.2. FiM_DemTriggerOnMonitorStatus
+
+下面的时序图说明了 **Dem** 如何通过调用 [FiM_DemTriggerOnMonitorStatus](#7331-fim_demtriggeronmonitorstatus) 将某个监视器状态的变化通知 **FiM**。此外，它还展示了使用 [FiM_GetFunctionPermission](#7321-fim_getfunctionpermission) 请求许可状态时 **FID** 会受到怎样的影响。
+
+![Figure9_2](figure9_2.png)
+
+## 9. 配置规范
+
+总体而言，本章定义配置参数及其到**容器**（container）的聚类组织。为支持本规范，第 9.1 章描述基础知识，并规定了应用于参数规范的模板（表）。我们有意将这些内容保留在规范中以保证可理解性。
+
+第 9.1 章规定模块 **FiM** 的结构（容器）和参数。
+
+第 9.2 章规定模块 **FiM** 的发布信息。
+
+### 9.1. 容器与配置参数
+
+以下各章汇总所有配置参数。各参数的详细含义见第 6 章和第 7 章。
+
+#### 9.1.1. FiM
+
+| SWS 条目 | [ECUC_FiM_00612] |
+|---|---|
+| 模块名称 | FiM |
+| 描述 | FiM（功能禁止管理器）模块的配置。 |
+| Post-Build 变体支持 | true |
+| 支持的配置变体 | VARIANT-POST-BUILD, VARIANT-PRE-COMPILE |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| FiMConfigSet | 1 | 该容器包含 **FiM** 模块的支持多个配置集的配置参数和子容器。 |
+| FiMGeneral | 1 | - |
+
+![Figure10_1](Figure10_1.png)
+
+#### 9.1.2. FiMGeneral
+
+| SWS 条目 | [ECUC_FiM_00040] |
+|---|---|
+| 容器名称 | FiMGeneral |
+| 父容器 | FiM |
+| 描述 | - |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_FiM_00610] |
+|---|---|
+| 参数名称 | FiMAvailabilitySupport |
+| 父容器 | FiMGeneral |
+| 描述 | 该配置参数指定 **Fim** 是否应支持设置功能可用性的服务。true：支持该服务。false：不支持该服务。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_FiM_00087] |
+|---|---|
+| 参数名称 | FiMDevErrorDetect |
+| 父容器 | FiMGeneral |
+| 描述 | 开启或关闭开发错误检测与通知。* **true**：检测与通知已启用。* **false**：检测与通知已禁用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_FiM_00086] |
+|---|---|
+| 参数名称 | FiMEventUpdateTriggeredByDem |
+| 父容器 | FiMGeneral |
+| 描述 | 该配置参数指定 **FIM** 获取 **EventId** 状态的方式。**TRUE**：**DEM** 将监视器状态的变化通知 **FIM**；**FALSE**：**FIM** 周期性地或在功能查询许可状态时从 **DEM** 模块轮询监视器状态。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_FiM_00611] |
+|---|---|
+| 参数名称 | FiMMainFunctionPeriod |
+| 父容器 | FiMGeneral |
+| 描述 | 允许配置周期性循环任务的时间。请注意：该配置值应与 **RTE** 模块的基础软件调度程序配置中的值相等。**AUTOSAR** 配置…… |
+| 多重性 | 1 |
+| 类型 | EcucFloatParamDef |
+| 范围 | ]0 .. |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_FiM_00608] |
+|---|---|
+| 参数名称 | FiMMaxEventsPerFidInhibitionConfiguration |
+| 父容器 | FiMGeneral |
+| 描述 | 该配置参数指定一个 FiMInhibitionConfiguration 中禁止事件的总数上限。它仅适用于 Post-Build 配置版本，可用于分配内存的最大大小。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 1 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_FiM_00606] |
+|---|---|
+| 参数名称 | FiMMaxFiMInhibitionConfigurations |
+| 父容器 | FiMGeneral |
+| 描述 | 该配置参数指定 FiMInhibitionConfiguration 的总数上限。它仅适用于 Post-Build 配置版本，可用于分配内存的最大大小。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 1 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_FiM_00609] |
+|---|---|
+| 参数名称 | FiMMaxInputEventsPerSummaryEvents |
+| 父容器 | FiMGeneral |
+| 描述 | 该配置参数指定每个汇总事件的输入事件总数上限。它仅适用于 Post-Build 配置版本，可用于分配内存的最大大小。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 1 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_FiM_00607] |
+|---|---|
+| 参数名称 | FiMMaxSumEventsPerFidInhibitionConfiguration |
+| 父容器 | FiMGeneral |
+| 描述 | 该配置参数指定一个 FiMInhibitionConfiguration 中禁止汇总事件的总数上限。它仅适用于 Post-Build 配置版本，可用于分配内存的最大大小。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 1 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_FiM_00091] |
+|---|---|
+| 参数名称 | FiMMaxSummaryEvents |
+| 父容器 | FiMGeneral |
+| 描述 | 该配置参数指定可以配置的汇总事件的最大数量。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_FiM_00094] |
+|---|---|
+| 参数名称 | FiMVersionInfoApi |
+| 父容器 | FiMGeneral |
+| 描述 | 该配置参数用于开启或关闭获取版本信息的 API。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+![Figure10_2](Figure10_2.png)
+
+#### 9.1.3. FiMConfigSet
+
+| SWS 条目 | [ECUC_FiM_00601] |
+|---|---|
+| 容器名称 | FiMConfigSet |
+| 父容器 | FiM |
+| 描述 | 该容器包含 **FiM** 模块的支持多个配置集的配置参数和子容器。 |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| FiMFID | 1..* | 该容器包含所有 **FID** 的符号名。 |
+| FiMInhibitionConfiguration | 1..* | 该容器包含与事件和 **FID** 之间关系有关的所有配置参数。 |
+| FiMSummaryEvent | 0..* | 汇总的 **EventId** 定义记录由一个汇总事件 ID 和特定的 **Dem** 事件组成。该记录表示：在汇总事件发生时应被禁用的特定 **FID**。 |
+
+#### 9.1.4. FiMFID
+
+| SWS 条目 | [ECUC_FiM_00039] |
+|---|---|
+| 容器名称 | FiMFID |
+| 父容器 | FiMConfigSet |
+| 描述 | 该容器包含所有 **FID** 的符号名。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_FiM_00085] |
+|---|---|
+| 参数名称 | FiMFunctionId |
+| 父容器 | FiMFID |
+| 描述 | FimFunctionId 的唯一标识符。该参数不应可由用户更改，因为 Id 应由 **Fim** 自己生成，以防止 Id 出现间隙和重复使用。注意：实现者可以添加…… |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名） |
+| 范围 | 0 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+无包含的容器。
+
+#### 9.1.5. FiMInhibitionConfiguration
+
+| SWS 条目 | [ECUC_FiM_00038] |
+|---|---|
+| 容器名称 | FiMInhibitionConfiguration |
+| 父容器 | FiMConfigSet |
+| 描述 | 该容器包含与事件和 **FID** 之间关系有关的所有配置参数。 |
+| Post-Build 变体多重性 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：x |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_FiM_00096] |
+|---|---|
+| 参数名称 | FiMInhInhibitionMask |
+| 父容器 | FiMInhibitionConfiguration |
+| 描述 | 该配置参数用于指定事件 - **FID** 关系的禁止掩码。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | FIM_LAST_FAILED：Last Failed —— **Dem** 事件状态的 **DEM_UDS_STATUS_TF** 标志被置位。用例：重新配置，避免后续错误。FIM_NOT_TESTED：Not Tested this cycle —— **Dem** 事件状态的 **DEM_UDS_STATUS_TNCTOC** 标志被置位。用例：监控器的调度。FIM_TESTED：Tested —— **Dem** 事件状态的 **DEM_UDS_STATUS_TNCTOC** 标志未被置位。用例：自我停用，在驾驶循环中检查。FIM_TESTED_AND_FAILED：Tested and Failed —— **Dem** 事件状态的 **DEM_UDS_STATUS_TF** 标志被置位且 **DEM_UDS_STATUS_TNCTOC** 标志未被置位。用例：避免死锁，重复监控。 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：x |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_FiM_00605] |
+|---|---|
+| 参数名称 | FiMInhComponentRef |
+| 父容器 | FiMInhibitionConfiguration |
+| 描述 | 对功能许可所必需的 **DemComponent** 的引用。 |
+| 多重性 | 0..* |
+| 类型 | Reference to DemComponent |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_FiM_00100] |
+|---|---|
+| 参数名称 | FiMInhEventRef |
+| 父容器 | FiMInhibitionConfiguration |
+| 描述 | 选择单个 **DEM** 事件。 |
+| 多重性 | 0..* |
+| 类型 | Symbolic name reference to DemEventParameter |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_FiM_00095] |
+|---|---|
+| 参数名称 | FiMInhFunctionIdRef |
+| 父容器 | FiMInhibitionConfiguration |
+| 描述 | - |
+| 多重性 | 1 |
+| 类型 | Reference to FiMFID |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_FiM_00102] |
+|---|---|
+| 参数名称 | FiMInhSumRef |
+| 父容器 | FiMInhibitionConfiguration |
+| 描述 | 选择一个汇总事件。 |
+| 多重性 | 0..* |
+| 类型 | Reference to FiMSummaryEvent |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+![Figure10_3](Figure10_3.png)
+
+#### 9.1.6. FiMSummaryEvent
+
+| SWS 条目 | [ECUC_FiM_00603] |
+|---|---|
+| 容器名称 | FiMSummaryEvent |
+| 父容器 | FiMConfigSet |
+| 描述 | 汇总的 **EventId** 定义记录由一个汇总事件 ID 和特定的 **Dem** 事件组成。该记录表示：在汇总事件发生时应被禁用的特定 **FID**。 |
+| Post-Build 变体多重性 | true |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：x |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_FiM_00604] |
+|---|---|
+| 参数名称 | FiMInputEventRef |
+| 父容器 | FiMSummaryEvent |
+| 描述 | 对组合成该汇总事件的 **DemEventParameter** 的引用。 |
+| 多重性 | 1..* |
+| 类型 | Symbolic name reference to DemEventParameter |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+![Figure10_4](Figure10_4.png)
+
+### 9.2. 发布信息
+
+有关详细信息，请参阅 SWS_BSWGeneral [\[1\]](#ref-1) 中的第 10.3 章「Published Information」（发布信息）。
+
+## B. AUTOSAR 可追溯项变更历史
+
+请注意，本章中的列表还包括在后续版本中已从规范中移除的可追溯项。这些条目不会作为超链接出现在文档中。
+
+### B.1. 本文档相对于 AUTOSAR R23-11 的可追溯项历史
+
+#### B.1.1. R23-11 中新增的规范条目
+
+无
+
+#### B.1.2. R23-11 中变更的规范条目
+
+无
+
+#### B.1.3. R23-11 中删除的规范条目
+
+无
+
+### B.2. 本文档相对于 AUTOSAR R22-11 的可追溯项历史
+
+#### B.2.1. R22-11 中新增的规范条目
+
+```
+[SWS_Fim_NA_00999]
+```
+
+#### B.2.2. R22-11 中变更的规范条目
+
+```
+[SWS_Fim_00006] [SWS_Fim_00011] [SWS_Fim_00021] [SWS_Fim_00027] [SWS_Fim_00060]
+[SWS_Fim_00076] [SWS_Fim_00077] [SWS_Fim_00078] [SWS_Fim_00079] [SWS_Fim_00080]
+[SWS_Fim_00081] [SWS_Fim_00090] [SWS_Fim_00092] [SWS_Fim_00094] [SWS_Fim_00101]
+[SWS_Fim_00106] [SWS_Fim_00107] [SWS_Fim_00108]
+```
+
+#### B.2.3. R22-11 中删除的规范条目
+
+无
 
 <section id="wechat">
 
