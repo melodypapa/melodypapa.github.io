@@ -3,7 +3,7 @@
 > Maintained by the autosar-translate skill per [STANDARD.md](STANDARD.md); update the touched entry and the `Last updated` date after every sync.
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-10-27
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-10-28
 
 ## Backlog
 
@@ -23,7 +23,7 @@
 - [ ] 2026-10-25 tables-as-images retired (STANDARD.md §4 decision — source tables translate as GFM tables): 5 `![Table*.png]` refs remain — bswm 1 (Table7-1 BswMRuleInitState), dcm 1, data_distribution 1, time_service 2; EcuM ✅ (all 7 translated/deleted 2026-10-25), operating_system ✅ (Table7_1 deleted 2026-10-26, GFM table already present)
 - [ ] 4 ⚠️ articles missing only the 「API规范」 chapter: pdu_router, can_interface, ethernet_interface, lin_interface (operating_system ✅ 2026-10-26; crypto_driver ✅ 2026-10-27 — its real gap was source 7.1.2–ch.10, not just the API chapter)
 - [ ] The other 9 ⚠️ articles: complete their respective missing chapters (com_based_transformer, data_distribution, e2e_transformer, sec_oc, SoAd, mirror, dem, fee, dcm) — iohwab ✅ 2026-10-27; memory_access ✅ 2026-10-27
-- [ ] 4 ⛔ stubs: full translation (ethernet_switch_driver, service_discovery, memory_mapping, platform_types — platform_types also needs its front-matter title and nav label fixed in the same change)
+- [ ] 3 ⛔ stubs: full translation (ethernet_switch_driver, service_discovery, platform_types — platform_types also needs its front-matter title and nav label fixed in the same change); memory_mapping ✅ 2026-10-28
 - [ ] 12 🔶 articles: align to Type A — flash_driver/time_service translate their legacy 「配置规范」 chapters in place (allowed since 2026-10-24; source ch.10 → article `## 8. 配置规范`); nvram drops the 「需求追踪」 chapter and fixes 「功能说明」; unify remaining legacy wording to STANDARD.md terms
 - [ ] IO section ✅ articles' heading-wording alignment (DIO/Port/PWM/OCU/ICU done 2026-10-24; same-class deviations remain): adc 4.2 「适用车型域」→「汽车域的适用性」
 - [ ] 4.2 「适用于汽车领域」→「汽车域的适用性」 (named in STANDARD.md 2026-10-24): bswm, ecu_state_manager, data_distribution (crypto_driver + crypto_service_manager ✅ 2026-10-27); 「对汽车领域的适用性」: ethernet_driver, can_interface; 「汽车领域的适用性」: nvram_manager
@@ -135,7 +135,7 @@
 - 🔶 [NvM](nvram_manager/) — SWS_NVRAMManager (contains the forbidden "需求追踪" chapter; "功能说明" legacy wording)
 - ⚠️ [Fee](flash_eeprom_emulation/) — SWS_FlashEEPROMEmulation (missing constraints/dependencies)
 - ✅ [AUTOSAR Memory Access（存储访问）](memory_access/) — SWS_MemoryAccess · R23-11 (2026-10-27 full Type A sync: §7 API规范 (31 types, 19 functions), §8 时序图 (7 diagrams), §9 配置规范, appendix B; 17 glossary terms added; source requirement tracing and Not applicable requirements omitted per STANDARD.md)
-- ⛔ [内存映射](memory_mapping/) — SWS_MemoryMapping (stub)
+- ✅ [AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory_mapping/) — SWS_MemoryMapping · R23-11 (2026-10-28 full Type A sync: §1 简介和功能概述 + 5 用例, §2 缩略语 (4 terms), §3 相关文档 (13 inputs), §4 约束和假设, §5 对其他模块的依赖, §6 功能规格 (16 source tables 7.1–7.16), §7 API规范 (不适用), §8 时序图 (不适用), §9 配置规范 (7 containers), §10 分析 (3 tables 11.1–11.3), §11 引用的元类 (26 meta classes), appendix B; 14 figures; source requirement tracing and Not applicable requirements omitted per STANDARD.md)
 - 📖 [NV 数据处理指南](nv_data_handling_guideline/) — EXP_NVDataHandling (exempt)
 
 ❌ Missing (6): SWS_EEPROMAbstraction (Ea), SWS_EEPROMDriver (Eep), SWS_MemoryAbstractionInterface, SWS_MemoryDriver, SWS_FlashTest (FlsTst), SWS_RAMTest (RamTst)
