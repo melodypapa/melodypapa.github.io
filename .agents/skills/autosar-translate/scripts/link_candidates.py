@@ -109,13 +109,19 @@ def chref_spans(seg: str):
     章节6.3启动（STARTUP）和 6.4 关闭（SHUTDOWN） form — no marker, the CJK
     tail is what separates it from decimal units like 3.3 V). Figure AND
     table refs (图 9.5 所示, 表 7.3 — 图 9.1 collides with the real §9.1
-    heading and EcuM's 表7.x collide with the §7.x API sections) and
+    heading and EcuM's 表7.x collide with the §7.x API sections), code-listing
+    refs (清单3.4 / 示例3.4 — the mode-management guide's lstlisting.3.N
+    artifacts, which collide with its §3.4) and
     identifier tails (B.2.2, X_2.3) never qualify — captions carry no
     anchor, so a table ref has nothing to link anyway. A bare 第N (第1部分,
     figure-caption part numbers) is NOT a ref unless N is dotted or carries
     a 章/节 suffix, and a number whose preceding text names another AUTOSAR
     document (按照AUTOSAR_SWS_Mcu_Driver第9.1章 — that is the MCU driver's
-    §9.1, not this article's) never qualifies. Resolution against actual
+    §9.1, not this article's; likewise 《基础软件模块通用规范》（**General
+    Specification of Basic Software Modules**）的第7.2章 and 参见相关文档[6]中
+    第13.6.5节 — a 《title》, a bolded "Specification" title or a citation
+    marker in the preceding window all name another document) never
+    qualifies. Resolution against actual
     heading numbers is the caller's job — an unmatched number (source
     renumbering artifact like EcuM's 7.9节) is census-reported, never linked."""
     out = []
@@ -128,16 +134,23 @@ def chref_spans(seg: str):
             pass
         elif ("." in num
               and re.search(r"[A-Za-z0-9_.]\s*$", pre) is None
-              and re.search(r"(?:图|表)\s*$", pre) is None
+              and re.search(r"(?:图|表|清单|示例)\s*$", pre) is None
               and re.match(r"\s*[\u4e00-\u9fff]", post)
               and re.match(r"\s*(?:天|毫秒|微秒|秒|分钟|小时|位|字节|倍|年|月)",
                            post) is None):  # a decimal + unit (4.9 天), not a ref
             pass
         else:
             continue
-        if re.search(r"(?:SWS|SRS|EXP|TPS|TR)_[A-Za-z0-9_]+", pre[-60:]):
-            continue  # another document's chapter number (id anywhere in the
-            # preceding window — connectors like 第/规范 may sit between)
+        if re.search(r"(?:图|表|清单|示例)\s*$", pre):
+            continue  # a labelled artifact number (清单3.4 = source lstlisting.3.4,
+            # the mode-management guide's code listings), never a section
+        if re.search(r"(?:SWS|SRS|EXP|TPS|TR)_[A-Za-z0-9_]+|》|\bSpecification\b"
+                     r"|\[\\?\[?\d+\\?\]", pre[-60:]):
+            continue  # another document's chapter number: a doc id, a 《title》,
+            # a bolded English "Specification …" title, or a citation marker
+            # [n] anywhere in the preceding window (《基础软件模块通用规范》的第7.2章
+            # is SWS_BSWGeneral's §7.2, not this article's; connectors like
+            # 第/规范/的 may sit between)
         out.append((m.start(), m.end(), num))
     return out
 
@@ -662,7 +675,7 @@ AUTOSAR_STD_ROOT = os.environ.get(
 # Not applicable requirements (user decision 2026-10-25). Appendix B
 # (change history) is kept as `## B.`.
 PDF_CHAPTERS = [
-    (r"introduction", r"简介"),
+    (r"introduction", r"简介|介绍|引言"),
     (r"definitions|abbreviations|acronyms", r"定义|缩略语"),
     (r"related documentation", r"相关文档"),
     (r"constraints", r"约束"),
@@ -762,7 +775,14 @@ def pdf_chapter_map(outline, lines, headings, page_count):
         if pat is None:
             entry["reason"] = "dropped by Type A"
         elif pat == "":
-            entry["reason"] = "unmapped title (links counted, numbers not mapped)"
+            # not a Type A skeleton title (EXP guides number their own
+            # chapters): same-number identity when the article has that
+            # chapter — nothing is dropped in a guide, so numbers line up
+            same = next((n for (n, _t) in art if n == num), None)
+            if same is not None:
+                entry["article"] = same
+            else:
+                entry["reason"] = "unmapped title (links counted, numbers not mapped)"
         else:
             hit = next((n for (n, t) in art if re.search(pat, t)), None)
             if hit is None and num.isalpha():
@@ -821,11 +841,19 @@ def pdf_census(article: str, pdf_arg: str):
     print(f"  front matter (TOC) links skipped: {len(front)}; excluded-chapter links: {len(excluded)}; "
           f"body links analysed: {len(kept)}")
 
-    # --- caption inventory (captions keep SOURCE numbering: 图7.1 under §6) --
+    # --- figure/table inventory: any numbered 图/表 mention — a caption line
+    # (表7.1：…) or a prose ref (下图**7-4**显示了, 如上图7-2所示) — since ch.7
+    # figures are referenced in prose in this corpus; numbers keep SOURCE
+    # numbering (图7.1 under §6). Headings/fences excluded. --------------------
     caps = set()
+    fence = False
     for ln in lines:
-        m = re.match(r"^\**\s*(图|表)\s*(\d+)[.\-](\d+)", ln)
-        if m:
+        if ln.startswith("```"):
+            fence = not fence
+            continue
+        if fence or ln.startswith("#"):
+            continue
+        for m in re.finditer(r"(图|表)\s*\**\s*(\d+)[.\-](\d+)", ln):
             caps.add(("figure" if m.group(1) == "图" else "table", f"{m.group(2)}.{m.group(3)}"))
 
     def present(name):
@@ -952,8 +980,10 @@ def pdf_census(article: str, pdf_arg: str):
         if ln.startswith("#"):
             continue
         for (_cls, name) in ids:
-            if name in ln and re.search(rf"(?<![A-Za-z0-9_]){re.escape(name)}(?![A-Za-z0-9_])", ln):
-                mentions[name] = mentions.get(name, 0) + 1
+            if name in ln:
+                n = len(re.findall(rf"(?<![A-Za-z0-9_]){re.escape(name)}(?![A-Za-z0-9_])", ln))
+                if n:
+                    mentions[name] = mentions.get(name, 0) + n
     by_cls = {}
     for (cls, name), (pre, cfg) in ids.items():
         by_cls.setdefault(cls, []).append((name, pre, cfg))
@@ -1011,11 +1041,11 @@ def pdf_census(article: str, pdf_arg: str):
           + (f" ({', '.join(sorted(set(unres_list))[:12])})" if unres_list else ""))
     have = [k for k in capsrc if k in caps or (art_num(k[1]) and (k[0], art_num(k[1])) in caps)]
     miss = sorted(k for k in capsrc if k not in have)
-    print(f"  -- figure/table refs: {sum(capsrc.values())} links -> {len(capsrc)} captions;"
-          f" {len(have)} captions exist in the article (anchor-less by rule — report-only),"
-          f" {len(miss)} have no caption")
+    print(f"  -- figure/table refs: {sum(capsrc.values())} links -> {len(capsrc)} figures/tables;"
+          f" {len(have)} are mentioned by number in the article (caption line or prose ref —"
+          f" anchor-less by rule, report-only), {len(miss)} are not")
     if miss:
-        print("      no caption (dropped figure, or a caption the article lacks — content check): "
+        print("      no numbered mention (dropped figure, or a 下图/该图 ref that lost its number — content check): "
               + ", ".join(f"{k[0]} {k[1]}" for k in miss))
 
     # --- requirement ids / footnotes / external ------------------------------
