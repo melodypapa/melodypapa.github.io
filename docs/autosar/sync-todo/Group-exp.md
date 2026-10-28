@@ -111,13 +111,19 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
   - [x] Step 6 — TODO.md row + commit/PR
-- [ ] exp macro_encapsulation_of_interpolation_calls (AUTOSAR_EXP_MacroEncapsulationofInterpolationCalls · Libraries · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] exp macro_encapsulation_of_interpolation_calls (AUTOSAR_CP_EXP_MacroEncapsulationofInterpolationCalls · Libraries · ❌ new article · 📖 skeleton-exempt)
+  - Note: numbered prose EXP document, chapters 1–7 mirrored; also creates the NEW libraries/ section (landing page docs/autosar/libraries/index.md + nav group 库（Libraries） before 模板) — first row of the libraries section per Group-libraries convention
+  - Note: 7.2.1 artifact table had a triple-duplicated description column (conversion chrome) — collapsed; page-decoration text between slides dropped (UML chrome)
+  - Note: census: 6 chapter-number refs applied, idempotent; citation registry 2.1/2.2 lists have no [n] prose citations (0 linked); cross-article mentions report-only (DEM ×1)
+  - Note: glossary +2 (IFX, IFL)
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] exp firmware_over_the_air (AUTOSAR_EXP_FirmwareOverTheAir · Memory · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
