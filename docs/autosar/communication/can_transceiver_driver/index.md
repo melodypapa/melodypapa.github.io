@@ -382,6 +382,8 @@ CAN收发器驱动程序需使用时间服务（Time service）的**Tm_BusyWait1
 
 ### 6.12. 安全事件
 
+该模块不报告安全事件。
+
 ## 7. API规范
 
 ### 7.1. 导入的类型
@@ -563,13 +565,11 @@ Std_ReturnType CanTrcv_CheckWakeFlag (uint8 Transceiver )
 void CanTrcv_DeInit ( void )
 ```
 
-### 7.4. 回调通知
+### 7.4. 调度函数
 
-由于 **CanTrcv** 是驱动程序模块，它不为下层模块提供任何回调函数。
+本章列出 **CanTrcv** 模块提供的、由基础软件模块调度器（**BSW Module Scheduler**）直接调用的所有函数。
 
-### 7.5. 调度函数
-
-#### 7.3.16. CanTrcv_MainFunction
+#### 7.4.1. CanTrcv_MainFunction
 
 **说明**: 用于扫描所有总线以查找唤醒事件并执行这些事件的服务。
 
@@ -577,13 +577,17 @@ void CanTrcv_DeInit ( void )
 void CanTrcv_MainFunction ( void )
 ```
 
-#### 7.3.17. CanTrcv_MainFunctionDiagnostics
+#### 7.4.2. CanTrcv_MainFunctionDiagnostics
 
 **说明**: 定期读取收发器诊断状态并相应报告生产或开发的错误。
 
 ```C
 void CanTrcv_MainFunctionDiagnostics ( void )
 ```
+
+### 7.5. 回调通知
+
+由于 **CanTrcv** 是驱动程序模块，它不为下层模块提供任何回调函数。
 
 ### 7.6. 期望接口
 
