@@ -18,42 +18,59 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (src ch.1–5→§1–§5, ch.7→§6, ch.8→§7, ch.9→§8, ch.10→§9, ch.12→§10; ch.6 + ch.11 dropped; the 3-level scalability structure and IB/EB split verified section by section)
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
   - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-crypto-sync · PR #141 (Closes issue #140))
-- [ ] ldcom (SWS_LargeDataCOM · R23-11 markdown · ❌ new article, short name LdCom)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] lsdu (SWS_LSduRouter · R23-11 markdown · ❌ new article, short name LsDu)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] dlt (SWS_DiagnosticLogAndTrace · R23-11 markdown · ❌ new article, short name Dlt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] doip (SWS_DiagnosticOverIP · R23-11 markdown · ❌ new article, short name DoIp)
-  - Note: acronym-ambiguous (DoIp) — directory name decided with the user in Step 1
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] xcp (SWS_XCP · R23-11 markdown · ❌ new article, short name XCP)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] ldcom (SWS_LargeDataCOM · R23-11 markdown · ❌ new article, short name LdCom)
+  - Note: article `communication/large_data_com/` (full-name directory convention, nav label "LdCom", landing-page 数据处理与安全 group). Shape: ch.2 2 acronyms (DEM/DET, 来源 lines appended to existing glossary entries) · ch.6 dropped · ch.7 → §6 (6.3 总体 carries 表6.1 API到参数映射 rebuilt from the page-broken 2-fragment source table; 6.4/6.5 IF/TP; 6.6.1 表6.2 dev errors; 6.6.2–6.6.5 no-error sentences) · ch.8 → §7 (7.1 9 imported types; 7.2.1 LdCom_ConfigType prose-style; 7.3 4 functions; 7.4 8 callbacks with full service-table folding; 7.5 调度函数 None → sentence; 7.6.1 强制接口 None → sentence; 7.6.3 8 configurable interfaces; 7.7 服务接口 None → sentence) · ch.9 → §8 (5 figures) · ch.10 → §9 (9 containers, 值配置类 with VARIANT scopes, callback-type Range rows folded into the cell; LdComUserCallbackType LDCOM_TX_TRIGGER_TRANSMIT row carries the source's own duplicated TX_CONFIRMATION description — kept verbatim as a source typo) · ch.A dropped · ch.B → appendix B
+  - Note: page-break-truncated table cells (8.4.1/8.4.3/8.4.8 Description) completed from the same source's sibling configurable-interface entries (91001/91003/91007 carry the identical sentences in full); "(draft)"/{DRAFT}/"Tags: atp.Status=draft" dropped as chrome; PDF-hyphenation artifacts (Ld-Com_Init, LdCo-mUser, TpRxIndicationshall) reconstructed; §3.1 registry reformatted to the [n] Title + > doc-id house format (script recognized it only in that shape)
+  - Note: Phase A — strict build exit 0 / 0 WARNING; headings §1–§9 + B continuous; hygiene 0 h1/{DRAFT}/\</requirement-ids; acronym 2 rows = source 2 rows, no tables; check_api_sync 1 type/4 functions OK; gen_api_list regenerated (LdCom 1 type + 4 functions SITE-linked, --check 0); census --apply: 24 identifier/chapter-ref links + 3 citation links + 11 registry anchors, idempotent re-run 0 lines; comma-form citations [n, 文档名] (7) stay prose — known open apply limitation; [6]/[10] EXTERNAL:? = known DOC_TARGETS gaps (report-only)
+  - Note: Phase B — coverage map: ch.1→§1, 2→§2, 3→§3, 4→§4, 5→§5, 7→§6, 8→§7, 9→§8, 10→§9, B→B; ch.6 + A dropped (compliance); all 11 content figures embedded (5+6, deco/≤345px chrome dropped by hash+size triage); §3.1 comma-form [n, 文档名] left unlinked pending the user's comma-form decision
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion (new article, main session per no-subagent rule)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (evidence above)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync · PR #177 (Closes issue #176)
+- [x] lsdu (SWS_LSduRouter · R23-11 markdown · ❌ new article, short name LsDu)
+  - Note: article `communication/lsdu_router/` (directory lsdu_router, nav label "LsDu" per this row; the source text itself names the module LSduR — identifiers kept verbatim). Shape: Known Limitations "- No content" → omitted per the 2026-10-28 placeholder rule · ch.1 → §1 (1.1–1.3, figures 1.1/1.2) · ch.2 → §2 15 rows incl. <SrcLo>/<DstLo>/<Lo>/<Up> entity term lines · 3.1 registry + 3.2 相关规范 · ch.5 → §5 (5.1.1/5.1.2, 5.2 版本检查) · ch.6 dropped · ch.7 → §6 (6.1 L-SDU 处理 with 6.1.1.1/6.1.2.1 groups; source depth-5 headings 7.1.2.1.1/.2 rendered as ###### with full numbers — h7 unsupported, recorded deviation; 6.2 零成本运行, 6.3 状态管理 + Figure7_2, 6.4 复杂驱动交互, 6.7 error tables incl. runtime table) · ch.8 → §7 (grouped 7.3.1 通用函数 / 7.3.2 上层可配置接口 / 7.3.3 下层可配置接口; 9 functions; 7.2.1 PBConfigType prose-style) · ch.9 → §8 (2 figures) · ch.10 → §9 (10.1 folded, 10.1.1 → 9.1 变体, 5 containers with sub-container tables inline; scope: ECU withAuto = true cells) · ch.A dropped · ch.B → B (B.1.1 added-items list was an IMAGE in the markdown conversion — 57 item IDs recovered verbatim from the R23-11 PDF page 52)
+  - Note: source typos kept verbatim and reported: 7.7.4 says "The IEEE1722Tp module does not define production errors" (copy-paste, context is LSduR), 8.2.3 intro says the state type "is returned by the LSduR_GetConfigurationId API" (copy-paste from 8.2.2); source typo CORRECTED: LSduR_GetVersionInfo Syntax "Std_VersionInfoType versionInfo" → `Std_VersionInfoType* versionInfo` (Parameters(out) says pointer; gpt source-typo-correction precedent)
+  - Note: Phase A — strict build exit 0 / 0 WARNING; headings §1–§9 + B; hygiene 0; acronym 15 rows = source 15 rows, no tables; check_api_sync = N/A (source 8.3.x are group headings, functions live at 8.3.x.y — script shape unsupported, RTE/CoreTest precedent): manual name/order verification 9/9 exact match incl. <User:Up>/<User:Lo> entities; gen_api_list regenerated (LSduR 3 types + 9 functions SITE-linked, --check 0); census --apply: 16 links + 3 chapter-refs + 4 citation links + 8 registry anchors, idempotent; comma-form [n, 文档名] unlinked per open limitation
+  - Note: glossary +11 new terms (I-PDU ID, L-PDU ID, L-SDU, L-SDU ID, L-SDU Router, Lower/Upper Layer Modules, <SrcLo>/<DstLo>/<Lo>/<Up>) + 4 来源 appends (PDU/I-PDU/L-PDU/SDU one-term-once)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion (new article, main session per no-subagent rule)
+  - [x] Step 3 — Phase A mechanical checks (evidence above; check_api_sync N/A with manual substitute)
+  - [x] Step 4 — Phase B coverage map + fidelity (10 content figures embedded; deco dropped; source typos listed above)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync · PR #177 (Closes issue #176)
+- [x] dlt (SWS_DiagnosticLogAndTrace · R23-11 markdown · ❌ new article, short name Dlt)
+  - Note: article `communication/diagnostic_log_and_trace/` (full-name directory, nav label "Dlt"). Shape: ch.2 → §2 (18 acronyms + ### 2.1 术语和定义 14 terms, all bold+blockquote) · 3.1 12-entry registry + 3.2 相关标准与规范 ([4, ISO-7498-1] one-liner) + 3.3 相关规范 · ch.7 → §6 (6.1 Dlt 规格: 表6.1 Service-ID 映射 18 rows; 6.1.2 与 SW-C 交互 + Figure7_1; 6.1.3 VFB 跟踪 with the source's pseudo-code fences; 6.1.9 发送数据路径 with source-kept figure numbers 图7.2→Figure7_2 and depth-5 6.1.9.9.1/.2 as ######; 6.1.10 15 Rx 命令; 6.1.11.1 BufferOverflowNotification; 6.2 错误分类 dev+runtime tables) · ch.8 → §7 (4 types; 24 functions; 8 callbacks; 7.5.1 Dlt_TxFunction; 7.6.1 强制/7.6.2 可选 8 rows incl. obsolete StbM_GetCurrentTimeExtended; 7.6.3 Dlt_InjectCall_<SESSION> table; 7.7 服务接口: 4 C/S interfaces — DltControlService 15 ops, InjectionCallback 1, LogTraceSessionControl 2, DltSwcMessageService 6 — each op as a vertical table; source's garbled/spilled op tables (GetTraceStatus/ResetToFactoryDefault/SetDefaultTraceStatus/SetLogChannelAssignment fragments) reconstructed from the fragments + the 1:1 API-table fields; 7.7.2 15 implementation data types (7.7.2.13 carries both LogChannelNameInfoType + LogChannelNameType per source); 7.7.3 4 ports) · ch.9 → §8 (4 figures) · ch.10 → §9 (18 containers, DltEcuId choice container, figures 10.1–10.9 embedded) · appendix A "Mentioned Class Tables" = CONTENT annex → `## A. 提及的类表` (3 meta-model class tables recovered from the R23-11 PDF pages 123–124 — the markdown carries only images), lettered per the rte precedent for source-lettered annexes · ch.6 dropped · appendix B → B (B.1.1 added-items table had 130 Number+Heading rows; rendered as the established ID-only code fence, Heading column dropped — record for user verification; recovered from the PDF pages 125–130)
+  - Note: {OBSOLETE} heading marker on Dlt_MessageIDType dropped as chrome; the "(OBSOLETE)" suffix in the type's Name cell kept; "Tags: atp.Status=draft/obsolete" chrome dropped
+  - Note: Phase A — strict build exit 0 / 0 WARNING; headings §1–§9 + A + B; hygiene 0; acronym rows 18+14 = source 18+14, no tables; check_api_sync OK (4 types / 24 functions / 24 说明 blocks); gen_api_list regenerated (Dlt 4 types + 24 functions SITE-linked, --check 0); census --apply: 156 links + 2 chapter-refs + 13 citation links + 12 registry anchors, idempotent re-run 0 lines; comma-form [n, 文档名] stays prose per open limitation
+  - Note: glossary +32 entries (18 acronyms + 14 ch.2.1 terms), no appends needed (no overlaps found)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion (new article, main session per no-subagent rule)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (16 content figures embedded; deco dropped; appendix A/B PDF recovery as noted)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync · PR #177 (Closes issue #176)
+- [x] doip (SWS_DiagnosticOverIP · R23-11 markdown · ❌ new article, short name DoIp)
+  - Note: directory name `diagnostic_over_ip` chosen per the full-name convention (spi_handler_driver/diagnostic_log_and_trace precedent) WITHOUT a Step-1 user decision — the per-run instruction was to commit without confirmation; user should verify in the batched report (row originally asked for a user decision). Nav label "DoIp". Shape: ch.1 stray "TLS" heading suffix + "ICMP|" stray line treated as conversion chrome · ch.2 12 acronyms · ch.4 has NO Limitations section → §4 carries only 4.1 汽车域的适用性 (renumbered down, noted) · ch.7 → §6 (6.1.1 DRAFT extension kept incl. its DRAFT marker in the heading as source content; 6.3 表7.1–7.14 payload-layout tables; 6.3.2.x.y depth-5 headings as ###### with full numbers; 6.6.1 dev-error table 表6.1) · ch.8 → §7 (8.1 import table + 6 Rte_DoIP_Type.h implementation data types rendered under 7.1; DOIP_E_PENDING=0x10 sentence above 7.2; 9 functions; 9 callbacks; MainFunction; 7.6.3 6 configurable interfaces; 7.6.4 服务组件 = 5 C/S interfaces + 5 ports rendered as vertical tables) · ch.9 → §8 (5 figures) · ch.10 → §9 (10.1 folded + 10.2.1 → 9.1 变体; 26 containers 9.2.1–9.2.26; 11 container figures; 8 scope cells missing in the markdown conversion recovered from the R23-11 PDF: DoIPMaxUDPRequestPerConnection/DoIPMaxTesterConnections Range 1..255 + scope local, DoIPDhcpOptionVinUse/DoIPHostNameSizeMax/DoIP_ISO13400_2_2012 scope local, DoIPNodeType range descriptions) · ch.6 dropped · source appendix A "Change History" → canonical `## B. AUTOSAR 可追溯项变更历史` (letter renumbered A→B per the STANDARD lettered-form reservation; B.1 = R22-11 with 46 changed ids, B.2 = R23-11 with 10 added/9 changed)
+  - Note: Phase A — strict build exit 0 / 0 WARNING; headings §1–§9 + B; hygiene 0; acronym 12 rows = source 12 rows, no tables; check_api_sync flags one name: source 8.3.9 heading carries the conversion artifact "DoIP_ TriggerVehicleAnnouncement" (stray space) — 9/9 names match after artifact normalization, recorded as N/A-with-explanation; gen_api_list regenerated (DoIP 1 type + 9 functions SITE-linked, --check 0); census --apply: 152 links + 1 chapter-ref + 14 citation links + 8 registry anchors, idempotent; comma-form [n, 文档名] stays prose
+  - Note: glossary +12 new terms (ARP, DHCP, EID, GID, ICMP, IP, IPv4, IPv6, TCP, TCP/IP, VIN, UDP), no appends needed
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion (new article, main session per no-subagent rule)
+  - [x] Step 3 — Phase A mechanical checks (evidence above; one artifact-normalized name)
+  - [x] Step 4 — Phase B coverage map + fidelity (19 content figures embedded; deco dropped)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync · PR #177 (Closes issue #176)
+- [x] xcp (SWS_XCP · R23-11 markdown · ❌ new article, short name XCP)
+  - Note: article `communication/xcp/`, nav label "Xcp". Shape: ch.2 32 acronyms · ch.6 dropped · ch.7 → §6 (6.1–6.3 XCP on CAN/FlexRay/Ethernet, 6.4 通用需求, 6.5 错误分类 dev table (source-typo error code CP_E_INVALID_PDUID kept verbatim), 6.6 版本检查, 6.7 安全事件; Figure7_1 architecture diagram) · ch.8 → §7 (2 types incl. Xcp_TransmissionModeType — source heading carries stray-space artifact "Xcp_Transmission Mode Type"; 3 functions; 3 callbacks with <Lo> placeholder entities; MainFunction; 7.6.1 强制接口 "There are no mandatory interfaces." table → sentence; 7.6.2 可选接口 8 rows; 7.6.3 可配置接口 prose only) · ch.9 → §8 (6 figures) · ch.10 → §9 (15 containers 9.1.1–9.1.15, XcpPdu choice container, figures 10.1–10.6) · ch.A "Not applicable requirements" dropped (droppable set) · ch.B → B (B.1.1 R22-11 78 ids + B.2.1 R23-11 79 ids recovered from the markdown text lists)
+  - Note: Phase A — strict build exit 0 / 0 WARNING; headings §1–§9 + B; hygiene 0; acronym 32 rows = source 32 rows, no tables; check_api_sync flags one name: source 8.2.2 heading artifact "Xcp_Transmission Mode Type" — 2/2 types and 3/3 functions match after artifact normalization, recorded as N/A-with-explanation; gen_api_list regenerated (XCP 2 types + 3 functions SITE-linked, --check 0); census --apply: 6 links + 1 chapter-ref + 33 citation links + 11 registry anchors, idempotent
+  - Note: glossary +22 new terms (A2L, ASAM, CAN, CanIf, CTO, DAQ, DTO, FrIf, LPDU, MCD, MISRA, ODT, RAM, ROM, SchM, SRS, STIM, SWS, TS, UDP/IP, URL, XCP), no appends needed
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion (new article, main session per no-subagent rule)
+  - [x] Step 3 — Phase A mechanical checks (evidence above; one artifact-normalized name)
+  - [x] Step 4 — Phase B coverage map + fidelity (13 content figures embedded; deco dropped)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync · PR #177 (Closes issue #176)
 - [ ] canxl_driver (SWS_CANXLDriver · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

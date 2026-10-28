@@ -125,19 +125,24 @@ nav:
       - "CanTrcv": autosar/communication/can_transceiver_driver/index.md
       - "ComXf": autosar/communication/com_based_transformer/index.md
       - "DDS": autosar/communication/data_distribution service/index.md
+      - "Dlt": autosar/communication/diagnostic_log_and_trace/index.md
+      - "DoIp": autosar/communication/diagnostic_over_ip/index.md
       - "E2EXf": autosar/communication/e2e_transformer/index.md
       - "Eth": autosar/communication/ethernet_driver/index.md
       - "EthIf": autosar/communication/ethernet_interface/index.md
       - "EthSwt": autosar/communication/ethernet_switch_driver/index.md
       - "FvM": autosar/communication/fvm/fvm.md
+      - "LdCom": autosar/communication/large_data_com/index.md
       - "Lin": autosar/communication/lin_driver/index.md
       - "LinIf": autosar/communication/lin_interface/index.md
+      - "LsDu": autosar/communication/lsdu_router/index.md
       - "Mirror": autosar/communication/mirror/mirror.md
       - "PduR": autosar/communication/pdu_router/index.md
       - "SecOC": autosar/communication/sec_oc/index.md
       - "SD": autosar/communication/service_discovery/index.md
       - "Spi": autosar/communication/spi_handler_driver/index.md
       - "SoAd": autosar/communication/SoAd/SoAd.md
+      - "Xcp": autosar/communication/xcp/index.md
       - "UdpNm": autosar/communication/udp_network_management/index.md
     - 加密（Crypto）:
 
@@ -198,18 +203,29 @@ nav:
       - "FiM": autosar/system_services/function_inhibition_manager/index.md
       - "Os": autosar/system_services/operating_system/index.md
       - "Time Service": autosar/system_services/time_service/index.md
+      - "软件集群设计与集成指南": autosar/system_services/sw_cluster_design_and_integration/index.md
     - 功能安全:
       - autosar/safety/index.md
       - "WdgM": autosar/safety/watchdog_manager/index.md
       - "WdgIf": autosar/safety/watchdog_interface/index.md
       - "Wdg": autosar/safety/watchdog_driver/index.md
+      - "AUTOSAR 功能安全措施概览": autosar/safety/functional_safety_measures/index.md
+      - "安全用例": autosar/safety/safety_use_case/index.md
     - RTE:
 
       - "RTE": autosar/rte/index.md
+    - SW 架构（SW Architecture）:
+      - autosar/sw_arch/index.md
+      - "AUTOSAR 运行时接口（ARTI）": autosar/sw_arch/arti/index.md
     - 应用接口:
       - autosar/application_interfaces/index.md
       - "ADAS 与车辆运动控制接口": autosar/application_interfaces/adas_vmc/index.md
       - "车身与舒适域应用接口": autosar/application_interfaces/body_and_comfort/index.md
+      - "底盘域应用接口": autosar/application_interfaces/chassis/index.md
+      - "HMI/多媒体/远程信息处理域应用接口": autosar/application_interfaces/hmi/index.md
+      - "乘员与行人安全系统域应用接口": autosar/application_interfaces/occupant_safety/index.md
+      - "动力总成（发动机）域应用接口": autosar/application_interfaces/powertrain/index.md
+      - "应用接口用户指南": autosar/application_interfaces/user_guide/index.md
     - 库:
       - autosar/libraries/index.md
       - "插值调用宏封装": autosar/libraries/macro_encapsulation_of_interpolation_calls/index.md

@@ -303,13 +303,24 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
   suffixed titles like `EcuM_ShutdownTarget端口接口` are never link targets),
   config-container mentions (identifier-titled headings inside the 配置规范
   chapter — `EcuMDriverInitListZero` is §9.1.7, not ch.7, and its pre-ch.9
-  参见 mentions must still link; user decision 2026-10-27. The chapter's
-  FIRST identifier-titled heading is the module-named top container
-  (`#### 9.1.1. EcuM`, `#### 9.1.1. Gpt`, `#### 9.1.1. Mcu`) and is NEVER a
-  target — it is the module NAME, not a container mention, and an article
-  never links its own module name. --apply still stops at 配置规范, so only
-  pre-config-chapter prose converts; the config tables stay definitional.
-  A same-named ch.7 heading always wins over the config heading),
+  参见 mentions must still link; user decision 2026-10-27. Module-named top
+  containers are NEVER targets — they are the module NAME, not a container
+  mention, and an article never links its own module name. The FIRST
+  identifier-titled config heading covers the single-module layout
+  (`#### 9.1.1. EcuM`, `#### 9.1.1. Gpt`, `#### 9.1.1. Mcu`); documents with
+  TWO config modules (LIN Interface: `#### 9.3.1. LinIf` +
+  `#### 9.4.1. LinTp`) are caught by the title check — a config heading
+  whose title is a ch.7 identifier prefix (`LinTp_` of **LinTp_Init**) is a
+  module name wherever the config chapter puts it, while a real container
+  (`EcuMDriverInitListZero` — no ch.7 identifier starts with
+  `EcuMDriverInitListZero_`) stays linkable; fixed 2026-10-29 after the LIN
+  run's apply linked 9 LinTp self-references. §2 acronym term lines are
+  definitions, never mentions — the whole §2 region is skipped by the
+  identifier scan (the old bare `**Term**` regex missed term lines with a
+  parenthetical like `**LIN TP**（**LinTp**）`). --apply still stops at
+  配置规范, so only pre-config-chapter prose converts; the config tables
+  stay definitional. A same-named ch.7 heading always wins over the config
+  heading),
   chapter-number refs (可参见第**6.3**章 / 章节**6.1.1** / 可参考章节6.3启动…和
   6.4 关闭 — link text is the number token with its bold markers:
   第[**6.3**](#63-startup阶段)章, matching the hand-written
