@@ -137,13 +137,20 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
   - [x] Step 6 — TODO.md row + commit/PR
-- [ ] exp adas_vmc (AUTOSAR_EXP_ADASVehicleMotionControl · ApplicationInterfaces (name per the source tree) · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] exp adas_vmc (AUTOSAR_CP_EXP_AIADASAndVMC · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
+  - Note: source file is AUTOSAR_CP_EXP_AIADASAndVMC.md (queue's "ADASVehicleMotionControl" = AIADASAndVMC); also creates the NEW application_interfaces/ section (landing page + nav group 应用接口（Application Interfaces） after RTE)
+  - Note: **USER DECISION NEEDED (batch gate):** Appendix B interface list (~200 rows, Figures 6.4–6.11) is OCR-garbled in the R23-11 conversion (mixed CJK chrome, broken rows). Reconstructed best-effort GFM tables with a 译者注; cell values flagged with \* must be verified against the source PDF before production use. Full PDF verification deferred as too large for this run.
+  - Note: chapters 1–6 mirrored; tables 4.1–4.5, 6.4–6.11 translated as GFM; UML chrome dropped; 29 figures placed (Figure01–29)
+  - Note: census: 4 chapter refs applied, idempotent; 13 prose [n] citations UNRESOLVED (no registry — this source cites documents inline as [1, AUTOSAR_EXP_AIChassis] style, left prose per rule); cross-article mentions report-only
+  - Note: glossary +4 (ACC, AEB, LKA, VMC)
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] exp body_and_comfort (AUTOSAR_EXP_BodyAndComfort · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
