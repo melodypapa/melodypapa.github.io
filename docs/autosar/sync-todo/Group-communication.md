@@ -97,13 +97,14 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR — commit 4d5ff96 (branch feature/group-communication-sync); PR #181, tracking issue #180
-- [ ] data_distribution (SWS_DataDistributionService · R23-11 markdown · ⚠️ missing API chapter)
-  - Note: directory `data_distribution service/` contains a space — renaming to `data_distribution/` requires the nav change in the same commit
+- [x] data_distribution (SWS_DataDistributionService · R23-11 markdown · realigned)
+  - Note: directory `data_distribution service/` contains a space — renaming to `data_distribution/` requires the nav change in the same commit ✅ (2026-10-29, `git mv` + `mkdocs.yml` nav + `communication/index.md` link in the same commit)
   - Note: 2026-10-29 gap analysis — article 241 ln vs source 4,074 ln; ends mid source 7.2.1.1 and everything from 7.1.2 onward is still untranslated English. Real gaps: 已知限制 (source = None); §2 split into 2.1 缩略语 (glossary reference) / 2.2 缩写 (None) / 2.3 术语表; §3.1 输入文档→输入文件和相关标准与规范 (14 entries), 3.2 相关规格→相关规范; §4.1 flat→4.1.1 假设/4.1.2 限制/4.1.3 约束, Table 4.1 rendered as a GFM table instead of the blog-era Table_4_1.png, 4.2 适用于汽车领域→汽车域的适用性; §5 对其他模块的依赖 + 5.1–5.6 sub-headings; §6 heading numbering bug `###### 7.1.1.1.`→`##### 6.1.1.1.` and `###### 7.2.1.1.`→`##### 6.2.1.1.`; §6.1.2 Security Mechanisms / §6.1.3 Safety Mechanisms untranslated; missing §6.2 通用需求 (topic-name uniqueness + 6.2.1.1 序列化/6.2.1.2 反序列化/6.2.1.3 发送队列/6.2.1.4 发送/6.2.1.5 接收队列/6.2.1.6 接收/6.2.1.7 时序 requirements, 6.2.2 安全需求, 6.2.3 安全机制需求); missing §6.3 错误分类 (7.3.1 development + 7.3.2 runtime + production/extended statements); §7 wholly missing (8.1 imported types, 8.2 Dds_ConfigType, 8.3 3 functions, 8.4 3 callbacks, 8.5 2 scheduled functions, 8.6 期望接口); source ch.9 → new §8 时序图 (3 figures); source ch.10 → new §9 配置规范 (Dds/DdsGeneral/DdsConfig + ~30 containers, Figure 10.1–10.16); appendix A droppable; source ch.B → new `## B.`; blog-era Figure_7_* PNGs to be replaced by the source figures where raster-identical
+  - Note: 2026-10-29 completion run — Phase A: strict build exit 0, 0 WARNING, no data_distribution INFO; heading audit ✓ (9.2.3.1.1/9.2.3.1.2 raised to h6, no level jumps, no body h1); requirement IDs confined to the `## B.` fences (the one `CONSTR_00725` mention in §4.1.3 rewritten as a section reference); Table_4_1.png replaced by a GFM table and Figure_7_1/7_2/7_3 replaced by source Figures 7-1..7-3 (blog-era PNGs deleted); check_api_sync OK (1 type / 3 functions / 3 说明 blocks); link_candidates --apply: 59 lines (8 chapter-ref + 79 citation), idempotent on rerun; 22 source figures wired in (7-1..7-3, 9-1..9-3, 10-1..10-16, including the uncaptioned DdsConfig diagram as 10-3 — the source skips the 10.3 caption); §9.3 reduced to the SWS_BSWGeneral 10.3 pointer (the DDS SWS publishes no module-id table); OMG references upgraded http→https. Steps 5/6 per user instruction: commit first, combined confirmation after
   - [x] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] sec_oc (SWS_SecureOnboardCommunication · R23-11 markdown · ⚠️ gaps)

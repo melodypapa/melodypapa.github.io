@@ -124,7 +124,7 @@ nav:
       - "CanNm": autosar/communication/can_network_management/index.md
       - "CanTrcv": autosar/communication/can_transceiver_driver/index.md
       - "ComXf": autosar/communication/com_based_transformer/index.md
-      - "DDS": autosar/communication/data_distribution service/index.md
+      - "DDS": autosar/communication/data_distribution/index.md
       - "Dlt": autosar/communication/diagnostic_log_and_trace/index.md
       - "DoIp": autosar/communication/diagnostic_over_ip/index.md
       - "E2EXf": autosar/communication/e2e_transformer/index.md
