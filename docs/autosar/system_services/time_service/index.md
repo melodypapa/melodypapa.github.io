@@ -35,10 +35,10 @@ release: R23-11
 
 **AUTOSAR** 定义了以下的时间服务预定义定时器：
 
-* Tm_PredefTimer1us16bitType
-* Tm_PredefTimer1us24bitType
-* Tm_PredefTimer1us32bitType
-* Tm_PredefTimer100us32bitType
+* [Tm_PredefTimer1us16bitType](#721-tm_predeftimer1us16bittype)
+* [Tm_PredefTimer1us24bitType](#722-tm_predeftimer1us24bittype)
+* [Tm_PredefTimer1us32bitType](#723-tm_predeftimer1us32bittype)
+* [Tm_PredefTimer100us32bitType](#724-tm_predeftimer100us32bittype)
 
 如果用户想要实现基于时间的功能，则不需要任何时间服务模块的用户特定配置。用户可以实例化任何计时器（仅受可用内存限制），并且可以完全独立地使用计时器实例。这样硬件计时器就可以被获得重用。
 
@@ -94,7 +94,7 @@ release: R23-11
 
 ## 2. 首字母缩略词、缩略语和术语
 
-此处仅列出了一些有助于理解本文档或具有本地范围的首字母缩略词和缩略语。 更多信息可以在官方 **AUTOSAR** 词汇表[8]中找到。
+此处仅列出了一些有助于理解本文档或具有本地范围的首字母缩略词和缩略语。 更多信息可以在官方 **AUTOSAR** 词汇表[\[2\]](#ref-2)中找到。
 
 **nop**
 > 无操作（**No Operation**）
@@ -113,46 +113,21 @@ release: R23-11
 
 ## 3. 相关文档
 
-### 3.1. 输入文件
+### 3.1. 输入文件和相关标准与规范
 
-[1] List of Basic Software Modules
-> AUTOSAR_TR_BSWModuleList.pdf
+<a id="ref-1"></a>[1] Specification of GPT Driver
+> AUTOSAR_CP_SWS_GPTDriver
 
-[2] Layered Software Architecture
-> AUTOSAR_EXP_LayeredSoftwareArchitecture.pdf
+<a id="ref-2"></a>[2] Glossary
+> AUTOSAR_FO_TR_Glossary
 
-[3] General Requirements on Basic Software Modules
-> AUTOSAR_SRS_BSWGeneral.pdf
+<a id="ref-3"></a>[3] General Specification of Basic Software Modules
+> AUTOSAR_CP_SWS_BSWGeneral
 
-[4] Specification of Standard Types
-> AUTOSAR_SWS_StandardTypes.pdf
+<a id="ref-4"></a>[4] Layered Software Architecture
+> AUTOSAR_CP_EXP_LayeredSoftwareArchitecture
 
-[5] Specification of Default Error Tracer
-> AUTOSAR_SWS_ DefaultErrorTracer.pdf
-
-[6] Specification of ECU Configuration
-> AUTOSAR_TPS_ECUConfiguration.pdf
-
-[7] Requirements on Time Service
-> AUTOSAR_SRS_TimeService.pdf
-
-[8] Glossary
-> AUTOSAR_TR_Glossary.pdf
-
-[9] Basic Software Module Description Template
-> AUTOSAR_TPS_BSWModuleDescriptionTemplate.pdf
-
-[10] General Specification of Basic Software Modules
-> AUTOSAR_SWS_BSWGeneral.pdf
-
-[11] Specification of GPT Driver
-> AUTOSAR_SWS_GPTDriver.pdf
-
-### 3.2. 相关标准和规范
-
-[12] IEC 7498-1 The Basic Model, IEC Norm, 1994
-
-### 3.3. 相关规范
+### 3.2. 相关规范
 
 AUTOSAR 提供了基本软件模块的通用规范 [10] (AUTOSAR_SWS_BSWGeneral)，它也适用于时间服务。
 
@@ -160,31 +135,39 @@ AUTOSAR 提供了基本软件模块的通用规范 [10] (AUTOSAR_SWS_BSWGeneral)
 
 ## 4. 约束和假设
 
-### 4.1. 限制
+### 4.1. 假设
 
-#### 4.1.1. 功能基于可能不可用的硬件计时器
+无假设。
+
+### 4.2. 限制
+
+#### 4.2.1. 功能基于可能不可用的硬件计时器
 
 时间服务模块的功能基于 **GPT** 驱动程序提供的硬件定时器（**GPT Predef Timers**）。
 
 可以启用哪个 **GPT** 预定义定时器取决于时钟和可用的定时器硬件（预分频器、定时器寄存器的宽度）。建议启用所有 **GPT Predef Timers** 以确保所有平台的基于时间的功能的兼容性。
 
-#### 4.1.2. 没有标准化的 AUTOSAR 接口
+#### 4.2.2. 没有标准化的 AUTOSAR 接口
 
 在本规范中，没有定义标准化的 **AUTOSAR** 接口。这意味着位于 **RTE** 上方的 AUTOSAR 软件组件 (SW-C) 无法访问时间服务模块的服务。在进一步的步骤（未来的 AUTOSAR 版本/修订）中，可以将标准化的 AUTOSAR 接口添加到规范中。
 
-#### 4.1.3. 多分区支持
+#### 4.2.3. 多分区支持
 
 因为时间服务模块使用 **GPT** 模块来获取硬件计时器的当前时间，所以两个模块都应该在同一个 BSW 分区上运行。如果 **Time Service** 模块用于具有分布式 **BSW** 的系统中（例如在多核系统中），建议在每个 **BSW** 分区中使用具有 **Time Service** 和 GPT 模块的功能集群，以防止分区间通信。
 
 由于性能原因主从服务方式（**A master/satellite approach**）在这里并不合适。即：在一个 **BSW** 分区中使用 GPT 和主时间服务，而在另一个 **BSW** 分区中使用从时间服务的方式。
 
+### 4.3. 汽车域的适用性
+
+无限制。
+
 ## 5. 对其他模块的依赖
 
 时间服务模块依赖于以下其他 **AUTOSAR** 模块： 
 
-### 5.1. GPT。
+### 5.1. GPT
 
-时间服务模块的功能基于所谓的 **GPT** 预定义定时器。**GPT** 预定义定时器是 **GPT** 驱动程序提供的一种自由运行计数器，具体请参阅参考文档[11]（SWS GPT 驱动程序）。
+时间服务模块的功能基于所谓的 **GPT** 预定义定时器。**GPT** 预定义定时器是 **GPT** 驱动程序提供的一种自由运行计数器，具体请参阅 [\[1\]](#ref-1)（SWS GPT 驱动程序）。
 
 ## 6. 功能规格
 
@@ -192,7 +175,7 @@ AUTOSAR 提供了基本软件模块的通用规范 [10] (AUTOSAR_SWS_BSWGeneral)
 
 #### 6.1.1. GPT 预定义计时器（GPT Predef Timers）
 
-时间服务模块的功能基于所谓的 **GPT** 预定义定时器，具体请参阅参考文档[11]（SWS GPT 驱动程序）。
+时间服务模块的功能基于所谓的 **GPT** 预定义定时器，具体请参阅 [\[1\]](#ref-1)（SWS GPT 驱动程序）。
 
 #### 6.1.2. 时间服务预定义定时器（Time Service Predef Timers）
 
@@ -200,17 +183,24 @@ AUTOSAR 提供了基本软件模块的通用规范 [10] (AUTOSAR_SWS_BSWGeneral)
 
 对应每个时间服务预定义定时器，都会定义了一个数据类型。
 
-![Table3](Table3.png)
+表7.1：时间服务预定义定时器的特征（**Characteristics of Time Service Predef Timers**）
 
-定时器实例可以通过定义时间服务预定义定时器数据类型的数据对象（RAM 数据）来创建。例如：
+| 时间服务预定义定时器的数据类型名称 | 刻度持续时间 | 最大刻度值 | 位数 | 最大时间跨度（约值） |
+|---|---|---|---|---|
+| [Tm_PredefTimer1us16bitType](#721-tm_predeftimer1us16bittype) | 1 µs | 65535 | 16 bit | 65 ms |
+| [Tm_PredefTimer1us24bitType](#722-tm_predeftimer1us24bittype) | 1 µs | 16777215 | 24 bit | 16 s |
+| [Tm_PredefTimer1us32bitType](#723-tm_predeftimer1us32bittype) | 1 µs | 4294967295 | 32 bit | 71 分钟 |
+| [Tm_PredefTimer100us32bitType](#724-tm_predeftimer100us32bittype) | 100 µs | 4294967295 | 32 bit | 4.9 天 |
 
-**Tm_PredefTimer1us32bitType** *Timer1*； /* 定义定时器实例 */
+定时器实例可以通过定义时间服务预定义定时器数据类型的数据对象（**RAM** 数据）来创建。例如：
+
+[**Tm_PredefTimer1us32bitType**](#723-tm_predeftimer1us32bittype) *Timer1*； /* 定义定时器实例 */
 
 数据类型（以及计时器实例）包含一个所谓的参考时间（**reference time**）。此参考时间对于某些 API 服务是必需的。
 
 因为结构元素不得在时间服务模块之外使用，所以数据类型的详细定义超出了本规范的范围。
 
-数据类型 **Tm_PredefTimer1us32bitType** 的示例：
+数据类型 [**Tm_PredefTimer1us32bitType**](#723-tm_predeftimer1us32bittype) 的示例：
 
 ```
 typedef struct {
@@ -233,7 +223,7 @@ typedef struct {
 * 第一部分：做什么。例如：**Tm_ResetTimer**
 * 第一部分：使用哪种预定义定时器类型。例如 **1us32bit**
 
-具体服务名称如下：**Tm_ResetTimer1us32bit**
+具体服务名称如下：[**Tm_ResetTimer1us32bit**](#7312-tm_resettimer1us32bit)
 
 时间服务模块需使用 GPT 驱动服务 **Gpt_GetPredefTimerValue** 来获取所需预定义定时器的当前时间值。
 
@@ -244,7 +234,7 @@ typedef struct {
 3. **1us32bit**功能需使用定时器 **GPT_PREDEF_TIMER_1US_32BIT** 作为时间基准。
 4. **100us32bit**功能需使用定时器 **GPT_PREDEF_TIMER_100US_32BIT** 作为时间基准。
 
-如**1us16bit**函数名的示例是**Tm_ResetTimer1us16bit** 
+如**1us16bit**函数名的示例是[**Tm_ResetTimer1us16bit**](#732-tm_resettimer1us16bit) 
 
 #### 6.1.3. 最大可测量时间跨度
 
@@ -276,9 +266,9 @@ typedef struct {
 
 ![figure3](figure3.png)
 
-在上面的示例图中，**Tm_GetTimeSpan1us32bit** <sup>1</sup> 和 **Tm_GetTimeSpan1us32bit** <sup>2</sup> 的两个调用都传递值1，这意味着 **1μs**。
+在上面的示例图中，[**Tm_GetTimeSpan1us32bit**](#7313-tm_gettimespan1us32bit) <sup>1</sup> 和 [**Tm_GetTimeSpan1us32bit**](#7313-tm_gettimespan1us32bit) <sup>2</sup> 的两个调用都传递值1，这意味着 **1μs**。
 
-根据 **Tm_ResetTimer1us32bit** 和 **Tm_GetTimeSpan1us32bit** 调用发生的时间点，实时时间跨度可以在接近 **0μs** 到接近 **2μs** 的范围内。
+根据 [**Tm_ResetTimer1us32bit**](#7312-tm_resettimer1us32bit) 和 [**Tm_GetTimeSpan1us32bit**](#7313-tm_gettimespan1us32bit) 调用发生的时间点，实时时间跨度可以在接近 **0μs** 到接近 **2μs** 的范围内。
 
 如果使用 **GetTimeSpan** 函数来检查最小时间。例如，为了：
 
@@ -296,7 +286,7 @@ typedef struct {
 其执行时间取决于：
 * 代码的实现（**Implementation**）
 * **CPU**速度
-* 相关**GPT**预定义定时器的实现，详见[11]（SWS GPT Driver）的GPT预定义定时器章节。
+* 相关**GPT**预定义定时器的实现，详见 [\[1\]](#ref-1)（SWS GPT Driver）的 GPT 预定义定时器章节。
 
 用户必须检查执行时间是否足以满足具体的使用用例。
 
@@ -304,25 +294,25 @@ typedef struct {
 
 **ResetTimer** 服务，从用户的角度重置计时器实例。
 
-**ResetTimer** 函数的示例：**Tm_ResetTimer1us32bit**
+**ResetTimer** 函数的示例：[**Tm_ResetTimer1us32bit**](#7312-tm_resettimer1us32bit)
 
 **ResetTimer** 函数需重置由参数**TimerPtr**传递的计时器实例。这意味着，定时器实例的参考时间应设置为相关 GPT 预定义定时器的当前时间。
 
 如果并发调用中使用的定时器实例不同，**ResetTimer**函数应该是可重入的。
 
-如果启用了时间服务模块的开发错误检测： 如果指针参数是空指针，**ResetTimer** 函数将引发错误 **TM_E_PARAM_POINTER** 并返回 **E_NOT_OK**。
+如果启用了时间服务模块的开发错误检测： 如果指针参数是空指针，**ResetTimer** 函数将引发错误 [**TM_E_PARAM_POINTER**](#641-开发错误) 并返回 **E_NOT_OK**。
 
 #### 6.1.7. GetTimeSpan服务
 
-**GetTimeSpan** 函数的示例：**Tm_GetTimeSpan1us32bit**
+**GetTimeSpan** 函数的示例：[**Tm_GetTimeSpan1us32bit**](#7313-tm_gettimespan1us32bit)
 
 **GetTimeSpan** 函数应计算并传递当前时间与计时器实例的参考时间之间的时间差。
 
 **注意：**
 
-最大可测量时间跨度的限制必须在用户软件层面考虑，见第 6.1.3 章节。
+最大可测量时间跨度的限制必须在用户软件层面考虑，见第 [6.1.3](#613-最大可测量时间跨度) 章节。
 
-由于 **GetTimeSpan** 函数以整数值的形式提供时间差，因此在使用/解释值时必须在用户软件级别考虑量化误差理论，请参阅第 6.1.4 章节。
+由于 **GetTimeSpan** 函数以整数值的形式提供时间差，因此在使用/解释值时必须在用户软件级别考虑量化误差理论，请参阅第 [6.1.4](#614-时间量化误差) 章节。
 
 如果当前时间的值小于参考时间的值，则 **GetTimeSpan** 函数应在减法（当前时间 - 参考时间）时执行适当的环绕处理（**wrap-around**）。
 
@@ -354,7 +344,7 @@ ui32TimeSpan = (uint32)(ui32CurrentTime
 
 **GetTimeSpan** 函数应该是完全可重入的，这意味着即使对于相同的计时器实例。
 
-如果启用时间服务模块的开发错误检测：如果指针参数是空指针，**GetTimeSpan** 函数将引发错误 **TM_E_PARAM_POINTER** 并返回 **E_NOT_OK**。
+如果启用时间服务模块的开发错误检测：如果指针参数是空指针，**GetTimeSpan** 函数将引发错误 [**TM_E_PARAM_POINTER**](#641-开发错误) 并返回 **E_NOT_OK**。
 
 当检测到错误并且参数 **TimeSpanPtr** 不是空指针时，**GetTimeSpan** 函数需使用数值“0”来提供时间跨度。
 
@@ -364,7 +354,7 @@ ui32TimeSpan = (uint32)(ui32CurrentTime
 
 #### 6.1.8. ShiftTimer服务
 
-**ShiftTimer** 函数的示例：**Tm_ShiftTimer1us32bit**
+**ShiftTimer** 函数的示例：[**Tm_ShiftTimer1us32bit**](#7314-tm_shifttimer1us32bit)
 
 **ShiftTimer** 函数应移动定时器实例的参考时间。这意味着，**TimeValue** 值需添加到计时器实例的参考时间。
 
@@ -400,20 +390,20 @@ TimerPtr->ui32RefTime = (uint32)(TimerPtr->ui32RefTime
 
 如果启用了时间服务模块的开发错误检测：
 
-* 如果参数 **TimeValue** 的值大于 **0xFFFFFF**，范围为 24 位的 **ShiftTimer** 函数将引发错误 **TM_E_PARAM_VALUE**。
+* 如果参数 **TimeValue** 的值大于 **0xFFFFFF**，范围为 24 位的 **ShiftTimer** 函数将引发错误 [**TM_E_PARAM_VALUE**](#641-开发错误)。
 * 如果指针参数是空指针，则 **ShiftTimer** 函数应引发错误 TM_E_PARA**M**_POINTER。
 
 如果并发调用中使用的计时器实例不同，则 **ShiftTimer** 函数应是可重入的。
 
 #### 6.1.9. SyncTimer服务
 
-**SyncTimer** 函数的示例：**Tm_SyncTimer1us32bit**
+**SyncTimer** 函数的示例：[**Tm_SyncTimer1us32bit**](#7315-tm_synctimer1us32bit)
 
 **SyncTimer** 函数需能同步两个定时器实例。 这意味着，目标定时器实例的参考时间应设置为源定时器实例的参考时间。
 
 如果并发调用中使用的目标定时器实例不同，则 **SyncTimer** 函数应是可重入的。
 
-如果启用时间服务模块的开发错误检测： 如果指针参数是空指针，则 **SyncTimer** 函数应引发错误 **TM_E_PARAM_POINTER**。
+如果启用时间服务模块的开发错误检测： 如果指针参数是空指针，则 **SyncTimer** 函数应引发错误 [**TM_E_PARAM_POINTER**](#641-开发错误)。
 
 #### 6.1.10. BusyWait服务
 
@@ -422,17 +412,17 @@ TimerPtr->ui32RefTime = (uint32)(TimerPtr->ui32RefTime
 具体风险可能如需：
 
 * 不能保证最短等待时间。
-* 使用循环（**loops**）或nop 指令（**nop instructions**）代替硬件定时器，具体可参见第 1.1.3 章节。
+* 使用循环（**loops**）或nop 指令（**nop instructions**）代替硬件定时器，具体可参见第 [1.1.3](#113-超时监督和忙等待) 章节。
 
 **注意：**
 
-**BusyWait** 函数的规范考虑了量化误差理论，具体请参见第 6.1.4 章节。
+**BusyWait** 函数的规范考虑了量化误差理论，具体请参见第 [6.1.4](#614-时间量化误差) 章节。
 
 因为 **BusyWait** 服务是基于轮询的，**BusyWait** 服务的用户有责任避免无意图的行为。参见第 6.1.10.1 章。
 
 该服务适用于滴答持续时间为 **1μs** 的预定义定时器。等待时间限制为 8 比特位，即最大为255**μs**，以防止代码执行的长时间阻塞。
 
-**BusyWait** 函数的示例：**Tm_BusyWait1us32bit**。
+**BusyWait** 函数的示例：[**Tm_BusyWait1us32bit**](#7316-tm_busywait1us32bit)。
 
 **BusyWait** 函数需使用传递的参数 **WaitingTimeMin** 作为最短时间来执行繁忙等待。**BusyWait** 函数不会禁用中断，这也就意味着实际等待时间可能会大于期望的等待时间。
 
@@ -452,23 +442,21 @@ TimerPtr->ui32RefTime = (uint32)(TimerPtr->ui32RefTime
 
 | 以μs为单位的经过时间 | 以μs为单位的16位基本定时器值 | 行动                                                                                             |
 | -------------------: | ---------------------------: | ------------------------------------------------------------------------------------------------ |
-|                    0 |                            0 | 任务处于运行状态，调用服务**Tm_BusyWait1us16bit(50)**; /* 等待 50us */}                          |
+|                    0 |                            0 | 任务处于运行状态，调用服务**[Tm_BusyWait1us16bit](#736-tm_busywait1us16bit)(50)**; /* 等待 50us */}                          |
 |                    2 |                            2 | 任务进入就绪状态                                                                                 |
 |                21055 |                        21055 | 任务仍处于就绪状态                                                                               |
 |                65535 |                        65535 | 任务仍处于就绪状态，定时器值与下一个刻度环绕                                                     |
 |                65536 |                            0 | 任务仍处于就绪状态                                                                               |
 |                65559 |                           23 | 任务再次进入运行状态。问题：尽管自调用以来经过了**65559μs** (> 50μs)，但繁忙的等待服务没有返回。 |
 
-![Table3_1](Table3_1.png)
-
 为确保在任何可能的情况下都能正确行为，**BusyWait** 服务的用户必须检查：
 
-* 选择需要/足够的**Busy** 等待服务 （Tm_BusyWait1us16bit、Tm_BusyWait1us24bit、Tm_BusyWait1us32bit）。
+* 选择需要/足够的**Busy** 等待服务 （[Tm_BusyWait1us16bit](#736-tm_busywait1us16bit)、[Tm_BusyWait1us24bit](#7311-tm_busywait1us24bit)、[Tm_BusyWait1us32bit](#7316-tm_busywait1us32bit)）。
 * 任务调度（**the task scheduling**）。
 * 在用户软件级别是否需要中断或资源锁定
 * 用户软件是否能容忍此类问题。
 
-通过使用服务**Tm_BusyWait1us32bit**，只有当调用忙等待服务的任务被抢占（未执行，处于就绪状态）超过 71 分钟时，才会出现上述问题。
+通过使用服务[**Tm_BusyWait1us32bit**](#7316-tm_busywait1us32bit)，只有当调用忙等待服务的任务被抢占（未执行，处于就绪状态）超过 71 分钟时，才会出现上述问题。
 
 #### 6.1.12. API服务的配置
 
@@ -484,11 +472,11 @@ TimerPtr->ui32RefTime = (uint32)(TimerPtr->ui32RefTime
 
 时间服务模块无任何关于初始化函数（**Tm_Init**）的需求。
 
-时间服务模块无需初始化任何变量（例如：状态）或硬件资源。时间服务模块（假定配置正确）所需的所有 GPT 预定义定时器都会在可能的情况下自动运行。 这是由 **GPT** 驱动程序确保的，请参阅第 6.1.1 章。
+时间服务模块无需初始化任何变量（例如：状态）或硬件资源。时间服务模块（假定配置正确）所需的所有 GPT 预定义定时器都会在可能的情况下自动运行。 这是由 **GPT** 驱动程序确保的，请参阅第 [6.1.1](#611-gpt-预定义计时器gpt-predef-timers) 章。
 
 ### 6.3. 用例示例代码
 
-本章包含了第1.1章节中描述的用例的示例代码。
+本章包含了第[1.1](#11-用例)章节中描述的用例的示例代码。
 
 #### 6.3.1. 时间测量
 
@@ -669,26 +657,76 @@ Std_ReturnType CanTrcv_SetOpMode(uint8 Transceiver, CanIf_TrcvModeType OpMode)
 
 ### 6.4. 错误分类
 
+当错误发生时，相应的时间服务函数应在没有任何动作的情况下返回，除非针对特定函数有不同/更详细的规定。
+
 #### 6.4.1. 开发错误
 
-**TM_E_PARAM_POINTER**
-> API参数检查：无效指针。
+| 错误类型 | 相关错误代码 | 错误值 |
+|---|---|---|
+| **API**参数检查：无效指针 | TM_E_PARAM_POINTER | 0x01 |
+| **API**参数检查：无效数值 | TM_E_PARAM_VALUE | 0x02 |
 
-**TM_E_PARAM_VALUE**
-> API参数检查：无效数值。
-
+由于特定实现而检测到的其他错误应添加在特定实现规范中。该分类和枚举应与所列出的错误兼容。
 
 #### 6.4.2. 运行时错误
 
-**TM_E_HARDWARE_TIMER**
-> 访问底层硬件定时器失败
+| 错误类型 | 相关错误代码 | 错误值 |
+|---|---|---|
+| 访问底层硬件定时器失败 | TM_E_HARDWARE_TIMER | 0x03 |
 
+如果底层 **GPT** 驱动程序服务返回 E_NOT_OK，则 ResetTimer、GetTimeSpan 和 BusyWait 函数应引发错误 **TM_E_HARDWARE_TIMER**。
+
+#### 6.4.3. 瞬态故障
+
+没有瞬态故障。
+
+#### 6.4.4. 生产错误
+
+时间服务模块没有定义生产错误。
+
+#### 6.4.5. 扩展生产错误
+
+没有扩展生产错误。
+
+### 6.5. 版本检查
+
+请参阅 SWS_BSWGeneral 中的「Version Check」（版本检查）一章。
 
 ## 7. API规范
 
-### 7.1. 函数定义
+### 7.1. 导入的类型
 
-#### 7.1.1. Tm_GetVersionInfo
+在本章中，列出了从以下模块包含的所有类型：
+
+**Tm**模块的导入数据类型定义
+
+| 模块 | 头文件 | 导入的类型 |
+|---|---|---|
+| Gpt | Gpt.h | Gpt_PredefTimerType |
+| Std | Std_Types.h | Std_ReturnType |
+| Std | Std_Types.h | Std_VersionInfoType |
+
+### 7.2. 类型定义
+
+#### 7.2.1. Tm_PredefTimer1us16bitType
+
+结构类型。时间服务预定义定时器 1µs16bit 的数据类型。该结构包含参考时间。可通过**Tm.h**获得。
+
+#### 7.2.2. Tm_PredefTimer1us24bitType
+
+结构类型。时间服务预定义定时器 1µs24bit 的数据类型。该结构包含参考时间。可通过**Tm.h**获得。
+
+#### 7.2.3. Tm_PredefTimer1us32bitType
+
+结构类型。时间服务预定义定时器 1µs32bit 的数据类型。该结构包含参考时间。可通过**Tm.h**获得。
+
+#### 7.2.4. Tm_PredefTimer100us32bitType
+
+结构类型。时间服务预定义定时器 100µs32bit 的数据类型。该结构包含参考时间。可通过**Tm.h**获得。
+
+### 7.3. 函数定义
+
+#### 7.3.1. Tm_GetVersionInfo
 
 **说明**: 返回此模块的版本信息。
 
@@ -697,7 +735,7 @@ void Tm_GetVersionInfo (
     Std_VersionInfoType* VersionInfoPtr )
 ```
 
-#### 7.1.2. Tm_ResetTimer1us16bit
+#### 7.3.2. Tm_ResetTimer1us16bit
 
 **说明**: 重置计时器实例（用户观点）。
 
@@ -706,7 +744,7 @@ Std_ReturnType Tm_ResetTimer1us16bit (
     Tm_PredefTimer1us16bitType* TimerPtr )
 ```
 
-#### 7.1.3. Tm_GetTimeSpan1us16bit
+#### 7.3.3. Tm_GetTimeSpan1us16bit
 
 **说明**: 提供时差（当前时间 - 参考时间）。
 
@@ -716,7 +754,7 @@ void Tm_ShiftTimer1us16bit (
     uint16 TimeValue )
 ```
 
-#### 7.1.4. Tm_ShiftTimer1us16bit
+#### 7.3.4. Tm_ShiftTimer1us16bit
 
 **说明**: 移动计时器实例的参考时间。
 
@@ -726,7 +764,7 @@ void Tm_ShiftTimer1us16bit (
     uint16 TimeValue )
 ```
 
-#### 7.1.5. Tm_SyncTimer1us16bit
+#### 7.3.5. Tm_SyncTimer1us16bit
 
 **说明**: 同步两个计时器实例。
 
@@ -736,7 +774,7 @@ void Tm_SyncTimer1us16bit (
     const Tm_PredefTimer1us16bitType* TimerSrcPtr )
 ```
 
-#### 7.1.6. Tm_BusyWait1us16bit
+#### 7.3.6. Tm_BusyWait1us16bit
 
 **说明**: 通过以保证的最短等待时间轮询来执行繁忙等待。
 
@@ -745,7 +783,7 @@ Std_ReturnType Tm_BusyWait1us16bit (
     uint8 WaitingTimeMin )
 ```
 
-#### 7.1.7. Tm_ResetTimer1us24bit
+#### 7.3.7. Tm_ResetTimer1us24bit
 
 **说明**: 重置计时器实例（用户观点）。
 
@@ -754,7 +792,7 @@ Std_ReturnType Tm_ResetTimer1us24bit (
     Tm_PredefTimer1us24bitType* TimerPtr )
 ```
 
-#### 7.1.8. Tm_GetTimeSpan1us24bit
+#### 7.3.8. Tm_GetTimeSpan1us24bit
 
 **说明**: 提供时差（当前时间 - 参考时间）。
 
@@ -764,7 +802,7 @@ Std_ReturnType Tm_GetTimeSpan1us24bit (
     uint32* TimeSpanPtr )
 ```
 
-#### 7.1.9. Tm_ShiftTimer1us24bit
+#### 7.3.9. Tm_ShiftTimer1us24bit
 
 **说明**: 移动计时器实例的参考时间。
 
@@ -774,7 +812,7 @@ void Tm_ShiftTimer1us24bit (
     uint32 TimeValue )
 ```
 
-#### 7.1.10. Tm_SyncTimer1us24bit
+#### 7.3.10. Tm_SyncTimer1us24bit
 
 **说明**: 同步两个计时器实例。
 
@@ -784,7 +822,7 @@ void Tm_SyncTimer1us24bit (
     const Tm_PredefTimer1us24bitType* TimerSrcPtr )
 ```
 
-#### 7.1.11. Tm_BusyWait1us24bit
+#### 7.3.11. Tm_BusyWait1us24bit
 
 **说明**: 通过以保证的最短等待时间轮询来执行繁忙等待。
 
@@ -793,7 +831,7 @@ Std_ReturnType BusyWait1us24bit (
     uint8 WaitingTimeMin )
 ```
 
-#### 7.1.12. Tm_ResetTimer1us32bit
+#### 7.3.12. Tm_ResetTimer1us32bit
 
 **说明**: 重置计时器实例（用户观点）。
 
@@ -802,7 +840,7 @@ Std_ReturnType Tm_ResetTimer1us32bit (
     Tm_PredefTimer1us32bitType* TimerPtr )
 ```
 
-#### 7.1.13. Tm_GetTimeSpan1us32bit
+#### 7.3.13. Tm_GetTimeSpan1us32bit
 
 **说明**: 提供时差（当前时间 - 参考时间）。
 
@@ -812,7 +850,7 @@ Std_ReturnType Tm_GetTimeSpan1us32bit (
     uint32* TimeSpanPtr )
 ```
 
-#### 7.1.14. Tm_ShiftTimer1us32bit
+#### 7.3.14. Tm_ShiftTimer1us32bit
 
 **说明**: 移动计时器实例的参考时间。
 
@@ -822,7 +860,7 @@ void Tm_ShiftTimer1us32bit (
     uint32 TimeValue )
 ```
 
-#### 7.1.15. Tm_SyncTimer1us32bit
+#### 7.3.15. Tm_SyncTimer1us32bit
 
 **说明**: 同步两个计时器实例。
 
@@ -832,7 +870,7 @@ void Tm_SyncTimer1us32bit (
     const Tm_PredefTimer1us32bitType* TimerSrcPtr )
 ```
 
-#### 7.1.16. Tm_BusyWait1us32bit
+#### 7.3.16. Tm_BusyWait1us32bit
 
 **说明**: 通过以保证的最短等待时间轮询来执行繁忙等待。
 
@@ -841,7 +879,7 @@ Std_ReturnType Tm_BusyWait1us32bit (
     uint8 WaitingTimeMin )
 ```
 
-#### 7.1.17. Tm_ResetTimer100us32bit
+#### 7.3.17. Tm_ResetTimer100us32bit
 
 **说明**: 重置计时器实例（用户观点）。
 
@@ -850,7 +888,7 @@ Std_ReturnType Tm_ResetTimer100us32bit (
     Tm_PredefTimer100us32bitType* TimerPtr )
 ```
 
-#### 7.1.18. Tm_GetTimeSpan100us32bit
+#### 7.3.18. Tm_GetTimeSpan100us32bit
 
 **说明**: 提供时差（当前时间 - 参考时间）。
 
@@ -860,7 +898,7 @@ Std_ReturnType Tm_GetTimeSpan100us32bit (
     uint32* TimeSpanPtr )
 ```
 
-#### 7.1.19. Tm_ShiftTimer100us32bit
+#### 7.3.19. Tm_ShiftTimer100us32bit
 
 **说明**: 移动计时器实例的参考时间。
 
@@ -870,7 +908,7 @@ void Tm_ShiftTimer100us32bit (
     uint32 TimeValue )
 ```
 
-#### 7.1.20. Tm_SyncTimer100us32bit
+#### 7.3.20. Tm_SyncTimer100us32bit
 
 **说明**: 同步两个计时器实例。
 
@@ -880,36 +918,178 @@ void Tm_SyncTimer100us32bit (
     const Tm_PredefTimer100us32bitType* TimerSrcPtr )
 ```
 
-## 8. 配置规范
+### 7.4. 回调通知
 
-### 8.1. TmGeneral
+无。
 
-#### 8.1.1. TmDevErrorDetect
+### 7.5. 调度函数
 
-打开或关闭开发错误检测和通知。
+无。
 
-* **true**：启用检测和通知。
-* **false**：检测和通知被禁用。
+### 7.6. 期望接口
 
-#### 8.1.2. TmEnablePredefTimer100us32bit
+在本章中，列出了需要从其他模块获得的所有接口。
 
-指定是否应启用100μs/32位的预定义定时器功能和 **API** 服务。**On**或者**Off**。
+#### 7.6.1. 强制接口
 
-#### 8.1.3. TmEnablePredefTimer1us16bit
+本章定义实现该模块核心功能所需的所有接口。
 
-指定是否应启用1μs/16位的预定义定时器功能和 **API** 服务。**On**或者**Off**。
+| API 函数 | 头文件 | 描述 |
+|---|---|---|
+| Det_ReportRuntimeError | Det.h | 报告运行时错误的服务。如果已配置调出函数，则应调用该调出函数。 |
+| Gpt_GetPredefTimerValue | Gpt.h | 返回所需的 **GPT** 预定义定时器的当前值。 |
 
-#### 8.1.4. TmEnablePredefTimer1us24bit
+#### 7.6.2. 可选接口
 
-指定是否应启用1μs/24位的预定义定时器功能和 **API** 服务。**On**或者**Off**。
+本章定义实现该模块可选功能所需的所有接口。
 
-#### 8.1.5. TmEnablePredefTimer1us32bit
+| API 函数 | 头文件 | 描述 |
+|---|---|---|
+| Det_ReportError | Det.h | 报告开发错误的服务。 |
 
-指定是否应启用1μs/32位的预定义定时器功能和 **API** 服务。**On**或者**Off**。
+#### 7.6.3. 可配置接口
 
-#### 8.1.6. TmVersionInfoApi
+在本章中，列出了目标函数可以被配置的所有接口。目标函数通常是回调函数。由于这类接口的名称不是固定的，因为它们是可配置的。
 
-从代码中添加/删除服务 **Tm_GetVersionInfo**()。**On**或者**Off**。
+无。
+
+## 8. 时序图
+
+### 8.1. Tm 正常操作
+
+![Figure9_1](Figure9_1.png)
+
+## 9. 配置规范
+
+总体而言，本章定义配置参数及其到**容器**（container）的聚类组织。为支持本规范，第 9.1 章描述基础知识，并规定了应用于参数规范的模板（表）。我们有意将这些内容保留在规范中以保证可理解性。
+
+第 9.1 章规定模块 **Tm** 的结构（容器）和参数。
+
+第 9.2 章规定模块 **Tm** 的发布信息。
+
+### 9.1. 容器与配置参数
+
+以下各章汇总所有配置参数。各参数的详细含义见第 6 章和第 7 章。
+
+#### 9.1.1. Tm
+
+| SWS 条目 | [ECUC_Tm_00008] |
+|---|---|
+| 模块名称 | Tm |
+| 描述 | 时间服务模块的配置。 |
+| Post-Build 变体支持 | false |
+| 支持的配置变体 | VARIANT-PRE-COMPILE |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| TmGeneral | 1 | 时间服务模块的通用配置。 |
+
+![Figure10_1](Figure10_1.png)
+
+#### 9.1.2. TmGeneral
+
+| SWS 条目 | [ECUC_Tm_00001] |
+|---|---|
+| 容器名称 | TmGeneral |
+| 父容器 | Tm |
+| 描述 | 时间服务模块的通用配置。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Tm_00002] |
+|---|---|
+| 参数名称 | TmDevErrorDetect |
+| 父容器 | TmGeneral |
+| 描述 | 开启或关闭开发错误检测与通知。* **true**：检测与通知已启用。* **false**：检测与通知已禁用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Tm_00006] |
+|---|---|
+| 参数名称 | TmEnablePredefTimer100us32bit |
+| 父容器 | TmGeneral |
+| 描述 | 指定是否启用预定义定时器 100µs32bit（功能与 **API** 服务集）。ON 或 OFF。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Tm_00003] |
+|---|---|
+| 参数名称 | TmEnablePredefTimer1us16bit |
+| 父容器 | TmGeneral |
+| 描述 | 指定是否启用预定义定时器 1µs16bit（功能与 **API** 服务集）。ON 或 OFF。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Tm_00004] |
+|---|---|
+| 参数名称 | TmEnablePredefTimer1us24bit |
+| 父容器 | TmGeneral |
+| 描述 | 指定是否启用预定义定时器 1µs24bit（功能与 **API** 服务集）。ON 或 OFF。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Tm_00005] |
+|---|---|
+| 参数名称 | TmEnablePredefTimer1us32bit |
+| 父容器 | TmGeneral |
+| 描述 | 指定是否启用预定义定时器 1µs32bit（功能与 **API** 服务集）。ON 或 OFF。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Tm_00007] |
+|---|---|
+| 参数名称 | TmVersionInfoApi |
+| 父容器 | TmGeneral |
+| 描述 | 从代码中添加/移除服务 Tm_GetVersionInfo()。ON 或 OFF。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+### 9.2. 发布信息
+
+有关详细信息，请参阅 SWS_BSWGeneral 中的第 10.3 章「Published Information」（发布信息）。
+
+## B. AUTOSAR 可追溯项变更历史
+
+请注意，本章中的列表还包括在后续版本中已从规范中移除的可追溯项。这些条目不会作为超链接出现在文档中。
+
+### B.1. 本文档相对于 AUTOSAR R23-11 的可追溯项历史
+
+#### B.1.1. R23-11 中新增的规范条目
+
+无
+
+#### B.1.2. R23-11 中变更的规范条目
+
+无
+
+#### B.1.3. R23-11 中删除的规范条目
+
+无
 
 <section id="wechat">
 
