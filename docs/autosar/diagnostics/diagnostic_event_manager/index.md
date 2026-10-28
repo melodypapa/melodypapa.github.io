@@ -3862,3 +3862,531 @@ API Dem_Shutdown 应完成 **Dem** 模块中所有未完成的操作，以便为
 #### 6.13.5. 扩展生产错误
 
 没有扩展生产错误。
+
+## 7. API规范
+
+下图给出 **Dem** 与其周围的 **SW-C** 和 **BSW** 模块之间的接口。接口的描述应给出这些关系的简单概览。
+
+![Figure8_1.png](Figure8_1.png)
+
+![Figure8_2.png](Figure8_2.png)
+
+![Figure8_3.png](Figure8_3.png)
+
+### 7.1. 导入的类型
+
+本节列出从其他模块导入的所有类型。
+
+模块 **Dem** 导入数据类型的定义：
+
+| 模块 | 头文件 | 导入的类型 |
+| --- | --- | --- |
+| Dcm | Rte_Dcm_Type.h | Dcm_NegativeResponseCodeType |
+| Dcm | Rte_Dcm_Type.h | Dcm_OpStatusType |
+| NvM | Rte_NvM_Type.h | NvM_BlockIdType |
+| NvM | Rte_NvM_Type.h | NvM_RequestResultType |
+| Std | Std_Types.h | Std_ReturnType |
+| Std | Std_Types.h | Std_VersionInfoType |
+
+### 7.2. 类型定义
+
+本规范中定义的函数应使用以下数据类型。
+
+#### 7.2.1. Dem 数据类型
+
+##### 7.2.1.1. Dem_ComponentIdType
+
+类型，派生自 **uint16**。范围为：1..65535 —— 受监控组件的内部标识符。注意：0 不是有效值。通过分配的 **ComponentId** 标识 **DemComponent**。**ComponentId** 是自动分配的。可通过**Dem.h**获得。
+
+##### 7.2.1.2. Dem_ConfigType
+
+结构类型。这种外部数据结构的类型应包含用于后构建初始化的 **Dem** 配置数据。可通过**Dem.h**获得。
+
+##### 7.2.1.3. Dem_EventIdType
+
+该数据类型同时用于 **C API** 和服务接口。其定义见第 7.6.1.8 节。
+
+##### 7.2.1.4. Dem_EventStatusType
+
+该数据类型同时用于 **C API** 和服务接口。其定义见第 7.6.1.9 节。
+
+##### 7.2.1.5. Dem_DebouncingStateType
+
+该数据类型同时用于 **C API** 和服务接口。其定义见第 7.6.1.5 节。
+
+##### 7.2.1.6. Dem_DebounceResetStatusType
+
+该数据类型同时用于 **C API** 和服务接口。其定义见第 7.6.1.6 节。
+
+##### 7.2.1.7. Dem_UdsStatusByteType
+
+该数据类型同时用于 **C API** 和服务接口。其定义见第 7.6.1.21 节。
+
+##### 7.2.1.8. Dem_IndicatorStatusType
+
+该数据类型同时用于 **C API** 和服务接口。其定义见第 7.6.1.17 节。
+
+##### 7.2.1.9. Dem_MonitorDataType
+
+该数据类型同时用于 **C API** 和服务接口。其定义见第 7.6.1.15 节。
+
+##### 7.2.1.10. Dem_MonitorStatusType
+
+该数据类型同时用于 **C API** 和服务接口。其定义见第 7.6.1.16 节。
+
+##### 7.2.1.11. Dem_DTCKindType
+
+类型，派生自 **uint8**。取值范围：
+
+* **DEM_DTC_KIND_ALL_DTCS**（0x01）：选择所有 **DTC**。
+* **DEM_DTC_KIND_EMISSION_REL_DTCS**（0x02）：选择与 **OBD** 相关的 **DTC**。
+
+该类型用于按种类过滤 **DTC**。可通过**Dem_J1939Dcm.h**获得。
+
+##### 7.2.1.12. Dem_DTCFormatType
+
+该数据类型同时用于 **C API** 和服务接口。其定义见第 7.6.1.10 节。
+
+##### 7.2.1.13. Dem_DTCOriginType
+
+该数据类型同时用于 **C API** 和服务接口。其定义见第 7.6.1.4 节。
+
+##### 7.2.1.14. Dem_DTCRequestType
+
+类型，派生自 **uint8**。取值范围：
+
+* **DEM_FIRST_FAILED_DTC**（0x01）：请求第一个失败的 **DTC**。
+* **DEM_MOST_RECENT_FAILED_DTC**（0x02）：请求最近的失败 **DTC**。
+* **DEM_FIRST_DET_CONFIRMED_DTC**（0x03）：请求第一个检测到的已确认 **DTC**。
+* **DEM_MOST_REC_DET_CONFIRMED_DTC**（0x04）：请求最近检测到的已确认 **DTC**。
+
+该类型用于请求具有特定属性的 **DTC**。可通过**Dem.h**获得。
+
+##### 7.2.1.15. Dem_DTCTranslationFormatType
+
+类型，派生自 **uint8**。取值范围：
+
+* **DEM_DTC_TRANSLATION_ISO15031_6**（0x00）：ISO15031-6 DTC 格式/SAE J2012-DA_DTCFormat_00 DTC 格式。
+* **DEM_DTC_TRANSLATION_ISO14229_1**（0x01）：ISO14229-1 DTC 格式。
+* **DEM_DTC_TRANSLATION_SAEJ1939_73**（0x02）：SAEJ1939-73 DTC 格式。
+* **DEM_DTC_TRANSLATION_ISO11992_4**（0x03）：ISO11992-4 DTC 格式。
+* **DEM_DTC_TRANSLATION_J2012DA_FORMAT_04**（0x04）：SAE_J2012-DA_DTCFormat_04 DTC 格式。
+
+ISO14229-1 中定义的 **DTC** 翻译格式。可通过**Dem.h**获得。
+
+##### 7.2.1.16. Dem_DTCSeverityType
+
+位域类型，派生自 **uint8**。元素：
+
+* **DEM_SEVERITY_NO_SEVERITY**（0x00）：无可用严重度信息。
+* **DEM_SEVERITY_WWHOBD_CLASS_NO_CLASS**（0x01）：无等级信息。
+* **DEM_SEVERITY_WWHOBD_CLASS_A**（0x02）：**WWH-OBD** Class A。
+* **DEM_SEVERITY_WWHOBD_CLASS_B1**（0x04）：**WWH-OBD** Class B1。
+* **DEM_SEVERITY_WWHOBD_CLASS_B2**（0x08）：**WWH-OBD** Class B2。
+* **DEM_SEVERITY_WWHOBD_CLASS_C**（0x10）：**WWH-OBD** Class C。
+* **DEM_SEVERITY_MAINTENANCE_ONLY**（0x20）：需要维护。
+* **DEM_SEVERITY_CHECK_AT_NEXT_HALT**（0x40）：在下次停机时检查。
+* **DEM_SEVERITY_CHECK_IMMEDIATELY**（0x80）：立即检查。
+
+**DTCSeverityMask** / **DTCSeverity** 字节的类型定义，按照 ISO 14229-1 附录 D.3 包含 **DTC** 严重度和 **DTC** 等级信息。高 3 位（位 7–5）用于表示 **DTC** 严重度信息。低 5 位（位 4–0）用于表示 **DTC** 等级信息。可通过**Dem.h**获得。
+
+##### 7.2.1.17. Dem_RatioIdType
+
+该数据类型同时用于 **C API** 和服务接口。其定义见第 7.6.1.20 节。
+
+##### 7.2.1.18. Dem_DTRControlType
+
+该数据类型同时用于 **C API** 和服务接口。其定义见第 7.6.1.7 节。
+
+##### 7.2.1.19. Dem_InitMonitorReasonType
+
+该数据类型同时用于 **C API** 和服务接口。其定义见第 7.6.1.11 节。
+
+##### 7.2.1.20. Dem_IumprDenomCondIdType
+
+该数据类型同时用于 **C API** 和服务接口。其定义见第 7.6.1.12 节。
+
+##### 7.2.1.21. Dem_IumprDenomCondStatusType
+
+该数据类型同时用于 **C API** 和服务接口。其定义见第 7.6.1.13 节。
+
+##### 7.2.1.22. Dem_J1939DcmDTCStatusFilterType
+
+类型，派生自 **uint8**。取值范围：
+
+* **DEM_J1939DTC_ACTIVE**（0）：活动 **DTC**。
+* **DEM_J1939DTC_PREVIOUSLY_ACTIVE**（1）：之前活动的 **DTC**。
+* **DEM_J1939DTC_PENDING**（2）：pending **DTC**。
+* **DEM_J1939DTC_PERMANENT**（3）：永久 **DTC**。
+* **DEM_J1939DTC_CURRENTLY_ACTIVE**（4）：当前活动的 **DTC**。
+
+用于区分应过滤哪些 **DTC** 的类型。可通过**Dem.h**获得。
+
+##### 7.2.1.23. Dem_J1939DcmSetClearFilterType
+
+类型，派生自 **uint8**。取值范围：
+
+* **DEM_J1939DTC_CLEAR_ACTIVE**（0）：活动 **DTC**。
+* **DEM_J1939DTC_CLEAR_PREVIOUSLY_ACTIVE**（1）：之前活动的 **DTC**。
+* **DEM_J1939DTC_CLEAR_ACTIVE_AND_PREVIOUSLY_ACTIVE**（2）：活动和之前活动的 **DTC**。
+
+用于区分清除哪些 **DTC** 的类型。可通过**Dem.h**获得。
+
+##### 7.2.1.24. Dem_J1939DcmSetFreezeFrameFilterType
+
+类型，派生自 **uint8**。取值范围：
+
+* **DEM_J1939DCM_FREEZEFRAME**（0）：冻结帧（**FreezeFrame**，DM04）。
+* **DEM_J1939DCM_EXPANDED_FREEZEFRAME**（1）：扩展冻结帧（**ExpandedFreezeFrame**，DM25）。
+* **DEM_J1939DCM_SPNS_IN_EXPANDED_FREEZEFRAME**（2）：扩展冻结帧中的 **SPN**（DM24）。
+
+用于区分清除哪些 **DTC** 的类型。可通过**Dem.h**获得。
+
+##### 7.2.1.25. Dem_J1939DcmLampStatusType
+
+结构类型。元素：
+
+* **LampStatus**（**uint8**）：灯状态。
+* **FlashLampStatus**（**uint8**）：闪烁灯状态。
+
+详情请参见 SAE J1939-73。可通过**Dem.h**获得。
+
+##### 7.2.1.26. Dem_J1939DcmDiagnosticReadiness1Type
+
+结构类型。元素：
+
+* **ActiveTroubleCodes**（**uint8**）：活动 **DTC** 的数量。
+* **PreviouslyActiveDiagnosticTroubleCodes**（**uint8**）：之前活动 **DTC** 的数量。
+* **OBDCompliance**（**uint8**）：**OBD** 合规性。
+* **ContinuouslyMonitoredSystemsSupport_Status**（**uint8**）：标识连续监控系统的支持和状态。
+* **NonContinuouslyMonitoredSystemsSupport5**（**uint8**）：标识非连续监控系统的支持（字节 5）。
+* **NonContinuouslyMonitoredSystemsSupport6**（**uint8**）：标识非连续监控系统的支持（字节 6）。
+* **NonContinuouslyMonitoredSystemsStatus7**（**uint8**）：标识非连续监控系统的状态（字节 7）。
+* **NonContinuouslyMonitoredSystemsStatus8**（**uint8**）：标识非连续监控系统的状态（字节 8）。
+
+该结构表示 DM05 报文的所有数据元素。编码应按照 SAE J1939-73 进行。可通过**Dem.h**获得。
+
+##### 7.2.1.27. Dem_J1939DcmDiagnosticReadiness2Type
+
+结构类型。元素：
+
+* **DistanceTraveledWhileMILisActivated**（**uint16**）：**MIL** 激活期间累计行驶的公里数。
+* **DistanceSinceDTCsCleared**（**uint16**）：自排放相关 **DTC** 被清除以来累计行驶的距离。
+* **MinutesRunbyEngineWhileMILisActivated**（**uint16**）：**MIL** 激活（点亮）期间累计的分钟数。
+* **TimeSinceDiagnosticTroubleCodesCleared**（**uint16**）：自排放相关 **DTC** 被清除以来累计的发动机运行时间。
+
+该结构表示 DM21 报文的所有数据元素。编码应按照 SAE J1939-73 进行。可通过**Dem.h**获得。
+
+##### 7.2.1.28. Dem_J1939DcmDiagnosticReadiness3Type
+
+结构类型。元素：
+
+* **TimeSinceEngineStart**（**uint16**）：自钥匙接通（**key-on**）以来发动机运行的时间。
+* **NumberofWarmupsSinceDTCsCleared**（**uint8**）：自所有 **DTC** 被清除以来 **OBD** 暖机循环的次数。
+* **ContinuouslyMonitoredSystemsEnableCompletedStatus**（**uint8**）：标识连续监控系统的启用/完成支持和状态。
+* **NonContinuouslyMonitoredSystemsEnableStatus5**（**uint8**）：本监控周期内非连续监视器的启用状态（字节 5）。
+* **NonContinuouslyMonitoredSystemsEnableStatus6**（**uint8**）：本监控周期内非连续监视器的启用状态（字节 6）。
+* **NonContinuouslyMonitoredSystems7**（**uint8**）：本监控周期内非连续监视器的完成状态（字节 7）。
+* **NonContinuouslyMonitoredSystems8**（**uint8**）：本监控周期内非连续监视器的完成状态（字节 8）。
+
+该结构表示 DM26 报文的所有数据元素。编码应按照 SAE J1939-73 进行。可通过**Dem.h**获得。
+
+##### 7.2.1.29. Dem_EventOBDReadinessGroupType
+
+类型，派生自 **uint8**。范围为：0..255。该数据类型对应 SAE J1979-DA 定义的就绪组。可通过**Dem.h**获得。
+
+### 7.3. 函数定义
+
+以下是为上层模块提供的函数列表。
+
+#### 7.3.1. Dem_GetVersionInfo
+
+**说明**: 返回此模块的版本信息。可通过**Dem.h**获得。本服务为同步调用，可重入。参数 versioninfo（out）：存储本模块版本信息的位置的指针。
+
+```C
+void Dem_GetVersionInfo ( Std_VersionInfoType* versioninfo )
+```
+
+#### 7.3.2. 接口 ECU 状态管理器 &lt;=&gt; Dem
+
+##### 7.3.2.1. Dem_PreInit
+
+**说明**: 初始化处理 **BSW** 模块所报告事件所需的内部状态。可通过**Dem.h**获得。本服务为同步调用，不可重入。
+
+```C
+void Dem_PreInit ( void )
+```
+
+##### 7.3.2.2. Dem_Init
+
+**说明**: 初始化或重新初始化本模块。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 ConfigPtr（in）：指向 **VARIANT-POST-BUILD** 中配置集的指针。
+
+```C
+void Dem_Init ( const Dem_ConfigType* ConfigPtr )
+```
+
+##### 7.3.2.3. Dem_Shutdown
+
+**说明**: 关闭本模块。可通过**Dem.h**获得。本服务为同步调用，不可重入。
+
+```C
+void Dem_Shutdown ( void )
+```
+
+#### 7.3.3. 接口 BSW 模块 / SW-组件 &lt;=&gt; Dem
+
+##### 7.3.3.1. Dem_ClearDTC
+
+**说明**: 清除单个 **DTC** 以及 **DTC** 组。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。返回值：**E_OK**：**DTC** 清除成功；**E_NOT_OK**：未选择 **DTC**；**DEM_WRONG_DTC**：所选格式下所选的 **DTC** 值不存在，或按配置仅允许清除所有 **DTC** 组；**DEM_WRONG_DTCORIGIN**：所选 **DTCOrigin** 不存在；**DEM_CLEAR_FAILED**：**DTC** 清除失败；**DEM_CLEAR_BUSY**：另一个客户端当前正在清除 **DTC**。所请求的操作不会开始，调用者应在稍后时刻重试；**DEM_CLEAR_MEMORY_ERROR**：擦除内存位置时发生错误（例如在 DemClearDTCBehavior 设置为 `DEM_CLRRESP_NONVOLATILE_FINISH` 且非易失性块擦除失败时）；**DEM_PENDING**：**DTC** 清除正在进行中。调用者应在稍后时刻再次调用此函数；**DEM_BUSY**：该客户端另一个基于 Dem_SelectDTC 的操作（按第 6.11.2.2 节）正在进行中。
+
+```C
+Std_ReturnType Dem_ClearDTC ( uint8 ClientId )
+```
+
+##### 7.3.3.2. Dem_ClearPrestoredFreezeFrame
+
+**说明**: 清除特定事件的预存储冻结帧。该 **API** 只能通过 **RTE** 使用，因此不通过**Dem.h**导出声明。**API** 可用性：仅当 ({ecuc(Dem/DemConfigSet/DemEventParameter.DemFFPrestorageSupported)} == true) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，对不同 EventId 可重入，对相同 EventId 不可重入。参数 EventId（in）：通过分配的 **EventId** 标识事件。返回值：**E_OK**：清除预存储冻结帧成功；**E_NOT_OK**：清除预存储冻结帧失败。
+
+```C
+Std_ReturnType Dem_ClearPrestoredFreezeFrame ( Dem_EventIdType EventId )
+```
+
+##### 7.3.3.3. Dem_GetComponentFailed
+
+**说明**: 获取 **DemComponent** 的失败状态。可通过**Dem.h**获得。本服务为同步调用，可重入。参数 ComponentId（in）：**DemComponent** 的标识。参数 ComponentFailed（out）：TRUE：已失败；FALSE：未失败。返回值：**E_OK**：获取 ComponentFailed 成功；**E_NOT_OK**：获取 ComponentFailed 不成功。
+
+```C
+Std_ReturnType Dem_GetComponentFailed ( Dem_ComponentIdType ComponentId, boolean* ComponentFailed )
+```
+
+##### 7.3.3.4. Dem_GetDTCSelectionResult
+
+**说明**: 提供上次 Dem_SelectDTC 调用是否选择了有效 **DTC** 或 **DTC** 组的信息。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。返回值：**E_OK**：**DTC** 选择参数检查成功，所请求 **DTC** 或所选来源中的 **DTC** 组已被选择用于进一步操作；**E_NOT_OK**：未选择 **DTC**；**DEM_WRONG_DTC**：所选格式下所选的 **DTC** 值不存在；**DEM_WRONG_DTCORIGIN**：所选 **DTCOrigin** 不存在；**DEM_PENDING**：SelectDTC 参数的检查正在进行中。调用者应在稍后时刻再次调用此函数；**DEM_BUSY**：该客户端另一个基于 Dem_SelectDTC 的操作（按第 6.11.2.2 节）正在进行中。
+
+```C
+Std_ReturnType Dem_GetDTCSelectionResult ( uint8 ClientId )
+```
+
+##### 7.3.3.5. Dem_GetDTCSelectionResultForClearDTC
+
+**说明**: 在考虑 **Dem** 是否仅允许清除所有 **DTC** 的设置的前提下，提供上次 Dem_SelectDTC 调用是否选择了有效 **DTC** 或 **DTC** 组的信息。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。返回值：**E_OK**：**DTC** 选择参数检查成功，所请求 **DTC** 或所选来源中的 **DTC** 组已被选择用于进一步操作；**DEM_WRONG_DTC**：所选格式下所选的 **DTC** 值不存在，或选择了单个 **DTC** 而 **Dem** 仅支持清除所有 **DTC**；**DEM_WRONG_DTCORIGIN**：所选 **DTCOrigin** 不存在；**DEM_PENDING**：SelectDTC 参数的检查正在进行中。调用者应在稍后时刻再次调用此函数；**DEM_BUSY**：该客户端另一个基于 Dem_SelectDTC 的操作（按第 6.11.2.2 节）正在进行中；**E_NOT_OK**：未选择 **DTC**。
+
+```C
+Std_ReturnType Dem_GetDTCSelectionResultForClearDTC ( uint8 ClientId )
+```
+
+##### 7.3.3.6. Dem_GetEventUdsStatus
+
+**说明**: 获取分配给事件 **DTC** 的当前 **UDS** 状态字节。可通过**Dem.h**获得。本服务为同步调用，可重入。参数 EventId（in）：通过分配的 **EventId** 标识事件。参数 UDSStatusByte（out）：所请求事件的 **UDS DTC** 状态字节（参见"状态位支持"一章）。如果函数调用的返回值为 E_NOT_OK，此参数不包含有效数据。返回值：**E_OK**：获取事件状态成功；**E_NOT_OK**：获取事件状态失败。
+
+```C
+Std_ReturnType Dem_GetEventUdsStatus ( Dem_EventIdType EventId, Dem_UdsStatusByteType* UDSStatusByte )
+```
+
+##### 7.3.3.7. Dem_GetMonitorStatus
+
+**说明**: 获取事件的当前监视器状态。可通过**Dem.h**获得。本服务为同步调用，可重入。参数 EventID（in）：通过分配的 **EventId** 标识事件。参数 MonitorStatus（out）：所请求事件的监视器状态字节。如果函数调用的返回值为 E_NOT_OK，此参数不包含有效数据。返回值：**E_OK**：获取监视器状态成功；**E_NOT_OK**：获取监视器状态失败。
+
+```C
+Std_ReturnType Dem_GetMonitorStatus ( Dem_EventIdType EventID, Dem_MonitorStatusType* MonitorStatus )
+```
+
+##### 7.3.3.8. Dem_GetDebouncingOfEvent
+
+**说明**: 获取事件的去抖动状态。此函数不应用于其函数内部具有原生去抖动的 EventId，而是适用于使用 **Dem** 内部去抖动的 EventId。可通过**Dem.h**获得。本服务为同步调用，可重入。参数 EventId（in）：通过分配的 **EventId** 标识事件。参数 DebouncingState（out）：位 0 暂时缺陷（对应 0 &lt; **FDC** &lt; 127）；位 1 最终缺陷（对应 **FDC** = 127）；位 2 暂时恢复（对应 -128 &lt; **FDC** &lt; 0）；位 3 测试完成（对应 **FDC** = -128 或 **FDC** = 127）；位 4 **DTR** 更新（= 测试完成 且 去抖动完成 且 使能条件/存储条件满足）。返回值：**E_OK**：获取每事件去抖动状态成功；**E_NOT_OK**：获取每事件去抖动状态失败。
+
+```C
+Std_ReturnType Dem_GetDebouncingOfEvent ( Dem_EventIdType EventId, Dem_DebouncingStateType* DebouncingState )
+```
+
+##### 7.3.3.9. Dem_GetDTCOfEvent
+
+**说明**: 获取事件的 **DTC**。可通过**Dem.h**获得。本服务为同步调用，可重入。参数 EventId（in）：通过分配的 **EventId** 标识事件。参数 DTCFormat（in）：定义所请求 **DTC** 值的输出格式。参数 DTCOfEvent（out）：以此函数返回的相应格式接收 **DTC** 值。如果函数返回值不是 E_OK，此参数不包含有效数据。返回值：**E_OK**：获取 **DTC** 成功；**E_NOT_OK**：调用不成功；**DEM_E_NO_DTC_AVAILABLE**：在所请求的格式中没有配置 **DTC**。
+
+```C
+Std_ReturnType Dem_GetDTCOfEvent ( Dem_EventIdType EventId, Dem_DTCFormatType DTCFormat, uint32* DTCOfEvent )
+```
+
+##### 7.3.3.10. Dem_GetDTCSuppression
+
+**说明**: 返回特定 **DTC** 的抑制状态。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemSuppressionSupport)} == DEM_DTC_SUPPRESSION) 时此 **API** 可用。可通过**Dem.h**获得。本服务为异步调用，可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 SuppressionStatus（out）：定义相应 **DTC** 是被抑制（TRUE）还是启用（FALSE）。返回值：**E_OK**：操作成功；**E_NOT_OK**：未调用 Dem_SelectDTC；**DEM_WRONG_DTC**：未选择有效的 **DTC** 或 **DTC** 组；**DEM_WRONG_DTCORIGIN**：选择了错误的 **DTC** origin；**DEM_PENDING**：所请求的值被异步计算，当前不可用。调用者可以在稍后重试；**DEM_BUSY**：该客户端另一个基于 Dem_SelectDTC 的操作（按第 6.11.2.2 节）正在进行中。
+
+```C
+Std_ReturnType Dem_GetDTCSuppression ( uint8 ClientId, boolean* SuppressionStatus )
+```
+
+##### 7.3.3.11. Dem_GetEventAvailable
+
+**说明**: 获取事件的可用性。可通过**Dem.h**获得。本服务为同步调用，可重入。参数 EventId（in）：通过分配的 **EventId** 标识事件。参数 AvailableStatus（out）：如果事件可用则为 TRUE；如果事件不可用则为 FALSE。返回值：**E_OK**：已获取事件可用性；**E_NOT_OK**：无法获取事件可用性。
+
+```C
+Std_ReturnType Dem_GetEventAvailable ( Dem_EventIdType EventId, boolean* AvailableStatus )
+```
+
+##### 7.3.3.12. Dem_GetFaultDetectionCounter
+
+**说明**: 获取事件的故障检测计数器。该 **API** 只能通过 **RTE** 使用，因此不通过**Dem.h**导出声明。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 EventId（in）：通过分配的 **EventId** 标识事件。参数 FaultDetectionCounter（out）：此参数接收所请求 **EventId** 的故障检测计数器信息。如果函数调用的返回值不是 E_OK，此参数不包含有效数据。按 ISO 14229-1 为 -128（十进制）… +127（十进制），对应 PASSED…FAILED。返回值：**E_OK**：请求成功；**E_NOT_OK**：请求失败；**DEM_E_NO_FDC_AVAILABLE**：所请求事件没有可用的故障检测计数器。
+
+```C
+Std_ReturnType Dem_GetFaultDetectionCounter ( Dem_EventIdType EventId, sint8* FaultDetectionCounter )
+```
+
+##### 7.3.3.13. Dem_GetIndicatorStatus
+
+**说明**: 获取从 **UDS** 状态推导的指示器状态。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral/DemEventMemory…} == …) 时此 **API** 可用（源文档转换在此处截断）。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 IndicatorId（in）：指示器编号。参数 IndicatorStatus（out）：指示器的状态，例如关闭、点亮或闪烁。返回值：**E_OK**：操作成功；**E_NOT_OK**：操作失败。
+
+```C
+Std_ReturnType Dem_GetIndicatorStatus ( uint8 IndicatorId, Dem_IndicatorStatusType* IndicatorStatus )
+```
+
+##### 7.3.3.14. Dem_GetEventFreezeFrameDataEx
+
+**说明**: 按事件获取冻结帧的数据。可通过**Dem.h**获得。本服务为同步调用，可重入。参数 EventId（in）：通过分配的 **EventId** 标识事件。参数 RecordNumber（in）：此参数是 ISO14229-1 定义的冻结帧记录的唯一标识符。0xFF 表示返回最新的冻结帧记录。仅当 **Dem** 模块支持 **WWH-OBD**（参见 DemOBDSupport）时才支持 0x00。参数 DataId（in）：此参数指定应复制到目标缓冲区的 **DID**（ISO14229-1）。参数 BufSize（inout）：函数被调用时此参数包含可写入缓冲区的最大数据字节数。函数在此参数中返回实际写入的数据字节数。参数 DestBuffer（out）：此参数包含一个字节指针，指向应写入冻结帧数据记录的缓冲区。格式为原始十六进制值，不包含头信息。返回值：**E_OK**：操作成功；**E_NOT_OK**：无法执行操作；**DEM_NO_SUCH_ELEMENT**：所请求的事件数据当前未存储（但请求有效），或事件不支持所请求的记录号，或冻结帧不支持所请求的 **DID**；**DEM_BUFFER_TOO_SMALL**：提供的缓冲区太小。
+
+```C
+Std_ReturnType Dem_GetEventFreezeFrameDataEx ( Dem_EventIdType EventId, uint8 RecordNumber, uint16 DataId, uint8* DestBuffer, uint16* BufSize )
+```
+
+##### 7.3.3.15. Dem_GetEventExtendedDataRecordEx
+
+**说明**: 按事件获取扩展数据记录的数据。可通过**Dem.h**获得。本服务为同步调用，可重入。参数 EventId（in）：通过分配的 **EventId** 标识事件。参数 RecordNumber（in）：所请求扩展数据记录的标识。有效值在 ISO14229-1 定义的 0x01 到 0xEF 之间。参数 BufSize（inout）：函数被调用时此参数包含可写入缓冲区的最大数据字节数。函数在此参数中返回实际写入的数据字节数。参数 DestBuffer（out）：此参数包含一个字节指针，指向应写入扩展数据的缓冲区。格式为原始十六进制值，不包含头信息。返回值：**E_OK**：操作成功；**E_NOT_OK**：无法执行操作；**DEM_NO_SUCH_ELEMENT**：所请求的事件数据当前未存储（但请求有效），或事件不支持所请求的记录号；**DEM_BUFFER_TOO_SMALL**：提供的缓冲区太小。
+
+```C
+Std_ReturnType Dem_GetEventExtendedDataRecordEx ( Dem_EventIdType EventId, uint8 RecordNumber, uint8* DestBuffer, uint16* BufSize )
+```
+
+##### 7.3.3.16. Dem_GetEventMemoryOverflow
+
+**说明**: 获取事件内存溢出指示状态。可通过**Dem.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：标识 DemEventMemorySet 的 DemClientID，指示在哪个事件内存中发生了溢出。参数 DTCOrigin（in）：如果 **Dem** 支持多个事件内存，此参数用于选择应从中读取溢出指示的源内存。参数 OverflowIndication（out）：如果相应事件内存已溢出，此参数返回 TRUE，否则返回 FALSE。返回值：**E_OK**：操作成功；**E_NOT_OK**：操作失败或不受支持。
+
+```C
+Std_ReturnType Dem_GetEventMemoryOverflow ( uint8 ClientId, Dem_DTCOriginType DTCOrigin, boolean* OverflowIndication )
+```
+
+##### 7.3.3.17. Dem_GetNumberOfEventMemoryEntries
+
+**说明**: 返回当前存储在所请求事件内存中的条目数量。可通过**Dem.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：标识所请求事件内存所属 DemEventMemorySet 的 DemClientID。参数 DTCOrigin（in）：如果 **Dem** 支持多个事件内存，此参数用于选择应从中读取条目数量的源内存。参数 NumberOfEventMemoryEntries（out）：当前存储在所请求事件内存中的条目数量。返回值：**E_OK**：操作成功；**E_NOT_OK**：操作失败。
+
+```C
+Std_ReturnType Dem_GetNumberOfEventMemoryEntries ( uint8 ClientId, Dem_DTCOriginType DTCOrigin, uint8* NumberOfEventMemoryEntries )
+```
+
+##### 7.3.3.18. Dem_ResetEventDebounceStatus
+
+**说明**: 由 **BSW** 模块和 **SW-C** 控制内部去抖动计数器/计时器。这些去抖动状态变化不会影响事件鉴定。自 Dem_PreInit 完成起，此 **API** 即可用于 **BSW** 模块（参见第 6.8 节和第 6.7.1 节）。可通过**Dem.h**获得。本服务为同步调用，对不同 EventId 可重入，对相同 EventId 不可重入。参数 EventId（in）：通过分配的 **EventId** 标识事件。参数 DebounceResetStatus（in）：冻结或复位指定事件的内部去抖动计数器/计时器。返回值：**E_OK**：操作成功；**E_NOT_OK**：仅在开发错误时出现。
+
+```C
+Std_ReturnType Dem_ResetEventDebounceStatus ( Dem_EventIdType EventId, Dem_DebounceResetStatusType DebounceResetStatus )
+```
+
+##### 7.3.3.19. Dem_ResetEventStatus
+
+**说明**: 复位事件的失败状态。该 **API** 只能通过 **RTE** 使用，因此不通过**Dem.h**导出声明。可通过**Dem.h**获得。本服务为异步调用，对不同 EventId 可重入，对相同 EventId 不可重入。参数 EventId（in）：通过分配的 **EventId** 标识事件。返回值：**E_OK**：复位事件状态的请求被成功接受；**E_NOT_OK**：复位事件状态的请求失败或不被允许，因为该事件在当前运行周期已被测试。
+
+```C
+Std_ReturnType Dem_ResetEventStatus ( Dem_EventIdType EventId )
+```
+
+##### 7.3.3.20. Dem_ResetMonitorStatus
+
+**说明**: 复位监视器的失败状态。可通过**Dem.h**获得。本服务为同步调用，对不同 EventId 可重入，对相同 EventId 不可重入。参数 EventId（in）：通过分配的 **EventId** 标识事件。返回值：**E_OK**：复位监视器状态的请求被成功接受；**E_NOT_OK**：复位监视器状态的请求失败或不被允许。
+
+```C
+Std_ReturnType Dem_ResetMonitorStatus ( Dem_EventIdType EventId )
+```
+
+##### 7.3.3.21. Dem_RestartOperationCycle
+
+**说明**: 设置一个运行周期状态。该 **API** 只能通过 **RTE** 使用，因此不通过**Dem.h**导出声明。该接口具有异步行为，以避免在需要处理大量事件以及重新初始化相关监视器期间超出 **API** 的典型时序要求。异步确认是相关的 InitMonitorForEvent 回调。可通过**Dem.h**获得。本服务为异步调用，可重入。参数 OperationCycleId（in）：运行周期的标识，例如电源周期、驾驶循环。返回值：**E_OK**：运行周期的设置被接受并将被异步处理；**E_NOT_OK**：运行周期的设置被拒绝。
+
+```C
+Std_ReturnType Dem_RestartOperationCycle ( uint8 OperationCycleId )
+```
+
+##### 7.3.3.22. Dem_PrestoreFreezeFrame
+
+**说明**: 为特定事件捕获冻结帧数据。该 **API** 只能通过 **RTE** 使用，因此不通过**Dem.h**导出声明。**API** 可用性：仅当 ({ecuc(Dem/DemConfigSet/DemEventParameter.DemFFPrestorageSupported)} == true) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，对不同 EventId 可重入，对相同 EventId 不可重入。参数 EventId（in）：通过分配的 **EventId** 标识事件。返回值：**E_OK**：冻结帧预存储成功；**E_NOT_OK**：冻结帧预存储失败。
+
+```C
+Std_ReturnType Dem_PrestoreFreezeFrame ( Dem_EventIdType EventId )
+```
+
+##### 7.3.3.23. Dem_SelectDTC
+
+**说明**: 选择一个 **DTC** 或 **DTC** 组作为进一步操作的目标。可通过**Dem.h**获得。本服务为同步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTC（in）：以相应格式定义所选的 **DTC**。如果 **DTC** 符合某个 **DTC** 组编号，则选择该 **DTC** 组。参数 DTCFormat（in）：定义所提供 **DTC** 值的输入格式。参数 DTCOrigin（in）：所请求 **DTC** 或 **DTC** 组的事件内存。返回值：**E_OK**：**DTC** 选择成功；**DEM_BUSY**：该客户端另一个 Dem_SelectDTC 或基于 Dem_SelectDTC 的操作正在进行中。
+
+```C
+Std_ReturnType Dem_SelectDTC ( uint8 ClientId, uint32 DTC, Dem_DTCFormatType DTCFormat, Dem_DTCOriginType DTCOrigin )
+```
+
+##### 7.3.3.24. Dem_SetComponentAvailable
+
+**说明**: 设置特定 **DemComponent** 的可用性。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 ComponentId（in）：**DemComponent** 的标识。参数 AvailableStatus（in）：此参数指定相应组件应可用（TRUE）还是不可用（FALSE）。返回值：**E_OK**：操作成功；**E_NOT_OK**：操作失败。
+
+```C
+Std_ReturnType Dem_SetComponentAvailable ( Dem_ComponentIdType ComponentId, boolean AvailableStatus )
+```
+
+##### 7.3.3.25. Dem_SetDTCSuppression
+
+**说明**: 设置特定 **DTC** 的抑制状态。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemSuppressionSupport)} == DEM_DTC_SUPPRESSION) 时此 **API** 可用。可通过**Dem.h**获得。本服务为异步调用，不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 SuppressionStatus（in）：此参数指定相应 **DTC** 应被禁用（TRUE）还是启用（FALSE）。返回值：**E_OK**：**DTC** 的状态已在 DTCStatus 参数中正确提供；**E_NOT_OK**：未选择 **DTC**；**DEM_WRONG_DTC**：所选格式下所选的 **DTC** 值不存在；**DEM_WRONG_DTCORIGIN**：所选 **DTCOrigin** 不存在；**DEM_PENDING**：所请求的值被异步计算，当前不可用。调用者可以在稍后重试；**DEM_BUSY**：该客户端另一个基于 Dem_SelectDTC 的操作（按第 6.11.2.2 节）正在进行中。
+
+```C
+Std_ReturnType Dem_SetDTCSuppression ( uint8 ClientId, boolean SuppressionStatus )
+```
+
+##### 7.3.3.26. Dem_SetEnableCondition
+
+**说明**: 设置一个使能条件。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral/DemEnableCondition)} != NULL) 时此 **API** 可用。可通过**Dem.h**获得。本服务为异步调用，可重入。参数 EnableConditionID（in）：此参数标识使能条件。参数 ConditionFulfilled（in）：此参数指定分配给 EnableConditionID 的使能条件是满足（TRUE）还是不满足（FALSE）。返回值：如果使能条件可以成功设置，**API** 调用返回 E_OK。如果使能条件的设置失败，函数的返回值为 E_NOT_OK。
+
+```C
+Std_ReturnType Dem_SetEnableCondition ( uint8 EnableConditionID, boolean ConditionFulfilled )
+```
+
+##### 7.3.3.27. Dem_SetEventAvailable
+
+**说明**: 设置特定事件的可用状态。可通过**Dem.h**获得。本服务为异步调用，对不同 EventId 可重入，对相同 EventId 不可重入。参数 EventId（in）：通过分配的 **EventId** 标识事件。参数 AvailableStatus（in）：此参数指定相应事件应可用（TRUE）还是不可用（FALSE）。返回值：**E_OK**：设置可用性状态的请求成功；**E_NOT_OK**：设置可用性状态的请求不被接受。
+
+```C
+Std_ReturnType Dem_SetEventAvailable ( Dem_EventIdType EventId, boolean AvailableStatus )
+```
+
+##### 7.3.3.28. Dem_SetEventConfirmationThresholdCounter
+
+**说明**: 设置事件的故障确认阈值。可通过**Dem.h**获得。本服务为异步调用，对不同 EventId 可重入，对相同 EventId 不可重入。参数 EventId（in）：通过分配的 **EventId** 标识事件。参数 FailureCycleCounterThreshold（in）：要设置的事件失败周期计数器阈值。返回值：**E_OK**：阈值的更改成功；**E_NOT_OK**：无法更改阈值，因为该事件的 DemEventConfirmationThresholdCounterAdaptable 设置为 FALSE。
+
+```C
+Std_ReturnType Dem_SetEventConfirmationThresholdCounter ( Dem_EventIdType EventId, uint8 FailureCycleCounterThreshold )
+```
+
+##### 7.3.3.29. Dem_SetEventStatus
+
+**说明**: 由 **SW-C** 或 **BSW** 模块调用，向 **Dem** 报告监视器状态信息。调用 Dem_SetEventStatus 的 **BSW** 模块可以安全地忽略返回值。此 **API** 仅在 ({Dem/DemConfigSet/DemEventParameter/DemEventReportingType} == STANDARD_REPORTING) 时可用。可通过**Dem.h**获得。本服务为同步调用，对不同 EventId 可重入，对相同 EventId 不可重入。参数 EventId（in）：通过分配的 **EventId** 标识事件。参数 EventStatus（in）：监视器测试结果。返回值：**E_OK**：事件状态的设置成功；**E_NOT_OK**：事件状态的设置或处理失败或不能被接受。
+
+```C
+Std_ReturnType Dem_SetEventStatus ( Dem_EventIdType EventId, Dem_EventStatusType EventStatus )
+```
+
+##### 7.3.3.30. Dem_SetEventStatusWithMonitorData
+
+**说明**: 此 **API** 仅在 ({Dem/DemConfigSet/DemEventParameter/DemEventReportingType} == STANDARD_REPORTING_WITH_MONITOR_DATA) 时可用。可通过**Dem.h**获得。本服务为同步调用，对不同 EventId 可重入，对相同 EventId 不可重入。参数 EventId（in）：通过分配的 **EventId** 标识事件。参数 EventStatus（in）：监视器测试结果。参数 monitorData0（in）：-。参数 monitorData1（in）：-。返回值：**E_OK**：事件状态的设置成功；**E_NOT_OK**：事件状态的设置或处理失败或不能被接受。
+
+```C
+Std_ReturnType Dem_SetEventStatusWithMonitorData ( Dem_EventIdType EventId, Dem_EventStatusType EventStatus, Dem_MonitorDataType monitorData0, Dem_MonitorDataType monitorData1 )
+```
+
+##### 7.3.3.31. Dem_SetStorageCondition
+
+**说明**: 设置一个存储条件。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral/DemStorageCondition)} != NULL) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，可重入。参数 StorageConditionID（in）：此参数标识存储条件。参数 ConditionFulfilled（in）：此参数指定分配给 StorageConditionID 的存储条件是满足（TRUE）还是不满足（FALSE）。返回值：如果存储条件可以成功设置，**API** 调用返回 E_OK。如果存储条件的设置失败，函数的返回值为 E_NOT_OK。
+
+```C
+Std_ReturnType Dem_SetStorageCondition ( uint8 StorageConditionID, boolean ConditionFulfilled )
+```
+
+##### 7.3.3.32. Dem_SetWIRStatus
+
+**说明**: 通过失效安全 **SW-C** 设置 **WIR** 状态位。该 **API** 只能通过 **RTE** 使用，因此不通过**Dem.h**导出声明。可通过**Dem.h**获得。本服务为异步调用，对不同 EventId 可重入，对相同 EventId 不可重入。参数 EventId（in）：通过分配的 **EventId** 标识事件。事件编号在 **DEM** 中配置。最小值：1（0：表示无事件或故障）；最大值：**DEM** 中事件编号配置的结果（最大为 255 或 65535）。参数 WIRStatus（in）：所请求的事件相关 **WIR** 位的状态（关于当前功能抑制状态）WIRStatus = TRUE -&gt; **WIR** 位应置为 "1"；WIRStatus = FALSE -&gt; **WIR** 位应置为 "0"。返回值：**E_OK**：设置 **WIR** 状态的请求成功；**E_NOT_OK**：设置 **WIR** 状态的请求不被接受（例如 controlDTCSetting 被禁用），应重复请求。
+
+```C
+Std_ReturnType Dem_SetWIRStatus ( Dem_EventIdType EventId, boolean WIRStatus )
+```
