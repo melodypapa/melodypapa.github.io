@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **51** 份已有站内文章）。
+共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **52** 份已有站内文章）。
 
 ## A
 
@@ -2184,88 +2184,88 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_EFXLibrary · R23-11
 
 **Dlt_ConfigType**
-> 类型 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 类型 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_DetForwardErrorTrace**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_GetDefaultLogLevel**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_GetDefaultTraceStatus**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_GetLogChannelNames**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_GetLogChannelThreshold**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_GetLogInfo**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_GetTraceStatus**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_GetVersionInfo**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_Init**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_MessageIDType**
-> 类型 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 类型 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_MessageNetworkTraceInfoType**
-> 类型 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 类型 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_MessageType**
-> 类型 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 类型 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_RegisterContext**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_ResetToFactoryDefault**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_SendLogMessage**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_SendLogMessageWithAttributes**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_SendTraceMessage**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_SendTraceMessageWithAttributes**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_SetDefaultLogLevel**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_SetDefaultTraceStatus**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_SetLogChannelAssignment**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_SetLogChannelThreshold**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_SetLogLevel**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_SetMessageFiltering**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_SetTraceStatus**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_StoreConfiguration**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **Dlt_UnregisterContext**
-> 函数 · 未翻译 · SWS_DiagnosticLogAndTrace · R23-11
+> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **DoIP_ActivationLineSwitch**
 > 函数 · 未翻译 · SWS_DiagnosticOverIP · R23-11

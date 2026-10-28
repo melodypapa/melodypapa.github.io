@@ -40,13 +40,17 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (10 content figures embedded; deco dropped; source typos listed above)
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
   - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync; hash in the batched report)
-- [ ] dlt (SWS_DiagnosticLogAndTrace · R23-11 markdown · ❌ new article, short name Dlt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] dlt (SWS_DiagnosticLogAndTrace · R23-11 markdown · ❌ new article, short name Dlt)
+  - Note: article `communication/diagnostic_log_and_trace/` (full-name directory, nav label "Dlt"). Shape: ch.2 → §2 (18 acronyms + ### 2.1 术语和定义 14 terms, all bold+blockquote) · 3.1 12-entry registry + 3.2 相关标准与规范 ([4, ISO-7498-1] one-liner) + 3.3 相关规范 · ch.7 → §6 (6.1 Dlt 规格: 表6.1 Service-ID 映射 18 rows; 6.1.2 与 SW-C 交互 + Figure7_1; 6.1.3 VFB 跟踪 with the source's pseudo-code fences; 6.1.9 发送数据路径 with source-kept figure numbers 图7.2→Figure7_2 and depth-5 6.1.9.9.1/.2 as ######; 6.1.10 15 Rx 命令; 6.1.11.1 BufferOverflowNotification; 6.2 错误分类 dev+runtime tables) · ch.8 → §7 (4 types; 24 functions; 8 callbacks; 7.5.1 Dlt_TxFunction; 7.6.1 强制/7.6.2 可选 8 rows incl. obsolete StbM_GetCurrentTimeExtended; 7.6.3 Dlt_InjectCall_<SESSION> table; 7.7 服务接口: 4 C/S interfaces — DltControlService 15 ops, InjectionCallback 1, LogTraceSessionControl 2, DltSwcMessageService 6 — each op as a vertical table; source's garbled/spilled op tables (GetTraceStatus/ResetToFactoryDefault/SetDefaultTraceStatus/SetLogChannelAssignment fragments) reconstructed from the fragments + the 1:1 API-table fields; 7.7.2 15 implementation data types (7.7.2.13 carries both LogChannelNameInfoType + LogChannelNameType per source); 7.7.3 4 ports) · ch.9 → §8 (4 figures) · ch.10 → §9 (18 containers, DltEcuId choice container, figures 10.1–10.9 embedded) · appendix A "Mentioned Class Tables" = CONTENT annex → `## A. 提及的类表` (3 meta-model class tables recovered from the R23-11 PDF pages 123–124 — the markdown carries only images), lettered per the rte precedent for source-lettered annexes · ch.6 dropped · appendix B → B (B.1.1 added-items table had 130 Number+Heading rows; rendered as the established ID-only code fence, Heading column dropped — record for user verification; recovered from the PDF pages 125–130)
+  - Note: {OBSOLETE} heading marker on Dlt_MessageIDType dropped as chrome; the "(OBSOLETE)" suffix in the type's Name cell kept; "Tags: atp.Status=draft/obsolete" chrome dropped
+  - Note: Phase A — strict build exit 0 / 0 WARNING; headings §1–§9 + A + B; hygiene 0; acronym rows 18+14 = source 18+14, no tables; check_api_sync OK (4 types / 24 functions / 24 说明 blocks); gen_api_list regenerated (Dlt 4 types + 24 functions SITE-linked, --check 0); census --apply: 156 links + 2 chapter-refs + 13 citation links + 12 registry anchors, idempotent re-run 0 lines; comma-form [n, 文档名] stays prose per open limitation
+  - Note: glossary +32 entries (18 acronyms + 14 ch.2.1 terms), no appends needed (no overlaps found)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion (new article, main session per no-subagent rule)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (16 content figures embedded; deco dropped; appendix A/B PDF recovery as noted)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync; hash in the batched report)
 - [ ] doip (SWS_DiagnosticOverIP · R23-11 markdown · ❌ new article, short name DoIp)
   - Note: acronym-ambiguous (DoIp) — directory name decided with the user in Step 1
   - [ ] Step 1 — Source resolution + gap analysis
