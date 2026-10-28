@@ -71,13 +71,20 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
   - [x] Step 6 — TODO.md row + commit/PR
-- [ ] exp error_description (AUTOSAR_EXP_ErrorDescription · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] exp error_description (AUTOSAR_CP_EXP_ErrorDescription · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
+  - Note: numbered prose EXP document, chapters 1–6 mirrored; ch.4 generic DEM-reporting mechanism, ch.5 CAN-stack errors (Bus Off, controller timeout, 6 signal errors), ch.6 NVRAM-stack errors (9 driver-level + 2 abstraction-level + 5 NVM-level); every error = summary + figure + per-module 检测/反应/报告/恢复 tables
+  - Note: no document-reference chapter in the source (no [n] citations) — citation registry N/A; SWS/ECUC ids kept verbatim in table cells per corpus convention
+  - Note: figure caption→image pairing verified per caption (the conversion alternates image-before/after caption); 17 figures placed (Figure01–28, content-hash dedupe)
+  - Note: census: 9 chapter-number refs applied, idempotent; 50 identifier-mention lines in §6 are error-code mentions inside definitional tables (not linked — no 错误-titled section, tables definitional); cross-article mentions report-only (DEM ×57, NvM ×38 SITE-class — batch gate)
+  - Note: glossary +1 (Bus Off)
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] exp cdd_design_and_integration (AUTOSAR_EXP_CDDDesignAndIntegration · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
