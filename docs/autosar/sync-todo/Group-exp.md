@@ -21,6 +21,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #158 (Closes #147); post-rebase article commit d6cf2ec on feature/exp-vfb; stacked PR chain merged in row order
   - [x] Step 6 — TODO.md row + commit/PR
 - [x] exp layered_software_architecture (AUTOSAR_CP_EXP_LayeredSoftwareArchitecture · General · ❌ new article · 📖 skeleton-exempt)
   - Note: source is a 183-page slide deck — R23-11 conversion flattens every slide title to `##`; the article's numbered structure (## 1. Architecture with 1.1–1.8, ## 2. Configuration, ## 3. Integration and Runtime Aspects with 3.1–3.10) is taken from the deck's own master TOC slide (PDF p8); slides become unnumbered #### sub-headings merged into their TOC sections
@@ -36,6 +37,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #157 (Closes #146); post-rebase article commit f60d11a on feature/exp-layered_software_architecture; stacked PR chain merged in row order
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] exp vfb (AUTOSAR_EXP_VFB · General · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis
@@ -57,6 +59,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #159 (Closes #148); post-rebase article commit 668adfc on feature/exp-bsw_distribution_guide; stacked PR chain merged in row order
   - [x] Step 6 — TODO.md row + commit/PR
 - [x] exp application_level_error_handling (AUTOSAR_CP_EXP_ApplicationLevelErrorHandling · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
   - Note: numbered prose EXP document, chapters 1–7 mirrored directly; ch.5 = 13 error-handling mechanisms each with Description/Applicability-matrix/AUTOSAR-References tables; ch.6 mapping tables; ch.7 partition terminate/restart
@@ -70,6 +73,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #160 (Closes #149); post-rebase article commit 52d4d5c on feature/exp-application_level_error_handling; stacked PR chain merged in row order
   - [x] Step 6 — TODO.md row + commit/PR
 - [x] exp error_description (AUTOSAR_CP_EXP_ErrorDescription · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
   - Note: numbered prose EXP document, chapters 1–6 mirrored; ch.4 generic DEM-reporting mechanism, ch.5 CAN-stack errors (Bus Off, controller timeout, 6 signal errors), ch.6 NVRAM-stack errors (9 driver-level + 2 abstraction-level + 5 NVM-level); every error = summary + figure + per-module 检测/反应/报告/恢复 tables
@@ -84,6 +88,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #161 (Closes #150); post-rebase article commit 9088a60 on feature/exp-error_description; stacked PR chain merged in row order
   - [x] Step 6 — TODO.md row + commit/PR
 - [x] exp cdd_design_and_integration (AUTOSAR_CP_EXP_CDDDesignAndIntegrationGuideline · BSWGeneral · ❌ new article · 📖 skeleton-exempt)
   - Note: numbered prose EXP document, chapters 1–7 mirrored (CDD intro, design recommendations, per-module interfacing, multi-core, MCAL CDD)
@@ -97,6 +102,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #162 (Closes #151); post-rebase article commit 4e5d294 on feature/exp-cdd_design_and_integration; stacked PR chain merged in row order
   - [x] Step 6 — TODO.md row + commit/PR
 - [x] exp utilization_of_crypto_services (AUTOSAR_CP_EXP_UtilizationOfCryptoServices · Crypto · ❌ new article · 📖 skeleton-exempt)
   - Note: numbered prose EXP document, chapters 1–6 mirrored (crypto stack overview, usage aspects, MAC example); source has no Known-Limitations content (1.3 = 无限制, kept)
@@ -110,6 +116,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #163 (Closes #152); post-rebase article commit bcbaf51 on feature/exp-utilization_of_crypto_services; stacked PR chain merged in row order
   - [x] Step 6 — TODO.md row + commit/PR
 - [x] exp macro_encapsulation_of_interpolation_calls (AUTOSAR_CP_EXP_MacroEncapsulationofInterpolationCalls · Libraries · ❌ new article · 📖 skeleton-exempt)
   - Note: numbered prose EXP document, chapters 1–7 mirrored; also creates the NEW libraries/ section (landing page docs/autosar/libraries/index.md + nav group 库（Libraries） before 模板) — first row of the libraries section per Group-libraries convention
@@ -123,6 +130,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #164 (Closes #153); post-rebase article commit f385e42 on feature/exp-macro_encapsulation_of_interpolation_calls; stacked PR chain merged in row order
   - [x] Step 6 — TODO.md row + commit/PR
 - [x] exp firmware_over_the_air (AUTOSAR_CP_EXP_FirmwareOverTheAir · Memory · ❌ new article · 📖 skeleton-exempt)
   - Note: numbered prose EXP document, chapters 1–6 mirrored (motivation, memory-stack prerequisites, terminology incl. FOTA process phases, detailed technical solution with FOTA Handler CDD + Dcm interaction + migration, sequence charts); source ch.6 "Appendix" = reference list — rendered unnumbered `## 参考文献` per VFB precedent so the [n] registry works
@@ -136,6 +144,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #165 (Closes #154); post-rebase article commit 30ee49d on feature/exp-firmware_over_the_air; stacked PR chain merged in row order
   - [x] Step 6 — TODO.md row + commit/PR
 - [x] exp adas_vmc (AUTOSAR_CP_EXP_AIADASAndVMC · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
   - Note: source file is AUTOSAR_CP_EXP_AIADASAndVMC.md (queue's "ADASVehicleMotionControl" = AIADASAndVMC); also creates the NEW application_interfaces/ section (landing page + nav group 应用接口（Application Interfaces） after RTE)
@@ -150,14 +159,23 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #166 (Closes #155); post-rebase article commit a8f5273 on feature/exp-adas_vmc; stacked PR chain merged in row order
   - [x] Step 6 — TODO.md row + commit/PR
-- [ ] exp body_and_comfort (AUTOSAR_EXP_BodyAndComfort · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] exp body_and_comfort (AUTOSAR_CP_EXP_AIBodyAndComfort · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
+  - Note: numbered prose EXP document, ch.1–6 mirrored; ch.4 = 16 functional decompositions (wiper, mirror, interior light, seat, central locking, exterior light, ATWS, horn, defrost, terminal clamp, immobilizer, seat climatization, PASE, RKE, convertible, body sensors); PASE/BodySensors port tables translated as GFM
+  - Note: figure-inlining UML port-name chrome dropped (extensive in this conversion); 42 content figures placed, unused copies removed
+  - Note: citation registry N/A (references ch.6.1 lists [1] RTE only, no [n] prose citations to a registry); cross-article mentions report-only
+  - Note: branch self-contained: also carries the AI landing page + nav group (adas_vmc PR carries its own entries; trivial line-level merge expected)
+  - Note: glossary +3 (ATWS, RKE, PASE)
+  - Note: check_api_sync N/A (EXP guide); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - Note: PR #167 (Closes #156); post-rebase article commit 9055f25 on feature/exp-body_and_comfort; stacked PR chain merged in row order
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] exp chassis (AUTOSAR_EXP_Chassis · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

@@ -178,7 +178,7 @@
 
 Translated 2026-10-28: LayeredSoftwareArchitecture → [general/layered_software_architecture](general/layered_software_architecture/) (📖 guide).
 
-ApplicationInterfaces 6 (BodyAndComfort, Chassis, HMI, OccupantSafety, Powertrain, UserGuide), BSWGeneral 0, General 1 (VFB), SWArch 1 (ARTI), Safety 2 (FunctionalSafetyMeasures, SafetyUseCase), SystemServices 1 (SwClusterDesignAndIntegration)
+ApplicationInterfaces 5 (Chassis, HMI, OccupantSafety, Powertrain, UserGuide), BSWGeneral 0, General 1 (VFB), SWArch 1 (ARTI), Safety 2 (FunctionalSafetyMeasures, SafetyUseCase), SystemServices 1 (SwClusterDesignAndIntegration)
 
 ## Suggested priority (2026-10-23 snapshot)
 
