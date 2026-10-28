@@ -28,9 +28,14 @@ title: "通信（Communication）"
 * [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](ethernet_switch_driver/index.md)
 * [AUTOSAR SoAd (Socket Adaptor)](SoAd/SoAd.md)
 * [AUTOSAR UdpNm (UDP Network Management)](udp_network_management/index.md)
+* [AUTOSAR XCP（通用校准协议）](xcp/index.md)
 
 ### 数据处理与安全
 
+* [AUTOSAR DoIP（基于 IP 的诊断）](diagnostic_over_ip/index.md)
+* [AUTOSAR Dlt（诊断日志与跟踪）](diagnostic_log_and_trace/index.md)
+* [AUTOSAR Large Data COM（大数据 COM）](large_data_com/index.md)
+* [AUTOSAR L-SDU Router（链路层 SDU 路由模块）](lsdu_router/index.md)
 * [AUTOSAR PduR (PDU Router)](pdu_router/index.md)
 * [AUTOSAR COM Based Transformer](com_based_transformer/index.md)
 * [E2E Transformer (E2E转换器)](e2e_transformer/index.md)
