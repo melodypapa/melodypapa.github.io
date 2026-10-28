@@ -110,6 +110,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > .arxml——AUTOSAR 可扩展标记语言文件（**AUTOSAR Extensible Markup Language File**）
 > 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
 
+**ASIL**
+> 汽车安全完整性等级（**Automotive Safety Integrity Level**）
+> 来源：[AUTOSAR 功能安全措施概览](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures · R23-11）
+
 **ASN.1**
 > 抽象语法标记一号（**Abstract Syntax Notation One**）：一种描述数据结构的标准记法，常与 DER 编码规则一起用于证书等密码学数据的编码。
 > 来源：[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager · R23-11）
@@ -143,6 +147,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **BIST**
 > 内建自测试（**Built in Self Test**）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
+
+**BIST**
+> 内建自测试（**Built In Self Test**）
+> 来源：[AUTOSAR 功能安全措施概览](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures · R23-11）
 
 **BndM**
 > 大容量非易失性数据管理器（**Bulk Non-Volatile Data Manager**）
@@ -511,6 +519,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
 > 来源：[固件远程升级指南（FOTA）](memory/firmware_over_the_air/index.md)（AUTOSAR_CP_EXP_FirmwareOverTheAir · R23-11）
 
+**FTTI**
+> 故障容忍时间间隔（**Fault Tolerant Time Interval**）
+> 来源：[AUTOSAR 功能安全措施概览](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures · R23-11）
+
 **Functionality**
 > 功能：涵盖系统用户可见和用户不可见的功能方面（见 [2]）。在 **FiM** 上下文中，一个功能可以由一个或多个可运行实体的全部或部分内容、以同一组许可/禁止条件构成。
 > 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager · R23-11）
@@ -556,9 +568,17 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## H
 
+**HARA**
+> 危害分析（**Hazard Analysis**）
+> 来源：[AUTOSAR 功能安全措施概览](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures · R23-11）
+
 **Hardware Trigger**
 > 硬件触发是**ADC**内部触发信号，用于启动ADC通道组的一次转换。**ADC**硬件触发在ADC硬件内部生成（例如：基于**ADC**定时器或触发沿信号）。触发硬件是强耦合或者直接集成在**ADC**的硬件中。当检测到硬件触发后，无需软件即可启动**ADC**通道组转换。**注意：**即使**ADC**硬件不支持硬件触发，也可以通过软件触发结合**GPT/ICU**驱动程序来实现类似的行为。（例如：在GPT定时器通知函数中，启动软件触发的**ADC**通道组的转换）
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
+
+**HAZOP**
+> 危害与可操作性分析（**Hazard & Operability Analysis**）
+> 来源：[AUTOSAR 功能安全措施概览](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures · R23-11）
 
 **HDC**
 > 坡道缓降控制（**Hill Decent Control**）
@@ -577,6 +597,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
 > 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver · R23-11）
 > 来源：[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface · R23-11）
+
+**HTM**
+> 硬件测试管理器（**Hardware Test Manager**）
+> 来源：[AUTOSAR 功能安全措施概览](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures · R23-11）
 
 **IFX**
 > 定点插值库（**Fixed Point Interpolation Routines**）的模块 ID 前缀；整数插值例程名称以 Ifx 开头。
@@ -817,6 +841,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **MS**
 > 里程碑（**Milestone**）
 > 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
+
+**MSTP**
+> 微控制器特定测试包（**Microcontroller Specific Test Package**）
+> 来源：[AUTOSAR 功能安全措施概览](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures · R23-11）
 
 ## N
 
@@ -1108,6 +1136,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Sender-receiver communication**
 > 发送方-接收方通信涉及原子数据元素组成的信号的发送和接收，这些原子数据元素由一个组件发送给另一个或多个组件。发送方-接收方接口可以包含多个数据元素。发送方-接收方通信是单向的 接收方发送的任何回复都可以视为一个单独的发送方-接收方通信。接收方组件的端口可以读取接口描述定义的数据元素，而提供方组件的端口可以按照接口描述定义写入数据元素。
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
+
+**SEooC**
+> 脱离语境的安全要素（**Safety Element out of Context**）
+> 来源：[AUTOSAR 功能安全措施概览](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures · R23-11）
 
 **Sequence**
 > 序列：若干个待传输的连续作业，但可以使用优先级机制在作业之间重新调度；序列传输是否可被中断取决于静态配置。

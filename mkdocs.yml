@@ -203,6 +203,7 @@ nav:
       - "WdgM": autosar/safety/watchdog_manager/index.md
       - "WdgIf": autosar/safety/watchdog_interface/index.md
       - "Wdg": autosar/safety/watchdog_driver/index.md
+      - "AUTOSAR 功能安全措施概览": autosar/safety/functional_safety_measures/index.md
     - RTE:
 
       - "RTE": autosar/rte/index.md

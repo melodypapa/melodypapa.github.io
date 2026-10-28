@@ -253,11 +253,16 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp functional_safety_measures (AUTOSAR_EXP_FunctionalSafetyMeasures · Safety · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: source document is AUTOSAR_CP_EXP_FunctionalSafetyMeasures.md; article at safety/functional_safety_measures/
+  - Note: chapters 1–4 + appendix A (acronyms table as GFM) + unnumbered B (相关文档, [n]/docid registry shape); 27 content figures; source footnote numbers rendered as <sup>N</sup> + "> N …" blockquotes at their source positions (the conversion lost the inline anchor positions — anchors not re-created)
+  - Note: prose citations use the [n, doc] comma form (e.g. "[1, ISO 26262]") — left prose per the open comma-form question; §3.7.x coverage-criteria/justification tables (3.2–3.23) translated as GFM with the triple spanning header collapsed to 覆盖准则/BSW 模块/需求/理由; table 3.8's scrambled CC02 row reconstructed from the prose line
+  - Note: iso.org URLs kept plain text (anti-bot Backlog); SWS requirement IDs kept verbatim inside Table 2.1/2.2 cells (SWS-ID-in-cell corpus class)
+  - Note: glossary +8 (ASIL, BIST, FTTI, HARA, HAZOP, HTM, MSTP, SEooC); check_api_sync N/A; gen_api_list --check clean
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp safety_use_case (AUTOSAR_EXP_SafetyUseCase · Safety · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis
