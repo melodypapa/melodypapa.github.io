@@ -217,11 +217,16 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp powertrain (AUTOSAR_EXP_Powertrain · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: source document is AUTOSAR_CP_EXP_AIPowertrain.md; article at application_interfaces/powertrain/
+  - Note: chapters 1–6 mirrored; 18 figures — Figure06 (Figure 3.6 torque-reserve add-on) was DROPPED by the md converter and extracted from the source PDF page 14 by bbox position (run precedent: VFB icon extraction); unnumbered bold labels (Sign definition / Ancillary torque losses / inertia / Engine Clutch / request labels / Legend / VLC-ESP arbitration) rendered as bold paragraphs
+  - Note: §6.3.6 tables reconstructed from the source PDF pages 30–34 (the md conversion scrambles the two-column bands across page breaks): "Kind of Modeling" 7 rows + "Specific Naming Assumptions" 6 rows; the band pairing of the "All ports are optional" / "Port interfaces are not designed to be reused" rationales re-verified against the PDF layout
+  - Note: prose [1]–[9] citations linked manually to `<a id="ref-n">` anchors in §2 (same _registry_sec gap); [5] AIChassis and [4] TR Glossary resolve SITE-class — hop-2 links are batch-gate decisions
+  - Note: glossary +2 (PTC, CVT); check_api_sync N/A; gen_api_list --check clean; strict build 0 WARNING / 0 anchor notices
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp user_guide (AUTOSAR_EXP_UserGuide · ApplicationInterfaces (exact document name to confirm in Step 1) · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis

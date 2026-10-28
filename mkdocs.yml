@@ -213,6 +213,7 @@ nav:
       - "底盘域应用接口": autosar/application_interfaces/chassis/index.md
       - "HMI/多媒体/远程信息处理域应用接口": autosar/application_interfaces/hmi/index.md
       - "乘员与行人安全系统域应用接口": autosar/application_interfaces/occupant_safety/index.md
+      - "动力总成（发动机）域应用接口": autosar/application_interfaces/powertrain/index.md
     - 库（Libraries）:
       - autosar/libraries/index.md
       - "插值调用宏封装": autosar/libraries/macro_encapsulation_of_interpolation_calls/index.md

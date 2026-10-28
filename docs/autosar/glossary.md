@@ -310,6 +310,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager · R23-11）
 
 
+**CVT**
+> 无级变速器（**Continuously Variable Transmission**）
+> 来源：[动力总成（发动机）域应用接口](application_interfaces/powertrain/index.md)（AUTOSAR_CP_EXP_AIPowertrain · R23-11）
+
 ## D
 
 **DAS**
@@ -958,6 +962,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 处理：指示作业处理的类型。异步（**Asynchronous**）：调用相应函数时作业不会被立即处理，通常由后续的调度函数处理并通过回调通知结果；同步（**Synchronous**）：调用相应函数时作业被立即处理，函数返回时结果已可用。
 > 来源：[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface · R23-11）
 
+
+**PTC**
+> 动力总成协调器（**Powertrain Coordinator**）
+> 来源：[动力总成（发动机）域应用接口](application_interfaces/powertrain/index.md)（AUTOSAR_CP_EXP_AIPowertrain · R23-11）
 
 ## R
 
