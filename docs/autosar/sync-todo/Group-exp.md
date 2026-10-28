@@ -229,11 +229,16 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp user_guide (AUTOSAR_EXP_UserGuide · ApplicationInterfaces (exact document name to confirm in Step 1) · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: source document is AUTOSAR_CP_EXP_AIUserGuide.md (123-page guide); article at application_interfaces/user_guide/
+  - Note: chapters 1–10 mirrored (largest AI guide); 85 content figures placed (UML meta-model diagrams + Excel sheet screenshots; 85th mapping entry was the PDF back-cover — dropped); ARXML/XSD listings reformatted into readable indented code fences (verbatim content), PDF line-wrap chrome dropped
+  - Note: caption order in the conversion is scrambled in places (e.g. Figure 4.2/4.3) — figures placed at their image-occurrence positions from a line-number map; 6.2/7.2 stray placements fixed against the mapping
+  - Note: prose [1]–[17] citations linked manually to `<a id="ref-n">` anchors in §10 参考文档 (same _registry_sec gap); [9]–[13] resolve SITE-class to the AI domain guides, [15] to the site TR glossary — hop-2 links are batch-gate decisions
+  - Note: glossary +10 (AI Table, Bugzilla, Excel, MS, SPEM, SVN, VB, WP, XSD, arxml; CPU/ECU/RTE/SW*/HMI/VFB already present); check_api_sync N/A; gen_api_list --check clean
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp arti (AUTOSAR_EXP_ARTI · SWArch · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis

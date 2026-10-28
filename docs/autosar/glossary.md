@@ -71,6 +71,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 存活指示（**Alive Indication**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 
+**AI Table**
+> 应用接口表（**Application Interface Table**）
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
+
 **Alive Counter**
 > **WdgM** 中在**检查点**上下文内的独立数据资源，用于跟踪和处理该**检查点**的**存活指示**数量。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
@@ -97,6 +101,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes · R23-11）
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
 > 来源：[AUTOSAR Standard Types（标准类型）](general/standard_types/index.md)（SWS_StandardTypes · R23-11）
+
+**arxml**
+> .arxml——AUTOSAR 可扩展标记语言文件（**AUTOSAR Extensible Markup Language File**）
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
 
 **ASN.1**
 > 抽象语法标记一号（**Abstract Syntax Notation One**）：一种描述数据结构的标准记法，常与 DER 编码规则一起用于证书等密码学数据的编码。
@@ -166,6 +174,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **BswM**
 > 基础软件模式管理器（**Basic Software Mode Manager**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**Bugzilla**
+> 变更请求管理工具（**Bugzilla**）
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
 
 **Bus Off**
 > CAN 总线的错误状态：CAN 控制器因错误计数达到上限而与总线脱离。CAN 状态管理器（CanSM）通过 Bus Off 恢复状态机进行恢复。
@@ -429,6 +441,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ESC**
 > 电子稳定控制（**Electronic Stability Control**）
 > 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**Excel**
+> Microsoft 电子表格应用（**Excel**）
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
 
 **i.e.**
 > （拉丁语）id est =（英语）that is，即「也就是说」。
@@ -794,6 +810,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Master**
 > 主。分布式 BSW 模块中协调卫星请求、并可过滤或监控进入的卫星请求的部分。
 > 来源：[BSW 分布指南](general/bsw_distribution_guide/index.md)（AUTOSAR_CP_EXP_BSWDistributionGuide · R23-11）
+**MS**
+> 里程碑（**Milestone**）
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
+
 ## N
 
 **N-PDU**
@@ -1120,6 +1140,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 传感器池（**Sensor Pool**）
 > 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
 
+**SPEM**
+> 软件过程工程元模型（**Software Process Engineering meta-model**）
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
+
 **SPI**
 > 串行外设接口（**Serial Peripheral Interface**）
 > 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
@@ -1163,6 +1187,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Supervision Reference Cycle**
 > **存活监督**用于执行已计数**存活指示**检查所使用的**监督周期**数量（对每个**被监督实体**分别确定），并且依赖于模式。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**SVN**
+> Subversion（版本控制系统）（**Subversion**）
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
 
 **SW**
 > 软件（**Software**）
@@ -1255,6 +1283,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 ## V
 
 
+**VB**
+> Visual Basic
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
+
 **VCD**
 > 车辆碰撞检测（**Vehicle Crash Detection**）
 > 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
@@ -1309,6 +1341,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 看门狗管理器（**Watchdog Manager**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 
+**WP**
+> 工作包（**Work package**）
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
+
 **Write Page**
 > 写入页面（**Write Page**）是指存储设备的最小可写单元（以字节为单位）。某些存储设备技术的访问必须考虑物理分段，因此并非所有存储设备技术都支持按字节访问。该术语定义了单次访问所需写入的最小大小。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
@@ -1322,6 +1358,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **XML**
 > 可扩展标记语言（**eXtensible Markup Language**）
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
+
+**XSD**
+> XML 模式定义（**XML Schema Definition**）
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
 
 ## Y
 
