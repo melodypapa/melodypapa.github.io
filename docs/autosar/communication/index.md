@@ -38,6 +38,7 @@ title: "通信（Communication）"
 * [AUTOSAR SecOC (Secure Onboard Communication)](sec_oc/index.md)
 * [AUTOSAR FVM (Freshness Value Manager)](fvm/fvm.md)
 * [AUTOSAR SD (Service Discovery)](service_discovery/index.md)
+* [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](spi_handler_driver/index.md)
 * [Data Distribution Service for Classic Platform](<data_distribution service/index.md>)
 
 ## 相关内容
