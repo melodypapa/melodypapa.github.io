@@ -12,7 +12,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 
 **Accuracy**
-> 精度（**Accuracy**）取决于用于采样或者生成的硬件外围设备。如：**AEB**
+> 精度（**Accuracy**）取决于用于采样或者生成的硬件外围设备。如：**ADC**转换器可以是 8/10/12/16 位转换器
+> 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
+
+**AEB**
 > 自主紧急制动（**Autonomous Emergency Braking**）。
 > 来源：[ADAS 与车辆运动控制接口](application_interfaces/adas_vmc/index.md)（AUTOSAR_CP_EXP_AIADASAndVMC · R23-11）
 
@@ -20,8 +23,6 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 自适应巡航控制（**Adaptive Cruise Control**）。
 > 来源：[ADAS 与车辆运动控制接口](application_interfaces/adas_vmc/index.md)（AUTOSAR_CP_EXP_AIADASAndVMC · R23-11）
 
-**ADC**转换器可以是 8/10/12/16 位转换器
-> 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
 
 **Acquisition Time**
 > 采集时间 = 采样时间（**Sample Time**）+ 转换时间（**Conversion Time**）
