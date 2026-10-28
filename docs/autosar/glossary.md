@@ -10,6 +10,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## A
 
+**AB**
+> 安全气囊（**Airbag**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
 **ABS**
 > 防抱死制动系统（**Antilock Braking System**）
 > 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
@@ -78,6 +82,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Alive Supervision**
 > 一种监督，用于检查**被监督实体**的执行是否足够频繁且不过于频繁（包括容差）。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**Antisubmarine**
+> 下潜——约束系统中与汽车应用相关的术语（**Antisubmarine**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**AP**
+> 执行器池（**Actuator Pool**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
 
 **API**
 > 应用编程接口（**Application Programming Interface**）
@@ -237,6 +249,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 转换时间是指将采样的模拟值转换为数值所需的时间。
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 
+**COOP**
+> 严重离位（**Critical Out of Position**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
 **Core**
 > **CPU** 及其紧邻的功能资源。
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
@@ -364,6 +380,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **EBD**
 > 制动力分配（**Electronic Brake Force Distribution**）
 > 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**eCall**
+> 紧急呼叫（**Emergency Call**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
 
 **ECC**
 > 纠错码（**Error Correction Code**）
@@ -806,6 +826,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 排放相关车载诊断（**Emission-related On-board Diagnostics**）。
 > 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager · R23-11）
 
+**OD**
+> 乘员检测（**Occupant Detection**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
 **Off-Mode**
 > 看门狗硬件被禁用/关闭。这样做可能是为了关闭整个 **ECU**，而不遭受仍在运行的外部看门狗的周期性复位。对于安全关键系统，该模式可能不被允许。在这种情况下，必须将 **Wdg** 模块配置为禁止切换到此模式。
 > 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
@@ -814,10 +838,30 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 对象标识符（**Object Identifier**）。
 > 来源：[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager · R23-11）
 
+**OOP**
+> 离位（**Out Of Position**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**OPC**
+> 乘员预处理（**Occupant Pre Conditioning**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
 **Operation**
 > 操作：加密原语的操作声明应执行加密原语的哪一部分，共有 **START**、**UPDATE**、**FINISH** 三种操作模式；通过拼接操作模式参数的相应位可以一次执行多个操作。
 > 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver · R23-11）
 > 来源：[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface · R23-11）
+
+**OPS**
+> 乘员与行人安全（**Occupant and Pedestrian Safety**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**OPSS**
+> OPS 系统（**OPS Systems**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**ORA**
+> 乘员约束激活（**Occupant Restraint Activation**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
 
 **OSEK/VDX**
 > 1993 年 5 月，**OSEK** 作为德国汽车工业的一个联合项目创立，旨在为车辆内分布式控制单元的开放式架构建立一个行业标准。**OSEK** 是德语术语「Offene Systeme und deren Schnittstellen für die Elektronik im Kraftfahrzeug」（英语：Open Systems and the Corresponding Interfaces for Automotive Electronics）的缩写。初始项目合作伙伴为 **BMW**、**Bosch**、**Daimler Chrysler**、**Opel**、**Siemens**、**VW** 以及作为协调方的卡尔斯鲁厄大学 **IIIT**。法国汽车制造商 **PSA** 和 **Renault** 于 1994 年加入 **OSEK**，引入了他们的 **VDX**（**Vehicle Distributed eXecutive**）方案——法国汽车工业内的一个类似项目。在 1995 年 10 月的第一次研讨会上，**OSEK/VDX** 小组展示了 **OSEK** 与 **VDX** 之间协调一致的规范成果。1997 年 10 月第 2 届国际 **OSEK/VDX** 研讨会之后，发布了规范的第二版。
@@ -839,13 +883,33 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 通过聚合访问存储页面来提高性能。在存储设备技术支持物理分段的情况下，一些存储设备可以提供一次读取或写入多个页面的优化访问方式。页面突发（**Page Burst**）表示用于访问优化的存储页面聚合。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
 
+**PCD**
+> 行人碰撞检测（**Pedestrian Crash Detection**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**PCP**
+> 行人碰撞预测（**Pedestrian Crash Prediction**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
 **PDC**
 > 泊车距离控制（**Park Distance Control**）
 > 来源：[HMI/多媒体/远程信息处理域应用接口](application_interfaces/hmi/index.md)（AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics · R23-11）
 
+**POD**
+> 俯仰翻覆碰撞检测（**Pitchover Crash Detection**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
 **Port-Interface**
 > 端口接口。定义提供或要求该接口的端口必须履行的契约；AUTOSAR 支持客户端-服务器、发送者-接收者、参数、非易失性数据、触发与模式切换六种端口接口。
 > 来源：[虚拟功能总线（VFB）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB · R23-11）
+
+**PPA**
+> 行人保护执行器激活（**Pedestrian Protection Actuator Activation**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**PPP**
+> 行人保护系统预处理（**Pedestrian Protection system Pre conditioning**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
 
 **Prototype**
 > 原型。组件类型在一个组合（Composition）中的使用；组合经由相互连接的原型定义。
@@ -901,9 +965,21 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 后轴（**Rear Axle**）
 > 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
 
+**ROD**
+> 翻滚碰撞检测（**Rollover Crash Detection**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
 **RSC**
 > 侧翻稳定控制（**Roll Stability Control**）
 > 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**RSM**
+> 约束系统监测（**Restraint System Monitoring**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**RSP**
+> 约束系统预处理（**Restraint System Pre conditioning**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
 
 **Runnable**
 > 可运行体。原子软件组件实现中的一段可由 RTE 启动的指令序列；在任务的上下文中运行。
@@ -957,6 +1033,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Sampling Time, Sample Time**
 > 采样时间是指对模拟值进行采样的时间（例如：加载电容器，……）
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
+
+**SBR**
+> 安全带提醒（**Seat Belt Reminder**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
 
 **SC**
 > 监督周期（**Supervision Cycle**）
@@ -1028,6 +1108,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 发送方/接收方（**Sender/Receiver**）
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
 
+**SP**
+> 传感器池（**Sensor Pool**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
 **SPI**
 > 串行外设接口（**Serial Peripheral Interface**）
 > 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
@@ -1039,6 +1123,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SRC**
 > 监督参考周期（**Supervision Reference Cycle**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**SRS**
+> 安全约束系统（**Safety Restraint System**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
 
 **SSM**
 > 静止管理（**Stand Still Manager/Management**）
@@ -1086,6 +1174,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SWCD**
 > 软件组件描述（**Software Component Description**）
 > 来源：[AUTOSAR BSW General（基础软件模块通用规范）](general/bsw_general/index.md)（SWS_BSWGeneral · R23-11）
+
+**SWCo**
+> 软件组合（**Software Composition**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
 
 **Symbolic name**
 > ECU信号的符号名称（**Symbolic name**）在**I/O**硬件抽象模块中是用来建立链接的。（包括：功能、引脚等）
@@ -1155,9 +1247,21 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 ## V
 
 
+**VCD**
+> 车辆碰撞检测（**Vehicle Crash Detection**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**VCP**
+> 车辆碰撞预测（**Vehicle Crash Prediction**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
 **VGR**
 > 可变传动比（**Variable Gear Ratio**）
 > 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**VH**
+> 变型处理概念（**Variant Handling concept**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
 
 **VLC**
 > 车辆纵向控制（**Vehicle Longitudinal Control**）

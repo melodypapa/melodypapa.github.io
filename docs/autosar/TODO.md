@@ -62,7 +62,7 @@
 | ⚠️ Partial | 16 | missing ≥1 chapter (most miss the 「API规范」 chapter) |
 | ⛔ Stub | 4 | 9–19 lines only |
 | ❌ Missing (SWS) | 78 | R23-11 has 127 SWS docs in total; 49 covered (38.6%) |
-| ❌ Missing (EXP) | 18 | R23-11 has 22 EXP docs in total; 4 covered |
+| ❌ Missing (EXP) | 17 | R23-11 has 22 EXP docs in total; 5 covered |
 | 📖 Guide/topic | 8 | exempt from the Type A skeleton |
 
 ## communication
@@ -178,13 +178,13 @@
 - ~~**Safety (2)**: SWS_WatchdogInterface (WdgIf), SWS_WatchdogDriver (Wdg)~~ — both translated 2026-10-27
 - **Security (2)**: SWS_Firewall, SWS_IntrusionDetectionSystemManager (IdsM)
 
-## Missing EXP guides (17)
+## Missing EXP guides (16)
 
 Translated 2026-10-28: LayeredSoftwareArchitecture → [general/layered_software_architecture](general/layered_software_architecture/) (📖 guide).
 
-ApplicationInterfaces 3 (OccupantSafety, Powertrain, UserGuide), BSWGeneral 0, General 1 (VFB), SWArch 1 (ARTI), Safety 2 (FunctionalSafetyMeasures, SafetyUseCase), SystemServices 1 (SwClusterDesignAndIntegration)
+ApplicationInterfaces 2 (Powertrain, UserGuide), BSWGeneral 0, General 1 (VFB), SWArch 1 (ARTI), Safety 2 (FunctionalSafetyMeasures, SafetyUseCase), SystemServices 1 (SwClusterDesignAndIntegration)
 
-Translated 2026-10-29: AIChassis → [application_interfaces/chassis](application_interfaces/chassis/) and AIHMIMultimediaAndTelematics → [application_interfaces/hmi](application_interfaces/hmi/) (📖 guides).
+Translated 2026-10-29: AIChassis → [application_interfaces/chassis](application_interfaces/chassis/) and AIHMIMultimediaAndTelematics → [application_interfaces/hmi](application_interfaces/hmi/), AIOccupantAndPedestrianSafety → [application_interfaces/occupant_safety](application_interfaces/occupant_safety/) (📖 guides).
 
 ## Suggested priority (2026-10-23 snapshot)
 

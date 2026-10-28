@@ -204,11 +204,17 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp occupant_safety (AUTOSAR_EXP_OccupantSafety · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: source document is AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety.md (queue name "OccupantSafety"); article at application_interfaces/occupant_safety/
+  - Note: chapters 1–5 mirrored; 10 content figures placed (Figure01–10, caption-verified); unnumbered slide headings (Normal Driving / Pre-Crash / In-Crash / Post-Crash / Sub-phases) rendered as bold paragraph labels (absent from the PDF TOC)
+  - Note: tables 5.1 (63 rows) / 5.2 (146 rows) generated mechanically from the source rows with an enum-cell translation map; row counts cross-checked against the source PDF (75 Activation + 71 Control = 146); PDF line-wrap hyphenation inside identifiers un-escaped (AOnBmpAtFrntMi- dLe → AOnBmpAtFrntMidLe)
+  - Note: source oddities kept verbatim + flagged: Table 2.1 lists VCD twice; "ACC | Adaptive Cruise Controll" (sic); Table 5.1 "Frent End" typo; Table 5.2 rows "ActvtOfActrPort/CtrlOfActrPort | Head Rest | Location" — the latter PDF-verified as genuine source content, not conversion garble (user decision at batch gate)
+  - Note: prose [1]/[2] citations linked manually to `<a id="ref-n">` anchors in §1.1 (same _registry_sec gap); sensor-location bullet list at the ch.3/ch.4 boundary dropped as Figure 4.1 sidebar chrome (content visible in the figure itself) — batch-gate verification reminder
+  - Note: glossary +26 (AB..VH; AI/IF/CS/PCI already present — one-term-once); check_api_sync N/A; gen_api_list --check clean
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp powertrain (AUTOSAR_EXP_Powertrain · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis

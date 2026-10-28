@@ -10,6 +10,7 @@ AUTOSAR 为各汽车域（底盘、动力总成、车身与舒适、乘员与行
 - [车身与舒适域应用接口](body_and_comfort/index.md)
 - [底盘域应用接口](chassis/index.md)
 - [HMI/多媒体/远程信息处理域应用接口](hmi/index.md)
+- [乘员与行人安全系统域应用接口](occupant_safety/index.md)
 
 ## 相关内容
 
