@@ -32,6 +32,7 @@ Pre-existing INFO-level anchor notices in build output are known and do not fail
 
 - AUTOSAR module articles are **faithful Chinese translations** of AUTOSAR standard documents. Their mandatory structure, wording, and formatting rules are codified in **`docs/autosar/STANDARD.md`** (Type A: 7-chapter skeleton; no 需求可追溯性/时序图/配置规范 chapters or lettered appendices). **`docs/autosar/TODO.md`** tracks per-article translation progress — update it in the same PR after every sync. Read both before creating or editing any article under `docs/autosar/`; both are excluded from the site build via `exclude_docs` in `mkdocs.yml`.
 - Before flagging a translation as wrong, check the source in `~/Workspace/autosar_standard/markdown/...` — the SWS (not SRS) is the structural source and the two genuinely differ in places (e.g. ADC driver "works on channel groups" is SWS-faithful).
+- Translation is never delegated to subagents — the session running the translation translates the source itself, sequentially, regardless of source length (codified in the autosar-translate skill, Step 5).
 - Headings: front-matter `title` is the only h1 source — **never write `# ` in a page body** (Material TOC breaks). Chapters are `## N. 标题` (number + trailing dot); heading level = numeric depth + 2. English terms bolded, code identifiers untranslated, API entries use `**说明**:` + ```C blocks.
 - Section landing pages: front-matter title + intro + `## 文章` link list + `## 相关内容`; registered as the unlabeled first nav entry under their section (`navigation.indexes`).
 - WeChat QR footer (where present): `<section id="wechat">` + `<h4>` — never a markdown heading.
@@ -39,6 +40,7 @@ Pre-existing INFO-level anchor notices in build output are known and do not fail
 ## Git workflow
 
 - Convention: feature branch (`feature/<topic>`) + tracking issue + PR; commits `docs:` / `feat:` / `fix:` with `Closes #N`. Use heredocs for multi-line `gh issue/pr create` bodies.
+- **No co-work attribution in commits, PRs or issues** (user rule, 2026-10-28): never add `Co-Authored-By:` / `Co-worked-by:` trailers, "Generated with …" footers, or any mention of the agent/session that did the work. Commit messages and PR/issue text describe the change only.
 - **Issue and PR titles + bodies are written in English** (user rule, 2026-10-25). Chinese stays in the diff and in quoted content identifiers (chapter names like `## 2. 定义和缩略语`, article text) — describe the work around them in English. PR/issue content rules: lead with a summary, group changes per area (article / skill+script / other), and end with a verification list including the strict-build result.
 - GitHub auto-deletes merged remote branches; delete merged local branches with `git branch -d`.
 - `github.com` over HTTPS is intermittently flaky (fetch/push timeouts). Use the SSH URL `git@github.com:melodypapa/melodypapa.github.io.git` for git transport; the `gh` CLI (api.github.com) always works.
