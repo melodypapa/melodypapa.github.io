@@ -96,7 +96,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit 4d5ff96 (branch feature/group-communication-sync)
 - [ ] data_distribution (SWS_DataDistributionService · R23-11 markdown · ⚠️ missing API chapter)
   - Note: directory `data_distribution service/` contains a space — renaming to `data_distribution/` requires the nav change in the same commit
   - [ ] Step 1 — Source resolution + gap analysis
