@@ -76,7 +76,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit aad6b21 (branch feature/group-communication-sync)
 - [ ] com_based_transformer (SWS_COMBasedTransformer · R23-11 markdown · ⚠️ gaps)
   - Note: missing acronym/dependency chapters; the 4.2 subsection structure ("基于COM的转换器规范") must be checked against the source; missing "约束和假设" (tracked in TODO.md)
   - [ ] Step 1 — Source resolution + gap analysis
