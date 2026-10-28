@@ -191,7 +191,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: article commit b1f1d8a on feature/exp-batch-sync (worktree ~/Workspace/mpt-exp-batch); single-branch batch, PR + row flip at batch confirmation gate
+  - [x] Step 6 — TODO.md row + commit/PR (commit b1f1d8a; batch PR pending)
 - [ ] exp hmi (AUTOSAR_EXP_HMI · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
   - Note: source document is AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics.md (queue name "HMI"); article at application_interfaces/hmi/
   - Note: chapters 1–7 mirrored (ch.4's unnumbered "Data Flow" block rendered as a bold paragraph label — absent from the PDF TOC); diagram chrome dropped; 6 content figures placed (Figure01–06; the uncaptioned 4.3 image is a 345×37 deco strip, dropped); 5.1.1–5.1.5 interface description tables translated as GFM with a 项目/说明 2-col shape (source header row = table name = spanning chrome)
@@ -202,7 +203,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: article commit 29ee0f3 on feature/exp-batch-sync (worktree ~/Workspace/mpt-exp-batch); single-branch batch, PR + row flip at batch confirmation gate
+  - [x] Step 6 — TODO.md row + commit/PR (commit 29ee0f3; batch PR pending)
 - [ ] exp occupant_safety (AUTOSAR_EXP_OccupantSafety · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
   - Note: source document is AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety.md (queue name "OccupantSafety"); article at application_interfaces/occupant_safety/
   - Note: chapters 1–5 mirrored; 10 content figures placed (Figure01–10, caption-verified); unnumbered slide headings (Normal Driving / Pre-Crash / In-Crash / Post-Crash / Sub-phases) rendered as bold paragraph labels (absent from the PDF TOC)
@@ -215,7 +217,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: article commit ed312b3 on feature/exp-batch-sync (worktree ~/Workspace/mpt-exp-batch); single-branch batch, PR + row flip at batch confirmation gate
+  - [x] Step 6 — TODO.md row + commit/PR (commit ed312b3; batch PR pending)
 - [ ] exp powertrain (AUTOSAR_EXP_Powertrain · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
   - Note: source document is AUTOSAR_CP_EXP_AIPowertrain.md; article at application_interfaces/powertrain/
   - Note: chapters 1–6 mirrored; 18 figures — Figure06 (Figure 3.6 torque-reserve add-on) was DROPPED by the md converter and extracted from the source PDF page 14 by bbox position (run precedent: VFB icon extraction); unnumbered bold labels (Sign definition / Ancillary torque losses / inertia / Engine Clutch / request labels / Legend / VLC-ESP arbitration) rendered as bold paragraphs
@@ -227,7 +230,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: article commit 7909111 on feature/exp-batch-sync (worktree ~/Workspace/mpt-exp-batch); single-branch batch, PR + row flip at batch confirmation gate
+  - [x] Step 6 — TODO.md row + commit/PR (commit 7909111; batch PR pending)
 - [ ] exp user_guide (AUTOSAR_EXP_UserGuide · ApplicationInterfaces (exact document name to confirm in Step 1) · ❌ new article · 📖 skeleton-exempt)
   - Note: source document is AUTOSAR_CP_EXP_AIUserGuide.md (123-page guide); article at application_interfaces/user_guide/
   - Note: chapters 1–10 mirrored (largest AI guide); 85 content figures placed (UML meta-model diagrams + Excel sheet screenshots; 85th mapping entry was the PDF back-cover — dropped); ARXML/XSD listings reformatted into readable indented code fences (verbatim content), PDF line-wrap chrome dropped
@@ -239,7 +243,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: article commit 2453865 on feature/exp-batch-sync (worktree ~/Workspace/mpt-exp-batch); single-branch batch, PR + row flip at batch confirmation gate
+  - [x] Step 6 — TODO.md row + commit/PR (commit 2453865; batch PR pending)
 - [ ] exp arti (AUTOSAR_EXP_ARTI · SWArch · ❌ new article · 📖 skeleton-exempt)
   - Note: source document is AUTOSAR_CP_EXP_ARTI.md; article at sw_arch/arti/ — also creates the NEW sw_arch/ section (landing page + nav group 「SW 架构（SW Architecture）」 after RTE)
   - Note: chapters 1–9 mirrored (unnumbered Known Limitations rendered as `## 已知限制` — content "No known limitations yet." is a real sentence, not a None. placeholder); 5 content figures (state diagrams + Ecuc class diagrams; one 897×118 code-page sliver and one 304×18 strip dropped as deco)
@@ -251,7 +256,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: article commit 89cd317 on feature/exp-batch-sync (worktree ~/Workspace/mpt-exp-batch); single-branch batch, PR + row flip at batch confirmation gate
+  - [x] Step 6 — TODO.md row + commit/PR (commit 89cd317; batch PR pending)
 - [ ] exp functional_safety_measures (AUTOSAR_EXP_FunctionalSafetyMeasures · Safety · ❌ new article · 📖 skeleton-exempt)
   - Note: source document is AUTOSAR_CP_EXP_FunctionalSafetyMeasures.md; article at safety/functional_safety_measures/
   - Note: chapters 1–4 + appendix A (acronyms table as GFM) + unnumbered B (相关文档, [n]/docid registry shape); 27 content figures; source footnote numbers rendered as <sup>N</sup> + "> N …" blockquotes at their source positions (the conversion lost the inline anchor positions — anchors not re-created)
@@ -263,7 +269,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: article commit c1ed1da on feature/exp-batch-sync (worktree ~/Workspace/mpt-exp-batch); single-branch batch, PR + row flip at batch confirmation gate
+  - [x] Step 6 — TODO.md row + commit/PR (commit c1ed1da; batch PR pending)
 - [ ] exp safety_use_case (AUTOSAR_EXP_SafetyUseCase · Safety · ❌ new article · 📖 skeleton-exempt)
   - Note: source document is AUTOSAR_CP_EXP_SafetyUseCase.md; article at safety/safety_use_case/
   - Note: chapters 1–9 mirrored (ch.9 图/表目录 rendered as lists); 10 content figures (the 913×58 back-matter sliver dropped)
@@ -275,7 +282,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: article commit 5fa1e61 on feature/exp-batch-sync (worktree ~/Workspace/mpt-exp-batch); single-branch batch, PR + row flip at batch confirmation gate
+  - [x] Step 6 — TODO.md row + commit/PR (commit 5fa1e61; batch PR pending)
 - [ ] exp sw_cluster_design_and_integration (AUTOSAR_EXP_SwClusterDesignAndIntegration · SystemServices · ❌ new article · 📖 skeleton-exempt)
   - Note: source document is AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline.md (11,250 lines, largest EXP doc); article at system_services/sw_cluster_design_and_integration/ (~8,370 lines)
   - Note: chapters 1–6 + appendices A–D mirrored; 6 content figures; ch.5 C examples (Examples 5.1–5.9) re-indented from the line-numbered conversion, verbatim content
@@ -288,7 +296,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: article commit 26625e4 on feature/exp-batch-sync (worktree ~/Workspace/mpt-exp-batch); single-branch batch, PR + row flip at batch confirmation gate
+  - [x] Step 6 — TODO.md row + commit/PR (commit 26625e4; batch PR pending)
 
 ## Not queued (deliberately skipped)
 - 📄 methodology_templates/basic_software_mode_manager template — TPS_BSWModuleDescriptionTemplate (existing article, exempt)
