@@ -193,11 +193,15 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp hmi (AUTOSAR_EXP_HMI · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: source document is AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics.md (queue name "HMI"); article at application_interfaces/hmi/
+  - Note: chapters 1–7 mirrored (ch.4's unnumbered "Data Flow" block rendered as a bold paragraph label — absent from the PDF TOC); diagram chrome dropped; 6 content figures placed (Figure01–06; the uncaptioned 4.3 image is a 345×37 deco strip, dropped); 5.1.1–5.1.5 interface description tables translated as GFM with a 项目/说明 2-col shape (source header row = table name = spanning chrome)
+  - Note: prose [1] linked manually to `<a id="ref-1">` in §7 参考文档 (same _registry_sec gap as chassis); [1] resolves SITE-class to the body_and_comfort article — hop-2 link is a batch-gate decision
+  - Note: glossary +5 (HMI, LED, Modality, PDC, UI; SWC already present — one-term-once); check_api_sync N/A; gen_api_list --check clean; strict build 0 WARNING / 0 anchor notices
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (deferred to batch confirmation gate)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp occupant_safety (AUTOSAR_EXP_OccupantSafety · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis

@@ -524,6 +524,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 坡道起步控制（**Hill Hold Control**）
 > 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
 
+**HMI**
+> 人机接口（**Human Machine Interface**）
+> 来源：[HMI/多媒体/远程信息处理域应用接口](application_interfaces/hmi/index.md)（AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics · R23-11）
+
 **HSM**
 > 硬件安全模块（**Hardware Security Module**），专用安全 **MCU** 的内核。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
@@ -665,6 +669,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 第二级存储器（**2nd level memory**）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
 
+**LED**
+> 发光二极管（**Light Emitting Diode**）
+> 来源：[HMI/多媒体/远程信息处理域应用接口](application_interfaces/hmi/index.md)（AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics · R23-11）
+
 **LKA**
 > 车道保持辅助（**Lane Keep Assist**）。
 > 来源：[ADAS 与车辆运动控制接口](application_interfaces/adas_vmc/index.md)（AUTOSAR_CP_EXP_AIADASAndVMC · R23-11）
@@ -728,6 +736,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **MISO**
 > Master Input Slave Output（主入从出）。
 > 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver · R23-11）
+
+**Modality**
+> 模态——到用户的输出通道的类型，例如音频或视频输出（**Modality**）
+> 来源：[HMI/多媒体/远程信息处理域应用接口](application_interfaces/hmi/index.md)（AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics · R23-11）
 
 **Mode**
 > 模式是车辆中运行的各个状态机的特定状态集合，这些状态与某个特定实体相关，例如 **SW-C**、**BSW** 模块、应用或整个车辆。在其生命周期内，一个实体在一组互斥的模式之间切换。这些切换由环境数据触发，例如信号接收、操作调用。在**看门狗管理器**的上下文中，一个模式由一组配置选项定义。被监督的**被监督实体**集合可以随模式而变化。
@@ -826,6 +838,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Page Burst**
 > 通过聚合访问存储页面来提高性能。在存储设备技术支持物理分段的情况下，一些存储设备可以提供一次读取或写入多个页面的优化访问方式。页面突发（**Page Burst**）表示用于访问优化的存储页面聚合。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
+
+**PDC**
+> 泊车距离控制（**Park Distance Control**）
+> 来源：[HMI/多媒体/远程信息处理域应用接口](application_interfaces/hmi/index.md)（AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics · R23-11）
 
 **Port-Interface**
 > 端口接口。定义提供或要求该接口的端口必须履行的契约；AUTOSAR 支持客户端-服务器、发送者-接收者、参数、非易失性数据、触发与模式切换六种端口接口。
@@ -1131,6 +1147,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **UDS**
 > 统一诊断服务（**Unified Diagnostic Services**）。
 > 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager · R23-11）
+
+**UI**
+> 用户界面（**User Interface**）
+> 来源：[HMI/多媒体/远程信息处理域应用接口](application_interfaces/hmi/index.md)（AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics · R23-11）
 
 ## V
 
