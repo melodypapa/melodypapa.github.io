@@ -106,7 +106,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit b2c1ffb (branch feature/group-communication-sync)
 - [ ] sec_oc (SWS_SecureOnboardCommunication · R23-11 markdown · ⚠️ gaps)
   - Note: missing related-documentation/API chapters; ch.3/4 are swapped (constraints before dependencies) — restore the source order
   - [ ] Step 1 — Source resolution + gap analysis
