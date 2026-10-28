@@ -6,29 +6,35 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 
 ## Queue
 
-- [ ] det (SWS_DefaultErrorTracer · R23-11 markdown · ❌ new article, small — do first)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] function_inhibition_manager (SWS_FunctionInhibitionManager · R23-11 markdown · 🔶 alignment)
-  - Note: legacy heading "功能规范" → "功能规格"
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] time_service (SWS_TimeService · R23-11 markdown · 🔶 alignment)
-  - Note: delete the forbidden "配置规范" chapter; legacy ch.2 heading → "缩略语"
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] det (SWS_DefaultErrorTracer · R23-11 markdown · ❌ new article, small — do first)
+  - Note: translated MANUALLY 2026-10-28 (provider concurrency cap blocked all subagent dispatches; small doc). Source 1196 lines; article `system_services/default_error_tracer/` 655 lines. Shape: ch.2 1 entry · 3.1 [1]–[4] full-form heading · 5.1 文件结构 (SWS_Det_00037) · ch.6 traceability DROPPED · ch.7 → §6 (6.1 初始化, 6.2 错误钩子 (00207 tail completed from the R22-11 PDF: "…notify each received error report by calling the configured error hook(s)"), 6.3 错误报告, 6.4 版本信息, 6.5 错误分类 + 6.5.1–6.5.5) · ch.8 → §7 (8.1 API nested as 7.1 API → 7.1.1 导入的类型/7.1.2 类型定义/7.1.3 函数定义 6 entries/7.1.4 期望接口/7.1.5 调出函数/可配置接口 3 callout entries; 8.2 服务接口 → 7.2 with DETService CSI + Det_<Name> port in the EcuM house table shape, Mapped-to-API cells linked) · ch.9 → §8 (Figure9_1–9_7; captions not repeated) · ch.10 → §9 (6 containers; source has BOTH 10.3 and 10.4 "Published Information" — PDF-TOC-confirmed source quirk, translated faithfully as 9.2/9.3) · appendix B "History of Requirements" → `## B. 需求历史` (direct title; R22-11/R23-11 added/changed/deleted ID lists in fences, none → 无); appendix A DROPPED. Figures: 8 content images (49486b49 Figure9_1, 03013129/579d7211/3516f3af/6658d788/082dc0a2/23c83d3f Figure9_2–9_7, 37405aba Figure10_1); all other hashes deco
+  - Note: Phase A — strict build exit 0 / 0 WARNING / no default_error_tracer notices; numbered headings continuous §1–§9 (+ unnumbered ## B.); hygiene 0 h1/{DRAFT}/`\<`/glyph/chrome; SWS ids only inside the appendix-B fences; ECUC ids only in SWS 条目 cells; ch.2 1 term line = 1 source row; 8 figure refs resolve; 说明 blocks 9 = 6 API functions + 3 configurable callouts; gen_api_list regenerated (Det 1 type + 6 functions SITE-linked, --check 0); census: identifier mentions 76 lines (§6 20 / §7 29 / §9 23), chapter refs 3 linked, citations 3/3 converted + 4 anchors ([1] glossary SITE-class two-hop, user decision pending), 0 UNRESOLVED, idempotent re-run 0 lines. Census quirk recorded: cross-article module mentions report "Det → NO-ARTICLE ×43" because the exclusion matches the directory slug, not the module short name — same class as the Mcu×107 self-hit gap (Backlog)
+  - [x] Step 1 — Source resolution + gap analysis (R23-11 source 1196 ln; no release fallback)
+  - [x] Step 2 — In-place translation/completion (new article, manual)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (src ch.1–5→§1–§5, ch.7→§6, ch.8→§7, ch.9→§8, ch.10→§9, B→B section by section; ch.6+A dropped; 00207 PDF completion; source quirks kept: GetVersionInfo null-pointer wording "is returned", 10.3/10.4 duplication)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-crypto-sync · commit 30510c9 + 8c50dde (glossary), 2026-10-28)
+- [x] function_inhibition_manager (SWS_FunctionInhibitionManager · R23-11 markdown · 🔶 alignment)
+  - Note: Step 1 finding (2026-10-28) — the 🔶 tag understated the gap like crypto_driver: article 461 ln carried legacy-topical §5/§6 and a FLAT §7.1 with all 8 functions and bare 说明+fences (no requirement bodies, no groups), no 导入的类型/类型定义/期望接口/服务接口/错误分类/配置约束/时序图 chapter/配置规范/appendix B. Article figure inventory was already complete (figure7_1/7_2/7_3/7_5/9_1/9_2 lower-case legacy names, kept — source Figures 7.1–7.4 + 9.1/9.2; note the legacy author placed Figure9_1/9_2 inside §6 — moved to the new §8 时序图 at source positions in this run); Figure 10.1–10.4 config overviews (64e1d7cc/1df372bc/36c1e762/cb931724) were NOT in the article — copied + embedded at 9.1.1/9.1.2/9.1.5/9.1.6
+  - Note: Step 2 (manual, no subagents per user instruction) — §3.1 file ids → CP-prefixed R23-11 names; §3.2 heading → 相关标准与规范 (source "Related standards and norms" — direct translation); §4.2 → 汽车域的适用性; §5 realigned to source ch.5 (intro 00044 + 5 bullets; legacy 5.1–5.5 subsections folded into the bullet list) + 5.1 需求 + 5.1.1 用例; §6 heading → 功能规格; 6.5 错误分类 (5-row dev-error table + 4 empty classes) + 6.6 配置约束 (CONSTR_00001) added; §7 rebuilt to source ch.8 shape keeping the 8 existing 说明 texts verbatim (7.1 导入的类型 5 rows, 7.2 FiM_ConfigType, 7.3.1–7.3.3 interface groups with ALL requirement paragraphs added — Init 00045/00059+cluster-sentence+shutdown-note, GetFunctionPermission 00066/00025/00055/00056, TriggerOnMonitorStatus 00057/00058, DemTriggerOnComponentStatus, DemInit 00069/00082, MainFunction 00070/00097/00067 —, 7.3.4 回调通知 无, 7.3.5 调度函数, 7.3.6 期望接口 2 tables) + 7.4 服务接口 (FunctionInhibition/ControlFunctionAvailable CSIs with Mapped-to-API anchor links, FiM_FunctionIdType, Func_/Control_ ports, internal-behavior fence); §9 配置规范 (FiM 00612 / FiMGeneral 00040 with 9 params / FiMConfigSet 00601 / FiMFID 00039 / FiMInhibitionConfiguration 00038 with the 4-literal mask Range descriptions / FiMSummaryEvent 00603; FiMInhibitionConfiguration-class rows carry VARIANT-PRE/POST-BUILD variants as the source gives) + 9.2 发布信息; ## 8. 时序图 with 9.2 prose; `## B. AUTOSAR 可追溯项变更历史` (B.1 all 无; B.2.1 added NA_00999, B.2.2 changed 18 ids in fences, B.2.3 无 — the source's B.2.3 is an empty heading, PDF-confirmed no content). Source truncations left as-is in config cells with …… (FiMMainFunctionPeriod description tail, FiMFunctionId note tail, Range "]0 .." — PDF-recovery candidates, noted); known kept quirk: legacy prose (**ECUC_FiM_00037**) parenthesized id in 6.2.4 (pre-existing)
+  - Note: Phase A — strict build exit 0 / 0 WARNING / no function_inhibition_manager notices (only the pre-existing blog INFO about an absolute link, unrelated); numbered headings continuous (script-checked); hygiene 0 h1/{DRAFT}/`\<`, SWS ids only in B fences; 8 说明 blocks = 8 functions; figure refs resolve (10 content + wechat footer); glossary +11 new terms + FiM 来源 append; census/--apply: 9 citation links + 6 registry anchors, idempotent 0 lines; gen_api_list unchanged (--check 0 — FiM was already mapped)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion (article 461 → ~1,045 lines)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (src ch.1–5→§1–§5, ch.7→§6, ch.8→§7, ch.9→§8, ch.10→§9, B→B; ch.6 traceability + appendix A dropped; 5.1.1 re-leveled to ####; ch.1's 6 truncated lead sentences NOT repaired this run — they are pre-existing §1 prose, PDF recovery queued in the row note for a follow-up)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-crypto-sync · commit 534d5d1, 2026-10-28)
+- [x] time_service (SWS_TimeService · R23-11 markdown · 🔶 alignment)
+  - Note: Step 1 (2026-10-28) — the row's original notes are STALE: (a) "delete the forbidden 配置规范 chapter" predates the 2026-10-24 ban lift — the source HAS ch.10 (Tm + TmGeneral) and TODO.md's corrected note (align per the config-spec rules) is followed; (b) "ch.2 heading → 缩略语" predates the 2026-10-25 direct-translation rule — the source heading is literally "Acronyms, abbreviations and terms", so the article's 「首字母缩略词、缩略语和术语」 IS the direct translation and was KEPT. The article (919 ln) also carried: an 11-entry pre-R23-11 §3.1 registry ([1] BSWModuleList … [11] GPT Driver + [12] IEC) vs R23-11's 4 entries — in-body citations [11]/[8] renumbered; 4.1 was 限制 while the source has 4.1 Assumptions/4.2 Limitations/4.3 Applicability; 6.4 had only 2 of 5 error classes and no intro; 7.4 Version check missing; §7 flat API without 导入的类型/类型定义/期望接口; no 时序图 chapter (source ch.9, Figure 9.1 = 15bdda33); legacy per-parameter 配置规范 chapter (superseded); Table3.png = source Table 7.1 as an image (tables-rule violation) and Table3_1.png a duplicate of an already-GFM table
+  - Note: Step 2 (manual) — §3 realigned (registry 4 entries, 3.2 相关标准与规范 removed as release drift, 3.3→3.2 相关规范); §4 restructured (4.1 假设 无假设 / 4.2 限制 with renumbered 4.2.1–4.2.3 / 4.3 汽车域的适用性 无限制); §5.1 heading "GPT。" → "GPT"; §6.4 completed (00063 intro + GFM tables incl. 00030 sentence + 6.4.3–6.4.5) + 6.5 版本检查; Table 7.1 → GFM with caption 表7.1 + duplicate image ref dropped; §7 realigned (7.1 导入的类型 3 rows, 7.2 4 type entries, existing 20 flat function entries renumbered 7.3.1–7.3.20 = source 8.3's flat shape, 7.4 回调通知 无 / 7.5 调度函数 无 / 7.6 期望接口 mandatory 2 + optional 1 + configurable None with the 8.6.3 intro completed from the R22-11 PDF "…because they are configurable"); ## 8. 时序图 (Figure9_1.png copied, caption dropped); ## 9. 配置规范 rebuilt in the container-table house style (Tm 00008 + TmGeneral 00001 with 6 params incl. TmVersionInfoApi description completed per source, Figure10_1.png copied) + 9.2 发布信息; ## B AUTOSAR 可追溯项变更历史 (B.1.1–B.1.3 all 无); legacy per-param ## 8 chapter deleted (superseded)
+  - Note: Phase A — strict build exit 0 / 0 WARNING (the one time_service INFO anchor from link_candidates' full-width-paren slug was hand-fixed to the Material slug); numbered headings continuous; 20 说明 blocks = 20 functions; ch.2 5 term lines; figure refs resolve (2 new + legacy figure1_1/2/3/4); glossary +4 terms (Time Service Predef Timer, Timer instance, Reference time, nop) + GPT Predef Timer 来源 append; census/--apply: 6 chapter refs + 4 citations converted, idempotent 0 lines
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion (article 919 → ~1,060 lines)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (src ch.1–5→§1–§5, ch.7→§6, ch.8→§7, ch.9→§8, ch.10→§9, B→B; ch.6 traceability + appendix A dropped)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-crypto-sync · commit 5c57d0a, 2026-10-28)
 - [ ] comm (SWS_COMManager · R23-11 markdown · ❌ new article, short name ComM)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

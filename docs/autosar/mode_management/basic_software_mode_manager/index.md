@@ -49,29 +49,29 @@ release: R23-11
 
 ### 3.1. 输入文件及相关标准和规范
 
-[1] General Specification of Basic Software Modules
+<a id="ref-1"></a>[1] General Specification of Basic Software Modules
 > AUTOSAR_CP_SWS_BSWGeneral
 
-[2] Guide to Mode Management
+<a id="ref-2"></a>[2] Guide to Mode Management
 > AUTOSAR_CP_EXP_ModeManagementGuide
 
-[3] General Requirements on Basic Software Modules
+<a id="ref-3"></a>[3] General Requirements on Basic Software Modules
 > AUTOSAR_CP_SRS_BSWGeneral
 
-[4] Requirements on Mode Management
+<a id="ref-4"></a>[4] Requirements on Mode Management
 > AUTOSAR_CP_SRS_ModeManagement
 
-[5] Specification of RTE Software
+<a id="ref-5"></a>[5] Specification of RTE Software
 > AUTOSAR_CP_SWS_RTE
 
-[6] Software Component Template
+<a id="ref-6"></a>[6] Software Component Template
 > AUTOSAR_CP_TPS_SoftwareComponentTemplate
 
 ### 3.2. 相关规范
 
-因为AUTOSAR提供了基础软件模块的通用规范（参见相关文档[1]），它也适用于**BSW**模式管理器。所以文档[1]应被视为**BSW**模式管理器的附加和必需规范。
+因为AUTOSAR提供了基础软件模块的通用规范（参见相关文档[\[1\]](#ref-1)），它也适用于**BSW**模式管理器。所以文档[\[1\]](#ref-1)应被视为**BSW**模式管理器的附加和必需规范。
 
-有关**BSW**模式管理器的配置和使用的信息可在辅助文档中找到：模式管理指南（**Guide to Mode Management**）参见相关文档[2]。
+有关**BSW**模式管理器的配置和使用的信息可在辅助文档中找到：模式管理指南（**Guide to Mode Management**）参见相关文档[\[2\]](#ref-2)。
 
 ## 4. 约束和假设
 
@@ -223,7 +223,7 @@ LIN传输协议（**LIN Transport Protocol**）作为**LinIf**一部分的，会
 
 **BswMEventRequestPort**事件请求与模式请求的不同，在于请求者不向**BswM**发送请求的模式/值，也就没有模式条件供**BswM**评估。而是**BswM**只能评估事件的接收情况。
 
-当请求者发送/调用事件时，**BswMEventRequestPort**将处于**SET**状态。**BswM**可以稍后通过执行**BswMClearEventRequest**动作将**BswMEventRequestPort**置于**CLEAR**状态。下图展示了具有两个条件的示例规则。规则和可用逻辑操作集被定义为**ECU**配置的一部分（在第**10.2**章中描述）。
+当请求者发送/调用事件时，**BswMEventRequestPort**将处于**SET**状态。**BswM**可以稍后通过执行**BswMClearEventRequest**动作将**BswMEventRequestPort**置于**CLEAR**状态。图7-1展示了具有两个条件的示例规则。规则和可用逻辑操作集被定义为**ECU**配置的一部分（在第**10.2**章中描述）。
 
 ![Figure7-1](Figure7-1.png)
 
@@ -366,7 +366,7 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 1. 模式请求者**SW-C**通过其发送端口（**Sender Port**）请求模式A。**RTE**分发请求，**BswM**通过接收端口接收（**Receiver Port**）到此请求。
 2. **BswM**根据接收到的模式仲裁请求或在执行BswM主函数期间周期地评估这些规则。
 3. 根据所选择的执行方式，执行相应的动作列表。具体细节可参见[章节6.2.3触发和条件动作列表](#623-触发和条件动作列表)。
-4. 在执行动作列表时，**BswM**可以发出一个或多个对**RTE Switch API**[5]的调用，来通知受影响的**SW-C**仲裁结果。任何**SW-C**，尤其是模式请求者都可以注册以接收模式切换指示。
+4. 在执行动作列表时，**BswM**可以发出一个或多个对**RTE Switch API**[\[5\]](#ref-5)的调用，来通知受影响的**SW-C**仲裁结果。任何**SW-C**，尤其是模式请求者都可以注册以接收模式切换指示。
 
 **注意：**
 
@@ -779,7 +779,7 @@ DataReceiveEvent AppModeRequestEvent {
 
 生成的输入是具有**ServerServiceOffer**、**ServerEventSubscriptionStatus**、**ClientEventSubscription**和**ClientEventSubscriptionStatus**的**RoleBasedDataAssignment**的端口，以及这些端口对应的**RepresentedPortGroups**。
 
-有关如何对必要的端口及其关系进行建模的详细信息，请参阅模式管理指南（参见相关文档[2]）中第13.6.5节"面向服务的用例"（**Service Oriented Use Cases**）。
+有关如何对必要的端口及其关系进行建模的详细信息，请参阅软件组件模板（**Software Component Template**，参见相关文档[\[6\]](#ref-6)）中第13.6.5节"面向服务的用例"（**Service Oriented Use Cases**）。
 
 配置工具需要完成以下步骤：
 
@@ -799,7 +799,7 @@ DataReceiveEvent AppModeRequestEvent {
 
 ![Figure7-7](Figure7-7.png)
 
-该图展示了在使用（**SomeIP**）服务发现的情况下，构成事件订阅请求的实体链。其中灰色元素为配置的元素。通过评估引用了应用事件（此处的**Ev1**）的端口组引用，可以推导出对应的请求端口（**SWC_P1_Req**）。应用事件与对应**SD**事件（此处的**Eventgroup 1**中的**Ev1**）之间的关系通过**ECU**配置提供。
+图7-7展示了在使用（**SomeIP**）服务发现的情况下，构成事件订阅请求的实体链。其中灰色元素为配置的元素。通过评估引用了应用事件（此处的**Ev1**）的端口组引用，可以推导出对应的请求端口（**SWC_P1_Req**）。应用事件与对应**SD**事件（此处的**Eventgroup 1**中的**Ev1**）之间的关系通过**ECU**配置提供。
 
 对于受根据**TPS_SWCT_03504**（软件组件作为客户端订阅事件和方法）的请求端口影响的每个服务实例的事件（组），应创建一个**BswM**规则（**BswMRule**）。该规则的短名称应为该服务实例目标事件（组）的短名称，并加上前缀**ESR_**。
 
@@ -1654,7 +1654,7 @@ void BswM_MainFunction (
 | IsService | **true** |
 | 变体 | {ArbName}_{PortName} |
 | 数据元素 | **ClientServiceSetStateRequest** |
-| 数据元素 | 类型：**BswM_ClientModeRequestEnum** |
+| 数据元素 | 类型：[**BswM_ClientModeRequestEnum**](#7761-bswm_clientmoderequestenum) |
 | 数据元素 | 变体：- |
 
 ###### 7.7.5.2. S/R接口 ServerServiceRequest
@@ -1665,7 +1665,7 @@ void BswM_MainFunction (
 | IsService | **true** |
 | 变体 | {ArbName}_{PortName} |
 | 数据元素 | **ServerServiceSetStateRequest** |
-| 数据元素 | 类型：**BswM_OfferModeEnum** |
+| 数据元素 | 类型：[**BswM_OfferModeEnum**](#7762-bswm_offermodeenum) |
 | 数据元素 | 变体：- |
 
 #### 7.7.6. 枚举
