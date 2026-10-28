@@ -47,14 +47,16 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR — commit e48b58e (branch feature/group-communication-sync)
-- [ ] pdu_router (SWS_PDURouter · R23-11 markdown · ⚠️ missing API chapter)
+- [x] pdu_router (SWS_PDURouter · R23-11 markdown · ⚠️ missing API chapter)
   - Note: one of the "6 articles missing only the API chapter"
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-28 gap analysis — the ⚠️ understates the gap: §6 stopped mid-sentence in 6.1.1 缓冲概念, and §5.5/§5.6, the whole of §7, §8, §9, §10 and `## B.` were missing. Real gaps: §5 +5.5 文件结构/5.6 版本检查; §6 completed from 6.1.1.1 缓冲区类型 through 6.10 多核分布 (6.1.2 接收/6.1.3 发送/6.1.4 网关/6.2 取消发送/6.3 取消接收/6.4 零成本操作/6.5 状态管理/6.6 路由路径组/6.7 复杂驱动交互/6.8 错误分类/6.9 API 参数检查/6.10 多核), Figure7-2 from image_000061; new §7 API规范 (7.1 导入的类型 8 rows, 7.2 4 types, 7.3 16 functions in 4 groups, 7.4 调度函数 none, 7.5 期望接口 1 required + 15 optional); new §8 时序图 (source ch.9, 18 figures Figure9-1..18 from image_000090..123); new §9 配置规范 (source ch.10, 12 containers, Figure10-1..10-5 from image_000127/130/139/142/145 — docling spacer images f5f4bf49/cad1600a/31a8ee06/8c27c74a skipped); new §10 模块设计说明 (source ch.11 incl. Figure11-1 from image_000162 and the source's generated-code example in a C fence); new `## B.` 可追溯项变更历史 (R22-11 + R23-11 blocks, added/changed/deleted item ids inside text fences); appendix A (not-applicable requirements) droppable. §3.1 also brought to the canonical 「输入文件和相关标准与规范」
+  - Note: 2026-10-28 completion run — §6 continuation keeps the source's requirement paragraphs in order with the IDs stripped; error tables: development (PDUR_E_INIT_FAILED 0x00 / UNINIT 0x01 / PDU_ID_INVALID 0x02 / ROUTING_PATH_GROUP_ID_INVALID 0x08 / PARAM_POINTER 0x09), runtime (PDUR_E_TP_GW_TX_REQ_REJECTED 0x03 / PDUR_E_PDU_INSTANCES_LOST 0x0a), production single-row PDUR_E_ROUTING_PATH_BUFFER_OVERFLOW. §7 functions: 7.3.1 general 5, 7.3.2 upper-layer 3, 7.3.3 lower CI 3, 7.3.4 lower TP 5 (16 `**说明**` blocks matching 16 source functions). §9 parameter cells filled per EcuM/Mcu precedent ([ECUC_PduR_nnnnn], 57 container/parameter blocks over 12 containers). Source-internal cross-references remapped to the article's own numbering (7.10→6.10, 8.3.3/8.3.4→7.3.3/7.3.4, 4.1.1→4.2, 5.1.1→5.5.1). check_api_sync = documented N/A (second grouped-function chapter: the script matches only same-level headings, so the article's retained group headings 7.3.x vs the source's 8.3.1 通用/8.3.2–8.3.4 可配置 layout report MISMATCH); manual verification: 4 types ↔ 7.2.1–7.2.4, 16 functions ↔ 7.3.3.x/7.3.4.x in source order, 16 **说明** blocks ✓. link_candidates --apply: 62 lines (12 chapter refs + 10 citations; 8 registry anchors `ref-1..8` added by hand because §3.1 had none) → idempotent on re-run; --list --pdf: source PDF absent under autosar_standard (report-only), identifier mentions 140 lines all anchored (config containers/params §9 x86 report-only), 14/18 prose citations linked with 4 listed as resolvable-but-unconverted ([2] BSW General, [8] Guide to BSW Distribution). Strict build: exit 0, zero WARNINGs, no pdu_router INFO. Legacy `\<…\>` occurrences (23) left in place — separate corpus-wide sweep (TODO.md). Glossary extension not done for this batch (rows 1–4 also skipped) — batch-level pending item for the gate. Steps 5/6 per user instruction: commit first, combined confirmation after
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit recorded below
 - [ ] ethernet_interface (SWS_EthernetInterface · R23-11 markdown · ⚠️ missing API chapter)
   - Note: one of the "6 articles missing only the API chapter"
   - [ ] Step 1 — Source resolution + gap analysis

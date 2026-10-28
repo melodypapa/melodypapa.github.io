@@ -25,14 +25,14 @@
 **Fill depth (existing articles)**
 
 - [ ] 2026-10-25 tables-as-images retired (STANDARD.md §4 decision — source tables translate as GFM tables): 5 `![Table*.png]` refs remain — bswm 1 (Table7-1 BswMRuleInitState), dcm 1, data_distribution 1, time_service 2; EcuM ✅ (all 7 translated/deleted 2026-10-25), operating_system ✅ (Table7_1 deleted 2026-10-26, GFM table already present)
-- [ ] 4 ⚠️ articles missing only the 「API规范」 chapter: pdu_router, can_interface, ethernet_interface, lin_interface (operating_system ✅ 2026-10-26; crypto_driver ✅ 2026-10-27 — its real gap was source 7.1.2–ch.10, not just the API chapter)
+- [ ] 3 ⚠️ articles missing only the 「API规范」 chapter: can_interface, ethernet_interface, lin_interface (operating_system ✅ 2026-10-26; crypto_driver ✅ 2026-10-27 — its real gap was source 7.1.2–ch.10, not just the API chapter; pdu_router ✅ 2026-10-28 — its real gap was §5.5 through §10 plus appendix B)
 - [ ] The other 9 ⚠️ articles: complete their respective missing chapters (com_based_transformer, data_distribution, e2e_transformer, sec_oc, SoAd, mirror, dem, fee, dcm) — iohwab ✅ 2026-10-27; memory_access ✅ 2026-10-27
 - [ ] 3 ⛔ stubs: full translation (ethernet_switch_driver, service_discovery, platform_types — platform_types also needs its front-matter title and nav label fixed in the same change); memory_mapping ✅ 2026-10-28
 - [ ] 12 🔶 articles: align to Type A — flash_driver/time_service translate their legacy 「配置规范」 chapters in place (allowed since 2026-10-24; source ch.10 → article `## 8. 配置规范`); nvram drops the 「需求追踪」 chapter and fixes 「功能说明」; unify remaining legacy wording to STANDARD.md terms
 - [ ] IO section ✅ articles' heading-wording alignment (DIO/Port/PWM/OCU/ICU done 2026-10-24; same-class deviations remain): adc 4.2 「适用车型域」→「汽车域的适用性」
 - [ ] 4.2 「适用于汽车领域」→「汽车域的适用性」 (named in STANDARD.md 2026-10-24): bswm, ecu_state_manager, data_distribution (crypto_driver + crypto_service_manager ✅ 2026-10-27); 「对汽车领域的适用性」: ethernet_driver, can_interface; 「汽车领域的适用性」: nvram_manager
 - [ ] *Scheduled functions* unified to 「调度函数」 (named in STANDARD.md 2026-10-24): bswm 7.3, crypto_service_manager 7.12 「Scheduled 函数」; can_network_management ✅ (2026-10-28, now 7.5)
-- [ ] §3.1 translated in full as 「输入文件和相关标准与规范」 (direct translation, named in STANDARD.md 2026-10-25 — the short form 「输入文件」 is no longer canonical): dio ✅ (2026-10-25); remaining — exact 「输入文件」: adc, crypto_service_manager, ecu_state_manager, ethernet_interface, can_network_management (+ r21_11 snapshot), udp_network_management, flash_driver, flash_eeprom_emulation, pwm, port, icu, ocu, lin_interface, function_inhibition_manager, time_service; — iohwab removed 2026-10-27: its R23-11 source 3.1 heading is literally "Input documents", so 「输入文件」 IS the direct translation and stays 「输入文件及相关标准规范」: bulk_nv_data_manager, nvram_manager; 「输入文件及相关标准和规范」: bswm, pdu_router, operating_system
+- [ ] §3.1 translated in full as 「输入文件和相关标准与规范」 (direct translation, named in STANDARD.md 2026-10-25 — the short form 「输入文件」 is no longer canonical): dio ✅ (2026-10-25); remaining — exact 「输入文件」: adc, crypto_service_manager, ecu_state_manager, ethernet_interface, can_network_management (+ r21_11 snapshot), udp_network_management, flash_driver, flash_eeprom_emulation, pwm, port, icu, ocu, lin_interface, function_inhibition_manager, time_service; — iohwab removed 2026-10-27: its R23-11 source 3.1 heading is literally "Input documents", so 「输入文件」 IS the direct translation and stays 「输入文件及相关标准规范」: bulk_nv_data_manager, nvram_manager; 「输入文件及相关标准和规范」: bswm, operating_system (pdu_router ✅ 2026-10-28)
 - [ ] Acronym chapters unified to 「粗体术语 + 引用块」 + row-set alignment (STANDARD.md §1; 2026-10-24 census 21:5): format — dio/port/pwm ✅ (reflowed 2026-10-24); lin_driver — 1 article still GFM tables; row sets (check line by line against the R23-11 sources) — adc restore API/HW/SW, DEM→DET source order, re-merge Conversion Mode into one entry (18 rows→16), lin_driver missing 14 rows (40→26); udp_network_management ✅ (2026-10-28, 25 entries); icu verified equal (12:12)
 - [ ] Hygiene fixes: udp_network_management WeChat footer → `<h4>` ✅ (2026-10-28); dem numbering gap; rename the `data_distribution service` directory to drop the space; SoAd/mirror → index.md layout; `timimg_extension/indx.md` spelling (nav change in the same commit)
 - [ ] BswM ch.10 → `## 9. 配置规范` (rule-lift follow-up, issue #71): 91 containers across ~3600 source lines (10.2.1–10.2.90) — dedicated run needed; bswm alignment + 时序图 lands first
@@ -85,7 +85,7 @@
 - ⚠️ [E2E 转换器](e2e_transformer/) — SWS_E2ETransformer (missing 缩略语/constraints/API)
 - ⚠️ [以太网接口](ethernet_interface/) — SWS_EthernetInterface (missing 「API规范」)
 - ⚠️ [LIN 接口](lin_interface/) — SWS_LINInterface (missing 「API规范」)
-- ⚠️ [PDU 路由器](pdu_router/) — SWS_PDURouter (missing 「API规范」)
+- ✅ [PDU 路由器](pdu_router/) — SWS_PDURouter (R23-11 realigned 2026-10-28: §3.1 canonical heading + registry anchors, §5.5 文件结构/§5.6 版本检查, §6 completed from 6.1.1.1 to 6.10 多核分布, new §7 API规范 (4 types/16 functions/期望接口), §8 时序图 18 figures, §9 配置规范 12 containers 5 figures, §10 模块设计说明, `## B.` 可追溯项变更历史)
 - ⚠️ [SecOC](sec_oc/) — SWS_SecureOnboardCommunication (missing 相关文档/API)
 - ⚠️ [SoAd](SoAd/SoAd.md) — SWS_SocketAdaptor (missing 缩略语; directory capitalized, file name is not index.md)
 - ⚠️ [Bus Mirror](mirror/mirror.md) — SWS_BusMirroring (missing 缩略语/API; file name is not index.md)
@@ -193,7 +193,7 @@ Translated 2026-10-29: AIChassis → [application_interfaces/chassis](applicatio
 
 ## Suggested priority (2026-10-23 snapshot)
 
-1. **Small-effort completions**: among the 17 ⚠️ articles, those missing only the 「API规范」 chapter (pdu_router, can_interface, crypto_driver, ethernet_interface, lin_interface, operating_system, …)
+1. **Small-effort completions**: among the 17 ⚠️ articles, those missing only the 「API规范」 chapter (can_interface, crypto_driver, ethernet_interface, lin_interface, operating_system, …)
 2. **Full stub translations**: the 4 ⛔ (platform_types also needs title + nav label fixed)
 3. **Communication backbone**: Com, CanSM, CanTp, TcpIp, Nm, EthSM, IpduM, the SomeIp family
 4. **System services**: ComM, Det (small)
