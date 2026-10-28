@@ -46,7 +46,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [x] Step 6 — TODO.md row + commit/PR — commit e48b58e (branch feature/group-communication-sync)
+  - [x] Step 6 — TODO.md row + commit/PR — commit e48b58e (branch feature/group-communication-sync); PR #181, tracking issue #180
 - [x] pdu_router (SWS_PDURouter · R23-11 markdown · ⚠️ missing API chapter)
   - Note: one of the "6 articles missing only the API chapter"
   - Note: 2026-10-28 gap analysis — the ⚠️ understates the gap: §6 stopped mid-sentence in 6.1.1 缓冲概念, and §5.5/§5.6, the whole of §7, §8, §9, §10 and `## B.` were missing. Real gaps: §5 +5.5 文件结构/5.6 版本检查; §6 completed from 6.1.1.1 缓冲区类型 through 6.10 多核分布 (6.1.2 接收/6.1.3 发送/6.1.4 网关/6.2 取消发送/6.3 取消接收/6.4 零成本操作/6.5 状态管理/6.6 路由路径组/6.7 复杂驱动交互/6.8 错误分类/6.9 API 参数检查/6.10 多核), Figure7-2 from image_000061; new §7 API规范 (7.1 导入的类型 8 rows, 7.2 4 types, 7.3 16 functions in 4 groups, 7.4 调度函数 none, 7.5 期望接口 1 required + 15 optional); new §8 时序图 (source ch.9, 18 figures Figure9-1..18 from image_000090..123); new §9 配置规范 (source ch.10, 12 containers, Figure10-1..10-5 from image_000127/130/139/142/145 — docling spacer images f5f4bf49/cad1600a/31a8ee06/8c27c74a skipped); new §10 模块设计说明 (source ch.11 incl. Figure11-1 from image_000162 and the source's generated-code example in a C fence); new `## B.` 可追溯项变更历史 (R22-11 + R23-11 blocks, added/changed/deleted item ids inside text fences); appendix A (not-applicable requirements) droppable. §3.1 also brought to the canonical 「输入文件和相关标准与规范」
@@ -56,7 +56,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [x] Step 6 — TODO.md row + commit/PR — commit f915d45 (branch feature/group-communication-sync)
+  - [x] Step 6 — TODO.md row + commit/PR — commit f915d45 (branch feature/group-communication-sync); PR #181, tracking issue #180
 - [ ] ethernet_interface (SWS_EthernetInterface · R23-11 markdown · ⚠️ missing API chapter)
   - Note: one of the "6 articles missing only the API chapter"
   - Note: 2026-10-29 gap analysis — the ⚠️ understates the gap: the ⚠️ understates it; real gaps vs R23-11: no 已知限制 chapter; §2 intro sentence missing + OA TC10 entry kept a [5] citation marker (dropped per acronym rule); §3.1 legacy 输入文件 heading + pre-R23-11 20-entry registry → R23-11 23 entries (old 17/18/19/20 = EthSwt/WEthTrcv/CV2x/MACsec now 20/21/22/23; new 15/17/18/19 enter prose); §3.2 heading 相关规格→相关规范; §4.1 局限性→限制, §4.2 汽车领域的适用性→汽车域的适用性, §5 对其他模块的依赖关系→对其他模块的依赖, §6 功能规范→功能规格 (no inbound anchors); §6 missing source 7.1.11 (frame/PDU communication incl. Reception/Transmission requirement bodies, PDU state handling, metadata, ingress queues) / 7.1.12–7.1.16 (Global Time, WEth, CV2X, MACsec, Firewall) / 7.2 安全事件 (4-event table) / 7.3 错误分类 (dev 9 rows, runtime 1, transient/production/extended none); §7 wholly missing (8.1 63-row imported types incl. draft/obsolete annotations, 8.2 4 types, 8.3 125 functions, 8.4 8 callbacks, 8.5 5 scheduled, 8.6 期望接口 0 mandatory/53 optional/3 configurable); source ch.9 → new §8 时序图 13 figures; source ch.10 → new §9 配置规范 15 containers; appendix A droppable; appendix B → new ## B.
@@ -66,7 +66,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [x] Step 6 — TODO.md row + commit/PR — commit a08b183 (branch feature/group-communication-sync)
+  - [x] Step 6 — TODO.md row + commit/PR — commit a08b183 (branch feature/group-communication-sync); PR #181, tracking issue #180
 - [ ] lin_interface (SWS_LINInterface · R23-11 markdown · ⚠️ missing API chapter)
   - Note: one of the "6 articles missing only the API chapter"
   - Note: 2026-10-29 gap analysis — article ended mid-6.2.1.3 (365 ln vs 5,670 src). Real gaps: ch.2 GFM tables → blockquotes, row set 18→source 20 acronyms (ID/SRS restored) + 11 terms, citation renumber [19]→[5]/[6]; §3.1 legacy pre-R23-11 19-entry registry → R23-11 20 entries (old 3.2 相关标准和规范 [17][18][19] folded in), heading 输入文件→输入文件和相关标准与规范, 相关的文档→相关文档, 3.2→相关规范; §4 +4.2 汽车域的适用性 (was missing) +4.3 关于其他LIN标准的澄清; §5 依赖关系→依赖 +5.3 文件结构 added (stray "s" typo removed); §6 legacy 6.1.x「X的传输」 naming → source 帧类型 hierarchy (6.1.1 帧类型 6.1.1.1-.5, 6.1.2 帧接收, 6.1.3 帧发送, 6.2 从节点到从节点, 6.3 无关通信, 6.4 调度表, 6.5 主函数, 6.6 网络管理, 6.7 状态管理, 6.8 诊断和节点配置, 6.9 诊断-传输协议, 6.10 多通道多驱动, 6.11 错误分类 incl. 6.11.5 扩展生产错误 6 tables); §7 wholly missing (8.1.1 22-row standard types, 8.1.2 4 types, 8.2 21 functions, 8.3 5 callbacks, 8.4 1 scheduled, 8.5 期望接口 4 mandatory/26 optional/8 configurable); ch.9 → §8 时序图 17 figures; ch.10 → §9 配置规范 (LinIf 20 containers + LinTp 7 containers, 13 figures); appendix A droppable; B.1 empty in source (history table absent from published doc — verified in PDF p.181)
@@ -76,7 +76,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [x] Step 6 — TODO.md row + commit/PR — commit aad6b21 (branch feature/group-communication-sync)
+  - [x] Step 6 — TODO.md row + commit/PR — commit aad6b21 (branch feature/group-communication-sync); PR #181, tracking issue #180
 - [ ] com_based_transformer (SWS_COMBasedTransformer · R23-11 markdown · ⚠️ gaps)
   - Note: missing acronym/dependency chapters; the 4.2 subsection structure ("基于COM的转换器规范") must be checked against the source; missing "约束和假设" (tracked in TODO.md)
   - Note: 2026-10-29 gap analysis — article was legacy-structured (章节 flat, no 缩略语/依赖, API = bare signatures). Real gaps vs R23-11: ch.2 one-sentence no-terms statement; §3 = source 3.1 「输入文件」 (source heading is literally "Input documents" — iohwab precedent, NOT renamed) 8 entries + 3.2 相关标准和规范 (Not applicable → 不适用) + 3.3 相关规范; §4.1 限制/§4.2 汽车域的适用性 split; §5 依赖 + 5.1 文件结构; §6 = old ch.4 renumbered + missing SWS_ComXf_00036 gaps-filler content already present + 6.2 错误分类 (dev errors 4 rows with <MIP>_ placeholders, runtime/transient/production/extended none); §7 rebuilt (8.1 one-sentence no-imported-types + Module-Interlink-Headers paragraph, 8.2 ComXf_ConfigType, 8.3 5 functions with 说明+requirement bodies incl. transformerChain/where-lists, 8.4/8.5/8.6 one-sentence statements); §8 时序图 = source ch.9 one-sentence statement (no applicable diagrams); §9 配置规范 = source ch.10 5 requirements; source annexes are LETTERED CONTENT annexes (rte precedent): A 引用的元类 (11 meta-class tables), B 使用的ECU配置 (6 containers/37 duplicated Com params + Figure B.1), C 约束和规格项的历史 (R4.2.1–R23-11, ID lists in fences); blog-era PNGs (2022-02-*.png) replaced by source artifacts Figure7-1..4 + FigureB-1
@@ -86,7 +86,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [x] Step 6 — TODO.md row + commit/PR — commit 3562899 (branch feature/group-communication-sync)
+  - [x] Step 6 — TODO.md row + commit/PR — commit 3562899 (branch feature/group-communication-sync); PR #181, tracking issue #180
 - [ ] e2e_transformer (SWS_E2ETransformer · R23-11 markdown · ⚠️ gaps)
   - Note: missing acronym/constraints/API chapters
   - Note: 2026-10-29 gap analysis — article was legacy (概述/相关的文档/依赖关系/功能规范 flat, API wholly missing, 1,49 lines vs 1,856 src). Real gaps: ch.2 缩略语 (9 terms) wholly missing; §3 legacy pre-R23-11 13-entry registry → R23-11 10 entries, headings 相关的文档→相关文档 + 输入文档→输入文件和相关标准与规范; §4 约束和假设 missing (4.1 限制 + 4.2 汽车域的适用性); §5 +5.1 支持的配置变体; §6 = source ch.7 (7.1 supported RTE functions + 7.2 naming already present in legacy; +7.3 配置 3 stages with 7.3.1-7.3.3, 7.4 generated structure types, 7.5 static initialization (per-profile P01/P02/P04-family/P05/P11/P22/SM init lists), 7.6 runtime init, 7.7 normal operation (7.7.1 in/out-of-place, 7.7.2 protect flow: 7.7.2.1 overview + 7.7.2.2-.11 detail subsections, 7.7.3 check flow: 7.7.3.1-.9, 7.7.4 de-init), 7.8 错误分类 dev 4 rows + runtime 2 + transient/production none + extended per [2]); §7 API wholly missing (8.1 68-row imported types, 8.2 E2EXf_ConfigType + E2EXf_CSTransactionHandleType, 8.3 5 functions, 8.4/8.5 one-sentence, 8.6 期望接口 66 mandatory + optional/configurable None); ch.9 → §8 时序图 10 figures; ch.10 → §9 配置规范 (5-requirement statement); appendix A droppable; ## B 变更历史 (B.1 empty, B.2 added none/changed 12/deleted 8 in fences); blog-era PNGs (2022-02-03-*.png) replaced by source figures 7-1..7-26 + 9-1..9-10
@@ -96,10 +96,11 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [x] Step 6 — TODO.md row + commit/PR — commit 4d5ff96 (branch feature/group-communication-sync)
+  - [x] Step 6 — TODO.md row + commit/PR — commit 4d5ff96 (branch feature/group-communication-sync); PR #181, tracking issue #180
 - [ ] data_distribution (SWS_DataDistributionService · R23-11 markdown · ⚠️ missing API chapter)
   - Note: directory `data_distribution service/` contains a space — renaming to `data_distribution/` requires the nav change in the same commit
-  - [ ] Step 1 — Source resolution + gap analysis
+  - Note: 2026-10-29 gap analysis — article 241 ln vs source 4,074 ln; ends mid source 7.2.1.1 and everything from 7.1.2 onward is still untranslated English. Real gaps: 已知限制 (source = None); §2 split into 2.1 缩略语 (glossary reference) / 2.2 缩写 (None) / 2.3 术语表; §3.1 输入文档→输入文件和相关标准与规范 (14 entries), 3.2 相关规格→相关规范; §4.1 flat→4.1.1 假设/4.1.2 限制/4.1.3 约束, Table 4.1 rendered as a GFM table instead of the blog-era Table_4_1.png, 4.2 适用于汽车领域→汽车域的适用性; §5 对其他模块的依赖 + 5.1–5.6 sub-headings; §6 heading numbering bug `###### 7.1.1.1.`→`##### 6.1.1.1.` and `###### 7.2.1.1.`→`##### 6.2.1.1.`; §6.1.2 Security Mechanisms / §6.1.3 Safety Mechanisms untranslated; missing §6.2 通用需求 (topic-name uniqueness + 6.2.1.1 序列化/6.2.1.2 反序列化/6.2.1.3 发送队列/6.2.1.4 发送/6.2.1.5 接收队列/6.2.1.6 接收/6.2.1.7 时序 requirements, 6.2.2 安全需求, 6.2.3 安全机制需求); missing §6.3 错误分类 (7.3.1 development + 7.3.2 runtime + production/extended statements); §7 wholly missing (8.1 imported types, 8.2 Dds_ConfigType, 8.3 3 functions, 8.4 3 callbacks, 8.5 2 scheduled functions, 8.6 期望接口); source ch.9 → new §8 时序图 (3 figures); source ch.10 → new §9 配置规范 (Dds/DdsGeneral/DdsConfig + ~30 containers, Figure 10.1–10.16); appendix A droppable; source ch.B → new `## B.`; blog-era Figure_7_* PNGs to be replaced by the source figures where raster-identical
+  - [x] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
