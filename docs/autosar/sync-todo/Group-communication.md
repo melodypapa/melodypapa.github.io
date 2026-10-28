@@ -86,7 +86,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit 3562899 (branch feature/group-communication-sync)
 - [ ] e2e_transformer (SWS_E2ETransformer · R23-11 markdown · ⚠️ gaps)
   - Note: missing acronym/constraints/API chapters
   - [ ] Step 1 — Source resolution + gap analysis
