@@ -10,6 +10,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## A
 
+**AB**
+> 安全气囊（**Airbag**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**ABS**
+> 防抱死制动系统（**Antilock Braking System**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
 **Accuracy**
 > 精度（**Accuracy**）取决于用于采样或者生成的硬件外围设备。如：**ADC**转换器可以是 8/10/12/16 位转换器
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
@@ -63,6 +71,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 存活指示（**Alive Indication**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 
+**AI Table**
+> 应用接口表（**Application Interface Table**）
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
+
 **Alive Counter**
 > **WdgM** 中在**检查点**上下文内的独立数据资源，用于跟踪和处理该**检查点**的**存活指示**数量。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
@@ -74,6 +86,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Alive Supervision**
 > 一种监督，用于检查**被监督实体**的执行是否足够频繁且不过于频繁（包括容差）。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**Antisubmarine**
+> 下潜——约束系统中与汽车应用相关的术语（**Antisubmarine**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**AP**
+> 执行器池（**Actuator Pool**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
 
 **API**
 > 应用编程接口（**Application Programming Interface**）
@@ -93,6 +113,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ASAM**
 > 自动化与测量系统标准化协会（**Association for Standardization of Automation and Measuring Systems**）。
 > 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
+
+**ARTI**
+> AUTOSAR 运行时接口——用于调试与跟踪嵌入式系统运行时行为的一组标准（**AUTOSAR Run-Time Interface**）
+> 来源：[AUTOSAR 运行时接口（ARTI）](sw_arch/arti/index.md)（AUTOSAR_CP_EXP_ARTI · R23-11）
+
+**arxml**
+> .arxml——AUTOSAR 可扩展标记语言文件（**AUTOSAR Extensible Markup Language File**）
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
+
+**ASIL**
+> 汽车安全完整性等级（**Automotive Safety Integrity Level**）
+> 来源：[AUTOSAR 功能安全措施概览](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures · R23-11）
 
 **ASN.1**
 > 抽象语法标记一号（**Abstract Syntax Notation One**）：一种描述数据结构的标准记法，常与 DER 编码规则一起用于证书等密码学数据的编码。
@@ -123,9 +155,25 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 存储 **Bank** 是一组扇区批次（**Sector Batch**）的集合。如果存储技术支持按扇区分段，则存储 **Bank** 是不允许边读边写操作的扇区批次组实例。对于闪存设备，**Bank** 通常映射到单独的闪存控制器。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
 
+**BAS**
+> 制动辅助（**Brake Assist**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**Binary Manifest**
+> 软件集群的二进制对象的定义良好的接口，提供资源的元信息与访问此类资源的句柄（**Binary Manifest**）
+> 来源：[软件集群设计与集成指南](system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline · R23-11）
+
+**Binary Object**
+> 一组文件的集合，包含在编程到目标 ECU 之前不会再被修改的二进制可执行代码与数据（**Binary Object**）
+> 来源：[软件集群设计与集成指南](system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline · R23-11）
+
 **BIST**
 > 内建自测试（**Built in Self Test**）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
+
+**BIST**
+> 内建自测试（**Built In Self Test**）
+> 来源：[AUTOSAR 功能安全措施概览](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures · R23-11）
 
 **BndM**
 > 大容量非易失性数据管理器（**Bulk Non-Volatile Data Manager**）
@@ -134,6 +182,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ATWS**
 > 防盗警告系统（**Anti-Theft Warning System**）。可借助光学与声学信号警示未授权进入尝试、并可防止发动机被起动的防盗系统。
 > 来源：[车身与舒适域应用接口](application_interfaces/body_and_comfort/index.md)（AUTOSAR_CP_EXP_AIBodyAndComfort · R23-11）
+
+**BRWS**
+> 基本后轮转向（**Basic Rear Wheel Steering**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**BSAS**
+> 基本转向角叠加（**Basic Steering Angle Superposition**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**BSTS**
+> 基本转向力矩叠加（**Basic Steering Torque Superposition**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
 
 **BSW**
 > 基础软件（**Basic Software**）
@@ -149,6 +209,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **BswM**
 > 基础软件模式管理器（**Basic Software Mode Manager**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**Bugzilla**
+> 变更请求管理工具（**Bugzilla**）
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
 
 **Bus Off**
 > CAN 总线的错误状态：CAN 控制器因错误计数达到上限而与总线脱离。CAN 状态管理器（CanSM）通过 Bus Off 恢复状态机进行恢复。
@@ -195,6 +259,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > CAN Interface —— CAN 接口。
 > 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
+**CBC**
+> 弯道制动控制（**Cornering Brake Control**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
 **CDD**
 > 复杂设备驱动程序（**Complex Device Driver**）。
 > 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver · R23-11）
@@ -218,6 +286,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > **被监督实体**控制流中的一个点，在该处向**WdgM** 报告活动。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 
+**CoG**
+> 重心（**Center of Gravity**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
 **Com**
 > 通信（**Communication**）
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes · R23-11）
@@ -232,6 +304,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Conversion Time**
 > 转换时间是指将采样的模拟值转换为数值所需的时间。
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
+
+**COOP**
+> 严重离位（**Critical Out of Position**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
 
 **Core**
 > **CPU** 及其紧邻的功能资源。
@@ -296,11 +372,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager · R23-11）
 
 
+**CVT**
+> 无级变速器（**Continuously Variable Transmission**）
+> 来源：[动力总成（发动机）域应用接口](application_interfaces/powertrain/index.md)（AUTOSAR_CP_EXP_AIPowertrain · R23-11）
+
 ## D
 
 **&lt;DstLo&gt;**
 > 作为 L-SDU 目标的下层通信接口模块。DstLo 可以是一对多。
 > 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
+
+**DAS**
+> 驾驶辅助系统（**Driver Assistance System**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
 
 **Data frame**
 > 数据帧：**SPI** 总线上与 SpiDataWidth 相关的位的物理帧。
@@ -366,6 +450,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > Data Transfer Object —— 数据传输对象。
 > 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
+**DRL**
+> 日间行车灯（**Daytime Running Light**）
+> 来源：[安全用例](safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase · R23-11）
+
+**DTC**
+> 拖滞力矩调节（**Regulation of the Drag Torque**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
 ## E
 
 **EAI**
@@ -375,6 +467,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **EB**
 > 外部缓冲通道（**Externally buffered channels**）：包含待传输数据的缓冲区位于 SPI 处理器/驱动程序之外。
 > 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver · R23-11）
+
+**EBD**
+> 制动力分配（**Electronic Brake Force Distribution**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**eCall**
+> 紧急呼叫（**Emergency Call**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
 
 **ECC**
 > 纠错码（**Error Correction Code**）
@@ -418,6 +518,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > Entity identifier —— 实体标识符。
 > 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
 
+**EPB**
+> 电子驻车制动（**Electronic Parking Brake**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**ESC**
+> 电子稳定控制（**Electronic Stability Control**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**Excel**
+> Microsoft 电子表格应用（**Excel**）
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
+
 **i.e.**
 > （拉丁语）id est =（英语）that is，即「也就是说」。
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes · R23-11）
@@ -449,6 +561,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## F
 
+**FA**
+> 前轴（**Front Axle**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
 **Fast-Mode**
 > 对看门狗硬件的触发必须以较短的超时期限完成。例如，该模式可用于 **ECU** 的正常运行。例如，看门狗硬件被配置为窗口模式（触发看门狗必须发生在超时期限内的特定最小/最大边界中）且超时期限为 5 毫秒。
 > 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
@@ -466,6 +582,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 > 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager · R23-11）
 
+**FLM**
+> 前灯管理（**Front Light Management**）
+> 来源：[安全用例](safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase · R23-11）
+
 **Foreground test**
 > 前台测试是同步测试，不得被中断。它通过用户应用程序调用。
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
@@ -477,6 +597,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **FrIf**
 > FlexRay Interface —— FlexRay 接口。
 > 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
+
+**FSC**
+> 功能安全概念（**Functional Safety Concept**）
+> 来源：[安全用例](safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase · R23-11）
+
+**FTT**
+> 故障容忍时间（德语「Fehlertoleranzzeit」）（**Fault Tolerance Time**）
+> 来源：[安全用例](safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase · R23-11）
+
+**FTTI**
+> 故障容忍时间间隔（**Fault Tolerant Time Interval**）
+> 来源：[AUTOSAR 功能安全措施概览](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures · R23-11）
 
 **Functionality**
 > 功能：涵盖系统用户可见和用户不可见的功能方面（见 [2]）。在 **FiM** 上下文中，一个功能可以由一个或多个可运行实体的全部或部分内容、以同一组许可/禁止条件构成。
@@ -526,15 +658,39 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## H
 
+**HARA**
+> 危害分析（**Hazard Analysis**）
+> 来源：[AUTOSAR 功能安全措施概览](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures · R23-11）
+
 **Hardware Trigger**
 > 硬件触发是**ADC**内部触发信号，用于启动ADC通道组的一次转换。**ADC**硬件触发在ADC硬件内部生成（例如：基于**ADC**定时器或触发沿信号）。触发硬件是强耦合或者直接集成在**ADC**的硬件中。当检测到硬件触发后，无需软件即可启动**ADC**通道组转换。**注意：**即使**ADC**硬件不支持硬件触发，也可以通过软件触发结合**GPT/ICU**驱动程序来实现类似的行为。（例如：在GPT定时器通知函数中，启动软件触发的**ADC**通道组的转换）
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
+
+**HAZOP**
+> 危害与可操作性分析（**Hazard & Operability Analysis**）
+> 来源：[AUTOSAR 功能安全措施概览](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures · R23-11）
+
+**HDC**
+> 坡道缓降控制（**Hill Decent Control**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**HHC**
+> 坡道起步控制（**Hill Hold Control**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**HMI**
+> 人机接口（**Human Machine Interface**）
+> 来源：[HMI/多媒体/远程信息处理域应用接口](application_interfaces/hmi/index.md)（AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics · R23-11）
 
 **HSM**
 > 硬件安全模块（**Hardware Security Module**），专用安全 **MCU** 的内核。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
 > 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver · R23-11）
 > 来源：[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface · R23-11）
+
+**HTM**
+> 硬件测试管理器（**Hardware Test Manager**）
+> 来源：[AUTOSAR 功能安全措施概览](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures · R23-11）
 
 **IFX**
 > 定点插值库（**Fixed Point Interpolation Routines**）的模块 ID 前缀；整数插值例程名称以 Ifx 开头。
@@ -704,6 +860,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 第二级存储器（**2nd level memory**）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
 
+**LB**
+> 近光功能（德语「Abblendlicht」）（**Low Beam**）
+> 来源：[安全用例](safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase · R23-11）
+
+**LED**
+> 发光二极管（**Light Emitting Diode**）
+> 来源：[HMI/多媒体/远程信息处理域应用接口](application_interfaces/hmi/index.md)（AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics · R23-11）
+
+**LET**
+> 逻辑执行时间——通过抽象物理执行来确保稳定软件行为的概念（**Logical Execution Time**）
+> 来源：[软件集群设计与集成指南](system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline · R23-11）
+
 **LKA**
 > 车道保持辅助（**Lane Keep Assist**）。
 > 来源：[ADAS 与车辆运动控制接口](application_interfaces/adas_vmc/index.md)（AUTOSAR_CP_EXP_AIADASAndVMC · R23-11）
@@ -733,6 +901,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **LPDU**
 > Data Link Layer PDU —— 数据链路层 PDU。
 > 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
+
+**LS**
+> 灯光开关（**Light Switch**）
+> 来源：[安全用例](safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase · R23-11）
 
 ## M
 
@@ -816,6 +988,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > Master Input Slave Output（主入从出）。
 > 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver · R23-11）
 
+**Modality**
+> 模态——到用户的输出通道的类型，例如音频或视频输出（**Modality**）
+> 来源：[HMI/多媒体/远程信息处理域应用接口](application_interfaces/hmi/index.md)（AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics · R23-11）
+
 **Mode**
 > 模式是车辆中运行的各个状态机的特定状态集合，这些状态与某个特定实体相关，例如 **SW-C**、**BSW** 模块、应用或整个车辆。在其生命周期内，一个实体在一组互斥的模式之间切换。这些切换由环境数据触发，例如信号接收、操作调用。在**看门狗管理器**的上下文中，一个模式由一组配置选项定义。被监督的**被监督实体**集合可以随模式而变化。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
@@ -845,6 +1021,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Master**
 > 主。分布式 BSW 模块中协调卫星请求、并可过滤或监控进入的卫星请求的部分。
 > 来源：[BSW 分布指南](general/bsw_distribution_guide/index.md)（AUTOSAR_CP_EXP_BSWDistributionGuide · R23-11）
+**MS**
+> 里程碑（**Milestone**）
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
+
+**MSTP**
+> 微控制器特定测试包（**Microcontroller Specific Test Package**）
+> 来源：[AUTOSAR 功能安全措施概览](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures · R23-11）
+
 ## N
 
 **N-PDU**
@@ -861,6 +1045,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **NOP, nop**
 > 空操作（**Null Operation**）
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
+
+**NVH**
+> 噪声、振动、平顺性（**Noise, Vibration, Harshness**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
 
 **NVRAM**
 > 非易失性 RAM（**Non-Volatile RAM**）
@@ -883,6 +1071,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > Object Descriptor Table —— 对象描述表。
 > 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
+**OD**
+> 乘员检测（**Occupant Detection**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
 **Off-Mode**
 > 看门狗硬件被禁用/关闭。这样做可能是为了关闭整个 **ECU**，而不遭受仍在运行的外部看门狗的周期性复位。对于安全关键系统，该模式可能不被允许。在这种情况下，必须将 **Wdg** 模块配置为禁止切换到此模式。
 > 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
@@ -891,10 +1083,34 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 对象标识符（**Object Identifier**）。
 > 来源：[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager · R23-11）
 
+**OOP**
+> 离位（**Out Of Position**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**OPC**
+> 乘员预处理（**Occupant Pre Conditioning**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
 **Operation**
 > 操作：加密原语的操作声明应执行加密原语的哪一部分，共有 **START**、**UPDATE**、**FINISH** 三种操作模式；通过拼接操作模式参数的相应位可以一次执行多个操作。
 > 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver · R23-11）
 > 来源：[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface · R23-11）
+
+**OPS**
+> 乘员与行人安全（**Occupant and Pedestrian Safety**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**OPSS**
+> OPS 系统（**OPS Systems**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**ORA**
+> 乘员约束激活（**Occupant Restraint Activation**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**ORTI**
+> OSEK 运行时接口——针对 OSEK 平台将跟踪工具对 OS 内部的访问标准化的标准（**OSEK Run-Time Interface**）
+> 来源：[AUTOSAR 运行时接口（ARTI）](sw_arch/arti/index.md)（AUTOSAR_CP_EXP_ARTI · R23-11）
 
 **OSEK/VDX**
 > 1993 年 5 月，**OSEK** 作为德国汽车工业的一个联合项目创立，旨在为车辆内分布式控制单元的开放式架构建立一个行业标准。**OSEK** 是德语术语「Offene Systeme und deren Schnittstellen für die Elektronik im Kraftfahrzeug」（英语：Open Systems and the Corresponding Interfaces for Automotive Electronics）的缩写。初始项目合作伙伴为 **BMW**、**Bosch**、**Daimler Chrysler**、**Opel**、**Siemens**、**VW** 以及作为协调方的卡尔斯鲁厄大学 **IIIT**。法国汽车制造商 **PSA** 和 **Renault** 于 1994 年加入 **OSEK**，引入了他们的 **VDX**（**Vehicle Distributed eXecutive**）方案——法国汽车工业内的一个类似项目。在 1995 年 10 月的第一次研讨会上，**OSEK/VDX** 小组展示了 **OSEK** 与 **VDX** 之间协调一致的规范成果。1997 年 10 月第 2 届国际 **OSEK/VDX** 研讨会之后，发布了规范的第二版。
@@ -916,9 +1132,33 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 通过聚合访问存储页面来提高性能。在存储设备技术支持物理分段的情况下，一些存储设备可以提供一次读取或写入多个页面的优化访问方式。页面突发（**Page Burst**）表示用于访问优化的存储页面聚合。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
 
+**PCD**
+> 行人碰撞检测（**Pedestrian Crash Detection**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**PCP**
+> 行人碰撞预测（**Pedestrian Crash Prediction**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**PDC**
+> 泊车距离控制（**Park Distance Control**）
+> 来源：[HMI/多媒体/远程信息处理域应用接口](application_interfaces/hmi/index.md)（AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics · R23-11）
+
+**POD**
+> 俯仰翻覆碰撞检测（**Pitchover Crash Detection**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
 **Port-Interface**
 > 端口接口。定义提供或要求该接口的端口必须履行的契约；AUTOSAR 支持客户端-服务器、发送者-接收者、参数、非易失性数据、触发与模式切换六种端口接口。
 > 来源：[虚拟功能总线（VFB）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB · R23-11）
+
+**PPA**
+> 行人保护执行器激活（**Pedestrian Protection Actuator Activation**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**PPP**
+> 行人保护系统预处理（**Pedestrian Protection system Pre conditioning**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
 
 **Prototype**
 > 原型。组件类型在一个组合（Composition）中的使用；组合经由相互连接的原型定义。
@@ -969,7 +1209,35 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface · R23-11）
 
 
+**Proxy Module**
+> 替代应用软件集群中一个 BSW 模块的模块，拆分为高代理与低代理（**Proxy Module**）
+> 来源：[软件集群设计与集成指南](system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline · R23-11）
+
+**PTC**
+> 动力总成协调器（**Powertrain Coordinator**）
+> 来源：[动力总成（发动机）域应用接口](application_interfaces/powertrain/index.md)（AUTOSAR_CP_EXP_AIPowertrain · R23-11）
+
 ## R
+
+**RA**
+> 后轴（**Rear Axle**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**ROD**
+> 翻滚碰撞检测（**Rollover Crash Detection**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**RSC**
+> 侧翻稳定控制（**Roll Stability Control**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**RSM**
+> 约束系统监测（**Restraint System Monitoring**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**RSP**
+> 约束系统预处理（**Restraint System Pre conditioning**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
 
 **Runnable**
 > 可运行体。原子软件组件实现中的一段可由 RTE 启动的指令序列；在任务的上下文中运行。
@@ -1043,6 +1311,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 采样时间是指对模拟值进行采样的时间（例如：加载电容器，……）
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
 
+**SBR**
+> 安全带提醒（**Seat Belt Reminder**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
 **SC**
 > 监督周期（**Supervision Cycle**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
@@ -1079,6 +1351,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 发送方-接收方通信涉及原子数据元素组成的信号的发送和接收，这些原子数据元素由一个组件发送给另一个或多个组件。发送方-接收方接口可以包含多个数据元素。发送方-接收方通信是单向的 接收方发送的任何回复都可以视为一个单独的发送方-接收方通信。接收方组件的端口可以读取接口描述定义的数据元素，而提供方组件的端口可以按照接口描述定义写入数据元素。
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
 
+**SEooC**
+> 脱离语境的安全要素（**Safety Element out of Context**）
+> 来源：[AUTOSAR 功能安全措施概览](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures · R23-11）
+
 **Sequence**
 > 序列：若干个待传输的连续作业，但可以使用优先级机制在作业之间重新调度；序列传输是否可被中断取决于静态配置。
 > 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver · R23-11）
@@ -1114,9 +1390,21 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 发送方/接收方（**Sender/Receiver**）
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
 
+**SP**
+> 传感器池（**Sensor Pool**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**SPEM**
+> 软件过程工程元模型（**Software Process Engineering meta-model**）
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
+
 **SPI**
 > 串行外设接口（**Serial Peripheral Interface**）
 > 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
+
+**SR**
+> 态势识别（**Situation Recognition**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
 
 **SRC**
 > 监督参考周期（**Supervision Reference Cycle**）
@@ -1130,6 +1418,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **STIM**
 > Data Stimulation packet —— 数据激励包。
 > 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
+
+**SRS**
+> 安全约束系统（**Safety Restraint System**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**SSM**
+> 静止管理（**Stand Still Manager/Management**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
 
 **Sub Address Area**
 > 子地址区（**Sub Address Area**）是指逻辑地址空间中的连续存储区域，并映射到一个存储设备的一个扇区批次（**Sector Batch**）。
@@ -1155,6 +1451,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > **存活监督**用于执行已计数**存活指示**检查所使用的**监督周期**数量（对每个**被监督实体**分别确定），并且依赖于模式。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 
+**SVN**
+> Subversion（版本控制系统）（**Subversion**）
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
+
 **SW**
 > 软件（**Software**）
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver · R23-11）
@@ -1176,6 +1476,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SWS**
 > Software Specification —— 软件规范。
 > 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
+
+**SwClu**
+> 软件集群——将在一台机器上部署软件相关的所有 AUTOSAR 产物分组在一起的独立构建单元（**Software Cluster**）
+> 来源：[软件集群设计与集成指南](system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline · R23-11）
+
+**SwCluC**
+> 软件集群连接（**Software Cluster Connection**）
+> 来源：[软件集群设计与集成指南](system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline · R23-11）
+
+**SWCo**
+> 软件组合（**Software Composition**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
 
 **Symbolic name**
 > ECU信号的符号名称（**Symbolic name**）在**I/O**硬件抽象模块中是用来建立链接的。（包括：功能、引脚等）
@@ -1201,6 +1513,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **TCP**
 > Transmission Control Protocol —— 传输控制协议。
 > 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
+
+**TCS**
+> 牵引力控制系统（**Traction Control System**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
 
 **test interval**
 > **CoreTest** 测试间隔：在配置为构成一个完整内核测试的硬件资源上（后台模式下执行的）所有部分测试的总和。
@@ -1267,8 +1583,40 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > Uniform Resource Locator —— 统一资源定位符。
 > 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
+**UI**
+> 用户界面（**User Interface**）
+> 来源：[HMI/多媒体/远程信息处理域应用接口](application_interfaces/hmi/index.md)（AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics · R23-11）
+
 ## V
 
+
+**VB**
+> Visual Basic
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
+
+**VCD**
+> 车辆碰撞检测（**Vehicle Crash Detection**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**VCP**
+> 车辆碰撞预测（**Vehicle Crash Prediction**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**VGR**
+> 可变传动比（**Variable Gear Ratio**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**VH**
+> 变型处理概念（**Variant Handling concept**）
+> 来源：[乘员与行人安全系统域应用接口](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**VLC**
+> 车辆纵向控制（**Vehicle Longitudinal Control**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**VM**
+> 车辆模型（**Vehicle Model**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
 
 **VMC**
 > 车辆运动控制（**Vehicle Motion Control**）。
@@ -1312,6 +1660,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > With ECU ID —— 带 ECU ID。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
 
+**WP**
+> 工作包（**Work package**）
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
+
 **Write Page**
 > 写入页面（**Write Page**）是指存储设备的最小可写单元（以字节为单位）。某些存储设备技术的访问必须考虑物理分段，因此并非所有存储设备技术都支持按字节访问。该术语定义了单次访问所需写入的最小大小。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
@@ -1334,3 +1686,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **XML**
 > 可扩展标记语言（**eXtensible Markup Language**）
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
+
+**XSD**
+> XML 模式定义（**XML Schema Definition**）
+> 来源：[应用接口用户指南](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
+
+## Y
+
+**YRC**
+> 横摆角速度控制（**Yaw Rate Control**）
+> 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
