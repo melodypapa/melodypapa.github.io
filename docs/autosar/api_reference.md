@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **45** 份已有站内文章）。
+共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **49** 份已有站内文章）。
 
 ## A
 
@@ -1372,16 +1372,16 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_CRCLibrary · R23-11
 
 **CryIf_ConfigType**
-> 类型 · 未翻译 · SWS_CryptoInterface · R23-11
+> 类型 · [AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md) · SWS_CryptoInterface · R23-11
 
 **CryIf_KeyElementCopyPartial**
-> 函数 · 未翻译 · SWS_CryptoInterface · R23-11
+> 函数 · [AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md) · SWS_CryptoInterface · R23-11
 
 **CryIf_KeySetInvalid**
-> 函数 · 未翻译 · SWS_CryptoInterface · R23-11
+> 函数 · [AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md) · SWS_CryptoInterface · R23-11
 
 **CryIf_ProcessJob**
-> 函数 · 未翻译 · SWS_CryptoInterface · R23-11
+> 函数 · [AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md) · SWS_CryptoInterface · R23-11
 
 **Crypto_AlgorithmFamilyType**
 > 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
@@ -2115,25 +2115,25 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **Det_ConfigType**
-> 类型 · 未翻译 · SWS_DefaultErrorTracer · R23-11
+> 类型 · [AUTOSAR Default Error Tracer（默认错误跟踪器）](system_services/default_error_tracer/index.md) · SWS_DefaultErrorTracer · R23-11
 
 **Det_GetVersionInfo**
-> 函数 · 未翻译 · SWS_DefaultErrorTracer · R23-11
+> 函数 · [AUTOSAR Default Error Tracer（默认错误跟踪器）](system_services/default_error_tracer/index.md) · SWS_DefaultErrorTracer · R23-11
 
 **Det_Init**
-> 函数 · 未翻译 · SWS_DefaultErrorTracer · R23-11
+> 函数 · [AUTOSAR Default Error Tracer（默认错误跟踪器）](system_services/default_error_tracer/index.md) · SWS_DefaultErrorTracer · R23-11
 
 **Det_ReportError**
-> 函数 · 未翻译 · SWS_DefaultErrorTracer · R23-11
+> 函数 · [AUTOSAR Default Error Tracer（默认错误跟踪器）](system_services/default_error_tracer/index.md) · SWS_DefaultErrorTracer · R23-11
 
 **Det_ReportRuntimeError**
-> 函数 · 未翻译 · SWS_DefaultErrorTracer · R23-11
+> 函数 · [AUTOSAR Default Error Tracer（默认错误跟踪器）](system_services/default_error_tracer/index.md) · SWS_DefaultErrorTracer · R23-11
 
 **Det_ReportTransientFault**
-> 函数 · 未翻译 · SWS_DefaultErrorTracer · R23-11
+> 函数 · [AUTOSAR Default Error Tracer（默认错误跟踪器）](system_services/default_error_tracer/index.md) · SWS_DefaultErrorTracer · R23-11
 
 **Det_Start**
-> 函数 · 未翻译 · SWS_DefaultErrorTracer · R23-11
+> 函数 · [AUTOSAR Default Error Tracer（默认错误跟踪器）](system_services/default_error_tracer/index.md) · SWS_DefaultErrorTracer · R23-11
 
 **Dio_ChannelGroupType**
 > 类型 · [AUTOSAR DIO Driver（数字输入输出驱动）](io/dio_driver/index.md) · SWS_DIODriver · R23-11
@@ -4199,7 +4199,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 **General**
 > 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
 > 函数 · 未翻译 · SWS_TcpIp · R23-11
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 > 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
 **GetApplicationID**
@@ -4706,79 +4706,79 @@ title: "AUTOSAR API 清单（函数与类型）"
 ## K
 
 **KeyM_CertDataPointerType**
-> 类型 · 未翻译 · SWS_KeyManager · R23-11
+> 类型 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_CertElementGet**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_CertElementGetByIndex**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_CertElementGetCount**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_CertElementGetFirst**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_CertElementGetNext**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_CertElementIteratorType**
-> 类型 · 未翻译 · SWS_KeyManager · R23-11
+> 类型 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_CertGetStatus**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_ConfigType**
-> 类型 · 未翻译 · SWS_KeyManager · R23-11
+> 类型 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_CryptoKeyIdType**
-> 类型 · 未翻译 · SWS_KeyManager · R23-11
+> 类型 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_Deinit**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_Finalize**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_GetCertificate**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_GetVersionInfo**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_Init**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_KH_UpdateOperationType**
-> 类型 · 未翻译 · SWS_KeyManager · R23-11
+> 类型 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_Prepare**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_ServiceCertificate**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_SetCertificate**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_Start**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_Update**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_Verify**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_VerifyCertificate**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_VerifyCertificateChain**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **KeyM_VerifyCertificates**
-> 函数 · 未翻译 · SWS_KeyManager · R23-11
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 ## L
 
@@ -5995,43 +5995,43 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · 未翻译 · SWS_SOMEIPTransformer · R23-11
 
 **Spi_AsyncTransmit**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_Cancel**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_DeInit**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_GetHWUnitStatus**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_GetJobResult**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_GetSequenceResult**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_GetStatus**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_Init**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_ReadIB**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_SetAsyncMode**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_SetupEB**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_SyncTransmit**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **Spi_WriteIB**
-> 函数 · 未翻译 · SWS_SPIHandlerDriver · R23-11
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **SpinlockIdType**
 > 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
