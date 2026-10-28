@@ -135,6 +135,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 复杂驱动（**Complex Driver**）。未被 AUTOSAR 标准化的软件实体，可以访问 AUTOSAR 接口和/或基础软件模块 API，或经由它们被访问；位于分层软件架构的复杂驱动层。
 > 来源：[CDD 设计与集成指南](general/cdd_design_and_integration/index.md)（AUTOSAR_CP_EXP_CDDDesignAndIntegrationGuideline · R23-11）
 
+**Crypto Primitive**
+> 加密原语。在加密驱动对象中实现的一个已配置加密算法的实例。
+> 来源：[加密服务使用指南](crypto/utilization_of_crypto_services/index.md)（AUTOSAR_CP_EXP_UtilizationOfCryptoServices · R23-11）
+
+**Crypto Driver Object**
+> 加密驱动对象。一个加密驱动实现一个或多个加密驱动对象；每个对象可提供不同加密原语，且只有一个工作区（同一时刻只能执行一个加密原语）。
+> 来源：[加密服务使用指南](crypto/utilization_of_crypto_services/index.md)（AUTOSAR_CP_EXP_UtilizationOfCryptoServices · R23-11）
+
 ## C
 
 **Callback**
@@ -523,6 +531,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 在使用中的监控性能比（**In-Use-Monitor Performance Ratio**）。
 > 来源：[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager · R23-11）
 
+
+**Job**
+> 作业。一个已配置的加密原语与一个被引用的密钥的组合；不包含实际密钥数据本身。
+> 来源：[加密服务使用指南](crypto/utilization_of_crypto_services/index.md)（AUTOSAR_CP_EXP_UtilizationOfCryptoServices · R23-11）
 
 ## J
 
