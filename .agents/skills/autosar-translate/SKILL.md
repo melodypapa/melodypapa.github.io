@@ -135,6 +135,16 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
 
 ## Step 5 — Translate in place
 
+- **The main session does the translating — never a subagent** (user
+  decision 2026-10-28): article text is written by the session running this
+  skill, sequentially, no matter how large the source. The giant-source
+  pattern of segmenting a long document by line range across parallel
+  subagent writers (RTE/OS runs, 2026-10-25/26) is retired. Read-only
+  subagent use (gap analysis, censuses, verification) is not forbidden — but
+  a subagent dispatch never produces translated article text: split writers
+  cannot carry one terminology, one numbering scheme and the in-place
+  insertion discipline across segments, and provider concurrency caps have
+  repeatedly blocked dispatches mid-run.
 - Existing translated content is never rewritten; fill gaps only, inserting
   at the position where the source has them.
 - Faithful translation of the standard's own wording — not a summary in your
@@ -696,3 +706,4 @@ open.
 | Realigning only the measurable chapters (ch.2/§3/API/new ch.8-9) and leaving a pre-existing §6 with legacy internal structure — the ADC article carried a topical 6.1.x layout under R23-11's Background-&-Rationale/Requirements convention, and its source 7.3 State Diagrams were never translated (found 2026-10-25) | The chapter-level coverage map passes while the body diverges from the source's structure; embedded diagram chapters get skipped as "figures" | Phase B: internal-structure verification per pre-existing chapter (see Coverage map); a realignment that cannot verify internal structure says so in its gate evidence |
 | Writing a rule as Phase B prose without a mechanical trigger (potential-links lived as a Phase B bullet for six runs — dio/port/pwm/ocu/icu/ecu/bswm — and was never executed once; its own "user decision" semantics made doing nothing always compliant) | Codified rules that only a gate presentation could surface get dropped when presentations lengthen; the omission is invisible in a deviations-framing | Any new rule gets (a) a tick-box in the step it executes in, and/or (b) a mechanical counter whose zero-output is explicit. Test rules at RUN level ("did a full sync execute it?"), not comprehension level |
 | Trusting the article-side link inference as complete (2026-10-27 EcuM analysis: six §8.8 service-interface data types with 42 source hyperlinks had no anchor and were invisible to every census because the defs collection only sees identifier-titled headings; the same census found 图7.15/7.17 and 表7.9 referenced but captionless) | Silent under-linking and dropped-figure gaps that no article-only check can detect — the heuristic can only confirm what the article already contains | Check 9 runs `--list --pdf` whenever the source PDF exists: the PDF's own named destinations are the ground truth; anchor-less/ABSENT targets and no-caption figures are reported per run (report-only — new applied classes remain user decisions) |
+| Delegating translation to subagents — the RTE/OS runs segmented giant sources by line range across parallel writer agents (2026-10-25/26), and provider concurrency caps repeatedly blocked dispatches mid-run | Split writers cannot carry one terminology, one numbering scheme and the in-place insertion discipline across segments; a capped dispatch stalls the run with half-translated segments; the queue-row ticks and user decisions live in the main session, not in the writers | Step 5 rule 1: the main session translates sequentially; subagent dispatches never write article text (user decision 2026-10-28) |
