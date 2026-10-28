@@ -7,13 +7,21 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 
 ## Queue
 
-- [ ] exp layered_software_architecture (AUTOSAR_EXP_LayeredSoftwareArchitecture · General · ❌ new article · 📖 skeleton-exempt)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] exp layered_software_architecture (AUTOSAR_CP_EXP_LayeredSoftwareArchitecture · General · ❌ new article · 📖 skeleton-exempt)
+  - Note: source is a 183-page slide deck — R23-11 conversion flattens every slide title to `##`; the article's numbered structure (## 1. Architecture with 1.1–1.8, ## 2. Configuration, ## 3. Integration and Runtime Aspects with 3.1–3.10) is taken from the deck's own master TOC slide (PDF p8); slides become unnumbered #### sub-headings merged into their TOC sections
+  - Note: doc-meta chrome dropped (change-history tables, disclaimer, TOC slides) per guide_to_mode_management precedent
+  - Note: figures — 144 content diagrams copied as Figure01–140.png (content-hash dedupe), 213 deco refs dropped (4 recurring strips + ~25 inline icons ≤90px); Layer Interaction Matrix and the memory-modules table + PDU/SDU naming table were glyph-garbled or column-shifted in the conversion — marks/cells recovered from the source PDF pages 80/86/96 (✓/✗/Δ transcribed visually)
+  - Note: source has the Memory Hardware Abstraction slide twice (2nd with draft marker) — merged into one section, both example figures kept
+  - Note: census (--list): identifier links 0 (no API chapter); 1 chapter-number ref applied (3.4 节); 6 参见 lines report-only; prose [2] at config-classes list is a list reference, not a citation — left prose (UNRESOLVED by design); cross-article mentions report-only (BswM/EcuM/NvM/SoAd/Dem/Dcm SITE-class candidates — batch-gate decision); --pdf: source PDF has 0 annotations (slide deck), nothing to restore
+  - Note: glossary +6 terms (PCI, PNC, ICC, VFC new; PDU/SDU +来源 line)
+  - Note: check_api_sync N/A (EXP guide, no API chapter); gen_api_list --check clean
+  - Note: Step 5 N/A: waived, batch confirmation gate 2026-10-28
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (N/A: waived, batch confirmation gate 2026-10-28)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] exp vfb (AUTOSAR_EXP_VFB · General · ❌ new article · 📖 skeleton-exempt)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
