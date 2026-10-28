@@ -10,55 +10,37 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
 
 - [ ] can_network_management (SWS_CANNetworkManagement · R23-11 markdown · ✅ alignment only)
   - Note: 7.3 "周期函数" → "调度函数"
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-28 gap analysis — the ✅ is stale (pre-Type-A census); real gaps vs R23-11: §3.1 heading "输入文件"→"输入文件和相关标准与规范" + registry rebuild (old 11-entry pre-R23-11 list → source 14 entries, numbering shifted ⇒ all prose [n] citations remapped old→new: 1→6, 2→1, 3→7, 4→5, 5→13, 6→10, 7→2, 8→8, 9→14, 10→4, 11→9); ch.2 legacy 2.1/2.2 split collapsed, terms table −2 legacy rows ("NM-Timeout Timer", "PN过滤遮罩") +1 missing row (Immediate Transmission Confirmation); §5 missing 5.1/5.1.1/5.1.2/5.2 + Figure 5.1; §6.6 renders source Tables 7.1/7.2 as images Figure7_1/7_2 (retired tables-as-images) → GFM; §6.11.3 region renders Table 7.3 as images Figure7-3/7-4 → GFM; §6 missing source 7.14 (7.14.1–7.14.5) / 7.15 / 7.17 / 7.18; §7 legacy layout (7.1 函数定义/7.2 Callback通知/7.3 周期函数) → house shape 7.1–7.7, missing source 8.1/8.2/8.3.20–22/8.6/8.7; source ch.9 → new §8 时序图 (Figure9-1/9-2 move here from 6.7, new Figure9-3 from image_000078 829x1161); source ch.10 → new §9 配置规范 (~1100 src lines, SWS 条目 cells filled [ECUC_CanNm_*] per EcuM/Mcu precedent); appendix A Examples → new §10 示例; appendix B + ch.6 = droppable (compliance)
+  - [x] Step 1 — Source resolution + gap analysis
+  - Note: 2026-10-28 run — §6.11 restructured: R23-11 completed (Rx/Tx handling requirements + new 6.11.6 Internal Requested Clusters + Table 7.3); legacy 6.11.3 过滤算法 / 6.11.4 EIRA / 6.11.5 ERA subsections are ABSENT from R23-11 (moved to SWS_NetworkManagementInterface) and kept in place pending user decision (can_driver bespoke-chapters precedent); Figure7-3/7-4 (legacy example) kept with them. §6.6 Tables 7.1/7.2 → GFM (images Figure7_1/7_2 deleted); Figure9-1/9-2 moved from 6.7 to §8; Figure 5.1 + Figure 7.1 (UML, rendered from PDF p.46 as Figure7_6.png; md artifact was 344x36 deco) + Figures 10-1 (PDF p.72, md artifact was a 758x91 fragment)/10-2..10-5/Figure9-3/A-1..A-5 extracted. §6.17 timing-summary table keeps SWS ids as inline-code data (appendix-B-style exception, recorded here). Legacy-fidelity decisions deferred to gate: §4.1 keeps 4 legacy items vs source 3 (content-equal, legacy split); ch.2 dropped rows NM-Timeout Timer/PN过滤遮罩, added Immediate Transmission Confirmation. link_candidates --apply: 52 lines (18 citation + 14 registry anchors + 2 chapter-ref + identifier/error-code); idempotent. PDF census: registry MATCH on all [n]; count-diffs (10 functions, source links −1/-2 vs mentions) explained by service-table cells folded into 说明 per house format; ABSENT "CanNm development/runtime error" targets = the dropped [SWS_CanNm_00316/317] ID-headings of 6.14.1/6.14.2; anchor-less report-only targets (Nm_*/PduR_*/Det_*/config params) queued as candidates. Steps 5/6 run post-commit per user instruction (commit first, combined confirmation after)
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [ ] Step 6 — TODO.md row + commit/PR — commit pushed; PR #139, tracking issue #138
 - [ ] udp_network_management (SWS_UDPNetworkManagement · R23-11 markdown · ✅ alignment)
   - Note: WeChat footer `##` → `<section id="wechat">`+`<h4>`; acronym chapter table → blockquotes and restore the row set (source 26 → article 12)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-28 run — footer fixed; ch.2 rebuilt flat (15 acronyms + 10 terms = 25 entries; census note said 26, actual table rows 25); §3.1 rebuilt to R23-11 10 entries (legacy 25-entry pre-R23-11 list + legacy §3.2 相关标准和规范 [24][25] dropped — not in R23-11, user veto possible at gate); §4.2 汽车域的适用性 added (source N/A); §5.1/5.1.1/5.2 added; legacy 250-node paragraph in §4.1 kept (absent from R23-11, pending user decision); §6 completed: new 6.8.6 Internal Requested Clusters (legacy filter/EIRA/ERA 6.8.3-6.8.5 kept pending decision, can_driver precedent), new 6.10 API功能需求, 6.12 错误分类 (7.12.1-7.12.5), 6.13, 6.14, 6.15 版本检查, 6.16 参数检查, 6.17 安全事件 (车辆唤醒 6.10→6.11); §7 rebuilt house shape 7.1-7.8: imported types (incl. Std_Types list), 2 types, 22 entries in 函数定义 (incl. source 8.3.22 UdpNm_RepeatMessageIndication — a callback the source numbers under ch.8, kept in place), SoAdIfTriggerTransmit renamed from legacy TriggerTransmit, callbacks 3, scheduled (7.5.1 <Instance Id> with &lt;&gt;), expected/service interfaces, 7.8 UML状态图 (source 8.8, Figure8_1.png from artifacts 863x1041); new §8 时序图和转换表 (source ch.9 title, 9.2 = transition table + figure); new §9 配置规范 (source ch.10, 24+14 params, SWS 条目 cells filled per EcuM/Mcu precedent); new ## B appendix (R23-11 added/changed/deleted items in code fences; source's duplicated 10.2 intro paragraph translated once). link_candidates --apply: 36 lines, idempotent; PDF census registry MATCH on all [n]; appendix B SWS ids live in code fences (sanctioned data exception). Steps 5/6 post-commit per user instruction
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [ ] Step 6 — TODO.md row + commit/PR — commit pushed; PR #139, tracking issue #138
 - [ ] can_driver (SWS_CANDriver · R23-11 markdown · 🔶 alignment)
   - Note: bespoke chapters (术语 / 优先级反转 / CAN 硬件单元) — keep-or-drop is a user decision; acronym blockquotes ✓
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-28 run — the keep-or-drop decision DISSOLVED: R23-11 puts Priority Inversion and CAN Hardware Unit as §2.1/§2.2 of the acronyms chapter; the article's bespoke ch.3/ch.4 moved there (content preserved incl. figures). ch.2 table → blockquotes (16 acronym rows + source order, added ISR/MCAL); §3 registry rebuilt to R23-11 9 entries (legacy 17+4-entry list + ISO/CiA standard entries dropped — R23-11 has NO input-documents chapter, 3.1 = Related specification only, direct translation 「相关规范」); §4.2 renamed; §5 renumbered + 5.1 静态配置/5.5 文件结构 added; §6 renumbered 8.x→6.x, 6.3.6/6.3.7 swapped to source order, new 6.8 selective wakeup, 6.12 error classification (7.12.1–7.12.6), 6.13 CAN FD rewritten to R23-11 text, new 6.14 CAN XL, 6.15 error reporting; §7 rebuilt (10 types, 17 functions in source's 3 service groups, callout, 5 scheduled — source's stray 8.4.2 placed as 7.4.2, unnamed 8.5.1 flattened, source's draft-tagged time-stamp APIs translated without {DRAFT}); §8 时序图 (both subsections = cross-refs, renumbered); §9 配置规范 (20 containers incl. CanTT*/CanXL*, SWS 条目 cells filled). check_api_sync = documented N/A (first grouped-function chapter: script counts source 8.3 group headings as functions); manual verification: 17 source functions (8.3.1.1-.3, 8.3.2.1-.13, 8.3.3.1) ↔ article 7.3.x in order, 10 types ✓, 17 **说明** blocks ✓. link_candidates --apply: 128 lines, idempotent. http://www.can-cia.org curl-checked 200. Steps 5/6 post-commit per user instruction
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [ ] Step 6 — TODO.md row + commit/PR — commit pushed; PR #139, tracking issue #138
 - [ ] can_transceiver_driver (SWS_CANTransceiverDriver · R23-11 markdown · 🔶 alignment)
   - Note: ch.1 "介绍" → "简介和功能概述"
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] ethernet_driver (SWS_EthernetDriver · R23-11 markdown · 🔶 alignment)
-  - Note: unify legacy heading terms; 4.2 "对汽车领域的适用性" → "汽车域的适用性"
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] lin_driver (SWS_LINDriver · R23-11 markdown · 🔶 alignment)
-  - Note: unify legacy heading terms; acronym chapter table → blockquotes and restore the row set (source 40 → article 26, 14 rows missing)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] can_interface (SWS_CANInterface · R23-11 markdown · ⚠️ missing API chapter)
-  - Note: one of the "6 articles missing only the API chapter"; 4.2 "对汽车领域的适用性" → "汽车域的适用性"
-  - [ ] Step 1 — Source resolution + gap analysis
+  - Note: 2026-10-28 gap analysis — real gaps: §1 heading rename; +§1.3 单线CAN收发器 (SAE J2411, not supported); ch.2 row set (source 18 rows, article 16 — add n/a + API); §3 registry rebuild to R23-11 (6 entries); §4.2 add; §5 rebuild to source (dependency table + 5.1.1 file table); §6 +6.6 错误分类 (7.6.1-7.6.5), renumber 6.6→6.7..6.9→6.10, +6.11 CAN XL, +6.12 安全事件; §7 rebuild house shape (8.1 imported types, 8.2 six type definitions, functions 8.3.1-8.3.15, 8.4 scheduled 2 main functions, 8.5 callbacks, 8.6 expected interfaces x3); new §8 时序图 (source ch.9: intro + 4 subsections; real figures image_000055/57/59/61/63, cad1/f5f4 deco); new §9 配置规范 (source ch.10: 12 containers); new ## B appendix (R23-11 added/changed items). Appendix A = NA requirements (droppable)
+  - Note: 2026-10-28 run progress — §1 renamed + §1.3 added; ch.2 +n/a/API rows (18 entries, source order); §3 rebuilt to R23-11 6 entries; §4.2 added; §5 rebuilt to source (dependency table + 5.1.1 file table); §6 +6.6 错误分类 (7.6.1-7.6.5 incl. CANTRCV_E_BUS_ERROR extended-production table), 6.7-6.10 renumber, +6.11 CAN XL, +6.12 安全事件; §7 restructured to house shape (7.1 imported types 16 rows, 7.2 six type definitions, 7.3 existing 15 functions renumbered, 7.4 callbacks none, 7.5 scheduled = moved 2 main functions, 7.6 expected interfaces 2+15+0 rows; an extrapolated Spi-row error was caught against source and fixed with the real Spi_GetStatus/ReadIB/SetupEB/SyncTransmit/WriteIB rows). STILL OPEN: per-function requirement-body enrichment (15 one-liner entries vs source requirement paragraphs), §8 时序图, §9 配置规范 (12 containers), ## B appendix
+  - [x] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
