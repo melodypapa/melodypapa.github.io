@@ -9,31 +9,31 @@ release: R23-11
 
 ## 参考文献
 
-[1] Software Component Template
+<a id="ref-1"></a>[1] Software Component Template
 > AUTOSAR_CP_TPS_SoftwareComponentTemplate
 
-[2] Meta Model
+<a id="ref-2"></a>[2] Meta Model
 > AUTOSAR_FO_MMOD_MetaModel
 
-[3] Basic Software Module Description Template
+<a id="ref-3"></a>[3] Basic Software Module Description Template
 > AUTOSAR_CP_TPS_BSWModuleDescriptionTemplate
 
-[4] Specification of Basic Software Mode Manager
+<a id="ref-4"></a>[4] Specification of Basic Software Mode Manager
 > AUTOSAR_CP_SWS_BSWModeManager
 
-[5] Specification of Diagnostic Communication Manager
+<a id="ref-5"></a>[5] Specification of Diagnostic Communication Manager
 > AUTOSAR_CP_SWS_DiagnosticCommunicationManager
 
-[6] Glossary
+<a id="ref-6"></a>[6] Glossary
 > AUTOSAR_FO_TR_Glossary
 
 ## 1. 介绍
 
 本文档主要是针对**AUTOSAR 4.0.3**及以后版本的模式管理的通用介绍。主要目的是为**AUTOSAR**的用户和开发人员提供基于示例的**AUTOSAR**模式管理不同方面的详细概述。概述会和相关示例相结合的一起解释。本文档中的代码清单共同构成了一个示例**ECU**（**sample ECU**）的配置。
 
-第**2**章节解释了基础的模式管理概念，例如：模式概述，模式切换的实现，模式管理器和模式用户的这些角色等。其次介绍了应用程序模式管理（**Application Mode management**）与基础软件模式管理（**Basic Software Mode management**）密切相关的依赖关系。
+第[**2**](#2-总体机制和概念)章节解释了基础的模式管理概念，例如：模式概述，模式切换的实现，模式管理器和模式用户的这些角色等。其次介绍了应用程序模式管理（**Application Mode management**）与基础软件模式管理（**Basic Software Mode management**）密切相关的依赖关系。
 
-**BswM**是**AUTOSAR R4.0**中的中央模式管理模块（**central mode management module**），它是高度可配置的。如何实现这种配置是第3章节的主题。
+**BswM**是**AUTOSAR R4.0**中的中央模式管理模块（**central mode management module**），它是高度可配置的。如何实现这种配置是第[3](#3-基础软件模式管理器的配置)章节的主题。
 
 ### 1.1. 后续工作
 
@@ -48,7 +48,7 @@ release: R23-11
 
 ## 2. 总体机制和概念
 
-本章节概述了模式的概念以及**AUTOSAR**中有关状态的简短定义。术语模式和状态的定义可以在第**4.1**章节中找到。模式可以看作是一个**ECU**范围的全局变量的当前状态（在**R4.0**中，该范围限于单个分区（**Partition**））。它由**RTE**或调度管理器维护。一个模式可能的取值（**possible assignments**）在**ModeDeclarationGroups**中定义，而**ModeDeclarationGroups**定义于**AUTOSAR**软件组件模板[1]中。
+本章节概述了模式的概念以及**AUTOSAR**中有关状态的简短定义。术语模式和状态的定义可以在第[**4.1**](#41-技术术语)章节中找到。模式可以看作是一个**ECU**范围的全局变量的当前状态（在**R4.0**中，该范围限于单个分区（**Partition**））。它由**RTE**或调度管理器维护。一个模式可能的取值（**possible assignments**）在**ModeDeclarationGroups**中定义，而**ModeDeclarationGroups**定义于**AUTOSAR**软件组件模板[\[1\]](#ref-1)中。
 
 模式可以用于不同的目的：
 
@@ -57,9 +57,9 @@ release: R23-11
 
 ### 2.1. 声明模式
 
-AUTOSAR软件组件模板[1]定义了一种用于描述**AUTOSAR**中模式的通用机制。模式通过模式声明（**ModeDeclaration**）来定义。一个模式声明表示全局变量当前状态的一种可能取值。例如：在**ECU**状态管理中，可能存在**STARTUP**、**RUN**、**POST_RUN**、**SLEEP**等模式声明。
+AUTOSAR软件组件模板[\[1\]](#ref-1)定义了一种用于描述**AUTOSAR**中模式的通用机制。模式通过模式声明（**ModeDeclaration**）来定义。一个模式声明表示全局变量当前状态的一种可能取值。例如：在**ECU**状态管理中，可能存在**STARTUP**、**RUN**、**POST_RUN**、**SLEEP**等模式声明。
 
-模式声明组（**ModeDeclarationGroup**）将多个模式声明分组在一起，其方式类似于枚举（**enumeration**）将字面量（**literal**）分组。在上面的示例中，模式声明组可以是**ECUMODE**。对于每个模式声明组，都必须定义一个初始模式（**InitialMode**），该初始模式在启动时被赋值给该变量。图2.1展示了**AUTOSAR**元模型（**Metamodel**）[2]中模式声明、模式声明组和可执行实体之间关系的摘录。
+模式声明组（**ModeDeclarationGroup**）将多个模式声明分组在一起，其方式类似于枚举（**enumeration**）将字面量（**literal**）分组。在上面的示例中，模式声明组可以是**ECUMODE**。对于每个模式声明组，都必须定义一个初始模式（**InitialMode**），该初始模式在启动时被赋值给该变量。图2.1展示了**AUTOSAR**元模型（**Metamodel**）[\[2\]](#ref-2)中模式声明、模式声明组和可执行实体之间关系的摘录。
 
 ![Figure2-1](Figure2-1.png)
 
@@ -85,7 +85,7 @@ AUTOSAR运行环境（**RTE**）实现了模式的概念。为此，它会为每
 
 基础软件调度器（**BSW Scheduler**）为基础软件模块提供了与**RTE**为软件组件所提供的类似的模式通信机制。如果基础软件模块在其基础软件模块描述中将一个模式声明组原型提供为**providedModeGroup**，则基础软件调度器会实例化一个模式机实例。因此，会为该基础软件模块提供一个**SchM_Switch** **API**，使其能够发起模式切换。模式用户必须将该模式声明组原型引用为**requiredModeGroup**，并将获得一个用于读取当前活动模式的**SchM_Mode** **API**。基础软件模块之间的模式请求可以直接通过函数调用进行通信。
 
-对于作为模式用户的基础软件模块，获知模式切换的另一种可能性是注册一个**BSW**模块条目（**BSW Module Entry**），该条目由模式切换事件（**Mode Switch Event**）触发（另请参阅[3]）。
+对于作为模式用户的基础软件模块，获知模式切换的另一种可能性是注册一个**BSW**模块条目（**BSW Module Entry**），该条目由模式切换事件（**Mode Switch Event**）触发（另请参阅[\[3\]](#ref-3)）。
 
 ### 2.5. 模式通信
 
@@ -129,7 +129,7 @@ AUTOSAR运行环境（**RTE**）实现了模式的概念。为此，它会为每
 
 目前，**AUTOSAR**有一个约束：只有本地软件组件才允许与服务组件（**ServiceComponent**）通信。因此，软件组件无法从远程（例如：基础软件模式管理器）请求模式。为了克服这一限制，**AUTOSAR Release 4.0**引入了所谓的**ServiceProxySwComponentType**。图2.4描绘了这一概念。
 
-对于应用软件和**RTE**而言，**ServiceProxySoftwareComponentType**的行为类似于一个"普通的"**AtomicSwComponentType**，但它实际上是一个**AUTOSAR**服务的代理。这意味着一方面，它必须通过服务端口与它所代表的**ECU**本地的**ServiceSwComponentType**通信；另一方面，它必须向**ApplicationSwComponentType**提供相应的端口原型。在元模型中，除了类不同之外，**ServiceProxySwComponentType**与**ApplicationSwComponentType**没有区别。作为代理满足语义所施加的限制是实现者的责任。**ServiceProxySwComponentType**与**ApplicationSwComponentType**的主要区别在于系统层面：**ServiceProxySwComponentType**的一个原型可以被映射到多个**ECU**，即使它在**VFB**系统中只出现一次，因为这样的原型在每个**ECU**上都是必需的，在那里它需要寻址一个本地的**ServiceSwComponentType**。由此导致的结果是，**ServiceProxySwComponentType**只能通过网络接收信号，而不能发送信号（另请参阅[1]）。
+对于应用软件和**RTE**而言，**ServiceProxySoftwareComponentType**的行为类似于一个"普通的"**AtomicSwComponentType**，但它实际上是一个**AUTOSAR**服务的代理。这意味着一方面，它必须通过服务端口与它所代表的**ECU**本地的**ServiceSwComponentType**通信；另一方面，它必须向**ApplicationSwComponentType**提供相应的端口原型。在元模型中，除了类不同之外，**ServiceProxySwComponentType**与**ApplicationSwComponentType**没有区别。作为代理满足语义所施加的限制是实现者的责任。**ServiceProxySwComponentType**与**ApplicationSwComponentType**的主要区别在于系统层面：**ServiceProxySwComponentType**的一个原型可以被映射到多个**ECU**，即使它在**VFB**系统中只出现一次，因为这样的原型在每个**ECU**上都是必需的，在那里它需要寻址一个本地的**ServiceSwComponentType**。由此导致的结果是，**ServiceProxySwComponentType**只能通过网络接收信号，而不能发送信号（另请参阅[\[1\]](#ref-1)）。
 
 ![Figure2-4](Figure2-4.png)
 
@@ -201,7 +201,7 @@ AUTOSAR运行环境（**RTE**）实现了模式的概念。为此，它会为每
 BswM_CanSM_CurrentState( NetworkHandleType Network, CanSM_BswMCurrentStateType CurrentState )
 ```
 
-的调用，需要根据标识事件发生通道的参数**Network**映射到不同的模式请求端口。参数**CurrentState**则包含被请求的模式。由**BswM**标准化接口定义的模式请求将在3.2.2.2节中更详细地描述。
+的调用，需要根据标识事件发生通道的参数**Network**映射到不同的模式请求端口。参数**CurrentState**则包含被请求的模式。由**BswM**标准化接口定义的模式请求将在[3.2.2.2](#3222-由bswm标准化接口定义的模式请求端口)节中更详细地描述。
 
 2. 由**SenderReceiverInterface**类型化的**RPort**（**BswMSwcModeRequest**）：对于此类型的每个容器，**BswM**必须在其服务组件描述中创建一个对应的**RPort**。
 3. 由**ModeSwitchInterface**类型化的**RPort**（**BswMSwcModeNotification**）：对于此类型的每个容器，**BswM**必须在其服务组件描述中创建一个对应的**RPort**。由于它由**ModeSwitchInterface**类型化，**BswM**作为该模式机实例的模式用户，会在模式管理器执行**rte_switch**时获得通知。
@@ -647,7 +647,7 @@ switchport EcuMode { modeSwitchinterface MSIF_EcuMode }
 
 **ModeControlContainer**容器包含这些动作列表。一个动作列表可以由一组原子动作、其他"嵌套的"动作列表组成，也可以引用（嵌套的）规则，这些规则会在该动作列表的上下文中被评估。
 
-下面的示例展示了一个简单的规则，它激活专用**CAN**通道的**I-PDU**组。根据此规则，**BswM**必须提供一个名为**Can1_Indication**的**CanSMIndication**类型的模式请求端口。这是一个来自基础软件模块的模式请求，在此例中来自**CAN**状态管理器。在代码中，此模式请求端口对应于[4]中[SWS_BswM_00049]所描述的**API BswM_CanSM_CurrentState**。**source**参数标识此模式请求源端口所属的网络。由**BswM**的配置工具负责为所引用的**ECUC**容器分配**API**所需的正确参数。
+下面的示例展示了一个简单的规则，它激活专用**CAN**通道的**I-PDU**组。根据此规则，**BswM**必须提供一个名为**Can1_Indication**的**CanSMIndication**类型的模式请求端口。这是一个来自基础软件模块的模式请求，在此例中来自**CAN**状态管理器。在代码中，此模式请求端口对应于[\[4\]](#ref-4)中[SWS_BswM_00049]所描述的**API BswM_CanSM_CurrentState**。**source**参数标识此模式请求源端口所属的网络。由**BswM**的配置工具负责为所引用的**ECUC**容器分配**API**所需的正确参数。
 
 该模式请求源端口的初始值为**CAN_SM_BswM_NO_COMMUNICATION**。
 
@@ -717,7 +717,7 @@ Modes:     modeGroup EcuM_StateType { ECUM_STATE_STARTUP, ECUM_STATE_APP_RUN,
 * **RUNRequested**：由**EcuM**根据**RUN**请求协议的结果，通过接口**BswM_EcuM_RequestedState()**设置。
 * **POSTRUNRequested**：由**EcuM**根据**RUN**请求协议的结果，通过接口**BswM_EcuM_RequestedState()**设置。
 
-下面的**BswM**规则展示了**ECU**模式处理中**EcuM**与**BswM**之间交互的一个示例。注意，这些**BswM**规则不足以构成一个完整的系统。还需要更多的**BswM**规则来覆盖例如**NvM**、唤醒处理和诊断等方面。完整示例请参阅3.3.2节。
+下面的**BswM**规则展示了**ECU**模式处理中**EcuM**与**BswM**之间交互的一个示例。注意，这些**BswM**规则不足以构成一个完整的系统。还需要更多的**BswM**规则来覆盖例如**NvM**、唤醒处理和诊断等方面。完整示例请参阅[3.3.2](#332-ecu模式处理的默认状态)节。
 
 ##### 3.3.1.1. 启动（Startup）
 
@@ -1502,7 +1502,7 @@ actions pnc3nocomTrueActions on condition {
 
 这是通过在启动时发送**AddressClaimed**（**AC**，0x0EE00）参数组来实现的，该报文宣告所期望的地址。如果另一个节点声明了相同的地址并具有更高的优先级，本节点在发送**CannotClaimAddress**参数组（**SA**为空地址的**AC**）后必须进入静默，或者尝试使用其他地址。
 
-为了支持这一用例，**BswM**被扩展为可以通过**API**函数**BswM_J1939Nm_StateChangeNotification()**接受来自**J1939Nm**的状态变化指示（另请参阅3.2.2.2.15节）。
+为了支持这一用例，**BswM**被扩展为可以通过**API**函数**BswM_J1939Nm_StateChangeNotification()**接受来自**J1939Nm**的状态变化指示（另请参阅[3.2.2.2.15](#322215-bswmj1939nmindication)节）。
 
 根据网络管理所指示的状态，**BswM**需要切换**COM**的**ComIPduGroup**、**PduR**的**PduRRoutingPathGroup**，以及**J1939Rm**的通用请求处理。
 
@@ -1720,7 +1720,7 @@ actions pnc2releasedActions on condition {
 
 ##### 3.4.8.1. 带唤醒请求的以太网交换机端口组切换
 
-**AUTOSAR**支持对兼容**OA TC10**的以太网硬件通过数据线（**dataline**）进行睡眠/唤醒的处理。结合**PNC**处理和以太网交换机端口组切换，当存在带唤醒请求的活动**PNC**请求时，**ComM**会以**COMM_PNC_REQUESTED_WITH_WAKEUP_REQUEST**向**BswM**发出指示。**BswM**通过以相应的**EthIfSwtPortGroup**和相应的**Eth_ModeType ETH_MODE_ACTIVE_WITH_WAKEUP_REQUEST**调用**EthIf_SwitchPortGroupRequestMode**，将该活动的**PNC**转发给**EthIf**。基于3.4.8节以太网交换机端口组切换中的示例配置，下面的示例展示了带数据线唤醒请求的以太网交换机端口切换：
+**AUTOSAR**支持对兼容**OA TC10**的以太网硬件通过数据线（**dataline**）进行睡眠/唤醒的处理。结合**PNC**处理和以太网交换机端口组切换，当存在带唤醒请求的活动**PNC**请求时，**ComM**会以**COMM_PNC_REQUESTED_WITH_WAKEUP_REQUEST**向**BswM**发出指示。**BswM**通过以相应的**EthIfSwtPortGroup**和相应的**Eth_ModeType ETH_MODE_ACTIVE_WITH_WAKEUP_REQUEST**调用**EthIf_SwitchPortGroupRequestMode**，将该活动的**PNC**转发给**EthIf**。基于[3.4.8](#348-以太网交换机端口组切换)节以太网交换机端口组切换中的示例配置，下面的示例展示了带数据线唤醒请求的以太网交换机端口切换：
 
 * 如果**PNC1**被请求，则以**EthSwtPortGroup1**和**ETH_MODE_ACTIVE_WITH_WAKEUP_REQUEST**调用**EthIf_SwitchPortGroupRequestMode**
 * 如果**PNC2**被请求，则以**EthSwtPortGroup2**和**ETH_MODE_ACTIVE_WITH_WAKEUP_REQUEST**调用**EthIf_SwitchPortGroupRequestMode**
@@ -1759,7 +1759,7 @@ actions pnc2requested_with_wakeup_request_Actions on condition {
 
 #### 3.4.9. PduR路由路径组切换
 
-**PduR**路由路径组切换用于切换未分配给**COM** **I-PDU**组的**I-PDU**的路由路径（参见3.4.4节"I-PDU组切换"），例如：通过**LdCom**传输的**I-PDU**。**LdCom**不具备**Com**所提供的那种控制**I-PDU**组的能力。
+**PduR**路由路径组切换用于切换未分配给**COM** **I-PDU**组的**I-PDU**的路由路径（参见[3.4.4](#344-i-pdu组切换)节"I-PDU组切换"），例如：通过**LdCom**传输的**I-PDU**。**LdCom**不具备**Com**所提供的那种控制**I-PDU**组的能力。
 
 因此，可以通过配置**PduR**路由路径组来控制受影响的**PduR**路由路径（类似于**COM**中的**I-PDU**组）。
 
@@ -1925,7 +1925,7 @@ actions pnc3requestedActions on condition {
 
 **AUTOSAR**提供了一种由应用软件组件控制面向服务通信的标准方式。它利用**BswM**进行模式管理的通用手段。
 
-为了实现标准的接口和行为，模式请求端口和模式切换接口与**BswM**的配置描述一起被标准化（参见[4]《基础软件模式管理器规范》第7.8章）。这样，不仅接口得到了很好的定义，期望的行为也得到了很好的定义。
+为了实现标准的接口和行为，模式请求端口和模式切换接口与**BswM**的配置描述一起被标准化（参见[\[4\]](#ref-4)《基础软件模式管理器规范》第7.8章）。这样，不仅接口得到了很好的定义，期望的行为也得到了很好的定义。
 
 配置描述旨在供工具链使用，生成一组相互匹配的规则和动作列表，以提供对服务发现的实际控制。
 
@@ -1964,7 +1964,7 @@ actions pnc3requestedActions on condition {
 
 该映射在设计时完成。映射的粒度可以选择为1:1、为整个服务实例使用一个请求端口，或介于两者之间的任何形式。在使用**Some-IP**服务发现的情况下，例如：可以将其设定为与事件到事件组的映射相匹配。因此，**BswM**规则会据此处理，当一个**SWC**端口映射到多于一个事件/方法时，相应的规则和动作列表将实现"最高者胜出"（**highest wins**，针对请求）和"最低者胜出"（**lowest wins**，针对返回的指示）。
 
-由于构建这些**BswM**规则所需的全部信息都可以通过**EcuExtract**和**EcuC**获得，配置工具可以生成完整的**BswM**配置，构建相应的请求和通知行为。更多细节请参阅[4]《基础软件模式管理器规范》。必要规则和动作列表的生成在[4]的第7.8.2–7.8.5章中描述。
+由于构建这些**BswM**规则所需的全部信息都可以通过**EcuExtract**和**EcuC**获得，配置工具可以生成完整的**BswM**配置，构建相应的请求和通知行为。更多细节请参阅[\[4\]](#ref-4)《基础软件模式管理器规范》。必要规则和动作列表的生成在[\[4\]](#ref-4)的第7.8.2–7.8.5章中描述。
 
 图3.6展示了生成的配置可能的样子的一个示例。所有白色的框都预期由配置工具生成。
 
@@ -1978,7 +1978,7 @@ actions pnc3requestedActions on condition {
 
 #### 3.5.1. 诊断会话控制
 
-对于会话控制，**SWS_DiagnosticCommunicationManager**[5]中的[SWS_Dcm_00777]定义了下面的模式声明组作为**providedModeGroup**。
+对于会话控制，**SWS_DiagnosticCommunicationManager**[\[5\]](#ref-5)中的[SWS_Dcm_00777]定义了下面的模式声明组作为**providedModeGroup**。
 
 **注意：** 模式名称和取值源自**DCM**的配置。本指南仅展示一个示例。
 
@@ -2008,7 +2008,7 @@ request BswModeNotification DiagnosticSessionControl {
 
 #### 3.5.2. ECU复位
 
-在**ECU**复位的情况下，**DCM**与**BswM**之间的交互更为复杂。《诊断通信管理器规范》[5]为此定义了清单3.35所述的接口。通过此接口，**DCM**向**BswM**发出信号：
+在**ECU**复位的情况下，**DCM**与**BswM**之间的交互更为复杂。《诊断通信管理器规范》[\[5\]](#ref-5)为此定义了清单3.35所述的接口。通过此接口，**DCM**向**BswM**发出信号：
 
 1. 使**ECU**准备好执行特定的复位。
 2. 显式地执行该复位。
@@ -2323,7 +2323,7 @@ interface modeSwitch MSIF_DcmResponseOnEvent{
 
 ### 4.1. 技术术语
 
-本文档中使用的所有技术术语——除此处列出的术语之外——均可在**AUTOSAR**官方术语表[6]或软件组件模板规范[1]中找到。
+本文档中使用的所有技术术语——除此处列出的术语之外——均可在**AUTOSAR**官方术语表[\[6\]](#ref-6)或软件组件模板规范[\[1\]](#ref-1)中找到。
 
 | 术语 | 描述 |
 | --- | --- |
@@ -2332,20 +2332,20 @@ interface modeSwitch MSIF_DcmResponseOnEvent{
 | 阶段（phase） | **ECU**管理器动作和事件的逻辑或时间上的组合，例如：**STARTUP**、**UP**、**SHUTDOWN**、**SLEEP**等。阶段可以由子阶段组成，子阶段通常被称为序列（**sequence**），如果它们的存在主要是为了将执行的动作序列组合成逻辑单元。此处的阶段不是**AUTOSAR**方法论中的阶段 |
 | 模式切换端口（mode switch port） | 用于接收（或发送）模式切换通知的端口。为此，模式切换端口由**ModeSwitchInterface**类型化 |
 | 模式请求接口（mode request interface） | 一种**AUTOSAR SenderReceiverInterface**，它在**VariableDataPrototype**中携带被请求的模式 |
-| 模式用户（mode user） | 通过**SwcModeSwitchEvent**、**BswModeSwitchEvent**，或仅通过读取模式的当前状态而依赖于模式的**AUTOSAR SW-C**或**AUTOSAR**基础软件模块称为模式用户。模式用户通过拥有一个required（接收）模式切换端口或一个**requiredModeGroup**模式声明组原型来定义。另请参阅第2章 |
-| 模式管理器（mode manager） | 进入和离开模式由模式管理器发起。模式管理器通过拥有一个provide（提供）模式切换端口或一个**providedModeGroup**模式声明组原型来定义。模式管理器可以是应用模式管理器，也可以是提供包括模式切换在内的服务的基础软件模块（如**ECU**状态管理器）。另请参阅第2.2节 |
+| 模式用户（mode user） | 通过**SwcModeSwitchEvent**、**BswModeSwitchEvent**，或仅通过读取模式的当前状态而依赖于模式的**AUTOSAR SW-C**或**AUTOSAR**基础软件模块称为模式用户。模式用户通过拥有一个required（接收）模式切换端口或一个**requiredModeGroup**模式声明组原型来定义。另请参阅第[2](#2-总体机制和概念)章 |
+| 模式管理器（mode manager） | 进入和离开模式由模式管理器发起。模式管理器通过拥有一个provide（提供）模式切换端口或一个**providedModeGroup**模式声明组原型来定义。模式管理器可以是应用模式管理器，也可以是提供包括模式切换在内的服务的基础软件模块（如**ECU**状态管理器）。另请参阅第[2.2](#22-模式管理器和模式用户)节 |
 | 应用模式管理器（application mode manager） | 应用模式管理器是提供模式切换服务的**AUTOSAR**软件组件。应用模式管理器的模式不必是标准化的 |
 | 模式请求（mode request） | 使用**SenderReceiverInterface**从模式用户向模式管理器传递模式请求的通信称为模式请求 |
 | 模式切换通知（mode switch notification） | 使用**ModeSwitchInterface**或**providedModeGroup**/**requiredModeGroup**模式声明组原型，从模式管理器向模式用户传递模式切换的通信称为模式切换通知 |
-| 模式机实例（mode machine instance） | 模式机或模式声明组的实例由模式管理器的模式声明组原型定义。由于模式切换不是瞬时执行的，**RTE**或基础软件调度器必须维护自己的状态。对于每个模式管理器的模式声明组原型，**RTE**或基础软件调度器都有一个状态机。该状态机称为模式机实例。对于同一模式管理器的模式声明组原型的所有模式用户，**RTE**和基础软件调度器使用同一个模式机实例。另请参阅第2.2节 |
+| 模式机实例（mode machine instance） | 模式机或模式声明组的实例由模式管理器的模式声明组原型定义。由于模式切换不是瞬时执行的，**RTE**或基础软件调度器必须维护自己的状态。对于每个模式管理器的模式声明组原型，**RTE**或基础软件调度器都有一个状态机。该状态机称为模式机实例。对于同一模式管理器的模式声明组原型的所有模式用户，**RTE**和基础软件调度器使用同一个模式机实例。另请参阅第[2.2](#22-模式管理器和模式用户)节 |
 | 公共模式机实例（common mode machine instance） | "公共模式机实例"是由**BSW**模块和**SW-C**共享的一种特殊的"模式机实例"：如果在软件组件端口中实例化的模式声明组原型与**BSW**模块的模式声明组原型同步（**synchronizedModeGroup**），则**RTE**生成器只创建一个模式机实例 |
 | 模式禁用依赖（Mode Disabling Dependency） | 启动**RunnableEntity**或基础软件可调度实体（**Basic Software Schedulable Entity**）的**RTEEvent**或**BswEvent**可以包含一个引用模式声明的**disabledMode**或**disabledInMode**关联。该关联在本文档中称为模式禁用依赖（**ModeDisablingDependency**） |
-| 模式禁用依赖的可执行实体（mode disabling dependent ExecutableEntity） | 模式禁用依赖的**RunnableEntity**或基础软件可调度实体由带有模式禁用依赖的**RTEEvent**或**BswEvent**触发。当相应的模式禁用处于活动状态时，**RTE**和基础软件调度器阻止通过该**RTEEvent**/**BswEvent**启动这些**RunnableEntity**或基础软件可调度实体。另请参阅第2.2节 |
-| 模式禁用（mode disabling） | 当"模式禁用"处于活动状态时，**RTE**和基础软件调度器会禁用模式禁用依赖的可执行实体的启动。"模式禁用"在模式禁用依赖所引用的模式期间，以及进入和离开该模式的转换期间处于活动状态。另请参阅第2.2节 |
-| OnEntry可执行实体（OnEntry ExecutableEntity） | 由带有**ModeActivationKind**为**entry**的**SwcModeSwitchEvent**或**BswModeSwitchEvent**触发的**RunnableEntity**或基础软件可调度实体，在进入模式时被触发。它被称为**OnEntry**可执行实体。另请参阅第2.2节 |
-| OnExit可执行实体（OnExit ExecutableEntity） | 由带有**ModeActivationKind**为**exit**的**SwcModeSwitchEvent**或**BswModeSwitchEvent**触发的**RunnableEntity**或基础软件可调度实体，在退出模式时被触发。它被称为**OnExit**可执行实体。另请参阅第2.2节 |
-| OnTransition可执行实体（OnTransition ExecutableEntity） | 由带有**ModeActivationKind**为**transition**的**SwcModeSwitchEvent**或**BswModeSwitchEvent**触发的**RunnableEntity**或基础软件可调度实体，在两个指定模式之间的转换时被触发。它被称为**OnTransition**可执行实体。另请参阅第2.2节 |
-| 模式切换确认可执行实体（mode switch acknowledge ExecutableEntity） | 由连接到模式管理器模式声明组原型的**SwcModeSwitchEvent**或**BswModeSwitchedAckEvent**触发的**RunnableEntity**或基础软件可调度实体。它被称为模式切换确认可执行实体。另请参阅第2.2节 |
+| 模式禁用依赖的可执行实体（mode disabling dependent ExecutableEntity） | 模式禁用依赖的**RunnableEntity**或基础软件可调度实体由带有模式禁用依赖的**RTEEvent**或**BswEvent**触发。当相应的模式禁用处于活动状态时，**RTE**和基础软件调度器阻止通过该**RTEEvent**/**BswEvent**启动这些**RunnableEntity**或基础软件可调度实体。另请参阅第[2.2](#22-模式管理器和模式用户)节 |
+| 模式禁用（mode disabling） | 当"模式禁用"处于活动状态时，**RTE**和基础软件调度器会禁用模式禁用依赖的可执行实体的启动。"模式禁用"在模式禁用依赖所引用的模式期间，以及进入和离开该模式的转换期间处于活动状态。另请参阅第[2.2](#22-模式管理器和模式用户)节 |
+| OnEntry可执行实体（OnEntry ExecutableEntity） | 由带有**ModeActivationKind**为**entry**的**SwcModeSwitchEvent**或**BswModeSwitchEvent**触发的**RunnableEntity**或基础软件可调度实体，在进入模式时被触发。它被称为**OnEntry**可执行实体。另请参阅第[2.2](#22-模式管理器和模式用户)节 |
+| OnExit可执行实体（OnExit ExecutableEntity） | 由带有**ModeActivationKind**为**exit**的**SwcModeSwitchEvent**或**BswModeSwitchEvent**触发的**RunnableEntity**或基础软件可调度实体，在退出模式时被触发。它被称为**OnExit**可执行实体。另请参阅第[2.2](#22-模式管理器和模式用户)节 |
+| OnTransition可执行实体（OnTransition ExecutableEntity） | 由带有**ModeActivationKind**为**transition**的**SwcModeSwitchEvent**或**BswModeSwitchEvent**触发的**RunnableEntity**或基础软件可调度实体，在两个指定模式之间的转换时被触发。它被称为**OnTransition**可执行实体。另请参阅第[2.2](#22-模式管理器和模式用户)节 |
+| 模式切换确认可执行实体（mode switch acknowledge ExecutableEntity） | 由连接到模式管理器模式声明组原型的**SwcModeSwitchEvent**或**BswModeSwitchedAckEvent**触发的**RunnableEntity**或基础软件可调度实体。它被称为模式切换确认可执行实体。另请参阅第[2.2](#22-模式管理器和模式用户)节 |
 | 服务器可运行实体（server runnable） | 由**OperationInvokedEvent**触发的服务器。它具有介于可运行实体和函数调用之间的混合行为。在某些情况下，**RTE**可以将客户端-服务器通信实现为简单的函数调用 |
 | 可运行实体激活（runnable activation） | 可运行实体的激活与导致该可运行实体执行的**RTEEvent**相关联。它被定义为该**RTEEvent**所指的事件。例如：对于定时事件，当定时器到期时激活相应的可运行实体；对于数据接收事件，当**RTE**接收到数据时激活该可运行实体 |
 | 基础软件可调度实体激活（Basic Software Schedulable Entity activation） | 基础软件可调度实体的激活定义为包含该实体的任务的激活，并最终包括设置一个标志，告知任务中的胶水代码（**glue code**）应执行哪个基础软件可调度实体 |

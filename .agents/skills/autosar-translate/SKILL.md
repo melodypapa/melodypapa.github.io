@@ -291,11 +291,18 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
   2026-10-27. A ref is 第N章/第N节/章节N or a dotted number followed by CJK
   text, AND only converts when a heading with that number exists. Never a
   ref: figure/table numbers (图 9.5 所示, 表 7.3 — captions carry no anchor
-  and 表7.x would collide with the §7.x API sections), bare-integer 第N part
+  and 表7.x would collide with the §7.x API sections), code-listing numbers
+  (清单3.4 / 示例3.4 — the mode-management guide's `lstlisting.3.N`
+  artifacts, which collide with its §3.4; guard added 2026-10-27), bare-integer 第N part
   numbers (第1部分 in figure captions), identifier tails (B.2.2), decimals
   followed by ASCII units (3.3 V), and a number whose preceding window names
-  another AUTOSAR document (按照AUTOSAR_SWS_Mcu_Driver第9.1章 is the MCU
-  driver's §9.1, not this article's). A number no heading carries
+  another AUTOSAR document — by doc id (按照AUTOSAR_SWS_Mcu_Driver第9.1章 is
+  the MCU driver's §9.1, not this article's), by 《title》 or a bolded
+  English "Specification …" title (《基础软件模块通用规范》（**General
+  Specification of Basic Software Modules**）的第7.2章 is SWS_BSWGeneral's
+  §7.2 — it had linked to BswM's own §7.2 类型定义), or by a citation marker
+  [n] in the window (参见相关文档[6]中第13.6.5节; guards added 2026-10-27 from
+  the mode_management dry-runs). A number no heading carries
   (EcuM's 参见7.9节多核 — source renumbering artifact) is census-reported
   UNRESOLVED and never linked; a 译者注/fix is a user decision),
   development-error codes (link to their

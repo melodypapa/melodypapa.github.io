@@ -356,6 +356,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **External Transition**
 > **外部转换**是两个**检查点**之间的**转换**，其中这两个**检查点**属于不同的**被监督实体**。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+> 来源：[应用层错误处理](general/application_level_error_handling/index.md)
 
 **FDIR**
 > 故障检测、隔离与恢复（**Fault Detection, Isolation and Recovery**）。系统运行期间处理故障的过程：检测→隔离→恢复。
@@ -388,6 +389,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 固件远程升级（**Firmware Over The Air**），通过无线通信进行固件远程更新。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
 
+**Functionality**
+> 功能：涵盖系统用户可见和用户不可见的功能方面（见 [2]）。在 **FiM** 上下文中，一个功能可以由一个或多个可运行实体的全部或部分内容、以同一组许可/禁止条件构成。
+> 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager · R23-11）
+
 **Fault**
 > 故障。系统的瞬态或永久性变化，使其完整性偏离预期的正确完整性；被激活并传播后成为错误（error）。
 > 来源：[应用层错误处理](general/application_level_error_handling/index.md)（AUTOSAR_CP_EXP_ApplicationLevelErrorHandling · R23-11）
@@ -399,10 +404,6 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Failure**
 > 失效。错误传播越过系统屏障、对系统环境可见后的结果：系统不再提供其规定的功能。
 > 来源：[应用层错误处理](general/application_level_error_handling/index.md)（AUTOSAR_CP_EXP_ApplicationLevelErrorHandling · R23-11）
-
-**Functionality**
-> 功能：涵盖系统用户可见和用户不可见的功能方面（见 [2]）。在 **FiM** 上下文中，一个功能可以由一个或多个可运行实体的全部或部分内容、以同一组许可/禁止条件构成。
-> 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager · R23-11）
 
 ## G
 
@@ -650,6 +651,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 内存保护单元（**Memory Protection Unit**）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
 
+
+
+**Master**
+> 主。分布式 BSW 模块中协调卫星请求、并可过滤或监控进入的卫星请求的部分。
+> 来源：[BSW 分布指南](general/bsw_distribution_guide/index.md)（AUTOSAR_CP_EXP_BSWDistributionGuide · R23-11）
 ## N
 
 **N-PDU**
@@ -802,11 +808,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## S
 
-
 **Satellite**
 > 卫星。分布式 BSW 模块的一部分；主与卫星之间的工作分配是实现特定的，卫星一般不能在没有主的情况下工作。
 > 来源：[BSW 分布指南](general/bsw_distribution_guide/index.md)（AUTOSAR_CP_EXP_BSWDistributionGuide · R23-11）
-
 
 **Sampling rate**
 > 采样率（**Sampling rate**）是获得信号值所需的时间段。
@@ -945,6 +949,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 标准（**Standard**）
 > 来源：[AUTOSAR Standard Types（标准类型）](general/standard_types/index.md)（SWS_StandardTypes · R23-11）
 
+
+
+**Satellite**
+> 卫星。分布式 BSW 模块的一部分；主与卫星之间的工作分配是实现特定的，卫星一般不能在没有主的情况下工作。
+> 来源：[BSW 分布指南](general/bsw_distribution_guide/index.md)（AUTOSAR_CP_EXP_BSWDistributionGuide · R23-11）
 ## T
 
 **Target time**
