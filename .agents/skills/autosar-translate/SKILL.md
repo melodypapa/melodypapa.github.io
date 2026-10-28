@@ -61,15 +61,26 @@ Compare the article's `## ` headings against the source chapter list:
 - **Complete** → report alignment status; do not rewrite content that already
   exists. The droppable set is exactly two things (user decision 2026-10-25,
   EcuM completion): the requirement-tracing chapter and appendix A (*Not
-  applicable requirements*). Their absence is compliance, not a gap; the
+  applicable requirements*). Their absence is compliance, not a gap — and so is
+  a section whose **entire content is a placeholder** (`None.` / `N/A.`):
+  omitted entirely per the 2026-10-28 rule (KeyM's Known Limitations `None.`
+  precedent, generalized to every section class on the user's instruction) —
+  no heading with a lone 无/不适用 body; covers pre-chapters, the optional
+  时序图/配置规范 chapters, and placeholder sub-sections inside a chapter with
+  other real content; the mandatory §7 API规范 chapter stays with a
+  one-sentence statement (STANDARD.md §1/§3). Every omission applied under it
+  is **reported** (queue row note + Step 8 gate) and the user reminded to
+  verify it — an omission is never silent. The
   absence of ANY other source section is a gap — including *Known
-  Limitations* (translates as unnumbered `## 已知限制` before §1), appendix B
+  Limitations* (translates as unnumbered `## 已知限制` before §1 when it has
+  actual content), appendix B
   (translates as `## B. …`, Step 5 rule), expected/port-interface chapters
   (EcuM's source 8.7/8.8 were missing from a ✅-rated article — found by the
   2026-10-25 diff), and content diagrams inside translated chapters. The
   配置规范 chapter translates as `## 8. 配置规范` (or `## 9.` when a 时序图
   chapter is also present) and the 时序图 chapter as `## 8. 时序图` when the
-  source has them (Step 5 rules).
+  source has them **with actual content** (Step 5 rules; `N/A.`-only chapters
+  are omitted and a surviving chapter renumbers down).
 
 For sources longer than ~2000 lines, present the sync plan and get user
 confirmation before translating — a full SWS can be an entire session of work.
@@ -189,7 +200,10 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
     interfaces incl. configurable callbacks/API parameter checks) fall under
     the same rule.
 - **时序图 chapter (source ch.9 → article `## 8. 时序图`, optional)** —
-  present iff the source document has a *Sequence diagrams* chapter; source
+  present iff the source document has a *Sequence diagrams* chapter **with
+  actual content** — a source chapter that is only `N/A.` is omitted entirely
+  (user decision 2026-10-28; a following 配置规范 chapter renumbers down,
+  grep inbound anchors); source
   9.x renumbers to 8.x; the chapter sits between §7 and the 配置规范
   chapter (renumbering 配置规范 to `## 9.` when both are present — grep for
   inbound anchor links first). Rules:
@@ -243,7 +257,9 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
   exception to the no-requirement-IDs rule (un-escape `SWS\_EcuM\_…`
   artifacts); "none" → 无.
 - **配置规范 chapter (source ch.10 → article `## 8. 配置规范`, or `## 9. 配置规范` when a 时序图 chapter precedes it, optional)** —
-  present iff the source document has a configuration specification; source
+  present iff the source document has a configuration specification **with
+  actual content** (an `N/A.`-only chapter is omitted entirely — user decision
+  2026-10-28); source
   10.x renumbers to 8.x (no 时序图 chapter) or 9.x (with 时序图). Terminology (site majority, baseline-tested
   2026-10-24): *Configuration specification* → 配置规范; *Containers and
   configuration parameters* → 容器与配置参数; *container* → 容器
@@ -437,14 +453,16 @@ before every commit, the second is evidence for the Step 8 confirmation.
    **zero WARNINGs** (pre-existing INFO anchor notices are fine).
 2. Heading audit: `grep '^## '` on the article equals the STANDARD.md §1
    skeleton with §2 wording, numbered `1.`–`7.` only — plus an unnumbered
-   `## 已知限制` before `## 1.` when the source has a Known Limitations
-   chapter; `###`/`####` numbering
+   `## 已知限制` before `## 1.` when the source's Known Limitations
+   chapter has actual content (a `None.`-only chapter is omitted — user
+   decision 2026-10-28); `###`/`####` numbering
    is continuous (no numbering gaps); no appendix A (`## A.`), and no forbidden
    chapter title (需求可追溯性 / 需求追踪) anywhere; `## B.` is allowed only
    as the 可追溯项变更历史 appendix; `## 8.` is
    allowed only as `## 8. 时序图` and `## 9.` only as `## 9. 配置规范`
-   (both optional — only when the source has ch.9 / ch.10; when only one
-   optional chapter is present it takes the lower number); a **numbered
+   (both optional — only when the source has ch.9 / ch.10 **with actual
+   content**; `N/A.`-only chapters are omitted and a surviving chapter takes
+   the lower number); a **numbered
    continuation** `## 10.`+ is allowed when the source has a chapter 11+ or a
    content annex that is not the droppable NA-requirements appendix
    (STANDARD.md §1) — its heading is a direct translation of the source title.
@@ -617,7 +635,10 @@ evidence, not asserted):
 **Confirmation gate — before the final commit and the PR.** Present to the
 user, in one message: the queue row's current state (steps + Notes), the
 Phase A results, the Phase B coverage map and deviations, and the proposed
-`docs/autosar/TODO.md` status row with its source-release note. Wait
+`docs/autosar/TODO.md` status row with its source-release note. The
+coverage map must list **every section omitted under the placeholder
+exception** (`None.`/`N.A.`-only sections) as a deliberate omission, each
+with a reminder for the user to verify it before confirmation. Wait
 for explicit confirmation. Passing Phase A alone never finishes a run — the
 gate exists precisely for what the build cannot see. A decision the user
 already gave mid-run settles *that item*, not the gate. On any objection: fix,

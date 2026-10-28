@@ -421,11 +421,8 @@ void Port_SetPinMode (Port_PinType Pin, Port_PinModeType Mode)
 
 本章列出了需要从其他模块获得的所有接口。
 
-#### 7.6.1. 强制接口
 
-无
-
-#### 7.6.2. 可选接口
+#### 7.6.1. 可选接口
 
 本章定义了为实现模块的可选功能而需要的所有接口。
 
@@ -433,9 +430,6 @@ void Port_SetPinMode (Port_PinType Pin, Port_PinModeType Mode)
 |---|---|---|
 | Det_ReportError | Det.h | 报告开发错误的服务 |
 
-#### 7.6.3. 可配置接口
-
-无
 
 ## 8. 配置规范
 

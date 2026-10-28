@@ -276,14 +276,14 @@ release: R23-11
     - 已初始化的 **Wdg** 接口；
     - 已初始化的 **OS**（因为可能使用 **OsCounter**）；
     - 已初始化的 **WdgM**（通过调用 [**WdgM_Init**](#731-wdgm_init) 完成）；
-    - 周期性地调用 [**WdgM_MainFunction**](#751-wdgm_mainfunction)，最好由 **AUTOSAR BSW** 调度器完成；在启动期间也可以由其他模块完成。
-        - **注意：** 周期性调用 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 的偏差/抖动会导致**存活监督**与**截止时间监督**（超时检测部分）中可能延迟检测，并在**存活监督**中导致误检或漏检。
+    - 周期性地调用 [**WdgM_MainFunction**](#741-wdgm_mainfunction)，最好由 **AUTOSAR BSW** 调度器完成；在启动期间也可以由其他模块完成。
+        - **注意：** 周期性调用 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 的偏差/抖动会导致**存活监督**与**截止时间监督**（超时检测部分）中可能延迟检测，并在**存活监督**中导致误检或漏检。
         - **注意：** 该周期性调用的任何阻塞都会导致**截止时间监督**（超时检测部分）、**存活监督**、**局部/全局监督状态**的所有状态转换，以及由此产生的用于从监督故障中恢复的错误处理机制全部失效，仅剩最后手段「通过硬件看门狗复位」除外，因为**看门狗处理**本身已丢失（不再通过 **WdgIf** 向硬件实例触发）。
 - 一个**被监督实体**及其所有**检查点**最多只能属于一个 **OSApplication**。由于 OS-Application 只能在一个内核上运行，因此某个特定的**被监督实体**只能在一个内核上运行。
-- **截止时间监督**（超时检测部分）与**存活监督**高度依赖于对 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 的周期性调用：应按照所请求的超时检测值仔细选择其周期性。
+- **截止时间监督**（超时检测部分）与**存活监督**高度依赖于对 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 的周期性调用：应按照所请求的超时检测值仔细选择其周期性。
 - 在多分区配置的软件架构中，[**WdgM_GetFirstExpiredSEID**](#7310-wdgm_getfirstexpiredseid) 的结果可能不完全可靠，取决于具体实现（至少，在没有跨分区的可靠且统一的时间戳机制的情况下无法做到这一点，但这不会被标准化）。
 - **看门狗管理器**无法检测在 **Category 2 ISR** 中运行的**被监督实体**的**截止时间监督**超时。
-    - 理由：在 **Category 2 ISR** 中运行的 **Runnable** 实体发生死锁会阻塞任务层上 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 的执行。
+    - 理由：在 **Category 2 ISR** 中运行的 **Runnable** 实体发生死锁会阻塞任务层上 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 的执行。
 
 ### 4.2. 汽车域的适用性
 
@@ -379,9 +379,9 @@ release: R23-11
 
 **截止时间监督**（提前到达与延迟的检测）以及**逻辑监督**的监督结果确定在 [**WdgM_CheckpointReached**](#736-wdgm_checkpointreached) 函数内执行。在该函数的一次执行中，它仅更新一个特定**被监督实体**的结果。
 
-**截止时间监督**（超时检测部分）以及**存活监督**的监督结果确定在 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数内执行。在该函数的一次执行中，它更新所有**被监督实体**的**截止时间监督**（超时检测部分）和/或**存活监督**的结果。
+**截止时间监督**（超时检测部分）以及**存活监督**的监督结果确定在 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数内执行。在该函数的一次执行中，它更新所有**被监督实体**的**截止时间监督**（超时检测部分）和/或**存活监督**的结果。
 
-**WdgM** 模块应在模块初始化后首次调用 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 时，启动所有**监督功能**（包括所有**监督算法**、**监督参考周期**）以及**看门狗处理**。
+**WdgM** 模块应在模块初始化后首次调用 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 时，启动所有**监督功能**（包括所有**监督算法**、**监督参考周期**）以及**看门狗处理**。
 
 **注意：** 如果 **WdgM** 模块未初始化，其主函数将立即返回而不执行任何功能，也不引发任何错误。此外，在首次调用主函数之前，模块不能使用 **RTE** **API**。因此，初始化后的首次主函数调用应被视为**监督功能**以及对硬件看门狗实例（使用 **WdgIf** 模块）相关处理的起点，以便作为安全相关监控机制具有一致的行为。
 
@@ -392,17 +392,17 @@ release: R23-11
 1. 可用的已初始化 **Wdg** 接口；
 2. 可用的已初始化 **OS**；
 3. 已初始化的 **WdgM**——通过调用 **[WdgM_Init](#731-wdgm_init)()** 函数实现；以及
-4. 周期性调用 **[WdgM_MainFunction](#751-wdgm_mainfunction)()** 函数。
+4. 周期性调用 **[WdgM_MainFunction](#741-wdgm_mainfunction)()** 函数。
 
-应由 **WdgM** 模块的调用者确保 [**WdgM_DeInit**](#732-wdgm_deinit)、[**WdgM_Init**](#731-wdgm_init) 与 [**WdgM_SetMode**](#734-wdgm_setmode) 函数不与 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 并发调用。
+应由 **WdgM** 模块的调用者确保 [**WdgM_DeInit**](#732-wdgm_deinit)、[**WdgM_Init**](#731-wdgm_init) 与 [**WdgM_SetMode**](#734-wdgm_setmode) 函数不与 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 并发调用。
 
 这可以通过集成者对初始化与任务调度进行适当协调来实现。
 
-**注意** 在集群式软件架构的情况下（**WdgMSwClusterSupport = ENABLE_SW_CLUSTER_SUPPORT**），应用软件集群中的 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 实例可以在任何时刻被调用，而不论宿主软件集群中的 [**WdgM_DeInit**](#732-wdgm_deinit)、[**WdgM_Init**](#731-wdgm_init) 与 [**WdgM_SetMode**](#734-wdgm_setmode) 函数是否并发调用。
+**注意** 在集群式软件架构的情况下（**WdgMSwClusterSupport = ENABLE_SW_CLUSTER_SUPPORT**），应用软件集群中的 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 实例可以在任何时刻被调用，而不论宿主软件集群中的 [**WdgM_DeInit**](#732-wdgm_deinit)、[**WdgM_Init**](#731-wdgm_init) 与 [**WdgM_SetMode**](#734-wdgm_setmode) 函数是否并发调用。
 
-为了即使某个**被监督实体**发生死锁也能继续**存活监督**和**截止时间监督**（超时检测部分），每个 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 必须映射到不包含由该 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 实例监督的**被监督实体**的任务上。
+为了即使某个**被监督实体**发生死锁也能继续**存活监督**和**截止时间监督**（超时检测部分），每个 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 必须映射到不包含由该 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 实例监督的**被监督实体**的任务上。
 
-执行 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 的 **OS** 任务应与调用**被监督实体**中任何函数的 **OS** 任务相分离。
+执行 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 的 **OS** 任务应与调用**被监督实体**中任何函数的 **OS** 任务相分离。
 
 #### 6.1.2. 局部监督状态
 
@@ -411,11 +411,11 @@ release: R23-11
 1. **局部监督状态**的前一个值；
 2. **存活监督**结果、**截止时间监督**结果、**逻辑监督**结果的当前值。
 
-**局部监督状态**状态机应在该**被监督实体**所属的 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 每次被调用时计算。
+**局部监督状态**状态机应在该**被监督实体**所属的 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 每次被调用时计算。
 
 该状态机应由 [**WdgM_Init**](#731-wdgm_init) 函数初始化。
 
-**看门狗管理器**模块提供了一项特性，为**存活监督**提供容错（对应于**局部监督状态** **WDGM_LOCAL_STATUS_FAILED**），容错时长为以**监督周期**（**监督周期**是调用 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 的周期）为单位的可配置（累积）时间量，称为**失败的监督参考周期**（见配置参数 **WdgMFailedAliveSupervisionRefCycleTol**）。如果该参数设置为 0，则**存活监督**没有容错，此时**存活监督**的行为与**截止时间监督**和**逻辑监督**相同，即第一个*不正确*结果就导致转换到 **WDGM_LOCAL_STATUS_EXPIRED**。
+**看门狗管理器**模块提供了一项特性，为**存活监督**提供容错（对应于**局部监督状态** **WDGM_LOCAL_STATUS_FAILED**），容错时长为以**监督周期**（**监督周期**是调用 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 的周期）为单位的可配置（累积）时间量，称为**失败的监督参考周期**（见配置参数 **WdgMFailedAliveSupervisionRefCycleTol**）。如果该参数设置为 0，则**存活监督**没有容错，此时**存活监督**的行为与**截止时间监督**和**逻辑监督**相同，即第一个*不正确*结果就导致转换到 **WDGM_LOCAL_STATUS_EXPIRED**。
 
 请注意，**截止时间监督**与**逻辑监督**不受 **WdgMFailedAliveSupervisionRefCycleTol** 影响。
 
@@ -433,14 +433,14 @@ release: R23-11
 
 如果成功调用了 [**WdgM_Init**](#731-wdgm_init) 函数，且该**被监督实体**在 **WdgMInitialMode** 中的参数 **WdgMInitialMode** 未配置为 **WDGM_LOCAL_STATUS_OK**，则**看门狗管理器**模块应将该**被监督实体**的**局部监督状态**设置为 **WDGM_LOCAL_STATUS_DEACTIVATED**。
 
-如果该**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_OK**，并且该**被监督实体**的三组**监督**结果（**存活监督**结果、**截止时间监督**结果、**逻辑监督**结果）中的所有值均为*正确*，则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应将该**被监督实体**保持在**局部监督状态** **WDGM_LOCAL_STATUS_OK**。
+如果该**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_OK**，并且该**被监督实体**的三组**监督**结果（**存活监督**结果、**截止时间监督**结果、**逻辑监督**结果）中的所有值均为*正确*，则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应将该**被监督实体**保持在**局部监督状态** **WDGM_LOCAL_STATUS_OK**。
 
 如果该**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_OK**，并且：
 
 1. 该**被监督实体**的**存活监督**结果中至少有一个*不正确*，且配置了零容错（见配置参数 **WdgMFailedAliveSupervisionRefCycleTol**）；或
 2. 该**被监督实体**的**截止时间监督**结果中至少有一个*不正确*，或**逻辑监督**结果中至少有一个*不正确*；
 
-则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应将**局部监督状态**更改为 **WDGM_LOCAL_STATUS_EXPIRED**。
+则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应将**局部监督状态**更改为 **WDGM_LOCAL_STATUS_EXPIRED**。
 
 以下需求说明了**存活监督**与**截止时间监督**及**逻辑监督**之间的重要区别：**存活监督**对失败的参考周期具有错误容错。
 
@@ -449,35 +449,35 @@ release: R23-11
 1. 该**被监督实体**的**存活监督**结果中至少有一个*不正确*，且配置了大于零的容错（见配置参数 **WdgMFailedAliveSupervisionRefCycleTol**）；并且
 2. 该**被监督实体**的所有**截止时间监督**结果与所有**逻辑监督**结果均为*正确*；
 
-则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应将**局部监督状态**更改为 **WDGM_LOCAL_STATUS_FAILED**，并递增**失败的监督参考周期**计数器。
+则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应将**局部监督状态**更改为 **WDGM_LOCAL_STATUS_FAILED**，并递增**失败的监督参考周期**计数器。
 
 如果该**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_FAILED**，并且：
 
 1. **存活监督**结果中至少有一个*不正确*，且**失败的监督参考周期**计数器小于所配置的容错（见参数 **WdgMFailedAliveSupervisionRefCycleTol**）；并且
 2. 该**被监督实体**的所有**截止时间监督**结果与所有**逻辑监督**结果均为*正确*；
 
-则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应将**局部监督状态**保持在 **WDGM_LOCAL_STATUS_FAILED**，并递增**失败的监督参考周期**计数器。
+则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应将**局部监督状态**保持在 **WDGM_LOCAL_STATUS_FAILED**，并递增**失败的监督参考周期**计数器。
 
 如果该**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_FAILED**，并且：
 
 1. 该**被监督实体**的所有**存活监督**结果均为*正确*，且**失败的监督参考周期**计数器 > 1；并且
 2. 该**被监督实体**的所有**截止时间监督**结果与所有**逻辑监督**结果均为*正确*；
 
-则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应将**局部监督状态**保持在 **WDGM_LOCAL_STATUS_FAILED**，并递减**失败的监督参考周期**计数器。
+则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应将**局部监督状态**保持在 **WDGM_LOCAL_STATUS_FAILED**，并递减**失败的监督参考周期**计数器。
 
 如果该**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_FAILED**，并且：
 
 1. 该**被监督实体**的所有**存活监督**结果均为*正确*，且**失败的监督参考周期**计数器等于 1；并且
 2. 该**被监督实体**的所有**截止时间监督**结果与所有**逻辑监督**结果均为*正确*；
 
-则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应将**局部监督状态**更改为 **WDGM_LOCAL_STATUS_OK**，并递减**失败的监督参考周期**计数器。
+则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应将**局部监督状态**更改为 **WDGM_LOCAL_STATUS_OK**，并递减**失败的监督参考周期**计数器。
 
 如果该**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_FAILED**，并且：
 
 1. **存活监督**结果中至少有一个*不正确*，且**失败的监督参考周期**计数器等于所配置的容错（见配置参数 **WdgMFailedAliveSupervisionRefCycleTol**）；或
 2. 该**被监督实体**的**截止时间监督**结果中至少有一个*不正确*，或**逻辑监督**结果中至少有一个*不正确*；
 
-则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应将**局部监督状态**更改为 **WDGM_LOCAL_STATUS_EXPIRED**。
+则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应将**局部监督状态**更改为 **WDGM_LOCAL_STATUS_EXPIRED**。
 
 如果该**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_OK**，且调用 [**WdgM_SetMode**](#734-wdgm_setmode) 切换到某个停用该**被监督实体**的模式，则**看门狗管理器**模块应将**局部监督状态**更改为 **WDGM_LOCAL_STATUS_DEACTIVATED**。
 
@@ -485,7 +485,7 @@ release: R23-11
 
 请注意，上述需求仅适用于 **WDGM_LOCAL_STATUS_FAILED** 状态，而不适用于 **WDGM_LOCAL_STATUS_EXPIRED**。
 
-如果该**被监督实体**处于**局部监督状态** **WDGM_LOCAL_STATUS_DEACTIVATED**，则 [**WdgM_CheckpointReached**](#736-wdgm_checkpointreached) 与 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数不应为该**被监督实体**执行任何**监督功能**，并应将**局部监督状态**保持在 **WDGM_LOCAL_STATUS_DEACTIVATED** 状态。
+如果该**被监督实体**处于**局部监督状态** **WDGM_LOCAL_STATUS_DEACTIVATED**，则 [**WdgM_CheckpointReached**](#736-wdgm_checkpointreached) 与 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数不应为该**被监督实体**执行任何**监督功能**，并应将**局部监督状态**保持在 **WDGM_LOCAL_STATUS_DEACTIVATED** 状态。
 
 如果该**被监督实体**处于**局部监督状态** **WDGM_LOCAL_STATUS_DEACTIVATED**，且调用 [**WdgM_SetMode**](#734-wdgm_setmode) 切换到某个在该模式中激活该**被监督实体**的模式，则**看门狗管理器**模块应将**局部监督状态**更改为 **WDGM_LOCAL_STATUS_OK**。并且**失败的监督参考周期**计数器应设置为零（0）。
 
@@ -505,11 +505,11 @@ release: R23-11
 
 **过期监督容差**在**全局监督状态**的状态机内实现。所定义的状态机在阻塞被推迟期间处于 **WDGM_GLOBAL_STATUS_EXPIRED** 状态。
 
-[**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应在每个主函数周期计算**全局监督状态**。该函数应在计算每个**局部监督状态**之后计算**全局监督状态**。
+[**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应在每个主函数周期计算**全局监督状态**。该函数应在计算每个**局部监督状态**之后计算**全局监督状态**。
 
 **全局监督状态**的周期性更新对于及时地从 **WDGM_GLOBAL_STATUS_EXPIRED** 转换到 **WDGM_GLOBAL_STATUS_STOPPED** 是必要的。
 
-**注意** 在集群式软件架构的情况下，可能存在多个 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 实例。在这种情况下，**全局监督状态**可以在任意 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 实例每次被调用时更新。
+**注意** 在集群式软件架构的情况下，可能存在多个 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 实例。在这种情况下，**全局监督状态**可以在任意 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 实例每次被调用时更新。
 
 计算**全局监督状态**应使用以下规则：
 
@@ -519,29 +519,29 @@ release: R23-11
 
 必须仔细考虑：当 **WdgM** 处于 **WDGM_GLOBAL_STATUS_EXPIRED** 或 **WDGM_GLOBAL_STATUS_STOPPED** 状态时对其进行停用，可能会妨碍错误报告或错误反应。
 
-如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_OK**，且所有**被监督实体**的**局部监督状态**均为 **WDGM_LOCAL_STATUS_OK** 或 **WDGM_LOCAL_STATUS_DEACTIVATED**，则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应保持**全局监督状态** **WDGM_GLOBAL_STATUS_OK**。
+如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_OK**，且所有**被监督实体**的**局部监督状态**均为 **WDGM_LOCAL_STATUS_OK** 或 **WDGM_LOCAL_STATUS_DEACTIVATED**，则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应保持**全局监督状态** **WDGM_GLOBAL_STATUS_OK**。
 
-如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_OK**，至少一个**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_FAILED**，且没有**被监督实体**处于**局部监督状态** **WDGM_LOCAL_STATUS_EXPIRED**，则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应将**全局监督状态**更改为 **WDGM_GLOBAL_STATUS_FAILED**。
+如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_OK**，至少一个**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_FAILED**，且没有**被监督实体**处于**局部监督状态** **WDGM_LOCAL_STATUS_EXPIRED**，则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应将**全局监督状态**更改为 **WDGM_GLOBAL_STATUS_FAILED**。
 
 **看门狗管理器**模块支持一项特性，可将错误反应（切换到 **WDGM_LOCAL_STATUS_EXPIRED**）推迟一段可配置的时间。这可用于在看门狗复位之前允许执行清理活动，例如写入错误原因、写入 **NVRAM** 数据。
 
-如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_OK**，至少一个**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_EXPIRED**，且**过期监督容差**配置为大于零的值（见配置参数 **WdgMExpiredSupervisionCycleTol**），则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应将**全局监督状态**更改为 **WDGM_GLOBAL_STATUS_EXPIRED**。并递增**过期周期计数器**。
+如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_OK**，至少一个**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_EXPIRED**，且**过期监督容差**配置为大于零的值（见配置参数 **WdgMExpiredSupervisionCycleTol**），则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应将**全局监督状态**更改为 **WDGM_GLOBAL_STATUS_EXPIRED**。并递增**过期周期计数器**。
 
-如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_OK**，至少一个**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_EXPIRED**，且**过期监督容差**配置为零（见配置参数 **WdgMExpiredSupervisionCycleTol**），则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应将**全局监督状态**更改为 **WDGM_GLOBAL_STATUS_STOPPED**。
+如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_OK**，至少一个**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_EXPIRED**，且**过期监督容差**配置为零（见配置参数 **WdgMExpiredSupervisionCycleTol**），则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应将**全局监督状态**更改为 **WDGM_GLOBAL_STATUS_STOPPED**。
 
-如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_FAILED**，至少一个**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_FAILED**，且没有**被监督实体**处于**局部监督状态** **WDGM_LOCAL_STATUS_EXPIRED**，则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应保持在**全局监督状态** **WDGM_GLOBAL_STATUS_FAILED**。
+如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_FAILED**，至少一个**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_FAILED**，且没有**被监督实体**处于**局部监督状态** **WDGM_LOCAL_STATUS_EXPIRED**，则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应保持在**全局监督状态** **WDGM_GLOBAL_STATUS_FAILED**。
 
-如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_FAILED**，且所有**被监督实体**的**局部监督状态**均为 **WDGM_LOCAL_STATUS_OK** 或 **WDGM_LOCAL_STATUS_DEACTIVATED**，则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应将**全局监督状态**更改为 **WDGM_GLOBAL_STATUS_OK**。
+如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_FAILED**，且所有**被监督实体**的**局部监督状态**均为 **WDGM_LOCAL_STATUS_OK** 或 **WDGM_LOCAL_STATUS_DEACTIVATED**，则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应将**全局监督状态**更改为 **WDGM_GLOBAL_STATUS_OK**。
 
-如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_FAILED**，至少一个**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_EXPIRED**，且**过期监督容差**配置为大于零的值（见配置参数 **WdgMExpiredSupervisionCycleTol**），则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应将**全局监督状态**更改为 **WDGM_GLOBAL_STATUS_EXPIRED**。并递增**过期周期计数器**。
+如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_FAILED**，至少一个**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_EXPIRED**，且**过期监督容差**配置为大于零的值（见配置参数 **WdgMExpiredSupervisionCycleTol**），则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应将**全局监督状态**更改为 **WDGM_GLOBAL_STATUS_EXPIRED**。并递增**过期周期计数器**。
 
-如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_FAILED**，至少一个**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_EXPIRED**，且**过期监督容差**配置为零（见配置参数 **WdgMExpiredSupervisionCycleTol**），则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应将**全局监督状态**更改为 **WDGM_GLOBAL_STATUS_STOPPED**。
+如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_FAILED**，至少一个**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_EXPIRED**，且**过期监督容差**配置为零（见配置参数 **WdgMExpiredSupervisionCycleTol**），则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应将**全局监督状态**更改为 **WDGM_GLOBAL_STATUS_STOPPED**。
 
-如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_EXPIRED**，至少一个**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_EXPIRED**，且**过期周期计数器**小于所配置的**过期监督容差**（见配置参数 **WdgMExpiredSupervisionCycleTol**），则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应保持**全局监督状态** **WDGM_GLOBAL_STATUS_EXPIRED** 并递增**过期周期计数器**。
+如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_EXPIRED**，至少一个**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_EXPIRED**，且**过期周期计数器**小于所配置的**过期监督容差**（见配置参数 **WdgMExpiredSupervisionCycleTol**），则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应保持**全局监督状态** **WDGM_GLOBAL_STATUS_EXPIRED** 并递增**过期周期计数器**。
 
-如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_EXPIRED**，至少一个**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_EXPIRED**，且**过期周期计数器**等于所配置的**过期监督容差**（见配置参数 **WdgMExpiredSupervisionCycleTol**），则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应将**全局监督状态**更改为 **WDGM_GLOBAL_STATUS_STOPPED**。
+如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_EXPIRED**，至少一个**被监督实体**的**局部监督状态**为 **WDGM_LOCAL_STATUS_EXPIRED**，且**过期周期计数器**等于所配置的**过期监督容差**（见配置参数 **WdgMExpiredSupervisionCycleTol**），则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应将**全局监督状态**更改为 **WDGM_GLOBAL_STATUS_STOPPED**。
 
-如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_STOPPED**，则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应保持在**全局监督状态** **WDGM_GLOBAL_STATUS_STOPPED**。
+如果**全局监督状态**为 **WDGM_GLOBAL_STATUS_STOPPED**，则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应保持在**全局监督状态** **WDGM_GLOBAL_STATUS_STOPPED**。
 
 如果对 **WdgIf_SetMode** 的调用失败，则函数应假定发生全局监督失败，并将**全局监督状态**设置为 **WDGM_GLOBAL_STATUS_STOPPED**。
 
@@ -553,9 +553,9 @@ release: R23-11
 
 对每个**被监督实体**，**存活监督**与**截止时间监督**（超时检测部分）应在对应的**主函数**实例内执行，该实例由 **WdgMMainFunctionPartitionRef** 标识。
 
-如果**全局监督状态**不处于 **WDGM_GLOBAL_STATUS_DEACTIVATED** 状态，则 **[WdgM_MainFunction](#751-wdgm_mainfunction)()** 应按照所配置的**监督周期**执行**存活监督**。
+如果**全局监督状态**不处于 **WDGM_GLOBAL_STATUS_DEACTIVATED** 状态，则 **[WdgM_MainFunction](#741-wdgm_mainfunction)()** 应按照所配置的**监督周期**执行**存活监督**。
 
-如果**全局监督状态**不处于 **WDGM_GLOBAL_STATUS_DEACTIVATED** 状态，则 **[WdgM_MainFunction](#751-wdgm_mainfunction)()** 应按照所配置的**主函数周期**执行**截止时间监督**（超时检测部分）。
+如果**全局监督状态**不处于 **WDGM_GLOBAL_STATUS_DEACTIVATED** 状态，则 **[WdgM_MainFunction](#741-wdgm_mainfunction)()** 应按照所配置的**主函数周期**执行**截止时间监督**（超时检测部分）。
 
 #### 6.2.1. 存活监督
 
@@ -595,23 +595,23 @@ release: R23-11
 
 **存活监督**通过在一个可配置周期内统计来自**被监督实体**的报告次数（由 [**WdgM_CheckpointReached**](#736-wdgm_checkpointreached) 发出）来执行。
 
-该监督由具有可配置周期时间的 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 执行。主函数对某个**被监督实体**的每个**检查点**的计数器的周期性检查，在每个**监督参考周期**（即**监督周期**的整数倍）进行。
+该监督由具有可配置周期时间的 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 执行。主函数对某个**被监督实体**的每个**检查点**的计数器的周期性检查，在每个**监督参考周期**（即**监督周期**的整数倍）进行。
 
 **监督周期**与**监督参考周期**（见 **WdgMSupervisionReferenceCycle**）是给定**看门狗管理器模式**下某个**检查点**的**存活监督**的属性。
 
-[**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应对在活动**模式**中配置的每个**存活监督**（**WdgMAliveSupervision**），检查该**被监督实体**的每个**检查点**的**存活计数器**。该检查应按对应**存活监督**（**WdgMAliveSupervision**）的 **WdgMSupervisionReferenceCycle** 周期进行。
+[**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应对在活动**模式**中配置的每个**存活监督**（**WdgMAliveSupervision**），检查该**被监督实体**的每个**检查点**的**存活计数器**。该检查应按对应**存活监督**（**WdgMAliveSupervision**）的 **WdgMSupervisionReferenceCycle** 周期进行。
 
-**注意：** 在**存活监督**的中间**监督周期**内，[**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数不执行**存活计数器**的检查。
+**注意：** 在**存活监督**的中间**监督周期**内，[**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数不执行**存活计数器**的检查。
 
-[**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应通过检查**存活计数器**是否在允许的容差范围内（期望值 - 最小偏差；期望值 + 最大偏差）来检查它（见 **WdgMExpectedAliveIndications**、**WdgMMinMargin**、**WdgMMaxMargin**）。
+[**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应通过检查**存活计数器**是否在允许的容差范围内（期望值 - 最小偏差；期望值 + 最大偏差）来检查它（见 **WdgMExpectedAliveIndications**、**WdgMMinMargin**、**WdgMMaxMargin**）。
 
 如果某个**被监督实体**的任何**检查点**未通过该检查，则该**被监督实体**的**存活监督**结果被设置为*不正确*。
 
-如果 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数检测到某个**被监督实体**的任何**检查点**的已计数**存活指示**与期望的存活指示数量之间存在偏差（包括容差边界），则该**被监督实体**在该**监督参考周期**上的**存活监督**应定义为*不正确*。否则应定义为*正确*。
+如果 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数检测到某个**被监督实体**的任何**检查点**的已计数**存活指示**与期望的存活指示数量之间存在偏差（包括容差边界），则该**被监督实体**在该**监督参考周期**上的**存活监督**应定义为*不正确*。否则应定义为*正确*。
 
 如果某个**检查点**在某个模式中未被**存活监督**，则**看门狗管理器**忽略它。
 
-[**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数不应在活动的**看门狗管理器模式**中未定义对应的**存活监督**（**WdgMAliveSupervision**）时，检查某个**检查点**的**存活计数器**。
+[**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数不应在活动的**看门狗管理器模式**中未定义对应的**存活监督**（**WdgMAliveSupervision**）时，检查某个**检查点**的**存活计数器**。
 
 #### 6.2.2. 截止时间监督
 
@@ -647,13 +647,13 @@ release: R23-11
 
 每个**被监督实体**的 **OS** 计数器应配置为可从包含该**被监督实体**的 **OsApplication** 访问。
 
-如果 **WdgMEnableTimeoutDetection** 设置为 true，则每个**被监督实体**的 **OS** 计数器还应配置为可从调用 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 的 **OsApplication** 访问。
+如果 **WdgMEnableTimeoutDetection** 设置为 true，则每个**被监督实体**的 **OS** 计数器还应配置为可从调用 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 的 **OsApplication** 访问。
 
 为了确定时间戳并计算时间戳之差，[**WdgM_CheckpointReached**](#736-wdgm_checkpointreached) 函数应使用 **OS** 函数 **GetElapsedValue**，其第一个参数使用为该**被监督实体**配置的 CounterID（见 **WdgMOSCounter**）。
 
 时间戳以 tick 为单位。而**看门狗**的截止时间配置以秒为单位。tick 与秒之间的换算在 **OS** 中配置。
 
-为了将时间戳差换算到限值（**WdgMDeadlineMin** 与 **WdgMDeadlineMax**），[**WdgM_CheckpointReached**](#736-wdgm_checkpointreached) 函数（用于提前到达与延迟的检测）以及 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数（用于超时的检测）应使用 **OsSecondsPerTick** 配置参数。
+为了将时间戳差换算到限值（**WdgMDeadlineMin** 与 **WdgMDeadlineMax**），[**WdgM_CheckpointReached**](#736-wdgm_checkpointreached) 函数（用于提前到达与延迟的检测）以及 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数（用于超时的检测）应使用 **OsSecondsPerTick** 配置参数。
 
 在初始化期间，所有**截止时间起始检查点**（即由 **WdgMDeadlineStartRef** 引用的**检查点**）的时间戳都被清零——设置为 0。
 
@@ -679,7 +679,7 @@ release: R23-11
 
 对于任何既不是**截止时间起始检查点**也不是**截止时间结束检查点**的报告**检查点**，[**WdgM_CheckpointReached**](#736-wdgm_checkpointreached) 函数应忽略该**检查点**，并且不更新该**被监督实体**的**截止时间监督**结果。
 
-如果启用了**截止时间超时**检测（即 **WdgMEnableTimeoutDetection** 设置为 'true'），则对于活动模式中配置的所有**截止时间监督**，如果对应**截止时间起始检查点**的时间戳 <> 0（即已报告起始检查点但尚未报告对应的结束检查点），则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应测量当前时间戳与对应**截止时间起始检查点**时间戳之间的时间差。如果测得的时间差超出（大于）最大限值（**WdgMDeadlineMax**），则 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应将该**被监督实体**的**截止时间监督**结果定义为*不正确*。
+如果启用了**截止时间超时**检测（即 **WdgMEnableTimeoutDetection** 设置为 'true'），则对于活动模式中配置的所有**截止时间监督**，如果对应**截止时间起始检查点**的时间戳 <> 0（即已报告起始检查点但尚未报告对应的结束检查点），则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应测量当前时间戳与对应**截止时间起始检查点**时间戳之间的时间差。如果测得的时间差超出（大于）最大限值（**WdgMDeadlineMax**），则 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应将该**被监督实体**的**截止时间监督**结果定义为*不正确*。
 
 **注意：** 通过这种方式，可以在**截止时间结束检查点**始终未被到达时检测到错误（**截止时间监督**的超时检测部分）。
 
@@ -795,7 +795,7 @@ CP0-0 i = 0; CP0-1 while(i < n) { CP0-2 if (a[i] < b[i]) CP0-3 a[i] = b[i]; CP0-
 
 当**看门狗管理器**达到 **WDGM_GLOBAL_STATUS_STOPPED** 状态时，**看门狗管理器**模块向**诊断事件管理器**（**DEM**）登记一个条目。**SW-C** 或 **CDD** 可以基于该错误条目采取恢复动作。
 
-在 [**WdgM_Init**](#731-wdgm_init) 之后的第一次 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 调用中，如果前一个运行周期的复位原因是**全局监督状态**曾达到 **WDGM_GLOBAL_STATUS_STOPPED**，且已配置参数 [WDGM_E_SUPERVISION](#684-生产错误)，则**看门狗管理器**模块应向 **DEM** 报告 [WDGM_E_SUPERVISION](#684-生产错误) 的错误状态 FAILED。
+在 [**WdgM_Init**](#731-wdgm_init) 之后的第一次 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 调用中，如果前一个运行周期的复位原因是**全局监督状态**曾达到 **WDGM_GLOBAL_STATUS_STOPPED**，且已配置参数 [WDGM_E_SUPERVISION](#684-生产错误)，则**看门狗管理器**模块应向 **DEM** 报告 [WDGM_E_SUPERVISION](#684-生产错误) 的错误状态 FAILED。
 
 #### 6.3.3. 不设置看门狗触发条件
 
@@ -833,9 +833,9 @@ CP0-0 i = 0; CP0-1 while(i < n) { CP0-2 if (a[i] < b[i]) CP0-3 a[i] = b[i]; CP0-
 
 **看门狗管理器**模块应在每次重新计算**全局监督状态**后更新触发条件。应使用以下规则来确定如何设置触发条件：
 
-1. 对于 **WDGM_GLOBAL_STATUS_OK**、**WDGM_GLOBAL_STATUS_FAILED** 与 **WDGM_GLOBAL_STATUS_EXPIRED** 状态，[**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应正确设置触发条件。
-2. 对于 **WDGM_GLOBAL_STATUS_STOPPED** 状态，[**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数应将触发条件设置为 0，其结果是通过硬件看门狗产生复位。
-3. 对于 **WDGM_GLOBAL_STATUS_DEACTIVATED** 状态，[**WdgM_MainFunction**](#751-wdgm_mainfunction) 函数不应设置触发条件（因为该状态意味着**看门狗管理器**模块未被正确初始化）。
+1. 对于 **WDGM_GLOBAL_STATUS_OK**、**WDGM_GLOBAL_STATUS_FAILED** 与 **WDGM_GLOBAL_STATUS_EXPIRED** 状态，[**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应正确设置触发条件。
+2. 对于 **WDGM_GLOBAL_STATUS_STOPPED** 状态，[**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数应将触发条件设置为 0，其结果是通过硬件看门狗产生复位。
+3. 对于 **WDGM_GLOBAL_STATUS_DEACTIVATED** 状态，[**WdgM_MainFunction**](#741-wdgm_mainfunction) 函数不应设置触发条件（因为该状态意味着**看门狗管理器**模块未被正确初始化）。
 
 如果**全局监督状态**重新计算为 **WDGM_GLOBAL_STATUS_OK**，则**看门狗管理器**模块应对所有未配置为 **WDGIF_OFF_MODE** 的看门狗调用 **WdgIf_SetTriggerCondition**，其 id 参数设置为 **WdgMWatchdogDeviceRef**，其触发条件参数设置为 **WdgMTriggerConditionValue**。
 
@@ -987,7 +987,7 @@ CP0-0 i = 0; CP0-1 while(i < n) { CP0-2 if (a[i] < b[i]) CP0-3 a[i] = b[i]; CP0-
 
 对于支持集群式软件架构（带或不带多分区配置）的 **ECU** 软件，假定**看门狗管理器**将按以下方式分配到每个**软件集群**（同样如图 7.12 所示）：
 
-- 在**宿主软件集群**内，**WdgM** 应提供完整的 **API** 集合（[**WdgM_MainFunction**](#751-wdgm_mainfunction)、[**WdgM_CheckpointReached**](#736-wdgm_checkpointreached) 等）。每个 **EcucPartition** 至少提供一个 [**WdgM_MainFunction**](#751-wdgm_mainfunction)。这些 API 集执行：
+- 在**宿主软件集群**内，**WdgM** 应提供完整的 **API** 集合（[**WdgM_MainFunction**](#741-wdgm_mainfunction)、[**WdgM_CheckpointReached**](#736-wdgm_checkpointreached) 等）。每个 **EcucPartition** 至少提供一个 [**WdgM_MainFunction**](#741-wdgm_mainfunction)。这些 API 集执行：
     - 在**宿主软件集群**内、按 EcucPartition（即在主实例和每个从实例中）的**存活监督**、**截止时间监督**与**逻辑监督**
     - 基于**跨集群外部图**的跨**软件集群****逻辑监督**（仅在包含 **WdgM** 主实例的 EcucPartition 中）
     - 每个**被监督实体**的**局部监督状态**的确定
@@ -995,8 +995,8 @@ CP0-0 i = 0; CP0-1 while(i < n) { CP0-2 if (a[i] < b[i]) CP0-3 a[i] = b[i]; CP0-
     - 基于**局部监督状态**的恢复动作
     - 基于**全局监督状态**的恢复动作（仅在主实例中）
     - **看门狗处理**（包括通过 **WdgIf** 与 **Wdg** 模块的看门狗触发）（仅在主实例中）
-- 在**宿主软件集群**内，**WdgM** 应在所有 EcucPartition 上提供从实例（[**WdgM_MainFunction**](#751-wdgm_mainfunction)），它们可连接到每个**应用软件集群**中的 **WdgM** 主实例。这确保**应用软件集群**中的每个 **WdgM**（主实例）都能访问同一分区上**宿主软件集群**中的 **WdgM**。
-- 在每个**应用软件集群**内，**WdgM** 应提供 **API** 的子集。每个 EcucPartition 至少提供一个 [**WdgM_MainFunction**](#751-wdgm_mainfunction)。
+- 在**宿主软件集群**内，**WdgM** 应在所有 EcucPartition 上提供从实例（[**WdgM_MainFunction**](#741-wdgm_mainfunction)），它们可连接到每个**应用软件集群**中的 **WdgM** 主实例。这确保**应用软件集群**中的每个 **WdgM**（主实例）都能访问同一分区上**宿主软件集群**中的 **WdgM**。
+- 在每个**应用软件集群**内，**WdgM** 应提供 **API** 的子集。每个 EcucPartition 至少提供一个 [**WdgM_MainFunction**](#741-wdgm_mainfunction)。
     - 在**宿主软件集群**内、按 EcucPartition（即在主实例和每个从实例中）的**存活监督**、**截止时间监督**与**逻辑监督**
     - 每个**被监督实体**的**局部监督状态**的确定
     - 基于**局部监督状态**的恢复动作
@@ -1094,7 +1094,7 @@ CP0-0 i = 0; CP0-1 while(i < n) { CP0-2 if (a[i] < b[i]) CP0-3 a[i] = b[i]; CP0-
 
 **注意：** 即使 **DemStatusBitStorageTestFailed** 被设置为 true，所存储的 DTC 也可能不会显示为「测试失败（事件激活）」，因为在达到**全局监督状态** = **WDGM_GLOBAL_STATUS_STOPPED** 之后无法始终确保 DTC 的存储。
 
-在 [**WdgM_Init**](#731-wdgm_init) 之后的第一次 [**WdgM_MainFunction**](#751-wdgm_mainfunction) 调用中，但在上述报告执行之后，如果已配置参数 WDGM_E_SUPERVISION，则**看门狗管理器**模块应向 **DEM** 报告 WDGM_E_SUPERVISION 的错误状态 PASSED。
+在 [**WdgM_Init**](#731-wdgm_init) 之后的第一次 [**WdgM_MainFunction**](#741-wdgm_mainfunction) 调用中，但在上述报告执行之后，如果已配置参数 WDGM_E_SUPERVISION，则**看门狗管理器**模块应向 **DEM** 报告 WDGM_E_SUPERVISION 的错误状态 PASSED。
 
 #### 6.8.5. 扩展生产错误
 
@@ -1331,15 +1331,12 @@ Std_ReturnType WdgM_GetFirstExpiredSEID ( WdgM_SupervisedEntityIdType* SEID )
 
 **WdgM_GetFirstExpiredSEID()** 函数应从未初始化的 **RAM** 位置读取以双反转值存储的 **SEID**。如果该值与其反转值不对应，则该函数应返回 **E_NOT_OK** 并向 *SEID 写入 0。如果该值与其反转值对应，则该函数应返回 **E_OK** 并将读取到的值写入 *SEID。
 
-### 7.4. 回调通知
 
-不适用。
-
-### 7.5. 调度函数
+### 7.4. 调度函数
 
 这些函数由**基础软件调度器**直接调用。
 
-#### 7.5.1. WdgM_MainFunction
+#### 7.4.1. WdgM_MainFunction
 
 **说明**: 此服务执行**看门狗管理器**周期性作业的处理。可通过**SchM_WdgM.h**获得。
 
@@ -1361,13 +1358,13 @@ void WdgM_MainFunction ( void )
 
 如果配置参数 **WdgMDevErrorDetect** 已启用，则该例程应检查**看门狗管理器**是否已初始化。如果发生错误，则不应执行主函数，并应以错误代码 [**WDGM_E_UNINIT**](#681-开发错误) 向**默认错误跟踪器**报告开发错误。
 
-### 7.6. 期望接口
+### 7.5. 期望接口
 
 本章列出了**看门狗管理器**模块需要从其他模块获得的所有接口。
 
 ![Figure8-1.png](Figure8-1.png)
 
-#### 7.6.1. 强制接口
+#### 7.5.1. 强制接口
 
 本节定义了为实现模块核心功能所需的所有接口。
 
@@ -1378,7 +1375,7 @@ void WdgM_MainFunction ( void )
 | WdgIf_SetMode | WdgIf.h | 将服务 **WdgIf_SetMode** 映射到对应**看门狗驱动**的 **Wdg_SetMode** 服务。 |
 | WdgIf_SetTriggerCondition | WdgIf.h | 将服务 **WdgIf_SetTriggerCondition** 映射到对应**看门狗驱动**的 **Wdg_SetTriggerCondition** 服务。 |
 
-#### 7.6.2. 可选接口
+#### 7.5.2. 可选接口
 
 本节定义了为实现模块可选功能所需的所有接口。
 
@@ -1394,11 +1391,8 @@ void WdgM_MainFunction ( void )
 | SwCluC_BManif_GetNoOfHandleSets _<Resource Entry Group> | SwCluC_BManif.h | 返回实际使用的——因而也是已连接的——句柄集的数量。 |
 | SwCluC_BManif_GetNoOfHandleSets _<Resource Entry Group>_<Resource Entry> | SwCluC_BManif.h | 返回实际使用的——因而也是已连接的——句柄集的数量 |
 
-#### 7.6.3. 可配置接口
 
-不适用。
-
-### 7.7. 服务接口
+### 7.6. 服务接口
 
 本章规定由**看门狗管理器**模块提供的 **AUTOSAR** 接口。**看门狗管理器**服务的 **SW-C** 描述将定义对 **SW-C** 与 **CDD** 可用的**看门狗管理器**端口。每个使用该服务的 **AUTOSAR SW-C** 或 **CDD** 都必须在其自身的描述中包含服务端口。这些端口使用相同的接口进行类型化，并且必须连接到**看门狗管理器**模块的端口，以便 **RTE** 能够生成相应的 **ID** 与所需的符号。
 
@@ -1414,15 +1408,15 @@ void WdgM_MainFunction ( void )
 - 端口：globalSupervision（端口接口：**WdgM_GlobalSupervision**，操作：**GetMode**）
 - 端口：mode_{SupervisedEntityName}（端口接口：**WdgM_LocalMode**，ModeGroup：currentMode）
 
-#### 7.7.1. 监督的端口与端口接口
+#### 7.6.1. 监督的端口与端口接口
 
-##### 7.7.1.1. 总体方案
+##### 7.6.1.1. 总体方案
 
 为了减少**看门狗管理器**模块所提供的端口数量，所有 **SW-C** / **CDD** 与该服务之间的接口都建模为**客户端/服务器**通信。对于报告**检查点**，发送者-接收者范式看起来可能更合适，但这种建模方式会使端口数量翻倍。因此，对于该功能同样选择了**客户端/服务器**范式。
 
 唯一的**被监督实体** **ID** 用于标识 **ECU** 内的**被监督实体**。为了使应用代码不依赖于 **ECU** 相关的**被监督实体** ID 的配置，**SW-C** 与 **CDD** 所使用的 **ID** 不被显式建模为在 **SW-C** 与服务之间传递的数据元素。这些 **ID** 被建模为**看门狗管理器**模块的 Provide 端口的「端口定义参数值」。因此，**被监督实体** **ID** 不会作为客户端-服务器接口操作的参数出现。该方法的进一步后果是，将为每个**被监督实体**设置独立的端口。
 
-##### 7.7.1.2. 数据类型
+##### 7.6.1.2. 数据类型
 
 在应用与服务之间传递的信息为：
 
@@ -1453,7 +1447,7 @@ void WdgM_MainFunction ( void )
 
 请注意，**检查点** **ID** 本身并不唯一。只有**被监督实体** **ID** 与**检查点** **ID** 的组合才能唯一标识一个**检查点**。
 
-##### 7.7.1.3. 端口接口
+##### 7.6.1.3. 端口接口
 
 所有操作被放入两个接口中（一个包含针对单个**被监督实体**的特定操作，另一个包含**看门狗管理器**的全局操作）。
 
@@ -1503,7 +1497,7 @@ void WdgM_MainFunction ( void )
 
 与 **API** 相比，这里名称中的 ' **WdgM_** ' 前缀不是必需的，因为此处给出的名称将出现在 **XML** 中，但不是作为接口描述的一部分出现，而是作为其一部分出现。
 
-##### 7.7.1.4. 服务端口
+##### 7.6.1.4. 服务端口
 
 图 8.2 给出了 **AUTOSAR** 软件组件（单个或多个实例）如何通过服务端口连接到**看门狗管理器**模块。在左侧，SWC1：SWC Type A。
 
@@ -1549,13 +1543,13 @@ void WdgM_MainFunction ( void )
 | 接口 | WdgM_GlobalSupervision |
 | 变体 | - |
 
-##### 7.7.1.5. 错误代码
+##### 7.6.1.5. 错误代码
 
 监督服务不返回任何服务特定的错误代码。
 
-#### 7.7.2. 状态报告的端口与端口接口
+#### 7.6.2. 状态报告的端口与端口接口
 
-##### 7.7.2.1. 总体方案
+##### 7.6.2.1. 总体方案
 
 为了控制 **SW-C** 与 **CDD** 的状态相关行为，**RTE** 提供了模式端口机制。模式管理器可以在模式端口中定义的不同模式之间切换。连接到模式端口的 **SW-C** / **CDD** 可以以两种方式使用模式信息：
 
@@ -1569,7 +1563,7 @@ void WdgM_MainFunction ( void )
 - 第一，它提供每个**被监督实体**的**局部监督状态**。因此，**看门狗管理器**模块为每个**被监督实体**都有一个模式端口。
 - 第二，**看门狗管理器**模块提供**全局监督状态**，它反映了所有**被监督实体**的组合监督状态。因此，它还有一个额外的模式端口。
 
-##### 7.7.2.2. 数据类型
+##### 7.6.2.2. 数据类型
 
 模式声明组 **WdgM_Mode** 表示将通知给 **SW-C** / **CDD** 与 **RTE** 的**看门狗管理器**模块的模式。
 
@@ -1629,7 +1623,7 @@ void WdgM_MainFunction ( void )
 | 变体 | - |
 | 可通过 | Rte_WdgM_Type.h |
 
-##### 7.7.2.3. 端口接口
+##### 7.6.2.3. 端口接口
 
 有两个不同的接口用于向感兴趣的 **SW-C** / **CDD** 与 **RTE** 指示监督状态的变化。
 
@@ -1663,7 +1657,7 @@ void WdgM_MainFunction ( void )
 
 为了避免**全局监督状态**的模式端口出现在该列表中，该端口使用不同的接口，即 **WdgM_GlobalMode** 而不是 **WdgM_LocalMode**。
 
-##### 7.7.2.4. 模式端口
+##### 7.6.2.4. 模式端口
 
 图 8.3 给出了 **AUTOSAR** 软件组件（单个或多个实例）如何通过模式端口与服务端口连接到**看门狗管理器**模块。在左侧，有组件 SWC Type A 的两个实例（swc1 和 swc2）与组件 SWC Type B 的一个实例（swc3）。每个组件都连接到与其自身**被监督实体**相对应的模式端口。此外，swc3 还连接到全局模式端口，因此可以对所有**被监督实体**的组合监督状态的变化作出反应。
 

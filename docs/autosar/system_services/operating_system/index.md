@@ -1737,7 +1737,7 @@ OS 服务 **ResumeOSInterrupts** 应仅影响调用它的内核。
 
 如果配置了 [IOC](#75-ioc)，**StartOS** 应初始化 [IOC](#75-ioc) 的数据结构。
 
-如果配置了 [IOC](#75-ioc)，并且 OS 生成器以"Default mode"被调用，**StartOS** 应调用 [**IocInit**](#7541-iocinit)（参见 [SWS_Os_00835]）来初始化 [IOC](#75-ioc) 的数据结构。
+如果配置了 [IOC](#75-ioc)，并且 OS 生成器以"Default mode"被调用，**StartOS** 应调用 [**IocInit**](#7531-iocinit)（参见 [SWS_Os_00835]）来初始化 [IOC](#75-ioc) 的数据结构。
 
 #### 6.9.15. 任务终止
 
@@ -2068,7 +2068,7 @@ OS 生成器应提供配置参数，允许将 [IOC](#75-ioc) 通信代码（"[IO
 
 需求 [SWS_Os_00833] 和 [SWS_Os_00834] 确保 OS 与 [IOC](#75-ioc) 可以相互独立地生成，并在构建 ECU 实例/机器（**Machine**）时链接在一起。
 
-如果配置了 [IOC](#75-ioc)，则应存在一个函数 [**IocInit**](#7541-iocinit)，负责 [IOC](#75-ioc) 数据结构的初始化。
+如果配置了 [IOC](#75-ioc)，则应存在一个函数 [**IocInit**](#7531-iocinit)，负责 [IOC](#75-ioc) 数据结构的初始化。
 
 内存保护边界是 **OS-Application** 的一个特性，需要特殊的通信机制才能跨越它们。多核系统可能还需要额外的措施来使内核之间的通信安全。
 
@@ -3608,11 +3608,8 @@ boolean isOsStarted ( void )
 
 如果一个 **ImplementationDataType** 的 typeEmitter != **RTE** 且以 ".h" 结尾，并用于 [**IOC**](#75-ioc) 通信，则 [**IOC**](#75-ioc) 应包含所指定的头文件。
 
-#### 7.5.2. 类型定义
 
-无
-
-#### 7.5.3. 常量
+#### 7.5.2. 常量
 
 | 名称 | 通信 | 类型 | 错误名 / 值 | 说明 |
 |---|---|---|---|---|
@@ -3622,11 +3619,11 @@ boolean isOsStarted ( void )
 | IOC_E_LOST_DATA | 排队 RCV | Std_ReturnType | 叠加错误 RTE_E_LOST_DATA / 64 | 在"事件"（排队）语义下，该叠加错误表示 [IOC](#75-ioc) 服务由于内部缓冲区溢出而拒绝了 IocSend 请求。 |
 | IOC_E_NO_DATA | 排队 RCV | Std_ReturnType | RTE_E_NO_DATA / 131 | 在"事件"（排队）语义下，没有可供接收的数据。 |
 
-#### 7.5.4. 函数定义
+#### 7.5.3. 函数定义
 
 如果 **VariableDataPrototype** 为动态类型，且相应的 **ApplicationArrayDataType** 中未使用尺寸指示符，则应生成该 **API** 的可选 length 参数。
 
-###### 7.5.4.1. IocInit
+###### 7.5.3.1. IocInit
 
 **说明**: 该服务初始化 [**IOC**](#75-ioc) 的数据结构。同步（**Synchronous**）服务，服务 ID 0x35，不可重入（**Non Reentrant**）。参数（in/inout/out）：无。返回值：无。可通过 **Ioc.h** 获得。
 
@@ -3634,7 +3631,7 @@ boolean isOsStarted ( void )
 void IocInit ( void )
 ```
 
-###### 7.5.4.2. IocSend / IocWrite
+###### 7.5.3.2. IocSend / IocWrite
 
 **IocWrite** API 调用是为"数据"（非排队）语义生成的，而 **IocSend** API 调用是为"事件"（排队）语义生成的。
 
@@ -3692,7 +3689,7 @@ Std_ReturnType IocWrite_<IocId>[_<SenderId>] ( <Data> IN, [uint16 numberOfBytesI
 
 在"事件"语义下，[**IOC**](#75-ioc) 应使用属性 **OsIocBufferLength** 的值配置其内部传输缓冲区尺寸。
 
-###### 7.5.4.3. IocSendGroup / IocWriteGroup
+###### 7.5.3.3. IocSendGroup / IocWriteGroup
 
 **IocWriteGroup** API 调用是为"数据"（非排队）语义生成的，而 **IocSendGroup** API 调用是为"事件"（排队）语义生成的。
 
@@ -3734,7 +3731,7 @@ Std_ReturnType IocWriteGroup_<IocId> ( <Data1> IN1, [uint16 numberOfBytesIN1], <
 
 在"事件"语义下，[**IOC**](#75-ioc) 应使用属性 **OsIocBufferLength** 的值配置其内部传输缓冲区尺寸。
 
-###### 7.5.4.4. IocReceive / IocRead
+###### 7.5.3.4. IocReceive / IocRead
 
 **IocRead** API 调用是为"数据"生成的，而 **IocReceive** API 调用是为"事件"生成的。
 
@@ -3788,7 +3785,7 @@ Std_ReturnType IocRead_<IocId>[_<ReceiverId>] ( <Data> OUT, [uint16* numberOfByt
 
 在"事件"语义下，如果 [**IOC**](#75-ioc) 通信服务由于内部缓冲区溢出而拒绝了发送方的 IocSend 请求，**IocReceive** 函数应返回 **IOC_E_LOST_DATA** 叠加错误。参数中返回的数据没有错误。
 
-###### 7.5.4.5. IocReceiveGroup / IocReadGroup
+###### 7.5.3.5. IocReceiveGroup / IocReadGroup
 
 **IocReadGroup** API 调用是为"数据"生成的，而 **IocReceiveGroup** API 调用是为"事件"生成的。
 
@@ -3826,7 +3823,7 @@ Std_ReturnType IocReadGroup_<IocId> ( <Data1> OUT1, [uint16* numberOfBytesOUT1],
 
 在"事件"语义下，如果 [**IOC**](#75-ioc) 通信服务由于内部缓冲区溢出而拒绝了发送方的 IocSendGroup 请求，**IocReceiveGroup** 函数应返回 **IOC_E_LOST_DATA** 叠加错误。参数中返回的数据没有错误。
 
-###### 7.5.4.6. IocEmptyQueue
+###### 7.5.3.6. IocEmptyQueue
 
 **说明**: 在由函数名中的 &lt;IocId&gt; 标识的排队通信中，应删除 [**IOC**](#75-ioc) 内部通信队列的内容。同步（**Synchronous**）服务，服务 ID 0x26，不可重入（**Non reentrant**）。参数（in/inout/out）：无。返回值（**Std_ReturnType**）：**IOC_E_OK**：队列内容被成功删除。可通过 **Ioc.h** 获得。
 

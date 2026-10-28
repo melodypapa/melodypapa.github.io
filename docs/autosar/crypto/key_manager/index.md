@@ -4,10 +4,6 @@ spec: AUTOSAR_CP_SWS_KeyManager
 release: R23-11
 ---
 
-## 已知限制
-
-无。
-
 ## 1. 简介和功能概述
 
 本规范规定了 **AUTOSAR** 基础软件模块 &lt;KeyManager&gt; 的功能、**API** 和配置。
