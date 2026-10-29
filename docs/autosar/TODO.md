@@ -112,7 +112,7 @@
 ## diagnostics
 
 - ⚠️ [Dcm 诊断通信管理器](diagnostic_communication_manager/) — SWS_DiagnosticCommunicationManager (intro + 缩略语 only; source ~24k lines)
-- ⚠️ [Dem 诊断事件管理器](diagnostic_event_manager/) — SWS_DiagnosticEventManager (missing constraints/dependencies/API; has an unnumbered heading gap)
+- ✅ [Dem 诊断事件管理器](diagnostic_event_manager/) — SWS_DiagnosticEventManager · R23-11 (Type A full rebuild 2026-10-29, PR #186: 11,270 lines; API 111 entries incl. 76 grouped functions, 38 ports, 46 config containers, appendix B)
 
 ❌ Missing (1): SWS_SAEJ1939DiagnosticCommunicationManager (J1939Dcm)
 
