@@ -577,6 +577,26 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## E
 
+**EC**
+> 以太网控制器（**Ethernet controller**）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
+
+**ET**
+> 以太网收发器（**Ethernet transceiver**）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
+
+**Eth**
+> Ethernet Controller Driver（**AUTOSAR BSW** 模块）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
+
+**EthIf**
+> Ethernet Interface（**AUTOSAR BSW** 模块）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
+
+**EthTrcv**
+> Ethernet Transceiver Driver（**AUTOSAR BSW** 模块）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
+
 **EAI**
 > 期望存活指示（**Expected Alive Indications**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
@@ -1140,6 +1160,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
 
 
+**MCG**
+> 模块配置生成器（**Module Configuration Generator**）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
+
+**MII**
+> 媒体独立接口（**Media Independent Interface**，由以太网控制器提供的用于访问以太网收发器的标准化接口，参见 IEEE 802.3-2006）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
+
 **MSBF**
 > Most Significant Byte First —— 最高有效字节在前。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
@@ -1299,6 +1327,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## O
 
+**OA TC10**
+> Open Alliance TC10（参见 OPEN Sleep/Wake-up Specification for Automotive Ethernet）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
+
 **OBD**
 > 车载诊断（**On-board Diagnostics**）。
 > 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager · R23-11）
@@ -1386,6 +1418,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
 
 ## P
+
+**P2P**
+> 点对点（**Point-to-Point**）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
+
+**PLCA**
+> 物理层冲突避免（**Physical Layer Collision Avoidance**）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
 
 **P-Code**
 > 动力总成代码（**Power train code**）
@@ -1815,6 +1855,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[BSW Distribution Guide（BSW 分布指南）](general/bsw_distribution_guide/index.md)（AUTOSAR_CP_EXP_BSWDistributionGuide · R23-11）
 
 ## T
+
+**TO**
+> 发送机会（**Transmit Opportunity**）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
 
 **Target time**
 > 目标时间：到达该值时应有某事发生。其行为取决于配置和已启用的功能。

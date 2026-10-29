@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **57** 份已有站内文章）。
+共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **58** 份已有站内文章）。
 
 ## A
 
@@ -3476,124 +3476,124 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthTrcv_BaudRateType**
-> 类型 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_CheckWakeup**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_ConfigType**
-> 类型 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_DuplexModeType**
-> 类型 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_EthSwitchMacSecAddTxSa**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_EthSwitchMacSecUpdateSecY**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetBaudRate**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetBusWuReason**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetCableDiagnosticsResult**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetDuplexMode**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetLinkState**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetMacMethod**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetPhyIdentifier**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetPhySignalQuality**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetTransceiverMode**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetVersionInfo**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_Init**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_LinkStateType**
-> 类型 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacMethodType**
-> 类型 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecAddRxSa**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecAddTxSa**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecDeleteRxSa**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecDeleteTxSa**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecGetMacSecStats**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecGetTxSaNextPn**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecInitRxSc**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecResetRxSc**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecSetControlledPortEnabled**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecUpdateRxSa**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecUpdateSecY**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecUpdateTxSa**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_SetPhyLoopbackMode**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_SetPhyTestMode**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_SetPhyTxMode**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_SetTransceiverMode**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_StartAutoNegotiation**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_StateType**
-> 类型 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_SwitchMacSecAddRxSa**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_SwitchMacSecGetMacSecStats**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_TransceiverLinkStateRequest**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTSyn_ConfigType**
 > 类型 · 未翻译 · SWS_TimeSyncOverEthernet · R23-11

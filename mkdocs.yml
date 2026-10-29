@@ -133,6 +133,7 @@ nav:
       - "Eth": autosar/communication/ethernet_driver/index.md
       - "EthIf": autosar/communication/ethernet_interface/index.md
       - "EthSwt": autosar/communication/ethernet_switch_driver/index.md
+      - "EthTrcv": autosar/communication/eth_trcv/index.md
       - "FvM": autosar/communication/fvm/fvm.md
       - "LdCom": autosar/communication/large_data_com/index.md
       - "Lin": autosar/communication/lin_driver/index.md
