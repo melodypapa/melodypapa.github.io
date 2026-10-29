@@ -52,7 +52,7 @@
 
 - [ ] Communication backbone: Com, CanSM, CanTp, TcpIp, Nm, EthSM, IpduM, SomeIpXf/SomeIpTp
 - [ ] System services: ComM, Det (small; Det first)
-- [ ] Global time cluster: StbM + CanTSyn/EthTSyn/FrTSyn
+- [ ] Global time cluster: StbM + CanTSyn/EthTSyn/FrTSyn — StbM done 2026-10-30 (Group-globaltime batch row 1)
 - [ ] Storage wrap-up: Ea, Eep
 - [ ] Libraries: Crc, E2E
 - [x] ~~Safety: WdgIf, Wdg~~ — done 2026-10-27 (wdgif + wdg run)
@@ -62,11 +62,11 @@
 
 | Status | Count | Note |
 | --- | ---: | --- |
-| ✅ Type A-compliant | 21 | ready to use |
+| ✅ Type A-compliant | 22 | ready to use |
 | 🔶 Translated pending alignment | 8 | seven chapters present; legacy wording / forbidden-chapter residue |
 | ⚠️ Partial | 16 | missing ≥1 chapter (most miss the 「API规范」 chapter) |
 | ⛔ Stub | 4 | 9–19 lines only |
-| ❌ Missing (SWS) | 78 | R23-11 has 127 SWS docs in total; 49 covered (38.6%) |
+| ❌ Missing (SWS) | 77 | R23-11 has 127 SWS docs in total; 50 covered (39.4%) |
 | ❌ Missing (EXP) | 11 | R23-11 has 22 EXP docs in total; 11 covered |
 | 📖 Guide/topic | 8 | exempt from the Type A skeleton |
 
@@ -126,6 +126,10 @@
 
 - ✅ [Platform Types（平台类型）](general/platform_types/) — SWS_PlatformTypes (2026-10-27 full Type A translation from R23-11: new article in the directory the StandardTypes run vacated; §4 carries the source's third subsection 4.3 安全相关环境的适用性; §5 对其他模块的依赖 incl. 5.1 文件结构; §6 功能规格 = 6.1 一般问题 / 6.2 CPU类型 / 6.3 字节序 (6.3.1 位序 + 6.3.2 字节序, 3 endian figures extracted) / 6.4 优化的整数数据类型 / 6.5 布尔数据类型 (C99 _Bool usage fences) / 6.6 错误分类; §7 API = 7.1 导入的类型 不适用 / 7.2 类型定义 19 entries (boolean, uint8..sint64, *_least ×6, float32/64 IEEE 754-2008, VoidPtr/ConstVoidPtr) / 7.3 符号定义 4 entries (CPU_TYPE, CPU_BIT_ORDER, CPU_BYTE_ORDER, TRUE/FALSE #ifndef fences) / 7.4–7.7 不适用; §8/§9 = 不适用 per source ch.9/10.1; appendix B 可追溯项变更历史 with verbatim ID fences; reconstructions flagged: TRUE/FALSE fence tail + VoidPtr Description truncated in source)
 
+## globaltime
+
+- ✅ [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) — SWS_SynchronizedTimeBaseManager · R23-11 (2026-10-30 full Type A translation, first row of the Group-globaltime batch: new article + new 全局时间（Global Time） section landing page + nav; ch.6 Requirements Tracing + appendix A dropped per mandate; ch.2 → 定义和缩略语 (2.1 缩略语 23 terms + 2.2 定义 27 terms, mirrors the source order Acronyms-then-Definitions); ch.7 → §6 功能规格 (7.1–7.23 incl. 10 figures 7-1..7-10 + 12 tables 7.1–7.10, formulas 7.1–7.15 restored from the R23-11 PDF where the markdown conversion lost them); ch.8 → §7 API规范 (3 types + 39 functions + 8 configurable interfaces + full 8.7 服务接口: 4 provided/6 required ports, 1 S/R + 9 C/S interfaces, 31 implementation data types); ch.9 → §8 时序图 (9 figures — Figure9-6 extracted from the source PDF p.204 because its diagram is lost in the markdown conversion); ch.10 → §9 配置规范 (14 containers, SWS 条目 cells filled with [ECUC_StbM_*], 12 container UML diagrams Figure10-1..10-12 embedded, 约束 5 items with [SWS_StbM_CONSTR_*] kept); appendix B → ## B. with verbatim ID fences; §3.1 registry in house format + citation/identifier/chapter links applied via link_candidates (506 lines + 5 citation links); 33 glossary terms added; check_api_sync: counts 3/3 + 39/39 match, two name diffs are source-conversion artifacts — source heading 8.2.1 "Extension to Std_ReturnType" is multi-word (script alias gap) and source heading 8.3.27 carries a stray space "StbM_ FrSetSlaveTimingData" (PDF p.140 confirms the real name; article uses the correct name); 4.3 Conflicts "None." omitted per the placeholder exception)
+
 ## io
 
 - ✅ [ADC 驱动](io/adc_driver/) — SWS_ADCDriver (pending wording alignment: 4.2 「适用车型域」)
@@ -182,7 +186,7 @@
 
 ## Missing sections (no articles at all)
 
-- **GlobalTime (4)**: SWS_SynchronizedTimeBaseManager (StbM), SWS_TimeSyncOverCAN (CanTSyn), SWS_TimeSyncOverEthernet (EthTSyn), SWS_TimeSyncOverFlexRay (FrTSyn)
+- **GlobalTime (3 remaining)**: SWS_TimeSyncOverCAN (CanTSyn), SWS_TimeSyncOverEthernet (EthTSyn), SWS_TimeSyncOverFlexRay (FrTSyn) — SWS_SynchronizedTimeBaseManager (StbM) translated 2026-10-30
 - **Libraries (9)**: SWS_CRCLibrary (Crc), SWS_E2ELibrary (E2E), SWS_BFXLibrary (Bfx), SWS_BSWMulticoreLibrary (Bmc), SWS_MFLLibrary (Mfl), SWS_MFXLibrary (Mfx), SWS_IFLLibrary (Ifl), SWS_IFXLibrary (Ifx), SWS_EFXLibrary (Efx)
 - **RTE / SWArch (2)**: SWS_RTE, SWS_ARTI
 - ~~**Safety (2)**: SWS_WatchdogInterface (WdgIf), SWS_WatchdogDriver (Wdg)~~ — both translated 2026-10-27

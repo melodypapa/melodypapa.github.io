@@ -41,6 +41,11 @@ title: "CP AUTOSAR"
   * [AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)
   * [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)
 
+### 全局时间（Global Time）
+
+* [全局时间（Global Time）](globaltime/index.md)
+  * [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)
+
 ### 加密（Crypto）
 
 * [加密（Crypto）](crypto/index.md)
