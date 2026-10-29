@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **55** 份已有站内文章）。
+共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **56** 份已有站内文章）。
 
 ## A
 
@@ -1123,106 +1123,106 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_ChineseV2XSecurity · R23-11
 
 **Com_ConfigType**
-> 类型 · 未翻译 · SWS_COM · R23-11
+> 类型 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_DeInit**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_DisableReceptionDM**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_EnableReceptionDM**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_GetStatus**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_GetVersionInfo**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_Init**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_InvalidateSignal**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_InvalidateSignalGroup**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_IpduGroupIdType**
-> 类型 · 未翻译 · SWS_COM · R23-11
+> 类型 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_IpduGroupStart**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_IpduGroupStop**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_ReceiveDynSignal**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_ReceiveDynSignalWithMetaData**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_ReceiveSignal**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_ReceiveSignalGroup**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_ReceiveSignalGroupArray**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_ReceiveSignalGroupArrayWithMetaData**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_ReceiveSignalGroupWithMetaData**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_ReceiveSignalWithMetaData**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_SendDynSignal**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_SendDynSignalWithMetaData**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_SendSignal**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_SendSignalGroup**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_SendSignalGroupArray**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_SendSignalGroupArrayWithMetaData**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_SendSignalGroupWithMetaData**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_SendSignalWithMetaData**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_SignalGroupIdType**
-> 类型 · 未翻译 · SWS_COM · R23-11
+> 类型 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_SignalIdType**
-> 类型 · 未翻译 · SWS_COM · R23-11
+> 类型 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_StatusType**
-> 类型 · 未翻译 · SWS_COM · R23-11
+> 类型 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_SwitchIpduTxMode**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_TriggerIPDUSend**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **Com_TriggerIPDUSendWithMetaData**
-> 函数 · 未翻译 · SWS_COM · R23-11
+> 函数 · [AUTOSAR COM（COM模块）](communication/com/index.md) · SWS_COM · R23-11
 
 **ComM_ConfigType**
 > 类型 · 未翻译 · SWS_COMManager · R23-11
@@ -5743,67 +5743,67 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **Sd_AclPolicyCheck**
-> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_AclUpdate**
-> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ClientServiceCurrentStateType**
-> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ClientServiceSetState**
-> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ClientServiceSetStateType**
-> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ConfigOptionStringType**
-> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ConfigType**
-> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ConsumedEventGroupCurrentStateType**
-> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ConsumedEventGroupSetState**
-> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ConsumedEventGroupSetStateType**
-> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_EventHandlerCurrentStateType**
-> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_GetVersionInfo**
-> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_Init**
-> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_LocalIpAddrAssignmentChg**
-> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ServerServiceSetState**
-> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ServerServiceSetStateType**
-> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ServiceAclUpdateType**
-> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ServiceGroupIdType**
-> 类型 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 类型 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ServiceGroupStart**
-> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_ServiceGroupStop**
-> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **Sd_SoConModeChg**
-> 函数 · [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
+> 函数 · [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **SecOC_ConfigType**
 > 类型 · 未翻译 · SWS_SecureOnboardCommunication · R23-11
