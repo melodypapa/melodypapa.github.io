@@ -106,7 +106,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [x] Step 6 — TODO.md row + commit/PR — commit b2c1ffb (branch feature/group-communication-sync)
+  - [x] Step 6 — TODO.md row + commit/PR — commit b2c1ffb (branch feature/group-communication-sync); PR #188, tracking issue #187
 - [x] sec_oc (SWS_SecureOnboardCommunication · R23-11 markdown · realigned)
   - Note: missing related-documentation/API chapters; ch.3/4 are swapped (constraints before dependencies) — restore the source order ✅ (2026-10-29, ch.1–5 rebuilt to source order; source §A Not applicable requirements dropped per STANDARD.md annex rules, reported here and in the PR text; check_api_sync.py gained the 可选接口↔Optional alias because source 8.3.10 "Optional Interfaces" sits inside the compared range)
   - [x] Step 1 — Source resolution + gap analysis
@@ -114,7 +114,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [x] Step 6 — TODO.md row + commit/PR — commit 3d584a2 (branch feature/group-communication-sync)
+  - [x] Step 6 — TODO.md row + commit/PR — commit 3d584a2 (branch feature/group-communication-sync); PR #188, tracking issue #187
 - [x] soad (SWS_SocketAdaptor · R23-11 markdown · ✅ realigned)
   - Note: missing acronyms; directory `SoAd/` is capitalised and the file is SoAd.md, not index.md — switching to the index.md layout requires the nav change in the same commit
   - [x] Step 1 — Source resolution + gap analysis
@@ -122,7 +122,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [x] Step 6 — TODO.md row + commit/PR — commit 1b9bf69 (branch feature/group-communication-sync)
+  - [x] Step 6 — TODO.md row + commit/PR — commit 1b9bf69 (branch feature/group-communication-sync); PR #188, tracking issue #187
   - Note: ✅ (2026-10-29, 1b9bf69) realigned to R23-11; layout switch SoAd/SoAd.md → soad/index.md with nav + cross-link fixes; §2 缩略语 rebuilt (21 acronyms + 5 terms); §6 completed 6.1–6.14; new §7 API规范 (21 imported types/5 types/29 functions/7 callbacks/1 scheduled/期望接口, check_api_sync leaf-level fix in 90965f0); §8 时序图 10 figures; §9 配置规范 16 containers 12 figures; `## B.` 可追溯项变更历史; source ch.6 Requirements Tracing + Annex A "Not applicable requirements" dropped per STANDARD.md annex rules; stale 2022-*.png removed; glossary gained 5 SoAd terms
 - [ ] mirror (SWS_BusMirroring · R23-11 markdown · ⚠️ gaps + layout change)
   - Note: missing acronyms/API; the file is mirror.md, not index.md — switching layout requires the nav change in the same commit
