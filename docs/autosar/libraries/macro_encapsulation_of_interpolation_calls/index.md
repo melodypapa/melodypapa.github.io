@@ -1,5 +1,5 @@
 ---
-title: "插值调用宏封装（Macro Encapsulation of Interpolation Calls）"
+title: "Macro Encapsulation of Interpolation Calls（插值调用宏封装）"
 spec: AUTOSAR_CP_EXP_MacroEncapsulationofInterpolationCalls
 release: R23-11
 ---

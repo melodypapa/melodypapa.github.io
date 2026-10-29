@@ -1,5 +1,5 @@
 ---
-title: "安全用例（Safety Use Case）"
+title: "Safety Use Case（安全用例）"
 spec: AUTOSAR_CP_EXP_SafetyUseCase
 release: R23-11
 ---

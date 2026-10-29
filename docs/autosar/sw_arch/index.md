@@ -6,7 +6,7 @@ AUTOSAR 在软件架构（SW Architecture）领域定义跨层与跨域的架构
 
 ## 文章
 
-- [AUTOSAR 运行时接口（ARTI）](arti/index.md)
+- [ARTI（AUTOSAR 运行时接口）](arti/index.md)
 
 ## 相关内容
 

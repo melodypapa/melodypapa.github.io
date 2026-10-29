@@ -6,13 +6,13 @@ AUTOSAR 为各汽车域（底盘、动力总成、车身与舒适、乘员与行
 
 ## 文章
 
-- [ADAS 与车辆运动控制接口](adas_vmc/index.md)
-- [车身与舒适域应用接口](body_and_comfort/index.md)
-- [底盘域应用接口](chassis/index.md)
-- [HMI/多媒体/远程信息处理域应用接口](hmi/index.md)
-- [乘员与行人安全系统域应用接口](occupant_safety/index.md)
-- [动力总成（发动机）域应用接口](powertrain/index.md)
-- [应用接口用户指南](user_guide/index.md)
+- [Explanation of Application Interface of AD/ADAS Vehicle Motion Control（AD/ADAS 车辆运动控制应用接口说明）](adas_vmc/index.md)
+- [Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](body_and_comfort/index.md)
+- [Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](chassis/index.md)
+- [Explanation of Application Interfaces of the HMI, Multimedia and Telematics Domain（HMI/多媒体/远程信息处理域应用接口说明）](hmi/index.md)
+- [Explanation of Application Interfaces of Occupant and Pedestrian Safety Systems Domain（乘员与行人安全系统域应用接口说明）](occupant_safety/index.md)
+- [Explanation of Application Interfaces of the Powertrain Engine Domain（动力总成（发动机）域应用接口说明）](powertrain/index.md)
+- [Application Interfaces User Guide（应用接口用户指南）](user_guide/index.md)
 
 ## 相关内容
 

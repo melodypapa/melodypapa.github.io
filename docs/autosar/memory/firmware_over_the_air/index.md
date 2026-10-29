@@ -1,5 +1,5 @@
 ---
-title: "固件远程升级指南（Firmware Over-The-Air）"
+title: "Explanation of Firmware Over-The-Air（固件远程升级说明）"
 spec: AUTOSAR_CP_EXP_FirmwareOverTheAir
 release: R23-11
 ---

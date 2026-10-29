@@ -1,5 +1,5 @@
 ---
-title: "应用接口用户指南（AI User Guide）"
+title: "Application Interfaces User Guide（应用接口用户指南）"
 spec: AUTOSAR_CP_EXP_AIUserGuide
 release: R23-11
 ---

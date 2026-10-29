@@ -1,5 +1,5 @@
 ---
-title: "模式管理指南（Guide to Mode Management）"
+title: "Guide to Mode Management（模式管理指南）"
 spec: AUTOSAR_CP_EXP_ModeManagementGuide
 release: R23-11
 ---

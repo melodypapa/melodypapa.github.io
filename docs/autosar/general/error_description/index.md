@@ -1,5 +1,5 @@
 ---
-title: "错误描述（Error Description）"
+title: "Error Description（错误描述）"
 spec: AUTOSAR_CP_EXP_ErrorDescription
 release: R23-11
 ---

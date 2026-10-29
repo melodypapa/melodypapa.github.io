@@ -114,7 +114,7 @@ nav:
     - 基础:
       - autosar/foundation/index.md
       - 通用:
-        - "AUTOSAR 术语表（TR Glossary）": autosar/foundation/general/tr_glossary/index.md
+        - "TR Glossary": autosar/foundation/general/tr_glossary/index.md
     - 通信:
       - autosar/communication/index.md
       - "CAN Driver":
@@ -163,6 +163,11 @@ nav:
       - "Platform Types": autosar/general/platform_types/index.md
       - "ComStack Types": autosar/general/communication_stack_types/index.md
       - "分层软件架构": autosar/general/layered_software_architecture/index.md
+      - "应用层错误处理": autosar/general/application_level_error_handling/index.md
+      - "BSW 分布指南": autosar/general/bsw_distribution_guide/index.md
+      - "CDD 设计与集成指南": autosar/general/cdd_design_and_integration/index.md
+      - "错误描述": autosar/general/error_description/index.md
+      - "VFB": autosar/general/vfb/index.md
     - I/O:
       - autosar/io/index.md
       - "Adc": autosar/io/adc_driver/index.md
@@ -187,7 +192,7 @@ nav:
       - "MemMap": autosar/memory/memory_mapping/index.md
       - "NV数据处理指南": autosar/memory/nv_data_handling_guideline/index.md
       - "NvM": autosar/memory/nvram_manager/index.md
-      - "固件远程升级指南（FOTA）": autosar/memory/firmware_over_the_air/index.md
+      - "FOTA": autosar/memory/firmware_over_the_air/index.md
     - 方法论与模板:
       - autosar/methodology_templates/index.md
       - "BSWMDT": autosar/methodology_templates/basic_software_module_description_template/index.md
@@ -203,30 +208,30 @@ nav:
       - "FiM": autosar/system_services/function_inhibition_manager/index.md
       - "Os": autosar/system_services/operating_system/index.md
       - "Time Service": autosar/system_services/time_service/index.md
-      - "软件集群设计与集成指南": autosar/system_services/sw_cluster_design_and_integration/index.md
-    - 安全（Safety）:
+      - "SwCluC": autosar/system_services/sw_cluster_design_and_integration/index.md
+    - 功能安全:
       - autosar/safety/index.md
       - "WdgM": autosar/safety/watchdog_manager/index.md
       - "WdgIf": autosar/safety/watchdog_interface/index.md
       - "Wdg": autosar/safety/watchdog_driver/index.md
-      - "AUTOSAR 功能安全措施概览": autosar/safety/functional_safety_measures/index.md
+      - "功能安全措施概览": autosar/safety/functional_safety_measures/index.md
       - "安全用例": autosar/safety/safety_use_case/index.md
     - RTE:
 
       - "RTE": autosar/rte/index.md
     - SW 架构（SW Architecture）:
       - autosar/sw_arch/index.md
-      - "AUTOSAR 运行时接口（ARTI）": autosar/sw_arch/arti/index.md
-    - 应用接口（Application Interfaces）:
+      - "ARTI": autosar/sw_arch/arti/index.md
+    - 应用接口:
       - autosar/application_interfaces/index.md
-      - "ADAS 与车辆运动控制接口": autosar/application_interfaces/adas_vmc/index.md
-      - "车身与舒适域应用接口": autosar/application_interfaces/body_and_comfort/index.md
-      - "底盘域应用接口": autosar/application_interfaces/chassis/index.md
-      - "HMI/多媒体/远程信息处理域应用接口": autosar/application_interfaces/hmi/index.md
-      - "乘员与行人安全系统域应用接口": autosar/application_interfaces/occupant_safety/index.md
-      - "动力总成（发动机）域应用接口": autosar/application_interfaces/powertrain/index.md
-      - "应用接口用户指南": autosar/application_interfaces/user_guide/index.md
-    - 库（Libraries）:
+      - "ADAS and VMC": autosar/application_interfaces/adas_vmc/index.md
+      - "Body and Comfort": autosar/application_interfaces/body_and_comfort/index.md
+      - "Chassis": autosar/application_interfaces/chassis/index.md
+      - "HMI/MM/T": autosar/application_interfaces/hmi/index.md
+      - "OPS": autosar/application_interfaces/occupant_safety/index.md
+      - "Powertrain": autosar/application_interfaces/powertrain/index.md
+      - "AI User Guide": autosar/application_interfaces/user_guide/index.md
+    - 库:
       - autosar/libraries/index.md
       - "插值调用宏封装": autosar/libraries/macro_encapsulation_of_interpolation_calls/index.md
     - 模板:

@@ -1683,16 +1683,16 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dds_ConfigType**
-> 类型 · [Data Distribution Service for Classic Platform](communication/data_distribution/index.md) · SWS_DataDistributionService · R23-11
+> 类型 · [Data Distribution Service for Classic Platform（经典平台数据分发服务）](communication/data_distribution/index.md) · SWS_DataDistributionService · R23-11
 
 **Dds_GetVersionInfo**
-> 函数 · [Data Distribution Service for Classic Platform](communication/data_distribution/index.md) · SWS_DataDistributionService · R23-11
+> 函数 · [Data Distribution Service for Classic Platform（经典平台数据分发服务）](communication/data_distribution/index.md) · SWS_DataDistributionService · R23-11
 
 **Dds_Init**
-> 函数 · [Data Distribution Service for Classic Platform](communication/data_distribution/index.md) · SWS_DataDistributionService · R23-11
+> 函数 · [Data Distribution Service for Classic Platform（经典平台数据分发服务）](communication/data_distribution/index.md) · SWS_DataDistributionService · R23-11
 
 **Dds_Transmit**
-> 函数 · [Data Distribution Service for Classic Platform](communication/data_distribution/index.md) · SWS_DataDistributionService · R23-11
+> 函数 · [Data Distribution Service for Classic Platform（经典平台数据分发服务）](communication/data_distribution/index.md) · SWS_DataDistributionService · R23-11
 
 **Dem_ClearDTC**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
@@ -5220,73 +5220,73 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **Mirror_AddCanMaskFilter**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_AddCanRangeFilter**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_AddFlexRayFilter**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_AddLinMaskFilter**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_AddLinRangeFilter**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_ConfigType**
-> 类型 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 类型 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_DeInit**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_GetDestNetwork**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_GetNetworkHandle**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_GetNetworkId**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_GetNetworkType**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_GetStaticFilterState**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_GetVersionInfo**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_Init**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **MIRROR_INVALID_NETWORK**
-> 类型 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 类型 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_IsMirrorActive**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_IsSourceNetworkStarted**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_Offline**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_RemoveFilter**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_SetStaticFilterState**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_StartSourceNetwork**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_StopSourceNetwork**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Mirror_SwitchDestNetwork**
-> 函数 · [AUTOSAR Mirror （总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
+> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md) · SWS_BusMirroring · R23-11
 
 **Miscellaneous**
 > 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
@@ -6935,13 +6935,13 @@ title: "AUTOSAR API 清单（函数与类型）"
 ## X
 
 **Xcp_ConfigType**
-> 类型 · [AUTOSAR XCP（通用校准协议）](communication/xcp/index.md) · SWS_XCP · R23-11
+> 类型 · [AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md) · SWS_XCP · R23-11
 
 **Xcp_GetVersionInfo**
-> 函数 · [AUTOSAR XCP（通用校准协议）](communication/xcp/index.md) · SWS_XCP · R23-11
+> 函数 · [AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md) · SWS_XCP · R23-11
 
 **Xcp_Init**
-> 函数 · [AUTOSAR XCP（通用校准协议）](communication/xcp/index.md) · SWS_XCP · R23-11
+> 函数 · [AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md) · SWS_XCP · R23-11
 
 **Xcp_SetTransmissionMode**
-> 函数 · [AUTOSAR XCP（通用校准协议）](communication/xcp/index.md) · SWS_XCP · R23-11
+> 函数 · [AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md) · SWS_XCP · R23-11

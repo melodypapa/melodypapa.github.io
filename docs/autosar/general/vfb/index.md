@@ -1,5 +1,5 @@
 ---
-title: "虚拟功能总线（VFB）"
+title: "VFB（虚拟功能总线）"
 spec: AUTOSAR_CP_EXP_VFB
 release: R23-11
 ---

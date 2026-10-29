@@ -1,5 +1,5 @@
 ---
-title: "时序扩展规范（Timing Extension）"
+title: "Specification of Timing Extensions for Classic Platform（经典平台时序扩展规范）"
 ---
 
 

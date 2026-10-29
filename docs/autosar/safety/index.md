@@ -9,8 +9,8 @@ title: "安全（Safety）"
 * [AUTOSAR Watchdog Manager（看门狗管理器）](watchdog_manager/index.md)
 * [AUTOSAR Watchdog Interface（看门狗接口）](watchdog_interface/index.md)
 * [AUTOSAR Watchdog Driver（看门狗驱动）](watchdog_driver/index.md)
-* [AUTOSAR 功能安全措施概览](functional_safety_measures/index.md)
-* [安全用例](safety_use_case/index.md)
+* [Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](functional_safety_measures/index.md)
+* [Safety Use Case（安全用例）](safety_use_case/index.md)
 
 ## 相关内容
 
