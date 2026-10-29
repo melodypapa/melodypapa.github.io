@@ -28,7 +28,12 @@ from pathlib import Path
 # in the line; only lines starting with '#' are scanned (keeps ToC tables out).
 # The lookbehind avoids matching the "8" of "18.3.2" style chapter numbers.
 SRC_RE = re.compile(r"(?:^|[^0-9.])8\.([23])\.(\d+)\s+\**\s*([A-Za-z][A-Za-z0-9_\\&;<>]*)")
+# Grouped layout: leaf functions one level deeper ("## 8.3.1.1  GetVersionInfo"
+# under "## 8.3.1  General"). When such 4-level headings exist they are the
+# real function entries; the 3-level headings are group captions.
+SRC_LEAF_RE = re.compile(r"(?:^|[^0-9.])8\.([23])\.(\d+)\.(\d+)\s+\**\s*([A-Za-z][A-Za-z0-9_\\&;<>]*)")
 ART_RE = re.compile(r"^####\s+7\.([23])\.(\d+)\.\s+(.+?)\s*$")
+ART_LEAF_RE = re.compile(r"^#####\s+7\.([23])\.(\d+)\.(\d+)\.\s+(.+?)\s*$")
 
 # Structural (non-API) heading names whose Chinese rendering is fixed by the
 # site's API-chapter convention. SRC_RE only captures the first English word,
@@ -49,29 +54,35 @@ def norm(name: str) -> str:
 
 
 def source_entries(text: str, chap: str) -> list[str]:
-    found: list[str] = []
+    flat: list[str] = []
+    leaf: list[str] = []
     for line in text.splitlines():
         if not line.startswith("#"):
             continue
-        hits = list(SRC_RE.finditer(line))
-        if not hits:
-            continue
-        m = hits[-1]
-        if m.group(1) != chap:
-            continue
-        name = norm(m.group(3))
-        if not found or found[-1] != name:  # dedupe merged-heading repeats
-            found.append(name)
-    return found
+        hits = [m for m in SRC_RE.finditer(line) if m.group(1) == chap]
+        if hits:
+            name = norm(hits[-1].group(3))
+            if not flat or flat[-1] != name:  # dedupe merged-heading repeats
+                flat.append(name)
+        leaf_hits = [m for m in SRC_LEAF_RE.finditer(line) if m.group(1) == chap]
+        if leaf_hits:
+            name = norm(leaf_hits[-1].group(4))
+            if not leaf or leaf[-1] != name:
+                leaf.append(name)
+    return leaf if leaf else flat
 
 
 def article_entries(text: str, chap: str) -> list[str]:
-    found: list[str] = []
+    flat: list[str] = []
+    leaf: list[str] = []
     for line in text.splitlines():
         m = ART_RE.match(line)
         if m and m.group(1) == chap:
-            found.append(norm(m.group(3)))
-    return found
+            flat.append(norm(m.group(3)))
+        m = ART_LEAF_RE.match(line)
+        if m and m.group(1) == chap:
+            leaf.append(norm(m.group(4)))
+    return leaf if leaf else flat
 
 
 def slice_section(text: str, start_re: str, end_re: str) -> str:
