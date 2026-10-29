@@ -30,6 +30,12 @@ from pathlib import Path
 SRC_RE = re.compile(r"(?:^|[^0-9.])8\.([23])\.(\d+)\s+\**\s*([A-Za-z][A-Za-z0-9_\\&;<>]*)")
 ART_RE = re.compile(r"^####\s+7\.([23])\.(\d+)\.\s+(.+?)\s*$")
 
+# Structural (non-API) heading names whose Chinese rendering is fixed by the
+# site's API-chapter convention. SRC_RE only captures the first English word,
+# so "Optional Interfaces" compares as "Optional"; the article renders it as
+# 可选接口. The tripwire still enforces counts and order around the alias.
+ALIASES = {"可选接口": "Optional"}
+
 
 def norm(name: str) -> str:
     r"""Normalize a heading name: drop extraction backslashes and spaces,
@@ -39,7 +45,7 @@ def norm(name: str) -> str:
     name = name.replace("\\", "").replace(" ", "")
     for ent, ch in (("&lt;", "<"), ("&gt;", ">"), ("&amp;", "&")):
         name = name.replace(ent, ch)
-    return name
+    return ALIASES.get(name, name)
 
 
 def source_entries(text: str, chap: str) -> list[str]:
