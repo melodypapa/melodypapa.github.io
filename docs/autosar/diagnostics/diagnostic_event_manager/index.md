@@ -4390,3 +4390,6881 @@ Std_ReturnType Dem_SetStorageCondition ( uint8 StorageConditionID, boolean Condi
 ```C
 Std_ReturnType Dem_SetWIRStatus ( Dem_EventIdType EventId, boolean WIRStatus )
 ```
+
+#### 7.3.4. 接口 Dcm &lt;=&gt; Dem
+
+##### 7.3.4.1. 访问 DTC 和状态信息
+
+###### 7.3.4.1.1. Dem_GetTranslationType
+
+**说明**: 获取 **ECU** 支持的 **DTC** 格式。支持的格式通过 DemTypeOfDTCSupported 配置。返回所配置的 **DTC** 转换格式，不支持多种 **DTC** 格式的组合。可通过**Dem.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。返回值：**Dem_DTCTranslationFormatType**：所配置的 **DTC** 转换格式。
+
+```C
+Dem_DTCTranslationFormatType Dem_GetTranslationType ( uint8 ClientId )
+```
+
+###### 7.3.4.1.2. Dem_GetDTCStatusAvailabilityMask
+
+**说明**: 获取所选故障内存的 **DTC** 状态可用性掩码。可通过**Dem.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCOrigin（in）：此参数选择所请求 **DTCStatusAvailabilityMask** 的事件内存。仅 `DEM_DTC_ORIGIN_PRIMARY_MEMORY` 和 `DEM_DTC_ORIGIN_USERDEFINED_MEMORY_<Name>` 为有效值。参数 DTCStatusMask（out）：**DTCStatusMask** 的值指示 **Dem** 支持的 **DTC** 状态位。所有支持的信息通过将相应的状态位置为 1 来指示。参见 ISO 14229-1。返回值：**E_OK**：获取 **DTC** 状态掩码成功；**E_NOT_OK**：获取 **DTC** 状态掩码失败。
+
+```C
+Std_ReturnType Dem_GetDTCStatusAvailabilityMask ( uint8 ClientId, Dem_UdsStatusByteType* DTCStatusMask, Dem_DTCOriginType DTCOrigin )
+```
+
+###### 7.3.4.1.3. Dem_GetStatusOfDTC
+
+**说明**: 获取 **DTC** 的状态。对于大型配置和 **DTC** 标定，接口行为可以是异步的（将 **DTC** 搜索拆分为多个段）。被抑制的 **OBD** 事件的 **DTC** 应报告为 `DEM_WRONG_DTC`。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCStatus（out）：此参数接收所请求 **DTC** 的状态信息。其格式遵循 ISO 14229-1 的定义。如果函数调用的返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。返回值：**E_OK**：**DTC** 的状态已在 **DTCStatus** 参数中正确提供；**E_NOT_OK**：未选择 **DTC**；**DEM_WRONG_DTC**：所选格式下所选的 **DTC** 值不存在；**DEM_WRONG_DTCORIGIN**：所选 **DTCOrigin** 不存在；**DEM_PENDING**：检索 **DTC** 状态正在进行中。调用者应在稍后时刻再次调用此函数；**DEM_NO_SUCH_ELEMENT**：所选 **DTC** 没有分配 **DTC** 状态；**DEM_BUSY**：该客户端另一个基于 Dem_SelectDTC 的操作（按第 6.11.2.2 节）正在进行中。
+
+```C
+Std_ReturnType Dem_GetStatusOfDTC ( uint8 ClientId, uint8* DTCStatus )
+```
+
+###### 7.3.4.1.4. Dem_GetSeverityOfDTC
+
+**说明**: 获取所请求 **DTC** 的严重度。对于大型配置和 **DTC** 标定，接口行为可以是异步的（将 **DTC** 搜索拆分为多个段）。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCSeverity（out）：此参数包含符合 ISO 14229-1 的 **DTCSeverity**。返回值：**E_OK**：**DTC** 严重度已在 **DTCSeverity** 参数中正确提供；**E_NOT_OK**：未选择 **DTC**；**DEM_WRONG_DTC**：所选格式下所选的 **DTC** 值不存在；**DEM_WRONG_DTCORIGIN**：所选 **DTCOrigin** 不存在；**DEM_PENDING**：检索 **DTC** 正在进行中。调用者应在稍后时刻再次调用此函数；**DEM_BUSY**：该客户端另一个基于 Dem_SelectDTC 的操作（按第 6.11.2.2 节）正在进行中。
+
+```C
+Std_ReturnType Dem_GetSeverityOfDTC ( Dem_DTCSeverityType* DTCSeverity, uint8 ClientId )
+```
+
+###### 7.3.4.1.5. Dem_GetFunctionalUnitOfDTC
+
+**说明**: 获取所请求 **DTC** 的功能单元。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCFunctionalUnit（out）：此 **DTC** 的功能单元值。返回值：**E_OK**：**DTC** 功能单元已在参数 DTCFunctionalUnit 中提供；**E_NOT_OK**：未选择 **DTC**；**DEM_WRONG_DTC**：所选格式下所选的 **DTC** 值不存在；**DEM_WRONG_DTCORIGIN**：所选 **DTCOrigin** 不存在；**DEM_PENDING**：检索 **DTC** 功能单元正在进行中。调用者应在稍后时刻再次调用此函数；**DEM_BUSY**：该客户端另一个基于 Dem_SelectDTC 的操作（按第 6.11.2.2 节）正在进行中。
+
+```C
+Std_ReturnType Dem_GetFunctionalUnitOfDTC ( uint8 ClientId, uint8* DTCFunctionalUnit )
+```
+
+###### 7.3.4.1.6. Dem_SetDTCFilter
+
+**说明**: 设置 **DTC** 过滤器。服务器应在参数 **DTCStatusMask** 与服务器中的当前 **UDS** 状态之间执行按位逻辑与运算。除了 **DTCStatusAvailabilityMask** 之外，服务器应返回所有与运算结果非零的 **DTC**（即 (statusOfDTC &amp; DTCStatusMask) != 0）。服务器仅处理其支持的 **DTC** 状态位。被抑制的 **OBD** 事件在计算中应被忽略。如果服务器中没有 **DTC** 匹配客户端请求中指定的掩码判据，则在肯定响应报文中 **DTCStatusAvailabilityMask** 字节之后不提供任何 **DTC** 或状态信息。可通过**Dem.h**获得。本服务为同步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCStatusMask（in）：用于 **DTC** 状态字节过滤的状态字节掩码。取值：0x00——AUTOSAR 特定的值，用于停用状态字节过滤（与 ISO 14229-1 中的含义不同），以报告所有受支持的 **DTC**（用于服务 0x19 子功能 0x0A/0x15）；0x01..0xFF——符合 ISO 14229-1 DTCStatusMask 的状态字节掩码（由 **Dcm** 直接从服务请求传递），用于过滤至少一个状态位与该状态字节掩码匹配的 **DTC**。参数 DTCFormat（in）：定义后续 **API** 调用所请求 **DTC** 值的输出格式。如果传入的值与配置不符，应报告 **Det** 错误 `DEM_E_WRONG_CONFIGURATION`，例如传入了 DTCFormat = `DEM_DTC_FORMAT_OBD` 但按配置不支持 **OBD**。参数 DTCOrigin（in）：如果 **Dem** 支持多个事件内存，此参数用于选择应从中读取 **DTC** 的源内存。如果传入的值与配置不符，应报告 **Det** 错误 `DEM_E_WRONG_CONFIGURATION`。参数 FilterWithSeverity（in）：此标志定义是否使用严重度信息（参见下方参数）进行过滤，以允许有和没有严重度信息的 **DTC** 共存。TRUE：使用严重度信息过滤。FALSE：不使用严重度信息过滤。参数 DTCSeverityMask（in）：包含符合 ISO 14229-1 的 DTCSeverityMask。参数 FilterForFaultDetectionCounter（in）：此标志定义是否使用故障检测计数器信息进行过滤，以允许有和没有故障检测计数器信息的 **DTC** 共存。如果故障检测计数器信息是过滤判据，则仅报告故障检测计数器值介于 1 和 0x7E 之间的 **DTC**。注意：如果事件不使用 **Dem** 内部去抖动，则 **Dem** 必须通过 Dem_GetFaultDetectionCounter 请求该信息。TRUE：使用故障检测计数器过滤。FALSE：不使用故障检测计数器过滤。返回值：**E_OK**：过滤器设置成功；**E_NOT_OK**：指示错误的 **DTCOrigin** 或 **DTCFormat**。
+
+```C
+Std_ReturnType Dem_SetDTCFilter ( uint8 ClientId, uint8 DTCStatusMask, Dem_DTCFormatType DTCFormat, Dem_DTCOriginType DTCOrigin, boolean FilterWithSeverity, Dem_DTCSeverityType DTCSeverityMask, boolean FilterForFaultDetectionCounter )
+```
+
+###### 7.3.4.1.7. Dem_GetNumberOfFilteredDTC
+
+**说明**: 获取过滤后的 **DTC** 数量。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 NumberOfFilteredDTC（out）：与所定义状态掩码匹配的 **DTC** 数量。返回值：**E_OK**：获取过滤后的 **DTC** 数量成功；**E_NOT_OK**：未设置 **DTC** 过滤器；**DEM_PENDING**：所请求的操作正在进行中。调用者应在稍后时刻再次调用此函数。
+
+```C
+Std_ReturnType Dem_GetNumberOfFilteredDTC ( uint8 ClientId, uint16* NumberOfFilteredDTC )
+```
+
+###### 7.3.4.1.8. Dem_GetNextFilteredDTC
+
+**说明**: 获取下一个匹配过滤判据的 **DTC**。对于 **UDS** 服务，接口具有异步行为，因为需要处理大量的 **DTC**。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTC（out）：接收此函数按过滤器的相应格式返回的 **DTC** 值。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 DTCStatus（out）：此参数接收所请求 **DTC** 的状态信息。其格式遵循 ISO 14229-1 的定义。如果函数调用的返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。返回值：**E_OK**：返回下一个过滤后的元素；**E_NOT_OK**：未设置 **DTC** 过滤器；**DEM_NO_SUCH_ELEMENT**：未找到更多匹配过滤判据的元素；**DEM_PENDING**：所请求的操作正在进行中。调用者应在稍后时刻再次调用此函数。注意：按照第 6.9.5 节，此返回值并不总是允许的。
+
+```C
+Std_ReturnType Dem_GetNextFilteredDTC ( uint8 ClientId, uint32* DTC, uint8* DTCStatus )
+```
+
+###### 7.3.4.1.9. Dem_GetNextFilteredDTCAndFDC
+
+**说明**: 获取下一个匹配过滤判据的 **DTC** 及其关联的故障检测计数器（**FDC**）。接口具有异步行为，因为需要处理大量的 **DTC**，且 **FDC** 也可能从 **SW-C** 异步接收。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTC（out）：接收此函数按过滤器的相应格式返回的 **DTC** 值。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 DTCFaultDetectionCounter（out）：此参数接收所请求 **DTC** 的故障检测计数器信息。如果函数调用的返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。按 ISO 14229-1 为 -128（十进制）… +127（十进制），对应 PASSED…FAILED。返回值：**E_OK**：返回下一个过滤后的元素；**E_NOT_OK**：未设置 **DTC** 过滤器；**DEM_NO_SUCH_ELEMENT**：未找到更多匹配过滤判据的元素；**DEM_PENDING**：所请求的操作正在异步处理，当前正在进行中。调用者应在稍后时刻再次调用此函数。
+
+```C
+Std_ReturnType Dem_GetNextFilteredDTCAndFDC ( uint8 ClientId, uint32* DTC, sint8* DTCFaultDetectionCounter )
+```
+
+###### 7.3.4.1.10. Dem_GetNextFilteredDTCAndSeverity
+
+**说明**: 获取下一个匹配过滤判据的 **DTC** 及其关联的严重度。接口具有异步行为，因为需要处理大量的 **DTC**。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTC（out）：接收此函数按过滤器的相应格式返回的 **DTC** 值。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 DTCStatus（out）：此参数接收所请求 **DTC** 的状态信息。其格式遵循 ISO 14229-1 的定义。如果函数调用的返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 DTCSeverity（out）：接收函数返回的严重度值。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 DTCFunctionalUnit（out）：接收函数返回的功能单元值。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。返回值：**E_OK**：返回下一个过滤后的元素；**E_NOT_OK**：未设置 **DTC** 过滤器；**DEM_NO_SUCH_ELEMENT**：未找到更多匹配过滤判据的元素；**DEM_PENDING**：所请求的操作正在进行中。调用者应在稍后时刻再次调用此函数。
+
+```C
+Std_ReturnType Dem_GetNextFilteredDTCAndSeverity ( uint8 ClientId, uint32* DTC, uint8* DTCStatus, Dem_DTCSeverityType* DTCSeverity, uint8* DTCFunctionalUnit )
+```
+
+###### 7.3.4.1.11. Dem_SetFreezeFrameRecordFilter
+
+**说明**: 设置冻结帧记录过滤器。可通过**Dem.h**获得。本服务为同步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCFormat（in）：定义所请求 **DTC** 值的输出格式。返回值：（重新）设置冻结帧记录过滤器的操作状态。**E_OK**：过滤器被接受；**E_NOT_OK**：选择了错误的过滤器。
+
+```C
+Std_ReturnType Dem_SetFreezeFrameRecordFilter ( uint8 ClientId, Dem_DTCFormatType DTCFormat )
+```
+
+###### 7.3.4.1.12. Dem_GetNextFilteredRecord
+
+**说明**: 获取事件内存中存储的下一个冻结帧记录号及其关联的 **DTC**。接口具有异步行为，因为可能需要 **NvRAM** 访问。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTC（out）：接收此函数按过滤器的相应格式返回的 **DTC** 值。如果函数返回值不是 E_OK，此参数不包含有效数据。参数 RecordNumber（out）：所报告 **DTC** 的冻结帧记录号（相对寻址）。如果函数返回值不是 E_OK，此参数不包含有效数据。返回值：从 **Dem** 检索 **DTC** 及其关联快照记录号的操作状态。**E_OK**：返回下一个过滤后的元素；**DEM_NO_SUCH_ELEMENT**：未找到更多（匹配过滤判据的）元素；**DEM_PENDING**：所请求的值被异步计算，当前不可用。调用者可以在稍后重试。仅由异步接口使用。
+
+```C
+Std_ReturnType Dem_GetNextFilteredRecord ( uint8 ClientId, uint32* DTC, uint8* RecordNumber )
+```
+
+###### 7.3.4.1.13. Dem_GetDTCByOccurrenceTime
+
+**说明**: 按发生时间获取 **DTC**。没有显式的 **DTC** origin 参数，因为 origin 始终为 `DEM_DTC_ORIGIN_PRIMARY_MEMORY`。可通过**Dem.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCRequest（in）：此参数定义 **DTC** 的请求类型。参数 DTC（out）：接收函数以 **UDS** 格式返回的 **DTC** 值。如果函数返回值不是 `DEM_OCCURR_OK`，此参数不包含有效数据。返回值：**E_OK**：获取 **DTC** 成功；**E_NOT_OK**：调用不成功；**DEM_NO_SUCH_ELEMENT**：所请求的元素未存储。
+
+```C
+Std_ReturnType Dem_GetDTCByOccurrenceTime ( uint8 ClientId, Dem_DTCRequestType DTCRequest, uint32* DTC )
+```
+
+###### 7.3.4.1.14. Dem_SetDTCFilterByExtendedDataRecordNumber
+
+**说明**: 基于给定的扩展数据记录在主故障内存上设置 **DTC** 过滤器。服务器选择所有具有匹配扩展数据记录的 **DTC**。可通过**Dem_Dcm.h**获得。本服务为同步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCFormat（in）：定义所请求数据的 **DTC** 格式。有效选择为 `DEM_DTC_FORMAT_UDS` 和 `DEM_DTC_FORMAT_OBD_3BYTE`。参数 ExtendedDataRecordNumber（in）：为其设置过滤器的扩展数据记录号。有效值在 0x01 到 0xFD 范围内。返回值：**E_OK**：所请求扩展数据记录的 **DTC** 过滤器设置成功；**E_NOT_OK**：指示选择了无效的扩展数据记录号。
+
+```C
+Std_ReturnType Dem_SetDTCFilterByExtendedDataRecordNumber ( uint8 ClientId, Dem_DTCFormatType DTCFormat, uint8 ExtendedDataRecordNumber )
+```
+
+###### 7.3.4.1.15. Dem_SetDTCFilterByReadinessGroup
+
+**说明**: 基于给定的 **DTC** 就绪组在主故障内存上设置 **DTC** 过滤器。服务器选择所有配置了该 **DTC** 就绪组的 **DTC**。可通过**Dem_Dcm.h**获得。本服务为同步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientID（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCFormat（in）：定义所请求数据的 **DTC** 格式。有效选择为 `DEM_DTC_FORMAT_UDS` 和 `DEM_DTC_FORMAT_OBD_3BYTE`。参数 ReadinessGroupNumber（in）：指定 SAE J1979-DA 定义的 **DTC** 就绪组编号。返回值：**E_OK**：所请求 **DTC** 就绪组的 **DTC** 过滤器设置成功；**E_NOT_OK**：指示选择了无效的 **DTC** 就绪组。
+
+```C
+Std_ReturnType Dem_SetDTCFilterByReadinessGroup ( uint8 ClientID, Dem_DTCFormatType DTCFormat, Dem_EventOBDReadinessGroupType ReadinessGroupNumber )
+```
+
+##### 7.3.4.2. 访问扩展数据记录和冻结帧数据
+
+###### 7.3.4.2.1. Dem_DisableDTCRecordUpdate
+
+**说明**: 禁用特定 **DTC**（一次仅一个）的事件内存更新。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。返回值：**E_OK**：事件内存更新已成功禁用；**E_NOT_OK**：未选择 **DTC**；**DEM_WRONG_DTC**：所选格式下所选的 **DTC** 值不存在，或选择了 **DTC** 组；**DEM_WRONG_DTCORIGIN**：所选 **DTCOrigin** 不存在；**DEM_PENDING**：禁用 **DTC** 记录更新正在进行中。调用者应在稍后时刻再次调用此函数；**DEM_BUSY**：该客户端另一个基于 Dem_SelectDTC 的操作（按第 6.11.2.2 节）正在进行中。
+
+```C
+Std_ReturnType Dem_DisableDTCRecordUpdate ( uint8 ClientId )
+```
+
+###### 7.3.4.2.2. Dem_EnableDTCRecordUpdate
+
+**说明**: 启用之前由 Dem_DisableDTCRecordUpdate() 禁用的 **DTC** 的事件内存更新。注意：由于对 Dem_EnableDTCRecordUpdate 的调用是禁用/启用 **DTC** 序列中的最后一个动作，调用者对返回值不感兴趣。因此，即使 **DTC** 是异步启用的，也应返回 E_OK。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。返回值：**E_OK**：**DTC** 记录已成功更新；**E_NOT_OK**：未选择 **DTC**。
+
+```C
+Std_ReturnType Dem_EnableDTCRecordUpdate ( uint8 ClientId )
+```
+
+###### 7.3.4.2.3. Dem_GetSizeOfExtendedDataRecordSelection
+
+**说明**: 获取通过调用 Dem_SelectExtendedDataRecord 所选 **DTC** 的扩展数据记录的大小。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 SizeOfExtendedDataRecord（out）：所请求扩展数据记录的大小（包括记录号）。单个 ExtendedDataRecord 的格式为：{Record Number, data[1], ..., data[N]}。返回值：**E_OK**：大小返回成功；**E_NOT_OK**：未调用选择函数；**DEM_PENDING**：所请求的值被异步计算，当前不可用。调用者可以在稍后重试；**DEM_WRONG_DTC**：**DTC** 值不存在；**DEM_WRONG_DTCORIGIN**：错误的 **DTC** origin；**DEM_NO_SUCH_ELEMENT**：记录号不受配置支持，因此无效。
+
+```C
+Std_ReturnType Dem_GetSizeOfExtendedDataRecordSelection ( uint8 ClientId, uint32* SizeOfExtendedDataRecord )
+```
+
+###### 7.3.4.2.4. Dem_GetSizeOfFreezeFrameSelection
+
+**说明**: 获取通过调用 Dem_SelectFreezeFrameData 所选 **DTC** 的冻结帧数据的大小。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 SizeOfFreezeFrame（out）：所请求冻结帧记录的字节数。返回值：**E_OK**：大小返回成功；**E_NOT_OK**：未调用选择函数；**DEM_PENDING**：所请求的值被异步计算，当前不可用。调用者可以在稍后重试；**DEM_WRONG_DTC**：**DTC** 值不存在；**DEM_WRONG_DTCORIGIN**：错误的 **DTC** origin；**DEM_NO_SUCH_ELEMENT**：记录号不受配置支持，因此无效。
+
+```C
+Std_ReturnType Dem_GetSizeOfFreezeFrameSelection ( uint8 ClientId, uint32* SizeOfFreezeFrame )
+```
+
+###### 7.3.4.2.5. Dem_GetNextExtendedDataRecord
+
+**说明**: 为 Dem_SelectExtendedDataRecord 所选 **DTC** 获取扩展数据记录。函数将数据存储在提供的 **DestBuffer** 中。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 BufSize（inout）：函数被调用时此参数包含可写入缓冲区的最大数据字节数。函数在此参数中返回实际写入的数据字节数。参数 DestBuffer（out）：此参数包含一个字节指针，指向应写入扩展数据记录的缓冲区。格式为：{ExtendedDataRecordNumber, data[0], data[1], ..., data[n]}。返回值：**E_OK**：大小和缓冲区成功返回；**E_NOT_OK**：未调用选择函数；**DEM_BUFFER_TOO_SMALL**：提供的缓冲区大小太小；**DEM_PENDING**：所请求的值被异步计算，当前不可用。调用者可以在稍后重试；**DEM_WRONG_DTC**：**DTC** 值不存在；**DEM_WRONG_DTCORIGIN**：错误的 **DTC** origin；**DEM_NO_SUCH_ELEMENT**：未找到更多（匹配过滤判据的）元素。
+
+```C
+Std_ReturnType Dem_GetNextExtendedDataRecord ( uint8 ClientId, uint8* DestBuffer, uint16* BufSize )
+```
+
+###### 7.3.4.2.6. Dem_GetNextFreezeFrameData
+
+**说明**: 为 Dem_SelectFreezeFrameData 所选 **DTC** 获取冻结帧数据。函数将数据存储在提供的 **DestBuffer** 中。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 BufSize（inout）：函数被调用时此参数包含可写入缓冲区的最大数据字节数。函数在此参数中返回实际写入的数据字节数。参数 DestBuffer（out）：此参数包含一个字节指针，指向应写入冻结帧数据记录的缓冲区。格式为：{RecordNumber, NumOfDIDs, DID[1], data[1], ..., DID[N], data[N]}。返回值：**E_OK**：大小和缓冲区成功返回；**DEM_BUFFER_TOO_SMALL**：提供的缓冲区大小太小；**DEM_PENDING**：所请求的值被异步计算，当前不可用。调用者可以在稍后重试；**DEM_WRONG_DTC**：**DTC** 值不存在；**E_NOT_OK**：未调用选择函数；**DEM_WRONG_DTCORIGIN**：错误的 **DTC** origin；**DEM_NO_SUCH_ELEMENT**：未找到更多（匹配过滤判据的）元素。
+
+```C
+Std_ReturnType Dem_GetNextFreezeFrameData ( uint8 ClientId, uint8* DestBuffer, uint16* BufSize )
+```
+
+###### 7.3.4.2.7. Dem_SelectExtendedDataRecord
+
+**说明**: 设置由 Dem_GetNextExtendedDataRecord 和 Dem_GetSizeOfExtendedDataRecordSelection 使用的过滤器。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 ExtendedDataNumber（in）：所请求扩展数据记录的标识/编号。对于主故障内存，明确允许值 0xFE 来请求所有法规要求排放 **OBD DTC** 扩展数据记录。在所有故障内存中明确允许值 0xFF 来检索所有扩展数据记录的数据。返回值：**E_OK**：扩展数据记录选择成功；**DEM_WRONG_DTC**：所选格式下所选的 **DTC** 值不存在；**DEM_WRONG_DTCORIGIN**：所选 **DTCOrigin** 不存在；**DEM_PENDING**：选择扩展数据记录正在进行中。调用者应在稍后时刻再次调用此函数；**DEM_BUSY**：该客户端另一个基于 Dem_SelectDTC 的操作（按第 6.11.2.2 节）正在进行中。
+
+```C
+Std_ReturnType Dem_SelectExtendedDataRecord ( uint8 ClientId, uint8 ExtendedDataNumber )
+```
+
+###### 7.3.4.2.8. Dem_SelectFreezeFrameData
+
+**说明**: 设置由 Dem_GetNextFreezeFrameData 和 Dem_GetSizeOfFreezeFrameSelection 使用的过滤器。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 RecordNumber（in）：ISO 14229-1 定义的快照记录的唯一标识符。值 0xFF 是引用所寻址 **DTC** 的所有快照记录的占位符。值 0x00 指示 **DTC** 特定的 **WWH-OBD** 快照记录。返回值：**E_OK**：冻结帧数据选择成功；**DEM_WRONG_DTC**：所选格式下所选的 **DTC** 值不存在；**DEM_WRONG_DTCORIGIN**：所选 **DTCOrigin** 不存在；**DEM_PENDING**：选择冻结帧正在进行中。调用者应在稍后时刻再次调用此函数；**DEM_BUSY**：该客户端另一个基于 Dem_SelectDTC 的操作（按第 6.11.2.2 节）正在进行中。
+
+```C
+Std_ReturnType Dem_SelectFreezeFrameData ( uint8 ClientId, uint8 RecordNumber )
+```
+
+###### 7.3.4.2.9. Dem_GetNumberOfFreezeFrameRecords
+
+**说明**: 此函数返回当前存储在主事件内存中的所有冻结帧记录的数量。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 NumberOfFilteredRecords（out）：当前存储在主事件内存中的所有冻结帧记录的数量。返回值：操作状态。**E_OK**：正确返回冻结帧记录的数量；**DEM_PENDING**：所请求的值被异步计算，当前不可用。调用者可以在稍后重试。
+
+```C
+Std_ReturnType Dem_GetNumberOfFreezeFrameRecords ( uint8 ClientId, uint16* NumberOfFilteredRecords )
+```
+
+##### 7.3.4.3. DTC 存储
+
+###### 7.3.4.3.1. Dem_DisableDTCSetting
+
+**说明**: 为分配给所寻址客户端的 DemEventMemorySet 的所有 **DTC** 禁用 **DTC** 设置。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。返回值：**E_OK**：返回下一个过滤后的元素；**DEM_PENDING**：所请求的操作正在进行中。调用者应在稍后时刻再次调用此函数。
+
+```C
+Std_ReturnType Dem_DisableDTCSetting ( uint8 ClientId )
+```
+
+###### 7.3.4.3.2. Dem_EnableDTCSetting
+
+**说明**: （重新）启用分配给所寻址客户端的 DemEventMemorySet 的所有 **DTC** 的 **DTC** 设置。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。返回值：**E_OK**：操作成功；**DEM_PENDING**：已启动的操作正在进行中。调用者应在稍后时刻再次调用此函数。
+
+```C
+Std_ReturnType Dem_EnableDTCSetting ( uint8 ClientId )
+```
+
+#### 7.3.5. OBD 专用 Dcm &lt;=&gt; Dem 接口
+
+##### 7.3.5.1. Dem_DcmGetInfoTypeValue08
+
+**说明**: 用于按照 InfoType $08 请求 **IUMPR** 数据的服务。此接口派生自 **Dcm** 定义的函数原型 &lt;Module&gt;_GetInfotypeValueData()，因此包含 **Dcm_OpStatusType** 和 **Std_ReturnType**。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 OpStatus（in）：仅会出现 `DCM_INITIAL`，因为此 **API** 表现为同步。参数 Iumprdata08BufferSize（inout）：可写入 Iumprdata08 缓冲区的最大数据字节数。函数返回时，该值更新为实际写入 Iumprdata08BufferSize 的数据字节数。参数 Iumprdata08（out）：包含（按 ISO 15031-5 定义的）数据元素数量和 InfoType $08 内容的缓冲区。该缓冲区由 **Dcm** 提供。返回值：始终返回 E_OK。
+
+```C
+Std_ReturnType Dem_DcmGetInfoTypeValue08 ( Dcm_OpStatusType OpStatus, uint8* Iumprdata08, uint8* Iumprdata08BufferSize )
+```
+
+##### 7.3.5.2. Dem_DcmGetInfoTypeValue0B
+
+**说明**: 用于按照 InfoType $0B 请求 **IUMPR** 数据的服务。此接口派生自 **Dcm** 定义的函数原型 &lt;Module&gt;_GetInfotypeValueData()，因此包含 **Dcm_OpStatusType** 和 **Std_ReturnType**。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 OpStatus（in）：仅会出现 `DCM_INITIAL`，因为此 **API** 表现为同步。参数 Iumprdata0BBufferSize（inout）：可写入 Iumprdata0B 缓冲区的最大数据字节数。函数返回时，该值更新为实际写入 Iumprdata0BBufferSize 的数据字节数。参数 Iumprdata0B（out）：包含（按 ISO 15031-5 定义的）数据元素数量和 InfoType $0B 内容的缓冲区。该缓冲区由 **Dcm** 提供。返回值：始终返回 E_OK。
+
+```C
+Std_ReturnType Dem_DcmGetInfoTypeValue0B ( Dcm_OpStatusType OpStatus, uint8* Iumprdata0B, uint8* Iumprdata0BBufferSize )
+```
+
+##### 7.3.5.3. Dem_DcmReadDataOfPID01
+
+**说明**: 报告 **Dem** 计算的 PID $01 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID01value（out）：包含 **Dem** 计算的 PID $01 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPID01 ( uint8* PID01value )
+```
+
+##### 7.3.5.4. Dem_DcmReadDataOfPID1C
+
+**说明**: 报告 **Dem** 计算的 PID $1C 值的服务。PID $1C 的值在 DemOBDCompliancy 中配置。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID1Cvalue（out）：包含 **Dem** 计算的 PID $1C 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPID1C ( uint8* PID1Cvalue )
+```
+
+##### 7.3.5.5. Dem_DcmReadDataOfPID21
+
+**说明**: 报告 **Dem** 计算的 PID $21 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID21value（out）：包含 **Dem** 计算的 PID $21 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPID21 ( uint8* PID21value )
+```
+
+##### 7.3.5.6. Dem_DcmReadDataOfPID30
+
+**说明**: 报告 **Dem** 计算的 PID $30 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID30value（out）：包含 **Dem** 计算的 PID $30 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPID30 ( uint8* PID30value )
+```
+
+##### 7.3.5.7. Dem_DcmReadDataOfPID31
+
+**说明**: 报告 **Dem** 计算的 PID $31 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID31value（out）：包含 **Dem** 计算的 PID $31 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPID31 ( uint8* PID31value )
+```
+
+##### 7.3.5.8. Dem_DcmReadDataOfPID41
+
+**说明**: 报告 **Dem** 计算的 PID $41 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID41value（out）：包含 **Dem** 计算的 PID $41 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPID41 ( uint8* PID41value )
+```
+
+##### 7.3.5.9. Dem_DcmReadDataOfPID4D
+
+**说明**: 报告 **Dem** 计算的 PID $4D 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID4Dvalue（out）：包含 **Dem** 计算的 PID $4D 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPID4D ( uint8* PID4Dvalue )
+```
+
+##### 7.3.5.10. Dem_DcmReadDataOfPID4E
+
+**说明**: 报告 **Dem** 计算的 PID $4E 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID4Evalue（out）：包含 **Dem** 计算的 PID $4E 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPID4E ( uint8* PID4Evalue )
+```
+
+##### 7.3.5.11. Dem_DcmReadDataOfPID91
+
+**说明**: 报告 **Dem** 计算的 PID $91 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID91value（out）：包含 **Dem** 计算的 PID $91 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPID91 ( uint8* PID91value )
+```
+
+##### 7.3.5.12. Dem_DcmReadDataOfOBDFreezeFrame
+
+**说明**: 按 **PID** 和索引获取为服务 $02 的输出而选择的最重要的冻结帧的数据元素。函数将数据存储在提供的 **DestBuffer** 中。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID（in）：此参数是 ISO 15031-5 定义的 **PID** 标识符。参数 DataElementIndexOfPID（in）：根据服务 $02 的 **Dcm** 配置，此 **PID** 的数据元素索引。它是从零开始连续的，并按数据元素位置排序（在 **Dcm** 中配置，参见第 6.9.5.2 节）。参数 DestBuffer（inout）：此参数包含一个字节指针，指向应写入该 **PID** 数据元素的缓冲区。格式为原始十六进制值，不包含头信息。参数 BufSize（inout）：函数被调用时此参数包含可写入缓冲区的最大数据字节数。函数在此参数中返回实际写入的数据字节数。返回值：**E_OK**：冻结帧数据成功报告；**E_NOT_OK**：冻结帧数据未成功报告。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfOBDFreezeFrame ( uint8 PID, uint8 DataElementIndexOfPID, uint8* DestBuffer, uint16* BufSize )
+```
+
+##### 7.3.5.13. Dem_DcmGetDTCOfOBDFreezeFrame
+
+**说明**: 按冻结帧记录号获取 **DTC**。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 FrameNumber（in）：ISO 15031-5 定义的冻结帧记录的唯一标识符。值 0x00 指示完整的 **OBD** 冻结帧。其他值保留用于未来的功能。参数 DTCFormat（in）：**DTC** 值的输出格式。参数 DTC（out）：**OBD** 格式的诊断故障码。如果函数返回值不是 E_OK，此参数不包含有效数据。返回值：**E_OK**：操作成功；**E_NOT_OK**：没有可用的 **DTC**。
+
+```C
+Std_ReturnType Dem_DcmGetDTCOfOBDFreezeFrame ( uint8 FrameNumber, uint32* DTC, Dem_DTCFormatType DTCFormat )
+```
+
+##### 7.3.5.14. Dem_DcmGetAvailableOBDMIDs
+
+**说明**: 在 Service $06 请求时向 **Dcm** 报告所请求"可用性 OBDMID"的值。测试仪由此显示维修人员可以选择的受支持测试。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，可重入。参数 Obdmid（in）：可用性 OBDMID（$00、$20、$40...）。参数 Obdmidvalue（out）：关于 OBDMID 支持情况的位编码信息。返回值：**E_OK**：**DTR** 结果报告成功。
+
+```C
+Std_ReturnType Dem_DcmGetAvailableOBDMIDs ( uint8 Obdmid, uint32* Obdmidvalue )
+```
+
+##### 7.3.5.15. Dem_DcmGetNumTIDsOfOBDMID
+
+**说明**: 获取每个（功能性）OBDMID 的 **TID** 数量。**DCM** 可以使用它在从 0 到 numberOfTIDs-1 的循环内迭代请求 **OBD/TID** 结果数据。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，可重入。参数 Obdmid（in）：作为请求对象的 OBDMID，用于标识分配的 **TID** 数量。参数 numberOfTIDs（out）：所请求 OBDMID 分配的 **TID** 数量。用作 **DCM** 检索所有 **OBD/TID** 结果数据的循环值。返回值：**E_OK**：获取 **TID** 数量成功；**E_NOT_OK**：获取 **TID** 数量失败。
+
+```C
+Std_ReturnType Dem_DcmGetNumTIDsOfOBDMID ( uint8 Obdmid, uint8* numberOfTIDs )
+```
+
+##### 7.3.5.16. Dem_DcmGetDTRData
+
+**说明**: 报告 **DTR** 数据及其 **TID** 值、UaSID、带下限和上限的测试结果。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，可重入。参数 Obdmid（in）：通过分配的 DTRId 标识 **DTR** 元素。参数 TIDindex（in）：**DEM** 内 **TID** 的索引。从 0 运行到在调用 Dem_DcmGetNumTIDsOfOBDMID() 时获得的"numberOfTIDs"。参数 TIDvalue（out）：要放入测试仪响应的 **TID**。参数 UaSID（out）：要放入测试仪响应的 UaSID。参数 Testvalue（out）：最新测试结果。参数 Lowlimvalue（out）：与最新测试结果关联的下限值。参数 Upplimvalue（out）：与最新测试结果关联的上限值。返回值：**E_OK**：**DTR** 结果报告成功；**E_NOT_OK**：**DTR** 结果报告失败。
+
+```C
+Std_ReturnType Dem_DcmGetDTRData ( uint8 Obdmid, uint8 TIDindex, uint8* TIDvalue, uint8* UaSID, uint16* Testvalue, uint16* Lowlimvalue, uint16* Upplimvalue )
+```
+
+##### 7.3.5.17. Dem_DcmGetInfoTypeValue79
+
+**说明**: 报告 **Dem** 计算的监视器活动分母 **PID** 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 OpStatus（in）：仅会出现 `DCM_INITIAL`，因为此 **API** 表现为同步。参数 DataValueBufferSize（inout）：可写入 DataValueBuffer 的最大数据字节数。函数返回时，该值更新为实际写入 DataValueBuffer 的数据字节数。参数 DataValueBuffer（out）：包含监视器活动分母内容的缓冲区。该缓冲区由调用者以适当的大小提供。返回值：始终返回 E_OK。
+
+```C
+Std_ReturnType Dem_DcmGetInfoTypeValue79 ( Dcm_OpStatusType OpStatus, uint8* DataValueBuffer, uint8* DataValueBufferSize )
+```
+
+##### 7.3.5.18. Dem_DcmReadDataOfPIDF501
+
+**说明**: 报告 **Dem** 计算的 PID 0xF501 值的函数。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PIDF501value（out）：包含 PID 0xF501 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供。返回值：始终返回 E_OK。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPIDF501 ( uint8* PIDF501value )
+```
+
+#### 7.3.6. 接口 J1939Dcm &lt;=&gt; Dem
+
+##### 7.3.6.1. 访问 DTC 和状态信息
+
+###### 7.3.6.1.1. Dem_J1939DcmSetDTCFilter
+
+**说明**: 该函数为特定节点设置 **DTC** 过滤器，并返回过滤后 **DTC** 的组合灯状态。可通过**Dem_J1939Dcm.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 DTCStatusFilter（in）：可用的类型有：`DEM_J1939DTC_ACTIVE`、`DEM_J1939DTC_PREVIOUSLY_ACTIVE`、`DEM_J1939DTC_PENDING`、`DEM_J1939DTC_PERMANENT`、`DEM_J1939DTC_CURRENTLY_ACTIVE`。参数 DTCKind（in）：定义要报告的 **DTC** 功能组（例如所有 **DTC**、**OBD** 相关 **DTC**）。参数 DTCOrigin（in）：此参数用于选择应从中读取/清除 **DTC** 的源内存。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 LampStatus（out）：接收灯状态。返回值：**E_OK**：操作成功；**E_NOT_OK**：无法设置过滤器。
+
+```C
+Std_ReturnType Dem_J1939DcmSetDTCFilter ( Dem_J1939DcmDTCStatusFilterType DTCStatusFilter, Dem_DTCKindType DTCKind, Dem_DTCOriginType DTCOrigin, uint8 ClientId, Dem_J1939DcmLampStatusType* LampStatus )
+```
+
+###### 7.3.6.1.2. Dem_J1939DcmGetNumberOfFilteredDTC
+
+**说明**: 获取由 Dem_J1939DcmSetDTCFilter 函数设置的当前过滤 **DTC** 的数量。可通过**Dem_J1939Dcm.h**获得。本服务为异步调用，不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 NumberOfFilteredDTC（out）：与所定义状态掩码匹配的 **DTC** 数量。返回值：**E_OK**：操作成功；**DEM_PENDING**：操作成功且结果挂起。
+
+```C
+Std_ReturnType Dem_J1939DcmGetNumberOfFilteredDTC ( uint16* NumberOfFilteredDTC, uint8 ClientId )
+```
+
+###### 7.3.6.1.3. Dem_J1939DcmGetNextFilteredDTC
+
+**说明**: 获取下一个过滤后的 **J1939 DTC**。可通过**Dem_J1939Dcm.h**获得。本服务为异步调用，不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 J1939DTC（out）：接收 **J1939DTC** 值。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 OccurenceCounter（out）：此参数接收相应的发生计数器。如果函数调用的返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。返回值：**E_OK**：操作成功；**DEM_NO_SUCH_ELEMENT**：所请求的元素不可用；**DEM_PENDING**：操作成功且结果挂起；**DEM_BUFFER_TOO_SMALL**：提供的缓冲区太小。
+
+```C
+Std_ReturnType Dem_J1939DcmGetNextFilteredDTC ( uint32* J1939DTC, uint8* OccurenceCounter, uint8 ClientId )
+```
+
+###### 7.3.6.1.4. Dem_J1939DcmFirstDTCwithLampStatus
+
+**说明**: 该函数为特定节点设置 DM31 响应的第一个适用 **DTC** 的过滤器。可通过**Dem_J1939Dcm.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。返回值：无。
+
+```C
+void Dem_J1939DcmFirstDTCwithLampStatus ( uint8 ClientId )
+```
+
+###### 7.3.6.1.5. Dem_J1939DcmGetNextDTCwithLampStatus
+
+**说明**: 获取 DM31 的下一个过滤 **J1939 DTC**，包括当前的 LampStatus。可通过**Dem_J1939Dcm.h**获得。本服务为同步调用，不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 LampStatus（out）：接收此函数返回的灯状态。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 J1939DTC（out）：接收 **J1939DTC** 值。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 OccurenceCounter（out）：此参数接收相应的发生计数器。如果函数调用的返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。返回值：**E_OK**：操作成功；**DEM_NO_SUCH_ELEMENT**：所请求的元素不可用；**DEM_PENDING**：操作成功且结果挂起；**DEM_BUFFER_TOO_SMALL**：提供的缓冲区太小。
+
+```C
+Std_ReturnType Dem_J1939DcmGetNextDTCwithLampStatus ( Dem_J1939DcmLampStatusType* LampStatus, uint32* J1939DTC, uint8* OccurenceCounter, uint8 ClientId )
+```
+
+##### 7.3.6.2. DTC 存储
+
+###### 7.3.6.2.1. Dem_J1939DcmClearDTC
+
+**说明**: 清除与指定 **DTC** 相关的所有事件的状态，以及这些事件的所有关联事件内存条目。可通过**Dem_J1939Dcm.h**获得。本服务为异步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 DTCTypeFilter（in）：定义要清除的 **DTC** 类型。参数 DTCOrigin（in）：此参数用于选择应从中读取/清除 **DTC** 的源内存。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。返回值：**E_OK**：**DTC** 清除成功；**DEM_WRONG_DTC**：所选格式下所选的 **DTC** 值不存在，或按配置仅允许清除所有 **DTC** 组；**DEM_WRONG_DTCORIGIN**：所选 **DTCOrigin** 不存在；**DEM_CLEAR_FAILED**：**DTC** 清除失败；**DEM_CLEAR_BUSY**：另一个客户端当前正在清除 **DTC**。所请求的操作不会开始，调用者应在稍后时刻重试；**DEM_CLEAR_MEMORY_ERROR**：擦除内存位置时发生错误（例如在 DemClearDTCBehavior 设置为 `DEM_CLRRESP_NONVOLATILE_FINISH` 且非易失性块擦除失败时）；**DEM_PENDING**：**DTC** 清除正在进行中。调用者应在稍后时刻再次调用此函数。
+
+```C
+Std_ReturnType Dem_J1939DcmClearDTC ( Dem_J1939DcmSetClearFilterType DTCTypeFilter, Dem_DTCOriginType DTCOrigin, uint8 ClientId )
+```
+
+###### 7.3.6.2.2. Dem_J1939DcmSetFreezeFrameFilter
+
+**说明**: 该函数为特定节点设置 FreezeFrame 过滤器。可通过**Dem_J1939Dcm.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 FreezeFrameKind（in）：可用的类型有：`DEM_J1939DCM_FREEZEFRAME`、`DEM_J1939DCM_EXPANDED_FREEZEFRAME`、`DEM_J1939DCM_SPNS_IN_EXPANDED_FREEZEFRAME`。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。返回值：**E_OK**：操作成功；**E_NOT_OK**：无法设置过滤器。
+
+```C
+Std_ReturnType Dem_J1939DcmSetFreezeFrameFilter ( Dem_J1939DcmSetFreezeFrameFilterType FreezeFrameKind, uint8 ClientId )
+```
+
+###### 7.3.6.2.3. Dem_J1939DcmGetNextFreezeFrame
+
+**说明**: 获取下一个冻结帧数据。函数将数据存储在提供的 **DestBuffer** 中。可通过**Dem_J1939Dcm.h**获得。本服务为异步调用，不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 DestBuffer（inout）：此参数包含一个字节指针，指向应写入冻结帧数据记录的缓冲区。参数 BufSize（inout）：函数被调用时此参数包含可写入缓冲区的最大数据字节数。函数在 DestBuffer 中返回实际写入的数据字节数。参数 J1939DTC（out）：接收 **J1939DTC** 值。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 OccurenceCounter（out）：此参数接收相应的发生计数器。如果函数调用的返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。返回值：**E_OK**：操作成功；**DEM_NO_SUCH_ELEMENT**：所请求的元素不可用；**DEM_PENDING**：操作成功且结果挂起；**DEM_BUFFER_TOO_SMALL**：提供的缓冲区太小。
+
+```C
+Std_ReturnType Dem_J1939DcmGetNextFreezeFrame ( uint32* J1939DTC, uint8* OccurenceCounter, uint8* DestBuffer, uint16* BufSize, uint8 ClientId )
+```
+
+###### 7.3.6.2.4. Dem_J1939DcmGetNextSPNInFreezeFrame
+
+**说明**: 获取下一个 **SPN**。可通过**Dem_J1939Dcm.h**获得。本服务为异步调用，不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 SPNSupported（out）：此参数包含 ExpandedFreezeFrame 中的下一个 **SPN**。返回值：**E_OK**：操作成功；**DEM_NO_SUCH_ELEMENT**：所请求的元素不可用；**DEM_PENDING**：操作成功且结果挂起。
+
+```C
+Std_ReturnType Dem_J1939DcmGetNextSPNInFreezeFrame ( uint32* SPNSupported, uint8 ClientId )
+```
+
+##### 7.3.6.3. 报告
+
+###### 7.3.6.3.1. Dem_J1939DcmSetRatioFilter
+
+**说明**: 该函数为特定节点设置 Ratio 过滤器，并返回相应的点火循环计数器和通用分母。可通过**Dem_J1939Dcm.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 IgnitionCycleCounter（out）：点火循环计数器。参数 OBDMonitoringConditionsEncountered（out）：遇到的 **OBD** 监控条件。返回值：**E_OK**：操作成功；**E_NOT_OK**：无法设置过滤器。
+
+```C
+Std_ReturnType Dem_J1939DcmSetRatioFilter ( uint16* IgnitionCycleCounter, uint16* OBDMonitoringConditionsEncountered, uint8 ClientId )
+```
+
+###### 7.3.6.3.2. Dem_J1939DcmGetNextFilteredRatio
+
+**说明**: 获取下一个过滤后的比率。可通过**Dem_J1939Dcm.h**获得。本服务为同步调用，不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 SPN（out）：接收适用系统监视器的 **SPN**。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 Numerator（out）：接收适用系统监视器的分子。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 Denominator（out）：接收适用系统监视器的分母。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。返回值：**E_OK**：操作成功；**DEM_NO_SUCH_ELEMENT**：所请求的元素不可用；**DEM_PENDING**：操作成功且结果挂起；**DEM_BUFFER_TOO_SMALL**：提供的缓冲区太小。
+
+```C
+Std_ReturnType Dem_J1939DcmGetNextFilteredRatio ( uint32* SPN, uint16* Numerator, uint16* Denominator, uint8 ClientId )
+```
+
+###### 7.3.6.3.3. Dem_J1939DcmReadDiagnosticReadiness1
+
+**说明**: 报告 **Dem** 计算的 Diagnostic Readiness 1（DM05）值的服务。可通过**Dem_J1939Dcm.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 DataValue（out）：包含 **Dem** 计算的 Diagnostic Readiness 1（DM05）内容的 8 字节缓冲区。返回值：**E_OK**：操作成功；**E_NOT_OK**：操作失败。
+
+```C
+Std_ReturnType Dem_J1939DcmReadDiagnosticReadiness1 ( Dem_J1939DcmDiagnosticReadiness1Type* DataValue, uint8 ClientId )
+```
+
+###### 7.3.6.3.4. Dem_J1939DcmReadDiagnosticReadiness2
+
+**说明**: 报告 **Dem** 计算的 Diagnostic Readiness 2（DM21）值的服务。可通过**Dem_J1939Dcm.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 DataValue（out）：包含 **Dem** 计算的 Diagnostic Readiness 2（DM21）内容的 8 字节缓冲区。返回值：**E_OK**：操作成功；**E_NOT_OK**：操作失败。
+
+```C
+Std_ReturnType Dem_J1939DcmReadDiagnosticReadiness2 ( Dem_J1939DcmDiagnosticReadiness2Type* DataValue, uint8 ClientId )
+```
+
+###### 7.3.6.3.5. Dem_J1939DcmReadDiagnosticReadiness3
+
+**说明**: 报告 **Dem** 计算的 Diagnostic Readiness 3（DM26）值的服务。可通过**Dem_J1939Dcm.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 DataValue（out）：包含 **Dem** 计算的 Diagnostic Readiness 3（DM26）内容的 8 字节缓冲区。返回值：**E_OK**：操作成功；**E_NOT_OK**：操作失败。
+
+```C
+Std_ReturnType Dem_J1939DcmReadDiagnosticReadiness3 ( Dem_J1939DcmDiagnosticReadiness3Type* DataValue, uint8 ClientId )
+```
+
+#### 7.3.7. OBD 专用接口
+
+##### 7.3.7.1. Dem_SetEventDisabled
+
+**说明**: 将事件报告为已禁用（针对 PID $41 计算）的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，对不同 EventId 可重入，对相同 EventId 不可重入。参数 EventId（in）：通过分配的 **EventId** 标识事件。返回值：**E_OK**：事件设置为已禁用成功；**E_NOT_OK**：事件设置为已禁用失败。
+
+```C
+Std_ReturnType Dem_SetEventDisabled ( Dem_EventIdType EventId )
+```
+
+##### 7.3.7.2. Dem_RepIUMPRFaultDetect
+
+**说明**: 报告可能发现故障（因为所有条件均已满足）的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，对不同 RatioID 可重入，对相同 RatioID 不可重入。参数 RatioID（in）：报告相应监视器可能已发现故障的比率标识符——仅在选择了接口选项"API"时使用。返回值：**E_OK**：**IUMPR** 结果报告成功。
+
+```C
+Std_ReturnType Dem_RepIUMPRFaultDetect ( Dem_RatioIdType RatioID )
+```
+
+##### 7.3.7.3. Dem_SetIUMPRDenCondition
+
+**说明**: 为了在 **OBD** 相关 **ECU** 之间传递（附加）分母条件的状态，此 **API** 用于将条件状态转发给特定 **ECU** 的 **Dem**。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，可重入。参数 ConditionId（in）：**IUMPR** 分母条件 ID 的标识（通用分母、冷启动、EVAP、500mi）。参数 ConditionStatus（in）：**IUMPR** 分母条件的状态（未达到、已达到、不可达/被抑制）。返回值：**E_OK**：**IUMPR** 分母条件设置成功；**E_NOT_OK**：**IUMPR** 分母条件设置失败或无法被接受。
+
+```C
+Std_ReturnType Dem_SetIUMPRDenCondition ( Dem_IumprDenomCondIdType ConditionId, Dem_IumprDenomCondStatusType ConditionStatus )
+```
+
+##### 7.3.7.4. Dem_GetIUMPRDenCondition
+
+**说明**: 为了在 **OBD** 相关 **ECU** 之间传递（附加）分母条件的状态，此 **API** 用于从计算这些条件的 **ECU** 的 **Dem** 中检索条件状态。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，可重入。参数 ConditionId（in）：**IUMPR** 分母条件 ID 的标识（通用分母、冷启动、EVAP、500mi）。参数 ConditionStatus（out）：**IUMPR** 分母条件的状态（未达到、已达到、不可达/被抑制）。返回值：**E_OK**：获取 **IUMPR** 分母条件状态成功；**E_NOT_OK**：获取条件状态失败。
+
+```C
+Std_ReturnType Dem_GetIUMPRDenCondition ( Dem_IumprDenomCondIdType ConditionId, Dem_IumprDenomCondStatusType* ConditionStatus )
+```
+
+##### 7.3.7.5. Dem_RepIUMPRDenRelease
+
+**说明**: 用于释放特定监视器分母的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，可重入。参数 RatioID（in）：报告特定分母已释放（因物理原因——例如温度条件或最小活动）的比率标识符。返回值：**E_OK**：**IUMPR** 分母状态报告成功；**E_NOT_OK**：**IUMPR** 分母状态报告失败。
+
+```C
+Std_ReturnType Dem_RepIUMPRDenRelease ( Dem_RatioIdType RatioID )
+```
+
+##### 7.3.7.6. Dem_SetPtoStatus
+
+**说明**: 设置 **PTO** 状态的 **API**。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 PtoStatus（in）：设置 **PTO** 的状态（TRUE==激活；FALSE==未激活）。返回值：当 **Dem** 采纳了新的 **PTO** 状态时返回 E_OK；在其他所有情况下返回 E_NOT_OK。
+
+```C
+Std_ReturnType Dem_SetPtoStatus ( boolean PtoStatus )
+```
+
+##### 7.3.7.7. Dem_ReadDataOfPID01
+
+**说明**: 报告 **Dem** 计算的 PID $01 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 PID01value（out）：包含 **Dem** 计算的 PID $01 内容的缓冲区。该缓冲区由应用以 4 字节大小提供。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_ReadDataOfPID01 ( uint8* PID01value )
+```
+
+##### 7.3.7.8. Dem_GetDataOfPID21
+
+**说明**: 软件组件从 **Dem** 获取 PID $21 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral/DemGeneralOBD.DemOBDCentralizedPID21Handling)} == true) 且 ({ecuc(Dem/DemGeneral.DemOBDSupport)} == `DEM_OBD_MASTER_ECU`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 PID21value（out）：原始十六进制值的 PID $21 内容。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_GetDataOfPID21 ( uint8* PID21value )
+```
+
+##### 7.3.7.9. Dem_SetDataOfPID21
+
+**说明**: 软件组件在 **Dem** 中设置 PID $21 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 PID21value（in）：包含 PID $21 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_SetDataOfPID21 ( const uint8* PID21value )
+```
+
+##### 7.3.7.10. Dem_SetDataOfPID31
+
+**说明**: 软件组件在 **Dem** 中设置 PID $31 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 PID31value（in）：包含 PID $31 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_SetDataOfPID31 ( const uint8* PID31value )
+```
+
+##### 7.3.7.11. Dem_SetDataOfPID4D
+
+**说明**: 软件组件在 **Dem** 中设置 PID $4D 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 PID4Dvalue（in）：包含 PID $4D 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_SetDataOfPID4D ( const uint8* PID4Dvalue )
+```
+
+##### 7.3.7.12. Dem_SetDataOfPID4E
+
+**说明**: 软件组件在 **Dem** 中设置 PID $4E 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为异步调用，不可重入。参数 PID4Evalue（in）：包含 PID $4E 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_SetDataOfPID4E ( const uint8* PID4Evalue )
+```
+
+##### 7.3.7.13. Dem_GetCycleQualified
+
+**说明**: 返回从属运行周期的鉴定状态。**API** 可用性：仅当任何一个 ({ecuc(Dem/DemGeneral/DemOperationCycle.DemLeadingCycleRef)} != NULL) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 OperationCycleId（in）：已配置 DemOperationCycle 的标识。参数 isQualified（out）：TRUE：从属运行周期已被鉴定。FALSE：尚未满足从属运行周期的鉴定条件。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_GetCycleQualified ( uint8 OperationCycleId, boolean* isQualified )
+```
+
+##### 7.3.7.14. Dem_SetCycleQualified
+
+**说明**: 将一个从属运行周期设置为已鉴定，使其可以与其主控周期一起处理。可通过**Dem.h**获得。本服务为同步调用，可重入。参数 OperationCycleId（in）：已配置 DemOperationCycle 的标识。返回值：始终返回 E_OK。
+
+```C
+Std_ReturnType Dem_SetCycleQualified ( uint8 OperationCycleId )
+```
+
+##### 7.3.7.15. Dem_GetDTCSeverityAvailabilityMask
+
+**说明**: 获取 **DTC** 严重度可用性掩码。可通过**Dem.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCSeverityMask（out）：**DTCSeverityMask** 的值指示 **Dem** 支持的 **DTC** 严重度位。所有支持的信息通过将相应的状态位置为 1 来指示。参见 ISO 14229-1。返回值：**E_OK**：获取 **DTC** 严重度掩码成功；**E_NOT_OK**：获取 **DTC** 严重度掩码失败。
+
+```C
+Std_ReturnType Dem_GetDTCSeverityAvailabilityMask ( uint8 ClientId, Dem_DTCSeverityType* DTCSeverityMask )
+```
+
+##### 7.3.7.16. Dem_GetB1Counter
+
+**说明**: 报告 **Dem** 计算的 **B1** 计数器值的服务。仅在 **WWH-OBD** 相关 **ECU** 中需要此 **API**。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 B1Counter（out）：包含 **B1** 计数器的缓冲区。该缓冲区由应用以 2 字节大小提供。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_GetB1Counter ( uint16* B1Counter )
+```
+
+##### 7.3.7.17. Dem_SetDTR
+
+**说明**: 报告带下限和上限的 **DTR** 结果。内部事件状态作为 **DTR** 值是转发还是忽略的主控，同时考虑 DTRUpdateKind。与该 **DTR** 相关的 EventId 通过配置分配（并从 ServiceNeeds 推导）。处理时会考虑使能/存储条件。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，对不同 DTRId 可重入，对相同 DTRId 不可重入。参数 DTRId（in）：通过分配的 DTRId 标识 **DTR** 元素。参数 TestResult（in）：**DTR** 的测试结果。参数 LowerLimit（in）：**DTR** 的下限。参数 UpperLimit（in）：**DTR** 的上限。参数 Ctrlval（in）：**DTR** 的控制值，用于支持 **Dem** 内部对其的解释。返回值：**E_OK**：**DTR** 结果报告成功；**E_NOT_OK**：**DTR** 结果报告失败。
+
+```C
+Std_ReturnType Dem_SetDTR ( uint16 DTRId, sint32 TestResult, sint32 LowerLimit, sint32 UpperLimit, Dem_DTRControlType Ctrlval )
+```
+
+### 7.4. 期望接口
+
+本章列出从其他模块所需的所有接口。
+
+#### 7.4.1. 强制接口
+
+本章定义实现 **Dem** 模块核心功能所需的全部接口。
+
+**Dem**模块中没有强制接口。
+
+#### 7.4.2. 可选接口
+
+本章定义实现 **Dem** 模块可选功能所需的全部接口。
+
+**Dem**模块中可选接口的定义：
+
+| API 函数 | 头文件 | 说明 |
+| --- | --- | --- |
+| Dcm_DemTriggerOnDTCStatus | Dcm_Dem.h | 在 **UDS** 状态字节变化时触发。允许为子服务 OnDTCStatusChanged 触发 ROE 事件。 |
+| Det_ReportError | Det.h | 报告开发错误的服务。 |
+| FiM_DemInit | FiM_Dem.h | 此服务重新初始化 **FIM**。 |
+| FiM_DemTriggerOnComponentStatus | FiM_Dem.h | 在组件失败状态变化时触发。 |
+| FiM_DemTriggerOnMonitorStatus | FiM_Dem.h | 提供给 **Dem** 调用的服务，用于将监视器状态变化通知 **Fim**。 |
+| J1939Dcm_DemTriggerOnDTCStatus | J1939Dcm_Dem.h | 用于 DM01 报文的触发器，指示发生了 **UDS** 状态变化。 |
+| NvM_GetErrorStatus | NvM.h | 读取块相关错误/状态信息的服务。 |
+| NvM_ReadBlock | NvM.h | 将 NV 块的数据复制到其对应 RAM 块的服务。 |
+| NvM_SetRamBlockStatus | NvM.h | 设置永久 RAM 块的 RAM 块状态或 NVRAM 块显式同步状态的服务。 |
+| NvM_WriteBlock | NvM.h | 将 RAM 块的数据复制到其对应 NV 块的服务。 |
+
+**注意：**基于实现策略，可以使用 FiM_DemInit（另参见第 6.11.4 节）。
+
+**注意：**基于实现策略，可以省略 NvM_[Read|Write]Block 或 NvM_SetRamBlockStatus，或者通过配置完全停用 **NvM** 的使用（另参见第 6.11.5 节）。
+
+#### 7.4.3. 可配置接口
+
+本章列出目标函数可以配置的所有接口。目标函数通常是回调函数。这类接口的名称不是固定的，因为它们是可配置的。
+
+![Figure8_4.png](Figure8_4.png)
+
+##### 7.4.3.1. 接口 BSW 模块 / SW-组件 &lt;=&gt; Dem
+
+从 **Dem** 到 **SW-组件** 的回调接口经 **RTE** 端口接口实现。以下回调描述针对其他 **BSW** 模块的 C 回调。
+
+###### 7.4.3.1.1. InitMonitorForEvent
+
+可配置接口 &lt;Module&gt;_DemInitMonitorFor&lt;EventName&gt; 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemInitMonitorFor&lt;EventName&gt; |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemInitMonitorFor&lt;EventName&gt; ( Dem_InitMonitorReasonType InitMonitorReason ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 InitMonitorReason（in） | 由监视器评估的特定（重新）初始化原因，用于标识要执行的初始化类型。 |
+| 返回值 | **Std_ReturnType**：返回值未使用——仅为与相应 **RTE** 操作兼容。 |
+| 说明 | 初始化特定事件的诊断监视器。如果 **Dem** 未提供端口接口，则每个事件有一个单独的回调（如果已配置）。 |
+| 可通过…获得 | Dem_Externals.h |
+
+###### 7.4.3.1.2. DemTriggerOnComponentStatus
+
+可配置接口 &lt;Module&gt;_DemTriggerOnComponentStatus 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemTriggerOnComponentStatus |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemTriggerOnComponentStatus ( Dem_ComponentIdType ComponentId ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 ComponentId（in） | **DemComponent** 的标识。 |
+| 返回值 | **Std_ReturnType**：返回值未使用——仅为与相应 **RTE** 操作兼容。 |
+| 说明 | 在 **DemComponent** 失败状态变化时触发。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.2. ClearDtcNotification
+
+可配置接口 &lt;Module&gt;_ClearDtcNotification 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_ClearDtcNotification |
+| 语法 | Std_ReturnType &lt;Module&gt;_ClearDtcNotification ( uint32 DTC, Dem_DTCFormatType DTCFormat, Dem_DTCOriginType DTCOrigin ) |
+| 同步/异步 | 异步 |
+| 可重入性 | 不可重入 |
+| 参数 DTC（in） | 被清除的 **DTC** 或 **DTC** 组。 |
+| 参数 DTCFormat（in） | **DTC** 值的格式。 |
+| 参数 DTCOrigin（in） | 当前清除操作所选的事件内存。 |
+| 返回值 | **Std_ReturnType**：始终返回 E_OK。 |
+| 说明 | **Dem** 在执行清除 **DTC** 操作时调用。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.3. DemGeneralTriggerOnMonitorStatus
+
+可配置接口 &lt;Module&gt;_DemGeneralTriggerOnMonitorStatus 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemGeneralTriggerOnMonitorStatus |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemGeneralTriggerOnMonitorStatus ( Dem_EventIdType EventId ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 EventId（in） | 通过分配的 **EventId** 标识事件。 |
+| 返回值 | **Std_ReturnType**：出于与 **RTE** 兼容的原因，此函数始终返回 E_OK。 |
+| 说明 | 在监视器状态变化时触发。在事件状态报告的上下文中同步调用。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.4. DemGeneralTriggerOnEventUdsStatus
+
+可配置接口 &lt;Module&gt;_DemGeneralTriggerOnEventUdsStatus 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemGeneralTriggerOnEventUdsStatus |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemGeneralTriggerOnEventUdsStatus ( Dem_EventIdType EventId, Dem_UdsStatusByteType EventStatusByteOld, Dem_UdsStatusByteType EventStatusByteNew ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 EventId（in） | 通过分配的 **EventId** 标识事件。 |
+| 参数 EventStatusByteOld（in） | 变化前事件的 **UDS DTC** 状态字节（参见"状态位支持"一章）。 |
+| 参数 EventStatusByteNew（in） | 变化后事件的 **UDS DTC** 状态字节（参见"状态位支持"一章）。 |
+| 返回值 | **Std_ReturnType**：出于与 **RTE** 兼容的原因，此函数始终返回 E_OK。 |
+| 说明 | 在 **UDS DTC** 状态字节变化时触发。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.5. DemTriggerOnEventUdsStatus
+
+可配置接口 &lt;Module&gt;_DemTriggerOnEventUdsStatus 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemTriggerOnEventUdsStatus |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemTriggerOnEventUdsStatus ( Dem_UdsStatusByteType EventStatusByteOld, Dem_UdsStatusByteType EventStatusByteNew ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 EventStatusByteOld（in） | 变化前事件的 **UDS DTC** 状态字节（参见"状态位支持"一章）。 |
+| 参数 EventStatusByteNew（in） | 变化后事件的 **UDS DTC** 状态字节（参见"状态位支持"一章）。 |
+| 返回值 | **Std_ReturnType**：出于与 **RTE** 兼容的原因，此函数始终返回 E_OK。 |
+| 说明 | 在 **UDS DTC** 状态字节变化时触发。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.6. DemTriggerOnDTCStatus
+
+可配置接口 &lt;Module&gt;_DemTriggerOnDTCStatus 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemTriggerOnDTCStatus |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemTriggerOnDTCStatus ( uint32 DTC, Dem_UdsStatusByteType DTCStatusOld, Dem_UdsStatusByteType DTCStatusNew ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 DTC（in） | **UDS** 格式的诊断故障码。 |
+| 参数 DTCStatusOld（in） | 变化前的 **UDS** 状态。 |
+| 参数 DTCStatusNew（in） | 变化后的 **UDS** 状态。 |
+| 返回值 | **Std_ReturnType**：出于与 **RTE** 兼容的原因，此函数始终返回 E_OK。 |
+| 说明 | 在 **UDS** 状态字节变化时触发。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.7. DemTriggerOnMonitorStatus
+
+可配置接口 &lt;Module&gt;_DemTriggerOnMonitorStatus 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemTriggerOnMonitorStatus |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemTriggerOnMonitorStatus ( void ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 返回值 | **Std_ReturnType**：出于与 **RTE** 兼容的原因，此函数始终返回 E_OK。 |
+| 说明 | 在监视器状态变化时触发。在事件状态报告的上下文中同步调用。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.8. EventDataChanged
+
+可配置接口 &lt;Module&gt;_DemTriggerOnEventData 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemTriggerOnEventData |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemTriggerOnEventData ( Dem_EventIdType EventId ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 EventId（in） | 通过分配的 **EventId** 标识事件。 |
+| 返回值 | **Std_ReturnType**：出于与 **RTE** 兼容的原因，此函数始终返回 E_OK。 |
+| 说明 | 在事件内存中事件相关数据变化时触发。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.9. ClearEventAllowed
+
+可配置接口 &lt;Module&gt;_DemClearEventAllowed&lt;ForCondition&gt; 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemClearEventAllowed&lt;ForCondition&gt; |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemClearEventAllowed&lt;ForCondition&gt; ( boolean* Allowed ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 Allowed（out） | True——允许清除事件；False——不允许清除事件。 |
+| 返回值 | **E_OK**：操作成功；**E_NOT_OK**：操作失败。 |
+| 说明 | 在删除 **DTC** 时触发，如果出参返回 False 则不允许删除。如果 **Dem** 未提供端口接口，则每个条件有一个单独的回调，该回调可分配给一个或多个事件。如果返回 E_NOT_OK，参数"Allowed"保持不变。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.10. ReadDataElement
+
+如果 DemDataElementFncSignature 设置为 `DATA_FNC_NORMAL`，则使用以下定义。
+
+可配置接口 &lt;Module&gt;_DemRead&lt;DataElement&gt; 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemRead&lt;DataElement&gt; |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemRead&lt;DataElement&gt; ( uint8* Buffer, [Dem_MonitorDataType monitorData0] ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 monitorData0（in） | 由 Dem_SetEventStatusWithMonitorData 提供的监视器数据。 |
+| 参数 Buffer（out） | 包含数据元素值的缓冲区。 |
+| 返回值 | **E_OK**：操作成功；**E_NOT_OK**：操作失败。 |
+| 说明 | 请求数据元素的当前值。如果 **Dem** 未提供端口接口，则每个数据元素有一个单独的回调。 |
+| 可通过…获得 | Dem_Externals.h |
+
+**注意：**方括号 [] 表示该参数是可选的。
+
+如果 DemDataElementFncSignature 设置为 `DATA_FNC_PROXY`，则使用以下定义。
+
+可配置接口 &lt;Module&gt;_DemRead&lt;DataElement&gt;（草案）的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemRead&lt;DataElement&gt;（草案） |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemRead&lt;DataElement&gt; ( uint8* Data, uint16 DataLength, Dcm_NegativeResponseCodeType* ErrorCode ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 DataLength（in） | 要读取数据的字节长度。 |
+| 参数 Data（out） | 应将所请求数据复制到其中的缓冲区。 |
+| 参数 ErrorCode（out） | 如果操作 Xxx_ReadData 返回 E_NOT_OK，**Dcm** 模块应发送 NRC 码等于 ErrorCode 参数值的否定响应。此参数的存在是为了确保 **Dcm** 和 **Dem** SwCluC 代理接口的 1:1 接口兼容性，以实现共同的数据访问。返回的错误码对 **Dem** 没有意义，应被丢弃。 |
+| 返回值 | **E_OK**：请求成功；**E_NOT_OK**：请求不成功。 |
+| 说明 | 请求数据元素的当前值。如果 **Dem** 未提供端口接口，则每个数据元素有一个单独的回调。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.11. GetFaultDetectionCounter
+
+可配置接口 &lt;Module&gt;_DemGetFaultDetectionCounter&lt;ForEvent&gt; 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemGetFaultDetectionCounter&lt;ForEvent&gt; |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemGetFaultDetectionCounter&lt;ForEvent&gt; ( sint8* FaultDetectionCounter ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 FaultDetectionCounter（out） | 此参数接收所请求 EventId 的故障检测计数器信息。如果函数调用的返回值不是 E_OK，此参数不包含有效数据。按 ISO 14229-1 为 -128（十进制）… +127（十进制），对应 PASSED…FAILED。 |
+| 返回值 | **E_OK**：请求成功；**E_NOT_OK**：请求失败。 |
+| 说明 | 获取当前故障检测计数器值。如果 **Dem** 未提供端口接口，则每个使用监视器内部去抖动的事件有一个 C 回调。 |
+| 可通过…获得 | Dem_Externals.h |
+
+### 7.5. 调度函数
+
+这些函数由基础软件调度器直接调用。以下函数应没有返回值和参数。所有函数应不可重入。
+
+#### 7.5.1. Dem_MainFunction
+
+调度函数 Dem_MainFunction 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | Dem_MainFunction |
+| 语法 | void Dem_MainFunction ( void ) |
+| 服务 ID [hex] | 0x55 |
+| 说明 | 处理所有非基于事件的 **Dem** 内部函数。 |
+| 可通过…获得 | SchM_Dem.h |
+
+函数 Dem_MainFunction 应处理所有非基于事件的 **Dem** 模块内部函数。
+
+详情请参阅 SWS_BSWGeneral 中第 8.5 章"调度函数"（**Scheduled Functions**）。
+
+#### 7.5.2. Runnable 实体 MainFunction
+
+```text
+1 RunnableEntity MainFunction 2 symbol "Dem_MainFunction" 3 canbeInvokedConcurrently = FALSE 4 SSCP = port CBEventUdsStatusChanged_*, CallbackEventUdsStatusChanged 5 SSCP = port GeneralCBStatusEvt, GeneralCallbackEventUdsStatusChanged 6 SSCP = port CBStatusDTC_*, DTCStatusChanged 7 SSCP = port CBDataEvt_*, EventDataChanged 8 SSCP = port GeneralCBDataEvt, EventDataChanged 9 SSCP = port CBReadData_*, ReadData
+```
+
+### 7.6. 服务接口
+
+#### 7.6.1. 实现数据类型
+
+##### 7.6.1.1. Dem_DataType_{Data}
+
+实现数据类型 Dem_DataType_{Data} 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_DataType_{Data} |
+| 类别 | Type |
+| 派生自 | Dem_DataArrayType_{Data}（变体：DemDataElementDataType == ([S&#124;U]INT[8&#124;16&#124;32]&#124;FLOAT)_N，适用于 DemExternalCSDataElementClass 或 DemExternalSRDataElementClass） |
+| 派生自 | Dem_DataPrimitiveType_{Data}（变体：DemDataElementDataType == (BOOLEAN&#124;[S&#124;U]INT[8&#124;16&#124;32]&#124;FLOAT)，适用于 DemExternalCSDataElementClass 或 DemExternalSRDataElementClass） |
+| 说明 | 外部数据元素的数据类型定义 |
+| 变体 | (({ecuc(Dem/DemGeneral/DemDataElementClass)} instanceof {ecuc(Dem/DemGeneral/DemDataElementClass/DemExternalCSDataElementClass)}) && ({ecuc(…/DemDataElementUsePort)} == true)) &#124;&#124; ({ecuc(Dem/DemGeneral/DemDataElementClass)} instanceof {ecuc(Dem/DemGeneral/DemDataElementClass/DemExternalSRDataElementClass)})；Data = {ecuc(Dem/DemGeneral/DemDataElementClass.SHORT-NAME)} |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.2. Dem_DataPrimitiveType_{Data}
+
+实现数据类型 Dem_DataPrimitiveType_{Data} 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_DataPrimitiveType_{Data} |
+| 类别 | Type |
+| 派生自 | boolean（变体：DemDataElementDataType == BOOLEAN）· float32（变体：== FLOAT）· sint16（== SINT16）· sint32（== SINT32）· sint8（== SINT8）· uint16（== UINT16）· uint32（== UINT32）· uint8（== UINT8）——各基类型的变体按 DemExternalCSDataElementClass 或 DemExternalSRDataElementClass 的 DemDataElementDataType 取值 |
+| 说明 | - |
+| 变体 | (DemDataElementDataType == (BOOLEAN&#124;[S&#124;U]INT[8&#124;16&#124;32]&#124;FLOAT))；Data = {ecuc(Dem/DemGeneral/DemDataElementClass.SHORT-NAME)} |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.3. Dem_DataArrayType_{Data}
+
+实现数据类型 Dem_DataArrayType_{Data} 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_DataArrayType_{Data} |
+| 类别 | Array |
+| 元素类型 | float32（变体：DemDataElementDataType == FLOAT_N）· sint16（== SINT16_N）· sint32（== SINT32_N）· sint8（== SINT8_N）· uint16（== UINT16_N）· uint32（== UINT32_N）· uint8（== UINT8_N）——按 DemExternalCSDataElementClass 或 DemExternalSRDataElementClass 的 DemDataElementDataType 取值 |
+| 大小 | - |
+| 说明 | 外部数据元素的数组数据类型定义 |
+| 变体 | (DemDataElementDataType == ([S&#124;U]INT[8&#124;16&#124;32]&#124;FLOAT)_N)；Data = {ecuc(Dem/DemGeneral/DemDataElementClass.SHORT-NAME)} |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.4. Dem_DTCOriginType
+
+实现数据类型 Dem_DTCOriginType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_DTCOriginType |
+| 类别 | Type |
+| 派生自 | **uint16** |
+| 取值 | `DEM_DTC_ORIGIN_PRIMARY_MEMORY`（0x0001）：事件信息位于主内存中 |
+| 取值 | `DEM_DTC_ORIGIN_PERMANENT_MEMORY`（0x0003）：事件信息位于永久内存中 |
+| 取值 | `DEM_DTC_ORIGIN_OBD_RELEVANT_MEMORY`（0x0004）：**OBD** 事件信息位于主内存中 |
+| 取值 | `DEM_DTC_ORIGIN_USERDEFINED_MEMORY_&lt;Name&gt;`（0x01XX）：事件信息位于用户自定义内存中，其中 XX 是十六进制表示的已配置 DemUserDefinedMemoryIdentifier，&lt;Name&gt; 是 DemUserDefinedMemory 的 Short-Name |
+| 说明 | 此枚举用于定义事件的位置。不同内存类型的定义和使用是 **OEM** 特定的。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.5. Dem_DebouncingStateType
+
+实现数据类型 Dem_DebouncingStateType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_DebouncingStateType |
+| 类别 | Bitfield |
+| 派生自 | **uint8** |
+| 元素 | bit `DEM_TEMPORARILY_DEFECTIVE`（0x01）：位 0：暂时缺陷（对应 0 &lt; **FDC** &lt; 127） |
+| 元素 | bit `DEM_FINALLY_DEFECTIVE`（0x02）：位 1：最终缺陷（对应 **FDC** = 127） |
+| 元素 | bit `DEM_TEMPORARILY_HEALED`（0x04）：位 2：暂时恢复（对应 -128 &lt; **FDC** &lt; 0） |
+| 元素 | bit `DEM_TEST_COMPLETE`（0x08）：位 3：测试完成（对应 **FDC** = -128 或 **FDC** = 127） |
+| 元素 | bit `DEM_DTR_UPDATE`（0x10）：位 4：**DTR** 更新（= 测试完成 且 去抖动完成 且 使能条件/存储条件满足） |
+| 说明 | - |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.6. Dem_DebounceResetStatusType
+
+实现数据类型 Dem_DebounceResetStatusType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_DebounceResetStatusType |
+| 类别 | Type |
+| 派生自 | **uint8** |
+| 取值 | `DEM_DEBOUNCE_STATUS_FREEZE`（0x00）：冻结内部去抖动计数器/计时器 |
+| 取值 | `DEM_DEBOUNCE_STATUS_RESET`（0x01）：复位内部去抖动计数器/计时器 |
+| 取值 | 0x02 - 0xFF：保留 |
+| 说明 | 此类型包含通过函数 Dem_ResetEventDebounceStatus() 控制内部去抖动计数器/计时器的全部定义。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.7. Dem_DTRControlType
+
+实现数据类型 Dem_DTRControlType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_DTRControlType |
+| 类别 | Type |
+| 派生自 | **uint8** |
+| 取值 | `DEM_DTR_CTL_NORMAL`（0x00）：值被报告并视为有效的测试结果 |
+| 取值 | `DEM_DTR_CTL_NO_MAX`（0x01）：值被报告，但最大限值不可用（无效）；上限值被忽略 |
+| 取值 | `DEM_DTR_CTL_NO_MIN`（0x02）：值被报告，但最小限值不可用（无效）；下限值被忽略 |
+| 取值 | `DEM_DTR_CTL_RESET`（0x03）：所有值均被忽略。外部表示为初始化后的全零（例如故障清除之后） |
+| 取值 | `DEM_DTR_CTL_INVISIBLE`（0x04）：所有值均被忽略。对于外部视图（测试仪），此 **DTR** 被视为未集成 |
+| 说明 | 所报告测试结果解释的控制参数。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.8. Dem_EventIdType
+
+实现数据类型 Dem_EventIdType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_EventIdType |
+| 类别 | Type |
+| 派生自 | **uint16** |
+| 取值 | 1..65535：诊断事件的内部标识符。注意：0 不是有效值 |
+| 说明 | 通过分配的 **EventId** 标识事件。**EventId** 由 **Dem** 分配。示例：1 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.9. Dem_EventStatusType
+
+实现数据类型 Dem_EventStatusType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_EventStatusType |
+| 类别 | Type |
+| 派生自 | **uint8** |
+| 取值 | `DEM_EVENT_STATUS_PASSED`（0x00）：监视器报告已鉴定的测试结果通过 |
+| 取值 | `DEM_EVENT_STATUS_FAILED`（0x01）：监视器报告已鉴定的测试结果失败 |
+| 取值 | `DEM_EVENT_STATUS_PREPASSED`（0x02）：监视器报告未鉴定的测试结果 pre-passed（**Dem** 内部去抖） |
+| 取值 | `DEM_EVENT_STATUS_PREFAILED`（0x03）：监视器报告未鉴定的测试结果 pre-failed（**Dem** 内部去抖） |
+| 取值 | `DEM_EVENT_STATUS_FDC_THRESHOLD_REACHED`（0x04）：监视器触发 ON_FDC_THRESHOLD 的 ExtendedDataRecords 和 FreezeFrames 存储 |
+| 取值 | 0x05 - 0xFF：保留 |
+| 说明 | 此类型包含可通过 Dem_SetEventStatus() 报告的所有监视器测试结果值。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.10. Dem_DTCFormatType
+
+实现数据类型 Dem_DTCFormatType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_DTCFormatType |
+| 类别 | Type |
+| 派生自 | **uint8** |
+| 取值 | `DEM_DTC_FORMAT_OBD`（0）：选择 2 字节 **OBD DTC** 格式（参见配置参数 DemObdDTC） |
+| 取值 | `DEM_DTC_FORMAT_UDS`（1）：选择 3 字节 **UDS DTC** 格式（参见配置参数 DemUdsDTC） |
+| 取值 | `DEM_DTC_FORMAT_J1939`（2）：选择 SPN + FMI 合并为 3 字节的 **J1939 DTC** 格式（参见 DemJ1939DTC） |
+| 取值 | `DEM_DTC_FORMAT_OBD_3BYTE`（3）：在使用 SAE J2012 与 **UDS DTC** 格式分离的情况下，选择 DemDtcValue3Byte 定义的 3 字节 **OBD DTC** |
+| 说明 | 此类型用于选择 **DTC** 值的格式。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.11. Dem_InitMonitorReasonType
+
+实现数据类型 Dem_InitMonitorReasonType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_InitMonitorReasonType |
+| 类别 | Type |
+| 派生自 | **uint8** |
+| 取值 | `DEM_INIT_MONITOR_CLEAR`（0x01）：事件被清除，所有内部值和状态被复位 |
+| 取值 | `DEM_INIT_MONITOR_RESTART`（0x02）：事件的运行周期被重启 |
+| 取值 | `DEM_INIT_MONITOR_REENABLED`（0x03）：使能条件或 **DTC** 设置被重新启用 |
+| 取值 | `DEM_INIT_MONITOR_STORAGE_REENABLED`（0x04）：存储条件被重新启用 |
+| 说明 | 回调函数 &lt;Module&gt;_DemInitMonitorFor&lt;EventName&gt;() 返回的（重新）初始化原因。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.12. Dem_IumprDenomCondIdType
+
+实现数据类型 Dem_IumprDenomCondIdType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_IumprDenomCondIdType |
+| 类别 | Type |
+| 派生自 | **uint8** |
+| 取值 | `DEM_IUMPR_GENERAL_INDIVIDUAL_DENOMINATOR`（0x05）：用于支持与通用分母不同条件的单独分母。它作用于单独的分母，允许设置与通用分母不同的条件 |
+| 取值 | `DEM_IUMPR_GENERAL_OBDCOND`（0x06）：用于 InfoType $08/$0B 输出的 **IUMPR** 分母条件"通用分母" |
+| 取值 | `DEM_IUMPR_DEN_COND_COLDSTART_CMPL`（0x07）：完整的 **IUMPR** 分母条件"冷启动" |
+| 取值 | `DEM_IUMPR_DEN_COND_EVAP_CMPL`（0x08）：完整的 **IUMPR** 分母条件"EVAP" |
+| 取值 | `DEM_IUMPR_DEN_COND_500MI_CMPL`（0x09）：完整的 **IUMPR** 分母条件"500 英里" |
+| 取值 | `DEM_IUMPR_DEN_COND_CSERS`（0x10）："冷启动排放降低策略"监视器的完整 **IUMPR** 分母条件 |
+| 取值 | `DEM_IUMPR_DEN_COND_EVAPPURGEFLOW_CMPL`（0x11）：完整的 **IUMPR** 分母条件"EVAP 净化流量" |
+| 说明 | 此类型包含可在 **OBD** 相关 **ECU** 之间广播的所有可能的附加 **IUMPR** 分母条件。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.13. Dem_IumprDenomCondStatusType
+
+实现数据类型 Dem_IumprDenomCondStatusType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_IumprDenomCondStatusType |
+| 类别 | Type |
+| 派生自 | **uint8** |
+| 取值 | `DEM_IUMPR_DEN_STATUS_NOT_REACHED`（0x00）：IUMPRDenCondId 给出的 **IUMPR** 分母条件尚未满足 |
+| 取值 | `DEM_IUMPR_DEN_STATUS_REACHED`（0x01）：IUMPRDenCondId 给出的 **IUMPR** 分母条件已满足 |
+| 取值 | `DEM_IUMPR_DEN_STATUS_INHIBITED`（0x02）：IUMPRDenCondId 给出的 **IUMPR** 分母条件被抑制且无法达到 |
+| 取值 | 0x03 - 0xFF：保留 |
+| 说明 | 此类型包含可在 **OBD** 相关 **ECU** 之间广播的附加 **IUMPR** 分母条件的所有可能状态。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.14. Dem_MaxDataValueType
+
+实现数据类型 Dem_MaxDataValueType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_MaxDataValueType |
+| 类别 | Array |
+| 元素类型 | **uint8** |
+| 大小 | 最大的扩展数据类 / 冻结帧记录元素的大小 |
+| 说明 | - |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.15. Dem_MonitorDataType
+
+实现数据类型 Dem_MonitorDataType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_MonitorDataType |
+| 类别 | Type |
+| 派生自 | **uint32** |
+| 说明 | 此类型用于向 **Dem** 传递监视数据。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.16. Dem_MonitorStatusType
+
+实现数据类型 Dem_MonitorStatusType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_MonitorStatusType |
+| 类别 | Bitfield |
+| 派生自 | **uint8** |
+| 元素 | bit `DEM_MONITOR_STATUS_TF`（0x01）：位 0：TestFailed |
+| 元素 | bit `DEM_MONITOR_STATUS_TNCTOC`（0x02）：位 1：TestNotCompletedThisOperationCycle |
+| 说明 | 此类型包含可能的监视器状态值。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.17. Dem_IndicatorStatusType
+
+实现数据类型 Dem_IndicatorStatusType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_IndicatorStatusType |
+| 类别 | Type |
+| 派生自 | **uint8** |
+| 取值 | `DEM_INDICATOR_OFF`（0x00）：指示器关闭模式 |
+| 取值 | `DEM_INDICATOR_CONTINUOUS`（0x01）：指示器持续点亮模式 |
+| 取值 | `DEM_INDICATOR_BLINKING`（0x02）：指示器闪烁模式 |
+| 取值 | `DEM_INDICATOR_BLINK_CONT`（0x03）：指示器闪烁或持续点亮模式 |
+| 取值 | `DEM_INDICATOR_SLOW_FLASH`（0x04）：指示器慢闪模式 |
+| 取值 | `DEM_INDICATOR_FAST_FLASH`（0x05）：指示器快闪模式 |
+| 取值 | `DEM_INDICATOR_ON_DEMAND`（0x06）：指示器按需模式 |
+| 取值 | `DEM_INDICATOR_SHORT`（0x07）：指示器短时模式 |
+| 说明 | Dem_GetIndicatorStatus() 使用的指示器模式。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.18. Dem_PID21valueType
+
+实现数据类型 Dem_PID21valueType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_PID21valueType |
+| 类别 | Array |
+| 元素类型 | **uint8** |
+| 大小 | 2 个元素 |
+| 说明 | - |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.19. Dem_PID31valueType
+
+实现数据类型 Dem_PID31valueType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_PID31valueType |
+| 类别 | Array |
+| 元素类型 | **uint8** |
+| 大小 | 2 个元素 |
+| 说明 | - |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.20. Dem_RatioIdType
+
+实现数据类型 Dem_RatioIdType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_RatioIdType |
+| 类别 | Type |
+| 派生自 | **uint16**（可配置，大小取决于系统复杂度，参见配置参数 DemRatioId 的取值范围）或 **uint8**（可配置，大小取决于系统复杂度） |
+| 取值 | 0..255、0..65535：可配置，大小取决于系统复杂度（参见配置参数 DemRatioId 的取值范围） |
+| 说明 | **OBD** 特定的比率 Id（与特定事件、一个 **FID** 和一个 **IUMPR** 组相关）。此类型取决于 **Dem** 的配置。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.21. Dem_UdsStatusByteType
+
+实现数据类型 Dem_UdsStatusByteType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_UdsStatusByteType |
+| 类别 | Bitfield |
+| 派生自 | **uint8** |
+| 下限 | 0x00 |
+| 上限 | 0xFF |
+| 元素 | bit `DEM_UDS_STATUS_TF`（0x01）：位 0：TestFailed |
+| 元素 | bit `DEM_UDS_STATUS_TFTOC`（0x02）：位 1：TestFailedThisOperationCycle |
+| 元素 | bit `DEM_UDS_STATUS_PDTC`（0x04）：位 2：PendingDTC |
+| 元素 | bit `DEM_UDS_STATUS_CDTC`（0x08）：位 3：ConfirmedDTC |
+| 元素 | bit `DEM_UDS_STATUS_TNCSLC`（0x10）：位 4：TestNotCompletedSinceLastClear |
+| 元素 | bit `DEM_UDS_STATUS_TFSLC`（0x20）：位 5：TestFailedSinceLastClear |
+| 元素 | bit `DEM_UDS_STATUS_TNCTOC`（0x40）：位 6：TestNotCompletedThisOperationCycle |
+| 元素 | bit `DEM_UDS_STATUS_WIR`（0x80）：位 7：WarningIndicatorRequested |
+| 说明 | 在此数据类型中每个位都有独立的含义。当条件成立时该位置为 1。例如，如果第 2 位（0x02）置为 1，表示本运行周期内测试失败。如果该位为 0，则本周期内尚未失败。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.22. Dem_PID4DvalueType
+
+实现数据类型 Dem_PID4DvalueType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_PID4DvalueType |
+| 类别 | Array |
+| 元素类型 | **uint8** |
+| 大小 | 2 个元素 |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral.DemOBDSupport)} == `DEM_OBD_MASTER_ECU`) |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.23. Dem_PID4EvalueType
+
+实现数据类型 Dem_PID4EvalueType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_PID4EvalueType |
+| 类别 | Array |
+| 元素类型 | **uint8** |
+| 大小 | 2 个元素 |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral.DemOBDSupport)} == `DEM_OBD_MASTER_ECU`) |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+#### 7.6.2. 发送者-接收者接口
+
+##### 7.6.2.1. DataServices_{Data}
+
+发送者-接收者接口 DataServices_{Data} 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DataServices_{Data} |
+| 注释 | - |
+| IsService | false |
+| 变体 | ({ecuc(Dem/DemGeneral/DemDataElementClass)} instanceof {ecuc(Dem/DemGeneral/DemDataElementClass/DemExternalSRDataElementClass)})；Data = {ecuc(Dem/DemGeneral/DemDataElementClass.SHORT-NAME)} |
+| 数据元素 | data：类型 Dem_DataType_{Data}，变体 Data = {ecuc(Dem/DemGeneral/DemDataElementClass.SHORT-NAME)} |
+
+#### 7.6.3. 客户端-服务器接口
+
+##### 7.6.3.1. CallbackClearEventAllowed
+
+客户端-服务器接口 CallbackClearEventAllowed 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CallbackClearEventAllowed |
+| 注释 | 如果已配置，它从 **SW-C** 获取清除特定事件的许可。对于每个事件，可以有一个此接口类型的端口。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：操作成功<br>1：操作失败 |
+
+**操作** ClearEventAllowed
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | &lt;Module&gt;_DemClearEventAllowed&lt;ForCondition&gt; |
+| 变体 | - |
+| 参数 Allowed | 类型 boolean，方向 OUT，说明：True——允许清除事件；False——不允许清除事件 |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.2. CallbackComponentStatusChanged
+
+客户端-服务器接口 CallbackComponentStatusChanged 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CallbackComponentStatusChanged |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | - |
+
+**操作** ComponentStatusChanged
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | - |
+| 变体 | - |
+| 参数 ComponentFailedStatus | 类型 boolean，方向 IN，注释：- |
+| 可能的错误 | - |
+
+##### 7.6.3.3. CallbackDTCStatusChange
+
+客户端-服务器接口 CallbackDTCStatusChange 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CallbackDTCStatusChange |
+| 注释 | 如果已配置，它通过 DemCallbackDTCStatusChanged、DemCallbackOBDDTCStatusChanged 和/或 DemCallbackJ1939DTCStatusChanged 在 **DTC** 状态字节变化时触发 **SW-C**。此接口类型可以有多个端口，由 **Dem** 服务组件全局提供。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK 操作<br>1：E_NOT_OK 操作 |
+
+**操作** DTCStatusChanged
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | &lt;Module&gt;_DemTriggerOnDTCStatus |
+| 变体 | - |
+| 参数 DTC | 类型 uint32，方向 IN，注释：- |
+| 参数 DTCStatusOld | 类型 Dem_UdsStatusByteType，方向 IN，注释：- |
+| 参数 DTCStatusNew | 类型 Dem_UdsStatusByteType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.4. CallbackEventDataChanged
+
+客户端-服务器接口 CallbackEventDataChanged 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CallbackEventDataChanged |
+| 注释 | 如果已配置，它在事件相关数据变化时触发 **SW-C**。对于每个事件，可以有一个此接口类型的端口。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功 |
+
+**操作** EventDataChanged
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | - |
+| 变体 | - |
+| 可能的错误 | - |
+
+##### 7.6.3.5. CallbackEventUdsStatusChanged
+
+客户端-服务器接口 CallbackEventUdsStatusChanged 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CallbackEventUdsStatusChanged |
+| 注释 | 如果已配置，它在事件状态字节变化时触发 **SW-C**。对于每个事件，可以有多个此接口类型的端口。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功 |
+
+**操作** CallbackEventUdsStatusChanged
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | - |
+| 变体 | - |
+| 参数 EventStatusByteOld | 类型 Dem_UdsStatusByteType，方向 IN，注释：- |
+| 参数 EventStatusByteNew | 类型 Dem_UdsStatusByteType，方向 IN，注释：- |
+| 可能的错误 | - |
+
+##### 7.6.3.6. CallbackGetFaultDetectCounter
+
+客户端-服务器接口 CallbackGetFaultDetectCounter 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CallbackGetFaultDetectCounter |
+| 注释 | 如果已配置，它从 **SW-C** 获取特定事件的监视器内部故障检测计数器值。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** GetFaultDetectionCounter
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | &lt;Module&gt;_DemGetFaultDetectionCounter&lt;ForEvent&gt; |
+| 变体 | - |
+| 参数 FaultDetectionCounter | 类型 sint8，方向 OUT，注释：FaultDetectionCounter 的值 |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.7. CallbackInitMonitorForEvent
+
+客户端-服务器接口 CallbackInitMonitorForEvent 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CallbackInitMonitorForEvent |
+| 注释 | 如果已配置，它触发 **SW-C** 监视器部分的事件特定初始化。对于每个事件，可以有一个此接口类型的端口。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：操作成功<br>1：操作失败 |
+
+**操作** InitMonitorForEvent
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | &lt;Module&gt;_DemInitMonitorFor&lt;EventName&gt; |
+| 变体 | - |
+| 参数 InitMonitorReason | 类型 Dem_InitMonitorReasonType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.8. CallbackMonitorStatusChange
+
+客户端-服务器接口 CallbackMonitorStatusChange 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CallbackMonitorStatusChange |
+| 注释 | 如果已配置，它在监视器状态变化时触发 **SW-C**。对于每个事件，可以有多个此接口类型的端口。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功 |
+
+**操作** MonitorStatusChanged
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | - |
+| 变体 | - |
+| 可能的错误 | - |
+
+##### 7.6.3.9. ClearDtcNotification
+
+客户端-服务器接口 ClearDtcNotification 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | ClearDtcNotification |
+| 注释 | - |
+| IsService | true |
+| 变体 | (count({ecuc(Dem/DemGeneral/DemEventMemorySet/DemClearDTCNotification/DemClearDtcNotificationFnc)} == NULL) &gt; 0) |
+| 可能的错误 | 0：E_OK，操作成功 |
+
+**操作** ClearDtcNotification
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | - |
+| 变体 | - |
+| 参数 DTC | 类型 uint32，方向 IN，注释：- |
+| 参数 DTCFormat | 类型 Dem_DTCFormatType，方向 IN，注释：- |
+| 参数 DTCOrigin | 类型 Dem_DTCOriginType，方向 IN，注释：- |
+| 可能的错误 | E_OK |
+
+##### 7.6.3.10. ClearDTC
+
+客户端-服务器接口 ClearDTC 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | ClearDTC |
+| 注释 | 仅向复杂设备驱动提供这些操作。此接口类型的一个端口由 **Dem** 服务组件全局提供。它以 ClientId 作为端口定义参数。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败<br>4：DEM_PENDING，**DTC** 清除正在进行中。调用者应在稍后时刻再次调用此函数<br>5：DEM_CLEAR_BUSY，另一个客户端当前正在清除 **DTC**。所请求的操作不会开始，调用者应在稍后时刻重试<br>6：DEM_CLEAR_MEMORY_ERROR，擦除内存位置时发生错误（例如在 DemClearDTCBehavior 设置为 DEM_CLRRESP_NON-VOLATILE_FINISH 且非易失性块擦除失败时）<br>7：DEM_CLEAR_FAILED，**DTC** 清除失败<br>8：DEM_WRONG_DTC，所选格式下所选的 **DTC** 值不存在，或按配置仅允许清除所有 **DTC** 组<br>9：DEM_WRONG_DTCORIGIN，所选 **DTCOrigin** 不存在<br>22：DEM_BUSY，该客户端另一个基于 Dem_SelectDTC 的操作（按第 6.11.2.2 节）正在进行中 |
+
+**操作** ClearDTC
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_ClearDTC |
+| 变体 | - |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_PENDING、DEM_CLEAR_BUSY、DEM_CLEAR_MEMORY_ERROR、DEM_CLEAR_FAILED、DEM_WRONG_DTC、DEM_WRONG_DTCORIGIN、DEM_BUSY |
+
+**操作** SelectDTC
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SelectDTC |
+| 变体 | - |
+| 参数 DTC | 类型 uint32，方向 IN，注释：- |
+| 参数 DTCFormat | 类型 Dem_DTCFormatType，方向 IN，注释：- |
+| 参数 DTCOrigin | 类型 Dem_DTCOriginType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.11. DTCSuppression
+
+客户端-服务器接口 DTCSuppression 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DTCSuppression |
+| 注释 | 提供控制 **DTC** 抑制的能力。此接口类型的一个端口由 **Dem** 服务组件全局提供。 |
+| IsService | true |
+| 变体 | ({ecuc(Dem/DemGeneral/DemSuppressionSupport)} == `DEM_DTC_SUPPRESSION`) |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败<br>4：DEM_PENDING，**DTC** 清除正在进行中。调用者应在稍后时刻再次调用此函数<br>8：DEM_WRONG_DTC，所选格式下所选的 **DTC** 值不存在，或按配置仅允许清除所有 **DTC** 组<br>9：DEM_WRONG_DTCORIGIN，所选 **DTCOrigin** 不存在 |
+
+**操作** GetDTCSuppression
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetDTCSuppression |
+| 变体 | - |
+| 参数 ClientID | 类型 uint8，方向 IN，说明：分配给调用模块实例的唯一客户端 ID |
+| 参数 SuppressionStatus | 类型 boolean，方向 OUT，说明：定义相应 **DTC** 是被抑制（TRUE）还是启用（FALSE） |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_PENDING、DEM_WRONG_DTC、DEM_WRONG_DTCORIGIN |
+
+**操作** SetDTCSuppression
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetDTCSuppression |
+| 变体 | - |
+| 参数 ClientID | 类型 uint8，方向 IN，说明：分配给调用模块实例的唯一客户端 ID |
+| 参数 SuppressionStatus | 类型 boolean，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_WRONG_DTC、DEM_WRONG_DTCORIGIN |
+
+##### 7.6.3.12. DataServices_{Data}
+
+客户端-服务器接口 DataServices_{Data} 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DataServices_{Data} |
+| 注释 | 如果已配置，它通过客户端/服务器或发送者/接收者通信从相应的 **SW-C** 获取包含在 **DID**、**PID** 或扩展数据记录中的数据元素值（参见图"Dem 和 Dcm 模块经 ReadData 操作请求 SW-C 的 PID 数据元素"）。**SW-C** 为每个数据元素提供一个此接口类型的端口。 |
+| IsService | true |
+| 变体 | (({ecuc(Dem/DemGeneral/DemDataElementClass)} instanceof {ecuc(Dem/DemGeneral/DemDataElementClass/DemExternalCSDataElementClass)}) && ({ecuc(…/DemDataElementUsePort)} == true))；Data = {ecuc(Dem/DemGeneral/DemDataElementClass.SHORT-NAME)} |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** ReadData
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | 服务器不允许返回 E_NOT_OK，而应始终向 **Dcm**/**Dem** 提供有效的数据值（例如错误情况下的默认/替换值）；尽管如此，该操作的签名包含 E_NOT_OK 以确保服务器 runnable 与 **RTE** 调用 **API** 之间的兼容性，因为 **RTE** 在某些情况下可能返回负的 Std_Return 值（例如服务器分区已停止）。 |
+| 映射到的 API | &lt;Module&gt;_DemRead&lt;DataElement&gt; |
+| 变体 | - |
+| 参数 Data | 类型 Dem_DataType_{Data}，方向 OUT，注释：-，变体 Data = {ecuc(Dem/DemGeneral/DemDataElementClass.SHORT-NAME)} |
+| 参数 monitorData0 | 类型 Dem_MonitorDataType，方向 IN，变体 ({ecuc(Dem/DemGeneral/DemDataElementClass/DemExternalCSDataElementClass/DemDataElementProvideMonitorData)} == true) |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.13. DTRCentralReport
+
+客户端-服务器接口 DTRCentralReport 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DTRCentralReport |
+| 注释 | 如果配置了 **OBD** 支持则可用。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：操作成功<br>1：操作失败 |
+
+**操作** SetDTR
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetDTR |
+| 变体 | - |
+| 参数 TestResult | 类型 sint32，方向 IN，注释：- |
+| 参数 LowerLimit | 类型 sint32，方向 IN，注释：- |
+| 参数 UpperLimit | 类型 sint32，方向 IN，注释：- |
+| 参数 Ctrlval | 类型 Dem_DTRControlType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**注意：**此接口类型的一个端口由 **Dem** 服务组件按 DtrId 提供。它以 DTRId 作为端口定义参数。
+
+##### 7.6.3.14. DiagnosticInfo
+
+客户端-服务器接口 DiagnosticInfo 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DiagnosticInfo |
+| 注释 | 提供获取事件信息的能力。此接口类型的一个端口由 **Dem** 服务组件按诊断事件提供。它以 EventId 作为端口定义参数。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败<br>10：DEM_E_NO_DTC_AVAILABLE，在所请求的格式中没有配置 **DTC**<br>14：DEM_E_NO_FDC_AVAILABLE，所请求事件没有可用的故障检测计数器<br>21：DEM_BUFFER_TOO_SMALL，提供的缓冲区大小太小<br>48：DEM_NO_SUCH_ELEMENT，所请求的事件数据当前未存储（但请求有效）；或该事件不支持所请求的记录号；或该冻结帧不支持所请求的 **DID**（GetEventFreezeFrameDataEx） |
+
+**操作** GetDTCOfEvent
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetDTCOfEvent |
+| 变体 | - |
+| 参数 DTCFormat | 类型 Dem_DTCFormatType，方向 IN，注释：- |
+| 参数 DTCOfEvent | 类型 uint32，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_E_NO_DTC_AVAILABLE |
+
+**操作** GetDebouncingOfEvent
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetDebouncingOfEvent |
+| 变体 | (({ecuc(Dem/DemConfigSet/DemEventParameter/DemDebounceAlgorithmClass)} instanceof {ecuc(…/DemDebounceCounterBased)}) &#124;&#124; ({ecuc(Dem/DemConfigSet/DemEventParameter/DemDebounceAlgorithmClass)} instanceof {ecuc(…/DemDebounceTimeBased)})) |
+| 参数 DebouncingState | 类型 Dem_DebouncingStateType，方向 OUT，说明：位 0 暂时缺陷（对应 0 &lt; **FDC** &lt; 127）；位 1 最终缺陷（对应 **FDC** = 127）；位 2 暂时恢复（对应 -128 &lt; **FDC** &lt; 0）；位 3 测试完成（对应 **FDC** = -128 或 **FDC** = 127）；位 4 **DTR** 更新（= 测试完成 且 去抖动完成 且 使能条件/存储条件满足） |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** GetEventAvailable
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetEventAvailable |
+| 变体 | - |
+| 参数 AvailableStatus | 类型 boolean*，方向 OUT，说明：事件可用则为 TRUE；事件不可用则为 FALSE |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** GetEventExtendedDataRecordEx
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetEventExtendedDataRecordEx |
+| 变体 | - |
+| 参数 RecordNumber | 类型 uint8，方向 IN，注释：- |
+| 参数 DestBuffer | 类型 Dem_MaxDataValueType，方向 OUT，注释：- |
+| 参数 Bufsize | 类型 uint16，方向 INOUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_BUFFER_TOO_SMALL、DEM_NO_SUCH_ELEMENT |
+
+**操作** GetEventFreezeFrameDataEx
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetEventFreezeFrameDataEx |
+| 变体 | - |
+| 参数 RecordNumber | 类型 uint8，方向 IN，注释：- |
+| 参数 DataId | 类型 uint16，方向 IN，注释：- |
+| 参数 DestBuffer | 类型 Dem_MaxDataValueType，方向 OUT，注释：- |
+| 参数 BufSize | 类型 uint16，方向 INOUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_BUFFER_TOO_SMALL、DEM_NO_SUCH_ELEMENT |
+
+**操作** GetEventUdsStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | 获取分配给事件 **DTC** 的当前 **UDS** 状态字节 |
+| 映射到的 API | Dem_GetEventUdsStatus |
+| 变体 | - |
+| 参数 UDSStatusByte | 类型 Dem_UdsStatusByteType，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** GetFaultDetectionCounter
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetFaultDetectionCounter |
+| 变体 | - |
+| 参数 FaultDetectionCounter | 类型 sint8，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_E_NO_FDC_AVAILABLE |
+
+**操作** GetMonitorStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetMonitorStatus |
+| 变体 | - |
+| 参数 MonitorStatus | 类型 Dem_MonitorStatusType，方向 OUT，说明：所请求事件的监视器状态字节。如果函数调用的返回值为 E_NOT_OK，此参数不包含有效数据。 |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**注意：**这些 DiagnosticInfo 端口也对每个 **BSW** 事件可用（以便 **SW-C** 也能访问）。
+
+##### 7.6.3.15. DiagnosticMonitor
+
+客户端-服务器接口 DiagnosticMonitor 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DiagnosticMonitor |
+| 注释 | 提供修改事件信息的能力。此接口类型的一个端口由 **Dem** 服务组件按应用相关诊断事件提供。它以 EventId 作为端口定义参数。 |
+| IsService | true |
+| 变体 | (({Dem/DemGeneral/DemStorageCondition.DemStorageConditionReplacementEventRef}) != ({Dem/DemConfigSet/DemEventParameter}) && ({Dem/DemConfigSet/DemEventParameter/DemEventReportingType} == `STANDARD_REPORTING`)) |
+| 可能的错误 | 0：操作成功<br>1：操作失败 |
+
+**操作** ClearPrestoredFreezeFrame
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_ClearPrestoredFreezeFrame |
+| 变体 | {ecuc(Dem/DemGeneral/DemMaxNumberPrestoredFF)} &gt; 0 |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** PrestoreFreezeFrame
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_PrestoreFreezeFrame |
+| 变体 | {ecuc(Dem/DemGeneral/DemMaxNumberPrestoredFF)} &gt; 0 |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** ResetEventDebounceStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_ResetEventDebounceStatus |
+| 变体 | ({ecuc(Dem/DemGeneral/DemDebounceCounterBasedSupport)} == true) &#124;&#124; ({ecuc(Dem/DemGeneral/DemDebounceTimeBasedSupport)} == true) |
+| 参数 DebounceResetStatus | 类型 Dem_DebounceResetStatusType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** ResetEventStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_ResetEventStatus |
+| 变体 | - |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** ResetMonitorStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_ResetMonitorStatus |
+| 变体 | - |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** SetEventDisabled
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetEventDisabled |
+| 变体 | {ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT` |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** SetEventStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetEventStatus |
+| 变体 | - |
+| 参数 EventStatus | 类型 Dem_EventStatusType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**注意：**DiagnosticMonitor 接口的每个端口仅连接到一个监视器端口。
+
+**注意：**对于内部使用的事件（替换事件），不会生成端口。
+
+**注意：**此客户端/服务器接口中的所有操作在每个服务器端口（相同 eventId）上是互斥的。被抢占的调用可能被忽略而不由 **Dem** 处理。
+
+##### 7.6.3.16. DiagnosticMonitor_MonitorData
+
+客户端-服务器接口 DiagnosticMonitor_MonitorData 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DiagnosticMonitor_MonitorData |
+| 注释 | 提供带监视数据报告诊断监视器状态的方法。 |
+| IsService | true |
+| 变体 | ({Dem/DemConfigSet/DemEventParameter/DemEventReportingType} == `STANDARD_REPORTING_WITH_MONITOR_DATA`) |
+| 可能的错误 | 0：操作成功<br>1：操作失败 |
+
+**操作** SetEventStatusWithMonitorData
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetEventStatusWithMonitorData |
+| 变体 | - |
+| 参数 EventStatus | 类型 Dem_EventStatusType，方向 IN，注释：- |
+| 参数 monitorData0 | 类型 Dem_MonitorDataType，方向 IN，注释：- |
+| 参数 monitorData1 | 类型 Dem_MonitorDataType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.17. EnableCondition
+
+客户端-服务器接口 EnableCondition 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | EnableCondition |
+| 注释 | 如果至少配置了一个使能条件，它提供设置使能条件的能力。此接口类型的一个端口由 **Dem** 服务组件按使能条件提供。它以 EnableConditionId 作为端口定义参数。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** SetEnableCondition
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetEnableCondition |
+| 变体 | - |
+| 参数 ConditionFulfilled | 类型 boolean，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.18. EventAvailable
+
+客户端-服务器接口 EventAvailable 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | EventAvailable |
+| 注释 | - |
+| IsService | true |
+| 变体 | {ecuc(Dem/DemGeneral/DemAvailabilitySupport)} == `DEM_EVENT_AVAILABILITY` |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** SetEventAvailable
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetEventAvailable |
+| 变体 | - |
+| 参数 AvailableStatus | 类型 boolean，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.19. EventFailureCycleCounterThreshold
+
+客户端-服务器接口 EventFailureCycleCounterThreshold 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | EventFailureCycleCounterThreshold |
+| 注释 | 提供动态调整失败周期阈值的能力。此接口类型的一个端口按诊断事件提供，以 EventId 作为端口定义参数。 |
+| IsService | true |
+| 变体 | (count({ecuc(Dem/DemConfigSet/DemEventParameter/DemEventConfirmationThresholdCounterAdaptable)} == TRUE) &gt; 0) |
+| 可能的错误 | 0：操作成功<br>1：操作失败 |
+
+**操作** SetEventFailureCycleCounterThreshold
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetEventConfirmationThresholdCounter |
+| 变体 | - |
+| 参数 FailureCycleCounterThreshold | 类型 uint8，方向 IN，说明：要设置的事件失败周期计数器阈值 |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.20. EvMemOverflowIndication
+
+客户端-服务器接口 EvMemOverflowIndication 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | EvMemOverflowIndication |
+| 注释 | 如果配置了相应的事件内存，它提供事件内存的状态。此接口类型的一个端口由 **Dem** 服务组件按支持的事件内存提供。它以 DTCOrigin 作为端口定义参数。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** GetEventMemoryOverflow
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetEventMemoryOverflow |
+| 变体 | - |
+| 参数 OverflowIndication | 类型 boolean，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** GetNumberOfEventMemoryEntries
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetNumberOfEventMemoryEntries |
+| 变体 | - |
+| 参数 NumberOfEventMemoryEntries | 类型 uint8，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.21. EventStatus
+
+客户端-服务器接口 EventStatus 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | EventStatus |
+| 注释 | 提供修改事件状态的能力。此接口类型的一个端口由 **Dem** 服务组件按应用相关诊断事件提供。它以 EventId 作为端口定义参数。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** SetWIRStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetWIRStatus |
+| 变体 | - |
+| 参数 WIRStatus | 类型 boolean，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**注意：**EventStatus 接口的每个端口仅连接到失效安全 **SW-C** 的一个端口。
+
+##### 7.6.3.22. GeneralCallbackEventDataChanged
+
+客户端-服务器接口 GeneralCallbackEventDataChanged 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GeneralCallbackEventDataChanged |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功 |
+
+**操作** EventDataChanged
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | - |
+| 变体 | - |
+| 参数 EventId | 类型 Dem_EventIdType，方向 IN，注释：- |
+| 可能的错误 | - |
+
+##### 7.6.3.23. GeneralCallbackEventUdsStatusChanged
+
+客户端-服务器接口 GeneralCallbackEventUdsStatusChanged 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GeneralCallbackEventUdsStatusChanged |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功 |
+
+**操作** GeneralCallbackEventUdsStatusChanged
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | - |
+| 变体 | - |
+| 参数 EventId | 类型 Dem_EventIdType，方向 IN，注释：- |
+| 参数 EventStatusByteOld | 类型 Dem_UdsStatusByteType，方向 IN，注释：- |
+| 参数 EventStatusByteNew | 类型 Dem_UdsStatusByteType，方向 IN，注释：- |
+| 可能的错误 | - |
+
+##### 7.6.3.24. GeneralCallbackMonitorStatusChanged
+
+客户端-服务器接口 GeneralCallbackMonitorStatusChanged 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GeneralCallbackMonitorStatusChanged |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功 |
+
+**操作** MonitorStatusChanged
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | - |
+| 变体 | - |
+| 参数 EventId | 类型 Dem_EventIdType，方向 IN，注释：- |
+| 可能的错误 | - |
+
+##### 7.6.3.25. GeneralDiagnosticInfo
+
+客户端-服务器接口 GeneralDiagnosticInfo 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GeneralDiagnosticInfo |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败<br>10：DEM_E_NO_DTC_AVAILABLE，在所请求的格式中没有配置 **DTC**<br>14：DEM_E_NO_FDC_AVAILABLE，所请求事件没有可用的故障检测计数器<br>21：DEM_BUFFER_TOO_SMALL，提供的缓冲区大小太小<br>48：DEM_NO_SUCH_ELEMENT，所请求的事件数据当前未存储（但请求有效）；或该事件不支持所请求的记录号；或该冻结帧不支持所请求的 **DID**（GetEventFreezeFrameDataEx） |
+
+**操作** GetDTCOfEvent
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetDTCOfEvent |
+| 变体 | - |
+| 参数 EventId | 类型 Dem_EventIdType，方向 IN，注释：- |
+| 参数 DTCFormat | 类型 Dem_DTCFormatType，方向 IN，注释：- |
+| 参数 DTCOfEvent | 类型 uint32，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** GetDebouncingOfEvent
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetDebouncingOfEvent |
+| 变体 | (({ecuc(Dem/DemConfigSet/DemEventParameter/DemDebounceAlgorithmClass)} instanceof {ecuc(…/DemDebounceCounterBased)}) &#124;&#124; ({ecuc(Dem/DemConfigSet/DemEventParameter/DemDebounceAlgorithmClass)} instanceof {ecuc(…/DemDebounceTimeBased)})) |
+| 参数 EventId | 类型 Dem_EventIdType，方向 IN，变体：- |
+| 参数 DebouncingState | 类型 Dem_DebouncingStateType，方向 OUT，说明：位 0 暂时缺陷（对应 0 &lt; **FDC** &lt; 127）；位 1 最终缺陷（对应 **FDC** = 127）；位 2 暂时恢复（对应 -128 &lt; **FDC** &lt; 0）；位 3 测试完成（对应 **FDC** = -128 或 **FDC** = 127）；位 4 **DTR** 更新（= 测试完成 且 去抖动完成 且 使能条件/存储条件满足） |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** GetEventExtendedDataRecordEx
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetEventExtendedDataRecordEx |
+| 变体 | - |
+| 参数 EventId | 类型 Dem_EventIdType，方向 IN，注释：- |
+| 参数 RecordNumber | 类型 uint8，方向 IN，注释：- |
+| 参数 DestBuffer | 类型 Dem_MaxDataValueType，方向 OUT，注释：- |
+| 参数 Bufsize | 类型 uint16，方向 INOUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_BUFFER_TOO_SMALL、DEM_NO_SUCH_ELEMENT |
+
+**操作** GetEventFreezeFrameDataEx
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetEventFreezeFrameDataEx |
+| 变体 | - |
+| 参数 EventId | 类型 Dem_EventIdType，方向 IN，注释：- |
+| 参数 RecordNumber | 类型 uint8，方向 IN，注释：- |
+| 参数 DataId | 类型 uint16，方向 IN，注释：- |
+| 参数 DestBuffer | 类型 Dem_MaxDataValueType，方向 OUT，注释：- |
+| 参数 BufSize | 类型 uint16，方向 INOUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_BUFFER_TOO_SMALL、DEM_NO_SUCH_ELEMENT |
+
+**操作** GetEventUdsStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | 获取分配给事件 **DTC** 的当前 **UDS** 状态字节 |
+| 映射到的 API | Dem_GetEventUdsStatus |
+| 变体 | - |
+| 参数 EventId | 类型 Dem_EventIdType，方向 IN，注释：- |
+| 参数 UDSStatusByte | 类型 Dem_UdsStatusByteType，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** GetFaultDetectionCounter
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetFaultDetectionCounter |
+| 变体 | - |
+| 参数 EventId | 类型 Dem_EventIdType，方向 IN，注释：- |
+| 参数 FaultDetectionCounter | 类型 sint8，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_E_NO_FDC_AVAILABLE |
+
+**操作** GetMonitorStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetMonitorStatus |
+| 变体 | - |
+| 参数 EventID | 类型 Dem_EventIdType，方向 IN，说明：通过分配的 **EventId** 标识事件 |
+| 参数 MonitorStatus | 类型 Dem_MonitorStatusType，方向 OUT，说明：所请求事件的监视器状态字节。如果函数调用的返回值为 E_NOT_OK，此参数不包含有效数据。 |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.26. GetDataOfPID21
+
+客户端-服务器接口 GetDataOfPID21 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GetDataOfPID21 |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** GetDataOfPID21
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetDataOfPID21 |
+| 变体 | - |
+| 参数 PID21value | 类型 Dem_PID21valueType，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.27. IndicatorStatus
+
+客户端-服务器接口 IndicatorStatus 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | IndicatorStatus |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：操作成功<br>1：操作失败 |
+
+**操作** GetIndicatorStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetIndicatorStatus |
+| 变体 | - |
+| 参数 IndicatorStatus | 类型 Dem_IndicatorStatusType，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.28. IUMPRDenominator
+
+客户端-服务器接口 IUMPRDenominator 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | IUMPRDenominator |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK 操作<br>1：E_NOT_OK 操作 |
+
+**操作** RepIUMPRDenRelease
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_RepIUMPRDenRelease |
+| 变体 | - |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.29. IUMPRDenominatorCondition
+
+客户端-服务器接口 IUMPRDenominatorCondition 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | IUMPRDenominatorCondition |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** GetIUMPRDenCondition
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetIUMPRDenCondition |
+| 变体 | - |
+| 参数 ConditionStatus | 类型 Dem_IumprDenomCondStatusType，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** SetIUMPRDenCondition
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetIUMPRDenCondition |
+| 变体 | - |
+| 参数 ConditionStatus | 类型 Dem_IumprDenomCondStatusType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.30. IUMPRNumerator
+
+客户端-服务器接口 IUMPRNumerator 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | IUMPRNumerator |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** RepIUMPRFaultDetect
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_RepIUMPRFaultDetect |
+| 变体 | - |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.31. OperationCycle
+
+客户端-服务器接口 OperationCycle 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | OperationCycle |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：操作成功<br>1：操作失败 |
+
+**操作** GetCycleQualified
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetCycleQualified |
+| 变体 | - |
+| 参数 isQualified | 类型 boolean*，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** RestartOperationCycle
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_RestartOperationCycle |
+| 变体 | - |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** SetCycleQualified
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetCycleQualified |
+| 变体 | - |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.32. PowerTakeOff
+
+客户端-服务器接口 PowerTakeOff 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | PowerTakeOff |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：操作成功<br>1：操作失败 |
+
+**操作** SetPtoStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetPtoStatus |
+| 变体 | - |
+| 参数 PtoStatus | 类型 boolean，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.33. SetDataOfPID21
+
+客户端-服务器接口 SetDataOfPID21 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | SetDataOfPID21 |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** SetDataOfPID21
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetDataOfPID21 |
+| 变体 | - |
+| 参数 PID21value | 类型 Dem_PID21valueType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.34. SetDataOfPID31
+
+客户端-服务器接口 SetDataOfPID31 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | SetDataOfPID31 |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** SetDataOfPID31
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetDataOfPID31 |
+| 变体 | - |
+| 参数 PID31value | 类型 Dem_PID31valueType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.35. SetDataOfPID4D
+
+客户端-服务器接口 SetDataOfPID4D 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | SetDataOfPID4D |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：操作成功 |
+
+**操作** SetDataOfPID4D
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetDataOfPID4D |
+| 变体 | - |
+| 参数 PID4Dvalue | 类型 Dem_PID4DvalueType，方向 IN，注释：- |
+| 可能的错误 | E_OK |
+
+##### 7.6.3.36. SetDataOfPID4E
+
+客户端-服务器接口 SetDataOfPID4E 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | SetDataOfPID4E |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：操作成功 |
+
+**操作** SetDataOfPID4E
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetDataOfPID4E |
+| 变体 | - |
+| 参数 PID4Evalue | 类型 Dem_PID4EvalueType，方向 IN，注释：- |
+| 可能的错误 | E_OK |
+
+##### 7.6.3.37. StorageCondition
+
+客户端-服务器接口 StorageCondition 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | StorageCondition |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** SetStorageCondition
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetStorageCondition |
+| 变体 | - |
+| 参数 ConditionFulfilled | 类型 boolean，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+#### 7.6.4. 端口
+
+##### 7.6.4.1. CBClrEvt
+
+端口 CBClrEvt_{Name} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CBClrEvt_{Name} |
+| 类别 | 需求端口 |
+| 接口 | CallbackClearEventAllowed |
+| 说明 | - |
+| 变体 | (({ecuc(Dem/DemConfigSet/DemEventParameter/DemCallbackClearEventAllowed)} != NULL) && ({ecuc(…/DemCallbackClearEventAllowedFnc)} == NULL))；Name = {ecuc(Dem/DemConfigSet/DemEventParameter/DemCallbackClearEventAllowed.SHORT-NAME)} |
+
+##### 7.6.4.2. CBDataEvt
+
+端口 CBDataEvt_{Name} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CBDataEvt_{Name} |
+| 类别 | 需求端口 |
+| 接口 | CallbackEventDataChanged |
+| 说明 | - |
+| 变体 | (({ecuc(Dem/DemConfigSet/DemEventParameter/DemCallbackEventDataChanged)} != NULL) && ({ecuc(…/DemCallbackEventDataChangedFnc)} == NULL))；Name = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)} |
+
+##### 7.6.4.3. CBFaultDetectCtr
+
+端口 CBFaultDetectCtr_{Name} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CBFaultDetectCtr_{Name} |
+| 类别 | 需求端口 |
+| 接口 | CallbackGetFaultDetectCounter |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemConfigSet/DemEventParameter/DemDebounceAlgorithmClass/DemDebounceMonitorInternal/DemCallbackGetFDC/DemCallbackGetFDCFnc)} == NULL)；Name = {ecuc(…/DemCallbackGetFDC.SHORT-NAME)} |
+
+##### 7.6.4.4. CBInitEvt
+
+端口 CBInitEvt_{Name} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CBInitEvt_{Name} |
+| 类别 | 需求端口 |
+| 接口 | CallbackInitMonitorForEvent |
+| 说明 | - |
+| 变体 | (({ecuc(Dem/DemConfigSet/DemEventParameter/DemCallbackInitMForE)} != NULL) && ({ecuc(…/DemCallbackInitMForEFnc)} == NULL))；Name = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)} |
+
+##### 7.6.4.5. CBStatusDTC
+
+端口 CBStatusDTC_{Name} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CBStatusDTC_{Name} |
+| 类别 | 需求端口 |
+| 接口 | CallbackDTCStatusChange |
+| 说明 | - |
+| 变体 | Name = {ecuc(Dem/DemGeneral/DemClient/DemCallbackDTCStatusChanged.SHORT-NAME)} |
+
+##### 7.6.4.6. CBEventUdsStatusChanged
+
+端口 CBEventUdsStatusChanged_{EventName}_{CallbackName} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CBEventUdsStatusChanged_{EventName}_{CallbackName} |
+| 类别 | 需求端口 |
+| 接口 | CallbackEventUdsStatusChanged |
+| 说明 | - |
+| 变体 | EventName = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)}；CallbackName = {ecuc(Dem/DemConfigSet/DemEventParameter/DemCallbackEventUdsStatusChanged.SHORT-NAME)} |
+
+##### 7.6.4.7. CBMonitorStatusChanged
+
+端口 CBMonitorStatusChanged_{EventName}_{CallbackName} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CBMonitorStatusChanged_{EventName}_{CallbackName} |
+| 类别 | 需求端口 |
+| 接口 | CallbackMonitorStatusChange |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemConfigSet/DemEventParameter.DemEventKind)} == `DEM_EVENT_KIND_SWC`)；EventName = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)}；CallbackName = {ecuc(Dem/DemConfigSet/DemEventParameter/DemCallbackMonitorStatusChanged.SHORT-NAME)} |
+
+##### 7.6.4.8. CBStatusComp
+
+端口 CBStatusComp_{ComponentName} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CBStatusComp_{ComponentName} |
+| 类别 | 需求端口 |
+| 接口 | CallbackComponentStatusChanged |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemConfigSet/DemComponent.DemComponentFailedCallbackUsePort)} == TRUE)；ComponentName = {ecuc(Dem/DemConfigSet/DemComponent.SHORT-NAME)} |
+
+##### 7.6.4.9. ClearDTC
+
+端口 ClearDTC_{Client} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | ClearDTC_{Client} |
+| 类别 | 提供端口 |
+| 接口 | ClearDTC |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral/DemClient/DemClientUsesRte)} == True) && ({ecuc(Dem/DemGeneral/DemClient/DemClientFunctionality)} == `DEM_CLIENT_USES_FULL_FUNCTIONALITY`)；Client = {ecuc(Dem/DemGeneral/DemClient.SHORT-NAME)} |
+
+##### 7.6.4.10. ClearDtcNotification
+
+端口 ClearDtcNotification_{EventMemorySet}_{Notification} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | ClearDtcNotification_{EventMemorySet}_{Notification} |
+| 类别 | 需求端口 |
+| 接口 | ClearDtcNotification |
+| 说明 | **Dem** 在执行清除 **DTC** 操作时调用 |
+| 变体 | ({ecuc(Dem/DemGeneral/DemEventMemorySet/DemClearDTCNotification/DemClearDtcNotificationFnc)} == NULL)；EventMemorySet = {ecuc(Dem/DemGeneral/DemEventMemorySet.SHORT-NAME)}；Notification = {ecuc(Dem/DemGeneral/DemEventMemorySet/DemClearDTCNotification.SHORT-NAME)} |
+
+##### 7.6.4.11. ControlDTCSuppression
+
+端口 ControlDTCSuppression 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | ControlDTCSuppression |
+| 类别 | 提供端口 |
+| 接口 | DTCSuppression |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral/DemSuppressionSupport)} == `DEM_DTC_SUPPRESSION`) |
+
+##### 7.6.4.12. EventAvailable
+
+端口 EventAvailable_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | EventAvailable_{Name} |
+| 类别 | 提供端口 |
+| 接口 | EventAvailable |
+| 说明 | - |
+| 变体 | {ecuc(Dem/DemGeneral/DemAvailabilitySupport)} == `DEM_EVENT_AVAILABILITY`；Name = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)} |
+
+##### 7.6.4.13. ControlEventFailureCycleCounterThreshold
+
+端口 ControlEventFailureCycleCounterThreshold_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | ControlEventFailureCycleCounterThreshold_{Name} |
+| 类别 | 提供端口 |
+| 接口 | EventFailureCycleCounterThreshold |
+| 说明 | - |
+| 变体 | {ecuc(Dem/DemConfigSet/DemEventParameter/DemEventConfirmationThresholdCounterAdaptable)} == TRUE；Name = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)} |
+
+##### 7.6.4.14. DataServices_{Data}
+
+端口 DataServices_{Data} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DataServices_{Data} |
+| 类别 | 需求端口 |
+| 接口 | DataServices_{Data}（客户端/服务器与发送者/接收者两种形式） |
+| 说明 | - |
+| 变体 | (({ecuc(Dem/DemGeneral/DemDataElementClass)} instanceof {ecuc(…/DemExternalCSDataElementClass)}) && ({ecuc(…/DemDataElementUsePort)} == TRUE)) &#124;&#124; ({ecuc(Dem/DemGeneral/DemDataElementClass)} instanceof {ecuc(…/DemExternalSRDataElementClass)})；Data = {ecuc(Dem/DemGeneral/DemDataElementClass.SHORT-NAME)} |
+
+##### 7.6.4.15. DTR
+
+端口 DTR_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DTR_{Name} |
+| 类别 | 提供端口 |
+| 接口 | DTRCentralReport |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`)；Name = {ecuc(Dem/DemConfigSet/DemDtrs/DemDtr.SHORT-NAME)} |
+
+##### 7.6.4.16. EnableCond
+
+端口 EnableCond_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | EnableCond_{Name} |
+| 类别 | 提供端口 |
+| 接口 | EnableCondition |
+| 说明 | - |
+| 变体 | Name = {ecuc(Dem/DemGeneral/DemEnableCondition.SHORT-NAME)} |
+
+##### 7.6.4.17. Event
+
+端口 Event_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Event_{Name} |
+| 类别 | 提供端口 |
+| 接口 | DiagnosticMonitor |
+| 说明 | - |
+| 变体 | Name = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)} |
+
+##### 7.6.4.18. DiagnosticMonitor_MonitorData
+
+端口 DiagnosticMonitor_MonitorData_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DiagnosticMonitor_MonitorData_{Name} |
+| 类别 | 提供端口 |
+| 接口 | DiagnosticMonitor_MonitorData |
+| 说明 | - |
+| 变体 | Name = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)} |
+
+##### 7.6.4.19. EventStatus
+
+端口 EventStatus_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | EventStatus_{Name} |
+| 类别 | 提供端口 |
+| 接口 | EventStatus |
+| 说明 | - |
+| 变体 | Name = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)} |
+
+##### 7.6.4.20. EventInfo
+
+端口 EventInfo_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | EventInfo_{Name} |
+| 类别 | 提供端口 |
+| 接口 | DiagnosticInfo |
+| 说明 | - |
+| 变体 | Name = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)} |
+
+##### 7.6.4.21. GeneralCBDataEvt
+
+端口 GeneralCBDataEvt 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GeneralCBDataEvt |
+| 类别 | 需求端口 |
+| 接口 | GeneralCallbackEventDataChanged |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral/DemGeneralInterfaceSupport)} == True) |
+
+##### 7.6.4.22. GeneralCBMonitorStatusChanged
+
+端口 GeneralCBMonitorStatusChanged 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GeneralCBMonitorStatusChanged |
+| 类别 | 需求端口 |
+| 接口 | GeneralCallbackMonitorStatusChanged |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral/DemGeneralInterfaceSupport)} == True) |
+
+##### 7.6.4.23. GeneralCBStatusEvt
+
+端口 GeneralCBStatusEvt 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GeneralCBStatusEvt |
+| 类别 | 需求端口 |
+| 接口 | GeneralCallbackEventUdsStatusChanged |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral/DemGeneralInterfaceSupport)} == True) |
+
+##### 7.6.4.24. GeneralEvtInfo
+
+端口 GeneralEvtInfo 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GeneralEvtInfo |
+| 类别 | 提供端口 |
+| 接口 | GeneralDiagnosticInfo |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral/DemGeneralInterfaceSupport)} == True) |
+
+##### 7.6.4.25. IndStatus
+
+端口 IndStatus_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | IndStatus_{Name} |
+| 类别 | 提供端口 |
+| 接口 | IndicatorStatus |
+| 说明 | - |
+| 变体 | Name = {ecuc(Dem/DemGeneral/DemEventMemorySet/DemIndicator.SHORT-NAME)} |
+
+##### 7.6.4.26. IUMPRDenominator
+
+端口 IUMPRDenominator_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | IUMPRDenominator_{Name} |
+| 类别 | 提供端口 |
+| 接口 | IUMPRDenominator |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`)；Name = {ecuc(Dem/DemGeneral/DemRatio/DemRatioId.SHORT-NAME)} |
+
+##### 7.6.4.27. IUMPRDenominatorCondition
+
+端口 IUMPRDenominatorCondition_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | IUMPRDenominatorCondition_{Name} |
+| 类别 | 提供端口 |
+| 接口 | IUMPRDenominatorCondition |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`)；Name = {ecuc(Dem/DemGeneral/DemRatio/DemIUMPRDenGroup.SHORT-NAME)} |
+
+##### 7.6.4.28. IUMPRNumerator
+
+端口 IUMPRNumerator_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | IUMPRNumerator_{Name} |
+| 类别 | 提供端口 |
+| 接口 | IUMPRNumerator |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`)；Name = {ecuc(Dem/DemGeneral/DemRatio/DemRatioId.SHORT-NAME)} |
+
+##### 7.6.4.29. OpCycle
+
+端口 OpCycle_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | OpCycle_{Name} |
+| 类别 | 提供端口 |
+| 接口 | OperationCycle |
+| 说明 | - |
+| 变体 | Name = {ecuc(Dem/DemGeneral/DemOperationCycle.SHORT-NAME)} |
+
+##### 7.6.4.30. OverflowIndPrimaryMemory
+
+端口 OverflowIndPrimaryMemory_{Client} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | OverflowIndPrimaryMemory_{Client} |
+| 类别 | 提供端口 |
+| 接口 | EvMemOverflowIndication |
+| 说明 | - |
+| 变体 | (({ecuc(Dem/DemGeneral/DemClient/DemClientUsesRte)} == TRUE))；Client = {ecuc(Dem/DemGeneral/DemClient.SHORT-NAME)} |
+
+##### 7.6.4.31. OverflowIndUserDefinedMemory
+
+端口 OverflowIndUserDefinedMemory_{Client}_{UserDefinedMemory} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | OverflowIndUserDefinedMemory_{Client}_{UserDefinedMemory} |
+| 类别 | 提供端口 |
+| 接口 | EvMemOverflowIndication |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral/DemClient/DemEventMemorySetRef-&gt;DemEventMemorySet/DemUserDefinedMemory} != NULL) && (({ecuc(Dem/DemGeneral/DemClient/DemClientUsesRte)} == TRUE))；Client = {ecuc(Dem/DemGeneral/DemEventMemorySet.SHORT-NAME)}；UserDefinedMemory = {ecuc(Dem/DemGeneral/DemClient/DemEventMemorySetRef-&gt;DemEventMemorySet/DemUserDefinedMemory.SHORT-NAME)} |
+
+##### 7.6.4.32. PowerTakeOffStatus
+
+端口 PowerTakeOffStatus 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | PowerTakeOffStatus |
+| 类别 | 提供端口 |
+| 接口 | PowerTakeOff |
+| 说明 | - |
+| 变体 | {ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT` |
+
+##### 7.6.4.33. GetDataOfPID21
+
+端口 GetDataOfPID21 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GetDataOfPID21 |
+| 类别 | 提供端口 |
+| 接口 | GetDataOfPID21 |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral/DemGeneralOBD.DemOBDCentralizedPID21Handling)} == true) && ({ecuc(Dem/DemGeneral.DemOBDSupport)} == `DEM_OBD_MASTER_ECU`) |
+
+##### 7.6.4.34. SetDataOfPID21
+
+端口 SetDataOfPID21 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | SetDataOfPID21 |
+| 类别 | 提供端口 |
+| 接口 | SetDataOfPID21 |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral/DemGeneralOBD.DemOBDCentralizedPID21Handling)} == true) && ({ecuc(Dem/DemGeneral.DemOBDSupport)} == `DEM_OBD_PRIMARY_ECU`) |
+
+##### 7.6.4.35. SetDataOfPID31
+
+端口 SetDataOfPID31 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | SetDataOfPID31 |
+| 类别 | 提供端口 |
+| 接口 | SetDataOfPID31 |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) && ({ecuc(Dem/DemGeneral/DemGeneralOBD.DemOBDCentralizedPID31Handling)} == true) |
+
+##### 7.6.4.36. SetDataOfPID4D
+
+端口 SetDataOfPID4D 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | SetDataOfPID4D |
+| 类别 | 提供端口 |
+| 接口 | SetDataOfPID4D |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral.DemOBDSupport)} == `DEM_OBD_MASTER_ECU`) |
+
+##### 7.6.4.37. SetDataOfPID4E
+
+端口 SetDataOfPID4E 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | SetDataOfPID4E |
+| 类别 | 提供端口 |
+| 接口 | SetDataOfPID4E |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral.DemOBDSupport)} == `DEM_OBD_MASTER_ECU`) |
+
+##### 7.6.4.38. StorageCond
+
+端口 StorageCond_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | StorageCond_{Name} |
+| 类别 | 提供端口 |
+| 接口 | StorageCondition |
+| 说明 | - |
+| 变体 | Name = {ecuc(Dem/DemGeneral/DemStorageCondition.SHORT-NAME)} |
+
+## 8. 时序图
+
+本章以时序图的形式给出 **Dem** 与其客户端（**Dcm**、**FiM**、**J1939Dcm** 及软件组件）之间的典型交互。
+
+### 8.1. ControlDTCSetting
+
+![Figure9_1.png](Figure9_1.png)
+
+### 8.2. Dem_ClearDTC
+
+![Figure9_2.png](Figure9_2.png)
+
+**Dem** 内部清除单个 **DTC** 的时序：
+
+![Figure9_3.png](Figure9_3.png)
+
+### 8.3. Dem_GetDTCByOccurrenceTime
+
+![Figure9_4.png](Figure9_4.png)
+
+### 8.4. Dem_GetNextExtendedDataRecord
+
+![Figure9_5.png](Figure9_5.png)
+
+### 8.5. Dem_GetStatusOfDTC
+
+![Figure9_6.png](Figure9_6.png)
+
+### 8.6. 冻结帧的检索
+
+![Figure9_7.png](Figure9_7.png)
+
+### 8.7. GetOBDFaultInformation
+
+![Figure9_8.png](Figure9_8.png)
+
+### 8.8. ReportDTCByStatusMask
+
+![Figure9_9.png](Figure9_9.png)
+
+### 8.9. FiM_DemTriggerOnEventStatus
+
+![Figure9_10.png](Figure9_10.png)
+
+### 8.10. ProcessEvent（示例）
+
+**Dem** 内部 ProcessEvent 的示例时序：
+
+![Figure9_11.png](Figure9_11.png)
+
+### 8.11. 基于受支持的扩展数据记录检索 DTC
+
+![Figure9_12.png](Figure9_12.png)
+
+### 8.12. 检索分配到 DTC 就绪组的 DTC
+
+![Figure9_13.png](Figure9_13.png)
+
+### 8.13. 检索所有 DTC 的已存储快照记录
+
+![Figure9_14.png](Figure9_14.png)
+
+## 9. 配置规范
+
+详情请参阅 SWS_BSWGeneral 中第 10.1 章"配置规范简介"（**Introduction to configuration specification**）。
+
+### 9.1. 容器与配置参数
+
+以下各节汇总所有配置参数。各参数的详细含义见第 6 章和第 7 章。
+
+#### 9.1.1. Dem
+
+| SWS 条目 | [ECUC_Dem_00928] |
+|---|---|
+| 模块名称 | Dem |
+| 描述 | **Dem**（诊断事件管理器）模块的配置。 |
+| Post-Build 变体支持 | true |
+| 支持的配置变体 | VARIANT-POST-BUILD、VARIANT-PRE-COMPILE |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemConfigSet | 1 | 此容器包含支持多个配置集的 **Dem** 模块的配置参数和子容器。 |
+| DemGeneral | 1 | 此容器包含 **BSW Dem** 的配置（参数）。 |
+
+#### 9.1.2. General
+
+##### 9.1.2.1. DemGeneral
+
+| SWS 条目 | [ECUC_Dem_00677] |
+|---|---|
+| 容器名称 | DemGeneral |
+| 父容器 | Dem |
+| 描述 | 此容器包含 **BSW Dem** 的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00918] |
+|---|---|
+| 参数名称 | DemAgingRequiresNotFailedCycle |
+| 父容器 | DemGeneral |
+| 描述 | 定义是否在没有测试失败报告的运行周期内处理老化周期计数器。true：仅在无测试失败的运行周期内处理老化周期计数器。false（默认）：对老化周期计数器的处理没有影响。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00877] |
+|---|---|
+| 参数名称 | DemAgingRequiresTestedCycle |
+| 父容器 | DemGeneral |
+| 描述 | 定义是在每个老化周期内都处理老化周期计数器，还是仅考虑已测试的老化周期。true：老化周期计数器仅考虑已测试的老化周期。false：每个老化周期内都处理老化周期计数器。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00878] |
+|---|---|
+| 参数名称 | DemAvailabilitySupport |
+| 父容器 | DemGeneral |
+| 描述 | 此配置开关定义是否启用可用性支持。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_EVENT_AVAILABILITY`：通过事件支持可用性 |
+| 取值 | `DEM_NO_AVAILABILITY`：不支持可用性 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00625] |
+|---|---|
+| 参数名称 | DemBswErrorBufferSize |
+| 父容器 | DemGeneral |
+| 描述 | 用于处理 **BSW** 错误的缓冲区的最大元素数量（参见第 6.8 节）。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00766] |
+|---|---|
+| 参数名称 | DemClearDTCBehavior |
+| 父容器 | DemGeneral |
+| 描述 | 定义易失性和非易失性内存的诊断信息清除过程，以及针对 **Dcm** 模块的肯定响应处理。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_CLRRESP_NONVOLATILE_FINISH`：在易失性和非易失性事件内存数据均清除后返回 DEM_CLEAR_OK |
+| 取值 | `DEM_CLRRESP_NONVOLATILE_TRIGGER`：在易失性事件内存数据清除且非易失性事件内存清除已触发后返回 DEM_CLEAR_OK |
+| 取值 | `DEM_CLRRESP_VOLATILE`：在易失性事件内存数据清除后返回 DEM_CLEAR_OK |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00790] |
+|---|---|
+| 参数名称 | DemClearDTCLimitation |
+| 父容器 | DemGeneral |
+| 描述 | 定义所支持的 Dem_&lt;...&gt;ClearDTC **API** 的范围。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_ALL_SUPPORTED_DTCS`：Dem_&lt;...&gt;ClearDTC 接受所有受支持的 **DTC** 值，以及在 DemGroupDTCs 中配置的所有 **DTC** 值和 `DEM_DTC_GROUP_ALL_DTCS`。 |
+| 取值 | `DEM_ONLY_CLEAR_ALL_DTCS`：Dem_&lt;...&gt;ClearDTC 仅接受 ClearAllDTCs。 |
+| 默认值 | `DEM_ALL_SUPPORTED_DTCS` |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00858] |
+|---|---|
+| 参数名称 | DemDataElementDefaultEndianness |
+| 父容器 | DemGeneral |
+| 描述 | 定义数据元素所属数据的默认字节序，适用于 DemExternalSRDataElementClass 未定义字节序的情况。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `BIG_ENDIAN`：最高有效字节应位于最低地址 |
+| 取值 | `LITTLE_ENDIAN`：最高有效字节应位于最高地址 |
+| 取值 | `OPAQUE`：不透明数据的字节序 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00724] |
+|---|---|
+| 参数名称 | DemDebounceCounterBasedSupport |
+| 父容器 | DemGeneral |
+| 描述 | 此配置开关定义是否启用基于计数器的去抖动支持。true：启用基于计数器的去抖动支持。false：禁用基于计数器的去抖动支持。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00725] |
+|---|---|
+| 参数名称 | DemDebounceTimeBasedSupport |
+| 父容器 | DemGeneral |
+| 描述 | 此配置开关定义是否启用基于时间的去抖动支持。true：启用基于时间的去抖动支持。false：禁用基于时间的去抖动支持。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00648] |
+|---|---|
+| 参数名称 | DemDevErrorDetect |
+| 父容器 | DemGeneral |
+| 描述 | 开启或关闭开发错误检测与通知。true：启用检测与通知。false：禁用检测与通知。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00740] |
+|---|---|
+| 参数名称 | DemEventCombinationSupport |
+| 父容器 | DemGeneral |
+| 描述 | 此参数定义 **Dem** 支持的事件组合类型。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_EVCOMB_DISABLED`：不支持事件组合 |
+| 取值 | `DEM_EVCOMB_ONRETRIEVAL`：检索时的事件组合 |
+| 取值 | `DEM_EVCOMB_ONSTORAGE`：存储时的事件组合 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00938] |
+|---|---|
+| 参数名称 | DemGeneralCallbackMonitorStatusChangedFnc |
+| 父容器 | DemGeneral |
+| 描述 | 原型 "&lt;Module&gt;_DemTriggerOnMonitorStatus" 的函数名称。用于通用监视器状态变化通知的函数。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00880] |
+|---|---|
+| 参数名称 | DemGeneralInterfaceSupport |
+| 父容器 | DemGeneral |
+| 描述 | 如果 DemGeneralInterfaceSupport 等于 true，则提供接口 GeneralEvtInfo、GeneralCallbackEventDataChanged、GeneralCallbackMonitorStatusChanged 和 GeneralCallbackEventUdsStatusChange。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00692] |
+|---|---|
+| 参数名称 | DemMaxNumberPrestoredFF |
+| 父容器 | DemGeneral |
+| 描述 | 定义预存储冻结帧的最大数量。如果设置为 0，则 **ECU** 不支持冻结帧预存储。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00698] |
+|---|---|
+| 参数名称 | DemOBDSupport |
+| 父容器 | DemGeneral |
+| 描述 | 此配置开关定义 **OBD** 支持及 **OBD ECU** 的类型。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_OBD_DEP_SEC_ECU`：OBD ECU 类型：OBD 从属/辅助 ECU |
+| 取值 | `DEM_OBD_MASTER_ECU`：OBD ECU 类型：主 ECU |
+| 取值 | `DEM_OBD_NO_OBD_SUPPORT`：此 **ECU** 内不支持 **OBD** |
+| 取值 | `DEM_OBD_PRIMARY_ECU`：OBD ECU 类型：Primary ECU |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00704] |
+|---|---|
+| 参数名称 | DemPTOSupport |
+| 父容器 | DemGeneral |
+| 描述 | 此配置开关定义是否启用 **PTO** 支持（即 PID $1E 支持）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00799] |
+|---|---|
+| 参数名称 | DemResetConfirmedBitOnOverflow |
+| 父容器 | DemGeneral |
+| 描述 | 此配置开关定义在事件内存条目被置换时是否复位 confirmed 位。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | true |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00991] |
+|---|---|
+| 参数名称 | DemResetPendingBitOnOverflow |
+| 父容器 | DemGeneral |
+| 描述 | 此配置开关定义在事件内存条目被置换时是否复位 pending 位。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | true |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00784] |
+|---|---|
+| 参数名称 | DemStatusBitHandlingTestFailedSinceLastClear |
+| 父容器 | DemGeneral |
+| 描述 | 此配置开关定义老化与置换机制是否应应用于 "TestFailedSinceLastClear" 状态位。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_STATUS_BIT_AGING_AND_DISPLACEMENT`：如果发生老化或置换，"TestFailedSinceLastClear" 状态位被复位为 0（与 "ConfirmedDTC" 状态位的处理相同） |
+| 取值 | `DEM_STATUS_BIT_NORMAL`：老化和置换对 "TestFailedSinceLastClear" 状态位没有影响 |
+| 默认值 | `DEM_STATUS_BIT_NORMAL` |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00714] |
+|---|---|
+| 参数名称 | DemStatusBitStorageTestFailed |
+| 父容器 | DemGeneral |
+| 描述 | 启用/停用 "TestFailed" 状态位的永久存储。true：启用存储。false：停用存储。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00793] |
+|---|---|
+| 参数名称 | DemSuppressionSupport |
+| 父容器 | DemGeneral |
+| 描述 | 此配置开关定义是否启用抑制支持。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_DTC_SUPPRESSION`：通过 **DTC** 支持抑制 |
+| 取值 | `DEM_NO_SUPPRESSION`：不支持抑制 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00715] |
+|---|---|
+| 参数名称 | DemTaskTime |
+| 父容器 | DemGeneral |
+| 描述 | 允许配置周期性循环任务的时间。请注意：此配置值应等于 **RTE** 模块的基础软件调度器配置中的值。AUTOSAR 配置标准是使用 SI 单位，因此此参数定义为以秒为单位的浮点值。**Dem** 配置工具必须将该浮点值转换为适当的值格式以用于 **Dem** 的软件实现。min：不允许负值。max：在事件状态被报告后，应在 100ms 内完成处理，以便尽快更新故障条目状态信息（例如用于 PID $01）。upperMultiplicity：每个配置必须恰好指定一个 TaskTime。 |
+| 多重性 | 1 |
+| 类型 | EcucFloatParamDef |
+| 取值范围 | ]0 .. INF[ |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00719] |
+|---|---|
+| 参数名称 | DemTriggerFiMReports |
+| 父容器 | DemGeneral |
+| 描述 | 启用/停用到功能抑制管理器的通知。true：启用 **FiM** 通知。false：停用 **FiM** 通知。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00765] |
+|---|---|
+| 参数名称 | DemTriggerMonitorInitBeforeClearOk |
+| 父容器 | DemGeneral |
+| 描述 | 定义监视器重新初始化应在 **Dem** 模块返回 DEM_CLEAR_OK 之前还是之后触发。true：在 DEM_CLEAR_OK 之前触发重新初始化。false：在 DEM_CLEAR_OK 之后触发重新初始化。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00721] |
+|---|---|
+| 参数名称 | DemVersionInfoApi |
+| 父容器 | DemGeneral |
+| 描述 | 启用/停用版本信息 **API**。true：启用版本信息。false：停用版本信息。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00941] |
+|---|---|
+| 参数名称 | DemClearEventsWithoutDTCEventMemoryRef |
+| 父容器 | DemGeneral |
+| 描述 | 指示用作清除未分配 **DTC** 的事件的触发器的事件内存。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemPrimaryMemory 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00940] |
+|---|---|
+| 参数名称 | DemOBDEventMemorySetRef |
+| 父容器 | DemGeneral |
+| 描述 | 引用用于 **OBD ECU** 的 DemEventMemorySet。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemEventMemorySet 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemClient | 1..255 | 此容器包含使用 **Dem API** 的可能的客户端。 |
+| DemDataElementClass | 0..65535 | 此容器包含内部/外部数据元素类的配置（参数）。 |
+| DemDidClass | 0..65535 | 此容器包含数据 Id 类的配置（参数）。它由一个或多个数据元素组装而成。 |
+| DemEnableCondition | 0..255 | 此容器包含使能条件的配置（参数）。 |
+| DemEnableConditionGroup | 0..255 | 此容器包含使能条件组的配置（参数）。 |
+| DemEventMemorySet | 1..255 | 此容器是所引用事件内存及相关信息的集合，用于一个 **Dem** 客户端。 |
+| DemExtendedDataClass | 0..65535 | 此类包含一个扩展数据类的扩展数据记录组合。 |
+| DemExtendedDataRecordClass | 0..253 | 此容器包含扩展数据记录类的配置（参数）。它由一个或多个数据元素组装而成。 |
+| DemFreezeFrameClass | 0..65535 | 此容器包含 **UDS** 以及经 **UDS** 的排放相关诊断的冻结帧的 **DID** 组合。 |
+| DemFreezeFrameRecNumClass | 0..65535 | 此容器包含分配给一个事件的专用、不同的冻结帧记录号列表。该列表中记录号的顺序与相应冻结帧记录的时间顺序对应。 |
+| DemFreezeFrameRecordClass | 0..65535 | 此容器包含专用、不同的冻结帧记录号的列表。 |
+| DemGeneralJ1939 | 0..1 | 此容器包含 **Dem** 模块 **J1939** 特定的通用配置（参数）。如果该容器存在，则启用 **J1939** 支持。 |
+| DemGeneralOBD | 0..1 | 此容器包含 **Dem** 模块 **OBD** 特定的通用配置（参数）。 |
+| DemNvRamBlockId | 0..* | 此容器包含 **Dem** 使用的非易失性内存块的配置（参数）。如果不需要事件内存条目的永久存储，则无需配置任何块。所需块的数量取决于 **Dem** 模块的实现和配置（例如所用事件内存的数量）。 |
+| DemOperationCycle | 1..256 | 此容器包含配置一个运行周期所需的所有参数。 |
+| DemRatio | 0..65535 | 此容器包含 **OBD** 特定的实际使用监视器性能比配置。它与特定事件、一个 **FID** 和一个 **IUMPR** 组相关。 |
+| DemStorageCondition | 0..255 | 此容器包含存储条件的配置（参数）。 |
+| DemStorageConditionGroup | 0..255 | 此容器包含存储条件组的配置（参数）。 |
+
+##### 9.1.2.2. DemConfigSet
+
+| SWS 条目 | [ECUC_Dem_00634] |
+|---|---|
+| 容器名称 | DemConfigSet |
+| 父容器 | Dem |
+| 描述 | 此容器包含支持多个配置集的 **Dem** 模块的配置参数和子容器。 |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemComponent | 0..* | 此容器配置被监控的组件和系统依赖关系。 |
+| DemDTC | 0..65535 | 此容器包含 **Dem UdsDTC** 的配置（参数）。 |
+| DemDTCAttributes | 0..65535 | 此容器包含 **Dem DTCAttributes** 的配置（参数）。 |
+| DemDebounceCounterBasedClass | 0..65535 | 此容器包含基于计数器去抖动类的配置。 |
+| DemDebounceTimeBasedClass | 0..65535 | 此容器包含基于时间去抖动类的配置。 |
+| DemDtrs | 0..1 | 此容器保存 **DTR** 集合的配置。 |
+| DemEventParameter | 1..65535 | 此容器包含事件的配置（参数）。 |
+| DemMultiEventTriggering | 0..65535 | 配置一个事件，该事件在被报告时将触发其他事件。 |
+| DemObdDTC | 0..65535 | 此容器包含 **Dem ObdDTC** 的配置（参数）。 |
+| DemPidClass | 0..255 | 此容器包含单个全局 **OBD** 相关冻结帧类的不同 **PID**。它由一个或多个数据元素组装而成。 |
+
+##### 9.1.2.3. DemClient
+
+| SWS 条目 | [ECUC_Dem_00931] |
+|---|---|
+| 容器名称 | DemClient |
+| 父容器 | DemGeneral |
+| 描述 | 此容器包含使用 **Dem API** 的可能的客户端。 |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00943] |
+|---|---|
+| 参数名称 | DemClientFunctionality |
+| 父容器 | DemClient |
+| 描述 | **Dem** 为 DemClient 提供的功能。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_CLIENT_ONLY_USES_EVENTOVERFLOW_INTERFACE`：**Dem** 仅为该客户端 ID 提供客户端相关的功能 EvMemOverflowIndication。该客户端不允许使用其他功能（例如 **DTC** 过滤器或清除）。 |
+| 取值 | `DEM_CLIENT_USES_FULL_FUNCTIONALITY`：**Dem** 为所选客户端提供所有客户端相关的功能（例如清除 **API** 和溢出指示）。 |
+| 默认值 | `DEM_CLIENT_USES_FULL_FUNCTIONALITY` |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| SWS 条目 | [ECUC_Dem_00932] |
+|---|---|
+| 参数名称 | DemClientId |
+| 父容器 | DemClient |
+| 描述 | 定义 **Dem** 客户端的唯一标识符。该编号由此客户端在所有带此参数的 **API** 的 ClientID 参数中使用。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名称） |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00933] |
+|---|---|
+| 参数名称 | DemClientUsesRte |
+| 父容器 | DemClient |
+| 描述 | 如果设置为 true，此客户端应仅通过 **RTE** 使用 **DEM**（**Dem** 将提供 C/S 接口：CddIf、EvMemOverflowIndication）。该客户端不得对 **DEM** 进行任何 C_API 调用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00942] |
+|---|---|
+| 参数名称 | DemEventMemorySetRef |
+| 父容器 | DemClient |
+| 描述 | 引用分配给该客户端的事件内存容器，该容器包含客户端特定的设置和事件内存。 |
+| 多重性 | 1 |
+| 类型 | 对 DemEventMemorySet 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemCallbackDTCStatusChanged | 0..* | 此容器的存在表示 **Dem** 可以访问 "DTCStatusChanged" 回调，**Dem** 将调用它来通知其他组件 **DTC** 状态的变化。如果存在 DemCallbackDTCStatusChangedFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackDTCStatusChangedFnc，**Dem** 将有一个 R 端口，需要接口 CallbackDTCStatusChanged，其名称通过唯一的回调前缀后跟事件名称生成。仅支持主内存中 **DTC** 的状态变化通知。 |
+
+##### 9.1.2.4. DemDTCAttributes
+
+| SWS 条目 | [ECUC_Dem_00641] |
+|---|---|
+| 容器名称 | DemDTCAttributes |
+| 父容器 | DemConfigSet |
+| 描述 | 此容器包含 DemDTCAttributes 的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00623] |
+|---|---|
+| 参数名称 | DemAgingCycleCounterThreshold |
+| 父容器 | DemDTCAttributes |
+| 描述 | 遗忘/删除所需的老化周期数。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 255 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00897] |
+|---|---|
+| 参数名称 | DemAgingCycleCounterThresholdForTFSLC |
+| 父容器 | DemDTCAttributes |
+| 描述 | 复位 testFailedSinceLastClear 位所需的老化周期数。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 255 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00662] |
+|---|---|
+| 参数名称 | DemDTCPriority |
+| 父容器 | DemDTCAttributes |
+| 描述 | 事件/**DTC** 在事件内存已满时的优先级。值越小表示优先级越高。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00779] |
+|---|---|
+| 参数名称 | DemDTCSignificance |
+| 父容器 | DemDTCAttributes |
+| 描述 | 事件的重要性，指示有关故障分类和解决的附加信息。它可以映射为 **Dem** 内部数据元素。如果它是事件相关数据的一部分，则应进行配置。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_EVENT_SIGNIFICANCE_FAULT`：影响组件/**ECU** 本身的故障 |
+| 取值 | `DEM_EVENT_SIGNIFICANCE_OCCURRENCE`：指示有关系统行为不足的附加信息的问题 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00605] |
+|---|---|
+| 参数名称 | DemMaxNumberFreezeFrameRecords |
+| 父容器 | DemDTCAttributes |
+| 描述 | 此参数定义可为此事件最多存储的相应冻结帧记录的数量。因此所有这些冻结帧记录具有相同的冻结帧类。仅计算型记录编号方式需要此参数（参见 DemTypeOfFreezeFrameRecordNumeration）。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00624] |
+|---|---|
+| 参数名称 | DemAgingCycleRef |
+| 父容器 | DemDTCAttributes |
+| 描述 | 对触发事件老化的周期的引用。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemOperationCycle 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00667] |
+|---|---|
+| 参数名称 | DemExtendedDataClassRef |
+| 父容器 | DemDTCAttributes |
+| 描述 | 此引用定义到扩展数据类采样器的链接。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemExtendedDataClass 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| SWS 条目 | [ECUC_Dem_00674] |
+|---|---|
+| 参数名称 | DemFreezeFrameClassRef |
+| 父容器 | DemDTCAttributes |
+| 描述 | 这些引用定义到冻结帧类采样器的链接。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemFreezeFrameClass 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| SWS 条目 | [ECUC_Dem_00776] |
+|---|---|
+| 参数名称 | DemFreezeFrameRecNumClassRef |
+| 父容器 | DemDTCAttributes |
+| 描述 | 此参数定义与诊断事件关联的专用冻结帧记录号的列表。这些记录号分配给冻结帧记录（而不是计算得到的记录号）。仅配置型记录编号方式需要此参数（参见 DemTypeOfFreezeFrameRecordNumeration）。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemFreezeFrameRecNumClass 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00834] |
+|---|---|
+| 参数名称 | DemJ1939ExpandedFreezeFrameClassRef |
+| 父容器 | DemDTCAttributes |
+| 描述 | 这些引用定义到 **J1939** 冻结帧类采样器的链接。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemJ1939FreezeFrameClass 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| SWS 条目 | [ECUC_Dem_00835] |
+|---|---|
+| 参数名称 | DemJ1939FreezeFrameClassRef |
+| 父容器 | DemDTCAttributes |
+| 描述 | 这些引用定义到 **J1939** 冻结帧类采样器的链接。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemJ1939FreezeFrameClass 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| SWS 条目 | [ECUC_Dem_00890] |
+|---|---|
+| 参数名称 | DemMemoryDestinationRef |
+| 父容器 | DemDTCAttributes |
+| 描述 | 内存目的地将 **DTC** 分配给一个内存目的地。 |
+| 多重性 | 1 |
+| 类型 | 对 [DemPrimaryMemory, DemUserDefinedMemory] 的选择引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00911] |
+|---|---|
+| 参数名称 | DemUDSOBDFreezeFrameClassRef |
+| 父容器 | DemDTCAttributes |
+| 描述 | 此引用定义到经 **UDS** 的排放相关诊断冻结帧的链接。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemFreezeFrameClass 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+##### 9.1.2.5. DemEventParameter
+
+| SWS 条目 | [ECUC_Dem_00661] |
+|---|---|
+| 容器名称 | DemEventParameter |
+| 父容器 | DemConfigSet |
+| 描述 | 此容器包含事件的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00921] |
+|---|---|
+| 参数名称 | DemCausalityDelayTime |
+| 父容器 | DemEventParameter |
+| 描述 | 等待事件被视为具有因果性的时间。该参数以秒为单位指定。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFloatParamDef |
+| 取值范围 | [0 .. 2.5] |
+| 默认值 | 0 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00909] |
+|---|---|
+| 参数名称 | DemComponentPriority |
+| 父容器 | DemEventParameter |
+| 描述 | 指定组件内的优先级。值越小表示优先级越高。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00969] |
+|---|---|
+| 参数名称 | DemEventAssociatedIdentification |
+| 父容器 | DemEventParameter |
+| 描述 | 允许标识一个事件的事件关联标识符。该值可以作为内部数据元素在快照记录或扩展数据记录中报告。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00792] |
+|---|---|
+| 参数名称 | DemEventAvailable |
+| 父容器 | DemEventParameter |
+| 描述 | 此参数将一个事件配置为不可用。**Dem** 将其视为不存在。true = 事件可用。false = 事件不可用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00968] |
+|---|---|
+| 参数名称 | DemEventAvailableInVariant |
+| 父容器 | DemEventParameter |
+| 描述 | 此参数定义事件的启用或禁用状态。如果设置为 FALSE，则该事件被整体禁用，即使 **SW-C** 已集成且该事件已在 ECUC 中描述。**Dem** 应忽略来自该 **SW-C** 的所有调用。如果设置为 TRUE，则事件的可用性取决于其他可用性来源。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | true |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00924] |
+|---|---|
+| 参数名称 | DemEventConfirmationThreshold |
+| 父容器 | DemEventParameter |
+| 描述 | 定义 **DTC** 确认（ISO 14229-1 的"确认阈值"）的运行周期阈值。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 255 |
+| 默认值 | 1 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00929] |
+|---|---|
+| 参数名称 | DemEventConfirmationThresholdCounterAdaptable |
+| 父容器 | DemEventParameter |
+| 描述 | 指示事件的确认周期阈值是否可以通过 Dem_SetEventConfirmationThresholdCounter 进行调整。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00659] |
+|---|---|
+| 参数名称 | DemEventId |
+| 父容器 | DemEventParameter |
+| 描述 | 诊断事件的唯一标识符。此参数不应允许用户修改，因为 Id 应由 **Dem** 自行生成，以防止出现间隙和 Id 的重复使用。事件应从 1 开始按顺序编号，中间不应有间隙。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名称） |
+| 取值范围 | 1 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00660] |
+|---|---|
+| 参数名称 | DemEventKind |
+| 父容器 | DemEventParameter |
+| 描述 | 此参数用于区分 **SW-C** 事件和 **BSW** 事件。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_EVENT_KIND_BSW`：该事件分配给一个 **BSW** 模块 |
+| 取值 | `DEM_EVENT_KIND_SWC`：该事件分配给一个 **SW-C** |
+| 默认值 | `DEM_EVENT_KIND_SWC` |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| SWS 条目 | [ECUC_Dem_00916] |
+|---|---|
+| 参数名称 | DemEventRecoverableInSameOperationCycle |
+| 父容器 | DemEventParameter |
+| 描述 | 如果此参数配置为 FALSE，则当事件已经处于"本运行周期内测试失败"状态时，PASSED 的报告将被忽略。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | true |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00970] |
+|---|---|
+| 参数名称 | DemEventReportingType |
+| 父容器 | DemEventParameter |
+| 描述 | 此参数定义监视器向 **Dem** 报告事件的方式。报告事件有多种方式，**Dem** 为此提供了不同的 **API**。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `STANDARD_REPORTING`：事件通过 **API** Dem_SetEventStatus 报告 |
+| 取值 | `STANDARD_REPORTING_WITH_MONITOR_DATA`：事件通过 **API** Dem_SetEventStatusWithMonitorData 报告 |
+| 默认值 | `STANDARD_REPORTING` |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00948] |
+|---|---|
+| 参数名称 | DemFFPrestorageInNvm |
+| 父容器 | DemEventParameter |
+| 描述 | 如果事件使用预存储冻结帧，此属性指示该事件是否要求将预存储数据存储在非易失性内存中。TRUE = 将预存储数据存储在非易失性内存中。FALSE = 预存储数据不存储在非易失性内存中。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00671] |
+|---|---|
+| 参数名称 | DemFFPrestorageSupported |
+| 父容器 | DemEventParameter |
+| 描述 | 如果此参数设置为 true，则冻结帧预存储受所分配事件的支持。此参数有助于计算缓冲区大小。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00894] |
+|---|---|
+| 参数名称 | DemReportBehavior |
+| 父容器 | DemEventParameter |
+| 描述 | 指示 **BSW** 模块（DemEventKind == `DEM_EVENT_KIND_BSW`）的报告行为，用于确定报告队列的大小。如果未定义该参数，则表示 REPORT_BEFORE_INIT。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `REPORT_AFTER_INIT`：指示事件不会在 Dem_Init() 之前被报告 |
+| 取值 | `REPORT_BEFORE_INIT`：指示事件可能在 Dem_Init() 之前被报告 |
+| 默认值 | `REPORT_BEFORE_INIT` |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00908] |
+|---|---|
+| 参数名称 | DemComponentClassRef |
+| 父容器 | DemEventParameter |
+| 描述 | 对被监控组件的引用。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemComponent 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00888] |
+|---|---|
+| 参数名称 | DemDTCRef |
+| 父容器 | DemEventParameter |
+| 描述 | 此参数定义与诊断事件关联的 **DTC** 配置（通常为 Uds）。允许存在没有 **DTC** 的事件（例如用于触发安全反应而不经诊断通信报告的 **ECU** 内部事件）。多个事件可以使用同一个 Dem DTCAttributes，以组合这些事件（参见第 6.7.5 节）。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemDTC 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| SWS 条目 | [ECUC_Dem_00746] |
+|---|---|
+| 参数名称 | DemEnableConditionGroupRef |
+| 父容器 | DemEventParameter |
+| 描述 | 引用一个使能条件组。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemEnableConditionGroup 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00839] |
+|---|---|
+| 参数名称 | DemOBDGroupingAssociativeEventsRef |
+| 父容器 | DemEventParameter |
+| 描述 | 此参数定义一个引用，指向一组关联事件中的一个代表性事件。"代表事件"必须引用其自身。注意：一个事件只允许被引用到一个关联事件组。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemEventParameter 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00702] |
+|---|---|
+| 参数名称 | DemOperationCycleRef |
+| 父容器 | DemEventParameter |
+| 描述 | 事件的运行周期类型（例如电源周期、驾驶循环等）。 |
+| 多重性 | 1 |
+| 类型 | 对 DemOperationCycle 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00769] |
+|---|---|
+| 参数名称 | DemStorageConditionGroupRef |
+| 父容器 | DemEventParameter |
+| 描述 | 引用一个存储条件组。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemStorageConditionGroup 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemCallbackClearEventAllowed | 0..1 | 此容器的存在表示 **Dem** 可以访问 "ClearEventAllowed" 回调。如果存在 DemCallbackClearEventAllowedFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackClearEventAllowedFnc，**Dem** 将有一个 R 端口，需要接口 CallbackClearEventAllowed，其名称通过唯一的回调前缀后跟事件名称生成。 |
+| DemCallbackEventDataChanged | 0..1 | 此容器的存在表示 **Dem** 可以访问 "EventDataChanged" 回调。如果存在 DemCallbackEventDataChangedFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackEventDataChangedFnc，**Dem** 将有一个 R 端口，需要接口 CallbackEventDataChanged，其名称通过唯一的回调前缀后跟事件名称生成。 |
+| DemCallbackEventUdsStatusChanged | 0..* | 此容器的存在表示 **Dem** 可以访问 "EventUdsStatusChanged" 回调，**Dem** 将调用它来通知其他组件事件状态的变化。如果存在 DemCallbackEventUdsStatusChangedFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackEventUdsStatusChangedFnc，**Dem** 将有一个 R 端口，需要接口 CallbackEventUdsStatusChanged，其名称通过唯一的回调前缀后跟事件名称生成。 |
+| DemCallbackInitMForE | 0..1 | 此容器的存在表示 **Dem** 可以访问 "InitMonitorForEvent" 回调，**Dem** 将调用它来初始化监视器。如果容器具有 DemCallbackInitMForEFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackInitMForEFnc，**Dem** 将有一个 R 端口，需要接口 CallbackInitMonitorForEvent，其名称通过唯一的回调前缀后跟事件名称生成。 |
+| DemCallbackMonitorStatusChanged | 0..* | 此容器的存在表示 **Dem** 可以访问 "MonitorStatusChanged" 回调，**Dem** 将调用它来通知其他组件事件状态的变化。如果存在 DemCallbackMonitorStatusChangedFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackMonitorStatusChangedFnc，**Dem** 将有一个 R 端口，需要接口 CallbackMonitorStatusChanged，其名称通过唯一的回调前缀后跟事件名称生成。 |
+| DemDebounceAlgorithmClass | 1 | 去抖动算法类：基于计数器、基于时间或监视器内部。 |
+| DemIndicatorAttribute | 0..255 | 此容器包含指示器的事件特定配置。 |
+
+##### 9.1.2.6. DemMultiEventTriggering
+
+| SWS 条目 | [ECUC_Dem_00944] |
+|---|---|
+| 容器名称 | DemMultiEventTriggering |
+| 父容器 | DemConfigSet |
+| 描述 | 配置一个事件，该事件在被报告时将触发其他事件。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00945] |
+|---|---|
+| 参数名称 | DemMultiEventTriggeringMasterEventRef |
+| 父容器 | DemMultiEventTriggering |
+| 描述 | 对在接收到本事件时将触发其他事件的事件的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 DemEventParameter 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00946] |
+|---|---|
+| 参数名称 | DemMultiEventTriggeringSlaveEventRef |
+| 父容器 | DemMultiEventTriggering |
+| 描述 | 对在触发主控事件时被触发的事件的引用。 |
+| 多重性 | 1..255 |
+| 类型 | 对 DemEventParameter 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+##### 9.1.2.7. DemComponent
+
+| SWS 条目 | [ECUC_Dem_00904] |
+|---|---|
+| 容器名称 | DemComponent |
+| 父容器 | DemConfigSet |
+| 描述 | 此容器配置被监控的组件和系统依赖关系。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00906] |
+|---|---|
+| 参数名称 | DemComponentFailedCallbackFnc |
+| 父容器 | DemComponent |
+| 描述 | 指定在组件失败状态变化时调用的函数。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00947] |
+|---|---|
+| 参数名称 | DemComponentFailedCallbackUsePort |
+| 父容器 | DemComponent |
+| 描述 | 指定是否应提供用于组件变化通知的 CBStatusComp_{ComponentName}。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | false |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00930] |
+|---|---|
+| 参数名称 | DemComponentId |
+| 父容器 | DemComponent |
+| 描述 | DemComponent 的唯一标识符。Component Id 应从 1 开始按顺序配置，中间不应有间隙。此参数不应允许用户修改，因为 Id 应由 **Dem** 自行生成，以防止出现间隙和 Id 的重复使用。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名称） |
+| 取值范围 | 1 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00905] |
+|---|---|
+| 参数名称 | DemComponentIgnoresPriority |
+| 父容器 | DemComponent |
+| 描述 | 此配置开关定义是否应忽略该组件处事件的优先级。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00907] |
+|---|---|
+| 参数名称 | DemImmediateChildComponentRef |
+| 父容器 | DemComponent |
+| 描述 | 对当前组件的所有直接子组件的引用。 |
+| 多重性 | 0..* |
+| 类型 | 对 DemComponent 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+##### 9.1.2.8. DemDTC
+
+| SWS 条目 | [ECUC_Dem_00886] |
+|---|---|
+| 容器名称 | DemDTC |
+| 父容器 | DemConfigSet |
+| 描述 | 此容器包含 DemUdsDTC 的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00643] |
+|---|---|
+| 参数名称 | DemDTCFunctionalUnit |
+| 父容器 | DemDTC |
+| 描述 | DTCFunctionalUnit 是一个 1 字节值，标识报告该 **DTC** 的相应基本车辆/系统功能。报告严重度信息需要此参数。如果没有为任何 **DTC** 配置此参数，**Dem** 不提供 **DTC** 功能单元信息。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00645] |
+|---|---|
+| 参数名称 | DemDTCSeverity |
+| 父容器 | DemDTC |
+| 描述 | 符合 ISO 14229-1 的 **DTC** 严重度。此参数取决于汽车制造商。如果未配置，该值计为"无严重度"。如果没有为任何 **DTC** 配置此参数，**Dem** 不提供 **DTC** 严重度信息。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_SEVERITY_CHECK_AT_NEXT_HALT`：在下次停机时检查 |
+| 取值 | `DEM_SEVERITY_CHECK_IMMEDIATELY`：立即检查 |
+| 取值 | `DEM_SEVERITY_MAINTENANCE_ONLY`：需要维护 |
+| 取值 | `DEM_SEVERITY_NO_SEVERITY`：无严重度信息可用 |
+| 默认值 | `DEM_SEVERITY_NO_SEVERITY` |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00887] |
+|---|---|
+| 参数名称 | DemDtcValue |
+| 父容器 | DemDTC |
+| 描述 | **UDS** 诊断故障码（**DTC**）的 3 字节值。该值在一个故障内存内唯一。范围 0x000000–0x0000FF 和 0xFFFFFF 由 ISO 14229-1 保留。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 256 .. 16777214 |
+| 默认值 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00127] |
+|---|---|
+| 参数名称 | DemNvStorageStrategy |
+| 父容器 | DemDTC |
+| 描述 | 此参数定义 **DTC** 的事件相关数据何时存储到 **NVRAM** 中。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DURING_SHUTDOWN`：在关机期间存储 |
+| 取值 | `IMMEDIATE_AT_FIRST_OCCURRENCE`：在 DemEventMemoryEntryStorageTrigger 触发器首次发生时以及在关机期间存储 |
+| 默认值 | `DURING_SHUTDOWN` |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00912] |
+|---|---|
+| 参数名称 | DemWWHOBDDTCClass |
+| 父容器 | DemDTC |
+| 描述 | 符合 ISO 14229-1 [2013 版] 的 **DTC** 等级。此参数取决于汽车制造商。如果未配置，该值标记为"未分级"。如果没有为任何 **DTC** 配置此参数，**Dem** 不提供 **DTC WWH-OBD** 等级信息。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_DTC_WWHOBD_CLASS_A`：Class A |
+| 取值 | `DEM_DTC_WWHOBD_CLASS_B1`：Class B1 |
+| 取值 | `DEM_DTC_WWHOBD_CLASS_B2`：Class B2 |
+| 取值 | `DEM_DTC_WWHOBD_CLASS_C`：Class C |
+| 取值 | `DEM_DTC_WWHOBD_CLASS_NOCLASS`：无等级信息 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00642] |
+|---|---|
+| 参数名称 | DemDTCAttributesRef |
+| 父容器 | DemDTC |
+| 描述 | 此参数定义与该 DemDTC 关联的 **DTC** 属性。 |
+| 多重性 | 1 |
+| 类型 | 对 DemDTCAttributes 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| SWS 条目 | [ECUC_Dem_00889] |
+|---|---|
+| 参数名称 | DemObdDTCRef |
+| 父容器 | DemDTC |
+| 描述 | 此参数定义与该 DemDTC 关联的 **OBD DTC** 配置。允许存在没有 **OBD DTC** 的事件。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemObdDTC 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+##### 9.1.2.9. DemGroupOfDTC
+
+| SWS 条目 | [ECUC_Dem_00679] |
+|---|---|
+| 容器名称 | DemGroupOfDTC |
+| 父容器 | DemPrimaryMemory、DemUserDefinedMemory |
+| 描述 | 此容器包含 **DTC** 组的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00678] |
+|---|---|
+| 参数名称 | DemGroupDTCs |
+| 父容器 | DemGroupOfDTC |
+| 描述 | 所选 **DTC** 组的 **DTC** 值（范围：3 字节；按照 ISO 14229-1 附录 D.1，0xFFFFFF 保留用于"所有 DTC"）。**DTC** 组"所有 DTC"始终可用，无需配置。ISO 14229-1 保留以下范围：0x000000 至 0x0000ff 以及 0xffff00 至 0xffffff。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 256 .. 16776959 |
+| 默认值 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+无包含的容器。
+
+##### 9.1.2.10. DemOperationCycle
+
+| SWS 条目 | [ECUC_Dem_00701] |
+|---|---|
+| 容器名称 | DemOperationCycle |
+| 父容器 | DemGeneral |
+| 描述 | 此容器保存配置一个运行周期所需的所有参数。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00898] |
+|---|---|
+| 参数名称 | DemOperationCycleId |
+| 父容器 | DemOperationCycle |
+| 描述 | 此参数的值与聚合容器一起用于定义运行周期的符号名称。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名称） |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00919] |
+|---|---|
+| 参数名称 | DemLeadingCycleRef |
+| 父容器 | DemOperationCycle |
+| 描述 | 定义与处理此运行周期相关的运行周期。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemOperationCycle 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+##### 9.1.2.11. DemIndicator
+
+| SWS 条目 | [ECUC_Dem_00680] |
+|---|---|
+| 容器名称 | DemIndicator |
+| 父容器 | DemEventMemorySet |
+| 描述 | 此容器包含指示器的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00683] |
+|---|---|
+| 参数名称 | DemIndicatorID |
+| 父容器 | DemIndicator |
+| 描述 | 指示器的唯一标识符。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名称） |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+##### 9.1.2.12. DemIndicatorAttribute
+
+| SWS 条目 | [ECUC_Dem_00681] |
+|---|---|
+| 容器名称 | DemIndicatorAttribute |
+| 父容器 | DemEventParameter |
+| 描述 | 此容器包含指示器的事件特定配置。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00682] |
+|---|---|
+| 参数名称 | DemIndicatorBehaviour |
+| 父容器 | DemIndicatorAttribute |
+| 描述 | 所链接指示器的行为。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_INDICATOR_BLINKING`：当事件状态为 FAILED 时指示器闪烁。与 **J1939** 无关。 |
+| 取值 | `DEM_INDICATOR_BLINK_CONT`：当事件状态为 FAILED 时指示器激活并闪烁。与 **J1939** 无关。 |
+| 取值 | `DEM_INDICATOR_CONTINUOUS`：当事件状态为 FAILED 时指示器激活 |
+| 取值 | `DEM_INDICATOR_FAST_FLASH`：闪烁指示灯应设置为"快闪" |
+| 取值 | `DEM_INDICATOR_SLOW_FLASH`：闪烁指示灯应设置为"慢闪" |
+| 默认值 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00750] |
+|---|---|
+| 参数名称 | DemIndicatorFailureCycleCounterThreshold |
+| 父容器 | DemIndicatorAttribute |
+| 描述 | 定义 WarningIndicatorOnCriteria 的失败周期数。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 255 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00748] |
+|---|---|
+| 参数名称 | DemIndicatorHealingCycleCounterThreshold |
+| 父容器 | DemIndicatorAttribute |
+| 描述 | 定义 WarningIndicatorOffCriteria 的恢复周期数。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00687] |
+|---|---|
+| 参数名称 | DemIndicatorRef |
+| 父容器 | DemIndicatorAttribute |
+| 描述 | 对所用指示器的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 DemIndicator 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+##### 9.1.2.13. DemNvRamBlockId
+
+| SWS 条目 | [ECUC_Dem_00696] |
+|---|---|
+| 容器名称 | DemNvRamBlockId |
+| 父容器 | DemGeneral |
+| 描述 | 此容器包含 **Dem** 使用的非易失性内存块的配置（参数）。如果不需要事件内存条目的永久存储，则无需配置任何块。所需块的数量取决于 **Dem** 模块的实现和配置（例如所用事件内存的数量）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00697] |
+|---|---|
+| 参数名称 | DemNvRamBlockIdRef |
+| 父容器 | DemNvRamBlockId |
+| 描述 | 此引用包含到非易失性内存块的链接。对于 post-build 时间配置，应使用最坏情况场景。 |
+| 多重性 | 1 |
+| 类型 | 对 NvMBlockDescriptor 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+#### 9.1.3. OBD
+
+##### 9.1.3.1. DemGeneralOBD
+
+| SWS 条目 | [ECUC_Dem_00756] |
+|---|---|
+| 容器名称 | DemGeneralOBD |
+| 父容器 | DemGeneral |
+| 描述 | 此容器包含 **Dem** 模块 **OBD** 特定的通用配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00794] |
+|---|---|
+| 参数名称 | DemOBDCentralizedPID21Handling |
+| 父容器 | DemGeneralOBD |
+| 描述 | 启用 PID $21 集中式处理的开关。true：启用 PID $21 集中式处理。false：禁用 PID $21 集中式处理。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00879] |
+|---|---|
+| 参数名称 | DemOBDCentralizedPID31Handling |
+| 父容器 | DemGeneralOBD |
+| 描述 | 启用 PID $31 集中式处理的开关。true：启用 PID $31 集中式处理。false：禁用 PID $31 集中式处理。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00795] |
+|---|---|
+| 参数名称 | DemOBDCompliancy |
+| 父容器 | DemGeneralOBD |
+| 描述 | 根据相应标准（例如 OBD、OBDII、JOBD 等）定义 PID $1C"车辆或发动机认证所依据的 OBD 要求"的合适值的配置值。另请参见 J1979 或 J1939-73 的 "DiagnosticReadiness 1" DM05 报文。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00917] |
+|---|---|
+| 参数名称 | DemOBDDelayedDCYConfirmedAndMIL |
+| 父容器 | DemGeneralOBD |
+| 描述 | 控制 **OBD** 驾驶循环的 confirmed 状态的延迟计算。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00900] |
+|---|---|
+| 参数名称 | DemOBDEngineType |
+| 父容器 | DemGeneralOBD |
+| 描述 | 提供汽油或柴油参数的开关。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_IGNITION_COMPRESSION`：柴油发动机类型 |
+| 取值 | `DEM_IGNITION_SPARK`：汽油发动机类型 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00796] |
+|---|---|
+| 参数名称 | DemOBDEventDisplacement |
+| 父容器 | DemGeneralOBD |
+| 描述 | 启用/停用 **OBD** 事件的不同置换行为。具有特殊条件（例如 Pending、MIL_On 等）的 **OBD** 事件不应被置换。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00989] |
+|---|---|
+| 参数名称 | DemSupportedObdUdsDtcSeparation |
+| 父容器 | DemGeneralOBD |
+| 描述 | 如果此参数设置为 true，则启用 **OBD UDS DTC** 分离。如果此参数设置为 false，则禁用 **OBD UDS DTC** 分离。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00923] |
+|---|---|
+| 参数名称 | DemOBDDrivingCycleRef |
+| 父容器 | DemGeneralOBD |
+| 描述 | 定义表示 **OBD** 驾驶循环的运行周期。 |
+| 多重性 | 1 |
+| 类型 | 对 DemOperationCycle 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| SWS 条目 | [ECUC_Dem_00763] |
+|---|---|
+| 参数名称 | DemOBDInputAcceleratorPedalInformation |
+| 父容器 | DemGeneralOBD |
+| 描述 | 加速踏板信息的输入变量，分配给用作 **Dem** 内部 **PID** 计算接口的特定数据元素。 |
+| 多重性 | 0..1 |
+| 类型 | 对 [DemExternalCSDataElementClass, DemExternalSRDataElementClass] 的选择引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00762] |
+|---|---|
+| 参数名称 | DemOBDInputAmbientPressure |
+| 父容器 | DemGeneralOBD |
+| 描述 | 环境压力的输入变量，分配给用作 **Dem** 内部 **PID** 计算接口的特定数据元素。 |
+| 多重性 | 0..1 |
+| 类型 | 对 [DemExternalCSDataElementClass, DemExternalSRDataElementClass] 的选择引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00761] |
+|---|---|
+| 参数名称 | DemOBDInputAmbientTemperature |
+| 父容器 | DemGeneralOBD |
+| 描述 | 环境温度的输入变量，分配给用作 **Dem** 内部 **PID** 计算接口的特定数据元素。 |
+| 多重性 | 0..1 |
+| 类型 | 对 [DemExternalCSDataElementClass, DemExternalSRDataElementClass] 的选择引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00759] |
+|---|---|
+| 参数名称 | DemOBDInputDistanceInformation |
+| 父容器 | DemGeneralOBD |
+| 描述 | 里程信息的输入变量，分配给用作 **Dem** 内部 **PID** 计算接口的特定数据元素。 |
+| 多重性 | 0..1 |
+| 类型 | 对 [DemExternalCSDataElementClass, DemExternalSRDataElementClass] 的选择引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00757] |
+|---|---|
+| 参数名称 | DemOBDInputEngineSpeed |
+| 父容器 | DemGeneralOBD |
+| 描述 | 发动机转速的输入变量，分配给用作 **Dem** 内部 **PID** 计算接口的特定数据元素。 |
+| 多重性 | 0..1 |
+| 类型 | 对 [DemExternalCSDataElementClass, DemExternalSRDataElementClass] 的选择引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00772] |
+|---|---|
+| 参数名称 | DemOBDInputEngineTemperature |
+| 父容器 | DemGeneralOBD |
+| 描述 | 发动机温度的输入变量，分配给用作 **Dem** 内部 **PID** 计算接口的特定数据元素。 |
+| 多重性 | 0..1 |
+| 类型 | 对 [DemExternalCSDataElementClass, DemExternalSRDataElementClass] 的选择引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00760] |
+|---|---|
+| 参数名称 | DemOBDInputProgrammingEvent |
+| 父容器 | DemGeneralOBD |
+| 描述 | 编程事件的输入变量，分配给用作 **Dem** 内部 **PID** 计算接口的特定数据元素。 |
+| 多重性 | 0..1 |
+| 类型 | 对 [DemExternalCSDataElementClass, DemExternalSRDataElementClass] 的选择引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00758] |
+|---|---|
+| 参数名称 | DemOBDInputVehicleSpeed |
+| 父容器 | DemGeneralOBD |
+| 描述 | 车辆速度的输入变量，分配给用作 **Dem** 内部 **PID** 计算接口的特定数据元素。 |
+| 多重性 | 0..1 |
+| 类型 | 对 [DemExternalCSDataElementClass, DemExternalSRDataElementClass] 的选择引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00920] |
+|---|---|
+| 参数名称 | DemOBDPFCCycleRef |
+| 父容器 | DemGeneralOBD |
+| 描述 | 定义与处理 **OBD PFC** 循环相关的运行周期。 |
+| 多重性 | 1 |
+| 类型 | 对 DemOperationCycle 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| SWS 条目 | [ECUC_Dem_00827] |
+|---|---|
+| 参数名称 | DemOBDTimeSinceEngineStart |
+| 父容器 | DemGeneralOBD |
+| 描述 | 发动机启动以来时间的输入变量，分配给一个特定数据元素。 |
+| 多重性 | 0..1 |
+| 类型 | 对 [DemExternalCSDataElementClass, DemExternalSRDataElementClass] 的选择引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00922] |
+|---|---|
+| 参数名称 | DemOBDWarmUpCycleRef |
+| 父容器 | DemGeneralOBD |
+| 描述 | 定义表示 **OBD** 暖机循环的运行周期。 |
+| 多重性 | 1 |
+| 类型 | 对 DemOperationCycle 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemCallbackOBDDTCStatusChanged | 0..* | 此容器的存在表示 **Dem** 可以访问 "DTCStatusChanged" 回调，**Dem** 将调用它来通知其他组件 **DTC** 状态的变化。如果存在 DemCallbackDTCStatusChangedFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackDTCStatusChangedFnc，**Dem** 将有一个 R 端口，需要接口 CallbackDTCStatusChanged，其名称通过唯一的回调前缀后跟事件名称生成。仅支持主内存中 **DTC** 的状态变化通知。 |
+
+##### 9.1.3.2. DemObdDTC
+
+| SWS 条目 | [ECUC_Dem_00884] |
+|---|---|
+| 容器名称 | DemObdDTC |
+| 父容器 | DemConfigSet |
+| 描述 | 此容器包含 DemObdDTC 的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00602] |
+|---|---|
+| 参数名称 | DemConsiderPtoStatus |
+| 父容器 | DemObdDTC |
+| 描述 | 当事件受 **Dem** 的 **PTO** 处理影响时，此参数为 TRUE。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00885] |
+|---|---|
+| 参数名称 | DemDtcValue |
+| 父容器 | DemObdDTC |
+| 描述 | **OBD** 的唯一诊断故障码值。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00988] |
+|---|---|
+| 参数名称 | DemDtcValue3Byte |
+| 父容器 | DemObdDTC |
+| 描述 | 在 **UDS** 与 **OBD DTC** 处理分离时用于 **UDS** 诊断故障码（**DTC**）的 3 字节 **OBD DTC** 值。该值基于 SAE J2012 定义一个 **DTC**。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 256 .. 16777214 |
+| 默认值 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00755] |
+|---|---|
+| 参数名称 | DemEventOBDReadinessGroup |
+| 父容器 | DemObdDTC |
+| 描述 | 此参数指定 SAE J1979-DA 为 PID $01 和 PID $41 计算定义的事件 **OBD** 就绪组。此参数仅适用于排放相关 **ECU**。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_OBD_RDY_AC`：A/C 系统组件 - 火花点火 |
+| 取值 | `DEM_OBD_RDY_BOOSTPR`：增压压力系统 - 压燃点火 |
+| 取值 | `DEM_OBD_RDY_CAT`：催化器 - 火花点火 |
+| 取值 | `DEM_OBD_RDY_CMPRCMPT`：综合组件 - 火花点火、压燃点火 |
+| 取值 | `DEM_OBD_RDY_CSER`：冷启动排放降低策略监控 - 火花点火、压燃点火 |
+| 取值 | `DEM_OBD_RDY_DOR`：直接臭氧还原（DOR）系统监控 - 火花点火、压燃点火 |
+| 取值 | `DEM_OBD_RDY_ECS`：发动机冷却系统监控 - 火花点火、压燃点火 |
+| 取值 | `DEM_OBD_RDY_EGR`：EGR 系统 - 火花点火、压燃点火 |
+| 取值 | `DEM_OBD_RDY_EGSENS`：排气传感器 - 压燃点火 |
+| 取值 | `DEM_OBD_RDY_EVAP`：蒸发排放系统 - 火花点火 |
+| 取值 | `DEM_OBD_RDY_FLSYS`：燃油系统 - 火花点火、压燃点火 |
+| 取值 | `DEM_OBD_RDY_FLSYS_NONCONT`：非连续燃油系统 - 火花点火、压燃点火 |
+| 取值 | `DEM_OBD_RDY_GPF`：汽油颗粒捕集器 - 火花点火 |
+| 取值 | `DEM_OBD_RDY_HCCAT`：非甲烷 HC 催化器 - 压燃点火 |
+| 取值 | `DEM_OBD_RDY_HTCAT`：加热型催化器 - 火花点火 |
+| 取值 | `DEM_OBD_RDY_MISF`：失火 - 火花点火、压燃点火 |
+| 取值 | `DEM_OBD_RDY_NONE`：无 - 火花点火、压燃点火 |
+| 取值 | `DEM_OBD_RDY_NOXADSORB`：NOx 吸附器监控 - 压燃点火 |
+| 取值 | `DEM_OBD_RDY_NOXCAT`：NOx 催化器 - 压燃点火 |
+| 取值 | `DEM_OBD_RDY_O2SENS`：氧传感器 - 火花点火 |
+| 取值 | `DEM_OBD_RDY_O2SENSHT`：氧传感器加热器 - 火花点火 |
+| 取值 | `DEM_OBD_RDY_OTHER`：其他排放控制或源系统监控 - 火花点火、压燃点火 |
+| 取值 | `DEM_OBD_RDY_PCV`：曲轴箱强制通风（PCV）系统监控 - 火花点火、压燃点火 |
+| 取值 | `DEM_OBD_RDY_PMFLT`：颗粒物过滤器 - 压燃点火 |
+| 取值 | `DEM_OBD_RDY_SECAIR`：二次空气系统 - 火花点火 |
+| 取值 | `DEM_OBD_RDY_VVT`：可变气门正时、升程和/或控制（VVT）系统监控 - 火花点火、压燃点火 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00892] |
+|---|---|
+| 参数名称 | DemJ1939DTCValue |
+| 父容器 | DemObdDTC |
+| 描述 | **J1939** 的唯一诊断故障码值（由 SPN 和 FMI 组成）。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 16777214 |
+| 默认值 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+无包含的容器。
+
+##### 9.1.3.3. DemRatio
+
+| SWS 条目 | [ECUC_Dem_00734] |
+|---|---|
+| 容器名称 | DemRatio |
+| 父容器 | DemGeneral |
+| 描述 | 此容器包含 **OBD** 特定的实际使用监视器性能比配置。它与特定事件、一个 **FID** 和一个 **IUMPR** 组相关。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00838] |
+|---|---|
+| 参数名称 | DemIUMPRDenGroup |
+| 父容器 | DemRatio |
+| 描述 | 此参数指定所分配的分母类型。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_IUMPR_DEN_500MILL`：基于 OBD2 定义的"500 英里"条件的条件 |
+| 取值 | `DEM_IUMPR_DEN_COLDSTART`：基于 EU5+ 定义的"冷启动"条件的条件 |
+| 取值 | `DEM_IUMPR_DEN_CSERS`："冷启动排放降低策略"分母 |
+| 取值 | `DEM_IUMPR_DEN_CSERS_API`：考虑通过 Dem_RepIUMPRDenRelease 报告的附加条件的"冷启动排放降低策略"分母 |
+| 取值 | `DEM_IUMPR_DEN_EVAP`：基于 OBD2 定义的"EVAP"条件的条件 |
+| 取值 | `DEM_IUMPR_DEN_EVAPPURGEFLOW`：基于"EVAP 净化流量"条件的条件 |
+| 取值 | `DEM_IUMPR_DEN_NONE`：无附加条件。分母仅基于 GENERAL_INDIVIDUAL_DENOMINATOR 递增。 |
+| 取值 | `DEM_IUMPR_DEN_PHYS_API`：GENERAL_INDIVIDUAL_DENOMINATOR 条件，考虑由 **SW-C** 内计算并经 Dem_RepIUMPRDenRelease 报告的附加物理条件（组件活动） |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00737] |
+|---|---|
+| 参数名称 | DemIUMPRGroup |
+| 父容器 | DemRatio |
+| 描述 | 此参数指定比率 Id 所分配的 **IUMPR** 组。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_IUMPR_AFRI1`：空燃比失衡监控器 1 组 |
+| 取值 | `DEM_IUMPR_AFRI2`：空燃比失衡监控器 2 组 |
+| 取值 | `DEM_IUMPR_BOOSTPRS`：- |
+| 取值 | `DEM_IUMPR_CAT1`：- |
+| 取值 | `DEM_IUMPR_CAT2`：- |
+| 取值 | `DEM_IUMPR_EGR`：- |
+| 取值 | `DEM_IUMPR_EGSENSOR`：- |
+| 取值 | `DEM_IUMPR_EVAP`：- |
+| 取值 | `DEM_IUMPR_FLSYS`：- |
+| 取值 | `DEM_IUMPR_NMHCCAT`：- |
+| 取值 | `DEM_IUMPR_NOXADSORB`：- |
+| 取值 | `DEM_IUMPR_NOXCAT`：- |
+| 取值 | `DEM_IUMPR_OXS1`：- |
+| 取值 | `DEM_IUMPR_OXS2`：- |
+| 取值 | `DEM_IUMPR_PF1`：颗粒捕集器监控器 1 组 |
+| 取值 | `DEM_IUMPR_PF2`：颗粒捕集器监控器 2 组 |
+| 取值 | `DEM_IUMPR_PMFILTER`：- |
+| 取值 | `DEM_IUMPR_PRIVATE`：- |
+| 取值 | `DEM_IUMPR_SAIR`：- |
+| 取值 | `DEM_IUMPR_SECOXS1`：- |
+| 取值 | `DEM_IUMPR_SECOXS2`：- |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00787] |
+|---|---|
+| 参数名称 | DemRatioId |
+| 父容器 | DemRatio |
+| 描述 | 定义一个唯一的比率 Id。此参数不应允许用户修改，因为 Id 应由 **Dem** 自行生成，以防止出现间隙和 Id 的重复使用。比率 Id 应从 0 开始按顺序编号，中间不应有间隙。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名称） |
+| 取值范围 | 0 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00741] |
+|---|---|
+| 参数名称 | DemRatioKind |
+| 父容器 | DemRatio |
+| 描述 | 此参数定义该比率是基于 **API** 还是基于观察者计算的。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_RATIO_API`：基于 **API** 的比率 Id |
+| 取值 | `DEM_RATIO_OBSERVER`：基于观察者的比率 Id |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00735] |
+|---|---|
+| 参数名称 | DemDiagnosticEventRef |
+| 父容器 | DemRatio |
+| 描述 | 此引用包含到诊断事件的链接。 |
+| 多重性 | 1 |
+| 类型 | 对 DemEventParameter 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00736] |
+|---|---|
+| 参数名称 | DemFunctionIdRef |
+| 父容器 | DemRatio |
+| 描述 | 此引用包含到 **FiM** 内用作主 **FID** 的功能标识符的链接。 |
+| 多重性 | 0..* |
+| 类型 | 对 FiMFID 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+无包含的容器。
+
+##### 9.1.3.4. DemDtrs
+
+| SWS 条目 | [ECUC_Dem_00913] |
+|---|---|
+| 容器名称 | DemDtrs |
+| 父容器 | DemConfigSet |
+| 描述 | 此容器保存 **DTR** 集合的配置。 |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemDtr | 0..65535 | 此容器保存一个单独 **DTR** 的配置。 |
+
+##### 9.1.3.5. DemDtr
+
+| SWS 条目 | [ECUC_Dem_00806] |
+|---|---|
+| 容器名称 | DemDtr |
+| 父容器 | DemDtrs |
+| 描述 | 此容器保存一个单独 **DTR** 的配置。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00815] |
+|---|---|
+| 参数名称 | DemDtrCompuDenominator0 |
+| 父容器 | DemDtr |
+| 描述 | 二进制表示与物理含义之间转换的一部分，类似于 **SW-C** 模板中 compuInternalToPhys 方向的、带 2 个分子系数和 1 个分母系数的转换 CompuRationalCoeffs。这是唯一受支持的分母值，为一个常数除数。不允许值 0。 |
+| 多重性 | 1 |
+| 类型 | EcucFloatParamDef |
+| 取值范围 | [-INF .. INF] |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00813] |
+|---|---|
+| 参数名称 | DemDtrCompuNumerator0 |
+| 父容器 | DemDtr |
+| 描述 | 二进制表示与物理含义之间转换的一部分，类似于 **SW-C** 模板中 compuInternalToPhys 方向的、带 2 个分子系数和 1 个分母系数的转换 CompuRationalCoeffs。这是第一个分子值，与 x^0 相乘，即偏移量。 |
+| 多重性 | 1 |
+| 类型 | EcucFloatParamDef |
+| 取值范围 | [-INF .. INF] |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00814] |
+|---|---|
+| 参数名称 | DemDtrCompuNumerator1 |
+| 父容器 | DemDtr |
+| 描述 | 二进制表示与物理含义之间转换的一部分，类似于 **SW-C** 模板中 compuInternalToPhys 方向的、带 2 个分子系数和 1 个分母系数的转换 CompuRationalCoeffs。这是第二个分子值，与 x^1 相乘，即系数。 |
+| 多重性 | 1 |
+| 类型 | EcucFloatParamDef |
+| 取值范围 | [-INF .. INF] |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00807] |
+|---|---|
+| 参数名称 | DemDtrId |
+| 父容器 | DemDtr |
+| 描述 | 分配给此 **DTR** 的索引标识值。该值在 **Dem** 配置过程中生成。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名称） |
+| 取值范围 | 0 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00809] |
+|---|---|
+| 参数名称 | DemDtrMid |
+| 父容器 | DemDtr |
+| 描述 | 此 **DTR** 的 OBDMID。值 0x00、0x20、0x40、0x60、0x80、0xA0、0xC0、0xE0 为可用性 OBDMID 保留。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00810] |
+|---|---|
+| 参数名称 | DemDtrTid |
+| 父容器 | DemDtr |
+| 描述 | 此 **DTR** 的 OBDTID。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00811] |
+|---|---|
+| 参数名称 | DemDtrUasid |
+| 父容器 | DemDtr |
+| 描述 | **DTR** 数据应缩放到的 UaSId，并与重新缩放的 **DTR** 数据一起报告。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00812] |
+|---|---|
+| 参数名称 | DemDtrUpdateKind |
+| 父容器 | DemDtr |
+| 描述 | **Dem** 应用于 **DTR** 值报告的更新条件。仅在配置了相关事件时受支持。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_DTR_UPDATE_ALWAYS`：监视器报告的任何 **DTR** 结果都被 **Dem** 使用。 |
+| 取值 | `DEM_DTR_UPDATE_STEADY`：仅当所配置的去抖动机制稳定在 FAIL 或 PASS 极限时，**Dem** 才接受所报告的 **DTR**。 |
+| 默认值 | `DEM_DTR_UPDATE_ALWAYS` |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00808] |
+|---|---|
+| 参数名称 | DemDtrEventRef |
+| 父容器 | DemDtr |
+| 描述 | 对此 **DTR** 所关联的 DemEventParameter 的引用。如果未配置相关事件，**Dem** 无法确保 **DTR** 与事件之间的一致性。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemEventParameter 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+无包含的容器。
+
+##### 9.1.3.6. DemPidClass
+
+| SWS 条目 | [ECUC_Dem_00729] |
+|---|---|
+| 容器名称 | DemPidClass |
+| 父容器 | DemConfigSet |
+| 描述 | 此容器包含单个全局 **OBD** 相关冻结帧类的不同 **PID**。它由一个或多个数据元素组装而成。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00705] |
+|---|---|
+| 参数名称 | DemPidIdentifier |
+| 父容器 | DemPidClass |
+| 描述 | **PID** 的标识符。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemPidDataElement | 1..255 | 此容器包含特定 **PID** 中所包含的不同数据元素。 |
+
+##### 9.1.3.7. DemPidDataElement
+
+| SWS 条目 | [ECUC_Dem_00896] |
+|---|---|
+| 容器名称 | DemPidDataElement |
+| 父容器 | DemPidClass |
+| 描述 | 此容器包含特定 **PID** 中所包含的不同数据元素。 |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00733] |
+|---|---|
+| 参数名称 | DemPidDataElementClassRef |
+| 父容器 | DemPidDataElement |
+| 描述 | 此引用包含到数据元素类的链接。 |
+| 多重性 | 1 |
+| 类型 | 对 DemDataElementClass 的引用 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+#### 9.1.4. J1939
+
+##### 9.1.4.1. DemGeneralJ1939
+
+| SWS 条目 | [ECUC_Dem_00864] |
+|---|---|
+| 容器名称 | DemGeneralJ1939 |
+| 父容器 | DemGeneral |
+| 描述 | 此容器包含 **Dem** 模块 **J1939** 特定的通用配置（参数）。如果该容器存在，则启用 **J1939** 支持。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00872] |
+|---|---|
+| 参数名称 | DemJ1939ClearDtcSupport |
+| 父容器 | DemGeneralJ1939 |
+| 描述 | 此配置开关定义是否支持清除 **J1939 DTC**（DM03 和 DM11）。此开关打开和关闭 **API** Dem_J1939DcmClearDTC。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00868] |
+|---|---|
+| 参数名称 | DemJ1939Dm31Support |
+| 父容器 | DemGeneralJ1939 |
+| 描述 | 此配置开关定义是否支持 **J1939** DM31。此开关打开和关闭 **API** Dem_J1939DcmFirstDTCwithLampStatus 和 Dem_J1939DcmGetNextDTCwithLampStatus。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00873] |
+|---|---|
+| 参数名称 | DemJ1939ExpandedFreezeFrameSupport |
+| 父容器 | DemGeneralJ1939 |
+| 描述 | 此配置开关定义是否支持 **J1939** 扩展冻结帧。此开关打开和关闭 **API** Dem_J1939DcmSetFreezeFrameFilter、Dem_J1939DcmGetNextFreezeFrame 和 Dem_J1939DcmGetNextSPNInFreezeFrame。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00866] |
+|---|---|
+| 参数名称 | DemJ1939FreezeFrameSupport |
+| 父容器 | DemGeneralJ1939 |
+| 描述 | 此配置开关定义是否支持 **J1939** 冻结帧。此开关打开和关闭 **API** Dem_J1939DcmSetFreezeFrameFilter 和 Dem_J1939DcmGetNextFreezeFrame。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00867] |
+|---|---|
+| 参数名称 | DemJ1939RatioSupport |
+| 父容器 | DemGeneralJ1939 |
+| 描述 | 此配置开关定义是否支持 **J1939** 性能比。此开关打开和关闭 **API** Dem_J1939DcmSetRatioFilter 和 Dem_J1939DcmGetNextFilteredRatio。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00869] |
+|---|---|
+| 参数名称 | DemJ1939Readiness1Support |
+| 父容器 | DemGeneralJ1939 |
+| 描述 | 此配置开关定义是否支持 **J1939** 诊断就绪 1。此开关打开和关闭 **API** Dem_J1939DcmReadDiagnosticReadiness1。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00870] |
+|---|---|
+| 参数名称 | DemJ1939Readiness2Support |
+| 父容器 | DemGeneralJ1939 |
+| 描述 | 此配置开关定义是否支持 **J1939** 诊断就绪 2。此开关打开和关闭 **API** Dem_J1939DcmReadDiagnosticReadiness2。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00871] |
+|---|---|
+| 参数名称 | DemJ1939Readiness3Support |
+| 父容器 | DemGeneralJ1939 |
+| 描述 | 此配置开关定义是否支持 **J1939** 诊断就绪 3。此开关打开和关闭 **API** Dem_J1939DcmReadDiagnosticReadiness3。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00865] |
+|---|---|
+| 参数名称 | DemJ1939ReadingDtcSupport |
+| 父容器 | DemGeneralJ1939 |
+| 描述 | 此配置开关定义是否支持 **J1939 DTC** 读取。此开关打开和关闭 **API** Dem_J1939DcmSetDTCFilter、Dem_J1939DcmGetNumberOfFilteredDTC 和 Dem_J1939DcmGetNextFilteredDTC。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemCallbackJ1939DTCStatusChanged | 0..* | 此容器的存在表示 **Dem** 可以访问 "DTCStatusChanged" 回调，**Dem** 将调用它来通知其他组件 **DTC** 状态的变化。如果存在 DemCallbackDTCStatusChangedFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackDTCStatusChangedFnc，**Dem** 将有一个 R 端口，需要接口 CallbackDTCStatusChanged，其名称通过唯一的回调前缀后跟事件名称生成。仅支持主内存中 **DTC** 的状态变化通知。 |
+| DemJ1939FreezeFrameClass | 0..255 | 此容器包含 **J1939** 相关冻结帧的 **SPN** 组合。 |
+| DemSPNClass | 0..* | 此容器包含一个 **SPN** 的配置（参数）。 |
+
+##### 9.1.4.2. DemJ1939FreezeFrameClass
+
+| SWS 条目 | [ECUC_Dem_00828] |
+|---|---|
+| 容器名称 | DemJ1939FreezeFrameClass |
+| 父容器 | DemGeneralJ1939 |
+| 描述 | 此容器包含 **J1939** 相关冻结帧的 **SPN** 组合。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00829] |
+|---|---|
+| 参数名称 | DemSPNClassRef |
+| 父容器 | DemJ1939FreezeFrameClass |
+| 描述 | 对一个 **SPN** 的引用。此引用定义 requiresIndex = true，因为它表示一个有序的引用列表，其中顺序描述了 **J1939** 冻结帧中单个 **SPN** 的顺序。属性：requiresIndex=true |
+| 多重性 | 1..255 |
+| 类型 | 对 DemSPNClass 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+##### 9.1.4.3. DemSPNClass
+
+| SWS 条目 | [ECUC_Dem_00830] |
+|---|---|
+| 容器名称 | DemSPNClass |
+| 父容器 | DemGeneralJ1939 |
+| 描述 | 此容器包含一个 **SPN** 的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00831] |
+|---|---|
+| 参数名称 | DemSPNId |
+| 父容器 | DemSPNClass |
+| 描述 | 可疑参数编号。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 524287 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00832] |
+|---|---|
+| 参数名称 | DemSPNDataElementClassRef |
+| 父容器 | DemSPNClass |
+| 描述 | 此引用包含到数据元素类的链接。 |
+| 多重性 | 1 |
+| 类型 | 对 DemDataElementClass 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+#### 9.1.5. Conditions
+
+##### 9.1.5.1. DemEnableCondition
+
+| SWS 条目 | [ECUC_Dem_00653] |
+|---|---|
+| 容器名称 | DemEnableCondition |
+| 父容器 | DemGeneral |
+| 描述 | 此容器包含使能条件的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00654] |
+|---|---|
+| 参数名称 | DemEnableConditionId |
+| 父容器 | DemEnableCondition |
+| 描述 | 定义一个唯一的使能条件 Id。此参数不应允许用户修改，因为 Id 应由 **Dem** 自行生成，以防止出现间隙和 Id 的重复使用。使能条件应从 0 开始按顺序编号，中间不应有间隙。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名称） |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00656] |
+|---|---|
+| 参数名称 | DemEnableConditionStatus |
+| 父容器 | DemEnableCondition |
+| 描述 | 定义启用或停用诊断事件报告接受情况的初始状态。该值是上电后的初始化值（在此条件第一次被报告之前）。true：启用诊断事件的接受。false：停用诊断事件的接受。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+##### 9.1.5.2. DemEnableConditionGroup
+
+| SWS 条目 | [ECUC_Dem_00745] |
+|---|---|
+| 容器名称 | DemEnableConditionGroup |
+| 父容器 | DemGeneral |
+| 描述 | 此容器包含使能条件组的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00655] |
+|---|---|
+| 参数名称 | DemEnableConditionRef |
+| 父容器 | DemEnableConditionGroup |
+| 描述 | 引用一个使能条件。 |
+| 多重性 | 1..255 |
+| 类型 | 对 DemEnableCondition 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+##### 9.1.5.3. DemStorageCondition
+
+| SWS 条目 | [ECUC_Dem_00728] |
+|---|---|
+| 容器名称 | DemStorageCondition |
+| 父容器 | DemGeneral |
+| 描述 | 此容器包含存储条件的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00730] |
+|---|---|
+| 参数名称 | DemStorageConditionId |
+| 父容器 | DemStorageCondition |
+| 描述 | 定义一个唯一的存储条件 Id。此参数不应允许用户修改，因为 Id 应由 **Dem** 自行生成，以防止出现间隙和 Id 的重复使用。存储条件应从 0 开始按顺序编号，中间不应有间隙。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名称） |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00731] |
+|---|---|
+| 参数名称 | DemStorageConditionStatus |
+| 父容器 | DemStorageCondition |
+| 描述 | 定义启用或停用诊断事件存储的初始状态。该值是上电后的初始化值（在此条件第一次被报告之前）。true：启用诊断事件的存储。false：停用诊断事件的存储。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00893] |
+|---|---|
+| 参数名称 | DemStorageConditionReplacementEventRef |
+| 父容器 | DemStorageCondition |
+| 描述 | 指定对一个事件的引用，该事件被存储到事件内存中并支持故障分析。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemEventParameter 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+##### 9.1.5.4. DemStorageConditionGroup
+
+| SWS 条目 | [ECUC_Dem_00773] |
+|---|---|
+| 容器名称 | DemStorageConditionGroup |
+| 父容器 | DemGeneral |
+| 描述 | 此容器包含存储条件组的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00768] |
+|---|---|
+| 参数名称 | DemStorageConditionRef |
+| 父容器 | DemStorageConditionGroup |
+| 描述 | 引用一个使能条件。 |
+| 多重性 | 1..255 |
+| 类型 | 对 DemStorageCondition 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+#### 9.1.6. 事件内存
+
+##### 9.1.6.1. DemEventMemorySet
+
+| SWS 条目 | [ECUC_Dem_00939] |
+|---|---|
+| 容器名称 | DemEventMemorySet |
+| 父容器 | DemGeneral |
+| 描述 | 此容器是所引用事件内存及相关信息的集合，用于一个 **Dem** 客户端。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00689] |
+|---|---|
+| 参数名称 | DemMaxNumberEventEntryPermanent |
+| 父容器 | DemEventMemorySet |
+| 描述 | 可存储在永久内存中的最大事件数量。事件向此内存类型的分配是动态的，仅用于排放相关事件。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00720] |
+|---|---|
+| 参数名称 | DemTypeOfDTCSupported |
+| 父容器 | DemEventMemorySet |
+| 描述 | 此参数定义 Dem_GetTranslationType 返回的格式，不涉及/不影响所支持的 **Dem** 功能。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_DTC_TRANSLATION_ISO11992_4`：ISO11992-4 DTC 格式 |
+| 取值 | `DEM_DTC_TRANSLATION_ISO14229_1`：ISO14229-1 DTC 格式（3 字节格式） |
+| 取值 | `DEM_DTC_TRANSLATION_ISO15031_6`：ISO15031-6 DTC 格式 = SAE_J2012-DA_DTCFormat_00（2 字节格式） |
+| 取值 | `DEM_DTC_TRANSLATION_SAEJ1939_73`：SAEJ1939-73 DTC 格式 |
+| 取值 | `DEM_DTC_TRANSLATION_SAE_J2012_DA_DTCFORMAT_04`：SAE_J2012-DA_DTCFormat_00（3 字节格式） |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00821] |
+|---|---|
+| 参数名称 | DemAmberWarningLampIndicatorRef |
+| 父容器 | DemEventMemorySet |
+| 描述 | 此参数定义表示琥珀色警告灯的指示器。支持 **J1939** 的 **ECU** 可以使用此参数。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemIndicator 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00723] |
+|---|---|
+| 参数名称 | DemMILIndicatorRef |
+| 父容器 | DemEventMemorySet |
+| 描述 | 此参数定义表示 **MIL** 的指示器。对于支持 **OBD** 的 **ECU**（参见 DemOBDSupport），此参数是必需的。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemIndicator 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00822] |
+|---|---|
+| 参数名称 | DemProtectLampIndicatorRef |
+| 父容器 | DemEventMemorySet |
+| 描述 | 此参数定义表示保护灯的指示器。支持 **J1939** 的 **ECU** 可以使用此参数。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemIndicator 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00820] |
+|---|---|
+| 参数名称 | DemRedStopLampIndicatorRef |
+| 父容器 | DemEventMemorySet |
+| 描述 | 此参数定义表示红色停车灯的指示器。支持 **J1939** 的 **ECU** 可以使用此参数。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemIndicator 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemClearDTCNotification | 0..255 | 包含在清除 **DTC** 操作期间调用的回调函数定义。 |
+| DemIndicator | 0..255 | 此容器包含指示器的配置（参数）。 |
+| DemPrimaryMemory | 1 | 此容器包含 **Dem** 模块主事件内存特定的参数。 |
+| DemUserDefinedMemory | 0..30 | 此容器包含 **Dem** 模块用户自定义事件内存特定的参数。 |
+
+##### 9.1.6.2. DemPrimaryMemory
+
+| SWS 条目 | [ECUC_Dem_00901] |
+|---|---|
+| 容器名称 | DemPrimaryMemory |
+| 父容器 | DemEventMemorySet |
+| 描述 | 此容器包含 **Dem** 模块主事件内存特定的参数。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00978] |
+|---|---|
+| 参数名称 | DemDtcStatusAvailabilityMask |
+| 父容器 | DemPrimaryMemory |
+| 描述 | **Dem** 支持的 **DTC** 状态位的掩码。此掩码用于 **UDS** 服务 0x19 的肯定响应中。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00980] |
+|---|---|
+| 参数名称 | DemEventDisplacementStrategy |
+| 父容器 | DemPrimaryMemory |
+| 描述 | 此配置开关定义是否启用事件置换支持，以及遵循哪种置换策略。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_DISPLACEMENT_FULL`：启用事件内存条目置换，考虑优先级、主动/被动状态和发生情况。 |
+| 取值 | `DEM_DISPLACEMENT_NONE`：禁用事件内存条目置换。 |
+| 取值 | `DEM_DISPLACEMENT_PRIO_OCC`：启用事件内存条目置换，考虑优先级和发生情况（但不考虑主动/被动状态）。 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00982] |
+|---|---|
+| 参数名称 | DemEventMemoryEntryStorageTrigger |
+| 父容器 | DemPrimaryMemory |
+| 描述 | 配置分配事件内存条目的主触发器。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_TRIGGER_ON_CONFIRMED`：如果 **UDS** 状态位 3（confirmedDTC）从 0 变为 1，则触发事件内存条目。 |
+| 取值 | `DEM_TRIGGER_ON_FDC_THRESHOLD`：当达到 **FDC** 阈值时触发事件内存条目。 |
+| 取值 | `DEM_TRIGGER_ON_TEST_FAILED`：如果 **UDS** 状态位 0（testFailed）从 0 变为 1，则触发事件内存条目。 |
+| 默认值 | `DEM_TRIGGER_ON_TEST_FAILED` |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00690] |
+|---|---|
+| 参数名称 | DemMaxNumberEventEntryPrimary |
+| 父容器 | DemPrimaryMemory |
+| 描述 | 可存储在主内存中的最大事件数量。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00984] |
+|---|---|
+| 参数名称 | DemOccurrenceCounterProcessing |
+| 父容器 | DemPrimaryMemory |
+| 描述 | 此配置开关定义发生计数器对故障确认过程的考虑。对于 **OBD** 和混合系统（OBD/非 OBD，参见 DemOBDSupport），此配置开关应始终设置为 `DEM_PROCESS_OCCCTR_TF`。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_PROCESS_OCCCTR_CDTC`：如果故障确认成功（ConfirmedDTC 位置位），发生计数器由 TestFailed 位触发 |
+| 取值 | `DEM_PROCESS_OCCCTR_TF`：发生计数器仅由 TestFailed 位触发（不考虑故障确认）。**J1939** 情况下此参数是必需的。 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00986] |
+|---|---|
+| 参数名称 | DemTypeOfFreezeFrameRecordNumeration |
+| 父容器 | DemPrimaryMemory |
+| 描述 | 此参数定义为事件特定冻结帧记录分配冻结帧记录号的类型。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_FF_RECNUM_CALCULATED`：冻结帧记录按其时间顺序从 1 开始连续编号 |
+| 取值 | `DEM_FF_RECNUM_CONFIGURED`：冻结帧记录基于给定配置按其时间顺序编号 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemGroupOfDTC | 0..65535 | 此容器包含 **DTC** 组的配置（参数）。 |
+
+##### 9.1.6.3. DemUserDefinedMemory
+
+| SWS 条目 | [ECUC_Dem_00910] |
+|---|---|
+| 容器名称 | DemUserDefinedMemory |
+| 父容器 | DemEventMemorySet |
+| 描述 | 此容器包含 **Dem** 模块用户自定义事件内存特定的参数。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00978] |
+|---|---|
+| 参数名称 | DemDtcStatusAvailabilityMask |
+| 父容器 | DemUserDefinedMemory |
+| 描述 | **Dem** 支持的 **DTC** 状态位的掩码。此掩码用于 **UDS** 服务 0x19 的肯定响应中。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00980] |
+|---|---|
+| 参数名称 | DemEventDisplacementStrategy |
+| 父容器 | DemUserDefinedMemory |
+| 描述 | 此配置开关定义是否启用事件置换支持，以及遵循哪种置换策略。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_DISPLACEMENT_FULL`：启用事件内存条目置换，考虑优先级、主动/被动状态和发生情况。 |
+| 取值 | `DEM_DISPLACEMENT_NONE`：禁用事件内存条目置换。 |
+| 取值 | `DEM_DISPLACEMENT_PRIO_OCC`：启用事件内存条目置换，考虑优先级和发生情况（但不考虑主动/被动状态）。 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00982] |
+|---|---|
+| 参数名称 | DemEventMemoryEntryStorageTrigger |
+| 父容器 | DemUserDefinedMemory |
+| 描述 | 配置分配事件内存条目的主触发器。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_TRIGGER_ON_CONFIRMED`：如果 **UDS** 状态位 3（confirmedDTC）从 0 变为 1，则触发事件内存条目。 |
+| 取值 | `DEM_TRIGGER_ON_FDC_THRESHOLD`：当达到 **FDC** 阈值时触发事件内存条目。 |
+| 取值 | `DEM_TRIGGER_ON_TEST_FAILED`：如果 **UDS** 状态位 0（testFailed）从 0 变为 1，则触发事件内存条目。 |
+| 默认值 | `DEM_TRIGGER_ON_TEST_FAILED` |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00691] |
+|---|---|
+| 参数名称 | DemMaxNumberEventEntryUserDefined |
+| 父容器 | DemUserDefinedMemory |
+| 描述 | 可存储在用户自定义内存中的最大事件数量。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00984] |
+|---|---|
+| 参数名称 | DemOccurrenceCounterProcessing |
+| 父容器 | DemUserDefinedMemory |
+| 描述 | 此配置开关定义发生计数器对故障确认过程的考虑。对于 **OBD** 和混合系统（OBD/非 OBD，参见 DemOBDSupport），此配置开关应始终设置为 `DEM_PROCESS_OCCCTR_TF`。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_PROCESS_OCCCTR_CDTC`：如果故障确认成功（ConfirmedDTC 位置位），发生计数器由 TestFailed 位触发 |
+| 取值 | `DEM_PROCESS_OCCCTR_TF`：发生计数器仅由 TestFailed 位触发（不考虑故障确认）。**J1939** 情况下此参数是必需的。 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00986] |
+|---|---|
+| 参数名称 | DemTypeOfFreezeFrameRecordNumeration |
+| 父容器 | DemUserDefinedMemory |
+| 描述 | 此参数定义为事件特定冻结帧记录分配冻结帧记录号的类型。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_FF_RECNUM_CALCULATED`：冻结帧记录按其时间顺序从 1 开始连续编号 |
+| 取值 | `DEM_FF_RECNUM_CONFIGURED`：冻结帧记录基于给定配置按其时间顺序编号 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00903] |
+|---|---|
+| 参数名称 | DemUserDefinedMemoryIdentifier |
+| 父容器 | DemUserDefinedMemory |
+| 描述 | 外部测试仪用于标识用户自定义事件内存的标识符。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名称） |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemGroupOfDTC | 0..65535 | 此容器包含 **DTC** 组的配置（参数）。 |
+
+#### 9.1.7. 去抖动
+
+##### 9.1.7.1. DemDebounceAlgorithmClass
+
+| SWS 条目 | [ECUC_Dem_00604] |
+|---|---|
+| 选择容器名称 | DemDebounceAlgorithmClass |
+| 父容器 | DemEventParameter |
+| 描述 | 去抖动算法类：基于计数器、基于时间或监视器内部。 |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemDebounceCounterBased | 0..1 | 此容器包含基于计数器去抖动的配置（参数）。 |
+| DemDebounceMonitorInternal | 0..1 | 此容器包含监视器内部去抖动的配置（参数）。 |
+| DemDebounceTimeBased | 0..1 | 此容器包含基于时间去抖动的配置（参数）。 |
+
+##### 9.1.7.2. DemDebounceCounterBased
+
+| SWS 条目 | [ECUC_Dem_00711] |
+|---|---|
+| 容器名称 | DemDebounceCounterBased |
+| 父容器 | DemDebounceAlgorithmClass |
+| 描述 | 此容器包含基于计数器去抖动的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00883] |
+|---|---|
+| 参数名称 | DemDebounceCounterBasedClassRef |
+| 父容器 | DemDebounceCounterBased |
+| 描述 | 此引用选择应用于 DemEventParameter 去抖动的 DemDebounceCounterBasedClass。 |
+| 多重性 | 1 |
+| 类型 | 对 DemDebounceCounterBasedClass 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+##### 9.1.7.3. DemDebounceCounterBasedClass
+
+| SWS 条目 | [ECUC_Dem_00881] |
+|---|---|
+| 容器名称 | DemDebounceCounterBasedClass |
+| 父容器 | DemConfigSet |
+| 描述 | 此容器包含基于计数器去抖动类的配置。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00914] |
+|---|---|
+| 参数名称 | DemCounterBasedFdcThresholdStorageValue |
+| 父容器 | DemDebounceCounterBasedClass |
+| 描述 | 分配事件内存条目并捕获冻结帧的阈值。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 32767 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00786] |
+|---|---|
+| 参数名称 | DemDebounceBehavior |
+| 父容器 | DemDebounceCounterBasedClass |
+| 描述 | 此参数定义当相关的使能条件未满足或相关事件的 ControlDTCSetting 被禁用时，事件去抖动算法的行为方式。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_DEBOUNCE_FREEZE`：在相关的使能条件未满足或相关事件的 ControlDTCSetting 被禁用期间，事件去抖动计数器以当前值冻结且不变化。在所有相关的使能条件均满足且相关事件的 ControlDTCSetting 重新启用之后，事件鉴定将随着该事件的下一次报告（即 SetEventStatus）继续。 |
+| 取值 | `DEM_DEBOUNCE_RESET`：在相关的使能条件未满足或相关事件的 ControlDTCSetting 被禁用时，事件去抖动计数器被复位到初始值。事件的鉴定将随着下一个有效事件报告重新开始。 |
+| 默认值 | `DEM_DEBOUNCE_RESET` |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00635] |
+|---|---|
+| 参数名称 | DemDebounceCounterDecrementStepSize |
+| 父容器 | DemDebounceCounterBasedClass |
+| 描述 | 定义内部去抖动计数器递减（PREPASSED）的步长。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 32768 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00618] |
+|---|---|
+| 参数名称 | DemDebounceCounterFailedThreshold |
+| 父容器 | DemDebounceCounterBasedClass |
+| 描述 | 定义指示失败状态的内部去抖动计数器的值。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 32767 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00637] |
+|---|---|
+| 参数名称 | DemDebounceCounterIncrementStepSize |
+| 父容器 | DemDebounceCounterBasedClass |
+| 描述 | 定义内部去抖动计数器递增（PREFAILED）的步长。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 32767 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00685] |
+|---|---|
+| 参数名称 | DemDebounceCounterJumpDown |
+| 父容器 | DemDebounceCounterBasedClass |
+| 描述 | 激活跳降（Jump-Down）的开关。true：激活跳降。false：停用跳降。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00638] |
+|---|---|
+| 参数名称 | DemDebounceCounterJumpDownValue |
+| 父容器 | DemDebounceCounterBasedClass |
+| 描述 | 内部去抖动计数器的跳降值，当发生相应的跳降时，它被用作计数器的初始化值。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | -32768 .. 32767 |
+| 默认值 | 0 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00686] |
+|---|---|
+| 参数名称 | DemDebounceCounterJumpUp |
+| 父容器 | DemDebounceCounterBasedClass |
+| 描述 | 激活跳升（Jump-Up）的开关。true：激活跳升。false：停用跳升。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00639] |
+|---|---|
+| 参数名称 | DemDebounceCounterJumpUpValue |
+| 父容器 | DemDebounceCounterBasedClass |
+| 描述 | 内部去抖动计数器的跳升值，当发生相应的跳升时，它被用作计数器的初始化值。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | -32768 .. 32767 |
+| 默认值 | 0 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00636] |
+|---|---|
+| 参数名称 | DemDebounceCounterPassedThreshold |
+| 父容器 | DemDebounceCounterBasedClass |
+| 描述 | 定义指示通过状态的内部去抖动计数器的值。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | -32768 .. -1 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00791] |
+|---|---|
+| 参数名称 | DemDebounceCounterStorage |
+| 父容器 | DemDebounceCounterBasedClass |
+| 描述 | 是否非易失性存储去抖动计数器值的开关。true：去抖动计数器值应非易失性存储。false：去抖动计数器值是易失性的。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+##### 9.1.7.4. DemDebounceTimeBased
+
+| SWS 条目 | [ECUC_Dem_00713] |
+|---|---|
+| 容器名称 | DemDebounceTimeBased |
+| 父容器 | DemDebounceAlgorithmClass |
+| 描述 | 此容器包含基于时间去抖动的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00891] |
+|---|---|
+| 参数名称 | DemDebounceTimeBasedClassRef |
+| 父容器 | DemDebounceTimeBased |
+| 描述 | 此引用选择应用于 DemEventParameter 去抖动的 DemDebounceTimeBasedClass。 |
+| 多重性 | 1 |
+| 类型 | 对 DemDebounceTimeBasedClass 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+##### 9.1.7.5. DemDebounceTimeBasedClass
+
+| SWS 条目 | [ECUC_Dem_00882] |
+|---|---|
+| 容器名称 | DemDebounceTimeBasedClass |
+| 父容器 | DemConfigSet |
+| 描述 | 此容器包含基于时间去抖动类的配置。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00789] |
+|---|---|
+| 参数名称 | DemDebounceBehavior |
+| 父容器 | DemDebounceTimeBasedClass |
+| 描述 | 此参数定义当相关的使能条件未满足或相关事件的 ControlDTCSetting 被禁用时，事件去抖动算法的行为方式。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_DEBOUNCE_FREEZE`：在相关的使能条件未满足或相关事件的 ControlDTCSetting 被禁用期间，事件去抖动计时器以当前值冻结且不变化。在所有相关的使能条件均满足且相关事件的 ControlDTCSetting 重新启用之后，事件鉴定将随着该事件的下一次报告（即 SetEventStatus）继续。 |
+| 取值 | `DEM_DEBOUNCE_RESET`：在相关的使能条件未满足或相关事件的 ControlDTCSetting 被禁用时，事件去抖动计时器被复位到初始值。事件的鉴定将随着下一个有效事件报告重新开始。 |
+| 默认值 | `DEM_DEBOUNCE_RESET` |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00716] |
+|---|---|
+| 参数名称 | DemDebounceTimeFailedThreshold |
+| 父容器 | DemDebounceTimeBasedClass |
+| 描述 | 定义"事件失败"鉴定（Event Failed）的超时持续时间。AUTOSAR 配置标准是使用 SI 单位，因此此参数定义为以秒为单位的浮点值。**Dem** 配置工具必须将该浮点值转换为适当的值格式以用于 **Dem** 的软件实现。 |
+| 多重性 | 1 |
+| 类型 | EcucFloatParamDef |
+| 取值范围 | [0.001 .. 3600] |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00717] |
+|---|---|
+| 参数名称 | DemDebounceTimePassedThreshold |
+| 父容器 | DemDebounceTimeBasedClass |
+| 描述 | 定义"事件通过"鉴定（Event Passed）的超时持续时间。AUTOSAR 配置标准是使用 SI 单位，因此此参数定义为以秒为单位的浮点值。**Dem** 配置工具必须将该浮点值转换为适当的值格式以用于 **Dem** 的软件实现。 |
+| 多重性 | 1 |
+| 类型 | EcucFloatParamDef |
+| 取值范围 | [0.001 .. 3600] |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00915] |
+|---|---|
+| 参数名称 | DemTimeBasedFdcThresholdStorageValue |
+| 父容器 | DemDebounceTimeBasedClass |
+| 描述 | 分配事件内存条目并捕获冻结帧的阈值。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFloatParamDef |
+| 取值范围 | [0.001 .. 3600] |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+##### 9.1.7.6. DemDebounceMonitorInternal
+
+| SWS 条目 | [ECUC_Dem_00712] |
+|---|---|
+| 容器名称 | DemDebounceMonitorInternal |
+| 父容器 | DemDebounceAlgorithmClass |
+| 描述 | 此容器包含监视器内部去抖动的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemCallbackGetFDC | 0..1 | DemCallbackGetFDC 指定用于获取故障检测计数器值的回调（存在参数 DemCallbackGetFDCFnc）或 R 端口（不存在参数 DemCallbackGetFDCFnc）。如果未配置容器，则没有可用的故障检测计数器。 |
+
+#### 9.1.8. 回调
+
+##### 9.1.8.1. DemCallbackClearEventAllowed
+
+| SWS 条目 | [ECUC_Dem_00607] |
+|---|---|
+| 容器名称 | DemCallbackClearEventAllowed |
+| 父容器 | DemEventParameter |
+| 描述 | 此容器的存在表示 **Dem** 可以访问 "ClearEventAllowed" 回调。如果存在 DemCallbackClearEventAllowedFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackClearEventAllowedFnc，**Dem** 将有一个 R 端口，需要接口 CallbackClearEventAllowed，其名称通过唯一的回调前缀后跟事件名称生成。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00609] |
+|---|---|
+| 参数名称 | DemCallbackClearEventAllowedFnc |
+| 父容器 | DemCallbackClearEventAllowed |
+| 描述 | 原型 "ClearEventAllowed" 的函数名称。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00788] |
+|---|---|
+| 参数名称 | DemClearEventAllowedBehavior |
+| 父容器 | DemCallbackClearEventAllowed |
+| 描述 | 定义根据 ClearEventAllowed 回调不允许清除的相关事件的最终 **UDS** 状态字节。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_NO_STATUS_BYTE_CHANGE`：**UDS** 状态字节保持不变。 |
+| 取值 | `DEM_ONLY_THIS_CYCLE_AND_READINESS`：**UDS** 状态字节的 &lt;...&gt;ThisOperationCycle 位和就绪位被复位。 |
+| 默认值 | `DEM_NO_STATUS_BYTE_CHANGE` |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+##### 9.1.8.2. DemCallbackDTCStatusChanged
+
+| SWS 条目 | [ECUC_Dem_00626] |
+|---|---|
+| 容器名称 | DemCallbackDTCStatusChanged |
+| 父容器 | DemClient |
+| 描述 | 此容器的存在表示 **Dem** 可以访问 "DTCStatusChanged" 回调，**Dem** 将调用它来通知其他组件 **DTC** 状态的变化。如果存在 DemCallbackDTCStatusChangedFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackDTCStatusChangedFnc，**Dem** 将有一个 R 端口，需要接口 CallbackDTCStatusChanged，其名称通过唯一的回调前缀后跟事件名称生成。仅支持主内存中 **DTC** 的状态变化通知。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00627] |
+|---|---|
+| 参数名称 | DemCallbackDTCStatusChangedFnc |
+| 父容器 | DemCallbackDTCStatusChanged |
+| 描述 | 原型 "DTCStatusChanged" 的函数名称。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+##### 9.1.8.3. DemCallbackJ1939DTCStatusChanged
+
+| SWS 条目 | [ECUC_Dem_00823] |
+|---|---|
+| 容器名称 | DemCallbackJ1939DTCStatusChanged |
+| 父容器 | DemGeneralJ1939 |
+| 描述 | 此容器的存在表示 **Dem** 可以访问 "DTCStatusChanged" 回调，**Dem** 将调用它来通知其他组件 **DTC** 状态的变化。如果存在 DemCallbackDTCStatusChangedFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackDTCStatusChangedFnc，**Dem** 将有一个 R 端口，需要接口 CallbackDTCStatusChanged，其名称通过唯一的回调前缀后跟事件名称生成。仅支持主内存中 **DTC** 的状态变化通知。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00824] |
+|---|---|
+| 参数名称 | DemCallbackDTCStatusChangedFnc |
+| 父容器 | DemCallbackJ1939DTCStatusChanged |
+| 描述 | 原型 "DTCStatusChanged" 的函数名称。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+##### 9.1.8.4. DemCallbackOBDDTCStatusChanged
+
+| SWS 条目 | [ECUC_Dem_00825] |
+|---|---|
+| 容器名称 | DemCallbackOBDDTCStatusChanged |
+| 父容器 | DemGeneralOBD |
+| 描述 | 此容器的存在表示 **Dem** 可以访问 "DTCStatusChanged" 回调，**Dem** 将调用它来通知其他组件 **DTC** 状态的变化。如果存在 DemCallbackDTCStatusChangedFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackDTCStatusChangedFnc，**Dem** 将有一个 R 端口，需要接口 CallbackDTCStatusChanged，其名称通过唯一的回调前缀后跟事件名称生成。仅支持主内存中 **DTC** 的状态变化通知。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00826] |
+|---|---|
+| 参数名称 | DemCallbackDTCStatusChangedFnc |
+| 父容器 | DemCallbackOBDDTCStatusChanged |
+| 描述 | 原型 "DTCStatusChanged" 的函数名称。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+##### 9.1.8.5. DemCallbackGetFDC
+
+| SWS 条目 | [ECUC_Dem_00630] |
+|---|---|
+| 容器名称 | DemCallbackGetFDC |
+| 父容器 | DemDebounceMonitorInternal |
+| 描述 | DemCallbackGetFDC 指定用于获取故障检测计数器值的回调（存在参数 DemCallbackGetFDCFnc）或 R 端口（不存在参数 DemCallbackGetFDCFnc）。如果未配置容器，则没有可用的故障检测计数器。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00631] |
+|---|---|
+| 参数名称 | DemCallbackGetFDCFnc |
+| 父容器 | DemCallbackGetFDC |
+| 描述 | 此参数定义 **Dem** 为从复杂驱动获取故障检测计数器值而调用的函数的名称。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+无包含的容器。
+
+##### 9.1.8.6. DemCallbackEventDataChanged
+
+| SWS 条目 | [ECUC_Dem_00606] |
+|---|---|
+| 容器名称 | DemCallbackEventDataChanged |
+| 父容器 | DemEventParameter |
+| 描述 | 此容器的存在表示 **Dem** 可以访问 "EventDataChanged" 回调。如果存在 DemCallbackEventDataChangedFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackEventDataChangedFnc，**Dem** 将有一个 R 端口，需要接口 CallbackEventDataChanged，其名称通过唯一的回调前缀后跟事件名称生成。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00608] |
+|---|---|
+| 参数名称 | DemCallbackEventDataChangedFnc |
+| 父容器 | DemCallbackEventDataChanged |
+| 描述 | 原型 "EventDataChanged" 的函数名称。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+##### 9.1.8.7. DemCallbackEventUdsStatusChanged
+
+| SWS 条目 | [ECUC_Dem_00628] |
+|---|---|
+| 容器名称 | DemCallbackEventUdsStatusChanged |
+| 父容器 | DemEventParameter |
+| 描述 | 此容器的存在表示 **Dem** 可以访问 "EventUdsStatusChanged" 回调，**Dem** 将调用它来通知其他组件事件状态的变化。如果存在 DemCallbackEventUdsStatusChangedFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackEventUdsStatusChangedFnc，**Dem** 将有一个 R 端口，需要接口 CallbackEventUdsStatusChanged，其名称通过唯一的回调前缀后跟事件名称生成。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00629] |
+|---|---|
+| 参数名称 | DemCallbackEventUdsStatusChangedFnc |
+| 父容器 | DemCallbackEventUdsStatusChanged |
+| 描述 | 原型 "Dem_CBEventUdsStatusChanged" 的函数名称。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+##### 9.1.8.8. DemCallbackMonitorStatusChanged
+
+| SWS 条目 | [ECUC_Dem_00936] |
+|---|---|
+| 容器名称 | DemCallbackMonitorStatusChanged |
+| 父容器 | DemEventParameter |
+| 描述 | 此容器的存在表示 **Dem** 可以访问 "MonitorStatusChanged" 回调，**Dem** 将调用它来通知其他组件事件状态的变化。如果存在 DemCallbackMonitorStatusChangedFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackMonitorStatusChangedFnc，**Dem** 将有一个 R 端口，需要接口 CallbackMonitorStatusChanged，其名称通过唯一的回调前缀后跟事件名称生成。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00937] |
+|---|---|
+| 参数名称 | DemCallbackMonitorStatusChangedFnc |
+| 父容器 | DemCallbackMonitorStatusChanged |
+| 描述 | 原型 "&lt;Module&gt;_DemTriggerOnMonitorStatus" 的函数名称。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+##### 9.1.8.9. DemCallbackInitMForE
+
+| SWS 条目 | [ECUC_Dem_00632] |
+|---|---|
+| 容器名称 | DemCallbackInitMForE |
+| 父容器 | DemEventParameter |
+| 描述 | 此容器的存在表示 **Dem** 可以访问 "InitMonitorForEvent" 回调，**Dem** 将调用它来初始化监视器。如果容器具有 DemCallbackInitMForEFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackInitMForEFnc，**Dem** 将有一个 R 端口，需要接口 CallbackInitMonitorForEvent，其名称通过唯一的回调前缀后跟事件名称生成。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00601] |
+|---|---|
+| 参数名称 | DemCallbackInitMForEFnc |
+| 父容器 | DemCallbackInitMForE |
+| 描述 | 原型 "InitMonitorForEvent" 的函数名称。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+##### 9.1.8.10. DemClearDTCNotification
+
+| SWS 条目 | [ECUC_Dem_00925] |
+|---|---|
+| 容器名称 | DemClearDTCNotification |
+| 父容器 | DemEventMemorySet |
+| 描述 | 包含在清除 **DTC** 操作期间调用的回调函数定义。 |
+| Post-Build 变体多重性 | false |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00926] |
+|---|---|
+| 参数名称 | DemClearDtcNotificationFnc |
+| 父容器 | DemClearDTCNotification |
+| 描述 | 在清除 **DTC** 操作时调用的通知回调函数名称（参见 &lt;Module&gt;_ClearDtcNotification）。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00927] |
+|---|---|
+| 参数名称 | DemClearDtcNotificationTime |
+| 父容器 | DemClearDTCNotification |
+| 描述 | 配置回调应在开始清除时调用，还是在完成清除 **DTC** 操作之后调用（参见 &lt;Module&gt;_ClearDtcNotification）。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `FINISH`：- |
+| 取值 | `START`：- |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+#### 9.1.9. 事件相关数据
+
+##### 9.1.9.1. DemFreezeFrameClass
+
+| SWS 条目 | [ECUC_Dem_00673] |
+|---|---|
+| 容器名称 | DemFreezeFrameClass |
+| 父容器 | DemGeneral |
+| 描述 | 此容器包含 **UDS** 以及经 **UDS** 的排放相关诊断的冻结帧的 **DID** 组合。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00707] |
+|---|---|
+| 参数名称 | DemDidClassRef |
+| 父容器 | DemFreezeFrameClass |
+| 描述 | 对应包含在冻结帧中的 **DID** 元素的引用。属性：requiresIndex=true |
+| 多重性 | 1..255 |
+| 类型 | 对 DemDidClass 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+##### 9.1.9.2. DemFreezeFrameRecordClass
+
+| SWS 条目 | [ECUC_Dem_00801] |
+|---|---|
+| 容器名称 | DemFreezeFrameRecordClass |
+| 父容器 | DemGeneral |
+| 描述 | 此容器包含专用、不同的冻结帧记录号的列表。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00777] |
+|---|---|
+| 参数名称 | DemFreezeFrameRecordNumber |
+| 父容器 | DemFreezeFrameRecordClass |
+| 描述 | 此参数定义一个冻结帧的快照记录号。此记录号在每个冻结帧记录号类中唯一。该编号需要在一个故障内存内唯一。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 254 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00803] |
+|---|---|
+| 参数名称 | DemFreezeFrameRecordTrigger |
+| 父容器 | DemFreezeFrameRecordClass |
+| 描述 | 定义存储 FreezeFrameRecord 的触发器。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_TRIGGER_ON_CONFIRMED`：如果 **UDS** 状态位 3（confirmedDTC）从 0 变为 1，则触发事件内存条目。 |
+| 取值 | `DEM_TRIGGER_ON_EVERY_TEST_FAILED`：每次事件被报告为 FAILED 或 PRE_FAILED 导致失败时，都触发事件内存条目。 |
+| 取值 | `DEM_TRIGGER_ON_FDC_THRESHOLD`：当达到 **FDC** 阈值时触发事件内存条目。 |
+| 取值 | `DEM_TRIGGER_ON_PENDING`：如果 **UDS** 状态位 2（pendingDTC）从 0 变为 1，则触发事件内存条目。 |
+| 取值 | `DEM_TRIGGER_ON_TEST_FAILED`：如果 **UDS** 状态位 0（testFailed）从 0 变为 1，则触发事件内存条目。 |
+| 取值 | `DEM_TRIGGER_ON_TEST_FAILED_THIS_OPERATION_CYCLE`：如果 **UDS** 状态位 1（testFailedThisOperationCycle）从 0 变为 1，则触发事件内存条目。 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00802] |
+|---|---|
+| 参数名称 | DemFreezeFrameRecordUpdate |
+| 父容器 | DemFreezeFrameRecordClass |
+| 描述 | 此参数定义存储/更新冻结帧记录的情形。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_UPDATE_RECORD_NO`：此记录仅对新的事件内存条目捕获。 |
+| 取值 | `DEM_UPDATE_RECORD_YES`：每次都捕获此记录。 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+##### 9.1.9.3. DemFreezeFrameRecNumClass
+
+| SWS 条目 | [ECUC_Dem_00775] |
+|---|---|
+| 容器名称 | DemFreezeFrameRecNumClass |
+| 父容器 | DemGeneral |
+| 描述 | 此容器包含分配给一个事件的专用、不同的冻结帧记录号列表。该列表中记录号的顺序与相应冻结帧记录的时间顺序对应。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00800] |
+|---|---|
+| 参数名称 | DemFreezeFrameRecordClassRef |
+| 父容器 | DemFreezeFrameRecNumClass |
+| 描述 | 此参数引用一个冻结帧记录的一个或多个记录号。属性：requiresIndex=true |
+| 多重性 | 1..254 |
+| 类型 | 对 DemFreezeFrameRecordClass 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+##### 9.1.9.4. DemExtendedDataClass
+
+| SWS 条目 | [ECUC_Dem_00664] |
+|---|---|
+| 容器名称 | DemExtendedDataClass |
+| 父容器 | DemGeneral |
+| 描述 | 此类包含一个扩展数据类的扩展数据记录组合。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00774] |
+|---|---|
+| 参数名称 | DemExtendedDataRecordClassRef |
+| 父容器 | DemExtendedDataClass |
+| 描述 | 此引用包含到扩展数据类记录的链接。属性：requiresIndex=true |
+| 多重性 | 1..253 |
+| 类型 | 对 DemExtendedDataRecordClass 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+无包含的容器。
+
+##### 9.1.9.5. DemExtendedDataRecordClass
+
+| SWS 条目 | [ECUC_Dem_00665] |
+|---|---|
+| 容器名称 | DemExtendedDataRecordClass |
+| 父容器 | DemGeneral |
+| 描述 | 此容器包含扩展数据记录类的配置（参数）。它由一个或多个数据元素组装而成。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00666] |
+|---|---|
+| 参数名称 | DemExtendedDataRecordNumber |
+| 父容器 | DemExtendedDataRecordClass |
+| 描述 | 此配置参数指定扩展数据记录的编号。该值在一个故障内存内唯一。一个或多个扩展数据记录可以分配给一个诊断事件/**DTC**。对于主故障内存，值 0x00 和 0xF0 到 0xFF 的范围或者被保留或者被预定义。对于用户自定义故障内存，仅值 0x00 被保留，0xFF 被预定义。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 254 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00804] |
+|---|---|
+| 参数名称 | DemExtendedDataRecordTrigger |
+| 父容器 | DemExtendedDataRecordClass |
+| 描述 | 定义存储 ExtendedDataRecord 的触发器。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_TRIGGER_ON_CONFIRMED`：当 **UDS** 状态 confirmed 位从 0 变为 1 时存储 ExtendedDataRecord。 |
+| 取值 | `DEM_TRIGGER_ON_FDC_THRESHOLD`：当 **FDC** 达到其阈值时存储 ExtendedDataRecord。 |
+| 取值 | `DEM_TRIGGER_ON_PASSED`：当事件被报告为通过时（testFailed 位从 1 跳变为 0）存储 ExtendedDataRecord。 |
+| 取值 | `DEM_TRIGGER_ON_PENDING`：当 **UDS** 状态 pending 位从 0 变为 1 时存储 ExtendedDataRecord。 |
+| 取值 | `DEM_TRIGGER_ON_TEST_FAILED`：当 **UDS** 状态 test failed 位从 0 变为 1 时存储 ExtendedDataRecord。 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00621] |
+|---|---|
+| 参数名称 | DemExtendedDataRecordUpdate |
+| 父容器 | DemExtendedDataRecordClass |
+| 描述 | 如果"DemandExtendedDataRecordTrigger"中配置的触发条件得到满足，则捕获此扩展数据记录。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_UPDATE_RECORD_NO`：此扩展数据记录仅对新的事件内存条目捕获。 |
+| 取值 | `DEM_UPDATE_RECORD_YES`：每次都捕获此扩展数据记录。 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00771] |
+|---|---|
+| 参数名称 | DemDataElementClassRef |
+| 父容器 | DemExtendedDataRecordClass |
+| 描述 | 此引用包含到数据元素类的链接。属性：requiresIndex=true |
+| 多重性 | 1..255 |
+| 类型 | 对 DemDataElementClass 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+#### 9.1.10. 数据元素
+
+##### 9.1.10.1. DemDataElementClass
+
+| SWS 条目 | [ECUC_Dem_00610] |
+|---|---|
+| 选择容器名称 | DemDataElementClass |
+| 父容器 | DemGeneral |
+| 描述 | 此容器包含内部/外部数据元素类的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemExternalCSDataElementClass | 0..1 | 此容器包含外部基于客户端/服务器的数据元素类的配置（参数）。它定义 **Dem** 如何从 **SW-C** 或另一个 **BSW** 模块获取数据元素的值。是使用客户端/服务器端口还是 C 函数调用，由 DemDataElementUsePort 定义。 |
+| DemExternalSRDataElementClass | 0..1 | 此容器包含外部基于发送者/接收者的数据元素类的配置（参数）。它定义 **Dem** 如何通过使用发送者/接收者端口从 **SW-C** 获取数据元素的值。 |
+| DemInternalDataElementClass | 0..1 | 此容器包含内部数据元素类的配置（参数）。 |
+
+##### 9.1.10.2. DemDataElementInstance
+
+| SWS 条目 | [ECUC_Dem_00875] |
+|---|---|
+| 容器名称 | DemDataElementInstance |
+| 父容器 | DemSRDataElementClass |
+| 描述 | 对端口中基本数据的实例引用，该数据元素以 ApplicationPrimitiveDataType 或 ImplementationDataType 类型化。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00861] |
+|---|---|
+| 参数名称 | DemDataElementInstanceRef |
+| 父容器 | DemDataElementInstance |
+| 描述 | 对应读取或写入的基本数据的实例引用。支持 SenderReceiverInterfaces 和 NvDataInterfaces 中的 VariableDataPrototypes 以及 ParameterInterfaces 中的 ParameterDataPrototypes（只读）。如果 AutosarDataPrototype 以类别 VALUE 或 BOOLEAN 的 ApplicationPrimitiveDataType 类型化，或者 AutosarDataPrototype 以最终归结为 VALUE 的类别 VALUE 或 TYPE_REFERENCE 的 ImplementationDataType 类型化，则此引用适用。 |
+| 多重性 | 1 |
+| 类型 | 对 AUTOSAR-DATA-PROTOTYPE 的实例引用（上下文：ROOT-SW-COMPOSITION-PROTOTYPE、SW-COMPONENT-PROTOTYPE、PORT-PROTOTYPE） |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+##### 9.1.10.3. DemDidClass
+
+| SWS 条目 | [ECUC_Dem_00706] |
+|---|---|
+| 容器名称 | DemDidClass |
+| 父容器 | DemGeneral |
+| 描述 | 此容器包含数据 Id 类的配置（参数）。它由一个或多个数据元素组装而成。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00650] |
+|---|---|
+| 参数名称 | DemDidIdentifier |
+| 父容器 | DemDidClass |
+| 描述 | 数据 ID 的标识符。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| SWS 条目 | [ECUC_Dem_00617] |
+|---|---|
+| 参数名称 | DemDidDataElementClassRef |
+| 父容器 | DemDidClass |
+| 描述 | 此引用包含到数据元素类的链接。属性：requiresIndex=true |
+| 多重性 | 1..255 |
+| 类型 | 对 DemDataElementClass 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+##### 9.1.10.4. DemInternalDataElementClass
+
+| SWS 条目 | [ECUC_Dem_00684] |
+|---|---|
+| 容器名称 | DemInternalDataElementClass |
+| 父容器 | DemDataElementClass |
+| 描述 | 此容器包含内部数据元素类的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00614] |
+|---|---|
+| 参数名称 | DemDataElementDataSize |
+| 父容器 | DemInternalDataElementClass |
+| 描述 | 定义数据元素的大小（以字节为单位）。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00616] |
+|---|---|
+| 参数名称 | DemInternalDataElement |
+| 父容器 | DemInternalDataElementClass |
+| 描述 | 此参数定义映射到该数据的 **Dem** 内部数据值。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_AGINGCTR_DOWNCNT`：映射递减的 **Dem** 内部老化计数器，最大范围：1 字节 |
+| 取值 | `DEM_AGINGCTR_UPCNT`：映射递增的 **Dem** 内部老化计数器，最大范围：1 字节 |
+| 取值 | `DEM_AGINGCTR_UPCNT_FIRST_ACTIVE`：映射递增的 **Dem** 内部老化计数器，最大范围：1 字节，老化开始时从 1 起 |
+| 取值 | `DEM_CLR_DIST`：自诊断故障码清除以来的距离（PID31） |
+| 取值 | `DEM_CLR_TIME`：自诊断故障码清除以来的时间（PID4E） |
+| 取值 | `DEM_CURRENT_FDC`：映射 **Dem** 内部故障检测计数器，最大范围：1 字节 |
+| 取值 | `DEM_CYCLES_SINCE_FIRST_FAILED`：映射 **Dem** 内部运行周期计数器——自首次失败以来的周期数，最大范围：1 字节 |
+| 取值 | `DEM_CYCLES_SINCE_LAST_FAILED`：映射 **Dem** 内部运行周期计数器——自上次失败以来的周期数，最大范围：1 字节 |
+| 取值 | `DEM_DTC_PRIORITY`：通过 DemDTCPriority 静态分配给此 **DTC** 的 **DTC** 优先级。长度为一个字节。 |
+| 取值 | `DEM_DTR`：以 SAE J1979-2 格式映射 **Dem** 内部 **DTR** 测试值 |
+| 取值 | `DEM_EVENT_ASSOCIATED_IDENTIFICATION`：表示通过 DemEventAssociatedIdentification 与事件关联的静态值。 |
+| 取值 | `DEM_FAILED_CYCLES`：映射 **Dem** 内部运行周期计数器——失败周期数，最大范围：1 字节 |
+| 取值 | `DEM_IUMPR`：以 SAE J1979-2 格式映射 **Dem** 内部 **IUMPR** 比率 |
+| 取值 | `DEM_J1939LAMP_STATUS`：此 **DTC** 的适用指示灯在 SAE J1939 DM31 格式中的当前状态。 |
+| 取值 | `DEM_MAX_FDC_DURING_CURRENT_CYCLE`：映射 **Dem** 内部 **DTC** 故障检测计数器在当前运行周期内的最大值，最大范围：1 字节 |
+| 取值 | `DEM_MAX_FDC_SINCE_LAST_CLEAR`：映射 **Dem** 内部 **DTC** 故障检测计数器自上次清除以来的最大值，最大范围：1 字节 |
+| 取值 | `DEM_MIL_DIST`：**MIL** 激活期间行驶的距离（PID21） |
+| 取值 | `DEM_MIL_TIME`：**MIL** 激活期间发动机运行的时间（PID4D） |
+| 取值 | `DEM_MONITOR_ACTIVITY_DATA`：以 SAE J1979-2 格式映射 **Dem** 内部监视器活动数据值 |
+| 取值 | `DEM_MONITOR_DATA_0`：随 Dem_SetEventStatusWithMonitorData 提供的 monitorData0 值。 |
+| 取值 | `DEM_MONITOR_DATA_1`：随 Dem_SetEventStatusWithMonitorData 提供的 monitorData1 值。 |
+| 取值 | `DEM_OCCCTR`：映射 **Dem** 内部发生计数器，最大范围：1 字节 |
+| 取值 | `DEM_OVFLIND`：映射 **Dem** 内部溢出指示，最大范围：1 字节（0 = False，1 = True） |
+| 取值 | `DEM_SIGNIFICANCE`：映射（静态的）**Dem** 内部事件重要性（参见 DemDTCSignificance），最大范围：1 字节（0 = OCCURRENCE，1 = FAULT） |
+| 取值 | `DEM_WARM_UPS`：自诊断故障码清除以来的暖机次数（PID30） |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+无包含的容器。
+
+##### 9.1.10.5. DemExternalCSDataElementClass
+
+| SWS 条目 | [ECUC_Dem_00668] |
+|---|---|
+| 容器名称 | DemExternalCSDataElementClass |
+| 父容器 | DemDataElementClass |
+| 描述 | 此容器包含外部基于客户端/服务器的数据元素类的配置（参数）。它定义 **Dem** 如何从 **SW-C** 或另一个 **BSW** 模块获取数据元素的值。是使用客户端/服务器端口还是 C 函数调用，由 DemDataElementUsePort 定义。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00949] |
+|---|---|
+| 参数名称 | DemDataElementArraySize |
+| 父容器 | DemExternalCSDataElementClass |
+| 描述 | 如果数据元素是数组数据元素，它定义数组中元素的数量。注意这不是以字节为单位的大小。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 4294967295 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00950] |
+|---|---|
+| 参数名称 | DemDataElementDataType |
+| 父容器 | DemExternalCSDataElementClass |
+| 描述 | 提供此 C/S 数据元素的实现数据类型。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `BOOLEAN`：数据的类型为 boolean。 |
+| 取值 | `FLOAT`：数据的类型为 float。 |
+| 取值 | `FLOAT_N`：数据的类型为 float 数组。 |
+| 取值 | `SINT16`：数据的类型为 sint16。 |
+| 取值 | `SINT16_N`：数据的类型为 sint16 数组。 |
+| 取值 | `SINT32`：数据的类型为 sint32。 |
+| 取值 | `SINT32_N`：数据的类型为 sint32 数组。 |
+| 取值 | `SINT8`：数据的类型为 sint8。 |
+| 取值 | `SINT8_N`：数据的类型为 sint8 数组。 |
+| 取值 | `UINT16`：数据的类型为 uint16。 |
+| 取值 | `UINT16_N`：数据的类型为 uint16 数组。 |
+| 取值 | `UINT32`：数据的类型为 uint32。 |
+| 取值 | `UINT32_N`：数据的类型为 uint32 数组。 |
+| 取值 | `UINT8`：数据的类型为 uint8。 |
+| 取值 | `UINT8_N`：数据的类型为 uint8 数组。 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00990] |
+|---|---|
+| 参数名称 | DemDataElementFncSignature |
+| 父容器 | DemExternalCSDataElementClass |
+| 描述 | 如果此参数设置为 `DATA_FNC_NORMAL`，函数将省略 DataLength 和 Dcm_NegativeResponseCodeType 参数。如果此参数设置为 `DATA_FNC_PROXY`，生成的用于获取数据元素的函数调用使用带 DataLength 和 Dcm_NegativeResponseCodeType 参数的 **Dcm** 代理签名。请注意，**Dcm** 代理通常为 **Dcm** 和 **Dem** 模块处理诊断数据连接。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DATA_FNC_NORMAL`：用于 **SW Cluster** 内部使用的函数调用。 |
+| 取值 | `DATA_FNC_PROXY`：使用用于 **Dcm** 低层代理的通用参数集的函数调用。 |
+| 默认值 | `DATA_FNC_NORMAL` |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00951] |
+|---|---|
+| 参数名称 | DemDataElementProvideMonitorData |
+| 父容器 | DemExternalCSDataElementClass |
+| 描述 | 如果此参数设置为 true，生成的用于获取数据元素的函数调用将 monitorData0 作为附加的第一个参数。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00619] |
+|---|---|
+| 参数名称 | DemDataElementReadFnc |
+| 父容器 | DemExternalCSDataElementClass |
+| 描述 | 在 DemDataElementUsePort 为 false 的情况下，此参数定义用于获取相应值的 C 函数 "ReadDataElement" 的原型。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00647] |
+|---|---|
+| 参数名称 | DemDataElementUsePort |
+| 父容器 | DemExternalCSDataElementClass |
+| 描述 | 如果此参数设置为 True，则生成一个 R 端口来获取数据元素（接口 DataServices_{Data}）。如果此参数设置为 False，则通过对由参数 DemDataElementReadFnc 指定的另一个 **BSW** 模块的 C 函数调用来获取信息。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+##### 9.1.10.6. DemExternalSRDataElementClass
+
+| SWS 条目 | [ECUC_Dem_00669] |
+|---|---|
+| 容器名称 | DemExternalSRDataElementClass |
+| 父容器 | DemDataElementClass |
+| 描述 | 此容器包含外部基于发送者/接收者的数据元素类的配置（参数）。它定义 **Dem** 如何通过使用发送者/接收者端口从 **SW-C** 获取数据元素的值。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00967] |
+|---|---|
+| 参数名称 | DemDataElementArraySize |
+| 父容器 | DemExternalSRDataElementClass |
+| 描述 | 如果数据元素是数组数据元素，它定义数组中元素的数量。注意这不是以字节为单位的大小。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 4294967295 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00840] |
+|---|---|
+| 参数名称 | DemDataElementDataType |
+| 父容器 | DemExternalSRDataElementClass |
+| 描述 | 提供属于外部数据的实现数据类型。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `BOOLEAN`：数据的类型为 boolean。 |
+| 取值 | `FLOAT`：数据的类型为 float。 |
+| 取值 | `FLOAT_N`：数据的类型为 float 数组。 |
+| 取值 | `SINT16`：数据的类型为 sint16。 |
+| 取值 | `SINT16_N`：数据的类型为 sint16 数组。 |
+| 取值 | `SINT32`：数据的类型为 sint32。 |
+| 取值 | `SINT32_N`：数据的类型为 sint32 数组。 |
+| 取值 | `SINT8`：数据的类型为 sint8。 |
+| 取值 | `SINT8_N`：数据的类型为 sint8 数组。 |
+| 取值 | `UINT16`：数据的类型为 uint16。 |
+| 取值 | `UINT16_N`：数据的类型为 uint16 数组。 |
+| 取值 | `UINT32`：数据的类型为 uint32。 |
+| 取值 | `UINT32_N`：数据的类型为 uint32 数组。 |
+| 取值 | `UINT8`：数据的类型为 uint8。 |
+| 取值 | `UINT8_N`：数据的类型为 uint8 数组。 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00841] |
+|---|---|
+| 参数名称 | DemDataElementEndianness |
+| 父容器 | DemExternalSRDataElementClass |
+| 描述 | 定义属于外部数据的字节序。如果未定义 DemDataElementEndianness，则适用 DemDataElementDefaultEndianness 的值。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `BIG_ENDIAN`：最高有效字节应位于最低地址 |
+| 取值 | `LITTLE_ENDIAN`：最高有效字节应位于最高地址 |
+| 取值 | `OPAQUE`：不透明数据的字节序 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemDiagnosisScaling | 0..1 | 此容器包含替代诊断表示的配置（参数）。由此可以计算诊断表示与 **ECU** 内部表示之间的转换，反之亦然。 |
+| DemSRDataElementClass | 0..1 | 此容器定义提供端口中应为外部数据元素读取的数据源。此容器应包含一个 DemSubElementInDataElementInstance、或 DemDataElementInstance、或 DemSubElementInImplDataElementInstance 引用。 |
+
+##### 9.1.10.7. DemSRDataElementClass
+
+| SWS 条目 | [ECUC_Dem_00842] |
+|---|---|
+| 选择容器名称 | DemSRDataElementClass |
+| 父容器 | DemExternalSRDataElementClass |
+| 描述 | 此容器定义提供端口中应为外部数据元素读取的数据源。此容器应包含一个 DemSubElementInDataElementInstance、或 DemDataElementInstance、或 DemSubElementInImplDataElementInstance 引用。 |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemDataElementInstance | 0..1 | 对端口中基本数据的实例引用，该数据元素以 ApplicationPrimitiveDataType 或 ImplementationDataType 类型化。 |
+| DemSubElementInDataElementInstance | 0..1 | 对端口中复合数据的基本子元素（任意层级）的实例引用，该数据元素以 ApplicationCompositeDataType 类型化。 |
+| DemSubElementInImplDataElementInstance | 0..1 | 对端口中复合数据的基本子元素（任意层级）的实例引用，该数据元素以类别 STRUCTURE 或 ARRAY 的 ImplementationDataType 类型化。 |
+
+##### 9.1.10.8. DemSubElementInDataElementInstance
+
+| SWS 条目 | [ECUC_Dem_00874] |
+|---|---|
+| 容器名称 | DemSubElementInDataElementInstance |
+| 父容器 | DemSRDataElementClass |
+| 描述 | 对端口中复合数据的基本子元素（任意层级）的实例引用，该数据元素以 ApplicationCompositeDataType 类型化。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00860] |
+|---|---|
+| 参数名称 | DemSubElementInDataElementInstanceRef |
+| 父容器 | DemSubElementInDataElementInstance |
+| 描述 | 对端口中应读取或写入的复合数据的基本子元素（任意层级）的实例引用。支持 SenderReceiverInterfaces 和 NvDataInterfaces 中的 VariableDataPrototypes 以及 ParameterInterfaces 中的 ParameterDataPrototypes（只读）。如果 AutosarDataPrototype 以 ApplicationCompositeDataType 类型化，则此引用适用。 |
+| 多重性 | 1 |
+| 类型 | 对 APPLICATION-COMPOSITE-ELEMENT-DATA-PROTOTYPE 的实例引用（上下文：ROOT-SW-COMPOSITION-PROTOTYPE、SW-COMPONENT-PROTOTYPE、PORT-PROTOTYPE、AUTOSAR-DATA-PROTOTYPE、APPLICATION-COMPOSITE-ELEMENT-DATA-PROTOTYPE*） |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+##### 9.1.10.9. DemSubElementInImplDataElementInstance
+
+| SWS 条目 | [ECUC_Dem_00876] |
+|---|---|
+| 容器名称 | DemSubElementInImplDataElementInstance |
+| 父容器 | DemSRDataElementClass |
+| 描述 | 对端口中复合数据的基本子元素（任意层级）的实例引用，该数据元素以类别 STRUCTURE 或 ARRAY 的 ImplementationDataType 类型化。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00862] |
+|---|---|
+| 参数名称 | DemSubElementInImplDataElementInstanceRef |
+| 父容器 | DemSubElementInImplDataElementInstance |
+| 描述 | 对端口中应读取或写入的复合数据的基本子元素（任意层级）的实例引用。支持 SenderReceiverInterfaces 和 NvDataInterfaces 中的 VariableDataPrototypes 以及 ParameterInterfaces 中的 ParameterDataPrototypes（只读）。如果 AutosarDataPrototype 以类别 STRUCTURE 或 ARRAY 的 ImplementationDataType 类型化，则此引用适用。请注意，在 ARRAY 的情况下，必须设置目标引用中的 index 属性以选择一个元素。 |
+| 多重性 | 1 |
+| 类型 | 对 IMPLEMENTATION-DATA-TYPE-ELEMENT 的实例引用（上下文：ROOT-SW-COMPOSITION-PROTOTYPE、SW-COMPONENT-PROTOTYPE、PORT-PROTOTYPE、AUTOSAR-DATA-PROTOTYPE、IMPLEMENTATION-DATA-TYPE-ELEMENT*） |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+##### 9.1.10.10. DemDiagnosisScaling
+
+| SWS 条目 | [ECUC_Dem_00843] |
+|---|---|
+| 选择容器名称 | DemDiagnosisScaling |
+| 父容器 | DemExternalSRDataElementClass |
+| 描述 | 此容器包含替代诊断表示的配置（参数）。由此可以计算诊断表示与 **ECU** 内部表示之间的转换，反之亦然。 |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemAlternativeDataInterface | 0..1 | 此容器通过 DataInterface 中的 VariableDataPrototype 的方式包含替代诊断表示的配置（参数）。此外，可以定义到 PortInterfaceMapping 的引用，它提供软件组件（DemSRDataElementClass）所使用的 DataInterface 中的 VariableDataPrototype 与 DemExternalSRDataElementClass 所定义的预期诊断表示之间的映射规则。 |
+| DemAlternativeDataType | 0..1 | 此容器通过 ApplicationDataType 的方式包含替代诊断表示的配置（参数）。此外，对于引用类别 TEXTTABLE 和 SCALE_LINEAR_AND_TEXTTABLE 的 CompuMethod 的 ApplicationDataType，可以定义文本表映射。 |
+| DemAlternativeDiagnosticDataElement | 0..1 | 此容器通过 Diagnostic Extract 的方式包含替代诊断表示的配置（参数）。 |
+
+##### 9.1.10.11. DemAlternativeDataInterface
+
+| SWS 条目 | [ECUC_Dem_00844] |
+|---|---|
+| 容器名称 | DemAlternativeDataInterface |
+| 父容器 | DemDiagnosisScaling |
+| 描述 | 此容器通过 DataInterface 中的 VariableDataPrototype 的方式包含替代诊断表示的配置（参数）。此外，可以定义到 PortInterfaceMapping 的引用，它提供软件组件（DemSRDataElementClass）所使用的 DataInterface 中的 VariableDataPrototype 与 DemExternalSRDataElementClass 所定义的预期诊断表示之间的映射规则。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00845] |
+|---|---|
+| 参数名称 | DemDataElement |
+| 父容器 | DemAlternativeDataInterface |
+| 描述 | 通过 DataInterface 中的 VariableDataPrototype 的方式为所定义的数据提供的替代诊断表示。所引用 VariableDataPrototype 的数据类型的 CompuMethod 将适用。 |
+| 多重性 | 1 |
+| 类型 | 对 VARIABLE-DATA-PROTOTYPE 的外部引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| SWS 条目 | [ECUC_Dem_00846] |
+|---|---|
+| 参数名称 | DemPortInterfaceMapping |
+| 父容器 | DemAlternativeDataInterface |
+| 描述 | 对定义映射规则的 PortInterfaceMapping 的可选引用。PortInterfaceMapping 用于获取 DataPrototypeMapping，它描述 DemDataElement 引用的数据原型与 DcmDspExternalSRDataElementClass 引用的数据原型之间的转换。 |
+| 多重性 | 0..1 |
+| 类型 | 对 PORT-INTERFACE-MAPPING 的外部引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+##### 9.1.10.12. DemAlternativeDiagnosticDataElement
+
+| SWS 条目 | [ECUC_Dem_00934] |
+|---|---|
+| 容器名称 | DemAlternativeDiagnosticDataElement |
+| 父容器 | DemDiagnosisScaling |
+| 描述 | 此容器通过 Diagnostic Extract 的方式包含替代诊断表示的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00935] |
+|---|---|
+| 参数名称 | DemDiagnosticDataElementRef |
+| 父容器 | DemAlternativeDiagnosticDataElement |
+| 描述 | 通过 Diagnostic Extract 中的 Diagnostic DataElement 的方式为所定义的数据提供的替代诊断表示。此 EcucForeignReference 支持访问所有 SwDataDefProps，特别是 BaseType、CompuMethod 和 DataConstr。适用于所引用 DiagnosticDataElement 的 CompuMethod 和 DataConstr 将应用于 **Dem** 所用接口中 VariableDataPrototype 的数据类型。映射的 ImplementationDataType 需要与给定的 BaseType 匹配。 |
+| 多重性 | 1 |
+| 类型 | 对 DIAGNOSTIC-DATA-ELEMENT 的外部引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+##### 9.1.10.13. DemAlternativeDataType
+
+| SWS 条目 | [ECUC_Dem_00847] |
+|---|---|
+| 容器名称 | DemAlternativeDataType |
+| 父容器 | DemDiagnosisScaling |
+| 描述 | 此容器通过 ApplicationDataType 的方式包含替代诊断表示的配置（参数）。此外，对于引用类别 TEXTTABLE 和 SCALE_LINEAR_AND_TEXTTABLE 的 CompuMethod 的 ApplicationDataType，可以定义文本表映射。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00848] |
+|---|---|
+| 参数名称 | DemApplicationDataType |
+| 父容器 | DemAlternativeDataType |
+| 描述 | 通过类别 VALUE、BOOLEAN 或 ARRAY 的 ApplicationDataType 的方式为所定义的数据提供的替代诊断表示。在类别 VALUE 或 BOOLEAN 的情况下，适用于所引用 ApplicationDataType 的 CompuMethod 将应用于 **Dem** 所用接口中 VariableDataPrototype 的数据类型。 |
+| 多重性 | 1 |
+| 类型 | 对 APPLICATION-DATA-TYPE 的外部引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemTextTableMapping | 0..* | DemDspTextTableMapping 的目的是将 **Dem** 上下文中定义的文本表值与 DataType 所引用的 CompuMethod 上下文中定义的文本表值相关联，该 DataType 将用于在 SenderReceiverInterface 中创建 dataElement。通过这种方式，可以创建一个原始版本的 TexttableMapping（仅当 dataElement 已经存在时才能应用）。换言之，DemDspTextTableMapping 提供了一种在无法应用 TexttableMapping 时的类似机制——即 **Dem** 服务组件的 PortPrototype 的 SenderReceiverInterface 尚不存在的情况。 |
+
+##### 9.1.10.14. DemTextTableMapping
+
+| SWS 条目 | [ECUC_Dem_00849] |
+|---|---|
+| 容器名称 | DemTextTableMapping |
+| 父容器 | DemAlternativeDataType |
+| 描述 | DemDspTextTableMapping 的目的是将 **Dem** 上下文中定义的文本表值与 DataType 所引用的 CompuMethod 上下文中定义的文本表值相关联，该 DataType 将用于在 SenderReceiverInterface 中创建 dataElement。通过这种方式，可以创建一个原始版本的 TexttableMapping（仅当 dataElement 已经存在时才能应用）。换言之，DemDspTextTableMapping 提供了一种在无法应用 TexttableMapping 时的类似机制——即 **Dem** 服务组件的 PortPrototype 的 SenderReceiverInterface 尚不存在的情况。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00851] |
+|---|---|
+| 参数名称 | DemDiagnosisRepresentationDataValue |
+| 父容器 | DemTextTableMapping |
+| 描述 | 诊断表示中的数据值。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 18446744073709551615 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00850] |
+|---|---|
+| 参数名称 | DemInternalDataValue |
+| 父容器 | DemTextTableMapping |
+| 描述 | **ECU** 内部数据值。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 18446744073709551615 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+### 9.2. 发布信息
+
+详情请参阅 SWS_BSWGeneral 中第 10.3 章"发布信息"（**Published Information**）。
+
+## B. 规范条目历史
+
+请注意，本章中的列表还包括在后续版本中已从规范中移除的可追溯项。这些项不会作为超链接出现在文档中。
+
+### B.1. 根据 AUTOSAR 版本 R23-11 的本文档可追溯项历史
+
+#### B.1.1. R23-11 中新增的规范条目
+
+表B.1：R23-11 中新增的规范条目（**Added Specification Items in R23-11**）
+
+| 编号 | 标题 |
+| --- | --- |
+| [SWS_Dem_01394] | - |
+| [SWS_Dem_01395] | Configurable reset of the pendingDTC bit in case of displacement |
+| [SWS_Dem_01396] | - |
+| [SWS_Dem_01397] | - |
+| [SWS_Dem_01398] | Support of DTCExtendedDataRecordNumber 0xFE |
+| [SWS_Dem_01399] | Support of DTCExtendedDataRecordNumber 0xFF in primary fault memory |
+| [SWS_Dem_01400] | Support of DTCExtendedDataRecordNumber 0xFF in user defined fault memory |
+| [SWS_Dem_01401] | - |
+
+#### B.1.2. R23-11 中变更的规范条目
+
+表B.2：R23-11 中变更的规范条目（**Changed Specification Items in R23-11**）
+
+| 编号 | 标题 |
+| --- | --- |
+| [SWS_Dem_00124] | - |
+| [SWS_Dem_00362] | Release of IUMPR Denominator |
+| [SWS_Dem_00409] | Configurable reset of the confirmedDTC bit in case of displacement |
+| [SWS_Dem_00626] | - |
+| [SWS_Dem_00913] | Reading IUMPR data for J1939 |
+| [SWS_Dem_01250] | - |
+| [SWS_Dem_01309] | - |
+| [SWS_Dem_01339] | - |
+| [SWS_Dem_01391] | Configuration of DTC priority as extended data record |
+| [SWS_Dem_01392] | - |
+| [SWS_Dem_91017] | Definition of API function Dem_SelectExtendedDataRecord |
+| [SWS_Dem_91037] | Definition of API function Dem_SetEventStatusWithMonitorData |
+| [SWS_Dem_91192] | Definition of API function Dem_SetDTCFilterByExtendedDataRecordNumber |
+| [SWS_Dem_91193] | Definition of API function Dem_SetDTCFilterByReadinessGroup |
+| [SWS_Dem_91194] | Definition of datatype Dem_EventOBDReadinessGroupType |
+
+#### B.1.3. R23-11 中删除的规范条目
+
+表B.3：R23-11 中删除的规范条目（**Deleted Specification Items in R23-11**）
+
+| 编号 | 标题 |
+| --- | --- |
+| [SWS_Dem_01352] | Setting event failed with synchronous freeze frame processing |
+| [SWS_Dem_01353] | Synchronous snapshot record processing |
+| [SWS_Dem_01354] | Only C-Callout data capturing for synchronous snapshot record processing |
+| [SWS_Dem_01355] | Optional callback after synchronous snapshot record processing |
+| [SWS_Dem_01356] | CallbackEventSyncStorageProcessed only for synchronous reporting event |
+| [SWS_Dem_91041] | - |
+| [SWS_Dem_91042] | - |
+
+#### B.1.4. R23-11 中新增的约束
+
+无。
+
+#### B.1.5. R23-11 中变更的约束
+
+无。
+
+#### B.1.6. R23-11 中删除的约束
+
+无。
