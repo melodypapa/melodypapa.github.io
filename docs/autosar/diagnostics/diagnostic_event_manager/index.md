@@ -5010,3 +5010,2290 @@ Std_ReturnType Dem_GetB1Counter ( uint16* B1Counter )
 ```C
 Std_ReturnType Dem_SetDTR ( uint16 DTRId, sint32 TestResult, sint32 LowerLimit, sint32 UpperLimit, Dem_DTRControlType Ctrlval )
 ```
+
+### 7.4. 期望接口
+
+本章列出从其他模块所需的所有接口。
+
+#### 7.4.1. 强制接口
+
+本章定义实现 **Dem** 模块核心功能所需的全部接口。
+
+**Dem**模块中没有强制接口。
+
+#### 7.4.2. 可选接口
+
+本章定义实现 **Dem** 模块可选功能所需的全部接口。
+
+**Dem**模块中可选接口的定义：
+
+| API 函数 | 头文件 | 说明 |
+| --- | --- | --- |
+| Dcm_DemTriggerOnDTCStatus | Dcm_Dem.h | 在 **UDS** 状态字节变化时触发。允许为子服务 OnDTCStatusChanged 触发 ROE 事件。 |
+| Det_ReportError | Det.h | 报告开发错误的服务。 |
+| FiM_DemInit | FiM_Dem.h | 此服务重新初始化 **FIM**。 |
+| FiM_DemTriggerOnComponentStatus | FiM_Dem.h | 在组件失败状态变化时触发。 |
+| FiM_DemTriggerOnMonitorStatus | FiM_Dem.h | 提供给 **Dem** 调用的服务，用于将监视器状态变化通知 **Fim**。 |
+| J1939Dcm_DemTriggerOnDTCStatus | J1939Dcm_Dem.h | 用于 DM01 报文的触发器，指示发生了 **UDS** 状态变化。 |
+| NvM_GetErrorStatus | NvM.h | 读取块相关错误/状态信息的服务。 |
+| NvM_ReadBlock | NvM.h | 将 NV 块的数据复制到其对应 RAM 块的服务。 |
+| NvM_SetRamBlockStatus | NvM.h | 设置永久 RAM 块的 RAM 块状态或 NVRAM 块显式同步状态的服务。 |
+| NvM_WriteBlock | NvM.h | 将 RAM 块的数据复制到其对应 NV 块的服务。 |
+
+**注意：**基于实现策略，可以使用 FiM_DemInit（另参见第 6.11.4 节）。
+
+**注意：**基于实现策略，可以省略 NvM_[Read|Write]Block 或 NvM_SetRamBlockStatus，或者通过配置完全停用 **NvM** 的使用（另参见第 6.11.5 节）。
+
+#### 7.4.3. 可配置接口
+
+本章列出目标函数可以配置的所有接口。目标函数通常是回调函数。这类接口的名称不是固定的，因为它们是可配置的。
+
+![Figure8_4.png](Figure8_4.png)
+
+##### 7.4.3.1. 接口 BSW 模块 / SW-组件 &lt;=&gt; Dem
+
+从 **Dem** 到 **SW-组件** 的回调接口经 **RTE** 端口接口实现。以下回调描述针对其他 **BSW** 模块的 C 回调。
+
+###### 7.4.3.1.1. InitMonitorForEvent
+
+可配置接口 &lt;Module&gt;_DemInitMonitorFor&lt;EventName&gt; 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemInitMonitorFor&lt;EventName&gt; |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemInitMonitorFor&lt;EventName&gt; ( Dem_InitMonitorReasonType InitMonitorReason ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 InitMonitorReason（in） | 由监视器评估的特定（重新）初始化原因，用于标识要执行的初始化类型。 |
+| 返回值 | **Std_ReturnType**：返回值未使用——仅为与相应 **RTE** 操作兼容。 |
+| 说明 | 初始化特定事件的诊断监视器。如果 **Dem** 未提供端口接口，则每个事件有一个单独的回调（如果已配置）。 |
+| 可通过…获得 | Dem_Externals.h |
+
+###### 7.4.3.1.2. DemTriggerOnComponentStatus
+
+可配置接口 &lt;Module&gt;_DemTriggerOnComponentStatus 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemTriggerOnComponentStatus |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemTriggerOnComponentStatus ( Dem_ComponentIdType ComponentId ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 ComponentId（in） | **DemComponent** 的标识。 |
+| 返回值 | **Std_ReturnType**：返回值未使用——仅为与相应 **RTE** 操作兼容。 |
+| 说明 | 在 **DemComponent** 失败状态变化时触发。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.2. ClearDtcNotification
+
+可配置接口 &lt;Module&gt;_ClearDtcNotification 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_ClearDtcNotification |
+| 语法 | Std_ReturnType &lt;Module&gt;_ClearDtcNotification ( uint32 DTC, Dem_DTCFormatType DTCFormat, Dem_DTCOriginType DTCOrigin ) |
+| 同步/异步 | 异步 |
+| 可重入性 | 不可重入 |
+| 参数 DTC（in） | 被清除的 **DTC** 或 **DTC** 组。 |
+| 参数 DTCFormat（in） | **DTC** 值的格式。 |
+| 参数 DTCOrigin（in） | 当前清除操作所选的事件内存。 |
+| 返回值 | **Std_ReturnType**：始终返回 E_OK。 |
+| 说明 | **Dem** 在执行清除 **DTC** 操作时调用。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.3. DemGeneralTriggerOnMonitorStatus
+
+可配置接口 &lt;Module&gt;_DemGeneralTriggerOnMonitorStatus 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemGeneralTriggerOnMonitorStatus |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemGeneralTriggerOnMonitorStatus ( Dem_EventIdType EventId ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 EventId（in） | 通过分配的 **EventId** 标识事件。 |
+| 返回值 | **Std_ReturnType**：出于与 **RTE** 兼容的原因，此函数始终返回 E_OK。 |
+| 说明 | 在监视器状态变化时触发。在事件状态报告的上下文中同步调用。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.4. DemGeneralTriggerOnEventUdsStatus
+
+可配置接口 &lt;Module&gt;_DemGeneralTriggerOnEventUdsStatus 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemGeneralTriggerOnEventUdsStatus |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemGeneralTriggerOnEventUdsStatus ( Dem_EventIdType EventId, Dem_UdsStatusByteType EventStatusByteOld, Dem_UdsStatusByteType EventStatusByteNew ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 EventId（in） | 通过分配的 **EventId** 标识事件。 |
+| 参数 EventStatusByteOld（in） | 变化前事件的 **UDS DTC** 状态字节（参见"状态位支持"一章）。 |
+| 参数 EventStatusByteNew（in） | 变化后事件的 **UDS DTC** 状态字节（参见"状态位支持"一章）。 |
+| 返回值 | **Std_ReturnType**：出于与 **RTE** 兼容的原因，此函数始终返回 E_OK。 |
+| 说明 | 在 **UDS DTC** 状态字节变化时触发。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.5. DemTriggerOnEventUdsStatus
+
+可配置接口 &lt;Module&gt;_DemTriggerOnEventUdsStatus 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemTriggerOnEventUdsStatus |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemTriggerOnEventUdsStatus ( Dem_UdsStatusByteType EventStatusByteOld, Dem_UdsStatusByteType EventStatusByteNew ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 EventStatusByteOld（in） | 变化前事件的 **UDS DTC** 状态字节（参见"状态位支持"一章）。 |
+| 参数 EventStatusByteNew（in） | 变化后事件的 **UDS DTC** 状态字节（参见"状态位支持"一章）。 |
+| 返回值 | **Std_ReturnType**：出于与 **RTE** 兼容的原因，此函数始终返回 E_OK。 |
+| 说明 | 在 **UDS DTC** 状态字节变化时触发。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.6. DemTriggerOnDTCStatus
+
+可配置接口 &lt;Module&gt;_DemTriggerOnDTCStatus 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemTriggerOnDTCStatus |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemTriggerOnDTCStatus ( uint32 DTC, Dem_UdsStatusByteType DTCStatusOld, Dem_UdsStatusByteType DTCStatusNew ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 DTC（in） | **UDS** 格式的诊断故障码。 |
+| 参数 DTCStatusOld（in） | 变化前的 **UDS** 状态。 |
+| 参数 DTCStatusNew（in） | 变化后的 **UDS** 状态。 |
+| 返回值 | **Std_ReturnType**：出于与 **RTE** 兼容的原因，此函数始终返回 E_OK。 |
+| 说明 | 在 **UDS** 状态字节变化时触发。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.7. DemTriggerOnMonitorStatus
+
+可配置接口 &lt;Module&gt;_DemTriggerOnMonitorStatus 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemTriggerOnMonitorStatus |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemTriggerOnMonitorStatus ( void ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 返回值 | **Std_ReturnType**：出于与 **RTE** 兼容的原因，此函数始终返回 E_OK。 |
+| 说明 | 在监视器状态变化时触发。在事件状态报告的上下文中同步调用。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.8. EventDataChanged
+
+可配置接口 &lt;Module&gt;_DemTriggerOnEventData 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemTriggerOnEventData |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemTriggerOnEventData ( Dem_EventIdType EventId ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 EventId（in） | 通过分配的 **EventId** 标识事件。 |
+| 返回值 | **Std_ReturnType**：出于与 **RTE** 兼容的原因，此函数始终返回 E_OK。 |
+| 说明 | 在事件内存中事件相关数据变化时触发。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.9. ClearEventAllowed
+
+可配置接口 &lt;Module&gt;_DemClearEventAllowed&lt;ForCondition&gt; 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemClearEventAllowed&lt;ForCondition&gt; |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemClearEventAllowed&lt;ForCondition&gt; ( boolean* Allowed ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 Allowed（out） | True——允许清除事件；False——不允许清除事件。 |
+| 返回值 | **E_OK**：操作成功；**E_NOT_OK**：操作失败。 |
+| 说明 | 在删除 **DTC** 时触发，如果出参返回 False 则不允许删除。如果 **Dem** 未提供端口接口，则每个条件有一个单独的回调，该回调可分配给一个或多个事件。如果返回 E_NOT_OK，参数"Allowed"保持不变。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.10. ReadDataElement
+
+如果 DemDataElementFncSignature 设置为 `DATA_FNC_NORMAL`，则使用以下定义。
+
+可配置接口 &lt;Module&gt;_DemRead&lt;DataElement&gt; 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemRead&lt;DataElement&gt; |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemRead&lt;DataElement&gt; ( uint8* Buffer, [Dem_MonitorDataType monitorData0] ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 monitorData0（in） | 由 Dem_SetEventStatusWithMonitorData 提供的监视器数据。 |
+| 参数 Buffer（out） | 包含数据元素值的缓冲区。 |
+| 返回值 | **E_OK**：操作成功；**E_NOT_OK**：操作失败。 |
+| 说明 | 请求数据元素的当前值。如果 **Dem** 未提供端口接口，则每个数据元素有一个单独的回调。 |
+| 可通过…获得 | Dem_Externals.h |
+
+**注意：**方括号 [] 表示该参数是可选的。
+
+如果 DemDataElementFncSignature 设置为 `DATA_FNC_PROXY`，则使用以下定义。
+
+可配置接口 &lt;Module&gt;_DemRead&lt;DataElement&gt;（草案）的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemRead&lt;DataElement&gt;（草案） |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemRead&lt;DataElement&gt; ( uint8* Data, uint16 DataLength, Dcm_NegativeResponseCodeType* ErrorCode ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 DataLength（in） | 要读取数据的字节长度。 |
+| 参数 Data（out） | 应将所请求数据复制到其中的缓冲区。 |
+| 参数 ErrorCode（out） | 如果操作 Xxx_ReadData 返回 E_NOT_OK，**Dcm** 模块应发送 NRC 码等于 ErrorCode 参数值的否定响应。此参数的存在是为了确保 **Dcm** 和 **Dem** SwCluC 代理接口的 1:1 接口兼容性，以实现共同的数据访问。返回的错误码对 **Dem** 没有意义，应被丢弃。 |
+| 返回值 | **E_OK**：请求成功；**E_NOT_OK**：请求不成功。 |
+| 说明 | 请求数据元素的当前值。如果 **Dem** 未提供端口接口，则每个数据元素有一个单独的回调。 |
+| 可通过…获得 | Dem_Externals.h |
+
+#### 7.4.3.11. GetFaultDetectionCounter
+
+可配置接口 &lt;Module&gt;_DemGetFaultDetectionCounter&lt;ForEvent&gt; 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | &lt;Module&gt;_DemGetFaultDetectionCounter&lt;ForEvent&gt; |
+| 语法 | Std_ReturnType &lt;Module&gt;_DemGetFaultDetectionCounter&lt;ForEvent&gt; ( sint8* FaultDetectionCounter ) |
+| 同步/异步 | 同步 |
+| 可重入性 | 可重入 |
+| 参数 FaultDetectionCounter（out） | 此参数接收所请求 EventId 的故障检测计数器信息。如果函数调用的返回值不是 E_OK，此参数不包含有效数据。按 ISO 14229-1 为 -128（十进制）… +127（十进制），对应 PASSED…FAILED。 |
+| 返回值 | **E_OK**：请求成功；**E_NOT_OK**：请求失败。 |
+| 说明 | 获取当前故障检测计数器值。如果 **Dem** 未提供端口接口，则每个使用监视器内部去抖动的事件有一个 C 回调。 |
+| 可通过…获得 | Dem_Externals.h |
+
+### 7.5. 调度函数
+
+这些函数由基础软件调度器直接调用。以下函数应没有返回值和参数。所有函数应不可重入。
+
+#### 7.5.1. Dem_MainFunction
+
+调度函数 Dem_MainFunction 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 服务名称 | Dem_MainFunction |
+| 语法 | void Dem_MainFunction ( void ) |
+| 服务 ID [hex] | 0x55 |
+| 说明 | 处理所有非基于事件的 **Dem** 内部函数。 |
+| 可通过…获得 | SchM_Dem.h |
+
+函数 Dem_MainFunction 应处理所有非基于事件的 **Dem** 模块内部函数。
+
+详情请参阅 SWS_BSWGeneral 中第 8.5 章"调度函数"（**Scheduled Functions**）。
+
+#### 7.5.2. Runnable 实体 MainFunction
+
+```text
+1 RunnableEntity MainFunction 2 symbol "Dem_MainFunction" 3 canbeInvokedConcurrently = FALSE 4 SSCP = port CBEventUdsStatusChanged_*, CallbackEventUdsStatusChanged 5 SSCP = port GeneralCBStatusEvt, GeneralCallbackEventUdsStatusChanged 6 SSCP = port CBStatusDTC_*, DTCStatusChanged 7 SSCP = port CBDataEvt_*, EventDataChanged 8 SSCP = port GeneralCBDataEvt, EventDataChanged 9 SSCP = port CBReadData_*, ReadData
+```
+
+### 7.6. 服务接口
+
+#### 7.6.1. 实现数据类型
+
+##### 7.6.1.1. Dem_DataType_{Data}
+
+实现数据类型 Dem_DataType_{Data} 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_DataType_{Data} |
+| 类别 | Type |
+| 派生自 | Dem_DataArrayType_{Data}（变体：DemDataElementDataType == ([S&#124;U]INT[8&#124;16&#124;32]&#124;FLOAT)_N，适用于 DemExternalCSDataElementClass 或 DemExternalSRDataElementClass） |
+| 派生自 | Dem_DataPrimitiveType_{Data}（变体：DemDataElementDataType == (BOOLEAN&#124;[S&#124;U]INT[8&#124;16&#124;32]&#124;FLOAT)，适用于 DemExternalCSDataElementClass 或 DemExternalSRDataElementClass） |
+| 说明 | 外部数据元素的数据类型定义 |
+| 变体 | (({ecuc(Dem/DemGeneral/DemDataElementClass)} instanceof {ecuc(Dem/DemGeneral/DemDataElementClass/DemExternalCSDataElementClass)}) && ({ecuc(…/DemDataElementUsePort)} == true)) &#124;&#124; ({ecuc(Dem/DemGeneral/DemDataElementClass)} instanceof {ecuc(Dem/DemGeneral/DemDataElementClass/DemExternalSRDataElementClass)})；Data = {ecuc(Dem/DemGeneral/DemDataElementClass.SHORT-NAME)} |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.2. Dem_DataPrimitiveType_{Data}
+
+实现数据类型 Dem_DataPrimitiveType_{Data} 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_DataPrimitiveType_{Data} |
+| 类别 | Type |
+| 派生自 | boolean（变体：DemDataElementDataType == BOOLEAN）· float32（变体：== FLOAT）· sint16（== SINT16）· sint32（== SINT32）· sint8（== SINT8）· uint16（== UINT16）· uint32（== UINT32）· uint8（== UINT8）——各基类型的变体按 DemExternalCSDataElementClass 或 DemExternalSRDataElementClass 的 DemDataElementDataType 取值 |
+| 说明 | - |
+| 变体 | (DemDataElementDataType == (BOOLEAN&#124;[S&#124;U]INT[8&#124;16&#124;32]&#124;FLOAT))；Data = {ecuc(Dem/DemGeneral/DemDataElementClass.SHORT-NAME)} |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.3. Dem_DataArrayType_{Data}
+
+实现数据类型 Dem_DataArrayType_{Data} 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_DataArrayType_{Data} |
+| 类别 | Array |
+| 元素类型 | float32（变体：DemDataElementDataType == FLOAT_N）· sint16（== SINT16_N）· sint32（== SINT32_N）· sint8（== SINT8_N）· uint16（== UINT16_N）· uint32（== UINT32_N）· uint8（== UINT8_N）——按 DemExternalCSDataElementClass 或 DemExternalSRDataElementClass 的 DemDataElementDataType 取值 |
+| 大小 | - |
+| 说明 | 外部数据元素的数组数据类型定义 |
+| 变体 | (DemDataElementDataType == ([S&#124;U]INT[8&#124;16&#124;32]&#124;FLOAT)_N)；Data = {ecuc(Dem/DemGeneral/DemDataElementClass.SHORT-NAME)} |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.4. Dem_DTCOriginType
+
+实现数据类型 Dem_DTCOriginType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_DTCOriginType |
+| 类别 | Type |
+| 派生自 | **uint16** |
+| 取值 | `DEM_DTC_ORIGIN_PRIMARY_MEMORY`（0x0001）：事件信息位于主内存中 |
+| 取值 | `DEM_DTC_ORIGIN_PERMANENT_MEMORY`（0x0003）：事件信息位于永久内存中 |
+| 取值 | `DEM_DTC_ORIGIN_OBD_RELEVANT_MEMORY`（0x0004）：**OBD** 事件信息位于主内存中 |
+| 取值 | `DEM_DTC_ORIGIN_USERDEFINED_MEMORY_&lt;Name&gt;`（0x01XX）：事件信息位于用户自定义内存中，其中 XX 是十六进制表示的已配置 DemUserDefinedMemoryIdentifier，&lt;Name&gt; 是 DemUserDefinedMemory 的 Short-Name |
+| 说明 | 此枚举用于定义事件的位置。不同内存类型的定义和使用是 **OEM** 特定的。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.5. Dem_DebouncingStateType
+
+实现数据类型 Dem_DebouncingStateType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_DebouncingStateType |
+| 类别 | Bitfield |
+| 派生自 | **uint8** |
+| 元素 | bit `DEM_TEMPORARILY_DEFECTIVE`（0x01）：位 0：暂时缺陷（对应 0 &lt; **FDC** &lt; 127） |
+| 元素 | bit `DEM_FINALLY_DEFECTIVE`（0x02）：位 1：最终缺陷（对应 **FDC** = 127） |
+| 元素 | bit `DEM_TEMPORARILY_HEALED`（0x04）：位 2：暂时恢复（对应 -128 &lt; **FDC** &lt; 0） |
+| 元素 | bit `DEM_TEST_COMPLETE`（0x08）：位 3：测试完成（对应 **FDC** = -128 或 **FDC** = 127） |
+| 元素 | bit `DEM_DTR_UPDATE`（0x10）：位 4：**DTR** 更新（= 测试完成 且 去抖动完成 且 使能条件/存储条件满足） |
+| 说明 | - |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.6. Dem_DebounceResetStatusType
+
+实现数据类型 Dem_DebounceResetStatusType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_DebounceResetStatusType |
+| 类别 | Type |
+| 派生自 | **uint8** |
+| 取值 | `DEM_DEBOUNCE_STATUS_FREEZE`（0x00）：冻结内部去抖动计数器/计时器 |
+| 取值 | `DEM_DEBOUNCE_STATUS_RESET`（0x01）：复位内部去抖动计数器/计时器 |
+| 取值 | 0x02 - 0xFF：保留 |
+| 说明 | 此类型包含通过函数 Dem_ResetEventDebounceStatus() 控制内部去抖动计数器/计时器的全部定义。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.7. Dem_DTRControlType
+
+实现数据类型 Dem_DTRControlType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_DTRControlType |
+| 类别 | Type |
+| 派生自 | **uint8** |
+| 取值 | `DEM_DTR_CTL_NORMAL`（0x00）：值被报告并视为有效的测试结果 |
+| 取值 | `DEM_DTR_CTL_NO_MAX`（0x01）：值被报告，但最大限值不可用（无效）；上限值被忽略 |
+| 取值 | `DEM_DTR_CTL_NO_MIN`（0x02）：值被报告，但最小限值不可用（无效）；下限值被忽略 |
+| 取值 | `DEM_DTR_CTL_RESET`（0x03）：所有值均被忽略。外部表示为初始化后的全零（例如故障清除之后） |
+| 取值 | `DEM_DTR_CTL_INVISIBLE`（0x04）：所有值均被忽略。对于外部视图（测试仪），此 **DTR** 被视为未集成 |
+| 说明 | 所报告测试结果解释的控制参数。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.8. Dem_EventIdType
+
+实现数据类型 Dem_EventIdType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_EventIdType |
+| 类别 | Type |
+| 派生自 | **uint16** |
+| 取值 | 1..65535：诊断事件的内部标识符。注意：0 不是有效值 |
+| 说明 | 通过分配的 **EventId** 标识事件。**EventId** 由 **Dem** 分配。示例：1 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.9. Dem_EventStatusType
+
+实现数据类型 Dem_EventStatusType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_EventStatusType |
+| 类别 | Type |
+| 派生自 | **uint8** |
+| 取值 | `DEM_EVENT_STATUS_PASSED`（0x00）：监视器报告已鉴定的测试结果通过 |
+| 取值 | `DEM_EVENT_STATUS_FAILED`（0x01）：监视器报告已鉴定的测试结果失败 |
+| 取值 | `DEM_EVENT_STATUS_PREPASSED`（0x02）：监视器报告未鉴定的测试结果 pre-passed（**Dem** 内部去抖） |
+| 取值 | `DEM_EVENT_STATUS_PREFAILED`（0x03）：监视器报告未鉴定的测试结果 pre-failed（**Dem** 内部去抖） |
+| 取值 | `DEM_EVENT_STATUS_FDC_THRESHOLD_REACHED`（0x04）：监视器触发 ON_FDC_THRESHOLD 的 ExtendedDataRecords 和 FreezeFrames 存储 |
+| 取值 | 0x05 - 0xFF：保留 |
+| 说明 | 此类型包含可通过 Dem_SetEventStatus() 报告的所有监视器测试结果值。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.10. Dem_DTCFormatType
+
+实现数据类型 Dem_DTCFormatType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_DTCFormatType |
+| 类别 | Type |
+| 派生自 | **uint8** |
+| 取值 | `DEM_DTC_FORMAT_OBD`（0）：选择 2 字节 **OBD DTC** 格式（参见配置参数 DemObdDTC） |
+| 取值 | `DEM_DTC_FORMAT_UDS`（1）：选择 3 字节 **UDS DTC** 格式（参见配置参数 DemUdsDTC） |
+| 取值 | `DEM_DTC_FORMAT_J1939`（2）：选择 SPN + FMI 合并为 3 字节的 **J1939 DTC** 格式（参见 DemJ1939DTC） |
+| 取值 | `DEM_DTC_FORMAT_OBD_3BYTE`（3）：在使用 SAE J2012 与 **UDS DTC** 格式分离的情况下，选择 DemDtcValue3Byte 定义的 3 字节 **OBD DTC** |
+| 说明 | 此类型用于选择 **DTC** 值的格式。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.11. Dem_InitMonitorReasonType
+
+实现数据类型 Dem_InitMonitorReasonType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_InitMonitorReasonType |
+| 类别 | Type |
+| 派生自 | **uint8** |
+| 取值 | `DEM_INIT_MONITOR_CLEAR`（0x01）：事件被清除，所有内部值和状态被复位 |
+| 取值 | `DEM_INIT_MONITOR_RESTART`（0x02）：事件的运行周期被重启 |
+| 取值 | `DEM_INIT_MONITOR_REENABLED`（0x03）：使能条件或 **DTC** 设置被重新启用 |
+| 取值 | `DEM_INIT_MONITOR_STORAGE_REENABLED`（0x04）：存储条件被重新启用 |
+| 说明 | 回调函数 &lt;Module&gt;_DemInitMonitorFor&lt;EventName&gt;() 返回的（重新）初始化原因。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.12. Dem_IumprDenomCondIdType
+
+实现数据类型 Dem_IumprDenomCondIdType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_IumprDenomCondIdType |
+| 类别 | Type |
+| 派生自 | **uint8** |
+| 取值 | `DEM_IUMPR_GENERAL_INDIVIDUAL_DENOMINATOR`（0x05）：用于支持与通用分母不同条件的单独分母。它作用于单独的分母，允许设置与通用分母不同的条件 |
+| 取值 | `DEM_IUMPR_GENERAL_OBDCOND`（0x06）：用于 InfoType $08/$0B 输出的 **IUMPR** 分母条件"通用分母" |
+| 取值 | `DEM_IUMPR_DEN_COND_COLDSTART_CMPL`（0x07）：完整的 **IUMPR** 分母条件"冷启动" |
+| 取值 | `DEM_IUMPR_DEN_COND_EVAP_CMPL`（0x08）：完整的 **IUMPR** 分母条件"EVAP" |
+| 取值 | `DEM_IUMPR_DEN_COND_500MI_CMPL`（0x09）：完整的 **IUMPR** 分母条件"500 英里" |
+| 取值 | `DEM_IUMPR_DEN_COND_CSERS`（0x10）："冷启动排放降低策略"监视器的完整 **IUMPR** 分母条件 |
+| 取值 | `DEM_IUMPR_DEN_COND_EVAPPURGEFLOW_CMPL`（0x11）：完整的 **IUMPR** 分母条件"EVAP 净化流量" |
+| 说明 | 此类型包含可在 **OBD** 相关 **ECU** 之间广播的所有可能的附加 **IUMPR** 分母条件。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.13. Dem_IumprDenomCondStatusType
+
+实现数据类型 Dem_IumprDenomCondStatusType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_IumprDenomCondStatusType |
+| 类别 | Type |
+| 派生自 | **uint8** |
+| 取值 | `DEM_IUMPR_DEN_STATUS_NOT_REACHED`（0x00）：IUMPRDenCondId 给出的 **IUMPR** 分母条件尚未满足 |
+| 取值 | `DEM_IUMPR_DEN_STATUS_REACHED`（0x01）：IUMPRDenCondId 给出的 **IUMPR** 分母条件已满足 |
+| 取值 | `DEM_IUMPR_DEN_STATUS_INHIBITED`（0x02）：IUMPRDenCondId 给出的 **IUMPR** 分母条件被抑制且无法达到 |
+| 取值 | 0x03 - 0xFF：保留 |
+| 说明 | 此类型包含可在 **OBD** 相关 **ECU** 之间广播的附加 **IUMPR** 分母条件的所有可能状态。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.14. Dem_MaxDataValueType
+
+实现数据类型 Dem_MaxDataValueType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_MaxDataValueType |
+| 类别 | Array |
+| 元素类型 | **uint8** |
+| 大小 | 最大的扩展数据类 / 冻结帧记录元素的大小 |
+| 说明 | - |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.15. Dem_MonitorDataType
+
+实现数据类型 Dem_MonitorDataType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_MonitorDataType |
+| 类别 | Type |
+| 派生自 | **uint32** |
+| 说明 | 此类型用于向 **Dem** 传递监视数据。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.16. Dem_MonitorStatusType
+
+实现数据类型 Dem_MonitorStatusType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_MonitorStatusType |
+| 类别 | Bitfield |
+| 派生自 | **uint8** |
+| 元素 | bit `DEM_MONITOR_STATUS_TF`（0x01）：位 0：TestFailed |
+| 元素 | bit `DEM_MONITOR_STATUS_TNCTOC`（0x02）：位 1：TestNotCompletedThisOperationCycle |
+| 说明 | 此类型包含可能的监视器状态值。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.17. Dem_IndicatorStatusType
+
+实现数据类型 Dem_IndicatorStatusType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_IndicatorStatusType |
+| 类别 | Type |
+| 派生自 | **uint8** |
+| 取值 | `DEM_INDICATOR_OFF`（0x00）：指示器关闭模式 |
+| 取值 | `DEM_INDICATOR_CONTINUOUS`（0x01）：指示器持续点亮模式 |
+| 取值 | `DEM_INDICATOR_BLINKING`（0x02）：指示器闪烁模式 |
+| 取值 | `DEM_INDICATOR_BLINK_CONT`（0x03）：指示器闪烁或持续点亮模式 |
+| 取值 | `DEM_INDICATOR_SLOW_FLASH`（0x04）：指示器慢闪模式 |
+| 取值 | `DEM_INDICATOR_FAST_FLASH`（0x05）：指示器快闪模式 |
+| 取值 | `DEM_INDICATOR_ON_DEMAND`（0x06）：指示器按需模式 |
+| 取值 | `DEM_INDICATOR_SHORT`（0x07）：指示器短时模式 |
+| 说明 | Dem_GetIndicatorStatus() 使用的指示器模式。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.18. Dem_PID21valueType
+
+实现数据类型 Dem_PID21valueType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_PID21valueType |
+| 类别 | Array |
+| 元素类型 | **uint8** |
+| 大小 | 2 个元素 |
+| 说明 | - |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.19. Dem_PID31valueType
+
+实现数据类型 Dem_PID31valueType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_PID31valueType |
+| 类别 | Array |
+| 元素类型 | **uint8** |
+| 大小 | 2 个元素 |
+| 说明 | - |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.20. Dem_RatioIdType
+
+实现数据类型 Dem_RatioIdType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_RatioIdType |
+| 类别 | Type |
+| 派生自 | **uint16**（可配置，大小取决于系统复杂度，参见配置参数 DemRatioId 的取值范围）或 **uint8**（可配置，大小取决于系统复杂度） |
+| 取值 | 0..255、0..65535：可配置，大小取决于系统复杂度（参见配置参数 DemRatioId 的取值范围） |
+| 说明 | **OBD** 特定的比率 Id（与特定事件、一个 **FID** 和一个 **IUMPR** 组相关）。此类型取决于 **Dem** 的配置。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.21. Dem_UdsStatusByteType
+
+实现数据类型 Dem_UdsStatusByteType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_UdsStatusByteType |
+| 类别 | Bitfield |
+| 派生自 | **uint8** |
+| 下限 | 0x00 |
+| 上限 | 0xFF |
+| 元素 | bit `DEM_UDS_STATUS_TF`（0x01）：位 0：TestFailed |
+| 元素 | bit `DEM_UDS_STATUS_TFTOC`（0x02）：位 1：TestFailedThisOperationCycle |
+| 元素 | bit `DEM_UDS_STATUS_PDTC`（0x04）：位 2：PendingDTC |
+| 元素 | bit `DEM_UDS_STATUS_CDTC`（0x08）：位 3：ConfirmedDTC |
+| 元素 | bit `DEM_UDS_STATUS_TNCSLC`（0x10）：位 4：TestNotCompletedSinceLastClear |
+| 元素 | bit `DEM_UDS_STATUS_TFSLC`（0x20）：位 5：TestFailedSinceLastClear |
+| 元素 | bit `DEM_UDS_STATUS_TNCTOC`（0x40）：位 6：TestNotCompletedThisOperationCycle |
+| 元素 | bit `DEM_UDS_STATUS_WIR`（0x80）：位 7：WarningIndicatorRequested |
+| 说明 | 在此数据类型中每个位都有独立的含义。当条件成立时该位置为 1。例如，如果第 2 位（0x02）置为 1，表示本运行周期内测试失败。如果该位为 0，则本周期内尚未失败。 |
+| 变体 | - |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.22. Dem_PID4DvalueType
+
+实现数据类型 Dem_PID4DvalueType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_PID4DvalueType |
+| 类别 | Array |
+| 元素类型 | **uint8** |
+| 大小 | 2 个元素 |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral.DemOBDSupport)} == `DEM_OBD_MASTER_ECU`) |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+##### 7.6.1.23. Dem_PID4EvalueType
+
+实现数据类型 Dem_PID4EvalueType 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Dem_PID4EvalueType |
+| 类别 | Array |
+| 元素类型 | **uint8** |
+| 大小 | 2 个元素 |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral.DemOBDSupport)} == `DEM_OBD_MASTER_ECU`) |
+| 可通过…获得 | Rte_Dem_Type.h |
+
+#### 7.6.2. 发送者-接收者接口
+
+##### 7.6.2.1. DataServices_{Data}
+
+发送者-接收者接口 DataServices_{Data} 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DataServices_{Data} |
+| 注释 | - |
+| IsService | false |
+| 变体 | ({ecuc(Dem/DemGeneral/DemDataElementClass)} instanceof {ecuc(Dem/DemGeneral/DemDataElementClass/DemExternalSRDataElementClass)})；Data = {ecuc(Dem/DemGeneral/DemDataElementClass.SHORT-NAME)} |
+| 数据元素 | data：类型 Dem_DataType_{Data}，变体 Data = {ecuc(Dem/DemGeneral/DemDataElementClass.SHORT-NAME)} |
+
+#### 7.6.3. 客户端-服务器接口
+
+##### 7.6.3.1. CallbackClearEventAllowed
+
+客户端-服务器接口 CallbackClearEventAllowed 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CallbackClearEventAllowed |
+| 注释 | 如果已配置，它从 **SW-C** 获取清除特定事件的许可。对于每个事件，可以有一个此接口类型的端口。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：操作成功<br>1：操作失败 |
+
+**操作** ClearEventAllowed
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | &lt;Module&gt;_DemClearEventAllowed&lt;ForCondition&gt; |
+| 变体 | - |
+| 参数 Allowed | 类型 boolean，方向 OUT，说明：True——允许清除事件；False——不允许清除事件 |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.2. CallbackComponentStatusChanged
+
+客户端-服务器接口 CallbackComponentStatusChanged 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CallbackComponentStatusChanged |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | - |
+
+**操作** ComponentStatusChanged
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | - |
+| 变体 | - |
+| 参数 ComponentFailedStatus | 类型 boolean，方向 IN，注释：- |
+| 可能的错误 | - |
+
+##### 7.6.3.3. CallbackDTCStatusChange
+
+客户端-服务器接口 CallbackDTCStatusChange 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CallbackDTCStatusChange |
+| 注释 | 如果已配置，它通过 DemCallbackDTCStatusChanged、DemCallbackOBDDTCStatusChanged 和/或 DemCallbackJ1939DTCStatusChanged 在 **DTC** 状态字节变化时触发 **SW-C**。此接口类型可以有多个端口，由 **Dem** 服务组件全局提供。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK 操作<br>1：E_NOT_OK 操作 |
+
+**操作** DTCStatusChanged
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | &lt;Module&gt;_DemTriggerOnDTCStatus |
+| 变体 | - |
+| 参数 DTC | 类型 uint32，方向 IN，注释：- |
+| 参数 DTCStatusOld | 类型 Dem_UdsStatusByteType，方向 IN，注释：- |
+| 参数 DTCStatusNew | 类型 Dem_UdsStatusByteType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.4. CallbackEventDataChanged
+
+客户端-服务器接口 CallbackEventDataChanged 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CallbackEventDataChanged |
+| 注释 | 如果已配置，它在事件相关数据变化时触发 **SW-C**。对于每个事件，可以有一个此接口类型的端口。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功 |
+
+**操作** EventDataChanged
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | - |
+| 变体 | - |
+| 可能的错误 | - |
+
+##### 7.6.3.5. CallbackEventUdsStatusChanged
+
+客户端-服务器接口 CallbackEventUdsStatusChanged 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CallbackEventUdsStatusChanged |
+| 注释 | 如果已配置，它在事件状态字节变化时触发 **SW-C**。对于每个事件，可以有多个此接口类型的端口。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功 |
+
+**操作** CallbackEventUdsStatusChanged
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | - |
+| 变体 | - |
+| 参数 EventStatusByteOld | 类型 Dem_UdsStatusByteType，方向 IN，注释：- |
+| 参数 EventStatusByteNew | 类型 Dem_UdsStatusByteType，方向 IN，注释：- |
+| 可能的错误 | - |
+
+##### 7.6.3.6. CallbackGetFaultDetectCounter
+
+客户端-服务器接口 CallbackGetFaultDetectCounter 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CallbackGetFaultDetectCounter |
+| 注释 | 如果已配置，它从 **SW-C** 获取特定事件的监视器内部故障检测计数器值。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** GetFaultDetectionCounter
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | &lt;Module&gt;_DemGetFaultDetectionCounter&lt;ForEvent&gt; |
+| 变体 | - |
+| 参数 FaultDetectionCounter | 类型 sint8，方向 OUT，注释：FaultDetectionCounter 的值 |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.7. CallbackInitMonitorForEvent
+
+客户端-服务器接口 CallbackInitMonitorForEvent 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CallbackInitMonitorForEvent |
+| 注释 | 如果已配置，它触发 **SW-C** 监视器部分的事件特定初始化。对于每个事件，可以有一个此接口类型的端口。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：操作成功<br>1：操作失败 |
+
+**操作** InitMonitorForEvent
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | &lt;Module&gt;_DemInitMonitorFor&lt;EventName&gt; |
+| 变体 | - |
+| 参数 InitMonitorReason | 类型 Dem_InitMonitorReasonType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.8. CallbackMonitorStatusChange
+
+客户端-服务器接口 CallbackMonitorStatusChange 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CallbackMonitorStatusChange |
+| 注释 | 如果已配置，它在监视器状态变化时触发 **SW-C**。对于每个事件，可以有多个此接口类型的端口。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功 |
+
+**操作** MonitorStatusChanged
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | - |
+| 变体 | - |
+| 可能的错误 | - |
+
+##### 7.6.3.9. ClearDtcNotification
+
+客户端-服务器接口 ClearDtcNotification 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | ClearDtcNotification |
+| 注释 | - |
+| IsService | true |
+| 变体 | (count({ecuc(Dem/DemGeneral/DemEventMemorySet/DemClearDTCNotification/DemClearDtcNotificationFnc)} == NULL) &gt; 0) |
+| 可能的错误 | 0：E_OK，操作成功 |
+
+**操作** ClearDtcNotification
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | - |
+| 变体 | - |
+| 参数 DTC | 类型 uint32，方向 IN，注释：- |
+| 参数 DTCFormat | 类型 Dem_DTCFormatType，方向 IN，注释：- |
+| 参数 DTCOrigin | 类型 Dem_DTCOriginType，方向 IN，注释：- |
+| 可能的错误 | E_OK |
+
+##### 7.6.3.10. ClearDTC
+
+客户端-服务器接口 ClearDTC 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | ClearDTC |
+| 注释 | 仅向复杂设备驱动提供这些操作。此接口类型的一个端口由 **Dem** 服务组件全局提供。它以 ClientId 作为端口定义参数。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败<br>4：DEM_PENDING，**DTC** 清除正在进行中。调用者应在稍后时刻再次调用此函数<br>5：DEM_CLEAR_BUSY，另一个客户端当前正在清除 **DTC**。所请求的操作不会开始，调用者应在稍后时刻重试<br>6：DEM_CLEAR_MEMORY_ERROR，擦除内存位置时发生错误（例如在 DemClearDTCBehavior 设置为 DEM_CLRRESP_NON-VOLATILE_FINISH 且非易失性块擦除失败时）<br>7：DEM_CLEAR_FAILED，**DTC** 清除失败<br>8：DEM_WRONG_DTC，所选格式下所选的 **DTC** 值不存在，或按配置仅允许清除所有 **DTC** 组<br>9：DEM_WRONG_DTCORIGIN，所选 **DTCOrigin** 不存在<br>22：DEM_BUSY，该客户端另一个基于 Dem_SelectDTC 的操作（按第 6.11.2.2 节）正在进行中 |
+
+**操作** ClearDTC
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_ClearDTC |
+| 变体 | - |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_PENDING、DEM_CLEAR_BUSY、DEM_CLEAR_MEMORY_ERROR、DEM_CLEAR_FAILED、DEM_WRONG_DTC、DEM_WRONG_DTCORIGIN、DEM_BUSY |
+
+**操作** SelectDTC
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SelectDTC |
+| 变体 | - |
+| 参数 DTC | 类型 uint32，方向 IN，注释：- |
+| 参数 DTCFormat | 类型 Dem_DTCFormatType，方向 IN，注释：- |
+| 参数 DTCOrigin | 类型 Dem_DTCOriginType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.11. DTCSuppression
+
+客户端-服务器接口 DTCSuppression 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DTCSuppression |
+| 注释 | 提供控制 **DTC** 抑制的能力。此接口类型的一个端口由 **Dem** 服务组件全局提供。 |
+| IsService | true |
+| 变体 | ({ecuc(Dem/DemGeneral/DemSuppressionSupport)} == `DEM_DTC_SUPPRESSION`) |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败<br>4：DEM_PENDING，**DTC** 清除正在进行中。调用者应在稍后时刻再次调用此函数<br>8：DEM_WRONG_DTC，所选格式下所选的 **DTC** 值不存在，或按配置仅允许清除所有 **DTC** 组<br>9：DEM_WRONG_DTCORIGIN，所选 **DTCOrigin** 不存在 |
+
+**操作** GetDTCSuppression
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetDTCSuppression |
+| 变体 | - |
+| 参数 ClientID | 类型 uint8，方向 IN，说明：分配给调用模块实例的唯一客户端 ID |
+| 参数 SuppressionStatus | 类型 boolean，方向 OUT，说明：定义相应 **DTC** 是被抑制（TRUE）还是启用（FALSE） |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_PENDING、DEM_WRONG_DTC、DEM_WRONG_DTCORIGIN |
+
+**操作** SetDTCSuppression
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetDTCSuppression |
+| 变体 | - |
+| 参数 ClientID | 类型 uint8，方向 IN，说明：分配给调用模块实例的唯一客户端 ID |
+| 参数 SuppressionStatus | 类型 boolean，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_WRONG_DTC、DEM_WRONG_DTCORIGIN |
+
+##### 7.6.3.12. DataServices_{Data}
+
+客户端-服务器接口 DataServices_{Data} 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DataServices_{Data} |
+| 注释 | 如果已配置，它通过客户端/服务器或发送者/接收者通信从相应的 **SW-C** 获取包含在 **DID**、**PID** 或扩展数据记录中的数据元素值（参见图"Dem 和 Dcm 模块经 ReadData 操作请求 SW-C 的 PID 数据元素"）。**SW-C** 为每个数据元素提供一个此接口类型的端口。 |
+| IsService | true |
+| 变体 | (({ecuc(Dem/DemGeneral/DemDataElementClass)} instanceof {ecuc(Dem/DemGeneral/DemDataElementClass/DemExternalCSDataElementClass)}) && ({ecuc(…/DemDataElementUsePort)} == true))；Data = {ecuc(Dem/DemGeneral/DemDataElementClass.SHORT-NAME)} |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** ReadData
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | 服务器不允许返回 E_NOT_OK，而应始终向 **Dcm**/**Dem** 提供有效的数据值（例如错误情况下的默认/替换值）；尽管如此，该操作的签名包含 E_NOT_OK 以确保服务器 runnable 与 **RTE** 调用 **API** 之间的兼容性，因为 **RTE** 在某些情况下可能返回负的 Std_Return 值（例如服务器分区已停止）。 |
+| 映射到的 API | &lt;Module&gt;_DemRead&lt;DataElement&gt; |
+| 变体 | - |
+| 参数 Data | 类型 Dem_DataType_{Data}，方向 OUT，注释：-，变体 Data = {ecuc(Dem/DemGeneral/DemDataElementClass.SHORT-NAME)} |
+| 参数 monitorData0 | 类型 Dem_MonitorDataType，方向 IN，变体 ({ecuc(Dem/DemGeneral/DemDataElementClass/DemExternalCSDataElementClass/DemDataElementProvideMonitorData)} == true) |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.13. DTRCentralReport
+
+客户端-服务器接口 DTRCentralReport 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DTRCentralReport |
+| 注释 | 如果配置了 **OBD** 支持则可用。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：操作成功<br>1：操作失败 |
+
+**操作** SetDTR
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetDTR |
+| 变体 | - |
+| 参数 TestResult | 类型 sint32，方向 IN，注释：- |
+| 参数 LowerLimit | 类型 sint32，方向 IN，注释：- |
+| 参数 UpperLimit | 类型 sint32，方向 IN，注释：- |
+| 参数 Ctrlval | 类型 Dem_DTRControlType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**注意：**此接口类型的一个端口由 **Dem** 服务组件按 DtrId 提供。它以 DTRId 作为端口定义参数。
+
+##### 7.6.3.14. DiagnosticInfo
+
+客户端-服务器接口 DiagnosticInfo 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DiagnosticInfo |
+| 注释 | 提供获取事件信息的能力。此接口类型的一个端口由 **Dem** 服务组件按诊断事件提供。它以 EventId 作为端口定义参数。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败<br>10：DEM_E_NO_DTC_AVAILABLE，在所请求的格式中没有配置 **DTC**<br>14：DEM_E_NO_FDC_AVAILABLE，所请求事件没有可用的故障检测计数器<br>21：DEM_BUFFER_TOO_SMALL，提供的缓冲区大小太小<br>48：DEM_NO_SUCH_ELEMENT，所请求的事件数据当前未存储（但请求有效）；或该事件不支持所请求的记录号；或该冻结帧不支持所请求的 **DID**（GetEventFreezeFrameDataEx） |
+
+**操作** GetDTCOfEvent
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetDTCOfEvent |
+| 变体 | - |
+| 参数 DTCFormat | 类型 Dem_DTCFormatType，方向 IN，注释：- |
+| 参数 DTCOfEvent | 类型 uint32，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_E_NO_DTC_AVAILABLE |
+
+**操作** GetDebouncingOfEvent
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetDebouncingOfEvent |
+| 变体 | (({ecuc(Dem/DemConfigSet/DemEventParameter/DemDebounceAlgorithmClass)} instanceof {ecuc(…/DemDebounceCounterBased)}) &#124;&#124; ({ecuc(Dem/DemConfigSet/DemEventParameter/DemDebounceAlgorithmClass)} instanceof {ecuc(…/DemDebounceTimeBased)})) |
+| 参数 DebouncingState | 类型 Dem_DebouncingStateType，方向 OUT，说明：位 0 暂时缺陷（对应 0 &lt; **FDC** &lt; 127）；位 1 最终缺陷（对应 **FDC** = 127）；位 2 暂时恢复（对应 -128 &lt; **FDC** &lt; 0）；位 3 测试完成（对应 **FDC** = -128 或 **FDC** = 127）；位 4 **DTR** 更新（= 测试完成 且 去抖动完成 且 使能条件/存储条件满足） |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** GetEventAvailable
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetEventAvailable |
+| 变体 | - |
+| 参数 AvailableStatus | 类型 boolean*，方向 OUT，说明：事件可用则为 TRUE；事件不可用则为 FALSE |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** GetEventExtendedDataRecordEx
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetEventExtendedDataRecordEx |
+| 变体 | - |
+| 参数 RecordNumber | 类型 uint8，方向 IN，注释：- |
+| 参数 DestBuffer | 类型 Dem_MaxDataValueType，方向 OUT，注释：- |
+| 参数 Bufsize | 类型 uint16，方向 INOUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_BUFFER_TOO_SMALL、DEM_NO_SUCH_ELEMENT |
+
+**操作** GetEventFreezeFrameDataEx
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetEventFreezeFrameDataEx |
+| 变体 | - |
+| 参数 RecordNumber | 类型 uint8，方向 IN，注释：- |
+| 参数 DataId | 类型 uint16，方向 IN，注释：- |
+| 参数 DestBuffer | 类型 Dem_MaxDataValueType，方向 OUT，注释：- |
+| 参数 BufSize | 类型 uint16，方向 INOUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_BUFFER_TOO_SMALL、DEM_NO_SUCH_ELEMENT |
+
+**操作** GetEventUdsStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | 获取分配给事件 **DTC** 的当前 **UDS** 状态字节 |
+| 映射到的 API | Dem_GetEventUdsStatus |
+| 变体 | - |
+| 参数 UDSStatusByte | 类型 Dem_UdsStatusByteType，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** GetFaultDetectionCounter
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetFaultDetectionCounter |
+| 变体 | - |
+| 参数 FaultDetectionCounter | 类型 sint8，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_E_NO_FDC_AVAILABLE |
+
+**操作** GetMonitorStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetMonitorStatus |
+| 变体 | - |
+| 参数 MonitorStatus | 类型 Dem_MonitorStatusType，方向 OUT，说明：所请求事件的监视器状态字节。如果函数调用的返回值为 E_NOT_OK，此参数不包含有效数据。 |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**注意：**这些 DiagnosticInfo 端口也对每个 **BSW** 事件可用（以便 **SW-C** 也能访问）。
+
+##### 7.6.3.15. DiagnosticMonitor
+
+客户端-服务器接口 DiagnosticMonitor 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DiagnosticMonitor |
+| 注释 | 提供修改事件信息的能力。此接口类型的一个端口由 **Dem** 服务组件按应用相关诊断事件提供。它以 EventId 作为端口定义参数。 |
+| IsService | true |
+| 变体 | (({Dem/DemGeneral/DemStorageCondition.DemStorageConditionReplacementEventRef}) != ({Dem/DemConfigSet/DemEventParameter}) && ({Dem/DemConfigSet/DemEventParameter/DemEventReportingType} == `STANDARD_REPORTING`)) |
+| 可能的错误 | 0：操作成功<br>1：操作失败 |
+
+**操作** ClearPrestoredFreezeFrame
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_ClearPrestoredFreezeFrame |
+| 变体 | {ecuc(Dem/DemGeneral/DemMaxNumberPrestoredFF)} &gt; 0 |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** PrestoreFreezeFrame
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_PrestoreFreezeFrame |
+| 变体 | {ecuc(Dem/DemGeneral/DemMaxNumberPrestoredFF)} &gt; 0 |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** ResetEventDebounceStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_ResetEventDebounceStatus |
+| 变体 | ({ecuc(Dem/DemGeneral/DemDebounceCounterBasedSupport)} == true) &#124;&#124; ({ecuc(Dem/DemGeneral/DemDebounceTimeBasedSupport)} == true) |
+| 参数 DebounceResetStatus | 类型 Dem_DebounceResetStatusType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** ResetEventStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_ResetEventStatus |
+| 变体 | - |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** ResetMonitorStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_ResetMonitorStatus |
+| 变体 | - |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** SetEventDisabled
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetEventDisabled |
+| 变体 | {ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT` |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** SetEventStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetEventStatus |
+| 变体 | - |
+| 参数 EventStatus | 类型 Dem_EventStatusType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**注意：**DiagnosticMonitor 接口的每个端口仅连接到一个监视器端口。
+
+**注意：**对于内部使用的事件（替换事件），不会生成端口。
+
+**注意：**此客户端/服务器接口中的所有操作在每个服务器端口（相同 eventId）上是互斥的。被抢占的调用可能被忽略而不由 **Dem** 处理。
+
+##### 7.6.3.16. DiagnosticMonitor_MonitorData
+
+客户端-服务器接口 DiagnosticMonitor_MonitorData 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DiagnosticMonitor_MonitorData |
+| 注释 | 提供带监视数据报告诊断监视器状态的方法。 |
+| IsService | true |
+| 变体 | ({Dem/DemConfigSet/DemEventParameter/DemEventReportingType} == `STANDARD_REPORTING_WITH_MONITOR_DATA`) |
+| 可能的错误 | 0：操作成功<br>1：操作失败 |
+
+**操作** SetEventStatusWithMonitorData
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetEventStatusWithMonitorData |
+| 变体 | - |
+| 参数 EventStatus | 类型 Dem_EventStatusType，方向 IN，注释：- |
+| 参数 monitorData0 | 类型 Dem_MonitorDataType，方向 IN，注释：- |
+| 参数 monitorData1 | 类型 Dem_MonitorDataType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.17. EnableCondition
+
+客户端-服务器接口 EnableCondition 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | EnableCondition |
+| 注释 | 如果至少配置了一个使能条件，它提供设置使能条件的能力。此接口类型的一个端口由 **Dem** 服务组件按使能条件提供。它以 EnableConditionId 作为端口定义参数。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** SetEnableCondition
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetEnableCondition |
+| 变体 | - |
+| 参数 ConditionFulfilled | 类型 boolean，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.18. EventAvailable
+
+客户端-服务器接口 EventAvailable 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | EventAvailable |
+| 注释 | - |
+| IsService | true |
+| 变体 | {ecuc(Dem/DemGeneral/DemAvailabilitySupport)} == `DEM_EVENT_AVAILABILITY` |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** SetEventAvailable
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetEventAvailable |
+| 变体 | - |
+| 参数 AvailableStatus | 类型 boolean，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.19. EventFailureCycleCounterThreshold
+
+客户端-服务器接口 EventFailureCycleCounterThreshold 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | EventFailureCycleCounterThreshold |
+| 注释 | 提供动态调整失败周期阈值的能力。此接口类型的一个端口按诊断事件提供，以 EventId 作为端口定义参数。 |
+| IsService | true |
+| 变体 | (count({ecuc(Dem/DemConfigSet/DemEventParameter/DemEventConfirmationThresholdCounterAdaptable)} == TRUE) &gt; 0) |
+| 可能的错误 | 0：操作成功<br>1：操作失败 |
+
+**操作** SetEventFailureCycleCounterThreshold
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetEventConfirmationThresholdCounter |
+| 变体 | - |
+| 参数 FailureCycleCounterThreshold | 类型 uint8，方向 IN，说明：要设置的事件失败周期计数器阈值 |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.20. EvMemOverflowIndication
+
+客户端-服务器接口 EvMemOverflowIndication 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | EvMemOverflowIndication |
+| 注释 | 如果配置了相应的事件内存，它提供事件内存的状态。此接口类型的一个端口由 **Dem** 服务组件按支持的事件内存提供。它以 DTCOrigin 作为端口定义参数。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** GetEventMemoryOverflow
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetEventMemoryOverflow |
+| 变体 | - |
+| 参数 OverflowIndication | 类型 boolean，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** GetNumberOfEventMemoryEntries
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetNumberOfEventMemoryEntries |
+| 变体 | - |
+| 参数 NumberOfEventMemoryEntries | 类型 uint8，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.21. EventStatus
+
+客户端-服务器接口 EventStatus 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | EventStatus |
+| 注释 | 提供修改事件状态的能力。此接口类型的一个端口由 **Dem** 服务组件按应用相关诊断事件提供。它以 EventId 作为端口定义参数。 |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** SetWIRStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetWIRStatus |
+| 变体 | - |
+| 参数 WIRStatus | 类型 boolean，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**注意：**EventStatus 接口的每个端口仅连接到失效安全 **SW-C** 的一个端口。
+
+##### 7.6.3.22. GeneralCallbackEventDataChanged
+
+客户端-服务器接口 GeneralCallbackEventDataChanged 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GeneralCallbackEventDataChanged |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功 |
+
+**操作** EventDataChanged
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | - |
+| 变体 | - |
+| 参数 EventId | 类型 Dem_EventIdType，方向 IN，注释：- |
+| 可能的错误 | - |
+
+##### 7.6.3.23. GeneralCallbackEventUdsStatusChanged
+
+客户端-服务器接口 GeneralCallbackEventUdsStatusChanged 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GeneralCallbackEventUdsStatusChanged |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功 |
+
+**操作** GeneralCallbackEventUdsStatusChanged
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | - |
+| 变体 | - |
+| 参数 EventId | 类型 Dem_EventIdType，方向 IN，注释：- |
+| 参数 EventStatusByteOld | 类型 Dem_UdsStatusByteType，方向 IN，注释：- |
+| 参数 EventStatusByteNew | 类型 Dem_UdsStatusByteType，方向 IN，注释：- |
+| 可能的错误 | - |
+
+##### 7.6.3.24. GeneralCallbackMonitorStatusChanged
+
+客户端-服务器接口 GeneralCallbackMonitorStatusChanged 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GeneralCallbackMonitorStatusChanged |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功 |
+
+**操作** MonitorStatusChanged
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | - |
+| 变体 | - |
+| 参数 EventId | 类型 Dem_EventIdType，方向 IN，注释：- |
+| 可能的错误 | - |
+
+##### 7.6.3.25. GeneralDiagnosticInfo
+
+客户端-服务器接口 GeneralDiagnosticInfo 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GeneralDiagnosticInfo |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败<br>10：DEM_E_NO_DTC_AVAILABLE，在所请求的格式中没有配置 **DTC**<br>14：DEM_E_NO_FDC_AVAILABLE，所请求事件没有可用的故障检测计数器<br>21：DEM_BUFFER_TOO_SMALL，提供的缓冲区大小太小<br>48：DEM_NO_SUCH_ELEMENT，所请求的事件数据当前未存储（但请求有效）；或该事件不支持所请求的记录号；或该冻结帧不支持所请求的 **DID**（GetEventFreezeFrameDataEx） |
+
+**操作** GetDTCOfEvent
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetDTCOfEvent |
+| 变体 | - |
+| 参数 EventId | 类型 Dem_EventIdType，方向 IN，注释：- |
+| 参数 DTCFormat | 类型 Dem_DTCFormatType，方向 IN，注释：- |
+| 参数 DTCOfEvent | 类型 uint32，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** GetDebouncingOfEvent
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetDebouncingOfEvent |
+| 变体 | (({ecuc(Dem/DemConfigSet/DemEventParameter/DemDebounceAlgorithmClass)} instanceof {ecuc(…/DemDebounceCounterBased)}) &#124;&#124; ({ecuc(Dem/DemConfigSet/DemEventParameter/DemDebounceAlgorithmClass)} instanceof {ecuc(…/DemDebounceTimeBased)})) |
+| 参数 EventId | 类型 Dem_EventIdType，方向 IN，变体：- |
+| 参数 DebouncingState | 类型 Dem_DebouncingStateType，方向 OUT，说明：位 0 暂时缺陷（对应 0 &lt; **FDC** &lt; 127）；位 1 最终缺陷（对应 **FDC** = 127）；位 2 暂时恢复（对应 -128 &lt; **FDC** &lt; 0）；位 3 测试完成（对应 **FDC** = -128 或 **FDC** = 127）；位 4 **DTR** 更新（= 测试完成 且 去抖动完成 且 使能条件/存储条件满足） |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** GetEventExtendedDataRecordEx
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetEventExtendedDataRecordEx |
+| 变体 | - |
+| 参数 EventId | 类型 Dem_EventIdType，方向 IN，注释：- |
+| 参数 RecordNumber | 类型 uint8，方向 IN，注释：- |
+| 参数 DestBuffer | 类型 Dem_MaxDataValueType，方向 OUT，注释：- |
+| 参数 Bufsize | 类型 uint16，方向 INOUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_BUFFER_TOO_SMALL、DEM_NO_SUCH_ELEMENT |
+
+**操作** GetEventFreezeFrameDataEx
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetEventFreezeFrameDataEx |
+| 变体 | - |
+| 参数 EventId | 类型 Dem_EventIdType，方向 IN，注释：- |
+| 参数 RecordNumber | 类型 uint8，方向 IN，注释：- |
+| 参数 DataId | 类型 uint16，方向 IN，注释：- |
+| 参数 DestBuffer | 类型 Dem_MaxDataValueType，方向 OUT，注释：- |
+| 参数 BufSize | 类型 uint16，方向 INOUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_BUFFER_TOO_SMALL、DEM_NO_SUCH_ELEMENT |
+
+**操作** GetEventUdsStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | 获取分配给事件 **DTC** 的当前 **UDS** 状态字节 |
+| 映射到的 API | Dem_GetEventUdsStatus |
+| 变体 | - |
+| 参数 EventId | 类型 Dem_EventIdType，方向 IN，注释：- |
+| 参数 UDSStatusByte | 类型 Dem_UdsStatusByteType，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** GetFaultDetectionCounter
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetFaultDetectionCounter |
+| 变体 | - |
+| 参数 EventId | 类型 Dem_EventIdType，方向 IN，注释：- |
+| 参数 FaultDetectionCounter | 类型 sint8，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK、DEM_E_NO_FDC_AVAILABLE |
+
+**操作** GetMonitorStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetMonitorStatus |
+| 变体 | - |
+| 参数 EventID | 类型 Dem_EventIdType，方向 IN，说明：通过分配的 **EventId** 标识事件 |
+| 参数 MonitorStatus | 类型 Dem_MonitorStatusType，方向 OUT，说明：所请求事件的监视器状态字节。如果函数调用的返回值为 E_NOT_OK，此参数不包含有效数据。 |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.26. GetDataOfPID21
+
+客户端-服务器接口 GetDataOfPID21 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GetDataOfPID21 |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** GetDataOfPID21
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetDataOfPID21 |
+| 变体 | - |
+| 参数 PID21value | 类型 Dem_PID21valueType，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.27. IndicatorStatus
+
+客户端-服务器接口 IndicatorStatus 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | IndicatorStatus |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：操作成功<br>1：操作失败 |
+
+**操作** GetIndicatorStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetIndicatorStatus |
+| 变体 | - |
+| 参数 IndicatorStatus | 类型 Dem_IndicatorStatusType，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.28. IUMPRDenominator
+
+客户端-服务器接口 IUMPRDenominator 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | IUMPRDenominator |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK 操作<br>1：E_NOT_OK 操作 |
+
+**操作** RepIUMPRDenRelease
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_RepIUMPRDenRelease |
+| 变体 | - |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.29. IUMPRDenominatorCondition
+
+客户端-服务器接口 IUMPRDenominatorCondition 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | IUMPRDenominatorCondition |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** GetIUMPRDenCondition
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetIUMPRDenCondition |
+| 变体 | - |
+| 参数 ConditionStatus | 类型 Dem_IumprDenomCondStatusType，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** SetIUMPRDenCondition
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetIUMPRDenCondition |
+| 变体 | - |
+| 参数 ConditionStatus | 类型 Dem_IumprDenomCondStatusType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.30. IUMPRNumerator
+
+客户端-服务器接口 IUMPRNumerator 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | IUMPRNumerator |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** RepIUMPRFaultDetect
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_RepIUMPRFaultDetect |
+| 变体 | - |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.31. OperationCycle
+
+客户端-服务器接口 OperationCycle 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | OperationCycle |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：操作成功<br>1：操作失败 |
+
+**操作** GetCycleQualified
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_GetCycleQualified |
+| 变体 | - |
+| 参数 isQualified | 类型 boolean*，方向 OUT，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** RestartOperationCycle
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_RestartOperationCycle |
+| 变体 | - |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+**操作** SetCycleQualified
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetCycleQualified |
+| 变体 | - |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.32. PowerTakeOff
+
+客户端-服务器接口 PowerTakeOff 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | PowerTakeOff |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：操作成功<br>1：操作失败 |
+
+**操作** SetPtoStatus
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetPtoStatus |
+| 变体 | - |
+| 参数 PtoStatus | 类型 boolean，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.33. SetDataOfPID21
+
+客户端-服务器接口 SetDataOfPID21 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | SetDataOfPID21 |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** SetDataOfPID21
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetDataOfPID21 |
+| 变体 | - |
+| 参数 PID21value | 类型 Dem_PID21valueType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.34. SetDataOfPID31
+
+客户端-服务器接口 SetDataOfPID31 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | SetDataOfPID31 |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** SetDataOfPID31
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetDataOfPID31 |
+| 变体 | - |
+| 参数 PID31value | 类型 Dem_PID31valueType，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+##### 7.6.3.35. SetDataOfPID4D
+
+客户端-服务器接口 SetDataOfPID4D 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | SetDataOfPID4D |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：操作成功 |
+
+**操作** SetDataOfPID4D
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetDataOfPID4D |
+| 变体 | - |
+| 参数 PID4Dvalue | 类型 Dem_PID4DvalueType，方向 IN，注释：- |
+| 可能的错误 | E_OK |
+
+##### 7.6.3.36. SetDataOfPID4E
+
+客户端-服务器接口 SetDataOfPID4E 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | SetDataOfPID4E |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：操作成功 |
+
+**操作** SetDataOfPID4E
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetDataOfPID4E |
+| 变体 | - |
+| 参数 PID4Evalue | 类型 Dem_PID4EvalueType，方向 IN，注释：- |
+| 可能的错误 | E_OK |
+
+##### 7.6.3.37. StorageCondition
+
+客户端-服务器接口 StorageCondition 的定义：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | StorageCondition |
+| 注释 | - |
+| IsService | true |
+| 变体 | - |
+| 可能的错误 | 0：E_OK，操作成功<br>1：E_NOT_OK，操作失败 |
+
+**操作** SetStorageCondition
+
+| 属性 | 值 |
+| --- | --- |
+| 注释 | - |
+| 映射到的 API | Dem_SetStorageCondition |
+| 变体 | - |
+| 参数 ConditionFulfilled | 类型 boolean，方向 IN，注释：- |
+| 可能的错误 | E_OK、E_NOT_OK |
+
+#### 7.6.4. 端口
+
+##### 7.6.4.1. CBClrEvt
+
+端口 CBClrEvt_{Name} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CBClrEvt_{Name} |
+| 类别 | 需求端口 |
+| 接口 | CallbackClearEventAllowed |
+| 说明 | - |
+| 变体 | (({ecuc(Dem/DemConfigSet/DemEventParameter/DemCallbackClearEventAllowed)} != NULL) && ({ecuc(…/DemCallbackClearEventAllowedFnc)} == NULL))；Name = {ecuc(Dem/DemConfigSet/DemEventParameter/DemCallbackClearEventAllowed.SHORT-NAME)} |
+
+##### 7.6.4.2. CBDataEvt
+
+端口 CBDataEvt_{Name} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CBDataEvt_{Name} |
+| 类别 | 需求端口 |
+| 接口 | CallbackEventDataChanged |
+| 说明 | - |
+| 变体 | (({ecuc(Dem/DemConfigSet/DemEventParameter/DemCallbackEventDataChanged)} != NULL) && ({ecuc(…/DemCallbackEventDataChangedFnc)} == NULL))；Name = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)} |
+
+##### 7.6.4.3. CBFaultDetectCtr
+
+端口 CBFaultDetectCtr_{Name} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CBFaultDetectCtr_{Name} |
+| 类别 | 需求端口 |
+| 接口 | CallbackGetFaultDetectCounter |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemConfigSet/DemEventParameter/DemDebounceAlgorithmClass/DemDebounceMonitorInternal/DemCallbackGetFDC/DemCallbackGetFDCFnc)} == NULL)；Name = {ecuc(…/DemCallbackGetFDC.SHORT-NAME)} |
+
+##### 7.6.4.4. CBInitEvt
+
+端口 CBInitEvt_{Name} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CBInitEvt_{Name} |
+| 类别 | 需求端口 |
+| 接口 | CallbackInitMonitorForEvent |
+| 说明 | - |
+| 变体 | (({ecuc(Dem/DemConfigSet/DemEventParameter/DemCallbackInitMForE)} != NULL) && ({ecuc(…/DemCallbackInitMForEFnc)} == NULL))；Name = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)} |
+
+##### 7.6.4.5. CBStatusDTC
+
+端口 CBStatusDTC_{Name} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CBStatusDTC_{Name} |
+| 类别 | 需求端口 |
+| 接口 | CallbackDTCStatusChange |
+| 说明 | - |
+| 变体 | Name = {ecuc(Dem/DemGeneral/DemClient/DemCallbackDTCStatusChanged.SHORT-NAME)} |
+
+##### 7.6.4.6. CBEventUdsStatusChanged
+
+端口 CBEventUdsStatusChanged_{EventName}_{CallbackName} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CBEventUdsStatusChanged_{EventName}_{CallbackName} |
+| 类别 | 需求端口 |
+| 接口 | CallbackEventUdsStatusChanged |
+| 说明 | - |
+| 变体 | EventName = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)}；CallbackName = {ecuc(Dem/DemConfigSet/DemEventParameter/DemCallbackEventUdsStatusChanged.SHORT-NAME)} |
+
+##### 7.6.4.7. CBMonitorStatusChanged
+
+端口 CBMonitorStatusChanged_{EventName}_{CallbackName} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CBMonitorStatusChanged_{EventName}_{CallbackName} |
+| 类别 | 需求端口 |
+| 接口 | CallbackMonitorStatusChange |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemConfigSet/DemEventParameter.DemEventKind)} == `DEM_EVENT_KIND_SWC`)；EventName = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)}；CallbackName = {ecuc(Dem/DemConfigSet/DemEventParameter/DemCallbackMonitorStatusChanged.SHORT-NAME)} |
+
+##### 7.6.4.8. CBStatusComp
+
+端口 CBStatusComp_{ComponentName} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | CBStatusComp_{ComponentName} |
+| 类别 | 需求端口 |
+| 接口 | CallbackComponentStatusChanged |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemConfigSet/DemComponent.DemComponentFailedCallbackUsePort)} == TRUE)；ComponentName = {ecuc(Dem/DemConfigSet/DemComponent.SHORT-NAME)} |
+
+##### 7.6.4.9. ClearDTC
+
+端口 ClearDTC_{Client} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | ClearDTC_{Client} |
+| 类别 | 提供端口 |
+| 接口 | ClearDTC |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral/DemClient/DemClientUsesRte)} == True) && ({ecuc(Dem/DemGeneral/DemClient/DemClientFunctionality)} == `DEM_CLIENT_USES_FULL_FUNCTIONALITY`)；Client = {ecuc(Dem/DemGeneral/DemClient.SHORT-NAME)} |
+
+##### 7.6.4.10. ClearDtcNotification
+
+端口 ClearDtcNotification_{EventMemorySet}_{Notification} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | ClearDtcNotification_{EventMemorySet}_{Notification} |
+| 类别 | 需求端口 |
+| 接口 | ClearDtcNotification |
+| 说明 | **Dem** 在执行清除 **DTC** 操作时调用 |
+| 变体 | ({ecuc(Dem/DemGeneral/DemEventMemorySet/DemClearDTCNotification/DemClearDtcNotificationFnc)} == NULL)；EventMemorySet = {ecuc(Dem/DemGeneral/DemEventMemorySet.SHORT-NAME)}；Notification = {ecuc(Dem/DemGeneral/DemEventMemorySet/DemClearDTCNotification.SHORT-NAME)} |
+
+##### 7.6.4.11. ControlDTCSuppression
+
+端口 ControlDTCSuppression 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | ControlDTCSuppression |
+| 类别 | 提供端口 |
+| 接口 | DTCSuppression |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral/DemSuppressionSupport)} == `DEM_DTC_SUPPRESSION`) |
+
+##### 7.6.4.12. EventAvailable
+
+端口 EventAvailable_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | EventAvailable_{Name} |
+| 类别 | 提供端口 |
+| 接口 | EventAvailable |
+| 说明 | - |
+| 变体 | {ecuc(Dem/DemGeneral/DemAvailabilitySupport)} == `DEM_EVENT_AVAILABILITY`；Name = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)} |
+
+##### 7.6.4.13. ControlEventFailureCycleCounterThreshold
+
+端口 ControlEventFailureCycleCounterThreshold_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | ControlEventFailureCycleCounterThreshold_{Name} |
+| 类别 | 提供端口 |
+| 接口 | EventFailureCycleCounterThreshold |
+| 说明 | - |
+| 变体 | {ecuc(Dem/DemConfigSet/DemEventParameter/DemEventConfirmationThresholdCounterAdaptable)} == TRUE；Name = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)} |
+
+##### 7.6.4.14. DataServices_{Data}
+
+端口 DataServices_{Data} 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DataServices_{Data} |
+| 类别 | 需求端口 |
+| 接口 | DataServices_{Data}（客户端/服务器与发送者/接收者两种形式） |
+| 说明 | - |
+| 变体 | (({ecuc(Dem/DemGeneral/DemDataElementClass)} instanceof {ecuc(…/DemExternalCSDataElementClass)}) && ({ecuc(…/DemDataElementUsePort)} == TRUE)) &#124;&#124; ({ecuc(Dem/DemGeneral/DemDataElementClass)} instanceof {ecuc(…/DemExternalSRDataElementClass)})；Data = {ecuc(Dem/DemGeneral/DemDataElementClass.SHORT-NAME)} |
+
+##### 7.6.4.15. DTR
+
+端口 DTR_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DTR_{Name} |
+| 类别 | 提供端口 |
+| 接口 | DTRCentralReport |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`)；Name = {ecuc(Dem/DemConfigSet/DemDtrs/DemDtr.SHORT-NAME)} |
+
+##### 7.6.4.16. EnableCond
+
+端口 EnableCond_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | EnableCond_{Name} |
+| 类别 | 提供端口 |
+| 接口 | EnableCondition |
+| 说明 | - |
+| 变体 | Name = {ecuc(Dem/DemGeneral/DemEnableCondition.SHORT-NAME)} |
+
+##### 7.6.4.17. Event
+
+端口 Event_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | Event_{Name} |
+| 类别 | 提供端口 |
+| 接口 | DiagnosticMonitor |
+| 说明 | - |
+| 变体 | Name = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)} |
+
+##### 7.6.4.18. DiagnosticMonitor_MonitorData
+
+端口 DiagnosticMonitor_MonitorData_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | DiagnosticMonitor_MonitorData_{Name} |
+| 类别 | 提供端口 |
+| 接口 | DiagnosticMonitor_MonitorData |
+| 说明 | - |
+| 变体 | Name = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)} |
+
+##### 7.6.4.19. EventStatus
+
+端口 EventStatus_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | EventStatus_{Name} |
+| 类别 | 提供端口 |
+| 接口 | EventStatus |
+| 说明 | - |
+| 变体 | Name = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)} |
+
+##### 7.6.4.20. EventInfo
+
+端口 EventInfo_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | EventInfo_{Name} |
+| 类别 | 提供端口 |
+| 接口 | DiagnosticInfo |
+| 说明 | - |
+| 变体 | Name = {ecuc(Dem/DemConfigSet/DemEventParameter.SHORT-NAME)} |
+
+##### 7.6.4.21. GeneralCBDataEvt
+
+端口 GeneralCBDataEvt 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GeneralCBDataEvt |
+| 类别 | 需求端口 |
+| 接口 | GeneralCallbackEventDataChanged |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral/DemGeneralInterfaceSupport)} == True) |
+
+##### 7.6.4.22. GeneralCBMonitorStatusChanged
+
+端口 GeneralCBMonitorStatusChanged 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GeneralCBMonitorStatusChanged |
+| 类别 | 需求端口 |
+| 接口 | GeneralCallbackMonitorStatusChanged |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral/DemGeneralInterfaceSupport)} == True) |
+
+##### 7.6.4.23. GeneralCBStatusEvt
+
+端口 GeneralCBStatusEvt 的定义（**Dem** 所需）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GeneralCBStatusEvt |
+| 类别 | 需求端口 |
+| 接口 | GeneralCallbackEventUdsStatusChanged |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral/DemGeneralInterfaceSupport)} == True) |
+
+##### 7.6.4.24. GeneralEvtInfo
+
+端口 GeneralEvtInfo 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GeneralEvtInfo |
+| 类别 | 提供端口 |
+| 接口 | GeneralDiagnosticInfo |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral/DemGeneralInterfaceSupport)} == True) |
+
+##### 7.6.4.25. IndStatus
+
+端口 IndStatus_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | IndStatus_{Name} |
+| 类别 | 提供端口 |
+| 接口 | IndicatorStatus |
+| 说明 | - |
+| 变体 | Name = {ecuc(Dem/DemGeneral/DemEventMemorySet/DemIndicator.SHORT-NAME)} |
+
+##### 7.6.4.26. IUMPRDenominator
+
+端口 IUMPRDenominator_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | IUMPRDenominator_{Name} |
+| 类别 | 提供端口 |
+| 接口 | IUMPRDenominator |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`)；Name = {ecuc(Dem/DemGeneral/DemRatio/DemRatioId.SHORT-NAME)} |
+
+##### 7.6.4.27. IUMPRDenominatorCondition
+
+端口 IUMPRDenominatorCondition_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | IUMPRDenominatorCondition_{Name} |
+| 类别 | 提供端口 |
+| 接口 | IUMPRDenominatorCondition |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`)；Name = {ecuc(Dem/DemGeneral/DemRatio/DemIUMPRDenGroup.SHORT-NAME)} |
+
+##### 7.6.4.28. IUMPRNumerator
+
+端口 IUMPRNumerator_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | IUMPRNumerator_{Name} |
+| 类别 | 提供端口 |
+| 接口 | IUMPRNumerator |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`)；Name = {ecuc(Dem/DemGeneral/DemRatio/DemRatioId.SHORT-NAME)} |
+
+##### 7.6.4.29. OpCycle
+
+端口 OpCycle_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | OpCycle_{Name} |
+| 类别 | 提供端口 |
+| 接口 | OperationCycle |
+| 说明 | - |
+| 变体 | Name = {ecuc(Dem/DemGeneral/DemOperationCycle.SHORT-NAME)} |
+
+##### 7.6.4.30. OverflowIndPrimaryMemory
+
+端口 OverflowIndPrimaryMemory_{Client} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | OverflowIndPrimaryMemory_{Client} |
+| 类别 | 提供端口 |
+| 接口 | EvMemOverflowIndication |
+| 说明 | - |
+| 变体 | (({ecuc(Dem/DemGeneral/DemClient/DemClientUsesRte)} == TRUE))；Client = {ecuc(Dem/DemGeneral/DemClient.SHORT-NAME)} |
+
+##### 7.6.4.31. OverflowIndUserDefinedMemory
+
+端口 OverflowIndUserDefinedMemory_{Client}_{UserDefinedMemory} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | OverflowIndUserDefinedMemory_{Client}_{UserDefinedMemory} |
+| 类别 | 提供端口 |
+| 接口 | EvMemOverflowIndication |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral/DemClient/DemEventMemorySetRef-&gt;DemEventMemorySet/DemUserDefinedMemory} != NULL) && (({ecuc(Dem/DemGeneral/DemClient/DemClientUsesRte)} == TRUE))；Client = {ecuc(Dem/DemGeneral/DemEventMemorySet.SHORT-NAME)}；UserDefinedMemory = {ecuc(Dem/DemGeneral/DemClient/DemEventMemorySetRef-&gt;DemEventMemorySet/DemUserDefinedMemory.SHORT-NAME)} |
+
+##### 7.6.4.32. PowerTakeOffStatus
+
+端口 PowerTakeOffStatus 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | PowerTakeOffStatus |
+| 类别 | 提供端口 |
+| 接口 | PowerTakeOff |
+| 说明 | - |
+| 变体 | {ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT` |
+
+##### 7.6.4.33. GetDataOfPID21
+
+端口 GetDataOfPID21 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | GetDataOfPID21 |
+| 类别 | 提供端口 |
+| 接口 | GetDataOfPID21 |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral/DemGeneralOBD.DemOBDCentralizedPID21Handling)} == true) && ({ecuc(Dem/DemGeneral.DemOBDSupport)} == `DEM_OBD_MASTER_ECU`) |
+
+##### 7.6.4.34. SetDataOfPID21
+
+端口 SetDataOfPID21 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | SetDataOfPID21 |
+| 类别 | 提供端口 |
+| 接口 | SetDataOfPID21 |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral/DemGeneralOBD.DemOBDCentralizedPID21Handling)} == true) && ({ecuc(Dem/DemGeneral.DemOBDSupport)} == `DEM_OBD_PRIMARY_ECU`) |
+
+##### 7.6.4.35. SetDataOfPID31
+
+端口 SetDataOfPID31 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | SetDataOfPID31 |
+| 类别 | 提供端口 |
+| 接口 | SetDataOfPID31 |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) && ({ecuc(Dem/DemGeneral/DemGeneralOBD.DemOBDCentralizedPID31Handling)} == true) |
+
+##### 7.6.4.36. SetDataOfPID4D
+
+端口 SetDataOfPID4D 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | SetDataOfPID4D |
+| 类别 | 提供端口 |
+| 接口 | SetDataOfPID4D |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral.DemOBDSupport)} == `DEM_OBD_MASTER_ECU`) |
+
+##### 7.6.4.37. SetDataOfPID4E
+
+端口 SetDataOfPID4E 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | SetDataOfPID4E |
+| 类别 | 提供端口 |
+| 接口 | SetDataOfPID4E |
+| 说明 | - |
+| 变体 | ({ecuc(Dem/DemGeneral.DemOBDSupport)} == `DEM_OBD_MASTER_ECU`) |
+
+##### 7.6.4.38. StorageCond
+
+端口 StorageCond_{Name} 的定义（**Dem** 提供）：
+
+| 属性 | 值 |
+| --- | --- |
+| 名称 | StorageCond_{Name} |
+| 类别 | 提供端口 |
+| 接口 | StorageCondition |
+| 说明 | - |
+| 变体 | Name = {ecuc(Dem/DemGeneral/DemStorageCondition.SHORT-NAME)} |
+
+## 8. 时序图
+
+本章以时序图的形式给出 **Dem** 与其客户端（**Dcm**、**FiM**、**J1939Dcm** 及软件组件）之间的典型交互。
+
+### 8.1. ControlDTCSetting
+
+![Figure9_1.png](Figure9_1.png)
+
+### 8.2. Dem_ClearDTC
+
+![Figure9_2.png](Figure9_2.png)
+
+**Dem** 内部清除单个 **DTC** 的时序：
+
+![Figure9_3.png](Figure9_3.png)
+
+### 8.3. Dem_GetDTCByOccurrenceTime
+
+![Figure9_4.png](Figure9_4.png)
+
+### 8.4. Dem_GetNextExtendedDataRecord
+
+![Figure9_5.png](Figure9_5.png)
+
+### 8.5. Dem_GetStatusOfDTC
+
+![Figure9_6.png](Figure9_6.png)
+
+### 8.6. 冻结帧的检索
+
+![Figure9_7.png](Figure9_7.png)
+
+### 8.7. GetOBDFaultInformation
+
+![Figure9_8.png](Figure9_8.png)
+
+### 8.8. ReportDTCByStatusMask
+
+![Figure9_9.png](Figure9_9.png)
+
+### 8.9. FiM_DemTriggerOnEventStatus
+
+![Figure9_10.png](Figure9_10.png)
+
+### 8.10. ProcessEvent（示例）
+
+**Dem** 内部 ProcessEvent 的示例时序：
+
+![Figure9_11.png](Figure9_11.png)
+
+### 8.11. 基于受支持的扩展数据记录检索 DTC
+
+![Figure9_12.png](Figure9_12.png)
+
+### 8.12. 检索分配到 DTC 就绪组的 DTC
+
+![Figure9_13.png](Figure9_13.png)
+
+### 8.13. 检索所有 DTC 的已存储快照记录
+
+![Figure9_14.png](Figure9_14.png)
