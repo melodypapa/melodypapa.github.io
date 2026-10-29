@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **60** 份已有站内文章）。
+共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **61** 份已有站内文章）。
 
 ## A
 
@@ -3787,133 +3787,133 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_FlashTest · R23-11
 
 **Fr_AbortCommunication**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_AckAbsoluteTimerIRQ**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_AllowColdstart**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_AllSlots**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_CancelAbsoluteTimer**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_CancelTxLPdu**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_ChannelType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_CheckTxLPduStatus**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_ConfigType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_ControllerInit**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_DisableAbsoluteTimerIRQ**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_DisableLPdu**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_EnableAbsoluteTimerIRQ**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_ErrorModeType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetAbsoluteTimerIRQStatus**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetChannelStatus**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetClockCorrection**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetGlobalTime**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetNmVector**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetNumOfStartupFrames**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetPOCStatus**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetSyncFrameList**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetVersionInfo**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetWakeupRxStatus**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_HaltCommunication**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_Init**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_POCStateType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_POCStatusType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_PrepareLPdu**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_ReadCCConfig**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_ReceiveRxLPdu**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_ReconfigLPdu**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_RxLPduStatusType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_SendWUP**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_SetAbsoluteTimer**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_SetWakeupChannel**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_SlotAssignmentType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_SlotModeType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_StartCommunication**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_StartupStateType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_TransmitTxLPdu**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_TxLPduStatusType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_WakeupStatusType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **FrArTp_CancelReceive**
 > 函数 · 未翻译 · SWS_FlexRayARTransportLayer · R23-11

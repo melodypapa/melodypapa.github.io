@@ -31,6 +31,7 @@ title: "通信（Communication）"
 * [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](eth_trcv/index.md)
 * [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](wlan_driver/index.md)
 * [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](wlan_transceiver_driver/index.md)
+* [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](flexray_driver/index.md)
 * [AUTOSAR SoAd (Socket Adaptor)](soad/index.md)
 * [AUTOSAR UdpNm (UDP Network Management)](udp_network_management/index.md)
 * [AUTOSAR XCP（通用测量与校准协议）](xcp/index.md)

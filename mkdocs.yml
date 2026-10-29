@@ -136,6 +136,7 @@ nav:
       - "EthTrcv": autosar/communication/eth_trcv/index.md
       - "WEth": autosar/communication/wlan_driver/index.md
       - "WEthTrcv": autosar/communication/wlan_transceiver_driver/index.md
+      - "Fr": autosar/communication/flexray_driver/index.md
       - "FvM": autosar/communication/fvm/fvm.md
       - "LdCom": autosar/communication/large_data_com/index.md
       - "Lin": autosar/communication/lin_driver/index.md

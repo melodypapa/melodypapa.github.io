@@ -128,11 +128,15 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [ ] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] flexray_driver (SWS_FlexRayDriver · R23-11 markdown · ❌ new article)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: article `communication/flexray_driver/` (directory per row, nav label "Fr", FlexRay group of the communication landing page). Shape: ch.2 → §2 27 acronyms + ### 2.1 术语 (source Table 2.2 "Terms", 5 rows, dlt precedent) · ch.4.1 → §4.1 限制 ([00449] requirement as prose) · ch.6 dropped · ch.7 → §6 (6.1 一般描述/6.2 实现需求 incl. the "implementation may assume" bullets/6.3 索引方案 Figure7_1/6.4 POC 状态机控制 Figure7_2 with the 3-note list/6.5 FIFO 支持和消息 ID 过滤 with the FrTp hint/6.6 配置描述/6.7 错误分类 (dev 12 rows, runtime 1, 6.7.5 扩展生产错误 FR_E_CTRL_TESTRESULT + FR_E_LPDU_SLOTSTATUS house tables with Fail/Pass detection criteria)/6.8 安全事件) · ch.8 → §7 (7.1 4 imported types (source table has 2 unlabeled Dem/Std continuation rows normalized); 7.2 宏定义 → 7.2.1 配置参数索引宏 with the full 63-row FR_CIDX GFM table; 7.3 11 types incl. Fr_SlotAssignmentType element table; 7.4 32 functions with CC 前置/后置条件 prose kept and the Fr4.10 Fr_StartCommunication hardware-error paragraph translated with the source's own function-name context; 7.5/7.6 no-callback/no-scheduled sentences; 7.7 期望接口 2 强制 + 3 可选 (SchM_Enter/Exit_Fr header "&lt;none&gt;" kept); 7.8 服务接口 one-sentence) · ch.9 → §8 one-sentence statement · ch.10 → §9 (10.1 folded; 9.1.1 Fr module/9.1.2 FrGeneral 12 params + [CONSTR_00001] prose/9.1.3 FrController 34 params incl. all FlexRay protocol parameters with their FlexRay 2.1/3.0 compliance remarks/9.1.4 FrAbsoluteTimer/9.1.5 FrControllerDemEventParameterRefs/9.1.6 FrFifo 7 params/9.1.7 FrRange 2 params/9.1.8 FrMultipleConfiguration; 9.2 发布信息) · appendix A dropped (droppable) · NO ## B chapter — the source has no change-history annex (ends with appendix A)
+  - Note: PDF ground-truth: registry MATCH ([1]/[2] carry no doc id — report-only unverified), 363 function links → 32 targets all anchored, 0 ABSENT targets; "FlexRay 协议 3.0" dotted-number census noise correctly NOT linked; census --apply: 170 lines + 4 chapter-refs, idempotent
+  - Note: Phase A — strict build exit 0 / 0 WARNING / no flexray_driver notices; headings §1–§9 (no B); hygiene 0; check_api_sync N/A-with-explanation (source ch.8 layout 8.2 macros/8.3 types/8.4 functions differs from the script's 8.2=types/8.3=functions convention — lsdu/RTE precedent; manual verification: source 8.3.x 11 types ↔ article 7.3.x 11, source 8.4.x 32 functions ↔ article 7.4.x 32, 32 说明 blocks); gen_api_list regenerated (Fr 11 types + 32 functions SITE-linked, --check 0); check_indexes 0 broken
+  - Note: Phase B — coverage map: ch.1→§1 (Figure1_1), 2→§2 (+2.1), 3→§3, 4→§4, 5→§5, 7→§6 (Figure7_1/7_2), 8→§7, 9→§8, 10→§9, A dropped; 3 content figures (hash+size triage); glossary +12 new (CC/CHI/FIFO/Fr/FrTp/FrTrcv/LPdu/NIT/POC/POCState/vPOC/Macrotick) + 4 术语 (absolute timer/buffer/cluster/Synchronized) + FrIf 来源 append (MCG/ISR one-term-once); cross-article mentions (FrIf/Dem/Det/EcuM) left prose per-run decision
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion (new article, main session per no-subagent rule)
+  - [x] Step 3 — Phase A mechanical checks (evidence above; check_api_sync N/A with manual substitute)
+  - [x] Step 4 — Phase B coverage map + fidelity (evidence above)
+  - [ ] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] flexray_interface (SWS_FlexRayInterface · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis

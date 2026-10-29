@@ -32,6 +32,7 @@ title: "CP AUTOSAR"
   * [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)
   * [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)
   * [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)
+  * [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)
   * [AUTOSAR FVM (Freshness Value Manager)](communication/fvm/fvm.md)
   * [AUTOSAR Large Data COM（大数据 COM）](communication/large_data_com/index.md)
   * [AUTOSAR LIN Driver](communication/lin_driver/index.md)

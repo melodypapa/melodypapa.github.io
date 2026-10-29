@@ -10,6 +10,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## A
 
+**absolute timer（绝对定时器）**
+> 绝对定时器被设置为 FlexRay 集群的一个绝对全局时间并由其触发。FlexRay 全局时间由一个循环和一个宏节拍偏移量组成。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
 **AIFS**
 > 仲裁帧间间隔（**Arbitration Inter Frame Space**）。
 > 来源：[AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)（SWS_WirelessEthernetTransceiverDriver · R23-11）
@@ -184,6 +188,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## B
 
+**buffer（缓冲区）**
+> 在 Fr SWS 的上下文中，缓冲区描述一个硬件发送/接收资源，它是 FlexRay 控制器的一部分，被映射到一个 FlexRay 槽、信道、循环用于发送或接收。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
 **Background test**
 > 后台测试由 **SW** 调度器/**RTOS** 周期性调用。
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
@@ -273,6 +281,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Utilization of Crypto Services（加密服务使用指南）](crypto/utilization_of_crypto_services/index.md)（AUTOSAR_CP_EXP_UtilizationOfCryptoServices · R23-11）
 
 ## C
+
+**cluster（集群）**
+> 多个相互连接的节点构成的通信系统。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
+**CC**
+> 通信控制器（**Communication Controller**）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
+**CHI**
+> 控制器主机接口（**Controller Host Interface**）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
 
 **CBR**
 > 信道忙闲比（**Channel Busy Ratio**）。
@@ -763,6 +783,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## F
 
+**FIFO**
+> 先进先出缓冲区（**First In First Out buffer**）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
+**Fr**
+> AUTOSAR 模块：FlexRay 驱动程序（**FlexRay Driver**）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
+**FrTp**
+> AUTOSAR 模块：FlexRay 传输协议（**FlexRay Transport Protocol**）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
+**FrTrcv**
+> AUTOSAR 模块：FlexRay 收发器驱动程序（**FlexRay Transceiver Driver**）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
 **FCS**
 > 帧校验序列（**Frame Check Sequence**）。
 > 来源：[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver · R23-11）
@@ -828,6 +864,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **FrIf**
 > FlexRay Interface —— FlexRay 接口。
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
 
 **FSC**
 > 功能安全概念（**Functional Safety Concept**）
@@ -1091,6 +1128,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## L
 
+**LPdu**
+> 数据链路层协议数据单元（**Datalink layer Protocol Datagram Unit**）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
 **&lt;Lo&gt;**
 > 下层通信接口模块。
 > 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
@@ -1167,6 +1208,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Safety Use Case（安全用例）](safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase · R23-11）
 
 ## M
+
+**Macrotick**
+> 宏节拍——FlexRay 集群全局同步时间的最小单位。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
 
 **MAKW**
 > 内存分配关键字（**Memory Allocation Key Word**）
@@ -1310,6 +1355,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## N
 
+**NIT**
+> FlexRay 网络空闲时间（**FlexRay Network Idle Time**）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
 **N-PDU**
 > 网络层 **PDU**（**Network Layer PDU**）。在 **AUTOSAR** 中，网络层等价于传输协议。
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes · R23-11）
@@ -1444,6 +1493,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
 
 ## P
+
+**POC**
+> 协议运行控制（**Protocol Operation Control**，详情参见 ISO 17458-1）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
+**POCState**
+> **CC** 内部的 **POC** 实际状态。该状态在某些情况下可能与 vPOC!State 不同，例如在 FREEZE 命令调用之后（详情参见 ISO 17458-1）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
 
 **P2P**
 > 点对点（**Point-to-Point**）。
@@ -1648,6 +1705,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
 ## S
+
+**Synchronized（同步）**
+> 只要 ((!vPOC!Freeze) && (vPOC!State == NORMAL_ACTIVE) || (vPOC!State == NORMAL_PASSIVE)) 成立，就认为 FlexRay CC 与其所连接的 FlexRay 集群同步。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
 
 **&lt;SrcLo&gt;**
 > 作为 L-SDU 源的下层通信接口模块。SrcLo 始终只有一个。
@@ -1985,6 +2046,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interfaces of the HMI, Multimedia and Telematics Domain（HMI/多媒体/远程信息处理域应用接口说明）](application_interfaces/hmi/index.md)（AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics · R23-11）
 
 ## V
+
+**vPOC**
+> **CC** 在 **CHI** 处提供给主机的数据结构，包含 **CC** 的实际 **POC** 状态（详情参见 ISO 17458-1）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
 
 **VB**
 > Visual Basic
