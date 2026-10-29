@@ -30,6 +30,7 @@ title: "CP AUTOSAR"
   * [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)
   * [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md)
   * [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)
+  * [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)
   * [AUTOSAR FVM (Freshness Value Manager)](communication/fvm/fvm.md)
   * [AUTOSAR Large Data COM（大数据 COM）](communication/large_data_com/index.md)
   * [AUTOSAR LIN Driver](communication/lin_driver/index.md)

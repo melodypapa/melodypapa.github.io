@@ -743,6 +743,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## F
 
+**FCS**
+> 帧校验序列（**Frame Check Sequence**）。
+> 来源：[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver · R23-11）
+
 **FA**
 > 前轴（**Front Axle**）
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
@@ -1016,6 +1020,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 中断服务程序（**Interrupt Service Routine**）
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
 > 来源：[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping · R23-11）
+> 来源：[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver · R23-11）
 
 **IUMPR**
 > 在使用中的监控性能比（**In-Use-Monitor Performance Ratio**）。
@@ -1163,6 +1168,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **MCG**
 > 模块配置生成器（**Module Configuration Generator**）。
 > 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
+> 来源：[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver · R23-11）
 
 **MII**
 > 媒体独立接口（**Media Independent Interface**，由以太网控制器提供的用于访问以太网收发器的标准化接口，参见 IEEE 802.3-2006）。
@@ -2018,6 +2024,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
 
 ## W
+
+**WEth**
+> Wireless Ethernet Driver（**AUTOSAR BSW** 模块）。
+> 来源：[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver · R23-11）
+
+**WEthTrcv**
+> Wireless Ethernet Transceiver（**AUTOSAR BSW** 模块）。
+> 来源：[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver · R23-11）
 
 **WCET**
 > 最坏情况执行时间（**Worst case execution time**）
