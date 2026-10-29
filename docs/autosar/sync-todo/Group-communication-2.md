@@ -117,11 +117,15 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [ ] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] wlan_transceiver_driver (SWS_WirelessEthernetTransceiverDriver · R23-11 markdown · ❌ new article)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: article `communication/wlan_transceiver_driver/` (directory per row, nav label "WEthTrcv", 以太网 group of the communication landing page). Shape: ch.2 → §2 12 acronyms · ch.6 dropped · ch.7 → §6 (6.1 栈 6.1.1 索引方案 incl. the RadioId requirement [10001] / 6.1.2 需求 / 6.1.3 收发器参数 / 6.1.4 键值参数映射 — 4 ParamId tables as GFM under their [10059]/[10061]/[10063]/[10065] requirements / 6.1.5 MainFunction / 6.1.6 V2X 特定需求 incl. [20244] max message rates bullet + [20246] PToll=10dBm / 6.1.7 唤醒支持 no-support sentence) + 6.2 错误分类 (dev 3 rows + 6.2.5 扩展生产错误 WETHTRCV_E_ACCESS house table) + 6.3 安全事件 one-sentence · ch.8 → §7 (7.1 6 imported types; 7.2 9 types; Figure8_1 at §7.2 lead; 7.3 9 functions; 7.4 one-sentence; 7.5.1 MainFunction; 7.6 期望接口 6 强制 + 1 可选 + 7.6.3 one-sentence; 7.7 服务接口 one-sentence — source 8.7 Service Interfaces) · ch.9 → §8 one-sentence statement incl. the no-link-state-change note · ch.10 → §9 (10.1 folded into intro; 9.1.1 WEthTrcv module + Figure10_1 / 9.1.2 ConfigSet / 9.1.3 Config 6 params + Figure10_2 + 2 CONSTR prose / 9.1.4 DemEventParameterRefs / 9.1.5 RadioConfigSet / 9.1.6 RadioConfig 9 params + Figure10_3 / 9.1.7 RadioChannelTxQueueConfig 5 params / 9.1.8 AntennaConfigSet / 9.1.9 AntennaConfig + Figure10_4 / 9.1.10 General 10 params + 2 CONSTR prose; 9.2 发布信息 incl. the additional-published-parameters sentence) · source appendix A (R23-11 only, ALL none) → ## B per the lettered-form rule with B.1 all 无 (no B.2 — source has no R22-11 block)
+  - Note: PDF-verified content recovery/quirks: 8.2.5 GetChanRxParamIdType lost the WETHTRCV_GETCHRXPID_CBR 0x00 row in the markdown conversion — recovered verbatim from the R23-11 PDF p.21 (2 rows total); BandwidthType invalid range "0x0000004..0xFFFFFFF" (7 hex digits) kept verbatim — source typo present in the PDF too; GetChanRxParams syntax `uint8* TrcvId` kept verbatim (markdown AND PDF agree — spec-side quirk like eth_trcv's GetMacMethod); 7.2.4 SetChanTxParamIdType Description cell is "-" in the source (kept as -。)
+  - Note: Phase A — strict build exit 0 / 0 WARNING / no wlan_transceiver notices; headings §1–§9 + B; hygiene 0; check_api_sync OK (9 types / 9 functions / 9 说明); gen_api_list regenerated (WEthTrcv 9 types + 9 functions SITE-linked, --check 0); check_indexes 0 broken; census --apply: 50 lines + 5 chapter-refs, idempotent re-run 0 lines; PDF ground-truth: registry MATCH, 0 ABSENT targets, 0 content-check diffs, chapter map A→B
+  - Note: Phase B — coverage map: ch.1→§1 (Figure1_1), 2→§2, 3→§3, 4→§4, 5→§5, 7→§6, 8→§7 (Figure8_1 at 7.2, Figure8_2 at 7.6), 9→§8, 10→§9 (Figure10_1–10_4), A→B; ch.6 dropped (compliance); 7 content figures (hash+size triage ≥367px); glossary +5 new terms (AIFS/CBR/CIT/CW/DP — Eth/EthIf/EthTrcv/ISR/MCG/WEth/WEthTrcv already present); cross-article mentions (EthIf/WEth/Dem/Det) left prose per-run decision
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion (new article, main session per no-subagent rule)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (evidence above)
+  - [ ] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] flexray_driver (SWS_FlexRayDriver · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis

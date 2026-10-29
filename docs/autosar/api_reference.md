@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **59** 份已有站内文章）。
+共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **60** 份已有站内文章）。
 
 ## A
 
@@ -6879,58 +6879,58 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEthTrcv_BandwidthType**
-> 类型 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_ConfigType**
-> 类型 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_GetChanRxParamIdType**
-> 类型 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_GetChanRxParams**
-> 函数 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_GetLinkState**
-> 函数 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_GetTransceiverMode**
-> 函数 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_GetVersionInfo**
-> 函数 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_Init**
-> 函数 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_RadioModeType**
-> 类型 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_RssiType**
-> 类型 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_SetChanRxParamIdType**
-> 类型 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_SetChanRxParams**
-> 函数 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_SetChanTxParamIdType**
-> 类型 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_SetChanTxParams**
-> 函数 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_SetRadioParamIdType**
-> 类型 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_SetRadioParams**
-> 函数 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_SetTransceiverMode**
-> 函数 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_TxPwrLvlType**
-> 类型 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 ## X
 

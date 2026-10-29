@@ -10,6 +10,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## A
 
+**AIFS**
+> 仲裁帧间间隔（**Arbitration Inter Frame Space**）。
+> 来源：[AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)（SWS_WirelessEthernetTransceiverDriver · R23-11）
+
 **AB**
 > 安全气囊（**Airbag**）
 > 来源：[Explanation of Application Interfaces of Occupant and Pedestrian Safety Systems Domain（乘员与行人安全系统域应用接口说明）](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
@@ -269,6 +273,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Utilization of Crypto Services（加密服务使用指南）](crypto/utilization_of_crypto_services/index.md)（AUTOSAR_CP_EXP_UtilizationOfCryptoServices · R23-11）
 
 ## C
+
+**CBR**
+> 信道忙闲比（**Channel Busy Ratio**）。
+> 来源：[AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)（SWS_WirelessEthernetTransceiverDriver · R23-11）
+
+**CIT**
+> 信道空闲时间（**Channel Idle Time**）。
+> 来源：[AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)（SWS_WirelessEthernetTransceiverDriver · R23-11）
+
+**CW**
+> 竞争窗口（**Contention Window**）。
+> 来源：[AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)（SWS_WirelessEthernetTransceiverDriver · R23-11）
+
+**DP**
+> DCC 配置（**DCC Profile**）。
+> 来源：[AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)（SWS_WirelessEthernetTransceiverDriver · R23-11）
 
 **Callback**
 > 术语回调函数（**Callback**）主要用于**API**服务，实现通知其他**BSW**模块。
