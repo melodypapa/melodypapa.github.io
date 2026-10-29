@@ -26,7 +26,7 @@ title: "通信（Communication）"
 * [AUTOSAR Ethernet Driver（以太网驱动程序）](ethernet_driver/index.md)
 * [AUTOSAR Ethernet Interface（以太网接口）](ethernet_interface/index.md)
 * [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](ethernet_switch_driver/index.md)
-* [AUTOSAR SoAd (Socket Adaptor)](SoAd/SoAd.md)
+* [AUTOSAR SoAd (Socket Adaptor)](soad/index.md)
 * [AUTOSAR UdpNm (UDP Network Management)](udp_network_management/index.md)
 * [AUTOSAR XCP（通用测量与校准协议）](xcp/index.md)
 
@@ -44,7 +44,7 @@ title: "通信（Communication）"
 * [AUTOSAR FVM (Freshness Value Manager)](fvm/fvm.md)
 * [AUTOSAR SD (Service Discovery)](service_discovery/index.md)
 * [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](spi_handler_driver/index.md)
-* [Data Distribution Service for Classic Platform（经典平台数据分发服务）](<data_distribution service/index.md>)
+* [Data Distribution Service for Classic Platform（经典平台数据分发服务）](data_distribution/index.md)
 
 ## 相关内容
 

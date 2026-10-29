@@ -20,7 +20,7 @@ title: "CP AUTOSAR"
   * [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)
   * [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)
   * [AUTOSAR COM Based Transformer](communication/com_based_transformer/index.md)
-  * [Data Distribution Service for Classic Platform（经典平台数据分发服务）](<communication/data_distribution service/index.md>)
+  * [Data Distribution Service for Classic Platform（经典平台数据分发服务）](communication/data_distribution/index.md)
   * [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)
   * [AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)
   * [E2E Transformer (E2E转换器)](communication/e2e_transformer/index.md)
@@ -37,7 +37,7 @@ title: "CP AUTOSAR"
   * [AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)
   * [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md)
   * [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)
-  * [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md)
+  * [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md)
   * [AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)
   * [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)
 
