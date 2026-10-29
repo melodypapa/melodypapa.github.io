@@ -4390,3 +4390,623 @@ Std_ReturnType Dem_SetStorageCondition ( uint8 StorageConditionID, boolean Condi
 ```C
 Std_ReturnType Dem_SetWIRStatus ( Dem_EventIdType EventId, boolean WIRStatus )
 ```
+
+#### 7.3.4. 接口 Dcm &lt;=&gt; Dem
+
+##### 7.3.4.1. 访问 DTC 和状态信息
+
+###### 7.3.4.1.1. Dem_GetTranslationType
+
+**说明**: 获取 **ECU** 支持的 **DTC** 格式。支持的格式通过 DemTypeOfDTCSupported 配置。返回所配置的 **DTC** 转换格式，不支持多种 **DTC** 格式的组合。可通过**Dem.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。返回值：**Dem_DTCTranslationFormatType**：所配置的 **DTC** 转换格式。
+
+```C
+Dem_DTCTranslationFormatType Dem_GetTranslationType ( uint8 ClientId )
+```
+
+###### 7.3.4.1.2. Dem_GetDTCStatusAvailabilityMask
+
+**说明**: 获取所选故障内存的 **DTC** 状态可用性掩码。可通过**Dem.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCOrigin（in）：此参数选择所请求 **DTCStatusAvailabilityMask** 的事件内存。仅 `DEM_DTC_ORIGIN_PRIMARY_MEMORY` 和 `DEM_DTC_ORIGIN_USERDEFINED_MEMORY_<Name>` 为有效值。参数 DTCStatusMask（out）：**DTCStatusMask** 的值指示 **Dem** 支持的 **DTC** 状态位。所有支持的信息通过将相应的状态位置为 1 来指示。参见 ISO 14229-1。返回值：**E_OK**：获取 **DTC** 状态掩码成功；**E_NOT_OK**：获取 **DTC** 状态掩码失败。
+
+```C
+Std_ReturnType Dem_GetDTCStatusAvailabilityMask ( uint8 ClientId, Dem_UdsStatusByteType* DTCStatusMask, Dem_DTCOriginType DTCOrigin )
+```
+
+###### 7.3.4.1.3. Dem_GetStatusOfDTC
+
+**说明**: 获取 **DTC** 的状态。对于大型配置和 **DTC** 标定，接口行为可以是异步的（将 **DTC** 搜索拆分为多个段）。被抑制的 **OBD** 事件的 **DTC** 应报告为 `DEM_WRONG_DTC`。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCStatus（out）：此参数接收所请求 **DTC** 的状态信息。其格式遵循 ISO 14229-1 的定义。如果函数调用的返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。返回值：**E_OK**：**DTC** 的状态已在 **DTCStatus** 参数中正确提供；**E_NOT_OK**：未选择 **DTC**；**DEM_WRONG_DTC**：所选格式下所选的 **DTC** 值不存在；**DEM_WRONG_DTCORIGIN**：所选 **DTCOrigin** 不存在；**DEM_PENDING**：检索 **DTC** 状态正在进行中。调用者应在稍后时刻再次调用此函数；**DEM_NO_SUCH_ELEMENT**：所选 **DTC** 没有分配 **DTC** 状态；**DEM_BUSY**：该客户端另一个基于 Dem_SelectDTC 的操作（按第 6.11.2.2 节）正在进行中。
+
+```C
+Std_ReturnType Dem_GetStatusOfDTC ( uint8 ClientId, uint8* DTCStatus )
+```
+
+###### 7.3.4.1.4. Dem_GetSeverityOfDTC
+
+**说明**: 获取所请求 **DTC** 的严重度。对于大型配置和 **DTC** 标定，接口行为可以是异步的（将 **DTC** 搜索拆分为多个段）。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCSeverity（out）：此参数包含符合 ISO 14229-1 的 **DTCSeverity**。返回值：**E_OK**：**DTC** 严重度已在 **DTCSeverity** 参数中正确提供；**E_NOT_OK**：未选择 **DTC**；**DEM_WRONG_DTC**：所选格式下所选的 **DTC** 值不存在；**DEM_WRONG_DTCORIGIN**：所选 **DTCOrigin** 不存在；**DEM_PENDING**：检索 **DTC** 正在进行中。调用者应在稍后时刻再次调用此函数；**DEM_BUSY**：该客户端另一个基于 Dem_SelectDTC 的操作（按第 6.11.2.2 节）正在进行中。
+
+```C
+Std_ReturnType Dem_GetSeverityOfDTC ( Dem_DTCSeverityType* DTCSeverity, uint8 ClientId )
+```
+
+###### 7.3.4.1.5. Dem_GetFunctionalUnitOfDTC
+
+**说明**: 获取所请求 **DTC** 的功能单元。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCFunctionalUnit（out）：此 **DTC** 的功能单元值。返回值：**E_OK**：**DTC** 功能单元已在参数 DTCFunctionalUnit 中提供；**E_NOT_OK**：未选择 **DTC**；**DEM_WRONG_DTC**：所选格式下所选的 **DTC** 值不存在；**DEM_WRONG_DTCORIGIN**：所选 **DTCOrigin** 不存在；**DEM_PENDING**：检索 **DTC** 功能单元正在进行中。调用者应在稍后时刻再次调用此函数；**DEM_BUSY**：该客户端另一个基于 Dem_SelectDTC 的操作（按第 6.11.2.2 节）正在进行中。
+
+```C
+Std_ReturnType Dem_GetFunctionalUnitOfDTC ( uint8 ClientId, uint8* DTCFunctionalUnit )
+```
+
+###### 7.3.4.1.6. Dem_SetDTCFilter
+
+**说明**: 设置 **DTC** 过滤器。服务器应在参数 **DTCStatusMask** 与服务器中的当前 **UDS** 状态之间执行按位逻辑与运算。除了 **DTCStatusAvailabilityMask** 之外，服务器应返回所有与运算结果非零的 **DTC**（即 (statusOfDTC &amp; DTCStatusMask) != 0）。服务器仅处理其支持的 **DTC** 状态位。被抑制的 **OBD** 事件在计算中应被忽略。如果服务器中没有 **DTC** 匹配客户端请求中指定的掩码判据，则在肯定响应报文中 **DTCStatusAvailabilityMask** 字节之后不提供任何 **DTC** 或状态信息。可通过**Dem.h**获得。本服务为同步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCStatusMask（in）：用于 **DTC** 状态字节过滤的状态字节掩码。取值：0x00——AUTOSAR 特定的值，用于停用状态字节过滤（与 ISO 14229-1 中的含义不同），以报告所有受支持的 **DTC**（用于服务 0x19 子功能 0x0A/0x15）；0x01..0xFF——符合 ISO 14229-1 DTCStatusMask 的状态字节掩码（由 **Dcm** 直接从服务请求传递），用于过滤至少一个状态位与该状态字节掩码匹配的 **DTC**。参数 DTCFormat（in）：定义后续 **API** 调用所请求 **DTC** 值的输出格式。如果传入的值与配置不符，应报告 **Det** 错误 `DEM_E_WRONG_CONFIGURATION`，例如传入了 DTCFormat = `DEM_DTC_FORMAT_OBD` 但按配置不支持 **OBD**。参数 DTCOrigin（in）：如果 **Dem** 支持多个事件内存，此参数用于选择应从中读取 **DTC** 的源内存。如果传入的值与配置不符，应报告 **Det** 错误 `DEM_E_WRONG_CONFIGURATION`。参数 FilterWithSeverity（in）：此标志定义是否使用严重度信息（参见下方参数）进行过滤，以允许有和没有严重度信息的 **DTC** 共存。TRUE：使用严重度信息过滤。FALSE：不使用严重度信息过滤。参数 DTCSeverityMask（in）：包含符合 ISO 14229-1 的 DTCSeverityMask。参数 FilterForFaultDetectionCounter（in）：此标志定义是否使用故障检测计数器信息进行过滤，以允许有和没有故障检测计数器信息的 **DTC** 共存。如果故障检测计数器信息是过滤判据，则仅报告故障检测计数器值介于 1 和 0x7E 之间的 **DTC**。注意：如果事件不使用 **Dem** 内部去抖动，则 **Dem** 必须通过 Dem_GetFaultDetectionCounter 请求该信息。TRUE：使用故障检测计数器过滤。FALSE：不使用故障检测计数器过滤。返回值：**E_OK**：过滤器设置成功；**E_NOT_OK**：指示错误的 **DTCOrigin** 或 **DTCFormat**。
+
+```C
+Std_ReturnType Dem_SetDTCFilter ( uint8 ClientId, uint8 DTCStatusMask, Dem_DTCFormatType DTCFormat, Dem_DTCOriginType DTCOrigin, boolean FilterWithSeverity, Dem_DTCSeverityType DTCSeverityMask, boolean FilterForFaultDetectionCounter )
+```
+
+###### 7.3.4.1.7. Dem_GetNumberOfFilteredDTC
+
+**说明**: 获取过滤后的 **DTC** 数量。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 NumberOfFilteredDTC（out）：与所定义状态掩码匹配的 **DTC** 数量。返回值：**E_OK**：获取过滤后的 **DTC** 数量成功；**E_NOT_OK**：未设置 **DTC** 过滤器；**DEM_PENDING**：所请求的操作正在进行中。调用者应在稍后时刻再次调用此函数。
+
+```C
+Std_ReturnType Dem_GetNumberOfFilteredDTC ( uint8 ClientId, uint16* NumberOfFilteredDTC )
+```
+
+###### 7.3.4.1.8. Dem_GetNextFilteredDTC
+
+**说明**: 获取下一个匹配过滤判据的 **DTC**。对于 **UDS** 服务，接口具有异步行为，因为需要处理大量的 **DTC**。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTC（out）：接收此函数按过滤器的相应格式返回的 **DTC** 值。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 DTCStatus（out）：此参数接收所请求 **DTC** 的状态信息。其格式遵循 ISO 14229-1 的定义。如果函数调用的返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。返回值：**E_OK**：返回下一个过滤后的元素；**E_NOT_OK**：未设置 **DTC** 过滤器；**DEM_NO_SUCH_ELEMENT**：未找到更多匹配过滤判据的元素；**DEM_PENDING**：所请求的操作正在进行中。调用者应在稍后时刻再次调用此函数。注意：按照第 6.9.5 节，此返回值并不总是允许的。
+
+```C
+Std_ReturnType Dem_GetNextFilteredDTC ( uint8 ClientId, uint32* DTC, uint8* DTCStatus )
+```
+
+###### 7.3.4.1.9. Dem_GetNextFilteredDTCAndFDC
+
+**说明**: 获取下一个匹配过滤判据的 **DTC** 及其关联的故障检测计数器（**FDC**）。接口具有异步行为，因为需要处理大量的 **DTC**，且 **FDC** 也可能从 **SW-C** 异步接收。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTC（out）：接收此函数按过滤器的相应格式返回的 **DTC** 值。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 DTCFaultDetectionCounter（out）：此参数接收所请求 **DTC** 的故障检测计数器信息。如果函数调用的返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。按 ISO 14229-1 为 -128（十进制）… +127（十进制），对应 PASSED…FAILED。返回值：**E_OK**：返回下一个过滤后的元素；**E_NOT_OK**：未设置 **DTC** 过滤器；**DEM_NO_SUCH_ELEMENT**：未找到更多匹配过滤判据的元素；**DEM_PENDING**：所请求的操作正在异步处理，当前正在进行中。调用者应在稍后时刻再次调用此函数。
+
+```C
+Std_ReturnType Dem_GetNextFilteredDTCAndFDC ( uint8 ClientId, uint32* DTC, sint8* DTCFaultDetectionCounter )
+```
+
+###### 7.3.4.1.10. Dem_GetNextFilteredDTCAndSeverity
+
+**说明**: 获取下一个匹配过滤判据的 **DTC** 及其关联的严重度。接口具有异步行为，因为需要处理大量的 **DTC**。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTC（out）：接收此函数按过滤器的相应格式返回的 **DTC** 值。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 DTCStatus（out）：此参数接收所请求 **DTC** 的状态信息。其格式遵循 ISO 14229-1 的定义。如果函数调用的返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 DTCSeverity（out）：接收函数返回的严重度值。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 DTCFunctionalUnit（out）：接收函数返回的功能单元值。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。返回值：**E_OK**：返回下一个过滤后的元素；**E_NOT_OK**：未设置 **DTC** 过滤器；**DEM_NO_SUCH_ELEMENT**：未找到更多匹配过滤判据的元素；**DEM_PENDING**：所请求的操作正在进行中。调用者应在稍后时刻再次调用此函数。
+
+```C
+Std_ReturnType Dem_GetNextFilteredDTCAndSeverity ( uint8 ClientId, uint32* DTC, uint8* DTCStatus, Dem_DTCSeverityType* DTCSeverity, uint8* DTCFunctionalUnit )
+```
+
+###### 7.3.4.1.11. Dem_SetFreezeFrameRecordFilter
+
+**说明**: 设置冻结帧记录过滤器。可通过**Dem.h**获得。本服务为同步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCFormat（in）：定义所请求 **DTC** 值的输出格式。返回值：（重新）设置冻结帧记录过滤器的操作状态。**E_OK**：过滤器被接受；**E_NOT_OK**：选择了错误的过滤器。
+
+```C
+Std_ReturnType Dem_SetFreezeFrameRecordFilter ( uint8 ClientId, Dem_DTCFormatType DTCFormat )
+```
+
+###### 7.3.4.1.12. Dem_GetNextFilteredRecord
+
+**说明**: 获取事件内存中存储的下一个冻结帧记录号及其关联的 **DTC**。接口具有异步行为，因为可能需要 **NvRAM** 访问。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTC（out）：接收此函数按过滤器的相应格式返回的 **DTC** 值。如果函数返回值不是 E_OK，此参数不包含有效数据。参数 RecordNumber（out）：所报告 **DTC** 的冻结帧记录号（相对寻址）。如果函数返回值不是 E_OK，此参数不包含有效数据。返回值：从 **Dem** 检索 **DTC** 及其关联快照记录号的操作状态。**E_OK**：返回下一个过滤后的元素；**DEM_NO_SUCH_ELEMENT**：未找到更多（匹配过滤判据的）元素；**DEM_PENDING**：所请求的值被异步计算，当前不可用。调用者可以在稍后重试。仅由异步接口使用。
+
+```C
+Std_ReturnType Dem_GetNextFilteredRecord ( uint8 ClientId, uint32* DTC, uint8* RecordNumber )
+```
+
+###### 7.3.4.1.13. Dem_GetDTCByOccurrenceTime
+
+**说明**: 按发生时间获取 **DTC**。没有显式的 **DTC** origin 参数，因为 origin 始终为 `DEM_DTC_ORIGIN_PRIMARY_MEMORY`。可通过**Dem.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCRequest（in）：此参数定义 **DTC** 的请求类型。参数 DTC（out）：接收函数以 **UDS** 格式返回的 **DTC** 值。如果函数返回值不是 `DEM_OCCURR_OK`，此参数不包含有效数据。返回值：**E_OK**：获取 **DTC** 成功；**E_NOT_OK**：调用不成功；**DEM_NO_SUCH_ELEMENT**：所请求的元素未存储。
+
+```C
+Std_ReturnType Dem_GetDTCByOccurrenceTime ( uint8 ClientId, Dem_DTCRequestType DTCRequest, uint32* DTC )
+```
+
+###### 7.3.4.1.14. Dem_SetDTCFilterByExtendedDataRecordNumber
+
+**说明**: 基于给定的扩展数据记录在主故障内存上设置 **DTC** 过滤器。服务器选择所有具有匹配扩展数据记录的 **DTC**。可通过**Dem_Dcm.h**获得。本服务为同步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCFormat（in）：定义所请求数据的 **DTC** 格式。有效选择为 `DEM_DTC_FORMAT_UDS` 和 `DEM_DTC_FORMAT_OBD_3BYTE`。参数 ExtendedDataRecordNumber（in）：为其设置过滤器的扩展数据记录号。有效值在 0x01 到 0xFD 范围内。返回值：**E_OK**：所请求扩展数据记录的 **DTC** 过滤器设置成功；**E_NOT_OK**：指示选择了无效的扩展数据记录号。
+
+```C
+Std_ReturnType Dem_SetDTCFilterByExtendedDataRecordNumber ( uint8 ClientId, Dem_DTCFormatType DTCFormat, uint8 ExtendedDataRecordNumber )
+```
+
+###### 7.3.4.1.15. Dem_SetDTCFilterByReadinessGroup
+
+**说明**: 基于给定的 **DTC** 就绪组在主故障内存上设置 **DTC** 过滤器。服务器选择所有配置了该 **DTC** 就绪组的 **DTC**。可通过**Dem_Dcm.h**获得。本服务为同步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientID（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCFormat（in）：定义所请求数据的 **DTC** 格式。有效选择为 `DEM_DTC_FORMAT_UDS` 和 `DEM_DTC_FORMAT_OBD_3BYTE`。参数 ReadinessGroupNumber（in）：指定 SAE J1979-DA 定义的 **DTC** 就绪组编号。返回值：**E_OK**：所请求 **DTC** 就绪组的 **DTC** 过滤器设置成功；**E_NOT_OK**：指示选择了无效的 **DTC** 就绪组。
+
+```C
+Std_ReturnType Dem_SetDTCFilterByReadinessGroup ( uint8 ClientID, Dem_DTCFormatType DTCFormat, Dem_EventOBDReadinessGroupType ReadinessGroupNumber )
+```
+
+##### 7.3.4.2. 访问扩展数据记录和冻结帧数据
+
+###### 7.3.4.2.1. Dem_DisableDTCRecordUpdate
+
+**说明**: 禁用特定 **DTC**（一次仅一个）的事件内存更新。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。返回值：**E_OK**：事件内存更新已成功禁用；**E_NOT_OK**：未选择 **DTC**；**DEM_WRONG_DTC**：所选格式下所选的 **DTC** 值不存在，或选择了 **DTC** 组；**DEM_WRONG_DTCORIGIN**：所选 **DTCOrigin** 不存在；**DEM_PENDING**：禁用 **DTC** 记录更新正在进行中。调用者应在稍后时刻再次调用此函数；**DEM_BUSY**：该客户端另一个基于 Dem_SelectDTC 的操作（按第 6.11.2.2 节）正在进行中。
+
+```C
+Std_ReturnType Dem_DisableDTCRecordUpdate ( uint8 ClientId )
+```
+
+###### 7.3.4.2.2. Dem_EnableDTCRecordUpdate
+
+**说明**: 启用之前由 Dem_DisableDTCRecordUpdate() 禁用的 **DTC** 的事件内存更新。注意：由于对 Dem_EnableDTCRecordUpdate 的调用是禁用/启用 **DTC** 序列中的最后一个动作，调用者对返回值不感兴趣。因此，即使 **DTC** 是异步启用的，也应返回 E_OK。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。返回值：**E_OK**：**DTC** 记录已成功更新；**E_NOT_OK**：未选择 **DTC**。
+
+```C
+Std_ReturnType Dem_EnableDTCRecordUpdate ( uint8 ClientId )
+```
+
+###### 7.3.4.2.3. Dem_GetSizeOfExtendedDataRecordSelection
+
+**说明**: 获取通过调用 Dem_SelectExtendedDataRecord 所选 **DTC** 的扩展数据记录的大小。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 SizeOfExtendedDataRecord（out）：所请求扩展数据记录的大小（包括记录号）。单个 ExtendedDataRecord 的格式为：{Record Number, data[1], ..., data[N]}。返回值：**E_OK**：大小返回成功；**E_NOT_OK**：未调用选择函数；**DEM_PENDING**：所请求的值被异步计算，当前不可用。调用者可以在稍后重试；**DEM_WRONG_DTC**：**DTC** 值不存在；**DEM_WRONG_DTCORIGIN**：错误的 **DTC** origin；**DEM_NO_SUCH_ELEMENT**：记录号不受配置支持，因此无效。
+
+```C
+Std_ReturnType Dem_GetSizeOfExtendedDataRecordSelection ( uint8 ClientId, uint32* SizeOfExtendedDataRecord )
+```
+
+###### 7.3.4.2.4. Dem_GetSizeOfFreezeFrameSelection
+
+**说明**: 获取通过调用 Dem_SelectFreezeFrameData 所选 **DTC** 的冻结帧数据的大小。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 SizeOfFreezeFrame（out）：所请求冻结帧记录的字节数。返回值：**E_OK**：大小返回成功；**E_NOT_OK**：未调用选择函数；**DEM_PENDING**：所请求的值被异步计算，当前不可用。调用者可以在稍后重试；**DEM_WRONG_DTC**：**DTC** 值不存在；**DEM_WRONG_DTCORIGIN**：错误的 **DTC** origin；**DEM_NO_SUCH_ELEMENT**：记录号不受配置支持，因此无效。
+
+```C
+Std_ReturnType Dem_GetSizeOfFreezeFrameSelection ( uint8 ClientId, uint32* SizeOfFreezeFrame )
+```
+
+###### 7.3.4.2.5. Dem_GetNextExtendedDataRecord
+
+**说明**: 为 Dem_SelectExtendedDataRecord 所选 **DTC** 获取扩展数据记录。函数将数据存储在提供的 **DestBuffer** 中。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 BufSize（inout）：函数被调用时此参数包含可写入缓冲区的最大数据字节数。函数在此参数中返回实际写入的数据字节数。参数 DestBuffer（out）：此参数包含一个字节指针，指向应写入扩展数据记录的缓冲区。格式为：{ExtendedDataRecordNumber, data[0], data[1], ..., data[n]}。返回值：**E_OK**：大小和缓冲区成功返回；**E_NOT_OK**：未调用选择函数；**DEM_BUFFER_TOO_SMALL**：提供的缓冲区大小太小；**DEM_PENDING**：所请求的值被异步计算，当前不可用。调用者可以在稍后重试；**DEM_WRONG_DTC**：**DTC** 值不存在；**DEM_WRONG_DTCORIGIN**：错误的 **DTC** origin；**DEM_NO_SUCH_ELEMENT**：未找到更多（匹配过滤判据的）元素。
+
+```C
+Std_ReturnType Dem_GetNextExtendedDataRecord ( uint8 ClientId, uint8* DestBuffer, uint16* BufSize )
+```
+
+###### 7.3.4.2.6. Dem_GetNextFreezeFrameData
+
+**说明**: 为 Dem_SelectFreezeFrameData 所选 **DTC** 获取冻结帧数据。函数将数据存储在提供的 **DestBuffer** 中。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 BufSize（inout）：函数被调用时此参数包含可写入缓冲区的最大数据字节数。函数在此参数中返回实际写入的数据字节数。参数 DestBuffer（out）：此参数包含一个字节指针，指向应写入冻结帧数据记录的缓冲区。格式为：{RecordNumber, NumOfDIDs, DID[1], data[1], ..., DID[N], data[N]}。返回值：**E_OK**：大小和缓冲区成功返回；**DEM_BUFFER_TOO_SMALL**：提供的缓冲区大小太小；**DEM_PENDING**：所请求的值被异步计算，当前不可用。调用者可以在稍后重试；**DEM_WRONG_DTC**：**DTC** 值不存在；**E_NOT_OK**：未调用选择函数；**DEM_WRONG_DTCORIGIN**：错误的 **DTC** origin；**DEM_NO_SUCH_ELEMENT**：未找到更多（匹配过滤判据的）元素。
+
+```C
+Std_ReturnType Dem_GetNextFreezeFrameData ( uint8 ClientId, uint8* DestBuffer, uint16* BufSize )
+```
+
+###### 7.3.4.2.7. Dem_SelectExtendedDataRecord
+
+**说明**: 设置由 Dem_GetNextExtendedDataRecord 和 Dem_GetSizeOfExtendedDataRecordSelection 使用的过滤器。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 ExtendedDataNumber（in）：所请求扩展数据记录的标识/编号。对于主故障内存，明确允许值 0xFE 来请求所有法规要求排放 **OBD DTC** 扩展数据记录。在所有故障内存中明确允许值 0xFF 来检索所有扩展数据记录的数据。返回值：**E_OK**：扩展数据记录选择成功；**DEM_WRONG_DTC**：所选格式下所选的 **DTC** 值不存在；**DEM_WRONG_DTCORIGIN**：所选 **DTCOrigin** 不存在；**DEM_PENDING**：选择扩展数据记录正在进行中。调用者应在稍后时刻再次调用此函数；**DEM_BUSY**：该客户端另一个基于 Dem_SelectDTC 的操作（按第 6.11.2.2 节）正在进行中。
+
+```C
+Std_ReturnType Dem_SelectExtendedDataRecord ( uint8 ClientId, uint8 ExtendedDataNumber )
+```
+
+###### 7.3.4.2.8. Dem_SelectFreezeFrameData
+
+**说明**: 设置由 Dem_GetNextFreezeFrameData 和 Dem_GetSizeOfFreezeFrameSelection 使用的过滤器。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 RecordNumber（in）：ISO 14229-1 定义的快照记录的唯一标识符。值 0xFF 是引用所寻址 **DTC** 的所有快照记录的占位符。值 0x00 指示 **DTC** 特定的 **WWH-OBD** 快照记录。返回值：**E_OK**：冻结帧数据选择成功；**DEM_WRONG_DTC**：所选格式下所选的 **DTC** 值不存在；**DEM_WRONG_DTCORIGIN**：所选 **DTCOrigin** 不存在；**DEM_PENDING**：选择冻结帧正在进行中。调用者应在稍后时刻再次调用此函数；**DEM_BUSY**：该客户端另一个基于 Dem_SelectDTC 的操作（按第 6.11.2.2 节）正在进行中。
+
+```C
+Std_ReturnType Dem_SelectFreezeFrameData ( uint8 ClientId, uint8 RecordNumber )
+```
+
+###### 7.3.4.2.9. Dem_GetNumberOfFreezeFrameRecords
+
+**说明**: 此函数返回当前存储在主事件内存中的所有冻结帧记录的数量。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientId 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 NumberOfFilteredRecords（out）：当前存储在主事件内存中的所有冻结帧记录的数量。返回值：操作状态。**E_OK**：正确返回冻结帧记录的数量；**DEM_PENDING**：所请求的值被异步计算，当前不可用。调用者可以在稍后重试。
+
+```C
+Std_ReturnType Dem_GetNumberOfFreezeFrameRecords ( uint8 ClientId, uint16* NumberOfFilteredRecords )
+```
+
+##### 7.3.4.3. DTC 存储
+
+###### 7.3.4.3.1. Dem_DisableDTCSetting
+
+**说明**: 为分配给所寻址客户端的 DemEventMemorySet 的所有 **DTC** 禁用 **DTC** 设置。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。返回值：**E_OK**：返回下一个过滤后的元素；**DEM_PENDING**：所请求的操作正在进行中。调用者应在稍后时刻再次调用此函数。
+
+```C
+Std_ReturnType Dem_DisableDTCSetting ( uint8 ClientId )
+```
+
+###### 7.3.4.3.2. Dem_EnableDTCSetting
+
+**说明**: （重新）启用分配给所寻址客户端的 DemEventMemorySet 的所有 **DTC** 的 **DTC** 设置。可通过**Dem.h**获得。本服务为异步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。返回值：**E_OK**：操作成功；**DEM_PENDING**：已启动的操作正在进行中。调用者应在稍后时刻再次调用此函数。
+
+```C
+Std_ReturnType Dem_EnableDTCSetting ( uint8 ClientId )
+```
+
+#### 7.3.5. OBD 专用 Dcm &lt;=&gt; Dem 接口
+
+##### 7.3.5.1. Dem_DcmGetInfoTypeValue08
+
+**说明**: 用于按照 InfoType $08 请求 **IUMPR** 数据的服务。此接口派生自 **Dcm** 定义的函数原型 &lt;Module&gt;_GetInfotypeValueData()，因此包含 **Dcm_OpStatusType** 和 **Std_ReturnType**。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 OpStatus（in）：仅会出现 `DCM_INITIAL`，因为此 **API** 表现为同步。参数 Iumprdata08BufferSize（inout）：可写入 Iumprdata08 缓冲区的最大数据字节数。函数返回时，该值更新为实际写入 Iumprdata08BufferSize 的数据字节数。参数 Iumprdata08（out）：包含（按 ISO 15031-5 定义的）数据元素数量和 InfoType $08 内容的缓冲区。该缓冲区由 **Dcm** 提供。返回值：始终返回 E_OK。
+
+```C
+Std_ReturnType Dem_DcmGetInfoTypeValue08 ( Dcm_OpStatusType OpStatus, uint8* Iumprdata08, uint8* Iumprdata08BufferSize )
+```
+
+##### 7.3.5.2. Dem_DcmGetInfoTypeValue0B
+
+**说明**: 用于按照 InfoType $0B 请求 **IUMPR** 数据的服务。此接口派生自 **Dcm** 定义的函数原型 &lt;Module&gt;_GetInfotypeValueData()，因此包含 **Dcm_OpStatusType** 和 **Std_ReturnType**。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 OpStatus（in）：仅会出现 `DCM_INITIAL`，因为此 **API** 表现为同步。参数 Iumprdata0BBufferSize（inout）：可写入 Iumprdata0B 缓冲区的最大数据字节数。函数返回时，该值更新为实际写入 Iumprdata0BBufferSize 的数据字节数。参数 Iumprdata0B（out）：包含（按 ISO 15031-5 定义的）数据元素数量和 InfoType $0B 内容的缓冲区。该缓冲区由 **Dcm** 提供。返回值：始终返回 E_OK。
+
+```C
+Std_ReturnType Dem_DcmGetInfoTypeValue0B ( Dcm_OpStatusType OpStatus, uint8* Iumprdata0B, uint8* Iumprdata0BBufferSize )
+```
+
+##### 7.3.5.3. Dem_DcmReadDataOfPID01
+
+**说明**: 报告 **Dem** 计算的 PID $01 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID01value（out）：包含 **Dem** 计算的 PID $01 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPID01 ( uint8* PID01value )
+```
+
+##### 7.3.5.4. Dem_DcmReadDataOfPID1C
+
+**说明**: 报告 **Dem** 计算的 PID $1C 值的服务。PID $1C 的值在 DemOBDCompliancy 中配置。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID1Cvalue（out）：包含 **Dem** 计算的 PID $1C 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPID1C ( uint8* PID1Cvalue )
+```
+
+##### 7.3.5.5. Dem_DcmReadDataOfPID21
+
+**说明**: 报告 **Dem** 计算的 PID $21 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID21value（out）：包含 **Dem** 计算的 PID $21 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPID21 ( uint8* PID21value )
+```
+
+##### 7.3.5.6. Dem_DcmReadDataOfPID30
+
+**说明**: 报告 **Dem** 计算的 PID $30 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID30value（out）：包含 **Dem** 计算的 PID $30 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPID30 ( uint8* PID30value )
+```
+
+##### 7.3.5.7. Dem_DcmReadDataOfPID31
+
+**说明**: 报告 **Dem** 计算的 PID $31 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID31value（out）：包含 **Dem** 计算的 PID $31 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPID31 ( uint8* PID31value )
+```
+
+##### 7.3.5.8. Dem_DcmReadDataOfPID41
+
+**说明**: 报告 **Dem** 计算的 PID $41 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID41value（out）：包含 **Dem** 计算的 PID $41 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPID41 ( uint8* PID41value )
+```
+
+##### 7.3.5.9. Dem_DcmReadDataOfPID4D
+
+**说明**: 报告 **Dem** 计算的 PID $4D 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID4Dvalue（out）：包含 **Dem** 计算的 PID $4D 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPID4D ( uint8* PID4Dvalue )
+```
+
+##### 7.3.5.10. Dem_DcmReadDataOfPID4E
+
+**说明**: 报告 **Dem** 计算的 PID $4E 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID4Evalue（out）：包含 **Dem** 计算的 PID $4E 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPID4E ( uint8* PID4Evalue )
+```
+
+##### 7.3.5.11. Dem_DcmReadDataOfPID91
+
+**说明**: 报告 **Dem** 计算的 PID $91 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID91value（out）：包含 **Dem** 计算的 PID $91 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPID91 ( uint8* PID91value )
+```
+
+##### 7.3.5.12. Dem_DcmReadDataOfOBDFreezeFrame
+
+**说明**: 按 **PID** 和索引获取为服务 $02 的输出而选择的最重要的冻结帧的数据元素。函数将数据存储在提供的 **DestBuffer** 中。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PID（in）：此参数是 ISO 15031-5 定义的 **PID** 标识符。参数 DataElementIndexOfPID（in）：根据服务 $02 的 **Dcm** 配置，此 **PID** 的数据元素索引。它是从零开始连续的，并按数据元素位置排序（在 **Dcm** 中配置，参见第 6.9.5.2 节）。参数 DestBuffer（inout）：此参数包含一个字节指针，指向应写入该 **PID** 数据元素的缓冲区。格式为原始十六进制值，不包含头信息。参数 BufSize（inout）：函数被调用时此参数包含可写入缓冲区的最大数据字节数。函数在此参数中返回实际写入的数据字节数。返回值：**E_OK**：冻结帧数据成功报告；**E_NOT_OK**：冻结帧数据未成功报告。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfOBDFreezeFrame ( uint8 PID, uint8 DataElementIndexOfPID, uint8* DestBuffer, uint16* BufSize )
+```
+
+##### 7.3.5.13. Dem_DcmGetDTCOfOBDFreezeFrame
+
+**说明**: 按冻结帧记录号获取 **DTC**。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 FrameNumber（in）：ISO 15031-5 定义的冻结帧记录的唯一标识符。值 0x00 指示完整的 **OBD** 冻结帧。其他值保留用于未来的功能。参数 DTCFormat（in）：**DTC** 值的输出格式。参数 DTC（out）：**OBD** 格式的诊断故障码。如果函数返回值不是 E_OK，此参数不包含有效数据。返回值：**E_OK**：操作成功；**E_NOT_OK**：没有可用的 **DTC**。
+
+```C
+Std_ReturnType Dem_DcmGetDTCOfOBDFreezeFrame ( uint8 FrameNumber, uint32* DTC, Dem_DTCFormatType DTCFormat )
+```
+
+##### 7.3.5.14. Dem_DcmGetAvailableOBDMIDs
+
+**说明**: 在 Service $06 请求时向 **Dcm** 报告所请求"可用性 OBDMID"的值。测试仪由此显示维修人员可以选择的受支持测试。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，可重入。参数 Obdmid（in）：可用性 OBDMID（$00、$20、$40...）。参数 Obdmidvalue（out）：关于 OBDMID 支持情况的位编码信息。返回值：**E_OK**：**DTR** 结果报告成功。
+
+```C
+Std_ReturnType Dem_DcmGetAvailableOBDMIDs ( uint8 Obdmid, uint32* Obdmidvalue )
+```
+
+##### 7.3.5.15. Dem_DcmGetNumTIDsOfOBDMID
+
+**说明**: 获取每个（功能性）OBDMID 的 **TID** 数量。**DCM** 可以使用它在从 0 到 numberOfTIDs-1 的循环内迭代请求 **OBD/TID** 结果数据。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，可重入。参数 Obdmid（in）：作为请求对象的 OBDMID，用于标识分配的 **TID** 数量。参数 numberOfTIDs（out）：所请求 OBDMID 分配的 **TID** 数量。用作 **DCM** 检索所有 **OBD/TID** 结果数据的循环值。返回值：**E_OK**：获取 **TID** 数量成功；**E_NOT_OK**：获取 **TID** 数量失败。
+
+```C
+Std_ReturnType Dem_DcmGetNumTIDsOfOBDMID ( uint8 Obdmid, uint8* numberOfTIDs )
+```
+
+##### 7.3.5.16. Dem_DcmGetDTRData
+
+**说明**: 报告 **DTR** 数据及其 **TID** 值、UaSID、带下限和上限的测试结果。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，可重入。参数 Obdmid（in）：通过分配的 DTRId 标识 **DTR** 元素。参数 TIDindex（in）：**DEM** 内 **TID** 的索引。从 0 运行到在调用 Dem_DcmGetNumTIDsOfOBDMID() 时获得的"numberOfTIDs"。参数 TIDvalue（out）：要放入测试仪响应的 **TID**。参数 UaSID（out）：要放入测试仪响应的 UaSID。参数 Testvalue（out）：最新测试结果。参数 Lowlimvalue（out）：与最新测试结果关联的下限值。参数 Upplimvalue（out）：与最新测试结果关联的上限值。返回值：**E_OK**：**DTR** 结果报告成功；**E_NOT_OK**：**DTR** 结果报告失败。
+
+```C
+Std_ReturnType Dem_DcmGetDTRData ( uint8 Obdmid, uint8 TIDindex, uint8* TIDvalue, uint8* UaSID, uint16* Testvalue, uint16* Lowlimvalue, uint16* Upplimvalue )
+```
+
+##### 7.3.5.17. Dem_DcmGetInfoTypeValue79
+
+**说明**: 报告 **Dem** 计算的监视器活动分母 **PID** 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 OpStatus（in）：仅会出现 `DCM_INITIAL`，因为此 **API** 表现为同步。参数 DataValueBufferSize（inout）：可写入 DataValueBuffer 的最大数据字节数。函数返回时，该值更新为实际写入 DataValueBuffer 的数据字节数。参数 DataValueBuffer（out）：包含监视器活动分母内容的缓冲区。该缓冲区由调用者以适当的大小提供。返回值：始终返回 E_OK。
+
+```C
+Std_ReturnType Dem_DcmGetInfoTypeValue79 ( Dcm_OpStatusType OpStatus, uint8* DataValueBuffer, uint8* DataValueBufferSize )
+```
+
+##### 7.3.5.18. Dem_DcmReadDataOfPIDF501
+
+**说明**: 报告 **Dem** 计算的 PID 0xF501 值的函数。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem_Dcm.h**获得。本服务为同步调用，不可重入。参数 PIDF501value（out）：包含 PID 0xF501 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供。返回值：始终返回 E_OK。
+
+```C
+Std_ReturnType Dem_DcmReadDataOfPIDF501 ( uint8* PIDF501value )
+```
+
+#### 7.3.6. 接口 J1939Dcm &lt;=&gt; Dem
+
+##### 7.3.6.1. 访问 DTC 和状态信息
+
+###### 7.3.6.1.1. Dem_J1939DcmSetDTCFilter
+
+**说明**: 该函数为特定节点设置 **DTC** 过滤器，并返回过滤后 **DTC** 的组合灯状态。可通过**Dem_J1939Dcm.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 DTCStatusFilter（in）：可用的类型有：`DEM_J1939DTC_ACTIVE`、`DEM_J1939DTC_PREVIOUSLY_ACTIVE`、`DEM_J1939DTC_PENDING`、`DEM_J1939DTC_PERMANENT`、`DEM_J1939DTC_CURRENTLY_ACTIVE`。参数 DTCKind（in）：定义要报告的 **DTC** 功能组（例如所有 **DTC**、**OBD** 相关 **DTC**）。参数 DTCOrigin（in）：此参数用于选择应从中读取/清除 **DTC** 的源内存。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 LampStatus（out）：接收灯状态。返回值：**E_OK**：操作成功；**E_NOT_OK**：无法设置过滤器。
+
+```C
+Std_ReturnType Dem_J1939DcmSetDTCFilter ( Dem_J1939DcmDTCStatusFilterType DTCStatusFilter, Dem_DTCKindType DTCKind, Dem_DTCOriginType DTCOrigin, uint8 ClientId, Dem_J1939DcmLampStatusType* LampStatus )
+```
+
+###### 7.3.6.1.2. Dem_J1939DcmGetNumberOfFilteredDTC
+
+**说明**: 获取由 Dem_J1939DcmSetDTCFilter 函数设置的当前过滤 **DTC** 的数量。可通过**Dem_J1939Dcm.h**获得。本服务为异步调用，不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 NumberOfFilteredDTC（out）：与所定义状态掩码匹配的 **DTC** 数量。返回值：**E_OK**：操作成功；**DEM_PENDING**：操作成功且结果挂起。
+
+```C
+Std_ReturnType Dem_J1939DcmGetNumberOfFilteredDTC ( uint16* NumberOfFilteredDTC, uint8 ClientId )
+```
+
+###### 7.3.6.1.3. Dem_J1939DcmGetNextFilteredDTC
+
+**说明**: 获取下一个过滤后的 **J1939 DTC**。可通过**Dem_J1939Dcm.h**获得。本服务为异步调用，不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 J1939DTC（out）：接收 **J1939DTC** 值。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 OccurenceCounter（out）：此参数接收相应的发生计数器。如果函数调用的返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。返回值：**E_OK**：操作成功；**DEM_NO_SUCH_ELEMENT**：所请求的元素不可用；**DEM_PENDING**：操作成功且结果挂起；**DEM_BUFFER_TOO_SMALL**：提供的缓冲区太小。
+
+```C
+Std_ReturnType Dem_J1939DcmGetNextFilteredDTC ( uint32* J1939DTC, uint8* OccurenceCounter, uint8 ClientId )
+```
+
+###### 7.3.6.1.4. Dem_J1939DcmFirstDTCwithLampStatus
+
+**说明**: 该函数为特定节点设置 DM31 响应的第一个适用 **DTC** 的过滤器。可通过**Dem_J1939Dcm.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。返回值：无。
+
+```C
+void Dem_J1939DcmFirstDTCwithLampStatus ( uint8 ClientId )
+```
+
+###### 7.3.6.1.5. Dem_J1939DcmGetNextDTCwithLampStatus
+
+**说明**: 获取 DM31 的下一个过滤 **J1939 DTC**，包括当前的 LampStatus。可通过**Dem_J1939Dcm.h**获得。本服务为同步调用，不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 LampStatus（out）：接收此函数返回的灯状态。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 J1939DTC（out）：接收 **J1939DTC** 值。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 OccurenceCounter（out）：此参数接收相应的发生计数器。如果函数调用的返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。返回值：**E_OK**：操作成功；**DEM_NO_SUCH_ELEMENT**：所请求的元素不可用；**DEM_PENDING**：操作成功且结果挂起；**DEM_BUFFER_TOO_SMALL**：提供的缓冲区太小。
+
+```C
+Std_ReturnType Dem_J1939DcmGetNextDTCwithLampStatus ( Dem_J1939DcmLampStatusType* LampStatus, uint32* J1939DTC, uint8* OccurenceCounter, uint8 ClientId )
+```
+
+##### 7.3.6.2. DTC 存储
+
+###### 7.3.6.2.1. Dem_J1939DcmClearDTC
+
+**说明**: 清除与指定 **DTC** 相关的所有事件的状态，以及这些事件的所有关联事件内存条目。可通过**Dem_J1939Dcm.h**获得。本服务为异步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 DTCTypeFilter（in）：定义要清除的 **DTC** 类型。参数 DTCOrigin（in）：此参数用于选择应从中读取/清除 **DTC** 的源内存。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。返回值：**E_OK**：**DTC** 清除成功；**DEM_WRONG_DTC**：所选格式下所选的 **DTC** 值不存在，或按配置仅允许清除所有 **DTC** 组；**DEM_WRONG_DTCORIGIN**：所选 **DTCOrigin** 不存在；**DEM_CLEAR_FAILED**：**DTC** 清除失败；**DEM_CLEAR_BUSY**：另一个客户端当前正在清除 **DTC**。所请求的操作不会开始，调用者应在稍后时刻重试；**DEM_CLEAR_MEMORY_ERROR**：擦除内存位置时发生错误（例如在 DemClearDTCBehavior 设置为 `DEM_CLRRESP_NONVOLATILE_FINISH` 且非易失性块擦除失败时）；**DEM_PENDING**：**DTC** 清除正在进行中。调用者应在稍后时刻再次调用此函数。
+
+```C
+Std_ReturnType Dem_J1939DcmClearDTC ( Dem_J1939DcmSetClearFilterType DTCTypeFilter, Dem_DTCOriginType DTCOrigin, uint8 ClientId )
+```
+
+###### 7.3.6.2.2. Dem_J1939DcmSetFreezeFrameFilter
+
+**说明**: 该函数为特定节点设置 FreezeFrame 过滤器。可通过**Dem_J1939Dcm.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 FreezeFrameKind（in）：可用的类型有：`DEM_J1939DCM_FREEZEFRAME`、`DEM_J1939DCM_EXPANDED_FREEZEFRAME`、`DEM_J1939DCM_SPNS_IN_EXPANDED_FREEZEFRAME`。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。返回值：**E_OK**：操作成功；**E_NOT_OK**：无法设置过滤器。
+
+```C
+Std_ReturnType Dem_J1939DcmSetFreezeFrameFilter ( Dem_J1939DcmSetFreezeFrameFilterType FreezeFrameKind, uint8 ClientId )
+```
+
+###### 7.3.6.2.3. Dem_J1939DcmGetNextFreezeFrame
+
+**说明**: 获取下一个冻结帧数据。函数将数据存储在提供的 **DestBuffer** 中。可通过**Dem_J1939Dcm.h**获得。本服务为异步调用，不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 DestBuffer（inout）：此参数包含一个字节指针，指向应写入冻结帧数据记录的缓冲区。参数 BufSize（inout）：函数被调用时此参数包含可写入缓冲区的最大数据字节数。函数在 DestBuffer 中返回实际写入的数据字节数。参数 J1939DTC（out）：接收 **J1939DTC** 值。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 OccurenceCounter（out）：此参数接收相应的发生计数器。如果函数调用的返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。返回值：**E_OK**：操作成功；**DEM_NO_SUCH_ELEMENT**：所请求的元素不可用；**DEM_PENDING**：操作成功且结果挂起；**DEM_BUFFER_TOO_SMALL**：提供的缓冲区太小。
+
+```C
+Std_ReturnType Dem_J1939DcmGetNextFreezeFrame ( uint32* J1939DTC, uint8* OccurenceCounter, uint8* DestBuffer, uint16* BufSize, uint8 ClientId )
+```
+
+###### 7.3.6.2.4. Dem_J1939DcmGetNextSPNInFreezeFrame
+
+**说明**: 获取下一个 **SPN**。可通过**Dem_J1939Dcm.h**获得。本服务为异步调用，不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 SPNSupported（out）：此参数包含 ExpandedFreezeFrame 中的下一个 **SPN**。返回值：**E_OK**：操作成功；**DEM_NO_SUCH_ELEMENT**：所请求的元素不可用；**DEM_PENDING**：操作成功且结果挂起。
+
+```C
+Std_ReturnType Dem_J1939DcmGetNextSPNInFreezeFrame ( uint32* SPNSupported, uint8 ClientId )
+```
+
+##### 7.3.6.3. 报告
+
+###### 7.3.6.3.1. Dem_J1939DcmSetRatioFilter
+
+**说明**: 该函数为特定节点设置 Ratio 过滤器，并返回相应的点火循环计数器和通用分母。可通过**Dem_J1939Dcm.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 IgnitionCycleCounter（out）：点火循环计数器。参数 OBDMonitoringConditionsEncountered（out）：遇到的 **OBD** 监控条件。返回值：**E_OK**：操作成功；**E_NOT_OK**：无法设置过滤器。
+
+```C
+Std_ReturnType Dem_J1939DcmSetRatioFilter ( uint16* IgnitionCycleCounter, uint16* OBDMonitoringConditionsEncountered, uint8 ClientId )
+```
+
+###### 7.3.6.3.2. Dem_J1939DcmGetNextFilteredRatio
+
+**说明**: 获取下一个过滤后的比率。可通过**Dem_J1939Dcm.h**获得。本服务为同步调用，不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 SPN（out）：接收适用系统监视器的 **SPN**。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 Numerator（out）：接收适用系统监视器的分子。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。参数 Denominator（out）：接收适用系统监视器的分母。如果函数返回值不是 `DEM_FILTERED_OK`，此参数不包含有效数据。返回值：**E_OK**：操作成功；**DEM_NO_SUCH_ELEMENT**：所请求的元素不可用；**DEM_PENDING**：操作成功且结果挂起；**DEM_BUFFER_TOO_SMALL**：提供的缓冲区太小。
+
+```C
+Std_ReturnType Dem_J1939DcmGetNextFilteredRatio ( uint32* SPN, uint16* Numerator, uint16* Denominator, uint8 ClientId )
+```
+
+###### 7.3.6.3.3. Dem_J1939DcmReadDiagnosticReadiness1
+
+**说明**: 报告 **Dem** 计算的 Diagnostic Readiness 1（DM05）值的服务。可通过**Dem_J1939Dcm.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 DataValue（out）：包含 **Dem** 计算的 Diagnostic Readiness 1（DM05）内容的 8 字节缓冲区。返回值：**E_OK**：操作成功；**E_NOT_OK**：操作失败。
+
+```C
+Std_ReturnType Dem_J1939DcmReadDiagnosticReadiness1 ( Dem_J1939DcmDiagnosticReadiness1Type* DataValue, uint8 ClientId )
+```
+
+###### 7.3.6.3.4. Dem_J1939DcmReadDiagnosticReadiness2
+
+**说明**: 报告 **Dem** 计算的 Diagnostic Readiness 2（DM21）值的服务。可通过**Dem_J1939Dcm.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 DataValue（out）：包含 **Dem** 计算的 Diagnostic Readiness 2（DM21）内容的 8 字节缓冲区。返回值：**E_OK**：操作成功；**E_NOT_OK**：操作失败。
+
+```C
+Std_ReturnType Dem_J1939DcmReadDiagnosticReadiness2 ( Dem_J1939DcmDiagnosticReadiness2Type* DataValue, uint8 ClientId )
+```
+
+###### 7.3.6.3.5. Dem_J1939DcmReadDiagnosticReadiness3
+
+**说明**: 报告 **Dem** 计算的 Diagnostic Readiness 3（DM26）值的服务。可通过**Dem_J1939Dcm.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：用于寻址 **J1939** 事件内存的 ClientId。参数 DataValue（out）：包含 **Dem** 计算的 Diagnostic Readiness 3（DM26）内容的 8 字节缓冲区。返回值：**E_OK**：操作成功；**E_NOT_OK**：操作失败。
+
+```C
+Std_ReturnType Dem_J1939DcmReadDiagnosticReadiness3 ( Dem_J1939DcmDiagnosticReadiness3Type* DataValue, uint8 ClientId )
+```
+
+#### 7.3.7. OBD 专用接口
+
+##### 7.3.7.1. Dem_SetEventDisabled
+
+**说明**: 将事件报告为已禁用（针对 PID $41 计算）的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，对不同 EventId 可重入，对相同 EventId 不可重入。参数 EventId（in）：通过分配的 **EventId** 标识事件。返回值：**E_OK**：事件设置为已禁用成功；**E_NOT_OK**：事件设置为已禁用失败。
+
+```C
+Std_ReturnType Dem_SetEventDisabled ( Dem_EventIdType EventId )
+```
+
+##### 7.3.7.2. Dem_RepIUMPRFaultDetect
+
+**说明**: 报告可能发现故障（因为所有条件均已满足）的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，对不同 RatioID 可重入，对相同 RatioID 不可重入。参数 RatioID（in）：报告相应监视器可能已发现故障的比率标识符——仅在选择了接口选项"API"时使用。返回值：**E_OK**：**IUMPR** 结果报告成功。
+
+```C
+Std_ReturnType Dem_RepIUMPRFaultDetect ( Dem_RatioIdType RatioID )
+```
+
+##### 7.3.7.3. Dem_SetIUMPRDenCondition
+
+**说明**: 为了在 **OBD** 相关 **ECU** 之间传递（附加）分母条件的状态，此 **API** 用于将条件状态转发给特定 **ECU** 的 **Dem**。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，可重入。参数 ConditionId（in）：**IUMPR** 分母条件 ID 的标识（通用分母、冷启动、EVAP、500mi）。参数 ConditionStatus（in）：**IUMPR** 分母条件的状态（未达到、已达到、不可达/被抑制）。返回值：**E_OK**：**IUMPR** 分母条件设置成功；**E_NOT_OK**：**IUMPR** 分母条件设置失败或无法被接受。
+
+```C
+Std_ReturnType Dem_SetIUMPRDenCondition ( Dem_IumprDenomCondIdType ConditionId, Dem_IumprDenomCondStatusType ConditionStatus )
+```
+
+##### 7.3.7.4. Dem_GetIUMPRDenCondition
+
+**说明**: 为了在 **OBD** 相关 **ECU** 之间传递（附加）分母条件的状态，此 **API** 用于从计算这些条件的 **ECU** 的 **Dem** 中检索条件状态。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，可重入。参数 ConditionId（in）：**IUMPR** 分母条件 ID 的标识（通用分母、冷启动、EVAP、500mi）。参数 ConditionStatus（out）：**IUMPR** 分母条件的状态（未达到、已达到、不可达/被抑制）。返回值：**E_OK**：获取 **IUMPR** 分母条件状态成功；**E_NOT_OK**：获取条件状态失败。
+
+```C
+Std_ReturnType Dem_GetIUMPRDenCondition ( Dem_IumprDenomCondIdType ConditionId, Dem_IumprDenomCondStatusType* ConditionStatus )
+```
+
+##### 7.3.7.5. Dem_RepIUMPRDenRelease
+
+**说明**: 用于释放特定监视器分母的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，可重入。参数 RatioID（in）：报告特定分母已释放（因物理原因——例如温度条件或最小活动）的比率标识符。返回值：**E_OK**：**IUMPR** 分母状态报告成功；**E_NOT_OK**：**IUMPR** 分母状态报告失败。
+
+```C
+Std_ReturnType Dem_RepIUMPRDenRelease ( Dem_RatioIdType RatioID )
+```
+
+##### 7.3.7.6. Dem_SetPtoStatus
+
+**说明**: 设置 **PTO** 状态的 **API**。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 PtoStatus（in）：设置 **PTO** 的状态（TRUE==激活；FALSE==未激活）。返回值：当 **Dem** 采纳了新的 **PTO** 状态时返回 E_OK；在其他所有情况下返回 E_NOT_OK。
+
+```C
+Std_ReturnType Dem_SetPtoStatus ( boolean PtoStatus )
+```
+
+##### 7.3.7.7. Dem_ReadDataOfPID01
+
+**说明**: 报告 **Dem** 计算的 PID $01 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 PID01value（out）：包含 **Dem** 计算的 PID $01 内容的缓冲区。该缓冲区由应用以 4 字节大小提供。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_ReadDataOfPID01 ( uint8* PID01value )
+```
+
+##### 7.3.7.8. Dem_GetDataOfPID21
+
+**说明**: 软件组件从 **Dem** 获取 PID $21 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral/DemGeneralOBD.DemOBDCentralizedPID21Handling)} == true) 且 ({ecuc(Dem/DemGeneral.DemOBDSupport)} == `DEM_OBD_MASTER_ECU`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 PID21value（out）：原始十六进制值的 PID $21 内容。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_GetDataOfPID21 ( uint8* PID21value )
+```
+
+##### 7.3.7.9. Dem_SetDataOfPID21
+
+**说明**: 软件组件在 **Dem** 中设置 PID $21 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 PID21value（in）：包含 PID $21 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_SetDataOfPID21 ( const uint8* PID21value )
+```
+
+##### 7.3.7.10. Dem_SetDataOfPID31
+
+**说明**: 软件组件在 **Dem** 中设置 PID $31 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 PID31value（in）：包含 PID $31 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_SetDataOfPID31 ( const uint8* PID31value )
+```
+
+##### 7.3.7.11. Dem_SetDataOfPID4D
+
+**说明**: 软件组件在 **Dem** 中设置 PID $4D 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 PID4Dvalue（in）：包含 PID $4D 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_SetDataOfPID4D ( const uint8* PID4Dvalue )
+```
+
+##### 7.3.7.12. Dem_SetDataOfPID4E
+
+**说明**: 软件组件在 **Dem** 中设置 PID $4E 值的服务。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为异步调用，不可重入。参数 PID4Evalue（in）：包含 PID $4E 内容的缓冲区。该缓冲区由 **Dcm** 以适当的大小提供，即在配置期间，**Dcm** 从最大的 **PID** 识别所需大小以配置 PIDBuffer。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_SetDataOfPID4E ( const uint8* PID4Evalue )
+```
+
+##### 7.3.7.13. Dem_GetCycleQualified
+
+**说明**: 返回从属运行周期的鉴定状态。**API** 可用性：仅当任何一个 ({ecuc(Dem/DemGeneral/DemOperationCycle.DemLeadingCycleRef)} != NULL) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 OperationCycleId（in）：已配置 DemOperationCycle 的标识。参数 isQualified（out）：TRUE：从属运行周期已被鉴定。FALSE：尚未满足从属运行周期的鉴定条件。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_GetCycleQualified ( uint8 OperationCycleId, boolean* isQualified )
+```
+
+##### 7.3.7.14. Dem_SetCycleQualified
+
+**说明**: 将一个从属运行周期设置为已鉴定，使其可以与其主控周期一起处理。可通过**Dem.h**获得。本服务为同步调用，可重入。参数 OperationCycleId（in）：已配置 DemOperationCycle 的标识。返回值：始终返回 E_OK。
+
+```C
+Std_ReturnType Dem_SetCycleQualified ( uint8 OperationCycleId )
+```
+
+##### 7.3.7.15. Dem_GetDTCSeverityAvailabilityMask
+
+**说明**: 获取 **DTC** 严重度可用性掩码。可通过**Dem.h**获得。本服务为同步调用，对不同 ClientID 可重入，对相同 ClientId 不可重入。参数 ClientId（in）：分配给调用模块实例的唯一客户端 ID。参数 DTCSeverityMask（out）：**DTCSeverityMask** 的值指示 **Dem** 支持的 **DTC** 严重度位。所有支持的信息通过将相应的状态位置为 1 来指示。参见 ISO 14229-1。返回值：**E_OK**：获取 **DTC** 严重度掩码成功；**E_NOT_OK**：获取 **DTC** 严重度掩码失败。
+
+```C
+Std_ReturnType Dem_GetDTCSeverityAvailabilityMask ( uint8 ClientId, Dem_DTCSeverityType* DTCSeverityMask )
+```
+
+##### 7.3.7.16. Dem_GetB1Counter
+
+**说明**: 报告 **Dem** 计算的 **B1** 计数器值的服务。仅在 **WWH-OBD** 相关 **ECU** 中需要此 **API**。可通过**Dem.h**获得。本服务为同步调用，不可重入。参数 B1Counter（out）：包含 **B1** 计数器的缓冲区。该缓冲区由应用以 2 字节大小提供。返回值：始终返回 E_OK，因为 E_NOT_OK 永远不会出现。
+
+```C
+Std_ReturnType Dem_GetB1Counter ( uint16* B1Counter )
+```
+
+##### 7.3.7.17. Dem_SetDTR
+
+**说明**: 报告带下限和上限的 **DTR** 结果。内部事件状态作为 **DTR** 值是转发还是忽略的主控，同时考虑 DTRUpdateKind。与该 **DTR** 相关的 EventId 通过配置分配（并从 ServiceNeeds 推导）。处理时会考虑使能/存储条件。仅在 **OBD** 相关 **ECU** 中需要此 **API**。**API** 可用性：仅当 ({ecuc(Dem/DemGeneral.DemOBDSupport)} != `DEM_OBD_NO_OBD_SUPPORT`) 时此 **API** 可用。可通过**Dem.h**获得。本服务为同步调用，对不同 DTRId 可重入，对相同 DTRId 不可重入。参数 DTRId（in）：通过分配的 DTRId 标识 **DTR** 元素。参数 TestResult（in）：**DTR** 的测试结果。参数 LowerLimit（in）：**DTR** 的下限。参数 UpperLimit（in）：**DTR** 的上限。参数 Ctrlval（in）：**DTR** 的控制值，用于支持 **Dem** 内部对其的解释。返回值：**E_OK**：**DTR** 结果报告成功；**E_NOT_OK**：**DTR** 结果报告失败。
+
+```C
+Std_ReturnType Dem_SetDTR ( uint16 DTRId, sint32 TestResult, sint32 LowerLimit, sint32 UpperLimit, Dem_DTRControlType Ctrlval )
+```
