@@ -95,7 +95,7 @@
 - ✅ [SoAd](soad/) — SWS_SocketAdaptor (R23-11 realigned 2026-10-29: layout switch `SoAd/SoAd.md` → `soad/index.md` with nav + cross-link fixes, §2 缩略语 rebuilt to blockquotes (21 acronyms + 5 terms), §3.1 rebuilt to R23-11 10-entry registry + canonical headings, §4.1/§4.2 added, §5 rebuilt (TcpIp dependency / 通用上层 / 文件结构 / 版本检查), §6 completed (6.1 套接字连接 打开/关闭/场景/通知/状态 through 6.14 版本检查), new §7 API规范 (21 imported types/5 types/29 functions/7 callbacks/1 scheduled/期望接口 incl. 可配置接口), §8 时序图 10 figures, §9 配置规范 16 containers 12 figures, `## B.` 可追溯项变更历史 (R23-11 added/changed items in fences); source ch.6 Requirements Tracing + Annex A "Not applicable requirements" dropped per STANDARD.md annex rules; stale 2022-*.png removed)
 - 🔶 [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/index.md) — SWS_BusMirroring (R23-11 realigned 2026-10-30)
 - 🔶 [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) — SWS_EthernetSwitchDriver (R23-11 full translation 2026-10-30)
-- ⛔ [服务发现](service_discovery/) — SWS_ServiceDiscovery (stub)
+- 🔶 [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) — SWS_ServiceDiscovery (R23-11 full translation 2026-10-30)
 - 📖 [FvM 专题](fvm/fvm.md) — topic derived from SecOC appendix A (no standalone spec)
 - 📖 [Full-CAN vs Basic-CAN](can_driver/full_can_vs_basic_can.md) — topic subpage
 - 📖 [CanNm R21-11 历史版](can_network_management/r21_11/index_r21_11.md) — historical snapshot
