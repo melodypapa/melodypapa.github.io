@@ -7983,3 +7983,285 @@ Std_ReturnType Dem_SetDTR ( uint16 DTRId, sint32 TestResult, sint32 LowerLimit, 
 | 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
 | 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: local |
+
+##### 9.1.2.5. DemEventParameter
+
+| SWS 条目 | [ECUC_Dem_00661] |
+|---|---|
+| 容器名称 | DemEventParameter |
+| 父容器 | DemConfigSet |
+| 描述 | 此容器包含事件的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00921] |
+|---|---|
+| 参数名称 | DemCausalityDelayTime |
+| 父容器 | DemEventParameter |
+| 描述 | 等待事件被视为具有因果性的时间。该参数以秒为单位指定。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFloatParamDef |
+| 取值范围 | [0 .. 2.5] |
+| 默认值 | 0 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00909] |
+|---|---|
+| 参数名称 | DemComponentPriority |
+| 父容器 | DemEventParameter |
+| 描述 | 指定组件内的优先级。值越小表示优先级越高。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00969] |
+|---|---|
+| 参数名称 | DemEventAssociatedIdentification |
+| 父容器 | DemEventParameter |
+| 描述 | 允许标识一个事件的事件关联标识符。该值可以作为内部数据元素在快照记录或扩展数据记录中报告。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00792] |
+|---|---|
+| 参数名称 | DemEventAvailable |
+| 父容器 | DemEventParameter |
+| 描述 | 此参数将一个事件配置为不可用。**Dem** 将其视为不存在。true = 事件可用。false = 事件不可用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00968] |
+|---|---|
+| 参数名称 | DemEventAvailableInVariant |
+| 父容器 | DemEventParameter |
+| 描述 | 此参数定义事件的启用或禁用状态。如果设置为 FALSE，则该事件被整体禁用，即使 **SW-C** 已集成且该事件已在 ECUC 中描述。**Dem** 应忽略来自该 **SW-C** 的所有调用。如果设置为 TRUE，则事件的可用性取决于其他可用性来源。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | true |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00924] |
+|---|---|
+| 参数名称 | DemEventConfirmationThreshold |
+| 父容器 | DemEventParameter |
+| 描述 | 定义 **DTC** 确认（ISO 14229-1 的"确认阈值"）的运行周期阈值。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 255 |
+| 默认值 | 1 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00929] |
+|---|---|
+| 参数名称 | DemEventConfirmationThresholdCounterAdaptable |
+| 父容器 | DemEventParameter |
+| 描述 | 指示事件的确认周期阈值是否可以通过 Dem_SetEventConfirmationThresholdCounter 进行调整。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00659] |
+|---|---|
+| 参数名称 | DemEventId |
+| 父容器 | DemEventParameter |
+| 描述 | 诊断事件的唯一标识符。此参数不应允许用户修改，因为 Id 应由 **Dem** 自行生成，以防止出现间隙和 Id 的重复使用。事件应从 1 开始按顺序编号，中间不应有间隙。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名称） |
+| 取值范围 | 1 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00660] |
+|---|---|
+| 参数名称 | DemEventKind |
+| 父容器 | DemEventParameter |
+| 描述 | 此参数用于区分 **SW-C** 事件和 **BSW** 事件。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_EVENT_KIND_BSW`：该事件分配给一个 **BSW** 模块 |
+| 取值 | `DEM_EVENT_KIND_SWC`：该事件分配给一个 **SW-C** |
+| 默认值 | `DEM_EVENT_KIND_SWC` |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| SWS 条目 | [ECUC_Dem_00916] |
+|---|---|
+| 参数名称 | DemEventRecoverableInSameOperationCycle |
+| 父容器 | DemEventParameter |
+| 描述 | 如果此参数配置为 FALSE，则当事件已经处于"本运行周期内测试失败"状态时，PASSED 的报告将被忽略。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | true |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00970] |
+|---|---|
+| 参数名称 | DemEventReportingType |
+| 父容器 | DemEventParameter |
+| 描述 | 此参数定义监视器向 **Dem** 报告事件的方式。报告事件有多种方式，**Dem** 为此提供了不同的 **API**。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `STANDARD_REPORTING`：事件通过 **API** Dem_SetEventStatus 报告 |
+| 取值 | `STANDARD_REPORTING_WITH_MONITOR_DATA`：事件通过 **API** Dem_SetEventStatusWithMonitorData 报告 |
+| 默认值 | `STANDARD_REPORTING` |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00948] |
+|---|---|
+| 参数名称 | DemFFPrestorageInNvm |
+| 父容器 | DemEventParameter |
+| 描述 | 如果事件使用预存储冻结帧，此属性指示该事件是否要求将预存储数据存储在非易失性内存中。TRUE = 将预存储数据存储在非易失性内存中。FALSE = 预存储数据不存储在非易失性内存中。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00671] |
+|---|---|
+| 参数名称 | DemFFPrestorageSupported |
+| 父容器 | DemEventParameter |
+| 描述 | 如果此参数设置为 true，则冻结帧预存储受所分配事件的支持。此参数有助于计算缓冲区大小。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00894] |
+|---|---|
+| 参数名称 | DemReportBehavior |
+| 父容器 | DemEventParameter |
+| 描述 | 指示 **BSW** 模块（DemEventKind == `DEM_EVENT_KIND_BSW`）的报告行为，用于确定报告队列的大小。如果未定义该参数，则表示 REPORT_BEFORE_INIT。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `REPORT_AFTER_INIT`：指示事件不会在 Dem_Init() 之前被报告 |
+| 取值 | `REPORT_BEFORE_INIT`：指示事件可能在 Dem_Init() 之前被报告 |
+| 默认值 | `REPORT_BEFORE_INIT` |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00908] |
+|---|---|
+| 参数名称 | DemComponentClassRef |
+| 父容器 | DemEventParameter |
+| 描述 | 对被监控组件的引用。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemComponent 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00888] |
+|---|---|
+| 参数名称 | DemDTCRef |
+| 父容器 | DemEventParameter |
+| 描述 | 此参数定义与诊断事件关联的 **DTC** 配置（通常为 Uds）。允许存在没有 **DTC** 的事件（例如用于触发安全反应而不经诊断通信报告的 **ECU** 内部事件）。多个事件可以使用同一个 Dem DTCAttributes，以组合这些事件（参见第 6.7.5 节）。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemDTC 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| SWS 条目 | [ECUC_Dem_00746] |
+|---|---|
+| 参数名称 | DemEnableConditionGroupRef |
+| 父容器 | DemEventParameter |
+| 描述 | 引用一个使能条件组。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemEnableConditionGroup 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00839] |
+|---|---|
+| 参数名称 | DemOBDGroupingAssociativeEventsRef |
+| 父容器 | DemEventParameter |
+| 描述 | 此参数定义一个引用，指向一组关联事件中的一个代表性事件。"代表事件"必须引用其自身。注意：一个事件只允许被引用到一个关联事件组。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemEventParameter 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00702] |
+|---|---|
+| 参数名称 | DemOperationCycleRef |
+| 父容器 | DemEventParameter |
+| 描述 | 事件的运行周期类型（例如电源周期、驾驶循环等）。 |
+| 多重性 | 1 |
+| 类型 | 对 DemOperationCycle 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00769] |
+|---|---|
+| 参数名称 | DemStorageConditionGroupRef |
+| 父容器 | DemEventParameter |
+| 描述 | 引用一个存储条件组。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemStorageConditionGroup 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemCallbackClearEventAllowed | 0..1 | 此容器的存在表示 **Dem** 可以访问 "ClearEventAllowed" 回调。如果存在 DemCallbackClearEventAllowedFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackClearEventAllowedFnc，**Dem** 将有一个 R 端口，需要接口 CallbackClearEventAllowed，其名称通过唯一的回调前缀后跟事件名称生成。 |
+| DemCallbackEventDataChanged | 0..1 | 此容器的存在表示 **Dem** 可以访问 "EventDataChanged" 回调。如果存在 DemCallbackEventDataChangedFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackEventDataChangedFnc，**Dem** 将有一个 R 端口，需要接口 CallbackEventDataChanged，其名称通过唯一的回调前缀后跟事件名称生成。 |
+| DemCallbackEventUdsStatusChanged | 0..* | 此容器的存在表示 **Dem** 可以访问 "EventUdsStatusChanged" 回调，**Dem** 将调用它来通知其他组件事件状态的变化。如果存在 DemCallbackEventUdsStatusChangedFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackEventUdsStatusChangedFnc，**Dem** 将有一个 R 端口，需要接口 CallbackEventUdsStatusChanged，其名称通过唯一的回调前缀后跟事件名称生成。 |
+| DemCallbackInitMForE | 0..1 | 此容器的存在表示 **Dem** 可以访问 "InitMonitorForEvent" 回调，**Dem** 将调用它来初始化监视器。如果容器具有 DemCallbackInitMForEFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackInitMForEFnc，**Dem** 将有一个 R 端口，需要接口 CallbackInitMonitorForEvent，其名称通过唯一的回调前缀后跟事件名称生成。 |
+| DemCallbackMonitorStatusChanged | 0..* | 此容器的存在表示 **Dem** 可以访问 "MonitorStatusChanged" 回调，**Dem** 将调用它来通知其他组件事件状态的变化。如果存在 DemCallbackMonitorStatusChangedFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackMonitorStatusChangedFnc，**Dem** 将有一个 R 端口，需要接口 CallbackMonitorStatusChanged，其名称通过唯一的回调前缀后跟事件名称生成。 |
+| DemDebounceAlgorithmClass | 1 | 去抖动算法类：基于计数器、基于时间或监视器内部。 |
+| DemIndicatorAttribute | 0..255 | 此容器包含指示器的事件特定配置。 |
