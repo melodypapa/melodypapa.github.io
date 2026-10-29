@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **54** 份已有站内文章）。
+共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **55** 份已有站内文章）。
 
 ## A
 
@@ -1683,16 +1683,16 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **Dds_ConfigType**
-> 类型 · 未翻译 · SWS_DataDistributionService · R23-11
+> 类型 · [Data Distribution Service for Classic Platform](communication/data_distribution/index.md) · SWS_DataDistributionService · R23-11
 
 **Dds_GetVersionInfo**
-> 函数 · 未翻译 · SWS_DataDistributionService · R23-11
+> 函数 · [Data Distribution Service for Classic Platform](communication/data_distribution/index.md) · SWS_DataDistributionService · R23-11
 
 **Dds_Init**
-> 函数 · 未翻译 · SWS_DataDistributionService · R23-11
+> 函数 · [Data Distribution Service for Classic Platform](communication/data_distribution/index.md) · SWS_DataDistributionService · R23-11
 
 **Dds_Transmit**
-> 函数 · 未翻译 · SWS_DataDistributionService · R23-11
+> 函数 · [Data Distribution Service for Classic Platform](communication/data_distribution/index.md) · SWS_DataDistributionService · R23-11
 
 **Dem_ClearDTC**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
@@ -4197,7 +4197,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 ## G
 
 **General**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 > 函数 · 未翻译 · SWS_TcpIp · R23-11
 > 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 > 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
@@ -5872,106 +5872,106 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · [AUTOSAR Platform Types（平台类型）](general/platform_types/index.md) · SWS_PlatformTypes · R23-11
 
 **SoAd_CloseSoCon**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_ConfigType**
-> 类型 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 类型 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_DisableRouting**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_DisableSpecificRouting**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_EnableRouting**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_EnableSpecificRouting**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_GetAndResetMeasurementData**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_GetLocalAddr**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_GetPhysAddr**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_GetRemoteAddr**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_GetSoConId**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_GetSoConMode**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_GetVersionInfo**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_IfRoutingGroupTransmit**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_IfSpecificRoutingGroupTransmit**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_IfTransmit**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_Init**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_IsConnectionReady**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_MeasurementIdxType**
-> 类型 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 类型 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_OpenSoCon**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_ReadDhcpHostNameOption**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_ReleaseIpAddrAssignment**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_ReleaseRemoteAddr**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_RequestIpAddrAssignment**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_RoutingGroupIdType**
-> 类型 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 类型 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_SetRemoteAddr**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_SetUniqueRemoteAddr**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_SoConIdType**
-> 类型 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 类型 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_SoConModeType**
-> 类型 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 类型 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_TpCancelReceive**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_TpCancelTransmit**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_TpChangeParameter**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_TpTransmit**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SoAd_WriteDhcpHostNameOption**
-> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/SoAd/SoAd.md) · SWS_SocketAdaptor · R23-11
+> 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SomeIpTp_GetVersionInfo**
 > 函数 · 未翻译 · SWS_SOMEIPTransportProtocol · R23-11

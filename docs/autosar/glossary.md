@@ -141,6 +141,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **AUTOSAR**
 > 汽车开放系统架构（**AUTomotive Open System ARchitecture**）
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
+**AUTOSAR Connector**
+> **SoAd** 在不同的 PDU 源/提供者与 TCP/IP 协议栈之间、以及 TCP/IP 协议栈与不同的 PDU 汇/消费者之间充当（解）复用器（**(De)Multiplexer**）。术语 AUTOSAR 连接器（**AUTOSAR connector**）指一个 PDU 的源/提供者或汇/消费者。
+> 来源：[AUTOSAR SoAd（Socket Adaptor）](communication/soad/index.md)（SWS_SocketAdaptor · R23-11）
 **A2L**
 > ASAM 2MC 语言文件的文件扩展名（**File Extension for an ASAM 2MC Language File**）。
 > 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
@@ -717,6 +720,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **I-PDU ID**
 > I-PDU 标识符（**I-PDU Identifier**）。
 > 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
+**IF-PDU**
+> 通过 SoAd 的 IF-API 发送/接收的 PDU。
+> 来源：[AUTOSAR SoAd（Socket Adaptor）](communication/soad/index.md)（SWS_SocketAdaptor · R23-11）
 
 **IB**
 > 内部缓冲通道（**Internally buffered channels**）：包含待传输数据的缓冲区位于 SPI 处理器/驱动程序之内。
@@ -1514,6 +1520,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > Transmission Control Protocol —— 传输控制协议。
 > 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
 
+**TCP socket connection**
+> 使用 TCP 作为传输协议的套接字连接（选择容器 **SoAdSocketProtocol** 包含 **SoAdSocketTcp** 子容器）。
+> 来源：[AUTOSAR SoAd（Socket Adaptor）](communication/soad/index.md)（SWS_SocketAdaptor · R23-11）
+
 **TCS**
 > 牵引力控制系统（**Traction Control System**）
 > 来源：[底盘域应用接口](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
@@ -1545,6 +1555,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **TP**
 > 传输协议（**Transport Protocol**）
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes · R23-11）
+**TP-PDU**
+> 通过 SoAd 的 TP-API 发送/接收的 PDU。
+> 来源：[AUTOSAR SoAd（Socket Adaptor）](communication/soad/index.md)（SWS_SocketAdaptor · R23-11）
 **Trace Message**
 > 包含已经过 **VFB** 的信息的消息。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
@@ -1566,6 +1579,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **UDP/IP**
 > User Datagram Protocol / Internet Protocol —— 用户数据报协议/互联网协议。
 > 来源：[AUTOSAR XCP（通用校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
+**UDP socket connection**
+> 使用 UDP 作为传输协议的套接字连接（选择容器 **SoAdSocketProtocol** 包含 **SoAdSocketUdp** 子容器）。
+> 来源：[AUTOSAR SoAd（Socket Adaptor）](communication/soad/index.md)（SWS_SocketAdaptor · R23-11）
 
 **UDS**
 > 统一诊断服务（**Unified Diagnostic Services**）。

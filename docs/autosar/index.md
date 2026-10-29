@@ -16,7 +16,7 @@ title: "CP AUTOSAR"
 * [AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)
 * [ATUOSAR E2E Transformer](communication/e2e_transformer/index.md)
 * [AUTOSAR COM Based Transformer](communication/com_based_transformer/index.md)
-* [AUTOSAR Socket Adaptor](communication/SoAd/SoAd.md)
+* [AUTOSAR Socket Adaptor](communication/soad/index.md)
 * [AUTOSAR Ethernet Driver](communication/ethernet_driver/index.md)
 * [AUTOSAR Ethernet Interface](communication/ethernet_interface/index.md)
 * [AUTOSAR LIN Driver](communication/lin_driver/index.md)
