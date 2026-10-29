@@ -136,7 +136,7 @@ nav:
       - "Lin": autosar/communication/lin_driver/index.md
       - "LinIf": autosar/communication/lin_interface/index.md
       - "LsDu": autosar/communication/lsdu_router/index.md
-      - "Mirror": autosar/communication/mirror/mirror.md
+      - "Mirror": autosar/communication/mirror/index.md
       - "PduR": autosar/communication/pdu_router/index.md
       - "SecOC": autosar/communication/sec_oc/index.md
       - "SD": autosar/communication/service_discovery/index.md

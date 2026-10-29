@@ -32,7 +32,7 @@ title: "CP AUTOSAR"
   * [AUTOSAR LIN Driver](communication/lin_driver/index.md)
   * [AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)
   * [AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)
-  * [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md)
+  * [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/index.md)
   * [AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)
   * [AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)
   * [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md)

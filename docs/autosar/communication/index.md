@@ -39,7 +39,7 @@ title: "通信（Communication）"
 * [AUTOSAR PduR (PDU Router)](pdu_router/index.md)
 * [AUTOSAR COM Based Transformer](com_based_transformer/index.md)
 * [E2E Transformer (E2E转换器)](e2e_transformer/index.md)
-* [AUTOSAR Bus Mirroring（总线镜像）](mirror/mirror.md)
+* [AUTOSAR Bus Mirroring（总线镜像）](mirror/index.md)
 * [AUTOSAR SecOC (Secure Onboard Communication)](sec_oc/index.md)
 * [AUTOSAR FVM (Freshness Value Manager)](fvm/fvm.md)
 * [AUTOSAR SD (Service Discovery)](service_discovery/index.md)
