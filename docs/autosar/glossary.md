@@ -22,6 +22,26 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 精度（**Accuracy**）取决于用于采样或者生成的硬件外围设备。如：**ADC**转换器可以是 8/10/12/16 位转换器
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
 
+**Activation Mode 1**
+> 无故障——**MIL** 应闪烁一次。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**Activation Mode 2**
+> "按需 MI"（on-demand-MI）——如果 **OBD** 系统按照区分显示策略会命令按需 MI，**MIL** 应闪烁两次。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**Activation Mode 3**
+> "短时 MI"（short-MI）——如果 **OBD** 系统按照区分显示策略会命令短时 MI，**MIL** 应闪烁三次。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**Activation Mode 4**
+> "持续 MI"（continuous-MI）——如果 **OBD** 系统按照区分显示策略会命令持续 MI，**MIL** 应保持持续点亮。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **AEB**
 > 自主紧急制动（**Autonomous Emergency Braking**）。
 > 来源：[Explanation of Application Interface of AD/ADAS Vehicle Motion Control（AD/ADAS 车辆运动控制应用接口说明）](application_interfaces/adas_vmc/index.md)（AUTOSAR_CP_EXP_AIADASAndVMC · R23-11）
@@ -66,6 +86,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Address Area**
 > 地址区（**Address Area**）是指逻辑地址空间中连续的存储区域。通常，多个物理存储扇区组合成一个逻辑地址区。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
+
+**Aging**
+> 在经过确定的运行周期数之后，从事件内存中遗忘/删除不再失败的事件/**DTC**。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**Aging Counter**
+> 用于执行老化的计数器（也称 **Aging Cycle Counter** 或 **DTC Aging Counter**）。它对事件/**DTC** 从事件内存中移除之前所经历的运行周期数进行计数。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
 
 **AI**
 > 存活指示（**Alive Indication**）
@@ -278,6 +308,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 一个类（**Class**）代表一组具有相似电气特性的信号。如：模拟类（**Analogue class**）
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
 
+**Class B1 counter**
+> Class B1 故障被确认（**Confirmed**）且处于 **TestFailed** 状态期间的发动机运行小时数。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **Client-Server communication**
 > 客户端-服务器通信（**Client-Server communication**）涉及两个实体。客户端是要求服务的一方，服务器是提供服务的一方。客户端发起通信，请求服务器执行服务，必要时传输参数集合。服务器以**RTE**的形式，等待来自客户端的传入通信请求，执行请求的服务并发送对客户端请求的响应。因此服务启动的方向是用来对**AUTOSAR**软件组件是客户端还是服务器分类的主要标识。
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
@@ -293,9 +328,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Com**
 > 通信（**Communication**）
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes · R23-11）
+**Combined DTC**
+> 普通 **DTC**，但被多个监视器报告的多个事件引用（例如 **ECU** 缺陷，由不同的硬件缺陷组成）。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **Context ID**
 > 一个用户定义的标识符，用于对一个应用/**SW-C** 生成的日志和跟踪消息进行分组；Context ID 按 Application ID 分组，且在一个 Application ID 内唯一。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
+
+**Continuous-MI counter**
+> 持续 MI 被命令点亮期间发动机运行的小时数。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
 
 **Conversion Mode**
 > One-Shot：**ADC**通道组的转换在触发后执行一次，结果写入所分配的结果缓冲区。触发可以是软件**API**调用或硬件事件。Continuous：**ADC**通道组的转换在软件**API**调用（启动）后连续执行，结果写入所分配的结果缓冲区。转换本身自动运行（由硬件/中断控制）。连续转换可通过软件**API**调用（停止）停止。
@@ -316,6 +361,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CPU**
 > 中央处理器（**Central Processing Unit**）
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
+
+**CRC**
+> 循环冗余校验（**Cyclic Redundancy Check**）
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
 
 **Cross-Cluster External Graph**
 > 一种特殊的**外部图**，在集群式软件架构下跨越多个**软件集群**（**Software Cluster**）。其配置依赖于模式（由**宿主软件集群**（**Host Software Cluster**）控制），并且另外具有专门的配置结构。注意：单个**软件集群**内的**外部图**可以在不使用集群式软件架构专门配置结构的情况下建模。
@@ -367,6 +417,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > Command Transfer Object —— 命令传输对象。
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
+**Cumulative Continuous-MI counter**
+> 在其寿命期内 **MI** 被持续命令点亮的发动机运行小时数。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **CVC**
 > 卡片可验证证书（**Card Verifiable Certificate**）。
 > 来源：[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager · R23-11）
@@ -406,6 +461,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 一种监督，用于检查两个**检查点**之间的执行时间是否小于给定的执行时间上限。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
 
+**Debounce counter**
+> 用于基于计数器去抖动算法的内部计数器。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **DEM**
 > 诊断事件管理器（**Diagnostic Event Manager**）。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
@@ -415,6 +475,26 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
 > 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver · R23-11）
 > 来源：[AUTOSAR Large Data COM（大数据 COM）](communication/large_data_com/index.md)（SWS_LargeDataCOM · R23-11）
+
+**Dem-internal data value**
+> 某些数据值（例如发生计数器）由 **Dem** 模块自身在内部计算。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**DemComponent / Monitored Component**
+> 被监控组件是系统的一部分，由一个或多个监控检查其是否正常运行（参见第 6.5 节）。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**Denominator**
+> 特定监视器 m 的分母（Denominatorm）是一个计数器，指示车辆驾驶事件的数量，并考虑该特定监视器特定的条件。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**Dependent / Secondary ECUs**
+> 从属/辅助 **ECU**（dep. / sec. ECU）始终与一个 **Master** 或 **Primary ECU** 相关联。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
 
 **DET**
 > 默认错误跟踪器（**Default Error Tracer**），实现报告开发错误的模块。
@@ -431,9 +511,24 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver · R23-11）
 > 来源：[AUTOSAR Large Data COM（大数据 COM）](communication/large_data_com/index.md)（SWS_LargeDataCOM · R23-11）
 
+**DID**
+> 数据标识符（**Data Identifier**）
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **DIP**
 > 数字输入/输出（**Digital Input/Output**）
 > 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
+**Directed acyclic graph**
+> 没有循环依赖的依赖关系图。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**Displacement**
+> 用需要存储的更重要的事件内存条目替换最不重要的条目。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **Dlt**
 > Diagnostic Log and Trace —— 诊断日志与跟踪。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
@@ -446,6 +541,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DAQ**
 > Data AcQuisition, Data AcQuisition Packet —— 数据采集，数据采集包。
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
+**DTC group**
+> 唯一标识一组 **DTC**。一个 **DTC** 组被映射到有效 **DTC** 的范围内。通过提供一个 **DTC** 组，表示对该组中的所有 **DTC** 请求某一特定操作。**DTC** 组的定义由 ISO 14229-1 规定，并为 **OEM**/供应商特定。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**DtcGroupAllDtcs**
+> 所有已配置 **DTC** 的分组（表示为 0xFFFFFF）。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **DTO**
 > Data Transfer Object —— 数据传输对象。
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
@@ -457,6 +562,15 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DTC**
 > 拖滞力矩调节（**Regulation of the Drag Torque**）
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**DTR**
+> 诊断测试结果（**Diagnostic Test Result**）
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**DYC**
+> **OBD** 术语：驾驶循环（**Driving Cycle**）
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
 
 ## E
 
@@ -511,6 +625,51 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **e.g.**
 > （拉丁语）exempli gratia =（英语）for example，即「例如」。
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes · R23-11）
+**Event combination**
+> 事件组合是将多个事件合并为一个特定组合 **DTC** 的方法。它用于将不同的监视器结果适配为一个显著的、在维修站可清晰评估的故障。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**Event confirmation**
+> 在通过故障确认计数器评估的、跨越多个周期或时间的合格事件的重复检测的情况下，诊断事件被确认。因此 **UDS** 状态位 3（ConfirmedDTC）被置位。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**Event debouncing**
+> 去抖动是评估诊断事件是否被鉴定的特定机制（例如基于计数器）。它在潜在的信号去抖动之上工作，可以在 **SW-C** 内或 **Dem** 内进行。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**Event memory**
+> 一个事件内存（例如主内存）由多个事件内存条目组成。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**Event memory entry**
+> 事件内存条目是一个事件及其事件相关数据的单一存储容器。事件内存条目被动态分配给特定的事件。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**Event qualification**
+> 在通过或失败结果被置位时（**Dem** 内部或由另一个 **BSW** 模块或 **SW-C** 报告），诊断事件被鉴定。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**Event related data**
+> 事件相关数据是与事件一起存储在事件内存中的附加数据，例如传感器值或时间戳/里程。ISO 定义了两种类型的事件相关数据：冻结帧（快照记录）和扩展数据。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**Event status byte**
+> 按 ISO 14229-1 定义、基于事件级别的状态字节。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**Extended data record**
+> 扩展数据记录是用于存储与故障相关联的特定信息的记录。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **External client**
 > 一种控制、监视和存储使用 **Dlt** 模块的 ECU 所提供的日志/跟踪消息的工具。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
@@ -565,6 +724,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 前轴（**Front Axle**）
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
 
+**Failure counter**
+> 失效计数器表示 ISO 14229-1 定义的 Trip Counter。Trip Counter 对发生故障的运行周期（驾驶循环）数进行计数。当计数器达到阈值（例如 2 个驾驶循环）时，confirmed 位从 0 变为 1。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **Fast-Mode**
 > 对看门狗硬件的触发必须以较短的超时期限完成。例如，该模式可用于 **ECU** 的正常运行。例如，看门狗硬件被配置为窗口模式（触发看门狗必须发生在超时期限内的特定最小/最大边界中）且超时期限为 5 毫秒。
 > 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
@@ -572,6 +736,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Failed Supervision Reference Cycle**
 > 一个**监督参考周期**，其结束时刻检测到**存活计数器**与**期望存活指示**数量之间存在偏差（包括容差）。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+
+**Fault Detection Counter**
+> ISO 和 **FDC API** 中使用的 sint8 值。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**FDC**
+> 故障检测计数器（**Fault Detection Counter**）
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
 
 **FID**
 > 功能标识符（**Function Identifier**）：在 **FiM** 中标识一个应用程序功能及其相关禁止条件的标识符。
@@ -586,6 +760,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 前灯管理（**Front Light Management**）
 > 来源：[Safety Use Case（安全用例）](safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase · R23-11）
 
+**FMI**
+> 失效模式指示符（**Failure Mode Indicator**，SAE J1939）
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **Foreground test**
 > 前台测试是同步测试，不得被中断。它通过用户应用程序调用。
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
@@ -594,6 +773,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 固件远程升级（**Firmware Over The Air**），通过无线通信进行固件远程更新。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
 > 来源：[Explanation of Firmware Over-The-Air（固件远程升级说明）](memory/firmware_over_the_air/index.md)（AUTOSAR_CP_EXP_FirmwareOverTheAir · R23-11）
+**Freeze frame**
+> 冻结帧被定义为数据的记录（**DID**/**PID**）。冻结帧与 ISO 14229-1 中的 SnapShotRecords 相同。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **FrIf**
 > FlexRay Interface —— FlexRay 接口。
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
@@ -601,6 +785,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **FSC**
 > 功能安全概念（**Functional Safety Concept**）
 > 来源：[Safety Use Case（安全用例）](safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase · R23-11）
+
+**FTB**
+> 失效类型字节（**Failure Type Byte**）
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
 
 **FTT**
 > 故障容忍时间（德语「Fehlertoleranzzeit」）（**Fault Tolerance Time**）
@@ -627,6 +816,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Application Level Error Handling（应用层错误处理）](general/application_level_error_handling/index.md)（AUTOSAR_CP_EXP_ApplicationLevelErrorHandling · R23-11）
 
 ## G
+
+**General Denominator**
+> 通用分母是一个计数器，指示车辆被操作的次数，并考虑通用条件。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
 
 **Global Supervision Status**
 > 汇总所有**被监督实体****局部监督状态**的状态。
@@ -673,6 +867,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **HDC**
 > 坡道缓降控制（**Hill Decent Control**）
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**Healing**
+> 关闭警告指示器，包括对在一段时间/若干运行周期内报告的通过结果的处理。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
 
 **HHC**
 > 坡道起步控制（**Hill Hold Control**）
@@ -728,6 +927,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ICMP**
 > Internet Control Message Protocol —— 互联网控制消息协议。
 > 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
+**In-Use performance ratio**
+> **OBD** 系统特定监视器 m 的实际使用性能比为：IUPRm = Numeratorm / Denominatorm。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **IP**
 > Internet Protocol —— 互联网协议。
 > 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
@@ -797,6 +1001,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Utilization of Crypto Services（加密服务使用指南）](crypto/utilization_of_crypto_services/index.md)（AUTOSAR_CP_EXP_UtilizationOfCryptoServices · R23-11）
 
 ## J
+
+**J1939Dcm**
+> SAE J1939 诊断通信管理器（**SAE J1939 Diagnostic Communication Manager**）
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
 
 **Job**
 > 作业：一个已配置的 **CsmJob**，它引用一个密钥、一个加密原语和一个参考通道。
@@ -915,6 +1124,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Master**
 > 主。分布式 BSW 模块中协调卫星请求、并可过滤或监控进入的卫星请求的部分。
 > 来源：[BSW Distribution Guide（BSW 分布指南）](general/bsw_distribution_guide/index.md)（AUTOSAR_CP_EXP_BSWDistributionGuide · R23-11）
+**Master ECU**
+> 与 **Primary ECU** 一样，**Master ECU** 在其事件内存中存储"自己的"以及相关的从属/辅助 **ECU** 的"报告的错误"。除此之外，**Master** 必须履行特殊的 **Master** 任务，如 **MIL Master** 或提供"通用分子"信息。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**Monitor**
+> 诊断监视器是确定组件是否正常运行的例程实体。也可以使用术语"诊断功能"。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **MSBF**
 > Most Significant Byte First —— 最高有效字节在前。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
@@ -1046,6 +1265,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 空操作（**Null Operation**）
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
 
+**Numerator**
+> 特定监视器 m 的分子（Numeratorm）是一个计数器，指示车辆被操作的次数，使得检测该特定监视器故障所需的所有监控条件都已被满足。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **NVH**
 > 噪声、振动、平顺性（**Noise, Vibration, Harshness**）
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
@@ -1058,15 +1282,39 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 汽车电子开放系统及其接口（**Offene Systeme und deren Schnittstellen fuer die Elektronik im Kraftfahrzeug**）
 > 来源：[AUTOSAR Standard Types（标准类型）](general/standard_types/index.md)（SWS_StandardTypes · R23-11）
 
+**Positive Callback from NvM**
+> 如果需要在 Dem_Init 和 Dem_Shutdown 之间存储数据，**Dem** 模块应使用 **NVRAM** 管理器的 **API** NvM_WriteBlock 和 NvM_GetErrorStatus。此外，**API** NvM_GetErrorStatus 应等待块写入成功完成的肯定响应。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**Triggered to NvM**
+> 如果需要在 Dem_Init 和 Dem_Shutdown 之间触发数据的存储，**Dem** 模块应使用 **NVRAM** 管理器的 **API** NvM_WriteBlock。此外，如果请求已被接受，**Dem** 模块应等待 NvM_WriteBlock 的肯定响应。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
 ## O
 
 **OBD**
 > 车载诊断（**On-board Diagnostics**）。
 > 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager · R23-11）
 
+**OBD ECUs**
+> 车辆中可以有 3 种不同类型的 **OBD ECU**：**Master ECU**（每车一个）、**Primary ECU**（每车多个）、从属/辅助 **ECU**（每车多个）。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**OBD UDS DTC separation**
+> 该特性为基于 SAE J1979-2 的 **UDS** 通信报告与其它 J1979-2 **UDS** 通信不同的 3 字节 **DTC** 编号。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **OBDII**
 > 排放相关车载诊断（**Emission-related On-board Diagnostics**）。
 > 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager · R23-11）
+**OC**
+> 发生计数（**Occurrence Count**，SAE J1939）
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **ODT**
 > Object Descriptor Table —— 对象描述表。
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
@@ -1090,6 +1338,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **OPC**
 > 乘员预处理（**Occupant Pre Conditioning**）
 > 来源：[Explanation of Application Interfaces of Occupant and Pedestrian Safety Systems Domain（乘员与行人安全系统域应用接口说明）](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**Operating cycle**
+> "运行周期"是事件鉴定和 **Dem** 调度的基础（例如点火钥匙关-开循环、驾驶循环等）。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
 
 **Operation**
 > 操作：加密原语的操作声明应执行加密原语的哪一部分，共有 **START**、**UPDATE**、**FINISH** 三种操作模式；通过拼接操作模式参数的相应位可以一次执行多个操作。
@@ -1128,6 +1381,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## P
 
+**P-Code**
+> 动力总成代码（**Power train code**）
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **Page Burst**
 > 通过聚合访问存储页面来提高性能。在存储设备技术支持物理分段的情况下，一些存储设备可以提供一次读取或写入多个页面的优化访问方式。页面突发（**Page Burst**）表示用于访问优化的存储页面聚合。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
@@ -1144,6 +1402,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 泊车距离控制（**Park Distance Control**）
 > 来源：[Explanation of Application Interfaces of the HMI, Multimedia and Telematics Domain（HMI/多媒体/远程信息处理域应用接口说明）](application_interfaces/hmi/index.md)（AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics · R23-11）
 
+**PFC cycle**
+> 永久故障代码——驾驶循环（**OBD** 术语）
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**PID**
+> 参数标识（**Parameter Identification**，SAE J1587 或 SAE J1979）
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **POD**
 > 俯仰翻覆碰撞检测（**Pitchover Crash Detection**）
 > 来源：[Explanation of Application Interfaces of Occupant and Pedestrian Safety Systems Domain（乘员与行人安全系统域应用接口说明）](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
@@ -1159,6 +1427,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **PPP**
 > 行人保护系统预处理（**Pedestrian Protection system Pre conditioning**）
 > 来源：[Explanation of Application Interfaces of Occupant and Pedestrian Safety Systems Domain（乘员与行人安全系统域应用接口说明）](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety · R23-11）
+
+**Primary ECU**
+> **Primary ECU** 在其事件内存中存储"自己的"以及相关的从属/辅助 **ECU** 的"报告的错误"。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
 
 **Prototype**
 > 原型。组件类型在一个组合（Composition）中的使用；组合经由相互连接的原型定义。
@@ -1217,11 +1490,25 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 动力总成协调器（**Powertrain Coordinator**）
 > 来源：[Explanation of Application Interfaces of the Powertrain Engine Domain（动力总成（发动机）域应用接口说明）](application_interfaces/powertrain/index.md)（AUTOSAR_CP_EXP_AIPowertrain · R23-11）
 
+**PTO**
+> 动力输出（**Power Take Off**）
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
 ## R
 
 **RA**
 > 后轴（**Rear Axle**）
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
+
+**RBM cycle**
+> **OBD** 术语：通用分子/基于比率的监控——驾驶循环。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**Readiness**
+> 就绪状态指 **UDS** 状态字节的已测试位 TestNotCompletedSinceLastClear（位 4）和 TestNotCompletedThisOperationCycle（位 6）。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
 
 **ROD**
 > 翻滚碰撞检测（**Rollover Crash Detection**）
@@ -1402,6 +1689,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 串行外设接口（**Serial Peripheral Interface**）
 > 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver · R23-11）
 
+**SPN**
+> 可疑参数编号（**Suspect Parameter Number**，SAE J1939）
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **SR**
 > 态势识别（**Situation Recognition**）
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
@@ -1409,6 +1701,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SRC**
 > 监督参考周期（**Supervision Reference Cycle**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
+**SSCP**
+> 同步服务器调用点（**synchronous server call point**）
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **STMS**
 > Timestamp —— 时间戳。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
@@ -1502,6 +1799,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Satellite**
 > 卫星。分布式 BSW 模块的一部分；主与卫星之间的工作分配是实现特定的，卫星一般不能在没有主的情况下工作。
 > 来源：[BSW Distribution Guide（BSW 分布指南）](general/bsw_distribution_guide/index.md)（AUTOSAR_CP_EXP_BSWDistributionGuide · R23-11）
+
 ## T
 
 **Target time**
@@ -1573,6 +1871,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **&lt;Up&gt;**
 > 上层通信接口模块。
 > 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
+**UDS status byte**
+> 按 ISO 14229-1 定义、基于 **DTC** 级别的状态字节。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **Upper Layer Modules（Up）**
 > 位于 L-SDU Router 之上的模块。该层通常包括 **IEEE1722Tp**。
 > 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
@@ -1588,7 +1891,6 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interfaces of the HMI, Multimedia and Telematics Domain（HMI/多媒体/远程信息处理域应用接口说明）](application_interfaces/hmi/index.md)（AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics · R23-11）
 
 ## V
-
 
 **VB**
 > Visual Basic
@@ -1643,6 +1945,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > Vehicle Identification Number —— 车辆识别码。
 > 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
 
+**VOBD**
+> 车辆车载诊断（**Vehicle On-Board-Diagnostic**）
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
 ## W
 
 **WCET**
@@ -1660,6 +1966,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > With ECU ID —— 带 ECU ID。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
 
+**WIR**
+> 警告指示器请求（**Warning Indicator Request**）
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
 **WP**
 > 工作包（**Work package**）
 > 来源：[Application Interfaces User Guide（应用接口用户指南）](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide · R23-11）
@@ -1673,6 +1984,15 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **WTMS**
 > With Timestamp —— 带时间戳。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
+
+**WUC**
+> **OBD** 术语：暖机循环（**Warm up cycle**）
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
+
+**WWH-OBD**
+> 全球统一车载诊断（**World Wide Harmonized On-Board-Diagnostic**）
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
 
 ## X
 
