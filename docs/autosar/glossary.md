@@ -304,6 +304,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > CAN Interface —— CAN 接口。
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 
+**CanTSyn**
+> **CAN** 时间同步模块（**Time Synchronization over CAN** module）。通过 **CAN** 总线分发时间信息、实现 **CAN** 特定时间同步协议的模块。
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN · R23-11）
+
 **CBC**
 > 弯道制动控制（**Cornering Brake Control**）
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis · R23-11）
@@ -480,6 +484,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 用于基于计数器去抖动算法的内部计数器。
 > 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
 
+**Debounce Time**
+> 具有相同 **PDU** 的两条 **TX** 报文之间的最小间隔。
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN · R23-11）
+
 **DEM**
 > 诊断事件管理器（**Diagnostic Event Manager**）。
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
@@ -552,6 +560,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Dlt User**
 > 一个 **Dlt** 用户代表一个生成的 **Dlt** 消息的来源。可能的用户是 **SW-C**、RTE（用于 **VFB** 跟踪）、**DEM** 或 **DET**。
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
+
+**DoS**
+> 拒绝服务（**Denial of Service**）。
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN · R23-11）
 
 **DRL**
 > 日间行车灯（**Daytime Running Light**）
@@ -932,16 +944,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Macro Encapsulation of Interpolation Calls（插值调用宏封装）](libraries/macro_encapsulation_of_interpolation_calls/index.md)（AUTOSAR_CP_EXP_MacroEncapsulationofInterpolationCalls · R23-11）
 ## I
 
+**&lt;Ie&gt;**
+> 实现特定文件名扩展名（**implementation specific file name extension**）
+> 来源：[AUTOSAR BSW General（基础软件模块通用规范）](general/bsw_general/index.md)（SWS_BSWGeneral · R23-11）
+
 **I-PDU**
 > 交互层 **PDU**（**Interaction Layer PDU**）。在 **AUTOSAR** 中，交互层等价于通信服务层。
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes · R23-11）
 > 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
+
 **I-PDU ID**
 > I-PDU 标识符（**I-PDU Identifier**）。
 > 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
-**IF-PDU**
-> 通过 SoAd 的 IF-API 发送/接收的 PDU。
-> 来源：[AUTOSAR SoAd（Socket Adaptor）](communication/soad/index.md)（SWS_SocketAdaptor · R23-11）
 
 **IB**
 > 内部缓冲通道（**Internally buffered channels**）：包含待传输数据的缓冲区位于 SPI 处理器/驱动程序之内。
@@ -950,37 +964,42 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ICC**
 > 实现一致性等级（**Implementation Conformance Class**）。AUTOSAR 对基础软件实现合规程度的分级（ICC1–ICC3）：ICC3 要求逐模块符合 AUTOSAR 规范，ICC2 允许项目定义的集群，ICC1 为专有基础软件（对外行为仍须符合 ICC3 模块规范）。
 > 来源：[Layered Software Architecture（分层软件架构）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture · R23-11）
+
 **ICMP**
 > Internet Control Message Protocol —— 互联网控制消息协议。
-> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
-**In-Use performance ratio**
-> **OBD** 系统特定监视器 m 的实际使用性能比为：IUPRm = Numeratorm / Denominatorm。
-> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
-
-
-**IP**
-> Internet Protocol —— 互联网协议。
 > 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
 
 **ICU**
 > 输入捕获单元（**Input Capture Unit**）
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
 
+**ICV**
+> 完整性校验值（**Integrity Check Value**）。为时间同步报文提供完整性和真实性保护的校验值。
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN · R23-11）
+
 **ID**
 > 标识符（**Identifier**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
-
-**&lt;Ie&gt;**
-> 实现特定文件名扩展名（**implementation specific file name extension**）
-> 来源：[AUTOSAR BSW General（基础软件模块通用规范）](general/bsw_general/index.md)（SWS_BSWGeneral · R23-11）
 
 **IdsM**
 > 入侵检测系统管理器（**Intrusion Detection System Manager**）。
 > 来源：[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager · R23-11）
 
+**IF-PDU**
+> 通过 SoAd 的 IF-API 发送/接收的 PDU。
+> 来源：[AUTOSAR SoAd（Socket Adaptor）](communication/soad/index.md)（SWS_SocketAdaptor · R23-11）
+
+**In-Use performance ratio**
+> **OBD** 系统特定监视器 m 的实际使用性能比为：IUPRm = Numeratorm / Denominatorm。
+> 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
+
 **Inhibition Condition**
 > 禁止条件：一个 **FID**、一个禁止掩码与 **Dem** 事件/组件状态之间的关系（见 FiMInhibitionConfiguration）。
 > 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager · R23-11）
+
+**int**
+> 整数（**Integer**）
+> 来源：[AUTOSAR Platform Types（平台类型）](general/platform_types/index.md)（SWS_PlatformTypes · R23-11）
 
 **Internal Graph**
 > 不跨越若干**被监督实体**的**图**。其配置与模式无关，并且可以通过禁用对应的**被监督实体**而被禁用。
@@ -998,12 +1017,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 输入/输出硬件抽象（**Input/Output Hardware Abstraction**）
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
 
-**int**
-> 整数（**Integer**）
-> 来源：[AUTOSAR Platform Types（平台类型）](general/platform_types/index.md)（SWS_PlatformTypes · R23-11）
+**IP**
+> Internet Protocol —— 互联网协议。
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
+
 **IPv4**
 > Internet Protocol version 4 —— 互联网协议第 4 版。
 > 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
+
 **IPv6**
 > Internet Protocol version 6 —— 互联网协议第 6 版。
 > 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP · R23-11）
@@ -1021,11 +1042,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 在使用中的监控性能比（**In-Use-Monitor Performance Ratio**）。
 > 来源：[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager · R23-11）
 
-
 **Job**
 > 作业。一个已配置的加密原语与一个被引用的密钥的组合；不包含实际密钥数据本身。
 > 来源：[Utilization of Crypto Services（加密服务使用指南）](crypto/utilization_of_crypto_services/index.md)（AUTOSAR_CP_EXP_UtilizationOfCryptoServices · R23-11）
-
 ## J
 
 **J1939Dcm**
@@ -1171,6 +1190,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **&lt;MIP&gt;**
 > 大写模块实现前缀（**Capitalized module implementation prefix**），即完全以大写形式书写的模块实现前缀 &lt;Mip&gt;
 > 来源：[AUTOSAR BSW General（基础软件模块通用规范）](general/bsw_general/index.md)（SWS_BSWGeneral · R23-11）
+
+**MAC**
+> 报文认证码（**Message Authentication Code**）。
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN · R23-11）
 
 **Main Time Triple**
 > 参考时间三元组 [TL_Main, TV_Main, TV_Fallback]，在主时间元组基础上增加了第三个成员——在主时间元组被更新的时刻采样的备用虚拟本地时间。
@@ -1388,6 +1411,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 只与其底层同步时基结合存在的时基；其绝对时间值由偏移时基的偏移时间值加上底层同步时基的时间值得到。
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager · R23-11）
 
+**OFNS message**
+> 偏移调整报文（Offset adjustment message）。
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN · R23-11）
+
+**OFS message**
+> 偏移同步报文（**Offset Synchronization message**）。
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN · R23-11）
+
 **OID**
 > 对象标识符（**Object Identifier**）。
 > 来源：[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager · R23-11）
@@ -1438,6 +1469,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **OTA**
 > 远程升级（**Over The Air**），OEM 后台（**backend**）与车辆之间无线通信的总称。
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess · R23-11）
+
+**OVS**
+> 溢出秒值（**Overflow Seconds** value，**FUP** 报文中的字段）。
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN · R23-11）
 ## P
 
 **P-Code**
@@ -1733,6 +1768,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 特殊功能寄存器（**Special Function Register**），**MCU** 寄存器
 > 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver · R23-11）
 
+**SGW**
+> 时间同步的「已同步到网关」（**Synchronized to Gateway**）状态。
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN · R23-11）
+
 **SHE**
 > 安全硬件扩展（**Security Hardware Extension**）。
 > 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver · R23-11）
@@ -1876,6 +1915,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SYNC Ingress Processing Delay**
 > 在 Timesync 模块一侧，从 **SYNC** 报文进入到通过 StbM_BusSetGlobalTime 将接收时间元组转发给 **StbM** 之间的时间区间。
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager · R23-11）
+
+**SYNC message**
+> 时间同步报文（**Time Synchronization message**）。
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN · R23-11）
 
 **Synchronized Time Base**
 > 通过 Timesync 报文与其他节点上的时基同步的时基，由时基标识符 0..127 标识。

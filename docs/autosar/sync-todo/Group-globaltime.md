@@ -23,11 +23,15 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 5 — User confirmation gate (batch gate after all 4 rows — user instruction 2026-10-30)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] can_tsyn (SWS_TimeSyncOverCAN · R23-11 markdown · ❌ new article, short name CanTSyn)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: source 4,084 lines; article ~2.8k lines. ch.6 Requirements Tracing + appendix A dropped per mandate; message-format tables 7.1–7.19 as GFM; figures 1-1/1-2/5-1/7-1..7-4/9-1..9-6/10-1..10-11 embedded
+  - Note: appendix B ID fences reconstructed from the R23-11 PDF pp.129-130 (markdown table for B.1.2 was hyphen-garbled; PDF is authoritative — 54 changed items)
+  - Note: §9 config 18 containers with [ECUC_CanTSyn_*] cells; §9.3 约束 keeps [SWS_CanTSyn_CONSTR_*] as data
+  - Note: check_api_sync OK (2/2 types, 3/3 functions); link_candidates applied (86 lines, idempotent); 10 glossary terms added
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate (batch gate after all 4 rows — user instruction 2026-10-30)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] eth_tsyn (SWS_TimeSyncOverEthernet · R23-11 markdown · ❌ new article, short name EthTSyn)
   - [ ] Step 1 — Source resolution + gap analysis

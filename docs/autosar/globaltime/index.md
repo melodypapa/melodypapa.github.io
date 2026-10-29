@@ -7,6 +7,7 @@ title: "全局时间（Global Time）"
 ## 文章
 
 * [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](stbm/index.md)
+* [AUTOSAR Time Synchronization over CAN（CAN 时间同步）](can_tsyn/index.md)
 
 ## 相关内容
 
