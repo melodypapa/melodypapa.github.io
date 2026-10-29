@@ -9,7 +9,7 @@ AUTOSAR 模式管理（**Mode Management**）相关的基础软件模块笔记�
 
 ## 文章
 
-* [模式管理指南（Guide to Mode Management）](guide_to_mode_management/)
+* [Guide to Mode Management（模式管理指南）](guide_to_mode_management/)
 * [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](basic_software_mode_manager/)
 * [AUTOSAR ECU State Manager（ECU状态管理器）](ecu_state_manager/)
 

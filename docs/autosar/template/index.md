@@ -7,9 +7,9 @@ title: "模板（Templates）"
 ## 文章
 
 * [通用结构（Generic Structure）一段话总结](generic_structure/index.md)
-* [时序扩展规范（Timing Extension）](timimg_extension/indx.md)
+* [Specification of Timing Extensions for Classic Platform（经典平台时序扩展规范）](timimg_extension/indx.md)
 
 ## 相关内容
 
 * [CP AUTOSAR 总览](../index.md)
-* [方法论与模板](../methodology_templates/index.md)
+* [方法论与模板（Methodology and Templates）](../methodology_templates/index.md)

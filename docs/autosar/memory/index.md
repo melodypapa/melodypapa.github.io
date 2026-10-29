@@ -15,6 +15,7 @@ title: "存储（Memory）"
 * [AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory_mapping/index.md)
 * [NV数据处理指南](nv_data_handling_guideline/index.md)
 * [AUTOSAR NVM（非易失性存储管理器）](nvram_manager/index.md)
+* [Explanation of Firmware Over-The-Air（固件远程升级说明）](firmware_over_the_air/index.md)
 
 ## 相关内容
 

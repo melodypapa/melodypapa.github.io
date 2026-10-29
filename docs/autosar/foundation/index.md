@@ -6,7 +6,7 @@ title: "基础（Foundation）"
 
 ## 文章
 
-* [AUTOSAR 术语表（TR Glossary）](general/tr_glossary/index.md)
+* [TR Glossary（AUTOSAR 术语表）](general/tr_glossary/index.md)
 
 ## 相关内容
 

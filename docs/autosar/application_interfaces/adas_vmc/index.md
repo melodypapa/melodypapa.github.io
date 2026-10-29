@@ -1,5 +1,5 @@
 ---
-title: "ADAS 与车辆运动控制接口（ADAS and VMC Interface）"
+title: "Explanation of Application Interface of AD/ADAS Vehicle Motion Control（AD/ADAS 车辆运动控制应用接口说明）"
 spec: AUTOSAR_CP_EXP_AIADASAndVMC
 release: R23-11
 ---

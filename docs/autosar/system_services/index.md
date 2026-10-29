@@ -10,9 +10,9 @@ title: "系统服务（System Services）"
 * [AUTOSAR FiM（功能禁止管理器）](function_inhibition_manager/index.md)
 * [AUTOSAR Operating System（操作系统）](operating_system/index.md)
 * [AUTOSAR Time Service（时间服务）](time_service/index.md)
-* [软件集群设计与集成指南](sw_cluster_design_and_integration/index.md)
+* [Software Cluster Design and Integration Guideline for Classic Platform（经典平台软件集群设计与集成指南）](sw_cluster_design_and_integration/index.md)
 
 ## 相关内容
 
 * [CP AUTOSAR 总览](../index.md)
-* [模式管理](../mode_management/index.md)
+* [模式管理（Mode Management）](../mode_management/index.md)

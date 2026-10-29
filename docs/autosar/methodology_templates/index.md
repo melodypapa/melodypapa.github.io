@@ -11,4 +11,4 @@ title: "方法论与模板（Methodology and Templates）"
 ## 相关内容
 
 * [CP AUTOSAR 总览](../index.md)
-* [模板](../template/index.md)
+* [模板（Templates）](../template/index.md)

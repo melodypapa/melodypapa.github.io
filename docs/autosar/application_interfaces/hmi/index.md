@@ -1,5 +1,5 @@
 ---
-title: "HMI/多媒体/远程信息处理域应用接口（HMI/MM/T）"
+title: "Explanation of Application Interfaces of the HMI, Multimedia and Telematics Domain（HMI/多媒体/远程信息处理域应用接口说明）"
 spec: AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics
 release: R23-11
 ---

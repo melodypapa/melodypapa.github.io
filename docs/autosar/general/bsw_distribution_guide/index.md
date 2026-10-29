@@ -1,5 +1,5 @@
 ---
-title: "BSW 分布指南（BSW Distribution Guide）"
+title: "BSW Distribution Guide（BSW 分布指南）"
 spec: AUTOSAR_CP_EXP_BSWDistributionGuide
 release: R23-11
 ---

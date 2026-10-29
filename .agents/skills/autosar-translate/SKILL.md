@@ -96,7 +96,8 @@ list**. Three sources feed it:
 
 - **The rule**: expand `docs/autosar/STANDARD.md` into a per-article checklist
   — 7-chapter skeleton, canonical chapter wording, no forbidden chapters, no
-  requirement IDs, front-matter title only, footer pattern, nav registration.
+  requirement IDs, front-matter title only, footer pattern, nav registration
+  and the three derived index pages (Step 6.3).
 - **The progress**: the article's current row in `docs/autosar/TODO.md` plus
   the gap-analysis results.
 - **The decisions**: anything the user decides mid-run (a wording choice, a
@@ -422,7 +423,7 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
 - Chapter numbering stays stable; when insertion forces a renumber, grep for
   inbound anchor links first and fix them in the same commit.
 
-## Step 6 — Regenerate the derived indexes (glossary + API list)
+## Step 6 — Regenerate the derived indexes (glossary, API list, site indexes)
 
 `api_reference.md` is a **pure derivation** (regenerate via
 `gen_api_list.py` when its source data changed); `glossary.md` is
@@ -455,6 +456,74 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
    `!` lines (ch.8 present but nothing parsed — 7 known docs, all untranslated,
    e.g. the interpolation libraries' "routines definitions" structure) are
    recorded limitations, not errors to silence.
+3. **Site indexes — nav + three landing-page levels** (user decision
+   2026-10-29). `mkdocs.yml`'s `nav` is the single source of truth; every
+   index page is derived from it, so a nav change and its index updates ship
+   in the same commit. `navigation.indexes` is enabled, so a section's
+   landing page is the **unlabeled first child** of its nav list
+   (`- autosar/general/index.md`), never a labeled sibling.
+   - **`mkdocs.yml` nav** — every published page is registered under its
+     section with `docs/`-relative paths; renames and removals update the nav
+     in the same commit. A nav page label is the **simple name** — the module
+     abbreviation or short domain name (`Powertrain`, `Chassis`, `ARTI`,
+     `VFB`, `FOTA`, `SwCluC`) — never the full bilingual title (user rule
+     2026-10-29); the full name belongs to the article title and the index
+     link labels. A page can build cleanly and still be unreachable from the
+     indexes: `--strict` only catches a nav entry with no file.
+   - **Section landing page** (`docs/autosar/<section>/index.md`) — fixed
+     shape: front-matter `title`, one intro paragraph, `## 文章`,
+     `## 相关内容`. `## 文章` lists **every** page of that nav branch in nav
+     order (nested `*` bullets for sub-groups); link text is the target's
+     front-matter `title`, never a directory identifier, and it keeps the
+     `English（中文）` structure below.
+   - **CP AUTOSAR overview** (`docs/autosar/index.md`) — mirrors the whole
+     `CP AUTOSAR` nav branch: one `###` group per nav section in nav order,
+     each starting with its landing page, every content page appearing
+     exactly once underneath it; standalone pages (`autosar/power`) get their
+     own group. `## 相关内容` keeps 术语表 / API 清单 / 首页.
+   - **Site home** (`docs/index.md`) — one bullet per top-level nav tab, in
+     nav order, label = nav label (including its `（…）` gloss), target = the
+     section's landing page or its first page when the section has none;
+     `About` last.
+   - **Entry structure** — a bilingual article title/label is
+     `English（中文）`: the English document or module name first, its Chinese
+     rendering in full-width parentheses, matching the sibling entries
+     (`AUTOSAR Crypto Driver（加密驱动程序）`,
+     `Layered Software Architecture（分层软件架构）`). `中文（English）` is
+     invalid (user rule 2026-10-29;
+     `加密服务使用指南（Utilization of Crypto Services）` was corrected to
+     `Utilization of Crypto Services（加密服务使用指南）`). A Chinese-first
+     title is fixed at the front-matter `title`, not only in the link label,
+     and the rename propagates to the landing page, the overview,
+     `glossary.md` 来源 lines and `api_reference.md` in the same commit.
+     The three levels are deliberately different (user rule 2026-10-29):
+     the **article front-matter `title` and every index link label** carry the
+     full `English（中文）` name (`Powertrain Engine Domain（动力总成（发动机）域）`),
+     while the **`mkdocs.yml` page label** stays the simple name (`Powertrain`,
+     `Chassis`, `ARTI`). Section
+     landing-page titles and nav section labels keep the existing
+     `中文（English）` form (`通信（Communication）`). A `中文（English）`
+     article title or an empty Chinese half (`Title（）`) is invalid. Both
+     language halves must describe the same document/module: verify the
+     English name and Chinese rendering against the `spec:` source and
+     authoritative acronym expansion, rather than only checking their order.
+     A standard acronym may pair with its Chinese expansion
+     (`VFB（虚拟功能总线）`). `check_indexes.py --titles` detects structural
+     issues only; it cannot judge translation meaning. Fix a confirmed
+     mismatch in the front-matter `title`, every index link label,
+     `glossary.md` 来源 line and `api_reference.md` in the same commit.
+   - Link targets are relative to the file that contains them; angle-bracket
+     a target containing a space
+     (`<communication/data_distribution service/index.md>`). An empty `（）`
+     is a defect in the title itself: fill in the Chinese half and propagate
+     the fixed title to every link label in the same commit.
+   - Mechanical check: `python
+     .agents/skills/autosar-translate/scripts/check_indexes.py` — exit 0
+     means every nav target exists, the overview and every section landing
+     page link their full branch, the home links every tab, and no index link
+     is broken. Add `--titles` to audit the `English（中文）` structure of
+     article titles, including empty halves and reversed order (report-only;
+     semantic equivalence must be checked against the source).
 
 Every mapped article carries front-matter `spec:` (source document) and
 `release:` (AUTOSAR release actually translated from) — set at article
@@ -505,10 +574,15 @@ before every commit, the second is evidence for the Step 8 confirmation.
    heading; angle-bracket placeholders (`<X>`, `<Service>`, `<#channel>`)
    render as `&lt;…&gt;` — `grep -c '\\<' <article>` must be 0 (the
    `\<…\>` form renders a stray backslash on this site, STANDARD.md §4).
-4. Nav and anchors: new pages registered in `mkdocs.yml` (paths `docs/`
-   -relative), removed pages cleaned in the same commit; renamed or renumbered
-   headings — grep inbound `](…#…)` links site-wide and fix them in the same
-   commit.
+4. Nav, indexes and anchors: new pages registered in `mkdocs.yml` (paths
+   `docs/`-relative), removed pages cleaned in the same commit; renamed or
+   renumbered headings — grep inbound `](…#…)` links site-wide and fix them in
+   the same commit. Then run
+   `python .agents/skills/autosar-translate/scripts/check_indexes.py`: exit 0
+   proves nav, the CP AUTOSAR overview, every section landing page and the
+   site home agree (Step 6.3). A page present in nav but missing from its
+   landing page or the overview is a failed gate, not a pass — the build
+   cannot see it.
 5. Acronym chapter: inside the `sed -n '/^## 2\. 缩略语/,/^## 3\./p' <article>`
    slice the `^| ` line count must be 0 (tables forbidden); the
    `^\*\*[^*]+\*\*\s*$` term-line count == the source table's data-row count
@@ -649,7 +723,9 @@ evidence, not asserted):
    instruments return (commit hash, PR link).
 2. New pages must be registered in `mkdocs.yml` nav (paths are `docs/`-relative)
    or the strict build fails. Removal of pages requires nav cleanup in the
-   same commit.
+   same commit. Nav registration alone is not publication: the same commit
+   updates the section landing page, the CP AUTOSAR overview and (for a new
+   tab) the site home, then runs `scripts/check_indexes.py` (Step 6.3).
 
 ## Step 8 — Confirm, then maintain the progress file
 
@@ -717,4 +793,6 @@ open.
 | Realigning only the measurable chapters (ch.2/§3/API/new ch.8-9) and leaving a pre-existing §6 with legacy internal structure — the ADC article carried a topical 6.1.x layout under R23-11's Background-&-Rationale/Requirements convention, and its source 7.3 State Diagrams were never translated (found 2026-10-25) | The chapter-level coverage map passes while the body diverges from the source's structure; embedded diagram chapters get skipped as "figures" | Phase B: internal-structure verification per pre-existing chapter (see Coverage map); a realignment that cannot verify internal structure says so in its gate evidence |
 | Writing a rule as Phase B prose without a mechanical trigger (potential-links lived as a Phase B bullet for six runs — dio/port/pwm/ocu/icu/ecu/bswm — and was never executed once; its own "user decision" semantics made doing nothing always compliant) | Codified rules that only a gate presentation could surface get dropped when presentations lengthen; the omission is invisible in a deviations-framing | Any new rule gets (a) a tick-box in the step it executes in, and/or (b) a mechanical counter whose zero-output is explicit. Test rules at RUN level ("did a full sync execute it?"), not comprehension level |
 | Trusting the article-side link inference as complete (2026-10-27 EcuM analysis: six §8.8 service-interface data types with 42 source hyperlinks had no anchor and were invisible to every census because the defs collection only sees identifier-titled headings; the same census found 图7.15/7.17 and 表7.9 referenced but captionless) | Silent under-linking and dropped-figure gaps that no article-only check can detect — the heuristic can only confirm what the article already contains | Check 9 runs `--list --pdf` whenever the source PDF exists: the PDF's own named destinations are the ground truth; anchor-less/ABSENT targets and no-caption figures are reported per run (report-only — new applied classes remain user decisions) |
+| Registering a new page in `mkdocs.yml` only (the five `general` guides shipped in nav on 2026-10-29 but absent from `general/index.md` and the CP AUTOSAR overview) | The page is reachable from the sidebar but invisible to a reader browsing the section or the landing page; the strict build cannot see the gap | Step 6.3 + Phase A check 4: `check_indexes.py` fails when any branch page is missing from its landing page or the overview |
+| Letting an index entry copy a Chinese-first title verbatim (`加密服务使用指南（Utilization of Crypto Services）`) | The entry breaks the list's `English（中文）` structure, so the same list mixes two conventions | Step 6.3 entry-structure rule: fix the article's front-matter `title` to `English（中文）`, then propagate to the index labels, `glossary.md` 来源 line and `api_reference.md`; `check_indexes.py --titles` lists remaining drift |
 | Delegating translation to subagents — the RTE/OS runs segmented giant sources by line range across parallel writer agents (2026-10-25/26), and provider concurrency caps repeatedly blocked dispatches mid-run | Split writers cannot carry one terminology, one numbering scheme and the in-place insertion discipline across segments; a capped dispatch stalls the run with half-translated segments; the queue-row ticks and user decisions live in the main session, not in the writers | Step 5 rule 1: the main session translates sequentially; subagent dispatches never write article text (user decision 2026-10-28) |

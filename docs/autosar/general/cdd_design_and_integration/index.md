@@ -1,5 +1,5 @@
 ---
-title: "CDD 设计与集成指南（CDD Design and Integration Guideline）"
+title: "CDD Design and Integration Guideline（CDD 设计与集成指南）"
 spec: AUTOSAR_CP_EXP_CDDDesignAndIntegrationGuideline
 release: R23-11
 ---
