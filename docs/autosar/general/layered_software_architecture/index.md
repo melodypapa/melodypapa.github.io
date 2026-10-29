@@ -1,5 +1,5 @@
 ---
-title: "分层软件架构（Layered Software Architecture）"
+title: "Layered Software Architecture（分层软件架构）"
 spec: AUTOSAR_CP_EXP_LayeredSoftwareArchitecture
 release: R23-11
 ---

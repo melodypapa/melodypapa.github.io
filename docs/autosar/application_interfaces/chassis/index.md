@@ -1,5 +1,5 @@
 ---
-title: "底盘域应用接口（Chassis）"
+title: "Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）"
 spec: AUTOSAR_CP_EXP_AIChassis
 release: R23-11
 ---

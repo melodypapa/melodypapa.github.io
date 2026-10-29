@@ -1,5 +1,5 @@
 ---
-title: "AUTOSAR XCP（通用校准协议）"
+title: "AUTOSAR XCP（通用测量与校准协议）"
 spec: AUTOSAR_CP_SWS_XCP
 release: R23-11
 ---

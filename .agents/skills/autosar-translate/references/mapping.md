@@ -80,7 +80,29 @@ above has a corresponding standard document.
   the user before creating.
 - New article file is always `index.md` with front-matter `title`, and must be
   registered in `mkdocs.yml` nav under the right section (paths relative to
-  `docs/`), or `mkdocs build --strict` fails.
+  `docs/`), or `mkdocs build --strict` fails. The same commit updates the
+  three derived indexes — `<section>/index.md` `## 文章`, the CP AUTOSAR
+  overview `autosar/index.md`, and the site home `docs/index.md` when the
+  article introduces a new top-level tab — then runs
+  `scripts/check_indexes.py` (SKILL.md Step 6.3).
+- Three naming levels (user rule 2026-10-29):
+  - `mkdocs.yml` page label = **simple name** (`Powertrain`, `Chassis`, `ARTI`,
+    `VFB`, `FOTA`, `SwCluC`) — never the full bilingual title.
+  - article front-matter `title` = **full** `English（中文）` — English name
+    first, Chinese in full-width parentheses
+    (`AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）`,
+    `Powertrain Engine Domain（动力总成（发动机）域）`).
+  - index link labels (`## 文章`, overview, `glossary.md` 来源,
+    `api_reference.md`) = the target's full front-matter `title`, never the
+    nav's short label.
+- `中文（English）` is invalid (user rule 2026-10-29): fix the title itself,
+  not just the index link label, and update the derived indexes and 来源 lines
+  in the same commit. `check_indexes.py --titles` lists remaining violations.
+- The English and Chinese halves must name the same document/module. Check
+  against the mapped `spec:` source and authoritative acronym expansions;
+  acronyms may pair with their Chinese expansion (`VFB（虚拟功能总线）`). The
+  title checker catches missing/empty halves and reversed order, not semantic
+  mismatches, so the latter needs a source-based review.
 
 ## Coverage inventory
 

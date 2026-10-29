@@ -1,5 +1,5 @@
 ---
-title: "乘员与行人安全系统域应用接口（OPS）"
+title: "Explanation of Application Interfaces of Occupant and Pedestrian Safety Systems Domain（乘员与行人安全系统域应用接口说明）"
 spec: AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety
 release: R23-11
 ---

@@ -1,5 +1,5 @@
 ---
-title: "AUTOSAR 术语表（TR Glossary）"
+title: "TR Glossary（AUTOSAR 术语表）"
 spec: AUTOSAR_FO_TR_Glossary
 release: R23-11
 ---

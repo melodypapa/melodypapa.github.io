@@ -1,5 +1,5 @@
 ---
-title: "车身与舒适域应用接口（Body and Comfort）"
+title: "Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）"
 spec: AUTOSAR_CP_EXP_AIBodyAndComfort
 release: R23-11
 ---

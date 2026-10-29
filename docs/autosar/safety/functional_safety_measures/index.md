@@ -1,5 +1,5 @@
 ---
-title: "AUTOSAR 功能安全措施概览（Functional Safety Measures）"
+title: "Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）"
 spec: AUTOSAR_CP_EXP_FunctionalSafetyMeasures
 release: R23-11
 ---

@@ -1,5 +1,5 @@
 ---
-title: "软件集群设计与集成指南（SwCluC）"
+title: "Software Cluster Design and Integration Guideline for Classic Platform（经典平台软件集群设计与集成指南）"
 spec: AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline
 release: R23-11
 ---

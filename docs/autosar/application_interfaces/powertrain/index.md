@@ -1,5 +1,5 @@
 ---
-title: "动力总成（发动机）域应用接口（Powertrain）"
+title: "Explanation of Application Interfaces of the Powertrain Engine Domain（动力总成（发动机）域应用接口说明）"
 spec: AUTOSAR_CP_EXP_AIPowertrain
 release: R23-11
 ---

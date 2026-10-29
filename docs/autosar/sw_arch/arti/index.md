@@ -1,5 +1,5 @@
 ---
-title: "AUTOSAR 运行时接口（ARTI）"
+title: "ARTI（AUTOSAR 运行时接口）"
 spec: AUTOSAR_CP_EXP_ARTI
 release: R23-11
 ---
