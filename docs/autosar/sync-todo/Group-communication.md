@@ -143,12 +143,13 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 6 — TODO.md row + commit/PR — commit 7f5fc5e (branch feature/group-communication-sync-2)
 - [ ] service_discovery (SWS_ServiceDiscovery · R23-11 markdown · ⛔ stub — full translation)
   - Note: short name Sd
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-30 run — stub replaced with the full Type A translation (commit 23b20e5, branch feature/group-communication-sync-2); front-matter title fixed to bilingual 「AUTOSAR SD（服务发现）」; §2 缩略语、缩写和定义 (9 acronyms + 17 terms, both as bold-term + blockquote); §4 constraints incl. Adaptive-Platform limitations; §5 dependencies + 5.7 file structure; §6 functional spec complete: 6.1 背景与理由, 6.2 requirements (general/ethernet/state/SoAd interaction/subscribe-retry), 6.3 message format (Request ID, fields, entry formats Type 1/2, options array incl. Configuration/Endpoint/Multicast/SD-Endpoint options, missing-redundant-conflicting handling, security, entries-referencing-options), 6.4 entry types, 6.5 send/receive sequences + receiving entries + multicast answering behaviour, 6.6 server timings (initial wait/repetition/main/fan-out/timer sharing), 6.7 client timings (down/initial wait/repetition/main/fan-in/timer sharing), 6.8 SdServiceGroup handling, 6.9 SOME/IP-ACL (config/update/policy check client+server), 6.10 security events (4-event table), 6.11 error classification (5 dev + 1 runtime + 3 extended production tables); prose SWS/PRS-ID refs debracketed to bare-id mentions per soad corpus practice (0 bracketed IDs outside B). §7 API规范: 14 imported types, 10 types, 11 functions, 1 callback, 1 scheduled, 期望接口 11 mandatory + 13 optional + 1 configurable callout; §8 时序图 (source ch.9, 13 figures); §9 配置规范 (26 containers, 96 params with [ECUC_SD_*/ECUC_Sd_*] cells, 10 container figures Figure10-1..10-10, record-extraction + hand translation map); ## B. 可追溯项变更历史 (B.1.1–B.1.3, R23-11, IDs in fences). Figures: 41 extracted; Figure7-6 (Configuration Option example) had only a docling deco artifact → recovered from the source PDF page 33 embedded image (xref 1287). Phase A: strict build exit 0, 0 content WARNINGs, no service_discovery INFO; heading audit ✓ (§1–§9 + B., no forbidden variants); hygiene ✓ (0 `\<`, 0 {DRAFT}, 0 bracketed prose IDs); acronym slice 0 tables; check_indexes.py exit 0; gen_api_list regenerated + --check up to date. link_candidates --apply: 189 lines (13 chapter-refs), idempotent on re-run, stopped before 配置规范; doc citations [1..8] registry stay unlinked in §3.1-style lists (no bare [n] prose citations in body). check_api_sync = documented N/A (11 functions under source 8.3.x + callback under 8.3.x numbering the script's 8.2.x/8.3.x split doesn't model; manual verification: 10 types ↔ 7.2.1-.10, 11 functions ↔ 7.3.1-.11, 1 callback ↔ 7.4.1, 1 scheduled ↔ 7.5.1, all 说明 blocks present). Glossary extension pending (batch-level item). Steps 5/6 per user instruction: commit first, combined confirmation after batch
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit 23b20e5 (branch feature/group-communication-sync-2)
 
 - [ ] com (SWS_COM · R23-11 markdown · ❌ new article, short name Com)
   - Note: backbone #1
