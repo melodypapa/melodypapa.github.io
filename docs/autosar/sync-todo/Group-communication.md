@@ -153,12 +153,13 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
 
 - [ ] com (SWS_COM · R23-11 markdown · ❌ new article, short name Com)
   - Note: backbone #1
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-30 run — new article communication/com/index.md created (commit 17cdb70, branch feature/group-communication-sync-2): full Type A translation, §2 缩略语、缩写和定义 (9 acronyms + 17 definitions as bold-term blockquotes); §6 functional spec complete from source ch.7 (excluded-features 表7.1, signal values 表7.2, endianness/sign extension, filtering with ONE_EVERY_N semantics, signal gateway overview, start-up, communication modes incl. transfer properties + TMS selection + N-times repetition + retry, signal invalidation, I-PDU group handling incl. 表7.3/7.4 stopped/started behavior, signal indication IMMEDIATE/DEFERRED, MDT, deadline monitoring RX+TX, signal groups + shadow buffer + uint8-array access, large/dynamic length data, metadata, PDU Router interface 表7.6, update-bits, gateway processing stages, error classification, interaction model 图7.2-7.4, multicore, SwCluC); §7 API规范: 9 imported types, 5 types, return codes 表8.1 (E_OK/E_NOT_OK/COM_SERVICE_NOT_AVAILABLE/COM_BUSY), 5 startup/control + 21 communication services + 8 callbacks + 3 scheduled functions, 期望接口 1+3, 7 configurable callbacks &lt;ComUser_Cbk*&gt; + Com_CbkTxPrep + 2 I-PDU callouts; §8 时序图 (source ch.9, 3 figures); §9 配置规范 (30 containers 9.2.1-9.2.30 with [ECUC_Com_*] cells, 13 container figures Figure10-1..10-14, generated via record extraction + hand translation map of 109 descriptions; §9.3 配置规则 translated incl. 9.3.11 Com user architecture + SwCluC relation); §10 附录 = source B Appendix (7 use cases, 表B.1-B.8 + 15 figures FigureB-0..B-14; source A Not-applicable-requirements annex dropped per STANDARD.md annex rules, numbered-continuation lettering per OS/watchdog precedent — recorded here as user-verifiable decision). Figures: 36 extracted by caption+hash+size triage (docling deco cluster dropped); FigureB-9/B-10 and B-12/B-13 resolved by adjacency + size. Phase A: strict build exit 0, 0 content WARNINGs, no com INFO; heading audit ✓ (§1–§10 + no B. appendix needed, no forbidden variants); hygiene ✓ (0 `\<`, 0 {DRAFT}; SWS_Com_* mentions in bare-id form per soad corpus practice); check_indexes.py exit 0; gen_api_list regenerated — Com now resolves to the new article, --check up to date. link_candidates --apply: 189 lines (36 chapter-refs), idempotent on re-run, stopped before 配置规范; citation [1..18] mentions are §3.1-adjacent doc references (no bare [n] prose citations). check_api_sync = documented N/A (source 8.3.x functions with 8.3.2/8.3.3 group split; manual verification: 5 types ↔ 7.2.1-.5, 34 functions ↔ 7.3.2.x/.3.x in source order, 8 callbacks ↔ 7.3.4.x, 3 scheduled ↔ 7.3.5.x, all 说明 blocks present). Glossary extension pending (batch-level item). Steps 5/6 per user instruction: commit first, combined confirmation after batch
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit 17cdb70 (branch feature/group-communication-sync-2)
 - [ ] cansm (SWS_CANStateManager · R23-11 markdown · ❌ new article, short name CanSM)
   - Note: backbone
   - [ ] Step 1 — Source resolution + gap analysis
