@@ -134,12 +134,13 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR — commit c3e84ef (branch feature/group-communication-sync-2)
 - [ ] ethernet_switch_driver (SWS_EthernetSwitchDriver · R23-11 markdown · ⛔ stub — full translation)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-30 run — stub replaced with the full Type A translation (commit 7f5fc5e, branch feature/group-communication-sync-2): §2 缩略语、缩写和定义 (8 acronyms + 4 definitions, source's Acronyms/Definitions split mirrored), §4.1 约束 with Table 4.1 (IEEE bridge execution order coverage, 29 rows) as GFM, §6 functional spec complete from source ch.7 (learning phase, frame forwarding with all processing stages incl. stream identification/PSFP/firewall interaction/transmission selection, prose SWS-ID cross-refs rewritten as 第N节 — 0 outside-B IDs), §6.6 error classification incl. 2 extended-production tables (表7.5/7.6); §7 API规范 = source ch.8: 39 imported types, 10 types, 74 functions, 1 callback, 2 scheduled (MainFunction + BackgroundTask), 期望接口 0+21+3 configurable callouts, 服务接口 one-sentence statement; §8 时序图 (source ch.9, 5 figures); §9 配置规范 = source ch.10 (54 containers with [ECUC_EthSwt_*] SWS 条目 cells, 161 parameters, 21 container overview figures Figure10-1..10-21, generated via record extraction + hand translation map; {DRAFT}/{OBSOLETE} tags dropped as PDF chrome; obsolete EthSwtPortFifo/PortShaper containers kept with source descriptions); ## B. 可追溯项变更历史 (B.1 R22-11 + B.2 R23-11, item IDs verbatim in fences; 224 IDs). Phase A: strict build exit 0, 0 content WARNINGs, no ethernet_switch INFO; heading audit ✓ (§1–§9 + B., no forbidden variants); hygiene ✓ (0 `\<`, 0 {DRAFT}, 0 prose requirement IDs); check_indexes.py exit 0; gen_api_list regenerated + --check up to date. link_candidates --apply: 210 lines (28 chapter-refs), idempotent on re-run, stopped before 配置规范; comma-form/plain doc citations stay prose (known open case). check_api_sync = documented N/A (74 functions under source 8.3.x without the 8.2.x/8.3.x type/function split the script expects; manual verification: 10 types ↔ 7.2.1-.10, 74 functions ↔ 7.3.1-.74 in source order, 1 callback ↔ 7.4.1, 2 scheduled ↔ 7.5.1-.2). Glossary extension pending (batch-level item). Steps 5/6 per user instruction: commit first, combined confirmation after batch
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit 7f5fc5e (branch feature/group-communication-sync-2)
 - [ ] service_discovery (SWS_ServiceDiscovery · R23-11 markdown · ⛔ stub — full translation)
   - Note: short name Sd
   - [ ] Step 1 — Source resolution + gap analysis
