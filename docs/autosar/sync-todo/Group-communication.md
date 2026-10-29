@@ -107,14 +107,14 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR — commit b2c1ffb (branch feature/group-communication-sync)
-- [ ] sec_oc (SWS_SecureOnboardCommunication · R23-11 markdown · ⚠️ gaps)
-  - Note: missing related-documentation/API chapters; ch.3/4 are swapped (constraints before dependencies) — restore the source order
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+- [x] sec_oc (SWS_SecureOnboardCommunication · R23-11 markdown · realigned)
+  - Note: missing related-documentation/API chapters; ch.3/4 are swapped (constraints before dependencies) — restore the source order ✅ (2026-10-29, ch.1–5 rebuilt to source order; source §A Not applicable requirements dropped per STANDARD.md annex rules, reported here and in the PR text; check_api_sync.py gained the 可选接口↔Optional alias because source 8.3.10 "Optional Interfaces" sits inside the compared range)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit 3d584a2 (branch feature/group-communication-sync)
 - [ ] soad (SWS_SocketAdaptor · R23-11 markdown · ⚠️ gaps + layout change)
   - Note: missing acronyms; directory `SoAd/` is capitalised and the file is SoAd.md, not index.md — switching to the index.md layout requires the nav change in the same commit
   - [ ] Step 1 — Source resolution + gap analysis
