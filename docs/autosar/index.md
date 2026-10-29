@@ -19,6 +19,7 @@ title: "CP AUTOSAR"
   * [AUTOSAR CAN Interface](communication/can_interface/index.md)
   * [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)
   * [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)
+  * [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md)
   * [AUTOSAR COM Based Transformer](communication/com_based_transformer/index.md)
   * [Data Distribution Service for Classic Platform（经典平台数据分发服务）](communication/data_distribution/index.md)
   * [AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)

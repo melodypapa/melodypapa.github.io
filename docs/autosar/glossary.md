@@ -1554,6 +1554,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 「硬件资源」是 **CoreTest** 驱动程序用户可以选择的最小单元（实例）。它可以在一个或多个原子序列中被测试。它是执行特定功能（例如 **IRQ** 控制器）的内核内部单元。
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
 
+**retransmit counter**
+> 部分 **CAN XL** 控制器提供的一项特性：当 **ACK** 槽未在总线上置位时，允许将一个 **CAN** 帧连续多次发送。该计数器给出了最大发送次数。
+> 来源：[AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md)（SWS_CANXLDriver · R23-11）
+
 **RTE**
 > 运行时环境（**Runtime Environment**）
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager · R23-11）
@@ -1623,6 +1627,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Layered Software Architecture（分层软件架构）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture · R23-11）
 > 来源：[VFB（虚拟功能总线）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB · R23-11）
 > 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
+
+**SDU type**
+> 服务数据单元类型（**service data unit type**）。
+> 来源：[AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md)（SWS_CANXLDriver · R23-11）
 
 **SE**
 > 被监督实体（**Supervised Entity**）
@@ -2018,6 +2026,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **XCP**
 > Universal Calibration Protocol —— 通用校准协议。
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
+
+**XLFF**
+> XL 帧格式（**XL Frame Format**）。
+> 来源：[AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md)（SWS_CANXLDriver · R23-11）
 
 **XML**
 > 可扩展标记语言（**eXtensible Markup Language**）

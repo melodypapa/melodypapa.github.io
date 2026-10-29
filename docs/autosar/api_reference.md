@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **55** 份已有站内文章）。
+共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **56** 份已有站内文章）。
 
 ## A
 
@@ -904,70 +904,70 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_TimeSyncOverCAN · R23-11
 
 **CanXL_EnableEgressTimeStamp**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetControllerMode**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetCounterValues**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetCurrentTime**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetCurrentTimeTuple**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetEgressTimeStamp**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetIngressTimeStamp**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetPhysAddr**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetRxStats**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetTxErrorCounterValues**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetTxStats**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_HwType**
-> 类型 · 未翻译 · SWS_CANXLDriver · R23-11
+> 类型 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_Params**
-> 类型 · 未翻译 · SWS_CANXLDriver · R23-11
+> 类型 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_PduType**
-> 类型 · 未翻译 · SWS_CANXLDriver · R23-11
+> 类型 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_ProvideTxBuffer**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_Receive**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_SetControllerMode**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_SetPhysAddr**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_Transmit**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_TxConfirmation**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_UpdatePhysAddrFilter**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_Write**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXLTrcv_CheckWakeup**
 > 函数 · 未翻译 · SWS_CANXLTransceiverDriver · R23-11
