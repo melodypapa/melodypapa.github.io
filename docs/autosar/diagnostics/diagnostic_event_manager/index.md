@@ -7297,3 +7297,689 @@ Std_ReturnType Dem_SetDTR ( uint16 DTRId, sint32 TestResult, sint32 LowerLimit, 
 ### 8.13. 检索所有 DTC 的已存储快照记录
 
 ![Figure9_14.png](Figure9_14.png)
+
+## 9. 配置规范
+
+详情请参阅 SWS_BSWGeneral 中第 10.1 章"配置规范简介"（**Introduction to configuration specification**）。
+
+### 9.1. 容器与配置参数
+
+以下各节汇总所有配置参数。各参数的详细含义见第 6 章和第 7 章。
+
+#### 9.1.1. Dem
+
+| SWS 条目 | [ECUC_Dem_00928] |
+|---|---|
+| 模块名称 | Dem |
+| 描述 | **Dem**（诊断事件管理器）模块的配置。 |
+| Post-Build 变体支持 | true |
+| 支持的配置变体 | VARIANT-POST-BUILD、VARIANT-PRE-COMPILE |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemConfigSet | 1 | 此容器包含支持多个配置集的 **Dem** 模块的配置参数和子容器。 |
+| DemGeneral | 1 | 此容器包含 **BSW Dem** 的配置（参数）。 |
+
+#### 9.1.2. General
+
+##### 9.1.2.1. DemGeneral
+
+| SWS 条目 | [ECUC_Dem_00677] |
+|---|---|
+| 容器名称 | DemGeneral |
+| 父容器 | Dem |
+| 描述 | 此容器包含 **BSW Dem** 的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00918] |
+|---|---|
+| 参数名称 | DemAgingRequiresNotFailedCycle |
+| 父容器 | DemGeneral |
+| 描述 | 定义是否在没有测试失败报告的运行周期内处理老化周期计数器。true：仅在无测试失败的运行周期内处理老化周期计数器。false（默认）：对老化周期计数器的处理没有影响。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00877] |
+|---|---|
+| 参数名称 | DemAgingRequiresTestedCycle |
+| 父容器 | DemGeneral |
+| 描述 | 定义是在每个老化周期内都处理老化周期计数器，还是仅考虑已测试的老化周期。true：老化周期计数器仅考虑已测试的老化周期。false：每个老化周期内都处理老化周期计数器。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00878] |
+|---|---|
+| 参数名称 | DemAvailabilitySupport |
+| 父容器 | DemGeneral |
+| 描述 | 此配置开关定义是否启用可用性支持。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_EVENT_AVAILABILITY`：通过事件支持可用性 |
+| 取值 | `DEM_NO_AVAILABILITY`：不支持可用性 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00625] |
+|---|---|
+| 参数名称 | DemBswErrorBufferSize |
+| 父容器 | DemGeneral |
+| 描述 | 用于处理 **BSW** 错误的缓冲区的最大元素数量（参见第 6.8 节）。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00766] |
+|---|---|
+| 参数名称 | DemClearDTCBehavior |
+| 父容器 | DemGeneral |
+| 描述 | 定义易失性和非易失性内存的诊断信息清除过程，以及针对 **Dcm** 模块的肯定响应处理。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_CLRRESP_NONVOLATILE_FINISH`：在易失性和非易失性事件内存数据均清除后返回 DEM_CLEAR_OK |
+| 取值 | `DEM_CLRRESP_NONVOLATILE_TRIGGER`：在易失性事件内存数据清除且非易失性事件内存清除已触发后返回 DEM_CLEAR_OK |
+| 取值 | `DEM_CLRRESP_VOLATILE`：在易失性事件内存数据清除后返回 DEM_CLEAR_OK |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00790] |
+|---|---|
+| 参数名称 | DemClearDTCLimitation |
+| 父容器 | DemGeneral |
+| 描述 | 定义所支持的 Dem_&lt;...&gt;ClearDTC **API** 的范围。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_ALL_SUPPORTED_DTCS`：Dem_&lt;...&gt;ClearDTC 接受所有受支持的 **DTC** 值，以及在 DemGroupDTCs 中配置的所有 **DTC** 值和 `DEM_DTC_GROUP_ALL_DTCS`。 |
+| 取值 | `DEM_ONLY_CLEAR_ALL_DTCS`：Dem_&lt;...&gt;ClearDTC 仅接受 ClearAllDTCs。 |
+| 默认值 | `DEM_ALL_SUPPORTED_DTCS` |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00858] |
+|---|---|
+| 参数名称 | DemDataElementDefaultEndianness |
+| 父容器 | DemGeneral |
+| 描述 | 定义数据元素所属数据的默认字节序，适用于 DemExternalSRDataElementClass 未定义字节序的情况。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `BIG_ENDIAN`：最高有效字节应位于最低地址 |
+| 取值 | `LITTLE_ENDIAN`：最高有效字节应位于最高地址 |
+| 取值 | `OPAQUE`：不透明数据的字节序 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00724] |
+|---|---|
+| 参数名称 | DemDebounceCounterBasedSupport |
+| 父容器 | DemGeneral |
+| 描述 | 此配置开关定义是否启用基于计数器的去抖动支持。true：启用基于计数器的去抖动支持。false：禁用基于计数器的去抖动支持。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00725] |
+|---|---|
+| 参数名称 | DemDebounceTimeBasedSupport |
+| 父容器 | DemGeneral |
+| 描述 | 此配置开关定义是否启用基于时间的去抖动支持。true：启用基于时间的去抖动支持。false：禁用基于时间的去抖动支持。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00648] |
+|---|---|
+| 参数名称 | DemDevErrorDetect |
+| 父容器 | DemGeneral |
+| 描述 | 开启或关闭开发错误检测与通知。true：启用检测与通知。false：禁用检测与通知。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00740] |
+|---|---|
+| 参数名称 | DemEventCombinationSupport |
+| 父容器 | DemGeneral |
+| 描述 | 此参数定义 **Dem** 支持的事件组合类型。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_EVCOMB_DISABLED`：不支持事件组合 |
+| 取值 | `DEM_EVCOMB_ONRETRIEVAL`：检索时的事件组合 |
+| 取值 | `DEM_EVCOMB_ONSTORAGE`：存储时的事件组合 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00938] |
+|---|---|
+| 参数名称 | DemGeneralCallbackMonitorStatusChangedFnc |
+| 父容器 | DemGeneral |
+| 描述 | 原型 "&lt;Module&gt;_DemTriggerOnMonitorStatus" 的函数名称。用于通用监视器状态变化通知的函数。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFunctionNameDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00880] |
+|---|---|
+| 参数名称 | DemGeneralInterfaceSupport |
+| 父容器 | DemGeneral |
+| 描述 | 如果 DemGeneralInterfaceSupport 等于 true，则提供接口 GeneralEvtInfo、GeneralCallbackEventDataChanged、GeneralCallbackMonitorStatusChanged 和 GeneralCallbackEventUdsStatusChange。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00692] |
+|---|---|
+| 参数名称 | DemMaxNumberPrestoredFF |
+| 父容器 | DemGeneral |
+| 描述 | 定义预存储冻结帧的最大数量。如果设置为 0，则 **ECU** 不支持冻结帧预存储。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00698] |
+|---|---|
+| 参数名称 | DemOBDSupport |
+| 父容器 | DemGeneral |
+| 描述 | 此配置开关定义 **OBD** 支持及 **OBD ECU** 的类型。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_OBD_DEP_SEC_ECU`：OBD ECU 类型：OBD 从属/辅助 ECU |
+| 取值 | `DEM_OBD_MASTER_ECU`：OBD ECU 类型：主 ECU |
+| 取值 | `DEM_OBD_NO_OBD_SUPPORT`：此 **ECU** 内不支持 **OBD** |
+| 取值 | `DEM_OBD_PRIMARY_ECU`：OBD ECU 类型：Primary ECU |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00704] |
+|---|---|
+| 参数名称 | DemPTOSupport |
+| 父容器 | DemGeneral |
+| 描述 | 此配置开关定义是否启用 **PTO** 支持（即 PID $1E 支持）。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00799] |
+|---|---|
+| 参数名称 | DemResetConfirmedBitOnOverflow |
+| 父容器 | DemGeneral |
+| 描述 | 此配置开关定义在事件内存条目被置换时是否复位 confirmed 位。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | true |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00991] |
+|---|---|
+| 参数名称 | DemResetPendingBitOnOverflow |
+| 父容器 | DemGeneral |
+| 描述 | 此配置开关定义在事件内存条目被置换时是否复位 pending 位。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | true |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00784] |
+|---|---|
+| 参数名称 | DemStatusBitHandlingTestFailedSinceLastClear |
+| 父容器 | DemGeneral |
+| 描述 | 此配置开关定义老化与置换机制是否应应用于 "TestFailedSinceLastClear" 状态位。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_STATUS_BIT_AGING_AND_DISPLACEMENT`：如果发生老化或置换，"TestFailedSinceLastClear" 状态位被复位为 0（与 "ConfirmedDTC" 状态位的处理相同） |
+| 取值 | `DEM_STATUS_BIT_NORMAL`：老化和置换对 "TestFailedSinceLastClear" 状态位没有影响 |
+| 默认值 | `DEM_STATUS_BIT_NORMAL` |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00714] |
+|---|---|
+| 参数名称 | DemStatusBitStorageTestFailed |
+| 父容器 | DemGeneral |
+| 描述 | 启用/停用 "TestFailed" 状态位的永久存储。true：启用存储。false：停用存储。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00793] |
+|---|---|
+| 参数名称 | DemSuppressionSupport |
+| 父容器 | DemGeneral |
+| 描述 | 此配置开关定义是否启用抑制支持。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_DTC_SUPPRESSION`：通过 **DTC** 支持抑制 |
+| 取值 | `DEM_NO_SUPPRESSION`：不支持抑制 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00715] |
+|---|---|
+| 参数名称 | DemTaskTime |
+| 父容器 | DemGeneral |
+| 描述 | 允许配置周期性循环任务的时间。请注意：此配置值应等于 **RTE** 模块的基础软件调度器配置中的值。AUTOSAR 配置标准是使用 SI 单位，因此此参数定义为以秒为单位的浮点值。**Dem** 配置工具必须将该浮点值转换为适当的值格式以用于 **Dem** 的软件实现。min：不允许负值。max：在事件状态被报告后，应在 100ms 内完成处理，以便尽快更新故障条目状态信息（例如用于 PID $01）。upperMultiplicity：每个配置必须恰好指定一个 TaskTime。 |
+| 多重性 | 1 |
+| 类型 | EcucFloatParamDef |
+| 取值范围 | ]0 .. INF[ |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00719] |
+|---|---|
+| 参数名称 | DemTriggerFiMReports |
+| 父容器 | DemGeneral |
+| 描述 | 启用/停用到功能抑制管理器的通知。true：启用 **FiM** 通知。false：停用 **FiM** 通知。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00765] |
+|---|---|
+| 参数名称 | DemTriggerMonitorInitBeforeClearOk |
+| 父容器 | DemGeneral |
+| 描述 | 定义监视器重新初始化应在 **Dem** 模块返回 DEM_CLEAR_OK 之前还是之后触发。true：在 DEM_CLEAR_OK 之前触发重新初始化。false：在 DEM_CLEAR_OK 之后触发重新初始化。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00721] |
+|---|---|
+| 参数名称 | DemVersionInfoApi |
+| 父容器 | DemGeneral |
+| 描述 | 启用/停用版本信息 **API**。true：启用版本信息。false：停用版本信息。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00941] |
+|---|---|
+| 参数名称 | DemClearEventsWithoutDTCEventMemoryRef |
+| 父容器 | DemGeneral |
+| 描述 | 指示用作清除未分配 **DTC** 的事件的触发器的事件内存。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemPrimaryMemory 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00940] |
+|---|---|
+| 参数名称 | DemOBDEventMemorySetRef |
+| 父容器 | DemGeneral |
+| 描述 | 引用用于 **OBD ECU** 的 DemEventMemorySet。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemEventMemorySet 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemClient | 1..255 | 此容器包含使用 **Dem API** 的可能的客户端。 |
+| DemDataElementClass | 0..65535 | 此容器包含内部/外部数据元素类的配置（参数）。 |
+| DemDidClass | 0..65535 | 此容器包含数据 Id 类的配置（参数）。它由一个或多个数据元素组装而成。 |
+| DemEnableCondition | 0..255 | 此容器包含使能条件的配置（参数）。 |
+| DemEnableConditionGroup | 0..255 | 此容器包含使能条件组的配置（参数）。 |
+| DemEventMemorySet | 1..255 | 此容器是所引用事件内存及相关信息的集合，用于一个 **Dem** 客户端。 |
+| DemExtendedDataClass | 0..65535 | 此类包含一个扩展数据类的扩展数据记录组合。 |
+| DemExtendedDataRecordClass | 0..253 | 此容器包含扩展数据记录类的配置（参数）。它由一个或多个数据元素组装而成。 |
+| DemFreezeFrameClass | 0..65535 | 此容器包含 **UDS** 以及经 **UDS** 的排放相关诊断的冻结帧的 **DID** 组合。 |
+| DemFreezeFrameRecNumClass | 0..65535 | 此容器包含分配给一个事件的专用、不同的冻结帧记录号列表。该列表中记录号的顺序与相应冻结帧记录的时间顺序对应。 |
+| DemFreezeFrameRecordClass | 0..65535 | 此容器包含专用、不同的冻结帧记录号的列表。 |
+| DemGeneralJ1939 | 0..1 | 此容器包含 **Dem** 模块 **J1939** 特定的通用配置（参数）。如果该容器存在，则启用 **J1939** 支持。 |
+| DemGeneralOBD | 0..1 | 此容器包含 **Dem** 模块 **OBD** 特定的通用配置（参数）。 |
+| DemNvRamBlockId | 0..* | 此容器包含 **Dem** 使用的非易失性内存块的配置（参数）。如果不需要事件内存条目的永久存储，则无需配置任何块。所需块的数量取决于 **Dem** 模块的实现和配置（例如所用事件内存的数量）。 |
+| DemOperationCycle | 1..256 | 此容器包含配置一个运行周期所需的所有参数。 |
+| DemRatio | 0..65535 | 此容器包含 **OBD** 特定的实际使用监视器性能比配置。它与特定事件、一个 **FID** 和一个 **IUMPR** 组相关。 |
+| DemStorageCondition | 0..255 | 此容器包含存储条件的配置（参数）。 |
+| DemStorageConditionGroup | 0..255 | 此容器包含存储条件组的配置（参数）。 |
+
+##### 9.1.2.2. DemConfigSet
+
+| SWS 条目 | [ECUC_Dem_00634] |
+|---|---|
+| 容器名称 | DemConfigSet |
+| 父容器 | Dem |
+| 描述 | 此容器包含支持多个配置集的 **Dem** 模块的配置参数和子容器。 |
+| 配置参数 | 见下方参数表 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemComponent | 0..* | 此容器配置被监控的组件和系统依赖关系。 |
+| DemDTC | 0..65535 | 此容器包含 **Dem UdsDTC** 的配置（参数）。 |
+| DemDTCAttributes | 0..65535 | 此容器包含 **Dem DTCAttributes** 的配置（参数）。 |
+| DemDebounceCounterBasedClass | 0..65535 | 此容器包含基于计数器去抖动类的配置。 |
+| DemDebounceTimeBasedClass | 0..65535 | 此容器包含基于时间去抖动类的配置。 |
+| DemDtrs | 0..1 | 此容器保存 **DTR** 集合的配置。 |
+| DemEventParameter | 1..65535 | 此容器包含事件的配置（参数）。 |
+| DemMultiEventTriggering | 0..65535 | 配置一个事件，该事件在被报告时将触发其他事件。 |
+| DemObdDTC | 0..65535 | 此容器包含 **Dem ObdDTC** 的配置（参数）。 |
+| DemPidClass | 0..255 | 此容器包含单个全局 **OBD** 相关冻结帧类的不同 **PID**。它由一个或多个数据元素组装而成。 |
+
+##### 9.1.2.3. DemClient
+
+| SWS 条目 | [ECUC_Dem_00931] |
+|---|---|
+| 容器名称 | DemClient |
+| 父容器 | DemGeneral |
+| 描述 | 此容器包含使用 **Dem API** 的可能的客户端。 |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00943] |
+|---|---|
+| 参数名称 | DemClientFunctionality |
+| 父容器 | DemClient |
+| 描述 | **Dem** 为 DemClient 提供的功能。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_CLIENT_ONLY_USES_EVENTOVERFLOW_INTERFACE`：**Dem** 仅为该客户端 ID 提供客户端相关的功能 EvMemOverflowIndication。该客户端不允许使用其他功能（例如 **DTC** 过滤器或清除）。 |
+| 取值 | `DEM_CLIENT_USES_FULL_FUNCTIONALITY`：**Dem** 为所选客户端提供所有客户端相关的功能（例如清除 **API** 和溢出指示）。 |
+| 默认值 | `DEM_CLIENT_USES_FULL_FUNCTIONALITY` |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| SWS 条目 | [ECUC_Dem_00932] |
+|---|---|
+| 参数名称 | DemClientId |
+| 父容器 | DemClient |
+| 描述 | 定义 **Dem** 客户端的唯一标识符。该编号由此客户端在所有带此参数的 **API** 的 ClientID 参数中使用。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名称） |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00933] |
+|---|---|
+| 参数名称 | DemClientUsesRte |
+| 父容器 | DemClient |
+| 描述 | 如果设置为 true，此客户端应仅通过 **RTE** 使用 **DEM**（**Dem** 将提供 C/S 接口：CddIf、EvMemOverflowIndication）。该客户端不得对 **DEM** 进行任何 C_API 调用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| SWS 条目 | [ECUC_Dem_00942] |
+|---|---|
+| 参数名称 | DemEventMemorySetRef |
+| 父容器 | DemClient |
+| 描述 | 引用分配给该客户端的事件内存容器，该容器包含客户端特定的设置和事件内存。 |
+| 多重性 | 1 |
+| 类型 | 对 DemEventMemorySet 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| DemCallbackDTCStatusChanged | 0..* | 此容器的存在表示 **Dem** 可以访问 "DTCStatusChanged" 回调，**Dem** 将调用它来通知其他组件 **DTC** 状态的变化。如果存在 DemCallbackDTCStatusChangedFnc，此参数定义 **Dem** 将调用的函数的名称。如果不存在 DemCallbackDTCStatusChangedFnc，**Dem** 将有一个 R 端口，需要接口 CallbackDTCStatusChanged，其名称通过唯一的回调前缀后跟事件名称生成。仅支持主内存中 **DTC** 的状态变化通知。 |
+
+##### 9.1.2.4. DemDTCAttributes
+
+| SWS 条目 | [ECUC_Dem_00641] |
+|---|---|
+| 容器名称 | DemDTCAttributes |
+| 父容器 | DemConfigSet |
+| 描述 | 此容器包含 DemDTCAttributes 的配置（参数）。 |
+| 配置参数 | 见下方参数表 |
+
+| SWS 条目 | [ECUC_Dem_00623] |
+|---|---|
+| 参数名称 | DemAgingCycleCounterThreshold |
+| 父容器 | DemDTCAttributes |
+| 描述 | 遗忘/删除所需的老化周期数。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 255 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00897] |
+|---|---|
+| 参数名称 | DemAgingCycleCounterThresholdForTFSLC |
+| 父容器 | DemDTCAttributes |
+| 描述 | 复位 testFailedSinceLastClear 位所需的老化周期数。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 255 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00662] |
+|---|---|
+| 参数名称 | DemDTCPriority |
+| 父容器 | DemDTCAttributes |
+| 描述 | 事件/**DTC** 在事件内存已满时的优先级。值越小表示优先级越高。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 1 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00779] |
+|---|---|
+| 参数名称 | DemDTCSignificance |
+| 父容器 | DemDTCAttributes |
+| 描述 | 事件的重要性，指示有关故障分类和解决的附加信息。它可以映射为 **Dem** 内部数据元素。如果它是事件相关数据的一部分，则应进行配置。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 取值 | `DEM_EVENT_SIGNIFICANCE_FAULT`：影响组件/**ECU** 本身的故障 |
+| 取值 | `DEM_EVENT_SIGNIFICANCE_OCCURRENCE`：指示有关系统行为不足的附加信息的问题 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00605] |
+|---|---|
+| 参数名称 | DemMaxNumberFreezeFrameRecords |
+| 父容器 | DemDTCAttributes |
+| 描述 | 此参数定义可为此事件最多存储的相应冻结帧记录的数量。因此所有这些冻结帧记录具有相同的冻结帧类。仅计算型记录编号方式需要此参数（参见 DemTypeOfFreezeFrameRecordNumeration）。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 取值范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00624] |
+|---|---|
+| 参数名称 | DemAgingCycleRef |
+| 父容器 | DemDTCAttributes |
+| 描述 | 对触发事件老化的周期的引用。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemOperationCycle 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00667] |
+|---|---|
+| 参数名称 | DemExtendedDataClassRef |
+| 父容器 | DemDTCAttributes |
+| 描述 | 此引用定义到扩展数据类采样器的链接。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemExtendedDataClass 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| SWS 条目 | [ECUC_Dem_00674] |
+|---|---|
+| 参数名称 | DemFreezeFrameClassRef |
+| 父容器 | DemDTCAttributes |
+| 描述 | 这些引用定义到冻结帧类采样器的链接。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemFreezeFrameClass 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| SWS 条目 | [ECUC_Dem_00776] |
+|---|---|
+| 参数名称 | DemFreezeFrameRecNumClassRef |
+| 父容器 | DemDTCAttributes |
+| 描述 | 此参数定义与诊断事件关联的专用冻结帧记录号的列表。这些记录号分配给冻结帧记录（而不是计算得到的记录号）。仅配置型记录编号方式需要此参数（参见 DemTypeOfFreezeFrameRecordNumeration）。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemFreezeFrameRecNumClass 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00834] |
+|---|---|
+| 参数名称 | DemJ1939ExpandedFreezeFrameClassRef |
+| 父容器 | DemDTCAttributes |
+| 描述 | 这些引用定义到 **J1939** 冻结帧类采样器的链接。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemJ1939FreezeFrameClass 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| SWS 条目 | [ECUC_Dem_00835] |
+|---|---|
+| 参数名称 | DemJ1939FreezeFrameClassRef |
+| 父容器 | DemDTCAttributes |
+| 描述 | 这些引用定义到 **J1939** 冻结帧类采样器的链接。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemJ1939FreezeFrameClass 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：x；Link time：-；Post-build time：- |
+| 作用域/依赖 | - |
+
+| SWS 条目 | [ECUC_Dem_00890] |
+|---|---|
+| 参数名称 | DemMemoryDestinationRef |
+| 父容器 | DemDTCAttributes |
+| 描述 | 内存目的地将 **DTC** 分配给一个内存目的地。 |
+| 多重性 | 1 |
+| 类型 | 对 [DemPrimaryMemory, DemUserDefinedMemory] 的选择引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: ECU |
+
+| SWS 条目 | [ECUC_Dem_00911] |
+|---|---|
+| 参数名称 | DemUDSOBDFreezeFrameClassRef |
+| 父容器 | DemDTCAttributes |
+| 描述 | 此引用定义到经 **UDS** 的排放相关诊断冻结帧的链接。 |
+| 多重性 | 0..1 |
+| 类型 | 对 DemFreezeFrameClass 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：x（VARIANT-PRE-COMPILE）；Link time：-；Post-build time：x（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
