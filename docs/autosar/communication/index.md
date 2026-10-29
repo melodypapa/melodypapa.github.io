@@ -16,6 +16,7 @@ title: "通信（Communication）"
 * [AUTOSAR CAN NM（CAN网络管理）](can_network_management/index.md)
 * [AUTOSAR CAN Transceiver Driver](can_transceiver_driver/index.md)
 * [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](canxl_driver/index.md)
+* [AUTOSAR CAN XL Transceiver Driver（CAN XL 收发器驱动程序）](canxl_transceiver_driver/index.md)
 
 ### LIN
 

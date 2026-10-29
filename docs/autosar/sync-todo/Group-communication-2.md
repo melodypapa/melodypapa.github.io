@@ -84,11 +84,15 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [ ] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] canxl_transceiver_driver (SWS_CANXLTransceiverDriver · R23-11 markdown · ❌ new article)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: article `communication/canxl_transceiver_driver/` (directory per row name, nav label "CanXLTrcv", CAN group of the communication landing page). Shape: ch.2 → §2 one-sentence statement (source defines no local acronyms; com_based_transformer precedent) · ch.6 dropped · ch.7 → §6 (6.1 初始化, 6.2 通信状态处理 with the link-state composition prose, 6.3 唤醒处理, 6.4 错误分类 dev table 5 rows + 6.4.2–6.4.5 none) · ch.8 → §7 (8.1 4 imported types; 8.2 "no additional type definitions" → 7.2 one-sentence; 8.3 6 functions; 8.4 Callback notifications source section is EMPTY → 7.4 one-sentence statement 未规定任何回调通知 — TRANSLATOR sentence, source states nothing; 8.5 Scheduled functions carries only the generic intro prose, no functions → 7.5 intro translated + 本模块未规定任何调度函数 added — also a translator sentence; 8.6.1/8.6.3 one-sentence statements per source, 8.6.2 可选 1 row EthIf_TrcvModeIndication) · ch.9 → §8 时序图 (8.1 CanXL BusOff handling for Ethernet + Figure9_1) · ch.10 → §9 (10.1 folded; 10.2→9.1 1 container CanXLTrcvChannel + 1 param CanXLTrcvEthEcucPartitionRef; 10.3→9.2 发布信息) · ch.A dropped · ch.B → ## B (B.1.1 42-item fence incl. NA_00999; R23-11 none)
+  - Note: PDF verification: SetTransceiverMode truncated syntax completed from R23-11 PDF p.18; Figure triage: exactly 2 content images (Figure1_1 540x633, Figure9_1 911x1025), all other artifacts ≤345px deco; [19] citation in §6.4 intro = same source typo as canxl_driver, kept prose; source typos "Extemal"/"addtitional"/"Can XL Tranceiver" are figure-chrome/table-garble — dropped or normalized
+  - Note: Phase A — strict build exit 0 / 0 WARNING / no canxl_transceiver notices; headings §1–§9 + B; hygiene 0 (appendix-B fence = sanctioned exception); check_api_sync OK (0 types/6 functions/6 说明); gen_api_list regenerated (CanXLTrcv 6 functions SITE-linked, --check 0); check_indexes 0 broken; census --apply: 29 lines changed (16 error-code links to §6.4.1 + 6 chapter-ref + function-identifier links), idempotent re-run 0 lines; PDF ground-truth: registry MATCH on all cited [n], 0 ABSENT targets, 0 fewer-MENTIONS diffs, section-ref 10.3→9.3 unresolved = deliberate 10.1-folding renumber (article says 9.2, correct); external URL http://www.can-cia.org curl 200 (verified in the canxl_driver run)
+  - Note: Phase B — coverage map: ch.1→§1 (Figure1_1), ch.2→§2, ch.3→§3, ch.4→§4, ch.5→§5, ch.7→§6, ch.8→§7, ch.9→§8, ch.10→§9, B→B; ch.6 + A dropped (compliance); no glossary additions (ch.2 has no terms); cross-article mentions left prose per-run decision
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion (new article, main session per no-subagent rule)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (evidence above)
+  - [ ] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] eth_trcv (SWS_EthernetTransceiverDriver · R23-11 markdown · ❌ new article, short name EthTrcv)
   - [ ] Step 1 — Source resolution + gap analysis
