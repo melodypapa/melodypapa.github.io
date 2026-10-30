@@ -7,7 +7,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 
 ## Queue
 
-- [ ] wdgm (SWS_WatchdogManager · R23-11 markdown · ❌ new article, short name WdgM)
+- [x] wdgm (SWS_WatchdogManager · R23-11 markdown · ❌ new article, short name WdgM)
   - Note: the first run also creates the `safety/` landing page + nav registration
   - Note: Step 1 done 2026-10-26 — source `Safety/AUTOSAR_CP_SWS_WatchdogManager.md` (R23-11) 3,877 lines, 168 requirement blocks, 35 content diagrams (54 unique hashes / 3 recurring deco strips dropped), ch.10 = 20 containers + Configuration Variants / 46 parameter tables, ch.2 = 18 acronym rows + 24 term rows. Article = full Type A translation (new) + new `safety/` section landing page + nav
   - Note: source→article chapter map — src 1→§1, 2→§2, 3→§3, 4→§4, 5→§5, **6 (Requirements Tracing) DROPPED**, 7→§6 功能规格, 8→§7 API规范, 9→§8 时序图, 10→§9 配置规范; src annex "Example Implementation of Alive Supervision Algorithm" → appendix (see decision); src "Not applicable requirements" → dropped (the second droppable item)
@@ -45,9 +45,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate
   - Note: Step 5 confirmed by user 2026-10-30 — the audit corrections and proposed TODO updates are approved.
-  - [ ] Step 6 — TODO.md row + commit/PR
-  - Note: Step 6 remains open; no commit/PR was requested.
-- [ ] wdgif (SWS_WatchdogInterface · R23-11 markdown · ❌ new article, short name WdgIf)
+  - [x] Step 6 — TODO.md row + commit/PR
+  - Note: 2026-10-30 delivery — commit 24c7a36, issue #195, draft PR #196.
+- [x] wdgif (SWS_WatchdogInterface · R23-11 markdown · ❌ new article, short name WdgIf)
   - Note: Step 1 done 2026-10-26 — source `Safety/AUTOSAR_CP_SWS_WatchdogInterface.md` (R23-11) 607 lines, 3 functions / 1 type / 21 requirement blocks; content diagrams: 1 (source Figure 10.1 config tree, image hash d0587294 — unique); all other artifact images are recurring deco strips (f5f4bf49 / cad1600 / 31a8ee06 / e61809f4 / 8c27c74a hashes); source ch.1 has no content diagram
   - Note: source→article chapter map — src 1→§1, 2→§2, 3→§3, 4→§4, 5→§5 (5.1/5.1.1/5.1.2 keep source numbering — no dependent-module promotion, source itself uses 5.1), 6 (Requirements Tracing) DROPPED, 7→§6 (7.1→6.1, 7.2→6.2 + 6.2.1–6.2.5), 8→§7 API规范 (8.1→7.1 imported types: Std only; 8.2→7.2 = 1 type WdgIf_ModeType, 8.3→7.3 函数定义 = 3 functions WdgIf_SetMode / WdgIf_SetTriggerCondition / WdgIf_GetVersionInfo + the ch.8 interleaved preceding requirements SWS_WdgIf_00017/18/13/19/20 with 2 implementation-hint code fences; 8.4→7.4 回调通知 none, 8.5→7.5 调度函数 none, 8.6→7.6 期望接口 8.6.1/8.6.2 tables + 8.6.3 none), 9→§8 时序图 (single cross-ref sentence to the watchdog driver spec — no source figures), 10→§9 配置规范 (9.1 How = 参数区分 intro… actually src 10.1 How to read this chapter = pure cross-ref; 10.2→9.2 容器与配置参数 9.2.1 WdgIf / 9.2.2 WdgIfGeneral / 9.2.3 WdgIfDevice, 10.3→9.3 发布信息)
   - Note: no Known Limitations chapter → no `## 已知限制`; src ch.4.1 = "No limitations."; no appendix B in source → no `## B.`; appendix A droppable
@@ -75,9 +75,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 5 — User confirmation gate
   - Note: Step 5 confirmed by user 2026-10-27（same gate as wdg）
   - Note: Audit corrections and the TODO update were confirmed by the user on 2026-10-30.
-  - [ ] Step 6 — TODO.md row + commit/PR
-  - Note: Step 6 remains open; no commit/PR was requested.
-- [ ] wdg (SWS_WatchdogDriver · R23-11 markdown · ❌ new article, short name Wdg)
+  - [x] Step 6 — TODO.md row + commit/PR
+  - Note: 2026-10-30 delivery — commit 24c7a36, issue #195, draft PR #196.
+- [x] wdg (SWS_WatchdogDriver · R23-11 markdown · ❌ new article, short name Wdg)
   - Note: Step 1 done 2026-10-27 — source `Safety/AUTOSAR_CP_SWS_WatchdogDriver.md` (R23-11) 1,149 lines, 4 functions / 1 type; content diagrams: Figure 9.1 (image a5c6, 740×498) + Figure 9.2 (image b8152a9, 769×569); the ch.7.4 image slots hold the AUTOSAR logo banner strip (hash a133f680 ×2) — the source's referenced Figure 2 does not exist in either the R23-11 markdown or the R22-11 PDF (checked p.22–24); source ch.1 has no content diagram
   - Note: source→article chapter map — src 1→§1, 2→§2 (5 acronym rows DIP/DET/DEM/SPI/WDG + the unnumbered *Definitions needed for understanding of the concepts* rows Off-/Slow-/Fast-Mode → flat bold-term + blockquote in source order, watchdog_manager 42-row precedent), 3→§3, 4→§4, 5→§5 (5.1/5.1.1–5.1.3 + 5.2 System clock + 5.3 Onboard communication handlers keep source numbering), 6 (Requirements Tracing) DROPPED, 7→§6 (6.1 通用设计规则 / 6.2 外部看门狗驱动 / 6.3 内部看门狗驱动 / 6.4 触发概念以支持窗口看门狗 / 6.5 错误分类 6.5.1–6.5.5), 8→§7 API规范 (8.1→7.1 imported: Dem/Std/WdgIf; 8.2→7.2 = 1 type Wdg_ConfigType; 8.3→7.3 函数定义 = 4 functions Wdg_Init / Wdg_SetMode / Wdg_SetTriggerCondition / Wdg_GetVersionInfo; 8.4→7.4 回调通知 none; 8.5→7.5 调度函数 none; 8.6→7.6 期望接口, optional table Dem_SetEventStatus + Det_ReportError), 9→§8 时序图 (8.1/8.2 with Figure9-1/9-2.png), 10→§9 配置规范 (9.2.1 Wdg faithful source order incl. module table at the end + 9.2.2 WdgSettingsFast which contains WdgExternalConfiguration/WdgSettingsOff/WdgSettingsSlow/WdgSettingsFast tables; 9.3 + 9.3.1 WdgPublishedInformation)
   - Note: appendix B translates as `## B. AUTOSAR 可追溯项变更历史` (EcuM precedent; B.1.1–B.1.3 verbatim ID fences, B.1.4/B.1.6 无, B.1.5 table with translated headings); appendix A dropped
@@ -103,9 +103,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 5 — User confirmation gate
   - Note: Step 5 confirmed by user 2026-10-27（both wdgif and wdg rows confirmed in one gate; wdgif article additionally carries the parallel session's Step-4 corpus-alignment fixes on disk — verified coherent, build green）
   - Note: Audit corrections and the TODO update were confirmed by the user on 2026-10-30.
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
   - Note: commit/PR via branch `feature/watchdog-interface` — see run summary
-  - Note: Step 6 remains open; no commit/PR was requested.
+  - Note: 2026-10-30 audit delivery — commit 24c7a36, issue #195, draft PR #196.
 
 ## Not queued (deliberately skipped)
 - (none)
