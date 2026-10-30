@@ -122,6 +122,7 @@ nav:
         - "Full-CAN 与 Basic-CAN 的区别": autosar/communication/can_driver/full_can_vs_basic_can.md
       - "CanIf": autosar/communication/can_interface/index.md
       - "CanNm": autosar/communication/can_network_management/index.md
+      - "CanSM": autosar/communication/cansm/index.md
       - "CanTrcv": autosar/communication/can_transceiver_driver/index.md
       - "ComXf": autosar/communication/com_based_transformer/index.md
       - "DDS": autosar/communication/data_distribution/index.md
@@ -136,7 +137,7 @@ nav:
       - "Lin": autosar/communication/lin_driver/index.md
       - "LinIf": autosar/communication/lin_interface/index.md
       - "LsDu": autosar/communication/lsdu_router/index.md
-      - "Mirror": autosar/communication/mirror/mirror.md
+      - "Mirror": autosar/communication/mirror/index.md
       - "PduR": autosar/communication/pdu_router/index.md
       - "SecOC": autosar/communication/sec_oc/index.md
       - "SD": autosar/communication/service_discovery/index.md
