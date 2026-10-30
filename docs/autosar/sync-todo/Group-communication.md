@@ -171,12 +171,13 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 6 — TODO.md row + commit/PR — commit a803400 (branch feature/group-communication-sync-2); PR #192, tracking issue #191
 - [ ] cantp (SWS_CANTransportLayer · R23-11 markdown · ❌ new article, short name CanTp)
   - Note: backbone
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-31 run — new article communication/cantp/index.md created (commit 5e2624d, branch feature/group-communication-sync-3): full Type A translation, 2118 ln; §2 70 term lines = source rows exactly (prefix table + 10 acronyms + 45 abbreviations + 12 concepts, all bold-term + blockquote); §6 functional spec complete from source ch.7 (all requirement bodies in order, IDs stripped, SWS-id cross-refs rewritten as 第N节); §6.4 error tables incl. 10 extended production errors as 6.4.5.1-.10; §7 API (9 imported types, 1 type, 8 functions, 2 callbacks, scheduled moved to 7.5.1 per house shape, 期望接口 7+1); §8 时序图 5 figures; §9 配置规范 14 containers with [ECUC_CanTp_*] cells + 8 container figures; ## B appendix (R23-11 added 10/changed 1/deleted none in fences); source ch.6 Requirements Tracing + annex A droppable (reported, user verify at gate). check_api_sync = documented N/A (source 8.3.9 is the scheduled function — moved to 7.5.1; source heading "CanTp_ GetVersionInfo" carries a space artifact; manual verification: 1 type/8 functions/1 scheduled/8 说明 blocks in source order). Figures: 24 extracted (20 rasters + vector renders for 9.1/10.3/10.5/10.6 per lin_interface precedent). Phase A: strict build exit 0, 0 WARNINGs, no cantp INFO; heading audit ✓; forbidden-variant sweep 0; hygiene ✓ (0 `\<`, 0 {DRAFT}, only ECUC ids in config cells + appendix-B SWS ids in fences); acronym slice 0 tables, 70 term lines; check_indexes exit 0; gen_api_list regenerated + --check up to date. link_candidates --apply: 37 lines (7 chapter-refs + 30 citations), idempotent; census: identifier mentions 97 lines all §9 (definitional, apply correctly stopped before 配置规范); UNRESOLVED chapter refs = cross-document (BSWGeneral 7.1.4/7.1.9/10.1/10.3) correctly never linked. ALSO FIXED batch-level: Com article (merged in PR #192) was missing from nav/landing page/overview — registered in this commit. Glossary extension skipped (batch-level pending item). Steps 5/6 per user instruction: commit first, combined confirmation after batch
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit 5e2624d (branch feature/group-communication-sync-3)
 - [ ] tcpip (SWS_TcpIp · R23-11 markdown · ❌ new article, short name TcpIp)
   - Note: backbone
   - [ ] Step 1 — Source resolution + gap analysis
