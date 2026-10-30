@@ -144,6 +144,11 @@ nav:
       - "SoAd": autosar/communication/soad/index.md
       - "Xcp": autosar/communication/xcp/index.md
       - "UdpNm": autosar/communication/udp_network_management/index.md
+    - 全局时间（Global Time）:
+      - autosar/globaltime/index.md
+      - "StbM": autosar/globaltime/stbm/index.md
+      - "CanTSyn": autosar/globaltime/can_tsyn/index.md
+      - "EthTSyn": autosar/globaltime/eth_tsyn/index.md
     - 加密（Crypto）:
 
       - autosar/crypto/index.md
