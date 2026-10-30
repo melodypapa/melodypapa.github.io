@@ -577,6 +577,21 @@ before every commit, the second is evidence for the Step 8 confirmation.
    scope the grep to heading lines — faithful prose is not in scope. A stale
    §2 line is exactly how a rejected wording re-enters a new article — the
    grep, not judgment, is what catches it.
+   **Sub-heading language**: every `###`+ heading title is a direct translation
+   of its source heading and therefore carries Chinese — the `grep '^## '` audit
+   above only sees the level-2 skeleton, so an untranslated `###`/`####`
+   sub-heading passes it silently (the GlobalTime batch shipped 115 of them:
+   StbM 12, CanTSyn 52, EthTSyn 51 — the prose was translated but the source
+   heading text was copied verbatim). Run
+   `python .agents/skills/autosar-translate/scripts/check_heading_lang.py <article>`:
+   exit 0 proves every sub-heading is translated. Identifier-titled headings
+   are exempt — API/type/container/port names stay verbatim (STANDARD.md §4):
+   the script recognizes them by shape (`StbM_Init`, `StbMGeneral`, `ISRType`,
+   `IOC`) and by the configuration container's own `模块名称`/`容器名称` table
+   cell (`Dio`, `Crypto`, `Spi`). Every prose title — including single words
+   that read like names (`General`, `Common`, `Accuracy`, `Variants`) — is
+   flagged and must be translated. `--site` sweeps the whole corpus; use it
+   to find the same defect in articles already published.
 3. Hygiene greps: no `^# ` in the body; no requirement IDs
    (`\[[A-Z][A-Za-z]*_[A-Za-z0-9]*_[0-9]+\]`) and no `{DRAFT}`; a WeChat
    footer, if present, is `<section id="wechat">` + `<h4>`, never a markdown
@@ -785,6 +800,7 @@ open.
 | Taking the SRS wording as ground truth | "Fixing" faithful SWS translations into errors | Step 4 + source-resolution.md |
 | Renaming a heading to STANDARD.md's listed term when most of the site uses a different one (DIO run: STANDARD listed 周期函数, 7 articles used 调度函数 — user kept 调度函数) | Churn in the wrong direction; the standard itself was stale | Before aligning wording, `grep` the heading across `docs/autosar`; if STANDARD.md and the site majority disagree, put the choice in the todo list as a user decision and update STANDARD.md in the same PR |
 | Shortening a source heading to fit the canonical list (DIO §3.1: *Input documents & related standards and norms* renamed 「输入文件」 per the then-canonical; user reverted 2026-10-25 to the direct translation 「输入文件和相关标准与规范」 — STANDARD.md updated in the same change) | The canonical list ends up codifying the drift it was meant to prevent — headings drift away from the source wording, site-wide | Headings are direct translations of the source headings; a source heading longer than the §2 rendering is translated in full, never shortened |
+| Copying the source's heading text verbatim into the article instead of translating it (GlobalTime batch 2026-10-30: 115 `###`+ headings shipped in English — StbM 12, CanTSyn 52, EthTSyn 51 — while the prose beneath them was Chinese; the `grep '^## '` audit saw only the level-2 skeleton and passed) | A bilingual-looking article whose table of contents reads as a list of English source section names — the reader sees untranslated content the standard's own chapter titles never were | Every heading title is a direct translation of its source heading; identifier-titled headings (API/type/container/port names) stay verbatim, prose titles translate even when they look like names (General, Common, Accuracy, Variants). Phase A check 2 runs `check_heading_lang.py`, which flags CJK-less `###`+ titles |
 | Translating *Configurable Interfaces* as `可配置的接口` because the pre-2026-10-24 §2 listed it (baseline test 2026-10-24: an agent handed the old §2 line reproduced the rejected heading verbatim, while agents given no wording guidance naturally wrote `可配置接口` — the danger is the stale authority, not free translation) | New articles silently diverge from the canonical term — the site's 5 IO articles all read `可配置接口` (user decision 2026-10-24, issue #54; STANDARD.md §2 updated in the same PR) | Phase A check 2's §2 `不用` sweep: grep every forbidden variant on the article to 0 hits |
 | Posting the todo list to chat instead of writing the todo file (DIO run, 2026-10-24) | The run's decisions and tick state die with the session; nothing to resume from, nothing to audit | Step 4 output contract + `references/todo-format.md` — the file is the todo, chat is a copy |
 | Batch-checking todo items at the end of the run | The list shows progress the work doesn't have; an unverified item hides until the PR review or never | Tick each item in the file the moment its verification passes (Step 4) |

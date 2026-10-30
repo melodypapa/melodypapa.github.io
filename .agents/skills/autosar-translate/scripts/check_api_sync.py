@@ -45,7 +45,12 @@ ART_LEAF_RE = re.compile(r"^#####\s+7\.([23])\.(\d+)\.(\d+)\.\s+(.+?)\s*$")
 # site's API-chapter convention. SRC_RE only captures the first English word,
 # so "Optional Interfaces" compares as "Optional"; the article renders it as
 # 可选接口. The tripwire still enforces counts and order around the alias.
-ALIASES = {"可选接口": "Optional"}
+# Likewise the source heading "Extension to Std_ReturnType" is captured as
+# "Extension", while the site renders that type heading as
+# 「Std_ReturnType 的扩展」 (crypto_driver / crypto_interface / key_manager /
+# stbm precedent) — the alias keeps the tripwire from reporting a false
+# mismatch on all four articles.
+ALIASES = {"可选接口": "Optional", "Std_ReturnType的扩展": "Extension"}
 
 
 def norm(name: str) -> str:
