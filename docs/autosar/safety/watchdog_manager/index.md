@@ -1145,7 +1145,7 @@ CP0-0 i = 0; CP0-1 while(i < n) { CP0-2 if (a[i] < b[i]) CP0-3 a[i] = b[i]; CP0-
 
 #### 7.3.1. WdgM_Init
 
-**说明**: 此服务初始化**看门狗管理器**。可通过**WdgM.h**获得。本服务为同步调用，不可重入。参数 ConfigPtr（in）：指向构建后配置数据的指针。无返回值。
+**说明**: 此服务初始化**看门狗管理器**。可通过**WdgM.h**获得。本服务为同步调用，不可重入。参数 ConfigPtr（in）：指向构建后配置数据的指针。无返回值。服务 ID 0x00。
 
 ```C
 void WdgM_Init ( const WdgM_ConfigType* ConfigPtr )
@@ -1173,7 +1173,7 @@ void WdgM_Init ( const WdgM_ConfigType* ConfigPtr )
 
 #### 7.3.2. WdgM_DeInit
 
-**说明**: 此服务去初始化**看门狗管理器**。可通过**WdgM.h**获得。本服务为同步调用，不可重入。无参数。无返回值。
+**说明**: 此服务去初始化**看门狗管理器**。可通过**WdgM.h**获得。本服务为同步调用，不可重入。无参数。无返回值。服务 ID 0x01。
 
 ```C
 void WdgM_DeInit ( void )
@@ -1189,7 +1189,7 @@ void WdgM_DeInit ( void )
 
 #### 7.3.3. WdgM_GetVersionInfo
 
-**说明**: 此服务返回本模块的版本信息。可通过**WdgM.h**获得。本服务为同步调用，可重入。参数 VersionInfo（out）：指向用于存储 **WdgM** 模块版本信息的位置的指针。无返回值。
+**说明**: 此服务返回本模块的版本信息。可通过**WdgM.h**获得。本服务为同步调用，可重入。参数 VersionInfo（out）：指向用于存储 **WdgM** 模块版本信息的位置的指针。无返回值。服务 ID 0x02。
 
 ```C
 void WdgM_GetVersionInfo ( Std_VersionInfoType* VersionInfo )
@@ -1199,7 +1199,7 @@ void WdgM_GetVersionInfo ( Std_VersionInfoType* VersionInfo )
 
 #### 7.3.4. WdgM_SetMode
 
-**说明**: 此服务设置**看门狗管理器**的当前模式。可通过**WdgM.h**获得。本服务为同步调用，不可重入。参数 Mode（in）：已配置的**看门狗管理器模式**之一。返回值：Std_ReturnType，**E_OK**：成功切换到新模式；**E_NOT_OK**：切换到新模式失败。
+**说明**: 此服务设置**看门狗管理器**的当前模式。可通过**WdgM.h**获得。本服务为同步调用，不可重入。参数 Mode（in）：已配置的**看门狗管理器模式**之一。返回值：Std_ReturnType，**E_OK**：成功切换到新模式；**E_NOT_OK**：切换到新模式失败。服务 ID 0x03。
 
 ```C
 Std_ReturnType WdgM_SetMode ( WdgM_ModeType Mode )
@@ -1225,7 +1225,7 @@ Std_ReturnType WdgM_SetMode ( WdgM_ModeType Mode )
 
 #### 7.3.5. WdgM_GetMode
 
-**说明**: 此服务返回**看门狗管理器**的当前模式。可通过**WdgM.h**获得。本服务为同步调用，可重入。无参数。返回值：Std_ReturnType，**E_OK**：成功返回当前模式；**E_NOT_OK**：返回当前模式失败。参数 Mode（out）：**看门狗管理器**的当前模式。
+**说明**: 此服务返回**看门狗管理器**的当前模式。可通过**WdgM.h**获得。本服务为同步调用，可重入。无参数。返回值：Std_ReturnType，**E_OK**：成功返回当前模式；**E_NOT_OK**：返回当前模式失败。参数 Mode（out）：**看门狗管理器**的当前模式。服务 ID 0x0b。
 
 ```C
 Std_ReturnType WdgM_GetMode ( WdgM_ModeType* Mode )
@@ -1241,7 +1241,7 @@ Std_ReturnType WdgM_GetMode ( WdgM_ModeType* Mode )
 
 #### 7.3.6. WdgM_CheckpointReached
 
-**说明**: 此服务向**看门狗管理器**指示已到达**被监督实体**内的某个**检查点**。可通过**WdgM.h**获得。本服务为同步调用，可重入。参数 SEID（in）：报告**检查点**的**被监督实体**的标识符。参数 CheckpointID（in）：已到达的**被监督实体**内**检查点**的标识符。返回值：Std_ReturnType，**E_OK**：成功更新存活计数器；**E_NOT_OK**：更新失败。
+**说明**: 此服务向**看门狗管理器**指示已到达**被监督实体**内的某个**检查点**。可通过**WdgM.h**获得。本服务为同步调用，可重入。参数 SEID（in）：报告**检查点**的**被监督实体**的标识符。参数 CheckpointID（in）：已到达的**被监督实体**内**检查点**的标识符。返回值：Std_ReturnType，**E_OK**：成功更新存活计数器；**E_NOT_OK**：更新失败。服务 ID 0x0e。
 
 ```C
 Std_ReturnType WdgM_CheckpointReached ( WdgM_SupervisedEntityIdType SEID, WdgM_CheckpointIdType CheckpointID )
@@ -1267,7 +1267,7 @@ Std_ReturnType WdgM_CheckpointReached ( WdgM_SupervisedEntityIdType SEID, WdgM_C
 
 #### 7.3.7. WdgM_GetLocalStatus
 
-**说明**: 此服务返回单个**被监督实体**的监督状态。可通过**WdgM.h**获得。本服务为同步调用，可重入。参数 SEID（in）：应返回其监督状态的被监督实体的标识符。参数 Status（out）：给定被监督实体的监督状态。返回值：Std_ReturnType，**E_OK**：成功返回当前监督状态；**E_NOT_OK**：返回当前监督状态失败。
+**说明**: 此服务返回单个**被监督实体**的监督状态。可通过**WdgM.h**获得。本服务为同步调用，可重入。参数 SEID（in）：应返回其监督状态的被监督实体的标识符。参数 Status（out）：给定被监督实体的监督状态。返回值：Std_ReturnType，**E_OK**：成功返回当前监督状态；**E_NOT_OK**：返回当前监督状态失败。服务 ID 0x0c。
 
 ```C
 Std_ReturnType WdgM_GetLocalStatus ( WdgM_SupervisedEntityIdType SEID, WdgM_LocalStatusType* Status )
@@ -1285,7 +1285,7 @@ Std_ReturnType WdgM_GetLocalStatus ( WdgM_SupervisedEntityIdType SEID, WdgM_Loca
 
 #### 7.3.8. WdgM_GetGlobalStatus
 
-**说明**: 此服务返回**看门狗管理器**的全局监督状态。可通过**WdgM.h**获得。本服务为同步调用，可重入。参数 Status（out）：**看门狗管理器**的全局监督状态。返回值：Std_ReturnType，**E_OK**：成功返回当前监督状态；**E_NOT_OK**：返回当前监督状态失败。
+**说明**: 此服务返回**看门狗管理器**的全局监督状态。可通过**WdgM.h**获得。本服务为同步调用，可重入。参数 Status（out）：**看门狗管理器**的全局监督状态。返回值：Std_ReturnType，**E_OK**：成功返回当前监督状态；**E_NOT_OK**：返回当前监督状态失败。服务 ID 0x0d。
 
 ```C
 Std_ReturnType WdgM_GetGlobalStatus ( WdgM_GlobalStatusType* Status )
@@ -1299,7 +1299,7 @@ Std_ReturnType WdgM_GetGlobalStatus ( WdgM_GlobalStatusType* Status )
 
 #### 7.3.9. WdgM_PerformReset
 
-**说明**: 此服务指示**看门狗管理器**产生看门狗复位。可通过**WdgM.h**获得。本服务为同步调用，不可重入。无参数。无返回值。
+**说明**: 此服务指示**看门狗管理器**产生看门狗复位。可通过**WdgM.h**获得。本服务为同步调用，不可重入。无参数。无返回值。服务 ID 0x0f。
 
 ```C
 void WdgM_PerformReset ( void )
@@ -1319,7 +1319,7 @@ void WdgM_PerformReset ( void )
 
 #### 7.3.10. WdgM_GetFirstExpiredSEID
 
-**说明**: 此服务返回首个达到 **WDGM_LOCAL_STATUS_EXPIRED** 状态的 **SEID**。可通过**WdgM.h**获得。本服务为同步调用，可重入。参数 SEID（out）：首个达到 **WDGM_LOCAL_STATUS_EXPIRED** 状态的被监督实体的标识符。返回值：Std_ReturnType，**E_OK**：成功返回 **SEID**；**E_NOT_OK**：返回 **SEID** 时出错。
+**说明**: 此服务返回首个达到 **WDGM_LOCAL_STATUS_EXPIRED** 状态的 **SEID**。可通过**WdgM.h**获得。本服务为同步调用，可重入。参数 SEID（out）：首个达到 **WDGM_LOCAL_STATUS_EXPIRED** 状态的被监督实体的标识符。返回值：Std_ReturnType，**E_OK**：成功返回 **SEID**；**E_NOT_OK**：返回 **SEID** 时出错。服务 ID 0x10。
 
 ```C
 Std_ReturnType WdgM_GetFirstExpiredSEID ( WdgM_SupervisedEntityIdType* SEID )
@@ -1338,7 +1338,7 @@ Std_ReturnType WdgM_GetFirstExpiredSEID ( WdgM_SupervisedEntityIdType* SEID )
 
 #### 7.4.1. WdgM_MainFunction
 
-**说明**: 此服务执行**看门狗管理器**周期性作业的处理。可通过**SchM_WdgM.h**获得。
+**说明**: 此服务执行**看门狗管理器**周期性作业的处理。可通过**SchM_WdgM.h**获得。服务 ID 0x08。
 
 ```C
 void WdgM_MainFunction ( void )
@@ -1741,7 +1741,7 @@ void WdgM_MainFunction ( void )
 
 #### 9.2.2. WdgM
 
-| SWS 条目 |  |
+| SWS 条目 | [ECUC_WdgM_00001] |
 |---|---|
 | 模块名称 | WdgM |
 | 描述 | **WdgM**（**看门狗管理器**）模块的配置。 |

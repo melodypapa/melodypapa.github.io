@@ -5,7 +5,7 @@ description: >
   site: translating, completing, updating, verifying, or inventorying any
   article under docs/autosar/; syncing a specification document (AUTOSAR
   SWS/EXP/SRS/TPS, releases R22-11/R23-11/R25-11, docs/autosar_pdf PDFs, or
-  the ~/Workspace/autosar_standard markdown tree) into a Type A article;
+  the ../autosar_standard markdown tree) into a Type A article;
   checking which specs still lack articles; or answering coverage and
   progress questions about docs/autosar/ (TODO.md, STANDARD.md). Also use
   for any AUTOSAR module name (CanSM, SoAd, Dem, NvM, EthSwt, Com, Det…)
@@ -33,7 +33,7 @@ stop and ask the user how to proceed rather than guessing conventions.
 Read `references/source-resolution.md` for the full recipe. Summary:
 
 1. **Primary source**: markdown conversion of the standard,
-   `~/Workspace/autosar_standard/markdown/Classic_Platform/Releases/R23-11/<Category>/AUTOSAR_CP_<Type>_<Name>.md`
+   `../autosar_standard/markdown/Classic_Platform/Releases/R23-11/<Category>/AUTOSAR_CP_<Type>_<Name>.md`
    (confirm the path on this machine first; it is outside the repo).
    Use the **SWS** document for module articles, **EXP** for guides. The SRS
    is only for requirement-coverage checks — never as the structural source.
@@ -191,8 +191,9 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
     8 types and 13 functions all aligned);
   - **Function entries**: the C signature is copied verbatim from the
     source's Syntax line into the code fence; the service-table fields are
-    folded into `**说明**` per site convention (sync/async, re-entrancy,
-    in/out parameters, return value, available via `<X>.h`);
+    folded into `**说明**` per site convention (Service ID [hex] when
+    present, sync/async, re-entrancy, in/out parameters, return value,
+    available via `<X>.h`);
     **every source requirement block under a function becomes one paragraph,
     in order** — look-alike duplicate sentences may be two distinct
     requirements (PWM's *pre compile time configurable* `10xx` vs
@@ -646,7 +647,7 @@ before every commit, the second is evidence for the Step 8 confirmation.
    counter exists so that cannot recur. `--apply` writes only the applied
    class; verify idempotency with a second run (0 lines changed) before
    committing. **When the source PDF is at hand (every R23-11 SWS row —
-   `~/Workspace/autosar_standard/Classic_Platform/Releases/R23-11/`), run
+   `../autosar_standard/Classic_Platform/Releases/R23-11/`), run
    `--list --pdf <article>` as well and record the PDF ground-truth block**:
    `registry MATCH` on every cited `[n]` (a MISMATCH is a §3.1 fix, not a
    `--ref-skip`), the anchor-less and ABSENT target lists, the count-diff
