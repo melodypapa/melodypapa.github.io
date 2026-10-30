@@ -34,11 +34,15 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 5 — User confirmation gate (batch gate after all 4 rows — user instruction 2026-10-30)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] eth_tsyn (SWS_TimeSyncOverEthernet · R23-11 markdown · ❌ new article, short name EthTSyn)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: source 3,950 lines; article ~2.65k lines. ch.6 Requirements Tracing + appendix A dropped per mandate; §3.1 registry 10 entries; ch.7 → §6 (7 subsections + figures 7-1/7-2, Pdelay protocol, secure time sync, dynamic port config); ch.8 → §7 API (2 types + 5 functions + 5 callbacks incl. TrcvLinkStateChg/Icv indications + 调度函数 + 期望接口 mandatory-none/optional-28); ch.9 → §8 时序图 (10 figure parts 9-1..9-9b; source 9.3/9.7 carry no own diagram content in the markdown — noted in place); ch.10 → §9 配置规范 (15 containers, [ECUC_EthTSyn_*] cells, 6 container diagrams Figure10-1..10-6, 5 [constr_*] constraints + note)
+  - Note: source annexes B (Changed Traces History) AND C (Changed Constraints History) both translated as ## B. / ## C. (source-lettered annexes, rte precedent)
+  - Note: check_api_sync N/A — EthTSyn source numbers its API chapter as 8.1.1–8.1.6 (4-level nesting), not the flat 8.2.x/8.3.x the script parses; counts verified manually: 2/2 types, 5/5 functions, 5/5 callbacks
+  - Note: link_candidates applied (80 lines, idempotent); 7 glossary terms added (2 EthTSyn entries kept separate — module definition + scope sentence)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate (batch gate — user instruction 2026-10-30; run stopped after row 3 per user)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] fr_tsyn (SWS_TimeSyncOverFlexRay · R23-11 markdown · ❌ new article, short name FrTSyn)
   - [ ] Step 1 — Source resolution + gap analysis

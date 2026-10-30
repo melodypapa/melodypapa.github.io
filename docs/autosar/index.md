@@ -46,6 +46,7 @@ title: "CP AUTOSAR"
 * [全局时间（Global Time）](globaltime/index.md)
   * [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)
   * [AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)
+  * [AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](globaltime/eth_tsyn/index.md)
 
 ### 加密（Crypto）
 
