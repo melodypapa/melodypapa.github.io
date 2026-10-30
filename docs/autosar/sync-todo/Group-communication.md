@@ -180,12 +180,13 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 6 — TODO.md row + commit/PR — commit 5e2624d (branch feature/group-communication-sync-3)
 - [ ] tcpip (SWS_TcpIp · R23-11 markdown · ❌ new article, short name TcpIp)
   - Note: backbone
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-31 run — new article communication/tcpip/index.md created (commit bcbd61e, branch feature/group-communication-sync-3): full Type A translation, ~7,480 ln; §2 37 term lines = source rows exactly; §6 functional spec complete from source ch.7 (scalability classes 表7.1, IPv4/ARP/Auto-IP/ICMPv4, IPv6/ICMPv6/NDP, IPsec/IKEv2, local address table, UDP/TCP, TLS incl. ciphersuite/handshake/PSK model + 3 examples, DHCPv4/v6, message reception/transmission, stack state handling, error classification, version check, security events 表); §7 API (13 imported types, 18 types, 4 symbols, 28 functions in source's 4 groups 7.4.1-7.4.4, 1 callback 7.5.1, 1 scheduled 7.6.2, 期望接口 7 mandatory + 22 optional + 14 configurable incl. socket-owner functions); §8 时序图 7 figures; §9 配置规范 76 numbered containers + nested TcpIpTlsTrustedCAList (unnumbered per source), ~390 parameter records generated via record extraction (3-column Value/Multiplicity Configuration Class rows preserved as 值配置类/多重性配置类 triples) + hand translation map of all container/parameter descriptions; inclusion lists from source tables (TcpIpConfig 11 subcontainers, TcpIpTlsCiphersuites 5, IKE family). source ch.6 Requirements Tracing droppable (reported, user verify at gate); no appendix A/B in source (ends at 10.3). check_api_sync = documented N/A (source ch.8 uses [SWS_TCPIP_*] headings without 8.2.x/8.3.x numbering — script parses 0 types/functions; manual verification: 18 types ↔ 7.2.1-.18, 4 symbols ↔ 7.3.1-.4, 28 functions ↔ 7.4.x in source order, 1 callback, 1 scheduled, 说明 blocks on every function). Figures: 65 extracted (2 rasters + 63 vector page renders for ch.9/ch.10 diagrams). Phase A: strict build exit 0, 0 WARNINGs, no tcpip INFO; heading audit ✓; forbidden-variant sweep 0; hygiene ✓ (0 `\<`, 0 {DRAFT} — source's {DRAFT} tags dropped as chrome, 0 prose SWS ids); acronym slice 0 tables, 37 term lines; check_indexes exit 0; gen_api_list regenerated + --check up to date. link_candidates --apply: 72 chapter-refs + 72 citation links + registry anchors, idempotent; census: identifier mentions 623 lines (589 §9 definitional, 33 applied in §6/§7), UNRESOLVED chapter refs = cross-document (BSWGeneral 5.1.6/5.1.8) and false positives (TLS 1.2, RFC 1122 sections) correctly never linked; cross-article mentions SoAd/DEM/NvM/PORT SITE report-only, Det/EthSM NO-ARTICLE. Glossary extension skipped (batch-level pending item). Steps 5/6 per user instruction: commit first, combined confirmation after batch
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit bcbd61e (branch feature/group-communication-sync-3)
 - [ ] nm (SWS_NetworkManagementInterface · R23-11 markdown · ❌ new article, short name Nm)
   - Note: backbone
   - [ ] Step 1 — Source resolution + gap analysis
