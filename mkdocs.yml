@@ -123,9 +123,11 @@ nav:
       - "CanIf": autosar/communication/can_interface/index.md
       - "CanNm": autosar/communication/can_network_management/index.md
       - "CanSM": autosar/communication/cansm/index.md
+      - "CanTp": autosar/communication/cantp/index.md
       - "CanTrcv": autosar/communication/can_transceiver_driver/index.md
       - "CanXL": autosar/communication/canxl_driver/index.md
       - "CanXLTrcv": autosar/communication/canxl_transceiver_driver/index.md
+      - "Com": autosar/communication/com/index.md
       - "ComXf": autosar/communication/com_based_transformer/index.md
       - "DDS": autosar/communication/data_distribution/index.md
       - "Dlt": autosar/communication/diagnostic_log_and_trace/index.md
