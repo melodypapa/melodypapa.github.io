@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **67** 份已有站内文章）。
+共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **68** 份已有站内文章）。
 
 ## A
 
@@ -4198,7 +4198,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 **General**
 > 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 > 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 > 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
@@ -6291,88 +6291,88 @@ title: "AUTOSAR API 清单（函数与类型）"
 ## T
 
 **TcpIp_Bind**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_ChangeParameter**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_Close**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_DhcpReadOption**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_DhcpV6ReadOption**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_DhcpV6WriteOption**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_DhcpWriteOption**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_GetAndResetMeasurementData**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_GetArpCacheEntries**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_GetCtrlIdx**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_GetIpAddr**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_GetNdpCacheEntries**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_GetPhysAddr**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_GetRemotePhysAddr**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_GetVersionInfo**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_IcmpTransmit**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_IcmpV6Transmit**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_Init**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_IsConnectionReady**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_ReleaseIpAddrAssignment**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_RequestComMode**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_RequestIpAddrAssignment**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_ResetIpAssignment**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_TcpConnect**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_TcpListen**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_TcpReceived**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_TcpTransmit**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_UdpTransmit**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TerminateApplication**
 > 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
@@ -6465,7 +6465,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 
 **Transmission**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TrustedFunctionIndexType**
 > 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11

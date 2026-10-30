@@ -152,6 +152,7 @@ nav:
       - "Spi": autosar/communication/spi_handler_driver/index.md
       - "SoAd": autosar/communication/soad/index.md
       - "Xcp": autosar/communication/xcp/index.md
+      - "TcpIp": autosar/communication/tcpip/index.md
       - "UdpNm": autosar/communication/udp_network_management/index.md
     - 全局时间（Global Time）:
       - autosar/globaltime/index.md
