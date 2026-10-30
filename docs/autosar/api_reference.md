@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **56** 份已有站内文章）。
+共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **57** 份已有站内文章）。
 
 ## A
 
@@ -790,37 +790,37 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
 **CanSM_BswMCurrentStateType**
-> 类型 · 未翻译 · SWS_CANStateManager · R23-11
+> 类型 · [AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md) · SWS_CANStateManager · R23-11
 
 **CanSM_ConfigType**
-> 类型 · 未翻译 · SWS_CANStateManager · R23-11
+> 类型 · [AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md) · SWS_CANStateManager · R23-11
 
 **CanSM_DeInit**
-> 函数 · 未翻译 · SWS_CANStateManager · R23-11
+> 函数 · [AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md) · SWS_CANStateManager · R23-11
 
 **CanSM_GetCurrentComMode**
-> 函数 · 未翻译 · SWS_CANStateManager · R23-11
+> 函数 · [AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md) · SWS_CANStateManager · R23-11
 
 **CanSM_GetVersionInfo**
-> 函数 · 未翻译 · SWS_CANStateManager · R23-11
+> 函数 · [AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md) · SWS_CANStateManager · R23-11
 
 **CanSM_Init**
-> 函数 · 未翻译 · SWS_CANStateManager · R23-11
+> 函数 · [AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md) · SWS_CANStateManager · R23-11
 
 **CanSM_RequestComMode**
-> 函数 · 未翻译 · SWS_CANStateManager · R23-11
+> 函数 · [AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md) · SWS_CANStateManager · R23-11
 
 **CanSM_SetBaudrate**
-> 函数 · 未翻译 · SWS_CANStateManager · R23-11
+> 函数 · [AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md) · SWS_CANStateManager · R23-11
 
 **CanSM_SetEcuPassive**
-> 函数 · 未翻译 · SWS_CANStateManager · R23-11
+> 函数 · [AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md) · SWS_CANStateManager · R23-11
 
 **CanSM_StartWakeupSource**
-> 函数 · 未翻译 · SWS_CANStateManager · R23-11
+> 函数 · [AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md) · SWS_CANStateManager · R23-11
 
 **CanSM_StopWakeupSource**
-> 函数 · 未翻译 · SWS_CANStateManager · R23-11
+> 函数 · [AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md) · SWS_CANStateManager · R23-11
 
 **CanTp_CancelReceive**
 > 函数 · 未翻译 · SWS_CANTransportLayer · R23-11
