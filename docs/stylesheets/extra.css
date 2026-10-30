@@ -73,6 +73,10 @@
   --md-typeset-mark-color: rgba(139, 38, 53, 0.15);
   --md-typeset-table-color: #e5dfd4;
   --md-typeset-table-color--light: rgba(229, 223, 212, 0.5);
+
+  /* 术语表「来源」行（对比度 5.58:1 / 释义 7.36:1） */
+  --md-glossary-source-fg: #6f675a;
+  --md-glossary-source-link: #2f5678;
 }
 
 /* ---- 调色板（深色：深夜蓝 / 柔酒红 / 暖浅灰） ---- */
@@ -91,6 +95,10 @@
   --md-typeset-a-color: #a9c6e0;
   --md-typeset-table-color: #4a463f;
   --md-typeset-table-color--light: rgba(217, 211, 202, 0.2);
+
+  /* 术语表「来源」行（对比度 4.85:1 / 释义 4.92:1） */
+  --md-glossary-source-fg: #8a8e94;
+  --md-glossary-source-link: #8fa5ba;
 }
 
 /* ---- 衬线标题（正文区 h1-h4） ---- */
@@ -175,6 +183,22 @@
   color: var(--md-default-fg-color--light);
   margin-left: 2em;
   padding-left: 1em;
+}
+
+/* 术语表的「来源」标注（.glossary-source）
+   与释义正文分层：字号更小、颜色更淡，读者一眼分得清哪句是定义、哪句是出处。
+   颜色单独定义而非借用 --md-default-fg-color--lighter：后者在浅色方案下
+   对白底只有 3.68:1、深色方案下 2.51:1，均低于 WCAG AA（4.5:1），
+   而来源行是 0.82em 的小字，必须保证可读性。
+   浅色 5.58:1（释义 7.36:1）／深色 4.85:1（释义 4.92:1）。 */
+.md-typeset blockquote .glossary-source {
+  font-size: 0.82em;
+  color: var(--md-glossary-source-fg);
+  margin-top: 0.2em;
+}
+
+.md-typeset blockquote .glossary-source a {
+  color: var(--md-glossary-source-link);
 }
 
 /* ---- 分隔线：细暖灰线 ---- */
