@@ -104,7 +104,7 @@ FOTA 过程意在适用于所有不同种类的内存架构与技术。但是，
 #### 2.2.1 延伸阅读
 
 - 关于 UCM-Master 实现的更多信息见规范文档 [\[1\]](#ref-1)；
-- 关于本文所指 FOTA-Master 的角色的更多信息，其预期行为的细节见 [3.2.2](#322-fota-master) 与 [5.1.2](#512-fota-masterucm-master) 章；
+- 关于本文所指 FOTA-Master 的角色的更多信息，其预期行为的细节见 [3.2.2](#322-fota-主节点fota-master) 与 [5.1.2](#512-fota-masterucm-master) 章；
 - 关于潜在的非易失性数据处理与迁移的更多信息见规范文档 [\[4\]](#ref-4)。
 
 ## 3. 术语
@@ -136,11 +136,11 @@ AUTOSAR 定义的、列于 AUTOSAR 词汇表 [\[5\]](#ref-5) 中的常见缩略�
 
 ### 3.2. 系统组件术语
 
-#### 3.2.1 FOTA Target
+#### 3.2.1 FOTA 目标（FOTA Target）
 
 该术语适用于一般而言能够经由 FOTA 过程更新的所有 ECU。
 
-#### 3.2.2 FOTA Master
+#### 3.2.2 FOTA 主节点（FOTA Master）
 
 FOTA Master 规定这样的实例：它处理所有软件更新以及把相应更新应用到由 FOTA 更新过程寻址的 FOTA Target ECU 所需的全部相关信息。
 
@@ -222,7 +222,7 @@ FOTA 的整体架构设计（如图 5.1 所示）由以下部分组成：
 - **FOTA Master ECU**：缓存所有要烧写到某个 FOTA Target ECU 的新 ECU 软件制品。
 - **后端服务器**：向 FOTA Master ECU 提供要安装到 FOTA Target ECU 的映像。
 
-#### 5.1.1 FOTA Target ECU
+#### 5.1.1 FOTA 目标 ECU（FOTA Target ECU）
 
 由于 FOTA Handler 规范目前正在演进、且并非所有特性都已规定与定义，FOTA Handler 模块目前被视为一个 CDD。做出这一决定是因为：迄今为止定义的特性还不足以发布一个完整的新 AUTOSAR 基础软件模块。如果未来特性集增长到值得成为 BSW 模块的复杂度，将考虑定义一个 FOTA BSW 模块。然而，由于「边读边写」Flash 方法与程序 Flash 访问（将由相关的 AUTOSAR MCAL 组实现）的架构决定尚未做出，CDD 方式保留了穿过所有 BSW 层连接的选项。
 
@@ -393,7 +393,7 @@ FOTA 内部状态枚举应可供 FOTA Master ECU 使用——由 FOTA Target ECU
 
 注意：如何在 FOTA 语境中实现该特性尚未定义，因此由实现者特定（例如通过设置标志、删除「旧」分区、使分区校验和失效等）。
 
-#### 5.2.2 FOTA Master
+#### 5.2.2 FOTA 主节点（FOTA Master）
 
 该 FOTA Master 实例连接到一个在 Dcm 模块内配置的、专门定义的用户作业（细节见 [5.2.3](#523-dcm-交互) 章）。Dcm 模块与 FOTA Handler 模块之间的数据传输应使用 FOTA 数据块完成，以便使 FOTA 下载与烧写过程可中断（可抢占）。这是必要的，因为 FOTA Target ECU 的所有功能（例如应用 SWC、BSW 服务）在烧写过程中应保持可用。
 

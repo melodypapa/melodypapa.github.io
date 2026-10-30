@@ -14377,7 +14377,7 @@ Rte_Mode 的返回值用于向调用者告知模式机器实例（**mode machine
 
 **RTE** 应支持在基础软件调度器初始化之后、**RTE** 初始化完成之前调用 Rte_Mode。
 
-###### 7.1.6.33. Enhanced Rte_Mode
+###### 7.1.6.33. 增强型 Rte_Mode
 
 目的：提供模式切换端口当前激活的模式。如果模式机器实例正处于切换过程中，还额外提供前一个模式和下一个模式的值。
 
@@ -17648,7 +17648,7 @@ Std_ReturnType SchM_Switch_<bsnp>[_<vi>_<ai>]_<name>(IN <mode>)
 
 注：无。
 
-###### 7.2.5.9. Enhanced SchM_Mode
+###### 7.2.5.9. 增强型 SchM_Mode
 
 目的：提供（`requiredModeGroup` 或 `providedModeGroup`）`ModeDeclarationGroupPrototype` 的当前活动模式。如果相应的模式机实例正处于转换之中，则额外提供前一个模式和下一个模式的值。
 
@@ -28462,7 +28462,7 @@ MISRA C 标准主要是针对手写代码而制定的。部分 MISRA C 规则仅
 
 ## D. 引用的 ECUC 配置参数
 
-### D.1. Com
+### D.1. 通信模块（Com）
 
 ### D.1.1. ComMainFunctionTx
 

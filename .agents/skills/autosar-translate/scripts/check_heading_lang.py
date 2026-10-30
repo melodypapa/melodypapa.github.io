@@ -19,7 +19,11 @@ Identifier-shaped title (exempt):
     IocSend, GlobalTime_Master, ReadPeripheral8, HSE_GPR2);
   - or it names an entity the article's own tables declare — a configuration
     container (`| 模块名称 | Dio |`, `| 容器名称 | X |`), its parent
-    (`| 父容器 | Com |`) or a meta-model class (`| 类 | Identifiable |`).
+    (`| 父容器 | Com |`) or a meta-model class (`| 类 | Identifiable |`);
+  - or, in a glossary file, it is a chapter-4 term heading (`### 4.1. Abstract
+    Platform`): the English term is the entry key and stays verbatim
+    (STANDARD.md §7); the Chinese gloss appears in the body
+    (`抽象平台（**Abstract Platform**）`).
 
 Everything else is prose and must carry Chinese. Single English words that are
 prose rather than identifiers — General, Common, Overview, Accuracy, Variants —
@@ -75,6 +79,23 @@ def heading_title(raw: str) -> str:
     return title.strip()
 
 
+def is_glossary_term(line: str) -> bool:
+    """True for a glossary entry heading — the English term is the entry key.
+
+    In `tr_glossary` (and any glossary file) chapter 4 is 术语定义; its
+    `### 4.N. <English term>` headings are the defined terms themselves, not
+    prose to be translated. STANDARD.md §7 keeps term names verbatim, so the
+    heading stays English even though it carries no Chinese (the body gives the
+    Chinese gloss: `抽象平台（**Abstract Platform**）`).
+    """
+    m = HEADING_RE.match(line)
+    if not m:
+        return False
+    # m.group(2) is the heading text with the `### ` prefix already removed;
+    # a glossary term entry is any heading whose number is under chapter 4.
+    return bool(re.match(r"^4\.(?:\d+\.)*\d+\.?\s+\S", m.group(2)))
+
+
 def check(path: Path) -> list[tuple[int, str]]:
     """Return (line number, heading) pairs that carry no Chinese."""
     lines = path.read_text(encoding="utf-8").splitlines()
@@ -82,6 +103,7 @@ def check(path: Path) -> list[tuple[int, str]]:
     # parent containers, and meta-model classes. A heading carrying one of
     # these names stands for that entity, so it is an identifier.
     declared = declared_names(lines)
+    is_glossary = "glossary" in path.as_posix()
     violations: list[tuple[int, str]] = []
     in_fence = False
     for lineno, line in enumerate(lines, 1):
@@ -92,6 +114,8 @@ def check(path: Path) -> list[tuple[int, str]]:
             continue
         m = HEADING_RE.match(line)
         if not m:
+            continue
+        if is_glossary and is_glossary_term(line):
             continue
         title = heading_title(m.group(2))
         if not title:
@@ -134,6 +158,10 @@ def iter_site(corpus: Path, allow: list[str]):
         if rel in ("STANDARD.md", "TODO.md", "glossary.md", "api_reference.md"):
             continue
         if rel.startswith("sync-todo/"):
+            continue
+        # tr_glossary is a guide/topic article (STANDARD.md §7 exempt): its
+        # ch.4 `### 4.x. <Term>` headings are term names that stay verbatim.
+        if rel.startswith("foundation/general/tr_glossary/"):
             continue
         if path.name != "index.md":
             continue

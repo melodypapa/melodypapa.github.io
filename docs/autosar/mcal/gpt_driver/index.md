@@ -192,7 +192,7 @@ release: R23-11
 
 ![Figure7-5.png](Figure7-5.png)
 
-### 6.1. GPT Predef Timer
+### 6.1. GPT 预定义定时器（GPT Predef Timer）
 
 除了可以用个别属性配置个别定时器通道之外，还定义了一些**GPT Predef Timer**。为「**GPT**定时器通道」规定的**API**不能用于**GPT Predef Timer**。
 

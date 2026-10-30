@@ -150,15 +150,15 @@ LIN内部硬件单元的硬件取决于系统时钟（**system clock**）、预�
 
 LIN驱动模块不会在它的初始化函数中负责配置时钟、预分频器和PLL的寄存器（例如打开/关闭PLL）。MCU模块必须做到这一点。
 
-### 5.2. Port
+### 5.2. Port Driver模块
 
 端口（**Port**）驱动程序用于配置LIN驱动程序所需的输入、输出的端口引脚。因此在使用LIN函数之前，必须先初始化Port驱动程序。否则LIN驱动函数将表现出未定义的行为。
 
-### 5.3. DET（**Default Error Tracer**）
+### 5.3. DET（默认错误跟踪器）
 
 在开发模式下，Lin模块通过模块**DET**的**Det_ReportError**函数报告开发错误。
 
-### 5.4. DEM（**Diagnostic Event Manager**）
+### 5.4. DEM（诊断事件管理器）
 
 Lin模块向诊断事件管理器（**DEM**）报告生产错误。
 

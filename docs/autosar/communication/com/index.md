@@ -203,7 +203,7 @@ AUTOSAR COM模块基于[3]。尽管如此，[3]的某些特性未被包含，某
 
 ![AUTOSAR COM module's context view](Figure5-1.png)
 
-### 5.1. PDU Router
+### 5.1. PDU 路由器
 
 AUTOSAR COM模块使用PDU路由器两组上层模块API的并集，即使用TP的上层模块API和不使用TP的上层模块API。这是必要的，因为AUTOSAR COM模块或者经由简单L-PDU不分段地传输I-PDU，或者经由TP分段传输I-PDU。
 
@@ -216,9 +216,9 @@ AUTOSAR COM模块使用PDU路由器两组上层模块API的并集，即使用TP�
 
 第[6.5](#65-大数据类型)节和第[8.1](#81-autosar-com模块与pdu路由器之间的接口)节包含与PDU路由器接口的详细描述。更多信息见[6]。
 
-### 5.2. Com Users
+### 5.2. Com模块用户
 
-#### 5.2.1. Runtime Environment (RTE)
+#### 5.2.1. 运行时环境（RTE）
 
 RTE使用AUTOSAR COM模块的能力来发送和接收信号。在AUTOSAR中，RTE是AUTOSAR COM模块之上的更高层。更多信息见[7]。
 
