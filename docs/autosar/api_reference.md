@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **57** 份已有站内文章）。
+共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **66** 份已有站内文章）。
 
 ## A
 
@@ -889,103 +889,103 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
 
 **CanTSyn_ConfigType**
-> 类型 · 未翻译 · SWS_TimeSyncOverCAN · R23-11
+> 类型 · [AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md) · SWS_TimeSyncOverCAN · R23-11
 
 **CanTSyn_GetVersionInfo**
-> 函数 · 未翻译 · SWS_TimeSyncOverCAN · R23-11
+> 函数 · [AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md) · SWS_TimeSyncOverCAN · R23-11
 
 **CanTSyn_Init**
-> 函数 · 未翻译 · SWS_TimeSyncOverCAN · R23-11
+> 函数 · [AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md) · SWS_TimeSyncOverCAN · R23-11
 
 **CanTSyn_SetTransmissionMode**
-> 函数 · 未翻译 · SWS_TimeSyncOverCAN · R23-11
+> 函数 · [AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md) · SWS_TimeSyncOverCAN · R23-11
 
 **CanTSyn_TransmissionModeType**
-> 类型 · 未翻译 · SWS_TimeSyncOverCAN · R23-11
+> 类型 · [AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md) · SWS_TimeSyncOverCAN · R23-11
 
 **CanXL_EnableEgressTimeStamp**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetControllerMode**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetCounterValues**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetCurrentTime**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetCurrentTimeTuple**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetEgressTimeStamp**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetIngressTimeStamp**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetPhysAddr**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetRxStats**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetTxErrorCounterValues**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_GetTxStats**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_HwType**
-> 类型 · 未翻译 · SWS_CANXLDriver · R23-11
+> 类型 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_Params**
-> 类型 · 未翻译 · SWS_CANXLDriver · R23-11
+> 类型 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_PduType**
-> 类型 · 未翻译 · SWS_CANXLDriver · R23-11
+> 类型 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_ProvideTxBuffer**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_Receive**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_SetControllerMode**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_SetPhysAddr**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_Transmit**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_TxConfirmation**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_UpdatePhysAddrFilter**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXL_Write**
-> 函数 · 未翻译 · SWS_CANXLDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md) · SWS_CANXLDriver · R23-11
 
 **CanXLTrcv_CheckWakeup**
-> 函数 · 未翻译 · SWS_CANXLTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Transceiver Driver（CAN XL 收发器驱动程序）](communication/canxl_transceiver_driver/index.md) · SWS_CANXLTransceiverDriver · R23-11
 
 **CanXLTrcv_GetLinkState**
-> 函数 · 未翻译 · SWS_CANXLTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Transceiver Driver（CAN XL 收发器驱动程序）](communication/canxl_transceiver_driver/index.md) · SWS_CANXLTransceiverDriver · R23-11
 
 **CanXLTrcv_GetTransceiverMode**
-> 函数 · 未翻译 · SWS_CANXLTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Transceiver Driver（CAN XL 收发器驱动程序）](communication/canxl_transceiver_driver/index.md) · SWS_CANXLTransceiverDriver · R23-11
 
 **CanXLTrcv_ReportErrorState**
-> 函数 · 未翻译 · SWS_CANXLTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Transceiver Driver（CAN XL 收发器驱动程序）](communication/canxl_transceiver_driver/index.md) · SWS_CANXLTransceiverDriver · R23-11
 
 **CanXLTrcv_SetTransceiverMode**
-> 函数 · 未翻译 · SWS_CANXLTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Transceiver Driver（CAN XL 收发器驱动程序）](communication/canxl_transceiver_driver/index.md) · SWS_CANXLTransceiverDriver · R23-11
 
 **CanXLTrcv_TransceiverLinkStateRequest**
-> 函数 · 未翻译 · SWS_CANXLTransceiverDriver · R23-11
+> 函数 · [AUTOSAR CAN XL Transceiver Driver（CAN XL 收发器驱动程序）](communication/canxl_transceiver_driver/index.md) · SWS_CANXLTransceiverDriver · R23-11
 
 **CbkHandleIdType**
 > 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
@@ -3476,145 +3476,145 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
 **EthTrcv_BaudRateType**
-> 类型 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_CheckWakeup**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_ConfigType**
-> 类型 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_DuplexModeType**
-> 类型 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_EthSwitchMacSecAddTxSa**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_EthSwitchMacSecUpdateSecY**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetBaudRate**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetBusWuReason**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetCableDiagnosticsResult**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetDuplexMode**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetLinkState**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetMacMethod**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetPhyIdentifier**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetPhySignalQuality**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetTransceiverMode**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_GetVersionInfo**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_Init**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_LinkStateType**
-> 类型 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacMethodType**
-> 类型 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecAddRxSa**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecAddTxSa**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecDeleteRxSa**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecDeleteTxSa**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecGetMacSecStats**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecGetTxSaNextPn**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecInitRxSc**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecResetRxSc**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecSetControlledPortEnabled**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecUpdateRxSa**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecUpdateSecY**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_MacSecUpdateTxSa**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_SetPhyLoopbackMode**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_SetPhyTestMode**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_SetPhyTxMode**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_SetTransceiverMode**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_StartAutoNegotiation**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_StateType**
-> 类型 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_SwitchMacSecAddRxSa**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_SwitchMacSecGetMacSecStats**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTrcv_TransceiverLinkStateRequest**
-> 函数 · 未翻译 · SWS_EthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md) · SWS_EthernetTransceiverDriver · R23-11
 
 **EthTSyn_ConfigType**
-> 类型 · 未翻译 · SWS_TimeSyncOverEthernet · R23-11
+> 类型 · [AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](globaltime/eth_tsyn/index.md) · SWS_TimeSyncOverEthernet · R23-11
 
 **EthTSyn_GetProtocolParam**
-> 函数 · 未翻译 · SWS_TimeSyncOverEthernet · R23-11
+> 函数 · [AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](globaltime/eth_tsyn/index.md) · SWS_TimeSyncOverEthernet · R23-11
 
 **EthTSyn_GetVersionInfo**
-> 函数 · 未翻译 · SWS_TimeSyncOverEthernet · R23-11
+> 函数 · [AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](globaltime/eth_tsyn/index.md) · SWS_TimeSyncOverEthernet · R23-11
 
 **EthTSyn_Init**
-> 函数 · 未翻译 · SWS_TimeSyncOverEthernet · R23-11
+> 函数 · [AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](globaltime/eth_tsyn/index.md) · SWS_TimeSyncOverEthernet · R23-11
 
 **EthTSyn_SetProtocolParam**
-> 函数 · 未翻译 · SWS_TimeSyncOverEthernet · R23-11
+> 函数 · [AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](globaltime/eth_tsyn/index.md) · SWS_TimeSyncOverEthernet · R23-11
 
 **EthTSyn_SetTransmissionMode**
-> 函数 · 未翻译 · SWS_TimeSyncOverEthernet · R23-11
+> 函数 · [AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](globaltime/eth_tsyn/index.md) · SWS_TimeSyncOverEthernet · R23-11
 
 **EthTSyn_TransmissionModeType**
-> 类型 · 未翻译 · SWS_TimeSyncOverEthernet · R23-11
+> 类型 · [AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](globaltime/eth_tsyn/index.md) · SWS_TimeSyncOverEthernet · R23-11
 
 **Exponential**
 > 函数 · 未翻译 · SWS_EFXLibrary · R23-11
@@ -3787,133 +3787,133 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · 未翻译 · SWS_FlashTest · R23-11
 
 **Fr_AbortCommunication**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_AckAbsoluteTimerIRQ**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_AllowColdstart**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_AllSlots**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_CancelAbsoluteTimer**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_CancelTxLPdu**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_ChannelType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_CheckTxLPduStatus**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_ConfigType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_ControllerInit**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_DisableAbsoluteTimerIRQ**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_DisableLPdu**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_EnableAbsoluteTimerIRQ**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_ErrorModeType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetAbsoluteTimerIRQStatus**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetChannelStatus**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetClockCorrection**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetGlobalTime**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetNmVector**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetNumOfStartupFrames**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetPOCStatus**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetSyncFrameList**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetVersionInfo**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_GetWakeupRxStatus**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_HaltCommunication**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_Init**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_POCStateType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_POCStatusType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_PrepareLPdu**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_ReadCCConfig**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_ReceiveRxLPdu**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_ReconfigLPdu**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_RxLPduStatusType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_SendWUP**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_SetAbsoluteTimer**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_SetWakeupChannel**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_SlotAssignmentType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_SlotModeType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_StartCommunication**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_StartupStateType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_TransmitTxLPdu**
-> 函数 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_TxLPduStatusType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **Fr_WakeupStatusType**
-> 类型 · 未翻译 · SWS_FlexRayDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **FrArTp_CancelReceive**
 > 函数 · 未翻译 · SWS_FlexRayARTransportLayer · R23-11
@@ -6049,124 +6049,124 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **StbM_BusGetCurrentTime**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_BusSetGlobalTime**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_CanSetMasterTimingData**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_CanSetSlaveTimingData**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_CloneTimeBase**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_ConfigType**
-> 类型 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 类型 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_EthSetMasterTimingData**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_EthSetPdelayInitiatorData**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_EthSetPdelayResponderData**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_EthSetSlaveTimingData**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_FrSetMasterTimingData**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_GetBusProtocolParam**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_GetCurrentSafeTime**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_GetCurrentTime**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_GetCurrentTimeExtended**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_GetCurrentVirtualLocalTime**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_GetFallbackVirtualLocalTime**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_GetMasterConfig**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_GetOffset**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_GetOffsetTimeRecordHead**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_GetRateDeviation**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_GetRxFreshness**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_GetSyncTimeRecordHead**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_GetTimeBaseStatus**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_GetTimeBaseUpdateCounter**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_GetTimeLeap**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_GetTxFreshness**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_GetTxFreshnessTruncData**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_GetVersionInfo**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_Init**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_MeasurementType**
-> 类型 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 类型 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_SetBusProtocolParam**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_SetGlobalTime**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_SetOffset**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_SetRateCorrection**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_SetUserData**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_SPduTxConfirmation**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_StartTimer**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_TriggerTimeTransmission**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **StbM_UpdateGlobalTime**
-> 函数 · 未翻译 · SWS_SynchronizedTimeBaseManager · R23-11
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **Std_ExtractProtocolHeaderFieldsType**
 > 类型 · [AUTOSAR Standard Types（标准类型）](general/standard_types/index.md) · SWS_StandardTypes · R23-11
@@ -6813,124 +6813,124 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md) · SWS_WatchdogManager · R23-11
 
 **WEth_BufWRxParamIdType**
-> 类型 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_BufWTxParamIdType**
-> 类型 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_ConfigType**
-> 类型 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_GetBufWRxParams**
-> 函数 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_GetBufWTxParams**
-> 函数 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_GetControllerMode**
-> 函数 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_GetPhysAddr**
-> 函数 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_GetVersionInfo**
-> 函数 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_GetWEtherStats32**
-> 函数 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_GetWEtherStats64**
-> 函数 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_Init**
-> 函数 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_ProvideTxBuffer**
-> 函数 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_ReadTrcvRegs**
-> 函数 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_Receive**
-> 函数 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_SetBufWTxParams**
-> 函数 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_SetControllerMode**
-> 函数 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_SetPhysAddr**
-> 函数 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_Transmit**
-> 函数 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_TriggerPriorityQueueTransmit**
-> 函数 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_TxConfirmation**
-> 函数 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_UpdatePhysAddrFilter**
-> 函数 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEth_WriteTrcvRegs**
-> 函数 · 未翻译 · SWS_WirelessEthernetDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md) · SWS_WirelessEthernetDriver · R23-11
 
 **WEthTrcv_BandwidthType**
-> 类型 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_ConfigType**
-> 类型 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_GetChanRxParamIdType**
-> 类型 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_GetChanRxParams**
-> 函数 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_GetLinkState**
-> 函数 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_GetTransceiverMode**
-> 函数 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_GetVersionInfo**
-> 函数 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_Init**
-> 函数 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_RadioModeType**
-> 类型 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_RssiType**
-> 类型 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_SetChanRxParamIdType**
-> 类型 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_SetChanRxParams**
-> 函数 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_SetChanTxParamIdType**
-> 类型 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_SetChanTxParams**
-> 函数 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_SetRadioParamIdType**
-> 类型 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_SetRadioParams**
-> 函数 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_SetTransceiverMode**
-> 函数 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 函数 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 **WEthTrcv_TxPwrLvlType**
-> 类型 · 未翻译 · SWS_WirelessEthernetTransceiverDriver · R23-11
+> 类型 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
 
 ## X
 

@@ -10,6 +10,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## A
 
+**absolute timer（绝对定时器）**
+> 绝对定时器被设置为 FlexRay 集群的一个绝对全局时间并由其触发。FlexRay 全局时间由一个循环和一个宏节拍偏移量组成。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
+**AIFS**
+> 仲裁帧间间隔（**Arbitration Inter Frame Space**）。
+> 来源：[AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)（SWS_WirelessEthernetTransceiverDriver · R23-11）
 **A2L**
 > ASAM 2MC 语言文件的文件扩展名（**File Extension for an ASAM 2MC Language File**）。
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
@@ -194,6 +201,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](globaltime/eth_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverEthernet · R23-11）
 ## B
 
+**buffer（缓冲区）**
+> 在 Fr SWS 的上下文中，缓冲区描述一个硬件发送/接收资源，它是 FlexRay 控制器的一部分，被映射到一个 FlexRay 槽、信道、循环用于发送或接收。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
 **ATWS**
 > 防盗警告系统（**Anti-Theft Warning System**）。可借助光学与声学信号警示未授权进入尝试、并可防止发动机被起动的防盗系统。
 > 来源：[Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](application_interfaces/body_and_comfort/index.md)（AUTOSAR_CP_EXP_AIBodyAndComfort · R23-11）
@@ -287,6 +297,33 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Utilization of Crypto Services（加密服务使用指南）](crypto/utilization_of_crypto_services/index.md)（AUTOSAR_CP_EXP_UtilizationOfCryptoServices · R23-11）
 ## C
 
+**cluster（集群）**
+> 多个相互连接的节点构成的通信系统。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
+**CC**
+> 通信控制器（**Communication Controller**）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
+**CHI**
+> 控制器主机接口（**Controller Host Interface**）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
+**CBR**
+> 信道忙闲比（**Channel Busy Ratio**）。
+> 来源：[AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)（SWS_WirelessEthernetTransceiverDriver · R23-11）
+
+**CIT**
+> 信道空闲时间（**Channel Idle Time**）。
+> 来源：[AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)（SWS_WirelessEthernetTransceiverDriver · R23-11）
+
+**CW**
+> 竞争窗口（**Contention Window**）。
+> 来源：[AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)（SWS_WirelessEthernetTransceiverDriver · R23-11）
+
+**DP**
+> DCC 配置（**DCC Profile**）。
+> 来源：[AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)（SWS_WirelessEthernetTransceiverDriver · R23-11）
 **C/S**
 > 客户端/服务器（**Client/Server**）
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
@@ -605,6 +642,25 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
 ## E
 
+**EC**
+> 以太网控制器（**Ethernet controller**）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
+
+**ET**
+> 以太网收发器（**Ethernet transceiver**）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
+
+**Eth**
+> Ethernet Controller Driver（**AUTOSAR BSW** 模块）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
+
+**EthIf**
+> Ethernet Interface（**AUTOSAR BSW** 模块）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
+
+**EthTrcv**
+> Ethernet Transceiver Driver（**AUTOSAR BSW** 模块）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
 **e.g.**
 > （拉丁语）exempli gratia =（英语）for example，即「例如」。
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes · R23-11）
@@ -752,6 +808,25 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes · R23-11）
 ## F
 
+**FIFO**
+> 先进先出缓冲区（**First In First Out buffer**）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
+**Fr**
+> AUTOSAR 模块：FlexRay 驱动程序（**FlexRay Driver**）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
+**FrTp**
+> AUTOSAR 模块：FlexRay 传输协议（**FlexRay Transport Protocol**）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
+**FrTrcv**
+> AUTOSAR 模块：FlexRay 收发器驱动程序（**FlexRay Transceiver Driver**）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
+**FCS**
+> 帧校验序列（**Frame Check Sequence**）。
+> 来源：[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver · R23-11）
 **Error**
 > 错误。系统中的错误（软）状态，即该状态不同于若故障不存在时系统应有的状态；传播越过系统屏障即转变为失效（failure）。
 > 来源：[Application Level Error Handling（应用层错误处理）](general/application_level_error_handling/index.md)（AUTOSAR_CP_EXP_ApplicationLevelErrorHandling · R23-11）
@@ -833,6 +908,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **FrIf**
 > FlexRay Interface —— FlexRay 接口。
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
 
 **FSC**
 > 功能安全概念（**Functional Safety Concept**）
@@ -1053,6 +1129,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 中断服务程序（**Interrupt Service Routine**）
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction · R23-11）
 > 来源：[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping · R23-11）
+> 来源：[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver · R23-11）
 
 **IUMPR**
 > 在使用中的监控性能比（**In-Use-Monitor Performance Ratio**）。
@@ -1100,6 +1177,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager · R23-11）
 
 ## L
+
+**LPdu**
+> 数据链路层协议数据单元（**Datalink layer Protocol Datagram Unit**）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
 
 **&lt;Lo&gt;**
 > 下层通信接口模块。
@@ -1191,6 +1272,25 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Safety Use Case（安全用例）](safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase · R23-11）
 ## M
 
+**Macrotick**
+> 宏节拍——FlexRay 集群全局同步时间的最小单位。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
+**Master**
+> 主。分布式 BSW 模块中协调卫星请求、并可过滤或监控进入的卫星请求的部分。
+> 来源：[BSW Distribution Guide（BSW 分布指南）](general/bsw_distribution_guide/index.md)（AUTOSAR_CP_EXP_BSWDistributionGuide · R23-11）
+**MCG**
+> 模块配置生成器（**Module Configuration Generator**）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
+> 来源：[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver · R23-11）
+
+**MII**
+> 媒体独立接口（**Media Independent Interface**，由以太网控制器提供的用于访问以太网收发器的标准化接口，参见 IEEE 802.3-2006）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
+
+**MSTP**
+> Message Type —— 消息类型。
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace · R23-11）
 **&lt;Ma&gt;**
 > 模块缩写（**Module abbreviation**）
 > 来源：[AUTOSAR BSW General（基础软件模块通用规范）](general/bsw_general/index.md)（SWS_BSWGeneral · R23-11）
@@ -1342,6 +1442,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures · R23-11）
 ## N
 
+**NIT**
+> FlexRay 网络空闲时间（**FlexRay Network Idle Time**）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
 **N-PDU**
 > 网络层 **PDU**（**Network Layer PDU**）。在 **AUTOSAR** 中，网络层等价于传输协议。
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes · R23-11）
@@ -1390,6 +1494,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 如果需要在 Dem_Init 和 Dem_Shutdown 之间触发数据的存储，**Dem** 模块应使用 **NVRAM** 管理器的 **API** NvM_WriteBlock。此外，如果请求已被接受，**Dem** 模块应等待 NvM_WriteBlock 的肯定响应。
 > 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
 ## O
+
+**OA TC10**
+> Open Alliance TC10（参见 OPEN Sleep/Wake-up Specification for Automotive Ethernet）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
 
 **OBD**
 > 车载诊断（**On-board Diagnostics**）。
@@ -1494,6 +1602,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 溢出秒值（**Overflow Seconds** value，**FUP** 报文中的字段）。
 > 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN · R23-11）
 ## P
+
+**POC**
+> 协议运行控制（**Protocol Operation Control**，详情参见 ISO 17458-1）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
+**POCState**
+> **CC** 内部的 **POC** 实际状态。该状态在某些情况下可能与 vPOC!State 不同，例如在 FREEZE 命令调用之后（详情参见 ISO 17458-1）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
+
+**P2P**
+> 点对点（**Point-to-Point**）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
+
+**PLCA**
+> 物理层冲突避免（**Physical Layer Collision Avoidance**）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
 
 **P-Code**
 > 动力总成代码（**Power train code**）
@@ -1656,6 +1780,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 「硬件资源」是 **CoreTest** 驱动程序用户可以选择的最小单元（实例）。它可以在一个或多个原子序列中被测试。它是执行特定功能（例如 **IRQ** 控制器）的内核内部单元。
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest · R23-11）
 
+**retransmit counter**
+> 部分 **CAN XL** 控制器提供的一项特性：当 **ACK** 槽未在总线上置位时，允许将一个 **CAN** 帧连续多次发送。该计数器给出了最大发送次数。
+> 来源：[AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md)（SWS_CANXLDriver · R23-11）
 **RKE**
 > 遥控无钥匙进入（**Remote Keyless Entry**）。设计用于远程锁定或解锁汽车进入的系统；单向广播无线电波，实现加密与滚动码算法。
 > 来源：[Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](application_interfaces/body_and_comfort/index.md)（AUTOSAR_CP_EXP_AIBodyAndComfort · R23-11）
@@ -1701,6 +1828,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 时间元组 [TG_Rx, TV_Rx]，在跟随报文进入时导出，并由 &lt;Bus&gt;TSyn 模块通过 StbM_BusSetGlobalTime 交给 **StbM**。
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager · R23-11）
 ## S
+
+**Synchronized（同步）**
+> 只要 ((!vPOC!Freeze) && (vPOC!State == NORMAL_ACTIVE) || (vPOC!State == NORMAL_PASSIVE)) 成立，就认为 FlexRay CC 与其所连接的 FlexRay 集群同步。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
 
 **&lt;SrcLo&gt;**
 > 作为 L-SDU 源的下层通信接口模块。SrcLo 始终只有一个。
@@ -1749,6 +1880,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Layered Software Architecture（分层软件架构）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture · R23-11）
 > 来源：[VFB（虚拟功能总线）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB · R23-11）
 > 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter · R23-11）
+
+**SDU type**
+> 服务数据单元类型（**service data unit type**）。
+> 来源：[AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md)（SWS_CANXLDriver · R23-11）
 
 **SE**
 > 被监督实体（**Supervised Entity**）
@@ -1957,6 +2092,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager · R23-11）
 ## T
 
+**TO**
+> 发送机会（**Transmit Opportunity**）。
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver · R23-11）
+
 **Target time**
 > 目标时间：到达该值时应有某事发生。其行为取决于配置和已启用的功能。
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver · R23-11）
@@ -2099,6 +2238,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
 ## V
 
+**vPOC**
+> **CC** 在 **CHI** 处提供给主机的数据结构，包含 **CC** 的实际 **POC** 状态（详情参见 ISO 17458-1）。
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver · R23-11）
 **Variation Point**
 > 变体点。设计中在 2 个或更多变体之间给出选择的位置；必须做出选择的时间称为最晚绑定时间。
 > 来源：[VFB（虚拟功能总线）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB · R23-11）
@@ -2164,6 +2306,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR 诊断事件管理器（Dem）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager · R23-11）
 ## W
 
+**WEth**
+> Wireless Ethernet Driver（**AUTOSAR BSW** 模块）。
+> 来源：[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver · R23-11）
+
+**WEthTrcv**
+> Wireless Ethernet Transceiver（**AUTOSAR BSW** 模块）。
+> 来源：[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver · R23-11）
+
 **WCET**
 > 最坏情况执行时间（**Worst case execution time**）
 > 来源：[AUTOSAR BSW General（基础软件模块通用规范）](general/bsw_general/index.md)（SWS_BSWGeneral · R23-11）
@@ -2215,6 +2365,10 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **XCP**
 > Universal Calibration Protocol —— 通用校准协议。
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP · R23-11）
+
+**XLFF**
+> XL 帧格式（**XL Frame Format**）。
+> 来源：[AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md)（SWS_CANXLDriver · R23-11）
 
 **XML**
 > 可扩展标记语言（**eXtensible Markup Language**）
