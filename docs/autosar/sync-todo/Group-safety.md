@@ -7,9 +7,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 
 ## Queue
 
-- [x] wdgm (SWS_WatchdogManager · R23-11 markdown · ❌ new article, short name WdgM)
+- [ ] wdgm (SWS_WatchdogManager · R23-11 markdown · ❌ new article, short name WdgM)
   - Note: the first run also creates the `safety/` landing page + nav registration
-  - Note: Step 1 done 2026-10-26 — source `Safety/AUTOSAR_CP_SWS_WatchdogManager.md` (R23-11) 3,877 lines, 168 requirement blocks, 35 content diagrams (54 unique hashes / 3 recurring deco strips dropped), ch.10 = 21 containers / 46 parameter tables, ch.2 = 18 acronym rows + 24 term rows. Article = full Type A translation (new) + new `safety/` section landing page + nav
+  - Note: Step 1 done 2026-10-26 — source `Safety/AUTOSAR_CP_SWS_WatchdogManager.md` (R23-11) 3,877 lines, 168 requirement blocks, 35 content diagrams (54 unique hashes / 3 recurring deco strips dropped), ch.10 = 20 containers + Configuration Variants / 46 parameter tables, ch.2 = 18 acronym rows + 24 term rows. Article = full Type A translation (new) + new `safety/` section landing page + nav
   - Note: source→article chapter map — src 1→§1, 2→§2, 3→§3, 4→§4, 5→§5, **6 (Requirements Tracing) DROPPED**, 7→§6 功能规格, 8→§7 API规范, 9→§8 时序图, 10→§9 配置规范; src annex "Example Implementation of Alive Supervision Algorithm" → appendix (see decision); src "Not applicable requirements" → dropped (the second droppable item)
   - Note: no Known Limitations chapter in the source → no `## 已知限制`; source ch.4.1 `{DRAFT}` markers dropped; source ch.7/8/10 requirement IDs dropped, requirement text kept as paragraphs
   - Note: §2 = 42 rows (18 acronyms + 24 terms) in source order, flat bold-term + blockquote (GPT-driver precedent for a source ch.2 with an acronym table AND a terms table); 6 acronyms already in glossary.md (BSW, DEM, DET, HW, MCU, OS) → 来源 line appended, 36 new entries added
@@ -23,19 +23,41 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: `| SWS 条目 |` cells filled with the ECUC id (MCU/GPT/CoreTest/EcuM precedent, 2026-10-26 batch) rather than left empty (ICU/DIO/OCU/PORT/PWM/OS) — decided by the most recent site practice; recorded here so the next run is consistent
   - Note: Phase A check 9 census (recorded, not silent) — applied class: 176 identifier-mention lines (functions 159 / error codes 30 / type 1) across §4·§6·§7·§9; `--apply` inserted the intra-article links and the `[n]` citation links (4 citations + 9 registry anchors, applied with the citation-linking rule added by the parallel RTE session) and is idempotent (2nd run = 0 lines); report-only: 0 §7.2 constant bullets, 35 参见/参考/详见 lines, prose `[n]` hop-2 resolutions ([1] IEC 61508 + [2] ISO 26262 EXTERNAL, [3] SWS_BSWGeneral EXTERNAL, [4] EcuM SITE, [8] SWS_MCUDriver EXTERNAL, [9] SWS_RTE EXTERNAL), cross-article module mentions (Mcu ×14 no article, DEM ×6 SITE, Det ×2 no article, EcuM ×1 SITE, BswM ×1 SITE) — the cross-article and hop-2 classes stay unlinked (user decision, queued in TODO.md's Backlog)
   - Note: **2026-10-26 delivery** — committed on `feature/watchdog-manager` (worktree off origin/master 3f59e79; commits **fdbffbb** + **240e771**) → **issue #117**, **PR #118**. Working-tree note: a parallel session merged its RTE work (PR #116) mid-run and reset `mkdocs.yml`; the safety nav entry was re-applied on top of the merged master before the commit
+  - Note: reopen 2026-10-30 — user requested corrections after an R23-11 PDF fidelity audit; scope remains the existing Watchdog Manager article.
+  - Note: R23-11 PDF p.128 repeats `WdgMMinMargin` for the upper formula bound and for ECUC_WdgM_00313; keep the R22-11 p.162 Max/Min formula, which agrees with the parameter definitions, and record this as an R23 source discrepancy.
+  - Note: audit found the module-level 9.2.2 `SWS 条目` cell empty although R23-11 PDF p.95 specifies ECUC_WdgM_00001; the 2026-10-26 filled-cell decision applies. Service IDs for the 10 API functions and scheduled WdgM_MainFunction are also being restored per the new API fidelity rule.
+  - Note: R23-11 PDF link-count deltas (source → article mentions): WdgM_CheckpointReached 46→34; GetFirstExpiredSEID 10→6; GetLocalStatus 7→5; GetVersionInfo 6→5; GetMode 7→6.
+  - Note: The census groups parameter destinations under API targets: GetFirstExpiredSEID has four SEID links; GetLocalStatus one SEID; GetVersionInfo one VersionInfo; CheckpointReached six SEID and three CheckpointID links. Defining headings also count in the PDF, not article prose.
+  - Note: The remaining two-count CheckpointReached difference is consistent with duplicated links in the repeated API table on PDF p.48; its translated requirement paragraphs are present, with no missing API entry found.
+  - Note: PDF census rerun — citation registry matches; 22 section references resolve; `Figure7-3.png` exists; SwCluC `ByIndex`/error-label ABSENT targets are conversion-name artifacts, and the six parameterized interface rows are present.
+  - Note: Check 8 — `https://iec.ch/` returned HTTP 202; the source URL is retained.
+  - Note: The user confirmed in a browser that `https://www.iso.org` loads the official ISO site after automated requests returned 403; the source URL is retained (2026-10-30).
+  - Note: Phase B audit 2026-10-30 — source/article chapter map and intentional drops verified; §2 has 42 ordered entries.
+  - Note: Configuration names are 20 containers / 46 parameters in source order; all 35 local figure references exist.
+  - Note: API names, signatures, and requirement paragraphs checked; Service IDs and ECUC_WdgM_00001 restored.
+  - Note: PDF census artifacts resolved — SwCluC names map to parameterized rows, Figure 7.3 is embedded, and error targets are PDF metadata labels.
+  - Note: Raw WdgM API mention deltas include headings, parameter links, and duplicate table annotations; targeted requirement paragraphs are present.
+  - Note: Step 2 audit fixes applied 2026-10-30 — ECUC_WdgM_00001 and 11 Service IDs restored.
+  - Note: R23/R22 formula discrepancy recorded; the semantically consistent R22 Max/Min formula is retained.
   - [x] Step 1 — Source resolution + gap analysis
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate
-  - [x] Step 6 — TODO.md row + commit/PR
-- [x] wdgif (SWS_WatchdogInterface · R23-11 markdown · ❌ new article, short name WdgIf)
+  - Note: Step 5 confirmed by user 2026-10-30 — the audit corrections and proposed TODO updates are approved.
+  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: Step 6 remains open; no commit/PR was requested.
+- [ ] wdgif (SWS_WatchdogInterface · R23-11 markdown · ❌ new article, short name WdgIf)
   - Note: Step 1 done 2026-10-26 — source `Safety/AUTOSAR_CP_SWS_WatchdogInterface.md` (R23-11) 607 lines, 3 functions / 1 type / 21 requirement blocks; content diagrams: 1 (source Figure 10.1 config tree, image hash d0587294 — unique); all other artifact images are recurring deco strips (f5f4bf49 / cad1600 / 31a8ee06 / e61809f4 / 8c27c74a hashes); source ch.1 has no content diagram
   - Note: source→article chapter map — src 1→§1, 2→§2, 3→§3, 4→§4, 5→§5 (5.1/5.1.1/5.1.2 keep source numbering — no dependent-module promotion, source itself uses 5.1), 6 (Requirements Tracing) DROPPED, 7→§6 (7.1→6.1, 7.2→6.2 + 6.2.1–6.2.5), 8→§7 API规范 (8.1→7.1 imported types: Std only; 8.2→7.2 = 1 type WdgIf_ModeType, 8.3→7.3 函数定义 = 3 functions WdgIf_SetMode / WdgIf_SetTriggerCondition / WdgIf_GetVersionInfo + the ch.8 interleaved preceding requirements SWS_WdgIf_00017/18/13/19/20 with 2 implementation-hint code fences; 8.4→7.4 回调通知 none, 8.5→7.5 调度函数 none, 8.6→7.6 期望接口 8.6.1/8.6.2 tables + 8.6.3 none), 9→§8 时序图 (single cross-ref sentence to the watchdog driver spec — no source figures), 10→§9 配置规范 (9.1 How = 参数区分 intro… actually src 10.1 How to read this chapter = pure cross-ref; 10.2→9.2 容器与配置参数 9.2.1 WdgIf / 9.2.2 WdgIfGeneral / 9.2.3 WdgIfDevice, 10.3→9.3 发布信息)
   - Note: no Known Limitations chapter → no `## 已知限制`; src ch.4.1 = "No limitations."; no appendix B in source → no `## B.`; appendix A droppable
   - Note: src ch.2 has NO tables — one prose note ("no local acronyms, all in [2, TR-Glossary]"); article §2 = that note translated (no acronym entries, no glossary additions needed from this document)
-  - Note: ch.10 ECUC ids → `| SWS 条目 | [ECUC_WdgIf_000xx] |` filled cells per watchdog_manager precedent (2026-10-26 decision); WdgIfGeneral/WdgIfDevErrorDetect-style boolean descriptions render per site pattern; collapsed merged-cell tables normalized
+  - Note: ch.10 ECUC ids → `| SWS 条目 | [ECUC_WdgIf_000xx] |` filled cells per watchdog_manager precedent (2026-10-26 decision; 7 ID cells); WdgIfGeneral/WdgIfDevErrorDetect-style boolean descriptions render per site pattern; collapsed merged-cell tables normalized
+  - Note: reopen 2026-10-30 — user requested correction of the PDF-verified §3.2 citation marker and API Service IDs.
+  - Note: R23-11 PDF p.9 has `[3, SWS BSW General]` in both §3.2 sentences; the second `[3]` marker was missing from article line 50. Restore the bracket-visible citation link.
+  - Note: R23-11 PDF API tables give Service IDs WdgIf_SetMode `0x01`, WdgIf_SetTriggerCondition `0x02`, and WdgIf_GetVersionInfo `0x03`; preserve them in each `**说明**` per the updated rule.
   - [x] Step 1 — Source resolution + gap analysis
+  - Note: Step 2 audit fixes applied 2026-10-30 — restored the second §3.2 `[3]` citation link and added Service IDs 0x01/0x02/0x03 to the three API descriptions.
   - [x] Step 2 — In-place translation/completion
   - Note: Step 2 done 2026-10-27 — article `docs/autosar/safety/watchdog_interface/index.md` written + nav entry `"WdgIf"` + safety landing page 文章 row; api_reference.md regenerated (1 type + 3 functions, linked); glossary: no new terms (source ch.2 is a no-local-acronyms note)
   - Note: figure — 1 content diagram copied as `Figure10-1.png` (source Figure 10.1 config tree, hash d0587294, 816×510; the 4 other one-off artifact images are ~345×36 page-deco banners, dropped); source ch.1/§3/§4/§5/§6/§7/§8 have no figures
@@ -44,28 +66,46 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Phase A results (wdgif) — strict build exit 0, 0 WARNINGs (fixed a pre-existing master WARNING: communication/index.md leftover dead link to the removed can_network_management/r21_11 page); heading audit = §1–§9 (+ no B.: source has no appendix B); §2 slice table count 0; check_api_sync.py OK (source 8.3.x = 3 = article 7.3.x); `| SWS 条目 |` cells filled with ECUC ids (watchdog_manager precedent, 67 cells); external-URL audit: none (source has no URLs); link census + `--apply` (citation links added 5, registry anchors added 7 — bracket-visible `[\[n\]](#ref-n)` style current) idempotent on 2nd run (0 lines changed)
   - Note: wdgif link census (recorded, check 9) — identifier mentions 8 lines applied (WDGIF_E_PARAM_DEVICE ×2, WdgIf_ModeType ×2, WdgIf_SetMode ×2, WDGIF_E_PARAM_POINTER ×1, WdgIf_SetTriggerCondition ×1); §7.2 constant bullets 0; 参见/参考/详见 0; [n] resolutions EXTERNAL class: [1] EXP_LayeredSoftwareArchitecture, [3] SWS_BSWGeneral ×5, [4] SRS_BSWGeneral ×1, [7] SWS_WatchdogDriver (target = the wdg row's article, being written in the same batch; cross-article link-up stays queued in TODO.md Backlog); remaining unlinked citations = 6, all 「[n, 文档名]」 compound citations that stay prose per watchdog_manager precedent; cross-article: Det ×2 NO-ARTICLE
   - Note: Step 4 done 2026-10-27 — coverage map verified section-by-section against the source (all src 1–5/7–10 map per the chapter map above; ch.6 tracing + appendix A dropped = compliance; no other source section missing); WdgIf_ModeType table cell-by-cell OK (Kind/3 Range rows verbatim, Description+Available-via folded into 说明 per WdgM house); ch.8 intro requirements 00017/18/13/19/20 1:1 in source order with both implementation-hint fences; 7.6.1/7.6.2 tables row-exact; figure hash re-verified (Figure10-1.png = source d0587294). Corpus-alignment fixes applied: §9.2.1 SWS 条目 cell filled with [ECUC_WdgIf_00033] (source has the id — the row's own filled-cells decision), §2 `[2、TR 术语表]`→`[2, TR 术语表]` (census-visible house form), §6.2.3 瞬时故障→瞬态故障 (site 12:2 majority), §6.2.2–.5 不存在→没有 (site majority), §6.2 intro sentence 2 aligned to WdgM's approved rendering, §9.2 caption-derived invented lead-in sentence dropped (skill: captions never repeated as text). link_candidates --apply: 0 additional links (all applied-class mentions sit in their own defining sections); census recorded in gate evidence
+  - Note: Phase A audit 2026-10-30 — strict build exit 0, 0 WARNINGs; check_api_sync 1 type/3 functions; indexes 0 broken; no external URLs; PDF citation registry MATCH.
+  - Note: R23-11 PDF audit rerun 2026-10-30 — §3.2 source/article citation counts now match (6/6); all 7 ECUC cells match the PDF registry.
+  - Note: PDF link-count flags resolved: WdgIf_SetMode's six links include five DeviceIndex parameter annotations; the “WdgIf development error” target is a PDF label, while both error codes are in §6.2.1.
+  - Note: Phase B audit — source chapters 1–5/7–10 map; ch.6/A omissions are intentional; WdgIf_ModeType ranges and 4 configuration parameters match.
+  - Note: The three Service IDs are present; the WdgIf_SetMode signature is PDF-verified.
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate
   - Note: Step 5 confirmed by user 2026-10-27（same gate as wdg）
-  - [x] Step 6 — TODO.md row + commit/PR
-- [x] wdg (SWS_WatchdogDriver · R23-11 markdown · ❌ new article, short name Wdg)
+  - Note: Audit corrections and the TODO update were confirmed by the user on 2026-10-30.
+  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: Step 6 remains open; no commit/PR was requested.
+- [ ] wdg (SWS_WatchdogDriver · R23-11 markdown · ❌ new article, short name Wdg)
   - Note: Step 1 done 2026-10-27 — source `Safety/AUTOSAR_CP_SWS_WatchdogDriver.md` (R23-11) 1,149 lines, 4 functions / 1 type; content diagrams: Figure 9.1 (image a5c6, 740×498) + Figure 9.2 (image b8152a9, 769×569); the ch.7.4 image slots hold the AUTOSAR logo banner strip (hash a133f680 ×2) — the source's referenced Figure 2 does not exist in either the R23-11 markdown or the R22-11 PDF (checked p.22–24); source ch.1 has no content diagram
   - Note: source→article chapter map — src 1→§1, 2→§2 (5 acronym rows DIP/DET/DEM/SPI/WDG + the unnumbered *Definitions needed for understanding of the concepts* rows Off-/Slow-/Fast-Mode → flat bold-term + blockquote in source order, watchdog_manager 42-row precedent), 3→§3, 4→§4, 5→§5 (5.1/5.1.1–5.1.3 + 5.2 System clock + 5.3 Onboard communication handlers keep source numbering), 6 (Requirements Tracing) DROPPED, 7→§6 (6.1 通用设计规则 / 6.2 外部看门狗驱动 / 6.3 内部看门狗驱动 / 6.4 触发概念以支持窗口看门狗 / 6.5 错误分类 6.5.1–6.5.5), 8→§7 API规范 (8.1→7.1 imported: Dem/Std/WdgIf; 8.2→7.2 = 1 type Wdg_ConfigType; 8.3→7.3 函数定义 = 4 functions Wdg_Init / Wdg_SetMode / Wdg_SetTriggerCondition / Wdg_GetVersionInfo; 8.4→7.4 回调通知 none; 8.5→7.5 调度函数 none; 8.6→7.6 期望接口, optional table Dem_SetEventStatus + Det_ReportError), 9→§8 时序图 (8.1/8.2 with Figure9-1/9-2.png), 10→§9 配置规范 (9.2.1 Wdg faithful source order incl. module table at the end + 9.2.2 WdgSettingsFast which contains WdgExternalConfiguration/WdgSettingsOff/WdgSettingsSlow/WdgSettingsFast tables; 9.3 + 9.3.1 WdgPublishedInformation)
   - Note: appendix B translates as `## B. AUTOSAR 可追溯项变更历史` (EcuM precedent; B.1.1–B.1.3 verbatim ID fences, B.1.4/B.1.6 无, B.1.5 table with translated headings); appendix A dropped
   - Note: gpt/mcu precedent — garbled `| SWS Item |` table of ECUC_Wdg_00131 WdgMaxTimeout (Description truncated to "The maximum") restored from the R22-11 PDF p.38: "The maximum timeout (sec) to which the watchdog trigger condition can be initialized."
   - Note: src 7.4 references "(see Figure 2)" — Figure 2 is absent from the released R22-11 PDF as well; kept as prose （见图 2）, recorded as a source-side dangling reference
+  - Note: reopen 2026-10-30 — user requested fixes from the R23-11 PDF audit.
+  - Note: R23-11 PDF p.23 says Wdg_ConfigType Elements = "Hardware dependent structure" and Type = "-"; correct the table wording and retain the Type row.
+  - Note: R23-11 PDF p.37 specifies module-level ECUC_Wdg_00073; restore the blank module `SWS 条目` cell. Add Service IDs 0x00/0x01/0x03/0x04 to the four API descriptions.
+  - Note: R23-11 PDF pp.32–34 confirms the article's WDGIF_SLOW_MODE range and WdgMaxTimeout range/description; these were lost or garbled in Markdown and are already correctly restored.
+  - Note: Step 2 audit fixes applied 2026-10-30 — corrected Wdg_ConfigType's hardware-dependent element and Type row, filled ECUC_Wdg_00073, and added the four API Service IDs.
   - [x] Step 1 — Source resolution + gap analysis
   - [x] Step 2 — In-place translation/completion
   - Note: Step 2 done 2026-10-27 — article `docs/autosar/safety/watchdog_driver/index.md` written + nav entry `"Wdg"` + safety landing page 文章 row; api_reference.md regenerated (1 type + 4 functions, linked); glossary.md extended: DIP / Fast-Mode / Off-Mode / Slow-Mode / SPI / WDG new entries with 来源 + DEM / DET got their Watchdog Driver 来源 lines
   - [x] Step 3 — Phase A mechanical checks
   - Note: Phase A results (wdg) — strict build exit 0, 0 WARNINGs; heading audit = §1–§9 + `## B.`; §2 slice table count 0; check_api_sync.py OK (source 8.3.x = 4 = article 7.3.x, **说明** = 4); external-URL audit: none; link census + `--apply` (citation links added 9, registry anchors added 6) idempotent on 2nd run (0 lines changed); remaining unlinked = 5, all compound citations per watchdog_manager precedent
   - Note: wdg link census (recorded, check 9) — identifier mentions 40 lines applied (Wdg_SetMode ×11, Wdg_Init ×8, WDG_E_MODE_FAILED ×6, WDG_E_DISABLE_REJECTED ×6, WDG_E_DRIVER_STATE ×3, WDG_E_PARAM_MODE ×3, Wdg_SetTriggerCondition ×3, WDG_E_PARAM_CONFIG ×2, WDG_E_PARAM_TIMEOUT ×2, WDG_E_PARAM_POINTER ×2, Wdg_ConfigType ×2, WDG_E_INIT_FAILED ×1, Wdg_GetVersionInfo ×1); 参见/参考/详见 1 line report-only; cross-article: DEM ×3 SITE (diagnostic_event_manager), Det ×1 NO-ARTICLE
+  - Note: Phase A audit 2026-10-30 — strict build exit 0, 0 WARNINGs, no safety anchor notices; API sync 1 type / 4 functions.
+  - Note: Index/title/API-list checks pass; 22/22 configuration IDs, 2/2 containers, 13/13 parameters; no external URLs.
+  - Note: Phase B audit — R23-11 PDF p.23 confirms the corrected Wdg_ConfigType table; pp.32–34 confirm WdgDefaultMode and WdgMaxTimeout values.
+  - Note: Appendix B item sequence matches after normalizing the source's split ID.
   - [x] Step 4 — Phase B coverage map + fidelity
   - Note: Phase B (wdg) — coverage map verified section-by-section (all src 1–5/7–10 map per the chapter map; ch.6 + appendix A dropped = compliance); Wdg_ConfigType table cell-by-cell per WdgM house (lements merged-cell junk normalized); all ch.8 requirement texts 1:1 in source order (Wdg_Init 8 blocks, Wdg_SetMode 10, Wdg_SetTriggerCondition 5, Wdg_GetVersionInfo 1); 6.5.5 extended-production-error tables follow mcu_driver/watchdog_manager house (N/A → -); appendix B verbatim fences. Editors' notes recorded: §5.1.1 "(for name expansion see SWS_Wdg_00169)" → dropped-ID cross-ref rendered as 「名称扩展见下文」; §5.1.2 "(see SWS_Wdg_00010 and ECUC_Wdg_00148)" → 「见第 6.5.5 章和第 6.5.1 章，以及配置容器 WdgDemEventParameterRefs」
   - [x] Step 5 — User confirmation gate
   - Note: Step 5 confirmed by user 2026-10-27（both wdgif and wdg rows confirmed in one gate; wdgif article additionally carries the parallel session's Step-4 corpus-alignment fixes on disk — verified coherent, build green）
-  - [x] Step 6 — TODO.md row + commit/PR
+  - Note: Audit corrections and the TODO update were confirmed by the user on 2026-10-30.
+  - [ ] Step 6 — TODO.md row + commit/PR
   - Note: commit/PR via branch `feature/watchdog-interface` — see run summary
+  - Note: Step 6 remains open; no commit/PR was requested.
 
 ## Not queued (deliberately skipped)
 - (none)

@@ -1740,3 +1740,171 @@ DcmDspAlternativeDataType.DcmApplicationDataType 工作流的特性是：在导�
 返回 DCM_E_PENDING 应进行重新触发（例如在下一个 **MainFunction** 周期中）。
 
 以等于 DCM_CANCEL 的 **OpStatus** 调用的接口，其返回值应被忽略。
+
+#### 6.6.2. UDS 服务
+
+**诊断请求验证（Diagnostic Request Validation）**：**Dcm** 应按照 **ISO 14229-1** [1] 执行诊断请求验证、负响应码（**NRC**）判定和处理。
+
+**Dcm** 模块应按下表实现 **UDS** 的服务。
+
+**UDS 服务的支持（Support of UDS Services）**：
+
+表7.3：UDS 服务的支持（**Support of UDS Services**）
+
+| SID | 服务 | 子功能 | 支持情况 |
+|---|---|---|---|
+| 0x10 | DiagnosticSessionControl | | 支持 |
+| 0x11 | ECUReset | | 支持 |
+| 0x14 | ClearDiagnosticInformation | | 支持 |
+| 0x19 | ReadDTCInformation | | 支持 |
+| 0x22 | ReadDataByIdentifier | | 支持 |
+| 0x23 | ReadMemoryByAddress | | 支持（callout） |
+| 0x24 | ReadScalingDataByIdentifier | | 支持 |
+| 0x27 | SecurityAccess | | 支持 |
+| 0x28 | CommunicationControl | | 支持 |
+| 0x29 | Authentication | | 支持 |
+| 0x2A | ReadDataByPeriodicIdentifier | | 支持 |
+| 0x2C | DynamicallyDefineDataIdentifier | | 支持 |
+| 0x2E | WriteDataByIdentifier | | 支持 |
+| 0x2F | InputOutputControlByIdentifier | | 支持 |
+| 0x31 | RoutineControl | | 支持 |
+| 0x34 | RequestDownload | | 支持（callout） |
+| 0x35 | RequestUpload | | 支持（callout） |
+| 0x36 | TransferData | | 支持 |
+| 0x37 | RequestTransferExit | | 支持 |
+| 0x38 | RequestFileTransfer | | 支持（callout） |
+| 0x3D | WriteMemoryByAddress | | 支持（callout） |
+| 0x3E | TesterPresent | | 支持 |
+| 0x83 | AccessTimingParameter | | **NRC** "ServiceNotSupported" |
+| 0x84 | SecuredDataTransmission | | **NRC** "ServiceNotSupported" |
+| 0x85 | ControlDTCSetting | On、off | 支持 |
+| 0x86 | ResponseOnEvent | 除 onComparisionOfValues 和 OnTimerInterrupt 之外的所有子功能 | 支持 |
+| 0x87 | LinkControl | | 用户可选 |
+
+##### 6.6.2.1. 使用 DEM 接口的通用行为
+
+默认情况下，与故障内存相关的诊断服务直接在 **Dcm** 内处理。**Dcm** 使用 **Dem** 模块来清除、查询和读取诊断故障码、状态和相关数据。通过 **DSD** 子模块的 callout 处理此类诊断的选项（例如服务 0x19 的 DcmDsdSubServiceFnc）被视为例外用例。
+
+本章描述通用规则，以及 **Dcm** 如何与 **Dem** 交互以完成处理故障内存相关 **UDS** 服务的任务。
+
+**UDS** 定义的 **DTC** 状态可用性掩码由 **Dem** 模块管理，因此不在 **Dcm** 中配置。当需要该掩码时，**Dcm** 使用 Dem_GetDTCStatusAvailabilityMask **API** 读取该信息。
+
+**UDS** 定义的 **DTC** 严重度可用性掩码同样由 **Dem** 管理，因此不在 **Dcm** 中配置。**Dcm** 使用 Dem_GetDTCStatusAvailabilityMask 获取该掩码信息。
+
+为确保读取序列期间事件相关数据的一致性，**Dcm** 模块将在读取操作期间锁定事件相关数据的更新。**Dem** 提供 Dem_DisableDTCRecordUpdate 和 Dem_EnableDTCRecordUpdate 来临时停止更新事件内存。尤其是在使用以下 **Dem API** 时会发生这种情况：
+
+- Dem_SelectExtendedDataRecord()
+- Dem_GetSizeOfExtendedDataRecordSelection()
+- Dem_GetNextExtendedDataRecord()
+- Dem_SelectFreezeFrameData()
+- Dem_GetSizeOfFreezeFrameSelection() 以及
+- Dem_GetNextFreezeFrameData()
+
+**Dem** 中可能耗时的 **API** 调用被设计为异步的，这样调用可以返回，调用者可以在稍后的时间再次调用以获取请求的数据。这些 **API** 将 DEM_PENDING 作为可能的返回值。如果检测到该返回值，**Dcm** 将以相同的参数再次调用。下一次调用的时间是实现特定的，但大多数情况下这会发生在下一个 **Dcm_MainFunction** 中。反复出现 **Dem** 返回 DEM_PENDING 可能导致 **Dcm** 发送 **ResponsePending NRC** 0x78。
+
+##### 6.6.2.2. 服务 0x10 - Diagnostic Session Control
+
+**UDS** 服务 0x10 允许外部诊断仪在服务器中启用不同的诊断会话。诊断会话在服务器中启用一组特定的诊断服务和/或功能。服务请求包含参数：
+
+- diagnosticSessionType
+
+**Dcm** 模块应实现 **UDS** 服务 0x10。
+
+在响应 **UDS** 服务 0x10 时，如果请求的子功能值未在 **ECU** 中配置（配置参数 DcmDspSessionLevel），**DSP** 子模块应触发带有 **NRC** 0x12（**SubFunction not supported**）的负响应。
+
+如果请求的子功能值已配置，则即使请求的会话类型与已运行的会话类型相同，也会处理以下步骤（参见 **ISO14229-1** [1] 第 9.2 节）。
+
+发送确认函数应使用 DslInternal_SetSesCtrlType() 设置新的诊断会话类型，并应设置新的时序参数（P2ServerMax、P2ServerMax*）（参见配置参数 DcmDspSessionP2ServerMax 和 DcmDspSessionP2StarServerMax），并通过以新的诊断会话类型调用 SchM_Switch_&lt;bsnp&gt;_DcmDiagnosticSessionControl() 执行 **ModeDeclarationGroupPrototype** DcmDiagnosticSessionControl 的模式切换。
+
+**DSP** 子模块应在内部管理 **ISO14229-1** [1] 中定义的 dataIdentifier 0xF186（**ActiveDiagnosticSessionDataIdentifier**）的读取访问。
+
+##### 6.6.2.3. 服务 0x11 - ECUReset
+
+**UDS** 服务 **ECUReset**（0x11）允许外部诊断仪请求服务器复位。服务请求包含参数：
+
+- resetType
+
+**Dcm** 模块应实现 **UDS** 服务 **ECUReset**（0x11）。
+
+在接收到子功能不是 enableRapidPowerShutDown（0x04）或 disableRapidPowerShutDown（0x05）的 **UDS** 服务 0x11 请求时，**Dcm** 模块应触发 **ModeDeclarationGroupPrototype** DcmEcuReset 的模式切换，切换到等于接收到的 resetType 的模式。在请求模式切换之后，**Dcm** 应触发正响应消息传输的启动。子功能 hardReset（0x01）到 HARD；子功能 keyOffOnReset（0x02）到 KEYONOFF；子功能 softReset（0x03）到 SOFT。
+
+**注意：** 通过该模式切换，**Dcm** 通知 **BswM** 执行处理该特定复位类型所需的操作。这些操作可以在与所请求复位类型对应的 **BswM** 动作列表中配置。在这里，集成商还可以定义是否最终执行 **ECU** 复位。
+
+在正响应的发送确认（调用 Dcm_TpTxConfirmation）时，**Dcm** 模块应触发 **ModeDeclarationGroupPrototype** DcmEcuReset 到模式 EXECUTE 的模式切换（通过 SchM_Switch_&lt;bsnp&gt;_DcmEcuReset(RTE_MODE_DcmEcuReset_EXECUTE)）。
+
+**注意：** 通过该模式切换，**Dcm** 请求 **BswM** 按照已配置的动作列表对复位类型执行最终处理。
+
+在接收到子功能为 enableRapidPowerShutdown（0x04）或 disableRapidPowerShutdown（0x05）的 **UDS** 服务 0x11 请求时，**Dcm** 模块应触发 **ModeDeclarationGroupPrototype** DcmRapidPowerShutDown 的模式切换：子功能 enableRapidPowerShutDown（0x04）到 ENABLE_RAPIDPOWERSHUTDOWN；子功能 disableRapidPowerShutDown（0x05）到 DISABLE_RAPIDPOWERSHUTDOWN。
+
+**注意：** 如果启用了 **EnableRapidPowerShutdown**，**ECU** 应缩短其掉电时间。
+
+如果参数 DcmDspPowerDownTime 存在，则 **Dcm** 应在子服务 enableRapidPowerShutDown 的正响应中将 powerDownTime 设置为 DcmDspPowerDownTime 中设置的值。
+
+在发送 **EcuReset** 的正响应之后（调用 Dcm_TpTxConfirmation），**Dcm** 应在复位处理期间忽略所有后续请求。
+
+**DcmDspEcuResetRow 容器配置（DcmDspEcuResetRow container configuration）**：对于为 **UDS** 服务 **ECUReset**（0x11）配置的、未配置相应 DcmDsdSubServiceFnc 参数的每个 DcmDsdSubService（DcmDspEcuResetId 与 DcmDsdSubServiceId 匹配），应配置一个容器 DcmDspEcuResetRow。
+
+##### 6.6.2.4. 服务 0x14 - Clear Diagnostic Information
+
+**UDS** 服务 **ClearDiagnosticInformation**（0x14）请求 **ECU** 清除错误内存。服务请求包含参数：
+
+- groupOfDTC
+
+**Dcm** 模块应实现 **UDS** 服务 0x14。
+
+在接收到带有参数 groupOfDTC 的 **UDS** 服务 **ClearDiagnosticInformation**（0x14）请求时，**Dcm** 模块应以以下参数值调用 **API** Dem_SelectDTC()：
+
+- ClientId：该 **Dcm** 实例的客户端 **Id**（参见 DcmDemClientRef）
+- DTC：来自服务请求的 groupOfDTC
+- DTCFormat：DEM_DTC_FORMAT_UDS
+- DTCOrigin：DEM_DTC_ORIGIN_PRIMARY_MEMORY
+
+在调用 Dem_SelectDTC() 之后，**Dcm** 应以以下参数值调用 Dem_GetDTCSelectionResultForClearDTC()：
+
+- ClientId：该 **Dcm** 实例的客户端 **Id**（参见 DcmDemClientRef）。
+
+在 Dem_GetDTCSelectionResultForClearDTC() 返回 DEM_WRONG_DTC 的情况下，**Dcm** 应发送 **NRC** 0x31（**RequestOutOfRange**）。
+
+在 Dem_GetDTCSelectionResultForClearDTC() 返回 E_OK 的情况下，**Dcm** 模块应检查应用程序是否允许清除该 **DTC**（根据配置参数 DcmDspClearDTCCheckFnc）。如果不允许，**Dcm** 模块应发送一个 **NRC** 设置为参数“ErrorCode”值的负响应。
+
+在应用程序允许清除该 **DTC** 的情况下，**Dcm** 模块应检查该 **DTC** 是否可以在当前模式条件下被清除（根据配置参数 DcmDspClearDTCModeRuleRef）。如果不可以，**Dcm** 模块应发送被引用 DcmModeRule 计算出的负响应码。
+
+如果条件检查成功完成，**Dcm** 模块应以以下参数值调用 Dem_ClearDTC：
+
+- ClientId = 该 **Dcm** 实例的客户端 **Id**（参见 DcmDemClientRef）
+
+在 Dem_ClearDTC() 返回 E_OK 的情况下，**Dcm** 模块应发送正响应。
+
+在 Dem_ClearDTC() 返回 DEM_CLEAR_FAILED 的情况下，**Dcm** 应发送负响应 0x22（**conditionsNotCorrect**）。
+
+在 Dem_ClearDTC() 返回 DEM_WRONG_DTC 的情况下，**Dcm** 应发送负响应 0x31（**requestOutOfRange**）。
+
+在 Dem_ClearDTC() 返回 DEM_CLEAR_BUSY 的情况下，**Dcm** 应发送负响应 0x22（**conditionsNotCorrect**）。
+
+在 Dem_ClearDTC() 返回 DEM_CLEAR_MEMORY_ERROR 的情况下，**Dcm** 应触发带有 **NRC** 0x72（**generalProgrammingFailure**）的负响应。
+
+在 Dem_ClearDTC() 返回 DEM_WRONG_DTCORIGIN 的情况下，**Dcm** 应触发负响应 0x31（**requestOutOfRange**）。
+
+##### 6.6.2.5. 服务 0x19 - Read DTC Information
+
+服务 0x19 允许客户端读取服务器驻留的诊断故障码（**DTC**）信息的状态。
+
+**Dcm** 模块应实现 **UDS** 服务 0x19。
+
+为了设置从 **Dem** 模块获取特定数据，**Dcm** 将调用不同的过滤 **API**（Dem_SetDTCFilter()、Dem_SetFreezeFrameRecordFilter()、Dem_SelectFreezeFrameData() 和 Dem_SelectExtendedDataRecord()）。
+
+在 Dem_SetDTCFilter() 返回 E_NOT_OK 的情况下，**Dcm** 模块应发送带有 **NRC** 0x31（**requestOutOfRange**）的负响应。
+
+对于所有寻址用户定义故障内存的子功能，在调用相应的 **Dem API** 之前，**Dcm** 应在接收到的选择请求参数 **MemorySelection** 上加 0x0100，以匹配 **Dem_DTCOriginType**。
+
+**UDS** 服务 **ReadDTCInformation**（0x19）的 **Dcm** 服务处理器可用于支持 **SAE J1979-2** 的配置，使得 **SAE J1979-2** 服务报告的 **DTC** 值与 **UDS DTC** 所用的 **DTC** 值不同。
+
+一些制造商不希望完全转变为支持带 **UDS** 的 **SAE J1979-2**，而只希望在 J1979-2 定义的有限 **UDS** 子集上支持 J1979-2 功能，因此增加了 **OBD UDS DTC** 分离特性。
+
+**OBD 与 UDS DTC 的分离使用（Use of separated OBD and UDS DTCs）**：如果 DcmDspReadDTCInformationSupportedObdUdsDtcSeparation 设置为 True，则 **Dcm** 服务处理器对于按照 **SAE J1979-2** 的所有诊断请求，应使用 **Dem API** Dem_SelectDTC（参数 DTCFormat 设置为 DEM_DTC_FORMAT_OBD_3BYTE）来查询和处理 **DTC** 相关信息。
+
+如果 DcmDspReadDTCInformationSupportedObdUdsDtcSeparation 设置为 False，则 **Dcm** 服务处理器对于按照 **SAE J1979-2** 的所有诊断请求，应使用 **Dem API** Dem_SelectDTC（参数 DTCFormat 设置为 DEM_DTC_FORMAT_UDS）来查询和处理 **DTC** 相关信息。
+
+对于请求中带有 **FunctionalGroupIdentifier** 参数的服务，**Dcm** 应只处理 **FunctionalGroupIdentifier** 等于 0x33 的请求消息。
+
+对于请求中带有 **FunctionalGroupIdentifier** 参数且 **FunctionalGroupIdentifier** 不等于 0x33 的服务，**Dcm** 应返回 **NRC** 0x31（**RequestOutOfRange**）。

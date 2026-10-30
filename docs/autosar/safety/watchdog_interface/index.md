@@ -47,7 +47,7 @@ release: R23-11
 
 **AUTOSAR** 提供了基础软件模块通用规范 [\[3\]](#ref-3)（**SWS BSW General**），该规范同样适用于**看门狗接口**。
 
-因此，规范 **SWS BSW General** 应被视为**看门狗接口**的附加且必需的规范。
+因此，规范 [\[3\]](#ref-3) **SWS BSW General** 应被视为**看门狗接口**的附加且必需的规范。
 
 ## 4. 约束和假设
 
@@ -170,7 +170,7 @@ release: R23-11
 
 #### 7.3.1. WdgIf_SetMode
 
-**说明**: 此服务将服务 **WdgIf_SetMode** 映射到相应看门狗驱动的服务 **Wdg_SetMode**。参数 DeviceIndex（in）：标识看门狗驱动实例。参数 WdgMode（in）：看门狗驱动模式（见看门狗驱动）。返回值：**Std_ReturnType**。可通过 **WdgIf.h** 获得。本服务为同步调用，不可重入。
+**说明**: 此服务将服务 **WdgIf_SetMode** 映射到相应看门狗驱动的服务 **Wdg_SetMode**。参数 DeviceIndex（in）：标识看门狗驱动实例。参数 WdgMode（in）：看门狗驱动模式（见看门狗驱动）。返回值：**Std_ReturnType**。可通过 **WdgIf.h** 获得。本服务为同步调用，不可重入。服务 ID 0x01。
 
 ```C
 Std_ReturnType WdgIf_SetMode ( uint8 DeviceIndex, WdgIf_ModeType WdgMode )
@@ -182,7 +182,7 @@ Std_ReturnType WdgIf_SetMode ( uint8 DeviceIndex, WdgIf_ModeType WdgMode )
 
 #### 7.3.2. WdgIf_SetTriggerCondition
 
-**说明**: 此服务将服务 **WdgIf_SetTriggerCondition** 映射到相应看门狗驱动的服务 **Wdg_SetTriggerCondition**。参数 DeviceIndex（in）：标识看门狗驱动实例。参数 Timeout（in）：用于设置触发计数器的超时值（毫秒）。无返回值。可通过 **WdgIf.h** 获得。本服务为同步调用，不可重入。
+**说明**: 此服务将服务 **WdgIf_SetTriggerCondition** 映射到相应看门狗驱动的服务 **Wdg_SetTriggerCondition**。参数 DeviceIndex（in）：标识看门狗驱动实例。参数 Timeout（in）：用于设置触发计数器的超时值（毫秒）。无返回值。可通过 **WdgIf.h** 获得。本服务为同步调用，不可重入。服务 ID 0x02。
 
 ```C
 void WdgIf_SetTriggerCondition ( uint8 DeviceIndex, uint16 Timeout )
@@ -190,7 +190,7 @@ void WdgIf_SetTriggerCondition ( uint8 DeviceIndex, uint16 Timeout )
 
 #### 7.3.3. WdgIf_GetVersionInfo
 
-**说明**: 此服务返回版本信息。参数 VersionInfoPtr（out）：指向存储本模块版本信息的位置的指针。无返回值。可通过 **WdgIf.h** 获得。本服务为同步调用，可重入。
+**说明**: 此服务返回版本信息。参数 VersionInfoPtr（out）：指向存储本模块版本信息的位置的指针。无返回值。可通过 **WdgIf.h** 获得。本服务为同步调用，可重入。服务 ID 0x03。
 
 ```C
 void WdgIf_GetVersionInfo ( Std_VersionInfoType* VersionInfoPtr )

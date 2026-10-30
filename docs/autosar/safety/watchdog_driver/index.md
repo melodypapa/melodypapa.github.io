@@ -281,15 +281,16 @@ release: R23-11
 | 名称 | Wdg_ConfigType |
 |---|---|
 | 种类 | 结构体 |
-| 元素 | 实现相关 |
+| 元素 | 硬件相关的结构体 |
+| 元素类型 | - |
 
-**说明**: 用于指向包含配置数据的结构体的指针，提供给 **Wdg** 模块初始化例程以配置模块和看门狗硬件。该结构体用于保存看门狗驱动的配置集。可通过 **Wdg.h** 获得。
+**说明**: 该结构用于保存看门狗驱动的配置集。指向该结构的指针用于将配置数据提供给 **Wdg** 模块初始化例程，以配置模块和看门狗硬件。可通过 **Wdg.h** 获得。
 
 ### 7.3. 函数定义
 
 #### 7.3.1. Wdg_Init
 
-**说明**: 此服务初始化模块。参数 ConfigPtr（in）：指向配置集的指针。无返回值。可通过 **Wdg.h** 获得。本服务为同步调用，不可重入。
+**说明**: 此服务初始化模块。参数 ConfigPtr（in）：指向配置集的指针。无返回值。可通过 **Wdg.h** 获得。本服务为同步调用，不可重入。服务 ID 0x00。
 
 ```C
 void Wdg_Init ( const Wdg_ConfigType* ConfigPtr )
@@ -315,7 +316,7 @@ void Wdg_Init ( const Wdg_ConfigType* ConfigPtr )
 
 #### 7.3.2. Wdg_SetMode
 
-**说明**: 此服务将看门狗切换到模式 **Mode**。参数 Mode（in）：以下静态配置模式之一：1. WDGIF_OFF_MODE 2. WDGIF_SLOW_MODE 3. WDGIF_FAST_MODE。返回值：**Std_ReturnType**。可通过 **Wdg.h** 获得。本服务为同步调用，不可重入。
+**说明**: 此服务将看门狗切换到模式 **Mode**。参数 Mode（in）：以下静态配置模式之一：1. WDGIF_OFF_MODE 2. WDGIF_SLOW_MODE 3. WDGIF_FAST_MODE。返回值：**Std_ReturnType**。可通过 **Wdg.h** 获得。本服务为同步调用，不可重入。服务 ID 0x01。
 
 ```C
 Std_ReturnType Wdg_SetMode ( WdgIf_ModeType Mode )
@@ -349,7 +350,7 @@ Std_ReturnType Wdg_SetMode ( WdgIf_ModeType Mode )
 
 #### 7.3.3. Wdg_SetTriggerCondition
 
-**说明**: 此服务为触发计数器设置超时值。参数 timeout（in）：用于设置触发计数器的超时值（毫秒）。无返回值。可通过 **Wdg.h** 获得。本服务为同步调用，不可重入。
+**说明**: 此服务为触发计数器设置超时值。参数 timeout（in）：用于设置触发计数器的超时值（毫秒）。无返回值。可通过 **Wdg.h** 获得。本服务为同步调用，不可重入。服务 ID 0x03。
 
 ```C
 void Wdg_SetTriggerCondition ( uint16 timeout )
@@ -367,7 +368,7 @@ void Wdg_SetTriggerCondition ( uint16 timeout )
 
 #### 7.3.4. Wdg_GetVersionInfo
 
-**说明**: 此服务返回该模块的版本信息。参数 versioninfo（out）：指向存储本模块版本信息的位置的指针。无返回值。可通过 **Wdg.h** 获得。本服务为同步调用，可重入。
+**说明**: 此服务返回该模块的版本信息。参数 versioninfo（out）：指向存储本模块版本信息的位置的指针。无返回值。可通过 **Wdg.h** 获得。本服务为同步调用，可重入。服务 ID 0x04。
 
 ```C
 void Wdg_GetVersionInfo ( Std_VersionInfoType* versioninfo )
@@ -613,7 +614,7 @@ void Wdg_GetVersionInfo ( Std_VersionInfoType* versioninfo )
 
 无包含的容器。
 
-| SWS 条目 |  |
+| SWS 条目 | [ECUC_Wdg_00073] |
 |---|---|
 | 模块名称 | Wdg |
 | 描述 | **Wdg**（**看门狗驱动**）模块的配置。 |

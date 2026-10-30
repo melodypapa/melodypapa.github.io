@@ -43,6 +43,7 @@ One source chapter uses exactly one rendering site-wide:
 ## 3. API chapter internal structure
 
 - Per function: `#### 7.1.x. <function name>` + `**说明**: …` + a ```C signature code block
+- If the source API or scheduled-function table defines `Service ID [hex]`, retain the exact ID value in that entry's `**说明**` as `服务 ID 0xNN`; this API metadata is not a source requirement ID.
 - Grouped as in the source document: `### 7.1. 函数定义`, `### 7.2. 调度函数`, `### 7.3. 回调通知`, etc. (write a group only if the source has it)
 - When there are no callbacks, state it in one sentence such as `**BswM**中没有回调通知。` — never omit the chapter. This sentence is content (the source states it in prose), not a `None.` placeholder — the §1 placeholder exception does not apply to it. When the source's whole API chapter is `N/A.` (types-only documents), keep `## 7. API规范` with a one-sentence 不适用 statement — the skeleton chapter itself is never dropped
 
