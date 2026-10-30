@@ -81,6 +81,8 @@ CONFIG_TITLE = "配置规范"  # --apply stops before this chapter (definitional
 # Registry entry line: optional invisible #ref-n anchor prefix + "[n] Title"
 # (the prefix is what --apply adds; census/parse must tolerate both states)
 REF_ANCHOR = r'(?:<a id="ref-\d+"></a>)?'
+# The article may render registry entries as Markdown list items ("- [n]").
+REF_ENTRY = rf"{REF_ANCHOR}(?:[-*+]\s+)?\[(\d+)\]"
 
 MD_LINK = re.compile(r"\[[^\]]*\]\([^)]*\)")
 
@@ -144,8 +146,19 @@ def chref_spans(seg: str):
         if re.search(r"(?:图|表|清单|示例)\s*$", pre):
             continue  # a labelled artifact number (清单3.4 = source lstlisting.3.4,
             # the mode-management guide's code listings), never a section
+        # Applying an inline link expands its Markdown source (notably
+        # [\[n\]](#ref-n)) and can push an earlier document/citation marker
+        # beyond the look-behind window on a later --apply run. Compare the
+        # visible link text, not its generated anchor syntax, for this guard.
+        guard_context = re.sub(
+            r"\[\\?\[(\d+)\\?\]\]\(#ref-\d+\)|\[(\d+)\]\(#ref-\d+\)",
+            lambda link: f"[{link.group(1) or link.group(2)}]",
+            pre,
+        )
+        guard_context = re.sub(r"\[([^\[\]]+)\]\(#[^)]+\)", r"\1", guard_context)
+        guard_context = re.split(r"[。！？!?]|(?<=\.)\s+", guard_context)[-1]
         if re.search(r"(?:SWS|SRS|EXP|TPS|TR)_[A-Za-z0-9_]+|》|\bSpecification\b"
-                     r"|\[\\?\[?\d+\\?\]", pre[-60:]):
+                     r"|\[\\?\[?\d+\\?\]", guard_context[-60:]):
             continue  # another document's chapter number: a doc id, a 《title》,
             # a bolded English "Specification …" title, or a citation marker
             # [n] anywhere in the preceding window (《基础软件模块通用规范》的第7.2章
@@ -155,13 +168,20 @@ def chref_spans(seg: str):
     return out
 
 
-def link_chrefs(seg: str, sec_nums: dict) -> str:
+def link_chrefs(seg: str, sec_nums: dict, context: str = "") -> str:
     """Wrap resolved chapter-number mentions: 第**6.3**章 ->
     第[**6.3**](#63-startup阶段)章 (bold markers kept in the link text,
-    matching the hand-written [**IOC**](#75-ioc) convention)."""
+    matching the hand-written [**IOC**](#75-ioc) convention). `context` is
+    the original line prefix before this free segment, so document/citation
+    guards still see text separated from the segment by an existing link."""
     out = []
     pos = 0
-    for (s, e, num) in chref_spans(seg):
+    prefix_len = len(context)
+    for (s, e, num) in chref_spans(context + seg):
+        if s < prefix_len:
+            continue
+        s -= prefix_len
+        e -= prefix_len
         anchor = sec_nums.get(num)
         if not anchor:
             continue
@@ -174,7 +194,7 @@ def link_chrefs(seg: str, sec_nums: dict) -> str:
 
 def slug_of(num: str, title: str) -> str:
     # Material/uslugify behaviour observed on this site: dots stripped from the
-    # number ("3.1." -> "31"), title lowercased with spaces -> '-', '_' kept.
+    # number ("3.1." -> "31"), title lowercased, separator runs -> '-', '_' kept.
     num = num.rstrip(".")
     num = num.replace(".", "")
     title = title.strip().lower()
@@ -183,7 +203,7 @@ def slug_of(num: str, title: str) -> str:
     # '——', '[UC2]' brackets. The old code kept some of them and produced
     # dead anchors (VFB 3.8/3.10, BSW 3.2.4, ALEH 7.2/7.2.2).
     title = re.sub(r"[^\w\s\-]", "", title)
-    title = re.sub(r"\s+", "-", title)
+    title = re.sub(r"[\s-]+", "-", title)
     return f"{num}-{title}"
 
 
@@ -365,20 +385,20 @@ def _registry_sec(article: str):
     # their sections 3.1 too, e.g. EXP_ModeManagementGuide's process steps).
     # Entry lines may carry the invisible #ref-n anchor prefix --apply adds.
     sec = re.search(r"### 3\.1\..*?(?=### 3\.2)", article, re.S)
-    if not (sec and re.search(rf"^{REF_ANCHOR}\[\d+\]\s", sec.group(0), re.M)):
+    if not (sec and re.search(rf"^{REF_ENTRY}\s", sec.group(0), re.M)):
         # §3.1 without a §3.2 (sources whose ch.3 has no "Related
         # specifications" section, e.g. SWS_BSWGeneral): end the slice at
         # the next chapter heading instead.
         sec = re.search(r"### 3\.1\..*?(?=\n## )", article, re.S)
-    if not (sec and re.search(rf"^{REF_ANCHOR}\[\d+\]\s", sec.group(0), re.M)):
+    if not (sec and re.search(rf"^{REF_ENTRY}\s", sec.group(0), re.M)):
         # the 参考文献 section may be the article's last section (VFB ch.13 "References")
         sec = re.search(r"## 参考文献\n.*?(?=\n## |\Z)", article, re.S)
-    if not (sec and re.search(rf"^{REF_ANCHOR}\[\d+\]\s", sec.group(0), re.M)):
+    if not (sec and re.search(rf"^{REF_ENTRY}\s", sec.group(0), re.M)):
         # EXP guides may number their input-documents registry differently
         # (CDD guideline: ch.4 -> "### 4.1. 输入文件和相关标准与规范") — accept
         # any x.1 subsection titled 输入文件 that actually holds [n] entries.
         for m in re.finditer(r"### \d+\.1\.[^\n]*输入文件[^\n]*\n.*?(?=\n## )", article, re.S):
-            if re.search(rf"^{REF_ANCHOR}\[\d+\]\s", m.group(0), re.M):
+            if re.search(rf"^{REF_ENTRY}\s", m.group(0), re.M):
                 sec = m
                 break
     return sec
@@ -388,9 +408,9 @@ def parse_entries31(article: str):
     sec = _registry_sec(article)
     entries = {}
     if sec:
-        blocks = re.split(rf"(?=^{REF_ANCHOR}\[\d+\])", sec.group(0), flags=re.M)
+        blocks = re.split(rf"(?=^{REF_ENTRY})", sec.group(0), flags=re.M)
         for b in blocks:
-            m = re.match(rf"^{REF_ANCHOR}\[(\d+)\]\s+(.+)$", b, re.M)
+            m = re.match(rf"^{REF_ENTRY}\s+(.+)$", b, re.M)
             if not m:
                 continue
             n, title = m.group(1), m.group(2).strip()
@@ -447,7 +467,7 @@ def add_registry_anchors(lines, entries31):
         return 0
     added = 0
     for i in range(span[0], span[1]):
-        m = re.match(rf"^{REF_ANCHOR}\[(\d+)\]\s", lines[i])
+        m = re.match(rf"^{REF_ENTRY}\s", lines[i])
         if m and f'id="ref-{m.group(1)}"' not in lines[i]:
             lines[i] = f'<a id="ref-{m.group(1)}"></a>' + lines[i]
             added += 1
@@ -474,8 +494,10 @@ def convert_citation_links(lines, entries31, ref_skip=frozenset()):
         if n in ref_skip or n not in entries31:
             return m.group(0)
         changed += 1
-        # escaped brackets in the link text keep the source's visible [n]
-        return f"[\\[{n}\\]](#ref-{n})"
+        # Escape the visible outer brackets in the link label. Preserve an
+        # optional source title in forms such as [7, SWS BSW General].
+        label = m.group(0)[1:-1]
+        return f"[\\[{label}\\]](#ref-{n})"
 
     for i, ln in enumerate(lines):
         if ln.startswith("```"):
@@ -487,7 +509,8 @@ def convert_citation_links(lines, entries31, ref_skip=frozenset()):
             continue
         segs = re.split(r"(`[^`]*`)", ln)  # odd indices = inline code
         lines[i] = "".join(
-            seg if si % 2 else re.sub(r"\[(\d+)\](?!\()", sub, seg)
+            seg if si % 2 else re.sub(
+                r"(?<!\\)\[(\d+)(?:,\s*[^\]]+)?\](?!\()", sub, seg)
             for si, seg in enumerate(segs))
     return changed
 
@@ -551,14 +574,16 @@ def census(article: str, self_dir: str = ""):
             # bracket-preserving [\[7\]](#ref-7) (2026-10-27 migration) — the
             # trailing \]? is the markdown link's own outer closing bracket,
             # present only in the new form
-            n_linked += len(re.findall(r"\\?\[(\d+)\\?\]\]?\(#ref-\d+\)", ln))
+            n_linked += len(re.findall(
+                r"\\?\[(\d+)(?:,\s*[^\]]+)?\\?\]\]?\(#ref-\d+\)", ln))
             if ln.lstrip().startswith("**译者注：**"):
                 tn_lines += 1
             else:
                 # no (?<!]) lookbehind: adjacent citation pairs ([19][4], the
                 # RTE article) must BOTH convert; reference-style links
                 # [text][1] do not exist in the corpus (audited 2026-10-26)
-                for m2 in re.finditer(r"\[(\d+)(?:,\s*[^\]]+)?\](?!\()", ln):
+                for m2 in re.finditer(
+                        r"(?<!\\)\[(\d+)(?:,\s*[^\]]+)?\](?!\()", ln):
                     n_lines += 1
                     n = m2.group(1)
                     ctx = ln[max(0, m2.start() - 24):m2.end()].strip()
@@ -654,19 +679,19 @@ def apply_links(article: str, ref_skip=frozenset()):
         pos = 0
         for m in MD_LINK.finditer(ln):
             if m.start() > pos:
-                segs.append((ln[pos:m.start()], False))
-            segs.append((m.group(0), True))
+                segs.append((ln[pos:m.start()], False, pos))
+            segs.append((m.group(0), True, m.start()))
             pos = m.end()
         if pos < len(ln):
-            segs.append((ln[pos:], False))
+            segs.append((ln[pos:], False, pos))
         out = []
-        for seg, is_link in segs:
+        for seg, is_link, seg_start in segs:
             if is_link or not seg:
                 out.append(seg)
                 continue
             # chapter numbers first (they never contain identifiers, and the
             # identifier pass below never matches digits — no re-wrap either way)
-            new_seg = link_chrefs(seg, sec_nums)
+            new_seg = link_chrefs(seg, sec_nums, context=ln[:seg_start])
             if new_seg != seg:
                 chref_changed += 1
             seg = new_seg

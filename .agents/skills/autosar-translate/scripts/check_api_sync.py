@@ -31,7 +31,13 @@ SRC_RE = re.compile(r"(?:^|[^0-9.])8\.([23])\.(\d+)\s+\**\s*([A-Za-z][A-Za-z0-9_
 # Grouped layout: leaf functions one level deeper ("## 8.3.1.1  GetVersionInfo"
 # under "## 8.3.1  General"). When such 4-level headings exist they are the
 # real function entries; the 3-level headings are group captions.
-SRC_LEAF_RE = re.compile(r"(?:^|[^0-9.])8\.([23])\.(\d+)\.(\d+)\s+\**\s*([A-Za-z][A-Za-z0-9_\\&;<>]*)")
+# Some extracted leaf headings split an escaped underscore from the next
+# identifier token (for example, ``Dcm\_ SetActiveDiagnostic``). Capture that
+# token as part of the name; norm() removes the separator and extraction slash.
+SRC_LEAF_RE = re.compile(
+    r"(?:^|[^0-9.])8\.([23])\.(\d+)\.(\d+)\s+\**\s*"
+    r"([A-Za-z][A-Za-z0-9_\\&;<>]*(?:\s+[A-Za-z][A-Za-z0-9_\\&;<>]*)?)"
+)
 ART_RE = re.compile(r"^####\s+7\.([23])\.(\d+)\.\s+(.+?)\s*$")
 ART_LEAF_RE = re.compile(r"^#####\s+7\.([23])\.(\d+)\.(\d+)\.\s+(.+?)\s*$")
 
