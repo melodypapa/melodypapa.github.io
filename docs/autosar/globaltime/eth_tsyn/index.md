@@ -235,7 +235,7 @@ release: R23-11
 - 使用多点（multidrop）拓扑时，不支持 **pDelay** 测量，应将其设为静态值。
 - 不支持对 **PDelay** 协议报文的保护。
 
-### 4.2. Accuracy
+### 4.2. 精度
 
 时间同步的精度取决于各种因素（例如振荡器精度、网络路径中网桥的数量、配置等）。关于如何正确配置整个系统以获得尽可能高精度的建议，请参阅 [5, **EXP** Time Sensitive Network Features] 的"Accuracy of Time Synchronization"一章。
 
@@ -260,9 +260,9 @@ release: R23-11
 
 ![Figure5-1.png](Figure5-1.png)
 
-### 5.1. File structure
+### 5.1. 文件结构
 
-#### 5.1.1. Code file structure
+#### 5.1.1. 代码文件结构
 
 细节请参阅 [3, **SWS** BSW General] 的第 5.1.6 节「Code file structure」。
 
@@ -274,11 +274,11 @@ release: R23-11
 
 **EthTSyn** 模块负责确保跨 **Ethernet** 网络的同步时间信息的收集与分发。它与 **StbM** 交互，并向 **StbM** 提供所有 **Ethernet** 特定的功能。
 
-#### 6.1.1. General
+#### 6.1.1. 概述
 
 参见 [1, **PRS** Time Synchronization Protocol] 的 General 一章。
 
-#### 6.1.2. VLAN Support
+#### 6.1.2. VLAN 支持
 
 如果参数 EthTSynFramePrio 存在，则 EthTSynGlobalTimeEthIfRef 应指向表示一个 **VLAN** 的虚拟以太网控制器。
 
@@ -286,7 +286,7 @@ release: R23-11
 
 关于附加要求，请参阅 [1, **PRS** Time Synchronization Protocol] 的 VLAN Support 一章。
 
-### 6.2. Initialization
+### 6.2. 初始化
 
 **Ethernet** 全局时间同步通过 [EthTSyn_Init](#731-ethtsyn_init) 初始化。除 [EthTSyn_GetVersionInfo](#732-ethtsyn_getversioninfo) 和 [EthTSyn_Init](#731-ethtsyn_init) 之外，**EthTSyn** 模块的 **API** 函数只有在模块被正确初始化之后才能调用。
 
@@ -294,7 +294,7 @@ release: R23-11
 
 **注意：** 除非另有规定，**EthTSyn** 使用 [4, **IEEE 802.1AS**] 中给出的默认值。
 
-### 6.3. Handling of different Virtual Local Time sources
+### 6.3. 不同虚拟本地时间源的处理
 
 如果启用了硬件时间戳，**StbM** 也可以使用 **ETH** 自由运行计数器来对全局时间的本地实例进行插值。但也存在 **StbM** 被配置为使用 **GPT** 的用例，例如：
 
@@ -308,7 +308,7 @@ release: R23-11
 
 如果时间戳的质量（参见 Eth_TimeStampQualType）被指示为 **ETH_INVALID** 或 **ETH_UNCERTAIN**，则 **EthTSyn** 应丢弃从以太网控制器硬件导出的时间戳（例如通过 EthIf_GetCurrentTimeTuple、EthIf_GetIngressTimeStamp 或 EthIf_GetEgressTimeStamp）。
 
-### 6.4. Debounce Time
+### 6.4. 去抖时间
 
 如果 EthTSynGlobalTimeDebounceTime 设为 0，**EthTSyn** 应忽略任何去抖。
 
@@ -322,13 +322,13 @@ EthTSynGlobalTimeDebounceTime 表示一个 debounceCounter 的重装载值，该
 
 [EthTSynGlobalTimeDomain](#924-ethtsynglobaltimedomain) 的每个端口应拥有自己的 debounceCounter。
 
-### 6.5. Pdelay Protocol for Latency Calculation
+### 6.5. 用于延迟计算的 Pdelay 协议
 
 本章在 [1, **PRS** Time Synchronization Protocol] 的"Pdelay Protocol for Latency Calculation"一章的通用要求之外定义 **EthTSyn** 特定的要求。
 
 **Pdelay** 测量的动作总体序列见图 9-3（图 9-2 后的 Pdelay 序列图）。
 
-#### 6.5.1. Pdelay Message Transmission
+#### 6.5.1. Pdelay 报文发送
 
 发送下列报文的详细动作序列见图 9-4：
 
@@ -369,7 +369,7 @@ EthTSynGlobalTimeDebounceTime 表示一个 debounceCounter 的重装载值，该
 1. 通过 EthIf_ProvideTxBuffer 获取空闲发送缓冲区；
 2. 通过 EthIf_Transmit 以上述 t3 规定的发送时间戳触发发送请求。
 
-#### 6.5.2. Pdelay Message Reception
+#### 6.5.2. Pdelay 报文接收
 
 接收下列报文的详细动作序列见图 9-5、图 9-6：
 
@@ -405,7 +405,7 @@ EthTSynGlobalTimeDebounceTime 表示一个 debounceCounter 的重装载值，该
 
 则 **EthTSyn** 应在下一次主函数调用中按照 [\[1\]](#ref-1) 中 PRS_TS_00003 的规定计算 linkDelay 值。
 
-### 6.6. Message Format
+### 6.6. 报文格式
 
 关于附加要求：
 
@@ -421,7 +421,7 @@ EthTSynGlobalTimeDebounceTime 表示一个 debounceCounter 的重装载值，该
 
 **AUTOSAR Sub-TLV：OFS Secured / Not Secured**——如果 **Ethernet** 上的偏移时间域引用了 **Ethernet** 上的同步时间域（参见 **StbM** 中的参数 StbMOffsetTimeBase），则相应的 **AUTOSAR** Sub-TLV：OFS 应映射到该同步时间域的 **Follow_Up** 报文。**AUTOSAR** Sub-TLV：OFS 的用户数据应映射到 StbM_UserDataType，报文中给出的字节号与 StbM_UserDataType 给出的字节号应匹配（UserByte_0 映射到 StbM_UserDataType.userByte0 等）。UserDataLength 应映射到 StbM_UserDataType.StbM_UserDataLength，反之亦然。附加要求请参阅 [1, **PRS** Time Synchronization Protocol] 的 AUTOSAR Sub-TLV: OFS Secured / Not Secured 一章。
 
-### 6.7. Acting as Time Master
+### 6.7. 作为时基主节点
 
 关于附加要求，请参阅 [\[1\]](#ref-1) 的 Acting as Time Master 一章。
 
@@ -431,7 +431,7 @@ EthTSynGlobalTimeDebounceTime 表示一个 debounceCounter 的重装载值，该
 
 ![Figure7-1.png](Figure7-1.png)
 
-#### 6.7.1. Message processing
+#### 6.7.1. 报文处理
 
 当 EthTSynGlobalTimePortRole 设为 **DYNAMIC** 或 **TIME_MASTER** 时，端口（对于以太网控制器只有 1 个端口，对于交换机是单个端口）应按照配置参数 EthTSynGlobalTimeTxPeriod 发送 **Sync** 和 **Follow_Up** 报文。
 
@@ -492,15 +492,15 @@ EthTSynGlobalTimeDebounceTime 表示一个 debounceCounter 的重装载值，该
 - 通过 EthIf_ProvideTxBuffer 获取空闲发送缓冲区；
 - 通过 EthIf_Transmit 以上述序列计算的发送时间戳触发发送请求。
 
-##### 6.7.1.1. Runtime Error detection
+##### 6.7.1.1. 运行时错误检测
 
 如果 EthTSynMasterSlaveConflictDetection 设为 **TRUE**，且时基主节点从另一个时基主节点接收到 **Sync** 报文，它应通过调用 Det_ReportRuntimeError 报告运行时错误（错误码 [**ETHTSYN_E_TMCONFLICT**](#6112-运行时错误)），并丢弃接收到的 **Sync** 报文。
 
-##### 6.7.1.2. Frame Debouncing
+##### 6.7.1.2. 帧去抖
 
 请参阅 [\[1\]](#ref-1) 的 Frame Debouncing 一章。
 
-##### 6.7.1.3. Immediate Time Synchronization
+##### 6.7.1.3. 立即时间同步
 
 除了标准的周期报文发送之外，可能还需要立即报文发送。根据配置，**EthTSyn** 模块在每次 [EthTSyn_MainFunction](#751-ethtsyn_mainfunction) 调用时，为每个主节点端口所属的时基检查是否需要发送 Timesync 报文。
 
@@ -518,9 +518,9 @@ EthTSynGlobalTimeDebounceTime 表示一个 debounceCounter 的重装载值，该
 
 **注意：** timeBaseStatus 可通过 StbM_GetTimeBaseStatus 或 StbM_GetCurrentTime 从 **StbM** 读取。
 
-第 [6.4](#64-debounce-time) 节所述的 debounceCounter 始终需要考虑。
+第 [6.4](#64-去抖时间) 节所述的 debounceCounter 始终需要考虑。
 
-除了立即发送的实际触发条件（见上文）之外，立即发送还需要考虑参数 EthTSynCyclicMsgResumeTime。另请参阅周期 Timesync 报文发送的触发条件（参见第 [6.7.1](#671-message-processing) 节的规定）。
+除了立即发送的实际触发条件（见上文）之外，立即发送还需要考虑参数 EthTSynCyclicMsgResumeTime。另请参阅周期 Timesync 报文发送的触发条件（参见第 [6.7.1](#671-报文处理) 节的规定）。
 
 配置 EthTSynCyclicMsgResumeTime 的两个主要场景：
 
@@ -546,7 +546,7 @@ EthTSynGlobalTimeDebounceTime 表示一个 debounceCounter 的重装载值，该
 
 **注意：** 该规定是为了确保第一次周期发送在与 cyclicMsgResumeCounter 达到 0 相同的主函数调用中被请求（参见上文"最早可能"主函数调用）。报文是否实际发送还取决于 debounceCounter。
 
-##### 6.7.1.4. Secure Time Synchronization
+##### 6.7.1.4. 安全时间同步
 
 关于每个时间域所引用 **FV** 的配置细节，请参阅 [\[2\]](#ref-2) **StbM** 的相应章节。
 
@@ -560,7 +560,7 @@ EthTSynGlobalTimeDebounceTime 表示一个 debounceCounter 的重装载值，该
 
 如果 StbM_GetTxFreshness 或 StbM_GetTxFreshnessTruncData 返回不可恢复的错误码（即 **E_NOT_OK**），时基主节点应：
 
-- 停止 **ICV** 生成（参见第 [6.7.3.5](#6735-icv-generation) 节「ICV Generation」），并相应地设置 **Follow_Up** 报文的 **AUTOSAR** Sub-TLV：Time Authenticated 中的 ICV_Flags；
+- 停止 **ICV** 生成（参见第 [6.7.3.5](#6735-icv-生成) 节「ICV 生成」），并相应地设置 **Follow_Up** 报文的 **AUTOSAR** Sub-TLV：Time Authenticated 中的 ICV_Flags；
 - 调用 Det_ReportRuntimeError，参数 ErrorId 设为 [**ETHTSYN_E_FRESHNESSFAILURE**](#6112-运行时错误)（参见第 [6.11](#611-错误分类) 节的运行时错误定义）；
 - 调用 IdsM_SetSecurityEventWithContextData，参数 EventId 设为 **SEV_TSYN_ETH_FRESHNESS_NOT_AVAILABLE**（参见第 [6.10](#610-安全事件) 节「安全事件」）。
 
@@ -607,7 +607,7 @@ EthTSynGlobalTimeDebounceTime 表示一个 debounceCounter 的重装载值，该
 
 如果经认证报文的构建已失败且认证构建计数器尚未达到配置值 EthTSynTxAuthenticationBuildAttempts，则应在下一次调用 [EthTSyn_MainFunction](#751-ethtsyn_mainfunction) 时重试新鲜度获取和 **ICV** 计算。
 
-#### 6.7.2. Link State and Transmission Mode
+#### 6.7.2. 链路状态与发送模式
 
 收发器链路状态变化（[EthTSyn_TrcvLinkStateChg](#743-ethtsyn_trcvlinkstatechg) 的通知调用）从 **ETHTRCV_LINK_STATE_ACTIVE** 到 **ETHTRCV_LINK_STATE_DOWN** 会复位时间同步报文发送和接收的状态机。
 
@@ -617,21 +617,21 @@ EthTSynGlobalTimeDebounceTime 表示一个 debounceCounter 的重装载值，该
 
 如果调用 [EthTSyn_SetTransmissionMode](#733-ethtsyn_settransmissionmode) 且参数 Mode 等于 **ETHTSYN_TX_ON**，则 **EthTSyn** 在此以太网控制器上的所有发送请求应能够被发送。
 
-#### 6.7.3. Message Field Calculation and Assembling
+#### 6.7.3. 报文字段的计算与组装
 
 关于附加要求，请参阅 [\[1\]](#ref-1) 的 Message Field Calculation and Assembling 一章。
 
-##### 6.7.3.1. SGW Calculation
+##### 6.7.3.1. SGW 计算
 
 请参阅 [\[1\]](#ref-1) 的 SGW Calculation 一章。
 
-##### 6.7.3.2. OFS Calculation
+##### 6.7.3.2. OFS 计算
 
 时基主节点应通过 StbM_GetOffset 从 **StbM** 获取偏移时基的值。
 
 关于附加要求，请参阅 [\[1\]](#ref-1) 的 OFS Calculation 一章。
 
-##### 6.7.3.3. CRC Calculation
+##### 6.7.3.3. CRC 计算
 
 关于附加要求，请参阅 [\[1\]](#ref-1) 的 CRC Calculation 一章。
 
@@ -639,19 +639,19 @@ EthTSynGlobalTimeDebounceTime 表示一个 debounceCounter 的重装载值，该
 
 **AUTOSAR Sub-TLV**：Time Secured / Status secured / UserData secured / OFS secured——请参阅 [\[1\]](#ref-1) 的相应章节。
 
-##### 6.7.3.4. Sequence Counter (sequenceId) Calculation
+##### 6.7.3.4. 序列计数器（sequenceId）计算
 
 关于附加要求，请参阅 [\[1\]](#ref-1) 的 Sequence Counter (sequenceId) Calculation 一章。
 
-##### 6.7.3.5. ICV Generation
+##### 6.7.3.5. ICV 生成
 
 请参阅 [\[1\]](#ref-1) 的 ICV Generation 一章。
 
-##### 6.7.3.6. Message Assembling
+##### 6.7.3.6. 报文组装
 
 请参阅 [\[1\]](#ref-1) 的 Message Assembling 一章。
 
-##### 6.7.3.7. Dynamic port configuration for Time Master and Time Slave
+##### 6.7.3.7. 时基主节点与时基从节点的动态端口配置
 
 如果在任何端口上参数 EthTSynGlobalTimePortRole 设为 **DYNAMIC**，接收到一条 **Sync** 报文应把相应的接收端口自动转为从端口。所有其余设为 **DYNAMIC** 的端口应转为主端口。
 
@@ -665,11 +665,11 @@ EthTSynGlobalTimeDebounceTime 表示一个 debounceCounter 的重装载值，该
 
 **注意：** 从端口是动态还是静态配置为 **TIME_SLAVE** 并不重要；无论哪种情况，在 HoldOverTime 之后都应停止 **Sync** 和 **Follow_Up** 报文的发送，以防止不连续。
 
-### 6.8. Acting as Time Slave
+### 6.8. 作为时基从节点
 
 关于附加要求，请参阅 [\[1\]](#ref-1) 的 Acting as Time Slave 一章。
 
-#### 6.8.1. Message processing
+#### 6.8.1. 报文处理
 
 除了时基从节点在总线上从时基主节点接收的 **Follow_Up** 报文字段——preciseOriginTimeStamp 和 correctionField（参见 [\[1\]](#ref-1) 的 Message Processing 一章）——之外，本章还定义并使用以下内部变量来计算同步时基的接收时间元组：
 
@@ -728,7 +728,7 @@ EthTSynGlobalTimeDebounceTime 表示一个 debounceCounter 的重装载值，该
 如果：
 
 - 配置参数 EthTSynRateRatioEnable 设为 **TRUE**，
-- 且已计算出有效的 neighborRateRatio（参见第 [6.5.2](#652-pdelay-message-reception) 节的规定），
+- 且已计算出有效的 neighborRateRatio（参见第 [6.5.2](#652-pdelay-报文接收) 节的规定），
 - 且接收到新的有效 **Follow-Up** 报文，
 
 则 **EthTSyn** 应在下一次主函数中按照 [\[1\]](#ref-1) 中 PRS_TS_00261 的规定计算 rateRatio。
@@ -765,17 +765,17 @@ EthTSynGlobalTimeDebounceTime 表示一个 debounceCounter 的重装载值，该
 
 参数 protocolParam 的成员 protocolType 应设为 **STBM_TIMESYNC_ETHERNET**。
 
-##### 6.8.1.1. Runtime Error detection
+##### 6.8.1.1. 运行时错误检测
 
 如果 EthTSynMasterSlaveConflictDetection 设为 **TRUE**，且时基从节点接收到具有不同 sourcePortIdentity（即不同 **MAC** 地址）的 **Sync** 帧，它应通过调用 Det_ReportRuntimeError 报告运行时错误（错误码 [**ETHTSYN_E_TSCONFLICT**](#6112-运行时错误)），并丢弃接收到的 **Sync** 帧。
 
-##### 6.8.1.2. Frame Debouncing
+##### 6.8.1.2. 帧去抖
 
 关于附加要求，请参阅 PRS-TimeSyncProtocol [\[1\]](#ref-1) 的 Frame Debouncing 一章。
 
 在 EthTSynGlobalTimeRxDebounceTime 期间，如果序列被复位，则时基从节点应调用 IdsM_SetSecurityEventWithContextData，参数 EventId 设为 **SEV_TSYN_ETH_MSG_SEQUENCE_ERROR**（参见第 [6.10](#610-安全事件) 节「安全事件」）。
 
-##### 6.8.1.3. Secure Time Synchronization
+##### 6.8.1.3. 安全时间同步
 
 关于每个时间域所引用 **FV** 的配置细节，请参阅 [\[2\]](#ref-2) **StbM** 的相应章节。
 
@@ -791,7 +791,7 @@ EthTSynGlobalTimeDebounceTime 表示一个 debounceCounter 的重装载值，该
 
 如果 StbM_GetRxFreshness 返回不可恢复的错误码（例如 **E_NOT_OK**），或 FVL == 0 且接收到的 **Follow_Up** 报文的 ICV_Flags 中「ICV with FV」位已置位，则接收到的 **Follow_Up** 报文的 **ICV** 验证被视为失败，时基从节点应：
 
-- 停止 **ICV** 验证（参见第 [6.8.2.5](#6825-icv-verification) 节「ICV Verification」）并丢弃接收到的 **Follow_Up** 报文；
+- 停止 **ICV** 验证（参见第 [6.8.2.5](#6825-icv-验证) 节「ICV 验证」）并丢弃接收到的 **Follow_Up** 报文；
 - 调用 Det_ReportRuntimeError，参数 ErrorId 设为 [**ETHTSYN_E_FRESHNESSFAILURE**](#6112-运行时错误)（参见第 [6.11](#611-错误分类) 节的运行时错误定义）；
 - 调用 IdsM_SetSecurityEventWithContextData，参数 EventId 设为 **SEV_TSYN_ETH_FRESHNESS_NOT_AVAILABLE**（参见第 [6.10](#610-安全事件) 节「安全事件」）。
 
@@ -822,7 +822,7 @@ EthTSynIcvVerificationTimeout 应随着 [EthTSyn_IcvVerificationIndication](#745
 
 则时基从节点应：
 
-- 停止 **ICV** 验证（参见第 [6.8.2.5](#6825-icv-verification) 节「ICV Verification」）并丢弃接收到的 **Follow_Up** 报文；
+- 停止 **ICV** 验证（参见第 [6.8.2.5](#6825-icv-验证) 节「ICV 验证」）并丢弃接收到的 **Follow_Up** 报文；
 - 调用 IdsM_SetSecurityEventWithContextData，参数 EventId 设为 **SEV_TSYN_ETH_ICV_VERIFICATION_FAILED**（参见第 [6.10](#610-安全事件) 节「安全事件」）。
 
 对于每次接收需要 **ICV** 验证的报文，**EthTSyn** 应维护一个认证构建计数器（参见 EthTSynRxAuthenticationBuildAttempts）。
@@ -841,21 +841,21 @@ EthTSynIcvVerificationTimeout 应随着 [EthTSyn_IcvVerificationIndication](#745
 
 当 [EthTSyn_IcvVerificationIndication](#745-ethtsyn_icvverificationindication) 回调被调用且 **ICV** 验证结果不成功时，时基从节点应丢弃该 **Follow_Up** 报文。
 
-#### 6.8.2. Message Field Validation and Disassembling
+#### 6.8.2. 报文字段的校验与拆解
 
 本章的附加内容见 [\[1\]](#ref-1) 的 Message Field Validation and Disassembling 一章。
 
-##### 6.8.2.1. SGW Calculation
+##### 6.8.2.1. SGW 计算
 
 请参阅 [\[1\]](#ref-1) 的 SGW Calculation 一章。
 
-##### 6.8.2.2. OFS Calculation
+##### 6.8.2.2. OFS 计算
 
 如果成功校验，时基从节点应通过 StbM_BusSetGlobalTime 将新的偏移时间转发给 **StbM**（按照 [PRS_TS_00110] 计算）。
 
 关于附加要求，请参阅 [\[1\]](#ref-1) 的 OFS Calculation 一章。
 
-##### 6.8.2.3. CRC Validation
+##### 6.8.2.3. CRC 校验
 
 如果已配置，应使用 [9, **SWS** CRCLibrary] 中定义的函数 Crc_CalculateCRC8H2F 来计算 **CRC**。
 
@@ -863,21 +863,21 @@ EthTSynIcvVerificationTimeout 应随着 [EthTSyn_IcvVerificationIndication](#745
 
 **AUTOSAR Sub-TLV**：Time Secured / Status secured / UserData secured / OFS secured——请参阅 [\[1\]](#ref-1) 的相应章节。
 
-##### 6.8.2.4. Sequence Counter (sequenceId) Validation
+##### 6.8.2.4. 序列计数器（sequenceId）校验
 
 关于附加要求，请参阅 **AUTOSAR** 时间同步协议规范 [\[1\]](#ref-1) 的 Sequence Counter (sequenceId) Validation 一章。
 
-##### 6.8.2.5. ICV Verification
+##### 6.8.2.5. ICV 验证
 
 请参阅 PRS-TimeSyncProtocol [\[1\]](#ref-1) 的 ICV Verification 一章。
 
-##### 6.8.2.6. Message Disassembling
+##### 6.8.2.6. 报文拆解
 
 请参阅 [\[1\]](#ref-1) 的 Message Disassembling 一章。
 
-### 6.9. Time Recording
+### 6.9. 时间记录
 
-#### 6.9.1. Time Validation
+#### 6.9.1. 时间验证
 
 如果 EthTSynTimeValidationSupport 设为 **TRUE**，**EthTSyn** 应支持时间验证。
 
@@ -894,8 +894,8 @@ EthTSynIcvVerificationTimeout 应随着 [EthTSyn_IcvVerificationIndication](#745
 
 - 已发送 **Sync** 报文的 sequenceId；
 - **Sync** 报文中发送的 sourcePortIdentity；
-- 在 **Sync** 报文发出时采样的虚拟本地时间 T2_VLT（参见第 [6.7.1](#671-message-processing) 节的发出时间戳规定）；
-- 复制到 **Follow_Up** 报文的 preciseOriginTimestamp（参见第 [6.7.1](#671-message-processing) 节的相应规定）；
+- 在 **Sync** 报文发出时采样的虚拟本地时间 T2_VLT（参见第 [6.7.1](#671-报文处理) 节的发出时间戳规定）；
+- 复制到 **Follow_Up** 报文的 preciseOriginTimestamp（参见第 [6.7.1](#671-报文处理) 节的相应规定）；
 - 复制到 **Follow_Up** 报文的 correctionField。
 
 如果：
@@ -913,7 +913,7 @@ StbM_EthSetSlaveTimingData 应在 StbM_BusSetGlobalTime 之后调用。
 
 - **Follow_Up** 报文中接收到的 sequenceId；
 - **Follow_Up** 报文中接收到的 sourcePortIdentity；
-- 在 **Sync** 报文进入时采样的虚拟本地时间 T1_VLT（参见第 [6.8.1](#681-message-processing) 节的进入时间戳规定）；
+- 在 **Sync** 报文进入时采样的虚拟本地时间 T1_VLT（参见第 [6.8.1](#681-报文处理) 节的进入时间戳规定）；
 - **Follow_Up** 报文中接收到的 preciseOriginTimestamp；
 - **Follow_Up** 报文中接收到的 correctionField，以及
 - **Pdelay** 的当前值。
@@ -922,7 +922,7 @@ StbM_EthSetSlaveTimingData 应在 StbM_BusSetGlobalTime 之后调用。
 
 **注意：** **EthTSyn** 传递 0 以避免未定义的值。**StbM** 将基于同步本地时间元组计算结构成员 referenceLocalTimestamp 和 referenceGlobalTimestamp（参见 **StbM** 规范的相应规定）。
 
-##### 6.9.1.1. Recording of Pdelay Measurement
+##### 6.9.1.1. Pdelay 测量的记录
 
 如果：
 
@@ -944,8 +944,8 @@ StbM_EthSetSlaveTimingData 应在 StbM_BusSetGlobalTime 之后调用。
 
 - 接收到的 Pdelay_Req 报文的 sequenceId，以及该报文的 sourcePortIdentity；
 - 已发送 Pdelay_Resp 报文的 sourcePortIdentity；
-- t2（参见第 [6.5.2](#652-pdelay-message-reception) 节的 t2 规定）；
-- t3（参见第 [6.5.1](#651-pdelay-message-transmission) 节的 t3 规定），以及
+- t2（参见第 [6.5.2](#652-pdelay-报文接收) 节的 t2 规定）；
+- t3（参见第 [6.5.1](#651-pdelay-报文发送) 节的 t3 规定），以及
 - 采样的参考时间元组 [T_refPDResponder, T_VLT_refPDResponder]（参见本节前述的取元组规定）。
 
 如果该时间域已启用用于时间验证的时间记录（见上两条的规定），时基从节点应在发送 Pdelay_Req 报文之前调用 StbM_GetCurrentTime 获取时间元组 [T_refPDInitiator, T_VLT_refPDInitiator]（参见 **EthTSyn** Pdelay 序列）。
@@ -963,7 +963,7 @@ StbM_EthSetSlaveTimingData 应在 StbM_BusSetGlobalTime 之后调用。
 
 - 已发送 Pdelay_Req 报文的 sequenceId，及其 sourcePortIdentity；
 - 接收到的 Pdelay_Resp 报文的 sourcePortIdentity；
-- t1（参见第 [6.5.1](#651-pdelay-message-transmission) 节的 t1 规定）、t4（参见第 [6.5.2](#652-pdelay-message-reception) 节的 t4 规定）；
+- t1（参见第 [6.5.1](#651-pdelay-报文发送) 节的 t1 规定）、t4（参见第 [6.5.2](#652-pdelay-报文接收) 节的 t4 规定）；
 - 来自 Pdelay_Resp 报文的 requestReceiptTimestamp；
 - 来自 Pdelay_Resp_Follow_Up 报文的 responseOriginTimestamp；
 - 采样的参考时间元组 [T_refPDInitiator, T_VLT_refPDInitiator]（参见本节前述的取元组规定）。
@@ -1094,7 +1094,7 @@ StbM_EthSetSlaveTimingData 应在 StbM_BusSetGlobalTime 之后调用。
 
 #### 7.3.1. EthTSyn_Init
 
-**说明**: 该函数初始化 **Ethernet** 时间同步。可通过**EthTSyn.h**获得。本服务为同步调用，不可重入。参数 configPtr（in）：指向所选配置结构的指针。服务 ID [hex]：0x01。细节见第 [6.1.1](#611-general) 节。
+**说明**: 该函数初始化 **Ethernet** 时间同步。可通过**EthTSyn.h**获得。本服务为同步调用，不可重入。参数 configPtr（in）：指向所选配置结构的指针。服务 ID [hex]：0x01。细节见第 [6.1.1](#611-概述) 节。
 
 ```C
 void EthTSyn_Init ( const EthTSyn_ConfigType* configPtr )
@@ -1286,43 +1286,43 @@ EthTSyn_MainFunction 的调用频率由配置参数 EthTSynMainFunctionPeriod �
 
 ![Figure9-1.png](Figure9-1.png)
 
-### 8.2. Time Synchronization Sequence
+### 8.2. 时间同步序列
 
 ![Figure9-2.png](Figure9-2.png)
 
 ![Figure9-2b.png](Figure9-2b.png)
 
-### 8.3. Pdelay Measurement Sequence
+### 8.3. Pdelay 测量序列
 
 （见源文档图 9.3——该图的图在 markdown 转换中未保留，图 9-3 由图 9-4/9-5/9-6 的 Pdelay 部分共同覆盖。）
 
-### 8.4. EthTSyn Egress Timestamping
+### 8.4. EthTSyn 出口时间戳
 
 ![Figure9-4.png](Figure9-4.png)
 
-### 8.5. EthTSyn Ingress Timestamping
+### 8.5. EthTSyn 入口时间戳
 
 ![Figure9-5.png](Figure9-5.png)
 
 ![Figure9-6.png](Figure9-6.png)
 
-### 8.6. Time measurement with Switches
+### 8.6. 使用交换机的时间测量
 
-#### 8.6.1. Time Aware Bridge with GTM as Management CPU - Tx
+#### 8.6.1. 以 GTM 作为管理 CPU 的时间感知桥接 - 发送
 
 ![Figure9-7.png](Figure9-7.png)
 
-#### 8.6.2. Time Aware Bridge without GTM as Management CPU - Tx
+#### 8.6.2. 不使用 GTM 作为管理 CPU 的时间感知桥接 - 发送
 
 ![Figure9-8.png](Figure9-8.png)
 
-#### 8.6.3. Time Aware Bridge without GTM as Management CPU - Rx
+#### 8.6.3. 不使用 GTM 作为管理 CPU 的时间感知桥接 - 接收
 
 ![Figure9-9.png](Figure9-9.png)
 
 ![Figure9-9b.png](Figure9-9b.png)
 
-### 8.7. Secure Time Synchronization Sequence
+### 8.7. 安全时间同步序列
 
 （见源文档第 9.7 节——正文仅为指向安全时间同步序列的指引，无独立内容。）
 

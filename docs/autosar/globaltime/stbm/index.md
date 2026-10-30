@@ -316,27 +316,27 @@ release: R23-11
 
 当前的模块方案对于在 **AUTOSAR** 系统中应用同步时基管理器存在若干限制。
 
-#### 4.1.1. OS ScheduleTable
+#### 4.1.1. OS 调度表
 
 同步时基管理器应执行将 **OS** ScheduleTable 与相应的同步时基同步的功能。但是，**StbM** 只考虑目标 **OS** ScheduleTable 被显式同步的情况。隐式同步不影响 **StbM**，因为该同步机制绕过了本模块（关于显式同步与隐式同步区别的更多信息，请参阅 [\[5\]](#ref-5)）。因此，下文谈论 **OS** ScheduleTable 同步时，始终指显式同步。
 
-#### 4.1.2. Synchronized Time Base Identifier
+#### 4.1.2. 同步时基标识符
 
 StbMSynchronizedTimeBaseIdentifier 的取值范围（128 .. 65535）目前是保留的，可能仍被遗留应用（实现触发型客户）使用。不过，该 ID 范围将在下一个版本中重新分配给新特性。届时将不再支持遗留应用。
 
-#### 4.1.3. Mode switches
+#### 4.1.3. 模式切换
 
 同步时基管理器不处理运行期间的模式切换。
 
-#### 4.1.4. Configuration
+#### 4.1.4. 配置
 
 **StbM** 的 Postbuild 配置仅限于为某时基启用或禁用系统范围全局时间主节点功能（参见 StbMIsSystemWideGlobalTimeMaster）。
 
-#### 4.1.5. Fallback Virtual Local Time
+#### 4.1.5. 备用虚拟本地时间
 
 同步时基管理器允许配置备用虚拟本地时间。如果主虚拟本地时间失效，备用虚拟本地时间只为本地应用提供保持（hold-over）能力。这意味着，从该备用虚拟本地时间导出的时间信息不会在网络上分发。在 **StbM** 的后续版本中，备用虚拟本地时间的行为可能会被扩展以支持更多用例。
 
-#### 4.1.6. Out of scope
+#### 4.1.6. 超出范围
 
 - 在全局时间建立期间发生的、并非由本模块自身引起的错误（例如 FlexRay 全局时间的丢失是 FlexRay 的问题，而不是同步时基管理器的问题）。
 - 在与客户交互期间发生的错误。
@@ -349,11 +349,11 @@ StbMSynchronizedTimeBaseIdentifier 的取值范围（128 .. 65535）目前是保
 
 ## 5. 对其他模块的依赖
 
-### 5.1. Code file structure
+### 5.1. 代码文件结构
 
 细节请参阅 [4, **SWS** BSW General] 的第 5.1.6 章「Code file structure」。
 
-### 5.2. Header file structure
+### 5.2. 头文件结构
 
 细节请参阅 [4, **SWS** BSW General] 的第 5.1.7 节「Header file structure」。
 
@@ -1829,7 +1829,7 @@ r_orc = (TG_Stop - TG_Start) / (TV_Stop - TV_Start) + 1     /* (7.4) */
 
 ### 6.16. 时间记录
 
-#### 6.16.1. General
+#### 6.16.1. 概述
 
 如果 StbMTimeRecordingSupport 设为 **TRUE**，**StbM** 应为某时基支持全局时间精度测量。
 
@@ -2058,7 +2058,7 @@ GlbSeconds 和 GlbNanoSeconds 是更新接收时间元组（即 TG_Rx）的全�
 
 如果 pathDelay 小于或等于 StbMPdelayValidationThreshold，**StbM** 应复位相应时基的 timeBaseStatus 中的 **PDELAY_EXCEEDED** 位。
 
-##### 6.17.1.3. Common
+##### 6.17.1.3. 公共部分
 
 以下的每一种记录表：
 
@@ -2124,7 +2124,7 @@ GlbSeconds 和 GlbNanoSeconds 是更新接收时间元组（即 TG_Rx）的全�
 
 **StbM** 传递块时应从包含最旧数据的块开始，随后按数据的新旧升序（即 **FIFO** 顺序）排列。包含最新数据的块最后传递。
 
-##### 6.17.2.3. Common
+##### 6.17.2.3. 公共部分
 
 **StbM** 应确保以下记录表中块的数据完整性：
 
@@ -2523,7 +2523,7 @@ TL_Monitor = TL_Main(prev) + (TV_Fallback - TV_Fallback_Main(prev))     /* (7.5)
 
 ### 7.2. 类型定义
 
-#### 7.2.1. Extension to Std_ReturnType
+#### 7.2.1. Std_ReturnType 的扩展
 
 范围 **STBM_E_BUSY**（0x02）：函数调用失败，因为该服务仍然忙碌。可通过**StbM.h**获得。
 
@@ -4139,7 +4139,7 @@ GetRxFreshnessFct 函数应由参数 StbMGetRxFreshnessValueFuncName 设置。
 
 ![Figure9-3.png](Figure9-3.png)
 
-### 8.3. OS ScheduleTable 的显式同步
+### 8.3. OS 调度表的显式同步
 
 ![Figure9-4.png](Figure9-4.png)
 

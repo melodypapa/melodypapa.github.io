@@ -196,13 +196,13 @@ release: R23-11
   - 为时基从节点验证 **ICV**
 - **IdsM**——安全事件的报告
 
-### 5.1. File structure
+### 5.1. 文件结构
 
-#### 5.1.1. Code file structure
+#### 5.1.1. 代码文件结构
 
 细节请参阅 [3, **SWS** BSW General] 的第 5.1.6 节「Code file structure」。
 
-#### 5.1.2. Header file structure
+#### 5.1.2. 头文件结构
 
 细节请参阅 [3, **SWS** BSW General] 的第 5.1.7 节「Header file structure」。
 
@@ -216,18 +216,18 @@ release: R23-11
 
 时间同步的原理和通用措辞在 [5, **SWS** Synchronized Time-Base Manager] 和 [1, **RS** Time Synchronization] 中描述。
 
-### 6.2. Module Handling
+### 6.2. 模块处理
 
 本节包含 **CAN** 时间同步辅助功能的描述。
 
 如果 **CanTSyn** 调用 **StbM** 的 **API**，它应使用相应时间域的参数 CanTSynSynchronizedTimeBaseRef 所引用时基的时基 ID。
 
-#### 6.2.1. Interrupt Handling
+#### 6.2.1. 中断处理
 
 在发送或接收 **SYNC** 报文时，需要在 RX 指示 / TX 确认回调中捕获虚拟本地时间的当前值：
 
-- either 在 **RX** / **TX** 中断的上下文中以中断模式捕获
-- or 在主函数中以轮询模式捕获（**注意：** 强烈建议时基从节点不要使用轮询模式）。
+- 要么在 **RX** / **TX** 中断的上下文中以中断模式捕获
+- 要么在主函数中以轮询模式捕获（**注意：** 强烈建议时基从节点不要使用轮询模式）。
 
 中断自身发生与当前虚拟本地时间的确定之间的任何延迟都会使发送或接收时基的精度变差。
 
@@ -237,7 +237,7 @@ release: R23-11
 
 因此，尽管后续的帧检查（例如 **CRC** 校验、**SC** 校验）可能会失败从而使该快照变得多余，但仍可能已经获取了虚拟本地时间的快照。
 
-#### 6.2.2. Initialization
+#### 6.2.2. 初始化
 
 **CAN** 时间同步通过 [CanTSyn_Init](#731-cantsyn_init) 初始化。除 [CanTSyn_GetVersionInfo](#732-cantsyn_getversioninfo) 和 [CanTSyn_Init](#731-cantsyn_init) 之外，**CAN** 时间同步的 **API** 函数只有在模块被正确初始化之后才能调用。
 
@@ -245,11 +245,11 @@ release: R23-11
 
 序列计数器（**SC**）应以 0 初始化。
 
-#### 6.2.3. Error Handling
+#### 6.2.3. 错误处理
 
 在错误和异常情况下，**CanTSyn** 模块不应修改其当前模块状态，而只需报告该错误事件。
 
-### 6.3. Message Format
+### 6.3. 报文格式
 
 **SYNC**、**FUP**、**OFS** 和 **OFNS** 报文被分配给专用的报文类型"TimeSync"。
 
@@ -318,7 +318,7 @@ release: R23-11
 
 StbM_UserDataType.userDataLength 应设为时间同步报文类型特定的用户字节数。
 
-#### 6.3.1. SYNC and FUP Message
+#### 6.3.1. SYNC 与 FUP 报文
 
 普通 **SYNC** 和 **FUP** 报文的报文布局由以下规定定义，取决于载荷是否受 **CRC** 保护和/或被 **ICV** 保护：
 
@@ -425,7 +425,7 @@ StbM_UserDataType.userDataLength 应设为时间同步报文类型特定的用�
 | 10 | | FV | | **FV** |
 | 10+ FVL（字节） | | ICV | | **ICV** |
 
-#### 6.3.2. Offset Messages
+#### 6.3.2. 偏移报文
 
 偏移报文可以与时间同步报文多路复用（使用相同的 **PDU** 等）。
 
@@ -437,13 +437,13 @@ StbM_UserDataType.userDataLength 应设为时间同步报文类型特定的用�
 
 如果 CanTSynUseExtendedMsgFormat 为 **FALSE**，则应使用普通偏移报文格式，即报文类型为 0x34、0x44、0x3C 和 0x4C 的偏移报文。
 
-**注意：** 普通偏移报文格式参见第 [6.3.2.1](#6321-normal-offset-messages) 节。
+**注意：** 普通偏移报文格式参见第 [6.3.2.1](#6321-普通偏移报文) 节。
 
 如果 CanTSynUseExtendedMsgFormat 为 **TRUE**，则应使用扩展偏移报文格式，即报文类型为 0x54、0x64、0x94 和 0xA4 的偏移报文。
 
-**注意：** 扩展偏移报文格式参见第 [6.3.2.2](#6322-extended-offset-messages) 节。
+**注意：** 扩展偏移报文格式参见第 [6.3.2.2](#6322-扩展偏移报文) 节。
 
-##### 6.3.2.1. Normal Offset Messages
+##### 6.3.2.1. 普通偏移报文
 
 普通 **OFS**/**OFNS** 报文的报文布局由以下规定定义，取决于载荷是否受 **CRC** 保护：
 
@@ -500,7 +500,7 @@ StbM_UserDataType.userDataLength 应设为时间同步报文类型特定的用�
 | 3 | 0 | SGW | SyncToGTM = 0 / SyncToSubDomain = 1 | |
 | 4-7 | | OfsTimeNSec | | 以纳秒为单位的 32 位偏移时间值 |
 
-##### 6.3.2.2. Extended Offset messages
+##### 6.3.2.2. 扩展偏移报文
 
 扩展 **OFS** 报文（即对于 **CAN FD PDU**，如果 CanTSynUseExtendedMsgFormat 设为 **TRUE**）的报文布局如下，取决于载荷是否受 **CRC** 保护和/或被 **ICV** 保护：
 
@@ -591,7 +591,7 @@ StbM_UserDataType.userDataLength 应设为时间同步报文类型特定的用�
 | 18 | | FV | | **FV** |
 | 18+ FVL（字节） | | ICV | | **ICV** |
 
-### 6.4. Acting as Time Master
+### 6.4. 作为时基主节点
 
 时基主节点是某个时基的主节点实体，它将该时基传播给通信网络某个区段内的一组时基从节点，作为该时基的源。
 
@@ -611,7 +611,7 @@ StbM_UserDataType.userDataLength 应设为时间同步报文类型特定的用�
 
 时基主节点应通过调用 CanIf_Transmit 来发送 **SYNC**、**FUP**、**OFS** 和 **OFNS** 报文，所用的 **PduId** 通过相应时间域的 CanTSynGlobalTimePduRef 导出。
 
-#### 6.4.1. SYNC and FUP message processing
+#### 6.4.1. SYNC 与 FUP 报文处理
 
 时基主节点应以 **SYNC** 报文开始同步时基的每个时间同步序列。
 
@@ -660,7 +660,7 @@ StbM_UserDataType.userDataLength 应设为时间同步报文类型特定的用�
 
 **FUP** 报文的发送方（时基主节点）使用 debounceCounter 值到达 0 作为从 **SYNC** 到 **FUP** 的触发条件。
 
-**注意：** debounceCounter 的使用参见第 [6.4.4](#644-debouncing-of-timesync-message-transmission) 节。
+**注意：** debounceCounter 的使用参见第 [6.4.4](#644-timesync-报文发送的去抖) 节。
 
 每次 **SYNC** 报文的发送请求都应监视发送确认超时。
 
@@ -672,7 +672,7 @@ StbM_UserDataType.userDataLength 应设为时间同步报文类型特定的用�
 
 **注意：** 如果 [CanTSyn_TxConfirmation](#742-cantsyn_txconfirmation) 被较晚调用，使用 2 秒的超时是为了避免 **FUP** 报文中 **OVS** 值的溢出（值域：0 .. 3 秒）。
 
-#### 6.4.2. OFS message processing
+#### 6.4.2. OFS 报文处理
 
 时基主节点应以 **OFS** 报文开始偏移时基的每个时间同步序列。
 
@@ -704,7 +704,7 @@ StbM_UserDataType.userDataLength 应设为时间同步报文类型特定的用�
 
 **OFNS** 报文的发送方（时基主节点）使用 debounceCounter 值到达 0 作为从 **OFS** 到 **OFNS** 的触发条件。
 
-**注意：** debounceCounter 的使用参见第 [6.4.4](#644-debouncing-of-timesync-message-transmission) 节。
+**注意：** debounceCounter 的使用参见第 [6.4.4](#644-timesync-报文发送的去抖) 节。
 
 如果 CanTSynGlobalTimeTxIcvSecured 为 **ICV_NOT_SUPPORTED**，则取决于 CanTSynGlobalTimeTxCrcSecured，**OFS** / **OFNS** 报文应为以下类型：
 
@@ -743,15 +743,15 @@ StbM_UserDataType.userDataLength 应设为时间同步报文类型特定的用�
 
 **注意：** 超时事件中状态机的复位避免了发送可能已过期的偏移时间。取而代之的是通过 StbM_GetOffset 获取最新的偏移时间。
 
-#### 6.4.3. Transmission mode
+#### 6.4.3. 发送模式
 
 如果调用 [CanTSyn_SetTransmissionMode](#733-cantsyn_settransmissionmode)(Controller, Mode) 且参数 Mode 等于 **CANTSYN_TX_OFF**，则应省略 **CanTSyn** 在此 **CAN** 通道上的所有发送请求。
 
 如果调用 [CanTSyn_SetTransmissionMode](#733-cantsyn_settransmissionmode)(Controller, Mode) 且参数 Mode 等于 **CANTSYN_TX_ON**，则 **CanTSyn** 在此 **CAN** 通道上的所有发送请求应能够被发送。
 
-#### 6.4.4. Debouncing of Timesync message transmission
+#### 6.4.4. Timesync 报文发送的去抖
 
-##### 6.4.4.1. Debouncing per PDU
+##### 6.4.4.1. 按 PDU 去抖
 
 **CanTSyn** 对时基主节点的 **CAN Tx PDU** 进行去抖（debounce），以避免总线上 Timesync 报文的突发（例如在启用立即发送时）。该机制还定义了 **SYNC** 与其对应 **FUP** 报文之间的最小间隔（以及 **OFS** 与 **OFNS** 报文之间的最小间隔）。
 
@@ -759,7 +759,7 @@ StbM_UserDataType.userDataLength 应设为时间同步报文类型特定的用�
 
 **CanTSyn** 不支持跨域和跨总线共享 **PDU**，即同一 **PDU** ID 不应用于不同的时间域。
 
-但是，**CanTSyn** 支持一个单独的机制来对跨 **CAN** 总线的 **SYNC**/**OFS** 报文发送进行去抖（参见第 [6.4.4.2](#6442-debouncing-across-multiple-domains-and-busses) 节「跨多个域和总线的去抖」）。
+但是，**CanTSyn** 支持一个单独的机制来对跨 **CAN** 总线的 **SYNC**/**OFS** 报文发送进行去抖（参见第 [6.4.4.2](#6442-跨多个域和总线的去抖) 节「跨多个域和总线的去抖」）。
 
 如果某时基的 CanTSynGlobalTimeDebounceTime 大于 0，**CanTSyn** 应始终按下述方式对相应的 Timesync **PDU** 进行去抖，否则 **CanTSyn** 不应执行任何去抖。
 
@@ -809,7 +809,7 @@ StbM_UserDataType.userDataLength 应设为时间同步报文类型特定的用�
 
 **理由：** **SYNC**/**FUP** 或 **OFS**/**OFNS** 序列不被中断，即在前一个序列完成之前不会开始新的 **SYNC**/**OFS** 序列。
 
-##### 6.4.4.2. Debouncing across multiple domains and busses
+##### 6.4.4.2. 跨多个域和总线的去抖
 
 如果使用 **SW** 时间戳，时基主节点发送的全局时间的精度会受到发送确认 ISR 延迟/抖动的影响。当时基主节点在多个域/总线上发送 **SYNC** 报文、且发送确认中断由同一核处理时，该影响会加剧。在这种情况下，多个发送确认中断很可能几乎同时被触发。结果是，除了第一次之外，每次 CanTSyn ISR 的执行都会被"第一个"待处理中断的 CanTSyn ISR 延迟及其执行时间所延迟，也会被在第一个 CanTSyn ISR 之后、第二个中断之前直接处理的其他中断的 ISR 延迟（例如由于中断优先级）。为了避免这种 **SYNC** 报文的突发发送，发送将分布在多个 **CanTSyn** 主循环上，即每个 **CanTSyn** 主循环同时进行的 **SYNC** 报文发送数量是受限的。另请参阅图 7.2 中 Timesync 报文发送的总体序列。
 
@@ -824,7 +824,7 @@ StbM_UserDataType.userDataLength 应设为时间同步报文类型特定的用�
 
 **CanTSyn** 模块应在每次为 **SYNC** 报文调用 CanIf_Transmit 时将 syncTxCounter 加 1。
 
-#### 6.4.5. Immediate Time Synchronization
+#### 6.4.5. 立即时间同步
 
 除了周期性的 Timesync 报文发送之外，可能还需要立即的报文发送。图 7.2 展示了立即发送与周期发送如何协调。
 
@@ -845,7 +845,7 @@ StbM_UserDataType.userDataLength 应设为时间同步报文类型特定的用�
 
 **注意：** timeBaseStatus 可通过 StbM_GetTimeBaseStatus 或 StbM_GetCurrentTime 获取。
 
-除了立即发送的实际触发条件（见上文）之外，立即发送还需要考虑参数 CanTSynCyclicMsgResumeTime。另请参阅周期 Timesync 报文发送的触发条件（分别见第 [6.4.1](#641-sync-and-fup-message-processing) 节和第 [6.4.2](#642-ofs-message-processing) 节的规定）。
+除了立即发送的实际触发条件（见上文）之外，立即发送还需要考虑参数 CanTSynCyclicMsgResumeTime。另请参阅周期 Timesync 报文发送的触发条件（分别见第 [6.4.1](#641-sync-与-fup-报文处理) 节和第 [6.4.2](#642-ofs-报文处理) 节的规定）。
 
 配置 CanTSynCyclicMsgResumeTime 的两个主要场景：
 
@@ -869,15 +869,15 @@ StbM_UserDataType.userDataLength 应设为时间同步报文类型特定的用�
 
 如果 cyclicMsgResumeCounter 被递减到 0 或以下，则 **CanTSyn** 应在同一个 [CanTSyn_MainFunction](#751-cantsyn_mainfunction) 调用内通过请求 **SYNC** 或 **OFS** 报文发送来恢复周期 Timesync 报文发送。
 
-**理由：** 该规定是为了确保第一次周期发送在与 cyclicMsgResumeCounter 达到 0 相同的主函数调用中被请求（参见第 [6.4.1](#641-sync-and-fup-message-processing) 节和第 [6.4.2](#642-ofs-message-processing) 节规定中的"最早可能"主函数）。报文是否实际发送还取决于 debounceCounter。
+**理由：** 该规定是为了确保第一次周期发送在与 cyclicMsgResumeCounter 达到 0 相同的主函数调用中被请求（参见第 [6.4.1](#641-sync-与-fup-报文处理) 节和第 [6.4.2](#642-ofs-报文处理) 节规定中的"最早可能"主函数）。报文是否实际发送还取决于 debounceCounter。
 
-#### 6.4.6. Calculation and Assembling of Time Synchronization Messages
+#### 6.4.6. 时间同步报文的计算与组装
 
 本章描述如何计算时间同步报文的各项（第 1 步）以及如何组装报文（第 2 步）的工作流。
 
-##### 6.4.6.1. Global Time Calculation
+##### 6.4.6.1. 全局时间计算
 
-除了时基主节点实际在总线上发送的报文字段（参见第 [6.3](#63-message-format) 节）——SyncTimeSec、OVS 和 SyncTimeNSec——之外，本章还定义并使用以下内部变量来计算要在总线上为同步时间域发送的全局时间：
+除了时基主节点实际在总线上发送的报文字段（参见第 [6.3](#63-报文格式) 节）——SyncTimeSec、OVS 和 SyncTimeNSec——之外，本章还定义并使用以下内部变量来计算要在总线上为同步时间域发送的全局时间：
 
 - T0_SYNC：从 **StbM** 获取的全局时间
 - T0_SYNC_ns：T0_SYNC 的纳秒部分
@@ -896,7 +896,7 @@ StbM_UserDataType.userDataLength 应设为时间同步报文类型特定的用�
 
 **SYNC** 报文成功发送之后，**CanTSyn** 捕获 **SYNC** 报文的发出时间戳。
 
-对于同步时间域，在 **SYNC** 报文 TX 确认成功且未发生 TX 确认超时（参见第 [6.4.1](#641-sync-and-fup-message-processing) 节的发送确认超时规定）时，时基主节点应在 TX 确认例程（[CanTSyn_TxConfirmation](#742-cantsyn_txconfirmation)）内：
+对于同步时间域，在 **SYNC** 报文 TX 确认成功且未发生 TX 确认超时（参见第 [6.4.1](#641-sync-与-fup-报文处理) 节的发送确认超时规定）时，时基主节点应在 TX 确认例程（[CanTSyn_TxConfirmation](#742-cantsyn_txconfirmation)）内：
 
 - 如果启用了硬件时间戳：
   - 通过 CanIf_GetEgressTimeStamp 从 **CAN** 控制器硬件值获取 T1_CAN 作为发出时间戳；
@@ -951,21 +951,21 @@ StbM_UserDataType.userDataLength 应设为时间同步报文类型特定的用�
 
 **注意：** **OFS** 和 **OFNS** 报文不加时间戳。
 
-##### 6.4.6.2. OVS Calculation
+##### 6.4.6.2. OVS 计算
 
 如果发送方检测到超出 StbM_TimeStampType.nanoseconds 定义范围的纳秒溢出（参见上文 **FUP** 报文数据写入规定），则应在 **FUP** 报文中设置 **OVS**。不适合放入 StbM_TimeStampType.nanoseconds 的剩余秒部分应写入 **OVS**。
 
-##### 6.4.6.3. SGW Calculation
+##### 6.4.6.3. SGW 计算
 
 **SGW** 值（时间网关同步状态）应从时基同步状态获取。如果 timeBaseStatus 中的 **SYNC_TO_GATEWAY** 位未置位，**SGW** 值应为 SyncToGTM。否则 **SGW** 值应设为 SyncToSubDomain。
 
-##### 6.4.6.4. Sequence Counter Calculation
+##### 6.4.6.4. 序列计数器计算
 
 4 位的序列计数器（**SC**）表示每个时间域 0 到 15 的数字。序列计数器在 **SYNC** 和 **OFS** 报文之间应相互独立，并且在每次 **SYNC** 或 **OFS** 报文发送请求时连续加 1。它应在 15 处回绕到 0。
 
 **FUP** 报文的序列计数器（**SC**）值应设为对应 **SYNC** 报文的 **SC** 值。**OFNS** 报文的 **SC** 值应设为对应 **OFS** 报文的 **SC** 值。
 
-##### 6.4.6.5. CRC Calculation
+##### 6.4.6.5. CRC 计算
 
 如果已配置，应使用 [6, **SWS** CRCLibrary] 中定义的函数 Crc_CalculateCRC8H2F 来计算 **CRC**。
 
@@ -977,7 +977,7 @@ DataID 应计算为 DataID = DataIDList[SC]，其中 DataIDList 由配置为每�
 
 如果 CanTSynUseExtendedMsgFormat 为 **TRUE**，对于扩展 Timesync 报文格式，**CRC** 应对时间同步报文字节 2 到字节 15 以及 DataID 计算，其中字节 2 最先施加，随后按升序施加其他字节，DataID 最后。
 
-##### 6.4.6.6. ICV Generation
+##### 6.4.6.6. ICV 生成
 
 **ICV** 应对 **SYNC** 载荷、**FUP** 载荷和 **FV**（基于配置 CanTSynIcvGenerationFvIdRef）计算，并包含在 **FUP** 报文中。
 
@@ -1049,7 +1049,7 @@ DataID 应计算为 DataID = DataIDList[SC]，其中 DataIDList 由配置为每�
 
 则时基主节点应在下一次调用 [CanTSyn_MainFunction](#751-cantsyn_mainfunction) 时重试新鲜度获取和 **ICV** 计算。
 
-##### 6.4.6.7. Message Assembling
+##### 6.4.6.7. 报文组装
 
 对于时间同步报文的每次发送，**CanTSyn** 模块应按如下方式组装报文：
 
@@ -1061,11 +1061,11 @@ DataID 应计算为 DataID = DataIDList[SC]，其中 DataIDList 由配置为每�
 6. 获取 **FV**（取决于配置）并将 FVL、ICVL 和 **FV** 附加到相关报文中的适当位置；
 7. 计算 **ICV**（取决于配置）并附加到相关报文中的适当位置。
 
-### 6.5. Acting as Time Slave
+### 6.5. 作为时基从节点
 
 时基从节点是在通信网络某个区段内作为某时基接收方/消费者的实体。
 
-#### 6.5.1. SYNC and FUP message processing
+#### 6.5.1. SYNC 与 FUP 报文处理
 
 如果 CanTSynRxCrcValidated 配置为 **CRC_VALIDATED**，**CanTSyn** 应只接受 Type 等于 0x20 且 **CRC** 值正确的 **SYNC** 报文。
 
@@ -1125,9 +1125,9 @@ DataID 应计算为 DataID = DataIDList[SC]，其中 DataIDList 由配置为每�
 
 **理由：** 上述两条规定的意图是提高 **CanTSyn** 模块对抗报文序列错误的稳健性，特别是攻击者注入伪造 **SYNC** 报文的场景。注意这并不能过滤掉所有可能的伪造 **SYNC** 场景。
 
-#### 6.5.2. OFS and OFNS message processing
+#### 6.5.2. OFS 与 OFNS 报文处理
 
-##### 6.5.2.1. CRC Validation of OFS messages
+##### 6.5.2.1. OFS 报文的 CRC 校验
 
 如果 CanTSynRxCrcValidated 配置为 **CRC_VALIDATED**，**CanTSyn** 应只接受：
 
@@ -1143,7 +1143,7 @@ DataID 应计算为 DataID = DataIDList[SC]，其中 DataIDList 由配置为每�
 - Type 等于 0x34、0x54 或 0x94 的 **OFS** 报文，或
 - Type 等于 0x44、0x64 或 0xA4 且 **CRC** 值正确的 **OFS** 报文。
 
-##### 6.5.2.2. CRC Validation of OFNS messages
+##### 6.5.2.2. OFNS 报文的 CRC 校验
 
 表 7.19 列出了使 **CanTSyn** 对 **OFNS** 报文的 **CRC** 校验成功的以下各项值的组合：
 
@@ -1175,7 +1175,7 @@ DataID 应计算为 DataID = DataIDList[SC]，其中 DataIDList 由配置为每�
 - 序列计数器与对应 **OFS** 报文的值相同、Type 等于 0x3C 的 **OFNS** 报文，或
 - 序列计数器与对应 **OFS** 报文的值相同、Type 等于 0x4C 且 **CRC** 值正确的 **OFNS** 报文。
 
-##### 6.5.2.3. ICV Verification of Extended OFS Messages
+##### 6.5.2.3. 扩展 OFS 报文的 ICV 验证
 
 如果 CanTSynRxIcvVerificationType 配置为 **ICV_VERIFIED**，**CanTSyn** 应对带 **ICV** 的扩展 **OFS** 报文（报文类型 0x94、0xA4）执行 **ICV** 验证。对于不带 **ICV** 的扩展 **OFS** 报文（报文类型 0x54、0x64），**CanTSyn** 应将 **ICV** 验证视为失败。
 
@@ -1185,7 +1185,7 @@ DataID 应计算为 DataID = DataIDList[SC]，其中 DataIDList 由配置为每�
 
 如果 CanTSynRxIcvVerificationType 配置为 **ICV_OPTIONAL**，**CanTSyn** 应对带 **ICV** 的扩展 **OFS** 报文（报文类型 0x94、0xA4）执行 **ICV** 验证。对于不带 **ICV** 的扩展 **OFS** 报文（报文类型 0x54、0x64），**CanTSyn** 不应执行 **ICV** 验证。
 
-##### 6.5.2.4. General
+##### 6.5.2.4. 概述
 
 如果 CanTSynUseExtendedMsgFormat 为 **FALSE**，**CanTSyn** 应为每个配置的时基从节点（[CanTSynGlobalTimeSlave](#9217-cantsynglobaltimeslave)）监视 **OFS** 与其 **OFNS** 报文之间的接收超时 CanTSynGlobalTimeFollowUpTimeout。
 
@@ -1208,13 +1208,13 @@ DataID 应计算为 DataID = DataIDList[SC]，其中 DataIDList 由配置为每�
 
 在调用 StbM_BusSetGlobalTime 时，measureDataPtr 结构的参数 pathDelay 应设为 0。
 
-#### 6.5.3. Validation and Disassembling of Time Synchronization Messages
+#### 6.5.3. 时间同步报文的校验与拆解
 
 本章描述如何校验时间同步报文的各项（第 1 步）以及如何拆卸报文（第 2 步）的工作流。
 
-##### 6.5.3.1. Global Time Calculation
+##### 6.5.3.1. 全局时间计算
 
-除了时基从节点在总线上从时基主节点实际接收的报文字段（参见第 [6.3](#63-message-format) 节）——SyncTimeSec、OVS 和 SyncTimeNSec——之外，本章还定义并使用以下内部变量来计算同步时间域的接收时间元组：
+除了时基从节点在总线上从时基主节点实际接收的报文字段（参见第 [6.3](#63-报文格式) 节）——SyncTimeSec、OVS 和 SyncTimeNSec——之外，本章还定义并使用以下内部变量来计算同步时间域的接收时间元组：
 
 - T0：在 **SYNC** 报文中从时基主节点接收的全局时间（秒部分）。
 - T1_VLT：**SYNC** 报文的进入时间戳，由 **CAN** 控制器中的硬件或在 [CanTSyn_RxIndication](#741-cantsyn_rxindication) 中的 **SW** 捕获。
@@ -1295,15 +1295,15 @@ DataID 应计算为 DataID = DataIDList[SC]，其中 DataIDList 由配置为每�
 
 **注意：** **OFS** 和 **OFNS** 报文不加时间戳。
 
-##### 6.5.3.2. OVS Consideration
+##### 6.5.3.2. OVS 的考量
 
 接收方应考虑 **OVS**（仅 **FUP**）以获取接收到的同步时基的秒部分。
 
-##### 6.5.3.3. SGW Calculation
+##### 6.5.3.3. SGW 计算
 
 如果 **SGW** 值（**FUP**、**OFNS** 和扩展 **OFS**）设为 SyncToSubDomain，则 timeBaseStatus 中的 **SYNC_TO_GATEWAY** 位应设为 **TRUE**。否则应设为 **FALSE**。
 
-##### 6.5.3.4. Sequence Counter Validation
+##### 6.5.3.4. 序列计数器校验
 
 图 7.4 展示了时基从节点对 **SYNC** 和 **OFS** 报文的序列计数器校验。
 
@@ -1329,7 +1329,7 @@ DataID 应计算为 DataID = DataIDList[SC]，其中 DataIDList 由配置为每�
 
 如果差值大于 0 且小于或等于 CanTSynGlobalTimeSequenceCounterJumpWidth，则时基从节点应将该序列计数器值视为有效，否则视为无效。
 
-###### 6.5.3.4.1. Sequence Counter Hysteresis
+###### 6.5.3.4.1. 序列计数器滞回
 
 本章规定如何应用可选的滞回（CanTSynGlobalTimeSequenceCounterHysteresis，参见下文的滞回计数规定）来检查序列计数器值是否有效，即序列计数器检查是否实际成功。
 
@@ -1375,7 +1375,7 @@ DataID 应计算为 DataID = DataIDList[SC]，其中 DataIDList 由配置为每�
 
 如果连续有效序列计数器跳变的数量超过值 CanTSynGlobalTimeSequenceCounterHysteresis，则时基从节点应将该序列计数器值视为有效，否则视为无效。
 
-##### 6.5.3.5. CRC Validation
+##### 6.5.3.5. CRC 校验
 
 如果已配置，应使用 [6, **SWS** CRCLibrary] 中定义的函数 Crc_CalculateCRC8H2F 来校验 **CRC**。
 
@@ -1387,7 +1387,7 @@ DataID 应计算为 DataID = DataIDList[SC]，其中 DataIDList 由配置为每�
 
 如果 CanTSynUseExtendedMsgFormat 为 **TRUE**，对于扩展 Timesync 报文格式，**CRC** 应对时间同步报文字节 2 到字节 15 以及 DataID 计算，其中字节 2 最先施加，随后按升序施加其他字节，DataID 最后。
 
-##### 6.5.3.6. ICV Verification
+##### 6.5.3.6. ICV 验证
 
 关于每个时间域所引用 **FV** 的配置细节，请参阅 [5, **SWS** StbM] 的第 [9.2.13](#9213-cantsynglobaltimeofnsdataidlistelement)/[9.2.14](#9214-cantsynglobaltimemaster) 节。
 
@@ -1466,12 +1466,12 @@ CanTSynIcvVerificationTimeout 应随着 [CanTSyn_IcvVerificationIndication](#744
 
 **注意：** 复位认证构建计数器可以防止在仍可能进行 **ICV** 验证尝试的情况下过早放弃认证过程。
 
-##### 6.5.3.7. Message Disassembling
+##### 6.5.3.7. 报文拆解
 
 对于每条接收到的时间同步报文，**CanTSyn** 应按如下方式校验该报文（所有条件都必须满足）：
 
 1. 根据 CanTSynRxCrcValidated 参数，Type 匹配；
-2. **SC** 值有效（参见第 [6.5.3.4](#6534-sequence-counter-validation) 节及 [6.5.3.4.1](#65341-sequence-counter-hysteresis) 节的各条规定）；
+2. **SC** 值有效（参见第 [6.5.3.4](#6534-序列计数器校验) 节及 [6.5.3.4.1](#65341-序列计数器滞回) 节的各条规定）；
 3. **D** 与每种 Type 定义的时间域范围匹配；
 4. **D** 与某个配置的时间域匹配（由参数 CanTSynGlobalTimeDomainId 给出）；
 5. SyncTimeNSec（仅 **FUP** / **OFNS** / 扩展 **OFS**）与 StbM_TimeStampType.nanoseconds 的定义范围匹配；
@@ -1482,13 +1482,13 @@ CanTSynIcvVerificationTimeout 应随着 [CanTSyn_IcvVerificationIndication](#744
 
 如果接收到的时间同步报文的校验失败（参见上述校验规定），**CanTSyn** 应丢弃接收到的时间同步报文。
 
-### 6.6. Time Recording
+### 6.6. 时间记录
 
-#### 6.6.1. Global Time Precision Measurement
+#### 6.6.1. 全局时间精度测量
 
 在调用 StbM_BusSetGlobalTime 时，measureDataPtr 结构的参数 pathDelay 应设为 0。
 
-#### 6.6.2. Time Validation
+#### 6.6.2. 时间验证
 
 如果 CanTSynTimeValidationSupport 设为 **TRUE**，**CanTSyn** 应支持时间验证。
 
@@ -1514,8 +1514,8 @@ StbM_CanSetSlaveTimingData 应在 StbM_BusSetGlobalTime 之后调用。
 
 - 来自发送方（时基主节点）的序列计数器值；
 - 接收到 **SYNC** 报文的物理通道的段 ID（参见参数 CanTSynGlobalTimeNetworkSegmentId）；
-- 作为 **SYNC** 报文的 syncIngressTimestamp 的 T2_VLT（参见第 [6.5.3.1](#6531-global-time-calculation) 节的 **SW** 时间戳/硬件时间戳各条规定）；
-- 从时基主节点接收的、作为 preciseOriginTimestamp 的 T0 + T4（参见第 [6.5.3.1](#6531-global-time-calculation) 节的相应规定）。
+- 作为 **SYNC** 报文的 syncIngressTimestamp 的 T2_VLT（参见第 [6.5.3.1](#6531-全局时间计算) 节的 **SW** 时间戳/硬件时间戳各条规定）；
+- 从时基主节点接收的、作为 preciseOriginTimestamp 的 T0 + T4（参见第 [6.5.3.1](#6531-全局时间计算) 节的相应规定）。
 
 结构成员 measureDataPtr→referenceLocalTimestamp 和 measureDataPtr→referenceGlobalTimestamp 应传 0。
 
@@ -1532,8 +1532,8 @@ StbM_CanSetSlaveTimingData 应在 StbM_BusSetGlobalTime 之后调用。
 
 - 在 **SYNC** 报文中发送的序列计数器；
 - 发送 **SYNC** 报文的物理通道的段 ID（参见参数 CanTSynGlobalTimeNetworkSegmentId）；
-- 作为 **SYNC** 报文的 syncEgressTimestamp 的 T1_VLT（参见第 [6.4.6.1](#6461-global-time-calculation) 节的相应规定）；
-- 作为精确 preciseOriginTimestamp 的 T0_SYNC + (T1_VLT − T0_VLT)（参见第 [6.4.6.1](#6461-global-time-calculation) 节的相应规定）。
+- 作为 **SYNC** 报文的 syncEgressTimestamp 的 T1_VLT（参见第 [6.4.6.1](#6461-全局时间计算) 节的相应规定）；
+- 作为精确 preciseOriginTimestamp 的 T0_SYNC + (T1_VLT − T0_VLT)（参见第 [6.4.6.1](#6461-全局时间计算) 节的相应规定）。
 
 ### 6.7. 安全事件
 
@@ -1653,7 +1653,7 @@ StbM_CanSetSlaveTimingData 应在 StbM_BusSetGlobalTime 之后调用。
 void CanTSyn_Init ( const CanTSyn_ConfigType* configPtr )
 ```
 
-[**CANTSYN_E_INIT_FAILED**](#681-开发错误) 按照 [3, **SWS** BSW General] 中 SWS_BSW_00050 的规定报告。细节见第 6.2.2 节「Initialization」。
+[**CANTSYN_E_INIT_FAILED**](#681-开发错误) 按照 [3, **SWS** BSW General] 中 SWS_BSW_00050 的规定报告。细节见第 6.2.2 节「初始化」。
 
 #### 7.3.2. CanTSyn_GetVersionInfo
 
@@ -1812,23 +1812,23 @@ CanTSyn_MainFunction 的调用频率由配置参数 CanTSynMainFunctionPeriod �
 
 ## 8. 时序图
 
-### 8.1. Enable Egress Timestamping
+### 8.1. 启用出口时间戳
 
 ![Figure9-1.png](Figure9-1.png)
 
-### 8.2. CAN Time Synchronization (Time Master)
+### 8.2. CAN 时间同步（时基主节点）
 
 ![Figure9-2.png](Figure9-2.png)
 
 ![Figure9-3.png](Figure9-3.png)
 
-### 8.3. CAN Time Synchronization (Time Slave)
+### 8.3. CAN 时间同步（时基从节点）
 
 ![Figure9-4.png](Figure9-4.png)
 
 ![Figure9-5.png](Figure9-5.png)
 
-### 8.4. CAN Secure Time Synchronization (Time Master, Time Slave)
+### 8.4. CAN 安全时间同步（时基主节点、时基从节点）
 
 ![Figure9-6.png](Figure9-6.png)
 
@@ -1848,7 +1848,7 @@ CanTSyn_MainFunction 的调用频率由配置参数 CanTSynMainFunctionPeriod �
 
 以下各章汇总所有配置参数。第 6 章和第 7 章描述参数的详细含义。
 
-#### 9.2.1. Variants
+#### 9.2.1. 变体
 
 **CAN** 时间同步应支持时基主节点、时基从节点和时间网关的配置。
 
