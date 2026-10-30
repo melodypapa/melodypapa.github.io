@@ -435,20 +435,52 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
    runs** (user decisions 2026-10-24/25, superseding the script scan): when
    an article or TR batch is translated, the run adds that article's/batch's
    terms to the page by hand with 来源 attribution (document title as link
-   text, spec + release). **Page format (2026-10-25): flat alphabetical** —
+   text, spec). **Page format (2026-10-25): flat alphabetical** —
    `## <letter>` sections, all entries A–Z across documents (no
    per-document sections, no methodology prose on the page); each entry =
-   `**Term**` + one definition line + one 「来源：」 line per contributing
-   document. Terms are extracted from the SOURCE
+   `**Term**` + one definition line + one 「来源：」 line carrying **all**
+   contributing documents. Terms are extracted from the SOURCE
    during translation — never machine-extracted from the translated article
    afterwards; `gen_glossary.py` is retired. **One term is translated once**
    (user rule 2026-10-24): the same term appearing in another document is NOT
-   re-translated — keep the one definition and append that document on its
-   own 「来源：」 line; a substantively different definition is a user
+   re-translated — keep the one definition and append that document to the
+   same 「来源：」 line; a substantively different definition is a user
    decision, never a silent second line. The
    Foundation TR glossary's translation state is tracked in
    `scripts/tr_glossary.json` (source-extraction workfile, not a build
    input).
+
+   **Entry format (2026-10-30)** — the definition and its attribution are
+   separate paragraphs, so the attribution is visually demoted (a
+   `.glossary-source` rule in `docs/stylesheets/extra.css` shrinks and
+   lightens it) instead of running on from the definition as one paragraph:
+
+   ```markdown
+   **Term**
+   > 释义正文
+   >
+   > 来源：[Doc A](a.md)（SWS_A）、[Doc B](b.md)（SWS_B）
+   {: .glossary-source}
+   ```
+
+   - the `>` separator line makes the attribution its own paragraph —
+     **without it** python-markdown merges the definition and the 来源 into
+     one `<p>` and the two read as one continuous sentence;
+   - the trailing `{: .glossary-source}` attribute is what the CSS targets;
+     it must follow the attribution line directly;
+   - multiple sources sit on **one** 来源 line, separated by `、` (not one
+     line per document);
+   - the release is **not** repeated per line — the page intro states
+     `R23-11` once, and each 来源 item carries only its spec id
+     (`（SWS_A）`);
+   - a term heading is followed by a **blank line** before its definition
+     block; a `**Term**` line glued to the previous entry's attribution is
+     swallowed into that entry's `<blockquote>` and loses its heading;
+   - entries are sorted alphabetically inside their letter section, and a
+     term's section is decided by **its own first letter** (not by where it
+     was pasted). `scripts/rewrite_glossary.py` normalizes the whole page
+     (format, ordering, duplicate handling) and is re-runnable; it refuses
+     to guess at a substantively different definition.
 2. **API reference `api_reference.md`** — every type (8.2) and function (8.3)
    defined in chapter 8 of every R23-11 SWS document, A–Z, each entry naming
    its document and release and linking to the site article when one exists.
@@ -797,3 +829,4 @@ open.
 | Registering a new page in `mkdocs.yml` only (the five `general` guides shipped in nav on 2026-10-29 but absent from `general/index.md` and the CP AUTOSAR overview) | The page is reachable from the sidebar but invisible to a reader browsing the section or the landing page; the strict build cannot see the gap | Step 6.3 + Phase A check 4: `check_indexes.py` fails when any branch page is missing from its landing page or the overview |
 | Letting an index entry copy a Chinese-first title verbatim (`加密服务使用指南（Utilization of Crypto Services）`) | The entry breaks the list's `English（中文）` structure, so the same list mixes two conventions | Step 6.3 entry-structure rule: fix the article's front-matter `title` to `English（中文）`, then propagate to the index labels, `glossary.md` 来源 line and `api_reference.md`; `check_indexes.py --titles` lists remaining drift |
 | Delegating translation to subagents — the RTE/OS runs segmented giant sources by line range across parallel writer agents (2026-10-25/26), and provider concurrency caps repeatedly blocked dispatches mid-run | Split writers cannot carry one terminology, one numbering scheme and the in-place insertion discipline across segments; a capped dispatch stalls the run with half-translated segments; the queue-row ticks and user decisions live in the main session, not in the writers | Step 5 rule 1: the main session translates sequentially; subagent dispatches never write article text (user decision 2026-10-28) |
+| Writing a glossary entry without the `>` separator line before its 「来源：」 line, or gluing the next `**Term**` heading straight onto the previous entry's attribution | Without the separator, python-markdown merges definition and attribution into one `<p>` — the attribution reads as part of the definition (found on all 558 entries, 2026-10-30); a glued heading is swallowed into the previous entry's `<blockquote>` and loses its own heading (13 entries) | Step 6.1 entry format: `**Term**` / `> 释义` / `>` / `> 来源：…` / `{: .glossary-source}`; `scripts/rewrite_glossary.py` normalizes the page and the strict build shows the resulting HTML |
