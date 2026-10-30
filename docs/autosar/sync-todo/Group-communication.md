@@ -189,12 +189,13 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 6 — TODO.md row + commit/PR — commit bcbd61e (branch feature/group-communication-sync-3)
 - [ ] nm (SWS_NetworkManagementInterface · R23-11 markdown · ❌ new article, short name Nm)
   - Note: backbone
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-31 run — new article communication/nm/index.md created (commit 5036abf, branch feature/group-communication-sync-3): full Type A translation, ~2,450 ln; §2 33 term lines (10 acronyms + 16 terms + 7 PN terms, bold-term blockquotes); §3.1 = 「输入文件」 (source heading is literally "Input documents" — com_based_transformer precedent, NOT renamed); §4 has THREE subsections per source (限制/当前版本的特定限制/汽车域的适用性); §6 functional spec complete from source ch.7 (base functionality, NM Coordinator incl. nested sub-buses + 3 sync use cases, wakeup/abortion, partial network incl. 表7.1-7.3 filter/EIRA-ERA example tables, synchronized PNC shutdown, bus-NM prerequisites, NM_BUSNM_LOCALNM, multicore, car wakeup, 表7.4 NM states); §7 API check_api_sync OK (4 types/18 functions/18 说明 blocks; source 8.3.3.2 Nm_UpdateIRA is titled "Definition of callback function" but numbered under ch.8.3 — kept in place); 19 callbacks + 1 scheduled + 期望接口 9+24+1 configurable; §8 时序图 5 figures (9.1 basic functionality = prose "no sequence diagram provided" per source); §9 配置规范 source 10.2-10.4 layout (Nm module, NmGlobalConfig/Constants/Properties/Features, NmChannelConfig + NmPnFilterMaskByte + choice container NmBusType + Generic/Standard sub-containers), 50 records via record extractor + hand translation; ## B appendix covers BOTH B.1 (R22-11, incl. SWS_Nm_NA_00999 in the added list) and B.2 (R23-11) in fences. source ch.6 Requirements traceability + annex A droppable (reported, user verify at gate). check_api_sync = OK. Figures: 18 extracted (8 vector-rendered: 4-1, 7-1, 9-1, 10-2..10-6). Phase A: strict build exit 0, 0 WARNINGs, no nm INFO; heading audit ✓; forbidden-variant sweep 0; hygiene ✓; acronym slice 0 tables, 33 term lines; check_indexes exit 0; gen_api_list regenerated + --check up to date. link_candidates --apply: 10 chapter-refs + 13 citations, idempotent; census: identifier mentions 88 lines (67 §9 definitional); cross-article mentions BswM/SoAd/EcuM/DEM/Dcm SITE report-only, Nm/ComM/Det NO-ARTICLE (Nm self-excluded from candidates). Glossary extension skipped (batch-level pending item). Steps 5/6 per user instruction: commit first, combined confirmation after batch
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit 5036abf (branch feature/group-communication-sync-3)
 - [ ] ethsm (SWS_EthernetStateManager · R23-11 markdown · ❌ new article, short name EthSM)
   - Note: backbone
   - [ ] Step 1 — Source resolution + gap analysis
