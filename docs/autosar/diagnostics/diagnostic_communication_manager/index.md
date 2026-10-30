@@ -1908,3 +1908,2664 @@ DcmDspAlternativeDataType.DcmApplicationDataType 工作流的特性是：在导�
 对于请求中带有 **FunctionalGroupIdentifier** 参数的服务，**Dcm** 应只处理 **FunctionalGroupIdentifier** 等于 0x33 的请求消息。
 
 对于请求中带有 **FunctionalGroupIdentifier** 参数且 **FunctionalGroupIdentifier** 不等于 0x33 的服务，**Dcm** 应返回 **NRC** 0x31（**RequestOutOfRange**）。
+
+###### 6.6.2.5.1. 子功能 0x01、0x07 和 0x12
+
+**UDS** 服务 0x19 的子功能 0x01 或 0x12 请求 **ECU** 报告与诊断仪定义的条件相匹配的 **DTC** 数量。服务请求包含参数：
+
+- DTCStatusMask
+
+**UDS** 服务 0x19 的子功能 0x07 请求 **ECU** 报告与诊断仪定义的条件相匹配的 **DTC** 数量。服务请求包含以下参数：
+
+- DTCSeverityMask
+- DTCStatusMask
+
+在向 **UDS** 服务 0x19 的子功能 0x01、0x07 或 0x12 发送正响应时，**Dcm** 模块应使用符合表7.4 的响应消息中的数据。
+
+表7.4：子功能 0x01、0x07 和 0x12 的响应值（**Subfunction 0x01, 0x07 and 0x12 response values**）
+
+| 参数名称 | 值 |
+|---|---|
+| DTCStatusAvailabilityMask | DTCStatusAvailabilityMask |
+| DTCFormatIdentifier | 由 Dem_GetTranslationType() 返回的值 |
+| DTCCount | 通过 Dem_GetNumberOfFilteredDTC() 计算得到的 **DTC** 数量 |
+
+在响应 **UDS** 服务 0x19 的子功能 0x01、0x07 或 0x12 时，**Dcm** 模块应在使用表7.5 中的参数值通过 Dem_SetDTCFilter() 设置 **DEM** 过滤器之后，使用 Dem_GetNumberOfFilteredDTC() 计算 **DTC** 数量。
+
+表7.5：子功能 0x01、0x07 和 0x12 的 Dem_SetDTCFilter() 参数值（**Dem_SetDTCFilter() parameters values for subfunctions 0x01, 0x07 and 0x12**）
+
+| 参数名称 | reportNumberOfDTCByStatusMask（0x01） | reportNumberOfDTCBySeverityMaskRecord（0x07） | reportNumberOfEmissionsRelatedOBDDTCByStatusMask（0x12） |
+|---|---|---|---|
+| ClientId | 此 Dcm 实例的 Client Id（参见 DcmDemClientRef） | 此 Dcm 实例的 Client Id（参见 DcmDemClientRef） | 此 Dcm 实例的 Client Id（参见 DcmDemClientRef） |
+| DTCStatusMask | 来自请求的 DTCStatusMask | 来自请求的 DTCStatusMask | 来自请求的 DTCStatusMask |
+| DTCFormat | DEM_DTC_FORMAT_UDS | DEM_DTC_FORMAT_UDS | DEM_DTC_FORMAT_UDS |
+| DTCOrigin | PRIMARY_MEMORY | PRIMARY_MEMORY | DEM_DTC_ORIGIN_OBD_RELEVANT_MEMORY |
+| FilterWithSeverity | FALSE | TRUE | FALSE |
+| DTCSeverityMask | 不相关 | 来自请求的 DTCSeverityMask | 不相关 |
+| FilterForFaultDetectionCounter | FALSE | FALSE | FALSE |
+
+###### 6.6.2.5.2. 子功能 0x02、0x0A、0x13、0x15 和 0x17
+
+**UDS** 服务 0x19 的子功能 0x02 或 0x13 请求满足特定条件的 **DTC**（及其相关状态）。服务请求包含参数：
+
+- DTCStatusMask
+
+**UDS** 服务 0x19 的子功能 0x0A 请求所有受支持的 **DTC** 及其相关状态。**UDS** 服务 0x19 的子功能 0x15 请求所有具有永久（permanent）状态的 **DTC**。
+
+在向 **UDS** 服务 0x19 的子功能 0x02、0x0A、0x13、0x15 或 0x17 发送正响应时，**Dcm** 模块应使用表7.6 所定义的响应消息中的数据。
+
+表7.6：子功能 0x02、0x0A、0x13、0x15 和 0x17 的响应值（**Subfunction 0x02, 0x0A, 0x13, 0x15 and 0x17 response values**）
+
+| 参数名称 | 值 |
+|---|---|
+| DTCStatusAvailabilityMask | DTCStatusAvailabilityMask |
+| DTCAndStatusRecord | 按 Dem_GetNextFilteredDTC() 记录获取要求定义（参见下文） |
+| MemorySelection（仅子服务 0x17） | 来自请求 |
+
+**用户定义存储器的状态掩码读取认证检查（Read user defined memory by status mask authentication check）**：在接收到 **UDS** 服务 **ReadDTCInformation**（0x19）子功能 reportUserDefMemoryDTCByStatusMask（0x17）时，**Dcm** 应检查对参数 MemorySelection 中所选用户定义存储器的访问是否已认证，并且仅在以下情况下读取 **DTC** 信息：
+
+- 为该用户定义故障存储器配置了与 MemorySelection 匹配的 DcmDspReadDTCInformationUserDefinedFaultMemoryRoleId，并且通过 DcmDspReadDTCInformationUserDefinedFaultMemoryRoleRef 配置了角色，且角色验证成功，或者
+- 该连接上的活动白名单针对所请求的用户定义存储器选择存在一个条目。
+
+根据以上要求，认证检查仅在配置了 DcmDspAuthentication 时执行。认证失败时的 **NRC** 处理按照 UDS 服务访问权限与认证的 **NRC** 规则执行（参见 §6.5.4.3.1 和 §6.6.2.10）。
+
+在接收到子功能为 0x02 和 0x13 的 **UDS** 服务 0x19 请求时，如果请求消息中接收到的 DTCStatusMask 与 **DEM** 报告的 DTCStatusAvailabilityMask 之间的按位与运算结果为 0，则 **Dcm** 模块应以 0 个 **DTC** 作出正响应。
+
+在响应 **UDS** 服务 0x19 的子功能 0x02、0x0A、0x13、0x15 或 0x17 时，**Dcm** 模块应在使用表7.7 中的参数值通过 Dem_SetDTCFilter() 配置过滤器之后，通过重复调用 Dem_GetNextFilteredDTC() 获取带有 **DTC**（及其相关状态）的记录。
+
+表7.7：子功能 0x02、0x0A、0x13、0x15 和 0x17 的 Dem_SetDTCFilter() 参数值（**Dem_SetDTCFilter() parameters values for subfunctions 0x02, 0x0A, 0x13, 0x15 and 0x17**）
+
+| 参数名称 | reportDTCByStatusMask（0x02） | reportSupportedDTCs（0x0A） | reportEmissionsRelatedOBDDTCByStatusMask（0x13） | reportDTCWithPermanentStatus（0x15） | reportUserDefMemoryDTCByStatusMask（0x17） |
+|---|---|---|---|---|---|
+| ClientId | 此 Dcm 实例的 Client Id（参见 DcmDemClientRef） | 此 Dcm 实例的 Client Id（参见 DcmDemClientRef） | 此 Dcm 实例的 Client Id（参见 DcmDemClientRef） | 此 Dcm 实例的 Client Id（参见 DcmDemClientRef） | 此 Dcm 实例的 Client Id（参见 DcmDemClientRef） |
+| DTCStatusMask | 来自请求的 DTCStatusMask | 0x00 | 来自请求的 DTCStatusMask | 0x00 | 来自请求的 DTCStatusMask |
+| DTCFormat | DEM_DTC_FORMAT_UDS | DEM_DTC_FORMAT_UDS | DEM_DTC_FORMAT_UDS | DEM_DTC_FORMAT_UDS | DEM_DTC_FORMAT_UDS |
+| DTCOrigin | PRIMARY_MEMORY | PRIMARY_MEMORY | DEM_DTC_ORIGIN_OBD_RELEVANT_MEMORY | PERMANENT_MEMORY | 来自请求的 MemorySelection + 0x0100 |
+| FilterWithSeverity | NO | NO | NO | NO | NO |
+| DTCSeverityMask | 不相关 | 不相关 | 不相关 | 不相关 | 不相关 |
+| FilterForFaultDetectionCounter | NO | NO | NO | NO | NO |
+
+**注意：**
+
+- **Dcm** 模块可以通过 Dem_GetNumberOfFilteredDTC() 得到使用 Dem_GetNextFilteredDTC() 将找到的记录数量的指示。这允许实现在遍历 **DTC** 之前计算响应的总大小。
+- 子功能 0x0A 和 0x15 用作 DTCStatusMask 的值 0x00 会禁用 Dem_SetDTCFilter() 中的状态字节过滤。
+
+在未启用分页缓冲支持的情况下，**Dcm** 模块不应向 **UDS** 服务 0x19 的子功能 0x02、0x0A、0x13、0x15 或 0x17 的响应中插入零填充的 **DTC**。
+
+在使用分页缓冲机制时，某些情况下匹配过滤器的 **DTC** 数量可能在计算第一页传输所需的总大小与发送后续页之间发生变化。因此适用以下要求：
+
+在启用分页缓冲支持的情况下，**Dcm** 应将响应大小限制为发送第一页时计算出的大小。如果在此次发送之后有更多 **DTC** 匹配过滤器，则不应考虑额外的 **DTC**。
+
+在启用分页缓冲支持的情况下，**Dcm** 应按发送第一页时计算出的大小对响应进行填充。如果在此次发送之后有更少的 **DTC** 匹配过滤器，则缺失的 **DTC** 应按 15031-6 [16] 的定义用 0 值填充。
+
+如果 Dem_GetNextFilteredDTC() 返回 DEM_NO_SUCH_ELEMENT，且此前已能获取至少一个匹配元素，则 **Dcm** 应发送包含这些数据元素的正响应。
+
+如果 Dem_GetNextFilteredDTC() 返回 DEM_NO_SUCH_ELEMENT，且此前未能获取任何匹配元素，则 **Dcm** 应仅针对正响应所需的服务、子服务及附加参数发送正响应。
+
+###### 6.6.2.5.3. 子功能 0x08
+
+**UDS** 服务 0x19 的子功能 0x08 请求与诊断仪定义的严重度掩码记录相匹配的 **DTC** 及其相关状态。服务请求包含以下参数：
+
+- DTCSeverityMask
+- DTCStatusMask
+
+在向 **UDS** 服务 0x19 的子功能 0x08 发送正响应时，**Dcm** 模块应使用表7.8 所定义的响应消息中的数据。
+
+表7.8：子功能 0x08 的响应值（**Subfunction 0x08 response values**）
+
+| 参数名称 | 值 |
+|---|---|
+| DTCStatusAvailabilityMask | DTCStatusAvailabilityMask |
+| DTCAndSeverityRecord | 按 **DTC** 严重度记录获取规则（Dem_GetNextFilteredDTCAndSeverity()）定义 |
+
+在响应 **UDS** 服务 0x19 的子功能 0x08 时，**Dcm** 模块应在使用表7.9 中的参数值通过 Dem_SetDTCFilter() 配置过滤器之后，通过重复调用 Dem_GetNextFilteredDTCAndSeverity() 获取 DTCAndSeverityRecord。
+
+表7.9：子功能 0x08 的 Dem_SetDTCFilter() 参数值（**Dem_SetDTCFilter() parameters values for Subfunction 0x08**）
+
+| 参数名称 | reportDTCBySeverityMaskRecord |
+|---|---|
+| ClientId | 此 Dcm 实例的 Client Id（参见 DcmDemClientRef） |
+| DTCStatusMask | 来自请求的 DTCStatusMask |
+| DTCFormat | DEM_DTC_FORMAT_UDS |
+| DTCOrigin | PRIMARY_MEMORY |
+| FilterWithSeverity | TRUE |
+| DTCSeverityMask | 来自请求的 DTCSeverityMask |
+| FilterForFaultDetectionCounter | FALSE |
+
+**注意：** **Dcm** 模块可以通过 Dem_GetNumberOfFilteredDTC() 得到使用 Dem_GetNextFilteredDTCAndSeverity() 将找到的记录数量的指示。
+
+###### 6.6.2.5.4. 子功能 0x09
+
+**UDS** 服务 0x19 的子功能 0x09 请求某个 **DTC** 的严重度信息。服务请求包含参数：
+
+- DTCMaskRecord
+
+在向 **UDS** 服务 0x19 的子功能 0x09 发送正响应时，**Dcm** 模块应使用表7.10 所定义的响应消息中的数据。
+
+表7.10：子功能 0x09 的响应值（**Subfunction 0x09 response values**）
+
+| 参数名称 | 值 |
+|---|---|
+| DTCStatusAvailabilityMask | DTCStatusAvailabilityMask |
+| DTCAndSeverityRecord | DTCSeverityMask：由 Dem_GetSeverityOfDTC() 获取；DTCFunctionalUnit：由 Dem_GetFunctionalUnitOfDTC() 获取；DTC：请求中给定的 **DTC**；statusOfDTC：由 Dem_GetStatusOfDTC() 获取 |
+
+为了选择该 **DTC**，**Dcm** 模块应使用以下参数值调用 **API** Dem_SelectDTC()：
+
+- ClientId：此 Dcm 实例的 Client Id（参见 DcmDemClientRef）
+- DTC：来自服务请求的 **DTC**
+- DTCFormat：DEM_DTC_FORMAT_UDS
+- DTCOrigin：DEM_DTC_ORIGIN_PRIMARY_MEMORY
+
+为了获取所选 **DTC** 的 DTCSeverityMask，**Dcm** 应使用以下参数值调用 Dem_GetSeverityOfDTC()：
+
+- ClientId：此 Dcm 实例的 Client Id（参见 DcmDemClientRef）
+
+为了获取所选 **DTC** 的 DTCFunctionalUnit，**Dcm** 应使用以下参数值调用 Dem_GetFunctionalUnitOfDTC()：
+
+- ClientId：此 Dcm 实例的 Client Id（参见 DcmDemClientRef）
+
+为了获取所选 **DTC** 的 statusOfDTC，**Dcm** 应使用以下参数值调用 Dem_GetStatusOfDTC()：
+
+- ClientId：此 Dcm 实例的 Client Id（参见 DcmDemClientRef）
+
+如果 Dem_GetFunctionalUnitOfDTC() 返回 DEM_WRONG_DTC 或 DEM_WRONG_DTCORIGIN，则 **Dcm** 应发送 **NRC** 0x31（requestOutOfRange）。
+
+如果 Dem_GetSeverityOfDTC() 返回 DEM_WRONG_DTC，则 **Dcm** 应发送 **NRC** 0x31（requestOutOfRange）。
+
+如果 Dem_GetStatusOfDTC() 返回 DEM_WRONG_DTC 或 DEM_WRONG_DTCORIGIN，则 **Dcm** 应发送 **NRC** 0x31（requestOutOfRange）。
+
+###### 6.6.2.5.5. 子功能 0x06/0x19
+
+**UDS** 服务 0x19 的子功能 0x06 或 0x19 请求针对特定 **DTC** 的特定扩展数据记录。服务请求包含参数：
+
+- DTCMaskRecord
+- DTCExtendedDataRecordNumber
+
+**用户定义存储器的扩展数据记录读取认证检查（Read user defined memory extended data record authentication check）**：在接收到 **UDS** 服务 **ReadDTCInformation**（0x19）子功能 reportUserDefMemoryDTCExtDataRecordByDTCNumber（0x19）时，**Dcm** 应检查对参数 MemorySelection 中所选用户定义存储器的访问是否已认证，并且仅在以下情况下读取 **DTC** 信息：
+
+- 为该用户定义故障存储器配置了与 MemorySelection 匹配的 DcmDspReadDTCInformationUserDefinedFaultMemoryRoleId，并且通过 DcmDspReadDTCInformationUserDefinedFaultMemoryRoleRef 配置了角色，且角色验证成功（参见 §6.6.2.10.4），或者
+- 该连接上的活动白名单针对所请求的用户定义存储器选择存在一个条目。
+
+根据以上要求，认证检查仅在配置了 DcmDspAuthentication 时执行。认证失败时的 **NRC** 处理按照 §6.4.4.12 和 §6.5.4.3.1 中的规则执行。
+
+在接收到 **UDS** 服务 0x19 的子功能 0x06 或 0x19 时，**Dcm** 应从 **Dem** 检索所请求 **DTC** 和来源的已存储扩展数据记录。
+
+在响应 **UDS** 服务 0x19 的子功能 0x06 或 0x19 时，**Dcm** 模块应首先使用表7.11 中的参数值调用 Dem_SelectDTC()，然后使用 ClientId = 此 Dcm 实例的 Client Id（参见 DcmDemClientRef）调用 Dem_GetStatusOfDTC()，以计算 statusOfDTC。
+
+表7.11：子功能 0x06 和 0x19 的 Dem_SelectDTC() 参数值（**Dem_SelectDTC() parameters values for subfunctions 0x06 and 0x19**）
+
+| 参数名称 | reportDTCExtendedDataRecordByDTCNumber（0x06） | reportUserDefMemoryDTCExtDataRecordByDTCNumber（0x19） |
+|---|---|---|
+| ClientId | 此 Dcm 实例的 Client Id（参见 DcmDemClientRef） | 此 Dcm 实例的 Client Id（参见 DcmDemClientRef） |
+| DTC | 来自请求的 DTCMaskRecord | 来自请求的 DTCMaskRecord |
+| DTCOrigin | PRIMARY_MEMORY | 来自请求的 MemorySelection + 0x0100 |
+
+如果 Dem_GetNextExtendedDataRecord() 返回 E_OK 且 BufSize 为 0（空缓冲区），则 **Dcm** 模块应在服务 0x19 子功能 0x06/0x19 的响应中省略相关记录的 DTCExtendedDataRecordNumber。
+
+在响应 **UDS** 服务 0x19 的子功能 0x06 或 0x19 时，**Dcm** 模块应首先使用表7.12 中的参数值调用 Dem_SelectExtendedDataRecord()，然后重复调用 Dem_GetNextExtendedDataRecord() 直到返回 DEM_NO_SUCH_ELEMENT，以计算 DTCExtendedDataRecord。
+
+表7.12：子功能 0x06 和 0x19 的 Dem_SelectExtendedDataRecord() 参数值（**Dem_SelectExtendedDataRecord() parameters values for subfunctions 0x06 and 0x19**）
+
+| 参数名称 | reportDTCExtendedDataRecordByDTCNumber（0x06） | reportUserDefMemoryDTCExtDataRecordByDTCNumber（0x19） |
+|---|---|---|
+| ClientId | 此 Dcm 实例的 Client Id（参见 DcmDemClientRef） | 此 Dcm 实例的 Client Id（参见 DcmDemClientRef） |
+| DTC | 来自请求的 DTCMaskRecord | 来自请求的 DTCMaskRecord |
+| DTCOrigin | PRIMARY_MEMORY | 来自请求的 MemorySelection + 0x0100 |
+| ExtendedDataNumber | 来自请求的 DTCExtendedDataRecordNumber | 来自请求的 DTCExtendedDataRecordNumber |
+
+**Dcm** 模块应使用 Dem_GetSizeOfExtendedDataRecordSelection() 获取扩展数据记录的大小。
+
+###### 6.6.2.5.6. 子功能 0x03
+
+**UDS** 服务 0x19 的子功能 0x03 允许外部诊断仪请求 **ECU** 中所有 **DTC** 的所有已存储快照记录。
+
+**Dcm** 应按照 **ISO 14229-1:2020** [8] 支持 **UDS** 服务 0x19 的子功能 0x03。
+
+在使用分页缓冲机制时，某些情况下匹配过滤器的 **DTC** 数量可能在计算第一页传输所需的总大小与发送后续页之间发生变化。因此，§6.6.2.5.2 中定义的响应大小限制与填充要求同样适用于该子功能。
+
+###### 6.6.2.5.7. 子功能 0x04 和 0x18
+
+使用 **UDS** 服务 0x19 的子功能 0x04 或 0x18，外部诊断仪可以请求特定 **DTC** 的一个或全部快照记录的快照记录数据。
+
+为了处理 **UDS** 服务 0x19 子功能 0x04 或 0x19 子功能 0x18，**Dcm** 支持两种选项：在与 **Dem** 交互的同时由 **BSW** 内部处理整个服务，以及将服务处理留给外部服务处理器。
+
+**使用内部服务处理器读取快照记录（Use of internal service processor to read snapshot records）**：如果为服务 0x19 配置了带有子功能 0x04 或 0x18 的 DcmDsdSubService 的 DcmDsdService，且没有为该服务配置 DcmDsdSubServiceFnc，则 **Dcm** 应按照 **ISO 14229-1** [1] 处理诊断请求。
+
+**使用外部服务处理器读取快照记录（Use of external service processor to read snapshot records）**：如果为服务 0x19 配置了带有子功能 0x04 或 0x18 的 DcmDsdSubService 的 DcmDsdService，且为该服务配置了 DcmDsdSubServiceFnc，则 **Dcm** 应将诊断请求的处理留给 DcmDsdSubServiceFnc 中提供的外部服务处理器。
+
+图7.10：通过快照记录号请求 DTC 快照记录（**Request DTC Snapshot Record by Snapshot Record Number**）
+
+![Figure7-10](Figure7-10.png)
+
+**用户定义存储器的快照记录读取认证检查（Read user defined memory snapshot record authentication check）**：在接收到 **UDS** 服务 **ReadDTCInformation**（0x19）子功能 reportUserDefMemoryDTCSnapshotRecordByDTCNumber（0x18）时，**Dcm** 应检查对参数 MemorySelection 中所选用户定义存储器的访问是否已认证，并且仅在以下情况下读取 **DTC** 信息：
+
+- 为该用户定义故障存储器配置了与 MemorySelection 匹配的 DcmDspReadDTCInformationUserDefinedFaultMemoryRoleId，并且通过 DcmDspReadDTCInformationUserDefinedFaultMemoryRoleRef 配置了角色，且角色验证成功（参见 §6.6.2.10.4），或者
+- 该连接上的活动白名单针对所请求的用户定义存储器选择存在一个条目。
+
+根据以上要求，认证检查仅在配置了 DcmDspAuthentication 时执行。认证失败时的 **NRC** 处理按照 §6.4.4.12 和 §6.5.4.3.1 中的规则执行。
+
+###### 6.6.2.5.8. 子功能 0x05
+
+**UDS** 服务 0x19 的子功能 0x05 允许外部诊断仪请求特定 **FreezeFrame** 记录号的 **FreezeFrame** 信息。服务请求包含参数：
+
+- DTCStoredDataRecordNumber
+
+由于 **Dem** 的限制，诊断服务 $19 05 仅限于 **OBD** 法规相关的冻结帧（freeze frame）。
+
+在接收到服务 0x19 的子功能 0x05 时，如果诊断请求的记录号与 0x00 不同，则 **Dcm** 模块应发送带有 **NRC** 0x31（request out of range）的负响应。
+
+在向 **UDS** 服务 0x19 的子功能 0x05 发送正响应且 DTCStoredDataRecordNumber 为 0x00 时，**Dcm** 模块应使用表7.13 中的响应消息数据。
+
+表7.13：子功能 0x05 的响应值（**Subfunction 0x05 response values**）
+
+| 参数名称 | 值 |
+|---|---|
+| DTCStoredDataRecordNumber | 来自请求的 DTCStoredDataRecordNumber（0x00） |
+| DTCAndStatusRecord | **DTC** 由 Dem_DcmGetDTCOfOBDFreezeFrame() 获取，statusOfDTC 由 Dem_GetStatusOfDTC() 获取 |
+| DTCStoredDataRecordNumberOfIdentifiers / DTCStoredDataRecord | 按 OBD 冻结帧组装要求（Dem_DcmReadDataOfOBDFreezeFrame()）定义 |
+
+在响应 **UDS** 服务 0x19 的子功能 0x05 且 DTCStoredDataRecordNumber 为 0x00 时，**Dcm** 应通过遍历所有 DcmDspPid 并收集为服务 0x02 配置的所有 DcmDspPidData、针对相应数据元素调用 Dem_DcmReadDataOfOBDFreezeFrame() 来组装 **OBD** 冻结帧。**Dcm** 应通过在 Pid 上加 0xF400 来组成 DidId，并计算填充和受支持信息。
+
+在响应 **UDS** 服务 0x19 的子功能 0x05 且 DTCStoredDataRecordNumber 为 0x00 时，**Dcm** 应使用 FrameNumber 0x00 和 DTCFormat DEM_DTC_FORMAT_UDS 调用 Dem_DcmGetDTCOfOBDFreezeFrame()，以检索所提供 **FreezeFrame** 的 **DTC**。
+
+在响应 **UDS** 服务 0x19 的子功能 0x05 且 DTCStoredDataRecordNumber 为 0x00 时，**Dcm** 模块应首先使用以下参数调用 Dem_SelectDTC() 来获取 **DTC** 的状态：
+
+- ClientId：此 Dcm 实例的 Client Id（参见 DcmDemClientRef）
+- DTC：如上文组装的 **OBD** 冻结帧 **DTC**
+- DTCOrigin：DEM_DTC_ORIGIN_PRIMARY_MEMORY
+
+然后使用以下参数调用 Dem_GetStatusOfDTC()：
+
+- ClientId：此 Dcm 实例的 Client Id（参见 DcmDemClientRef）
+
+###### 6.6.2.5.9. 子功能 0x0B、0x0C、0x0D 和 0x0E
+
+外部测试工具可以通过发送包含子功能 0x0B、0x0C、0x0D、0x0E 之一的 **UDS** 服务请求 0x19，请求首个出现的或最近一次失败或已确认的 **DTC** 及其相关状态。
+
+在向 **UDS** 服务 0x19 的子功能 0x0B、0x0C、0x0D 或 0x0E 发送正响应时，**Dcm** 模块应使用表7.14 所定义的响应消息中的数据。
+
+表7.14：子功能 0x0B、0x0C、0x0D 和 0x0E 的响应值（**Subfunctions 0x0B, 0x0C, 0x0D and 0x0E response values**）
+
+| 参数名称 | 值 |
+|---|---|
+| DTCStatusAvailabilityMask | DTCStatusAvailabilityMask |
+| DTCAndStatusRecord | **DTC** 通过 Dem_GetDTCByOccurrenceTime() 获取，StatusOfDtc 通过 Dem_GetStatusOfDTC() 获取 |
+
+为了响应 **UDS** 服务 0x19 的子功能 0x0B、0x0C、0x0D 或 0x0E，**Dcm** 模块应使用以下参数值调用 Dem_GetStatusOfDTC() 获取 StatusOfDtc：
+
+- ClientId：此 Dcm 实例的 Client Id（参见 DcmDemClientRef）
+- DTC：通过 Dem_GetDTCByOccurrenceTime() 获取的 **DTC** 值
+- DTCOrigin：DEM_DTC_ORIGIN_PRIMARY_MEMORY
+
+为了响应 **UDS** 服务 0x19 的子功能 0x0B、0x0C、0x0D 或 0x0E，**Dcm** 应使用表7.15 中的参数值调用 Dem_GetDTCByOccurrenceTime() 获取 **DTC**。
+
+表7.15：子功能 0x0B、0x0C、0x0D 和 0x0E 的 Dem_GetDTCByOccurrenceTime() 参数值（**Dem_GetDTCByOccurrenceTime() parameters values for subfunctions 0x0B, 0x0C, 0x0D and 0x0E**）
+
+| 参数名称 | reportFirstTestFailedDTC（0x0B） | reportFirstConfirmedDTC（0x0C） | reportMostRecentTestFailedDTC（0x0D） | reportMostRecentConfirmedDTC（0x0E） |
+|---|---|---|---|---|
+| ClientId | 此 Dcm 实例的 Client Id（参见 DcmDemClientRef） | 此 Dcm 实例的 Client Id（参见 DcmDemClientRef） | 此 Dcm 实例的 Client Id（参见 DcmDemClientRef） | 此 Dcm 实例的 Client Id（参见 DcmDemClientRef） |
+| DTCRequest | DEM_FIRST_FAILED_DTC | DEM_FIRST_DET_CONFIRMED_DTC | DEM_MOST_RECENT_FAILED_DTC | DEM_MOST_REC_DET_CONFIRMED_DTC |
+
+如果 **Dcm** 在调用 Dem_GetDTCByOccurrenceTime 时收到 DEM_NO_SUCH_ELEMENT，则应以正响应和空的 DTCAndStatusRecord 作出应答。
+
+###### 6.6.2.5.10. 子功能 0x14
+
+外部测试工具可以通过发送子功能为 0x14 的 **UDS** 服务请求 0x19，请求 **ECU** 报告所有具有“预失败（Prefailed）”状态的 **DTC** 的 FaultDetectionCounter。
+
+在向 **UDS** 服务 0x19 的子功能 0x14 发送正响应时，**Dcm** 模块应使用表7.16 所定义的响应消息中的数据。
+
+表7.16：子功能 0x14 的响应值（**Subfunction 0x14 response values**）
+
+| 参数名称 | 值 |
+|---|---|
+| DTC | **DTC** 通过调用 Dem_GetNextFilteredDTCAndFDC() 获取 |
+| DTCFaultDetectionCounter | DTCFaultDetectionCounter 通过调用 Dem_GetNextFilteredDTCAndFDC() 获取 |
+
+在响应 **UDS** 服务 0x19 的子功能 0x14 时，**Dcm** 模块应在使用表7.17 中的参数值通过 Dem_SetDTCFilter() 配置过滤器之后，通过重复调用 Dem_GetNextFilteredDTCAndFDC() 获取每个具有“prefailed”状态的 **DTC** 的 DTCFaultCounter。
+
+表7.17：子功能 0x14 的 Dem_GetNextFilteredDTCAndFDC() 参数值（**Dem_GetNextFilteredDTCAndFDC() parameters values for subfunctions 0x14**）
+
+| 参数名称 | 值 |
+|---|---|
+| ClientId | 此 Dcm 实例的 Client Id（参见 DcmDemClientRef） |
+| DTCStatusMask | 0x00 |
+| DTCFormat | DEM_DTC_FORMAT_UDS |
+| DTCOrigin | PRIMARY_MEMORY |
+| FilterWithSeverity | FALSE |
+| DTCSeverityMask | 不相关 |
+| FilterForFaultDetectionCounter | TRUE |
+
+**Dcm** 模块应使用 Dem_GetNumberOfFilteredDTC() 获取将使用 Dem_GetNextFilteredDTCAndFDC() 找到的记录数量。
+
+将参数 FilterForFaultDetectionCounter 设置为 YES 的 Dem_SetDTCFilter() 调用应在 **Dcm_MainFunction** 上下文中执行。
+
+这允许实现在遍历 **DTC** 之前计算响应的总大小。
+
+在使用分页缓冲机制时，某些情况下匹配过滤器的 **DTC** 数量可能在计算第一页传输所需的总大小与发送后续页之间发生变化。因此，在实现该子服务时应考虑 §6.6.2.5.2 中定义的响应大小限制与填充要求。
+
+如果 Dem_GetNextFilteredDTCAndFDC() 返回 DEM_NO_SUCH_ELEMENT，且此前已能获取至少一个匹配元素，则 **Dcm** 应发送包含这些数据元素的正响应。
+
+如果 Dem_GetNextFilteredDTCAndFDC() 返回 DEM_NO_SUCH_ELEMENT，且此前未能获取任何匹配元素，则 **Dcm** 应仅针对服务与子服务发送正响应。
+
+###### 6.6.2.5.11. 子功能 0x1A
+
+**UDS** 服务 0x19 的子功能 0x1A 请求 **Dcm** 检索所有支持扩展数据记录的 **DTC**。
+
+**Dcm** 应按照 **ISO 14229-1:2020** [8] 支持 **UDS** 服务 0x19 的子功能 0x1A。
+
+为了检索支持扩展数据记录的 **DTC**，**Dem** 提供 **API** Dem_SetDTCFilterByExtendedDataRecordNumber，它允许为扩展数据记录设置过滤器。后续对 Dem_GetNextFilteredDTC 的调用提供所请求的数据。
+
+正响应由 **DTC** 编号和 **DTC** 状态的枚举组成。**Dcm** 不定义 **DTC** 在正响应消息中报告的任何特定顺序。
+
+**子功能 0x1A 的正响应（Positive response of UDS Service 0x19 with subfunction 0x1A）**：如果所请求的 DTCExtDataRecordNumber 支持一个或多个扩展数据记录，则 **Dcm** 应发送包含所有 **DTC** 及其 **DTC** 状态的正响应。
+
+**子功能 0x1A 的负响应（Negative response of UDS Service 0x19 with subfunction 0x1A）**：如果所请求的 DTCExtDataRecordNumber 不支持任何扩展数据记录，则 **Dcm** 应发送带有 **NRC** 0x31（**RequestOutOfRange**）的负响应。
+
+###### 6.6.2.5.12. 子功能 0x42
+
+**UDS** 服务 0x19 的子功能 0x42 请求与 **DTC** 状态掩码和严重度掩码记录相匹配的 **WWH OBD DTC**。服务请求包含以下参数：
+
+- FunctionalGroupIdentifier
+- DTCSeverityMask
+- DTCStatusMask
+
+在向 **UDS** 服务 0x19 的子功能 0x42 发送正响应时，**Dcm** 模块应使用表7.18 所定义的响应消息中的数据。
+
+表7.18：子功能 0x42 的响应值（**Subfunction 0x42 response values**）
+
+| 参数名称 | 值 |
+|---|---|
+| FunctionalGroupIdentifier | 0x33 |
+| DTCStatusAvailabilityMask | Dem_GetDTCStatusAvailabilityMask |
+| DTCSeverityAvailabilityMask | Dem_GetDTCStatusAvailabilityMask |
+| DTCFormatIdentifier | Dem_GetTranslationType（限值为 0x04 和 0x02） |
+| DTCAndSeverityRecord | 按 Dem_GetNextFilteredDTCAndSeverity() 记录获取要求定义 |
+
+在响应 **UDS** 服务 0x19 的子功能 0x42 时，**Dcm** 模块应在使用表7.19 中的参数值通过 Dem_SetDTCFilter() 配置过滤器之后，通过重复调用 Dem_GetNextFilteredDTCAndSeverity() 获取 DTCAndSeverityRecord。
+
+表7.19：子功能 0x42 的 Dem_GetNextFilteredDTCAndSeverity() 参数值（**Dem_GetNextFilteredDTCAndSeverity() parameters values for subfunctions 0x42**）
+
+| 参数名称 | 值 |
+|---|---|
+| ClientId | 此 Dcm 实例的 Client Id（参见 DcmDemClientRef） |
+| DTCStatusMask | 来自请求的 DTCStatusMask |
+| DTCFormat | DEM_DTC_FORMAT_UDS |
+| DTCOrigin | DEM_DTC_ORIGIN_OBD_RELEVANT_MEMORY |
+| FilterWithSeverity | TRUE |
+| DTCSeverityMask | 来自请求的 DTCSeverityMask |
+| FilterForFaultDetectionCounter | FALSE |
+
+Dem_GetNextFilteredDTCAndSeverity 的返回值应按表7.20 填充。
+
+表7.20：Dem_GetNextFilteredDTCAndSeverity 的返回值（**Dem_GetNextFilteredDTCAndSeverity return values**）
+
+| 参数名称 | 值 |
+|---|---|
+| DTCSeverity | DTCSeverity |
+| DTCHighByte（MSB） | **DTC**（高字节） |
+| DTCMiddleByte | **DTC**（中间字节） |
+| DTCLowByte | **DTC**（低字节） |
+| statusOfDTC | DTCStatus |
+
+**注意：** **Dcm** 模块可以通过 Dem_GetNumberOfFilteredDTC() 得到使用 Dem_GetNextFilteredDTCAndSeverity() 将找到的记录数量的指示。
+
+###### 6.6.2.5.13. 子功能 0x55
+
+借助 **UDS** 服务 0x19 的子功能 0x55，客户端可以检索具有“永久 **DTC**（permanent **DTC**）”状态的 **OBD DTC** 列表。服务请求包含以下参数：
+
+- FunctionalGroupIdentifier
+
+在向 **UDS** 服务 0x19 的子功能 0x55 发送正响应时，**Dcm** 模块应使用表7.21 所定义的响应消息中的数据。
+
+表7.21：子功能 0x55 的响应值（**Subfunction 0x55 response values**）
+
+| 参数名称 | 值 |
+|---|---|
+| FunctionalGroupIdentifier | 0x33 |
+| DTCStatusAvailabilityMask | Dem_GetDTCStatusAvailabilityMask |
+| DTCFormatIdentifier | Dem_GetTranslationType（限值为 0x04 和 0x02） |
+| DTCAndStatusRecord | 由 Dem_GetNextFilteredDTC() 返回 |
+
+**注意：** 在响应 **UDS** 服务 0x19 的子功能 0x55 时，**Dcm** 模块可以在使用表7.22 中的参数值通过 Dem_SetDTCFilter() 配置过滤器之后，通过重复调用 Dem_GetNextFilteredDTC() 获取 DTCAndStatusRecord。
+
+表7.22：子功能 0x55 的 Dem_SetDTCFilter() 参数值（**Dem_SetDTCFilter() parameters values for subfunction 0x55**）
+
+| 参数名称 | 值 |
+|---|---|
+| ClientId | 参见 DcmDemClientRef |
+| DTCStatusMask | 0x00 |
+| DTCFormat | DEM_DTC_FORMAT_UDS |
+| DTCOrigin | DEM_DTC_ORIGIN_PERMANENT_MEMORY |
+| FilterWithSeverity | FALSE |
+| DTCSeverityMask | 不相关 |
+| FilterForFaultDetectionCounter | FALSE |
+
+**Dcm** 模块可以通过 Dem_GetNumberOfFilteredDTC() 得到使用 Dem_GetNextFilteredDTC() 将找到的记录数量的指示。
+
+在响应 **UDS** 服务 0x19 的子功能 0x55 时，如果 Dem_GetTranslationType 返回的 Dem_DTCTranslationFormatType 不是 0x02（DEM_DTC_TRANSLATION_SAEJ1939_73）或 0x04（DEM_DTC_TRANSLATION_J2012DA_FORMAT_04），则 **Dcm** 模块应返回 **NRC** 0x10（generalReject）。
+
+###### 6.6.2.5.14. 子功能 0x56
+
+**UDS** 服务 0x19 的子功能 0x56 请求 **Dcm** 检索所有分配给某个 **DTC** 就绪组标识符的 **DTC**。
+
+**Dcm** 应按照 **ISO 14229-1:2020** [8] 支持 **UDS** 服务 0x19 的子功能 0x56。
+
+为了检索分配给某个 **DTC** 就绪组的 **DTC**，**Dem** 提供 **API** Dem_SetDTCFilterByReadinessGroup，它允许为就绪组设置过滤器。后续对 Dem_GetNextFilteredDTC 的调用提供所请求的数据。
+
+正响应由 **DTC** 编号和 **DTC** 状态的枚举组成。**Dcm** 不定义 **DTC** 在正响应消息中报告的任何特定顺序。
+
+**子功能 0x56 的正响应（Positive response of UDS Service 0x19 with subfunction 0x56）**：如果一个或多个 **DTC** 支持所请求的 **DTC** 就绪组标识符，则 **Dcm** 应发送包含所有 **DTC** 及其 **DTC** 状态的正响应。
+
+**子功能 0x56 的负响应（Negative response of UDS Service 0x19 with subfunction 0x56）**：如果没有 **DTC** 支持所请求的 **DTC** 就绪组，则 **Dcm** 应发送带有 **NRC** 0x31（requestOutOfRange）的负响应。
+
+##### 6.6.2.6. 服务 0x22 - ReadDataByIdentifier
+
+**Dcm** 模块应实现 **UDS** 服务 **ReadDataByIdentifier**（0x22）。
+
+在接收到 **UDS** 服务 **ReadDataByIdentifier**（0x22）时，如果所请求的 **DID** 数量超过配置的最大数据标识符数量（参见配置参数 DcmDspMaxDidToRead），则 **Dcm** 模块应发送 **NRC** 0x13（Incorrect message length or invalid format）。
+
+借助 **UDS** 服务 0x22，诊断仪可以请求一个或多个 **DID** 的值。
+
+**UDS DID 读取认证检查（Read UDS DID authentication check）**：在接收到 **UDS** 服务 **ReadDataByIdentifier**（0x22）时，**Dcm** 应检查对 0xF200-0xF8FF 范围之外所有所请求 **DID** 的访问是否已认证，并且仅在以下情况下读取数据标识符：
+
+- 为该读取 **DID** 通过 DcmDspDidReadRoleRef 配置了角色，且角色验证成功（参见 §6.6.2.10.4），或者
+- 该连接上的活动白名单针对每个所请求的 **DID** 具有一个带有读访问权限且与该 **DID** 匹配的条目。
+
+**动态定义 DID 的读取认证检查（Read Dynamically defined DID authentication check）**：在接收到 **UDS** 服务 **ReadDataByIdentifier**（0x22）时，**Dcm** 应针对 0xF200-0xF3FF 范围内的所有所请求 **DID** 检查其内容是否基于已认证的 **DID** 或 **DID** 的组成部分，并且仅在以下情况下读取数据标识符：
+
+- 为这些读取 **DID** 通过 DcmDspDidReadRoleRef 配置了角色，且角色验证成功（参见 §6.6.2.10.4），或者
+- 该连接上的活动白名单针对每个所请求的 **DID** 具有一个带有读访问权限且与这些 **DID** 匹配的条目。
+
+根据以上要求，认证检查仅在配置了 DcmDspAuthentication 时执行。认证失败时的 **NRC** 处理按照 §6.5.4.3.1 和 §6.6.2.10 中的规则执行。
+
+在接收到 **UDS** 服务 **ReadDataByIdentifier**（0x22）时，**Dcm** 模块应针对每个所请求的 **DID** 检查该 **DID** 是否受支持（参见配置参数 DcmDspDid 和 DcmDspDidRange）。如果所请求的 **DID** 均不受支持，则 **Dcm** 模块应发送 **NRC** 0x31（Request out of range）。
+
+在接收到 **DID** 位于 0xF200 到 0xF3FF 范围内的 **UDS** 服务 **ReadDataByIdentifier**（0x22）时，**Dcm** 模块应检查该 **DID** 是否可以被动态定义（其引用的 DcmDspDidInfo 的 DcmDspDidDynamicallyDefined 设置为 true）。如果可以，并且该 **DID** 尚未通过调用 **DynamicallyDefineDataIdentifier**（0x2C）服务被动态定义，即尚未定义任何数据源，则 **Dcm** 模块应发送 **NRC** 0x31（Request out of range）。
+
+在接收到 **DID** 位于 0xF200 到 0xF3FF 范围内的 **UDS** 服务 **ReadDataByIdentifier**（0x22）时，如果验证已成功完成（参见上一段要求）且动态 **DID** 已使用 **DID** 源定义，则 **Dcm** 模块应使用该 **DID** 源的配置来读取数据。
+
+在接收到 **DID** 位于 0xF200 到 0xF3FF 范围内的 **UDS** 服务 **ReadDataByIdentifier**（0x22）时，如果验证已成功完成（参见上一段要求）且动态 **DID** 已使用 **DID** 源定义，则当配置参数 DcmDspDDDIDcheckPerSourceDID 设置为 TRUE 时，**Dcm** 模块应对所有源 **DID** 执行会话、安全和模式依赖检查。
+
+在配置参数 DcmDspDDDIDcheckPerSourceDID 设置为 FALSE 的情况下，不对源 **DID** 执行会话、安全或模式依赖检查。
+
+**注意：** 如果始终需要验证会话或安全依赖关系，则应在任何安全和会话切换时清除 DDDID。
+
+在接收到 **DID** 位于 0xF200 到 0xF3FF 范围内的 **UDS** 服务 **ReadDataByIdentifier**（0x22）时，如果验证已成功完成且动态 **DID** 已使用存储器地址定义，则 **Dcm** 模块应使用 callout Dcm_ReadMemory 读取数据。
+
+如果某个 **DID** 被设置为未使用（DcmDspDidUsed 设置为 FALSE），则 **Dcm** 应将该 **DID** 视为不受支持（参见上文对 **DID** 支持性的检查要求）。
+
+在接收到 **UDS** 服务 **ReadDataByIdentifier**（0x22）时，**Dcm** 模块应针对每个所请求的 **DID** 检查该 **DID** 是否配置了读访问（参见 DcmDspDidInfo 中的配置参数 DcmDspDidRead）。如果没有任何 **DID** 具有读访问权限，则 **Dcm** 模块应发送 **NRC** 0x31（Request out of range）。
+
+在接收到 **UDS** 服务 **ReadDataByIdentifier**（0x22）时，**Dcm** 模块应针对每个所请求的 **DID** 检查该 **DID** 是否可以在当前会话中读取（参见配置参数 DcmDspDidReadSessionRef）。如果没有任何 **DID** 可以在当前会话中读取，则 **Dcm** 模块应发送 **NRC** 0x31（RequestOutOfRange）。
+
+在接收到 **UDS** 服务 **ReadDataByIdentifier**（0x22）时，**Dcm** 模块应针对每个所请求的 **DID** 检查该 **DID** 是否可以在当前安全级别中读取（参见配置参数 DcmDspDidReadSecurityLevelRef）。如果不行，则 **Dcm** 模块应发送 **NRC** 0x33（Security access denied）。
+
+在接收到 **UDS** 服务 **ReadDataByIdentifier**（0x22）时，**Dcm** 模块应针对每个所请求的 **DID** 检查该 **DID** 是否可以在当前模式条件下读取（根据配置参数 DcmDspDidReadModeRuleRef）。如果不行，则 **Dcm** 模块应发送所引用 DcmModeRule 计算出的负响应。
+
+在接收到 **UDS** 服务 **ReadDataByIdentifier**（0x22）时，对于 **OBD** 范围（F400-F8FF）之外的每个所请求 **DID**，**Dcm** 模块应通过对该 **DID** 的每个数据调用所配置的函数（如果参数 DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC 或 USE_DATA_ASYNCH_FNC 或 USE_DATA_ASYNCH_FNC_ERROR 或 USE_DATA_SYNCH_FNC_PROXY 或 USE_DATA_ASYNCH_FNC_PROXY；参见配置参数 DcmDspDataConditionCheckReadFnc）或调用关联的 ConditionCheckRead 操作（如果参数 DcmDspDataUsePort 设置为 USE_DATA_SYNCH_CLIENT_SERVER 或 USE_DATA_ASYNCH_CLIENT_SERVER 或 USE_DATA_ASYNCH_CLIENT_SERVER_ERROR），向应用程序请求该 **DID** 是否可以被读取。如果不行（某个函数返回 E_NOT_OK），则 **Dcm** 模块应发送负响应，其 **NRC** 设置为 DcmDspDataConditionCheckReadFnc 函数或 ConditionCheckRead 操作的参数“ErrorCode”的值。
+
+**注意：** 该要求超出了 **ISO 14229-1** “NRC handling for ReadDataByIdentifier service” 所描述的标准 ConditionCheck 行为，因为它不限于在负响应中使用 **NRC** 0x22。
+
+如果所请求的 **DID** 通过 DcmDspDidRef 引用其他 **DID**，则 **Dcm** 模块应处理每个被引用 **DID** 的验证与读取，并根据配置中的顺序无间隙地拼接响应数据。
+
+DcmDspDid 容器不应包含相同的 DcmDspDidRef 参数多于一次。
+
+DcmDspDataEcuSignal 应仅在 DcmDspDataUsePort 设置为 USE_ECU_SIGNAL 时存在。
+
+在未配置 DcmDspDataEndianness 的情况下，应改用 DcmDspDataDefaultEndianness。
+
+DcmDspDataReadDataLengthFnc 应仅在以下情况下存在：
+
+- DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC，或者
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC，或者
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC_ERROR，或者
+- DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC_PROXY，或者
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC_PROXY
+
+DcmDspDataReadFnc 应仅在以下情况下存在：
+
+- DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC，或者
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC，或者
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC_ERROR，或者
+- DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC_PROXY，或者
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC_PROXY
+
+如果 **DID** 数据记录中存在未被任何数据元素定义的字节，则 **Dcm** 应将这些字节填充为 0x00。
+
+如果配置了配置参数 DcmDspDidSize，则 **Dcm** 应强制 **DID** 数据具有所配置的大小。
+
+**原子 BndM 读取操作（Atomic BndM read operation）**：在所有验证之后，**Dcm** 模块应对于每个 DcmDspDidUsePort 设置为 USE_ATOMIC_BNDM 且位于 **OBD** 范围（F400-F8FF）之外的所请求 **DID**，使用块特定的读取函数 BndM_GetBlockPtr_&lt;BlockId.Shortname&gt; 从 **BndM**（DcmDspDidBndMBlockIdRef）读取关联 BlockId 的数据，以获取数据值。
+
+###### 6.6.2.6.1. UDS DID
+
+在接收到 **UDS** 服务 **ReadDataByIdentifier**（0x22）时，对于 **OBD** 范围（F400-F8FF）之外的每个所请求 **DID**，在所有验证之后，如果数据被配置为 **IoHwAb** 的“**ECU** 信号”（参数 DcmDspDataUsePort），则 **Dcm** 应调用 **API** IoHwAb_Dcm_Read&lt;EcuSignalName&gt;()（参数 DcmDspDataReadEcuSignal）以获取数据。在这种情况下，上文针对读取数据的要求、**DID** 信号动态数据长度的要求以及数据值获取的要求均不适用。
+
+在接收到 **UDS** 服务 **ReadDataByIdentifier**（0x22）时，对于 **OBD** 范围（F400-F8FF）之外的每个所请求 **DID**，**Dcm** 模块应对每个具有动态数据长度（DcmDspDataType 设置为 UINT8_DYN）的信号（DcmDspDidSignal）：调用所配置的函数 DcmDspDataReadDataLengthFnc（如果参数 DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC 或 USE_DATA_ASYNCH_FNC 或 USE_DATA_ASYNCH_FNC_ERROR 或 USE_DATA_SYNCH_FNC_PROXY 或 USE_DATA_ASYNCH_FNC_PROXY）或调用关联的 ReadDataLength 操作（如果参数 DcmDspDataUsePort 设置为 USE_DATA_SYNCH_CLIENT_SERVER 或 USE_DATA_ASYNCH_CLIENT_SERVER 或 USE_DATA_ASYNCH_CLIENT_SERVER_ERROR），以获取以字节为单位的数据长度。
+
+在所有验证之后，**Dcm** 模块应对于 **OBD** 范围（F400-F8FF）之外的每个所请求 **DID**，通过调用所有已配置的函数（如果参数 DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC 或 USE_DATA_ASYNCH_FNC 或 USE_DATA_ASYNCH_FNC_ERROR 或 USE_DATA_SYNCH_FNC_PROXY 或 USE_DATA_ASYNCH_FNC_PROXY；参见配置参数 DcmDspDataReadFnc）或调用所有关联的 ReadData 操作（如果参数 DcmDspDataUsePort 设置为 USE_DATA_SYNCH_CLIENT_SERVER 或 USE_DATA_ASYNCH_CLIENT_SERVER 或 USE_DATA_ASYNCH_CLIENT_SERVER_ERROR）或读取所有关联的 SenderReceiver 接口（如果参数 DcmDspDataUsePort 设置为 USE_DATA_SENDER_RECEIVER 或 USE_DATA_SENDER_RECEIVER_AS_SERVICE），获取所有数据值。
+
+在所有验证之后，**Dcm** 模块应对于每个 DcmDspDidUsePort 设置为 USE_ATOMIC_SENDER_RECEIVER_INTERFACE、USE_ATOMIC_SENDER_RECEIVER_INTERFACE_AS_SERVICE 或 USE_ATOMIC_NV_DATA_INTERFACE 且位于 **OBD** 范围（F400-F8FF）之外的所请求 **DID**，通过读取关联的 sender-receiver 或 NvDataInterface DataServices_{DID} 来获取数据值。
+
+为了将所需的 **AUTOSAR** 数据类型（有符号和无符号整数）序列化到 **ReadDataByIdentifier** 响应的响应消息中，对于 DcmDspDataUsePort 设置为 USE_DATA_SENDER_RECEIVER、USE_DATA_SENDER_RECEIVER_AS_SERVICE、USE_ECU_SIGNAL 的 DcmDspData 元素，应考虑 DcmDspDataEndianness 中配置的目标端序。
+
+在未配置 DcmDspDataEndianness 的情况下，应改用 DcmDspDataDefaultEndianness。
+
+###### 6.6.2.6.2. OBD DID
+
+在接收到 **UDS** 服务 **ReadDataByIdentifier**（0x22）时，对于 **OBD** 范围（F400-F4FF）内的每个所请求 **DID**，如果 DcmDspEnableObdMirror 设置为 true，则 **Dcm** 模块应按 **OBD** 服务 $01 的定义（即通过 **OBD** 服务 $01 的读取规则）获取 **DID** 值。
+
+在接收到 **UDS** 服务 **ReadDataByIdentifier**（0x22）时，对于 **OBD** 监视器范围（F600-F6FF）内的每个所请求 **DID**，**Dcm** 模块应按 **OBD** 服务 $06 的定义（即通过 **OBD** 服务 $06 的测试结果读取规则）获取 **DID** 值。
+
+在接收到 **UDS** 服务 **ReadDataByIdentifier**（0x22）时，对于 **OBD** InfoType 范围（F800-F8FF）内的每个所请求 **DID**，如果 DcmDspEnableObdMirror 设置为 true，则 **Dcm** 模块应按 **OBD** 服务 $09 的定义（即通过 **OBD** 服务 $09 的车辆信息读取规则）获取 **DID** 值，且响应中不包含数据项数量。
+
+如果 DcmDspEnableObdMirror 设置为 true，则 **OBD** 范围（F400-F4FF）和 **OBD** InfoType 范围（F800-F8FF）内显式配置的 **DID** 应使用 **UDS** 接口。
+
+如果 DcmDspEnableObdMirror 设置为 FALSE，则 **OBD DID** 范围内的所有请求应使用 **UDS** 接口。
+
+如果 DcmDspEnableObdMirror 设置为 FALSE，或者 **DID** 在 **OBD** PID 范围（F400-F4FF）内被显式配置，则应按以下方式提供对 **OBD** 数据的访问：
+
+在接收到仅以“可用性 OBDDataIdentifier”为参数的 **UDS** 服务 **ReadDataByIdentifier**（0x22）请求时，**Dcm** 应使用 **OBD** 范围（F400-F4FF）内相应的受支持（即已配置）**DID** 作出响应。
+
+在接收到仅包含不是“可用性 OBDDataIdentifier”的 OBDDataIdentifier 的 **UDS** 服务 **ReadDataByIdentifier**（0x22）请求时，**Dcm** 应通过对该 OBDDataIdentifier 的每个数据调用所配置的 Xxx_ReadData() 函数来获取这些 OBDDataIdentifier 的当前值，并将这些值作为服务 0x22 的响应返回。
+
+如果某个 OBDDataIdentifier 包含支持信息（存在 DcmDspDidDataSupportInfo 容器），则 **Dcm** 应在诊断响应中添加该支持信息。
+
+如果某个 OBDDataIdentifier 包含支持信息（存在 DcmDspDidDataSupportInfo 容器），则 **Dcm** 应根据该 **DID** 的可用数据计算支持信息值：对于该 **DID** 存在的每个 DcmDspData 容器，DcmDspDidDataSupportInfo 中引用的关联支持信息位应设置为 1。
+
+在以 OBDDataIdentifier 响应 **UDS** 服务 **ReadDataByIdentifier**（0x22）时，**Dcm** 应在 OBDDataIdentifier 中的 DcmDspData 之间插入填充字节，以在内容字节缺失时符合 **DID** 大小（参见配置参数 DcmDspDidSize）。
+
+为了将所需的 **AUTOSAR** 数据类型（有符号和无符号整数）序列化到 **ReadDataByIdentifier**（0x22）OBDDataIdentifier 响应的响应消息中，对于 DcmDspDataUsePort 设置为 {USE_DATA_SENDER_RECEIVER, USE_DATA_SENDER_RECEIVER_AS_SERVICE, USE_ECU_SIGNAL} 的 DcmDspData 元素，应考虑 DcmDspDataEndianness 中配置的目标端序。在未配置 DcmDspDataEndianness 的情况下，应改用 DcmDspDataDefaultEndianness。
+
+如果 DcmDspEnableObdMirror 设置为 FALSE，或者 **DID** 在 **OBD** InfoType 范围（F800-F8FF）内被显式配置，则应按以下方式提供对 **OBD** 数据的访问：
+
+在接收到以一个或多个“可用性 OBDInfoTypeDataIdentifier”为参数的 **UDS** 服务 **ReadDataByIdentifier**（0x22）请求时，**Dcm** 模块应使用 **OBD** 范围（F800-F8FF）内相应的受支持（即已配置）**DID** 作出响应。
+
+在接收到带有不是“可用性 OBDInfoTypeDataIdentifier”的 OBDInfoTypeDataIdentifier 的 **UDS** 服务 **ReadDataByIdentifier**（0x22）请求时，**Dcm** 模块应通过对该 OBDInfoTypeDataIdentifier 的每个数据调用所有已配置的 Xxx_ReadData() 函数来获取该 OBDInfoTypeDataIdentifier 的值，并将该值作为服务 0x22 的响应返回。
+
+##### 6.6.2.7. 服务 0x24 - ReadScalingDataByIdentifier
+
+**Dcm** 模块应实现 **UDS** 服务 **ReadScalingDataByIdentifier**（0x24）。
+
+为了获取缩放信息，诊断仪可以使用 2 字节 **DID** 作为参数调用 **UDS** 服务 0x24。**Dcm** 的配置为每个已配置的 **DID** 包含：
+
+- 2 字节 **DID**（参见配置参数 DcmDspDidIdentifier）
+- 该 **DID** 的每个数据：
+  - 函数 GetScalingInformation（参见配置参数 DcmDspDataGetScalingInfoFnc 和 DcmDspDataUsePort）
+  - 由 GetScalingInformation 函数返回的 ScalingInfo 的长度（参见配置参数 DcmDspDataScalingInfoSize）
+
+在接收到 **UDS** 服务 **ReadScalingByIdentifier** 的请求时，**Dcm** 模块应针对请求中接收到的 **DID** 的每个数据调用所配置的每个 Xxx_GetScalingInformation() 函数，并在响应中返回所接收的数据。
+
+针对上述要求，**Dcm** 应将 **DcmDspDid** 中每个数据所接收到的缩放信息按 DcmDspDidByteOffset 指定的相同顺序放置。
+
+DcmDspDataGetScalingInfoFnc 应仅在以下情况下存在：
+
+- DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC，或者
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC，或者
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC_ERROR，或者
+- DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC_PROXY，或者
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC_PROXY
+
+##### 6.6.2.8. 服务 0x27 - SecurityAccess
+
+**Dcm** 模块应实现 **UDS** 服务 **SecurityAccess**（0x27）。
+
+该服务的目的是提供一种访问数据或诊断服务的手段，这些数据或诊断服务出于安全、排放或功能安全原因而具有受限访问。
+
+如果请求长度正确，**DSP** 子模块应检查所请求的子功能值（访问类型）是否已在 **ECU** 中配置（参见配置参数 DcmDspSecurityLevel）。如果所请求的子功能值未配置，则 **DSP** 子模块应触发带有 **NRC** 0x12（SubFunction not supported）的负响应。
+
+如果所请求的子功能值已配置，并且已接收到子功能类型为“requestSeed”（即奇数值）的服务，且所请求的访问类型已经激活（参见 Dcm_GetSecurityLevel），则 **DSP** 子模块应将种子内容设置为 0x00。
+
+在与上述情形不同的另一种情况下（访问类型未激活或请求为“send key”），如果 DcmDspSecurityUsePort 设置为 USE_ASYNCH_CLIENT_SERVER，则 **DSP** 子模块应调用所配置的操作 Xxx_GetSeed()（在接收到“request seed”的情况下）或 Xxx_CompareKey()（在接收到“send key”的情况下）。
+
+在接收到子功能类型为“requestSeed”的 **UDS** 服务 **SecurityAccess**（0x27）且所请求的访问类型尚未激活时，**Dcm** 模块应通过调用所配置的 Xxx_GetSeed() 函数来请求种子（如果配置参数 DcmDspSecurityUsePort 设置为 USE_ASYNCH_FNC，参见配置参数 DcmDspSecurityGetSeedFnc）。
+
+**注意：** 如果使用静态种子机制，则处理需要由实现 Xxx_GetSeed() 和 Xxx_CompareKey() 函数的应用程序完成。
+
+DcmDspSecurityGetSeedFnc 应仅在 DcmDspSecurityUsePort 设置为 USE_ASYNCH_FNC 时存在。
+
+在接收到子功能类型为“sendKey”的 **UDS** 服务 **SecurityAccess**（0x27）、所请求的访问类型尚未激活且相关访问类型的“request seed”已成功执行时，**Dcm** 模块应通过调用所配置的 Xxx_CompareKey() 函数来请求密钥比较结果（如果配置参数 DcmDspSecurityUsePort 设置为 USE_ASYNCH_FNC，参见配置参数 DcmDspSecurityCompareKeyFnc）。
+
+DcmDspSecurityCompareKeyFnc 应仅在 DcmDspSecurityUsePort 设置为 USE_ASYNCH_FNC 时配置。
+
+以下列表以示例方式给出安全访问服务可以检测并存储在错误码信息中的错误：
+
+- RequestSequenceError（**NRC** 0x24），当在“send key”时发送了无效的访问类型，
+- RequiredTimeDelayNotExpired（**NRC** 0x37），当时间延迟处于激活状态（参见配置参数 DcmDspSecurityDelayTime），
+- ExceededNumberOfAttempts（**NRC** 0x36），当获取安全访问的尝试次数达到或超过所配置的限制（参见配置参数 DcmDspSecurityNumAttDelay），以及
+- InvalidKey（**NRC** 0x35），当在“send key”时发送了无效的密钥。
+
+如果 CompareKey() 操作返回 E_OK，则 **DSP** 子模块应使用 DslInternal_SetSecurityLevel() 设置新的访问类型（参见 ECUC_Dcm_00754 DcmDspSecurityLevel 中给出的换算公式）。
+
+如果 Xxx_CompareKey() 返回值 DCM_E_COMPARE_KEY_FAILED 且配置了 DcmDspSecurityNumAttDelay，则 **Dcm** 应增加 sendKey 子功能请求失败的安全级别的尝试计数器。
+
+如果 Xxx_CompareKey() 返回值 DCM_E_COMPARE_KEY_FAILED，且进入所请求安全级别的失败尝试次数（AttemptCounter）小于所请求安全级别的 DcmDspSecurityNumAttDelay 参数所配置的值，则 **Dcm** 模块应发送带有 **NRC** 0x35（InvalidKey）的负响应，并且不应更改 **Dcm** 内部安全级别。
+
+**注意：** 如果未配置 DcmDspSecurityNumAttDelay 参数，则不考虑进入所请求安全级别的失败尝试次数（AttemptCounter）。
+
+如果 Xxx_CompareKey() 返回值 DCM_E_COMPARE_KEY_FAILED，且进入所请求安全级别的失败尝试次数（AttemptCounter）大于或等于所请求安全级别的 DcmDspSecurityNumAttDelay 参数所配置的值，则 **Dcm** 模块应使用该失败请求所请求的 SecurityLevel 在 DcmDspSecurityDelayTime 中配置的值启动 SecurityDelayTimer，发送带有 **NRC** 0x36（exceededNumberOfAttempts）的负响应，并且不应更改 **Dcm** 内部安全级别。
+
+如果 Xxx_CompareKey() 返回值 E_NOT_OK，则 **Dcm** 模块应发送 **NRC** 码等于 ErrorCode 参数值的负响应，并且不应增加尝试计数器或更改 **Dcm** 内部安全级别。
+
+在 SecurityLevel 的 SecurityDelayTimer 尚未到期期间，对于该 Security Level 的 **SecurityAccess**（0x27）requestSeed 子功能请求，**Dcm** 模块应发送带有 **NRC** 0x37（requiredTimeDelayNotExpired）的负响应。
+
+如果 Xxx_GetSeed() 返回值 E_NOT_OK，则 **Dcm** 模块应发送 **NRC** 码等于 ErrorCode 参数值的负响应。
+
+##### 6.6.2.9. 服务 0x28 - CommunicationControl
+
+**Dcm** 模块应实现统一诊断服务中的 **CommunicationControl**（服务 0x28）。
+
+在 **DSD** 调用 **UDS** 服务 **CommunicationControl**（0x28）的发送确认函数且请求的子网参数等于 0x00 时，**Dcm** 应对 DcmDspComControlAllChannel 中配置的每个 NetworkHandle（参见 DcmDspAllComMChannelRef）执行以下操作：
+
+1. 触发模式切换 Dcm_CommunicationControl_&lt;Network&gt; ModeDeclarationGroupPrototype 到与 **CommunicationControl** 请求中的 communicationType 和 controlType 参数相对应的模式。
+2. 使用与 **CommunicationControl** 请求中的 communicationType 和 controlType 参数相对应的参数 NetworkHandleType 和 Dcm_CommunicationModeType 调用 **API** BswM_Dcm_CommunicationMode_CurrentState（参见 **Dcm_CommunicationModeType** 定义）。
+
+在 **DSD** 调用 **UDS** 服务 **CommunicationControl**（0x28）的发送确认函数且请求的子网参数等于 0x0F（对接收请求所在网络进行 **CommunicationControl**）时，**Dcm** 应对当前接收到的 DcmDslProtocolRxPduRef 的 NetworkHandle（参见 DcmDslProtocolComMChannelRef）执行以下操作：
+
+1. 触发模式切换 Dcm_CommunicationControl_&lt;Network&gt; ModeDeclarationGroupPrototype 到与 **CommunicationControl** 请求中的 communicationType 和 controlType 参数相对应的模式。
+2. 使用与 **CommunicationControl** 请求中的 communicationType 和 controlType 参数相对应的参数 NetworkHandleType 和 Dcm_CommunicationModeType 调用 **API** BswM_Dcm_CommunicationMode_CurrentState（参见 **Dcm_CommunicationModeType** 定义）。
+
+在 **DSD** 调用 **UDS** 服务 **CommunicationControl**（0x28）的发送确认函数且请求的子网参数在 0x01 到 0x0E 之间时，**Dcm** 应检查所接收到的子网参数（参见 DcmDspSubnetNumber）是否受支持。如果不受支持，则应发送负响应码 0x31。如果受支持，则 **Dcm** 应对所接收子网参数（参见 DcmDspSubnetNumber）的相应 NetworkHandle（参见 DcmDspSpecificComMChannelRef）执行以下操作：
+
+1. 触发模式切换 Dcm_CommunicationControl_&lt;Network&gt; ModeDeclarationGroupPrototype 到与 **CommunicationControl** 请求中的 communicationType 和 controlType 参数相对应的模式。
+2. 使用与 **CommunicationControl** 请求中的 communicationType 和 controlType 参数相对应的参数 NetworkHandleType 和 Dcm_CommunicationModeType 调用 **API** BswM_Dcm_CommunicationMode_CurrentState（参见 **Dcm_CommunicationModeType** 定义）。
+
+对于某些用例，**Dcm** 可能由于外部改变的模式条件而重新启用 **CommunicationControl**：
+
+在某个 NetworkHandle 当前所处的状态不是 DCM_ENABLE_RX_TX_NORM_NM、且所引用的 ModeRule（参见 ECUC_Dcm_00943）不再被满足的情况下，**Dcm** 应：
+
+1. 将模式组 Dcm_CommunicationControl_&lt;Network&gt; ModeDeclarationGroupPrototype 切换到 DCM_ENABLE_RX_TX_NORM_NM
+2. 使用参数 NetworkHandleType 设置为该网络对应的 NetworkHandle、RequestedCommunicationMode 设置为 DCM_ENABLE_RX_TX_NORM_NM 调用 BswM_Dcm_CommunicationMode_CurrentState
+
+对于当前所处状态不是 DCM_ENABLE_RX_TX_NORM_NM 的 NetworkHandle，如果 **Dcm** 正在切换到默认会话，或者在新的会话不再支持 **UDS** 服务 **CommunicationControl** 的任何诊断会话切换时，**Dcm** 应：
+
+1. 将模式组 Dcm_CommunicationControl_&lt;Network&gt; ModeDeclarationGroupPrototype 切换到 DCM_ENABLE_RX_TX_NORM_NM
+2. 使用参数 NetworkHandleType 设置为该网络对应的 NetworkHandle、RequestedCommunicationMode 设置为 DCM_ENABLE_RX_TX_NORM_NM 调用 BswM_Dcm_CommunicationMode_CurrentState
+
+**注意：** 需要考虑的 NetworkHandle 是 DcmDspSpecificComMChannelRef、DcmDspAllComMChannelRef 或 DcmDspComControlSubNodeComMChannelRef 中引用的所有 **ComM** 通道。
+
+如果接收到子功能为“enableRxAndDisableTxWithEnhancedAddressInformation”的 **CommunicationControl** 请求，则 **Dcm** 应检查列为 DcmDspComControlSubNodeId 的“nodeIdentificationNumber”，并针对所引用的网络（参见 DcmDspComControlSubNodeComMChannelRef）执行以下操作：
+
+1. 触发模式切换 Dcm_CommunicationControl_&lt;Network&gt; ModeDeclarationGroupPrototype 到与 **CommunicationControl** 请求中的 communicationType 和 controlType 参数相对应的模式。
+2. 使用与 **CommunicationControl** 请求中的 communicationType 和 controlType 参数相对应的参数 NetworkHandleType 和 Dcm_CommunicationModeType 调用 **API** BswM_Dcm_CommunicationMode_CurrentState（参见 **Dcm_CommunicationModeType** 定义）。
+
+类似的 controlType enableRxAndDisableTx 应与以下现有的 **Dcm_CommunicationModeType** 值一起使用：
+
+- DCM_ENABLE_RX_DISABLE_TX_NORM
+- DCM_ENABLE_RX_DISABLE_TX_NM
+- DCM_ENABLE_RX_DISABLE_TX_NORM_NM
+
+如果接收到子功能为“enableRxAndDisableTxWithEnhancedAddressInformation”且“nodeIdentificationNumber”未列为 DcmDspComControlSubNodeId 的 **CommunicationControl** 请求，则 **Dcm** 应触发带有 **NRC** 0x31（**RequestOutOfRange**）的负响应。
+
+如果接收到子功能为“enableRxAndTxWithEnhancedAddressInformation”的 **CommunicationControl** 请求，则 **Dcm** 应检查列为 DcmDspComControlSubNodeId 的“nodeIdentificationNumber”，并针对所引用的网络（参见 DcmDspComControlSubNodeComMChannelRef）执行以下操作：
+
+1. 触发模式切换 Dcm_CommunicationControl_&lt;Network&gt; ModeDeclarationGroupPrototype 到与 **CommunicationControl** 请求中的 communicationType 和 controlType 参数相对应的模式。
+2. 使用与 **CommunicationControl** 请求中的 communicationType 和 controlType 参数相对应的参数 NetworkHandleType 和 Dcm_CommunicationModeType 调用 **API** BswM_Dcm_CommunicationMode_CurrentState（参见 **Dcm_CommunicationModeType** 定义）。
+
+类似的 controlType enableRxAndTx 应与以下现有的 **Dcm_CommunicationType** 值一起使用：
+
+- DCM_ENABLE_RX_TX_NORM
+- DCM_ENABLE_RX_TX_NM
+- DCM_ENABLE_RX_TX_NORM_NM
+
+如果接收到子功能为“enableRxAndTxWithEnhancedAddressInformation”且“nodeIdentificationNumber”未列为 DcmDspComControlSubNodeId 的 **CommunicationControl** 请求，则 **Dcm** 应触发带有 **NRC** 0x31（**RequestOutOfRange**）的负响应。
+
+如果 DcmDspComControlSubNodeUsed 设置为 FALSE，则该子系统（DcmDspComControlSubNode）在此配置中不可用。
+
+如果 DcmDspComControlSubNodeUsed 设置为 TRUE，则该子系统（DcmDspComControlSubNode）在此配置中可用。
+
+**注意：** 对 CommunicationType 和 NetworkType 的条件检查（即 **NRC** 22 检查）以及对 CommunicationType 支持的检查（即 CommunicationType 的 **NRC** 0x31 检查）不直接由 **Dcm** 支持。可以使用供应商/制造商的通知（notification）。
+
+##### 6.6.2.10. 服务 0x29 - Authentication
+
+**UDS** 服务 **Authentication**（0x29）用于提供控制对诊断服务访问的动态手段。执行某些诊断服务可能对功能安全、排放或车辆产生影响。通过证书控制对诊断服务的访问，提供了在生产之后控制诊断服务访问的手段。对这些资源的访问可以在时间上受限，或仅绑定到特定车辆或 **ECU**。**AUTOSAR Dcm** 为具有给定 **UDS** 服务 **Authentication** 语义的认证诊断提供了开箱即用的解决方案。即使 **ISO14229-1** [8] 留出了更多自由度，**Dcm** 也仅使用本章规定的功能。进一步的解释、证书类型或证书内容超出 **AUTOSAR Dcm** 模块的范围。
+
+**UDS 服务认证的支持（Support of UDS service authentication）**：**Dcm** 应实现 **UDS** 服务 **Authentication**（0x29）的以下子功能：
+
+- deAuthenticate
+- verifyCertificateUnidirectional
+- verifyCertificateBidirectional
+- proofOfOwnership
+- authenticationConfiguration
+
+**注意：** **AUTOSAR Dcm** 仅实现基于 **PKI** 证书交换的认证。基于挑战-响应（challenge-response，ACR）的认证超出 **AUTOSAR** 的范围。如果需要，则必须使用现有的 **Dcm** callout 进行自定义服务处理，以实现完整的自定义实现。
+
+**UDS 服务认证的 NRC 处理（NRC Handling for UDS service authentication）**：**Dcm** 应遵循 **ISO 14229-1:2018** 中为 **UDS** 服务认证定义的 **NRC** 处理。这包括 **NRC** 码以及各个 **NRC** 检查的顺序。
+
+**认证配置（Authentication configuration）**：DcmDsdSidTabServiceId 设置为 0x29 的 DcmDsdService 的存在，要求在 DcmDsp 上配置容器 DcmDspAuthentication。
+
+**每个连接的认证（Authentication per connection）**：DcmDsdSidTabServiceId 设置为 0x29 的 DcmDsdService 的存在，要求为每个已配置的连接 DcmDslConnection 配置 DcmDspAuthenticationConnection。
+
+**每个连接一个认证配置（One authentication configuration per connection）**：每个 DcmDspAuthenticationConnection 应通过 DcmDspAuthenticationConnectionMainConnectionRef 中的引用指向不同的 DcmDslMainConnection。
+
+**Dcm** 使用 **Csm** 和 **KeyM** 进行证书管理。解析证书是可能耗时的操作，需要异步执行。
+
+存在这样的观点：安全机制不应透露认证失败的任何原因，因此对于不同的证书失败不应有专用的 **NRC**。为支持该用例，**Dcm** 提供了通用的安全 **NRC** 处理。
+
+**对无效证书或内容使用通用 NRC（Use of generic NRC for invalid certificate or content）**：如果 DcmDspAuthenticationGeneralNRCModeRuleRef 所引用的模式求值为 true，则**在所有证书验证失败并返回 NRC 的情形中**，**Dcm** 应发送 DcmDspAuthenticationGeneralNRC 中给出的 **NRC** 码，而不是特定的 **NRC** 码。
+
+**通用 NRC 配置要求（Generic NRC configuration requirements）**：如果配置了 DcmDspAuthenticationGeneralNRCModeRuleRef，则还应配置参数 DcmDspAuthenticationGeneralNRC。
+
+###### 6.6.2.10.1. 去认证
+
+如果使用服务 0x29，则 de-authenticate 子功能应始终可用。该服务将收到请求所在诊断连接的认证状态设置为已去认证（deauthenticated）。
+
+DcmDsdSidTabServiceId 设置为 0x29 的 DcmDsdService 的存在，要求在该 DcmDsdService 上有一个 DcmDsdSubServiceId 设置为 deAuthenticate 的 DcmDsdSubService。
+
+**通过诊断服务请求去认证（Deauthentication by diagnostic service request）**：在接收到子功能等于 de-authenticate 的 **Authentication**（0x29）服务时，**Dcm** 应将 **Dcm** 接收该请求所在连接的认证状态设置为已去认证。
+
+在接收到子功能等于 de-Authenticate 的 **Authentication**（0x29）服务时，**Dcm** 应以 authenticationReturnParameter 设置为 DeAuthentication successful 的正响应作出应答。
+
+###### 6.6.2.10.2. 验证证书
+
+**支持的 communicationConfiguration（Supported communicationConfiguration）**：在接收到子功能等于 verifyCertificateUnidirectional 或 verifyCertificateBidirectional 的 **Authentication**（0x29）服务时，如果 communicationConfiguration（COCO）参数的值不是 0x00，则 **Dcm** 应以 **NRC** 0x31（requestOutOfRange）作出应答。
+
+支持常量值为 0x00 的 COCO 意味着 **Dcm** 不支持会话密钥（session key）。在接收到子功能为 verifyCertificateUniDirectional 且 communicationConfiguration（COCO）设置为 0x00 的认证请求时，**Dcm** 开始验证证书。该服务有意在 **BSW** 层面实现，以将服务 0x29 可能的方言种类减少到 **AUTOSAR** 原生支持的范围。**Csm** [17] 和 **KeyM** [18] 模块允许使用不同的密码学方法。**Dcm** 策略的一部分是明确要求证书及其内部所有形式的信息访问都由 **Csm** 及其配置处理。这允许将具有不同安全级别的不同种类证书映射到 **Dcm**，从而对 **Dcm** 隐藏证书的复杂性。
+
+**verifyCertificateUnidirectional 消息长度检查（Verify verifyCertificateUnidirectional message length check）**：在接收到子功能等于 verifyCertificateUnidirectional 的 **Authentication**（0x29）服务时，**Dcm** 应验证消息长度是否符合参数 lengthOfCertificateClient 给出的大小，如果大小不匹配则返回 **NRC** 0x13。
+
+**verifyCertificateBidirectional 消息长度检查（Verify verifyCertificateBidirectional message length check）**：在接收到子功能等于 verifyCertificateBidirectional 的 **Authentication**（0x29）服务时，**Dcm** 应验证消息长度是否符合参数 lengthOfCertificateClient 和 lengthOfChallengeClient 给出的大小，如果大小不匹配则返回 **NRC** 0x13。**Dcm** 使用 lengthOfCertificateClient 作为偏移量来计算 lengthOfChallengeClient 的位置。
+
+**双向认证所需配置（Required configuration for bidirectional authentication）**：如果在 0x29 的 DsdServiceSubFunction 中配置了子功能 verifyCertificateBidirectional，则配置参数 DcmDspAuthenticationECUCertificateRef 和 DcmDspAuthenticationECUCertificateKeyElementRef 是必需的。
+
+**必需的证书数据（Mandatory certificate data）**：在接收到子功能等于 verifyCertificateUnidirectional 或 verifyCertificateBidirectional 且 lengthOfCertificateClient 等于 0 的 **Authentication**（0x29）服务时，**Dcm** 应以 **NRC** 0x13（incorrectMessageLengthOrInvalidFormat）作出响应。
+
+**在 Csm 中存储证书（Store certificate in Csm）** —— **证书验证（Certificate validation）**：在接收到子功能等于 verifyCertificateUnidirectional 或 verifyCertificateBidirectional 的 **Authentication**（0x29）服务时，**Dcm** 应使用 **KeyM API** KeyM_SetCertificate 将来自服务请求的客户端证书存储到 **KeyM** 模块中。应使用以下参数值：
+
+- CertificateId = DcmDspAuthenticationConnectionCertificateRef -&gt; KeyMCertificate.KeyMCertificateId
+- certificateDataPtr.certData = 指向请求中 certificateClient 的指针
+- certificateDataPtr.certDataLength = 来自请求的 lengthOfCertificateClient
+
+诊断证书配置主要是在 **Csm** 和 **KeyM** 模块中执行的任务。**Dcm** 提供了对这些模块的抽象，仅保留对保存信息的容器的符号引用。在配置 **Csm** 和 **KeyM** 时请注意“以 **Dcm** 证书的精神”进行配置。
+
+**无效证书大小失败（Invalid certificate size failure）**：如果 **API** KeyM_SetCertificate 返回 KEYM_E_SIZE_MISMATCH，则 **Dcm** 应返回 **NRC** 0x13（incorrectMessageLengthOrInvalidFormat）。
+
+**密码学操作忙碌时的行为（Behavior on busy crypto operation）**：如果 **Dcm** 调用的任何 **Csm** 或 **KeyM API** 返回 CRYPTO_E_BUSY 或 KEYM_E_BUSY，则 **Dcm** 应返回 **NRC** 0x21（busyRepeat）。
+
+**Csm API 返回失败码时的行为（Csm APIs returning failure code behavior）**：本章中 **Csm** 或 **KeyM** 用于处理认证请求。这些 **API** 具有表示失败的返回值。除非对某个给定返回值没有专门要求，并且该返回值不同于 E_OK，否则 **Dcm** 应返回 **NRC** 0x10“GeneralReject”。
+
+密码学操作可能具有较长的执行时间，并以异步方式调用。
+
+**异步证书操作处理（Asynchronous certificate operation handling）**：对于所有异步 **Csm** 或 **KeyM** 操作，**Dcm** 应等待回调被调用（表明作业成功结束）。如果结果（例如 KeyM_CertificateStatusType）为 E_OK，则 **Dcm** 应继续处理 0x29 请求；如果结果不同于 E_OK，则 **Dcm** 应跳过进一步处理并返回带有 **NRC**“GeneralReject”的负响应。
+
+**在 Csm 中解析并验证证书（Parse and Verify certificate in Csm）**
+
+**验证客户端证书（Verifying client certificate）**：在 **Dcm** 按上文所述设置证书之后，**Dcm** 应使用以下参数调用 KeyM_VerifyCertificate 来验证证书：
+
+- CertificateId = DcmDspAuthenticationConnectionCertificateRef -&gt; KeyMMCertificate.KeyMCertificateId
+
+**证书验证失败时的行为（Behavior on failed certificate verification）**：在 **Dcm** 验证证书且 KeyM_CertificateStatusType 设置为 KEYM_E_CERTIFICATE_SIGNATURE_FAIL 之后，**Dcm** 应发送 **NRC** 设置为“Certificate verification failed - Invalid Signature”的负响应。
+
+**检查证书信任链（Check certificate chain of trust）**：如果上文启动的操作返回 KEYM_E_CERTIFICATE_INVALID_CHAIN_OF_TRUST，则 **Dcm** 应拒绝客户端证书并返回 **NRC**“Certificate verification failed - Invalid Chain of Trust”的负响应。
+
+**检查证书类型（Check certificate type）**：如果上文启动的操作返回 KEYM_E_CERTIFICATE_INVALID_TYPE，则 **Dcm** 应拒绝客户端证书并返回 **NRC**“Certificate verification failed - Invalid Type”的负响应。
+
+**检查证书格式（Check certificate format）**：如果上文启动的操作返回 KEYM_E_CERTIFICATE_INVALID_FORMAT，则 **Dcm** 应拒绝客户端证书并返回 **NRC**“Certificate verification failed - Invalid Format”的负响应。
+
+如果上文启动的操作返回 KEYM_E_CERTIFICATE_INVALID_CONTENT，则 **Dcm** 应拒绝客户端证书并返回 **NRC**“Certificate verification failed - Invalid Scope”的负响应。
+
+**注意：** 虽然大多数 **KeyM** 返回值可以 1:1 映射到 **UDS NRC** 值，但 KEYM_E_CERTIFICATE_INVALID_CONTENT 并非如此。来自 **KeyM** 的无效内容表明密钥元素验证失败。密钥元素验证失败意味着证书本身有效，但 **KeyM** 拒绝该证书，因为数据不符合服务器的要求值。在 **UDS** 中这由“Certificate verification failed - Invalid Scope”表示。因此，来自 **KeyM** 的无效内容将触发 **NRC** invalid scope。
+
+如果上文启动的操作返回 KEYM_E_CERTIFICATE_REVOKED，则 **Dcm** 应拒绝客户端证书并返回 **NRC**“Certificate verification failed - Invalid Certificate (revoked)”的负响应。
+
+**检查证书有效期（Check certificate valid until）**：如果上文启动的操作返回 KEYM_E_CERTIFICATE_VALIDITY_PERIOD_FAIL，则 **Dcm** 应拒绝客户端证书并返回 **NRC**“Certificate verification failed -Invalid Time Period”的负响应。
+
+**提供服务器挑战（Providing the server challenge）**
+
+**Dcm** 使用 **Csm** 通过返回随机值来创建服务器挑战。
+
+**服务器挑战的长度（Length of server challenge）**：**Dcm** 应创建长度按 DcmDspAuthenticationEcuChallengeLength 配置的服务器挑战。
+
+**创建服务器挑战（Creating the server challenge）**：在成功验证客户端证书之后，**Dcm** 应按以下顺序使用 **Csm** 创建服务器挑战：
+
+1. 使用以下参数调用 Csm_RandomGenerate：
+   - jobId：DcmDspAuthenticationRandomJobRef -&gt; CsmJobId
+2. 按照异步操作处理要求等待异步作业结束。
+
+**API** Csm_RandomGenerate 需要已初始化的随机数生成器。随机数生成器的初始化是系统（集成商）的任务。
+
+如果服务器挑战的计算失败，即 Csm_RandomGenerate 返回 CRYPTO_E_ENTROPY_EXHAUSTED，则 **Dcm** 应发送 **NRC** 0x59（Challenge calculation failed）。
+
+**verifyCertificateUniDirectional 的正响应（Sending positive response on verifyCertificateUniDirectional）**：如果 **Dcm** 已成功计算出服务器挑战，则 **Dcm** 应使用以下参数值发送 verifyCertificateUniDirectional 请求的正响应：
+
+- authenticationReturnParameter：“Certificate verified, Ownership verification necessary”
+- lengtfOfChallengeServer：上文生成的挑战长度
+- challengeServer：上文生成的挑战
+- lengthOfEphemeralPublicKeyServer：0x0000
+
+处理诊断请求 verifyCertificateBidirectional 还要求 **Dcm** 发送服务器证书并对客户端挑战进行签名。因此，对于 verifyCertificateBidirectional 还要额外执行以下步骤。
+
+**对客户端挑战签名（Signing client challenge）**：在接收到子功能等于 verifyCertificateBidirectional 的 **Authentication**（0x29）服务时，**Dcm** 应使用以下参数值调用 Csm_SignatureGenerate 对接收到的客户端挑战进行签名：
+
+- jobId：DcmDspAuthenticationClientChallengeSignJobRef -&gt; CsmJobId
+- mode：CRYPTO_OPERATIONMODE_SINGLECALL
+- dataPtr：指向请求中 challengeClient 的指针
+- dataLength：来自请求的 lengthOfChallengeClient
+- resultPtr：用于存储 proofOfOwnershipServer 的 **Dcm** 侧缓冲区
+- resultLengthPtr：lengthOfProofOfOwnershipServer 的响应数据
+
+**要求异步的客户端挑战签名（Require asynchronous client challenge signing）**：DcmDspAuthenticationClientChallengeSignJobRef 仅在所引用的 **CsmJob** 本身满足以下条件时才被接受：
+
+- 其 CsmProcessingMode 设置为 CRYPTO_PROCESSING_ASYNC
+- 引用了聚合 CsmSignatureGenerate 的 CsmPrimitive
+
+**提供服务器证书（Providing the server certificate）**：在接收到子功能等于 verifyCertificateBidirectional 的 **Authentication**（0x29）服务时，**Dcm** 应在响应中提供服务器证书。**Dcm** 应使用以下参数调用 KeyM_GetCertificate：
+
+- certId：DcmDspAuthenticationECUCertificateRef /KeyMCertificateId
+- certificateDataPtr：**Dcm** 实现特定
+
+**服务器证书大小检查（Server certificate size check）**：如果 **API** KeyM_GetCertificate 返回 KEYM_E_KEY_CERT_SIZE_MISMATCH（0x04），则 **Dcm** 应返回 **NRC** 0x10（generalReject）。
+
+**verifyCertificateBidirectional 的正响应（Sending positive response on verifyCertificateBidirectional）**：如果 **Dcm** 已成功计算出服务器挑战、服务器挑战与服务器证书，则 **Dcm** 应使用以下参数值发送 verifyCertificateBidirectional 请求的正响应：
+
+- authenticationReturnParameter：“Certificate verified, Ownership verification necessary”
+- lengtfOfChallengeServer：上文生成的挑战长度
+- challengeServer：上文生成的挑战
+- lengthOfCertificateServer：上文提供的证书长度
+- certificateServer：上文提供的证书
+- lengthOfProofOfOwnershipServer：上文创建的 proof-of-ownership server 的长度
+- proofOfOwnershipServer：上文创建的 proof-of-ownership server
+- lengthOfEphemeralPublicKeyServer：0x0000
+
+###### 6.6.2.10.3. 客户端所有权证明
+
+**顺序检查（Sequence check）**：在接收到子功能等于 proofOfOwnership 的 **Authentication**（0x29）服务时，如果该连接上最近处理的 verifyCertificateUnidirectional 或 verifyCertificateBidirectional 服务失败，或尚未处理过此类子功能，则 **Dcm** 应发送负响应“requestSequenceError”。该连接应保持已去认证状态。
+
+**所有权证明消息长度检查（Proof of ownership message length check）**：在接收到子功能等于 proofOfOwnership 的 **Authentication**（0x29）服务时，**Dcm** 应验证消息长度是否符合参数 lengthOfProofOfOwnershipClient 和 lengthOfEphemeralPublicKeyClient 给出的大小，如果大小不匹配则返回 **NRC** 0x13。
+
+**客户端所有权证明验证（Client proof of ownership verification）**：在接收到子功能等于 proofOfOwnership 的 **Authentication**（0x29）服务时，**Dcm** 应使用以下输入参数调用 Csm_SignatureVerify，以验证请求中提供的客户端所有权证明数据：
+
+- jobId：DcmDspAuthenticationVerifyProofOfOwnerShipClientJobRef -&gt; CsmJob.CsmJobId
+- mode：设置为 CRYPTO_OPERATIONMODE_SINGLECALL
+- dataPtr：上文生成的挑战
+- dataLength：上文生成的挑战长度
+- signaturePtr：来自请求的 proofOfOwnerShipClient
+- signatureLength：来自请求的 lengthOfProofOfOwnerShipClient
+
+**要求异步签名验证（Require asynchronous signature verification）**：DcmDspAuthenticationVerifyProofOfOwnerShipClientJobRef 仅在所引用的 **CsmJob** 本身满足以下条件时有效：
+
+- 其 CsmProcessingMode 设置为 CRYPTO_PROCESSING_ASYNC
+- 引用了聚合 CsmSignatureVerify 的 CsmPrimitive
+
+**所有权验证失败（Failed ownership verification）**：如果 Csm_SignatureVerify 的结果 Crypto_VerifyResultType 等于 CRYPTO_E_VER_NOT_OK，则 **Dcm** 应发送带有 **NRC**“Ownership verification failed”的负响应。
+
+**会话密钥支持（SessionKey support）**：在发送子功能等于 proofOfOwnership 的认证请求的正响应时，**Dcm** 应：
+
+- 将 lengthOfSessionKeyInfo 的所有字节设置为 0x00
+- 省略 sessionKeyInfo
+
+**设置当前角色（Set current role）**
+
+**更新当前角色（Update the current role）**：如果所有权证明验证成功并返回 CRYPTO_E_VER_OK，则 **Dcm** 应将从证书扩展 DcmDspAuthenticationRoleElementRef 中读取的值作为当前已认证状态的新角色。
+
+**角色大小检查（Role size check）**：如果读取到的角色信息大小与 DcmDspAuthenticationRoleSize 中的大小不同，则 **Dcm** 应发送带有 **NRC**“Certificate verification failed - Invalid Content”的负响应。
+
+**设置白名单（Set white list）**
+
+**更新当前白名单（Update the current whitelist）**：如果所有权证明验证成功并返回 CRYPTO_E_VER_OK，则 **Dcm** 应使用根据下文要求从证书中读取的白名单作为当前已认证状态的新白名单。
+
+**白名单访问（White list access）**：为了从证书中读取白名单，**Dcm** 应通过重复调用 KeyM_CertElementGetFirst 和 KeyM_CertElementGetNext 的序列（直到没有更多子元素可用），从所引用的 DcmDspAuthenticationWhiteListServicesElementRef、DcmDspAuthenticationWhiteListDIDElementRef、DcmDspAuthenticationWhiteListRIDElementRef 和 DcmDspAuthenticationWhiteListMemorySelectionElementRef 证书数据中读取所有子元素。**Dcm** 应使用以下输入参数值：
+
+- certId：DcmDspAuthenticationConnectionCertificateRef -&gt; KeyMCertificate.KeyMCertificateId
+- certElementId：DcmDspAuthenticationWhiteListMemorySelectionElementRef -&gt; KeyMCertificateElement.KeyMCertificateElementId
+
+**白名单大小检查（White list size check）**：如果读取到的白名单信息大小大于 DcmDspAuthenticationWhiteListMemorySelectionMaxSize 中的大小，则 **Dcm** 应发送带有 **NRC**“Certificate verification failed - Invalid Content”的负响应。
+
+**白名单所需大小（Required size for white lists）**：如果配置了任何可选的 DcmDspAuthenticationWhiteListMemorySelectionElementRef，则应为该白名单配置对应的 DcmDspAuthenticationWhiteListMemorySelectionMaxSize。
+
+###### 6.6.2.10.4. 角色的定义和验证
+
+证书中传输的角色用于为一个连接上的诊断仪分配一个或多个角色。单个角色本身由角色位域表示中的某一位表示。**Dcm** 内部对每个诊断服务存在静态的角色分配。如果分配给某个服务的至少一个角色（位）与证书中的某个角色（位）匹配，则该服务可以执行。
+
+**受支持的角色大小（Supported role sizes）**：参数 DcmDspAuthenticationRoleSize 定义了在证书和 **ECU** 内部静态角色配置中使用的字节大小。所有角色参数（例如 DcmDspServiceRole）的值应适合 DcmDspAuthenticationRoleSize 所给出的字节数。
+
+**证书中角色的整数解释（Integer interpretation of roles in certificates）**：**Dcm** 应以小端格式解释所有已配置的角色整数值。
+
+**角色验证（Role verification）**：在每次角色验证时，**Dcm** 应对证书中为该连接提供的角色值与分配给该服务的角色值执行按位“与”运算。分配给服务的值通过设置每个 DcmDspAuthenticationRow 所引用的所有位来计算。如果结果大于 0，则 **Dcm** 应将该服务视为允许执行。
+
+**角色验证失败（Failed role verification）**：在每次角色验证时，**Dcm** 应对证书中为该连接提供的角色与分配给该服务的角色执行按位“与”运算。如果结果等于 0，则 **Dcm** 应停止该服务的处理并发送负响应“authenticationRequired”。
+
+证书中的角色与分配了证书的服务的示例见图7.11。所提供的证书为角色使用 1 个字节，其中定义了 5 个角色。该证书将授予诊断仪“AfterSales”和“ExtendedUser”角色的权限。使用该证书，诊断仪可以执行在这些角色中具有相应执行权限的服务。在该示例中，服务 0x28 和 0x11 01 都允许执行。标识符为 0x5678 的例程仅允许在“production”角色中执行，**Dcm** 将以 **NRC**“authenticationRequired”拒绝执行。
+
+图7.11：角色的示例（**Example for roles**）
+
+![Figure7-11](Figure7-11.png)
+
+###### 6.6.2.10.5. 白名单的定义和验证
+
+除了使用角色之外，证书还可以扩展可选的白名单用于服务执行。这允许证书的签发者在不必更新 **ECU** 中访问列表的情况下扩展允许服务的范围。
+
+白名单由以下元素构成：
+
+- 允许的服务列表，每个 1-4 字节
+- 允许的数据标识符（**DID**）及访问信息列表，每个 3 字节
+- 允许的例程标识符（**RID**）及访问信息列表，每个 3 字节
+- 允许的用户定义故障存储器列表，每个 1 字节
+
+白名单不同元素的解析与访问通过按前述要求调用 KeyM_CertElementGetFirst 和 KeyM_CertElementGetNext 完成。
+
+**服务白名单的定义（White list for services definition）**：服务白名单是一组值，每个值最多由 4 个字节组成。每个值本身包含允许执行的诊断服务的前几个字节。
+
+**示例：** 在以下示例中显示了证书中的白名单段。它包含 5 个可执行的附加服务：
+
+```text
+1 ... 2 SEQUENCE (1 elem) 3 SEQUENCE (2 elem) 4 OBJECT IDENTIFIER 3.9.3.345.3.1.3453.24.3.9.355.73 5 SET (6 elem) 6 OCTET STRING (1 byte) 85 7 OCTET STRING (2 byte) 1101 8 OCTET STRING (3 byte) 22123A 9 OCTET STRING (3 byte) 2E123A 10 OCTET STRING (4 byte) 310113F4 11 SEQUENCE (3 elem) ....
+```
+
+这将允许 **Dcm** 执行：
+
+- 服务 0x85（任意子功能和 DTCSettingControlOptionRecord 字节）
+- 服务 0x11 01
+- 对 DID 0x123A 的 Read 和 WriteDataByIdentifier
+- 对 RID 0x13F4 的 Routine Start
+
+对服务白名单的检查全部在 **DSD** 层面完成。**Dcm** 检查接收到的诊断请求的前几个字节是否与白名单允许的值匹配。如果存在一个白名单条目，其所有字节都与请求的前几个字节匹配，则授予该服务访问权限。
+
+对于所有其他白名单，**Dcm** 在 **DSP** 层面由相应的服务处理器执行检查。
+
+请注意，可以在白名单的两个位置允许 DID 执行：1）作为 3 字节服务，2）作为 DID 列表中的 DID。区别在于，服务检查仅检查 **PDU** 的前 3 个字节，不会检测到该 DID 被用于多个 DID 或动态定义 DID 请求的情形，而 DID 列表元素会在所有请求该 DID 的服务中验证。
+
+**DID 的白名单定义（White list definition for DIDs）**：**DID** 的白名单定义了允许被读取、写入和控制的数据标识符集合。每个条目应在前两个字节中包含 **DID** 编号，在第三个字节中包含以下访问定义：
+
+- 位 0：读访问
+- 位 1：写访问
+- 位 2：控制访问（通过 InputOutputControlByIdentifier）
+
+位值 0 表示该操作被禁止，位值 1 表示该操作被允许。所有未使用的位（3-7）应设置为零。
+
+**DID** 编号始终为大端格式（MSB 在前）。
+
+示例：
+
+| DID 访问记录 | 授予的访问权限 |
+|---|---|
+| 0x1A90 0x01 | 对 DID 0x1A90 的所有 read data by identifier 操作 |
+| 0x314F 0x05 | 对 DID 0x314F 的所有 read data by identifier 和 IOcontrol 操作 |
+
+DID 读取操作由各种 **UDS** 服务执行。**Dcm** 在每次 DID 读取时检查对该 DID 的访问权限。
+
+**RID 的白名单定义（White list definition for RIDs）**：**RID** 的白名单定义了可访问子功能 startRoutine、stopRoutine 和 requestRoutineResult 的例程标识符集合。每个条目应在前两个字节中包含 **RID** 编号，在第三个字节中包含以下访问定义：
+
+- 位 0：对子功能“startRoutine”的访问
+- 位 1：对子功能“stopRoutine”的访问
+- 位 2：对子功能“requestRoutineResult”的访问
+
+位值 0 表示该子功能被禁止，位值 1 表示该子功能被允许。所有未使用的位（3-7）应设置为零。
+
+**RID** 编号始终为大端格式（MSB 在前）。
+
+示例：
+
+| RID 访问记录 | 授予的访问权限 |
+|---|---|
+| 0x0240 0x01 | RID 0x0240 允许 StartRoutine |
+| 0x028A 0x07 | RID 0x028A 允许所有例程子功能 |
+
+**MemorySelection 的白名单定义（White list definition for MemorySelection）**：白名单存储器选择用于 **UDS** 服务 0x19 的子功能 0x17、0x18 和 0x19。白名单中的值定义了 **UDS** 请求中 MemorySelection 可接受的参数值。
+
+**转换到已认证会话（Transition into authenticated session）**
+
+**转换到已认证状态（Transition into authenticated state）**：如果所有权证明验证成功并返回 CRYPTO_E_VER_OK，并且在角色与白名单设置完成之后，**Dcm** 应将该连接上的 DcmAuthenticationState_{Channel} 设置为 DCM_AUTHENTICATED。
+
+**所有权验证成功（Successful ownership verification）**：如果 Csm_SignatureVerify 的结果 Crypto_VerifyResultType 等于 CRYPTO_E_VER_OK，则 **Dcm** 应发送正响应，authenticationReturnParameter 设置为“Ownership verified, Authentication complete”，并且 lengthOfSessionKeyInfo 的大小为 0 且不包含 sessionKeyInfo。
+
+**保持认证状态（Persisting authentication state）**：如果 Csm_SignatureVerify 的结果 Crypto_VerifyResultType 等于 CRYPTO_E_VER_OK，且 DcmDspAuthenticationPersistStateModeRuleRef 所引用的模式规则求值为 true，则 **Dcm** 应保持该连接上的认证状态、角色和白名单。
+
+**角色与白名单的激活（Activation of role and white list）**：**Dcm** 应仅在处于已认证状态时考虑角色和白名单用于访问控制。
+
+**重新进入已认证状态（Re-entering authenticated state）**：如果 **Dcm** 已处于已认证状态，同时又根据上述要求请求转换到已认证状态，则 **Dcm** 应覆盖角色和白名单，并仅使用最后接收到的证书中的角色和白名单。
+
+###### 6.6.2.10.6. AuthenticationConfiguration
+
+**提供认证配置（Providing the authentication configuration）**：如果配置了 DcmDspAuthentication，并且接收到子功能等于 authenticationConfiguration 的 **Authentication**（0x29）服务，则 **Dcm** 应发送正响应，authenticationReturnParameter 设置为“AuthenticationConfiguration APCE”。
+
+###### 6.6.2.10.7. TransmitCertificate
+
+子功能 transmitCertificate（0x4）提供了一种将通用证书传输到 **ECU** 的机制。**Dcm** 不直接解释此类证书，而是允许应用程序使用它们。通常其语义超出 **Dcm** 的范围。典型的示例有：
+
+- 安全编码（Secure coding）证书 —— 验证由 WDBDI 写入的数据
+- SecOC 证书
+- TLS ECU 证书
+- 增强诊断权限证书
+
+**Dcm** 可以支持其中多个证书。识别证书类型的关键是 **UDS** 请求消息中的 certificateEvaluationId 参数。DcmDspAuthenticationTransmitCertificate 提供关于如何处理证书以及使用哪个应用程序回调通知证书传输成功的配置信息。
+
+**子功能 transmitCertificate 的支持（Support of subfunction transmitCertificate）**：**Dcm** 应按照 **ISO 14229-1:2020** [8] 支持 **UDS** 服务 **Authentication** 的子功能 transmitCertificate。
+
+**验证 certificateEvaluationId（Verify certificateEvaluationId）**：如果接收到子功能等于 transmitCertificate 的 **UDS** 服务 **Authentication**（0x29）服务，且 certificateEvaluationId 在任何 DcmDspAuthenticationTransmitCertificate 容器中都没有配置的 DcmDspAuthenticationTransmitCertificateEvaluationId，则 **Dcm** 应返回 **NRC** 0x31（requestOutOfRange）。
+
+**Dcm** 使用 **KeyM** 进行所有证书管理操作。本文档仅提及 **KeyM** 以及对 KeyMCertificate 的配置引用。关于如何使用 **KeyM** 模块的详细信息，请阅读 **KeyM** 的 SWS 文档。请注意密码学操作可能具有较长的执行时间并以异步方式调用。
+
+**证书的存储、解析与验证（Certificate storage parsing and verification）**：**Dcm** 应在 **KeyM** 模块中存储、解析并验证证书，对接收到的 certificateEvaluationId 使用 **KeyM** 目标 DcmDspAuthenticationTransmitCertificateRef。
+
+在证书按上述要求成功处理之后，证书被正确存储在服务器中，应用程序通过 **KeyM** 获知新证书的存在。
+
+##### 6.6.2.11. 服务 0x2A - ReadDataByPeriodicIdentifier
+
+**Dcm** 应按照 **ISO 14229-1:2020** [8] 支持所有 transmissionMode 类型的 **UDS** 服务 **ReadDataByPeriodicIdentifier**（0x2A）。
+
+**静态定义 DID 的周期性 DID 读取认证检查（Read Periodic DID authentication check for statically defined DIDs）**：在接收到 **UDS** 服务 **ReadDataByPeriodicIdentifier**（0x2A）时，**Dcm** 应检查对所有静态定义的目标 **DID** 的访问是否已认证，并且仅在以下情况下周期性读取数据标识符：
+
+- 为该 **DID** 通过 DcmDspDidReadRoleRef 配置了 **DID** 读取角色，且角色验证成功（参见 §6.6.2.10.4），或者
+- 该连接上的活动白名单针对每个所请求的 **DID** 具有一个带有读访问权限且与该 **DID** 匹配的条目。
+
+**动态定义 DID 的周期性 DID 读取认证检查（Read Periodic DID authentication check for dynamically defined DIDs）**：在接收到 **UDS** 服务 **ReadDataByPeriodicIdentifier**（0x2A）时，**Dcm** 应检查对所有动态定义的目标 **DID**（其内容基于 **DID** 或 **DID** 的组成部分）的访问是否已认证，并且仅在以下情况下周期性读取数据标识符：
+
+- 为该 **DID** 通过 DcmDspDidReadRoleRef 配置了 **DID** 读取角色，且角色验证成功（参见 §6.6.2.10.4），或者
+- 该连接上的活动白名单针对每个所请求的 **DID** 具有一个带有读访问权限且与该 **DID** 匹配的条目。
+
+根据以上要求，认证检查仅在配置了 DcmDspAuthentication 时执行。认证失败时的 **NRC** 处理按照 §6.5.4.3.1 和 §6.6.2.10 中的规则执行。
+
+在接收到 **UDS** 服务 **ReadDataByPeriodicIdentifier**（0x2A）时，**Dcm** 模块应针对每个所请求的 periodicDID 检查该 periodicDID 是否可以在当前会话中读取（参见配置参数 DcmDspDidReadSessionRef）。如果没有任何 periodicDID 可以在当前会话中读取，则 **Dcm** 模块应发送 **NRC** 0x31（RequestOutOfRange）。
+
+在接收到 **UDS** 服务 **ReadDataByPeriodicIdentifier**（0x2A）时，**Dcm** 模块应针对每个所请求的 periodicDID 检查该 periodicDID 是否可以在当前安全级别中读取（参见配置参数 DcmDspDidReadSecurityLevelRef）。如果不可读取，则 **Dcm** 模块应发送 **NRC** 0x33（Security access denied）。
+
+**注意：** 为评估会话与安全分配，**Dcm** 使用 **ReadDataByIdentifier** 所用的配置，例如 DcmDspDidReadSessionRef 或 DcmDspDidReadSecurityLevelRef。
+
+在接收到 **UDS** 服务 **ReadDataByPeriodicIdentifier**（0x2A）时，**Dcm** 模块应针对每个所请求的 periodicDID 检查该 periodicDID 是否可以在当前模式条件下读取（参见配置参数 DcmDspDidReadModeRuleRef）。如果不可读取，则 **Dcm** 模块应发送由所引用的 DcmModeRule 计算得到的否定响应码。
+
+在接收到 **UDS** 服务 **ReadDataByPeriodicIdentifier**（0x2A）时，如果验证已成功完成（参见上述会话、安全和模式检查要求），且请求中包含一个或多个动态定义的 **DID**，则当配置参数 DcmDspDDDIDcheckPerSourceDID 设置为 TRUE 时，**Dcm** 模块应对所有源数据执行会话、安全和模式依赖检查。
+
+在接收到 **UDS** 服务 **ReadDataByPeriodicIdentifier**（0x2A）时，**Dcm** 模块应针对每个所请求的 periodicDID 在已配置的情况下调用 ConditionCheckRead 操作（或相应的 C 函数）。在结果为否定的情况下，返回的 ErrorCode 应作为最终的否定响应码。
+
+在接收到 **UDS** 服务 **ReadDataByPeriodicIdentifier**（0x2A）时，**Dcm** 模块应针对每个具有所配置动态长度的所请求 periodicDID 调用 ReadDataLength 操作（或相应的 C 函数）以获取该 periodicDID 的长度。该长度在该 periodicDID 被从调度器中移除或通过新请求更新之前的每次 ReadData 操作中均有效。此外，该长度应用于与 UUDT 大小的检查。
+
+在接收到 **UDS** 服务 **ReadDataByPeriodicIdentifier**（0x2A）时，**Dcm** 模块应检查单个请求中所请求的 periodicDataIdentifier 是否未超过配置的 DcmDspMaxPeriodicDidToRead（最大长度检查）。否则（在元素数量超出的情况下），**Dcm** 模块应发送 **NRC** 0x13（Incorrect message length or invalid format）。
+
+如果 DcmDspDidUsed 设置为 FALSE，则 **Dcm** 应将该 **DID** 视为不受支持。
+
+###### 6.6.2.11.1. 调度器周期性传输（Scheduler PeriodicTransmission）
+
+**注意：** 周期性响应消息的布局遵循 **ISO 14229-1:2020** [8]。它包含周期性数据标识符和数据。服务 ID 与 A_PCI 字节不属于周期性响应消息的一部分。
+
+**Dcm** 应使用所配置的 DcmDslPeriodicConnection 发送所有周期性调度的响应。
+
+**ISO 14229-1:2020** [8] 为 **ReadDataByPeriodicIdentifier** 定义了两种不同的调度器类型。取决于调度器类型，**Dcm** 具有不同的传输策略。服务器的所用调度器类型通过将 DcmDspPeriodicTransmissionSchedulerType 设置为两种类型之一来选择。
+
+**周期传输类型 1 的支持（Support of periodic transmission type 1）**：如果 DcmDspPeriodicTransmissionSchedulerType 设置为 SCHEDULER_TYPE1，且 **Dcm** 已设置为发送 PDID，则每次所配置的周期性传输速率到时，**Dcm** 应触发所有已调度 PDID 的传输。
+
+**每个可用连接传输一个 PDID（Transmission of one PDID per available connection）**：如果依据上述要求触发了 PDID 传输，则 **Dcm** 应在每个可用周期性连接上传输一个 PDID，从已调度 PDID 列表中的第一个 PDID 开始。
+
+如果 PDID 传输按上述要求触发，且要传输的 PDID 数量多于可用周期性连接的数量，则 **Dcm** 应在下一次 **Dcm** 主函数调用中继续传输。每次均应使用可用的周期性连接。
+
+如果 PDID 传输按上述要求触发，并且在 **Dcm** 尚未完成发送已调度 PDID 之前又出现下一次周期性传输速率触发，则 **Dcm** 应继续按上述方式传输 PDID，并在上一个 PDID 传输完成之后安排新触发所对应的 PDID。
+
+**周期传输类型 2 的支持（Support of periodic transmission type 2）**：如果 DcmDspPeriodicTransmissionSchedulerType 设置为 SCHEDULER_TYPE2，**Dcm** 已设置为发送 PDID，并且某个调度器的周期性传输速率到时，则 **Dcm** 应触发在所有可用周期性连接上传输下一批已调度 PDID。
+
+**调度器类型 2 的 PDID 传输顺序（PDID transmission sequence for scheduler type 2）**：对于调度器类型 2 在调度器单次到时内的 PDID 传输，**Dcm** 应从第一个所配置的 PDID 开始传输，并连续传输所有其他已配置的 PDID。如果最后一个 PDID 已传输，**Dcm** 从第一个所配置的 PDID 重新开始该序列。如果某个 PDID 在调度器单次到时内被发送多次，则每次重传时该 PDID 的内容应使用适用的 **DID** / 存储器数据重新加载。
+
+如果调度器类型 2 的 PDID 传输处于活动状态，而已调度 PDID 的数量大于可用周期性连接的数量，则 **Dcm** 应在下一次周期性传输速率调度器到时发送下一批已调度 PDID。
+
+以下示例概述了调度器类型 1 和类型 2。它们使用从 0xF201 开始的 PDID，且所有 PDID 数据均设置为零。PDID 在 CAN 2.0 上使用 CAN-ID 0x6A0、0x6A1 发送。
+
+**示例 1：调度器类型 1（Example 1: Scheduler Type 1）**
+
+| 参数 | 值 |
+|---|---|
+| SchedulerRate | 1000 ms |
+| PeriodicRate | 4000 ms |
+| NumPeriodicAddr | 1 |
+| NumPDID | 2 |
+
+传输序列（时间戳 / CAN-ID / PDID / 数据）：
+
+```
+1017.02  6A0 01 00 00 00 00 00 00 00
+2016.97  6A0 02 00 00 00 00 00 00 00
+5016.87  6A0 01 00 00 00 00 00 00 00
+6016.78  6A0 02 00 00 00 00 00 00 00
+9016.67  6A0 01 00 00 00 00 00 00 00
+10016.63 6A0 02 00 00 00 00 00 00 00
+13016.52 6A0 01 00 00 00 00 00 00 00
+14016.46 6A0 02 00 00 00 00 00 00 00
+```
+
+**示例 2：调度器类型 2（Example 2: Scheduler Type 2）**
+
+| 参数 | 值 |
+|---|---|
+| SchedulerRate | 1000 ms |
+| PeriodicRate | 4000 ms |
+| NumPeriodicAddr | 1 |
+| NumPDID | 2 |
+
+```
+945.01   6A0 01 00 00 00 00 00 00 00
+4944.78  6A0 02 00 00 00 00 00 00 00
+8944.66  6A0 01 00 00 00 00 00 00 00
+12944.49 6A0 02 00 00 00 00 00 00 00
+16944.33 6A0 01 00 00 00 00 00 00 00
+20944.28 6A0 02 00 00 00 00 00 00 00
+24944.01 6A0 01 00 00 00 00 00 00 00
+```
+
+**示例 3：调度器类型 1 的别名（Example 3: Aliasing with Scheduler Type 1）**
+
+| 参数 | 值 |
+|---|---|
+| SchedulerRate | 1000 ms |
+| PeriodicRate | 4000 ms |
+| NumPeriodicAddr | 1 |
+| NumPDID | 5 |
+
+```
+529.89   6A0 01 00 00 00 00 00 00 00
+1529.70  6A0 02 00 00 00 00 00 00 00
+2529.59  6A0 03 00 00 00 00 00 00 00
+3529.35  6A0 04 00 00 00 00 00 00 00
+4529.16  6A0 05 00 00 00 00 00 00 00  <-- 别名（本应从 01 重新开始）
+5529.02  6A0 01 00 00 00 00 00 00 00
+6529.15  6A0 02 00 00 00 00 00 00 00
+7529.03  6A0 03 00 00 00 00 00 00 00
+8528.92  6A0 04 00 00 00 00 00 00 00  <-- 别名（本应从 01 重新开始）
+9528.82  6A0 05 00 00 00 00 00 00 00
+10528.46 6A0 01 00 00 00 00 00 00 00
+11528.60 6A0 02 00 00 00 00 00 00 00
+12528.47 6A0 03 00 00 00 00 00 00 00  <-- 别名（本应从 01 重新开始）
+13528.36 6A0 04 00 00 00 00 00 00 00
+14528.27 6A0 05 00 00 00 00 00 00 00
+```
+
+**示例 4：调度器类型 2（Example 4: Scheduler Type 2）**
+
+| 参数 | 值 |
+|---|---|
+| SchedulerRate | 1000 ms |
+| PeriodicRate | 4000 ms |
+| NumPeriodicAddr | 1 |
+| NumPDID | 5 |
+
+```
+592.03   6A0 01 00 00 00 00 00 00 00
+4591.56  6A0 02 00 00 00 00 00 00 00
+8591.13  6A0 03 00 00 00 00 00 00 00
+12590.69 6A0 04 00 00 00 00 00 00 00
+16590.26 6A0 05 00 00 00 00 00 00 00
+20589.78 6A0 01 00 00 00 00 00 00 00
+24589.23 6A0 02 00 00 00 00 00 00 00
+28588.90 6A0 03 00 00 00 00 00 00 00
+32588.45 6A0 04 00 00 00 00 00 00 00
+36588.05 6A0 05 00 00 00 00 00 00 00
+```
+
+**示例 5：具有多个周期性地址的调度器 1（Example 5: Scheduler 1 with Multiple Periodic Addresses）**
+
+| 参数 | 值 |
+|---|---|
+| SchedulerRate | 1000 ms |
+| PeriodicRate | 4000 ms |
+| NumPeriodicAddr | 2 |
+| NumPDID | 5 |
+
+```
+778.69   6A0 01 00 00 00 00 00 00 00
+778.73   6A1 02 00 00 00 00 00 00 00
+1778.56  6A0 03 00 00 00 00 00 00 00
+1778.61  6A1 04 00 00 00 00 00 00 00
+2778.44  6A0 05 00 00 00 00 00 00 00
+4778.24  6A0 01 00 00 00 00 00 00 00
+4778.27  6A1 02 00 00 00 00 00 00 00
+5778.08  6A0 03 00 00 00 00 00 00 00
+5778.12  6A1 04 00 00 00 00 00 00 00
+6778.12  6A0 05 00 00 00 00 00 00 00
+8777.90  6A0 01 00 00 00 00 00 00 00
+8777.93  6A1 02 00 00 00 00 00 00 00
+9777.70  6A0 03 00 00 00 00 00 00 00
+9777.73  6A1 04 00 00 00 00 00 00 00
+10777.57 6A0 05 00 00 00 00 00 00 00
+```
+
+**示例 6：具有多个周期性地址的调度器 2（Example 6: Scheduler 2 with Multiple Periodic Addresses）**
+
+| 参数 | 值 |
+|---|---|
+| SchedulerRate | 1000 ms |
+| PeriodicRate | 4000 ms |
+| NumPeriodicAddr | 2 |
+| NumPDID | 5 |
+
+```
+764.64   6A0 01 00 00 00 00 00 00 00
+764.69   6A1 02 00 00 00 00 00 00 00
+4762.79  6A0 03 00 00 00 00 00 00 00
+4762.82  6A1 04 00 00 00 00 00 00 00
+8762.35  6A0 05 00 00 00 00 00 00 00
+8762.36  6A1 01 00 00 00 00 00 00 00
+12762.01 6A0 02 00 00 00 00 00 00 00
+12762.04 6A1 03 00 00 00 00 00 00 00
+```
+
+**示例 7：具有 2 个周期性地址和 1 个 PDID 的调度器 2（Example 7: Scheduler 2 with 2 Periodic Addresses and 1 PDID）**
+
+| 参数 | 值 |
+|---|---|
+| SchedulerRate | 1000 ms |
+| PeriodicRate | 1000 ms |
+| NumPeriodicAddr | 2 |
+| NumPDID | 1 |
+
+```
+7.19     6A0 01 00 00 00 00 00 00 00
+77.21    6A1 01 00 00 00 00 00 00 00
+1077.61  6A0 01 00 00 00 00 00 00 00
+1077.68  6A1 01 00 00 00 00 00 00 00
+2078.29  6A0 01 00 00 00 00 00 00 00
+2078.40  6A1 01 00 00 00 00 00 00 00
+3078.26  6A0 01 00 00 00 00 00 00 00
+3078.33  6A1 01 00 00 00 00 00 00 00
+4079.13  6A0 01 00 00 00 00 00 00 00
+4079.19  6A1 01 00 00 00 00 00 00 00
+5079.17  6A0 01 00 00 00 00 00 00 00
+5079.24  6A1 01 00 00 00 00 00 00 00
+6079.75  6A0 01 00 00 00 00 00 00 00
+6079.82  6A1 01 00 00 00 00 00 00 00
+7080.77  6A0 01 00 00 00 00 00 00 00
+7080.91  6A1 01 00 00 00 00 00 00 00
+8080.90  6A0 01 00 00 00 00 00 00 00
+8080.97  6A1 01 00 00 00 00 00 00 00
+9081.09  6A0 01 00 00 00 00 00 00 00
+9081.15  6A1 01 00 00 00 00 00 00 00
+```
+
+**要求上一次确认之后再触发下一次传输（Require previous confirmation before next transmission）**：**Dcm** 应仅在接收到上一次所传输周期性响应的 DcmDslPeriodicTxConfirmationPduId 传输确认之后，才触发 DcmDslPeriodicTxPduRef 传输。
+
+**传输错误行为（Transmission error behavior）**：在 PDID 传输错误的情况下，**Dcm** 应始终对每个客户端使用相同的 periodicDID 顺序。传输错误不应影响该顺序，**Dcm** 应继续重试传输，并且仅在 PDID 成功传输之后才开始发送下一个 PDID。
+
+**正响应之后周期性 DID 无否定响应（No negative response for periodic DID after positive response）**：在 periodicDID 启动并发送正响应之后，**Dcm** 应开始发送周期性 **DID**。
+
+**在无进一步条件检查的情况下发送周期性 DID（Sending periodic DIDs without further condition checks）**：每次某个 periodicDataIdentifier 的计数器到时，**Dcm** 应在不验证进一步条件（即会话、安全、模式依赖、ConditionCheckRead 和 ReadDataLength）的情况下获取 **DID** 数据。
+
+**注意：** 某个 transmissionMode 的速率定义为：在仅调度单个 periodicDID 时，任意两条具有同一 periodicDataIdentifier 的连续响应消息之间的时间。如果多个 periodicDID 同时被调度，则同一 periodicDataIdentifier 之间的有效周期将根据以下设计参数而变化：
+
+- 主函数重复周期 DcmTaskTime
+- 可用周期性连接的数量
+- 可同时调度的 periodicDID 数量（参见配置参数 DcmDspMaxPeriodicDidScheduler）
+
+**快速传输的连接限制（Connection limitation for fast transmission）**：如果配置了 DcmDspPeriodicTransmissionMaxPeriodicFastTransmissions，则 **Dcm** 应将 transmissionMode `sendAtFastRate` 所使用的周期性连接数量限制为 DcmDspPeriodicTransmissionMaxPeriodicFastTransmissions 个连接。
+
+**中等速率传输的连接限制（Connection limitation for medium transmission）**：如果配置了 DcmDspPeriodicTransmissionMaxPeriodicMediumTransmissions，则 **Dcm** 应将 transmissionMode `sendAtMediumRate` 所使用的周期性连接数量限制为 DcmDspPeriodicTransmissionMaxPeriodicMediumTransmissions 个连接。
+
+**慢速传输的连接限制（Connection limitation for slow transmission）**：如果配置了 DcmDspPeriodicTransmissionMaxPeriodicSlowTransmissions，则 **Dcm** 应将 transmissionMode `sendAtSlowRate` 所使用的周期性连接数量限制为 DcmDspPeriodicTransmissionMaxPeriodicSlowTransmissions 个连接。
+
+**受限传输的连接顺序（Connection order for limited transmissions）**：如果配置了上述任一传输连接限制，则 **Dcm** 应按定义顺序选择 DcmDslPeriodicConnection。这意味着第一个被传输的周期性 **DID** 应使用第一批所配置的连接，依此类推。
+
+**周期性 DDDID 传输与会话切换（Periodic DDDID transmission and session change）**：如果 DcmDspDDDIDcheckPerSourceDID 设置为 TRUE，则在会话切换时，**Dcm** 应停止任何包含当前会话不支持的源数据的已调度周期性 DDDID。
+
+**周期性 DDDID 传输与安全级别切换（Periodic DDDID transmission and security level change）**：如果 DcmDspDDDIDcheckPerSourceDID 设置为 TRUE，则在任何安全级别切换时，**Dcm** 应停止任何包含当前安全级别不支持的源数据的已调度周期性 DDDID。
+
+**取消挂起的读取操作（Cancel pending read operations）**：在停止对某个数据标识符的周期性读取时，如果仍有挂起的异步 ReadData 操作正在执行，**Dcm** 应通过以 OpStatus = DCM_CANCEL 调用 ReadData 来取消该挂起的读取操作。
+
+**停止时取消挂起的传输（Stop cancels pending transmissions）**：在停止对某个数据标识符的周期性读取时，**Dcm** 应取消该 **DID** 的挂起传输。
+
+**停止时完成已发起的传输（Finalizing initiated transmissions upon stop）**：在停止对某个数据标识符的周期性读取时，**Dcm** 应完成该 **DID** 已发起的传输。
+
+##### 6.6.2.12. 服务 0x2C - DynamicallyDefineDataIdentifier
+
+**DSP** 子模块应实现统一诊断服务中的 **DynamicallyDefineDataIdentifier**（服务 0x2C，诊断数据访问）。
+
+**DynamicallyDefineDataIdentifier** 服务在 **Dcm** 模块内部实现。
+
+如果配置参数 DcmDDDIDStorage 设置为 FALSE，则 **Dcm** 应在启动（Dcm_Init）时将全部 DDDID 初始化为不存在。
+
+如果配置参数 DcmDDDIDStorage 设置为 TRUE，则 **Dcm** 应在启动（Dcm_Init）时从 **NvM** 恢复 DDDID 定义。
+
+如果配置参数 DcmDDDIDStorage 设置为 TRUE，则 **Dcm** 应触发将 DDDID 定义存储到 NvRam（通过 NvM_SetRamBlockStatus）。
+
+在接收到子服务为 defineByIdentifier 或 defineByMemoryAddress 的 **DynamicallyDefineDataIdentifier** 服务时，**Dcm** 模块应使用来自诊断请求的关联信息配置该新 **DID**：存储器地址与存储器长度，或者 **DID** 源、位置与大小。
+
+在接收到 **UDS** 服务 **DynamicallyDefineDataIdentifier**（0x2C）时，**Dcm** 模块应检查该 DDDID 是否不会超出配置参数 DcmDspDDDIDMaxElements 的值。否则（在元素数量将超出的情况下），**Dcm** 模块应发送 **NRC** 0x31（RequestOutOfRange）。
+
+在接收到子服务为 defineByMemoryAddress 的 **UDS** 服务 **DynamicallyDefineDataIdentifier**（0x2C）时，**Dcm** 应检查所请求的 AddressAndLengthFormatIdentifier 是否受支持（参见配置参数 DcmDspSupportedAddressAndLengthFormatIdentifier），否则应返回 **NRC** 0x31（requestOutOfRange）。在未提供容器 AddressAndLengthFormatIdentifier 的情况下，**Dcm** 应接受所有可能的 AddressAndLengthFormatIdentifier。
+
+在接收到子服务为 clearDynamicallyDefinedDataIdentifier 的 **DynamicallyDefineDataIdentifier** 服务时，**Dcm** 模块应移除该 **DID** 的配置。
+
+在接收到 **UDS** 服务 **DynamicallyDefineDataIdentifier**（0x2C）时，**Dcm** 模块应检查该 DDDID 是否可以在当前会话中定义（参见配置参数 DcmDspDidReadSessionRef）。如果不可定义，则 **Dcm** 模块应发送 **NRC** 0x31（RequestOutOfRange）。
+
+在接收到 **UDS** 服务 **DynamicallyDefineDataIdentifier**（0x2C）时，**Dcm** 模块应检查该 DDDID 是否可以在当前安全级别中定义（参见配置参数 DcmDspDidReadSecurityLevelRef）。如果不可定义，则 **Dcm** 模块应发送 **NRC** 0x33（Security access denied）。
+
+在接收到 **UDS** 服务 **DynamicallyDefineDataIdentifier**（0x2C）时，**Dcm** 模块应检查所请求的源 **DID** 是否在当前会话中受支持（参见所引用 **DID** 的配置参数 DcmDspDidReadSessionRef）。如果不支持，则 **Dcm** 模块应发送 **NRC** 0x31（RequestOutOfRange）。
+
+在接收到 **UDS** 服务 **DynamicallyDefineDataIdentifier**（0x2C）时，**Dcm** 模块应检查所请求的源 **DID** 或存储器范围是否在当前安全级别中受支持（参见所引用 **DID** 的配置参数 DcmDspDidReadSecurityLevelRef，或存储器范围的 DcmDspReadMemoryRangeSecurityLevelRef）。如果不支持，则 **Dcm** 模块应发送 **NRC** 0x33（Security access denied）。
+
+在接收到 **UDS** 服务 **DynamicallyDefineDataIdentifier**（0x2C）时，**Dcm** 模块应检查所请求的源 **DID** 或存储器范围是否在当前模式条件下受支持（参见所引用 **DID** 的配置参数 DcmDspDidReadModeRuleRef，或存储器范围的 DcmDspReadMemoryRangeModeRuleRef）。如果不支持，则 **Dcm** 模块应发送由所引用的 DcmModeRule 计算得到的否定响应码。
+
+在存储器地址的情况下，当接收到针对某个动态定义 **DID** 的 **ReadDataByIdentifier** 或 **ReadDataByPeriodicIdentifier** 请求时，**Dcm** 将使用 callout Dcm_ReadMemory 访问所有所包含的存储器地址的数据。
+
+在接收到 **UDS** 服务 **DynamicallyDefineDataIdentifier**（0x2C）时，如果请求消息中包含与 DcmDspMemoryIdInfo 容器中所配置值不同的 MemoryIdValue，则 **Dcm** 应发送 **NRC** 0x31（RequestOutOfRange）。
+
+在 **DID** 源的情况下，当接收到针对某个动态定义 **DID** 的 **ReadDataByIdentifier** 或 **ReadDataByPeriodicIdentifier** 请求时，**Dcm** 将使用所包含 **DID** 的配置来读取数据。
+
+##### 6.6.2.13. 服务 0x2E - WriteDataByIdentifier
+
+**Dcm** 模块应实现统一诊断服务中的 **UDS** 服务 **WriteDataByIdentifier**（0x2E）。
+
+使用服务 0x2E 时，诊断仪的请求包含 2 字节 **DID** 以及带有待写入数据的 dataRecord。**Dcm** 的配置包含受支持 **DID** 的列表，并为每个所配置的 **DID** 定义：
+
+- 2 字节的 **DID**（参见配置参数 DcmDspDidIdentifier）
+- 该 **DID** 的每个数据：
+    - 该数据所使用的 WriteData 函数（参见配置参数 DcmDspDataWriteFnc 和 DcmDspDataUsePort）
+
+**写入 UDS DID 认证检查（Write UDS DID authentication check）**：在接收到 **UDS** 服务 **WriteDataByIdentifier**（0x2E）时，**Dcm** 应检查对所请求 **DID** 的写访问是否已认证，并且仅在以下情况下写入该数据标识符：
+
+- 为该写入 **DID** 通过 DcmDspDidWriteRoleRef 配置了角色，且角色验证成功（参见 §6.6.2.10.4），或者
+- 该连接上的活动白名单针对所请求的 **DID** 具有一个带有写访问权限且与该 **DID** 匹配的条目。
+
+根据以上要求，认证检查仅在配置了 DcmDspAuthentication 时执行。认证失败时的 **NRC** 处理按照 §6.5.4.3.1 和 §6.6.2.10 中的规则执行。
+
+在接收到 **UDS** 服务 **WriteDataByIdentifier**（0x2E）时，**Dcm** 模块应检查该 **DID** 是否受支持（参见配置参数 DcmDspDid 和 DcmDspDidRange）。如果不支持，则 **Dcm** 模块应发送 **NRC** 0x31（Request out of range）。
+
+如果某个 **DID** 被设置为未使用（DcmDspDidUsed 设置为 FALSE），则 **Dcm** 应将该 **DID** 视为不受支持（参见上文对 **DID** 支持性的检查要求）。
+
+在接收到 **UDS** 服务 **WriteDataByIdentifier**（0x2E）时，**Dcm** 模块应检查该 **DID** 是否配置了写访问（参见 DcmDspDidInfo 中的配置参数 DcmDspDidWrite）。如果未配置，则 **Dcm** 模块应发送 **NRC** 0x31（Request out of range）。
+
+在接收到 **UDS** 服务 **WriteDataByIdentifier**（0x2E）时，**Dcm** 模块应检查该 **DID** 是否可以在当前会话中写入（参见配置参数 DcmDspDidWriteSessionRef）。如果不可写入，则 **Dcm** 模块应发送 **NRC** 0x31（Request Out of Range）。
+
+在接收到 **UDS** 服务 **WriteDataByIdentifier**（0x2E）时，**Dcm** 模块应检查该 **DID** 是否可以在当前安全级别中写入（参见配置参数 DcmDspDidWriteSecurityLevelRef）。如果不可写入，则 **Dcm** 模块应发送 **NRC** 0x33（Security access denied）。
+
+在接收到 **UDS** 服务 **WriteDataByIdentifier**（0x2E）时，**Dcm** 模块应检查该 **DID** 是否可以在当前模式条件下写入（参见配置参数 DcmDspDidWriteModeRuleRef）。如果不可写入，则 **Dcm** 模块应发送由所引用的 DcmModeRule 计算得到的否定响应码。
+
+在接收到 **UDS** 服务 **WriteDataByIdentifier**（0x2E）时，如果该 **DID** 的所有信号（DcmDspDidSignal）均具有固定长度（DcmDspDataType 不等于 UINT8_DYN），则 **Dcm** 模块应检查所接收的数据长度是否与该 **DID** 的数据长度（所有 DcmDspDataByteSize 之和）一致。
+
+在完成所有验证（参见上述对 **DID** 支持性、写访问、会话、安全以及数据长度的检查要求）之后，**Dcm** 模块应写入该 **DID** 的所有信号（DcmDspDidSignal），方式是调用所配置的函数 DcmDspDataWriteFnc（如果参数 DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC 或 USE_DATA_ASYNCH_FNC 或 USE_DATA_ASYNCH_FNC_ERROR 或 USE_DATA_SYNCH_FNC_PROXY 或 USE_DATA_ASYNCH_FNC_PROXY），或者调用关联的 WriteData 操作（如果参数 DcmDspDataUsePort 设置为 USE_DATA_SYNCH_CLIENT_SERVER 或 USE_DATA_ASYNCH_CLIENT_SERVER 或 USE_DATA_ASYNCH_CLIENT_SERVER_ERROR），或者调用关联的 SenderReceiver 接口（如果参数 DcmDspDataUsePort 设置为 USE_DATA_SENDER_RECEIVER 或 USE_DATA_SENDER_RECEIVER_AS_SERVICE），并使用以下参数值：
+
+- Data：来自请求的 dataRecord
+- DataLength：dataRecord 中的字节数（如果该数据具有固定长度，即 DcmDspDataType 不等于 UINT8_DYN，则取自配置；如果该数据具有动态长度，即 DcmDspDataType 设置为 UINT8_DYN，则取自诊断请求长度）
+
+在完成所有验证（参见上述对 **DID** 支持性、写访问、会话、安全以及数据长度的检查要求）之后，对于 DcmDspDidUsePort 设置为 USE_ATOMIC_SENDER_RECEIVER_INTERFACE、USE_ATOMIC_SENDER_RECEIVER_INTERFACE_AS_SERVICE 或 USE_ATOMIC_NV_DATA_INTERFACE 的 **DID**，**Dcm** 模块应通过写入关联的 sender-receiver 或 NvDataInterface DataServices_{DID} 来写入数据。
+
+**可变数据长度的信号（Signals with variable datalength）**：一个 **DID** 中只有最后一个信号（DcmDspDidSignal）可以具有可变数据长度（DcmDspDataType 设置为 UINT8_DYN）。
+
+在其他情况下，**Dcm** 将无法从请求中拆分数据。
+
+为将 **UDS** 服务 **WriteDataByIdentifier** 请求的请求消息序列化为所需的 **AUTOSAR** 数据类型（有符号和无符号整数），对于 DcmDspDataUsePort 设置为 USE_DATA_SENDER_RECEIVER、USE_DATA_SENDER_RECEIVER_AS_SERVICE 的 DcmDspData 元素，应考虑 DcmDspDataEndianness 中所配置的目标字节序。在未提供 DcmDspDataEndianness 的情况下，应改用 DcmDspDataDefaultEndianness。
+
+服务 0x2E 中使用的 DcmDspData 元素不得将 DcmDspDataUsePort 设置为 USE_ECU_SIGNAL。
+
+**DcmDspDataWriteFnc 的依赖关系（Dependency for DcmDspDataWriteFnc）**：DcmDspDataWriteFnc 应仅在以下情况下存在：
+
+- DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC，或
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC，或
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC_ERROR，或
+- DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC_PROXY，或
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC_PROXY
+
+**注意：** 函数 BndM_WriteStart 与 BndM_WriteFinalize 的调用不属于 **Dcm** 规范的内容。这些函数通过项目特定的实现（例如 CDD）调用。
+
+**原子 BndM 写操作（Atomic BndM write operation）**：在完成所有验证（参见上述对 **DID** 支持性、写访问、会话、安全以及数据长度的检查要求）之后，对于 DcmDspDidUsePort 设置为 USE_ATOMIC_BNDM 的 **DID**，**Dcm** 模块应使用块专用写函数 BndM_WriteBlock_&lt;BlockId.Shortname&gt; 将数据写入 **BndM** 中关联的 BlockId（DcmDspDidBndMBlockIdRef）。
+
+**不允许的原子 BndM 写操作（Not allowed atomic BndM write operation）**：如果 **Dcm** 按上述要求调用 BndM_WriteBlock_'BlockId.Shortname'，且 BndM_WriteBlock_'BlockId.Shortname' 返回 E_NOT_OK，则 **Dcm** 应返回否定响应 0x24（requestSequenceError）。
+
+**注意：** 作为前提，**BndM** 需被置于写模式。这由 **Dcm** 中的编码子模块或 CDD 完成。
+
+**原子 BndM 写操作的正响应（Positive response on atomic BndM write operation）**：如果 **Dcm** 已按上述要求触发原子 BndM 写操作，则当 **BndM** 的写操作以参数 result 设置为 E_OK 调用 Dcm_BndMWriteBlockFinish 时，**Dcm** 应返回正响应。
+
+**原子 BndM 写操作的否定响应（Negative response on atomic BndM write operation）**：如果 **Dcm** 已按上述要求触发原子 BndM 写操作，则当 **BndM** 的写操作以参数 result 设置为 E_NOT_OK 调用 Dcm_BndMWriteBlockFinish 时，**Dcm** 应返回否定响应 0x72（generalProgrammingFailure）。
+
+**注意：** 在等待上述作业完成回调期间，**Dcm** 需确保遵守在需要额外处理时间时发送 **NRC** 0x78（Response pending）的时序要求（参见 §6.4.4.6）。
+
+如果 **Dcm** 正在读取或写入 DcmDspDidUsePort 设置为 USE_ATOMIC_BNDM 的 **DID**，则 **Dcm** 应将该 dataRecord 转换为相应的 **BndM** 类型。**DID** 的数据元素结构需与所引用的 BndMBlockDescriptor 的 ImplementationDataType 兼容。每个 **DID** 数据元素在 ImplementationDataType 中都应存在一个具有相同短名的相应子元素，且基础类型应兼容。
+
+**BndM 块配置的一致性（Consistency of BndM Block configuration）**：如果某个 DcmDspDid 的 DcmDspDidUsePort 设置为 USE_ATOMIC_BNDM，则参数 DcmDspDidBndMBlockIdRef 应存在。
+
+##### 6.6.2.14. 服务 0x2F - InputOutputControlByIdentifier
+
+**Dcm** 模块应实现 **UDS** 服务 **InputOutputControlByIdentifier**（0x2F）。
+
+使用服务 0x2F 时，诊断仪的请求包含 2 字节 **DID**。
+
+**Dcm** 的配置包含受支持 **DID** 的列表。对于每个 **DID**，**Dcm** 配置指定：
+
+- 2 字节的 **DID**（参见配置参数 DcmDspDidIdentifier）
+- 该 **DID** 的每个数据：
+    - 该数据所使用的函数 Xxx_ReturnControlToECU()（参见配置参数 DcmDspDataReturnControlToEcuFnc 和 DcmDspDataUsePort）
+    - 该数据所使用的函数 Xxx_ResetToDefault()（参见配置参数 DcmDspDataResetToDefaultFnc 和 DcmDspDataUsePort）
+    - 该 **DID** 所使用的函数 Xxx_FreezeCurrentState()（参见配置参数 DcmDspDataFreezeCurrentStateFnc 和 DcmDspDataUsePort）
+    - 该 **DID** 所使用的函数 Xxx_ShortTermAdjustment()（参见配置参数 DcmDspDataShortTermAdjustmentFnc 和 DcmDspDataUsePort）
+    - 函数 Xxx_ShortTermAdjustment() 中所使用的控制记录的大小（参见配置参数 DcmDspDataByteSize）
+
+**Dcm** 应支持表7.23 中所定义 **InputOutputControlParameter** 的取值。
+
+表7.23：InputOutputControlParameter 定义（**InputOutputControlParameter definitions**）
+
+| 十六进制 | 描述 |
+|---|---|
+| 0x00 | returnControlToECU |
+| 0x01 | resetToDefault |
+| 0x02 | freezeCurrentState |
+| 0x03 | shortTermAdjustment |
+
+**IOControl DID 认证检查（IOControl DID authentication check）**：在接收到 **UDS** 服务 **InputOutputControlByIdentifier**（0x2F）时，**Dcm** 应检查对所请求 **DID** 的控制访问是否已认证，并且仅在以下情况下执行 IO 控制：
+
+- 为该 IO 控制通过 DcmDspDidControlRoleRef 配置了角色，且角色验证成功（参见 §6.6.2.10.4），或者
+- 该连接上的活动白名单针对所请求的 **DID** 具有一个带有控制访问权限且与该 **DID** 匹配的条目。
+
+根据以上要求，认证检查仅在配置了 DcmDspAuthentication 时执行。认证失败时的 **NRC** 处理按照 §6.5.4.3.1 和 §6.6.2.10 中的规则执行。
+
+在接收到 **UDS** 服务 **InputOutputControlByIdentifier**（0x2F）时，**Dcm** 模块应检查该 **DID** 是否受支持（参见配置参数 DcmDspDid）。如果不支持，则 **Dcm** 模块应发送 **NRC** 0x31（Request out of range）。
+
+如果某个 **DID** 被设置为未使用（DcmDspDidUsed 设置为 FALSE），则 **Dcm** 应将该 **DID** 视为不受支持（参见上文对 **DID** 支持性的检查要求）。
+
+在接收到 **UDS** 服务 **InputOutputControlByIdentifier**（0x2F）时，**Dcm** 模块应检查该 **DID** 是否配置了控制访问（参见 DcmDspDidInfo 中的配置参数 DcmDspDidControl）。如果未配置，则 **Dcm** 模块应发送 **NRC** 0x31（Request out of range）。
+
+在接收到 **UDS** 服务 **InputOutputControlByIdentifier**（0x2F）时，**Dcm** 模块应检查该 **DID** 是否可以在当前会话中控制（参见配置参数 DcmDspDidControlSessionRef）。如果不可控制，则 **Dcm** 模块应发送 **NRC** 0x31（Request Out of Range）。
+
+在接收到 **UDS** 服务 **InputOutputControlByIdentifier**（0x2F）时，**Dcm** 模块应检查该 **DID** 是否可以在当前安全级别中控制（参见配置参数 DcmDspDidControlSecurityLevelRef）。如果不可控制，则 **Dcm** 模块应发送 **NRC** 0x33（Security access denied）。
+
+在接收到 **UDS** 服务 **InputOutputControlByIdentifier**（0x2F）时，**Dcm** 模块应检查该 **DID** 是否可以在当前模式条件下控制（参见配置参数 DcmDspDidControlModeRuleRef）。如果不可控制，则 **Dcm** 模块应发送由所引用的 DcmModeRule 计算得到的否定响应码。
+
+**UDS 请求中不含 CEMR 时 S/R 接口上的 CEMR（CEMR on SR interface for DIDs with no CEMR in the UDS request）**：如果 IOC **DID** 在 **UDS** 请求消息中不包含 CEMR，则 **Dcm** 应在接口 IOControlRequest 上使用一种 Dcm_Cemr_Type，其中该 **DID** 的每个 DcmDspData 对应一位，且每一位均设置为 1。
+
+在接收到 **UDS** 服务 **InputOutputControlByIdentifier**（0x2F）的请求时，如果所有验证均已成功完成（参见上述对受支持性、控制访问、会话和安全级别的检查要求），并且该数据被配置为 **IoHwAb** 的“**ECU** 信号”（参数 DcmDspDataUsePort），则 **Dcm** 应调用 API IoHwAb_Dcm_&lt;**ECU** 信号的符号名（参数 DcmDspDataEcuSignal）&gt;()，以 InputOutputControlParameter 作为 `action` 参数；在 InputOutputControlParameter 设置为 `shortTermAdjustment` 的情况下，还会传入信号值作为 `signal` 参数。在此情况下，关于通过配置的函数、C/S 操作或 S/R 接口执行 **ReturnControlToECU**、**ResetToDefault**、**FreezeCurrentState** 与 **ShortTermAdjustment** 的通用要求（参见下文对各类 inputOutputControlParameter 的处理要求）不适用。
+
+在一个 **DataIdentifier** 支持多于一个 I/O 信号且配置参数 DcmDspDidControlMask 设置为 DCM_CONTROLMASK_INTERNAL 的情况下，**Dcm** 应在内部考虑参数 controlEnableMaskRecord，并且仅控制请求消息中所包含的信号。
+
+配置参数 DcmDspDidControlMaskSize 应仅在 DcmDspDidControlMask 等于 DCM_CONTROLMASK_EXTERNAL 或 DCM_CONTROLMASK_INTERNAL 时存在。
+
+如果配置参数 DcmDspDidControlMask 设置为 DCM_CONTROLMASK_EXTERNAL 或 DCM_CONTROLMASK_INTERNAL，或者服务 0x2F 中所使用的 DcmDspDid 元素被配置为具有原子 S/R 接口，则 **Dcm** 应以 **NRC** 0x13（incorrectMessageLengthOrInvalidFormat）拒绝未包含 control enable mask record 的请求。
+
+如果配置参数 DcmDspDidControlMask 设置为 DCM_CONTROLMASK_NO，则 **Dcm** 应以 **NRC** 0x13（incorrectMessageLengthOrInvalidFormat）拒绝包含 control enable mask record 的请求。
+
+**IOControl 的发送方-接收方通信仅限于原子 S/R 接口（Sender-receiver communication for IOControls is limited to atomic S/R interfaces）**：如果某个 **DID** 配置了 DcmDspDidUsePort = USE_DATA_ELEMENT_SPECIFIC_INTERFACES，则 DcmDspDataUsePort 的可能取值仅限于非 S/R 接口。
+
+**IOControl 的原子 S/R 仅限于非 NV 接口（Atomic S/R for IOControls are limited to non-NV interfaces）**：如果某个 **DID** 配置了 DcmDspDidControl，则 DcmDspDidUsePort 的可能取值仅限于原子 S/R 接口和 USE_DATA_ELEMENT_SPECIFIC_INTERFACES。
+
+**具有原子 S/R 的 DID 的信号不与其他 DID 共享（Signals for DIDs with Atomic S/R are not shared with other DIDs）**：如果某个 DcmDspDid 被配置为具有原子 S/R 接口，则该 **DID** 所引用的所有 DcmDspDataElement 应仅被该 **DID** 引用。
+
+如果某个 DcmDspDid 在服务 0x2F 中使用并被配置为具有原子 S/R 接口，则 DcmDspDidControlMask 应设置为 DCM_CONTROLMASK_EXTERNAL，且参数 DcmDspDidControlMaskSize 应存在并具有大于零的值。
+
+**内部 ControlEnableMaskRecord 到 DID 数据元素的映射（Mapping of internal ControlEnableMaskRecord to DID data elements）**：如果 DcmDspDidControlMask 设置为 DCM_CONTROLMASK_INTERNAL，则 ControlEnableMaskRecord 应按以下映射关系映射到 **DID** 的数据元素：
+
+- ControlEnableMask 第一个字节的最高有效位应对应第一个 **DID** 数据元素
+- ControlEnableMask 第一个字节的次高有效位应对应第二个 **DID** 数据元素，并以此方式继续，按需使用尽可能多的 ControlEnableMask 字节来映射所有 **DID** 数据元素
+
+controlEnableMaskRecord 仅在 **DataIdentifier** 支持多于一个信号时才存在。
+
+**Dcm** 支持通过配置 DcmDspDidUsePort 设置为 USE_ATOMIC_SENDER_RECEIVER_INTERFACE 或 USE_ATOMIC_SENDER_RECEIVER_INTERFACE_AS_SERVICE 所激活的原子 S/R 接口。在本章的正文与要求中，IO 控制所涉及的术语“原子 S/R 接口”表示所控制的 IO **DID** 被配置为这两种选择之一。
+
+服务用例 TPS_SWCT_01654 与约束 constr_1679 将用于 IOControl 的 S/R 接口限定为显式 S/R 通信。**Dcm** 不支持隐式通信。
+
+**IOControl 的通用执行顺序（IOControl General execution sequence）**：在接收到 **UDS** 服务 **InputOutputControlByIdentifier**（0x2F）的请求时，**Dcm** 应首先执行上述服务验证（受支持性、控制访问、会话和安全级别检查），并在验证成功通过后启动所配置的服务处理。
+
+在接收到 inputOutputControlParameter 等于 returnControlToEcu 的 **UDS** 服务 **InputOutputControlByIdentifier**（0x2F）请求时，对于 controlEnableMaskRecord 中所有受影响的已配置函数（如果参数 DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC 或 USE_DATA_ASYNCH_FNC 或 USE_DATA_ASYNCH_FNC_ERROR 或 USE_DATA_SYNCH_FNC_PROXY 或 USE_DATA_ASYNCH_FNC_PROXY；参见配置参数 DcmDspDataReturnControlToEcuFnc），**Dcm** 模块应调用它们；或者，对于请求中所接收到的该 **DID** 的每个数据，调用所有关联的 ReturnControlToECU 操作（如果参数 DcmDspDataUsePort 设置为 USE_DATA_SYNCH_CLIENT_SERVER 或 USE_DATA_ASYNCH_CLIENT_SERVER 或 USE_DATA_ASYNCH_CLIENT_SERVER_ERROR）。
+
+在接收到 inputOutputControlParameter 等于 resetToDefault 的 **UDS** 服务 **InputOutputControlByIdentifier**（0x2F）请求时，对于 controlEnableMaskRecord 中所有受影响的已配置函数（如果参数 DcmDspDataUsePort 设置为上述函数端口；参见配置参数 DcmDspDataResetToDefaultFnc），**Dcm** 模块应调用它们；或者，对于请求中所接收到的该 **DID** 的每个数据，调用所有关联的 ResetToDefault 操作（如果参数 DcmDspDataUsePort 设置为上述 C/S 端口）。
+
+在接收到 inputOutputControlParameter 等于 freezeCurrentState 的 **UDS** 服务 **InputOutputControlByIdentifier**（0x2F）请求时，对于 controlEnableMaskRecord 中所有受影响的已配置函数（如果参数 DcmDspDataUsePort 设置为上述函数端口；参见配置参数 DcmDspDataFreezeCurrentStateFnc），**Dcm** 模块应调用它们；或者，对于请求中所接收到的该 **DID** 的每个数据，调用所有关联的 FreezeCurrentState 操作（如果参数 DcmDspDataUsePort 设置为上述 C/S 端口）。
+
+在接收到 inputOutputControlParameter 等于 shortTermAdjustment 的 **UDS** 服务 **InputOutputControlByIdentifier**（0x2F）请求时，对于 controlEnableMaskRecord 中所有受影响的已配置函数（如果参数 DcmDspDataUsePort 设置为上述函数端口；参见配置参数 DcmDspDataShortTermAdjustmentFnc），**Dcm** 模块应调用它们；或者，对于请求中所接收到的该 **DID** 的每个数据，调用所有关联的 ShortTermAdjustment 操作（如果参数 DcmDspDataUsePort 设置为上述 C/S 端口）。
+
+**会话切换时取消活动的 IO 控制（Cancel active IO controls on session change）**：在任何会话切换时，**Dcm** 应停止所有当前活动的、且新会话不支持的 IO 控制（按上文所述的取消序列执行）。
+
+**在默认会话中取消活动的 IO 控制（Cancel active IO controls in default sessions）**：在切换到默认会话时，**Dcm** 应停止所有当前活动的 IO 控制（按下文所述的取消序列执行）。
+
+**安全级别切换时取消活动的 IO 控制（Cancel active IO controls on security level change）**：在任何安全级别切换时，**Dcm** 应停止所有当前活动的、且新安全级别不再支持的 IO 控制（按下文所述的取消序列执行）。
+
+**Dcm 取消 IO 控制的序列（Dcm cancel IO control sequence）**：如果 **Dcm** 因会话切换或安全级别切换需要取消某个活动的 IO 控制，则 **Dcm** 应执行以下操作：
+
+- 对于 DcmDspDataUsePort 设置为 USE_ECU_SIGNAL 的受控数据元素：调用 IoHwAb_Dcm_&lt;**ECU** 信号符号名&gt;()，并将 `action` 参数设置为 ReturnControlToECU。
+- 对于 DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_CLIENT_SERVER、USE_DATA_SYNCH_CLIENT_SERVER 或 USE_DATA_ASYNCH_CLIENT_SERVER_ERROR 的受控数据元素：调用 C/S 接口操作 ReturnControlToECU。
+- 对于 DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC、USE_DATA_ASYNCH_FNC、USE_DATA_ASYNCH_FNC_ERROR、USE_DATA_SYNCH_FNC_PROXY 或 USE_DATA_ASYNCH_FNC_PROXY 的受控数据元素：调用所配置的函数 Xxx_ReturnControlToECU（参见参数 DcmDspDataReturnControlToEcuFnc）。
+- 对于配置为原子 S/R 接口的受控 **DID**：将数据元素 IOOperationRequest 更新为 inputOutputControlParameter = 0x00、controlEnableMask = 0xFFFFFFFF（掩码的大小取决于参数 DcmDspDidControlMaskSize），并将数据元素 underControl 更新为 0x00。
+
+为将请求消息（在 inputOutputControlParameter 设置为 `shortTermAdjustment` 的情况下）中的所需 **AUTOSAR** 数据类型（有符号和无符号整数）序列化，或序列化到 **UDS** 服务 **InputOutputControlByIdentifier** 响应消息中，对于 DcmDspDataUsePort 设置为 USE_ECU_SIGNAL 的 DcmDspData 元素，应考虑 DcmDspDataEndianness 中所配置的目标字节序。在未提供 DcmDspDataEndianness 的情况下，应改用 DcmDspDataDefaultEndianness。
+
+对于 IoControl 服务正响应消息，ControlStatusRecord 中的 controlState 应在 IO 控制请求的应用程序处理被正面完成后，通过关联的 ReadData 操作/函数/SenderReceiver 获取。
+
+除 Client/Server 接口之外，**Dcm** 还提供 SenderReceiver 接口 IOControlRequest_{DID}。该接口的 underControl 数据元素由 **Dcm** 计算，其中每个数据元素对应一个状态位，与 CEMR 一致。应用程序可以直接获得当前生效的控制使能状态，而无需维护内部状态。
+
+位掩码 underControl 包含关于该特定 I/O 的哪些数据元素当前处于诊断控制之下的累计状态。如果 underControl 的值为 0x00（即初始值），则可推导出正常运行状态。每个置位的位表示某个数据元素当前正通过 FreezeCurrentState、ResetToDefault 或 ShortTermAdjustment 处于诊断控制之下。
+
+**underControl 数据元素的计算（Calculation of the underControl data element）**：**Dcm** 应计算 S/R 接口 IOControlRequest_{DID} 的 underControl 数据元素。underControl 是一个位域，其大小与受控 **DID** 的 CEMR 相同。每一位表示与 CEMR 中相同的数据元素。值为 0 表示相应数据元素当前不受 **Dcm** 控制，值为 1 表示受控制。初始值为 0，每个针对某数据元素且 inputOutputControlParameter 等于 ResetToDefault、FreezeCurrentState 或 ShortTermAdjustment 的控制请求都会将对应位设置为 1，而每个 inputOutputControlParameter 设置为 ReturnControlToECU 的控制请求都会将该位设置为 0。
+
+每个 I/O 控制请求都会向应用程序提供一个命令 IOOperationRequest，用于更新输入或相应的输出。IOOperationRequest 包含 inputOutputControlParameter、controlEnableMask，以及在 ShortTermAdjustment 的情况下包含 controlState。
+
+为识别先前的操作已完成（例如写入 IOControlRequest_{DID}），用户可以使用 **RTE** 的更新标志（update flag）机制。
+
+应用程序需要更新其输出值，并通过响应消息 IOOperationResponse 向 **Dcm** 完成该请求。可能的取值有：
+
+- 0x00 正响应（类似于 E_OK）
+- 0x10 generalReject
+- 0x21 busyRepeatRequest
+- 0x22 conditionsNotCorrect
+- 0x26 FailurePreventsExecutionOfRequestedAction
+- 0x31 requestOutOfRange
+- 0x78 ResponsePending（类似于 E_PENDING）
+
+基于 SW-C 对 IOControlResponse_{DID}.IOOperationResponse 的写入触发，**Dcm** 将：
+
+1. 等待最终处理（0x78）
+2. 发送正响应消息（0x00）
+3. 发送否定响应消息（除 0xFF 之外的所有其他值）
+
+图7.12：带发送方/接收方接口的 IO 控制（**IO-Control with Sender/Receiver interfaces**）
+
+![Figure7-12](Figure7-12.png)
+
+**inputOutputControlParameter 的空闲状态（inputOutputControlParameter idle state）**：来自 S/R 接口 IOControlRequest_{DID} 的 IOOperationRequest 数据元素的 inputOutputControlParameter 应具有初始值 0xFF。该值向应用程序表明，**Dcm** 当前未处理用于控制该 **DID** 的 **UDS** 服务。
+
+**处理 UDS InputOutputControlByIdentifier（0x2F）服务之后的 inputOutputControlParameter**：如果 **Dcm** 正在处理 inputOutputControlParameter 等于 ResetToDefault、FreezeCurrentState 或 ShortTermAdjustment 的 **InputOutputControlByIdentifier** 请求，则在应用程序已将 IOControlResponse_{DID}.IOOperationResponse 设置为 0x00 之后、并且在处理其他 **InputOutputControlByIdentifier** 请求之前，**Dcm** 应将来自 S/R 接口 IOControlRequest_{DID} 的 IOOperationRequest 数据元素的 inputOutputControlParameter 设置为空闲状态 0xFF。
+
+在 **Dcm** 写入 IOControlRequest_{DID} 的 IOOperationRequest 之后，SWC 处理该 IO 控制请求。SWC 通过更新 IOControlResponse_{DID}.IOOperationResponse 向 **Dcm** 通知当前处理状态。
+
+**基于 IOOperationResponse 的正响应（Positive response based on IOOperationResponse）**：如果 **Dcm** 正在处理 **InputOutputControlByIdentifier** 请求，并且应用程序将 IOControlResponse_{DID}.IOOperationResponse 设置为 0x00，则 **Dcm** 应回复正响应。
+
+**基于 IOOperationResponse 的否定响应（Negative response based on IOOperationResponse）**：如果 **Dcm** 正在处理 **InputOutputControlByIdentifier** 请求，并且应用程序将 IOControlResponse_{DID}.IOOperationResponse 设置为不同于 0x00 和 0x78 的值，则 **Dcm** 应回复带有 NRC（等于 IOControlResponse_{DID}.IOOperationResponse）的否定响应。
+
+**基于 IOOperationResponse 的 RCRRP**：如果 **Dcm** 正在处理 **InputOutputControlByIdentifier** 请求，且 IOControlResponse_{DID}.IOOperationResponse 的值为 0x78，则 **Dcm** 应等待直到 IOControlResponse_{DID}.IOOperationResponse 获得不同于 0x78 的值，并按 §6.4.4.6 中的要求发送 RCRRP（**NRC** 0x78）。
+
+**注意：** 使用 **RTE** 功能 'IsUpdated' 是 **Dcm** 检测 SW-C 对 S/R 数据元素进行写入的一种可行机制。
+
+**具有原子 S/R 的所有 inputOutputControlParameter 操作的通用动作（Common action for all inputOutputControlParameter operations with atomic S/R）**：如果 **Dcm** 正在处理针对某个配置为原子 S/R 接口的 **DID** 的 **InputOutputControlByIdentifier** 请求，则 **Dcm** 模块应在 IOControlRequest_{DID} 中更新数据元素 IOOperationRequest，其中：
+
+1. controlEnableMask = 请求消息中的 controlEnableMaskRecord
+2. inputOutputControlParameter = 请求消息中的 inputOutputControlParameter
+
+命令 IOOperationRequest 的 inputOutputControlParameter 值 0xFF 表示“空闲”状态。值 0x00（ReturnControlToECU）、0x01（ResetToDefault）、0x02（FreezeCurrentState）或 0x03（ShortTermAdjustment）会启动请求处理，并包含控制选项 inputOutputControlParameter、controlEnableMask 以及 controlState（仅对 ShortTermAdjustment）。
+
+**具有原子 S/R 时 ShortTermAdjustment 的 InputOutputControl 操作的附加动作（Additional action for InputOutputControl operations for ShortTermAdjustment with atomic S/R）**：如果 **Dcm** 正在处理针对某个配置为原子 S/R 接口的 **DID** 且 inputOutputControlParameter 等于 ShortTermAdjustment 的 **InputOutputControlByIdentifier** 请求，则除上述通用动作之外，**Dcm** 模块还应在 IOControlRequest_{DID} 中更新数据元素 controlState，内容取自请求消息中的 controlState。
+
+**注意：** controlState 是一个独立的数据元素，因此它可以可选地由数据变换器处理，以便将字节流转换为复合类型（参见图7.12：带发送方/接收方接口的 IO 控制）。
+
+**Dcm** S/R 交互的示例见图 9.23、图 9.24 和图 9.25。对于 ReturnControlToECU，来自请求的数据被提供给应用程序，**Dcm** 在将数据写入 S/R 端口之后将继续完成该请求。所有其他子功能都将等待应用程序提供响应 0x00 或某个 NRC 代码。
+
+**复合子元素仅可通过读取访问（Composite sub elements accessible only by read）**：复合子元素只能从读 **DID** 引用，即不支持写 **DID** 和控制 **DID**。
+
+只要下列参数中至少有一个被激活，ReturnControlToEcu 功能就存在：DcmDspDidFreezeCurrentState（ECUC_Dcm_00624 中）、DcmDspDidResetToDefault（ECUC_Dcm_00623 中）或 DcmDspDidShortTermAdjustment（ECUC_Dcm_00625 中）。
+
+**DcmDspDataFreezeCurrentStateFnc 的依赖关系（Dependency for DcmDspDataFreezeCurrentStateFnc）**：DcmDspDataFreezeCurrentStateFnc 应仅在以下情况下存在：
+
+- DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC，或
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC，或
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC_ERROR，或
+- DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC_PROXY，或
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC_PROXY
+
+**DcmDspDataResetToDefaultFnc 的依赖关系（Dependency for DcmDspDataResetToDefaultFnc）**：DcmDspDataResetToDefaultFnc 应仅在以下情况下存在：
+
+- DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC，或
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC，或
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC_ERROR，或
+- DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC_PROXY，或
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC_PROXY
+
+**DcmDspDidControlMaskSize 的依赖关系（Dependency for DcmDspDidControlMaskSize）**：DcmDspDidControlMaskSize 应仅在 DcmDspDidControlMask 等于 DCM_CONTROLMASK_EXTERNAL 或 DCM_CONTROLMASK_INTERNAL 时存在。
+
+**DcmDspDidControlMaskBitPosition 的依赖关系（Dependency for DcmDspDidControlMaskBitPosition）**：为 DcmDspDidControlMaskBitPosition 配置的值应小于 DcmDspDidControlMaskSize * 8。
+
+**DcmDspDataReturnControlToEcuFnc 的依赖关系（Dependency for DcmDspDataReturnControlToEcuFnc）**：DcmDspDataReturnControlToEcuFnc 应仅在以下情况下存在：
+
+- DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC，或
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC，或
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC_ERROR，或
+- DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC_PROXY，或
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC_PROXY
+
+**DcmDspDataShortTermAdjustmentFnc 的依赖关系（Dependency for DcmDspDataShortTermAdjustmentFnc）**：DcmDspDataShortTermAdjustmentFnc 应仅在以下情况下存在：
+
+- DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC，或
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC，或
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC_ERROR，或
+- DcmDspDataUsePort 设置为 USE_DATA_SYNCH_FNC_PROXY，或
+- DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_FNC_PROXY
+
+**DcmDspDidControlMaskSize 的依赖关系（Dependency for DcmDspDidControlMaskSize）**：仅当 DcmDspDataUsePort 设置为 USE_DATA_ASYNCH_CLIENT_SERVER、USE_DATA_ASYNCH_CLIENT_SERVER_ERROR 或 USE_DATA_SYNCH_CLIENT_SERVER 时，才允许 DcmDspDidControlMaskSize 大于 4。
+
+**注意：** 大于 32 位的 ControlEnableMask 是非常罕见的使用场景。因此 **Dcm** 仅支持通过 C/S 接口解决该场景。
+
+##### 6.6.2.15. 服务 0x31 - RoutineControl
+
+**Dcm** 模块应实现 **UDS** 服务 **RoutineControl**（0x31）的子功能 startRoutine、stopRoutine 和 requestRoutineResults。
+
+诊断仪可以使用 **UDS** 服务 0x31 启动、停止或获取由 2 字节 routineIdentifier 所标识的例程的结果。**Dcm** 模块配置包含 **DCM** 所支持的 routineIdentifier 列表（参见配置参数 DcmDspRoutineIdentifier）。对于每个 routineIdentifier，**Dcm** 配置指定：
+
+- 与该 routineIdentifier 关联的函数 Xxx_Start()（参见配置参数 DcmDspStartRoutineFnc、DcmDspRoutineUsePort 和 DcmDspRoutineFncSignature）
+- 请求与响应中可用的信号列表（参见配置参数 DcmDspStartRoutineIn 和 DcmDspStartRoutineOut）
+- 与该 routineIdentifier 关联的函数 Xxx_Stop()（参见配置参数 DcmDspStopRoutineFnc、DcmDspRoutineUsePort 和 DcmDspRoutineFncSignature）
+- 请求与响应中可用的信号列表（参见配置参数 DcmDspStopRoutineIn 和 DcmDspStopRoutineOut）
+- 与该 routineIdentifier 关联的函数 Xxx_RequestResults()（参见配置参数 DcmDspRequestRoutineResultsFnc、DcmDspRoutineUsePort 和 DcmDspRoutineFncSignature）
+- 请求与响应中可用的信号列表（参见配置参数 DcmDspRequestRoutineResultsIn 和 DcmDspRequestRoutineResultsOut）
+
+如果 DcmDspRoutineUsePort 设置为 TRUE，则 **Dcm** 应调用 C/S 接口 RoutineServices_RoutineName 的相应操作来处理该例程。
+
+例程处理器处理诊断例程控制请求。**Dcm** 将 routineControlOption 作为输入参数传递给例程处理器。该例程处理请求，并将结果写入例程处理器调用的输出参数。在 Rx 与 Tx 缓冲区共享的情况下，会有两类情形导致写入例程控制的输出参数时覆盖输入参数：
+
+- 例程控制使用数组作为输出参数（按引用调用）
+- 例程控制写入输出参数并返回 DCM_E_PENDING。随后再次以 DcmOpstatus 设置为 DCM_PENDING 调用。其输入参数取自已被上一次对输出参数的写入所覆盖的 Rx 缓冲区
+
+出于高效内存消耗的考虑，可以控制 **Dcm** 是否在这些情形下采用进一步的策略来分离输入与输出参数。
+
+**基于 C/S 的例程处理期间输入与输出的一致性（Input and output consistency during C/S based routine handling）**：如果 DcmDspRoutineUsePort 设置为 TRUE，且该操作的 ClientServerOperation.diagArgIntegrity 也设置为 TRUE，则 **Dcm** 应确保 C/S 接口 RoutineServices_RoutineName 中对输出参数进行写入的例程处理器不会覆盖输入参数。
+
+**C/S 调用的例程参数完整性（Routine argument integrity for C/S calls）**：如果 DcmDspRoutineUsePort 设置为 TRUE 且配置了 DcmDspRoutineInterfaceArgumentIntegrity，则 **Dcm** 应创建 C/S 接口 RoutineServices_RoutineName 的相应操作，并将其 ClientServerOperation.diagArgIntegrity 设置为 DcmDspRoutineInterfaceArgumentIntegrity。
+
+**DcmDspRoutineInterfaceArgumentIntegrity 的可用性（Availability of DcmDspRoutineInterfaceArgumentIntegrity）**：仅当相应的 DcmDspRoutine 的 DcmDspRoutineUsePort 设置为 TRUE 时，DcmDspRoutineInterfaceArgumentIntegrity 才可用。
+
+如果 DcmDspRoutineUsePort 设置为 FALSE，则 **Dcm** 应使用所配置的 callout 函数执行例程操作。
+
+在接收到 **UDS** 服务 **RoutineControl**（0x31）时，**Dcm** 模块应检查该例程是否受支持（参见配置参数 DcmDspRoutine）。如果不支持，则 **Dcm** 模块应发送 **NRC** 0x31（Request out of range）。
+
+如果某个例程被设置为未使用（DcmDspRoutineUsed 设置为 FALSE），则 **Dcm** 应将该例程视为不受支持（参见上文对例程支持性的检查要求）。
+
+**StartRoutine 认证检查（StartRoutine authentication check）**：在接收到子功能为 startRoutine 的 **UDS** 服务 **RoutineControl**（0x31）时，**Dcm** 应检查对所请求 routineIdentifier 的访问是否已认证，并且仅在以下情况下处理该例程：
+
+- 为该启动例程服务通过 DcmDspStartRoutineRoleRef 配置了角色，且角色验证成功（参见 §6.6.2.10.4），或者
+- 该连接上的活动白名单具有一个 RID 条目，其子功能访问设置为 startRoutine，且与该服务及子功能匹配。
+
+**StopRoutine 认证检查（StopRoutine authentication check）**：在接收到子功能为 stopRoutine 的 **UDS** 服务 **RoutineControl**（0x31）时，**Dcm** 应检查对所请求 routineIdentifier 的访问是否已认证，并且仅在以下情况下处理该例程：
+
+- 为该停止例程服务通过 DcmDspStopRoutineRoleRef 配置了角色，且角色验证成功（参见 §6.6.2.10.4），或者
+- 该连接上的活动白名单具有一个 RID 条目，其子功能访问设置为 stopRoutine，且与该服务及子功能匹配。
+
+**RequestRoutineResult 认证检查（RequestRoutineResult authentication check）**：在接收到子功能为 requestRoutineResult 的 **UDS** 服务 **RoutineControl**（0x31）时，**Dcm** 应检查对所请求 routineIdentifier 的访问是否已认证，并且仅在以下情况下处理该例程：
+
+- 为该请求例程结果服务通过 DcmDspRequestRoutineResultsRoleRef 配置了角色，且角色验证成功（参见 §6.6.2.10.4），或者
+- 该连接上的活动白名单具有一个 RID 条目，其子功能访问设置为 requestRoutineResults，且与该服务及子功能匹配。
+
+根据以上要求，认证检查仅在配置了 DcmDspAuthentication 时执行。认证失败时的 **NRC** 处理按照 §6.5.4.3.1 和 §6.6.2.10 中的规则执行。
+
+服务 **RoutineControl**（0x31）具有特殊性质，它同时具有子功能和一个标识符。**UDS** 为此服务定义了不同的行为。会话与安全的权限检查在标识符层面而非子功能层面执行。
+
+**同一例程标识符具有相同的会话与安全设置（Same session and security settings for same routine identifier）**：由同一个 DcmDspRoutine 通过 DcmDspStartRoutineCommonAuthorizationRef、DcmDspStopRoutineCommonAuthorizationRef 或 DcmDspRequestRoutineResultsCommonAuthorizationRef 所引用的所有 DcmDspCommonAuthorization，应具有相同（完全一致）的 DcmDspCommonAuthorizationSecurityLevelRef 与 DcmDspCommonAuthorizationSessionRef 引用集合。
+
+在接收到 **UDS** 服务 **RoutineControl**（0x31）时，**Dcm** 模块应检查该例程是否可以在当前会话中执行（参见配置参数 DcmDspStartRoutineCommonAuthorizationRef、DcmDspStopRoutineCommonAuthorizationRef 和 DcmDspRequestRoutineResultsCommonAuthorizationRef）。如果不可执行，则 **Dcm** 模块应发送 **NRC** 0x31（Request Out of Range）。
+
+在接收到 **UDS** 服务 **RoutineControl**（0x31）时，**Dcm** 模块应检查该例程是否可以在当前安全级别中执行（参见配置参数 DcmDspStartRoutineCommonAuthorizationRef、DcmDspStopRoutineCommonAuthorizationRef 和 DcmDspRequestRoutineResultsCommonAuthorizationRef）。如果不可执行，则 **Dcm** 模块应发送 **NRC** 0x33（Security access denied）。
+
+在接收到 **UDS** 服务 **RoutineControl**（0x31）时，**Dcm** 模块应检查该例程的相应子功能是否受支持（参见子功能 0x02 的配置容器 DcmDspStopRoutine 是否存在；子功能 0x03 的 DcmDspRequestRoutineResults 是否存在）。如果不支持，则 **Dcm** 模块应发送 **NRC** 0x12（SubFunction not supported）。
+
+在接收到子功能为 startRoutine 的 **UDS** 服务 **RoutineControl**（0x31）时，**Dcm** 模块应检查该例程是否可以在当前模式条件下执行（参见配置参数 DcmDspStartRoutineCommonAuthorizationRef）。如果不可执行，则 **Dcm** 模块应发送由所引用的 DcmModeRule 计算得到的否定响应码。
+
+在接收到子功能为 stopRoutine 的 **UDS** 服务 **RoutineControl**（0x31）时，**Dcm** 模块应检查该例程是否可以在当前模式条件下执行（参见配置参数 DcmDspStopRoutineCommonAuthorizationRef）。如果不可执行，则 **Dcm** 模块应发送由所引用的 DcmModeRule 计算得到的否定响应码。
+
+在接收到子功能为 requestRoutineResults 的 **UDS** 服务 **RoutineControl**（0x31）时，**Dcm** 模块应检查该例程是否可以在当前模式条件下执行（参见配置参数 DcmDspRequestRoutineResultsCommonAuthorizationRef）。如果不可执行，则 **Dcm** 模块应发送由所引用的 DcmModeRule 计算得到的否定响应码。
+
+例程根据例程配置具有不同的输入与输出参数（例如 DcmDspStartRoutineIn 为启动例程服务的输入参数）。所调用的例程操作 Xxx_Start、Xxx_Stop 与 Xxx_RequestResults 的签名取决于该配置。为输入与输出例程数据所定义的参数是可选的，并在 API 定义中以方括号 `[]` 标记。
+
+对于 DcmDspStartRoutineInSignal、DcmDspStopRoutineInSignal 或 DcmDspRequestRoutineResultsInSignal 中每个信号类型不等于 VARIABLE_LENGTH 的已配置例程输入信号，相应操作中应提供可选参数 `DcmDspRoutineSignalType dataIn_n`。
+
+对于 DcmDspStartRoutineInSignal、DcmDspStopRoutineInSignal 或 DcmDspRequestRoutineResultsInSignal 中信号类型等于 VARIABLE_LENGTH 的已配置例程输入信号，相应操作中应提供可选参数 `const uint8 * dataInVar`。
+
+对于 DcmDspStartRoutineOutSignal、DcmDspStopRoutineOutSignal 或 DcmDspRequestRoutineResultsOutSignal 中每个信号类型不等于 VARIABLE_LENGTH 的已配置例程输出信号，相应操作中应提供可选参数 `DcmDspRoutineSignalType dataOut_n`。
+
+对于 DcmDspStartRoutineOutSignal、DcmDspStopRoutineOutSignal 或 DcmDspRequestRoutineResultsOutSignal 中信号类型等于 VARIABLE_LENGTH 的已配置例程输出信号，相应操作中应提供可选参数 `const uint8 * dataOutVar`。
+
+只要例程输入信号数据或例程输出信号数据中至少有一个信号具有例程类型 VARIABLE_LENGTH，相应操作中的可选 in/out 参数 currentDataLength 就始终存在。
+
+**注意：** 作为 in/out 参数的 currentDataLength 在调用操作时包含 dataInVar 的数据长度（字节），并返回 dataOutVar 的长度（字节）。由于 dataInVar 与 dataOutVar 均为可选，因此仅当至少使用其中一个可选参数时，currentDataLength 才存在。
+
+在接收到 **UDS** 服务 **RoutineControl**（0x31）的请求时，如果所有验证均已成功完成（参见上述对例程支持性、会话和安全级别的检查要求），则 **Dcm** 模块应按照为该例程所配置的输入信号列表（参见配置参数 DcmDspStartRoutineIn、DcmDspStopRoutineIn、DcmDspRequestRoutineResultsIn）拆分所接收到的 routineControlOptionRecord。
+
+**（草案）通过 S/R 代理签名传递 routineControlOptionRecord**：在接收到 **UDS** 服务 **RoutineControl**（0x31）的请求时，如果所有验证均已成功完成（参见上述对例程支持性、会话和安全级别的检查要求），且 DcmDspRoutineFncSignature 设置为 ROUTINE_FNC_PROXY，则 **Dcm** 模块应将 routineControlOptionRecord 传递给所调用的函数，并通过 dataInOut 参数回传所得的 routineStatusRecord，其中 currentDataLength 表示所传入 routineControlOptionRecord 的大小以及所返回 routineStatusRecord 的大小。
+
+在接收到子功能为 startRoutine 的 **UDS** 服务 **RoutineControl**（0x31）请求时，如果所有验证均已成功完成（参见上述对例程支持性、会话和安全级别的检查要求），则 **Dcm** 模块应调用所配置的 Xxx_Start() 函数，传入由 routineControlOptionRecord 计算得到的 dataIn，以及按照为该例程所配置的输出信号列表（参见配置参数 DcmDspStartRoutineOut）所确定的 dataOut 引用。
+
+在完成上述 Xxx_Start() 调用之后，当 Xxx_Start() 返回 E_OK 时，**Dcm** 模块应回复正响应，并将 Xxx_Start() 在 dataOut 中返回的数据作为 routineStatusRecord（dataOut 按照为该例程所配置的输出信号列表合并，参见配置参数 DcmDspStartRoutineOut）。
+
+**（草案）ROUTINE_FNC_PROXY 下的 startRoutine**：在接收到子功能为 startRoutine 的 **UDS** 服务 **RoutineControl**（0x31）请求时，如果所有验证均已成功完成且 DcmDspRoutineFncSignature 设置为 ROUTINE_FNC_PROXY，则 **Dcm** 模块应调用所配置的 Xxx_Start() 函数，并通过上述代理方式传递 routineControlOptionRecord；如果 Xxx_Start() 返回 E_OK，则将其返回的 routineStatusRecord 以正响应回复。
+
+在接收到子功能为 stopRoutine 的 **UDS** 服务 **RoutineControl**（0x31）请求时，如果所有验证均已成功完成（参见上述对例程支持性、会话和安全级别的检查要求），则 **Dcm** 模块应调用所配置的 Xxx_Stop() 函数，传入由 routineControlOptionRecord 计算得到的 dataIn，以及按照为该例程所配置的输出信号列表（参见配置参数 DcmDspStopRoutineOut）所确定的 dataOut 引用。
+
+在完成上述 Xxx_Stop() 调用之后，当 Xxx_Stop() 返回 E_OK 时，**Dcm** 模块应回复正响应，并将 Xxx_Stop() 在 dataOut 中返回的数据作为 routineStatusRecord（dataOut 按照为该例程所配置的输出信号列表合并，参见配置参数 DcmDspStopRoutineOut）。
+
+**（草案）ROUTINE_FNC_PROXY 下的 stopRoutine**：在接收到子功能为 stopRoutine 的 **UDS** 服务 **RoutineControl**（0x31）请求时，如果所有验证均已成功完成且 DcmDspRoutineFncSignature 设置为 ROUTINE_FNC_PROXY，则 **Dcm** 模块应调用所配置的 Xxx_Stop() 函数，并通过上述代理方式传递 routineControlOptionRecord；如果 Xxx_Stop() 返回 E_OK，则将其返回的 routineStatusRecord 以正响应回复。
+
+在接收到子功能为 requestRoutineResults 的 **UDS** 服务 **RoutineControl**（0x31）请求时，如果所有验证均已成功完成（参见上述对例程支持性、会话和安全级别的检查要求），则 **Dcm** 模块应调用所配置的 Xxx_RequestResults() 函数，传入由 routineControlOptionRecord 计算得到的 dataIn，并提供按照为该例程所配置的输出信号列表（参见配置参数 DcmDspRequestRoutineResultsOut）所确定的 dataOut 引用。
+
+在完成上述 Xxx_RequestResults() 调用之后，当 Xxx_RequestResults() 返回 E_OK 时，**Dcm** 模块应回复正响应，并将 Xxx_RequestResults() 在 dataOut 中返回的数据作为 routineStatusRecord（dataOut 按照为该例程所配置的输出信号列表合并，参见配置参数 DcmDspRequestRoutineResultsOut）。
+
+**（草案）ROUTINE_FNC_PROXY 下的 requestRoutineResults**：在接收到子功能为 requestRoutineResults 的 **UDS** 服务 **RoutineControl**（0x31）请求时，如果所有验证均已成功完成且 DcmDspRoutineFncSignature 设置为 ROUTINE_FNC_PROXY，则 **Dcm** 模块应调用所配置的 Xxx_RequestResults() 函数，并通过上述代理方式传递 routineControlOptionRecord；如果 Xxx_RequestResults() 返回 E_OK，则将其返回的 routineStatusRecord 以正响应回复。
+
+为将 **UDS** 服务 **RoutineControl** 的请求消息中的所需 **AUTOSAR** 数据类型（有符号和无符号整数）序列化，或序列化到其响应消息中，对于 DcmDspRoutineSignalType 设置为固定长度（即不等于 VARIABLE_LENGTH）的 DcmDspRoutine 信号，应考虑 DcmDspRoutineSignalEndianness 中所配置的目标字节序。
+
+**DcmDspRoutineSignalEndianness 的依赖关系（Dependency for DcmDspRoutineSignalEndianness）**：在未提供 DcmDspRoutineSignalEndianness 的情况下，应改用 DcmDspDataDefaultEndianness。
+
+**Dcm** 应按照 **ISO 14229-1** [1] 遵循 **RoutineControl** 服务的 **NRC** 处理。
+
+在接收到 **UDS** 服务 **RoutineControl**（0x31）时，**Dcm** 模块应检查请求的总长度。如果请求长度不正确，则 **Dcm** 模块应向诊断仪发送 **NRC** 0x13（Incorrect message length or invalid format）。
+
+**Dcm** 应在完成总长度检查以及模式规则、安全级别和会话检查（DcmDspStartRoutineCommonAuthorizationRef、DcmDspStopRoutineCommonAuthorizationRef 和 DcmDspRequestRoutineResultsCommonAuthorizationRef）之后，调用 **SWC** 的相应例程函数。
+
+**注意：** 后续检查须由 **SWC** 执行。
+
+在接收到 **UDS** 服务 **RoutineControl**（0x31）时，对于 **OBD** 范围（E000-E0FF）内的每个所请求 **RID**，**Dcm** 应隐式允许子功能 StartRoutine。
+
+在接收到 **UDS** 服务 **RoutineControl**（0x31）时，对于 **OBD** 范围（E000-E0FF）内的每个所请求 **RID** 且使用 **UDS** 接口时，**Dcm** 模块应在对诊断仪的响应中使用来自 DcmDspRoutineInfoByte 的 routineInfo 字节值。
+
+如果 DcmDspEnableObdMirror 设置为 TRUE，则 **OBD** 范围（E000-E0FF）内被显式配置的 **RID** 应使用 **UDS** 接口。
+
+如果 DcmDspEnableObdMirror 设置为 FALSE，则 **OBD** **RID** 范围内的所有请求均应使用 **UDS** 接口。
+
+在接收到 **UDS** 服务 **RoutineControl**（0x31）时，对于 **OBD** 范围（E000-E0FF）内的每个所请求 **RID**，如果 DcmDspEnableObdMirror 设置为 TRUE 且该 **RID** 未被显式配置，则 **Dcm** 模块应按照 **OBD** 服务 $08 所定义的方式处理该 **RID**（参见 §6.6.3 中各 **OBD** 服务要求）。
+
+在接收到 **UDS** 服务 **RoutineControl**（0x31）时，对于 **OBD** 范围（E000-E0FF）内的每个所请求 **RID** 且使用 **OBD** 接口时，**Dcm** 应在对诊断仪的响应中使用来自 DcmDspRequestControlInfoByte 的 routineInfo 字节值。
+
+如果 DcmDspEnableObdMirror 设置为 FALSE，或者该 **RID** 在 **OBD** TestId 范围（E000-E0FF）内被显式配置，则应按以下方式授予对 **OBD** 数据的访问：
+
+在接收到带有一个或多个“可用性 **OBD**TestId”作为参数的 **UDS** 服务 **RoutineControl**（0x31）请求时，**Dcm** 模块应以相应的受支持（即已配置）**RID** 进行响应。
+
+在接收到带有不属于“可用性 **OBD**TestId”的 **OBD**TestId 的 **UDS** 服务 **RoutineControl**（0x31）请求时，**Dcm** 模块应调用所配置的 Xxx_Start() 函数。
+
+按照 SAE J1979 [3] 的规定，未使用的数据字节应填充为 $00。
+
+如果 Xxx_Start() 未返回 E_OK，则 **Dcm** 应返回 **NRC** 0x22。
+
+如果 Start() 操作返回 E_NOT_OK，则 **Dcm** 模块应发送 NRC 代码等于 ErrorCode 参数值的否定响应。
+
+如果 Start() 操作返回 DCM_E_FORCE_RCRRP，则 **Dcm** 模块应启动 **NRC** 0x78 的发送。
+
+如果 Stop() 操作返回 E_NOT_OK，则 **Dcm** 模块应发送 NRC 代码等于 ErrorCode 参数值的否定响应。
+
+如果 Stop() 操作返回 DCM_E_FORCE_RCRRP，则 **Dcm** 模块应启动 **NRC** 0x78 的发送。
+
+如果 RequestResults() 操作返回 E_NOT_OK，则 **Dcm** 模块应发送 NRC 代码等于 ErrorCode 参数值的否定响应。
+
+如果 RequestResults() 操作返回 DCM_E_FORCE_RCRRP，则 **Dcm** 模块应启动 **NRC** 0x78 的发送。
+
+**DcmDspStartRoutineFnc、DcmDspStopRoutineFnc、DcmDspRequestRoutineResultsFnc、DcmDspStartRoutineConfirmationFnc 与 DcmDspStopRoutineConfirmationFnc 的依赖关系**：以下配置参数应仅在 DcmDspRoutineUsePort 设置为 FALSE 时存在。
+
+- DcmDspStartRoutineFnc
+- DcmDspStopRoutineFnc
+- DcmDspRequestRoutineResultsFnc
+- DcmDspStartRoutineConfirmationFnc
+- DcmDspStopRoutineConfirmationFnc
+
+##### 6.6.2.16. 服务 0x3E - Tester Present
+
+**Dcm** 模块应实现统一诊断服务中的 **Tester Present**（服务 0x3E，诊断通信与安全）的子功能值 0x00 和 0x80。
+
+**Tester Present 跳过认证检查（Skipping authentication check for tester present）**：**Dcm** 应独立于当前认证状态处理 **UDS** 服务 0x3E（**TesterPresent**）。
+
+该服务用于使一个或多个服务器保持在非默认会话的诊断会话中。
+
+##### 6.6.2.17. 服务 0x3D - WriteMemoryByAddress
+
+**Dcm** 模块应实现统一诊断服务中的 **WriteMemoryByAddress**（服务 0x3D）。
+
+该服务用于使用物理存储器地址写入数据。
+
+在接收到 **UDS** 服务 **WriteMemoryByAddress**（0x3D）时，**Dcm** 应检查所请求的 AddressAndLengthFormatIdentifier 是否受支持（参见配置参数 DcmDspSupportedAddressAndLengthFormatIdentifier），否则应返回 **NRC** 0x31（requestOutOfRange）。在未提供容器 AddressAndLengthFormatIdentifier 的情况下，**Dcm** 应接受所有可能的 AddressAndLengthFormatIdentifier。
+
+在接收到 **UDS** 服务 **WriteMemoryByAddress**（0x3D）时，**Dcm** 应检查待写入的完整存储器范围（从 `memoryAddress` 参数到 `memoryAddress + memorySize - 1`）是否位于允许的存储器范围之内（对每个 DcmDspWriteMemoryRangeInfo 容器检查 DcmDspWriteMemoryRangeLow 与 DcmDspWriteMemoryRangeHigh 参数，或对每个 DcmDspWriteMemoryRangeByLabelInfo 容器检查 DcmDspWriteMemoryRangeByLabelLow 与 DcmDspWriteMemoryRangeByLabelHigh 参数）。如果不在允许范围内，则 **Dcm** 模块应发送 **NRC** 0x31（Request out of range）。
+
+在接收到 **UDS** 服务 **WriteMemoryByAddress**（0x3D）时，**Dcm** 应检查该完整存储器范围（从 `memoryAddress` 参数到 `memoryAddress + memorySize - 1`）是否可以在当前安全级别中写入（参见 DcmDspWriteMemoryRangeSecurityLevelRef）。如果安全级别不正确，则 **Dcm** 模块应发送 **NRC** 0x33（securityAccessDenied）。
+
+在接收到 **UDS** 服务 **WriteMemoryByAddress**（0x3D）时，**Dcm** 应检查该完整存储器范围（从 `memoryAddress` 参数到 `memoryAddress + memorySize - 1`）是否可以在当前模式条件下写入（参见 DcmDspWriteMemoryRangeModeRuleRef）。如果模式条件不正确，则 **Dcm** 模块应发送由所引用的 dcmModeRule 计算得到的否定响应码。
+
+在接收到 **UDS** 服务 **WriteMemoryByAddress**（0x3D）时，并且在验证请求的有效性之后（参见上述存储器范围与安全级别的检查要求），**Dcm** 模块应调用 callout Dcm_WriteMemory。
+
+在接收到 **UDS** 服务 **WriteMemoryByAddress**（0x3D）时，如果请求消息中包含与 DcmDspMemoryIdInfo 容器中所配置值不同的 MemoryIdValue，则 **Dcm** 应发送 **NRC** 0x31（RequestOutOfRange）。
+
+所配置的存储器地址范围（DcmDspReadMemoryRangeHigh 与 DcmDspReadMemoryRangeLow，或 DcmDspReadMemoryRangeByLabelHigh 与 DcmDspReadMemoryRangeByLabelLow）不应相互重叠。
+
+在接收到 **UDS** 服务 **WriteMemoryByAddress**（0x3D）时，**Dcm** 应检查该完整存储器范围（从 `memoryAddress` 参数到 `memoryAddress + memorySize - 1`）是否可以在当前会话中写入（参见 DcmDspWriteMemoryRangeSessionLevelRef）。如果会话不正确，则 **Dcm** 模块应发送 **NRC** 0x31（RequestOutOfRange）。
+
+如果操作 Dcm_WriteMemory 返回 DCM_WRITE_FAILED，则 **Dcm** 模块应发送 NRC 代码等于 ErrorCode 参数值的否定响应。
+
+如果对 Dcm_WriteMemory 的调用返回 DCM_WRITE_FORCE_RCRRP，则 **Dcm** 应发起 RCR-RP 的发送请求（**NRC** 0x78 发送），并且在 RCR-RP 被发送之前，**Dcm** 不应再次调用该操作。
+
+在上述 **NRC** 0x78 的发送确认之后，**Dcm** 应从 Dcm_MainFunction 中（鉴于调用上下文）再次调用 Dcm_WriteMemory，并将 OpStatus 设置为 DCM_FORCE_RCRRP_OK。
+
+##### 6.6.2.18. 服务 0x23 - ReadMemoryByAddress
+
+该服务用于使用物理存储器地址读取数据。
+
+**Dcm** 模块应实现统一诊断服务中的 **ReadMemoryByAddress**（服务 0x23）。
+
+在接收到 **UDS** 服务 **ReadMemoryByAddress**（0x23）时，**Dcm** 应检查所请求的 AddressAndLengthFormatIdentifier 是否受支持（参见配置参数 DcmDspSupportedAddressAndLengthFormatIdentifier），否则应返回 **NRC** 0x31（requestOutOfRange）。在未提供容器 DcmDspAddressAndLengthFormatIdentifier 的情况下，**Dcm** 应接受所有可能的 AddressAndLengthFormatIdentifier。
+
+在接收到 **UDS** 服务 **ReadMemoryByAddress**（0x23）时，**Dcm** 应检查待读取的完整存储器范围（从 `memoryAddress` 参数到 `memoryAddress + memorySize - 1`）是否位于允许的存储器范围之内（对每个 DcmDspReadMemoryRangeInfo 容器检查 DcmDspReadMemoryRangeLow 与 DcmDspReadMemoryRangeHigh 参数，或对每个 DcmDspReadMemoryRangeByLabelInfo 容器检查 DcmDspReadMemoryRangeByLabelLow 与 DcmDspReadMemoryRangeByLabelHigh 参数）。如果不在允许范围内，则 **Dcm** 模块应发送 **NRC** 0x31（Request out of range）。
+
+在接收到 **UDS** 服务 **ReadMemoryByAddress**（0x23）时，**Dcm** 应检查该完整存储器范围（从 `memoryAddress` 参数到 `memoryAddress + memorySize - 1`）是否可以在当前安全级别中读取（参见 DcmDspReadMemoryRangeSecurityLevelRef）。如果安全级别不正确，则 **Dcm** 模块应发送 **NRC** 0x33（securityAccessDenied）。
+
+在接收到 **UDS** 服务 **ReadMemoryByAddress**（0x23）时，**Dcm** 应检查该完整存储器范围（从 `memoryAddress` 参数到 `memoryAddress + memorySize - 1`）是否可以在当前模式条件下读取（参见 DcmDspReadMemoryRangeModeRuleRef）。如果模式条件不正确，则 **Dcm** 模块应发送由所引用的 DcmModeRule 计算得到的否定响应码。
+
+在接收到 **UDS** 服务 **ReadMemoryByAddress**（0x23）时，并且在验证请求的有效性之后（参见上述存储器范围与安全级别的检查要求），**Dcm** 模块应调用 callout Dcm_ReadMemory。
+
+在接收到 **UDS** 服务 **ReadMemoryByAddress**（0x23）时，如果请求消息中包含与 DcmDspMemoryIdInfo 容器中所配置值不同的 MemoryIdValue，则 **Dcm** 应发送 **NRC** 0x31（RequestOutOfRange）。
+
+所配置的存储器地址范围（DcmDspReadMemoryRangeHigh 与 DcmDspReadMemoryRangeLow，或 DcmDspReadMemoryRangeByLabelHigh 与 DcmDspReadMemoryRangeByLabelLow）不应相互重叠。
+
+在接收到 **UDS** 服务 **ReadMemoryByAddress**（0x23）时，**Dcm** 应检查该完整存储器范围（从 `memoryAddress` 参数到 `memoryAddress + memorySize - 1`）是否可以在当前会话中读取（参见 DcmDspReadMemoryRangeSessionLevelRef）。如果会话不正确，则 **Dcm** 模块应发送 **NRC** 0x31（RequestOutOfRange）。
+
+如果操作 Dcm_ReadMemory 返回 DCM_READ_FAILED，则 **Dcm** 模块应发送 NRC 代码等于 ErrorCode 参数值的否定响应。
+
+如果对 Dcm_ReadMemory 的调用返回 DCM_READ_FORCE_RCRRP，则 **Dcm** 应发起 RCR-RP 的发送请求（**NRC** 0x78 发送），并且在 RCR-RP 被发送之前，**Dcm** 不应再次调用该操作。
+
+在上述 **NRC** 0x78 的发送确认之后，**Dcm** 应从 Dcm_MainFunction 中（鉴于调用上下文）再次调用 Dcm_ReadMemory，并将 OpStatus 设置为 DCM_FORCE_RCRRP_OK。
+
+##### 6.6.2.19. 服务 0x34 - RequestDownload
+
+该服务用于请求启动一个下载过程。
+
+**Dcm** 模块应实现统一诊断服务中的 **RequestDownload**（服务 0x34）。
+
+在接收到 **UDS** 服务 **RequestDownload**（0x34）时，**Dcm** 应检查所请求的 AddressAndLengthFormatIdentifier 是否受支持（参见配置参数 DcmDspSupportedAddressAndLengthFormatIdentifier），否则应返回 **NRC** 0x31（requestOutOfRange）。在未提供容器 AddressAndLengthFormatIdentifier 的情况下，**Dcm** 应接受所有可能的 AddressAndLengthFormatIdentifier。
+
+在接收到 **UDS** 服务 **RequestDownload**（0x34）时，如果请求消息中包含与 DcmDspMemoryIdInfo 容器中所配置值不同的 MemoryIdValue，则 **Dcm** 应发送 **NRC** 0x31（RequestOutOfRange）。
+
+表7.24 中所列的 **NRC** 应由 callout 函数负责。
+
+表7.24：服务 0x34 中由 callout 函数管理的 NRC（**NRC managed by callout function for service 0x34**）
+
+| NRC | 使用场景 |
+|---|---|
+| 0x31 requestOutOfRange | 所指定的 dataFormatIdentifier 无效。 |
+| 0x70 uploadDownloadNotAccepted | 由于某些故障条件，向服务器存储器进行下载的尝试无法完成。注意：仅当此情形未使用模式规则时，该 **NRC** 才由 callout 处理。 |
+
+**注意：** callout 函数在需要时也可以返回其他 **NRC**，但上述 **NRC** 不会由 **Dcm** 模块处理。
+
+**在不使用 RTE 的情况下处理 RequestDownload（Processing request download without RTE）**：如果 DcmDspMemoryTransferUsePort 设置为 FALSE，则 **Dcm** 应调用 Dcm_ProcessRequestDownload 来处理该请求。
+
+如果操作 Dcm_ProcessRequestDownload 返回 E_NOT_OK，则 **Dcm** 模块应发送 NRC 代码等于 ErrorCode 参数值的否定响应。
+
+在调用 Dcm_ProcessRequestDownload 时，**Dcm** 应将可能的最大缓冲区大小写入 BlockLength 参数。
+
+如果函数调用 Dcm_ProcessRequestDownload 返回的请求缓冲区长度大于当前协议连接所支持的缓冲区长度，则 **Dcm** 应报告 **Det** 错误 DCM_E_INTERFACE_BUFFER_OVERFLOW。
+
+如果函数调用 Dcm_ProcessRequestDownload 返回的请求缓冲区长度小于或等于当前协议连接所支持的缓冲区长度，则 **Dcm** 应在正响应的 maxNumberOfBlockLength 参数中返回 BlockLength 值。
+
+##### 6.6.2.20. 服务 0x35 - RequestUpload
+
+该服务用于请求启动一个上传过程。
+
+**Dcm** 模块应实现统一诊断服务中的 **RequestUpload**（服务 0x35）。
+
+在接收到 **UDS** 服务 **RequestUpload**（0x35）时，**Dcm** 应检查所请求的 AddressAndLengthFormatIdentifier 是否受支持（参见配置参数 DcmDspSupportedAddressAndLengthFormatIdentifier），否则应返回 **NRC** 0x31（requestOutOfRange）。在未提供容器 AddressAndLengthFormatIdentifier 的情况下，**Dcm** 应接受所有可能的 AddressAndLengthFormatIdentifier。
+
+在接收到 **UDS** 服务 **RequestUpload**（0x35）时，如果请求消息中包含与 DcmDspMemoryIdInfo 容器中所配置值不同的 MemoryIdValue，则 **Dcm** 应发送 **NRC** 0x31（RequestOutOfRange）。
+
+表7.25 中所列的 **NRC** 应由 callout 函数负责。
+
+表7.25：服务 0x35 中由 callout 函数管理的 NRC（**NRC managed by callout function for service 0x35**）
+
+| NRC | 使用场景 |
+|---|---|
+| 0x31 requestOutOfRange | 所指定的 dataFormatIdentifier 无效。 |
+| 0x70 uploadDownloadNotAccepted | 由于某些故障条件，向服务器存储器进行下载的尝试无法完成。注意：仅当此情形未使用模式规则时，该 **NRC** 才由 callout 处理。 |
+
+**注意：** callout 函数在需要时也可以返回其他 **NRC**，但上述 **NRC** 不会由 **Dcm** 模块处理。
+
+**在不使用 RTE 的情况下处理 RequestUpload（Processing request upload without RTE）**：如果 DcmDspMemoryTransferUsePort 设置为 FALSE，则 **Dcm** 应调用 Dcm_ProcessRequestUpload 来处理该请求。
+
+如果操作 Dcm_ProcessRequestUpload 返回 E_NOT_OK，则 **Dcm** 模块应发送 NRC 代码等于 ErrorCode 参数值的否定响应。
+
+在调用 Dcm_ProcessRequestUpload 时，**Dcm** 应将可能的最大缓冲区大小写入 BlockLength 参数。
+
+如果函数调用 Dcm_ProcessRequestUpload 返回的请求缓冲区长度大于当前协议连接所支持的缓冲区长度，则 **Dcm** 应报告 **Det** 错误 DCM_E_INTERFACE_BUFFER_OVERFLOW。
+
+如果函数调用 Dcm_ProcessRequestUpload 返回的请求缓冲区长度小于或等于当前协议连接所支持的缓冲区长度，则 **Dcm** 应在正响应的 maxNumberOfBlockLength 参数中返回 BlockLength 值。
+
+##### 6.6.2.21. 服务 0x36 - TransferData
+
+该服务用于在下载或上传过程中传输数据。
+
+**Dcm** 模块应实现统一诊断服务中的 **TransferData**（服务 0x36）。
+
+根据 **ISO 14229-1** [1]，执行传输数据请求必须先接收到 **RequestDownload** 或 **RequestUpload**。**Dcm** 将遵循该要求，并在内部跟踪此类请求是否已在 **TransferData** 请求之前被接收。这对于检查是否发生 **NRC** 0x24 序列错误以及复位块序列计数器是必要的。
+
+**请求序列错误检查（Request sequence error check）**：**Dcm** 应按照 **ISO 14229-1** [1] 为 **RequestDownload**、**RequestUpload** 和 **RequestFileTransfer** 操作实现 requestSequenceErrorCheck（**NRC** 0x24）。
+
+**Dcm** 不通过 memorySize 参数跟踪数据传输是否完成。该情形的 **NRC** 0x24 检查必须在应用程序中完成。这与 **ISO 14229-1** [1] 不同，后者仅在一处进行 **NRC** 0x24 检查。
+
+**块序列计数器检查（Block sequence counter check）**：**Dcm** 应在执行读或写数据调用之前按照 **ISO 14229-1** [1] 执行块序列计数器错误校验，并在请求的块序列计数器错误时返回 **NRC** 0x73。
+
+**在不使用 RTE 的情况下处理传输数据写入（Processing transfer data write without RTE）**：在接收到 **UDS** 服务 **TransferData**（0x36）时，如果下载过程正在运行（先前已接收到 **RequestDownload** 服务）、请求格式正确且 DcmDspMemoryTransferUsePort 设置为 FALSE，则 **Dcm** 模块应调用 callout Dcm_ProcessTransferDataWrite。
+
+**在不使用 RTE 的情况下处理传输数据读取（Processing transfer data read without RTE）**：在接收到 **UDS** 服务 **TransferData**（0x36）时，如果上传过程正在运行（先前已接收到 **RequestUpload** 服务）、请求格式正确且 DcmDspMemoryTransferUsePort 设置为 FALSE，则 **Dcm** 模块应调用 callout Dcm_ProcessTransferDataRead。
+
+在接收到 **UDS** 服务 **TransferData**（0x36）时，如果文件下载过程正在运行（先前已接收到 modeOfOperation 为 0x01（AddFile）或 0x03（ReplaceFile）的 **RequestFileTransfer** 服务）且请求格式正确，则 **Dcm** 模块应调用 callout Dcm_WriteFile()。
+
+在接收到 **UDS** 服务 **TransferData**（0x36）时，如果文件或目录信息上传过程正在运行（先前已接收到 modeOfOperation 为 0x04（ReadFile）或 0x05（ReadDir）的 **RequestFileTransfer** 服务）且请求格式正确，则 **Dcm** 模块应调用 callout Dcm_ReadFileOrDir()。
+
+表7.26 中所列的 **NRC** 应由 callout 函数负责。
+
+表7.26：服务 0x36 中由 callout 函数管理的 NRC（**NRC managed by callout function for service 0x36**）
+
+| NRC | 使用场景 |
+|---|---|
+| 0x24 requestSequenceError | 仅适用于以下情形：**RequestDownload** 或 **RequestUpload** 服务处于活动状态，但服务器已按活动 **RequestDownload** 或 **RequestUpload** 服务中的 memorySize 参数接收到全部数据。 |
+| 0x31 requestOutOfRange | 仅适用于以下情形：transferRequestParameterRecord 中包含附加控制参数（例如附加地址信息），且该控制信息无效；transferRequestParameterRecord 与服务器的存储器对齐约束不一致。 |
+| 0x71 transferDataSuspended | 数据传输操作因某些故障而中止。 |
+| 0x72 generalProgrammingFailure | 服务器在完成客户端与服务器之间的数据传输时检测到错误（例如通过完整性检查）。 |
+| 0x92 voltageTooHigh | 所测得的电压高于下载数据可接受的最高电压。 |
+| 0x93 voltageTooLow | 所测得的电压低于下载数据可接受的最低电压。 |
+
+**注意：** callout 函数在需要时也可以返回其他 **NRC**，但上述 **NRC** 不会由 **Dcm** 模块处理。
+
+##### 6.6.2.22. 服务 0x37 - RequestTransferExit
+
+该服务用于终止下载或上传过程。
+
+**Dcm** 模块应实现统一诊断服务中的 **RequestTransferExit**（服务 0x37）。
+
+表7.27 中所列的 **NRC** 应由 callout 函数负责。
+
+表7.27：服务 0x37 中由 callout 函数管理的 NRC（**NRC managed by callout function for service 0x37**）
+
+| NRC | 使用场景 |
+|---|---|
+| 0x24 requestSequenceError | 在接收到该服务请求时，编程过程尚未完成。 |
+| 0x72 generalProgrammingFailure | 服务器在完成客户端与服务器之间的数据传输时检测到错误（例如通过完整性检查）。 |
+
+**注意：** callout 函数在需要时也可以返回其他 **NRC**，但上述 **NRC** 不会由 **Dcm** 模块处理。
+
+**在不使用 RTE 的情况下处理传输退出（Processing transfer exit without RTE）**：如果 DcmDspMemoryTransferUsePort 设置为 FALSE，则 **Dcm** 应调用 Dcm_ProcessRequestTransferExit 来处理该请求。
+
+如果操作 Dcm_ProcessRequestTransferExit 返回 E_NOT_OK，则 **Dcm** 模块应发送 NRC 代码等于 ErrorCode 参数值的否定响应。
+
+**用于 RequestTransferExit 处理的 API 使用（Usage of API for RequestTransferExit processing）**：如果 DcmDspMemoryTransferUsePort 设置为 FALSE，则 **Dcm** 应使用 API Dcm_ProcessRequestTransferExit 来处理 **RequestTransferExit** 请求。
+
+**用于 RequestTransferExit 处理的 C/S 接口使用（Usage of C/S interface for RequestTransferExit processing）**：如果 DcmDspMemoryTransferUsePort 设置为 TRUE，则 **Dcm** 应使用 C/S 接口 UploadDownloadServices 的 ProcessRequestTransferExit 操作来处理 **RequestTransferExit** 请求。
+
+**transferRequestParameter 的映射（Mapping of transferRequestParameter）**：对于 Dcm_ProcessRequestTransferExit 以及 C/S 接口 UploadDownloadServices 的 ProcessRequestTransferExit 操作，**Dcm** 应使用：
+
+- 请求中 transferRequestParameterRecord 的字节大小，作为参数 transferRequestParameterRecordSize
+- 请求中的 transferRequestParameterRecord 数据，作为参数 transferRequestParameterRecord
+
+对于 Dcm_ProcessRequestTransferExit 以及 C/S 接口 UploadDownloadServices 的 ProcessRequestTransferExit 操作，**Dcm** 应将实现数据类型 Dcm_RequestDataArrayType 的大小作为 in/out 参数 transferResponseParameterRecordSize 的输入值使用。
+
+**transferResponseParameter 到正响应的映射（Mapping of transferResponseParameter to the positive response）**：对于 Dcm_ProcessRequestTransferExit 以及 C/S 接口 UploadDownloadServices 的 ProcessRequestTransferExit 操作，**Dcm** 应将 transferResponseParameterRecord 中 transferResponseParameterRecordSize 个字节作为正响应的 transferResponseParameterRecord 使用。
+
+##### 6.6.2.23. 服务 0x38 - RequestFileTransfer
+
+**Dcm** 模块应实现统一诊断服务中的 **RequestFileTransfer**（服务 0x38）。
+
+该服务用于按照 **ISO 14229-1** 请求启动一个文件传输过程。
+
+如果 DcmRequestFileTransferUsePort 设置为 TRUE，则 **Dcm** 应对所有与 **RequestFileTransfer** 相关的 callout 使用接口 RequestFileTransfer 的 C/S 调用。
+
+如果 DcmRequestFileTransferUsePort 设置为 FALSE，则 **Dcm** 应对所有与 **RequestFileTransfer** 相关的 callout 使用 C 函数调用。
+
+如果 **RequestFileTransfer** 请求中的 fileSizeParameterLength 参数存在且超出闭区间 [0x01..0x08]，则 **Dcm** 应发送带有 **NRC** 0x31（RequestOutOfRange）的否定响应。
+
+如果 **RequestFileTransfer** 请求中的 modeOfOperation 参数不受支持（为 0x00 或大于 0x05），则 **Dcm** 应发送带有 **NRC** 0x31（RequestOutOfRange）的否定响应。
+
+**Dcm** 应按照 [5] 的规定处理 **RequestFileTransfer**，并在 modeOfOperation 等于 0x01（AddFile）的情况下，在完成总长度检查之后调用 XXX_ProcessRequestAddFile。
+
+**Dcm** 应按照 [5] 的规定处理 **RequestFileTransfer**，并在 modeOfOperation 等于 0x02（DeleteFile）的情况下，在完成总长度检查之后调用 XXX_ProcessRequestDeleteFile。
+
+**Dcm** 应按照 [5] 的规定处理 **RequestFileTransfer**，并在 modeOfOperation 等于 0x03（ReplaceFile）的情况下，在完成总长度检查之后调用 XXX_ProcessRequestReplaceFile。
+
+**Dcm** 应按照 [5] 的规定处理 **RequestFileTransfer**，并在 modeOfOperation 等于 0x04（ReadFile）的情况下，在完成总长度检查之后调用 XXX_ProcessRequestReadFile。
+
+**Dcm** 应按照 [5] 的规定处理 **RequestFileTransfer**，并在 modeOfOperation 等于 0x05（ReadDir）的情况下，在完成总长度检查之后调用 XXX_ProcessRequestReadDir。
+
+如果任一文件传输操作 XXX_ProcessRequest&lt;yyy&gt; 返回 E_NOT_OK，则 **Dcm** 模块应发送 NRC 代码等于 ErrorCode 参数值的否定响应。
+
+**Dcm** 应将 DcmRequestFileTransferFileSizeOrDirInfoParameterLength 中所配置的值作为响应中 fileSizeOrDirInfoParameterLength 的值发送。
+
+**Dcm** 应将 DcmRequestFileTransferFileSizeOrDirInfoParameterLength 中所配置的值作为响应中 fileSizeUncompressedOrDirInfoLength 与 fileSizeCompressed 所发送的字节数。
+
+**Dcm** 应将 DcmRequestFileTransferLengthFormatIdentifier 中所配置的值作为响应中 lengthFormatIdentifier 的值发送。
+
+**Dcm** 应将 DcmRequestFileTransferLengthFormatIdentifier 中所配置的值作为响应中 maxNumberOfBlockLength 所发送的字节数。
+
+如果 maxNumberOfBlockLength 无法容纳于所请求的 lengthFormatIdentifier 字节数中，则 **Dcm** 应发送 **NRC** 0x10（generalReject）。
+
+如果 fileSizeUncompressedOrDirInfoLength 或 fileSizeCompressed 无法容纳于所请求的 fileSizeOrDirInfoParameterLength 字节数中，则 **Dcm** 应发送 **NRC** 0x10（generalReject）。
+
+##### 6.6.2.24. 服务 0x85 - ControlDTCSetting
+
+外部测试工具可以通过发送子功能为 0x01（“ON”）或 0x02（“OFF”）的 **UDS** 服务 0x85 请求，要求 **ECU** 禁止或允许在 **ECU** 错误存储器中存储 **DTC**。
+
+**Dcm** 模块应实现 **UDS** 服务 **ControlDTCSetting**（0x85），以禁止或允许在 **ECU** 错误存储器中存储 **DTC**。
+
+如果 **Dcm** 接收到 DTCSettingControlOptionRecord 不等于 0xFFFFFF 的 **ControlDTCSetting**（0x85）服务，则 **Dcm** 应发送 **NRC** 0x31（RequestOutOfRange）。
+
+在接收到子功能为 0x01（DTCSettingType “ON”）的 **UDS** 服务 0x85 时，**Dcm** 应以 ClientId = 该 **Dcm** 实例的 Client Id（参见 DcmDemClientRef）调用 Dem_EnableDTCSetting()。
+
+如果 Dem_EnableDTCSetting 返回 E_OK（参见上述要求），则 **Dcm** 应通过调用 SchM_Switch_&lt;bsnp&gt;_DcmControlDTCSetting(RTE_MODE_DcmControlDTCSetting_ENABLEDTCSETTING) 触发 ModeDeclarationGroupPrototype DcmControlDTCSetting 的模式切换。
+
+在接收到子功能为 0x02（DTCSettingType “OFF”）的 **UDS** 服务 0x85 时，**Dcm** 应以 ClientId = 该 **Dcm** 实例的 Client Id（参见 DcmDemClientRef）调用 Dem_DisableDTCSetting()。
+
+如果 Dem_DisableDTCSetting 返回 E_OK（参见上述要求），则 **Dcm** 应通过调用 SchM_Switch_&lt;bsnp&gt;_DcmControlDTCSetting(RTE_MODE_DcmControlDTCSetting_DISABLEDTCSETTING) 触发 ModeDeclarationGroupPrototype DcmControlDTCSetting 的模式切换。
+
+在 DTCSetting 已被禁止的情况下，若发生到默认会话的切换，或发生任何诊断会话切换而新会话不再支持 **UDS** 服务 **ControlDTCSetting**，则 **Dcm** 模块应以下列参数调用 Dem_EnableDTCSetting()：
+
+- ClientId：该 **Dcm** 实例的 Client Id（参见 DcmDemClientRef）
+
+并将模式 DcmControlDTCSetting 切换为 DCM_ENABLEDTCSETTING。
+
+对于某些使用场景，**Dcm** 可能因外部模式条件变化而重新允许 controlDTCSetting：
+
+在 DTCSetting 已被禁止的情况下，若为 DTCSettingType “OFF”（0x02）的 **ControlDTCSetting**（0x85）服务所引用的任意 ModeDeclarationGroupPrototype（参见配置参数 DcmDspControlDTCSettingReEnableModeRuleRef）至少有一个不再满足，则 **Dcm** 模块应以下列参数调用 Dem_EnableDTCSetting()：
+
+- ClientId：该 **Dcm** 实例的 Client Id（参见 DcmDemClientRef）
+
+并将模式 DcmControlDTCSetting 切换为 DCM_ENABLEDTCSETTING。
+
+**注意：** 如果为 DTCSettingType “OFF”（0x02）的 **ControlDTCSetting**（0x85）服务配置了至少一个 ModeDeclarationGroupPrototype（参见配置参数 DcmDspControlDTCSettingReEnableModeRuleRef），则建议激活相应子功能 0x02 的条件检查（参见配置参数 DcmDsdSubServiceModeRuleRef）。
+
+**注意：** 对所引用模式声明组的这种主动观察，既可以通过在每个 MainFunction 周期中轮询模式条件实现，也可以通过挂接模式声明组的变更通知实现（**SchM** 会在该模式声明组变化时触发 **Dcm** 中的 BSW 实体）。
+
+如果配置参数 DcmSupportDTCSettingControlOptionRecord 设置为 TRUE，且请求中 DTCSettingControlOptionRecord 的长度不等于 3 字节，则 **Dcm** 应返回 **NRC** 0x13（Incorrect message length or invalid format）。
+
+如果配置参数 DcmSupportDTCSettingControlOptionRecord 设置为 FALSE，且请求在子功能之后包含任何数据，则 **Dcm** 应返回 **NRC** 0x13（Incorrect message length or invalid format）。
+
+如果配置参数 DcmSupportDTCSettingControlOptionRecord 设置为 FALSE，且请求在子功能之后包含任何数据，则 **Dcm** 应返回 **NRC** 0x13（Incorrect message length or invalid format）。
+
+##### 6.6.2.25. 服务 0x86 - ResponseOnEvent（RoE）
+
+借助 **UDS** 服务 **ResponseOnEvent**（0x86），诊断仪可以请求服务器启动或停止发送由指定服务器事件所触发的响应。
+
+**ResponseOnEvent 的支持（Support of ResponseOnEvent）**：**Dcm** 应按照 **ISO 14229-1:2020** [8] 支持 **UDS** 服务 **ResponseOnEvent**（0x86）及其所有子功能。
+
+**不支持的 storageState 位（Not supported storageState bit）**：如果 DcmDspRoeStoreEventSupport 设置为 FALSE，且接收到 storeEvent 位设置为 1 的 RoE 请求，则 **Dcm** 应发送 **NRC** 0x31（requestOutOfRange）。
+
+**eventWindowTime 的支持（Support of eventWindowTime）**：**Dcm** 应按照 **ISO 14229-1:2020** [8] 支持设置为 infiniteTimeToResponse 和 powerWindowTime 的 eventWindowTime。
+
+**DTC 状态变化触发（DTC status changed trigger）**：**Dcm** 应使用对 Dcm_DemTriggerOnDTCStatus() 的调用作为 **DTC** 状态变化的触发。
+
+由谁调用 Dcm_DemTriggerOnDTCStatus() 由 **Dcm** 留待决定。不过，**Dcm** API 被设计为与 **Dem** 模块兼容。如果使用 **Dem**，建议将一个 **Dem** **DTC** 状态触发通知映射到 Dcm_DemTriggerOnDTCStatus()。
+
+**ClearDiagnosticInformation 期间不产生 onDTCStatusChangedEvents**：在 **Dcm** 处理 **ClearDiagnosticInformation** 请求期间，**Dcm** 应忽略回调 Dcm_DemTriggerOnDTCStatus。
+
+**丢弃因传输错误而无法发送的 serviceToRespondTo 消息（Discard serviceToRespondToMessage on transmission errors）**：**Dcm** 应丢弃所有因传输错误而无法发送的 serviceToRespondTo 消息。
+
+对于失败的 RoE 响应，不存在用于后续发送的排队机制。
+
+**对 service to respond to 的认证检查（Authentication check for service to respond to）**：在发送 service to respond to 时，**Dcm** 应执行服务认证检查，并仅为已授予该连接访问权限的服务发送正响应。
+
+**ResponseOnEvent 调度器速率（ResponseOnEvent scheduler rate）**：**Dcm** 应按照 **ISO 14229-1:2020** [8] 实现 RoE 调度器，并将所配置的调度器速率 DcmDspRoeSchedulerRate 映射为 **ISO 14229-1:2020** [8] 中的 ResponseOnEventSchedulerRate。
+
+**每个调度器所允许的变化 DID 最大数量（Maximum number of changed DIDs per scheduler）**：**Dcm** 应通过将 DcmDspRoeMaxNumChangeOfDataIdentfierEvents 映射为 **ISO 14229-1:2020** [8] 中的 MaxNumChangeOfDataIdentfierEvents，提供每个 RoE 调度器所允许的变化 **DID** 最大数量。
+
+如果 **Dcm** 被配置为支持子功能为 onChangeOfDataIdentifier 的服务 **ResponseOnEvent**，则应配置 DcmDspRoeMaxNumChangeOfDataIdentfierEvents。
+
+**每个调度器所允许的 DID 值比较最大数量（Maximum number of comparison of value DIDs per scheduler）**：**Dcm** 应通过将 DcmDspRoeMaxNumChangeOfDataIdentfierEvents 映射为 **ISO 14229-1:2020** [8] 中的 MaxNumComparisionOfValueEvents，提供每个 RoE 调度器所允许的 **DID** 值比较最大数量。
+
+如果 **Dcm** 被配置为支持子功能为 onComparisionOfValues 的服务 **ResponseOnEvent**，则应配置 DcmDspRoeMaxNumChangeOfDataIdentfierEvents。
+
+**所支持的 DID 最大长度（Maximum supported DID length）**：**Dcm** 应通过将 DcmDspRoeMaxSupportedDIDLength 映射为 **ISO 14229-1:2020** [8] 中的 MaxSupportedDIDLength，提供作为 **ResponseOnEvent** 事件输入的 **DID** 最大长度。
+
+如果 **Dcm** 被配置为支持子功能为 onChangeOfDataIdentifier 或 onComparisionOfValues 的服务 **ResponseOnEvent**，则应配置 DcmDspRoeMaxSupportedDIDLength。
+
+**每个调度器所允许的变化 DTC 最大数量（Maximum number of changed DTCs per scheduler）**：**Dcm** 应通过将 DcmDspRoeMaxNumberOfStoredDTCStatusChangedEvents 映射为 **ISO 14229-1:2020** [8] 中的 MaxNumberOfStoredDTCStatusChangedEvents，提供 **DTC** 状态变化事件的最大数量。
+
+如果 **Dcm** 被配置为支持子功能为 onDTCStatusChange 的服务 **ResponseOnEvent**，则应配置 DcmDspRoeMaxNumberOfStoredDTCStatusChangedEvents。
+
+##### 6.6.2.26. 服务 0x87 - LinkControl
+
+该服务用于为诊断目的获取总线带宽。
+
+服务 **LinkControl**（0x87）是用户可选的。存在不同的项目特定使用场景，默认 **Dcm** 并不处理这些场景。一个使用场景是切换应用中的带宽，另一个使用场景是执行 **OEM** 引导加载程序跳转。
+
+因此，服务 **LinkControl** 需要作为外部服务按项目特定方式实现（参见 §7.8 将 **Dcm** 作为服务组件）。
+
+##### 6.6.3. OBD 服务
+
+###### 6.6.3.1. 概述
+
+下表定义了 **DCM** 所支持的 **OBD** 服务。
+
+表7.28：DCM 中 OBD 服务的支持情况（**Support for OBD services in the DCM**）
+
+| 相关 **OBD** 服务标识符 | **DCM** 中的支持情况 |
+|---|---|
+| $01 | 支持 |
+| $02 | 支持 |
+| $03 | 支持 |
+| $04 | 支持 |
+| $06 | 支持 |
+| $07 | 支持 |
+| $08 | 支持 |
+| $09 | 支持 |
+| $0A | 支持 |
+
+###### 6.6.3.2. 通用行为
+
+在许多情况下，**Dcm** 协议允许将多个请求（例如多个“PID”）捆绑在一起，并相应地捆绑响应。各服务的行为描述并未显式考虑这一点。由于 **Dcm** 需要符合 **OBD** 标准（如下文各项要求所定义），**Dcm** 可能需要重复下文所定义的步骤来解析请求并组装有效的响应。
+
+在车辆中可以有 3 种不同类型的 **OBD** **ECU**：
+
+- **主 ECU**（Master ECU，每辆车一个）
+- **主控 ECU**（Primary ECU，每辆车若干个）
+- **从属 / 次级 ECU**（Dependent / Secondary ECU，每辆车若干个）
+
+从基础软件的角度看，从属 / 次级 **ECU** 不需要任何特定的 **OBD** 功能。在从属 / 次级 **ECU** 中，**OBD** 相关信息不会存储在基础软件中（例如不与扫描工具直接通信）。相应的 **OBD** 功能在从属 / 次级 **ECU** 中可能由 SWC 处理。
+
+以下 **OBD** 要求仅对主 **ECU** 与主控 **ECU** 有效。必要时 **OBD** 要求会区分主 **ECU** 要求与主控 **ECU** 要求。
+
+下表概述了主 **ECU**、主控 **ECU** 与从属 / 次级 **ECU** 中必须支持哪些 **OBD** 功能：
+
+表7.29：不同 OBD ECU 中 OBD 功能概述（**Overview about OBD functionality in different OBD ECUs**）
+
+| 功能 | 主 ECU | 主控 ECU | 从属 / 次级 ECU |
+|---|---|---|---|
+| **OBD** 扫描工具通信 | 是 | 是 | 否 |
+
+在为 **OBD** 服务调用 **DEM** 模块时，**Dcm** 模块应为参数 DTCOrigin 使用以下值：
+
+- 服务 $0A 使用 DEM_DTC_ORIGIN_PERMANENT_MEMORY
+- 所有其他服务使用 DEM_DTC_ORIGIN_OBD_RELEVANT_MEMORY
+
+###### 6.6.3.3. 服务 $01 - Request Current Powertrain Diagnostic Data
+
+**Dcm** 模块应按照 **OBD** 标准的全部规定实现 **OBD** 服务 $01（Request Current Powertrain diagnostic Data）。
+
+使用服务 $01，外部测试工具可以请求与排放相关的 **ECU** 返回 PID 值或返回受支持的 PID。**OBD** 保留某些 PID 用于特殊目的，以获取某一范围内的可用 PID 列表。这些 PID 称为“可用性 PID”（availability PID），即 $00、$20、$40、$60、$80、$A0、$C0 和 $E0。
+
+**Dcm** 从 1 到 n 个 SW-C 收集 PID 信息。这尤其适用于包含来自可能不同来源的多个数据值的 PID。例如：PID$83 在一个组合 PID 中报告传感器 1 与传感器 2 的 Nox 传感器数据，这些数据可能来自不同的 SW-C。
+
+**Dcm** 配置定义了 **ECU** 上可用的 PID。**Dcm** 配置为每个这样的 PID 定义：
+
+- PID 标识符（参见配置参数 DcmDspPidIdentifier）
+- 该 PID 是否被使用的指示（用于 postbuild 配置，参见配置参数 DcmDspPidUsed）
+- 该 PID 的大小（参见配置参数 DcmDspPidSize）
+- 该 PID 所支持的信息（参见配置参数 DcmDspPidSupportInfo）
+- 该 PID 的数据列表（DcmDspPidData），其中每个数据具有以下配置：
+    - 与该 PID 关联的数据长度（参见配置参数 DcmDspPidDataByteSize）
+    - 该数据在 PID 中的位置（参见配置参数 DcmDspPidByteOffset）
+    - 对所支持信息容器的引用（参见配置参数 DcmDspPidDataSupportInfo）
+    - **Dcm** 为获取该数据当前值必须调用的 Xxx_ReadData() 函数，或 **Dcm** 用于通过 **RTE** 从 SW-C 获取当前值的端口名（参见配置参数 DcmDspPidDataReadFnc 和 DcmDspPidDataUsePort）
+
+在接收到仅以“可用性 PID”为参数的 **OBD** 服务 $01 请求时，**Dcm** 应以相应的受支持（即已配置）PID 进行响应，并按 **OBD** 标准编码。
+
+为获取某个 PID 的值，**Dcm** 对该 PID 的每个数据使用所配置的 Xxx_ReadData() 函数。为提供 **OBD** 服务 $01，**Dcm** 依赖外部函数来获取 PID 的值。**DCM** 所需的每个 PID 的每个数据都对应一个这样的函数。
+
+使用 Xxx_ReadData() 函数时，**Dcm** 提供长度正确的缓冲区，该函数将 PID 数据值填入其中。
+
+在接收到仅包含非“可用性 PID”的 PID 的 **OBD** 服务 $01 请求时，**Dcm** 应通过对该 PID 的每个数据调用所配置的 Xxx_ReadData() 函数来获取这些 PID 的当前值，并将这些值作为服务 $01 的响应返回。
+
+在接收到“可用性 PID”与非“可用性 PID”混合的 **OBD** 服务 $01 请求时，该请求应被 **Dcm** 忽略。
+
+为某个 PID 的特定信号提供 Xxx_ReadData() 函数实际实现的实体，可能是某个 SW-C 或另一个基础软件模块。该函数的来源对 **Dcm** 不可知，但属于 **Dcm** 配置的一部分。某些 PID 由 **DEM** 提供。这些 PID 也显式配置在 **Dcm** 配置中，正确的 **Dcm** 配置需负责使 Xxx_ReadData() 函数指向 **DEM** 所提供的正确函数。
+
+**DcmDspPidDataReadFnc 的依赖关系（Dependency for DcmDspPidDataReadFnc）**：DcmDspPidDataReadFnc 应仅在 DcmDspPidDataUsePort 设置为 USE_DATA_SYNCH_FNC 时存在。
+
+对于某些 PID，**Dem** 提供获取 PID 值的函数。哪些 PID 来自 **Dem**，属于 **Dcm** 配置的一部分。
+
+**注意：** 对于由 **Dem** 提供函数的 PID，该 PID 的 DcmDspPidDataUsePort 应设置为 USE_DATA_SYNCH_FNC，且 DcmDspPidDataReadFnc 应指向函数 Dem_DcmReadDataOfPID&lt;NN&gt;，其中 &lt;NN&gt; 表示该 PID 的 Id。
+
+PID 的数据字节 A 包含后续数据字节的支持状态。由于特定车辆配置可能导致并非所有数据值都可用（例如在上述示例中车辆仅有一个 Nox 传感器 1），PID 响应会在该数据字节 A 中给出后续数据值支持状态的信息。注意，即使并非所有值都真正可用，PID 也始终包含相同数量的字节。
+
+如果某个 PID 包含支持信息（存在 DcmDspPidDataSupportInfo 容器），**Dcm** 应在诊断响应中加入该支持信息。
+
+如果某个 PID 包含支持信息（存在 DcmDspPidDataSupportInfo 容器），**Dcm** 应根据该 PID 的可用数据计算支持信息值：对于该 PID 存在的每个 DcmDspPidData 容器，DcmDspPidDataSupportInfo 中所引用的关联支持信息位应设置为 1。
+
+对 **OBD** 诊断仪的响应需要由可用的数据值组合而成。未由 SW-C 提供的数据字节需要用填充字节替换，以获得完整的 PID 内容。
+
+在对 **OBD** 服务 $01 进行响应时，**Dcm** 应在 PID 中 DcmDspPidData 之间插入填充字节以补齐 PID 大小（参见配置参数 DcmDspPidSize），以应对内容字节缺失的情况。
+
+**Dcm** 应将填充字节设置为 0x00。
+
+**注意：** 如果法规要求使用 0x00 以外的填充字节，则应用程序必须提供该填充字节的值。
+
+为将所需的 **AUTOSAR** 数据类型（有符号和无符号整数）序列化到 **OBD** 服务 $01 的响应消息中，对于 DcmDspPidDataUsePort 设置为 USE_DATA_SENDER_RECEIVER 或 USE_DATA_SENDER_RECEIVER_AS_SERVICE 的 DcmDspPidData 元素，应考虑 DcmDspPidDataEndianness 中所配置的目标字节序。在未提供 DcmDspPidDataEndianness 的情况下，应改用 DcmDspDataDefaultEndianness。
+
+**DcmDspPidDataEndianness 的依赖关系（Dependency for DcmDspPidDataEndianness）**：在未提供 DcmDspPidDataEndianness 的情况下，应改用 DcmDspDataDefaultEndianness。
+
+###### 6.6.3.4. 服务 $02 - Request Power Train FreezeFrame Data
+
+**Dcm** 应按照 **OBD** 标准的全部规定实现 **OBD** 服务 $02（Request Power Train FreezeFrame Data）。
+
+对于 **OBD** 相关的 FreezeFrame，**AUTOSAR** 仅支持帧 0，这是法规所要求的最小值。
+
+**Dcm** 应忽略所有 record-number 不为 0 的请求。
+
+在接收到“可用性 PID”与非“可用性 PID”混合的 **OBD** 服务 $02 请求时，该请求应被 **Dcm** 忽略。
+
+在对 **OBD** 服务 $02 进行响应时，**Dcm** 应在 PID 中 DcmDspPidData 之间插入填充字节以补齐 PID 大小（参见配置参数 DcmDspPidSize），以应对内容字节缺失的情况。
+
+**Dcm** 应将填充字节设置为 0x00。
+
+**注意：** 如果法规要求使用 0x00 以外的填充字节，则应用程序必须提供该填充字节的值。
+
+以下各部分定义了 **Dcm** 如何处理特定的 PID。
+
+**服务 $02 - PID$02**：外部测试工具可以通过使用 PID 值为 $02 的服务 $02，请求导致 FreezeFrame 被存储的 **DTC**。
+
+在接收到 PID 为 $02 的服务 $02 请求时，**Dcm** 应调用 Dem_DcmGetDTCOfOBDFreezeFrame()，并将 FrameNumber 设置为 0x00，以获取 **DTC** 编号。
+
+**Dem** 模块返回相应的 **DTC**。注意，该 2 字节 **DTC** 被封装进调用 Dem_DcmGetDTCOfOBDFreezeFrame() 所返回的 4 字节数据中，具体做法参见 **Dem** 规范。
+
+如果 Dem_DcmGetDTCOfOBDFreezeFrame 返回 E_NOT_OK，则 **Dcm** 应以 $0000 正面响应（表示没有已存储的冻结帧数据）。
+
+**服务 $02 - 可用性 PID**：使用服务 $02，外部测试工具可以通过“可用性 PID”请求特定冻结帧的受支持 PID。
+
+在接收到带有“可用性 PID”的服务 $02 请求时，**Dcm** 应以相应的受支持（即已配置）PID 进行响应，并按 **OBD** 标准编码。
+
+**服务 $02 - 其他 PID**：使用服务 $02，外部测试工具可以请求特定 FreezeFrame 中特定 PID 的值。
+
+在接收到 PID 既不是“可用性 PID”也不是 $02 的服务 $02 请求时，**Dcm** 应对该 PID 的每个数据调用 Dem_DcmReadDataOfOBDFreezeFrame()，并使用以下参数值：
+
+- PID = **OBD** 请求中所接收到的 PID
+- DestBuffer = 被调用者可在其中写入 PID 值的缓冲区
+- BufSize = DestBuffer 的大小，其至少应等于 **DCM** 中所配置的存储该 PID 值所需的大小
+- DataElementIndexOfPid = 由 **Dcm** 按照该 PID 中各数据元素位置的顺序计算得到的隐式索引（从 0 到 n，参见参数 DcmDspPidByteOffset）
+
+注意，**Dcm** 模块无需锁定或解锁 **Dem** 模块的记录更新。
+
+在完成上述调用之后，**Dcm** 应生成响应消息，其中包含相应的 PID、FreezeFrame Number 以及所请求 FreezeFrame 编号的关联数据记录。
+
+如果 Dem_DcmReadDataOfOBDFreezeFrame() 返回 E_NOT_OK 且仅请求了单个 PID，则 **Dcm** 不应给出任何应答。
+
+如果 Dem_DcmReadDataOfOBDFreezeFrame() 返回 E_NOT_OK 且所请求的多个 PID 中所有 PID 均不受支持，则 **Dcm** 不应给出任何应答。
+
+如果 Dem_DcmReadDataOfOBDFreezeFrame() 返回 E_NOT_OK 且所请求的多个 PID 中至少有一个 PID 受支持，则 **Dcm** 应发送包含受支持 PID 数据的正响应。
+
+###### 6.6.3.5. 服务 $03 $07 $0A - 获取 DTC
+
+**Dcm** 模块应按照 **OBD** 标准的全部规定实现 **OBD** 服务 $03（Request emission-related diagnostic trouble codes）。
+
+**Dcm** 模块应按照 **OBD** 标准的全部规定实现 **OBD** 服务 $07（Request Emission-Related Diagnostic Trouble Codes Detected during Current or Last Completed Driving Cycle）。
+
+**Dcm** 模块应按照 **OBD** 标准的全部规定实现 **OBD** 服务 $0A（Request Emission-Related Diagnostic Trouble Codes with Permanent Status）。
+
+外部测试工具可以分别发送请求 $03、$07、$0A，要求与排放相关的 **ECU** 报告所有已存储的、待定的或永久性的排放相关 **DTC**。
+
+在接收到 **OBD** 服务 $03 请求时，**Dcm** 模块应使用函数 Dem_SetDTCFilter() 和 Dem_GetNextFilteredDTC() 从 **DEM** 获取主存储器中所有状态为“confirmed”的 **DTC**。
+
+**注意：** **Dcm** 模块可以通过 Dem_GetNumberOfFilteredDTC() 获得 Dem_GetNextFilteredDTC() 将查找到的记录数量的指示。这使得实现可以在遍历 **DTC** 之前计算出响应的总大小。
+
+在接收到 **OBD** 服务 $07 请求时，**Dcm** 模块应使用函数 Dem_SetDTCFilter() 和 Dem_GetNextFilteredDTC() 从 **DEM** 模块获取主存储器中所有状态为“pending”的 **DTC**。
+
+**注意：** **Dcm** 模块可以通过 Dem_GetNumberOfFilteredDTC() 获得 Dem_GetNextFilteredDTC() 将查找到的记录数量的指示。这使得实现可以在遍历 **DTC** 之前计算出响应的总大小。
+
+在接收到 **OBD** 服务 $0A 请求时，**Dcm** 模块应使用函数 Dem_SetDTCFilter() 和 Dem_GetNextFilteredDTC() 从 **DEM** 获取永久存储器中存储的所有 **DTC**。
+
+**注意：** **Dcm** 模块可以通过 Dem_GetNumberOfFilteredDTC() 获得 Dem_GetNextFilteredDTC() 将查找到的记录数量的指示。这使得实现可以在遍历 **DTC** 之前计算出响应的总大小。
+
+下表说明了 **Dcm** 模块在响应 **OBD** 服务 $03、$07 或 $0A 请求时必须用于调用 Dem_SetDTCFilter() 的参数。
+
+表7.30：Dem_SetDTCFilter 参数（**Dem_SetDTCFilter Parameters**）
+
+| Dem_SetDTCFilter 的参数 | $03 | $07 | $0A |
+|---|---|---|---|
+| ClientId | 该 **Dcm** 实例的 Client Id（参见 DcmDemClientRef） | 该 **Dcm** 实例的 Client Id（参见 DcmDemClientRef） | 该 **Dcm** 实例的 Client Id（参见 DcmDemClientRef） |
+| DTCStatusMask | 0x08（confirmed 位已置位） | 0x04（pending 位已置位） | 0x00 |
+| DTCFormat | DEM_DTC_FORMAT_OBD | DEM_DTC_FORMAT_OBD | DEM_DTC_FORMAT_OBD |
+| DTCOrigin | DEM_DTC_ORIGIN_OBD_RELEVANT_MEMORY | DEM_DTC_ORIGIN_OBD_RELEVANT_MEMORY | DEM_DTC_ORIGIN_PERMANENT |
+| FilterWithSeverity | FALSE | FALSE | FALSE |
+| DTCSeverityMask | 不相关 | 不相关 | 不相关 |
+| FilterForFaultDetectionCounter | FALSE | FALSE | FALSE |
+
+在使用分页缓冲机制时，某些情况下匹配过滤器的 **DTC** 数量可能在计算首页传输所需的总大小与发送后续页之间发生变化。因此，在实现该服务时应考虑对分页缓冲与响应挂起的要求（参见 §6.4.4.8 与 §6.4.4.9）。
+
+如果 Dem_GetNextFilteredDTC 返回 DEM_NO_SUCH_ELEMENT，且此前已能获取到至少一个匹配元素，则 **Dcm** 应发送包含这些数据元素以及 **DTC** 数量的正响应。
+
+如果 Dem_GetNextFilteredDTC 返回 DEM_NO_SUCH_ELEMENT，且此前未能获取到任何匹配元素，则 **Dcm** 应发送 **DTC** 数量设置为 0x00 的正响应。
+
+###### 6.6.3.6. 服务 $04 - Clear/reset emission-related diagnostic information
+
+**Dcm** 模块应按照 **OBD** 标准的全部规定实现 **OBD** 服务 $04（Clear/reset emission-related diagnostic information）。
+
+外部测试工具可以发送请求 $04，要求与排放相关的 **ECU** 清除错误存储器。
+
+在接收到 **OBD** 服务 $04 请求时，**Dcm** 模块应使用以下参数值调用接口 Dem_SelectDTC：
+
+- ClientId：该 **Dcm** 实例的 Client Id（参见 DcmDemClientRef）
+- DTC = DEM_DTC_GROUP_ALL_DTCS
+- DTCFormat = DEM_DTC_FORMAT_OBD
+- DTCOrigin = DEM_DTC_ORIGIN_OBD_RELEVANT_MEMORY
+
+如果 Dem_ClearDTC() 返回 E_OK，则 **Dcm** 模块应发送正响应。
+
+如果 Dem_ClearDTC() 返回 DEM_PENDING，则 **Dcm** 应在下一次 Dcm_MainFunction 调用时再次调用 Dem_ClearDTC()。是否发送 **NRC** 0x78（ResponsePending）以符合响应行为，由 **Dcm** 自行决定。
+
+如果 Dem_ClearDTC() 返回 DEM_CLEAR_FAILED，则 **Dcm** 应发送否定响应 0x22（conditionsNotCorrect）。
+
+如果 Dem_ClearDTC() 返回 DEM_CLEAR_BUSY，则 **Dcm** 应发送否定响应 0x22（ConditionsNotCorrect）。
+
+如果 Dem_ClearDTC() 返回 DEM_CLEAR_MEMORY_ERROR，则 **Dcm** 模块应发送否定响应 0x22（ConditionNotCorrect）。
+
+###### 6.6.3.7. 服务 $06 - Request On-Board Monitoring Test-results for Specific Monitored Systems
+
+**通用要求（General requirements）**：**Dcm** 模块应按照 **OBD** 标准的全部规定实现 **OBD** 服务 $06（Request OnBoard Monitoring Test-results for Specific Monitored Systems）。
+
+使用服务 $06，外部测试工具可以请求与排放相关的 **ECU** 返回与 **OBD**MID 关联的 DTR，或返回受支持的 **OBD**MID。**OBD** 保留某些 **OBD**MID 用于特殊目的，以获取某一范围内受支持 **OBD**MID 的列表。这些 **OBD**MID 称为“可用性 **OBD**MID”（availability OBDMID），即 $00、$20、$40、$60、$80、$A0、$C0 和 $E0。
+
+诊断仪对受支持 **OBD**MID 的请求最多可包含六（6）个“可用性 **OBD**MID”。
+
+在接收到以“可用性 **OBD**MID”与其他 **OBD**MID 同时作为参数的 **OBD** 服务 $06 请求时，**Dcm** 模块应忽略该请求。
+
+在接收到带有多个非可用性 **OBD**MID 的 **OBD** 服务 $06 请求时，**Dcm** 模块应忽略该请求。
+
+**通过 Dem 交互获取的测试结果（Test results obtained via Dem interaction）**：DTR 的维护属于 **DEM** 的职责。报告 DTR 的 SW-C 使用 **DEM** 所提供的专用接口。在诊断仪请求时，**Dcm** 使用专用的 **DEM** 接口从 **DEM** 获取信息。**Dcm** 与 SW-C 之间没有直接交互。
+
+在接收到仅以“可用性 **OBD**MID”为参数的 **OBD** 服务 $06 请求时，**Dcm** 模块应对请求中所包含的每个“可用性 **OBD**MID（$00、$20 等）”调用 **Dem** 接口 Dem_DcmGetAvailableOBDMIDs() 以获取受支持的 **OBD**MID，并按照 **ISO 15031-5** [2] 在响应消息中拼接结果。
+
+在接收到带有不属于“可用性 **OBD**MID”的 **OBD**MID 的 **OBD** 服务 $06 请求时，**Dcm** 模块应调用 **DEM** 接口 Dem_DcmGetNumTIDsOfOBDMID() 以获取所请求 **OBD**MID 可用的 TID，然后对已报告的 TID 数量重复调用接口 Dem_DcmGetDTRData()，以获取关联的 DTR 数据。
+
+###### 6.6.3.8. 服务 $08 - Request Control of On-Board System, Test or Component
+
+**Dcm** 模块应按照 **OBD** 标准的全部规定实现 **OBD** 服务 $08（Request Control of On-Board System, Test or Component）。
+
+使用服务 $08，外部测试工具可以使用 TID 控制车载系统、测试或组件。**OBD** 保留某些 TID 用于特殊目的，以获取某一范围内受支持 TID 的列表。这些 TID 称为“可用性 TID”（availability TID），即 $00、$20、$40、$60、$80、$A0、$C0 和 $E0。
+
+**Dcm** 模块的配置定义了 **ECU** 上可用于 **OBD** 服务 $08 的 TID。该配置为每个这样的 TID（参见配置参数 DcmDspRequestControlTestId）定义：
+
+- **Dcm** 用于访问 RequestControlServices 接口的端口名（参见配置参数 DcmDspRequestControl）
+- 该函数作为输入接收的字节数（参见配置参数 DcmDspRequestControlInBufferSize）
+- 该函数作为输出写入的字节数（参见配置参数 DcmDspRequestControlOutBufferSize）
+
+为提供 **OBD** 服务 $08，**Dcm** 依赖按 TID 配置的外部函数。
+
+在接收到带有一个或多个“可用性 TID”作为参数的 **OBD** 服务 $08 请求时，**Dcm** 模块应以相应的受支持（即已配置）TID 进行响应。
+
+在接收到以“可用性 TID”与其他 TID 同时作为参数的 **OBD** 服务 $08 请求时，**Dcm** 模块应忽略该请求。
+
+在接收到带有不属于“可用性 TID”的 TID 的 **OBD** 服务 $08 请求时，**Dcm** 模块应使用以下参数值调用所配置的 Xxx_RequestControl() 函数：InBuffer 为 **OBD** 请求中所包含的数据（其大小必须与 **Dcm** 模块配置中所配置的大小一致）；OutBuffer 为 RequestControl 函数可存储其结果的空间（该缓冲区的大小取自 **Dcm** 模块的配置）。
+
+在上述调用执行之后，**Dcm** 模块应使用 RequestControl 函数存储在 OutBuffer 中的数据响应该服务请求。
+
+按照 SAE J1979 [3] 的规定，未使用的数据字节应填充为 $00。
+
+如果 Xxx_RequestControl() 未返回 E_OK，则 **Dcm** 应返回 **NRC** 0x22。
+
+###### 6.6.3.9. 服务 $09 - Request Vehicle Information
+
+**Dcm** 模块应按照 **OBD** 标准的全部规定实现 **OBD** 服务 $09（Request Vehicle Information）。
+
+使用服务 $09，外部测试工具可以请求车辆信息，或获取受支持车辆信息的列表。**OBD** 保留某些 InfoType 用于特殊目的，以获取某一范围内受支持 InfoType 的列表。这些 InfoType 称为“可用性 InfoType”（availability InfoType），即 $00、$20、$40、$60、$80、$A0、$C0 和 $E0。
+
+**Dcm** 模块的配置定义了在一个或多个 SW-C 上可用的 InfoType 及关联数据。该配置为每个这样的 InfoType 定义：
+
+- InfoType 的值（参见配置参数 DcmDspVehInfoInfoType）
+- 该 InfoType 的每个数据：
+    - 该数据在 InfoType 中的位置（参见配置参数 DcmDspVehInfoDataOrder）
+    - InfoType 数据值的大小（参见配置参数 DcmDspVehInfoDataSize）
+    - **Dcm** 模块为获取该 InfoType 数据值必须调用的函数，或 **Dcm** 模块可借以获取该 InfoType 数据值的端口名（参见配置参数 DcmDspVehInfoDataReadFnc 和 DcmDspVehInfoDataUsePort）
+
+为提供 **OBD** 服务 $09，**Dcm** 依赖外部函数来获取 InfoType 数据的值。**DCM** 所需的每个 InfoType 数据都对应一个这样的函数。
+
+在调用 Xxx_GetInfotypeValueData() 函数时，**Dcm** 模块提供大小正确的缓冲区，用于存储 InfoType 数据的值。为特定 InfoType 数据提供 Xxx_GetInfotypeValueData() 函数实际实现的实体，可能是某个 SW-C 或另一个基础软件模块。该函数的来源属于 **Dcm** 模块配置的一部分。
+
+**Dcm** 为提供服务 $09 所需的某些 InfoType 由 **DEM** 提供。这在 **Dcm** 配置中处理。
+
+在接收到带有一个或多个“可用性 InfoType”作为参数的 **OBD** 服务 $09 请求时，**Dcm** 模块应以相应的受支持（即已配置）InfoType 进行响应。
+
+在接收到以“可用性 InfoType”与其他 InfoType 同时作为参数的 **OBD** 服务 $09 请求时，**Dcm** 模块应忽略该请求。
+
+在接收到针对不属于“可用性 InfoType”的 InfoType 的 **OBD** 服务 $09 请求时，**Dcm** 模块应通过对该 InfoType 的每个数据调用所有已配置的 Xxx_GetInfotypeValueData() 函数来获取该 InfoType 的值，并将该值作为服务 $09 的响应返回。
+
+在 DcmDspVehInfoNODIProvResp 设置为 FALSE 的情况下，除收集各个 SW-C 所提供的可用 InfoType 值内容之外，**Dcm** 还应计算诊断响应中的数据字节 NofDataItems，该字节定义了一个 InfoType 中所包含的 DataItem 数量。
+
+**注意：** 校准标识（CAL-ID）与校准验证号（CVN）的计算不属于 BSW 任务，不在 **DCM** 中处理。
+
+在 DcmDspVehInfoNODIProvResp 设置为 TRUE 的情况下，**Dcm** 应接管提供方所返回的值，并将其作为诊断响应中的 NofDataItems 报告。
+
+在责任位于提供方一侧（DcmDspVehInfoNODIProvResp 设置为 TRUE）的情况下，只应允许一个 DcmDspVehInfoData 容器。
+
+在 DcmDspVehInfoDataUsePort 设置为 FALSE 且 DcmDspVehInfoDataReadFnc 设置为 Dem_DcmGetInfoTypeValue08 或 Dem_DcmGetInfoTypeValue0B 的情况下，DcmDspVehInfoNODIProvResp 应设置为 TRUE。
+
+**注意：** 集成方必须确保由 DcmDspVehInfoDataSize 所确定的缓冲区足够大，以接收数据提供方所返回的数据。
+
+如果 Xxx_GetInfoTypeValueData() 未返回 E_OK 或 E_PENDING，则 **Dcm** 应返回 **NRC** 0x22。
+
+#### 6.6.4. 交互用例
+
+**Dcm** 应能够处理跳转到 Bootloader 以及因 **ECUReset** 请求而发生的跳转。由于实现这类跳转的方式多种多样，因此将通过 **callout** 调用完成。
+
+##### 6.6.4.1. 跳转到 Bootloader
+
+在所有前置条件均已满足、并假定 'suppressPosRspMsgIndicationBit' 标志设置为 'false' 的情况下，已识别出跳转到 Bootloader 的 4 种不同用例：
+
+1. 应用立即发送最终正响应，然后跳转到 Bootloader
+2. 应用先发送 NRC 0x78 响应，然后发送最终正响应，随后跳转到 Bootloader
+3. 应用立即跳转到 Bootloader，由 Bootloader 发送最终正响应
+4. 应用先发送 NRC 0x78 响应，然后跳转到 Bootloader，由 Bootloader 发送最终正响应
+
+**注意：** 在 'suppressPosRspMsgIndicationBit' 标志设置为 'true' 的情况下，用例 '1' 和用例 '3' 将不发出正响应。
+
+在接收到服务 DiagnosticSessionControl 时，如果所提供的会话用于跳转到 OEM Bootloader（参数 DcmDspSessionForBoot 设置为 DCM_OEM_BOOT 或 DCM_OEM_BOOT_RESPAPP），则 **Dcm** 应通过触发 ModeDeclarationGroupPrototype DcmEcuReset 向 JUMPTOBOOTLOADER 的模式切换，为跳转到 OEM Bootloader 做准备（参见下文关于 Dcm_SetProgConditions 的说明）。
+
+**注意：** 通过该模式切换，**Dcm** 通知 **BswM** 为跳转到 Bootloader 做准备。
+
+在接收到服务 DiagnosticSessionControl 时，如果所提供的会话用于跳转到 System Supplier Bootloader（参数 DcmDspSessionForBoot 设置为 DCM_SYS_BOOT 或 DCM_SYS_BOOT_RESPAPP），则 **Dcm** 应通过触发 ModeDeclarationGroupPrototype DcmEcuReset 向 JUMPTOSYSSUPPLIERBOOTLOADER 的模式切换，为跳转到 System Supplier Bootloader 做准备（参见下文关于 Dcm_SetProgConditions 的说明）。
+
+**注意：** 通过该模式切换，**Dcm** 通知 **BswM** 为跳转到 Bootloader 做准备。
+
+如果服务 DiagnosticSessionControl 意味着一次 ECU 复位，则在该复位处理期间，**Dcm** 应忽略所有后续请求。
+
+如果 ModeDeclarationGroupPrototype DcmEcuReset 切换到模式 JUMPTOBOOTLOADER 或 JUMPTOSYSSUPPLIERBOOTLOADER，且配置参数 DcmSendRespPendOnRestart 设置为 TRUE，则 **Dcm** 应触发发送 NRC 0x78 - RCR-RP。
+
+**注意：** 在切换到 Bootloader 之前发送的这一最终 NRC 0x78 应重新装载客户端中的 P2* 超时。
+
+如果 ModeDeclarationGroupPrototype DcmEcuReset 无法切换到 JUMPTOBOOTLOADER 或 JUMPTOSYSSUPPLIERBOOTLOADER，则 **Dcm** 应以 **NRC** 0x22（Conditions not correct）对该请求作出否定应答。
+
+如果请求跳转到 Bootloader（即上文就 DCM_OEM_BOOT 与 DCM_SYS_BOOT 所描述的准备过程），配置参数 DcmSendRespPendOnRestart 设置为 TRUE，并且配置参数 DcmDspSessionForBoot 设置为 DCM_OEM_BOOT 或 DCM_SYS_BOOT，则 **Dcm** 应在成功发送 NRC 0x78（Response pending）之后调用 Dcm_SetProgConditions。
+
+这允许在跳转到 Bootloader 之前存储所有相关信息。
+
+**注意：** 由软件集成方决定该数据的存储位置。通常将其存储在非易失性存储器（例如数据 Flash）中。将该数据“存储”在复位后不被初始化的 RAM 区中也是可接受的。
+
+在请求跳转到 Bootloader 的上下文中，当 Dcm_SetProgConditions 按上文所述返回 E_OK 之后，**Dcm** 应触发 ModeDeclarationGroupPrototype DcmEcuReset 向 EXECUTE 的模式切换。
+
+如果请求跳转到 Bootloader，配置参数 DcmSendRespPendOnRestart 设置为 TRUE，并且配置参数 DcmDspSessionForBoot 设置为 DCM_OEM_BOOT_RESPAPP 或 DCM_SYS_BOOT_RESPAPP，则 **Dcm** 应在成功发送 NRC 0x78（Response pending）之后发起最终响应。
+
+如果上文所述 NRC 0x78（Response Pending）响应未被成功发送，则 **Dcm** 应取消当前请求。
+
+如果上文所述 NRC 0x78（Response Pending）响应未被成功发送，则不应执行跳转到 Bootloader。
+
+**注意：** 如果 NRC 0x78（Response Pending）响应未被正确发送，**Dcm** 将停留在应用中并等待客户端的下一个请求。
+
+如果 ModeDeclarationGroupPrototype DcmEcuReset 切换到模式 JUMPTOBOOTLOADER 或 JUMPTOSYSSUPPLIERBOOTLOADER，配置参数 DcmSendRespPendOnRestart 设置为 FALSE，并且配置参数 DcmDspSessionForBoot 设置为 DCM_OEM_BOOT_RESPAPP 或 DCM_SYS_BOOT_RESPAPP，则 **Dcm** 应发起最终响应。
+
+如果最终响应已按上文所述成功发送，则 **Dcm** 应调用 Dcm_SetProgConditions。
+
+如果 Dcm_SetProgConditions 按上文所述返回 E_OK，则 **Dcm** 应触发 ModeDeclarationGroupPrototype DcmEcuReset 向 EXECUTE 的模式切换。
+
+如果 Dcm_SetProgConditions 按上文所述返回 E_NOT_OK，则 **Dcm** 不应请求任何复位、不应执行跳转到 Bootloader，也不应将 ModeDeclarationGroupPrototype DcmEcuReset 切换到 EXECUTE。
+
+如果 ModeDeclarationGroupPrototype DcmEcuReset 切换到模式 JUMPTOBOOTLOADER 或 JUMPTOSYSSUPPLIERBOOTLOADER，配置参数 DcmSendRespPendOnRestart 设置为 FALSE，并且配置参数 DcmDspSessionForBoot 设置为 DCM_OEM_BOOT 或 DCM_SYS_BOOT，则 **Dcm** 应立即调用 Dcm_SetProgConditions。
+
+如果 Dcm_SetProgConditions 按上文所述返回 E_OK，则 **Dcm** 应在不发送 NRC 0x78（Response pending）的情况下触发 ModeDeclarationGroupPrototype DcmEcuReset 向 EXECUTE 的模式切换。
+
+在上述情况下，具体的响应处理取决于请求消息中 'suppressPosRspMsgIndicationBit' 的状态（TRUE 或 FALSE）。
+
+如果请求跳转到 Bootloader，并且对 Dcm_SetProgConditions 的调用返回 E_NOT_OK（参见上文关于 NRC 0x78 发送与 Dcm_SetProgConditions 立即调用的要求），则 **Dcm** 不应采取进一步动作，并应返回否定响应 **NRC** 0x22（Conditions not correct）。
+
+##### 6.6.4.2. 因 ECUReset 的跳转
+
+在接收到 **ECUReset** 服务 0x11 请求时，如果配置参数 DcmResponseToEcuReset 设置为 AFTER_RESET，则 **Dcm** 将通过调用 Dcm_SetProgConditions 置位 ResponseRequired 标志。
+
+在接收到 **ECUReset** 服务 0x11 请求时，如果 DcmResponseToEcuReset 设置为 AFTER_RESET，则 **Dcm** 应在复位之后应答 EcuReset 服务。
+
+在接收到 **ECUReset** 服务 0x11 请求时，如果 DcmResponseToEcuReset 设置为 BEFORE_RESET，则 **Dcm** 应在复位之前应答 EcuReset 服务。
+
+如果 **Dcm** 发起一次复位并且 DcmSendRespPendOnRestart 设置为 TRUE，则 **Dcm** 应在复位之前触发发送 NRC 0x78（Response pending）。
+
+##### 6.6.4.3. 从 Bootloader 跳转 / ECUReset
+
+在 **Dcm** 初始化时，**Dcm** 应调用 Dcm_GetProgConditions，以判断该初始化是否是 Bootloader 跳转 / **ECUReset** 的结果。
+
+**注意：** 由软件集成方负责确保在调用 Dcm_Init 时 Dcm_ProgConditionsType 中包含的数据是有效的。例如，如果该数据存储在非易失性存储器中，则在 ECU 复位之后可能需要一段时间才能使用。在设计 ECU 的启动过程时必须考虑这一点。
+
+如果 **Dcm** 的初始化是 Bootloader 跳转 / **ECUReset** 的结果，则 **Dcm** 应调用 ComM_DCM_ActiveDiagnostic(NetworkId)，向 ComManager 请求完全通信模式。
+
+当 **ComM** 向 **Dcm** 报告完全通信时，**Dcm** 应发送对 Dcm_ProgConditionsType 中所传递的 Service Id 的响应。
+
+如果 **Dcm** 的初始化是 Bootloader 跳转的结果，并且应用通过 FLASH 下载得到了更新（Dcm_ProgConditionsType.ApplUpdated == True），则 **Dcm** 应调用 BswM_Dcm_ApplicationUpdated()，以通知 **BswM** 应用已被更新。
+
+##### 6.6.4.4. 标志管理
+
+###### 6.6.4.4.1. 跳转到 Bootloader
+
+在接收到带有子功能 0x02（Start Programming Session）的 UDS 服务 0x10（Diagnostic Session Control）请求时，**Dcm** 应通过调用 Dcm_SetProgConditions 置位 ReprogramingRequest 标志，并在该服务已指示需要时置位 ResponseRequired 标志。
+
+根据配置参数 DcmDspSessionForBoot，或者由应用发送正响应（如果 suppressPosRspMsgIndicationBit = FALSE），或者在 **ECU** 复位之后、Bootloader 启动时由 Bootloader 发送响应并清除 ResponseRequired 标志。无论哪种情况，Bootloader 都应清除 ReprogramingRequest 标志。
+
+如果在跳转到 Bootloader 期间 Dcm_SetProgConditions API 返回 E_NOT_OK，则应报告 **DET** 错误 DCM_E_SET_PROG_CONDITIONS_FAIL，并恢复正常功能。
+
+###### 6.6.4.4.2. 从 Bootloader 跳转
+
+在成功重新编程应用软件之后，Bootloader 将更新 ApplUpdated 标志和 ResponseRequired 标志。
+
+在 **ECU** 复位之后，当新编程的应用首次启动时，**Dcm** 将通过调用 Dcm_GetProgConditions 读取 ApplUpdated 和 ResponseRequired 标志。在该函数调用期间，ApplUpdated 和 ResponseRequired 标志由集成代码清除。
+
+### 6.7. 错误通知
+
+Default Error Tracer 模块只是为 BSW 开发和集成提供帮助。它不应包含在产品代码中。该 API 已定义，但功能可以根据开发需要自行选择与实现（例如错误计数、通过串行接口将错误信息发送给外部记录器等等）。
+
+### 6.8. 同步与异步实现
+
+**Dcm** 可以通过一个 R-Port 访问数据，该端口要求使用同步或异步的 ClientServerInterface DataServices_&lt;Data&gt;。在 **Dcm** SWS 中，参数 DcmDspDataUsePort 设置为 USE_DATA_SYNCH_CLIENT_SERVER、USE_DATA_ASYNCH_CLIENT_SERVER 或 USE_DATA_ASYNCH_CLIENT_SERVER_ERROR。
+
+在使用 USE_DATA_SYNCH_CLIENT_SERVER 的情况下，接口应与 **Dem** 接口“DataServices_&lt;Data&gt;”兼容（不带 OpStatus 参数）。参数 OpStatus 与返回参数 DCM_E_PENDING 仅在使用 USE_DATA_ASYNCH_CLIENT_SERVER 或 USE_DATA_ASYNCH_CLIENT_SERVER_ERROR 的情况下才可用。
+
+**注意：** 在调用服务处理函数时使用 AsynchronousServerCallPoint 还是 SynchronousServerCallPoint 完全是一项实现决策。它只是表明该操作使用操作状态来允许 **SW-C** 进行异步处理（发起请求、检查请求是否仍处于挂起状态，或取消挂起的请求，参见 §7 中 ClientServerInterface DataServices_&lt;Data&gt; 的定义）。
+
+操作签名（即 OpStatus 参数与 DCM_E_PENDING 返回码是否存在）与要求使用 AsynchronousServerCallPoint 或 SynchronousServerCallPoint 之间没有关联。
+
+如果使用异步接口，则 **Dcm** 应仅在最后一次返回 E_OK 的接口调用之后才认为输出数据（OUT）有效。
+
+如果使用异步接口，则 **Dcm** 应仅在最后一次返回 E_NOT_OK 的接口调用之后才认为 OUT 参数 ErrorCode 有效。
+
+**注意：** 对接口的“最后一次调用”是指返回值表明处理已结束（即 E_OK 或 E_NOT_OK）的那次调用。
+
+**注意：** INOUT 参数是上述要求的组合，即在接口的每次调用中参数都应具有有效的输入值，而 **Dcm** 仅在接口最后一次调用之后才认为输出值有效。
+
+如果使用异步接口，则 **Dcm** 应在接口的每次调用中为输入数据（IN）提供源自该请求的值。
+
+**注意：** 对于明确规定了特殊行为的函数，上述关于异步接口输出数据、ErrorCode 与输入数据的要求不适用。
+
+### 6.9. DID 配置
+
+**Dcm** 的配置包含一份受支持 DID 的列表，可通过两种方式进行配置：
+
+- 单个 DID 配置，要求为该 DID 的每个已配置数据元素提供一条连接（通过端口或 C 函数）以访问数据（读取、写入和控制）。在这种情况下，每个 DID 都应使用接口 DataServices。
+- DID 范围配置，用于在仅有一条端口连接的情况下，在单个 **SW-C** 中统一处理一组行为相同的 DID。在这种情况下应使用接口 DataServices_DIDRange_{Range}。使用该配置可以实现接口优化。为使用 DIDRange 优化，应配置以下参数：DcmDspDidRangeIdentifierLowerLimit 和 DcmDspDidRangeIdentifierUpperLimit，用于界定 DID 的范围；以及 DcmDspDidRangeMaxDataLength 和 DcmDspDidRangeHasGaps。
+
+如果配置了 DcmVinRef，则 **Dcm** 应在启动期间通过调用 Dcm_GetVin 一次性获取 **VIN**。
+
+#### 6.9.1. 单个 DID
+
+单个 DID 可在 DcmDspDid 中配置。唯一的 DID 标识符以 2 字节配置在 DcmDspDidIdentifier 中。如果该 DID 引用了其它 DID，则它们之间的链接可在 DcmDspDidRef 中配置（DcmDspDid 容器的概述参见 §9.2.5.8.1）。每个 DID 允许访问信号数据值（通过读取和/或写入）。信号引用（指向 DcmDspData）以及该数据在诊断应答（用于读取）或请求（用于写入）中的位置可在 DcmDspDidSignal 中配置。
+
+属于该 DID 的数据的配置可在容器 DcmDspData（ECUC_Dcm_00869）中提供。该容器收集以下信息：
+
+- 属于该 DID 的数据的数据字节序（ECUC_Dcm_00986：DcmDspDataEndianness）
+- 数据的长度和类型（ECUC_Dcm_00605：DcmDspDataByteSize，ECUC_Dcm_00985：DcmDspDataType）
+- 用于访问数据的接口（ECUC_Dcm_00713：DcmDspDataUsePort）
+- 面向应用的以下接口：
+    - 检查在当前条件下该 DID 是否可以访问。这可以通过为每个 DataElement 检查读取数据的条件是否满足来实现（ECUC_Dcm_00677：DcmDspDataConditionCheckReadFnc 和 ECUC_Dcm_00955：DcmDspDataConditionCheckReadFncUsed）
+    - 请求冻结某个 IOControl 的当前状态（ECUC_Dcm_00674：DcmDspDataFreezeCurrentStateFnc）
+    - 获取该 DID 的定标信息。这可以通过为每个 DataElement 获取定标信息来实现（ECUC_Dcm_00676：DcmDspDataGetScalingInfoFnc）
+    - 请求某个 DataElement 的数据长度（ECUC_Dcm_00671：DcmDspDataReadDataLengthFnc）
+    - 读取某个 ECU 信号（ECUC_Dcm_00824：DcmDspDataReadEcuSignal）
+    - 以读取或写入方式访问数据（ECUC_Dcm_00669：DcmDspDataReadFnc，ECUC_Dcm_00670：DcmDspDataWriteFnc）
+    - 请求将某个 IOControl 复位为默认值（ECUC_Dcm_00673：DcmDspDataResetToDefaultFnc）
+    - 请求将某个 IOControl 的控制权交还给 ECU（ECUC_Dcm_00672：DcmDspDataReturnControlToEcuFnc）
+    - 请求调整 IO 信号（ECUC_Dcm_00675：DcmDspDataShortTermAdjustmentFnc）
+
+也可以通过 ECUC_Dcm_00993：DcmDspDiagnosisScaling 配置一种替代的诊断表示。
+
+以下示例展示了如何为单个 DID 0xF080 配置容器 DcmDspDid 和 DcmDspData。该配置允许通过同步 C API WriteDID_F080（用于写入）和 ReadDID_F080（用于读取）访问一个字节的数据。
+
+- DcmDspDidIdentifier = 0xF080
+- DcmDspDidByteOffset = 0
+- DcmDspDidDataRef = DcmDspData_F080
+- DcmDspDataByteSize = 8
+- DcmDspDataType = UINT8_N
+- DcmDspDataUsePort = USE_DATA_SYNCH_FNC
+- DcmDspDataWriteFnc = WriteDID_F080
+- DcmDspDataReadFnc = ReadDID_F080
+
+#### 6.9.2. DID 范围
+
+DID 范围与“普通”的 DID 读/写功能大体相同，区别在于 DID 也作为参数传递。这使得可以在读或写函数中以 switch/case 处理 DID 范围。
+
+这些范围可应用于 DID 的读取（ReadDataByIdentifier 0x22）和写入（WriteDataByIdentifier 0x2E）。
+
+范围可在 ECUC_Dcm_00937：DcmDspDidRange 中配置。每个已配置的范围默认可通过服务 0x22 和 0x2E 访问。如果该范围应限于读取或写入，则所引用的 DcmDspDidInfo 容器应相应定义。
+
+也可以在范围内定义空隙（DcmDspDidRangeHasGaps）。激活该功能后，每当请求已配置范围内的某个 DID 时，**Dcm** 都会调用操作 IsDidAvailable，以检查其当前可用性。并且，由于指定范围内的 DID 可以具有不同长度，因此必须配置最长 DID 的长度（DcmDspDidRangeMaxDataLength），以便为传递给相应函数的缓冲区预留足够空间。
+
+一般而言，如果特别希望将 DID 作为参数传递，则范围功能也可用于单个 DID。此时下界 DID 与上界 DID 应相同。
+
+操作 ReadDidRangeDataLength 允许请求应用返回某个 DID 范围的数据长度。
+
+任何已定义的范围只能通过 DcmDspDidRangeInfoRef 进行引用。不应使用 DcmDspDidInfo 中的子容器 DcmDspDidControl 和 DcmDspDidDefine。
+
+DID 范围不能映射到 DDDID 上，因为服务 0x2C DDDID 不支持范围功能。实际上 DcmDspDidRangeIdentifierLowerLimit 和 DcmDspDidRangeIdentifierUpperLimit 不应包含 0xF200 至 0xF3FF 范围内的 DID。任何已定义的范围只能通过 DcmDspDidRangeInfoRef 引用 DcmDspDidInfo，且该容器需设置 DcmDspDidDynamicallyDefined == False。
+
+### 6.10. 安全编码
+
+安全编码或安全变体编码提供了以安全方式更新、更改或替换服务器中参数的功能。安全变体编码是 **AUTOSAR** 标准化的功能，允许制造商控制哪些数据可以写入 **ECU**。只有经过签名的数据才会被接受并可写入服务器。在典型环境中，数据由制造商的后端签名。制造商可以控制哪些数据可以被写入。
+
+从高层看，该流程包括：
+
+- 引入一个证书，用于认证将要写入的内容
+- 写入参数数据
+- 提供与证书公钥匹配的数据签名
+- 更新服务器中的数据。
+
+图7.13：安全编码序列（**Secure Coding Sequence**）
+
+![Figure7-13](Figure7-13.png)
+
+安全编码序列总是通过使用 UDS 服务 Authentication 的 transmitCertificate 子功能传输一个证书来启动。
+
+在通过 UDS 服务 transmitCertificate 接收到一个证书、且该证书的 certificateEvaluationId 映射到某个 DcmDspAuthenticationTransmitCertificate 且其 DcmDspAuthenticationTransmitCertificateFunction 设置为 SECURE_CODING 时，**Dcm** 应（重新）启动安全编码机制，并使用该证书来校验安全编码数据。
+
+需要特别关注在编码数据受到保护之前对其进行缓冲的机制。安全编码流程可以包含多个连续发送的 WriteDataByIdentifier 请求。只有当对全部数据计算出的签名有效时，所写入的数据才能被应用并转发给应用。在此期间，数据被缓冲。对于资源高效的缓冲区处理存在多种方法。**AUTOSAR** 并不以提供所有可能策略的解决方案为目标，而是考虑两种策略：
+
+1. 在持久化之前将所有编码数据缓冲在 **Dcm** 内部。该方法对于较小的写入数据工作良好，但对较大的编码数据扩展性较差。
+2. 该策略是对使用 **BndM** 模块的展望，它可能成为未来 **AUTOSAR** 版本的一部分。**BndM** 允许直接访问 A/B 分区 NV 存储器，不需要额外的 RAM 缓冲区。
+
+**Dcm** 直接从 DID 数据元素所配置使用的端口接口 DcmDspDataUsePort 推导所使用的策略。在当前版本中仅支持策略 1），这意味着除下述一种情况外，所有已配置的端口接口都是有效的。
+
+被 DcmSecureCodingDataIdentifier 引用的 DcmDspDid 不应包含 DcmDspDataUsePort 设置为 USE_ECU_SIGNAL 或 USE_BLOCK_ID 的 DcmDspData。
+
+在安全编码过程中所存储的数据是由所存储的数据标识符构成的顺序链，如图7.14 所示。对于每个数据标识符，先存储 2 字节的数据标识符编号，随后存储该数据标识符的数据记录。对每个安全数据标识符依次重复此过程。签名校验在整个缓冲区上运行。
+
+图7.14：**Dcm** 安全编码缓冲区布局（**Dcm Secure Coding Buffer Layout**）
+
+![Figure7-14](Figure7-14.png)
+
+签名校验中的数据标识符编号确保所写入的数据与制造商预期的写操作相匹配，并避免把某个数据记录误用作其它 DID 的数据。在整个缓冲区上执行签名校验只允许一种明确的 DID 顺序，必须按该顺序写入数据。即使对某些用户而言顺序对编码数据可能无关紧要，仍需保持该顺序。
+
+如果 **Dcm** 接收到针对被 DcmSecureCodingDataIdentifier 引用的数据标识符的 write data by identifier 请求，且安全编码序列已按上文所述启动，则 **Dcm** 应将数据依次存储到由 DcmSecureCodingDataBufferSize 定义的缓冲区中，并在其中存储 2 字节 DID 号及其后的数据。
+
+被 DcmSecureCodingDataIdentifier 引用的 DcmDspDid 应具有静态长度。这意味着该 DID 的 DcmDspData 不应将任何 DcmDspDataType 设置为 UINT8_DYN。
+
+按照上述要求，**Dcm** 将数据存储在对外部不可见的临时本地缓冲区中。因此应用此时无法访问该数据。这也意味着 DcmDspDataUsePort 中配置的 **callout** 尚未被调用。
+
+除这一本地数据存储之外，**Dcm** 处理安全编码 DID 的诊断请求的方式与处理任何其它诊断请求相同。特别是所有服务校验检查都会被执行。
+
+如果 **Dcm** 接收到针对被 DcmSecureCodingDataIdentifier 引用的数据标识符的 write data by identifier 请求，而安全编码序列尚未按上文所述启动，则 **Dcm** 应返回 **NRC** 0x22（conditionsNotCorrect）作为对该 write data by identifier 请求的响应。
+
+如果 **Dcm** 正在把安全编码 DID 数据存储到由 DcmSecureCodingDataBufferSize 提供的缓冲区中，而写入其中的 DID 数据超出所配置的大小，则 **Dcm** 应发送 **NRC** 0x22（conditionsNotCorrect）并停止安全编码序列。
+
+安全编码序列由专用的例程控制服务结束。该服务负责校验所写入数据的真实性，并触发最终的数据写操作。
+
+如果 **Dcm** 接收到由 DcmSecureCodingValidationRoutine 引用的例程控制服务，而安全编码序列尚未按上文所述启动，则 **Dcm** 应返回 **NRC** 0x22（conditionsNotCorrect）。
+
+如果 **Dcm** 接收到由 DcmSecureCodingValidationRoutine 引用的例程控制服务，而迄今尚未写入任何安全数据，则 **Dcm** 应返回 **NRC** 0x22（conditionsNotCorrect）。
+
+被 DcmSecureCodingValidationRoutine 引用的 DcmDspRoutine 只应有一个已配置的 DcmDspStartRoutineInSignal，且其 DcmDspRoutineSignalType 设置为 UINT8_N。
+
+被 DcmSecureCodingValidationRoutine 引用的 DcmDspRoutine 只应有一个已配置的 DcmDspStartRoutineOutSignal，且其 DcmDspRoutineSignalType 设置为 UINT8。
+
+安全编码校验例程控制服务完全在 **Dcm** 内部处理，既不通过 C/S 调用 **SWC**，也不通过 C 函数调用 **CDD**。
+
+被 DcmSecureCodingValidationRoutine 引用的 DcmDspRoutine 不应配置 DcmDspStopRoutine 和 DcmDspRequestRoutineResults。
+
+如果 **Dcm** 接收到由 DcmSecureCodingValidationRoutine 引用的例程控制服务，则 **Dcm** 应在 **Dcm** 内部处理该例程控制，既不创建也不调用外部 C 函数接口。
+
+如果 **Dcm** 接收到由 DcmSecureCodingValidationRoutine 引用的例程控制服务，则它应使用由 DcmSecureCodingAuthenticationJobRef 配置的加密作业，以由唯一的例程控制请求参数获得的签名以及安全编码数据缓冲区作为待校验数据，校验该签名是否与安全编码证书所提供的认证相匹配。
+
+DcmSecureCodingAuthenticationJobRef 仅在所引用的 CsmJob 本身满足以下条件时有效：
+
+- 其 CsmProcessingMode 设置为 CRYPTO_PROCESSING_ASYNC
+- 引用一个带聚合 CsmSignatureVerify 的 CsmPrimitive
+
+上述加密作业以证书的公钥安全地认证已写入安全数据缓冲区的数据。其做法是使用该数据与客户端作为安全编码认证例程控制服务的请求参数所提供的签名进行校验。证书的公钥是校验所必需的输入数据。在 **AUTOSAR** 架构中，加密作业直接访问证书的公钥。**Csm** 和 **KeyM** 模块的集成方将公钥链接到该加密作业。
+
+从安全角度看，对安全数据的成功认证确保客户端被认证为可向相应数据标识符写入恰好这些数据。在此成功认证之后，**Dcm** 将调用与不使用安全编码流程的写操作相同的已配置写 API。这可以视为把写操作延迟到全部写入数据均被认证的那一刻。对应用而言，它仍是一次写操作，无需区分普通编码写操作与安全编码写操作。
+
+如果安全编码数据已按上文所述成功校验，则 **Dcm** 应对安全数据缓冲区中的所有安全编码数据标识符调用已配置的写操作。
+
+安全编码序列可以由多个所写入的数据标识符组成。从 **Dcm** 一侧看，不存在事务系统，也不存在写操作失败时的任何回滚机制。在写操作失败的情况下，安全编码序列被取消，并在安全编码校验例程控制服务的正响应中作为参数发送失败指示。应用有责任设计足够稳定的机制来处理这种情况。
+
+如果上述所有被调用的写操作均已成功完成，则 **Dcm** 应将 DcmSecureCodingValidationRoutine 的正响应例程参数 DcmDspStartRoutineOutSignal 设置为值 0x00，以指示安全编码流程成功完成，并为 DcmSecureCodingValidationRoutine 发送正响应。
+
+如果上述某个被调用的写操作失败，则 **Dcm** 应取消所有其它挂起的安全编码写操作，并将 DcmSecureCodingValidationRoutine 的正响应例程参数 DcmDspStartRoutineOutSignal 设置为值 0x01，以指示安全编码写操作失败，并为 DcmSecureCodingValidationRoutine 发送正响应。
+
+如果用于认证安全数据的加密作业失败，则 **Dcm** 应将 DcmSecureCodingValidationRoutine 的正响应例程参数 DcmDspStartRoutineOutSignal 设置为值 0x02，以指示签名校验失败，并为 DcmSecureCodingValidationRoutine 发送正响应。
+
+如果 DcmSecureCodingValidationRoutine 背后的例程控制的执行时间因 §6.6.1.8 所述原因超出允许的最大响应次数，则 **Dcm** 应报告运行时错误 DCM_E_INTERFACE_TIMEOUT。
+
+### 6.11. 启动行为
+
+Dcm_Init 应使用配置中的值初始化所有 **Dcm** 全局变量。
