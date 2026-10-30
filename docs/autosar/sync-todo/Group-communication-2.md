@@ -81,8 +81,8 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 2 — In-place translation/completion (new article, main session per no-subagent rule)
   - [x] Step 3 — Phase A mechanical checks (evidence above)
   - [x] Step 4 — Phase B coverage map + fidelity (evidence above)
-  - [ ] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-2 · PR #190 (Closes issue #189))
 - [ ] canxl_transceiver_driver (SWS_CANXLTransceiverDriver · R23-11 markdown · ❌ new article)
   - Note: article `communication/canxl_transceiver_driver/` (directory per row name, nav label "CanXLTrcv", CAN group of the communication landing page). Shape: ch.2 → §2 one-sentence statement (source defines no local acronyms; com_based_transformer precedent) · ch.6 dropped · ch.7 → §6 (6.1 初始化, 6.2 通信状态处理 with the link-state composition prose, 6.3 唤醒处理, 6.4 错误分类 dev table 5 rows + 6.4.2–6.4.5 none) · ch.8 → §7 (8.1 4 imported types; 8.2 "no additional type definitions" → 7.2 one-sentence; 8.3 6 functions; 8.4 Callback notifications source section is EMPTY → 7.4 one-sentence statement 未规定任何回调通知 — TRANSLATOR sentence, source states nothing; 8.5 Scheduled functions carries only the generic intro prose, no functions → 7.5 intro translated + 本模块未规定任何调度函数 added — also a translator sentence; 8.6.1/8.6.3 one-sentence statements per source, 8.6.2 可选 1 row EthIf_TrcvModeIndication) · ch.9 → §8 时序图 (8.1 CanXL BusOff handling for Ethernet + Figure9_1) · ch.10 → §9 (10.1 folded; 10.2→9.1 1 container CanXLTrcvChannel + 1 param CanXLTrcvEthEcucPartitionRef; 10.3→9.2 发布信息) · ch.A dropped · ch.B → ## B (B.1.1 42-item fence incl. NA_00999; R23-11 none)
   - Note: PDF verification: SetTransceiverMode truncated syntax completed from R23-11 PDF p.18; Figure triage: exactly 2 content images (Figure1_1 540x633, Figure9_1 911x1025), all other artifacts ≤345px deco; [19] citation in §6.4 intro = same source typo as canxl_driver, kept prose; source typos "Extemal"/"addtitional"/"Can XL Tranceiver" are figure-chrome/table-garble — dropped or normalized
@@ -92,8 +92,8 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 2 — In-place translation/completion (new article, main session per no-subagent rule)
   - [x] Step 3 — Phase A mechanical checks (evidence above)
   - [x] Step 4 — Phase B coverage map + fidelity (evidence above)
-  - [ ] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-2 · PR #190 (Closes issue #189))
 - [ ] eth_trcv (SWS_EthernetTransceiverDriver · R23-11 markdown · ❌ new article, short name EthTrcv)
   - Note: article `communication/eth_trcv/` (directory per row, nav label "EthTrcv", 以太网 group of the communication landing page). Shape: Known Limitations real content → unnumbered 已知限制 · ch.2 → §2 11 acronyms · ch.3 → §3 (3.1 source-literal 「输入文件」 heading — source says "Input documents", com_based_transformer precedent; 3.2 相关标准与规范 with the source's own [7]/[8] numbering (registry collision is a source quirk — 3.2 items carry no anchors); 3.3) · ch.6 dropped · ch.7 → §6 (6.1 Ethernet BSW 栈 6.1.1–6.1.6 incl. 6.1.4.1 数据线路唤醒和睡眠 + 6.2 错误分类: dev 3 rows, runtime 1, 6.2.5 扩展生产错误 ETHTRCV_E_ACCESS house table) · ch.8 → §7 (7.1 16 imported types, Mka "(DRAFT)" chrome dropped; 7.2 11 types; 7.3 35 functions — 7.3.2.1–.3/7.3.7.1–.2/7.3.8.1–.2 sub-sections kept; 7.4 2 callbacks; 7.5 MainFunction with 8 requirement bodies; 7.6 期望接口 4 强制 + 9 可选 + 7.6.3.1 <EthTrcvWakeUpCallout>; 7.7 中断服务程序 one-sentence) · ch.9 → §8 one-sentence statement (usage depicted in Ethernet Interface's diagrams) · ch.10 → §9 (10.1 folded; 9.1.1 EthTrcv module table / 9.1.2 ConfigSet / 9.1.3 EthTrcvConfig 24 params + Figure10_1/10_2 + 3 SWS requirements as prose / 9.1.4 DemEventParameterRefs / 9.1.5 MgmtInterface choice + 9.1.5.1/.2 sub-containers + [00208] prose / 9.1.6 WakeupMap / 9.1.7 General 18 params + Figure10_3/10_4 + [00156]; 9.2 发布信息) · ch.A dropped · ch.B → ## B THREE release blocks: B.1 R23-11 (1 added 91015), B.2 R22-11 (17 added/43 changed/1 deleted 00139), B.3 R21-11 (169 added, changed/deleted/constraints none)
   - Note: source quirks verified: 8.2.6 heading artifact "EthTrcv_ WakeupModeType" is a conversion artifact — the [SWS_EthTrcv_00114] item heading and table name it EthTrcv_WakeupReasonType (article follows the item name; recorded); EthTrcv_GetMacMethod syntax carries `uint8* TrcvIdx` in BOTH markdown and R23-11 PDF — kept verbatim as a spec-side quirk; 3.2 reuses [7] for IEC 7498-1 while 3.1 [7] is IEEE 802.3cg-2019 — source quirk kept (no anchors on 3.2 items); the unnumbered source heading "Dependencies to other Modules:" inside ch.5 rendered as a bold lead-in paragraph (not a heading); hyphenation artifacts (SWS_EthTrcv_- 00208 etc.) healed in appendix-B fences
@@ -103,8 +103,8 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 2 — In-place translation/completion (new article, main session per no-subagent rule)
   - [x] Step 3 — Phase A mechanical checks (evidence above; check_api_sync N/A with manual substitute)
   - [x] Step 4 — Phase B coverage map + fidelity (evidence above)
-  - [ ] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-2 · PR #190 (Closes issue #189))
 - [ ] wlan_driver (SWS_WirelessEthernetDriver · R23-11 markdown · ❌ new article)
   - Note: article `communication/wlan_driver/` (directory per row, nav label "WEth", 以太网 group of the communication landing page). Shape: ch.2 → §2 7 acronyms · ch.4.1 → §4.1 限制 5-item list · ch.5 → §5 (5.1 驱动服务: on-chip/off-chip service rules + non-blocking [10004]; the off-chip footnote rendered as a 译注 blockquote after §5.1 — source footnote marker "1" carried as translator note) · ch.6 dropped · ch.7 → §6 (6.1 栈 6.1.1–6.1.6 incl. 6.1.5 键/值参数映射 with the 2 ParamId tables translated as prose-referenced GFM tables (source requirement heading [10066]/[10068] carries the table) and 6.1.6 V2X 特定需求 with DP0–DP3 bullet list) + 6.2 错误分类 (dev 3 rows, 6.2.5 扩展生产错误 WETH_E_ACCESS house table) + 6.3 安全事件 one-sentence · ch.8 → §7 (7.1 14 imported types, "(draft)" timestamp chrome dropped; 7.2 3 types; Figure8_1 module dependencies + Figure8_2 shared typedefs embedded at the §7 intro / §7.2 lead; 7.3 19 functions — GetWEtherStats32 carries the full 64-item dot11STAStatistics list and GetWEtherStats64 the 5-item list, hyphenation artifacts healed; 7.4 one-sentence no callbacks; 7.5.1 MainFunction; 7.6.1 强制 7 rows incl. EthIf_MainFunctionRx/Tx + GetVersionInfo; 7.6.2 可选 Det_ReportError; 7.6.3 one-sentence) · ch.9 → §8 one-sentence statement (usage same as Ethernet Driver, see [9]) · ch.10 → §9 (10.1→9.1 容器与配置参数 incl. [00040] partition requirement; 10.1.1 Variants "No content." omitted per the 2026-10-28 placeholder rule — REPORTED; 9.1.1 WEth module / 9.1.2 ConfigSet / 9.1.3 CtrlConfig 7 params + Figure10_1 / 9.1.4 DemEventParameterRefs / 9.1.5 General 7 params + Figure10_2 + the two CONSTR requirements as prose; source intro's stale template sentence "Chapter 10.2 specifies additionally published information" rendered WITHOUT the chapter number — the source has no Published Information section, REPORTED) · source appendix A (Change history) → canonical ## B per the lettered-form rule (B.1 R23-11: 7 changed items incl. 10066/10068; B.2 R22-11: constraint-only blocks, no spec-item subsections — faithful to source)
   - Note: source typos CORRECTED (gpt precedent): requirement prose "WEth_GetWEthertStats32/64" → WEtherStats (the API headings and syntax are correct); GetWEtherStats32 syntax "( uint8 CtrlId," missing opening paren reconstructed; "Wirless" typo normalized; "Transmit" hyphenation healed; note [00238]/[10027] keep the typo'd function names? NO — corrected like the requirement prose
@@ -114,8 +114,8 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 2 — In-place translation/completion (new article, main session per no-subagent rule)
   - [x] Step 3 — Phase A mechanical checks (evidence above)
   - [x] Step 4 — Phase B coverage map + fidelity (evidence above)
-  - [ ] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-2 · PR #190 (Closes issue #189))
 - [ ] wlan_transceiver_driver (SWS_WirelessEthernetTransceiverDriver · R23-11 markdown · ❌ new article)
   - Note: article `communication/wlan_transceiver_driver/` (directory per row, nav label "WEthTrcv", 以太网 group of the communication landing page). Shape: ch.2 → §2 12 acronyms · ch.6 dropped · ch.7 → §6 (6.1 栈 6.1.1 索引方案 incl. the RadioId requirement [10001] / 6.1.2 需求 / 6.1.3 收发器参数 / 6.1.4 键值参数映射 — 4 ParamId tables as GFM under their [10059]/[10061]/[10063]/[10065] requirements / 6.1.5 MainFunction / 6.1.6 V2X 特定需求 incl. [20244] max message rates bullet + [20246] PToll=10dBm / 6.1.7 唤醒支持 no-support sentence) + 6.2 错误分类 (dev 3 rows + 6.2.5 扩展生产错误 WETHTRCV_E_ACCESS house table) + 6.3 安全事件 one-sentence · ch.8 → §7 (7.1 6 imported types; 7.2 9 types; Figure8_1 at §7.2 lead; 7.3 9 functions; 7.4 one-sentence; 7.5.1 MainFunction; 7.6 期望接口 6 强制 + 1 可选 + 7.6.3 one-sentence; 7.7 服务接口 one-sentence — source 8.7 Service Interfaces) · ch.9 → §8 one-sentence statement incl. the no-link-state-change note · ch.10 → §9 (10.1 folded into intro; 9.1.1 WEthTrcv module + Figure10_1 / 9.1.2 ConfigSet / 9.1.3 Config 6 params + Figure10_2 + 2 CONSTR prose / 9.1.4 DemEventParameterRefs / 9.1.5 RadioConfigSet / 9.1.6 RadioConfig 9 params + Figure10_3 / 9.1.7 RadioChannelTxQueueConfig 5 params / 9.1.8 AntennaConfigSet / 9.1.9 AntennaConfig + Figure10_4 / 9.1.10 General 10 params + 2 CONSTR prose; 9.2 发布信息 incl. the additional-published-parameters sentence) · source appendix A (R23-11 only, ALL none) → ## B per the lettered-form rule with B.1 all 无 (no B.2 — source has no R22-11 block)
   - Note: PDF-verified content recovery/quirks: 8.2.5 GetChanRxParamIdType lost the WETHTRCV_GETCHRXPID_CBR 0x00 row in the markdown conversion — recovered verbatim from the R23-11 PDF p.21 (2 rows total); BandwidthType invalid range "0x0000004..0xFFFFFFF" (7 hex digits) kept verbatim — source typo present in the PDF too; GetChanRxParams syntax `uint8* TrcvId` kept verbatim (markdown AND PDF agree — spec-side quirk like eth_trcv's GetMacMethod); 7.2.4 SetChanTxParamIdType Description cell is "-" in the source (kept as -。)
@@ -125,8 +125,8 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 2 — In-place translation/completion (new article, main session per no-subagent rule)
   - [x] Step 3 — Phase A mechanical checks (evidence above)
   - [x] Step 4 — Phase B coverage map + fidelity (evidence above)
-  - [ ] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-2 · PR #190 (Closes issue #189))
 - [ ] flexray_driver (SWS_FlexRayDriver · R23-11 markdown · ❌ new article)
   - Note: article `communication/flexray_driver/` (directory per row, nav label "Fr", FlexRay group of the communication landing page). Shape: ch.2 → §2 27 acronyms + ### 2.1 术语 (source Table 2.2 "Terms", 5 rows, dlt precedent) · ch.4.1 → §4.1 限制 ([00449] requirement as prose) · ch.6 dropped · ch.7 → §6 (6.1 一般描述/6.2 实现需求 incl. the "implementation may assume" bullets/6.3 索引方案 Figure7_1/6.4 POC 状态机控制 Figure7_2 with the 3-note list/6.5 FIFO 支持和消息 ID 过滤 with the FrTp hint/6.6 配置描述/6.7 错误分类 (dev 12 rows, runtime 1, 6.7.5 扩展生产错误 FR_E_CTRL_TESTRESULT + FR_E_LPDU_SLOTSTATUS house tables with Fail/Pass detection criteria)/6.8 安全事件) · ch.8 → §7 (7.1 4 imported types (source table has 2 unlabeled Dem/Std continuation rows normalized); 7.2 宏定义 → 7.2.1 配置参数索引宏 with the full 63-row FR_CIDX GFM table; 7.3 11 types incl. Fr_SlotAssignmentType element table; 7.4 32 functions with CC 前置/后置条件 prose kept and the Fr4.10 Fr_StartCommunication hardware-error paragraph translated with the source's own function-name context; 7.5/7.6 no-callback/no-scheduled sentences; 7.7 期望接口 2 强制 + 3 可选 (SchM_Enter/Exit_Fr header "&lt;none&gt;" kept); 7.8 服务接口 one-sentence) · ch.9 → §8 one-sentence statement · ch.10 → §9 (10.1 folded; 9.1.1 Fr module/9.1.2 FrGeneral 12 params + [CONSTR_00001] prose/9.1.3 FrController 34 params incl. all FlexRay protocol parameters with their FlexRay 2.1/3.0 compliance remarks/9.1.4 FrAbsoluteTimer/9.1.5 FrControllerDemEventParameterRefs/9.1.6 FrFifo 7 params/9.1.7 FrRange 2 params/9.1.8 FrMultipleConfiguration; 9.2 发布信息) · appendix A dropped (droppable) · NO ## B chapter — the source has no change-history annex (ends with appendix A)
   - Note: PDF ground-truth: registry MATCH ([1]/[2] carry no doc id — report-only unverified), 363 function links → 32 targets all anchored, 0 ABSENT targets; "FlexRay 协议 3.0" dotted-number census noise correctly NOT linked; census --apply: 170 lines + 4 chapter-refs, idempotent
@@ -136,190 +136,190 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 2 — In-place translation/completion (new article, main session per no-subagent rule)
   - [x] Step 3 — Phase A mechanical checks (evidence above; check_api_sync N/A with manual substitute)
   - [x] Step 4 — Phase B coverage map + fidelity (evidence above)
-  - [ ] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-2 · PR #190 (Closes issue #189))
 - [ ] flexray_interface (SWS_FlexRayInterface · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] flexray_nm (SWS_FlexRayNetworkManagement · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] flexray_sm (SWS_FlexRayStateManager · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] flexray_trcv (SWS_FlexRayTransceiverDriver · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] flexray_ar_tp (SWS_FlexRayARTransportLayer · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] flexray_iso_tp (SWS_FlexRayISOTransportLayer · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] linsm (SWS_LINStateManager · R23-11 markdown · ❌ new article, short name LinSM)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] lintrcv (SWS_LINTransceiverDriver · R23-11 markdown · ❌ new article, short name LinTrcv)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] ttcan_driver (SWS_TTCANDriver · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] ttcan_interface (SWS_TTCANInterface · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] j1939nm (SWS_SAEJ1939NetworkManagement · R23-11 markdown · ❌ new article, short name J1939Nm)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] j1939rm (SWS_SAEJ1939RequestManager · R23-11 markdown · ❌ new article, short name J1939Rm)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] j1939tp (SWS_SAEJ1939TransportLayer · R23-11 markdown · ❌ new article, short name J1939Tp)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] ieee1722tp (SWS_IEEE1722TransportLayer · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] macsec (SWS_MACsecKeyAgreement · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] cellularv2x_driver (SWS_CellularV2XDriver · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] chargingmanager (SWS_ChargingManager · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] chinesev2x_mgmt (SWS_ChineseV2XManagement · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] chinesev2x_msg (SWS_ChineseV2XMessage · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] chinesev2x_net (SWS_ChineseV2XNetwork · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] chinesev2x_sec (SWS_ChineseV2XSecurity · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] v2x_basictp (SWS_V2XBasicTransport · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] v2x_datamgr (SWS_V2XDataManager · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] v2x_facilities (SWS_V2XFacilities · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] v2x_geonet (SWS_V2XGeoNetworking · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 - [ ] v2x_mgmt (SWS_V2XManagement · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] Step 6 — TODO.md row + commit/PR
 
 ## Not queued (deliberately skipped)
 - (none)
