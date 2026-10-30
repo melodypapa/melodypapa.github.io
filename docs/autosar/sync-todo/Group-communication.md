@@ -97,71 +97,78 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR — commit 4d5ff96 (branch feature/group-communication-sync); PR #181, tracking issue #180
-- [ ] data_distribution (SWS_DataDistributionService · R23-11 markdown · ⚠️ missing API chapter)
-  - Note: directory `data_distribution service/` contains a space — renaming to `data_distribution/` requires the nav change in the same commit
+- [x] data_distribution (SWS_DataDistributionService · R23-11 markdown · realigned)
+  - Note: directory `data_distribution service/` contains a space — renaming to `data_distribution/` requires the nav change in the same commit ✅ (2026-10-29, `git mv` + `mkdocs.yml` nav + `communication/index.md` link in the same commit)
   - Note: 2026-10-29 gap analysis — article 241 ln vs source 4,074 ln; ends mid source 7.2.1.1 and everything from 7.1.2 onward is still untranslated English. Real gaps: 已知限制 (source = None); §2 split into 2.1 缩略语 (glossary reference) / 2.2 缩写 (None) / 2.3 术语表; §3.1 输入文档→输入文件和相关标准与规范 (14 entries), 3.2 相关规格→相关规范; §4.1 flat→4.1.1 假设/4.1.2 限制/4.1.3 约束, Table 4.1 rendered as a GFM table instead of the blog-era Table_4_1.png, 4.2 适用于汽车领域→汽车域的适用性; §5 对其他模块的依赖 + 5.1–5.6 sub-headings; §6 heading numbering bug `###### 7.1.1.1.`→`##### 6.1.1.1.` and `###### 7.2.1.1.`→`##### 6.2.1.1.`; §6.1.2 Security Mechanisms / §6.1.3 Safety Mechanisms untranslated; missing §6.2 通用需求 (topic-name uniqueness + 6.2.1.1 序列化/6.2.1.2 反序列化/6.2.1.3 发送队列/6.2.1.4 发送/6.2.1.5 接收队列/6.2.1.6 接收/6.2.1.7 时序 requirements, 6.2.2 安全需求, 6.2.3 安全机制需求); missing §6.3 错误分类 (7.3.1 development + 7.3.2 runtime + production/extended statements); §7 wholly missing (8.1 imported types, 8.2 Dds_ConfigType, 8.3 3 functions, 8.4 3 callbacks, 8.5 2 scheduled functions, 8.6 期望接口); source ch.9 → new §8 时序图 (3 figures); source ch.10 → new §9 配置规范 (Dds/DdsGeneral/DdsConfig + ~30 containers, Figure 10.1–10.16); appendix A droppable; source ch.B → new `## B.`; blog-era Figure_7_* PNGs to be replaced by the source figures where raster-identical
+  - Note: 2026-10-29 completion run — Phase A: strict build exit 0, 0 WARNING, no data_distribution INFO; heading audit ✓ (9.2.3.1.1/9.2.3.1.2 raised to h6, no level jumps, no body h1); requirement IDs confined to the `## B.` fences (the one `CONSTR_00725` mention in §4.1.3 rewritten as a section reference); Table_4_1.png replaced by a GFM table and Figure_7_1/7_2/7_3 replaced by source Figures 7-1..7-3 (blog-era PNGs deleted); check_api_sync OK (1 type / 3 functions / 3 说明 blocks); link_candidates --apply: 59 lines (8 chapter-ref + 79 citation), idempotent on rerun; 22 source figures wired in (7-1..7-3, 9-1..9-3, 10-1..10-16, including the uncaptioned DdsConfig diagram as 10-3 — the source skips the 10.3 caption); §9.3 reduced to the SWS_BSWGeneral 10.3 pointer (the DDS SWS publishes no module-id table); OMG references upgraded http→https. Steps 5/6 per user instruction: commit first, combined confirmation after
   - [x] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] sec_oc (SWS_SecureOnboardCommunication · R23-11 markdown · ⚠️ gaps)
-  - Note: missing related-documentation/API chapters; ch.3/4 are swapped (constraints before dependencies) — restore the source order
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 6 — TODO.md row + commit/PR — commit b2c1ffb (branch feature/group-communication-sync); PR #188, tracking issue #187
+- [x] sec_oc (SWS_SecureOnboardCommunication · R23-11 markdown · realigned)
+  - Note: missing related-documentation/API chapters; ch.3/4 are swapped (constraints before dependencies) — restore the source order ✅ (2026-10-29, ch.1–5 rebuilt to source order; source §A Not applicable requirements dropped per STANDARD.md annex rules, reported here and in the PR text; check_api_sync.py gained the 可选接口↔Optional alias because source 8.3.10 "Optional Interfaces" sits inside the compared range)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] soad (SWS_SocketAdaptor · R23-11 markdown · ⚠️ gaps + layout change)
+  - [x] Step 6 — TODO.md row + commit/PR — commit 3d584a2 (branch feature/group-communication-sync); PR #188, tracking issue #187
+- [x] soad (SWS_SocketAdaptor · R23-11 markdown · ✅ realigned)
   - Note: missing acronyms; directory `SoAd/` is capitalised and the file is SoAd.md, not index.md — switching to the index.md layout requires the nav change in the same commit
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit 1b9bf69 (branch feature/group-communication-sync); PR #188, tracking issue #187
+  - Note: ✅ (2026-10-29, 1b9bf69) realigned to R23-11; layout switch SoAd/SoAd.md → soad/index.md with nav + cross-link fixes; §2 缩略语 rebuilt (21 acronyms + 5 terms); §6 completed 6.1–6.14; new §7 API规范 (21 imported types/5 types/29 functions/7 callbacks/1 scheduled/期望接口, check_api_sync leaf-level fix in 90965f0); §8 时序图 10 figures; §9 配置规范 16 containers 12 figures; `## B.` 可追溯项变更历史; source ch.6 Requirements Tracing + Annex A "Not applicable requirements" dropped per STANDARD.md annex rules; stale 2022-*.png removed; glossary gained 5 SoAd terms
 - [ ] mirror (SWS_BusMirroring · R23-11 markdown · ⚠️ gaps + layout change)
   - Note: missing acronyms/API; the file is mirror.md, not index.md — switching layout requires the nav change in the same commit
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-30 run — layout switch mirror/mirror.md → mirror/index.md with nav + landing-page/overview links fixed in the same commit (commit c3e84ef, branch feature/group-communication-sync-2); legacy 599-ln article rebuilt to full Type A shape: unnumbered 已知限制 (source chapter has real content), §2 one-sentence no-acronyms statement, §3.1 rebuilt to R23-11 4 entries, §4.1 restored the FlexRay timestamp/cycle limitation paragraph + CAN XL item, §5.1/5.1.1/5.1.2 file structure with 4 header requirements; §6 functional spec completed from source ch.7 (requirement bodies in order, IDs stripped; prose SWS-ID cross-refs rewritten as 第N节 references per corpus practice — 0 outside-B IDs); source ch.9 Sequence diagrams = "Currently, no sequence diagrams are available." → OMITTED under the 2026-10-28 placeholder exception (user verify at gate), 配置规范 renumbers to §8; §7 API规范 = source ch.8 house shape: 7.1 API参数检查, 7.2 导入的类型 27 rows, 7.3 2 types, 7.4 21 functions in 4 source groups, 7.5 6 callbacks, 7.6 1 scheduled, 7.7 期望接口 1+12, 7.8 服务接口 (Mirror_NetworkType, MirrorControl client-server 18 operations, provided port); §8 配置规范 = source ch.10 (26 containers, SWS 条目 cells filled [ECUC_Mirror_*] per Mcu precedent; truncated source cells MirrorSourceLinFilterLinIdCode/MirrorSourceFlexRayFilterUpperSlot/MirrorStatusCanId marked 「源文档此处截断」); `## B.` 约束和规格项的历史 (B.1–B.6, item IDs verbatim in fences; source annex B Not Applicable Requirements dropped per STANDARD.md annex rules). check_api_sync = documented N/A (source functions live under 8.4.x, script matches only 8.3.x — reports the 2 types; manual verification: 2 types ↔ 7.3.1-.2, 21 functions ↔ 7.4.x in source order, 6 callbacks ↔ 7.5.x, 1 scheduled ↔ 7.6.1, 21+6+1 说明 blocks ✓); figures: 6 content figures Figure7-1..7-6 extracted by caption+hash+size triage (344×38/21×21 fragments and the f5f4bf49/cad1600a/31a8ee06/8c27c74a deco cluster dropped); 11 blog-era PNGs deleted. Phase A: strict build exit 0 (sole WARNING = pre-existing MkDocs-2 migration notice), 0 content WARNINGs, no mirror INFO; heading audit ✓ (已知限制, §1–§8 + B., no forbidden variants); hygiene ✓ (0 `\<`, 0 {DRAFT}, 0 prose requirement IDs outside the sanctioned ECUC config cells); acronym slice 0 tables ✓; check_indexes.py exit 0; gen_api_list regenerated (23 mirror links) + --check up to date. link_candidates --apply: 159 lines (32 chapter-refs incl. the rewritten section refs), idempotent on re-run; census: comma-form [n, doc] citations and plain [2] doc mentions stay prose (known open case); UNRESOLVED chapter numbers = cross-document refs (BSWGeneral 5.1.6/5.1.7/10.1/10.3, source ch.9) correctly never linked; cross-article mentions: ComM/CanIf/Det NO-ARTICLE, PORT/Dcm/SoAd SITE report-only. Glossary extension N/A (source ch.2 defines no terms). Steps 5/6 per user instruction: commit first, combined confirmation after batch
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit c3e84ef (branch feature/group-communication-sync-2); PR #192, tracking issue #191
 - [ ] ethernet_switch_driver (SWS_EthernetSwitchDriver · R23-11 markdown · ⛔ stub — full translation)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-30 run — stub replaced with the full Type A translation (commit 7f5fc5e, branch feature/group-communication-sync-2): §2 缩略语、缩写和定义 (8 acronyms + 4 definitions, source's Acronyms/Definitions split mirrored), §4.1 约束 with Table 4.1 (IEEE bridge execution order coverage, 29 rows) as GFM, §6 functional spec complete from source ch.7 (learning phase, frame forwarding with all processing stages incl. stream identification/PSFP/firewall interaction/transmission selection, prose SWS-ID cross-refs rewritten as 第N节 — 0 outside-B IDs), §6.6 error classification incl. 2 extended-production tables (表7.5/7.6); §7 API规范 = source ch.8: 39 imported types, 10 types, 74 functions, 1 callback, 2 scheduled (MainFunction + BackgroundTask), 期望接口 0+21+3 configurable callouts, 服务接口 one-sentence statement; §8 时序图 (source ch.9, 5 figures); §9 配置规范 = source ch.10 (54 containers with [ECUC_EthSwt_*] SWS 条目 cells, 161 parameters, 21 container overview figures Figure10-1..10-21, generated via record extraction + hand translation map; {DRAFT}/{OBSOLETE} tags dropped as PDF chrome; obsolete EthSwtPortFifo/PortShaper containers kept with source descriptions); ## B. 可追溯项变更历史 (B.1 R22-11 + B.2 R23-11, item IDs verbatim in fences; 224 IDs). Phase A: strict build exit 0, 0 content WARNINGs, no ethernet_switch INFO; heading audit ✓ (§1–§9 + B., no forbidden variants); hygiene ✓ (0 `\<`, 0 {DRAFT}, 0 prose requirement IDs); check_indexes.py exit 0; gen_api_list regenerated + --check up to date. link_candidates --apply: 210 lines (28 chapter-refs), idempotent on re-run, stopped before 配置规范; comma-form/plain doc citations stay prose (known open case). check_api_sync = documented N/A (74 functions under source 8.3.x without the 8.2.x/8.3.x type/function split the script expects; manual verification: 10 types ↔ 7.2.1-.10, 74 functions ↔ 7.3.1-.74 in source order, 1 callback ↔ 7.4.1, 2 scheduled ↔ 7.5.1-.2). Glossary extension pending (batch-level item). Steps 5/6 per user instruction: commit first, combined confirmation after batch
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit 7f5fc5e (branch feature/group-communication-sync-2); PR #192, tracking issue #191
 - [ ] service_discovery (SWS_ServiceDiscovery · R23-11 markdown · ⛔ stub — full translation)
   - Note: short name Sd
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-30 run — stub replaced with the full Type A translation (commit 23b20e5, branch feature/group-communication-sync-2); front-matter title fixed to bilingual 「AUTOSAR SD（服务发现）」; §2 缩略语、缩写和定义 (9 acronyms + 17 terms, both as bold-term + blockquote); §4 constraints incl. Adaptive-Platform limitations; §5 dependencies + 5.7 file structure; §6 functional spec complete: 6.1 背景与理由, 6.2 requirements (general/ethernet/state/SoAd interaction/subscribe-retry), 6.3 message format (Request ID, fields, entry formats Type 1/2, options array incl. Configuration/Endpoint/Multicast/SD-Endpoint options, missing-redundant-conflicting handling, security, entries-referencing-options), 6.4 entry types, 6.5 send/receive sequences + receiving entries + multicast answering behaviour, 6.6 server timings (initial wait/repetition/main/fan-out/timer sharing), 6.7 client timings (down/initial wait/repetition/main/fan-in/timer sharing), 6.8 SdServiceGroup handling, 6.9 SOME/IP-ACL (config/update/policy check client+server), 6.10 security events (4-event table), 6.11 error classification (5 dev + 1 runtime + 3 extended production tables); prose SWS/PRS-ID refs debracketed to bare-id mentions per soad corpus practice (0 bracketed IDs outside B). §7 API规范: 14 imported types, 10 types, 11 functions, 1 callback, 1 scheduled, 期望接口 11 mandatory + 13 optional + 1 configurable callout; §8 时序图 (source ch.9, 13 figures); §9 配置规范 (26 containers, 96 params with [ECUC_SD_*/ECUC_Sd_*] cells, 10 container figures Figure10-1..10-10, record-extraction + hand translation map); ## B. 可追溯项变更历史 (B.1.1–B.1.3, R23-11, IDs in fences). Figures: 41 extracted; Figure7-6 (Configuration Option example) had only a docling deco artifact → recovered from the source PDF page 33 embedded image (xref 1287). Phase A: strict build exit 0, 0 content WARNINGs, no service_discovery INFO; heading audit ✓ (§1–§9 + B., no forbidden variants); hygiene ✓ (0 `\<`, 0 {DRAFT}, 0 bracketed prose IDs); acronym slice 0 tables; check_indexes.py exit 0; gen_api_list regenerated + --check up to date. link_candidates --apply: 189 lines (13 chapter-refs), idempotent on re-run, stopped before 配置规范; doc citations [1..8] registry stay unlinked in §3.1-style lists (no bare [n] prose citations in body). check_api_sync = documented N/A (11 functions under source 8.3.x + callback under 8.3.x numbering the script's 8.2.x/8.3.x split doesn't model; manual verification: 10 types ↔ 7.2.1-.10, 11 functions ↔ 7.3.1-.11, 1 callback ↔ 7.4.1, 1 scheduled ↔ 7.5.1, all 说明 blocks present). Glossary extension pending (batch-level item). Steps 5/6 per user instruction: commit first, combined confirmation after batch
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit 23b20e5 (branch feature/group-communication-sync-2); PR #192, tracking issue #191
 
 - [ ] com (SWS_COM · R23-11 markdown · ❌ new article, short name Com)
   - Note: backbone #1
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-30 run — new article communication/com/index.md created (commit 17cdb70, branch feature/group-communication-sync-2): full Type A translation, §2 缩略语、缩写和定义 (9 acronyms + 17 definitions as bold-term blockquotes); §6 functional spec complete from source ch.7 (excluded-features 表7.1, signal values 表7.2, endianness/sign extension, filtering with ONE_EVERY_N semantics, signal gateway overview, start-up, communication modes incl. transfer properties + TMS selection + N-times repetition + retry, signal invalidation, I-PDU group handling incl. 表7.3/7.4 stopped/started behavior, signal indication IMMEDIATE/DEFERRED, MDT, deadline monitoring RX+TX, signal groups + shadow buffer + uint8-array access, large/dynamic length data, metadata, PDU Router interface 表7.6, update-bits, gateway processing stages, error classification, interaction model 图7.2-7.4, multicore, SwCluC); §7 API规范: 9 imported types, 5 types, return codes 表8.1 (E_OK/E_NOT_OK/COM_SERVICE_NOT_AVAILABLE/COM_BUSY), 5 startup/control + 21 communication services + 8 callbacks + 3 scheduled functions, 期望接口 1+3, 7 configurable callbacks &lt;ComUser_Cbk*&gt; + Com_CbkTxPrep + 2 I-PDU callouts; §8 时序图 (source ch.9, 3 figures); §9 配置规范 (30 containers 9.2.1-9.2.30 with [ECUC_Com_*] cells, 13 container figures Figure10-1..10-14, generated via record extraction + hand translation map of 109 descriptions; §9.3 配置规则 translated incl. 9.3.11 Com user architecture + SwCluC relation); §10 附录 = source B Appendix (7 use cases, 表B.1-B.8 + 15 figures FigureB-0..B-14; source A Not-applicable-requirements annex dropped per STANDARD.md annex rules, numbered-continuation lettering per OS/watchdog precedent — recorded here as user-verifiable decision). Figures: 36 extracted by caption+hash+size triage (docling deco cluster dropped); FigureB-9/B-10 and B-12/B-13 resolved by adjacency + size. Phase A: strict build exit 0, 0 content WARNINGs, no com INFO; heading audit ✓ (§1–§10 + no B. appendix needed, no forbidden variants); hygiene ✓ (0 `\<`, 0 {DRAFT}; SWS_Com_* mentions in bare-id form per soad corpus practice); check_indexes.py exit 0; gen_api_list regenerated — Com now resolves to the new article, --check up to date. link_candidates --apply: 189 lines (36 chapter-refs), idempotent on re-run, stopped before 配置规范; citation [1..18] mentions are §3.1-adjacent doc references (no bare [n] prose citations). check_api_sync = documented N/A (source 8.3.x functions with 8.3.2/8.3.3 group split; manual verification: 5 types ↔ 7.2.1-.5, 34 functions ↔ 7.3.2.x/.3.x in source order, 8 callbacks ↔ 7.3.4.x, 3 scheduled ↔ 7.3.5.x, all 说明 blocks present). Glossary extension pending (batch-level item). Steps 5/6 per user instruction: commit first, combined confirmation after batch
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit 17cdb70 (branch feature/group-communication-sync-2); PR #192, tracking issue #191
 - [ ] cansm (SWS_CANStateManager · R23-11 markdown · ❌ new article, short name CanSM)
   - Note: backbone
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-30 run — new article communication/cansm/index.md created (commit a803400, branch feature/group-communication-sync-2); BATCH STOPPED after this row per user instruction ("stop when this translation is done") — remaining backbone rows (cantp/tcpip/nm/ethsm/ipdum/someipxf/someiptp) NOT started. Full Type A translation: §2 缩略语 15 entries; §5 dependencies EcuM/SchM/ComM/CanIf/DEM/BswM/CanNm/DET + 5.9 file structure (CanSM.h export requirement); §6 functional spec complete from source ch.7: CANSM_BSM top state machine (triggers PowerOn/Init/DeInit/T_START|STOP_WAKEUP_SOURCE/T_FULL|SILENT|NO_COM_MODE_REQUEST/T_BUS_OFF, guards G_FULL|SILENT_COM_MODE_REQUESTED, effects E_PRE_NOCOM/E_NOCOM/E_FULL_COM/E_FULL_TO_SILENT_COM/E_BR_END_*/E_SILENT_TO_FULL_COM with ordered API-call sequences), sub state machines 6.2.19 WUVALIDATION, 6.2.20 PRE_NOCOM (incl. DeinitPnSupported 25 + DeinitPnNotSupported 16 sub-steps), 6.2.21 SILENTCOM_BOR, 6.2.22 PRE_FULLCOM, 6.2.23 FULLCOM (G_BUS_OFF_PASSIVE polling variants, E_BUS_OFF ordered calls, S_RESTART_CC, G_TX_ON L1/L2 + &lt;User_GetBusOffDelay&gt; random delay, E_TX_ON, TX_TIMEOUT_EXCEPTION sub state machine incl. ExitPoint TxTimeout), 6.2.24 CHANGE_BAUDRATE (DO_SET_BAUDRATE_DIRECT, E_CHANGE_BAUDRATE, G_NO_COM_MODE_* guards); prose SWS/ECUC ids kept as bare-id mentions (corpus practice); §6.3 error classification (6 dev + 1 runtime + CANSM_E_BUS_OFF extended production table); §6.4 ECU passive; §7 API规范: 10 imported types, 2 types, functions 7.3.1-.6 mandatory + 7.3.7 Optional group (GetVersionInfo/SetBaudrate/SetEcuPassive, source 8.3.7 grouping preserved), 8 callbacks (ControllerBusOff/ControllerModeIndication/TransceiverModeIndication/TxTimeoutException/ClearTrcvWufFlagIndication/CheckTransceiverWakeFlagIndication/ConfirmPnAvailability/ConfirmCtrlPnAvailability), 7.5.1 MainFunction, 期望接口 12 mandatory (incl. 7.6.1.1 CanIf_SetPduMode usage remark) + 2 optional + configurable &lt;User_GetBusOffDelay&gt;; §8 时序图 (source ch.9, 2 figures); §9 配置规范 (5 containers CanSM/CanSMConfiguration/CanSMGeneral/CanSMManagerNetwork/CanSMDemEventParameterRefs, 21 params, generated via record extraction + hand translation map; source has no container overview figures and no change-history annex — annex A Not-applicable-requirements dropped per STANDARD.md annex rules). Nav + communication landing page + CP AUTOSAR overview registered in the same commit (check_indexes.py exit 0, 184 nav targets). Figures: 14 extracted (Figure1-1, 5-1, 7-1..7-10, 9-1, 9-2). Phase A: strict build exit 0, 0 content WARNINGs, no cansm INFO; heading audit ✓ (§1–§9, no forbidden variants); hygiene ✓ (0 `\<`, 0 {DRAFT}, 0 tables in §2, 0 bracketed prose SWS ids outside B-less article); gen_api_list regenerated — CanSM now resolves to the new article, --check up to date. link_candidates --apply: 71 lines, idempotent on re-run, stopped before 配置规范. check_api_sync = documented N/A (source 8.3.x with 8.3.7 Optional subgroup; manual verification: 2 types ↔ 7.2.1-.2, 9 functions ↔ 7.3.1-.6/7.3.7.1-.3, 8 callbacks ↔ 7.4.1-.8, 1 scheduled ↔ 7.5.1, all 说明 blocks present). Glossary extension pending (batch-level item). Steps 5/6 per user instruction: commit first, combined confirmation after batch
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit a803400 (branch feature/group-communication-sync-2); PR #192, tracking issue #191
 - [ ] cantp (SWS_CANTransportLayer · R23-11 markdown · ❌ new article, short name CanTp)
   - Note: backbone
   - [ ] Step 1 — Source resolution + gap analysis

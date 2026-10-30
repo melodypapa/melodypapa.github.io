@@ -14,7 +14,10 @@ title: "通信（Communication）"
   * [Full-CAN 与 Basic-CAN 的区别](can_driver/full_can_vs_basic_can.md)
 * [AUTOSAR CAN Interface](can_interface/index.md)
 * [AUTOSAR CAN NM（CAN网络管理）](can_network_management/index.md)
+* [AUTOSAR CanSM（CAN状态管理器）](cansm/index.md)
 * [AUTOSAR CAN Transceiver Driver](can_transceiver_driver/index.md)
+* [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](canxl_driver/index.md)
+* [AUTOSAR CAN XL Transceiver Driver（CAN XL 收发器驱动程序）](canxl_transceiver_driver/index.md)
 
 ### LIN
 
@@ -26,7 +29,11 @@ title: "通信（Communication）"
 * [AUTOSAR Ethernet Driver（以太网驱动程序）](ethernet_driver/index.md)
 * [AUTOSAR Ethernet Interface（以太网接口）](ethernet_interface/index.md)
 * [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](ethernet_switch_driver/index.md)
-* [AUTOSAR SoAd (Socket Adaptor)](SoAd/SoAd.md)
+* [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](eth_trcv/index.md)
+* [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](wlan_driver/index.md)
+* [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](wlan_transceiver_driver/index.md)
+* [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](flexray_driver/index.md)
+* [AUTOSAR SoAd (Socket Adaptor)](soad/index.md)
 * [AUTOSAR UdpNm (UDP Network Management)](udp_network_management/index.md)
 * [AUTOSAR XCP（通用测量与校准协议）](xcp/index.md)
 
@@ -39,12 +46,12 @@ title: "通信（Communication）"
 * [AUTOSAR PduR (PDU Router)](pdu_router/index.md)
 * [AUTOSAR COM Based Transformer](com_based_transformer/index.md)
 * [E2E Transformer (E2E转换器)](e2e_transformer/index.md)
-* [AUTOSAR Bus Mirroring（总线镜像）](mirror/mirror.md)
+* [AUTOSAR Bus Mirroring（总线镜像）](mirror/index.md)
 * [AUTOSAR SecOC (Secure Onboard Communication)](sec_oc/index.md)
 * [AUTOSAR FVM (Freshness Value Manager)](fvm/fvm.md)
 * [AUTOSAR SD (Service Discovery)](service_discovery/index.md)
 * [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](spi_handler_driver/index.md)
-* [Data Distribution Service for Classic Platform（经典平台数据分发服务）](<data_distribution service/index.md>)
+* [Data Distribution Service for Classic Platform（经典平台数据分发服务）](data_distribution/index.md)
 
 ## 相关内容
 

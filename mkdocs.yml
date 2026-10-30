@@ -122,28 +122,40 @@ nav:
         - "Full-CAN 与 Basic-CAN 的区别": autosar/communication/can_driver/full_can_vs_basic_can.md
       - "CanIf": autosar/communication/can_interface/index.md
       - "CanNm": autosar/communication/can_network_management/index.md
+      - "CanSM": autosar/communication/cansm/index.md
       - "CanTrcv": autosar/communication/can_transceiver_driver/index.md
+      - "CanXL": autosar/communication/canxl_driver/index.md
+      - "CanXLTrcv": autosar/communication/canxl_transceiver_driver/index.md
       - "ComXf": autosar/communication/com_based_transformer/index.md
-      - "DDS": autosar/communication/data_distribution service/index.md
+      - "DDS": autosar/communication/data_distribution/index.md
       - "Dlt": autosar/communication/diagnostic_log_and_trace/index.md
       - "DoIp": autosar/communication/diagnostic_over_ip/index.md
       - "E2EXf": autosar/communication/e2e_transformer/index.md
       - "Eth": autosar/communication/ethernet_driver/index.md
       - "EthIf": autosar/communication/ethernet_interface/index.md
       - "EthSwt": autosar/communication/ethernet_switch_driver/index.md
+      - "EthTrcv": autosar/communication/eth_trcv/index.md
+      - "WEth": autosar/communication/wlan_driver/index.md
+      - "WEthTrcv": autosar/communication/wlan_transceiver_driver/index.md
+      - "Fr": autosar/communication/flexray_driver/index.md
       - "FvM": autosar/communication/fvm/fvm.md
       - "LdCom": autosar/communication/large_data_com/index.md
       - "Lin": autosar/communication/lin_driver/index.md
       - "LinIf": autosar/communication/lin_interface/index.md
       - "LsDu": autosar/communication/lsdu_router/index.md
-      - "Mirror": autosar/communication/mirror/mirror.md
+      - "Mirror": autosar/communication/mirror/index.md
       - "PduR": autosar/communication/pdu_router/index.md
       - "SecOC": autosar/communication/sec_oc/index.md
       - "SD": autosar/communication/service_discovery/index.md
       - "Spi": autosar/communication/spi_handler_driver/index.md
-      - "SoAd": autosar/communication/SoAd/SoAd.md
+      - "SoAd": autosar/communication/soad/index.md
       - "Xcp": autosar/communication/xcp/index.md
       - "UdpNm": autosar/communication/udp_network_management/index.md
+    - 全局时间（Global Time）:
+      - autosar/globaltime/index.md
+      - "StbM": autosar/globaltime/stbm/index.md
+      - "CanTSyn": autosar/globaltime/can_tsyn/index.md
+      - "EthTSyn": autosar/globaltime/eth_tsyn/index.md
     - 加密（Crypto）:
 
       - autosar/crypto/index.md
