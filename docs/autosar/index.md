@@ -32,6 +32,7 @@ title: "CP AUTOSAR"
   * [E2E Transformer (E2E转换器)](communication/e2e_transformer/index.md)
   * [AUTOSAR Ethernet Driver（以太网驱动程序）](communication/ethernet_driver/index.md)
   * [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)
+  * [AUTOSAR Ethernet State Manager（以太网状态管理器）](communication/ethsm/index.md)
   * [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md)
   * [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)
   * [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)

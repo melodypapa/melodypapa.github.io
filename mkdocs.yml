@@ -136,6 +136,7 @@ nav:
       - "E2EXf": autosar/communication/e2e_transformer/index.md
       - "Eth": autosar/communication/ethernet_driver/index.md
       - "EthIf": autosar/communication/ethernet_interface/index.md
+      - "EthSM": autosar/communication/ethsm/index.md
       - "EthSwt": autosar/communication/ethernet_switch_driver/index.md
       - "EthTrcv": autosar/communication/eth_trcv/index.md
       - "WEth": autosar/communication/wlan_driver/index.md

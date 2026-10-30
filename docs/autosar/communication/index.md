@@ -30,6 +30,7 @@ title: "通信（Communication）"
 
 * [AUTOSAR Ethernet Driver（以太网驱动程序）](ethernet_driver/index.md)
 * [AUTOSAR Ethernet Interface（以太网接口）](ethernet_interface/index.md)
+* [AUTOSAR Ethernet State Manager（以太网状态管理器）](ethsm/index.md)
 * [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](ethernet_switch_driver/index.md)
 * [AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](eth_trcv/index.md)
 * [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](wlan_driver/index.md)
