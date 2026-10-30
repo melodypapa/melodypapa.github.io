@@ -18,6 +18,7 @@ title: "CP AUTOSAR"
     * [Full-CAN 与 Basic-CAN 的区别](communication/can_driver/full_can_vs_basic_can.md)
   * [AUTOSAR CAN Interface](communication/can_interface/index.md)
   * [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)
+  * [AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)
   * [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)
   * [AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md)
   * [AUTOSAR CAN XL Transceiver Driver（CAN XL 收发器驱动程序）](communication/canxl_transceiver_driver/index.md)
@@ -38,7 +39,7 @@ title: "CP AUTOSAR"
   * [AUTOSAR LIN Driver](communication/lin_driver/index.md)
   * [AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)
   * [AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)
-  * [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/mirror.md)
+  * [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/index.md)
   * [AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)
   * [AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)
   * [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md)
@@ -46,6 +47,13 @@ title: "CP AUTOSAR"
   * [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md)
   * [AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)
   * [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)
+
+### 全局时间（Global Time）
+
+* [全局时间（Global Time）](globaltime/index.md)
+  * [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)
+  * [AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)
+  * [AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](globaltime/eth_tsyn/index.md)
 
 ### 加密（Crypto）
 

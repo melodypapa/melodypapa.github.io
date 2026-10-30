@@ -52,7 +52,7 @@
 
 - [ ] Communication backbone: Com, CanSM, CanTp, TcpIp, Nm, EthSM, IpduM, SomeIpXf/SomeIpTp
 - [ ] System services: ComM, Det (small; Det first)
-- [ ] Global time cluster: StbM + CanTSyn/EthTSyn/FrTSyn
+- [ ] Global time cluster: StbM + CanTSyn/EthTSyn/FrTSyn — StbM done 2026-10-30 (Group-globaltime batch row 1)
 - [ ] Storage wrap-up: Ea, Eep
 - [ ] Libraries: Crc, E2E
 - [x] ~~Safety: WdgIf, Wdg~~ — done 2026-10-27 (wdgif + wdg run)
@@ -62,11 +62,11 @@
 
 | Status | Count | Note |
 | --- | ---: | --- |
-| ✅ Type A-compliant | 21 | ready to use |
+| ✅ Type A-compliant | 24 | ready to use |
 | 🔶 Translated pending alignment | 8 | seven chapters present; legacy wording / forbidden-chapter residue |
 | ⚠️ Partial | 16 | missing ≥1 chapter (most miss the 「API规范」 chapter) |
 | ⛔ Stub | 4 | 9–19 lines only |
-| ❌ Missing (SWS) | 78 | R23-11 has 127 SWS docs in total; 49 covered (38.6%) |
+| ❌ Missing (SWS) | 75 | R23-11 has 127 SWS docs in total; 52 covered (40.9%) |
 | ❌ Missing (EXP) | 11 | R23-11 has 22 EXP docs in total; 11 covered |
 | 📖 Guide/topic | 8 | exempt from the Type A skeleton |
 
@@ -99,14 +99,16 @@
 - ✅ [PDU 路由器](pdu_router/) — SWS_PDURouter (R23-11 realigned 2026-10-28: §3.1 canonical heading + registry anchors, §5.5 文件结构/§5.6 版本检查, §6 completed from 6.1.1.1 to 6.10 多核分布, new §7 API规范 (4 types/16 functions/期望接口), §8 时序图 18 figures, §9 配置规范 12 containers 5 figures, §10 模块设计说明, `## B.` 可追溯项变更历史)
 - ✅ [SecOC](sec_oc/) — SWS_SecureOnboardCommunication (R23-11 realigned 2026-10-29: ch.1–5 rebuilt to source order (3=相关文档 / 4=约束和假设 / 5=对其他模块的依赖), §6 rebuilt to source hierarchy incl. 6.2–6.8 requirement tables / 6.9 错误分类, new §7 API规范 (11 imported types from 4 modules / 2 types / 10 functions incl. 可选接口 / 8 callbacks / 5 callouts / 2 scheduled / 期望接口 / 服务接口), §8 时序图 8 figures, §9 配置规范 23 containers + SecOCSecurityEventRefs structure figure, §10 附录A FvM 应用提示 (13 figures incl. FvMaster relationship), `## B.` 可追溯项变更历史 (source has no traceability annex); source §A Not applicable requirements dropped per STANDARD.md annex rules)
 - ✅ [SoAd](soad/) — SWS_SocketAdaptor (R23-11 realigned 2026-10-29: layout switch `SoAd/SoAd.md` → `soad/index.md` with nav + cross-link fixes, §2 缩略语 rebuilt to blockquotes (21 acronyms + 5 terms), §3.1 rebuilt to R23-11 10-entry registry + canonical headings, §4.1/§4.2 added, §5 rebuilt (TcpIp dependency / 通用上层 / 文件结构 / 版本检查), §6 completed (6.1 套接字连接 打开/关闭/场景/通知/状态 through 6.14 版本检查), new §7 API规范 (21 imported types/5 types/29 functions/7 callbacks/1 scheduled/期望接口 incl. 可配置接口), §8 时序图 10 figures, §9 配置规范 16 containers 12 figures, `## B.` 可追溯项变更历史 (R23-11 added/changed items in fences); source ch.6 Requirements Tracing + Annex A "Not applicable requirements" dropped per STANDARD.md annex rules; stale 2022-*.png removed)
-- ⚠️ [Bus Mirror](mirror/mirror.md) — SWS_BusMirroring (missing 缩略语/API; file name is not index.md)
-- ⛔ [以太网交换机驱动](ethernet_switch_driver/) — SWS_EthernetSwitchDriver (stub)
-- ⛔ [服务发现](service_discovery/) — SWS_ServiceDiscovery (stub)
+- 🔶 [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/index.md) — SWS_BusMirroring (R23-11 realigned 2026-10-30)
+- 🔶 [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) — SWS_EthernetSwitchDriver (R23-11 full translation 2026-10-30)
+- 🔶 [AUTOSAR SD（服务发现）](communication/service_discovery/index.md) — SWS_ServiceDiscovery (R23-11 full translation 2026-10-30)
 - 📖 [FvM 专题](fvm/fvm.md) — topic derived from SecOC appendix A (no standalone spec)
 - 📖 [Full-CAN vs Basic-CAN](can_driver/full_can_vs_basic_can.md) — topic subpage
 - 📖 [CanNm R21-11 历史版](can_network_management/r21_11/index_r21_11.md) — historical snapshot
 
-❌ Missing (36): SWS_COM (Com), SWS_CANStateManager (CanSM), SWS_CANTransportLayer (CanTp), SWS_TcpIp (TcpIp), SWS_SOMEIPTransformer (SomeIpXf), SWS_SOMEIPTransportProtocol (SomeIpTp), SWS_IPDUMultiplexer (IpduM), SWS_EthernetStateManager (EthSM), SWS_NetworkManagementInterface (Nm), SWS_FlexRayDriver, SWS_FlexRayInterface, SWS_FlexRayNetworkManagement, SWS_FlexRayStateManager, SWS_FlexRayTransceiverDriver, SWS_FlexRayARTransportLayer, SWS_FlexRayISOTransportLayer, SWS_LINStateManager (LinSM), SWS_LINTransceiverDriver (LinTrcv), SWS_TTCANDriver, SWS_TTCANInterface, SWS_SAEJ1939NetworkManagement (J1939Nm), SWS_SAEJ1939RequestManager (J1939Rm), SWS_SAEJ1939TransportLayer (J1939Tp), SWS_IEEE1722TransportLayer, SWS_MACsecKeyAgreement, SWS_CellularV2XDriver, SWS_ChargingManager, SWS_ChineseV2XManagement, SWS_ChineseV2XMessage, SWS_ChineseV2XNetwork, SWS_ChineseV2XSecurity, SWS_V2XBasicTransport, SWS_V2XDataManager, SWS_V2XFacilities, SWS_V2XGeoNetworking, SWS_V2XManagement
+- ✅ [AUTOSAR COM（COM模块）](communication/com/index.md) — SWS_COM (R23-11 full translation 2026-10-30)
+- ✅ [AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md) — SWS_CANStateManager (R23-11 full translation 2026-10-30)
+❌ Missing (33): SWS_CANTransportLayer (CanTp), SWS_TcpIp (TcpIp), SWS_SOMEIPTransformer (SomeIpXf), SWS_SOMEIPTransportProtocol (SomeIpTp), SWS_IPDUMultiplexer (IpduM), SWS_EthernetStateManager (EthSM), SWS_NetworkManagementInterface (Nm), SWS_FlexRayInterface, SWS_FlexRayNetworkManagement, SWS_FlexRayStateManager, SWS_FlexRayTransceiverDriver, SWS_FlexRayARTransportLayer, SWS_FlexRayISOTransportLayer, SWS_LINStateManager (LinSM), SWS_LINTransceiverDriver (LinTrcv), SWS_TTCANDriver, SWS_TTCANInterface, SWS_SAEJ1939NetworkManagement (J1939Nm), SWS_SAEJ1939RequestManager (J1939Rm), SWS_SAEJ1939TransportLayer (J1939Tp), SWS_IEEE1722TransportLayer, SWS_MACsecKeyAgreement, SWS_CellularV2XDriver, SWS_ChargingManager, SWS_ChineseV2XManagement, SWS_ChineseV2XMessage, SWS_ChineseV2XNetwork, SWS_ChineseV2XSecurity, SWS_V2XBasicTransport, SWS_V2XDataManager, SWS_V2XFacilities, SWS_V2XGeoNetworking, SWS_V2XManagement
 
 ## crypto
 
@@ -131,6 +133,12 @@
 - ✅ [BSW General（基础软件模块通用规范）](general/bsw_general/) — SWS_BSWGeneral (2026-10-27 full Type A translation from R23-11: new article — the foundation document cited as an input document by every module article; ch.6 Requirements Tracing dropped per mandate; source appendix "A Change History" is a change-history annex (not the droppable NA-requirements appendix) and translates as `## B. AUTOSAR 可追溯项变更历史` with item-ID lists verbatim in fences; ch.9 → `## 8. 时序图` (one-sentence chapter per source); ch.10 → `## 9. 配置规范` (template tables, no containers); 1 content figure; OS-services table (66 rows) kept as parsed from R23-11; check_api_sync 0==0)
 
 - ✅ [Platform Types（平台类型）](general/platform_types/) — SWS_PlatformTypes (2026-10-27 full Type A translation from R23-11: new article in the directory the StandardTypes run vacated; §4 carries the source's third subsection 4.3 安全相关环境的适用性; §5 对其他模块的依赖 incl. 5.1 文件结构; §6 功能规格 = 6.1 一般问题 / 6.2 CPU类型 / 6.3 字节序 (6.3.1 位序 + 6.3.2 字节序, 3 endian figures extracted) / 6.4 优化的整数数据类型 / 6.5 布尔数据类型 (C99 _Bool usage fences) / 6.6 错误分类; §7 API = 7.1 导入的类型 不适用 / 7.2 类型定义 19 entries (boolean, uint8..sint64, *_least ×6, float32/64 IEEE 754-2008, VoidPtr/ConstVoidPtr) / 7.3 符号定义 4 entries (CPU_TYPE, CPU_BIT_ORDER, CPU_BYTE_ORDER, TRUE/FALSE #ifndef fences) / 7.4–7.7 不适用; §8/§9 = 不适用 per source ch.9/10.1; appendix B 可追溯项变更历史 with verbatim ID fences; reconstructions flagged: TRUE/FALSE fence tail + VoidPtr Description truncated in source)
+
+## globaltime
+
+- ✅ [AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](globaltime/eth_tsyn/index.md) — SWS_TimeSyncOverEthernet · R23-11 (2026-10-30 full Type A translation, Group-globaltime batch row 3: ch.6 + appendix A dropped per mandate; ch.7 → §6 功能规格 incl. Pdelay protocol + secure time sync + dynamic port config + figures 7-1/7-2; ch.8 → §7 API规范 (2 types + 5 functions + 5 callbacks + 期望接口 none-mandatory/28-optional); ch.9 → §8 时序图 (10 figure parts 9-1..9-9b); ch.10 → §9 配置规范 (15 containers, [ECUC_EthTSyn_*] cells, 6 container diagrams, 5 constr_* constraints); source lettered annexes B (traces) AND C (constraints) both translated as ## B./## C.; check_api_sync N/A — source numbers API as 8.1.x 4-level nesting, counts verified manually 2/5/5; 7 glossary terms)
+- ✅ [AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md) — SWS_TimeSyncOverCAN · R23-11 (2026-10-30 full Type A translation, Group-globaltime batch row 2: ch.6 + appendix A dropped per mandate; ch.3 → house §3.1 registry (8 entries); ch.7 → §6 功能规格 with message-format tables 7.1–7.19 as GFM + figures 7-1..7-4; ch.8 → §7 API规范 (2 types + 3 functions + 4 callbacks + 调度函数 + 期望接口 mandatory/optional); ch.9 → §8 时序图 (6 figures 9-1..9-6); ch.10 → §9 配置规范 (18 containers, [ECUC_CanTSyn_*] cells, 11 container diagrams Figure10-1..10-11, 约束 2 items with [SWS_CanTSyn_CONSTR_*] kept); appendix B ID fences reconstructed from the R23-11 PDF pp.129-130 (markdown B.1.2 table hyphen-garbled); check_api_sync OK; 10 glossary terms; CanTSyn source ch.4.1 keeps the 3-item numbered limitation list; no dev-error anchors needed beyond the error tables)
+- ✅ [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md) — SWS_SynchronizedTimeBaseManager · R23-11 (2026-10-30 full Type A translation, first row of the Group-globaltime batch: new article + new 全局时间（Global Time） section landing page + nav; ch.6 Requirements Tracing + appendix A dropped per mandate; ch.2 → 定义和缩略语 (2.1 缩略语 23 terms + 2.2 定义 27 terms, mirrors the source order Acronyms-then-Definitions); ch.7 → §6 功能规格 (7.1–7.23 incl. 10 figures 7-1..7-10 + 12 tables 7.1–7.10, formulas 7.1–7.15 restored from the R23-11 PDF where the markdown conversion lost them); ch.8 → §7 API规范 (3 types + 39 functions + 8 configurable interfaces + full 8.7 服务接口: 4 provided/6 required ports, 1 S/R + 9 C/S interfaces, 31 implementation data types); ch.9 → §8 时序图 (9 figures — Figure9-6 extracted from the source PDF p.204 because its diagram is lost in the markdown conversion); ch.10 → §9 配置规范 (14 containers, SWS 条目 cells filled with [ECUC_StbM_*], 12 container UML diagrams Figure10-1..10-12 embedded, 约束 5 items with [SWS_StbM_CONSTR_*] kept); appendix B → ## B. with verbatim ID fences; §3.1 registry in house format + citation/identifier/chapter links applied via link_candidates (506 lines + 5 citation links); 33 glossary terms added; check_api_sync: counts 3/3 + 39/39 match, two name diffs are source-conversion artifacts — source heading 8.2.1 "Extension to Std_ReturnType" is multi-word (script alias gap) and source heading 8.3.27 carries a stray space "StbM_ FrSetSlaveTimingData" (PDF p.140 confirms the real name; article uses the correct name); 4.3 Conflicts "None." omitted per the placeholder exception)
 
 ## io
 
@@ -188,7 +196,7 @@
 
 ## Missing sections (no articles at all)
 
-- **GlobalTime (4)**: SWS_SynchronizedTimeBaseManager (StbM), SWS_TimeSyncOverCAN (CanTSyn), SWS_TimeSyncOverEthernet (EthTSyn), SWS_TimeSyncOverFlexRay (FrTSyn)
+- **GlobalTime (1 remaining)**: SWS_TimeSyncOverFlexRay (FrTSyn) — SWS_SynchronizedTimeBaseManager (StbM) + SWS_TimeSyncOverCAN (CanTSyn) + SWS_TimeSyncOverEthernet (EthTSyn) translated 2026-10-30
 - **Libraries (9)**: SWS_CRCLibrary (Crc), SWS_E2ELibrary (E2E), SWS_BFXLibrary (Bfx), SWS_BSWMulticoreLibrary (Bmc), SWS_MFLLibrary (Mfl), SWS_MFXLibrary (Mfx), SWS_IFLLibrary (Ifl), SWS_IFXLibrary (Ifx), SWS_EFXLibrary (Efx)
 - **RTE / SWArch (2)**: SWS_RTE, SWS_ARTI
 - ~~**Safety (2)**: SWS_WatchdogInterface (WdgIf), SWS_WatchdogDriver (Wdg)~~ — both translated 2026-10-27
