@@ -37,7 +37,7 @@
 
 **Fill depth (existing articles)**
 
-- [ ] 2026-10-25 tables-as-images retired (STANDARD.md §4 decision — source tables translate as GFM tables): 4 `![Table*.png]` refs remain — bswm 1 (Table7-1 BswMRuleInitState), dcm 1, time_service 2; EcuM ✅ (all 7 translated/deleted 2026-10-25), operating_system ✅ (Table7_1 deleted 2026-10-26, GFM table already present), data_distribution ✅ (Table_4_1 deleted 2026-10-29)
+- [ ] 2026-10-25 tables-as-images retired (STANDARD.md §4 decision — source tables translate as GFM tables): 3 `![Table*.png]` refs remain — bswm 1 (Table7-1 BswMRuleInitState), time_service 2; Dcm Table1-1 converted to GFM in the current sync (2026-10-30), EcuM ✅ (all 7 translated/deleted 2026-10-25), operating_system ✅ (Table7_1 deleted 2026-10-26, GFM table already present), data_distribution ✅ (Table_4_1 deleted 2026-10-29)
 - [ ] 1 ⚠️ article missing only the 「API规范」 chapter: can_interface (operating_system ✅ 2026-10-26; crypto_driver ✅ 2026-10-27 — its real gap was source 7.1.2–ch.10, not just the API chapter; pdu_router ✅ 2026-10-28 — its real gap was §5.5 through §10 plus appendix B; ethernet_interface ✅ 2026-10-28 — its real gap was §6.1.11–ch.10 plus appendix B, not just the API chapter)
 - [ ] The other 6 ⚠️ articles: complete their respective missing chapters (sec_oc, SoAd, mirror, dem, fee, dcm) — iohwab ✅ 2026-10-27; memory_access ✅ 2026-10-27; data_distribution ✅ 2026-10-29; sec_oc ✅ 2026-10-29; SoAd ✅ 2026-10-29
 - [ ] 3 ⛔ stubs: full translation (ethernet_switch_driver, service_discovery, platform_types — platform_types also needs its front-matter title and nav label fixed in the same change); memory_mapping ✅ 2026-10-28
@@ -129,7 +129,7 @@
 
 ## diagnostics
 
-- ⚠️ [Dcm 诊断通信管理器](diagnostic_communication_manager/) — SWS_DiagnosticCommunicationManager (intro + 缩略语 only; source ~24k lines)
+- ⚠️ [Dcm 诊断通信管理器](diagnostic_communication_manager/) — SWS_DiagnosticCommunicationManager · R23-11 (translated through §9; Appendix A change-history scope and ISO URL verification pending; Appendix B N/A requirements omitted)
 - ✅ [Dem 诊断事件管理器](diagnostic_event_manager/) — SWS_DiagnosticEventManager · R23-11 (Type A full rebuild 2026-10-29, PR #186: 11,270 lines; API 111 entries incl. 76 grouped functions, 38 ports, 46 config containers, appendix B)
 
 ❌ Missing (1): SWS_SAEJ1939DiagnosticCommunicationManager (J1939Dcm)

@@ -126,6 +126,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
 {: .glossary-source}
 
+**AddressAndLengthFormat Identifier**
+> 地址和长度格式标识符：定义请求消息中 memoryAddress 和 memorySize 参数使用的字节数。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
 **AEB**
 > 自主紧急制动（**Autonomous Emergency Braking**）。
 >
@@ -195,7 +201,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **API**
 > 应用编程接口（**Application Programming Interface**）
 >
-> 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Standard Types（标准类型）](general/standard_types/index.md)（SWS_StandardTypes）
+> 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Standard Types（标准类型）](general/standard_types/index.md)（SWS_StandardTypes）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **APID**
@@ -208,6 +214,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 一个应用/**SW-C** 的缩写，标识一条日志和跟踪消息所来自的应用/**SW-C**；由四个 8 位 ASCII 字符组成。
 >
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+{: .glossary-source}
+
+**Application Layer**
+> 应用层位于 **RTE** 之上；**AUTOSAR** 软件组件位于应用层中。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **Applied Rate**
@@ -256,6 +268,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 组装连接器。在 VFB 层级把一个组件的 RPort/PRPort 与另一个组件的 PPort/PRPort 连接起来的连接器；恰好连接一个提供端口与一个要求端口。
 >
 > 来源：[VFB（虚拟功能总线）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）
+{: .glossary-source}
+
+**Atomic Sender/Receiver interface**
+> 原子发送者/接收者接口可将 **DID** 数据元素分组为一个记录数据元素原型，所有数据元素都可以通过单个读取或写入操作访问。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **Atomic sequence/ atomic piece**
@@ -445,7 +463,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CAN**
 > Controller Area Network —— 控制器局域网。
 >
-> 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）
+> 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **CanIf**
@@ -482,6 +500,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 复杂驱动（**Complex Driver**）。未被 AUTOSAR 标准化的软件实体，可以访问 AUTOSAR 接口和/或基础软件模块 API，或经由它们被访问；位于分层软件架构的复杂驱动层。
 >
 > 来源：[CDD Design and Integration Guideline（CDD 设计与集成指南）](general/cdd_design_and_integration/index.md)（AUTOSAR_CP_EXP_CDDDesignAndIntegrationGuideline）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）
+{: .glossary-source}
+
+**CEMR**
+> 控制使能掩码记录（**ControlEnableMaskRecord**）。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **Channel**
@@ -548,6 +572,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 普通 **DTC**，但被多个监视器报告的多个事件引用（例如 **ECU** 缺陷，由不同的硬件缺陷组成）。
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**Concurrent TesterPresent**
+> 设置 suppressPosRspMsgIndicationBit（3E 80）并通过功能寻址接收的 **UDS** 服务 **TesterPresent**；也称为保活（keep-alive）逻辑。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **Context ID**
@@ -711,7 +741,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DCM**
 > 诊断通信管理器（**Diagnostic Communication Manager**）
 >
-> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）
+> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **Deadline End Checkpoint**（**Deadline Stop Checkpoint**）
@@ -747,7 +777,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DEM**
 > 诊断事件管理器（**Diagnostic Event Manager**）。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](communication/large_data_com/index.md)（SWS_LargeDataCOM）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **Dem-internal data value**
@@ -777,7 +807,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DET**
 > 默认错误跟踪器（**Default Error Tracer**），实现报告开发错误的模块。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Default Error Tracer（默认错误跟踪器）](system_services/default_error_tracer/index.md)（SWS_DefaultErrorTracer）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](communication/large_data_com/index.md)（SWS_LargeDataCOM）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Default Error Tracer（默认错误跟踪器）](system_services/default_error_tracer/index.md)（SWS_DefaultErrorTracer）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **DHCP**
@@ -786,10 +816,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）
 {: .glossary-source}
 
+**Diagnostic Channel**
+> 诊断通道：诊断工具与 **ECU** 之间可以进行数据传输的链路。例如，**ECU** 通过 **CAN** 连接时，诊断通道会分配一个 **CAN-ID**；连接至 **MOST**、**FlexRay**、**LIN** 等总线系统的诊断通道同样适用。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
 **DID**
 > 数据标识符（**Data Identifier**）
 >
-> 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+> 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **DIP**
@@ -844,6 +880,24 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 日间行车灯（**Daytime Running Light**）
 >
 > 来源：[Safety Use Case（安全用例）](safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase）
+{: .glossary-source}
+
+**DSD**
+> 诊断服务分发器（**Diagnostic Service Dispatcher**），**Dcm** 模块的子模块。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**DSL**
+> 诊断会话层（**Diagnostic Session Layer**），**Dcm** 模块的子模块。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**DSP**
+> 诊断服务处理（**Diagnostic Service Processing**），**Dcm** 模块的子模块。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **&lt;DstLo&gt;**
@@ -1112,6 +1166,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）
 {: .glossary-source}
 
+**External Diagnostic Tool**
+> 外部诊断工具：并非永久连接到车辆通信网络的设备，可为开发、制造或维修用途连接车辆，例如诊断测试仪或 OBD 扫描工具。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
 **External Graph**
 > 可能涉及多于一个**被监督实体**的**图**。其配置依赖于模式。
 >
@@ -1298,6 +1358,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 故障容忍时间间隔（**Fault Tolerant Time Interval**）
 >
 > 来源：[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures）
+{: .glossary-source}
+
+**Functional Addressing**
+> 功能寻址：特定通信网络中的一组或全部节点从一个发送节点接收消息（1:n）的诊断通信模型，也称为广播或多播。**OBD** 通信始终使用功能寻址模式。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **Functionality**
@@ -1495,7 +1561,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ID**
 > 标识符（**Identifier**）
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **IdsM**
@@ -1544,6 +1610,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 整数（**Integer**）
 >
 > 来源：[AUTOSAR Platform Types（平台类型）](general/platform_types/index.md)（SWS_PlatformTypes）
+{: .glossary-source}
+
+**Internal Diagnostic Tool**
+> 内部诊断工具：连接到车辆通信网络的设备或 **ECU**，可用于高级事件跟踪、高级分析和维修。其行为可以与外部诊断工具相同；该术语并不意味着它作为 **AUTOSAR** 软件组件包含在每个 **ECU** 中。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **Internal Graph**
@@ -1708,6 +1780,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Software Cluster Design and Integration Guideline for Classic Platform（经典平台软件集群设计与集成指南）](system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline）
 {: .glossary-source}
 
+**LIN**
+> 局部互联网络（**Local Interconnect Network**）。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
 **LKA**
 > 车道保持辅助（**Lane Keep Assist**）。
 >
@@ -1869,7 +1947,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **MCU**
 > 微控制器单元（**Microcontroller Unit**）
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **Memory Device**
@@ -1960,6 +2038,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > Master Output Slave Input（主出从入）。
 >
 > 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）
+{: .glossary-source}
+
+**MOST**
+> 面向媒体的系统传输（**Media Orientated System Transport**）。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **MPU**
@@ -2060,6 +2144,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
 
+**NRC**
+> 负响应码（**Negative Response Code**）。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
 **Numerator**
 > 特定监视器 m 的分子（Numeratorm）是一个计数器，指示车辆被操作的次数，使得检测该特定监视器故障所需的所有监控条件都已被满足。
 >
@@ -2089,13 +2179,25 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **OBD**
 > 车载诊断（**On-board Diagnostics**）。
 >
-> 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）
+> 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **OBD ECUs**
 > 车辆中可以有 3 种不同类型的 **OBD ECU**：**Master ECU**（每车一个）、**Primary ECU**（每车多个）、从属/辅助 **ECU**（每车多个）。
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**OBD Scan tool**
+> 参见外部诊断工具（**External Diagnostic Tool**）的定义。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**OBD Service**
+> 这是指 **ISO 15031-5** 中定义的 **OBD** 服务。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **OBD UDS DTC separation**
@@ -2224,6 +2326,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Standard Types（标准类型）](general/standard_types/index.md)（SWS_StandardTypes）、[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）
 {: .glossary-source}
 
+**OSI**
+> 开放系统互连（**Open Systems Interconnection**）。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
 **OTA**
 > 远程升级（**Over The Air**），OEM 后台（**backend**）与车辆之间无线通信的总称。
 >
@@ -2298,10 +2406,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](globaltime/eth_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverEthernet）
 {: .glossary-source}
 
+**PDID**
+> 周期数据标识符（**Periodic Data Identifier**），在 **ReadDataByPeriodicIdentifier** 请求后由 **Dcm** 周期性发送。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
 **PDU**
 > 协议数据单元（**Protocol Data Unit**）
 >
-> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[Layered Software Architecture（分层软件架构）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[VFB（虚拟功能总线）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）
+> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[Layered Software Architecture（分层软件架构）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[VFB（虚拟功能总线）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**periodic transmission rate**
+> 周期数据标识符传输的两次调用之间的时间间隔；快速、中速和慢速周期传输分别配置速率，且配置值始终是 **Dcm** 主任务时间的整数倍。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **Permission state**
@@ -2316,10 +2436,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**Physical Addressing**
+> 物理寻址：特定通信网络中的一个节点从一个发送节点接收消息（1:1）的诊断通信模型，也称为单播。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
 **PID**
 > 参数标识（**Parameter Identification**，SAE J1587 或 SAE J1979）
 >
-> 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+> 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **PKI**
@@ -2480,6 +2606,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**RCRRP**
+> 正确接收响应——响应挂起（**Response correctly received - response pending**）。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
 **Readiness**
 > 就绪状态指 **UDS** 状态字节的已测试位 TestNotCompletedSinceLastClear（位 4）和 TestNotCompletedThisOperationCycle（位 6）。
 >
@@ -2510,6 +2642,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CAN XL Driver（CAN XL 驱动程序）](communication/canxl_driver/index.md)（SWS_CANXLDriver）
 {: .glossary-source}
 
+**RID**
+> 例程标识符（**Routine Identifier**）。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
 **RKE**
 > 遥控无钥匙进入（**Remote Keyless Entry**）。设计用于远程锁定或解锁汽车进入的系统；单向广播无线电波，实现加密与滚动码算法。
 >
@@ -2520,6 +2658,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 翻滚碰撞检测（**Rollover Crash Detection**）
 >
 > 来源：[Explanation of Application Interfaces of Occupant and Pedestrian Safety Systems Domain（乘员与行人安全系统域应用接口说明）](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety）
+{: .glossary-source}
+
+**ROE**
+> 事件响应（**ResponseOnEvent**）。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **Rollover mechanism**
@@ -2555,7 +2699,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **RTE**
 > 运行时环境（**Runtime Environment**）
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **Runnable**
@@ -2602,6 +2746,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）
 {: .glossary-source}
 
+**SAP**
+> 服务访问点（**Service Access Point**）。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
 **Satellite**
 > 卫星。分布式 BSW 模块的一部分；主与卫星之间的工作分配是实现特定的，卫星一般不能在没有主的情况下工作。
 >
@@ -2629,7 +2779,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SDU**
 > 服务数据单元（**Service Data Unit**）——**PDU** 的载荷。
 >
-> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR Platform Types（平台类型）](general/platform_types/index.md)（SWS_PlatformTypes）、[Layered Software Architecture（分层软件架构）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[VFB（虚拟功能总线）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）
+> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR Platform Types（平台类型）](general/platform_types/index.md)（SWS_PlatformTypes）、[Layered Software Architecture（分层软件架构）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[VFB（虚拟功能总线）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **SDU type**
@@ -2716,6 +2866,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）
 {: .glossary-source}
 
+**SID**
+> 服务标识符（**Service Identifier**）。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
 **Slow-Mode**
 > 对看门狗硬件的触发可以以较长的超时期限完成。例如，该模式可用于系统启动/初始化阶段。例如，看门狗硬件被配置为翻转模式（对触发的时间点没有约束）且超时期限为 20 毫秒。
 >
@@ -2756,6 +2912,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 可疑参数编号（**Suspect Parameter Number**，SAE J1939）
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**SPRMIB**
+> 正响应消息指示位抑制（**suppressPosRspMsgIndicationBit**）。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **SR**
@@ -2875,7 +3037,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SW-C**
 > 软件组件（**Software Component**）
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **SWC**
@@ -3063,7 +3225,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **TP**
 > 传输协议（**Transport Protocol**）
 >
-> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）
+> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **TP-PDU**
@@ -3131,7 +3293,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **UDS**
 > 统一诊断服务（**Unified Diagnostic Services**）。
 >
-> 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）
+> 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**UDS Service**
+> 指 **ISO 14229-1** 中定义的 **UDS** 服务。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **UDS status byte**
@@ -3390,6 +3558,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > XML 模式定义（**XML Schema Definition**）
 >
 > 来源：[Application Interfaces User Guide（应用接口用户指南）](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide）
+{: .glossary-source}
+
+**Xxx_**
+> **API** 提供者的占位符（**Placeholder for an API provider**）。
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 ## Y
