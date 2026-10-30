@@ -198,12 +198,13 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 6 — TODO.md row + commit/PR — commit 5036abf (branch feature/group-communication-sync-3)
 - [ ] ethsm (SWS_EthernetStateManager · R23-11 markdown · ❌ new article, short name EthSM)
   - Note: backbone
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-31 run — new article communication/ethsm/index.md created (commit 37c98ec, branch feature/group-communication-sync-3): full Type A translation, ~875 ln; §2 14 term lines = source rows exactly; §3 = source 「Input documents」 heading (com_based_transformer precedent, kept); SOURCE PLACEHOLDER OMISSION reported for user verification: source §3.2 "Related standards and norms" is an EMPTY section (no content at all) → omitted entirely under the 2026-10-28 placeholder exception, §3.3 相关规范 renumbered to 9.2; §6 functional spec complete from source ch.7 (mode request translation, mode output incl. draft SWS_EthSM_00224 ChrgM_DataLinkIndication kept, peripheral control, multiple networks, background/rationale, network mode state machine with ALL sub-state transitions 6.6.1-6.6.8, 表7.1 sub-state/hardware/IP table, COTS stack usage incl. dummy mode); §6.8 error tables incl. production error ETHSM_E_LINK_DOWN as vertical table; §7 API check_api_sync OK (4 functions/4 说明 blocks; 9 imported types, 1 type, 4 callbacks incl. draft EthSM_SleepIndication, 1 scheduled, 期望接口 5+4); §8 时序图 3 figures; §9 配置规范 (Configuration Tool subsection reduced to pointer sentence — source has no parameters there, reported; EthSMGeneral 5 params + EthSMNetwork 5 params + EthSMDemEventParameterRefs 1 param, ECUC cells filled). source ch.6 Requirements Tracing + annex A droppable (reported). check_api_sync = OK. Figures: 6 extracted (4 vector-rendered: 7-1, 9-1..9-3). Phase A: strict build exit 0, 0 WARNINGs, no ethsm INFO; heading audit ✓ (9.2.1 translated as 配置工具（Configuration Tool）); forbidden-variant sweep 0; hygiene ✓ (0 `\<`, 0 {DRAFT} — draft tags dropped as chrome); acronym slice 0 tables, 14 term lines; check_indexes exit 0; gen_api_list regenerated + --check up to date. link_candidates --apply: 3 chapter-refs + 6 citations, idempotent; census: identifier mentions 18 lines all §9 definitional; cross-article mentions DEM/BswM/EcuM SITE report-only, EthSM/ComM/Det NO-ARTICLE (EthSM self-excluded). Glossary extension skipped (batch-level pending item). Steps 5/6 per user instruction: commit first, combined confirmation after batch
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit 37c98ec (branch feature/group-communication-sync-3)
 - [ ] ipdum (SWS_IPDUMultiplexer · R23-11 markdown · ❌ new article, short name IpduM)
   - Note: backbone
   - [ ] Step 1 — Source resolution + gap analysis
