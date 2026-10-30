@@ -122,6 +122,7 @@ nav:
         - "Full-CAN 与 Basic-CAN 的区别": autosar/communication/can_driver/full_can_vs_basic_can.md
       - "CanIf": autosar/communication/can_interface/index.md
       - "CanNm": autosar/communication/can_network_management/index.md
+      - "Nm": autosar/communication/nm/index.md
       - "CanSM": autosar/communication/cansm/index.md
       - "CanTp": autosar/communication/cantp/index.md
       - "CanTrcv": autosar/communication/can_transceiver_driver/index.md

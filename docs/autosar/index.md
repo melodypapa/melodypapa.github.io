@@ -18,6 +18,7 @@ title: "CP AUTOSAR"
     * [Full-CAN 与 Basic-CAN 的区别](communication/can_driver/full_can_vs_basic_can.md)
   * [AUTOSAR CAN Interface](communication/can_interface/index.md)
   * [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)
+  * [AUTOSAR Nm（网络管理接口）](communication/nm/index.md)
   * [AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)
   * [AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)
   * [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)
