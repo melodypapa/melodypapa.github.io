@@ -52,7 +52,7 @@ release: R23-11
 
 在本文档的上下文中，只有一个强制时间适用：“在 **BSW** 模块配置完成时”。
 
-### 1.4. Abbreviations
+### 1.4. 缩略语（Abbreviations）
 
 The following table contains a list of abbreviations used in the scope of this document along with the spelled-out meaning of each of the abbreviations.
 

@@ -498,7 +498,7 @@ BSW调度器调用服务发现模块的主函数，这是服务发现周期性�
 
 ![Overview of the Service Discovery message format](Figure7-2.png)
 
-#### 6.3.1. Request ID
+#### 6.3.1. Request ID 字段
 
 本章描述与Request ID字段相关的需求。Request ID由Client ID和Session ID组成。Client ID不用于服务发现，而Session ID用于检测车辆内其他服务发现实例的重启或重新启动，以修复服务发现模块的本地状态。
 
@@ -541,7 +541,7 @@ SOME/IP-SD报头以Flags字段开始。它用于指示全局的服务发现信�
 
 该Reserved字段目前未使用，留空以供SOME/IP-SD协议的进一步增强使用。
 
-#### 6.3.8. Entries Array
+#### 6.3.8. Entries Array（条目数组）
 
 当SOME/IP-SD查找或提供服务实例或处理订阅时，这是通过所谓的条目（**entries**）完成的，条目在SOME/IP-SD消息的条目数组中传输（见图7.2）。
 
@@ -587,7 +587,7 @@ Type 2条目格式布局的Eventgroup ID字段应承载事件组的ID，使用�
 
 Type 2条目（事件组条目）不得使用「任意值」作为Service ID（即0xFFFF）、Instance ID（即0xFFFF）、Eventgroup ID（即0xFFFF）和/或Major Version（即0xFF）。
 
-#### 6.3.9. Options Array
+#### 6.3.9. Options Array（选项数组）
 
 Option数组是服务发现消息的最后一部分（见图7.2）。options数组中的选项携带附加信息。
 
@@ -623,7 +623,7 @@ Configuration Option示例：
 
 如果存在**SdInstanceHostname**，则应向Configuration Option添加一个key为「hostname」、value设置为该配置项字符串的条目。
 
-#### 6.3.9.2. IPv4 Endpoint Option
+#### 6.3.9.2. IPv4 端点选项
 
 本章描述IPv4端点选项（**IPv4 Endpoint Option**）的字段和值，它传输单播IP地址、第4层协议（如UDP或TCP）和端口号；即与服务通信所需的信息。
 
@@ -640,7 +640,7 @@ Configuration Option示例：
 
 此外，如果选择了安全端口，则需要在发送订阅之前建立安全关联。否则，事件和通知事件既不能通过安全端口发送也不能接收。
 
-#### 6.3.9.3. IPv6 Endpoint Option
+#### 6.3.9.3. IPv6 端点选项
 
 本章描述IPv6端点选项（**IPv6 Endpoint Option**）的字段和值，它与IPv4 Endpoint Option相同，只是传输IPv6地址而不是IPv4地址。
 
@@ -655,7 +655,7 @@ Configuration Option示例：
 
 此外，如果选择了安全端口，则需要在发送订阅之前建立安全关联。否则，事件和通知事件既不能通过安全端口发送也不能接收。
 
-#### 6.3.9.4. IPv4 Multicast Option
+#### 6.3.9.4. IPv4 组播选项
 
 IPv4多播选项（**IPv4 Multicast Option**）要么由[**SdServerService**](#9217-sdserverservice)用于通告其已配置的Eventhandler多播端点，要么由[**SdClientService**](#927-sdclientservice)用于通告其已配置的Consumed Eventgroup多播端点：
 
@@ -668,7 +668,7 @@ IPv4多播选项（**IPv4 Multicast Option**）要么由[**SdServerService**](#9
 
 ![IPv4 Multicast Option format](Figure7-9.png)
 
-#### 6.3.9.5. IPv6 Multicast Option
+#### 6.3.9.5. IPv6 组播选项
 
 IPv6多播选项（**IPv6 Multicast Option**）要么由[**SdServerService**](#9217-sdserverservice)用于通告其已配置的Eventhandler多播端点，要么由[**SdClientService**](#927-sdclientservice)用于通告其已配置的Consumed Eventgroup多播端点：
 
@@ -681,7 +681,7 @@ IPv6多播选项（**IPv6 Multicast Option**）要么由[**SdServerService**](#9
 
 ![IPv6 Multicast Option format](Figure7-10.png)
 
-#### 6.3.9.6. IPv4 SD Endpoint Option
+#### 6.3.9.6. IPv4 SD 端点选项
 
 IPv4 SD端点选项（**IPv4 SD Endpoint Option**）传输发送方SD实现的端点（即IP地址和端口）。这用于在无法使用IP地址和/或端口号的情况下标识SOME/IP-SD实例。
 
@@ -695,7 +695,7 @@ PRS_SOMEIPSD_00547、PRS_SOMEIPSD_00650、PRS_SOMEIPSD_00651、PRS_SOMEIPSD_0054
 
 注意：SD Endpoint Options的发送目前不在AUTOSAR的范围之内。
 
-#### 6.3.9.7. IPv6 SD Endpoint Option
+#### 6.3.9.7. IPv6 SD 端点选项
 
 IPv6 SD端点选项（**IPv6 SD Endpoint Option**）传输发送方SD实现的端点（即IP地址和端口）。这用于在无法使用IP地址和/或端口号的情况下标识SOME/IP-SD实例。
 
@@ -772,7 +772,7 @@ OfferService条目应承载按照**SdServerTimerTTL**配置的TTL。
 
 所有涉及服务的条目（FindService、OfferService和StopOfferService）应承载（即引用）按配置的选项。
 
-注意：另见第[6.3.9.6](#6396-ipv4-sd-endpoint-option)节。
+注意：另见第[6.3.9.6](#6396-ipv4-sd-端点选项)节。
 
 #### 6.4.2. FindService条目
 
@@ -1699,7 +1699,7 @@ SD应将更新后的ACL保存在该ACL **SdAclCheckBlockDescriptorRef**所引用
 
 在**ClientService**侧：
 
-###### 6.9.2.1.1. Offer Service
+###### 6.9.2.1.1. Offer Service（服务提供）
 
 当Client Service收到一个OfferService时：
 
@@ -1735,7 +1735,7 @@ SD应以参数SoConId和RemoteAddr调用函数**SoAd_IsConnectionReady**，以�
 
 参见图9.12：SubscribeEventgroup的ACL检查序列。
 
-###### 6.9.2.2.2. Method Request
+###### 6.9.2.2.2. Method Request（方法请求）
 
 当Server Service收到一个Method调用请求时：
 
@@ -2390,15 +2390,15 @@ boolean <SdCapabilityRecordMatchCallout> ( PduIdType pduID, uint8 type, uint16 s
 | 参数（in） | pduID |
 | | 所接收I-PDU的ID（用于区分不同的SD实例）。 |
 | | type |
-| | 所接收条目的Type字段的内容（见第[6.3.8](#638-entries-array)节）。 |
+| | 所接收条目的Type字段的内容（见第[6.3.8](#638-entries-array条目数组)节）。 |
 | | serviceID |
-| | 所接收条目的Service ID字段的内容（见第[6.3.8](#638-entries-array)节）。 |
+| | 所接收条目的Service ID字段的内容（见第[6.3.8](#638-entries-array条目数组)节）。 |
 | | instanceID |
-| | 所接收条目的Instance ID字段的内容（见第[6.3.8](#638-entries-array)节）。 |
+| | 所接收条目的Instance ID字段的内容（见第[6.3.8](#638-entries-array条目数组)节）。 |
 | | majorVersion |
-| | 所接收条目的Major Version字段的内容（见第[6.3.8](#638-entries-array)节）。 |
+| | 所接收条目的Major Version字段的内容（见第[6.3.8](#638-entries-array条目数组)节）。 |
 | | minorVersion |
-| | 所接收条目的Minor Version字段的内容（见第[6.3.8](#638-entries-array)节）。 |
+| | 所接收条目的Minor Version字段的内容（见第[6.3.8](#638-entries-array条目数组)节）。 |
 | | receivedConfigOptionPtrArray |
 | | 以NULL_PTR结尾的指针数组，指向传入条目（即所接收的SD消息）中以零结尾的配置字符串（见图6「Configuration Option」）。 |
 | | configuredConfigOptionPtrArray |
@@ -2420,13 +2420,13 @@ boolean <SdCapabilityRecordMatchCallout> ( PduIdType pduID, uint8 type, uint16 s
 
 ![Sequence CLIENT / SERVER: Sd_RxIndication](Figure9-1.png)
 
-### 8.2. SERVER: Response Behavior
+### 8.2. SERVER（服务端）: 响应行为
 
 图9.2：序列SERVER: Response Behavior（**Sequence SERVER: Response Behavior**）
 
 ![Sequence SERVER: Response Behavior](Figure9-2.png)
 
-### 8.3. CLIENT: Response Behavior
+### 8.3. CLIENT（客户端）: 响应行为
 
 图9.3：序列CLIENT: Response Behavior（**Sequence CLIENT: Response Behavior**）
 
@@ -2462,19 +2462,19 @@ boolean <SdCapabilityRecordMatchCallout> ( PduIdType pduID, uint8 type, uint16 s
 
 ![Sequence SERVER: AddClientToFanOut](Figure9-8.png)
 
-### 8.9. SERVER: Start
+### 8.9. SERVER（服务端）: 启动
 
 图9.9：序列配置变体SERVER: Start（**Sequence configuration variants SERVER: Start**）
 
 ![Sequence configuration variants SERVER: Start](Figure9-9.png)
 
-### 8.10. CLIENT: Start
+### 8.10. CLIENT（客户端）: 启动
 
 图9.10：序列CLIENT: Start（**Sequence CLIENT: Start**）
 
 ![Sequence CLIENT: Start](Figure9-10.png)
 
-### 8.11. ACL: Service Offer
+### 8.11. ACL（访问控制列表）: 服务提供
 
 图9.11：Service Offer的ACL检查序列（**ACL check Sequence for Service Offer**）
 
@@ -2486,7 +2486,7 @@ boolean <SdCapabilityRecordMatchCallout> ( PduIdType pduID, uint8 type, uint16 s
 
 ![ACL check Sequence for SubscribeEventgroup](Figure9-12.png)
 
-### 8.13. ACL: Method call request
+### 8.13. ACL（访问控制列表）: 方法调用请求
 
 图9.13：Method Call Request的ACL检查序列（**ACL check Sequence for Method Call Request**）
 

@@ -313,7 +313,7 @@ release: R23-11
 | SEV_UDS_NUMBER_OF_FAILED_AUTHENTICATION_ATTEMPTS_EXCEEDED | 身份验证失败次数超限 —— **OEM** 特定。 | 35 |
 | SEV_UDS_CERTIFICATE_FAILURE | 诊断仪尝试使用无效证书进行身份验证。 | 36 |
 | SEV_UDS_ECU_UNLOCK_SUCCESSFUL | 成功解锁 **ECU**（通过 **Security Access** $27），按级别计。 | 37 |
-| SEV_UDS_AUTHENTICATION_SUCCESSFUL | 成功完成身份验证（通过 [**Authentication**](#79311-authentication) $29）。 | 38 |
+| SEV_UDS_AUTHENTICATION_SUCCESSFUL | 成功完成身份验证（通过 [**Authentication**](#79311-认证authentication) $29）。 | 38 |
 | SEV_UDS_CLEAR_DTC_SUCCESSFUL | **DTC** 信息已通过 **SID** 0x14 **ClearDTCInformation** 清除。 | 39 |
 | SEV_UDS_ECU_RESET | **ECU** 已被 **SID** 0x11 **ResetECU** 复位。 | 40 |
 | SEV_UDS_WRITE_DATA | 诊断数据标识符已通过 **SID** 0x2E 写入。 | 41 |
@@ -882,13 +882,13 @@ DcmDspSecurityResetAttemptCounterOnTimeout 只有在 [DcmDspSecurityRow](#925202
 
 **Dcm** 提供认证诊断的手段。**DSL** 子模块为每个诊断连接提供一个认证状态。它在启动时初始化该状态，并负责在连接空闲一段时间后回退到未认证状态。
 
-**每个连接的认证状态（[Authentication](#79311-authentication) state per connection）**：**Dcm** 应为每个配置的 [DcmDslConnection](#9247-dcmdslconnection) 提供一个认证状态。
+**每个连接的认证状态（[Authentication](#79311-认证authentication) state per connection）**：**Dcm** 应为每个配置的 [DcmDslConnection](#9247-dcmdslconnection) 提供一个认证状态。
 
 **每个认证状态的模式声明组（Mode declaration group per authentication state）**：**Dcm** 应通过 **ModeDeclarationGroupPrototype** DcmAuthentication_&lt;ConnectionName&gt; 提供每个认证状态的状态。
 
 **Dcm** 维护一个认证状态，并将该状态镜像到模式声明组 DcmAuthentication_&lt;ConnectionName&gt;。该模式声明组只应由 **Dcm** 更改，但更改此状态的应用程序不会影响 **Dcm** 的认证状态。
 
-**认证状态（[Authentication](#79311-authentication) states）**：**Dcm** 应为每个连接支持以下两种认证状态：
+**认证状态（[Authentication](#79311-认证authentication) states）**：**Dcm** 应为每个连接支持以下两种认证状态：
 
 - deauthenticated（未认证）
 - authenticated（已认证）
@@ -1348,15 +1348,15 @@ P2min / P2*min 应设置为规定的值：P2min = 0ms，P2*min = 0ms。
 
 ###### 6.5.4.3.1. 诊断服务访问权限的验证
 
-**UDS** 服务 [**Authentication**](#79311-authentication)（0x29）用于更改诊断连接的认证状态并提供访问权限。根据所达到的角色和提供的白名单，诊断仪在该连接上可以使用一组动态的诊断服务。**DSD** 子模块在服务 **ID**（**SID**）和子功能（**SF**）级别验证服务是否可以执行。
+**UDS** 服务 [**Authentication**](#79311-认证authentication)（0x29）用于更改诊断连接的认证状态并提供访问权限。根据所达到的角色和提供的白名单，诊断仪在该连接上可以使用一组动态的诊断服务。**DSD** 子模块在服务 **ID**（**SID**）和子功能（**SF**）级别验证服务是否可以执行。
 
-**仅对 UDS 服务进行认证（[Authentication](#79311-authentication) on UDS services only）**：**Dcm** 应只对 **UDS** 服务进行认证验证。**UDS** 服务的服务 **ID** 在 0x10 到 0xFF 范围内。
+**仅对 UDS 服务进行认证（[Authentication](#79311-认证authentication) on UDS services only）**：**Dcm** 应只对 **UDS** 服务进行认证验证。**UDS** 服务的服务 **ID** 在 0x10 到 0xFF 范围内。
 
 **OBD** 服务被明确排除在认证检查之外。根据立法，**OBD** 服务必须始终可用，与活动的认证状态无关。如果使用 **WWH-OBD**，系统工程师必须确保这些服务始终可访问。
 
 **验证访问权限（Verifying access rights）**：只有当容器 [DcmDspAuthentication](#9253-dcmdspauthentication) 已配置时，**Dcm** 才应验证并检查诊断服务的已配置访问权限。
 
-如果未配置 [DcmDspAuthentication](#9253-dcmdspauthentication)，**Dcm** 将处理所有诊断服务，就像当前连接被授予执行当前处理的服务的权限一样。诊断服务访问权限的检查在服务结构的不同级别进行。诊断服务访问权限的使用提供了根据当前角色和认证状态允许或拒绝诊断服务的手段。有些服务应始终允许执行，例如用于设置当前诊断仪访问权限的服务 0x29（[**Authentication**](#79311-authentication)）。该服务和其他 **OEM** 或供应商特定的服务应独立于认证状态被授予访问权限。为实现这一点，**Dcm** 使用一个在所有未认证状态下使用的默认角色。在该状态下，所有基于角色的验证都与已认证状态一样进行。活动角色由配置提供。
+如果未配置 [DcmDspAuthentication](#9253-dcmdspauthentication)，**Dcm** 将处理所有诊断服务，就像当前连接被授予执行当前处理的服务的权限一样。诊断服务访问权限的检查在服务结构的不同级别进行。诊断服务访问权限的使用提供了根据当前角色和认证状态允许或拒绝诊断服务的手段。有些服务应始终允许执行，例如用于设置当前诊断仪访问权限的服务 0x29（[**Authentication**](#79311-认证authentication)）。该服务和其他 **OEM** 或供应商特定的服务应独立于认证状态被授予访问权限。为实现这一点，**Dcm** 使用一个在所有未认证状态下使用的默认角色。在该状态下，所有基于角色的验证都与已认证状态一样进行。活动角色由配置提供。
 
 **未认证状态下服务的访问权限（Access rights for services in deauthenticated state）**：如果当前连接处于未认证状态，**Dcm** 应使用 DcmDspAuthenticationDeauthenticatedRoleRef 配置的角色作为所有基于角色访问验证检查的当前角色。
 
@@ -1764,7 +1764,7 @@ DcmDspDiagnosticDataElementRef 工作流的特性是在生成的 **EcuC** 值中
 | 0x24 | ReadScalingDataByIdentifier | | 支持 |
 | 0x27 | [SecurityAccess](#781-securityaccess) | | 支持 |
 | 0x28 | CommunicationControl | | 支持 |
-| 0x29 | [Authentication](#79311-authentication) | | 支持 |
+| 0x29 | [Authentication](#79311-认证authentication) | | 支持 |
 | 0x2A | ReadDataByPeriodicIdentifier | | 支持 |
 | 0x2C | DynamicallyDefineDataIdentifier | | 支持 |
 | 0x2E | WriteDataByIdentifier | | 支持 |
@@ -2619,9 +2619,9 @@ DcmDspSecurityCompareKeyFnc 应仅在 DcmDspSecurityUsePort 设置为 USE_ASYNCH
 
 ##### 6.6.2.10. 服务 0x29 - Authentication
 
-**UDS** 服务 [**Authentication**](#79311-authentication)（0x29）用于提供控制对诊断服务访问的动态手段。执行某些诊断服务可能对功能安全、排放或车辆产生影响。通过证书控制对诊断服务的访问，提供了在生产之后控制诊断服务访问的手段。对这些资源的访问可以在时间上受限，或仅绑定到特定车辆或 **ECU**。**AUTOSAR Dcm** 为具有给定 **UDS** 服务 [**Authentication**](#79311-authentication) 语义的认证诊断提供了开箱即用的解决方案。即使 **ISO14229-1** [\[8\]](#ref-8) 留出了更多自由度，**Dcm** 也仅使用本章规定的功能。进一步的解释、证书类型或证书内容超出 **AUTOSAR Dcm** 模块的范围。
+**UDS** 服务 [**Authentication**](#79311-认证authentication)（0x29）用于提供控制对诊断服务访问的动态手段。执行某些诊断服务可能对功能安全、排放或车辆产生影响。通过证书控制对诊断服务的访问，提供了在生产之后控制诊断服务访问的手段。对这些资源的访问可以在时间上受限，或仅绑定到特定车辆或 **ECU**。**AUTOSAR Dcm** 为具有给定 **UDS** 服务 [**Authentication**](#79311-认证authentication) 语义的认证诊断提供了开箱即用的解决方案。即使 **ISO14229-1** [\[8\]](#ref-8) 留出了更多自由度，**Dcm** 也仅使用本章规定的功能。进一步的解释、证书类型或证书内容超出 **AUTOSAR Dcm** 模块的范围。
 
-**UDS 服务认证的支持（Support of UDS service authentication）**：**Dcm** 应实现 **UDS** 服务 [**Authentication**](#79311-authentication)（0x29）的以下子功能：
+**UDS 服务认证的支持（Support of UDS service authentication）**：**Dcm** 应实现 **UDS** 服务 [**Authentication**](#79311-认证authentication)（0x29）的以下子功能：
 
 - deAuthenticate
 - verifyCertificateUnidirectional
@@ -2633,9 +2633,9 @@ DcmDspSecurityCompareKeyFnc 应仅在 DcmDspSecurityUsePort 设置为 USE_ASYNCH
 
 **UDS 服务认证的 NRC 处理（NRC Handling for UDS service authentication）**：**Dcm** 应遵循 **ISO 14229-1:2018** 中为 **UDS** 服务认证定义的 **NRC** 处理。这包括 **NRC** 码以及各个 **NRC** 检查的顺序。
 
-**认证配置（[Authentication](#79311-authentication) configuration）**：DcmDsdSidTabServiceId 设置为 0x29 的 [DcmDsdService](#9232-dcmdsdservice) 的存在，要求在 [DcmDsp](#925-dcmdsp) 上配置容器 [DcmDspAuthentication](#9253-dcmdspauthentication)。
+**认证配置（[Authentication](#79311-认证authentication) configuration）**：DcmDsdSidTabServiceId 设置为 0x29 的 [DcmDsdService](#9232-dcmdsdservice) 的存在，要求在 [DcmDsp](#925-dcmdsp) 上配置容器 [DcmDspAuthentication](#9253-dcmdspauthentication)。
 
-**每个连接的认证（[Authentication](#79311-authentication) per connection）**：DcmDsdSidTabServiceId 设置为 0x29 的 [DcmDsdService](#9232-dcmdsdservice) 的存在，要求为每个已配置的连接 [DcmDslConnection](#9247-dcmdslconnection) 配置 [DcmDspAuthenticationConnection](#9255-dcmdspauthenticationconnection)。
+**每个连接的认证（[Authentication](#79311-认证authentication) per connection）**：DcmDsdSidTabServiceId 设置为 0x29 的 [DcmDsdService](#9232-dcmdsdservice) 的存在，要求为每个已配置的连接 [DcmDslConnection](#9247-dcmdslconnection) 配置 [DcmDspAuthenticationConnection](#9255-dcmdspauthenticationconnection)。
 
 **每个连接一个认证配置（One authentication configuration per connection）**：每个 [DcmDspAuthenticationConnection](#9255-dcmdspauthenticationconnection) 应通过 DcmDspAuthenticationConnectionMainConnectionRef 中的引用指向不同的 [DcmDslMainConnection](#9248-dcmdslmainconnection)。
 
@@ -2653,25 +2653,25 @@ DcmDspSecurityCompareKeyFnc 应仅在 DcmDspSecurityUsePort 设置为 USE_ASYNCH
 
 DcmDsdSidTabServiceId 设置为 0x29 的 [DcmDsdService](#9232-dcmdsdservice) 的存在，要求在该 [DcmDsdService](#9232-dcmdsdservice) 上有一个 DcmDsdSubServiceId 设置为 deAuthenticate 的 [DcmDsdSubService](#9236-dcmdsdsubservice)。
 
-**通过诊断服务请求去认证（Deauthentication by diagnostic service request）**：在接收到子功能等于 de-authenticate 的 [**Authentication**](#79311-authentication)（0x29）服务时，**Dcm** 应将 **Dcm** 接收该请求所在连接的认证状态设置为已去认证。
+**通过诊断服务请求去认证（Deauthentication by diagnostic service request）**：在接收到子功能等于 de-authenticate 的 [**Authentication**](#79311-认证authentication)（0x29）服务时，**Dcm** 应将 **Dcm** 接收该请求所在连接的认证状态设置为已去认证。
 
-在接收到子功能等于 de-Authenticate 的 [**Authentication**](#79311-authentication)（0x29）服务时，**Dcm** 应以 authenticationReturnParameter 设置为 DeAuthentication successful 的正响应作出应答。
+在接收到子功能等于 de-Authenticate 的 [**Authentication**](#79311-认证authentication)（0x29）服务时，**Dcm** 应以 authenticationReturnParameter 设置为 DeAuthentication successful 的正响应作出应答。
 
 ###### 6.6.2.10.2. 验证证书
 
-**支持的 communicationConfiguration（Supported communicationConfiguration）**：在接收到子功能等于 verifyCertificateUnidirectional 或 verifyCertificateBidirectional 的 [**Authentication**](#79311-authentication)（0x29）服务时，如果 communicationConfiguration（COCO）参数的值不是 0x00，则 **Dcm** 应以 **NRC** 0x31（requestOutOfRange）作出应答。
+**支持的 communicationConfiguration（Supported communicationConfiguration）**：在接收到子功能等于 verifyCertificateUnidirectional 或 verifyCertificateBidirectional 的 [**Authentication**](#79311-认证authentication)（0x29）服务时，如果 communicationConfiguration（COCO）参数的值不是 0x00，则 **Dcm** 应以 **NRC** 0x31（requestOutOfRange）作出应答。
 
 支持常量值为 0x00 的 COCO 意味着 **Dcm** 不支持会话密钥（session key）。在接收到子功能为 verifyCertificateUniDirectional 且 communicationConfiguration（COCO）设置为 0x00 的认证请求时，**Dcm** 开始验证证书。该服务有意在 **BSW** 层面实现，以将服务 0x29 可能的方言种类减少到 **AUTOSAR** 原生支持的范围。**Csm** [\[17\]](#ref-17) 和 **KeyM** [\[18\]](#ref-18) 模块允许使用不同的密码学方法。**Dcm** 策略的一部分是明确要求证书及其内部所有形式的信息访问都由 **Csm** 及其配置处理。这允许将具有不同安全级别的不同种类证书映射到 **Dcm**，从而对 **Dcm** 隐藏证书的复杂性。
 
-**verifyCertificateUnidirectional 消息长度检查（Verify verifyCertificateUnidirectional message length check）**：在接收到子功能等于 verifyCertificateUnidirectional 的 [**Authentication**](#79311-authentication)（0x29）服务时，**Dcm** 应验证消息长度是否符合参数 lengthOfCertificateClient 给出的大小，如果大小不匹配则返回 **NRC** 0x13。
+**verifyCertificateUnidirectional 消息长度检查（Verify verifyCertificateUnidirectional message length check）**：在接收到子功能等于 verifyCertificateUnidirectional 的 [**Authentication**](#79311-认证authentication)（0x29）服务时，**Dcm** 应验证消息长度是否符合参数 lengthOfCertificateClient 给出的大小，如果大小不匹配则返回 **NRC** 0x13。
 
-**verifyCertificateBidirectional 消息长度检查（Verify verifyCertificateBidirectional message length check）**：在接收到子功能等于 verifyCertificateBidirectional 的 [**Authentication**](#79311-authentication)（0x29）服务时，**Dcm** 应验证消息长度是否符合参数 lengthOfCertificateClient 和 lengthOfChallengeClient 给出的大小，如果大小不匹配则返回 **NRC** 0x13。**Dcm** 使用 lengthOfCertificateClient 作为偏移量来计算 lengthOfChallengeClient 的位置。
+**verifyCertificateBidirectional 消息长度检查（Verify verifyCertificateBidirectional message length check）**：在接收到子功能等于 verifyCertificateBidirectional 的 [**Authentication**](#79311-认证authentication)（0x29）服务时，**Dcm** 应验证消息长度是否符合参数 lengthOfCertificateClient 和 lengthOfChallengeClient 给出的大小，如果大小不匹配则返回 **NRC** 0x13。**Dcm** 使用 lengthOfCertificateClient 作为偏移量来计算 lengthOfChallengeClient 的位置。
 
 **双向认证所需配置（Required configuration for bidirectional authentication）**：如果在 0x29 的 DsdServiceSubFunction 中配置了子功能 verifyCertificateBidirectional，则配置参数 DcmDspAuthenticationECUCertificateRef 和 DcmDspAuthenticationECUCertificateKeyElementRef 是必需的。
 
-**必需的证书数据（Mandatory certificate data）**：在接收到子功能等于 verifyCertificateUnidirectional 或 verifyCertificateBidirectional 且 lengthOfCertificateClient 等于 0 的 [**Authentication**](#79311-authentication)（0x29）服务时，**Dcm** 应以 **NRC** 0x13（incorrectMessageLengthOrInvalidFormat）作出响应。
+**必需的证书数据（Mandatory certificate data）**：在接收到子功能等于 verifyCertificateUnidirectional 或 verifyCertificateBidirectional 且 lengthOfCertificateClient 等于 0 的 [**Authentication**](#79311-认证authentication)（0x29）服务时，**Dcm** 应以 **NRC** 0x13（incorrectMessageLengthOrInvalidFormat）作出响应。
 
-**在 Csm 中存储证书（Store certificate in Csm）** —— **证书验证（Certificate validation）**：在接收到子功能等于 verifyCertificateUnidirectional 或 verifyCertificateBidirectional 的 [**Authentication**](#79311-authentication)（0x29）服务时，**Dcm** 应使用 **KeyM API** KeyM_SetCertificate 将来自服务请求的客户端证书存储到 **KeyM** 模块中。应使用以下参数值：
+**在 Csm 中存储证书（Store certificate in Csm）** —— **证书验证（Certificate validation）**：在接收到子功能等于 verifyCertificateUnidirectional 或 verifyCertificateBidirectional 的 [**Authentication**](#79311-认证authentication)（0x29）服务时，**Dcm** 应使用 **KeyM API** KeyM_SetCertificate 将来自服务请求的客户端证书存储到 **KeyM** 模块中。应使用以下参数值：
 
 - CertificateId = DcmDspAuthenticationConnectionCertificateRef -&gt; KeyMCertificate.KeyMCertificateId
 - certificateDataPtr.certData = 指向请求中 certificateClient 的指针
@@ -2736,7 +2736,7 @@ DcmDsdSidTabServiceId 设置为 0x29 的 [DcmDsdService](#9232-dcmdsdservice) �
 
 处理诊断请求 verifyCertificateBidirectional 还要求 **Dcm** 发送服务器证书并对客户端挑战进行签名。因此，对于 verifyCertificateBidirectional 还要额外执行以下步骤。
 
-**对客户端挑战签名（Signing client challenge）**：在接收到子功能等于 verifyCertificateBidirectional 的 [**Authentication**](#79311-authentication)（0x29）服务时，**Dcm** 应使用以下参数值调用 Csm_SignatureGenerate 对接收到的客户端挑战进行签名：
+**对客户端挑战签名（Signing client challenge）**：在接收到子功能等于 verifyCertificateBidirectional 的 [**Authentication**](#79311-认证authentication)（0x29）服务时，**Dcm** 应使用以下参数值调用 Csm_SignatureGenerate 对接收到的客户端挑战进行签名：
 
 - jobId：DcmDspAuthenticationClientChallengeSignJobRef -&gt; CsmJobId
 - mode：CRYPTO_OPERATIONMODE_SINGLECALL
@@ -2750,7 +2750,7 @@ DcmDsdSidTabServiceId 设置为 0x29 的 [DcmDsdService](#9232-dcmdsdservice) �
 - 其 CsmProcessingMode 设置为 CRYPTO_PROCESSING_ASYNC
 - 引用了聚合 CsmSignatureGenerate 的 CsmPrimitive
 
-**提供服务器证书（Providing the server certificate）**：在接收到子功能等于 verifyCertificateBidirectional 的 [**Authentication**](#79311-authentication)（0x29）服务时，**Dcm** 应在响应中提供服务器证书。**Dcm** 应使用以下参数调用 KeyM_GetCertificate：
+**提供服务器证书（Providing the server certificate）**：在接收到子功能等于 verifyCertificateBidirectional 的 [**Authentication**](#79311-认证authentication)（0x29）服务时，**Dcm** 应在响应中提供服务器证书。**Dcm** 应使用以下参数调用 KeyM_GetCertificate：
 
 - certId：DcmDspAuthenticationECUCertificateRef /KeyMCertificateId
 - certificateDataPtr：**Dcm** 实现特定
@@ -2770,11 +2770,11 @@ DcmDsdSidTabServiceId 设置为 0x29 的 [DcmDsdService](#9232-dcmdsdservice) �
 
 ###### 6.6.2.10.3. 客户端所有权证明
 
-**顺序检查（Sequence check）**：在接收到子功能等于 proofOfOwnership 的 [**Authentication**](#79311-authentication)（0x29）服务时，如果该连接上最近处理的 verifyCertificateUnidirectional 或 verifyCertificateBidirectional 服务失败，或尚未处理过此类子功能，则 **Dcm** 应发送负响应“requestSequenceError”。该连接应保持已去认证状态。
+**顺序检查（Sequence check）**：在接收到子功能等于 proofOfOwnership 的 [**Authentication**](#79311-认证authentication)（0x29）服务时，如果该连接上最近处理的 verifyCertificateUnidirectional 或 verifyCertificateBidirectional 服务失败，或尚未处理过此类子功能，则 **Dcm** 应发送负响应“requestSequenceError”。该连接应保持已去认证状态。
 
-**所有权证明消息长度检查（Proof of ownership message length check）**：在接收到子功能等于 proofOfOwnership 的 [**Authentication**](#79311-authentication)（0x29）服务时，**Dcm** 应验证消息长度是否符合参数 lengthOfProofOfOwnershipClient 和 lengthOfEphemeralPublicKeyClient 给出的大小，如果大小不匹配则返回 **NRC** 0x13。
+**所有权证明消息长度检查（Proof of ownership message length check）**：在接收到子功能等于 proofOfOwnership 的 [**Authentication**](#79311-认证authentication)（0x29）服务时，**Dcm** 应验证消息长度是否符合参数 lengthOfProofOfOwnershipClient 和 lengthOfEphemeralPublicKeyClient 给出的大小，如果大小不匹配则返回 **NRC** 0x13。
 
-**客户端所有权证明验证（Client proof of ownership verification）**：在接收到子功能等于 proofOfOwnership 的 [**Authentication**](#79311-authentication)（0x29）服务时，**Dcm** 应使用以下输入参数调用 Csm_SignatureVerify，以验证请求中提供的客户端所有权证明数据：
+**客户端所有权证明验证（Client proof of ownership verification）**：在接收到子功能等于 proofOfOwnership 的 [**Authentication**](#79311-认证authentication)（0x29）服务时，**Dcm** 应使用以下输入参数调用 Csm_SignatureVerify，以验证请求中提供的客户端所有权证明数据：
 
 - jobId：DcmDspAuthenticationVerifyProofOfOwnerShipClientJobRef -&gt; CsmJob.CsmJobId
 - mode：设置为 CRYPTO_OPERATIONMODE_SINGLECALL
@@ -2908,7 +2908,7 @@ DID 读取操作由各种 **UDS** 服务执行。**Dcm** 在每次 DID 读取时
 
 **转换到已认证状态（Transition into authenticated state）**：如果所有权证明验证成功并返回 CRYPTO_E_VER_OK，并且在角色与白名单设置完成之后，**Dcm** 应将该连接上的 DcmAuthenticationState_{Channel} 设置为 DCM_AUTHENTICATED。
 
-**所有权验证成功（Successful ownership verification）**：如果 Csm_SignatureVerify 的结果 Crypto_VerifyResultType 等于 CRYPTO_E_VER_OK，则 **Dcm** 应发送正响应，authenticationReturnParameter 设置为“Ownership verified, [Authentication](#79311-authentication) complete”，并且 lengthOfSessionKeyInfo 的大小为 0 且不包含 sessionKeyInfo。
+**所有权验证成功（Successful ownership verification）**：如果 Csm_SignatureVerify 的结果 Crypto_VerifyResultType 等于 CRYPTO_E_VER_OK，则 **Dcm** 应发送正响应，authenticationReturnParameter 设置为“Ownership verified, [Authentication](#79311-认证authentication) complete”，并且 lengthOfSessionKeyInfo 的大小为 0 且不包含 sessionKeyInfo。
 
 **保持认证状态（Persisting authentication state）**：如果 Csm_SignatureVerify 的结果 Crypto_VerifyResultType 等于 CRYPTO_E_VER_OK，且 DcmDspAuthenticationPersistStateModeRuleRef 所引用的模式规则求值为 true，则 **Dcm** 应保持该连接上的认证状态、角色和白名单。
 
@@ -2918,7 +2918,7 @@ DID 读取操作由各种 **UDS** 服务执行。**Dcm** 在每次 DID 读取时
 
 ###### 6.6.2.10.6. AuthenticationConfiguration
 
-**提供认证配置（Providing the authentication configuration）**：如果配置了 [DcmDspAuthentication](#9253-dcmdspauthentication)，并且接收到子功能等于 authenticationConfiguration 的 [**Authentication**](#79311-authentication)（0x29）服务，则 **Dcm** 应发送正响应，authenticationReturnParameter 设置为“AuthenticationConfiguration APCE”。
+**提供认证配置（Providing the authentication configuration）**：如果配置了 [DcmDspAuthentication](#9253-dcmdspauthentication)，并且接收到子功能等于 authenticationConfiguration 的 [**Authentication**](#79311-认证authentication)（0x29）服务，则 **Dcm** 应发送正响应，authenticationReturnParameter 设置为“AuthenticationConfiguration APCE”。
 
 ###### 6.6.2.10.7. TransmitCertificate
 
@@ -2931,9 +2931,9 @@ DID 读取操作由各种 **UDS** 服务执行。**Dcm** 在每次 DID 读取时
 
 **Dcm** 可以支持其中多个证书。识别证书类型的关键是 **UDS** 请求消息中的 certificateEvaluationId 参数。[DcmDspAuthenticationTransmitCertificate](#92531-dcmdspauthenticationtransmitcertificate) 提供关于如何处理证书以及使用哪个应用程序回调通知证书传输成功的配置信息。
 
-**子功能 transmitCertificate 的支持（Support of subfunction transmitCertificate）**：**Dcm** 应按照 **ISO 14229-1:2020** [\[8\]](#ref-8) 支持 **UDS** 服务 [**Authentication**](#79311-authentication) 的子功能 transmitCertificate。
+**子功能 transmitCertificate 的支持（Support of subfunction transmitCertificate）**：**Dcm** 应按照 **ISO 14229-1:2020** [\[8\]](#ref-8) 支持 **UDS** 服务 [**Authentication**](#79311-认证authentication) 的子功能 transmitCertificate。
 
-**验证 certificateEvaluationId（Verify certificateEvaluationId）**：如果接收到子功能等于 transmitCertificate 的 **UDS** 服务 [**Authentication**](#79311-authentication)（0x29）服务，且 certificateEvaluationId 在任何 [DcmDspAuthenticationTransmitCertificate](#92531-dcmdspauthenticationtransmitcertificate) 容器中都没有配置的 DcmDspAuthenticationTransmitCertificateEvaluationId，则 **Dcm** 应返回 **NRC** 0x31（requestOutOfRange）。
+**验证 certificateEvaluationId（Verify certificateEvaluationId）**：如果接收到子功能等于 transmitCertificate 的 **UDS** 服务 [**Authentication**](#79311-认证authentication)（0x29）服务，且 certificateEvaluationId 在任何 [DcmDspAuthenticationTransmitCertificate](#92531-dcmdspauthenticationtransmitcertificate) 容器中都没有配置的 DcmDspAuthenticationTransmitCertificateEvaluationId，则 **Dcm** 应返回 **NRC** 0x31（requestOutOfRange）。
 
 **Dcm** 使用 **KeyM** 进行所有证书管理操作。本文档仅提及 **KeyM** 以及对 KeyMCertificate 的配置引用。关于如何使用 **KeyM** 模块的详细信息，请阅读 **KeyM** 的 SWS 文档。请注意密码学操作可能具有较长的执行时间并以异步方式调用。
 
@@ -3965,7 +3965,7 @@ controlEnableMaskRecord 仅在 **DataIdentifier** 支持多于一个信号时才
 
 对于失败的 RoE 响应，不存在用于后续发送的排队机制。
 
-**对 service to respond to 的认证检查（[Authentication](#79311-authentication) check for service to respond to）**：在发送 service to respond to 时，**Dcm** 应执行服务认证检查，并仅为已授予该连接访问权限的服务发送正响应。
+**对 service to respond to 的认证检查（[Authentication](#79311-认证authentication) check for service to respond to）**：在发送 service to respond to 时，**Dcm** 应执行服务认证检查，并仅为已授予该连接访问权限的服务发送正响应。
 
 **ResponseOnEvent 调度器速率（ResponseOnEvent scheduler rate）**：**Dcm** 应按照 **ISO 14229-1:2020** [\[8\]](#ref-8) 实现 RoE 调度器，并将所配置的调度器速率 DcmDspRoeSchedulerRate 映射为 **ISO 14229-1:2020** [\[8\]](#ref-8) 中的 ResponseOnEventSchedulerRate。
 
@@ -4496,7 +4496,7 @@ DID 范围不能映射到 DDDID 上，因为服务 0x2C DDDID 不支持范围功
 
 ![Figure7-13](Figure7-13.png)
 
-安全编码序列总是通过使用 UDS 服务 [Authentication](#79311-authentication) 的 transmitCertificate 子功能传输一个证书来启动。
+安全编码序列总是通过使用 UDS 服务 [Authentication](#79311-认证authentication) 的 transmitCertificate 子功能传输一个证书来启动。
 
 在通过 UDS 服务 transmitCertificate 接收到一个证书、且该证书的 certificateEvaluationId 映射到某个 [DcmDspAuthenticationTransmitCertificate](#92531-dcmdspauthenticationtransmitcertificate) 且其 DcmDspAuthenticationTransmitCertificateFunction 设置为 SECURE_CODING 时，**Dcm** 应（重新）启动安全编码机制，并使用该证书来校验安全编码数据。
 
@@ -5715,7 +5715,7 @@ Std_ReturnType Xxx_RequestResultsConfirmation ( Dcm_ConfirmationStatusType Confi
 
 从 **DCM** 的角度看，该操作具有以下函数签名。
 
-##### 7.8.6.1. Xxx_RequestControl Callout
+##### 7.8.6.1. Xxx_RequestControl 回调（Callout）
 
 **说明**: 调用一个 **TID** 特定的函数，该函数以所配置的字节数作为输入，并返回固定数量的字节作为输出。该函数通常用于实现 OBD 服务 $08。服务 ID 0x63。本服务为同步调用，不可重入。无 in 参数。参数 OutBuffer（inout）：**RequestControl** 函数可存放其结果的输出缓冲区；InBuffer（inout）：包含 OBD 服务 0x08 请求数据的输入缓冲区。无 out 参数。返回值：**E_OK**：请求成功；**E_NOT_OK**：请求未成功。可通过**Dcm_Externals.h**获得。
 
@@ -8219,7 +8219,7 @@ Callout 函数。若某个 RequestFileTransfer 流程正在运行，且该流程
 | 参数 active | 类型 boolean，方向 IN，说明：false 时 **Dcm** 不调用 ComM_DCM_ActiveDiagnostic()；true 时 **Dcm** 调用该函数。 |
 | 可能的错误 | E_OK |
 
-##### 7.9.3.11. Authentication
+##### 7.9.3.11. 认证（Authentication）
 
 客户端-服务器接口 Authentication 的定义：
 
@@ -8631,7 +8631,7 @@ Connector from CBFaultDetectCtrDummy to Dem/GeneralEvtInfo
 | --- | --- |
 | 名称 | Authentication_{Connection} |
 | 类别 | RequiredPort |
-| 接口 | [Authentication](#79311-authentication) |
+| 接口 | [Authentication](#79311-认证authentication) |
 | 描述 | - |
 | 端口定义参数 | 类型：uint16 |
 | 端口定义参数 | 值：[DcmDslMainConnection](#9248-dcmdslmainconnection).DcmDslProtocolRxConnectionId |

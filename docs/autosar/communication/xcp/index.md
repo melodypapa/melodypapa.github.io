@@ -265,7 +265,7 @@ AUTOSAR **XCP** 模块应根据 [\[3\]](#ref-3) 支持特性「旁路（Bypassin
 
 AUTOSAR **XCP** 模块应根据 [\[3\]](#ref-3) 支持特性「Seed &amp; Key」。
 
-为了发送和接收标定数据，应使用 AUTOSAR BSW 总线接口（FlexRay 接口、CAN 接口、**TCP/IP** Socket Adaptor）中规定的发送和接收 API。请参阅第 [7.1](#71-导入的类型)、[7.2](#72-类型定义) 和 [7.3](#73-函数定义) 章（本文第 [6.1](#61-xcp-on-can)、[6.2](#62-xcp-on-flexray) 和 [6.3](#63-xcp-on-ethernet) 章）。
+为了发送和接收标定数据，应使用 AUTOSAR BSW 总线接口（FlexRay 接口、CAN 接口、**TCP/IP** Socket Adaptor）中规定的发送和接收 API。请参阅第 [7.1](#71-导入的类型)、[7.2](#72-类型定义) 和 [7.3](#73-函数定义) 章（本文第 [6.1](#61-基于-can-的-xcpxcp-on-can)、[6.2](#62-基于-flexray-的-xcpxcp-on-flexray) 和 [6.3](#63-基于-ethernet-的-xcpxcp-on-ethernet) 章）。
 
 AUTOSAR **XCP** 模块应根据 [\[3\]](#ref-3) 支持特性「页切换」。
 
@@ -281,7 +281,7 @@ AUTOSAR **XCP** 模块应根据 [\[3\]](#ref-3) 支持 flash 编程（PGM）。
 
 AUTOSAR **XCP** 模块应根据 [\[3\]](#ref-3) 支持特性「交错（Interleaved）通信模式」。
 
-### 6.1. XCP on CAN
+### 6.1. 基于 CAN 的 XCP（XCP on CAN）
 
 AUTOSAR **XCP** 模块应根据 [\[6\]](#ref-6) 支持 CAN 通信总线。
 
@@ -293,7 +293,7 @@ AUTOSAR **XCP** 模块应根据 [\[6\]](#ref-6) 支持 CAN 通信总线。
 
 **XCP** 模块应根据 [\[6\]](#ref-6) 支持 GET_SLAVE_ID 命令。
 
-### 6.2. XCP on FlexRay
+### 6.2. 基于 FlexRay 的 XCP（XCP on FlexRay）
 
 AUTOSAR **XCP** 模块应根据 [\[8\]](#ref-8) 支持 FlexRay 通信总线。
 
@@ -325,7 +325,7 @@ XCP 主设备从 ASAM MCD 2MC 描述文件获取关于 XCP 专用 FlexRay 通信
 
 AUTOSAR **XCP** 模块应能够根据 [\[8\]](#ref-8) 将多条 XCP 消息打包进一个 FlexRay 帧。
 
-### 6.3. XCP on Ethernet
+### 6.3. 基于 Ethernet 的 XCP（XCP on Ethernet）
 
 AUTOSAR **XCP** 模块应根据 [\[10\]](#ref-10) 支持以太网通信总线。
 
@@ -564,7 +564,7 @@ XCP 主函数应被周期性地调用。
 
 ## 8. 时序图
 
-### 8.1. XCP on FlexRay
+### 8.1. 基于 FlexRay 的 XCP（XCP on FlexRay）
 
 #### 8.1.1. Xcp on FlexRay 发送
 
@@ -574,7 +574,7 @@ XCP 主函数应被周期性地调用。
 
 ![Figure9_2](Figure9_2.png)
 
-### 8.2. XCP on CAN
+### 8.2. 基于 CAN 的 XCP（XCP on CAN）
 
 #### 8.2.1. Xcp on CAN 发送
 
@@ -588,7 +588,7 @@ XCP 主函数应被周期性地调用。
 
 ![Figure9_5](Figure9_5.png)
 
-### 8.3. XCP on Ethernet
+### 8.3. 基于 Ethernet 的 XCP（XCP on Ethernet）
 
 #### 8.3.1. Xcp on Ethernet 接收指示
 
