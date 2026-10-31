@@ -47,14 +47,39 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (confirmed 2026-10-30, batch gate; run stopped after row 3 per user — fr_tsyn row stays open for the next run)
   - [x] Step 6 — TODO.md row + commit/PR (commit 8f01771, batch confirmed 2026-10-30)
-- [ ] fr_tsyn (SWS_TimeSyncOverFlexRay · R23-11 markdown · ❌ new article, short name FrTSyn)
+- [x] fr_tsyn (SWS_TimeSyncOverFlexRay · R23-11 markdown · ❌ new article, short name FrTSyn)
   - Note: 2026-10-30 — translate every `###`+ heading title, not just the level-2 chapters (rows 1–3 shipped 115 English headings; fixed in the same PR). Run `python .agents/skills/autosar-translate/scripts/check_heading_lang.py docs/autosar/globaltime/fr_tsyn/index.md` in Step 3 — exit 0 required. Identifier-titled headings (FrTSyn_*, FrTSynGlobalTimeDomain, port/interface names) stay English; every prose title translates
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: Source confirmed: R23-11 markdown `AUTOSAR_CP_SWS_TimeSyncOverFlexRay.md` (3,167 lines); the new article path does not exist.
+  - Note: Mapping: source ch.1–5 → article §§1–5; ch.6 Requirements Tracing and appendix A are deliberately omitted per mandate; ch.7→§6, ch.8→§7, ch.9→§8, ch.10→§9, appendix B→`## B. AUTOSAR 可追溯项变更历史`.
+  - Note: Source inventory: 24 ch.2 rows; API has 2 types, 3 functions, 4 callbacks, 1 scheduled function; ch.9 has 3 sequence diagrams; ch.10 has 14 configuration containers.
+  - Note: Source API uses nested 8.1.2/8.1.3 numbering rather than the flat 8.2.x/8.3.x parsed by `check_api_sync.py`; verify names, order, and counts manually.
+  - Note: No Known Limitations chapter or additional `None.`/`N/A.`-only sections found in the initial scan. Appendix B `none` values and API `None` cells carry content and are not omissions; verify during coverage review.
+  - Note: Plan: create `fr_tsyn/index.md`, translate all required source sections and glossary terms, restore applicable in-article links, update nav + section/CP AUTOSAR indexes, regenerate the API list, then run Phase A and Phase B.
+  - Note: Article completed: source ch.1–5, 7–10, and appendix B map to §§1–5, 6–9, and B; source ch.6 and appendix A are omitted per mandate.
+  - Note: Embedded all 18 content diagrams (3 overview/dependency, 3 functional-spec, 3 sequence, 9 config); all source tables are GFM; translated 14 configuration containers.
+  - Note: PDF cross-checks: formula restored on p.33; split Tables 7.3/7.7 reconstructed (pp.22/24); Appendix B IDs reconstructed (pp.102–104); security-event name verified on p.52.
+  - Note: API inventory: 2 types, 3 functions, 4 callbacks, 1 scheduled function, 5 mandatory and 20 optional interfaces.
+  - Note: `link_candidates.py --apply` changed 51 lines (16 chapter refs, 20 citation links, 0 anchors); second run changed 0 lines.
+  - Note: Glossary extended with 10 new terms and FrTSyn source attribution on 20 existing entries; `SC` is listed as “Sequence Counter” to avoid the existing “Supervision Cycle” definition.
+  - Note: Source anomalies for confirmation: PDF p.58 spells `SduLength` as `SduLengh`; article uses the API field `SduLength`. PDF p.98 describes `FrTSynIcvVerificationFvIdRef` as FV for ICV generation despite its verification container; article translates the apparent intended use.
+  - Note: User decision (2026-10-31): keep `docs/index.md` unchanged. Phase A `check_indexes.py` remains blocked by the pre-existing missing home link to the top-level `音乐` tab; no out-of-scope fix made.
+  - Note: User decision superseded later (2026-10-31): add the one-line `音乐` home link in `docs/index.md`; `check_indexes.py` now passes.
+  - Note: API listing regenerated on `origin/master`'s current article-based generator; it lists 2 types and 8 functions (3 APIs, 4 callbacks, 1 scheduled function); `--check` passes.
+  - Note: Phase A passed (2026-10-31): strict build exit 0 with zero MkDocs WARNINGs; heading-language and index checks passed (207 nav targets, 129 overview pages, 18 landings, 12 tabs).
+  - Note: Hygiene passed: 0 body H1, `{DRAFT}`, broken `\<` placeholders, or requirement IDs before configuration; acronym table is 24/24 in source order; Annex B and constraint IDs are permitted data.
+  - Note: Derived checks passed: API listing `--check`, glossary `--check`; `check_api_sync.py` is N/A for source 8.1.x numbering, manual inventory verified 2 types/3 functions/4 callbacks/1 schedule/5 mandatory/20 optional.
+  - Note: Link audit passed: no external URLs; all anchors resolve; census 133 identifier mentions (§5 1/§6 35/§7 14/§9 83), 27 reference lines, 6 chapter refs (0 unresolved), 20/20 linked citations (0 unresolved), BswM SITE ×2, Det NO-ARTICLE ×9.
+  - Note: Phase B map: source ch.1–5 → §§1–5; ch.7 → §6, including all numbered subsections and descendants; ch.8 → §7; ch.9 → §8; ch.10 → §9; appendix B → §B.
+  - Note: Phase B API coverage: 22 imported types, 2 definitions, 3 functions, 4 callbacks, 1 scheduled function, and 5 mandatory/20 optional interfaces; signatures and service IDs manually checked.
+  - Note: Fidelity checks: 24/24 acronym rows match source order; message tables 7.1–7.8 present; all 56 unique ECUC IDs match; 14 config containers and 9 config diagrams included.
+  - Note: Appendix B lists match the R23-11 PDF: R22-11 added/changed/deleted 55/40/1 IDs; R23-11 added/changed/deleted 20/35/1 IDs, plus 1 added constraint.
+  - Note: Omissions verified: only mandated ch.6 Requirements Tracing and appendix A; no Known Limitations or additional None/N.A.-only sections; appendix B `none` values translated as 无.
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (confirmed 2026-10-31; coverage, source corrections, and TODO status row approved)
+  - [x] Step 6 — TODO.md row + local commit (873a5ec; no push/PR per user request)
 
 ## Not queued (deliberately skipped)
 - (none)

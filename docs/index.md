@@ -11,6 +11,7 @@ A slow sparrow should make an early start. Learning a endless life.
 欢迎来到本站。这里整理了我在汽车嵌入式软件领域的学习笔记与设计文档：
 
 - **[博客](blog/index.md)** — 更新动态与技术随笔
+- **[音乐](music/index.md)** — 音乐欣赏与唱片导读
 - **[ARM Cortex](cortex/index.md)** — Cortex-M7 / Cortex-R52 处理器架构：内存保护（MPU）、异常模型、地址映射、缓存
 - **[CP AUTOSAR](autosar/index.md)** — AUTOSAR CP 各基础软件模块的原理与设计：通信（CAN/Ethernet/LIN）、存储（NvM/Flash/EEP）、模式管理（EcuM/BswM）、I/O（ADC/DIO/PWM）、系统服务等，以及[电源状态管理](autosar/power/index.md)等专题
 - **[Automotive（车载以太网）](automotive/ethernet/frame_format/index.md)** — 车载以太网帧格式

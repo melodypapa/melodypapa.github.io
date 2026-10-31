@@ -170,6 +170,7 @@ nav:
       - "StbM": autosar/globaltime/stbm/index.md
       - "CanTSyn": autosar/globaltime/can_tsyn/index.md
       - "EthTSyn": autosar/globaltime/eth_tsyn/index.md
+      - "FrTSyn": autosar/globaltime/fr_tsyn/index.md
     - 加密（Crypto）:
 
       - autosar/crypto/index.md
