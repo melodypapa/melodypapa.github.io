@@ -93,8 +93,8 @@ above has a corresponding standard document.
     (`AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）`,
     `Powertrain Engine Domain（动力总成（发动机）域）`).
   - index link labels (`## 文章`, overview, `glossary.md` 来源,
-    `api_reference.md`) = the target's full front-matter `title`, never the
-    nav's short label.
+    the API listing `docs/autosar/api/`) = the target's full front-matter
+    `title`, never the nav's short label.
 - `中文（English）` is invalid (user rule 2026-10-29): fix the title itself,
   not just the index link label, and update the derived indexes and 来源 lines
   in the same commit. `check_indexes.py --titles` lists remaining violations.

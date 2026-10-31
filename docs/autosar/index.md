@@ -191,5 +191,5 @@ title: "CP AUTOSAR"
 ## 相关内容
 
 * [AUTOSAR 术语表](glossary.md)
-* [API 清单](api_reference.md)
+* [AUTOSAR API 清单](api/index.md)
 * [首页](../index.md)

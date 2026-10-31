@@ -113,7 +113,10 @@ nav:
   - CP AUTOSAR:
     - autosar/index.md
     - "术语表": autosar/glossary.md
-    - "API 清单": autosar/api_reference.md
+    - "API 清单":
+      - autosar/api/index.md
+      - "AUTOSAR API 类型清单": autosar/api/types.md
+      - "AUTOSAR API 函数清单": autosar/api/functions.md
     - 基础:
       - autosar/foundation/index.md
       - 通用:

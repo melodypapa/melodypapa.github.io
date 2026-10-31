@@ -14,4 +14,4 @@ title: "全局时间（Global Time）"
 
 * [CP AUTOSAR 总览](../index.md)
 * [术语表](../glossary.md)
-* [API 清单](../api_reference.md)
+* [API 清单](../api/index.md)
