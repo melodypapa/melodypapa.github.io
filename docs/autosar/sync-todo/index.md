@@ -14,7 +14,7 @@
 | --- | --- | ---: | --- |
 | 1 | [Group-io.md](Group-io.md) | 7 | IO wrap-up — **batch complete 2026-10-27 (7/7)** (1 done + wording/acronym alignment + iohwab gaps + adc deep completion) |
 | 2 | [Group-general.md](Group-general.md) | 4 | platform_types stub repair + BSWGeneral (global base spec) and 2 more missing documents |
-| 3 | [Group-crypto.md](Group-crypto.md) | 4 | **batch complete 2026-10-28 (4/4)** — Csm alignment (PR #133) + crypto_driver full completion + CryIf/KeyM new articles |
+| 3 | [Group-crypto.md](Group-crypto.md) | 4 | **batch complete 2026-10-28 (4/4)** — Csm alignment (PR #133) + crypto_driver full completion + CryIf/KeyM new articles; Csm reopened 2026-10-28 (incomplete) → full R23-11 re-sync complete 2026-10-31 |
 | 4 | [Group-system_services.md](Group-system_services.md) | 7 | **4/7 done 2026-10-28** (operating_system + det + FiM + time_service) — remaining: ComM (giant, ~5.2k-line source), SwCluC, HwTestManager |
 | 5 | [Group-mode_management.md](Group-mode_management.md) | 2 | EcuM alignment + BswM alignment (small) |
 | 6 | [Group-diagnostics.md](Group-diagnostics.md) | 3 | Dem gaps + J1939Dcm + Dcm (24k-line source, giant — last) |
