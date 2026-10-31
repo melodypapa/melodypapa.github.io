@@ -81,6 +81,9 @@ markdown_extensions:
 nav:
   - 首页: index.md
   - 博客: blog/index.md
+  - "音乐":
+    - music/index.md
+    - "舒曼的大提琴之光——Sol Gabetta《Schumann》专辑漫笔": music/sol-gabetta-schumann/index.md
   - ARM Cortex:
     - cortex/index.md
     - "背景概念":
