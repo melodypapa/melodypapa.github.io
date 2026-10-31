@@ -350,6 +350,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## B
 
+**&lt;Bus&gt;TSyn**
+> 特定总线的时间同步模块（**Bus specific Time Synchronization** module）。
+>
+> 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
+{: .glossary-source}
+
 **Background test**
 > 后台测试由 **SW** 调度器/**RTOS** 周期性调用。
 >
@@ -437,7 +443,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **BswM**
 > 基础软件模式管理器（**Basic Software Mode Manager**）
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **BSWMD**
@@ -925,7 +931,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CRC**
 > 循环冗余校验（**Cyclic Redundancy Check**）
 >
-> 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+> 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **Cross-Cluster External Graph**
@@ -967,7 +973,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CSM**
 > 加密服务管理器（**Crypto Service Manager**）。
 >
-> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
+> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **CSUM/Checksum/signature**
@@ -1125,7 +1131,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Debounce Time**
 > 具有相同 **PDU** 的两条 **TX** 报文之间的最小间隔。
 >
-> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **Default Error Tracer**
@@ -1167,7 +1173,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DET**
 > 默认错误跟踪器（**Default Error Tracer**），实现报告开发错误的模块。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Default Error Tracer（默认错误跟踪器）](system_services/default_error_tracer/index.md)（SWS_DefaultErrorTracer）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Default Error Tracer（默认错误跟踪器）](system_services/default_error_tracer/index.md)（SWS_DefaultErrorTracer）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **DHCP**
@@ -1739,6 +1745,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
 {: .glossary-source}
 
+**FCNT**
+> **FlexRay** 周期计数器（**FlexRay Cycle Counter**）。
+>
+> 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
+{: .glossary-source}
+
 **FCS**
 > 帧校验序列（**Frame Check Sequence**）。
 >
@@ -1835,6 +1847,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[Explanation of Firmware Over-The-Air（固件远程升级说明）](memory/firmware_over_the_air/index.md)（AUTOSAR_CP_EXP_FirmwareOverTheAir）
 {: .glossary-source}
 
+**FR**
+> **FlexRay**。
+>
+> 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
+{: .glossary-source}
+
 **Fr**
 > AUTOSAR 模块：FlexRay 驱动程序（**FlexRay Driver**）。
 >
@@ -1850,19 +1868,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Freshness Value**
 > 用于确保经认证的时间同步报文新鲜度的单调计数器，可以是独立报文计数器（新鲜度计数器）或时间戳值（新鲜度时间戳）。
 >
-> 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
+> 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **Freshness Value Manager**
 > 新鲜度值管理器（**Freshness Value Manager**）。新鲜度值的提供者，**StbM** 充当 &lt;Bus&gt;TSyn 模块与 **FVM** 之间的接口。
 >
-> 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
+> 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **FrIf**
 > FlexRay Interface —— FlexRay 接口。
 >
-> 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）、[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver）
+> 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）、[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **FrTp**
@@ -1875,6 +1893,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > AUTOSAR 模块：FlexRay 收发器驱动程序（**FlexRay Transceiver Driver**）。
 >
 > 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver）
+{: .glossary-source}
+
+**FrTSyn**
+> **FlexRay** 时间同步模块（**Time Synchronization over FlexRay** module）。
+>
+> 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **FS**
@@ -1931,10 +1955,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）
 {: .glossary-source}
 
+**FVL**
+> 新鲜度值长度（**Freshness Value Length**）。
+>
+> 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
+{: .glossary-source}
+
 **FV**（**Freshness Value**）
 > 新鲜度值
 >
-> 来源：[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
+> 来源：[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 ## G
@@ -1972,7 +2002,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Global Time Master**
 > 全局时间主节点（**Global Time Master**）。某时基的系统级源头，其时基值通过网络分发给各时基从节点。
 >
-> 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
+> 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **GM(C)**
@@ -2015,6 +2045,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 组信号（**Group signal**）是包含在信号组中的信号。
 >
 > 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**GTM**
+> 全局时间主节点（**Global Time Master**）。
+>
+> 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 ## H
@@ -2198,7 +2234,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ICV**
 > 完整性校验值（**Integrity Check Value**）。为时间同步报文提供完整性和真实性保护的校验值。
 >
-> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
+{: .glossary-source}
+
+**ICVL**
+> 完整性校验值长度（**Integrity Check Value Length**）。
+>
+> 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **ID**
@@ -2210,7 +2252,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **IdsM**
 > 入侵检测系统管理器（**Intrusion Detection System Manager**）。
 >
-> 来源：[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）
+> 来源：[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **&lt;Ie&gt;**
@@ -2662,13 +2704,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **MAC**
 > 报文认证码（**Message Authentication Code**）。
 >
-> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **Macrotick**
 > 宏节拍——FlexRay 集群全局同步时间的最小单位。
 >
-> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver）
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **Main Time Triple**
@@ -3362,7 +3404,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **OFS message**
 > 偏移同步报文（**Offset Synchronization message**）。
 >
-> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **OID**
@@ -4169,6 +4211,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）
 {: .glossary-source}
 
+**Sequence Counter**
+> 时间同步报文中的序列计数器（**SC**）。
+>
+> 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
+{: .glossary-source}
+
 **Server**
 > 承载服务器服务（**ServerServices**）的ECU。
 >
@@ -4238,7 +4286,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SGW**
 > 时间同步的「已同步到网关」（**Synchronized to Gateway**）状态。
 >
-> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **SHE**
@@ -4472,7 +4520,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **StbM**
 > 同步时基管理器（**Synchronized Time-Base Manager**）。向其客户提供与分布式系统其他节点上的时基同步的时基的基础软件模块。
 >
-> 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
+> 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **STD**
@@ -4610,7 +4658,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SYNC message**
 > 时间同步报文（**Time Synchronization message**）。
 >
-> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **Synchronized Time Base**
@@ -4696,7 +4744,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Time Gateway**
 > 被一个时基从节点和一个或多个时基主节点引用的时基；Timesync 报文不直接穿过时间网关路由，因为路由延迟需要被补偿。
 >
-> 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
+> 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
+{: .glossary-source}
+
+**Time Master**
+> 某时基的主节点实体，作为该时基的源，将其传播给通信网络某个区段内的一组时基从节点。
+>
+> 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **Time Offset**
@@ -4714,7 +4768,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Time Slave**
 > 基于由相应 Timesync 模块提供的全局时基值来更新其内部维护的本地时基的角色。
 >
-> 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
+> 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **Time Triple**
@@ -4739,6 +4793,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 定时器实例：由 **API** 数据类型 Tm_PredefTimer...bitType 所对应的一个数据对象，即用户软件级别上的时间服务预定义定时器的实例化。
 >
 > 来源：[AUTOSAR Time Service（时间服务）](system_services/time_service/index.md)（SWS_TimeService）
+{: .glossary-source}
+
+**Timesync**
+> 时间同步（**Time Synchronization**）。
+>
+> 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **TLS**

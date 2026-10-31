@@ -62,6 +62,7 @@ title: "CP AUTOSAR"
   * [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)
   * [AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)
   * [AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](globaltime/eth_tsyn/index.md)
+  * [AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)
 
 ### 加密（Crypto）
 
@@ -192,4 +193,6 @@ title: "CP AUTOSAR"
 
 * [AUTOSAR 术语表](glossary.md)
 * [AUTOSAR API 清单](api/index.md)
+  * [AUTOSAR API 类型清单](api/types.md)
+  * [AUTOSAR API 函数清单](api/functions.md)
 * [首页](../index.md)
