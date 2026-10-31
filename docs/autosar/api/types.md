@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **486** 个条目。
+共 **489** 个条目。
 
 ## A
 
@@ -99,6 +99,15 @@ title: "AUTOSAR API 类型清单"
 > 类型 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
 ## B
+
+**[BndM_BlockIdType](../memory/bulk_nv_data_manager/index.md#722-bndm_blockidtype)**
+> 类型 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
+
+**[BndM_ConfigType](../memory/bulk_nv_data_manager/index.md#721-bndm_configtype)**
+> 类型 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
+
+**[BndM_Result](../memory/bulk_nv_data_manager/index.md#724-bndm_result)**
+> 类型 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
 **[BswM_ConfigType](../mode_management/basic_software_mode_manager/index.md#721-bswm_configtype)**
 > 类型 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11

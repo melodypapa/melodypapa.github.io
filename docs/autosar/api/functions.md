@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **1974** 个条目。
+共 **1976** 个条目。
 
 ## A
 
@@ -103,28 +103,34 @@ title: "AUTOSAR API 函数清单"
 **[BLUEPRINT](../application_interfaces/user_guide/index.md#412-blueprint)**
 > 函数 · [Application Interfaces User Guide（应用接口用户指南）](../application_interfaces/user_guide/index.md) · EXP_AIUserGuide · R23-11
 
-**[BndM_GetVersionInfo](../memory/bulk_nv_data_manager/index.md#712-bndm_getversioninfo)**
+**[BndM_GetBlockPtr](../memory/bulk_nv_data_manager/index.md#733-bndm_getblockptr)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
-**[BndM_Init](../memory/bulk_nv_data_manager/index.md#711-bndm_init)**
+**[BndM_GetVersionInfo](../memory/bulk_nv_data_manager/index.md#732-bndm_getversioninfo)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
-**[BndM_JobEndNotification](../memory/bulk_nv_data_manager/index.md#721-bndm_jobendnotification)**
+**[BndM_Init](../memory/bulk_nv_data_manager/index.md#731-bndm_init)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
-**[BndM_JobErrorNotification](../memory/bulk_nv_data_manager/index.md#722-bndm_joberrornotification)**
+**[BndM_JobEndNotification](../memory/bulk_nv_data_manager/index.md#741-bndm_jobendnotification)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
-**[BndM_MainFunction](../memory/bulk_nv_data_manager/index.md#721-bndm_mainfunction)**
+**[BndM_JobErrorNotification](../memory/bulk_nv_data_manager/index.md#742-bndm_joberrornotification)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
-**[BndM_WriteCancel](../memory/bulk_nv_data_manager/index.md#717-bndm_writecancel)**
+**[BndM_MainFunction](../memory/bulk_nv_data_manager/index.md#751-bndm_mainfunction)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
-**[BndM_WriteFinalize](../memory/bulk_nv_data_manager/index.md#716-bndm_writefinalize)**
+**[BndM_WriteBlock](../memory/bulk_nv_data_manager/index.md#735-bndm_writeblock)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
-**[BndM_WriteStart](../memory/bulk_nv_data_manager/index.md#714-bndm_writestart)**
+**[BndM_WriteCancel](../memory/bulk_nv_data_manager/index.md#737-bndm_writecancel)**
+> 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
+
+**[BndM_WriteFinalize](../memory/bulk_nv_data_manager/index.md#736-bndm_writefinalize)**
+> 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
+
+**[BndM_WriteStart](../memory/bulk_nv_data_manager/index.md#734-bndm_writestart)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
 **[BswEvent](../rte/index.md#62225-bswevent)**
