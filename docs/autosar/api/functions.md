@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **1953** 个条目。
+共 **1974** 个条目。
 
 ## A
 
@@ -320,6 +320,9 @@ title: "AUTOSAR API 函数清单"
 
 **[CallbackMonitorStatusChange](../diagnostics/diagnostic_event_manager/index.md#7638-callbackmonitorstatuschange)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+
+**[CallbackNotification](../crypto/crypto_service_manager/index.md#7551-callbacknotification)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 **[CallTrustedFunction](../system_services/operating_system/index.md#744-calltrustedfunction)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
@@ -1050,115 +1053,175 @@ title: "AUTOSAR API 函数清单"
 **[CSM](../communication/sec_oc/index.md#52-csm)**
 > 函数 · [AUTOSAR SecOC (Secure Onboard Communication)](../communication/sec_oc/index.md) · SWS_SecOc · R23-11
 
-**[Csm_AEADDecrypt](../crypto/crypto_service_manager/index.md#752-csm_aeaddecrypt)**
+**[Csm_AEADDecrypt](../crypto/crypto_service_manager/index.md#7352-csm_aeaddecrypt)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_AEADEncrypt](../crypto/crypto_service_manager/index.md#751-csm_aeadencrypt)**
+**[Csm_AEADEncrypt](../crypto/crypto_service_manager/index.md#7351-csm_aeadencrypt)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_CallbackNotification](../crypto/crypto_service_manager/index.md#7121-csm_callbacknotification)**
+**[Csm_CallbackNotification](../crypto/crypto_service_manager/index.md#73131-csm_callbacknotification)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_CancelJob](../crypto/crypto_service_manager/index.md#7111-csm_canceljob)**
+**[Csm_CancelJob](../crypto/crypto_service_manager/index.md#73111-csm_canceljob)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_Decrypt](../crypto/crypto_service_manager/index.md#742-csm_decrypt)**
+**[Csm_CustomService](../crypto/crypto_service_manager/index.md#73121-csm_customservice)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_Encrypt](../crypto/crypto_service_manager/index.md#741-csm_encrypt)**
+**[Csm_CustomSync](../crypto/crypto_service_manager/index.md#73122-csm_customsync)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_GetVersionInfo](../crypto/crypto_service_manager/index.md#712-csm_getversioninfo)**
+**[Csm_Decrypt](../crypto/crypto_service_manager/index.md#7342-csm_decrypt)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_Hash](../crypto/crypto_service_manager/index.md#721-csm_hash)**
+**[Csm_Encrypt](../crypto/crypto_service_manager/index.md#7341-csm_encrypt)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_Init](../crypto/crypto_service_manager/index.md#711-csm_init)**
+**[Csm_GetVersionInfo](../crypto/crypto_service_manager/index.md#7312-csm_getversioninfo)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_JobKeyDerive](../crypto/crypto_service_manager/index.md#795-csm_jobkeyderive)**
+**[Csm_Hash](../crypto/crypto_service_manager/index.md#7321-csm_hash)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_JobKeyExchangeCalcPubVal](../crypto/crypto_service_manager/index.md#796-csm_jobkeyexchangecalcpubval)**
+**[Csm_Init](../crypto/crypto_service_manager/index.md#7311-csm_init)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_JobKeyExchangeCalcSecret](../crypto/crypto_service_manager/index.md#797-csm_jobkeyexchangecalcsecret)**
+**[Csm_JobKeyDerive](../crypto/crypto_service_manager/index.md#7395-csm_jobkeyderive)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_JobKeyGenerate](../crypto/crypto_service_manager/index.md#794-csm_jobkeygenerate)**
+**[Csm_JobKeyExchangeCalcPubVal](../crypto/crypto_service_manager/index.md#7396-csm_jobkeyexchangecalcpubval)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_JobKeySetInvalid](../crypto/crypto_service_manager/index.md#792-csm_jobkeysetinvalid)**
+**[Csm_JobKeyExchangeCalcSecret](../crypto/crypto_service_manager/index.md#7397-csm_jobkeyexchangecalcsecret)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_JobKeySetValid](../crypto/crypto_service_manager/index.md#791-csm_jobkeysetvalid)**
+**[Csm_JobKeyGenerate](../crypto/crypto_service_manager/index.md#7394-csm_jobkeygenerate)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_JobRandomSeed](../crypto/crypto_service_manager/index.md#793-csm_jobrandomseed)**
+**[Csm_JobKeySetInvalid](../crypto/crypto_service_manager/index.md#7392-csm_jobkeysetinvalid)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_KeyCopy](../crypto/crypto_service_manager/index.md#7842-csm_keycopy)**
+**[Csm_JobKeySetValid](../crypto/crypto_service_manager/index.md#7391-csm_jobkeysetvalid)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_KeyDerive](../crypto/crypto_service_manager/index.md#7861-csm_keyderive)**
+**[Csm_JobRandomSeed](../crypto/crypto_service_manager/index.md#7393-csm_jobrandomseed)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_KeyElementCopy](../crypto/crypto_service_manager/index.md#7841-csm_keyelementcopy)**
+**[Csm_KeyCopy](../crypto/crypto_service_manager/index.md#73842-csm_keycopy)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_KeyElementCopyPartial](../crypto/crypto_service_manager/index.md#7843-csm_keyelementcopypartial)**
+**[Csm_KeyDerive](../crypto/crypto_service_manager/index.md#73861-csm_keyderive)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_KeyElementGet](../crypto/crypto_service_manager/index.md#7831-csm_keyelementget)**
+**[Csm_KeyElementCopy](../crypto/crypto_service_manager/index.md#73841-csm_keyelementcopy)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_KeyElementSet](../crypto/crypto_service_manager/index.md#7811-csm_keyelementset)**
+**[Csm_KeyElementCopyPartial](../crypto/crypto_service_manager/index.md#73843-csm_keyelementcopypartial)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_KeyExchangeCalcPubVal](../crypto/crypto_service_manager/index.md#7871-csm_keyexchangecalcpubval)**
+**[Csm_KeyElementGet](../crypto/crypto_service_manager/index.md#73831-csm_keyelementget)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_KeyExchangeCalcSecret](../crypto/crypto_service_manager/index.md#7872-csm_keyexchangecalcsecret)**
+**[Csm_KeyElementSet](../crypto/crypto_service_manager/index.md#73811-csm_keyelementset)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_KeyGenerate](../crypto/crypto_service_manager/index.md#7852-csm_keygenerate)**
+**[Csm_KeyExchangeCalcPubVal](../crypto/crypto_service_manager/index.md#73871-csm_keyexchangecalcpubval)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_KeyGetStatus](../crypto/crypto_service_manager/index.md#7821-csm_keygetstatus)**
+**[Csm_KeyExchangeCalcSecret](../crypto/crypto_service_manager/index.md#73872-csm_keyexchangecalcsecret)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_KeySetInvalid](../crypto/crypto_service_manager/index.md#7813-csm_keysetinvalid)**
+**[Csm_KeyGenerate](../crypto/crypto_service_manager/index.md#73852-csm_keygenerate)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_KeySetValid](../crypto/crypto_service_manager/index.md#7812-csm_keysetvalid)**
+**[Csm_KeyGetStatus](../crypto/crypto_service_manager/index.md#73821-csm_keygetstatus)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_MacGenerate](../crypto/crypto_service_manager/index.md#731-csm_macgenerate)**
+**[Csm_KeySetInvalid](../crypto/crypto_service_manager/index.md#73813-csm_keysetinvalid)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_MacVerify](../crypto/crypto_service_manager/index.md#732-csm_macverify)**
+**[Csm_KeySetValid](../crypto/crypto_service_manager/index.md#73812-csm_keysetvalid)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_MainFunction](../crypto/crypto_service_manager/index.md#7131-csm_mainfunction)**
+**[Csm_MacGenerate](../crypto/crypto_service_manager/index.md#7331-csm_macgenerate)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_RandomGenerate](../crypto/crypto_service_manager/index.md#771-csm_randomgenerate)**
+**[Csm_MacVerify](../crypto/crypto_service_manager/index.md#7332-csm_macverify)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_RandomSeed](../crypto/crypto_service_manager/index.md#7851-csm_randomseed)**
+**[Csm_MainFunction](../crypto/crypto_service_manager/index.md#73141-csm_mainfunction)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_RestoreContextJob](../crypto/crypto_service_manager/index.md#7102-csm_restorecontextjob)**
+**[Csm_RandomGenerate](../crypto/crypto_service_manager/index.md#7371-csm_randomgenerate)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_SaveContextJob](../crypto/crypto_service_manager/index.md#7101-csm_savecontextjob)**
+**[Csm_RandomSeed](../crypto/crypto_service_manager/index.md#73851-csm_randomseed)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_SignatureGenerate](../crypto/crypto_service_manager/index.md#761-csm_signaturegenerate)**
+**[Csm_RestoreContextJob](../crypto/crypto_service_manager/index.md#73102-csm_restorecontextjob)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
-**[Csm_SignatureVerify](../crypto/crypto_service_manager/index.md#762-csm_signatureverify)**
+**[Csm_SaveContextJob](../crypto/crypto_service_manager/index.md#73101-csm_savecontextjob)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[Csm_SignatureGenerate](../crypto/crypto_service_manager/index.md#7361-csm_signaturegenerate)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[Csm_SignatureVerify](../crypto/crypto_service_manager/index.md#7362-csm_signatureverify)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CsmAEADDecrypt](../crypto/crypto_service_manager/index.md#7527-csmaeaddecrypt)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CsmAEADEncrypt](../crypto/crypto_service_manager/index.md#7526-csmaeadencrypt)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CsmCustom](../crypto/crypto_service_manager/index.md#75211-csmcustom)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CsmDecrypt](../crypto/crypto_service_manager/index.md#7525-csmdecrypt)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CsmEncrypt](../crypto/crypto_service_manager/index.md#7524-csmencrypt)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CsmHash](../crypto/crypto_service_manager/index.md#7521-csmhash)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CsmJobKeyDerive](../crypto/crypto_service_manager/index.md#7535-csmjobkeyderive)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CsmJobKeyExchangeCalcPubVal](../crypto/crypto_service_manager/index.md#7536-csmjobkeyexchangecalcpubval)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CsmJobKeyExchangeCalcSecret](../crypto/crypto_service_manager/index.md#7537-csmjobkeyexchangecalcsecret)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CsmJobKeyGenerate](../crypto/crypto_service_manager/index.md#7534-csmjobkeygenerate)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CsmJobKeySetInvalid](../crypto/crypto_service_manager/index.md#7532-csmjobkeysetinvalid)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CsmJobKeySetValid](../crypto/crypto_service_manager/index.md#7531-csmjobkeysetvalid)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CsmJobRandomSeed](../crypto/crypto_service_manager/index.md#7533-csmjobrandomseed)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CsmMacGenerate](../crypto/crypto_service_manager/index.md#7522-csmmacgenerate)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CsmMacVerify](../crypto/crypto_service_manager/index.md#7523-csmmacverify)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CsmRandomGenerate](../crypto/crypto_service_manager/index.md#75210-csmrandomgenerate)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CsmSignatureGenerate](../crypto/crypto_service_manager/index.md#7528-csmsignaturegenerate)**
+> 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CsmSignatureVerify](../crypto/crypto_service_manager/index.md#7529-csmsignatureverify)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 ## D

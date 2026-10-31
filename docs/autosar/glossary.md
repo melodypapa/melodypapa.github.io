@@ -132,6 +132,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
+**AEAD**
+> 具有关联数据的经过身份验证的加密（**Authenticated Encryption with Associated Data**）。
+>
+> 来源：[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
+{: .glossary-source}
+
 **AEB**
 > 自主紧急制动（**Autonomous Emergency Braking**）。
 >
@@ -697,7 +703,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CDD**
 > 复杂驱动（**Complex Driver**）。未被 AUTOSAR 标准化的软件实体，可以访问 AUTOSAR 接口和/或基础软件模块 API，或经由它们被访问；位于分层软件架构的复杂驱动层。
 >
-> 来源：[CDD Design and Integration Guideline（CDD 设计与集成指南）](general/cdd_design_and_integration/index.md)（AUTOSAR_CP_EXP_CDDDesignAndIntegrationGuideline）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）
+> 来源：[CDD Design and Integration Guideline（CDD 设计与集成指南）](general/cdd_design_and_integration/index.md)（AUTOSAR_CP_EXP_CDDDesignAndIntegrationGuideline）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 **CEMR**
@@ -715,7 +721,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Channel**
 > 通道：从加密服务管理器队列经由加密接口到特定加密驱动程序对象的路径。
 >
-> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）
+> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 **channel**
@@ -943,19 +949,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CRYIF**
 > 加密接口（**Crypto Interface**）。
 >
-> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）
+> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 **CRYPTO**
 > 加密驱动程序（**Crypto Driver**）。
 >
-> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）
+> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 **Crypto Driver Object**
 > 加密驱动程序对象：加密驱动程序实现一个或多个加密驱动程序对象，每个对象可以在硬件或软件中提供不同的加密原语；同一加密驱动程序的各加密驱动程序对象彼此独立，每个对象只有一个工作区（即同一时刻只能执行一个加密原语），独立性的唯一例外是默认随机数生成器的使用。
 >
-> 来源：[Utilization of Crypto Services（加密服务使用指南）](crypto/utilization_of_crypto_services/index.md)（AUTOSAR_CP_EXP_UtilizationOfCryptoServices）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）
+> 来源：[Utilization of Crypto Services（加密服务使用指南）](crypto/utilization_of_crypto_services/index.md)（AUTOSAR_CP_EXP_UtilizationOfCryptoServices）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 **Crypto Primitive**
@@ -973,7 +979,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CSM**
 > 加密服务管理器（**Crypto Service Manager**）。
 >
-> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
+> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 **CSUM/Checksum/signature**
@@ -1173,7 +1179,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DET**
 > 默认错误跟踪器（**Default Error Tracer**），实现报告开发错误的模块。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Default Error Tracer（默认错误跟踪器）](system_services/default_error_tracer/index.md)（SWS_DefaultErrorTracer）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Default Error Tracer（默认错误跟踪器）](system_services/default_error_tracer/index.md)（SWS_DefaultErrorTracer）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 **DHCP**
@@ -2124,7 +2130,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **HSM**
 > 硬件安全模块（**Hardware Security Module**），专用安全 **MCU** 的内核。
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+> 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 **HTM**
@@ -2142,7 +2148,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **HW**
 > 硬件（**Hardware**）
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 ## I
@@ -2470,7 +2476,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Job**
 > 作业：一个已配置的 **CsmJob**，它引用一个密钥、一个加密原语和一个参考通道。
 >
-> 来源：[Utilization of Crypto Services（加密服务使用指南）](crypto/utilization_of_crypto_services/index.md)（AUTOSAR_CP_EXP_UtilizationOfCryptoServices）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）
+> 来源：[Utilization of Crypto Services（加密服务使用指南）](crypto/utilization_of_crypto_services/index.md)（AUTOSAR_CP_EXP_UtilizationOfCryptoServices）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 **Job Request**
@@ -2484,19 +2490,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Key**
 > 密钥：密钥可以被 **Csm** 中的作业引用；在加密驱动程序中，每个密钥引用一种特定的密钥类型。
 >
-> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）
+> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 **Key Element**
 > 密钥元素：用于存储数据（例如 **AES** 加密所需的密钥材料或 **IV**），也可用于配置密钥管理功能的行为；不同密钥的密钥元素拥有不同的存储区域（**NV** 区域和 **RAM** 区域）。
 >
-> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）
+> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 **Key Type**
 > 密钥类型：由对密钥元素的引用组成，通常由加密驱动程序的供应商预先配置。
 >
-> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）
+> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 ## L
@@ -3434,7 +3440,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Operation**
 > 操作：加密原语的操作声明应执行加密原语的哪一部分，共有 **START**、**UPDATE**、**FINISH** 三种操作模式；通过拼接操作模式参数的相应位可以一次执行多个操作。
 >
-> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）
+> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 **OPS**
@@ -3796,19 +3802,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Primitive**
 > 原语：在加密驱动程序对象中实现的已配置加密算法的实例；它指向 **CSM** 向应用程序提供的功能、具体的底层算法家族（如 **AES**、**MD5**、**RSA**）以及算法模式（如 **ECB**、**CBC**）。
 >
-> 来源：[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）
+> 来源：[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 **Priority**
 > 优先级：作业的优先级定义其重要性，优先级（数值）越高，作业越需立即执行；加密作业的优先级是配置的一部分。
 >
-> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）
+> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 **Processing**
 > 处理：指示作业处理的类型。异步（**Asynchronous**）：调用相应函数时作业不会被立即处理，通常由后续的调度函数处理并通过回调通知结果；同步（**Synchronous**）：调用相应函数时作业被立即处理，函数返回时结果已可用。
 >
-> 来源：[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）
+> 来源：[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 **Prototype**
@@ -4232,7 +4238,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Service**
 > 服务：按 **TR_Glossary** 文档的定义理解——服务是一种具有已发布的接口和行为规范的操作，涉及功能提供者与潜在客户之间的合同。
 >
-> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
+> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 **Service Instance**
@@ -4292,7 +4298,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SHE**
 > 安全硬件扩展（**Security Hardware Extension**）。
 >
-> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）
+> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 **SID**
@@ -4598,7 +4604,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SW**
 > 软件（**Software**）
 >
-> 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）
+> 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 **SW-C**
