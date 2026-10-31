@@ -58,12 +58,12 @@ Status: **24/24** completed
 | `can_network_management`   | [x] Done | 3a7fa89890 |
 | `udp_network_management`   | [x] Done | 3a7fa89890 |
 | `can_driver`               | [x] Done | 3a7fa89890 |
-| `can_transceiver_driver`   | [x] Done | 79ff9b7ef5 |
-| `pdu_router`               | [x] Done | 79ff9b7ef5 |
-| `ethernet_interface`       | [x] Done | 79ff9b7ef5 |
-| `lin_interface`            | [x] Done | 79ff9b7ef5 |
-| `com_based_transformer`    | [x] Done | 79ff9b7ef5 |
-| `e2e_transformer`          | [x] Done | 79ff9b7ef5 |
+| `can_transceiver_driver`   | [x] Done | e48b58e604 |
+| `pdu_router`               | [x] Done | f915d45a5d |
+| `ethernet_interface`       | [x] Done | a08b183bbd |
+| `lin_interface`            | [x] Done | c6dd02bec7 |
+| `com_based_transformer`    | [x] Done | 3562899b14 |
+| `e2e_transformer`          | [x] Done | 4d5ff96f15 |
 | `data_distribution`        | [x] Done | b2c1ffb46a |
 | `sec_oc`                   | [x] Done | 3d584a281f |
 | `soad`                     | [x] Done | 1b9bf69034 |
@@ -82,11 +82,11 @@ Status: **24/24** completed
 
 ## Group crypto — crypto section
 
-Status: **3/4** completed
+Status: **4/4** completed
 
 | Article                  | Status | Commit ID |
 | ------------------------- | -------- | ---------- |
-| `crypto_service_manager`   | [ ] Aligned ⚠️ | 82efc1391e |
+| `crypto_service_manager`   | [x] Done | fd2aecd11c |
 | `crypto_driver`            | [x] Done | 8b73b6f312 |
 | `cryif`                    | [x] Done | c2cba4b51d |
 | `keym`                     | [x] Done | 6e52dcabd4 |
@@ -262,5 +262,5 @@ Status: **4/7** completed
 | `hwtestmanager`                 | [ ] Pending | N/A |
 | `operating_system`              | [x] Done | ca7ecda991 |
 
-**Total: 94/146 queue rows complete.**
+**Total: 95/146 queue rows complete.**
 
