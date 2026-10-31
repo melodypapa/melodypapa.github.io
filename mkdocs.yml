@@ -153,6 +153,7 @@ nav:
       - "SecOC": autosar/communication/sec_oc/index.md
       - "SD": autosar/communication/service_discovery/index.md
       - "Spi": autosar/communication/spi_handler_driver/index.md
+      - "SomeIpTp": autosar/communication/someiptp/index.md
       - "SomeIpXf": autosar/communication/someipxf/index.md
       - "SoAd": autosar/communication/soad/index.md
       - "Xcp": autosar/communication/xcp/index.md
