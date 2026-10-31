@@ -49,6 +49,7 @@ title: "CP AUTOSAR"
   * [AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)
   * [AUTOSAR SD (Service Discovery)](communication/service_discovery/index.md)
   * [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)
+  * [AUTOSAR SOME/IP Transformer（SOME/IP转换器）](communication/someipxf/index.md)
   * [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md)
   * [AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)
   * [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)
