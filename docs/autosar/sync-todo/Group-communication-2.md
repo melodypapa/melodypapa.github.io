@@ -145,13 +145,13 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (page-split service tables in ch.8 had cross-mangled Description/Return rows between adjacent functions — FrIf_SetWakeupChannel/SendWUP/GetPOCStatus/GetGlobalTime/AllowColdstart/GetMacroticksPerCycle re-associated by syntax + wrapped-function match; duplicated SWS_FrIf_05421/05425 rendered once; source typo Fr_CancleAbsoluteTimer corrected)
   - [ ] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
   - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] flexray_nm (SWS_FlexRayNetworkManagement · R23-11 markdown · ❌ new article)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-- [ ] Step 6 — TODO.md row + commit/PR
+- [x] flexray_nm (SWS_FlexRayNetworkManagement · R23-11 markdown · ❌ new article)
+  - [x] Step 1 — Source resolution + gap analysis (3633-line R23-11 markdown; new article docs/autosar/communication/flexray_network_management/)
+  - [x] Step 2 — In-place translation/completion (Type A article 2563 lines; 22 API functions + 3 callbacks, acronyms table 2.1 + terms table 2.2 as 2.1 术语, NM-PDU format tables 7.1-7.4, partial-networking RX/TX paths, config with 11 containers, examples 9.5.1/9.5.2 with figures 10.7-10.10; 22 figures extracted — vector figures rendered from PDF drawings with caption-anchored bands)
+  - [x] Step 3 — Phase A mechanical checks (strict build 0 WARNING; check_heading_lang OK; check_indexes OK; check_api_sync 22/22 + 1/1 types OK; gen_api_list regenerated; link_candidates applied + idempotent)
+  - [x] Step 4 — Phase B coverage map + fidelity (source ch.7.7.1/7.7.2 page-split duplicated the ⌈⌋ requirement blocks of SWS_FrNm_00010/00467 — deduplicated clean versions translated; §10 config flat containers: global 10.3.x + channel 10.4.x rendered as 9.2.2-9.2.11; FrNmVotingCycle Range row truncated at 32 in conversion, restored to 7 literals per SWS_FrNm_00195)
+  - [ ] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] flexray_sm (SWS_FlexRayStateManager · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
