@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **489** 个条目。
+共 **492** 个条目。
 
 ## A
 
@@ -689,6 +689,15 @@ title: "AUTOSAR API 类型清单"
 
 **[float64](../general/platform_types/index.md#7117-float64)**
 > 类型 · [AUTOSAR Platform Types（平台类型）](../general/platform_types/index.md) · SWS_PlatformTypes · R23-11
+
+**[Fls_AddressType](../memory/flash_driver/index.md#722-fls_addresstype)**
+> 类型 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+
+**[Fls_ConfigType](../memory/flash_driver/index.md#721-fls_configtype)**
+> 类型 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+
+**[Fls_LengthType](../memory/flash_driver/index.md#723-fls_lengthtype)**
+> 类型 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
 **[Fr_ChannelType](../communication/flexray_driver/index.md#7310-fr_channeltype)**
 > 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](../communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11

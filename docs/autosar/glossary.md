@@ -1823,6 +1823,24 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
 {: .glossary-source}
 
+**Flash access code**
+> 由主函数（作业处理函数）调用的内部闪存驱动程序例程，用于擦除或写入闪存硬件。
+>
+> 来源：[AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md)（AUTOSAR_CP_SWS_FlashDriver）
+{: .glossary-source}
+
+**Flash page**
+> 一次可以编程的最小闪存量。闪存页的大小取决于闪存技术，因此取决于硬件。
+>
+> 来源：[AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md)（AUTOSAR_CP_SWS_FlashDriver）
+{: .glossary-source}
+
+**Flash sector**
+> 一次可以擦除的最小闪存量。闪存扇区的大小取决于闪存技术，因此取决于硬件。
+>
+> 来源：[AUTOSAR FLS（闪存驱动程序）](memory/flash_driver/index.md)（AUTOSAR_CP_SWS_FlashDriver）
+{: .glossary-source}
+
 **FLM**
 > 前灯管理（**Front Light Management**）
 >

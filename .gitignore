@@ -10,5 +10,6 @@ eb_tresos/safety_rte
 reference
 .workbuddy/memory/*.md
 .zcode/
+.trae
 site/
 __pycache__/
