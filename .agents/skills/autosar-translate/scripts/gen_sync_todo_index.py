@@ -89,15 +89,50 @@ def parse_group(path):
     return title, rows
 
 
+_SHA_LEN = 10  # same commit-id length as py-armodel's SyncTodoIndex.md
+
+
+def _full_sha(short):
+    """Expand a short sha to the canonical _SHA_LEN prefix ('' if unknown)."""
+    full = git("rev-parse", short)
+    return full[:_SHA_LEN] if re.fullmatch(r"[0-9a-f]{40}", full) else ""
+
+
+_pr_cache = {}
+
+
+def pr_commit(pr_no):
+    """Merge commit of a merged PR, head commit of an open PR."""
+    if pr_no not in _pr_cache:
+        r = subprocess.run(
+            ["gh", "pr", "view", str(pr_no), "--repo", "melodypapa/melodypapa.github.io",
+             "--json", "state,mergeCommit,headRefOid"],
+            capture_output=True, text=True)
+        sha = ""
+        if r.returncode == 0:
+            import json
+            try:
+                d = json.loads(r.stdout)
+                sha = (d.get("mergeCommit") or {}).get("oid") or d.get("headRefOid") or ""
+            except ValueError:
+                pass
+        _pr_cache[pr_no] = sha[:_SHA_LEN] if re.fullmatch(r"[0-9a-f]{40}", sha) else ""
+    return _pr_cache[pr_no]
+
+
 def commit_ref(done, name, block):
     m = re.search(r"commits? ([0-9a-f]{7,40}(?:\s*/\s*[0-9a-f]{7,40})*)", block)
     if m:
-        return "/".join(s[:10] for s in re.split(r"/\s*", m.group(1)))
+        shas = [t for t in (_full_sha(s) for s in re.split(r"/\s*", m.group(1))) if t]
+        if shas:
+            return "/".join(dict.fromkeys(shas))
     m = re.search(r"PR #(\d+)", block)
     if m:
-        return f"PR #{m.group(1)}"
+        sha = pr_commit(m.group(1))
+        if sha:
+            return sha
     if done or article_exists(name):
-        c = article_add_commit(name)
+        c = _full_sha(article_add_commit(name))
         if c:
             return c
     return "N/A"
@@ -115,7 +150,9 @@ def main():
                "are not ticked — the remaining steps are an alignment pass, not a fresh "
                "translation (the row's ✅/🔶/⚠️/📖 marker is kept). Status `Pending` = the article "
                "does not exist yet. Commit ID = the translation commit sha(s) or PR recorded on "
-               "the queue row (falling back to the commit that added the article); "
+               "the queue row, resolved to 10-character commit ids (PR numbers are "
+               "resolved to the PR's merge commit, or head commit while open; "
+               "falling back to the commit that added the article); "
                "`N/A` = work not started.\n")
 
     total_done = total = 0

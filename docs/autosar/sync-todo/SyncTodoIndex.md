@@ -2,7 +2,7 @@
 
 Generated from all Group files in `docs/autosar/sync-todo/` — articles ordered by group, then by appearance order within each group. Regenerate with `python .agents/skills/autosar-translate/scripts/gen_sync_todo_index.py`.
 
-Status `Done` = all 6 queue steps complete (translation merged). Status `Aligned` = the article already exists on the site but the queue steps are not ticked — the remaining steps are an alignment pass, not a fresh translation (the row's ✅/🔶/⚠️/📖 marker is kept). Status `Pending` = the article does not exist yet. Commit ID = the translation commit sha(s) or PR recorded on the queue row (falling back to the commit that added the article); `N/A` = work not started.
+Status `Done` = all 6 queue steps complete (translation merged). Status `Aligned` = the article already exists on the site but the queue steps are not ticked — the remaining steps are an alignment pass, not a fresh translation (the row's ✅/🔶/⚠️/📖 marker is kept). Status `Pending` = the article does not exist yet. Commit ID = the translation commit sha(s) or PR recorded on the queue row, resolved to 10-character commit ids (PR numbers are resolved to the PR's merge commit, or head commit while open; falling back to the commit that added the article); `N/A` = work not started.
 
 ## Group communication-2 — communication section — remaining missing documents (38)
 
@@ -10,23 +10,23 @@ Status: **11/38** completed
 
 | Article                    | Status | Commit ID |
 | --------------------------- | -------- | ---------- |
-| `spi`                        | [x] Done | PR #141 |
-| `ldcom`                      | [x] Done | PR #177 |
-| `lsdu`                       | [x] Done | PR #177 |
-| `dlt`                        | [x] Done | PR #177 |
-| `doip`                       | [x] Done | PR #177 |
-| `xcp`                        | [x] Done | PR #177 |
-| `canxl_driver`               | [ ] Aligned | PR #190 |
-| `canxl_transceiver_driver`   | [ ] Aligned | PR #190 |
-| `eth_trcv`                   | [ ] Aligned | PR #190 |
-| `wlan_driver`                | [ ] Aligned | PR #190 |
-| `wlan_transceiver_driver`    | [ ] Aligned | PR #190 |
-| `flexray_driver`             | [ ] Aligned | PR #190 |
-| `flexray_interface`          | [x] Done | PR #208 |
-| `flexray_nm`                 | [x] Done | PR #208 |
-| `flexray_sm`                 | [x] Done | PR #208 |
-| `flexray_trcv`               | [x] Done | PR #208 |
-| `flexray_ar_tp`              | [x] Done | PR #208 |
+| `spi`                        | [x] Done | be171a1b1c |
+| `ldcom`                      | [x] Done | 6e4865a2a5 |
+| `lsdu`                       | [x] Done | 6e4865a2a5 |
+| `dlt`                        | [x] Done | 6e4865a2a5 |
+| `doip`                       | [x] Done | 6e4865a2a5 |
+| `xcp`                        | [x] Done | 6e4865a2a5 |
+| `canxl_driver`               | [ ] Aligned | fa81322ae9 |
+| `canxl_transceiver_driver`   | [ ] Aligned | fa81322ae9 |
+| `eth_trcv`                   | [ ] Aligned | fa81322ae9 |
+| `wlan_driver`                | [ ] Aligned | fa81322ae9 |
+| `wlan_transceiver_driver`    | [ ] Aligned | fa81322ae9 |
+| `flexray_driver`             | [ ] Aligned | fa81322ae9 |
+| `flexray_interface`          | [x] Done | 51bd5a4c8f |
+| `flexray_nm`                 | [x] Done | 51bd5a4c8f |
+| `flexray_sm`                 | [x] Done | 51bd5a4c8f |
+| `flexray_trcv`               | [x] Done | 51bd5a4c8f |
+| `flexray_ar_tp`              | [x] Done | 51bd5a4c8f |
 | `flexray_iso_tp`             | [ ] Pending | N/A |
 | `linsm`                      | [ ] Pending | N/A |
 | `lintrcv`                    | [ ] Pending | N/A |
@@ -55,30 +55,30 @@ Status: **4/24** completed
 
 | Article                  | Status | Commit ID |
 | ------------------------- | -------- | ---------- |
-| `can_network_management`   | [ ] Aligned ✅ | PR #139 |
-| `udp_network_management`   | [ ] Aligned ✅ | PR #139 |
-| `can_driver`               | [ ] Aligned 🔶 | PR #139 |
-| `can_transceiver_driver`   | [ ] Aligned 🔶 | e48b58e |
-| `pdu_router`               | [x] Done | f915d45 |
-| `ethernet_interface`       | [ ] Aligned ⚠️ | a08b183 |
-| `lin_interface`            | [ ] Aligned ⚠️ | c6dd02b |
-| `com_based_transformer`    | [ ] Aligned ⚠️ | 3562899 |
-| `e2e_transformer`          | [ ] Aligned ⚠️ | 4d5ff96 |
-| `data_distribution`        | [x] Done | b2c1ffb |
-| `sec_oc`                   | [x] Done | 3d584a2 |
-| `soad`                     | [x] Done | 1b9bf69 |
-| `mirror`                   | [ ] Aligned ⚠️ | c3e84ef |
-| `ethernet_switch_driver`   | [ ] Aligned | 7f5fc5e |
-| `service_discovery`        | [ ] Aligned | 23b20e5 |
-| `com`                      | [ ] Aligned | 17cdb70 |
-| `cansm`                    | [ ] Aligned | a803400 |
-| `cantp`                    | [ ] Aligned | 5e2624d |
-| `tcpip`                    | [ ] Aligned | bcbd61e |
-| `nm`                       | [ ] Aligned | 5036abf |
-| `ethsm`                    | [ ] Aligned | 37c98ec |
-| `ipdum`                    | [ ] Aligned | 5cef2ca |
-| `someipxf`                 | [ ] Aligned | e411562 |
-| `someiptp`                 | [ ] Aligned | af4d193 |
+| `can_network_management`   | [ ] Aligned ✅ | cda997f617 |
+| `udp_network_management`   | [ ] Aligned ✅ | cda997f617 |
+| `can_driver`               | [ ] Aligned 🔶 | cda997f617 |
+| `can_transceiver_driver`   | [ ] Aligned 🔶 | e48b58e604 |
+| `pdu_router`               | [x] Done | f915d45a5d |
+| `ethernet_interface`       | [ ] Aligned ⚠️ | a08b183bbd |
+| `lin_interface`            | [ ] Aligned ⚠️ | c6dd02bec7 |
+| `com_based_transformer`    | [ ] Aligned ⚠️ | 3562899b14 |
+| `e2e_transformer`          | [ ] Aligned ⚠️ | 4d5ff96f15 |
+| `data_distribution`        | [x] Done | b2c1ffb46a |
+| `sec_oc`                   | [x] Done | 3d584a281f |
+| `soad`                     | [x] Done | 1b9bf69034 |
+| `mirror`                   | [ ] Aligned ⚠️ | c3e84ef8da |
+| `ethernet_switch_driver`   | [ ] Aligned | 7f5fc5ecc6 |
+| `service_discovery`        | [ ] Aligned | 23b20e5f63 |
+| `com`                      | [ ] Aligned | 17cdb70608 |
+| `cansm`                    | [ ] Aligned | a803400f8b |
+| `cantp`                    | [ ] Aligned | 5e2624deac |
+| `tcpip`                    | [ ] Aligned | bcbd61e4de |
+| `nm`                       | [ ] Aligned | 5036abf611 |
+| `ethsm`                    | [ ] Aligned | 37c98ecaf5 |
+| `ipdum`                    | [ ] Aligned | 5cef2ca1e3 |
+| `someipxf`                 | [ ] Aligned | e4115620c1 |
+| `someiptp`                 | [ ] Aligned | af4d193edc |
 
 ## Group crypto — crypto section
 
@@ -86,10 +86,10 @@ Status: **3/4** completed
 
 | Article                  | Status | Commit ID |
 | ------------------------- | -------- | ---------- |
-| `crypto_service_manager`   | [ ] Aligned ⚠️ | PR #133 |
-| `crypto_driver`            | [x] Done | 8b73b6f |
-| `cryif`                    | [x] Done | c2cba4b |
-| `keym`                     | [x] Done | 6e52dca |
+| `crypto_service_manager`   | [ ] Aligned ⚠️ | 82efc1391e |
+| `crypto_driver`            | [x] Done | 8b73b6f312 |
+| `cryif`                    | [x] Done | c2cba4b51d |
+| `keym`                     | [x] Done | 6e52dcabd4 |
 
 ## Group diagnostics — diagnostics section
 
@@ -97,9 +97,9 @@ Status: **1/3** completed
 
 | Article                            | Status | Commit ID |
 | ----------------------------------- | -------- | ---------- |
-| `diagnostic_event_manager`           | [x] Done | c5b4a25 |
-| `j1939dcm`                           | [ ] Pending | 8795b71 |
-| `diagnostic_communication_manager`   | [ ] Aligned ⚠️ | 24c7a36 |
+| `diagnostic_event_manager`           | [x] Done | c5b4a2573a |
+| `j1939dcm`                           | [ ] Pending | 8795b71e19 |
+| `diagnostic_communication_manager`   | [ ] Aligned ⚠️ | 24c7a36bc4 |
 
 ## Group exp — missing EXP guides (20)
 
@@ -107,27 +107,27 @@ Status: **21/21** completed
 
 | Article                                          | Status | Commit ID |
 | ------------------------------------------------- | -------- | ---------- |
-| `exp vfb`                                          | [x] Done | d6cf2ec |
-| `exp layered_software_architecture`                | [x] Done | f60d11a |
-| `exp vfb`                                          | [x] Done | PR #158 |
-| `exp bsw_distribution_guide`                       | [x] Done | 668adfc |
-| `exp application_level_error_handling`             | [x] Done | 52d4d5c |
-| `exp error_description`                            | [x] Done | 9088a60 |
-| `exp cdd_design_and_integration`                   | [x] Done | 4e5d294 |
-| `exp utilization_of_crypto_services`               | [x] Done | bcbaf51 |
-| `exp macro_encapsulation_of_interpolation_calls`   | [x] Done | f385e42 |
-| `exp firmware_over_the_air`                        | [x] Done | 30ee49d |
-| `exp adas_vmc`                                     | [x] Done | a8f5273 |
-| `exp body_and_comfort`                             | [x] Done | 9055f25 |
-| `exp chassis`                                      | [x] Done | b1f1d8a |
-| `exp hmi`                                          | [x] Done | 29ee0f3 |
-| `exp occupant_safety`                              | [x] Done | ed312b3 |
-| `exp powertrain`                                   | [x] Done | 7909111 |
-| `exp user_guide`                                   | [x] Done | 2453865 |
-| `exp arti`                                         | [x] Done | 89cd317 |
-| `exp functional_safety_measures`                   | [x] Done | c1ed1da |
-| `exp safety_use_case`                              | [x] Done | 5fa1e61 |
-| `exp sw_cluster_design_and_integration`            | [x] Done | 26625e4 |
+| `exp vfb`                                          | [x] Done | d6cf2ec55c |
+| `exp layered_software_architecture`                | [x] Done | f60d11a303 |
+| `exp vfb`                                          | [x] Done | d6cf2ec55c |
+| `exp bsw_distribution_guide`                       | [x] Done | 668adfc728 |
+| `exp application_level_error_handling`             | [x] Done | 52d4d5c646 |
+| `exp error_description`                            | [x] Done | 9088a60a46 |
+| `exp cdd_design_and_integration`                   | [x] Done | 4e5d294ed6 |
+| `exp utilization_of_crypto_services`               | [x] Done | bcbaf51a17 |
+| `exp macro_encapsulation_of_interpolation_calls`   | [x] Done | f385e42b04 |
+| `exp firmware_over_the_air`                        | [x] Done | 30ee49dcbe |
+| `exp adas_vmc`                                     | [x] Done | a8f5273bc0 |
+| `exp body_and_comfort`                             | [x] Done | 9055f2593a |
+| `exp chassis`                                      | [x] Done | b1f1d8aff6 |
+| `exp hmi`                                          | [x] Done | 29ee0f30c0 |
+| `exp occupant_safety`                              | [x] Done | ed312b3ecd |
+| `exp powertrain`                                   | [x] Done | 790911157f |
+| `exp user_guide`                                   | [x] Done | 2453865a8c |
+| `exp arti`                                         | [x] Done | 89cd317758 |
+| `exp functional_safety_measures`                   | [x] Done | c1ed1dacae |
+| `exp safety_use_case`                              | [x] Done | 5fa1e61af2 |
+| `exp sw_cluster_design_and_integration`            | [x] Done | 26625e4b1b |
 
 ## Group general — general/base specifications
 
@@ -135,11 +135,11 @@ Status: **4/5** completed
 
 | Article                     | Status | Commit ID |
 | ---------------------------- | -------- | ---------- |
-| `platform_types`              | [x] Done | PR #120 |
-| `bsw_general`                 | [x] Done | 2bc57c2 |
-| `platform_types_2`            | [x] Done | PR #123 |
-| `communication_stack_types`   | [x] Done | faa0806 |
-| `tr_glossary`                 | [ ] Aligned 📖 | c19bc75 |
+| `platform_types`              | [x] Done | 439597529a |
+| `bsw_general`                 | [x] Done | 2bc57c2cd4 |
+| `platform_types_2`            | [x] Done | d773247410 |
+| `communication_stack_types`   | [x] Done | faa08069ee |
+| `tr_glossary`                 | [ ] Aligned 📖 | c19bc75dd6 |
 
 ## Group globaltime — global time cluster (new section)
 
@@ -147,9 +147,9 @@ Status: **3/4** completed
 
 | Article    | Status | Commit ID |
 | ----------- | -------- | ---------- |
-| `stbm`       | [x] Done | 53cd591 |
-| `can_tsyn`   | [x] Done | 364c4fd |
-| `eth_tsyn`   | [x] Done | 8f01771 |
+| `stbm`       | [x] Done | 53cd591142 |
+| `can_tsyn`   | [x] Done | 364c4fd73b |
+| `eth_tsyn`   | [x] Done | 8f01771012 |
 | `fr_tsyn`    | [ ] Pending | N/A |
 
 ## Group io — IO section wrap-up
@@ -158,13 +158,13 @@ Status: **7/7** completed
 
 | Article       | Status | Commit ID |
 | -------------- | -------- | ---------- |
-| `dio_driver`    | [x] Done | de11d8a/493ed12/e21067f |
-| `port_driver`   | [x] Done | ee486aa |
-| `pwm_driver`    | [x] Done | 1b5e44b |
-| `ocu_driver`    | [x] Done | b156916 |
-| `icu_driver`    | [x] Done | d11d759/9cb8764 |
-| `adc_driver`    | [x] Done | 3d8dd12/625d437 |
-| `iohwab`        | [x] Done | 72a103c |
+| `dio_driver`    | [x] Done | de11d8ac0f/493ed125e3/e21067fbde |
+| `port_driver`   | [x] Done | ee486aa54f |
+| `pwm_driver`    | [x] Done | 1b5e44b812 |
+| `ocu_driver`    | [x] Done | b156916583 |
+| `icu_driver`    | [x] Done | d11d759ec8/9cb876443e |
+| `adc_driver`    | [x] Done | 3d8dd128be/625d4371a6 |
+| `iohwab`        | [x] Done | 72a103c0ff |
 
 ## Group libraries — libraries section (new section)
 
@@ -188,9 +188,9 @@ Status: **3/3** completed
 
 | Article    | Status | Commit ID |
 | ----------- | -------- | ---------- |
-| `mcu`        | [x] Done | 2f0e714 |
-| `gpt`        | [x] Done | 065baee |
-| `coretest`   | [x] Done | 1abff90 |
+| `mcu`        | [x] Done | 2f0e714db9 |
+| `gpt`        | [x] Done | 065baee97a |
+| `coretest`   | [x] Done | 1abff90a9d |
 
 ## Group memory — memory section
 
@@ -198,12 +198,12 @@ Status: **2/12** completed
 
 | Article                        | Status | Commit ID |
 | ------------------------------- | -------- | ---------- |
-| `memory_access`                  | [x] Done | PR #131 |
-| `memory_mapping`                 | [x] Done | PR #144 |
-| `bulk_nv_data_manager`           | [ ] Aligned 🔶 | df7fb88 |
-| `flash_driver`                   | [ ] Aligned 🔶 | df7fb88 |
-| `nvram_manager`                  | [ ] Aligned 🔶 | df7fb88 |
-| `flash_eeprom_emulation`         | [ ] Aligned ⚠️ | df7fb88 |
+| `memory_access`                  | [x] Done | 922364777e |
+| `memory_mapping`                 | [x] Done | 89900677f4 |
+| `bulk_nv_data_manager`           | [ ] Aligned 🔶 | df7fb88a82 |
+| `flash_driver`                   | [ ] Aligned 🔶 | df7fb88a82 |
+| `nvram_manager`                  | [ ] Aligned 🔶 | df7fb88a82 |
+| `flash_eeprom_emulation`         | [ ] Aligned ⚠️ | df7fb88a82 |
 | `ea`                             | [ ] Pending | N/A |
 | `eep`                            | [ ] Pending | N/A |
 | `memory_abstraction_interface`   | [ ] Pending | N/A |
@@ -217,8 +217,8 @@ Status: **1/2** completed
 
 | Article                       | Status | Commit ID |
 | ------------------------------ | -------- | ---------- |
-| `basic_software_mode_manager`   | [ ] Aligned ✅ | PR #70 |
-| `ecu_state_manager`             | [x] Done | 37ee564 |
+| `basic_software_mode_manager`   | [ ] Aligned ✅ | de15f9833e |
+| `ecu_state_manager`             | [x] Done | 37ee564d4a |
 
 ## Group rte-swarch — RTE / SWArch section (new section)
 
@@ -226,8 +226,8 @@ Status: **0/2** completed
 
 | Article | Status | Commit ID |
 | ------- | -------- | ---------- |
-| `rte`    | [ ] Aligned | 67b0783 |
-| `arti`   | [ ] Aligned | 89cd317 |
+| `rte`    | [ ] Aligned | 67b0783783 |
+| `arti`   | [ ] Aligned | 89cd317758 |
 
 ## Group safety — safety section (new section)
 
@@ -235,9 +235,9 @@ Status: **3/3** completed
 
 | Article | Status | Commit ID |
 | -------- | -------- | ---------- |
-| `wdgm`    | [x] Done | 24c7a36 |
-| `wdgif`   | [x] Done | 24c7a36 |
-| `wdg`     | [x] Done | 24c7a36 |
+| `wdgm`    | [x] Done | 24c7a36bc4 |
+| `wdgif`   | [x] Done | 24c7a36bc4 |
+| `wdg`     | [x] Done | 24c7a36bc4 |
 
 ## Group security — security section (new section)
 
@@ -254,13 +254,13 @@ Status: **4/7** completed
 
 | Article                       | Status | Commit ID |
 | ------------------------------ | -------- | ---------- |
-| `det`                           | [x] Done | 30510c9 |
-| `function_inhibition_manager`   | [x] Done | 534d5d1 |
-| `time_service`                  | [x] Done | 5c57d0a |
+| `det`                           | [x] Done | 30510c9c38 |
+| `function_inhibition_manager`   | [x] Done | 534d5d1099 |
+| `time_service`                  | [x] Done | 5c57d0ae39 |
 | `comm`                          | [ ] Pending | N/A |
 | `swcluc`                        | [ ] Pending | N/A |
 | `hwtestmanager`                 | [ ] Pending | N/A |
-| `operating_system`              | [x] Done | ca7ecda |
+| `operating_system`              | [x] Done | ca7ecda991 |
 
 **Total: 67/146 queue rows complete.**
 
