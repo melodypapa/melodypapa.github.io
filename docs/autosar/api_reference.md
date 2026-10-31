@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **66** 份已有站内文章）。
+共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **73** 份已有站内文章）。
 
 ## A
 
@@ -823,28 +823,28 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md) · SWS_CANStateManager · R23-11
 
 **CanTp_CancelReceive**
-> 函数 · 未翻译 · SWS_CANTransportLayer · R23-11
+> 函数 · [AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md) · SWS_CANTransportLayer · R23-11
 
 **CanTp_CancelTransmit**
-> 函数 · 未翻译 · SWS_CANTransportLayer · R23-11
+> 函数 · [AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md) · SWS_CANTransportLayer · R23-11
 
 **CanTp_ChangeParameter**
-> 函数 · 未翻译 · SWS_CANTransportLayer · R23-11
+> 函数 · [AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md) · SWS_CANTransportLayer · R23-11
 
 **CanTp_ConfigType**
-> 类型 · 未翻译 · SWS_CANTransportLayer · R23-11
+> 类型 · [AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md) · SWS_CANTransportLayer · R23-11
 
 **CanTp_Init**
-> 函数 · 未翻译 · SWS_CANTransportLayer · R23-11
+> 函数 · [AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md) · SWS_CANTransportLayer · R23-11
 
 **CanTp_ReadParameter**
-> 函数 · 未翻译 · SWS_CANTransportLayer · R23-11
+> 函数 · [AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md) · SWS_CANTransportLayer · R23-11
 
 **CanTp_Shutdown**
-> 函数 · 未翻译 · SWS_CANTransportLayer · R23-11
+> 函数 · [AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md) · SWS_CANTransportLayer · R23-11
 
 **CanTp_Transmit**
-> 函数 · 未翻译 · SWS_CANTransportLayer · R23-11
+> 函数 · [AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md) · SWS_CANTransportLayer · R23-11
 
 **CanTrcv_CheckWakeFlag**
 > 函数 · [AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
@@ -3209,19 +3209,19 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthSM_GetCurrentComMode**
-> 函数 · 未翻译 · SWS_EthernetStateManager · R23-11
+> 函数 · [AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md) · SWS_EthernetStateManager · R23-11
 
 **EthSM_GetVersionInfo**
-> 函数 · 未翻译 · SWS_EthernetStateManager · R23-11
+> 函数 · [AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md) · SWS_EthernetStateManager · R23-11
 
 **EthSM_Init**
-> 函数 · 未翻译 · SWS_EthernetStateManager · R23-11
+> 函数 · [AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md) · SWS_EthernetStateManager · R23-11
 
 **EthSM_NetworkModeStateType**
-> 类型 · 未翻译 · SWS_EthernetStateManager · R23-11
+> 类型 · [AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md) · SWS_EthernetStateManager · R23-11
 
 **EthSM_RequestComMode**
-> 函数 · 未翻译 · SWS_EthernetStateManager · R23-11
+> 函数 · [AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md) · SWS_EthernetStateManager · R23-11
 
 **EthSwt_CheckWakeup**
 > 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
@@ -4198,7 +4198,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 **General**
 > 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 > 函数 · [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 > 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
@@ -4588,16 +4588,16 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md) · SWS_IOHardwareAbstraction · R23-11
 
 **IpduM_ConfigType**
-> 类型 · 未翻译 · SWS_IPDUMultiplexer · R23-11
+> 类型 · [AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md) · SWS_IPDUMultiplexer · R23-11
 
 **IpduM_GetVersionInfo**
-> 函数 · 未翻译 · SWS_IPDUMultiplexer · R23-11
+> 函数 · [AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md) · SWS_IPDUMultiplexer · R23-11
 
 **IpduM_Init**
-> 函数 · 未翻译 · SWS_IPDUMultiplexer · R23-11
+> 函数 · [AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md) · SWS_IPDUMultiplexer · R23-11
 
 **IpduM_Transmit**
-> 函数 · 未翻译 · SWS_IPDUMultiplexer · R23-11
+> 函数 · [AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md) · SWS_IPDUMultiplexer · R23-11
 
 **isOsStarted**
 > 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
@@ -5378,70 +5378,70 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **Nm_BusNmType**
-> 类型 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 类型 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_CheckRemoteSleepIndication**
-> 函数 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 函数 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_ConfigType**
-> 类型 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 类型 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_DisableCommunication**
-> 函数 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 函数 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_EnableCommunication**
-> 函数 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 函数 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_GetLocalNodeIdentifier**
-> 函数 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 函数 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_GetNodeIdentifier**
-> 函数 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 函数 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_GetPduData**
-> 函数 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 函数 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_GetState**
-> 函数 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 函数 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_GetUserData**
-> 函数 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 函数 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_GetVersionInfo**
-> 函数 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 函数 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_Init**
-> 函数 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 函数 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_ModeType**
-> 类型 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 类型 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_NetworkRelease**
-> 函数 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 函数 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_NetworkRequest**
-> 函数 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 函数 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_PassiveStartUp**
-> 函数 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 函数 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_PnLearningRequest**
-> 函数 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 函数 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_RepeatMessageRequest**
-> 函数 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 函数 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_RequestSynchronizedPncShutdown**
-> 函数 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 函数 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_SetUserData**
-> 函数 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 函数 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_StateType**
-> 类型 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 类型 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **Nm_UpdateIRA**
-> 函数 · 未翻译 · SWS_NetworkManagementInterface · R23-11
+> 函数 · [AUTOSAR Nm（网络管理接口）](communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
 
 **NvM_CancelJobs**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
@@ -5974,25 +5974,25 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR SoAd (Socket Adaptor)](communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
 **SomeIpTp_GetVersionInfo**
-> 函数 · 未翻译 · SWS_SOMEIPTransportProtocol · R23-11
+> 函数 · [AUTOSAR SomeIpTp（SOME/IP传输协议）](communication/someiptp/index.md) · SWS_SOMEIPTransportProtocol · R23-11
 
 **SomeIpTp_Init**
-> 函数 · 未翻译 · SWS_SOMEIPTransportProtocol · R23-11
+> 函数 · [AUTOSAR SomeIpTp（SOME/IP传输协议）](communication/someiptp/index.md) · SWS_SOMEIPTransportProtocol · R23-11
 
 **SomeIpTp_Transmit**
-> 函数 · 未翻译 · SWS_SOMEIPTransportProtocol · R23-11
+> 函数 · [AUTOSAR SomeIpTp（SOME/IP传输协议）](communication/someiptp/index.md) · SWS_SOMEIPTransportProtocol · R23-11
 
 **SomeIpXf_DeInit**
-> 函数 · 未翻译 · SWS_SOMEIPTransformer · R23-11
+> 函数 · [AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md) · SWS_SOMEIPTransformer · R23-11
 
 **SomeIpXf_ExtractProtocolHeaderFields**
-> 函数 · 未翻译 · SWS_SOMEIPTransformer · R23-11
+> 函数 · [AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md) · SWS_SOMEIPTransformer · R23-11
 
 **SomeIpXf_GetVersionInfo**
-> 函数 · 未翻译 · SWS_SOMEIPTransformer · R23-11
+> 函数 · [AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md) · SWS_SOMEIPTransformer · R23-11
 
 **SomeIpXf_Init**
-> 函数 · 未翻译 · SWS_SOMEIPTransformer · R23-11
+> 函数 · [AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md) · SWS_SOMEIPTransformer · R23-11
 
 **Spi_AsyncTransmit**
 > 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
@@ -6291,88 +6291,88 @@ title: "AUTOSAR API 清单（函数与类型）"
 ## T
 
 **TcpIp_Bind**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_ChangeParameter**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_Close**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_DhcpReadOption**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_DhcpV6ReadOption**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_DhcpV6WriteOption**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_DhcpWriteOption**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_GetAndResetMeasurementData**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_GetArpCacheEntries**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_GetCtrlIdx**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_GetIpAddr**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_GetNdpCacheEntries**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_GetPhysAddr**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_GetRemotePhysAddr**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_GetVersionInfo**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_IcmpTransmit**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_IcmpV6Transmit**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_Init**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_IsConnectionReady**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_ReleaseIpAddrAssignment**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_RequestComMode**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_RequestIpAddrAssignment**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_ResetIpAssignment**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_TcpConnect**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_TcpListen**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_TcpReceived**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_TcpTransmit**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TcpIp_UdpTransmit**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TerminateApplication**
 > 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
@@ -6465,7 +6465,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 
 **Transmission**
-> 函数 · 未翻译 · SWS_TcpIp · R23-11
+> 函数 · [AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md) · SWS_TcpIp · R23-11
 
 **TrustedFunctionIndexType**
 > 类型 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
