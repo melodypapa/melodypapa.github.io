@@ -216,12 +216,13 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 6 — TODO.md row + commit/PR — commit 5cef2ca (branch feature/group-communication-sync-3)
 - [ ] someipxf (SWS_SOMEIPTransformer · R23-11 markdown · ❌ new article, short name SomeIpXf)
   - Note: backbone
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-31 run — new article communication/someipxf/index.md created (commit e411562, branch feature/group-communication-sync-3): full Type A translation, ~2,200 ln; §2 14 term lines = source rows exactly; §3.2 相关标准和规范 = 不适用 (source "Not applicable"); §6 functional spec complete from source ch.7 (SOME/IP on-wire format 6.1: message format + all header fields + serialization of basic datatypes/structs/tagged structs with optional members incl. availability-bitfield formulas in code fences/strings fixed+dynamic/arrays fixed+dynamic incl. VSA profiles/bitfields/unions incl. 表7.10 layout; protocol spec 6.2: C/S + autonomous error reaction, S/R + session handling, external trigger events, error handling + 表7.11 return codes + reliability state machines); §6.3 error tables (4 dev); §7 API 10 function definitions (source 8.3.2/8.3.3 each hold 3 same-named SomeIpXf_<transformerId>/Inv_<transformerId> SWS definitions — article splits them into translated descriptive sub-headings 7.3.2.1-.3/7.3.3.1-.3; check_api_sync = documented N/A for name-matching, manual verification: 10 source SWS definitions ↔ 10 article 说明 blocks); 回调/调度/期望接口 one-sentence statements per source; §8 时序图 one-sentence statement (source: no applicable diagrams — com_based_transformer precedent, NOT the placeholder omission); §9 配置规范 one-sentence (no module-specific config, EcuC of [3] used) + apiServicePrefix requirement; annex A 需求历史 (R22-11 + R23-11 in fences), annex B 引用的元类 = 32 meta-class tables translated to normalized vertical tables (com_based_transformer annex precedent; PDF-chrome Tags: xml.*/atp.* dropped), annex C 不支持的SOME/IP特性, annex D 示例 (D.1 C/S serialization with RTE/transformer API signatures in fences). check_api_sync = documented N/A (see above). Figures: 15 extracted (all vector-rendered). Phase A: strict build exit 0, 0 WARNINGs, no someipxf INFO; heading audit ✓ (annex B/C/D lettered per rte/com_based_transformer precedent); forbidden-variant sweep 0; hygiene ✓ (0 `\<`, 0 {DRAFT}); acronym slice 0 tables, 14 term lines; check_indexes exit 0; gen_api_list --check up to date (transformer docs among the 7 known unparseable `!` docs — SomeIpXf added by gen script on its own). link_candidates --apply: 5 chapter-refs + 36 citations, idempotent; census: identifier mentions 7 lines §6; cross-article mentions PORT SITE report-only. Glossary extension skipped (batch-level pending item). Steps 5/6 per user instruction: commit first, combined confirmation after batch
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit e411562 (branch feature/group-communication-sync-3)
 - [ ] someiptp (SWS_SOMEIPTransportProtocol · R23-11 markdown · ❌ new article, short name SomeIpTp)
   - Note: backbone
   - [ ] Step 1 — Source resolution + gap analysis
