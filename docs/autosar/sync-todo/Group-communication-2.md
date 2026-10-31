@@ -138,13 +138,13 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (evidence above)
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
   - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-2 · PR #190 (Closes issue #189))
-- [ ] flexray_interface (SWS_FlexRayInterface · R23-11 markdown · ❌ new article)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-- [ ] Step 6 — TODO.md row + commit/PR
+- [x] flexray_interface (SWS_FlexRayInterface · R23-11 markdown · ❌ new article)
+  - [x] Step 1 — Source resolution + gap analysis (5815-line R23-11 markdown; new article docs/autosar/communication/flexray_interface/)
+  - [x] Step 2 — In-place translation/completion (Type A article 3899 lines; 26 mandatory + 16 optional API functions, 6 configurable interfaces, 19 config containers / 112 parameters, 17 figures incl. state machine + sequence diagrams; table 7.9 Fail cell citing FRIF_E_SW_CH_B kept source-faithful)
+  - [x] Step 3 — Phase A mechanical checks (strict build 0 WARNING; check_heading_lang OK; check_indexes OK; check_api_sync 26/26 functions + 3/3 types OK; gen_api_list regenerated; link_candidates applied + idempotent; link_candidates.py fix: heading-slug simulation now unescapes &lt;/&gt; entities to match Material slugs for placeholder-named headings)
+  - [x] Step 4 — Phase B coverage map + fidelity (page-split service tables in ch.8 had cross-mangled Description/Return rows between adjacent functions — FrIf_SetWakeupChannel/SendWUP/GetPOCStatus/GetGlobalTime/AllowColdstart/GetMacroticksPerCycle re-associated by syntax + wrapped-function match; duplicated SWS_FrIf_05421/05425 rendered once; source typo Fr_CancleAbsoluteTimer corrected)
+  - [ ] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] flexray_nm (SWS_FlexRayNetworkManagement · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
