@@ -225,12 +225,13 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 6 — TODO.md row + commit/PR — commit e411562 (branch feature/group-communication-sync-3)
 - [ ] someiptp (SWS_SOMEIPTransportProtocol · R23-11 markdown · ❌ new article, short name SomeIpTp)
   - Note: backbone
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-31 run — new article communication/someiptp/index.md created (commit af4d193, branch feature/group-communication-sync-3): full Type A translation, ~985 ln; §2 1 term line (SOME/IP); §6 functional spec complete from source ch.7 (SOME/IP header overview 6.1 with TP-flag/offset/reserved/more-segments fields + 表7.1/表7.2 + 5-segment example with Figure7-3/7-4/7-5; TX path 6.2 segment sizing/header/sending incl. burst-size debounce/disassembly interruption; RX path 6.3 assembly incl. offset-0/offset>0/interruption with runtime errors); §6.4 error tables (4 dev + 5 runtime + 注意 on unsegmented messages); §7 API check_api_sync = documented N/A (source 8.2 type defined under [SWS_SomeIpTp_91002] heading without 8.2.x numbering — script parses 0 types; manual verification: 1 type, 3 functions/3 说明 blocks, 3 callbacks, 2 scheduled, 期望接口 7+1+可配置不适用); §8 时序图 2 figures; §9 配置规范 7 containers (SomeIpTp module, SomeIpTpGeneral 4 params, SomeIpTpChannel 3 params, SomeIpTpRxNSdu/SomeIpTpRxNPdu/SomeIpTpTxNSdu/SomeIpTpTxNPdu, ECUC cells filled) + Figure10-1 (vector-rendered from p.42 — initially missed by the caption mapper because the docling page order differs; caught by strict build as a missing-link WARNING, fixed in-run). source annex A "Change history" rendered as canonical ## B. AUTOSAR 可追溯项变更历史 (source letters it A; letter normalized per STANDARD.md §1 rule — USER VERIFY at gate); no separate NA-requirements annex in source. Figures: 7 extracted (2 vector-rendered 9-1/9-2 + Figure10-1). Phase A: strict build exit 0, 0 WARNINGs, no someiptp INFO; heading audit ✓; forbidden-variant sweep 0; hygiene ✓ (0 `\<`, 0 {DRAFT}); acronym slice 0 tables, 1 term line; check_indexes exit 0; gen_api_list --check up to date. link_candidates --apply: 2 chapter-refs + 10 citations, idempotent; census: identifier mentions 29 lines all §9 definitional; cross-article mentions Det NO-ARTICLE report-only. Glossary extension skipped (batch-level pending item). Steps 5/6 per user instruction: commit first, combined confirmation after batch
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit af4d193 (branch feature/group-communication-sync-3)
 
 ## Not queued (deliberately skipped)
 - 📖 fvm/fvm.md — topic article derived from SecOC appendix A (no standalone specification)
