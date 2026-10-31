@@ -72,6 +72,7 @@ also reports UNRESOLVED citation numbers (not in the §3.1 registry — source
 typos like EcuM's [23], never linked, 译者注 is a user decision) and UNLINKED
 resolved ones (context shown so a document-name mismatch is caught).
 """
+import html
 import os
 import re
 import sys
@@ -198,6 +199,10 @@ def slug_of(num: str, title: str) -> str:
     num = num.rstrip(".")
     num = num.replace(".", "")
     title = title.strip().lower()
+    # unescape HTML entities before stripping punctuation: the article markdown
+    # writes '<' as '&lt;' — Material renders it back to '<' (then strips it),
+    # so 'lt'/'gt' letters must not leak into the slug (FrIf_JobListExec_&lt;...).
+    title = html.unescape(title)
     # Material/uslugify keeps word chars (letters, digits, '_', CJK), spaces ->
     # '-', and strips all punctuation — incl. CJK/fullwidth punctuation, '/',
     # '——', '[UC2]' brackets. The old code kept some of them and produced
