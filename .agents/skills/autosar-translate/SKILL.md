@@ -459,14 +459,18 @@ changed); `glossary.md` is
      (format, ordering, duplicate handling) and is re-runnable; it refuses
      to guess at a substantively different definition.
 2. **API listing `docs/autosar/api/`** — landing page plus two A–Z pages
-   (types 8.2 / functions 8.3), **article-based**: only identifiers whose
-   translated article carries a matching heading are listed, and each
-   identifier deep-links to that heading's anchor. Regenerate after any
-   front-matter `spec:` change, article addition, or API-chapter change:
-   `python .agents/skills/autosar-translate/scripts/gen_api_list.py`. Its
-   `dropped (no heading in article)` report lines are recorded limitations,
-   not errors to silence — they mark API chapters the article does not
-   deliver yet.
+   (types / functions), derived **from the translated articles only** (the
+   repository is the sole input — no external corpus): identifiers are
+   enumerated from each article's own identifier-shaped headings,
+   classified by the article's section titles (类型定义 → type; 函数定义 /
+   服务接口 → function; identifiers under 导入的类型 / 期望接口 are
+   excluded; the scan stops at the 配置规范 chapter), and each identifier
+   deep-links to its heading's anchor. Regenerate after any front-matter
+   `spec:`/`release:` change, article addition, or API-chapter change:
+   `python .agents/skills/autosar-translate/scripts/gen_api_list.py`. The
+   per-article report lines are the coverage record — articles whose API
+   chapters are prose-structured simply contribute what their headings
+   expose.
 3. **Site indexes — nav + three landing-page levels** (user decision
    2026-10-29). `mkdocs.yml`'s `nav` is the single source of truth; every
    index page is derived from it, so a nav change and its index updates ship
