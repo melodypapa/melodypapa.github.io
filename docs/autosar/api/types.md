@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **467** 个条目。
+共 **486** 个条目。
 
 ## A
 
@@ -234,8 +234,65 @@ title: "AUTOSAR API 类型清单"
 **[CryIf_ConfigType](../crypto/crypto_interface/index.md#722-cryif_configtype)**
 > 类型 · [AUTOSAR Crypto Interface（加密接口）](../crypto/crypto_interface/index.md) · SWS_CryptoInterface · R23-11
 
+**[Crypto_AlgorithmFamilyType](../crypto/crypto_service_manager/index.md#723-crypto_algorithmfamilytype)**
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[Crypto_AlgorithmInfoType](../crypto/crypto_service_manager/index.md#7212-crypto_algorithminfotype)**
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[Crypto_AlgorithmModeType](../crypto/crypto_service_manager/index.md#724-crypto_algorithmmodetype)**
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
 **[Crypto_ConfigType](../crypto/crypto_driver/index.md#722-crypto_configtype)**
 > 类型 · [AUTOSAR Crypto Driver（加密驱动程序）](../crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
+
+**[Crypto_InputOutputRedirectionConfigType](../crypto/crypto_service_manager/index.md#725-crypto_inputoutputredirectionconfigtype)**
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[Crypto_JobPrimitiveInfoType](../crypto/crypto_service_manager/index.md#729-crypto_jobprimitiveinfotype)**
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[Crypto_JobPrimitiveInputOutputType](../crypto/crypto_service_manager/index.md#728-crypto_jobprimitiveinputoutputtype)**
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[Crypto_JobRedirectionInfoType](../crypto/crypto_service_manager/index.md#7211-crypto_jobredirectioninfotype)**
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[Crypto_JobStateType](../crypto/crypto_service_manager/index.md#727-crypto_jobstatetype)**
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[Crypto_JobType](../crypto/crypto_service_manager/index.md#726-crypto_jobtype)**
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[Crypto_KeyStatusType](../crypto/crypto_service_manager/index.md#75630-crypto_keystatustype)**
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[Crypto_OperationModeType](../crypto/crypto_service_manager/index.md#7561-crypto_operationmodetype)**
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[Crypto_PrimitiveInfoType](../crypto/crypto_service_manager/index.md#7214-crypto_primitiveinfotype)**
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[Crypto_ProcessingType](../crypto/crypto_service_manager/index.md#7213-crypto_processingtype)**
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[Crypto_ResultType](../crypto/crypto_service_manager/index.md#7564-crypto_resulttype)**
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[Crypto_ServiceInfoType](../crypto/crypto_service_manager/index.md#7210-crypto_serviceinfotype)**
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[Crypto_VerifyResultType](../crypto/crypto_service_manager/index.md#7562-crypto_verifyresulttype)**
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[Csm_ConfigType](../crypto/crypto_service_manager/index.md#722-csm_configtype)**
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[Csm_LengthPtr](../crypto/crypto_service_manager/index.md#75628-csm_lengthptr)**
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[Csm_VerifyResultPtr](../crypto/crypto_service_manager/index.md#75629-csm_verifyresultptr)**
+> 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 ## D
 
