@@ -166,13 +166,13 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (FrTrcvAccess container id [ECUC_FrTrcv_00454] restored from source (extraction missed choice containers); FrTrcvChannel INC multiplicities corrected to source values 1/1..*/0..1; FrTrcvHardwareInterfaceName description restored from page-split table row)
   - [ ] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
   - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] flexray_ar_tp (SWS_FlexRayARTransportLayer · R23-11 markdown · ❌ new article)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-- [ ] Step 6 — TODO.md row + commit/PR
+- [x] flexray_ar_tp (SWS_FlexRayARTransportLayer · R23-11 markdown · ❌ new article)
+  - [x] Step 1 — Source resolution + gap analysis (3001-line R23-11 markdown; new article docs/autosar/communication/flexray_ar_transport_layer/)
+  - [x] Step 2 — In-place translation/completion (Type A article 2017 lines; 7 API functions + 3 callbacks, full frame-layout chapter with tables 1-3, 8 config containers / 36 parameters, 10.4 config-issues chapter with timing tables 4-5, 24 figures incl. 13 uncaptioned §9 sequence diagrams carried from the source conversion artifacts)
+  - [x] Step 3 — Phase A mechanical checks (strict build 0 WARNING; check_heading_lang OK; check_indexes OK; check_api_sync N/A — source ch.8 uses three-level numbering 8.3.1.1-8.3.3.4 the script cannot parse; manual verification 7/7 functions + 1/1 type in order; gen_api_list regenerated; link_candidates applied + idempotent)
+  - [x] Step 4 — Phase B coverage map + fidelity (7 mangled config descriptions restored: FrArTpMaxRn/StMin/TimeBr/TimeCs/TimeoutBs/MultRec/Ra/SduTxId reconstructed from parallel-parameter wording — flagged as reconstruction; source appendix A "Not applicable requirements" is empty and dropped per Type A droppable set; source ch.5/6 numbering quirk (5.1 before 5) normalized)
+  - [ ] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] flexray_iso_tp (SWS_FlexRayISOTransportLayer · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
