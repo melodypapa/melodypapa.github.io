@@ -1,18 +1,30 @@
 #!/usr/bin/env python3
-"""Generate docs/autosar/api_reference.md — an A–Z index of every API function
-and type defined in chapter 8 (API specification) of every AUTOSAR CP SWS
-document in the R23-11 markdown corpus, each entry naming its document and
-release, and linking to the site article when one exists.
+"""Generate the AUTOSAR API listing under docs/autosar/api/ — an A–Z index of
+the API functions and types covered by the site's TRANSLATED articles.
 
-Pure derivation of the source corpus + the articles' front-matter `spec:` —
-never hand-edit the output. Run after any article/front-matter change
-(autosar-translate SKILL.md Step 6) and verify with --check in Phase A.
+Basis is the translated articles (front-matter `spec:`), not the raw corpus:
+for every article, the identifiers defined in the matching SWS document's
+ch.8 (8.2 types / 8.3 functions, per the R23-11 markdown corpus) are listed
+ONLY when the article itself carries a heading for the identifier, and the
+identifier deep-links to that heading's anchor (Material slug rules,
+including `_1`-style dedup) inside the article. Identifiers without a
+matching article heading are dropped and reported — the listing never
+promises more than the articles deliver.
+
+Output (three pages, regenerate as a set — never hand-edit):
+  api/index.md      landing page (intro + 文章 links to the two lists)
+  api/types.md      type list  (ch.8 8.2 Type definitions)
+  api/functions.md  function list (ch.8 8.3 Function definitions)
+
+Pure derivation of the articles + the source corpus — never hand-edit the
+output. Run after any article/front-matter change (autosar-translate
+SKILL.md Step 6) and verify with --check in Phase A.
 
 Usage:
   python .agents/skills/autosar-translate/scripts/gen_api_list.py           # (re)write
   python .agents/skills/autosar-translate/scripts/gen_api_list.py --check   # exit 1 if stale
 
-Extraction (per source document):
+Corpus extraction (per source document, classification only):
   ch.8 region   = from `## 8 API specification` to `## 9 …`
   types         = `## 8.2.N[.M] <Identifier>`   (8.2 Type definitions)
   functions     = `## 8.3.N[.M] <Identifier>`   (8.3 Function definitions)
@@ -28,7 +40,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
 DOCS = ROOT / "docs" / "autosar"
-OUT = DOCS / "api_reference.md"
+API_DIR = DOCS / "api"
+OUT_INDEX = API_DIR / "index.md"
+OUT_TYPES = API_DIR / "types.md"
+OUT_FUNCS = API_DIR / "functions.md"
 RELEASE = "R23-11"
 SRC = Path.home() / "Workspace/autosar_standard/markdown/Classic_Platform/Releases" / RELEASE
 
@@ -107,7 +122,9 @@ def article_index():
     """spec stem -> (label, link) from articles' front-matter."""
     idx = {}
     for p in sorted(DOCS.rglob("*.md")):
-        if "sync-todo" in p.parts or "r21_11" in p.parts or p.name in {"STANDARD.md", "TODO.md", "glossary.md", "api_reference.md"}:
+        if "sync-todo" in p.parts or "r21_11" in p.parts or p.name in {"STANDARD.md", "TODO.md", "glossary.md"}:
+            continue
+        if p.relative_to(DOCS).parts[0] == "api":
             continue
         text = p.read_text(encoding="utf-8")
         m = re.search(r"^spec:\s*(\S+)", text, re.M)
@@ -137,42 +154,55 @@ def letter_of(name: str) -> str:
     return c if "A" <= c <= "Z" else "#"
 
 
-def build():
-    idx = article_index()
-    entries: "OrderedDict[str, list]" = OrderedDict()  # name.lower() -> [(name, kind, stem, label, link)]
-    report, n_docs, n_types, n_funcs = [], 0, 0, 0
-    for doc in sorted(SRC.rglob("AUTOSAR_CP_SWS_*.md")):
-        if "_artifacts" in doc.parts:
-            continue
-        res = extract(doc)
-        stem = doc.stem
-        if res is None:
-            report.append(f"  - {stem}: no ch.8 API specification heading")
-            continue
-        types, funcs = res
-        if not types and not funcs:
-            report.append(f"  ! {stem}: ch.8 present but no 8.2/8.3 identifiers parsed")
-            continue
-        n_docs += 1
-        n_types += len(types)
-        n_funcs += len(funcs)
-        label_link = idx.get(stem)
-        report.append(f"  {len(types):3d} types {len(funcs):3d} funcs  {stem}{'' if label_link else '  (未翻译)'}")
-        for name, kind in [(t, "类型") for t in types] + [(f, "函数") for f in funcs]:
-            entries.setdefault(name.lower(), []).append((name, kind, stem, label_link))
+NUM_PREFIX = re.compile(r"^\d+(?:\.\d+)*\.?\s+")
+ART_HEAD = re.compile(r"^(#{2,6})\s+(.+?)\s*$", re.M)
 
-    translated = sum(1 for d in {e[2] for v in entries.values() for e in v} if d in idx)
+
+def material_slug(text: str) -> str:
+    """pymdownx.slugs.slugify(case='lower'): lowercase, drop punctuation,
+    whitespace -> '-'. Unicode word chars (CJK, _) survive — matches the
+    site's Material config."""
+    s = re.sub(r"[^\w\s-]", "", text.strip().lower(), flags=re.UNICODE)
+    return re.sub(r"\s+", "-", s)
+
+
+def article_anchors(article: Path) -> dict[str, str]:
+    """identifier (lower) -> anchor slug of its FIRST heading occurrence.
+
+    Walks every heading in document order, computing Material slugs with
+    the same-seen `_N` dedup mkdocs applies, so the recorded anchor is the
+    one the rendered page actually assigns. First occurrence wins: the API
+    definition chapter precedes the 配置规范 chapter, whose same-named
+    container headings would otherwise shadow the definition."""
+    seen: dict[str, int] = {}
+    anchors: dict[str, str] = {}
+    for m in ART_HEAD.finditer(article.read_text(encoding="utf-8")):
+        text = m.group(2).strip()
+        ident = NUM_PREFIX.sub("", text).strip()
+        if not IDENT_RE.match(ident):
+            continue
+        base = material_slug(text)
+        n = seen.get(base, 0)
+        seen[base] = n + 1
+        slug = base if n == 0 else f"{base}_{n}"
+        anchors.setdefault(ident.lower(), slug)
+    return anchors
+
+
+def render_list(title: str, chapter_note: str, entries, n_items: int) -> list[str]:
+    """One A–Z list page: intro + `## <letter>` sections of entries."""
     out = [
         "---",
-        'title: "AUTOSAR API 清单（函数与类型）"',
+        f'title: "{title}"',
         "---",
         "",
-        f"本页汇总 AUTOSAR CP **{RELEASE}** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）"
-        "与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。"
+        f"本页汇总站内已翻译 AUTOSAR 文章所覆盖 SWS 文档第 8 章「API specification」中定义的{chapter_note}，"
+        "按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，"
+        "每条另标注所属文档与发布版本。"
         "**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；"
         f"源：`~/Workspace/autosar_standard/markdown/.../{RELEASE}/`）。",
         "",
-        f"共 **{n_types}** 个类型、**{n_funcs}** 个函数，来自 **{n_docs}** 份文档（其中 **{translated}** 份已有站内文章）。",
+        f"共 **{n_items}** 个条目。",
         "",
     ]
     current = None
@@ -182,29 +212,115 @@ def build():
         if letter != current:
             current = letter
             out += [f"## {letter if letter != '#' else '其他'}", ""]
-        out.append(f"**{occ[0][0]}**")
-        for name, kind, stem, label_link in occ:
+        for name, kind, stem, label_link, anchor in occ:
             spec_disp = stem.removeprefix("AUTOSAR_CP_")
-            where = f"[{label_link[0]}]({label_link[1]})" if label_link else "未翻译"
-            out.append(f"> {kind} · {where} · {spec_disp} · {RELEASE}")
-        out.append("")
-    return "\n".join(out).rstrip() + "\n", report
+            # article paths are stored relative to docs/autosar/; the list
+            # pages live one level deeper (autosar/api/), so prefix ../
+            target = f"../{label_link[1]}"
+            out.append(f"**[{name}]({target}#{anchor})**")
+            out.append(f"> {kind} · [{label_link[0]}]({target}) · {spec_disp} · {RELEASE}")
+            out.append("")
+    return out
+
+
+def build():
+    idx = article_index()
+    entries_t: "OrderedDict[str, list]" = OrderedDict()  # name.lower() -> [(name, kind, stem, label_link, anchor)]
+    entries_f: "OrderedDict[str, list]" = OrderedDict()
+    report, n_types, n_funcs = [], 0, 0
+    n_articles = len(idx)
+    for doc in sorted(SRC.rglob("AUTOSAR_CP_SWS_*.md")):
+        if "_artifacts" in doc.parts:
+            continue
+        stem = doc.stem
+        label_link = idx.get(stem)
+        if not label_link:
+            continue  # not translated — the listing is article-based
+        res = extract(doc)
+        if res is None:
+            report.append(f"  - {stem}: no ch.8 in corpus, article anchors not enumerated")
+            continue
+        types, funcs = res
+        article = DOCS / label_link[1]
+        anchors = article_anchors(article)
+        listed, dropped = 0, []
+        for bucket, names in ((entries_t, types), (entries_f, funcs)):
+            kind = "类型" if bucket is entries_t else "函数"
+            for name in names:
+                anchor = anchors.get(name.lower())
+                if anchor is None:
+                    dropped.append(name)
+                    continue
+                bucket.setdefault(name.lower(), []).append((name, kind, stem, label_link, anchor))
+                listed += 1
+        if dropped:
+            report.append(f"  {stem}: {listed} listed, {len(dropped)} dropped (no heading in article): {', '.join(dropped[:8])}{' …' if len(dropped) > 8 else ''}")
+        else:
+            report.append(f"  {stem}: {listed} listed")
+        n_types += sum(1 for t in types if t.lower() in anchors)
+        n_funcs += sum(1 for f in funcs if f.lower() in anchors)
+
+    index_page = [
+        "---",
+        'title: "AUTOSAR API 清单"',
+        "---",
+        "",
+        f"本页汇总站内已翻译 AUTOSAR 文章所覆盖 SWS 文档第 8 章「API specification」中定义的 API，"
+        "分为**类型**与**函数**两个清单，各自按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节。"
+        "**由脚本自动生成，请勿手工编辑**"
+        "（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；"
+        f"源：`~/Workspace/autosar_standard/markdown/.../{RELEASE}/`）。",
+        "",
+        f"共 **{n_types}** 个类型、**{n_funcs}** 个函数，来自 **{n_articles}** 篇已翻译文章。",
+        "",
+        "## 文章",
+        "",
+        "- [AUTOSAR API 类型清单](types.md) —— 已翻译文章中的全部类型定义（源文档 8.2 Type definitions）",
+        "- [AUTOSAR API 函数清单](functions.md) —— 已翻译文章中的全部函数定义（源文档 8.3 Function definitions）",
+        "",
+        "## 相关内容",
+        "",
+        "- [术语表](../glossary.md)",
+        "- [CP AUTOSAR](../index.md)",
+        "",
+    ]
+
+    types_page = render_list(
+        "AUTOSAR API 类型清单",
+        "**类型**（源文档 8.2 Type definitions）",
+        entries_t,
+        n_types,
+    )
+    funcs_page = render_list(
+        "AUTOSAR API 函数清单",
+        "**函数**（源文档 8.3 Function definitions）",
+        entries_f,
+        n_funcs,
+    )
+    return (
+        (OUT_INDEX, "\n".join(index_page)),
+        (OUT_TYPES, "\n".join(types_page).rstrip() + "\n"),
+        (OUT_FUNCS, "\n".join(funcs_page).rstrip() + "\n"),
+    ), report
 
 
 def main(argv):
     if not SRC.exists():
         print(f"source corpus not found: {SRC}", file=sys.stderr)
         return 2
-    content, report = build()
+    pages, report = build()
     if "--check" in argv:
-        current = OUT.read_text(encoding="utf-8") if OUT.exists() else ""
-        if current != content:
-            print(f"STALE: {OUT.relative_to(ROOT)} differs from regenerated content — run gen_api_list.py", file=sys.stderr)
-            return 1
-        print("api_reference up to date")
+        for out, content in pages:
+            current = out.read_text(encoding="utf-8") if out.exists() else ""
+            if current != content:
+                print(f"STALE: {out.relative_to(ROOT)} differs from regenerated content — run gen_api_list.py", file=sys.stderr)
+                return 1
+        print("api listing up to date")
         return 0
-    OUT.write_text(content, encoding="utf-8")
-    print(f"wrote {OUT.relative_to(ROOT)}")
+    API_DIR.mkdir(exist_ok=True)
+    for out, content in pages:
+        out.write_text(content, encoding="utf-8")
+        print(f"wrote {out.relative_to(ROOT)}")
     print("\n".join(report))
     return 0
 

@@ -245,7 +245,9 @@ def main() -> int:
         skip = set(cp_landings) | {
             "autosar/index.md",
             "autosar/glossary.md",
-            "autosar/api_reference.md",
+            "autosar/api/index.md",
+            "autosar/api/types.md",
+            "autosar/api/functions.md",
         }
         for page in pages_of(cp_branch):
             if page in skip or not page.startswith("autosar/"):
