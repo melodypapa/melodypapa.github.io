@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **75** 份已有站内文章）。
+共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **76** 份已有站内文章）。
 
 ## A
 
@@ -4093,28 +4093,28 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **FrSM_AllSlots**
-> 函数 · 未翻译 · SWS_FlexRayStateManager · R23-11
+> 函数 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
 
 **FrSM_BswM_StateType**
-> 类型 · 未翻译 · SWS_FlexRayStateManager · R23-11
+> 类型 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
 
 **FrSM_ConfigType**
-> 类型 · 未翻译 · SWS_FlexRayStateManager · R23-11
+> 类型 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
 
 **FrSM_GetCurrentComMode**
-> 函数 · 未翻译 · SWS_FlexRayStateManager · R23-11
+> 函数 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
 
 **FrSM_GetVersionInfo**
-> 函数 · 未翻译 · SWS_FlexRayStateManager · R23-11
+> 函数 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
 
 **FrSM_Init**
-> 函数 · 未翻译 · SWS_FlexRayStateManager · R23-11
+> 函数 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
 
 **FrSM_RequestComMode**
-> 函数 · 未翻译 · SWS_FlexRayStateManager · R23-11
+> 函数 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
 
 **FrSM_SetEcuPassive**
-> 函数 · 未翻译 · SWS_FlexRayStateManager · R23-11
+> 函数 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
 
 **FrTp_CancelReceive**
 > 函数 · 未翻译 · SWS_FlexRayISOTransportLayer · R23-11
