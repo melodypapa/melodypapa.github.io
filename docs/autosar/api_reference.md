@@ -4,7 +4,7 @@ title: "AUTOSAR API 清单（函数与类型）"
 
 本页汇总 AUTOSAR CP **R23-11** 全部 SWS 文档第 8 章「API specification」中定义的**类型**（8.2）与**函数**（8.3），按字母排序，便于查找；每条标注所属文档与发布版本，已翻译的模块链接到站内文章。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：`~/Workspace/autosar_standard/markdown/.../R23-11/`）。
 
-共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **69** 份已有站内文章）。
+共 **643** 个类型、**1659** 个函数，来自 **120** 份文档（其中 **71** 份已有站内文章）。
 
 ## A
 
@@ -3209,19 +3209,19 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
 **EthSM_GetCurrentComMode**
-> 函数 · 未翻译 · SWS_EthernetStateManager · R23-11
+> 函数 · [AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md) · SWS_EthernetStateManager · R23-11
 
 **EthSM_GetVersionInfo**
-> 函数 · 未翻译 · SWS_EthernetStateManager · R23-11
+> 函数 · [AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md) · SWS_EthernetStateManager · R23-11
 
 **EthSM_Init**
-> 函数 · 未翻译 · SWS_EthernetStateManager · R23-11
+> 函数 · [AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md) · SWS_EthernetStateManager · R23-11
 
 **EthSM_NetworkModeStateType**
-> 类型 · 未翻译 · SWS_EthernetStateManager · R23-11
+> 类型 · [AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md) · SWS_EthernetStateManager · R23-11
 
 **EthSM_RequestComMode**
-> 函数 · 未翻译 · SWS_EthernetStateManager · R23-11
+> 函数 · [AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md) · SWS_EthernetStateManager · R23-11
 
 **EthSwt_CheckWakeup**
 > 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
@@ -4588,16 +4588,16 @@ title: "AUTOSAR API 清单（函数与类型）"
 > 函数 · [AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md) · SWS_IOHardwareAbstraction · R23-11
 
 **IpduM_ConfigType**
-> 类型 · 未翻译 · SWS_IPDUMultiplexer · R23-11
+> 类型 · [AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md) · SWS_IPDUMultiplexer · R23-11
 
 **IpduM_GetVersionInfo**
-> 函数 · 未翻译 · SWS_IPDUMultiplexer · R23-11
+> 函数 · [AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md) · SWS_IPDUMultiplexer · R23-11
 
 **IpduM_Init**
-> 函数 · 未翻译 · SWS_IPDUMultiplexer · R23-11
+> 函数 · [AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md) · SWS_IPDUMultiplexer · R23-11
 
 **IpduM_Transmit**
-> 函数 · 未翻译 · SWS_IPDUMultiplexer · R23-11
+> 函数 · [AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md) · SWS_IPDUMultiplexer · R23-11
 
 **isOsStarted**
 > 函数 · [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md) · SWS_OS · R23-11
