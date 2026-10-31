@@ -16,7 +16,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [ ] Step 6 — TODO.md row + commit/PR — commit pushed; PR #139, tracking issue #138
 - [ ] udp_network_management (SWS_UDPNetworkManagement · R23-11 markdown · ✅ alignment)
   - Note: WeChat footer `##` → `<section id="wechat">`+`<h4>`; acronym chapter table → blockquotes and restore the row set (source 26 → article 12)
@@ -25,7 +25,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [ ] Step 6 — TODO.md row + commit/PR — commit pushed; PR #139, tracking issue #138
 - [ ] can_driver (SWS_CANDriver · R23-11 markdown · 🔶 alignment)
   - Note: bespoke chapters (术语 / 优先级反转 / CAN 硬件单元) — keep-or-drop is a user decision; acronym blockquotes ✓
@@ -34,7 +34,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [ ] Step 6 — TODO.md row + commit/PR — commit pushed; PR #139, tracking issue #138
 - [ ] can_transceiver_driver (SWS_CANTransceiverDriver · R23-11 markdown · 🔶 alignment)
   - Note: ch.1 "介绍" → "简介和功能概述"
@@ -45,7 +45,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit e48b58e (branch feature/group-communication-sync); PR #181, tracking issue #180
 - [x] pdu_router (SWS_PDURouter · R23-11 markdown · ⚠️ missing API chapter)
   - Note: one of the "6 articles missing only the API chapter"
@@ -55,7 +55,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit f915d45 (branch feature/group-communication-sync); PR #181, tracking issue #180
 - [ ] ethernet_interface (SWS_EthernetInterface · R23-11 markdown · ⚠️ missing API chapter)
   - Note: one of the "6 articles missing only the API chapter"
@@ -65,7 +65,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit a08b183 (branch feature/group-communication-sync); PR #181, tracking issue #180
 - [ ] lin_interface (SWS_LINInterface · R23-11 markdown · ⚠️ missing API chapter)
   - Note: one of the "6 articles missing only the API chapter"
@@ -75,7 +75,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit aad6b21 (branch feature/group-communication-sync); PR #181, tracking issue #180
 - [ ] com_based_transformer (SWS_COMBasedTransformer · R23-11 markdown · ⚠️ gaps)
   - Note: missing acronym/dependency chapters; the 4.2 subsection structure ("基于COM的转换器规范") must be checked against the source; missing "约束和假设" (tracked in TODO.md)
@@ -85,7 +85,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit 3562899 (branch feature/group-communication-sync); PR #181, tracking issue #180
 - [ ] e2e_transformer (SWS_E2ETransformer · R23-11 markdown · ⚠️ gaps)
   - Note: missing acronym/constraints/API chapters
@@ -95,7 +95,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit 4d5ff96 (branch feature/group-communication-sync); PR #181, tracking issue #180
 - [x] data_distribution (SWS_DataDistributionService · R23-11 markdown · realigned)
   - Note: directory `data_distribution service/` contains a space — renaming to `data_distribution/` requires the nav change in the same commit ✅ (2026-10-29, `git mv` + `mkdocs.yml` nav + `communication/index.md` link in the same commit)
@@ -105,7 +105,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit b2c1ffb (branch feature/group-communication-sync); PR #188, tracking issue #187
 - [x] sec_oc (SWS_SecureOnboardCommunication · R23-11 markdown · realigned)
   - Note: missing related-documentation/API chapters; ch.3/4 are swapped (constraints before dependencies) — restore the source order ✅ (2026-10-29, ch.1–5 rebuilt to source order; source §A Not applicable requirements dropped per STANDARD.md annex rules, reported here and in the PR text; check_api_sync.py gained the 可选接口↔Optional alias because source 8.3.10 "Optional Interfaces" sits inside the compared range)
@@ -113,7 +113,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit 3d584a2 (branch feature/group-communication-sync); PR #188, tracking issue #187
 - [x] soad (SWS_SocketAdaptor · R23-11 markdown · ✅ realigned)
   - Note: missing acronyms; directory `SoAd/` is capitalised and the file is SoAd.md, not index.md — switching to the index.md layout requires the nav change in the same commit
@@ -121,7 +121,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit 1b9bf69 (branch feature/group-communication-sync); PR #188, tracking issue #187
   - Note: ✅ (2026-10-29, 1b9bf69) realigned to R23-11; layout switch SoAd/SoAd.md → soad/index.md with nav + cross-link fixes; §2 缩略语 rebuilt (21 acronyms + 5 terms); §6 completed 6.1–6.14; new §7 API规范 (21 imported types/5 types/29 functions/7 callbacks/1 scheduled/期望接口, check_api_sync leaf-level fix in 90965f0); §8 时序图 10 figures; §9 配置规范 16 containers 12 figures; `## B.` 可追溯项变更历史; source ch.6 Requirements Tracing + Annex A "Not applicable requirements" dropped per STANDARD.md annex rules; stale 2022-*.png removed; glossary gained 5 SoAd terms
 - [ ] mirror (SWS_BusMirroring · R23-11 markdown · ⚠️ gaps + layout change)
@@ -131,7 +131,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit c3e84ef (branch feature/group-communication-sync-2); PR #192, tracking issue #191
 - [ ] ethernet_switch_driver (SWS_EthernetSwitchDriver · R23-11 markdown · ⛔ stub — full translation)
   - Note: 2026-10-30 run — stub replaced with the full Type A translation (commit 7f5fc5e, branch feature/group-communication-sync-2): §2 缩略语、缩写和定义 (8 acronyms + 4 definitions, source's Acronyms/Definitions split mirrored), §4.1 约束 with Table 4.1 (IEEE bridge execution order coverage, 29 rows) as GFM, §6 functional spec complete from source ch.7 (learning phase, frame forwarding with all processing stages incl. stream identification/PSFP/firewall interaction/transmission selection, prose SWS-ID cross-refs rewritten as 第N节 — 0 outside-B IDs), §6.6 error classification incl. 2 extended-production tables (表7.5/7.6); §7 API规范 = source ch.8: 39 imported types, 10 types, 74 functions, 1 callback, 2 scheduled (MainFunction + BackgroundTask), 期望接口 0+21+3 configurable callouts, 服务接口 one-sentence statement; §8 时序图 (source ch.9, 5 figures); §9 配置规范 = source ch.10 (54 containers with [ECUC_EthSwt_*] SWS 条目 cells, 161 parameters, 21 container overview figures Figure10-1..10-21, generated via record extraction + hand translation map; {DRAFT}/{OBSOLETE} tags dropped as PDF chrome; obsolete EthSwtPortFifo/PortShaper containers kept with source descriptions); ## B. 可追溯项变更历史 (B.1 R22-11 + B.2 R23-11, item IDs verbatim in fences; 224 IDs). Phase A: strict build exit 0, 0 content WARNINGs, no ethernet_switch INFO; heading audit ✓ (§1–§9 + B., no forbidden variants); hygiene ✓ (0 `\<`, 0 {DRAFT}, 0 prose requirement IDs); check_indexes.py exit 0; gen_api_list regenerated + --check up to date. link_candidates --apply: 210 lines (28 chapter-refs), idempotent on re-run, stopped before 配置规范; comma-form/plain doc citations stay prose (known open case). check_api_sync = documented N/A (74 functions under source 8.3.x without the 8.2.x/8.3.x type/function split the script expects; manual verification: 10 types ↔ 7.2.1-.10, 74 functions ↔ 7.3.1-.74 in source order, 1 callback ↔ 7.4.1, 2 scheduled ↔ 7.5.1-.2). Glossary extension pending (batch-level item). Steps 5/6 per user instruction: commit first, combined confirmation after batch
@@ -139,7 +139,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit 7f5fc5e (branch feature/group-communication-sync-2); PR #192, tracking issue #191
 - [ ] service_discovery (SWS_ServiceDiscovery · R23-11 markdown · ⛔ stub — full translation)
   - Note: short name Sd
@@ -148,7 +148,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit 23b20e5 (branch feature/group-communication-sync-2); PR #192, tracking issue #191
 
 - [ ] com (SWS_COM · R23-11 markdown · ❌ new article, short name Com)
@@ -158,7 +158,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit 17cdb70 (branch feature/group-communication-sync-2); PR #192, tracking issue #191
 - [ ] cansm (SWS_CANStateManager · R23-11 markdown · ❌ new article, short name CanSM)
   - Note: backbone
@@ -167,7 +167,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit a803400 (branch feature/group-communication-sync-2); PR #192, tracking issue #191
 - [ ] cantp (SWS_CANTransportLayer · R23-11 markdown · ❌ new article, short name CanTp)
   - Note: backbone
@@ -176,7 +176,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit 5e2624d (branch feature/group-communication-sync-3)
 - [ ] tcpip (SWS_TcpIp · R23-11 markdown · ❌ new article, short name TcpIp)
   - Note: backbone
@@ -185,7 +185,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit bcbd61e (branch feature/group-communication-sync-3)
 - [ ] nm (SWS_NetworkManagementInterface · R23-11 markdown · ❌ new article, short name Nm)
   - Note: backbone
@@ -194,7 +194,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit 5036abf (branch feature/group-communication-sync-3)
 - [ ] ethsm (SWS_EthernetStateManager · R23-11 markdown · ❌ new article, short name EthSM)
   - Note: backbone
@@ -203,7 +203,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit 37c98ec (branch feature/group-communication-sync-3)
 - [ ] ipdum (SWS_IPDUMultiplexer · R23-11 markdown · ❌ new article, short name IpduM)
   - Note: backbone
@@ -212,7 +212,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit 5cef2ca (branch feature/group-communication-sync-3)
 - [ ] someipxf (SWS_SOMEIPTransformer · R23-11 markdown · ❌ new article, short name SomeIpXf)
   - Note: backbone
@@ -221,7 +221,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit e411562 (branch feature/group-communication-sync-3)
 - [ ] someiptp (SWS_SOMEIPTransportProtocol · R23-11 markdown · ❌ new article, short name SomeIpTp)
   - Note: backbone
@@ -230,7 +230,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate — confirmed 2026-10-31 (combined batch gate; PR opened this date)
   - [x] Step 6 — TODO.md row + commit/PR — commit af4d193 (branch feature/group-communication-sync-3)
 
 ## Not queued (deliberately skipped)
