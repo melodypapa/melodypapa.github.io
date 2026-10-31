@@ -132,6 +132,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
+**AddressAndLengthFormatIdentifier**
+> 定义请求消息中 memoryAddress 与 memorySize 参数所占用的字节数（**Defines the number of bytes used for the memoryAddress and memorySize parameter in the request messages**）
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
 **AEAD**
 > 具有关联数据的经过身份验证的加密（**Authenticated Encryption with Associated Data**）。
 >
@@ -1868,7 +1874,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Freeze frame**
 > 冻结帧被定义为数据的记录（**DID**/**PID**）。冻结帧与 ISO 14229-1 中的 SnapShotRecords 相同。
 >
-> 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+> 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **Freshness Value**

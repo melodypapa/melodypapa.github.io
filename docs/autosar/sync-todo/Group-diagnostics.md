@@ -64,11 +64,12 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Appendix A has content (change-history sections A.1.1–A.1.6); if approved, translate as numbered §10 per STANDARD §1. Appendix B is not-applicable requirements; scope remains open.
   - Note: Steps 2 and 4 remain open pending the Appendix A scope decision; Step 3 remains open for manual ISO URL verification. Steps 5 and 6 remain gated on user confirmation.
   - [x] Step 1 — Source resolution + gap analysis (findings and split plan recorded above; user confirmed the two-part split on 2026-10-29)
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: 2026-11-01 run — the open items closed with their STANDARD.md defaults under the user's batched-confirmation instruction (2026-11-01, issue #224): (1) Appendix A (content-bearing change history A.1.1–A.1.6) translated as numbered `## 10. AUTOSAR 可追溯项变更历史` per STANDARD §1 numbered-continuation + the Dem appendix-B GFM-table precedent (编号/标题 columns, ids verbatim as data; hyphenation artifacts in the 编号 column un-escaped; row counts 57 added / 254 changed / 16 deleted / 6+1+2 constraints) — source Appendix B (Not applicable requirements) dropped as the droppable set; (2) heading wordings aligned to the site majority: `## 5. 与其他模块的依赖关系` → 对其他模块的依赖 and `## 7. API 规范` → API规范 (81/78 articles vs this one outlier; in-article anchor #7-api-规范 updated); (3) ISO URL re-probed with browser UA — https://www.iso.org 403 (curl AND server-side fetch), the documented anti-bot case (CoreTest precedent) — link RETAINED, browser verification still owed; (4) glossary: +AddressAndLengthFormatIdentifier, 来源 appended to Freeze frame (Dem same-concept entry); Channel (crypto-domain definition) and DTC (拖滞力矩调节) same-acronym conflicts remain USER DECISIONS; (5) the OBD UDS DTC separation wording resolved source-faithful: the source itself reads "than for none J1979-2 UDS communication" — the article's 非 J1979-2 rendering matches the source, kept unchanged.
+  - [x] Step 2 — In-place translation/completion (complete: §1–§9 delivered by the 2026-10-29/30 runs; §10 appendix this run)
+  - [x] Step 3 — Phase A mechanical checks (strict build exit 0 / 0 WARNING / no diagnostic_communication anchor notices after the §5/§7 renames; check_heading_lang OK; hygiene: 0 h1, 0 \<; 0 SWS ids outside the §10 tables; check_indexes 0; ISO URL probe recorded as above)
+  - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 + Appendix A ↔ §1–§10 1:1; ch.6 tracing + source Appendix B dropped per the droppable set; appendix headings verbatim-English 标题 cells per the Dem precedent; J1979-2 wording source-verified)
+  - [ ] Step 5 — User confirmation gate (batched 2026-10-27 pattern — pending with the Group-diagnostics batch)
+  - [ ] Step 6 — TODO.md row + commit/PR (after the batched gate; branch feature/group-diagnostics-sync-2, issue #224)
 
 ## Not queued (deliberately skipped)
 - (none)
