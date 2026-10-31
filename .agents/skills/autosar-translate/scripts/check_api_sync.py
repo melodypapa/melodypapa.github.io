@@ -27,7 +27,9 @@ from pathlib import Path
 # with fence junk ("## ⌋ () 8.2.5  Pwm\_ChannelClassType"), so match anywhere
 # in the line; only lines starting with '#' are scanned (keeps ToC tables out).
 # The lookbehind avoids matching the "8" of "18.3.2" style chapter numbers.
-SRC_RE = re.compile(r"(?:^|[^0-9.])8\.([23])\.(\d+)\s+\**\s*([A-Za-z][A-Za-z0-9_\\&;<>]*)")
+# The name class includes "." so templated names survive intact
+# ("BndM_Block&lt;BlockId.Shortname&gt;Type" — R23-11 SWS_BulkNvDataManager 8.2.3).
+SRC_RE = re.compile(r"(?:^|[^0-9.])8\.([23])\.(\d+)\s+\**\s*([A-Za-z][A-Za-z0-9_.\\&;<>]*)")
 # Grouped layout: leaf functions one level deeper ("## 8.3.1.1  GetVersionInfo"
 # under "## 8.3.1  General"). When such 4-level headings exist they are the
 # real function entries; the 3-level headings are group captions.
@@ -36,7 +38,7 @@ SRC_RE = re.compile(r"(?:^|[^0-9.])8\.([23])\.(\d+)\s+\**\s*([A-Za-z][A-Za-z0-9_
 # token as part of the name; norm() removes the separator and extraction slash.
 SRC_LEAF_RE = re.compile(
     r"(?:^|[^0-9.])8\.([23])\.(\d+)\.(\d+)\s+\**\s*"
-    r"([A-Za-z][A-Za-z0-9_\\&;<>]*(?:\s+[A-Za-z][A-Za-z0-9_\\&;<>]*)?)"
+    r"([A-Za-z][A-Za-z0-9_.\\&;<>]*(?:\s+[A-Za-z][A-Za-z0-9_.\\&;<>]*)?)"
 )
 ART_RE = re.compile(r"^####\s+7\.([23])\.(\d+)\.\s+(.+?)\s*$")
 ART_LEAF_RE = re.compile(r"^#####\s+7\.([23])\.(\d+)\.(\d+)\.\s+(.+?)\s*$")
