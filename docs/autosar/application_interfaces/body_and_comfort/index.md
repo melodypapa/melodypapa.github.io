@@ -503,7 +503,7 @@ CentralLocking 软件组件组控制汽车的中央门锁功能。CentralLocking
 
 HMI 包含检测驾驶员与中央门锁相关需求的全部其他传感器组件。请注意，「HMI」仅用作非规范性的描述。
 
-##### 4.5.2.3 RemoteKey / Keyless Access
+##### 4.5.2.3 遥控钥匙 / 无钥匙进入（RemoteKey / Keyless Access）
 
 进入车辆的驾驶员请求可以由 RemoteKey 或无钥匙进入系统提供（包括用于个性化的 profile 信息）。
 
@@ -515,7 +515,7 @@ HMI 包含检测驾驶员与中央门锁相关需求的全部其他传感器组�
 
 ![Figure12.png](Figure12.png)
 
-##### 4.5.2.5 KeyPad Manager
+##### 4.5.2.5 键盘管理器（KeyPad Manager）
 
 从键盘生成激活车门的 CL 功能的请求以及单独激活后盖的请求。
 
@@ -523,7 +523,7 @@ KeyPad 是一个单一的 SWC（可以是非原子的），它为前门、后门
 
 ![Figure13.png](Figure13.png)
 
-##### 4.5.2.6 GloveBox / Tankflap
+##### 4.5.2.6 手套箱 / 油箱盖（GloveBox / Tankflap）
 
 其他块如 Glovebox 与 TankFlap 提供状态信息并（部分）接收锁定命令。发动机罩没有用例。
 

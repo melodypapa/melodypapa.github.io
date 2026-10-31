@@ -7480,7 +7480,7 @@ glyph[triangle]
 | 取值范围 | MEMMAP_SECTION_TYPE_ CONST | 用于全局或静态常量。 |
 
 
-### C.3 Ecuc
+### C.3 ECUC 配置（Ecuc）
 
 ### C.3.1 EcucPartition
 
@@ -8054,7 +8054,7 @@ glyph[triangle]
 
 ### D.1 RTE
 
-### D.1.1 RTE Lifecycle API Reference
+### D.1.1 RTE 生命周期 API 参考（RTE Lifecycle API Reference）
 
 ### D.1.1.1 Rte_Init
 
@@ -8088,7 +8088,7 @@ glyph[triangle]
 | 可通过……获得 | Rte.h |  |
 
 
-### D.1.2 RTE RIPS API Reference
+### D.1.2 RTE RIPS API 参考（RTE RIPS API Reference）
 
 ### D.1.2.1 Rte_Rips_DataIsUpdated
 
@@ -8351,11 +8351,11 @@ glyph[triangle]
 | 可通过……获得 | Rte_Rips_<PlugIn>_<SwcBswI>.h |  |
 
 
-### D.1.3 RTE API Reference
+### D.1.3 RTE API 参考（RTE API Reference）
 
 ### D.2 OS
 
-### D.2.1 OS API Reference
+### D.2.1 OS API 参考（OS API Reference）
 
 ### D.2.1.1 SwCluC_BManif_GetHandle
 

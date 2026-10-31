@@ -313,7 +313,7 @@ Std_ReturnType CanXLTrcv_CheckWakeup ( uint8 TrcvIdx )
 
 ## 8. 时序图
 
-### 8.1. CanXL BusOff handling for Ethernet
+### 8.1. CanXL 总线关闭（BusOff）的以太网处理
 
 ![Figure9_1.png](Figure9_1.png)
 

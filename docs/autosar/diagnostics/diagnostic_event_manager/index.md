@@ -6972,7 +6972,7 @@ Std_ReturnType Dem_SetDTR ( uint16 DTRId, sint32 TestResult, sint32 LowerLimit, 
 | 说明 | - |
 | 变体 | Name = {ecuc(Dem/DemGeneral/DemEnableCondition.SHORT-NAME)} |
 
-##### 7.6.4.17. Event
+##### 7.6.4.17. 事件（Event）
 
 端口 Event_{Name} 的定义（**Dem** 提供）：
 
@@ -7320,7 +7320,7 @@ Std_ReturnType Dem_SetDTR ( uint16 DTRId, sint32 TestResult, sint32 LowerLimit, 
 | DemConfigSet | 1 | 此容器包含支持多个配置集的 **Dem** 模块的配置参数和子容器。 |
 | DemGeneral | 1 | 此容器包含 **BSW Dem** 的配置（参数）。 |
 
-#### 9.1.2. General
+#### 9.1.2. 概述（General）
 
 ##### 9.1.2.1. DemGeneral
 
@@ -9513,7 +9513,7 @@ Std_ReturnType Dem_SetDTR ( uint16 DTRId, sint32 TestResult, sint32 LowerLimit, 
 | 值配置类 | Pre-compile time：x（All Variants）；Link time：-；Post-build time：- |
 | 作用域/依赖 | scope: ECU |
 
-#### 9.1.5. Conditions
+#### 9.1.5. 条件（Conditions）
 
 ##### 9.1.5.1. DemEnableCondition
 

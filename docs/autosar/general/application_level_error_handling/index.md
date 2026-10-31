@@ -965,7 +965,7 @@ OS-Application 分为 i) 受信任的 OS-Application 和 ii) 非受信任的 OS-
 
 非受信任的 OS-Application 运行在非特权模式，由 OS 自动监控内存访问和最后期限违例。SW-C 被分配到非受信任的 OS-Application，或 BSW 的一个受信任 OS-Application。每个 OS-Application 有零个、一个或多个 SW-C。
 
-##### 7.3.1.2 Protection Hook
+##### 7.3.1.2. 保护钩子（Protection Hook）
 
 系统有一个单一的全局 Protection Hook。当保护违例发生时，OS 调用 Protection Hook，其角色是决定作为对错误的反应应执行哪个动作。调用 Protection Hook 时带有一个指示所检测违例的参数值。Protection Hook 可以查询是哪个 OS-Application² 引起了违例，然后决定 OS 在钩子返回后应执行的必要动作（见上文）。如果没有配置保护钩子，OS 将调用 ShutdownOS()。保护钩子的返回值定义 OS 执行的后续动作。
 

@@ -91,7 +91,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [1] ，此文档也适用于*
 
 ## 5. 对其他模块的依赖
 
-### 5.1. MCU Driver
+### 5.1. MCU 驱动模块（MCU Driver）
 
 微控制器单元驱动（**MCU Driver**）主要负责初始化和控制芯片的内部时钟源和时钟预分频器。
 
@@ -100,7 +100,7 @@ AUTOSAR 提供了基础软件模块的通用规范 [1] ，此文档也适用于*
 * 转换时间（**Conversion time**）
 * 采样时间（**Sampling time**）
 
-### 5.2. PORT driver
+### 5.2. PORT 驱动模块（PORT driver）
 
 **PORT**模块主要负责配置**ADC**模块使用的端口引脚。包括：模拟输入引脚（**analogue input pin**）和外部触发引脚（**external trigger pin**）。
 

@@ -102,7 +102,7 @@ AUTOSAR 提供了一份关于基础软件模块的通用规范 [\[1\]](#ref-1)�
 
 ![Figure5_1](Figure5_1.png)
 
-### 5.1. Socket Adaptor（SoAd）
+### 5.1. 套接字适配器（SoAd）
 
 Socket Adaptor [\[2\]](#ref-2) 是 **DoIP** 模块的下层模块。它提供：
 
@@ -114,7 +114,7 @@ Socket Adaptor [\[2\]](#ref-2) 是 **DoIP** 模块的下层模块。它提供：
 
 Socket Adaptor 是 **TCP/IP** 协议栈 [\[3\]](#ref-3) 的接口模块，后者支持 **IP**、**TCP**、**UDP**、IPv4、IPv6 以及 AutoIP 和 **DHCP** 等地址分配机制。
 
-### 5.2. Pdu Router（PduR）
+### 5.2. PDU 路由器（PduR）
 
 **PDU** 路由器 [\[4\]](#ref-4) 是 **DoIP** 模块用于连接通信栈其余部分的模块。它提供：
 
@@ -123,11 +123,11 @@ Socket Adaptor 是 **TCP/IP** 协议栈 [\[3\]](#ref-3) 的接口模块，后者
 
 **PduR** 是将诊断消息从 **DoIP** 模块路由到其相应目标并返回的模块。
 
-### 5.3. Diagnostic Communication Manager（Dcm）
+### 5.3. 诊断通信管理器（Dcm）
 
 诊断通信管理器 [\[5\]](#ref-5) 是为 **DoIP** 模块提供 **VIN** 的模块。此外，**Dcm** 将执行经由 **PduR** 路由的 ECU 本地诊断。
 
-### 5.4. Default Error Tracer（Det）
+### 5.4. 默认错误跟踪器（Det）
 
 如果配置参数 DoIPDevelopmentErrorDetect 设置为 true 且 **DoIP** API 以不正确的参数被调用，则默认错误跟踪器 [\[6\]](#ref-6) 会带有一个错误 ID 被调用。
 

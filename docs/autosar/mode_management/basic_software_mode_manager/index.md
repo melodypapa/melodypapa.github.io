@@ -93,7 +93,7 @@ release: R23-11
 
 **BswM**通过**RTE**接收来自**SW-C**的模式请求。模式切换通知也通过**RTE**传播到**SW-C**。
 
-### 5.2. EcuM Flex
+### 5.2. EcuM 灵活配置（EcuM Flex）
 
 **EcuM Flex**可以向**BswM**指示其唤醒源的状态。当使用**ECU**模式处理时，**BswM**可以设置**EcuM Flex**的状态，并根据**RUN**请求协议接收某些模式的状态。
 
@@ -155,7 +155,7 @@ LIN传输协议（**LIN Transport Protocol**）作为**LinIf**一部分的，会
 
 **BswM**通过**J1939Rm_SetState**可以改变**J1939Rm**的状态。
 
-### 5.15. NM Interface
+### 5.15. NM 接口（NM Interface）
 
 **BswM**将使用**Nm_EnableCommunication**和**Nm_DisableCommunication**来控制基于当前模式的**NM**通信。
 

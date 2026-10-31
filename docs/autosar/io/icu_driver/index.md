@@ -600,7 +600,7 @@ sequenceDiagram
     D-->>U: return()
 ```
 
-### 8.3. Check Wakeup Events
+### 8.3. 检查唤醒事件（Check Wakeup Events）
 
 **ICU**的唤醒事件检查时序图见**ECU**状态管理器规范 [10]（AUTOSAR_SWS_ECUStateManager.pdf），本文档不重复给出。
 
