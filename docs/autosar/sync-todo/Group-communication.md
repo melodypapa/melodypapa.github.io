@@ -207,12 +207,13 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
   - [x] Step 6 — TODO.md row + commit/PR — commit 37c98ec (branch feature/group-communication-sync-3)
 - [ ] ipdum (SWS_IPDUMultiplexer · R23-11 markdown · ❌ new article, short name IpduM)
   - Note: backbone
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-10-31 run — new article communication/ipdum/index.md created (commit 5cef2ca, branch feature/group-communication-sync-3): full Type A translation, ~2,200 ln; §2 14 term lines = source rows exactly; §6 functional spec complete from source ch.7 (I-PDU multiplexing 6.2 incl. 7.2.1 layout/definitions + Figure7-1/7-2, initialization, transmission trigger modes + JIT update, reception, metadata; multiple-PDU-to-container 6.3 incl. dynamic/static layouts Figure7-3, trigger conditions, assembly, queueing, last-is-best, accept-configured/accept-all, error handling); §6.5 error tables (4 dev + 3 runtime); §7 API check_api_sync OK (3 functions/3 说明 blocks; 5 imported types, 1 type, 3 callbacks, 2 scheduled MainFunctionRx/Tx, 期望接口 1+5+可配置不适用); §8 时序图 4 figures; §9 配置规范 23 numbered containers (pathway hierarchy IpduMConfig→Tx/Rx→Container/Contained, MainFunctionRx/Tx, PublishedInformation) + §9.3 发布信息 + §9.4 配置规则 (source 10.4.1-10.4.4, incl. CONSTR-derived rules without IDs), 89 records via record extractor + hand translation; source annex A "History of Constraints and Specification Items" rendered as ## A. 约束和规范项的历史 (source lettering kept — OS 直译 precedent; item IDs in fences; USER VERIFY at gate: letter choice A vs standard's B-form); annex B Not applicable requirements droppable (reported). check_api_sync = OK. Figures: 18 extracted (14 vector-rendered: 9-1..9-4, 10-1..10-10). Phase A: strict build exit 0, 0 WARNINGs, no ipdum INFO; heading audit ✓; forbidden-variant sweep 0; hygiene ✓ (0 `\<`, 0 {DRAFT}); acronym slice 0 tables, 14 term lines; check_indexes exit 0; gen_api_list regenerated + --check up to date. link_candidates --apply: 14 chapter-refs + 20 citations, idempotent; UNRESOLVED chapter ref = cross-document (BSWGeneral 10.1) correctly never linked; census: identifier mentions 304 lines (153 §9 definitional); cross-article mentions Det/CanIf NO-ARTICLE report-only. Glossary extension skipped (batch-level pending item). Steps 5/6 per user instruction: commit first, combined confirmation after batch
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR — commit 5cef2ca (branch feature/group-communication-sync-3)
 - [ ] someipxf (SWS_SOMEIPTransformer · R23-11 markdown · ❌ new article, short name SomeIpXf)
   - Note: backbone
   - [ ] Step 1 — Source resolution + gap analysis
