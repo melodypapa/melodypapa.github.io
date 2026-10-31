@@ -1342,10 +1342,6 @@ void FrArTp_MainFunction (void)
 | 描述 | FrArTp（FlexRay 传输协议）模块的配置。 |
 | 配置参数 | 见下方参数表 |
 
-![Figure10-1](Figure10-1.png)
-
-图10.1：FrArTp 主配置（**Figure 22: FrArTp main configuration**）
-
 | 包含的容器 | 容器名称 | 多重性 |
 | --- | --- | --- |
 | 包含的容器 | FrArTpGeneral | 1 |

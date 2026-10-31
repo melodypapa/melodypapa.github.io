@@ -201,7 +201,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **API**
 > 应用编程接口（**Application Programming Interface**）
 >
-> 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Standard Types（标准类型）](general/standard_types/index.md)（SWS_StandardTypes）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+> 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Standard Types（标准类型）](general/standard_types/index.md)（SWS_StandardTypes）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
 {: .glossary-source}
 
 **APID**
@@ -231,7 +231,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ARP**
 > Address Resolution Protocol —— 地址解析协议。
 >
-> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
 **ARTI**
@@ -294,10 +294,40 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](application_interfaces/body_and_comfort/index.md)（AUTOSAR_CP_EXP_AIBodyAndComfort）
 {: .glossary-source}
 
+**Authentic I-PDU**（可信 I-PDU）
+> 可信 I-PDU 是一个任意的 AUTOSAR I-PDU，其内容在通过网络传输期间借助受保护的 I-PDU（**Secured I-PDU**）得到保护。受保护的内容包括完整的 I-PDU 或 I-PDU 的一部分。
+>
+> 来源：[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
+{: .glossary-source}
+
+**Authentication Information**（认证信息）
+> 认证信息由新鲜度值（**Freshness Value**，或其一部分）和验证器（**Authenticator**，或其一部分）组成。认证信息是 **SecOC** 为实现受保护的 I-PDU 而添加的附加信息。
+>
+> 来源：[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
+{: .glossary-source}
+
+**Authentication**（认证）
+> 认证是与识别相关的一项服务。该功能既适用于实体本身，也适用于信息。进入通信的两个参与方应相互识别。通过信道传递的信息应就其来源、来源日期、数据内容、发送时间等进行认证。因此，密码学的这一方面通常细分为两大类：实体认证（**entity authentication**）和数据来源认证（**data origin authentication**）。数据来源认证隐含地提供了数据完整性（因为如果消息被修改，则来源已改变）。
+>
+> 来源：[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
+{: .glossary-source}
+
+**Authenticator**（验证器）
+> 验证器是用于提供消息认证的数据。通常，术语消息验证码（**Message Authentication Code**，**MAC**）用于对称方法，而术语签名或数字签名（**Signature** 或 **Digital Signature**）指的是具有不同属性和约束的非对称方法。
+>
+> 来源：[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
+{: .glossary-source}
+
 **AUTOSAR**
 > 汽车开放系统架构（**AUTomotive Open System ARchitecture**）
 >
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）
+{: .glossary-source}
+
+**AUTOSAR COM**
+> AUTOSAR COM模块源自[3]。详情见第6.2.1节。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
 {: .glossary-source}
 
 **AUTOSAR Connector**
@@ -374,6 +404,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis）
 {: .glossary-source}
 
+**BS**
+> 块大小（**Block Size**）
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
 **BSAS**
 > 基本转向角叠加（**Basic Steering Angle Superposition**）
 >
@@ -389,7 +425,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **BSW**
 > 基础软件（**Basic Software**）
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping）、[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping）、[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
 {: .glossary-source}
 
 **BSW driver**
@@ -401,7 +437,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **BswM**
 > 基础软件模式管理器（**Basic Software Mode Manager**）
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
 {: .glossary-source}
 
 **BSWMD**
@@ -422,10 +458,34 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Application Interfaces User Guide（应用接口用户指南）](application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide）
 {: .glossary-source}
 
+**Bus**
+> NM节点/ECU所连接到的物理通信介质。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**Bus idle timeout**
+> 总线没有活动所持续流逝的时长。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
+{: .glossary-source}
+
 **Bus Off**
 > CAN 总线的错误状态：CAN 控制器因错误计数达到上限而与总线脱离。CAN 状态管理器（CanSM）通过 Bus Off 恢复状态机进行恢复。
 >
 > 来源：[Error Description（错误描述）](general/error_description/index.md)（AUTOSAR_CP_EXP_ErrorDescription）
+{: .glossary-source}
+
+**Bus-Off state**
+> 指没有电缆连接到以太网硬件的情况。
+>
+> 来源：[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）
+{: .glossary-source}
+
+**Bus-Sleep Mode**
+> 所有互连的通信控制器均处于睡眠模式的网络模式。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
 {: .glossary-source}
 
 ## C
@@ -463,13 +523,139 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CAN**
 > Controller Area Network —— 控制器局域网。
 >
-> 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+> 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）
+{: .glossary-source}
+
+**Can**
+> CAN驱动程序模块
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**CAN CF**
+> CAN连续帧N-PDU
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**CAN Channel**
+> 从**CAN**控制器通过**CAN**收发器连接到**CAN**网络的物理通道。
+>
+> 来源：[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
+{: .glossary-source}
+
+**CAN controller**
+> CAN控制器仅服务于一个物理通道。
+>
+> 来源：[AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）
+{: .glossary-source}
+
+**CAN FC**
+> CAN流控N-PDU
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**CAN FD**
+> CAN灵活数据速率
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**CAN FF**
+> CAN首帧N-PDU
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**CAN Hardware Unit**
+> CAN硬件单元可以由一个或多个相同类型的CAN控制器和一个或多个CAN RAM区域组成。CAN硬件单元可以是片上设备，也可以是外部设备。CAN硬件单元由一个CAN驱动程序表示。
+>
+> 来源：[AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）
+{: .glossary-source}
+
+**CAN L-PDU**
+> 数据链路层协议数据单元。由标识符（**Identifier**）、数据长度（**Data Length**）和数据（**Data (SDU)**）组成。（见[2]）
+>
+> 来源：[AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）
+{: .glossary-source}
+
+**CAN L-SDU**
+> 数据链路层服务数据单元。在L-PDU内部传输的数据。（见[2]）
+>
+> 来源：[AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**CAN LSduId**
+> 这是SDU在CAN接口内的唯一标识符。它用于引用L-SDU的路由属性。因此，为了通过CAN接口的API与之交互，上层使用CAN LSduId来引用CAN L-SDU信息结构。
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**CAN N-PDU**
+> 这是CAN传输层的PDU。它包含一个唯一标识符、数据长度和数据（协议控制信息加上整个N-SDU或其一部分）。
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**CAN N-SDU**
+> 这是CAN传输层的SDU。在AUTOSAR架构中，它是来自PDU路由器的一组数据。
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**CAN N-SDU Info Structure**
+> 这是CAN传输层内部的常量结构，包含处理相关CAN N-SDU的发送、接收、分段和重组所需的特定CAN传输层信息。
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**CAN NSduId**
+> SDU在CAN传输层内的唯一标识符。它用于引用N-SDU的路由属性。因此，为了通过CAN传输层的API与之交互，上层使用CAN NSduId来引用CAN N-SDU信息结构。
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**CAN SF**
+> CAN单帧N-PDU
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**CAN_DL**
+> CAN帧数据长度
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
 {: .glossary-source}
 
 **CanIf**
 > CAN Interface —— CAN 接口。
 >
-> 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）
+> 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）、[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**CanNm**
+> CAN网络管理（**CAN Network Management**）的缩写
+>
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**CanSM**
+> CAN状态管理器（**CAN State Manager**）。
+>
+> 来源：[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）
+{: .glossary-source}
+
+**CanTp**
+> CAN传输层
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**CanTrcv**
+> CAN收发器模块
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
 {: .glossary-source}
 
 **CanTSyn**
@@ -487,13 +673,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CBR**
 > 信道忙闲比（**Channel Busy Ratio**）。
 >
-> 来源：[AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)（SWS_WirelessEthernetTransceiverDriver）
+> 来源：[AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)（SWS_WirelessEthernetTransceiverDriver）、[AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）
+{: .glossary-source}
+
+**CBV**
+> 控制位向量（**Control Bit Vector**）
+>
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
 {: .glossary-source}
 
 **CC**
 > 通信控制器（**Communication Controller**）。
 >
-> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver）
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver）、[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
 {: .glossary-source}
 
 **CDD**
@@ -508,10 +700,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
+**CF**
+> 连续帧，传输协议术语。
+>
+> 来源：[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）、[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
 **Channel**
 > 通道：从加密服务管理器队列经由加密接口到特定加密驱动程序对象的路径。
 >
 > 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）
+{: .glossary-source}
+
+**channel**
+> NM节点/ECU所连接到的逻辑总线。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
 {: .glossary-source}
 
 **Checkpoint**
@@ -529,7 +733,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CIT**
 > 信道空闲时间（**Channel Idle Time**）。
 >
-> 来源：[AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)（SWS_WirelessEthernetTransceiverDriver）
+> 来源：[AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)（SWS_WirelessEthernetTransceiverDriver）、[AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）
 {: .glossary-source}
 
 **Class**
@@ -544,10 +748,28 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**Client**
+> 承载客户端服务（**ClientServices**）的ECU。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
+{: .glossary-source}
+
+**Client Service**
+> 消费一个服务。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
+{: .glossary-source}
+
 **Client-Server communication**
 > 客户端-服务器通信（**Client-Server communication**）涉及两个实体。客户端是要求服务的一方，服务器是提供服务的一方。客户端发起通信，请求服务器执行服务，必要时传输参数集合。服务器以**RTE**的形式，等待来自客户端的传入通信请求，执行请求的服务并发送对客户端请求的响应。因此服务启动的方向是用来对**AUTOSAR**软件组件是客户端还是服务器分类的主要标识。
 >
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）
+{: .glossary-source}
+
+**Client-Service-Instance-Entry**
+> 另一个ECU所提供的服务实例的配置和所需数据，在使用该服务（客户端）的ECU上被称为Client-Service-Instance-Entry。
+>
+> 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
 {: .glossary-source}
 
 **cluster（集群）**
@@ -565,7 +787,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Com**
 > 通信（**Communication**）
 >
-> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）
+> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**COM I-PDU**
+> 由COM信号（**COM Signals**）在COM模块中组装而成的I-PDU。
+>
+> 来源：[AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md)（AUTOSAR_CP_SWS_IPDUMultiplexer）
 {: .glossary-source}
 
 **Combined DTC**
@@ -574,10 +802,70 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**ComM**
+> Communication Manager
+>
+> 来源：[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
+{: .glossary-source}
+
 **Concurrent TesterPresent**
 > 设置 suppressPosRspMsgIndicationBit（3E 80）并通过功能寻址接收的 **UDS** 服务 **TesterPresent**；也称为保活（keep-alive）逻辑。
 >
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**Confirmation**
+> 确认（**Confirmation**）是PDU路由器对AUTOSAR COM模块请求已成功完成的报告。它是对COM请求的响应，例如PDU已成功发送。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**Connection**
+> 一个传输协议会话，或者是N-SDU上的发送会话，或者是接收会话。
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**Connection channel**
+> CAN传输层管理多个连接所使用的资源以节省RAM。当一个连接变为活动状态时，该连接使用的通道将对其他连接不可用。
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**Consumed Eventgroup multicast connection**
+> 描述当**SdClientService**经由Consumed Eventgroup多播端点接收事件时，已建立的套接字连接的使用情况的术语。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
+{: .glossary-source}
+
+**Consumed Eventgroup multicast endpoint**
+> 描述按**Consumed Eventgroup**为**SdClientService**预配置的多播地址和端口元组的术语。以该多播地址和端口订阅的SdClientService向SdServer指示应将相应的事件发送到哪个端点。Consumed Eventgroup多播端点经由**SubscribeEventgroup**或**StopSubscribeEventgroup**条目所引用的Multicast option通告。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
+{: .glossary-source}
+
+**Consumed Eventgroup unicast connection**
+> 描述当**SdClientService**经由Consumed Eventgroup单播端点接收事件时，已建立的套接字连接的使用情况的术语。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
+{: .glossary-source}
+
+**Consumed Eventgroup unicast endpoint**
+> 描述按**Consumed Eventgroup**为**SdClientService**预配置的单播地址和端口元组的术语。以该单播地址和端口订阅的SdClientService向SdServer指示应将相应的事件发送到哪个端点。Consumed Eventgroup单播端点经由**SubscribeEventgroup**或**StopSubscribeEventgroup**条目所引用的Endpoint option通告。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
+{: .glossary-source}
+
+**contained I-PDU**
+> 被组装进容器PDU（**Container PDU**）或从中提取出来的I-PDU。
+>
+> 来源：[AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md)（AUTOSAR_CP_SWS_IPDUMultiplexer）
+{: .glossary-source}
+
+**Container PDU**
+> 包含I-PDU和报头的PDU。
+>
+> 来源：[AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md)（AUTOSAR_CP_SWS_IPDUMultiplexer）
 {: .glossary-source}
 
 **Context ID**
@@ -608,6 +896,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 严重离位（**Critical Out of Position**）
 >
 > 来源：[Explanation of Application Interfaces of Occupant and Pedestrian Safety Systems Domain（乘员与行人安全系统域应用接口说明）](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety）
+{: .glossary-source}
+
+**Coordinated shutdown**
+> 以两个或多个总线的关闭恰好同时完成的方式关闭它们。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**Coordination algorithm**
+> 在所有条件都满足的情况下发起协调关闭。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
 {: .glossary-source}
 
 **Core**
@@ -667,7 +967,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CSM**
 > 加密服务管理器（**Crypto Service Manager**）。
 >
-> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）
+> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
 {: .glossary-source}
 
 **CSUM/Checksum/signature**
@@ -700,6 +1000,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
 
+**CV2x**
+> Cellular Vehicle to X driver，蜂窝车辆到X驱动程序。
+>
+> 来源：[AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）
+{: .glossary-source}
+
 **CVC**
 > 卡片可验证证书（**Card Verifiable Certificate**）。
 >
@@ -718,7 +1024,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)（SWS_WirelessEthernetTransceiverDriver）
 {: .glossary-source}
 
+**CWU**
+> 整车唤醒（**Car Wakeup**）
+>
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）
+{: .glossary-source}
+
 ## D
+
+**DAD**
+> 重复地址检测（**Duplicate Address Detection**）。
+>
+> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+{: .glossary-source}
 
 **DAQ**
 > Data AcQuisition, Data AcQuisition Packet —— 数据采集，数据采集包。
@@ -732,16 +1050,52 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis）
 {: .glossary-source}
 
+**Data element**
+> 发送者和接收者之间交换的数据。**E2E** 转换器将数据元素一对一地映射到 **I-signal** 或 **I-signal** 组。
+>
+> 来源：[E2E Transformer (E2E转换器)](communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）
+{: .glossary-source}
+
 **Data frame**
 > 数据帧：**SPI** 总线上与 SpiDataWidth 相关的位的物理帧。
 >
 > 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）
 {: .glossary-source}
 
+**Data integrity**（数据完整性）
+> 数据完整性是指数据自被合法来源创建、传输或存储以来未被以未经授权的方式更改的属性。为确保数据完整性，应具备检测未经授权方数据操纵的能力。数据操纵包括插入、删除和替换等。
+>
+> 来源：[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
+{: .glossary-source}
+
+**Data Invalid Value**
+> 数据无效值（**Data Invalid Value**）是AUTOSAR COM模块发送的值，用于指示发送侧的AUTOSAR软件组件无法提供有效值。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**Data origin authentication**（数据来源认证）
+> 数据来源认证是一种认证类型，其中一方被证实为在过去某个（通常未指定的）时间创建的特定数据的（原始）来源。根据定义，数据来源认证包含数据完整性。
+>
+> 来源：[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
+{: .glossary-source}
+
 **DCM**
 > 诊断通信管理器（**Diagnostic Communication Manager**）
 >
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**Dcm**
+> 诊断通信管理器模块
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**DDS PDU** / **非 DDS PDU**
+> 包含/不包含 **DDS** 数据的 **PDU**（例如：列出或未列在 **DdsAppDataTxPduCollection**、**DdsAppDataRxPduCollection**、**DdsDomainParticipantUnicastRtpsPduCollection** 或 **DdsDomainParticipantMulticastRtpsPduCollection** 容器中的 **PDU**）。
+>
+> 来源：[Data Distribution Service for Classic Platform（经典平台数据分发服务）](communication/data_distribution/index.md)（AUTOSAR_CP_SWS_DataDistributionService）
 {: .glossary-source}
 
 **Deadline End Checkpoint**（**Deadline Stop Checkpoint**）
@@ -774,10 +1128,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）
 {: .glossary-source}
 
+**Default Error Tracer**
+> 默认错误跟踪器仅用于支持软件开发和集成，不包含在生产代码中。其API是定义了的，但功能可以由开发人员根据其特定需求进行选择和实现。
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
 **DEM**
 > 诊断事件管理器（**Diagnostic Event Manager**）。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[E2E Transformer (E2E转换器)](communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
 {: .glossary-source}
 
 **Dem-internal data value**
@@ -807,13 +1167,25 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DET**
 > 默认错误跟踪器（**Default Error Tracer**），实现报告开发错误的模块。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Default Error Tracer（默认错误跟踪器）](system_services/default_error_tracer/index.md)（SWS_DefaultErrorTracer）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Default Error Tracer（默认错误跟踪器）](system_services/default_error_tracer/index.md)（SWS_DefaultErrorTracer）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
 {: .glossary-source}
 
 **DHCP**
 > Diagnostic Host Configuration Protocol —— 诊断主机配置协议。
 >
-> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+{: .glossary-source}
+
+**DHCPv4**
+> 互联网协议版本4的动态主机配置协议（**Dynamic Host Configuration Protocol for Internet Protocol Version 4**）。
+>
+> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+{: .glossary-source}
+
+**DHCPv6**
+> 互联网协议版本6的动态主机配置协议（**Dynamic Host Configuration Protocol for Internet Protocol Version 6**）。
+>
+> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
 **Diagnostic Channel**
@@ -822,10 +1194,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
+**Diagnostic Event Manager**
+> 诊断事件管理器是生产代码中提供的标准AUTOSAR模块，其功能在AUTOSAR项目中规定。
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
 **DID**
 > 数据标识符（**Data Identifier**）
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**DIO**
+> Digital Input Output (SPAL module)
+>
+> 来源：[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
 {: .glossary-source}
 
 **DIP**
@@ -852,6 +1236,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**Distinction unilateral/ bilateral authentication**（单向/双向认证的区分）
+> 在单向认证（**unilateral authentication**）中，一方证明其身份。请求方甚至未被认证到可证明其有权请求认证的程度。在双向认证（**bilateral authentication**）中，请求方也至少被认证（见下文）以证明其请求的权限。基于上述双向认证，存在一种高效且更安全的双向端点认证方式。除了最初由接收方（在第一条消息中）请求的认证（在第二条消息中）之外，发送方也请求一次认证。接收方发送第三条消息，提供发送方所请求的认证。这仅需要三条消息（相比之下，两条单向消息需要四条）。
+>
+> 来源：[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
+{: .glossary-source}
+
+**DLC**
+> 数据长度码（**Data Length Code**，CAN报文中描述SDU长度的部分）。
+>
+> 来源：[AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
 **Dlt**
 > Diagnostic Log and Trace —— 诊断日志与跟踪。
 >
@@ -862,6 +1258,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 一个 **Dlt** 用户代表一个生成的 **Dlt** 消息的来源。可能的用户是 **SW-C**、RTE（用于 **VFB** 跟踪）、**DEM** 或 **DET**。
 >
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+{: .glossary-source}
+
+**DM**
+> 截止期监控（**Deadline Monitoring**），详情见第6.3.6节。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
 {: .glossary-source}
 
 **DoS**
@@ -903,7 +1305,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **&lt;DstLo&gt;**
 > 作为 L-SDU 目标的下层通信接口模块。DstLo 可以是一对多。
 >
-> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
+{: .glossary-source}
+
+**&lt;DstLoTp&gt;**
+> 下层传输协议模块，作为**I-PDU**的目的地。**DstLoTp**可以是一对多的。
+>
+> 来源：[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
 {: .glossary-source}
 
 **DTC**
@@ -942,12 +1350,36 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**Dynamic Length I-PDU**
+> 动态长度I-PDU（**Dynamic Length I-PDU**）是包含动态长度信号的I-PDU。其长度随所包含动态长度信号的长度而变化。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**Dynamic Length Signal**
+> 动态长度信号（**Dynamic Length Signal**）是其长度可以在运行时变化的信号。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**dynamic part**
+> 见[2]。
+>
+> 来源：[AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md)（AUTOSAR_CP_SWS_IPDUMultiplexer）
+{: .glossary-source}
+
 ## E
 
 **e.g.**
 > （拉丁语）exempli gratia =（英语）for example，即「例如」。
 >
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）
+{: .glossary-source}
+
+**E2E**
+> 端到端保护（**End-To-End Protection**）。
+>
+> 来源：[E2E Transformer (E2E转换器)](communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）
 {: .glossary-source}
 
 **EAI**
@@ -959,7 +1391,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **EB**
 > 外部缓冲通道（**Externally buffered channels**）：包含待传输数据的缓冲区位于 SPI 处理器/驱动程序之外。
 >
-> 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）
+> 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
 {: .glossary-source}
 
 **EBD**
@@ -983,13 +1415,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ECC**
 > 纠错码（**Error Correction Code**）
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
+> 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
 **ECU**
 > 电子控制单元（**Electronic Control Unit**）
 >
-> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）
+> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
 **ECU ID**
@@ -1025,7 +1457,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **EcuM**
 > **ECU** 状态管理器（**ECU State Manager**）
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
 {: .glossary-source}
 
 **EID**
@@ -1034,16 +1466,47 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）
 {: .glossary-source}
 
+**EIRA**
+> 外部和内部请求数组（**External and Internal Request Array**）
+>
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）
+{: .glossary-source}
+
 **Electrical Signal**
 > 电信号（**Electrical Signal**）代表**ECU**引脚上的物理信号。
 >
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）
 {: .glossary-source}
 
+**Endpoint Option**
+> 端点选项（**Endpoint Options**）用于通告一个单播地址和端口的元组。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
+{: .glossary-source}
+
+**EndToEndTransformationDescription**
+> 所定义的特定类，包含约 30 个用于 **E2E** 配置的参数（参见 [4]）。它被 **TransformationTechnology** 引用。
+>
+> 来源：[E2E Transformer (E2E转换器)](communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）
+{: .glossary-source}
+
+**Entity authentication**（实体认证）
+> 实体认证是这样一种过程：一方（通过获取佐证证据）确信协议中涉及的第二方的身份，并且该第二方确实参与了协议（即，在获取证据时或紧邻其之前处于活动状态）。
+> **注意：** 实体认证意味着证明存在性和操作就绪性。
+>
+> 来源：[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
+{: .glossary-source}
+
 **EPB**
 > 电子驻车制动（**Electronic Parking Brake**）
 >
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis）
+{: .glossary-source}
+
+**ERA**
+> 外部请求数组（**External Request Array**）
+>
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）
 {: .glossary-source}
 
 **Error**
@@ -1067,25 +1530,37 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Eth**
 > Ethernet Controller Driver（**AUTOSAR BSW** 模块）。
 >
-> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）、[AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
 {: .glossary-source}
 
 **EthIf**
 > Ethernet Interface（**AUTOSAR BSW** 模块）。
 >
-> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
+{: .glossary-source}
+
+**EthSM**
+> Ethernet State Manager，以太网状态管理器（AUTOSAR BSW 模块）。
+>
+> 来源：[AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
 {: .glossary-source}
 
 **EthTrcv**
 > Ethernet Transceiver Driver（**AUTOSAR BSW** 模块）。
 >
-> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）、[AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
 {: .glossary-source}
 
 **EthTSyn**
 > **Ethernet** 的时间同步提供者模块（**Time Synchronization Provider module for Ethernet**）。
 >
 > 来源：[AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](globaltime/eth_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverEthernet）
+{: .glossary-source}
+
+**Event**
+> 由实现一个服务实例的ECU发送给使用该服务实例的ECU的消息。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
 {: .glossary-source}
 
 **Event combination**
@@ -1136,6 +1611,24 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**Eventgroup**
+> 一个或多个事件的逻辑分组。一个事件组（**Eventgroup**）是服务的一部分。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
+{: .glossary-source}
+
+**Eventhandler multicast connection**
+> 描述当**SdServerService**经由已配置的Eventhandler多播端点提供多播事件时，已建立的套接字连接的使用情况的术语。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
+{: .glossary-source}
+
+**Eventhandler multicast endpoint**
+> 描述按**EventHandler**为**SdServerService**预配置的多播地址和端口元组的术语。如果订阅的、具有不同端点信息的客户端数量已达到阈值，则服务器将相应的事件发送到该预配置的多播地址和端口。Eventhandler多播端点经由**SubscribeEventgroupAck**条目所引用的Multicast option通告。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
+{: .glossary-source}
+
 **Excel**
 > Microsoft 电子表格应用（**Excel**）
 >
@@ -1146,6 +1639,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 一个**监督周期**，其中**存活监督**已失败其两个升级步骤（**存活计数器**失败的**期望存活指示**数量（包括容差）超过允许的失败参考周期次数）。
 >
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）
+{: .glossary-source}
+
+**Extended addressing format**
+> 为每个N_SA和Mtype的组合分配一个唯一的CAN标识符。在CAN帧数据域的第一个数据字节中，为每个N_TA和N_TAtype的组合填入一个唯一的地址。N_PCI和N_Data填入CAN帧数据域的其余字节。
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
 {: .glossary-source}
 
 **Extended data record**
@@ -1234,6 +1733,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**FC**
+> 见「CAN FC」
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
 **FCS**
 > 帧校验序列（**Frame Check Sequence**）。
 >
@@ -1252,10 +1757,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Application Level Error Handling（应用层错误处理）](general/application_level_error_handling/index.md)（AUTOSAR_CP_EXP_ApplicationLevelErrorHandling）
 {: .glossary-source}
 
+**FF**
+> 第一帧，传输协议术语。
+>
+> 来源：[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）、[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
 **FID**
 > 功能标识符（**Function Identifier**）：在 **FiM** 中标识一个应用程序功能及其相关禁止条件的标识符。
 >
 > 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）
+{: .glossary-source}
+
+**Field**
+> 字段表示一个状态，因此在任何时刻都有一个有效值，getter、setter和notifier作用于该值。
+>
+> 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
 {: .glossary-source}
 
 **FIFO**
@@ -1264,10 +1781,28 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver）
 {: .glossary-source}
 
+**FIM**
+> 功能禁用管理器
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
 **FiM**
 > 功能抑制管理器（**Function Inhibition Manager**）
 >
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）
+{: .glossary-source}
+
+**Find**
+> 用于查找一个服务实例的消息条目。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
+{: .glossary-source}
+
+**Finding a service instance**
+> 发送一条SOME/IP-SD消息以查找所需的服务实例。
+>
+> 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
 {: .glossary-source}
 
 **FLM**
@@ -1280,6 +1815,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 失效模式指示符（**Failure Mode Indicator**，SAE J1939）
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**FM**（**Freshness Manager**）
+> 新鲜度管理器
+>
+> 来源：[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
 {: .glossary-source}
 
 **Foreground test**
@@ -1336,6 +1877,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver）
 {: .glossary-source}
 
+**FS**
+> 流状态（**Flow Status**）
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
 **FSC**
 > 功能安全概念（**Functional Safety Concept**）
 >
@@ -1360,10 +1907,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures）
 {: .glossary-source}
 
+**Function Inhibition Manager**
+> 功能禁用管理器（**FIM**）代表事件的评估和分配，以及软件组件所需操作（例如禁用特定的「监控功能」）的分配。当事件状态发生变化时，DEM会通知并更新功能禁用管理器（**FIM**），以便根据分配的依赖关系停止或释放功能实体。功能实体的接口由模式管理器定义和支持。FIM不是DEM的一部分。
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
 **Functional Addressing**
 > 功能寻址：特定通信网络中的一组或全部节点从一个发送节点接收消息（1:n）的诊断通信模型，也称为广播或多播。**OBD** 通信始终使用功能寻址模式。
 >
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**Functional addressing**
+> 在传输层中，功能寻址指的是N_TAtype参数（它是用于编码通信模型的N_TA参数[1]的扩展）取值为functional的N-SDU。这意味着该N-SDU用于1到n的通信。因此，对于CAN协议，功能寻址仅支持单帧通信。在应用方面，如果外部（或内部）测试仪不知道应响应服务请求的ECU的物理地址，或者ECU的功能是作为分布在多个ECU上的分布式服务器实现的，则外部（或内部）测试仪会使用功能寻址。使用功能寻址时，通信是从外部测试仪到一个或多个ECU的通信广播（1到n通信）。用例有（例如）广播消息，如「ECUReset」或「Communication Control」。OBD通信将始终作为功能寻址的一部分执行。
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
 {: .glossary-source}
 
 **Functionality**
@@ -1372,12 +1931,24 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）
 {: .glossary-source}
 
+**FV**（**Freshness Value**）
+> 新鲜度值
+>
+> 来源：[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
+{: .glossary-source}
+
 ## G
 
 **General Denominator**
 > 通用分母是一个计数器，指示车辆被操作的次数，并考虑通用条件。
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**Getter**
+> 允许对字段进行读访问的请求/响应（**Request/Response**）调用。
+>
+> 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
 {: .glossary-source}
 
 **GID**
@@ -1440,12 +2011,36 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）
 {: .glossary-source}
 
+**Group signal**
+> 组信号（**Group signal**）是包含在信号组中的信号。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
 ## H
 
 **HARA**
 > 危害分析（**Hazard Analysis**）
 >
 > 来源：[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures）
+{: .glossary-source}
+
+**Hardware Object**
+> CAN硬件对象定义为CAN硬件单元/CAN控制器的CAN RAM中的一个PDU缓冲区。硬件对象定义为CAN硬件单元CAN RAM中的L-PDU缓冲器。
+>
+> 来源：[AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）
+{: .glossary-source}
+
+**Hardware Receive Handle (HRH)**
+> 硬件接收句柄（**HRH**）由CAN驱动程序定义和提供。每个HRH通常只表示一个硬件对象。HRH可用于优化软件过滤。
+>
+> 来源：[AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）
+{: .glossary-source}
+
+**Hardware Transmit Handle (HTH)**
+> 硬件传输句柄（**HTH**）由CAN驱动程序定义和提供。每个HTH通常只表示一个或多个硬件对象，这些硬件对象被配置为硬件传输缓冲池。
+>
+> 来源：[AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）
 {: .glossary-source}
 
 **Hardware Trigger**
@@ -1493,13 +2088,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **HSM**
 > 硬件安全模块（**Hardware Security Module**），专用安全 **MCU** 的内核。
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）
+> 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
 **HTM**
 > 硬件测试管理器（**Hardware Test Manager**）
 >
 > 来源：[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures）
+{: .glossary-source}
+
+**HTTP**
+> 超文本传输协议（**HyperText Transfer Protocol**）。
+>
+> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
 **HW**
@@ -1510,16 +2111,40 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## I
 
+**I-**
+> 相对于AUTOSAR COM交互层（**Interaction Layer**）
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
 **I-PDU**
 > 交互层 **PDU**（**Interaction Layer PDU**）。在 **AUTOSAR** 中，交互层等价于通信服务层。
 >
-> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）
+> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）、[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**I-PDU group**
+> I-PDU组（**I-PDU group**）是COM模块中同方向（即发送或接收）I-PDU的任意集合。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
 {: .glossary-source}
 
 **I-PDU ID**
 > I-PDU 标识符（**I-PDU Identifier**）。
 >
-> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
+{: .glossary-source}
+
+**I-Signal**
+> 待序列化为字节数组以进行 **E2E** 保护的条目。为了进行 **E2E** 保护，**I-Signal** 必须分配给一个 **I-Signal 组**。
+>
+> 来源：[E2E Transformer (E2E转换器)](communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）
+{: .glossary-source}
+
+**I-Signal group**
+> 要进行 **E2E** 保护的一组 **I-Signal**。**E2E** 保护在 **I-Signal** 组这一层级上定义。
+>
+> 来源：[E2E Transformer (E2E转换器)](communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）
 {: .glossary-source}
 
 **i.e.**
@@ -1528,10 +2153,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）
 {: .glossary-source}
 
+**IANA**
+> 互联网号码分配局（**Internet Assigned Numbers Authority**）。
+>
+> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+{: .glossary-source}
+
 **IB**
 > 内部缓冲通道（**Internally buffered channels**）：包含待传输数据的缓冲区位于 SPI 处理器/驱动程序之内。
 >
-> 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）
+> 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
 {: .glossary-source}
 
 **ICC**
@@ -1543,7 +2174,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ICMP**
 > Internet Control Message Protocol —— 互联网控制消息协议。
 >
-> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+{: .glossary-source}
+
+**ICMPv4**
+> 互联网协议版本4的互联网控制消息协议（**Internet Control Message Protocol for Internet Protocol Version 4**）。
+>
+> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+{: .glossary-source}
+
+**ICMPv6**
+> 互联网协议版本6的互联网控制消息协议（**Internet Control Message Protocol for Internet Protocol Version 6**）。
+>
+> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
 **ICU**
@@ -1561,7 +2204,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ID**
 > 标识符（**Identifier**）
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
 {: .glossary-source}
 
 **IdsM**
@@ -1574,6 +2217,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 实现特定文件名扩展名（**implementation specific file name extension**）
 >
 > 来源：[AUTOSAR BSW General（基础软件模块通用规范）](general/bsw_general/index.md)（SWS_BSWGeneral）
+{: .glossary-source}
+
+**IETF**
+> 互联网工程任务组（**Internet Engineering Task Force**）。
+>
+> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
 **IF-PDU**
@@ -1600,16 +2249,64 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**IND**
+> 反向邻居发现（**Inverse Neighbor Discovery**）。
+>
+> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+{: .glossary-source}
+
+**Indication**
+> 指示（**Indication**）是从PDU路由器到COM的异步信息，例如确认已接收到某些内容。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
 **Inhibition Condition**
 > 禁止条件：一个 **FID**、一个禁止掩码与 **Dem** 事件/组件状态之间的关系（见 FiMInhibitionConfiguration）。
 >
 > 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）
 {: .glossary-source}
 
+**Init Value**
+> 初始值（**Init Value**）。AUTOSAR COM模块在启动后将I-PDU和信号设置为初始值。在被覆盖之前一直使用该值。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**Inner Priority Inversion**
+> 高优先级的**L-PDU**的传输由于在同一个发送硬件对象中存在一个未决的低优先级的L-PDU而被阻止。
+>
+> 来源：[AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）
+{: .glossary-source}
+
+**instance of an I-PDU**
+> 具有一种特定布局和内容的IpduM I-PDU。
+>
+> 来源：[AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md)（AUTOSAR_CP_SWS_IPDUMultiplexer）
+{: .glossary-source}
+
+**Instances of a Container**
+> 同一容器PDU的多个实例。
+>
+> 来源：[AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md)（AUTOSAR_CP_SWS_IPDUMultiplexer）
+{: .glossary-source}
+
 **int**
 > 整数（**Integer**）
 >
 > 来源：[AUTOSAR Platform Types（平台类型）](general/platform_types/index.md)（SWS_PlatformTypes）
+{: .glossary-source}
+
+**Inter-ECU-communication**
+> ECU间通信（**Inter-ECU-communication**）是两个或多个ECU之间的通信，例如经由CAN网络。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**Intermediate PNC coordinator**
+> 一个ECU，对在至少一个通道上被被动协调的那些PNC充当中间PNC协调器。该ECU启用了PNC网关功能。如果启用了同步PNC关闭，中间PNC协调器将被被动协调的PNC的同步PNC关闭转发到主动协调的通道。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
 {: .glossary-source}
 
 **Internal Diagnostic Tool**
@@ -1630,6 +2327,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）
 {: .glossary-source}
 
+**Intra-ECU-communication**
+> ECU内通信（**Intra-ECU-communication**）是驻留在同一ECU上的软件组件之间的通信。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**Inverse transformer**
+> 接收端的转换器，它反转在发送端应用的转换步骤。
+>
+> 来源：[E2E Transformer (E2E转换器)](communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）
+{: .glossary-source}
+
 **Inversion**
 > 物理值与逻辑值的反转（**Inversion**）。此属性不可见，但可以由**I/O**硬件抽象来实现，并向用户传递预期值。
 >
@@ -1645,19 +2354,37 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **IP**
 > Internet Protocol —— 互联网协议。
 >
-> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+{: .glossary-source}
+
+**IpduM**
+> I-PDU多路复用器。
+>
+> 来源：[AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md)（AUTOSAR_CP_SWS_IPDUMultiplexer）
+{: .glossary-source}
+
+**IpduM I-PDU**
+> 由两个COM I-PDU在IpduM模块中组装而成的I-PDU。
+>
+> 来源：[AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md)（AUTOSAR_CP_SWS_IPDUMultiplexer）
+{: .glossary-source}
+
+**IPsec**
+> 互联网协议安全（**Internet Protocol Security**）。
+>
+> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
 **IPv4**
 > Internet Protocol version 4 —— 互联网协议第 4 版。
 >
-> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
 **IPv6**
 > Internet Protocol version 6 —— 互联网协议第 6 版。
 >
-> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
 **IRQ**
@@ -1666,10 +2393,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）
 {: .glossary-source}
 
+**Irrelevant frame**
+> 从 LIN 从节点的角度来看，LIN 总线上存在 3 种不同方向的帧：从节点发送的响应、从节点接收的响应和从节点忽略的响应（即主节点与另一个从节点之间或另外两个从节点之间的通信）。这些被忽略的帧在本规范中被称为无关帧（**irrelevant frame**）。这在 ISO 17987 规范中没有明确描述。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
+{: .glossary-source}
+
 **ISR**
 > 中断服务程序（**Interrupt Service Routine**）
 >
-> 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping）、[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver）
+> 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping）、[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver）、[AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）、[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
 {: .glossary-source}
 
 **IUMPR**
@@ -1684,6 +2417,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > SAE J1939 诊断通信管理器（**SAE J1939 Diagnostic Communication Manager**）
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**Jitter**
+> 最长延迟和最短延迟之间的差异（例如，最坏情况执行时间 - 最佳情况执行时间）。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
 {: .glossary-source}
 
 **Job**
@@ -1720,10 +2459,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## L
 
+**L-**
+> 相对于CAN接口模块，它等同于逻辑链路控制（**Logical Link Control**，数据链路层的上半部分——下半部分称为媒体访问控制）
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
 **L-PDU**
 > 数据链路层 **PDU**（**Data Link Layer PDU**）。在 **AUTOSAR** 中，数据链路层等价于通信硬件抽象和微控制器抽象层。
 >
-> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）
+> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）、[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**L-PDU Handle**
+> L-PDU句柄被定义并放置在**CanIf**模块层内。通常每个句柄代表一个L-PDU，它是一个包含Tx/Rx处理信息的常量结构。
+>
+> 来源：[AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）
 {: .glossary-source}
 
 **L-PDU ID**
@@ -1762,10 +2513,28 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）
 {: .glossary-source}
 
+**Large I-PDU**
+> 大I-PDU（**Large I-PDU**）是太大而无法放入底层通信协议单个L-PDU的I-Signal-I-PDU。大I-PDU由COM像其他I-PDU一样处理，但经由TP API发送/接收。请注意，如果大I-PDU只包含一个信号，或者信号可以由RTE（反）序列化，**LargeDataCOM**可以更高效地处理它们。但如果信号必须被单独处理或必须被路由，则大I-PDU必须由COM处理。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**Large Signal**
+> 大信号（**Large Signal**）是太大而无法放入底层通信协议单个L-PDU的信号。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
 **LB**
 > 近光功能（德语「Abblendlicht」）（**Low Beam**）
 >
 > 来源：[Safety Use Case（安全用例）](safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase）
+{: .glossary-source}
+
+**LDF**
+> LIN 描述文件（**LIN Description File**）。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
 {: .glossary-source}
 
 **LED**
@@ -1786,6 +2555,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
+**LIN TP**（**LinTp**）
+> LIN 传输协议（**LIN Transport Protocol**）（LIN 接口的一部分）。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
+{: .glossary-source}
+
 **LKA**
 > 车道保持辅助（**Lane Keep Assist**）。
 >
@@ -1795,7 +2570,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **&lt;Lo&gt;**
 > 下层通信接口模块。
 >
-> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
 {: .glossary-source}
 
 **Local Instance of the Global Time**
@@ -1840,6 +2615,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）
 {: .glossary-source}
 
+**&lt;LoTp&gt;**
+> 下层传输协议模块。
+>
+> 来源：[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
+{: .glossary-source}
+
 **Lower Layer Modules（Lo）**
 > 位于 L-SDU Router 之下的模块。该层包括以太网通信接口模块。
 >
@@ -1881,7 +2662,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **MAC**
 > 报文认证码（**Message Authentication Code**）。
 >
-> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
 {: .glossary-source}
 
 **Macrotick**
@@ -1920,10 +2701,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**Maximum frame length**
+> 最大帧长度是 ISO 17987-3 [6] 中定义的 **T_FRAME_MAX**（即标称帧长度加上 40%）。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
+{: .glossary-source}
+
 **MCAL**
 > 微机抽象层（**Microcomputer Abstraction Layer**）
 >
-> 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR BSW General（基础软件模块通用规范）](general/bsw_general/index.md)（SWS_BSWGeneral）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）
+> 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR BSW General（基础软件模块通用规范）](general/bsw_general/index.md)（SWS_BSWGeneral）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）、[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
 {: .glossary-source}
 
 **MCD**
@@ -1935,7 +2722,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **MCG**
 > 模块配置生成器（**Module Configuration Generator**）。
 >
-> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）、[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver）
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）、[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver）、[AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）
 {: .glossary-source}
 
 **MCNT**
@@ -1950,10 +2737,34 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
+**MDIO**
+> 管理数据输入/输出（**Management Data Input/Output**）。
+>
+> 来源：[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）
+{: .glossary-source}
+
+**MDT**
+> 最小延迟定时器（**Minimum Delay Timer**）的详细描述见[3]。另见第6.3.5.5节。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
 **Memory Device**
 > 存储设备（**Memory Device**）是指一组存储 **Bank** 的组合。
 >
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
+{: .glossary-source}
+
+**Message**
+> [3]始终使用同义词消息（**message**）。在AUTOSAR中，message被signal替换，但含义相同。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**Message authentication**（消息认证）
+> 消息认证是与数据来源认证类似使用的术语。它提供关于原始消息来源的数据来源认证（以及数据完整性，但不提供唯一性）。
+>
+> 来源：[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
 {: .glossary-source}
 
 **Message ID**
@@ -1962,10 +2773,34 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
 {: .glossary-source}
 
+**MetaData**
+> 与PDU一起传输的元数据，由一组元数据项组成
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**Metadata**
+> 元数据（**Metadata**）。对于某些I-PDU（如J1939 I-PDU），有效载荷会扩展以包含附加的元数据，例如CAN-ID。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**MetaDataItem**
+> 具有定义的类型和大小的单个MetaData项
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**Method**
+> 被调用/调用的方法、过程、函数或子例程。
+>
+> 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
+{: .glossary-source}
+
 **MII**
 > 媒体独立接口（**Media Independent Interface**，由以太网控制器提供的用于访问以太网收发器的标准化接口，参见 IEEE 802.3-2006）。
 >
-> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）、[AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）
 {: .glossary-source}
 
 **MIL**
@@ -1998,6 +2833,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）
 {: .glossary-source}
 
+**Mixed addressing format**
+> 为每个N_SA、N_TA、N_TAtype的组合分配一个唯一的CAN标识符。N_AE放置在CAN帧数据域的第一个数据字节中。N_PCI和N_Data放置在CAN帧数据域的其余字节中。
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
 **Modality**
 > 模态——到用户的输出通道的类型，例如音频或视频输出（**Modality**）
 >
@@ -2008,6 +2849,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 模式是车辆中运行的各个状态机的特定状态集合，这些状态与某个特定实体相关，例如 **SW-C**、**BSW** 模块、应用或整个车辆。在其生命周期内，一个实体在一组互斥的模式之间切换。这些切换由环境数据触发，例如信号接收、操作调用。在**看门狗管理器**的上下文中，一个模式由一组配置选项定义。被监督的**被监督实体**集合可以随模式而变化。
 >
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）
+{: .glossary-source}
+
+**&lt;module&gt;**
+> 任何类型的软件模块 <...>.
+>
+> 来源：[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
 {: .glossary-source}
 
 **Module abbreviation**
@@ -2050,6 +2897,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 内存保护单元（**Memory Protection Unit**）
 >
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）
+{: .glossary-source}
+
+**MRF**
+> 主节点请求帧（**Master Request Frame**）。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
 {: .glossary-source}
 
 **MS**
@@ -2100,12 +2953,150 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures）
 {: .glossary-source}
 
+**MTU**
+> 最大传输单元（**Maximum Transmission Unit**）。
+>
+> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+{: .glossary-source}
+
+**Mtype**
+> 消息类型（可能取值：诊断、远程诊断）
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**Multicast event**
+> 由承载**SdServerService**的ECU发送到多播端点的事件。该多播端点可以由SdServerService（见「Eventhandler multicast endpoint」）和SdClientService（见「Consumed Eventgroup multicast endpoint」）提供。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
+{: .glossary-source}
+
+**Multicast Option**
+> 多播选项（**Multicast Options**）用于通告一个多播地址和端口的元组。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
+{: .glossary-source}
+
+**Multiple connection**
+> CAN传输层应同时管理多个传输协议通信会话。
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**multiplexed I-PDU**
+> 见IpduM I-PDU。
+>
+> 来源：[AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md)（AUTOSAR_CP_SWS_IPDUMultiplexer）
+{: .glossary-source}
+
 ## N
+
+**N-**
+> 相对于CAN传输层，它等同于OSI网络层（**Network Layer**）
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
 
 **N-PDU**
 > 网络层 **PDU**（**Network Layer PDU**）。在 **AUTOSAR** 中，网络层等价于传输协议。
 >
-> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）
+> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
+{: .glossary-source}
+
+**N_AE**
+> 网络地址扩展（见ISO 15765-2 [1]）
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**N_AI**
+> 网络地址信息（见ISO 15765-2）
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**N_Ar**
+> 接收方CAN帧（任意N-PDU）的传输时间（见ISO 15765-2 [1]）
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**N_As**
+> 发送端发送 LIN 帧（任何 N-PDU）的时间（见 ISO 17987-2 [5]）。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**N_Br**
+> 直到发送下一个流控N-PDU的时间（见ISO 15765-2 [1]）
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**N_Bs**
+> 直到接收到下一个流控N-PDU的时间（见ISO 15765-2 [1]）
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**N_Cr**
+> 直到接收到下一个连续帧 N-PDU 的时间（见 ISO 17987-2 [5]）。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**N_Cs**
+> 直到传输下一个连续帧 N-PDU 的时间（见 ISO 17987-2 [5]）。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**N_Data**
+> 传输层的数据信息
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**N_PCI**
+> 传输层的协议控制信息
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**N_SA**
+> 网络源地址（见ISO 15765-2 [1]）
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**N_TA**
+> 网络目标地址（见ISO 15765-2 [1]）。在扩展寻址的情况下，它可能已包含N_TAtype（物理/功能）
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**N_TAtype**
+> 网络目标地址类型（见ISO 15765-2 [1]）
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**NAD**
+> 节点地址（**Node Address**）。LIN 中的每个从节点都必须具有唯一的 NAD。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
+{: .glossary-source}
+
+**NC**
+> 节点配置（**Node Configuration**）。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
+{: .glossary-source}
+
+**NDP**
+> 邻居发现协议（**Neighbor Discovery Protocol**）。
+>
+> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
 **neighborRateRatio**
@@ -2114,16 +3105,100 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](globaltime/eth_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverEthernet）
 {: .glossary-source}
 
+**network**
+> 连接到同一总线的所有NM节点/ECU的实体。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
 **NIT**
 > FlexRay 网络空闲时间（**FlexRay Network Idle Time**）。
 >
 > 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver）
 {: .glossary-source}
 
+**NM**
+> 网络管理（**Network Management**）
+>
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**Nm**
+> 通用网络管理接口模块，本规范全文中用它作为该模块的缩写。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**NM Message**
+> 最抽象的术语，指在NM算法的方法论中传输的任何单个信息项。
+>
+> 来源：[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）
+{: .glossary-source}
+
+**NM Packet**
+> 指一个以太网帧，除了由NM在有效载荷部分传输的数据（**PDU**）之外，还包含一个**IP**和一个**UDP**报头。
+>
+> 来源：[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）
+{: .glossary-source}
+
+**NM PDU**
+> 指在数据包中传输的有效载荷。它包含**NM**用户数据以及控制位向量和源节点标识符。
+>
+> 来源：[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）
+{: .glossary-source}
+
+**NM User Data**
+> 附在总线上发送的每条NM消息上的补充性应用特定数据。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**NM-Channel**
+> 与NM集群相关联的逻辑通道。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**NM-Cluster**
+> 使用NM算法协调的NM节点的集合。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**NM-Coordinator**
+> Nm的一项功能，它允许对多个NM通道的网络睡眠进行协调。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**NM-Message**
+> 为NM算法的目的而交换的信息包。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**NM-Timeout**
+> NM算法中引发向总线睡眠模式（**Bus-Sleep Mode**）转换的超时。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
 **NOAR**
 > Number of Arguments —— 参数数量。
 >
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+{: .glossary-source}
+
+**Node Identifier**
+> 为NM算法的目的而交换的节点地址信息。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**Node Identifier List**
+> NM算法所识别的节点标识符列表。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
 {: .glossary-source}
 
 **nop**
@@ -2138,10 +3213,28 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver）
 {: .glossary-source}
 
+**Normal addressing format**
+> 为每个N_SA、N_TA、N_TAtype和Mtype的组合分配一个唯一的CAN标识符。N_PCI和N_Data填入CAN帧数据域。
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**Notification**
+> 通知（**Notification**）是AUTOSAR COM模块向其用户（如**RTE**、**SwCluC**）提供的信息，例如新数据可用或发生错误。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
 **Notification Time Base Customer**
 > 一种时基客户，当时基状态改变或时基值到达客户先前设置的给定值时，由同步时基管理器通知。
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
+{: .glossary-source}
+
+**Notifier**
+> 在字段的值发生变化时发送带有新值的事件消息。
+>
+> 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
 {: .glossary-source}
 
 **NRC**
@@ -2173,13 +3266,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **OA TC10**
 > Open Alliance TC10（参见 OPEN Sleep/Wake-up Specification for Automotive Ethernet）。
 >
-> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）、[AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
 {: .glossary-source}
 
 **OBD**
 > 车载诊断（**On-board Diagnostics**）。
 >
-> 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+> 来源：[AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
 {: .glossary-source}
 
 **OBD ECUs**
@@ -2230,10 +3323,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）
 {: .glossary-source}
 
+**OEM**
+> 原始设备制造商（**Original Equipment Manufacturer**）。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
 **Off-Mode**
 > 看门狗硬件被禁用/关闭。这样做可能是为了关闭整个 **ECU**，而不遭受仍在运行的外部看门狗的周期性复位。对于安全关键系统，该模式可能不被允许。在这种情况下，必须将 **Wdg** 模块配置为禁止切换到此模式。
 >
 > 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver）
+{: .glossary-source}
+
+**Offer**
+> 提供一个服务实例（**Service Instance**）的消息条目。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
 {: .glossary-source}
 
 **Offset Correction**
@@ -2338,6 +3443,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
 {: .glossary-source}
 
+**Outer Priority Inversion**
+> 由于两个连续发送的**L-PDU**之间存在时间间隔。在这种情况下，来自另一个节点的低优先级的**L-PDU**可以阻止发送自己的高优先级的**L-PDU**。此时，高优先级的**L-PDU**不能参与网络访问仲裁，因为低优先级的**L-PDU**已经赢得了仲裁。
+>
+> 来源：[AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）
+{: .glossary-source}
+
 **OVS**
 > 溢出秒值（**Overflow Seconds** value，**FUP** 报文中的字段）。
 >
@@ -2350,6 +3461,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 动力总成代码（**Power train code**）
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**P2**
+> 在 LIN 总线上接收到诊断请求的最后一帧与从节点能够提供响应数据之间的时间。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
+{: .glossary-source}
+
+**P2\***
+> 从发送响应挂起帧（0x78）到 LIN 从设备能够为响应提供数据之间的时间。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
 {: .glossary-source}
 
 **P2P**
@@ -2415,7 +3538,37 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **PDU**
 > 协议数据单元（**Protocol Data Unit**）
 >
-> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[Layered Software Architecture（分层软件架构）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[VFB（虚拟功能总线）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[Layered Software Architecture（分层软件架构）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[VFB（虚拟功能总线）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**PDU Router**
+> PDU路由器是在模块之间传输I-PDU的模块。PDU路由器可用于网关操作和内部路由目的。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**PduInfoType**
+> 该类型指用于存储处理PDU（或SDU）发送/接收所需基本信息（即指向RAM中其有效载荷的指针和相应的长度（以字节为单位））的结构。
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**PduR**
+> PDU路由器
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**PDU传输能力被禁用**（**PDU transmission ability is disabled**）
+> 这意味着网络管理**PDU**传输已被服务**CanNm_DisableCommunication**禁用。
+>
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）
+{: .glossary-source}
+
+**PDU路由器（PDU Router）**
+> 将**I-PDU**从一个模块传输到另一个模块的模块。PDU路由器模块可用于网关操作和内部路由目的。
+>
+> 来源：[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
 {: .glossary-source}
 
 **periodic transmission rate**
@@ -2442,16 +3595,28 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
+**Physical addressing**
+> 在传输层中，物理寻址指的是N_TAtype参数（它是用于编码通信模型的N_TA参数[1]的扩展）取值为physical的N-SDU。这意味着该N-SDU用于1到1的通信，因此所有类型的网络层消息都支持物理寻址。在应用方面，如果外部（或内部）测试仪知道应响应服务请求的ECU的物理地址，则外部（或内部）测试仪会使用物理寻址。使用物理寻址时，通信为点对点通信（1对1通信）。用例有（例如）「ReadDataByIdentifier」或「InputOutputControlByIdentifier」等消息。
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**Physical Channel**
+> 一个物理通道代表一个从CAN控制器到CAN网络的接口。CAN硬件单元的不同物理通道可能访问不同的网络。
+>
+> 来源：[AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）
+{: .glossary-source}
+
 **PID**
 > 参数标识（**Parameter Identification**，SAE J1587 或 SAE J1979）
 >
-> 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+> 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
 {: .glossary-source}
 
 **PKI**
 > 公钥基础设施（**Public Key Infrastructure**）。
 >
-> 来源：[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）
+> 来源：[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
 **PLCA**
@@ -2460,10 +3625,70 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）
 {: .glossary-source}
 
+**PN filter mask**
+> 由每通道的配置容器NmPnFilterMaskByte定义的过滤掩码字节向量，用于为PNC定时器处理过滤相关的PNC请求。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**PN shutdown message**
+> 顶层PNC协调器发送PN关闭消息以在PN拓扑上指示一次同步PNC关闭。PN关闭消息是一条控制位向量中PNSR位置位、且所有被指示为同步关闭的PNC均置为「1」的NM消息。接收到PN关闭消息的中间PNC协调器必须在受影响的通道上将该PNC位向量作为PN关闭消息转发。注意：中间PNC协调器必须尽快转发所接收PN关闭消息的PNC位向量，以确保受影响的PNC在PN拓扑上近乎同步地关闭。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
 **PNC**
 > 部分网络集群（**Partial Network Cluster**）。一组系统信号，用于支持分布在车辆网络多个 ECU 上的一个或多个车辆功能；表示把一组总线映射到一个或多个虚拟功能集群（VFC）的系统视图。
 >
-> 来源：[Layered Software Architecture（分层软件架构）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）
+> 来源：[Layered Software Architecture（分层软件架构）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**PNC bit**
+> 在部分网络信息范围（**Partial Network Info Range**）中表示某个特定部分网络的一个位。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**PNC bit vector**
+> 在NM帧中表示部分网络信息。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**PNC bit vector length**
+> 以字节表示部分网络信息的长度。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**PNC leaf node**
+> PNC叶节点是既不充当顶层PNC协调器也不充当中间PNC协调器的ECU。它在网络中充当没有PNC网关的ECU，并将PN关闭消息作为普通NM消息处理。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**PNC叶节点**（**PNC leaf node**）
+> PNC叶节点是一个**ECU**，在网络中根本不充当PNC协调器。它像通常的NM消息一样处理PN关闭消息。
+>
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）
+{: .glossary-source}
+
+**PNI**
+> 部分网络信息（**Partial Network Information**）
+>
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）
+{: .glossary-source}
+
+**PNL**
+> 部分网络学习（**Partial Network Learning**）
+>
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）
+{: .glossary-source}
+
+**PN关闭消息**（**PN shutdown message**）
+> 顶级PNC协调器传输PN关闭消息以指示跨PN拓扑的同步PNC关闭。PN关闭消息是作为**NM**消息，它在控制位向量中具有**PNSR**位，并且所有被指示用于同步关闭的PNC都设置为**1**
+>
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）
 {: .glossary-source}
 
 **POC**
@@ -2482,6 +3707,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 俯仰翻覆碰撞检测（**Pitchover Crash Detection**）
 >
 > 来源：[Explanation of Application Interfaces of Occupant and Pedestrian Safety Systems Domain（乘员与行人安全系统域应用接口说明）](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety）
+{: .glossary-source}
+
+**Port**
+> Port module (SPAL module)
+>
+> 来源：[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
 {: .glossary-source}
 
 **Port-Interface**
@@ -2508,6 +3739,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interfaces of Occupant and Pedestrian Safety Systems Domain（乘员与行人安全系统域应用接口说明）](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety）
 {: .glossary-source}
 
+**PRF**
+> 伪随机函数（**Pseudo Random Function**）。
+>
+> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+{: .glossary-source}
+
 **Primary ECU**
 > **Primary ECU** 在其事件内存中存储"自己的"以及相关的从属/辅助 **ECU** 的"报告的错误"。
 >
@@ -2523,7 +3760,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Priority**
 > 优先级：作业的优先级定义其重要性，优先级（数值）越高，作业越需立即执行；加密作业的优先级是配置的一部分。
 >
-> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）
+> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）
 {: .glossary-source}
 
 **Processing**
@@ -2624,6 +3861,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Time Service（时间服务）](system_services/time_service/index.md)（SWS_TimeService）
 {: .glossary-source}
 
+**Relevant frame**
+> 从 LIN 从节点的角度来看，从节点发送或接收的帧。与无关帧相对。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
+{: .glossary-source}
+
+**Request**
+> 客户端发给服务器、调用某个方法的消息。
+>
+> 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
+{: .glossary-source}
+
 **Resolution**
 > 分辨率（**Resolution**）属性适用于依赖于范围和数据类型的许多类别。如：(upperLimit - lowerLimit) / (2<sup>datatypelength</sup> -1)。 对于其他类别，它可能是已知和被定义的。如：[-12 Volts…+12Volts]，数据类型: 16 bits，**Resolution** 为 24 / 65535。
 >
@@ -2634,6 +3883,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 「硬件资源」是 **CoreTest** 驱动程序用户可以选择的最小单元（实例）。它可以在一个或多个原子序列中被测试。它是执行特定功能（例如 **IRQ** 控制器）的内核内部单元。
 >
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）
+{: .glossary-source}
+
+**Response**
+> 服务器发给客户端、传输方法调用结果的消息。
+>
+> 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
 {: .glossary-source}
 
 **retransmit counter**
@@ -2652,6 +3907,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 遥控无钥匙进入（**Remote Keyless Entry**）。设计用于远程锁定或解锁汽车进入的系统；单向广播无线电波，实现加密与滚动码算法。
 >
 > 来源：[Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](application_interfaces/body_and_comfort/index.md)（AUTOSAR_CP_EXP_AIBodyAndComfort）
+{: .glossary-source}
+
+**RNG**
+> 随机数发生器（**Random Number Generator**）。
+>
+> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
 **ROD**
@@ -2678,6 +3939,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）
 {: .glossary-source}
 
+**RSA**
+> Rivest-Shamir-Adleman。一种使用公钥和私钥进行数据加密和解密的方法。
+>
+> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+{: .glossary-source}
+
 **RSC**
 > 侧翻稳定控制（**Roll Stability Control**）
 >
@@ -2694,6 +3961,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 约束系统预处理（**Restraint System Pre conditioning**）
 >
 > 来源：[Explanation of Application Interfaces of Occupant and Pedestrian Safety Systems Domain（乘员与行人安全系统域应用接口说明）](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety）
+{: .glossary-source}
+
+**RSSI**
+> Received Signal Strength Indicator，接收信号强度指示器。
+>
+> 来源：[AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）
 {: .glossary-source}
 
 **RTE**
@@ -2720,10 +3993,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
 {: .glossary-source}
 
+**RX**
+> 接收（**Reception**）。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）
+{: .glossary-source}
+
 **Rx Time Tuple**
 > 时间元组 [TG_Rx, TV_Rx]，在跟随报文进入时导出，并由 &lt;Bus&gt;TSyn 模块通过 StbM_BusSetGlobalTime 交给 **StbM**。
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
+{: .glossary-source}
+
+**RX_DL**
+> 接收数据链路层数据长度
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
 {: .glossary-source}
 
 ## S
@@ -2732,6 +4017,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 发送方/接收方（**Sender/Receiver**）
 >
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）
+{: .glossary-source}
+
+**SACK**
+> 选择性确认（**Selective Acknowledgment**）。
+>
+> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
 **Sampling rate**
@@ -2758,6 +4049,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[BSW Distribution Guide（BSW 分布指南）](general/bsw_distribution_guide/index.md)（AUTOSAR_CP_EXP_BSWDistributionGuide）
 {: .glossary-source}
 
+**SBC**
+> System Basis Chip 系统基础芯片。集成了例如 CAN 和/或 LIN 收发器、看门狗和电源控制。
+>
+> 来源：[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
+{: .glossary-source}
+
 **SBR**
 > 安全带提醒（**Seat Belt Reminder**）
 >
@@ -2770,16 +4067,34 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）
 {: .glossary-source}
 
+**Schedule entry is due**
+> 这意味着 LIN 接口已到达调度表中的新条目，并且将启动一个帧（接收或发送）。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
+{: .glossary-source}
+
 **SchM**
 > Schedule Manager —— 调度管理器。
 >
-> 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）
+> 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
+{: .glossary-source}
+
+**SD**
+> 服务发现（**Service Discovery**）。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
+{: .glossary-source}
+
+**Sd**
+> AUTOSAR中的服务发现模块（**Service Discovery Module in AUTOSAR**）。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
 {: .glossary-source}
 
 **SDU**
 > 服务数据单元（**Service Data Unit**）——**PDU** 的载荷。
 >
-> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR Platform Types（平台类型）](general/platform_types/index.md)（SWS_PlatformTypes）、[Layered Software Architecture（分层软件架构）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[VFB（虚拟功能总线）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR Platform Types（平台类型）](general/platform_types/index.md)（SWS_PlatformTypes）、[Layered Software Architecture（分层软件架构）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[VFB（虚拟功能总线）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
 {: .glossary-source}
 
 **SDU type**
@@ -2792,6 +4107,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 被监督实体（**Supervised Entity**）
 >
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）
+{: .glossary-source}
+
+**SecOC**（**Secure Onboard Communication**）
+> 安全板载通信
+>
+> 来源：[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
 {: .glossary-source}
 
 **Sector**
@@ -2812,6 +4133,24 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
 {: .glossary-source}
 
+**Secured I-PDU**（受保护的 I-PDU）
+> 受保护的 I-PDU 是一个 AUTOSAR I-PDU，它包含可信 I-PDU 的负载并附加了额外的认证信息。
+>
+> 来源：[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
+{: .glossary-source}
+
+**segment**
+> 静态部分或动态部分可以由多于一个片段组成。这些片段称为段（**segment**）。另见第6.2.1节和图7.1。
+>
+> 来源：[AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md)（AUTOSAR_CP_SWS_IPDUMultiplexer）
+{: .glossary-source}
+
+**selector field**
+> 见[2]。
+>
+> 来源：[AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md)（AUTOSAR_CP_SWS_IPDUMultiplexer）
+{: .glossary-source}
+
 **Sender-receiver communication**
 > 发送方-接收方通信涉及原子数据元素组成的信号的发送和接收，这些原子数据元素由一个组件发送给另一个或多个组件。发送方-接收方接口可以包含多个数据元素。发送方-接收方通信是单向的 接收方发送的任何回复都可以视为一个单独的发送方-接收方通信。接收方组件的端口可以读取接口描述定义的数据元素，而提供方组件的端口可以按照接口描述定义写入数据元素。
 >
@@ -2830,10 +4169,34 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）
 {: .glossary-source}
 
+**Server**
+> 承载服务器服务（**ServerServices**）的ECU。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
+{: .glossary-source}
+
+**Server Service**
+> 提供一个服务。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
+{: .glossary-source}
+
 **Service**
 > 服务：按 **TR_Glossary** 文档的定义理解——服务是一种具有已发布的接口和行为规范的操作，涉及功能提供者与潜在客户之间的合同。
 >
-> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）
+> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
+{: .glossary-source}
+
+**Service Instance**
+> 服务（**Service**）的单个实例。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
+{: .glossary-source}
+
+**Service Interface**
+> 服务的形式化规范，包括其方法、事件和字段。
+>
+> 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
 {: .glossary-source}
 
 **Session**
@@ -2848,10 +4211,28 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
 {: .glossary-source}
 
+**Setter**
+> 允许对字段进行写访问的请求/响应调用。
+>
+> 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
+{: .glossary-source}
+
+**SF**
+> 单帧，传输协议术语。
+>
+> 来源：[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）、[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
+{: .glossary-source}
+
+**SF_DL**
+> 单帧数据长度（字节）
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
 **SFR**
 > 特殊功能寄存器（**Special Function Register**），**MCU** 寄存器
 >
-> 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver）
+> 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）
 {: .glossary-source}
 
 **SGW**
@@ -2869,7 +4250,49 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SID**
 > 服务标识符（**Service Identifier**）。
 >
-> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
+{: .glossary-source}
+
+**Signal**
+> 在AUTOSAR COM模块的上下文中，信号（**Signal**）等同于[3]中的消息；另见[1]。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**signal**
+> 见[3]。
+>
+> 来源：[AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md)（AUTOSAR_CP_SWS_IPDUMultiplexer）
+{: .glossary-source}
+
+**Signal group**
+> 在AUTOSAR中使用所谓的复杂数据类型（**complex data types**）。在复杂数据类型内部，有一个或多个数据元素（基本数据类型），就像C结构体一样。这种复杂数据类型的数据一致性必须得到保证。用户（如**RTE**或**SwCluC**）将复杂数据类型分解为单个信号并将其发送给AUTOSAR COM模块。由于这些信号需要被一致地处理，它们被称为信号组（**signal group**）。另见[1]。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**signal group**
+> 见[3]。
+>
+> 来源：[AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md)（AUTOSAR_CP_SWS_IPDUMultiplexer）
+{: .glossary-source}
+
+**Single connection**
+> CAN传输层一次只管理一个传输协议通信会话。
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**Slave-to-slave**
+> 从 LIN 主节点的角度来看，LIN 总线上存在 3 种不同方向的帧：主节点发送的响应、主节点接收的响应和一个从节点发送并由另一个从节点接收的响应。**slave-to-slave** 描述的是最后一个。这在 ISO 17987 规范中没有明确描述，但在 ISO 17987-3 中的图 14 中提到：三个无条件帧传输。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
+{: .glossary-source}
+
+**Slot Delay**
+> 调度表中帧开始之间的时间。单位是特定集群的时基数。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
 {: .glossary-source}
 
 **Slow-Mode**
@@ -2878,10 +4301,40 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver）
 {: .glossary-source}
 
+**SN**
+> 序列号（见ISO 15765-2 [1]）
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**SNI**
+> 源节点标识符（**Source Node Identifier**）
+>
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+{: .glossary-source}
+
+**SoAd**
+> 套接字适配器（**Socket Adaptor**）。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
+{: .glossary-source}
+
 **Software Trigger**
 > 软件触发是一个软件**API**调用，用于启动转换一个**ADC**通道组或一系列连续**ADC**通道组转换的。
 >
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](io/adc_driver/index.md)（SWS_ADCDriver）
+{: .glossary-source}
+
+**SOME/IP**
+> 可扩展的面向服务的基于IP的中间件（**Scalable service-Oriented MiddlwarE over IP**）。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR SomeIpXf（SOME/IP转换器）](communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）、[AUTOSAR SomeIpTp（SOME/IP传输协议）](communication/someiptp/index.md)（AUTOSAR_CP_SWS_SOMEIPTransportProtocol）
+{: .glossary-source}
+
+**SOME/IP-SD**
+> SOME/IP服务发现（**SOME/IP Service Discovery**）。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
 {: .glossary-source}
 
 **SOTA**
@@ -2896,6 +4349,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interfaces of Occupant and Pedestrian Safety Systems Domain（乘员与行人安全系统域应用接口说明）](application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety）
 {: .glossary-source}
 
+**SPAL**
+> 标准外围抽象层（**Standard Peripheral Abstraction Layer**）。
+>
+> 来源：[AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）、[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
+{: .glossary-source}
+
 **SPEM**
 > 软件过程工程元模型（**Software Process Engineering meta-model**）
 >
@@ -2908,10 +4367,40 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](safety/watchdog_driver/index.md)（SWS_WatchdogDriver）
 {: .glossary-source}
 
+**SPI Channel**
+> 一个通道是使用相同标准定义的软件数据交换介质。请参阅SPI驱动程序规范
+>
+> 来源：[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
+{: .glossary-source}
+
+**SPI Job**
+> 一个作业由一个或多个具有相同片选的通道组成。作业被认为是原子的，因此不能被中断。 作业也具有指定的优先级。 有关详细信息，请参阅SPI驱动程序规范。
+>
+> 来源：[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
+{: .glossary-source}
+
+**SPI Sequence**
+> 一个序列是要传输的多个连续作业。 序列取决于静态配置。 有关详细信息，请参阅 SPI 驱动程序规范。
+>
+> 来源：[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
+{: .glossary-source}
+
 **SPN**
 > 可疑参数编号（**Suspect Parameter Number**，SAE J1939）
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**Sporadic frame**
+> 这是附加到偶发时隙（**Sporadic slot**）的一种无条件帧。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
+{: .glossary-source}
+
+**Sporadic slot**
+> 这是偶发帧（**Sporadic frame**）的占位符。将其命名为时隙（**slot**）的原因是它没有 LIN 帧的 ID。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
 {: .glossary-source}
 
 **SPRMIB**
@@ -2935,7 +4424,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **&lt;SrcLo&gt;**
 > 作为 L-SDU 源的下层通信接口模块。SrcLo 始终只有一个。
 >
-> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
+{: .glossary-source}
+
+**&lt;SrcLoTp&gt;**
+> 下层传输协议模块，作为**I-PDU**的来源。**SrcLoTp**始终只有一个。
+>
+> 来源：[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
+{: .glossary-source}
+
+**SRF**
+> 从节点的响应帧（**Slave Response Frame**）。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
 {: .glossary-source}
 
 **SRS（Safety Restraint System）**
@@ -2947,7 +4448,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SRS（Software Requirements Specification）**
 > Software Requirements Specification —— 软件需求规范。
 >
-> 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）
+> 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）、[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
 {: .glossary-source}
 
 **SSCP**
@@ -2960,6 +4461,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 静止管理（**Stand Still Manager/Management**）
 >
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis）
+{: .glossary-source}
+
+**static part**
+> 见[2]。
+>
+> 来源：[AUTOSAR IpduM（I-PDU多路复用器）](communication/ipdum/index.md)（AUTOSAR_CP_SWS_IPDUMultiplexer）
 {: .glossary-source}
 
 **StbM**
@@ -2980,10 +4487,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）
 {: .glossary-source}
 
+**STmin**
+> 发送方在两次CF传输之间需等待的最短时间（见ISO 15765-2 [1]）
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
 **STMS**
 > Timestamp —— 时间戳。
 >
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+{: .glossary-source}
+
+**Stop Offer**
+> 停止提供一个服务实例的消息。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
 {: .glossary-source}
 
 **Sub Address Area**
@@ -3043,7 +4562,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SWC**
 > 软件组件（**SoftWare Component**）
 >
-> 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）
+> 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）
 {: .glossary-source}
 
 **SWCD**
@@ -3123,7 +4642,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **TCP**
 > Transmission Control Protocol —— 传输控制协议。
 >
-> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
 **TCP socket connection**
@@ -3135,7 +4654,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **TCP/IP**
 > 计算机网络中使用的一族通信协议。
 >
-> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+{: .glossary-source}
+
+**TCP/IP Stack**
+> Ethernet communication stack，以太网通信栈。
+>
+> 来源：[AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）
 {: .glossary-source}
 
 **TCS**
@@ -3159,7 +4684,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Tick**
 > 定义定时器分辨率，即定时器一次递增的持续时间。
 >
-> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver）
+> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
 {: .glossary-source}
 
 **Time Base Customer**
@@ -3216,16 +4741,46 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Time Service（时间服务）](system_services/time_service/index.md)（SWS_TimeService）
 {: .glossary-source}
 
+**TLS**
+> 传输层安全（**Transport Layer Security**）。
+>
+> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+{: .glossary-source}
+
+**TM**
+> 传输模式（**Transmission Mode**）。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**TMC**
+> 传输模式条件（**Transmission Mode Condition**），见第6.3.3.2节。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**TMS**
+> 传输模式选择器（**Transmission Mode Selector**），见第6.3.3.2节。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
 **TO**
 > 发送机会（**Transmit Opportunity**）。
 >
 > 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）
 {: .glossary-source}
 
+**Top-level PNC coordinator**
+> 一个ECU，对在其所有已分配通道上被主动协调的那些PNC充当顶层PNC协调器。该ECU启用了PNC网关功能。如果没有网络中的其他ECU请求这些PNC且同步PNC关闭已启用，顶层PNC协调器会为这些PNC触发一次同步PNC关闭。注意：对于不同的PNC，可以有不同的顶层PNC协调器。但对于同一个PNC只支持一个顶层协调器。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
 **TP**
 > 传输协议（**Transport Protocol**）
 >
-> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
 **TP-PDU**
@@ -3246,6 +4801,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
 {: .glossary-source}
 
+**Transaction authentication**（事务认证）
+> 事务认证表示消息认证，额外提供数据的唯一性和时效性（从而防止不可检测的消息重放）。
+>
+> 来源：[AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
+{: .glossary-source}
+
+**TransformationTechnology**
+> **TransformationTechnology** 是 [4] 中定义的一个特定类。该类保存转换器（不仅是 **E2E** 转换器）的通用配置参数。
+>
+> 来源：[E2E Transformer (E2E转换器)](communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）
+{: .glossary-source}
+
 **Triggered Time Base Customer**
 > 由同步时基管理器触发的时基客户；该功能目前仅限于 **OS** ScheduleTable 的同步。
 >
@@ -3264,6 +4831,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）
 {: .glossary-source}
 
+**TX**
+> 发送（**Transmission**）。
+>
+> 来源：[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）
+{: .glossary-source}
+
+**TX_DL**
+> 发送数据链路层数据长度
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
 ## U
 
 **uC**
@@ -3275,7 +4854,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **UDP**
 > User Datagram Protocol —— 用户数据报协议。
 >
-> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
 **UDP socket connection**
@@ -3288,6 +4867,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > User Datagram Protocol / Internet Protocol —— 用户数据报协议/互联网协议。
 >
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）
+{: .glossary-source}
+
+**UdpNm**
+> UDP网络管理（**UDP Network Management**）
+>
+> 来源：[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）
 {: .glossary-source}
 
 **UDS**
@@ -3320,10 +4905,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interfaces of the HMI, Multimedia and Telematics Domain（HMI/多媒体/远程信息处理域应用接口说明）](application_interfaces/hmi/index.md)（AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics）
 {: .glossary-source}
 
+**Unicast event**
+> 由承载**SdServerService**的ECU发送到单播端点的事件。该单播端点由已在Endpoint Option（见「Consumed Eventgroup unicast endpoint」）中引用的、订阅了该SdServerService的特定SdClientService提供。
+>
+> 来源：[AUTOSAR SD（服务发现）](communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
+{: .glossary-source}
+
 **&lt;Up&gt;**
 > 上层通信接口模块。
 >
-> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）
+> 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
+{: .glossary-source}
+
+**Update-bit**
+> 更新位（**Update-bit**）是AUTOSAR COM模块支持的一种机制，信号/信号组的接收者可以借此识别发送者是否在发送之前更新了该信号/信号组中的数据。见第6.9节。
+>
+> 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
 {: .glossary-source}
 
 **Updated Rx Time Tuple**
@@ -3345,6 +4942,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 ## V
+
+**Variant**
+> 由 **TransformationTechnology** 和 **EndToEndTransformationDescription** 的配置定义的转换器变体。基于同一变体的 **E2E** 转换器使用相同的 **E2E** 配置文件（profile）（参见 [4] 中的 **constr_03313**）。
+>
+> 来源：[E2E Transformer (E2E转换器)](communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）
+{: .glossary-source}
 
 **Variation Point**
 > 变体点。设计中在 2 个或更多变体之间给出选择的位置；必须做出选择的时间称为最晚绑定时间。
@@ -3418,6 +5021,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
 
+**VLAN**
+> Virtual Local Area Network，虚拟局域网。
+>
+> 来源：[AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）
+{: .glossary-source}
+
 **VLC**
 > 车辆纵向控制（**Vehicle Longitudinal Control**）
 >
@@ -3477,13 +5086,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **WEth**
 > Wireless Ethernet Driver（**AUTOSAR BSW** 模块）。
 >
-> 来源：[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver）
+> 来源：[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver）、[AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）
 {: .glossary-source}
 
 **WEthTrcv**
 > Wireless Ethernet Transceiver（**AUTOSAR BSW** 模块）。
 >
-> 来源：[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver）
+> 来源：[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver）、[AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）
+{: .glossary-source}
+
+**WFTmax**
+> 接收方允许连续发送的FC.WAIT数量的上限（见ISO 15765-2 [1]）
+>
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
 {: .glossary-source}
 
 **WIR**
@@ -3572,4 +5187,102 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 横摆角速度控制（**Yaw Rate Control**）
 >
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis）
+{: .glossary-source}
+
+## 上
+
+**上层模块(Up)（Upper Layer Modules）**
+> PDU路由器模块的上方模块。该层通常包括**Com**和诊断通信管理器 (**Dcm**)。
+>
+> 来源：[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
+{: .glossary-source}
+
+## 下
+
+**下层模块(Lo)（Lower Layer Modules）**
+> PDU路由器模块的下方模块。该层可能包括**CAN**、**LIN**、**FlexRay**、以太网通信接口模块和相应的**TP**模块。
+>
+> 来源：[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
+{: .glossary-source}
+
+## 中
+
+**中间PNC协调员**（**Intermediate PNC coordinator**）
+> 中间PNC协调器是一个**ECU**，它充当网络中的PNC网关，并在至少一个分配的通道上将至少一个PNC处理为被动协调。如果启用了同步PNC关闭，它会将收到的这些PNC的关闭请求转发到相应的主动协调通道，并相应地启动它们的关闭。
+>
+> 来源：[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）
+{: .glossary-source}
+
+**中间PNC协调器**（**Intermediate PNC coordinator**）
+> 中间PNC协调器是一个**ECU**，它充当网络中的PNC网关，并在至少一个分配的通道上将至少一个PNC处理为被动协调。如果启用了同步PNC关闭，它会将收到的这些PNC的关闭请求转发到相应的主动协调通道，并相应地启动它们的关闭。
+>
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）
+{: .glossary-source}
+
+## 先
+
+**先进先出（FIFO）缓冲**
+> 缓冲区概念，采用先进先出策略。
+>
+> 来源：[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
+{: .glossary-source}
+
+## 即
+
+**即时传输确认**（**Immediate Transmission Confirmation**）
+> 每个NM PDU传输请求都直接被视为已被总线确认，不需要超时处理。该机制可用于那些总线流量经过设计、确保每次传输总能被发送到总线上的总线系统。
+>
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）
+{: .glossary-source}
+
+**即时网关（on-the-fly gatewaying）**
+> 网关的能力。两个TP 模块之间的路由，其中在接收到所有数据之前（达到指定阈值时）开始转发数据。如果在两个接口之间传输大量数据，则希望能够在从源网络接收所有数据之前在目标网络上开始传输。这样可以节省内存和时间。
+>
+> 来源：[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
+{: .glossary-source}
+
+## 多
+
+**多播操作（multicast operation）**
+> 将PDU同时传输到一组接收者，即：1:n路由。
+>
+> 来源：[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
+{: .glossary-source}
+
+## 数
+
+**数据提供（data provision）**
+> 向接口模块提供数据。(a)直接数据提供：需传输的数据直接在传输请求时提供。目标通信接口可能以两种方式运行：直接复制数据或将复制推迟到触发传输。(b)触发传输数据提供：需传输的数据不是在传输请求时提供，而是由通信接口模块通过回调函数获取。
+>
+> 来源：[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
+{: .glossary-source}
+
+## 最
+
+**最后最好（last-is-best——缓冲**
+> 最新值覆盖最后一个值的缓冲策略。
+>
+> 来源：[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
+{: .glossary-source}
+
+## 重
+
+**重复报文请求位指示**（**Repeat Message Request Bit Indication**）
+> **CanNm_RxIndication**在收到的网络管理**PDU**的控制位向量中找到**RptMsgRequest**集。
+>
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）
+{: .glossary-source}
+
+**重复消息请求位指示**（**Repeat Message Request Bit Indication**）
+> **UdpNm_SoAdIfRxIndication**在接收到的**NM**消息的控制位向量中找到重复消息位。
+>
+> 来源：[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）
+{: .glossary-source}
+
+## 顶
+
+**顶级PNC协调员**（**Top-level PNC coordinator**）
+> 顶级PNC协调器是一个**ECU**，它充当网络中的PNC网关，并在所有分配的通道上主动协调处理至少一个PNC。如果启用了同步PNC关闭，如果网络中没有其他ECU请求它们，顶级PNC协调器将为这些PNC触发关闭。
+>
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）
 {: .glossary-source}
