@@ -152,13 +152,13 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (source ch.7.7.1/7.7.2 page-split duplicated the ⌈⌋ requirement blocks of SWS_FrNm_00010/00467 — deduplicated clean versions translated; §10 config flat containers: global 10.3.x + channel 10.4.x rendered as 9.2.2-9.2.11; FrNmVotingCycle Range row truncated at 32 in conversion, restored to 7 literals per SWS_FrNm_00195)
   - [ ] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
   - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] flexray_sm (SWS_FlexRayStateManager · R23-11 markdown · ❌ new article)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-- [ ] Step 6 — TODO.md row + commit/PR
+- [x] flexray_sm (SWS_FlexRayStateManager · R23-11 markdown · ❌ new article)
+  - [x] Step 1 — Source resolution + gap analysis (1787-line R23-11 markdown; new article docs/autosar/communication/flexray_state_manager/)
+  - [x] Step 2 — In-place translation/completion (Type A article 1277 lines; 6 API functions, full transition table T00-T41 incl. T08/T108/T101/T108 duplicated-number rows kept source-faithful, tables 7.1-7.3, 5 config containers / 23 parameters, 15 figures rendered from PDF drawings)
+  - [x] Step 3 — Phase A mechanical checks (strict build 0 WARNING; check_heading_lang OK; check_indexes OK; check_api_sync 6/6 + 2/2 types OK; gen_api_list regenerated; link_candidates applied + idempotent)
+  - [x] Step 4 — Phase B coverage map + fidelity (three source params FrSMCheckWakeupReason/FrSMDurationT2/FrSMMinNumberOfColdstarter had page-split-emptied Description cells — descriptions restored from their PDF table rows elsewhere in the source; Figure 9.2/9.4/9.6/9.8 "continued on next page" split figures rendered as separate images per source)
+  - [ ] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+  - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] flexray_trcv (SWS_FlexRayTransceiverDriver · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
