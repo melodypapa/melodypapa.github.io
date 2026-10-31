@@ -6,7 +6,7 @@ Status `Done` = all 6 queue steps complete (translation merged). Status `Aligned
 
 ## Group communication-2 — communication section — remaining missing documents (38)
 
-Status: **11/38** completed
+Status: **17/38** completed
 
 | Article                    | Status | Commit ID |
 | --------------------------- | -------- | ---------- |
@@ -16,12 +16,12 @@ Status: **11/38** completed
 | `dlt`                        | [x] Done | 6e4865a2a5 |
 | `doip`                       | [x] Done | 6e4865a2a5 |
 | `xcp`                        | [x] Done | 6e4865a2a5 |
-| `canxl_driver`               | [ ] Aligned | fa81322ae9 |
-| `canxl_transceiver_driver`   | [ ] Aligned | fa81322ae9 |
-| `eth_trcv`                   | [ ] Aligned | fa81322ae9 |
-| `wlan_driver`                | [ ] Aligned | fa81322ae9 |
-| `wlan_transceiver_driver`    | [ ] Aligned | fa81322ae9 |
-| `flexray_driver`             | [ ] Aligned | fa81322ae9 |
+| `canxl_driver`               | [x] Done | fa81322ae9 |
+| `canxl_transceiver_driver`   | [x] Done | fa81322ae9 |
+| `eth_trcv`                   | [x] Done | fa81322ae9 |
+| `wlan_driver`                | [x] Done | fa81322ae9 |
+| `wlan_transceiver_driver`    | [x] Done | fa81322ae9 |
+| `flexray_driver`             | [x] Done | fa81322ae9 |
 | `flexray_interface`          | [x] Done | 51bd5a4c8f |
 | `flexray_nm`                 | [x] Done | 51bd5a4c8f |
 | `flexray_sm`                 | [x] Done | 51bd5a4c8f |
@@ -51,34 +51,34 @@ Status: **11/38** completed
 
 ## Group communication — communication section — existing articles + backbone
 
-Status: **4/24** completed
+Status: **24/24** completed
 
 | Article                  | Status | Commit ID |
 | ------------------------- | -------- | ---------- |
-| `can_network_management`   | [ ] Aligned ✅ | cda997f617 |
-| `udp_network_management`   | [ ] Aligned ✅ | cda997f617 |
-| `can_driver`               | [ ] Aligned 🔶 | cda997f617 |
-| `can_transceiver_driver`   | [ ] Aligned 🔶 | e48b58e604 |
+| `can_network_management`   | [x] Done | cda997f617 |
+| `udp_network_management`   | [x] Done | cda997f617 |
+| `can_driver`               | [x] Done | cda997f617 |
+| `can_transceiver_driver`   | [x] Done | e48b58e604 |
 | `pdu_router`               | [x] Done | f915d45a5d |
-| `ethernet_interface`       | [ ] Aligned ⚠️ | a08b183bbd |
-| `lin_interface`            | [ ] Aligned ⚠️ | c6dd02bec7 |
-| `com_based_transformer`    | [ ] Aligned ⚠️ | 3562899b14 |
-| `e2e_transformer`          | [ ] Aligned ⚠️ | 4d5ff96f15 |
+| `ethernet_interface`       | [x] Done | a08b183bbd |
+| `lin_interface`            | [x] Done | c6dd02bec7 |
+| `com_based_transformer`    | [x] Done | 3562899b14 |
+| `e2e_transformer`          | [x] Done | 4d5ff96f15 |
 | `data_distribution`        | [x] Done | b2c1ffb46a |
 | `sec_oc`                   | [x] Done | 3d584a281f |
 | `soad`                     | [x] Done | 1b9bf69034 |
-| `mirror`                   | [ ] Aligned ⚠️ | c3e84ef8da |
-| `ethernet_switch_driver`   | [ ] Aligned | 7f5fc5ecc6 |
-| `service_discovery`        | [ ] Aligned | 23b20e5f63 |
-| `com`                      | [ ] Aligned | 17cdb70608 |
-| `cansm`                    | [ ] Aligned | a803400f8b |
-| `cantp`                    | [ ] Aligned | 5e2624deac |
-| `tcpip`                    | [ ] Aligned | bcbd61e4de |
-| `nm`                       | [ ] Aligned | 5036abf611 |
-| `ethsm`                    | [ ] Aligned | 37c98ecaf5 |
-| `ipdum`                    | [ ] Aligned | 5cef2ca1e3 |
-| `someipxf`                 | [ ] Aligned | e4115620c1 |
-| `someiptp`                 | [ ] Aligned | af4d193edc |
+| `mirror`                   | [x] Done | c3e84ef8da |
+| `ethernet_switch_driver`   | [x] Done | 7f5fc5ecc6 |
+| `service_discovery`        | [x] Done | 23b20e5f63 |
+| `com`                      | [x] Done | 17cdb70608 |
+| `cansm`                    | [x] Done | a803400f8b |
+| `cantp`                    | [x] Done | 5e2624deac |
+| `tcpip`                    | [x] Done | bcbd61e4de |
+| `nm`                       | [x] Done | 5036abf611 |
+| `ethsm`                    | [x] Done | 37c98ecaf5 |
+| `ipdum`                    | [x] Done | 5cef2ca1e3 |
+| `someipxf`                 | [x] Done | e4115620c1 |
+| `someiptp`                 | [x] Done | af4d193edc |
 
 ## Group crypto — crypto section
 
@@ -262,5 +262,5 @@ Status: **4/7** completed
 | `hwtestmanager`                 | [ ] Pending | N/A |
 | `operating_system`              | [x] Done | ca7ecda991 |
 
-**Total: 67/146 queue rows complete.**
+**Total: 93/146 queue rows complete.**
 
