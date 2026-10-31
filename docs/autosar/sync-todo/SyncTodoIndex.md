@@ -55,9 +55,9 @@ Status: **24/24** completed
 
 | Article                  | Status | Commit ID |
 | ------------------------- | -------- | ---------- |
-| `can_network_management`   | [x] Done | cda997f617 |
-| `udp_network_management`   | [x] Done | cda997f617 |
-| `can_driver`               | [x] Done | cda997f617 |
+| `can_network_management`   | [x] Done | 3a7fa89890 |
+| `udp_network_management`   | [x] Done | 3a7fa89890 |
+| `can_driver`               | [x] Done | 3a7fa89890 |
 | `can_transceiver_driver`   | [x] Done | e48b58e604 |
 | `pdu_router`               | [x] Done | f915d45a5d |
 | `ethernet_interface`       | [x] Done | a08b183bbd |
