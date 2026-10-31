@@ -58,12 +58,12 @@ Status: **24/24** completed
 | `can_network_management`   | [x] Done | 3a7fa89890 |
 | `udp_network_management`   | [x] Done | 3a7fa89890 |
 | `can_driver`               | [x] Done | 3a7fa89890 |
-| `can_transceiver_driver`   | [x] Done | e48b58e604 |
-| `pdu_router`               | [x] Done | f915d45a5d |
-| `ethernet_interface`       | [x] Done | a08b183bbd |
-| `lin_interface`            | [x] Done | c6dd02bec7 |
-| `com_based_transformer`    | [x] Done | 3562899b14 |
-| `e2e_transformer`          | [x] Done | 4d5ff96f15 |
+| `can_transceiver_driver`   | [x] Done | 79ff9b7ef5 |
+| `pdu_router`               | [x] Done | 79ff9b7ef5 |
+| `ethernet_interface`       | [x] Done | 79ff9b7ef5 |
+| `lin_interface`            | [x] Done | 79ff9b7ef5 |
+| `com_based_transformer`    | [x] Done | 79ff9b7ef5 |
+| `e2e_transformer`          | [x] Done | 79ff9b7ef5 |
 | `data_distribution`        | [x] Done | b2c1ffb46a |
 | `sec_oc`                   | [x] Done | 3d584a281f |
 | `soad`                     | [x] Done | 1b9bf69034 |
@@ -143,14 +143,14 @@ Status: **4/5** completed
 
 ## Group globaltime — global time cluster (new section)
 
-Status: **3/4** completed
+Status: **4/4** completed
 
 | Article    | Status | Commit ID |
 | ----------- | -------- | ---------- |
 | `stbm`       | [x] Done | 53cd591142 |
 | `can_tsyn`   | [x] Done | 364c4fd73b |
 | `eth_tsyn`   | [x] Done | 8f01771012 |
-| `fr_tsyn`    | [ ] Pending | N/A |
+| `fr_tsyn`    | [x] Done | 873a5ec018 |
 
 ## Group io — IO section wrap-up
 
@@ -262,5 +262,5 @@ Status: **4/7** completed
 | `hwtestmanager`                 | [ ] Pending | N/A |
 | `operating_system`              | [x] Done | ca7ecda991 |
 
-**Total: 93/146 queue rows complete.**
+**Total: 94/146 queue rows complete.**
 

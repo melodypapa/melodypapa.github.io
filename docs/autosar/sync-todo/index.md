@@ -21,7 +21,7 @@
 | 7 | [Group-memory.md](Group-memory.md) | 12 | MemIf/Fee gaps + stubs + 4 alignments + 6 missing (Ea/Eep…) |
 | 8 | [Group-communication.md](Group-communication.md) | 27 | 18 existing articles completed/aligned + 9 backbone documents (Com/CanSM/CanTp/TcpIp/Nm/EthSM/IpduM/SomeIp×2) |
 | 9 | [Group-mcal.md](Group-mcal.md) | 3 | Mcu, Gpt, CoreTest |
-| 10 | [Group-globaltime.md](Group-globaltime.md) | 4 | StbM + CanTSyn/EthTSyn/FrTSyn |
+| 10 | [Group-globaltime.md](Group-globaltime.md) | 4 | **batch complete 2026-10-31 (4/4)** — StbM + CanTSyn/EthTSyn/FrTSyn |
 | 11 | [Group-libraries.md](Group-libraries.md) | 9 | Crc, E2E library and 7 more |
 | 12 | [Group-safety.md](Group-safety.md) | 3 | WdgM/WdgIf/Wdg |
 | 13 | [Group-security.md](Group-security.md) | 2 | Firewall, IdsM |

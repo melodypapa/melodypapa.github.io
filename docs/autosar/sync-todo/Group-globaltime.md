@@ -47,7 +47,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (confirmed 2026-10-30, batch gate; run stopped after row 3 per user — fr_tsyn row stays open for the next run)
   - [x] Step 6 — TODO.md row + commit/PR (commit 8f01771, batch confirmed 2026-10-30)
-- [ ] fr_tsyn (SWS_TimeSyncOverFlexRay · R23-11 markdown · ❌ new article, short name FrTSyn)
+- [x] fr_tsyn (SWS_TimeSyncOverFlexRay · R23-11 markdown · ❌ new article, short name FrTSyn)
   - Note: 2026-10-30 — translate every `###`+ heading title, not just the level-2 chapters (rows 1–3 shipped 115 English headings; fixed in the same PR). Run `python .agents/skills/autosar-translate/scripts/check_heading_lang.py docs/autosar/globaltime/fr_tsyn/index.md` in Step 3 — exit 0 required. Identifier-titled headings (FrTSyn_*, FrTSynGlobalTimeDomain, port/interface names) stay English; every prose title translates
   - Note: Source confirmed: R23-11 markdown `AUTOSAR_CP_SWS_TimeSyncOverFlexRay.md` (3,167 lines); the new article path does not exist.
   - Note: Mapping: source ch.1–5 → article §§1–5; ch.6 Requirements Tracing and appendix A are deliberately omitted per mandate; ch.7→§6, ch.8→§7, ch.9→§8, ch.10→§9, appendix B→`## B. AUTOSAR 可追溯项变更历史`.
@@ -79,7 +79,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (confirmed 2026-10-31; coverage, source corrections, and TODO status row approved)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + local commit (873a5ec; no push/PR per user request)
 
 ## Not queued (deliberately skipped)
 - (none)
