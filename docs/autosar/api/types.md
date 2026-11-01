@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **508** 个条目。
+共 **509** 个条目。
 
 ## A
 
@@ -773,6 +773,9 @@ title: "AUTOSAR API 类型清单"
 
 **[FrSM_ConfigType](../communication/flexray_state_manager/index.md#721-frsm_configtype)**
 > 类型 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
+
+**[FrTp_ConfigType](../communication/flexray_iso_transport_layer/index.md#721-frtp_configtype)**
+> 类型 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
 
 **[FrTrcv_ConfigType](../communication/flexray_transceiver_driver/index.md#721-frtrcv_configtype)**
 > 类型 · [AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11

@@ -174,6 +174,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interface of AD/ADAS Vehicle Motion Control（AD/ADAS 车辆运动控制应用接口说明）](application_interfaces/adas_vmc/index.md)（AUTOSAR_CP_EXP_AIADASAndVMC）
 {: .glossary-source}
 
+**AF**
+> 确认帧（Acknowledge Frame，请参阅 ISO 10681-2）。
+>
+> 来源：[AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](communication/flexray_iso_transport_layer/index.md)（SWS_FlexRayISOTransportLayer）
+{: .glossary-source}
+
 **Aging**
 > 在经过确定的运行周期数之后，从事件内存中遗忘/删除不再失败的事件/**DTC**。
 >
@@ -2015,6 +2021,24 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver）
 {: .glossary-source}
 
+**Fr L-SDU**
+> FlexRay 接口模块的 SDU。从 FlexRay 接口模块的角度看，它与 Fr N-PDU 类似（**The SDU of the FlexRay Interface module**）。
+>
+> 来源：[AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](communication/flexray_iso_transport_layer/index.md)（SWS_FlexRayISOTransportLayer）
+{: .glossary-source}
+
+**Fr N-PDU**
+> FlexRay 传输层的 PDU。它包含地址信息、协议控制信息与数据（完整的 Fr N-SDU 或其一部分）。
+>
+> 来源：[AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](communication/flexray_iso_transport_layer/index.md)（SWS_FlexRayISOTransportLayer）
+{: .glossary-source}
+
+**Fr N-SDU**
+> FlexRay 传输层的 SDU。在 AUTOSAR 架构中，它是来自 PDU 路由器的一组数据。
+>
+> 来源：[AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](communication/flexray_iso_transport_layer/index.md)（SWS_FlexRayISOTransportLayer）
+{: .glossary-source}
+
 **Freeze frame**
 > 冻结帧被定义为数据的记录（**DID**/**PID**）。冻结帧与 ISO 14229-1 中的 SnapShotRecords 相同。
 >
@@ -2036,13 +2060,49 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **FrIf**
 > FlexRay Interface —— FlexRay 接口。
 >
-> 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）、[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
+> 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）、[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](communication/flexray_iso_transport_layer/index.md)（SWS_FlexRayISOTransportLayer）
 {: .glossary-source}
 
 **FrTp**
 > AUTOSAR 模块：FlexRay 传输协议（**FlexRay Transport Protocol**）。
 >
-> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver）
+> 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)（SWS_FlexRayDriver）、[AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](communication/flexray_iso_transport_layer/index.md)（SWS_FlexRayISOTransportLayer）
+{: .glossary-source}
+
+**FrTp_Ar**
+> 接收方的定时器参数：接收方一侧 FlexRay 帧（任意 N_PDU）的传输时间（请参阅 ISO 10681-2）。
+>
+> 来源：[AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](communication/flexray_iso_transport_layer/index.md)（SWS_FlexRayISOTransportLayer）
+{: .glossary-source}
+
+**FrTp_As**
+> 发送方的定时器参数：发送方一侧 FlexRay 帧（任意 N_PDU）的传输时间（请参阅 ISO 10681-2）。
+>
+> 来源：[AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](communication/flexray_iso_transport_layer/index.md)（SWS_FlexRayISOTransportLayer）
+{: .glossary-source}
+
+**FrTp_Br**
+> 接收方的定时器参数：直到发送下一个流控制 N_PDU 的时间（请参阅 ISO 10681-2）。
+>
+> 来源：[AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](communication/flexray_iso_transport_layer/index.md)（SWS_FlexRayISOTransportLayer）
+{: .glossary-source}
+
+**FrTp_BS**
+> 发送方的定时器参数：直到收到下一个流控制 N_PDU 的时间（请参阅 ISO 10681-2）。
+>
+> 来源：[AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](communication/flexray_iso_transport_layer/index.md)（SWS_FlexRayISOTransportLayer）
+{: .glossary-source}
+
+**FrTp_Cr**
+> 接收方的定时器参数：直到收到下一个连续帧 N_PDU 的时间（请参阅 ISO 10681-2）。
+>
+> 来源：[AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](communication/flexray_iso_transport_layer/index.md)（SWS_FlexRayISOTransportLayer）
+{: .glossary-source}
+
+**FrTp_Cs**
+> 发送方的定时器参数：直到发送下一个连续帧 N_PDU/末帧 N_PDU 的时间（请参阅 ISO 10681-2）。
+>
+> 来源：[AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](communication/flexray_iso_transport_layer/index.md)（SWS_FlexRayISOTransportLayer）
 {: .glossary-source}
 
 **FrTrcv**
@@ -4604,7 +4664,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SN**
 > 序列号（见ISO 15765-2 [1]）
 >
-> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](communication/flexray_iso_transport_layer/index.md)（SWS_FlexRayISOTransportLayer）
 {: .glossary-source}
 
 **SNI**
@@ -4779,6 +4839,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 标准（**Standard**）
 >
 > 来源：[AUTOSAR Standard Types（标准类型）](general/standard_types/index.md)（SWS_StandardTypes）
+{: .glossary-source}
+
+**STF**
+> 起始帧（Start Frame，请参阅 ISO 10681-2）。
+>
+> 来源：[AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](communication/flexray_iso_transport_layer/index.md)（SWS_FlexRayISOTransportLayer）
 {: .glossary-source}
 
 **STIM**
