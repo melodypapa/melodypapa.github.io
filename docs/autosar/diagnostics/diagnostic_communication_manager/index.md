@@ -16706,20 +16706,20 @@ n-2 → n) `[Dcm_TpTxConfirmation](#745-dcm_tptxconfirmation)`：所有数据发
 | [SWS_Dcm_00993] | Definition of datatype Dcm_IdContextType |
 | [SWS_Dcm_00994] | Definition of datatype Dcm_MsgContextType |
 | [SWS_Dcm_01012] | Definition of ImplementationDataType Dcm_RangeArray_{Range}Type |
-| [SWS_Dcm_01013] | Definition of ImplementationDataType Dcm_InfoTypeServicesArray_{VehInfo Data}Type |
-| [SWS_Dcm_01014] | Definition of ImplementationDataType Dcm_RequestControlServicesIn Array_{Tid}Type |
-| [SWS_Dcm_01015] | Definition of ImplementationDataType Dcm_RequestControlServicesOut Array_{Tid}Type |
+| [SWS_Dcm_01013] | Definition of ImplementationDataType Dcm_InfoTypeServicesArray_{VehInfoData}Type |
+| [SWS_Dcm_01014] | Definition of ImplementationDataType Dcm_RequestControlServicesInArray_{Tid}Type |
+| [SWS_Dcm_01015] | Definition of ImplementationDataType Dcm_RequestControlServicesOutArray_{Tid}Type |
 | [SWS_Dcm_01017] | Definition of ImplementationDataType Dcm_ScalingInfoArray_{Data}Type |
-| [SWS_Dcm_01018] | Definition of ImplementationDataType Dcm_RequestData Out_{Routine}_{Signal}PrimitivType |
-| [SWS_Dcm_01019] | Definition of ImplementationDataType Dcm_RequestFlexibleOutArray Data_{Routine}_{Signal}Type |
-| [SWS_Dcm_01020] | Definition of ImplementationDataType Dcm_StartData In_{Routine}_{Signal}PrimitivType |
-| [SWS_Dcm_01021] | Definition of ImplementationDataType Dcm_StartData Out_{Routine}_{Signal}PrimitivType |
-| [SWS_Dcm_01022] | Definition of ImplementationDataType Dcm_StartFlexibleInArray Data_{Routine}_{Signal}Type |
-| [SWS_Dcm_01023] | Definition of ImplementationDataType Dcm_StartFlexibleOutArray Data_{Routine}_{Signal}Type |
-| [SWS_Dcm_01024] | Definition of ImplementationDataType Dcm_StopData In_{Routine}_{Signal}PrimitivType |
-| [SWS_Dcm_01025] | Definition of ImplementationDataType Dcm_StopData Out_{Routine}_{Signal}PrimitivType |
-| [SWS_Dcm_01026] | Definition of ImplementationDataType Dcm_StopFlexibleInArray Data_{Routine}_{Signal}Type |
-| [SWS_Dcm_01027] | Definition of ImplementationDataType Dcm_StopFlexibleOutArray Data_{Routine}_{Signal}Type |
+| [SWS_Dcm_01018] | Definition of ImplementationDataType Dcm_RequestDataOut_{Routine}_{Signal}PrimitivType |
+| [SWS_Dcm_01019] | Definition of ImplementationDataType Dcm_RequestFlexibleOutArrayData_{Routine}_{Signal}Type |
+| [SWS_Dcm_01020] | Definition of ImplementationDataType Dcm_StartDataIn_{Routine}_{Signal}PrimitivType |
+| [SWS_Dcm_01021] | Definition of ImplementationDataType Dcm_StartDataOut_{Routine}_{Signal}PrimitivType |
+| [SWS_Dcm_01022] | Definition of ImplementationDataType Dcm_StartFlexibleInArrayData_{Routine}_{Signal}Type |
+| [SWS_Dcm_01023] | Definition of ImplementationDataType Dcm_StartFlexibleOutArrayData_{Routine}_{Signal}Type |
+| [SWS_Dcm_01024] | Definition of ImplementationDataType Dcm_StopDataIn_{Routine}_{Signal}PrimitivType |
+| [SWS_Dcm_01025] | Definition of ImplementationDataType Dcm_StopDataOut_{Routine}_{Signal}PrimitivType |
+| [SWS_Dcm_01026] | Definition of ImplementationDataType Dcm_StopFlexibleInArrayData_{Routine}_{Signal}Type |
+| [SWS_Dcm_01027] | Definition of ImplementationDataType Dcm_StopFlexibleOutArrayData_{Routine}_{Signal}Type |
 | [SWS_Dcm_01028] | Definition of ImplementationDataType Dcm_KeyArray_{SecurityLevel}Type |
 | [SWS_Dcm_01029] | Definition of ImplementationDataType Dcm_SeedArray_{SecurityLevel}Type |
 | [SWS_Dcm_01030] | Definition of Port DCMServices provided by module Dcm |
@@ -16745,7 +16745,7 @@ n-2 → n) `[Dcm_TpTxConfirmation](#745-dcm_tptxconfirmation)`：所有数据发
 | [SWS_Dcm_01151] | Definition of configurable interface Xxx_GetSeed |
 | [SWS_Dcm_01152] | Definition of configurable interface Xxx_GetSecurityAttemptCounter |
 | [SWS_Dcm_01153] | Definition of configurable interface Xxx_SetSecurityAttemptCounter |
-| [SWS_Dcm_01159] | Definition of ImplementationDataType Dcm_SecurityAccessDataRecord Array_{SecurityLevel}Type |
+| [SWS_Dcm_01159] | Definition of ImplementationDataType Dcm_SecurityAccessDataRecordArray_{SecurityLevel}Type |
 | [SWS_Dcm_01165] | Definition of ImplementationDataType Dcm_RequestDataArrayType |
 | [SWS_Dcm_01173] | - |
 | [SWS_Dcm_01203] | Definition of configurable interface Xxx_Start |
@@ -16756,7 +16756,7 @@ n-2 → n) `[Dcm_TpTxConfirmation](#745-dcm_tptxconfirmation)`：所有数据发
 | [SWS_Dcm_01285] | Definition of configurable interface Xxx_ReturnControlToECU |
 | [SWS_Dcm_01286] | Definition of configurable interface Xxx_ResetToDefault |
 | [SWS_Dcm_01290] | Definition of configurable interface Xxx_FreezeCurrentState |
-| [SWS_Dcm_01305] | Definition of ImplementationDataType Dcm_InputOutputControlParameter Type |
+| [SWS_Dcm_01305] | Definition of ImplementationDataType Dcm_InputOutputControlParameterType |
 | [SWS_Dcm_01306] | Definition of ImplementationDataType Dcm_IOOperationRequest_{DID}Type |
 | [SWS_Dcm_01307] | Definition of ImplementationDataType Dcm_IOOperationResponseType |
 | [SWS_Dcm_01308] | Definition of SenderReceiverInterface IOControlRequest_{DID} |
@@ -16802,39 +16802,39 @@ n-2 → n) `[Dcm_TpTxConfirmation](#745-dcm_tptxconfirmation)`：所有数据发
 | [SWS_Dcm_91023] | Definition of ModeDeclarationGroup DcmModeRapidPowerShutDown |
 | [SWS_Dcm_91024] | Definition of ModeSwitchInterface Dcm_ModeRapidPowerShutDownMode SwitchInterface |
 | [SWS_Dcm_91025] | Definition of ModeDeclarationGroup DcmCommunicationControl |
-| [SWS_Dcm_91026] | Definition of ModeSwitchInterface CommunicationControlModeSwitch Interface_{ComMChannelName} |
+| [SWS_Dcm_91026] | Definition of ModeSwitchInterface CommunicationControlModeSwitchInterface_{ComMChannelName} |
 | [SWS_Dcm_91027] | Definition of ModeDeclarationGroup DcmControlDTCSetting |
-| [SWS_Dcm_91028] | Definition of ModeSwitchInterface Dcm_ControlDTCSettingModeSwitch Interface |
+| [SWS_Dcm_91028] | Definition of ModeSwitchInterface Dcm_ControlDTCSettingModeSwitchInterface |
 | [SWS_Dcm_91031] | Definition of ModeDeclarationGroup DcmSecurityAccess |
-| [SWS_Dcm_91032] | Definition of ModeSwitchInterface Dcm_SecurityAccessModeSwitch Interface |
+| [SWS_Dcm_91032] | Definition of ModeSwitchInterface Dcm_SecurityAccessModeSwitchInterface |
 | [SWS_Dcm_91033] | Definition of Port DiagnosticSessionControlModeSwitchInterface provided by module Dcm |
 | [SWS_Dcm_91034] | Definition of Port EcuResetModeSwitchInterface provided by module Dcm |
 | [SWS_Dcm_91035] | Definition of Port ModeRapidPowerShutDownModeSwitchInterface provided by module Dcm |
-| [SWS_Dcm_91036] | Definition of Port CommunicationControlModeSwitchInterface_{Com MChannelName} provided by module Dcm |
+| [SWS_Dcm_91036] | Definition of Port CommunicationControlModeSwitchInterface_{ComMChannelName} provided by module Dcm |
 | [SWS_Dcm_91037] | Definition of Port ControlDTCSettingModeSwitchInterface provided by module Dcm |
 | [SWS_Dcm_91039] | Definition of Port SecurityAccessModeSwitchInterface provided by module Dcm |
-| [SWS_Dcm_91040] | Definition of ImplementationDataType Dcm_RequestData Out_{Routine}_{Signal}Type |
-| [SWS_Dcm_91041] | Definition of ImplementationDataType Dcm_RequestData Out_{Routine}_{Signal}ArrayType |
-| [SWS_Dcm_91042] | Definition of ImplementationDataType Dcm_StartData In_{Routine}_{Signal}Type |
-| [SWS_Dcm_91043] | Definition of ImplementationDataType Dcm_StartData In_{Routine}_{Signal}ArrayType |
-| [SWS_Dcm_91044] | Definition of ImplementationDataType Dcm_StartData Out_{Routine}_{Signal}Type |
-| [SWS_Dcm_91045] | Definition of ImplementationDataType Dcm_StartData Out_{Routine}_{Signal}ArrayType |
-| [SWS_Dcm_91046] | Definition of ImplementationDataType Dcm_StopData In_{Routine}_{Signal}Type |
-| [SWS_Dcm_91047] | Definition of ImplementationDataType Dcm_StopData In_{Routine}_{Signal}ArrayType |
-| [SWS_Dcm_91048] | Definition of ImplementationDataType Dcm_StopData Out_{Routine}_{Signal}Type |
-| [SWS_Dcm_91049] | Definition of ImplementationDataType Dcm_StopData Out_{Routine}_{Signal}ArrayType |
+| [SWS_Dcm_91040] | Definition of ImplementationDataType Dcm_RequestDataOut_{Routine}_{Signal}Type |
+| [SWS_Dcm_91041] | Definition of ImplementationDataType Dcm_RequestDataOut_{Routine}_{Signal}ArrayType |
+| [SWS_Dcm_91042] | Definition of ImplementationDataType Dcm_StartDataIn_{Routine}_{Signal}Type |
+| [SWS_Dcm_91043] | Definition of ImplementationDataType Dcm_StartDataIn_{Routine}_{Signal}ArrayType |
+| [SWS_Dcm_91044] | Definition of ImplementationDataType Dcm_StartDataOut_{Routine}_{Signal}Type |
+| [SWS_Dcm_91045] | Definition of ImplementationDataType Dcm_StartDataOut_{Routine}_{Signal}ArrayType |
+| [SWS_Dcm_91046] | Definition of ImplementationDataType Dcm_StopDataIn_{Routine}_{Signal}Type |
+| [SWS_Dcm_91047] | Definition of ImplementationDataType Dcm_StopDataIn_{Routine}_{Signal}ArrayType |
+| [SWS_Dcm_91048] | Definition of ImplementationDataType Dcm_StopDataOut_{Routine}_{Signal}Type |
+| [SWS_Dcm_91049] | Definition of ImplementationDataType Dcm_StopDataOut_{Routine}_{Signal}ArrayType |
 | [SWS_Dcm_91050] | Definition of ImplementationDataType Dcm_ControlMask_{Data}ArrayType |
 | [SWS_Dcm_91051] | Definition of ImplementationDataType Dcm_DataElement_{Data}Type |
-| [SWS_Dcm_91052] | Definition of ImplementationDataType Dcm_RequestData In_{Routine}_{Signal}Type |
-| [SWS_Dcm_91053] | Definition of ImplementationDataType Dcm_RequestFlexibleInArray Data_{Routine}_{Signal}Type |
-| [SWS_Dcm_91054] | Definition of ImplementationDataType Dcm_RequestData In_{Routine}_{Signal}PrimitiveType |
-| [SWS_Dcm_91055] | Definition of ImplementationDataType Dcm_RequestData In_{Routine}_{Signal}ArrayType |
+| [SWS_Dcm_91052] | Definition of ImplementationDataType Dcm_RequestDataIn_{Routine}_{Signal}Type |
+| [SWS_Dcm_91053] | Definition of ImplementationDataType Dcm_RequestFlexibleInArrayData_{Routine}_{Signal}Type |
+| [SWS_Dcm_91054] | Definition of ImplementationDataType Dcm_RequestDataIn_{Routine}_{Signal}PrimitiveType |
+| [SWS_Dcm_91055] | Definition of ImplementationDataType Dcm_RequestDataIn_{Routine}_{Signal}ArrayType |
 | [SWS_Dcm_91057] | Definition of SenderReceiverInterface DataServices_{DID} |
 | [SWS_Dcm_91058] | Definition of Port DataServices_{DID} provided by module Dcm |
 | [SWS_Dcm_91059] | Definition of Port DataServices_{DID} required by module Dcm |
 | [SWS_Dcm_91060] | Definition of Port DataServices_{DID} provided/required by module Dcm |
 | [SWS_Dcm_91061] | Definition of SenderReceiverInterface DataServices_{DID} |
-| [SWS_Dcm_91062] | Definition of ImplementationDataType Dcm_DataElement_{Data}_Primitive Type |
+| [SWS_Dcm_91062] | Definition of ImplementationDataType Dcm_DataElement_{Data}_PrimitiveType |
 | [SWS_Dcm_91063] | Definition of ImplementationDataType Dcm_DataElement_{Data}_ArrayType |
 | [SWS_Dcm_91064] | Definition of ImplementationDataType Dcm_ResponseDataArrayType |
 | [SWS_Dcm_91065] | Definition of ClientServerInterface UploadDownloadServices |
@@ -16846,7 +16846,7 @@ n-2 → n) `[Dcm_TpTxConfirmation](#745-dcm_tptxconfirmation)`：所有数据发
 | [SWS_Dcm_91071] | Definition of configurable interface Dcm_ProcessTransferDataWrite |
 | [SWS_Dcm_91072] | Definition of ClientServerInterface Authentication |
 | [SWS_Dcm_91073] | Definition of Port Authentication_{Connection} required by module Dcm |
-| [SWS_Dcm_91074] | Definition of ModeSwitchInterface Dcm_AuthenticationStateModeSwitch Interface_{Connection} |
+| [SWS_Dcm_91074] | Definition of ModeSwitchInterface Dcm_AuthenticationStateModeSwitchInterface_{Connection} |
 | [SWS_Dcm_91076] | Definition of configurable interface Dcm_CsmAsyncJobFinished |
 | [SWS_Dcm_91077] | Definition of configurable interface Dcm_KeyMAsyncCertificateVerify Finished |
 | [SWS_Dcm_91078] | Definition of configurable interface Dcm_ProcessRequestAddFile |
@@ -16858,7 +16858,7 @@ n-2 → n) `[Dcm_TpTxConfirmation](#745-dcm_tptxconfirmation)`：所有数据发
 | [SWS_Dcm_91084] | Definition of Port UploadDownloadServices required by module Dcm |
 | [SWS_Dcm_91085] | Definition of configurable interface Dcm_ReadFileOrDir |
 | [SWS_Dcm_91087] | Definition of ImplementationDataType Dcm_Cemr_{DID}Type |
-| [SWS_Dcm_91089] | Definition of ImplementationDataType Dcm_ControlMask_{Data}_Primitive Type |
+| [SWS_Dcm_91089] | Definition of ImplementationDataType Dcm_ControlMask_{Data}_PrimitiveType |
 | [SWS_Dcm_91090] | Definition of configurable interface Xxx_ReadData |
 | [SWS_Dcm_91091] | Definition of configurable interface Xxx_ReadData |
 | [SWS_Dcm_91092] | Definition of configurable interface Xxx_WriteData |
@@ -16877,13 +16877,13 @@ n-2 → n) `[Dcm_TpTxConfirmation](#745-dcm_tptxconfirmation)`：所有数据发
 | [SWS_Dcm_91105] | Definition of configurable interface Xxx_Start |
 | [SWS_Dcm_91106] | Definition of configurable interface Xxx_Stop |
 | [SWS_Dcm_91107] | Definition of configurable interface Xxx_RequestResults |
-| [SWS_Dcm_91118] | Definition of ImplementationDataType Dcm_DataElement_{Data}_Structured Type |
-| [SWS_Dcm_91119] | Definition of ImplementationDataType Dcm_RequestData Out_{Routine}_{Signal}StructuredType |
-| [SWS_Dcm_91120] | Definition of ImplementationDataType Dcm_RequestData In_{Routine}_{Signal}StructuredType |
-| [SWS_Dcm_91121] | Definition of ImplementationDataType Dcm_StartData In_{Routine}_{Signal}StructuredType |
-| [SWS_Dcm_91122] | Definition of ImplementationDataType Dcm_StartData Out_{Routine}_{Signal}StructuredType |
-| [SWS_Dcm_91123] | Definition of ImplementationDataType Dcm_StopData In_{Routine}_{Signal}StructuredType |
-| [SWS_Dcm_91124] | Definition of ImplementationDataType Dcm_StopData Out_{Routine}_{Signal}StructuredType |
+| [SWS_Dcm_91118] | Definition of ImplementationDataType Dcm_DataElement_{Data}_StructuredType |
+| [SWS_Dcm_91119] | Definition of ImplementationDataType Dcm_RequestDataOut_{Routine}_{Signal}StructuredType |
+| [SWS_Dcm_91120] | Definition of ImplementationDataType Dcm_RequestDataIn_{Routine}_{Signal}StructuredType |
+| [SWS_Dcm_91121] | Definition of ImplementationDataType Dcm_StartDataIn_{Routine}_{Signal}StructuredType |
+| [SWS_Dcm_91122] | Definition of ImplementationDataType Dcm_StartDataOut_{Routine}_{Signal}StructuredType |
+| [SWS_Dcm_91123] | Definition of ImplementationDataType Dcm_StopDataIn_{Routine}_{Signal}StructuredType |
+| [SWS_Dcm_91124] | Definition of ImplementationDataType Dcm_StopDataOut_{Routine}_{Signal}StructuredType |
 
 #### 10.1.3. R23-11 中删除的规范条目
 

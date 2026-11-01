@@ -42,6 +42,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](io/iohwab/index.md)（SWS_IOHardwareAbstraction）
 {: .glossary-source}
 
+**ACK**
+> 控制字节置 0、肯定确认的 J1939 确认 PG（**ACKM**）
+>
+> 来源：[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**ACKM**
+> J1939 确认 PG（**J1939 Acknowledgement PG**，PGN = 0x0E800）
+>
+> 来源：[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
+{: .glossary-source}
+
 **Acquisition Time**
 > 采集时间 = 采样时间（**Sample Time**）+ 转换时间（**Conversion Time**）
 >
@@ -372,6 +384,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 后台测试由 **SW** 调度器/**RTOS** 周期性调用。
 >
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）
+{: .glossary-source}
+
+**BAM**
+> 广播公告消息（**Broadcast Announce Message**），SAE J1939 传输层的广播变体
+>
+> 来源：[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **Bank**
@@ -724,16 +742,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）、[AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
 {: .glossary-source}
 
-**Channel**
+**channel**
+> NM节点/ECU所连接到的逻辑总线。
+>
+> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**Channel（Crypto Driver Object Path）**
 > 通道：从加密服务管理器队列经由加密接口到特定加密驱动程序对象的路径。
 >
 > 来源：[AUTOSAR Crypto Driver（加密驱动程序）](crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
-**channel**
-> NM节点/ECU所连接到的逻辑总线。
+**Channel（Data Transfer Link）**
+> 可以进行数据传输的链路；存在多个 Channel 时，通常会为 Channel 分配某种 ID（**A link at which a data transfer can take place**）
 >
-> 来源：[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **Checkpoint**
@@ -1050,6 +1074,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## D
 
+**DA**
+> 目标地址（**Destination Address**），SAE J1939 消息 29 位标识符的组成部分
+>
+> 来源：[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
+{: .glossary-source}
+
 **DAD**
 > 重复地址检测（**Duplicate Address Detection**）。
 >
@@ -1278,10 +1308,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
 {: .glossary-source}
 
-**DM**
+**DM（Deadline Monitoring）**
 > 截止期监控（**Deadline Monitoring**），详情见第6.3.6节。
 >
 > 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**DM（Diagnostic Message）**
+> SAE J1939 诊断消息（**SAE J1939 Diagnostic Message**），定义于 SAE J1939-73，多数由灯状态（Lamp Status）与可变数量的 DTC 组成
+>
+> 来源：[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **DoS**
@@ -1290,7 +1326,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）
 {: .glossary-source}
 
-**DP**
+**DP（Data Page）**
+> 数据页（**Data Page**），18 位 PGN 的最高有效位（MSB）
+>
+> 来源：[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**DP（DCC Profile）**
 > DCC 配置（**DCC Profile**）。
 >
 > 来源：[AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)（SWS_WirelessEthernetTransceiverDriver）
@@ -1332,12 +1374,6 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
 {: .glossary-source}
 
-**DTC**
-> 拖滞力矩调节（**Regulation of the Drag Torque**）
->
-> 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis）
-{: .glossary-source}
-
 **DTC group**
 > 唯一标识一组 **DTC**。一个 **DTC** 组被映射到有效 **DTC** 的范围内。通过提供一个 **DTC** 组，表示对该组中的所有 **DTC** 请求某一特定操作。**DTC** 组的定义由 ISO 14229-1 规定，并为 **OEM**/供应商特定。
 >
@@ -1348,6 +1384,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 所有已配置 **DTC** 的分组（表示为 0xFFFFFF）。
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**DTC（Diagnostic Trouble Code）**
+> 诊断故障码（**Diagnostic Trouble Code**），在诊断消息中传输，包含问题来源（SPN）、问题种类（FMI）与出现计数器（OC）
+>
+> 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（SWS_DiagnosticCommunicationManager）、[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**DTC（Regulation of the Drag Torque）**
+> 拖滞力矩调节（**Regulation of the Drag Torque**）
+>
+> 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis）
 {: .glossary-source}
 
 **DTO**
@@ -1476,6 +1524,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > **ECU** 状态管理器（**ECU State Manager**）
 >
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
+{: .glossary-source}
+
+**EDP**
+> 扩展数据页（**Extended Data Page**），18 位 PGN 中最高有效位之后的第二位
+>
+> 来源：[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **EID**
@@ -1838,7 +1892,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **FMI**
 > 失效模式指示符（**Failure Mode Indicator**，SAE J1939）
 >
-> 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+> 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）、[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **FM**（**Freshness Manager**）
@@ -2567,6 +2621,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）
 {: .glossary-source}
 
+**LampStatus**
+> 灯状态（**Lamp Status**）包含激活错误的严重程度信息，作为诊断消息的一部分传输
+>
+> 来源：[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
+{: .glossary-source}
+
 **Large I-PDU**
 > 大I-PDU（**Large I-PDU**）是太大而无法放入底层通信协议单个L-PDU的I-Signal-I-PDU。大I-PDU由COM像其他I-PDU一样处理，但经由TP API发送/接收。请注意，如果大I-PDU只包含一个信号，或者信号可以由RTE（反）序列化，**LargeDataCOM**可以更高效地处理它们。但如果信号必须被单独处理或必须被路由，则大I-PDU必须由COM处理。
 >
@@ -2830,7 +2890,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **MetaData**
 > 与PDU一起传输的元数据，由一组元数据项组成
 >
-> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **Metadata**
@@ -2842,7 +2902,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **MetaDataItem**
 > 具有定义的类型和大小的单个MetaData项
 >
-> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+> 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **Method**
@@ -3135,6 +3195,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
 {: .glossary-source}
 
+**NACK**
+> 控制字节置 1、否定确认的 J1939 确认 PG（**ACKM**）
+>
+> 来源：[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
+{: .glossary-source}
+
 **NAD**
 > 节点地址（**Node Address**）。LIN 中的每个从节点都必须具有唯一的 NAD。
 >
@@ -3362,7 +3428,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **OC**
 > 发生计数（**Occurrence Count**，SAE J1939）
 >
-> 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+> 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）、[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **OD**
@@ -3541,6 +3607,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Memory Access（存储访问）](memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
 {: .glossary-source}
 
+**Parameter**
+> 参数（**Parameter**），SAE J1939 对信号的称谓，包含已定义的量程、限值、偏移量与物理单位
+>
+> 来源：[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
+{: .glossary-source}
+
 **Partial test**
 > 部分测试定义为一个或多个「硬件资源」的测试。（部分测试是可中断的，因为它在后台模式下执行。）
 >
@@ -3592,13 +3664,25 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **PDU**
 > 协议数据单元（**Protocol Data Unit**）
 >
-> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[Layered Software Architecture（分层软件架构）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[VFB（虚拟功能总线）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[Layered Software Architecture（分层软件架构）](general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[VFB（虚拟功能总线）](general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **PDU Router**
 > PDU路由器是在模块之间传输I-PDU的模块。PDU路由器可用于网关操作和内部路由目的。
 >
 > 来源：[AUTOSAR COM（COM模块）](communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**PDU1**
+> J1939 PDU 类型 1（**J1939 PDU Type 1**），这种 PG 可以发送到特定的目标地址
+>
+> 来源：[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**PDU2**
+> J1939 PDU 类型 2（**J1939 PDU Type 2**），这种 PG 只能以广播方式发送
+>
+> 来源：[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **PduInfoType**
@@ -4448,7 +4532,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SPN**
 > 可疑参数编号（**Suspect Parameter Number**，SAE J1939）
 >
-> 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+> 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）、[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
 {: .glossary-source}
 
 **Sporadic frame**
