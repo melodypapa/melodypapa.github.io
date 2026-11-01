@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **509** 个条目。
+共 **507** 个条目。
 
 ## A
 
@@ -82,12 +82,6 @@ title: "AUTOSAR API 类型清单"
 
 **[Adc_ValueGroupType](../io/adc_driver/index.md#724-adc_valuegrouptype)**
 > 类型 · [AUTOSAR ADC Driver（模数转换器驱动）](../io/adc_driver/index.md) · SWS_ADCDriver · R23-11
-
-**[ApplicationArrayDataType](../application_interfaces/user_guide/index.md#42513-applicationarraydatatype)**
-> 类型 · [Application Interfaces User Guide（应用接口用户指南）](../application_interfaces/user_guide/index.md) · EXP_AIUserGuide · R23-11
-
-**[ApplicationRecordDataType](../application_interfaces/user_guide/index.md#42514-applicationrecorddatatype)**
-> 类型 · [Application Interfaces User Guide（应用接口用户指南）](../application_interfaces/user_guide/index.md) · EXP_AIUserGuide · R23-11
 
 **[ApplicationStateRefType](../system_services/operating_system/index.md#733-applicationstatereftype)**
 > 类型 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
