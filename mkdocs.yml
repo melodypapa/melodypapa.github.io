@@ -273,11 +273,6 @@ nav:
       - 时序扩展:
 
         - "时序扩展规范": autosar/template/timimg_extension/indx.md
-  - Automotive（车载以太网）:
-
-    - 以太网（Ethernet）:
-
-      - "以太网帧格式": automotive/ethernet/frame_format/index.md
   - EB Tresos:
     - eb_tresos/index.md
     - Guided Configuration: eb_tresos/guided_configuration/index.md
@@ -315,11 +310,6 @@ nav:
 
         - "S32K5xx ADC 功能安全机制设计": nxp/s32k5xx/adc_safety/S32K5_ADC_Safety_Design_CN.md
         - "S32K5xx ADC Safety Mechanism Design": nxp/s32k5xx/adc_safety/S32K5_ADC_Safety_Design_EN.md
-  - "信息安全":
-    - cybersecurity/index.md
-    - 概念:
-
-      - "加密术语": cybersecurity/concept/terms/index.md
   - "语言":
     - languages/index.md
     - Deutsch:
