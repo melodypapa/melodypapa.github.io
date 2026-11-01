@@ -35,13 +35,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity (src ch.1–5→§1–§5, ch.7→§6, ch.8→§7, ch.9→§8, ch.10→§9, B→B; ch.6 traceability + appendix A dropped)
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end)
   - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-crypto-sync · commit 5c57d0a, 2026-10-28)
-- [ ] comm (SWS_COMManager · R23-11 markdown · ❌ new article, short name ComM)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+- [x] comm (SWS_COMManager · R23-11 markdown · ❌ new article, short name ComM)
+  - Note: 2026-11-01 run (issue #228; user instruction: commit without confirmation, batched gate at the end; scope narrowed to ComM ONLY — swcluc + hwtestmanager rows untouched). Source 5,154 ln at ../autosar_standard/markdown/.../SystemServices/AUTOSAR_CP_SWS_COMManager.md → article 4,0xx ln, §1–§9. ch.2 "Acronyms and definitions" translated in source order as `## 2. 缩略语和定义` (2.1 缩略语 16 rows + 2.2 定义 19 rows, both blockquote format). ch.9 has REAL content (5 sequence diagrams + prose) → `## 8. 时序图`; ch.10 → `## 9. 配置规范` (9.1 how-to-read, 9.2 8 containers ComM/ComMGeneral/ComMConfigSet/ComMUser/ComMChannel/ComMNetworkManagement/ComMUserPerChannel/ComMPnc in the Dcm attribute-table house style, 9.3 发布信息); appendix A = Not applicable requirements (garbled SRS id table) → dropped (droppable set). Figure triage: 5 recurring deco hashes (72×/33×/25×/12×/10×, the known Dem deco set) + 4× e61809f4 identified as a repeated pre-figure strip; 19 content figures extracted (Figure5-1, Figure7-1…7-11, Figure9-1…9-7, Figure10-1…10-7). [ECUC_ComM_*] cross-references KEPT in prose per the OS bracketed-ids decision (hygiene SWS-id grep is 0; ECUC refs are config-container cross-refs). check_api_sync 0 (4 types / 21 functions / 21 说明). ch.10.2.2's ComMGlobalNvMBlockDescriptor "none volatile" source spelling kept in the ComMNoWakeUpInhibitionNvmStorage description.
+  - [x] Step 1 — Source resolution + gap analysis (R23-11 markdown, no release fallback; source spans mapped in the note above)
+  - [x] Step 2 — In-place translation/completion (full Type A build; ch.7→§6 incl. PNC/channel state machines, ch.8→§7 with all 5 interface groups, ch.9→§8, ch.10→§9)
+  - [x] Step 3 — Phase A mechanical checks (strict build exit 0 / 0 WARNING / 0 comm anchor notices; check_heading_lang OK; hygiene: 0 h1, 0 \<, 0 [SWS_*] ids (ECUC cross-refs kept per OS precedent); check_indexes 0 (208 nav targets); check_api_sync 0; gen_api_list --check 0 (comm contributes 7 types / 53 funcs); census recorded: 409 identifier-mention lines, 21 chapter-ref links + 28 citation links + 29 registry anchors applied, --apply idempotent 0; cross-article Dcm×24/BswM×20/NvM×10 SITE report-only; census MODULE_LINKS still lists ComM as NO-ARTICLE (self-mention gap, known))
+  - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 ↔ §1–§9 1:1; ch.6 tracing + appendix A dropped per the droppable set; tables merged across page splits: 表7.1 state/transition links, 表7.2 capabilities, 表7.3 NM variants; code fences (service definition + internal behavior) kept verbatim with the PDF line-joining reconstructed; e61809f4 4×-recurring strip classified deco by position analysis)
+  - [x] Step 5 — User confirmation gate (CONFIRMED 2026-11-01: user approved the gate and requested commit/PR)
+  - [x] Step 6 — TODO.md row + commit/PR (commit bcf713d + row-record commit; PR https://github.com/melodypapa/melodypapa.github.io/pull/230, branch feature/group-system-services-sync, issue #228 — swcluc + hwtestmanager rows remain open)
 - [ ] swcluc (SWS_SoftwareClusterConnection · R23-11 markdown · ❌ new article, short name SwCluC)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

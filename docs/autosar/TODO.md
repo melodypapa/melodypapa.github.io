@@ -3,7 +3,7 @@
 > Maintained by the autosar-translate skill per [STANDARD.md](STANDARD.md); update the touched entry and the `Last updated` date after every sync.
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-01 (Group-diagnostics batch + BndM/Fls/NvM full R23-11 syncs)
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-01 (Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
 
 ## Backlog
 
@@ -210,7 +210,9 @@
 - ✅ [时间服务](time_service/) — SWS_TimeService (2026-10-28 realignment+completion: §3 registry realigned to R23-11's 4 entries ([11]/[8] prose citations renumbered, stale [12]-[16] standards removed — release drift); 4.1 假设/4.2 限制 (renumbered)/4.3 汽车域的适用性; 6.4 got the 00063 intro + 6.4.3–6.4.5 + GFM error tables; 6.5 版本检查; Table 7.1 Predef-Timer characteristics converted from Table3.png to GFM (tables rule; Table3_1.png was a duplicate of an existing GFM table — dropped); §7 API realigned (7.1 导入的类型, 7.2 4 type entries, flat 7.3.1–7.3.20 kept = source 8.3 shape, 7.4 回调通知 无, 7.5 调度函数 无, 7.6 期望接口 2+1+None); ## 8. 时序图 (Figure9_1) + ## 9. 配置规范 (legacy per-param chapter replaced by the container-table house style, Tm+TmGeneral 6 params, Figure10_1) + appendix B; ch.2 heading 首字母缩略词、缩略语和术语 KEPT as the direct translation of the source heading (stale queue note wanted 缩略语 — decision recorded)
 - ✅ [OS](operating_system/) — SWS_OS · R23-11 (2026-10-26 full sync: §2.1 术语表 46 terms added, ch.7 completed to source end (7.7.2–7.17 incl. multi-core/IOC/ARTI), new ## 7. API规范 (22 types + 39 functions + IOC/期望接口/钩子/服务接口), ## 8. 时序图 (8 figures), ## 9. 配置规范 (Os×35 + IOC×5 + ARTI×20 containers + 发布信息), ## 10–13 (生成/应用说明/服务/展望 — ch.11–14 顺延 per user decision), ## B. 约束和规格项的历史; §3.1 realigned to source's 11-entry list; spec: → AUTOSAR_CP_SWS_OS; Table7_1.png retired; 55 figures; glossary.md OS terms pending — parallel-session conflict)
 
-❌ Missing (4): SWS_COMManager (ComM), SWS_DefaultErrorTracer (Det), SWS_HWTestManager, SWS_SoftwareClusterConnection (SwCluC)
+- ✅ [ComM（通信管理器）](comm/) — SWS_COMManager · R23-11 (new article 2026-11-01, full Type A: ch.2 缩略语和定义 in source order (16+19 rows), §6 PNC/channel state machines + module services with verbatim service/internal-behavior fences, §7 API (6 imported types incl. Std_ReturnType extension, 4 types, 21 functions, 19 callbacks in 5 groups, 6 C-S + 8 ports + mode declaration group), §8 时序图 7 figures, §9 8 containers in the Dcm attribute-table style; 19 figures; appendix A NA requirements dropped; [ECUC_ComM_*] prose cross-refs kept per OS precedent; identifier/chapter-ref/citation links applied)
+
+❌ Missing (2): SWS_HWTestManager, SWS_SoftwareClusterConnection (SwCluC)
 
 ## safety
 
