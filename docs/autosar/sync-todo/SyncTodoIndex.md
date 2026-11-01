@@ -217,7 +217,7 @@ Status: **1/2** completed
 
 | Article                       | Status | Commit ID |
 | ------------------------------ | -------- | ---------- |
-| `basic_software_mode_manager`   | [ ] Aligned ✅ | de15f9833e |
+| `basic_software_mode_manager`   | [ ] Aligned ✅ | e7b893ebd0 |
 | `ecu_state_manager`             | [x] Done | 37ee564d4a |
 
 ## Group rte-swarch — RTE / SWArch section (new section)
