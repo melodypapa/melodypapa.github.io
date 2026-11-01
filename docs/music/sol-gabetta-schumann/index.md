@@ -2,6 +2,8 @@
 title: "舒曼的大提琴之光——Sol Gabetta《Schumann》专辑漫笔"
 ---
 
+[![专辑封面：Sol Gabetta《Schumann》（Sony Classical，2018）](cover.jpg)](https://music.apple.com/us/album/schumann/1441430095)
+
 2018 年 11 月 30 日，阿根廷大提琴家索尔·加贝塔（Sol Gabetta）在 Sony Classical 发行了一张以作曲家名字直接命名的专辑——《Schumann》。一张 CD 装进一部协奏曲和三组大提琴与钢琴作品，几乎覆盖了舒曼为大提琴写下的全部重要曲目。更特别的是演出阵容：加贝塔找来的不是录音棚里的"明星拼盘"，而是她音乐生活中最亲密的一群朋友。本文整理自 Sony Classical 官方页面与多家乐评机构，从专辑背景、演奏家、曲目三个层面介绍这张唱片。
 
 ## 专辑速览
