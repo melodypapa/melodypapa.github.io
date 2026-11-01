@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2004** 个条目。
+共 **2057** 个条目。
 
 ## A
 
@@ -872,6 +872,165 @@ title: "AUTOSAR API 函数清单"
 
 **[ComM](../mode_management/basic_software_mode_manager/index.md#53-comm)**
 > 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
+
+**[ComM_BusSM_BusSleepMode](../system_services/comm/index.md#7452-comm_bussm_bussleepmode)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_BusSM_ModeIndication](../system_services/comm/index.md#7451-comm_bussm_modeindication)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_ChannelLimitation](../system_services/comm/index.md#7721-comm_channellimitation)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_ChannelWakeup](../system_services/comm/index.md#7722-comm_channelwakeup)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_CL](../system_services/comm/index.md#7751-comm_cl)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_CommunicationAllowed](../system_services/comm/index.md#7441-comm_communicationallowed)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_CR](../system_services/comm/index.md#7752-comm_cr)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_CurrentChannelRequest](../system_services/comm/index.md#7711-comm_currentchannelrequest)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_CurrentMode](../system_services/comm/index.md#7731-comm_currentmode)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_CW](../system_services/comm/index.md#7753-comm_cw)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_DCM_ActiveDiagnostic](../system_services/comm/index.md#7421-comm_dcm_activediagnostic)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_DCM_InactiveDiagnostic](../system_services/comm/index.md#7422-comm_dcm_inactivediagnostic)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_DeInit](../system_services/comm/index.md#732-comm_deinit)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_DynamicPncToChannelMapping](../system_services/comm/index.md#7726-comm_dynamicpnctochannelmapping)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_EcuM_PNCWakeUpIndication](../system_services/comm/index.md#7432-comm_ecum_pncwakeupindication)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_EcuM_WakeUpIndication](../system_services/comm/index.md#7431-comm_ecum_wakeupindication)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_ECUModeLimitation](../system_services/comm/index.md#7723-comm_ecumodelimitation)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_GetCurrentComMode](../system_services/comm/index.md#738-comm_getcurrentcommode)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_GetCurrentPNCComMode](../system_services/comm/index.md#739-comm_getcurrentpnccommode)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_GetInhibitionStatus](../system_services/comm/index.md#734-comm_getinhibitionstatus)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_GetMaxComMode](../system_services/comm/index.md#736-comm_getmaxcommode)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_GetPncToChannelMapping](../system_services/comm/index.md#7310-comm_getpnctochannelmapping)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_GetRequestedComMode](../system_services/comm/index.md#737-comm_getrequestedcommode)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_GetStatus](../system_services/comm/index.md#733-comm_getstatus)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_GetVersionInfo](../system_services/comm/index.md#7321-comm_getversioninfo)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_Init](../system_services/comm/index.md#731-comm_init)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_LimitChannelToNoComMode](../system_services/comm/index.md#7316-comm_limitchanneltonocommode)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_LimitECUToNoComMode](../system_services/comm/index.md#7317-comm_limitecutonocommode)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_modeLimitation](../system_services/comm/index.md#7754-comm_modelimitation)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_Nm_BusSleepMode](../system_services/comm/index.md#7414-comm_nm_bussleepmode)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_Nm_ForwardSynchronizedPncShutdown](../system_services/comm/index.md#7418-comm_nm_forwardsynchronizedpncshutdown)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_Nm_NetworkMode](../system_services/comm/index.md#7412-comm_nm_networkmode)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_Nm_NetworkStartIndication](../system_services/comm/index.md#7411-comm_nm_networkstartindication)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_Nm_PncLearningBitIndication](../system_services/comm/index.md#7417-comm_nm_pnclearningbitindication)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_Nm_PrepareBusSleepMode](../system_services/comm/index.md#7413-comm_nm_preparebussleepmode)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_Nm_RepeatMessageLeftIndication](../system_services/comm/index.md#7416-comm_nm_repeatmessageleftindication)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_Nm_RestartIndication](../system_services/comm/index.md#7415-comm_nm_restartindication)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_Nm_UpdateEIRA](../system_services/comm/index.md#7419-comm_nm_updateeira)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_Nm_UpdateERA](../system_services/comm/index.md#74110-comm_nm_updateera)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_PncToChannelMapping](../system_services/comm/index.md#7725-comm_pnctochannelmapping)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_PnLearningRequest](../system_services/comm/index.md#7313-comm_pnlearningrequest)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_PreventWakeUp](../system_services/comm/index.md#7315-comm_preventwakeup)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_ReadInhibitCounter](../system_services/comm/index.md#7318-comm_readinhibitcounter)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_RequestComMode](../system_services/comm/index.md#735-comm_requestcommode)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_ResetInhibitCounter](../system_services/comm/index.md#7319-comm_resetinhibitcounter)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_ResetPncToChannelMapping](../system_services/comm/index.md#7312-comm_resetpnctochannelmapping)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_SetECUGroupClassification](../system_services/comm/index.md#7320-comm_setecugroupclassification)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_UM](../system_services/comm/index.md#7755-comm_um)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_UpdatePncMembership](../system_services/comm/index.md#7314-comm_updatepncmembership)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_UpdatePncToChannelMapping](../system_services/comm/index.md#7311-comm_updatepnctochannelmapping)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_UR](../system_services/comm/index.md#7756-comm_ur)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComM_UserRequest](../system_services/comm/index.md#7724-comm_userrequest)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
+
+**[ComMMode](../system_services/comm/index.md#7761-commmode)**
+> 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
 
 **[ComXf_DeInit](../communication/com_based_transformer/index.md#734-comxf_deinit)**
 > 函数 · [AUTOSAR COM Based Transformer](../communication/com_based_transformer/index.md) · SWS_COMBasedTransformer · R23-11
