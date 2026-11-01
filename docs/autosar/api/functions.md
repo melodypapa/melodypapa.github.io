@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **1931** 个条目。
+共 **1949** 个条目。
 
 ## A
 
@@ -4766,199 +4766,253 @@ title: "AUTOSAR API 函数清单"
 **[RoutineServices](../diagnostics/diagnostic_communication_manager/index.md#785-routineservices)**
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
-**[Rte_Call](../rte/index.md#71613-rte_call)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Call](../rte/rte/index.md#71613-rte_call)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_CData](../rte/index.md#71616-rte_cdata)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_CData](../rte/rte/index.md#71616-rte_cdata)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_DRead](../rte/index.md#71611-rte_dread)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_DRead](../rte/rte/index.md#71611-rte_dread)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_Enter](../rte/index.md#71630-rte_enter)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Enter](../rte/rte/index.md#71630-rte_enter)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_Exit](../rte/index.md#71631-rte_exit)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Exit](../rte/rte/index.md#71631-rte_exit)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_Feedback](../rte/index.md#7168-rte_feedback)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Feedback](../rte/rte/index.md#7168-rte_feedback)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_GetMetaDataItem](../rte/index.md#71642-rte_getmetadataitem)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_GetMetaDataItem](../rte/rte/index.md#71642-rte_getmetadataitem)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_GetMetaDataLength](../rte/index.md#71643-rte_getmetadatalength)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_GetMetaDataLength](../rte/rte/index.md#71643-rte_getmetadatalength)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_IFeedback](../rte/index.md#71636-rte_ifeedback)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_IFeedback](../rte/rte/index.md#71636-rte_ifeedback)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_IInvalidate](../rte/index.md#71622-rte_iinvalidate)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_IInvalidate](../rte/rte/index.md#71622-rte_iinvalidate)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_Init](../rte/index.md#7183-rte_init)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Init](../rte/rte/index.md#7183-rte_init)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_Invalidate](../rte/index.md#7167-rte_invalidate)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Invalidate](../rte/rte/index.md#7167-rte_invalidate)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_IRead](../rte/index.md#71618-rte_iread)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_IRead](../rte/rte/index.md#71618-rte_iread)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_IReadRef](../rte/index.md#71619-rte_ireadref)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_IReadRef](../rte/rte/index.md#71619-rte_ireadref)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_IrTrigger](../rte/index.md#71635-rte_irtrigger)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_IrTrigger](../rte/rte/index.md#71635-rte_irtrigger)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_IrvIRead](../rte/index.md#71624-rte_irviread)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_IrvIRead](../rte/rte/index.md#71624-rte_irviread)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_IrvIReadRef](../rte/index.md#71625-rte_irvireadref)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_IrvIReadRef](../rte/rte/index.md#71625-rte_irvireadref)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_IrvIWrite](../rte/index.md#71626-rte_irviwrite)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_IrvIWrite](../rte/rte/index.md#71626-rte_irviwrite)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_IrvIWriteRef](../rte/index.md#71627-rte_irviwriteref)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_IrvIWriteRef](../rte/rte/index.md#71627-rte_irviwriteref)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_IrvRead](../rte/index.md#71628-rte_irvread)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_IrvRead](../rte/rte/index.md#71628-rte_irvread)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_IrvWrite](../rte/index.md#71629-rte_irvwrite)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_IrvWrite](../rte/rte/index.md#71629-rte_irvwrite)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_IsAvailable](../rte/index.md#71639-rte_isavailable)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_IsAvailable](../rte/rte/index.md#71639-rte_isavailable)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_IStatus](../rte/index.md#71623-rte_istatus)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_IStatus](../rte/rte/index.md#71623-rte_istatus)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_IsUpdated](../rte/index.md#71637-rte_isupdated)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_IsUpdated](../rte/rte/index.md#71637-rte_isupdated)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_IWrite](../rte/index.md#71620-rte_iwrite)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_IWrite](../rte/rte/index.md#71620-rte_iwrite)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_IWriteRef](../rte/index.md#71621-rte_iwriteref)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_IWriteRef](../rte/rte/index.md#71621-rte_iwriteref)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_Mode](../rte/index.md#71632-rte_mode)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Mode](../rte/rte/index.md#71632-rte_mode)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_NPorts](../rte/index.md#7162-rte_nports)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_NPorts](../rte/rte/index.md#7162-rte_nports)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_PBCon](../rte/index.md#71638-rte_pbcon)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_PBCon](../rte/rte/index.md#71638-rte_pbcon)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_Pim](../rte/index.md#71615-rte_pim)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Pim](../rte/rte/index.md#71615-rte_pim)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_Port](../rte/index.md#7163-rte_port)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Port](../rte/rte/index.md#7163-rte_port)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_Ports](../rte/index.md#7161-rte_ports)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Ports](../rte/rte/index.md#7161-rte_ports)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_Prm](../rte/index.md#71617-rte_prm)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Prm](../rte/rte/index.md#71617-rte_prm)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_Read](../rte/index.md#71610-rte_read)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Read](../rte/rte/index.md#71610-rte_read)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_Receive](../rte/index.md#71612-rte_receive)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Receive](../rte/rte/index.md#71612-rte_receive)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_Result](../rte/index.md#71614-rte_result)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Result](../rte/rte/index.md#71614-rte_result)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_Send](../rte/index.md#7165-rte_send)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Send](../rte/rte/index.md#7165-rte_send)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_SetAvailable](../rte/index.md#71640-rte_setavailable)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_SetAvailable](../rte/rte/index.md#71640-rte_setavailable)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_SetMetaDataItem](../rte/index.md#71641-rte_setmetadataitem)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_SetMetaDataItem](../rte/rte/index.md#71641-rte_setmetadataitem)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_Start](../rte/index.md#7181-rte_start)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Start](../rte/rte/index.md#7181-rte_start)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_StartTiming](../rte/index.md#7184-rte_starttiming)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_StartTiming](../rte/rte/index.md#7184-rte_starttiming)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_Stop](../rte/index.md#7182-rte_stop)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Stop](../rte/rte/index.md#7182-rte_stop)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_Switch](../rte/index.md#7166-rte_switch)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Switch](../rte/rte/index.md#7166-rte_switch)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_SwitchAck](../rte/index.md#7169-rte_switchack)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_SwitchAck](../rte/rte/index.md#7169-rte_switchack)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_Trigger](../rte/index.md#71634-rte_trigger)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Trigger](../rte/rte/index.md#71634-rte_trigger)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[Rte_Write](../rte/index.md#7164-rte_write)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Write](../rte/rte/index.md#7164-rte_write)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
 ## S
 
-**[SchM_ActMainFunction](../rte/index.md#72512-schm_actmainfunction)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[SchM_ActMainFunction](../rte/rte/index.md#72512-schm_actmainfunction)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[SchM_Call](../rte/index.md#7253-schm_call)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[SchM_ActMainFunction](../rte/schm/index.md#912-schm_actmainfunction)**
+> 函数 · [AUTOSAR SchM（基础软件调度器）](../rte/schm/index.md) · SWS_RTE · R23-11
 
-**[SchM_CData](../rte/index.md#72513-schm_cdata)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[SchM_Call](../rte/rte/index.md#7253-schm_call)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[SchM_Deinit](../rte/index.md#7274-schm_deinit)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[SchM_Call](../rte/schm/index.md#93-schm_call)**
+> 函数 · [AUTOSAR SchM（基础软件调度器）](../rte/schm/index.md) · SWS_RTE · R23-11
 
-**[SchM_Enter](../rte/index.md#7251-schm_enter)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[SchM_CData](../rte/rte/index.md#72513-schm_cdata)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[SchM_Exit](../rte/index.md#7252-schm_exit)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[SchM_CData](../rte/schm/index.md#913-schm_cdata)**
+> 函数 · [AUTOSAR SchM（基础软件调度器）](../rte/schm/index.md) · SWS_RTE · R23-11
 
-**[SchM_GetVersionInfo](../rte/index.md#7275-schm_getversioninfo)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[SchM_Deinit](../rte/rte/index.md#7274-schm_deinit)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[SchM_Init](../rte/index.md#7271-schm_init)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[SchM_Deinit](../rte/schm/index.md#114-schm_deinit)**
+> 函数 · [AUTOSAR SchM（基础软件调度器）](../rte/schm/index.md) · SWS_RTE · R23-11
 
-**[SchM_Mode](../rte/index.md#7258-schm_mode)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[SchM_Enter](../rte/rte/index.md#7251-schm_enter)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[SchM_Pim](../rte/index.md#72514-schm_pim)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[SchM_Enter](../rte/schm/index.md#91-schm_enter)**
+> 函数 · [AUTOSAR SchM（基础软件调度器）](../rte/schm/index.md) · SWS_RTE · R23-11
 
-**[SchM_Receive](../rte/index.md#7256-schm_receive)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[SchM_Exit](../rte/rte/index.md#7252-schm_exit)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[SchM_Result](../rte/index.md#7254-schm_result)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[SchM_Exit](../rte/schm/index.md#92-schm_exit)**
+> 函数 · [AUTOSAR SchM（基础软件调度器）](../rte/schm/index.md) · SWS_RTE · R23-11
 
-**[SchM_Send](../rte/index.md#7255-schm_send)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[SchM_GetVersionInfo](../rte/rte/index.md#7275-schm_getversioninfo)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[SchM_Start](../rte/index.md#7272-schm_start)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[SchM_GetVersionInfo](../rte/schm/index.md#115-schm_getversioninfo)**
+> 函数 · [AUTOSAR SchM（基础软件调度器）](../rte/schm/index.md) · SWS_RTE · R23-11
 
-**[SchM_StartTiming](../rte/index.md#7273-schm_starttiming)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[SchM_Init](../rte/rte/index.md#7271-schm_init)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[SchM_Switch](../rte/index.md#7257-schm_switch)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[SchM_Init](../rte/schm/index.md#111-schm_init)**
+> 函数 · [AUTOSAR SchM（基础软件调度器）](../rte/schm/index.md) · SWS_RTE · R23-11
 
-**[SchM_SwitchAck](../rte/index.md#72510-schm_switchack)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[SchM_Mode](../rte/rte/index.md#7258-schm_mode)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
-**[SchM_Trigger](../rte/index.md#72511-schm_trigger)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[SchM_Mode](../rte/schm/index.md#98-schm_mode)**
+> 函数 · [AUTOSAR SchM（基础软件调度器）](../rte/schm/index.md) · SWS_RTE · R23-11
+
+**[SchM_Pim](../rte/rte/index.md#72514-schm_pim)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
+
+**[SchM_Pim](../rte/schm/index.md#914-schm_pim)**
+> 函数 · [AUTOSAR SchM（基础软件调度器）](../rte/schm/index.md) · SWS_RTE · R23-11
+
+**[SchM_Receive](../rte/rte/index.md#7256-schm_receive)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
+
+**[SchM_Receive](../rte/schm/index.md#96-schm_receive)**
+> 函数 · [AUTOSAR SchM（基础软件调度器）](../rte/schm/index.md) · SWS_RTE · R23-11
+
+**[SchM_Result](../rte/rte/index.md#7254-schm_result)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
+
+**[SchM_Result](../rte/schm/index.md#94-schm_result)**
+> 函数 · [AUTOSAR SchM（基础软件调度器）](../rte/schm/index.md) · SWS_RTE · R23-11
+
+**[SchM_Send](../rte/rte/index.md#7255-schm_send)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
+
+**[SchM_Send](../rte/schm/index.md#95-schm_send)**
+> 函数 · [AUTOSAR SchM（基础软件调度器）](../rte/schm/index.md) · SWS_RTE · R23-11
+
+**[SchM_Start](../rte/rte/index.md#7272-schm_start)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
+
+**[SchM_Start](../rte/schm/index.md#112-schm_start)**
+> 函数 · [AUTOSAR SchM（基础软件调度器）](../rte/schm/index.md) · SWS_RTE · R23-11
+
+**[SchM_StartTiming](../rte/rte/index.md#7273-schm_starttiming)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
+
+**[SchM_StartTiming](../rte/schm/index.md#113-schm_starttiming)**
+> 函数 · [AUTOSAR SchM（基础软件调度器）](../rte/schm/index.md) · SWS_RTE · R23-11
+
+**[SchM_Switch](../rte/rte/index.md#7257-schm_switch)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
+
+**[SchM_Switch](../rte/schm/index.md#97-schm_switch)**
+> 函数 · [AUTOSAR SchM（基础软件调度器）](../rte/schm/index.md) · SWS_RTE · R23-11
+
+**[SchM_SwitchAck](../rte/rte/index.md#72510-schm_switchack)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
+
+**[SchM_SwitchAck](../rte/schm/index.md#910-schm_switchack)**
+> 函数 · [AUTOSAR SchM（基础软件调度器）](../rte/schm/index.md) · SWS_RTE · R23-11
+
+**[SchM_Trigger](../rte/rte/index.md#72511-schm_trigger)**
+> 函数 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
+
+**[SchM_Trigger](../rte/schm/index.md#911-schm_trigger)**
+> 函数 · [AUTOSAR SchM（基础软件调度器）](../rte/schm/index.md) · SWS_RTE · R23-11
 
 **[Sd_AclPolicyCheck](../communication/service_discovery/index.md#7311-sd_aclpolicycheck)**
 > 函数 · [AUTOSAR SD（服务发现）](../communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11

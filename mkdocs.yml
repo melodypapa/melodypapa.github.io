@@ -118,11 +118,11 @@ nav:
   - CP AUTOSAR:
     - autosar/index.md
     - "术语表": autosar/glossary.md
-    - "API 清单":
+    - "API":
       - autosar/api/index.md
-      - "AUTOSAR API 类型清单": autosar/api/types.md
-      - "AUTOSAR API 函数清单": autosar/api/functions.md
-      - "AUTOSAR API 函数清单（按模块）": autosar/api/functions_by_module.md
+      - "数据类型清单": autosar/api/types.md
+      - "函数清单": autosar/api/functions.md
+      - "函数清单（按模块）": autosar/api/functions_by_module.md
     - 基础:
       - autosar/foundation/index.md
       - 通用:
@@ -251,8 +251,9 @@ nav:
       - "功能安全措施概览": autosar/safety/functional_safety_measures/index.md
       - "安全用例": autosar/safety/safety_use_case/index.md
     - RTE:
-
-      - "RTE": autosar/rte/index.md
+      - autosar/rte/index.md
+      - "RTE": autosar/rte/rte/index.md
+      - "SchM": autosar/rte/schm/index.md
     - SW 架构:
       - autosar/sw_arch/index.md
       - "ARTI": autosar/sw_arch/arti/index.md

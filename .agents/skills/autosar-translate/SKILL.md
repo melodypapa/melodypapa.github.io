@@ -791,8 +791,8 @@ open.
   `git@github.com:melodypapa/melodypapa.github.io.git`; `gh` (API) always works.
 - A failed fetch can break `refs/remotes/origin/master`; repair with
   `git update-ref refs/remotes/origin/master <sha>`.
-- `.gitignore` has stale root-anchored Jekyll-era patterns; trust `git ls-files`
-  over `git check-ignore`.
+- The Jekyll-era stale `.gitignore` patterns were removed on 2026-11-02 (repo is
+  now mkdocs-only); trust `git ls-files` over `git check-ignore`.
 - No CI on PRs — the strict build you run locally is the only gate there is.
 
 ## Common mistakes (all observed in real runs)

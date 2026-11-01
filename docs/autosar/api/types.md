@@ -1187,8 +1187,8 @@ title: "AUTOSAR API 类型清单"
 **[RetryInfoType](../general/communication_stack_types/index.md#718-retryinfotype)**
 > 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](../general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 
-**[Rte_Instance](../rte/index.md#7152-rte_instance)**
-> 类型 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Rte_Instance](../rte/rte/index.md#7152-rte_instance)**
+> 类型 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
 ## S
 
@@ -1432,8 +1432,8 @@ title: "AUTOSAR API 类型清单"
 **[Std_ReturnType](../general/standard_types/index.md#711-std_returntype)**
 > 类型 · [AUTOSAR Standard Types（标准类型）](../general/standard_types/index.md) · SWS_StandardTypes · R23-11
 
-**[Std_ReturnType](../rte/index.md#7151-std_returntype)**
-> 类型 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
+**[Std_ReturnType](../rte/rte/index.md#7151-std_returntype)**
+> 类型 · [AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE · R23-11
 
 **[Std_TransformerError](../general/standard_types/index.md#713-std_transformererror)**
 > 类型 · [AUTOSAR Standard Types（标准类型）](../general/standard_types/index.md) · SWS_StandardTypes · R23-11
