@@ -95,15 +95,15 @@ nav:
       - cortex/concept/index.md
       - Cache:
 
-        - "多级缓存架构（Multilevel Cache Organisation）": cortex/concept/cache/multilevel_cache/index.md
-        - "透写和回写缓存（Write Through and Write Back in Cache）": cortex/concept/cache/write_through_and_back_in_cache/index.md
+        - "多级缓存架构": cortex/concept/cache/multilevel_cache/index.md
+        - "透写和回写缓存": cortex/concept/cache/write_through_and_back_in_cache/index.md
       - 通信:
 
         - "什么是SerDes": cortex/concept/communication/serdes/index.md
     - Cortex-M7 内核:
 
-      - "ARM架构的内存模式（Arm Architecture Memory Model）": cortex/m7_processor/arm_architecture_memory_mode/index.md
-      - "ARM 异常模型（Exception model）": cortex/m7_processor/exception_model/index.md
+      - "ARM架构的内存模式": cortex/m7_processor/arm_architecture_memory_mode/index.md
+      - "ARM 异常模型": cortex/m7_processor/exception_model/index.md
       - "Cortex-M7 指令集": cortex/m7_processor/instruction_set/index.md
       - "嵌套向量中断控制器": cortex/m7_processor/nested_vectored_interrupt_controller/index.md
       - "Cortex-M7 程序状态寄存器": cortex/m7_processor/program_status_register/index.md
@@ -111,10 +111,10 @@ nav:
       - "系统地址映射": cortex/m7_processor/system_address_map/index.md
     - Cortex-R52+ 内核:
 
-      - "内存保护单元（Memory Protection Unit）": cortex/r52p_processor/memory_protection_unit/index.md
-      - "内存系统（Memory System）": cortex/r52p_processor/memory_system/index.md
-      - "Cortex®-R52+ 程序员模型（Programmers Model）": cortex/r52p_processor/programmers_model/index.md
-      - "系统控制（System Control）": cortex/r52p_processor/system_control/index.md
+      - "内存保护单元": cortex/r52p_processor/memory_protection_unit/index.md
+      - "内存系统": cortex/r52p_processor/memory_system/index.md
+      - "Cortex®-R52+ 程序员模型": cortex/r52p_processor/programmers_model/index.md
+      - "系统控制": cortex/r52p_processor/system_control/index.md
   - CP AUTOSAR:
     - autosar/index.md
     - "术语表": autosar/glossary.md
@@ -282,14 +282,14 @@ nav:
     - nxp/index.md
     - S32G2:
 
-      - "引导（Boot）": nxp/s32g2/boot/index.md
+      - "引导": nxp/s32g2/boot/index.md
       - "Extended Resource Domain Controller (XRDC)": nxp/s32g2/extended_resource_domain_controller/index.md
       - "Fault Collection and Control Unit (FCCU)": nxp/s32g2/fault_collection_and_control_unit/index.md
       - "Network-on-Chip (NoC)": nxp/s32g2/network_on_chip/index.md
       - "周期性中断定时器 (**PIT**)": nxp/s32g2/periodic_interrupt_timer/index.md
       - "Quad Serial Peripheral Interface (QuadSPI)": nxp/s32g2/quad_serial_peripheral_interface/index.md
       - "实时时钟 (**RTC**)": nxp/s32g2/real_time_clock/index.md
-      - "复位（**Reset**）": nxp/s32g2/reset/index.md
+      - "复位": nxp/s32g2/reset/index.md
       - "信息安全 (**Security**)": nxp/s32g2/security/index.md
       - "Semaphores2 (SEMA42)": nxp/s32g2/semaphores2/index.md
       - "系统定时器模块 (**STM**)": nxp/s32g2/system_timer_module/index.md
