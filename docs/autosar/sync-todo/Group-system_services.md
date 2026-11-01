@@ -41,8 +41,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion (full Type A build; ch.7→§6 incl. PNC/channel state machines, ch.8→§7 with all 5 interface groups, ch.9→§8, ch.10→§9)
   - [x] Step 3 — Phase A mechanical checks (strict build exit 0 / 0 WARNING / 0 comm anchor notices; check_heading_lang OK; hygiene: 0 h1, 0 \<, 0 [SWS_*] ids (ECUC cross-refs kept per OS precedent); check_indexes 0 (208 nav targets); check_api_sync 0; gen_api_list --check 0 (comm contributes 7 types / 53 funcs); census recorded: 409 identifier-mention lines, 21 chapter-ref links + 28 citation links + 29 registry anchors applied, --apply idempotent 0; cross-article Dcm×24/BswM×20/NvM×10 SITE report-only; census MODULE_LINKS still lists ComM as NO-ARTICLE (self-mention gap, known))
   - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 ↔ §1–§9 1:1; ch.6 tracing + appendix A dropped per the droppable set; tables merged across page splits: 表7.1 state/transition links, 表7.2 capabilities, 表7.3 NM variants; code fences (service definition + internal behavior) kept verbatim with the PDF line-joining reconstructed; e61809f4 4×-recurring strip classified deco by position analysis)
-  - [ ] Step 5 — User confirmation gate (batched 2026-10-27 pattern — pending, ComM-only batch)
-  - [ ] Step 6 — TODO.md row + commit/PR (after the batched gate; branch feature/group-system-services-sync, issue #228)
+  - [x] Step 5 — User confirmation gate (CONFIRMED 2026-11-01: user approved the gate and requested commit/PR)
+  - [x] Step 6 — TODO.md row + commit/PR (commit bcf713d + row-record commit; PR https://github.com/melodypapa/melodypapa.github.io/pull/229, branch feature/group-system-services-sync, issue #228 — swcluc + hwtestmanager rows remain open)
 - [ ] swcluc (SWS_SoftwareClusterConnection · R23-11 markdown · ❌ new article, short name SwCluC)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
