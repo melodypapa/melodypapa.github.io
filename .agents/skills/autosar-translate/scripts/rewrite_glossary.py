@@ -77,6 +77,23 @@ HOMONYMS = {
         "SWS_XCP": "Software Requirements Specification",
         "AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety": "Safety Restraint System",
     },
+    "DM": {
+        "AUTOSAR_CP_SWS_COM": "Deadline Monitoring",
+        "SWS_SAEJ1939DiagnosticCommunicationManager": "Diagnostic Message",
+    },
+    "DP": {
+        "SWS_WirelessEthernetTransceiverDriver": "DCC Profile",
+        "SWS_SAEJ1939DiagnosticCommunicationManager": "Data Page",
+    },
+    "DTC": {
+        "AUTOSAR_CP_EXP_AIChassis": "Regulation of the Drag Torque",
+        "SWS_DiagnosticCommunicationManager": "Diagnostic Trouble Code",
+        "SWS_SAEJ1939DiagnosticCommunicationManager": "Diagnostic Trouble Code",
+    },
+    "Channel": {
+        "SWS_CryptoDriver": "Crypto Driver Object Path",
+        "SWS_DiagnosticCommunicationManager": "Data Transfer Link",
+    },
 }
 
 INTRO = (

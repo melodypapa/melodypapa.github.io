@@ -183,6 +183,7 @@ nav:
       - autosar/diagnostics/index.md
       - "Dcm": autosar/diagnostics/diagnostic_communication_manager/index.md
       - "Dem": autosar/diagnostics/diagnostic_event_manager/index.md
+      - "J1939Dcm": autosar/diagnostics/j1939dcm/index.md
     - 通用（General）:
       - autosar/general/index.md
       - "BSW General": autosar/general/bsw_general/index.md

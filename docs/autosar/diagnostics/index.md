@@ -10,6 +10,7 @@ title: "诊断（Diagnostics）"
 
 * [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostic_communication_manager/index.md)
 * [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostic_event_manager/index.md)
+* [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](j1939dcm/index.md)
 
 ## 相关内容
 

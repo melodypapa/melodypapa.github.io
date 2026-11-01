@@ -3,7 +3,7 @@
 > Maintained by the autosar-translate skill per [STANDARD.md](STANDARD.md); update the touched entry and the `Last updated` date after every sync.
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-01 (flash_driver full R23-11 sync)
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-01 (Group-diagnostics batch + BndM/Fls/NvM full R23-11 syncs)
 
 ## Backlog
 
@@ -146,10 +146,10 @@
 
 ## diagnostics
 
-- ⚠️ [Dcm 诊断通信管理器](diagnostic_communication_manager/) — SWS_DiagnosticCommunicationManager · R23-11 (translated through §9; Appendix A change-history scope and ISO URL verification pending; Appendix B N/A requirements omitted)
+- ✅ [Dcm 诊断通信管理器](diagnostic_communication_manager/) — SWS_DiagnosticCommunicationManager · R23-11 (2026-10-29/30 runs through §9 + 2026-11-01 completion: source Appendix A change history translated as numbered §10 (336 rows, ids as data); source Appendix B N/A requirements omitted; §5/§7 headings aligned to the canonical wording; iso.org URL anti-bot 403 recorded, retained)
 - ✅ [Dem 诊断事件管理器](diagnostic_event_manager/) — SWS_DiagnosticEventManager · R23-11 (Type A full rebuild 2026-10-29, PR #186: 11,270 lines; API 111 entries incl. 76 grouped functions, 38 ports, 46 config containers, appendix B)
 
-❌ Missing (1): SWS_SAEJ1939DiagnosticCommunicationManager (J1939Dcm)
+- ✅ [SAE J1939 Dcm 诊断通信管理器](diagnostics/j1939dcm/) — SWS_SAEJ1939DiagnosticCommunicationManager · R23-11 (new article 2026-11-01, full Type A: ch.2 31 acronyms, §6 DM01–DM55 handling + DEM interaction, §7 API 2 types/5 functions/9 callbacks/expected+configurable/service interfaces, §8 时序图 one-sentence chapter per source, §9 19 containers; 13 figures; appendix A NA requirements omitted; identifier/chapter-ref/citation links applied)
 
 ## general
 

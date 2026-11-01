@@ -199,7 +199,7 @@ release: R23-11
 本文档使用以下排版约定：
 
 - 参见配置参数 myConfigurationParameter：这是对一个配置参数的引用，可在第 [9](#9-配置规范) 章中找到。
-- myFunction()：这是模块提供或要求的函数，其定义见第 [7](#7-api-规范) 章。
+- myFunction()：这是模块提供或要求的函数，其定义见第 [7](#7-api规范) 章。
 
 ## 3. 相关文档
 
@@ -274,7 +274,7 @@ release: R23-11
 
 对于 **WWH-OBD**，当前仅支持 **FunctionalGroupIdentifier** 0x33。
 
-## 5. 与其他模块的依赖关系
+## 5. 对其他模块的依赖
 
 **AUTOSAR** 诊断通信管理器（**DCM**）与以下基础软件模块和 **SW-C** 存在接口和依赖关系：
 
@@ -4572,7 +4572,7 @@ DcmSecureCodingAuthenticationJobRef 仅在所引用的 CsmJob 本身满足以下
 
 [Dcm_Init](#7311-dcm_init) 应使用配置中的值初始化所有 **Dcm** 全局变量。
 
-## 7. API 规范
+## 7. API规范
 
 本章定义：
 
@@ -16553,3 +16553,387 @@ n-2 → n) `[Dcm_TpTxConfirmation](#745-dcm_tptxconfirmation)`：所有数据发
 ### 9.4. 发布信息
 
 详细说明请参见 SWS BSWGeneral 第 10.3 节“发布信息”（参考文档[\[7\]](#ref-7)）。
+
+## 10. AUTOSAR 可追溯项变更历史
+
+请注意，本章中的列表还包括在后续版本中已从规范中移除的可追溯项。这些项不会作为超链接出现在文档中。
+
+### 10.1. 根据 AUTOSAR 版本 R23-11 的本文档可追溯项历史
+
+#### 10.1.1. R23-11 中新增的规范条目
+
+表10.1：R23-11 中新增的规范条目（**Added Specification Items in R23-11**）
+
+| 编号 | 标题 |
+| --- | --- |
+| [SWS_Dcm_01641] | Support of UDS Services |
+| [SWS_Dcm_01642] | Subfunction 0x01, 0x07 and 0x12 response values |
+| [SWS_Dcm_01643] | Dem_SetDTCFilter() parameters values for subfunctions 0x01, 0x07 and 0x12 |
+| [SWS_Dcm_01644] | Subfunction 0x02, 0x0A, 0x13, 0x15 and 0x17 response values |
+| [SWS_Dcm_01645] | Dem_SetDTCFilter() parameters values for subfunctions 0x02, 0x0A, 0x13, 0x15 and0x17 |
+| [SWS_Dcm_01646] | Subfunction 0x08 response values |
+| [SWS_Dcm_01647] | Dem_SetDTCFilter() parameters values for Subfunction 0x08 |
+| [SWS_Dcm_01648] | Subfunction 0x09 response values |
+| [SWS_Dcm_01649] | Dem_SelectDTC() parameters values for subfunctions 0x06 and 0x19 |
+| [SWS_Dcm_01650] | Dem_SelectExtendedDataRecord() parameters values for subfunctions 0x06 and 0x19 |
+| [SWS_Dcm_01651] | Subfunction 0x05 response values |
+| [SWS_Dcm_01652] | Subfunctions 0x0B, 0x0C, 0x0D and 0x0E response values |
+| [SWS_Dcm_01653] | Dem_GetDTCByOccurrenceTime() parameters values for subfunctions 0x0B, 0x0C, 0x0D and 0x0E |
+| [SWS_Dcm_01654] | Subfunction 0x14 response values |
+| [SWS_Dcm_01655] | Dem_GetNextFilteredDTCAndFDC() parameters values for subfunctions 0x14 |
+| [SWS_Dcm_01656] | Subfunction 0x42 response values |
+| [SWS_Dcm_01657] | Dem_GetNextFilteredDTCAndSeverity() parameters values for subfunctions 0x42 |
+| [SWS_Dcm_01658] | Dem_GetNextFilteredDTCAndSeverity return values |
+| [SWS_Dcm_01659] | Subfunction 0x55 response values |
+| [SWS_Dcm_01660] | Dem_SetDTCFilter() parameters values for subfunction 0x55 |
+| [SWS_Dcm_01661] | InputOutputControlParameter definitions |
+| [SWS_Dcm_01662] | NRC managed by callout function for service 0x34 |
+| [SWS_Dcm_01663] | NRC managed by callout function for service 0x35 |
+| [SWS_Dcm_01664] | NRC managed by callout function for service 0x37 |
+| [SWS_Dcm_01665] | NRC managed by callout function for service 0x36 |
+| [SWS_Dcm_01666] | Concurrent tester present support |
+| [SWS_Dcm_01667] | Concurrent tester present from different connections |
+| [SWS_Dcm_01668] | S3Server session timer support |
+| [SWS_Dcm_01669] | Sessions and connections |
+| [SWS_Dcm_01670] | Change to default session upon S3Server elapses |
+| [SWS_Dcm_01671] | Message reception according to ISO 14229-2 |
+| [SWS_Dcm_01672] | Mapping of T_DataSOM.ind |
+| [SWS_Dcm_01673] | Mapping of T_Data.ind |
+| [SWS_Dcm_01674] | Multi client handling |
+| [SWS_Dcm_01675] | Protocol resource availability |
+| [SWS_Dcm_01676] | Decline a second request with NRC 0x21 |
+| [SWS_Dcm_01677] | Ignoring a second request |
+| [SWS_Dcm_01678] | Mulitple requests on the same connection |
+| [SWS_Dcm_01679] | Default S3 timeout value |
+| [SWS_Dcm_01680] | Overwritten S3 timeout value |
+| [SWS_Dcm_01681] | Support of subfunction transmitCertificate |
+| [SWS_Dcm_01682] | Verify certificateEvaluationId |
+| [SWS_Dcm_01683] | Certificate storage parsing and verification |
+| [SWS_Dcm_01684] | Starting the secure coding sequence |
+| [SWS_Dcm_01685] | Write Secure Coding DID for started secure coding sequence |
+| [SWS_Dcm_01686] | Write Secure Coding DID without a started secure coding sequence |
+| [SWS_Dcm_01687] | Write Secure Coding DID buffer overflow |
+| [SWS_Dcm_01688] | Secure Coding validation trigger on inactive secure coding sequence |
+| [SWS_Dcm_01689] | Secure Coding validation trigger without written data |
+| [SWS_Dcm_01690] | Dcm internal processing of secure coding validation routine |
+| [SWS_Dcm_01691] | Authentication of secure coding data |
+| [SWS_Dcm_01692] | Successful authenticated secure coding data |
+| [SWS_Dcm_01693] | Successfully completed secure coding procedure |
+| [SWS_Dcm_01694] | Failed secure coding write |
+| [SWS_Dcm_01695] | Wrong signature for secure coding data |
+| [SWS_Dcm_01696] | Behavior on too long signature validation |
+| [SWS_Dcm_91075] | Definition of Port AuthenticationStateModeSwitchInterface_{Connection} provided by module Dcm |
+
+#### 10.1.2. R23-11 中变更的规范条目
+
+表10.2：R23-11 中变更的规范条目（**Changed Specification Items in R23-11**）
+
+| 编号 | 标题 |
+| --- | --- |
+| [SWS_Dcm_00027] | - |
+| [SWS_Dcm_00030] | - |
+| [SWS_Dcm_00092] | Definition of API function Dcm_CopyTxData |
+| [SWS_Dcm_00094] | Definition of callback function Dcm_StartOfReception |
+| [SWS_Dcm_00143] | - |
+| [SWS_Dcm_00293] | - |
+| [SWS_Dcm_00295] | - |
+| [SWS_Dcm_00333] | Definition of imported datatypes of module Dcm |
+| [SWS_Dcm_00338] | Definition of API function Dcm_GetSecurityLevel |
+| [SWS_Dcm_00339] | Definition of API function Dcm_GetSesCtrlType |
+| [SWS_Dcm_00376] | - |
+| [SWS_Dcm_00377] | - |
+| [SWS_Dcm_00378] | - |
+| [SWS_Dcm_00379] | - |
+| [SWS_Dcm_00380] | - |
+| [SWS_Dcm_00381] | - |
+| [SWS_Dcm_00382] | - |
+| [SWS_Dcm_00392] | - |
+| [SWS_Dcm_00442] | - |
+| [SWS_Dcm_00464] | - |
+| [SWS_Dcm_00465] | - |
+| [SWS_Dcm_00466] | - |
+| [SWS_Dcm_00520] | Definition of API function Dcm_ResetToDefaultSession |
+| [SWS_Dcm_00539] | Definition of configurable interface Dcm_ReadMemory |
+| [SWS_Dcm_00540] | Definition of configurable interface Dcm_WriteMemory |
+| [SWS_Dcm_00543] | Definition of configurable interface Dcm_SetProgConditions |
+| [SWS_Dcm_00544] | Definition of configurable interface Dcm_GetProgConditions |
+| [SWS_Dcm_00556] | Definition of API function Dcm_CopyRxData |
+| [SWS_Dcm_00574] | - |
+| [SWS_Dcm_00579] | - |
+| [SWS_Dcm_00614] | Definition of API function Dcm_DemTriggerOnDTCStatus |
+| [SWS_Dcm_00641] | - |
+| [SWS_Dcm_00685] | Definition of ClientServerInterface SecurityAccess_{SecurityLevel} |
+| [SWS_Dcm_00686] | Definition of ClientServerInterface DataServices_{Data} |
+| [SWS_Dcm_00687] | Definition of SenderReceiverInterface DataServices_{Data} |
+| [SWS_Dcm_00688] | Definition of ClientServerInterface InfotypeServices_{VehInfoData} |
+| [SWS_Dcm_00690] | Definition of ClientServerInterface RoutineServices_{RoutineName} |
+| [SWS_Dcm_00691] | Definition of ClientServerInterface RequestControlServices_{Tid} |
+| [SWS_Dcm_00692] | Definition of ClientServerInterface CallbackDCMRequestServices |
+| [SWS_Dcm_00694] | Definition of ClientServerInterface ServiceRequestNotification |
+| [SWS_Dcm_00698] | Definition of ClientServerInterface DCMServices |
+| [SWS_Dcm_00754] | Definition of configurable interface Dcm_ProcessRequestDownload |
+| [SWS_Dcm_00755] | Definition of configurable interface Dcm_ProcessRequestTransferExit |
+| [SWS_Dcm_00756] | Definition of configurable interface Dcm_ProcessRequestUpload |
+| [SWS_Dcm_00763] | Definition of configurable interface <Module>_<DiagnosticService> |
+| [SWS_Dcm_00764] | Definition of configurable interface <Module>_<DiagnosticService>_<Sub Service> |
+| [SWS_Dcm_00769] | Definition of ClientServerInterface DataServices_DIDRange_{Range} |
+| [SWS_Dcm_00793] | Definition of configurable interface Xxx_ReadData |
+| [SWS_Dcm_00794] | Definition of configurable interface Xxx_WriteData |
+| [SWS_Dcm_00796] | Definition of configurable interface Xxx_ReadDataLength |
+| [SWS_Dcm_00797] | Definition of configurable interface Xxx_ConditionCheckRead |
+| [SWS_Dcm_00798] | Definition of configurable interface Xxx_GetScalingInformation |
+| [SWS_Dcm_00802] | Definition of configurable interface Xxx_ShortTermAdjustment |
+| [SWS_Dcm_00803] | Definition of configurable interface Xxx_IsDidAvailable |
+| [SWS_Dcm_00804] | Definition of configurable interface Xxx_ReadDidData |
+| [SWS_Dcm_00805] | Definition of configurable interface Xxx_WriteDidData |
+| [SWS_Dcm_00950] | Definition of API function Dcm_GetVin |
+| [SWS_Dcm_00976] | Definition of datatype Dcm_StatusType |
+| [SWS_Dcm_00977] | Definition of ImplementationDataType Dcm_SecLevelType |
+| [SWS_Dcm_00978] | Definition of ImplementationDataType Dcm_SesCtrlType |
+| [SWS_Dcm_00979] | Definition of ImplementationDataType Dcm_ProtocolType |
+| [SWS_Dcm_00980] | Definition of ImplementationDataType Dcm_NegativeResponseCodeType |
+| [SWS_Dcm_00981] | Definition of datatype Dcm_CommunicationModeType |
+| [SWS_Dcm_00982] | Definition of datatype Dcm_ConfigType |
+| [SWS_Dcm_00983] | Definition of ImplementationDataType Dcm_ConfirmationStatusType |
+| [SWS_Dcm_00984] | Definition of ImplementationDataType Dcm_OpStatusType |
+| [SWS_Dcm_00985] | Definition of datatype Dcm_ReturnReadMemoryType |
+| [SWS_Dcm_00986] | Definition of datatype Dcm_ReturnWriteMemoryType |
+| [SWS_Dcm_00987] | Definition of datatype Dcm_EcuStartModeType |
+| [SWS_Dcm_00988] | Definition of datatype Dcm_ProgConditionsType |
+| [SWS_Dcm_00989] | Definition of datatype Dcm_MsgItemType |
+| [SWS_Dcm_00990] | Definition of datatype Dcm_MsgType |
+| [SWS_Dcm_00991] | Definition of datatype Dcm_MsgLenType |
+| [SWS_Dcm_00993] | Definition of datatype Dcm_IdContextType |
+| [SWS_Dcm_00994] | Definition of datatype Dcm_MsgContextType |
+| [SWS_Dcm_01012] | Definition of ImplementationDataType Dcm_RangeArray_{Range}Type |
+| [SWS_Dcm_01013] | Definition of ImplementationDataType Dcm_InfoTypeServicesArray_{VehInfoData}Type |
+| [SWS_Dcm_01014] | Definition of ImplementationDataType Dcm_RequestControlServicesInArray_{Tid}Type |
+| [SWS_Dcm_01015] | Definition of ImplementationDataType Dcm_RequestControlServicesOutArray_{Tid}Type |
+| [SWS_Dcm_01017] | Definition of ImplementationDataType Dcm_ScalingInfoArray_{Data}Type |
+| [SWS_Dcm_01018] | Definition of ImplementationDataType Dcm_RequestDataOut_{Routine}_{Signal}PrimitivType |
+| [SWS_Dcm_01019] | Definition of ImplementationDataType Dcm_RequestFlexibleOutArrayData_{Routine}_{Signal}Type |
+| [SWS_Dcm_01020] | Definition of ImplementationDataType Dcm_StartDataIn_{Routine}_{Signal}PrimitivType |
+| [SWS_Dcm_01021] | Definition of ImplementationDataType Dcm_StartDataOut_{Routine}_{Signal}PrimitivType |
+| [SWS_Dcm_01022] | Definition of ImplementationDataType Dcm_StartFlexibleInArrayData_{Routine}_{Signal}Type |
+| [SWS_Dcm_01023] | Definition of ImplementationDataType Dcm_StartFlexibleOutArrayData_{Routine}_{Signal}Type |
+| [SWS_Dcm_01024] | Definition of ImplementationDataType Dcm_StopDataIn_{Routine}_{Signal}PrimitivType |
+| [SWS_Dcm_01025] | Definition of ImplementationDataType Dcm_StopDataOut_{Routine}_{Signal}PrimitivType |
+| [SWS_Dcm_01026] | Definition of ImplementationDataType Dcm_StopFlexibleInArrayData_{Routine}_{Signal}Type |
+| [SWS_Dcm_01027] | Definition of ImplementationDataType Dcm_StopFlexibleOutArrayData_{Routine}_{Signal}Type |
+| [SWS_Dcm_01028] | Definition of ImplementationDataType Dcm_KeyArray_{SecurityLevel}Type |
+| [SWS_Dcm_01029] | Definition of ImplementationDataType Dcm_SeedArray_{SecurityLevel}Type |
+| [SWS_Dcm_01030] | Definition of Port DCMServices provided by module Dcm |
+| [SWS_Dcm_01031] | Definition of Port DataServices_{Data} provided by module Dcm |
+| [SWS_Dcm_01033] | Definition of Port CallbackDCMRequestServices_{Name} required by module Dcm |
+| [SWS_Dcm_01034] | Definition of Port DataServices_DIDRange_{Range} required by module Dcm |
+| [SWS_Dcm_01035] | Definition of Port DataServices_{Data} required by module Dcm |
+| [SWS_Dcm_01037] | Definition of Port InfotypeServices_{VehInfoData} required by module Dcm |
+| [SWS_Dcm_01038] | Definition of Port RequestControlServices_{Tid} required by module Dcm |
+| [SWS_Dcm_01039] | Definition of Port ServiceRequestManufacturerNotification_{Name} required by module Dcm |
+| [SWS_Dcm_01040] | Definition of Port RoutineServices_{RoutineName} required by module Dcm |
+| [SWS_Dcm_01041] | Definition of Port SecurityAccess_{SecurityLevel} required by module Dcm |
+| [SWS_Dcm_01042] | Definition of Port ServiceRequestSupplierNotification_{Name} required by module Dcm |
+| [SWS_Dcm_01068] | Definition of API function Dcm_SetActiveDiagnostic |
+| [SWS_Dcm_01121] | Definition of ImplementationDataType Dcm_DataArrayTypeUint8_{Data}Type |
+| [SWS_Dcm_01129] | - |
+| [SWS_Dcm_01130] | - |
+| [SWS_Dcm_01131] | - |
+| [SWS_Dcm_01132] | - |
+| [SWS_Dcm_01133] | - |
+| [SWS_Dcm_01134] | - |
+| [SWS_Dcm_01138] | Definition of ImplementationDataType Dcm_DidSupportedType |
+| [SWS_Dcm_01151] | Definition of configurable interface Xxx_GetSeed |
+| [SWS_Dcm_01152] | Definition of configurable interface Xxx_GetSecurityAttemptCounter |
+| [SWS_Dcm_01153] | Definition of configurable interface Xxx_SetSecurityAttemptCounter |
+| [SWS_Dcm_01159] | Definition of ImplementationDataType Dcm_SecurityAccessDataRecordArray_{SecurityLevel}Type |
+| [SWS_Dcm_01165] | Definition of ImplementationDataType Dcm_RequestDataArrayType |
+| [SWS_Dcm_01173] | - |
+| [SWS_Dcm_01203] | Definition of configurable interface Xxx_Start |
+| [SWS_Dcm_01204] | Definition of configurable interface Xxx_Stop |
+| [SWS_Dcm_01270] | Definition of configurable interface Xxx_ClearDTCCheckFnc |
+| [SWS_Dcm_01271] | Definition of configurable interface Xxx_ReadDidRangeDataLength |
+| [SWS_Dcm_01273] | - |
+| [SWS_Dcm_01285] | Definition of configurable interface Xxx_ReturnControlToECU |
+| [SWS_Dcm_01286] | Definition of configurable interface Xxx_ResetToDefault |
+| [SWS_Dcm_01290] | Definition of configurable interface Xxx_FreezeCurrentState |
+| [SWS_Dcm_01305] | Definition of ImplementationDataType Dcm_InputOutputControlParameterType |
+| [SWS_Dcm_01306] | Definition of ImplementationDataType Dcm_IOOperationRequest_{DID}Type |
+| [SWS_Dcm_01307] | Definition of ImplementationDataType Dcm_IOOperationResponseType |
+| [SWS_Dcm_01308] | Definition of SenderReceiverInterface IOControlRequest_{DID} |
+| [SWS_Dcm_01309] | Definition of SenderReceiverInterface IOControlResponse_{DID} |
+| [SWS_Dcm_01310] | Definition of Port DataServices_{Data} required by module Dcm |
+| [SWS_Dcm_01311] | Definition of Port DataServices_{Data} provided/required by module Dcm |
+| [SWS_Dcm_01312] | Definition of Port IOControlRequest_{DID} provided/required by module Dcm |
+| [SWS_Dcm_01313] | Definition of Port IOControlResponse_{DID} required by module Dcm |
+| [SWS_Dcm_01314] | Definition of configurable interface Xxx_ResetToDefault |
+| [SWS_Dcm_01315] | Definition of configurable interface Xxx_FreezeCurrentState |
+| [SWS_Dcm_01316] | Definition of configurable interface Xxx_ShortTermAdjustment |
+| [SWS_Dcm_01320] | Definition of ImplementationDataType Dcm_ControlMask_{DID}Type |
+| [SWS_Dcm_01338] | Definition of configurable interface Xxx_RequestControl |
+| [SWS_Dcm_01339] | Definition of configurable interface Xxx_StartProtocol |
+| [SWS_Dcm_01340] | Definition of configurable interface Xxx_StopProtocol |
+| [SWS_Dcm_01341] | Definition of configurable interface Xxx_Indication |
+| [SWS_Dcm_01342] | Definition of configurable interface Xxx_Confirmation |
+| [SWS_Dcm_01345] | - |
+| [SWS_Dcm_01415] | Behavior on application returning unexpected return code |
+| [SWS_Dcm_01590] | Security events for Dcm |
+| [SWS_Dcm_91001] | Definition of mandatory interfaces in module Dcm |
+| [SWS_Dcm_91002] | Definition of optional interfaces in module Dcm |
+| [SWS_Dcm_91003] | Definition of configurable interface Xxx_GetSeed |
+| [SWS_Dcm_91004] | Definition of configurable interface Xxx_CompareKey |
+| [SWS_Dcm_91005] | Definition of configurable interface Xxx_ReadData |
+| [SWS_Dcm_91006] | Definition of configurable interface Xxx_ReadData |
+| [SWS_Dcm_91007] | Definition of configurable interface Xxx_WriteData |
+| [SWS_Dcm_91008] | Definition of configurable interface Xxx_WriteData |
+| [SWS_Dcm_91009] | Definition of configurable interface Xxx_WriteData |
+| [SWS_Dcm_91010] | Definition of configurable interface Xxx_ReadDataLength |
+| [SWS_Dcm_91011] | Definition of configurable interface Xxx_ConditionCheckRead |
+| [SWS_Dcm_91012] | Definition of configurable interface Xxx_GetScalingInformation |
+| [SWS_Dcm_91013] | Definition of configurable interface Xxx_RequestResults |
+| [SWS_Dcm_91014] | Definition of configurable interface Xxx_GetInfotypeValueData |
+| [SWS_Dcm_91015] | Definition of datatype Dcm_ExtendedOpStatusType |
+| [SWS_Dcm_91016] | Definition of configurable interface Xxx_StartConfirmation |
+| [SWS_Dcm_91017] | Definition of configurable interface Xxx_StopConfirmation |
+| [SWS_Dcm_91018] | Definition of configurable interface Xxx_RequestResultsConfirmation |
+| [SWS_Dcm_91019] | Definition of ModeDeclarationGroup DcmDiagnosticSessionControl |
+| [SWS_Dcm_91020] | Definition of ModeSwitchInterface Dcm_DiagnosticSessionControlMode SwitchInterface |
+| [SWS_Dcm_91021] | Definition of ModeDeclarationGroup DcmEcuReset |
+| [SWS_Dcm_91022] | Definition of ModeSwitchInterface Dcm_EcuResetModeSwitchInterface |
+| [SWS_Dcm_91023] | Definition of ModeDeclarationGroup DcmModeRapidPowerShutDown |
+| [SWS_Dcm_91024] | Definition of ModeSwitchInterface Dcm_ModeRapidPowerShutDownMode SwitchInterface |
+| [SWS_Dcm_91025] | Definition of ModeDeclarationGroup DcmCommunicationControl |
+| [SWS_Dcm_91026] | Definition of ModeSwitchInterface CommunicationControlModeSwitchInterface_{ComMChannelName} |
+| [SWS_Dcm_91027] | Definition of ModeDeclarationGroup DcmControlDTCSetting |
+| [SWS_Dcm_91028] | Definition of ModeSwitchInterface Dcm_ControlDTCSettingModeSwitchInterface |
+| [SWS_Dcm_91031] | Definition of ModeDeclarationGroup DcmSecurityAccess |
+| [SWS_Dcm_91032] | Definition of ModeSwitchInterface Dcm_SecurityAccessModeSwitchInterface |
+| [SWS_Dcm_91033] | Definition of Port DiagnosticSessionControlModeSwitchInterface provided by module Dcm |
+| [SWS_Dcm_91034] | Definition of Port EcuResetModeSwitchInterface provided by module Dcm |
+| [SWS_Dcm_91035] | Definition of Port ModeRapidPowerShutDownModeSwitchInterface provided by module Dcm |
+| [SWS_Dcm_91036] | Definition of Port CommunicationControlModeSwitchInterface_{ComMChannelName} provided by module Dcm |
+| [SWS_Dcm_91037] | Definition of Port ControlDTCSettingModeSwitchInterface provided by module Dcm |
+| [SWS_Dcm_91039] | Definition of Port SecurityAccessModeSwitchInterface provided by module Dcm |
+| [SWS_Dcm_91040] | Definition of ImplementationDataType Dcm_RequestDataOut_{Routine}_{Signal}Type |
+| [SWS_Dcm_91041] | Definition of ImplementationDataType Dcm_RequestDataOut_{Routine}_{Signal}ArrayType |
+| [SWS_Dcm_91042] | Definition of ImplementationDataType Dcm_StartDataIn_{Routine}_{Signal}Type |
+| [SWS_Dcm_91043] | Definition of ImplementationDataType Dcm_StartDataIn_{Routine}_{Signal}ArrayType |
+| [SWS_Dcm_91044] | Definition of ImplementationDataType Dcm_StartDataOut_{Routine}_{Signal}Type |
+| [SWS_Dcm_91045] | Definition of ImplementationDataType Dcm_StartDataOut_{Routine}_{Signal}ArrayType |
+| [SWS_Dcm_91046] | Definition of ImplementationDataType Dcm_StopDataIn_{Routine}_{Signal}Type |
+| [SWS_Dcm_91047] | Definition of ImplementationDataType Dcm_StopDataIn_{Routine}_{Signal}ArrayType |
+| [SWS_Dcm_91048] | Definition of ImplementationDataType Dcm_StopDataOut_{Routine}_{Signal}Type |
+| [SWS_Dcm_91049] | Definition of ImplementationDataType Dcm_StopDataOut_{Routine}_{Signal}ArrayType |
+| [SWS_Dcm_91050] | Definition of ImplementationDataType Dcm_ControlMask_{Data}ArrayType |
+| [SWS_Dcm_91051] | Definition of ImplementationDataType Dcm_DataElement_{Data}Type |
+| [SWS_Dcm_91052] | Definition of ImplementationDataType Dcm_RequestDataIn_{Routine}_{Signal}Type |
+| [SWS_Dcm_91053] | Definition of ImplementationDataType Dcm_RequestFlexibleInArrayData_{Routine}_{Signal}Type |
+| [SWS_Dcm_91054] | Definition of ImplementationDataType Dcm_RequestDataIn_{Routine}_{Signal}PrimitiveType |
+| [SWS_Dcm_91055] | Definition of ImplementationDataType Dcm_RequestDataIn_{Routine}_{Signal}ArrayType |
+| [SWS_Dcm_91057] | Definition of SenderReceiverInterface DataServices_{DID} |
+| [SWS_Dcm_91058] | Definition of Port DataServices_{DID} provided by module Dcm |
+| [SWS_Dcm_91059] | Definition of Port DataServices_{DID} required by module Dcm |
+| [SWS_Dcm_91060] | Definition of Port DataServices_{DID} provided/required by module Dcm |
+| [SWS_Dcm_91061] | Definition of SenderReceiverInterface DataServices_{DID} |
+| [SWS_Dcm_91062] | Definition of ImplementationDataType Dcm_DataElement_{Data}_PrimitiveType |
+| [SWS_Dcm_91063] | Definition of ImplementationDataType Dcm_DataElement_{Data}_ArrayType |
+| [SWS_Dcm_91064] | Definition of ImplementationDataType Dcm_ResponseDataArrayType |
+| [SWS_Dcm_91065] | Definition of ClientServerInterface UploadDownloadServices |
+| [SWS_Dcm_91066] | Definition of ImplementationDataType Dcm_FileAndDirNameType |
+| [SWS_Dcm_91067] | Definition of ModeDeclarationGroup DcmAuthenticationState_{Connection} |
+| [SWS_Dcm_91068] | Definition of ImplementationDataType Dcm_AuthenticationRoleType |
+| [SWS_Dcm_91069] | Definition of API function Dcm_SetDeauthenticatedRole |
+| [SWS_Dcm_91070] | Definition of configurable interface Dcm_ProcessTransferDataRead |
+| [SWS_Dcm_91071] | Definition of configurable interface Dcm_ProcessTransferDataWrite |
+| [SWS_Dcm_91072] | Definition of ClientServerInterface Authentication |
+| [SWS_Dcm_91073] | Definition of Port Authentication_{Connection} required by module Dcm |
+| [SWS_Dcm_91074] | Definition of ModeSwitchInterface Dcm_AuthenticationStateModeSwitchInterface_{Connection} |
+| [SWS_Dcm_91076] | Definition of configurable interface Dcm_CsmAsyncJobFinished |
+| [SWS_Dcm_91077] | Definition of configurable interface Dcm_KeyMAsyncCertificateVerify Finished |
+| [SWS_Dcm_91078] | Definition of configurable interface Dcm_ProcessRequestAddFile |
+| [SWS_Dcm_91079] | Definition of configurable interface Dcm_ProcessRequestDeleteFile |
+| [SWS_Dcm_91080] | Definition of configurable interface Dcm_ProcessRequestReplaceFile |
+| [SWS_Dcm_91081] | Definition of configurable interface Dcm_ProcessRequestReadFile |
+| [SWS_Dcm_91082] | Definition of configurable interface Dcm_ProcessRequestReadDir |
+| [SWS_Dcm_91083] | Definition of configurable interface Dcm_WriteFile |
+| [SWS_Dcm_91084] | Definition of Port UploadDownloadServices required by module Dcm |
+| [SWS_Dcm_91085] | Definition of configurable interface Dcm_ReadFileOrDir |
+| [SWS_Dcm_91087] | Definition of ImplementationDataType Dcm_Cemr_{DID}Type |
+| [SWS_Dcm_91089] | Definition of ImplementationDataType Dcm_ControlMask_{Data}_PrimitiveType |
+| [SWS_Dcm_91090] | Definition of configurable interface Xxx_ReadData |
+| [SWS_Dcm_91091] | Definition of configurable interface Xxx_ReadData |
+| [SWS_Dcm_91092] | Definition of configurable interface Xxx_WriteData |
+| [SWS_Dcm_91093] | Definition of configurable interface Xxx_GetScalingInformation |
+| [SWS_Dcm_91094] | Definition of configurable interface Xxx_GetScalingInformation |
+| [SWS_Dcm_91095] | Definition of configurable interface Xxx_WriteData |
+| [SWS_Dcm_91096] | Definition of configurable interface Xxx_ReadDataLength |
+| [SWS_Dcm_91097] | Definition of configurable interface Xxx_ReadDataLength |
+| [SWS_Dcm_91098] | Definition of configurable interface Xxx_ReturnControlToECU |
+| [SWS_Dcm_91099] | Definition of configurable interface Xxx_ResetToDefault |
+| [SWS_Dcm_91100] | Definition of configurable interface Xxx_ResetToDefault |
+| [SWS_Dcm_91101] | Definition of configurable interface Xxx_FreezeCurrentState |
+| [SWS_Dcm_91102] | Definition of configurable interface Xxx_FreezeCurrentState |
+| [SWS_Dcm_91103] | Definition of configurable interface Xxx_ShortTermAdjustment |
+| [SWS_Dcm_91104] | Definition of configurable interface Xxx_ShortTermAdjustment |
+| [SWS_Dcm_91105] | Definition of configurable interface Xxx_Start |
+| [SWS_Dcm_91106] | Definition of configurable interface Xxx_Stop |
+| [SWS_Dcm_91107] | Definition of configurable interface Xxx_RequestResults |
+| [SWS_Dcm_91118] | Definition of ImplementationDataType Dcm_DataElement_{Data}_StructuredType |
+| [SWS_Dcm_91119] | Definition of ImplementationDataType Dcm_RequestDataOut_{Routine}_{Signal}StructuredType |
+| [SWS_Dcm_91120] | Definition of ImplementationDataType Dcm_RequestDataIn_{Routine}_{Signal}StructuredType |
+| [SWS_Dcm_91121] | Definition of ImplementationDataType Dcm_StartDataIn_{Routine}_{Signal}StructuredType |
+| [SWS_Dcm_91122] | Definition of ImplementationDataType Dcm_StartDataOut_{Routine}_{Signal}StructuredType |
+| [SWS_Dcm_91123] | Definition of ImplementationDataType Dcm_StopDataIn_{Routine}_{Signal}StructuredType |
+| [SWS_Dcm_91124] | Definition of ImplementationDataType Dcm_StopDataOut_{Routine}_{Signal}StructuredType |
+
+#### 10.1.3. R23-11 中删除的规范条目
+
+表10.3：R23-11 中删除的规范条目（**Deleted Specification Items in R23-11**）
+
+| 编号 | 标题 |
+| --- | --- |
+| [SWS_Dcm_00112] | - |
+| [SWS_Dcm_00113] | - |
+| [SWS_Dcm_00140] | - |
+| [SWS_Dcm_00141] | - |
+| [SWS_Dcm_00541] | - |
+| [SWS_Dcm_00557] | - |
+| [SWS_Dcm_00560] | - |
+| [SWS_Dcm_00655] | - |
+| [SWS_Dcm_00656] | - |
+| [SWS_Dcm_00788] | - |
+| [SWS_Dcm_00789] | - |
+| [SWS_Dcm_00790] | - |
+| [SWS_Dcm_01128] | - |
+| [SWS_Dcm_01145] | - |
+| [SWS_Dcm_01146] | - |
+| [SWS_Dcm_01168] | - |
+
+#### 10.1.4. R23-11 中新增的约束
+
+表10.4：R23-11 中新增的约束（**Added Constraints in R23-11**）
+
+| 编号 | 标题 |
+| --- | --- |
+| [SWS_Dcm_CONSTR_06108] | Not supported port interfaces for secure coding |
+| [SWS_Dcm_CONSTR_06109] | Static length of secure coding DID s |
+| [SWS_Dcm_CONSTR_06110] | Secure Coding validation routine input parameter |
+| [SWS_Dcm_CONSTR_06111] | Secure Coding validation routine output parameter |
+| [SWS_Dcm_CONSTR_06112] | Secure Coding validation routine is synchronous |
+| [SWS_Dcm_CONSTR_06113] | Require asynchronous signature verification |
+
+#### 10.1.5. R23-11 中变更的约束
+
+表10.5：R23-11 中变更的约束（**Changed Constraints in R23-11**）
+
+| 编号 | 标题 |
+| --- | --- |
+| [SWS_Dcm_CONSTR_06026] | Usage of variable data length in case of S/R communication, NvRam access or ECU signal access |
+
+#### 10.1.6. R23-11 中删除的约束
+
+表10.6：R23-11 中删除的约束（**Deleted Constraints in R23-11**）
+
+| 编号 | 标题 |
+| --- | --- |
+| [SWS_Dcm_CONSTR_06038] | Restrictions on datatype usage |
+| [SWS_Dcm_CONSTR_06067] | Dependency for DcmDspDataBlockIdRef |

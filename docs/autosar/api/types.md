@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **498** 个条目。
+共 **501** 个条目。
 
 ## A
 
@@ -122,6 +122,9 @@ title: "AUTOSAR API 类型清单"
 > 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](../general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 
 ## C
+
+**[CalibrationIDArrayType](../diagnostics/j1939dcm/index.md#7711-calibrationidarraytype)**
+> 类型 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
 
 **[Can_ConfigType](../communication/can_driver/index.md#721-can_configtype)**
 > 类型 · [AUTOSAR CAN Driver（CAN驱动程序）](../communication/can_driver/index.md) · SWS_CANDriver · R23-11
@@ -825,6 +828,14 @@ title: "AUTOSAR API 类型清单"
 
 **[ISRType](../system_services/operating_system/index.md#7311-isrtype)**
 > 类型 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
+
+## J
+
+**[J1939Dcm_ConfigType](../diagnostics/j1939dcm/index.md#721-j1939dcm_configtype)**
+> 类型 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
+**[J1939Dcm_StateType](../diagnostics/j1939dcm/index.md#722-j1939dcm_statetype)**
+> 类型 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
 
 ## K
 
