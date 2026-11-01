@@ -217,29 +217,29 @@ LIN传输协议（**LIN Transport Protocol**）作为**LinIf**一部分的，会
 
 构成模式仲裁规则的逻辑表达式可以使用不同的运算符，包括：**AND**、**OR**、**XOR**、**NOT**和**NAND**。表达式中的每一项对应一个模式请求条件（**mode request condition**）。
 
-如果模式条件（**mode condition**）关联了一个**BswMModeRequestPort**，则该条件会验证请求的模式（**requested mode**）或者指示的模式（**indicated mode**）是否**EQUAL**或者**NOT_EQUAL**于某个模式。
+如果模式条件（**mode condition**）关联了一个[**BswMModeRequestPort**](#9210-bswmmoderequestport)，则该条件会验证请求的模式（**requested mode**）或者指示的模式（**indicated mode**）是否**EQUAL**或者**NOT_EQUAL**于某个模式。
 
-如果条件关联了一个**BswMEventRequestPort**，则条件将验证请求端口是**SET**还是**CLEAR**了。 
+如果条件关联了一个[**BswMEventRequestPort**](#929-bswmeventrequestport)，则条件将验证请求端口是**SET**还是**CLEAR**了。
 
-**BswMEventRequestPort**事件请求与模式请求的不同，在于请求者不向**BswM**发送请求的模式/值，也就没有模式条件供**BswM**评估。而是**BswM**只能评估事件的接收情况。
+[**BswMEventRequestPort**](#929-bswmeventrequestport)事件请求与模式请求的不同，在于请求者不向**BswM**发送请求的模式/值，也就没有模式条件供**BswM**评估。而是**BswM**只能评估事件的接收情况。
 
-当请求者发送/调用事件时，**BswMEventRequestPort**将处于**SET**状态。**BswM**可以稍后通过执行**BswMClearEventRequest**动作将**BswMEventRequestPort**置于**CLEAR**状态。图7-1展示了具有两个条件的示例规则。规则和可用逻辑操作集被定义为**ECU**配置的一部分（在第**10.2**章中描述）。
+当请求者发送/调用事件时，[**BswMEventRequestPort**](#929-bswmeventrequestport)将处于**SET**状态。**BswM**可以稍后通过执行[**BswMClearEventRequest**](#9253-bswmcleareventrequest)动作将[**BswMEventRequestPort**](#929-bswmeventrequestport)置于**CLEAR**状态。图7-1展示了具有两个条件的示例规则。规则和可用逻辑操作集被定义为**ECU**配置的一部分（在第[**9.2**](#92-容器与配置参数)章中描述）。
 
 ![Figure7-1](Figure7-1.png)
 
-当**BswMConditionType**配置为**BSWM_EVENT_IS_SET**，且**BswMModeCondition**引用了**BswMEventRequestPort**时：
+当**BswMConditionType**配置为**BSWM_EVENT_IS_SET**，且[**BswMModeCondition**](#925-bswmmodecondition)引用了[**BswMEventRequestPort**](#929-bswmeventrequestport)时：
 
-* 如果**BswMEventRequestPort**处于**SET**状态，则**BswMModeCondition**应评估为**TRUE**。
-* 如果**BswMEventRequestPort**处于**CLEAR**状态，则**BswMModeCondition**应评估为**FALSE**。
+* 如果[**BswMEventRequestPort**](#929-bswmeventrequestport)处于**SET**状态，则[**BswMModeCondition**](#925-bswmmodecondition)应评估为**TRUE**。
+* 如果[**BswMEventRequestPort**](#929-bswmeventrequestport)处于**CLEAR**状态，则[**BswMModeCondition**](#925-bswmmodecondition)应评估为**FALSE**。
 
-当BswMConditionType配置为**BSWM_EVENT_IS_CLEARED**，且**BswMModeCondition**引用了**BswMEventRequestPort**时：
+当BswMConditionType配置为**BSWM_EVENT_IS_CLEARED**，且[**BswMModeCondition**](#925-bswmmodecondition)引用了[**BswMEventRequestPort**](#929-bswmeventrequestport)时：
 
-* 如果**BswMEventRequestPort**处于**SET**状态，则**BswMModeCondition**应评估为**FALSE**。
-* 如果**BswMEventRequestPort**处于**CLEAR**状态，则**BswMModeCondition**应评估为**TRUE**。
+* 如果[**BswMEventRequestPort**](#929-bswmeventrequestport)处于**SET**状态，则[**BswMModeCondition**](#925-bswmmodecondition)应评估为**FALSE**。
+* 如果[**BswMEventRequestPort**](#929-bswmeventrequestport)处于**CLEAR**状态，则[**BswMModeCondition**](#925-bswmmodecondition)应评估为**TRUE**。
 
-当**BswM**在配置的**BswMEventRequestPort**上接收到事件时，（例如：[**BswM_ComM_InitiateReset**](#735-bswm_comm_initiatereset)被**ComM**调用），**BswMEventRequestPort**需被置于**SET**状态。
+当**BswM**在配置的[**BswMEventRequestPort**](#929-bswmeventrequestport)上接收到事件时，（例如：[**BswM_ComM_InitiateReset**](#735-bswm_comm_initiatereset)被**ComM**调用），[**BswMEventRequestPort**](#929-bswmeventrequestport)需被置于**SET**状态。
 
-当在**BswMEventRequestPort**上执行**BswMClearEventRequest**动作，则**BswMEventRequestPort**需被置于**CLEAR**状态。
+当在[**BswMEventRequestPort**](#929-bswmeventrequestport)上执行[**BswMClearEventRequest**](#9253-bswmcleareventrequest)动作，则[**BswMEventRequestPort**](#929-bswmeventrequestport)需被置于**CLEAR**状态。
 
 #### 6.1.3. 模式仲裁的需求
 
@@ -257,7 +257,7 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 
 **注意：**
 
-所有模式仲裁请求（请求和指示）都是由**BswM**模块以相同的方式处理。它们是通过在**BswMModeRequestSource**配置容器中，选择相应的模式条件类型（**mode condition type**）进行配置。
+所有模式仲裁请求（请求和指示）都是由**BswM**模块以相同的方式处理。它们是通过在[**BswMModeRequestSource**](#9214-bswmmoderequestsource)配置容器中，选择相应的模式条件类型（**mode condition type**）进行配置。
 
 **BswM**也需支持使用所配置的规则执行模式仲裁。模式仲裁规则（**mode arbitration rules**）需支持通过模块的配置参数进行配置。
 
@@ -290,14 +290,14 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 
 模式仲裁规则可以包含立即和延迟模式仲裁请求的任意组合。
 
-对于模式仲裁请求（**a mode arbitration request**），**BswM**模块可通过**BswMModeRequestPort**参数容器中的**BswMRequestProcessing**配置参数进行设定:
+对于模式仲裁请求（**a mode arbitration request**），**BswM**模块可通过[**BswMModeRequestPort**](#9210-bswmmoderequestport)参数容器中的**BswMRequestProcessing**配置参数进行设定:
 
 1. 当**BswM**模块需支持立即执行模式仲裁时，可将**BswMRequestProcessing**配置参数设置为**BSWM_IMMEDIATE**。
 2. 当**BswM**模块需支持将模式仲裁推迟到BswM主函数执行时，可将**BswMRequestProcessing**配置参数设置为**BSWM_DEFERRED**。
    
 只有使用特定的立即模式条件（**immediate mode condition**）的模式仲裁规则，才需要由**BswM**在该特定模式请求或者指示的上下文环境中进行评估。
 
-对于事件的设置（**an event is set**)，**BswM**模块可通过**BswMEventRequestPort**参数容器中的**BswMEventRequestProcessing**配置参数进行设定:
+对于事件的设置（**an event is set**)，**BswM**模块可通过[**BswMEventRequestPort**](#929-bswmeventrequestport)参数容器中的**BswMEventRequestProcessing**配置参数进行设定:
 
 1. 当**BswM**模块需支持立即执行模式仲裁时，可将**BswMEventRequestProcessing**配置参数设置为**BSWM_IMMEDIATE**。
 2. 当**BswM**模块需支持将模式仲裁推迟到BswM主函数执行时，可将**BswMEventRequestProcessing**配置参数设置为**BSWM_DEFERRED**。
@@ -318,15 +318,15 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 
 #### 6.1.4. 初始化后的仲裁行为
 
-**BswM**初始化后的模式仲裁行为，由配置容器**BswMModeInitValue**控制。该参数可以为配置中的每个**BswMModeRequestPort**进行单次的配置。
+**BswM**初始化后的模式仲裁行为，由配置容器[**BswMModeInitValue**](#9211-bswmmodeinitvalue)控制。该参数可以为配置中的每个[**BswMModeRequestPort**](#9210-bswmmoderequestport)进行单次的配置。
 
-如果容器**BswMModeInitValue**不存在或者**ModeRequest**尚无初始值，则**BswM**应将相应的模式条件视为未定义，直到相应的模式仲裁请求第一次更新后，才将其用于模式仲裁。
+如果容器[**BswMModeInitValue**](#9211-bswmmodeinitvalue)不存在或者**ModeRequest**尚无初始值，则**BswM**应将相应的模式条件视为未定义，直到相应的模式仲裁请求第一次更新后，才将其用于模式仲裁。
 
 **BswM**需仅对在其逻辑表达式中不包含任何未定义模式条件的规则进行仲裁。
 
-每个**BswMModeRequestPort**初始化后的初始值可以由配置容器**BswMModeInitValue**控制。
+每个[**BswMModeRequestPort**](#9210-bswmmoderequestport)初始化后的初始值可以由配置容器[**BswMModeInitValue**](#9211-bswmmodeinitvalue)控制。
 
-在定义**BswMModeInitValue**的情况下，**BswM**应在**BswM**被初始化时，使用**BswMBswModeInitValue**或者**BswMCompuScaleModeValue**的值来初始化相应的**BswMModeRequestSource**。对于单个的**BswMModeInitValue**，**BswM**需拒绝同时包含**BswMBswModeInitValue**和**BswMCompuScaleModeValue**的配置。该初始化值将用于仲裁规则，直到相应的模式仲裁请求已被更新，例如：每次调用[**BswM_RequestMode**](#7326-bswm_requestmode)都需更新**GenericRequest**模式。
+在定义[**BswMModeInitValue**](#9211-bswmmodeinitvalue)的情况下，**BswM**应在**BswM**被初始化时，使用**BswMBswModeInitValue**或者[**BswMCompuScaleModeValue**](#9212-bswmcompuscalemodevalue)的值来初始化相应的[**BswMModeRequestSource**](#9214-bswmmoderequestsource)。对于单个的[**BswMModeInitValue**](#9211-bswmmodeinitvalue)，**BswM**需拒绝同时包含**BswMBswModeInitValue**和[**BswMCompuScaleModeValue**](#9212-bswmcompuscalemodevalue)的配置。该初始化值将用于仲裁规则，直到相应的模式仲裁请求已被更新，例如：每次调用[**BswM_RequestMode**](#7326-bswm_requestmode)都需更新**GenericRequest**模式。
 
 **注意：**
 
@@ -400,9 +400,9 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 
 如果没有**BswMActionListPriority**的动作列表应被解释为**BswMActionListPriority**等于**0**。
 
-**BswM**需拒绝**BswMActionList**包含具有相同值**BswMActionListItemIndexes**的**BswMActionListItems**的配置。
+**BswM**需拒绝[**BswMActionList**](#9286-bswmactionlist)包含具有相同值**BswMActionListItemIndexes**的**BswMActionListItems**的配置。
 
-在执行**BswMActionList**时，**BswM**应从具有最低**BswMActionListItemIndex**值的**BswMActionListItem**开始。随后的**BswMActionListItems**应按其 **BswMActionListItemIndex**的递增顺序执行。
+在执行[**BswMActionList**](#9286-bswmactionlist)时，**BswM**应从具有最低**BswMActionListItemIndex**值的[**BswMActionListItem**](#9287-bswmactionlistitem)开始。随后的**BswMActionListItems**应按其 **BswMActionListItemIndex**的递增顺序执行。
 
 在动作列表中，配置的**BswMActionListItemIndexes**不一定需要是连续的或从零开始的。**BswM**将开始执行具有最低索引的动作列表项，并继续执行具有最高索引的动作列表项。如果索引有间隙，即索引不连续的情况，这些间隙将被简单地忽略。因为动作列表是有序列表，所以不允许在动作列表的上下文中配置相同数值的**BswMActionListItemIndexes**。
 
@@ -413,7 +413,7 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 1. **BSWM_CONDITION**：条件执行，即每次评估规则时被执行。
 2. **BSWM_TRIGGER**：触发执行，即每次评估结果发生变化时才执行。 
 
-可以使用**BswMActionList**配置容器中的**BswMActionListExecution**配置参数，对动作列表的执行方式的进行设定。
+可以使用[**BswMActionList**](#9286-bswmactionlist)配置容器中的**BswMActionListExecution**配置参数，对动作列表的执行方式的进行设定。
 
 但是对于不被规则直接引用的嵌套动作列表，**BswMActionListExecution**参数（如：**BSWM_CONDITION**或者**BSWM_TRIGGER**）是没有任何意义，并且不会影响嵌套动作列表的执行方式。每当其父动作列表被执行时，不被规则直接引用的嵌套动作列表也会被相应地执行。
 
@@ -427,52 +427,61 @@ request**）即可对应于模式指示（**mode indication**），也可对应�
 
 **BswM**包含了部分预定义的动作集合，这些动作可以在动作列表中被使用。这样做的原因是为了简化**ECU**配置和**BswM**配置代码的生成。
 
-**BswM**需要能够执行由配置容器**BswMAvailableActions**定义的预定义动作。同时**BswM**应能够调用**AUTOSAR BSW**中的任何函数，即使它不存在**BswMAvailableActions**配置定义的标准化动作中。
+**BswM**需要能够执行由配置容器[**BswMAvailableActions**](#9252-bswmavailableactions)定义的预定义动作。同时**BswM**应能够调用**AUTOSAR BSW**中的任何函数，即使它不存在[**BswMAvailableActions**](#9252-bswmavailableactions)配置定义的标准化动作中。
 
-* BswMClearEventRequest
-* BswMComMAllowCom
-* BswMComMModeLimitation
-* BswMComMModeSwitch
-* BswMCoreHaltMode
-* BswMDeadlineMonitoringControl
-* BswMEcuMDriverInitListBswM
-* BswMEcuMGoDownHaltPoll
-* BswMEcuMSelectShutdownTarget
-* BswMEcuMStateSwitch
-* BswMEthIfStartAllPorts
-* BswMEthIfSwitchPortGroupRequestMode
-* BswMFrSMAllSlots 
+* [BswMClearEventRequest](#9253-bswmcleareventrequest)
+* [BswMComMAllowCom](#9254-bswmcommallowcom)
+* [BswMComMModeLimitation](#9255-bswmcommmodelimitation)
+* [BswMComMModeSwitch](#9256-bswmcommmodeswitch)
+* [BswMCoreHaltMode](#9257-bswmcorehaltmode)
+* [BswMDeadlineMonitoringControl](#9258-bswmdeadlinemonitoringcontrol)
+* [BswMEcuMDriverInitListBswM](#9259-bswmecumdriverinitlistbswm)
+* [BswMEcuMGoDownHaltPoll](#9260-bswmecumgodownhaltpoll)
+* [BswMEcuMSelectShutdownTarget](#9261-bswmecumselectshutdowntarget)
+* [BswMEcuMStateSwitch](#9262-bswmecumstateswitch)
+* [BswMEthIfStartAllPorts](#9263-bswmethifstartallports)
+* [BswMEthIfSwitchPortGroupRequestMode](#9264-bswmethifswitchportgrouprequestmode)
+* [BswMFrSMAllSlots](#9265-bswmfrsmallslots)
 * BswMIdsMBlockStateChangeRequest
-* BswMJ1939DcmStateSwitch
-* BswMJ1939RmStateSwitch
-* BswMLinScheduleSwitch
-* BswMNMControl
-* BswMPduGroupSwitch
-* BswMPduRouterControl
-* BswMRteModeRequest
-* BswMRteStart
-* BswMRteStop
-* BswMRteSwitch
-* BswMSchMSwitch
-* BswMSdClientServiceModeRequest
-* BswMSdConsumedEventGroupModeRequest
-* BswMSdServerServiceModeRequest
-* BswMSdServiceGroupSwitch
-* BswMSetFirewallState
-* BswMSwitchIPduMode
-* BswMTimerControl
-* BswMTriggerIPduSend
-* BswMUserCallout
+* [BswMJ1939DcmStateSwitch](#9266-bswmj1939dcmstateswitch)
+* [BswMJ1939RmStateSwitch](#9267-bswmj1939rmstateswitch)
+* [BswMLinScheduleSwitch](#9268-bswmlinscheduleswitch)
+* [BswMNMControl](#9269-bswmnmcontrol)
+* [BswMPduGroupSwitch](#9270-bswmpdugroupswitch)
+* [BswMPduRouterControl](#9271-bswmpduroutercontrol)
+* [BswMRteModeRequest](#9272-bswmrtemoderequest)
+* [BswMRteStart](#9273-bswmrtestart)
+* [BswMRteStop](#9274-bswmrtestop)
+* [BswMRteSwitch](#9275-bswmrteswitch)
+* [BswMSchMSwitch](#9276-bswmschmswitch)
+* [BswMSdClientServiceModeRequest](#9277-bswmsdclientservicemoderequest)
+* [BswMSdConsumedEventGroupModeRequest](#9278-bswmsdconsumedeventgroupmoderequest)
+* [BswMSdServerServiceModeRequest](#9279-bswmsdserverservicemoderequest)
+* [BswMSdServiceGroupSwitch](#9280-bswmsdservicegroupswitch)
+* [BswMSetFirewallState](#9281-bswmsetfirewallstate)
+* [BswMSwitchIPduMode](#9282-bswmswitchipdumode)
+* [BswMTimerControl](#9283-bswmtimercontrol)
+* [BswMTriggerIPduSend](#9284-bswmtriggeripdusend)
+* [BswMUserCallout](#9285-bswmusercallout)
 
-BswM也能够调用用户定义的函数（**user defined functions**），同时用户定义函数的参数及其数值需在**ECU**配置时定义，通过**BswMUserCallout**配置容器来定义。
+BswM也能够调用用户定义的函数（**user defined functions**），同时用户定义函数的参数及其数值需在**ECU**配置时定义，通过[**BswMUserCallout**](#9285-bswmusercallout)配置容器来定义。
 
 #### 6.2.5. 初始化后模式控制的行为
 
-**BswM**初始化后，模式控制的行为通过**BswMRule**配置容器内的**BswMRuleInitState**配置参数进行配置。它定义了在初始化后第一次评估规则后，决定执行哪个动作列表时，需要使用的先前评估结果（**previous evaluation result**）。在**BswMActionList**配置容器内的**BswMActionListExecution**配置参数也会影响初始化后的动作列表执行。
+**BswM**初始化后，模式控制的行为通过[**BswMRule**](#9248-bswmrule)配置容器内的**BswMRuleInitState**配置参数进行配置。它定义了在初始化后第一次评估规则后，决定执行哪个动作列表时，需要使用的先前评估结果（**previous evaluation result**）。在[**BswMActionList**](#9286-bswmactionlist)配置容器内的**BswMActionListExecution**配置参数也会影响初始化后的动作列表执行。
 
 在初始化后第一次评估规则时，**BswM**需根据表7-1中的规定进行操作。
 
-![Table7-1](Table7-1.png)
+表7.1：**BswM**初始化后首次评估规则时的行为
+
+| BswMRuleInitState | BswMActionListExecution | 规则评估为 true | 规则评估为 false |
+|---|---|---|---|
+| BSWM_UNDEFINED | BSWM_TRIGGER | 执行“true”操作列表 | 执行“false”操作列表 |
+| BSWM_TRUE | BSWM_TRIGGER | 不执行任何操作 | 执行“false”操作列表 |
+| BSWM_FALSE | BSWM_TRIGGER | 执行“true”操作列表 | 不执行任何操作 |
+| BSWM_UNDEFINED | BSWM_CONDITION | 执行“true”操作列表 | 执行“false”操作列表 |
+| BSWM_TRUE | BSWM_CONDITION | 执行“true”操作列表 | 执行“false”操作列表 |
+| BSWM_FALSE | BSWM_CONDITION | 执行“true”操作列表 | 执行“false”操作列表 |
 
 **注意：**
 
@@ -484,39 +493,39 @@ BswM也能够调用用户定义的函数（**user defined functions**），同�
 
 一个定时器总是由两部分构成：
 
-1. 一个作为**BswMModeRequestSource**的**BswMTimer**。
-2. 一个控制此**BswMTimer**的相应动作（可参见**BswMTimerControl**配置参数）
+1. 一个作为[**BswMModeRequestSource**](#9214-bswmmoderequestsource)的[**BswMTimer**](#9247-bswmtimer)。
+2. 一个控制此[**BswMTimer**](#9247-bswmtimer)的相应动作（可参见[**BswMTimerControl**](#9283-bswmtimercontrol)配置参数）
 
-**BswMTimer**的值例如（**e.g.**）为：**BSWM_TIMER_STOPPED**、**BSWM_TIMER_STARTED**、**BSWM_TIMER_EXPIRED**。
+[**BswMTimer**](#9247-bswmtimer)的值例如（**e.g.**）为：**BSWM_TIMER_STOPPED**、**BSWM_TIMER_STARTED**、**BSWM_TIMER_EXPIRED**。
    
-定时器的操作只能在**BswMTimerControl**动作的上下文环境中控制。同时**BswMTimer**的值可以被**BswM**中所配置的其他规则进行评估，并以此触发动作列表。没有外部接口（**external interface**）来控制或者操作此定时器。
+定时器的操作只能在[**BswMTimerControl**](#9283-bswmtimercontrol)动作的上下文环境中控制。同时[**BswMTimer**](#9247-bswmtimer)的值可以被**BswM**中所配置的其他规则进行评估，并以此触发动作列表。没有外部接口（**external interface**）来控制或者操作此定时器。
 
-每个**BswMTimer**在初始化期间，都是停止状态，也就是说**BswMTimer**的初始值需为**BSWM_TIMER_STOPPED**。
+每个[**BswMTimer**](#9247-bswmtimer)在初始化期间，都是停止状态，也就是说[**BswMTimer**](#9247-bswmtimer)的初始值需为**BSWM_TIMER_STOPPED**。
 
-**BSWM_TIMER_START**的**BswMTimerAction**动作需使用相应配置在**BswMTimerValue**参数中的定时器值，重新加载引用的**BswMTimer**（通过：**BswMTimerRef**），并将定时器的模式更改为**BSWM_TIMER_STARTED**。
+**BSWM_TIMER_START**的**BswMTimerAction**动作需使用相应配置在**BswMTimerValue**参数中的定时器值，重新加载引用的[**BswMTimer**](#9247-bswmtimer)（通过：**BswMTimerRef**），并将定时器的模式更改为**BSWM_TIMER_STARTED**。
 
 注意：定时器只能通过 BswMTimerAction 动作重新加载（不可能自动重新加载）。
 
-每个**BswMTimer**处于**BSWM_TIMER_STARTED**模式时，需在[**BswM_MainFunction**](#751-bswm_mainfunction)中递减定时器的计数（需按[**BswM_MainFunction**](#751-bswm_mainfunction)的周期时间）。
+每个[**BswMTimer**](#9247-bswmtimer)处于**BSWM_TIMER_STARTED**模式时，需在[**BswM_MainFunction**](#751-bswm_mainfunction)中递减定时器的计数（需按[**BswM_MainFunction**](#751-bswm_mainfunction)的周期时间）。
 
 **注意：**
 
-**BswMTimer**分辨率（**resolution**）需是[**BswM_MainFunction**](#751-bswm_mainfunction)周期时间的倍数。此外**BswMTimer**的准确性取决于[**BswM_MainFunction**](#751-bswm_mainfunction)的准确性。
+[**BswMTimer**](#9247-bswmtimer)分辨率（**resolution**）需是[**BswM_MainFunction**](#751-bswm_mainfunction)周期时间的倍数。此外[**BswMTimer**](#9247-bswmtimer)的准确性取决于[**BswM_MainFunction**](#751-bswm_mainfunction)的准确性。
 
-如果处于**BSWM_TIMER_STARTED**模式的**BswMTimer**时间到期时，则**BswMTimer**模式需更改为**BSWM_TIMER_EXPIRED**，接着**BswMTimer**模式需在同一个[**BswM_MainFunction**](#751-bswm_mainfunction)的周期中进行仲裁。
+如果处于**BSWM_TIMER_STARTED**模式的[**BswMTimer**](#9247-bswmtimer)时间到期时，则[**BswMTimer**](#9247-bswmtimer)模式需更改为**BSWM_TIMER_EXPIRED**，接着[**BswMTimer**](#9247-bswmtimer)模式需在同一个[**BswM_MainFunction**](#751-bswm_mainfunction)的周期中进行仲裁。
 
-**BSWM_TIMER_STOP**的**BswMTimerAction**动作需立即停止引用的**BswMTimer**（通过：**BswMTimerRef**）并将其模式更改为**BSWM_TIMER_STOPPED**。
+**BSWM_TIMER_STOP**的**BswMTimerAction**动作需立即停止引用的[**BswMTimer**](#9247-bswmtimer)（通过：**BswMTimerRef**）并将其模式更改为**BSWM_TIMER_STOPPED**。
 
-与**BswMTimer**相关的**BswMRequestProcessing**（例如：**IMMEDIATE**、**DEFERRED**）配置会被**BswM**忽略。**BswM**会始终将**BswMTimer**的处理视为**DEFERRED**，并在**BswM**主函数期间进行仲裁。
+与[**BswMTimer**](#9247-bswmtimer)相关的**BswMRequestProcessing**（例如：**IMMEDIATE**、**DEFERRED**）配置会被**BswM**忽略。**BswM**会始终将[**BswMTimer**](#9247-bswmtimer)的处理视为**DEFERRED**，并在**BswM**主函数期间进行仲裁。
 
 注意：
-在**BSWM_TIMER_EXPIRED**模式下的**BswMTimer**不会被**BswM**自动设置为**BSWM_TIMER_STOPPED**。为了将**BswMTimer**从**BSWM_TIMER_EXPIRED**转换到另一种模式，用户需要配置一个动作（**Action**）。如果没有配置任何动作使**BswMTimer**退出**BSWM_TIMER_EXPIRED**模式，那么**BswMTimer**将在接下来的**BswM**主函数周期中继续被仲裁为**BSWM_TIMER_EXPIRED**。
+在**BSWM_TIMER_EXPIRED**模式下的[**BswMTimer**](#9247-bswmtimer)不会被**BswM**自动设置为**BSWM_TIMER_STOPPED**。为了将[**BswMTimer**](#9247-bswmtimer)从**BSWM_TIMER_EXPIRED**转换到另一种模式，用户需要配置一个动作（**Action**）。如果没有配置任何动作使[**BswMTimer**](#9247-bswmtimer)退出**BSWM_TIMER_EXPIRED**模式，那么[**BswMTimer**](#9247-bswmtimer)将在接下来的**BswM**主函数周期中继续被仲裁为**BSWM_TIMER_EXPIRED**。
 
 ### 6.4. 多分区支持
 
 对于多个**BswM**实例的情况，每个**BswM**实例将根据自己的配置集生成自己单独的服务组件描述。集成商需要将这些单独的服务组件分配给相应的分区。
 
-**BswM**存在于每个分区中，并具有特定于此分区的配置，即每个分区的**BswMConfig**都是单独实例的。包含的动作列表只在本地分区执行。
+**BswM**存在于每个分区中，并具有特定于此分区的配置，即每个分区的[**BswMConfig**](#922-bswmconfig)都是单独实例的。包含的动作列表只在本地分区执行。
 
 ### 6.5. 错误分类
 
@@ -547,7 +556,7 @@ BswM也能够调用用户定义的函数（**user defined functions**），同�
 | --- | --- | --- |
 | 某个动作返回**E_NOT_OK** | **BSWM_E_ACTION_FAILED** | 0x80..0xFF（由**BswMReportFailRuntimeErrorId**配置） |
 
-当**BswMActionListItem**配置了**BswMReportFailRuntimeErrorId**，如果操作返回**E_NOT_OK**，则**BswM**需向**Det**报告**BSWM_E_ACTION_FAILED**运行时错误。**BSWM_E_ACTION_FAILED**运行时错误中报告的**ErrorId**由**BswMReportFailRuntimeErrorId**中配置的值给出。
+当[**BswMActionListItem**](#9287-bswmactionlistitem)配置了**BswMReportFailRuntimeErrorId**，如果操作返回**E_NOT_OK**，则**BswM**需向**Det**报告**BSWM_E_ACTION_FAILED**运行时错误。**BSWM_E_ACTION_FAILED**运行时错误中报告的**ErrorId**由**BswMReportFailRuntimeErrorId**中配置的值给出。
 
 由于动作的调用上下文取决于配置（例如：**DEFERRED**或**IMMEDIATE**），**BSWM_E_ACTION_FAILED**运行时错误中报告的**ApiId**未在本规范中定义，可能是特定于实现的。
 
@@ -801,7 +810,7 @@ DataReceiveEvent AppModeRequestEvent {
 
 图7-7展示了在使用（**SomeIP**）服务发现的情况下，构成事件订阅请求的实体链。其中灰色元素为配置的元素。通过评估引用了应用事件（此处的**Ev1**）的端口组引用，可以推导出对应的请求端口（**SWC_P1_Req**）。应用事件与对应**SD**事件（此处的**Eventgroup 1**中的**Ev1**）之间的关系通过**ECU**配置提供。
 
-对于受根据**TPS_SWCT_03504**（软件组件作为客户端订阅事件和方法）的请求端口影响的每个服务实例的事件（组），应创建一个**BswM**规则（**BswMRule**）。该规则的短名称应为该服务实例目标事件（组）的短名称，并加上前缀**ESR_**。
+对于受根据**TPS_SWCT_03504**（软件组件作为客户端订阅事件和方法）的请求端口影响的每个服务实例的事件（组），应创建一个**BswM**规则（[**BswMRule**](#9248-bswmrule)）。该规则的短名称应为该服务实例目标事件（组）的短名称，并加上前缀**ESR_**。
 
 **注意：** **SomeIP**服务发现仅支持事件组。因此，在使用**SomeIP**的情况下，该规则可能覆盖多个事件。
 
@@ -809,13 +818,13 @@ DataReceiveEvent AppModeRequestEvent {
 
 **注意：** 服务请求规则会收集指向同一服务实例的所有请求端口。这样，只要请求了任何事件或方法，就会请求客户端服务。
 
-客户端订阅**SenderReceiverInterface**应按照[SWS_BSwM_91010]（见章节[7.7.5.1 S/R接口 ClientServiceRequest](#7751-s/r接口-clientservicerequest)）中定义的方式定义：其中{RuleName}为对应规则的名称，{PortName}为对应**SW-C**端口的短名称。
+客户端订阅**SenderReceiverInterface**应按照[7.7.5.1 S/R接口 ClientServiceRequest](#7751-sr接口-clientservicerequest)中定义的方式定义：其中{RuleName}为对应规则的名称，{PortName}为对应**SW-C**端口的短名称。
 
 **注意：** {PortName}足以匹配对应的请求端口。
 
 **注意：** 同一个接口同时用于请求事件和请求客户端服务。
 
-对于根据**TPS_SWCT_03504**的每个请求端口，应按照[SWS_BSwM_91007]（见章节[7.7.2.4 S/R端口 BswM_ClientServiceRequest](#7724-s/r端口-bswm_clientservicerequest)）创建一个对应的**RPortPrototype**。
+对于根据**TPS_SWCT_03504**的每个请求端口，应按照[7.7.2.4 S/R端口 BswM_ClientServiceRequest](#7724-sr端口-bswm_clientservicerequest)创建一个对应的**RPortPrototype**。
 
 属于同一事件（组）的所有请求端口应作为事件订阅规则的输入。
 
@@ -859,21 +868,21 @@ DataReceiveEvent AppModeRequestEvent {
 
 作为客户端且对事件和方法订阅状态感兴趣的软件组件，会暴露一个由**ModeSwitchInterface**类型化的**RPortPrototype**。通过这种方式，软件组件可以由**BswM**通知订阅是否已建立。
 
-客户端服务订阅状态模式切换接口（**Mode Switch Interface**）应按照[SWS_BSwM_91016]（见章节[7.7.4.1 模式切换接口 ClientServiceSubscriptionState](#7741-模式切换接口-clientservicesubscriptionstate)）定义：其中{RuleName}为对应规则的名称，{SwcName_PortName}为对应**SW-C**端口的**SW-C**短名称和端口名称。初始模式应为**RELEASE_SERVICE**。
+客户端服务订阅状态模式切换接口（**Mode Switch Interface**）应按照[7.7.4.1 模式切换接口 ClientServiceSubscriptionState](#7741-模式切换接口-clientservicesubscriptionstate)定义：其中{RuleName}为对应规则的名称，{SwcName_PortName}为对应**SW-C**端口的**SW-C**短名称和端口名称。初始模式应为**RELEASE_SERVICE**。
 
 **注意：** 同一个接口既用于通知事件订阅，也用于指示客户端服务的可用性，具体取决于是否有事件受到影响（**depending on whether events are affected**）。
 
 对于根据**TPS_SWCT_03505**（软件组件接收客户端事件和方法订阅状态变化的通知）被任何**RPortPrototype**引用的每个端口组，应创建一个**BswM**规则。其短名称应为**SANR_{端口组的短名称}**。
 
-对于受服务可用性通知规则影响的每个已消费事件组（**Consumed Eventgroup**），应创建一个**BswMModeRequestSource.BswMSdConsumedEventGroupCurrentState**，作为该规则的输入。
+对于受服务可用性通知规则影响的每个已消费事件组（**Consumed Eventgroup**），应创建一个**[BswMModeRequestSource](#9214-bswmmoderequestsource).[BswMSdConsumedEventGroupCurrentState](#9241-bswmsdconsumedeventgroupcurrentstate)**，作为该规则的输入。
 
-对于受服务可用性通知规则影响的每个客户端服务，应创建一个**BswMModeRequestSource.BswMSdClientServiceCurrentState**，作为该规则的输入。
+对于受服务可用性通知规则影响的每个客户端服务，应创建一个**[BswMModeRequestSource](#9214-bswmmoderequestsource).[BswMSdClientServiceCurrentState](#9240-bswmsdclientservicecurrentstate)**，作为该规则的输入。
 
 对于根据**TPS_SWCT_03505**被任何**RPortPrototype**引用的每个端口组，应按以下方式创建一个**BswM**规则：**BswMRuleInitState** = **FALSE**。如果所有关联的模式请求源都评估为**SD_CLIENT_SERVICE_AVAILABLE**，且所有关联的模式请求源都评估为**SD_CONSUMED_EVENTGROUP_AVAILABLE**，则该规则应评估为**TRUE**；否则，该规则应评估为**FALSE**。
 
 **注意：** 只有当与端口组关联的所有事件和所有服务都可用时，该端口组才可用。
 
-对于根据**TPS_SWCT_03505**被任何**RPortPrototype**引用的每个端口组，应按照[SWS_BSwM_91015]（见章节[7.7.2.6 模式切换端口 BswM_ClientServiceSubscriptionState](#7726-模式切换端口-bswm_clientservicesubscriptionstate)）创建一个对应的**PPortPrototype**（客户端订阅通知端口）。
+对于根据**TPS_SWCT_03505**被任何**RPortPrototype**引用的每个端口组，应按照[7.7.2.6 模式切换端口 BswM_ClientServiceSubscriptionState](#7726-模式切换端口-bswm_clientservicesubscriptionstate)创建一个对应的**PPortPrototype**（客户端订阅通知端口）。
 
 应创建一个动作列表，通过将客户端订阅通知**PPort**的当前模式设置为**REQUEST_SERVICE**，来执行对相应**SW-C**的通知。该动作列表应作为客户端事件订阅通知规则的**TRUE**动作列表。
 
@@ -889,13 +898,13 @@ DataReceiveEvent AppModeRequestEvent {
 
 **约束：** 对于服务实例的每个实例，根据**TPS_SWCT_03502**只允许一个端口。
 
-服务器服务请求**SenderReceiverInterface**应按照[SWS_BSwM_91009]（见章节[7.7.5.2 S/R接口 ServerServiceRequest](#7752-s/r接口-serverservicerequest)）定义：其中{RuleName}为对应规则的名称，{PortName}为服务器**SW-C**对应**SW-C**端口的短名称。
+服务器服务请求**SenderReceiverInterface**应按照[7.7.5.2 S/R接口 ServerServiceRequest](#7752-sr接口-serverservicerequest)定义：其中{RuleName}为对应规则的名称，{PortName}为服务器**SW-C**对应**SW-C**端口的短名称。
 
 **注意：** {PortName}足以匹配对应的请求端口。
 
 对于受根据**TPS_SWCT_03502**的请求端口影响的每个服务实例，应创建一个**BswM**规则。该规则的短名称应为目标服务的短名称，并加上前缀**SOR_**。
 
-对于根据**TPS_SWCT_03502**的每个请求端口，应按照[SWS_BSwM_91011]（见章节[7.7.2.5 S/R端口 BswM_ServerServiceRequest](#7725-s/r端口-bswm_serverservicerequest)）创建一个对应的**RPortPrototype**。
+对于根据**TPS_SWCT_03502**的每个请求端口，应按照[7.7.2.5 S/R端口 BswM_ServerServiceRequest](#7725-sr端口-bswm_serverservicerequest)创建一个对应的**RPortPrototype**。
 
 属于同一服务实例的请求端口应作为服务提供规则的输入。
 
@@ -925,15 +934,15 @@ DataReceiveEvent AppModeRequestEvent {
 
 作为服务器且对服务实例事件订阅状态感兴趣的软件组件，会暴露一个由**ModeSwitchInterface**类型化的**RPortPrototype**。通过这种方式，软件组件可以由**BswM**通知订阅的变化。
 
-服务器服务订阅状态模式切换接口应按照[SWS_BSwM_91013]（见章节[7.7.4.2 模式切换接口 ServerServiceSubscriptionState](#7742-模式切换接口-serverservicesubscriptionstate)）定义：其中{RuleName}为对应规则的名称，{SwcName_PortName}为对应**SW-C**端口的**SW-C**短名称和端口名称。初始模式应为**RELEASE_SERVICE**。
+服务器服务订阅状态模式切换接口应按照[7.7.4.2 模式切换接口 ServerServiceSubscriptionState](#7742-模式切换接口-serverservicesubscriptionstate)定义：其中{RuleName}为对应规则的名称，{SwcName_PortName}为对应**SW-C**端口的**SW-C**短名称和端口名称。初始模式应为**RELEASE_SERVICE**。
 
 对于根据**TPS_SWCT_03503**（软件组件接收服务器事件订阅状态变化的通知）被任何**RPortPrototype**引用的每个端口组，应创建一个**BswM**规则。其短名称应为**SESNR_{端口组的短名称}**。
 
-对于根据**TPS_SWCT_03503**的每个通知端口，应按照[SWS_BSwM_91012]（见章节[7.7.2.7 模式切换端口 BswM_ServerServiceSubscriptionState](#7727-模式切换端口-bswm_serverservicesubscriptionstate)）创建一个对应的**PPortPrototype**（服务器订阅通知端口）。
+对于根据**TPS_SWCT_03503**的每个通知端口，应按照[7.7.2.7 模式切换端口 BswM_ServerServiceSubscriptionState](#7727-模式切换端口-bswm_serverservicesubscriptionstate)创建一个对应的**PPortPrototype**（服务器订阅通知端口）。
 
-对于受服务器事件订阅通知规则影响的每个事件（组），应创建一个**BswMModeRequestSource.BswMSdEventHandlerCurrentState**，作为该规则的输入。
+对于受服务器事件订阅通知规则影响的每个事件（组），应创建一个**[BswMModeRequestSource](#9214-bswmmoderequestsource).[BswMSdEventHandlerCurrentState](#9242-bswmsdeventhandlercurrentstate)**，作为该规则的输入。
 
-如果属于服务器事件订阅通知规则的至少一个**BswMModeRequestSource**指示**SD_EVENT_HANDLER_REQUESTED**，则对应的服务器订阅通知**PPort**的当前模式应为**REQUEST_SERVICE**；否则，其当前模式应为**RELEASE_SERVICE**。
+如果属于服务器事件订阅通知规则的至少一个[**BswMModeRequestSource**](#9214-bswmmoderequestsource)指示**SD_EVENT_HANDLER_REQUESTED**，则对应的服务器订阅通知**PPort**的当前模式应为**REQUEST_SERVICE**；否则，其当前模式应为**RELEASE_SERVICE**。
 
 #### 6.8.6. 配置期端口连接
 
@@ -1122,7 +1131,7 @@ void BswM_Dcm_CommunicationMode_CurrentState (
 )
 ```
 
-此函数的行为应使用配置容器 **BswMDcmComModeRequest** 进行配置，其中配置参数 **BswMDcmComMChannelRef** 与此函数的参数 **Network** 相关联。
+此函数的行为应使用配置容器 [**BswMDcmComModeRequest**](#9221-bswmdcmcommoderequest) 进行配置，其中配置参数 **BswMDcmComMChannelRef** 与此函数的参数 **Network** 相关联。
 
 如果 **BswMDevErrorDetect** 开关已启用，该例程应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略模式请求（**mode request**），并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
 
@@ -1273,7 +1282,7 @@ void BswM_J1939DcmBroadcastStatus (
 )
 ```
 
-**BswM_J1939DcmBroadcastStatus** 的参数 **NetworkMask** 是一个位掩码，其位位置与由 **BswMJ1939DcmBroadcastStatus.BswMJ1939DcmChannelRef** 参数所引用的 **ComMChannel.ComMChannelId** 相对应。对于规则处理，**BswM** 应使用 **NetworkMask** 中位于被引用的 **ComMChannel.ComMChannelId** 所配置位置上的位的值（0 或 1）。
+**BswM_J1939DcmBroadcastStatus** 的参数 **NetworkMask** 是一个位掩码，其位位置与由 **[BswMJ1939DcmBroadcastStatus](#9229-bswmj1939dcmbroadcaststatus).BswMJ1939DcmChannelRef** 参数所引用的 **ComMChannel.ComMChannelId** 相对应。对于规则处理，**BswM** 应使用 **NetworkMask** 中位于被引用的 **ComMChannel.ComMChannelId** 所配置位置上的位的值（0 或 1）。
 
 #### 7.3.18. BswM_J1939Nm_StateChangeNotification
 
@@ -1505,7 +1514,7 @@ void BswM_MainFunction (
 | ComM_ReadInhibitCounter | ComM.h | 该函数返回被拒绝的 **COMM_FULL_COMMUNICATION** 用户请求的数量。 |
 | ComM_RequestComMode | ComM.h | 由用户请求通信模式。注意：以下模式不是有效的用户请求，因为它们被用作内部模式：**COMM_SILENT_COMMUNICATION**（该模式用于关机时的同步）、**COMM_FULL_COMMUNICATION_WITH_WAKEUP_REQUEST**（该模式在 **ComM** 通道状态机内部使用，当所用硬件支持该特性（例如与 **OA TC10** 兼容的以太网硬件）时，用于触发下层在网络上请求唤醒）。以下模式是有效的用户请求：**COMM_NO_COMMUNICATION**、**COMM_FULL_COMMUNICATION**。由于 **ComM** 通信禁止，通信请求也可能被释放。 |
 | ComM_ResetInhibitCounter | ComM.h | 该函数复位被禁止的 **COMM_FULL_COMMUNICATION** 请求计数器。 |
-| ComM_SetECUGroupClassification | ComM.h | 更改 **ECU** 组分类（**ECU Group Classification**）状态（见第10.2.2章）。 |
+| ComM_SetECUGroupClassification | ComM.h | 更改 **ECU** 组分类（**ECU Group Classification**）状态（见第[9.2.2](#922-bswmconfig)章）。 |
 | ControlIdle | Os.h | 该 API 允许调用者选择在 **OS** 空闲时间（例如没有激活的**任务**/**ISR**时）执行的空闲模式动作。它可用于实现节能。实际的空闲模式取决于硬件，未被标准化。每个内核的默认空闲模式为 **IDLE_NO_HALT**。 |
 | Det_ReportError | Det.h | 报告开发错误的服务。 |
 | EcuM_AL_DriverInitBswM_<x> | EcuM.h | 该回调应提供由**BSW**模式管理器调用的**BSW**模块初始化。 |
@@ -1538,9 +1547,9 @@ void BswM_MainFunction (
 | 名称 | modeNotificationPort_{ArbName}_{ModeName} |
 |---|---|
 | 类别 | 所需端口（**RequiredPort**） |
-| 接口引用 | {ecuc(BswM/BswMConfig/BswMArbitration/BswMModeRequestPort/BswMModeRequestSource/BswMSwcModeNotification.BswMSwcModeNotificationModeDeclarationGroupPrototypeRef)}.parent |
+| 接口引用 | {ecuc(BswM/[BswMConfig](#922-bswmconfig)/[BswMArbitration](#923-bswmarbitration)/[BswMModeRequestPort](#9210-bswmmoderequestport)/[BswMModeRequestSource](#9214-bswmmoderequestsource)/[BswMSwcModeNotification](#9244-bswmswcmodenotification).BswMSwcModeNotificationModeDeclarationGroupPrototypeRef)}.parent |
 | 描述 | - |
-| 变体 | ArbName = {ecuc(BswM/BswMConfig/BswMArbitration.SHORT-NAME)}；ModeName = {ecuc(BswM/BswMConfig/BswMArbitration/BswMModeRequestPort/BswMModeRequestSource/BswMSwcModeNotification.SHORT-NAME)} |
+| 变体 | ArbName = {ecuc(BswM/[BswMConfig](#922-bswmconfig)/[BswMArbitration](#923-bswmarbitration).SHORT-NAME)}；ModeName = {ecuc(BswM/[BswMConfig](#922-bswmconfig)/[BswMArbitration](#923-bswmarbitration)/[BswMModeRequestPort](#9210-bswmmoderequestport)/[BswMModeRequestSource](#9214-bswmmoderequestsource)/[BswMSwcModeNotification](#9244-bswmswcmodenotification).SHORT-NAME)} |
 
 如果 **BswMDevErrorDetect** 开关已启用，**BswM_modeNotificationPort** 应检查**BSW**模式管理器是否已初始化。发生错误时，**BswM** 应忽略该通知，并以错误码 [**BSWM_E_UNINIT**](#651-开发错误) 向**默认错误跟踪器**（**Default Error Tracer**）报告错误。
 
@@ -1549,18 +1558,18 @@ void BswM_MainFunction (
 | 名称 | modeRequestPort_{ArbName}_{ReqName} |
 |---|---|
 | 类别 | 所需端口（**RequiredPort**） |
-| 接口引用 | {ecuc(BswM/BswMConfig/BswMArbitration/BswMModeRequestPort.BswMModeRequestSource.BswMSwcModeRequest.BswMSwcModeRequestVariableDataPrototypeRef)}.parent |
+| 接口引用 | {ecuc(BswM/[BswMConfig](#922-bswmconfig)/[BswMArbitration](#923-bswmarbitration)/[BswMModeRequestPort](#9210-bswmmoderequestport).[BswMModeRequestSource](#9214-bswmmoderequestsource).[BswMSwcModeRequest](#9245-bswmswcmoderequest).BswMSwcModeRequestVariableDataPrototypeRef)}.parent |
 | 描述 | - |
-| 变体 | ArbName = {ecuc(BswM/BswMConfig/BswMArbitration.SHORT-NAME)}；ReqName = {ecuc(BswM/BswMConfig/BswMArbitration/BswMModeRequestPort.SHORT-NAME)} |
+| 变体 | ArbName = {ecuc(BswM/[BswMConfig](#922-bswmconfig)/[BswMArbitration](#923-bswmarbitration).SHORT-NAME)}；ReqName = {ecuc(BswM/[BswMConfig](#922-bswmconfig)/[BswMArbitration](#923-bswmarbitration)/[BswMModeRequestPort](#9210-bswmmoderequestport).SHORT-NAME)} |
 
 ###### 7.7.2.3. BswM_modeSwitchPort
 
 | 名称 | modeSwitchPort_{ModConName}_{SwitchName} |
 |---|---|
 | 类别 | 提供端口（**ProvidedPort**） |
-| 接口引用 | {ecuc(BswM/BswMConfig/BswMModeControl/BswMSwitchPort.BswMModeSwitchInterfaceRef)} |
+| 接口引用 | {ecuc(BswM/[BswMConfig](#922-bswmconfig)/[BswMModeControl](#9250-bswmmodecontrol)/[BswMSwitchPort](#9289-bswmswitchport).BswMModeSwitchInterfaceRef)} |
 | 描述 | - |
-| 变体 | {ecuc(BswM/BswMConfig/BswMModeControl/BswMSwitchPort.BswMModeSwitchInterfaceRef} != NULL；ModConName = {ecuc(BswM/BswMConfig/BswMModeControl.SHORT-NAME)}；SwitchName = {ecuc(BswM/BswMConfig/BswMModeControl/BswMSwitchPort.SHORT-NAME)} |
+| 变体 | {ecuc(BswM/[BswMConfig](#922-bswmconfig)/[BswMModeControl](#9250-bswmmodecontrol)/[BswMSwitchPort](#9289-bswmswitchport).BswMModeSwitchInterfaceRef} != NULL；ModConName = {ecuc(BswM/[BswMConfig](#922-bswmconfig)/[BswMModeControl](#9250-bswmmodecontrol).SHORT-NAME)}；SwitchName = {ecuc(BswM/[BswMConfig](#922-bswmconfig)/[BswMModeControl](#9250-bswmmodecontrol)/[BswMSwitchPort](#9289-bswmswitchport).SHORT-NAME)} |
 
 ###### 7.7.2.4. S/R端口 BswM_ClientServiceRequest
 
@@ -1696,32 +1705,32 @@ void BswM_MainFunction (
 
 | API | 请求端口 | API / 配置参数对 |
 |---|---|---|
-| [BswM_BswMPartitionRestarted](#731-bswm_bswmpartitionrestarted) | BswMPartitionRestarted | - |
-| [BswM_CanSM_CurrentState](#732-bswm_cansm_currentstate) | BswMCanSMIndication | Network / BswMCanSMChannelRef |
-| [BswM_ComM_CurrentMode](#733-bswm_comm_currentmode) | BswMComMIndication | Network / BswMComMChannelRef |
-| [BswM_ComM_CurrentPNCMode](#734-bswm_comm_currentpncmode) | BswMComMPncRequest | PNC / BswMComMPncRef |
-| [BswM_ComM_InitiateReset](#735-bswm_comm_initiatereset) | BswMComMInitiateReset | - |
-| [BswM_Dcm_ApplicationUpdated](#736-bswm_dcm_applicationupdated) | BswMDcmApplicationUpdatedIndication | - |
-| [BswM_Dcm_CommunicationMode_CurrentState](#737-bswm_dcm_communicationmode_currentstate) | BswMDcmComModeRequest | Network / BswMDcmComMChannelRef |
-| [BswM_EcuM_CurrentState](#739-bswm_ecum_currentstate) | BswMEcuMIndication | - |
-| [BswM_EcuM_CurrentWakeup](#7310-bswm_ecum_currentwakeup) | BswMEcuMWakeupSource | source / BswMEcuMWakeupSrcRef |
-| [BswM_EcuM_RequestedState](#7311-bswm_ecum_requestedstate) | BswMEcuMRUNRequestIndication | State / BswMEcuMRUNRequestProtocolPort |
-| [BswM_EthIf_PortGroupLinkStateChg](#7312-bswm_ethif_portgrouplinkstatechg) | BswMEthIfPortGroupLinkStateChg | PortGroupIdx / BswMEthIfSwitchPortGroupRef |
-| [BswM_EthSM_CurrentState](#7313-bswm_ethsm_currentstate) | BswMEthSMIndication | Network / BswMEthSMChannelRef |
-| [BswM_FrSM_CurrentState](#7314-bswm_frsm_currentstate) | BswMFrSMIndication | Network / BswMFrSMChannelRef |
-| [BswM_J1939DcmBroadcastStatus](#7317-bswm_j1939dcmbroadcaststatus) | BswMJ1939DcmBroadcastStatus | NetworkMask / BswMJ1939DcmChannelRef |
-| [BswM_J1939Nm_StateChangeNotification](#7318-bswm_j1939nm_statechangenotification) | BswMJ1939NmIndication | Network / BswMJ1939NmChannelRef；Node / BswMJ1939NmNodeRef |
-| [BswM_LinSM_CurrentSchedule](#7319-bswm_linsm_currentschedule) | BswMLinScheduleIndication | Network / BswMLinSMChannelRef |
-| [BswM_LinSM_CurrentState](#7320-bswm_linsm_currentstate) | BswMLinSMIndication | Network / BswMLinSMChannelRef |
-| [BswM_LinTp_RequestMode](#7321-bswm_lintp_requestmode) | BswMLinTpModeRequest | Network / BswMLinTpChannelRef |
-| [BswM_Nm_CarWakeUpIndication](#7322-bswm_nm_carwakeupindication) | BswMNmCarWakeUpIndication | - |
-| [BswM_Nm_StateChangeNotification](#7323-bswm_nm_statechangenotification) | BswMNmStateChangeNotification | Network / BswMNmChannelRef |
-| [BswM_NvM_CurrentBlockMode](#7324-bswm_nvm_currentblockmode) | BswMNvMRequest | Block / BswMNvMBlockRef |
-| [BswM_NvM_CurrentJobMode](#7325-bswm_nvm_currentjobmode) | BswMNvMJobModeIndication | MultiBlockRequest / BswMNvmService |
-| [BswM_RequestMode](#7326-bswm_requestmode) | BswMGenericRequest | requesting_user / BswMModeRequesterId |
-| [BswM_Sd_ClientServiceCurrentState](#7327-bswm_sd_clientservicecurrentstate) | BswMSdClientServiceCurrentState | SdClientServiceHandleId / BswMSdClientMethodsRef |
-| [BswM_Sd_ConsumedEventGroupCurrentState](#7328-bswm_sd_consumedeventgroupcurrentstate) | BswMSdConsumedEventGroupCurrentState | SdConsumedEventGroupHandleId / BswMSdConsumedEventGroupRef |
-| [BswM_Sd_EventHandlerCurrentState](#7329-bswm_sd_eventhandlercurrentstate) | BswMSdEventHandlerCurrentState | SdEventHandlerHandleId / BswMSdEventHandlerRef |
+| [BswM_BswMPartitionRestarted](#731-bswm_bswmpartitionrestarted) | [BswMPartitionRestarted](#9239-bswmpartitionrestarted) | - |
+| [BswM_CanSM_CurrentState](#732-bswm_cansm_currentstate) | [BswMCanSMIndication](#9216-bswmcansmindication) | Network / BswMCanSMChannelRef |
+| [BswM_ComM_CurrentMode](#733-bswm_comm_currentmode) | [BswMComMIndication](#9217-bswmcommindication) | Network / BswMComMChannelRef |
+| [BswM_ComM_CurrentPNCMode](#734-bswm_comm_currentpncmode) | [BswMComMPncRequest](#9219-bswmcommpncrequest) | PNC / BswMComMPncRef |
+| [BswM_ComM_InitiateReset](#735-bswm_comm_initiatereset) | [BswMComMInitiateReset](#9218-bswmcomminitiatereset) | - |
+| [BswM_Dcm_ApplicationUpdated](#736-bswm_dcm_applicationupdated) | [BswMDcmApplicationUpdatedIndication](#9220-bswmdcmapplicationupdatedindication) | - |
+| [BswM_Dcm_CommunicationMode_CurrentState](#737-bswm_dcm_communicationmode_currentstate) | [BswMDcmComModeRequest](#9221-bswmdcmcommoderequest) | Network / BswMDcmComMChannelRef |
+| [BswM_EcuM_CurrentState](#739-bswm_ecum_currentstate) | [BswMEcuMIndication](#9222-bswmecumindication) | - |
+| [BswM_EcuM_CurrentWakeup](#7310-bswm_ecum_currentwakeup) | [BswMEcuMWakeupSource](#9224-bswmecumwakeupsource) | source / BswMEcuMWakeupSrcRef |
+| [BswM_EcuM_RequestedState](#7311-bswm_ecum_requestedstate) | [BswMEcuMRUNRequestIndication](#9223-bswmecumrunrequestindication) | State / BswMEcuMRUNRequestProtocolPort |
+| [BswM_EthIf_PortGroupLinkStateChg](#7312-bswm_ethif_portgrouplinkstatechg) | [BswMEthIfPortGroupLinkStateChg](#9225-bswmethifportgrouplinkstatechg) | PortGroupIdx / BswMEthIfSwitchPortGroupRef |
+| [BswM_EthSM_CurrentState](#7313-bswm_ethsm_currentstate) | [BswMEthSMIndication](#9226-bswmethsmindication) | Network / BswMEthSMChannelRef |
+| [BswM_FrSM_CurrentState](#7314-bswm_frsm_currentstate) | [BswMFrSMIndication](#9227-bswmfrsmindication) | Network / BswMFrSMChannelRef |
+| [BswM_J1939DcmBroadcastStatus](#7317-bswm_j1939dcmbroadcaststatus) | [BswMJ1939DcmBroadcastStatus](#9229-bswmj1939dcmbroadcaststatus) | NetworkMask / BswMJ1939DcmChannelRef |
+| [BswM_J1939Nm_StateChangeNotification](#7318-bswm_j1939nm_statechangenotification) | [BswMJ1939NmIndication](#9230-bswmj1939nmindication) | Network / BswMJ1939NmChannelRef；Node / BswMJ1939NmNodeRef |
+| [BswM_LinSM_CurrentSchedule](#7319-bswm_linsm_currentschedule) | [BswMLinScheduleIndication](#9232-bswmlinscheduleindication) | Network / BswMLinSMChannelRef |
+| [BswM_LinSM_CurrentState](#7320-bswm_linsm_currentstate) | [BswMLinSMIndication](#9231-bswmlinsmindication) | Network / BswMLinSMChannelRef |
+| [BswM_LinTp_RequestMode](#7321-bswm_lintp_requestmode) | [BswMLinTpModeRequest](#9233-bswmlintpmoderequest) | Network / BswMLinTpChannelRef |
+| [BswM_Nm_CarWakeUpIndication](#7322-bswm_nm_carwakeupindication) | [BswMNmCarWakeUpIndication](#9235-bswmnmcarwakeupindication) | - |
+| [BswM_Nm_StateChangeNotification](#7323-bswm_nm_statechangenotification) | [BswMNmStateChangeNotification](#9236-bswmnmstatechangenotification) | Network / BswMNmChannelRef |
+| [BswM_NvM_CurrentBlockMode](#7324-bswm_nvm_currentblockmode) | [BswMNvMRequest](#9238-bswmnvmrequest) | Block / BswMNvMBlockRef |
+| [BswM_NvM_CurrentJobMode](#7325-bswm_nvm_currentjobmode) | [BswMNvMJobModeIndication](#9237-bswmnvmjobmodeindication) | MultiBlockRequest / BswMNvmService |
+| [BswM_RequestMode](#7326-bswm_requestmode) | [BswMGenericRequest](#9228-bswmgenericrequest) | requesting_user / BswMModeRequesterId |
+| [BswM_Sd_ClientServiceCurrentState](#7327-bswm_sd_clientservicecurrentstate) | [BswMSdClientServiceCurrentState](#9240-bswmsdclientservicecurrentstate) | SdClientServiceHandleId / BswMSdClientMethodsRef |
+| [BswM_Sd_ConsumedEventGroupCurrentState](#7328-bswm_sd_consumedeventgroupcurrentstate) | [BswMSdConsumedEventGroupCurrentState](#9241-bswmsdconsumedeventgroupcurrentstate) | SdConsumedEventGroupHandleId / BswMSdConsumedEventGroupRef |
+| [BswM_Sd_EventHandlerCurrentState](#7329-bswm_sd_eventhandlercurrentstate) | [BswMSdEventHandlerCurrentState](#9242-bswmsdeventhandlercurrentstate) | SdEventHandlerHandleId / BswMSdEventHandlerRef |
 
 表7.1：**API**与请求端口的映射：该表描述了当某个 **API** 被调用时应触发哪个请求端口。此外，它还描述了哪些配置参数与相应 **API** 调用的参数相关联。
 
@@ -1738,6 +1747,2920 @@ void BswM_MainFunction (
 ![Figure9-2.png](Figure9-2.png)
 
 图 9.2：BswM 的立即操作
+
+## 9. 配置规范
+
+本章总体上定义配置参数及其分组到容器的方式。为便于理解本规范，9.1节介绍基础知识，并规定参数规范所用的模板（表格）。为确保内容易于理解，本规范保留该节。9.2节说明 **BswM** 模块的容器结构和配置参数；9.3节说明 **BswM** 模块发布的信息。
+
+### 9.1. 如何阅读本章
+
+详情请参见《基础软件模块通用规范》（SWS_BSWGeneral）第10.1章“配置规范简介”。
+
+### 9.2. 容器与配置参数
+
+以下各节汇总所有配置参数。参数的详细含义参见第6章和第7章。
+
+**实现者注意：** 对于某些 **BswMModeRequestSource** 和 **BswMAvailableActions**，采用一种命名约定，将特定配置参数的枚举值映射到实现中使用的底层函数参数值。在此约定中，配置参数的枚举标签与映射后的函数参数枚举标签相同，但以 **BSWM_** 为前缀。例如，**BswMEthIfSwitchPortGroupRequestMode** 的 **BSWM_ETH_MODE_ACTIVE** 值对应相应类型中的 **ETH_MODE_ACTIVE** 值。
+
+#### 9.2.1. BswM
+
+| 字段 | 值 |
+|---|---|
+| 模块名称 | BswM |
+| 描述 | BswM（基础软件模式管理器）模块的配置。 |
+| Post-Build 变体支持 | true |
+| 支持的配置变体 | VARIANT-LINK-TIME、VARIANT-POST-BUILD、VARIANT-PRE-COMPILE |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| BswMConfig | 1..* | 此容器包含 AUTOSAR **BswM** 模块的配置参数和子容器。每个分区中都存在一个此容器。 |
+| BswMGeneral | 1 | 基础软件模式管理器的通用配置参数。 |
+
+#### 9.2.2. BswMConfig
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMConfig |
+| 父容器 | BswM |
+| 描述 | 此容器包含 AUTOSAR **BswM** 模块的配置参数和子容器。每个分区中都存在一个此容器。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMPartitionRef |
+| 父容器 | BswMConfig |
+| 描述 | 引用 **BswM** 运行所在的分区。 |
+| 多重性 | 0..1 |
+| 类型 | 对 EcucPartition 的引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：All Variants；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| BswMArbitration | 1 | 此容器包含所有与 **BswM** 模式仲裁功能相关的配置子容器和参数。 |
+| BswMDataTypeMappingSets | 0..1 | DataTypeMappingSet 的引用集合。 |
+| BswMModeControl | 1 | 此容器包含所有与 **BswM** 模式控制功能相关的配置子容器和参数。 |
+
+#### 9.2.3. BswMArbitration
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMArbitration |
+| 父容器 | BswMConfig |
+| 描述 | 此容器包含所有与 **BswM** 模式仲裁功能相关的配置子容器和参数。 |
+| 配置参数 | 见下方参数表。 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| BswMEventRequestPort | 0..* | 每个实例定义一个可发送至 **BswM** 的事件。基础软件模块可以通过调用相应的 **BswM** C API（例如 **BswM_ComM_InitiateReset()**）向 **BswM** 发送这些事件。 |
+| BswMLogicalExpression | 0..* | 此容器描述用于模式仲裁的逻辑表达式。逻辑表达式由一组参数和一个逻辑运算符构成。每个参数可以是模式条件或子表达式，因此可以定义更复杂的逻辑表达式。每个逻辑表达式中的参数数量没有限制。请注意，表达式的求值顺序未定义。 |
+| BswMModeCondition | 0..* | 此容器描述 **BswM** 模式条件，可单独构成规则，也可作为逻辑表达式的一部分。 |
+| BswMModeRequestPort | 0..* | 每个实例定义一个模式请求接口，用于向 **BswM** 请求模式或指示模式。根据请求来自 **SW-C** 还是 **BSW** 模块，这些接口通过端口或普通 C 函数实现。模式请求包括：1. 来自 **SW-C** 的模式请求；2. 来自其他 **BSW** 模块（如 **DCM**）的模式请求；3. 来自 **RTE** 或其他 **BSW** 模块（如总线特定状态管理器）的状态/模式指示。**BswM** 对所有请求和指示的处理方式完全相同。 |
+| BswMRule | 0..* | 每个实例描述一个 **BswM** 仲裁规则。规则由简单的模式条件或更复杂的逻辑表达式构成，并引用规则评估为 true 或 false 时应调用的动作列表。 |
+
+#### 9.2.4. BswMLogicalExpression
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMLogicalExpression |
+| 父容器 | BswMArbitration |
+| 描述 | 此容器描述用于模式仲裁的逻辑表达式。逻辑表达式由一组参数和一个逻辑运算符构成。每个参数可以是模式条件或子表达式，因此可以定义更复杂的逻辑表达式。每个逻辑表达式中的参数数量没有限制。请注意，表达式的求值顺序未定义。 |
+| Post-Build 变体多重性 | false |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE、VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMLogicalOperator |
+| 父容器 | BswMLogicalExpression |
+| 描述 | 此参数指定逻辑表达式使用的逻辑运算符。如果逻辑运算符不是 **BSWM_NOT**，且表达式只包含一个条件，则此参数不起作用。 |
+| 多重性 | 0..1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | BSWM_AND |
+| 范围 | BSWM_NAND |
+| 范围 | BSWM_NOT |
+| 范围 | BSWM_OR |
+| 范围 | BSWM_XOR |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMArgumentRef |
+| 父容器 | BswMLogicalExpression |
+| 描述 | 此引用可选择模式条件或子表达式。如果 **BswMLogicalExpression.BswMLogicalOperator** 等于 **BSWM_NAND**，则仅支持两个操作数；如果等于 **BSWM_NOT**，则仅支持一个操作数。 |
+| 多重性 | 1..* |
+| 类型 | 对 BswMLogicalExpression 或 BswMModeCondition 的选择引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+**BswM** 应拒绝 **BswMLogicalOperator** 等于 **BSWM_NAND** 且 **BswMArgumentRef** 数量不是两个的配置。**BswM** 应拒绝 **BswMLogicalOperator** 等于 **BSWM_NOT** 且 **BswMArgumentRef** 数量不是一个的配置。
+
+如果 **BswMLogicalOperator** 为 **BSWM_XOR**，当为 true 的参数数量为奇数时，逻辑表达式的结果应为 true；当为 true 的参数数量为偶数时，结果应为 false。
+
+**BSWM_AND** 运算符在所有参数均为 true 时应求值为 true；至少一个参数为 false 时应求值为 false。
+
+**BSWM_NAND** 运算符在所有参数均为 true 时应求值为 false；至少一个参数为 false 时应求值为 true。
+
+**BSWM_OR** 运算符在所有参数均为 false 时应求值为 false；至少一个参数为 true 时应求值为 true。
+
+**BSWM_NOT** 运算符应将 true 求值为 false，并将 false 求值为 true。
+
+#### 9.2.5. BswMModeCondition
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMModeCondition |
+| 父容器 | BswMArbitration |
+| 描述 | 此容器描述 **BswM** 模式条件，可单独构成规则，也可作为逻辑表达式的一部分。 |
+| Post-Build 变体多重性 | false |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE、VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMConditionType |
+| 父容器 | BswMModeCondition |
+| 描述 | 此参数指定评估模式条件时所进行的比较类型。对于 **BSWM_EQUALS** 和 **BSWM_EQUALS_NOT**，将 **BswMConditionMode** 引用的 **BswMModeRequestPort** 与 **BswMConditionValue** 中配置的值进行相等或不相等比较。对于 **BSWM_EVENT_IS_SET** 和 **BSWM_EVENT_IS_CLEARED**，检查 **BswMConditionMode** 引用的 **BswMEventRequestPort** 是否已设置或已清除（未设置）。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | BSWM_EQUALS |
+| 范围 | BSWM_EQUALS_NOT |
+| 范围 | BSWM_EVENT_IS_CLEARED |
+| 范围 | BSWM_EVENT_IS_SET |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMConditionMode |
+| 父容器 | BswMModeCondition |
+| 描述 | 此参数引用模式请求端口或事件请求端口。 |
+| 多重性 | 1 |
+| 类型 | 对 BswMEventRequestPort 或 BswMModeRequestPort 的选择引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| BswMConditionValue | 0..1 | 此容器保存用于确定模式类型以及与模式请求比较的值所需的参数和引用。 |
+
+**BswM** 应拒绝以下配置：将 **BswMConditionType** 设置为 **BSWM_EQUALS** 或 **BSWM_EQUALS_NOT**，同时 **BswMConditionMode** 引用 **BswMEventRequestPort**；或将 **BswMConditionType** 设置为 **BSWM_EVENT_IS_SET** 或 **BSWM_EVENT_IS_CLEARED**，同时 **BswMConditionMode** 引用 **BswMModeRequestPort**。
+
+#### 9.2.6. BswMConditionValue
+
+| 字段 | 值 |
+|---|---|
+| 选择容器名称 | BswMConditionValue |
+| 父容器 | BswMModeCondition |
+| 描述 | 此容器保存用于确定模式类型以及与模式请求比较的值所需的参数和引用。 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| BswMBswMode | 0..1 | 此容器定义 BSW 中某个模式的值。 |
+| BswMCompuScaleModeValue | 0..1 | 此容器包含用于定义模式值的参数。 |
+| BswMModeDeclaration | 0..1 | 当模式对应于模式请求或模式指示接口时，该模式由模式声明定义。模式声明定义在 SW-C 模板中，因此此处使用对相应模式声明的外部引用。 |
+
+#### 9.2.7. BswMBswMode
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMBswMode |
+| 父容器 | BswMConditionValue |
+| 描述 | 此容器定义 BSW 中某个模式的值。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMBswRequestedMode |
+| 父容器 | BswMBswMode |
+| 描述 | 此参数以字符串形式保存 BSW 模块可以请求或指示的模式/状态的符号名称。 |
+| 多重性 | 1 |
+| 类型 | EcucStringParamDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.8. BswMModeDeclaration
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMModeDeclaration |
+| 父容器 | BswMConditionValue |
+| 描述 | 当模式对应于模式请求或模式指示接口时，该模式由模式声明定义。模式声明定义在 SW-C 模板中，因此此处使用对相应模式声明的外部引用。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMModeValueRef |
+| 父容器 | BswMModeDeclaration |
+| 描述 | 对与此条件对应的模式请求所使用的模式声明的外部引用。 |
+| 多重性 | 1 |
+| 类型 | 对 MODE-DECLARATION 的外部引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.9. BswMEventRequestPort
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMEventRequestPort |
+| 父容器 | BswMArbitration |
+| 描述 | 此容器的每个实例定义一个可发送至 **BswM** 的事件。基础软件模块可以通过调用相应的 **BswM** C API（例如 **BswM_ComM_InitiateReset()**）向 **BswM** 发送这些事件。 |
+| Post-Build 变体多重性 | false |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE、VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMEventRequestProcessing |
+| 父容器 | BswMEventRequestPort |
+| 描述 | 此参数定义收到事件请求后，是立即处理模式仲裁，还是延迟到 **BswM** 主函数执行时处理。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | BSWM_DEFERRED |
+| 范围 | BSWM_IMMEDIATE |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| BswMEventRequestSource | 1 | 此选择容器指定事件请求的来源。事件发送方可以是其他 **BSW** 模块，例如 **ComM**。 |
+
+#### 9.2.10. BswMModeRequestPort
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMModeRequestPort |
+| 父容器 | BswMArbitration |
+| 描述 | 每个实例定义一个模式请求接口，用于向 **BswM** 请求模式或指示模式。根据请求来自 **SW-C** 还是 **BSW** 模块，这些接口通过端口或普通 C 函数实现。模式请求包括：1. 来自 **SW-C** 的模式请求；2. 来自其他 **BSW** 模块（如 **DCM**）的模式请求；3. 来自 **RTE** 或其他 **BSW** 模块（如总线特定状态管理器）的状态/模式指示。**BswM** 对所有请求和指示的处理方式完全相同。 |
+| Post-Build 变体多重性 | false |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE、VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMRequestProcessing |
+| 父容器 | BswMModeRequestPort |
+| 描述 | 此参数定义收到模式请求后，是立即处理模式仲裁，还是延迟到 **BswM** 主函数执行时处理。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | BSWM_DEFERRED |
+| 范围 | BSWM_IMMEDIATE |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| BswMModeInitValue | 0..1 | 此容器定义 **BswM** 初始化后用于相应模式请求的初始模式值。可通过配置 BswMBswModeInitValue 或 BswMCompuScaleModeValue 来定义该值。此容器为可选。 |
+| BswMModeRequestSource | 1 | 此选择容器指定模式请求或状态/模式指示的来源。模式请求方可以是 **SW-C**，也可以是其他 **BSW** 模块，例如总线特定状态管理器。 |
+
+#### 9.2.11. BswMModeInitValue
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMModeInitValue |
+| 父容器 | BswMModeRequestPort |
+| 描述 | 此容器定义 **BswM** 初始化后用于相应模式请求的初始模式值。可通过配置 BswMBswModeInitValue 或 BswMCompuScaleModeValue 来定义该值。此容器为可选。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMBswModeInitValue |
+| 父容器 | BswMModeInitValue |
+| 描述 | 此参数定义 **BswM** 初始化后用于相应模式请求的初始模式值。 |
+| 多重性 | 0..1 |
+| 类型 | EcucStringParamDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| BswMCompuScaleModeValue | 0..1 | 此容器包含用于定义模式值的参数。 |
+
+#### 9.2.12. BswMCompuScaleModeValue
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMCompuScaleModeValue |
+| 父容器 | BswMConditionValue、BswMModeInitValue |
+| 描述 | 此容器包含用于定义模式值的参数。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMCompuConstText |
+| 父容器 | BswMCompuScaleModeValue |
+| 描述 | 此参数的值应与所引用 CompuMethod（BswMCompuMethodRef）中定义的 CompuConst 的 VT 成员匹配。相应 CompuScale 的区间值将用作模式请求值。 |
+| 多重性 | 1 |
+| 类型 | EcucStringParamDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMCompuMethodRef |
+| 父容器 | BswMCompuScaleModeValue |
+| 描述 | 对用于模式请求的 CompuMethod 的外部引用。 |
+| 多重性 | 1 |
+| 类型 | 对 COMPU-METHOD 的外部引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+所引用外部引用 **BswMCompuMethodRef** 的 **CompuMethod.category** 值必须为 **TEXTTABLE**。
+
+#### 9.2.13. BswMEventRequestSource
+
+| 字段 | 值 |
+|---|---|
+| 选择容器名称 | BswMEventRequestSource |
+| 父容器 | BswMEventRequestPort |
+| 描述 | 此选择容器指定事件请求的来源。事件发送方可以是其他 **BSW** 模块，例如 **ComM**。 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| BswMComMInitiateReset | 0..1 | 这是来自 **ComM** 的指示，用于通知关机。 |
+| BswMDcmApplicationUpdatedIndication | 0..1 | 这是来自 **DCM** 的应用数据更新请求。此容器不包含参数，因为此类请求无需进一步配置。 |
+| BswMModeSwitchErrorEvent | 0..1 | 当引用的 PPort 所在分区中的模式用户由 **RTE** 重启时，此通知用于报告错误。由于保存当前模式的 Mode Machine Instance 可能位于该已终止的分区中，因此必须将该分区丢失的情况通知模式管理器。 |
+| BswMNmCarWakeUpIndication | 0..1 | 这是来自 **Nm** 的车辆唤醒指示。 |
+| BswMPartitionRestarted | 0..1 | 当 **RTE** 重启包含 **BswM** 的分区时，此通知用于报告错误。模式用户可能位于另一个仍在运行的分区中，因此必须通知 **BswM**：其所在分区的启动并非正常启动，而是单个分区的重启。此信息可在规则中使用。该通知必须由相应分区的重启任务使用。 |
+| BswMSwitchAckNotification | 0..1 | 这是模式转换已完成的通知。 |
+
+#### 9.2.14. BswMModeRequestSource
+
+| 字段 | 值 |
+|---|---|
+| 选择容器名称 | BswMModeRequestSource |
+| 父容器 | BswMModeRequestPort |
+| 描述 | 此选择容器指定模式请求或状态/模式指示的来源。模式请求方可以是 **SW-C**，也可以是其他 **BSW** 模块，例如总线特定状态管理器。 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| BswMBswModeNotification | 0..1 | 此模式请求源来自另一个 **BSW** 模块。 |
+| BswMCanSMIndication | 0..1 | 这是对 **CAN** 状态管理器当前状态的指示。 |
+| BswMComMIndication | 0..1 | 这是对通信管理器中某个通道当前通信模式的指示。 |
+| BswMComMPncRequest | 0..1 | 这是对通信管理器中某个部分网络集群当前通信模式的请求。 |
+| BswMDcmComModeRequest | 0..1 | 此模式请求源为诊断通信管理器。 |
+| BswMEcuMIndication | 0..1 | 这是对 ECU 状态管理器当前运行模式的通知。此容器不包含参数，因为此类请求无需进一步配置。 |
+| BswMEcuMRUNRequestIndication | 0..1 | 这是对 RUN 请求协议当前状态的指示。 |
+| BswMEcuMWakeupSource | 0..1 | 这是对 ECU 状态管理器唤醒源当前状态的通知。 |
+| BswMEthIfPortGroupLinkStateChg | 0..1 | 当以太网接口交换机端口组的链路状态发生变化时，这是来自 **EthIf** 的指示。 |
+| BswMEthSMIndication | 0..1 | 这是对以太网状态管理器当前状态的指示。 |
+| BswMFrSMIndication | 0..1 | 这是对 FlexRay 状态管理器当前状态的指示。 |
+| BswMGenericRequest | 0..1 | 此模式请求来自标准化请求方列表之外的请求方，即不同的资源管理器。 |
+| BswMJ1939DcmBroadcastStatus | 0..1 | 这是通过 DM13 触发的、按网络指定的期望广播状态通知。 |
+| BswMJ1939NmIndication | 0..1 | 这是对 J1939 网络管理模块当前状态的指示。 |
+| BswMLinSMIndication | 0..1 | 这是对 LIN 状态管理器当前状态的指示。 |
+| BswMLinScheduleIndication | 0..1 | 这是对特定 LIN 接口当前激活的 LIN 调度表的指示。 |
+| BswMLinTpModeRequest | 0..1 | 这是来自 **LinIf** 的 **LinTp** 模式请求，对应于 **BswM_LinTp_RequestMode** API 的调用。 |
+| BswMNmStateChangeNotification | 0..1 | 这是 **Nm** 模块状态发生变化时发出的通知。 |
+| BswMNvMJobModeIndication | 0..1 | 指示多块作业的当前状态。作业由 **BswMNvmService** 标识。此指示的可能值为 **NvM_RequestResultType** 的可能值。 |
+| BswMNvMRequest | 0..1 | 通过此模式请求源，**NvM** 指示指定块的当前状态。可能值包括 **NVM_REQ_OK**、**NVM_REQ_NOT_OK**、**NVM_REQ_PENDING**、**NVM_REQ_INTEGRITY_FAILED**、**NVM_REQ_BLOCK_SKIPPED**、**NVM_REQ_NV_INVALIDATED**、**NVM_REQ_CANCELED**、**NVM_REQ_REDUNDANCY_FAILED** 和 **NVM_REQ_RESTORED_FROM_ROM**。 |
+| BswMSdClientServiceCurrentState | 0..1 | **Service Discovery** 模块用于指示客户端服务的当前状态（可用/不可用）。 |
+| BswMSdConsumedEventGroupCurrentState | 0..1 | **Service Discovery** 用于指示事件处理器的当前状态（已请求/已释放）。 |
+| BswMSdEventHandlerCurrentState | 0..1 | **Service Discovery** 用于指示事件处理器的当前状态（已请求/已释放）。 |
+| BswMSoAdSoConModeChg | 0..1 | 这是对 **SoAd** 当前状态的指示。 |
+| BswMSwcModeNotification | 0..1 | 此模式切换通知与 **RTE** 切换接口相关联。 |
+| BswMSwcModeRequest | 0..1 | 此模式请求源为软件组件。 |
+| BswMTimer | 0..1 | 这是可用于时间相关规则的定时器。此模式请求端口可处于三种模式之一：**BSWM_TIMER_STOPPED**（初始状态，定时器已由动作停止）、**BSWM_TIMER_STARTED**（定时器已由动作启动）或 **BSWM_TIMER_EXPIRED**（定时器已到期）。 |
+
+#### 9.2.15. BswMBswModeNotification
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMBswModeNotification |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 此模式请求源来自另一个 **BSW** 模块。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMBswModeDeclarationGroupPrototypeRef |
+| 父容器 | BswMBswModeNotification |
+| 描述 | 对模式声明组原型的外部引用。 |
+| 多重性 | 1 |
+| 类型 | 对 MODE-DECLARATION-GROUP-PROTOTYPE 的外部引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.16. BswMCanSMIndication
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMCanSMIndication |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 这是对 CAN 状态管理器当前状态的指示。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMCanSMChannelRef |
+| 父容器 | BswMCanSMIndication |
+| 描述 | 对应于此模式请求的 CAN 通道句柄的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMChannel 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.17. BswMComMIndication
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMComMIndication |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 这是对通信管理器中某个通道当前通信模式的指示。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMComMChannelRef |
+| 父容器 | BswMComMIndication |
+| 描述 | 对应于此指示的通信管理器通道句柄的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMChannel 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.18. BswMComMInitiateReset
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMComMInitiateReset |
+| 父容器 | BswMEventRequestSource |
+| 描述 | 这是来自 **ComM** 的指示，用于通知关机。 |
+| 配置参数 | 无配置参数。 |
+
+无包含的容器。
+
+#### 9.2.19. BswMComMPncRequest
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMComMPncRequest |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 这是对通信管理器中某个部分网络集群当前通信模式的请求。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMComMPncRef |
+| 父容器 | BswMComMPncRequest |
+| 描述 | 对应于此请求的部分网络集群的通信管理器 PNC 句柄的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMPnc 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.20. BswMDcmApplicationUpdatedIndication
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMDcmApplicationUpdatedIndication |
+| 父容器 | BswMEventRequestSource |
+| 描述 | 这是来自 **DCM** 的应用数据更新请求。此容器不包含参数，因为此类请求无需进一步配置。 |
+| 配置参数 | 无配置参数。 |
+
+无包含的容器。
+
+#### 9.2.21. BswMDcmComModeRequest
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMDcmComModeRequest |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 此模式请求源为诊断通信管理器。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMDcmComMChannelRef |
+| 父容器 | BswMDcmComModeRequest |
+| 描述 | 从 DcmModeRequest 到该指示所对应 ComM 通道的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMChannel 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.22. BswMEcuMIndication
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMEcuMIndication |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 这是对 ECU 状态管理器当前运行模式的通知。此容器不包含参数，因为此类请求无需进一步配置。 |
+| 配置参数 | 无配置参数。 |
+
+无包含的容器。
+
+#### 9.2.23. BswMEcuMRUNRequestIndication
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMEcuMRUNRequestIndication |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 这是对 RUN 请求协议当前状态的指示。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMEcuMRUNRequestProtocolPort |
+| 父容器 | BswMEcuMRUNRequestIndication |
+| 描述 | 标识与该模式请求相关的 ECU 状态。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | BSWM_ECUM_STATE_POST_RUN：EcuM 的 POST_RUN 状态端口。 |
+| 范围 | BSWM_ECUM_STATE_RUN：EcuM 的 RUN 状态端口。 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.24. BswMEcuMWakeupSource
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMEcuMWakeupSource |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 这是对 ECU 状态管理器唤醒源当前状态的通知。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMEcuMWakeupSrcRef |
+| 父容器 | BswMEcuMWakeupSource |
+| 描述 | 对应于该指示的 ECU 状态管理器唤醒源的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 EcuMWakeupSource 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.25. BswMEthIfPortGroupLinkStateChg
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMEthIfPortGroupLinkStateChg |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 当以太网接口交换机端口组的链路状态发生变化时，这是来自 EthIf 的指示。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMEthIfSwitchPortGroupRef |
+| 父容器 | BswMEthIfPortGroupLinkStateChg |
+| 描述 | 对应于该指示的以太网接口交换机端口组的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 EthIfSwitchPortGroup 的符号名称引用 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.26. BswMEthSMIndication
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMEthSMIndication |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 这是对以太网状态管理器当前状态的指示。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMEthSMChannelRef |
+| 父容器 | BswMEthSMIndication |
+| 描述 | 对应于该模式请求的以太网通道句柄的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMChannel 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.27. BswMFrSMIndication
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMFrSMIndication |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 这是对 FlexRay 状态管理器当前状态的指示。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMFrSMChannelRef |
+| 父容器 | BswMFrSMIndication |
+| 描述 | 对应于该模式请求的 FlexRay 集群句柄的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMChannel 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.28. BswMGenericRequest
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMGenericRequest |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 此模式请求来自标准化模式请求方列表之外的请求方，即不同的资源管理器。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMModeRequesterId |
+| 父容器 | BswMGenericRequest |
+| 描述 | 此参数用于标识通用模式请求接口的不同用户。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef（为此参数生成符号名称） |
+| 范围 | 0 .. 65535 |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.29. BswMJ1939DcmBroadcastStatus
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMJ1939DcmBroadcastStatus |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 这是通过 DM13 触发的、按网络指定的期望广播状态通知。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMJ1939DcmChannelRef |
+| 父容器 | BswMJ1939DcmBroadcastStatus |
+| 描述 | 受此模式请求影响的通信通道引用。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMChannel 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+由于 **BswM_J1939DcmBroadcastStatus** API 中的 **NetworkMask** 为 16 位，**BswM** 应拒绝 **BswMJ1939DcmChannelRef** 所引用的 **ComMChannel.ComMChannelId** 大于 15 的配置。
+
+#### 9.2.30. BswMJ1939NmIndication
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMJ1939NmIndication |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 这是对 J1939 网络管理模块当前状态的指示。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMJ1939NmChannelRef |
+| 父容器 | BswMJ1939NmIndication |
+| 描述 | 对应于该模式请求的 J1939Nm 通道句柄的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMChannel 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMJ1939NmNodeRef |
+| 父容器 | BswMJ1939NmIndication |
+| 描述 | 对应于该模式请求的节点引用。 |
+| 多重性 | 1 |
+| 类型 | 对 J1939NmNode 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.31. BswMLinSMIndication
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMLinSMIndication |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 这是对 LIN 状态管理器当前状态的指示。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMLinSMChannelRef |
+| 父容器 | BswMLinSMIndication |
+| 描述 | 对应于该模式请求的 LIN 通道句柄的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMChannel 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.32. BswMLinScheduleIndication
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMLinScheduleIndication |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 这是对特定 LIN 接口当前激活的 LIN 调度表的指示。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMLinScheduleRef |
+| 父容器 | BswMLinScheduleIndication |
+| 描述 | 对应于该模式请求的 LIN 调度表句柄的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 LinSMSchedule 的符号名称引用 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMLinSMChannelRef |
+| 父容器 | BswMLinScheduleIndication |
+| 描述 | 对应于该模式请求的 LIN 通道句柄的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMChannel 的符号名称引用 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.33. BswMLinTpModeRequest
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMLinTpModeRequest |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 这是来自 **LinIf** 的 **LinTp** 模式请求，对应于 **BswM_LinTp_RequestMode** API 的调用。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMLinTpChannelRef |
+| 父容器 | BswMLinTpModeRequest |
+| 描述 | 对应于该模式请求的 LIN 接口通道引用。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMChannel 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.34. BswMModeSwitchErrorEvent
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMModeSwitchErrorEvent |
+| 父容器 | BswMEventRequestSource |
+| 描述 | 当引用的 PPort 所在分区中的模式用户由 **RTE** 重启时，此通知用于报告错误。由于保存当前模式的 Mode Machine Instance 可能位于该已终止的分区中，因此必须将该分区丢失的情况通知模式管理器。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMRteSwitchPortRef |
+| 父容器 | BswMModeSwitchErrorEvent |
+| 描述 | 对 BswMSwitchPort 的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 BswMSwitchPort 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+**BswMModeSwitchErrorEvent** 指定一个 **SwcModeManagerErrorEvent**，**BswM** 应在其 SWCD 中创建该事件。此 **SwcModeManagerErrorEvent.modeGroup** 所引用的 **ModeDeclarationGroupPrototype** 应与 **BswMRteSwitchPortRef** 在 **BswMModeSwitchErrorEvent** 中配置的 **BswMSwitchPort** 所引用 **ModeSwitchInterface** 使用的 **ModeDeclarationGroupPrototype** 相对应。**BswM** 应创建一个关联的可运行实体，以仲裁该 **SwcModeManagerErrorEvent**。
+
+#### 9.2.35. BswMNmCarWakeUpIndication
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMNmCarWakeUpIndication |
+| 父容器 | BswMEventRequestSource |
+| 描述 | 这是来自 **Nm** 的车辆唤醒指示。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMNmChannelRef |
+| 父容器 | BswMNmCarWakeUpIndication |
+| 描述 | 对应于该指示的通道句柄的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMChannel 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.36. BswMNmStateChangeNotification
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMNmStateChangeNotification |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 这是 **Nm** 模块状态发生变化时发出的通知。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMNmChannelRef |
+| 父容器 | BswMNmStateChangeNotification |
+| 描述 | 对应于该通知的通道句柄的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMChannel 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.37. BswMNvMJobModeIndication
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMNvMJobModeIndication |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 指示多块作业的当前状态。作业通过 **BswMNvmService** 标识。此指示的可能值为 **NvM_RequestResultType** 的可能值。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMNvmService |
+| 父容器 | BswMNvMJobModeIndication |
+| 描述 | 标识与该模式请求相关的 NvM 作业。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | NvmCancelWriteAll：对应多块服务 NvM_CancelWriteAll。 |
+| 范围 | NvmFirstInitAll：对应多块服务 NvM_FirstInitAll。 |
+| 范围 | NvmReadAll：对应多块服务 NvM_ReadAll。 |
+| 范围 | NvmValidateAll：对应多块服务 NvM_ValidateAll。 |
+| 范围 | NvmWriteAll：对应多块服务 NvM_WriteAll。 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.38. BswMNvMRequest
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMNvMRequest |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 通过此模式请求源，**NvM** 指示指定块的当前状态。可能值包括 **NvM_RequestResultType** 的以下值：**NVM_REQ_OK**、**NVM_REQ_NOT_OK**、**NVM_REQ_PENDING**、**NVM_REQ_INTEGRITY_FAILED**、**NVM_REQ_BLOCK_SKIPPED**、**NVM_REQ_NV_INVALIDATED**、**NVM_REQ_CANCELED**、**NVM_REQ_REDUNDANCY_FAILED** 和 **NVM_REQ_RESTORED_FROM_ROM**。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMNvMBlockRef |
+| 父容器 | BswMNvMRequest |
+| 描述 | 对应于该请求的 NvM 块描述符的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 NvMBlockDescriptor 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.39. BswMPartitionRestarted
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMPartitionRestarted |
+| 父容器 | BswMEventRequestSource |
+| 描述 | 当 **RTE** 重启包含 **BswM** 的分区时，此通知用于报告错误。模式用户可能位于另一个仍在运行的分区中，因此必须通知 **BswM**：其所在分区的启动并非正常启动，而是单个分区的重启。此信息可在规则中使用。该通知必须由相应分区的重启任务使用。 |
+| 配置参数 | 无配置参数。 |
+
+无包含的容器。
+
+#### 9.2.40. BswMSdClientServiceCurrentState
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMSdClientServiceCurrentState |
+| 父容器 | BswMModeRequestSource |
+| 描述 | **Service Discovery** 模块用于指示客户端服务的当前状态（可用/不可用）。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSdClientMethodsRef |
+| 父容器 | BswMSdClientServiceCurrentState |
+| 描述 | 对 **Sd** 模块中客户端服务的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 SdClientService 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.41. BswMSdConsumedEventGroupCurrentState
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMSdConsumedEventGroupCurrentState |
+| 父容器 | BswMModeRequestSource |
+| 描述 | **Service Discovery** 用于指示事件处理器的当前状态（已请求/已释放）。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSdConsumedEventGroupRef |
+| 父容器 | BswMSdConsumedEventGroupCurrentState |
+| 描述 | 对 **Sd** 模块客户端服务中定义的 eventGroup 的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 SdConsumedEventGroup 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.42. BswMSdEventHandlerCurrentState
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMSdEventHandlerCurrentState |
+| 父容器 | BswMModeRequestSource |
+| 描述 | **Service Discovery** 用于指示事件处理器的当前状态（已请求/已释放）。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSdEventHandlerRef |
+| 父容器 | BswMSdEventHandlerCurrentState |
+| 描述 | 对 **Sd** 模块服务器服务中定义的事件处理器的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 SdEventHandler 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.43. BswMSoAdSoConModeChg
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMSoAdSoConModeChg |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 这是对 **SoAd** 当前状态的指示。 |
+| Post-Build 变体多重性 | false |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSoAdSocketIdRef |
+| 父容器 | BswMSoAdSoConModeChg |
+| 描述 | 对应于该模式请求的 SoAd 套接字连接 ID 句柄的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 SoAdSocketConnection 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.44. BswMSwcModeNotification
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMSwcModeNotification |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 此模式切换通知与 RTE 切换接口相关联。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSwcModeNotificationModeDeclarationGroupPrototypeRef |
+| 父容器 | BswMSwcModeNotification |
+| 描述 | 对 ModeDeclarationGroupPrototype 的外部引用。 |
+| 多重性 | 1 |
+| 类型 | 对 MODE-DECLARATION-GROUP-PROTOTYPE 的外部引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.45. BswMSwcModeRequest
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMSwcModeRequest |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 此模式请求源为软件组件。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSwcModeRequestVariableDataPrototypeRef |
+| 父容器 | BswMSwcModeRequest |
+| 描述 | 对 VariableDataPrototype 的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 VARIABLE-DATA-PROTOTYPE 的外部引用 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+**BswM** 仅应接受如下配置：**BswMSwcModeRequest** 所引用的 **VariableDataPrototype** 属于 **SenderReceiverInterface**。
+
+#### 9.2.46. BswMSwitchAckNotification
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMSwitchAckNotification |
+| 父容器 | BswMEventRequestSource |
+| 描述 | 这是模式转换已完成的通知。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSwitchPortRef |
+| 父容器 | BswMSwitchAckNotification |
+| 描述 | 对将接收该通知的切换端口的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 BswMSwitchPort 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+如果引用的 **BswMSwitchPort** 配置了 **BswMModeSwitchInterfaceRef**，但未配置 **BswMSchMModeDeclarationGroupRef**，则此配置指定一个 **ModeSwitchedAckEvent**，**BswM** 应在其 SWCD 中创建该事件。**BswM** 应创建一个关联的可运行实体；该可运行实体/可调度实体的 C 定义应仲裁该 **ModeSwitchedAckEvent**。
+
+如果引用的 **BswMSwitchPort** 配置了 **BswMSchMModeDeclarationGroupRef**，则此配置指定一个 **BswModeSwitchedAckEvent**，**BswM** 应在其 BSWMD 中创建该事件。**BswM** 应创建一个关联的可运行实体；该可运行实体/可调度实体的 C 定义应仲裁该 **BswModeSwitchedAckEvent**。
+
+#### 9.2.47. BswMTimer
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMTimer |
+| 父容器 | BswMModeRequestSource |
+| 描述 | 此定时器可用于时间相关规则。根据定时器状态，此模式请求端口可处于三种模式之一：**BSWM_TIMER_STOPPED**（初始状态，定时器已由动作停止）、**BSWM_TIMER_STARTED**（定时器已由动作启动）或 **BSWM_TIMER_EXPIRED**（定时器已到期）。 |
+| 配置参数 | 无配置参数。 |
+
+无包含的容器。
+
+#### 9.2.48. BswMRule
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMRule |
+| 父容器 | BswMArbitration |
+| 描述 | 每个实例描述一个 **BswM** 仲裁规则。规则由简单的模式条件或更复杂的逻辑表达式构成，并引用规则评估为 true 或 false 时应调用的动作列表。 |
+| Post-Build 变体多重性 | true |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMNestedExecutionOnly |
+| 父容器 | BswMRule |
+| 描述 | 此参数定义相关规则是独立规则还是从属规则。**false**：独立规则，在每次适用时均进行评估，包括作为由自身 BswMModeRequestSource 驱动的独立规则，以及被其他规则引用时；**true**：从属规则，仅在被一个或多个动作列表引用时进行评估。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMRuleInitState |
+| 父容器 | BswMRule |
+| 描述 | 此参数属于 **BswM** 的重置/初始化行为。仅当规则评估结果与上次评估相比发生变化时，才执行动作列表。此参数定义 **BswM** 初始化后使用的规则“先前评估结果”。若设置为 **BSWM_UNDEFINED**，则初始化后首次评估规则时，评估结果始终视为已变化；若设置为 **BSWM_TRUE**，则规则评估为 false 时，评估结果视为已变化；若设置为 **BSWM_FALSE**，则规则评估为 true 时，评估结果视为已变化。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | BSWM_FALSE |
+| 范围 | BSWM_TRUE |
+| 范围 | BSWM_UNDEFINED |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMRuleExpressionRef |
+| 父容器 | BswMRule |
+| 描述 | 对每条规则进行评估时所使用的逻辑表达式的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 BswMLogicalExpression 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMRuleFalseActionList |
+| 父容器 | BswMRule |
+| 描述 | 规则评估为 false 时应执行的动作列表的引用。 |
+| 多重性 | 0..1 |
+| 类型 | 对 BswMActionList 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMRuleTrueActionList |
+| 父容器 | BswMRule |
+| 描述 | 规则评估为 true 时应执行的动作列表的引用。 |
+| 多重性 | 0..1 |
+| 类型 | 对 BswMActionList 的引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.49. BswMDataTypeMappingSets
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMDataTypeMappingSets |
+| 父容器 | BswMConfig |
+| 描述 | DataTypeMappingSet 的引用集合。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMDataTypeMappingSetRef |
+| 父容器 | BswMDataTypeMappingSets |
+| 描述 | 对 DataTypeMappingSet 的引用。 |
+| 多重性 | 1..* |
+| 类型 | 对 DATA-TYPE-MAPPING-SET 的外部引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.50. BswMModeControl
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMModeControl |
+| 父容器 | BswMConfig |
+| 描述 | 此容器包含所有与 **BswM** 模式控制功能相关的配置子容器和参数。 |
+| 配置参数 | 见下方参数表。 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| BswMAction | 0..* | 此类型的每个容器都定义一个动作。这些动作可以属于一个或多个动作列表。 |
+| BswMActionList | 0..* | 此容器的每个实例定义一个基于 **BswM** 规则调用的动作列表。动作列表包含按编号排列、待处理的动作项列表，也可以包含其他动作列表。 |
+| BswMRteModeRequestPort | 0..* | 此容器定义一个模式请求端口，**BswM** 可用它向充当模式管理器的 **SW-C** 发送模式请求。如果某个 **BswMRteModeRequest** 引用了此容器，**BswM** 应在其服务描述中创建相应的 PPort。 |
+| BswMSwitchPort | 0..* | 表示由 **BswM** 生成的输出模式切换端口。如果配置了 **BswMModeSwitchInterfaceRef**，则在 SWCD 中生成 PPortPrototype；如果配置了 **BswMSchMModeDeclarationGroupRef**，则在 BSWMD 的 ProvidedModeGroups 中生成 ModeDeclarationGroupPrototype。如果两者都配置，则还会在 BSWMD 中生成 SwcBswSynchronizedModeGroupPrototype（参见《BSW 模块描述模板规范》（SWS）的第6.11章，以及《模式管理指南》（EXP））。 |
+
+#### 9.2.51. BswMAction
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMAction |
+| 父容器 | BswMModeControl |
+| 描述 | 此类型的每个容器都定义一个动作。这些动作可以属于一个或多个动作列表。 |
+| Post-Build 变体多重性 | false |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE、VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Link time：-；Post-build time：- |
+| 配置参数 | 见下方容器表。 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| BswMAvailableActions | 1 | 此选择容器包含动作列表中可用的动作。 |
+
+#### 9.2.52. BswMAvailableActions
+
+| 字段 | 值 |
+|---|---|
+| 选择容器名称 | BswMAvailableActions |
+| 父容器 | BswMAction |
+| 描述 | 此选择容器包含动作列表中可用的动作。 |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| BswMClearEventRequest | 0..1 | 此容器包含对 BswMEventRequestPort 的引用；执行该动作时会清除此端口（即将其设置为 CLEAR 状态）。 |
+| BswMComMAllowCom | 0..1 | 此容器包含允许或阻止 ComM 通道通信所需的全部参数。配置此动作时会调用 ComM_CommunicationAllowed。 |
+| BswMComMModeLimitation | 0..1 | 此容器包含限制 ComM 通道通信模式所需的全部参数。配置此动作时会调用 ComM_LimitChannelToNoComMode。 |
+| BswMComMModeSwitch | 0..1 | 此容器包含切换 ComM 用户通信模式所需的全部参数。配置此动作时会调用 ComM_RequestComMode。 |
+| BswMCoreHaltMode | 0..1 | 此容器包含切换核心暂停激活状态所需的全部参数。 |
+| BswMDeadlineMonitoringControl | 0..1 | 此容器包含启用或禁用 COM 中一个或多个 PDU 的期限监控所需的全部参数。 |
+| BswMEcuMDriverInitListBswM | 0..1 | 此容器定义触发 EcuM 驱动初始化列表的动作。 |
+| BswMEcuMGoDownHaltPoll | 0..1 | 此容器定义由 BswM 触发 EcuM_GoDownHaltPoll 的动作。 |
+| BswMEcuMSelectShutdownTarget | 0..1 | 此容器定义关机目标。 |
+| BswMEcuMStateSwitch | 0..1 | 此容器定义切换 ECU 状态管理器状态的动作。 |
+| BswMEthIfStartAllPorts | 0..1 | 此容器定义由 BswM 调用 EthIf_StartAllPorts，从而启动所有受影响 EthSwtPort 的动作。 |
+| BswMEthIfSwitchPortGroupRequestMode | 0..1 | 此容器包含为 EthIfSwtPortGroup 请求模式所需的全部参数。执行此动作时会调用 EthIf_SwitchPortGroupRequestMode API。 |
+| BswMFrSMAllSlots | 0..1 | 此容器包含请求退出 FlexRay KeySlotOnlyMode 所需的参数。执行此动作时会调用 FrSM_AllSlots。 |
+| BswMIdsMBlockStateChangeRequest | 0..1 | 此容器定义切换 IdsM BlockState 的动作。 |
+| BswMJ1939DcmStateSwitch | 0..1 | 此容器包含为 J1939 网络节点切换 J1939 诊断通信管理器网络状态所需的全部参数。配置此动作时会调用 J1939Dcm_SetState。 |
+| BswMJ1939RmStateSwitch | 0..1 | 此容器包含为 J1939 网络节点切换 J1939 请求管理器网络状态所需的全部参数。配置此动作时会调用 J1939Rm_SetState。 |
+| BswMLinScheduleSwitch | 0..1 | 此容器包含切换 LIN 调度表所需的全部参数。配置此动作时会调用 LinSM_ScheduleRequest。`network` 参数的配置可通过 BswMLinScheduleRef 所引用容器的父容器 LinSMChannel 中的 LinSMComMNetworkHandleRef 引用获得。 |
+| BswMNMControl | 0..1 | 此容器包含启用或禁用网络管理通信所需的全部参数。可由 DCM 请求禁用 NM 通信。配置此动作时会调用 Nm_EnableCommunication 或 Nm_DisableCommunication。 |
+| BswMPduGroupSwitch | 0..1 | 此容器包含待启用和禁用的 PDU 组引用。 |
+| BswMPduRouterControl | 0..1 | 此容器包含启用和禁用 PDU Router 路由路径组路由所需的全部参数。配置此动作时会调用 PduR_EnableRouting 或 PduR_DisableRouting。 |
+| BswMRteModeRequest | 0..1 | 此容器定义由 BswM 向充当模式管理器的 SW-C 发送的模式请求。配置此动作时会调用 RTE_Write。 |
+| BswMRteStart | 0..1 | 此容器定义由 BswM 调用 Rte_Start 的动作。 |
+| BswMRteStop | 0..1 | 此容器定义由 BswM 调用 Rte_Stop 的动作。 |
+| BswMRteSwitch | 0..1 | 此容器定义由 BswM 向需要接收模式切换通知的 SW-C 提供的模式切换指示。配置此动作时会调用 RTE_Switch。 |
+| BswMSchMSwitch | 0..1 | 此容器定义由 BswM 向需要接收模式切换通知的 SW-C 提供的模式切换指示。配置此动作时会调用 SchM_Switch。 |
+| BswMSdClientServiceModeRequest | 0..1 | 此容器包含选择 Sd 客户端服务所需的全部参数。配置此动作时会调用 Sd_ClientServiceSetState。 |
+| BswMSdConsumedEventGroupModeRequest | 0..1 | 此容器包含选择 Sd 已消费事件组所需的全部参数。配置此动作时会调用 Sd_ConsumedEventGroupSetState。 |
+| BswMSdServerServiceModeRequest | 0..1 | 此容器包含选择 Sd 服务器服务所需的全部参数。配置此动作时会调用 Sd_ServerServiceSetState。 |
+| BswMSdServiceGroupSwitch | 0..1 | 此容器包含待启用和禁用的 SdServiceGroup 引用。 |
+| BswMSetFirewallState | 0..1 | 此容器包含切换防火墙状态所需的参数。执行此动作时，BswM 会调用 Fw_SetFirewallState()。 |
+| BswMSwitchIPduMode | 0..1 | 此容器包含选择由 COM 发送的 I-PDU 传输模式所需的全部参数。配置此动作时会调用 Com_SwitchIpduTxMode。 |
+| BswMTimerControl | 0..1 | 此容器包含启动或停止定时器所需的全部参数。 |
+| BswMTriggerIPduSend | 0..1 | 此容器包含触发 COM 发送 I-PDU 所需的全部参数。配置此动作时会调用 Com_TriggerIPDUSend。 |
+| BswMUserCallout | 0..1 | 此容器包含调用用户定义函数所需的全部信息。 |
+
+#### 9.2.53. BswMClearEventRequest
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMClearEventRequest |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含对 BswMEventRequestPort 的引用；执行该动作时会清除此端口（即将其设置为 CLEAR 状态）。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMClearEventRequestPortRef |
+| 父容器 | BswMClearEventRequest |
+| 描述 | 此参数引用待清除的 BswMEventRequestPort。 |
+| 多重性 | 1 |
+| 类型 | 对 BswMEventRequestPort 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.54. BswMComMAllowCom
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMComMAllowCom |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含允许或阻止 ComM 通道通信所需的全部参数。配置此动作时会调用 ComM_CommunicationAllowed。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMComAllowed |
+| 父容器 | BswMComMAllowCom |
+| 描述 | BswMComMAllowChannelRef 参数引用允许或阻止通信的通道。此参数对应 ComM_CommunicationAllowed() 函数的 Allowed 参数。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMComMAllowChannelRef |
+| 父容器 | BswMComMAllowCom |
+| 描述 | 对允许或阻止通信的 ComM 通道的引用。此引用对应 ComM_CommunicationAllowed() 函数的 Channel 参数。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMChannel 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.55. BswMComMModeLimitation
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMComMModeLimitation |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含限制 ComM 通道通信模式所需的全部参数。配置此动作时会调用 ComM_LimitChannelToNoComMode。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMComMLimitMode |
+| 父容器 | BswMComMModeLimitation |
+| 描述 | ComM_LimitChannelToNoComMode() 函数使用此布尔参数将通道的通信模式限制为无通信模式。此参数对应函数的 Status 参数。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMComMLimitChannelRef |
+| 父容器 | BswMComMModeLimitation |
+| 描述 | 对需要限制其通信模式的 ComM 通道的引用。此引用对应 ComM_LimitChannelToNoComMode() 函数的 Channel 参数。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMChannel 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.56. BswMComMModeSwitch
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMComMModeSwitch |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含切换 ComM 用户通信模式所需的全部参数。配置此动作时会调用 ComM_RequestComMode。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMComMRequestedMode |
+| 父容器 | BswMComMModeSwitch |
+| 描述 | 此参数指定请求的通信模式，对应 ComM_RequestComMode() 函数的 ComMode 参数。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | BSWM_COMM_FULL_COMMUNICATION |
+| 范围 | BSWM_COMM_NO_COMMUNICATION |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMComMUserRef |
+| 父容器 | BswMComMModeSwitch |
+| 描述 | 对需要请求通信模式的 ComM 用户的引用。此引用对应 ComM_RequestComMode() 函数的 User 参数。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMUser 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.57. BswMCoreHaltMode
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMCoreHaltMode |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含切换核心暂停激活状态所需的全部参数。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMCoreHaltActivationState |
+| 父容器 | BswMCoreHaltMode |
+| 描述 | 根据 OS 实现和 CPU 硬件提供不同选项。此参数涉及的 HALT 模式在 OS 实现中以名称（字符串）定义。不同实现可以实现不同的 HALT 模式，因此名称也可能不同。 |
+| 多重性 | 1 |
+| 类型 | EcucStringParamDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMTargetCoreRef |
+| 父容器 | BswMCoreHaltMode |
+| 描述 | 对需要影响其核心暂停过程的核心的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 EcucCoreDefinition 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.58. BswMDeadlineMonitoringControl
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMDeadlineMonitoringControl |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含启用或禁用 COM 中一个或多个 PDU 的期限监控所需的全部参数。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMDisabledDMPduGroupRef |
+| 父容器 | BswMDeadlineMonitoringControl |
+| 描述 | 对需要禁用期限监控的 PDU 组的引用。此引用对应 Com_DisableReceptionDM() 函数的 IpduGroupId 参数。 |
+| 多重性 | 0..* |
+| 类型 | 对 ComIPduGroup 的符号名称引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMEnabledDMPduGroupRef |
+| 父容器 | BswMDeadlineMonitoringControl |
+| 描述 | 对需要启用期限监控的 PDU 组的引用。此引用对应 Com_EnableReceptionDM() 函数的 IpduGroupId 参数。 |
+| 多重性 | 0..* |
+| 类型 | 对 ComIPduGroup 的符号名称引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+**BswM** 应拒绝同时配置 **BswMDisabledDMPduGroupRef** 和 **BswMEnabledDMPduGroupRef** 且两者引用同一 PDU 组的配置。
+
+执行 **BswMDeadlineMonitoringControl** 动作时，**BswM** 应为每个 **BswMEnabledDMPduGroupRef** 调用 **Com_EnableReceptionDM**，并为每个 **BswMDisabledDMPduGroupRef** 调用 **Com_DisableReceptionDM**。这些 **Com** 调用的顺序未定义。
+
+**注意：** 如果需要严格规定调用 **Com_EnableReceptionDM** 或 **Com_DisableReceptionDM** 的顺序，可以在有序动作列表中配置多个独立动作（每个 **BswMDeadlineMonitoringControl** 动作仅包含一个 **BswM*PduGroupRef**）。
+
+#### 9.2.59. BswMEcuMDriverInitListBswM
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMEcuMDriverInitListBswM |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器定义触发 EcuM 驱动初始化列表的动作。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMEcuMDriverInitListBswMRef |
+| 父容器 | BswMEcuMDriverInitListBswM |
+| 描述 | 对代表待触发驱动初始化列表的 EcuM EcuMDriverInitListBswM 容器的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 EcuMDriverInitListBswM 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+**EcuM（Flex）** 可配置驱动初始化列表（EcuMDriverInitListBswM），随后可由 **BswM** 调用。
+
+执行 **BswMEcuMDriverInitListBswM** 动作时，**BswM** 应调用由 **EcuM** 提供的函数 `EcuM_AL_DriverInitBswM_<EcuMDriverInitListBswM.shortName>(void)`。
+
+#### 9.2.60. BswMEcuMGoDownHaltPoll
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMEcuMGoDownHaltPoll |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器定义由 **BswM** 触发 EcuM_GoDownHaltPoll 的动作。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMEcuMUserIdRef |
+| 父容器 | BswMEcuMGoDownHaltPoll |
+| 描述 | 对 EcuM UserId 的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 EcuMFlexUserConfig 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.61. BswMEcuMSelectShutdownTarget
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMEcuMSelectShutdownTarget |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器定义关机目标。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMEcuMShutdownTarget |
+| 父容器 | BswMEcuMSelectShutdownTarget |
+| 描述 | 此参数包含 **BswM** 在 **EcuM** 中选择的关机目标。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | BSWM_ECUM_SHUTDOWN_TARGET_OFF |
+| 范围 | BSWM_ECUM_SHUTDOWN_TARGET_RESET：如果配置为此值，则必须存在 BswMEcuMResetModeRef 参数，并且该参数必须有效引用一个 EcuM 复位模式。 |
+| 范围 | BSWM_ECUM_SHUTDOWN_TARGET_SLEEP：如果配置为此值，则必须存在 BswMEcuMSleepModeRef 参数，并且该参数必须有效引用一个 EcuM 睡眠模式。 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMEcuMResetModeRef |
+| 父容器 | BswMEcuMSelectShutdownTarget |
+| 描述 | 对复位模式的引用。 |
+| 多重性 | 0..1 |
+| 类型 | 对 EcuMResetMode 的符号名称引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMEcuMSleepModeRef |
+| 父容器 | BswMEcuMSelectShutdownTarget |
+| 描述 | 对睡眠模式的引用。 |
+| 多重性 | 0..1 |
+| 类型 | 对 EcuMSleepMode 的符号名称引用 |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.62. BswMEcuMStateSwitch
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMEcuMStateSwitch |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器定义切换 ECU 状态管理器状态的动作。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMEcuMState |
+| 父容器 | BswMEcuMStateSwitch |
+| 描述 | 此参数对应 EcuM_SetState() 函数的 State 参数。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | BSWM_ECUM_STATE_POST_RUN |
+| 范围 | BSWM_ECUM_STATE_RUN |
+| 范围 | BSWM_ECUM_STATE_SHUTDOWN |
+| 范围 | BSWM_ECUM_STATE_SLEEP |
+| 范围 | BSWM_ECUM_STATE_STARTUP |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.63. BswMEthIfStartAllPorts
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMEthIfStartAllPorts |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器定义由 **BswM** 调用 EthIf_StartAllPorts，从而启动所有受影响 EthSwtPort 的动作。 |
+| 配置参数 | 无配置参数。 |
+
+无包含的容器。
+
+配置此动作时，**BswM** 执行该动作应调用 EthIf_StartAllPorts(void)。
+
+#### 9.2.64. BswMEthIfSwitchPortGroupRequestMode
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMEthIfSwitchPortGroupRequestMode |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含为 EthIfSwtPortGroup 请求模式所需的全部参数。执行此动作时会调用 EthIf_SwitchPortGroupRequestMode API。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMEthTrcvMode |
+| 父容器 | BswMEthIfSwitchPortGroupRequestMode |
+| 描述 | 此参数包含要请求的模式。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | BSWM_ETH_MODE_ACTIVE：启用端口组。 |
+| 范围 | BSWM_ETH_MODE_ACTIVE_WITH_WAKEUP_REQUEST：启用端口组并请求网络触发唤醒。 |
+| 范围 | BSWM_ETH_MODE_DOWN：禁用端口组。 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMEthIfSwitchPortGroupRef |
+| 父容器 | BswMEthIfSwitchPortGroupRequestMode |
+| 描述 | 对接收请求的以太网接口交换机端口组的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 EthIfSwitchPortGroup 的符号名称引用 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.65. BswMFrSMAllSlots
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMFrSMAllSlots |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含请求退出 FlexRay KeySlotOnlyMode 所需的全部参数。执行此动作时会调用 FrSM_AllSlots。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMFrSMAllSlotsNetworkHandleRef |
+| 父容器 | BswMFrSMAllSlots |
+| 描述 | 对 FlexRay 集群的引用，对应 FrSM_AllSlots() 函数的 NetworkHandle 参数。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMChannel 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.66. BswMJ1939DcmStateSwitch
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMJ1939DcmStateSwitch |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含为 J1939 网络节点切换 J1939 诊断通信管理器网络状态所需的全部参数。配置此动作时会调用 J1939Dcm_SetState。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMJ1939DcmRequestedState |
+| 父容器 | BswMJ1939DcmStateSwitch |
+| 描述 | 此参数描述 J1939 诊断通信管理器的通信状态，对应 J1939Dcm_SetState() 函数的 newState 参数。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | BSWM_J1939DCM_STATE_OFFLINE |
+| 范围 | BSWM_J1939DCM_STATE_ONLINE |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMJ1939DcmChannelRef |
+| 父容器 | BswMJ1939DcmStateSwitch |
+| 描述 | 此引用指向由 ComMChannel 定义的唯一通道，并提供 ComMChannelId 中的唯一通道索引值。此引用对应 J1939Dcm_SetState() 函数的 channel 参数。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMChannel 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMJ1939DcmNodeRef |
+| 父容器 | BswMJ1939DcmStateSwitch |
+| 描述 | 此引用指向 J1939NmNode，并提供唯一的 J1939Nm NodeId。此引用对应 J1939Dcm_SetState() 函数的 node 参数。 |
+| 多重性 | 1 |
+| 类型 | 对 J1939NmNode 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.67. BswMJ1939RmStateSwitch
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMJ1939RmStateSwitch |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含为 J1939 网络节点切换 J1939 请求管理器网络状态所需的全部参数。配置此动作时会调用 J1939Rm_SetState。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMJ1939RmRequestedState |
+| 父容器 | BswMJ1939RmStateSwitch |
+| 描述 | 此参数描述 J1939 请求管理器的通信状态，对应 J1939Rm_SetState() 函数的 new state 参数。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | BSWM_J1939RM_STATE_OFFLINE |
+| 范围 | BSWM_J1939RM_STATE_ONLINE |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMJ1939RmChannelRef |
+| 父容器 | BswMJ1939RmStateSwitch |
+| 描述 | 此引用指向由 ComMChannel 定义的唯一通道，并提供 ComMChannelId 中的唯一通道索引值。此引用对应 J1939Rm_SetState() 函数的 channel 参数。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMChannel 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMJ1939RmNodeRef |
+| 父容器 | BswMJ1939RmStateSwitch |
+| 描述 | 此引用指向 J1939NmNode，并提供唯一的 J1939Nm NodeId。此引用对应 J1939Rm_SetState() 函数的 node 参数。 |
+| 多重性 | 1 |
+| 类型 | 对 J1939NmNode 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.68. BswMLinScheduleSwitch
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMLinScheduleSwitch |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含切换 LIN 调度表所需的全部参数。配置此动作时会调用 LinSM_ScheduleRequest。“network”参数的配置可通过 BswMLinScheduleRef 所引用容器的父容器 LinSMChannel 中的 LinSMComMNetworkHandleRef 引用获得。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMLinScheduleRef |
+| 父容器 | BswMLinScheduleSwitch |
+| 描述 | 对 LIN 状态管理器应切换到的 LIN 调度表的引用。此引用对应 LinSM_ScheduleRequest() 函数的 schedule 参数。 |
+| 多重性 | 1 |
+| 类型 | 对 LinSMSchedule 的符号名称引用 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.69. BswMNMControl
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMNMControl |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含启用或禁用网络管理通信所需的全部参数。DCM 可以请求禁用 NM 通信。配置此动作时会调用 Nm_EnableCommunication 或 Nm_DisableCommunication。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMNMAction |
+| 父容器 | BswMNMControl |
+| 描述 | 此参数指定启用或禁用相应 NM 通道的通信。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | BSWM_NM_DISABLE |
+| 范围 | BSWM_NM_ENABLE |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMComMNetworkHandleRef |
+| 父容器 | BswMNMControl |
+| 描述 | 此引用指向由 ComMChannel 定义的唯一通道，并提供 ComMChannelId 中的唯一通道索引值。此引用对应 Nm_EnableCommunication 和 Nm_DisableCommunication 函数的 NetworkHandle 参数。 |
+| 多重性 | 1 |
+| 类型 | 对 ComMChannel 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.70. BswMPduGroupSwitch
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMPduGroupSwitch |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含待启用和禁用的 PDU 组引用。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMPduGroupSwitchReinit |
+| 父容器 | BswMPduGroupSwitch |
+| 描述 | 此参数定义启动 PDU 组时，是否重新初始化 I-PDU 数据、所包含信号组的影子缓冲区等。此参数对应 Com_IpduGroupStart() 函数的 initialize 参数。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMDisabledPduGroupRef |
+| 父容器 | BswMPduGroupSwitch |
+| 描述 | 对应禁用 PDU 组的引用。此引用对应 Com_IpduGroupStop() 函数的 IpduGroupId 参数。 |
+| 多重性 | 0..* |
+| 类型 | 对 ComIPduGroup 的符号名称引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMEnabledPduGroupRef |
+| 父容器 | BswMPduGroupSwitch |
+| 描述 | 对应启用 PDU 组的引用。此引用对应 Com_IpduGroupStart() 函数的 IpduGroupId 参数。 |
+| 多重性 | 0..* |
+| 类型 | 对 ComIPduGroup 的符号名称引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+**BswM** 应拒绝同时配置 **BswMDisabledPduGroupRef** 和 **BswMEnabledPduGroupRef** 且两者引用同一 PDU 组的配置。
+
+执行 **BswMPduGroupSwitch** 动作时，**BswM** 应为每个 **BswMEnabledPduGroupRef** 调用 **Com_IpduGroupStart**，并为每个 **BswMDisabledPduGroupRef** 调用 **Com_IpduGroupStop**。这些 **Com** 调用的顺序未定义。
+
+**注意：** 如果需要严格规定调用 **Com_IpduGroupStart** 或 **Com_IpduGroupStop** 的顺序，可以在有序动作列表中配置多个独立动作（每个 **BswMPduGroupSwitch** 动作仅包含一个 **BswM*PduGroupRef**）。
+
+#### 9.2.71. BswMPduRouterControl
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMPduRouterControl |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含启用和禁用 PDU Router 路由路径组路由所需的全部参数。配置此动作时会调用 PduR_EnableRouting 或 PduR_DisableRouting。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMPduRouterAction |
+| 父容器 | BswMPduRouterControl |
+| 描述 | 此参数指定启用还是禁用相应 PDU 的路由。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | BSWM_PDUR_DISABLE |
+| 范围 | BSWM_PDUR_ENABLE |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMPduRouterDisableInitBuffer |
+| 父容器 | BswMPduRouterControl |
+| 描述 | 当 BswMPduRouterAction 设置为 **BSWM_PDUR_DISABLE** 且此参数设置为 true 时，调用 PduR_DisableRouting 时将 initialize 参数设为 true；否则设为 false。 |
+| 多重性 | 0..1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMPduRoutingPathGroupRef |
+| 父容器 | BswMPduRouterControl |
+| 描述 | 对需要在 PDU Router 中启用或禁用路由的 PDU 路由路径组的引用。此引用对应 PduR_EnableRouting() 和 PduR_DisableRouting() 函数的 id 参数。 |
+| 多重性 | 1..* |
+| 类型 | 对 PduRRoutingPathGroup 的符号名称引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.72. BswMRteModeRequest
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMRteModeRequest |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器定义由 **BswM** 向充当模式管理器的 **SW-C** 发送的模式请求。配置此动作时会调用 RTE_Write。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMRequestedModeRef |
+| 父容器 | BswMRteModeRequest |
+| 描述 | 对用于该模式请求的模式声明的外部引用。 |
+| 多重性 | 1 |
+| 类型 | 对 MODE-DECLARATION 的外部引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMRteModeRequestPortRef |
+| 父容器 | BswMRteModeRequest |
+| 描述 | 对 BswMRteModeRequestPort 的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 BswMRteModeRequestPort 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.73. BswMRteStart
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMRteStart |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器定义由 **BswM** 启动 RTE 的动作。 |
+| 配置参数 | 无配置参数。 |
+
+无包含的容器。
+
+配置此动作时，执行该动作应由 **BswM** 调用 Rte_Start(void)。
+
+#### 9.2.74. BswMRteStop
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMRteStop |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器定义由 **BswM** 停止 RTE 的动作。 |
+| 配置参数 | 无配置参数。 |
+
+无包含的容器。
+
+配置此动作时，执行该动作应由 **BswM** 调用 Rte_Stop(void)。
+
+#### 9.2.75. BswMRteSwitch
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMRteSwitch |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器定义由 **BswM** 向需要接收模式切换通知的 **SW-C** 提供的模式切换指示。配置此动作时会调用 RTE_Switch。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMRteSwitchPortRef |
+| 父容器 | BswMRteSwitch |
+| 描述 | 对 BswMSwitchPort 的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 BswMSwitchPort 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSwitchedMode |
+| 父容器 | BswMRteSwitch |
+| 描述 | 此参数包含模式声明组中某个模式对应的整数值。 |
+| 多重性 | 1 |
+| 类型 | 对 MODE-DECLARATION 的外部引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.76. BswMSchMSwitch
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMSchMSwitch |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器定义由 **BswM** 向需要接收模式切换通知的 **SW-C** 提供的模式切换指示。配置此动作时会调用 SchM_Switch。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSchMSwitchedMode |
+| 父容器 | BswMSchMSwitch |
+| 描述 | 此参数包含模式声明组中某个模式对应的整数值。 |
+| 多重性 | 1 |
+| 类型 | 对 MODE-DECLARATION 的外部引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSchMSwitchPortRef |
+| 父容器 | BswMSchMSwitch |
+| 描述 | 对 BswMSwitchPort 的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 BswMSwitchPort 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.77. BswMSdClientServiceModeRequest
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMSdClientServiceModeRequest |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含选择 Sd 客户端服务所需的全部参数。配置此动作时会调用 Sd_ClientServiceSetState。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSdClientServiceState |
+| 父容器 | BswMSdClientServiceModeRequest |
+| 描述 | 此参数指定相应客户端服务应释放还是请求。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | BSWM_SD_CLIENT_SERVICE_RELEASED：应释放客户端服务。 |
+| 范围 | BSWM_SD_CLIENT_SERVICE_REQUESTED：应请求客户端服务。 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSdClientMethodsRef |
+| 父容器 | BswMSdClientServiceModeRequest |
+| 描述 | 对 Sd 模块中客户端服务的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 SdClientService 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.78. BswMSdConsumedEventGroupModeRequest
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMSdConsumedEventGroupModeRequest |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含选择 Sd 已消费事件组所需的全部参数。配置此动作时会调用 Sd_ConsumedEventGroupSetState。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSdConsumedEventGroupState |
+| 父容器 | BswMSdConsumedEventGroupModeRequest |
+| 描述 | 此参数指定相应已消费事件组应释放还是请求。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | BSWM_SD_CONSUMED_EVENTGROUP_RELEASED：应释放事件组。 |
+| 范围 | BSWM_SD_CONSUMED_EVENTGROUP_REQUESTED：应请求事件组。 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSdConsumedEventGroupRef |
+| 父容器 | BswMSdConsumedEventGroupModeRequest |
+| 描述 | 对 Sd 模块客户端服务中定义的 eventGroup 的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 SdConsumedEventGroup 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.79. BswMSdServerServiceModeRequest
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMSdServerServiceModeRequest |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含选择 Sd 服务器服务所需的全部参数。配置此动作时会调用 Sd_ServerServiceSetState。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSdServerServiceState |
+| 父容器 | BswMSdServerServiceModeRequest |
+| 描述 | 此参数指定相应服务器服务应处于关闭还是可用状态。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | BSWM_SD_SERVER_SERVICE_AVAILABLE：服务器服务应可用。 |
+| 范围 | BSWM_SD_SERVER_SERVICE_DOWN：服务器服务应关闭。 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSdServerMethodsRef |
+| 父容器 | BswMSdServerServiceModeRequest |
+| 描述 | 对 Sd 模块中服务器服务的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 SdServerService 的符号名称引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.80. BswMSdServiceGroupSwitch
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMSdServiceGroupSwitch |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含待启用和禁用的 SdServiceGroup 引用。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMDisabledSdServiceGroupRef |
+| 父容器 | BswMSdServiceGroupSwitch |
+| 描述 | 对需要禁用的 SdServiceGroup 的引用。此引用对应 Sd_ServiceGroupStop() 函数的 ServiceGroupId 参数。 |
+| 多重性 | 0..* |
+| 类型 | 对 SdServiceGroup 的符号名称引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMEnabledSdServiceGroupRef |
+| 父容器 | BswMSdServiceGroupSwitch |
+| 描述 | 对需要启用的 SdServiceGroup 的引用。此引用对应 Sd_ServiceGroupStart() 函数的 ServiceGroupId 参数。 |
+| 多重性 | 0..* |
+| 类型 | 对 SdServiceGroup 的符号名称引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+**BswM** 应拒绝同时配置 **BswMDisabledSdServiceGroupRef** 和 **BswMEnabledSdServiceGroupRef** 且两者引用同一 SdServiceGroup 的配置。
+
+执行 **BswMSdServiceGroupSwitch** 动作时，**BswM** 应为每个 **BswMEnabledSdServiceGroupRef** 调用 **Sd_ServiceGroupStart**，并为每个 **BswMDisabledSdServiceGroupRef** 调用 **Sd_ServiceGroupStop**。这些 **Sd** 调用的顺序未定义。
+
+**注意：** 如果需要严格规定调用 **Sd_ServiceGroupStart** 或 **Sd_ServiceGroupStop** 的顺序，可以在有序动作列表中配置多个独立动作（每个 **BswMSdServiceGroupSwitch** 动作仅包含一个 **BswM*ServiceGroupRef**）。
+
+#### 9.2.81. BswMSetFirewallState
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMSetFirewallState |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含切换防火墙状态所需的参数。执行此动作时，**BswM** 会调用 Fw_SetFirewallState()。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMFirewallStateRef |
+| 父容器 | BswMSetFirewallState |
+| 描述 | 对将被激活的防火墙状态的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 FirewallState 的符号名称引用 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.82. BswMSwitchIPduMode
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMSwitchIPduMode |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含选择由 COM 发送的 I-PDU 传输模式所需的全部参数。配置此动作时会调用 Com_SwitchIpduTxMode。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSwitchIPduModeValue |
+| 父容器 | BswMSwitchIPduMode |
+| 描述 | 此参数定义本次调用所选的传输模式，对应 Com_SwitchIpduTxMode() 函数的 Mode 参数。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSwitchIPduModeRef |
+| 父容器 | BswMSwitchIPduMode |
+| 描述 | 对需要设置传输模式的 I-PDU 的引用。此引用对应 Com_SwitchIpduTxMode() 函数的 PduId 参数。 |
+| 多重性 | 1 |
+| 类型 | 对 ComIPdu 的符号名称引用 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.83. BswMTimerControl
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMTimerControl |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含启动或停止定时器所需的全部参数。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMTimerAction |
+| 父容器 | BswMTimerControl |
+| 描述 | 指定定时器执行的动作。定时器可以启动或停止。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | BSWM_TIMER_START |
+| 范围 | BSWM_TIMER_STOP |
+| 默认值 | BSWM_TIMER_START |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMTimerValue |
+| 父容器 | BswMTimerControl |
+| 描述 | 定时器启动时使用的定时器值，单位为秒。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFloatParamDef |
+| 范围 | ]0 .. INF[ |
+| 默认值 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMTimerRef |
+| 父容器 | BswMTimerControl |
+| 描述 | 指定执行定时器动作的定时器。 |
+| 多重性 | 1 |
+| 类型 | 对 BswMTimer 的引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.84. BswMTriggerIPduSend
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMTriggerIPduSend |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含触发 COM 发送 I-PDU 所需的全部参数。配置此动作时会调用 Com_TriggerIPDUSend。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMTriggeredIPduRef |
+| 父容器 | BswMTriggerIPduSend |
+| 描述 | 对需要触发发送的 I-PDU 的引用。此引用对应 Com_TriggerIPDUSend() 函数的 PduId 参数。 |
+| 多重性 | 1..* |
+| 类型 | 对 ComIPdu 的符号名称引用 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.85. BswMUserCallout
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMUserCallout |
+| 父容器 | BswMAvailableActions |
+| 描述 | 此容器包含调用用户定义函数所需的全部信息。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMUserCalloutFunction |
+| 父容器 | BswMUserCallout |
+| 描述 | 此参数指定包含全部参数的完整函数调用。参数在配置时指定，运行时不能更改。调用返回的任何值都会被忽略。用法示例包括：初始化其他 BSW 模块的动作、调用 NvM_ReadAll() 的动作，以及调用 NvM_WriteAll() 的动作。 |
+| 多重性 | 1 |
+| 类型 | EcucStringParamDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.86. BswMActionList
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMActionList |
+| 父容器 | BswMModeControl |
+| 描述 | 每个实例定义一个基于 **BswM** 规则调用的动作列表。动作列表包含按编号排列、待处理的动作项列表，也可以包含其他动作列表。 |
+| Post-Build 变体多重性 | true |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMActionListExecution |
+| 父容器 | BswMActionList |
+| 描述 | 此参数控制相应动作列表是在每次规则评估时都执行，还是仅在评估结果发生变化时执行。当此动作列表在另一个动作列表中执行时，此参数不起作用。 |
+| 多重性 | 1 |
+| 类型 | EcucEnumerationParamDef |
+| 范围 | BSWM_CONDITION：每次评估规则时都执行动作列表。 |
+| 范围 | BSWM_TRIGGER：每当评估结果发生变化时执行动作列表。 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMActionListPriority |
+| 父容器 | BswMActionList |
+| 描述 | 当一个模式控制周期内执行多个动作列表时，此参数控制它们的执行顺序。优先级最高的动作列表先执行。0 为最低优先级，255 为最高优先级。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 255 |
+| 默认值 | 0 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| BswMActionListItem | 1..* | 此容器定义动作列表中的一个动作项。 |
+
+#### 9.2.87. BswMActionListItem
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMActionListItem |
+| 父容器 | BswMActionList |
+| 描述 | 此容器定义动作列表中的一个动作项。 |
+| Post-Build 变体多重性 | true |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMAbortOnFail |
+| 父容器 | BswMActionListItem |
+| 描述 | 如果此动作返回 E_NOT_OK，此参数定义是否应中止动作列表的执行。仅当该动作可能返回 E_NOT_OK 时，此参数才适用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMActionListItemIndex |
+| 父容器 | BswMActionListItem |
+| 描述 | 此参数定义动作在动作列表中的索引，用于确定动作的执行顺序。 |
+| 多重性 | 1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 0 .. 255 |
+| 默认值 | - |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMReportFailRuntimeErrorId |
+| 父容器 | BswMActionListItem |
+| 描述 | 如果配置此参数且该动作返回 E_NOT_OK，**BswM** 将报告一个 Det 运行时错误。所报告运行时错误中的 ErrorId 由此参数配置的值给出。 |
+| 多重性 | 0..1 |
+| 类型 | EcucIntegerParamDef |
+| 范围 | 128 .. 255 |
+| 默认值 | 128 |
+| Post-Build 变体多重性 | true |
+| Post-Build 变体值 | true |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMActionListItemRef |
+| 父容器 | BswMActionListItem |
+| 描述 | 动作项可以是原子动作，也可以是对另一个动作列表或规则的引用。 |
+| 多重性 | 1 |
+| 类型 | 对 BswMAction、BswMActionList 或 BswMRule 的选择引用 |
+| Post-Build 变体值 | true |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME）；Post-build time：X（VARIANT-POST-BUILD） |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+#### 9.2.88. BswMRteModeRequestPort
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMRteModeRequestPort |
+| 父容器 | BswMModeControl |
+| 描述 | 此容器定义一个模式请求端口，**BswM** 可用它向充当模式管理器的 **SW-C** 发送模式请求。如果某个 **BswMRteModeRequest** 引用了此容器，**BswM** 应在其服务描述中创建相应的 PPort。 |
+| Post-Build 变体多重性 | false |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE、VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMRteModeRequestPortInterfaceRef |
+| 父容器 | BswMRteModeRequestPort |
+| 描述 | 对用于模式请求的 variable data prototype 的实例引用。 |
+| 多重性 | 0..1 |
+| 类型 | VARIABLE-DATA-PROTOTYPE 的实例引用；上下文：SW-COMPONENT-PROTOTYPE*PORT-PROTOTYPE |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local；依赖：BswMRteModeRequestVariableDataPrototypeSRRef == NULL |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMRteModeRequestVariableDataPrototypeSRRef |
+| 父容器 | BswMRteModeRequestPort |
+| 描述 | 用于模式请求的 VariableDataPrototype 的外部引用。 |
+| 多重性 | 0..1 |
+| 类型 | 对 VARIABLE-DATA-PROTOTYPE 的外部引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local；依赖：BswMRteModeRequestPortInterfaceRef == NULL |
+
+无包含的容器。
+
+#### 9.2.89. BswMSwitchPort
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMSwitchPort |
+| 父容器 | BswMModeControl |
+| 描述 | 表示由 **BswM** 生成的输出模式切换端口。如果配置了 BswMModeSwitchInterfaceRef，则在 SWCD 中生成 PPortPrototype；如果配置了 BswMSchMModeDeclarationGroupRef，则在 BSWMD 的 ProvidedModeGroups 中生成 ModeDeclarationGroupPrototype。如果两者都配置，则还会在 BSWMD 中生成 SwcBswSynchronizedModeGroupPrototype（参见《BSW 模块描述模板规范》（SWS）的第6.11章，以及《模式管理指南》（EXP））。 |
+| Post-Build 变体多重性 | false |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE、VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Link time：-；Post-build time：- |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMModeSwitchInterfaceRef |
+| 父容器 | BswMSwitchPort |
+| 描述 | 对 **BswM** 用于生成 PPortPrototype 的 ModeSwitchInterface 的引用。 |
+| 多重性 | 0..1 |
+| 类型 | 对 MODE-SWITCH-INTERFACE 的外部引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSchMModeDeclarationGroupRef |
+| 父容器 | BswMSwitchPort |
+| 描述 | 对 **BswM** 用于生成 ModeDeclarationGroupPrototype 的 ModeDeclarationGroup 的引用。 |
+| 多重性 | 0..1 |
+| 类型 | 对 MODE-DECLARATION-GROUP 的外部引用 |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+如果任何 BswMRteSwitch 动作或 BswMModeSwitchErrorEvent 引用了 BswMSwitchPort，则必须配置 BswMModeSwitchInterfaceRef。如果任何 BswMSchMSwitch 动作引用了该 BswMSwitchPort，则必须配置 BswMSchMModeDeclarationGroupRef。至少必须配置其中一个引用。
+
+#### 9.2.90. BswMGeneral
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMGeneral |
+| 父容器 | BswM |
+| 描述 | 基础软件模式管理器的通用配置参数。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMCanSMEnabled |
+| 父容器 | BswMGeneral |
+| 描述 | 启用或禁用与 CanSM 模块相关的 BswM API：**true**：启用；**false**：禁用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMComMEnabled |
+| 父容器 | BswMGeneral |
+| 描述 | 启用或禁用与 ComM 模块相关的 BswM API：**true**：启用；**false**：禁用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMDcmEnabled |
+| 父容器 | BswMGeneral |
+| 描述 | 启用或禁用与 Dcm 模块相关的 BswM API：**true**：启用；**false**：禁用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMDevErrorDetect |
+| 父容器 | BswMGeneral |
+| 描述 | 切换开发错误检测和通知的启用状态：**true**：启用检测和通知；**false**：禁用检测和通知。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMEcuMEnabled |
+| 父容器 | BswMGeneral |
+| 描述 | 启用或禁用与 EcuM 模块相关的 BswM API：**true**：启用；**false**：禁用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMEthIfEnabled |
+| 父容器 | BswMGeneral |
+| 描述 | 启用或禁用与 EthIf 模块相关的 BswM API：**true**：启用；**false**：禁用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMEthSMEnabled |
+| 父容器 | BswMGeneral |
+| 描述 | 启用或禁用与 EthSM 模块相关的 BswM API：**true**：启用；**false**：禁用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMFrSMEnabled |
+| 父容器 | BswMGeneral |
+| 描述 | 启用或禁用与 FrSM 模块相关的 BswM API：**true**：启用；**false**：禁用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMGenericRequestEnabled |
+| 父容器 | BswMGeneral |
+| 描述 | 启用或禁用通用请求相关的 BswM API：**true**：启用；**false**：禁用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMJ1939DcmEnabled |
+| 父容器 | BswMGeneral |
+| 描述 | 启用或禁用与 J1939Dcm 模块相关的 BswM API：**true**：启用；**false**：禁用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMJ1939NmEnabled |
+| 父容器 | BswMGeneral |
+| 描述 | 启用或禁用与 J1939Nm 模块相关的 BswM API：**true**：启用；**false**：禁用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMLinSMEnabled |
+| 父容器 | BswMGeneral |
+| 描述 | 启用或禁用与 LinSM 模块相关的 BswM API：**true**：启用；**false**：禁用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMLinTPEnabled |
+| 父容器 | BswMGeneral |
+| 描述 | 启用或禁用与 LinTP 模块相关的 BswM API：**true**：启用；**false**：禁用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMMainFunctionPeriod |
+| 父容器 | BswMGeneral |
+| 描述 | BswM 周期性主函数的周期时间，单位为秒。 |
+| 多重性 | 0..1 |
+| 类型 | EcucFloatParamDef |
+| 范围 | ]0 .. INF[ |
+| 默认值 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 值配置类 | Pre-compile time：X（VARIANT-PRE-COMPILE）；Link time：X（VARIANT-LINK-TIME、VARIANT-POST-BUILD）；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMNmEnabled |
+| 父容器 | BswMGeneral |
+| 描述 | 启用或禁用与 Nm 模块相关的 BswM API：**true**：启用；**false**：禁用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMNvMEnabled |
+| 父容器 | BswMGeneral |
+| 描述 | 启用或禁用与 NvM 模块相关的 BswM API：**true**：启用；**false**：禁用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSdControlEnabled |
+| 父容器 | BswMGeneral |
+| 描述 | 启用或禁用面向应用程序的 Service Discovery 控制功能：**true**：启用；**false**：禁用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMSdEnabled |
+| 父容器 | BswMGeneral |
+| 描述 | 启用或禁用与 Sd 模块相关的 BswM API：**true**：启用；**false**：禁用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMVersionInfoApi |
+| 父容器 | BswMGeneral |
+| 描述 | 启用或禁用通过 BswM_GetVersionInfo() 服务读取版本信息的功能：**true**：启用；**false**：禁用。 |
+| 多重性 | 1 |
+| 类型 | EcucBooleanParamDef |
+| 默认值 | false |
+| Post-Build 变体值 | false |
+| 值配置类 | Pre-compile time：X（All Variants）；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+| 容器名称 | 多重性 | 作用域/依赖 |
+|---|---|---|
+| BswMUserIncludeFiles | 0..1 | BswM 应包含的头文件名集合。 |
+
+**BswM** 与其他基础软件模块之间私有头文件（例如 `BswM_ComM.h`）的可用性取决于配置参数 `BswM<BSWModule>Enabled`。如果该配置参数设置为 false，则 **BswM** 不得为相应的 BSW 模块提供私有头文件。
+
+#### 9.2.91. BswMUserIncludeFiles
+
+| 字段 | 值 |
+|---|---|
+| 容器名称 | BswMUserIncludeFiles |
+| 父容器 | BswMGeneral |
+| 描述 | BswM 应包含的头文件名集合。 |
+| 配置参数 | 见下方参数表。 |
+
+| 字段 | 值 |
+|---|---|
+| 参数名称 | BswMUserIncludeFile |
+| 父容器 | BswMUserIncludeFiles |
+| 描述 | BswM 应包含的头文件名。此参数值应按照 ISO C99 采用 h-char-sequence 或 q-char-sequence，且不得表示路径。 |
+| 多重性 | 1..* |
+| 类型 | EcucStringParamDef |
+| 默认值 | - |
+| 正则表达式 | - |
+| Post-Build 变体多重性 | false |
+| Post-Build 变体值 | false |
+| 多重性配置类 | Pre-compile time：X；Link time：-；Post-build time：- |
+| 值配置类 | Pre-compile time：X；Link time：-；Post-build time：- |
+| 作用域/依赖 | scope: local |
+
+无包含的容器。
+
+### 9.3. 发布信息
+
+详情请参见 SWS_BSWGeneral 第10.3章“发布信息”。
+
+## B. AUTOSAR 可追溯项变更历史
+
+### B.1. 本文档在 AUTOSAR R23-11 版本中的可追溯项历史
+
+#### B.1.1. R23-11 新增规范条目
+
+```text
+SWS_BSWM_91006
+SWS_BSWM_91007
+SWS_BSWM_91008
+SWS_BSWM_91009
+SWS_BSWM_91010
+SWS_BSWM_91011
+SWS_BSWM_91012
+SWS_BSWM_91013
+SWS_BSWM_91014
+SWS_BSWM_91015
+SWS_BSWM_91016
+SWS_BSWM_91018
+SWS_BswM_00287
+SWS_BswM_00288
+SWS_BswM_00289
+SWS_BswM_00290
+SWS_BswM_00291
+SWS_BswM_00292
+SWS_BswM_00293
+SWS_BswM_00294
+SWS_BswM_00295
+SWS_BswM_00296
+SWS_BswM_00297
+SWS_BswM_00298
+SWS_BswM_00299
+SWS_BswM_00300
+SWS_BswM_00301
+SWS_BswM_00302
+SWS_BswM_00303
+SWS_BswM_00304
+SWS_BswM_00305
+SWS_BswM_00306
+SWS_BswM_00307
+SWS_BswM_00308
+SWS_BswM_00309
+SWS_BswM_00310
+SWS_BswM_00311
+SWS_BswM_00312
+SWS_BswM_00313
+SWS_BswM_00314
+SWS_BswM_00315
+SWS_BswM_00316
+SWS_BswM_00317
+SWS_BswM_00318
+SWS_BswM_00319
+```
+
+#### B.1.2. R23-11 变更的规范条目
+
+```text
+SWS_BswM_00008
+```
+
+#### B.1.3. R23-11 删除的规范条目
+
+无。
+
+#### B.1.4. R23-11 新增约束
+
+```text
+SWS_BswM_CONSTR_00007
+```
+
+#### B.1.5. R23-11 变更的约束
+
+无。
+
+#### B.1.6. R23-11 删除的约束
+
+无。
 
 <section id="wechat">
 

@@ -131,6 +131,12 @@ def chref_spans(seg: str):
     for m in CHREF_NUM.finditer(seg):
         num = m.group(2)
         pre, post = seg[:m.start()], seg[m.end():]
+        # A numeric suffix contiguous with an ASCII identifier is not a
+        # chapter number, even when the following Chinese word starts with
+        # 章/节 (e.g. `J1939 节点`). Whitespace separates an identifier from a
+        # chapter reference such as `BswM 9.2.2章`.
+        if re.search(r"[A-Za-z][A-Za-z0-9_-]*$", pre):
+            continue
         if re.search(r"章节\s*$", pre) or re.match(r"\s*[章节]", post):
             pass
         elif re.search(r"第\s*$", pre) and ("." in num or re.match(r"\s*[章节]", post)):
