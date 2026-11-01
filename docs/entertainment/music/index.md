@@ -10,4 +10,5 @@ title: 音乐
 
 ## 相关内容
 
-- [博客](../blog/index.md)
+- [读书](../books/index.md)
+- [博客](../../blog/index.md)
