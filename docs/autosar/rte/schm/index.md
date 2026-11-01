@@ -215,7 +215,7 @@ AUTOSAR 服务、**ECU** 抽象和复杂设备驱动是 AUTOSAR 软件组件与�
 
 **注意：** 任务链中某个 `OsTask` 的最终前驱任务可以这样找到：从该 `OsTask` 被某个 `RteOsTaskChain` 容器引用之处开始，沿着所有 `RtePredecessorOsTaskRef` 追溯，直到任务链的 `RtePredecessorOsTaskRef` 引用了一个未被任何 `RteSuccessorOsTaskRef` 引用的 `OsTask`。最后一个 `RteOsTaskChain` 容器中被引用为 `RtePredecessorOsTaskRef` 的 `OsTask` 即最终前驱任务。
 
-**示例 4.3**：考虑一个 `RteOsTaskChain` 配置，其中 Task1 链接到 Task2，Task2 又链接到 Task3。在该场景中，如果 Task2 因某个 `DataReceivedEvent` 需要被 **RTE** 激活，则 **RTE** 必须激活 Task1 而不是 Task2，因为 Task1 是最终前驱任务。
+例4.3：考虑一个 `RteOsTaskChain` 配置，其中 Task1 链接到 Task2，Task2 又链接到 Task3。在该场景中，如果 Task2 因某个 `DataReceivedEvent` 需要被 **RTE** 激活，则 **RTE** 必须激活 Task1 而不是 Task2，因为 Task1 是最终前驱任务。
 
 图 4.10 展示了任务链接顺序的示意。
 
@@ -504,7 +504,7 @@ TASK(Task3)
 
 在基础软件调度器生成阶段，**RTE** 生成器应作为 **BSW** 模块描述的一部分提供 MC 支持（测量与标定，**Measurement and Calibration**）描述。
 
-关于 MC 支持的细节见 6.2.9.4 节。
+关于 MC 支持的细节见《**AUTOSAR CP SWS RTE**》源文档 6.2.9.4 节。
 
 对于包含软件组件的软件构建，适用 **RTE** 生成阶段（见 [6.1.6.2 节](../rte/index.md#6162-rte-生成阶段)），在该阶段也会生成 **RTE** 的基础软件调度器部分。
 
@@ -707,7 +707,7 @@ void NvM_MainFunction (void);
 
 **7.1.4 基础软件调度器模式**
 
-模块互链类型头文件应包含 `ModeDeclaration` 的标识符以及第 4.2 节中定义的 `ModeDeclarationGroup` 的类型定义。
+模块互链类型头文件应包含 `ModeDeclaration` 的标识符以及第 8.2 节中定义的 `ModeDeclarationGroup` 的类型定义。
 
 ### 7.2. 模块互链头文件
 
@@ -1311,7 +1311,7 @@ Std_ReturnType SchM_Send_<bsnp>[_<vi>_<ai>]_<name>(IN <data>)
 
 描述：当 **BSW** 模块在 **BSW** 运行于多个分区的系统上向某个发送方-接收方连接写入数据时，应调用 `SchM_Send_<bsnp>[_<vi>_<ai>]_<name>(<data>)`。`SchM_Send` API 调用发起一次发送方-接收方通信，其中传输发生在进行 **API** 调用的时刻（参见显式传输）。`SchM_Send` API 调用包含 IN 参数 `<data>`，用于传递要写入的数据元素。IN 参数 `<data>` 按照 `ImplementationDataType` 以值或引用方式传递，如 5.2.6.5 节所述。如果 IN 参数 `<data>` 以引用方式传递，则该指针必须保持有效，直至 **API** 调用返回。
 
-返回值：返回值用于指示 **SchM** 在执行 `SchM_Send` 期间检测到的错误：
+返回值：用于指示 **SchM** 在执行 `SchM_Send` 期间检测到的错误：
 
 * `SCHM_E_OK` — 数据已成功传递给通信服务。
 * `SCHM_E_LIMIT` — 某个分区本地接收方因队列已满而丢弃了一个“事件”。
