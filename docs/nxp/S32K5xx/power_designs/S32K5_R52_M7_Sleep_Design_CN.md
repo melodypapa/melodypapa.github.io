@@ -1,6 +1,8 @@
-## R52 和 M7 双核独立 OS 的休眠设计方案
+---
+title: "R52 和 M7 双核独立 OS 的休眠设计方案"
+---
 
-### 1. 整体架构认知
+## 1. 整体架构认知
 
 S32K5 的电源域（Power Domain）划分决定了休眠策略的根本约束：
 
@@ -12,7 +14,7 @@ S32K5 的电源域（Power Domain）划分决定了休眠策略的根本约束�
 
 **关键约束**：CM7 和 R52 都位于 **PD2** 中，这意味着——**无法单独让 CM7 休眠而 R52 继续运行，反之亦然**。PD2 要么全上，要么全下。
 
-### 2. 支持的电源模式及各核心状态
+## 2. 支持的电源模式及各核心状态
 
 | 电源模式 | 供电域 | R52 | M7 | CM4（LPE） | HSE2 |
 |---|---|---|---|---|---|
@@ -26,9 +28,9 @@ S32K5 的电源域（Power Domain）划分决定了休眠策略的根本约束�
 >
 > **注 2（LPRUN 时钟）**：LPRUN/Standby 下 **PLL 不可用**，可用时钟仅为 FXOSC、SXOSC、SIRC、FIRC 及其派生。FIRC 在这些模式下**处于活动状态但不可配置**（资源仅 HSE2 可访问）。因此若要走 Run → LPRUN → Standby 路径，**FIRC 必须在 Run 模式下配置好**，因为 LPRUN 中 HSE2 已不可用。
 
-### 3. 推荐的休眠设计方案
+## 3. 推荐的休眠设计方案
 
-#### 方案一：LPRUN 模式（推荐，最常用）
+### 方案一：LPRUN 模式（推荐，最常用）
 
 当 M7 和 R52 都无事可做时，两者都执行 WFI，PD2 断电，仅保留 **LPE（CM4）在 PD1 中运行**。
 
@@ -77,7 +79,7 @@ PMIC handshake 配置（使用外部 PMIC 时必需）
     LPRUN 模式（仅 CM4 运行在 PD1）
 ```
 
-#### 方案二：STANDBY 模式（最低功耗）
+### 方案二：STANDBY 模式（最低功耗）
 
 ```
 正常 RUN（M7+R52）
@@ -109,7 +111,7 @@ PMIC handshake 配置（使用外部 PMIC 时必需）
     STANDBY（仅 PD0 供电，384KB RAM 保持）
 ```
 
-### 4. 多核休眠协调流程（关键）
+## 4. 多核休眠协调流程（关键）
 
 S32K5 的 **MC_ME** 模块提供了 WFI 状态监测机制，用于多核协调。
 
@@ -214,7 +216,7 @@ S32K5 的 **MC_ME** 模块提供了 WFI 状态监测机制，用于多核协调�
 >
 > **注意**：主核时钟必须始终保持使能 —— 若主核由应用自行配置，`McuCoreUnderMcuControl` 取消勾选；否则 `McuCoreUnderMcuControl` 与 `McuCoreClockEnable` 必须同时勾选。
 
-#### Step 1：各 OS 各自完成睡眠前准备
+### Step 1：各 OS 各自完成睡眠前准备
 
 | M7 OS 要做的事 | R52 OS 要做的事 |
 |---|---|
@@ -227,7 +229,7 @@ S32K5 的 **MC_ME** 模块提供了 WFI 状态监测机制，用于多核协调�
 
 **此外，Requestor Core 必须通过 MU 中断通知 CM4（LPE）**：即使 PD1 在 LPRUN 下保持供电，CM4 仍可能正在访问 PD2 域的资源（如 FLEXCAN、SENT 等位于 PD2 的外设）。Requestor Core 需通知 CM4 停止使用这些 PD2 外设，CM4 确认后方可继续关断流程。
 
-#### Step 2：Requestor Core 检查 WFI 状态
+### Step 2：Requestor Core 检查 WFI 状态
 
 由任一核心（M7 或 R52）担任 **Requestor Core**，轮询检查各核心的 WFI 状态。
 
@@ -247,7 +249,7 @@ S32K5 的 **MC_ME** 模块提供了 WFI 状态监测机制，用于多核协调�
 
 因此，**当 R52 作为 Requestor Core 时，读取 M7 的 WFI 状态需访问 SoC MC_ME 分区**（`MC_ME.PRTN0_CORE0_STAT` 等），而非 `CPE_MC_ME`。
 
-#### Step 3：时钟降频、关断与复位
+### Step 3：时钟降频、关断与复位
 
 ```
 1. 设置时钟到初始频率，完成 PCFS ramp-down（降频）
@@ -259,7 +261,7 @@ S32K5 的 **MC_ME** 模块提供了 WFI 状态监测机制，用于多核协调�
 7. 读 MC_RGM_PSTAT 确认复位已生效 -> 核心正式关断
 ```
 
-#### Step 4：关停 PD2 外设与请求模式切换
+### Step 4：关停 PD2 外设与请求模式切换
 
 ```
 1. 写 CTL_KEY 密钥序列（0x5AF0，然后 0xA50F）
@@ -287,9 +289,9 @@ S32K5 的 **MC_ME** 模块提供了 WFI 状态监测机制，用于多核协调�
 >
 > ⚠️ **CPE_LLC 注意**：对 CPE_LLC0/CPE_LLC1 选择 PowerOffState 会导致 HardFault（驱动仍会访问已断电的分区），应选 PowerOnState。
 
-### 5. 唤醒流程
+## 5. 唤醒流程
 
-#### 从 LPRUN 唤醒 M7+R52
+### 从 LPRUN 唤醒 M7+R52
 
 唤醒主体由 **LPE（CM4）** 执行：
 
@@ -322,7 +324,7 @@ M7 和 R52 各自的 OS 恢复上下文
 
 > **启动链说明（S32K5 无 IVT 概念）**：硬件复位完成后，**唯一先运行的是 HSE2 上的 ZenV 核**，经 BootROM → sBAF（Secure Boot Assist Firmware）→ HSE2_FW 由 **HSE2_FW 使能 PD2 中的应用核**。S32K5 不使用 IVT（Image Vector Table）机制。
 
-#### 唤醒导致的复位域范围
+### 唤醒导致的复位域范围
 
 | 模式转换 | PD2 | PD1 | PD0 |
 |---|---|---|---|
@@ -332,7 +334,7 @@ M7 和 R52 各自的 OS 恢复上下文
 
 > **省电关键路径**：Standby → LPRUN 转换时 **PD2 保持 OFF**，仅 PD1 上电。这是唤醒后 CM4 先跑起来、PD2 应用核稍后才启动的分级上电路径。
 
-#### 唤醒源支持
+### 唤醒源支持
 
 **外部唤醒源**
 
@@ -364,7 +366,7 @@ M7 和 R52 各自的 OS 恢复上下文
 - 两个及以上唤醒源同时采样且指示不同的模式转换时，**Standby → Run 优先级最高**
 - 所有唤醒事件无论设备当前处于何种模式、也无论是否正在进行模式转换，**都会在 WKPU 中置位对应标志**
 
-### 6. STANDBY RAM 使用建议
+## 6. STANDBY RAM 使用建议
 
 PD0 域有 **384KB 的 SRAM** 可供数据保持（SRAM UPPER PD0 = 256KB，SRAM LOWER PD0 = 128KB），建议在两个 OS 的休眠方案中这样分配：
 
@@ -376,7 +378,7 @@ PD0 域有 **384KB 的 SRAM** 可供数据保持（SRAM UPPER PD0 = 256KB，SRAM
 
 > **注**：上述 192/128/64KB 的切分是**建议值，非硬件约束**。实际分配需按两个 OS 的实测上下文大小调整，且总容量不得超过 384KB。PD0 SRAM 在低功耗模式下由保持电压供电以维持数据。
 
-### 7. 推荐实施总结
+## 7. 推荐实施总结
 
 | 事项 | 建议 |
 |---|---|
@@ -385,20 +387,21 @@ PD0 域有 **384KB 的 SRAM** 可供数据保持（SRAM UPPER PD0 = 256KB，SRAM
 | **核间通信** | 用 **MU（Message Unit）** 通知其他核心启动关断流程；共享 PD0 SRAM 用于握手数据 |
 | **CM4 通知** | Requestor Core **必须**通知 CM4 停止使用 PD2 外设并确认 |
 | **上下文保存** | 每个 OS 将上下文保存到 **PD0 SRAM**（384KB） |
-| **时钟降频** | 关钟前先完成 **PCFS ramp-down**；LPRUN/Standby 下 **FIRC 须在 Run 模式预配置** |
+| **时钟降频** | 关钟前先完成 **PCFS ramp-down**；LPRUN/Standby 下 **FIRC 须在 Run 模式预配置**；若选用 **FIRC < 24 MHz**（时钟模式 E/E2），安全应用必须**关断 CMU_Fx_n**，否则产生误报 FHH 事件（UM §3.6.10） |
 | **Flash 低功耗** | Standby 前须**等待 Flash 高压操作结束**并关闭 **PMC_LASTMILE**，否则 Flash 阵列仍耗电 |
 | **分区关断顺序** | **一次只关一个 CPE 分区**；CPE_LLC0/1 须选 PowerOnState，否则 HardFault |
 | **寄存器写保护** | 所有受控寄存器写入前须执行 **CTL_KEY 密钥序列（0x5AF0 / 0xA50F）** |
 | **模式切换屏障** | 写 `MODE_CONF` 前须执行 **DSB + ISB** |
 | **唤醒源** | 依 RM Table 299 配置 8 个内部源之一或 WKPU 外部引脚；**内部源仅支持正极性** |
-| **中断责任** | 请求模式切换前**必须屏蔽所有中断**；**EcuM 负责确保无唤醒中断丢失**（MCU 驱动无法感知） |
+| **中断责任** | 请求模式切换前**必须屏蔽所有中断**，且临界区须**扩展至 IPL 屏蔽层级**；**EcuM 负责确保无唤醒中断丢失**（MCU 驱动无法感知；UM §3.6.13 Note） |
 | **PLL 恢复** | 唤醒后需**显式调用 `Mcu_DistributePllClock`** 恢复 PLL 时钟（切 PLL 动作不由 `Mcu_InitClock` 完成） |
+| **SMPS/DCDC 唤醒风险** | 若使用 **SMPS（DCDC）** 且 PMC 处于低功耗模式，唤醒前必须确保 **VDD_DCDC 完全可用且可带载**，否则唤醒时可能发生**低压复位**（UM §3.6.11） |
 | **唤醒源判定** | 用 `Mcu_GetResetReason` 判断唤醒原因 |
 | **PMIC 协同** | 推荐 **FS25 SBC**（专为 S32K5/S32J 设计，ASIL D），通过 **PGOOD + EXTWAKE(1)/(2)** 完成 handshake |
 
 > **注**：以上第 4 节中大量寄存器级步骤（PCFS ramp-down、CTL_KEY 密钥序列、`COREn_PCONF[CCE]`、`COFB_CLKEN[REQnz]`、`MODE_CONF`、DSB+ISB）在实际项目中**由 MCU 驱动内部完成**，应用层不应直接操作这些寄存器。详见 `MCAL_API_MAPPING.md`。
 
-#### PMIC Handshake 信号语义
+### PMIC Handshake 信号语义
 
 S32K5 通过 **PGOOD**（输入）与 **EXTWAKE(1)/EXTWAKE(2)**（输出）与 PMIC/SBC 握手，最多使用 4 个 GPIO。EXTWAKE 的极性可通过 `GPR_0` 寄存器配置，映射通过 SIUL2 的 MSCR 配置。
 
@@ -416,3 +419,26 @@ S32K5 通过 **PGOOD**（输入）与 **EXTWAKE(1)/EXTWAKE(2)**（输出）与 P
 > **EXTWAKE 断言后 POR WDOG 被触发**：若 PGOOD 在配置时间内未拉高，POR WDOG 将对芯片发出复位。
 >
 > **Run → Standby 需注意 PGOOD 毛刺**：切换时可能检测到非预期复位状态。规避步骤为：① 置 `PMC.CONFIG[PGOODMASK]` 暂时屏蔽 PGOOD；② 将 PMIC 配置进入 LPE 模式（带延时）。此两步必须**受中断保护**，确保序列不会在时间上被拆开。
+
+## 8. 驱动运行时错误（DET/DEM）
+
+休眠相关路径上 MCU 驱动的错误上报（RTD MCU UM §3.7，UM85MCUASRR23-11）：
+
+**DET 错误（Table 3.4，经 DET 上报）**
+
+| 函数 | 错误码 | 触发条件 |
+|---|---|---|
+| `Mcu_SetMode()` | `MCU_E_PARAM_MODE` | 输入参数无效 |
+| `Mcu_InitClock()` | `MCU_E_PARAM_CLOCK` | 输入参数无效 |
+| `Mcu_DistributePllClock()` | `MCU_E_PLL_NOT_LOCKED` | 任一使用的 PLL 未能锁定（**唤醒恢复 PLL 时可能触发**） |
+| 除 `Mcu_Init()` / `Mcu_GetVersionInfo()` 外的所有函数 | `MCU_E_UNINIT` | 驱动处于未初始化状态 |
+
+**DEM 错误（Table 3.6，经 DEM 上报）**
+
+| 函数 | 错误码 | 触发条件 |
+|---|---|---|
+| `Mcu_SetMode()` | `Mcu_E_TimeoutFailure` | **MC_ME 或 LPU 模式切换失败**（休眠入口失败的主要观测点） |
+| `Mcu_Init()` | `Mcu_E_TimeoutFailure` | MC_ME 模式切换失败 |
+| `Mcu_GetResetReason()` / `Mcu_GetResetRawValue()` | `Mcu_E_TimeoutFailure` | 复位标志无法清除 |
+
+> **集成要点**：`Mcu_SetMode` 的 `Mcu_E_TimeoutFailure` 是**休眠入口序列失败**（MC_ME/LPU 切换超时）的标准观测路径，应触发告警与重试/降级策略；唤醒后 `Mcu_DistributePllClock` 返回 `MCU_E_PLL_NOT_LOCKED` 表示 PLL 未恢复。时钟失败发生在 ISR 上下文时使用变体错误码 `MCU_E_ISR_CLOCK_FAILURE`（由 CMU 中断上报，见 `MCAL_API_MAPPING.md`「5.1 与 AUTOSAR 规范的偏差」）。

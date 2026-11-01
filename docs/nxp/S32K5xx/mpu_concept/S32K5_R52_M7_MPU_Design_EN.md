@@ -1,4 +1,6 @@
-## MPU Design for S32K5xx (Cortex-M7 + Cortex-R52)
+---
+title: "MPU Design for S32K5xx (Cortex-M7 + Cortex-R52)"
+---
 
 > **Target platform**: NXP S32K5xx family (S32K566 / S32K58, etc.), Cortex-M7 platform cores + Cortex-R52 compute cores
 >
@@ -12,7 +14,7 @@
 
 ---
 
-### 1. Why MPU design is mandatory on S32K5
+## 1. Why MPU design is mandatory on S32K5
 
 S32K5 is an ASIL D platform with three heterogeneous core clusters sharing one MRAM and SRAM pool:
 
@@ -90,9 +92,9 @@ In this system the MPU provides **responsibility isolation**, not merely memory 
 
 ---
 
-### 2. Cortex-M7 MPU in detail (ARMv7-M PMSAv7)
+## 2. Cortex-M7 MPU in detail (ARMv7-M PMSAv7)
 
-#### 2.1 Register set
+### 2.1 Register set
 
 The M7 has **one** MPU only, located in the System Control Space (SCS) at base `0xE000ED90`:
 
@@ -106,7 +108,7 @@ The M7 has **one** MPU only, located in the System Control Space (SCS) at base `
 
 The programming model is **"select the number first, then write attributes"**: write `MPU_RNR = n`, then write `MPU_RBAR` and `MPU_RASR`. CMSIS wraps this in `ARM_MPU_SetRegion()`.
 
-#### 2.2 MPU_RASR bit fields
+### 2.2 MPU_RASR bit fields
 
 ```
  31        28  26  24  21  19  18  17  16   15    8  6  5    1   0
@@ -130,7 +132,7 @@ The programming model is **"select the number first, then write attributes"**: w
 
 **Base alignment constraint**: a region's ADDR must be aligned to its SIZE. For example, a 64 KB region must fall on a `0x00010000` boundary, not `0x00010001`. This is the single most common PMSAv7 pitfall — if a linker-script section is not aligned to a power of two, the low bits of the written ADDR are ignored and the MPU actually protects a region **twice as large** as intended.
 
-#### 2.3 AP access permission encoding
+### 2.3 AP access permission encoding
 
 | AP[2:0] | Privileged | Unprivileged | Notes |
 | --- | --- | --- | --- |
@@ -143,7 +145,7 @@ The programming model is **"select the number first, then write attributes"**: w
 | `110` | Read-only | Read-only | Privileged and unprivileged read-only |
 | `111` | Read-only | Read-only | Same as 110 |
 
-#### 2.4 TEX/C/B/S memory attribute encoding
+### 2.4 TEX/C/B/S memory attribute encoding
 
 | TEX | C | B | Memory type / cacheability | Shareable |
 | --- | --- | --- | --- | --- |
@@ -172,7 +174,7 @@ Cache policy for `{TEX,C,B} = 1BB`, where AA/BB are:
 
 **Peripherals must use the Device type.** This is the most frequent error on M7: configuring the UART, FLEXCAN or GPIO register window as Normal cacheable makes registers read back stale values and swallows peripheral writes into the cache. The correct encoding is `TEX=000, C=0, B=1` (Shared Device) or `TEX=010, C=0, B=0` (Non-shared Device).
 
-#### 2.5 MPU_CTRL three-bit semantics
+### 2.5 MPU_CTRL three-bit semantics
 
 | Bit | Name | Semantics |
 | --- | --- | --- |
@@ -182,12 +184,12 @@ Cache policy for `{TEX,C,B} = 1BB`, where AA/BB are:
 
 Trade-off on `HFNMIENA`: when `=0` the fault handler itself is unconstrained by the MPU, which makes a full memory dump for offline analysis easy; when `=1` even the fault handler is constrained, giving stronger anti-tampering but potentially incomplete scene data. Safety-diagnostic firmware usually sets 0 and stores the scene in a dedicated no-cacheable region.
 
-#### 2.6 Region overlap and subregions
+### 2.6 Region overlap and subregions
 
 - **On overlap, the higher region number wins**: if regions 0 and 1 both cover the same memory, region 1's attributes apply. This is PMSAv7's most useful feature — you can set a broad baseline with one large region and then tighten it with a smaller overlapping region.
 - **SRD subregions**: when the region is ≥ 256 B it is divided into 8 equal subregions; `SRD[n]=1` disables subregion n, with `SRD[0]` mapping to the lowest-address subregion. **Note: for regions of 32/64/128 B, writing SRD has unpredictable effects.**
 
-#### 2.7 Recommended M7 memory attributes (S32K5 perspective)
+### 2.7 Recommended M7 memory attributes (S32K5 perspective)
 
 | Region | Address / size | TEX/C/B | AP | XN | Notes |
 | --- | --- | --- | --- | --- | --- |
@@ -201,7 +203,7 @@ Trade-off on `HFNMIENA`: when `=0` the fault handler itself is unconstrained by 
 | XSPI data | `0x8100_0000`–`0xC0FF_FFFF` | `001/0/0` NC | `011` | 0 | External flash execution |
 | PPB | `0xE000_0000`–`0xE00F_FFFF` | `010/0/0` Device | `101` | 1 | Core-private |
 
-#### 2.8 M7 configuration code skeleton
+### 2.8 M7 configuration code skeleton
 
 ```c
 #include "core_cm7.h"
@@ -284,7 +286,7 @@ uint32_t M7_MPU_GetRegionCount(void)
 
 > The SIZE values above must be adapted to the actual linker script. **Always confirm via `MPU_TYPE.DREGION` how many regions are implemented before accessing them** — accessing an out-of-range region number is undefined behaviour.
 
-#### 2.9 MemManage exception handling
+### 2.9 MemManage exception handling
 
 ```c
 void MemManage_Handler(void)
@@ -322,9 +324,9 @@ MFSR byte in `SCB->CFSR` (critical for determining direction):
 
 ---
 
-### 3. Cortex-R52 MPU in detail (Armv8-R PMSAv8-32)
+## 3. Cortex-R52 MPU in detail (Armv8-R PMSAv8-32)
 
-#### 3.1 The dual-MPU model
+### 3.1 The dual-MPU model
 
 The R52 has **two independent MPUs** — the largest architectural difference from the M7:
 
@@ -339,7 +341,7 @@ Combination rules:
 - **EL2 access** → EL2 MPU only
 - The EL2 MPU can be disabled wholesale (S32K5 typically does not use virtualization; keep the EL2 MPU off)
 
-#### 3.2 Registers and AArch32 access
+### 3.2 Registers and AArch32 access
 
 | Register | Function |
 | --- | --- |
@@ -366,7 +368,7 @@ MCR   p15, 0, R1, c6, c8+n[3:1], 4*n[0]+1    @ Read PRLARn
 
 > **Easy mistake**: the `op1` computation for direct access is error-prone (involving `c8 + n[3:1]` and `4*n[0]`). Prefer the PRSELR indirect method, or use the CMSIS `__set_PRBAR()` inline functions.
 
-#### 3.3 Region definition: base + limit
+### 3.3 Region definition: base + limit
 
 The fundamental difference from PMSAv7:
 
@@ -386,7 +388,7 @@ PRBAR.BASE:0b000000 <= address <= PRLAR.LIMIT:0b111111
 
 The colon is the bit-concatenation operator. This means the low 6 bits of BASE are read as 0 and the low 6 bits of LIMIT are read as 1 — **the effective granularity is 64 bytes, and both ends are inclusive.** This is more intuitive than the M7's "align to SIZE", and it means a misconfiguration does not silently double the region size as on M7; instead it raises an exception immediately — fail-fast.
 
-#### 3.4 PRBAR / PRLAR fields
+### 3.4 PRBAR / PRLAR fields
 
 | Field | Register | Semantics |
 | --- | --- | --- |
@@ -414,7 +416,7 @@ The colon is the bit-concatenation operator. This means the low 6 bits of BASE a
 | `10` | Outer-shareable |
 | `11` | Inner-shareable |
 
-#### 3.5 MAIR memory attribute indirection
+### 3.5 MAIR memory attribute indirection
 
 The R52 moves memory attributes out of the region registers into `MAIRx`; each MPU has 8 slots of 8 bits:
 
@@ -439,7 +441,7 @@ DSB
 ISB
 ```
 
-#### 3.6 Background region and default memory map
+### 3.6 Background region and default memory map
 
 **Instruction-access background region**:
 
@@ -471,7 +473,7 @@ Note that everything above `0x8000_0000` defaults to Device type — exactly whe
 
 > **Trap**: with `HCR.DC = 1` the default attributes are the **most permissive** (Normal, IB-OB WB, RA). After combination with the EL2 MPU attributes the result still equals the EL2 attributes, making the EL2 MPU completely transparent over the background region. In other words, `DC=1` strips the EL1 background region of its protective value; for S32K5 without virtualization, keep `DC=0`.
 
-#### 3.7 Fault types
+### 3.7 Fault types
 
 | Fault | Trigger condition |
 | --- | --- |
@@ -480,7 +482,7 @@ Note that everything above `0x8000_0000` defaults to Device type — exactly whe
 
 The M7 raises only permission faults (on MPU overlap the highest-number region is simply selected), whereas the R52 turns "overlap" from a feature into an error.
 
-#### 3.8 R52 configuration code skeleton
+### 3.8 R52 configuration code skeleton
 
 ```c
 #include <stdint.h>
@@ -557,7 +559,7 @@ void R52_MPU_Init(void)
 
 > R52 system-register access must go through `MCR p15, ...` or CMSIS inline functions; you cannot simply dereference a memory address as on the M7. The `PRBAR(n)` base address and the `SCTLR` address in the code above must be confirmed against the NXP integration manual.
 
-#### 3.9 Programming rules (Arm requirement)
+### 3.9 Programming rules (Arm requirement)
 
 1. When reconfiguring a region, **the programming code itself must not reside in that region** — otherwise the instant the permission changes, instruction fetch fails and the CPU wedges.
 2. Execute **DSB** before changing `PRBAR`/`PRLAR` to ensure all prior memory accesses complete.
@@ -567,9 +569,9 @@ These three rules apply equally to the M7.
 
 ---
 
-### 4. S32K5 memory map and MPU layout
+## 4. S32K5 memory map and MPU layout
 
-#### 4.1 Key memory resources
+### 4.1 Key memory resources
 
 All values below are the **S32K566** figures from `S32K5xx_memory_map.xlsx`; the "Max size" column is the architectural window, "Actual" is what this derivative implements.
 
@@ -603,7 +605,7 @@ All values below are the **S32K566** figures from `S32K5xx_memory_map.xlsx`; the
 
 S32K5 partitions SRAM in hardware into cacheable / non-cacheable / shareable blocks (reflected in the linker as `int_sram_no_cacheable` and `int_sram_shareable`); the MPU configuration must **strictly match this partitioning**, otherwise conflicting software and hardware attributes produce unpredictable behaviour.
 
-#### 4.2 Recommended M7 region layout (16-region budget)
+### 4.2 Recommended M7 region layout (16-region budget)
 
 M7 implements **16 regions** (`MPU_TYPE` reset `0x00001000`). `[来源: rm1131130 Rev.3, Chapter_02 Table 10]`
 
@@ -627,7 +629,7 @@ M7 implements **16 regions** (`MPU_TYPE` reset `0x00001000`). `[来源: rm113113
 
 > **Device attribute is mandatory, not advisory.** RM Ch.11 §11.3.5 NOTE: a REG_PROT transfer error is only observable on the CPU that "has defined the **strongly ordered memory region (through its MPU or MMU)** covering the target register address." Configure the peripheral window as Normal memory and REG_PROT rejections degrade into asynchronous bus errors that surface far from their cause. See §5.7.
 
-#### 4.3 Recommended R52 region layout (20-region budget)
+### 4.3 Recommended R52 region layout (20-region budget)
 
 S32K566 implements **EL1: 20 regions, EL2: 20 regions** (not 16 or 24). `[来源: rm1131130 Rev.3, Chapter_02 Table 6 / Table 10]`
 
@@ -657,7 +659,7 @@ S32K566 implements **EL1: 20 regions, EL2: 20 regions** (not 16 or 24). `[来源
 >
 > **Peripheral upper bound is `0x421F_FFFF`, not `0xE00F_FFFF`.** The `0xE00FFFFF` figure in Rev.A came from the Zephyr S32K566 R52 port and is a conservative placeholder; the actual memory map shows the last peripheral bridge (LPE_PBRIDGE3) ending at `0x4219_7FFF`, with DSP_PBRIDGE3 at `0x4260_0000`–`0x427F_FFFF` and CPE_GIC0 at `0x4300_0000`–`0x431F_FFFF`. Decide deliberately whether DSP and GIC belong in the Device region or get their own.
 
-#### 4.4 Special handling of inter-core shared areas
+### 4.4 Special handling of inter-core shared areas
 
 The regions where R52 and M7 exchange data (CAN frames, timestamps, etc.) are cross-core shared and must be configured **identically on both cores as shareable + cacheable**, combined with:
 
@@ -670,11 +672,11 @@ The regions where R52 and M7 exchange data (CAN frames, timestamps, etc.) are cr
 
 ---
 
-### 5. MPU configuration by memory type (MRAM / SRAM / TCM / XSPI / peripherals)
+## 5. MPU configuration by memory type (MRAM / SRAM / TCM / XSPI / peripherals)
 
 This section expands the layout tables of chapter 4 down to **each individual memory type**. MPU attributes are not a matter of picking "Normal WB" at random — they are dictated by the physical characteristics of the storage medium. Pick the wrong attribute and nothing faults; the feature just quietly breaks.
 
-#### 5.1 S32K5 memory-type landscape
+### 5.1 S32K5 memory-type landscape
 
 | Memory type | Address range | Capacity (S32K566) | ECC | Volatility | Recommended MPU attribute | Reachable cores |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -696,9 +698,9 @@ This section expands the layout tables of chapter 4 down to **each individual me
 
 > **Peripheral window bound, corrected.** Rev.A used `0xE00FFFFF` (from the Zephyr R52 port) and warned against `0xFFFFFFFF`. The Rev.3 memory map shows the actual last peripheral at `0x4219_7FFF`. The honest statement is: **peripherals occupy `0x4000_0000`–`0x431F_FFFF`** (including DSP_PBRIDGE3 `0x4260_0000` and CPE_GIC0 `0x4300_0000`), and everything above `0xE000_0000` is PPB plus vendor space. Whether to bound the Device region at `0x431F_FFFF` or extend it to `0xDFFF_FFFF` is a design choice — extending it is simpler but loses the ability to fault on stray accesses into unmapped space.
 
-#### 5.2 Code MRAM (eMRAM) — the biggest architectural change in S32K5
+### 5.2 Code MRAM (eMRAM) — the biggest architectural change in S32K5
 
-###### Hardware characteristics
+##### Hardware characteristics
 
 S32K5 is the industry's first automotive MCU on 16 nm FinFET with embedded MRAM. Compared with eFlash (S32K3 and earlier), MRAM overturns several low-level assumptions:
 
@@ -712,14 +714,14 @@ S32K5 is the industry's first automotive MCU on 16 nm FinFET with embedded MRAM.
 
 > **Retention data conflict (confirm against the RM)**: an NXP–TSMC 16 nm MRAM technology announcement claims 20 years at 150 °C, while another source states 10 years at 85 °C for S32K5 MRAM, below eFlash. The gap is enormous — **check the MRAM chapter of the S32K5xx RM**, since it directly drives the logging-data policy.
 
-###### MPU configuration implications
+##### MPU configuration implications
 
 1. **The code region is readable, writable and executable** — MRAM needs no XIP read-only protection and supports in-place FOTA A/B image swapping. But this also means **the code region can be overwritten by its own data**. If ASIL D requires "code immutable at runtime", the MPU cannot deliver it (AP bottoms out at RO, which does not constrain privileged code); you need **XRDC read-only locking**.
 2. **Both cores share the same MRAM** — M7 and R52 both fetch code from Code MRAM by default (in Zephyr both use `cmram` as `zephyr,flash`). The same physical region is configured by two independent MPUs, so **the attributes must match field for field**. Otherwise one core sees it as cacheable and the other as non-cacheable, and cross-core function-pointer jumps become unpredictable.
 3. **Disable the cache during FOTA writes** — although MRAM writes are fast, if the target code section is still held in the cache or pipeline during the write, clean + invalidate is required. Have the FOTA driver perform cache maintenance before and after flashing.
 4. **Do not configure MRAM as Device type** — performance collapses (MRAM is meant to be used as RAM) and MRAM does support caching.
 
-#### 5.3 M7 SRAM (3 MB, three banks)
+### 5.3 M7 SRAM (3 MB, three banks)
 
 S32K566 exposes three 1 MB SRAM banks to the M7 cluster, contiguous at `0x2100_0000`–`0x212F_FFFF`. The Rev.A table below (retained for reference) listed S32K3 partition boundaries; **those addresses do not exist on S32K5** and must not be used.
 
@@ -735,7 +737,7 @@ S32K566 exposes three 1 MB SRAM banks to the M7 cluster, contiguous at `0x2100_0
 
 **Zephyr correspondence**: the M7 board target uses `sram0` as `zephyr,sram`, the R52 target uses `cpe_sram`. The two DTS files point at different SRAM — they are **not two names for the same memory**. On S32K5 specifically: M7 → `0x2100_0000`, R52 → `0x2200_0000`.
 
-#### 5.4 R52 SRAM (cpe_sram, 1 MB)
+### 5.4 R52 SRAM (cpe_sram, 1 MB)
 
 | Item | Content |
 | --- | --- |
@@ -748,9 +750,9 @@ S32K566 exposes three 1 MB SRAM banks to the M7 cluster, contiguous at `0x2100_0
 
 **MPU attributes**: Normal WB RA, RW, XN=1 (data regions non-executable). R52 SRAM hosts the R52-side stacks and task data; subdivide further per task as in 4.3.
 
-#### 5.5 TCM (ITCM / DTCM / ATCM / BTCM / CTCM) — ECC and backdoor are the two traps
+### 5.5 TCM (ITCM / DTCM / ATCM / BTCM / CTCM) — ECC and backdoor are the two traps
 
-###### Hardware characteristics
+##### Hardware characteristics
 
 | Item | Description |
 | --- | --- |
@@ -760,13 +762,13 @@ S32K566 exposes three 1 MB SRAM banks to the M7 cluster, contiguous at `0x2100_0
 | M7 DTCM interfaces | Dual interface D0TCM / D1TCM |
 | Enable | `ITCMCR.EN` / `DTCMCR.EN` software-controllable |
 
-###### ECC initialization constraint (very easy to trip over)
+##### ECC initialization constraint (very easy to trip over)
 
 **Before reading TCM or system RAM, a 64-bit write initialization is mandatory**, otherwise ECC errors occur. NXP S32K documentation: *"To prevent ECC errors, TCM and system RAM both require 64-bit write initialization before read operations."*
 
 This means the MPU configuration **must not** read TCM contents before the TCM is initialized — startup code must fill ECC first and build regions afterwards. Also, RAM ECC initialization must be done **only on Power-On Reset**; repeating it on other reset types destroys retained data.
 
-###### TCM backdoor: the structural hole in core-MPU protection
+##### TCM backdoor: the structural hole in core-MPU protection
 
 This is the most important S32K5-specific finding in this revision, and it is **not** covered by Rev.A.
 
@@ -781,7 +783,7 @@ Consequence: **any master reaching a TCM through `AXBS_TCM` bypasses that core's
 
 > **Design rule**: every TCM must be configured in **both** the owning core's MPU *and* the corresponding XRDC MRC. Configuring only the MPU leaves the backdoor wide open — and the backdoor addresses (`0x1100_0000`–`0x116F_FFFF` for ITCM, `0x2300_0000`–`0x236F_FFFF` for DTCM) are separate windows from the TCM's own base, so they need their own XRDC regions.
 
-###### Multi-core TCM sharing (S32K5 specific)
+##### Multi-core TCM sharing (S32K5 specific)
 
 Arm/NXP specify that on multi-core devices, all enabled cores and non-core masters **may use the TCMs of disabled cores as system memory**. For an enabled core to use a disabled core's TCM as ordinary RAM:
 
@@ -791,7 +793,7 @@ Arm/NXP specify that on multi-core devices, all enabled cores and non-core maste
 
 **MPU implication**: TCM ownership is dynamic — whichever core is enabled owns its TCM; once a core is disabled, its TCM becomes common RAM. Therefore TCM region MPU configuration cannot be statically hard-coded; it must follow core enable state, or simply be managed by XRDC per domain.
 
-###### MPU attributes
+##### MPU attributes
 
 The TCM interface is inherently **non-cacheable** (Tightly-Coupled Memory already runs at single-cycle latency, so caching buys nothing). Hence:
 
@@ -803,7 +805,7 @@ The TCM interface is inherently **non-cacheable** (Tightly-Coupled Memory alread
 
 Configuring Normal cacheable raises no error, but the cache is ineffective over that range and the attribute is vacuous — harmless but pointless; it should still be written correctly at review.
 
-###### ⚠️ The ATCM-vs-WXN conflict (new in Rev.B)
+##### ⚠️ The ATCM-vs-WXN conflict (new in Rev.B)
 
 `SCTLR.WXN` resets to **0**, and the TRM states this explicitly: *"0 = EL1-controlled MPU regions with write permission are not forced to be XN, **this is the reset value**."*
 
@@ -818,7 +820,7 @@ Two ways out, neither free:
 
 Also note `SCTLR.UWXN` (bit 20, "unprivileged write permission implies EL1 XN") **also resets to 0** — setting only `WXN` leaves unprivileged-writable regions executable.
 
-#### 5.6 XSPI / QSPI external storage
+### 5.6 XSPI / QSPI external storage
 
 | Item | Content |
 | --- | --- |
@@ -836,7 +838,7 @@ Also note `SCTLR.UWXN` (bit 20, "unprivileged write permission implies EL1 XN") 
 
 **Trap**: the XSPI **register window** and **data window** must be two separate MPU regions. Configuring the register window as Normal cacheable is the classic XSPI mistake — the same reasoning as on-chip peripherals. Also, MRAM programming over XSPI has special handling requirements (SEGGER explicitly notes *"QSPI flash programming requires special handling compared to internal flash"*).
 
-#### 5.7 Peripheral window
+### 5.7 Peripheral window
 
 | Item | Content |
 | --- | --- |
@@ -856,11 +858,11 @@ Also note `SCTLR.UWXN` (bit 20, "unprivileged write permission implies EL1 XN") 
 
 **Secure / non-secure aliasing (new in Rev.B)**: the memory map gives an explicit alias window only for PBRIDGE3_0, at exactly **base + `0x1000_0000`** (`0x4000_0000` → `0x5000_0000`). The other 435 mapped peripherals have **no** alias. Combined with RM §36.2/§36.3 — "the memory slots in the table represent the **non-secure address region**" — the practical reading is: the tabulated addresses are the non-secure view, and the secure view's base rule is **not fully determined by this attachment**. Treat the `+0x1000_0000` rule as confirmed for PBRIDGE3_0 only, and verify before assuming it generalises.
 
-#### 5.8 XRDC: the complementary layer that must be designed alongside the MPU
+### 5.8 XRDC: the complementary layer that must be designed alongside the MPU
 
 This is where S32K5 differs most from S32K3, and it is **an entire layer that an MPU-only design misses**.
 
-###### NXP's two-level isolation model
+##### NXP's two-level isolation model
 
 NXP states it explicitly: *"Through XRDC and MPU, a two-level isolation hierarchy can be achieved"*:
 
@@ -871,7 +873,7 @@ NXP states it explicitly: *"Through XRDC and MPU, a two-level isolation hierarch
 
 In other words: **the MPU governs "who is who inside one core", XRDC governs "which master may touch which slave"**. The two do not overlap; neither is optional.
 
-###### XRDC submodules
+##### XRDC submodules
 
 | Submodule | Responsibility |
 | --- | --- |
@@ -880,7 +882,7 @@ In other words: **the MPU governs "who is who inside one core", XRDC governs "wh
 | `XRDC_MRC` | Memory Region Controller; memory access control via region descriptors |
 | `XRDC_PAC` | Peripheral Access Controller; peripheral access control per domain |
 
-###### S32K566 XRDC instances and MRC targets (new in Rev.B)
+##### S32K566 XRDC instances and MRC targets (new in Rev.B)
 
 Five XRDC instances: `XRDC_A`, `XRDC_B`, `XRDC_C`, `CPE_XRDC`, `LPE_XRDC`. **16 Domain IDs**; each instance exposes **768 PDAC slots (0–767)**. `[来源: rm1131130 Rev.3, Chapter_31 §31.1.1–31.1.5]`
 
@@ -904,19 +906,19 @@ Five XRDC instances: `XRDC_A`, `XRDC_B`, `XRDC_C`, `CPE_XRDC`, `LPE_XRDC`. **16 
 
 **PAC ↔ bridge mapping**: `PAC_A0-1`→PBRIDGE3_0 (slots 0–127), `PAC_C0-2`→PBRIDGE3_1 (128–255), `PAC_B0-2`→PBRIDGE3_2 (256–383), `PAC_C3-4`→PBRIDGE3_3 (384–511), `PAC_C5-6`→PBRIDGE3_4 (512–639), `PAC_B3-5`→PBRIDGE3_5 (640–767), `CPE_PAC0-1`→CPE_PBRIDGE3_0, `CPE_PAC2-3`→CPE_PBRIDGE3_1, `LPE_PAC0-2`→LPE_PBRIDGE3. The full slot↔peripheral table is in the "Peripherals Memory Map" tab of the memory map attachment.
 
-###### ⚠️ XRDC has no execute-never attribute (new in Rev.B)
+##### ⚠️ XRDC has no execute-never attribute (new in Rev.B)
 
 The `DdACP` permission field encodes only **read / write** across four levels (secure-privileged, secure-user, nonsecure-privileged, nonsecure-user). There is **no XN bit**.
 
 > **Consequence: all code-executability control lives in the core MPU.** XRDC can make a region read-only for a domain, but it cannot make it non-executable. Any "this memory must never run as code" requirement must be enforced by `PRBAR.XN` / `MPU_RASR.XN` on every core that can fetch from it — and, per §5.5, that includes cores reaching it via backdoor.
 
-###### Enable ordering: XRDC locks itself out if enabled half-configured
+##### Enable ordering: XRDC locks itself out if enabled half-configured
 
 > "When XRDC is enabled (`CR[GVLD]` = 1), you **cannot access any XRDC-protected memory unless** you configure at least one set of memory region descriptors that includes the targeted memory." `[来源: Chapter_31 §31.5.6.5]`
 
 **Configure all MRGD/PAC descriptors and self-check them before setting `GVLD=1`.** Enabling first and configuring second can lock you out of the XRDC's own registers.
 
-###### Key differences from the MPU
+##### Key differences from the MPU
 
 | Dimension | MPU | XRDC |
 | --- | --- | --- |
@@ -928,7 +930,7 @@ The `DdACP` permission field encodes only **read / write** across four levels (s
 
 **The single most important conclusion: the MPU cannot stop DMA.** eDMA, the Ethernet MAC, CAN and other masters bypass the CPU's MPU and access the bus directly. If the safety design only covers the MPU, a misconfigured DMA descriptor can write through arbitrary memory — including the R52's stack and the M7's fault-record area. Such violations must be intercepted by XRDC's MRC/PAC.
 
-###### Inter-domain sharing and SEMA42
+##### Inter-domain sharing and SEMA42
 
 XRDC supports marking a memory block or peripheral as shared across domains, with **SEMA42 hardware semaphores** for mutual exclusion. The typical flow from NXP AN14715:
 
@@ -938,11 +940,11 @@ XRDC supports marking a memory block or peripheral as shared across domains, wit
 
 **Exception-handling implication**: an XRDC violation raises a **Bus Fault**, a different exception entry from the MPU's MemManage/Abort. The fault-handling code must implement two separate handlers, and XRDC error status must be read with the dedicated API — it is not found in `SCB->CFSR`.
 
-###### MCUXpresso SDK support
+##### MCUXpresso SDK support
 
 The MCUXpresso SDK provides `XRDC_Init`, domain assignment (`xrdc_processor_domain_assignment_t`), memory access policy (`xrdc_mem_access_config_t`) and peripheral access policy (`xrdc_periph_access_config_t`). On the AUTOSAR path this corresponds to the `Xrdc_Ip` driver.
 
-#### 5.9 MPU configuration quick reference by memory type
+### 5.9 MPU configuration quick reference by memory type
 
 | Memory type | M7 attribute | R52 attribute | XN | Special notes |
 | --- | --- | --- | --- | --- |
@@ -964,11 +966,11 @@ The MCUXpresso SDK provides `XRDC_Init`, domain assignment (`xrdc_processor_doma
 
 ---
 
-### 6. Cache coherency: coupling between MPU attributes and Cache
+## 6. Cache coherency: coupling between MPU attributes and Cache
 
 This is the most underrated part of MPU design.
 
-#### 5.1 Cache architecture of R52 vs M7
+### 5.1 Cache architecture of R52 vs M7
 
 | Item | Cortex-M7 | Cortex-R52 |
 | --- | --- | --- |
@@ -980,7 +982,7 @@ This is the most underrated part of MPU design.
 
 The S32K5's M7 and R52 are **mutually independent**, with no shared L2 cache. This means cross-core shared data cannot rely on a cache-coherency protocol to synchronize automatically.
 
-#### 5.2 Attribute configuration rules
+### 5.2 Attribute configuration rules
 
 | Storage | Correct attribute | Consequence of wrong attribute |
 | --- | --- | --- |
@@ -990,7 +992,7 @@ The S32K5's M7 and R52 are **mutually independent**, with no shared L2 cache. Th
 | ITCM / DTCM | Normal WT WB | The TC interface is inherently non-cacheable; wrong config is harmless but pointless |
 | Cross-core shared SRAM | Normal WB + Shareable | Attribute mismatch → permanently inconsistent data |
 
-#### 5.3 Cache maintenance sequence
+### 5.3 Cache maintenance sequence
 
 After changing MPU attributes you must invalidate the corresponding cache lines, otherwise data cached under the old attributes will be wrongly reused:
 
@@ -1007,9 +1009,9 @@ __ISB();
 
 ---
 
-### 7. Startup sequence and configuration order
+## 7. Startup sequence and configuration order
 
-#### 6.1 M7 startup sequence
+### 6.1 M7 startup sequence
 
 ```
 Reset
@@ -1024,7 +1026,7 @@ Reset
 
 **Do not enable the MPU's cacheable attribute before enabling the cache** — configuring cacheable while no cache exists is safe, but the reverse (cache first, then changing attributes) requires invalidation first.
 
-#### 6.2 R52 startup sequence
+### 6.2 R52 startup sequence
 
 ```
 R52 reset (launched by M7 via BOOT configuration registers)
@@ -1047,7 +1049,7 @@ R52 reset (launched by M7 via BOOT configuration registers)
 
 The R52 has no independent reset (SEGGER's documentation states that a debugger cannot reset an R52 core on its own), so **R52 MPU configuration must be triggered entirely from the M7-side startup code**, with an MU interrupt or shared-memory flag handshake between the two.
 
-#### 6.3 Timing risks of dual-core configuration
+### 6.3 Timing risks of dual-core configuration
 
 | Risk | Description | Mitigation |
 | --- | --- | --- |
@@ -1058,9 +1060,9 @@ The R52 has no independent reset (SEGGER's documentation states that a debugger 
 
 ---
 
-### 8. Fault handling and ASIL D implications
+## 8. Fault handling and ASIL D implications
 
-#### 7.1 Fault response matrix
+### 7.1 Fault response matrix
 
 | Scenario | Detection | Response |
 | --- | --- | --- |
@@ -1072,7 +1074,7 @@ The R52 has no independent reset (SEGGER's documentation states that a debugger 
 
 > Key insight: **the MPU can only stop "unauthorized access", not "misconfiguration"**. A peripheral window wrongly configured as cacheable generates no fault at all — it merely behaves oddly. Therefore MPU configuration tables belong in static checks and unit tests.
 
-#### 7.2 Dual-core safety strategy
+### 7.2 Dual-core safety strategy
 
 S32K5 is an ASIL D platform, and the MPU configuration itself is a **safety-related configuration item**, requiring:
 
@@ -1081,7 +1083,7 @@ S32K5 is an ASIL D platform, and the MPU configuration itself is a **safety-rela
 3. **Single-fault protection**: the MPU registers themselves are unprotected, and configuration errors raise no fault. Keep expected values in ECC-covered read-only constants and compare periodically at runtime.
 4. **ASIL D decomposition**: as a hardware mechanism the MPU provides **QM-level** capability; reaching ASIL D requires diagnostic coverage (structural coverage + runtime comparison).
 
-#### 7.3 Diagnostic coverage recommendations
+### 7.3 Diagnostic coverage recommendations
 
 | Diagnostic | Method | Coverage target |
 | --- | --- | --- |
@@ -1092,9 +1094,9 @@ S32K5 is an ASIL D platform, and the MPU configuration itself is a **safety-rela
 
 ---
 
-### 9. Implementation checklist
+## 9. Implementation checklist
 
-#### 8.1 Porting-layer interface abstraction
+### 8.1 Porting-layer interface abstraction
 
 Because the M7 and R52 register models are completely different, the driver layer should expose a unified interface:
 
@@ -1140,7 +1142,7 @@ extern const MpuHalOps MpuHal_R52;  /* PMSAv8-32 implementation */
 | `MPU_AP_FULL_RW` | `011` | `00` |
 | `MPU_AP_PRIV_RO` | `101` | `10` |
 
-#### 8.2 Integration steps
+### 8.2 Integration steps
 
 1. Set the `MEMFAULTENA` bit in `SCB->SHCSR` (enable MemManage) and give it priority above other maskable exceptions.
 2. Implement the MemManage handler (Abort exception at EL0/EL1), reading and saving CFSR/MMFAR/BFAR plus the stacked PC/LR.
@@ -1150,7 +1152,7 @@ extern const MpuHalOps MpuHal_R52;  /* PMSAv8-32 implementation */
 6. After enabling, run a self-check comparison and refuse to boot on failure.
 7. Enable MemManage / Abort breakpoints in the debug configuration.
 
-#### 8.3 Common errors checklist
+### 8.3 Common errors checklist
 
 | # | Error | Consequence | Fix |
 | --- | --- | --- | --- |
@@ -1172,7 +1174,7 @@ extern const MpuHalOps MpuHal_R52;  /* PMSAv8-32 implementation */
 
 ---
 
-### 10. References
+## 10. References
 
 | # | Document | Link |
 | --- | --- | --- |
@@ -1198,7 +1200,7 @@ extern const MpuHalOps MpuHal_R52;  /* PMSAv8-32 implementation */
 
 ---
 
-### 11. Open items
+## 11. Open items
 
 **Closed in Rev.B (2026-10-14)** — resolved against `rm1131130` Rev.3 and its embedded `S32K5xx_memory_map.xlsx`:
 
@@ -1229,7 +1231,7 @@ extern const MpuHalOps MpuHal_R52;  /* PMSAv8-32 implementation */
 
 ---
 
-### 12. OMU: an address-remapping trap for ASIL partitions (new in Rev.B)
+## 12. OMU: an address-remapping trap for ASIL partitions (new in Rev.B)
 
 The Overlay Management Unit remaps **read** addresses only, and the FCCU is required to keep it disabled during normal operation.
 
@@ -1249,7 +1251,7 @@ The Overlay Management Unit remaps **read** addresses only, and the FCCU is requ
 
 ---
 
-### 13. Consolidated risk register (new in Rev.B)
+## 13. Consolidated risk register (new in Rev.B)
 
 | # | Risk | Severity | Source |
 | --- | --- | --- | --- |
