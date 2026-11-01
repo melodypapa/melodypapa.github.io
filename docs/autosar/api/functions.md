@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **1974** 个条目。
+共 **1992** 个条目。
 
 ## A
 
@@ -1225,6 +1225,9 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
 
 ## D
+
+**[DataCondition](../diagnostics/j1939dcm/index.md#7731-datacondition)**
+> 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
 
 **[DataLength](../communication/mirror/index.md#64214-datalength)**
 > 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
@@ -3971,6 +3974,54 @@ title: "AUTOSAR API 函数清单"
 **[J1939Dcm](../mode_management/basic_software_mode_manager/index.md#512-j1939dcm)**
 > 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
+**[J1939Dcm_CalibrationInformation](../diagnostics/j1939dcm/index.md#7721-j1939dcm_calibrationinformation)**
+> 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
+**[J1939Dcm_CopyRxData](../diagnostics/j1939dcm/index.md#745-j1939dcm_copyrxdata)**
+> 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
+**[J1939Dcm_CopyTxData](../diagnostics/j1939dcm/index.md#747-j1939dcm_copytxdata)**
+> 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
+**[J1939Dcm_DeInit](../diagnostics/j1939dcm/index.md#732-j1939dcm_deinit)**
+> 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
+**[J1939Dcm_DemTriggerOnDTCStatus](../diagnostics/j1939dcm/index.md#7491-j1939dcm_demtriggerondtcstatus)**
+> 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
+**[J1939Dcm_GenericDMxTransmit](../diagnostics/j1939dcm/index.md#735-j1939dcm_genericdmxtransmit)**
+> 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
+**[J1939Dcm_GetVersionInfo](../diagnostics/j1939dcm/index.md#733-j1939dcm_getversioninfo)**
+> 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
+**[J1939Dcm_Init](../diagnostics/j1939dcm/index.md#731-j1939dcm_init)**
+> 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
+**[J1939Dcm_MainFunction](../diagnostics/j1939dcm/index.md#751-j1939dcm_mainfunction)**
+> 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
+**[J1939Dcm_RequestIndication](../diagnostics/j1939dcm/index.md#741-j1939dcm_requestindication)**
+> 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
+**[J1939Dcm_RxIndication](../diagnostics/j1939dcm/index.md#742-j1939dcm_rxindication)**
+> 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
+**[J1939Dcm_SetState](../diagnostics/j1939dcm/index.md#734-j1939dcm_setstate)**
+> 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
+**[J1939Dcm_StartOfReception](../diagnostics/j1939dcm/index.md#744-j1939dcm_startofreception)**
+> 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
+**[J1939Dcm_TpRxIndication](../diagnostics/j1939dcm/index.md#746-j1939dcm_tprxindication)**
+> 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
+**[J1939Dcm_TpTxConfirmation](../diagnostics/j1939dcm/index.md#748-j1939dcm_tptxconfirmation)**
+> 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
+**[J1939Dcm_TxConfirmation](../diagnostics/j1939dcm/index.md#743-j1939dcm_txconfirmation)**
+> 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
 **[J1939Nm](../mode_management/basic_software_mode_manager/index.md#513-j1939nm)**
 > 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
@@ -4444,6 +4495,9 @@ title: "AUTOSAR API 函数清单"
 
 **[MirrorControl](../communication/mirror/index.md#7821-mirrorcontrol)**
 > 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
+
+**[ModeCondition](../diagnostics/j1939dcm/index.md#7743-modecondition)**
+> 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
 
 **[MultiCore](../mode_management/ecu_state_manager/index.md#69-multicore)**
 > 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](../mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11

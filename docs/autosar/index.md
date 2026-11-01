@@ -78,6 +78,7 @@ title: "CP AUTOSAR"
 * [诊断（Diagnostics）](diagnostics/index.md)
   * [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)
   * [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)
+  * [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](diagnostics/j1939dcm/index.md)
 
 ### 通用（General）
 
