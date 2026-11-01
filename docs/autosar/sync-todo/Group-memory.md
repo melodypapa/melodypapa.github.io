@@ -102,7 +102,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - Note: step 5 confirmation received 2026-11-01 — user approved the completed sync and requested proceeding to commit.
   - [x] Step 5 — User confirmation gate
-  - Note: step 6 — TODO.md status row flipped to ✅ (Backlog items for 需求追踪/功能说明, 4.2 wording and §3.1 wording marked done); content commit `afba0fe` on `feature/bulk-nv-data-manager-sync`, recorded on PR #223: https://github.com/melodypapa/melodypapa.github.io/pull/223
+  - Note: step 6 — TODO.md status row flipped to ✅ (Backlog items for 需求追踪/功能说明, 4.2 wording and §3.1 wording marked done); issue #226: https://github.com/melodypapa/melodypapa.github.io/issues/226; content commit `afba0fe` on `feature/bulk-nv-data-manager-sync`, recorded on PR #223: https://github.com/melodypapa/melodypapa.github.io/pull/223 (PR body updated with the NvM section and `Closes #226`)
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] flash_eeprom_emulation (SWS_FlashEEPROMEmulation · R23-11 markdown · ⚠️ gaps)
   - Note: missing constraints/dependencies chapters; 3.1 "输入文件" ✓; 4.2 currently "地址计算" — verify ch.4's actual subsections against the source structure
