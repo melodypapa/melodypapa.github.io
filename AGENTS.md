@@ -49,5 +49,5 @@ Pre-existing INFO-level anchor notices in build output are known and do not fail
 
 ## Known gotchas
 
-- `.gitignore` contains stale root-anchored patterns from the Jekyll era (`eb_tresos/safety_os`, `nxp/saf`, `reference`) that do **not** match anything under `docs/` — `git check-ignore` results can mislead; trust `git ls-files`.
+- The Jekyll-era stale `.gitignore` patterns (`_site`, `.sass-cache`, `.jekyll-cache`, `.jekyll-metadata`, `vendor`, `nxp/saf`, `eb_tresos/*`, `reference`) were removed on 2026-11-02 along with the `_site/` build, `.bundle/config`, and the default Jekyll welcome post — the repo is now mkdocs-only.
 - `docs/autosar/template/timimg_extension/indx.md` — directory and filename typos that are load-bearing: `mkdocs.yml` nav references `indx.md` explicitly. Fixing the name requires a nav change in the same commit.

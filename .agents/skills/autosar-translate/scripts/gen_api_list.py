@@ -75,8 +75,12 @@ def material_slug(text: str) -> str:
 
 
 def article_index():
-    """spec stem -> (label, link, release) from articles' front-matter."""
-    idx = {}
+    """spec stem -> list of (label, link, release) from articles' front-matter.
+
+    One spec can back several articles (AUTOSAR_CP_SWS_RTE -> the RTE article
+    and the SchM extract under rte/schm/): every article is scanned on its
+    own, so entries link to the article they were found in."""
+    idx: dict = {}
     for p in sorted(DOCS.rglob("*.md")):
         if "sync-todo" in p.parts or "r21_11" in p.parts or p.name in {"STANDARD.md", "TODO.md", "glossary.md"}:
             continue
@@ -88,7 +92,8 @@ def article_index():
             tm = re.search(r'^title:\s*"?(.+?)"?\s*$', text, re.M)
             label = tm.group(1) if tm else (p.parent.name if p.name == "index.md" else p.stem)
             rm = re.search(r'^release:\s*"?([^"\s]+)"?\s*$', text, re.M)
-            idx[m.group(1)] = (label, p.relative_to(DOCS).as_posix(), rm.group(1) if rm else "R23-11")
+            idx.setdefault(m.group(1), []).append(
+                (label, p.relative_to(DOCS).as_posix(), rm.group(1) if rm else "R23-11"))
     return idx
 
 
@@ -215,7 +220,7 @@ def render_by_module(by_mod) -> list[str]:
         'title: "AUTOSAR API 函数清单（按模块）"',
         "---",
         "",
-        "本页按模块分表（模块按字母排序）汇总站内已翻译 AUTOSAR 文章中定义的函数："
+        "本页按模块分表（模块与表内函数均按字母排序）汇总站内已翻译 AUTOSAR 文章中定义的函数："
         "**名称**直达文章中该条目的定义小节，**简述**取自条目「说明」的第一句。"
         "**由脚本自动生成，请勿手工编辑**"
         "（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；"
@@ -232,7 +237,8 @@ def render_by_module(by_mod) -> list[str]:
             "| 函数 | 简述 |",
             "|---|---|",
         ]
-        for ident, anchor, brief in rows:
+        # table rows in identifier order (case-insensitive), not article order
+        for ident, anchor, brief in sorted(rows, key=lambda r: r[0].casefold()):
             out.append(f"| [**{ident}**](../{relpath}#{anchor}) | {brief or '—'} |")
         out.append("")
     return out
@@ -245,7 +251,7 @@ def build():
     by_mod: "OrderedDict[str, dict]" = OrderedDict()     # relpath -> {label, spec, rows:[(ident, anchor, brief)]}
     report, n_types, n_funcs = [], 0, 0
     contributing = set()
-    for stem, (label, relpath, release) in sorted(idx.items(), key=lambda kv: kv[1][1]):
+    for stem, arts in sorted(idx.items(), key=lambda kv: min(a[1] for a in kv[1])):
         # EXP/TR articles are explanatory guides, not module API sources —
         # their identifier-shaped headings (use cases ACC/AEB/LKA, BswM action
         # names, DET/RTE acronym prose, TR glossary terms) polluted the
@@ -253,21 +259,22 @@ def build():
         if "_EXP_" in stem or "_TR_" in stem:
             continue
         spec_disp = stem.removeprefix("AUTOSAR_CP_")
-        t = f = 0
-        for kind, ident, anchor, brief in collect(DOCS / relpath):
-            if kind == "类型":
-                entries_t.setdefault(ident.lower(), []).append((ident, kind, spec_disp, release, (label, relpath), anchor))
-                t += 1
-            else:
-                entries_f.setdefault(ident.lower(), []).append((ident, kind, spec_disp, release, (label, relpath), anchor))
-                # per-module view keeps the article's own entry order
-                by_mod.setdefault(relpath, {"label": label, "spec": spec_disp, "rows": []})["rows"].append((ident, anchor, brief))
-                f += 1
-        n_types += t
-        n_funcs += f
-        if t or f:
-            contributing.add(relpath)
-        report.append(f"  {relpath}: {t} types {f} funcs")
+        for label, relpath, release in arts:
+            t = f = 0
+            for kind, ident, anchor, brief in collect(DOCS / relpath):
+                if kind == "类型":
+                    entries_t.setdefault(ident.lower(), []).append((ident, kind, spec_disp, release, (label, relpath), anchor))
+                    t += 1
+                else:
+                    entries_f.setdefault(ident.lower(), []).append((ident, kind, spec_disp, release, (label, relpath), anchor))
+                    # per-module view keeps the article's own entry order
+                    by_mod.setdefault(relpath, {"label": label, "spec": spec_disp, "rows": []})["rows"].append((ident, anchor, brief))
+                    f += 1
+            n_types += t
+            n_funcs += f
+            if t or f:
+                contributing.add(relpath)
+            report.append(f"  {relpath}: {t} types {f} funcs")
     n_articles = len(contributing)
 
     index_page = [
