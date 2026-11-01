@@ -233,6 +233,7 @@ nav:
     - 系统服务:
       - autosar/system_services/index.md
       - "Det": autosar/system_services/default_error_tracer/index.md
+      - "ComM": autosar/system_services/comm/index.md
       - "FiM": autosar/system_services/function_inhibition_manager/index.md
       - "Os": autosar/system_services/operating_system/index.md
       - "Time Service": autosar/system_services/time_service/index.md

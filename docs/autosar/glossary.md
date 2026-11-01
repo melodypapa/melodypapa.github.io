@@ -90,6 +90,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
 
+**Active wake-up**
+> 由本 ECU 引起的唤醒，例如由传感器引起（**Wake-up caused by the hosting ECU e.g. by a sensor**）。
+>
+> 来源：[AUTOSAR Communication Manager（通信管理器）](system_services/comm/index.md)（SWS_COMManager）
+{: .glossary-source}
+
 **Activity state**
 > 活动状态：软件组件正在执行时的状态。活动状态以许可状态为前提条件，并叠加物理使能条件。它不由 **FiM** 计算，也不作为状态变量提供，只能通过观察或测量确定。
 >
@@ -434,16 +440,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CoreTest（内核测试）](mcal/core_test/index.md)（SWS_CoreTest）、[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures）
 {: .glossary-source}
 
-**BMCA**
-> 最佳主时钟算法（**Best Master Clock Algorithm**）。
->
-> 来源：[AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](globaltime/eth_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverEthernet）
-{: .glossary-source}
-
 **Block Management Type**
 > NVRAM 块的类型。它取决于 NVRAM 块在不同强制/可选基本存储对象块中的（可配置）单独组合以及此 NVRAM 块的后续处理。
 >
 > 来源：[AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
+{: .glossary-source}
+
+**BMCA**
+> 最佳主时钟算法（**Best Master Clock Algorithm**）。
+>
+> 来源：[AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](globaltime/eth_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverEthernet）
 {: .glossary-source}
 
 **BndM**
@@ -528,6 +534,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > CAN 总线的错误状态：CAN 控制器因错误计数达到上限而与总线脱离。CAN 状态管理器（CanSM）通过 Bus Off 恢复状态机进行恢复。
 >
 > 来源：[Error Description（错误描述）](general/error_description/index.md)（AUTOSAR_CP_EXP_ErrorDescription）
+{: .glossary-source}
+
+**Bus sleep**
+> 通信总线上无需任何活动，例如 CAN 总线睡眠（**No activity required on the communication bus**）。
+>
+> 来源：[AUTOSAR Communication Manager（通信管理器）](system_services/comm/index.md)（SWS_COMManager）
 {: .glossary-source}
 
 **Bus-Off state**
@@ -865,7 +877,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ComM**
 > Communication Manager
 >
-> 来源：[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
+> 来源：[AUTOSAR CAN Transceiver Driver](communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR CanSM（CAN状态管理器）](communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR Nm（网络管理接口）](communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR Communication Manager（通信管理器）](system_services/comm/index.md)（SWS_COMManager）
+{: .glossary-source}
+
+**Communication Channel**
+> 用于将信息从发送方（或发送器）传递到接收方的介质（**The medium used to convey information from a sender (or transmitter) to a receiver**）。
+>
+> 来源：[AUTOSAR Communication Manager（通信管理器）](system_services/comm/index.md)（SWS_COMManager）
+{: .glossary-source}
+
+**Communication Mode**
+> 决定允许何种通信的模式：完全通信 = COMM_FULL_COMMUNICATION；无通信 = COMM_NO_COMMUNICATION；静默通信 = COMM_SILENT_COMMUNICATION（**Mode determining which kind of communication are allowed**）。用户不能请求 COMM_SILENT_COMMUNICATION——它是关机时用于同步网络的内部模式。
+>
+> 来源：[AUTOSAR Communication Manager（通信管理器）](system_services/comm/index.md)（SWS_COMManager）
 {: .glossary-source}
 
 **Concurrent TesterPresent**
@@ -1565,7 +1589,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **EIRA**
 > 外部和内部请求数组（**External and Internal Request Array**）
 >
-> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR Communication Manager（通信管理器）](system_services/comm/index.md)（SWS_COMManager）
 {: .glossary-source}
 
 **Electrical Signal**
@@ -1602,7 +1626,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ERA**
 > 外部请求数组（**External Request Array**）
 >
-> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR Communication Manager（通信管理器）](system_services/comm/index.md)（SWS_COMManager）
+{: .glossary-source}
+
+**ERAn**
+> ComM 中可用的全部外部请求阵列，即 n 个设置了 ComMPncGatewayType 的 ComMChannel 会在 ComM 中产生 n 个外部请求阵列（**All External Request Arrays which are available in ComM**）。
+>
+> 来源：[AUTOSAR Communication Manager（通信管理器）](system_services/comm/index.md)（SWS_COMManager）
 {: .glossary-source}
 
 **Error**
@@ -1811,6 +1841,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
 
+**Fan-out**
+> 同一消息/指示被发送到多个目的地/接收方（**Same message/indication are sent to multiple destinations/receivers**）。
+>
+> 来源：[AUTOSAR Communication Manager（通信管理器）](system_services/comm/index.md)（SWS_COMManager）
+{: .glossary-source}
+
 **Fast-Mode**
 > 对看门狗硬件的触发必须以较短的超时期限完成。例如，该模式可用于 **ECU** 的正常运行。例如，看门狗硬件被配置为窗口模式（触发看门狗必须发生在超时期限内的特定最小/最大边界中）且超时期限为 5 毫秒。
 >
@@ -1859,16 +1895,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
-**FEE**
-> 闪存 EEPROM 仿真（**Flash EEPROM Emulation**）。
->
-> 来源：[AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
-{: .glossary-source}
-
 **FDIR**
 > 故障检测、隔离与恢复（**Fault Detection, Isolation and Recovery**）。系统运行期间处理故障的过程：检测→隔离→恢复。
 >
 > 来源：[Application Level Error Handling（应用层错误处理）](general/application_level_error_handling/index.md)（AUTOSAR_CP_EXP_ApplicationLevelErrorHandling）
+{: .glossary-source}
+
+**FEE**
+> 闪存 EEPROM 仿真（**Flash EEPROM Emulation**）。
+>
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
 {: .glossary-source}
 
 **FF**
@@ -2549,6 +2585,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR DoIP（基于 IP 的诊断）](communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）、[AUTOSAR TcpIp（TCP/IP协议栈）](communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
+**IRA**
+> 内部请求阵列（**Internal Request Array**）。这是一个位向量，包含每个通道聚合后的内部 PNC 请求。
+>
+> 来源：[AUTOSAR Communication Manager（通信管理器）](system_services/comm/index.md)（SWS_COMManager）
+{: .glossary-source}
+
 **IRQ**
 > 中断请求（**Interrupt Request**）
 >
@@ -2855,6 +2897,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 内存分配关键字（**Memory Allocation Key Word**）
 >
 > 来源：[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping）
+{: .glossary-source}
+
+**Managed channel**
+> 由 ECUC 参数 ComMManageReference 从另一个通道独占引用的 ComM 通道（**A ComM channel that is referenced exclusively from one other channel by ECUC parameter ComMManageReference**）。
+>
+> 来源：[AUTOSAR Communication Manager（通信管理器）](system_services/comm/index.md)（SWS_COMManager）
+{: .glossary-source}
+
+**Managing channel**
+> 通过 ECUC 参数 ComMManageReference 引用 1..n 个其他通道的 ComM 通道（**A ComM channel that references 1..n other channels by ECUC parameter ComMManageReference**）。
+>
+> 来源：[AUTOSAR Communication Manager（通信管理器）](system_services/comm/index.md)（SWS_COMManager）
 {: .glossary-source}
 
 **Master**
@@ -3470,7 +3524,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **OA TC10**
 > Open Alliance TC10（参见 OPEN Sleep/Wake-up Specification for Automotive Ethernet）。
 >
-> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）、[AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）、[AUTOSAR Ethernet Interface（以太网接口）](communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR EthSM（以太网状态管理器）](communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR Communication Manager（通信管理器）](system_services/comm/index.md)（SWS_COMManager）
 {: .glossary-source}
 
 **OBD**
@@ -3707,6 +3761,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 无源进入（**Passive Entry**）。帮助用户无需物理使用钥匙即可进入汽车的锁定系统。
 >
 > 来源：[Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](application_interfaces/body_and_comfort/index.md)（AUTOSAR_CP_EXP_AIBodyAndComfort）
+{: .glossary-source}
+
+**Passive wake-up**
+> 由另一个 ECU 引起、并（例如通过总线或唤醒线）传播到当前关注的 ECU 的唤醒（**Wake-up by another ECU and propagated to the ECU currently in focus**）。
+>
+> 来源：[AUTOSAR Communication Manager（通信管理器）](system_services/comm/index.md)（SWS_COMManager）
 {: .glossary-source}
 
 **PCD**
@@ -4871,6 +4931,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
 
+**System User**
+> 一种管理功能（一个在 ComM 内部上下文中生成的特定「用户」），用于发起默认请求以及覆盖用户请求（**An administration functionality for making a default request and for overriding the user requests**）。
+>
+> 来源：[AUTOSAR Communication Manager（通信管理器）](system_services/comm/index.md)（SWS_COMManager）
+{: .glossary-source}
+
 ## T
 
 **Target time**
@@ -5193,6 +5259,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）
 {: .glossary-source}
 
+**User**
+> ECU 状态管理器模块与通信管理器模块的请求方概念。用户可以是 BswM、一个可运行实体、一个 SW-C 或一组 SW-C，它们作为一个整体与 ECU 状态管理器模块及通信管理器模块交互（**Concept for requestors of the ECU State Manager module and of the Communication Manager Module**）。
+>
+> 来源：[AUTOSAR Communication Manager（通信管理器）](system_services/comm/index.md)（SWS_COMManager）
+{: .glossary-source}
+
+**User Request**
+> 用户可以向 ComM 请求不同的通信模式（**A User can request different Communication Modes from ComM**）。
+>
+> 来源：[AUTOSAR Communication Manager（通信管理器）](system_services/comm/index.md)（SWS_COMManager）
+{: .glossary-source}
+
 ## V
 
 **Variant**
@@ -5295,6 +5373,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 车辆运动控制（**Vehicle Motion Control**）。
 >
 > 来源：[Explanation of Application Interface of AD/ADAS Vehicle Motion Control（AD/ADAS 车辆运动控制应用接口说明）](application_interfaces/adas_vmc/index.md)（AUTOSAR_CP_EXP_AIADASAndVMC）
+{: .glossary-source}
+
+**VMM**
+> 车辆消息矩阵（**Vehicle Message Matrix**）。
+>
+> 来源：[AUTOSAR Communication Manager（通信管理器）](system_services/comm/index.md)（SWS_COMManager）
 {: .glossary-source}
 
 **VOBD**
