@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **492** 个条目。
+共 **498** 个条目。
 
 ## A
 
@@ -1037,6 +1037,24 @@ title: "AUTOSAR API 类型清单"
 
 **[NetworkHandleType](../general/communication_stack_types/index.md#719-networkhandletype)**
 > 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](../general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
+
+**[NvM_BlockIdType](../memory/nvram_manager/index.md#7722-nvm_blockidtype)**
+> 类型 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+
+**[NvM_BlockRequestType](../memory/nvram_manager/index.md#7724-nvm_blockrequesttype)**
+> 类型 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+
+**[NvM_ConfigType](../memory/nvram_manager/index.md#721-nvm_configtype)**
+> 类型 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+
+**[NvM_InitBlockRequestType](../memory/nvram_manager/index.md#7723-nvm_initblockrequesttype)**
+> 类型 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+
+**[NvM_MultiBlockRequestType](../memory/nvram_manager/index.md#722-nvm_multiblockrequesttype)**
+> 类型 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+
+**[NvM_RequestResultType](../memory/nvram_manager/index.md#7721-nvm_requestresulttype)**
+> 类型 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 ## O
 

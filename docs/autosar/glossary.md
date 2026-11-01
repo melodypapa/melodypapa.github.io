@@ -132,6 +132,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
+**Administrative Block**
+> 「管理块」是「基本存储对象」。它驻留在 **RAM** 中。「管理块」是「NVRAM 块」的强制部分。
+>
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
+{: .glossary-source}
+
 **AEAD**
 > 具有关联数据的经过身份验证的加密（**Authenticated Encryption with Associated Data**）。
 >
@@ -380,6 +386,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis）
 {: .glossary-source}
 
+**Basic Storage Object**
+> 「基本存储对象」是 **NVRAM** 块的最小实体。多个基本存储对象可用于构建 **NVRAM** 块。「基本存储对象」可以驻留在不同的内存位置，包括：**RAM**、**ROM**、NV 内存（**NV memory**）中。
+>
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
+{: .glossary-source}
+
 **Binary Manifest**
 > 软件集群的二进制对象的定义良好的接口，提供资源的元信息与访问此类资源的句柄（**Binary Manifest**）
 >
@@ -402,6 +414,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 最佳主时钟算法（**Best Master Clock Algorithm**）。
 >
 > 来源：[AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](globaltime/eth_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverEthernet）
+{: .glossary-source}
+
+**Block Management Type**
+> NVRAM 块的类型。它取决于 NVRAM 块在不同强制/可选基本存储对象块中的（可配置）单独组合以及此 NVRAM 块的后续处理。
+>
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
 {: .glossary-source}
 
 **BndM**
@@ -1394,6 +1412,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[E2E Transformer (E2E转换器)](communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）
 {: .glossary-source}
 
+**EA**
+> EEPROM 抽象（**EEPROM Abstraction**）。
+>
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
+{: .glossary-source}
+
 **EAI**
 > 期望存活指示（**Expected Alive Indications**）
 >
@@ -1751,6 +1775,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CanTp（CAN传输层）](communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
 {: .glossary-source}
 
+**FCFS**
+> 先到先服务（**First come first served**）。
+>
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
+{: .glossary-source}
+
 **FCNT**
 > **FlexRay** 周期计数器（**FlexRay Cycle Counter**）。
 >
@@ -1767,6 +1797,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 故障检测计数器（**Fault Detection Counter**）
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**FEE**
+> 闪存 EEPROM 仿真（**Flash EEPROM Emulation**）。
+>
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
 {: .glossary-source}
 
 **FDIR**
@@ -3315,6 +3351,30 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**NV**
+> 非易失性（**Non volatile**）。
+>
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
+{: .glossary-source}
+
+**NV Block**
+> 「NV 块」是「基本存储对象」。它代表驻留在 **NV 内存** 中的「NVRAM 块」的一部分。「NV 块」是「NVRAM 块」的强制性部分。
+>
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
+{: .glossary-source}
+
+**NV Block Header**
+> 如果启用「静态块 ID」机制，则 **NV 块**中包含的附加信息。
+>
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
+{: .glossary-source}
+
+**NV data**
+> 「NV 数据」是指要存储在非易失性存储器中的数据。
+>
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
+{: .glossary-source}
+
 **NVH**
 > 噪声、振动、平顺性（**Noise, Vibration, Harshness**）
 >
@@ -3325,6 +3385,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 非易失性 RAM（**Non-Volatile RAM**）
 >
 > 来源：[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping）
+{: .glossary-source}
+
+**NVRAM Block**
+> 「NVRAM 块」是管理和存储 NV 数据块所需的整个结构。
+>
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
 {: .glossary-source}
 
 ## O
@@ -3885,6 +3951,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）
 {: .glossary-source}
 
+**RAM Block**
+> 「RAM 块」是「基本存储对象」。它代表驻留在 **RAM** 中的「NVRAM 块」的一部分。
+>
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
+{: .glossary-source}
+
 **Range**
 > 范围（**Range**）在这里是一个功能范围（**functional range**），而不是电气范围（**electrical range**）。所有范围都用于功能的需要或者诊断的检测。对于模拟**ECU**信号，可以定义上下限值 [lowerLimit...upperLimit]（电压、电流）。对于电阻信号和时序信号（周期）的特殊情况，下限值（**lowerLimit**）不能为负。
 >
@@ -4003,6 +4075,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > Read Only Memory —— 只读存储器。
 >
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](communication/xcp/index.md)（SWS_XCP）
+{: .glossary-source}
+
+**ROM Block**
+> 「ROM 块」是「基本存储对象」。它代表驻留在 **ROM** 中的「NVRAM 块」的一部分。「ROM 块」是「NVRAM 块」的可选部分。
+>
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
 {: .glossary-source}
 
 **RSA**
