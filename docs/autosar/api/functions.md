@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **1992** 个条目。
+共 **2004** 个条目。
 
 ## A
 
@@ -103,28 +103,34 @@ title: "AUTOSAR API 函数清单"
 **[BLUEPRINT](../application_interfaces/user_guide/index.md#412-blueprint)**
 > 函数 · [Application Interfaces User Guide（应用接口用户指南）](../application_interfaces/user_guide/index.md) · EXP_AIUserGuide · R23-11
 
-**[BndM_GetVersionInfo](../memory/bulk_nv_data_manager/index.md#712-bndm_getversioninfo)**
+**[BndM_GetBlockPtr](../memory/bulk_nv_data_manager/index.md#733-bndm_getblockptr)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
-**[BndM_Init](../memory/bulk_nv_data_manager/index.md#711-bndm_init)**
+**[BndM_GetVersionInfo](../memory/bulk_nv_data_manager/index.md#732-bndm_getversioninfo)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
-**[BndM_JobEndNotification](../memory/bulk_nv_data_manager/index.md#721-bndm_jobendnotification)**
+**[BndM_Init](../memory/bulk_nv_data_manager/index.md#731-bndm_init)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
-**[BndM_JobErrorNotification](../memory/bulk_nv_data_manager/index.md#722-bndm_joberrornotification)**
+**[BndM_JobEndNotification](../memory/bulk_nv_data_manager/index.md#741-bndm_jobendnotification)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
-**[BndM_MainFunction](../memory/bulk_nv_data_manager/index.md#721-bndm_mainfunction)**
+**[BndM_JobErrorNotification](../memory/bulk_nv_data_manager/index.md#742-bndm_joberrornotification)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
-**[BndM_WriteCancel](../memory/bulk_nv_data_manager/index.md#717-bndm_writecancel)**
+**[BndM_MainFunction](../memory/bulk_nv_data_manager/index.md#751-bndm_mainfunction)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
-**[BndM_WriteFinalize](../memory/bulk_nv_data_manager/index.md#716-bndm_writefinalize)**
+**[BndM_WriteBlock](../memory/bulk_nv_data_manager/index.md#735-bndm_writeblock)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
-**[BndM_WriteStart](../memory/bulk_nv_data_manager/index.md#714-bndm_writestart)**
+**[BndM_WriteCancel](../memory/bulk_nv_data_manager/index.md#737-bndm_writecancel)**
+> 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
+
+**[BndM_WriteFinalize](../memory/bulk_nv_data_manager/index.md#736-bndm_writefinalize)**
+> 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
+
+**[BndM_WriteStart](../memory/bulk_nv_data_manager/index.md#734-bndm_writestart)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
 **[BswEvent](../rte/index.md#62225-bswevent)**
@@ -3210,40 +3216,40 @@ title: "AUTOSAR API 函数清单"
 **[FiM_SetFunctionAvailable](../system_services/function_inhibition_manager/index.md#7322-fim_setfunctionavailable)**
 > 函数 · [AUTOSAR FiM（功能禁止管理器）](../system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11
 
-**[Fls_BlankCheck](../memory/flash_driver/index.md#8111-fls_blankcheck)**
+**[Fls_BlankCheck](../memory/flash_driver/index.md#7311-fls_blankcheck)**
 > 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
-**[Fls_Cancel](../memory/flash_driver/index.md#814-fls_cancel)**
+**[Fls_Cancel](../memory/flash_driver/index.md#734-fls_cancel)**
 > 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
-**[Fls_Compare](../memory/flash_driver/index.md#818-fls_compare)**
+**[Fls_Compare](../memory/flash_driver/index.md#738-fls_compare)**
 > 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
-**[Fls_Erase](../memory/flash_driver/index.md#812-fls_erase)**
+**[Fls_Erase](../memory/flash_driver/index.md#732-fls_erase)**
 > 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
-**[Fls_GetJobResult](../memory/flash_driver/index.md#816-fls_getjobresult)**
+**[Fls_GetJobResult](../memory/flash_driver/index.md#736-fls_getjobresult)**
 > 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
-**[Fls_GetStatus](../memory/flash_driver/index.md#815-fls_getstatus)**
+**[Fls_GetStatus](../memory/flash_driver/index.md#735-fls_getstatus)**
 > 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
-**[Fls_GetVersionInfo](../memory/flash_driver/index.md#8110-fls_getversioninfo)**
+**[Fls_GetVersionInfo](../memory/flash_driver/index.md#7310-fls_getversioninfo)**
 > 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
-**[Fls_Init](../memory/flash_driver/index.md#811-fls_init)**
+**[Fls_Init](../memory/flash_driver/index.md#731-fls_init)**
 > 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
-**[Fls_MainFunction](../memory/flash_driver/index.md#8112-fls_mainfunction)**
+**[Fls_MainFunction](../memory/flash_driver/index.md#751-fls_mainfunction)**
 > 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
-**[Fls_Read](../memory/flash_driver/index.md#817-fls_read)**
+**[Fls_Read](../memory/flash_driver/index.md#737-fls_read)**
 > 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
-**[Fls_SetMode](../memory/flash_driver/index.md#819-fls_setmode)**
+**[Fls_SetMode](../memory/flash_driver/index.md#739-fls_setmode)**
 > 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
-**[Fls_Write](../memory/flash_driver/index.md#813-fls_write)**
+**[Fls_Write](../memory/flash_driver/index.md#733-fls_write)**
 > 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
 **[Fr_AbortCommunication](../communication/flexray_driver/index.md#747-fr_abortcommunication)**
@@ -4537,79 +4543,109 @@ title: "AUTOSAR API 函数清单"
 **[NvM](../mode_management/basic_software_mode_manager/index.md#516-nvm)**
 > 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
-**[NvM_CancelJobs](../memory/nvram_manager/index.md#819-nvm_canceljobs)**
+**[NvM_Admin](../memory/nvram_manager/index.md#7711-nvm_admin)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_CancelWriteAll](../memory/nvram_manager/index.md#833-nvm_cancelwriteall)**
+**[NvM_CancelJobs](../memory/nvram_manager/index.md#7318-nvm_canceljobs)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_EraseNvBlock](../memory/nvram_manager/index.md#824-nvm_erasenvblock)**
+**[NvM_CancelWriteAll](../memory/nvram_manager/index.md#7333-nvm_cancelwriteall)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_FirstInitAll](../memory/nvram_manager/index.md#835-nvm_firstinitall)**
+**[NVM_E_HARDWARE](../memory/nvram_manager/index.md#6341-nvm_e_hardware)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_GetDataIndex](../memory/nvram_manager/index.md#813-nvm_getdataindex)**
+**[NVM_E_INTEGRITY_FAILED](../memory/nvram_manager/index.md#6351-nvm_e_integrity_failed)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_GetErrorStatus](../memory/nvram_manager/index.md#815-nvm_geterrorstatus)**
+**[NVM_E_LOSS_OF_REDUNDANCY](../memory/nvram_manager/index.md#6355-nvm_e_loss_of_redundancy)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_GetVersionInfo](../memory/nvram_manager/index.md#816-nvm_getversioninfo)**
+**[NVM_E_REQ_FAILED](../memory/nvram_manager/index.md#6352-nvm_e_req_failed)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_Init](../memory/nvram_manager/index.md#811-nvm_init)**
+**[NVM_E_VERIFY_FAILED](../memory/nvram_manager/index.md#6354-nvm_e_verify_failed)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_InvalidateNvBlock](../memory/nvram_manager/index.md#825-nvm_invalidatenvblock)**
+**[NVM_E_WRONG_BLOCK_ID](../memory/nvram_manager/index.md#6353-nvm_e_wrong_block_id)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_JobEndNotification](../memory/nvram_manager/index.md#841-nvm_jobendnotification)**
+**[NvM_EraseNvBlock](../memory/nvram_manager/index.md#7324-nvm_erasenvblock)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_JobErrorNotification](../memory/nvram_manager/index.md#842-nvm_joberrornotification)**
+**[NvM_FirstInitAll](../memory/nvram_manager/index.md#7335-nvm_firstinitall)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_MainFunction](../memory/nvram_manager/index.md#842-nvm_mainfunction)**
+**[NvM_GetDataIndex](../memory/nvram_manager/index.md#7313-nvm_getdataindex)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_ReadAll](../memory/nvram_manager/index.md#831-nvm_readall)**
+**[NvM_GetErrorStatus](../memory/nvram_manager/index.md#7315-nvm_geterrorstatus)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_ReadBlock](../memory/nvram_manager/index.md#821-nvm_readblock)**
+**[NvM_GetVersionInfo](../memory/nvram_manager/index.md#7316-nvm_getversioninfo)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_ReadPRAMBlock](../memory/nvram_manager/index.md#826-nvm_readpramblock)**
+**[NvM_Init](../memory/nvram_manager/index.md#7311-nvm_init)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_RestoreBlockDefaults](../memory/nvram_manager/index.md#823-nvm_restoreblockdefaults)**
+**[NvM_InvalidateNvBlock](../memory/nvram_manager/index.md#7325-nvm_invalidatenvblock)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_RestorePRAMBlockDefaults](../memory/nvram_manager/index.md#828-nvm_restorepramblockdefaults)**
+**[NvM_JobEndNotification](../memory/nvram_manager/index.md#73361-nvm_jobendnotification)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_SetBlockLockStatus](../memory/nvram_manager/index.md#818-nvm_setblocklockstatus)**
+**[NvM_JobErrorNotification](../memory/nvram_manager/index.md#73362-nvm_joberrornotification)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_SetBlockProtection](../memory/nvram_manager/index.md#814-nvm_setblockprotection)**
+**[NvM_MainFunction](../memory/nvram_manager/index.md#741-nvm_mainfunction)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_SetDataIndex](../memory/nvram_manager/index.md#812-nvm_setdataindex)**
+**[NvM_Mirror](../memory/nvram_manager/index.md#7712-nvm_mirror)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_SetRamBlockStatus](../memory/nvram_manager/index.md#817-nvm_setramblockstatus)**
+**[NvM_NotifyInitBlock](../memory/nvram_manager/index.md#7713-nvm_notifyinitblock)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_ValidateAll](../memory/nvram_manager/index.md#834-nvm_validateall)**
+**[NvM_NotifyJobFinished](../memory/nvram_manager/index.md#7714-nvm_notifyjobfinished)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_WriteAll](../memory/nvram_manager/index.md#832-nvm_writeall)**
+**[NvM_ReadAll](../memory/nvram_manager/index.md#7331-nvm_readall)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_WriteBlock](../memory/nvram_manager/index.md#822-nvm_writeblock)**
+**[NvM_ReadBlock](../memory/nvram_manager/index.md#7321-nvm_readblock)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
-**[NvM_WritePRAMBlock](../memory/nvram_manager/index.md#827-nvm_writepramblock)**
+**[NvM_ReadPRAMBlock](../memory/nvram_manager/index.md#7326-nvm_readpramblock)**
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+
+**[NvM_RestoreBlockDefaults](../memory/nvram_manager/index.md#7323-nvm_restoreblockdefaults)**
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+
+**[NvM_RestorePRAMBlockDefaults](../memory/nvram_manager/index.md#7328-nvm_restorepramblockdefaults)**
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+
+**[NvM_Service](../memory/nvram_manager/index.md#7715-nvm_service)**
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+
+**[NvM_SetBlockProtection](../memory/nvram_manager/index.md#7314-nvm_setblockprotection)**
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+
+**[NvM_SetDataIndex](../memory/nvram_manager/index.md#7312-nvm_setdataindex)**
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+
+**[NvM_SetRamBlockStatus](../memory/nvram_manager/index.md#7317-nvm_setramblockstatus)**
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+
+**[NvM_ValidateAll](../memory/nvram_manager/index.md#7334-nvm_validateall)**
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+
+**[NvM_WriteAll](../memory/nvram_manager/index.md#7332-nvm_writeall)**
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+
+**[NvM_WriteBlock](../memory/nvram_manager/index.md#7322-nvm_writeblock)**
+> 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
+
+**[NvM_WritePRAMBlock](../memory/nvram_manager/index.md#7327-nvm_writepramblock)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 ## O

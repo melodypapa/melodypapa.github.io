@@ -18,7 +18,7 @@
 | 4 | [Group-system_services.md](Group-system_services.md) | 7 | **4/7 done 2026-10-28** (operating_system + det + FiM + time_service) — remaining: ComM (giant, ~5.2k-line source), SwCluC, HwTestManager |
 | 5 | [Group-mode_management.md](Group-mode_management.md) | 2 | EcuM alignment + BswM alignment (small) |
 | 6 | [Group-diagnostics.md](Group-diagnostics.md) | 3 | Dem gaps + J1939Dcm + Dcm (24k-line source, giant — last) |
-| 7 | [Group-memory.md](Group-memory.md) | 12 | MemIf/Fee gaps + stubs + 4 alignments + 6 missing (Ea/Eep…) |
+| 7 | [Group-memory.md](Group-memory.md) | 12 | **3/12 done 2026-10-31** (memory_access, memory_mapping, bulk_nv_data_manager PR #223) — remaining: Fee/NvM/Fls alignments + Ea/Eep… |
 | 8 | [Group-communication.md](Group-communication.md) | 27 | 18 existing articles completed/aligned + 9 backbone documents (Com/CanSM/CanTp/TcpIp/Nm/EthSM/IpduM/SomeIp×2) |
 | 9 | [Group-mcal.md](Group-mcal.md) | 3 | Mcu, Gpt, CoreTest |
 | 10 | [Group-globaltime.md](Group-globaltime.md) | 4 | **batch complete 2026-10-31 (4/4)** — StbM + CanTSyn/EthTSyn/FrTSyn |

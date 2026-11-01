@@ -27,19 +27,34 @@ from pathlib import Path
 # with fence junk ("## ⌋ () 8.2.5  Pwm\_ChannelClassType"), so match anywhere
 # in the line; only lines starting with '#' are scanned (keeps ToC tables out).
 # The lookbehind avoids matching the "8" of "18.3.2" style chapter numbers.
-SRC_RE = re.compile(r"(?:^|[^0-9.])8\.([23])\.(\d+)\s+\**\s*([A-Za-z][A-Za-z0-9_\\&;<>]*)")
+# The name class includes "." so templated names survive intact
+# ("BndM_Block&lt;BlockId.Shortname&gt;Type" — R23-11 SWS_BulkNvDataManager 8.2.3).
+SRC_RE = re.compile(r"(?:^|[^0-9.])8\.([23])\.(\d+)\s+\**\s*([A-Za-z][A-Za-z0-9_.\\&;<>]*)")
 # Grouped layout: leaf functions one level deeper ("## 8.3.1.1  GetVersionInfo"
 # under "## 8.3.1  General"). When such 4-level headings exist they are the
 # real function entries; the 3-level headings are group captions.
+# NvM (R23-11) nests one level deeper still: "## 8.3.3.6  Callback notifications"
+# is a 4-level group caption whose leaves are 5-level ("## 8.3.3.6.1 NVRAM
+# Manager job end notification without error"). The leaf pattern therefore
+# matches 4- OR 5-level numbers; parent filtering below drops any entry whose
+# number is extended by a deeper entry (a group caption), whatever its depth.
 # Some extracted leaf headings split an escaped underscore from the next
 # identifier token (for example, ``Dcm\_ SetActiveDiagnostic``). Capture that
 # token as part of the name; norm() removes the separator and extraction slash.
 SRC_LEAF_RE = re.compile(
-    r"(?:^|[^0-9.])8\.([23])\.(\d+)\.(\d+)\s+\**\s*"
-    r"([A-Za-z][A-Za-z0-9_\\&;<>]*(?:\s+[A-Za-z][A-Za-z0-9_\\&;<>]*)?)"
+    r"(?:^|[^0-9.])8\.(?P<chap>[23])\.(?P<num>\d+(?:\.\d+){1,2})\s+\**\s*"
+    # name: one identifier token plus any number of continuation tokens — the
+    # prose leaf headings of NvM's callbacks span seven words; the historical
+    # single-continuation `?` (added for "Dcm\_ SetActiveDiagnostic") is not
+    # enough
+    r"(?P<name>[A-Za-z][A-Za-z0-9_.\\&;<>]*(?:\s+[A-Za-z][A-Za-z0-9_.\\&;<>]*)*)"
 )
 ART_RE = re.compile(r"^####\s+7\.([23])\.(\d+)\.\s+(.+?)\s*$")
-ART_LEAF_RE = re.compile(r"^#####\s+7\.([23])\.(\d+)\.(\d+)\.\s+(.+?)\s*$")
+# Article heading level = numeric depth + 2, so 4-level entries are ##### and
+# 5-level entries (NvM callbacks) are ######.
+ART_LEAF_RE = re.compile(
+    r"^#{5,6}\s+7\.(?P<chap>[23])\.(?P<num>\d+(?:\.\d+){1,2})\.\s+(?P<name>.+?)\s*$"
+)
 
 # Structural (non-API) heading names whose Chinese rendering is fixed by the
 # site's API-chapter convention. SRC_RE only captures the first English word,
@@ -50,7 +65,16 @@ ART_LEAF_RE = re.compile(r"^#####\s+7\.([23])\.(\d+)\.(\d+)\.\s+(.+?)\s*$")
 # 「Std_ReturnType 的扩展」 (crypto_driver / crypto_interface / key_manager /
 # stbm precedent) — the alias keeps the tripwire from reporting a false
 # mismatch on all four articles.
-ALIASES = {"可选接口": "Optional", "Std_ReturnType的扩展": "Extension"}
+ALIASES = {
+    "可选接口": "Optional",
+    "Std_ReturnType的扩展": "Extension",
+    # NvM (R23-11) names its two callback entries with prose headings ("NVRAM
+    # Manager job end notification without/with error"); the article keeps the
+    # pre-existing function-name headings (old-article 8.4.1/8.4.2 continuity,
+    # site API function listing) — map the source prose names onto them.
+    "NVRAMManagerjobendnotificationwithouterror": "NvM_JobEndNotification",
+    "NVRAMManagerjobendnotificationwitherror": "NvM_JobErrorNotification",
+}
 
 
 def norm(name: str) -> str:
@@ -64,9 +88,23 @@ def norm(name: str) -> str:
     return ALIASES.get(name, name)
 
 
+def _drop_parents(entries: list[tuple[str, str]]) -> list[str]:
+    """Names of entries that are not a parent of a deeper entry.
+
+    Group captions can sit at any depth (NvM: "8.3.3.6 Callback notifications"
+    is a 4-level caption over 5-level leaves); an entry whose number is
+    extended by another entry's number is a caption, not an API leaf."""
+    nums = [num for num, _ in entries]
+    return [
+        name
+        for num, name in entries
+        if not any(other != num and other.startswith(num + ".") for other in nums)
+    ]
+
+
 def source_entries(text: str, chap: str) -> list[str]:
     flat: list[str] = []
-    leaf: list[str] = []
+    leaf: list[tuple[str, str]] = []
     for line in text.splitlines():
         if not line.startswith("#"):
             continue
@@ -75,25 +113,28 @@ def source_entries(text: str, chap: str) -> list[str]:
             name = norm(hits[-1].group(3))
             if not flat or flat[-1] != name:  # dedupe merged-heading repeats
                 flat.append(name)
-        leaf_hits = [m for m in SRC_LEAF_RE.finditer(line) if m.group(1) == chap]
+        leaf_hits = [m for m in SRC_LEAF_RE.finditer(line) if m.group("chap") == chap]
         if leaf_hits:
-            name = norm(leaf_hits[-1].group(4))
-            if not leaf or leaf[-1] != name:
-                leaf.append(name)
-    return leaf if leaf else flat
+            m = leaf_hits[-1]
+            if not leaf or leaf[-1][0] != m.group("num"):
+                leaf.append((m.group("num"), norm(m.group("name"))))
+    leaves = _drop_parents(leaf)
+    return leaves if leaves else flat
 
 
 def article_entries(text: str, chap: str) -> list[str]:
     flat: list[str] = []
-    leaf: list[str] = []
+    leaf: list[tuple[str, str]] = []
     for line in text.splitlines():
         m = ART_RE.match(line)
         if m and m.group(1) == chap:
             flat.append(norm(m.group(3)))
         m = ART_LEAF_RE.match(line)
-        if m and m.group(1) == chap:
-            leaf.append(norm(m.group(4)))
-    return leaf if leaf else flat
+        if m and m.group("chap") == chap:
+            if not leaf or leaf[-1][0] != m.group("num"):
+                leaf.append((m.group("num"), norm(m.group("name"))))
+    leaves = _drop_parents(leaf)
+    return leaves if leaves else flat
 
 
 def slice_section(text: str, start_re: str, end_re: str) -> str:
