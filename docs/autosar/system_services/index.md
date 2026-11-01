@@ -7,6 +7,7 @@ title: "系统服务（System Services）"
 ## 文章
 
 * [AUTOSAR Default Error Tracer（默认错误跟踪器）](default_error_tracer/index.md)
+* [AUTOSAR Communication Manager（通信管理器）](comm/index.md)
 * [AUTOSAR FiM（功能禁止管理器）](function_inhibition_manager/index.md)
 * [AUTOSAR Operating System（操作系统）](operating_system/index.md)
 * [AUTOSAR Time Service（时间服务）](time_service/index.md)

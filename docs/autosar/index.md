@@ -39,6 +39,7 @@ title: "CP AUTOSAR"
   * [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)
   * [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)
   * [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)
+  * [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](communication/flexray_iso_transport_layer/index.md)
   * [AUTOSAR FVM (Freshness Value Manager)](communication/fvm/fvm.md)
   * [AUTOSAR Large Data COM（大数据 COM）](communication/large_data_com/index.md)
   * [AUTOSAR LIN Driver](communication/lin_driver/index.md)
@@ -145,6 +146,7 @@ title: "CP AUTOSAR"
 
 * [系统服务（System Services）](system_services/index.md)
   * [AUTOSAR Default Error Tracer（默认错误跟踪器）](system_services/default_error_tracer/index.md)
+  * [AUTOSAR Communication Manager（通信管理器）](system_services/comm/index.md)
   * [AUTOSAR FiM（功能禁止管理器）](system_services/function_inhibition_manager/index.md)
   * [AUTOSAR Operating System（操作系统）](system_services/operating_system/index.md)
   * [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md)

@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2057** 个条目。
+共 **2077** 个条目。
 
 ## A
 
@@ -3798,6 +3798,54 @@ title: "AUTOSAR API 函数清单"
 **[FrSM_SetEcuPassive](../communication/flexray_state_manager/index.md#736-frsm_setecupassive)**
 > 函数 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
 
+**[FrTp_CancelReceive](../communication/flexray_iso_transport_layer/index.md#7334-frtp_cancelreceive)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
+
+**[FrTp_CancelTransmit](../communication/flexray_iso_transport_layer/index.md#7332-frtp_canceltransmit)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
+
+**[FrTp_ChangeParameter](../communication/flexray_iso_transport_layer/index.md#7333-frtp_changeparameter)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
+
+**[FrTp_GetVersionInfo](../communication/flexray_iso_transport_layer/index.md#7311-frtp_getversioninfo)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
+
+**[FrTp_Init](../communication/flexray_iso_transport_layer/index.md#7321-frtp_init)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
+
+**[FrTp_MainFunction](../communication/flexray_iso_transport_layer/index.md#751-frtp_mainfunction)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
+
+**[FrTp_RxIndication](../communication/flexray_iso_transport_layer/index.md#742-frtp_rxindication)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
+
+**[FrTp_Shutdown](../communication/flexray_iso_transport_layer/index.md#7322-frtp_shutdown)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
+
+**[FrTp_Transmit](../communication/flexray_iso_transport_layer/index.md#7331-frtp_transmit)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
+
+**[FrTp_TriggerTransmit](../communication/flexray_iso_transport_layer/index.md#741-frtp_triggertransmit)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
+
+**[FrTp_TxConfirmation](../communication/flexray_iso_transport_layer/index.md#743-frtp_txconfirmation)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
+
+**[FrTpChannel](../communication/flexray_iso_transport_layer/index.md#6332-frtpchannel)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
+
+**[FrTpConnectionControl](../communication/flexray_iso_transport_layer/index.md#6323-frtpconnectioncontrol)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
+
+**[FrTpConnectionControlRuntime](../communication/flexray_iso_transport_layer/index.md#6333-frtpconnectioncontrolruntime)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
+
+**[FrTpRuntime](../communication/flexray_iso_transport_layer/index.md#6331-frtpruntime)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
+
+**[FrTpTxPduPool](../communication/flexray_iso_transport_layer/index.md#6322-frtptxpdupool)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
+
 **[FrTrcv_CheckWakeupByTransceiver](../communication/flexray_transceiver_driver/index.md#737-frtrcv_checkwakeupbytransceiver)**
 > 函数 · [AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
 
@@ -5167,6 +5215,12 @@ title: "AUTOSAR API 函数清单"
 **[Rte_Write](../rte/index.md#7164-rte_write)**
 > 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
 
+**[RX_ERROR](../communication/flexray_iso_transport_layer/index.md#6514-rx_error)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
+
+**[RX_PDU_AVAILABLE](../communication/flexray_iso_transport_layer/index.md#6513-rx_pdu_available)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
+
 ## S
 
 **[SchM_ActMainFunction](../rte/index.md#72512-schm_actmainfunction)**
@@ -5902,6 +5956,12 @@ title: "AUTOSAR API 函数清单"
 
 **[TryToGetSpinlock](../system_services/operating_system/index.md#7428-trytogetspinlock)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
+
+**[TX_SDU_AVAILABLE](../communication/flexray_iso_transport_layer/index.md#6511-tx_sdu_available)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
+
+**[TX_SDU_UNKNOWN_MSG_LENGTH](../communication/flexray_iso_transport_layer/index.md#6512-tx_sdu_unknown_msg_length)**
+> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
 
 ## U
 

@@ -6,7 +6,7 @@ Status `Done` = all 6 queue steps complete (translation merged). Status `Aligned
 
 ## Group communication-2 — communication section — remaining missing documents (38)
 
-Status: **17/38** completed
+Status: **18/38** completed
 
 | Article                    | Status | Commit ID |
 | --------------------------- | -------- | ---------- |
@@ -27,7 +27,7 @@ Status: **17/38** completed
 | `flexray_sm`                 | [x] Done | 51bd5a4c8f |
 | `flexray_trcv`               | [x] Done | 51bd5a4c8f |
 | `flexray_ar_tp`              | [x] Done | 51bd5a4c8f |
-| `flexray_iso_tp`             | [ ] Pending | N/A |
+| `flexray_iso_tp`             | [x] Done | N/A |
 | `linsm`                      | [ ] Pending | N/A |
 | `lintrcv`                    | [ ] Pending | N/A |
 | `ttcan_driver`               | [ ] Pending | N/A |
@@ -93,13 +93,13 @@ Status: **4/4** completed
 
 ## Group diagnostics — diagnostics section
 
-Status: **1/3** completed
+Status: **3/3** completed
 
 | Article                            | Status | Commit ID |
 | ----------------------------------- | -------- | ---------- |
 | `diagnostic_event_manager`           | [x] Done | c5b4a2573a |
-| `j1939dcm`                           | [ ] Pending | 8795b71e19 |
-| `diagnostic_communication_manager`   | [ ] Aligned ⚠️ | 24c7a36bc4 |
+| `j1939dcm`                           | [x] Done | 8795b71e19 |
+| `diagnostic_communication_manager`   | [x] Done | 24c7a36bc4 |
 
 ## Group exp — missing EXP guides (20)
 
@@ -194,15 +194,15 @@ Status: **3/3** completed
 
 ## Group memory — memory section
 
-Status: **2/12** completed
+Status: **5/12** completed
 
 | Article                        | Status | Commit ID |
 | ------------------------------- | -------- | ---------- |
 | `memory_access`                  | [x] Done | 922364777e |
 | `memory_mapping`                 | [x] Done | 89900677f4 |
-| `bulk_nv_data_manager`           | [ ] Aligned 🔶 | df7fb88a82 |
-| `flash_driver`                   | [ ] Aligned 🔶 | df7fb88a82 |
-| `nvram_manager`                  | [ ] Aligned 🔶 | df7fb88a82 |
+| `bulk_nv_data_manager`           | [x] Done | df7fb88a82 |
+| `flash_driver`                   | [x] Done | df7fb88a82 |
+| `nvram_manager`                  | [x] Done | 0358128113 |
 | `flash_eeprom_emulation`         | [ ] Aligned ⚠️ | df7fb88a82 |
 | `ea`                             | [ ] Pending | N/A |
 | `eep`                            | [ ] Pending | N/A |
@@ -250,17 +250,17 @@ Status: **0/2** completed
 
 ## Group system_services — system services section
 
-Status: **4/7** completed
+Status: **5/7** completed
 
 | Article                       | Status | Commit ID |
 | ------------------------------ | -------- | ---------- |
 | `det`                           | [x] Done | 30510c9c38 |
 | `function_inhibition_manager`   | [x] Done | 534d5d1099 |
 | `time_service`                  | [x] Done | 5c57d0ae39 |
-| `comm`                          | [ ] Pending | N/A |
+| `comm`                          | [x] Done | bcf713dc1e |
 | `swcluc`                        | [ ] Pending | N/A |
 | `hwtestmanager`                 | [ ] Pending | N/A |
 | `operating_system`              | [x] Done | ca7ecda991 |
 
-**Total: 95/146 queue rows complete.**
+**Total: 102/146 queue rows complete.**
 

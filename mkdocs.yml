@@ -148,6 +148,7 @@ nav:
       - "WEth": autosar/communication/wlan_driver/index.md
       - "WEthTrcv": autosar/communication/wlan_transceiver_driver/index.md
       - "Fr": autosar/communication/flexray_driver/index.md
+      - "FrTp": autosar/communication/flexray_iso_transport_layer/index.md
       - "FvM": autosar/communication/fvm/fvm.md
       - "LdCom": autosar/communication/large_data_com/index.md
       - "Lin": autosar/communication/lin_driver/index.md
@@ -233,6 +234,7 @@ nav:
     - 系统服务:
       - autosar/system_services/index.md
       - "Det": autosar/system_services/default_error_tracer/index.md
+      - "ComM": autosar/system_services/comm/index.md
       - "FiM": autosar/system_services/function_inhibition_manager/index.md
       - "Os": autosar/system_services/operating_system/index.md
       - "Time Service": autosar/system_services/time_service/index.md

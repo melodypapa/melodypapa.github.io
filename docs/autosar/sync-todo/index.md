@@ -15,10 +15,10 @@
 | 1 | [Group-io.md](Group-io.md) | 7 | IO wrap-up — **batch complete 2026-10-27 (7/7)** (1 done + wording/acronym alignment + iohwab gaps + adc deep completion) |
 | 2 | [Group-general.md](Group-general.md) | 4 | platform_types stub repair + BSWGeneral (global base spec) and 2 more missing documents |
 | 3 | [Group-crypto.md](Group-crypto.md) | 4 | **batch complete 2026-10-28 (4/4)** — Csm alignment (PR #133) + crypto_driver full completion + CryIf/KeyM new articles; Csm reopened 2026-10-28 (incomplete) → full R23-11 re-sync complete 2026-10-31 |
-| 4 | [Group-system_services.md](Group-system_services.md) | 7 | **4/7 done 2026-10-28** (operating_system + det + FiM + time_service) — remaining: ComM (giant, ~5.2k-line source), SwCluC, HwTestManager |
+| 4 | [Group-system_services.md](Group-system_services.md) | 7 | **5/7 done 2026-11-01** (operating_system + det + FiM + time_service + comm PR #230) — remaining: SwCluC (24.7k-line source, giant), HwTestManager |
 | 5 | [Group-mode_management.md](Group-mode_management.md) | 2 | EcuM alignment + BswM alignment (small) |
-| 6 | [Group-diagnostics.md](Group-diagnostics.md) | 3 | Dem gaps + J1939Dcm + Dcm (24k-line source, giant — last) |
-| 7 | [Group-memory.md](Group-memory.md) | 12 | **3/12 done 2026-10-31** (memory_access, memory_mapping, bulk_nv_data_manager PR #223) — remaining: Fee/NvM/Fls alignments + Ea/Eep… |
+| 6 | [Group-diagnostics.md](Group-diagnostics.md) | 3 | **batch complete 2026-11-01 (3/3)** — Dem near-full build + j1939dcm new article + Dcm 24k-line sync (PR #225) |
+| 7 | [Group-memory.md](Group-memory.md) | 12 | **5/12 done 2026-11-01** (memory_access, memory_mapping, bulk_nv_data_manager + flash_driver PR #223, nvram_manager) — next: flash_eeprom_emulation; remaining: Ea/Eep/MemIf/MemDriver/FlsTst/RamTst new articles |
 | 8 | [Group-communication.md](Group-communication.md) | 27 | 18 existing articles completed/aligned + 9 backbone documents (Com/CanSM/CanTp/TcpIp/Nm/EthSM/IpduM/SomeIp×2) |
 | 9 | [Group-mcal.md](Group-mcal.md) | 3 | Mcu, Gpt, CoreTest |
 | 10 | [Group-globaltime.md](Group-globaltime.md) | 4 | **batch complete 2026-10-31 (4/4)** — StbM + CanTSyn/EthTSyn/FrTSyn |
@@ -26,7 +26,7 @@
 | 12 | [Group-safety.md](Group-safety.md) | 3 | WdgM/WdgIf/Wdg |
 | 13 | [Group-security.md](Group-security.md) | 2 | Firewall, IdsM |
 | 14 | [Group-rte-swarch.md](Group-rte-swarch.md) | 2 | RTE, ARTI |
-| 15 | [Group-communication-2.md](Group-communication-2.md) | 38 | remaining communication gaps (CAN XL/LdCom/Dlt/DoIp/XCP/Spi/FlexRay/J1939/V2X…) |
+| 15 | [Group-communication-2.md](Group-communication-2.md) | 38 | **18/38 done 2026-11-01** (Spi/LdCom/LsDu/Dlt/DoIp/XCP/CanXL×2/EthTrcv/WEth×2/FlexRay×7 + flexray_iso_tp this branch) — remaining: LinSM/LinTrcv/TTCAN×2/J1939×3/IEEE1722/MACsec/CellularV2X/ChargingManager/ChineseV2X×4/V2X×5 |
 | 16 | [Group-exp.md](Group-exp.md) | 20 | 20 missing EXP guides (the TPS template is exempt and not queued, same flow) |
 
 Total 148 documents = all **127 R23-11 SWS** (io 7 + general 4 + crypto 4 + system_services 7 + mode_management 2 + diagnostics 3 + memory 12 + communication 65 + globaltime 4 + libraries 9 + mcal 3 + rte-swarch 2 + safety 3 + security 2, 1 of them already done) + **20 missing EXP** + 1 TPS template (exempt, not queued — see Group-exp). Batch order is adjustable; row order inside a batch = suggested execution order (small/alignment work first, giant sources last).
