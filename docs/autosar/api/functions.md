@@ -4,18 +4,12 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2077** 个条目。
+共 **1931** 个条目。
 
 ## A
 
-**[ACC](../application_interfaces/adas_vmc/index.md#431-acc)**
-> 函数 · [Explanation of Application Interface of AD/ADAS Vehicle Motion Control（AD/ADAS 车辆运动控制应用接口说明）](../application_interfaces/adas_vmc/index.md) · EXP_AIADASAndVMC · R23-11
-
 **[ActivateTaskAsyn](../system_services/operating_system/index.md#7437-activatetaskasyn)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
-
-**[Adaptability](../foundation/general/tr_glossary/index.md#45-adaptability)**
-> 函数 · [TR Glossary（AUTOSAR 术语表）](../foundation/general/tr_glossary/index.md) · AUTOSAR_FO_TR_Glossary · R23-11
 
 **[Adc_DeInit](../io/adc_driver/index.md#733-adc_deinit)**
 > 函数 · [AUTOSAR ADC Driver（模数转换器驱动）](../io/adc_driver/index.md) · SWS_ADCDriver · R23-11
@@ -71,37 +65,13 @@ title: "AUTOSAR API 函数清单"
 **[Adc_StopGroupConversion](../io/adc_driver/index.md#735-adc_stopgroupconversion)**
 > 函数 · [AUTOSAR ADC Driver（模数转换器驱动）](../io/adc_driver/index.md) · SWS_ADCDriver · R23-11
 
-**[AEB](../application_interfaces/adas_vmc/index.md#432-aeb)**
-> 函数 · [Explanation of Application Interface of AD/ADAS Vehicle Motion Control（AD/ADAS 车辆运动控制应用接口说明）](../application_interfaces/adas_vmc/index.md) · EXP_AIADASAndVMC · R23-11
-
 **[AllowAccess](../system_services/operating_system/index.md#7421-allowaccess)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
-
-**[AlwaysTransmit](../communication/flexray_interface/index.md#663-alwaystransmit)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[API](../system_services/default_error_tracer/index.md#71-api)**
 > 函数 · [AUTOSAR Default Error Tracer（默认错误跟踪器）](../system_services/default_error_tracer/index.md) · SWS_DefaultErrorTracer · R23-11
 
-**[Application](../foundation/general/tr_glossary/index.md#49-application)**
-> 函数 · [TR Glossary（AUTOSAR 术语表）](../foundation/general/tr_glossary/index.md) · AUTOSAR_FO_TR_Glossary · R23-11
-
-**[Architecture](../foundation/general/tr_glossary/index.md#413-architecture)**
-> 函数 · [TR Glossary（AUTOSAR 术语表）](../foundation/general/tr_glossary/index.md) · AUTOSAR_FO_TR_Glossary · R23-11
-
-**[Artifact](../foundation/general/tr_glossary/index.md#414-artifact)**
-> 函数 · [TR Glossary（AUTOSAR 术语表）](../foundation/general/tr_glossary/index.md) · AUTOSAR_FO_TR_Glossary · R23-11
-
-**[AuthenticationConfiguration](../diagnostics/diagnostic_communication_manager/index.md#662106-authenticationconfiguration)**
-> 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
-
-**[AutoAdjustUserRequestManager](../application_interfaces/body_and_comfort/index.md#4424-autoadjustuserrequestmanager)**
-> 函数 · [Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](../application_interfaces/body_and_comfort/index.md) · EXP_AIBodyAndComfort · R23-11
-
 ## B
-
-**[BLUEPRINT](../application_interfaces/user_guide/index.md#412-blueprint)**
-> 函数 · [Application Interfaces User Guide（应用接口用户指南）](../application_interfaces/user_guide/index.md) · EXP_AIUserGuide · R23-11
 
 **[BndM_GetBlockPtr](../memory/bulk_nv_data_manager/index.md#733-bndm_getblockptr)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
@@ -132,9 +102,6 @@ title: "AUTOSAR API 函数清单"
 
 **[BndM_WriteStart](../memory/bulk_nv_data_manager/index.md#734-bndm_writestart)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
-
-**[BswEvent](../rte/index.md#62225-bswevent)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
 
 **[BswM_BswMPartitionRestarted](../mode_management/basic_software_mode_manager/index.md#731-bswm_bswmpartitionrestarted)**
 > 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
@@ -243,60 +210,6 @@ title: "AUTOSAR API 函数清单"
 
 **[BswM_SoAd_SoConModeChg](../mode_management/basic_software_mode_manager/index.md#7330-bswm_soad_soconmodechg)**
 > 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
-
-**[BswMCanSMIndication](../mode_management/guide_to_mode_management/index.md#32224-bswmcansmindication)**
-> 函数 · [Guide to Mode Management（模式管理指南）](../mode_management/guide_to_mode_management/index.md) · EXP_ModeManagementGuide · R23-11
-
-**[BswMComMIndication](../mode_management/guide_to_mode_management/index.md#32221-bswmcommindication)**
-> 函数 · [Guide to Mode Management（模式管理指南）](../mode_management/guide_to_mode_management/index.md) · EXP_ModeManagementGuide · R23-11
-
-**[BswMComMPncRequest](../mode_management/guide_to_mode_management/index.md#32222-bswmcommpncrequest)**
-> 函数 · [Guide to Mode Management（模式管理指南）](../mode_management/guide_to_mode_management/index.md) · EXP_ModeManagementGuide · R23-11
-
-**[BswMDcmComModeRequest](../mode_management/guide_to_mode_management/index.md#32223-bswmdcmcommoderequest)**
-> 函数 · [Guide to Mode Management（模式管理指南）](../mode_management/guide_to_mode_management/index.md) · EXP_ModeManagementGuide · R23-11
-
-**[BswMEcuMCurrentState](../mode_management/guide_to_mode_management/index.md#32229-bswmecumcurrentstate)**
-> 函数 · [Guide to Mode Management（模式管理指南）](../mode_management/guide_to_mode_management/index.md) · EXP_ModeManagementGuide · R23-11
-
-**[BswMEcuMRequestedState](../mode_management/guide_to_mode_management/index.md#32228-bswmecumrequestedstate)**
-> 函数 · [Guide to Mode Management（模式管理指南）](../mode_management/guide_to_mode_management/index.md) · EXP_ModeManagementGuide · R23-11
-
-**[BswMEcuMWakeupSource](../mode_management/guide_to_mode_management/index.md#322210-bswmecumwakeupsource)**
-> 函数 · [Guide to Mode Management（模式管理指南）](../mode_management/guide_to_mode_management/index.md) · EXP_ModeManagementGuide · R23-11
-
-**[BswMEthSMIndication](../mode_management/guide_to_mode_management/index.md#32225-bswmethsmindication)**
-> 函数 · [Guide to Mode Management（模式管理指南）](../mode_management/guide_to_mode_management/index.md) · EXP_ModeManagementGuide · R23-11
-
-**[BswMFrSMIndication](../mode_management/guide_to_mode_management/index.md#32226-bswmfrsmindication)**
-> 函数 · [Guide to Mode Management（模式管理指南）](../mode_management/guide_to_mode_management/index.md) · EXP_ModeManagementGuide · R23-11
-
-**[BswMJ1939DcmBroadcastStatus](../mode_management/guide_to_mode_management/index.md#322217-bswmj1939dcmbroadcaststatus)**
-> 函数 · [Guide to Mode Management（模式管理指南）](../mode_management/guide_to_mode_management/index.md) · EXP_ModeManagementGuide · R23-11
-
-**[BswMJ1939NmIndication](../mode_management/guide_to_mode_management/index.md#322215-bswmj1939nmindication)**
-> 函数 · [Guide to Mode Management（模式管理指南）](../mode_management/guide_to_mode_management/index.md) · EXP_ModeManagementGuide · R23-11
-
-**[BswMLinScheduleIndication](../mode_management/guide_to_mode_management/index.md#322211-bswmlinscheduleindication)**
-> 函数 · [Guide to Mode Management（模式管理指南）](../mode_management/guide_to_mode_management/index.md) · EXP_ModeManagementGuide · R23-11
-
-**[BswMLinSMIndication](../mode_management/guide_to_mode_management/index.md#32227-bswmlinsmindication)**
-> 函数 · [Guide to Mode Management（模式管理指南）](../mode_management/guide_to_mode_management/index.md) · EXP_ModeManagementGuide · R23-11
-
-**[BswMLinTpModeRequest](../mode_management/guide_to_mode_management/index.md#322212-bswmlintpmoderequest)**
-> 函数 · [Guide to Mode Management（模式管理指南）](../mode_management/guide_to_mode_management/index.md) · EXP_ModeManagementGuide · R23-11
-
-**[BswMNvMJobModeIndication](../mode_management/guide_to_mode_management/index.md#322213-bswmnvmjobmodeindication)**
-> 函数 · [Guide to Mode Management（模式管理指南）](../mode_management/guide_to_mode_management/index.md) · EXP_ModeManagementGuide · R23-11
-
-**[BswMNvMRequest](../mode_management/guide_to_mode_management/index.md#322214-bswmnvmrequest)**
-> 函数 · [Guide to Mode Management（模式管理指南）](../mode_management/guide_to_mode_management/index.md) · EXP_ModeManagementGuide · R23-11
-
-**[BswMWdgMRequestPartitionReset](../mode_management/guide_to_mode_management/index.md#322216-bswmwdgmrequestpartitionreset)**
-> 函数 · [Guide to Mode Management（模式管理指南）](../mode_management/guide_to_mode_management/index.md) · EXP_ModeManagementGuide · R23-11
-
-**[BufferOverflowNotification](../communication/diagnostic_log_and_trace/index.md#61111-bufferoverflownotification)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 ## C
 
@@ -480,9 +393,6 @@ title: "AUTOSAR API 函数清单"
 **[CanNm_TxConfirmation](../communication/can_network_management/index.md#741-cannm_txconfirmation)**
 > 函数 · [AUTOSAR CAN NM（CAN网络管理）](../communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
 
-**[CanSM](../mode_management/basic_software_mode_manager/index.md#56-cansm)**
-> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
-
 **[CanSM_CheckTransceiverWakeFlagIndication](../communication/cansm/index.md#746-cansm_checktransceiverwakeflagindication)**
 > 函数 · [AUTOSAR CanSM（CAN状态管理器）](../communication/cansm/index.md) · SWS_CANStateManager · R23-11
 
@@ -502,9 +412,6 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR CanSM（CAN状态管理器）](../communication/cansm/index.md) · SWS_CANStateManager · R23-11
 
 **[CanSM_DeInit](../communication/cansm/index.md#732-cansm_deinit)**
-> 函数 · [AUTOSAR CanSM（CAN状态管理器）](../communication/cansm/index.md) · SWS_CANStateManager · R23-11
-
-**[CANSM_E_BUS_OFF](../communication/cansm/index.md#6351-cansm_e_bus_off)**
 > 函数 · [AUTOSAR CanSM（CAN状态管理器）](../communication/cansm/index.md) · SWS_CANStateManager · R23-11
 
 **[CanSM_GetCurrentComMode](../communication/cansm/index.md#734-cansm_getcurrentcommode)**
@@ -539,9 +446,6 @@ title: "AUTOSAR API 函数清单"
 
 **[CanSM_TxTimeoutException](../communication/cansm/index.md#744-cansm_txtimeoutexception)**
 > 函数 · [AUTOSAR CanSM（CAN状态管理器）](../communication/cansm/index.md) · SWS_CANStateManager · R23-11
-
-**[CANTP](../general/error_description/index.md#53521-cantp)**
-> 函数 · [Error Description（错误描述）](../general/error_description/index.md) · EXP_ErrorDescription · R23-11
 
 **[CanTrcv_CheckWakeFlag](../communication/can_transceiver_driver/index.md#7314-cantrcv_checkwakeflag)**
 > 函数 · [AUTOSAR CAN Transceiver Driver](../communication/can_transceiver_driver/index.md) · SWS_CANTransceiverDriver · R23-11
@@ -717,9 +621,6 @@ title: "AUTOSAR API 函数清单"
 **[CBStatusDTC](../diagnostics/diagnostic_event_manager/index.md#7645-cbstatusdtc)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
-**[CentralLockingMaster](../application_interfaces/body_and_comfort/index.md#4521-centrallockingmaster)**
-> 函数 · [Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](../application_interfaces/body_and_comfort/index.md) · EXP_AIBodyAndComfort · R23-11
-
 **[CheckISRMemoryAccess](../system_services/operating_system/index.md#745-checkisrmemoryaccess)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
@@ -738,17 +639,14 @@ title: "AUTOSAR API 函数清单"
 **[ClearDTCCheckFnc](../diagnostics/diagnostic_communication_manager/index.md#789-cleardtccheckfnc)**
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
-**[ClearDtcNotification](../diagnostics/diagnostic_event_manager/index.md#7639-cleardtcnotification)**
+**[ClearDtcNotification](../diagnostics/diagnostic_event_manager/index.md#7432-cleardtcnotification)**
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+
+**[ClearEventAllowed](../diagnostics/diagnostic_event_manager/index.md#7439-cleareventallowed)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **[ClearPendingInterrupt](../system_services/operating_system/index.md#7436-clearpendinginterrupt)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
-
-**[COM](../communication/ipdum/index.md#54-com)**
-> 函数 · [AUTOSAR IpduM（I-PDU多路复用器）](../communication/ipdum/index.md) · SWS_IPDUMultiplexer · R23-11
-
-**[COM](../mode_management/basic_software_mode_manager/index.md#54-com)**
-> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **[Com_CopyRxData](../communication/com/index.md#7347-com_copyrxdata)**
 > 函数 · [AUTOSAR COM（COM模块）](../communication/com/index.md) · SWS_COM · R23-11
@@ -869,9 +767,6 @@ title: "AUTOSAR API 函数清单"
 
 **[Com_TxConfirmation](../communication/com/index.md#7344-com_txconfirmation)**
 > 函数 · [AUTOSAR COM（COM模块）](../communication/com/index.md) · SWS_COM · R23-11
-
-**[ComM](../mode_management/basic_software_mode_manager/index.md#53-comm)**
-> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **[ComM_BusSM_BusSleepMode](../system_services/comm/index.md#7452-comm_bussm_bussleepmode)**
 > 函数 · [AUTOSAR Communication Manager（通信管理器）](../system_services/comm/index.md) · SWS_COMManager · R23-11
@@ -1041,9 +936,6 @@ title: "AUTOSAR API 函数清单"
 **[ComXf_Init](../communication/com_based_transformer/index.md#733-comxf_init)**
 > 函数 · [AUTOSAR COM Based Transformer](../communication/com_based_transformer/index.md) · SWS_COMBasedTransformer · R23-11
 
-**[ControlDTCSetting](../diagnostics/diagnostic_event_manager/index.md#81-controldtcsetting)**
-> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
-
 **[ControlDTCSuppression](../diagnostics/diagnostic_event_manager/index.md#76411-controldtcsuppression)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
@@ -1053,16 +945,10 @@ title: "AUTOSAR API 函数清单"
 **[ControlIdle](../system_services/operating_system/index.md#7430-controlidle)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
-**[CoreID](../system_services/operating_system/index.md#6922-coreid)**
-> 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
-
 **[CorTst_Abort](../mcal/core_test/index.md#733-cortst_abort)**
 > 函数 · [AUTOSAR CoreTest（内核测试）](../mcal/core_test/index.md) · SWS_CoreTest · R23-11
 
 **[CorTst_DeInit](../mcal/core_test/index.md#732-cortst_deinit)**
-> 函数 · [AUTOSAR CoreTest（内核测试）](../mcal/core_test/index.md) · SWS_CoreTest · R23-11
-
-**[CORTST_E_CORE_FAILURE](../mcal/core_test/index.md#6251-cortst_e_core_failure)**
 > 函数 · [AUTOSAR CoreTest（内核测试）](../mcal/core_test/index.md) · SWS_CoreTest · R23-11
 
 **[CorTst_GetCurrentStatus](../mcal/core_test/index.md#735-cortst_getcurrentstatus)**
@@ -1214,9 +1100,6 @@ title: "AUTOSAR API 函数清单"
 
 **[Crypto_RandomSeed](../crypto/crypto_driver/index.md#73451-crypto_randomseed)**
 > 函数 · [AUTOSAR Crypto Driver（加密驱动程序）](../crypto/crypto_driver/index.md) · SWS_CryptoDriver · R23-11
-
-**[CSM](../communication/sec_oc/index.md#52-csm)**
-> 函数 · [AUTOSAR SecOC (Secure Onboard Communication)](../communication/sec_oc/index.md) · SWS_SecOc · R23-11
 
 **[Csm_AEADDecrypt](../crypto/crypto_service_manager/index.md#7352-csm_aeaddecrypt)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
@@ -1394,20 +1277,11 @@ title: "AUTOSAR API 函数清单"
 **[DataCondition](../diagnostics/j1939dcm/index.md#7731-datacondition)**
 > 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
 
-**[DataLength](../communication/mirror/index.md#64214-datalength)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
 **[DataServices](../diagnostics/diagnostic_communication_manager/index.md#782-dataservices)**
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **[DataServices_DIDRange](../diagnostics/diagnostic_communication_manager/index.md#783-dataservices_didrange)**
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
-
-**[DCM](../general/error_description/index.md#53523-dcm)**
-> 函数 · [Error Description（错误描述）](../general/error_description/index.md) · EXP_ErrorDescription · R23-11
-
-**[DCM](../mode_management/basic_software_mode_manager/index.md#511-dcm)**
-> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **[Dcm_AuthenticationStateModeSwitchInterface](../diagnostics/diagnostic_communication_manager/index.md#7977-dcm_authenticationstatemodeswitchinterface)**
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
@@ -1433,10 +1307,10 @@ title: "AUTOSAR API 函数清单"
 **[Dcm_ControlDTCSettingModeSwitchInterface](../diagnostics/diagnostic_communication_manager/index.md#79518-dcm_controldtcsettingmodeswitchinterface)**
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
-**[Dcm_CopyRxData](../diagnostics/diagnostic_communication_manager/index.md#64422-dcm_copyrxdata)**
+**[Dcm_CopyRxData](../diagnostics/diagnostic_communication_manager/index.md#742-dcm_copyrxdata)**
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
-**[Dcm_CopyTxData](../diagnostics/diagnostic_communication_manager/index.md#64431-dcm_copytxdata)**
+**[Dcm_CopyTxData](../diagnostics/diagnostic_communication_manager/index.md#744-dcm_copytxdata)**
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **[Dcm_CsmAsyncJobFinished](../diagnostics/diagnostic_communication_manager/index.md#7410-dcm_csmasyncjobfinished)**
@@ -1529,13 +1403,13 @@ title: "AUTOSAR API 函数清单"
 **[Dcm_SetProgConditions](../diagnostics/diagnostic_communication_manager/index.md#753-dcm_setprogconditions)**
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
-**[Dcm_StartOfReception](../diagnostics/diagnostic_communication_manager/index.md#64421-dcm_startofreception)**
+**[Dcm_StartOfReception](../diagnostics/diagnostic_communication_manager/index.md#741-dcm_startofreception)**
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
-**[Dcm_TpRxIndication](../diagnostics/diagnostic_communication_manager/index.md#64423-dcm_tprxindication)**
+**[Dcm_TpRxIndication](../diagnostics/diagnostic_communication_manager/index.md#743-dcm_tprxindication)**
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
-**[Dcm_TpTxConfirmation](../diagnostics/diagnostic_communication_manager/index.md#64432-dcm_tptxconfirmation)**
+**[Dcm_TpTxConfirmation](../diagnostics/diagnostic_communication_manager/index.md#745-dcm_tptxconfirmation)**
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 **[Dcm_TxConfirmation](../diagnostics/diagnostic_communication_manager/index.md#746-dcm_txconfirmation)**
@@ -1597,9 +1471,6 @@ title: "AUTOSAR API 函数清单"
 
 **[Dds_TxConfirmation](../communication/data_distribution/index.md#742-dds_txconfirmation)**
 > 函数 · [Data Distribution Service for Classic Platform（经典平台数据分发服务）](../communication/data_distribution/index.md) · SWS_DataDistributionService · R23-11
-
-**[DEM](../communication/diagnostic_log_and_trace/index.md#57-dem)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **[Dem_ClearDTC](../diagnostics/diagnostic_event_manager/index.md#7331-dem_cleardtc)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
@@ -1937,11 +1808,23 @@ title: "AUTOSAR API 函数清单"
 **[Dem_Shutdown](../diagnostics/diagnostic_event_manager/index.md#7323-dem_shutdown)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
-**[DET](../communication/diagnostic_log_and_trace/index.md#56-det)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
+**[DemGeneralTriggerOnEventUdsStatus](../diagnostics/diagnostic_event_manager/index.md#7434-demgeneraltriggeroneventudsstatus)**
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
-**[DET](../general/error_description/index.md#4123-det)**
-> 函数 · [Error Description（错误描述）](../general/error_description/index.md) · EXP_ErrorDescription · R23-11
+**[DemGeneralTriggerOnMonitorStatus](../diagnostics/diagnostic_event_manager/index.md#7433-demgeneraltriggeronmonitorstatus)**
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+
+**[DemTriggerOnComponentStatus](../diagnostics/diagnostic_event_manager/index.md#74312-demtriggeroncomponentstatus)**
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+
+**[DemTriggerOnDTCStatus](../diagnostics/diagnostic_event_manager/index.md#7436-demtriggerondtcstatus)**
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+
+**[DemTriggerOnEventUdsStatus](../diagnostics/diagnostic_event_manager/index.md#7435-demtriggeroneventudsstatus)**
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+
+**[DemTriggerOnMonitorStatus](../diagnostics/diagnostic_event_manager/index.md#7437-demtriggeronmonitorstatus)**
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **[Det_GetVersionInfo](../system_services/default_error_tracer/index.md#7136-det_getversioninfo)**
 > 函数 · [AUTOSAR Default Error Tracer（默认错误跟踪器）](../system_services/default_error_tracer/index.md) · SWS_DefaultErrorTracer · R23-11
@@ -2108,9 +1991,6 @@ title: "AUTOSAR API 函数清单"
 **[DltSwcMessageService](../communication/diagnostic_log_and_trace/index.md#7714-dltswcmessageservice)**
 > 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
-**[DM31](../diagnostics/diagnostic_event_manager/index.md#6103-dm31)**
-> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
-
 **[DoIP_ActivationLineSwitch](../communication/diagnostic_over_ip/index.md#738-doip_activationlineswitch)**
 > 函数 · [AUTOSAR DoIP（基于 IP 的诊断）](../communication/diagnostic_over_ip/index.md) · SWS_DiagnosticOverIP · R23-11
 
@@ -2168,9 +2048,6 @@ title: "AUTOSAR API 函数清单"
 **[DoIP_TriggerVehicleAnnouncement](../communication/diagnostic_over_ip/index.md#739-doip_triggervehicleannouncement)**
 > 函数 · [AUTOSAR DoIP（基于 IP 的诊断）](../communication/diagnostic_over_ip/index.md) · SWS_DiagnosticOverIP · R23-11
 
-**[DoorLock](../application_interfaces/body_and_comfort/index.md#4524-doorlock)**
-> 函数 · [Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](../application_interfaces/body_and_comfort/index.md) · EXP_AIBodyAndComfort · R23-11
-
 **[DsdInternal_ProcessPage](../diagnostics/diagnostic_communication_manager/index.md#7118-dsdinternal_processpage)**
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
@@ -2215,9 +2092,6 @@ title: "AUTOSAR API 函数清单"
 **[E2EXf_handling_P01_P02](../communication/e2e_transformer/index.md#6723-e2exf_handling_p01_p02)**
 > 函数 · [E2E Transformer (E2E转换器)](../communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
 
-**[E2EXf_handling_specific_protection](../communication/e2e_transformer/index.md#6725-e2exf_handling_specific_protection)**
-> 函数 · [E2E Transformer (E2E转换器)](../communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
-
 **[E2EXf_Init](../communication/e2e_transformer/index.md#733-e2exf_init)**
 > 函数 · [E2E Transformer (E2E转换器)](../communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
 
@@ -2247,18 +2121,6 @@ title: "AUTOSAR API 函数清单"
 
 **[E2EXf_Inv_store_request_counter](../communication/e2e_transformer/index.md#6738-e2exf_inv_store_request_counter)**
 > 函数 · [E2E Transformer (E2E转换器)](../communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
-
-**[E2EXf_MapCodeToStatus](../communication/e2e_transformer/index.md#67211-e2exf_mapcodetostatus)**
-> 函数 · [E2E Transformer (E2E转换器)](../communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
-
-**[E2EXf_set_response_counter](../communication/e2e_transformer/index.md#6729-e2exf_set_response_counter)**
-> 函数 · [E2E Transformer (E2E转换器)](../communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
-
-**[E2EXf_store_request_counter](../communication/e2e_transformer/index.md#6726-e2exf_store_request_counter)**
-> 函数 · [E2E Transformer (E2E转换器)](../communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
-
-**[ECUC](../sw_arch/arti/index.md#33-ecuc)**
-> 函数 · [ARTI（AUTOSAR 运行时接口）](../sw_arch/arti/index.md) · EXP_ARTI · R23-11
 
 **[EcuM_AbortWakeupAlarm](../mode_management/ecu_state_manager/index.md#7363-ecum_abortwakeupalarm)**
 > 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](../mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
@@ -2505,9 +2367,6 @@ title: "AUTOSAR API 函数清单"
 
 **[EthIf_EnableEgressTimeStamp](../communication/ethernet_interface/index.md#7323-ethif_enableegresstimestamp)**
 > 函数 · [AUTOSAR Ethernet Interface（以太网接口）](../communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
-
-**[EthIf_EnableEgressTimeStamp](../globaltime/eth_tsyn/index.md#81-ethif_enableegresstimestamp)**
-> 函数 · [AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](../globaltime/eth_tsyn/index.md) · SWS_TimeSyncOverEthernet · R23-11
 
 **[EthIf_EthGetSpiStatus](../communication/ethernet_interface/index.md#7385-ethif_ethgetspistatus)**
 > 函数 · [AUTOSAR Ethernet Interface（以太网接口）](../communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
@@ -2899,9 +2758,6 @@ title: "AUTOSAR API 函数清单"
 **[EthIf_WritePortMirrorConfiguration](../communication/ethernet_interface/index.md#7370-ethif_writeportmirrorconfiguration)**
 > 函数 · [AUTOSAR Ethernet Interface（以太网接口）](../communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
 
-**[EthSM](../mode_management/basic_software_mode_manager/index.md#510-ethsm)**
-> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
-
 **[EthSwt_BackgroundTask](../communication/ethernet_switch_driver/index.md#752-ethswt_backgroundtask)**
 > 函数 · [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](../communication/ethernet_switch_driver/index.md) · SWS_EthernetSwitchDriver · R23-11
 
@@ -3280,6 +3136,9 @@ title: "AUTOSAR API 函数清单"
 **[EventAvailable](../diagnostics/diagnostic_event_manager/index.md#76318-eventavailable)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
+**[EventDataChanged](../diagnostics/diagnostic_event_manager/index.md#7438-eventdatachanged)**
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+
 **[EventFailureCycleCounterThreshold](../diagnostics/diagnostic_event_manager/index.md#76319-eventfailurecyclecounterthreshold)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
@@ -3291,18 +3150,6 @@ title: "AUTOSAR API 函数清单"
 
 **[EvMemOverflowIndication](../diagnostics/diagnostic_event_manager/index.md#76320-evmemoverflowindication)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
-
-**[EXAMPLE](../application_interfaces/user_guide/index.md#413-example)**
-> 函数 · [Application Interfaces User Guide（应用接口用户指南）](../application_interfaces/user_guide/index.md) · EXP_AIUserGuide · R23-11
-
-**[ExteriorLightActuator](../application_interfaces/body_and_comfort/index.md#4613-exteriorlightactuator)**
-> 函数 · [Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](../application_interfaces/body_and_comfort/index.md) · EXP_AIBodyAndComfort · R23-11
-
-**[ExteriorLightAdapter](../application_interfaces/body_and_comfort/index.md#4612-exteriorlightadapter)**
-> 函数 · [Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](../application_interfaces/body_and_comfort/index.md) · EXP_AIBodyAndComfort · R23-11
-
-**[ExteriorLightManager](../application_interfaces/body_and_comfort/index.md#4611-exteriorlightmanager)**
-> 函数 · [Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](../application_interfaces/body_and_comfort/index.md) · EXP_AIBodyAndComfort · R23-11
 
 ## F
 
@@ -3327,8 +3174,14 @@ title: "AUTOSAR API 函数清单"
 **[Fee_InvalidateBlock](../memory/flash_eeprom_emulation/index.md#518-fee_invalidateblock)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
+**[Fee_JobEndNotification](../memory/flash_driver/index.md#7631-fee_jobendnotification)**
+> 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+
 **[Fee_JobEndNotification](../memory/flash_eeprom_emulation/index.md#521-fee_jobendnotification)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
+
+**[Fee_JobErrorNotification](../memory/flash_driver/index.md#7632-fee_joberrornotification)**
+> 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
 **[Fee_MainFunction](../memory/flash_eeprom_emulation/index.md#521-fee_mainfunction)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
@@ -3350,9 +3203,6 @@ title: "AUTOSAR API 函数清单"
 
 **[FiM_DemTriggerOnComponentStatus](../system_services/function_inhibition_manager/index.md#7332-fim_demtriggeroncomponentstatus)**
 > 函数 · [AUTOSAR FiM（功能禁止管理器）](../system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11
-
-**[FiM_DemTriggerOnEventStatus](../diagnostics/diagnostic_event_manager/index.md#89-fim_demtriggeroneventstatus)**
-> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **[FiM_DemTriggerOnMonitorStatus](../system_services/function_inhibition_manager/index.md#7331-fim_demtriggeronmonitorstatus)**
 > 函数 · [AUTOSAR FiM（功能禁止管理器）](../system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11
@@ -3507,21 +3357,6 @@ title: "AUTOSAR API 函数清单"
 **[Fr_TransmitTxLPdu](../communication/flexray_driver/index.md#7411-fr_transmittxlpdu)**
 > 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](../communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
-**[FrameID](../communication/mirror/index.md#64228-frameid)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
-**[FrameIDAvailable](../communication/mirror/index.md#64223-frameidavailable)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
-**[FrameIDCAN](../communication/mirror/index.md#frameidcan)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
-**[FrameIDFlexRay](../communication/mirror/index.md#frameidflexray)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
-**[FrameIDLIN](../communication/mirror/index.md#frameidlin)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
 **[FrArTp_CancelReceive](../communication/flexray_ar_transport_layer/index.md#8333-frartp_cancelreceive)**
 > 函数 · [AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
@@ -3554,12 +3389,6 @@ title: "AUTOSAR API 函数清单"
 
 **[FrArTp_TxConfirmation](../communication/flexray_ar_transport_layer/index.md#843-frartp_txconfirmation)**
 > 函数 · [AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
-
-**[FREE_OP_A](../communication/flexray_interface/index.md#6657-free_op_a)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
-
-**[FREE_OP_B](../communication/flexray_interface/index.md#6658-free_op_b)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FreshnessManagement](../communication/sec_oc/index.md#7832-freshnessmanagement)**
 > 函数 · [AUTOSAR SecOC (Secure Onboard Communication)](../communication/sec_oc/index.md) · SWS_SecOc · R23-11
@@ -3771,16 +3600,7 @@ title: "AUTOSAR API 函数清单"
 **[FrNm_TxConfirmation](../communication/flexray_network_management/index.md#743-frnm_txconfirmation)**
 > 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
-**[FrSM](../mode_management/basic_software_mode_manager/index.md#59-frsm)**
-> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
-
 **[FrSM_AllSlots](../communication/flexray_state_manager/index.md#735-frsm_allslots)**
-> 函数 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
-
-**[FRSM_E_CLUSTER_STARTUP](../communication/flexray_state_manager/index.md#6541-frsm_e_cluster_startup)**
-> 函数 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
-
-**[FRSM_E_CLUSTER_SYNC_LOSS](../communication/flexray_state_manager/index.md#6542-frsm_e_cluster_sync_loss)**
 > 函数 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
 
 **[FrSM_GetCurrentComMode](../communication/flexray_state_manager/index.md#733-frsm_getcurrentcommode)**
@@ -3829,21 +3649,6 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
 
 **[FrTp_TxConfirmation](../communication/flexray_iso_transport_layer/index.md#743-frtp_txconfirmation)**
-> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
-
-**[FrTpChannel](../communication/flexray_iso_transport_layer/index.md#6332-frtpchannel)**
-> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
-
-**[FrTpConnectionControl](../communication/flexray_iso_transport_layer/index.md#6323-frtpconnectioncontrol)**
-> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
-
-**[FrTpConnectionControlRuntime](../communication/flexray_iso_transport_layer/index.md#6333-frtpconnectioncontrolruntime)**
-> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
-
-**[FrTpRuntime](../communication/flexray_iso_transport_layer/index.md#6331-frtpruntime)**
-> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
-
-**[FrTpTxPduPool](../communication/flexray_iso_transport_layer/index.md#6322-frtptxpdupool)**
 > 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
 
 **[FrTrcv_CheckWakeupByTransceiver](../communication/flexray_transceiver_driver/index.md#737-frtrcv_checkwakeupbytransceiver)**
@@ -3947,32 +3752,20 @@ title: "AUTOSAR API 函数清单"
 **[GetDataOfPID21](../diagnostics/diagnostic_event_manager/index.md#76326-getdataofpid21)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
-**[GetDefaultLogLevel](../communication/diagnostic_log_and_trace/index.md#61104-getdefaultloglevel)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
-
-**[GetDefaultTraceStatus](../communication/diagnostic_log_and_trace/index.md#611010-getdefaulttracestatus)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
-
 **[GetElapsedValue](../system_services/operating_system/index.md#7419-getelapsedvalue)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
+
+**[GetFaultDetectionCounter](../diagnostics/diagnostic_event_manager/index.md#74311-getfaultdetectioncounter)**
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **[GetISRID](../system_services/operating_system/index.md#743-getisrid)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
-**[GetLogChannelNames](../communication/diagnostic_log_and_trace/index.md#611011-getlogchannelnames)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
-
-**[GetLogChannelThreshold](../communication/diagnostic_log_and_trace/index.md#611015-getlogchannelthreshold)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
-
-**[GetLogInfo](../communication/diagnostic_log_and_trace/index.md#61103-getloginfo)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
-
 **[GetNumberOfActivatedCores](../system_services/operating_system/index.md#7423-getnumberofactivatedcores)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
-**[GetOBDFaultInformation](../diagnostics/diagnostic_event_manager/index.md#87-getobdfaultinformation)**
-> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+**[GetRxFreshnessFct](../globaltime/stbm/index.md#7638-getrxfreshnessfct)**
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](../globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **[GetScheduleTableStatus](../system_services/operating_system/index.md#7416-getscheduletablestatus)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
@@ -3980,11 +3773,11 @@ title: "AUTOSAR API 函数清单"
 **[GetSpinlock](../system_services/operating_system/index.md#7426-getspinlock)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
-**[GetTaskID](../system_services/operating_system/index.md#698-gettaskid)**
-> 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
+**[GetTxFreshnessFct](../globaltime/stbm/index.md#7637-gettxfreshnessfct)**
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](../globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
-**[GetTraceStatus](../communication/diagnostic_log_and_trace/index.md#611012-gettracestatus)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
+**[GetTxFreshnessTruncDataFct](../globaltime/stbm/index.md#7636-gettxfreshnesstruncdatafct)**
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](../globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **[GlobalTime_Master](../globaltime/stbm/index.md#7711-globaltime_master)**
 > 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](../globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
@@ -4000,12 +3793,6 @@ title: "AUTOSAR API 函数清单"
 
 **[GlobalTime_TimeEvent](../globaltime/stbm/index.md#7721-globaltime_timeevent)**
 > 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](../globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
-
-**[GPT](../communication/diagnostic_log_and_trace/index.md#54-gpt)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
-
-**[GPT](../system_services/time_service/index.md#51-gpt)**
-> 函数 · [AUTOSAR Time Service（时间服务）](../system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **[Gpt_CheckWakeup](../mcal/gpt_driver/index.md#7313-gpt_checkwakeup)**
 > 函数 · [AUTOSAR GPT Driver（通用定时器驱动）](../mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
@@ -4048,14 +3835,6 @@ title: "AUTOSAR API 函数清单"
 
 **[Gpt_StopTimer](../mcal/gpt_driver/index.md#737-gpt_stoptimer)**
 > 函数 · [AUTOSAR GPT Driver（通用定时器驱动）](../mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
-
-## H
-
-**[HeaderTimestamp](../communication/mirror/index.md#64213-headertimestamp)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
-**[HMI](../application_interfaces/body_and_comfort/index.md#4522-hmi)**
-> 函数 · [Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](../application_interfaces/body_and_comfort/index.md) · EXP_AIBodyAndComfort · R23-11
 
 ## I
 
@@ -4137,9 +3916,6 @@ title: "AUTOSAR API 函数清单"
 **[Icu_StopTimestamp](../io/icu_driver/index.md#7312-icu_stoptimestamp)**
 > 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](../io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
-**[IF](../communication/large_data_com/index.md#641-if)**
-> 函数 · [AUTOSAR Large Data COM（大数据 COM）](../communication/large_data_com/index.md) · SWS_LargeDataCOM · R23-11
-
 **[IncrementCounter](../system_services/operating_system/index.md#7417-incrementcounter)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
@@ -4152,11 +3928,11 @@ title: "AUTOSAR API 函数清单"
 **[InfoTypesServices](../diagnostics/diagnostic_communication_manager/index.md#784-infotypesservices)**
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
+**[InitMonitorForEvent](../diagnostics/diagnostic_event_manager/index.md#74311-initmonitorforevent)**
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+
 **[InjectionCallback](../communication/diagnostic_log_and_trace/index.md#7712-injectioncallback)**
 > 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
-
-**[InteriorLightManager](../application_interfaces/body_and_comfort/index.md#431-interiorlightmanager)**
-> 函数 · [Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](../application_interfaces/body_and_comfort/index.md) · EXP_AIBodyAndComfort · R23-11
 
 **[IOC](../system_services/operating_system/index.md#75-ioc)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
@@ -4183,9 +3959,6 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 ## J
-
-**[J1939Dcm](../mode_management/basic_software_mode_manager/index.md#512-j1939dcm)**
-> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **[J1939Dcm_CalibrationInformation](../diagnostics/j1939dcm/index.md#7721-j1939dcm_calibrationinformation)**
 > 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
@@ -4235,12 +4008,6 @@ title: "AUTOSAR API 函数清单"
 **[J1939Dcm_TxConfirmation](../diagnostics/j1939dcm/index.md#743-j1939dcm_txconfirmation)**
 > 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
 
-**[J1939Nm](../mode_management/basic_software_mode_manager/index.md#513-j1939nm)**
-> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
-
-**[J1939Rm](../mode_management/basic_software_mode_manager/index.md#514-j1939rm)**
-> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
-
 ## K
 
 **[KeyM_CertElementGet](../crypto/key_manager/index.md#7337-keym_certelementget)**
@@ -4264,6 +4031,18 @@ title: "AUTOSAR API 函数清单"
 **[KeyM_Certificate](../crypto/key_manager/index.md#7831-keym_certificate)**
 > 函数 · [AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
+**[KeyM_CertificateVerifyCallbackNotification](../crypto/key_manager/index.md#77311-keym_certificateverifycallbacknotification)**
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager · R23-11
+
+**[KeyM_CryptoKeyFinalizeCallbackNotification](../crypto/key_manager/index.md#7738-keym_cryptokeyfinalizecallbacknotification)**
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager · R23-11
+
+**[KeyM_CryptoKeyUpdateCallbackNotification](../crypto/key_manager/index.md#7737-keym_cryptokeyupdatecallbacknotification)**
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager · R23-11
+
+**[KeyM_CryptoKeyVerifyCallbackNotification](../crypto/key_manager/index.md#7739-keym_cryptokeyverifycallbacknotification)**
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager · R23-11
+
 **[KeyM_Deinit](../crypto/key_manager/index.md#7312-keym_deinit)**
 > 函数 · [AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
@@ -4279,6 +4058,24 @@ title: "AUTOSAR API 函数清单"
 **[KeyM_Init](../crypto/key_manager/index.md#7311-keym_init)**
 > 函数 · [AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
+**[KeyM_KH_Finalize](../crypto/key_manager/index.md#7734-keym_kh_finalize)**
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager · R23-11
+
+**[KeyM_KH_Prepare](../crypto/key_manager/index.md#7732-keym_kh_prepare)**
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager · R23-11
+
+**[KeyM_KH_ServiceCertificate](../crypto/key_manager/index.md#7736-keym_kh_servicecertificate)**
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager · R23-11
+
+**[KeyM_KH_Start](../crypto/key_manager/index.md#7731-keym_kh_start)**
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager · R23-11
+
+**[KeyM_KH_Update](../crypto/key_manager/index.md#7733-keym_kh_update)**
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager · R23-11
+
+**[KeyM_KH_Verify](../crypto/key_manager/index.md#7735-keym_kh_verify)**
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager · R23-11
+
 **[KeyM_MainBackgroudFunction](../crypto/key_manager/index.md#762-keym_mainbackgroudfunction)**
 > 函数 · [AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
@@ -4289,6 +4086,9 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **[KeyM_ServiceCertificate](../crypto/key_manager/index.md#7331-keym_servicecertificate)**
+> 函数 · [AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager · R23-11
+
+**[KeyM_ServiceCertificateCallbackNotification](../crypto/key_manager/index.md#77310-keym_servicecertificatecallbacknotification)**
 > 函数 · [AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager · R23-11
 
 **[KeyM_SetCertificate](../crypto/key_manager/index.md#7332-keym_setcertificate)**
@@ -4371,6 +4171,30 @@ title: "AUTOSAR API 函数清单"
 **[LdCom_TxConfirmation](../communication/large_data_com/index.md#747-ldcom_txconfirmation)**
 > 函数 · [AUTOSAR Large Data COM（大数据 COM）](../communication/large_data_com/index.md) · SWS_LargeDataCOM · R23-11
 
+**[LdComCbkCopyRxData](../communication/large_data_com/index.md#7634-ldcomcbkcopyrxdata)**
+> 函数 · [AUTOSAR Large Data COM（大数据 COM）](../communication/large_data_com/index.md) · SWS_LargeDataCOM · R23-11
+
+**[LdComCbkCopyTxData](../communication/large_data_com/index.md#7631-ldcomcbkcopytxdata)**
+> 函数 · [AUTOSAR Large Data COM（大数据 COM）](../communication/large_data_com/index.md) · SWS_LargeDataCOM · R23-11
+
+**[LdComCbkRxIndication](../communication/large_data_com/index.md#7636-ldcomcbkrxindication)**
+> 函数 · [AUTOSAR Large Data COM（大数据 COM）](../communication/large_data_com/index.md) · SWS_LargeDataCOM · R23-11
+
+**[LdComCbkStartOfReception](../communication/large_data_com/index.md#7633-ldcomcbkstartofreception)**
+> 函数 · [AUTOSAR Large Data COM（大数据 COM）](../communication/large_data_com/index.md) · SWS_LargeDataCOM · R23-11
+
+**[LdComCbkTpRxIndication](../communication/large_data_com/index.md#7635-ldcomcbktprxindication)**
+> 函数 · [AUTOSAR Large Data COM（大数据 COM）](../communication/large_data_com/index.md) · SWS_LargeDataCOM · R23-11
+
+**[LdComCbkTpTxConfirmation](../communication/large_data_com/index.md#7632-ldcomcbktptxconfirmation)**
+> 函数 · [AUTOSAR Large Data COM（大数据 COM）](../communication/large_data_com/index.md) · SWS_LargeDataCOM · R23-11
+
+**[LdComCbkTriggerTransmit](../communication/large_data_com/index.md#7637-ldcomcbktriggertransmit)**
+> 函数 · [AUTOSAR Large Data COM（大数据 COM）](../communication/large_data_com/index.md) · SWS_LargeDataCOM · R23-11
+
+**[LdComCbkTxConfirmation](../communication/large_data_com/index.md#7638-ldcomcbktxconfirmation)**
+> 函数 · [AUTOSAR Large Data COM（大数据 COM）](../communication/large_data_com/index.md) · SWS_LargeDataCOM · R23-11
+
 **[Lin_CheckWakeup](../communication/lin_driver/index.md#712-lin_checkwakeup)**
 > 函数 · [AUTOSAR LIN Driver](../communication/lin_driver/index.md) · SWS_LINDriver · R23-11
 
@@ -4399,9 +4223,6 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR LIN Driver](../communication/lin_driver/index.md) · SWS_LINDriver · R23-11
 
 **[LinIf_CheckWakeup](../communication/lin_interface/index.md#7320-linif_checkwakeup)**
-> 函数 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11
-
-**[LINIF_E_SCHEDULE_TABLE_SWITCH_REQUEST_NOT_ACCEPTED](../communication/lin_interface/index.md#61156-linif_e_schedule_table_switch_request_not_accepted)**
 > 函数 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11
 
 **[LinIf_EnableBusMirroring](../communication/lin_interface/index.md#7321-linif_enablebusmirroring)**
@@ -4464,28 +4285,7 @@ title: "AUTOSAR API 函数清单"
 **[LinIf_WakeupConfirmation](../communication/lin_interface/index.md#741-linif_wakeupconfirmation)**
 > 函数 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11
 
-**[LinSM](../mode_management/basic_software_mode_manager/index.md#57-linsm)**
-> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
-
-**[LinTP](../mode_management/basic_software_mode_manager/index.md#58-lintp)**
-> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
-
 **[LinTp_ChangeParameter](../communication/lin_interface/index.md#7319-lintp_changeparameter)**
-> 函数 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11
-
-**[LINTP_E_DROPPED_CONSECUTIVE_FRAMES_DETECTED](../communication/lin_interface/index.md#61155-lintp_e_dropped_consecutive_frames_detected)**
-> 函数 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11
-
-**[LINTP_E_LINTPNAS_TIMEOUT_OCCURRED](../communication/lin_interface/index.md#61151-lintp_e_lintpnas_timeout_occurred)**
-> 函数 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11
-
-**[LINTP_E_LINTPNCR_TIMEOUT_OCCURRED](../communication/lin_interface/index.md#61153-lintp_e_lintpncr_timeout_occurred)**
-> 函数 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11
-
-**[LINTP_E_LINTPNCS_TIMEOUT_OCCURRED](../communication/lin_interface/index.md#61152-lintp_e_lintpncs_timeout_occurred)**
-> 函数 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11
-
-**[LINTP_E_SWAPPED_CONSECUTIVE_FRAMES_RECEIVED](../communication/lin_interface/index.md#61154-lintp_e_swapped_consecutive_frames_received)**
 > 函数 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11
 
 **[LinTp_GetVersionInfo](../communication/lin_interface/index.md#7317-lintp_getversioninfo)**
@@ -4499,9 +4299,6 @@ title: "AUTOSAR API 函数清单"
 
 **[LinTp_Transmit](../communication/lin_interface/index.md#7316-lintp_transmit)**
 > 函数 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11
-
-**[LKA](../application_interfaces/adas_vmc/index.md#433-lka)**
-> 函数 · [Explanation of Application Interface of AD/ADAS Vehicle Motion Control（AD/ADAS 车辆运动控制应用接口说明）](../application_interfaces/adas_vmc/index.md) · EXP_AIADASAndVMC · R23-11
 
 **[LogTraceSessionControl](../communication/diagnostic_log_and_trace/index.md#7713-logtracesessioncontrol)**
 > 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
@@ -4517,16 +4314,7 @@ title: "AUTOSAR API 函数清单"
 
 ## M
 
-**[MainFunction](../communication/wlan_transceiver_driver/index.md#615-mainfunction)**
-> 函数 · [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](../communication/wlan_transceiver_driver/index.md) · SWS_WirelessEthernetTransceiverDriver · R23-11
-
-**[MCU](../communication/lin_driver/index.md#51-mcu)**
-> 函数 · [AUTOSAR LIN Driver](../communication/lin_driver/index.md) · SWS_LINDriver · R23-11
-
 **[Mcu_DistributePllClock](../mcal/mcu_driver/index.md#734-mcu_distributepllclock)**
-> 函数 · [AUTOSAR MCU Driver（微控制器单元驱动）](../mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
-
-**[MCU_E_CLOCK_FAILURE](../mcal/mcu_driver/index.md#6251-mcu_e_clock_failure)**
 > 函数 · [AUTOSAR MCU Driver（微控制器单元驱动）](../mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
 **[Mcu_GetPllStatus](../mcal/mcu_driver/index.md#735-mcu_getpllstatus)**
@@ -4712,43 +4500,19 @@ title: "AUTOSAR API 函数清单"
 **[ModeCondition](../diagnostics/j1939dcm/index.md#7743-modecondition)**
 > 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
 
-**[MultiCore](../mode_management/ecu_state_manager/index.md#69-multicore)**
-> 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](../mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
-
 ## N
 
-**[NetworkID](../communication/mirror/index.md#64226-networkid)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
-**[NetworkState](../communication/mirror/index.md#64227-networkstate)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
-**[NetworkStateAvailable](../communication/mirror/index.md#64222-networkstateavailable)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
-**[NetworkStateCAN](../communication/mirror/index.md#networkstatecan)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
-**[NetworkStateFlexRay](../communication/mirror/index.md#networkstateflexray)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
-**[NetworkStateLIN](../communication/mirror/index.md#networkstatelin)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
-**[NetworkType](../communication/mirror/index.md#64225-networktype)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
+**[NetworkStartIndication](../communication/flexray_network_management/index.md#7631-networkstartindication)**
+> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[NextScheduleTable](../system_services/operating_system/index.md#7412-nextscheduletable)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
+**[NmCarWakeUpCallout](../communication/nm/index.md#7631-nmcarwakeupcallout)**
+> 函数 · [AUTOSAR Nm（网络管理接口）](../communication/nm/index.md) · SWS_NetworkManagementInterface · R23-11
+
 **[NULL_PTR](../general/standard_types/index.md#725-null_ptr)**
 > 函数 · [AUTOSAR Standard Types（标准类型）](../general/standard_types/index.md) · SWS_StandardTypes · R23-11
-
-**[NvM](../communication/diagnostic_log_and_trace/index.md#53-nvm)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
-
-**[NvM](../mode_management/basic_software_mode_manager/index.md#516-nvm)**
-> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **[NvM_Admin](../memory/nvram_manager/index.md#7711-nvm_admin)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
@@ -4757,24 +4521,6 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **[NvM_CancelWriteAll](../memory/nvram_manager/index.md#7333-nvm_cancelwriteall)**
-> 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
-
-**[NVM_E_HARDWARE](../memory/nvram_manager/index.md#6341-nvm_e_hardware)**
-> 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
-
-**[NVM_E_INTEGRITY_FAILED](../memory/nvram_manager/index.md#6351-nvm_e_integrity_failed)**
-> 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
-
-**[NVM_E_LOSS_OF_REDUNDANCY](../memory/nvram_manager/index.md#6355-nvm_e_loss_of_redundancy)**
-> 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
-
-**[NVM_E_REQ_FAILED](../memory/nvram_manager/index.md#6352-nvm_e_req_failed)**
-> 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
-
-**[NVM_E_VERIFY_FAILED](../memory/nvram_manager/index.md#6354-nvm_e_verify_failed)**
-> 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
-
-**[NVM_E_WRONG_BLOCK_ID](../memory/nvram_manager/index.md#6353-nvm_e_wrong_block_id)**
 > 函数 · [AUTOSAR NVM（非易失性存储管理器）](../memory/nvram_manager/index.md) · SWS_NVRAMManager · R23-11
 
 **[NvM_EraseNvBlock](../memory/nvram_manager/index.md#7324-nvm_erasenvblock)**
@@ -4857,9 +4603,6 @@ title: "AUTOSAR API 函数清单"
 
 ## O
 
-**[OBDonUDS](../diagnostics/diagnostic_event_manager/index.md#697-obdonuds)**
-> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
-
 **[Ocu_DeInit](../io/ocu_driver/index.md#732-ocu_deinit)**
 > 函数 · [AUTOSAR OCU Driver（输出比较单元驱动）](../io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
@@ -4896,26 +4639,17 @@ title: "AUTOSAR API 函数清单"
 **[Ocu_StopChannel](../io/ocu_driver/index.md#734-ocu_stopchannel)**
 > 函数 · [AUTOSAR OCU Driver（输出比较单元驱动）](../io/ocu_driver/index.md) · SWS_OCUDriver · R23-11
 
+**[OffsetTimeRecordBlockCallback](../globaltime/stbm/index.md#7632-offsettimerecordblockcallback)**
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](../globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
+
 **[OpCycle](../diagnostics/diagnostic_event_manager/index.md#76429-opcycle)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 **[OperationCycle](../diagnostics/diagnostic_event_manager/index.md#76331-operationcycle)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
-**[OS](../mode_management/basic_software_mode_manager/index.md#517-os)**
-> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
-
-**[OS](../rte/index.md#6222-os)**
-> 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
-
-**[OS](../sw_arch/arti/index.md#3-os)**
-> 函数 · [ARTI（AUTOSAR 运行时接口）](../sw_arch/arti/index.md) · EXP_ARTI · R23-11
-
 **[Os_Service](../system_services/operating_system/index.md#7821-os_service)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
-
-**[OSRestartTask](../general/application_level_error_handling/index.md#7314-osrestarttask)**
-> 函数 · [Application Level Error Handling（应用层错误处理）](../general/application_level_error_handling/index.md) · EXP_ApplicationLevelErrorHandling · R23-11
 
 **[OverflowIndPrimaryMemory](../diagnostics/diagnostic_event_manager/index.md#76430-overflowindprimarymemory)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
@@ -4924,21 +4658,6 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 ## P
-
-**[PayloadAvailable](../communication/mirror/index.md#64224-payloadavailable)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
-**[PayloadLength](../communication/mirror/index.md#64229-payloadlength)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
-**[PduR](../communication/sec_oc/index.md#51-pdur)**
-> 函数 · [AUTOSAR SecOC (Secure Onboard Communication)](../communication/sec_oc/index.md) · SWS_SecOc · R23-11
-
-**[PDUR](../general/error_description/index.md#53522-pdur)**
-> 函数 · [Error Description（错误描述）](../general/error_description/index.md) · EXP_ErrorDescription · R23-11
-
-**[PduR](../mode_management/basic_software_mode_manager/index.md#55-pdur)**
-> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
 
 **[PduR_DisableRouting](../communication/pdu_router/index.md#7315-pdur_disablerouting)**
 > 函数 · [AUTOSAR PduR (PDU Router)](../communication/pdu_router/index.md) · SWS_PduR · R23-11
@@ -4954,6 +4673,9 @@ title: "AUTOSAR API 函数清单"
 
 **[PduR_Init](../communication/pdu_router/index.md#7311-pdur_init)**
 > 函数 · [AUTOSAR PduR (PDU Router)](../communication/pdu_router/index.md) · SWS_PduR · R23-11
+
+**[PduRxIndication](../communication/flexray_network_management/index.md#7632-pdurxindication)**
+> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[Port_GetVersionInfo](../io/port_driver/index.md#734-port_getversioninfo)**
 > 函数 · [AUTOSAR Port Driver（端口驱动）](../io/port_driver/index.md) · SWS_PortDriver · R23-11
@@ -4976,23 +4698,8 @@ title: "AUTOSAR API 函数清单"
 **[PowerTakeOffStatus](../diagnostics/diagnostic_event_manager/index.md#76432-powertakeoffstatus)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
-**[PREPARE_LPDU](../communication/flexray_interface/index.md#6656-prepare_lpdu)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
-
-**[ProfileManager](../application_interfaces/body_and_comfort/index.md#436-profilemanager)**
-> 函数 · [Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](../application_interfaces/body_and_comfort/index.md) · EXP_AIBodyAndComfort · R23-11
-
 **[ProtectionHook](../system_services/operating_system/index.md#771-protectionhook)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
-
-**[ProtocolVersion](../communication/mirror/index.md#64211-protocolversion)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
-**[ProvideRxIndication](../communication/flexray_interface/index.md#6654-providerxindication)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
-
-**[ProvideTxConfirmation](../communication/flexray_interface/index.md#6652-providetxconfirmation)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[Pwm_DeInit](../io/pwm_driver/index.md#732-pwm_deinit)**
 > 函数 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](../io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
@@ -5038,44 +4745,26 @@ title: "AUTOSAR API 函数清单"
 
 ## R
 
-**[ReceiveAndIndicate](../communication/flexray_interface/index.md#6655-receiveandindicate)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+**[ReadDataElement](../diagnostics/diagnostic_event_manager/index.md#74310-readdataelement)**
+> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
-**[ReceiveAndStore](../communication/flexray_interface/index.md#6653-receiveandstore)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+**[ReceiverPullCB](../system_services/operating_system/index.md#7621-receiverpullcb)**
+> 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **[ReleaseSpinlock](../system_services/operating_system/index.md#7427-releasespinlock)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
-**[ReportDTCByStatusMask](../diagnostics/diagnostic_event_manager/index.md#88-reportdtcbystatusmask)**
-> 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+**[RemoteSleepCancellation](../communication/flexray_network_management/index.md#7633-remotesleepcancellation)**
+> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+
+**[RemoteSleepIndication](../communication/flexray_network_management/index.md#7634-remotesleepindication)**
+> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[RequestControlServices](../diagnostics/diagnostic_communication_manager/index.md#786-requestcontrolservices)**
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
-**[ResetToFactoryDefault](../communication/diagnostic_log_and_trace/index.md#61106-resettofactorydefault)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
-
 **[RoutineServices](../diagnostics/diagnostic_communication_manager/index.md#785-routineservices)**
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
-
-**[RTE](../communication/diagnostic_log_and_trace/index.md#51-rte)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
-
-**[RTE](../communication/large_data_com/index.md#511-rte)**
-> 函数 · [AUTOSAR Large Data COM（大数据 COM）](../communication/large_data_com/index.md) · SWS_LargeDataCOM · R23-11
-
-**[RTE](../communication/sec_oc/index.md#53-rte)**
-> 函数 · [AUTOSAR SecOC (Secure Onboard Communication)](../communication/sec_oc/index.md) · SWS_SecOc · R23-11
-
-**[RTE](../general/error_description/index.md#4125-rte)**
-> 函数 · [Error Description（错误描述）](../general/error_description/index.md) · EXP_ErrorDescription · R23-11
-
-**[RTE](../mode_management/basic_software_mode_manager/index.md#51-rte)**
-> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
-
-**[RTE](../sw_arch/arti/index.md#4-rte)**
-> 函数 · [ARTI（AUTOSAR 运行时接口）](../sw_arch/arti/index.md) · EXP_ARTI · R23-11
 
 **[Rte_Call](../rte/index.md#71613-rte_call)**
 > 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
@@ -5215,12 +4904,6 @@ title: "AUTOSAR API 函数清单"
 **[Rte_Write](../rte/index.md#7164-rte_write)**
 > 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
 
-**[RX_ERROR](../communication/flexray_iso_transport_layer/index.md#6514-rx_error)**
-> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
-
-**[RX_PDU_AVAILABLE](../communication/flexray_iso_transport_layer/index.md#6513-rx_pdu_available)**
-> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
-
 ## S
 
 **[SchM_ActMainFunction](../rte/index.md#72512-schm_actmainfunction)**
@@ -5277,9 +4960,6 @@ title: "AUTOSAR API 函数清单"
 **[SchM_Trigger](../rte/index.md#72511-schm_trigger)**
 > 函数 · [AUTOSAR RTE（运行时环境）](../rte/index.md) · SWS_RTE · R23-11
 
-**[Sd](../mode_management/basic_software_mode_manager/index.md#518-sd)**
-> 函数 · [AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager · R23-11
-
 **[Sd_AclPolicyCheck](../communication/service_discovery/index.md#7311-sd_aclpolicycheck)**
 > 函数 · [AUTOSAR SD（服务发现）](../communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
@@ -5290,15 +4970,6 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR SD（服务发现）](../communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **[Sd_ConsumedEventGroupSetState](../communication/service_discovery/index.md#735-sd_consumedeventgroupsetstate)**
-> 函数 · [AUTOSAR SD（服务发现）](../communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
-
-**[SD_E_MALFORMED_MSG](../communication/service_discovery/index.md#61152-sd_e_malformed_msg)**
-> 函数 · [AUTOSAR SD（服务发现）](../communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
-
-**[SD_E_OUT_OF_RES](../communication/service_discovery/index.md#61151-sd_e_out_of_res)**
-> 函数 · [AUTOSAR SD（服务发现）](../communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
-
-**[SD_E_SUBSCR_NACK_RECV](../communication/service_discovery/index.md#61153-sd_e_subscr_nack_recv)**
 > 函数 · [AUTOSAR SD（服务发现）](../communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
 
 **[Sd_GetVersionInfo](../communication/service_discovery/index.md#732-sd_getversioninfo)**
@@ -5327,18 +4998,6 @@ title: "AUTOSAR API 函数清单"
 
 **[Sd_SoConModeChg](../communication/service_discovery/index.md#737-sd_soconmodechg)**
 > 函数 · [AUTOSAR SD（服务发现）](../communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
-
-**[SeatAdjustManager](../application_interfaces/body_and_comfort/index.md#4428-seatadjustmanager)**
-> 函数 · [Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](../application_interfaces/body_and_comfort/index.md) · EXP_AIBodyAndComfort · R23-11
-
-**[SeatAxisActuator](../application_interfaces/body_and_comfort/index.md#4426-seataxisactuator)**
-> 函数 · [Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](../application_interfaces/body_and_comfort/index.md) · EXP_AIBodyAndComfort · R23-11
-
-**[SeatAxisActuatorAdapter](../application_interfaces/body_and_comfort/index.md#4425-seataxisactuatoradapter)**
-> 函数 · [Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](../application_interfaces/body_and_comfort/index.md) · EXP_AIBodyAndComfort · R23-11
-
-**[SeatAxisMemoryAdapter](../application_interfaces/body_and_comfort/index.md#4427-seataxismemoryadapter)**
-> 函数 · [Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](../application_interfaces/body_and_comfort/index.md) · EXP_AIBodyAndComfort · R23-11
 
 **[SecOC_CopyRxData](../communication/sec_oc/index.md#746-secoc_copyrxdata)**
 > 函数 · [AUTOSAR SecOC (Secure Onboard Communication)](../communication/sec_oc/index.md) · SWS_SecOc · R23-11
@@ -5409,6 +5068,12 @@ title: "AUTOSAR API 函数清单"
 **[SecOC_TxConfirmation](../communication/sec_oc/index.md#743-secoc_txconfirmation)**
 > 函数 · [AUTOSAR SecOC (Secure Onboard Communication)](../communication/sec_oc/index.md) · SWS_SecOc · R23-11
 
+**[SecOC_VerificationStatusCallout](../communication/sec_oc/index.md#7731-secoc_verificationstatuscallout)**
+> 函数 · [AUTOSAR SecOC (Secure Onboard Communication)](../communication/sec_oc/index.md) · SWS_SecOc · R23-11
+
+**[SecOC_VerifyStatus](../communication/sec_oc/index.md#7732-secoc_verifystatus)**
+> 函数 · [AUTOSAR SecOC (Secure Onboard Communication)](../communication/sec_oc/index.md) · SWS_SecOc · R23-11
+
 **[SecOC_VerifyStatusOverride](../communication/sec_oc/index.md#739-secoc_verifystatusoverride)**
 > 函数 · [AUTOSAR SecOC (Secure Onboard Communication)](../communication/sec_oc/index.md) · SWS_SecOc · R23-11
 
@@ -5417,9 +5082,6 @@ title: "AUTOSAR API 函数清单"
 
 **[SendDefaultAuthenticationInformation](../communication/sec_oc/index.md#7842-senddefaultauthenticationinformation)**
 > 函数 · [AUTOSAR SecOC (Secure Onboard Communication)](../communication/sec_oc/index.md) · SWS_SecOc · R23-11
-
-**[SequenceNumber](../communication/mirror/index.md#64212-sequencenumber)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
 
 **[ServiceRequestNotification](../diagnostics/diagnostic_communication_manager/index.md#788-servicerequestnotification)**
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
@@ -5436,59 +5098,14 @@ title: "AUTOSAR API 函数清单"
 **[SetDataOfPID4E](../diagnostics/diagnostic_event_manager/index.md#76336-setdataofpid4e)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
-**[SetDefaultLogLevel](../communication/diagnostic_log_and_trace/index.md#61108-setdefaultloglevel)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
-
-**[SetDefaultTraceStatus](../communication/diagnostic_log_and_trace/index.md#61109-setdefaulttracestatus)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
-
 **[SetEventAsyn](../system_services/operating_system/index.md#7438-seteventasyn)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
-
-**[SetLogChannelAssignment](../communication/diagnostic_log_and_trace/index.md#611013-setlogchannelassignment)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
-
-**[SetLogChannelThreshold](../communication/diagnostic_log_and_trace/index.md#611014-setlogchannelthreshold)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
-
-**[SetLogLevel](../communication/diagnostic_log_and_trace/index.md#61101-setloglevel)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
-
-**[SetLogLevelFilter](../communication/diagnostic_log_and_trace/index.md#83-setloglevelfilter)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
-
-**[SetMessageFiltering](../communication/diagnostic_log_and_trace/index.md#61107-setmessagefiltering)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
 
 **[SetScheduleTableAsync](../system_services/operating_system/index.md#7415-setscheduletableasync)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
-**[SetTraceStatus](../communication/diagnostic_log_and_trace/index.md#61102-settracestatus)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
-
-**[SHProtocolVersion](../communication/mirror/index.md#65311-shprotocolversion)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
 **[ShutdownAllCores](../system_services/operating_system/index.md#7429-shutdownallcores)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
-
-**[SIFrameID](../communication/mirror/index.md#65326-siframeid)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
-**[SIFrameIDAvailable](../communication/mirror/index.md#65322-siframeidavailable)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
-**[SINetworkID](../communication/mirror/index.md#65324-sinetworkid)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
-**[SINetworkState](../communication/mirror/index.md#65325-sinetworkstate)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
-**[SINetworkStateAvailable](../communication/mirror/index.md#65321-sinetworkstateavailable)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
-
-**[SINetworkType](../communication/mirror/index.md#65323-sinetworktype)**
-> 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
 
 **[SoAd_CloseSoCon](../communication/soad/index.md#7343-soad_closesocon)**
 > 函数 · [AUTOSAR SoAd (Socket Adaptor)](../communication/soad/index.md) · SWS_SocketAdaptor · R23-11
@@ -5601,6 +5218,9 @@ title: "AUTOSAR API 函数清单"
 **[SoAd_WriteDhcpHostNameOption](../communication/soad/index.md#73419-soad_writedhcphostnameoption)**
 > 函数 · [AUTOSAR SoAd (Socket Adaptor)](../communication/soad/index.md) · SWS_SocketAdaptor · R23-11
 
+**[SPduTxConfirmationFct](../globaltime/stbm/index.md#7635-spdutxconfirmationfct)**
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](../globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
+
 **[Spi_AsyncTransmit](../communication/spi_handler_driver/index.md#734-spi_asynctransmit)**
 > 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](../communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
@@ -5608,9 +5228,6 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](../communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **[Spi_DeInit](../communication/spi_handler_driver/index.md#732-spi_deinit)**
-> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](../communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
-
-**[SPI_E_HARDWARE_ERROR](../communication/spi_handler_driver/index.md#6451-spi_e_hardware_error)**
 > 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](../communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **[Spi_GetHWUnitStatus](../communication/spi_handler_driver/index.md#7312-spi_gethwunitstatus)**
@@ -5631,10 +5248,16 @@ title: "AUTOSAR API 函数清单"
 **[Spi_Init](../communication/spi_handler_driver/index.md#731-spi_init)**
 > 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](../communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
+**[Spi_JobEndNotification](../communication/spi_handler_driver/index.md#7631-spi_jobendnotification)**
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](../communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
+
 **[Spi_MainFunction_Handling](../communication/spi_handler_driver/index.md#751-spi_mainfunction_handling)**
 > 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](../communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **[Spi_ReadIB](../communication/spi_handler_driver/index.md#735-spi_readib)**
+> 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](../communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
+
+**[Spi_SeqEndNotification](../communication/spi_handler_driver/index.md#7632-spi_seqendnotification)**
 > 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](../communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
 
 **[Spi_SetAsyncMode](../communication/spi_handler_driver/index.md#7314-spi_setasyncmode)**
@@ -5648,9 +5271,6 @@ title: "AUTOSAR API 函数清单"
 
 **[Spi_WriteIB](../communication/spi_handler_driver/index.md#733-spi_writeib)**
 > 函数 · [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](../communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver · R23-11
-
-**[STANDARD](../application_interfaces/user_guide/index.md#411-standard)**
-> 函数 · [Application Interfaces User Guide（应用接口用户指南）](../application_interfaces/user_guide/index.md) · EXP_AIUserGuide · R23-11
 
 **[StartCore](../system_services/operating_system/index.md#7425-startcore)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
@@ -5670,11 +5290,8 @@ title: "AUTOSAR API 函数清单"
 **[StatusNotification](../globaltime/stbm/index.md#7731-statusnotification)**
 > 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](../globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
-**[StbM](../communication/data_distribution/index.md#53-stbm)**
-> 函数 · [Data Distribution Service for Classic Platform（经典平台数据分发服务）](../communication/data_distribution/index.md) · SWS_DataDistributionService · R23-11
-
-**[StbM](../communication/diagnostic_log_and_trace/index.md#55-stbm)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
+**[StatusNotificationCallback](../globaltime/stbm/index.md#7633-statusnotificationcallback)**
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](../globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **[StbM_BusGetCurrentTime](../globaltime/stbm/index.md#7313-stbm_busgetcurrenttime)**
 > 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](../globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
@@ -5805,62 +5422,11 @@ title: "AUTOSAR API 函数清单"
 **[StorageCondition](../diagnostics/diagnostic_event_manager/index.md#76337-storagecondition)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
-**[StoreConfiguration](../communication/diagnostic_log_and_trace/index.md#61105-storeconfiguration)**
-> 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
-
-**[SubscribeEventgroup](../communication/service_discovery/index.md#69221-subscribeeventgroup)**
-> 函数 · [AUTOSAR SD（服务发现）](../communication/service_discovery/index.md) · SWS_ServiceDiscovery · R23-11
-
-**[SWC](../general/error_description/index.md#53323-swc)**
-> 函数 · [Error Description（错误描述）](../general/error_description/index.md) · EXP_ErrorDescription · R23-11
-
-**[SwCluC](../communication/com/index.md#522-swcluc)**
-> 函数 · [AUTOSAR COM（COM模块）](../communication/com/index.md) · SWS_COM · R23-11
-
-**[SwCluC](../communication/large_data_com/index.md#512-swcluc)**
-> 函数 · [AUTOSAR Large Data COM（大数据 COM）](../communication/large_data_com/index.md) · SWS_LargeDataCOM · R23-11
-
 **[SyncScheduleTable](../system_services/operating_system/index.md#7414-syncscheduletable)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
-**[SysSafReq01](../safety/safety_use_case/index.md#3421-syssafreq01)**
-> 函数 · [Safety Use Case（安全用例）](../safety/safety_use_case/index.md) · EXP_SafetyUseCase · R23-11
-
-**[SysSafReq02](../safety/safety_use_case/index.md#3422-syssafreq02)**
-> 函数 · [Safety Use Case（安全用例）](../safety/safety_use_case/index.md) · EXP_SafetyUseCase · R23-11
-
-**[SysSafReq03](../safety/safety_use_case/index.md#3423-syssafreq03)**
-> 函数 · [Safety Use Case（安全用例）](../safety/safety_use_case/index.md) · EXP_SafetyUseCase · R23-11
-
-**[SysSafReq04](../safety/safety_use_case/index.md#3424-syssafreq04)**
-> 函数 · [Safety Use Case（安全用例）](../safety/safety_use_case/index.md) · EXP_SafetyUseCase · R23-11
-
-**[SysSafReq05](../safety/safety_use_case/index.md#3425-syssafreq05)**
-> 函数 · [Safety Use Case（安全用例）](../safety/safety_use_case/index.md) · EXP_SafetyUseCase · R23-11
-
-**[SysSafReq06](../safety/safety_use_case/index.md#3426-syssafreq06)**
-> 函数 · [Safety Use Case（安全用例）](../safety/safety_use_case/index.md) · EXP_SafetyUseCase · R23-11
-
-**[SysSafReq07](../safety/safety_use_case/index.md#3427-syssafreq07)**
-> 函数 · [Safety Use Case（安全用例）](../safety/safety_use_case/index.md) · EXP_SafetyUseCase · R23-11
-
-**[SysSafReq08](../safety/safety_use_case/index.md#3428-syssafreq08)**
-> 函数 · [Safety Use Case（安全用例）](../safety/safety_use_case/index.md) · EXP_SafetyUseCase · R23-11
-
-**[SysSafReq09](../safety/safety_use_case/index.md#3429-syssafreq09)**
-> 函数 · [Safety Use Case（安全用例）](../safety/safety_use_case/index.md) · EXP_SafetyUseCase · R23-11
-
-**[SysSafReq10](../safety/safety_use_case/index.md#34210-syssafreq10)**
-> 函数 · [Safety Use Case（安全用例）](../safety/safety_use_case/index.md) · EXP_SafetyUseCase · R23-11
-
-**[SysSafReq11](../safety/safety_use_case/index.md#34211-syssafreq11)**
-> 函数 · [Safety Use Case（安全用例）](../safety/safety_use_case/index.md) · EXP_SafetyUseCase · R23-11
-
-**[SysSafReq12](../safety/safety_use_case/index.md#34212-syssafreq12)**
-> 函数 · [Safety Use Case（安全用例）](../safety/safety_use_case/index.md) · EXP_SafetyUseCase · R23-11
-
-**[SysSafReq13](../safety/safety_use_case/index.md#34213-syssafreq13)**
-> 函数 · [Safety Use Case（安全用例）](../safety/safety_use_case/index.md) · EXP_SafetyUseCase · R23-11
+**[SyncTimeRecordBlockCallback](../globaltime/stbm/index.md#7631-synctimerecordblockcallback)**
+> 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](../globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 ## T
 
@@ -5939,29 +5505,14 @@ title: "AUTOSAR API 函数清单"
 **[Tm_SyncTimer1us32bit](../system_services/time_service/index.md#7315-tm_synctimer1us32bit)**
 > 函数 · [AUTOSAR Time Service（时间服务）](../system_services/time_service/index.md) · SWS_TimeService · R23-11
 
-**[TP](../communication/large_data_com/index.md#642-tp)**
-> 函数 · [AUTOSAR Large Data COM（大数据 COM）](../communication/large_data_com/index.md) · SWS_LargeDataCOM · R23-11
-
-**[TransmitCertificate](../diagnostics/diagnostic_communication_manager/index.md#662107-transmitcertificate)**
-> 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
-
-**[TransmitWithDecoupledBufferAccess](../communication/flexray_interface/index.md#6651-transmitwithdecoupledbufferaccess)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
-
-**[TransmitWithImmediateBufferAccess](../communication/flexray_interface/index.md#811-transmitwithimmediatebufferaccess)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+**[TransmissionTimeoutException](../communication/flexray_network_management/index.md#7635-transmissiontimeoutexception)**
+> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[TriggerTransmit](../communication/large_data_com/index.md#813-triggertransmit)**
 > 函数 · [AUTOSAR Large Data COM（大数据 COM）](../communication/large_data_com/index.md) · SWS_LargeDataCOM · R23-11
 
 **[TryToGetSpinlock](../system_services/operating_system/index.md#7428-trytogetspinlock)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
-
-**[TX_SDU_AVAILABLE](../communication/flexray_iso_transport_layer/index.md#6511-tx_sdu_available)**
-> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
-
-**[TX_SDU_UNKNOWN_MSG_LENGTH](../communication/flexray_iso_transport_layer/index.md#6512-tx_sdu_unknown_msg_length)**
-> 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
 
 ## U
 
@@ -6213,6 +5764,15 @@ title: "AUTOSAR API 函数清单"
 
 **[Xcp_SetTransmissionMode](../communication/xcp/index.md#733-xcp_settransmissionmode)**
 > 函数 · [AUTOSAR XCP（通用测量与校准协议）](../communication/xcp/index.md) · SWS_XCP · R23-11
+
+**[xxx_BndMWriteBlockFinish](../memory/bulk_nv_data_manager/index.md#7632-xxx_bndmwriteblockfinish)**
+> 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
+
+**[xxx_BndMWriteFinalizeFinish](../memory/bulk_nv_data_manager/index.md#7633-xxx_bndmwritefinalizefinish)**
+> 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
+
+**[xxx_BndMWriteStartFinish](../memory/bulk_nv_data_manager/index.md#7631-xxx_bndmwritestartfinish)**
+> 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
 
 **[Xxx_ClearDTCCheckFnc](../diagnostics/diagnostic_communication_manager/index.md#7891-xxx_cleardtccheckfnc)**
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11

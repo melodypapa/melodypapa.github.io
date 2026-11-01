@@ -122,6 +122,7 @@ nav:
       - autosar/api/index.md
       - "AUTOSAR API 类型清单": autosar/api/types.md
       - "AUTOSAR API 函数清单": autosar/api/functions.md
+      - "AUTOSAR API 函数清单（按模块）": autosar/api/functions_by_module.md
     - 基础:
       - autosar/foundation/index.md
       - 通用:
