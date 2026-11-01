@@ -1,6 +1,8 @@
-## Design of Sleep Mode for R52 and M7 (Two Independent OSes)
+---
+title: "Design of Sleep Mode for R52 and M7 (Two Independent OSes)"
+---
 
-### 1. Overall Architecture Understanding
+## 1. Overall Architecture Understanding
 
 The power domain (PD) division of S32K5 determines the fundamental constraints of the sleep strategy:
 
@@ -12,7 +14,7 @@ The power domain (PD) division of S32K5 determines the fundamental constraints o
 
 **Key constraint**: Both CM7 and R52 are located in **PD2**, which means you cannot put CM7 to sleep while keeping R52 running, or vice versa. PD2 is either fully powered or fully off.
 
-### 2. Supported Power Modes and Core States
+## 2. Supported Power Modes and Core States
 
 | Power Mode  | Powered Domains | R52      | M7       | CM4 (LPE)     | HSE2 |
 | ----------- | --------------- | -------- | -------- | ------------- | ---- |
@@ -26,9 +28,9 @@ That is, R52 and M7 sleep **in tandem** — they must enter LPRUN/STANDBY togeth
 >
 > **Note 2 (clocks in LPRUN)**: PLLs are **not available** in LPRUN/Standby. The only usable clocks are FXOSC, SXOSC, SIRC, FIRC and their derivatives. FIRC is active in these modes but **not configurable** (its resources are accessible only by HSE2). Therefore, for a Run → LPRUN → Standby path, **FIRC must be configured in Run mode**, because HSE2 is unavailable once in LPRUN.
 
-### 3. Recommended Sleep Design
+## 3. Recommended Sleep Design
 
-#### Scheme 1: LPRUN Mode (Recommended, most common)
+### Scheme 1: LPRUN Mode (Recommended, most common)
 
 When both M7 and R52 have nothing to do, both execute WFI, PD2 is powered off, leaving only **LPE (CM4) running in PD1**.
 
@@ -77,7 +79,7 @@ Write CTL_KEY + MC_RGM MODE_CONF[LPRUN] to request LPRUN entry
     LPRUN mode (only CM4 running in PD1)
 ```
 
-#### Scheme 2: STANDBY Mode (Lowest power)
+### Scheme 2: STANDBY Mode (Lowest power)
 
 ```
 Normal RUN (M7 + R52)
@@ -109,7 +111,7 @@ Write CTL_KEY + MC_RGM MODE_CONF[STANDBY] to request STANDBY entry
     STANDBY (only PD0 powered, 384KB RAM retained)
 ```
 
-### 4. Multi-Core Sleep Coordination Sequence (Key)
+## 4. Multi-Core Sleep Coordination Sequence (Key)
 
 The **MC_ME** module of S32K5 provides a WFI status monitoring mechanism for multi-core coordination.
 
@@ -218,7 +220,7 @@ The **MC_ME** module of S32K5 provides a WFI status monitoring mechanism for mul
 >
 > **Note**: the clock of the main core must always stay enabled — either leave `McuCoreUnderMcuControl` unchecked if the application configures the main core, or check both `McuCoreUnderMcuControl` and `McuCoreClockEnable` together.
 
-#### Step 1: Each OS completes its own pre-sleep preparation
+### Step 1: Each OS completes its own pre-sleep preparation
 
 | What the M7 OS does                              | What the R52 OS does                    |
 | ------------------------------------------------ | --------------------------------------- |
@@ -231,7 +233,7 @@ The **MC_ME** module of S32K5 provides a WFI status monitoring mechanism for mul
 
 **In addition, the Requestor Core must notify CM4 (LPE) via an MU interrupt.** Even though PD1 stays powered in LPRUN, CM4 may still be accessing PD2 domain resources (e.g. FlexCAN, SENT, which reside in PD2). The Requestor Core must notify CM4 to stop using those PD2 peripherals, and proceed only after CM4 confirms.
 
-#### Step 2: Requestor Core checks WFI status
+### Step 2: Requestor Core checks WFI status
 
 Either core (M7 or R52) acts as the **Requestor Core**, polling each core's WFI status.
 
@@ -251,7 +253,7 @@ Either core (M7 or R52) acts as the **Requestor Core**, polling each core's WFI 
 
 Therefore, **when R52 acts as the Requestor Core, reading M7's WFI status requires the SoC MC_ME partition** (`MC_ME.PRTN0_CORE0_STAT`, etc.), not `CPE_MC_ME`.
 
-#### Step 3: Clock ramp-down, shutdown and reset
+### Step 3: Clock ramp-down, shutdown and reset
 
 ```
 1. Set clocks to initial frequency and complete PCFS ramp-down
@@ -263,7 +265,7 @@ Therefore, **when R52 acts as the Requestor Core, reading M7's WFI status requir
 7. Read MC_RGM_PSTAT to confirm reset took effect -> core officially off
 ```
 
-#### Step 4: Shut down PD2 peripherals and request mode switch
+### Step 4: Shut down PD2 peripherals and request mode switch
 
 ```
 1. Write the CTL_KEY key sequence (0x5AF0, then 0xA50F)
@@ -291,9 +293,9 @@ Therefore, **when R52 acts as the Requestor Core, reading M7's WFI status requir
 >
 > ⚠️ **CPE_LLC caution**: selecting `PowerOffState` for CPE_LLC0/CPE_LLC1 causes a HardFault (the driver still accesses the unpowered partition). Select `PowerOnState` instead.
 
-### 5. Wake-Up Flow
+## 5. Wake-Up Flow
 
-#### Waking M7+R52 from LPRUN
+### Waking M7+R52 from LPRUN
 
 Wake-up is executed by **LPE (CM4)**:
 
@@ -326,7 +328,7 @@ Return to RUN mode
 
 > **Boot chain (S32K5 has no IVT concept)**: after the hardware reset sequence completes, **the only core running initially is the ZenV core on HSE2**, which proceeds BootROM → sBAF (Secure Boot Assist Firmware) → HSE2_FW, and it is **HSE2_FW that enables the application cores in PD2**. S32K5 does not use an IVT (Image Vector Table) mechanism.
 
-#### Reset domain scope triggered by wake-up
+### Reset domain scope triggered by wake-up
 
 | Mode transition | PD2                  | PD1                  | PD0         |
 | ---------------- | -------------------- | -------------------- | ----------- |
@@ -336,7 +338,7 @@ Return to RUN mode
 
 > **Low-power fast path**: on Standby → LPRUN, **PD2 stays OFF** and only PD1 powers up. This is the staged power-up path where CM4 starts running first and the PD2 application cores are enabled later.
 
-#### Supported Wake-Up Sources
+### Supported Wake-Up Sources
 
 **External wake-up sources**
 
@@ -368,7 +370,7 @@ Return to RUN mode
 - When two or more wake-up sources are sampled together and indicate different mode transitions, **Standby → Run has the highest priority**
 - All wake-up events set their corresponding flag in WKPU whenever they occur, regardless of the device's current power mode or any ongoing power mode transition
 
-### 6. PD0 SRAM Usage Recommendations
+## 6. PD0 SRAM Usage Recommendations
 
 PD0 provides **384KB of SRAM** for data retention (SRAM UPPER PD0 = 256KB, SRAM LOWER PD0 = 128KB). Suggested allocation for the two OSes:
 
@@ -380,7 +382,7 @@ PD0 provides **384KB of SRAM** for data retention (SRAM UPPER PD0 = 256KB, SRAM 
 
 > **Note**: the 192/128/64KB split is a **suggestion, not a hardware constraint**. Adjust it to the measured context size of each OS, and do not exceed the 384KB total. PD0 SRAM is powered by the retention voltage in low-power modes to preserve data.
 
-### 7. Recommended Implementation Summary
+## 7. Recommended Implementation Summary
 
 | Item | Recommendation |
 |---|---|
@@ -389,20 +391,21 @@ PD0 provides **384KB of SRAM** for data retention (SRAM UPPER PD0 = 256KB, SRAM 
 | **Inter-core communication** | Use **MU (Message Unit)** interrupts to notify peers of the shutdown sequence; use shared PD0 SRAM for handshake data |
 | **CM4 notification** | The Requestor Core **must** notify CM4 to stop using PD2 peripherals and wait for confirmation |
 | **Context saving** | Each OS saves context to **PD0 SRAM** (384KB) |
-| **Clock ramp-down** | Complete **PCFS ramp-down** before clock gating; **FIRC must be pre-configured in Run mode** for LPRUN/Standby |
+| **Clock ramp-down** | Complete **PCFS ramp-down** before clock gating; **FIRC must be pre-configured in Run mode** for LPRUN/Standby; if **FIRC < 24 MHz** is selected (clocking option E/E2), safety applications must **disable the CMU_Fx_n** modules, otherwise spurious FHH events occur (UM §3.6.10) |
 | **Flash low power** | Before Standby, **wait for ongoing flash high-voltage operations to finish** and disable **PMC_LASTMILE**, otherwise the flash array still consumes power |
 | **Partition shutdown order** | **Disable only one CPE partition at a time**; CPE_LLC0/1 must use `PowerOnState`, otherwise HardFault |
 | **Register write protection** | Execute the **CTL_KEY key sequence (0x5AF0 / 0xA50F)** before writing any protected register |
 | **Mode switch barrier** | Execute **DSB + ISB** before writing `MODE_CONF` |
 | **Wake-up sources** | Configure one of the 8 internal sources per RM Table 299, or WKPU external pins; **internal sources are positive polarity only** |
-| **Interrupt responsibility** | **All interrupts must be disabled** before requesting the mode switch; **EcuM is responsible for ensuring no wake-up interrupt is lost** (the MCU driver cannot detect this) |
+| **Interrupt responsibility** | **All interrupts must be disabled** before requesting the mode switch, and the critical section must be **extended to IPL masking level**; **EcuM is responsible for ensuring no wake-up interrupt is lost** (the MCU driver cannot detect this; UM §3.6.13 Note) |
 | **PLL recovery** | After wake-up, **explicitly call `Mcu_DistributePllClock`** to restore the PLL clock (the switch to PLL is not completed by `Mcu_InitClock`) |
+| **SMPS/DCDC wake-up risk** | If **SMPS (DCDC)** mode is used and the PMC is in low-power mode, **VDD_DCDC must be fully operational and loadable before wake-up**, otherwise a **low-voltage reset** may occur on wake-up (UM §3.6.11) |
 | **Wake-up reason** | Use `Mcu_GetResetReason` to determine why the MCU woke up |
 | **PMIC collaboration** | **FS25 SBC** recommended (purpose-built for S32K5/S32J, ASIL D), handshake via **PGOOD + EXTWAKE(1)/(2)** |
 
 > **Note**: many of the register-level steps in Section 4 (PCFS ramp-down, CTL_KEY key sequence, `COREn_PCONF[CCE]`, `COFB_CLKEN[REQnz]`, `MODE_CONF`, DSB+ISB) are **performed internally by the MCU driver** in a real project. The application layer should not manipulate these registers directly. See `MCAL_API_MAPPING.md` for details.
 
-#### PMIC Handshake Signal Semantics
+### PMIC Handshake Signal Semantics
 
 The S32K5 handshakes with a PMIC/SBC via **PGOOD** (input) and **EXTWAKE(1)/EXTWAKE(2)** (outputs), using up to four GPIOs. EXTWAKE polarity is configurable via `GPR_0` registers, and pin mapping via the SIUL2 MSCR registers.
 
@@ -420,3 +423,26 @@ The S32K5 handshakes with a PMIC/SBC via **PGOOD** (input) and **EXTWAKE(1)/EXTW
 > **POR WDOG is triggered after EXTWAKE assertion**: if PGOOD does not assert within the configured time, POR WDOG issues a reset to the chip.
 >
 > **Run → Standby PGOOD glitch**: an unintended reset state can be detected during this transition. To avoid it: ① set `PMC.CONFIG[PGOODMASK]` to temporarily mask PGOOD; ② program the PMIC into LPE mode (with a delay). These two steps **must be interrupt-protected** so the sequence cannot be split in time.
+
+## 8. Driver runtime errors (DET/DEM)
+
+Error reporting of the MCU driver along the sleep-related paths (RTD MCU UM §3.7, UM85MCUASRR23-11):
+
+**DET errors (Table 3.4, reported via DET)**
+
+| Function | Error code | Triggering condition |
+|---|---|---|
+| `Mcu_SetMode()` | `MCU_E_PARAM_MODE` | Invalid input parameter |
+| `Mcu_InitClock()` | `MCU_E_PARAM_CLOCK` | Invalid input parameter |
+| `Mcu_DistributePllClock()` | `MCU_E_PLL_NOT_LOCKED` | One of the used PLLs failed to achieve lock (**can trigger when restoring the PLL after wake-up**) |
+| All functions except `Mcu_Init()` / `Mcu_GetVersionInfo()` | `MCU_E_UNINIT` | Driver is in an uninitialized state |
+
+**DEM errors (Table 3.6, reported via DEM)**
+
+| Function | Error code | Triggering condition |
+|---|---|---|
+| `Mcu_SetMode()` | `Mcu_E_TimeoutFailure` | **The MC_ME or LPU mode transition failed** (the primary observation point for sleep-entry failures) |
+| `Mcu_Init()` | `Mcu_E_TimeoutFailure` | The MC_ME mode transition failed |
+| `Mcu_GetResetReason()` / `Mcu_GetResetRawValue()` | `Mcu_E_TimeoutFailure` | Reset flags could not be cleared |
+
+> **Integration note**: `Mcu_E_TimeoutFailure` from `Mcu_SetMode` is the standard observation path for a **failed sleep-entry sequence** (MC_ME/LPU transition timeout) and should trigger an alarm plus a retry/degradation strategy; after wake-up, `MCU_E_PLL_NOT_LOCKED` from `Mcu_DistributePllClock` means the PLL was not restored. For clock failures raised in ISR context the variant error code `MCU_E_ISR_CLOCK_FAILURE` is used (reported by the CMU interrupt, see `MCAL_API_MAPPING.md` §5.1 "Deviations from the AUTOSAR specification").

@@ -1,12 +1,14 @@
-## S32K5 MPU Quick Reference
+---
+title: "S32K5 MPU Quick Reference"
+---
 
 Companion to the main design document: [S32K5_R52_M7_MPU_Design_EN.md](S32K5_R52_M7_MPU_Design_EN.md) / [S32K5_R52_M7_MPU_Design_CN.md](S32K5_R52_M7_MPU_Design_CN.md)
 
 ---
 
-### Registers
+## Registers
 
-#### Cortex-M7 (PMSAv7, SCS `0xE000ED9x`)
+### Cortex-M7 (PMSAv7, SCS `0xE000ED9x`)
 
 | Register | Address |
 | --- | --- |
@@ -16,7 +18,7 @@ Companion to the main design document: [S32K5_R52_M7_MPU_Design_EN.md](S32K5_R52
 | `MPU_RBAR` | `0xE000ED9C` |
 | `MPU_RASR` | `0xE000EDA0` |
 
-#### Cortex-R52 (Armv8-R)
+### Cortex-R52 (Armv8-R)
 
 | Register | Access |
 | --- | --- |
@@ -28,9 +30,9 @@ Companion to the main design document: [S32K5_R52_M7_MPU_Design_EN.md](S32K5_R52
 
 ---
 
-### AP permissions
+## AP permissions
 
-#### M7 (3 bit, `RASR[26:24]`)
+### M7 (3 bit, `RASR[26:24]`)
 
 | AP | Privileged | Unprivileged |
 | --- | --- | --- |
@@ -43,7 +45,7 @@ Companion to the main design document: [S32K5_R52_M7_MPU_Design_EN.md](S32K5_R52
 | `110` | RO | RO |
 | `111` | RO | RO |
 
-#### R52 (2 bit, `PRBAR[3:2]`)
+### R52 (2 bit, `PRBAR[3:2]`)
 
 | AP | Meaning |
 | --- | --- |
@@ -54,9 +56,9 @@ Companion to the main design document: [S32K5_R52_M7_MPU_Design_EN.md](S32K5_R52
 
 ---
 
-### Memory attributes
+## Memory attributes
 
-#### M7: TEX/C/B/S
+### M7: TEX/C/B/S
 
 | Use | TEX | C | B | S |
 | --- | --- | --- | --- | --- |
@@ -68,7 +70,7 @@ Companion to the main design document: [S32K5_R52_M7_MPU_Design_EN.md](S32K5_R52
 | Normal WB RA | `001` | 1 | 1 | S |
 | Normal NC | `001` | 0 | 0 | S |
 
-#### R52: MAIR values
+### R52: MAIR values
 
 | Index | Value | Meaning |
 | --- | --- | --- |
@@ -79,7 +81,7 @@ Companion to the main design document: [S32K5_R52_M7_MPU_Design_EN.md](S32K5_R52
 
 ---
 
-### Size encoding
+## Size encoding
 
 | Platform | Formula | Minimum | Alignment |
 | --- | --- | --- | --- |
@@ -88,14 +90,14 @@ Companion to the main design document: [S32K5_R52_M7_MPU_Design_EN.md](S32K5_R52
 
 ---
 
-### SRD subregions (M7 only)
+## SRD subregions (M7 only)
 
 Regions ≥ 256 B split into 8 subregions; `SRD[n]=1` disables subregion n, `SRD[0]` maps to the lowest address.
 For regions of 32/64/128 B, writing SRD has **unpredictable effects**.
 
 ---
 
-### Memory types on S32K5
+## Memory types on S32K5
 
 | Memory type | Address | M7 | R52 | XN | Notes |
 | --- | --- | --- | --- | --- | --- |
@@ -113,7 +115,7 @@ For regions of 32/64/128 B, writing SRD has **unpredictable effects**.
 
 ---
 
-### MPU vs XRDC
+## MPU vs XRDC
 
 | | MPU | XRDC |
 | --- | --- | --- |
@@ -125,7 +127,7 @@ For regions of 32/64/128 B, writing SRD has **unpredictable effects**.
 
 ---
 
-### MRAM vs eFlash
+## MRAM vs eFlash
 
 | | MRAM (S32K5) | eFlash (S32K3) |
 | --- | --- | --- |
@@ -136,7 +138,7 @@ For regions of 32/64/128 B, writing SRD has **unpredictable effects**.
 
 ---
 
-### Three iron rules
+## Three iron rules
 
 1. **Programming code must not reside in a region being reconfigured** — otherwise instruction fetch fails the instant the permission changes and the CPU wedges.
 2. **DSB before, ISB after** — guarantees the change takes effect.
@@ -144,7 +146,7 @@ For regions of 32/64/128 B, writing SRD has **unpredictable effects**.
 
 ---
 
-### Traps
+## Traps
 
 | Trap | Symptom |
 | --- | --- |

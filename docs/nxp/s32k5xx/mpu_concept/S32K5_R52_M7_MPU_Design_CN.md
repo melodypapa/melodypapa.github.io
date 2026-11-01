@@ -1,4 +1,6 @@
-## S32K5xx MPU 内存保护单元设计方案（Cortex-M7 + Cortex-R52）
+---
+title: "S32K5xx MPU 内存保护单元设计方案（Cortex-M7 + Cortex-R52）"
+---
 
 > 适用平台：NXP S32K5xx 系列（S32K566 / S32K58 等），Cortex-M7 平台核 + Cortex-R52 计算核
 >
@@ -12,7 +14,7 @@
 
 ---
 
-### 1. 为什么在 S32K5 上必须做 MPU 设计
+## 1. 为什么在 S32K5 上必须做 MPU 设计
 
 S32K5 是 ASIL D 平台，三簇异构核共用同一套 MRAM 与 SRAM：
 
@@ -90,9 +92,9 @@ MPU 在这套系统里承担的是**职责隔离**而非仅仅是内存保护：
 
 ---
 
-### 2. Cortex-M7 MPU 详解（ARMv7-M PMSAv7）
+## 2. Cortex-M7 MPU 详解（ARMv7-M PMSAv7）
 
-#### 2.1 寄存器组
+### 2.1 寄存器组
 
 M7 只有**一套** MPU，寄存器位于系统控制空间（SCS），基址 `0xE000ED90`：
 
@@ -106,7 +108,7 @@ M7 只有**一套** MPU，寄存器位于系统控制空间（SCS），基址 `0
 
 编程模型是**"先选号，再写属性"**：写 `MPU_RNR = n`，然后写 `MPU_RBAR` 和 `MPU_RASR`。CMSIS 把它封装成 `ARM_MPU_SetRegion()`。
 
-#### 2.2 MPU_RASR 位域
+### 2.2 MPU_RASR 位域
 
 ```
  31        28  26  24  21  19  18  17  16   15    8  6  5    1   0
@@ -130,7 +132,7 @@ M7 只有**一套** MPU，寄存器位于系统控制空间（SCS），基址 `0
 
 **基址对齐约束**：region 的 ADDR 必须按 SIZE 对齐。例如 64 KB 区域必须落在 `0x00010000` 边界上，不能是 `0x00010001`。这是 PMSAv7 最容易踩的坑 —— 链接脚本里的段地址若未按 2 的幂对齐，写进去的 ADDR 低位会被忽略，MPU 实际保护的是一个大一倍的区域。
 
-#### 2.3 AP 访问权限编码
+### 2.3 AP 访问权限编码
 
 | AP[2:0] | 特权访问 | 非特权访问 | 说明 |
 | --- | --- | --- | --- |
@@ -143,7 +145,7 @@ M7 只有**一套** MPU，寄存器位于系统控制空间（SCS），基址 `0
 | `110` | 只读 | 只读 | 特权与非特权均只读 |
 | `111` | 只读 | 只读 | 同 110 |
 
-#### 2.4 TEX/C/B/S 内存属性编码
+### 2.4 TEX/C/B/S 内存属性编码
 
 | TEX | C | B | 内存类型 / 缓存属性 | Shareable |
 | --- | --- | --- | --- | --- |
@@ -172,7 +174,7 @@ M7 只有**一套** MPU，寄存器位于系统控制空间（SCS），基址 `0
 
 **外设必须用 Device 类型**。这是 M7 上最高频的错误：把 UART、FLEXCAN、GPIO 寄存器窗口配成 Normal cacheable，会导致寄存器读回旧值、外设写入被 cache 吞掉。正确做法是 `TEX=000, C=0, B=1`（Shared Device）或 `TEX=010, C=0, B=0`（Non-shared Device）。
 
-#### 2.5 MPU_CTRL 三位语义
+### 2.5 MPU_CTRL 三位语义
 
 | 位 | 名称 | 语义 |
 | --- | --- | --- |
@@ -182,12 +184,12 @@ M7 只有**一套** MPU，寄存器位于系统控制空间（SCS），基址 `0
 
 `HFNMIENA` 的取舍：`=0` 时故障处理器不受 MPU 约束，方便完整 dump 现场内存做离线分析；`=1` 时连故障处理器也受限，防篡改更强但现场信息可能残缺。做安全诊断固件时通常置 0 并把现场存入专用 no-cacheable 区域。
 
-#### 2.6 区域重叠与子区域
+### 2.6 区域重叠与子区域
 
 - **重叠时编号大的优先**：区域 0 和区域 1 覆盖同一段内存，区域 1 的属性生效。这是 PMSAv7 最有用的特性 —— 可以先用一个大区域定基调，再叠加小区域收紧。
 - **SRD 子区域**：区域 ≥ 256 B 时被等分为 8 段，`SRD[n]=1` 表示禁用第 n 段，`SRD[0]` 对应最低地址段。**注意：区域为 32/64/128 B 时写 SRD 结果不可预测**。
 
-#### 2.7 M7 内存属性推荐表（S32K5 视角）
+### 2.7 M7 内存属性推荐表（S32K5 视角）
 
 | 区域 | 地址 / 大小 | TEX/C/B | AP | XN | 说明 |
 | --- | --- | --- | --- | --- | --- |
@@ -201,7 +203,7 @@ M7 只有**一套** MPU，寄存器位于系统控制空间（SCS），基址 `0
 | XSPI 数据 | `0x8100_0000`–`0xC0FF_FFFF` | `001/0/0` NC | `011` | 0 | 外部 flash 执行 |
 | PPB | `0xE000_0000`–`0xE00F_FFFF` | `010/0/0` Device | `101` | 1 | 本核私有 |
 
-#### 2.8 M7 配置代码骨架
+### 2.8 M7 配置代码骨架
 
 ```c
 #include "core_cm7.h"
@@ -283,7 +285,7 @@ uint32_t M7_MPU_GetRegionCount(void)
 
 > 上例的 SIZE 值需按实际链接脚本调整。**务必先用 `MPU_TYPE.DREGION` 确认实现了多少区域再访问**，写越界区域号的行为未定义。
 
-#### 2.9 MemManage 异常处理
+### 2.9 MemManage 异常处理
 
 ```c
 void MemManage_Handler(void)
@@ -321,9 +323,9 @@ void MemManage_Handler(void)
 
 ---
 
-### 3. Cortex-R52 MPU 详解（Armv8-R PMSAv8-32）
+## 3. Cortex-R52 MPU 详解（Armv8-R PMSAv8-32）
 
-#### 3.1 双 MPU 模型
+### 3.1 双 MPU 模型
 
 R52 有**两个独立 MPU**，这是与 M7 最大的架构差异：
 
@@ -338,7 +340,7 @@ R52 有**两个独立 MPU**，这是与 M7 最大的架构差异：
 - **EL2 访问** → 只查 EL2 MPU
 - EL2 MPU 可整体禁用（S32K5 一般不用虚拟化，EL2 MPU 保持关闭）
 
-#### 3.2 寄存器与 AArch32 访问
+### 3.2 寄存器与 AArch32 访问
 
 | 寄存器 | 作用 |
 | --- | --- |
@@ -365,7 +367,7 @@ MCR   p15, 0, R1, c6, c8+n[3:1], 4*n[0]+1    @ 读 PRLARn
 
 > **易错点**：直接访问方式的 `op1` 计算容易写错（涉及 `c8 + n[3:1]` 与 `4*n[0]`）。建议统一用 PRSELR 间接方式，或直接用 CMSIS 封装的 `__set_PRBAR()` 系列内联函数。
 
-#### 3.3 区域定义：基址 + 上限
+### 3.3 区域定义：基址 + 上限
 
 与 PMSAv7 的根本区别：
 
@@ -385,7 +387,7 @@ PRBAR.BASE:0b000000 <= address <= PRLAR.LIMIT:0b111111
 
 冒号是位连接运算符。这意味着 BASE 的低 6 位被硬件读为 0，LIMIT 的低 6 位被读为 1 —— **实际粒度 64 字节，且两端都是包含的**。这比 M7 的"按 SIZE 对齐"更直观，但也意味着配错时不会像 M7 那样"悄悄扩成大一倍"，而是立刻产生异常，属于 fail-fast。
 
-#### 3.4 PRBAR / PRLAR 字段
+### 3.4 PRBAR / PRLAR 字段
 
 | 字段 | 所属 | 语义 |
 | --- | --- | --- |
@@ -413,7 +415,7 @@ PRBAR.BASE:0b000000 <= address <= PRLAR.LIMIT:0b111111
 | `10` | Outer-shareable |
 | `11` | Inner-shareable |
 
-#### 3.5 MAIR 内存属性间接
+### 3.5 MAIR 内存属性间接
 
 R52 把内存属性从区域寄存器里搬到了 `MAIRx`，每个 MPU 有 8 个 8-bit 属性槽：
 
@@ -438,7 +440,7 @@ DSB
 ISB
 ```
 
-#### 3.6 背景区域与默认内存映射
+### 3.6 背景区域与默认内存映射
 
 **指令访问背景区域**：
 
@@ -470,7 +472,7 @@ ISB
 
 > **陷阱**：`HCR.DC = 1` 时默认属性是**最宽松**的（Normal, IB-OB WB, RA）。与 EL2 MPU 属性组合后结果仍等于 EL2 的属性，EL2 MPU 因此对背景区域完全透明。也就是说 `DC=1` 会让 EL1 背景区域失去它本来的保护意义，S32K5 无虚拟化场景建议保持 `DC=0`。
 
-#### 3.7 故障类型
+### 3.7 故障类型
 
 | 故障 | 触发条件 |
 | --- | --- |
@@ -479,7 +481,7 @@ ISB
 
 M7 只有 Permission fault（MPU 重叠时按优先级选中，不报错），R52 把"重叠"从特性变成了错误。
 
-#### 3.8 R52 配置代码骨架
+### 3.8 R52 配置代码骨架
 
 ```c
 #include <stdint.h>
@@ -555,7 +557,7 @@ void R52_MPU_Init(void)
 
 > R52 的系统寄存器访问必须走 `MCR p15, ...` 或 CMSIS 内联函数，不能像 M7 那样直接对内存地址解引用。上面代码中的 `PRBAR(n)` 基址与 `SCTLR` 地址需按 NXP 集成手册确认。
 
-#### 3.9 编程规则（ARM 官方要求）
+### 3.9 编程规则（ARM 官方要求）
 
 1. 重配某区域时，**编程代码本身不得位于该区域内** —— 否则改权限的瞬间取指就失败，CPU 卡死。
 2. 改 `PRBAR`/`PRLAR` 前执行 **DSB**，确保此前所有访存完成。
@@ -565,9 +567,9 @@ void R52_MPU_Init(void)
 
 ---
 
-### 4. S32K5 存储映射与 MPU 布局
+## 4. S32K5 存储映射与 MPU 布局
 
-#### 4.1 关键存储资源
+### 4.1 关键存储资源
 
 以下均为 **S32K566** 取值，来自 `S32K5xx_memory_map.xlsx`；"窗口"列是架构地址范围，"实际"列是本型号真正实现的部分。
 
@@ -601,7 +603,7 @@ void R52_MPU_Init(void)
 
 S32K5 已在硬件层面把 SRAM 切分为 cacheable / non-cacheable / shareable 段（linker 里体现为 `int_sram_no_cacheable`、`int_sram_shareable`），MPU 配置必须与这套划分**严格对齐**，否则软件属性与硬件属性冲突会导致不可预测行为。
 
-#### 4.2 推荐的 M7 区域布局（16 区域预算）
+### 4.2 推荐的 M7 区域布局（16 区域预算）
 
 M7 实现 **16 个区域**（`MPU_TYPE` 复位值 `0x00001000`）。`[来源: rm1131130 Rev.3, Chapter_02 Table 10]`
 
@@ -625,7 +627,7 @@ M7 实现 **16 个区域**（`MPU_TYPE` 复位值 `0x00001000`）。`[来源: rm
 
 > **Device 属性是强制的，不是建议。** RM Ch.11 §11.3.5 NOTE：REG_PROT 的 transfer error 只有在"通过其 MPU 或 MMU 定义了覆盖目标寄存器地址的 **strongly ordered 内存区域**"的 CPU 上才可观测。把外设窗口配成 Normal memory，REG_PROT 的拒绝会退化成异步总线错误，出错点离原因很远。详见 §5.7。
 
-#### 4.3 推荐的 R52 区域布局（20 区域预算）
+### 4.3 推荐的 R52 区域布局（20 区域预算）
 
 S32K566 实现 **EL1: 20 区域，EL2: 20 区域**（不是 16 或 24）。`[来源: rm1131130 Rev.3, Chapter_02 Table 6 / Table 10]`
 
@@ -655,7 +657,7 @@ S32K566 实现 **EL1: 20 区域，EL2: 20 区域**（不是 16 或 24）。`[来
 >
 > **外设上界是 `0x421F_FFFF`，不是 `0xE00F_FFFF`。** Rev.A 的 `0xE00FFFFF` 取自 Zephyr S32K566 R52 移植，是个保守占位值；真实 memory map 显示最后一个外设桥（LPE_PBRIDGE3）结束于 `0x4219_7FFF`，另有 DSP_PBRIDGE3 在 `0x4260_0000`–`0x427F_FFFF`、CPE_GIC0 在 `0x4300_0000`–`0x431F_FFFF`。需明确决定 DSP 与 GIC 是归入 Device 区域还是单独建区。
 
-#### 4.4 核间共享区的特殊处理
+### 4.4 核间共享区的特殊处理
 
 R52 与 M7 交换数据（如 CAN 报文、时间戳）的区域是跨核共享的，必须**双方一致地配置为 shareable + cacheable**，并配合以下手段：
 
@@ -668,11 +670,11 @@ R52 与 M7 交换数据（如 CAN 报文、时间戳）的区域是跨核共享�
 
 ---
 
-### 5. 按存储类型的 MPU 配置详解（MRAM / SRAM / TCM / XSPI / 外设）
+## 5. 按存储类型的 MPU 配置详解（MRAM / SRAM / TCM / XSPI / 外设）
 
 本节把第 4 章的布局表展开到**每一种存储类型**。MPU 属性不是"拍脑袋选 Normal WB"，而是由存储介质的物理特性决定的 —— 选错属性不会报错，只会让功能悄悄坏掉。
 
-#### 5.1 S32K5 存储类型全景
+### 5.1 S32K5 存储类型全景
 
 | 存储类型 | 地址范围 | 容量（S32K566） | ECC | 易失性 | 建议 MPU 属性 | 可达核 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -694,9 +696,9 @@ R52 与 M7 交换数据（如 CAN 报文、时间戳）的区域是跨核共享�
 
 > **外设窗口上界，已纠正。** Rev.A 用 `0xE00FFFFF`（取自 Zephyr R52 移植）并提醒不要用 `0xFFFFFFFF`。Rev.3 memory map 显示真实最后一个外设在 `0x4219_7FFF`。准确的表述是：**外设占据 `0x4000_0000`–`0x431F_FFFF`**（含 DSP_PBRIDGE3 `0x4260_0000`、CPE_GIC0 `0x4300_0000`），`0xE000_0000` 以上是 PPB 加厂商空间。Device region 的边界取 `0x431F_FFFF` 还是延伸到 `0xDFFF_FFFF` 是个设计选择——延伸更简单，但会失去"对误入未映射空间的访问报错"的能力。
 
-#### 5.2 Code MRAM（eMRAM）—— S32K5 最大的架构变化
+### 5.2 Code MRAM（eMRAM）—— S32K5 最大的架构变化
 
-###### 硬件特性
+##### 硬件特性
 
 S32K5 是业界首款 16 nm FinFET + 嵌入式 MRAM 的车规 MCU。与 S32K3 及更早的 eFlash 相比，MRAM 改变了几条底层假设：
 
@@ -710,14 +712,14 @@ S32K5 是业界首款 16 nm FinFET + 嵌入式 MRAM 的车规 MCU。与 S32K3 �
 
 > **保持期数据冲突（待 RM 确认）**：NXP–TSMC 的 16 nm MRAM 技术公告称 20 年 @150 °C；另有中文资料称 S32K5 MRAM 数据保持期为 10 年 @85 °C，低于 eFlash。两者差异巨大，**必须查 S32K5xx RM 的 MRAM 章节**，这直接影响日志类数据的落盘策略。
 
-###### MPU 配置含义
+##### MPU 配置含义
 
 1. **代码区可读可写可执行** —— MRAM 不需要 XIP 只读保护，支持 FOTA 的 A/B 双镜像原地切换。但这也意味着**代码区能被自身数据覆盖**。ASIL D 场景下若要求"运行期代码不可变"，MPU 做不到（AP 最低只能 RO，而 RO 对特权代码无效），必须靠 **XRDC 的只读锁定**实现。
 2. **两核共用同一块 MRAM** —— M7 与 R52 默认都从 Code MRAM 取指执行（Zephyr 中两者都以 `cmram` 作为 `zephyr,flash`）。同一物理区被两个核的 MPU 分别配置，**属性必须逐字段一致**，否则一个核看到的是 cacheable，另一个看到的是 non-cacheable，跨核函数指针跳转会出现不可预测行为。
 3. **FOTA 写入期间应关闭 cache** —— MRAM 写入虽快，但写入过程中若目标代码段正在被 cache 或流水线持有，需要 clean + invalidate。建议 FOTA 驱动在刷写前后统一做 cache 维护。
 4. **不要把 MRAM 配成 Device 类型** —— 性能会崩塌（MRAM 就是当 RAM 用的），且 MRAM 支持 cache。
 
-#### 5.3 M7 SRAM（3 MB，三个 bank）
+### 5.3 M7 SRAM（3 MB，三个 bank）
 
 S32K566 向 M7 核簇暴露三个 1 MB SRAM bank，连续位于 `0x2100_0000`–`0x212F_FFFF`。下表是 Rev.A 的分区表（保留备查），**这些地址在 S32K5 上不存在，不得使用**。
 
@@ -733,7 +735,7 @@ S32K566 向 M7 核簇暴露三个 1 MB SRAM bank，连续位于 `0x2100_0000`–
 
 **Zephyr 对应关系**：M7 板级目标用 `sram0` 作为 `zephyr,sram`，R52 目标用 `cpe_sram`。两套 DTS 走的是不同的 SRAM，**不是同一块内存的两种名字**。具体到 S32K5：M7 → `0x2100_0000`，R52 → `0x2200_0000`。
 
-#### 5.4 R52 SRAM（cpe_sram，1 MB）
+### 5.4 R52 SRAM（cpe_sram，1 MB）
 
 | 项 | 内容 |
 | --- | --- |
@@ -746,9 +748,9 @@ S32K566 向 M7 核簇暴露三个 1 MB SRAM bank，连续位于 `0x2100_0000`–
 
 **MPU 属性**：Normal WB RA，RW，XN=1（数据区不可执行）。R52 SRAM 是 R52 侧栈与任务数据的所在地，建议按任务再细分（见 4.3）。
 
-#### 5.5 TCM（ITCM / DTCM / ATCM / BTCM / CTCM）—— ECC 与 backdoor 是两个坑
+### 5.5 TCM（ITCM / DTCM / ATCM / BTCM / CTCM）—— ECC 与 backdoor 是两个坑
 
-###### 硬件特性
+##### 硬件特性
 
 | 项 | 说明 |
 | --- | --- |
@@ -758,13 +760,13 @@ S32K566 向 M7 核簇暴露三个 1 MB SRAM bank，连续位于 `0x2100_0000`–
 | M7 DTCM 接口 | 双接口 D0TCM / D1TCM |
 | 使能 | `ITCMCR.EN` / `DTCMCR.EN` 软件可关 |
 
-###### ECC 初始化约束（极易踩坑）
+##### ECC 初始化约束（极易踩坑）
 
 **读 TCM 或系统 RAM 之前，必须先做 64-bit 写初始化**，否则 ECC 会报错。NXP S32K 文档原文：*"为了防止 ECC 报错，在读操作前，TCM 和系统 RAM 都需要 64bit 写入初始化。"*
 
 这意味着 MPU 配置**不能**放在 TCM 初始化之前去读 TCM 内容 —— 启动代码必须先填 ECC 再建区域。且 RAM ECC 初始化**只在 Power-On Reset 时做**，其他复位类型不能重复做（会破坏 retained 数据）。
 
-###### TCM backdoor：核 MPU 保护的结构性漏洞
+##### TCM backdoor：核 MPU 保护的结构性漏洞
 
 这是 Rev.B 新增的最重要 S32K5 特有发现，Rev.A 完全没有覆盖。
 
@@ -779,7 +781,7 @@ S32K566 向 M7 核簇暴露三个 1 MB SRAM bank，连续位于 `0x2100_0000`–
 
 > **设计规则：每个 TCM 必须同时在拥有核的 MPU 和对应的 XRDC MRC 中配置。** 只配 MPU 等于把 backdoor 敞开 —— 而且 backdoor 地址（ITCM `0x1100_0000`–`0x116F_FFFF`，DTCM `0x2300_0000`–`0x236F_FFFF`）是与 TCM 自身基址不同的窗口，需要独立的 XRDC region。
 
-###### 多核共享 TCM（S32K5 特有）
+##### 多核共享 TCM（S32K5 特有）
 
 Arm/NXP 规定：多核器件上，所有已使能的核与非核 master **都可以使用未启用核的 TCM 作为系统内存**。启用核要把禁用核的 TCM 当普通 RAM 用，需按步骤执行：
 
@@ -789,7 +791,7 @@ Arm/NXP 规定：多核器件上，所有已使能的核与非核 master **都�
 
 **MPU 含义**：TCM 的归属是动态的 —— 哪个核启用了，TCM 就归谁；核被禁用后，它的 TCM 变成公共 RAM。因此 TCM 区域的 MPU 配置不能静态写死，需要随核的使能状态调整，或者干脆用 XRDC 按 domain 管。
 
-###### MPU 属性
+##### MPU 属性
 
 TCM 接口本身**不可 cache**（Tightly-Coupled Memory 的延迟已经是单周期级别，cache 无意义）。所以：
 
@@ -801,7 +803,7 @@ TCM 接口本身**不可 cache**（Tightly-Coupled Memory 的延迟已经是单�
 
 配成 Normal cacheable 不会报错，但 cache 对该区间无效，属性形同虚设 —— 属"无害但无意义"，评审时仍应写对。
 
-###### ⚠️ ATCM 与 WXN 的冲突（Rev.B 新增）
+##### ⚠️ ATCM 与 WXN 的冲突（Rev.B 新增）
 
 `SCTLR.WXN` 复位为 **0**，TRM 原文写得很明确：*"0 = EL1-controlled MPU regions with write permission are not forced to be XN, **this is the reset value**."*
 
@@ -816,7 +818,7 @@ TCM 接口本身**不可 cache**（Tightly-Coupled Memory 的延迟已经是单�
 
 另需注意 `SCTLR.UWXN`（bit 20，"unprivileged write permission implies EL1 XN"）**同样复位为 0** —— 只置 `WXN` 的话，非特权可写区域仍然是可执行的。
 
-#### 5.6 XSPI / QSPI 外部存储
+### 5.6 XSPI / QSPI 外部存储
 
 | 项 | 内容 |
 | --- | --- |
@@ -834,7 +836,7 @@ TCM 接口本身**不可 cache**（Tightly-Coupled Memory 的延迟已经是单�
 
 **陷阱**：XSPI 的**寄存器窗口**与**数据窗口**必须分成两个 MPU 区域。把寄存器窗口配成 Normal cacheable 是最典型的 XSPI 配置错误 —— 与片上外设同理。另外 MRAM 编程走 XSPI 时有特殊处理要求（SEGGER 文档特别标注 *"QSPI flash programming requires special handling compared to internal flash"*）。
 
-#### 5.7 外设窗口
+### 5.7 外设窗口
 
 | 项 | 内容 |
 | --- | --- |
@@ -854,11 +856,11 @@ TCM 接口本身**不可 cache**（Tightly-Coupled Memory 的延迟已经是单�
 
 **Secure / non-secure alias（Rev.B 新增）**：memory map 只为 PBRIDGE3_0 给出了明确的 alias 窗口，地址正好是 **基址 + `0x1000_0000`**（`0x4000_0000` → `0x5000_0000`）。其余 435 个已映射外设**没有** alias。结合 RM §36.2/§36.3 的表述 —— "表中内存槽代表的是 **non-secure 地址区**" —— 符合实际的解读是：表中地址即 non-secure 视图，而 secure 视图的基址规则**无法由该附件完全确定**。`+0x1000_0000` 规则仅对 PBRIDGE3_0 确认，推广前需核实。
 
-#### 5.8 XRDC：MPU 的互补层，必须一起设计
+### 5.8 XRDC：MPU 的互补层，必须一起设计
 
 这是 S32K5 与 S32K3 设计上最大的差别，也是**只做 MPU 设计会漏掉的一整层**。
 
-###### NXP 的两级隔离模型
+##### NXP 的两级隔离模型
 
 NXP 官方明确表述：*"通过 XRDC 和 MPU，可以实现 2 级隔离层级"*：
 
@@ -869,7 +871,7 @@ NXP 官方明确表述：*"通过 XRDC 和 MPU，可以实现 2 级隔离层级"
 
 也就是说：**MPU 管"一个核内部谁是谁"，XRDC 管"哪个 master 能碰哪个 slave"**。两者职责不重叠，缺一不可。
 
-###### XRDC 子模块
+##### XRDC 子模块
 
 | 子模块 | 职责 |
 | --- | --- |
@@ -878,7 +880,7 @@ NXP 官方明确表述：*"通过 XRDC 和 MPU，可以实现 2 级隔离层级"
 | `XRDC_MRC` | Memory Region Controller，按 region descriptor 管内存访问 |
 | `XRDC_PAC` | Peripheral Access Controller，按 domain access control 管外设访问 |
 
-###### S32K566 XRDC 实例与 MRC 目标（Rev.B 新增）
+##### S32K566 XRDC 实例与 MRC 目标（Rev.B 新增）
 
 五个 XRDC 实例：`XRDC_A`、`XRDC_B`、`XRDC_C`、`CPE_XRDC`、`LPE_XRDC`。**16 个 Domain ID**；每实例 **768 个 PDAC slot（0–767）**。`[来源: rm1131130 Rev.3, Chapter_31 §31.1.1–31.1.5]`
 
@@ -902,19 +904,19 @@ NXP 官方明确表述：*"通过 XRDC 和 MPU，可以实现 2 级隔离层级"
 
 **PAC ↔ 桥映射**：`PAC_A0-1`→PBRIDGE3_0（slot 0–127）、`PAC_C0-2`→PBRIDGE3_1（128–255）、`PAC_B0-2`→PBRIDGE3_2（256–383）、`PAC_C3-4`→PBRIDGE3_3（384–511）、`PAC_C5-6`→PBRIDGE3_4（512–639）、`PAC_B3-5`→PBRIDGE3_5（640–767）、`CPE_PAC0-1`→CPE_PBRIDGE3_0、`CPE_PAC2-3`→CPE_PBRIDGE3_1、`LPE_PAC0-2`→LPE_PBRIDGE3。完整的 slot↔外设对照表见 memory map 附件的 "Peripherals Memory Map" tab。
 
-###### ⚠️ XRDC 没有 execute-never 属性（Rev.B 新增）
+##### ⚠️ XRDC 没有 execute-never 属性（Rev.B 新增）
 
 `DdACP` 权限字段只编码**读/写**，分四级（secure-privileged、secure-user、nonsecure-privileged、nonsecure-user）。**没有 XN 位。**
 
 > **后果：所有代码可执行性控制都在核 MPU 里。** XRDC 能让某 region 对某域只读，但不能让它不可执行。任何"这段内存绝不能当代码跑"的要求，必须靠每个能从这里取指的核上的 `PRBAR.XN` / `MPU_RASR.XN` 来落实 —— 而且按 §5.5，这包括经 backdoor 触达它的那些核。
 
-###### 启用顺序：XRDC 会把自己锁死
+##### 启用顺序：XRDC 会把自己锁死
 
 > "When XRDC is enabled (`CR[GVLD]` = 1), you **cannot access any XRDC-protected memory unless** you configure at least one set of memory region descriptors that includes the targeted memory." `[来源: Chapter_31 §31.5.6.5]`
 
 **必须在置 `GVLD=1` 之前配完所有 MRGD/PAC descriptor 并自检。** 先启用后配置，可能把自己锁在 XRDC 寄存器之外。
 
-###### 与 MPU 的关键差异
+##### 与 MPU 的关键差异
 
 | 维度 | MPU | XRDC |
 | --- | --- | --- |
@@ -927,7 +929,7 @@ NXP 官方明确表述：*"通过 XRDC 和 MPU，可以实现 2 级隔离层级"
 
 **最关键的结论：MPU 挡不住 DMA。** eDMA、以太网 MAC、CAN 等 master 绕过 CPU 的 MPU 直接访问总线。若安全设计只做 MPU，一个配置错误的 DMA 描述符就能写穿任意内存 —— 包括 R52 的栈和 M7 的故障记录区。这类越权必须用 XRDC 的 MRC/PAC 拦。
 
-###### 域间共享与 SEMA42
+##### 域间共享与 SEMA42
 
 XRDC 支持把某块内存/外设设为多域共享，并用 **SEMA42 硬件信号量**做互斥。NXP AN14715 给出的典型流程：
 
@@ -937,11 +939,11 @@ XRDC 支持把某块内存/外设设为多域共享，并用 **SEMA42 硬件信�
 
 **异常处理含义**：XRDC 违规产生的是 **Bus Fault**，与 MPU 的 MemManage/Abort 是**不同的异常入口**。故障处理代码必须分别实现两个 handler，且 XRDC 的错误状态要用专用 API 读，不能从 `SCB->CFSR` 里找。
 
-###### MCUXpresso SDK 支持
+##### MCUXpresso SDK 支持
 
 MCUXpresso SDK 提供 `XRDC_Init`、domain assignment（`xrdc_processor_domain_assignment_t`）、memory access policy（`xrdc_mem_access_config_t`）、peripheral access policy（`xrdc_periph_access_config_t`）等 API。AUTOSAR 路径下对应 `Xrdc_Ip` 驱动。
 
-#### 5.9 按存储类型的 MPU 配置速查
+### 5.9 按存储类型的 MPU 配置速查
 
 | 存储类型 | M7 属性 | R52 属性 | XN | 特别注意事项 |
 | --- | --- | --- | --- | --- |
@@ -963,11 +965,11 @@ MCUXpresso SDK 提供 `XRDC_Init`、domain assignment（`xrdc_processor_domain_a
 
 ---
 
-### 6. Cache 一致性：MPU 属性与 Cache 的耦合
+## 6. Cache 一致性：MPU 属性与 Cache 的耦合
 
 这是 MPU 设计中最容易被低估的部分。
 
-#### 5.1 R52 与 M7 的 Cache 架构
+### 5.1 R52 与 M7 的 Cache 架构
 
 | 项 | Cortex-M7 | Cortex-R52 |
 | --- | --- | --- |
@@ -979,7 +981,7 @@ MCUXpresso SDK 提供 `XRDC_Init`、domain assignment（`xrdc_processor_domain_a
 
 S32K5 的 M7 与 R52 **各自独立**，没有共享 L2 cache。这意味着跨核共享数据不能依赖 cache 一致性协议自动同步。
 
-#### 5.2 属性配置规则
+### 5.2 属性配置规则
 
 | 存储 | 正确属性 | 错误属性的后果 |
 | --- | --- | --- |
@@ -989,7 +991,7 @@ S32K5 的 M7 与 R52 **各自独立**，没有共享 L2 cache。这意味着跨�
 | ITCM / DTCM | Normal WT WB | TC 接口本身不可 cache，配错无害但无意义 |
 | 跨核共享 SRAM | Normal WB + Shareable | 属性不一致 → 数据永久不一致 |
 
-#### 5.3 Cache 维护序列
+### 5.3 Cache 维护序列
 
 MPU 改属性后，必须失效对应 cache line，否则旧属性下缓存的数据会被错误复用：
 
@@ -1006,9 +1008,9 @@ __ISB();
 
 ---
 
-### 7. 启动时序与配置顺序
+## 7. 启动时序与配置顺序
 
-#### 6.1 M7 启动序列
+### 6.1 M7 启动序列
 
 ```
 复位
@@ -1023,7 +1025,7 @@ __ISB();
 
 **不要在使能 Cache 前使能 MPU 的 cacheable 属性** —— 没有 cache 时配 cacheable 是安全的，但反过来（先有 cache 再改属性）必须先 invalidate。
 
-#### 6.2 R52 启动序列
+### 6.2 R52 启动序列
 
 ```
 R52 复位（由 M7 通过 BOOT 配置寄存器启动）
@@ -1046,7 +1048,7 @@ R52 复位（由 M7 通过 BOOT 配置寄存器启动）
 
 R52 无独立复位（SEGGER 文档明确指出调试器无法单独复位 R52 核），因此**R52 的 MPU 配置完全由 M7 侧的启动代码负责触发**，两者之间需要 MU 中断或共享内存标志握手。
 
-#### 6.3 双核配置的时序风险
+### 6.3 双核配置的时序风险
 
 | 风险 | 说明 | 缓解 |
 | --- | --- | --- |
@@ -1057,9 +1059,9 @@ R52 无独立复位（SEGGER 文档明确指出调试器无法单独复位 R52 �
 
 ---
 
-### 8. 故障处理与 ASIL D 关联
+## 8. 故障处理与 ASIL D 关联
 
-#### 7.1 故障响应矩阵
+### 7.1 故障响应矩阵
 
 | 场景 | 检测手段 | 响应 |
 | --- | --- | --- |
@@ -1071,7 +1073,7 @@ R52 无独立复位（SEGGER 文档明确指出调试器无法单独复位 R52 �
 
 > 关键认知：**MPU 只能挡住"越权"，挡不住"配置错误"**。外设窗口误配为 cacheable 这类问题不会产生任何 fault，只表现为功能异常。所以 MPU 配置表应纳入静态检查与单元测试。
 
-#### 7.2 双核协同的安全策略
+### 7.2 双核协同的安全策略
 
 S32K5 是 ASIL D 平台，MPU 配置本身属于**安全相关配置项**，需要：
 
@@ -1080,7 +1082,7 @@ S32K5 是 ASIL D 平台，MPU 配置本身属于**安全相关配置项**，需�
 3. **单点故障防护**：MPU 寄存器本身不受保护，配置错误不会产生 fault。需在 ECC 覆盖的只读常量中保存期望值，运行期周期性比对。
 4. **ASIL D 分解**：MPU 作为硬件机制提供的是 **QM 级能力**，要达到 ASIL D 需要配合诊断覆盖率（结构性覆盖 + 运行时比对）。
 
-#### 7.3 诊断覆盖建议
+### 7.3 诊断覆盖建议
 
 | 诊断项 | 方法 | 覆盖率目标 |
 | --- | --- | --- |
@@ -1091,9 +1093,9 @@ S32K5 是 ASIL D 平台，MPU 配置本身属于**安全相关配置项**，需�
 
 ---
 
-### 9. 实现清单
+## 9. 实现清单
 
-#### 8.1 移植层接口抽象
+### 8.1 移植层接口抽象
 
 由于 M7 与 R52 的寄存器模型完全不同，驱动层应抽象出统一接口：
 
@@ -1139,7 +1141,7 @@ extern const MpuHalOps MpuHal_R52;  /* PMSAv8-32 实现 */
 | `MPU_AP_FULL_RW` | `011` | `00` |
 | `MPU_AP_PRIV_RO` | `101` | `10` |
 
-#### 8.2 集成步骤
+### 8.2 集成步骤
 
 1. 打开 `SCB->SHCSR` 的 `MEMFAULTENA` 位（MemManage 使能），并设置优先级高于其他可屏蔽异常。
 2. 实现 MemManage（EL0/EL1 为 Abort 异常）处理程序，读取并保存 CFSR/MMFAR/BFAR 与堆栈 PC/LR。
@@ -1149,7 +1151,7 @@ extern const MpuHalOps MpuHal_R52;  /* PMSAv8-32 实现 */
 6. 使能后执行自检比对，失败则拒绝启动。
 7. 在 Debug 配置中打开 MemManage / Abort 断点。
 
-#### 8.3 常见错误清单
+### 8.3 常见错误清单
 
 | # | 错误 | 后果 | 修正 |
 | --- | --- | --- | --- |
@@ -1171,7 +1173,7 @@ extern const MpuHalOps MpuHal_R52;  /* PMSAv8-32 实现 */
 
 ---
 
-### 10. 参考资料
+## 10. 参考资料
 
 | # | 文档 | 链接 |
 | --- | --- | --- |
@@ -1197,7 +1199,7 @@ extern const MpuHalOps MpuHal_R52;  /* PMSAv8-32 实现 */
 
 ---
 
-### 11. 待确认事项
+## 11. 待确认事项
 
 **Rev.B（2026-10-14）已关闭** —— 依据 `rm1131130` Rev.3 及其内嵌 `S32K5xx_memory_map.xlsx` 解决：
 
@@ -1228,7 +1230,7 @@ extern const MpuHalOps MpuHal_R52;  /* PMSAv8-32 实现 */
 
 ---
 
-### 12. OMU：ASIL 分区的地址重映射陷阱（Rev.B 新增）
+## 12. OMU：ASIL 分区的地址重映射陷阱（Rev.B 新增）
 
 Overlay Management Unit 只重映射**读**地址，且 FCCU 被要求在其正常工作时保持其禁用。
 
@@ -1248,7 +1250,7 @@ Overlay Management Unit 只重映射**读**地址，且 FCCU 被要求在其正�
 
 ---
 
-### 13. 风险清单汇总（Rev.B 新增）
+## 13. 风险清单汇总（Rev.B 新增）
 
 | # | 风险 | 严重度 | 依据 |
 | --- | --- | --- | --- |

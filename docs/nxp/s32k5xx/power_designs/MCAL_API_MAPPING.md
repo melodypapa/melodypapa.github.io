@@ -1,4 +1,6 @@
-## S32K5 MCAL 驱动 API 与休眠设计方案映射分析
+---
+title: "S32K5 MCAL 驱动 API 与休眠设计方案映射分析"
+---
 
 **分析对象**：`S32K5_R52_M7_Sleep_Design_CN.md` / `S32K5_R52_M7_Sleep_Design_EN.md`
 **分析基准**（取自 IMA 知识库「米多papa的知识库 / MCAL」文件夹）
@@ -14,15 +16,15 @@
 
 ---
 
-### 一、核心结论
+## 1. 核心结论
 
 设计文档描述的是**底层寄存器级流程**，而 MCAL MCU 驱动已经把这套流程**封装成了标准 AUTOSAR 服务**。二者关系是：**文档流程 ≈ MCU 驱动内部实现**，绝大多数步骤不需要应用层手写。
 
-初版设计文档完全没提 MCAL 驱动的存在，会导致集成时出现职责空白。**该问题已在后续修订中解决**（设计文档第 4 节现已包含 SW1–SW4 四阶段与驱动 API 的映射表）；第四节保留当初的缺口分析记录，所列修订建议**均已落实到设计文档**（状态见第七节清单）。
+初版设计文档完全没提 MCAL 驱动的存在，会导致集成时出现职责空白。**该问题已在后续修订中解决**（设计文档第 4 节现已包含 SW1–SW4 四阶段与驱动 API 的映射表）；第 4 节保留当初的缺口分析记录，所列修订建议**均已落实到设计文档**（状态见第 7 节清单）。
 
 ---
 
-### 二、S32K5 MCU 驱动覆盖的 API 清单
+## 2. S32K5 MCU 驱动覆盖的 API 清单
 
 AUTOSAR SWS R23-11 定义的 MCU 驱动服务共 11 个，S32K5 MCU 驱动实现情况如下（Service ID 以 SWS R23-11 原文为准）：
 
@@ -42,7 +44,9 @@ AUTOSAR SWS R23-11 定义的 MCU 驱动服务共 11 个，S32K5 MCU 驱动实现
 
 > ⚠️ **Service ID 注意事项**：`Mcu_PerformReset` 在 SWS 中是**条件服务**（`SWS_Mcu_00146`：仅当 `McuPerformResetApi` 为 TRUE 时提供），因此其编号在不同 AUTOSAR 版本间存在偏移。本表按 R23-11 原文排列，**实际取值请以你所用 MCAL 版本的 `Mcu_Cfg.h` / `Mcu.h` 为准**。
 
-#### 与休眠方案直接相关的三个 API
+> 📌 **平台可用性注（UM §3.6.13）**：`Mcu_GetPowerModeState` 在 S32K5 平台**不可用**——硬件仅支持 run/standby 两种模式，且只有 Run 模式执行代码，模式状态隐式可知。模式查询逻辑不要依赖该 API。
+
+### 与休眠方案直接相关的三个 API
 
 **1. `Mcu_SetMode` — 核心 API**
 
@@ -76,7 +80,7 @@ SWS_Mcu_00148：
 
 ---
 
-### 三、驱动内部实现：SW1–SW4 四阶段
+## 3. 驱动内部实现：SW1–SW4 四阶段
 
 **这是本次分析最关键的发现**。S32K5 MCU 驱动 User Manual §3.6.6 明确给出了进入低功耗模式的完整软件阶段划分，**与设计文档的步骤高度对应**：
 
@@ -89,7 +93,7 @@ SWS_Mcu_00148：
 | **SW3** | Flash Low-Power Handshake + PMC_LASTMILE Regulator Disable | `Mcu_InitClock`（切 FIRC、关 PLL）；`Mcu_SetMode(SOC_PREPARE_STANDBY)` | 第 4 节 Step 4.6（已落实） |
 | **SW4** | Main Core Shutdown | 配置唤醒 IP；`Mcu_SetMode(SOC_STANDBY)`，`McuMainCoreSelect` 设为执行该转换的核 | 第 4 节 Step 4.7-4.10 请求模式切换 |
 
-#### SW2 的两步握手（与你的设计文档高度一致）
+### SW2 的两步握手（与你的设计文档高度一致）
 
 User Manual 原文：
 
@@ -99,7 +103,7 @@ User Manual 原文：
 
 这印证了你文档第 4 节「Requestor Core 协调其他核心 WFI 再关钟」的设计是**符合驱动实现思路的**。
 
-#### 关键配置参数（Tresos / MCAL 配置）
+### 关键配置参数（Tresos / MCAL 配置）
 
 | 参数 | 作用 |
 |---|---|
@@ -118,7 +122,7 @@ User Manual 原文：
 
 > ⚠️ **这条对你的双核方案很关键**：主核时钟必须保持使能。若主核由应用自己配置，需同时勾选 `McuCoreUnderMcuControl` 与 `McuCoreClockEnable`，否则关断时会出问题。
 
-#### 时钟模式选项（§3.6.7）
+### 时钟模式选项（§3.6.7）
 
 | 选项 | 模式 | CORE_CLK | 可用模式 |
 |---|---|---|---|
@@ -134,9 +138,9 @@ User Manual 原文：
 
 ---
 
-### 四、设计文档的 3 个集成缺口（修订记录，均已落实）
+## 4. 设计文档的 3 个集成缺口（修订记录，均已落实）
 
-#### 缺口 1：SW3 阶段完全缺失 ⭐ 最重要
+### 缺口 1：SW3 阶段完全缺失 ⭐ 最重要
 
 **修订状态**：第 4 节 Step 4 现已包含 SW3（Step 4.6：挂起/等待 Flash 高压操作结束 → 切换 FIRC 关 PLL → `SOC_PREPARE_STANDBY`，含 **PMC_LASTMILE 关闭**）。以下为当初的缺口分析，修订建议已落实。
 
@@ -160,7 +164,7 @@ SW3: Flash 低功耗握手与 PMC_LASTMILE 关闭
 
 ---
 
-#### 缺口 2：未说明 EcuM 的唤醒中断责任
+### 缺口 2：未说明 EcuM 的唤醒中断责任
 
 **User Manual §3.6.6 Note 原文**：
 
@@ -179,7 +183,7 @@ SW3: Flash 低功耗握手与 PMC_LASTMILE 关闭
 
 ---
 
-#### 缺口 3：LPM25EN（2.5V 供电才能用 FXOSC）未提及
+### 缺口 3：LPM25EN（2.5V 供电才能用 FXOSC）未提及
 
 **User Manual §3.6.6 原文**：
 
@@ -203,9 +207,9 @@ SW3: Flash 低功耗握手与 PMC_LASTMILE 关闭
 
 ---
 
-### 五、S32K5 驱动已知偏差与限制（影响方案实现）
+## 5. S32K5 驱动已知偏差与限制（影响方案实现）
 
-#### 5.1 与 AUTOSAR 规范的偏差（§3.4 Deviations）
+### 5.1 与 AUTOSAR 规范的偏差（§3.4 Deviations）
 
 | Requirement | 状态 | 说明 | 对方案的影响 |
 |---|---|---|---|
@@ -216,7 +220,7 @@ SW3: Flash 低功耗握手与 PMC_LASTMILE 关闭
 
 > **`SWS_Mcu_00056` 这一条对你的唤醒流程影响最大**：设计文档第 5 节唤醒流程写「PD2 上电 → HSE2_FW 使能应用核 → 恢复上下文 → 回到 RUN」，但**没有提时钟如何恢复**。PLL 恢复需要单独调 `Mcu_DistributePllClock`。
 
-#### 5.2 驱动限制（§3.5 Limitations）
+### 5.2 驱动限制（§3.5 Limitations）
 
 | 限制 | 后果 | 与方案的关系 |
 |---|---|---|
@@ -230,7 +234,7 @@ SW3: Flash 低功耗握手与 PMC_LASTMILE 关闭
 
 ---
 
-### 六、MCAL 分层职责划分建议
+## 6. MCAL 分层职责划分建议
 
 基于以上分析，设计文档应补充以下职责边界：
 
@@ -248,7 +252,7 @@ SW3: Flash 低功耗握手与 PMC_LASTMILE 关闭
 
 ---
 
-### 七、建议修订清单（新增）
+## 7. 建议修订清单（新增）
 
 | 优先级 | 动作 | 依据 | 状态（2026-10-15 核对） |
 |---|---|---|---|
@@ -266,7 +270,7 @@ SW3: Flash 低功耗握手与 PMC_LASTMILE 关闭
 
 ---
 
-### 八、与上一轮评审的关系
+## 8. 与上一轮评审的关系
 
 上一轮 RM 评审的修订**依然全部有效**——那些是**寄存器级**的正确性，MCAL 驱动内部正是这么做的。
 
@@ -278,7 +282,7 @@ SW3: Flash 低功耗握手与 PMC_LASTMILE 关闭
 
 ---
 
-### 九、ima 原文核实记录（2026-10-15）
+## 9. ima 原文核实记录（2026-10-15）
 
 针对评审中「未重新对照 ima 原文」的 4 项引用，已回库逐条核对（源文档：ima 知识库内 `RTD_MCU_UM.pdf` = UM85MCUASRR23-11、`AUTOSAR_CP_SWS_MCUDriver.pdf` = AUTOSAR CP R23-11）：
 
@@ -289,7 +293,7 @@ SW3: Flash 低功耗握手与 PMC_LASTMILE 关闭
 | 3 | 时钟模式表 D/E 行 "Low-Speed RUN / Run" 大小写不一致 | ✅ 非笔误——UM §3.6.7 原文即如此写法 | UM §3.6.7 Option D/E 原文（见表下注释） |
 | 4 | 时钟失败错误码变体 `MCU_E_ISR_CLOCK_FAILURE` | ✅ 准确 | UM §3.4 偏离表：SWS_Mcu_00053/00257/00258 均标 N/S，Notes 定义该 ISR 变体由 CMU 中断上报 |
 
-顺带核实的其他引用同样全部准确：主核时钟保持使能 Note（UM §3.6.2，与第三节引用逐字一致）；「一次只关一个 CPE 分区」HardFault 约束（UM §3.5 Driver Limitations）；`SWS_Mcu_00056` 的 N/S 描述（UM §3.4：NXP 驱动偏离 SWS——"will change the Mcu hardware / clock switching to PLL is not completed by Mcu_InitClock"，与第六节表格表述一致）。
+顺带核实的其他引用同样全部准确：主核时钟保持使能 Note（UM §3.6.2，与第 3 节引用逐字一致）；「一次只关一个 CPE 分区」HardFault 约束（UM §3.5 Driver Limitations）；`SWS_Mcu_00056` 的 N/S 描述（UM §3.4：NXP 驱动偏离 SWS——"will change the Mcu hardware / clock switching to PLL is not completed by Mcu_InitClock"，与第 6 节表格表述一致）。
 
 **结论：本文全部 UM/SWS 引用均可在 ima 知识库原文中溯源，无推测内容。**
 

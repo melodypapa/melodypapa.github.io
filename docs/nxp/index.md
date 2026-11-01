@@ -9,7 +9,7 @@ NXP 汽车芯片的应用笔记与设计方案。
 
 ## S32K5xx
 
-- [S32K5xx 文档索引](S32K5xx/index.md)
+- [S32K5xx 文档索引](s32k5xx/index.md)
 
 ## S32G2
 
