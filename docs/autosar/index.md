@@ -138,10 +138,6 @@ title: "CP AUTOSAR"
   * [Guide to Mode Management（模式管理指南）](mode_management/guide_to_mode_management/index.md)
   * [callback 与 callout 的区别（微信公众号）](https://mp.weixin.qq.com/s/BlOXxJJ33NNNuG_RvbzF-Q)
 
-### 电源状态管理
-
-* [AUTOSAR ECU 电源状态管理：启动、下电、唤醒与复位流程](power/index.md)
-
 ### 系统服务
 
 * [系统服务（System Services）](system_services/index.md)
