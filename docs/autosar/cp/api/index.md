@@ -14,5 +14,5 @@ title: "AUTOSAR API 清单"
 
 ## 相关内容
 
-- [术语表](../glossary.md)
+- [术语表](../../glossary.md)
 - [CP AUTOSAR](../index.md)

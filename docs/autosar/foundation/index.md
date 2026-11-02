@@ -1,14 +1,25 @@
 ---
-title: "基础（Foundation）"
+title: "基础标准（Foundation）"
 ---
 
-**AUTOSAR** 基础（**Foundation**）标准相关的笔记：**Foundation** 标准汇集了 **Classic Platform** 与 **Adaptive Platform** 共用的跨平台规范，例如统一定义全部 **AUTOSAR** 术语与缩略语的术语表（**TR Glossary**）。本节按 **Foundation** 标准的分类组织，目前收录「通用（General）」类别的文档。
+**AUTOSAR** 基础标准（**Foundation**）R23-11 的中文翻译笔记：**Foundation** 汇集了 **Classic Platform** 与 **Adaptive Platform** 共用的跨平台规范——需求规范（**RS**）、协议规范（**PRS**）、模板规范（**TPS**）、技术报告（**TR**）与说明文档（**EXP**），例如统一定义全部 **AUTOSAR** 术语与缩略语的术语表（**TR Glossary**）。本节按 **Foundation** R23-11 标准的十个分类组织；目前已翻译「通用（General）」类别的 **TR Glossary**，其余分类的页面列出待翻译的源文档。
 
 ## 文章
 
-* [TR Glossary（AUTOSAR 术语表）](general/tr_glossary/index.md)
+* [通用（General）](general/index.md)
+  * [TR Glossary（AUTOSAR 术语表）](general/tr_glossary/index.md)
+* [通信管理（Communication Management）](communication_management/index.md)
+* [诊断（Diagnostics）](diagnostics/index.md)
+* [健康监控（Health Monitoring）](health_monitoring/index.md)
+* [方法论与模板（Methodology and Templates）](methodology_templates/index.md)
+* [协议（Protocols）](protocols/index.md)
+* [发布文档（Release Documentation）](release_documentation/index.md)
+* [功能安全（Safety）](safety/index.md)
+* [信息安全（Security）](security/index.md)
+* [系统服务（System Services）](system_services/index.md)
 
 ## 相关内容
 
-* [CP AUTOSAR 总览](../index.md)
+* [AUTOSAR 总览](../index.md)
+* [CP AUTOSAR（经典平台）](../cp/index.md)
 * [术语表](../glossary.md)

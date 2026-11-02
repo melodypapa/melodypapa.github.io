@@ -155,7 +155,7 @@ def iter_site(corpus: Path, allow: list[str]):
         rel = path.relative_to(corpus).as_posix()
         if any(frag in rel for frag in allow):
             continue
-        if rel in ("STANDARD.md", "TODO.md", "glossary.md") or rel.startswith("api/"):
+        if rel in ("STANDARD.md", "TODO.md", "glossary.md") or rel.startswith("cp/api/"):
             continue
         if rel.startswith("sync-todo/"):
             continue

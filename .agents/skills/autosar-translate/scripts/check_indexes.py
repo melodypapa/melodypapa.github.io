@@ -1,23 +1,29 @@
 #!/usr/bin/env python3
-"""Check the nav and the three derived index levels of this site.
+"""Check the nav and the derived index levels of this site.
 
 The `nav` block in `mkdocs.yml` is the source of truth for the site
-structure. Three hand-maintained index pages are derived from it:
+structure. Hand-maintained index pages are derived from it:
 
-  docs/index.md                      site home: one bullet per top-level tab
-  docs/autosar/index.md              CP AUTOSAR overview: full page tree
-  docs/autosar/<section>/index.md    section landing page: its whole branch
+  docs/index.md                         site home: one bullet per top-level tab
+  docs/autosar/index.md                 AUTOSAR hub: links its direct children
+                                        (术语表 + the CP and Foundation landings)
+  docs/autosar/cp/index.md              CP overview: full page tree of the CP group
+  docs/autosar/foundation/index.md      Foundation overview: full page tree
+  docs/autosar/<platform>/<section>/index.md
+                                        section landing page: its whole branch
 
 This is the mechanical tripwire for SKILL.md Step 6.3 / Phase A check 4.
 It verifies what the strict build cannot:
 
   1. every nav target exists on disk;
-  2. the CP AUTOSAR overview links every page of that nav branch;
-  3. every CP AUTOSAR section landing page links every page of its branch;
+  2. the AUTOSAR hub links every direct child of the tab (pages and the
+     landing page of every nested group);
+  3. every other landing page inside the AUTOSAR tab — at any nesting depth —
+     links every page of its nav subtree;
   4. the site home links every top-level nav tab;
   5. every internal link on those index pages resolves.
 
-`--titles` additionally audits the `English（中文）` structure of CP AUTOSAR
+`--titles` additionally audits the `English（中文）` structure of AUTOSAR
 article titles, including empty Chinese halves and nested parentheses, and
 lists violations (report-only). Semantic equivalence still requires checking
 the title against its `spec:` source; this script does not judge translations.
@@ -42,7 +48,7 @@ try:
 except ImportError:  # pragma: no cover - environment guard
     sys.exit("check_indexes: PyYAML is required (use the mkdocs venv)")
 
-CP_LABEL = "CP AUTOSAR"
+TAB_LABEL = "AUTOSAR"
 HOME = "首页"
 LINK_RE = re.compile(r"\]\(([^)]+)\)")
 
@@ -89,6 +95,39 @@ def landing_page(value):
     if isinstance(value, list) and value and is_page(value[0]):
         return value[0]
     return None
+
+
+def landings_in(items) -> list[tuple[str, list]]:
+    """Every (landing page, its nav subtree) inside `items`, at any depth."""
+    out: list[tuple[str, list]] = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        for branch in item.values():
+            if not isinstance(branch, list):
+                continue
+            landing = landing_page(branch)
+            if landing is not None:
+                out.append((landing, branch))
+            out.extend(landings_in(branch))
+    return out
+
+
+def direct_children(items) -> list[str]:
+    """Pages a hub must link: direct child pages, and for each nested group
+    its landing page (or all of its pages when it has none)."""
+    out: list[str] = []
+    for item in items:
+        if isinstance(item, str):
+            out.append(item)
+        elif isinstance(item, dict):
+            for value in item.values():
+                if isinstance(value, str):
+                    out.append(value)
+                elif isinstance(value, list):
+                    landing = landing_page(value)
+                    out.extend([landing] if landing else pages_of(value))
+    return out
 
 
 def resolve(page: Path, target: str) -> Path:
@@ -148,68 +187,53 @@ def main() -> int:
         if not (docs / page).is_file():
             failures.append(f"nav target missing on disk: {page}")
 
-    # Locate the CP AUTOSAR branch ----------------------------------------
-    cp_branch = None
+    # Locate the AUTOSAR tab ----------------------------------------------
+    tab_branch = None
     top_sections: list[tuple[str, object]] = []
     for item in nav:
         if not isinstance(item, dict):
             continue
         for label, value in item.items():
             top_sections.append((str(label), value))
-            if str(label) == CP_LABEL:
-                cp_branch = value
-    if cp_branch is None:
-        failures.append(f"nav has no '{CP_LABEL}' top-level tab")
+            if str(label) == TAB_LABEL:
+                tab_branch = value
+    if tab_branch is None:
+        failures.append(f"nav has no '{TAB_LABEL}' top-level tab")
 
-    # Section landing pages inside the CP AUTOSAR branch -----------------
-    cp_landings: list[str] = []
-    if isinstance(cp_branch, list):
-        for child in cp_branch:
-            if not isinstance(child, dict):
-                continue
-            for branch in child.values():
-                landing = landing_page(branch)
-                if landing is not None:
-                    cp_landings.append(landing)
-
-    # 2. CP AUTOSAR overview links every page of the branch ----------------
     index_pages = [docs / "index.md"]
-    landing_count = len(cp_landings)
-    if cp_branch is not None:
-        overview = docs / "autosar" / "index.md"
-        index_pages.append(overview)
-        expected = [p for p in pages_of(cp_branch) if p != "autosar/index.md"]
-        linked = {rel(docs, p) for p in links_in(overview)}
+    hub = landing_page(tab_branch)
+    landings = landings_in(tab_branch) if isinstance(tab_branch, list) else []
+    landing_count = len(landings)
+
+    # 2. AUTOSAR hub links every direct child of the tab --------------------
+    if hub is not None:
+        page = docs / hub
+        index_pages.append(page)
+        expected = [p for p in direct_children(tab_branch) if p != hub]
+        linked = {rel(docs, p) for p in links_in(page)}
         missing = [p for p in expected if p not in linked]
         if missing:
             failures.append(
-                "CP AUTOSAR overview misses {} page(s): {}".format(
+                "AUTOSAR hub misses {} page(s): {}".format(
                     len(missing), ", ".join(missing[:8])
                 )
             )
+    elif tab_branch is not None:
+        failures.append(f"'{TAB_LABEL}' tab has no unlabeled landing page")
 
-        # 3. Section landing pages link their whole branch ------------------
-        for label, value in top_sections:
-            if label != CP_LABEL or not isinstance(value, list):
-                continue
-            for child in value:
-                if not isinstance(child, dict):
-                    continue
-                for branch in child.values():
-                    landing = landing_page(branch)
-                    if landing is None or not isinstance(branch, list):
-                        continue
-                    page = docs / landing
-                    index_pages.append(page)
-                    expected = [p for p in pages_of(branch) if p != landing]
-                    linked = {rel(docs, p) for p in links_in(page)}
-                    missing = [p for p in expected if p not in linked]
-                    if missing:
-                        failures.append(
-                            "landing page {} misses {} page(s): {}".format(
-                                landing, len(missing), ", ".join(missing[:8])
-                            )
-                        )
+    # 3. Every nested landing page links its whole subtree ------------------
+    for landing, branch in landings:
+        page = docs / landing
+        index_pages.append(page)
+        expected = [p for p in pages_of(branch) if p != landing]
+        linked = {rel(docs, p) for p in links_in(page)}
+        missing = [p for p in expected if p not in linked]
+        if missing:
+            failures.append(
+                "landing page {} misses {} page(s): {}".format(
+                    landing, len(missing), ", ".join(missing[:8])
+                )
+            )
 
     # 4. Homepage links every top-level tab --------------------------------
     home = docs / "index.md"
@@ -241,15 +265,16 @@ def main() -> int:
 
     # 6. Title structure audit (report-only) -------------------------------
     title_issues: list[tuple[str, str, str]] = []
-    if args.titles and cp_branch is not None:
-        skip = set(cp_landings) | {
-            "autosar/index.md",
+    if args.titles and tab_branch is not None:
+        skip = {landing for landing, _ in landings} | {
+            hub,
             "autosar/glossary.md",
-            "autosar/api/index.md",
-            "autosar/api/types.md",
-            "autosar/api/functions.md",
+            "autosar/cp/api/index.md",
+            "autosar/cp/api/types.md",
+            "autosar/cp/api/functions.md",
+            "autosar/cp/api/functions_by_module.md",
         }
-        for page in pages_of(cp_branch):
+        for page in pages_of(tab_branch):
             if page in skip or not page.startswith("autosar/"):
                 continue
             path = docs / page
@@ -291,11 +316,11 @@ def main() -> int:
         return 1
 
     print(
-        "index checks: OK - nav {} targets, CP AUTOSAR overview {} pages, "
-        "{} section landing pages, {} top-level tabs, 0 broken links".format(
+        "index checks: OK - nav {} targets, AUTOSAR tab {} pages, "
+        "{} landing pages, {} top-level tabs, 0 broken links".format(
             len(all_nav_pages),
-            len([p for p in pages_of(cp_branch) if p != "autosar/index.md"])
-            if cp_branch is not None
+            len([p for p in pages_of(tab_branch) if p != hub])
+            if tab_branch is not None
             else 0,
             landing_count,
             len([l for l, _ in top_sections if l != HOME]),

@@ -5,6 +5,7 @@ Personal knowledge base 「米多papa的小屋」: a Material-for-MkDocs site (C
 ## Layout
 
 - `docs/` — ALL site content. **MkDocs nav paths in `mkdocs.yml` are relative to `docs/`, not the repo root.**
+- `docs/autosar/` — one subtree per AUTOSAR platform (since 2026-11-02): `cp/<section>/<article>/` for Classic Platform (SWS/EXP/TPS translations + the generated API listing `cp/api/`), `foundation/<topic>/<article>/` for Foundation (RS/PRS/TPS/TR/EXP; 10 topic landings, TR Glossary translated), plus the hub `index.md`, the shared `glossary.md`, and the excluded working files (`STANDARD.md`, `TODO.md`, `sync-todo/`). Nav: one `AUTOSAR` tab → `CP（经典平台）` / `Foundation（基础标准）` groups. Old pre-move URLs are served by `mkdocs-redirects` (`redirect_maps` in `mkdocs.yml`; pinned `==1.2.2` — 1.2.3 pulls in the `properdocs` fork).
 - `mkdocs.yml` — site config + explicit `nav`. Every page must be registered here or `--strict` fails; removing a page requires removing its nav entry.
 - `overrides/` — Material theme customization (sidebar 常用链接 block).
 - `.github/workflows/ci.yml` — deploy. **Triggers on push to `master` only; PRs build nothing.**
@@ -50,4 +51,4 @@ Pre-existing INFO-level anchor notices in build output are known and do not fail
 ## Known gotchas
 
 - The Jekyll-era stale `.gitignore` patterns (`_site`, `.sass-cache`, `.jekyll-cache`, `.jekyll-metadata`, `vendor`, `nxp/saf`, `eb_tresos/*`, `reference`) were removed on 2026-11-02 along with the `_site/` build, `.bundle/config`, and the default Jekyll welcome post — the repo is now mkdocs-only.
-- `docs/autosar/template/timimg_extension/indx.md` — directory and filename typos that are load-bearing: `mkdocs.yml` nav references `indx.md` explicitly. Fixing the name requires a nav change in the same commit.
+- `docs/autosar/cp/template/timimg_extension/indx.md` — directory and filename typos that are load-bearing: `mkdocs.yml` nav references `indx.md` explicitly. Fixing the name requires a nav change in the same commit.

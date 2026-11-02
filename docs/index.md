@@ -13,7 +13,7 @@ A slow sparrow should make an early start. Learning a endless life.
 - **[博客](blog/index.md)** — 更新动态与技术随笔
 - **[娱乐](entertainment/index.md)** — 音乐欣赏与读书笔记
 - **[ARM Cortex](cortex/index.md)** — Cortex-M7 / Cortex-R52 处理器架构：内存保护（MPU）、异常模型、地址映射、缓存
-- **[CP AUTOSAR](autosar/index.md)** — AUTOSAR CP 各基础软件模块的原理与设计：通信（CAN/Ethernet/LIN）、存储（NvM/Flash/EEP）、模式管理（EcuM/BswM）、I/O（ADC/DIO/PWM）、系统服务等
+- **[AUTOSAR](autosar/index.md)** — AUTOSAR R23-11 标准的中文翻译：Classic Platform 各基础软件模块的原理与设计（通信 CAN/Ethernet/LIN、存储 NvM/Flash/EEP、模式管理 EcuM/BswM、I/O ADC/DIO/PWM、系统服务等），以及跨平台的 Foundation 基础标准
 - **[EB Tresos](eb_tresos/index.md)** — EB tresos Studio 配置工具的使用与 Safety OS 集成
 - **[NXP](nxp/index.md)** — S32K5xx 与 S32G2 芯片的应用笔记：MPU 设计、休眠方案、S32G2 各模块
 - **[语言](languages/index.md)** — 德语（Berliner Platz）与法语课程笔记
