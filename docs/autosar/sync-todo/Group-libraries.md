@@ -20,7 +20,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (confirmed 2026-11-03, batch-end joint confirmation covering all batch decisions incl. the "None." API-group rendering and the annex A/B numbered-continuation handling)
-  - [x] Step 6 — TODO.md row + commit/PR (commit 209cfc5; TODO.md ✅ row added; batch PR pending user confirmation)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 209cfc5; PR #250 "Part of #249")
 - [x] e2e (SWS_E2ELibrary · R23-11 markdown · ❌ new article, short name E2E; note this is a different document from cp/communication/e2e_transformer)
   - Note: 2026-11-03 batch run — committed without the per-article Step 5 gate (batch-end joint confirmation), same as the crc row.
   - Note: check_api_sync GREEN (62 types / 91 functions / 91 **说明** blocks, names+order match) — this document's identifier-named leaves align with the script's positional 7.2/7.3 assumption.
@@ -34,7 +34,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (confirmed 2026-11-03, batch-end joint confirmation covering all batch decisions incl. the "None." API-group rendering and the annex A/B numbered-continuation handling)
-  - [x] Step 6 — TODO.md row + commit/PR (commits cd14a65 (crc caption fixup) + 0a3139e; batch PR pending user confirmation)
+  - [x] Step 6 — TODO.md row + commit/PR (commits cd14a65 + 0a3139e; PR #250 "Part of #249")
 - [x] bfx (SWS_BFXLibrary · R23-11 markdown · ❌ new article, short name Bfx)
   - Note: 2026-11-03 batch run — RUN STOPPED HERE per user instruction mid-batch ("stop when this translation finished"); bmc/mfl/mfx/ifl/ifx/efx rows still pending.
   - Note: committed without the per-article Step 5 gate (batch-end joint confirmation), same as the crc/e2e rows.
@@ -48,7 +48,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (confirmed 2026-11-03, batch-end joint confirmation covering all batch decisions incl. the "None." API-group rendering and the annex A/B numbered-continuation handling)
-  - [x] Step 6 — TODO.md row + commit/PR (commit b11a226; batch PR pending user confirmation)
+  - [x] Step 6 — TODO.md row + commit/PR (commit b11a226; PR #250 "Part of #249")
 - [ ] bmc (SWS_BSWMulticoreLibrary · R23-11 markdown · ❌ new article, short name Bmc)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
