@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2062** 个条目。
+共 **2086** 个条目。
 
 ## A
 
@@ -368,6 +368,78 @@ title: "AUTOSAR API 函数清单"
 
 **[Can_Write](../communication/can_driver/index.md#7331-can_write)**
 > 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](../communication/can_driver/index.md) · SWS_CANDriver · R23-11
+
+**[CanIf_TTAckTimeMark](../communication/ttcan_interface/index.md#745-canif_ttacktimemark)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTApplWatchdogError](../communication/ttcan_interface/index.md#761-canif_ttapplwatchdogerror)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTCancelTimeMark](../communication/ttcan_interface/index.md#744-canif_ttcanceltimemark)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTDisableTimeMarkIRQ](../communication/ttcan_interface/index.md#747-canif_ttdisabletimemarkirq)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTEnableTimeMarkIRQ](../communication/ttcan_interface/index.md#746-canif_ttenabletimemarkirq)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTGap](../communication/ttcan_interface/index.md#764-canif_ttgap)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTGetControllerTime](../communication/ttcan_interface/index.md#731-canif_ttgetcontrollertime)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTGetErrorLevel](../communication/ttcan_interface/index.md#734-canif_ttgeterrorlevel)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTGetMasterState](../communication/ttcan_interface/index.md#732-canif_ttgetmasterstate)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTGetNTUActual](../communication/ttcan_interface/index.md#733-canif_ttgetntuactual)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTGetSyncQuality](../communication/ttcan_interface/index.md#742-canif_ttgetsyncquality)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTGetTimeMarkIRQStatus](../communication/ttcan_interface/index.md#748-canif_ttgettimemarkirqstatus)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTGlobalTimePreset](../communication/ttcan_interface/index.md#738-canif_ttglobaltimepreset)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTMasterStateChange](../communication/ttcan_interface/index.md#767-canif_ttmasterstatechange)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTSetEndOfGap](../communication/ttcan_interface/index.md#736-canif_ttsetendofgap)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTSetExtClockSyncCommand](../communication/ttcan_interface/index.md#739-canif_ttsetextclocksynccommand)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTSetNextIsGap](../communication/ttcan_interface/index.md#735-canif_ttsetnextisgap)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTSetNTUAdjust](../communication/ttcan_interface/index.md#7310-canif_ttsetntuadjust)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTSetTimeCommand](../communication/ttcan_interface/index.md#737-canif_ttsettimecommand)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTSetTimeMark](../communication/ttcan_interface/index.md#743-canif_ttsettimemark)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTSevereError](../communication/ttcan_interface/index.md#763-canif_ttsevereerror)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTStartOfCycle](../communication/ttcan_interface/index.md#765-canif_ttstartofcycle)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTTimeDisc](../communication/ttcan_interface/index.md#766-canif_tttimedisc)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTTimingError](../communication/ttcan_interface/index.md#762-canif_tttimingerror)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
 
 **[CanNm_ActivateTxPnShutdownMsg](../communication/can_network_management/index.md#7321-cannm_activatetxpnshutdownmsg)**
 > 函数 · [AUTOSAR CAN NM（CAN网络管理）](../communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11

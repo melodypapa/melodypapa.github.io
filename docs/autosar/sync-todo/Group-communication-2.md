@@ -214,13 +214,18 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 + B ↔ §1–§9 + B 1:1; ch.6 tracing + appendix A dropped (compliance))
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
 - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-4)
-- [ ] ttcan_interface (SWS_TTCANInterface · R23-11 markdown · ❌ new article)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-- [ ] Step 6 — TODO.md row + commit/PR
+- [x] ttcan_interface (SWS_TTCANInterface · R23-11 markdown · ❌ new article)
+  - Note: article `cp/communication/ttcan_interface/` (directory per row name, nav label "TtCanIf"). Shape: ch.1 → §1 (Figure1_1 layer model; figure UML chrome dropped) · ch.2 → §2 43 acronyms (two page-split tables merged in order) · ch.3 → §3 (intro + 3.1 5-entry registry + 3.2) · ch.4 → §4 single paragraph (same constraints as CanIf) · ch.5 → §5 (5.1 additional dependencies + 5.1.1 OS/5.1.2 PduR/5.1.3 upper protocol layers/5.1.4 TTCAN driver) · ch.7 → §6 (6.1 general functionality, 6.2 state machine + Figure7_1, 6.3 Job List, 6.4 JLEF incl. the 8-step exemplary execution with nested lettered sub-steps (source numbering quirk 1..9 re-flowed), 6.5 TTCAN data communication + [00141] buffering, 6.6 controller mode BusOff mapping, 6.7 error classification incl. extended production error 表7.1 CANIF_TT_E_JLE_SYNC attribute table) · ch.8 → §7 (7.1 12 imported + PduIdType note; 7.2 10 types; 7.3 10 functions; 7.4 可选函数定义 8 functions incl. CanIf_TTJobListExec_<Controller> with &lt;Controller&gt; placeholder headings; 7.5 scheduled none-sentence; 7.6 7 callbacks; 7.7 期望接口 11 强制 + 8 可选 + 7.7.3 可配置接口 + 7.7.3.1 &lt;User_TriggerTransmit&gt; extension) · ch.9 → §8 3 figures · ch.10 → §9 (10.1 intro + Figure10_1 + CanIfSupportTTCAN note; 9.1.1 CanIfTTGeneral 2 params + included table; 9.1.2 CanIfTTDemEventParameterRefs 1 param; 9.1.3 CanIfTTTxFrameTriggering + Figure10_2 + 2 params; 9.1.4 CanIfTTRxFrameTriggering + Figure10_3 + 2 params; 9.2 发布信息) · ch.6 tracing + appendix A dropped; source ## B Change History → ## B (B.1.3 R22-11 deleted [SWS_TtCanIf_00058]; B.2.2 R23-11 changed [SWS_TtCanIf_00008]; others none)
+  - Note: figure mapping corrections: Figure1_1 and Figure10_3 initial mapper fallbacks hit the known deco hashes (31a8ee06/f5f4bf49 — caption had only deco within 10 lines below); real artifacts recovered from the image ref 2 lines ABOVE each caption (image_000007/image_000064) — 8 content figures total
+  - Note: source quirks kept verbatim and reported: [SWS_TtCanIf_00106] CanIf_TTSetEndOfGap "shall call Can_TTSetNextIsGap(Controller)" (copy-paste from 8.3.5, semantic mismatch); CanIf_TTGetNTUActual Syntax "float32 CanIf_TTNTUAct" without pointer (md-as-printed, Parameters(out) says address); "syncronisation"/"synchronoulsy"/"funciton"/"occured" typos translated past; two truncated Syntax parens reconstructed (SetEndOfGap/AckTimeMark/GetSyncQuality/TimeDisc)
+  - Note: Phase A — strict build exit 0 / 0 WARNING; check_heading_lang OK; check_indexes OK; hygiene 0 h1/\</{DRAFT}; acronym 43 term lines = source 43 rows; check_api_sync OK (10 types/10 functions/10 说明; 8 optional 8.4.x functions verified manually); gen_api_list regenerated (TtCanIf 10 types + 24 functions, --check 0); census --apply: 9 lines (3 chapter-ref + 33 citation links) + 5 registry anchors, idempotent re-run 0 lines
+  - Note: glossary +7 new terms (Communication Job, Controller, DLL, Gap, JLEF, Job List, UL) + 6 来源 appends (OS/PduR/SDU/EcuM/Hardware Object/Dem); the 16 "See ISO 11898-4" rows translate as pointer entries
+  - [x] Step 1 — Source resolution + gap analysis (1799-line R23-11 markdown; config tables parsed field-by-field)
+  - [x] Step 2 — In-place translation/completion (full Type A build, main session)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 + B ↔ §1–§9 + B 1:1; ch.6 tracing + appendix A dropped (compliance))
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+- [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-4)
 - [ ] j1939nm (SWS_SAEJ1939NetworkManagement · R23-11 markdown · ❌ new article, short name J1939Nm)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

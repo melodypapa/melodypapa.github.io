@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **546** 个条目。
+共 **556** 个条目。
 
 ## A
 
@@ -170,6 +170,36 @@ title: "AUTOSAR API 类型清单"
 
 **[Can_TTTURType](../communication/ttcan_driver/index.md#728-can_ttturtype)**
 > 类型 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[CanIf_TTErrorLevelEnumType](../communication/ttcan_interface/index.md#725-canif_tterrorlevelenumtype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTErrorLevelType](../communication/ttcan_interface/index.md#726-canif_tterrorleveltype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTEventEnumType](../communication/ttcan_interface/index.md#729-canif_tteventenumtype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTMasterSlaveModeType](../communication/ttcan_interface/index.md#722-canif_ttmasterslavemodetype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTMasterStateType](../communication/ttcan_interface/index.md#724-canif_ttmasterstatetype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTSevereErrorEnumType](../communication/ttcan_interface/index.md#727-canif_ttsevereerrorenumtype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTSyncModeEnumType](../communication/ttcan_interface/index.md#723-canif_ttsyncmodeenumtype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTTimeSourceType](../communication/ttcan_interface/index.md#728-canif_tttimesourcetype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTTimeType](../communication/ttcan_interface/index.md#721-canif_tttimetype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTTimingErrorIRQType](../communication/ttcan_interface/index.md#7210-canif_tttimingerrorirqtype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
 
 **[CanNm_ConfigType](../communication/can_network_management/index.md#721-cannm_configtype)**
 > 类型 · [AUTOSAR CAN NM（CAN网络管理）](../communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11

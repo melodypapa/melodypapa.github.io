@@ -310,6 +310,7 @@ nav:
         - "Xcp": autosar/cp/communication/xcp/index.md
         - "TcpIp": autosar/cp/communication/tcpip/index.md
         - "TtCan": autosar/cp/communication/ttcan_driver/index.md
+        - "TtCanIf": autosar/cp/communication/ttcan_interface/index.md
         - "UdpNm": autosar/cp/communication/udp_network_management/index.md
       - 全局时间:
         - autosar/cp/globaltime/index.md

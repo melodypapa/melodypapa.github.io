@@ -898,6 +898,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Communication Manager（通信管理器）](cp/system_services/comm/index.md)（SWS_COMManager）
 {: .glossary-source}
 
+**Communication Job**
+> TTCAN 通信作业定义特定的通信操作与所分配的执行时间。
+>
+> 来源：[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）
+{: .glossary-source}
+
 **Communication Mode**
 > 决定允许何种通信的模式：完全通信 = COMM_FULL_COMMUNICATION；无通信 = COMM_NO_COMMUNICATION；静默通信 = COMM_SILENT_COMMUNICATION（**Mode determining which kind of communication are allowed**）。用户不能请求 COMM_SILENT_COMMUNICATION——它是关机时用于同步网络的内部模式。
 >
@@ -980,6 +986,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 持续 MI 被命令点亮期间发动机运行的小时数。
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**Controller**
+> （TTCAN）控制器是 **CPU** 片上或外部的独立硬件器件。一个控制器连接到一个物理通道。
+>
+> 来源：[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）
 {: .glossary-source}
 
 **Conversion Mode**
@@ -1368,6 +1380,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CAN Driver（CAN驱动程序）](cp/communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TTCAN Driver（TTCAN 驱动程序）](cp/communication/ttcan_driver/index.md)（AUTOSAR_CP_SWS_TTCANDriver）
 {: .glossary-source}
 
+**DLL**
+> 数据链路层（**Data Link Layer**）。
+>
+> 来源：[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）
+{: .glossary-source}
+
 **Dlt**
 > Diagnostic Log and Trace —— 诊断日志与跟踪。
 >
@@ -1601,7 +1619,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **EcuM**
 > **ECU** 状态管理器（**ECU State Manager**）
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）、[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）
 {: .glossary-source}
 
 **EDP**
@@ -2215,6 +2233,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## G
 
+**Gap**
+> 参见 ISO 11898-4。
+>
+> 来源：[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）
+{: .glossary-source}
+
 **General Denominator**
 > 通用分母是一个计数器，指示车辆被操作的次数，并考虑通用条件。
 >
@@ -2316,7 +2340,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Hardware Object**
 > CAN硬件对象定义为CAN硬件单元/CAN控制器的CAN RAM中的一个PDU缓冲区。硬件对象定义为CAN硬件单元CAN RAM中的L-PDU缓冲器。
 >
-> 来源：[AUTOSAR CAN Driver（CAN驱动程序）](cp/communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）
+> 来源：[AUTOSAR CAN Driver（CAN驱动程序）](cp/communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）、[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）
 {: .glossary-source}
 
 **Hardware Receive Handle (HRH)**
@@ -2725,10 +2749,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR LinIf (LIN Interface)](cp/communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
 {: .glossary-source}
 
+**JLEF**
+> （**TTCAN**）作业列表执行函数（**Job List Execution Function**）。
+>
+> 来源：[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）
+{: .glossary-source}
+
 **Job**
 > 作业：一个已配置的 **CsmJob**，它引用一个密钥、一个加密原语和一个参考通道。
 >
 > 来源：[Utilization of Crypto Services（加密服务使用指南）](cp/crypto/utilization_of_crypto_services/index.md)（AUTOSAR_CP_EXP_UtilizationOfCryptoServices）、[AUTOSAR Crypto Driver（加密驱动程序）](cp/crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](cp/crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](cp/crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](cp/communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Crypto Service Manager（加密服务管理器）](cp/crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
+{: .glossary-source}
+
+**Job List**
+> **TTCAN** 作业列表是按各自执行开始时间排序的（可能不同的）通信作业的列表。
+>
+> 来源：[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）
 {: .glossary-source}
 
 **Job Request**
@@ -3800,7 +3836,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **OS**
 > 操作系统（**Operating System**）
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）
 {: .glossary-source}
 
 **OSEK/VDX**
@@ -3958,7 +3994,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **PduR**
 > PDU路由器
 >
-> 来源：[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+> 来源：[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）
 {: .glossary-source}
 
 **PDU传输能力被禁用**（**PDU transmission ability is disabled**）
@@ -4508,7 +4544,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SDU**
 > 服务数据单元（**Service Data Unit**）——**PDU** 的载荷。
 >
-> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR Platform Types（平台类型）](cp/general/platform_types/index.md)（SWS_PlatformTypes）、[Layered Software Architecture（分层软件架构）](cp/general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[VFB（虚拟功能总线）](cp/general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](cp/communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR COM（COM模块）](cp/communication/com/index.md)（AUTOSAR_CP_SWS_COM）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR Platform Types（平台类型）](cp/general/platform_types/index.md)（SWS_PlatformTypes）、[Layered Software Architecture（分层软件架构）](cp/general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[VFB（虚拟功能总线）](cp/general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](cp/communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR COM（COM模块）](cp/communication/com/index.md)（AUTOSAR_CP_SWS_COM）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）
 {: .glossary-source}
 
 **SDU type**
@@ -5383,6 +5419,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 用户界面（**User Interface**）
 >
 > 来源：[Explanation of Application Interfaces of the HMI, Multimedia and Telematics Domain（HMI/多媒体/远程信息处理域应用接口说明）](cp/application_interfaces/hmi/index.md)（AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics）
+{: .glossary-source}
+
+**UL**
+> 上层（**Upper layer**）。
+>
+> 来源：[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）
 {: .glossary-source}
 
 **UML**

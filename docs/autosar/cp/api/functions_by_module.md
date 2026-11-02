@@ -2549,6 +2549,37 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**Can_TTSetTimeCommand**](../communication/ttcan_driver/index.md#737-can_ttsettimecommand) | — |
 | [**Can_TTSetTimeMark**](../communication/ttcan_driver/index.md#742-can_ttsettimemark) | — |
 
+## AUTOSAR TTCAN Interface（TTCAN 接口）（24）
+
+来源：[AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface
+
+| 函数 | 简述 |
+|---|---|
+| [**CanIf_TTAckTimeMark**](../communication/ttcan_interface/index.md#745-canif_ttacktimemark) | — |
+| [**CanIf_TTApplWatchdogError**](../communication/ttcan_interface/index.md#761-canif_ttapplwatchdogerror) | — |
+| [**CanIf_TTCancelTimeMark**](../communication/ttcan_interface/index.md#744-canif_ttcanceltimemark) | — |
+| [**CanIf_TTDisableTimeMarkIRQ**](../communication/ttcan_interface/index.md#747-canif_ttdisabletimemarkirq) | — |
+| [**CanIf_TTEnableTimeMarkIRQ**](../communication/ttcan_interface/index.md#746-canif_ttenabletimemarkirq) | — |
+| [**CanIf_TTGap**](../communication/ttcan_interface/index.md#764-canif_ttgap) | — |
+| [**CanIf_TTGetControllerTime**](../communication/ttcan_interface/index.md#731-canif_ttgetcontrollertime) | — |
+| [**CanIf_TTGetErrorLevel**](../communication/ttcan_interface/index.md#734-canif_ttgeterrorlevel) | — |
+| [**CanIf_TTGetMasterState**](../communication/ttcan_interface/index.md#732-canif_ttgetmasterstate) | — |
+| [**CanIf_TTGetNTUActual**](../communication/ttcan_interface/index.md#733-canif_ttgetntuactual) | — |
+| [**CanIf_TTGetSyncQuality**](../communication/ttcan_interface/index.md#742-canif_ttgetsyncquality) | — |
+| [**CanIf_TTGetTimeMarkIRQStatus**](../communication/ttcan_interface/index.md#748-canif_ttgettimemarkirqstatus) | — |
+| [**CanIf_TTGlobalTimePreset**](../communication/ttcan_interface/index.md#738-canif_ttglobaltimepreset) | — |
+| [**CanIf_TTMasterStateChange**](../communication/ttcan_interface/index.md#767-canif_ttmasterstatechange) | — |
+| [**CanIf_TTSetEndOfGap**](../communication/ttcan_interface/index.md#736-canif_ttsetendofgap) | — |
+| [**CanIf_TTSetExtClockSyncCommand**](../communication/ttcan_interface/index.md#739-canif_ttsetextclocksynccommand) | — |
+| [**CanIf_TTSetNextIsGap**](../communication/ttcan_interface/index.md#735-canif_ttsetnextisgap) | — |
+| [**CanIf_TTSetNTUAdjust**](../communication/ttcan_interface/index.md#7310-canif_ttsetntuadjust) | — |
+| [**CanIf_TTSetTimeCommand**](../communication/ttcan_interface/index.md#737-canif_ttsettimecommand) | — |
+| [**CanIf_TTSetTimeMark**](../communication/ttcan_interface/index.md#743-canif_ttsettimemark) | — |
+| [**CanIf_TTSevereError**](../communication/ttcan_interface/index.md#763-canif_ttsevereerror) | — |
+| [**CanIf_TTStartOfCycle**](../communication/ttcan_interface/index.md#765-canif_ttstartofcycle) | — |
+| [**CanIf_TTTimeDisc**](../communication/ttcan_interface/index.md#766-canif_tttimedisc) | — |
+| [**CanIf_TTTimingError**](../communication/ttcan_interface/index.md#762-canif_tttimingerror) | — |
+
 ## AUTOSAR UdpNm (UDP Network Management)（25）
 
 来源：[AUTOSAR UdpNm (UDP Network Management)](../communication/udp_network_management/index.md) · SWS_UDPNetworkManagement
