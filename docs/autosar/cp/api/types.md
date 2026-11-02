@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **512** 个条目。
+共 **514** 个条目。
 
 ## A
 
@@ -1061,6 +1061,12 @@ title: "AUTOSAR API 类型清单"
 
 **[MemAcc_MemWriteFuncType](../memory/memory_access/index.md#7227-memacc_memwritefunctype)**
 > 类型 · [AUTOSAR Memory Access（存储访问）](../memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+
+**[MemIf_JobResultType](../memory/memory_abstraction_interface/index.md#722-memif_jobresulttype)**
+> 类型 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
+
+**[MemIf_StatusType](../memory/memory_abstraction_interface/index.md#721-memif_statustype)**
+> 类型 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
 
 **[MemorySizeType](../system_services/operating_system/index.md#7310-memorysizetype)**
 > 类型 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11

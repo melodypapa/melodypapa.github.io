@@ -1817,6 +1817,21 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**Mcu_PerformReset**](../mcal/mcu_driver/index.md#738-mcu_performreset) | 此服务执行微控制器复位。 |
 | [**Mcu_SetMode**](../mcal/mcu_driver/index.md#739-mcu_setmode) | 此服务激活MCU电源模式。 |
 
+## AUTOSAR MemIf（内存抽象接口）（8）
+
+来源：[AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface
+
+| 函数 | 简述 |
+|---|---|
+| [**MemIf_Cancel**](../memory/memory_abstraction_interface/index.md#733-memif_cancel) | 服务 ID 0x04。 |
+| [**MemIf_EraseImmediateBlock**](../memory/memory_abstraction_interface/index.md#738-memif_eraseimmediateblock) | 服务 ID 0x09。 |
+| [**MemIf_GetJobResult**](../memory/memory_abstraction_interface/index.md#735-memif_getjobresult) | 服务 ID 0x06。 |
+| [**MemIf_GetStatus**](../memory/memory_abstraction_interface/index.md#734-memif_getstatus) | 服务 ID 0x05。 |
+| [**MemIf_GetVersionInfo**](../memory/memory_abstraction_interface/index.md#737-memif_getversioninfo) | 服务 ID 0x08。 |
+| [**MemIf_InvalidateBlock**](../memory/memory_abstraction_interface/index.md#736-memif_invalidateblock) | 服务 ID 0x07。 |
+| [**MemIf_Read**](../memory/memory_abstraction_interface/index.md#731-memif_read) | 服务 ID 0x02。 |
+| [**MemIf_Write**](../memory/memory_abstraction_interface/index.md#732-memif_write) | 服务 ID 0x03。 |
+
 ## AUTOSAR Memory Access（存储访问）（20）
 
 来源：[AUTOSAR Memory Access（存储访问）](../memory/memory_access/index.md) · SWS_MemoryAccess

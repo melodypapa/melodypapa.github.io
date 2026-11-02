@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **1970** 个条目。
+共 **1978** 个条目。
 
 ## A
 
@@ -4472,6 +4472,30 @@ title: "AUTOSAR API 函数清单"
 
 **[MemAcc_Write](../memory/memory_access/index.md#7323-memacc_write)**
 > 函数 · [AUTOSAR Memory Access（存储访问）](../memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+
+**[MemIf_Cancel](../memory/memory_abstraction_interface/index.md#733-memif_cancel)**
+> 函数 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
+
+**[MemIf_EraseImmediateBlock](../memory/memory_abstraction_interface/index.md#738-memif_eraseimmediateblock)**
+> 函数 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
+
+**[MemIf_GetJobResult](../memory/memory_abstraction_interface/index.md#735-memif_getjobresult)**
+> 函数 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
+
+**[MemIf_GetStatus](../memory/memory_abstraction_interface/index.md#734-memif_getstatus)**
+> 函数 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
+
+**[MemIf_GetVersionInfo](../memory/memory_abstraction_interface/index.md#737-memif_getversioninfo)**
+> 函数 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
+
+**[MemIf_InvalidateBlock](../memory/memory_abstraction_interface/index.md#736-memif_invalidateblock)**
+> 函数 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
+
+**[MemIf_Read](../memory/memory_abstraction_interface/index.md#731-memif_read)**
+> 函数 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
+
+**[MemIf_Write](../memory/memory_abstraction_interface/index.md#732-memif_write)**
+> 函数 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
 
 **[Mirror_AddCanMaskFilter](../communication/mirror/index.md#7424-mirror_addcanmaskfilter)**
 > 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11

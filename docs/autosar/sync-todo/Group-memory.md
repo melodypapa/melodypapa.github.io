@@ -139,11 +139,15 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 5 — User confirmation gate (batch gate — user asked for a joint confirmation after the whole Group-memory run)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] memory_abstraction_interface (SWS_MemoryAbstractionInterface · R23-11 markdown · ❌ new article)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: step 1 run 2026-11-03 — source confirmed `~/Workspace/autosar_standard/markdown/Classic_Platform/Releases/R23-11/Memory/AUTOSAR_CP_SWS_MemoryAbstractionInterface.md` (R23-11 markdown, 686 lines) + official PDF (27 pp). New article `cp/memory/memory_abstraction_interface/` (nav label MemIf). Chapter map: ch.1→§1 (+Figure1_1), ch.2 (14 rows: 10 shared acronyms + Address area/Fast Mode/Slow Mode/Vendor specific library)→§2, ch.3 (8 inputs)→§3, ch.4→§4 (无限制), ch.5 Dependencies to other modules — heading exists but the body is EMPTY in the source markdown AND verifiably empty in the official PDF (p.11 carries the heading alone; p.12 starts ch.6) → article keeps the empty `## 5. 对其他模块的依赖` heading, user asked to verify at the batch gate, ch.6 Requirements Tracing DROPPED, ch.7→§6 (6.1 错误分类: dev 2-row table, runtime/transient/production/extended all 没有X), ch.8→§7 (7.1.1 标准类型 2 imported rows; 7.2 2 general requirements + 2 enum types incl. MEMIF_BLOCK_INCONSISTENT's dual description; 7.3 intro 8 requirements incl. two macro Example fences and the GetStatus/GetJobResult/E_NOT_OK return-value breakdown; 7.3.1–7.3.8 functions ×8 with broadcast MEMIF_BROADCAST_ID requirement under GetStatus; 7.4 回调 = 无 (NvM provides them); 7.5 调度 = 无; 7.6 期望接口 强制6(Ea/Fee)/可选1/可配置=无), ch.9→§8 (single cross-ref sentence 请参阅内存抽象模块的规范 — real content, chapter kept), ch.10→§9 (MemIf + MemIfGeneral 3 params; MemIfNumberOfDevices range verifiably 1 .. 2 per PDF p.25), appendix A DROPPED. No appendix B in source.
+  - Note: step 2 run 2026-11-03 — PDF verdicts: ch.5 empty (see above); MemIfNumberOfDevices Range "1 .. 2" (markdown garbled "1 .. | 2 | 2"); garbled syntaxes reconstructed: MemIf_GetStatus/InvalidateBlock/EraseImmediateBlock closing parens. Figures: Figure1_1 + Figure10_1 (only content-hash images; the rest are chrome strips). Glossary: MemIf appended as 来源 to the 11 shared terms; 3 new entries (Fast Mode, Slow Mode, Vendor specific library).
+  - Note: step 3 run 2026-11-03 — strict build exit 0, zero content WARNINGs; heading audit 1.–9. continuous; check_heading_lang OK; hygiene 0 h1/0 {DRAFT}/0 backslash-lt; requirement IDs confined to the 5 [ECUC_MemIf_*] SWS 条目 cells; §2 slice 0 table rows + 14 term lines = 14 source rows; check_api_sync OK (2/2 types, 8/8 functions); check_indexes exit 0; gen_api_list regenerated + --check OK; link_candidates --apply 4 lines, re-run 0 (idempotent), all anchors resolve.
+  - Note: step 4 run 2026-11-03 — coverage map verified heading-by-heading; ch.6 + appendix A dropped (mandated); §5 empty-by-source recorded as a gate item; §6.1 错误分类 complete; §7 complete incl. the two macro examples as C fences; §8 kept with the source's cross-reference sentence; §9 5 ECUC items. Omitted-under-placeholder-exception: none (the empty ch.5 is a heading-only chapter, kept as a heading-only section).
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate (batch gate — user asked for a joint confirmation after the whole Group-memory run)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] memory_driver (SWS_MemoryDriver · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis

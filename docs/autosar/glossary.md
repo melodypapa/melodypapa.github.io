@@ -141,7 +141,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Address Area**
 > 地址区（**Address Area**）是指逻辑地址空间中连续的存储区域。通常，多个物理存储扇区组合成一个逻辑地址区。
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）
+> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）、[AUTOSAR MemIf（内存抽象接口）](cp/memory/memory_abstraction_interface/index.md)（AUTOSAR_CP_SWS_MemoryAbstractionInterface）
 {: .glossary-source}
 
 **AddressAndLengthFormat Identifier**
@@ -1517,7 +1517,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **EA**
 > EEPROM 抽象（**EEPROM Abstraction**）。
 >
-> 来源：[AUTOSAR NVM（非易失性存储管理器）](cp/memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）、[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](cp/memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）、[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）、[AUTOSAR MemIf（内存抽象接口）](cp/memory/memory_abstraction_interface/index.md)（AUTOSAR_CP_SWS_MemoryAbstractionInterface）
 {: .glossary-source}
 
 **EAI**
@@ -1607,7 +1607,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **EEPROM**
 > 电可擦除可编程ROM（**Electrically Erasable and Programmable ROM**，只读存储器（**Read Only Memory**））。
 >
-> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）、[AUTOSAR Eep（EEPROM驱动程序）](cp/memory/eep/index.md)（AUTOSAR_CP_SWS_EEPROMDriver）
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）、[AUTOSAR Eep（EEPROM驱动程序）](cp/memory/eep/index.md)（AUTOSAR_CP_SWS_EEPROMDriver）、[AUTOSAR MemIf（内存抽象接口）](cp/memory/memory_abstraction_interface/index.md)（AUTOSAR_CP_SWS_MemoryAbstractionInterface）
 {: .glossary-source}
 
 **EEPROM cell**
@@ -1883,6 +1883,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Communication Manager（通信管理器）](cp/system_services/comm/index.md)（SWS_COMManager）
 {: .glossary-source}
 
+**Fast Mode**
+> 快速模式：例如在启动/关闭阶段，底层驱动程序可被切换到的模式，以便在这些阶段实现快速读取/写入。是否可行取决于驱动程序的实现和底层设备的能力；是否这样做取决于NVRAM管理器的配置。
+>
+> 来源：[AUTOSAR MemIf（内存抽象接口）](cp/memory/memory_abstraction_interface/index.md)（AUTOSAR_CP_SWS_MemoryAbstractionInterface）
+{: .glossary-source}
+
 **Fast-Mode**
 > 对看门狗硬件的触发必须以较短的超时期限完成。例如，该模式可用于 **ECU** 的正常运行。例如，看门狗硬件被配置为窗口模式（触发看门狗必须发生在超时期限内的特定最小/最大边界中）且超时期限为 5 毫秒。
 >
@@ -1940,7 +1946,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **FEE**
 > 闪存 EEPROM 仿真（**Flash EEPROM Emulation**）。
 >
-> 来源：[AUTOSAR NVM（非易失性存储管理器）](cp/memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）、[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](cp/memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）、[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）、[AUTOSAR MemIf（内存抽象接口）](cp/memory/memory_abstraction_interface/index.md)（AUTOSAR_CP_SWS_MemoryAbstractionInterface）
 {: .glossary-source}
 
 **FF**
@@ -2960,7 +2966,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **LSB**
 > 最低有效位/字节（**Least significant bit / byte**，取决于上下文；此处指"位"）。
 >
-> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）、[AUTOSAR MemIf（内存抽象接口）](cp/memory/memory_abstraction_interface/index.md)（AUTOSAR_CP_SWS_MemoryAbstractionInterface）
 {: .glossary-source}
 
 ## M
@@ -3082,19 +3088,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Mem**
 > 内存驱动程序（**Memory Driver**）。
 >
-> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）、[AUTOSAR MemIf（内存抽象接口）](cp/memory/memory_abstraction_interface/index.md)（AUTOSAR_CP_SWS_MemoryAbstractionInterface）
 {: .glossary-source}
 
 **MemAcc**
 > 内存访问（**Memory Access**）。
 >
-> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）、[AUTOSAR MemIf（内存抽象接口）](cp/memory/memory_abstraction_interface/index.md)（AUTOSAR_CP_SWS_MemoryAbstractionInterface）
 {: .glossary-source}
 
 **MemIf**
 > 内存抽象接口（**Memory Abstraction Interface**）。
 >
-> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）、[AUTOSAR MemIf（内存抽象接口）](cp/memory/memory_abstraction_interface/index.md)（AUTOSAR_CP_SWS_MemoryAbstractionInterface）
 {: .glossary-source}
 
 **Memory Device**
@@ -3262,7 +3268,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **MSB**
 > 最高有效位/字节（**Most significant bit / byte**，取决于上下文；此处指"位"）。
 >
-> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）、[AUTOSAR MemIf（内存抽象接口）](cp/memory/memory_abstraction_interface/index.md)（AUTOSAR_CP_SWS_MemoryAbstractionInterface）
 {: .glossary-source}
 
 **MSBF**
@@ -3648,13 +3654,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **NvM**
 > NVRAM管理器（**NVRAM Manager**）。
 >
-> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）、[AUTOSAR Eep（EEPROM驱动程序）](cp/memory/eep/index.md)（AUTOSAR_CP_SWS_EEPROMDriver）
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）、[AUTOSAR Eep（EEPROM驱动程序）](cp/memory/eep/index.md)（AUTOSAR_CP_SWS_EEPROMDriver）、[AUTOSAR MemIf（内存抽象接口）](cp/memory/memory_abstraction_interface/index.md)（AUTOSAR_CP_SWS_MemoryAbstractionInterface）
 {: .glossary-source}
 
 **NVRAM**
 > 非易失性 RAM（**Non-Volatile RAM**）
 >
-> 来源：[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](cp/memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping）、[AUTOSAR Eep（EEPROM驱动程序）](cp/memory/eep/index.md)（AUTOSAR_CP_SWS_EEPROMDriver）
+> 来源：[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](cp/memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping）、[AUTOSAR Eep（EEPROM驱动程序）](cp/memory/eep/index.md)（AUTOSAR_CP_SWS_EEPROMDriver）、[AUTOSAR MemIf（内存抽象接口）](cp/memory/memory_abstraction_interface/index.md)（AUTOSAR_CP_SWS_MemoryAbstractionInterface）
 {: .glossary-source}
 
 **NVRAM Block**
@@ -4751,6 +4757,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR LinIf (LIN Interface)](cp/communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
 {: .glossary-source}
 
+**Slow Mode**
+> 慢速模式：正常运行期间底层驱动程序可使用的模式，以减少运行时间或底层设备/通信介质阻塞时间方面的资源占用。是否可行取决于驱动程序的实现和底层设备的能力；是否这样做取决于NVRAM管理器的配置。
+>
+> 来源：[AUTOSAR MemIf（内存抽象接口）](cp/memory/memory_abstraction_interface/index.md)（AUTOSAR_CP_SWS_MemoryAbstractionInterface）
+{: .glossary-source}
+
 **Slow-Mode**
 > 对看门狗硬件的触发可以以较长的超时期限完成。例如，该模式可用于系统启动/初始化阶段。例如，看门狗硬件被配置为翻转模式（对触发的时间点没有约束）且超时期限为 20 毫秒。
 >
@@ -5463,6 +5475,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 车辆碰撞预测（**Vehicle Crash Prediction**）
 >
 > 来源：[Explanation of Application Interfaces of Occupant and Pedestrian Safety Systems Domain（乘员与行人安全系统域应用接口说明）](cp/application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety）
+{: .glossary-source}
+
+**Vendor specific library**
+> 供应商特定库：**FEE/FLS**和**EA/EEP**模块的**ICC-2**实现，提供与相应**ICC-3**实现相同的上层接口（**API**）和功能。
+>
+> 来源：[AUTOSAR MemIf（内存抽象接口）](cp/memory/memory_abstraction_interface/index.md)（AUTOSAR_CP_SWS_MemoryAbstractionInterface）
 {: .glossary-source}
 
 **VERB**
