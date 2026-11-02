@@ -1686,6 +1686,25 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**Icu_StopSignalMeasurement**](../io/icu_driver/index.md#7321-icu_stopsignalmeasurement) | 停止给定通道的信号测量。 |
 | [**Icu_StopTimestamp**](../io/icu_driver/index.md#7312-icu_stoptimestamp) | 停止给定通道的时间戳测量。 |
 
+## AUTOSAR J1939Nm（SAE J1939 网络管理）（12）
+
+来源：[AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement
+
+| 函数 | 简述 |
+|---|---|
+| [**J1939Nm_DeInit**](../communication/j1939nm/index.md#742-j1939nm_deinit) | — |
+| [**J1939Nm_GetBusOffDelay**](../communication/j1939nm/index.md#747-j1939nm_getbusoffdelay) | — |
+| [**J1939Nm_GetState**](../communication/j1939nm/index.md#746-j1939nm_getstate) | — |
+| [**J1939Nm_GetVersionInfo**](../communication/j1939nm/index.md#743-j1939nm_getversioninfo) | — |
+| [**J1939Nm_Init**](../communication/j1939nm/index.md#741-j1939nm_init) | — |
+| [**J1939Nm_MainFunction**](../communication/j1939nm/index.md#761-j1939nm_mainfunction) | — |
+| [**J1939Nm_NetworkRelease**](../communication/j1939nm/index.md#745-j1939nm_networkrelease) | — |
+| [**J1939Nm_NetworkRequest**](../communication/j1939nm/index.md#744-j1939nm_networkrequest) | — |
+| [**J1939Nm_PassiveStartUp**](../communication/j1939nm/index.md#748-j1939nm_passivestartup) | — |
+| [**J1939Nm_RequestIndication**](../communication/j1939nm/index.md#753-j1939nm_requestindication) | — |
+| [**J1939Nm_RxIndication**](../communication/j1939nm/index.md#751-j1939nm_rxindication) | — |
+| [**J1939Nm_TxConfirmation**](../communication/j1939nm/index.md#752-j1939nm_txconfirmation) | — |
+
 ## AUTOSAR Key Manager（密钥管理器）（41）
 
 来源：[AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager

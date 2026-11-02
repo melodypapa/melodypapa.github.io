@@ -226,13 +226,16 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 + B ↔ §1–§9 + B 1:1; ch.6 tracing + appendix A dropped (compliance))
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
 - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-4)
-- [ ] j1939nm (SWS_SAEJ1939NetworkManagement · R23-11 markdown · ❌ new article, short name J1939Nm)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-- [ ] Step 6 — TODO.md row + commit/PR
+- [x] j1939nm (SWS_SAEJ1939NetworkManagement · R23-11 markdown · ❌ new article, short name J1939Nm)
+  - Note: article `cp/communication/j1939nm/` (directory per row name, nav label "J1939Nm"). Shape: ch.1 → §1 (1.1 J1939 NM concept, 1.2 module) · ch.2 → §2 25 acronyms · ch.3 → §3 (3.1 20-entry registry) · ch.4 → §4 (4.1 3-item limitations list, 4.2 applicability) · ch.5 → §5 + 5.1 file structure (pointer sentences) · ch.7 → §6 (6.1 overview, 6.2 module handling + timing/random delay, 6.3 NM states per NodeChannel + Figure7_1 + 6.3.1 ECU startup (Claiming/NormalOperation + startup delay) + 6.3.2 address loss + 6.3.3 shutdown, 6.4 AC transmission (metadata CAN_ID_32, single buffer), 6.5 AC reception + callout, 6.6 request handling, 6.7 address coordination (2 strategies), 6.8 error classification dev 表6.1 10 rows + extended production error 表6.2 J1939NM_E_ADDRESS_LOST attribute table + runtime "not yet classified" + transient/production none) · ch.8 → §7 (7.1 API parameter checking; 7.2 12 imported; 7.3.1 ConfigType; 7.4 8 functions; 7.5 3 callbacks; 7.6 MainFunction; 7.7 期望接口 6 强制 + 1 可选 + 7.7.3.1 &lt;User_AddressClaimedIndication&gt;) · ch.9 → §8 3 figures · ch.10 → §9 (10.1 folded; 9.1.1 J1939Nm; 9.1.2 J1939NmGeneral 6 params; 9.1.3 J1939NmConfigSet + 4 included; 9.1.4 J1939NmSharedAddressSpace; 9.1.5 J1939NmChannel 3 params + 3 included; 9.1.6/9.1.7 TxPdu/RxPdu 2 params each; 9.1.8 NodeSpecificDemEventParameterRefs 2 params; 9.1.9 J1939NmNode 13 params incl. 5-literal AddressConfigurationCapability; 9.1.10 J1939NmExternalNode 13 params; 9.2 NM 接口的配置 15-entry checklist; figures 10.1–10.4) · ch.6 tracing dropped · source ## A History of Constraints and Specification Items (R23-11 all none) → ## B; source ## B Not Applicable Requirements dropped (droppable)
+  - Note: Phase A — strict build exit 0 / 0 WARNING; check_heading_lang OK; check_indexes OK; hygiene 0; acronym 25 term lines = source 25 rows; check_api_sync N/A-with-explanation (source ch.8 layout 8.3 types/8.4 functions differs from the script's 8.2/8.3 convention — flexray_driver precedent; manual verification: 1 type/8 functions/3 callbacks/1 scheduled/1 configurable all in order); gen_api_list regenerated (J1939Nm 1 type + 12 functions, --check 0); census --apply: 17 lines (15 chapter-ref + 28 citation links) + 20 registry anchors, idempotent re-run 0 lines
+  - Note: glossary +14 new terms (AC, DA, DP, EDP, NAME, Node, NodeChannel, PDUF, PDUS, PG, PGN, RQST, SA, SchM) + 7 来源 appends (BSW/CanIf/ComM/DET/DEM/BswM/RTE)
+  - [x] Step 1 — Source resolution + gap analysis (2029-line R23-11 markdown; 8 content figures via caption-anchored mapper; config tables parsed field-by-field)
+  - [x] Step 2 — In-place translation/completion (full Type A build, main session)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 + A-history ↔ §1–§9 + B 1:1; ch.6 tracing + NA appendix dropped (compliance))
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+- [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-4)
 - [ ] j1939rm (SWS_SAEJ1939RequestManager · R23-11 markdown · ❌ new article, short name J1939Rm)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

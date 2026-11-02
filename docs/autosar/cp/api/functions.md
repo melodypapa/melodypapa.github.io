@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2086** 个条目。
+共 **2098** 个条目。
 
 ## A
 
@@ -4244,6 +4244,42 @@ title: "AUTOSAR API 函数清单"
 
 **[J1939Dcm_TxConfirmation](../diagnostics/j1939dcm/index.md#743-j1939dcm_txconfirmation)**
 > 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
+**[J1939Nm_DeInit](../communication/j1939nm/index.md#742-j1939nm_deinit)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_GetBusOffDelay](../communication/j1939nm/index.md#747-j1939nm_getbusoffdelay)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_GetState](../communication/j1939nm/index.md#746-j1939nm_getstate)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_GetVersionInfo](../communication/j1939nm/index.md#743-j1939nm_getversioninfo)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_Init](../communication/j1939nm/index.md#741-j1939nm_init)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_MainFunction](../communication/j1939nm/index.md#761-j1939nm_mainfunction)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_NetworkRelease](../communication/j1939nm/index.md#745-j1939nm_networkrelease)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_NetworkRequest](../communication/j1939nm/index.md#744-j1939nm_networkrequest)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_PassiveStartUp](../communication/j1939nm/index.md#748-j1939nm_passivestartup)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_RequestIndication](../communication/j1939nm/index.md#753-j1939nm_requestindication)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_RxIndication](../communication/j1939nm/index.md#751-j1939nm_rxindication)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_TxConfirmation](../communication/j1939nm/index.md#752-j1939nm_txconfirmation)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
 
 ## K
 
