@@ -39,6 +39,7 @@ title: "CP AUTOSAR"
   * [AUTOSAR Large Data COM（大数据 COM）](communication/large_data_com/index.md)
   * [AUTOSAR LIN Driver](communication/lin_driver/index.md)
   * [AUTOSAR LinIf (LIN Interface)](communication/lin_interface/index.md)
+  * [AUTOSAR LinSM（LIN 状态管理器）](communication/linsm/index.md)
   * [AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)
   * [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/index.md)
   * [AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)

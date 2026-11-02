@@ -1821,6 +1821,23 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**LinTp_Shutdown**](../communication/lin_interface/index.md#7318-lintp_shutdown) | 关闭 LIN TP。 |
 | [**LinTp_Transmit**](../communication/lin_interface/index.md#7316-lintp_transmit) | 请求发送一个 PDU。 |
 
+## AUTOSAR LinSM（LIN 状态管理器）（10）
+
+来源：[AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager
+
+| 函数 | 简述 |
+|---|---|
+| [**LinSM_GetCurrentComMode**](../communication/linsm/index.md#734-linsm_getcurrentcommode) | — |
+| [**LinSM_GetVersionInfo**](../communication/linsm/index.md#733-linsm_getversioninfo) | — |
+| [**LinSM_GotoSleepConfirmation**](../communication/linsm/index.md#753-linsm_gotosleepconfirmation) | — |
+| [**LinSM_GotoSleepIndication**](../communication/linsm/index.md#752-linsm_gotosleepindication) | — |
+| [**LinSM_Init**](../communication/linsm/index.md#731-linsm_init) | — |
+| [**LinSM_MainFunction**](../communication/linsm/index.md#741-linsm_mainfunction) | — |
+| [**LinSM_RequestComMode**](../communication/linsm/index.md#735-linsm_requestcommode) | — |
+| [**LinSM_ScheduleRequest**](../communication/linsm/index.md#732-linsm_schedulerequest) | — |
+| [**LinSM_ScheduleRequestConfirmation**](../communication/linsm/index.md#751-linsm_schedulerequestconfirmation) | — |
+| [**LinSM_WakeupConfirmation**](../communication/linsm/index.md#754-linsm_wakeupconfirmation) | — |
+
 ## AUTOSAR MCU Driver（微控制器单元驱动）（11）
 
 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](../mcal/mcu_driver/index.md) · SWS_MCUDriver

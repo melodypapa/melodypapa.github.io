@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2026** 个条目。
+共 **2036** 个条目。
 
 ## A
 
@@ -4392,6 +4392,36 @@ title: "AUTOSAR API 函数清单"
 
 **[LinIf_WakeupConfirmation](../communication/lin_interface/index.md#741-linif_wakeupconfirmation)**
 > 函数 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11
+
+**[LinSM_GetCurrentComMode](../communication/linsm/index.md#734-linsm_getcurrentcommode)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
+**[LinSM_GetVersionInfo](../communication/linsm/index.md#733-linsm_getversioninfo)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
+**[LinSM_GotoSleepConfirmation](../communication/linsm/index.md#753-linsm_gotosleepconfirmation)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
+**[LinSM_GotoSleepIndication](../communication/linsm/index.md#752-linsm_gotosleepindication)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
+**[LinSM_Init](../communication/linsm/index.md#731-linsm_init)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
+**[LinSM_MainFunction](../communication/linsm/index.md#741-linsm_mainfunction)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
+**[LinSM_RequestComMode](../communication/linsm/index.md#735-linsm_requestcommode)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
+**[LinSM_ScheduleRequest](../communication/linsm/index.md#732-linsm_schedulerequest)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
+**[LinSM_ScheduleRequestConfirmation](../communication/linsm/index.md#751-linsm_schedulerequestconfirmation)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
+**[LinSM_WakeupConfirmation](../communication/linsm/index.md#754-linsm_wakeupconfirmation)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
 
 **[LinTp_ChangeParameter](../communication/lin_interface/index.md#7319-lintp_changeparameter)**
 > 函数 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11

@@ -181,13 +181,17 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 ↔ §1–§9 1:1; ch.6 tracing + ch.11 NA requirements dropped; page-split tables merged in order; source's own typos kept as data: "Trnasport", FRTP_E_FRTPTIMEBR vs FRTP_E_FRTPTIMEOUTBR inconsistency in source; Figure 20 caption had no adjacent image — mapped via non-deco neighbor rule img000084; the two Garbled-lead sentences in ch.1 (Cinuro 1...) identified as conversion chrome of Figure 1 and dropped)
   - [x] Step 5 — User confirmation gate (article merged by user via PR #232 — acceptance recorded by the merge)
 - [x] Step 6 — TODO.md row + commit/PR (commits a65bdec + 269b880 + c2dcde5, PR #232 merged 2026-11-01; TODO.md row added 2026-11-03 when finalizing the row)
-- [ ] linsm (SWS_LINStateManager · R23-11 markdown · ❌ new article, short name LinSM)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-- [ ] Step 6 — TODO.md row + commit/PR
+- [x] linsm (SWS_LINStateManager · R23-11 markdown · ❌ new article, short name LinSM)
+  - Note: article `cp/communication/linsm/` (directory per row name — ethsm/cansm precedent, nav label "LinSM"). Shape: ch.2 → §2 31 acronyms (term lines == source rows) · 3.1 12-entry registry + 3.2 · ch.7 → §6 (6.1 state machine 7.1.1–7.1.8 incl. 6.1.5.1/5.2 master-slave goto-sleep, 6.1.6 schedule change, 6.1.7 wakeup, 6.1.8 timeout handling incl. silence-after-wakeup; 6.2 multiple networks; 6.3 error classification dev 表6.1 5 rows + runtime 表6.2 1 row + transient/production/extended none) · ch.8 → §7 (7.1 6 imported types (unlabeled Std continuation row normalized); 7.2 2 types; 7.3 5 functions; 7.4 MainFunction; 7.5 4 callbacks; 7.6 强制接口 8 rows; 7.7 可选接口 2 rows; 7.8 one-sentence none) · ch.9 → §8 (4 figures) · ch.10 → §9 (10.1 folded into intro; 9.1.1 配置工具; 9.1.2 LinSM module table + included containers; 9.1.3 LinSMConfigSet 2 params; 9.1.4 LinSMChannel 5 params; 9.1.5 LinSMGeneral 3 params; 9.1.6 LinSMSchedule 2 params; 9.2 发布信息 pointer sentence) · ch.6 Requirements Tracing dropped · source appendix A (titled "Not applicable requirements" but carries the change history) → canonical `## B.` with B.1 R22-11 (121 added, changed/deleted none) + B.2 R23-11 (1 added/23 changed/6 deleted), hyphenation artifacts (SWS\_LinSM\_-00013 etc.) healed in the fences
+  - Note: source typo kept verbatim as data: [SWS_LinSM_00233] "LinIf shall call LinIf_GotoSleep" (context is LinSM — semantic change risk, user verify); source truncation: 5.3.1 ends with "kept in separate files:" with the following list missing in the conversion — translated as-is; the "## This means:" stray heading at source 1.2 is a conversion artifact — the prose translates into §1.2
+  - Note: Phase A — strict build exit 0 / 0 WARNING / no linsm notices; check_heading_lang OK; check_indexes OK; hygiene 0 h1/\</{DRAFT}, SWS ids only in appendix-B fences; prose ECUC_LinSM_00206 mention dropped (hygiene); acronym 31 term lines = source 31 rows, 0 tables; check_api_sync OK (2 types/5 functions/5 说明); gen_api_list regenerated (LinSM 2 types + 10 functions SITE-listed, --check 0); census --apply: 44 lines (33 identifier + 11 citation links) + 12 registry anchors, idempotent re-run 0 lines; one bogus chapter-ref anchor (#92 → #91 after 10.1-folding renumber) fixed pre-apply; census UNRESOLVED L272 "2.1、2.2 和" = LIN version numbers, false positive, never linked
+  - Note: glossary +6 new terms (LinIf, LinSM, SRS, UART, UML, WPII) + 25 来源 appends (one-term-once; API/AUTOSAR/BSW/BswM/ComM/DCM/DEM/DET/ECU/ID/ISR/Jitter/LIN/MCAL/PDU/RAM/RTE/RX/SPAL/SW/SWS/TP/TX/URL/XML already present)
+  - [x] Step 1 — Source resolution + gap analysis (1632-line R23-11 markdown; chapter map in the note above; 8 content figures via caption-anchored mapper, deco cluster f5f4bf49 29× + known deco hashes dropped)
+  - [x] Step 2 — In-place translation/completion (full Type A build, main session)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 ↔ §1–§9 1:1 + B; ch.6 tracing dropped (compliance); UML figure chrome in ch.4.2/ch.5 lead dropped)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+- [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-4)
 - [ ] lintrcv (SWS_LINTransceiverDriver · R23-11 markdown · ❌ new article, short name LinTrcv)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

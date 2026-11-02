@@ -295,6 +295,7 @@ nav:
         - "LdCom": autosar/cp/communication/large_data_com/index.md
         - "Lin": autosar/cp/communication/lin_driver/index.md
         - "LinIf": autosar/cp/communication/lin_interface/index.md
+        - "LinSM": autosar/cp/communication/linsm/index.md
         - "LsDu": autosar/cp/communication/lsdu_router/index.md
         - "Mirror": autosar/cp/communication/mirror/index.md
         - "IpduM": autosar/cp/communication/ipdum/index.md
