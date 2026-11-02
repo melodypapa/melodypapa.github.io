@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **509** 个条目。
+共 **512** 个条目。
 
 ## A
 
@@ -615,6 +615,15 @@ title: "AUTOSAR API 类型清单"
 
 **[EcuM_WakeupStatusType](../mode_management/ecu_state_manager/index.md#724-ecum_wakeupstatustype)**
 > 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](../mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+
+**[Eep_AddressType](../memory/eep/index.md#722-eep_addresstype)**
+> 类型 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_ConfigType](../memory/eep/index.md#721-eep_configtype)**
+> 类型 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_LengthType](../memory/eep/index.md#723-eep_lengthtype)**
+> 类型 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
 
 **[EthIf_ConfigType](../communication/ethernet_interface/index.md#721-ethif_configtype)**
 > 类型 · [AUTOSAR Ethernet Interface（以太网接口）](../communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11

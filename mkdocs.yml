@@ -359,6 +359,7 @@ nav:
         - "Fls": autosar/cp/memory/flash_driver/index.md
         - "Fee": autosar/cp/memory/flash_eeprom_emulation/index.md
         - "Ea": autosar/cp/memory/ea/index.md
+        - "Eep": autosar/cp/memory/eep/index.md
         - "MemAcc": autosar/cp/memory/memory_access/index.md
         - "MemMap": autosar/cp/memory/memory_mapping/index.md
         - "NV数据处理指南": autosar/cp/memory/nv_data_handling_guideline/index.md

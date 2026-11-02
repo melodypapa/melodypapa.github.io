@@ -1036,6 +1036,24 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**EcuM_StopWakeupSources**](../mode_management/ecu_state_manager/index.md#7553-ecum_stopwakeupsources) | 在唤醒验证不成功后，此Callout需停止给定的唤醒源。 |
 | [**EcuM_ValidateWakeupEvent**](../mode_management/ecu_state_manager/index.md#7412-ecum_validatewakeupevent) | 唤醒后ECU状态管理器将在WAKEUP VALIDATION状态/序列期间，停止进程以等待唤醒事件的验证。 |
 
+## AUTOSAR Eep（EEPROM驱动程序）（11）
+
+来源：[AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver
+
+| 函数 | 简述 |
+|---|---|
+| [**Eep_Cancel**](../memory/eep/index.md#737-eep_cancel) | 服务 ID 0x06。 |
+| [**Eep_Compare**](../memory/eep/index.md#736-eep_compare) | 服务 ID 0x05。 |
+| [**Eep_Erase**](../memory/eep/index.md#735-eep_erase) | 服务 ID 0x04。 |
+| [**Eep_GetJobResult**](../memory/eep/index.md#739-eep_getjobresult) | 服务 ID 0x08。 |
+| [**Eep_GetStatus**](../memory/eep/index.md#738-eep_getstatus) | 服务 ID 0x07。 |
+| [**Eep_GetVersionInfo**](../memory/eep/index.md#7310-eep_getversioninfo) | 服务 ID 0x0a。 |
+| [**Eep_Init**](../memory/eep/index.md#731-eep_init) | 服务 ID 0x00。 |
+| [**Eep_MainFunction**](../memory/eep/index.md#751-eep_mainfunction) | 服务 ID 0x09。 |
+| [**Eep_Read**](../memory/eep/index.md#733-eep_read) | 服务 ID 0x02。 |
+| [**Eep_SetMode**](../memory/eep/index.md#732-eep_setmode) | 服务 ID 0x01。 |
+| [**Eep_Write**](../memory/eep/index.md#734-eep_write) | 服务 ID 0x03。 |
+
 ## AUTOSAR Ethernet Driver（以太网驱动程序）（21）
 
 来源：[AUTOSAR Ethernet Driver（以太网驱动程序）](../communication/ethernet_driver/index.md) · SWS_EthernetDriver

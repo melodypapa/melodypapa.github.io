@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **1959** 个条目。
+共 **1970** 个条目。
 
 ## A
 
@@ -2310,6 +2310,39 @@ title: "AUTOSAR API 函数清单"
 
 **[EcuM_ValidateWakeupEvent](../mode_management/ecu_state_manager/index.md#7412-ecum_validatewakeupevent)**
 > 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](../mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+
+**[Eep_Cancel](../memory/eep/index.md#737-eep_cancel)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_Compare](../memory/eep/index.md#736-eep_compare)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_Erase](../memory/eep/index.md#735-eep_erase)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_GetJobResult](../memory/eep/index.md#739-eep_getjobresult)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_GetStatus](../memory/eep/index.md#738-eep_getstatus)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_GetVersionInfo](../memory/eep/index.md#7310-eep_getversioninfo)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_Init](../memory/eep/index.md#731-eep_init)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_MainFunction](../memory/eep/index.md#751-eep_mainfunction)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_Read](../memory/eep/index.md#733-eep_read)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_SetMode](../memory/eep/index.md#732-eep_setmode)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_Write](../memory/eep/index.md#734-eep_write)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
 
 **[EnableCond](../diagnostics/diagnostic_event_manager/index.md#76416-enablecond)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
