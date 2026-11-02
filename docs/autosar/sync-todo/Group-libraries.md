@@ -36,12 +36,19 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 5 — User confirmation gate (deferred to batch-end joint confirmation)
   - [x] Step 6 — TODO.md row + commit/PR (commits cd14a65 (crc caption fixup) + 0a3139e; batch PR pending user confirmation)
 - [ ] bfx (SWS_BFXLibrary · R23-11 markdown · ❌ new article, short name Bfx)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: 2026-11-03 batch run — RUN STOPPED HERE per user instruction mid-batch ("stop when this translation finished"); bmc/mfl/mfx/ifl/ifx/efx rows still pending.
+  - Note: committed without the per-article Step 5 gate (batch-end joint confirmation), same as the crc/e2e rows.
+  - Note: source ch.9 Sequence diagrams = "Not applicable" → omitted per the placeholder rule; ch.10 配置规范 renumbered to §8 (no 时序图 chapter present).
+  - Note: check_api_sync trivially OK but N/A in substance — source functions live under 8.4 with stem-titled headings (Bfx_SetBit) whose templated prototypes expand one stem into 4 concrete functions (u8/u16/u32/u64); manual verification: 24 sections in source order + 8.8 GetVersionInfo → §7.8.
+  - Note: source §3.2 prose names "IFX Library" (source copy-paste artifact from the IFX document) — translated verbatim, faithful to source.
+  - Note: source §8.1 cites [6] Platform_Types.h but the §3.1 registry only has [1]–[4] — dangling source reference, left as prose (UNRESOLVED per census).
+  - Note: appendix B is "History of Specification Items" with a numbered GFM table (Table B.1) including empty Heading cells — translated as table with IDs as data.
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate (deferred to batch-end joint confirmation)
+  - [x] Step 6 — TODO.md row + commit/PR (commit b11a226; batch PR pending user confirmation)
 - [ ] bmc (SWS_BSWMulticoreLibrary · R23-11 markdown · ❌ new article, short name Bmc)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
