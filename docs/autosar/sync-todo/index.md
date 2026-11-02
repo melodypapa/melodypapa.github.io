@@ -1,6 +1,6 @@
 # AUTOSAR translation queue — index
 
-> Generated: 2026-10-24 · Base: R23-11 (`~/Workspace/autosar_standard/markdown/`)
+> Generated: 2026-10-24 · Foundation batch added 2026-11-02 · Base: R23-11 (`~/Workspace/autosar_standard/markdown/` — `Classic_Platform/` for Group 1–16, `Foundation/` for Groups 17–18)
 > Model: Group queue modelled on py-armodel `sync-autosar-class` — one `Group-<section>.md`
 > per batch, one row per document, each row carrying a 6-step sub-checklist;
 > **resume = the first row still `[ ]` in the chosen batch file**; all rows `[x]` =
@@ -13,7 +13,7 @@
 | # | Batch file | Rows | Content |
 | --- | --- | ---: | --- |
 | 1 | [Group-io.md](Group-io.md) | 7 | IO wrap-up — **batch complete 2026-10-27 (7/7)** (1 done + wording/acronym alignment + iohwab gaps + adc deep completion) |
-| 2 | [Group-general.md](Group-general.md) | 4 | platform_types stub repair + BSWGeneral (global base spec) and 2 more missing documents |
+| 2 | [Group-general.md](Group-general.md) | 4 | **batch complete 2026-11-02 (4/4)** — platform_types stub repair + BSWGeneral + communication_stack_types; the tr_glossary row moved to Group-foundation (Foundation document) |
 | 3 | [Group-crypto.md](Group-crypto.md) | 4 | **batch complete 2026-10-28 (4/4)** — Csm alignment (PR #133) + crypto_driver full completion + CryIf/KeyM new articles; Csm reopened 2026-10-28 (incomplete) → full R23-11 re-sync complete 2026-10-31 |
 | 4 | [Group-system_services.md](Group-system_services.md) | 7 | **5/7 done 2026-11-01** (operating_system + det + FiM + time_service + comm PR #230) — remaining: SwCluC (24.7k-line source, giant), HwTestManager |
 | 5 | [Group-mode_management.md](Group-mode_management.md) | 2 | EcuM alignment + BswM alignment (small) |
@@ -28,8 +28,10 @@
 | 14 | [Group-rte-swarch.md](Group-rte-swarch.md) | 2 | RTE, ARTI |
 | 15 | [Group-communication-2.md](Group-communication-2.md) | 38 | **18/38 done 2026-11-01** (Spi/LdCom/LsDu/Dlt/DoIp/XCP/CanXL×2/EthTrcv/WEth×2/FlexRay×7 + flexray_iso_tp this branch) — remaining: LinSM/LinTrcv/TTCAN×2/J1939×3/IEEE1722/MACsec/CellularV2X/ChargingManager/ChineseV2X×4/V2X×5 |
 | 16 | [Group-exp.md](Group-exp.md) | 20 | 20 missing EXP guides (the TPS template is exempt and not queued, same flow) |
+| 17 | [Group-foundation-exp.md](Group-foundation-exp.md) | 20 | **Foundation guides/templates/reports** (EXP 5 / TR 6 / TPS 8 / ASWS 1) — document-type counterpart of CP's Group-exp; 1 in-flight (TR Glossary, ch.4 14/343 terms); size-ascending |
+| 18 | [Group-foundation-rs-prs.md](Group-foundation-rs-prs.md) | 32 | **Foundation requirement/protocol specifications** (RS 23 / PRS 9) — size-ascending; the RS/PRS item-ID keep-or-drop decision is recorded in the file header |
 
-Total 148 documents = all **127 R23-11 SWS** (io 7 + general 4 + crypto 4 + system_services 7 + mode_management 2 + diagnostics 3 + memory 12 + communication 65 + globaltime 4 + libraries 9 + mcal 3 + rte-swarch 2 + safety 3 + security 2, 1 of them already done) + **20 missing EXP** + 1 TPS template (exempt, not queued — see Group-exp). Batch order is adjustable; row order inside a batch = suggested execution order (small/alignment work first, giant sources last).
+Total 200 documents = CP 148 + Foundation 52. CP 148 = all **127 R23-11 SWS** (io 7 + general 4 + crypto 4 + system_services 7 + mode_management 2 + diagnostics 3 + memory 12 + communication 65 + globaltime 4 + libraries 9 + mcal 3 + rte-swarch 2 + safety 3 + security 2, 1 of them already done) + **20 missing EXP** + 1 TPS template (exempt, not queued — see Group-exp). Foundation 52 = every `AUTOSAR_FO_*` document of R23-11 (`Foundation/Releases/R23-11/`, 10 topics), all skeleton-exempt, 1 partially translated (TR Glossary) — split by document type on 2026-11-03 (user request, CP Group-exp model): Group 17 = 20 guide/template/report documents, Group 18 = 32 requirement/protocol specifications. Batch order is adjustable; row order inside a batch = suggested execution order (small/alignment work first, giant sources last).
 
 ## Rules
 

@@ -85,7 +85,7 @@
 | ❌ Missing (SWS) | 74 | R23-11 has 127 SWS docs in total; 53 covered (41.7%) |
 | ❌ Missing (EXP) | 11 | R23-11 has 22 EXP docs in total; 11 covered |
 | 📖 Guide/topic | 8 | exempt from the Type A skeleton |
-| ❌ Missing (Foundation) | 51 | R23-11 has 52 FO docs (RS/PRS/TPS/TR/EXP); 1 covered (TR Glossary) — see `## foundation` |
+| ❌ Missing (Foundation) | 51 | R23-11 has 52 FO docs (RS/PRS/TPS/TR/EXP/ASWS); 1 partially translated (TR Glossary 📖) — see `## foundation` and `sync-todo/Group-foundation-exp.md` / `Group-foundation-rs-prs.md` |
 
 ## communication
 
@@ -154,8 +154,6 @@
 - ✅ [SAE J1939 Dcm 诊断通信管理器](cp/diagnostics/j1939dcm/) — SWS_SAEJ1939DiagnosticCommunicationManager · R23-11 (new article 2026-11-01, full Type A: ch.2 31 acronyms, §6 DM01–DM55 handling + DEM interaction, §7 API 2 types/5 functions/9 callbacks/expected+configurable/service interfaces, §8 时序图 one-sentence chapter per source, §9 19 containers; 13 figures; appendix A NA requirements omitted; identifier/chapter-ref/citation links applied)
 
 ## general
-
-- 📖 [TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/) — AUTOSAR_FO_TR_Glossary（Foundation · R23-11）（2026-10-24 翻译中：ch.2 缩略语 206 条 ✅；ch.4 术语定义 343 条分批进行；内容并入术语表页）
 
 - ✅ [Standard Types](cp/general/standard_types/) — SWS_StandardTypes (2026-10-27 full Type A translation from R23-11 replacing the 9-line stub: title fixed from the wrong "ECU State Manager" + mkdocs.yml nav label "EcuM" → "Standard Types"; §7 API = 7 type definitions + 5 symbol definitions + 函数定义 不适用, prose folds + literal bullets per the mcu/gpt style, Table 8.1 error codes as GFM; §8/§9 = 不适用 per source ch.9/10; appendix B 需求历史 with verbatim item-ID fences; Figure8-1 bit-layout extracted; source ch.5 "Software Architecture" → §5 软件架构 direct translation, empty 5.1 kept)
 - ✅ [ComStack Types 通信栈类型](cp/general/communication_stack_types/index.md) — SWS_CommunicationStackTypes (2026-10-27 full Type A translation from R23-11: new article + nav `"ComStack Types"`; ch.6 Requirements Tracing + appendix A dropped per mandate; ch.2 two tables → 13 blockquote entries (incl. the long OSEK/VDX row); ch.7 → §6 功能规格 (3 general reqs + 6.2 错误分类 5×"none" + 6.3 安全事件); ch.8 → §7 API规范 (14 types 7.1.1–7.1.14, 8.2 不适用 → §7.2); ch.9 不适用 → §8 时序图; ch.10 → §9 配置规范 (9.1 发布信息); 0 figures — all source images are page-chrome strips; glossary +13 terms incl. an API 来源 line)
@@ -229,11 +227,11 @@
 
 ## foundation
 
-Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<topic>/`; FO documents are RS/PRS/TPS/TR/EXP (no SWS) — translation queue not yet opened (skill adaptation pending).
+Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<topic>/<type>_<name>/` (slug after the `tr_glossary` precedent); FO documents are RS/PRS/TPS/TR/EXP/ASWS (no SWS) — all skeleton-exempt (STANDARD.md §7). Execution queue (batches 17–18, split by document type 2026-11-03): [sync-todo/Group-foundation-exp.md](sync-todo/Group-foundation-exp.md) — 20 EXP/TR/TPS/ASWS guide/template/report documents — and [sync-todo/Group-foundation-rs-prs.md](sync-todo/Group-foundation-rs-prs.md) — 32 RS/PRS requirement/protocol specifications; the RS/PRS/TPS item-ID handling decision is recorded in the rs-prs header and taken at the first such row.
 
 ### foundation/general (General)
 
-- 📖 [TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/) — AUTOSAR_FO_TR_Glossary (R23-11; guide-type article, STANDARD.md §7 exempt)
+- 📖 [TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/) — AUTOSAR_FO_TR_Glossary (R23-11; guide-type article, STANDARD.md §7 exempt; **partial** — ch.2 缩略语 complete (201 acronyms), ch.4 术语定义 14/343 terms, remaining tranches = first row of Group-foundation; terms also flow into glossary.md)
 - ❌ Explanation of Software Architectural Decisions（软件架构决策说明） — AUTOSAR_FO_EXP_SWArchitecturalDecisions (`foundation/general/`)
 - ❌ Safety Overview（功能安全概览） — AUTOSAR_FO_EXP_SafetyOverview (`foundation/general/`)
 - ❌ Security Overview（信息安全概览） — AUTOSAR_FO_EXP_SecurityOverview (`foundation/general/`)

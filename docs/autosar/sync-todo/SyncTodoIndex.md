@@ -129,9 +129,75 @@ Status: **21/21** completed
 | `exp safety_use_case`                              | [x] Done | 5fa1e61af2 |
 | `exp sw_cluster_design_and_integration`            | [x] Done | 26625e4b1b |
 
+## Group foundation exp — Foundation R23-11 guide/template/report documents (20)
+
+Status: **0/20** completed
+
+| Article                                              | Status | Commit ID |
+| ----------------------------------------------------- | -------- | ---------- |
+| `tr_glossary`                                          | [ ] Aligned 📖 | bce433256f |
+| `tr_list_of_known_issues_secure_hardware_extensions`   | [ ] Pending | N/A |
+| `exp_system_health_monitoring`                         | [ ] Pending | N/A |
+| `tr_predefined_names`                                  | [ ] Pending | N/A |
+| `exp_time_sensitive_network_features`                  | [ ] Pending | N/A |
+| `exp_security_overview`                                | [ ] Pending | N/A |
+| `tr_release_overview`                                  | [ ] Pending | N/A |
+| `exp_sw_architectural_decisions`                       | [ ] Pending | N/A |
+| `tps_log_and_trace_extract`                            | [ ] Pending | N/A |
+| `exp_safety_overview`                                  | [ ] Pending | N/A |
+| `tps_arxml_serialization_rules`                        | [ ] Pending | N/A |
+| `asws_health_monitoring`                               | [ ] Pending | N/A |
+| `tps_abstract_platform_specification`                  | [ ] Pending | N/A |
+| `tps_xml_schema_production_rules`                      | [ ] Pending | N/A |
+| `tr_secure_hardware_extensions`                        | [ ] Pending | N/A |
+| `tps_security_extract_template`                        | [ ] Pending | N/A |
+| `tps_feature_model_exchange_format`                    | [ ] Pending | N/A |
+| `tr_timing_analysis`                                   | [ ] Pending | N/A |
+| `tps_standardization_template`                         | [ ] Pending | N/A |
+| `tps_generic_structure_template`                       | [ ] Pending | N/A |
+
+## Group foundation rs-prs — Foundation R23-11 requirement/protocol specifications (32)
+
+Status: **0/32** completed
+
+| Article                                 | Status | Commit ID |
+| ---------------------------------------- | -------- | ---------- |
+| `rs_project_objectives`                   | [ ] Pending | N/A |
+| `rs_ieee1722`                             | [ ] Pending | N/A |
+| `rs_debug_trace_profile`                  | [ ] Pending | N/A |
+| `rs_someip_service_discovery_protocol`    | [ ] Pending | N/A |
+| `prs_v2x_remote_access_layer`             | [ ] Pending | N/A |
+| `rs_ipsec_protocol`                       | [ ] Pending | N/A |
+| `rs_security_extract_template`            | [ ] Pending | N/A |
+| `rs_feature_model_exchange_format`        | [ ] Pending | N/A |
+| `prs_secoc_protocol`                      | [ ] Pending | N/A |
+| `rs_data_distribution_service`            | [ ] Pending | N/A |
+| `prs_network_management_protocol`         | [ ] Pending | N/A |
+| `rs_e2e`                                  | [ ] Pending | N/A |
+| `rs_intrusion_detection_system`           | [ ] Pending | N/A |
+| `rs_firewall`                             | [ ] Pending | N/A |
+| `rs_health_monitoring`                    | [ ] Pending | N/A |
+| `rs_someip_protocol`                      | [ ] Pending | N/A |
+| `rs_macsec`                               | [ ] Pending | N/A |
+| `rs_methodology`                          | [ ] Pending | N/A |
+| `prs_intrusion_detection_system`          | [ ] Pending | N/A |
+| `rs_timing_extensions`                    | [ ] Pending | N/A |
+| `rs_safety`                               | [ ] Pending | N/A |
+| `rs_network_management`                   | [ ] Pending | N/A |
+| `rs_main`                                 | [ ] Pending | N/A |
+| `rs_log_and_trace`                        | [ ] Pending | N/A |
+| `rs_time_sync`                            | [ ] Pending | N/A |
+| `rs_standardization_template`             | [ ] Pending | N/A |
+| `prs_time_sync_protocol`                  | [ ] Pending | N/A |
+| `prs_someip_protocol`                     | [ ] Pending | N/A |
+| `rs_diagnostics`                          | [ ] Pending | N/A |
+| `prs_someip_service_discovery_protocol`   | [ ] Pending | N/A |
+| `prs_log_and_trace_protocol`              | [ ] Pending | N/A |
+| `prs_e2e_protocol`                        | [ ] Pending | N/A |
+
 ## Group general — general/base specifications
 
-Status: **4/5** completed
+Status: **4/4** completed
 
 | Article                     | Status | Commit ID |
 | ---------------------------- | -------- | ---------- |
@@ -139,7 +205,6 @@ Status: **4/5** completed
 | `bsw_general`                 | [x] Done | 2bc57c2cd4 |
 | `platform_types_2`            | [x] Done | d773247410 |
 | `communication_stack_types`   | [x] Done | faa08069ee |
-| `tr_glossary`                 | [ ] Aligned 📖 | c19bc75dd6 |
 
 ## Group globaltime — global time cluster (new section)
 
@@ -150,7 +215,7 @@ Status: **4/4** completed
 | `stbm`       | [x] Done | 53cd591142 |
 | `can_tsyn`   | [x] Done | 364c4fd73b |
 | `eth_tsyn`   | [x] Done | 8f01771012 |
-| `fr_tsyn`    | [x] Done | 873a5ec018 |
+| `fr_tsyn`    | [x] Done | 05b2b4d283 |
 
 ## Group io — IO section wrap-up
 
@@ -200,10 +265,10 @@ Status: **5/12** completed
 | ------------------------------- | -------- | ---------- |
 | `memory_access`                  | [x] Done | 922364777e |
 | `memory_mapping`                 | [x] Done | 89900677f4 |
-| `bulk_nv_data_manager`           | [x] Done | df7fb88a82 |
-| `flash_driver`                   | [x] Done | df7fb88a82 |
+| `bulk_nv_data_manager`           | [x] Done | 05b2b4d283 |
+| `flash_driver`                   | [x] Done | 05b2b4d283 |
 | `nvram_manager`                  | [x] Done | 0358128113 |
-| `flash_eeprom_emulation`         | [ ] Aligned ⚠️ | df7fb88a82 |
+| `flash_eeprom_emulation`         | [ ] Aligned ⚠️ | 05b2b4d283 |
 | `ea`                             | [ ] Pending | N/A |
 | `eep`                            | [ ] Pending | N/A |
 | `memory_abstraction_interface`   | [ ] Pending | N/A |
@@ -227,7 +292,7 @@ Status: **0/2** completed
 | Article | Status | Commit ID |
 | ------- | -------- | ---------- |
 | `rte`    | [ ] Aligned | 67b0783783 |
-| `arti`   | [ ] Aligned | 89cd317758 |
+| `arti`   | [ ] Aligned | 05b2b4d283 |
 
 ## Group safety — safety section (new section)
 
@@ -262,5 +327,5 @@ Status: **5/7** completed
 | `hwtestmanager`                 | [ ] Pending | N/A |
 | `operating_system`              | [x] Done | ca7ecda991 |
 
-**Total: 102/146 queue rows complete.**
+**Total: 102/197 queue rows complete.**
 
