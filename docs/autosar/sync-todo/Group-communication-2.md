@@ -179,8 +179,8 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 2 — In-place translation/completion (full Type A build)
   - [x] Step 3 — Phase A mechanical checks (strict build exit 0 / 0 WARNING / 0 flexray_iso anchor notices; check_heading_lang OK; hygiene: 0 h1, 0 \<, 0 [SWS_*]/[ECUC_*] ids; acronym chapter: prefix table + 45 blockquote rows == source rows; check_indexes 0 (210 nav targets); check_api_sync 0; gen_api_list --check 0 (1 type/20 funcs listed); census: 256 identifier-mention lines, apply 175 lines (50 chapter-ref + 3 citation links + 14 registry anchors) then idempotent 0)
   - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 ↔ §1–§9 1:1; ch.6 tracing + ch.11 NA requirements dropped; page-split tables merged in order; source's own typos kept as data: "Trnasport", FRTP_E_FRTPTIMEBR vs FRTP_E_FRTPTIMEOUTBR inconsistency in source; Figure 20 caption had no adjacent image — mapped via non-deco neighbor rule img000084; the two Garbled-lead sentences in ch.1 (Cinuro 1...) identified as conversion chrome of Figure 1 and dropped)
-  - [ ] Step 5 — User confirmation gate (batched 2026-10-27 pattern — pending, Group-communication-2 batch)
-- [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 5 — User confirmation gate (article merged by user via PR #232 — acceptance recorded by the merge)
+- [x] Step 6 — TODO.md row + commit/PR (commits a65bdec + 269b880 + c2dcde5, PR #232 merged 2026-11-01; TODO.md row added 2026-11-03 when finalizing the row)
 - [ ] linsm (SWS_LINStateManager · R23-11 markdown · ❌ new article, short name LinSM)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
