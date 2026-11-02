@@ -22,12 +22,19 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 5 — User confirmation gate (deferred to batch-end joint confirmation)
   - [x] Step 6 — TODO.md row + commit/PR (commit 209cfc5; TODO.md ✅ row added; batch PR pending user confirmation)
 - [ ] e2e (SWS_E2ELibrary · R23-11 markdown · ❌ new article, short name E2E; note this is a different document from cp/communication/e2e_transformer)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: 2026-11-03 batch run — committed without the per-article Step 5 gate (batch-end joint confirmation), same as the crc row.
+  - Note: check_api_sync GREEN (62 types / 91 functions / 91 **说明** blocks, names+order match) — this document's identifier-named leaves align with the script's positional 7.2/7.3 assumption.
+  - Note: source 7.1.5 Extended Production Errors has NO body even in the R22-11 PDF (heading is the last line of page 33) — omitted per the placeholder rule. Source ch.6 Requirements Tracing + annex C dropped per mandate. Annex A (safety manual) → §10, Annex B (application hints) → §11, Annex D → ## B.
+  - Note: P01 CheckStatusType E2E_P01STATUS_OK=0x00 row lost in the R23-11 markdown conversion — recovered from the bundled R22-11 PDF (UML + table); the P02 MapStatusToSM INITIAL-row merge-cell artifact likewise reconstructed from the PDF.
+  - Note: ~20 service tables were page-break scrambled in the conversion (e.g. [SWS_E2E_00600] mapping table landed inside the P04mProtect section) — content restored to its owning entry; P04mForward/P08mProtect/P44mProtect syntax tails truncated by the converter, reconstructed from the R22-11 PDF or the entry's own parameter table.
+  - Note: Figure B.20 (Mapping of Data elements into I-PDU) image is absent from the source conversion — caption kept as text.
+  - Note: --apply converted the bit-offset example's Data[1]/Data[2] table cells as citation markers — reverted manually (they are array subscripts, not [n] citations); comma forms [1, ...]/[3, ...] converted to #ref links; constant-bullet mentions (207) stay report-only.
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate (deferred to batch-end joint confirmation)
+  - [x] Step 6 — TODO.md row + commit/PR (commits cd14a65 (crc caption fixup) + 0a3139e; batch PR pending user confirmation)
 - [ ] bfx (SWS_BFXLibrary · R23-11 markdown · ❌ new article, short name Bfx)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
