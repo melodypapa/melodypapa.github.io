@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2118** 个条目。
+共 **2128** 个条目。
 
 ## A
 
@@ -4340,6 +4340,36 @@ title: "AUTOSAR API 函数清单"
 
 **[J1939Rm_TxConfirmation](../communication/j1939rm/index.md#752-j1939rm_txconfirmation)**
 > 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Tp_CancelReceive](../communication/j1939tp/index.md#746-j1939tp_cancelreceive)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
+
+**[J1939Tp_CancelTransmit](../communication/j1939tp/index.md#745-j1939tp_canceltransmit)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
+
+**[J1939Tp_ChangeParameter](../communication/j1939tp/index.md#747-j1939tp_changeparameter)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
+
+**[J1939Tp_GetVersionInfo](../communication/j1939tp/index.md#743-j1939tp_getversioninfo)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
+
+**[J1939Tp_Init](../communication/j1939tp/index.md#741-j1939tp_init)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
+
+**[J1939Tp_MainFunction](../communication/j1939tp/index.md#761-j1939tp_mainfunction)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
+
+**[J1939Tp_RxIndication](../communication/j1939tp/index.md#751-j1939tp_rxindication)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
+
+**[J1939Tp_Shutdown](../communication/j1939tp/index.md#742-j1939tp_shutdown)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
+
+**[J1939Tp_Transmit](../communication/j1939tp/index.md#744-j1939tp_transmit)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
+
+**[J1939Tp_TxConfirmation](../communication/j1939tp/index.md#752-j1939tp_txconfirmation)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
 
 ## K
 

@@ -1732,6 +1732,23 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**J1939Rm_SetState**](../communication/j1939rm/index.md#744-j1939rm_setstate) | — |
 | [**J1939Rm_TxConfirmation**](../communication/j1939rm/index.md#752-j1939rm_txconfirmation) | — |
 
+## AUTOSAR J1939Tp（SAE J1939 传输层）（10）
+
+来源：[AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer
+
+| 函数 | 简述 |
+|---|---|
+| [**J1939Tp_CancelReceive**](../communication/j1939tp/index.md#746-j1939tp_cancelreceive) | — |
+| [**J1939Tp_CancelTransmit**](../communication/j1939tp/index.md#745-j1939tp_canceltransmit) | — |
+| [**J1939Tp_ChangeParameter**](../communication/j1939tp/index.md#747-j1939tp_changeparameter) | — |
+| [**J1939Tp_GetVersionInfo**](../communication/j1939tp/index.md#743-j1939tp_getversioninfo) | — |
+| [**J1939Tp_Init**](../communication/j1939tp/index.md#741-j1939tp_init) | — |
+| [**J1939Tp_MainFunction**](../communication/j1939tp/index.md#761-j1939tp_mainfunction) | — |
+| [**J1939Tp_RxIndication**](../communication/j1939tp/index.md#751-j1939tp_rxindication) | — |
+| [**J1939Tp_Shutdown**](../communication/j1939tp/index.md#742-j1939tp_shutdown) | — |
+| [**J1939Tp_Transmit**](../communication/j1939tp/index.md#744-j1939tp_transmit) | — |
+| [**J1939Tp_TxConfirmation**](../communication/j1939tp/index.md#752-j1939tp_txconfirmation) | — |
+
 ## AUTOSAR Key Manager（密钥管理器）（41）
 
 来源：[AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager

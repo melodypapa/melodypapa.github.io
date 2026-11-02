@@ -16,6 +16,7 @@ title: "通信（Communication）"
 * [AUTOSAR CAN NM（CAN网络管理）](can_network_management/index.md)
 * [AUTOSAR J1939Nm（SAE J1939 网络管理）](j1939nm/index.md)
 * [AUTOSAR J1939Rm（SAE J1939 请求管理器）](j1939rm/index.md)
+* [AUTOSAR J1939Tp（SAE J1939 传输层）](j1939tp/index.md)
 * [AUTOSAR Nm（网络管理接口）](nm/index.md)
 * [AUTOSAR CanSM（CAN状态管理器）](cansm/index.md)
 * [AUTOSAR CanTp（CAN传输层）](cantp/index.md)

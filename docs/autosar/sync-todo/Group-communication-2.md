@@ -246,13 +246,17 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 + A-history ↔ §1–§9 + B 1:1; ch.6 tracing + NA appendix dropped (compliance))
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
 - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-4)
-- [ ] j1939tp (SWS_SAEJ1939TransportLayer · R23-11 markdown · ❌ new article, short name J1939Tp)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-- [ ] Step 6 — TODO.md row + commit/PR
+- [x] j1939tp (SWS_SAEJ1939TransportLayer · R23-11 markdown · ❌ new article, short name J1939Tp)
+  - Note: article `cp/communication/j1939tp/` (directory per row name, nav label "J1939Tp"). Shape: ch.1 → §1 (Figure1_1 comm stack) · ch.2 "Glossary, Acronyms, and Abbreviations" → §2 缩略语 with 5 glossary term entries + 33 acronym entries (38 term lines = source 5+33 rows, no subsections in source) · ch.3 → §3 (3.1 18-entry registry) · ch.4 → §4 (4.1 incl. no-TriggerTransmit limitation) · ch.5 → §5 (Figure5_1 interactions; UML chrome around ch.4.2/ch.5 dropped) · ch.7 → §6 (6.1 basic principles, 6.2 basic functionality incl. metadata types/parallel connections, 6.3 init/shutdown + Figure7_1, 6.4 lower-layer communication, 6.5 internal behavior: 6.5.1 session handling 5 subsections, 6.5.2 N-SDU reception, 6.5.3 N-SDU transmission, 6.5.4 data flow direct/CMDT/BAM with Figures 7.2–7.4 + dynamic block calc + retry + timeout requirements, 6.5.5 buffer locking Figures 7.5–7.6, 6.5.6 N-SDU/N-PDU relation Figure 7.7, 6.5.7 concurrent connections, 6.5.8 padding, 6.5.9 unexpected N-PDUs, 6.6 error classification dev 表6.1 5 rows + runtime 表6.2 14 rows) · ch.8 → §7 (7.1 param checking; 7.2 9 imported; 7.3.1 ConfigType (source table page-split, elements/Type/Comment merged); 7.4 7 functions; 7.5 2 callbacks; 7.6 MainFunction; 7.7 期望接口 7 强制 + 1 可选) · ch.9 → §8 7 figures · ch.10 → §9 (10.1 folded; 9.1.1 J1939Tp; 9.1.2 J1939TpGeneral 4 params; 9.1.3 J1939TpConfiguration + 2 included; 9.1.4 J1939TpRxChannel 9 params + 4 included; 9.1.5–9.1.10 RxCmNPdu/RxDtNPdu/RxPg/RxDirectNPdu/RxNSdu/TxFcNPdu; 9.1.11 J1939TpTxChannel 8 params + 4 included; 9.1.12–9.1.17 RxFcNPdu/TxCmNPdu/TxDtNPdu/TxPg/TxDirectNPdu/TxNSdu 2 params each; figures 10.1–10.7; 9.2 发布信息) · ch.6 tracing dropped · source appendix A (NA requirements) dropped (droppable); NO ## B chapter
+  - Note: source truncations kept/completed: RxChannel/TxChannel Description page-split truncated at "for all po…" — completed from parallel wording (ttcan precedent); J1939TpRxProtocolType/J1939TpTxProtocolType range rows page-split garbled — CMDT literal reconstructed from the parallel BAM row ("This protocol uses three N-PDUs: The CmNPdu, the DtNPdu and the FcNPdu"); J1939TpRxSa Range empty in markdown (sibling J1939TpRxDa carries 0 .. 253) — rendered 0 .. 253, user verify; J1939Tp_RxIndication Description cell "Indication of a received" + split continuation merged
+  - Note: Phase A — strict build exit 0 / 0 WARNING; check_heading_lang OK; check_indexes OK; hygiene 0; acronym 38 term lines = source 38 rows; check_api_sync N/A-with-explanation (source ch.8 layout 8.3 types/8.4 functions differs from the script convention — flexray_driver precedent; manual verification 1 type/7 functions/2 callbacks/1 scheduled in order); gen_api_list regenerated (J1939Tp 1 type + 10 functions, --check 0); census --apply: 4 lines (4 chapter-ref + 45 citation links) + 18 registry anchors, idempotent re-run 0 lines
+  - Note: glossary +12 new terms (BAM, CMDT, MetaDataItem, SNA, SPN, TP.CM + 5 variants, TP.DT) + 20 来源 appends (BSW/CanIf/CanTp/DA/DET/DP/EcuM/EDP/FrTp/MetaData/PDU1/PDU2/PDUF/PduR/PDUS/PG/PGN/RTE/SA/SchM)
+  - [x] Step 1 — Source resolution + gap analysis (2517-line R23-11 markdown; 23 content figures via caption-anchored mapper; config tables parsed field-by-field)
+  - [x] Step 2 — In-place translation/completion (full Type A build, main session)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 ↔ §1–§9 1:1; ch.6 tracing + appendix A dropped (compliance))
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+- [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-4)
 - [ ] ieee1722tp (SWS_IEEE1722TransportLayer · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
