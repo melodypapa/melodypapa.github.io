@@ -249,7 +249,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **API**
 > 应用编程接口（**Application Programming Interface**）
 >
-> 来源：[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Standard Types（标准类型）](cp/general/standard_types/index.md)（SWS_StandardTypes）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
+> 来源：[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Standard Types（标准类型）](cp/general/standard_types/index.md)（SWS_StandardTypes）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR RamTst（RAM测试）](cp/memory/ramtst/index.md)（AUTOSAR_CP_SWS_RAMTest）
 {: .glossary-source}
 
 **APID**
@@ -316,6 +316,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 组装连接器。在 VFB 层级把一个组件的 RPort/PRPort 与另一个组件的 PPort/PRPort 连接起来的连接器；恰好连接一个提供端口与一个要求端口。
 >
 > 来源：[VFB（虚拟功能总线）](cp/general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）
+{: .glossary-source}
+
+**Asynchronous**
+> 异步通信不阻塞发送方软件实体，发送方在不获得通信伙伴响应的情况下继续其操作；通信系统可以就信息的发送给出确认，稍后的响应可以到达发送方。
+>
+> 来源：[AUTOSAR RamTst（RAM测试）](cp/memory/ramtst/index.md)（AUTOSAR_CP_SWS_RAMTest）
 {: .glossary-source}
 
 **Atomic Sender/Receiver interface**
@@ -1021,7 +1027,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CRC**
 > 循环冗余校验（**Cyclic Redundancy Check**）
 >
-> 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
+> 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR RamTst（RAM测试）](cp/memory/ramtst/index.md)（AUTOSAR_CP_SWS_RAMTest）
 {: .glossary-source}
 
 **Cross-Cluster External Graph**
@@ -1257,7 +1263,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DEM**
 > 诊断事件管理器（**Diagnostic Event Manager**）。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](cp/mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](cp/communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](cp/communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[E2E Transformer (E2E转换器)](cp/communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR Eep（EEPROM驱动程序）](cp/memory/eep/index.md)（AUTOSAR_CP_SWS_EEPROMDriver）、[AUTOSAR FlsTst（闪存测试驱动程序）](cp/memory/flstst/index.md)（AUTOSAR_CP_SWS_FlashTest）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](cp/mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](cp/communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](cp/communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[E2E Transformer (E2E转换器)](cp/communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR Eep（EEPROM驱动程序）](cp/memory/eep/index.md)（AUTOSAR_CP_SWS_EEPROMDriver）、[AUTOSAR FlsTst（闪存测试驱动程序）](cp/memory/flstst/index.md)（AUTOSAR_CP_SWS_FlashTest）、[AUTOSAR RamTst（RAM测试）](cp/memory/ramtst/index.md)（AUTOSAR_CP_SWS_RAMTest）
 {: .glossary-source}
 
 **Dem-internal data value**
@@ -1287,7 +1293,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DET**
 > 默认错误跟踪器（**Default Error Tracer**），实现报告开发错误的模块。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](cp/mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR Crypto Driver（加密驱动程序）](cp/crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](cp/crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Default Error Tracer（默认错误跟踪器）](cp/system_services/default_error_tracer/index.md)（SWS_DefaultErrorTracer）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](cp/communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](cp/communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR Eep（EEPROM驱动程序）](cp/memory/eep/index.md)（AUTOSAR_CP_SWS_EEPROMDriver）、[AUTOSAR Crypto Service Manager（加密服务管理器）](cp/crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）、[AUTOSAR FlsTst（闪存测试驱动程序）](cp/memory/flstst/index.md)（AUTOSAR_CP_SWS_FlashTest）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](cp/mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR Crypto Driver（加密驱动程序）](cp/crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](cp/crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Default Error Tracer（默认错误跟踪器）](cp/system_services/default_error_tracer/index.md)（SWS_DefaultErrorTracer）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](cp/communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](cp/communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR Eep（EEPROM驱动程序）](cp/memory/eep/index.md)（AUTOSAR_CP_SWS_EEPROMDriver）、[AUTOSAR Crypto Service Manager（加密服务管理器）](cp/crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）、[AUTOSAR FlsTst（闪存测试驱动程序）](cp/memory/flstst/index.md)（AUTOSAR_CP_SWS_FlashTest）、[AUTOSAR RamTst（RAM测试）](cp/memory/ramtst/index.md)（AUTOSAR_CP_SWS_RAMTest）
 {: .glossary-source}
 
 **DHCP**
@@ -1378,6 +1384,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 一个 **Dlt** 用户代表一个生成的 **Dlt** 消息的来源。可能的用户是 **SW-C**、RTE（用于 **VFB** 跟踪）、**DEM** 或 **DET**。
 >
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+{: .glossary-source}
+
+**DMA**
+> 直接内存访问（**Direct Memory Access**）。
+>
+> 来源：[AUTOSAR RamTst（RAM测试）](cp/memory/ramtst/index.md)（AUTOSAR_CP_SWS_RAMTest）
 {: .glossary-source}
 
 **DM（Deadline Monitoring）**
@@ -1559,7 +1571,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ECC**
 > 纠错码（**Error Correction Code**）
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）
+> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）、[AUTOSAR RamTst（RAM测试）](cp/memory/ramtst/index.md)（AUTOSAR_CP_SWS_RAMTest）
 {: .glossary-source}
 
 **ECU**
@@ -3573,6 +3585,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
 {: .glossary-source}
 
+**NMI**
+> 不可屏蔽中断（**Non Maskable Interrupt**）。
+>
+> 来源：[AUTOSAR RamTst（RAM测试）](cp/memory/ramtst/index.md)（AUTOSAR_CP_SWS_RAMTest）
+{: .glossary-source}
+
 **NOAR**
 > Number of Arguments —— 参数数量。
 >
@@ -4296,7 +4314,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **RAM**
 > Random Access Memory —— 随机访问存储器。
 >
-> 来源：[AUTOSAR XCP（通用测量与校准协议）](cp/communication/xcp/index.md)（SWS_XCP）
+> 来源：[AUTOSAR XCP（通用测量与校准协议）](cp/communication/xcp/index.md)（SWS_XCP）、[AUTOSAR RamTst（RAM测试）](cp/memory/ramtst/index.md)（AUTOSAR_CP_SWS_RAMTest）
 {: .glossary-source}
 
 **RAM Block**
@@ -5145,6 +5163,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 只要 ((!vPOC!Freeze) && (vPOC!State == NORMAL_ACTIVE) || (vPOC!State == NORMAL_PASSIVE)) 成立，就认为 FlexRay CC 与其所连接的 FlexRay 集群同步。
 >
 > 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](cp/communication/flexray_driver/index.md)（SWS_FlexRayDriver）
+{: .glossary-source}
+
+**Synchronous**
+> 当调用软件实体被阻塞直到被调用的操作被求值时，通信是同步的；调用软件实体通过获得结果继续其操作。分布式功能单元之间的同步通信必须实现为远程过程调用。
+>
+> 来源：[AUTOSAR RamTst（RAM测试）](cp/memory/ramtst/index.md)（AUTOSAR_CP_SWS_RAMTest）
 {: .glossary-source}
 
 **SyncLocal Time Tuple**

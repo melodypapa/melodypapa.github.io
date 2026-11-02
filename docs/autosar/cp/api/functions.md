@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2006** 个条目。
+共 **2026** 个条目。
 
 ## A
 
@@ -4915,6 +4915,66 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](../io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 ## R
+
+**[RamTst_Allow](../memory/ramtst/index.md#734-ramtst_allow)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_ChangeNumberOfTestedCells](../memory/ramtst/index.md#7315-ramtst_changenumberoftestedcells)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_DeInit](../memory/ramtst/index.md#732-ramtst_deinit)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_ErrorNotification](../memory/ramtst/index.md#7632-ramtst_errornotification)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_GetAlgParams](../memory/ramtst/index.md#7311-ramtst_getalgparams)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_GetExecutionStatus](../memory/ramtst/index.md#737-ramtst_getexecutionstatus)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_GetNumberOfTestedCells](../memory/ramtst/index.md#7313-ramtst_getnumberoftestedcells)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_GetTestAlgorithm](../memory/ramtst/index.md#7312-ramtst_gettestalgorithm)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_GetTestResult](../memory/ramtst/index.md#738-ramtst_gettestresult)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_GetTestResultPerBlock](../memory/ramtst/index.md#739-ramtst_gettestresultperblock)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_GetVersionInfo](../memory/ramtst/index.md#7310-ramtst_getversioninfo)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_Init](../memory/ramtst/index.md#731-ramtst_init)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_MainFunction](../memory/ramtst/index.md#751-ramtst_mainfunction)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_Resume](../memory/ramtst/index.md#736-ramtst_resume)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_RunFullTest](../memory/ramtst/index.md#7316-ramtst_runfulltest)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_RunPartialTest](../memory/ramtst/index.md#7317-ramtst_runpartialtest)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_SelectAlgParams](../memory/ramtst/index.md#7314-ramtst_selectalgparams)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_Stop](../memory/ramtst/index.md#733-ramtst_stop)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_Suspend](../memory/ramtst/index.md#735-ramtst_suspend)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_TestCompletedNotification](../memory/ramtst/index.md#7631-ramtst_testcompletednotification)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
 
 **[ReadDataElement](../diagnostics/diagnostic_event_manager/index.md#74310-readdataelement)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11

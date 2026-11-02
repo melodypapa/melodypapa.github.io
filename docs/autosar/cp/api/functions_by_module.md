@@ -2068,6 +2068,33 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**Pwm_SetPeriodAndDuty**](../io/pwm_driver/index.md#734-pwm_setperiodandduty) | 设置PWM通道周期和占空比的服务。 |
 | [**Pwm_SetPowerState**](../io/pwm_driver/index.md#739-pwm_setpowerstate) | 此API配置Pwm模块，使其进入已准备的电源状态（从预定义的一组已配置电源状态中选择）。 |
 
+## AUTOSAR RamTst（RAM测试）（20）
+
+来源：[AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest
+
+| 函数 | 简述 |
+|---|---|
+| [**RamTst_Allow**](../memory/ramtst/index.md#734-ramtst_allow) | 服务 ID 0x03。 |
+| [**RamTst_ChangeNumberOfTestedCells**](../memory/ramtst/index.md#7315-ramtst_changenumberoftestedcells) | 服务 ID 0x08。 |
+| [**RamTst_DeInit**](../memory/ramtst/index.md#732-ramtst_deinit) | 服务 ID 0x0c。 |
+| [**RamTst_ErrorNotification**](../memory/ramtst/index.md#7632-ramtst_errornotification) | — |
+| [**RamTst_GetAlgParams**](../memory/ramtst/index.md#7311-ramtst_getalgparams) | 服务 ID 0x12。 |
+| [**RamTst_GetExecutionStatus**](../memory/ramtst/index.md#737-ramtst_getexecutionstatus) | 服务 ID 0x04。 |
+| [**RamTst_GetNumberOfTestedCells**](../memory/ramtst/index.md#7313-ramtst_getnumberoftestedcells) | 服务 ID 0x09。 |
+| [**RamTst_GetTestAlgorithm**](../memory/ramtst/index.md#7312-ramtst_gettestalgorithm) | 服务 ID 0x07。 |
+| [**RamTst_GetTestResult**](../memory/ramtst/index.md#738-ramtst_gettestresult) | 服务 ID 0x05。 |
+| [**RamTst_GetTestResultPerBlock**](../memory/ramtst/index.md#739-ramtst_gettestresultperblock) | 服务 ID 0x06。 |
+| [**RamTst_GetVersionInfo**](../memory/ramtst/index.md#7310-ramtst_getversioninfo) | 服务 ID 0x0a。 |
+| [**RamTst_Init**](../memory/ramtst/index.md#731-ramtst_init) | 服务 ID 0x00。 |
+| [**RamTst_MainFunction**](../memory/ramtst/index.md#751-ramtst_mainfunction) | 服务 ID 0x01。 |
+| [**RamTst_Resume**](../memory/ramtst/index.md#736-ramtst_resume) | 服务 ID 0x0e。 |
+| [**RamTst_RunFullTest**](../memory/ramtst/index.md#7316-ramtst_runfulltest) | 服务 ID 0x10。 |
+| [**RamTst_RunPartialTest**](../memory/ramtst/index.md#7317-ramtst_runpartialtest) | 服务 ID 0x11。 |
+| [**RamTst_SelectAlgParams**](../memory/ramtst/index.md#7314-ramtst_selectalgparams) | 服务 ID 0x0b。 |
+| [**RamTst_Stop**](../memory/ramtst/index.md#733-ramtst_stop) | 服务 ID 0x02。 |
+| [**RamTst_Suspend**](../memory/ramtst/index.md#735-ramtst_suspend) | 服务 ID 0x0d。 |
+| [**RamTst_TestCompletedNotification**](../memory/ramtst/index.md#7631-ramtst_testcompletednotification) | — |
+
 ## AUTOSAR RTE（运行时环境）（64）
 
 来源：[AUTOSAR RTE（运行时环境）](../rte/rte/index.md) · SWS_RTE

@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **529** 个条目。
+共 **536** 个条目。
 
 ## A
 
@@ -1246,6 +1246,27 @@ title: "AUTOSAR API 类型清单"
 > 类型 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](../io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 ## R
+
+**[RamTst_AlgorithmType](../memory/ramtst/index.md#725-ramtst_algorithmtype)**
+> 类型 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_AlgParamsIdType](../memory/ramtst/index.md#724-ramtst_algparamsidtype)**
+> 类型 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_ConfigType](../memory/ramtst/index.md#721-ramtst_configtype)**
+> 类型 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_ExecutionStatusType](../memory/ramtst/index.md#722-ramtst_executionstatustype)**
+> 类型 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_NumberOfBlocksType](../memory/ramtst/index.md#727-ramtst_numberofblockstype)**
+> 类型 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_NumberOfTestedCellsType](../memory/ramtst/index.md#726-ramtst_numberoftestedcellstype)**
+> 类型 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_TestResultType](../memory/ramtst/index.md#723-ramtst_testresulttype)**
+> 类型 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
 
 **[RestartType](../system_services/operating_system/index.md#7316-restarttype)**
 > 类型 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
