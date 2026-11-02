@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **583** 个条目。
+共 **596** 个条目。
 
 ## A
 
@@ -1280,6 +1280,45 @@ title: "AUTOSAR API 类型清单"
 
 **[Mirror_NetworkType](../communication/mirror/index.md#7811-mirror_networktype)**
 > 类型 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
+
+**[Mka_ConfidentialityOffsetType](../communication/macsec/index.md#723-mka_confidentialityoffsettype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_ConfigType](../communication/macsec/index.md#7213-mka_configtype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_MacSecConfigType](../communication/macsec/index.md#721-mka_macsecconfigtype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_MkaStatusType](../communication/macsec/index.md#7212-mka_mkastatustype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_PaeStatusType](../communication/macsec/index.md#7211-mka_paestatustype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_PermissiveModeType](../communication/macsec/index.md#729-mka_permissivemodetype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_SakKeyPtrType](../communication/macsec/index.md#728-mka_sakkeyptrtype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_Stats_Rx_ScType](../communication/macsec/index.md#727-mka_stats_rx_sctype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_Stats_Rx_SecYType](../communication/macsec/index.md#725-mka_stats_rx_secytype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_Stats_SecYType](../communication/macsec/index.md#7210-mka_stats_secytype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_Stats_Tx_ScType](../communication/macsec/index.md#726-mka_stats_tx_sctype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_Stats_Tx_SecYType](../communication/macsec/index.md#724-mka_stats_tx_secytype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_ValidateFramesType](../communication/macsec/index.md#722-mka_validateframestype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
 
 ## N
 

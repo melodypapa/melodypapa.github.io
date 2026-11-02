@@ -46,6 +46,7 @@ title: "CP AUTOSAR"
   * [AUTOSAR LinSM（LIN 状态管理器）](communication/linsm/index.md)
   * [AUTOSAR LinTrcv（LIN 收发器驱动程序）](communication/lintrcv/index.md)
   * [AUTOSAR L-SDU Router（链路层 SDU 路由模块）](communication/lsdu_router/index.md)
+  * [AUTOSAR Mka（MACsec 密钥协商）](communication/macsec/index.md)
   * [AUTOSAR Bus Mirroring（总线镜像）](communication/mirror/index.md)
   * [AUTOSAR PduR (PDU Router)](communication/pdu_router/index.md)
   * [AUTOSAR SecOC (Secure Onboard Communication)](communication/sec_oc/index.md)

@@ -59,6 +59,7 @@ title: "通信（Communication）"
 * [AUTOSAR Dlt（诊断日志与跟踪）](diagnostic_log_and_trace/index.md)
 * [AUTOSAR Large Data COM（大数据 COM）](large_data_com/index.md)
 * [AUTOSAR L-SDU Router（链路层 SDU 路由模块）](lsdu_router/index.md)
+* [AUTOSAR Mka（MACsec 密钥协商）](macsec/index.md)
 * [AUTOSAR PduR (PDU Router)](pdu_router/index.md)
 * [AUTOSAR COM（COM模块）](com/index.md)
 * [AUTOSAR COM Based Transformer](com_based_transformer/index.md)

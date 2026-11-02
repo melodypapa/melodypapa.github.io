@@ -302,6 +302,7 @@ nav:
         - "LinSM": autosar/cp/communication/linsm/index.md
         - "LinTrcv": autosar/cp/communication/lintrcv/index.md
         - "LsDu": autosar/cp/communication/lsdu_router/index.md
+        - "Mka": autosar/cp/communication/macsec/index.md
         - "Mirror": autosar/cp/communication/mirror/index.md
         - "IpduM": autosar/cp/communication/ipdum/index.md
         - "PduR": autosar/cp/communication/pdu_router/index.md

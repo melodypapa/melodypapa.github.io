@@ -1993,6 +1993,7 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**MemAcc_RequestLock**](../memory/memory_access/index.md#7328-memacc_requestlock) | 请求锁定一个地址区以进行独占访问。 |
 | [**MemAcc_Write**](../memory/memory_access/index.md#7323-memacc_write) | 触发一个写作业，将所传递的数据以给定的地址和长度存储到所提供的地址区中。 |
 
+<<<<<<< HEAD
 ## AUTOSAR Mem（内存驱动程序）（13）
 
 来源：[AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver
@@ -2012,6 +2013,32 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**Mem_Resume**](../memory/memory_driver/index.md#7316-mem_resume) | 服务 ID 0x0d。 |
 | [**Mem_Suspend**](../memory/memory_driver/index.md#7315-mem_suspend) | 服务 ID 0x0c。 |
 | [**Mem_Write**](../memory/memory_driver/index.md#7322-mem_write) | 服务 ID 0x06。 |
+=======
+## AUTOSAR Mka（MACsec 密钥协商）（18）
+
+来源：[AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement
+
+| 函数 | 简述 |
+|---|---|
+| [**Mka_GetCknStatus**](../communication/macsec/index.md#734-mka_getcknstatus) | — |
+| [**Mka_GetEnable**](../communication/macsec/index.md#736-mka_getenable) | — |
+| [**Mka_GetMacSecStatistics**](../communication/macsec/index.md#7310-mka_getmacsecstatistics) | — |
+| [**Mka_GetMacSecStatisticsNotification**](../communication/macsec/index.md#741-mka_getmacsecstatisticsnotification) | — |
+| [**Mka_GetPaeStatus**](../communication/macsec/index.md#737-mka_getpaestatus) | — |
+| [**Mka_GetVersionInfo**](../communication/macsec/index.md#732-mka_getversioninfo) | — |
+| [**Mka_Init**](../communication/macsec/index.md#731-mka_init) | — |
+| [**Mka_LinkStateChange**](../communication/macsec/index.md#7311-mka_linkstatechange) | — |
+| [**Mka_MacSecAddRxSaNotification**](../communication/macsec/index.md#746-mka_macsecaddrxsanotification) | — |
+| [**Mka_MacSecAddTxSaNotification**](../communication/macsec/index.md#745-mka_macsecaddtxsanotification) | — |
+| [**Mka_MacSecUpdateSecYNotification**](../communication/macsec/index.md#744-mka_macsecupdatesecynotification) | — |
+| [**Mka_MainFunction**](../communication/macsec/index.md#751-mka_mainfunction) | — |
+| [**Mka_RxIndication**](../communication/macsec/index.md#742-mka_rxindication) | — |
+| [**Mka_SetCknStatus**](../communication/macsec/index.md#733-mka_setcknstatus) | — |
+| [**Mka_SetEnable**](../communication/macsec/index.md#735-mka_setenable) | — |
+| [**Mka_SetPaePermissiveMode**](../communication/macsec/index.md#738-mka_setpaepermissivemode) | — |
+| [**Mka_StartPae**](../communication/macsec/index.md#739-mka_startpae) | — |
+| [**Mka_TxConfirmation**](../communication/macsec/index.md#743-mka_txconfirmation) | — |
+>>>>>>> c43ef7d (docs: translate MACsec Key Agreement (Mka))
 
 ## AUTOSAR Nm（网络管理接口）（1）
 

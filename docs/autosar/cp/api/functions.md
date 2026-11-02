@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2139** 个条目。
+共 **2157** 个条目。
 
 ## A
 
@@ -5006,6 +5006,60 @@ title: "AUTOSAR API 函数清单"
 
 **[MirrorControl](../communication/mirror/index.md#7821-mirrorcontrol)**
 > 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
+
+**[Mka_GetCknStatus](../communication/macsec/index.md#734-mka_getcknstatus)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_GetEnable](../communication/macsec/index.md#736-mka_getenable)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_GetMacSecStatistics](../communication/macsec/index.md#7310-mka_getmacsecstatistics)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_GetMacSecStatisticsNotification](../communication/macsec/index.md#741-mka_getmacsecstatisticsnotification)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_GetPaeStatus](../communication/macsec/index.md#737-mka_getpaestatus)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_GetVersionInfo](../communication/macsec/index.md#732-mka_getversioninfo)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_Init](../communication/macsec/index.md#731-mka_init)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_LinkStateChange](../communication/macsec/index.md#7311-mka_linkstatechange)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_MacSecAddRxSaNotification](../communication/macsec/index.md#746-mka_macsecaddrxsanotification)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_MacSecAddTxSaNotification](../communication/macsec/index.md#745-mka_macsecaddtxsanotification)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_MacSecUpdateSecYNotification](../communication/macsec/index.md#744-mka_macsecupdatesecynotification)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_MainFunction](../communication/macsec/index.md#751-mka_mainfunction)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_RxIndication](../communication/macsec/index.md#742-mka_rxindication)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_SetCknStatus](../communication/macsec/index.md#733-mka_setcknstatus)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_SetEnable](../communication/macsec/index.md#735-mka_setenable)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_SetPaePermissiveMode](../communication/macsec/index.md#738-mka_setpaepermissivemode)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_StartPae](../communication/macsec/index.md#739-mka_startpae)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_TxConfirmation](../communication/macsec/index.md#743-mka_txconfirmation)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
 
 **[ModeCondition](../diagnostics/j1939dcm/index.md#7743-modecondition)**
 > 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
