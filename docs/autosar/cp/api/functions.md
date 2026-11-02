@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2043** 个条目。
+共 **2062** 个条目。
 
 ## A
 
@@ -308,6 +308,63 @@ title: "AUTOSAR API 函数清单"
 
 **[Can_SetControllerMode](../communication/can_driver/index.md#7322-can_setcontrollermode)**
 > 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](../communication/can_driver/index.md) · SWS_CANDriver · R23-11
+
+**[Can_TTAckTimeMark](../communication/ttcan_driver/index.md#744-can_ttacktimemark)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTCancelTimeMark](../communication/ttcan_driver/index.md#743-can_ttcanceltimemark)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTDisableTimeMarkIRQ](../communication/ttcan_driver/index.md#746-can_ttdisabletimemarkirq)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTEnableTimeMarkIRQ](../communication/ttcan_driver/index.md#745-can_ttenabletimemarkirq)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTGetControllerTime](../communication/ttcan_driver/index.md#731-can_ttgetcontrollertime)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTGetErrorLevel](../communication/ttcan_driver/index.md#734-can_ttgeterrorlevel)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTGetMasterState](../communication/ttcan_driver/index.md#732-can_ttgetmasterstate)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTGetNTUActual](../communication/ttcan_driver/index.md#733-can_ttgetntuactual)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTGetSyncQuality](../communication/ttcan_driver/index.md#741-can_ttgetsyncquality)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTGetTimeMarkIRQStatus](../communication/ttcan_driver/index.md#747-can_ttgettimemarkirqstatus)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTGlobalTimePreset](../communication/ttcan_driver/index.md#738-can_ttglobaltimepreset)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTMainFunction_IRQ](../communication/ttcan_driver/index.md#751-can_ttmainfunction_irq)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTReceive](../communication/ttcan_driver/index.md#748-can_ttreceive)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTSetEndOfGap](../communication/ttcan_driver/index.md#736-can_ttsetendofgap)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTSetExtClockSyncCommand](../communication/ttcan_driver/index.md#739-can_ttsetextclocksynccommand)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTSetNextIsGap](../communication/ttcan_driver/index.md#735-can_ttsetnextisgap)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTSetNTUAdjust](../communication/ttcan_driver/index.md#7310-can_ttsetntuadjust)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTSetTimeCommand](../communication/ttcan_driver/index.md#737-can_ttsettimecommand)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTSetTimeMark](../communication/ttcan_driver/index.md#742-can_ttsettimemark)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
 
 **[Can_Write](../communication/can_driver/index.md#7331-can_write)**
 > 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](../communication/can_driver/index.md) · SWS_CANDriver · R23-11

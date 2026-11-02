@@ -2523,6 +2523,32 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**FrTSyn_SetTransmissionMode**](../globaltime/fr_tsyn/index.md#733-frtsyn_settransmissionmode) | 本 API 用于启用和禁用 FrTSyn 的 TX 能力。 |
 | [**FrTSyn_TriggerTransmit**](../globaltime/fr_tsyn/index.md#742-frtsyn_triggertransmit) | 在此 API 中，上层模块（称为调用模块）应检查可用数据是否适合 PduInfoPtr->SduLength 所报告的缓冲区大小。 |
 
+## AUTOSAR TTCAN Driver（TTCAN 驱动程序）（19）
+
+来源：[AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver
+
+| 函数 | 简述 |
+|---|---|
+| [**Can_TTAckTimeMark**](../communication/ttcan_driver/index.md#744-can_ttacktimemark) | — |
+| [**Can_TTCancelTimeMark**](../communication/ttcan_driver/index.md#743-can_ttcanceltimemark) | — |
+| [**Can_TTDisableTimeMarkIRQ**](../communication/ttcan_driver/index.md#746-can_ttdisabletimemarkirq) | — |
+| [**Can_TTEnableTimeMarkIRQ**](../communication/ttcan_driver/index.md#745-can_ttenabletimemarkirq) | — |
+| [**Can_TTGetControllerTime**](../communication/ttcan_driver/index.md#731-can_ttgetcontrollertime) | — |
+| [**Can_TTGetErrorLevel**](../communication/ttcan_driver/index.md#734-can_ttgeterrorlevel) | — |
+| [**Can_TTGetMasterState**](../communication/ttcan_driver/index.md#732-can_ttgetmasterstate) | — |
+| [**Can_TTGetNTUActual**](../communication/ttcan_driver/index.md#733-can_ttgetntuactual) | — |
+| [**Can_TTGetSyncQuality**](../communication/ttcan_driver/index.md#741-can_ttgetsyncquality) | — |
+| [**Can_TTGetTimeMarkIRQStatus**](../communication/ttcan_driver/index.md#747-can_ttgettimemarkirqstatus) | — |
+| [**Can_TTGlobalTimePreset**](../communication/ttcan_driver/index.md#738-can_ttglobaltimepreset) | — |
+| [**Can_TTMainFunction_IRQ**](../communication/ttcan_driver/index.md#751-can_ttmainfunction_irq) | — |
+| [**Can_TTReceive**](../communication/ttcan_driver/index.md#748-can_ttreceive) | — |
+| [**Can_TTSetEndOfGap**](../communication/ttcan_driver/index.md#736-can_ttsetendofgap) | — |
+| [**Can_TTSetExtClockSyncCommand**](../communication/ttcan_driver/index.md#739-can_ttsetextclocksynccommand) | — |
+| [**Can_TTSetNextIsGap**](../communication/ttcan_driver/index.md#735-can_ttsetnextisgap) | — |
+| [**Can_TTSetNTUAdjust**](../communication/ttcan_driver/index.md#7310-can_ttsetntuadjust) | — |
+| [**Can_TTSetTimeCommand**](../communication/ttcan_driver/index.md#737-can_ttsettimecommand) | — |
+| [**Can_TTSetTimeMark**](../communication/ttcan_driver/index.md#742-can_ttsettimemark) | — |
+
 ## AUTOSAR UdpNm (UDP Network Management)（25）
 
 来源：[AUTOSAR UdpNm (UDP Network Management)](../communication/udp_network_management/index.md) · SWS_UDPNetworkManagement

@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **538** 个条目。
+共 **546** 个条目。
 
 ## A
 
@@ -146,6 +146,30 @@ title: "AUTOSAR API 类型清单"
 
 **[Can_TimeStampType](../communication/can_driver/index.md#7210-can_timestamptype)**
 > 类型 · [AUTOSAR CAN Driver（CAN驱动程序）](../communication/can_driver/index.md) · SWS_CANDriver · R23-11
+
+**[Can_TTErrorLevelEnumType](../communication/ttcan_driver/index.md#725-can_tterrorlevelenumtype)**
+> 类型 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTErrorLevelType](../communication/ttcan_driver/index.md#726-can_tterrorleveltype)**
+> 类型 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTMasterSlaveModeType](../communication/ttcan_driver/index.md#722-can_ttmasterslavemodetype)**
+> 类型 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTMasterStateType](../communication/ttcan_driver/index.md#724-can_ttmasterstatetype)**
+> 类型 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTSyncModeEnumType](../communication/ttcan_driver/index.md#723-can_ttsyncmodeenumtype)**
+> 类型 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTTimeSourceType](../communication/ttcan_driver/index.md#727-can_tttimesourcetype)**
+> 类型 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTTimeType](../communication/ttcan_driver/index.md#721-can_tttimetype)**
+> 类型 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTTURType](../communication/ttcan_driver/index.md#728-can_ttturtype)**
+> 类型 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
 
 **[CanNm_ConfigType](../communication/can_network_management/index.md#721-cannm_configtype)**
 > 类型 · [AUTOSAR CAN NM（CAN网络管理）](../communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11

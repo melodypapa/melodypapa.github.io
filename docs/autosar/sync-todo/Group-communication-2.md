@@ -203,13 +203,17 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 ↔ §1–§9 1:1; ch.6 tracing + appendix A dropped (compliance))
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
 - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-4)
-- [ ] ttcan_driver (SWS_TTCANDriver · R23-11 markdown · ❌ new article)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-- [ ] Step 6 — TODO.md row + commit/PR
+- [x] ttcan_driver (SWS_TTCANDriver · R23-11 markdown · ❌ new article)
+  - Note: article `cp/communication/ttcan_driver/` (directory per row name, nav label "TtCan"). Shape: ch.1 → §1 (Figure1_1 layer model; UML chrome dropped) · ch.2 → §2 30 acronyms (28 "See ISO 11898-4 [1]" refs kept as 参见) · ch.3 → §3 (intro sentence + 3.1 10-entry registry + 3.2) · ch.4 → §4 single paragraph (source has NO 4.1 Limitations / 4.2 Applicability subsections — §4 carries only the reference to the CAN driver constraints) · ch.5 → §5 + 5.1 TTCAN Interface (source has no 5.1/5.2 relation chapters, only prose + one subsection) · ch.7 → §6 (6.1 state machine SYNCHRONIZING + 6.1.1/6.1.2 incl. severe-error transitions STARTED→STOPPED, 6.2 L-PDU tx + 6.2.1 priority inversion, 6.3 L-PDU rx, 6.4 sync + 6.4.1 event sync, 6.5 time-triggered operation + 表7.1 events table, 6.6 application watchdog 3 notes, 6.7 TTCAN error handling, 6.8 error classification dev 表6.1 4 rows + others none) · ch.8 → §7 (7.1 10 imported; 7.2 8 types incl. 3 structure types with element rows; 7.3 10 functions; 7.4 可选函数定义 8 functions per source 8.4; 7.5.1 Can_TTMainFunction_IRQ; 7.6.1 强制接口 7 rows; no 7.6.2/7.6.3 — source has only mandatory interfaces) · ch.9 → §8 two pointer sentences (8.1 see TTCAN/CAN interface specs, 8.2 see EcuM) · ch.10 → §9 (10.1 folded intro + Figure10_1 + CanSupportTTCANRef note + [00157] partition requirement; 9.1.1 CanTTController 19 params; 9.1.2 CanTTHardwareObjectTrigger 5 params incl. 5-literal TriggerType; 9.2 发布信息) · ch.6 tracing + appendix A dropped; source ## B Change History → ## B (B.1 R22-11 all six subsections none; B.2 R23-11 1 added + 2 changed rendered as ID fences per dlt Number+Heading-table precedent, deleted/constraints none)
+  - Note: fidelity: 7 truncated Syntax lines (missing parens) reconstructed: Can_TTGetControllerTime/GetMasterState/SetEndOfGap/GlobalTimePreset/GetSyncQuality/AckTimeMark/GetTimeMarkIRQStatus/Receive; source typos kept as data: CAN_TT_E_CONSEQUTIVE_DISC, "potentional" (2×), "wich", "preriod" (TURRestore description), CanTTIRQProcessing description names Can_MainFunction_BusOff (copy-paste from CAN driver — semantic mismatch, user verify); "Wachtdog Driver SWS" normalized to 看门狗驱动程序; bracketed [SWS_TtCan_00090]/[00091] cross-refs kept in §6.4 prose per OS/EcuM precedent
+  - Note: Phase A — strict build exit 0 / 0 WARNING; check_heading_lang OK; check_indexes OK; hygiene 0 h1/\</{DRAFT}, 2 bracketed SWS cross-refs per precedent, SWS ids in ## B fences only; acronym 30 term lines = source 30 rows; check_api_sync OK (8 types/10 functions/10 说明; the 8 optional 8.4.x functions verified manually 8/8 in order); gen_api_list regenerated (TtCan 8 types + 19 functions incl. optional + scheduled, --check 0); census --apply: 6 lines (1 chapter-ref + 48 citation links) + 10 registry anchors, idempotent re-run 0 lines
+  - Note: glossary +6 new terms (Continuous Transmission, Hardware Receive Handle (HRH), Single Shot, TTCAN Controller, TtcanDrv, TtcanIf) + 7 来源 appends (BSW/CanIf/ISR/L-PDU/MCAL/DLC/Inner Priority Inversion); the 20 "See ISO 11898-4" term rows translate as pointer entries, not glossary candidates
+  - [x] Step 1 — Source resolution + gap analysis (1949-line R23-11 markdown; 4 content figures via caption-anchored mapper; unmapped artifacts all ≤345px chrome; config tables parsed field-by-field from the page-split source tables)
+  - [x] Step 2 — In-place translation/completion (full Type A build, main session)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 + B ↔ §1–§9 + B 1:1; ch.6 tracing + appendix A dropped (compliance))
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+- [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-4)
 - [ ] ttcan_interface (SWS_TTCANInterface · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
