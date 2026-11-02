@@ -402,7 +402,7 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
 
 ## Step 6 — Regenerate the derived indexes (glossary, API list, site indexes)
 
-`docs/autosar/api/` (landing page + type list + function list) is a
+`docs/autosar/cp/api/` (landing page + type list + function list) is a
 **pure derivation** (regenerate via `gen_api_list.py` when its source data
 changed); `glossary.md` is
 **manually extended during translation runs** (see below — user decision
@@ -458,7 +458,7 @@ changed); `glossary.md` is
      was pasted). `scripts/rewrite_glossary.py` normalizes the whole page
      (format, ordering, duplicate handling) and is re-runnable; it refuses
      to guess at a substantively different definition.
-2. **API listing `docs/autosar/api/`** — landing page plus two A–Z pages
+2. **API listing `docs/autosar/cp/api/`** — landing page plus two A–Z pages
    (types / functions), derived **from the translated articles only** (the
    repository is the sole input — no external corpus): identifiers are
    enumerated from each article's own identifier-shaped headings,
@@ -485,17 +485,23 @@ changed); `glossary.md` is
      2026-10-29); the full name belongs to the article title and the index
      link labels. A page can build cleanly and still be unreachable from the
      indexes: `--strict` only catches a nav entry with no file.
-   - **Section landing page** (`docs/autosar/<section>/index.md`) — fixed
+   - **Section landing page** (`docs/autosar/cp/<section>/index.md`, or
+     `docs/autosar/foundation/<topic>/index.md`) — fixed
      shape: front-matter `title`, one intro paragraph, `## 文章`,
      `## 相关内容`. `## 文章` lists **every** page of that nav branch in nav
      order (nested `*` bullets for sub-groups); link text is the target's
      front-matter `title`, never a directory identifier, and it keeps the
      `English（中文）` structure below.
-   - **CP AUTOSAR overview** (`docs/autosar/index.md`) — mirrors the whole
-     `CP AUTOSAR` nav branch: one `###` group per nav section in nav order,
+   - **CP AUTOSAR overview** (`docs/autosar/cp/index.md`) — mirrors the whole
+     `CP（经典平台）` nav group: one `###` group per nav section in nav order,
      each starting with its landing page, every content page appearing
-     exactly once underneath it; standalone pages (`autosar/power`) get their
-     own group. `## 相关内容` keeps 术语表 / API 清单 / 首页.
+     exactly once underneath it. `## 相关内容` keeps API 清单 / AUTOSAR 总览 /
+     Foundation / 术语表 / 首页. The Foundation overview
+     (`docs/autosar/foundation/index.md`) mirrors the `Foundation（基础标准）`
+     group the same way.
+   - **AUTOSAR hub** (`docs/autosar/index.md`) — the tab's landing page:
+     links the 术语表 and the two platform overviews only (direct children of
+     the tab); the platform overviews own the full page trees.
    - **Site home** (`docs/index.md`) — one bullet per top-level nav tab, in
      nav order, label = nav label (including its `（…）` gloss), target = the
      section's landing page or its first page when the section has none;
@@ -510,7 +516,7 @@ changed); `glossary.md` is
      `Utilization of Crypto Services（加密服务使用指南）`). A Chinese-first
      title is fixed at the front-matter `title`, not only in the link label,
      and the rename propagates to the landing page, the overview,
-     `glossary.md` 来源 lines and the API listing (`docs/autosar/api/`) in the same commit.
+     `glossary.md` 来源 lines and the API listing (`docs/autosar/cp/api/`) in the same commit.
      The three levels are deliberately different (user rule 2026-10-29):
      the **article front-matter `title` and every index link label** carry the
      full `English（中文）` name (`Powertrain Engine Domain（动力总成（发动机）域）`),
@@ -526,7 +532,7 @@ changed); `glossary.md` is
      (`VFB（虚拟功能总线）`). `check_indexes.py --titles` detects structural
      issues only; it cannot judge translation meaning. Fix a confirmed
      mismatch in the front-matter `title`, every index link label,
-     `glossary.md` 来源 line and the API listing (`docs/autosar/api/`) in the same commit.
+     `glossary.md` 来源 line and the API listing (`docs/autosar/cp/api/`) in the same commit.
    - Link targets are relative to the file that contains them; angle-bracket
      a target containing a space
      (`<communication/data_distribution service/index.md>`). An empty `（）`
@@ -818,6 +824,6 @@ open.
 | Writing a rule as Phase B prose without a mechanical trigger (potential-links lived as a Phase B bullet for six runs — dio/port/pwm/ocu/icu/ecu/bswm — and was never executed once; its own "user decision" semantics made doing nothing always compliant) | Codified rules that only a gate presentation could surface get dropped when presentations lengthen; the omission is invisible in a deviations-framing | Any new rule gets (a) a tick-box in the step it executes in, and/or (b) a mechanical counter whose zero-output is explicit. Test rules at RUN level ("did a full sync execute it?"), not comprehension level |
 | Turning report-only link candidates into individual edits | Unreviewed candidates can create wrong or unwanted links, and one-by-one patching is costly | Use article-only `--list` for the required census; `--apply` handles only documented classes, while other candidates stay report-only until a user decision |
 | Registering a new page in `mkdocs.yml` only (the five `general` guides shipped in nav on 2026-10-29 but absent from `general/index.md` and the CP AUTOSAR overview) | The page is reachable from the sidebar but invisible to a reader browsing the section or the landing page; the strict build cannot see the gap | Step 6.3 + Phase A check 4: `check_indexes.py` fails when any branch page is missing from its landing page or the overview |
-| Letting an index entry copy a Chinese-first title verbatim (`加密服务使用指南（Utilization of Crypto Services）`) | The entry breaks the list's `English（中文）` structure, so the same list mixes two conventions | Step 6.3 entry-structure rule: fix the article's front-matter `title` to `English（中文）`, then propagate to the index labels, `glossary.md` 来源 line and the API listing (`docs/autosar/api/`); `check_indexes.py --titles` lists remaining drift |
+| Letting an index entry copy a Chinese-first title verbatim (`加密服务使用指南（Utilization of Crypto Services）`) | The entry breaks the list's `English（中文）` structure, so the same list mixes two conventions | Step 6.3 entry-structure rule: fix the article's front-matter `title` to `English（中文）`, then propagate to the index labels, `glossary.md` 来源 line and the API listing (`docs/autosar/cp/api/`); `check_indexes.py --titles` lists remaining drift |
 | Delegating translation to subagents — the RTE/OS runs segmented giant sources by line range across parallel writer agents (2026-10-25/26), and provider concurrency caps repeatedly blocked dispatches mid-run | Split writers cannot carry one terminology, one numbering scheme and the in-place insertion discipline across segments; a capped dispatch stalls the run with half-translated segments; the queue-row ticks and user decisions live in the main session, not in the writers | Step 5 rule 1: the main session translates sequentially; subagent dispatches never write article text (user decision 2026-10-28) |
 | Writing a glossary entry without the `>` separator line before its 「来源：」 line, or gluing the next `**Term**` heading straight onto the previous entry's attribution | Without the separator, python-markdown merges definition and attribution into one `<p>` — the attribution reads as part of the definition (found on all 558 entries, 2026-10-30); a glued heading is swallowed into the previous entry's `<blockquote>` and loses its own heading (13 entries) | Step 6.1 entry format: `**Term**` / `> 释义` / `>` / `> 来源：…` / `{: .glossary-source}`; `scripts/rewrite_glossary.py` normalizes the page and the strict build shows the resulting HTML |

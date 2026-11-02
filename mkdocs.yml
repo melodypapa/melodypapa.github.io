@@ -47,6 +47,144 @@ plugins:
   - search
   - blog:
       blog_dir: blog
+  - redirects:
+      redirect_maps:
+        autosar/api/functions.md: autosar/cp/api/functions.md
+        autosar/api/functions_by_module.md: autosar/cp/api/functions_by_module.md
+        autosar/api/index.md: autosar/cp/api/index.md
+        autosar/api/types.md: autosar/cp/api/types.md
+        autosar/application_interfaces/adas_vmc/index.md: autosar/cp/application_interfaces/adas_vmc/index.md
+        autosar/application_interfaces/body_and_comfort/index.md: autosar/cp/application_interfaces/body_and_comfort/index.md
+        autosar/application_interfaces/chassis/index.md: autosar/cp/application_interfaces/chassis/index.md
+        autosar/application_interfaces/hmi/index.md: autosar/cp/application_interfaces/hmi/index.md
+        autosar/application_interfaces/index.md: autosar/cp/application_interfaces/index.md
+        autosar/application_interfaces/occupant_safety/index.md: autosar/cp/application_interfaces/occupant_safety/index.md
+        autosar/application_interfaces/powertrain/index.md: autosar/cp/application_interfaces/powertrain/index.md
+        autosar/application_interfaces/user_guide/index.md: autosar/cp/application_interfaces/user_guide/index.md
+        autosar/communication/can_driver/full_can_vs_basic_can.md: autosar/cp/communication/can_driver/full_can_vs_basic_can.md
+        autosar/communication/can_driver/index.md: autosar/cp/communication/can_driver/index.md
+        autosar/communication/can_interface/index.md: autosar/cp/communication/can_interface/index.md
+        autosar/communication/can_network_management/index.md: autosar/cp/communication/can_network_management/index.md
+        autosar/communication/can_transceiver_driver/index.md: autosar/cp/communication/can_transceiver_driver/index.md
+        autosar/communication/cansm/index.md: autosar/cp/communication/cansm/index.md
+        autosar/communication/cantp/index.md: autosar/cp/communication/cantp/index.md
+        autosar/communication/canxl_driver/index.md: autosar/cp/communication/canxl_driver/index.md
+        autosar/communication/canxl_transceiver_driver/index.md: autosar/cp/communication/canxl_transceiver_driver/index.md
+        autosar/communication/com/index.md: autosar/cp/communication/com/index.md
+        autosar/communication/com_based_transformer/index.md: autosar/cp/communication/com_based_transformer/index.md
+        autosar/communication/data_distribution/index.md: autosar/cp/communication/data_distribution/index.md
+        autosar/communication/diagnostic_log_and_trace/index.md: autosar/cp/communication/diagnostic_log_and_trace/index.md
+        autosar/communication/diagnostic_over_ip/index.md: autosar/cp/communication/diagnostic_over_ip/index.md
+        autosar/communication/e2e_transformer/index.md: autosar/cp/communication/e2e_transformer/index.md
+        autosar/communication/eth_trcv/index.md: autosar/cp/communication/eth_trcv/index.md
+        autosar/communication/ethernet_driver/index.md: autosar/cp/communication/ethernet_driver/index.md
+        autosar/communication/ethernet_interface/index.md: autosar/cp/communication/ethernet_interface/index.md
+        autosar/communication/ethernet_switch_driver/index.md: autosar/cp/communication/ethernet_switch_driver/index.md
+        autosar/communication/ethsm/index.md: autosar/cp/communication/ethsm/index.md
+        autosar/communication/flexray_ar_transport_layer/index.md: autosar/cp/communication/flexray_ar_transport_layer/index.md
+        autosar/communication/flexray_driver/index.md: autosar/cp/communication/flexray_driver/index.md
+        autosar/communication/flexray_interface/index.md: autosar/cp/communication/flexray_interface/index.md
+        autosar/communication/flexray_iso_transport_layer/index.md: autosar/cp/communication/flexray_iso_transport_layer/index.md
+        autosar/communication/flexray_network_management/index.md: autosar/cp/communication/flexray_network_management/index.md
+        autosar/communication/flexray_state_manager/index.md: autosar/cp/communication/flexray_state_manager/index.md
+        autosar/communication/flexray_transceiver_driver/index.md: autosar/cp/communication/flexray_transceiver_driver/index.md
+        autosar/communication/fvm/fvm.md: autosar/cp/communication/fvm/fvm.md
+        autosar/communication/index.md: autosar/cp/communication/index.md
+        autosar/communication/ipdum/index.md: autosar/cp/communication/ipdum/index.md
+        autosar/communication/large_data_com/index.md: autosar/cp/communication/large_data_com/index.md
+        autosar/communication/lin_driver/index.md: autosar/cp/communication/lin_driver/index.md
+        autosar/communication/lin_interface/index.md: autosar/cp/communication/lin_interface/index.md
+        autosar/communication/lsdu_router/index.md: autosar/cp/communication/lsdu_router/index.md
+        autosar/communication/mirror/index.md: autosar/cp/communication/mirror/index.md
+        autosar/communication/nm/index.md: autosar/cp/communication/nm/index.md
+        autosar/communication/pdu_router/index.md: autosar/cp/communication/pdu_router/index.md
+        autosar/communication/sec_oc/index.md: autosar/cp/communication/sec_oc/index.md
+        autosar/communication/service_discovery/index.md: autosar/cp/communication/service_discovery/index.md
+        autosar/communication/soad/index.md: autosar/cp/communication/soad/index.md
+        autosar/communication/someiptp/index.md: autosar/cp/communication/someiptp/index.md
+        autosar/communication/someipxf/index.md: autosar/cp/communication/someipxf/index.md
+        autosar/communication/spi_handler_driver/index.md: autosar/cp/communication/spi_handler_driver/index.md
+        autosar/communication/tcpip/index.md: autosar/cp/communication/tcpip/index.md
+        autosar/communication/udp_network_management/index.md: autosar/cp/communication/udp_network_management/index.md
+        autosar/communication/wlan_driver/index.md: autosar/cp/communication/wlan_driver/index.md
+        autosar/communication/wlan_transceiver_driver/index.md: autosar/cp/communication/wlan_transceiver_driver/index.md
+        autosar/communication/xcp/index.md: autosar/cp/communication/xcp/index.md
+        autosar/crypto/crypto_driver/index.md: autosar/cp/crypto/crypto_driver/index.md
+        autosar/crypto/crypto_interface/index.md: autosar/cp/crypto/crypto_interface/index.md
+        autosar/crypto/crypto_service_manager/index.md: autosar/cp/crypto/crypto_service_manager/index.md
+        autosar/crypto/index.md: autosar/cp/crypto/index.md
+        autosar/crypto/key_manager/index.md: autosar/cp/crypto/key_manager/index.md
+        autosar/crypto/utilization_of_crypto_services/index.md: autosar/cp/crypto/utilization_of_crypto_services/index.md
+        autosar/diagnostics/diagnostic_communication_manager/index.md: autosar/cp/diagnostics/diagnostic_communication_manager/index.md
+        autosar/diagnostics/diagnostic_event_manager/index.md: autosar/cp/diagnostics/diagnostic_event_manager/index.md
+        autosar/diagnostics/index.md: autosar/cp/diagnostics/index.md
+        autosar/diagnostics/j1939dcm/index.md: autosar/cp/diagnostics/j1939dcm/index.md
+        autosar/general/application_level_error_handling/index.md: autosar/cp/general/application_level_error_handling/index.md
+        autosar/general/bsw_distribution_guide/index.md: autosar/cp/general/bsw_distribution_guide/index.md
+        autosar/general/bsw_general/index.md: autosar/cp/general/bsw_general/index.md
+        autosar/general/cdd_design_and_integration/index.md: autosar/cp/general/cdd_design_and_integration/index.md
+        autosar/general/communication_stack_types/index.md: autosar/cp/general/communication_stack_types/index.md
+        autosar/general/error_description/index.md: autosar/cp/general/error_description/index.md
+        autosar/general/index.md: autosar/cp/general/index.md
+        autosar/general/layered_software_architecture/index.md: autosar/cp/general/layered_software_architecture/index.md
+        autosar/general/platform_types/index.md: autosar/cp/general/platform_types/index.md
+        autosar/general/standard_types/index.md: autosar/cp/general/standard_types/index.md
+        autosar/general/vfb/index.md: autosar/cp/general/vfb/index.md
+        autosar/globaltime/can_tsyn/index.md: autosar/cp/globaltime/can_tsyn/index.md
+        autosar/globaltime/eth_tsyn/index.md: autosar/cp/globaltime/eth_tsyn/index.md
+        autosar/globaltime/fr_tsyn/index.md: autosar/cp/globaltime/fr_tsyn/index.md
+        autosar/globaltime/index.md: autosar/cp/globaltime/index.md
+        autosar/globaltime/stbm/index.md: autosar/cp/globaltime/stbm/index.md
+        autosar/io/adc_driver/index.md: autosar/cp/io/adc_driver/index.md
+        autosar/io/dio_driver/index.md: autosar/cp/io/dio_driver/index.md
+        autosar/io/icu_driver/index.md: autosar/cp/io/icu_driver/index.md
+        autosar/io/index.md: autosar/cp/io/index.md
+        autosar/io/iohwab/index.md: autosar/cp/io/iohwab/index.md
+        autosar/io/ocu_driver/index.md: autosar/cp/io/ocu_driver/index.md
+        autosar/io/port_driver/index.md: autosar/cp/io/port_driver/index.md
+        autosar/io/pwm_driver/index.md: autosar/cp/io/pwm_driver/index.md
+        autosar/libraries/index.md: autosar/cp/libraries/index.md
+        autosar/libraries/macro_encapsulation_of_interpolation_calls/index.md: autosar/cp/libraries/macro_encapsulation_of_interpolation_calls/index.md
+        autosar/mcal/core_test/index.md: autosar/cp/mcal/core_test/index.md
+        autosar/mcal/gpt_driver/index.md: autosar/cp/mcal/gpt_driver/index.md
+        autosar/mcal/index.md: autosar/cp/mcal/index.md
+        autosar/mcal/mcu_driver/index.md: autosar/cp/mcal/mcu_driver/index.md
+        autosar/memory/bulk_nv_data_manager/index.md: autosar/cp/memory/bulk_nv_data_manager/index.md
+        autosar/memory/firmware_over_the_air/index.md: autosar/cp/memory/firmware_over_the_air/index.md
+        autosar/memory/flash_driver/index.md: autosar/cp/memory/flash_driver/index.md
+        autosar/memory/flash_eeprom_emulation/index.md: autosar/cp/memory/flash_eeprom_emulation/index.md
+        autosar/memory/index.md: autosar/cp/memory/index.md
+        autosar/memory/memory_access/index.md: autosar/cp/memory/memory_access/index.md
+        autosar/memory/memory_mapping/index.md: autosar/cp/memory/memory_mapping/index.md
+        autosar/memory/nv_data_handling_guideline/index.md: autosar/cp/memory/nv_data_handling_guideline/index.md
+        autosar/memory/nvram_manager/index.md: autosar/cp/memory/nvram_manager/index.md
+        autosar/methodology_templates/basic_software_module_description_template/index.md: autosar/cp/methodology_templates/basic_software_module_description_template/index.md
+        autosar/methodology_templates/index.md: autosar/cp/methodology_templates/index.md
+        autosar/mode_management/basic_software_mode_manager/index.md: autosar/cp/mode_management/basic_software_mode_manager/index.md
+        autosar/mode_management/ecu_state_manager/index.md: autosar/cp/mode_management/ecu_state_manager/index.md
+        autosar/mode_management/guide_to_mode_management/index.md: autosar/cp/mode_management/guide_to_mode_management/index.md
+        autosar/mode_management/index.md: autosar/cp/mode_management/index.md
+        autosar/rte/index.md: autosar/cp/rte/index.md
+        autosar/rte/rte/index.md: autosar/cp/rte/rte/index.md
+        autosar/rte/schm/index.md: autosar/cp/rte/schm/index.md
+        autosar/safety/functional_safety_measures/index.md: autosar/cp/safety/functional_safety_measures/index.md
+        autosar/safety/index.md: autosar/cp/safety/index.md
+        autosar/safety/safety_use_case/index.md: autosar/cp/safety/safety_use_case/index.md
+        autosar/safety/watchdog_driver/index.md: autosar/cp/safety/watchdog_driver/index.md
+        autosar/safety/watchdog_interface/index.md: autosar/cp/safety/watchdog_interface/index.md
+        autosar/safety/watchdog_manager/index.md: autosar/cp/safety/watchdog_manager/index.md
+        autosar/sw_arch/arti/index.md: autosar/cp/sw_arch/arti/index.md
+        autosar/sw_arch/index.md: autosar/cp/sw_arch/index.md
+        autosar/system_services/comm/index.md: autosar/cp/system_services/comm/index.md
+        autosar/system_services/default_error_tracer/index.md: autosar/cp/system_services/default_error_tracer/index.md
+        autosar/system_services/function_inhibition_manager/index.md: autosar/cp/system_services/function_inhibition_manager/index.md
+        autosar/system_services/index.md: autosar/cp/system_services/index.md
+        autosar/system_services/operating_system/index.md: autosar/cp/system_services/operating_system/index.md
+        autosar/system_services/sw_cluster_design_and_integration/index.md: autosar/cp/system_services/sw_cluster_design_and_integration/index.md
+        autosar/system_services/time_service/index.md: autosar/cp/system_services/time_service/index.md
+        autosar/template/generic_structure/index.md: autosar/cp/template/generic_structure/index.md
+        autosar/template/index.md: autosar/cp/template/index.md
+        autosar/template/timimg_extension/indx.md: autosar/cp/template/timimg_extension/indx.md
 
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js
@@ -115,166 +253,187 @@ nav:
       - "内存系统": cortex/r52p_processor/memory_system/index.md
       - "Cortex®-R52+ 程序员模型": cortex/r52p_processor/programmers_model/index.md
       - "系统控制": cortex/r52p_processor/system_control/index.md
-  - CP AUTOSAR:
+  - AUTOSAR:
     - autosar/index.md
     - "术语表": autosar/glossary.md
-    - "API":
-      - autosar/api/index.md
-      - "数据类型清单": autosar/api/types.md
-      - "函数清单": autosar/api/functions.md
-      - "函数清单（按模块）": autosar/api/functions_by_module.md
-    - 基础:
+    - CP（经典平台）:
+      - autosar/cp/index.md
+      - "API":
+        - autosar/cp/api/index.md
+        - "数据类型清单": autosar/cp/api/types.md
+        - "函数清单": autosar/cp/api/functions.md
+        - "函数清单（按模块）": autosar/cp/api/functions_by_module.md
+      - 通信:
+        - autosar/cp/communication/index.md
+        - "CAN Driver":
+          - "Can": autosar/cp/communication/can_driver/index.md
+          - "Full-CAN 与 Basic-CAN 的区别": autosar/cp/communication/can_driver/full_can_vs_basic_can.md
+        - "CanIf": autosar/cp/communication/can_interface/index.md
+        - "CanNm": autosar/cp/communication/can_network_management/index.md
+        - "Nm": autosar/cp/communication/nm/index.md
+        - "CanSM": autosar/cp/communication/cansm/index.md
+        - "CanTp": autosar/cp/communication/cantp/index.md
+        - "CanTrcv": autosar/cp/communication/can_transceiver_driver/index.md
+        - "CanXL": autosar/cp/communication/canxl_driver/index.md
+        - "CanXLTrcv": autosar/cp/communication/canxl_transceiver_driver/index.md
+        - "Com": autosar/cp/communication/com/index.md
+        - "ComXf": autosar/cp/communication/com_based_transformer/index.md
+        - "DDS": autosar/cp/communication/data_distribution/index.md
+        - "Dlt": autosar/cp/communication/diagnostic_log_and_trace/index.md
+        - "DoIp": autosar/cp/communication/diagnostic_over_ip/index.md
+        - "E2EXf": autosar/cp/communication/e2e_transformer/index.md
+        - "Eth": autosar/cp/communication/ethernet_driver/index.md
+        - "EthIf": autosar/cp/communication/ethernet_interface/index.md
+        - "EthSM": autosar/cp/communication/ethsm/index.md
+        - "EthSwt": autosar/cp/communication/ethernet_switch_driver/index.md
+        - "EthTrcv": autosar/cp/communication/eth_trcv/index.md
+        - "WEth": autosar/cp/communication/wlan_driver/index.md
+        - "WEthTrcv": autosar/cp/communication/wlan_transceiver_driver/index.md
+        - "Fr": autosar/cp/communication/flexray_driver/index.md
+        - "FrTp": autosar/cp/communication/flexray_iso_transport_layer/index.md
+        - "FvM": autosar/cp/communication/fvm/fvm.md
+        - "LdCom": autosar/cp/communication/large_data_com/index.md
+        - "Lin": autosar/cp/communication/lin_driver/index.md
+        - "LinIf": autosar/cp/communication/lin_interface/index.md
+        - "LsDu": autosar/cp/communication/lsdu_router/index.md
+        - "Mirror": autosar/cp/communication/mirror/index.md
+        - "IpduM": autosar/cp/communication/ipdum/index.md
+        - "PduR": autosar/cp/communication/pdu_router/index.md
+        - "SecOC": autosar/cp/communication/sec_oc/index.md
+        - "SD": autosar/cp/communication/service_discovery/index.md
+        - "Spi": autosar/cp/communication/spi_handler_driver/index.md
+        - "SomeIpTp": autosar/cp/communication/someiptp/index.md
+        - "SomeIpXf": autosar/cp/communication/someipxf/index.md
+        - "SoAd": autosar/cp/communication/soad/index.md
+        - "Xcp": autosar/cp/communication/xcp/index.md
+        - "TcpIp": autosar/cp/communication/tcpip/index.md
+        - "UdpNm": autosar/cp/communication/udp_network_management/index.md
+      - 全局时间:
+        - autosar/cp/globaltime/index.md
+        - "StbM": autosar/cp/globaltime/stbm/index.md
+        - "CanTSyn": autosar/cp/globaltime/can_tsyn/index.md
+        - "EthTSyn": autosar/cp/globaltime/eth_tsyn/index.md
+        - "FrTSyn": autosar/cp/globaltime/fr_tsyn/index.md
+      - 信息安全:
+
+        - autosar/cp/crypto/index.md
+        - "Crypto": autosar/cp/crypto/crypto_driver/index.md
+        - "CryIf": autosar/cp/crypto/crypto_interface/index.md
+        - "Csm": autosar/cp/crypto/crypto_service_manager/index.md
+        - "KeyM": autosar/cp/crypto/key_manager/index.md
+        - "加密服务使用指南": autosar/cp/crypto/utilization_of_crypto_services/index.md
+      - 诊断:
+        - autosar/cp/diagnostics/index.md
+        - "Dcm": autosar/cp/diagnostics/diagnostic_communication_manager/index.md
+        - "Dem": autosar/cp/diagnostics/diagnostic_event_manager/index.md
+        - "J1939Dcm": autosar/cp/diagnostics/j1939dcm/index.md
+      - 通用:
+        - autosar/cp/general/index.md
+        - "BSW General": autosar/cp/general/bsw_general/index.md
+        - "Standard Types": autosar/cp/general/standard_types/index.md
+        - "Platform Types": autosar/cp/general/platform_types/index.md
+        - "ComStack Types": autosar/cp/general/communication_stack_types/index.md
+        - "分层软件架构": autosar/cp/general/layered_software_architecture/index.md
+        - "应用层错误处理": autosar/cp/general/application_level_error_handling/index.md
+        - "BSW 分布指南": autosar/cp/general/bsw_distribution_guide/index.md
+        - "CDD 设计与集成指南": autosar/cp/general/cdd_design_and_integration/index.md
+        - "错误描述": autosar/cp/general/error_description/index.md
+        - "VFB": autosar/cp/general/vfb/index.md
+      - I/O:
+        - autosar/cp/io/index.md
+        - "Adc": autosar/cp/io/adc_driver/index.md
+        - "Dio": autosar/cp/io/dio_driver/index.md
+        - "Icu": autosar/cp/io/icu_driver/index.md
+        - "IoHwAb": autosar/cp/io/iohwab/index.md
+        - "Ocu": autosar/cp/io/ocu_driver/index.md
+        - "Port": autosar/cp/io/port_driver/index.md
+        - "Pwm": autosar/cp/io/pwm_driver/index.md
+      - MCAL:
+        - autosar/cp/mcal/index.md
+        - "CorTst": autosar/cp/mcal/core_test/index.md
+        - "Gpt": autosar/cp/mcal/gpt_driver/index.md
+        - "Mcu": autosar/cp/mcal/mcu_driver/index.md
+      - 存储:
+        - autosar/cp/memory/index.md
+        - "BndM": autosar/cp/memory/bulk_nv_data_manager/index.md
+        - "Fls": autosar/cp/memory/flash_driver/index.md
+        - "Fee": autosar/cp/memory/flash_eeprom_emulation/index.md
+        - "MemAcc": autosar/cp/memory/memory_access/index.md
+        - "MemMap": autosar/cp/memory/memory_mapping/index.md
+        - "NV数据处理指南": autosar/cp/memory/nv_data_handling_guideline/index.md
+        - "NvM": autosar/cp/memory/nvram_manager/index.md
+        - "FOTA": autosar/cp/memory/firmware_over_the_air/index.md
+      - 方法论与模板:
+        - autosar/cp/methodology_templates/index.md
+        - "BSWMDT": autosar/cp/methodology_templates/basic_software_module_description_template/index.md
+      - 模式管理:
+        - autosar/cp/mode_management/index.md
+        - "BswM": autosar/cp/mode_management/basic_software_mode_manager/index.md
+        - "EcuM": autosar/cp/mode_management/ecu_state_manager/index.md
+        - "模式管理指南": autosar/cp/mode_management/guide_to_mode_management/index.md
+      - 系统服务:
+        - autosar/cp/system_services/index.md
+        - "Det": autosar/cp/system_services/default_error_tracer/index.md
+        - "ComM": autosar/cp/system_services/comm/index.md
+        - "FiM": autosar/cp/system_services/function_inhibition_manager/index.md
+        - "Os": autosar/cp/system_services/operating_system/index.md
+        - "Tm": autosar/cp/system_services/time_service/index.md
+        - "SwCluC": autosar/cp/system_services/sw_cluster_design_and_integration/index.md
+      - 功能安全:
+        - autosar/cp/safety/index.md
+        - "WdgM": autosar/cp/safety/watchdog_manager/index.md
+        - "WdgIf": autosar/cp/safety/watchdog_interface/index.md
+        - "Wdg": autosar/cp/safety/watchdog_driver/index.md
+        - "功能安全措施概览": autosar/cp/safety/functional_safety_measures/index.md
+        - "安全用例": autosar/cp/safety/safety_use_case/index.md
+      - RTE:
+        - autosar/cp/rte/index.md
+        - "RTE": autosar/cp/rte/rte/index.md
+        - "SchM": autosar/cp/rte/schm/index.md
+      - SW 架构:
+        - autosar/cp/sw_arch/index.md
+        - "ARTI": autosar/cp/sw_arch/arti/index.md
+      - 应用接口:
+        - autosar/cp/application_interfaces/index.md
+        - "ADAS and VMC": autosar/cp/application_interfaces/adas_vmc/index.md
+        - "Body and Comfort": autosar/cp/application_interfaces/body_and_comfort/index.md
+        - "Chassis": autosar/cp/application_interfaces/chassis/index.md
+        - "HMI/MM/T": autosar/cp/application_interfaces/hmi/index.md
+        - "OPS": autosar/cp/application_interfaces/occupant_safety/index.md
+        - "Powertrain": autosar/cp/application_interfaces/powertrain/index.md
+        - "AI User Guide": autosar/cp/application_interfaces/user_guide/index.md
+      - 库:
+        - autosar/cp/libraries/index.md
+        - "插值调用宏封装": autosar/cp/libraries/macro_encapsulation_of_interpolation_calls/index.md
+      - 模板:
+        - autosar/cp/template/index.md
+        - "1. 一段话总结": autosar/cp/template/generic_structure/index.md
+        - 时序扩展:
+
+          - "时序扩展规范": autosar/cp/template/timimg_extension/indx.md
+    - Foundation（基础标准）:
       - autosar/foundation/index.md
       - 通用:
+        - autosar/foundation/general/index.md
         - "TR Glossary": autosar/foundation/general/tr_glossary/index.md
-    - 通信:
-      - autosar/communication/index.md
-      - "CAN Driver":
-        - "Can": autosar/communication/can_driver/index.md
-        - "Full-CAN 与 Basic-CAN 的区别": autosar/communication/can_driver/full_can_vs_basic_can.md
-      - "CanIf": autosar/communication/can_interface/index.md
-      - "CanNm": autosar/communication/can_network_management/index.md
-      - "Nm": autosar/communication/nm/index.md
-      - "CanSM": autosar/communication/cansm/index.md
-      - "CanTp": autosar/communication/cantp/index.md
-      - "CanTrcv": autosar/communication/can_transceiver_driver/index.md
-      - "CanXL": autosar/communication/canxl_driver/index.md
-      - "CanXLTrcv": autosar/communication/canxl_transceiver_driver/index.md
-      - "Com": autosar/communication/com/index.md
-      - "ComXf": autosar/communication/com_based_transformer/index.md
-      - "DDS": autosar/communication/data_distribution/index.md
-      - "Dlt": autosar/communication/diagnostic_log_and_trace/index.md
-      - "DoIp": autosar/communication/diagnostic_over_ip/index.md
-      - "E2EXf": autosar/communication/e2e_transformer/index.md
-      - "Eth": autosar/communication/ethernet_driver/index.md
-      - "EthIf": autosar/communication/ethernet_interface/index.md
-      - "EthSM": autosar/communication/ethsm/index.md
-      - "EthSwt": autosar/communication/ethernet_switch_driver/index.md
-      - "EthTrcv": autosar/communication/eth_trcv/index.md
-      - "WEth": autosar/communication/wlan_driver/index.md
-      - "WEthTrcv": autosar/communication/wlan_transceiver_driver/index.md
-      - "Fr": autosar/communication/flexray_driver/index.md
-      - "FrTp": autosar/communication/flexray_iso_transport_layer/index.md
-      - "FvM": autosar/communication/fvm/fvm.md
-      - "LdCom": autosar/communication/large_data_com/index.md
-      - "Lin": autosar/communication/lin_driver/index.md
-      - "LinIf": autosar/communication/lin_interface/index.md
-      - "LsDu": autosar/communication/lsdu_router/index.md
-      - "Mirror": autosar/communication/mirror/index.md
-      - "IpduM": autosar/communication/ipdum/index.md
-      - "PduR": autosar/communication/pdu_router/index.md
-      - "SecOC": autosar/communication/sec_oc/index.md
-      - "SD": autosar/communication/service_discovery/index.md
-      - "Spi": autosar/communication/spi_handler_driver/index.md
-      - "SomeIpTp": autosar/communication/someiptp/index.md
-      - "SomeIpXf": autosar/communication/someipxf/index.md
-      - "SoAd": autosar/communication/soad/index.md
-      - "Xcp": autosar/communication/xcp/index.md
-      - "TcpIp": autosar/communication/tcpip/index.md
-      - "UdpNm": autosar/communication/udp_network_management/index.md
-    - 全局时间:
-      - autosar/globaltime/index.md
-      - "StbM": autosar/globaltime/stbm/index.md
-      - "CanTSyn": autosar/globaltime/can_tsyn/index.md
-      - "EthTSyn": autosar/globaltime/eth_tsyn/index.md
-      - "FrTSyn": autosar/globaltime/fr_tsyn/index.md
-    - 信息安全:
-
-      - autosar/crypto/index.md
-      - "Crypto": autosar/crypto/crypto_driver/index.md
-      - "CryIf": autosar/crypto/crypto_interface/index.md
-      - "Csm": autosar/crypto/crypto_service_manager/index.md
-      - "KeyM": autosar/crypto/key_manager/index.md
-      - "加密服务使用指南": autosar/crypto/utilization_of_crypto_services/index.md
-    - 诊断:
-      - autosar/diagnostics/index.md
-      - "Dcm": autosar/diagnostics/diagnostic_communication_manager/index.md
-      - "Dem": autosar/diagnostics/diagnostic_event_manager/index.md
-      - "J1939Dcm": autosar/diagnostics/j1939dcm/index.md
-    - 通用:
-      - autosar/general/index.md
-      - "BSW General": autosar/general/bsw_general/index.md
-      - "Standard Types": autosar/general/standard_types/index.md
-      - "Platform Types": autosar/general/platform_types/index.md
-      - "ComStack Types": autosar/general/communication_stack_types/index.md
-      - "分层软件架构": autosar/general/layered_software_architecture/index.md
-      - "应用层错误处理": autosar/general/application_level_error_handling/index.md
-      - "BSW 分布指南": autosar/general/bsw_distribution_guide/index.md
-      - "CDD 设计与集成指南": autosar/general/cdd_design_and_integration/index.md
-      - "错误描述": autosar/general/error_description/index.md
-      - "VFB": autosar/general/vfb/index.md
-    - I/O:
-      - autosar/io/index.md
-      - "Adc": autosar/io/adc_driver/index.md
-      - "Dio": autosar/io/dio_driver/index.md
-      - "Icu": autosar/io/icu_driver/index.md
-      - "IoHwAb": autosar/io/iohwab/index.md
-      - "Ocu": autosar/io/ocu_driver/index.md
-      - "Port": autosar/io/port_driver/index.md
-      - "Pwm": autosar/io/pwm_driver/index.md
-    - MCAL:
-      - autosar/mcal/index.md
-      - "CorTst": autosar/mcal/core_test/index.md
-      - "Gpt": autosar/mcal/gpt_driver/index.md
-      - "Mcu": autosar/mcal/mcu_driver/index.md
-    - 存储:
-      - autosar/memory/index.md
-      - "BndM": autosar/memory/bulk_nv_data_manager/index.md
-      - "Fls": autosar/memory/flash_driver/index.md
-      - "Fee": autosar/memory/flash_eeprom_emulation/index.md
-      - "MemAcc": autosar/memory/memory_access/index.md
-      - "MemMap": autosar/memory/memory_mapping/index.md
-      - "NV数据处理指南": autosar/memory/nv_data_handling_guideline/index.md
-      - "NvM": autosar/memory/nvram_manager/index.md
-      - "FOTA": autosar/memory/firmware_over_the_air/index.md
-    - 方法论与模板:
-      - autosar/methodology_templates/index.md
-      - "BSWMDT": autosar/methodology_templates/basic_software_module_description_template/index.md
-    - 模式管理:
-      - autosar/mode_management/index.md
-      - "BswM": autosar/mode_management/basic_software_mode_manager/index.md
-      - "EcuM": autosar/mode_management/ecu_state_manager/index.md
-      - "模式管理指南": autosar/mode_management/guide_to_mode_management/index.md
-    - 系统服务:
-      - autosar/system_services/index.md
-      - "Det": autosar/system_services/default_error_tracer/index.md
-      - "ComM": autosar/system_services/comm/index.md
-      - "FiM": autosar/system_services/function_inhibition_manager/index.md
-      - "Os": autosar/system_services/operating_system/index.md
-      - "Tm": autosar/system_services/time_service/index.md
-      - "SwCluC": autosar/system_services/sw_cluster_design_and_integration/index.md
-    - 功能安全:
-      - autosar/safety/index.md
-      - "WdgM": autosar/safety/watchdog_manager/index.md
-      - "WdgIf": autosar/safety/watchdog_interface/index.md
-      - "Wdg": autosar/safety/watchdog_driver/index.md
-      - "功能安全措施概览": autosar/safety/functional_safety_measures/index.md
-      - "安全用例": autosar/safety/safety_use_case/index.md
-    - RTE:
-      - autosar/rte/index.md
-      - "RTE": autosar/rte/rte/index.md
-      - "SchM": autosar/rte/schm/index.md
-    - SW 架构:
-      - autosar/sw_arch/index.md
-      - "ARTI": autosar/sw_arch/arti/index.md
-    - 应用接口:
-      - autosar/application_interfaces/index.md
-      - "ADAS and VMC": autosar/application_interfaces/adas_vmc/index.md
-      - "Body and Comfort": autosar/application_interfaces/body_and_comfort/index.md
-      - "Chassis": autosar/application_interfaces/chassis/index.md
-      - "HMI/MM/T": autosar/application_interfaces/hmi/index.md
-      - "OPS": autosar/application_interfaces/occupant_safety/index.md
-      - "Powertrain": autosar/application_interfaces/powertrain/index.md
-      - "AI User Guide": autosar/application_interfaces/user_guide/index.md
-    - 库:
-      - autosar/libraries/index.md
-      - "插值调用宏封装": autosar/libraries/macro_encapsulation_of_interpolation_calls/index.md
-    - 模板:
-      - autosar/template/index.md
-      - "1. 一段话总结": autosar/template/generic_structure/index.md
-      - 时序扩展:
-
-        - "时序扩展规范": autosar/template/timimg_extension/indx.md
+      - 通信管理:
+        - autosar/foundation/communication_management/index.md
+      - 诊断:
+        - autosar/foundation/diagnostics/index.md
+      - 健康监控:
+        - autosar/foundation/health_monitoring/index.md
+      - 方法论与模板:
+        - autosar/foundation/methodology_templates/index.md
+      - 协议:
+        - autosar/foundation/protocols/index.md
+      - 发布文档:
+        - autosar/foundation/release_documentation/index.md
+      - 功能安全:
+        - autosar/foundation/safety/index.md
+      - 信息安全:
+        - autosar/foundation/security/index.md
+      - 系统服务:
+        - autosar/foundation/system_services/index.md
   - EB Tresos:
     - eb_tresos/index.md
     - Guided Configuration: eb_tresos/guided_configuration/index.md

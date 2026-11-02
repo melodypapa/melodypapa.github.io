@@ -120,7 +120,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: PR #163 (Closes #152); post-rebase article commit bcbaf51 on feature/exp-utilization_of_crypto_services; stacked PR chain merged in row order
   - [x] Step 6 — TODO.md row + commit/PR
 - [x] exp macro_encapsulation_of_interpolation_calls (AUTOSAR_CP_EXP_MacroEncapsulationofInterpolationCalls · Libraries · ❌ new article · 📖 skeleton-exempt)
-  - Note: numbered prose EXP document, chapters 1–7 mirrored; also creates the NEW libraries/ section (landing page docs/autosar/libraries/index.md + nav group 库（Libraries） before 模板) — first row of the libraries section per Group-libraries convention
+  - Note: numbered prose EXP document, chapters 1–7 mirrored; also creates the NEW libraries/ section (landing page docs/autosar/cp/libraries/index.md + nav group 库（Libraries） before 模板) — first row of the libraries section per Group-libraries convention
   - Note: 7.2.1 artifact table had a triple-duplicated description column (conversion chrome) — collapsed; page-decoration text between slides dropped (UML chrome)
   - Note: census: 6 chapter-number refs applied, idempotent; citation registry 2.1/2.2 lists have no [n] prose citations (0 linked); cross-article mentions report-only (DEM ×1)
   - Note: glossary +2 (IFX, IFL)
@@ -178,7 +178,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: PR #167 (Closes #156); post-rebase article commit 9055f25 on feature/exp-body_and_comfort; stacked PR chain merged in row order
   - [x] Step 6 — TODO.md row + commit/PR
 - [x] exp chassis (AUTOSAR_EXP_Chassis · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
-  - Note: source document is AUTOSAR_CP_EXP_AIChassis.md (queue name "Chassis" = AIChassis in R23-11); article at application_interfaces/chassis/ (landing page + nav entry already existed from adas_vmc)
+  - Note: source document is AUTOSAR_CP_EXP_AIChassis.md (queue name "Chassis" = AIChassis in R23-11); article at cp/application_interfaces/chassis/ (landing page + nav entry already existed from adas_vmc)
   - Note: chapters 1–5 mirrored; PDF→markdown chrome (interleaved diagram text, page-break glyph markers, change-history tables, Contents) dropped; 25 content figures placed (Figure01–25, content-hash dedupe, 8 recurring deco strips ≤36px dropped); source figure captions not repeated as text
   - Note: table 2.1 (ACC object list) restructured per cluster — the page-scrambled trailing rows (LaneProblty..DstMaxForFolwCtrl) verified to belong to ObjDataRlvForFolwCtrl1 via the source PDF layout + R22-11 conversion; table 4.3's 4th column header verified as ONE cell ("Switchable spring Body level actuator") against the PDF
   - Note: prose [n] citations linked manually to `<a id="ref-n">` anchors in §2.4 (15 markers) — script gap: link_candidates `_registry_sec` does not recognize a 「参考文档」-titled registry section (only 输入文件 x.1 / 参考文献), so --apply can't convert this shape; census shows the 5 anchor lines as false-positive UNRESOLVED
@@ -194,7 +194,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: article commit b1f1d8a on feature/exp-batch-sync (worktree ~/Workspace/mpt-exp-batch); batch PR #179 (Closes #178); batch gate confirmed 2026-10-29
   - [x] Step 6 — TODO.md row + commit/PR (commit b1f1d8a; batch PR pending)
 - [x] exp hmi (AUTOSAR_EXP_HMI · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
-  - Note: source document is AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics.md (queue name "HMI"); article at application_interfaces/hmi/
+  - Note: source document is AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics.md (queue name "HMI"); article at cp/application_interfaces/hmi/
   - Note: chapters 1–7 mirrored (ch.4's unnumbered "Data Flow" block rendered as a bold paragraph label — absent from the PDF TOC); diagram chrome dropped; 6 content figures placed (Figure01–06; the uncaptioned 4.3 image is a 345×37 deco strip, dropped); 5.1.1–5.1.5 interface description tables translated as GFM with a 项目/说明 2-col shape (source header row = table name = spanning chrome)
   - Note: prose [1] linked manually to `<a id="ref-1">` in §7 参考文档 (same _registry_sec gap as chassis); [1] resolves SITE-class to the body_and_comfort article — hop-2 link is a batch-gate decision
   - Note: glossary +5 (HMI, LED, Modality, PDC, UI; SWC already present — one-term-once); check_api_sync N/A; gen_api_list --check clean; strict build 0 WARNING / 0 anchor notices
@@ -206,7 +206,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: article commit 29ee0f3 on feature/exp-batch-sync (worktree ~/Workspace/mpt-exp-batch); batch PR #179 (Closes #178); batch gate confirmed 2026-10-29
   - [x] Step 6 — TODO.md row + commit/PR (commit 29ee0f3; batch PR pending)
 - [x] exp occupant_safety (AUTOSAR_EXP_OccupantSafety · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
-  - Note: source document is AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety.md (queue name "OccupantSafety"); article at application_interfaces/occupant_safety/
+  - Note: source document is AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety.md (queue name "OccupantSafety"); article at cp/application_interfaces/occupant_safety/
   - Note: chapters 1–5 mirrored; 10 content figures placed (Figure01–10, caption-verified); unnumbered slide headings (Normal Driving / Pre-Crash / In-Crash / Post-Crash / Sub-phases) rendered as bold paragraph labels (absent from the PDF TOC)
   - Note: tables 5.1 (63 rows) / 5.2 (146 rows) generated mechanically from the source rows with an enum-cell translation map; row counts cross-checked against the source PDF (75 Activation + 71 Control = 146); PDF line-wrap hyphenation inside identifiers un-escaped (AOnBmpAtFrntMi- dLe → AOnBmpAtFrntMidLe)
   - Note: source oddities kept verbatim + flagged: Table 2.1 lists VCD twice; "ACC | Adaptive Cruise Controll" (sic); Table 5.1 "Frent End" typo; Table 5.2 rows "ActvtOfActrPort/CtrlOfActrPort | Head Rest | Location" — the latter PDF-verified as genuine source content, not conversion garble (user decision at batch gate)
@@ -220,7 +220,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: article commit ed312b3 on feature/exp-batch-sync (worktree ~/Workspace/mpt-exp-batch); batch PR #179 (Closes #178); batch gate confirmed 2026-10-29
   - [x] Step 6 — TODO.md row + commit/PR (commit ed312b3; batch PR pending)
 - [x] exp powertrain (AUTOSAR_EXP_Powertrain · ApplicationInterfaces · ❌ new article · 📖 skeleton-exempt)
-  - Note: source document is AUTOSAR_CP_EXP_AIPowertrain.md; article at application_interfaces/powertrain/
+  - Note: source document is AUTOSAR_CP_EXP_AIPowertrain.md; article at cp/application_interfaces/powertrain/
   - Note: chapters 1–6 mirrored; 18 figures — Figure06 (Figure 3.6 torque-reserve add-on) was DROPPED by the md converter and extracted from the source PDF page 14 by bbox position (run precedent: VFB icon extraction); unnumbered bold labels (Sign definition / Ancillary torque losses / inertia / Engine Clutch / request labels / Legend / VLC-ESP arbitration) rendered as bold paragraphs
   - Note: §6.3.6 tables reconstructed from the source PDF pages 30–34 (the md conversion scrambles the two-column bands across page breaks): "Kind of Modeling" 7 rows + "Specific Naming Assumptions" 6 rows; the band pairing of the "All ports are optional" / "Port interfaces are not designed to be reused" rationales re-verified against the PDF layout
   - Note: prose [1]–[9] citations linked manually to `<a id="ref-n">` anchors in §2 (same _registry_sec gap); [5] AIChassis and [4] TR Glossary resolve SITE-class — hop-2 links are batch-gate decisions
@@ -233,7 +233,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: article commit 7909111 on feature/exp-batch-sync (worktree ~/Workspace/mpt-exp-batch); batch PR #179 (Closes #178); batch gate confirmed 2026-10-29
   - [x] Step 6 — TODO.md row + commit/PR (commit 7909111; batch PR pending)
 - [x] exp user_guide (AUTOSAR_EXP_UserGuide · ApplicationInterfaces (exact document name to confirm in Step 1) · ❌ new article · 📖 skeleton-exempt)
-  - Note: source document is AUTOSAR_CP_EXP_AIUserGuide.md (123-page guide); article at application_interfaces/user_guide/
+  - Note: source document is AUTOSAR_CP_EXP_AIUserGuide.md (123-page guide); article at cp/application_interfaces/user_guide/
   - Note: chapters 1–10 mirrored (largest AI guide); 85 content figures placed (UML meta-model diagrams + Excel sheet screenshots; 85th mapping entry was the PDF back-cover — dropped); ARXML/XSD listings reformatted into readable indented code fences (verbatim content), PDF line-wrap chrome dropped
   - Note: caption order in the conversion is scrambled in places (e.g. Figure 4.2/4.3) — figures placed at their image-occurrence positions from a line-number map; 6.2/7.2 stray placements fixed against the mapping
   - Note: prose [1]–[17] citations linked manually to `<a id="ref-n">` anchors in §10 参考文档 (same _registry_sec gap); [9]–[13] resolve SITE-class to the AI domain guides, [15] to the site TR glossary — hop-2 links are batch-gate decisions
@@ -246,7 +246,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: article commit 2453865 on feature/exp-batch-sync (worktree ~/Workspace/mpt-exp-batch); batch PR #179 (Closes #178); batch gate confirmed 2026-10-29
   - [x] Step 6 — TODO.md row + commit/PR (commit 2453865; batch PR pending)
 - [x] exp arti (AUTOSAR_EXP_ARTI · SWArch · ❌ new article · 📖 skeleton-exempt)
-  - Note: source document is AUTOSAR_CP_EXP_ARTI.md; article at sw_arch/arti/ — also creates the NEW sw_arch/ section (landing page + nav group 「SW 架构（SW Architecture）」 after RTE)
+  - Note: source document is AUTOSAR_CP_EXP_ARTI.md; article at cp/sw_arch/arti/ — also creates the NEW sw_arch/ section (landing page + nav group 「SW 架构（SW Architecture）」 after RTE)
   - Note: chapters 1–9 mirrored (unnumbered Known Limitations rendered as `## 已知限制` — content "No known limitations yet." is a real sentence, not a None. placeholder); 5 content figures (state diagrams + Ecuc class diagrams; one 897×118 code-page sliver and one 304×18 strip dropped as deco)
   - Note: listings 3.1–3.4, 4.1–4.2, 6.1–6.5, 7.1–7.6 reconstructed from the PDF-conversion fragments (line-number stripping, entity un-escaping, XML re-indentation); the Example 4.1 XML block reassembled from scrambled fragments; listing 7.2's trailing stray `*/` kept with a 译者注
   - Note: prose [1]–[4] citations linked manually to `<a id="ref-n">` anchors in §9.1.1; SWS_OS/RTE articles exist on site (SITE-class hop-2 — batch-gate decision)
@@ -259,7 +259,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: article commit 89cd317 on feature/exp-batch-sync (worktree ~/Workspace/mpt-exp-batch); batch PR #179 (Closes #178); batch gate confirmed 2026-10-29
   - [x] Step 6 — TODO.md row + commit/PR (commit 89cd317; batch PR pending)
 - [x] exp functional_safety_measures (AUTOSAR_EXP_FunctionalSafetyMeasures · Safety · ❌ new article · 📖 skeleton-exempt)
-  - Note: source document is AUTOSAR_CP_EXP_FunctionalSafetyMeasures.md; article at safety/functional_safety_measures/
+  - Note: source document is AUTOSAR_CP_EXP_FunctionalSafetyMeasures.md; article at cp/safety/functional_safety_measures/
   - Note: chapters 1–4 + appendix A (acronyms table as GFM) + unnumbered B (相关文档, [n]/docid registry shape); 27 content figures; source footnote numbers rendered as <sup>N</sup> + "> N …" blockquotes at their source positions (the conversion lost the inline anchor positions — anchors not re-created)
   - Note: prose citations use the [n, doc] comma form (e.g. "[1, ISO 26262]") — left prose per the open comma-form question; §3.7.x coverage-criteria/justification tables (3.2–3.23) translated as GFM with the triple spanning header collapsed to 覆盖准则/BSW 模块/需求/理由; table 3.8's scrambled CC02 row reconstructed from the prose line
   - Note: iso.org URLs kept plain text (anti-bot Backlog); SWS requirement IDs kept verbatim inside Table 2.1/2.2 cells (SWS-ID-in-cell corpus class)
@@ -272,7 +272,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: article commit c1ed1da on feature/exp-batch-sync (worktree ~/Workspace/mpt-exp-batch); batch PR #179 (Closes #178); batch gate confirmed 2026-10-29
   - [x] Step 6 — TODO.md row + commit/PR (commit c1ed1da; batch PR pending)
 - [x] exp safety_use_case (AUTOSAR_EXP_SafetyUseCase · Safety · ❌ new article · 📖 skeleton-exempt)
-  - Note: source document is AUTOSAR_CP_EXP_SafetyUseCase.md; article at safety/safety_use_case/
+  - Note: source document is AUTOSAR_CP_EXP_SafetyUseCase.md; article at cp/safety/safety_use_case/
   - Note: chapters 1–9 mirrored (ch.9 图/表目录 rendered as lists); 10 content figures (the 913×58 back-matter sliver dropped)
   - Note: the 23 analysis tables (5.2–5.24) extracted mechanically from the page-split fragments (two were headed as list items "- 5.3.N Analysis" in the conversion) with an 8-column GFM shape; long Safety-Measures/AUTOSAR-Mechanism cells truncated by the conversion marked with ……〔转换截断〕 and a 译者注 at §5.3 top (adas_vmc Appendix-B class — PDF verification deferred); heading numbering in the source skips no sections but 5.3.12 appears as a list item
   - Note: iso.org URL kept plain text (anti-bot Backlog); [n] prose citations: [1]–[4] linked to §8.1 anchors; source-internal "[1, ISO 26262]" comma-form occurrences left prose (open comma-form question)
@@ -285,7 +285,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: article commit 5fa1e61 on feature/exp-batch-sync (worktree ~/Workspace/mpt-exp-batch); batch PR #179 (Closes #178); batch gate confirmed 2026-10-29
   - [x] Step 6 — TODO.md row + commit/PR (commit 5fa1e61; batch PR pending)
 - [x] exp sw_cluster_design_and_integration (AUTOSAR_EXP_SwClusterDesignAndIntegration · SystemServices · ❌ new article · 📖 skeleton-exempt)
-  - Note: source document is AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline.md (11,250 lines, largest EXP doc); article at system_services/sw_cluster_design_and_integration/ (~8,370 lines)
+  - Note: source document is AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline.md (11,250 lines, largest EXP doc); article at cp/system_services/sw_cluster_design_and_integration/ (~8,370 lines)
   - Note: chapters 1–6 + appendices A–D mirrored; 6 content figures; ch.5 C examples (Examples 5.1–5.9) re-indented from the line-numbered conversion, verbatim content
   - Note: appendix A (21 ARXML listing files, ~7,900 source lines) emitted as xml code fences by script: chrome (page headers/footers/glyph/image refs) stripped, entities un-escaped, line order preserved — the conversion carries line-ordering artifacts in long listings; 译者注 at the appendix points to the Concept-670 supplementary folder as the authoritative source (user verification reminder at batch gate)
   - Note: appendices B (meta classes, ~30 tables) / C (ECUC params) / D (C-API, incl. SwCluC_BManif_GetHandle service table) extracted mechanically with duplicate-column collapse; fully translated after batch-gate user decision (2026-10-29: 先补译) — meta-attribute tails (Stereotypes:/Tags:/InstanceRef implemented by:) and identifiers kept verbatim per AUTOSAR convention

@@ -3,7 +3,7 @@
 Base: R23-11 · Generated: 2026-10-24 · Queue order = row order
 (Resume = the first row still `[ ]`; all `[x]` = batch complete)
 Steps: ① source resolution + gap analysis · ② in-place translation/completion · ③ Phase A mechanical checks · ④ Phase B evidence · ⑤ user confirmation gate · ⑥ TODO.md row + commit
-> This batch must first create the section landing page `docs/autosar/globaltime/index.md` (STANDARD.md §6 format) and register it in the nav — folded into the first row's Step 2.
+> This batch must first create the section landing page `docs/autosar/cp/globaltime/index.md` (STANDARD.md §6 format) and register it in the nav — folded into the first row's Step 2.
 
 ## Queue
 
@@ -48,7 +48,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 5 — User confirmation gate (confirmed 2026-10-30, batch gate; run stopped after row 3 per user — fr_tsyn row stays open for the next run)
   - [x] Step 6 — TODO.md row + commit/PR (commit 8f01771, batch confirmed 2026-10-30)
 - [x] fr_tsyn (SWS_TimeSyncOverFlexRay · R23-11 markdown · ❌ new article, short name FrTSyn)
-  - Note: 2026-10-30 — translate every `###`+ heading title, not just the level-2 chapters (rows 1–3 shipped 115 English headings; fixed in the same PR). Run `python .agents/skills/autosar-translate/scripts/check_heading_lang.py docs/autosar/globaltime/fr_tsyn/index.md` in Step 3 — exit 0 required. Identifier-titled headings (FrTSyn_*, FrTSynGlobalTimeDomain, port/interface names) stay English; every prose title translates
+  - Note: 2026-10-30 — translate every `###`+ heading title, not just the level-2 chapters (rows 1–3 shipped 115 English headings; fixed in the same PR). Run `python .agents/skills/autosar-translate/scripts/check_heading_lang.py docs/autosar/cp/globaltime/fr_tsyn/index.md` in Step 3 — exit 0 required. Identifier-titled headings (FrTSyn_*, FrTSynGlobalTimeDomain, port/interface names) stay English; every prose title translates
   - Note: Source confirmed: R23-11 markdown `AUTOSAR_CP_SWS_TimeSyncOverFlexRay.md` (3,167 lines); the new article path does not exist.
   - Note: Mapping: source ch.1–5 → article §§1–5; ch.6 Requirements Tracing and appendix A are deliberately omitted per mandate; ch.7→§6, ch.8→§7, ch.9→§8, ch.10→§9, appendix B→`## B. AUTOSAR 可追溯项变更历史`.
   - Note: Source inventory: 24 ch.2 rows; API has 2 types, 3 functions, 4 callbacks, 1 scheduled function; ch.9 has 3 sequence diagrams; ch.10 has 14 configuration containers.

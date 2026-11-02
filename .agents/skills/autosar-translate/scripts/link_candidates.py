@@ -351,10 +351,14 @@ DOC_TARGETS = {
 }
 
 # Cross-article module mentions (report-only class). Status reflects the site
-# as of 2026-10-25 — re-verify before applying any of these as links. Names are
-# matched case-insensitively with word boundaries (articles render "Port
-# Driver" as **PORT**/**Port**驱动程序, "Det" as **DET**); standalone bold-term
-# lines (the §2 acronym entries) are skipped — a term line defines, not mentions.
+# as of 2026-10-25 — re-verify before applying any of these as links. Paths
+# are relative to the scanned article; every CP article lives under
+# docs/autosar/cp/<section>/<article>/, so `../x/` is a same-section sibling
+# and `../../<section>/x/` crosses sections (the cp/ root is never named).
+# Names are matched case-insensitively with word boundaries (articles render
+# "Port Driver" as **PORT**/**Port**驱动程序, "Det" as **DET**); standalone
+# bold-term lines (the §2 acronym entries) are skipped — a term line defines,
+# not mentions.
 MODULE_LINKS = {
     "Port Driver": ("SITE", "../port_driver/"),
     "PORT": ("SITE", "../port_driver/"),
@@ -366,7 +370,7 @@ MODULE_LINKS = {
     "Mcu": ("NO-ARTICLE", None),
     "NvM": ("SITE", "../../memory/nvram_manager/"),
     "Dcm": ("SITE", "../../diagnostics/diagnostic_communication_manager/"),
-    "SoAd": ("SITE", "../../communication/SoAd/SoAd/"),
+    "SoAd": ("SITE", "../../communication/soad/"),
     "ComM": ("NO-ARTICLE", None),
     "CanSM": ("NO-ARTICLE", None),
     "LinSM": ("NO-ARTICLE", None),

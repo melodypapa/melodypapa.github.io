@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the AUTOSAR API listing under docs/autosar/api/ from the site's
+"""Generate the AUTOSAR API listing under docs/autosar/cp/api/ from the site's
 TRANSLATED articles — the repository itself is the only input (no external
 corpus dependency).
 
@@ -42,7 +42,9 @@ from collections import OrderedDict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
-DOCS = ROOT / "docs" / "autosar"
+# CP articles only: the API listing is derived from CP SWS API chapters, and
+# Foundation (docs/autosar/foundation/) has no SWS documents.
+DOCS = ROOT / "docs" / "autosar" / "cp"
 API_DIR = DOCS / "api"
 OUT_INDEX = API_DIR / "index.md"
 OUT_TYPES = API_DIR / "types.md"
@@ -194,8 +196,8 @@ def render_list(title: str, chapter_note: str, entries, n_items: int) -> list[st
             current = letter
             out += [f"## {letter if letter != '#' else '其他'}", ""]
         for name, kind, spec_disp, release, label_link, anchor in occ:
-            # article paths are stored relative to docs/autosar/; the list
-            # pages live one level deeper (autosar/api/), so prefix ../
+            # article paths are stored relative to docs/autosar/cp/; the list
+            # pages live one level deeper (autosar/cp/api/), so prefix ../
             target = f"../{label_link[1]}"
             out.append(f"**[{name}]({target}#{anchor})**")
             out.append(f"> {kind} · [{label_link[0]}]({target}) · {spec_disp} · {release}")
@@ -299,7 +301,7 @@ def build():
         "",
         "## 相关内容",
         "",
-        "- [术语表](../glossary.md)",
+        "- [术语表](../../glossary.md)",
         "- [CP AUTOSAR](../index.md)",
         "",
     ]
