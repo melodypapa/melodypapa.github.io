@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **1949** 个条目。
+共 **2026** 个条目。
 
 ## A
 
@@ -2122,6 +2122,39 @@ title: "AUTOSAR API 函数清单"
 **[E2EXf_Inv_store_request_counter](../communication/e2e_transformer/index.md#6738-e2exf_inv_store_request_counter)**
 > 函数 · [E2E Transformer (E2E转换器)](../communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
 
+**[Ea_Cancel](../memory/ea/index.md#734-ea_cancel)**
+> 函数 · [AUTOSAR Ea（EEPROM抽象）](../memory/ea/index.md) · SWS_EEPROMAbstraction · R23-11
+
+**[Ea_EraseImmediateBlock](../memory/ea/index.md#739-ea_eraseimmediateblock)**
+> 函数 · [AUTOSAR Ea（EEPROM抽象）](../memory/ea/index.md) · SWS_EEPROMAbstraction · R23-11
+
+**[Ea_GetJobResult](../memory/ea/index.md#736-ea_getjobresult)**
+> 函数 · [AUTOSAR Ea（EEPROM抽象）](../memory/ea/index.md) · SWS_EEPROMAbstraction · R23-11
+
+**[Ea_GetStatus](../memory/ea/index.md#735-ea_getstatus)**
+> 函数 · [AUTOSAR Ea（EEPROM抽象）](../memory/ea/index.md) · SWS_EEPROMAbstraction · R23-11
+
+**[Ea_GetVersionInfo](../memory/ea/index.md#738-ea_getversioninfo)**
+> 函数 · [AUTOSAR Ea（EEPROM抽象）](../memory/ea/index.md) · SWS_EEPROMAbstraction · R23-11
+
+**[Ea_Init](../memory/ea/index.md#731-ea_init)**
+> 函数 · [AUTOSAR Ea（EEPROM抽象）](../memory/ea/index.md) · SWS_EEPROMAbstraction · R23-11
+
+**[Ea_InvalidateBlock](../memory/ea/index.md#737-ea_invalidateblock)**
+> 函数 · [AUTOSAR Ea（EEPROM抽象）](../memory/ea/index.md) · SWS_EEPROMAbstraction · R23-11
+
+**[Ea_JobEndNotification](../memory/ea/index.md#741-ea_jobendnotification)**
+> 函数 · [AUTOSAR Ea（EEPROM抽象）](../memory/ea/index.md) · SWS_EEPROMAbstraction · R23-11
+
+**[Ea_MainFunction](../memory/ea/index.md#751-ea_mainfunction)**
+> 函数 · [AUTOSAR Ea（EEPROM抽象）](../memory/ea/index.md) · SWS_EEPROMAbstraction · R23-11
+
+**[Ea_Read](../memory/ea/index.md#732-ea_read)**
+> 函数 · [AUTOSAR Ea（EEPROM抽象）](../memory/ea/index.md) · SWS_EEPROMAbstraction · R23-11
+
+**[Ea_Write](../memory/ea/index.md#733-ea_write)**
+> 函数 · [AUTOSAR Ea（EEPROM抽象）](../memory/ea/index.md) · SWS_EEPROMAbstraction · R23-11
+
 **[EcuM_AbortWakeupAlarm](../mode_management/ecu_state_manager/index.md#7363-ecum_abortwakeupalarm)**
 > 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](../mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
@@ -2277,6 +2310,39 @@ title: "AUTOSAR API 函数清单"
 
 **[EcuM_ValidateWakeupEvent](../mode_management/ecu_state_manager/index.md#7412-ecum_validatewakeupevent)**
 > 函数 · [AUTOSAR ECU State Manager（ECU状态管理器）](../mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+
+**[Eep_Cancel](../memory/eep/index.md#737-eep_cancel)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_Compare](../memory/eep/index.md#736-eep_compare)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_Erase](../memory/eep/index.md#735-eep_erase)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_GetJobResult](../memory/eep/index.md#739-eep_getjobresult)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_GetStatus](../memory/eep/index.md#738-eep_getstatus)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_GetVersionInfo](../memory/eep/index.md#7310-eep_getversioninfo)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_Init](../memory/eep/index.md#731-eep_init)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_MainFunction](../memory/eep/index.md#751-eep_mainfunction)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_Read](../memory/eep/index.md#733-eep_read)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_SetMode](../memory/eep/index.md#732-eep_setmode)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_Write](../memory/eep/index.md#734-eep_write)**
+> 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
 
 **[EnableCond](../diagnostics/diagnostic_event_manager/index.md#76416-enablecond)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
@@ -3153,46 +3219,43 @@ title: "AUTOSAR API 函数清单"
 
 ## F
 
-**[Fee_Cancel](../memory/flash_eeprom_emulation/index.md#515-fee_cancel)**
+**[Fee_Cancel](../memory/flash_eeprom_emulation/index.md#734-fee_cancel)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
-**[Fee_EraseImmediateBlock](../memory/flash_eeprom_emulation/index.md#5110-fee_eraseimmediateblock)**
+**[Fee_EraseImmediateBlock](../memory/flash_eeprom_emulation/index.md#739-fee_eraseimmediateblock)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
-**[Fee_GetJobResult](../memory/flash_eeprom_emulation/index.md#517-fee_getjobresult)**
+**[Fee_GetJobResult](../memory/flash_eeprom_emulation/index.md#736-fee_getjobresult)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
-**[Fee_GetStatus](../memory/flash_eeprom_emulation/index.md#516-fee_getstatus)**
+**[Fee_GetStatus](../memory/flash_eeprom_emulation/index.md#735-fee_getstatus)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
-**[Fee_GetVersionInfo](../memory/flash_eeprom_emulation/index.md#519-fee_getversioninfo)**
+**[Fee_GetVersionInfo](../memory/flash_eeprom_emulation/index.md#738-fee_getversioninfo)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
-**[Fee_Init](../memory/flash_eeprom_emulation/index.md#511-fee_init)**
+**[Fee_Init](../memory/flash_eeprom_emulation/index.md#731-fee_init)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
-**[Fee_InvalidateBlock](../memory/flash_eeprom_emulation/index.md#518-fee_invalidateblock)**
+**[Fee_InvalidateBlock](../memory/flash_eeprom_emulation/index.md#737-fee_invalidateblock)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
 **[Fee_JobEndNotification](../memory/flash_driver/index.md#7631-fee_jobendnotification)**
 > 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
-**[Fee_JobEndNotification](../memory/flash_eeprom_emulation/index.md#521-fee_jobendnotification)**
+**[Fee_JobEndNotification](../memory/flash_eeprom_emulation/index.md#741-fee_jobendnotification)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
 **[Fee_JobErrorNotification](../memory/flash_driver/index.md#7632-fee_joberrornotification)**
 > 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
-**[Fee_MainFunction](../memory/flash_eeprom_emulation/index.md#521-fee_mainfunction)**
+**[Fee_MainFunction](../memory/flash_eeprom_emulation/index.md#751-fee_mainfunction)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
-**[Fee_Read](../memory/flash_eeprom_emulation/index.md#513-fee_read)**
+**[Fee_Read](../memory/flash_eeprom_emulation/index.md#732-fee_read)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
-**[Fee_SetMode](../memory/flash_eeprom_emulation/index.md#512-fee_setmode)**
-> 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
-
-**[Fee_Write](../memory/flash_eeprom_emulation/index.md#514-fee_write)**
+**[Fee_Write](../memory/flash_eeprom_emulation/index.md#733-fee_write)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
 **[FiM_ControlFunctionAvailable](../system_services/function_inhibition_manager/index.md#7412-fim_controlfunctionavailable)**
@@ -3260,6 +3323,51 @@ title: "AUTOSAR API 函数清单"
 
 **[Fls_Write](../memory/flash_driver/index.md#733-fls_write)**
 > 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+
+**[FlsTst_Abort](../memory/flstst/index.md#734-flstst_abort)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_DeInit](../memory/flstst/index.md#732-flstst_deinit)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_GetCurrentState](../memory/flstst/index.md#737-flstst_getcurrentstate)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_GetErrorDetails](../memory/flstst/index.md#7313-flstst_geterrordetails)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_GetTestResultBgnd](../memory/flstst/index.md#738-flstst_gettestresultbgnd)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_GetTestResultFgnd](../memory/flstst/index.md#739-flstst_gettestresultfgnd)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_GetTestSignatureBgnd](../memory/flstst/index.md#7311-flstst_gettestsignaturebgnd)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_GetTestSignatureFgnd](../memory/flstst/index.md#7312-flstst_gettestsignaturefgnd)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_GetVersionInfo](../memory/flstst/index.md#7310-flstst_getversioninfo)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_Init](../memory/flstst/index.md#731-flstst_init)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_MainFunction](../memory/flstst/index.md#751-flstst_mainfunction)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_Resume](../memory/flstst/index.md#736-flstst_resume)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_StartFgnd](../memory/flstst/index.md#733-flstst_startfgnd)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_Suspend](../memory/flstst/index.md#735-flstst_suspend)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_TestEcc](../memory/flstst/index.md#7314-flstst_testecc)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
 
 **[Fr_AbortCommunication](../communication/flexray_driver/index.md#747-fr_abortcommunication)**
 > 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](../communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
@@ -4350,6 +4458,45 @@ title: "AUTOSAR API 函数清单"
 **[MeasurementNotification](../globaltime/stbm/index.md#7745-measurementnotification)**
 > 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](../globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
+**[Mem_BlankCheck](../memory/memory_driver/index.md#7324-mem_blankcheck)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_DeInit](../memory/memory_driver/index.md#7312-mem_deinit)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_Erase](../memory/memory_driver/index.md#7323-mem_erase)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_GetJobResult](../memory/memory_driver/index.md#7314-mem_getjobresult)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_GetVersionInfo](../memory/memory_driver/index.md#7313-mem_getversioninfo)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_HwSpecificService](../memory/memory_driver/index.md#7325-mem_hwspecificservice)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_Init](../memory/memory_driver/index.md#7311-mem_init)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_MainFunction](../memory/memory_driver/index.md#751-mem_mainfunction)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_PropagateError](../memory/memory_driver/index.md#7317-mem_propagateerror)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_Read](../memory/memory_driver/index.md#7321-mem_read)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_Resume](../memory/memory_driver/index.md#7316-mem_resume)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_Suspend](../memory/memory_driver/index.md#7315-mem_suspend)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_Write](../memory/memory_driver/index.md#7322-mem_write)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
 **[MemAcc_ActivateMem](../memory/memory_access/index.md#7319-memacc_activatemem)**
 > 函数 · [AUTOSAR Memory Access（存储访问）](../memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
@@ -4409,6 +4556,30 @@ title: "AUTOSAR API 函数清单"
 
 **[MemAcc_Write](../memory/memory_access/index.md#7323-memacc_write)**
 > 函数 · [AUTOSAR Memory Access（存储访问）](../memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+
+**[MemIf_Cancel](../memory/memory_abstraction_interface/index.md#733-memif_cancel)**
+> 函数 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
+
+**[MemIf_EraseImmediateBlock](../memory/memory_abstraction_interface/index.md#738-memif_eraseimmediateblock)**
+> 函数 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
+
+**[MemIf_GetJobResult](../memory/memory_abstraction_interface/index.md#735-memif_getjobresult)**
+> 函数 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
+
+**[MemIf_GetStatus](../memory/memory_abstraction_interface/index.md#734-memif_getstatus)**
+> 函数 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
+
+**[MemIf_GetVersionInfo](../memory/memory_abstraction_interface/index.md#737-memif_getversioninfo)**
+> 函数 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
+
+**[MemIf_InvalidateBlock](../memory/memory_abstraction_interface/index.md#736-memif_invalidateblock)**
+> 函数 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
+
+**[MemIf_Read](../memory/memory_abstraction_interface/index.md#731-memif_read)**
+> 函数 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
+
+**[MemIf_Write](../memory/memory_abstraction_interface/index.md#732-memif_write)**
+> 函数 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
 
 **[Mirror_AddCanMaskFilter](../communication/mirror/index.md#7424-mirror_addcanmaskfilter)**
 > 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
@@ -4744,6 +4915,66 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](../io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 ## R
+
+**[RamTst_Allow](../memory/ramtst/index.md#734-ramtst_allow)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_ChangeNumberOfTestedCells](../memory/ramtst/index.md#7315-ramtst_changenumberoftestedcells)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_DeInit](../memory/ramtst/index.md#732-ramtst_deinit)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_ErrorNotification](../memory/ramtst/index.md#7632-ramtst_errornotification)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_GetAlgParams](../memory/ramtst/index.md#7311-ramtst_getalgparams)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_GetExecutionStatus](../memory/ramtst/index.md#737-ramtst_getexecutionstatus)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_GetNumberOfTestedCells](../memory/ramtst/index.md#7313-ramtst_getnumberoftestedcells)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_GetTestAlgorithm](../memory/ramtst/index.md#7312-ramtst_gettestalgorithm)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_GetTestResult](../memory/ramtst/index.md#738-ramtst_gettestresult)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_GetTestResultPerBlock](../memory/ramtst/index.md#739-ramtst_gettestresultperblock)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_GetVersionInfo](../memory/ramtst/index.md#7310-ramtst_getversioninfo)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_Init](../memory/ramtst/index.md#731-ramtst_init)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_MainFunction](../memory/ramtst/index.md#751-ramtst_mainfunction)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_Resume](../memory/ramtst/index.md#736-ramtst_resume)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_RunFullTest](../memory/ramtst/index.md#7316-ramtst_runfulltest)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_RunPartialTest](../memory/ramtst/index.md#7317-ramtst_runpartialtest)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_SelectAlgParams](../memory/ramtst/index.md#7314-ramtst_selectalgparams)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_Stop](../memory/ramtst/index.md#733-ramtst_stop)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_Suspend](../memory/ramtst/index.md#735-ramtst_suspend)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_TestCompletedNotification](../memory/ramtst/index.md#7631-ramtst_testcompletednotification)**
+> 函数 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
 
 **[ReadDataElement](../diagnostics/diagnostic_event_manager/index.md#74310-readdataelement)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11

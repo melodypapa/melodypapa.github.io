@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **507** 个条目。
+共 **536** 个条目。
 
 ## A
 
@@ -595,6 +595,9 @@ title: "AUTOSAR API 类型清单"
 **[E2EXf_CSTransactionHandleType](../communication/e2e_transformer/index.md#722-e2exf_cstransactionhandletype)**
 > 类型 · [E2E Transformer (E2E转换器)](../communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
 
+**[Ea_ConfigType](../memory/ea/index.md#721-ea_configtype)**
+> 类型 · [AUTOSAR Ea（EEPROM抽象）](../memory/ea/index.md) · SWS_EEPROMAbstraction · R23-11
+
 **[EcuM_ConfigType](../mode_management/ecu_state_manager/index.md#721-ecum_configtype)**
 > 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](../mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
 
@@ -612,6 +615,15 @@ title: "AUTOSAR API 类型清单"
 
 **[EcuM_WakeupStatusType](../mode_management/ecu_state_manager/index.md#724-ecum_wakeupstatustype)**
 > 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](../mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11
+
+**[Eep_AddressType](../memory/eep/index.md#722-eep_addresstype)**
+> 类型 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_ConfigType](../memory/eep/index.md#721-eep_configtype)**
+> 类型 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Eep_LengthType](../memory/eep/index.md#723-eep_lengthtype)**
+> 类型 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
 
 **[EthIf_ConfigType](../communication/ethernet_interface/index.md#721-ethif_configtype)**
 > 类型 · [AUTOSAR Ethernet Interface（以太网接口）](../communication/ethernet_interface/index.md) · SWS_EthernetInterface · R23-11
@@ -696,6 +708,9 @@ title: "AUTOSAR API 类型清单"
 
 ## F
 
+**[Fee_ConfigType](../memory/flash_eeprom_emulation/index.md#721-fee_configtype)**
+> 类型 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
+
 **[FiM_ConfigType](../system_services/function_inhibition_manager/index.md#721-fim_configtype)**
 > 类型 · [AUTOSAR FiM（功能禁止管理器）](../system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11
 
@@ -716,6 +731,33 @@ title: "AUTOSAR API 类型清单"
 
 **[Fls_LengthType](../memory/flash_driver/index.md#723-fls_lengthtype)**
 > 类型 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+
+**[FlsTst_BlockIdFgndType](../memory/flstst/index.md#725-flstst_blockidfgndtype)**
+> 类型 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_ConfigType](../memory/flstst/index.md#721-flstst_configtype)**
+> 类型 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_ErrorDetailsType](../memory/flstst/index.md#726-flstst_errordetailstype)**
+> 类型 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_StateType](../memory/flstst/index.md#722-flstst_statetype)**
+> 类型 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_TestResultBgndType](../memory/flstst/index.md#724-flstst_testresultbgndtype)**
+> 类型 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_TestResultFgndType](../memory/flstst/index.md#723-flstst_testresultfgndtype)**
+> 类型 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_TestResultType](../memory/flstst/index.md#729-flstst_testresulttype)**
+> 类型 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_TestSignatureBgndType](../memory/flstst/index.md#728-flstst_testsignaturebgndtype)**
+> 类型 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_TestSignatureFgndType](../memory/flstst/index.md#727-flstst_testsignaturefgndtype)**
+> 类型 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
 
 **[Fr_ChannelType](../communication/flexray_driver/index.md#7310-fr_channeltype)**
 > 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](../communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
@@ -954,6 +996,24 @@ title: "AUTOSAR API 类型清单"
 **[Mcu_ResetType](../mcal/mcu_driver/index.md#724-mcu_resettype)**
 > 类型 · [AUTOSAR MCU Driver（微控制器单元驱动）](../mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
 
+**[Mem_AddressType](../memory/memory_driver/index.md#721-mem_addresstype)**
+> 类型 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_ConfigType](../memory/memory_driver/index.md#722-mem_configtype)**
+> 类型 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_DataType](../memory/memory_driver/index.md#723-mem_datatype)**
+> 类型 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_HwServiceIdType](../memory/memory_driver/index.md#726-mem_hwserviceidtype)**
+> 类型 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_InstanceIdType](../memory/memory_driver/index.md#724-mem_instanceidtype)**
+> 类型 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_LengthType](../memory/memory_driver/index.md#725-mem_lengthtype)**
+> 类型 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
 **[MemAcc_AddressAreaIdType](../memory/memory_access/index.md#721-memacc_addressareaidtype)**
 > 类型 · [AUTOSAR Memory Access（存储访问）](../memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
 
@@ -1046,6 +1106,12 @@ title: "AUTOSAR API 类型清单"
 
 **[MemAcc_MemWriteFuncType](../memory/memory_access/index.md#7227-memacc_memwritefunctype)**
 > 类型 · [AUTOSAR Memory Access（存储访问）](../memory/memory_access/index.md) · SWS_MemoryAccess · R23-11
+
+**[MemIf_JobResultType](../memory/memory_abstraction_interface/index.md#722-memif_jobresulttype)**
+> 类型 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
+
+**[MemIf_StatusType](../memory/memory_abstraction_interface/index.md#721-memif_statustype)**
+> 类型 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
 
 **[MemorySizeType](../system_services/operating_system/index.md#7310-memorysizetype)**
 > 类型 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
@@ -1180,6 +1246,27 @@ title: "AUTOSAR API 类型清单"
 > 类型 · [AUTOSAR PWM Driver（脉冲宽度调制驱动）](../io/pwm_driver/index.md) · SWS_PWMDriver · R23-11
 
 ## R
+
+**[RamTst_AlgorithmType](../memory/ramtst/index.md#725-ramtst_algorithmtype)**
+> 类型 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_AlgParamsIdType](../memory/ramtst/index.md#724-ramtst_algparamsidtype)**
+> 类型 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_ConfigType](../memory/ramtst/index.md#721-ramtst_configtype)**
+> 类型 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_ExecutionStatusType](../memory/ramtst/index.md#722-ramtst_executionstatustype)**
+> 类型 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_NumberOfBlocksType](../memory/ramtst/index.md#727-ramtst_numberofblockstype)**
+> 类型 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_NumberOfTestedCellsType](../memory/ramtst/index.md#726-ramtst_numberoftestedcellstype)**
+> 类型 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
+
+**[RamTst_TestResultType](../memory/ramtst/index.md#723-ramtst_testresulttype)**
+> 类型 · [AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest · R23-11
 
 **[RestartType](../system_services/operating_system/index.md#7316-restarttype)**
 > 类型 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11

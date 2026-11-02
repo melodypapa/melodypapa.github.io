@@ -959,6 +959,24 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**E2EXf_Inv_set_check_counter**](../communication/e2e_transformer/index.md#6737-e2exf_inv_set_check_counter) | — |
 | [**E2EXf_Inv_store_request_counter**](../communication/e2e_transformer/index.md#6738-e2exf_inv_store_request_counter) | — |
 
+## AUTOSAR Ea（EEPROM抽象）（11）
+
+来源：[AUTOSAR Ea（EEPROM抽象）](../memory/ea/index.md) · SWS_EEPROMAbstraction
+
+| 函数 | 简述 |
+|---|---|
+| [**Ea_Cancel**](../memory/ea/index.md#734-ea_cancel) | 服务 ID 0x04。 |
+| [**Ea_EraseImmediateBlock**](../memory/ea/index.md#739-ea_eraseimmediateblock) | 服务 ID 0x09。 |
+| [**Ea_GetJobResult**](../memory/ea/index.md#736-ea_getjobresult) | 服务 ID 0x06。 |
+| [**Ea_GetStatus**](../memory/ea/index.md#735-ea_getstatus) | 服务 ID 0x05。 |
+| [**Ea_GetVersionInfo**](../memory/ea/index.md#738-ea_getversioninfo) | 服务 ID 0x08。 |
+| [**Ea_Init**](../memory/ea/index.md#731-ea_init) | 服务 ID 0x00。 |
+| [**Ea_InvalidateBlock**](../memory/ea/index.md#737-ea_invalidateblock) | 服务 ID 0x07。 |
+| [**Ea_JobEndNotification**](../memory/ea/index.md#741-ea_jobendnotification) | 服务 ID 0x10。 |
+| [**Ea_MainFunction**](../memory/ea/index.md#751-ea_mainfunction) | 服务 ID 0x12。 |
+| [**Ea_Read**](../memory/ea/index.md#732-ea_read) | 服务 ID 0x02。 |
+| [**Ea_Write**](../memory/ea/index.md#733-ea_write) | 服务 ID 0x03。 |
+
 ## AUTOSAR ECU State Manager（ECU状态管理器）（52）
 
 来源：[AUTOSAR ECU State Manager（ECU状态管理器）](../mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager
@@ -1017,6 +1035,24 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**EcuM_StartWakeupSources**](../mode_management/ecu_state_manager/index.md#7551-ecum_startwakeupsources) | 此Callout将启动给定的唤醒源，以便它们准备好执行唤醒验证。 |
 | [**EcuM_StopWakeupSources**](../mode_management/ecu_state_manager/index.md#7553-ecum_stopwakeupsources) | 在唤醒验证不成功后，此Callout需停止给定的唤醒源。 |
 | [**EcuM_ValidateWakeupEvent**](../mode_management/ecu_state_manager/index.md#7412-ecum_validatewakeupevent) | 唤醒后ECU状态管理器将在WAKEUP VALIDATION状态/序列期间，停止进程以等待唤醒事件的验证。 |
+
+## AUTOSAR Eep（EEPROM驱动程序）（11）
+
+来源：[AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver
+
+| 函数 | 简述 |
+|---|---|
+| [**Eep_Cancel**](../memory/eep/index.md#737-eep_cancel) | 服务 ID 0x06。 |
+| [**Eep_Compare**](../memory/eep/index.md#736-eep_compare) | 服务 ID 0x05。 |
+| [**Eep_Erase**](../memory/eep/index.md#735-eep_erase) | 服务 ID 0x04。 |
+| [**Eep_GetJobResult**](../memory/eep/index.md#739-eep_getjobresult) | 服务 ID 0x08。 |
+| [**Eep_GetStatus**](../memory/eep/index.md#738-eep_getstatus) | 服务 ID 0x07。 |
+| [**Eep_GetVersionInfo**](../memory/eep/index.md#7310-eep_getversioninfo) | 服务 ID 0x0a。 |
+| [**Eep_Init**](../memory/eep/index.md#731-eep_init) | 服务 ID 0x00。 |
+| [**Eep_MainFunction**](../memory/eep/index.md#751-eep_mainfunction) | 服务 ID 0x09。 |
+| [**Eep_Read**](../memory/eep/index.md#733-eep_read) | 服务 ID 0x02。 |
+| [**Eep_SetMode**](../memory/eep/index.md#732-eep_setmode) | 服务 ID 0x01。 |
+| [**Eep_Write**](../memory/eep/index.md#734-eep_write) | 服务 ID 0x03。 |
 
 ## AUTOSAR Ethernet Driver（以太网驱动程序）（21）
 
@@ -1317,24 +1353,23 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**EthTrcv_TransceiverLinkStateRequest**](../communication/eth_trcv/index.md#737-ethtrcv_transceiverlinkstaterequest) | 为给定的收发器请求给定的链路状态。 |
 | [**EthTrcv_WriteMiiIndication**](../communication/eth_trcv/index.md#742-ethtrcv_writemiiindication) | 当经由 MII 接口写入信息时被调用。 |
 
-## AUTOSAR FEE（闪存EEPROM仿真）（12）
+## AUTOSAR FEE（闪存EEPROM仿真）（11）
 
 来源：[AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation
 
 | 函数 | 简述 |
 |---|---|
-| [**Fee_Cancel**](../memory/flash_eeprom_emulation/index.md#515-fee_cancel) | 调用底层闪存驱动程序的取消函数的服务。 |
-| [**Fee_EraseImmediateBlock**](../memory/flash_eeprom_emulation/index.md#5110-fee_eraseimmediateblock) | 擦除逻辑块的服务。 |
-| [**Fee_GetJobResult**](../memory/flash_eeprom_emulation/index.md#517-fee_getjobresult) | 查询上层软件下发的最后一个接受作业的结果的服务。 |
-| [**Fee_GetStatus**](../memory/flash_eeprom_emulation/index.md#516-fee_getstatus) | 返回状态的服务。 |
-| [**Fee_GetVersionInfo**](../memory/flash_eeprom_emulation/index.md#519-fee_getversioninfo) | 返回FEE模块版本信息的服务。 |
-| [**Fee_Init**](../memory/flash_eeprom_emulation/index.md#511-fee_init) | 初始化FEE模块的服务。 |
-| [**Fee_InvalidateBlock**](../memory/flash_eeprom_emulation/index.md#518-fee_invalidateblock) | 使逻辑块无效的服务。 |
-| [**Fee_JobEndNotification**](../memory/flash_eeprom_emulation/index.md#521-fee_jobendnotification) | 向此模块报告异步操作成功结束的服务。 |
-| [**Fee_MainFunction**](../memory/flash_eeprom_emulation/index.md#521-fee_mainfunction) | 处理请求的读/写/擦除作业和内部管理操作的服务。 |
-| [**Fee_Read**](../memory/flash_eeprom_emulation/index.md#513-fee_read) | 启动读取作业的服务。 |
-| [**Fee_SetMode**](../memory/flash_eeprom_emulation/index.md#512-fee_setmode) | 切换底层Flash Driver模式的函数。 |
-| [**Fee_Write**](../memory/flash_eeprom_emulation/index.md#514-fee_write) | 启动写入作业的服务。 |
+| [**Fee_Cancel**](../memory/flash_eeprom_emulation/index.md#734-fee_cancel) | 服务 ID 0x04。 |
+| [**Fee_EraseImmediateBlock**](../memory/flash_eeprom_emulation/index.md#739-fee_eraseimmediateblock) | 服务 ID 0x09。 |
+| [**Fee_GetJobResult**](../memory/flash_eeprom_emulation/index.md#736-fee_getjobresult) | 服务 ID 0x06。 |
+| [**Fee_GetStatus**](../memory/flash_eeprom_emulation/index.md#735-fee_getstatus) | 服务 ID 0x05。 |
+| [**Fee_GetVersionInfo**](../memory/flash_eeprom_emulation/index.md#738-fee_getversioninfo) | 服务 ID 0x08。 |
+| [**Fee_Init**](../memory/flash_eeprom_emulation/index.md#731-fee_init) | 服务 ID 0x00。 |
+| [**Fee_InvalidateBlock**](../memory/flash_eeprom_emulation/index.md#737-fee_invalidateblock) | 服务 ID 0x07。 |
+| [**Fee_JobEndNotification**](../memory/flash_eeprom_emulation/index.md#741-fee_jobendnotification) | 服务 ID 0x10。 |
+| [**Fee_MainFunction**](../memory/flash_eeprom_emulation/index.md#751-fee_mainfunction) | 服务 ID 0x12。 |
+| [**Fee_Read**](../memory/flash_eeprom_emulation/index.md#732-fee_read) | 服务 ID 0x02。 |
+| [**Fee_Write**](../memory/flash_eeprom_emulation/index.md#733-fee_write) | 服务 ID 0x03。 |
 
 ## AUTOSAR FiM（功能禁止管理器）（10）
 
@@ -1545,6 +1580,28 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**RemoteSleepCancellation**](../communication/flexray_network_management/index.md#7633-remotesleepcancellation) | — |
 | [**RemoteSleepIndication**](../communication/flexray_network_management/index.md#7634-remotesleepindication) | — |
 | [**TransmissionTimeoutException**](../communication/flexray_network_management/index.md#7635-transmissiontimeoutexception) | — |
+
+## AUTOSAR FlsTst（闪存测试驱动程序）（15）
+
+来源：[AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest
+
+| 函数 | 简述 |
+|---|---|
+| [**FlsTst_Abort**](../memory/flstst/index.md#734-flstst_abort) | 服务 ID 0x03。 |
+| [**FlsTst_DeInit**](../memory/flstst/index.md#732-flstst_deinit) | 服务 ID 0x01。 |
+| [**FlsTst_GetCurrentState**](../memory/flstst/index.md#737-flstst_getcurrentstate) | 服务 ID 0x06。 |
+| [**FlsTst_GetErrorDetails**](../memory/flstst/index.md#7313-flstst_geterrordetails) | 服务 ID 0x0b。 |
+| [**FlsTst_GetTestResultBgnd**](../memory/flstst/index.md#738-flstst_gettestresultbgnd) | 服务 ID 0x07。 |
+| [**FlsTst_GetTestResultFgnd**](../memory/flstst/index.md#739-flstst_gettestresultfgnd) | 服务 ID 0x0f。 |
+| [**FlsTst_GetTestSignatureBgnd**](../memory/flstst/index.md#7311-flstst_gettestsignaturebgnd) | 服务 ID 0x09。 |
+| [**FlsTst_GetTestSignatureFgnd**](../memory/flstst/index.md#7312-flstst_gettestsignaturefgnd) | 服务 ID 0x0a。 |
+| [**FlsTst_GetVersionInfo**](../memory/flstst/index.md#7310-flstst_getversioninfo) | 服务 ID 0x08。 |
+| [**FlsTst_Init**](../memory/flstst/index.md#731-flstst_init) | 服务 ID 0x00。 |
+| [**FlsTst_MainFunction**](../memory/flstst/index.md#751-flstst_mainfunction) | 服务 ID 0x0d。 |
+| [**FlsTst_Resume**](../memory/flstst/index.md#736-flstst_resume) | 服务 ID 0x05。 |
+| [**FlsTst_StartFgnd**](../memory/flstst/index.md#733-flstst_startfgnd) | 服务 ID 0x02。 |
+| [**FlsTst_Suspend**](../memory/flstst/index.md#735-flstst_suspend) | 服务 ID 0x04。 |
+| [**FlsTst_TestEcc**](../memory/flstst/index.md#7314-flstst_testecc) | 服务 ID 0x0c。 |
 
 ## AUTOSAR FLS（闪存驱动程序）（14）
 
@@ -1782,6 +1839,21 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**Mcu_PerformReset**](../mcal/mcu_driver/index.md#738-mcu_performreset) | 此服务执行微控制器复位。 |
 | [**Mcu_SetMode**](../mcal/mcu_driver/index.md#739-mcu_setmode) | 此服务激活MCU电源模式。 |
 
+## AUTOSAR MemIf（内存抽象接口）（8）
+
+来源：[AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface
+
+| 函数 | 简述 |
+|---|---|
+| [**MemIf_Cancel**](../memory/memory_abstraction_interface/index.md#733-memif_cancel) | 服务 ID 0x04。 |
+| [**MemIf_EraseImmediateBlock**](../memory/memory_abstraction_interface/index.md#738-memif_eraseimmediateblock) | 服务 ID 0x09。 |
+| [**MemIf_GetJobResult**](../memory/memory_abstraction_interface/index.md#735-memif_getjobresult) | 服务 ID 0x06。 |
+| [**MemIf_GetStatus**](../memory/memory_abstraction_interface/index.md#734-memif_getstatus) | 服务 ID 0x05。 |
+| [**MemIf_GetVersionInfo**](../memory/memory_abstraction_interface/index.md#737-memif_getversioninfo) | 服务 ID 0x08。 |
+| [**MemIf_InvalidateBlock**](../memory/memory_abstraction_interface/index.md#736-memif_invalidateblock) | 服务 ID 0x07。 |
+| [**MemIf_Read**](../memory/memory_abstraction_interface/index.md#731-memif_read) | 服务 ID 0x02。 |
+| [**MemIf_Write**](../memory/memory_abstraction_interface/index.md#732-memif_write) | 服务 ID 0x03。 |
+
 ## AUTOSAR Memory Access（存储访问）（20）
 
 来源：[AUTOSAR Memory Access（存储访问）](../memory/memory_access/index.md) · SWS_MemoryAccess
@@ -1808,6 +1880,26 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**MemAcc_ReleaseLock**](../memory/memory_access/index.md#7329-memacc_releaselock) | 释放所提供地址区的访问锁。 |
 | [**MemAcc_RequestLock**](../memory/memory_access/index.md#7328-memacc_requestlock) | 请求锁定一个地址区以进行独占访问。 |
 | [**MemAcc_Write**](../memory/memory_access/index.md#7323-memacc_write) | 触发一个写作业，将所传递的数据以给定的地址和长度存储到所提供的地址区中。 |
+
+## AUTOSAR Mem（内存驱动程序）（13）
+
+来源：[AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver
+
+| 函数 | 简述 |
+|---|---|
+| [**Mem_BlankCheck**](../memory/memory_driver/index.md#7324-mem_blankcheck) | 服务 ID 0x9。 |
+| [**Mem_DeInit**](../memory/memory_driver/index.md#7312-mem_deinit) | 服务 ID 0x0b。 |
+| [**Mem_Erase**](../memory/memory_driver/index.md#7323-mem_erase) | 服务 ID 0x07。 |
+| [**Mem_GetJobResult**](../memory/memory_driver/index.md#7314-mem_getjobresult) | 服务 ID 0x04。 |
+| [**Mem_GetVersionInfo**](../memory/memory_driver/index.md#7313-mem_getversioninfo) | 服务 ID 0x02。 |
+| [**Mem_HwSpecificService**](../memory/memory_driver/index.md#7325-mem_hwspecificservice) | 服务 ID 0x0a。 |
+| [**Mem_Init**](../memory/memory_driver/index.md#7311-mem_init) | 服务 ID 0x01。 |
+| [**Mem_MainFunction**](../memory/memory_driver/index.md#751-mem_mainfunction) | 服务 ID 0x03。 |
+| [**Mem_PropagateError**](../memory/memory_driver/index.md#7317-mem_propagateerror) | 服务 ID 0x08。 |
+| [**Mem_Read**](../memory/memory_driver/index.md#7321-mem_read) | 服务 ID 0x05。 |
+| [**Mem_Resume**](../memory/memory_driver/index.md#7316-mem_resume) | 服务 ID 0x0d。 |
+| [**Mem_Suspend**](../memory/memory_driver/index.md#7315-mem_suspend) | 服务 ID 0x0c。 |
+| [**Mem_Write**](../memory/memory_driver/index.md#7322-mem_write) | 服务 ID 0x06。 |
 
 ## AUTOSAR Nm（网络管理接口）（1）
 
@@ -1975,6 +2067,33 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**Pwm_SetOutputToIdle**](../io/pwm_driver/index.md#735-pwm_setoutputtoidle) | 将PWM输出设置为配置的空闲状态的服务。 |
 | [**Pwm_SetPeriodAndDuty**](../io/pwm_driver/index.md#734-pwm_setperiodandduty) | 设置PWM通道周期和占空比的服务。 |
 | [**Pwm_SetPowerState**](../io/pwm_driver/index.md#739-pwm_setpowerstate) | 此API配置Pwm模块，使其进入已准备的电源状态（从预定义的一组已配置电源状态中选择）。 |
+
+## AUTOSAR RamTst（RAM测试）（20）
+
+来源：[AUTOSAR RamTst（RAM测试）](../memory/ramtst/index.md) · SWS_RAMTest
+
+| 函数 | 简述 |
+|---|---|
+| [**RamTst_Allow**](../memory/ramtst/index.md#734-ramtst_allow) | 服务 ID 0x03。 |
+| [**RamTst_ChangeNumberOfTestedCells**](../memory/ramtst/index.md#7315-ramtst_changenumberoftestedcells) | 服务 ID 0x08。 |
+| [**RamTst_DeInit**](../memory/ramtst/index.md#732-ramtst_deinit) | 服务 ID 0x0c。 |
+| [**RamTst_ErrorNotification**](../memory/ramtst/index.md#7632-ramtst_errornotification) | — |
+| [**RamTst_GetAlgParams**](../memory/ramtst/index.md#7311-ramtst_getalgparams) | 服务 ID 0x12。 |
+| [**RamTst_GetExecutionStatus**](../memory/ramtst/index.md#737-ramtst_getexecutionstatus) | 服务 ID 0x04。 |
+| [**RamTst_GetNumberOfTestedCells**](../memory/ramtst/index.md#7313-ramtst_getnumberoftestedcells) | 服务 ID 0x09。 |
+| [**RamTst_GetTestAlgorithm**](../memory/ramtst/index.md#7312-ramtst_gettestalgorithm) | 服务 ID 0x07。 |
+| [**RamTst_GetTestResult**](../memory/ramtst/index.md#738-ramtst_gettestresult) | 服务 ID 0x05。 |
+| [**RamTst_GetTestResultPerBlock**](../memory/ramtst/index.md#739-ramtst_gettestresultperblock) | 服务 ID 0x06。 |
+| [**RamTst_GetVersionInfo**](../memory/ramtst/index.md#7310-ramtst_getversioninfo) | 服务 ID 0x0a。 |
+| [**RamTst_Init**](../memory/ramtst/index.md#731-ramtst_init) | 服务 ID 0x00。 |
+| [**RamTst_MainFunction**](../memory/ramtst/index.md#751-ramtst_mainfunction) | 服务 ID 0x01。 |
+| [**RamTst_Resume**](../memory/ramtst/index.md#736-ramtst_resume) | 服务 ID 0x0e。 |
+| [**RamTst_RunFullTest**](../memory/ramtst/index.md#7316-ramtst_runfulltest) | 服务 ID 0x10。 |
+| [**RamTst_RunPartialTest**](../memory/ramtst/index.md#7317-ramtst_runpartialtest) | 服务 ID 0x11。 |
+| [**RamTst_SelectAlgParams**](../memory/ramtst/index.md#7314-ramtst_selectalgparams) | 服务 ID 0x0b。 |
+| [**RamTst_Stop**](../memory/ramtst/index.md#733-ramtst_stop) | 服务 ID 0x02。 |
+| [**RamTst_Suspend**](../memory/ramtst/index.md#735-ramtst_suspend) | 服务 ID 0x0d。 |
+| [**RamTst_TestCompletedNotification**](../memory/ramtst/index.md#7631-ramtst_testcompletednotification) | — |
 
 ## AUTOSAR RTE（运行时环境）（64）
 
