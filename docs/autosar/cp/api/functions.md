@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **1978** 个条目。
+共 **1991** 个条目。
 
 ## A
 
@@ -4412,6 +4412,45 @@ title: "AUTOSAR API 函数清单"
 
 **[MeasurementNotification](../globaltime/stbm/index.md#7745-measurementnotification)**
 > 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](../globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
+
+**[Mem_BlankCheck](../memory/memory_driver/index.md#7324-mem_blankcheck)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_DeInit](../memory/memory_driver/index.md#7312-mem_deinit)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_Erase](../memory/memory_driver/index.md#7323-mem_erase)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_GetJobResult](../memory/memory_driver/index.md#7314-mem_getjobresult)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_GetVersionInfo](../memory/memory_driver/index.md#7313-mem_getversioninfo)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_HwSpecificService](../memory/memory_driver/index.md#7325-mem_hwspecificservice)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_Init](../memory/memory_driver/index.md#7311-mem_init)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_MainFunction](../memory/memory_driver/index.md#751-mem_mainfunction)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_PropagateError](../memory/memory_driver/index.md#7317-mem_propagateerror)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_Read](../memory/memory_driver/index.md#7321-mem_read)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_Resume](../memory/memory_driver/index.md#7316-mem_resume)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_Suspend](../memory/memory_driver/index.md#7315-mem_suspend)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_Write](../memory/memory_driver/index.md#7322-mem_write)**
+> 函数 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
 
 **[MemAcc_ActivateMem](../memory/memory_access/index.md#7319-memacc_activatemem)**
 > 函数 · [AUTOSAR Memory Access（存储访问）](../memory/memory_access/index.md) · SWS_MemoryAccess · R23-11

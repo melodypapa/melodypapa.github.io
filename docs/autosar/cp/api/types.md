@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **514** 个条目。
+共 **520** 个条目。
 
 ## A
 
@@ -968,6 +968,24 @@ title: "AUTOSAR API 类型清单"
 
 **[Mcu_ResetType](../mcal/mcu_driver/index.md#724-mcu_resettype)**
 > 类型 · [AUTOSAR MCU Driver（微控制器单元驱动）](../mcal/mcu_driver/index.md) · SWS_MCUDriver · R23-11
+
+**[Mem_AddressType](../memory/memory_driver/index.md#721-mem_addresstype)**
+> 类型 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_ConfigType](../memory/memory_driver/index.md#722-mem_configtype)**
+> 类型 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_DataType](../memory/memory_driver/index.md#723-mem_datatype)**
+> 类型 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_HwServiceIdType](../memory/memory_driver/index.md#726-mem_hwserviceidtype)**
+> 类型 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_InstanceIdType](../memory/memory_driver/index.md#724-mem_instanceidtype)**
+> 类型 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
+
+**[Mem_LengthType](../memory/memory_driver/index.md#725-mem_lengthtype)**
+> 类型 · [AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver · R23-11
 
 **[MemAcc_AddressAreaIdType](../memory/memory_access/index.md#721-memacc_addressareaidtype)**
 > 类型 · [AUTOSAR Memory Access（存储访问）](../memory/memory_access/index.md) · SWS_MemoryAccess · R23-11

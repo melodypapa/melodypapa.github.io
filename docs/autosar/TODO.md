@@ -195,7 +195,7 @@
 - ✅ [AUTOSAR Memory Mapping（AUTOSAR 内存映射）](cp/memory/memory_mapping/) — SWS_MemoryMapping · R23-11 (2026-10-28 full Type A sync: §1 简介和功能概述 + 5 用例, §2 缩略语 (4 terms), §3 相关文档 (13 inputs), §4 约束和假设, §5 对其他模块的依赖, §6 功能规格 (16 source tables 7.1–7.16), §7 API规范 (不适用), §8 时序图 (不适用), §9 配置规范 (7 containers), §10 分析 (3 tables 11.1–11.3), §11 引用的元类 (26 meta classes), appendix B; 14 figures; source requirement tracing and Not applicable requirements omitted per STANDARD.md)
 - 📖 [NV 数据处理指南](cp/memory/nv_data_handling_guideline/) — EXP_NVDataHandling (exempt)
 
-❌ Missing (3): SWS_MemoryDriver, SWS_FlashTest (FlsTst), SWS_RAMTest (RamTst)
+❌ Missing (2): SWS_FlashTest (FlsTst), SWS_RAMTest (RamTst)
 
 ## mode_management
 

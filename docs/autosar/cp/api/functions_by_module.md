@@ -1859,6 +1859,26 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**MemAcc_RequestLock**](../memory/memory_access/index.md#7328-memacc_requestlock) | 请求锁定一个地址区以进行独占访问。 |
 | [**MemAcc_Write**](../memory/memory_access/index.md#7323-memacc_write) | 触发一个写作业，将所传递的数据以给定的地址和长度存储到所提供的地址区中。 |
 
+## AUTOSAR Mem（内存驱动程序）（13）
+
+来源：[AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver
+
+| 函数 | 简述 |
+|---|---|
+| [**Mem_BlankCheck**](../memory/memory_driver/index.md#7324-mem_blankcheck) | 服务 ID 0x9。 |
+| [**Mem_DeInit**](../memory/memory_driver/index.md#7312-mem_deinit) | 服务 ID 0x0b。 |
+| [**Mem_Erase**](../memory/memory_driver/index.md#7323-mem_erase) | 服务 ID 0x07。 |
+| [**Mem_GetJobResult**](../memory/memory_driver/index.md#7314-mem_getjobresult) | 服务 ID 0x04。 |
+| [**Mem_GetVersionInfo**](../memory/memory_driver/index.md#7313-mem_getversioninfo) | 服务 ID 0x02。 |
+| [**Mem_HwSpecificService**](../memory/memory_driver/index.md#7325-mem_hwspecificservice) | 服务 ID 0x0a。 |
+| [**Mem_Init**](../memory/memory_driver/index.md#7311-mem_init) | 服务 ID 0x01。 |
+| [**Mem_MainFunction**](../memory/memory_driver/index.md#751-mem_mainfunction) | 服务 ID 0x03。 |
+| [**Mem_PropagateError**](../memory/memory_driver/index.md#7317-mem_propagateerror) | 服务 ID 0x08。 |
+| [**Mem_Read**](../memory/memory_driver/index.md#7321-mem_read) | 服务 ID 0x05。 |
+| [**Mem_Resume**](../memory/memory_driver/index.md#7316-mem_resume) | 服务 ID 0x0d。 |
+| [**Mem_Suspend**](../memory/memory_driver/index.md#7315-mem_suspend) | 服务 ID 0x0c。 |
+| [**Mem_Write**](../memory/memory_driver/index.md#7322-mem_write) | 服务 ID 0x06。 |
+
 ## AUTOSAR Nm（网络管理接口）（1）
 
 来源：[AUTOSAR Nm（网络管理接口）](../communication/nm/index.md) · SWS_NetworkManagementInterface

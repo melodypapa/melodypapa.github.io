@@ -18,6 +18,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interfaces of Occupant and Pedestrian Safety Systems Domain（乘员与行人安全系统域应用接口说明）](cp/application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety）
 {: .glossary-source}
 
+**ABI**
+> 应用二进制接口（**Application Binary Interface**）。
+>
+> 来源：[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）
+{: .glossary-source}
+
 **ABS**
 > 防抱死制动系统（**Antilock Braking System**）
 >
@@ -141,7 +147,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Address Area**
 > 地址区（**Address Area**）是指逻辑地址空间中连续的存储区域。通常，多个物理存储扇区组合成一个逻辑地址区。
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）、[AUTOSAR MemIf（内存抽象接口）](cp/memory/memory_abstraction_interface/index.md)（AUTOSAR_CP_SWS_MemoryAbstractionInterface）
+> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）、[AUTOSAR Ea（EEPROM抽象）](cp/memory/ea/index.md)（AUTOSAR_CP_SWS_EEPROMAbstraction）、[AUTOSAR MemIf（内存抽象接口）](cp/memory/memory_abstraction_interface/index.md)（AUTOSAR_CP_SWS_MemoryAbstractionInterface）、[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）
 {: .glossary-source}
 
 **AddressAndLengthFormat Identifier**
@@ -413,7 +419,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Bank**
 > 存储 **Bank** 是一组扇区批次（**Sector Batch**）的集合。如果存储技术支持按扇区分段，则存储 **Bank** 是不允许边读边写操作的扇区批次组实例。对于闪存设备，**Bank** 通常映射到单独的闪存控制器。
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
+> 来源：[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）、[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
 {: .glossary-source}
 
 **BAS**
@@ -461,7 +467,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **BndM**
 > 大容量非易失性数据管理器（**Bulk Non-Volatile Data Manager**）
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
+> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）
 {: .glossary-source}
 
 **BRWS**
@@ -1553,7 +1559,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ECC**
 > 纠错码（**Error Correction Code**）
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）
 {: .glossary-source}
 
 **ECU**
@@ -2042,7 +2048,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **FOTA**
 > 固件远程升级（**Firmware Over The Air**），通过无线通信进行固件远程更新。
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[Explanation of Firmware Over-The-Air（固件远程升级说明）](cp/memory/firmware_over_the_air/index.md)（AUTOSAR_CP_EXP_FirmwareOverTheAir）
+> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[Explanation of Firmware Over-The-Air（固件远程升级说明）](cp/memory/firmware_over_the_air/index.md)（AUTOSAR_CP_EXP_FirmwareOverTheAir）、[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）
 {: .glossary-source}
 
 **FR**
@@ -2376,7 +2382,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **HSM**
 > 硬件安全模块（**Hardware Security Module**），专用安全 **MCU** 的内核。
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[AUTOSAR Crypto Driver（加密驱动程序）](cp/crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](cp/crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR Crypto Service Manager（加密服务管理器）](cp/crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
+> 来源：[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）、[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[AUTOSAR Crypto Driver（加密驱动程序）](cp/crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](cp/crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR Crypto Service Manager（加密服务管理器）](cp/crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
 **HTM**
@@ -2740,7 +2746,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Job Request**
 > 作业请求（**Job Request**）是指上层模块对地址区的存储访问请求。
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
+> 来源：[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）、[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
 {: .glossary-source}
 
 ## K
@@ -3106,7 +3112,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Memory Device**
 > 存储设备（**Memory Device**）是指一组存储 **Bank** 的组合。
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
+> 来源：[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）、[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
 {: .glossary-source}
 
 **Message**
@@ -3848,7 +3854,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **OTA**
 > 远程升级（**Over The Air**），OEM 后台（**backend**）与车辆之间无线通信的总称。
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
+> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）
 {: .glossary-source}
 
 **Outer Priority Inversion**
@@ -3892,7 +3898,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Page Burst**
 > 通过聚合访问存储页面来提高性能。在存储设备技术支持物理分段的情况下，一些存储设备可以提供一次读取或写入多个页面的优化访问方式。页面突发（**Page Burst**）表示用于访问优化的存储页面聚合。
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
+> 来源：[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）、[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
 {: .glossary-source}
 
 **Parameter**
@@ -4446,7 +4452,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **RWW**
 > 并行读写（**Read While Write**）。指存储设备在一个存储 **Bank** 中执行读取操作，同时在另一个存储 **Bank** 中执行写入或擦除操作的能力。
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
+> 来源：[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）、[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
 {: .glossary-source}
 
 **RX**
@@ -4574,19 +4580,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Sector**
 > 扇区（**Sector**）是指最小的可擦除存储单元（以字节为单位）。某些存储设备技术在写入存储前需要显式执行物理擦除操作。扇区定义了此类擦除单元的最小大小。根据存储设备的不同，扇区可以为统一大小或可变大小。
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
+> 来源：[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）、[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
 {: .glossary-source}
 
 **Sector Batch**
 > 扇区批次（**Sector Batch**）是大小统一的扇区集合，即大小相同且连续的扇区的逻辑集合。
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
+> 来源：[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）、[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
 {: .glossary-source}
 
 **Sector Burst**
 > 扇区突发（**Sector Burst**）是聚合扇区以提高擦除性能。如果存储技术需要物理擦除操作，一些设备会通过一步擦除一组扇区来优化擦除性能。
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
+> 来源：[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）、[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
 {: .glossary-source}
 
 **Secured I-PDU**（受保护的 I-PDU）
@@ -4806,9 +4812,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **SOTA**
-> 软件远程升级（**Software Over The Air**），使用无线通信进行软件远程更新。
+> 软件远程升级（**Software Over The Air**）——使用无线通信进行的远程软件更新。
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
+> 来源：[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）、[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
 {: .glossary-source}
 
 **SP**
@@ -4982,7 +4988,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Sub Address Area**
 > 子地址区（**Sub Address Area**）是指逻辑地址空间中的连续存储区域，并映射到一个存储设备的一个扇区批次（**Sector Batch**）。
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
+> 来源：[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）、[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
 {: .glossary-source}
 
 **Supervised Entity**
@@ -5644,7 +5650,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Write Page**
 > 写入页面（**Write Page**）是指存储设备的最小可写单元（以字节为单位）。某些存储设备技术的访问必须考虑物理分段，因此并非所有存储设备技术都支持按字节访问。该术语定义了单次访问所需写入的最小大小。
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
+> 来源：[AUTOSAR Mem（内存驱动程序）](cp/memory/memory_driver/index.md)（AUTOSAR_CP_SWS_MemoryDriver）、[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
 {: .glossary-source}
 
 **WSID**
