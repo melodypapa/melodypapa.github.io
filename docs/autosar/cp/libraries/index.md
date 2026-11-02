@@ -7,6 +7,7 @@ AUTOSAR 库是一组为相关目的而提供的函数集合（如 CRC 计算、E
 ## 文章
 
 - [Macro Encapsulation of Interpolation Calls（插值调用宏封装）](macro_encapsulation_of_interpolation_calls/index.md)
+- [Specification of CRC Routines（CRC 例程规范）](crc/index.md)
 
 ## 相关内容
 

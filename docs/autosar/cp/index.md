@@ -184,6 +184,7 @@ title: "CP AUTOSAR"
 
 * [库（Libraries）](libraries/index.md)
   * [Macro Encapsulation of Interpolation Calls（插值调用宏封装）](libraries/macro_encapsulation_of_interpolation_calls/index.md)
+  * [Specification of CRC Routines（CRC 例程规范）](libraries/crc/index.md)
 
 ### 模板
 

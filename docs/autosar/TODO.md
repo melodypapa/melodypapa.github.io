@@ -179,6 +179,10 @@
 - ✅ [ICU 驱动](cp/io/icu_driver/) — SWS_ICUDriver (2026-10-24 realigned to R23-11: 4.2 「汽车域的适用性」, 3.2/3.3 renamed to the site pattern; ## 8. 时序图 kept per the lifted ban; ## 9. 配置规范 translated (28 params); front-matter release R22-11 → R23-11 + glossary regenerated)
 - ✅ [I/O 硬件抽象](cp/io/iohwab/) — SWS_IOHardwareAbstraction (2026-10-27 full Type A realignment from R23-11: new §4 约束和假设, §3.2 相关标准和规范, §5.5 文件结构, §6.6 错误分类, §6.7 其他需求, §7.1 导入的类型, §7.2 类型定义, §7.5 调度函数, §7.8 期望接口, §9 配置规范; API chapter regrouped to source ch.8 (7.3–7.7) with every missing requirement paragraph translated; §2 rows restored 17/11/5 + 2.2 reordered; 功能规格 restructured 背景与原理/需求 with source nesting restored; sourceless 5.7 电源模式 dissolved into §8.2 per source ch.9; Figure5_1_1 table-as-image → GFM; 33 ch.2 terms to glossary)
 
+## libraries
+
+- ✅ [Specification of CRC Routines（CRC 例程规范）](cp/libraries/crc/index.md) — SWS_CRCLibrary (2026-11-03 full Type A translation from R23-11: new article; source ch.6 Requirements Tracing + appendix A dropped per mandate; source 7.5 Debugging concept「None」omitted per the placeholder rule (§7.6→§6.5 renumbered); ch.9 → `## 8. 时序图` (7 figures); ch.10 → `## 9. 配置规范` (module + 1 container + 7 enum params + published info); API chapter keeps all source groups 8.1–8.7 → 7.1–7.7, literal「None.」groups rendered as one-sentence statements (batch decision, user to confirm); formulas of §6.1 reconstructed from the R22-11 PDF; check_api_sync N/A — source 8.3.x leaf headings are prose ("8-bit SAE J1850 CRC Calculation"), translated to Chinese by design; 8 function entries verified manually in order; appendix B IDs in fences; glossary +ALU, CRC 来源 line extended)
+
 ## mcal
 
 - ✅ [MCU 驱动](cp/mcal/mcu_driver/) — SWS_MCUDriver (2026-10-26 full Type A translation from R23-11: new article + new MCAL section landing page + nav; ch.6 traceability dropped per mandate; ch.9 → `## 8. 时序图` (4 figures), ch.10 → `## 9. 配置规范` (10 containers, SWS 条目 cells filled with [ECUC_Mcu_*] per EcuM style); first inline cross-article prose links — Dem/Port)
@@ -313,7 +317,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 ## Missing sections (no articles at all)
 
-- **Libraries (9)**: SWS_CRCLibrary (Crc), SWS_E2ELibrary (E2E), SWS_BFXLibrary (Bfx), SWS_BSWMulticoreLibrary (Bmc), SWS_MFLLibrary (Mfl), SWS_MFXLibrary (Mfx), SWS_IFLLibrary (Ifl), SWS_IFXLibrary (Ifx), SWS_EFXLibrary (Efx)
+- **Libraries (8)**: SWS_E2ELibrary (E2E), SWS_BFXLibrary (Bfx), SWS_BSWMulticoreLibrary (Bmc), SWS_MFLLibrary (Mfl), SWS_MFXLibrary (Mfx), SWS_IFLLibrary (Ifl), SWS_IFXLibrary (Ifx), SWS_EFXLibrary (Efx)
 - **RTE / SWArch (2)**: SWS_RTE, SWS_ARTI
 - ~~**Safety (2)**: SWS_WatchdogInterface (WdgIf), SWS_WatchdogDriver (Wdg)~~ — both translated 2026-10-27
 - **Security (2)**: SWS_Firewall, SWS_IntrusionDetectionSystemManager (IdsM)
