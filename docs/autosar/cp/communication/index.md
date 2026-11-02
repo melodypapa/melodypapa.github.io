@@ -26,6 +26,7 @@ title: "通信（Communication）"
 * [AUTOSAR LIN Driver](lin_driver/index.md)
 * [AUTOSAR LinIf (LIN Interface)](lin_interface/index.md)
 * [AUTOSAR LinSM（LIN 状态管理器）](linsm/index.md)
+* [AUTOSAR LinTrcv（LIN 收发器驱动程序）](lintrcv/index.md)
 
 ### 以太网
 

@@ -192,13 +192,17 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 ↔ §1–§9 1:1 + B; ch.6 tracing dropped (compliance); UML figure chrome in ch.4.2/ch.5 lead dropped)
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
 - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-4)
-- [ ] lintrcv (SWS_LINTransceiverDriver · R23-11 markdown · ❌ new article, short name LinTrcv)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-- [ ] Step 6 — TODO.md row + commit/PR
+- [x] lintrcv (SWS_LINTransceiverDriver · R23-11 markdown · ❌ new article, short name LinTrcv)
+  - Note: article `cp/communication/lintrcv/` (directory per row name, nav label "LinTrcv"). Shape: ch.1 → §1 (1.1 goal, 1.2 explicitly uncovered functionality) · ch.2 → §2 22 acronyms (term lines == source rows incl. n/a, SPI Channel/Job/Sequence) · 3.1 5-entry registry + 3.2 · ch.5 → §5 dependency TABLE (7 modules, source has no 5.1/5.2 relation chapters) + 5.1 文件结构 (5.1.1 naming convention, 5.1.2/5.1.3) · ch.7 → §6 (6.1 operation modes + Figure7_1 + 6-row state table + hint, 6.2 hardware modes, 6.3 wakeup types 4 scenarios, 6.4 wakeup modes incl. ICU enable/disable + rationale, 6.5 error classification (dev 表6.1 6 rows + runtime/transient/production/extended none), 6.6 init preconditions, 6.7 instance concept, 6.8 wait states incl. Tm_BusyWait1us16bit) · ch.8 → §7 (7.1 14 imported; 7.2 4 types incl. 7-value TrcvWakeupReasonType page-split table merged; 7.3 7 functions — 8.3.6 CheckWakeup carries the source's own "Definition of callback function" heading text but sits under 函数定义 per source structure; 7.4/7.5 none-sentences; 7.6 期望接口 1 强制 + 16 可选 + 7.6.3 one-sentence; error-code links hand-applied to §6.5.1) · ch.9 → §8 one-sentence pointer to EcuM ch.9 · ch.10 → §9 (10.1+10.2 intro folded; 9.1.1 变体; 9.1.2 LinTrcv + Figure10_1; 9.1.3 LinTrcvGeneral 7 params; 9.1.4 LinTrcvChannel 5 params + [00176]/[00178]/[00177] prose + Figure10_2; 9.1.5 LinTrcvAccess choice container + Figure10_3 + choices table; 9.1.6 LinTrcvDioAccess + Figure10_4; 9.1.7 LinTrcvDioChannelAccess 2 params; 9.1.8 LinTrcvSpiSequence 1 param; 9.2 发布信息) · ch.6 tracing + appendix A (NA_00999 list) dropped (droppable set); NO ## B chapter — source has no change-history annex
+  - Note: source quirks kept verbatim and reported: 6.5.1 opens with "There are no development errors." immediately followed by the 6-row dev-error table (source contradiction); 8.3.2 Description cell truncated mid-word ("parameter Op") — kept with 源文截断 marker; 10.2.1 变体 body repeats the 10.2 intro sentence; 10.2 intro self-refs 10.1/10.2/10.3 renumbered to the article's own 9.1-fold layout (eth_trcv precedent)
+  - Note: Phase A — strict build exit 0 / 0 WARNING; check_heading_lang OK; check_indexes OK; hygiene 0; acronym 22 term lines = source 22 rows; check_api_sync OK (4 types/7 functions/7 说明); gen_api_list regenerated (LinTrcv 4 types + 7 functions, --check 0); census --apply: 4 lines (1 chapter-ref + 4 citation links incl. the comma-form [1, AUTOSAR glossary]) + 5 registry anchors, idempotent re-run 0 lines
+  - Note: glossary +10 new terms (Channel, Det, Dio, Frt, Gpt, LinTrcv, n/a, SPI Channel/Job/Sequence as 来源 appends — the last three existed already and gained the LinTrcv 来源 via rewrite merge) + 12 来源 appends (API/ComM/EcuM/ECU/ICU/ISR/MCAL/PDU/SBC/SPAL/SW/SPI)
+  - [x] Step 1 — Source resolution + gap analysis (1389-line R23-11 markdown; 5 content figures via caption-anchored mapper; unmapped artifacts all ≤345px chrome)
+  - [x] Step 2 — In-place translation/completion (full Type A build, main session)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 ↔ §1–§9 1:1; ch.6 tracing + appendix A dropped (compliance))
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+- [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-4)
 - [ ] ttcan_driver (SWS_TTCANDriver · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

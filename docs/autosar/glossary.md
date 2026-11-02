@@ -243,7 +243,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **API**
 > 应用编程接口（**Application Programming Interface**）
 >
-> 来源：[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Standard Types（标准类型）](cp/general/standard_types/index.md)（SWS_StandardTypes）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
+> 来源：[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Standard Types（标准类型）](cp/general/standard_types/index.md)（SWS_StandardTypes）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
 {: .glossary-source}
 
 **APID**
@@ -778,6 +778,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR PduR (PDU Router)](cp/communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）、[AUTOSAR LinIf (LIN Interface)](cp/communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
 {: .glossary-source}
 
+**Channel**
+> 通道：按相同准则定义的数据的软件交换媒介。
+>
+> 来源：[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
+{: .glossary-source}
+
 **channel**
 > NM节点/ECU所连接到的逻辑总线。
 >
@@ -883,7 +889,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ComM**
 > Communication Manager
 >
-> 来源：[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR Communication Manager（通信管理器）](cp/system_services/comm/index.md)（SWS_COMManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
+> 来源：[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR Communication Manager（通信管理器）](cp/system_services/comm/index.md)（SWS_COMManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
 {: .glossary-source}
 
 **Communication Channel**
@@ -1266,6 +1272,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](cp/mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR Crypto Driver（加密驱动程序）](cp/crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](cp/crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Default Error Tracer（默认错误跟踪器）](cp/system_services/default_error_tracer/index.md)（SWS_DefaultErrorTracer）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](cp/communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](cp/communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR Crypto Service Manager（加密服务管理器）](cp/crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
 {: .glossary-source}
 
+**Det**
+> 默认错误追踪器（**Default Error Tracer**）。
+>
+> 来源：[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
+{: .glossary-source}
+
 **DHCP**
 > Diagnostic Host Configuration Protocol —— 诊断主机配置协议。
 >
@@ -1306,6 +1318,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > Digital Input Output (SPAL module)
 >
 > 来源：[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
+{: .glossary-source}
+
+**Dio**
+> 数字输入输出，**SPAL** 软件模块之一（**Digital input output**）。
+>
+> 来源：[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
 {: .glossary-source}
 
 **DIP**
@@ -1541,7 +1559,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ECU**
 > 电子控制单元（**Electronic Control Unit**）
 >
-> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
+> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
 {: .glossary-source}
 
 **ECU ID**
@@ -1577,7 +1595,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **EcuM**
 > **ECU** 状态管理器（**ECU State Manager**）
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
 {: .glossary-source}
 
 **EDP**
@@ -2063,6 +2081,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](cp/communication/xcp/index.md)（SWS_XCP）、[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](cp/communication/flexray_driver/index.md)（SWS_FlexRayDriver）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](cp/communication/flexray_iso_transport_layer/index.md)（SWS_FlexRayISOTransportLayer）
 {: .glossary-source}
 
+**Frt**
+> 自由运行定时器（**Free Running Timer**）。
+>
+> 来源：[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
+{: .glossary-source}
+
 **FrTp**
 > AUTOSAR 模块：FlexRay 传输协议（**FlexRay Transport Protocol**）。
 >
@@ -2243,6 +2267,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 通用定时器（**General Purpose Timer**）
 >
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）
+{: .glossary-source}
+
+**Gpt**
+> 通用定时器（**General purpose Timer**）。
+>
+> 来源：[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
 {: .glossary-source}
 
 **GPT Predef Timer**
@@ -2444,7 +2474,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ICU**
 > 输入捕获单元（**Input Capture Unit**）
 >
-> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）
+> 来源：[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
 {: .glossary-source}
 
 **ICV**
@@ -2666,7 +2696,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ISR**
 > 中断服务程序（**Interrupt Service Routine**）
 >
-> 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](cp/memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping）、[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](cp/communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver）、[AUTOSAR CAN Driver（CAN驱动程序）](cp/communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
+> 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](cp/memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping）、[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](cp/communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver）、[AUTOSAR CAN Driver（CAN驱动程序）](cp/communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
 {: .glossary-source}
 
 **IUMPR**
@@ -2843,6 +2873,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
 {: .glossary-source}
 
+**LinTrcv**
+> LIN 收发器驱动程序（**LIN Transceiver Driver**）。
+>
+> 来源：[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
+{: .glossary-source}
+
 **LKA**
 > 车道保持辅助（**Lane Keep Assist**）。
 >
@@ -3004,7 +3040,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **MCAL**
 > 微机抽象层（**Microcomputer Abstraction Layer**）
 >
-> 来源：[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR BSW General（基础软件模块通用规范）](cp/general/bsw_general/index.md)（SWS_BSWGeneral）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR CAN Driver（CAN驱动程序）](cp/communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
+> 来源：[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR BSW General（基础软件模块通用规范）](cp/general/bsw_general/index.md)（SWS_BSWGeneral）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR CAN Driver（CAN驱动程序）](cp/communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
 {: .glossary-source}
 
 **MCD**
@@ -3295,6 +3331,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 网络层 **PDU**（**Network Layer PDU**）。在 **AUTOSAR** 中，网络层等价于传输协议。
 >
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR PduR (PDU Router)](cp/communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
+{: .glossary-source}
+
+**n/a**
+> 不适用（**Not applicable**）。
+>
+> 来源：[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
 {: .glossary-source}
 
 **N_AE**
@@ -3880,7 +3922,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **PDU**
 > 协议数据单元（**Protocol Data Unit**）
 >
-> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[Layered Software Architecture（分层软件架构）](cp/general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[VFB（虚拟功能总线）](cp/general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](cp/communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR PduR (PDU Router)](cp/communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](cp/diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
+> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[Layered Software Architecture（分层软件架构）](cp/general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[VFB（虚拟功能总线）](cp/general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](cp/communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR PduR (PDU Router)](cp/communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](cp/diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
 {: .glossary-source}
 
 **PDU Router**
@@ -4418,7 +4460,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SBC**
 > System Basis Chip 系统基础芯片。集成了例如 CAN 和/或 LIN 收发器、看门狗和电源控制。
 >
-> 来源：[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
+> 来源：[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
 {: .glossary-source}
 
 **SBR**
@@ -4724,7 +4766,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SPAL**
 > 标准外围抽象层（**Standard Peripheral Abstraction Layer**）。
 >
-> 来源：[AUTOSAR CAN Driver（CAN驱动程序）](cp/communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
+> 来源：[AUTOSAR CAN Driver（CAN驱动程序）](cp/communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
 {: .glossary-source}
 
 **SPEM**
@@ -4736,25 +4778,25 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SPI**
 > 串行外设接口（**Serial Peripheral Interface**）
 >
-> 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）
+> 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
 {: .glossary-source}
 
 **SPI Channel**
-> 一个通道是使用相同标准定义的软件数据交换介质。请参阅SPI驱动程序规范
+> 通道是按相同准则定义的数据的软件交换媒介：配置参数、具有相同大小的数据元素的数量以及数据指针（源与目标）或位置。更多细节参见 SPI 驱动程序规范。
 >
-> 来源：[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
+> 来源：[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
 {: .glossary-source}
 
 **SPI Job**
 > 一个作业由一个或多个具有相同片选的通道组成。作业被认为是原子的，因此不能被中断。 作业也具有指定的优先级。 有关详细信息，请参阅SPI驱动程序规范。
 >
-> 来源：[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
+> 来源：[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
 {: .glossary-source}
 
 **SPI Sequence**
 > 一个序列是要传输的多个连续作业。 序列取决于静态配置。 有关详细信息，请参阅 SPI 驱动程序规范。
 >
-> 来源：[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
+> 来源：[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
 {: .glossary-source}
 
 **SPN**
@@ -4934,7 +4976,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SW**
 > 软件（**Software**）
 >
-> 来源：[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Crypto Driver（加密驱动程序）](cp/crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](cp/crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Crypto Service Manager（加密服务管理器）](cp/crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
+> 来源：[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Crypto Driver（加密驱动程序）](cp/crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](cp/crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Crypto Service Manager（加密服务管理器）](cp/crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）
 {: .glossary-source}
 
 **SW-C**

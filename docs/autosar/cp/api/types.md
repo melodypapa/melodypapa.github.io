@@ -964,6 +964,18 @@ title: "AUTOSAR API 类型清单"
 **[LinTp_Mode](../communication/lin_interface/index.md#724-lintp_mode)**
 > 类型 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11
 
+**[LinTrcv_ConfigType](../communication/lintrcv/index.md#721-lintrcv_configtype)**
+> 类型 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
+
+**[LinTrcv_TrcvModeType](../communication/lintrcv/index.md#722-lintrcv_trcvmodetype)**
+> 类型 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
+
+**[LinTrcv_TrcvWakeupModeType](../communication/lintrcv/index.md#723-lintrcv_trcvwakeupmodetype)**
+> 类型 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
+
+**[LinTrcv_TrcvWakeupReasonType](../communication/lintrcv/index.md#724-lintrcv_trcvwakeupreasontype)**
+> 类型 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
+
 **[ListElemStructType](../general/communication_stack_types/index.md#7114-listelemstructtype)**
 > 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](../general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
 

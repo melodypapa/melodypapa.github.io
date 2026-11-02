@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2036** 个条目。
+共 **2043** 个条目。
 
 ## A
 
@@ -4437,6 +4437,27 @@ title: "AUTOSAR API 函数清单"
 
 **[LinTp_Transmit](../communication/lin_interface/index.md#7316-lintp_transmit)**
 > 函数 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11
+
+**[LinTrcv_CheckWakeup](../communication/lintrcv/index.md#736-lintrcv_checkwakeup)**
+> 函数 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
+
+**[LinTrcv_GetBusWuReason](../communication/lintrcv/index.md#734-lintrcv_getbuswureason)**
+> 函数 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
+
+**[LinTrcv_GetOpMode](../communication/lintrcv/index.md#733-lintrcv_getopmode)**
+> 函数 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
+
+**[LinTrcv_GetVersionInfo](../communication/lintrcv/index.md#735-lintrcv_getversioninfo)**
+> 函数 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
+
+**[LinTrcv_Init](../communication/lintrcv/index.md#731-lintrcv_init)**
+> 函数 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
+
+**[LinTrcv_SetOpMode](../communication/lintrcv/index.md#732-lintrcv_setopmode)**
+> 函数 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
+
+**[LinTrcv_SetWakeupMode](../communication/lintrcv/index.md#737-lintrcv_setwakeupmode)**
+> 函数 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
 
 **[LogTraceSessionControl](../communication/diagnostic_log_and_trace/index.md#7713-logtracesessioncontrol)**
 > 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11

@@ -1838,6 +1838,20 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**LinSM_ScheduleRequestConfirmation**](../communication/linsm/index.md#751-linsm_schedulerequestconfirmation) | — |
 | [**LinSM_WakeupConfirmation**](../communication/linsm/index.md#754-linsm_wakeupconfirmation) | — |
 
+## AUTOSAR LinTrcv（LIN 收发器驱动程序）（7）
+
+来源：[AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver
+
+| 函数 | 简述 |
+|---|---|
+| [**LinTrcv_CheckWakeup**](../communication/lintrcv/index.md#736-lintrcv_checkwakeup) | — |
+| [**LinTrcv_GetBusWuReason**](../communication/lintrcv/index.md#734-lintrcv_getbuswureason) | — |
+| [**LinTrcv_GetOpMode**](../communication/lintrcv/index.md#733-lintrcv_getopmode) | — |
+| [**LinTrcv_GetVersionInfo**](../communication/lintrcv/index.md#735-lintrcv_getversioninfo) | — |
+| [**LinTrcv_Init**](../communication/lintrcv/index.md#731-lintrcv_init) | — |
+| [**LinTrcv_SetOpMode**](../communication/lintrcv/index.md#732-lintrcv_setopmode) | — |
+| [**LinTrcv_SetWakeupMode**](../communication/lintrcv/index.md#737-lintrcv_setwakeupmode) | — |
+
 ## AUTOSAR MCU Driver（微控制器单元驱动）（11）
 
 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](../mcal/mcu_driver/index.md) · SWS_MCUDriver
