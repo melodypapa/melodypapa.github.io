@@ -1581,6 +1581,28 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**RemoteSleepIndication**](../communication/flexray_network_management/index.md#7634-remotesleepindication) | — |
 | [**TransmissionTimeoutException**](../communication/flexray_network_management/index.md#7635-transmissiontimeoutexception) | — |
 
+## AUTOSAR FlsTst（闪存测试驱动程序）（15）
+
+来源：[AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest
+
+| 函数 | 简述 |
+|---|---|
+| [**FlsTst_Abort**](../memory/flstst/index.md#734-flstst_abort) | 服务 ID 0x03。 |
+| [**FlsTst_DeInit**](../memory/flstst/index.md#732-flstst_deinit) | 服务 ID 0x01。 |
+| [**FlsTst_GetCurrentState**](../memory/flstst/index.md#737-flstst_getcurrentstate) | 服务 ID 0x06。 |
+| [**FlsTst_GetErrorDetails**](../memory/flstst/index.md#7313-flstst_geterrordetails) | 服务 ID 0x0b。 |
+| [**FlsTst_GetTestResultBgnd**](../memory/flstst/index.md#738-flstst_gettestresultbgnd) | 服务 ID 0x07。 |
+| [**FlsTst_GetTestResultFgnd**](../memory/flstst/index.md#739-flstst_gettestresultfgnd) | 服务 ID 0x0f。 |
+| [**FlsTst_GetTestSignatureBgnd**](../memory/flstst/index.md#7311-flstst_gettestsignaturebgnd) | 服务 ID 0x09。 |
+| [**FlsTst_GetTestSignatureFgnd**](../memory/flstst/index.md#7312-flstst_gettestsignaturefgnd) | 服务 ID 0x0a。 |
+| [**FlsTst_GetVersionInfo**](../memory/flstst/index.md#7310-flstst_getversioninfo) | 服务 ID 0x08。 |
+| [**FlsTst_Init**](../memory/flstst/index.md#731-flstst_init) | 服务 ID 0x00。 |
+| [**FlsTst_MainFunction**](../memory/flstst/index.md#751-flstst_mainfunction) | 服务 ID 0x0d。 |
+| [**FlsTst_Resume**](../memory/flstst/index.md#736-flstst_resume) | 服务 ID 0x05。 |
+| [**FlsTst_StartFgnd**](../memory/flstst/index.md#733-flstst_startfgnd) | 服务 ID 0x02。 |
+| [**FlsTst_Suspend**](../memory/flstst/index.md#735-flstst_suspend) | 服务 ID 0x04。 |
+| [**FlsTst_TestEcc**](../memory/flstst/index.md#7314-flstst_testecc) | 服务 ID 0x0c。 |
+
 ## AUTOSAR FLS（闪存驱动程序）（14）
 
 来源：[AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver

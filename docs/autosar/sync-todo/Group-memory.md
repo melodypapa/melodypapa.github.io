@@ -161,11 +161,15 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 5 — User confirmation gate (batch gate — user asked for a joint confirmation after the whole Group-memory run)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] flstst (SWS_FlashTest · R23-11 markdown · ❌ new article, short name FlsTst)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: step 1 run 2026-11-03 — source confirmed `~/Workspace/autosar_standard/markdown/Classic_Platform/Releases/R23-11/Memory/AUTOSAR_CP_SWS_FlashTest.md` (R23-11 markdown, 1826 lines) + official PDF (55 pp). New article `cp/memory/flstst/`. Chapter map: ch.1→§1 (no content figure), ch.2→§2 flat 19 entries in source order (3 acronyms + 5 abbreviations + 11 terms, three tables), ch.3→§3 (4 inputs), ch.4→§4 (4.1 real content), ch.5→§5 (5.1.1 代码文件结构 with Note), ch.6 Requirements Tracing DROPPED, ch.7→§6 (6.1 一般行为 with Figure7_1/7_2 state/process diagrams + 6.1.1 状态图 Figure7_3; 6.2 错误分类 dev 6-row + 6.2.5 扩展生产错误 FLSTST_E_FLSTST_FAILURE table; 6.3 初始化序列 / 6.4 版本检查 / 6.5 调试支持 "No requirement defined." → 未定义任何需求。), ch.8→§7 (4 imported types / 9 types / 14 functions / callbacks prose / FlsTst_MainFunction 9 requirements / 期望接口 强制1+可选1+可配置 with 7.6.3.1 FlsTst_TestCompletedNotification table), ch.9→§8 (6 diagrams: init, de-init, background test ×2, suspend/resume, fgnd-interrupts-bgnd), ch.10→§9 (9.1 配置参数的规范模板 with the x/-/L/M label tables + 9.2.1 变体 + 9.2.2 FlsTst + 9.2.3 FlsTstConfigSet 3 params + 9.2.4 FlsTstGeneral 8 params + 9.2.5 FlsTstConfigurationOfOptApiServices 10 params + 9.2.6 FlsTstDemEventParameterRefs 1 + 9.2.7 FlsTstBlockBgnd 5 + 9.2.8 FlsTstBlockFgnd 5; 9.3 发布信息 prose ref), appendix A DROPPED. No appendix B in source.
+  - Note: step 2 run 2026-11-03 — no PDF verdicts needed beyond structure (state-diagram chrome around [SWS_FlsTst_00143] dropped, prose reassembled; "FlsTst_Suspended()" in [SWS_FlsTst_00142] kept verbatim as the source writes it). Figure triage: 9 content figures (Figure7_1/7_2/7_3 state+process diagrams, Figure9_1..9_6 sequence diagrams). Glossary: 19 attributions (4 appended to DEM/DET/BSW/ISR + 15 new: Background test, Flash cell, Foreground test, Invariable memory, Memory block, MCU, Partial test, PC, PB, PLL, Signature, Test block, Test interval, Test Interval Id, Test time — PLL did not exist as an entry and was added new).
+  - Note: step 3 run 2026-11-03 — strict build exit 0, zero content WARNINGs; heading audit 1.–9. continuous; check_heading_lang OK; hygiene 0 h1/0 {DRAFT}/0 backslash-lt; requirement IDs confined to the 39 [ECUC_FlsTst_*] SWS 条目 cells (0 elsewhere; source has no traceable-item appendix); §2 slice 0 table rows + 19 term lines = 19 source rows; check_api_sync OK (9/9 types, 14/14 functions); check_indexes exit 0; gen_api_list regenerated + --check OK; link_candidates --apply 20 lines, re-run 0 (idempotent), all anchors resolve.
+  - Note: step 4 run 2026-11-03 — coverage map verified heading-by-heading: source ch.1–5 → §§1–5, ch.6 + appendix A dropped (mandated), ch.7 → §6 complete, ch.8 → §7 complete, ch.9 → §8 (6/6 diagrams incl. the nested 9.3.1/9.3.2 renumbered to 8.3.1/8.3.2), ch.10 → §9 (39 ECUC items incl. the specification-template label tables rendered as GFM). Omitted-under-placeholder-exception: none.
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate (batch gate — user asked for a joint confirmation after the whole Group-memory run)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] ramtst (SWS_RAMTest · R23-11 markdown · ❌ new article, short name RamTst)
   - [ ] Step 1 — Source resolution + gap analysis

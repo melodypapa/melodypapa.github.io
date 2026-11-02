@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **1991** 个条目。
+共 **2006** 个条目。
 
 ## A
 
@@ -3323,6 +3323,51 @@ title: "AUTOSAR API 函数清单"
 
 **[Fls_Write](../memory/flash_driver/index.md#733-fls_write)**
 > 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
+
+**[FlsTst_Abort](../memory/flstst/index.md#734-flstst_abort)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_DeInit](../memory/flstst/index.md#732-flstst_deinit)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_GetCurrentState](../memory/flstst/index.md#737-flstst_getcurrentstate)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_GetErrorDetails](../memory/flstst/index.md#7313-flstst_geterrordetails)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_GetTestResultBgnd](../memory/flstst/index.md#738-flstst_gettestresultbgnd)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_GetTestResultFgnd](../memory/flstst/index.md#739-flstst_gettestresultfgnd)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_GetTestSignatureBgnd](../memory/flstst/index.md#7311-flstst_gettestsignaturebgnd)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_GetTestSignatureFgnd](../memory/flstst/index.md#7312-flstst_gettestsignaturefgnd)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_GetVersionInfo](../memory/flstst/index.md#7310-flstst_getversioninfo)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_Init](../memory/flstst/index.md#731-flstst_init)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_MainFunction](../memory/flstst/index.md#751-flstst_mainfunction)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_Resume](../memory/flstst/index.md#736-flstst_resume)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_StartFgnd](../memory/flstst/index.md#733-flstst_startfgnd)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_Suspend](../memory/flstst/index.md#735-flstst_suspend)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
+
+**[FlsTst_TestEcc](../memory/flstst/index.md#7314-flstst_testecc)**
+> 函数 · [AUTOSAR FlsTst（闪存测试驱动程序）](../memory/flstst/index.md) · SWS_FlashTest · R23-11
 
 **[Fr_AbortCommunication](../communication/flexray_driver/index.md#747-fr_abortcommunication)**
 > 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](../communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11

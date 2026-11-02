@@ -362,6 +362,7 @@ nav:
         - "Eep": autosar/cp/memory/eep/index.md
         - "MemIf": autosar/cp/memory/memory_abstraction_interface/index.md
         - "Mem": autosar/cp/memory/memory_driver/index.md
+        - "FlsTst": autosar/cp/memory/flstst/index.md
         - "MemAcc": autosar/cp/memory/memory_access/index.md
         - "MemMap": autosar/cp/memory/memory_mapping/index.md
         - "NV数据处理指南": autosar/cp/memory/nv_data_handling_guideline/index.md
