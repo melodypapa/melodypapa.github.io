@@ -182,6 +182,7 @@
 ## libraries
 
 - ✅ [Specification of CRC Routines（CRC 例程规范）](cp/libraries/crc/index.md) — SWS_CRCLibrary (2026-11-03 full Type A translation from R23-11: new article; source ch.6 Requirements Tracing + appendix A dropped per mandate; source 7.5 Debugging concept「None」omitted per the placeholder rule (§7.6→§6.5 renumbered); ch.9 → `## 8. 时序图` (7 figures); ch.10 → `## 9. 配置规范` (module + 1 container + 7 enum params + published info); API chapter keeps all source groups 8.1–8.7 → 7.1–7.7, literal「None.」groups rendered as one-sentence statements (batch decision, user to confirm); formulas of §6.1 reconstructed from the R22-11 PDF; check_api_sync N/A — source 8.3.x leaf headings are prose ("8-bit SAE J1850 CRC Calculation"), translated to Chinese by design; 8 function entries verified manually in order; appendix B IDs in fences; glossary +ALU, CRC 来源 line extended)
+- ✅ [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](cp/libraries/e2e/index.md) — SWS_E2ELibrary (2026-11-03 full Type A translation from R23-11: new article 3,743 lines + 83 figures; source ch.6 Requirements Tracing + annex C dropped per mandate; source 7.1.5 Extended Production Errors empty in the PDF — omitted per placeholder rule; source ch.7 (error classification only) → §6, ch.8 (15 type groups + 16 routine groups, ~150 API entries) → §7, ch.9 (sender/receiver sequence diagrams) → §8 (5 figures), ch.10 (published info only) → §9; annex A (safety manual) → §10, annex B (application hints incl. E2EPW routines + code example) → §11 numbered continuation, annex D → ## B. with ID fences; Figure B.20 image lost in the source markdown conversion — caption kept as text; the P01 CheckStatusType OK=0x00 row lost in conversion recovered from the R22-11 PDF; ~20 page-break scrambles of service tables reordered; 46 unique content figures triaged from a 337-image artifact set; glossary: no new terms (E2E terms already present))
 
 ## mcal
 
@@ -317,7 +318,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 ## Missing sections (no articles at all)
 
-- **Libraries (8)**: SWS_E2ELibrary (E2E), SWS_BFXLibrary (Bfx), SWS_BSWMulticoreLibrary (Bmc), SWS_MFLLibrary (Mfl), SWS_MFXLibrary (Mfx), SWS_IFLLibrary (Ifl), SWS_IFXLibrary (Ifx), SWS_EFXLibrary (Efx)
+- **Libraries (7)**: SWS_BFXLibrary (Bfx), SWS_BSWMulticoreLibrary (Bmc), SWS_MFLLibrary (Mfl), SWS_MFXLibrary (Mfx), SWS_IFLLibrary (Ifl), SWS_IFXLibrary (Ifx), SWS_EFXLibrary (Efx)
 - **RTE / SWArch (2)**: SWS_RTE, SWS_ARTI
 - ~~**Safety (2)**: SWS_WatchdogInterface (WdgIf), SWS_WatchdogDriver (Wdg)~~ — both translated 2026-10-27
 - **Security (2)**: SWS_Firewall, SWS_IntrusionDetectionSystemManager (IdsM)
