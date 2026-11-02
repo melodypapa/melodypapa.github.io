@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **557** 个条目。
+共 **562** 个条目。
 
 ## A
 
@@ -953,6 +953,21 @@ title: "AUTOSAR API 类型清单"
 
 **[J1939Nm_ConfigType](../communication/j1939nm/index.md#731-j1939nm_configtype)**
 > 类型 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Rm_AckCode](../communication/j1939rm/index.md#7841-j1939rm_ackcode)**
+> 类型 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_ConfigType](../communication/j1939rm/index.md#731-j1939rm_configtype)**
+> 类型 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_ExtIdInfoType](../communication/j1939rm/index.md#7843-j1939rm_extidinfotype)**
+> 类型 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_ExtIdType](../communication/j1939rm/index.md#7842-j1939rm_extidtype)**
+> 类型 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_StateType](../communication/j1939rm/index.md#732-j1939rm_statetype)**
+> 类型 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
 
 ## K
 

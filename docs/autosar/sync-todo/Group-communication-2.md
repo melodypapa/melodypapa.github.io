@@ -236,13 +236,16 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 + A-history ↔ §1–§9 + B 1:1; ch.6 tracing + NA appendix dropped (compliance))
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
 - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-4)
-- [ ] j1939rm (SWS_SAEJ1939RequestManager · R23-11 markdown · ❌ new article, short name J1939Rm)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-- [ ] Step 6 — TODO.md row + commit/PR
+- [x] j1939rm (SWS_SAEJ1939RequestManager · R23-11 markdown · ❌ new article, short name J1939Rm)
+  - Note: article `cp/communication/j1939rm/` (directory per row name, nav label "J1939Rm"). Shape: ch.1 → §1 (1.1 request management incl. footnote 1 rendered as [^1], 1.2 module, 1.3 J1939 术语) · ch.2 → §2 27 acronyms · ch.3 → §3 (3.1 21-entry registry; conversion artifact healed: [12] CDDDesignAndIntegrationGuideline heading lost its doc id to a stray "13." list line — restored) · ch.4 → §4 · ch.5 → §5 + 5.1.2 4 include requirements · ch.7 → §6 (6.1 overview + CAN_ID_32 metadata bit layout, 6.2 module handling, 6.3 communication state, 6.4 request reception + 6.4.1 forwarding + 6.4.2 COM + 6.4.3 unknown PGNs, 6.5 ack transmission + queues, 6.6 request transmission + queues + timeout storage, 6.7 ack reception, 6.8 timeout supervision, 6.9 routing incl. 2 config-path chains, 6.10 error classification dev 表6.1 15 rows + runtime "not yet classified" + others none) · ch.8 → §7 (7.1 param checking; 7.2 6 imported (unlabeled Std continuation normalized); 7.3 2 types; 7.4 7 functions; 7.5 3 callbacks; 7.6 MainFunction; 7.7 期望接口 1 强制 + 4 可选 + 3 configurable &lt;User&gt;_*; 7.8 服务接口: 7.8.1 3 provided ports + 7.8.2 3 required ports rendered as compact vertical tables + 7.8.3 6 C/S interfaces with operation/parameter tables + 7.8.4 3 implementation data types) · ch.9 → §8 7 figures · ch.10 → §9 (10.1 folded; 9.1.1 J1939Rm; 9.1.2 J1939RmGeneral 10 params; 9.1.3 J1939RmConfigSet + 2 included; 9.1.4 J1939RmChannel 5 params + 6 PDU sub-containers; 9.1.5–9.1.10 Ackm/Rqst/Rqst2 Rx+Tx Pdu containers 2 params each; 9.1.11 J1939RmNode 2 params + included User; 9.1.12 J1939RmUser choice with 5 choices; 9.1.13 NmUser; 9.1.14 DcmUser 2 params; 9.1.15 CddUser 9 params; 9.1.16 RteUser 9 params; 9.1.17 ComUser; 9.1.18 ComIPdu 5 params; 9.2 发布信息; figures 10.1–10.10) · ch.6 tracing dropped · source ## A History (R21-11 6 changed / R22-11 1 added / R23-11 9 changed) → ## B; source ## B NA requirements dropped (droppable)
+  - Note: Phase A — strict build exit 0 / 0 WARNING; check_heading_lang OK; check_indexes OK; hygiene 0 (SWS ids only in ## B fences); acronym 27 term lines = source 27 rows; check_api_sync N/A-with-explanation (source ch.8 layout 8.3 types/8.4 functions differs from the script convention — flexray_driver precedent; manual verification 2 types/7 functions/3 callbacks/1 scheduled in order); gen_api_list regenerated (J1939Rm 5 types + 20 functions incl. service-interface impl types, --check 0); census --apply: 52 lines (16 chapter-ref + 31 citation links) + 21 registry anchors, idempotent re-run 0 lines; nav repair: a failed-then-retried nav edit had duplicated the J1939Nm mkdocs.yml line — deduped in this commit
+  - Note: glossary +9 new terms (ACK, ACKM, CA, NACK, PDU1, PDU2, RQST2, SW-C, XFER) + 13 来源 appends (AC/BSW/CDD/DA/DET/DP/EDP/PG/PGN/RQST/RTE/SA/MetaData)
+  - [x] Step 1 — Source resolution + gap analysis (3171-line R23-11 markdown; 17 content figures via caption-anchored mapper; config tables parsed field-by-field incl. the 5-user choice container)
+  - [x] Step 2 — In-place translation/completion (full Type A build, main session)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 + A-history ↔ §1–§9 + B 1:1; ch.6 tracing + NA appendix dropped (compliance))
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+- [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-4)
 - [ ] j1939tp (SWS_SAEJ1939TransportLayer · R23-11 markdown · ❌ new article, short name J1939Tp)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

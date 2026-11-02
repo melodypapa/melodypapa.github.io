@@ -271,7 +271,7 @@ nav:
         - "CanIf": autosar/cp/communication/can_interface/index.md
         - "CanNm": autosar/cp/communication/can_network_management/index.md
         - "J1939Nm": autosar/cp/communication/j1939nm/index.md
-        - "J1939Nm": autosar/cp/communication/j1939nm/index.md
+        - "J1939Rm": autosar/cp/communication/j1939rm/index.md
         - "Nm": autosar/cp/communication/nm/index.md
         - "CanSM": autosar/cp/communication/cansm/index.md
         - "CanTp": autosar/cp/communication/cantp/index.md

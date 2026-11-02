@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2098** 个条目。
+共 **2118** 个条目。
 
 ## A
 
@@ -70,6 +70,24 @@ title: "AUTOSAR API 函数清单"
 
 **[API](../system_services/default_error_tracer/index.md#71-api)**
 > 函数 · [AUTOSAR Default Error Tracer（默认错误跟踪器）](../system_services/default_error_tracer/index.md) · SWS_DefaultErrorTracer · R23-11
+
+**[AppAckIndication](../communication/j1939rm/index.md#7834-appackindication)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[AppCancelRequestTimeout](../communication/j1939rm/index.md#7833-appcancelrequesttimeout)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[AppRequestIndication](../communication/j1939rm/index.md#7835-apprequestindication)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[AppRequestTimeoutIndication](../communication/j1939rm/index.md#7836-apprequesttimeoutindication)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[AppSendAck](../communication/j1939rm/index.md#7831-appsendack)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[AppSendRequest](../communication/j1939rm/index.md#7832-appsendrequest)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
 
 ## B
 
@@ -4280,6 +4298,48 @@ title: "AUTOSAR API 函数清单"
 
 **[J1939Nm_TxConfirmation](../communication/j1939nm/index.md#752-j1939nm_txconfirmation)**
 > 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Rm_AckIndication](../communication/j1939rm/index.md#7821-j1939rm_ackindication)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_CancelRequestTimeout](../communication/j1939rm/index.md#746-j1939rm_cancelrequesttimeout)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_CheckReceivedComIPdu](../communication/j1939rm/index.md#753-j1939rm_checkreceivedcomipdu)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_DeInit](../communication/j1939rm/index.md#742-j1939rm_deinit)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_GetVersionInfo](../communication/j1939rm/index.md#743-j1939rm_getversioninfo)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_Init](../communication/j1939rm/index.md#741-j1939rm_init)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_MainFunction](../communication/j1939rm/index.md#761-j1939rm_mainfunction)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_RequestIndication](../communication/j1939rm/index.md#7822-j1939rm_requestindication)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_RequestTimeoutIndication](../communication/j1939rm/index.md#7823-j1939rm_requesttimeoutindication)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_RxIndication](../communication/j1939rm/index.md#751-j1939rm_rxindication)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_SendAck](../communication/j1939rm/index.md#747-j1939rm_sendack)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_SendRequest](../communication/j1939rm/index.md#745-j1939rm_sendrequest)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_SetState](../communication/j1939rm/index.md#744-j1939rm_setstate)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_TxConfirmation](../communication/j1939rm/index.md#752-j1939rm_txconfirmation)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
 
 ## K
 

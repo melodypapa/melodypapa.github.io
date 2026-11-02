@@ -1705,6 +1705,33 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**J1939Nm_RxIndication**](../communication/j1939nm/index.md#751-j1939nm_rxindication) | — |
 | [**J1939Nm_TxConfirmation**](../communication/j1939nm/index.md#752-j1939nm_txconfirmation) | — |
 
+## AUTOSAR J1939Rm（SAE J1939 请求管理器）（20）
+
+来源：[AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager
+
+| 函数 | 简述 |
+|---|---|
+| [**AppAckIndication**](../communication/j1939rm/index.md#7834-appackindication) | — |
+| [**AppCancelRequestTimeout**](../communication/j1939rm/index.md#7833-appcancelrequesttimeout) | — |
+| [**AppRequestIndication**](../communication/j1939rm/index.md#7835-apprequestindication) | — |
+| [**AppRequestTimeoutIndication**](../communication/j1939rm/index.md#7836-apprequesttimeoutindication) | — |
+| [**AppSendAck**](../communication/j1939rm/index.md#7831-appsendack) | — |
+| [**AppSendRequest**](../communication/j1939rm/index.md#7832-appsendrequest) | — |
+| [**J1939Rm_AckIndication**](../communication/j1939rm/index.md#7821-j1939rm_ackindication) | — |
+| [**J1939Rm_CancelRequestTimeout**](../communication/j1939rm/index.md#746-j1939rm_cancelrequesttimeout) | — |
+| [**J1939Rm_CheckReceivedComIPdu**](../communication/j1939rm/index.md#753-j1939rm_checkreceivedcomipdu) | — |
+| [**J1939Rm_DeInit**](../communication/j1939rm/index.md#742-j1939rm_deinit) | — |
+| [**J1939Rm_GetVersionInfo**](../communication/j1939rm/index.md#743-j1939rm_getversioninfo) | — |
+| [**J1939Rm_Init**](../communication/j1939rm/index.md#741-j1939rm_init) | — |
+| [**J1939Rm_MainFunction**](../communication/j1939rm/index.md#761-j1939rm_mainfunction) | — |
+| [**J1939Rm_RequestIndication**](../communication/j1939rm/index.md#7822-j1939rm_requestindication) | — |
+| [**J1939Rm_RequestTimeoutIndication**](../communication/j1939rm/index.md#7823-j1939rm_requesttimeoutindication) | — |
+| [**J1939Rm_RxIndication**](../communication/j1939rm/index.md#751-j1939rm_rxindication) | — |
+| [**J1939Rm_SendAck**](../communication/j1939rm/index.md#747-j1939rm_sendack) | — |
+| [**J1939Rm_SendRequest**](../communication/j1939rm/index.md#745-j1939rm_sendrequest) | — |
+| [**J1939Rm_SetState**](../communication/j1939rm/index.md#744-j1939rm_setstate) | — |
+| [**J1939Rm_TxConfirmation**](../communication/j1939rm/index.md#752-j1939rm_txconfirmation) | — |
+
 ## AUTOSAR Key Manager（密钥管理器）（41）
 
 来源：[AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager
