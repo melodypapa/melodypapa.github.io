@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **508** 个条目。
+共 **509** 个条目。
 
 ## A
 
@@ -594,6 +594,9 @@ title: "AUTOSAR API 类型清单"
 
 **[E2EXf_CSTransactionHandleType](../communication/e2e_transformer/index.md#722-e2exf_cstransactionhandletype)**
 > 类型 · [E2E Transformer (E2E转换器)](../communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
+
+**[Ea_ConfigType](../memory/ea/index.md#721-ea_configtype)**
+> 类型 · [AUTOSAR Ea（EEPROM抽象）](../memory/ea/index.md) · SWS_EEPROMAbstraction · R23-11
 
 **[EcuM_ConfigType](../mode_management/ecu_state_manager/index.md#721-ecum_configtype)**
 > 类型 · [AUTOSAR ECU State Manager（ECU状态管理器）](../mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager · R23-11

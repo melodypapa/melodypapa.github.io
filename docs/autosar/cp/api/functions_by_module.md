@@ -959,6 +959,24 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**E2EXf_Inv_set_check_counter**](../communication/e2e_transformer/index.md#6737-e2exf_inv_set_check_counter) | — |
 | [**E2EXf_Inv_store_request_counter**](../communication/e2e_transformer/index.md#6738-e2exf_inv_store_request_counter) | — |
 
+## AUTOSAR Ea（EEPROM抽象）（11）
+
+来源：[AUTOSAR Ea（EEPROM抽象）](../memory/ea/index.md) · SWS_EEPROMAbstraction
+
+| 函数 | 简述 |
+|---|---|
+| [**Ea_Cancel**](../memory/ea/index.md#734-ea_cancel) | 服务 ID 0x04。 |
+| [**Ea_EraseImmediateBlock**](../memory/ea/index.md#739-ea_eraseimmediateblock) | 服务 ID 0x09。 |
+| [**Ea_GetJobResult**](../memory/ea/index.md#736-ea_getjobresult) | 服务 ID 0x06。 |
+| [**Ea_GetStatus**](../memory/ea/index.md#735-ea_getstatus) | 服务 ID 0x05。 |
+| [**Ea_GetVersionInfo**](../memory/ea/index.md#738-ea_getversioninfo) | 服务 ID 0x08。 |
+| [**Ea_Init**](../memory/ea/index.md#731-ea_init) | 服务 ID 0x00。 |
+| [**Ea_InvalidateBlock**](../memory/ea/index.md#737-ea_invalidateblock) | 服务 ID 0x07。 |
+| [**Ea_JobEndNotification**](../memory/ea/index.md#741-ea_jobendnotification) | 服务 ID 0x10。 |
+| [**Ea_MainFunction**](../memory/ea/index.md#751-ea_mainfunction) | 服务 ID 0x12。 |
+| [**Ea_Read**](../memory/ea/index.md#732-ea_read) | 服务 ID 0x02。 |
+| [**Ea_Write**](../memory/ea/index.md#733-ea_write) | 服务 ID 0x03。 |
+
 ## AUTOSAR ECU State Manager（ECU状态管理器）（52）
 
 来源：[AUTOSAR ECU State Manager（ECU状态管理器）](../mode_management/ecu_state_manager/index.md) · SWS_ECUStateManager
