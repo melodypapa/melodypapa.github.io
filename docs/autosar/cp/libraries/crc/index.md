@@ -572,8 +572,6 @@ reflect<sub>n</sub>(x) = Σ<sub>i=0</sub><sup>n−1</sup> x<sub>i</sub> × 2<sup
 
 在本章中，列出了从以下模块包含的所有类型：
 
-表7.15：模块 Crc 导入的数据类型定义（**Definition of imported datatypes of module Crc**）
-
 | 模块 | 头文件 | 导入类型 |
 |---|---|---|
 | Std | Std_Types.h | Std_VersionInfoType |
@@ -1112,8 +1110,6 @@ Crc_GetVersionInfo 函数应返回 **CRC** 模块的版本信息。版本信息�
 标准化的通用发布参数——如《基础软件模块通用需求》一文 [\[3\]](#ref-3) 中的 SRS_BSW_00402 所要求的——应在本模块的头文件中发布，并需在 **BSW** 模块描述中提供。相应的模块缩写可在《基础软件模块列表》[\[10\]](#ref-10) 中找到。
 
 如果适用，下面列出了其他模块特定的发布参数。
-
-表7.16：模块 Crc 的发布信息（**Published information of module Crc**）
 
 | 信息元素名称 | 类型/范围 | 信息元素描述 |
 |---|---|---|
