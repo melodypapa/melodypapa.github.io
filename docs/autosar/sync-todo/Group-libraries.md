@@ -7,7 +7,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 
 ## Queue
 
-- [ ] crc (SWS_CRCLibrary · R23-11 markdown · ❌ new article, short name Crc)
+- [x] crc (SWS_CRCLibrary · R23-11 markdown · ❌ new article, short name Crc)
   - Note: 2026-11-03 batch run — user pre-approved per-article commits without the per-article Step 5 gate; all confirmations collected once at batch end.
   - Note: the `libraries/` landing page + nav group already existed (PR #244); this run added the nav entry "CRC" + landing-page/CP-overview rows instead.
   - Note: batch decision (gate pending) — literal "None." groups inside the §7 API chapter render as one-sentence statements and keep source positions 8.1–8.7 → 7.1–7.7 (7.2 类型定义/7.4 回调通知/7.6.1–7.6.3/7.7; check_api_sync is positional 7.2=types/7.3=functions, omission+renumber would fail it); outside §7 the placeholder rule applies: source 7.5 Debugging concept "None" omitted, §7.6→§6.5 renumbered.
@@ -19,9 +19,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate (deferred to batch-end joint confirmation)
+  - [x] Step 5 — User confirmation gate (confirmed 2026-11-03, batch-end joint confirmation covering all batch decisions incl. the "None." API-group rendering and the annex A/B numbered-continuation handling)
   - [x] Step 6 — TODO.md row + commit/PR (commit 209cfc5; TODO.md ✅ row added; batch PR pending user confirmation)
-- [ ] e2e (SWS_E2ELibrary · R23-11 markdown · ❌ new article, short name E2E; note this is a different document from cp/communication/e2e_transformer)
+- [x] e2e (SWS_E2ELibrary · R23-11 markdown · ❌ new article, short name E2E; note this is a different document from cp/communication/e2e_transformer)
   - Note: 2026-11-03 batch run — committed without the per-article Step 5 gate (batch-end joint confirmation), same as the crc row.
   - Note: check_api_sync GREEN (62 types / 91 functions / 91 **说明** blocks, names+order match) — this document's identifier-named leaves align with the script's positional 7.2/7.3 assumption.
   - Note: source 7.1.5 Extended Production Errors has NO body even in the R22-11 PDF (heading is the last line of page 33) — omitted per the placeholder rule. Source ch.6 Requirements Tracing + annex C dropped per mandate. Annex A (safety manual) → §10, Annex B (application hints) → §11, Annex D → ## B.
@@ -33,9 +33,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate (deferred to batch-end joint confirmation)
+  - [x] Step 5 — User confirmation gate (confirmed 2026-11-03, batch-end joint confirmation covering all batch decisions incl. the "None." API-group rendering and the annex A/B numbered-continuation handling)
   - [x] Step 6 — TODO.md row + commit/PR (commits cd14a65 (crc caption fixup) + 0a3139e; batch PR pending user confirmation)
-- [ ] bfx (SWS_BFXLibrary · R23-11 markdown · ❌ new article, short name Bfx)
+- [x] bfx (SWS_BFXLibrary · R23-11 markdown · ❌ new article, short name Bfx)
   - Note: 2026-11-03 batch run — RUN STOPPED HERE per user instruction mid-batch ("stop when this translation finished"); bmc/mfl/mfx/ifl/ifx/efx rows still pending.
   - Note: committed without the per-article Step 5 gate (batch-end joint confirmation), same as the crc/e2e rows.
   - Note: source ch.9 Sequence diagrams = "Not applicable" → omitted per the placeholder rule; ch.10 配置规范 renumbered to §8 (no 时序图 chapter present).
@@ -47,7 +47,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate (deferred to batch-end joint confirmation)
+  - [x] Step 5 — User confirmation gate (confirmed 2026-11-03, batch-end joint confirmation covering all batch decisions incl. the "None." API-group rendering and the annex A/B numbered-continuation handling)
   - [x] Step 6 — TODO.md row + commit/PR (commit b11a226; batch PR pending user confirmation)
 - [ ] bmc (SWS_BSWMulticoreLibrary · R23-11 markdown · ❌ new article, short name Bmc)
   - [ ] Step 1 — Source resolution + gap analysis
