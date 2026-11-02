@@ -53,7 +53,15 @@ platform tree (`cp/` or `foundation/`).
 | `SystemServices` | `system_services/` |
 
 All ten Foundation topic directories exist with landing pages; only
-`general/tr_glossary/` holds a translated article so far.
+`general/tr_glossary/` holds a (partially translated) article so far. Every
+Foundation document is queued in `sync-todo/Group-foundation-exp.md`
+(EXP/TR/TPS/ASWS guide/template/report documents — the CP `Group-exp.md`
+counterpart) and `sync-todo/Group-foundation-rs-prs.md` (RS/PRS
+requirement/protocol specifications).
+Foundation article slug = `<type>_<snake_name>` of the source file name after
+the `tr_glossary` precedent (`rs_main`, `prs_e2e_protocol`,
+`tps_generic_structure_template`): the type prefix keeps the same-named RS/PRS
+pairs apart (`rs_someip_protocol` vs `prs_someip_protocol`).
 
 ## Known mappings (curated; keep in sync with the repo)
 

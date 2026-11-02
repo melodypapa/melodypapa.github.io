@@ -37,11 +37,20 @@ Read `references/source-resolution.md` for the full recipe. Summary:
    (confirm the path on this machine first; it is outside the repo).
    Use the **SWS** document for module articles, **EXP** for guides. The SRS
    is only for requirement-coverage checks — never as the structural source.
+   **Foundation rows** (`sync-todo/Group-foundation-exp.md`, `Group-foundation-rs-prs.md`) resolve against the
+   sibling tree
+   `../autosar_standard/markdown/Foundation/Releases/R23-11/<Topic>/AUTOSAR_FO_<Type>_<Name>.md`;
+   every Foundation document (RS/PRS/TPS/TR/EXP/ASWS) is skeleton-exempt
+   (STANDARD.md §7) and follows the EXP-guide flow — the article mirrors the
+   source's own chapter numbering under `docs/autosar/foundation/<topic>/`.
+   The RS/PRS/TPS item-ID handling decision lives in the `Group-foundation-rs-prs.md` header.
 2. **Fallback by release**: no R22-11 markdown exists. If the requested
    release is missing, use the nearest available release and **state which
    release you used** in the issue and PR text.
 3. **Last resort**: bundled PDFs in `docs/autosar_pdf/AUTOSAR_CP/<Release>/`
-   (pypdf extraction recipe and fidelity warnings in the reference).
+   (pypdf extraction recipe and fidelity warnings in the reference). No
+   Foundation PDFs are bundled; the corpus repo holds them under
+   `../autosar_standard/Foundation/Releases/<Release>/` (Git LFS).
 
 ## Step 2 — Map spec → target article
 

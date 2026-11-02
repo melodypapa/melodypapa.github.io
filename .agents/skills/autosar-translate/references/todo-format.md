@@ -22,6 +22,8 @@ docs/autosar/sync-todo/
   Group-general.md
   ...
   Group-exp.md
+  Group-foundation-exp.md     # Foundation R23-11 guide/template/report docs (EXP/TR/TPS/ASWS)
+  Group-foundation-rs-prs.md  # Foundation R23-11 requirement/protocol specs (RS/PRS)
 ```
 
 **Resume rule:** pick the batch (user names it, or the first unfinished batch
