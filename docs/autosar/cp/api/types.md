@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **563** 个条目。
+共 **583** 个条目。
 
 ## A
 
@@ -939,6 +939,66 @@ title: "AUTOSAR API 类型清单"
 
 **[IdleModeType](../system_services/operating_system/index.md#7321-idlemodetype)**
 > 类型 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
+
+**[IEEE1722Tp_CommonStreamHeaderType](../communication/ieee1722tp/index.md#734-ieee1722tp_commonstreamheadertype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_ConfigType](../communication/ieee1722tp/index.md#731-ieee1722tp_configtype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_RxAafAes3Type](../communication/ieee1722tp/index.md#7316-ieee1722tp_rxaafaes3type)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_RxAafPcmType](../communication/ieee1722tp/index.md#7314-ieee1722tp_rxaafpcmtype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_RxCrfType](../communication/ieee1722tp/index.md#7320-ieee1722tp_rxcrftype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_RxIec68133CipNoSphType](../communication/ieee1722tp/index.md#7310-ieee1722tp_rxiec68133cipnosphtype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_RxIec68133CipWithSphType](../communication/ieee1722tp/index.md#7312-ieee1722tp_rxiec68133cipwithsphtype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_RxIec68133IidcType](../communication/ieee1722tp/index.md#736-ieee1722tp_rxiec68133iidctype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_RxIec68133Type](../communication/ieee1722tp/index.md#738-ieee1722tp_rxiec68133type)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_RxRvfType](../communication/ieee1722tp/index.md#7318-ieee1722tp_rxrvftype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_StreamIndexType](../communication/ieee1722tp/index.md#732-ieee1722tp_streamindextype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_StreamStateType](../communication/ieee1722tp/index.md#733-ieee1722tp_streamstatetype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_TxAafAes3Type](../communication/ieee1722tp/index.md#7315-ieee1722tp_txaafaes3type)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_TxAafPcmType](../communication/ieee1722tp/index.md#7313-ieee1722tp_txaafpcmtype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_TxCrfType](../communication/ieee1722tp/index.md#7319-ieee1722tp_txcrftype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_TxIec68133CipNoSphType](../communication/ieee1722tp/index.md#739-ieee1722tp_txiec68133cipnosphtype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_TxIec68133CipWithSphType](../communication/ieee1722tp/index.md#7311-ieee1722tp_txiec68133cipwithsphtype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_TxIec68133IidcType](../communication/ieee1722tp/index.md#735-ieee1722tp_txiec68133iidctype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_TxIec68133Type](../communication/ieee1722tp/index.md#737-ieee1722tp_txiec68133type)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_TxRvfType](../communication/ieee1722tp/index.md#7317-ieee1722tp_txrvftype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
 
 **[ISRType](../system_services/operating_system/index.md#7311-isrtype)**
 > 类型 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11

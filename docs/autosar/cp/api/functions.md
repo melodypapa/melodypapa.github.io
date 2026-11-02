@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2128** 个条目。
+共 **2139** 个条目。
 
 ## A
 
@@ -4170,6 +4170,39 @@ title: "AUTOSAR API 函数清单"
 
 **[Icu_StopTimestamp](../io/icu_driver/index.md#7312-icu_stoptimestamp)**
 > 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](../io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+
+**[IEEE1722Tp_ActivateStream](../communication/ieee1722tp/index.md#7421-ieee1722tp_activatestream)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_DeactivateStream](../communication/ieee1722tp/index.md#7422-ieee1722tp_deactivatestream)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_DeInit](../communication/ieee1722tp/index.md#7412-ieee1722tp_deinit)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_GetVersionInfo](../communication/ieee1722tp/index.md#7413-ieee1722tp_getversioninfo)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_Init](../communication/ieee1722tp/index.md#7411-ieee1722tp_init)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_MainFunctionRx](../communication/ieee1722tp/index.md#762-ieee1722tp_mainfunctionrx)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_MainFunctionTx](../communication/ieee1722tp/index.md#761-ieee1722tp_mainfunctiontx)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_ReleaseRxBuffer](../communication/ieee1722tp/index.md#7432-ieee1722tp_releaserxbuffer)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_RxIndication](../communication/ieee1722tp/index.md#752-ieee1722tp_rxindication)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_Transmit](../communication/ieee1722tp/index.md#7431-ieee1722tp_transmit)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_TxConfirmation](../communication/ieee1722tp/index.md#751-ieee1722tp_txconfirmation)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
 
 **[IncrementCounter](../system_services/operating_system/index.md#7417-incrementcounter)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11

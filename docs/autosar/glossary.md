@@ -12,6 +12,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](cp/communication/xcp/index.md)（SWS_XCP）
 {: .glossary-source}
 
+**AAF**
+> **AVTP** 音频格式（**AVTP Audio Format**），由 IEEE 1722 定义。
+>
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
+{: .glossary-source}
+
 **AB**
 > 安全气囊（**Airbag**）
 >
@@ -46,6 +52,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 精度（**Accuracy**）取决于用于采样或者生成的硬件外围设备。如：**ADC**转换器可以是 8/10/12/16 位转换器
 >
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）
+{: .glossary-source}
+
+**ACF**
+> **AVTP** 控制格式（**AVTP Control Format**），由 IEEE 1722 定义。
+>
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
 {: .glossary-source}
 
 **ACK**
@@ -394,6 +406,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 音视频桥接（**Audio Video Bridging**）。
 >
 > 来源：[AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](cp/globaltime/eth_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverEthernet）
+{: .glossary-source}
+
+**AVTP**
+> 音视频传输协议（**Audio/Video Transport Protocol**），由 IEEE 1722 定义。
+>
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
+{: .glossary-source}
+
+**AVTPDU**
+> 音视频传输协议数据单元（**Audio/Video Transport Protocol Data Unit**），由 IEEE 1722 定义。
+>
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
 {: .glossary-source}
 
 ## B
@@ -1058,6 +1082,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 循环冗余校验（**Cyclic Redundancy Check**）
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
+{: .glossary-source}
+
+**CRF**
+> 时钟参考格式（**Control Reference Format**），由 IEEE 1722 定义。
+>
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
 {: .glossary-source}
 
 **Cross-Cluster External Graph**
@@ -2335,6 +2365,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR Time Service（时间服务）](cp/system_services/time_service/index.md)（SWS_TimeService）
 {: .glossary-source}
 
+**gPTP**
+> 广义精确时间协议（**generalized Precision Time Protocol**，IEEE Std 802.1AS）。
+>
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
+{: .glossary-source}
+
 **Graph**
 > 控制流图（**Control Flow Graph**）。一组通过**转换**相连的**检查点**，其中至少有一个**检查点**是**初始检查点**。在该**图**的任意两个**检查点**之间都存在一条（通过**转换**的）路径。
 >
@@ -2583,6 +2619,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 定点插值库（**Fixed Point Interpolation Routines**）的模块 ID 前缀；整数插值例程名称以 Ifx 开头。
 >
 > 来源：[Macro Encapsulation of Interpolation Calls（插值调用宏封装）](cp/libraries/macro_encapsulation_of_interpolation_calls/index.md)（AUTOSAR_CP_EXP_MacroEncapsulationofInterpolationCalls）
+{: .glossary-source}
+
+**IIDC**
+> 仪器与工业数码相机（**Instrumentation and Industrial Digital Camera**），由 IEEE 1722 定义。
+>
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
 {: .glossary-source}
 
 **In-Use performance ratio**
@@ -3172,7 +3214,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **MetaData**
 > 与PDU一起传输的元数据，由一组元数据项组成
 >
-> 来源：[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](cp/diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）、[AUTOSAR J1939Rm（SAE J1939 请求管理器）](cp/communication/j1939rm/index.md)（AUTOSAR_CP_SWS_SAEJ1939RequestManager）、[AUTOSAR J1939Tp（SAE J1939 传输层）](cp/communication/j1939tp/index.md)（AUTOSAR_CP_SWS_SAEJ1939TransportLayer）
+> 来源：[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](cp/diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）、[AUTOSAR J1939Rm（SAE J1939 请求管理器）](cp/communication/j1939rm/index.md)（AUTOSAR_CP_SWS_SAEJ1939RequestManager）、[AUTOSAR J1939Tp（SAE J1939 传输层）](cp/communication/j1939tp/index.md)（AUTOSAR_CP_SWS_SAEJ1939TransportLayer）、[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
 {: .glossary-source}
 
 **Metadata**
@@ -3352,7 +3394,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **MTU**
 > 最大传输单元（**Maximum Transmission Unit**）。
 >
-> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
 {: .glossary-source}
 
 **Mtype**
@@ -3667,6 +3709,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 负响应码（**Negative Response Code**）。
 >
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**NTSCF**
+> 非时间敏感控制格式（**None Time Sensitive Control Format**），由 IEEE 1722 定义。
+>
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
 {: .glossary-source}
 
 **Numerator**
@@ -4513,6 +4561,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 可运行实体：原子软件组件的一部分，可以独立于该原子软件组件的其他可运行实体被执行和调度。
 >
 > 来源：[AUTOSAR FiM（功能禁止管理器）](cp/system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）
+{: .glossary-source}
+
+**RVF**
+> 原始视频格式（**Raw Video Format**），由 IEEE 1722 定义。
+>
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
 {: .glossary-source}
 
 **RWW**
@@ -5453,6 +5507,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > Time Stamp —— 时间戳。
 >
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](cp/communication/xcp/index.md)（SWS_XCP）
+{: .glossary-source}
+
+**TSCF**
+> 时间敏感控制格式（**Time Sensitive Control Format**），由 IEEE 1722 定义。
+>
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
+{: .glossary-source}
+
+**TSN**
+> 时间敏感网络（**Time-Sensitive Networking**）。
+>
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
 {: .glossary-source}
 
 **TTCAN Controller**

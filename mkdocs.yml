@@ -273,6 +273,7 @@ nav:
         - "J1939Nm": autosar/cp/communication/j1939nm/index.md
         - "J1939Rm": autosar/cp/communication/j1939rm/index.md
         - "J1939Tp": autosar/cp/communication/j1939tp/index.md
+        - "IEEE1722Tp": autosar/cp/communication/ieee1722tp/index.md
         - "Nm": autosar/cp/communication/nm/index.md
         - "CanSM": autosar/cp/communication/cansm/index.md
         - "CanTp": autosar/cp/communication/cantp/index.md

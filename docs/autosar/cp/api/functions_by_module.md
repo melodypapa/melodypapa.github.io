@@ -1686,6 +1686,24 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**Icu_StopSignalMeasurement**](../io/icu_driver/index.md#7321-icu_stopsignalmeasurement) | 停止给定通道的信号测量。 |
 | [**Icu_StopTimestamp**](../io/icu_driver/index.md#7312-icu_stoptimestamp) | 停止给定通道的时间戳测量。 |
 
+## AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）（11）
+
+来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer
+
+| 函数 | 简述 |
+|---|---|
+| [**IEEE1722Tp_ActivateStream**](../communication/ieee1722tp/index.md#7421-ieee1722tp_activatestream) | — |
+| [**IEEE1722Tp_DeactivateStream**](../communication/ieee1722tp/index.md#7422-ieee1722tp_deactivatestream) | — |
+| [**IEEE1722Tp_DeInit**](../communication/ieee1722tp/index.md#7412-ieee1722tp_deinit) | — |
+| [**IEEE1722Tp_GetVersionInfo**](../communication/ieee1722tp/index.md#7413-ieee1722tp_getversioninfo) | — |
+| [**IEEE1722Tp_Init**](../communication/ieee1722tp/index.md#7411-ieee1722tp_init) | — |
+| [**IEEE1722Tp_MainFunctionRx**](../communication/ieee1722tp/index.md#762-ieee1722tp_mainfunctionrx) | — |
+| [**IEEE1722Tp_MainFunctionTx**](../communication/ieee1722tp/index.md#761-ieee1722tp_mainfunctiontx) | — |
+| [**IEEE1722Tp_ReleaseRxBuffer**](../communication/ieee1722tp/index.md#7432-ieee1722tp_releaserxbuffer) | — |
+| [**IEEE1722Tp_RxIndication**](../communication/ieee1722tp/index.md#752-ieee1722tp_rxindication) | — |
+| [**IEEE1722Tp_Transmit**](../communication/ieee1722tp/index.md#7431-ieee1722tp_transmit) | — |
+| [**IEEE1722Tp_TxConfirmation**](../communication/ieee1722tp/index.md#751-ieee1722tp_txconfirmation) | — |
+
 ## AUTOSAR J1939Nm（SAE J1939 网络管理）（12）
 
 来源：[AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement
