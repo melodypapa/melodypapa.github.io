@@ -1317,24 +1317,23 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**EthTrcv_TransceiverLinkStateRequest**](../communication/eth_trcv/index.md#737-ethtrcv_transceiverlinkstaterequest) | 为给定的收发器请求给定的链路状态。 |
 | [**EthTrcv_WriteMiiIndication**](../communication/eth_trcv/index.md#742-ethtrcv_writemiiindication) | 当经由 MII 接口写入信息时被调用。 |
 
-## AUTOSAR FEE（闪存EEPROM仿真）（12）
+## AUTOSAR FEE（闪存EEPROM仿真）（11）
 
 来源：[AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation
 
 | 函数 | 简述 |
 |---|---|
-| [**Fee_Cancel**](../memory/flash_eeprom_emulation/index.md#515-fee_cancel) | 调用底层闪存驱动程序的取消函数的服务。 |
-| [**Fee_EraseImmediateBlock**](../memory/flash_eeprom_emulation/index.md#5110-fee_eraseimmediateblock) | 擦除逻辑块的服务。 |
-| [**Fee_GetJobResult**](../memory/flash_eeprom_emulation/index.md#517-fee_getjobresult) | 查询上层软件下发的最后一个接受作业的结果的服务。 |
-| [**Fee_GetStatus**](../memory/flash_eeprom_emulation/index.md#516-fee_getstatus) | 返回状态的服务。 |
-| [**Fee_GetVersionInfo**](../memory/flash_eeprom_emulation/index.md#519-fee_getversioninfo) | 返回FEE模块版本信息的服务。 |
-| [**Fee_Init**](../memory/flash_eeprom_emulation/index.md#511-fee_init) | 初始化FEE模块的服务。 |
-| [**Fee_InvalidateBlock**](../memory/flash_eeprom_emulation/index.md#518-fee_invalidateblock) | 使逻辑块无效的服务。 |
-| [**Fee_JobEndNotification**](../memory/flash_eeprom_emulation/index.md#521-fee_jobendnotification) | 向此模块报告异步操作成功结束的服务。 |
-| [**Fee_MainFunction**](../memory/flash_eeprom_emulation/index.md#521-fee_mainfunction) | 处理请求的读/写/擦除作业和内部管理操作的服务。 |
-| [**Fee_Read**](../memory/flash_eeprom_emulation/index.md#513-fee_read) | 启动读取作业的服务。 |
-| [**Fee_SetMode**](../memory/flash_eeprom_emulation/index.md#512-fee_setmode) | 切换底层Flash Driver模式的函数。 |
-| [**Fee_Write**](../memory/flash_eeprom_emulation/index.md#514-fee_write) | 启动写入作业的服务。 |
+| [**Fee_Cancel**](../memory/flash_eeprom_emulation/index.md#734-fee_cancel) | 服务 ID 0x04。 |
+| [**Fee_EraseImmediateBlock**](../memory/flash_eeprom_emulation/index.md#739-fee_eraseimmediateblock) | 服务 ID 0x09。 |
+| [**Fee_GetJobResult**](../memory/flash_eeprom_emulation/index.md#736-fee_getjobresult) | 服务 ID 0x06。 |
+| [**Fee_GetStatus**](../memory/flash_eeprom_emulation/index.md#735-fee_getstatus) | 服务 ID 0x05。 |
+| [**Fee_GetVersionInfo**](../memory/flash_eeprom_emulation/index.md#738-fee_getversioninfo) | 服务 ID 0x08。 |
+| [**Fee_Init**](../memory/flash_eeprom_emulation/index.md#731-fee_init) | 服务 ID 0x00。 |
+| [**Fee_InvalidateBlock**](../memory/flash_eeprom_emulation/index.md#737-fee_invalidateblock) | 服务 ID 0x07。 |
+| [**Fee_JobEndNotification**](../memory/flash_eeprom_emulation/index.md#741-fee_jobendnotification) | 服务 ID 0x10。 |
+| [**Fee_MainFunction**](../memory/flash_eeprom_emulation/index.md#751-fee_mainfunction) | 服务 ID 0x12。 |
+| [**Fee_Read**](../memory/flash_eeprom_emulation/index.md#732-fee_read) | 服务 ID 0x02。 |
+| [**Fee_Write**](../memory/flash_eeprom_emulation/index.md#733-fee_write) | 服务 ID 0x03。 |
 
 ## AUTOSAR FiM（功能禁止管理器）（10）
 

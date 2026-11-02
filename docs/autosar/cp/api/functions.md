@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **1949** 个条目。
+共 **1948** 个条目。
 
 ## A
 
@@ -3153,46 +3153,43 @@ title: "AUTOSAR API 函数清单"
 
 ## F
 
-**[Fee_Cancel](../memory/flash_eeprom_emulation/index.md#515-fee_cancel)**
+**[Fee_Cancel](../memory/flash_eeprom_emulation/index.md#734-fee_cancel)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
-**[Fee_EraseImmediateBlock](../memory/flash_eeprom_emulation/index.md#5110-fee_eraseimmediateblock)**
+**[Fee_EraseImmediateBlock](../memory/flash_eeprom_emulation/index.md#739-fee_eraseimmediateblock)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
-**[Fee_GetJobResult](../memory/flash_eeprom_emulation/index.md#517-fee_getjobresult)**
+**[Fee_GetJobResult](../memory/flash_eeprom_emulation/index.md#736-fee_getjobresult)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
-**[Fee_GetStatus](../memory/flash_eeprom_emulation/index.md#516-fee_getstatus)**
+**[Fee_GetStatus](../memory/flash_eeprom_emulation/index.md#735-fee_getstatus)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
-**[Fee_GetVersionInfo](../memory/flash_eeprom_emulation/index.md#519-fee_getversioninfo)**
+**[Fee_GetVersionInfo](../memory/flash_eeprom_emulation/index.md#738-fee_getversioninfo)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
-**[Fee_Init](../memory/flash_eeprom_emulation/index.md#511-fee_init)**
+**[Fee_Init](../memory/flash_eeprom_emulation/index.md#731-fee_init)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
-**[Fee_InvalidateBlock](../memory/flash_eeprom_emulation/index.md#518-fee_invalidateblock)**
+**[Fee_InvalidateBlock](../memory/flash_eeprom_emulation/index.md#737-fee_invalidateblock)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
 **[Fee_JobEndNotification](../memory/flash_driver/index.md#7631-fee_jobendnotification)**
 > 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
-**[Fee_JobEndNotification](../memory/flash_eeprom_emulation/index.md#521-fee_jobendnotification)**
+**[Fee_JobEndNotification](../memory/flash_eeprom_emulation/index.md#741-fee_jobendnotification)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
 **[Fee_JobErrorNotification](../memory/flash_driver/index.md#7632-fee_joberrornotification)**
 > 函数 · [AUTOSAR FLS（闪存驱动程序）](../memory/flash_driver/index.md) · SWS_FlashDriver · R23-11
 
-**[Fee_MainFunction](../memory/flash_eeprom_emulation/index.md#521-fee_mainfunction)**
+**[Fee_MainFunction](../memory/flash_eeprom_emulation/index.md#751-fee_mainfunction)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
-**[Fee_Read](../memory/flash_eeprom_emulation/index.md#513-fee_read)**
+**[Fee_Read](../memory/flash_eeprom_emulation/index.md#732-fee_read)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
-**[Fee_SetMode](../memory/flash_eeprom_emulation/index.md#512-fee_setmode)**
-> 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
-
-**[Fee_Write](../memory/flash_eeprom_emulation/index.md#514-fee_write)**
+**[Fee_Write](../memory/flash_eeprom_emulation/index.md#733-fee_write)**
 > 函数 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
 **[FiM_ControlFunctionAvailable](../system_services/function_inhibition_manager/index.md#7412-fim_controlfunctionavailable)**

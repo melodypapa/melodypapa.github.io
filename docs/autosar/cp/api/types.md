@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **507** 个条目。
+共 **508** 个条目。
 
 ## A
 
@@ -695,6 +695,9 @@ title: "AUTOSAR API 类型清单"
 > 类型 · [AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](../globaltime/eth_tsyn/index.md) · SWS_TimeSyncOverEthernet · R23-11
 
 ## F
+
+**[Fee_ConfigType](../memory/flash_eeprom_emulation/index.md#721-fee_configtype)**
+> 类型 · [AUTOSAR FEE（闪存EEPROM仿真）](../memory/flash_eeprom_emulation/index.md) · SWS_FlashEEPROMEmulation · R23-11
 
 **[FiM_ConfigType](../system_services/function_inhibition_manager/index.md#721-fim_configtype)**
 > 类型 · [AUTOSAR FiM（功能禁止管理器）](../system_services/function_inhibition_manager/index.md) · SWS_FunctionInhibitionManager · R23-11

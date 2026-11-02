@@ -141,7 +141,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Address Area**
 > 地址区（**Address Area**）是指逻辑地址空间中连续的存储区域。通常，多个物理存储扇区组合成一个逻辑地址区。
 >
-> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
+> 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）
 {: .glossary-source}
 
 **AddressAndLengthFormat Identifier**
@@ -425,7 +425,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Basic Storage Object**
 > 「基本存储对象」是 **NVRAM** 块的最小实体。多个基本存储对象可用于构建 **NVRAM** 块。「基本存储对象」可以驻留在不同的内存位置，包括：**RAM**、**ROM**、NV 内存（**NV memory**）中。
 >
-> 来源：[AUTOSAR NVM（非易失性存储管理器）](cp/memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](cp/memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）、[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）
 {: .glossary-source}
 
 **Binary Manifest**
@@ -1176,6 +1176,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SecOC (Secure Onboard Communication)](cp/communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
 {: .glossary-source}
 
+**Dataset**
+> NVRAM管理器的一个概念：用户可寻址的相同大小的块数组。
+>
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）
+{: .glossary-source}
+
 **DCM**
 > 诊断通信管理器（**Diagnostic Communication Manager**）
 >
@@ -1499,7 +1505,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **EA**
 > EEPROM 抽象（**EEPROM Abstraction**）。
 >
-> 来源：[AUTOSAR NVM（非易失性存储管理器）](cp/memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](cp/memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）、[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）
 {: .glossary-source}
 
 **EAI**
@@ -1584,6 +1590,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 扩展数据页（**Extended Data Page**），18 位 PGN 中最高有效位之后的第二位
 >
 > 来源：[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](cp/diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**EEPROM**
+> 电可擦除可编程ROM（**Electrically Erasable and Programmable ROM**，只读存储器（**Read Only Memory**））。
+>
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）
 {: .glossary-source}
 
 **EID**
@@ -1910,7 +1922,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **FEE**
 > 闪存 EEPROM 仿真（**Flash EEPROM Emulation**）。
 >
-> 来源：[AUTOSAR NVM（非易失性存储管理器）](cp/memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](cp/memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）、[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）
 {: .glossary-source}
 
 **FF**
@@ -2579,6 +2591,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）
 {: .glossary-source}
 
+**Internal residue**
+> 如果配置的块大小不是虚拟页面大小的整数倍，则最后一个虚拟页面末尾的未使用空间。
+>
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）
+{: .glossary-source}
+
 **Internal Transition**
 > **内部转换**是同一个**被监督实体**内两个**检查点**之间的**转换**。
 >
@@ -2879,6 +2897,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
 {: .glossary-source}
 
+**Logical block**
+> 模块用户看到的最小可写/可擦除单元，由一个或多个虚拟页面组成。
+>
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）
+{: .glossary-source}
+
 **Logical Supervision**
 > 一种对软件的在线监督，用于检查软件（**被监督实体**或一组**被监督实体**）是否按程序员（即已开发的代码）定义的顺序执行。
 >
@@ -2913,6 +2937,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 灯光开关（**Light Switch**）
 >
 > 来源：[Safety Use Case（安全用例）](cp/safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase）
+{: .glossary-source}
+
+**LSB**
+> 最低有效位/字节（**Least significant bit / byte**，取决于上下文；此处指"位"）。
+>
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）
 {: .glossary-source}
 
 ## M
@@ -3029,6 +3059,24 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 最小延迟定时器（**Minimum Delay Timer**）的详细描述见[3]。另见第6.3.5.5节。
 >
 > 来源：[AUTOSAR COM（COM模块）](cp/communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**Mem**
+> 内存驱动程序（**Memory Driver**）。
+>
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）
+{: .glossary-source}
+
+**MemAcc**
+> 内存访问（**Memory Access**）。
+>
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）
+{: .glossary-source}
+
+**MemIf**
+> 内存抽象接口（**Memory Abstraction Interface**）。
+>
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）
 {: .glossary-source}
 
 **Memory Device**
@@ -3191,6 +3239,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 里程碑（**Milestone**）
 >
 > 来源：[Application Interfaces User Guide（应用接口用户指南）](cp/application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide）
+{: .glossary-source}
+
+**MSB**
+> 最高有效位/字节（**Most significant bit / byte**，取决于上下文；此处指"位"）。
+>
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）
 {: .glossary-source}
 
 **MSBF**
@@ -3567,6 +3621,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](cp/application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis）
 {: .glossary-source}
 
+**NvM**
+> NVRAM管理器（**NVRAM Manager**）。
+>
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）
+{: .glossary-source}
+
 **NVRAM**
 > 非易失性 RAM（**Non-Volatile RAM**）
 >
@@ -3576,7 +3636,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **NVRAM Block**
 > 「NVRAM 块」是管理和存储 NV 数据块所需的整个结构。
 >
-> 来源：[AUTOSAR NVM（非易失性存储管理器）](cp/memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
+> 来源：[AUTOSAR NVM（非易失性存储管理器）](cp/memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）、[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）
 {: .glossary-source}
 
 ## O
@@ -4201,6 +4261,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 就绪状态指 **UDS** 状态字节的已测试位 TestNotCompletedSinceLastClear（位 4）和 TestNotCompletedThisOperationCycle（位 6）。
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**Redundant copy**
+> NVRAM管理器的一个概念：将相同的信息存储两次以提高数据存储的可靠性。
+>
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）
 {: .glossary-source}
 
 **Reference time**
@@ -5411,10 +5477,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR DoIP（基于 IP 的诊断）](cp/communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）
 {: .glossary-source}
 
+**Virtual address**
+> 由16位块序号和逻辑块内的16位偏移量组成的地址。
+>
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）
+{: .glossary-source}
+
 **Virtual Local Time**
 > **StbM** 从硬件时钟导出的本地时间参考，用于全局时间本地实例的推移。
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
+{: .glossary-source}
+
+**Virtual page**
+> 虚拟页面可能由一个或多个物理页面组成，以便于处理逻辑块和地址计算。
+>
+> 来源：[AUTOSAR FEE（闪存EEPROM仿真）](cp/memory/flash_eeprom_emulation/index.md)（AUTOSAR_CP_SWS_FlashEEPROMEmulation）
 {: .glossary-source}
 
 **VLAN**
