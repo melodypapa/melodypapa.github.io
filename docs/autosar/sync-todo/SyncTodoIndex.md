@@ -131,7 +131,7 @@ Status: **21/21** completed
 
 ## Group foundation exp — Foundation R23-11 guide/template/report documents (20)
 
-Status: **2/20** completed
+Status: **3/20** completed
 
 | Article                                              | Status | Commit ID |
 | ----------------------------------------------------- | -------- | ---------- |
@@ -147,7 +147,7 @@ Status: **2/20** completed
 | `exp_safety_overview`                                  | [ ] Pending | N/A |
 | `tps_arxml_serialization_rules`                        | [ ] Pending | N/A |
 | `asws_health_monitoring`                               | [x] Done | e956feb4ea |
-| `tps_abstract_platform_specification`                  | [ ] Pending | N/A |
+| `tps_abstract_platform_specification`                  | [x] Done | 510c6d7fdf |
 | `tps_xml_schema_production_rules`                      | [ ] Pending | N/A |
 | `tr_secure_hardware_extensions`                        | [ ] Pending | N/A |
 | `tps_security_extract_template`                        | [ ] Pending | N/A |
@@ -327,5 +327,5 @@ Status: **5/7** completed
 | `hwtestmanager`                 | [ ] Pending | N/A |
 | `operating_system`              | [x] Done | ca7ecda991 |
 
-**Total: 123/197 queue rows complete.**
+**Total: 124/197 queue rows complete.**
 
