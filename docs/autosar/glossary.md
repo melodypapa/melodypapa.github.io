@@ -3325,6 +3325,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Specification of Floating Point Math Routines（浮点数学例程规范）](cp/libraries/mfl/index.md)（AUTOSAR_CP_SWS_MFLLibrary）
 {: .glossary-source}
 
+**Mfx**
+> 定点数学库（**Math - Fixed Point library**）。
+>
+> 来源：[Specification of Fixed Point Math Routines（定点数学例程规范）](cp/libraries/mfx/index.md)（AUTOSAR_CP_SWS_MFXLibrary）
+{: .glossary-source}
+
 **MISRA**
 > 汽车工业软件可靠性协会（**Motor Industry Software Reliability Association**）。
 >

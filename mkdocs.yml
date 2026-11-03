@@ -430,6 +430,7 @@ nav:
         - "Bfx": autosar/cp/libraries/bfx/index.md
         - "Bmc": autosar/cp/libraries/bmc/index.md
         - "Mfl": autosar/cp/libraries/mfl/index.md
+        - "Mfx": autosar/cp/libraries/mfx/index.md
       - 模板:
         - autosar/cp/template/index.md
         - "1. 一段话总结": autosar/cp/template/generic_structure/index.md

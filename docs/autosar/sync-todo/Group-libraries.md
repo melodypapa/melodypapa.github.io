@@ -80,10 +80,17 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] mfx (SWS_MFXLibrary · R23-11 markdown · ❌ new article, short name Mfx)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-04 batch run — committed without the per-article Step 5 gate (batch-end joint confirmation), same as the crc/e2e/bfx rows.
+  - Note: source ch.6 Requirements Tracing + appendix A dropped per mandate; ch.9 "Not applicable" omitted per the placeholder rule (ch.10 → §8, 10.1 如何阅读本章 style per bfx); source 8.11 Expected-interfaces intro "None." omitted (subsections keep one-sentence statements); 8.7 Examples of use of functions HAS content → kept as §7.7 with its two worked examples; 8.12 Service Interfaces "None." → §7.12 one-sentence statement.
+  - Note: manual API verification: 33 entries (22 routine groups + 16 P2 sub-entries sharing templated headings + Sgn_s32_s8 + GetVersionInfo — count by 说明 blocks), ~380 implemented-function table rows transcribed in full; check_api_sync positional trivial-OK (source 8.2.x/8.3.x = 0).
+  - Note: 5 formula-not-decoded spots reconstructed from the R22-11 PDF (AddP2 00153, SubP2 00165/00171, AbsDiffP2 00177 a<b cases — a≥b case was in text); §5.1 option examples placement (2.1 NomMath/ScaledMath, 2.2 Add.c, 2.4 Add8.c, 2.3 no example) verified against the same PDF.
+  - Note: source quirks — RDiv 0xoFB converter artifact corrected to 0x0FB; Absdiff lowercase-d rows kept verbatim; DivShLeft 0x160 "31 31" merged-cell and 0x161 empty shift normalized to 31; 0x163 truncated prototype reconstructed; AddP2/SubP2 32-bit prototype rows carry sint32 radix params while the Syntax says sint16 (source inconsistency kept verbatim); §8.1 cites [6] Platform_Types.h — registry defines [1]–[5] only, dangling ref left as prose (bfx precedent).
+  - Note: "see subsection 8.7.1/8.7.2" cross-refs renumbered to the article's own §7.7.1/§7.7.2 and linked (renumbering convention; anchor slugs include the bilingual paren per Material slugger).
+  - Note: gen_api_list does not recognize entity-bearing templated headings — mfx contributes 2/33 identifiers to the API listing (mfl 84/97) — Backlog entry added to TODO.md (2026-11-04); the pure derivation stays as-is this run.
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] ifl (SWS_IFLLibrary · R23-11 markdown · ❌ new article, short name Ifl)

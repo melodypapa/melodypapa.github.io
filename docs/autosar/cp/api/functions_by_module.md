@@ -2533,6 +2533,15 @@ title: "AUTOSAR API 函数清单（按模块）"
 |---|---|
 | [**Crc_GetVersionInfo**](../libraries/crc/index.md#735-crc_getversioninfo) | 此服务返回本模块的版本信息。 |
 
+## Specification of Fixed Point Math Routines（定点数学例程规范）（2）
+
+来源：[Specification of Fixed Point Math Routines（定点数学例程规范）](../libraries/mfx/index.md) · SWS_MFXLibrary
+
+| 函数 | 简述 |
+|---|---|
+| [**Mfx_GetVersionInfo**](../libraries/mfx/index.md#781-mfx_getversioninfo) | 返回本库的版本信息。 |
+| [**Mfx_Sgn_s32_s8**](../libraries/mfx/index.md#75161-mfx_sgn_s32_s8) | 符号函数（Signum function）。 |
+
 ## Specification of Floating Point Math Routines（浮点数学例程规范）（84）
 
 来源：[Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary

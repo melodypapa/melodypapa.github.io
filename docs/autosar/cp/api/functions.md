@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2389** 个条目。
+共 **2391** 个条目。
 
 ## A
 
@@ -5615,6 +5615,12 @@ title: "AUTOSAR API 函数清单"
 
 **[Mfl_Trunc_f32](../libraries/mfl/index.md#7531-mfl_trunc_f32)**
 > 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfx_GetVersionInfo](../libraries/mfx/index.md#781-mfx_getversioninfo)**
+> 函数 · [Specification of Fixed Point Math Routines（定点数学例程规范）](../libraries/mfx/index.md) · SWS_MFXLibrary · R23-11
+
+**[Mfx_Sgn_s32_s8](../libraries/mfx/index.md#75161-mfx_sgn_s32_s8)**
+> 函数 · [Specification of Fixed Point Math Routines（定点数学例程规范）](../libraries/mfx/index.md) · SWS_MFXLibrary · R23-11
 
 **[Mirror_AddCanMaskFilter](../communication/mirror/index.md#7424-mirror_addcanmaskfilter)**
 > 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
