@@ -74,6 +74,7 @@ title: "CP AUTOSAR"
   * [AUTOSAR V2X Basic Transport（V2X基本传输协议）](communication/v2x_basictp/index.md)
   * [AUTOSAR V2X Data Manager（V2X数据管理器）](communication/v2x_datamgr/index.md)
   * [AUTOSAR V2X Facilities（V2X设施层）](communication/v2x_facilities/index.md)
+  * [AUTOSAR V2X GeoNetworking（V2X地理网络）](communication/v2x_geonet/index.md)
 
 ### 全局时间（Global Time）
 

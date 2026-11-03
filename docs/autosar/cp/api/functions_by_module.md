@@ -3027,6 +3027,23 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**V2xFacDenBs**](../communication/v2x_facilities/index.md#7721-v2xfacdenbs) | — |
 | [**V2xFacVdp**](../communication/v2x_facilities/index.md#7711-v2xfacvdp) | — |
 
+## AUTOSAR V2X GeoNetworking（V2X地理网络）（10）
+
+来源：[AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking
+
+| 函数 | 简述 |
+|---|---|
+| [**V2xGn_GetVersionInfo**](../communication/v2x_geonet/index.md#732-v2xgn_getversioninfo) | 返回本模块的版本信息。 |
+| [**V2xGn_Init**](../communication/v2x_geonet/index.md#731-v2xgn_init) | 初始化 V2xGn 模块。 |
+| [**V2xGn_MainFunction**](../communication/v2x_geonet/index.md#751-v2xgn_mainfunction) | V2xGn 模块的主函数，用于周期性执行协议操作。 |
+| [**V2xGn_RxIndication**](../communication/v2x_geonet/index.md#743-v2xgn_rxindication) | 指示以太网帧的接收。 |
+| [**V2xGn_Transmit**](../communication/v2x_geonet/index.md#736-v2xgn_transmit) | 由 V2x_Btp 调用以发送消息。 |
+| [**V2xGn_V2xM_AbortPseudonymChange**](../communication/v2x_geonet/index.md#735-v2xgn_v2xm_abortpseudonymchange) | 当并非所有模块都同意假名更改且该更改将被回退时，V2xM 调用本函数。 |
+| [**V2xGn_V2xM_CommitPseudonymChange**](../communication/v2x_geonet/index.md#734-v2xgn_v2xm_commitpseudonymchange) | 当所有模块都同意假名更改且该更改将被提交时，V2xM 调用本函数。 |
+| [**V2xGn_V2xM_DecapConfirmation**](../communication/v2x_geonet/index.md#742-v2xgn_v2xm_decapconfirmation) | 当解封装完成时由 V2xM 调用本函数。 |
+| [**V2xGn_V2xM_EncapConfirmation**](../communication/v2x_geonet/index.md#741-v2xgn_v2xm_encapconfirmation) | 当封装完成时由 V2xM 调用本函数。 |
+| [**V2xGn_V2xM_PreparePseudonymChange**](../communication/v2x_geonet/index.md#733-v2xgn_v2xm_preparepseudonymchange) | 发生假名更改时由 V2xM 调用本函数，以在使用该假名的每个模块中准备该更改。 |
+
 ## AUTOSAR Watchdog Driver（看门狗驱动）（4）
 
 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](../safety/watchdog_driver/index.md) · SWS_WatchdogDriver

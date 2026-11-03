@@ -384,13 +384,17 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 ↔ §1–§9 1:1; ch.6 tracing + appendix A dropped (compliance); 8 figures embedded; 50-type 7.7.3 catalog table-for-table in source order)
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
 - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-5)
-- [ ] v2x_geonet (SWS_V2XGeoNetworking · R23-11 markdown · ❌ new article)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-- [ ] Step 6 — TODO.md row + commit/PR
+- [x] v2x_geonet (SWS_V2XGeoNetworking · R23-11 markdown · ❌ new article)
+  - Note: article `cp/communication/v2x_geonet/` (directory per row name, nav label "V2xGn", V2X group). Shape: ch.1 → §1 (1.1 架构总览 Figure1_1, 1.2 功能总览) · ch.2 → §2 12 acronyms · 3.1 19-entry registry (incl. [19] IEEE EtherType list URL curl 200) + 3.2 · ch.4 → §4 (4.1 3-item, 4.2, 4.3 授权票证与假名) · ch.5 → §5 5 module sections + 5.6 文件结构/5.6.1 代码文件结构 · ch.6 dropped · ch.7 → §6 (6.1 通用功能 incl. itsGnSecurity/itsGnIfType/80 km²/ITS-G5 assumptions + no-packet-repetition, 6.2 GN 包结构与格式 (SHB/GBC/Beacon headers only + LifeTime rules), 6.3 协议操作: 6.3.1 网络管理 (position update/beaconing/PAI/location table) + 6.3.2 安全机制 (encap/decap via V2xM + pseudonym suspension), 6.4 消息转发 (Area forwarding Annex E.3 + DCC DP3 + 6 km sender distance), 6.5 消息发送 (EthIf buffer flow + EncapReqId + SCF store-carry-forward + TC field rules + MHL=10 + EtherType 0x8947 + GN 源地址构造 bullet list), 6.6 消息接收 (DecapReqId + duplicate detection + certificate-digest collision rule), 6.7 错误分类 dev 表 4 rows + none-sentences) · ch.8 → §7 (7.1 23 imported rows incl. 12 unlabeled V2x_GeneralTypes continuation rows normalized; 7.2 1 type V2xGn_TxParamsType 8 elements; 7.3 6 functions incl. 3 pseudonym-change; 7.4 3 callbacks (EncapConfirmation/DecapConfirmation/RxIndication); 7.5.1 MainFunction; 7.6.1 强制 15 rows + 7.6.2 可选 1 row) · ch.9 → §8 (4 figures; 9.1 carries the verification-on-demand correction note) · ch.10 → §9 (9.1.1 变体, 9.1.2 V2xGn + Figure10_1, 9.1.3 V2xGnGeneral 11 params incl. SnDecapResultHandling 2-literal enum + StationType 12-literal enum, 9.1.4 V2xGnBeaconService 2 params + Figure10_3, 9.1.5 V2xGnPacketForwarding 13 params + Figure10_4; SWS 条目 cells [ECUC_V2xGn_*]; 9.2 发布信息 pointer) · ch.6 tracing dropped · appendix A (4 NA_* requirements referencing SRS ids) dropped (droppable) · NO ## B chapter
+  - Note: source quirks kept verbatim and reported: [SWS_V2xGn_00076] mandatory-interface table row "V2xM_V2xGn_GetGlobalTxParams … get the current channel busy percentage" and SetGlobalRxParams "set the current channel busy percentage" (both read/set the same value — kept); DecapConfirmation Syntax truncated at "uint8 SspLength," — SspBits param completed from the Parameters (in) rows; 8.3.4 CommitPseudonymChange table page-split reassembled; 10.1.3 V2xGnItsGnProtocolVersion description cites "[14]" (the DET spec) though the GN protocol version is defined in [8] Annex H — kept verbatim (user verify); 9.1.3 PaiInterval range "0 .."/"100" page-split rejoined; StationType enum uses the V2XFAC_ST_* literals (not V2XGN_*) — kept
+  - Note: Phase A — strict build exit 0 / 0 WARNING / no v2xgn notices; check_heading_lang OK (after §5.3/5.4 heading translation); check_indexes OK; hygiene 0 h1/`\<`/{DRAFT}/bracketed-SWS-ids; acronym 12 term lines = source 12 rows, 0 tables; check_api_sync OK (0 types script-counted at 8.2 but 1 type verified manually / 6 functions / 6 说明); gen_api_list regenerated (V2xGn 1 type + 6 functions SITE-linked, --check 0); census --apply: 33 lines (4 chapter-refs + 37 citation links), idempotent re-run 0 lines; external URL ieee.org 200
+  - Note: glossary +7 new terms (CBF, GAC, GBC, GN-SDU, SHB, TC, TSB) + 8 来源 appends (BTP, DET, GN, ITS, MAC, UDP)
+  - [x] Step 1 — Source resolution + gap analysis (1510-line R23-11 markdown; 9 content figures via caption-anchored mapper, 51 chrome artifacts dropped)
+  - [x] Step 2 — In-place translation/completion (full Type A build, main session)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 ↔ §1–§9 1:1; ch.6 tracing + appendix A dropped (compliance); 9 figures embedded)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+- [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-5)
 - [ ] v2x_mgmt (SWS_V2XManagement · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

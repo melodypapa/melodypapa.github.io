@@ -332,6 +332,7 @@ nav:
           - "V2xBtp": autosar/cp/communication/v2x_basictp/index.md
           - "V2xDM": autosar/cp/communication/v2x_datamgr/index.md
           - "V2xFac": autosar/cp/communication/v2x_facilities/index.md
+          - "V2xGn": autosar/cp/communication/v2x_geonet/index.md
       - 全局时间:
         - autosar/cp/globaltime/index.md
         - "StbM": autosar/cp/globaltime/stbm/index.md

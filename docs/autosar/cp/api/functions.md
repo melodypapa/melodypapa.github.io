@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2382** 个条目。
+共 **2392** 个条目。
 
 ## A
 
@@ -6948,6 +6948,36 @@ title: "AUTOSAR API 函数清单"
 
 **[V2xFacVdp](../communication/v2x_facilities/index.md#7711-v2xfacvdp)**
 > 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xGn_GetVersionInfo](../communication/v2x_geonet/index.md#732-v2xgn_getversioninfo)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xGn_Init](../communication/v2x_geonet/index.md#731-v2xgn_init)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xGn_MainFunction](../communication/v2x_geonet/index.md#751-v2xgn_mainfunction)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xGn_RxIndication](../communication/v2x_geonet/index.md#743-v2xgn_rxindication)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xGn_Transmit](../communication/v2x_geonet/index.md#736-v2xgn_transmit)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xGn_V2xM_AbortPseudonymChange](../communication/v2x_geonet/index.md#735-v2xgn_v2xm_abortpseudonymchange)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xGn_V2xM_CommitPseudonymChange](../communication/v2x_geonet/index.md#734-v2xgn_v2xm_commitpseudonymchange)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xGn_V2xM_DecapConfirmation](../communication/v2x_geonet/index.md#742-v2xgn_v2xm_decapconfirmation)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xGn_V2xM_EncapConfirmation](../communication/v2x_geonet/index.md#741-v2xgn_v2xm_encapconfirmation)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xGn_V2xM_PreparePseudonymChange](../communication/v2x_geonet/index.md#733-v2xgn_v2xm_preparepseudonymchange)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
 
 **[VerificationStatus](../communication/sec_oc/index.md#7843-verificationstatus)**
 > 函数 · [AUTOSAR SecOC (Secure Onboard Communication)](../communication/sec_oc/index.md) · SWS_SecOc · R23-11
