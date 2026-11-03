@@ -329,6 +329,7 @@ nav:
           - "CnV2xMsg": autosar/cp/communication/chinesev2x_msg/index.md
           - "CnV2xNet": autosar/cp/communication/chinesev2x_net/index.md
           - "CnV2xSec": autosar/cp/communication/chinesev2x_sec/index.md
+          - "V2xBtp": autosar/cp/communication/v2x_basictp/index.md
       - 全局时间:
         - autosar/cp/globaltime/index.md
         - "StbM": autosar/cp/globaltime/stbm/index.md

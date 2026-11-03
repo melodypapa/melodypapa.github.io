@@ -2981,6 +2981,18 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**UdpNm_SoAdIfTxConfirmation**](../communication/udp_network_management/index.md#741-udpnm_soadiftxconfirmation) | 下层通信接口模块确认PDU的传输，或者PDU的传输失败。 |
 | [**UdpNm_Transmit**](../communication/udp_network_management/index.md#7318-udpnm_transmit) | 请求传输 PDU。 |
 
+## AUTOSAR V2X Basic Transport（V2X基本传输协议）（5）
+
+来源：[AUTOSAR V2X Basic Transport（V2X基本传输协议）](../communication/v2x_basictp/index.md) · SWS_V2XBasicTransport
+
+| 函数 | 简述 |
+|---|---|
+| [**V2xBtp_CopyTxData**](../communication/v2x_basictp/index.md#742-v2xbtp_copytxdata) | V2xGn 模块调用本 API 以请求 V2xBtp 模块将发送数据复制到特定位置。 |
+| [**V2xBtp_GetVersionInfo**](../communication/v2x_basictp/index.md#732-v2xbtp_getversioninfo) | 返回本模块的版本信息。 |
+| [**V2xBtp_Init**](../communication/v2x_basictp/index.md#731-v2xbtp_init) | 初始化 V2xBtp 模块。 |
+| [**V2xBtp_RxIndication**](../communication/v2x_basictp/index.md#741-v2xbtp_rxindication) | 通过本 API，V2xBtp 模块获取接收到的 GeoNetworking 包的数据（BTP-PDU）和 GeoNetworking 参数。 |
+| [**V2xBtp_Transmit**](../communication/v2x_basictp/index.md#733-v2xbtp_transmit) | V2xFac 模块调用本 API 以请求向对端 BTP 实体发送一个 BTP-PDU。 |
+
 ## AUTOSAR Watchdog Driver（看门狗驱动）（4）
 
 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](../safety/watchdog_driver/index.md) · SWS_WatchdogDriver

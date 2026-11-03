@@ -350,13 +350,17 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 + B ↔ §1–§9 + B 1:1; ch.6 tracing + appendix A + "None." Known Limitations dropped; 3 figures embedded; [02018] SM2/SM3 requirement kept in source order between the SecReport checks)
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
 - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-5)
-- [ ] v2x_basictp (SWS_V2XBasicTransport · R23-11 markdown · ❌ new article)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-- [ ] Step 6 — TODO.md row + commit/PR
+- [x] v2x_basictp (SWS_V2XBasicTransport · R23-11 markdown · ❌ new article)
+  - Note: article `cp/communication/v2x_basictp/` (directory per row name, nav label "V2xBtp", V2X group). Shape: ch.1 → §1 (1.1 架构总览 Figure1_1, 1.2 功能总览 incl. the 3-bullet responsibility list) · ch.2 → §2 11 acronyms (intro names [13] Autosar Glossary) · 3.1 20-entry registry (largest so far; [9] rfc-editor.org curl 200; [15] split heading/line healed) + 3.2 · ch.4 → §4 (4.1 2-item C2C-CC/ETSI limitations, 4.2) · ch.5 → §5 intro + 5.1–5.4 · ch.6 dropped · ch.7 → §6 (6.1 通用功能, 6.2 消息接收 incl. V2xBtpDestinationPort matching + silent-drop + NOTE, 6.3 消息发送 incl. BTP-B/NH=2/destination-port-0, 6.4 错误分类 dev 表 4 rows + none-sentences) · ch.8 → §7 (7.1 15 imported rows; 7.2 2 types (TxParams 9 elements, RxParams 15 elements incl. securityReport/certificateId/sspBits); 7.3 3 functions (Transmit syntax ")" completed at page split); 7.4 2 callbacks (RxIndication + CopyTxData); 7.5.1 强制 2 rows + 7.5.2 可选 1 row + 7.5.3.1 &lt;User&gt;_RxIndication configurable as vertical table + [00058] configurability requirement) · ch.9 → §8 时序图 (intro prose translated; 8.1 发送请求 Figure9_1, 8.2 接收指示 Figure9_2) · ch.10 → §9 (9.1 如何阅读本章; 9.2 容器: 9.2.1 变体 + 9.2.1.1 VARIANT-PRE-COMPILE depth preserved, 9.2.2 V2xBtp + Figure10_1, 9.2.3 V2xBtpGeneral 2 params + Figure10_2, 9.2.4 V2xBtpRxIndicationFunction 3 params + Figure10_3; SWS 条目 cells [ECUC_V2xBtp_*]; 9.3 发布信息 pointer sentence PDF-recovered from p.32) · ch.6 tracing dropped · NO ## B chapter — source has no change-history annex (ends at ch.10)
+  - Note: source quirks: none significant — figure chrome ("V2X Management", "Off-board Communication Services") dropped; 10.3 Published Information content recovered from the R23-11 PDF ("For details refer to the chapter 10.3 … in [14]")
+  - Note: Phase A — strict build exit 0 / 0 WARNING / no v2xbtp notices; check_heading_lang OK; check_indexes OK; hygiene 0 h1/`\<`/{DRAFT}/bracketed-SWS-ids; acronym 11 term lines = source 11 rows, 0 tables; check_api_sync OK (2 types/3 functions/3 说明); gen_api_list regenerated (V2xBtp 2 types + 3 functions SITE-linked, --check 0); census --apply: 26 lines (6 chapter-refs + 31 citation links), idempotent re-run 0 lines; external URL rfc-editor.org 200
+  - Note: glossary +8 new terms (BTP, BTP-A, BTP-B, CAM, DENM, GN, ITS, UDP-append wait — UDP exists) + 4 来源 appends (DET, IP, PDU, UDP); new: BTP, BTP-A, BTP-B, CAM, DENM, GN, ITS
+  - [x] Step 1 — Source resolution + gap analysis (873-line R23-11 markdown; 6 content figures via caption-anchored mapper — figures 9.x/10.x confirmed real despite small pixel sizes 393–637px wide diagrams)
+  - [x] Step 2 — In-place translation/completion (full Type A build, main session)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 ↔ §1–§9 1:1; ch.6 tracing dropped (compliance); no B chapter — source has none; 6 figures embedded)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+- [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-5)
 - [ ] v2x_datamgr (SWS_V2XDataManager · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
