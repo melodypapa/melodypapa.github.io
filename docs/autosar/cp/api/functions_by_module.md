@@ -1993,7 +1993,6 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**MemAcc_RequestLock**](../memory/memory_access/index.md#7328-memacc_requestlock) | 请求锁定一个地址区以进行独占访问。 |
 | [**MemAcc_Write**](../memory/memory_access/index.md#7323-memacc_write) | 触发一个写作业，将所传递的数据以给定的地址和长度存储到所提供的地址区中。 |
 
-<<<<<<< HEAD
 ## AUTOSAR Mem（内存驱动程序）（13）
 
 来源：[AUTOSAR Mem（内存驱动程序）](../memory/memory_driver/index.md) · SWS_MemoryDriver
@@ -2013,7 +2012,7 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**Mem_Resume**](../memory/memory_driver/index.md#7316-mem_resume) | 服务 ID 0x0d。 |
 | [**Mem_Suspend**](../memory/memory_driver/index.md#7315-mem_suspend) | 服务 ID 0x0c。 |
 | [**Mem_Write**](../memory/memory_driver/index.md#7322-mem_write) | 服务 ID 0x06。 |
-=======
+
 ## AUTOSAR Mka（MACsec 密钥协商）（18）
 
 来源：[AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement
@@ -2038,7 +2037,6 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**Mka_SetPaePermissiveMode**](../communication/macsec/index.md#738-mka_setpaepermissivemode) | — |
 | [**Mka_StartPae**](../communication/macsec/index.md#739-mka_startpae) | — |
 | [**Mka_TxConfirmation**](../communication/macsec/index.md#743-mka_txconfirmation) | — |
->>>>>>> c43ef7d (docs: translate MACsec Key Agreement (Mka))
 
 ## AUTOSAR Nm（网络管理接口）（1）
 
@@ -2456,6 +2454,144 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**SoAd_TpTransmit**](../communication/soad/index.md#7324-soad_tptransmit) | C |
 | [**SoAd_TxConfirmation**](../communication/soad/index.md#743-soad_txconfirmation) | C |
 | [**SoAd_WriteDhcpHostNameOption**](../communication/soad/index.md#73419-soad_writedhcphostnameoption) | C |
+
+## Specification of Bit Handling Routines（位处理例程规范）（25）
+
+来源：[Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary
+
+| 函数 | 简述 |
+|---|---|
+| [**Bfx_ClrBit**](../libraries/bfx/index.md#742-bfx_clrbit) | 该函数应将输入数据在请求的位位置上的逻辑状态清除为「0」。 |
+| [**Bfx_ClrBitMask**](../libraries/bfx/index.md#747-bfx_clrbitmask) | 该函数应按照掩码的规定，将输入数据所有位位置的逻辑状态清除为「0」。 |
+| [**Bfx_CopyBit**](../libraries/bfx/index.md#7417-bfx_copybit) | 该函数应将一个位从源数据的某个位位置复制到目标数据的某个位位置。 |
+| [**Bfx_CountLeadingOnes**](../libraries/bfx/index.md#7422-bfx_countleadingones) | 从最高有效位开始统计数据中连续 1 的数量并返回结果。 |
+| [**Bfx_CountLeadingSigns**](../libraries/bfx/index.md#7423-bfx_countleadingsigns) | 从 msb 减一的位置开始，统计数据中与最高有效位具有相同值的连续位的数量。 |
+| [**Bfx_CountLeadingZeros**](../libraries/bfx/index.md#7424-bfx_countleadingzeros) | 从最高有效位开始统计数据中连续 0 的数量并返回结果。 |
+| [**Bfx_GetBit**](../libraries/bfx/index.md#743-bfx_getbit) | 该函数应返回输入数据在请求的位位置上的逻辑状态。 |
+| [**Bfx_GetBits**](../libraries/bfx/index.md#745-bfx_getbits) | 该函数应返回输入数据从「BitStartPn」开始、长度为「BitLn」的各个位。 |
+| [**Bfx_GetVersionInfo**](../libraries/bfx/index.md#781-bfx_getversioninfo) | 返回本库的版本信息。 |
+| [**Bfx_PutBit**](../libraries/bfx/index.md#7420-bfx_putbit) | 该函数应按照「Status」值，将输入数据中由 BitPn 指定的位更新为「1」或「0」。 |
+| [**Bfx_PutBits**](../libraries/bfx/index.md#7418-bfx_putbits) | 该函数应按照 Pattern 中的规定，将位从指定的位位置开始放入输入 Data 中。 |
+| [**Bfx_PutBitsMask**](../libraries/bfx/index.md#7419-bfx_putbitsmask) | 该函数应将 Pattern 中定义的、且相应 Mask 位置位为 1 的所有位放入输入 Data 中。 |
+| [**Bfx_RotBitLt**](../libraries/bfx/index.md#7416-bfx_rotbitlt) | 该函数应将数据向左循环移位 ShiftCnt 位。 |
+| [**Bfx_RotBitRt**](../libraries/bfx/index.md#7415-bfx_rotbitrt) | 该函数应将数据向右循环移位 ShiftCnt 位。 |
+| [**Bfx_SetBit**](../libraries/bfx/index.md#741-bfx_setbit) | 该函数应将输入数据在请求的位位置上的逻辑状态设置为「1」。 |
+| [**Bfx_SetBitMask**](../libraries/bfx/index.md#746-bfx_setbitmask) | 该函数应按照相应的 Mask 位设置为 1 的情况，将数据设置为逻辑状态「1」，其余位保持其原始值。 |
+| [**Bfx_SetBits**](../libraries/bfx/index.md#744-bfx_setbits) | 该函数应按照「Status」值，从「BitStartPn」开始、以「BitLn」为长度，将输入数据设置为「1」或「0」。 |
+| [**Bfx_ShiftBitLt**](../libraries/bfx/index.md#7414-bfx_shiftbitlt) | 该函数应将数据左移 ShiftCnt 位。 |
+| [**Bfx_ShiftBitRt**](../libraries/bfx/index.md#7413-bfx_shiftbitrt) | 该函数应将数据右移 ShiftCnt 位。 |
+| [**Bfx_ShiftBitSat**](../libraries/bfx/index.md#7421-bfx_shiftbitsat) | 带饱和的算术移位。 |
+| [**Bfx_ToggleBitMask**](../libraries/bfx/index.md#7412-bfx_togglebitmask) | 当掩码的相应位被启用并置为 1 时，该函数切换数据的相应位。 |
+| [**Bfx_ToggleBits**](../libraries/bfx/index.md#7411-bfx_togglebits) | 该函数切换数据的所有位（数据的 1 的补码）。 |
+| [**Bfx_TstBitLnMask**](../libraries/bfx/index.md#749-bfx_tstbitlnmask) | 该函数对输入数据进行测试，如果按照掩码至少有一个位被置位，则该函数应返回 TRUE，否则应返回 FALSE。 |
+| [**Bfx_TstBitMask**](../libraries/bfx/index.md#748-bfx_tstbitmask) | 如果掩码值中定义的所有位都在输入 Data 值中被置位，则该函数应返回 TRUE。 |
+| [**Bfx_TstParityEven**](../libraries/bfx/index.md#7410-bfx_tstparityeven) | 该函数测试被置位为 1 的位的数量。 |
+
+## Specification of CRC Routines（CRC 例程规范）（1）
+
+来源：[Specification of CRC Routines（CRC 例程规范）](../libraries/crc/index.md) · SWS_CRCLibrary
+
+| 函数 | 简述 |
+|---|---|
+| [**Crc_GetVersionInfo**](../libraries/crc/index.md#735-crc_getversioninfo) | 此服务返回本模块的版本信息。 |
+
+## Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）（91）
+
+来源：[Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary
+
+| 函数 | 简述 |
+|---|---|
+| [**E2E_GetVersionInfo**](../libraries/e2e/index.md#73161-e2e_getversioninfo) | 返回本模块的版本信息。 |
+| [**E2E_P01Check**](../libraries/e2e/index.md#7314-e2e_p01check) | 使用 E2E profile 1 校验接收到的 Data。 |
+| [**E2E_P01CheckInit**](../libraries/e2e/index.md#7315-e2e_p01checkinit) | 初始化校验状态。 |
+| [**E2E_P01Forward**](../libraries/e2e/index.md#7313-e2e_p01forward) | 使用 E2E profile 01 保护被转发的数据。 |
+| [**E2E_P01MapStatusToSM**](../libraries/e2e/index.md#7316-e2e_p01mapstatustosm) | 该函数将 Profile 1 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P01Protect**](../libraries/e2e/index.md#7311-e2e_p01protect) | 使用 E2E profile 1 保护要发送的数组/缓冲区。 |
+| [**E2E_P01ProtectInit**](../libraries/e2e/index.md#7312-e2e_p01protectinit) | 初始化保护状态。 |
+| [**E2E_P02Check**](../libraries/e2e/index.md#7324-e2e_p02check) | 使用 E2E profile 2 校验数组/缓冲区。 |
+| [**E2E_P02CheckInit**](../libraries/e2e/index.md#7325-e2e_p02checkinit) | 初始化校验状态。 |
+| [**E2E_P02Forward**](../libraries/e2e/index.md#7323-e2e_p02forward) | 使用 E2E profile 02 保护被转发的数据。 |
+| [**E2E_P02MapStatusToSM**](../libraries/e2e/index.md#7326-e2e_p02mapstatustosm) | 该函数将 Profile 2 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P02Protect**](../libraries/e2e/index.md#7321-e2e_p02protect) | 使用 E2E profile 2 保护要发送的数组/缓冲区。 |
+| [**E2E_P02ProtectInit**](../libraries/e2e/index.md#7322-e2e_p02protectinit) | 初始化保护状态。 |
+| [**E2E_P04Check**](../libraries/e2e/index.md#7334-e2e_p04check) | 使用 E2E profile 4 校验接收到的 Data。 |
+| [**E2E_P04CheckInit**](../libraries/e2e/index.md#7335-e2e_p04checkinit) | 初始化校验状态。 |
+| [**E2E_P04Forward**](../libraries/e2e/index.md#7333-e2e_p04forward) | 使用 E2E profile 04 保护被转发的数据。 |
+| [**E2E_P04MapStatusToSM**](../libraries/e2e/index.md#7336-e2e_p04mapstatustosm) | 该函数将 Profile 4 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P04mCheckInit**](../libraries/e2e/index.md#7346-e2e_p04mcheckinit) | 初始化校验状态。 |
+| [**E2E_P04mForward**](../libraries/e2e/index.md#7343-e2e_p04mforward) | 使用 E2E profile 4m 保护被转发的数据。 |
+| [**E2E_P04mMapStatusToSM**](../libraries/e2e/index.md#7347-e2e_p04mmapstatustosm) | 该函数将 Profile 4m 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P04mProtect**](../libraries/e2e/index.md#7341-e2e_p04mprotect) | 使用 E2E profile 4m 保护要发送的数组/缓冲区。 |
+| [**E2E_P04mProtectInit**](../libraries/e2e/index.md#7342-e2e_p04mprotectinit) | 初始化保护状态。 |
+| [**E2E_P04mSinkCheck**](../libraries/e2e/index.md#7345-e2e_p04msinkcheck) | 使用 E2E profile 4m 校验接收到的 Data。 |
+| [**E2E_P04mSourceCheck**](../libraries/e2e/index.md#7344-e2e_p04msourcecheck) | 使用 E2E profile 4m 校验接收到的 Data。 |
+| [**E2E_P04Protect**](../libraries/e2e/index.md#7331-e2e_p04protect) | 使用 E2E profile 4 保护要发送的数组/缓冲区。 |
+| [**E2E_P04ProtectInit**](../libraries/e2e/index.md#7332-e2e_p04protectinit) | 初始化保护状态。 |
+| [**E2E_P05Check**](../libraries/e2e/index.md#7354-e2e_p05check) | 使用 E2E profile 5 校验接收到的 Data。 |
+| [**E2E_P05CheckInit**](../libraries/e2e/index.md#7355-e2e_p05checkinit) | 初始化校验状态。 |
+| [**E2E_P05Forward**](../libraries/e2e/index.md#7353-e2e_p05forward) | 使用 E2E profile 05 保护被转发的数据。 |
+| [**E2E_P05MapStatusToSM**](../libraries/e2e/index.md#7356-e2e_p05mapstatustosm) | 该函数将 Profile 5 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P05Protect**](../libraries/e2e/index.md#7351-e2e_p05protect) | 使用 E2E profile 5 保护要发送的数组/缓冲区。 |
+| [**E2E_P05ProtectInit**](../libraries/e2e/index.md#7352-e2e_p05protectinit) | 初始化保护状态。 |
+| [**E2E_P06Check**](../libraries/e2e/index.md#7364-e2e_p06check) | 使用 E2E profile 6 校验接收到的 Data。 |
+| [**E2E_P06CheckInit**](../libraries/e2e/index.md#7365-e2e_p06checkinit) | 初始化校验状态。 |
+| [**E2E_P06Forward**](../libraries/e2e/index.md#7363-e2e_p06forward) | 使用 E2E profile 06 保护被转发的数据。 |
+| [**E2E_P06MapStatusToSM**](../libraries/e2e/index.md#7366-e2e_p06mapstatustosm) | 该函数将 Profile 6 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P06Protect**](../libraries/e2e/index.md#7361-e2e_p06protect) | 使用 E2E profile 6 保护要发送的数组/缓冲区。 |
+| [**E2E_P06ProtectInit**](../libraries/e2e/index.md#7362-e2e_p06protectinit) | 初始化保护状态。 |
+| [**E2E_P07Check**](../libraries/e2e/index.md#7374-e2e_p07check) | 使用 E2E profile 7 校验接收到的 Data。 |
+| [**E2E_P07CheckInit**](../libraries/e2e/index.md#7375-e2e_p07checkinit) | 初始化校验状态。 |
+| [**E2E_P07Forward**](../libraries/e2e/index.md#7373-e2e_p07forward) | 使用 E2E profile 07 保护被转发的数据。 |
+| [**E2E_P07MapStatusToSM**](../libraries/e2e/index.md#7376-e2e_p07mapstatustosm) | 该函数将 Profile 7 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P07mCheckInit**](../libraries/e2e/index.md#7386-e2e_p07mcheckinit) | 初始化校验状态。 |
+| [**E2E_P07mForward**](../libraries/e2e/index.md#7383-e2e_p07mforward) | 使用 E2E profile 7m 保护被转发的数据。 |
+| [**E2E_P07mMapStatusToSM**](../libraries/e2e/index.md#7387-e2e_p07mmapstatustosm) | 该函数将 Profile 7m 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P07mProtect**](../libraries/e2e/index.md#7381-e2e_p07mprotect) | 使用 E2E profile 7m 保护要发送的数组/缓冲区。 |
+| [**E2E_P07mProtectInit**](../libraries/e2e/index.md#7382-e2e_p07mprotectinit) | 初始化保护状态。 |
+| [**E2E_P07mSinkCheck**](../libraries/e2e/index.md#7385-e2e_p07msinkcheck) | 使用 E2E profile 7m 校验接收到的 Data。 |
+| [**E2E_P07mSourceCheck**](../libraries/e2e/index.md#7384-e2e_p07msourcecheck) | 使用 E2E profile 7m 校验接收到的 Data。 |
+| [**E2E_P07Protect**](../libraries/e2e/index.md#7371-e2e_p07protect) | 使用 E2E profile 7 保护要发送的数组/缓冲区。 |
+| [**E2E_P07ProtectInit**](../libraries/e2e/index.md#7372-e2e_p07protectinit) | 初始化保护状态。 |
+| [**E2E_P08Check**](../libraries/e2e/index.md#7394-e2e_p08check) | 使用 E2E profile 08 校验接收到的 Data。 |
+| [**E2E_P08CheckInit**](../libraries/e2e/index.md#7395-e2e_p08checkinit) | 初始化校验状态。 |
+| [**E2E_P08Forward**](../libraries/e2e/index.md#7393-e2e_p08forward) | 使用 E2E profile 08 保护被转发的数据。 |
+| [**E2E_P08MapStatusToSM**](../libraries/e2e/index.md#7396-e2e_p08mapstatustosm) | 该函数将 Profile 08 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P08mCheckInit**](../libraries/e2e/index.md#73106-e2e_p08mcheckinit) | 初始化校验状态。 |
+| [**E2E_P08mForward**](../libraries/e2e/index.md#73103-e2e_p08mforward) | 使用 E2E profile 08m 保护被转发的数据。 |
+| [**E2E_P08mMapStatusToSM**](../libraries/e2e/index.md#73107-e2e_p08mmapstatustosm) | 该函数将 Profile 08m 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P08mProtect**](../libraries/e2e/index.md#73101-e2e_p08mprotect) | 使用 E2E profile 08m 保护要发送的数组/缓冲区。 |
+| [**E2E_P08mProtectInit**](../libraries/e2e/index.md#73102-e2e_p08mprotectinit) | 初始化保护状态。 |
+| [**E2E_P08mSinkCheck**](../libraries/e2e/index.md#73105-e2e_p08msinkcheck) | 使用 E2E profile 8m 校验接收到的 Data。 |
+| [**E2E_P08mSourceCheck**](../libraries/e2e/index.md#73104-e2e_p08msourcecheck) | 使用 E2E profile 8m 校验接收到的 Data。 |
+| [**E2E_P08Protect**](../libraries/e2e/index.md#7391-e2e_p08protect) | 使用 E2E profile 08 保护要发送的数组/缓冲区。 |
+| [**E2E_P08ProtectInit**](../libraries/e2e/index.md#7392-e2e_p08protectinit) | 初始化保护状态。 |
+| [**E2E_P11Check**](../libraries/e2e/index.md#73114-e2e_p11check) | 使用 E2E profile 11 校验接收到的 Data。 |
+| [**E2E_P11CheckInit**](../libraries/e2e/index.md#73115-e2e_p11checkinit) | 初始化校验状态。 |
+| [**E2E_P11Forward**](../libraries/e2e/index.md#73113-e2e_p11forward) | 使用 E2E profile 11 保护被转发的数据。 |
+| [**E2E_P11MapStatusToSM**](../libraries/e2e/index.md#73116-e2e_p11mapstatustosm) | 该函数将 Profile 11 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P11Protect**](../libraries/e2e/index.md#73111-e2e_p11protect) | 使用 E2E profile 11 保护要发送的数组/缓冲区。 |
+| [**E2E_P11ProtectInit**](../libraries/e2e/index.md#73112-e2e_p11protectinit) | 初始化保护状态。 |
+| [**E2E_P22Check**](../libraries/e2e/index.md#73124-e2e_p22check) | 使用 E2E profile 22 校验接收到的 Data。 |
+| [**E2E_P22CheckInit**](../libraries/e2e/index.md#73125-e2e_p22checkinit) | 初始化校验状态。 |
+| [**E2E_P22Forward**](../libraries/e2e/index.md#73123-e2e_p22forward) | 使用 E2E profile 22 保护被转发的数据。 |
+| [**E2E_P22MapStatusToSM**](../libraries/e2e/index.md#73126-e2e_p22mapstatustosm) | 该函数将 Profile 22 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P22Protect**](../libraries/e2e/index.md#73121-e2e_p22protect) | 使用 E2E profile 22 保护要发送的数组/缓冲区。 |
+| [**E2E_P22ProtectInit**](../libraries/e2e/index.md#73122-e2e_p22protectinit) | 初始化保护状态。 |
+| [**E2E_P44Check**](../libraries/e2e/index.md#73134-e2e_p44check) | 使用 E2E profile 44 校验接收到的 Data。 |
+| [**E2E_P44CheckInit**](../libraries/e2e/index.md#73135-e2e_p44checkinit) | 初始化校验状态。 |
+| [**E2E_P44Forward**](../libraries/e2e/index.md#73133-e2e_p44forward) | 使用 E2E profile 44 保护被转发的数据。 |
+| [**E2E_P44MapStatusToSM**](../libraries/e2e/index.md#73136-e2e_p44mapstatustosm) | 该函数将 Profile 44 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P44mCheckInit**](../libraries/e2e/index.md#73146-e2e_p44mcheckinit) | 初始化校验状态。 |
+| [**E2E_P44mForward**](../libraries/e2e/index.md#73143-e2e_p44mforward) | 使用 E2E profile 44m 保护被转发的数据。 |
+| [**E2E_P44mMapStatusToSM**](../libraries/e2e/index.md#73147-e2e_p44mmapstatustosm) | 该函数将 Profile 44m 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P44mProtect**](../libraries/e2e/index.md#73141-e2e_p44mprotect) | 使用 E2E profile 44m 保护要发送的数组/缓冲区。 |
+| [**E2E_P44mProtectInit**](../libraries/e2e/index.md#73142-e2e_p44mprotectinit) | 初始化保护状态。 |
+| [**E2E_P44mSinkCheck**](../libraries/e2e/index.md#73145-e2e_p44msinkcheck) | 使用 E2E profile 44m 校验接收到的 Data。 |
+| [**E2E_P44mSourceCheck**](../libraries/e2e/index.md#73144-e2e_p44msourcecheck) | 使用 E2E profile 44m 校验接收到的 Data。 |
+| [**E2E_P44Protect**](../libraries/e2e/index.md#73131-e2e_p44protect) | 使用 E2E profile 44 保护要发送的数组/缓冲区。 |
+| [**E2E_P44ProtectInit**](../libraries/e2e/index.md#73132-e2e_p44protectinit) | 初始化保护状态。 |
+| [**E2E_SMCheck**](../libraries/e2e/index.md#73151-e2e_smcheck) | 校验通信信道。 |
+| [**E2E_SMCheckInit**](../libraries/e2e/index.md#73152-e2e_smcheckinit) | 初始化状态机。 |
 
 ## AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）（17）
 

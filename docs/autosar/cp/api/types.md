@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **596** 个条目。
+共 **662** 个条目。
 
 ## A
 
@@ -642,6 +642,192 @@ title: "AUTOSAR API 类型清单"
 > 类型 · [AUTOSAR DoIP（基于 IP 的诊断）](../communication/diagnostic_over_ip/index.md) · SWS_DiagnosticOverIP · R23-11
 
 ## E
+
+**[E2E_P01CheckStateType](../libraries/e2e/index.md#7214-e2e_p01checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P01CheckStatusType](../libraries/e2e/index.md#7215-e2e_p01checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P01ConfigType](../libraries/e2e/index.md#7211-e2e_p01configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P01DataIDMode](../libraries/e2e/index.md#7212-e2e_p01dataidmode)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P01ProtectStateType](../libraries/e2e/index.md#7213-e2e_p01protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P02CheckStateType](../libraries/e2e/index.md#7223-e2e_p02checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P02CheckStatusType](../libraries/e2e/index.md#7224-e2e_p02checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P02ConfigType](../libraries/e2e/index.md#7221-e2e_p02configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P02ProtectStateType](../libraries/e2e/index.md#7222-e2e_p02protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04CheckStateType](../libraries/e2e/index.md#7233-e2e_p04checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04CheckStatusType](../libraries/e2e/index.md#7234-e2e_p04checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04ConfigType](../libraries/e2e/index.md#7231-e2e_p04configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04mCheckStateType](../libraries/e2e/index.md#7243-e2e_p04mcheckstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04mCheckStatusType](../libraries/e2e/index.md#7244-e2e_p04mcheckstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04mConfigType](../libraries/e2e/index.md#7241-e2e_p04mconfigtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04mProtectStateType](../libraries/e2e/index.md#7242-e2e_p04mprotectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04ProtectStateType](../libraries/e2e/index.md#7232-e2e_p04protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P05CheckStateType](../libraries/e2e/index.md#7253-e2e_p05checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P05CheckStatusType](../libraries/e2e/index.md#7254-e2e_p05checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P05ConfigType](../libraries/e2e/index.md#7251-e2e_p05configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P05ProtectStateType](../libraries/e2e/index.md#7252-e2e_p05protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P06CheckStateType](../libraries/e2e/index.md#7263-e2e_p06checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P06CheckStatusType](../libraries/e2e/index.md#7264-e2e_p06checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P06ConfigType](../libraries/e2e/index.md#7261-e2e_p06configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P06ProtectStateType](../libraries/e2e/index.md#7262-e2e_p06protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07CheckStateType](../libraries/e2e/index.md#7273-e2e_p07checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07CheckStatusType](../libraries/e2e/index.md#7274-e2e_p07checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07ConfigType](../libraries/e2e/index.md#7271-e2e_p07configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07mCheckStateType](../libraries/e2e/index.md#7283-e2e_p07mcheckstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07mCheckStatusType](../libraries/e2e/index.md#7284-e2e_p07mcheckstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07mConfigType](../libraries/e2e/index.md#7281-e2e_p07mconfigtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07mProtectStateType](../libraries/e2e/index.md#7282-e2e_p07mprotectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07ProtectStateType](../libraries/e2e/index.md#7272-e2e_p07protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08CheckStateType](../libraries/e2e/index.md#7293-e2e_p08checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08CheckStatusType](../libraries/e2e/index.md#7294-e2e_p08checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08ConfigType](../libraries/e2e/index.md#7291-e2e_p08configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08mCheckStateType](../libraries/e2e/index.md#72103-e2e_p08mcheckstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08mCheckStatusType](../libraries/e2e/index.md#72104-e2e_p08mcheckstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08mConfigType](../libraries/e2e/index.md#72101-e2e_p08mconfigtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08mProtectStateType](../libraries/e2e/index.md#72102-e2e_p08mprotectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08ProtectStateType](../libraries/e2e/index.md#7292-e2e_p08protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P11CheckStateType](../libraries/e2e/index.md#72114-e2e_p11checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P11CheckStatusType](../libraries/e2e/index.md#72115-e2e_p11checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P11ConfigType](../libraries/e2e/index.md#72111-e2e_p11configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P11DataIDMode](../libraries/e2e/index.md#72112-e2e_p11dataidmode)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P11ProtectStateType](../libraries/e2e/index.md#72113-e2e_p11protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P22CheckStateType](../libraries/e2e/index.md#72123-e2e_p22checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P22CheckStatusType](../libraries/e2e/index.md#72124-e2e_p22checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P22ConfigType](../libraries/e2e/index.md#72121-e2e_p22configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P22ProtectStateType](../libraries/e2e/index.md#72122-e2e_p22protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44CheckStateType](../libraries/e2e/index.md#72133-e2e_p44checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44CheckStatusType](../libraries/e2e/index.md#72134-e2e_p44checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44ConfigType](../libraries/e2e/index.md#72131-e2e_p44configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44mCheckStateType](../libraries/e2e/index.md#72143-e2e_p44mcheckstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44mCheckStatusType](../libraries/e2e/index.md#72144-e2e_p44mcheckstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44mConfigType](../libraries/e2e/index.md#72141-e2e_p44mconfigtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44mProtectStateType](../libraries/e2e/index.md#72142-e2e_p44mprotectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44ProtectStateType](../libraries/e2e/index.md#72132-e2e_p44protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_PCheckStatusType](../libraries/e2e/index.md#72151-e2e_pcheckstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_SMCheckStateType](../libraries/e2e/index.md#72153-e2e_smcheckstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_SMConfigType](../libraries/e2e/index.md#72152-e2e_smconfigtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_SMStateType](../libraries/e2e/index.md#72154-e2e_smstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
 
 **[E2EXf_ConfigType](../communication/e2e_transformer/index.md#721-e2exf_configtype)**
 > 类型 · [E2E Transformer (E2E转换器)](../communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
