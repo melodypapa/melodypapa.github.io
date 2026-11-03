@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2399** 个条目。
+共 **2400** 个条目。
 
 ## A
 
@@ -4671,6 +4671,9 @@ title: "AUTOSAR API 函数清单"
 
 **[Ifl_IpoMap_f32](../libraries/ifl/index.md#75131-ifl_ipomap_f32)**
 > 函数 · [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../libraries/ifl/index.md) · SWS_IFLLibrary · R23-11
+
+**[Ifx_GetVersionInfo](../libraries/ifx/index.md#761-ifx_getversioninfo)**
+> 函数 · [Specification of Fixed Point Interpolation Routines（定点插值例程规范）](../libraries/ifx/index.md) · SWS_IFXLibrary · R23-11
 
 **[IncrementCounter](../system_services/operating_system/index.md#7417-incrementcounter)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11

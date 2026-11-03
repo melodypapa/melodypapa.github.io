@@ -432,6 +432,7 @@ nav:
         - "Mfl": autosar/cp/libraries/mfl/index.md
         - "Mfx": autosar/cp/libraries/mfx/index.md
         - "Ifl": autosar/cp/libraries/ifl/index.md
+        - "Ifx": autosar/cp/libraries/ifx/index.md
       - 模板:
         - autosar/cp/template/index.md
         - "1. 一段话总结": autosar/cp/template/generic_structure/index.md

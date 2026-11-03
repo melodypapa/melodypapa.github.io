@@ -2533,6 +2533,14 @@ title: "AUTOSAR API 函数清单（按模块）"
 |---|---|
 | [**Crc_GetVersionInfo**](../libraries/crc/index.md#735-crc_getversioninfo) | 此服务返回本模块的版本信息。 |
 
+## Specification of Fixed Point Interpolation Routines（定点插值例程规范）（1）
+
+来源：[Specification of Fixed Point Interpolation Routines（定点插值例程规范）](../libraries/ifx/index.md) · SWS_IFXLibrary
+
+| 函数 | 简述 |
+|---|---|
+| [**Ifx_GetVersionInfo**](../libraries/ifx/index.md#761-ifx_getversioninfo) | 返回本库的版本信息。 |
+
 ## Specification of Fixed Point Math Routines（定点数学例程规范）（2）
 
 来源：[Specification of Fixed Point Math Routines（定点数学例程规范）](../libraries/mfx/index.md) · SWS_MFXLibrary

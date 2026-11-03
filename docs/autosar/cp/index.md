@@ -205,6 +205,7 @@ title: "CP AUTOSAR"
   * [Specification of Floating Point Math Routines（浮点数学例程规范）](libraries/mfl/index.md)
   * [Specification of Fixed Point Math Routines（定点数学例程规范）](libraries/mfx/index.md)
   * [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](libraries/ifl/index.md)
+  * [Specification of Fixed Point Interpolation Routines（定点插值例程规范）](libraries/ifx/index.md)
 
 ### 模板
 

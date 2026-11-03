@@ -108,10 +108,17 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] ifx (SWS_IFXLibrary · R23-11 markdown · ❌ new article, short name Ifx)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-04 batch run — committed without the per-article Step 5 gate (batch-end joint confirmation), same as the crc/e2e/bfx rows.
+  - Note: source ch.6 Requirements Tracing + appendix A dropped per mandate; ch.9 "Not applicable" omitted per the placeholder rule (ch.10 → §8, MFX-style 10.1 如何阅读本章 pattern); source 8.6 Examples "None" omitted (8.7–8.10 renumbered to §7.6–§7.9); 8.10 intro "None" omitted (subsections keep one-sentence statements).
+  - Note: 23 API entries — DPSearch/IpoCur/LkUpCur/IpoMap/LkUpMap/LkUpBaseMap (distributed) + 16 integrated groups (IntIpoCur/IntLkUpCur/IntIpoFixCur/IntLkUpFixCur/IntIpoFixICur/IntLkUpFixICur/IntIpoMap/IntLkUpMap/IntLkUpBaseMap/IntIpoFixMap/IntLkUpFixMap/IntLkUpFixBaseMap/IntIpoFixIMap/IntLkUpFixIMap/IntLkUpFixIBaseMap/IpoCub) + GetVersionInfo, each with full routine-ID tables incl. the u32/s32 0x0C1–0x0EA extension rows; page-break-split tables merged. Ifx_IntLkUpFixICur keeps the source's "_OutTypeMnt" typo (heading + syntax + prototype all carry it).
+  - Note: source 8.4.1's stray "- 00302" bullet fragment is converter debris — dropped; 8.5.3.1's "See section 8.4.2" renumbered to §7.4.2 and linked (IFX has a real 8.4.2 — unlike IFL's dangling ref); 8.5.3.2 Note "swaping X and Y axis during function call for Call-back notifications" is source-garbled — rendered 如第 7.4 章所述…适用于下面提到的记录布局：从 Map_u8u16_u8（序号 61）到 Map_s16u16_s16（序号 84）; Table 8.2's page-split continuation rows (Map_u32/Map_s32/Cub_s8/s16/u8/u16, cell/name columns swapped in the artifact) normalized into the main table.
+  - Note: content figures: Figure1-1 (c8707ddb) + Figure8-1 (46d52fff, 914×360 linear-vs-lookup diagram); the spilled diagram labels ("Linear interpolation - Lookup · Data points original curve") dropped; 914×60 strips (76d7626d/4bfa9ef3/0d061909) are page-footer chrome. asam.net (§3.1 [4]) verified 200.
+  - Note: glossary — IFX entry already existed (Macro Encapsulation EXP run); 来源 line extended with SWS_IFXLibrary (one-term-once).
+  - Note: gen_api_list entity-heading limitation (Backlog 2026-11-04) also applies — ifx contributes 1/23 identifiers.
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] efx (SWS_EFXLibrary · R23-11 markdown · ❌ new article, short name Efx)
