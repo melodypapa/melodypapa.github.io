@@ -264,8 +264,7 @@ nav:
         - "函数清单(按模块)": autosar/cp/api/functions_by_module.md
       - 通信:
         - autosar/cp/communication/index.md
-        - "CAN Driver":
-          - "Can": autosar/cp/communication/can_driver/index.md
+        - "Can": autosar/cp/communication/can_driver/index.md
         - "CanIf": autosar/cp/communication/can_interface/index.md
         - "CanNm": autosar/cp/communication/can_network_management/index.md
         - "J1939Nm": autosar/cp/communication/j1939nm/index.md
