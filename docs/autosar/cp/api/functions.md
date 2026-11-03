@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2305** 个条目。
+共 **2389** 个条目。
 
 ## A
 
@@ -5363,6 +5363,258 @@ title: "AUTOSAR API 函数清单"
 
 **[MemIf_Write](../memory/memory_abstraction_interface/index.md#732-memif_write)**
 > 函数 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
+
+**[Mfl](../libraries/mfl/index.md#75183-mfl)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Abs_f32](../libraries/mfl/index.md#7551-mfl_abs_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_arcCos_f32](../libraries/mfl/index.md#7586-mfl_arccos_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_arcSin_f32](../libraries/mfl/index.md#7584-mfl_arcsin_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_arcTan2_f32](../libraries/mfl/index.md#75810-mfl_arctan2_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_arcTan_f32](../libraries/mfl/index.md#7588-mfl_arctan_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_ArrayAverage_f32_f32](../libraries/mfl/index.md#75101-mfl_arrayaverage_f32_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Average_f32_f32](../libraries/mfl/index.md#7591-mfl_average_f32_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Bitpat_f32_u32](../libraries/mfl/index.md#75191-mfl_bitpat_f32_u32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_CalcTeQ_f32](../libraries/mfl/index.md#75433-mfl_calcteq_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_CalcTeQApp_f32](../libraries/mfl/index.md#75434-mfl_calcteqapp_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Ceil_f32](../libraries/mfl/index.md#7533-mfl_ceil_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Cos_f32](../libraries/mfl/index.md#7582-mfl_cos_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Cos_s32_f32](../libraries/mfl/index.md#75211-mfl_cos_s32_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_CtrlSetLimit](../libraries/mfl/index.md#75463-mfl_ctrlsetlimit)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_CtrlSetLimits](../libraries/mfl/index.md#75464-mfl_ctrlsetlimits)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DeadTime](../libraries/mfl/index.md#7514-mfl_deadtime)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DeadTime_f32_f32](../libraries/mfl/index.md#75141-mfl_deadtime_f32_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Debounce](../libraries/mfl/index.md#75151-mfl_debounce)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Debounce_u8_u8](../libraries/mfl/index.md#751511-mfl_debounce_u8_u8)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DebounceInit](../libraries/mfl/index.md#75152-mfl_debounceinit)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DebounceSetParam](../libraries/mfl/index.md#75153-mfl_debouncesetparam)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DivLim_f32](../libraries/mfl/index.md#75185-mfl_divlim_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DT1Typ1Calc](../libraries/mfl/index.md#75441-mfl_dt1typ1calc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DT1Typ1Out_f32](../libraries/mfl/index.md#75445-mfl_dt1typ1out_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DT1Typ1SetState](../libraries/mfl/index.md#75443-mfl_dt1typ1setstate)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DT1Typ2Calc](../libraries/mfl/index.md#75442-mfl_dt1typ2calc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DT1Typ2Out_f32](../libraries/mfl/index.md#75446-mfl_dt1typ2out_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DT1Typ2SetState](../libraries/mfl/index.md#75444-mfl_dt1typ2setstate)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Exp_f32](../libraries/mfl/index.md#7573-mfl_exp_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Floor_f32](../libraries/mfl/index.md#7534-mfl_floor_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_GetVersionInfo](../libraries/mfl/index.md#761-mfl_getversioninfo)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Hypot_f32f32_f32](../libraries/mfl/index.md#75111-mfl_hypot_f32f32_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_HystCenterHalfDelta_f32_u8](../libraries/mfl/index.md#751311-mfl_hystcenterhalfdelta_f32_u8)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_HystDeltaRight_f32_u8](../libraries/mfl/index.md#751331-mfl_hystdeltaright_f32_u8)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_HystLeftDelta_f32_u8](../libraries/mfl/index.md#751341-mfl_hystleftdelta_f32_u8)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_HystLeftRight_f32_u8](../libraries/mfl/index.md#751321-mfl_hystleftright_f32_u8)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_ICalc](../libraries/mfl/index.md#75461-mfl_icalc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_ILimCalc](../libraries/mfl/index.md#75462-mfl_ilimcalc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_IOut_f32](../libraries/mfl/index.md#75466-mfl_iout_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_ISetState](../libraries/mfl/index.md#75465-mfl_isetstate)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Limit_f32](../libraries/mfl/index.md#7564-mfl_limit_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Log_f32](../libraries/mfl/index.md#7574-mfl_log_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Max_f32](../libraries/mfl/index.md#7561-mfl_max_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_MedianSort_f32_f32](../libraries/mfl/index.md#75181-mfl_mediansort_f32_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Min_f32](../libraries/mfl/index.md#7562-mfl_min_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Mod_f32](../libraries/mfl/index.md#75184-mfl_mod_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PCalc](../libraries/mfl/index.md#75421-mfl_pcalc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PDCalc](../libraries/mfl/index.md#75451-mfl_pdcalc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PDOut_f32](../libraries/mfl/index.md#75454-mfl_pdout_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PDSetParam](../libraries/mfl/index.md#75453-mfl_pdsetparam)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PDSetState](../libraries/mfl/index.md#75452-mfl_pdsetstate)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PIDOut_f32](../libraries/mfl/index.md#75487-mfl_pidout_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PIDSetParam](../libraries/mfl/index.md#75486-mfl_pidsetparam)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PIDSetState](../libraries/mfl/index.md#75485-mfl_pidsetstate)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PIDTyp1Calc](../libraries/mfl/index.md#75481-mfl_pidtyp1calc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PIDTyp1LimCalc](../libraries/mfl/index.md#75482-mfl_pidtyp1limcalc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PIDTyp2Calc](../libraries/mfl/index.md#75483-mfl_pidtyp2calc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PIDTyp2LimCalc](../libraries/mfl/index.md#75484-mfl_pidtyp2limcalc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_POut_f32](../libraries/mfl/index.md#75422-mfl_pout_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Pow_f32](../libraries/mfl/index.md#7571-mfl_pow_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PT1Calc](../libraries/mfl/index.md#75431-mfl_pt1calc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PT1Out_f32](../libraries/mfl/index.md#75435-mfl_pt1out_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PT1SetState](../libraries/mfl/index.md#75432-mfl_pt1setstate)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RampCalc](../libraries/mfl/index.md#751211-mfl_rampcalc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RampCalcJump](../libraries/mfl/index.md#751251-mfl_rampcalcjump)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RampCalcSwitch](../libraries/mfl/index.md#751262-mfl_rampcalcswitch)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RampCalcSwitch_f32](../libraries/mfl/index.md#751261-mfl_rampcalcswitch_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RampCheckActivity](../libraries/mfl/index.md#751281-mfl_rampcheckactivity)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RampGetSwitchPos](../libraries/mfl/index.md#751271-mfl_rampgetswitchpos)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RampInitState](../libraries/mfl/index.md#751221-mfl_rampinitstate)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RampOut_f32](../libraries/mfl/index.md#751241-mfl_rampout_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RampSetParam](../libraries/mfl/index.md#751231-mfl_rampsetparam)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RateLimiter_f32](../libraries/mfl/index.md#7563-mfl_ratelimiter_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Round_f32](../libraries/mfl/index.md#7532-mfl_round_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RSqrt_f32](../libraries/mfl/index.md#75201-mfl_rsqrt_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Sign_f32](../libraries/mfl/index.md#7552-mfl_sign_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Sin_f32](../libraries/mfl/index.md#7581-mfl_sin_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Sin_s32_f32](../libraries/mfl/index.md#75212-mfl_sin_s32_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_SortAscend_f32](../libraries/mfl/index.md#75161-mfl_sortascend_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_SortDescend_f32](../libraries/mfl/index.md#75171-mfl_sortdescend_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Sqrt_f32](../libraries/mfl/index.md#7572-mfl_sqrt_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Tan_f32](../libraries/mfl/index.md#7583-mfl_tan_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Trunc_f32](../libraries/mfl/index.md#7531-mfl_trunc_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
 
 **[Mirror_AddCanMaskFilter](../communication/mirror/index.md#7424-mirror_addcanmaskfilter)**
 > 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11

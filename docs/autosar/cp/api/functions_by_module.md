@@ -2533,6 +2533,97 @@ title: "AUTOSAR API 函数清单（按模块）"
 |---|---|
 | [**Crc_GetVersionInfo**](../libraries/crc/index.md#735-crc_getversioninfo) | 此服务返回本模块的版本信息。 |
 
+## Specification of Floating Point Math Routines（浮点数学例程规范）（84）
+
+来源：[Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary
+
+| 函数 | 简述 |
+|---|---|
+| [**Mfl**](../libraries/mfl/index.md#75183-mfl) | 返回相应浮点输入的整数值。 |
+| [**Mfl_Abs_f32**](../libraries/mfl/index.md#7551-mfl_abs_f32) | 返回根据以下等式确定的参数的绝对值（ValAbs）。 |
+| [**Mfl_arcCos_f32**](../libraries/mfl/index.md#7586-mfl_arccos_f32) | 返回角度的反余弦，范围为 0.0 到 pi。 |
+| [**Mfl_arcSin_f32**](../libraries/mfl/index.md#7584-mfl_arcsin_f32) | 返回角度的反正弦，范围为 -pi/2 到 pi/2。 |
+| [**Mfl_arcTan2_f32**](../libraries/mfl/index.md#75810-mfl_arctan2_f32) | 返回角度的反正切，范围为 [-pi 到 pi]。 |
+| [**Mfl_arcTan_f32**](../libraries/mfl/index.md#7588-mfl_arctan_f32) | 返回角度的反正切，范围为 -pi/2 到 pi/2。 |
+| [**Mfl_ArrayAverage_f32_f32**](../libraries/mfl/index.md#75101-mfl_arrayaverage_f32_f32) | 该例程返回数组的平均值。 |
+| [**Mfl_Average_f32_f32**](../libraries/mfl/index.md#7591-mfl_average_f32_f32) | 该例程返回平均值。 |
+| [**Mfl_Bitpat_f32_u32**](../libraries/mfl/index.md#75191-mfl_bitpat_f32_u32) | 返回单精度浮点值的位表示。 |
+| [**Mfl_CalcTeQ_f32**](../libraries/mfl/index.md#75433-mfl_calcteq_f32) | 本例程计算时间等效系数。 |
+| [**Mfl_CalcTeQApp_f32**](../libraries/mfl/index.md#75434-mfl_calcteqapp_f32) | 本例程计算时间等效系数。 |
+| [**Mfl_Ceil_f32**](../libraries/mfl/index.md#7533-mfl_ceil_f32) | 返回通过将参数向正无穷方向舍入而确定的整数值。 |
+| [**Mfl_Cos_f32**](../libraries/mfl/index.md#7582-mfl_cos_f32) | 计算参数的余弦。 |
+| [**Mfl_Cos_s32_f32**](../libraries/mfl/index.md#75211-mfl_cos_s32_f32) | 快速余弦计算。 |
+| [**Mfl_CtrlSetLimit**](../libraries/mfl/index.md#75463-mfl_ctrlsetlimit) | 更新限幅结构。 |
+| [**Mfl_CtrlSetLimits**](../libraries/mfl/index.md#75464-mfl_ctrlsetlimits) | 更新限幅结构。 |
+| [**Mfl_DeadTime**](../libraries/mfl/index.md#7514-mfl_deadtime) | — |
+| [**Mfl_DeadTime_f32_f32**](../libraries/mfl/index.md#75141-mfl_deadtime_f32_f32) | 本例程返回具有指定延迟时间的输入值。 |
+| [**Mfl_Debounce**](../libraries/mfl/index.md#75151-mfl_debounce) | — |
+| [**Mfl_Debounce_u8_u8**](../libraries/mfl/index.md#751511-mfl_debounce_u8_u8) | 本例程对数字输入信号进行去抖，并以布尔值返回信号的状态。 |
+| [**Mfl_DebounceInit**](../libraries/mfl/index.md#75152-mfl_debounceinit) | — |
+| [**Mfl_DebounceSetParam**](../libraries/mfl/index.md#75153-mfl_debouncesetparam) | — |
+| [**Mfl_DivLim_f32**](../libraries/mfl/index.md#75185-mfl_divlim_f32) | 将 X_f32 除以 Y_f32，并将结果限制在 min_f32 和 max_f32 值之内。 |
+| [**Mfl_DT1Typ1Calc**](../libraries/mfl/index.md#75441-mfl_dt1typ1calc) | 本例程使用微分方程计算 DT1 控制器输出值。 |
+| [**Mfl_DT1Typ1Out_f32**](../libraries/mfl/index.md#75445-mfl_dt1typ1out_f32) | 本例程返回「DT1」控制器的输出值。 |
+| [**Mfl_DT1Typ1SetState**](../libraries/mfl/index.md#75443-mfl_dt1typ1setstate) | 该例程初始化 DT1 组件的内部状态变量。 |
+| [**Mfl_DT1Typ2Calc**](../libraries/mfl/index.md#75442-mfl_dt1typ2calc) | 本例程使用微分方程计算 DT1 控制器输出值。 |
+| [**Mfl_DT1Typ2Out_f32**](../libraries/mfl/index.md#75446-mfl_dt1typ2out_f32) | 本例程返回「DT1」控制器的输出值。 |
+| [**Mfl_DT1Typ2SetState**](../libraries/mfl/index.md#75444-mfl_dt1typ2setstate) | 该例程初始化 DT1 组件的内部状态变量。 |
+| [**Mfl_Exp_f32**](../libraries/mfl/index.md#7573-mfl_exp_f32) | 返回根据以下等式确定的操作数的指数（ValExp）。 |
+| [**Mfl_Floor_f32**](../libraries/mfl/index.md#7534-mfl_floor_f32) | 返回通过将参数向负无穷方向舍入而确定的自然数值。 |
+| [**Mfl_GetVersionInfo**](../libraries/mfl/index.md#761-mfl_getversioninfo) | 返回本库的版本信息。 |
+| [**Mfl_Hypot_f32f32_f32**](../libraries/mfl/index.md#75111-mfl_hypot_f32f32_f32) | 本服务计算向量的长度。 |
+| [**Mfl_HystCenterHalfDelta_f32_u8**](../libraries/mfl/index.md#751311-mfl_hystcenterhalfdelta_f32_u8) | 具有中心及左右两侧 halfDelta 切换点的滞回。 |
+| [**Mfl_HystDeltaRight_f32_u8**](../libraries/mfl/index.md#751331-mfl_hystdeltaright_f32_u8) | 具有右切换点和到左切换点增量的滞回。 |
+| [**Mfl_HystLeftDelta_f32_u8**](../libraries/mfl/index.md#751341-mfl_hystleftdelta_f32_u8) | 具有左切换点和到右切换点增量的滞回。 |
+| [**Mfl_HystLeftRight_f32_u8**](../libraries/mfl/index.md#751321-mfl_hystleftright_f32_u8) | 具有左、右切换点的滞回。 |
+| [**Mfl_ICalc**](../libraries/mfl/index.md#75461-mfl_icalc) | 本例程使用微分方程计算 I 控制器输出值。 |
+| [**Mfl_ILimCalc**](../libraries/mfl/index.md#75462-mfl_ilimcalc) | 本例程使用微分方程计算 I 控制器输出值。 |
+| [**Mfl_IOut_f32**](../libraries/mfl/index.md#75466-mfl_iout_f32) | 本例程返回「I」控制器的输出值。 |
+| [**Mfl_ISetState**](../libraries/mfl/index.md#75465-mfl_isetstate) | 该例程初始化 I 组件的内部状态变量。 |
+| [**Mfl_Limit_f32**](../libraries/mfl/index.md#7564-mfl_limit_f32) | 返回根据以下等式确定的有界值（newVal）。 |
+| [**Mfl_Log_f32**](../libraries/mfl/index.md#7574-mfl_log_f32) | 返回根据以下等式确定的操作数的自然（以 e 为底）对数（ValLog）。 |
+| [**Mfl_Max_f32**](../libraries/mfl/index.md#7561-mfl_max_f32) | 返回根据以下等式确定的两个参数中较大者的值（ValMax）。 |
+| [**Mfl_MedianSort_f32_f32**](../libraries/mfl/index.md#75181-mfl_mediansort_f32_f32) | 本例程按升序对数组的值进行排序。 |
+| [**Mfl_Min_f32**](../libraries/mfl/index.md#7562-mfl_min_f32) | 返回根据以下等式确定的两个参数中较小者的值（Min）。 |
+| [**Mfl_Mod_f32**](../libraries/mfl/index.md#75184-mfl_mod_f32) | 本例程返回值 x_f32 - (n*y_f32)，其中 n 为某一整数，使得当 y_f32 非零时，结果与 x_f32 同号且幅值小于 y_f32 的幅值。 |
+| [**Mfl_PCalc**](../libraries/mfl/index.md#75421-mfl_pcalc) | 微分方程：Y = K * X。 |
+| [**Mfl_PDCalc**](../libraries/mfl/index.md#75451-mfl_pdcalc) | 本例程使用微分方程计算比例加微分控制器的输出值。 |
+| [**Mfl_PDOut_f32**](../libraries/mfl/index.md#75454-mfl_pdout_f32) | 本例程返回「PD」控制器的输出值。 |
+| [**Mfl_PDSetParam**](../libraries/mfl/index.md#75453-mfl_pdsetparam) | 该例程设置 PD 组件的参数结构。 |
+| [**Mfl_PDSetState**](../libraries/mfl/index.md#75452-mfl_pdsetstate) | 该例程初始化 PD 组件的内部状态变量。 |
+| [**Mfl_PIDOut_f32**](../libraries/mfl/index.md#75487-mfl_pidout_f32) | 本例程返回「PID」控制器的输出值。 |
+| [**Mfl_PIDSetParam**](../libraries/mfl/index.md#75486-mfl_pidsetparam) | 该例程设置 PID 组件的参数结构。 |
+| [**Mfl_PIDSetState**](../libraries/mfl/index.md#75485-mfl_pidsetstate) | 该例程初始化 PID 组件的内部状态变量。 |
+| [**Mfl_PIDTyp1Calc**](../libraries/mfl/index.md#75481-mfl_pidtyp1calc) | 本例程使用微分方程计算比例加积分加微分控制器（隐式类型）的输出值。 |
+| [**Mfl_PIDTyp1LimCalc**](../libraries/mfl/index.md#75482-mfl_pidtyp1limcalc) | 本例程使用微分方程计算比例加积分加微分控制器（隐式类型）的输出值。 |
+| [**Mfl_PIDTyp2Calc**](../libraries/mfl/index.md#75483-mfl_pidtyp2calc) | 本例程使用微分方程计算比例加积分加微分控制器（显式类型）的输出值。 |
+| [**Mfl_PIDTyp2LimCalc**](../libraries/mfl/index.md#75484-mfl_pidtyp2limcalc) | 本例程使用微分方程计算比例加积分加微分控制器（显式类型）的输出值。 |
+| [**Mfl_POut_f32**](../libraries/mfl/index.md#75422-mfl_pout_f32) | 本例程返回受返回数据类型限制的「P」控制器输出值。 |
+| [**Mfl_Pow_f32**](../libraries/mfl/index.md#7571-mfl_pow_f32) | 返回根据以下等式确定的 ValBase 的 ValExp 次幂。 |
+| [**Mfl_PT1Calc**](../libraries/mfl/index.md#75431-mfl_pt1calc) | 本例程使用以下差分方程计算 PT1 控制器输出值。 |
+| [**Mfl_PT1Out_f32**](../libraries/mfl/index.md#75435-mfl_pt1out_f32) | 本例程返回「PT1」控制器的输出值。 |
+| [**Mfl_PT1SetState**](../libraries/mfl/index.md#75432-mfl_pt1setstate) | 该例程初始化 PT1 组件的内部状态变量。 |
+| [**Mfl_RampCalc**](../libraries/mfl/index.md#751211-mfl_rampcalc) | 斜坡输出值根据 (State\_cpst-&gt;State\_f32 &gt; X\_f32) 还是 (State\_cpst-&gt;State\_f32 &lt; X\_f32)，以斜率 * dT_f32 增加或减小一个值。 |
+| [**Mfl_RampCalcJump**](../libraries/mfl/index.md#751251-mfl_rampcalcjump) | 本例程在主斜坡函数 Mfl_RampCalc 的基础上工作，以提供对目标值的更快适配。 |
+| [**Mfl_RampCalcSwitch**](../libraries/mfl/index.md#751262-mfl_rampcalcswitch) | 本例程基于 Switch 参数在斜坡服务的两个目标值之间切换。 |
+| [**Mfl_RampCalcSwitch_f32**](../libraries/mfl/index.md#751261-mfl_rampcalcswitch_f32) | 本例程基于 Switch 值在两个目标值之间切换斜坡。 |
+| [**Mfl_RampCheckActivity**](../libraries/mfl/index.md#751281-mfl_rampcheckactivity) | 本例程检查斜坡的状态，如果斜坡处于活动状态则返回 TRUE，否则返回 FALSE。 |
+| [**Mfl_RampGetSwitchPos**](../libraries/mfl/index.md#751271-mfl_rampgetswitchpos) | 获取斜坡开关函数的当前开关位置。 |
+| [**Mfl_RampInitState**](../libraries/mfl/index.md#751221-mfl_rampinitstate) | 初始化斜坡的状态、方向和开关参数。 |
+| [**Mfl_RampOut_f32**](../libraries/mfl/index.md#751241-mfl_rampout_f32) | 返回斜坡组件的内部状态。 |
+| [**Mfl_RampSetParam**](../libraries/mfl/index.md#751231-mfl_rampsetparam) | 为结构 Mfl\_ParamRamp\_Type 所提供的斜坡设置斜率参数。 |
+| [**Mfl_RateLimiter_f32**](../libraries/mfl/index.md#7563-mfl_ratelimiter_f32) | 增加的值和减小的值受 maxdif 速率限制。 |
+| [**Mfl_Round_f32**](../libraries/mfl/index.md#7532-mfl_round_f32) | 返回通过将参数向最接近的整数舍入而确定的整数值。 |
+| [**Mfl_RSqrt_f32**](../libraries/mfl/index.md#75201-mfl_rsqrt_f32) | 操作数的快速平方根倒数（ValSqrt）。 |
+| [**Mfl_Sign_f32**](../libraries/mfl/index.md#7552-mfl_sign_f32) | 返回根据以下等式确定的参数的符号（ValSign）。 |
+| [**Mfl_Sin_f32**](../libraries/mfl/index.md#7581-mfl_sin_f32) | 计算参数的正弦。 |
+| [**Mfl_Sin_s32_f32**](../libraries/mfl/index.md#75212-mfl_sin_s32_f32) | 快速正弦计算。 |
+| [**Mfl_SortAscend_f32**](../libraries/mfl/index.md#75161-mfl_sortascend_f32) | 排序算法将给定的输入数组按升序修改，并通过指针返回排序后的数组结果。 |
+| [**Mfl_SortDescend_f32**](../libraries/mfl/index.md#75171-mfl_sortdescend_f32) | 排序算法将给定的输入数组按降序修改，并通过指针返回排序后的数组结果。 |
+| [**Mfl_Sqrt_f32**](../libraries/mfl/index.md#7572-mfl_sqrt_f32) | 返回根据以下等式确定的操作数的平方根（ValSqrt）。 |
+| [**Mfl_Tan_f32**](../libraries/mfl/index.md#7583-mfl_tan_f32) | 计算参数的正切。 |
+| [**Mfl_Trunc_f32**](../libraries/mfl/index.md#7531-mfl_trunc_f32) | 返回通过将参数向零舍入而确定的整数值。 |
+
 ## Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）（91）
 
 来源：[Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary

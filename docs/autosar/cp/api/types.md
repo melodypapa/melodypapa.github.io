@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **665** 个条目。
+共 **672** 个条目。
 
 ## A
 
@@ -1466,6 +1466,27 @@ title: "AUTOSAR API 类型清单"
 
 **[MemoryStartAddressType](../system_services/operating_system/index.md#739-memorystartaddresstype)**
 > 类型 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
+
+**[Mfl_PIOut_f32](../libraries/mfl/index.md#75477-mfl_piout_f32)**
+> 类型 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PISetParam](../libraries/mfl/index.md#75476-mfl_pisetparam)**
+> 类型 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PISetState](../libraries/mfl/index.md#75475-mfl_pisetstate)**
+> 类型 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PITyp1Calc](../libraries/mfl/index.md#754711-mfl_pityp1calc)**
+> 类型 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PITyp1LimCalc](../libraries/mfl/index.md#754721-mfl_pityp1limcalc)**
+> 类型 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PITyp2Calc](../libraries/mfl/index.md#754731-mfl_pityp2calc)**
+> 类型 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PITyp2LimCalc](../libraries/mfl/index.md#754741-mfl_pityp2limcalc)**
+> 类型 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
 
 **[Mirror_ConfigType](../communication/mirror/index.md#731-mirror_configtype)**
 > 类型 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
