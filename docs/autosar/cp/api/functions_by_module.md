@@ -2993,6 +2993,18 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**V2xBtp_RxIndication**](../communication/v2x_basictp/index.md#741-v2xbtp_rxindication) | 通过本 API，V2xBtp 模块获取接收到的 GeoNetworking 包的数据（BTP-PDU）和 GeoNetworking 参数。 |
 | [**V2xBtp_Transmit**](../communication/v2x_basictp/index.md#733-v2xbtp_transmit) | V2xFac 模块调用本 API 以请求向对端 BTP 实体发送一个 BTP-PDU。 |
 
+## AUTOSAR V2X Data Manager（V2X数据管理器）（5）
+
+来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](../communication/v2x_datamgr/index.md) · SWS_V2XDataManager
+
+| 函数 | 简述 |
+|---|---|
+| [**V2xDM_GetVersionInfo**](../communication/v2x_datamgr/index.md#742-v2xdm_getversioninfo) | 返回组件的版本信息、供应商 ID 和 AUTOSAR 模块 ID。 |
+| [**V2xDM_Init**](../communication/v2x_datamgr/index.md#741-v2xdm_init) | 初始化模块 V2xDM 的服务。 |
+| [**V2xDM_MainFunction**](../communication/v2x_datamgr/index.md#761-v2xdm_mainfunction) | 按照指定的时间间隔周期性调用的函数。 |
+| [**V2xDM_RxIndication**](../communication/v2x_datamgr/index.md#751-v2xdm_rxindication) | 来自下层通信接口模块（PduR）的接收 PDU 指示。 |
+| [**V2xDM_V2xStackRxIndication**](../communication/v2x_datamgr/index.md#752-v2xdm_v2xstackrxindication) | 由底层 V2x 协议栈调用，向 V2x Data Manager 提供 V2x 消息。 |
+
 ## AUTOSAR Watchdog Driver（看门狗驱动）（4）
 
 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](../safety/watchdog_driver/index.md) · SWS_WatchdogDriver

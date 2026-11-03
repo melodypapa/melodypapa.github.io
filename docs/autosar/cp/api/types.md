@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **779** 个条目。
+共 **780** 个条目。
 
 ## A
 
@@ -2328,6 +2328,9 @@ title: "AUTOSAR API 类型清单"
 
 **[V2xBtp_TxParamsType](../communication/v2x_basictp/index.md#721-v2xbtp_txparamstype)**
 > 类型 · [AUTOSAR V2X Basic Transport（V2X基本传输协议）](../communication/v2x_basictp/index.md) · SWS_V2XBasicTransport · R23-11
+
+**[V2xDM_ConfigType](../communication/v2x_datamgr/index.md#731-v2xdm_configtype)**
+> 类型 · [AUTOSAR V2X Data Manager（V2X数据管理器）](../communication/v2x_datamgr/index.md) · SWS_V2XDataManager · R23-11
 
 **[VoidPtr](../general/platform_types/index.md#7118-voidptr)**
 > 类型 · [AUTOSAR Platform Types（平台类型）](../general/platform_types/index.md) · SWS_PlatformTypes · R23-11

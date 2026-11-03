@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2362** 个条目。
+共 **2367** 个条目。
 
 ## A
 
@@ -6888,6 +6888,21 @@ title: "AUTOSAR API 函数清单"
 
 **[V2xBtp_Transmit](../communication/v2x_basictp/index.md#733-v2xbtp_transmit)**
 > 函数 · [AUTOSAR V2X Basic Transport（V2X基本传输协议）](../communication/v2x_basictp/index.md) · SWS_V2XBasicTransport · R23-11
+
+**[V2xDM_GetVersionInfo](../communication/v2x_datamgr/index.md#742-v2xdm_getversioninfo)**
+> 函数 · [AUTOSAR V2X Data Manager（V2X数据管理器）](../communication/v2x_datamgr/index.md) · SWS_V2XDataManager · R23-11
+
+**[V2xDM_Init](../communication/v2x_datamgr/index.md#741-v2xdm_init)**
+> 函数 · [AUTOSAR V2X Data Manager（V2X数据管理器）](../communication/v2x_datamgr/index.md) · SWS_V2XDataManager · R23-11
+
+**[V2xDM_MainFunction](../communication/v2x_datamgr/index.md#761-v2xdm_mainfunction)**
+> 函数 · [AUTOSAR V2X Data Manager（V2X数据管理器）](../communication/v2x_datamgr/index.md) · SWS_V2XDataManager · R23-11
+
+**[V2xDM_RxIndication](../communication/v2x_datamgr/index.md#751-v2xdm_rxindication)**
+> 函数 · [AUTOSAR V2X Data Manager（V2X数据管理器）](../communication/v2x_datamgr/index.md) · SWS_V2XDataManager · R23-11
+
+**[V2xDM_V2xStackRxIndication](../communication/v2x_datamgr/index.md#752-v2xdm_v2xstackrxindication)**
+> 函数 · [AUTOSAR V2X Data Manager（V2X数据管理器）](../communication/v2x_datamgr/index.md) · SWS_V2XDataManager · R23-11
 
 **[VerificationStatus](../communication/sec_oc/index.md#7843-verificationstatus)**
 > 函数 · [AUTOSAR SecOC (Secure Onboard Communication)](../communication/sec_oc/index.md) · SWS_SecOc · R23-11
