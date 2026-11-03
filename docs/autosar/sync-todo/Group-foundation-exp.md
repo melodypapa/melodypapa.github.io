@@ -34,7 +34,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp_system_health_monitoring (AUTOSAR_FO_EXP_SystemHealthMonitoring · HealthMonitoring · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [x] exp_system_health_monitoring (AUTOSAR_FO_EXP_SystemHealthMonitoring · HealthMonitoring · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Explanation of System Health Monitoring（系统健康监控说明）; target `foundation/health_monitoring/exp_system_health_monitoring/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)
   - Note: source `HealthMonitoring/AUTOSAR_FO_EXP_SystemHealthMonitoring.md` — 408 lines, 22 figure refs, no item IDs
   - Note: related site content: cp/safety/watchdog_manager (WdgM) (cross-link candidates, report-only until the run decides)
@@ -47,8 +47,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 5 — User confirmation gate (2026-11-03: approved — scope limited to the EXP document, item IDs dropped/titles only)
+  - [x] Step 6 — TODO.md row + commit/PR (issue #255 · commit 4320445 · PR #256)
 - [ ] tr_predefined_names (AUTOSAR_FO_TR_PredefinedNames · General · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Predefined Names in AUTOSAR（AUTOSAR 预定义名称）; target `foundation/general/tr_predefined_names/`; technical report (TR) — prose; no specification items
   - Note: source `General/AUTOSAR_FO_TR_PredefinedNames.md` — 423 lines, 23 figure refs, no item IDs
