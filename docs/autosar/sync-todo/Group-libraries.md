@@ -49,7 +49,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (confirmed 2026-11-03, batch-end joint confirmation covering all batch decisions incl. the "None." API-group rendering and the annex A/B numbered-continuation handling)
   - [x] Step 6 — TODO.md row + commit/PR (commit b11a226; PR #250 "Part of #249")
-- [ ] bmc (SWS_BSWMulticoreLibrary · R23-11 markdown · ❌ new article, short name Bmc)
+- [x] bmc (SWS_BSWMulticoreLibrary · R23-11 markdown · ❌ new article, short name Bmc)
   - Note: 2026-11-04 batch run — committed without the per-article Step 5 gate (batch-end joint confirmation), same as the crc/e2e/bfx rows.
   - Note: source ch.9 Sequence diagrams "Not applicable" omitted per the placeholder rule; ch.10 配置规范 renumbered to §8; annex A (History of Constraints and Specification Items) → ## B. with ID fences (crc batch precedent); source appendix B Not applicable requirements dropped per mandate.
   - Note: source 8.4's function groups carry per-group headings (Bmc_Load etc.) with u/s variant definition tables inside — article renders grouped headings (§7.4.2.1. Bmc_Load) with numbered variant children (7.4.2.1.1. Bmc_Load_u); 22 function entries verified manually in source order; check_api_sync passes trivially (3 types; 0/0 functions — the script is positional, functions live under source 8.4.x).
@@ -60,9 +60,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] mfl (SWS_MFLLibrary · R23-11 markdown · ❌ new article, short name Mfl)
+  - [x] Step 5 — User confirmation gate (confirmed 2026-11-04, batch-end joint confirmation covering all batch decisions incl. the placeholder omissions, the R22-11 PDF formula reconstructions, the figure triage results and the source-defect keep list)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 18f9ee6)
+- [x] mfl (SWS_MFLLibrary · R23-11 markdown · ❌ new article, short name Mfl)
   - Note: 2026-11-04 batch run — committed without the per-article Step 5 gate (batch-end joint confirmation), same as the crc/e2e/bfx rows.
   - Note: source ch.6 Requirements Tracing + appendix A Not-applicable-requirements dropped per mandate; ch.9 "Not applicable" omitted per the placeholder rule (ch.10 → §8); source 8.6 Examples of use "None" omitted per the placeholder rule (8.7–8.10 renumbered to §7.6–§7.9); source 8.10 intro "None" likewise omitted (subsections keep one-sentence statements per the batch decision).
   - Note: source ch.8 title "Routine specification" → mandated `## 7. API规范` (STANDARD §1 skeleton); source ch.7 functional spec → §6 (6.2 错误检测 / 6.3 错误通知 are MFL-specific extra sections).
@@ -77,9 +77,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] mfx (SWS_MFXLibrary · R23-11 markdown · ❌ new article, short name Mfx)
+  - [x] Step 5 — User confirmation gate (confirmed 2026-11-04, batch-end joint confirmation covering all batch decisions incl. the placeholder omissions, the R22-11 PDF formula reconstructions, the figure triage results and the source-defect keep list)
+  - [x] Step 6 — TODO.md row + commit/PR (commits f47a7ee + 8b84ed7)
+- [x] mfx (SWS_MFXLibrary · R23-11 markdown · ❌ new article, short name Mfx)
   - Note: 2026-11-04 batch run — committed without the per-article Step 5 gate (batch-end joint confirmation), same as the crc/e2e/bfx rows.
   - Note: source ch.6 Requirements Tracing + appendix A dropped per mandate; ch.9 "Not applicable" omitted per the placeholder rule (ch.10 → §8, 10.1 如何阅读本章 style per bfx); source 8.11 Expected-interfaces intro "None." omitted (subsections keep one-sentence statements); 8.7 Examples of use of functions HAS content → kept as §7.7 with its two worked examples; 8.12 Service Interfaces "None." → §7.12 one-sentence statement.
   - Note: manual API verification: 33 entries (22 routine groups + 16 P2 sub-entries sharing templated headings + Sgn_s32_s8 + GetVersionInfo — count by 说明 blocks), ~380 implemented-function table rows transcribed in full; check_api_sync positional trivial-OK (source 8.2.x/8.3.x = 0).
@@ -91,9 +91,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] ifl (SWS_IFLLibrary · R23-11 markdown · ❌ new article, short name Ifl)
+  - [x] Step 5 — User confirmation gate (confirmed 2026-11-04, batch-end joint confirmation covering all batch decisions incl. the placeholder omissions, the R22-11 PDF formula reconstructions, the figure triage results and the source-defect keep list)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 71821da)
+- [x] ifl (SWS_IFLLibrary · R23-11 markdown · ❌ new article, short name Ifl)
   - Note: 2026-11-04 batch run — committed without the per-article Step 5 gate (batch-end joint confirmation), same as the crc/e2e/bfx rows.
   - Note: source ch.6 Requirements Tracing + appendix A dropped per mandate; ch.9 "Not applicable" omitted per the placeholder rule (ch.10 → §8, 8.1 发布信息 + 8.2 配置选项 per source order); source 8.6 Examples "None" omitted (8.7–8.10 renumbered to §7.6–§7.9; 8.9 title 调度例程 per source "Scheduled routines"); 8.10 intro "None." omitted (subsections keep one-sentence statements).
   - Note: 11 API entries (DPSearch, IpoCur/IpoMap/Interpolate, IntIpoCur/IntIpoMap, IpoCub_f32, 3 mixed-type templated groups 91001–91003 with routine-ID tables, GetVersionInfo); jumbled fence requirements (00011–00016, 00042–00050, 00231/00234 implementation blocks) un-nested into ordered prose + fences; the duplicated dpResult->Index/Ratio lines in 00011 are a converter duplication — rendered once.
@@ -105,9 +105,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] ifx (SWS_IFXLibrary · R23-11 markdown · ❌ new article, short name Ifx)
+  - [x] Step 5 — User confirmation gate (confirmed 2026-11-04, batch-end joint confirmation covering all batch decisions incl. the placeholder omissions, the R22-11 PDF formula reconstructions, the figure triage results and the source-defect keep list)
+  - [x] Step 6 — TODO.md row + commit/PR (commit da855e3)
+- [x] ifx (SWS_IFXLibrary · R23-11 markdown · ❌ new article, short name Ifx)
   - Note: 2026-11-04 batch run — committed without the per-article Step 5 gate (batch-end joint confirmation), same as the crc/e2e/bfx rows.
   - Note: source ch.6 Requirements Tracing + appendix A dropped per mandate; ch.9 "Not applicable" omitted per the placeholder rule (ch.10 → §8, MFX-style 10.1 如何阅读本章 pattern); source 8.6 Examples "None" omitted (8.7–8.10 renumbered to §7.6–§7.9); 8.10 intro "None" omitted (subsections keep one-sentence statements).
   - Note: 23 API entries — DPSearch/IpoCur/LkUpCur/IpoMap/LkUpMap/LkUpBaseMap (distributed) + 16 integrated groups (IntIpoCur/IntLkUpCur/IntIpoFixCur/IntLkUpFixCur/IntIpoFixICur/IntLkUpFixICur/IntIpoMap/IntLkUpMap/IntLkUpBaseMap/IntIpoFixMap/IntLkUpFixMap/IntLkUpFixBaseMap/IntIpoFixIMap/IntLkUpFixIMap/IntLkUpFixIBaseMap/IpoCub) + GetVersionInfo, each with full routine-ID tables incl. the u32/s32 0x0C1–0x0EA extension rows; page-break-split tables merged. Ifx_IntLkUpFixICur keeps the source's "_OutTypeMnt" typo (heading + syntax + prototype all carry it).
@@ -119,9 +119,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] efx (SWS_EFXLibrary · R23-11 markdown · ❌ new article, short name Efx)
+  - [x] Step 5 — User confirmation gate (confirmed 2026-11-04, batch-end joint confirmation covering all batch decisions incl. the placeholder omissions, the R22-11 PDF formula reconstructions, the figure triage results and the source-defect keep list)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 1089ec8)
+- [x] efx (SWS_EFXLibrary · R23-11 markdown · ❌ new article, short name Efx)
   - Note: 2026-11-04 batch run — committed without the per-article Step 5 gate (batch-end joint confirmation), same as the crc/e2e/bfx rows.
   - Note: source ch.6 Requirements Tracing + appendix A dropped per mandate; ch.9 "Not applicable" omitted per the placeholder rule (ch.10 → §8); source 8.6 回调通知 "None" → one-sentence §7.6; source 8.8 Expected-interfaces intro "None" omitted (subsections keep one-sentence statements); source order kept — EFX's Version API (8.9) comes AFTER Expected interfaces (8.8), so article §7.6–§7.9 = 回调通知/调度函数/期望接口/版本 API; §8 intro keeps the source's literal "&lt;MODULE_ABBREVIATION&gt;" template placeholder as entity.
   - Note: manual API verification: 105 说明-block entries (LpFilterFac1/LpFilter/4×HpFilter, 8 controller groups with SetState/SetParam/LimCalc/Out variants + CalcTeQ/CalcTeQApp, Sqrt×3/Exp/Average/ArrayAverage/MovingAverage/Hypot×3/Trig×12 (Sin/Cos/ArcSin/ArcCos × 3 sizes; ArsSin_s16_s16 source typo kept)/SlewRate/Ramp×8/Hysteresis×5/Debounce×3/Sort×3/Edge×3/Interval×4/Counter×2/RSFlipFlop/TypeLimiter (33-row table incl. 0x0A1–0x0AE 64-bit extensions)/64-bit Abs/Add/Sub/Mul/Div/Mod/Sgn/GetVersionInfo); check_api_sync positional trivial-OK.
@@ -132,8 +132,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 5 — User confirmation gate (confirmed 2026-11-04, batch-end joint confirmation covering all batch decisions incl. the placeholder omissions, the R22-11 PDF formula reconstructions, the figure triage results and the source-defect keep list)
+  - [x] Step 6 — TODO.md row + commit/PR (commit bed2f8c)
 
 ## Not queued (deliberately skipped)
 - (none)
