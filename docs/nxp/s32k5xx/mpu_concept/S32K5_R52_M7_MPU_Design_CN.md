@@ -2,15 +2,15 @@
 title: "S32K5xx MPU 内存保护单元设计方案（Cortex-M7 + Cortex-R52）"
 ---
 
-> **文档结构（2026-11-01 重组）**：本文档分为两大部分。
-> **第一部分 · ARM 架构篇**（第 1–3 章）与具体芯片无关，按 Arm 官方文档对 Cortex-M7（ARMv7-M PMSAv7）与 Cortex-R52（Armv8-R PMSAv8-32）的 MPU 寄存器**逐位说明**，并在第 3 章对两者做系统的差异分析。
-> **第二部分 · S32K5 实现篇**（第 4–19 章）把架构规范落到 S32K566：存储映射、区域布局、按存储类型的配置、启动时序、AUTOSAR OS 分区、RTD Platform 驱动与 sBoot 校验、故障处理与 ASIL D 关联。
->
-> **本次修订要点**：① 寄存器位域按 Arm 文档重新逐位核对（R52 的 `PRBAR.XN`/`SH`/`AP`、`PRLAR.AttrIndx`、`PRSELR` 位宽、`MPUIR`、`HPRENR` 等均有修正，见第 1/2 章）；② 新增第 3 章 M7 vs R52 差异分析；③ 新增第 12 章 RTD Platform MPU 驱动与 sBoot 校验（来自 ima 知识库 `RTD_PLATFORM_UM.pdf` / `S32K5_SAF_SBOOT_UM.pdf` / `M7_S32K5_SCST_User_Manual.pdf`）；④ 修正 PMSAv7「区域大小必须为 2 的幂」约束引发的布局问题（3 MB SRAM 与 50 MB 外设窗无法用单个 M7 区域覆盖，见 §1.7/§5.3）。
+本文面向 S32K566，先说明 Cortex-M7（ARMv7-M PMSAv7）与 Cortex-R52（Armv8-R PMSAv8-32）的 MPU 架构，再介绍 S32K5 的内存映射、区域布局与双核配置。
+
+> **本次修订要点**：① 寄存器位域按 Arm 文档重新逐位核对（R52 的 `PRBAR.XN`/`SH`/`AP`、`PRLAR.AttrIndx`、`PRSELR` 位宽、`MPUIR`、`HPRENR` 等均有修正，见[第 1 章](#1-cortex-m7-mpu-详解armv7-m-pmsav7)/[第 2 章](#2-cortex-r52-mpu-详解armv8-r-pmsav8-32)）；② 新增[第 3 章](#3-m7-与-r52-mpu-差异分析) M7 vs R52 差异分析；③ 新增[第 12 章](#12-rtd-platform-mpu-驱动与-sboot-校验) RTD Platform MPU 驱动与 sBoot 校验（来自 ima 知识库 `RTD_PLATFORM_UM.pdf` / `S32K5_SAF_SBOOT_UM.pdf` / `M7_S32K5_SCST_User_Manual.pdf`）；④ 修正 PMSAv7「区域大小必须为 2 的幂」约束引发的布局问题（3 MB SRAM 与 50 MB 外设窗无法用单个 M7 区域覆盖，见 [§1.7](#17-size-编码与基址对齐约束)/[§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案)）。
 
 ---
 
-## 第一部分 · ARM 架构篇 —— PMSAv7 与 PMSAv8-32 寄存器规范
+## 第一部分 · ARM 架构 {#第一部分-arm-架构篇-pmsav7-与-pmsav8-32-寄存器规范}
+
+本部分与具体芯片无关，逐位说明 Cortex-M7（ARMv7-M PMSAv7）与 Cortex-R52（Armv8-R PMSAv8-32）的 MPU 寄存器，并比较两者的架构差异。
 
 ## 1. Cortex-M7 MPU 详解（ARMv7-M PMSAv7）
 
@@ -30,7 +30,9 @@ Cortex-M7 只有**一套** MPU，寄存器位于系统控制空间（SCS），�
 
 > `MPU_CTRL` 复位为 0（MPU 关闭）；`MPU_TYPE` 复位值反映实现——S32K566 上为 `0x00001000`，即 DREGION = 16。`[来源: S32K5xx RM, Chapter_02 Table 6]`
 
-### 1.2 MPU_TYPE —— MPU 类型寄存器（`0xE000_ED90`，RO）
+### 1.2 MPU_TYPE {#12-mpu_type-mpu-类型寄存器0xe000_ed90ro}
+
+`MPU_TYPE` 是 SCS 地址 `0xE000_ED90` 的只读寄存器，用于探测 MPU 是否实现及其区域数（DREGION）。
 
 | 位 | 名称 | 说明 |
 | --- | --- | --- |
@@ -40,33 +42,41 @@ Cortex-M7 只有**一套** MPU，寄存器位于系统控制空间（SCS），�
 | `[7:1]` | — | res0 |
 | `[0]` | `SEPARATE` | 0 = 统一 MPU（指令/数据同一套区域）；1 = 分立。M7 为 0 |
 
-### 1.3 MPU_CTRL —— MPU 控制寄存器（`0xE000_ED94`，RW）
+### 1.3 MPU_CTRL {#13-mpu_ctrl-mpu-控制寄存器0xe000_ed94rw}
+
+`MPU_CTRL` 是位于 SCS 地址 `0xE000_ED94` 的 32 位读写控制寄存器，管理 MPU 使能、背景映射与故障期行为。
 
 | 位 | 名称 | 语义 |
 | --- | --- | --- |
-| `[2]` | `PRIVDEFENA` | 特权代码未命中区域时是否使用**默认内存映射**作为背景。**S32K5 建议置 0 并改用显式背景区域**（见 §9） |
+| `[2]` | `PRIVDEFENA` | 特权代码未命中区域时是否使用**默认内存映射**作为背景。**S32K5 建议置 0 并改用显式背景区域**（见 [§9](#9-m7-背景区域与-speculative-访问-仍然需要架构行为-sden-1013783-b)） |
 | `[1]` | `HFNMIENA` | HardFault / NMI / FAULTMASK 期间是否仍启用 MPU |
 | `[0]` | `ENABLE` | MPU 总使能。为 0 时其他寄存器配置全部无效 |
 | `[31:3]` | — | res0 |
 
 `HFNMIENA` 的取舍：`=0` 时故障处理器不受 MPU 约束，方便完整 dump 现场内存做离线分析；`=1` 时连故障处理器也受限，防篡改更强但现场信息可能残缺。做安全诊断固件时通常置 0 并把现场存入专用 no-cacheable 区域。
 
-### 1.4 MPU_RNR —— 区域号寄存器（`0xE000_ED98`，RW）
+### 1.4 MPU_RNR {#14-mpu_rnr-区域号寄存器0xe000_ed98rw}
+
+`MPU_RNR` 是位于 `0xE000_ED98` 的 32 位读写区域选择寄存器。
 
 | 位 | 名称 | 说明 |
 | --- | --- | --- |
 | `[7:0]` | `REGION` | 当前区域号。写 ≥ DREGION 的值行为未定义 |
 | `[31:8]` | — | res0 |
 
-### 1.5 MPU_RBAR —— 区域基址寄存器（`0xE000_ED9C`，RW）
+### 1.5 MPU_RBAR {#15-mpu_rbar-区域基址寄存器0xe000_ed9crw}
+
+`MPU_RBAR` 是位于 `0xE000_ED9C` 的 32 位读写区域基址寄存器。
 
 | 位 | 名称 | 说明 |
 | --- | --- | --- |
-| `[31:5]` | `ADDR` | 区域基址。低位按 SIZE 对齐（§1.7），不足对齐时**低位被忽略**，保护范围悄悄扩大 |
+| `[31:5]` | `ADDR` | 区域基址。低位按 SIZE 对齐（[§1.7](#17-size-编码与基址对齐约束)），不足对齐时**低位被忽略**，保护范围悄悄扩大 |
 | `[4]` | `VALID` | 1 = 本次访问使用 `REGION[3:0]` 指定的区域，忽略 `MPU_RNR`；0 = 使用 `MPU_RNR` |
 | `[3:0]` | `REGION` | `VALID=1` 时的区域号 |
 
-### 1.6 MPU_RASR —— 区域属性与大小寄存器（`0xE000_EDA0`，RW）
+### 1.6 MPU_RASR {#16-mpu_rasr-区域属性与大小寄存器0xe000_eda0rw}
+
+`MPU_RASR` 是位于 `0xE000_EDA0` 的 32 位读写寄存器，配置区域属性、大小与使能。
 
 ```
  31   29 28  27    26   24 23  22   21   19 18 17 16   15    8  7  6    5    1  0
@@ -78,13 +88,13 @@ Cortex-M7 只有**一套** MPU，寄存器位于系统控制空间（SCS），�
 | 字段 | 位 | 说明 |
 | --- | --- | --- |
 | `XN` | `[28]` | Execute Never。1 = 禁止从该区取指执行；0 = 可执行 |
-| `AP[2:0]` | `[26:24]` | 访问权限，见 §1.8 |
-| `TEX[2:0]` | `[21:19]` | 内存类型扩展，与 C/B/S 组合，见 §1.9 |
+| `AP[2:0]` | `[26:24]` | 访问权限，见 [§1.8](#18-ap-访问权限编码) |
+| `TEX[2:0]` | `[21:19]` | 内存类型扩展，与 C/B/S 组合，见 [§1.9](#19-texcbs-内存属性编码) |
 | `S` | `[18]` | Shareable |
 | `C` | `[17]` | Cacheable |
 | `B` | `[16]` | Bufferable |
-| `SRD[7:0]` | `[15:8]` | 子区域禁用，≥256 B 时分 8 段，见 §1.10 |
-| `SIZE[4:0]` | `[5:1]` | 区域大小 = 2^(SIZE+1) 字节，见 §1.7 |
+| `SRD[7:0]` | `[15:8]` | 子区域禁用，≥256 B 时分 8 段，见 [§1.10](#110-区域重叠与-srd-子区域禁用) |
+| `SIZE[4:0]` | `[5:1]` | 区域大小 = 2^(SIZE+1) 字节，见 [§1.7](#17-size-编码与基址对齐约束) |
 | `ENABLE` | `[0]` | 区域使能（还需 `MPU_CTRL.ENABLE`） |
 
 其余位（`[31:29]`、`[27]`、`[23:22]`、`[7:6]`）为 res0。
@@ -108,7 +118,7 @@ Cortex-M7 只有**一套** MPU，寄存器位于系统控制空间（SCS），�
 1. **区域大小必须是 2 的幂**（32 B – 4 GB）；
 2. **基址必须按区域大小对齐**——64 KB 区域必须落在 `0x0001_0000` 边界，不能是 `0x0001_0001`。
 
-违反第 2 条时，写进去的 ADDR 低位被硬件忽略，MPU 实际保护的是一个大一倍的区域。违反第 1 条时，大小**根本无法编码**——S32K566 上两个真实案例：3 MB 的 M7 SRAM0-2 与约 50 MB 的外设窗（`0x4000_0000`–`0x431F_FFFF`）都不能用单个 PMSAv7 区域覆盖，必须拆分（见 §5.3）。R52 的 PMSAv8-32 无此约束（BASE+LIMIT 任意 64 B 粒度），同一空间可单区覆盖（见 §3.3）。
+违反第 2 条时，写进去的 ADDR 低位被硬件忽略，MPU 实际保护的是一个大一倍的区域。违反第 1 条时，大小**根本无法编码**——S32K566 上两个真实案例：3 MB 的 M7 SRAM0-2 与约 50 MB 的外设窗（`0x4000_0000`–`0x431F_FFFF`）都不能用单个 PMSAv7 区域覆盖，必须拆分（见 [§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案)）。R52 的 PMSAv8-32 无此约束（BASE+LIMIT 任意 64 B 粒度），同一空间可单区覆盖（见 [§3.3](#33-区域定义size-幂约束-vs-limit-自由粒度)）。
 
 ### 1.8 AP 访问权限编码
 
@@ -154,7 +164,7 @@ Cortex-M7 只有**一套** MPU，寄存器位于系统控制空间（SCS），�
 
 ### 1.10 区域重叠与 SRD 子区域禁用
 
-- **重叠时编号大的优先**：区域 0 和区域 1 覆盖同一段内存，区域 1 的属性生效。这是 PMSAv7 最有用的特性——可以先用一个大区域定基调，再叠加小区域收紧（S32K5 的"背景 no-access + 有效区叠加"与"SRAM 合并区 + NC 子区覆盖"都依赖它，见 §5.2/§5.3）。
+- **重叠时编号大的优先**：区域 0 和区域 1 覆盖同一段内存，区域 1 的属性生效。这是 PMSAv7 最有用的特性——可以先用一个大区域定基调，再叠加小区域收紧（S32K5 的"背景 no-access + 有效区叠加"与"SRAM 合并区 + NC 子区覆盖"都依赖它，见 [§5.2](#52-静态区域权限策略本次修订确立)/[§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案)）。
 - **SRD 子区域**：区域 ≥ 256 B 时被等分为 8 段，`SRD[n]=1` 表示禁用第 n 段，`SRD[0]` 对应最低地址段。**注意：区域为 32/64/128 B 时写 SRD 结果不可预测**。
 
 ### 1.11 默认内存映射（背景区域）
@@ -175,7 +185,7 @@ Cortex-M7 只有**一套** MPU，寄存器位于系统控制空间（SCS），�
 
 两个要点：
 
-1. **只有 `0x0000_0000`–`0x1FFF_FFFF` 默认可执行**——这解释了为什么 MRAM 空置段（`0x0A00_0000` 起）是投机取指雷区，而 XSPI 窗口（`0x8100_0000` 起）的取指默认被 XN 压制（其危险来自数据侧投机，见 §9.2）；
+1. **只有 `0x0000_0000`–`0x1FFF_FFFF` 默认可执行**——这解释了为什么 MRAM 空置段（`0x0A00_0000` 起）是投机取指雷区，而 XSPI 窗口（`0x8100_0000` 起）的取指默认被 XN 压制（其危险来自数据侧投机，见 [§9.2](#92-s32k5-上的两个雷区)）；
 2. 默认映射中 Normal 段的 cacheable 属性以 cache 实际使能为前提——cache 关闭时等效 Non-cacheable。
 
 ### 1.12 MemManage 故障与现场获取
@@ -214,7 +224,7 @@ void MemManage_Handler(void)
 }
 ```
 
-> 使用前需在 `SCB->SHCSR` 打开 `MEMFAULTENA` 位（见 §14.2），否则 MemManage 直接进 HardFault。
+> 使用前需在 `SCB->SHCSR` 打开 `MEMFAULTENA` 位（见 [§14.2](#142-集成步骤)），否则 MemManage 直接进 HardFault。
 
 ### 1.13 编程规则（M7 与 R52 通用）
 
@@ -248,18 +258,18 @@ S32K566 实现 **EL1: 20 区域，EL2: 20 区域**（不是 16 或 24）。RM Ta
 
 | 寄存器 | cp15 编码 | 访问 | 说明 |
 | --- | --- | --- | --- |
-| `MPUIR` | `c0, c0, 4` | RO（EL1/EL2） | EL1 MPU 区域信息（§2.3） |
-| `PRSELR` | `c6, c2, 1` | RW | 选择当前 `PRBAR`/`PRLAR` 访问的目标区域（§2.4） |
-| `PRBAR` | `c6, c3, 0` | RW | 区域基址 + AP/SH/XN（§2.5） |
-| `PRLAR` | `c6, c3, 1` | RW | 区域上限 + AttrIndx + EN（§2.6） |
+| `MPUIR` | `c0, c0, 4` | RO（EL1/EL2） | EL1 MPU 区域信息（[§2.3](#23-mpuir-mpu-类型寄存器mrc-p15-0-rt-c0-c0-4ro)） |
+| `PRSELR` | `c6, c2, 1` | RW | 选择当前 `PRBAR`/`PRLAR` 访问的目标区域（[§2.4](#24-prselr-hprselr-区域选择寄存器c6-c2-1rw)） |
+| `PRBAR` | `c6, c3, 0` | RW | 区域基址 + AP/SH/XN（[§2.5](#25-prbar-hprbar-区域基址寄存器c6-c3-0rw)） |
+| `PRLAR` | `c6, c3, 1` | RW | 区域上限 + AttrIndx + EN（[§2.6](#26-prlar-hprlar-区域上限寄存器c6-c3-1rw)） |
 | `PRBARn` / `PRLARn` | `c6, c8+n[3:1], 4*n[0]+{0,1}` | RW | 直接访问 region 0–15 |
-| `MAIR0` / `MAIR1` | `c10, c2, 0` / `c10, c2, 1` | RW | 内存属性间接（§2.8） |
-| `SCTLR` | `c1, c0, 0` | RW | 系统控制（M/BR/WXN/UWXN/I/C，§2.10） |
-| `HCR` | `c1, c1, 0` | RW | Hypervisor 配置（DC/VM/TID1，§2.10） |
+| `MAIR0` / `MAIR1` | `c10, c2, 0` / `c10, c2, 1` | RW | 内存属性间接（[§2.8](#28-mair0-mair1-内存属性间接寄存器c10-c2-0-c10-c2-1rw)） |
+| `SCTLR` | `c1, c0, 0` | RW | 系统控制（M/BR/WXN/UWXN/I/C，[§2.10](#210-sctlr-hcr-关键控制位)） |
+| `HCR` | `c1, c1, 0` | RW | Hypervisor 配置（DC/VM/TID1，[§2.10](#210-sctlr-hcr-关键控制位)） |
 | `HMPUIR` | `p15, 4, c0, c0, 4` | RO（EL2） | EL2 MPU 区域信息 |
 | `HPRSELR` | `p15, 4, c6, c2, 1` | RW（EL2） | EL2 区域选择 |
 | `HPRBAR` / `HPRLAR` | `p15, 4, c6, c3, 0` / `p15, 4, c6, c3, 1` | RW（EL2） | EL2 区域基址 / 上限 |
-| `HPRENR` | `p15, 4, c6, c1, 1` | RW（EL2） | EL2 区域使能位掩码（§2.7） |
+| `HPRENR` | `p15, 4, c6, c1, 1` | RW（EL2） | EL2 区域使能位掩码（[§2.7](#27-hprenr-el2-区域使能寄存器p15-4-c6-c1-1rw)） |
 | `HMAIR0` / `HMAIR1` | `p15, 4, c10, c2, 0` / `1` | RW（EL2） | EL2 内存属性间接 |
 
 两种编程方式：
@@ -276,11 +286,13 @@ MCR   p15, 0, R1, c6, c8+n[3:1], 4*n[0]      @ PRBARn
 MCR   p15, 0, R2, c6, c8+n[3:1], 4*n[0]+1    @ PRLARn
 ```
 
-> **易错点**：直接访问方式的 `op1` 计算容易写错（涉及 `c8 + n[3:1]` 与 `4*n[0]`）。**统一用 PRSELR 间接方式**——这同时是 region 16–19 的唯一访问途径（见 §16 风险 12）。
+> **易错点**：直接访问方式的 `op1` 计算容易写错（涉及 `c8 + n[3:1]` 与 `4*n[0]`）。**统一用 PRSELR 间接方式**——这同时是 region 16–19 的唯一访问途径（见 [§16](#16-风险清单汇总) 风险 12）。
 >
-> **EL1 没有 PRENR**：R52 的 EL1 MPU 区域使能只能通过 `PRLAR.EN`；位掩码形式的区域使能寄存器只有 EL2 的 `HPRENR`（§2.7）。
+> **EL1 没有 PRENR**：R52 的 EL1 MPU 区域使能只能通过 `PRLAR.EN`；位掩码形式的区域使能寄存器只有 EL2 的 `HPRENR`（[§2.7](#27-hprenr-el2-区域使能寄存器p15-4-c6-c1-1rw)）。
 
-### 2.3 MPUIR —— MPU 类型寄存器（`MRC p15, 0, Rt, c0, c0, 4`，RO）
+### 2.3 MPUIR {#23-mpuir-mpu-类型寄存器mrc-p15-0-rt-c0-c0-4ro}
+
+`MPUIR` 是只读 MPU 信息寄存器，通过 `MRC p15, 0, Rt, c0, c0, 4` 读取。
 
 | 位 | 名称 | 说明 |
 | --- | --- | --- |
@@ -292,9 +304,9 @@ MCR   p15, 0, R2, c6, c8+n[3:1], 4*n[0]+1    @ PRLARn
 
 EL1 读 `MPUIR` 在 `HCR.TID1=1` 时被 trap 到 EL2。
 
-### 2.4 PRSELR / HPRSELR —— 区域选择寄存器（`c6, c2, 1`，RW）
+### 2.4 PRSELR / HPRSELR {#24-prselr-hprselr-区域选择寄存器c6-c2-1rw}
 
-位宽随实现的区域数变化：
+`PRSELR` / `HPRSELR` 是访问编码为 `c6, c2, 1` 的读写区域选择寄存器；`REGION` 位宽随实现的区域数变化：
 
 | 实现 | `REGION` 位域 | 越界行为 |
 | --- | --- | --- |
@@ -303,25 +315,29 @@ EL1 读 `MPUIR` 在 `HCR.TID1=1` 时被 trap 到 EL2。
 
 S32K566（20 区域）应使用 `[4:0]`。选号后，`PRBAR`/`PRLAR` 的读写即作用于该区域。
 
-### 2.5 PRBAR / HPRBAR —— 区域基址寄存器（`c6, c3, 0`，RW）
+### 2.5 PRBAR / HPRBAR {#25-prbar-hprbar-区域基址寄存器c6-c3-0rw}
+
+`PRBAR` / `HPRBAR` 是访问编码为 `c6, c3, 0` 的读写区域基址寄存器。
 
 | 位 | 名称 | 说明 |
 | --- | --- | --- |
 | `[31:6]` | `BASE` | 区域基址 bits[31:6]，零扩展后参与比较 |
 | `[5]` | — | res0 |
-| `[4:3]` | `SH[1:0]` | Shareability，见 §2.9 |
-| `[2:1]` | `AP[2:1]` | 访问权限，见 §2.9 |
-| `[0]` | `XN` | Execute-never。**注意 XN 在 PRBAR 而非 PRLAR**——与 M7（`MPU_RASR.XN[28]`）位置完全不同，见 §3.5 |
+| `[4:3]` | `SH[1:0]` | Shareability，见 [§2.9](#29-ap-与-sh-编码) |
+| `[2:1]` | `AP[2:1]` | 访问权限，见 [§2.9](#29-ap-与-sh-编码) |
+| `[0]` | `XN` | Execute-never。**注意 XN 在 PRBAR 而非 PRLAR**——与 M7（`MPU_RASR.XN[28]`）位置完全不同，见 [§3.5](#35-xn-的位置与-wxn-冲突) |
 
 复位值为 UNKNOWN，配置代码必须写全字段。
 
-### 2.6 PRLAR / HPRLAR —— 区域上限寄存器（`c6, c3, 1`，RW）
+### 2.6 PRLAR / HPRLAR {#26-prlar-hprlar-区域上限寄存器c6-c3-1rw}
+
+`PRLAR` / `HPRLAR` 是访问编码为 `c6, c3, 1` 的读写区域上限寄存器。
 
 | 位 | 名称 | 说明 |
 | --- | --- | --- |
 | `[31:6]` | `LIMIT` | 区域上限 bits[31:6]，硬件自动后补 `0x3F`——**上限含端点** |
 | `[5:4]` | — | res0 |
-| `[3:1]` | `AttrIndx[2:0]` | 内存属性索引，索引 `MAIRx`（§2.8） |
+| `[3:1]` | `AttrIndx[2:0]` | 内存属性索引，索引 `MAIRx`（[§2.8](#28-mair0-mair1-内存属性间接寄存器c10-c2-0-c10-c2-1rw)） |
 | `[0]` | `EN` | 区域使能。0 = 禁用；1 = 使能。**EL1 MPU 只有这一种使能方式** |
 
 区域地址范围：
@@ -332,7 +348,9 @@ PRBAR.BASE:0b000000 <= address <= PRLAR.LIMIT:0b111111
 
 冒号是位连接运算符。BASE 的低 6 位被硬件读为 0，LIMIT 的低 6 位被读为 1——**实际粒度 64 字节，且两端都是包含的**。配错时不会像 M7 那样"悄悄扩成大一倍"，而是立刻产生异常，属于 fail-fast。
 
-### 2.7 HPRENR —— EL2 区域使能寄存器（`p15, 4, c6, c1, 1`，RW）
+### 2.7 HPRENR {#27-hprenr-el2-区域使能寄存器p15-4-c6-c1-1rw}
+
+`HPRENR` 是 EL2 的读写区域使能寄存器，访问编码为 `p15, 4, c6, c1, 1`。
 
 | 实现 | 位域 | 说明 |
 | --- | --- | --- |
@@ -343,17 +361,17 @@ PRBAR.BASE:0b000000 <= address <= PRLAR.LIMIT:0b111111
 
 复位值 `0x00000000`。它是 `HPRLAR.EN` 的批量替代，仅 EL2 可访问。
 
-### 2.8 MAIR0 / MAIR1 —— 内存属性间接寄存器（`c10, c2, 0` / `c10, c2, 1`，RW）
+### 2.8 MAIR0 / MAIR1 {#28-mair0-mair1-内存属性间接寄存器c10-c2-0-c10-c2-1rw}
 
-R52 把内存属性从区域寄存器里搬到了 `MAIRx`，每个 MPU 有 8 个 8-bit 属性槽，区域通过 `PRLAR.AttrIndx` 引用：
+R52 通过读写寄存器 `MAIR0`（`c10, c2, 0`）和 `MAIR1`（`c10, c2, 1`）配置内存属性。每个 MPU 有 8 个 8-bit 属性槽，区域通过 `PRLAR.AttrIndx` 引用：
 
-| AttrIndx | 值 | 内存类型 | S32K5 用途 |
+| AttrIndx | 值 | 内存类型 | S32K566 用途 |
 | --- | --- | --- | --- |
 | 0 | `0xFF` | Normal, Inner/Outer RW, Write-back, Write-allocate | Code/Data MRAM、SRAM |
 | 1 | `0x00` | Device-nGnRnE | PPB（最严格 Device） |
 | 2 | `0xBB` | Normal, Inner/Outer RW, Write-through（no write-allocate） | 保留 |
 | 3 | `0x04` | Device-nGnRE | 外设桥窗口 |
-| 4 | `0x44` | Normal, Inner/Outer Non-cacheable | LPE_SRAM Code 只读视图 |
+| 4 | `0x44` | Normal, Inner/Outer Non-cacheable | LPE_SRAM Code（只读权限由区域 AP 设置） |
 
 ```asm
 @ 配置 MAIR0：Attr3=0x04, Attr2=0xBB, Attr1=0x00, Attr0=0xFF
@@ -368,7 +386,7 @@ ISB
 
 > Device 属性四档严格程度：`0x00` nGnRnE（无合并、无重排序、无提前写确认）> `0x04` nGnRE > `0x0C` nGRE > `0x0F` GRE。中断控制器/系统关键寄存器用 nGnRnE，普通外设用 nGnRE。
 >
-> `HMAIR0`/`HMAIR1` 复位为 0——EL2 侧属性编程前全部无效（见 §16 风险 9）。
+> `HMAIR0`/`HMAIR1` 复位为 0——EL2 侧属性编程前全部无效（见 [§16](#16-风险清单汇总) 风险 9）。
 
 ### 2.9 AP 与 SH 编码
 
@@ -390,15 +408,15 @@ ISB
 | `10` | Outer Shareable |
 | `11` | Inner Shareable |
 
-> **PMSAv8-32 没有"特权读写 + 用户只读"的混合 AP 编码**（M7 的 `AP=010` 在 R52 上无对应）。需要该语义时只能靠 OS 动态 region 在任务切换时改写 AP（见 §10.2）。
+> **PMSAv8-32 没有"特权读写 + 用户只读"的混合 AP 编码**（M7 的 `AP=010` 在 R52 上无对应）。需要该语义时只能靠 OS 动态 region 在任务切换时改写 AP（见 [§10.2](#102-分区模型与保护集)）。
 
 ### 2.10 SCTLR / HCR 关键控制位
 
 | 寄存器 | 位 | 名称 | 语义 |
 | --- | --- | --- | --- |
 | `SCTLR` | `[0]` | `M` | EL1 MPU 使能。为 0 时使用默认内存映射 |
-| `SCTLR` | `[17]` | `BR` | Background Region for EL1。为 1 时 EL1 特权访问未命中区域可用背景区域；**S32K5 保持 0**（未命中即 fault，见 §5.4）。复位值 0 |
-| `SCTLR` | `[19]` | `WXN` | Write permission implies XN。1 = 所有可写 region 强制 XN。**复位值 0**；置 1 会破坏 ATCM（必须可执行，见 §6.5） |
+| `SCTLR` | `[17]` | `BR` | Background Region for EL1。为 1 时 EL1 特权访问未命中区域可用背景区域；**S32K5 保持 0**（未命中即 fault，见 [§5.4](#54-推荐的-r52-区域布局20-region-预算最小化方案)）。复位值 0 |
+| `SCTLR` | `[19]` | `WXN` | Write permission implies XN。1 = 所有可写 region 强制 XN。**复位值 0**；置 1 会破坏 ATCM（必须可执行，见 [§6.5](#65-tcmitcm-dtcm-atcm-btcm-ctcm-ecc-与-backdoor-是两个坑)） |
 | `SCTLR` | `[20]` | `UWXN` | Unprivileged write permission implies EL1 XN。复位值 0 |
 | `SCTLR` | `[12]` | `I` | 指令 cache 总使能 |
 | `SCTLR` | `[2]` | `C` | 数据 cache 总使能 |
@@ -438,12 +456,12 @@ M7 只有 Permission fault（MPU 重叠时按优先级选中，不报错），R5
 
 ### 2.13 编程规则
 
-同 §1.13（M7 与 R52 通用），另加 R52 特有的两条：
+同 [§1.13](#113-编程规则m7-与-r52-通用)（M7 与 R52 通用），另加 R52 特有的两条：
 
 1. **ATCM 优先**。R52 TRM：*"Do not enable the MPU unless at least one MPU region is programmed and active. If the MPU is enabled, before using the TCM you must program MPU regions to cover the TCM regions."* 若在没有覆盖 TCM 的 region 时就置 `SCTLR.M`，TCM 访问会立即 fault。
-2. **`WXN` 是决策，不是默认**。`WXN`/`UWXN` 复位为 0。由于 ATCM 必须保持可执行，全局 `WXN=1` 这条路走不通——改为逐 region 置 `XN`，并加上电自检读回每个 `PRBAR.XN`（见 §6.5）。
+2. **`WXN` 是决策，不是默认**。`WXN`/`UWXN` 复位为 0。由于 ATCM 必须保持可执行，全局 `WXN=1` 这条路走不通——改为逐 region 置 `XN`，并加上电自检读回每个 `PRBAR.XN`（见 [§6.5](#65-tcmitcm-dtcm-atcm-btcm-ctcm-ecc-与-backdoor-是两个坑)）。
 
-R52 无独立复位（SEGGER 文档明确指出调试器无法单独复位 R52 核），因此 R52 的 MPU 配置完全由 M7 侧的启动代码负责触发，两者之间需要 MU 中断或共享内存标志握手（见 §11）。
+R52 无独立复位（SEGGER 文档明确指出调试器无法单独复位 R52 核），因此 R52 的 MPU 配置完全由 M7 侧的启动代码负责触发，两者之间需要 MU 中断或共享内存标志握手（见 [§11](#11-启动时序与配置顺序)）。
 
 ---
 
@@ -477,7 +495,7 @@ R52 无独立复位（SEGGER 文档明确指出调试器无法单独复位 R52 �
 | 编程模型 | `MPU_RNR` 选号 → RBAR/RASR | `PRSELR` 选号 → PRBAR/PRLAR（或直接 PRBARn/PRLARn） |
 | WXN | 无此概念 | `SCTLR.WXN`/`UWXN`，复位 0 |
 | 故障期行为 | `HFNMIENA` 可豁免故障处理器 | 无对应机制，故障处理器自身受 MPU 约束 |
-| 投机访问 | TRM 确立为架构行为；errata 1013783-B（§9） | 被 MPU 阻止出总线，**不产生 fault** |
+| 投机访问 | TRM 确立为架构行为；errata 1013783-B（[§9](#9-m7-背景区域与-speculative-访问-仍然需要架构行为-sden-1013783-b)） | 被 MPU 阻止出总线，**不产生 fault** |
 
 <figure style="margin:1.2em 0;text-align:center">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 452" width="100%" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif" role="img">
@@ -533,23 +551,23 @@ R52 无独立复位（SEGGER 文档明确指出调试器无法单独复位 R52 �
 
 ### 3.2 寄存器模型与编程接口差异
 
-M7 的 MPU 寄存器是**内存映射**的（SCS `0xE000_ED9x`），C 代码可以直接解引用；R52 的是**系统寄存器**，必须走 `MCR`/`MRC p15` 或 CMSIS 内联函数。这直接决定了 HAL 抽象层的形态（§14.1）：驱动层对下要同时实现"内存映射写 RASR"和"cp15 写 PRBAR/PRLAR"两条完全不同的路径，对上暴露统一的 `MpuRegionCfg` 接口。
+M7 的 MPU 寄存器是**内存映射**的（SCS `0xE000_ED9x`），C 代码可以直接解引用；R52 的是**系统寄存器**，必须走 `MCR`/`MRC p15` 或 CMSIS 内联函数。这直接决定了 HAL 抽象层的形态（[§14.1](#141-移植层接口抽象)）：驱动层对下要同时实现"内存映射写 RASR"和"cp15 写 PRBAR/PRLAR"两条完全不同的路径，对上暴露统一的 `MpuRegionCfg` 接口。
 
 另一个编程模型差异：M7 用 `MPU_RNR` 选号、`MPU_RBAR.VALID` 可临时覆盖选号；R52 用 `PRSELR` 选号（位宽随区域数变化，20 区域实现是 `[4:0]`），没有 VALID 机制。
 
-### 3.3 区域定义：SIZE 幂约束 vs LIMIT 自由粒度
+### 3.3 区域大小：SIZE 与 LIMIT {#33-区域定义size-幂约束-vs-limit-自由粒度}
 
-这是对 S32K5 布局影响最大的差异：
+M7（PMSAv7）以 2 的幂编码区域大小；R52（PMSAv8-32）使用 BASE/LIMIT 并支持 64 B 粒度。这是对 S32K5 布局影响最大的差异：
 
-- M7 的区域大小**必须是 2 的幂**且基址按大小对齐。S32K566 上两块连续大空间因此无法单区覆盖：**3 MB 的 M7 SRAM0-2**（拆 2 MB + 1 MB，§5.3）与**约 50 MB 的外设窗**（拆 32 MB + 8 MB，§5.3）。"SRAM0-2 合并为一个区域""外设合并为一个区域"这类在 PMSAv8 上成立的做法，在 PMSAv7 上不成立。
-- R52 用 BASE+LIMIT、64 B 粒度，同样空间可以一个区域覆盖（外设 `0x4000_0000`–`0x431F_FFFF` 单区，§5.4）。
+- M7 的区域大小**必须是 2 的幂**且基址按大小对齐。S32K566 上两块连续大空间因此无法单区覆盖：**3 MB 的 M7 SRAM0-2**（拆 2 MB + 1 MB，[§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案)）与**约 50 MB 的外设窗**（拆 32 MB + 8 MB，[§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案)）。"SRAM0-2 合并为一个区域""外设合并为一个区域"这类在 PMSAv8 上成立的做法，在 PMSAv7 上不成立。
+- R52 用 BASE+LIMIT、64 B 粒度，同样空间可以一个区域覆盖（外设 `0x4000_0000`–`0x431F_FFFF` 单区，[§5.4](#54-推荐的-r52-区域布局20-region-预算最小化方案)）。
 - 对齐失败的后果也相反：M7 是**静默扩大**（低地址位被忽略），R52 是**立即异常**（fail-fast）。
 
 ### 3.4 权限模型差异
 
 M7 的 AP 是 3 位 8 编码（特权/非特权 × 无/RO/RW），R52 的 AP 是 2 位 4 编码（EL0/EL1 两级 × 无/RO/RW）。三点实务影响：
 
-1. **混合权限缺失**：M7 的 `AP=010`（特权 RW + 非特权 RO）在 R52 上**没有对应编码**。需要"内核可写、应用只读"的共享区时，R52 侧只能靠 OS 在任务切换时改写区域 AP（§10.2），或接受双方同权限。
+1. **混合权限缺失**：M7 的 `AP=010`（特权 RW + 非特权 RO）在 R52 上**没有对应编码**。需要"内核可写、应用只读"的共享区时，R52 侧只能靠 OS 在任务切换时改写区域 AP（[§10.2](#102-分区模型与保护集)），或接受双方同权限。
 2. **保留值**：M7 的 `AP=100` 是保留值（行为不可预测），R52 的 `SH=01` 是 UNPREDICTABLE——静态检查规则要分别配置。
 3. **特权级联**：R52 的 AP 语义天然覆盖"本 EL 及更低 EL"，EL2 MPU 再叠一层取最小权限；M7 只有单层 + `HFNMIENA` 的故障期豁免。
 
@@ -557,7 +575,7 @@ M7 的 AP 是 3 位 8 编码（特权/非特权 × 无/RO/RW），R52 的 AP 是
 
 - M7 的 XN 在 `MPU_RASR[28]`，与 AP/属性同寄存器，一次写 RASR 即完成权限+属性+禁执行；
 - R52 的 XN 在 `PRBAR[0]`，与基址同寄存器——**配基址的那次写顺手就把 XN 定了**，代码评审时容易漏看。
-- R52 另有 `SCTLR.WXN`/`UWXN` 全局开关（复位 0）。看似方便的"write-xor-execute 全局兜底"在 S32K5 上**走不通**：ATCM 必须同时可写可执行（向量表、启动代码），`WXN=1` 会把它强制 XN，核无法从 ATCM 启动（§6.5）。R52 侧只能逐 region 管 XN，靠上电自检读回 `PRBAR.XN` 兜底（§16 风险 2/3）。
+- R52 另有 `SCTLR.WXN`/`UWXN` 全局开关（复位 0）。看似方便的"write-xor-execute 全局兜底"在 S32K5 上**走不通**：ATCM 必须同时可写可执行（向量表、启动代码），`WXN=1` 会把它强制 XN，核无法从 ATCM 启动（[§6.5](#65-tcmitcm-dtcm-atcm-btcm-ctcm-ecc-与-backdoor-是两个坑)）。R52 侧只能逐 region 管 XN，靠上电自检读回 `PRBAR.XN` 兜底（[§16](#16-风险清单汇总) 风险 2/3）。
 - M7 无 WXN 概念，相应也没有这个陷阱——但也没有全局兜底，同样是逐 region 管。
 
 ### 3.6 背景区域与 fail-fast 策略差异
@@ -567,41 +585,43 @@ M7 的 AP 是 3 位 8 编码（特权/非特权 × 无/RO/RW），R52 的 AP 是
 | | M7 | R52 |
 | --- | --- | --- |
 | 机制 | `PRIVDEFENA=1` 时特权访问落到**默认内存映射** | `SCTLR.BR=1` 时特权访问落到**背景区域** |
-| S32K5 选择 | **`PRIVDEFENA=0` + 显式 4 GB no-access 背景区**（区域 0，§9.3） | **`SCTLR.BR=0`，未命中即 Translation fault**（§5.4） |
+| S32K5 选择 | **`PRIVDEFENA=0` + 显式 4 GB no-access 背景区**（区域 0，[§9.3](#93-设计决策本次修订确立)） | **`SCTLR.BR=0`，未命中即 Translation fault**（[§5.4](#54-推荐的-r52-区域布局20-region-预算最小化方案)） |
 | 能否"大背景+小覆盖" | 能（重叠合法，编号大者优先） | **不能**（重叠非法） |
 | 未映射空间行为 | 落入背景区 → MemManage，fail-fast | 不建区 → Translation fault，fail-fast |
-| 投机访问压制 | 背景区 SO+XN+AP=000（SDEN 1013783-B workaround，§9） | 投机访问被 MPU 阻止出总线、不产生 fault（§3.8） |
+| 投机访问压制 | 背景区 SO+XN+AP=000（SDEN 1013783-B workaround，[§9](#9-m7-背景区域与-speculative-访问-仍然需要架构行为-sden-1013783-b)） | 投机访问被 MPU 阻止出总线、不产生 fault（[§3.8](#38-投机访问行为差异)） |
 
-M7 之所以还要显式建 4 GB 背景区而不是开 `PRIVDEFENA`：默认映射把 `0x0000_0000`–`0x1FFF_FFFF` 全部列为 Normal 可执行，MRAM 空置段（`0x0A00_0000` 起）与未用 XSPI 窗都在其中，正是投机访问放行的雷区（§9.2）；且 errata 1013783-B 恰恰只在 `PRIVDEFENA=0` 时触发，官方 workaround 就是本方案的背景区配置（§9.1）。
+M7 之所以还要显式建 4 GB 背景区而不是开 `PRIVDEFENA`：默认映射把 `0x0000_0000`–`0x1FFF_FFFF` 全部列为 Normal 可执行，MRAM 空置段（`0x0A00_0000` 起）与未用 XSPI 窗都在其中，正是投机访问放行的雷区（[§9.2](#92-s32k5-上的两个雷区)）；且 errata 1013783-B 恰恰只在 `PRIVDEFENA=0` 时触发，官方 workaround 就是本方案的背景区配置（[§9.1](#91-问题机制)）。
 
 ### 3.7 故障模型差异
 
-M7 的 MPU 违规走 **MemManage** 异常入口（`CFSR.MFSR` + `MMFAR`/`BFAR`）；R52 走 **Abort**（Permission/Translation fault，`DFAR`/`IFAR` 经 cp15 读取）。R52 多出的 Translation fault（区域重叠/未命中且背景不可用）把 M7 上的两个"静默行为"（重叠按优先级、未命中走默认映射）都变成了显式故障——配置错误更早暴露，但也意味着**R52 的区域表任何重叠都直接致命**，上电自检必须做非重叠校验（§13.3）。
+M7 的 MPU 违规走 **MemManage** 异常入口（`CFSR.MFSR` + `MMFAR`/`BFAR`）；R52 走 **Abort**（Permission/Translation fault，`DFAR`/`IFAR` 经 cp15 读取）。R52 多出的 Translation fault（区域重叠/未命中且背景不可用）把 M7 上的两个"静默行为"（重叠按优先级、未命中走默认映射）都变成了显式故障——配置错误更早暴露，但也意味着**R52 的区域表任何重叠都直接致命**，上电自检必须做非重叠校验（[§13.3](#133-诊断覆盖建议)）。
 
-R52 没有 `HFNMIENA` 等价物：故障处理器自身也在 MPU 约束之下，现场 dump 缓冲区必须保证对 EL1 可达（§13.2）。
+R52 没有 `HFNMIENA` 等价物：故障处理器自身也在 MPU 约束之下，现场 dump 缓冲区必须保证对 EL1 可达（[§13.2](#132-双核协同的安全策略)）。
 
 ### 3.8 投机访问行为差异
 
-M7 TRM 把 speculative 访问确立为**架构行为**（任何 Normal 可执行地址可能被取指、任何 Normal 地址可能被数据读/cacheable 地址可能被 linefill），并明确 XN 区、non-accessible 区、Device/SO 区、Non-cacheable 区、AHBP 端口不发生投机访问——背景区配置正是利用这组规则压制投机（§9）。
+M7 TRM 把 speculative 访问确立为**架构行为**（任何 Normal 可执行地址可能被取指、任何 Normal 地址可能被数据读/cacheable 地址可能被 linefill），并明确 XN 区、non-accessible 区、Device/SO 区、Non-cacheable 区、AHBP 端口不发生投机访问——背景区配置正是利用这组规则压制投机（[§9](#9-m7-背景区域与-speculative-访问-仍然需要架构行为-sden-1013783-b)）。
 
 R52 TRM 的表述不同：投机访问**被 MPU 阻止生成总线事务，且不产生 translation/permission fault**。也就是说 R52 侧未命中区域的投机访问天然无害；M7 侧则必须靠背景区的 SO+XN+AP=000 主动压制。这是 S32K5 上两核背景策略不同的架构根因。
 
 ### 3.9 对 S32K5 设计的推论
 
 1. **两套背景策略并存**：M7 显式背景区（13 静态区之一），R52 靠 BR=0 fail-fast——同一芯片两种互补哲学，HAL 不能假设对称；
-2. **M7 区域预算是稀缺资源**：16 个区域 + 2 的幂约束，静态区用到 13 个，OS 动态仅剩 3 个；R52 20 个区域 + 自由粒度，静态 12 个、动态 8 个——**双核的分区保护能力不对称**，AUTOSAR OS 分区规划必须按核分别预算（§10.3）；
-3. **跨核共享区属性必须逐字段一致**：M7 的 TEX/C/B 与 R52 的 MAIR 槽要通过统一枚举映射（§14.1），否则一个核看到 WB、另一个看到 NC，跨核函数指针跳转会出现不可预测行为（§6.2）；
+2. **M7 区域预算是稀缺资源**：16 个区域 + 2 的幂约束，静态区用到 13 个，OS 动态仅剩 3 个；R52 20 个区域 + 自由粒度，静态 12 个、动态 8 个——**双核的分区保护能力不对称**，AUTOSAR OS 分区规划必须按核分别预算（[§10.3](#103-内存布局要求决定-region-数量下限)）；
+3. **跨核共享区属性必须逐字段一致**：M7 的 TEX/C/B 与 R52 的 MAIR 槽要通过统一枚举映射（[§14.1](#141-移植层接口抽象)），否则一个核看到 WB、另一个看到 NC，跨核函数指针跳转会出现不可预测行为（[§6.2](#62-code-mramemram-s32k5-最大的架构变化)）；
 4. **XN 位置差异必须被 HAL 屏蔽**：统一 `MpuRegionCfg.xn` 字段，M7 实现写 `RASR[28]`，R52 实现写 `PRBAR[0]`；
 5. **故障处理分核实现**：M7 `MemManage_Handler` + `CFSR/MMFAR`，R52 Abort handler + `DFAR/IFAR`；
 6. **自检策略分化**：M7 查 `MPU_TYPE.DREGION` + RASR 回读；R52 查 `MPUIR.DREGION` + `PRSELR` 间接回读（覆盖 region 16–19）+ 非重叠校验。
 
 ---
 
-## 第二部分 · S32K5 实现篇 —— 落到 S32K566 的设计决策
+## 第二部分 · S32K5 实现 {#第二部分-s32k5-实现篇-落到-s32k566-的设计决策}
+
+本部分将上述架构应用于 S32K566，涵盖内存映射、区域布局、配置、启动顺序、AUTOSAR OS 分区与安全集成。
 
 ## 4. S32K5 平台与 MPU 设计动因
 
-### 4.1 三簇异构核与隔离需求
+### 4.1 核簇与隔离 {#41-三簇异构核与隔离需求}
 
 S32K5 是 ASIL D 平台，三簇异构核共用同一套 MRAM 与 SRAM：
 
@@ -620,7 +640,7 @@ MPU 在这套系统里承担的是**职责隔离**而非仅仅是内存保护：
 
 ### 4.2 MPU 与 XRDC 的两级隔离模型
 
-**Note:** MPU 只约束**本核**的访问，**挡不住 DMA** —— eDMA、以太网 MAC、CAN 等 master 绕过 CPU 的 MPU 直接打总线，要拦住它们必须配 **XRDC**（详见 §6.8）。S32K5 的安全设计如果只做 MPU，等于给非受控写入留了一扇敞开的大门。
+**Note:** MPU 只约束**本核**的访问，**挡不住 DMA** —— eDMA、以太网 MAC、CAN 等 master 绕过 CPU 的 MPU 直接打总线，要拦住它们必须配 **XRDC**（详见 [§6.8](#68-xrdcmpu-的互补层必须一起设计)）。S32K5 的安全设计如果只做 MPU，等于给非受控写入留了一扇敞开的大门。
 
 ```mermaid
 flowchart LR
@@ -666,84 +686,84 @@ flowchart LR
 
 S32K5 已在硬件层面把 SRAM 切分为 cacheable / non-cacheable / shareable 段（linker 里体现为 `int_sram_no_cacheable`、`int_sram_shareable`），MPU 配置必须与这套划分**严格对齐**，否则软件属性与硬件属性冲突会导致不可预测行为。
 
-### 5.2 静态区域权限策略（本次修订确立）
+### 5.2 静态区域权限 {#52-静态区域权限策略本次修订确立}
 
 布局表之前先定权限策略，否则"RWX/RO"的表述各章会漂移：
 
 | 区域类别 | M7 AP | R52 AP | 说明 |
 | --- | --- | --- | --- |
 | **静态区域**（全部硬件资源） | `001`（特权 RW）或 `101`（特权 RO） | `00`（EL1 RW）或 `10`（EL1 RO） | 供 OS 内核与可信服务使用；**用户态零访问** |
-| **OS 动态区域**（按任务授权） | `011`/`010`/`110` | `01`/`11` | 非可信分区的代码 RO+X（M7 `110` / R52 `11`）与数据 RW+XN（M7 `011` / R52 `01`），任务切换时改写（§10.2） |
-| **背景 no-access**（仅 M7） | `000` | — | 未覆盖地址一律 MemManage（§9） |
+| **OS 动态区域**（按任务授权） | `011`/`010`/`110` | `01`/`11` | 非可信分区的代码 RO+X（M7 `110` / R52 `11`）与数据 RW+XN（M7 `011` / R52 `01`），任务切换时改写（[§10.2](#102-分区模型与保护集)） |
+| **背景 no-access**（仅 M7） | `000` | — | 未覆盖地址一律 MemManage（[§9](#9-m7-背景区域与-speculative-访问-仍然需要架构行为-sden-1013783-b)） |
 
 推论：
 
-- **Bank A/B 静态区为特权 RW**（M7 `001` / R52 `00`）。运行镜像的"不可变"不是 MPU RO 能提供的——特权代码可自改 MPU，MPU RO 只是便利性收紧；真正的代码不可变靠 **XRDC 只读锁定**（§6.8）。FOTA 下载期把 Bank A 收紧为 RO+X（M7 `101` / R52 `10`）是可选加固，纳入 FOTA 状态机（§6.2）。
+- **Bank A/B 静态区为特权 RW**（M7 `001` / R52 `00`）。运行镜像的"不可变"不是 MPU RO 能提供的——特权代码可自改 MPU，MPU RO 只是便利性收紧；真正的代码不可变靠 **XRDC 只读锁定**（[§6.8](#68-xrdcmpu-的互补层必须一起设计)）。FOTA 下载期把 Bank A 收紧为 RO+X（M7 `101` / R52 `10`）是可选加固，纳入 FOTA 状态机（[§6.2](#62-code-mramemram-s32k5-最大的架构变化)）。
 - **PPB 静态区必须特权可写**（M7 `001` / R52 `00`）：M7 的 MPU 寄存器就在 PPB（`0xE000_ED9x`），R52 的 GIC CPU 接口也在 PPB——OS 运行期切换 region、中断应答都要写 PPB。把它配成 RO 会让 OS 的分区保护直接锁死。
-- **外设静态区为特权 RW**：用户态外设访问一律走 Trusted Function 提权（§10.4），不放开外设区写权限。
+- **外设静态区为特权 RW**：用户态外设访问一律走 Trusted Function 提权（[§10.4](#104-trusted-non-trusted-与外设访问)），不放开外设区写权限。
 
-### 5.3 推荐的 M7 区域布局（16 region 预算，最小化方案）
+### 5.3 M7 区域布局 {#53-推荐的-m7-区域布局16-region-预算最小化方案}
 
-M7 实现 **16 个区域**（`MPU_TYPE` 复位值 `0x00001000`）。RM Table 6 原文："On-core MPU for **dynamic task protection** (16 regions)"。`[来源: S32K5xx RM Rev.2 (2026-06-01), Chapter_02 Table 6/Table 10 —— ima automotive/S32K5/S32K5RM/]`
+本节给出 S32K566 的 16 区域预算下推荐的最小化 M7 布局。M7 实现 **16 个区域**（`MPU_TYPE` 复位值 `0x00001000`）。RM Table 6 原文："On-core MPU for **dynamic task protection** (16 regions)"。`[来源: S32K5xx RM Rev.2 (2026-06-01), Chapter_02 Table 6/Table 10 —— ima automotive/S32K5/S32K5RM/]`
 
 设计原则（本次修订确立）：
 
-1. **区域 0 固定为 4 GB 背景 no-access**（speculative 访问背景区域，SDEN 1013783-B workaround，见 §9），利用 PMSAv7「编号大者优先」的特性，让所有有效区域叠加在其上；
-2. **PMSAv7 功率约束**（§1.7）：区域大小必须是 2 的幂——SRAM0-2（3 MB）拆为 **2 MB + 1 MB** 两个区域；外设窗（`0x4000_0000`–`0x431F_FFFF`，约 50 MB）拆为 **32 MB + 8 MB** 两个区域（32 MB 区上界取 `0x41FF_FFFF` 覆盖 PBRIDGE3_0–5 + CPE 桥，8 MB 区覆盖 LPE/DSP 桥）；
-3. **CPE_GIC0（`0x4300_0000`–`0x431F_FFFF`）不给 M7 建区**——它是 R52 核簇的中断控制器，M7 用自己的 NVIC（PPB 内），核间中断走 MU（§4.2/§6.7）。若 M7 需参与跨簇中断配置，增设 2 MB Device 区（静态 14、动态 2）；
+1. **区域 0 固定为 4 GB 背景 no-access**（speculative 访问背景区域，SDEN 1013783-B workaround，见 [§9](#9-m7-背景区域与-speculative-访问-仍然需要架构行为-sden-1013783-b)），利用 PMSAv7「编号大者优先」的特性，让所有有效区域叠加在其上；
+2. **PMSAv7 功率约束**（[§1.7](#17-size-编码与基址对齐约束)）：区域大小必须是 2 的幂——SRAM0-2（3 MB）拆为 **2 MB + 1 MB** 两个区域；外设窗（`0x4000_0000`–`0x431F_FFFF`，约 50 MB）拆为 **32 MB + 8 MB** 两个区域（32 MB 区上界取 `0x41FF_FFFF` 覆盖 PBRIDGE3_0–5 + CPE 桥，8 MB 区覆盖 LPE/DSP 桥）；
+3. **CPE_GIC0（`0x4300_0000`–`0x431F_FFFF`）不给 M7 建区**——它是 R52 核簇的中断控制器，M7 用自己的 NVIC（PPB 内），核间中断走 MU（[§4.2](#42-mpu-与-xrdc-的两级隔离模型)/[§6.7](#67-外设窗口)）。若 M7 需参与跨簇中断配置，增设 2 MB Device 区（静态 14、动态 2）；
 4. **外部存储窗口不建区**（本项目不使用 XSPI），由背景区域兜底；
 5. NC/shareable 子分区用**重叠小区域**收紧（M7 允许重叠）。
 
 | # | 区域 | BASE | LIMIT | 大小 | 属性 | AP | XN | 备注 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 0 | **背景 no-access** | `0x0000_0000` | — | 4 GB | **SO** | **000** | 1 | speculative 背景（SDEN 1013783-B，§9）；未覆盖地址一律 MemManage |
+| 0 | **背景 no-access** | `0x0000_0000` | — | 4 GB | **SO** | **000** | 1 | speculative 背景（SDEN 1013783-B，[§9](#9-m7-背景区域与-speculative-访问-仍然需要架构行为-sden-1013783-b)）；未覆盖地址一律 MemManage |
 | 1 | M7 SRAM0+1 | `0x2100_0000` | `0x211F_FFFF` | 2 MB | WB | 001 | 1 | .data/.bss/堆（SIZE=20） |
 | 2 | M7 SRAM2 | `0x2120_0000` | `0x212F_FFFF` | 1 MB | WB | 001 | 1 | （SIZE=19）；`0x2130_0000` 以上不建区 |
 | 3 | SRAM NC/shareable 子分区 | 按链接脚本 | — | — | NC / Shareable | 001 | 1 | **重叠区域**，编号 > 1/2，压住合并区的对应子段 |
-| 4 | Code MRAM **Bank A** | `0x0800_0000` | `0x08FF_FFFF` | 16 MB | WB | 001 | 0 | 活动镜像；FOTA 期可收紧 RO+X（§6.2） |
-| 5 | Code MRAM **Bank B** | `0x0900_0000` | `0x09FF_FFFF` | 16 MB | WB | 001 | 0 | 更新镜像；A/B 隔离（§6.2） |
+| 4 | Code MRAM **Bank A** | `0x0800_0000` | `0x08FF_FFFF` | 16 MB | WB | 001 | 0 | 活动镜像；FOTA 期可收紧 RO+X（[§6.2](#62-code-mramemram-s32k5-最大的架构变化)） |
+| 5 | Code MRAM **Bank B** | `0x0900_0000` | `0x09FF_FFFF` | 16 MB | WB | 001 | 0 | 更新镜像；A/B 隔离（[§6.2](#62-code-mramemram-s32k5-最大的架构变化)） |
 | 6 | Data MRAM | `0x0C80_0000` | `0x0C83_FFFF` | 256 KB | WB | 001 | 1 | |
-| 7 | DTCM（本核） | `0x2000_0000` | `0x2000_FFFF` | 64 KB | NC | 001 | 1 | 主栈；读前需 64-bit 写初始化做 ECC（§6.5） |
+| 7 | DTCM（本核） | `0x2000_0000` | `0x2000_FFFF` | 64 KB | NC | 001 | 1 | 主栈；读前需 64-bit 写初始化做 ECC（[§6.5](#65-tcmitcm-dtcm-atcm-btcm-ctcm-ecc-与-backdoor-是两个坑)） |
 | 8 | ITCM（本核） | `0x0000_0000` | `0x0000_7FFF` | 32 KB | NC | 001 | 0 | 向量表 + 热点 ISR。**与 LPE_SRAM alias 共用 1 MB 窗口** |
 | 9 | LPE_SRAM Code | `0x1000_0000` | `0x1003_FFFF` | 256 KB | NC | 101 | 1 | M7 侧只读视图 |
 | 10 | 外设 P-A | `0x4000_0000` | `0x41FF_FFFF` | 32 MB | Device | 001 | 1 | PBRIDGE3_0–5 + CPE_PBRIDGE3_0/1 + 桥间间隙 |
 | 11 | 外设 P-B | `0x4200_0000` | `0x427F_FFFF` | 8 MB | Device | 001 | 1 | LPE_PBRIDGE3 + DSP_PBRIDGE3 + 间隙 |
-| 12 | PPB | `0xE000_0000` | `0xE00F_FFFF` | 1 MB | Device | 001 | 1 | 本核私有；**必须特权可写**（§5.2） |
-| 13–15 | **OS 分区动态区域** | — | — | — | — | 011/110 等 | — | AUTOSAR OS 任务/分区切换（§10） |
+| 12 | PPB | `0xE000_0000` | `0xE00F_FFFF` | 1 MB | Device | 001 | 1 | 本核私有；**必须特权可写**（[§5.2](#52-静态区域权限策略本次修订确立)） |
+| 13–15 | **OS 分区动态区域** | — | — | — | — | 011/110 等 | — | AUTOSAR OS 任务/分区切换（[§10](#10-autosar-os-分区与-asil-隔离freedom-from-interference)） |
 
 静态区域 **13 个**，OS 动态预算 **3 个**。`0x0A00_0000` 以上 MRAM 窗口空置段、`0x8100_0000` XSPI 窗口、`0x2130_0000` 以上、`0x4280_0000`–`0x42FF_FFFF`、`0x4320_0000` 以上、`0xE010_0000` 以上等**未实现/未使用空间全部落入区域 0**——误访问立即 fault，同时 speculative 访问被 SO+XN 压制。
 
-> **Device 属性是强制的，不是建议。** RM Ch.11 §11.3.5 NOTE：REG_PROT 的 transfer error 只有在"通过其 MPU 或 MMU 定义了覆盖目标寄存器地址的 **strongly ordered 内存区域**"的 CPU 上才可观测。把外设窗口配成 Normal memory，REG_PROT 的拒绝会退化成异步总线错误，出错点离原因很远。详见 §6.7。
+> **Device 属性是强制的，不是建议。** RM Ch.11 §11.3.5 NOTE：REG_PROT 的 transfer error 只有在"通过其 MPU 或 MMU 定义了覆盖目标寄存器地址的 **strongly ordered 内存区域**"的 CPU 上才可观测。把外设窗口配成 Normal memory，REG_PROT 的拒绝会退化成异步总线错误，出错点离原因很远。详见 [§6.7](#67-外设窗口)。
 
-### 5.4 推荐的 R52 区域布局（20 region 预算，最小化方案）
+### 5.4 R52 区域布局 {#54-推荐的-r52-区域布局20-region-预算最小化方案}
 
-S32K566 实现 **EL1: 20 区域，EL2: 20 区域**（不是 16 或 24）。RM Table 6 原文："Level 1 and level 2 MPUs with **20 regions each** (level 2 MPU supports hypervisor)"。`[来源: S32K5xx RM Rev.2, Chapter_02 Table 6/Table 10]`
+本节给出 S32K566 的最小化 R52 区域布局；该实现 **EL1 和 EL2 各有 20 个区域**（不是 16 或 24）。RM Table 6 原文："Level 1 and level 2 MPUs with **20 regions each** (level 2 MPU supports hypervisor)"。`[来源: S32K5xx RM Rev.2, Chapter_02 Table 6/Table 10]`
 
 R52 与 M7 的关键差异：**PMSAv8 禁止区域重叠**，无法用"大背景 + 小覆盖"的手法；R52 依靠 **`SCTLR.BR = 0`（背景区域检查关闭）实现 fail-fast**——未命中任何区域的访问直接 Translation fault。因此 R52 侧**不能**建 4 GB no-access 背景（会与"全覆盖"冲突），而是**只覆盖软件确实会访问的空间，其余空间留给 fault**。CPE_LLC0/1 scratchpad（CPE 加速器私有）与 XSPI 窗口（本项目不使用）**不建区**——误入即 fault，正是期望行为。
 
 | # | 区域 | BASE | LIMIT | Attr | AP | XN | 备注 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 0 | ATCM_CPU0 | `0x0100_0000` | `0x0100_7FFF` | WB-WA（Attr0） | 00 | **0** | 必须在使能 MPU **之前**配置（§2.13/§11.2） |
+| 0 | ATCM_CPU0 | `0x0100_0000` | `0x0100_7FFF` | WB-WA（Attr0） | 00 | **0** | 必须在使能 MPU **之前**配置（[§2.13](#213-编程规则)/[§11.2](#112-r52-启动序列)） |
 | 1 | BTCM_CPU0 | `0x0110_0000` | `0x0110_7FFF` | WB-WA | 00 | 1 | |
 | 2 | CTCM_CPU0 | `0x0120_0000` | `0x0120_7FFF` | WB-WA | 00 | 1 | |
 | 3 | Code MRAM **Bank A** | `0x0800_0000` | `0x08FF_FFFF` | WB-WA（Attr0） | 00 | 0 | 属性与 M7 侧逐字段一致；活动镜像 |
-| 4 | Code MRAM **Bank B** | `0x0900_0000` | `0x09FF_FFFF` | WB-WA | 00 | 0 | 与 Bank A 分开建区（§6.2） |
+| 4 | Code MRAM **Bank B** | `0x0900_0000` | `0x09FF_FFFF` | WB-WA | 00 | 0 | 与 Bank A 分开建区（[§6.2](#62-code-mramemram-s32k5-最大的架构变化)） |
 | 5 | Data MRAM | `0x0C80_0000` | `0x0C83_FFFF` | WB-WA | 00 | 1 | |
 | 6 | CPE_SRAM 0-3 | `0x2200_0000` | `0x220F_FFFF` | WB-WA | 00 | 1 | `cpe_sram`，R52 私有数据/栈 |
-| 7 | SysSRAM 0-2 | `0x2100_0000` | `0x212F_FFFF` | WB-WA | 00 | 1 | 与 M7 的跨核共享区（属性必须一致，§5.5） |
+| 7 | SysSRAM 0-2 | `0x2100_0000` | `0x212F_FFFF` | WB-WA | 00 | 1 | 与 M7 的跨核共享区（属性必须一致，[§5.5](#55-核间共享区的特殊处理)） |
 | 8 | LPE_SRAM Code | `0x1000_0000` | `0x1003_FFFF` | NC（Attr4） | 10 | 1 | R52 侧只读 |
 | 9 | LPE_SRAM Data | `0x2400_0000` | `0x2401_FFFF` | WB-WA | 00 | 1 | |
 | 10 | **外设（单区域）** | `0x4000_0000` | `0x431F_FFFF` | Device-nGnRE（Attr3） | 00 | 1 | 覆盖全部桥 + **CPE_GIC0**（R52 的中断控制器必须可达） |
 | 11 | PPB | `0xE000_0000` | `0xE00F_FFFF` | Device-nGnRnE（Attr1） | 00 | 1 | 仅 EL1 的 AP |
-| 12–19 | **OS 分区动态区域** | — | — | — | — | 01/11 | — | AUTOSAR OS（§10）：8 个动态 region |
+| 12–19 | **OS 分区动态区域** | — | — | — | — | 01/11 | — | AUTOSAR OS（[§10](#10-autosar-os-分区与-asil-隔离freedom-from-interference)）：8 个动态 region |
 
 静态区域 **12 个**，OS 动态预算 **8 个**。
 
-> R52 **禁止区域重叠**是设计中最硬的约束（见 §2.6）。上表用掉 **12/20** 个静态区域，两两不重叠且 64 字节对齐，留 8 个给 OS 分区切换——RM 对 MPU 用途的描述正是"dynamic task protection"。
+> R52 **禁止区域重叠**是设计中最硬的约束（见 [§2.6](#26-prlar-hprlar-区域上限寄存器c6-c3-1rw)）。上表用掉 **12/20** 个静态区域，两两不重叠且 64 字节对齐，留 8 个给 OS 分区切换——RM 对 MPU 用途的描述正是"dynamic task protection"。
 >
 > **CPU1 仅 TCM 基址不同**：CPU1 的 ATCM/BTCM/CTCM 是 `0x0140_0000` / `0x0150_0000` / `0x0160_0000`。CPU1 不需要为 CPU0 的 TCM 建区。
 >
-> **外设单区域的取舍**：真实 memory map 显示最后一个桥（LPE_PBRIDGE3）结束于 `0x4219_7FFF`，DSP_PBRIDGE3 在 `0x4260_0000`–`0x427F_FFFF`、CPE_GIC0 在 `0x4300_0000`–`0x431F_FFFF`。本方案把三者**并入同一个 Device 区域**（上界 `0x431F_FFFF`）——R52 的 GIC 访问是刚需，DSP 桥并入只是让 bridge 间隙也变成 Device 可访问，换取 region 预算；对间隙的误访问改由该区域兜底而非 fault，属可接受的折衷（在风险清单中登记）。**同样的合并在 M7 上做不到**——PMSAv7 的 2 的幂约束迫使外设窗拆成两个区域（§3.3/§5.3）。
+> **外设单区域的取舍**：真实 memory map 显示最后一个桥（LPE_PBRIDGE3）结束于 `0x4219_7FFF`，DSP_PBRIDGE3 在 `0x4260_0000`–`0x427F_FFFF`、CPE_GIC0 在 `0x4300_0000`–`0x431F_FFFF`。本方案把三者**并入同一个 Device 区域**（上界 `0x431F_FFFF`）——R52 的 GIC 访问是刚需，DSP 桥并入只是让 bridge 间隙也变成 Device 可访问，换取 region 预算；对间隙的误访问改由该区域兜底而非 fault，属可接受的折衷（在风险清单中登记）。**同样的合并在 M7 上做不到**——PMSAv7 的 2 的幂约束迫使外设窗拆成两个区域（[§3.3](#33-区域定义size-幂约束-vs-limit-自由粒度)/[§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案)）。
 
 ### 5.5 核间共享区的特殊处理
 
@@ -756,13 +776,13 @@ R52 与 M7 交换数据（如 CAN 报文、时间戳）的区域是跨核共享�
 | Mailbox / MU | S32K5 的 MU（Messaging Unit）寄存器用于核间同步与中断通知 |
 | Cache 维护 | 跨核可见性依赖硬件一致性；S32K5 的核间不共享 L1 cache，需靠内存属性 + 屏障 |
 
-共享区的地址与属性必须集中定义在共享头文件中（§11.3），两核 MPU 的对应区域逐字段一致——M7 的 `TEX=001,C=1,B=1,S=1` 对应 R52 的 Attr0（`0xFF`）+ `SH=11`（Inner-shareable）。
+共享区的地址与属性必须集中定义在共享头文件中（[§11.3](#113-双核配置的时序风险)），两核 MPU 的对应区域逐字段一致——M7 的 `TEX=001,C=1,B=1,S=1` 对应 R52 的 Attr0（`0xFF`）+ `SH=11`（Inner-shareable）。
 
 ---
 
-## 6. 按存储类型的 MPU 配置详解（MRAM / SRAM / TCM / XSPI / 外设）
+## 6. MPU 存储配置 {#6-按存储类型的-mpu-配置详解mram-sram-tcm-xspi-外设}
 
-本节把第 5 章的布局表展开到**每一种存储类型**。MPU 属性不是"拍脑袋选 Normal WB"，而是由存储介质的物理特性决定的——选错属性不会报错，只会让功能悄悄坏掉。
+本章按 MRAM、SRAM、TCM、XSPI 与外设逐类展开[第 5 章](#5-s32k5-存储映射与-mpu-区域布局)的 MPU 配置。属性选择取决于存储介质的物理特性；选错时通常不会报错，但可能导致功能异常。
 
 ### 6.1 S32K5 存储类型全景
 
@@ -780,17 +800,17 @@ R52 与 M7 交换数据（如 CAN 报文、时间戳）的区域是跨核共享�
 | ITCM（每 M7） | `0x0000_0000`–`0x0000_7FFF` | 32 KB | 有 | 易失 | Normal NC，RWX | M7 |
 | DTCM（每 M7） | `0x2000_0000`–`0x2000_FFFF` | 64 KB | 有 | 易失 | Normal NC，RW | M7 |
 | R52 ATCM/BTCM/CTCM | `0x0100_0000`–`0x0160_7FFF` | 各 32 KB | 有 | 易失 | Normal WB-WA | R52 |
-| XSPI/QSPI 外部 flash | `0x8100_0000`–`0xC0FF_FFFF` | 1024 MB | 依器件 | 非易失 | **不建区**——本项目不使用，并入背景 no-access（§9） | 全部核 |
+| XSPI/QSPI 外部 flash | `0x8100_0000`–`0xC0FF_FFFF` | 1024 MB | 依器件 | 非易失 | **不建区**——本项目不使用，并入背景 no-access（[§9](#9-m7-背景区域与-speculative-访问-仍然需要架构行为-sden-1013783-b)） | 全部核 |
 | 外设窗口 | `0x4000_0000`–`0x431F_FFFF` | 已用 34 MB | — | — | **Device-nGnRnE**（M7）/ **Device-nGnRE**（R52），XN | 全部核 |
 | PPB（私有外设总线） | `0xE000_0000`–`0xE00F_FFFF` | 1 MB | — | — | Device-nGnRnE | 本核私有 |
 
-> **外设窗口上界**：Rev.2 memory map 显示真实最后一个外设在 `0x4219_7FFF`。准确的表述是：**外设占据 `0x4000_0000`–`0x431F_FFFF`**（含 DSP_PBRIDGE3 `0x4260_0000`、CPE_GIC0 `0x4300_0000`）。本方案已决定：M7 侧拆两个 Device 区（`0x4000_0000`–`0x41FF_FFFF` + `0x4200_0000`–`0x427F_FFFF`，§5.3），R52 侧单区上界取 **`0x431F_FFFF`**；其后的厂商空间与未映射段并入背景 no-access 区域（M7，§9）或留空触发 Translation fault（R52）。
+> **外设窗口上界**：Rev.2 memory map 显示真实最后一个外设在 `0x4219_7FFF`。准确的表述是：**外设占据 `0x4000_0000`–`0x431F_FFFF`**（含 DSP_PBRIDGE3 `0x4260_0000`、CPE_GIC0 `0x4300_0000`）。本方案已决定：M7 侧拆两个 Device 区（`0x4000_0000`–`0x41FF_FFFF` + `0x4200_0000`–`0x427F_FFFF`，[§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案)），R52 侧单区上界取 **`0x431F_FFFF`**；其后的厂商空间与未映射段并入背景 no-access 区域（M7，[§9](#9-m7-背景区域与-speculative-访问-仍然需要架构行为-sden-1013783-b)）或留空触发 Translation fault（R52）。
 
-### 6.2 Code MRAM（eMRAM）—— S32K5 最大的架构变化
+### 6.2 Code MRAM {#62-code-mramemram-s32k5-最大的架构变化}
 
 ##### 硬件特性
 
-S32K5 是业界首款 16 nm FinFET + 嵌入式 MRAM 的车规 MCU。与 S32K3 及更早的 eFlash 相比，MRAM 改变了几条底层假设：
+S32K5 是业界首款 16 nm FinFET + 嵌入式 MRAM 的车规 MCU；Code MRAM（eMRAM）也是其相较 S32K3 及更早 eFlash 平台的关键架构变化。MRAM 改变了几条底层假设：
 
 | 特性 | MRAM (S32K5) | eFlash (S32K3 及更早) |
 | --- | --- | --- |
@@ -804,12 +824,12 @@ S32K5 是业界首款 16 nm FinFET + 嵌入式 MRAM 的车规 MCU。与 S32K3 �
 
 ##### MPU 配置含义
 
-1. **代码区可读可写可执行**——MRAM 不需要 XIP 只读保护，支持 FOTA 的 A/B 双 bank 切换。但这也意味着**代码区能被自身数据覆盖**。ASIL D 场景下若要求"运行期代码不可变"，MPU 做不到（RO 对特权代码只是便利性收紧，特权代码可自改 MPU），必须靠 **XRDC 的只读锁定**实现（§6.8）。
+1. **代码区可读可写可执行**——MRAM 不需要 XIP 只读保护，支持 FOTA 的 A/B 双 bank 切换。但这也意味着**代码区能被自身数据覆盖**。ASIL D 场景下若要求"运行期代码不可变"，MPU 做不到（RO 对特权代码只是便利性收紧，特权代码可自改 MPU），必须靠 **XRDC 的只读锁定**实现（[§6.8](#68-xrdcmpu-的互补层必须一起设计)）。
 2. **两核共用同一块 MRAM**——M7 与 R52 默认都从 Code MRAM 取指执行（Zephyr 中两者都以 `cmram` 作为 `zephyr,flash`）。同一物理区被两个核的 MPU 分别配置，**属性必须逐字段一致**（M7 `TEX=001,C=1,B=1` ↔ R52 Attr0 `0xFF`），否则一个核看到的是 cacheable，另一个看到的是 non-cacheable，跨核函数指针跳转会出现不可预测行为。
 3. **FOTA 写入期间应关闭 cache**——MRAM 写入虽快，但写入过程中若目标代码段正在被 cache 或流水线持有，需要 clean + invalidate。建议 FOTA 代理在刷写前后统一做 cache 维护。
 4. **不要把 MRAM 配成 Device 类型**——性能会崩塌（MRAM 就是当 RAM 用的），且 MRAM 支持 cache。
 
-##### MRAM A/B bank：必须拆成两个独立 MPU 区域
+##### MRAM A/B bank {#mram-ab-bank必须拆成两个独立-mpu-区域}
 
 Code MRAM 按 **Bank A（Lower）/ Bank B（Upper）各 16 MB、共 32 MB** 组织。这一结构已被 RM Rev.2 多处交叉证实：Ch.40 §40.1.1 列出 **16 个 2 MB Code 分区**（8 个 MRAMC Code block × Lower/Upper，Partition 0–15）另有 4 个 256 KB 小分区（Data / Secure Code A / Secure Code B / Secure Data），合计 33 MB——与 Ch.2 特性表 "MRAM: **33 MB**"（S32K566）一致；F16ASM `MCRS[SIZE]` 复位值 `6` 按 SIZE 编码即 **32 MB**。特性表同页给出的 OTA 能力是 "**Flexible A/B swap, RWW, Automatic address translation**"——硬件本身就按 A/B 双 bank 设计。`[来源: S32K5xx RM Rev.2, Chapter_40 §40.1.1/Table 194、Chapter_02 Table 6/特性比较表]`
 
@@ -820,16 +840,16 @@ Code MRAM 按 **Bank A（Lower）/ Bank B（Upper）各 16 MB、共 32 MB** 组�
 | FOTA 下载 | 更新代理与运行代码同权限，无法约束写入者 | **Bank A（运行镜像）在下载期收紧为 RO+X**，Bank B 独享 RW——只有 FOTA 代理所在分区能写更新镜像 |
 | 失效隔离 | 野指针可从 A 一路写到 B，两个镜像同时损毁 | Bank 边界天然是 16 MB 对齐的隔离墙，A 侧失控不破坏 B 侧备份镜像 |
 | 启动校验 | — | 切换前对 B bank 做签名校验，校验逻辑运行于 A bank 的 RO 权限下，防"校验代码被篡改" |
-| 区域成本 | 省 1 个区域 | 多用 1 个区域——在 §5.3/§5.4 的最小化预算下可承受 |
+| 区域成本 | 省 1 个区域 | 多用 1 个区域——在 [§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案)/[§5.4](#54-推荐的-r52-区域布局20-region-预算最小化方案) 的最小化预算下可承受 |
 
-地址边界与硬件特性天然契合：`0x0800_0000`（Bank A）/`0x0900_0000`（Bank B）都是 16 MB 对齐（M7 `SIZE=23` 直接可用），R52 侧 64 B 粒度更无压力。`0x0A00_0000` 以上的窗口空置段（实现 32 MB、窗口 64 MB）不建区——由 M7 的背景 no-access 区域（§9）兜底；R52 侧留空触发 Translation fault。
+地址边界与硬件特性天然契合：`0x0800_0000`（Bank A）/`0x0900_0000`（Bank B）都是 16 MB 对齐（M7 `SIZE=23` 直接可用），R52 侧 64 B 粒度更无压力。`0x0A00_0000` 以上的窗口空置段（实现 32 MB、窗口 64 MB）不建区——由 M7 的背景 no-access 区域（[§9](#9-m7-背景区域与-speculative-访问-仍然需要架构行为-sden-1013783-b)）兜底；R52 侧留空触发 Translation fault。
 
 > **两条硬件侧的写入防线**（与 MPU 区域互补）：
 > ① **分区写锁**——`LOCK0[LPLOCKL/LPLOCKU]` 复位值 `FF`：**上电时全部分区处于写锁定**，FOTA 解锁是显式动作，意外写入天然被拒；`GCR[HLB]` 式的硬锁定在 MRAMC 侧对应 LOCK 寄存器（详见 Ch.40 §40.6.6）。
 > ② **RWW 粒度**——read-while-write 以 **2 MB 分区**为粒度，FOTA 写入 Bank B 不阻塞 Bank A 取指；256-bit 页写 + 写后校验（`MCRS[WRE]`）由硬件自动完成。
 > `[来源: S32K5xx RM Rev.2, Chapter_40 §40.2.2/§40.3.3.1.3/§40.6.6]`
 >
-> **A/B 切换机制**：RM 描述为 "Flexible A/B swap + **Automatic address translation**"（地址自动平移由硬件承担），OMU 的 "Code MRAM alias for calibration" 只重映射**前 16 MB**（§15）且仅用于标定——**不要把 OTA 的 A/B 角色互换寄托在 OMU 上**。MPU 区域表在切换后需要同步重配（A/B 角色互换），该动作纳入 FOTA 流程的安全状态机并做双核交叉校验（§13.2）。
+> **A/B 切换机制**：RM 描述为 "Flexible A/B swap + **Automatic address translation**"（地址自动平移由硬件承担），OMU 的 "Code MRAM alias for calibration" 只重映射**前 16 MB**（[§15](#15-omuasil-分区的地址重映射陷阱)）且仅用于标定——**不要把 OTA 的 A/B 角色互换寄托在 OMU 上**。MPU 区域表在切换后需要同步重配（A/B 角色互换），该动作纳入 FOTA 流程的安全状态机并做双核交叉校验（[§13.2](#132-双核协同的安全策略)）。
 
 ### 6.3 M7 SRAM（3 MB，三个 bank）
 
@@ -845,7 +865,7 @@ S32K566 向 M7 核簇暴露三个 1 MB SRAM bank，连续位于 `0x2100_0000`–
 >
 > **Standby RAM 硬约束不延续。** NXP 对 S32K3 的指引 *"CM7 CPU D-Cache MUST be disabled to use the Standby RAM area. Or set the standby RAM as non-cacheable in MPU configuration."* 是 S32K3 特有的——S32K5 memory map 中没有 256 B standby 窗口。S32K5 上对应的关注点是 **Standby 模式下保持的 384 KB `LPE_SRAM`**，位于 `0x1000_0000`（code）与 `0x2400_0000`（data），由 M4 配置而非 M7。
 
-**PMSAv7 布局含义**：SRAM0-2 合计 3 MB，**不是 2 的幂，无法用单个 M7 区域覆盖**（§1.7）。本方案拆为 SRAM0+1（2 MB，`SIZE=20`）+ SRAM2（1 MB，`SIZE=19`）两个区域（§5.3）；NC/shareable 子分区在此之上用重叠小区域收紧。`0x2130_0000`–`0x213F_FFFF`（SRAM2 之后 1 MB）**不建区**，误访问落入背景区 fault。
+**PMSAv7 布局含义**：SRAM0-2 合计 3 MB，**不是 2 的幂，无法用单个 M7 区域覆盖**（[§1.7](#17-size-编码与基址对齐约束)）。本方案拆为 SRAM0+1（2 MB，`SIZE=20`）+ SRAM2（1 MB，`SIZE=19`）两个区域（[§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案)）；NC/shareable 子分区在此之上用重叠小区域收紧。`0x2130_0000`–`0x213F_FFFF`（SRAM2 之后 1 MB）**不建区**，误访问落入背景区 fault。
 
 **Zephyr 对应关系**：M7 板级目标用 `sram0` 作为 `zephyr,sram`，R52 目标用 `cpe_sram`。两套 DTS 走的是不同的 SRAM，**不是同一块内存的两种名字**。具体到 S32K5：M7 → `0x2100_0000`，R52 → `0x2200_0000`。
 
@@ -860,9 +880,11 @@ S32K566 向 M7 核簇暴露三个 1 MB SRAM bank，连续位于 `0x2100_0000`–
 
 **关键风险**：R52 SRAM 虽然"归属 R52 核簇"，但物理上对片上其他 master（M7、eDMA、以太网 MAC 等）是可见的。MPU 只约束**本核**的访问，**挡不住 M7 或 DMA 从总线侧闯入**。要真正隔离必须配 **XRDC**——具体是 `CPE_MRC0`–`CPE_MRC3`，每个 CPE_SRAMCTL bank 对应一个 MRC，各 16 个 region descriptor。
 
-**MPU 属性**：Normal WB RA，RW，XN=1（数据区不可执行）。R52 SRAM 是 R52 侧栈与任务数据的所在地，建议按任务再细分（见 §5.4/§10）。
+**MPU 属性**：Normal WB RA，RW，XN=1（数据区不可执行）。R52 SRAM 是 R52 侧栈与任务数据的所在地，建议按任务再细分（见 [§5.4](#54-推荐的-r52-区域布局20-region-预算最小化方案)/[§10](#10-autosar-os-分区与-asil-隔离freedom-from-interference)）。
 
-### 6.5 TCM（ITCM / DTCM / ATCM / BTCM / CTCM）—— ECC 与 backdoor 是两个坑
+### 6.5 TCM {#65-tcmitcm-dtcm-atcm-btcm-ctcm-ecc-与-backdoor-是两个坑}
+
+本节覆盖 M7 的 ITCM/DTCM 与 R52 的 ATCM/BTCM/CTCM，重点讨论 ECC 初始化和 TCM backdoor 对 MPU 保护的影响。
 
 ##### 硬件特性
 
@@ -874,13 +896,15 @@ S32K566 向 M7 核簇暴露三个 1 MB SRAM bank，连续位于 `0x2100_0000`–
 | M7 DTCM 接口 | 双接口 D0TCM / D1TCM |
 | 使能 | `ITCMCR.EN` / `DTCMCR.EN` 软件可关 |
 
-##### ECC 初始化约束（极易踩坑）
+##### ECC 初始化 {#ecc-初始化约束极易踩坑}
 
 **读 TCM 或系统 RAM 之前，必须先做 64-bit 写初始化**，否则 ECC 会报错。NXP S32K 文档原文：*"为了防止 ECC 报错，在读操作前，TCM 和系统 RAM 都需要 64bit 写入初始化。"*
 
 这意味着 MPU 配置**不能**放在 TCM 初始化之前去读 TCM 内容——启动代码必须先填 ECC 再建区域。且 RAM ECC 初始化**只在 Power-On Reset 时做**，其他复位类型不能重复做（会破坏 retained 数据）。
 
-##### TCM backdoor：核 MPU 保护的结构性漏洞
+##### TCM backdoor {#tcm-backdoor核-mpu-保护的结构性漏洞}
+
+TCM backdoor 访问绕过核 MPU 查找，因此仅配置 MPU 不能防护其他 master 对 TCM 的访问。
 
 > Arm Cortex-M7 TRM：*"**AHBS interface transactions are not capable of performing MPU lookups.** No distinction is made internally between unprivileged and privileged AHBS interface accesses as indicated on HPROTS. **The system is entirely responsible for providing TCM protection functionality for AHBS interface accesses** as required."*
 
@@ -929,16 +953,16 @@ Arm/NXP 规定：多核器件上，所有已使能的核与非核 master **都�
 
 另需注意 `SCTLR.UWXN`（bit 20，"unprivileged write permission implies EL1 XN"）**同样复位为 0**——只置 `WXN` 的话，非特权可写区域仍然是可执行的。
 
-### 6.6 外部存储扩展（XSPI / QSPI）—— 本项目不使用
+### 6.6 外部存储（XSPI / QSPI） {#66-外部存储扩展xspi-qspi-本项目不使用}
 
 **设计决策：本方案不考虑外部 flash / 外部 RAM 等扩展功能**，XSPI 窗口（数据 `0x8100_0000`–`0xC0FF_FFFF`、控制器寄存器 `0x40BA_4000`–`0x40BA_BFFF`）**不建 MPU 区域**，处理方式分核：
 
 | 核 | 未使用窗口的处理 | 依据 |
 | --- | --- | --- |
-| M7 | 落入**背景 no-access 区域**（区域 0，§9） | 窗口的 `0x8100_0000`–`0x9FFF_FFFF` 段在 M7 默认内存映射里属于 Normal WT cacheable 段（取指默认 XN，但**数据侧可被投机读/linefill**）——这正是 speculative 访问问题的原始场景；背景区域以 SO+XN+AP=000 将其彻底压制 |
+| M7 | 落入**背景 no-access 区域**（区域 0，[§9](#9-m7-背景区域与-speculative-访问-仍然需要架构行为-sden-1013783-b)） | 窗口的 `0x8100_0000`–`0x9FFF_FFFF` 段在 M7 默认内存映射里属于 Normal WT cacheable 段（取指默认 XN，但**数据侧可被投机读/linefill**）——这正是 speculative 访问问题的原始场景；背景区域以 SO+XN+AP=000 将其彻底压制 |
 | R52 | **不建区**，`SCTLR.BR = 0` 下未命中区域即 Translation fault | fail-fast：任何误指向外部窗口的访问立即暴露 |
 
-> 若未来项目启用外部存储：XSPI 的**寄存器窗口**与**数据窗口**必须分成两个 MPU 区域，寄存器窗口配 Device-nGnRnE、数据窗口配 Normal NC，且不得使用默认映射放行（同 errata 逻辑，未用地址段必须 SO+XN）。MRAM 编程走 XSPI 时有特殊处理要求（SEGGER：*"QSPI flash programming requires special handling compared to internal flash"*）。届时应重新评估 §5.3/§5.4 的 region 预算。
+> 若未来项目启用外部存储：XSPI 的**寄存器窗口**与**数据窗口**必须分成两个 MPU 区域，寄存器窗口配 Device-nGnRnE、数据窗口配 Normal NC，且不得使用默认映射放行（同 errata 逻辑，未用地址段必须 SO+XN）。MRAM 编程走 XSPI 时有特殊处理要求（SEGGER：*"QSPI flash programming requires special handling compared to internal flash"*）。届时应重新评估 [§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案)/[§5.4](#54-推荐的-r52-区域布局20-region-预算最小化方案) 的 region 预算。
 
 ### 6.7 外设窗口
 
@@ -951,7 +975,7 @@ Arm/NXP 规定：多核器件上，所有已使能的核与非核 master **都�
 | 属性 | **Device-nGnRE**（R52 Attr3 `0x04`）/ **Device**（M7 `TEX=010,C=0,B=0`） |
 | XN | 1（不可执行） |
 
-**桥的槽位几何**（决定 region 粒度）：每个 PBRIDGE3 占 2 MB，划分为 128 个 4 / 16 / 64 KB 槽。Rev.2 memory map 显示 486 行中有 479 个已映射外设，槽大小为 16 KB（384 个）、32 KB（91 个）、64 KB（11 个）。**合并 ≤ 64 KB 的间隙可把 34 MB 外设空间折叠成 11 个连续段**——这正是 §5.4 能用 **1 个 PERI region**（R52）覆盖全部外设（含 DSP 桥与 GIC）的原因；M7 侧因 PMSAv7 的 2 的幂约束需 **2 个**（§5.3）。
+**桥的槽位几何**（决定 region 粒度）：每个 PBRIDGE3 占 2 MB，划分为 128 个 4 / 16 / 64 KB 槽。Rev.2 memory map 显示 486 行中有 479 个已映射外设，槽大小为 16 KB（384 个）、32 KB（91 个）、64 KB（11 个）。**合并 ≤ 64 KB 的间隙可把 34 MB 外设空间折叠成 11 个连续段**——这正是 [§5.4](#54-推荐的-r52-区域布局20-region-预算最小化方案) 能用 **1 个 PERI region**（R52）覆盖全部外设（含 DSP 桥与 GIC）的原因；M7 侧因 PMSAv7 的 2 的幂约束需 **2 个**（[§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案)）。
 
 **必须单独建区的两块**：
 
@@ -960,9 +984,9 @@ Arm/NXP 规定：多核器件上，所有已使能的核与非核 master **都�
 
 **Secure / non-secure alias**：memory map 只为 PBRIDGE3_0 给出了明确的 alias 窗口，地址正好是 **基址 + `0x1000_0000`**（`0x4000_0000` → `0x5000_0000`）。其余 435 个已映射外设**没有** alias。结合 RM §36.2/§36.3 的表述——"表中内存槽代表的是 **non-secure 地址区**"——符合实际的解读是：表中地址即 non-secure 视图，而 secure 视图的基址规则**无法由该附件完全确定**。`+0x1000_0000` 规则仅对 PBRIDGE3_0 确认，推广前需核实。
 
-### 6.8 XRDC：MPU 的互补层，必须一起设计
+### 6.8 XRDC：互补隔离 {#68-xrdcmpu-的互补层必须一起设计}
 
-这是 S32K5 与 S32K3 设计上最大的差别，也是**只做 MPU 设计会漏掉的一整层**。
+XRDC 是 MPU 的互补隔离层，必须与 MPU 一起设计。这是 S32K5 相较于 S32K3 的重要差异；**只做 MPU 会漏掉这一层**。
 
 ##### NXP 的两级隔离模型
 
@@ -1012,9 +1036,9 @@ NXP 官方明确表述：*"通过 XRDC 和 MPU，可以实现 2 级隔离层级"
 
 `DdACP` 权限字段只编码**读/写**，分四级（secure-privileged、secure-user、nonsecure-privileged、nonsecure-user）。**没有 XN 位。**
 
-> **后果：所有代码可执行性控制都在核 MPU 里。** XRDC 能让某 region 对某域只读，但不能让它不可执行。任何"这段内存绝不能当代码跑"的要求，必须靠每个能从这里取指的核上的 `PRBAR.XN` / `MPU_RASR.XN` 来落实——而且按 §6.5，这包括经 backdoor 触达它的那些核。
+> **后果：所有代码可执行性控制都在核 MPU 里。** XRDC 能让某 region 对某域只读，但不能让它不可执行。任何"这段内存绝不能当代码跑"的要求，必须靠每个能从这里取指的核上的 `PRBAR.XN` / `MPU_RASR.XN` 来落实——而且按 [§6.5](#65-tcmitcm-dtcm-atcm-btcm-ctcm-ecc-与-backdoor-是两个坑)，这包括经 backdoor 触达它的那些核。
 
-##### 启用顺序：XRDC 会把自己锁死
+##### XRDC 启用顺序 {#启用顺序xrdc-会把自己锁死}
 
 > "When XRDC is enabled (`CR[GVLD]` = 1), you **cannot access any XRDC-protected memory unless** you configure at least one set of memory region descriptors that includes the targeted memory." `[来源: Chapter_31 §31.5.6.5]`
 
@@ -1051,21 +1075,21 @@ MCUXpresso SDK 提供 `XRDC_Init`、domain assignment（`xrdc_processor_domain_a
 
 | 存储类型 | M7 属性 | R52 属性 | XN | 特别注意事项 |
 | --- | --- | --- | --- | --- |
-| Code MRAM `0x0800_0000`–`0x08FF_FFFF`（Bank A） | Normal WB RA | Attr0 `0xFF` | 0 | 两核属性必须逐字段一致；A/B 分区实现 FOTA 隔离（§6.2）；代码区不可变需 XRDC（XRDC 无 XN） |
+| Code MRAM `0x0800_0000`–`0x08FF_FFFF`（Bank A） | Normal WB RA | Attr0 `0xFF` | 0 | 两核属性必须逐字段一致；A/B 分区实现 FOTA 隔离（[§6.2](#62-code-mramemram-s32k5-最大的架构变化)）；代码区不可变需 XRDC（XRDC 无 XN） |
 | Code MRAM `0x0900_0000`–`0x09FF_FFFF`（Bank B） | Normal WB RA | Attr0 `0xFF` | 0 | 同上 |
 | Data MRAM `0x0C80_0000`–`0x0C83_FFFF` | Normal WB RA | Attr0 `0xFF` | 1 | |
-| M7 SRAM0-2 `0x2100_0000`–`0x212F_FFFF` | Normal WB RA | — | 1 | 3 MB 非 2 的幂，M7 拆 2+1 MB 两区（§1.7/§5.3）；NC 与 shareable 子分区用重叠区收紧 |
+| M7 SRAM0-2 `0x2100_0000`–`0x212F_FFFF` | Normal WB RA | — | 1 | 3 MB 非 2 的幂，M7 拆 2+1 MB 两区（[§1.7](#17-size-编码与基址对齐约束)/[§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案)）；NC 与 shareable 子分区用重叠区收紧 |
 | R52 SRAM `0x2200_0000`–`0x220F_FFFF` | — | Attr0 `0xFF` | 1 | 防其他 master 需 XRDC（`CPE_MRC0`–`MRC3`） |
 | CPE_LLC0/1 scratchpad | — | 不建区 | — | `0x0700_0000`（960 KB）/ `0x0F00_0000`（448 KB）；CPE 加速器私有，误入即 fault |
 | LPE_SRAM Code `0x1000_0000` | Normal NC | Attr4 `0x44` | 1 | 256 KB；两核均按只读配置（M7 `101` / R52 `10`） |
-| LPE_SRAM Data `0x2400_0000` | 不建区 | Attr0 `0xFF` | 1 | 128 KB；M7 不访问 LPE 数据区（M7 布局无此区，§5.3） |
+| LPE_SRAM Data `0x2400_0000` | 不建区 | Attr0 `0xFF` | 1 | 128 KB；M7 不访问 LPE 数据区（M7 布局无此区，[§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案)） |
 | ITCM `0x0000_0000`（32 KB） | Normal NC | — | 0 | **与 LPE_SRAM alias 共用 1 MB 窗口**；读前必须 64-bit 写初始化 ECC |
 | DTCM `0x2000_0000`（64 KB） | Normal NC | — | 1 | backdoor 在 `0x2300_0000`–`0x236F_FFFF`，需 XRDC `MRC_B3` |
-| R52 ATCM/BTCM/CTCM | — | Attr0 `0xFF` | ATCM=0，其余=1 | backdoor 需 XRDC `CPE_MRC4`；ATCM 必须可执行（WXN 冲突，见 §6.5） |
-| XSPI 数据 `0x8100_0000`–`0xC0FF_FFFF` | **不建区**（背景 no-access，§9） | **不建区**（BR=0 下 fault） | — | 本项目不使用外部存储（§6.6） |
+| R52 ATCM/BTCM/CTCM | — | Attr0 `0xFF` | ATCM=0，其余=1 | backdoor 需 XRDC `CPE_MRC4`；ATCM 必须可执行（WXN 冲突，见 [§6.5](#65-tcmitcm-dtcm-atcm-btcm-ctcm-ecc-与-backdoor-是两个坑)） |
+| XSPI 数据 `0x8100_0000`–`0xC0FF_FFFF` | **不建区**（背景 no-access，[§9](#9-m7-背景区域与-speculative-访问-仍然需要架构行为-sden-1013783-b)） | **不建区**（BR=0 下 fault） | — | 本项目不使用外部存储（[§6.6](#66-外部存储扩展xspi-qspi-本项目不使用)） |
 | XSPI 寄存器 `0x40BA_4000` | **不建区**（已并入外设 P-A 区，Device） | 同左 | 1 | 若未来启用 XSPI，须与数据窗口分开建区 |
-| 外设 `0x4000_0000`–`0x431F_FFFF` | Device（**2 个区域**：32 MB + 8 MB） | Device-nGnRE（**单区域**） | 1 | M7 拆区因 PMSAv7 功率约束（§3.3）；含 DSP 桥；真实最后外设 `0x4219_7FFF` |
-| PPB `0xE000_0000`–`0xE00F_FFFF` | Device | Attr1 `0x00` | 1 | 本核私有；**必须特权/EL1 可写**（§5.2） |
+| 外设 `0x4000_0000`–`0x431F_FFFF` | Device（**2 个区域**：32 MB + 8 MB） | Device-nGnRE（**单区域**） | 1 | M7 拆区因 PMSAv7 功率约束（[§3.3](#33-区域定义size-幂约束-vs-limit-自由粒度)）；含 DSP 桥；真实最后外设 `0x4219_7FFF` |
+| PPB `0xE000_0000`–`0xE00F_FFFF` | Device | Attr1 `0x00` | 1 | 本核私有；**必须特权/EL1 可写**（[§5.2](#52-静态区域权限策略本次修订确立)） |
 
 ---
 
@@ -1295,11 +1319,11 @@ void R52_MPU_Init(void)
 }
 ```
 
-> R52 的系统寄存器访问必须走 `MCR p15, ...` 或 CMSIS 内联函数，不能像 M7 那样直接对内存地址解引用。`HCR.DC`/`HCR.VM` 的确认放在双核启动握手里（§11.2/§11.3）。
+> R52 的系统寄存器访问必须走 `MCR p15, ...` 或 CMSIS 内联函数，不能像 M7 那样直接对内存地址解引用。`HCR.DC`/`HCR.VM` 的确认放在双核启动握手里（[§11.2](#112-r52-启动序列)/[§11.3](#113-双核配置的时序风险)）。
 
-## 8. Cache 一致性：MPU 属性与 Cache 的耦合
+## 8. Cache 一致性 {#8-cache-一致性mpu-属性与-cache-的耦合}
 
-这是 MPU 设计中最容易被低估的部分。
+MPU 属性决定 cacheability，并影响 Cache 行为与跨核数据可见性。本章比较 M7/R52 的 Cache 架构，并说明属性配置和维护要求。
 
 ### 8.1 R52 与 M7 的 Cache 架构
 
@@ -1338,7 +1362,9 @@ __ISB();
 
 **禁用 D-Cache 与 MPU 的替代方案**：NXP 在 Standby RAM 案例中给出的两条路是「禁用 D-Cache」或「MPU 配成 non-cacheable」。二选一，但**不能都不做**。
 
-## 9. M7 背景区域与 speculative 访问 —— 仍然需要（架构行为 + SDEN 1013783-B）
+## 9. M7 投机访问保护 {#9-m7-背景区域与-speculative-访问-仍然需要架构行为-sden-1013783-b}
+
+即使 S32K5 上启用了 MPU，M7 仍需要显式背景区域：投机访问是架构行为，SDEN 1013783-B 的 workaround 也要求保护未映射空间。
 
 ### 9.1 问题机制
 
@@ -1347,13 +1373,13 @@ Cortex-M7 会对 **Normal 内存属性**的区域发起 speculative 访问——
 - speculative instruction fetch：可发生在任何 Normal、可执行地址，与该指令是否最终执行无关；
 - speculative data read：任何 Normal RW/RO 地址，偶发于无任何指令触发数据读的场合；
 - speculative cache linefill：任何 cacheable 地址；
-- **TCM 区域永远按 Normal 处理**，因此永远受 speculation 影响（未初始化 TCM 会产生偶发 ECC 错误——§6.5 的"读前 64-bit 写初始化"由此而来）。
+- **TCM 区域永远按 Normal 处理**，因此永远受 speculation 影响（未初始化 TCM 会产生偶发 ECC 错误——[§6.5](#65-tcmitcm-dtcm-atcm-btcm-ctcm-ecc-与-backdoor-是两个坑) 的"读前 64-bit 写初始化"由此而来）。
 
 作为对照，TRM 同时明确了 speculation **不会**发生的场合：XN 区域不取指、MPU 标记 non-accessible 的地址不发起 data read、Non-cacheable 地址不 linefill、Device/Strongly-ordered 不发生 data read 与 linefill、AHBP 端口不发起 speculative 读、**speculative 写从不发生**。
 
 若目标地址没有物理存储响应（未实现窗口、未连接器件），总线事务可能长时间挂起甚至**把系统锁死**——且这类访问**不产生 fault**：主循环停摆但中断仍在跑，是最难排查的一类失效。
 
-> **errata 编号沿革（2026-11-01 以 SDEN v11.0 核实）**：早期 SDEN 版本与多家厂商手册以 **837019** 引用该问题（典型场景即 External RAM 段 speculative 访问无响应器件）。在 ima 收录的现行 *SDEN-1068427 v11.0（2024-05-28）* 中 **837019 已不再出现**；与其对应的现行条目是 **1013783-B**（"PLD might perform linefill to address that would generate a MemManage Fault"，Category B）：触发条件为 **D-Cache 开启 + MPU 开启 + `PRIVDEFENA=0`**——正是本方案的配置；其官方 workaround 为"region 0 覆盖全部未映射空间，XN=1、AP=000、TEX/C/B=000（Strongly-ordered）"——与本节设计逐字段一致。RTD Platform UM 亦将 "[Core] Speculative Accesses to Unmapped Memory" 列为 S32K5 errata（§3.6.5.1），与本节结论互证（§12）。
+> **errata 编号沿革（2026-11-01 以 SDEN v11.0 核实）**：早期 SDEN 版本与多家厂商手册以 **837019** 引用该问题（典型场景即 External RAM 段 speculative 访问无响应器件）。在 ima 收录的现行 *SDEN-1068427 v11.0（2024-05-28）* 中 **837019 已不再出现**；与其对应的现行条目是 **1013783-B**（"PLD might perform linefill to address that would generate a MemManage Fault"，Category B）：触发条件为 **D-Cache 开启 + MPU 开启 + `PRIVDEFENA=0`**——正是本方案的配置；其官方 workaround 为"region 0 覆盖全部未映射空间，XN=1、AP=000、TEX/C/B=000（Strongly-ordered）"——与本节设计逐字段一致。RTD Platform UM 亦将 "[Core] Speculative Accesses to Unmapped Memory" 列为 S32K5 errata（§3.6.5.1），与本节结论互证（[§12](#12-rtd-platform-mpu-驱动与-sboot-校验)）。
 
 ### 9.2 S32K5 上的两个雷区
 
@@ -1361,30 +1387,30 @@ Cortex-M7 会对 **Normal 内存属性**的区域发起 speculative 访问——
 
 | 窗口 | 落入的默认段 | 危险 |
 | --- | --- | --- |
-| `0x0A00_0000`–`0x0BFF_FFFF`（MRAM 窗口空置段——实现 32 MB、窗口 64 MB，见 §5.1） | Code 区（Normal WT，**可执行**） | speculative 取指打向未实现的 MRAM 地址 |
-| `0x8100_0000`–`0x9FFF_FFFF`（未使用的 XSPI 窗口，§6.6） | External RAM 区（Normal，**默认可执行**——speculative 访问问题的原始场景） | 器件未连接，speculative 访问无响应 |
+| `0x0A00_0000`–`0x0BFF_FFFF`（MRAM 窗口空置段——实现 32 MB、窗口 64 MB，见 [§5.1](#51-关键存储资源)） | Code 区（Normal WT，**可执行**） | speculative 取指打向未实现的 MRAM 地址 |
+| `0x8100_0000`–`0x9FFF_FFFF`（未使用的 XSPI 窗口，[§6.6](#66-外部存储扩展xspi-qspi-本项目不使用)） | External RAM 区（Normal，**默认可执行**——speculative 访问问题的原始场景） | 器件未连接，speculative 访问无响应 |
 
-**结论：背景保护机制在 S32K5 上仍然需要，且不能依赖 `PRIVDEFENA` 的默认映射**——默认映射恰恰是 Normal 属性最集中的地方，它只会把 speculative 访问放行到总线；而且 1013783-B 恰恰只在 `PRIVDEFENA=0` 时才会触发（见 §9.1 编号沿革），即本方案的配置必须叠加显式背景区域才安全。
+**结论：背景保护机制在 S32K5 上仍然需要，且不能依赖 `PRIVDEFENA` 的默认映射**——默认映射恰恰是 Normal 属性最集中的地方，它只会把 speculative 访问放行到总线；而且 1013783-B 恰恰只在 `PRIVDEFENA=0` 时才会触发（见 [§9.1](#91-问题机制) 编号沿革），即本方案的配置必须叠加显式背景区域才安全。
 
 ### 9.3 设计决策（本次修订确立）
 
 1. **`PRIVDEFENA = 0`**：不用默认映射当背景；
-2. **显式背景区域**：区域 0 = 4 GB、`AP=000`（无访问）、Strongly-ordered、`XN=1`（§5.3）——
+2. **显式背景区域**：区域 0 = 4 GB、`AP=000`（无访问）、Strongly-ordered、`XN=1`（[§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案)）——
    - `XN=1` 压制 speculative **取指**（取指从不进入 XN 区域）；
    - Strongly-ordered / Device 类型无 speculative **数据读**与 linefill；
    - `AP=000` 让任何真实误访问立即产生 MemManage——fail-fast；
    - 该配置即 SDEN 1013783-B 官方 workaround 的逐字段复现；
 3. 所有有效区域编号 > 0，利用 PMSAv7 **重叠时编号大者优先**叠加在背景之上；
 4. **不推荐** ST 风格的省区域变体（4 GB 区 + `SRD=0x87` 只屏蔽 External RAM/Peripheral 段、Code/SRAM 段留给默认映射）：它保留了默认映射的 Normal 兜底，未映射段不再 fail-fast，不符合 ASIL D 的期望行为；
-5. R52 无此问题（PMSAv8 无特权默认映射兜底），以 **`SCTLR.BR = 0` 的 fail-fast** 达到同等效果（§5.4）。
+5. R52 无此问题（PMSAv8 无特权默认映射兜底），以 **`SCTLR.BR = 0` 的 fail-fast** 达到同等效果（[§5.4](#54-推荐的-r52-区域布局20-region-预算最小化方案)）。
 
-> speculative 访问是核微架构/架构行为，与 SoC 集成无关，**无法被 S32K5 的总线/互连侧"修复"**；1013783-B 在 SDEN v11.0 中为 open（Category B）。量产前仍以 NXP S32K5 errata sheet 复核 S32K5 所用 M7 revision（r1p2-00rel0）的具体适用状态（§18）。
+> speculative 访问是核微架构/架构行为，与 SoC 集成无关，**无法被 S32K5 的总线/互连侧"修复"**；1013783-B 在 SDEN v11.0 中为 open（Category B）。量产前仍以 NXP S32K5 errata sheet 复核 S32K5 所用 M7 revision（r1p2-00rel0）的具体适用状态（[§18](#18-待确认事项)）。
 
 ---
 
-## 10. AUTOSAR OS 分区与 ASIL 隔离（Freedom from Interference）
+## 10. AUTOSAR OS 分区与 ASIL 隔离 {#10-autosar-os-分区与-asil-隔离freedom-from-interference}
 
-> 本章机制综合 ima 知识库《AUTOSAR OS 模块详解(九) 内存保护 Memory Protection》（Vector MICROSAR 实现剖析）与 AUTOSAR OS 规范通则，映射到 S32K5 双核 MPU 方案。
+> 本章讨论 AUTOSAR OS 分区与 ASIL 隔离（Freedom from Interference，FFI），综合 ima 知识库《AUTOSAR OS 模块详解(九) 内存保护 Memory Protection》（Vector MICROSAR 实现剖析）与 AUTOSAR OS 规范通则，并映射到 S32K5 双核 MPU 方案。
 
 ### 10.1 需求映射
 
@@ -1395,44 +1421,46 @@ ISO 26262 对 FFI 的要求：**一个分区的故障不得传播到另一分区
 3. **故障检测与处理**——违规必须被硬件捕获并交给 OS 标准钩子；
 4. **特权分离**——应用运行于 user 模式，仅 OS 内核与可信服务运行于特权模式。
 
-QM 与 ASIL 代码共核运行时，MPU 是实现 FFI 的核心技术手段；跨核 FFI 则由 XRDC 补全（§6.8）。
+QM 与 ASIL 代码共核运行时，MPU 是实现 FFI 的核心技术手段；跨核 FFI 则由 XRDC 补全（[§6.8](#68-xrdcmpu-的互补层必须一起设计)）。
 
 ### 10.2 分区模型与保护集
 
 - **OsApplication ↔ EcuC Partition ↔ ASIL 等级**一一对应；`OsAppMemoryProtectionIdentifier` 把 Application 绑定到一个**硬件保护集**（protection set）。**0 号保护集固定给系统 Application**——中断与异常入口默认切到 set 0，因此系统区必须始终可达；
-- **静态 region，运行期不重编**：OS 初始化时一次性配置全部区域，运行期通过**切换保护集**改变权限视图——保护集与静态区域是多对多关系。这正是 §5.3/§5.4 预留动态 region 预算的机制基础；
+- **静态 region，运行期不重编**：OS 初始化时一次性配置全部区域，运行期通过**切换保护集**改变权限视图——保护集与静态区域是多对多关系。这正是 [§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案)/[§5.4](#54-推荐的-r52-区域布局20-region-预算最小化方案) 预留动态 region 预算的机制基础；
 - **栈保护**：SC3+ 下每核第一个内存保护区域默认给栈，任务切换时同步切换栈保护区间的边界——每个任务只能写自己的栈。
 
-### 10.3 内存布局要求（决定 region 数量下限）
+### 10.3 内存布局与区域数 {#103-内存布局要求决定-region-数量下限}
+
+以下内存布局约束决定了每个核所需的最小 MPU 区域数：
 
 1. 所有代码/数据按 **AUTOSAR MemMap** 方式以分区为颗粒组装，链接脚本保证分区边界与 MPU 粒度对齐：
    - M7：基址按 `SIZE` 的 2 的幂对齐；**段尾必须预留 padding**——EndAddress 会被硬件取整到粒度边界，不足则保护范围悄悄扩大；
    - R52：BASE/LIMIT 按 64 B 对齐（粒度细，padding 压力小）。
 2. 每个非可信分区的典型占用：**代码 RO+`XN=0` 一区 + 数据 RW+`XN=1` 一区**（Trusted 函数单独成区时再 +1）。n 个非可信分区 ⇒ 至少 2n 个动态 region；
-3. 本方案预算（按核分别规划，§3.9）：**M7 预留 3 个**（§5.3 区域 13–15，支持 1 个非可信分区完整配置 + 1 个栈守护区，或 2 个合并了代码/数据的分区）、**R52 预留 8 个**（§5.4 区域 12–19，支持 4 个非可信分区）。分区数超出预算时，正确做法是**合并同 ASIL 等级的分区**，而不是压缩代码/数据区的成对配置。
+3. 本方案预算（按核分别规划，[§3.9](#39-对-s32k5-设计的推论)）：**M7 预留 3 个**（[§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案) 区域 13–15，支持 1 个非可信分区完整配置 + 1 个栈守护区，或 2 个合并了代码/数据的分区）、**R52 预留 8 个**（[§5.4](#54-推荐的-r52-区域布局20-region-预算最小化方案) 区域 12–19，支持 4 个非可信分区）。分区数超出预算时，正确做法是**合并同 ASIL 等级的分区**，而不是压缩代码/数据区的成对配置。
 
 ### 10.4 Trusted / Non-Trusted 与外设访问
 
 - `OsTrusted` / `OsApplicationIsPrivileged`：Non-Trusted 应用以 user 模式访问外设寄存器，多数控制性写入会被拒绝（只读/状态类可用）。需要特权操作时经 **Trusted Function（`CallTrustedFunction`）**陷入提权，**不得**通过放开外设区域写权限来"解决"；
-- 外设访问的分区级粒度：本方案把外设合并为大区域（M7 两个区 / R52 单区，§5.3/§5.4），OS 若需按分区细分外设权限，走 **XRDC PAC**（domain 级，静态）而不是拆 MPU 区域——与 §6.8 的两层模型一致。
+- 外设访问的分区级粒度：本方案把外设合并为大区域（M7 两个区 / R52 单区，[§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案)/[§5.4](#54-推荐的-r52-区域布局20-region-预算最小化方案)），OS 若需按分区细分外设权限，走 **XRDC PAC**（domain 级，静态）而不是拆 MPU 区域——与 [§6.8](#68-xrdcmpu-的互补层必须一起设计) 的两层模型一致。
 
 ### 10.5 违规处理路径
 
 | 层 | 机制 | 处理 |
 | --- | --- | --- |
-| 硬件 | M7 MemManage / R52 Permission-Translation fault | 保存现场 → OS 错误入口（§13.1） |
+| 硬件 | M7 MemManage / R52 Permission-Translation fault | 保存现场 → OS 错误入口（[§13.1](#131-故障响应矩阵)） |
 | OS | `ProtectionHook` 返回值 | `PRO_RESTART_TASK` / `PRO_RESTART_OSAP`（分区重启）/ `PRO_RESTART_OS` / `PRO_SHUTDOWN`——按 HARA 的降级策略选择 |
-| 系统总线 | XRDC 违规 → Bus Fault | **独立异常入口**，用 `Xrdc_Ip` 专用 API 读错误状态（§6.8） |
+| 系统总线 | XRDC 违规 → Bus Fault | **独立异常入口**，用 `Xrdc_Ip` 专用 API 读错误状态（[§6.8](#68-xrdcmpu-的互补层必须一起设计)） |
 
 ### 10.6 与本方案的耦合点
 
 | OS 机制 | 本方案支撑 |
 | --- | --- |
-| 保护集切换 | §5.3 区域 13–15 / §5.4 区域 12–19 |
+| 保护集切换 | [§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案) 区域 13–15 / [§5.4](#54-推荐的-r52-区域布局20-region-预算最小化方案) 区域 12–19 |
 | 栈守护 | 每分区栈边界区域，配合 OS 栈溢出检测 |
-| 代码完整性 | MPU 只能 RO（对特权代码无效）——关键分区代码完整性靠 XRDC RO 锁 + 周期性读回校验（§13.2/§13.3） |
+| 代码完整性 | MPU 只能 RO（对特权代码无效）——关键分区代码完整性靠 XRDC RO 锁 + 周期性读回校验（[§13.2](#132-双核协同的安全策略)/[§13.3](#133-诊断覆盖建议)） |
 | 时序保护（SC2/SC4） | 与空间保护正交，由 OS 监控计数器实现，不占 MPU region |
-| MRAM FOTA | §6.2 的 A/B 分区：FOTA 代理所在分区持有 Bank B 写权限，运行分区仅 Bank A RO |
+| MRAM FOTA | [§6.2](#62-code-mramemram-s32k5-最大的架构变化) 的 A/B 分区：FOTA 代理所在分区持有 Bank B 写权限，运行分区仅 Bank A RO |
 
 ---
 
@@ -1474,7 +1502,7 @@ R52 复位（由 M7 通过 BOOT 配置寄存器启动）
 1. **ATCM 优先。** R52 TRM §6.1.1：*"Do not enable the MPU unless at least one MPU region is programmed and active. If the MPU is enabled, before using the TCM you must program MPU regions to cover the TCM regions."* 若在没有覆盖 TCM 的 region 时就置 `SCTLR.M`，TCM 访问会立即 fault。
 2. **`WXN` 是决策，不是默认。** `WXN`/`UWXN` 复位为 0。由于 ATCM 必须保持可执行，全局 `WXN=1` 这条路走不通 —— 改为逐 region 置 `XN`，并加上电自检读回每个 `PRBAR.XN`。
 
-> **EL1 无 `PRENR`**（§2.2）：区域使能只由 `PRLAR.EN` 决定，无需额外的使能掩码步骤。
+> **EL1 无 `PRENR`**（[§2.2](#22-寄存器总览与访问方式)）：区域使能只由 `PRLAR.EN` 决定，无需额外的使能掩码步骤。
 
 R52 无独立复位（SEGGER 文档明确指出调试器无法单独复位 R52 核），因此**R52 的 MPU 配置完全由 M7 侧的启动代码负责触发**，两者之间需要 MU 中断或共享内存标志握手。
 
@@ -1493,36 +1521,36 @@ R52 无独立复位（SEGGER 文档明确指出调试器无法单独复位 R52 �
 
 > 本章内容来自 ima 知识库 `RTD_PLATFORM_UM.pdf`（S32K5 RTD Platform Driver User Manual）与 `S32K5_SAF_SBOOT_UM.pdf`（S32K5 sBoot Software Product User Manual，v4.0/EAR-0.8.0）。两份 PDF 正文抓取受限，以下按其目录与检查表组织；落地编码前需打开原文核对参数默认值。
 
-### 12.1 RTD Platform 驱动的 MPU 配置模型
+### 12.1 RTD MPU 配置 {#121-rtd-platform-驱动的-mpu-配置模型}
 
 S32K5 RTD 的 **Platform 驱动**统一承载 M7 与 R52 的 MPU 配置，通过 EB tresos / S32DS 配置容器生成 `Mpu_M7_Ip_ConfigType` / `Mpu_R52_Ip_ConfigType` 结构，启动代码调用其初始化接口完成 MPU 编程。配置开关 `PlatformMpuM7Configurable` / `PlatformMpuR52Configurable` 控制两个核的 MPU 配置是否纳入生成代码。
 
-**MPU_M7 配置容器**（对应本文 §1 的 PMSAv7 寄存器组）：
+**MPU_M7 配置容器**（对应本文 [§1](#1-cortex-m7-mpu-详解armv7-m-pmsav7) 的 PMSAv7 寄存器组）：
 
 | 容器 / 参数 | 对应本文 | 说明 |
 | --- | --- | --- |
-| `MPU_M7_ModuleConfig.DefaultMapEnable` | §1.3 `PRIVDEFENA` | 默认映射背景使能——**本方案必须配置为 disabled**（§9.3），否则 speculative 雷区放行 |
-| `MPU_M7_ModuleConfig.RunInHFNMIEnable` | §1.3 `HFNMIENA` | 故障期 MPU 行为 |
-| `MPU_M7_ModuleConfig.MemManageInterruptEnable` | §14.2 `MEMFAULTENA` | MemManage 异常使能 |
-| `MPU_M7_ModuleConfig.PhysicalCoreID` | §6.3 | 多 M7 核时区分 ITCM/DTCM 归属 |
-| `Mpu_M7_EcucPartitionRef` | §10.2 | 绑定到 AUTOSAR ECUC Partition |
-| `RegionConfig`：RegionNumber / StartAddress / EndAddress / RegionSize / MemoryType / AccessRights / OuterCachePolicy / InnerCachePolicy / SubregionMask / Shareable | §1.6/§1.7/§1.9/§1.10 | 逐区域配置；注意 **RegionSize 受 2 的幂约束**（§1.7），本方案 §5.3 的拆分（SRAM 2+1 MB、外设 32+8 MB）必须原样映射到该容器 |
+| `MPU_M7_ModuleConfig.DefaultMapEnable` | [§1.3](#13-mpu_ctrl-mpu-控制寄存器0xe000_ed94rw) `PRIVDEFENA` | 默认映射背景使能——**本方案必须配置为 disabled**（[§9.3](#93-设计决策本次修订确立)），否则 speculative 雷区放行 |
+| `MPU_M7_ModuleConfig.RunInHFNMIEnable` | [§1.3](#13-mpu_ctrl-mpu-控制寄存器0xe000_ed94rw) `HFNMIENA` | 故障期 MPU 行为 |
+| `MPU_M7_ModuleConfig.MemManageInterruptEnable` | [§14.2](#142-集成步骤) `MEMFAULTENA` | MemManage 异常使能 |
+| `MPU_M7_ModuleConfig.PhysicalCoreID` | [§6.3](#63-m7-sram3-mb三个-bank) | 多 M7 核时区分 ITCM/DTCM 归属 |
+| `Mpu_M7_EcucPartitionRef` | [§10.2](#102-分区模型与保护集) | 绑定到 AUTOSAR ECUC Partition |
+| `RegionConfig`：RegionNumber / StartAddress / EndAddress / RegionSize / MemoryType / AccessRights / OuterCachePolicy / InnerCachePolicy / SubregionMask / Shareable | [§1.6](#16-mpu_rasr-区域属性与大小寄存器0xe000_eda0rw)/[§1.7](#17-size-编码与基址对齐约束)/[§1.9](#19-texcbs-内存属性编码)/[§1.10](#110-区域重叠与-srd-子区域禁用) | 逐区域配置；注意 **RegionSize 受 2 的幂约束**（[§1.7](#17-size-编码与基址对齐约束)），本方案 [§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案) 的拆分（SRAM 2+1 MB、外设 32+8 MB）必须原样映射到该容器 |
 
-**MPU_R52 配置容器**（对应本文 §2 的 PMSAv8-32 寄存器组）：
+**MPU_R52 配置容器**（对应本文 [§2](#2-cortex-r52-mpu-详解armv8-r-pmsav8-32) 的 PMSAv8-32 寄存器组）：
 
 | 容器 / 参数 | 对应本文 | 说明 |
 | --- | --- | --- |
-| `MPU_R52_ModuleConfig.MPU_R52_ExLevel` | §2.1 | 配置目标异常级别（EL1/EL2）——本方案配 EL1 |
-| `MPU_R52_HwConfig` / `MPU_R52_DefaultMapEnable` | §2.10 `SCTLR.BR` | R52 的默认映射/背景区域开关——**本方案保持 disabled**（BR=0，§5.4） |
-| `MPU_R52_VirtualEnable` | §2.10 `HCR.VM/DC` | 虚拟化使能——本方案 disabled |
-| `MPU_R52_MemAttrArr`（AttrNum / MemType / DeviceAttr / NormalOuterAttr / NormalInnerAttr） | §2.8 MAIR 槽 | 内存属性间接表，生成 MAIR0/MAIR1 编码 |
-| `MPU_R52_RegionConfig`（RegionNumber / StartAddress / EndAddress / AccessRights / Shareability / MPU_R52_MemAttr） | §2.5/§2.6/§2.9 | 逐区域配置；EndAddress 直接对应 `PRLAR.LIMIT`（含端点，§2.6）——与 M7 容器的 RegionSize+幂约束形成鲜明对比 |
+| `MPU_R52_ModuleConfig.MPU_R52_ExLevel` | [§2.1](#21-双-mpu-模型el1-el2) | 配置目标异常级别（EL1/EL2）——本方案配 EL1 |
+| `MPU_R52_HwConfig` / `MPU_R52_DefaultMapEnable` | [§2.10](#210-sctlr-hcr-关键控制位) `SCTLR.BR` | R52 的默认映射/背景区域开关——**本方案保持 disabled**（BR=0，[§5.4](#54-推荐的-r52-区域布局20-region-预算最小化方案)） |
+| `MPU_R52_VirtualEnable` | [§2.10](#210-sctlr-hcr-关键控制位) `HCR.VM/DC` | 虚拟化使能——本方案 disabled |
+| `MPU_R52_MemAttrArr`（AttrNum / MemType / DeviceAttr / NormalOuterAttr / NormalInnerAttr） | [§2.8](#28-mair0-mair1-内存属性间接寄存器c10-c2-0-c10-c2-1rw) MAIR 槽 | 内存属性间接表，生成 MAIR0/MAIR1 编码 |
+| `MPU_R52_RegionConfig`（RegionNumber / StartAddress / EndAddress / AccessRights / Shareability / MPU_R52_MemAttr） | [§2.5](#25-prbar-hprbar-区域基址寄存器c6-c3-0rw)/[§2.6](#26-prlar-hprlar-区域上限寄存器c6-c3-1rw)/[§2.9](#29-ap-与-sh-编码) | 逐区域配置；EndAddress 直接对应 `PRLAR.LIMIT`（含端点，[§2.6](#26-prlar-hprlar-区域上限寄存器c6-c3-1rw)）——与 M7 容器的 RegionSize+幂约束形成鲜明对比 |
 
 **使用要点**：
 
-1. RTD Platform UM §3.6.4.2 给出 MPU_M7 的 API 调用顺序（初始化 → 逐 region 配置 → 使能），与本文 §11.1 序列一致；§3.6.1.1 明确 MPU/FPU/Cache 在启动代码中的使能次序；
-2. UM §3.6.5.1 将 **[Core] Speculative Accesses to Unmapped Memory** 列为 S32K5 errata——RTD 官方同样要求对未映射空间做防护，与本文 §9 的背景区域决策互证；
-3. RTD 配置容器的参数默认值（尤其 `DefaultMapEnable`）**不能直接使用**，须按本文 §9.3/§5.4 显式覆盖；
+1. RTD Platform UM §3.6.4.2 给出 MPU_M7 的 API 调用顺序（初始化 → 逐 region 配置 → 使能），与本文 [§11.1](#111-m7-启动序列) 序列一致；§3.6.1.1 明确 MPU/FPU/Cache 在启动代码中的使能次序；
+2. UM §3.6.5.1 将 **[Core] Speculative Accesses to Unmapped Memory** 列为 S32K5 errata——RTD 官方同样要求对未映射空间做防护，与本文 [§9](#9-m7-背景区域与-speculative-访问-仍然需要架构行为-sden-1013783-b) 的背景区域决策互证；
+3. RTD 配置容器的参数默认值（尤其 `DefaultMapEnable`）**不能直接使用**，须按本文 [§9.3](#93-设计决策本次修订确立)/[§5.4](#54-推荐的-r52-区域布局20-region-预算最小化方案) 显式覆盖；
 4. UM §4.4 列出 `IPV_MPU_M7_IP`（集成验证 IP），可在集成测试中用于 MPU 路径的验证。
 
 ### 12.2 sBoot 的 MPU 检查（REQ_SBOOT_LOW_064）
@@ -1543,9 +1571,9 @@ sBoot（安全启动软件产品）在上电早期对 MPU 配置做**安全机�
 **与本项目设计的衔接**：
 
 1. **检查配置来源**：sBoot 的 MPU Check Configuration（UM §5.3.3.3）引用生成的 `Mpu_M7_Config` / `Mpu_R52_Config` 结构——**期望值与运行期配置必须来自同一份 RTD 配置**，不能在 sBoot 与 OS 侧各写一份，否则 RegionConfigCheck 会误报或漏报；
-2. **DefaultMemoryMap 检查与 §9.3 的对齐**：sBoot 检查"M7 默认映射背景区域使能"状态。本方案 `PRIVDEFENA=0` + 显式背景区域，属于对安全假设的**替代实现**——需在安全分析（safety manual 假设裁剪）中说明该偏差，或将 sBoot 期望值配置为与本方案一致；
-3. **执行约束**：sBoot UM 明确要求*执行检查的核**不得被 MPU/MMU/XRDC/寄存器保护限制其对 Peripheral 寄存器的特权访问***。这与本文 §5.2 "PPB 必须特权可写"及 §6.7 外设区的配置一致——sBoot 执行阶段若先于 OS 配置 MPU，天然满足；若 MPU 在 sBoot 之前已生效，须保证外设区对执行核特权可达；
-4. **版本演进**：sBoot v3.0 增加 M7 MPU 检查，v4.0（EAR-0.8.0）新增 **R52 MPU 检查与 XRDC 检查**——印证 §6.8 的结论：XRDC 已被 NXP 纳入与 MPU 同级的安全机制检查范围。
+2. **DefaultMemoryMap 检查与 [§9.3](#93-设计决策本次修订确立) 的对齐**：sBoot 检查"M7 默认映射背景区域使能"状态。本方案 `PRIVDEFENA=0` + 显式背景区域，属于对安全假设的**替代实现**——需在安全分析（safety manual 假设裁剪）中说明该偏差，或将 sBoot 期望值配置为与本方案一致；
+3. **执行约束**：sBoot UM 明确要求*执行检查的核**不得被 MPU/MMU/XRDC/寄存器保护限制其对 Peripheral 寄存器的特权访问***。这与本文 [§5.2](#52-静态区域权限策略本次修订确立) "PPB 必须特权可写"及 [§6.7](#67-外设窗口) 外设区的配置一致——sBoot 执行阶段若先于 OS 配置 MPU，天然满足；若 MPU 在 sBoot 之前已生效，须保证外设区对执行核特权可达；
+4. **版本演进**：sBoot v3.0 增加 M7 MPU 检查，v4.0（EAR-0.8.0）新增 **R52 MPU 检查与 XRDC 检查**——印证 [§6.8](#68-xrdcmpu-的互补层必须一起设计) 的结论：XRDC 已被 NXP 纳入与 MPU 同级的安全机制检查范围。
 
 ---
 
@@ -1568,9 +1596,9 @@ sBoot（安全启动软件产品）在上电早期对 MPU 配置做**安全机�
 S32K5 是 ASIL D 平台，MPU 配置本身属于**安全相关配置项**，需要：
 
 1. **配置完整性检查**：上电后自检遍历所有 region，验证 BASE/LIMIT/属性与编译期常量表一致，不一致则拒绝启动。
-2. **双核交叉校验**：M7 侧持有 R52 的期望配置表，通过 MU 让 R52 回读实际寄存器并比对。FOTA 的 MRAM A/B 切换后 MPU 区域表重配（§6.2）同样纳入该交叉校验。
+2. **双核交叉校验**：M7 侧持有 R52 的期望配置表，通过 MU 让 R52 回读实际寄存器并比对。FOTA 的 MRAM A/B 切换后 MPU 区域表重配（[§6.2](#62-code-mramemram-s32k5-最大的架构变化)）同样纳入该交叉校验。
 3. **单点故障防护**：MPU 寄存器本身不受保护，配置错误不会产生 fault。需在 ECC 覆盖的只读常量中保存期望值，运行期周期性比对。
-4. **现场 dump 可达性**：R52 没有 `HFNMIENA` 等价物（§3.7），故障处理器自身受 MPU 约束——fault log 缓冲区必须落在 R52 静态区域覆盖范围内（§5.4 的 SysSRAM/CPE_SRAM 区）。
+4. **现场 dump 可达性**：R52 没有 `HFNMIENA` 等价物（[§3.7](#37-故障模型差异)），故障处理器自身受 MPU 约束——fault log 缓冲区必须落在 R52 静态区域覆盖范围内（[§5.4](#54-推荐的-r52-区域布局20-region-预算最小化方案) 的 SysSRAM/CPE_SRAM 区）。
 5. **ASIL D 分解**：MPU 作为硬件机制提供的是 **QM 级能力**，要达到 ASIL D 需要配合诊断覆盖率（结构性覆盖 + 运行时比对）。
 
 ### 13.3 诊断覆盖建议
@@ -1579,9 +1607,9 @@ S32K5 是 ASIL D 平台，MPU 配置本身属于**安全相关配置项**，需�
 | --- | --- | --- |
 | MPU 可用性 | M7 读 `MPU_TYPE` / R52 读 `MPUIR`，确认 DREGION != 0 | 开机自检 |
 | 区域配置正确性 | 遍历比对期望表 | 开机 + 运行时周期 |
-| R52 region 16–19 | **必须经 `PRSELR` 间接访问**回读，直接访问编码不可达（§2.2） | 开机自检 |
-| R52 区域非重叠 | 遍历两两比对 BASE/LIMIT 区间（重叠即 Translation fault 隐患，§3.7） | 开机自检 |
-| R52 XN 位 | 逐 region 读回 `PRBAR.XN` 与期望表比对（WXN 无全局兜底，§6.5） | 开机 + 运行时周期 |
+| R52 region 16–19 | **必须经 `PRSELR` 间接访问**回读，直接访问编码不可达（[§2.2](#22-寄存器总览与访问方式)） | 开机自检 |
+| R52 区域非重叠 | 遍历两两比对 BASE/LIMIT 区间（重叠即 Translation fault 隐患，[§3.7](#37-故障模型差异)） | 开机自检 |
+| R52 XN 位 | 逐 region 读回 `PRBAR.XN` 与期望表比对（WXN 无全局兜底，[§6.5](#65-tcmitcm-dtcm-atcm-btcm-ctcm-ecc-与-backdoor-是两个坑)） | 开机 + 运行时周期 |
 | R52 寄存器可读 | 通过 MU 让 R52 回读 PRBAR/PRLAR | 开机 |
 | Cache 属性与 MPU 一致 | 静态配置一致性检查 | 编译期 + 评审 |
 
@@ -1619,11 +1647,11 @@ extern const MpuHalOps MpuHal_R52;  /* PMSAv8-32 实现 */
 
 | 平台无关枚举 | M7 (TEX/C/B/S) | R52 (MAIR idx, val) |
 | --- | --- | --- |
-| `MPU_ATTR_DEVICE` | `010/0/0` | idx 1, `0x04` |
+| `MPU_ATTR_DEVICE` | `010/0/0` | idx 3, `0x04`（Device-nGnRE） |
 | `MPU_ATTR_NORMAL_WB` | `001/1/1` | idx 0, `0xFF` |
 | `MPU_ATTR_NORMAL_WT` | `000/1/0` | idx 2, `0xBB` |
 | `MPU_ATTR_NORMAL_NC` | `001/0/0` | idx 4, `0x44` |
-| `MPU_ATTR_STRONGLY_ORDERED` | `000/0/0` | idx 1, `0x00` |
+| `MPU_ATTR_STRONGLY_ORDERED` | `000/0/0` | idx 1, `0x00`（Device-nGnRnE） |
 
 **权限枚举统一映射**：
 
@@ -1638,13 +1666,13 @@ extern const MpuHalOps MpuHal_R52;  /* PMSAv8-32 实现 */
 ### 14.2 集成步骤
 
 1. 打开 `SCB->SHCSR` 的 `MEMFAULTENA` 位（MemManage 使能），并设置优先级高于其他可屏蔽异常。
-2. 实现 MemManage（R52 为 Abort 异常）处理程序，读取并保存 CFSR/MMFAR/BFAR 与堆栈 PC/LR（§1.12）。
-3. 分配 no-cacheable 的 fault log 区域，确保诊断数据不被 cache 影响；R52 侧缓冲区必须在其静态区域覆盖内（§13.2）。
+2. 实现 MemManage（R52 为 Abort 异常）处理程序，读取并保存 CFSR/MMFAR/BFAR 与堆栈 PC/LR（[§1.12](#112-memmanage-故障与现场获取)）。
+3. 分配 no-cacheable 的 fault log 区域，确保诊断数据不被 cache 影响；R52 侧缓冲区必须在其静态区域覆盖内（[§13.2](#132-双核协同的安全策略)）。
 4. 在 `MPU_TYPE.DREGION`（M7）/ `MPUIR.DREGION`（R52）确认区域数后再访问 region 寄存器。
-5. 按 §5.3 / §5.4 的布局表编写配置代码，**地址与 SIZE 必须与 linker script 严格一致**。
-6. 使能后执行自检比对，失败则拒绝启动；R52 侧含非重叠校验与 region 16–19 的间接回读（§13.3）。
+5. 按 [§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案) / [§5.4](#54-推荐的-r52-区域布局20-region-预算最小化方案) 的布局表编写配置代码，**地址与 SIZE 必须与 linker script 严格一致**。
+6. 使能后执行自检比对，失败则拒绝启动；R52 侧含非重叠校验与 region 16–19 的间接回读（[§13.3](#133-诊断覆盖建议)）。
 7. 在 Debug 配置中打开 MemManage / Abort 断点。
-8. 若使用 RTD Platform 驱动（§12.1），配置容器的 `DefaultMapEnable` 等参数须按本文覆盖默认值，并保证 sBoot（§12.2）与运行期引用同一份生成配置。
+8. 若使用 RTD Platform 驱动（[§12.1](#121-rtd-platform-驱动的-mpu-配置模型)），配置容器的 `DefaultMapEnable` 等参数须按本文覆盖默认值，并保证 sBoot（[§12.2](#122-sboot-的-mpu-检查req_sboot_low_064)）与运行期引用同一份生成配置。
 
 ---
 
@@ -1664,7 +1692,7 @@ Overlay Management Unit 只重映射**读**地址，且 FCCU 被要求在其正�
 
 > RM Ch.35 §35.3：*"During normal operation, the **FCCU monitors the OMU enable signal to ensure that the OMU is always disabled**."*
 
-**为什么这与 MPU 设计相关**：OMU 的作用范围正好覆盖 §5.3/§5.4 配置的 Code MRAM region。若 OMU 在开发模式下遗留启用，CPU 读到的是重映射后的内容，而写的是原地址 —— 代码看起来在跑，但跑的不是那个地址的代码。**量产必须置 `OER[OE]=0`（bypass）**，并依赖 FCCU 监控作为安全机制。
+**为什么这与 MPU 设计相关**：OMU 的作用范围正好覆盖 [§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案)/[§5.4](#54-推荐的-r52-区域布局20-region-预算最小化方案) 配置的 Code MRAM region。若 OMU 在开发模式下遗留启用，CPU 读到的是重映射后的内容，而写的是原地址 —— 代码看起来在跑，但跑的不是那个地址的代码。**量产必须置 `OER[OE]=0`（bypass）**，并依赖 FCCU 监控作为安全机制。
 
 ---
 
@@ -1674,7 +1702,7 @@ Overlay Management Unit 只重映射**读**地址，且 FCCU 被要求在其正�
 | --- | --- | --- | --- |
 | 1 | R52 区域重叠产生 **translation fault**，而非按优先级裁决 | 🔴 高 | R52 TRM §8.1 |
 | 2 | `SCTLR.WXN` / `UWXN` 复位为 **0** —— 可写区域默认可执行 | 🔴 高 | R52 TRM Table 3-133 |
-| 3 | 全局 `WXN=1` 会破坏 ATCM 可执行性（向量表） | 🔴 高 | 推导，见 §6.5 |
+| 3 | 全局 `WXN=1` 会破坏 ATCM 可执行性（向量表） | 🔴 高 | 推导，见 [§6.5](#65-tcmitcm-dtcm-atcm-btcm-ctcm-ecc-与-backdoor-是两个坑) |
 | 4 | R52 使能 MPU 前未配覆盖 TCM 的 region → TCM 访问全锁 | 🔴 高 | R52 TRM §6.1.1 |
 | 5 | M7/R52 TCM **backdoor 绕过核 MPU**，只有 XRDC MRC 能覆盖 | 🔴 高 | M7 TRM（AHBS）+ RM Ch.02 Table 11/12 |
 | 6 | XRDC `GVLD=1` 早于 descriptor 配置完成 → 被保护内存不可访问 | 🔴 高 | RM Ch.31 §31.5.6.5 |
@@ -1689,7 +1717,7 @@ Overlay Management Unit 只重映射**读**地址，且 FCCU 被要求在其正�
 | 15 | `GCR[HLB]` 仅系统复位可清 —— 断送 OTA 后重配置的可能 | 🟡 低 | RM Ch.11 §11.6.3 |
 | 16 | MSCM `CPXCFG3[CMP]` 复位值未知 —— 必须回读，不能假设 | 🟡 低 | RM Ch.09 §9.5.3.8 |
 
-> 上表中的地址与区域数一旦确认，需要同步更新 §5.3 / §5.4 的布局表、第 6 章的按存储类型配置表，以及 §7.1 / §7.2 的配置代码。
+> 上表中的地址与区域数一旦确认，需要同步更新 [§5.3](#53-推荐的-m7-区域布局16-region-预算最小化方案) / [§5.4](#54-推荐的-r52-区域布局20-region-预算最小化方案) 的布局表、[第 6 章](#6-按存储类型的-mpu-配置详解mram-sram-tcm-xspi-外设)的按存储类型配置表，以及 [§7.1](#71-m7-配置骨架pmsav7) / [§7.2](#72-r52-配置骨架pmsav8-32) 的配置代码。
 
 ---
 
@@ -1703,27 +1731,27 @@ Overlay Management Unit 只重映射**读**地址，且 FCCU 被要求在其正�
 | 4 | 未先 DSB/ISB 就生效 | 新属性延迟生效 | 改属性前后加屏障 |
 | 5 | 重配区域的代码位于该区域内 | 取指失败、CPU 卡死 | 关键重配移入 RAM |
 | 6 | 改属性后未 invalidate cache | 旧数据被复用 | DSB → clean/invalidate → ISB |
-| 7 | LPE_SRAM（Standby 保持区）配成 cacheable | 低功耗后数据丢失 | 配 NC 或关 D-Cache（§8.2） |
+| 7 | LPE_SRAM（Standby 保持区）配成 cacheable | 低功耗后数据丢失 | 配 NC 或关 D-Cache（[§8.2](#82-属性配置规则)） |
 | 8 | 用 AP=`100`（M7 保留值） | 行为不可预测 | 只用合法编码 |
 | 9 | 访问越界 region 序号 | 未定义行为 | 先查 DREGION |
-| 10 | 忘开 `MEMFAULTENA` | fault 直接进 HardFault | 初始化时开（§14.2） |
-| 11 | TCM 只配了核 MPU，没配 XRDC | 其他 master 经 backdoor 写入畅通无阻 | 两层都配（§6.5） |
-| 12 | 以为 XRDC 能让区域不可执行 | 代码照样跑 | XRDC 无 XN，`XN` 要在核 MPU 里设（§6.8） |
-| 13 | XRDC `GVLD` 提前置位 | 被保护内存变得不可访问 | 先配完、自检、再使能（§6.8） |
-| 14 | OMU 量产未禁用 | 读被静默转到重映射地址 | `OER[OE]=0`，靠 FCCU 监控（§15） |
-| 15 | R52 自检只遍历 region 0–15 | region 16–19 被静默跳过 | 用 `PRSELR` 间接访问（§2.4） |
-| 16 | RTD `DefaultMapEnable` 保持默认值 | M7 默认映射放行 speculative 雷区 | 显式 disabled，按 §9.3/§12.1 覆盖 |
-| 17 | sBoot 与 OS 侧 MPU 期望值各写一份 | RegionConfigCheck 误报/漏报 | 统一引用同一份生成配置（§12.2） |
+| 10 | 忘开 `MEMFAULTENA` | fault 直接进 HardFault | 初始化时开（[§14.2](#142-集成步骤)） |
+| 11 | TCM 只配了核 MPU，没配 XRDC | 其他 master 经 backdoor 写入畅通无阻 | 两层都配（[§6.5](#65-tcmitcm-dtcm-atcm-btcm-ctcm-ecc-与-backdoor-是两个坑)） |
+| 12 | 以为 XRDC 能让区域不可执行 | 代码照样跑 | XRDC 无 XN，`XN` 要在核 MPU 里设（[§6.8](#68-xrdcmpu-的互补层必须一起设计)） |
+| 13 | XRDC `GVLD` 提前置位 | 被保护内存变得不可访问 | 先配完、自检、再使能（[§6.8](#68-xrdcmpu-的互补层必须一起设计)） |
+| 14 | OMU 量产未禁用 | 读被静默转到重映射地址 | `OER[OE]=0`，靠 FCCU 监控（[§15](#15-omuasil-分区的地址重映射陷阱)） |
+| 15 | R52 自检只遍历 region 0–15 | region 16–19 被静默跳过 | 用 `PRSELR` 间接访问（[§2.4](#24-prselr-hprselr-区域选择寄存器c6-c2-1rw)） |
+| 16 | RTD `DefaultMapEnable` 保持默认值 | M7 默认映射放行 speculative 雷区 | 显式 disabled，按 [§9.3](#93-设计决策本次修订确立)/[§12.1](#121-rtd-platform-驱动的-mpu-配置模型) 覆盖 |
+| 17 | sBoot 与 OS 侧 MPU 期望值各写一份 | RegionConfigCheck 误报/漏报 | 统一引用同一份生成配置（[§12.2](#122-sboot-的-mpu-检查req_sboot_low_064)） |
 
 ---
 
 ## 18. 待确认事项
 
-- [ ] M7 `MPU_RASR` 的 `SIZE` 字段编码公式与 `AP[2:0]` 语义 —— 需 *Arm v7-M Architecture Reference Manual*，该文档不在参考集内。§1.7/§1.8 用的是 Armv7-M 标准编码，量产前应以 DDI 0314 复核。
+- [ ] M7 `MPU_RASR` 的 `SIZE` 字段编码公式与 `AP[2:0]` 语义 —— 需 *Arm v7-M Architecture Reference Manual*，该文档不在参考集内。[§1.7](#17-size-编码与基址对齐约束)/[§1.8](#18-ap-访问权限编码) 用的是 Armv7-M 标准编码，量产前应以 DDI 0314 复核。
 - [x] **MRAM 总容量与 A/B bank 划分（已按 RM Rev.2 核实）**：Code MRAM = **32 MB（16×2 MB 分区，Lower/Upper 各 16 MB）**，加 1 MB 小分区（Data/Secure Code A/Secure Code B/Secure Data）合计 33 MB；`MCRS[SIZE]=6`、特性表 "33 MB"、"Flexible A/B swap, RWW" 三处交叉证实。**2026-11-01 补充（memory_map.xlsx 部分核实）**：附件 `S32K5xx_memory_map.xlsx` 已收录在 ima S32K5RM 目录，其 Overview Memory Map 页的 Code MRAM 行带**按型号的实现容量列**（S32K511 = 8192 KB，即 8 MB）——证实 Code MRAM 是**单一地址行（0x0800_0000 起）+ 按型号实现容量**的表法；S32K566 实现 32 MB 时 Lower/Upper 各 16 MB 的边界 `0x0900_0000` 是算术必然。**遗留**：xlsx 全文抓取超限（83 KB，Peripherals Memory Map 页占大头），Bank A/B 命名与 RWW active/passive 分区隔离要求需在 ima 客户端打开该附件逐行确认；若项目实际型号为 S32K511（Code MRAM 仅 8 MB），A/B 边界与 region SIZE 需按 4 MB bank 重算
-- [x] **speculative 访问 errata 的适用状态（2026-11-01 已核实，详见 §9.1 编号沿革）**：RM Table 9 给出 M7 revision 为 **r1p2-00rel0**、R52 为 **r1p4-00rel0**。ima `automotive/ARM/M7/` 收录的 *SDEN-1068427 v11.0（2024-05-28）* 中 **837019 已不存在**（旧版 SDEN 编号）；现行条目为 **1013783-B**（Category B，open），其触发条件（DC=1 + MPU 开 + `PRIVDEFENA=0`）与本方案一致，官方 workaround 与 §9.3 背景 region 逐字段相同——**背景区域结论不变**。speculative 访问本身由 *M7 TRM r1p2*（ima 收录）"Speculative accesses" 一节确立为架构行为。**遗留**：SDEN 全文抓取超限，1013783-B 对 r1p2 的逐 revision 标注以 NXP S32K5 errata sheet 最终确认；ima 的 R52 TRM 是 r1p0 版本，与 RM 声明的 r1p4 存在版本差——R52 MPU 行为论述应以 r1p4 文档复核
-- [ ] RTD Platform `MPU_M7/MPU_R52` 配置容器的参数默认值与 API 签名（正文抓取受限，需打开 `RTD_PLATFORM_UM.pdf` 核对 §3.6.4/§4.1）
-- [ ] sBoot `DefaultMemoryMapBackgroundRegionEnabled` 检查的期望语义与 §9.3（`PRIVDEFENA=0`）的偏差裁剪路径（需打开 `S32K5_SAF_SBOOT_UM.pdf` §5.3.3.3 及对应 Safety Manual 假设条目）
+- [x] **speculative 访问 errata 的适用状态（2026-11-01 已核实，详见 [§9.1](#91-问题机制) 编号沿革）**：RM Table 9 给出 M7 revision 为 **r1p2-00rel0**、R52 为 **r1p4-00rel0**。ima `automotive/ARM/M7/` 收录的 *SDEN-1068427 v11.0（2024-05-28）* 中 **837019 已不存在**（旧版 SDEN 编号）；现行条目为 **1013783-B**（Category B，open），其触发条件（DC=1 + MPU 开 + `PRIVDEFENA=0`）与本方案一致，官方 workaround 与 [§9.3](#93-设计决策本次修订确立) 背景 region 逐字段相同——**背景区域结论不变**。speculative 访问本身由 *M7 TRM r1p2*（ima 收录）"Speculative accesses" 一节确立为架构行为。**遗留**：SDEN 全文抓取超限，1013783-B 对 r1p2 的逐 revision 标注以 NXP S32K5 errata sheet 最终确认；ima 的 R52 TRM 是 r1p0 版本，与 RM 声明的 r1p4 存在版本差——R52 MPU 行为论述应以 r1p4 文档复核
+- [ ] RTD Platform `MPU_M7/MPU_R52` 配置容器的参数默认值与 API 签名（正文抓取受限，需打开 `RTD_PLATFORM_UM.pdf` 核对 §3.6.4/[§4.1](#41-三簇异构核与隔离需求)）
+- [ ] sBoot `DefaultMemoryMapBackgroundRegionEnabled` 检查的期望语义与 [§9.3](#93-设计决策本次修订确立)（`PRIVDEFENA=0`）的偏差裁剪路径（需打开 `S32K5_SAF_SBOOT_UM.pdf` §5.3.3.3 及对应 Safety Manual 假设条目）
 - [ ] MRAM 数据保持期（NXP–TSMC 称 20 年 @150 °C，另有资料称 10 年 @85 °C，差异巨大）
 - [ ] MRAM 写入速度的确切口径（8.8 MB/s vs 15 MB/s）
 - [ ] MRAM 写期间的取指/流水线行为（是否需要 FOTA 期间关 cache）

@@ -404,7 +404,7 @@ E2E转换器函数和结构添加后缀<**transformerId**>。（<**transformerId
 
 根据通信类型，**E2EXf_&lt;transformerId&gt;()** 的流程有所不同。
 
-该函数的一般概述在 [6.7.2.1](#6721-e2exf_lttransformeridgt保护函数) 小节中提供。特定部分的详细信息在 [6.7.2.2](#6722-e2exf_input_checks) 至 [6.7.2.11](#67211-e2exf_mapcodetostatus) 小节中提供。通信类型特定的部分按表7.1所述着色。
+该函数的一般概述在 [6.7.2.1](#6721-e2exf_transformerid保护函数) 小节中提供。特定部分的详细信息在 [6.7.2.2](#6722-e2exf_input_checks) 至 [6.7.2.11](#67211-e2exf_mapcodetostatus) 小节中提供。通信类型特定的部分按表7.1所述着色。
 
 ##### 6.7.2.1. E2EXf_&lt;transformerId&gt;（保护函数）
 
@@ -811,13 +811,13 @@ E2E转换器函数和结构添加后缀<**transformerId**>。（<**transformerId
 
 如果 **XfrmDevErrorDetect** 开关已启用，函数 [**E2EXf_GetVersionInfo**](#735-e2exf_getversioninfo) 应检查是否为 **VersionInfo** 参数传递了 **NULL** 指针。在发生错误的情况下，函数 [**E2EXf_GetVersionInfo**](#735-e2exf_getversioninfo) 的其余部分不应被执行…（源文档此处截断）。
 
-如果配置参数 **XfrmDevErrorDetect** 已启用，**API** **E2EXf_&lt;transformerId&gt;**（参见 [7.3.1](#731-e2exf_lttransformeridgt) 小节）的所有参数都应检查是否在允许的范围内。发生错误时，模式开关不应被…（源文档此处截断）。
+如果配置参数 **XfrmDevErrorDetect** 已启用，**API** **E2EXf_&lt;transformerId&gt;**（参见 [7.3.1](#731-e2exf_transformerid) 小节）的所有参数都应检查是否在允许的范围内。发生错误时，模式开关不应被…（源文档此处截断）。
 
-如果配置参数 **XfrmDevErrorDetect** 已启用，**API** **E2EXf_&lt;transformerId&gt;**（参见 [7.3.1](#731-e2exf_lttransformeridgt) 小节）应检查 **E2E** 转换器是否已初始化。发生错误时，应报告错误码 **E2EXF_E_UNINIT**…（源文档此处截断）。
+如果配置参数 **XfrmDevErrorDetect** 已启用，**API** **E2EXf_&lt;transformerId&gt;**（参见 [7.3.1](#731-e2exf_transformerid) 小节）应检查 **E2E** 转换器是否已初始化。发生错误时，应报告错误码 **E2EXF_E_UNINIT**…（源文档此处截断）。
 
-如果配置参数 **XfrmDevErrorDetect** 已启用，**API** **E2EXf_Inv_&lt;transformerId&gt;**（参见 [7.3.2](#732-e2exf_inv_lttransformeridgt) 小节）的所有参数都应检查是否在允许的范围内。发生错误时，模式开关不应被…（源文档此处截断）。
+如果配置参数 **XfrmDevErrorDetect** 已启用，**API** **E2EXf_Inv_&lt;transformerId&gt;**（参见 [7.3.2](#732-e2exf_inv_transformerid) 小节）的所有参数都应检查是否在允许的范围内。发生错误时，模式开关不应被…（源文档此处截断）。
 
-如果配置参数 **XfrmDevErrorDetect** 已启用，**API** **E2EXf_Inv_&lt;transformerId&gt;**（参见 [7.3.2](#732-e2exf_inv_lttransformeridgt) 小节）应检查 **E2E** 转换器是否已初始化。发生错误时，不应执行该例程，错误…（源文档此处截断）。
+如果配置参数 **XfrmDevErrorDetect** 已启用，**API** **E2EXf_Inv_&lt;transformerId&gt;**（参见 [7.3.2](#732-e2exf_inv_transformerid) 小节）应检查 **E2E** 转换器是否已初始化。发生错误时，不应执行该例程，错误…（源文档此处截断）。
 
 #### 6.8.2. 运行时错误
 

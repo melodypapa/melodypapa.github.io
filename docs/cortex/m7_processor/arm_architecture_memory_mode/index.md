@@ -45,7 +45,7 @@ LDC、LDM、LDRD、POP、PUSH、STC、STRD、STM、VLDM、VPOP、VPUSH、VSTM、
 
 ### 1.3. 字节序支持
 
-按[地址空间](#1-地址空间)规则要求地址**A**：
+按[地址空间](#11-地址空间)规则要求地址**A**：
 
 * 地址**A**处的字(**word**)由地址**A**、**A+1**、**A+2**和**A+3**的字节组成。
 * 地址**A**的半字(**halfword**)由地址**A**和**A+1**的字节组成。
@@ -83,7 +83,7 @@ LDC、LDM、LDRD、POP、PUSH、STC、STRD、STM、VLDM、VPOP、VPUSH、VSTM、
 **Armv7-M** 支持可选字节序模型(**selectable endian mode**)。在该模型中，在复位时，控制输入确定字节序是大端字节序 (BE) 还是小端字节序 (LE)。这种字节序映射有以下限制：
 
 * 字节序设置仅适用于数据访问。取指令总是小端。
-* 所有对 **SCS** 的访问都是小端的，请参阅[系统控制空间 (SCS)](#22-系统控制空间-scs)。
+* 所有对 **SCS** 的访问都是小端的，请参阅[系统控制空间 (SCS)](../system_address_map/index.md#2-系统控制空间-scs)。
 
 **AIRCR.ENDIANNESS** 位指示字节顺序，请参见应用程序中断和复位控制寄存器**AIRCR**。
 

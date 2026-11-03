@@ -90,7 +90,7 @@ EL2 side (`p15, 4, ...`): `HMPUIR` / `HPRSELR` / `HPRBAR` / `HPRLAR` / `HPRENR` 
 | Normal WB RA | `001` | 1 | 1 | S |
 | Normal NC | `001` | 0 | 0 | S |
 
-### R52: MAIR values (S32K5 scheme)
+### R52: MAIR attribute slot mapping (S32K566 example)
 
 | AttrIndx | Value | Meaning | Used for |
 | --- | --- | --- | --- |
@@ -98,7 +98,7 @@ EL2 side (`p15, 4, ...`): `HMPUIR` / `HPRSELR` / `HPRBAR` / `HPRLAR` / `HPRENR` 
 | 1 | `0x00` | Device-nGnRnE (strictest) | PPB |
 | 2 | `0xBB` | Normal, RW, WT (no WA) | reserved |
 | 3 | `0x04` | Device-nGnRE | peripheral bridges |
-| 4 | `0x44` | Normal, Non-cacheable | LPE_SRAM Code read-only view |
+| 4 | `0x44` | Normal, Non-cacheable | LPE_SRAM Code (read-only permission set by region AP) |
 
 Device strictness: `0x00` nGnRnE > `0x04` nGnRE > `0x0C` nGRE > `0x0F` GRE.
 
