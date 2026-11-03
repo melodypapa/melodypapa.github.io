@@ -294,7 +294,12 @@ nav:
         - "WEth": autosar/cp/communication/wlan_driver/index.md
         - "WEthTrcv": autosar/cp/communication/wlan_transceiver_driver/index.md
         - "Fr": autosar/cp/communication/flexray_driver/index.md
+        - "FrArTp": autosar/cp/communication/flexray_ar_transport_layer/index.md
+        - "FrIf": autosar/cp/communication/flexray_interface/index.md
+        - "FrNm": autosar/cp/communication/flexray_network_management/index.md
+        - "FrSM": autosar/cp/communication/flexray_state_manager/index.md
         - "FrTp": autosar/cp/communication/flexray_iso_transport_layer/index.md
+        - "FrTrcv": autosar/cp/communication/flexray_transceiver_driver/index.md
         - "FvM": autosar/cp/communication/fvm/fvm.md
         - "LdCom": autosar/cp/communication/large_data_com/index.md
         - "Lin": autosar/cp/communication/lin_driver/index.md
@@ -420,6 +425,9 @@ nav:
       - 库:
         - autosar/cp/libraries/index.md
         - "插值调用宏封装": autosar/cp/libraries/macro_encapsulation_of_interpolation_calls/index.md
+        - "CRC": autosar/cp/libraries/crc/index.md
+        - "E2E": autosar/cp/libraries/e2e/index.md
+        - "Bfx": autosar/cp/libraries/bfx/index.md
       - 模板:
         - autosar/cp/template/index.md
         - "1. 一段话总结": autosar/cp/template/generic_structure/index.md
@@ -475,8 +483,8 @@ nav:
 
         - "S32K5 MPU 速查表": nxp/s32k5xx/mpu_concept/MPU_Quick_Reference_CN.md
         - S32K5 MPU Quick Reference: nxp/s32k5xx/mpu_concept/MPU_Quick_Reference_EN.md
-        - "S32K5xx MPU 内存保护单元设计方案（Cortex-M7 + Cortex-R52）": nxp/s32k5xx/mpu_concept/S32K5_R52_M7_MPU_Design_CN.md
-        - "MPU Design for S32K5xx (Cortex-M7 + Cortex-R52)": nxp/s32k5xx/mpu_concept/S32K5_R52_M7_MPU_Design_EN.md
+        - "S32K5xx MPU 设计": nxp/s32k5xx/mpu_concept/S32K5_R52_M7_MPU_Design_CN.md
+        - "S32K5xx MPU Design": nxp/s32k5xx/mpu_concept/S32K5_R52_M7_MPU_Design_EN.md
       - 电源与休眠设计:
 
         - "S32K5 MCAL 驱动 API 与休眠设计方案映射分析": nxp/s32k5xx/power_designs/MCAL_API_MAPPING.md

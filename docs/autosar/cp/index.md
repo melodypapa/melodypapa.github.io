@@ -38,7 +38,12 @@ title: "CP AUTOSAR"
   * [AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](communication/wlan_driver/index.md)
   * [AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](communication/wlan_transceiver_driver/index.md)
   * [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](communication/flexray_driver/index.md)
+  * [AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）](communication/flexray_ar_transport_layer/index.md)
+  * [AUTOSAR FlexRay 接口（FlexRay Interface）](communication/flexray_interface/index.md)
+  * [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](communication/flexray_network_management/index.md)
+  * [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](communication/flexray_state_manager/index.md)
   * [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](communication/flexray_iso_transport_layer/index.md)
+  * [AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）](communication/flexray_transceiver_driver/index.md)
   * [AUTOSAR FVM (Freshness Value Manager)](communication/fvm/fvm.md)
   * [AUTOSAR Large Data COM（大数据 COM）](communication/large_data_com/index.md)
   * [AUTOSAR LIN Driver](communication/lin_driver/index.md)
@@ -193,6 +198,9 @@ title: "CP AUTOSAR"
 
 * [库（Libraries）](libraries/index.md)
   * [Macro Encapsulation of Interpolation Calls（插值调用宏封装）](libraries/macro_encapsulation_of_interpolation_calls/index.md)
+  * [Specification of CRC Routines（CRC 例程规范）](libraries/crc/index.md)
+  * [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](libraries/e2e/index.md)
+  * [Specification of Bit Handling Routines（位处理例程规范）](libraries/bfx/index.md)
 
 ### 模板
 

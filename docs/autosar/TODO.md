@@ -4,7 +4,7 @@
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
 > Layout (2026-11-02): CP articles live under `cp/<section>/`, Foundation under `foundation/<topic>/`; article links below are relative to `docs/autosar/`.
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-02 (cp/ + foundation/ restructure, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-03 (libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
 
 ## Backlog
 
@@ -189,6 +189,12 @@
 - ✅ [ICU 驱动](cp/io/icu_driver/) — SWS_ICUDriver (2026-10-24 realigned to R23-11: 4.2 「汽车域的适用性」, 3.2/3.3 renamed to the site pattern; ## 8. 时序图 kept per the lifted ban; ## 9. 配置规范 translated (28 params); front-matter release R22-11 → R23-11 + glossary regenerated)
 - ✅ [I/O 硬件抽象](cp/io/iohwab/) — SWS_IOHardwareAbstraction (2026-10-27 full Type A realignment from R23-11: new §4 约束和假设, §3.2 相关标准和规范, §5.5 文件结构, §6.6 错误分类, §6.7 其他需求, §7.1 导入的类型, §7.2 类型定义, §7.5 调度函数, §7.8 期望接口, §9 配置规范; API chapter regrouped to source ch.8 (7.3–7.7) with every missing requirement paragraph translated; §2 rows restored 17/11/5 + 2.2 reordered; 功能规格 restructured 背景与原理/需求 with source nesting restored; sourceless 5.7 电源模式 dissolved into §8.2 per source ch.9; Figure5_1_1 table-as-image → GFM; 33 ch.2 terms to glossary)
 
+## libraries
+
+- ✅ [Specification of CRC Routines（CRC 例程规范）](cp/libraries/crc/index.md) — SWS_CRCLibrary (2026-11-03 full Type A translation from R23-11: new article; source ch.6 Requirements Tracing + appendix A dropped per mandate; source 7.5 Debugging concept「None」omitted per the placeholder rule (§7.6→§6.5 renumbered); ch.9 → `## 8. 时序图` (7 figures); ch.10 → `## 9. 配置规范` (module + 1 container + 7 enum params + published info); API chapter keeps all source groups 8.1–8.7 → 7.1–7.7, literal「None.」groups rendered as one-sentence statements (batch decision, user to confirm); formulas of §6.1 reconstructed from the R22-11 PDF; check_api_sync N/A — source 8.3.x leaf headings are prose ("8-bit SAE J1850 CRC Calculation"), translated to Chinese by design; 8 function entries verified manually in order; appendix B IDs in fences; glossary +ALU, CRC 来源 line extended)
+- ✅ [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](cp/libraries/e2e/index.md) — SWS_E2ELibrary (2026-11-03 full Type A translation from R23-11: new article 3,743 lines + 83 figures; source ch.6 Requirements Tracing + annex C dropped per mandate; source 7.1.5 Extended Production Errors empty in the PDF — omitted per placeholder rule; source ch.7 (error classification only) → §6, ch.8 (15 type groups + 16 routine groups, ~150 API entries) → §7, ch.9 (sender/receiver sequence diagrams) → §8 (5 figures), ch.10 (published info only) → §9; annex A (safety manual) → §10, annex B (application hints incl. E2EPW routines + code example) → §11 numbered continuation, annex D → ## B. with ID fences; Figure B.20 image lost in the source markdown conversion — caption kept as text; the P01 CheckStatusType OK=0x00 row lost in conversion recovered from the R22-11 PDF; ~20 page-break scrambles of service tables reordered; 46 unique content figures triaged from a 337-image artifact set; glossary: no new terms (E2E terms already present))
+- ✅ [Specification of Bit Handling Routines（位处理例程规范）](cp/libraries/bfx/index.md) — SWS_BFXLibrary (2026-11-03 full Type A translation from R23-11: new article; source ch.6 Requirements Tracing + appendix A dropped per mandate; source ch.9 Sequence diagrams "Not applicable" omitted per the placeholder rule, ch.10 → §8 renumbered down; source 8.4's 24 bit-function entries → §7.4 with implemented-function tables, source 8.8 Version API → §7.8; source 3.2 prose names "IFX Library" verbatim (source copy-paste artifact, kept faithful); check_api_sync N/A — source 8.4.x headings are identifier-stem titles (Bfx_SetBit) whose templated prototypes u8..u64 expand one stem into 4 functions, manual verification: 24 sections in source order + GetVersionInfo; appendix B as GFM table with IDs as data)
+
 ## mcal
 
 - ✅ [MCU 驱动](cp/mcal/mcu_driver/) — SWS_MCUDriver (2026-10-26 full Type A translation from R23-11: new article + new MCAL section landing page + nav; ch.6 traceability dropped per mandate; ch.9 → `## 8. 时序图` (4 figures), ch.10 → `## 9. 配置规范` (10 containers, SWS 条目 cells filled with [ECUC_Mcu_*] per EcuM style); first inline cross-article prose links — Dem/Port)
@@ -323,7 +329,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 ## Missing sections (no articles at all)
 
-- **Libraries (9)**: SWS_CRCLibrary (Crc), SWS_E2ELibrary (E2E), SWS_BFXLibrary (Bfx), SWS_BSWMulticoreLibrary (Bmc), SWS_MFLLibrary (Mfl), SWS_MFXLibrary (Mfx), SWS_IFLLibrary (Ifl), SWS_IFXLibrary (Ifx), SWS_EFXLibrary (Efx)
+- **Libraries (6)**: SWS_BSWMulticoreLibrary (Bmc), SWS_MFLLibrary (Mfl), SWS_MFXLibrary (Mfx), SWS_IFLLibrary (Ifl), SWS_IFXLibrary (Ifx), SWS_EFXLibrary (Efx)
 - **RTE / SWArch (2)**: SWS_RTE, SWS_ARTI
 - ~~**Safety (2)**: SWS_WatchdogInterface (WdgIf), SWS_WatchdogDriver (Wdg)~~ — both translated 2026-10-27
 - **Security (2)**: SWS_Firewall, SWS_IntrusionDetectionSystemManager (IdsM)

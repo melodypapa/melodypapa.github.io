@@ -26,7 +26,36 @@ The site focuses on automotive embedded software, along with personal notes on l
 
 ## Local Development
 
-Prerequisite: Python 3 (pip)
+Prerequisite: Python 3 and either [uv](https://docs.astral.sh/uv/) (recommended) or pip.
+
+### Using uv
+
+Create a project virtual environment:
+
+```bash
+uv venv .venv
+```
+
+Activate it using the command for your shell:
+
+```bash
+# macOS / Linux
+source .venv/bin/activate
+```
+
+```powershell
+# Windows PowerShell
+.\.venv\Scripts\Activate.ps1
+```
+
+Install dependencies and start the live preview:
+
+```bash
+uv pip install -r requirements.txt
+mkdocs serve
+```
+
+### Using pip
 
 ```bash
 # Install dependencies
