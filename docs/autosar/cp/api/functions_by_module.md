@@ -279,6 +279,26 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**CanSM_TransceiverModeIndication**](../communication/cansm/index.md#743-cansm_transceivermodeindication) | C |
 | [**CanSM_TxTimeoutException**](../communication/cansm/index.md#744-cansm_txtimeoutexception) | C |
 
+## AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）（13）
+
+来源：[AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver
+
+| 函数 | 简述 |
+|---|---|
+| [**CV2x_GetBufCV2xPC5RxParams**](../communication/cellularv2x_driver/index.md#739-cv2x_getbufcv2xpc5rxparams) | 读取与接收到的包相关的值。 |
+| [**CV2x_GetBufCV2xPC5TxParams**](../communication/cellularv2x_driver/index.md#7310-cv2x_getbufcv2xpc5txparams) | 读取与所发送包的接收方向相关的值。 |
+| [**CV2x_GetChanCV2xPC5TxParams**](../communication/cellularv2x_driver/index.md#7312-cv2x_getchancv2xpc5txparams) | 读取与信道接收方向相关的值。 |
+| [**CV2x_GetControllerMode**](../communication/cellularv2x_driver/index.md#734-cv2x_getcontrollermode) | 获取被索引控制器的状态。 |
+| [**CV2x_GetVersionInfo**](../communication/cellularv2x_driver/index.md#732-cv2x_getversioninfo) | 返回本模块的版本信息。 |
+| [**CV2x_Init**](../communication/cellularv2x_driver/index.md#731-cv2x_init) | 初始化 Cellular V2X 驱动程序。 |
+| [**CV2x_MainFunction**](../communication/cellularv2x_driver/index.md#751-cv2x_mainfunction) | 支持间接发送（扩展帧时序约束）。 |
+| [**CV2x_ProvideTxBuffer**](../communication/cellularv2x_driver/index.md#735-cv2x_providetxbuffer) | 提供对指定控制器发送缓冲区的访问。 |
+| [**CV2x_Receive**](../communication/cellularv2x_driver/index.md#738-cv2x_receive) | 触发帧接收。 |
+| [**CV2x_SetBufCV2xPC5TxParams**](../communication/cellularv2x_driver/index.md#7311-cv2x_setbufcv2xpc5txparams) | 为特定缓冲区（待发送的包）设置与发送方向相关的值。 |
+| [**CV2x_SetControllerMode**](../communication/cellularv2x_driver/index.md#733-cv2x_setcontrollermode) | 启用/禁用被索引的控制器。 |
+| [**CV2x_Transmit**](../communication/cellularv2x_driver/index.md#736-cv2x_transmit) | 触发发送一个先前已填充的发送缓冲区。 |
+| [**CV2x_TxConfirmation**](../communication/cellularv2x_driver/index.md#737-cv2x_txconfirmation) | 触发发送确认。 |
+
 ## AUTOSAR COM Based Transformer（3）
 
 来源：[AUTOSAR COM Based Transformer](../communication/com_based_transformer/index.md) · SWS_COMBasedTransformer

@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2274** 个条目。
+共 **2287** 个条目。
 
 ## A
 
@@ -1496,6 +1496,45 @@ title: "AUTOSAR API 函数清单"
 
 **[CsmSignatureVerify](../crypto/crypto_service_manager/index.md#7529-csmsignatureverify)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CV2x_GetBufCV2xPC5RxParams](../communication/cellularv2x_driver/index.md#739-cv2x_getbufcv2xpc5rxparams)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_GetBufCV2xPC5TxParams](../communication/cellularv2x_driver/index.md#7310-cv2x_getbufcv2xpc5txparams)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_GetChanCV2xPC5TxParams](../communication/cellularv2x_driver/index.md#7312-cv2x_getchancv2xpc5txparams)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_GetControllerMode](../communication/cellularv2x_driver/index.md#734-cv2x_getcontrollermode)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_GetVersionInfo](../communication/cellularv2x_driver/index.md#732-cv2x_getversioninfo)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_Init](../communication/cellularv2x_driver/index.md#731-cv2x_init)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_MainFunction](../communication/cellularv2x_driver/index.md#751-cv2x_mainfunction)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_ProvideTxBuffer](../communication/cellularv2x_driver/index.md#735-cv2x_providetxbuffer)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_Receive](../communication/cellularv2x_driver/index.md#738-cv2x_receive)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_SetBufCV2xPC5TxParams](../communication/cellularv2x_driver/index.md#7311-cv2x_setbufcv2xpc5txparams)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_SetControllerMode](../communication/cellularv2x_driver/index.md#733-cv2x_setcontrollermode)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_Transmit](../communication/cellularv2x_driver/index.md#736-cv2x_transmit)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_TxConfirmation](../communication/cellularv2x_driver/index.md#737-cv2x_txconfirmation)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
 
 ## D
 

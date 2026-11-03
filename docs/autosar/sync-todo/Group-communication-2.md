@@ -281,13 +281,18 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 + B ↔ §1–§9 + B 1:1; ch.6 tracing + appendix A dropped (compliance))
   - [x] Step 5 — User confirmation gate (user confirmed 2026-11-03 — batched confirmation for the sync-4 batch)
 - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-4)
-- [ ] cellularv2x_driver (SWS_CellularV2XDriver · R23-11 markdown · ❌ new article)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-- [ ] Step 6 — TODO.md row + commit/PR
+- [x] cellularv2x_driver (SWS_CellularV2XDriver · R23-11 markdown · ❌ new article)
+  - Note: article `cp/communication/cellularv2x_driver/` (directory per row name, nav label "CV2x", new V2X group of the communication landing page + nav sub-group "V2X" after UdpNm). Shape: ch.1 → §1 (Figure1_1 the ONLY content figure — all other 46 artifacts deco/≤346px chrome) · ch.2 → §2 10 acronyms · 3.1 6-entry registry (refs [1]/[2] carry ccsa.org.cn URLs — curl 200) + 3.2 · ch.4 → §4 (4.1 5-item limitations incl. LTE-V2X PC5-only + non-IP/DSMP-only, 4.2) · ch.5 → §5 (EthIf user list) + 5.1 驱动服务 (on-chip/off-chip requirements as prose + Note + Implementation hint) · ch.6 dropped · ch.7 → §6 (6.1 栈: 6.1.1 索引方案, 6.1.2 通用需求, 6.1.3 按包参数, 6.1.4 键/值参数映射 with 3 ParamId tables; 6.2 错误分类 dev 表 5 rows + runtime/transient/production none-sentences + 6.2.5 扩展生产错误 CV2X_E_ACCESS attribute table) · ch.8 → §7 (7.1 13 imported rows incl. 3 ComStackTypes.h draft timestamp types; 7.2 5 types in the ttcan 4-column house format (类别/取值); 7.3 12 functions; 7.4 no-callback sentence; 7.5.1 CV2x_MainFunction 0x10; 7.6.1 强制 4 rows + [02005] FrameType/PhysAddr-ignore, 7.6.2 可选 1 row Det_ReportError, 7.6.3 none-sentence) · ch.9 → §8 one-sentence pointer to EthIf [6] · ch.10 → §9 (10.1 folded intro; 9.1.1 变体; 9.1.2 CV2x; 9.1.3 CV2xGeneral 5 params + 2 partition CONSTR as 注意 blocks; 9.1.4 CV2xConfigSet; 9.1.5 CV2xCtrlConfig 6 params; 9.1.6 CV2xDemEventParameterRefs 1 param; SWS 条目 cells filled [ECUC_CV2x_*]; 10.2-published-info intro sentence rendered WITHOUT number — source has no 10.2 section, REPORTED) · ch.6 tracing + appendix A ("None") dropped · ## B with B.1.1–B.1.6 all 无
+  - Note: PDF ground-truth (R23-11 corpus PDF): 12 Syntax lines completed with closing parens (markdown dropped the paren at page breaks for every multi-line signature); 8.2.5 table page-split reassembled (Description/Available via rows were displaced after the spilled [01013] requirement, which was returned to 7.3.1 CV2x_Init per source order)
+  - Note: source quirks kept verbatim and reported: 6.2.5 says "There are no extended production errors." then defines CV2X_E_ACCESS (lintrcv contradiction precedent); 6.2.3 瞬态故障 and 6.2.4 生产错误 both say "no runtime errors" (copy-paste); 7.2.4 enum defines TRANSACTION_ID_16 0x07 while the 6.1.4 table [00026] lists TRANSACTION_ID_32; [01084] ChannelId check raises CV2X_E_PARAM_POINTER (unusual — other value params use INV_PARAM); [01081] keeps the source's SWS_CV2x_00027 prose cross-ref (OS/EcuM bracketed-cross-ref precedent, unbracketed); [01020]/[01022] are literal duplicate requirements (both kept per PWM look-alike rule); prose typos ("Ceulluar", "Soruce", "Synchornizaiton", "requires requires") translated past; "Cv2x_Init"/"Cv2x_ProvideTxBuffer" casing normalized to CV2x_*
+  - Note: Phase A — strict build exit 0 / 0 WARNING / no cellular notices; check_heading_lang OK; check_indexes OK (250 nav targets); hygiene 0 h1/`\<`/{DRAFT}, SWS ids 0 (ECUC ids only in SWS 条目 cells); acronym 10 term lines = source 10 rows, 0 tables; check_api_sync OK (5 types/12 functions/12 说明); gen_api_list regenerated (CV2x 5 types + 13 functions SITE-linked, --check 0); census --apply: 65 lines (12 citation links + 2 chapter-refs), idempotent re-run 0 lines; [n] resolutions: [3] SITE glossary, [1]/[2]/[5]/[6] EXTERNAL:? report-only
+  - Note: glossary +7 new terms (CCSA, DSMP, LTE-V2X, NTCAS, PC5, PPPP, V2X) + 3 来源 appends (CBR, CV2x, IP); rewrite_glossary normalized (1025 entries)
+  - [x] Step 1 — Source resolution + gap analysis (1354-line R23-11 markdown; 1 content figure via caption-anchored mapper, 46 chrome artifacts dropped)
+  - [x] Step 2 — In-place translation/completion (full Type A build, main session)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 + B ↔ §1–§9 + B 1:1; ch.6 tracing + appendix A dropped (compliance); §6.1.4 3 ParamId tables row-for-row)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+- [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-5)
 - [ ] chargingmanager (SWS_ChargingManager · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion

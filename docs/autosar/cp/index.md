@@ -65,6 +65,7 @@ title: "CP AUTOSAR"
   * [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](communication/ttcan_driver/index.md)
   * [AUTOSAR TTCAN Interface（TTCAN 接口）](communication/ttcan_interface/index.md)
   * [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)
+  * [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](communication/cellularv2x_driver/index.md)
 
 ### 全局时间（Global Time）
 

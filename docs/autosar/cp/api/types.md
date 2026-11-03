@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **662** 个条目。
+共 **667** 个条目。
 
 ## A
 
@@ -374,6 +374,21 @@ title: "AUTOSAR API 类型清单"
 
 **[Csm_VerifyResultPtr](../crypto/crypto_service_manager/index.md#75629-csm_verifyresultptr)**
 > 类型 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CV2x_BufCV2xPC5RxParamIdType](../communication/cellularv2x_driver/index.md#723-cv2x_bufcv2xpc5rxparamidtype)**
+> 类型 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_BufCV2xPC5TxParamIdType](../communication/cellularv2x_driver/index.md#724-cv2x_bufcv2xpc5txparamidtype)**
+> 类型 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_ConfigType](../communication/cellularv2x_driver/index.md#721-cv2x_configtype)**
+> 类型 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_GetChanTxParamIdType](../communication/cellularv2x_driver/index.md#725-cv2x_getchantxparamidtype)**
+> 类型 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_StateType](../communication/cellularv2x_driver/index.md#722-cv2x_statetype)**
+> 类型 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
 
 ## D
 

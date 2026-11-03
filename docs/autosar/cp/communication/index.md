@@ -79,6 +79,10 @@ title: "通信（Communication）"
 * [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](spi_handler_driver/index.md)
 * [Data Distribution Service for Classic Platform（经典平台数据分发服务）](data_distribution/index.md)
 
+### V2X
+
+* [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](cellularv2x_driver/index.md)
+
 ## 相关内容
 
 * [CP AUTOSAR 总览](../index.md)
