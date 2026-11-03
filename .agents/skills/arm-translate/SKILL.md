@@ -1,0 +1,160 @@
+---
+name: arm-translate
+description: >
+  Use when translating, completing, verifying, or inventorying the Arm
+  technical-reference articles under docs/cortex/ of the melodypapa.github.io
+  MkDocs site; when syncing a Cortex-M7 or Cortex-R52 Arm document (TRM,
+  Armv7-M/Armv8-M architecture reference manual, SDEN errata) from the local
+  `.private/ARM` mirror into a docs/cortex page; or when asked about coverage of
+  a Cortex core chapter such as MPU, cache, memory system, programmers model,
+  exception model, instruction set, or system address map.
+---
+
+# Arm Document → Cortex Article Sync
+
+Translate or complete the Chinese articles under `docs/cortex/` from the Arm
+documents mirrored in `.private/ARM/`. Follow the steps in order; the
+conventions live in `references/`, not in this file.
+
+## Step 0 — Read the law of the land
+
+There is no `STANDARD.md` for `docs/cortex/`. The law is the existing articles
+plus `references/article-format.md`. Read that reference before writing, and
+read at least one neighbouring article in the same `docs/cortex/<core>_processor/`
+tree so the new page matches its tone and structure.
+
+## Step 1 — Resolve the source document
+
+Read `references/source-resolution.md`. Summary:
+
+1. Primary source is the ima-parsed Markdown in `.private/ARM/<core>/`
+   (`M7/`, `R52/`), paired with the original PDF of the same doc ID and
+   revision. Use the `.md` for text and the `.pdf` for figures and tables that
+   the parse flattened.
+2. Confirm the pairing from `.private/ARM/README.md` — it records the doc ID,
+   revision, media size and which pairs are complete. Filenames do not always
+   match between `.md` and `.pdf` (the M7 TRM PDF drops `_r1p2`; the SDEN PDF
+   carries the long `cortex_m7_at610_and_...` name).
+3. The `.md` files are read-only; never edit them. Never translate from the PDF
+   text layer when a `.md` exists — the parse is the structural source.
+
+## Step 2 — Map source → target article
+
+Read `references/mapping.md` for the article ↔ source-chapter table. The
+evidence is the figure/table number in the source (`Figure8-*` ⇒ chapter 8,
+`TableB3-*` ⇒ Armv7-M ARM appendix B3); when the numbering does not prove it,
+match section headings before writing.
+
+A source chapter becomes one article at
+`docs/cortex/<core>_processor/<topic>/index.md` (`m7_processor/`,
+`r52p_processor/`). Propose the directory name to the user when a topic
+straddles two chapters or could be split.
+
+## Step 3 — Gap analysis before any writing
+
+Compare the article's `## ` headings against the source chapter's section list:
+
+- **Missing article** → plan a full translation of that chapter.
+- **Partial / stub** → plan in-place completion; insert translations where the
+  source has them, never rewrite translated text.
+- **Complete** → report alignment; check for sections the article dropped.
+
+The droppable set is the document chrome only: cover page, proprietary notice,
+contents, document history, feedback and index. Everything else that carries
+content — including notes, register descriptions and "Related references" —
+translates. For a source chapter longer than ~1500 lines, present the plan and
+get confirmation before translating.
+
+Gap analysis is text-only: compare Markdown headings, never open figures.
+Count the chapter's figures and tables from the source heading/text before
+writing and record the count; if the requester's description of the chapter
+contradicts the source (wrong length, "no figures", "one table"), say so and
+follow the source.
+
+## Step 4 — Create the work todo list
+
+One run consumes one article. Emit an explicit checklist before writing:
+chapter sections in source order, figures/tables to crop, register entries,
+nav registration, landing-page update, verification commands. If the user names
+an article with no target directory, create the directory first.
+
+## Step 5 — Translate in place
+
+- **The main session translates — never a subagent**, sequentially, regardless
+  of chapter length. Read-only subagents may do censuses or verification.
+- Faithful translation of Arm's own wording, not a summary. Keep technical
+  identifiers, register names, bit-field names and instruction syntax
+  untranslated; bold the English term on first mention, Chinese gloss in
+  parentheses.
+- Renumber the source chapter to `## 1.` and mirror its relative structure
+  (`### 1.1.`, `#### 1.1.1.`). Numbering restarts at 1 in every article.
+- Never write `# ` in the body (front-matter `title` is the only h1).
+- Keep code and instruction snippets in fenced blocks tagged `arm`
+  (`MCR p15, 0, <Rt>, c6, CRm, op2`), verbatim from the source.
+- Source notes render as `**注意：**` paragraphs.
+- Register subsections keep the source's order: name, description,
+  `**使用限制**`, access table (`| EL0 | EL1 | EL2 |`), field table.
+- Tables: render textual tables (bit fields, access rights, encodings) as GFM
+  tables; keep only merged-cell layout tables as cropped `Table<ch>-<n>.png`
+  images, matching the neighbouring article.
+- Figures: every content figure in the chapter embeds, cropped and referenced
+  without caption text (`![Figure8-2](Figure8-2.png)`).
+
+**Precedence.** The conventions in `references/` are the default. When the
+requester waives one — keep source numbering, skip figures, summarise tables,
+"add nav later", "I'll check the build" — say what the waiver costs and take it
+only as an explicit instruction; never silently drop a figure, a table row, a
+register, the nav entry or the landing link, and never copy a section from a
+neighbouring article to fill a gap.
+
+## Step 6 — Produce the figures
+
+Read `references/article-format.md` for naming. Crop from the source PDF with
+PyMuPDF into the article directory (`Figure<chapter>-<n>.png`,
+`Table<chapter>-<n>.png`); keep source numbering so the figure can be traced
+back. Legacy directories mix `Figure4_77.png` and `FigureA3-1.png` — never
+rename existing files, only keep new ones consistent.
+
+## Step 7 — Register the page
+
+- `mkdocs.yml`: add the page under the `ARM Cortex` group of the right core
+  (`Cortex-M7 内核` / `Cortex-R52+ 内核`).
+- `docs/cortex/index.md`: add the numbered link under the matching core section.
+- Concept articles that cite external sources stay outside this skill.
+
+## Step 8 — Verify (two-phase gate)
+
+Phase A (mechanical, all must pass):
+
+```
+/tmp/mkdocs-venv/bin/python -m mkdocs build --strict --site-dir /tmp/mkdocs-check
+python3 .agents/skills/autosar-translate/scripts/check_indexes.py
+python3 .agents/skills/autosar-translate/scripts/check_heading_lang.py <article>
+```
+
+Plus: every `![](...)` target exists in the article directory; no `# ` in the
+body; every `## ` heading is Chinese with the source number; no untranslated
+English paragraph left behind.
+
+Phase B (fidelity): walk the chapter section by section — each source section
+has a translation, each register/figure/table is present, row sets and bit
+ranges match the source, and deprecated Chinese-only wording is not used where
+the source is a proper noun.
+
+Report both phases with concrete evidence; do not claim completion without the
+build output. Run the gate even when the requester says they will verify it
+themselves — Phase A is the author's responsibility, not a hand-off.
+
+## Step 9 — Repository workflow
+
+Feature branch (`feature/cortex-<core>-<topic>`), English issue and PR text,
+`docs:` commit with `Closes #N`, strict build before commit, no co-work
+attribution. Merge through a PR; `master` is protected.
+
+## Common mistakes
+
+- Renumbering the article to the source chapter number (must restart at 1).
+- Pasted PDF text with broken table cells or hyphen splits left unrepaired.
+- Figures skipped "because the parse has no caption" — the figure still embeds.
+- Translating the proprietary notice or document history.
+- Adding the page without the nav entry (strict build passes, page is orphaned).
