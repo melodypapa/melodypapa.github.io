@@ -3044,6 +3044,35 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**V2xGn_V2xM_EncapConfirmation**](../communication/v2x_geonet/index.md#741-v2xgn_v2xm_encapconfirmation) | 当封装完成时由 V2xM 调用本函数。 |
 | [**V2xGn_V2xM_PreparePseudonymChange**](../communication/v2x_geonet/index.md#733-v2xgn_v2xm_preparepseudonymchange) | 发生假名更改时由 V2xM 调用本函数，以在使用该假名的每个模块中准备该更改。 |
 
+## AUTOSAR V2X Management（V2X管理）（22）
+
+来源：[AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement
+
+| 函数 | 简述 |
+|---|---|
+| [**V2xM_CalcDistance**](../communication/v2x_mgmt/index.md#7312-v2xm_calcdistance) | 在假定两点海拔为 0 的前提下计算地球上两个地理位置点之间的距离。 |
+| [**V2xM_CalcHeadingInTolerance**](../communication/v2x_mgmt/index.md#7313-v2xm_calcheadingintolerance) | 计算航向值之差是否在容差值内。 |
+| [**V2xM_GeoMath**](../communication/v2x_mgmt/index.md#7713-v2xm_geomath) | — |
+| [**V2xM_GetPositionAndTime**](../communication/v2x_mgmt/index.md#733-v2xm_getpositionandtime) | 提供瞬时位置信息。 |
+| [**V2xM_GetRefTimePtr**](../communication/v2x_mgmt/index.md#734-v2xm_getreftimeptr) | 提供指向 V2X-Stack 时间基准的指针。 |
+| [**V2xM_GetTime**](../communication/v2x_mgmt/index.md#7318-v2xm_gettime) | 获取由 V2X-Stack 估计的 ITS 时间的服务。 |
+| [**V2xM_GetVersionInfo**](../communication/v2x_mgmt/index.md#732-v2xm_getversioninfo) | 提供本模块的版本信息。 |
+| [**V2xM_Init**](../communication/v2x_mgmt/index.md#731-v2xm_init) | 初始化 V2xM 模块。 |
+| [**V2xM_LockPseudonymChange**](../communication/v2x_mgmt/index.md#738-v2xm_lockpseudonymchange) | 由 V2xGn 或应用服务接口调用本函数以锁定假名更改。 |
+| [**V2xM_MainFunction**](../communication/v2x_mgmt/index.md#751-v2xm_mainfunction) | V2xM 的调度主函数。 |
+| [**V2xM_PseudonymChange**](../communication/v2x_mgmt/index.md#7712-v2xm_pseudonymchange) | — |
+| [**V2xM_SetTollingZoneInformation**](../communication/v2x_mgmt/index.md#7314-v2xm_settollingzoneinformation) | 设置可用的收费区域信息。 |
+| [**V2xM_TriggerPseudonymChange**](../communication/v2x_mgmt/index.md#737-v2xm_triggerpseudonymchange) | 由 V2xFac、V2xGn 或其他实体调用本函数以更改 V2X-Stack 使用的假名，例如由于 GeoNetworking 地址冲突。 |
+| [**V2xM_UnlockPseudonymChange**](../communication/v2x_mgmt/index.md#739-v2xm_unlockpseudonymchange) | 由 V2xGn 或应用服务接口调用本函数以解锁假名更改。 |
+| [**V2xM_V2xGn_GetGlobalTxParams**](../communication/v2x_mgmt/index.md#7311-v2xm_v2xgn_getglobaltxparams) | 由 V2xGn 调用本函数以获取指定信道的当前信道忙百分比。 |
+| [**V2xM_V2xGn_ReqDecap**](../communication/v2x_mgmt/index.md#736-v2xm_v2xgn_reqdecap) | V2xGn 调用本函数以解密并验证消息。 |
+| [**V2xM_V2xGn_ReqEncap**](../communication/v2x_mgmt/index.md#735-v2xm_v2xgn_reqencap) | V2xGn 调用本函数以签名和/或加密消息。 |
+| [**V2xM_V2xGn_SetGlobalRxParams**](../communication/v2x_mgmt/index.md#7310-v2xm_v2xgn_setglobalrxparams) | 由 V2xGn 调用本函数以设置指定信道的当前信道忙百分比。 |
+| [**V2xM_Vdp**](../communication/v2x_mgmt/index.md#7711-v2xm_vdp) | — |
+| [**V2xM_Vdp_GetNextLongTermCertificateExpirationDate**](../communication/v2x_mgmt/index.md#7315-v2xm_vdp_getnextlongtermcertificateexpirationdate) | 获取最近将过期的长期证书的证书过期日期的服务。 |
+| [**V2xM_Vdp_GetNextPseudonymCertificateExpirationDate**](../communication/v2x_mgmt/index.md#7316-v2xm_vdp_getnextpseudonymcertificateexpirationdate) | 获取最近将过期的假名证书的证书过期日期的服务。 |
+| [**V2xM_Vdp_SetPositionAndTime**](../communication/v2x_mgmt/index.md#7317-v2xm_vdp_setpositionandtime) | 用于设置与 V2X-Stack 相关的位置和时间信息的服务。 |
+
 ## AUTOSAR Watchdog Driver（看门狗驱动）（4）
 
 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](../safety/watchdog_driver/index.md) · SWS_WatchdogDriver

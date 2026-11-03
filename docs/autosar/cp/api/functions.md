@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2392** 个条目。
+共 **2414** 个条目。
 
 ## A
 
@@ -6978,6 +6978,72 @@ title: "AUTOSAR API 函数清单"
 
 **[V2xGn_V2xM_PreparePseudonymChange](../communication/v2x_geonet/index.md#733-v2xgn_v2xm_preparepseudonymchange)**
 > 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xM_CalcDistance](../communication/v2x_mgmt/index.md#7312-v2xm_calcdistance)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_CalcHeadingInTolerance](../communication/v2x_mgmt/index.md#7313-v2xm_calcheadingintolerance)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_GeoMath](../communication/v2x_mgmt/index.md#7713-v2xm_geomath)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_GetPositionAndTime](../communication/v2x_mgmt/index.md#733-v2xm_getpositionandtime)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_GetRefTimePtr](../communication/v2x_mgmt/index.md#734-v2xm_getreftimeptr)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_GetTime](../communication/v2x_mgmt/index.md#7318-v2xm_gettime)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_GetVersionInfo](../communication/v2x_mgmt/index.md#732-v2xm_getversioninfo)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_Init](../communication/v2x_mgmt/index.md#731-v2xm_init)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_LockPseudonymChange](../communication/v2x_mgmt/index.md#738-v2xm_lockpseudonymchange)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_MainFunction](../communication/v2x_mgmt/index.md#751-v2xm_mainfunction)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_PseudonymChange](../communication/v2x_mgmt/index.md#7712-v2xm_pseudonymchange)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_SetTollingZoneInformation](../communication/v2x_mgmt/index.md#7314-v2xm_settollingzoneinformation)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_TriggerPseudonymChange](../communication/v2x_mgmt/index.md#737-v2xm_triggerpseudonymchange)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_UnlockPseudonymChange](../communication/v2x_mgmt/index.md#739-v2xm_unlockpseudonymchange)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_V2xGn_GetGlobalTxParams](../communication/v2x_mgmt/index.md#7311-v2xm_v2xgn_getglobaltxparams)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_V2xGn_ReqDecap](../communication/v2x_mgmt/index.md#736-v2xm_v2xgn_reqdecap)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_V2xGn_ReqEncap](../communication/v2x_mgmt/index.md#735-v2xm_v2xgn_reqencap)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_V2xGn_SetGlobalRxParams](../communication/v2x_mgmt/index.md#7310-v2xm_v2xgn_setglobalrxparams)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_Vdp](../communication/v2x_mgmt/index.md#7711-v2xm_vdp)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_Vdp_GetNextLongTermCertificateExpirationDate](../communication/v2x_mgmt/index.md#7315-v2xm_vdp_getnextlongtermcertificateexpirationdate)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_Vdp_GetNextPseudonymCertificateExpirationDate](../communication/v2x_mgmt/index.md#7316-v2xm_vdp_getnextpseudonymcertificateexpirationdate)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_Vdp_SetPositionAndTime](../communication/v2x_mgmt/index.md#7317-v2xm_vdp_setpositionandtime)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
 
 **[VerificationStatus](../communication/sec_oc/index.md#7843-verificationstatus)**
 > 函数 · [AUTOSAR SecOC (Secure Onboard Communication)](../communication/sec_oc/index.md) · SWS_SecOc · R23-11

@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **832** 个条目。
+共 **849** 个条目。
 
 ## A
 
@@ -2323,6 +2323,51 @@ title: "AUTOSAR API 类型清单"
 
 ## V
 
+**[V2x_ChanType](../communication/v2x_mgmt/index.md#7212-v2x_chantype)**
+> 类型 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2x_GnAddressType](../communication/v2x_mgmt/index.md#724-v2x_gnaddresstype)**
+> 类型 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2x_GnAreaShapeType](../communication/v2x_mgmt/index.md#725-v2x_gnareashapetype)**
+> 类型 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2x_GnDestinationAreaType](../communication/v2x_mgmt/index.md#726-v2x_gndestinationareatype)**
+> 类型 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2x_GnDestinationType](../communication/v2x_mgmt/index.md#723-v2x_gndestinationtype)**
+> 类型 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2x_GnLongPositionVectorType](../communication/v2x_mgmt/index.md#7214-v2x_gnlongpositionvectortype)**
+> 类型 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2x_GnPacketTransportType](../communication/v2x_mgmt/index.md#722-v2x_gnpackettransporttype)**
+> 类型 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2x_GnTxResultType](../communication/v2x_mgmt/index.md#727-v2x_gntxresulttype)**
+> 类型 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2x_GnUpperProtocolType](../communication/v2x_mgmt/index.md#7213-v2x_gnupperprotocoltype)**
+> 类型 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2x_MaximumPacketLifetimeType](../communication/v2x_mgmt/index.md#7210-v2x_maximumpacketlifetimetype)**
+> 类型 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2x_PseudonymType](../communication/v2x_mgmt/index.md#7215-v2x_pseudonymtype)**
+> 类型 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2x_SecProfileType](../communication/v2x_mgmt/index.md#728-v2x_secprofiletype)**
+> 类型 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2x_SecReportType](../communication/v2x_mgmt/index.md#7216-v2x_secreporttype)**
+> 类型 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2x_SecReturnType](../communication/v2x_mgmt/index.md#729-v2x_secreturntype)**
+> 类型 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2x_TrafficClassIdType](../communication/v2x_mgmt/index.md#7211-v2x_trafficclassidtype)**
+> 类型 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
 **[V2xBtp_RxParamsType](../communication/v2x_basictp/index.md#722-v2xbtp_rxparamstype)**
 > 类型 · [AUTOSAR V2X Basic Transport（V2X基本传输协议）](../communication/v2x_basictp/index.md) · SWS_V2XBasicTransport · R23-11
 
@@ -2487,6 +2532,12 @@ title: "AUTOSAR API 类型清单"
 
 **[V2xGn_TxParamsType](../communication/v2x_geonet/index.md#721-v2xgn_txparamstype)**
 > 类型 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xM_ConfigType](../communication/v2x_mgmt/index.md#721-v2xm_configtype)**
+> 类型 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_PositionAndTimeType](../communication/v2x_mgmt/index.md#7721-v2xm_positionandtimetype)**
+> 类型 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
 
 **[VoidPtr](../general/platform_types/index.md#7118-voidptr)**
 > 类型 · [AUTOSAR Platform Types（平台类型）](../general/platform_types/index.md) · SWS_PlatformTypes · R23-11

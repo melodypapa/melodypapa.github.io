@@ -91,6 +91,7 @@ title: "通信（Communication）"
 * [AUTOSAR V2X Data Manager（V2X数据管理器）](v2x_datamgr/index.md)
 * [AUTOSAR V2X Facilities（V2X设施层）](v2x_facilities/index.md)
 * [AUTOSAR V2X GeoNetworking（V2X地理网络）](v2x_geonet/index.md)
+* [AUTOSAR V2X Management（V2X管理）](v2x_mgmt/index.md)
 
 ## 相关内容
 
