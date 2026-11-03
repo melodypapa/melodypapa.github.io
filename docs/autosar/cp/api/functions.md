@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2304** 个条目。
+共 **2308** 个条目。
 
 ## A
 
@@ -920,6 +920,18 @@ title: "AUTOSAR API 函数清单"
 
 **[ClearPendingInterrupt](../system_services/operating_system/index.md#7436-clearpendinginterrupt)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
+
+**[CnV2xM_GetChanTxParams](../communication/chinesev2x_mgmt/index.md#733-cnv2xm_getchantxparams)**
+> 函数 · [AUTOSAR Chinese V2X Management（中国V2X管理）](../communication/chinesev2x_mgmt/index.md) · SWS_ChineseV2XManagement · R23-11
+
+**[CnV2xM_GetVersionInfo](../communication/chinesev2x_mgmt/index.md#732-cnv2xm_getversioninfo)**
+> 函数 · [AUTOSAR Chinese V2X Management（中国V2X管理）](../communication/chinesev2x_mgmt/index.md) · SWS_ChineseV2XManagement · R23-11
+
+**[CnV2xM_Init](../communication/chinesev2x_mgmt/index.md#731-cnv2xm_init)**
+> 函数 · [AUTOSAR Chinese V2X Management（中国V2X管理）](../communication/chinesev2x_mgmt/index.md) · SWS_ChineseV2XManagement · R23-11
+
+**[CnV2xM_MainFunction](../communication/chinesev2x_mgmt/index.md#751-cnv2xm_mainfunction)**
+> 函数 · [AUTOSAR Chinese V2X Management（中国V2X管理）](../communication/chinesev2x_mgmt/index.md) · SWS_ChineseV2XManagement · R23-11
 
 **[Com_CopyRxData](../communication/com/index.md#7347-com_copyrxdata)**
 > 函数 · [AUTOSAR COM（COM模块）](../communication/com/index.md) · SWS_COM · R23-11

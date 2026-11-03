@@ -323,6 +323,17 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**ChrgM_V2GTpStartOfReception**](../communication/chargingmanager/index.md#744-chrgm_v2gtpstartofreception) | 在开始接收 N-SDU 时调用本函数。 |
 | [**ChrgM_V2GTpTxConfirmation**](../communication/chargingmanager/index.md#745-chrgm_v2gtptxconfirmation) | 下层调用 ChrgM 的本 API 向 ChrgM 通报所发送 PDU 的状态。 |
 
+## AUTOSAR Chinese V2X Management（中国V2X管理）（4）
+
+来源：[AUTOSAR Chinese V2X Management（中国V2X管理）](../communication/chinesev2x_mgmt/index.md) · SWS_ChineseV2XManagement
+
+| 函数 | 简述 |
+|---|---|
+| [**CnV2xM_GetChanTxParams**](../communication/chinesev2x_mgmt/index.md#733-cnv2xm_getchantxparams) | 读取与信道接收方向相关的值。 |
+| [**CnV2xM_GetVersionInfo**](../communication/chinesev2x_mgmt/index.md#732-cnv2xm_getversioninfo) | 返回本模块的版本信息。 |
+| [**CnV2xM_Init**](../communication/chinesev2x_mgmt/index.md#731-cnv2xm_init) | 初始化 CnV2xM 模块。 |
+| [**CnV2xM_MainFunction**](../communication/chinesev2x_mgmt/index.md#751-cnv2xm_mainfunction) | CnV2xM 模块的主函数，用于周期性执行协议操作。 |
+
 ## AUTOSAR COM Based Transformer（3）
 
 来源：[AUTOSAR COM Based Transformer](../communication/com_based_transformer/index.md) · SWS_COMBasedTransformer

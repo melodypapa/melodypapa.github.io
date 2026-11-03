@@ -67,6 +67,7 @@ title: "CP AUTOSAR"
   * [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)
   * [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](communication/cellularv2x_driver/index.md)
   * [AUTOSAR Charging Manager（充电管理器）](communication/chargingmanager/index.md)
+  * [AUTOSAR Chinese V2X Management（中国V2X管理）](communication/chinesev2x_mgmt/index.md)
 
 ### 全局时间（Global Time）
 

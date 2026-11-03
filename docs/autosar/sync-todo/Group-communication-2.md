@@ -305,13 +305,17 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (已知限制+ch.1–5/7/8/9/10 + B ↔ 已知限制+§1–§9 + B 1:1; ch.6 tracing + appendix A + 8.6.3/8.7 placeholders dropped; 16 figures embedded; §6.2.2 four discard/reset bullet blocks row-for-row)
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
 - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-5)
-- [ ] chinesev2x_mgmt (SWS_ChineseV2XManagement · R23-11 markdown · ❌ new article)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-- [ ] Step 6 — TODO.md row + commit/PR
+- [x] chinesev2x_mgmt (SWS_ChineseV2XManagement · R23-11 markdown · ❌ new article)
+  - Note: article `cp/communication/chinesev2x_mgmt/` (directory per row name, nav label "CnV2xM", V2X group). Shape: ch.1 → §1 (1.1 架构总览 Figure1_1, 1.2 功能总览) · ch.2 → §2 15 acronyms · 3.1 6-entry registry (refs [1] catarc.org.cn curl 200 / [2] ccsa.org.cn) + 3.2 · ch.4 → §4 (4.1 3-item, 4.2) · ch.5 → §5 intro + 5.1–5.4 module sections · ch.6 dropped · ch.7 → §6 (6.1 启动行为 2 reqs, 6.2 关停行为, 6.3 公共信道参数获取, 6.4 错误分类 dev 表 4 rows + runtime/transient/production/extended none-sentences) · ch.8 → §7 (7.1 5 imported rows — unlabeled Std continuation row normalized to Std; 7.2 2 types incl. ConfigType with the Elements implementation-specific rows; 7.3 3 functions (GetChanTxParams page-split table reassembled); 7.4 no-callback sentence; 7.5.1 MainFunction; 7.6.1 强制 3 rows + 7.6.2 可选 1 row — source has no 8.6.3) · ch.9 → §8 时序图 (8.1 CnV2xM 初始化 Figure9_1, 8.2 蜂窝V2X驱动初始化 Figure9_2; UML message-label chrome dropped) · ch.10 → §9 (10.1 folded; 9.1.1 变体 [03001]; 9.1.2 CnV2xM; 9.1.3 CnV2xMGeneral 4 params incl. MainFunctionPeriod range ]0 .. 1[ rejoined from the "0 .."/"1[" page split; SWS 条目 cells filled [ECUC_CnV2xM_*]) · ch.6 tracing + appendix A ("None.") dropped · ## B all 无
+  - Note: source quirks kept verbatim and reported: [02004] "The Configuration pointer configPtr shall always have a NULL_PTR value" contradicts [02002] store-configuration (kept verbatim — user verify); CnV2xM_GetChanTxParams Description says "Read values related to the receive direction" (copy-paste from CV2x's GetChanCV2xPC5TxParams); CnV2xM_ChanType has a single range CN_V2X_CH1 5905-5925MHz; 02021 "Celluar" typo normalized to Cellular; 8.6.1 EthIf_GetChanCV2xPC5TxParams Header File cell "-" kept
+  - Note: Phase A — strict build exit 0 / 0 WARNING / no cnv2xm notices; check_heading_lang OK; check_indexes OK; hygiene 0 h1/`\<`/{DRAFT}/bracketed-SWS-ids; acronym 15 term lines = source 15 rows, 0 tables; check_api_sync OK (2 types/3 functions/3 说明); gen_api_list regenerated (CnV2xM 2 types + 4 functions SITE-linked, --check 0); census --apply: 11 lines (10 citation links), idempotent re-run 0 lines
+  - Note: glossary +9 new terms (BSM, C-V2X, CnV2xM, CnV2xMsg, CnV2xNet, CnV2xSec, DME, LTE, TP-Transmit Power); TP is a homonym — the existing TP entry is Transport Protocol (4 sources), the CnV2xM definition 发射功率（Transmit Power） added as a separate entry (one-term-once exception: substantively different definitions are user decisions — user verify, may merge or drop)
+  - [x] Step 1 — Source resolution + gap analysis (669-line R23-11 markdown; 3 content figures via caption-anchored mapper, 26 chrome artifacts dropped incl. two 912×57 table-split strips)
+  - [x] Step 2 — In-place translation/completion (full Type A build, main session)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 + B ↔ §1–§9 + B 1:1; ch.6 tracing + appendix A dropped (compliance); both sequence diagrams embedded)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+- [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-5)
 - [ ] chinesev2x_msg (SWS_ChineseV2XMessage · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
