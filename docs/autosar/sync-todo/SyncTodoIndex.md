@@ -6,7 +6,7 @@ Status `Done` = all 6 queue steps complete (translation merged). Status `Aligned
 
 ## Group communication-2 — communication section — remaining missing documents (38)
 
-Status: **18/38** completed
+Status: **27/38** completed
 
 | Article                    | Status | Commit ID |
 | --------------------------- | -------- | ---------- |
@@ -27,16 +27,16 @@ Status: **18/38** completed
 | `flexray_sm`                 | [x] Done | 51bd5a4c8f |
 | `flexray_trcv`               | [x] Done | 51bd5a4c8f |
 | `flexray_ar_tp`              | [x] Done | 51bd5a4c8f |
-| `flexray_iso_tp`             | [x] Done | N/A |
-| `linsm`                      | [ ] Pending | N/A |
-| `lintrcv`                    | [ ] Pending | N/A |
-| `ttcan_driver`               | [ ] Pending | N/A |
-| `ttcan_interface`            | [ ] Pending | N/A |
-| `j1939nm`                    | [ ] Pending | N/A |
-| `j1939rm`                    | [ ] Pending | N/A |
-| `j1939tp`                    | [ ] Pending | N/A |
-| `ieee1722tp`                 | [ ] Pending | N/A |
-| `macsec`                     | [ ] Pending | N/A |
+| `flexray_iso_tp`             | [x] Done | b48b925ab3 |
+| `linsm`                      | [x] Done | f303f4733c |
+| `lintrcv`                    | [x] Done | 5796ad8a4b |
+| `ttcan_driver`               | [x] Done | eec321065b |
+| `ttcan_interface`            | [x] Done | f4c87c4d03 |
+| `j1939nm`                    | [x] Done | b859ebfeee |
+| `j1939rm`                    | [x] Done | b5e4e61ae3 |
+| `j1939tp`                    | [x] Done | 983f3f3fd1 |
+| `ieee1722tp`                 | [x] Done | 862dfbd774 |
+| `macsec`                     | [x] Done | 70cf6ad088 |
 | `cellularv2x_driver`         | [ ] Pending | N/A |
 | `chargingmanager`            | [ ] Pending | N/A |
 | `chinesev2x_mgmt`            | [ ] Pending | N/A |
@@ -131,13 +131,13 @@ Status: **21/21** completed
 
 ## Group foundation exp — Foundation R23-11 guide/template/report documents (20)
 
-Status: **0/20** completed
+Status: **2/20** completed
 
 | Article                                              | Status | Commit ID |
 | ----------------------------------------------------- | -------- | ---------- |
 | `tr_glossary`                                          | [ ] Aligned 📖 | bce433256f |
 | `tr_list_of_known_issues_secure_hardware_extensions`   | [ ] Pending | N/A |
-| `exp_system_health_monitoring`                         | [ ] Pending | N/A |
+| `exp_system_health_monitoring`                         | [x] Done | 4320445302 |
 | `tr_predefined_names`                                  | [ ] Pending | N/A |
 | `exp_time_sensitive_network_features`                  | [ ] Pending | N/A |
 | `exp_security_overview`                                | [ ] Pending | N/A |
@@ -146,7 +146,7 @@ Status: **0/20** completed
 | `tps_log_and_trace_extract`                            | [ ] Pending | N/A |
 | `exp_safety_overview`                                  | [ ] Pending | N/A |
 | `tps_arxml_serialization_rules`                        | [ ] Pending | N/A |
-| `asws_health_monitoring`                               | [ ] Pending | N/A |
+| `asws_health_monitoring`                               | [x] Done | e956feb4ea |
 | `tps_abstract_platform_specification`                  | [ ] Pending | N/A |
 | `tps_xml_schema_production_rules`                      | [ ] Pending | N/A |
 | `tr_secure_hardware_extensions`                        | [ ] Pending | N/A |
@@ -233,13 +233,13 @@ Status: **7/7** completed
 
 ## Group libraries — libraries section (new section)
 
-Status: **0/9** completed
+Status: **3/9** completed
 
 | Article | Status | Commit ID |
 | ------ | -------- | ---------- |
-| `crc`   | [ ] Pending | N/A |
-| `e2e`   | [ ] Pending | N/A |
-| `bfx`   | [ ] Pending | N/A |
+| `crc`   | [x] Done | 209cfc516e |
+| `e2e`   | [x] Done | cd14a65a1f |
+| `bfx`   | [x] Done | b11a2267b0 |
 | `bmc`   | [ ] Pending | N/A |
 | `mfl`   | [ ] Pending | N/A |
 | `mfx`   | [ ] Pending | N/A |
@@ -259,7 +259,7 @@ Status: **3/3** completed
 
 ## Group memory — memory section
 
-Status: **5/12** completed
+Status: **12/12** completed
 
 | Article                        | Status | Commit ID |
 | ------------------------------- | -------- | ---------- |
@@ -268,13 +268,13 @@ Status: **5/12** completed
 | `bulk_nv_data_manager`           | [x] Done | 05b2b4d283 |
 | `flash_driver`                   | [x] Done | 05b2b4d283 |
 | `nvram_manager`                  | [x] Done | 0358128113 |
-| `flash_eeprom_emulation`         | [ ] Aligned ⚠️ | 05b2b4d283 |
-| `ea`                             | [ ] Pending | N/A |
-| `eep`                            | [ ] Pending | N/A |
-| `memory_abstraction_interface`   | [ ] Pending | N/A |
-| `memory_driver`                  | [ ] Pending | N/A |
-| `flstst`                         | [ ] Pending | N/A |
-| `ramtst`                         | [ ] Pending | N/A |
+| `flash_eeprom_emulation`         | [x] Done | 05b2b4d283 |
+| `ea`                             | [x] Done | b19e4a8438 |
+| `eep`                            | [x] Done | 75b9fcfe56 |
+| `memory_abstraction_interface`   | [x] Done | df003cd278 |
+| `memory_driver`                  | [x] Done | 04145b57b0 |
+| `flstst`                         | [x] Done | 1040e9ecb1 |
+| `ramtst`                         | [x] Done | 95babf9d9d |
 
 ## Group mode_management — mode management section
 
@@ -327,5 +327,5 @@ Status: **5/7** completed
 | `hwtestmanager`                 | [ ] Pending | N/A |
 | `operating_system`              | [x] Done | ca7ecda991 |
 
-**Total: 102/197 queue rows complete.**
+**Total: 123/197 queue rows complete.**
 

@@ -36,6 +36,24 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](cp/communication/flexray_driver/index.md)（SWS_FlexRayDriver）
 {: .glossary-source}
 
+**Abstract Platform**
+> 抽象平台（**Abstract Platform**，**XP**）。平台无关的功能设计层，独立于 AUTOSAR 自适应平台（AP）与经典平台（CP）；描述组件、端口、接口与连接器，不涉及部署与实现细节。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
+{: .glossary-source}
+
+**Abstract Platform System Description**
+> 抽象平台系统描述（**Abstract Platform System Description**，**ASD**）。承载抽象平台设计工件的系统描述，其 `System.category` 为 `ABSTRACT_PLATFORM_SYSTEM_DESCRIPTION`。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
+{: .glossary-source}
+
+**Abstract Software Component**
+> 抽象软件组件（**Abstract Software Component**，**XSC**）。抽象平台中不绑定具体用例的软件组件，通常以 `CompositionSwComponentType` 建模。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
+{: .glossary-source}
+
 **AC**
 > J1939 **AddressClaimed PG**（**PGN** = 0x0EE00）；当 **SA** = 0xFE 时为 **CannotClaimAddress**。
 >
@@ -282,10 +300,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
 {: .glossary-source}
 
+**Application Data Type**
+> 应用数据类型（**Application Data Type**）。从应用视角定义的数据类型，描述物理含义（如测量单位）而不涉及位宽、字节序等实现细节；抽象平台只允许应用数据层的数据类型。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
+{: .glossary-source}
+
 **Application ID**
 > 一个应用/**SW-C** 的缩写，标识一条日志和跟踪消息所来自的应用/**SW-C**；由四个 8 位 ASCII 字符组成。
 >
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+{: .glossary-source}
+
+**Application Interface**
+> 应用接口（**Application Interface**）。抽象平台中的端口接口类型，元素包括命令（`command`）、指示（`indication`）与属性（`attribute`），与中间件部署无关。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
 {: .glossary-source}
 
 **Application Layer**
@@ -970,6 +1000,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Communication Manager（通信管理器）](cp/system_services/comm/index.md)（SWS_COMManager）
 {: .glossary-source}
 
+**Composition**
+> 组合（**Composition**）。以类型-原型模式嵌套组织软件组件的结构；在抽象平台中用于按任意深度递归地定义组件层次。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
+{: .glossary-source}
+
 **Concurrent TesterPresent**
 > 设置 suppressPosRspMsgIndicationBit（3E 80）并通过功能寻址接收的 **UDS** 服务 **TesterPresent**；也称为保活（keep-alive）逻辑。
 >
@@ -1318,6 +1354,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 默认错误跟踪器仅用于支持软件开发和集成，不包含在生产代码中。其API是定义了的，但功能可以由开发人员根据其特定需求进行选择和实现。
 >
 > 来源：[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**Deferred Data Type**
+> 推迟数据类型（**Deferred Data Type**）。抽象平台独有的占位数据类型 `ApplicationDeferredDataType`，不承载具体类型类别，用于把精确类型化推迟到下游设计阶段。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
 {: .glossary-source}
 
 **DEM**
@@ -2407,6 +2449,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
+**Green-fields**
+> 绿地设计（**Green-fields**）。在所关注系统中从零开始的全新设计方法，与受既有架构约束的增量设计相对。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
+{: .glossary-source}
+
 **Group signal**
 > 组信号（**Group signal**）是包含在信号组中的信号。
 >
@@ -3317,6 +3365,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 用于表征消息自身所传输信息的 ID；唯一地标识一种日志或跟踪消息，并在开发或配置时静态固定。
 >
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+{: .glossary-source}
+
+**Meta-class**
+> 元类（**Meta-class**）。AUTOSAR 元模型（M2 层）中定义模型元素结构与语义的类，例如 `System`、`CompositionSwComponentType`。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
+{: .glossary-source}
+
+**Meta-model**
+> 元模型（**Meta-model**）。定义建模语言本身的模型层（M2）；抽象平台复用 AUTOSAR 元模型，通过平台特定限制约束其工件。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
 {: .glossary-source}
 
 **MetaData**
@@ -4417,6 +4477,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
 {: .glossary-source}
 
+**Port Group**
+> 端口组（**Port Group**）。把离散端口分组的建模元素；抽象平台允许把离散端口分配给零个或多个端口组。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
+{: .glossary-source}
+
 **Port-Interface**
 > 端口接口。定义提供或要求该接口的端口必须履行的契约；AUTOSAR 支持客户端-服务器、发送者-接收者、参数、非易失性数据、触发与模式切换六种端口接口。
 >
@@ -4603,6 +4669,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 服务器发给客户端、传输方法调用结果的消息。
 >
 > 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](cp/communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
+{: .glossary-source}
+
+**REST Services Interface**
+> REST 服务接口（**REST Services Interface**，**RSI**）。以 REST 风格提供的服务接口。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
 {: .glossary-source}
 
 **retransmit counter**
@@ -5459,6 +5531,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
 
+**System Description**
+> 系统描述（**System Description**）。以 `System` 为顶层元素描述系统内容的设计工件；抽象平台、经典平台与自适应平台各自使用 `category` 区分的系统描述。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
+{: .glossary-source}
+
 **System Health Monitor (SHM)**
 > **系统健康监控器**组件允许在若干 **Classic**、**Adaptive** 或任意第三方平台之间对错误处理进行系统级协调。
 >
@@ -5469,6 +5547,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 一种管理功能（一个在 ComM 内部上下文中生成的特定「用户」），用于发起默认请求以及覆盖用户请求（**An administration functionality for making a default request and for overriding the user requests**）。
 >
 > 来源：[AUTOSAR Communication Manager（通信管理器）](cp/system_services/comm/index.md)（SWS_COMManager）
+{: .glossary-source}
+
+**Systems Modelling Language**
+> 系统建模语言（**Systems Modelling Language**，**SYSML**）。面向系统工程的通用建模语言。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
 {: .glossary-source}
 
 ## T
@@ -5773,6 +5857,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
 {: .glossary-source}
 
+**Type-prototype**
+> 类型-原型模式（**Type-prototype**）。以类型定义、再以原型实例化并聚合到组合中的软件组件建模模式，抽象平台与经典平台一致采用。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
+{: .glossary-source}
+
 ## U
 
 **UART**
@@ -5951,6 +6041,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[VFB（虚拟功能总线）](cp/general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）
 {: .glossary-source}
 
+**VFB++**
+> 抽象平台 VFB（**Abstract Platform VFB**，**VFB++**）。抽象平台的功能视图，描述组件、端口、接口、连接器的交互，与信号式或服务式架构无关。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
+{: .glossary-source}
+
 **VFC**
 > 虚拟功能集群（**Virtual Function Cluster**）。把实现一个或多个车辆功能所需的 SW 组件之间端口层面的通信分组；逻辑视图，允许可复用的、独立于总线/ECU 的设计。在部分组网（Partial Networking）中，VFC 映射到一个或多个部分网络集群（PNC）。
 >
@@ -6015,6 +6111,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 车辆车载诊断（**Vehicle On-Board-Diagnostic**）
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**Volkswagen Infotainment Web Interface**
+> 大众信息娱乐 Web 接口（**Volkswagen Infotainment Web Interface**，**VIWI**）。大众汽车的信息娱乐 Web 接口。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
 {: .glossary-source}
 
 **vPOC**
