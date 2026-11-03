@@ -202,6 +202,7 @@ title: "CP AUTOSAR"
   * [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](libraries/e2e/index.md)
   * [Specification of Bit Handling Routines（位处理例程规范）](libraries/bfx/index.md)
   * [Specification of Basic Software Multicore Library（基础软件多核库规范）](libraries/bmc/index.md)
+  * [Specification of Floating Point Math Routines（浮点数学例程规范）](libraries/mfl/index.md)
 
 ### 模板
 

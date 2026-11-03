@@ -63,10 +63,20 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] mfl (SWS_MFLLibrary · R23-11 markdown · ❌ new article, short name Mfl)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-04 batch run — committed without the per-article Step 5 gate (batch-end joint confirmation), same as the crc/e2e/bfx rows.
+  - Note: source ch.6 Requirements Tracing + appendix A Not-applicable-requirements dropped per mandate; ch.9 "Not applicable" omitted per the placeholder rule (ch.10 → §8); source 8.6 Examples of use "None" omitted per the placeholder rule (8.7–8.10 renumbered to §7.6–§7.9); source 8.10 intro "None" likewise omitted (subsections keep one-sentence statements per the batch decision).
+  - Note: source ch.8 title "Routine specification" → mandated `## 7. API规范` (STANDARD §1 skeleton); source ch.7 functional spec → §6 (6.2 错误检测 / 6.3 错误通知 are MFL-specific extra sections).
+  - Note: source 8.2 has no numbered type headings — the 2 enums (Mfl_Mod_St_Type / MfL_Div_st) and 12 controller/ramp/debounce structures render as bold-term blocks, so check_api_sync is positional trivial-OK; manual verification: 97 function entries (说明 blocks) in source order incl. all u/s groups, deprecated duplicates (arcSin/arcCos/arcTan/arcTan2/CtrlSetLimit/RampCalcSwitch_f32/DebounceSetparam + their replacements).
+  - Note: 6 formula-not-decoded spots reconstructed from the R22-11 PDF (controller general equation Yn=a1*Yn-1+b0*Xn+…, PCalc *P_pf32=K_f32*X_f32, CalcTeQ TeQ_f32=exp(-T1rec_f32*dT_f32), DT1Typ2/PD X1-init tails, ArcTan2 |Z|<1 branch); the "K : Amplification factor … given in" sentence is truncated in the R22-11 PDF itself (source-side defect) — rendered as 「其语义的描述见下文」.
+  - Note: figure triage by hash recurrence + pixel size: only Figure1-1.png (829×414 layered architecture) is content; all other images ≤347px page chrome.
+  - Note: Mfl_POut_f32 output equation, RampSwitch garbled if/else interleave (00219/00370-00371), MedianSort truncated table description, RampCalcSwitch continuation rows (Xb_f32/Switch without row label) reconstructed/reordered per the R22-11 PDF; Mfl_DeadTimeParam_Type element names (dsintStatic/*lszStatic/*dtbufBegStatic/*dtbufEndStatic) are source-garbled, kept verbatim; Mfl_Mod_f32 source table has an empty Available-via cell — 可通过 sentence omitted (no invention).
+  - Note: check_heading_lang flags L2501 「7.5.18.3. Mfl」 — that heading is the source's own identifier title ([SWS_Mfl_00839] Definition of API function Mfl), a checker false positive by design (identifier-titled headings exempt; the script cannot recognize a bare module name).
+  - Note: link census — 4 identifier-mention lines applied (Mfl_CalcTeQ_f32/Mfl_RampCalc cross-references in §7.5.4 intros), idempotent; [10] in §6.6's C99-equivalents note is UNRESOLVED (registry defines [1]–[2] only) — left prose; https://www.iso.org (§3.1 [1]) is anti-bot 403 (known batch precedent, browser-verified).
+  - Note: appendix B History of Specification Items → ## B. as GFM tables (bfx precedent); B.1.2 merged from the page-split 3 chunks into one 表B.2; [SWS_Mfl_00045]/[SWS_Mfl_00305] empty Heading cells and 表B.3's empty row kept as-is.
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] mfx (SWS_MFXLibrary · R23-11 markdown · ❌ new article, short name Mfx)

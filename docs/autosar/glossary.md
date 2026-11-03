@@ -3319,6 +3319,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](cp/communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）
 {: .glossary-source}
 
+**MFL**
+> 浮点数学库（**Mathematical Floating point Library**），**AUTOSAR** 库中提供浮点算术例程的模块简称 Mfl。
+>
+> 来源：[Specification of Floating Point Math Routines（浮点数学例程规范）](cp/libraries/mfl/index.md)（AUTOSAR_CP_SWS_MFLLibrary）
+{: .glossary-source}
+
 **MISRA**
 > 汽车工业软件可靠性协会（**Motor Industry Software Reliability Association**）。
 >

@@ -429,6 +429,7 @@ nav:
         - "E2E": autosar/cp/libraries/e2e/index.md
         - "Bfx": autosar/cp/libraries/bfx/index.md
         - "Bmc": autosar/cp/libraries/bmc/index.md
+        - "Mfl": autosar/cp/libraries/mfl/index.md
       - 模板:
         - autosar/cp/template/index.md
         - "1. 一段话总结": autosar/cp/template/generic_structure/index.md
