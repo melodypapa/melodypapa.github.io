@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **773** 个条目。
+共 **777** 个条目。
 
 ## A
 
@@ -563,6 +563,18 @@ title: "AUTOSAR API 类型清单"
 
 **[CnV2xNet_TxParamsType](../communication/chinesev2x_net/index.md#721-cnv2xnet_txparamstype)**
 > 类型 · [AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork · R23-11
+
+**[CnV2xSec_ConfigType](../communication/chinesev2x_sec/index.md#721-cnv2xsec_configtype)**
+> 类型 · [AUTOSAR Chinese V2X Security（中国V2X安全）](../communication/chinesev2x_sec/index.md) · SWS_ChineseV2XSecurity · R23-11
+
+**[CnV2xSec_SecProfileType](../communication/chinesev2x_sec/index.md#722-cnv2xsec_secprofiletype)**
+> 类型 · [AUTOSAR Chinese V2X Security（中国V2X安全）](../communication/chinesev2x_sec/index.md) · SWS_ChineseV2XSecurity · R23-11
+
+**[CnV2xSec_SecReportType](../communication/chinesev2x_sec/index.md#723-cnv2xsec_secreporttype)**
+> 类型 · [AUTOSAR Chinese V2X Security（中国V2X安全）](../communication/chinesev2x_sec/index.md) · SWS_ChineseV2XSecurity · R23-11
+
+**[CnV2xSec_SecReturnType](../communication/chinesev2x_sec/index.md#724-cnv2xsec_secreturntype)**
+> 类型 · [AUTOSAR Chinese V2X Security（中国V2X安全）](../communication/chinesev2x_sec/index.md) · SWS_ChineseV2XSecurity · R23-11
 
 **[Com_ConfigType](../communication/com/index.md#725-com_configtype)**
 > 类型 · [AUTOSAR COM（COM模块）](../communication/com/index.md) · SWS_COM · R23-11

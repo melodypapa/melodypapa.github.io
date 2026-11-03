@@ -70,6 +70,7 @@ title: "CP AUTOSAR"
   * [AUTOSAR Chinese V2X Management（中国V2X管理）](communication/chinesev2x_mgmt/index.md)
   * [AUTOSAR Chinese V2X Message（中国V2X消息）](communication/chinesev2x_msg/index.md)
   * [AUTOSAR Chinese V2X Network（中国V2X网络）](communication/chinesev2x_net/index.md)
+  * [AUTOSAR Chinese V2X Security（中国V2X安全）](communication/chinesev2x_sec/index.md)
 
 ### 全局时间（Global Time）
 

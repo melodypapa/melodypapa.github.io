@@ -392,6 +392,18 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**CnV2xNet_TxConfirmation**](../communication/chinesev2x_net/index.md#742-cnv2xnet_txconfirmation) | 确认以太网帧的发送。 |
 | [**CnV2xNetMainFunction**](../communication/chinesev2x_net/index.md#751-cnv2xnetmainfunction) | CnV2xNet 模块的主函数，用于周期性执行协议操作。 |
 
+## AUTOSAR Chinese V2X Security（中国V2X安全）（5）
+
+来源：[AUTOSAR Chinese V2X Security（中国V2X安全）](../communication/chinesev2x_sec/index.md) · SWS_ChineseV2XSecurity
+
+| 函数 | 简述 |
+|---|---|
+| [**CnV2xSec_GetVersionInfo**](../communication/chinesev2x_sec/index.md#732-cnv2xsec_getversioninfo) | 返回本模块的版本信息。 |
+| [**CnV2xSec_Init**](../communication/chinesev2x_sec/index.md#731-cnv2xsec_init) | 初始化 CnV2xSec 模块。 |
+| [**CnV2xSec_MainFunction**](../communication/chinesev2x_sec/index.md#751-cnv2xsec_mainfunction) | CnV2xSec 的调度主函数。 |
+| [**CnV2xSec_ReqDecap**](../communication/chinesev2x_sec/index.md#734-cnv2xsec_reqdecap) | CnV2xMsg 调用本函数以解封装 SPDU。 |
+| [**CnV2xSec_ReqEncap**](../communication/chinesev2x_sec/index.md#733-cnv2xsec_reqencap) | CnV2xMsg 调用本函数以生成 SPDU，其中包含 V2X 消息、签名和假名。 |
+
 ## AUTOSAR COM Based Transformer（3）
 
 来源：[AUTOSAR COM Based Transformer](../communication/com_based_transformer/index.md) · SWS_COMBasedTransformer

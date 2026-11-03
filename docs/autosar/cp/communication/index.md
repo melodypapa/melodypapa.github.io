@@ -86,6 +86,7 @@ title: "通信（Communication）"
 * [AUTOSAR Chinese V2X Management（中国V2X管理）](chinesev2x_mgmt/index.md)
 * [AUTOSAR Chinese V2X Message（中国V2X消息）](chinesev2x_msg/index.md)
 * [AUTOSAR Chinese V2X Network（中国V2X网络）](chinesev2x_net/index.md)
+* [AUTOSAR Chinese V2X Security（中国V2X安全）](chinesev2x_sec/index.md)
 
 ## 相关内容
 

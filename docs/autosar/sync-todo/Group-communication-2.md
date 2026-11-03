@@ -339,13 +339,17 @@ All ❌ new articles; most are low-frequency buses (FlexRay/J1939/V2X), so the o
   - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 + B ↔ §1–§9 + B 1:1; ch.6 tracing + appendix A + content-less Known Limitations dropped; 3 figures embedded)
   - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
 - [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-5)
-- [ ] chinesev2x_sec (SWS_ChineseV2XSecurity · R23-11 markdown · ❌ new article)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-- [ ] Step 6 — TODO.md row + commit/PR
+- [x] chinesev2x_sec (SWS_ChineseV2XSecurity · R23-11 markdown · ❌ new article)
+  - Note: article `cp/communication/chinesev2x_sec/` (directory per row name, nav label "CnV2xSec", V2X group). Shape: Known Limitations "None." → omitted per the 2026-10-28 placeholder rule (REPORTED) · ch.1 → §1 (Figure1_1) · ch.2 → §2 22 acronyms · 3.1 7-entry registry (refs [1] catarc / [2][3] ccsa curl 200) + 3.2 · ch.4 → §4 (4.1 限制, 4.2 AUTOSAR R22-11 中的已知限制 — real subsection kept, 4.3) · ch.5 → §5 intro + 5.1–5.5 (5.4 heading translated AUTOSAR 加密服务模块（Csm）) · ch.6 dropped · ch.7 → §6 (6.1 启动行为, 6.2 安全功能规格 + 6.2.1 封装与解封装 + 6.2.2 假名管理 incl. the 300 s/2.1 km/vehicleEventFlags update condition, 6.3 错误分类 dev 表 4 rows + none-sentences) · ch.8 → §7 (7.1 6 imported rows — 3 unlabeled continuation rows normalized; 7.2 4 types incl. 20-literal SecReportType page-split table reassembled; 7.3 4 functions (ReqEncap syntax ")" completed at page split); 7.4.1 CSM 回调接口 02021; 7.5.1 MainFunction; 7.6.1 强制 6 rows + 7.6.2 可选 1 row) · ch.9 → §8 时序图 (8.1 封装 Figure9_2, 8.2 解封装 Figure9_4 — source skips figure numbers 9.1/9.3 (no such captions); 8.3 更新假名 pointer to [6] EcuM) · ch.10 → §9 (9.1.1 变体, 9.1.2 CnV2xSec, 9.1.3 CnV2xSecGeneral 6 params; SWS 条目 cells filled [ECUC_CnV2xSec_*]) · ch.6 tracing + appendix A ("No content") dropped · ## B (B.1.1 无; B.1.2 7 changed ids as fence; B.1.3 无)
+  - Note: source quirks kept verbatim and reported: [00005]/[00006] cite "chapter 6.4 of [12]/[13]" and [00009] cites "[14]" while the 3.1 registry has only [1]–[7] (UNRESOLVED citations, census confirms — kept prose, never linked); [00007] cites "[15]" likewise; figure numbering skips 9.1 and 9.3 (9.1 Encapsulation carries "Figure 9.2", 9.2 Decapsulation carries "Figure 9.4" — article section headings use the section titles, figure files Figure9_2/Figure9_4); typos "siginaure"/"chang"/"Certifate"/"aximum" translated past; ReqEncap/ReqDecap return-value cells carry "Cn V2XSEC_E_OK" spacing artifact normalized to CNV2XSEC_E_OK
+  - Note: Phase A — strict build exit 0 / 0 WARNING / no cnv2xsec notices; check_heading_lang OK (after 5.4 heading translation); check_indexes OK; hygiene 0 h1/`\<`/{DRAFT}/bracketed-SWS-ids; acronym 21 term lines = source 21 rows (wait: source has 21 data rows — AID…VDP; verified line-by-line), 0 tables; check_api_sync OK (0 types counted by script at 8.2, manual verification 4 types in order / 4 functions / 4 说明); gen_api_list regenerated (CnV2xSec 4 types + 4 functions SITE-linked, --check 0); census --apply: 22 lines (2 chapter-refs + 13 citation links), idempotent re-run 0 lines; citations [2][3] resolve to registry entries [12]/[13]/[14]/[15] UNRESOLVED
+  - Note: glossary +2 new terms (AID, SPDU) + 20 来源 appends (BS, BSM, C-V2X, CCSA, CnV2xMsg, CnV2xM, CnV2xNet, CnV2xSec, DE, DF, EcuM, NTCAS, PH, POTI, RSI, RSM, RSU, SPAT, VDP — CnV2xM was added by the cellularv2x run as CV2x? NO — CnV2xM added by this run; verified)
+  - [x] Step 1 — Source resolution + gap analysis (906-line R23-11 markdown; 3 content figures via caption-anchored mapper — Figure 9.1/9.3 have no captions in the source, 9.2/9.4 mapped)
+  - [x] Step 2 — In-place translation/completion (full Type A build, main session)
+  - [x] Step 3 — Phase A mechanical checks (evidence above)
+  - [x] Step 4 — Phase B coverage map + fidelity (ch.1–5/7/8/9/10 + B ↔ §1–§9 + B 1:1; ch.6 tracing + appendix A + "None." Known Limitations dropped; 3 figures embedded; [02018] SM2/SM3 requirement kept in source order between the SecReport checks)
+  - [x] Step 5 — User confirmation gate (N/A per user instruction — commit first, batched confirmation at the end of the batch)
+- [x] Step 6 — TODO.md row + commit/PR (branch feature/group-communication-2-sync-5)
 - [ ] v2x_basictp (SWS_V2XBasicTransport · R23-11 markdown · ❌ new article)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
