@@ -36,6 +36,24 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](cp/communication/flexray_driver/index.md)（SWS_FlexRayDriver）
 {: .glossary-source}
 
+**Abstract Platform**
+> 抽象平台（**Abstract Platform**，**XP**）。平台无关的功能设计层，独立于 AUTOSAR 自适应平台（AP）与经典平台（CP）；描述组件、端口、接口与连接器，不涉及部署与实现细节。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
+{: .glossary-source}
+
+**Abstract Platform System Description**
+> 抽象平台系统描述（**Abstract Platform System Description**，**ASD**）。承载抽象平台设计工件的系统描述，其 `System.category` 为 `ABSTRACT_PLATFORM_SYSTEM_DESCRIPTION`。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
+{: .glossary-source}
+
+**Abstract Software Component**
+> 抽象软件组件（**Abstract Software Component**，**XSC**）。抽象平台中不绑定具体用例的软件组件，通常以 `CompositionSwComponentType` 建模。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
+{: .glossary-source}
+
 **AC**
 > J1939 **AddressClaimed PG**（**PGN** = 0x0EE00）；当 **SA** = 0xFE 时为 **CannotClaimAddress**。
 >
@@ -237,13 +255,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Alive Indication**
 > 由**被监督实体**的**检查点**提供的指示，用于向**WdgM** 标识其存活状态。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
 **Alive Supervision**
 > 一种监督，用于检查**被监督实体**的执行是否足够频繁且不过于频繁（包括容差）。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
 **ALU**
@@ -282,10 +300,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
 {: .glossary-source}
 
+**Application Data Type**
+> 应用数据类型（**Application Data Type**）。从应用视角定义的数据类型，描述物理含义（如测量单位）而不涉及位宽、字节序等实现细节；抽象平台只允许应用数据层的数据类型。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
+{: .glossary-source}
+
 **Application ID**
 > 一个应用/**SW-C** 的缩写，标识一条日志和跟踪消息所来自的应用/**SW-C**；由四个 8 位 ASCII 字符组成。
 >
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+{: .glossary-source}
+
+**Application Interface**
+> 应用接口（**Application Interface**）。抽象平台中的端口接口类型，元素包括命令（`command`）、指示（`indication`）与属性（`attribute`），与中间件部署无关。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
 {: .glossary-source}
 
 **Application Layer**
@@ -865,7 +895,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Checkpoint**
 > **被监督实体**控制流中的一个点，在该处向**WdgM** 报告活动。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
 **CHI**
@@ -974,6 +1004,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 决定允许何种通信的模式：完全通信 = COMM_FULL_COMMUNICATION；无通信 = COMM_NO_COMMUNICATION；静默通信 = COMM_SILENT_COMMUNICATION（**Mode determining which kind of communication are allowed**）。用户不能请求 COMM_SILENT_COMMUNICATION——它是关机时用于同步网络的内部模式。
 >
 > 来源：[AUTOSAR Communication Manager（通信管理器）](cp/system_services/comm/index.md)（SWS_COMManager）
+{: .glossary-source}
+
+**Composition**
+> 组合（**Composition**）。以类型-原型模式嵌套组织软件组件的结构；在抽象平台中用于按任意深度递归地定义组件层次。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
 {: .glossary-source}
 
 **Concurrent TesterPresent**
@@ -1305,7 +1341,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Deadline Supervision**
 > 一种监督，用于检查两个**检查点**之间的执行时间是否小于给定的执行时间上限。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
 **Debounce counter**
@@ -1324,6 +1360,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 默认错误跟踪器仅用于支持软件开发和集成，不包含在生产代码中。其API是定义了的，但功能可以由开发人员根据其特定需求进行选择和实现。
 >
 > 来源：[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**Deferred Data Type**
+> 推迟数据类型（**Deferred Data Type**）。抽象平台独有的占位数据类型 `ApplicationDeferredDataType`，不承载具体类型类别，用于把精确类型化推迟到下游设计阶段。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
 {: .glossary-source}
 
 **DEM**
@@ -1730,6 +1772,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）
 {: .glossary-source}
 
+**Elementary Supervision Status**
+> 表示**存活监督**、**时限监督**或**逻辑监督**当前状态的状态，基于对该监督的评估（正确/错误）。
+>
+> 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+{: .glossary-source}
+
 **Endpoint Option**
 > 端点选项（**Endpoint Options**）用于通告一个单播地址和端口的元组。
 >
@@ -2075,6 +2123,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR FiM（功能禁止管理器）](cp/system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）
 {: .glossary-source}
 
+**Final Checkpoint**
+> **图**的结束**检查点**。每个**图**可以有零个或多个**最终检查点**。
+>
+> 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+{: .glossary-source}
+
 **Find**
 > 用于查找一个服务实例的消息条目。
 >
@@ -2344,7 +2398,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Global Supervision Status**
 > 汇总所有**被监督实体****局部监督状态**的状态。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
 **Global Time**
@@ -2404,7 +2458,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Graph**
 > 控制流图（**Control Flow Graph**）。一组通过**转换**相连的**检查点**，其中至少有一个**检查点**是**初始检查点**。在该**图**的任意两个**检查点**之间都存在一条（通过**转换**的）路径。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+{: .glossary-source}
+
+**Green-fields**
+> 绿地设计（**Green-fields**）。在所关注系统中从零开始的全新设计方法，与受既有架构约束的增量设计相对。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
 {: .glossary-source}
 
 **Group signal**
@@ -2472,19 +2532,49 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Health Channel**
 > 提供有关（子）系统健康状态信息的通道。它可能是应用的**全局监督状态**、任一测试例程的结果，或（子）系统报告的状态（例如电压监控、**OS** 内核、**ECU** 状态）。
 >
-> 来源：[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）
+> 来源：[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+{: .glossary-source}
+
+**Health Channel Supervision**
+> 检查被监督软件所登记的健康指标是否在容差/限值内的一类监督。
+>
+> 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
 **Health Indicator (HI)**
 > **健康指标**提供针对安全要求的当前系统性能的评估度量。
 >
-> 来源：[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）
+> 来源：[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+{: .glossary-source}
+
+**Health Indicator Interface**
+> 使用标准化服务字段来通信**健康指标**的接口。
+>
+> 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+{: .glossary-source}
+
+**Health Monitoring**
+> 对软件行为的正确时序与顺序进行的监督。
+>
+> 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
 **Health of Service (HoS)**
 > 把服务提供方的**健康指标**作为质量参数绑定到所提供的数据上，使接收方在无需了解其背后架构的情况下决定如何使用该服务。
 >
 > 来源：[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）
+{: .glossary-source}
+
+**Health Status**
+> 与被监督软件相关的一组状态（例如电压状态、应用状态、**RAM** 监控算法的结果）。
+>
+> 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+{: .glossary-source}
+
+**Health Status Supervision**
+> 检查被监督软件所登记的健康指标是否在容差/限值内。
+>
+> 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
 **HHC**
@@ -2703,6 +2793,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 初始值（**Init Value**）。AUTOSAR COM模块在启动后将I-PDU和信号设置为初始值。在被覆盖之前一直使用该值。
 >
 > 来源：[AUTOSAR COM（COM模块）](cp/communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**Initial Checkpoint**
+> **图**的起始**检查点**。每个**图**可以有一个或多个**初始检查点**。
+>
+> 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
 **Inner Priority Inversion**
@@ -3053,6 +3149,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](cp/communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR PduR (PDU Router)](cp/communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
 {: .glossary-source}
 
+**Local Health Monitor**
+> 收集其所在平台的健康信息的组件。
+>
+> 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+{: .glossary-source}
+
 **Local Instance of the Global Time**
 > 在从全局时间主节点接收到两个时间值采样之间，借助虚拟本地时间或受控硬件时钟对时间当前值的本地外推。
 >
@@ -3062,7 +3164,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Local Supervision Status**
 > 表示单个**被监督实体**当前存活监督结果的状态。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
 **Log and trace level**
@@ -3092,7 +3194,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Logical Supervision**
 > 一种对软件的在线监督，用于检查软件（**被监督实体**或一组**被监督实体**）是否按程序员（即已开发的代码）定义的顺序执行。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
 **&lt;LoTp&gt;**
@@ -3143,6 +3245,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 报文认证码（**Message Authentication Code**）。
 >
 > 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](cp/globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR SecOC (Secure Onboard Communication)](cp/communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
+{: .glossary-source}
+
+**Machine**
+> MCU、虚拟机或分区；本身未被标准化，参见 AUTOSAR 术语表。
+>
+> 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
 **Macrotick**
@@ -3269,6 +3377,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 用于表征消息自身所传输信息的 ID；唯一地标识一种日志或跟踪消息，并在开发或配置时静态固定。
 >
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+{: .glossary-source}
+
+**Meta-class**
+> 元类（**Meta-class**）。AUTOSAR 元模型（M2 层）中定义模型元素结构与语义的类，例如 `System`、`CompositionSwComponentType`。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
+{: .glossary-source}
+
+**Meta-model**
+> 元模型（**Meta-model**）。定义建模语言本身的模型层（M2）；抽象平台复用 AUTOSAR 元模型，通过平台特定限制约束其工件。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
 {: .glossary-source}
 
 **MetaData**
@@ -4207,6 +4327,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR PduR (PDU Router)](cp/communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
 {: .glossary-source}
 
+**Performance**
+> 针对故障行为对性能进行评级。
+>
+> 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+{: .glossary-source}
+
 **periodic transmission rate**
 > 周期数据标识符传输的两次调用之间的时间间隔；快速、中速和慢速周期传输分别配置速率，且配置值始终是 **Dcm** 主任务时间的整数倍。
 >
@@ -4270,7 +4396,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Platform Health Management (PHM)**
 > 平台健康管理（**Platform Health Management**）。
 >
-> 来源：[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）
+> 来源：[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
 **PLCA**
@@ -4373,6 +4499,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > Port module (SPAL module)
 >
 > 来源：[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
+{: .glossary-source}
+
+**Port Group**
+> 端口组（**Port Group**）。把离散端口分组的建模元素；抽象平台允许把离散端口分配给零个或多个端口组。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
 {: .glossary-source}
 
 **Port-Interface**
@@ -4533,6 +4665,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR LinIf (LIN Interface)](cp/communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
 {: .glossary-source}
 
+**Reliability**
+> 评估由于不确定性而对系统的可信程度。
+>
+> 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+{: .glossary-source}
+
 **Request**
 > 客户端发给服务器、调用某个方法的消息。
 >
@@ -4555,6 +4693,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 服务器发给客户端、传输方法调用结果的消息。
 >
 > 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](cp/communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
+{: .glossary-source}
+
+**REST Services Interface**
+> REST 服务接口（**REST Services Interface**，**RSI**）。以 REST 风格提供的服务接口。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
 {: .glossary-source}
 
 **retransmit counter**
@@ -4820,7 +4964,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SE**
 > 被监督实体（**Supervised Entity**）
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
 **SecOC**（**Secure Onboard Communication**）
@@ -5087,6 +5231,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
 {: .glossary-source}
 
+**SOTIF**
+> 预期功能安全（**Safety Of The Intended Functionality**）。
+>
+> 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+{: .glossary-source}
+
 **SP**
 > 传感器池（**Sensor Pool**）
 >
@@ -5282,7 +5432,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Supervised Entity**
 > 被纳入**WdgM** 监督的软件实体。每个**被监督实体**恰好具有一个标识符。**被监督实体**表示软件组件类型或基础软件模块某个实例内的一组**检查点**。在一个软件组件类型或基础软件模块的实例中，可以有零个、一个或多个**被监督实体**。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
 **Supervised Entity Identifier**
@@ -5301,6 +5451,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > **WdgM****监督参考周期**的时基，在其中执行周期性的**存活监督**。它同时也是更新**全局监督状态**以及执行由此产生的恢复动作的间隔。这在所属 **WdgM** 的主函数每次被调用时完成，并且依赖于模式（在切换模式时可能变化）。
 >
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）
+{: .glossary-source}
+
+**Supervision Mode**
+> 微控制器或虚拟机的整体状态，或（在 **Adaptive Platform** 情况下）功能组的状态。各模式互斥；模式例如可以是 Startup、Shutdown、Low power。
+>
+> 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
 **Supervision Reference Cycle**
@@ -5399,16 +5555,28 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
 
+**System Description**
+> 系统描述（**System Description**）。以 `System` 为顶层元素描述系统内容的设计工件；抽象平台、经典平台与自适应平台各自使用 `category` 区分的系统描述。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
+{: .glossary-source}
+
 **System Health Monitor (SHM)**
 > **系统健康监控器**组件允许在若干 **Classic**、**Adaptive** 或任意第三方平台之间对错误处理进行系统级协调。
 >
-> 来源：[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）
+> 来源：[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
 **System User**
 > 一种管理功能（一个在 ComM 内部上下文中生成的特定「用户」），用于发起默认请求以及覆盖用户请求（**An administration functionality for making a default request and for overriding the user requests**）。
 >
 > 来源：[AUTOSAR Communication Manager（通信管理器）](cp/system_services/comm/index.md)（SWS_COMManager）
+{: .glossary-source}
+
+**Systems Modelling Language**
+> 系统建模语言（**Systems Modelling Language**，**SYSML**）。面向系统工程的通用建模语言。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
 {: .glossary-source}
 
 ## T
@@ -5713,6 +5881,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
 {: .glossary-source}
 
+**Type-prototype**
+> 类型-原型模式（**Type-prototype**）。以类型定义、再以原型实例化并聚合到组合中的软件组件建模模式，抽象平台与经典平台一致采用。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
+{: .glossary-source}
+
 ## U
 
 **UART**
@@ -5891,6 +6065,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[VFB（虚拟功能总线）](cp/general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）
 {: .glossary-source}
 
+**VFB++**
+> 抽象平台 VFB（**Abstract Platform VFB**，**VFB++**）。抽象平台的功能视图，描述组件、端口、接口、连接器的交互，与信号式或服务式架构无关。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
+{: .glossary-source}
+
 **VFC**
 > 虚拟功能集群（**Virtual Function Cluster**）。把实现一个或多个车辆功能所需的 SW 组件之间端口层面的通信分组；逻辑视图，允许可复用的、独立于总线/ECU 的设计。在部分组网（Partial Networking）中，VFC 映射到一个或多个部分网络集群（PNC）。
 >
@@ -5955,6 +6135,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 车辆车载诊断（**Vehicle On-Board-Diagnostic**）
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**Volkswagen Infotainment Web Interface**
+> 大众信息娱乐 Web 接口（**Volkswagen Infotainment Web Interface**，**VIWI**）。大众汽车的信息娱乐 Web 接口。
+>
+> 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
 {: .glossary-source}
 
 **vPOC**

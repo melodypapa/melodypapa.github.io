@@ -131,7 +131,7 @@ Status: **21/21** completed
 
 ## Group foundation exp — Foundation R23-11 guide/template/report documents (20)
 
-Status: **1/20** completed
+Status: **3/20** completed
 
 | Article                                              | Status | Commit ID |
 | ----------------------------------------------------- | -------- | ---------- |
@@ -146,8 +146,8 @@ Status: **1/20** completed
 | `tps_log_and_trace_extract`                            | [ ] Pending | N/A |
 | `exp_safety_overview`                                  | [ ] Pending | N/A |
 | `tps_arxml_serialization_rules`                        | [ ] Pending | N/A |
-| `asws_health_monitoring`                               | [ ] Pending | N/A |
-| `tps_abstract_platform_specification`                  | [ ] Pending | N/A |
+| `asws_health_monitoring`                               | [x] Done | e956feb4ea |
+| `tps_abstract_platform_specification`                  | [x] Done | 510c6d7fdf |
 | `tps_xml_schema_production_rules`                      | [ ] Pending | N/A |
 | `tr_secure_hardware_extensions`                        | [ ] Pending | N/A |
 | `tps_security_extract_template`                        | [ ] Pending | N/A |
@@ -240,12 +240,12 @@ Status: **3/9** completed
 | `crc`   | [x] Done | 209cfc516e |
 | `e2e`   | [x] Done | cd14a65a1f |
 | `bfx`   | [x] Done | b11a2267b0 |
-| `bmc`   | [ ] Aligned | 18f9ee615e |
-| `mfl`   | [ ] Aligned | f47a7eedbd |
-| `mfx`   | [ ] Aligned | 71821da882 |
-| `ifl`   | [ ] Aligned | da855e37e2 |
-| `ifx`   | [ ] Aligned | 1089ec8205 |
-| `efx`   | [ ] Aligned | bed2f8cc85 |
+| `bmc`   | [ ] Pending | N/A |
+| `mfl`   | [ ] Pending | N/A |
+| `mfx`   | [ ] Pending | N/A |
+| `ifl`   | [ ] Pending | N/A |
+| `ifx`   | [ ] Pending | N/A |
+| `efx`   | [ ] Pending | N/A |
 
 ## Group mcal — MCAL section (new section)
 
@@ -327,5 +327,5 @@ Status: **5/7** completed
 | `hwtestmanager`                 | [ ] Pending | N/A |
 | `operating_system`              | [x] Done | ca7ecda991 |
 
-**Total: 122/197 queue rows complete.**
+**Total: 124/197 queue rows complete.**
 

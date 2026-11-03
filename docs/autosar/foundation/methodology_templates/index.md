@@ -6,7 +6,9 @@ title: "方法论与模板（Methodology and Templates）"
 
 ## 文章
 
-本类别尚无已翻译文章。R23-11 包含以下源文档（待翻译）：
+* [Specification of Abstract Platform（抽象平台规范）](tps_abstract_platform_specification/index.md)
+
+R23-11 中本类别的其余源文档（待翻译）：
 
 * **AUTOSAR_FO_RS_FeatureModelExchangeFormat** — Requirements on Feature Model Exchange Format（特征模型交换格式需求）
 * **AUTOSAR_FO_RS_Methodology** — Requirements on Methodology（方法论需求）
@@ -14,7 +16,6 @@ title: "方法论与模板（Methodology and Templates）"
 * **AUTOSAR_FO_RS_StandardizationTemplate** — Requirements on Standardization Template（标准化模板需求）
 * **AUTOSAR_FO_RS_TimingExtensions** — Requirements on Timing Extensions（时序扩展需求）
 * **AUTOSAR_FO_TPS_ARXMLSerializationRules** — ARXML Serialization Rules（ARXML 序列化规则）
-* **AUTOSAR_FO_TPS_AbstractPlatformSpecification** — Abstract Platform Specification（抽象平台规范）
 * **AUTOSAR_FO_TPS_FeatureModelExchangeFormat** — Feature Model Exchange Format（特征模型交换格式）
 * **AUTOSAR_FO_TPS_GenericStructureTemplate** — Generic Structure Template（通用结构模板）
 * **AUTOSAR_FO_TPS_LogAndTraceExtract** — Log and Trace Extract Template（日志与跟踪提取模板）

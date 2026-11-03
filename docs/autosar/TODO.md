@@ -4,7 +4,7 @@
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
 > Layout (2026-11-02): CP articles live under `cp/<section>/`, Foundation under `foundation/<topic>/`; article links below are relative to `docs/autosar/`.
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-03 (Foundation health_monitoring: EXP System Health Monitoring new-article translation; libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-04 (Foundation methodology_templates: Abstract Platform Specification (TPS) new-article translation; 2026-11-03: Foundation health_monitoring: ASWS Health Monitoring new-article translation (EXP System Health Monitoring earlier the same day); libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
 
 ## Backlog
 
@@ -130,7 +130,7 @@
 - 🔶 [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md) — SWS_EthernetSwitchDriver (R23-11 full translation 2026-10-30)
 - 🔶 [AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md) — SWS_ServiceDiscovery (R23-11 full translation 2026-10-30)
 - 📖 [FvM 专题](cp/communication/fvm/fvm.md) — topic derived from SecOC appendix A (no standalone spec)
-- 📖 [Full-CAN vs Basic-CAN](cp/communication/can_driver/full_can_vs_basic_can.md) — topic subpage
+- 📖 [Full-CAN vs Basic-CAN](cp/others/full_can_vs_basic_can/) — topic subpage (moved to `cp/others/` 2026-11-04)
 - 📖 [CanNm R21-11 历史版](cp/communication/can_network_management/r21_11/index_r21_11.md) — historical snapshot
 
 - ✅ [AUTOSAR COM（COM模块）](cp/communication/com/index.md) — SWS_COM (R23-11 full translation 2026-10-30)
@@ -246,7 +246,7 @@
 ## methodology_templates / template
 
 - 📄 [BSW 模块描述模板](cp/methodology_templates/basic_software_module_description_template/) — TPS_BSWModuleDescriptionTemplate (exempt)
-- 📖 [时序扩展示例](cp/template/timimg_extension/indx.md), [通用结构示例](cp/template/generic_structure/) — template examples (not synced)
+- 📖 时序扩展示例（`cp/template/timimg_extension/`）、通用结构示例（`cp/template/generic_structure/`）— template examples (deleted 2026-11-04)
 
 ## foundation
 
@@ -278,7 +278,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 ### foundation/health_monitoring (Health Monitoring)
 
-- ❌ Abstract Specification of Health Monitoring（健康监控抽象规范） — AUTOSAR_FO_ASWS_HealthMonitoring (`foundation/health_monitoring/`)
+- ✅ Specification of Health Monitoring（健康监控规范） — AUTOSAR_FO_ASWS_HealthMonitoring (`foundation/health_monitoring/asws_health_monitoring/`)
 - ✅ Explanation of System Health Monitoring（系统健康监控说明） — AUTOSAR_FO_EXP_SystemHealthMonitoring (`foundation/health_monitoring/exp_system_health_monitoring/`)
 - ❌ Requirements on Health Monitoring（健康监控需求） — AUTOSAR_FO_RS_HealthMonitoring (`foundation/health_monitoring/`)
 
@@ -290,7 +290,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ❌ Requirements on Standardization Template（标准化模板需求） — AUTOSAR_FO_RS_StandardizationTemplate (`foundation/methodology_templates/`)
 - ❌ Requirements on Timing Extensions（时序扩展需求） — AUTOSAR_FO_RS_TimingExtensions (`foundation/methodology_templates/`)
 - ❌ ARXML Serialization Rules（ARXML 序列化规则） — AUTOSAR_FO_TPS_ARXMLSerializationRules (`foundation/methodology_templates/`)
-- ❌ Abstract Platform Specification（抽象平台规范） — AUTOSAR_FO_TPS_AbstractPlatformSpecification (`foundation/methodology_templates/`)
+- ✅ Abstract Platform Specification（抽象平台规范） — AUTOSAR_FO_TPS_AbstractPlatformSpecification (`foundation/methodology_templates/tps_abstract_platform_specification/`)
 - ❌ Feature Model Exchange Format（特征模型交换格式） — AUTOSAR_FO_TPS_FeatureModelExchangeFormat (`foundation/methodology_templates/`)
 - ❌ Generic Structure Template（通用结构模板） — AUTOSAR_FO_TPS_GenericStructureTemplate (`foundation/methodology_templates/`)
 - ❌ Log and Trace Extract Template（日志与跟踪提取模板） — AUTOSAR_FO_TPS_LogAndTraceExtract (`foundation/methodology_templates/`)
