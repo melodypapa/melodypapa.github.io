@@ -4,7 +4,7 @@
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
 > Layout (2026-11-02): CP articles live under `cp/<section>/`, Foundation under `foundation/<topic>/`; article links below are relative to `docs/autosar/`.
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-03 (libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-03 (Foundation health_monitoring: EXP System Health Monitoring new-article translation; libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
 
 ## Backlog
 
@@ -272,7 +272,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 ### foundation/health_monitoring (Health Monitoring)
 
 - ❌ Abstract Specification of Health Monitoring（健康监控抽象规范） — AUTOSAR_FO_ASWS_HealthMonitoring (`foundation/health_monitoring/`)
-- ❌ Explanation of System Health Monitoring（系统健康监控说明） — AUTOSAR_FO_EXP_SystemHealthMonitoring (`foundation/health_monitoring/`)
+- ✅ Explanation of System Health Monitoring（系统健康监控说明） — AUTOSAR_FO_EXP_SystemHealthMonitoring (`foundation/health_monitoring/exp_system_health_monitoring/`)
 - ❌ Requirements on Health Monitoring（健康监控需求） — AUTOSAR_FO_RS_HealthMonitoring (`foundation/health_monitoring/`)
 
 ### foundation/methodology_templates (Methodology and Templates)

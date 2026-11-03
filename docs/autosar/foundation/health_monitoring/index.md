@@ -6,10 +6,11 @@ title: "健康监控（Health Monitoring）"
 
 ## 文章
 
-本类别尚无已翻译文章。R23-11 包含以下源文档（待翻译）：
+* [Explanation of System Health Monitoring（系统健康监控说明）](exp_system_health_monitoring/index.md)
+
+R23-11 中本类别的其余源文档（待翻译）：
 
 * **AUTOSAR_FO_ASWS_HealthMonitoring** — Abstract Specification of Health Monitoring（健康监控抽象规范）
-* **AUTOSAR_FO_EXP_SystemHealthMonitoring** — Explanation of System Health Monitoring（系统健康监控说明）
 * **AUTOSAR_FO_RS_HealthMonitoring** — Requirements on Health Monitoring（健康监控需求）
 
 ## 相关内容
