@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **662** 个条目。
+共 **665** 个条目。
 
 ## A
 
@@ -93,6 +93,15 @@ title: "AUTOSAR API 类型清单"
 > 类型 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
 ## B
+
+**[Bmc_AtomicFlagType](../libraries/bmc/index.md#723-bmc_atomicflagtype)**
+> 类型 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_AtomicSType](../libraries/bmc/index.md#722-bmc_atomicstype)**
+> 类型 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_AtomicUType](../libraries/bmc/index.md#721-bmc_atomicutype)**
+> 类型 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
 
 **[BndM_BlockIdType](../memory/bulk_nv_data_manager/index.md#722-bndm_blockidtype)**
 > 类型 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11

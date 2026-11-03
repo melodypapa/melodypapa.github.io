@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2274** 个条目。
+共 **2305** 个条目。
 
 ## A
 
@@ -165,6 +165,99 @@ title: "AUTOSAR API 函数清单"
 
 **[Bfx_TstParityEven](../libraries/bfx/index.md#7410-bfx_tstparityeven)**
 > 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bmc_CompareExchange](../libraries/bmc/index.md#7424-bmc_compareexchange)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_CompareExchange_s](../libraries/bmc/index.md#74242-bmc_compareexchange_s)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_CompareExchange_u](../libraries/bmc/index.md#74241-bmc_compareexchange_u)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_Exchange](../libraries/bmc/index.md#7423-bmc_exchange)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_Exchange_s](../libraries/bmc/index.md#74232-bmc_exchange_s)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_Exchange_u](../libraries/bmc/index.md#74231-bmc_exchange_u)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchAdd](../libraries/bmc/index.md#7431-bmc_fetchadd)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchAdd_s](../libraries/bmc/index.md#74312-bmc_fetchadd_s)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchAdd_u](../libraries/bmc/index.md#74311-bmc_fetchadd_u)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchAnd](../libraries/bmc/index.md#7435-bmc_fetchand)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchAnd_s](../libraries/bmc/index.md#74352-bmc_fetchand_s)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchAnd_u](../libraries/bmc/index.md#74351-bmc_fetchand_u)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchOr](../libraries/bmc/index.md#7433-bmc_fetchor)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchOr_s](../libraries/bmc/index.md#74332-bmc_fetchor_s)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchOr_u](../libraries/bmc/index.md#74331-bmc_fetchor_u)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchSub](../libraries/bmc/index.md#7432-bmc_fetchsub)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchSub_s](../libraries/bmc/index.md#74322-bmc_fetchsub_s)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchSub_u](../libraries/bmc/index.md#74321-bmc_fetchsub_u)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchXor](../libraries/bmc/index.md#7434-bmc_fetchxor)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchXor_s](../libraries/bmc/index.md#74342-bmc_fetchxor_s)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchXor_u](../libraries/bmc/index.md#74341-bmc_fetchxor_u)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FlagClear](../libraries/bmc/index.md#7412-bmc_flagclear)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FlagTestAndSet](../libraries/bmc/index.md#7411-bmc_flagtestandset)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_GetVersionInfo](../libraries/bmc/index.md#7451-bmc_getversioninfo)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_Load](../libraries/bmc/index.md#7421-bmc_load)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_Load_s](../libraries/bmc/index.md#74212-bmc_load_s)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_Load_u](../libraries/bmc/index.md#74211-bmc_load_u)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_Store](../libraries/bmc/index.md#7422-bmc_store)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_Store_s](../libraries/bmc/index.md#74222-bmc_store_s)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_Store_u](../libraries/bmc/index.md#74221-bmc_store_u)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_ThreadFence](../libraries/bmc/index.md#7441-bmc_threadfence)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
 
 **[BndM_GetBlockPtr](../memory/bulk_nv_data_manager/index.md#733-bndm_getblockptr)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11

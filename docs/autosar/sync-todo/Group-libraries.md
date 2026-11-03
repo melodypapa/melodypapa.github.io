@@ -50,10 +50,16 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 5 — User confirmation gate (confirmed 2026-11-03, batch-end joint confirmation covering all batch decisions incl. the "None." API-group rendering and the annex A/B numbered-continuation handling)
   - [x] Step 6 — TODO.md row + commit/PR (commit b11a226; PR #250 "Part of #249")
 - [ ] bmc (SWS_BSWMulticoreLibrary · R23-11 markdown · ❌ new article, short name Bmc)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-04 batch run — committed without the per-article Step 5 gate (batch-end joint confirmation), same as the crc/e2e/bfx rows.
+  - Note: source ch.9 Sequence diagrams "Not applicable" omitted per the placeholder rule; ch.10 配置规范 renumbered to §8; annex A (History of Constraints and Specification Items) → ## B. with ID fences (crc batch precedent); source appendix B Not applicable requirements dropped per mandate.
+  - Note: source 8.4's function groups carry per-group headings (Bmc_Load etc.) with u/s variant definition tables inside — article renders grouped headings (§7.4.2.1. Bmc_Load) with numbered variant children (7.4.2.1.1. Bmc_Load_u); 22 function entries verified manually in source order; check_api_sync passes trivially (3 types; 0/0 functions — the script is positional, functions live under source 8.4.x).
+  - Note: type Range cells ("- – <platform-specific lock-free mapping requirement>") are source content, not merged-cell artifacts — verified against the bundled R22-11 PDF. CompareExchange's Expected parameter description "Value to be stored" and FetchAnd's "Parameters (in) None + two inout rows" are the standard's own table quirks (R22-11 PDF-confirmed) — kept faithful.
+  - Note: link census — 23 identifier mentions applied (idempotent), 0 chapter refs, census UNRESOLVED items are §5 option list numbers (2.1/2.2), not chapter refs; cppreference URL is anti-bot (curl/WebFetch 403) — verified live via alternate reader (page + Sequentially-consistent ordering section present), link kept.
+  - Note: cross-article census: Det → NO-ARTICLE is a MODULE_LINKS gap (site article default_error_tracer exists) — known Backlog item.
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] mfl (SWS_MFLLibrary · R23-11 markdown · ❌ new article, short name Mfl)

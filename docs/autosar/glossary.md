@@ -500,6 +500,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](cp/globaltime/eth_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverEthernet）
 {: .glossary-source}
 
+**Bmc**
+> 基础软件多核库（**Basic Software Multicore Library**）
+>
+> 来源：[Specification of Basic Software Multicore Library（基础软件多核库规范）](cp/libraries/bmc/index.md)（AUTOSAR_CP_SWS_BSWMulticoreLibrary）
+{: .glossary-source}
+
 **BndM**
 > 大容量非易失性数据管理器（**Bulk Non-Volatile Data Manager**）
 >

@@ -2455,6 +2455,44 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**SoAd_TxConfirmation**](../communication/soad/index.md#743-soad_txconfirmation) | C |
 | [**SoAd_WriteDhcpHostNameOption**](../communication/soad/index.md#73419-soad_writedhcphostnameoption) | C |
 
+## Specification of Basic Software Multicore Library（基础软件多核库规范）（31）
+
+来源：[Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary
+
+| 函数 | 简述 |
+|---|---|
+| [**Bmc_CompareExchange**](../libraries/bmc/index.md#7424-bmc_compareexchange) | — |
+| [**Bmc_CompareExchange_s**](../libraries/bmc/index.md#74242-bmc_compareexchange_s) | 该函数原子地将 Object 所指向的值与 Expected 中的值进行相等比较，若相等，则用 Desired 替换 Object 所指向的值；若不相等，则用 Object 所指向的值更新 Expected 中的值。 |
+| [**Bmc_CompareExchange_u**](../libraries/bmc/index.md#74241-bmc_compareexchange_u) | 该函数原子地将 Object 所指向的值与 Expected 中的值进行相等比较，若相等，则用 Desired 替换 Object 所指向的值；若不相等，则用 Object 所指向的值更新 Expected 中的值。 |
+| [**Bmc_Exchange**](../libraries/bmc/index.md#7423-bmc_exchange) | — |
+| [**Bmc_Exchange_s**](../libraries/bmc/index.md#74232-bmc_exchange_s) | 该函数原子地用 Desired 的值替换 Object 所指向的值，并返回操作生效前 Object 所指向的值。 |
+| [**Bmc_Exchange_u**](../libraries/bmc/index.md#74231-bmc_exchange_u) | 该函数原子地用 Desired 的值替换 Object 所指向的值，并返回操作生效前 Object 所指向的值。 |
+| [**Bmc_FetchAdd**](../libraries/bmc/index.md#7431-bmc_fetchadd) | — |
+| [**Bmc_FetchAdd_s**](../libraries/bmc/index.md#74312-bmc_fetchadd_s) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用加法所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FetchAdd_u**](../libraries/bmc/index.md#74311-bmc_fetchadd_u) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用加法所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FetchAnd**](../libraries/bmc/index.md#7435-bmc_fetchand) | — |
+| [**Bmc_FetchAnd_s**](../libraries/bmc/index.md#74352-bmc_fetchand_s) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用与运算所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FetchAnd_u**](../libraries/bmc/index.md#74351-bmc_fetchand_u) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用与运算所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FetchOr**](../libraries/bmc/index.md#7433-bmc_fetchor) | — |
+| [**Bmc_FetchOr_s**](../libraries/bmc/index.md#74332-bmc_fetchor_s) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用或运算所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FetchOr_u**](../libraries/bmc/index.md#74331-bmc_fetchor_u) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用或运算所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FetchSub**](../libraries/bmc/index.md#7432-bmc_fetchsub) | — |
+| [**Bmc_FetchSub_s**](../libraries/bmc/index.md#74322-bmc_fetchsub_s) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用减法所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FetchSub_u**](../libraries/bmc/index.md#74321-bmc_fetchsub_u) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用减法所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FetchXor**](../libraries/bmc/index.md#7434-bmc_fetchxor) | — |
+| [**Bmc_FetchXor_s**](../libraries/bmc/index.md#74342-bmc_fetchxor_s) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用异或运算所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FetchXor_u**](../libraries/bmc/index.md#74341-bmc_fetchxor_u) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用异或运算所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FlagClear**](../libraries/bmc/index.md#7412-bmc_flagclear) | 该函数原子地将 Object 所指向的值设置为 false。 |
+| [**Bmc_FlagTestAndSet**](../libraries/bmc/index.md#7411-bmc_flagtestandset) | 该函数原子地将 Object 所指向的值设置为 true。 |
+| [**Bmc_GetVersionInfo**](../libraries/bmc/index.md#7451-bmc_getversioninfo) | 该函数返回本库的版本信息。 |
+| [**Bmc_Load**](../libraries/bmc/index.md#7421-bmc_load) | — |
+| [**Bmc_Load_s**](../libraries/bmc/index.md#74212-bmc_load_s) | 该函数原子地加载 Object 所指向的值并将其返回。 |
+| [**Bmc_Load_u**](../libraries/bmc/index.md#74211-bmc_load_u) | 该函数原子地加载 Object 所指向的值并将其返回。 |
+| [**Bmc_Store**](../libraries/bmc/index.md#7422-bmc_store) | — |
+| [**Bmc_Store_s**](../libraries/bmc/index.md#74222-bmc_store_s) | 该函数原子地用 Desired 的值替换 Object 所指向的值。 |
+| [**Bmc_Store_u**](../libraries/bmc/index.md#74221-bmc_store_u) | 该函数原子地用 Desired 的值替换 Object 所指向的值。 |
+| [**Bmc_ThreadFence**](../libraries/bmc/index.md#7441-bmc_threadfence) | 该函数创建一个顺序一致的获取（acquire）与释放（release）栅栏。 |
+
 ## Specification of Bit Handling Routines（位处理例程规范）（25）
 
 来源：[Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary

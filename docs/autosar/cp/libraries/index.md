@@ -10,6 +10,7 @@ AUTOSAR 库是一组为相关目的而提供的函数集合（如 CRC 计算、E
 - [Specification of CRC Routines（CRC 例程规范）](crc/index.md)
 - [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](e2e/index.md)
 - [Specification of Bit Handling Routines（位处理例程规范）](bfx/index.md)
+- [Specification of Basic Software Multicore Library（基础软件多核库规范）](bmc/index.md)
 
 ## 相关内容
 
