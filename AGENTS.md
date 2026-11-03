@@ -51,4 +51,4 @@ Pre-existing INFO-level anchor notices in build output are known and do not fail
 ## Known gotchas
 
 - The Jekyll-era stale `.gitignore` patterns (`_site`, `.sass-cache`, `.jekyll-cache`, `.jekyll-metadata`, `vendor`, `nxp/saf`, `eb_tresos/*`, `reference`) were removed on 2026-11-02 along with the `_site/` build, `.bundle/config`, and the default Jekyll welcome post — the repo is now mkdocs-only.
-- `docs/autosar/cp/template/timimg_extension/indx.md` — directory and filename typos that are load-bearing: `mkdocs.yml` nav references `indx.md` explicitly. Fixing the name requires a nav change in the same commit.
+- `docs/autosar/cp/template/` holds only its landing page since 2026-11-04 (the `generic_structure` and `timimg_extension` pages were removed); `cp/others/` hosts topic articles outside a module section, currently the Full-CAN vs Basic-CAN comparison.

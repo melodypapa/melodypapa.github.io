@@ -301,5 +301,5 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 
 ## Not queued (deliberately skipped)
 - 📄 methodology_templates/basic_software_mode_manager template — TPS_BSWModuleDescriptionTemplate (existing article, exempt)
-- 📖 template/ (generic_structure, timimg_extension) — template examples (not synced)
+- 📖 template/ — template example pages removed 2026-11-04 (landing only)
 - 📖 power/ — bespoke topic article (no standalone specification)

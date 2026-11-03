@@ -196,7 +196,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 - [ ] tr_timing_analysis (AUTOSAR_FO_TR_TimingAnalysis · SystemServices · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Timing Analysis（时序分析）; target `foundation/system_services/tr_timing_analysis/`; technical report (TR) — prose; no specification items
   - Note: source `SystemServices/AUTOSAR_FO_TR_TimingAnalysis.md` — 5,676 lines, 330 figure refs, no item IDs; **giant source** — segment plan before Step 2 (OS/RTE precedent)
-  - Note: related site content: cp/template/timimg_extension (cross-link candidates, report-only until the run decides)
+  - Note: related site content: cp/template/timimg_extension (deleted 2026-11-04) (cross-link candidates, report-only until the run decides)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
@@ -216,7 +216,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 - [ ] tps_generic_structure_template (AUTOSAR_FO_TPS_GenericStructureTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Generic Structure Template（通用结构模板）; target `foundation/methodology_templates/tps_generic_structure_template/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_TPS_GenericStructureTemplate.md` — 15,110 lines, 663 figure refs, 578 item IDs; **giant source** — segment plan before Step 2 (OS/RTE precedent)
-  - Note: related site content: cp/template/generic_structure (one-paragraph summary page, not a translation — this row is the full FO document) (cross-link candidates, report-only until the run decides)
+  - Note: related site content: cp/template/generic_structure (one-paragraph summary page, deleted 2026-11-04 — this row is the full FO document) (cross-link candidates, report-only until the run decides)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks

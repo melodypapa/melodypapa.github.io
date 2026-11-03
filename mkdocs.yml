@@ -61,7 +61,8 @@ plugins:
         autosar/application_interfaces/occupant_safety/index.md: autosar/cp/application_interfaces/occupant_safety/index.md
         autosar/application_interfaces/powertrain/index.md: autosar/cp/application_interfaces/powertrain/index.md
         autosar/application_interfaces/user_guide/index.md: autosar/cp/application_interfaces/user_guide/index.md
-        autosar/communication/can_driver/full_can_vs_basic_can.md: autosar/cp/communication/can_driver/full_can_vs_basic_can.md
+        autosar/communication/can_driver/full_can_vs_basic_can.md: autosar/cp/others/full_can_vs_basic_can/index.md
+        autosar/cp/communication/can_driver/full_can_vs_basic_can.md: autosar/cp/others/full_can_vs_basic_can/index.md
         autosar/communication/can_driver/index.md: autosar/cp/communication/can_driver/index.md
         autosar/communication/can_interface/index.md: autosar/cp/communication/can_interface/index.md
         autosar/communication/can_network_management/index.md: autosar/cp/communication/can_network_management/index.md
@@ -182,9 +183,7 @@ plugins:
         autosar/system_services/operating_system/index.md: autosar/cp/system_services/operating_system/index.md
         autosar/system_services/sw_cluster_design_and_integration/index.md: autosar/cp/system_services/sw_cluster_design_and_integration/index.md
         autosar/system_services/time_service/index.md: autosar/cp/system_services/time_service/index.md
-        autosar/template/generic_structure/index.md: autosar/cp/template/generic_structure/index.md
         autosar/template/index.md: autosar/cp/template/index.md
-        autosar/template/timimg_extension/indx.md: autosar/cp/template/timimg_extension/indx.md
 
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js
@@ -256,18 +255,17 @@ nav:
   - AUTOSAR:
     - autosar/index.md
     - "术语表": autosar/glossary.md
-    - CP（经典平台）:
+    - CP(经典平台):
       - autosar/cp/index.md
       - "API":
         - autosar/cp/api/index.md
         - "数据类型清单": autosar/cp/api/types.md
         - "函数清单": autosar/cp/api/functions.md
-        - "函数清单（按模块）": autosar/cp/api/functions_by_module.md
+        - "函数清单(按模块)": autosar/cp/api/functions_by_module.md
       - 通信:
         - autosar/cp/communication/index.md
         - "CAN Driver":
           - "Can": autosar/cp/communication/can_driver/index.md
-          - "Full-CAN 与 Basic-CAN 的区别": autosar/cp/communication/can_driver/full_can_vs_basic_can.md
         - "CanIf": autosar/cp/communication/can_interface/index.md
         - "CanNm": autosar/cp/communication/can_network_management/index.md
         - "J1939Nm": autosar/cp/communication/j1939nm/index.md
@@ -429,10 +427,9 @@ nav:
         - "Bfx": autosar/cp/libraries/bfx/index.md
       - 模板:
         - autosar/cp/template/index.md
-        - "1. 一段话总结": autosar/cp/template/generic_structure/index.md
-        - 时序扩展:
-
-          - "时序扩展规范": autosar/cp/template/timimg_extension/indx.md
+      - 其他:
+        - autosar/cp/others/index.md
+        - "Full-CAN 与 Basic-CAN 的区别": autosar/cp/others/full_can_vs_basic_can/index.md
     - Foundation（基础标准）:
       - autosar/foundation/index.md
       - 通用:

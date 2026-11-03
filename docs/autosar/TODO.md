@@ -129,7 +129,7 @@
 - 🔶 [AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md) — SWS_EthernetSwitchDriver (R23-11 full translation 2026-10-30)
 - 🔶 [AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md) — SWS_ServiceDiscovery (R23-11 full translation 2026-10-30)
 - 📖 [FvM 专题](cp/communication/fvm/fvm.md) — topic derived from SecOC appendix A (no standalone spec)
-- 📖 [Full-CAN vs Basic-CAN](cp/communication/can_driver/full_can_vs_basic_can.md) — topic subpage
+- 📖 [Full-CAN vs Basic-CAN](cp/others/full_can_vs_basic_can/) — topic subpage (moved to `cp/others/` 2026-11-04)
 - 📖 [CanNm R21-11 历史版](cp/communication/can_network_management/r21_11/index_r21_11.md) — historical snapshot
 
 - ✅ [AUTOSAR COM（COM模块）](cp/communication/com/index.md) — SWS_COM (R23-11 full translation 2026-10-30)
@@ -239,7 +239,7 @@
 ## methodology_templates / template
 
 - 📄 [BSW 模块描述模板](cp/methodology_templates/basic_software_module_description_template/) — TPS_BSWModuleDescriptionTemplate (exempt)
-- 📖 [时序扩展示例](cp/template/timimg_extension/indx.md), [通用结构示例](cp/template/generic_structure/) — template examples (not synced)
+- 📖 时序扩展示例（`cp/template/timimg_extension/`）、通用结构示例（`cp/template/generic_structure/`）— template examples (deleted 2026-11-04)
 
 ## foundation
 
