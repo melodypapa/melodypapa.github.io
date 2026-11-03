@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2308** 个条目。
+共 **2343** 个条目。
 
 ## A
 
@@ -921,6 +921,21 @@ title: "AUTOSAR API 函数清单"
 **[ClearPendingInterrupt](../system_services/operating_system/index.md#7436-clearpendinginterrupt)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
+**[CnV2xApplRxIndicationBsm](../communication/chinesev2x_msg/index.md#7712-cnv2xapplrxindicationbsm)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xApplRxIndicationMap](../communication/chinesev2x_msg/index.md#7716-cnv2xapplrxindicationmap)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xApplRxIndicationRsm](../communication/chinesev2x_msg/index.md#7714-cnv2xapplrxindicationrsm)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xApplRxIndicationSpat](../communication/chinesev2x_msg/index.md#7715-cnv2xapplrxindicationspat)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xApplRxIndicationzRsi](../communication/chinesev2x_msg/index.md#7713-cnv2xapplrxindicationzrsi)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
 **[CnV2xM_GetChanTxParams](../communication/chinesev2x_mgmt/index.md#733-cnv2xm_getchantxparams)**
 > 函数 · [AUTOSAR Chinese V2X Management（中国V2X管理）](../communication/chinesev2x_mgmt/index.md) · SWS_ChineseV2XManagement · R23-11
 
@@ -932,6 +947,96 @@ title: "AUTOSAR API 函数清单"
 
 **[CnV2xM_MainFunction](../communication/chinesev2x_mgmt/index.md#751-cnv2xm_mainfunction)**
 > 函数 · [AUTOSAR Chinese V2X Management（中国V2X管理）](../communication/chinesev2x_mgmt/index.md) · SWS_ChineseV2XManagement · R23-11
+
+**[CnV2xMsg_AbortPseudonymChange](../communication/chinesev2x_msg/index.md#738-cnv2xmsg_abortpseudonymchange)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_BsmBs_MainFunction](../communication/chinesev2x_msg/index.md#751-cnv2xmsg_bsmbs_mainfunction)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_CheckDistance](../communication/chinesev2x_msg/index.md#734-cnv2xmsg_checkdistance)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_CnV2xApplRxIndicationBSM](../communication/chinesev2x_msg/index.md#7742-cnv2xmsg_cnv2xapplrxindicationbsm)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_CnV2xApplRxIndicationMAP](../communication/chinesev2x_msg/index.md#7747-cnv2xmsg_cnv2xapplrxindicationmap)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_CnV2xApplRxIndicationRSI](../communication/chinesev2x_msg/index.md#7744-cnv2xmsg_cnv2xapplrxindicationrsi)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_CnV2xApplRxIndicationRSM](../communication/chinesev2x_msg/index.md#7745-cnv2xmsg_cnv2xapplrxindicationrsm)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_CnV2xApplRxIndicationSPAT](../communication/chinesev2x_msg/index.md#7746-cnv2xmsg_cnv2xapplrxindicationspat)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_CommitPseudonymChange](../communication/chinesev2x_msg/index.md#737-cnv2xmsg_commitpseudonymchange)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_DecapConfirmation](../communication/chinesev2x_msg/index.md#744-cnv2xmsg_decapconfirmation)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_EncapConfirmation](../communication/chinesev2x_msg/index.md#743-cnv2xmsg_encapconfirmation)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_GetRefTimePtr](../communication/chinesev2x_msg/index.md#733-cnv2xmsg_getreftimeptr)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_GetTime32](../communication/chinesev2x_msg/index.md#739-cnv2xmsg_gettime32)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_GetVehickeEventFlagsStatus](../communication/chinesev2x_msg/index.md#735-cnv2xmsg_getvehickeeventflagsstatus)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_GetVersionInfo](../communication/chinesev2x_msg/index.md#732-cnv2xmsg_getversioninfo)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_Init](../communication/chinesev2x_msg/index.md#731-cnv2xmsg_init)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_MapS_MainFunction](../communication/chinesev2x_msg/index.md#756-cnv2xmsg_maps_mainfunction)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_Mgt_MainFunction](../communication/chinesev2x_msg/index.md#752-cnv2xmsg_mgt_mainfunction)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_Poti](../communication/chinesev2x_msg/index.md#7743-cnv2xmsg_poti)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PreparePseudonymChange](../communication/chinesev2x_msg/index.md#736-cnv2xmsg_preparepseudonymchange)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_RsiS_MainFunction](../communication/chinesev2x_msg/index.md#753-cnv2xmsg_rsis_mainfunction)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_RsmS_MainFunction](../communication/chinesev2x_msg/index.md#754-cnv2xmsg_rsms_mainfunction)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_RxIndication](../communication/chinesev2x_msg/index.md#742-cnv2xmsg_rxindication)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_RxS_MainFunction](../communication/chinesev2x_msg/index.md#757-cnv2xmsg_rxs_mainfunction)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_SetPositionAndTime](../communication/chinesev2x_msg/index.md#7310-cnv2xmsg_setpositionandtime)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_SpatS_MainFunction](../communication/chinesev2x_msg/index.md#755-cnv2xmsg_spats_mainfunction)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_TxConfirmation](../communication/chinesev2x_msg/index.md#741-cnv2xmsg_txconfirmation)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_Vdp](../communication/chinesev2x_msg/index.md#7741-cnv2xmsg_vdp)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsgPoti](../communication/chinesev2x_msg/index.md#7721-cnv2xmsgpoti)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsgVdp](../communication/chinesev2x_msg/index.md#7711-cnv2xmsgvdp)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
 
 **[Com_CopyRxData](../communication/com/index.md#7347-com_copyrxdata)**
 > 函数 · [AUTOSAR COM（COM模块）](../communication/com/index.md) · SWS_COM · R23-11

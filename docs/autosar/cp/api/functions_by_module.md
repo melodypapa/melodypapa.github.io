@@ -334,6 +334,48 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**CnV2xM_Init**](../communication/chinesev2x_mgmt/index.md#731-cnv2xm_init) | 初始化 CnV2xM 模块。 |
 | [**CnV2xM_MainFunction**](../communication/chinesev2x_mgmt/index.md#751-cnv2xm_mainfunction) | CnV2xM 模块的主函数，用于周期性执行协议操作。 |
 
+## AUTOSAR Chinese V2X Message（中国V2X消息）（35）
+
+来源：[AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage
+
+| 函数 | 简述 |
+|---|---|
+| [**CnV2xApplRxIndicationBsm**](../communication/chinesev2x_msg/index.md#7712-cnv2xapplrxindicationbsm) | — |
+| [**CnV2xApplRxIndicationMap**](../communication/chinesev2x_msg/index.md#7716-cnv2xapplrxindicationmap) | — |
+| [**CnV2xApplRxIndicationRsm**](../communication/chinesev2x_msg/index.md#7714-cnv2xapplrxindicationrsm) | — |
+| [**CnV2xApplRxIndicationSpat**](../communication/chinesev2x_msg/index.md#7715-cnv2xapplrxindicationspat) | — |
+| [**CnV2xApplRxIndicationzRsi**](../communication/chinesev2x_msg/index.md#7713-cnv2xapplrxindicationzrsi) | — |
+| [**CnV2xMsg_AbortPseudonymChange**](../communication/chinesev2x_msg/index.md#738-cnv2xmsg_abortpseudonymchange) | 当并非所有模块都同意假名证书更改且该更改将被回退时，CnV2xSec 模块调用本函数。 |
+| [**CnV2xMsg_BsmBs_MainFunction**](../communication/chinesev2x_msg/index.md#751-cnv2xmsg_bsmbs_mainfunction) | 这是 BSM 基本服务的主处理函数。 |
+| [**CnV2xMsg_CheckDistance**](../communication/chinesev2x_msg/index.md#734-cnv2xmsg_checkdistance) | 检查当前地理位置点与 CnV2xSec 在海拔 0 处提交假名证书更改时的点之间的距离。 |
+| [**CnV2xMsg_CnV2xApplRxIndicationBSM**](../communication/chinesev2x_msg/index.md#7742-cnv2xmsg_cnv2xapplrxindicationbsm) | — |
+| [**CnV2xMsg_CnV2xApplRxIndicationMAP**](../communication/chinesev2x_msg/index.md#7747-cnv2xmsg_cnv2xapplrxindicationmap) | — |
+| [**CnV2xMsg_CnV2xApplRxIndicationRSI**](../communication/chinesev2x_msg/index.md#7744-cnv2xmsg_cnv2xapplrxindicationrsi) | — |
+| [**CnV2xMsg_CnV2xApplRxIndicationRSM**](../communication/chinesev2x_msg/index.md#7745-cnv2xmsg_cnv2xapplrxindicationrsm) | — |
+| [**CnV2xMsg_CnV2xApplRxIndicationSPAT**](../communication/chinesev2x_msg/index.md#7746-cnv2xmsg_cnv2xapplrxindicationspat) | — |
+| [**CnV2xMsg_CommitPseudonymChange**](../communication/chinesev2x_msg/index.md#737-cnv2xmsg_commitpseudonymchange) | 当所有模块都同意假名证书更改且该更改将被提交时，CnV2xSec 模块调用本函数。 |
+| [**CnV2xMsg_DecapConfirmation**](../communication/chinesev2x_msg/index.md#744-cnv2xmsg_decapconfirmation) | 当解封装完成时，CnV2xSec 模块调用本函数。 |
+| [**CnV2xMsg_EncapConfirmation**](../communication/chinesev2x_msg/index.md#743-cnv2xmsg_encapconfirmation) | 当封装完成时，V2xSecCN 模块调用本函数。 |
+| [**CnV2xMsg_GetRefTimePtr**](../communication/chinesev2x_msg/index.md#733-cnv2xmsg_getreftimeptr) | 提供指向中国 V2X 协议栈时间基准的指针。 |
+| [**CnV2xMsg_GetTime32**](../communication/chinesev2x_msg/index.md#739-cnv2xmsg_gettime32) | 获取当前参考时间的服务。 |
+| [**CnV2xMsg_GetVehickeEventFlagsStatus**](../communication/chinesev2x_msg/index.md#735-cnv2xmsg_getvehickeeventflagsstatus) | 提供指向当前车辆事件状态的指针。 |
+| [**CnV2xMsg_GetVersionInfo**](../communication/chinesev2x_msg/index.md#732-cnv2xmsg_getversioninfo) | 返回本模块的版本信息。 |
+| [**CnV2xMsg_Init**](../communication/chinesev2x_msg/index.md#731-cnv2xmsg_init) | 初始化 CnV2xMsg 模块。 |
+| [**CnV2xMsg_MapS_MainFunction**](../communication/chinesev2x_msg/index.md#756-cnv2xmsg_maps_mainfunction) | 这是 MAP 服务的主处理函数。 |
+| [**CnV2xMsg_Mgt_MainFunction**](../communication/chinesev2x_msg/index.md#752-cnv2xmsg_mgt_mainfunction) | CnV2xMsg 的调度管理函数。 |
+| [**CnV2xMsg_Poti**](../communication/chinesev2x_msg/index.md#7743-cnv2xmsg_poti) | — |
+| [**CnV2xMsg_PreparePseudonymChange**](../communication/chinesev2x_msg/index.md#736-cnv2xmsg_preparepseudonymchange) | 通过本 API 原语，CnV2xMsg 模块获得一个指示：给定的假名证书以及由此而来的 Msg count 和 Vehicle ID 即将被更改。 |
+| [**CnV2xMsg_RsiS_MainFunction**](../communication/chinesev2x_msg/index.md#753-cnv2xmsg_rsis_mainfunction) | 这是 RSI 服务的主处理函数。 |
+| [**CnV2xMsg_RsmS_MainFunction**](../communication/chinesev2x_msg/index.md#754-cnv2xmsg_rsms_mainfunction) | 这是 RSM 服务的主处理函数。 |
+| [**CnV2xMsg_RxIndication**](../communication/chinesev2x_msg/index.md#742-cnv2xmsg_rxindication) | 通过本 API 原语，CnV2xMsg 模块获得一个确认：具有某一 ID 的 V2X 消息已成功发送。 |
+| [**CnV2xMsg_RxS_MainFunction**](../communication/chinesev2x_msg/index.md#757-cnv2xmsg_rxs_mainfunction) | 当接收到的 V2X 消息经 V2xDm 模块发送到应用层或 PDUR 时，这是消息接收服务的主处理函数。 |
+| [**CnV2xMsg_SetPositionAndTime**](../communication/chinesev2x_msg/index.md#7310-cnv2xmsg_setpositionandtime) | 用于设置与 V2X-Stack 相关的位置和时间信息的服务。 |
+| [**CnV2xMsg_SpatS_MainFunction**](../communication/chinesev2x_msg/index.md#755-cnv2xmsg_spats_mainfunction) | 这是 SPAT 服务的主处理函数。 |
+| [**CnV2xMsg_TxConfirmation**](../communication/chinesev2x_msg/index.md#741-cnv2xmsg_txconfirmation) | 通过本 API 原语，CnV2xMsg 模块获得一个确认：具有某一 ID 的 V2X 消息已成功发送。 |
+| [**CnV2xMsg_Vdp**](../communication/chinesev2x_msg/index.md#7741-cnv2xmsg_vdp) | — |
+| [**CnV2xMsgPoti**](../communication/chinesev2x_msg/index.md#7721-cnv2xmsgpoti) | — |
+| [**CnV2xMsgVdp**](../communication/chinesev2x_msg/index.md#7711-cnv2xmsgvdp) | — |
+
 ## AUTOSAR COM Based Transformer（3）
 
 来源：[AUTOSAR COM Based Transformer](../communication/com_based_transformer/index.md) · SWS_COMBasedTransformer

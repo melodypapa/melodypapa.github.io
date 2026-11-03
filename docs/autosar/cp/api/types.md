@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **672** 个条目。
+共 **762** 个条目。
 
 ## A
 
@@ -260,6 +260,276 @@ title: "AUTOSAR API 类型清单"
 
 **[CnV2xM_ConfigType](../communication/chinesev2x_mgmt/index.md#721-cnv2xm_configtype)**
 > 类型 · [AUTOSAR Chinese V2X Management（中国V2X管理）](../communication/chinesev2x_mgmt/index.md) · SWS_ChineseV2XManagement · R23-11
+
+**[CnV2xMsg_AccelerationSet4WayPresenceType](../communication/chinesev2x_msg/index.md#773139-cnv2xmsg_accelerationset4waypresencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_AccelerationSet4WayType](../communication/chinesev2x_msg/index.md#77328-cnv2xmsg_accelerationset4waytype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_AntiLockBrakeStatusType](../communication/chinesev2x_msg/index.md#77314-cnv2xmsg_antilockbrakestatustype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_AuxiliaryBrakeStatusType](../communication/chinesev2x_msg/index.md#77317-cnv2xmsg_auxiliarybrakestatustype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_BasicVehicleClassType](../communication/chinesev2x_msg/index.md#773130-cnv2xmsg_basicvehicleclasstype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_BrakeAppliedStatusType](../communication/chinesev2x_msg/index.md#77312-cnv2xmsg_brakeappliedstatustype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_BrakeBoostAppliedType](../communication/chinesev2x_msg/index.md#77316-cnv2xmsg_brakeboostappliedtype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_BrakePedalStatusType](../communication/chinesev2x_msg/index.md#77311-cnv2xmsg_brakepedalstatustype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_BrakeSystemStatusPresenceType](../communication/chinesev2x_msg/index.md#773210-cnv2xmsg_brakesystemstatuspresencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_BrakeSystemStatusType](../communication/chinesev2x_msg/index.md#77329-cnv2xmsg_brakesystemstatustype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_BsmPresenceType](../communication/chinesev2x_msg/index.md#773241-cnv2xmsg_bsmpresencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_BsmRootType](../communication/chinesev2x_msg/index.md#773242-cnv2xmsg_bsmroottype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_BsmType](../communication/chinesev2x_msg/index.md#773240-cnv2xmsg_bsmtype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_DDateTimePresenceType](../communication/chinesev2x_msg/index.md#773216-cnv2xmsg_ddatetimepresencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_DDateTimeType](../communication/chinesev2x_msg/index.md#773215-cnv2xmsg_ddatetimetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_ElevationConfidenceType](../communication/chinesev2x_msg/index.md#773133-cnv2xmsg_elevationconfidencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_ExteriorLightsType](../communication/chinesev2x_msg/index.md#773129-cnv2xmsg_exteriorlightstype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_FuelType](../communication/chinesev2x_msg/index.md#773137-cnv2xmsg_fueltype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_FuelTypeType](../communication/chinesev2x_msg/index.md#773140-cnv2xmsg_fueltypetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_FullPositionVectorPresenceType](../communication/chinesev2x_msg/index.md#773237-cnv2xmsg_fullpositionvectorpresencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_FullPositionVectorType](../communication/chinesev2x_msg/index.md#773236-cnv2xmsg_fullpositionvectortype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_GNSSStatusType](../communication/chinesev2x_msg/index.md#773110-cnv2xmsg_gnssstatustype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_HeadingConfidenceType](../communication/chinesev2x_msg/index.md#773135-cnv2xmsg_headingconfidencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_LatitudeType](../communication/chinesev2x_msg/index.md#773118-cnv2xmsg_latitudetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_LightbarInUseType](../communication/chinesev2x_msg/index.md#773127-cnv2xmsg_lightbarinusetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_LongitudeType](../communication/chinesev2x_msg/index.md#773117-cnv2xmsg_longitudetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_MapRootType](../communication/chinesev2x_msg/index.md#773244-cnv2xmsg_maproottype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_MotionConfidenceSetPresenceType](../communication/chinesev2x_msg/index.md#77327-cnv2xmsg_motionconfidencesetpresencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_MotionConfidenceSetType](../communication/chinesev2x_msg/index.md#77326-cnv2xmsg_motionconfidencesettype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_OffsetLLB12Type](../communication/chinesev2x_msg/index.md#773111-cnv2xmsg_offsetllb12type)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_OffsetLLB14Type](../communication/chinesev2x_msg/index.md#773112-cnv2xmsg_offsetllb14type)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_OffsetLLB16Type](../communication/chinesev2x_msg/index.md#773113-cnv2xmsg_offsetllb16type)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_OffsetLLB18Type](../communication/chinesev2x_msg/index.md#773114-cnv2xmsg_offsetllb18type)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_OffsetLLB22Type](../communication/chinesev2x_msg/index.md#773115-cnv2xmsg_offsetllb22type)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_OffsetLLB24Type](../communication/chinesev2x_msg/index.md#773116-cnv2xmsg_offsetllb24type)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PathHistoryPointListType](../communication/chinesev2x_msg/index.md#773233-cnv2xmsg_pathhistorypointlisttype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PathHistoryPointPresenceType](../communication/chinesev2x_msg/index.md#773232-cnv2xmsg_pathhistorypointpresencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PathHistoryPointType](../communication/chinesev2x_msg/index.md#773231-cnv2xmsg_pathhistorypointtype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PathHistoryPresenceType](../communication/chinesev2x_msg/index.md#773235-cnv2xmsg_pathhistorypresencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PathHistoryType](../communication/chinesev2x_msg/index.md#773234-cnv2xmsg_pathhistorytype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PathPredictionType](../communication/chinesev2x_msg/index.md#773228-cnv2xmsg_pathpredictiontype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_Position3DPresenceType](../communication/chinesev2x_msg/index.md#77322-cnv2xmsg_position3dpresencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_Position3DType](../communication/chinesev2x_msg/index.md#77321-cnv2xmsg_position3dtype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PositionAccuracyType](../communication/chinesev2x_msg/index.md#77323-cnv2xmsg_positionaccuracytype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PositionAndTimeType](../communication/chinesev2x_msg/index.md#773243-cnv2xmsg_positionandtimetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PositionConfidenceSetPresenceType](../communication/chinesev2x_msg/index.md#77325-cnv2xmsg_positionconfidencesetpresencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PositionConfidenceSetType](../communication/chinesev2x_msg/index.md#77324-cnv2xmsg_positionconfidencesettype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PositionConfidenceType](../communication/chinesev2x_msg/index.md#773132-cnv2xmsg_positionconfidencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PositionOffsetLL24BType](../communication/chinesev2x_msg/index.md#773217-cnv2xmsg_positionoffsetll24btype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PositionOffsetLL28BType](../communication/chinesev2x_msg/index.md#773218-cnv2xmsg_positionoffsetll28btype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PositionOffsetLL32BType](../communication/chinesev2x_msg/index.md#773219-cnv2xmsg_positionoffsetll32btype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PositionOffsetLL36BType](../communication/chinesev2x_msg/index.md#773220-cnv2xmsg_positionoffsetll36btype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PositionOffsetLL44BType](../communication/chinesev2x_msg/index.md#773221-cnv2xmsg_positionoffsetll44btype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PositionOffsetLL48BType](../communication/chinesev2x_msg/index.md#773222-cnv2xmsg_positionoffsetll48btype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PositionOffsetLL64BType](../communication/chinesev2x_msg/index.md#773223-cnv2xmsg_positionoffsetll64btype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PositionOffsetLLType](../communication/chinesev2x_msg/index.md#773224-cnv2xmsg_positionoffsetlltype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PositionOffsetLLVPresenceType](../communication/chinesev2x_msg/index.md#773227-cnv2xmsg_positionoffsetllvpresencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PositionOffsetLLVType](../communication/chinesev2x_msg/index.md#773226-cnv2xmsg_positionoffsetllvtype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PositonConfidenceSetType](../communication/chinesev2x_msg/index.md#773245-cnv2xmsg_positonconfidencesettype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_ResponseTypeType](../communication/chinesev2x_msg/index.md#773125-cnv2xmsg_responsetypetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_RsiRootType](../communication/chinesev2x_msg/index.md#773246-cnv2xmsg_rsiroottype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_RsmRootType](../communication/chinesev2x_msg/index.md#773247-cnv2xmsg_rsmroottype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_RxParamsPresenceType](../communication/chinesev2x_msg/index.md#722-cnv2xmsg_rxparamspresencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_RxParamsType](../communication/chinesev2x_msg/index.md#721-cnv2xmsg_rxparamstype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_SecReportType](../communication/chinesev2x_msg/index.md#773138-cnv2xmsg_secreporttype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_SirenInUseType](../communication/chinesev2x_msg/index.md#773126-cnv2xmsg_sireninusetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_SpatRootType](../communication/chinesev2x_msg/index.md#773248-cnv2xmsg_spatroottype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_SpeedConfidenceType](../communication/chinesev2x_msg/index.md#773134-cnv2xmsg_speedconfidencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_StabilityControlStatusType](../communication/chinesev2x_msg/index.md#77315-cnv2xmsg_stabilitycontrolstatustype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_SteeringWheelAngleConfidenceType](../communication/chinesev2x_msg/index.md#773136-cnv2xmsg_steeringwheelangleconfidencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_TimeConfidenceType](../communication/chinesev2x_msg/index.md#77319-cnv2xmsg_timeconfidencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_TractionControlStatusType](../communication/chinesev2x_msg/index.md#77313-cnv2xmsg_tractioncontrolstatustype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_TransmissionStateType](../communication/chinesev2x_msg/index.md#77318-cnv2xmsg_transmissionstatetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_VehicleClassificationPresenceType](../communication/chinesev2x_msg/index.md#773214-cnv2xmsg_vehicleclassificationpresencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_VehicleClassificationType](../communication/chinesev2x_msg/index.md#773213-cnv2xmsg_vehicleclassificationtype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_VehicleEmergencyExtensionsPresenceType](../communication/chinesev2x_msg/index.md#773230-cnv2xmsg_vehicleemergencyextensionspresencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_VehicleEmergencyExtensionsType](../communication/chinesev2x_msg/index.md#773229-cnv2xmsg_vehicleemergencyextensionstype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_VehicleEventFlagsType](../communication/chinesev2x_msg/index.md#773128-cnv2xmsg_vehicleeventflagstype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_VehicleIDType](../communication/chinesev2x_msg/index.md#773131-cnv2xmsg_vehicleidtype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_VehicleSafetyExtensionsPresenceType](../communication/chinesev2x_msg/index.md#773239-cnv2xmsg_vehiclesafetyextensionspresencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_VehicleSafetyExtensionsType](../communication/chinesev2x_msg/index.md#773238-cnv2xmsg_vehiclesafetyextensionstype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_VehicleSizePresenceType](../communication/chinesev2x_msg/index.md#773212-cnv2xmsg_vehiclesizepresencetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_VehicleSizeType](../communication/chinesev2x_msg/index.md#773211-cnv2xmsg_vehiclesizetype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_VerOffsetB07Type](../communication/chinesev2x_msg/index.md#773119-cnv2xmsg_veroffsetb07type)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_VerOffsetB08Type](../communication/chinesev2x_msg/index.md#773120-cnv2xmsg_veroffsetb08type)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_VerOffsetB09Type](../communication/chinesev2x_msg/index.md#773121-cnv2xmsg_veroffsetb09type)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_VerOffsetB10Type](../communication/chinesev2x_msg/index.md#773122-cnv2xmsg_veroffsetb10type)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_VerOffsetB11Type](../communication/chinesev2x_msg/index.md#773123-cnv2xmsg_veroffsetb11type)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_VerOffsetB12Type](../communication/chinesev2x_msg/index.md#773124-cnv2xmsg_veroffsetb12type)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_VertcalOffsetType](../communication/chinesev2x_msg/index.md#773225-cnv2xmsg_vertcaloffsettype)**
+> 类型 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
 
 **[Com_ConfigType](../communication/com/index.md#725-com_configtype)**
 > 类型 · [AUTOSAR COM（COM模块）](../communication/com/index.md) · SWS_COM · R23-11
