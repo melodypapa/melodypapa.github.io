@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2343** 个条目。
+共 **2352** 个条目。
 
 ## A
 
@@ -1037,6 +1037,33 @@ title: "AUTOSAR API 函数清单"
 
 **[CnV2xMsgVdp](../communication/chinesev2x_msg/index.md#7711-cnv2xmsgvdp)**
 > 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xNet_AbortAppLayerIdChange](../communication/chinesev2x_net/index.md#736-cnv2xnet_abortapplayeridchange)**
+> 函数 · [AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork · R23-11
+
+**[CnV2xNet_CommitAppLayerIdChange](../communication/chinesev2x_net/index.md#735-cnv2xnet_commitapplayeridchange)**
+> 函数 · [AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork · R23-11
+
+**[CnV2xNet_GetVersionInfo](../communication/chinesev2x_net/index.md#732-cnv2xnet_getversioninfo)**
+> 函数 · [AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork · R23-11
+
+**[CnV2xNet_Init](../communication/chinesev2x_net/index.md#731-cnv2xnet_init)**
+> 函数 · [AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork · R23-11
+
+**[CnV2xNet_PrepareAppLayerIdChange](../communication/chinesev2x_net/index.md#734-cnv2xnet_prepareapplayeridchange)**
+> 函数 · [AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork · R23-11
+
+**[CnV2xNet_RxIndication](../communication/chinesev2x_net/index.md#741-cnv2xnet_rxindication)**
+> 函数 · [AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork · R23-11
+
+**[CnV2xNet_Transmit](../communication/chinesev2x_net/index.md#733-cnv2xnet_transmit)**
+> 函数 · [AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork · R23-11
+
+**[CnV2xNet_TxConfirmation](../communication/chinesev2x_net/index.md#742-cnv2xnet_txconfirmation)**
+> 函数 · [AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork · R23-11
+
+**[CnV2xNetMainFunction](../communication/chinesev2x_net/index.md#751-cnv2xnetmainfunction)**
+> 函数 · [AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork · R23-11
 
 **[Com_CopyRxData](../communication/com/index.md#7347-com_copyrxdata)**
 > 函数 · [AUTOSAR COM（COM模块）](../communication/com/index.md) · SWS_COM · R23-11

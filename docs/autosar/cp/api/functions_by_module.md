@@ -376,6 +376,22 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**CnV2xMsgPoti**](../communication/chinesev2x_msg/index.md#7721-cnv2xmsgpoti) | — |
 | [**CnV2xMsgVdp**](../communication/chinesev2x_msg/index.md#7711-cnv2xmsgvdp) | — |
 
+## AUTOSAR Chinese V2X Network（中国V2X网络）（9）
+
+来源：[AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork
+
+| 函数 | 简述 |
+|---|---|
+| [**CnV2xNet_AbortAppLayerIdChange**](../communication/chinesev2x_net/index.md#736-cnv2xnet_abortapplayeridchange) | 当并非所有模块都同意假名证书更改且该更改将被回退时，CnV2xMsg 模块调用本函数。 |
+| [**CnV2xNet_CommitAppLayerIdChange**](../communication/chinesev2x_net/index.md#735-cnv2xnet_commitapplayeridchange) | 当所有模块都同意假名证书更改且该更改将被提交时，CnV2xMsg 模块调用本函数。 |
+| [**CnV2xNet_GetVersionInfo**](../communication/chinesev2x_net/index.md#732-cnv2xnet_getversioninfo) | 返回本模块的版本信息。 |
+| [**CnV2xNet_Init**](../communication/chinesev2x_net/index.md#731-cnv2xnet_init) | 初始化 CnV2xNet 模块。 |
+| [**CnV2xNet_PrepareAppLayerIdChange**](../communication/chinesev2x_net/index.md#734-cnv2xnet_prepareapplayeridchange) | 通过本 API 原语，CnV2xNet 模块获得一个指示：应用层 Id 即将更改，因此源 Layer-2 ID 即将更改。 |
+| [**CnV2xNet_RxIndication**](../communication/chinesev2x_net/index.md#741-cnv2xnet_rxindication) | 指示以太网帧的接收。 |
+| [**CnV2xNet_Transmit**](../communication/chinesev2x_net/index.md#733-cnv2xnet_transmit) | CvxMsgCN 模块调用本 API 以请求向对端网络实体发送一个网络层 V2X PDU。 |
+| [**CnV2xNet_TxConfirmation**](../communication/chinesev2x_net/index.md#742-cnv2xnet_txconfirmation) | 确认以太网帧的发送。 |
+| [**CnV2xNetMainFunction**](../communication/chinesev2x_net/index.md#751-cnv2xnetmainfunction) | CnV2xNet 模块的主函数，用于周期性执行协议操作。 |
+
 ## AUTOSAR COM Based Transformer（3）
 
 来源：[AUTOSAR COM Based Transformer](../communication/com_based_transformer/index.md) · SWS_COMBasedTransformer
