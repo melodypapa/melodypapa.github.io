@@ -15,6 +15,7 @@ AUTOSAR 库是一组为相关目的而提供的函数集合（如 CRC 计算、E
 - [Specification of Fixed Point Math Routines（定点数学例程规范）](mfx/index.md)
 - [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](ifl/index.md)
 - [Specification of Fixed Point Interpolation Routines（定点插值例程规范）](ifx/index.md)
+- [Specification of Extended Fixed Point Routines（扩展定点例程规范）](efx/index.md)
 
 ## 相关内容
 

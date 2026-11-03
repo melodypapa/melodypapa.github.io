@@ -1694,6 +1694,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）
 {: .glossary-source}
 
+**Efx**
+> 扩展定点数学库（**Extended Mathematical library - Fixed point**）。
+>
+> 来源：[Specification of Extended Fixed Point Routines（扩展定点例程规范）](cp/libraries/efx/index.md)（AUTOSAR_CP_SWS_EFXLibrary）
+{: .glossary-source}
+
 **EcuM**
 > **ECU** 状态管理器（**ECU State Manager**）
 >

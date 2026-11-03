@@ -122,10 +122,16 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] efx (SWS_EFXLibrary · R23-11 markdown · ❌ new article, short name Efx)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-04 batch run — committed without the per-article Step 5 gate (batch-end joint confirmation), same as the crc/e2e/bfx rows.
+  - Note: source ch.6 Requirements Tracing + appendix A dropped per mandate; ch.9 "Not applicable" omitted per the placeholder rule (ch.10 → §8); source 8.6 回调通知 "None" → one-sentence §7.6; source 8.8 Expected-interfaces intro "None" omitted (subsections keep one-sentence statements); source order kept — EFX's Version API (8.9) comes AFTER Expected interfaces (8.8), so article §7.6–§7.9 = 回调通知/调度函数/期望接口/版本 API; §8 intro keeps the source's literal "&lt;MODULE_ABBREVIATION&gt;" template placeholder as entity.
+  - Note: manual API verification: 105 说明-block entries (LpFilterFac1/LpFilter/4×HpFilter, 8 controller groups with SetState/SetParam/LimCalc/Out variants + CalcTeQ/CalcTeQApp, Sqrt×3/Exp/Average/ArrayAverage/MovingAverage/Hypot×3/Trig×12 (Sin/Cos/ArcSin/ArcCos × 3 sizes; ArsSin_s16_s16 source typo kept)/SlewRate/Ramp×8/Hysteresis×5/Debounce×3/Sort×3/Edge×3/Interval×4/Counter×2/RSFlipFlop/TypeLimiter (33-row table incl. 0x0A1–0x0AE 64-bit extensions)/64-bit Abs/Add/Sub/Mul/Div/Mod/Sgn/GetVersionInfo); check_api_sync positional trivial-OK.
+  - Note: 7 formula-not-decoded spots reconstructed from the R22-11 PDF: LpFilter Yn=Yn-1+(Xn-Yn-1)*K, LpFilterFac1 Yn=Yn-1+(((Xn-Yn-1)*fac)>>n), controller general equation, X1-init (00059/00138) and Y1-init <<16 (00078/00115); the LpFilter 00015 discrete-filter formula and Figures 8.1/8.2/8.3 (transfer functions) were never extracted as images by the converter — formulas rendered as text (output = old_output*exp(-recurrence/tau_const)) and figure loss noted in TODO row.
+  - Note: figure triage: only Figure1-1 (c8707ddb layered architecture) is content; all other images ≤347px or 914×61 footer chrome.
+  - Note: gen_api_list entity-heading limitation (Backlog 2026-11-04) also applies — efx contributes 72/105 identifiers.
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 

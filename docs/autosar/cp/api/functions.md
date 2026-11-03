@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2400** 个条目。
+共 **2472** 个条目。
 
 ## A
 
@@ -2934,6 +2934,222 @@ title: "AUTOSAR API 函数清单"
 
 **[Eep_Write](../memory/eep/index.md#734-eep_write)**
 > 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Efx_ArcCos_s16_u16](../libraries/efx/index.md#751042-efx_arccos_s16_u16)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_ArcCos_s32_u32](../libraries/efx/index.md#751041-efx_arccos_s32_u32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_ArcCos_s8_u8](../libraries/efx/index.md#751043-efx_arccos_s8_u8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_ArcSin_s32_s32](../libraries/efx/index.md#751031-efx_arcsin_s32_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_ArcSin_s8_s8](../libraries/efx/index.md#751033-efx_arcsin_s8_s8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_ArsSin_s16_s16](../libraries/efx/index.md#751032-efx_arssin_s16_s16)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Average_s32_s32](../libraries/efx/index.md#7561-efx_average_s32_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_CalcTeQ_s32](../libraries/efx/index.md#75334-efx_calcteq_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_CalcTeQApp_s32](../libraries/efx/index.md#75335-efx_calcteqapp_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Cos_s16_s16](../libraries/efx/index.md#751022-efx_cos_s16_s16)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Cos_s32_s32](../libraries/efx/index.md#751021-efx_cos_s32_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Cos_s8_s8](../libraries/efx/index.md#751023-efx_cos_s8_s8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_CtrlSetLimits](../libraries/efx/index.md#75363-efx_ctrlsetlimits)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Debounce](../libraries/efx/index.md#75141-efx_debounce)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Debounce_u8_u8](../libraries/efx/index.md#751411-efx_debounce_u8_u8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_DebounceInit](../libraries/efx/index.md#75142-efx_debounceinit)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_DebounceSetparam](../libraries/efx/index.md#75143-efx_debouncesetparam)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_DT1Typ1Calc](../libraries/efx/index.md#75341-efx_dt1typ1calc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_DT1Typ1SetState](../libraries/efx/index.md#75343-efx_dt1typ1setstate)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_DT1Typ2Calc](../libraries/efx/index.md#75342-efx_dt1typ2calc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_DT1Typ2SetState](../libraries/efx/index.md#75344-efx_dt1typ2setstate)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_EdgeBipol_u8_u8](../libraries/efx/index.md#751811-efx_edgebipol_u8_u8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_EdgeFalling_u8_u8](../libraries/efx/index.md#751821-efx_edgefalling_u8_u8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_EdgeRising_u8_u8](../libraries/efx/index.md#751831-efx_edgerising_u8_u8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Exp_s32_s32](../libraries/efx/index.md#7551-efx_exp_s32_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_GetVersionInfo](../libraries/efx/index.md#791-efx_getversioninfo)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_HpFilter_s16_s32](../libraries/efx/index.md#7524-efx_hpfilter_s16_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_HpFilter_s8_s16](../libraries/efx/index.md#7522-efx_hpfilter_s8_s16)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_HpFilter_u16_s32](../libraries/efx/index.md#7523-efx_hpfilter_u16_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_HpFilter_u8_s16](../libraries/efx/index.md#7521-efx_hpfilter_u8_s16)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Hypot_u16u16_u16](../libraries/efx/index.md#7592-efx_hypot_u16u16_u16)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Hypot_u32u32_u32](../libraries/efx/index.md#7591-efx_hypot_u32u32_u32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Hypot_u8u8_u8](../libraries/efx/index.md#7593-efx_hypot_u8u8_u8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_ICalc](../libraries/efx/index.md#75361-efx_icalc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_ILimCalc](../libraries/efx/index.md#75362-efx_ilimcalc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_ISetState](../libraries/efx/index.md#75364-efx_isetstate)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PCalc](../libraries/efx/index.md#75321-efx_pcalc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PDCalc](../libraries/efx/index.md#75351-efx_pdcalc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PDSetParam](../libraries/efx/index.md#75353-efx_pdsetparam)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PDSetState](../libraries/efx/index.md#75352-efx_pdsetstate)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PIDSetParam](../libraries/efx/index.md#75386-efx_pidsetparam)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PIDSetState](../libraries/efx/index.md#75385-efx_pidsetstate)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PIDTyp1Calc](../libraries/efx/index.md#75381-efx_pidtyp1calc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PIDTyp1LimCalc](../libraries/efx/index.md#75382-efx_pidtyp1limcalc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PIDTyp2Calc](../libraries/efx/index.md#75383-efx_pidtyp2calc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PIDTyp2LimCalc](../libraries/efx/index.md#75384-efx_pidtyp2limcalc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PISetParam](../libraries/efx/index.md#75376-efx_pisetparam)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PISetState](../libraries/efx/index.md#75375-efx_pisetstate)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PITyp1Calc](../libraries/efx/index.md#75371-efx_pityp1calc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PITyp1LimCalc](../libraries/efx/index.md#75372-efx_pityp1limcalc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PITyp2Calc](../libraries/efx/index.md#75373-efx_pityp2calc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PITyp2LimCalc](../libraries/efx/index.md#75374-efx_pityp2limcalc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PSetState](../libraries/efx/index.md#75322-efx_psetstate)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PT1Calc](../libraries/efx/index.md#75331-efx_pt1calc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PT1SetState](../libraries/efx/index.md#75333-efx_pt1setstate)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PT1Typ1Calc](../libraries/efx/index.md#75332-efx_pt1typ1calc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_RampCalc](../libraries/efx/index.md#751211-efx_rampcalc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_RampCalcJump](../libraries/efx/index.md#751251-efx_rampcalcjump)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_RampCalcSwitch](../libraries/efx/index.md#751261-efx_rampcalcswitch)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_RampCheckActivity](../libraries/efx/index.md#751281-efx_rampcheckactivity)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_RampGetSwitchPos](../libraries/efx/index.md#751271-efx_rampgetswitchpos)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_RampInitState](../libraries/efx/index.md#751221-efx_rampinitstate)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_RampOut_s32](../libraries/efx/index.md#751241-efx_rampout_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_RampSetParam](../libraries/efx/index.md#751231-efx_rampsetparam)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_RSFlipFlop](../libraries/efx/index.md#75211-efx_rsflipflop)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Sgn_s64_s8](../libraries/efx/index.md#752381-efx_sgn_s64_s8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Sin_s16_s16](../libraries/efx/index.md#751012-efx_sin_s16_s16)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Sin_s32_s32](../libraries/efx/index.md#751011-efx_sin_s32_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Sin_s8_s8](../libraries/efx/index.md#751013-efx_sin_s8_s8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Sqrt_u16_u16](../libraries/efx/index.md#7542-efx_sqrt_u16_u16)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Sqrt_u32_u32](../libraries/efx/index.md#7541-efx_sqrt_u32_u32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Sqrt_u8_u8](../libraries/efx/index.md#7543-efx_sqrt_u8_u8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
 
 **[EnableCond](../diagnostics/diagnostic_event_manager/index.md#76416-enablecond)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
