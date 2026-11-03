@@ -814,6 +814,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](cp/communication/flexray_driver/index.md)（SWS_FlexRayDriver）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
 {: .glossary-source}
 
+**CCS**
+> 组合充电系统（**Combined Charging System**）。
+>
+> 来源：[AUTOSAR Charging Manager（充电管理器）](cp/communication/chargingmanager/index.md)（AUTOSAR_CP_SWS_ChargingManager）
+{: .glossary-source}
+
 **CCSA**
 > 中国通信标准化协会（**China Communications Standards Association**）。
 >
@@ -872,6 +878,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 控制器主机接口（**Controller Host Interface**）。
 >
 > 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](cp/communication/flexray_driver/index.md)（SWS_FlexRayDriver）
+{: .glossary-source}
+
+**ChrgM**
+> **Charging Manager**，充电管理器。
+>
+> 来源：[AUTOSAR Charging Manager（充电管理器）](cp/communication/chargingmanager/index.md)（AUTOSAR_CP_SWS_ChargingManager）
 {: .glossary-source}
 
 **CIT**
@@ -1718,6 +1730,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR DoIP（基于 IP 的诊断）](cp/communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）
 {: .glossary-source}
 
+**EIM**
+> 外部识别方式（**External Identification Means**）。
+>
+> 来源：[AUTOSAR Charging Manager（充电管理器）](cp/communication/chargingmanager/index.md)（AUTOSAR_CP_SWS_ChargingManager）
+{: .glossary-source}
+
 **EIRA**
 > 外部和内部请求数组（**External and Internal Request Array**）
 >
@@ -1728,6 +1746,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 电信号（**Electrical Signal**）代表**ECU**引脚上的物理信号。
 >
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）
+{: .glossary-source}
+
+**eMAID**
+> e-移动账户标识符（**e-Mobility Account Identifier**）。
+>
+> 来源：[AUTOSAR Charging Manager（充电管理器）](cp/communication/chargingmanager/index.md)（AUTOSAR_CP_SWS_ChargingManager）
 {: .glossary-source}
 
 **Endpoint Option**
@@ -1815,6 +1839,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](cp/globaltime/eth_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverEthernet）
 {: .glossary-source}
 
+**EV**
+> 电动汽车（**Electric Vehicle**）。
+>
+> 来源：[AUTOSAR Charging Manager（充电管理器）](cp/communication/chargingmanager/index.md)（AUTOSAR_CP_SWS_ChargingManager）
+{: .glossary-source}
+
+**EVCC**
+> 电动汽车通信控制器（**Electric Vehicle Communication Controller**）。
+>
+> 来源：[AUTOSAR Charging Manager（充电管理器）](cp/communication/chargingmanager/index.md)（AUTOSAR_CP_SWS_ChargingManager）
+{: .glossary-source}
+
 **Event**
 > 由实现一个服务实例的ECU发送给使用该服务实例的ECU的消息。
 >
@@ -1887,10 +1923,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
 {: .glossary-source}
 
+**EVSE**
+> 电动汽车供电设备（**Electrical Vehicle Supply Equipment**）。
+>
+> 来源：[AUTOSAR Charging Manager（充电管理器）](cp/communication/chargingmanager/index.md)（AUTOSAR_CP_SWS_ChargingManager）
+{: .glossary-source}
+
 **Excel**
 > Microsoft 电子表格应用（**Excel**）
 >
 > 来源：[Application Interfaces User Guide（应用接口用户指南）](cp/application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide）
+{: .glossary-source}
+
+**EXI**
+> 高效 XML 交换（**Efficient XML Interchange**）。
+>
+> 来源：[AUTOSAR Charging Manager（充电管理器）](cp/communication/chargingmanager/index.md)（AUTOSAR_CP_SWS_ChargingManager）
 {: .glossary-source}
 
 **Expired Supervision Cycle**
@@ -2491,6 +2539,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 坡道起步控制（**Hill Hold Control**）
 >
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](cp/application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis）
+{: .glossary-source}
+
+**HLC**
+> 高层通信（**High Level Communication**）。
+>
+> 来源：[AUTOSAR Charging Manager（充电管理器）](cp/communication/chargingmanager/index.md)（AUTOSAR_CP_SWS_ChargingManager）
 {: .glossary-source}
 
 **HMI**
@@ -4279,6 +4333,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）
 {: .glossary-source}
 
+**PLC**
+> 导引线通信（**Pilot Line Communication**）。
+>
+> 来源：[AUTOSAR Charging Manager（充电管理器）](cp/communication/chargingmanager/index.md)（AUTOSAR_CP_SWS_ChargingManager）
+{: .glossary-source}
+
 **PLCA**
 > 物理层冲突避免（**Physical Layer Collision Avoidance**）。
 >
@@ -4817,6 +4877,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
 {: .glossary-source}
 
+**SDP**
+> SECC 发现协议（**SECC Discovery Protocol**）。
+>
+> 来源：[AUTOSAR Charging Manager（充电管理器）](cp/communication/chargingmanager/index.md)（AUTOSAR_CP_SWS_ChargingManager）
+{: .glossary-source}
+
 **SDU**
 > 服务数据单元（**Service Data Unit**）——**PDU** 的载荷。
 >
@@ -4833,6 +4899,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 被监督实体（**Supervised Entity**）
 >
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）
+{: .glossary-source}
+
+**SECC**
+> 供电设备通信控制器（**Supply Equipment Communication Controller**）。
+>
+> 来源：[AUTOSAR Charging Manager（充电管理器）](cp/communication/chargingmanager/index.md)（AUTOSAR_CP_SWS_ChargingManager）
 {: .glossary-source}
 
 **SecOC**（**Secure Onboard Communication**）
@@ -5854,6 +5926,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 ## V
+
+**V2GTP**
+> 车辆到电网传输协议（**Vehicle to Grid Transport Protocol**）。
+>
+> 来源：[AUTOSAR Charging Manager（充电管理器）](cp/communication/chargingmanager/index.md)（AUTOSAR_CP_SWS_ChargingManager）
+{: .glossary-source}
 
 **V2X**
 > 车联网（**Vehicle to Everything**）。

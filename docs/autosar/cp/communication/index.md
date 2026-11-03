@@ -82,6 +82,7 @@ title: "通信（Communication）"
 ### V2X
 
 * [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](cellularv2x_driver/index.md)
+* [AUTOSAR Charging Manager（充电管理器）](chargingmanager/index.md)
 
 ## 相关内容
 

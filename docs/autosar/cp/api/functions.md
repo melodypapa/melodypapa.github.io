@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2287** 个条目。
+共 **2304** 个条目。
 
 ## A
 
@@ -854,6 +854,57 @@ title: "AUTOSAR API 函数清单"
 
 **[CheckTaskMemoryAccess](../system_services/operating_system/index.md#746-checktaskmemoryaccess)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
+
+**[ChrgM_CpLineStatus](../communication/chargingmanager/index.md#733-chrgm_cplinestatus)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_DataLinkIndication](../communication/chargingmanager/index.md#734-chrgm_datalinkindication)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_ErrorIndication](../communication/chargingmanager/index.md#735-chrgm_errorindication)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_Init](../communication/chargingmanager/index.md#731-chrgm_init)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_MainFunction_Rx](../communication/chargingmanager/index.md#736-chrgm_mainfunction_rx)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_MainFunction_Tx](../communication/chargingmanager/index.md#737-chrgm_mainfunction_tx)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_PaymentServiceSelectionIndication](../communication/chargingmanager/index.md#738-chrgm_paymentserviceselectionindication)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_SessionSetupIndication](../communication/chargingmanager/index.md#739-chrgm_sessionsetupindication)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_SessionStopIndication](../communication/chargingmanager/index.md#7310-chrgm_sessionstopindication)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_StartProcess](../communication/chargingmanager/index.md#732-chrgm_startprocess)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_V2GTpCopyRxData](../communication/chargingmanager/index.md#7311-chrgm_v2gtpcopyrxdata)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_V2GTpCopyTxData](../communication/chargingmanager/index.md#7312-chrgm_v2gtpcopytxdata)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_V2GTpLocalIpAddrAssignmentChg](../communication/chargingmanager/index.md#741-chrgm_v2gtplocalipaddrassignmentchg)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_V2GTpRxIndication](../communication/chargingmanager/index.md#742-chrgm_v2gtprxindication)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_V2GTpSoConModeChg](../communication/chargingmanager/index.md#743-chrgm_v2gtpsoconmodechg)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_V2GTpStartOfReception](../communication/chargingmanager/index.md#744-chrgm_v2gtpstartofreception)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_V2GTpTxConfirmation](../communication/chargingmanager/index.md#745-chrgm_v2gtptxconfirmation)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
 
 **[ClearDTC](../diagnostics/diagnostic_event_manager/index.md#76310-cleardtc)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11

@@ -324,6 +324,7 @@ nav:
         - "UdpNm": autosar/cp/communication/udp_network_management/index.md
         - "V2X":
           - "CV2x": autosar/cp/communication/cellularv2x_driver/index.md
+          - "ChrgM": autosar/cp/communication/chargingmanager/index.md
       - 全局时间:
         - autosar/cp/globaltime/index.md
         - "StbM": autosar/cp/globaltime/stbm/index.md

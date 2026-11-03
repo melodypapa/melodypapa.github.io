@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **667** 个条目。
+共 **670** 个条目。
 
 ## A
 
@@ -245,6 +245,15 @@ title: "AUTOSAR API 类型清单"
 
 **[CbkHandleIdType](../general/communication_stack_types/index.md#7110-cbkhandleidtype)**
 > 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](../general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
+
+**[ChrgM_ConfigType](../communication/chargingmanager/index.md#721-chrgm_configtype)**
+> 类型 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_ErrorHandlerType](../communication/chargingmanager/index.md#722-chrgm_errorhandlertype)**
+> 类型 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_ResponseCodeType](../communication/chargingmanager/index.md#723-chrgm_responsecodetype)**
+> 类型 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
 
 **[Com_ConfigType](../communication/com/index.md#725-com_configtype)**
 > 类型 · [AUTOSAR COM（COM模块）](../communication/com/index.md) · SWS_COM · R23-11

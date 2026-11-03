@@ -299,6 +299,30 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**CV2x_Transmit**](../communication/cellularv2x_driver/index.md#736-cv2x_transmit) | 触发发送一个先前已填充的发送缓冲区。 |
 | [**CV2x_TxConfirmation**](../communication/cellularv2x_driver/index.md#737-cv2x_txconfirmation) | 触发发送确认。 |
 
+## AUTOSAR Charging Manager（充电管理器）（17）
+
+来源：[AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager
+
+| 函数 | 简述 |
+|---|---|
+| [**ChrgM_CpLineStatus**](../communication/chargingmanager/index.md#733-chrgm_cplinestatus) | 上层调用本 API 向 ChrgM 通报 CP 线状态。 |
+| [**ChrgM_DataLinkIndication**](../communication/chargingmanager/index.md#734-chrgm_datalinkindication) | 本 API 由 EthSM 调用，向 ChrgM 通报数据链路连接的状态。 |
+| [**ChrgM_ErrorIndication**](../communication/chargingmanager/index.md#735-chrgm_errorindication) | ChrgM 向上层通报错误。 |
+| [**ChrgM_Init**](../communication/chargingmanager/index.md#731-chrgm_init) | 本服务初始化 ChrgM 模块。 |
+| [**ChrgM_MainFunction_Rx**](../communication/chargingmanager/index.md#736-chrgm_mainfunction_rx) | 本函数执行 AUTOSAR ChrgM 模块的接收处理。 |
+| [**ChrgM_MainFunction_Tx**](../communication/chargingmanager/index.md#737-chrgm_mainfunction_tx) | 本函数执行 AUTOSAR ChrgM 模块的发送处理。 |
+| [**ChrgM_PaymentServiceSelectionIndication**](../communication/chargingmanager/index.md#738-chrgm_paymentserviceselectionindication) | ChrgM 向上层通报 SECC 提供的支付方式。 |
+| [**ChrgM_SessionSetupIndication**](../communication/chargingmanager/index.md#739-chrgm_sessionsetupindication) | ChrgM 向上层通报 V2G 会话建立信息。 |
+| [**ChrgM_SessionStopIndication**](../communication/chargingmanager/index.md#7310-chrgm_sessionstopindication) | ChrgM 向上层通报 V2G 会话的状态。 |
+| [**ChrgM_StartProcess**](../communication/chargingmanager/index.md#732-chrgm_startprocess) | 上层调用本 API 以启动充电过程：如果布尔参数设置为 TRUE，ChrgM 将启动 IP 地址分配过程，否则不启动。 |
+| [**ChrgM_V2GTpCopyRxData**](../communication/chargingmanager/index.md#7311-chrgm_v2gtpcopyrxdata) | 调用本函数以向上层提供 I-PDU 段（N-PDU）的接收数据。 |
+| [**ChrgM_V2GTpCopyTxData**](../communication/chargingmanager/index.md#7312-chrgm_v2gtpcopytxdata) | 调用本函数以获取 I-PDU 段（N-PDU）的发送数据。 |
+| [**ChrgM_V2GTpLocalIpAddrAssignmentChg**](../communication/chargingmanager/index.md#741-chrgm_v2gtplocalipaddrassignmentchg) | SoAd 调用本 API 向 ChrgM 通报 IP 地址的状态。 |
+| [**ChrgM_V2GTpRxIndication**](../communication/chargingmanager/index.md#742-chrgm_v2gtprxindication) | 在收到 I-PDU 之后（分段情况下为收到最后一个 I-PDU 之后）由下层调用。 |
+| [**ChrgM_V2GTpSoConModeChg**](../communication/chargingmanager/index.md#743-chrgm_v2gtpsoconmodechg) | SoAd 调用本 API 向 ChrgM 通报套接字连接的状态。 |
+| [**ChrgM_V2GTpStartOfReception**](../communication/chargingmanager/index.md#744-chrgm_v2gtpstartofreception) | 在开始接收 N-SDU 时调用本函数。 |
+| [**ChrgM_V2GTpTxConfirmation**](../communication/chargingmanager/index.md#745-chrgm_v2gtptxconfirmation) | 下层调用 ChrgM 的本 API 向 ChrgM 通报所发送 PDU 的状态。 |
+
 ## AUTOSAR COM Based Transformer（3）
 
 来源：[AUTOSAR COM Based Transformer](../communication/com_based_transformer/index.md) · SWS_COMBasedTransformer
