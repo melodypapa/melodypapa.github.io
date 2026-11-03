@@ -204,6 +204,7 @@ title: "CP AUTOSAR"
   * [Specification of Basic Software Multicore Library（基础软件多核库规范）](libraries/bmc/index.md)
   * [Specification of Floating Point Math Routines（浮点数学例程规范）](libraries/mfl/index.md)
   * [Specification of Fixed Point Math Routines（定点数学例程规范）](libraries/mfx/index.md)
+  * [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](libraries/ifl/index.md)
 
 ### 模板
 

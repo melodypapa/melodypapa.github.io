@@ -2654,7 +2654,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **IFL**
 > 浮点插值库（**Floating Point Interpolation Routines**）的模块 ID 前缀；浮点插值例程名称以 Ifl 开头。
 >
-> 来源：[Macro Encapsulation of Interpolation Calls（插值调用宏封装）](cp/libraries/macro_encapsulation_of_interpolation_calls/index.md)（AUTOSAR_CP_EXP_MacroEncapsulationofInterpolationCalls）
+> 来源：[Macro Encapsulation of Interpolation Calls（插值调用宏封装）](cp/libraries/macro_encapsulation_of_interpolation_calls/index.md)（AUTOSAR_CP_EXP_MacroEncapsulationofInterpolationCalls）、[Specification of Floating Point Interpolation Routines（浮点插值例程规范）](cp/libraries/ifl/index.md)（AUTOSAR_CP_SWS_IFLLibrary）
 {: .glossary-source}
 
 **IFX**

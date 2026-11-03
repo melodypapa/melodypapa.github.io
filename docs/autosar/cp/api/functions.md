@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2391** 个条目。
+共 **2399** 个条目。
 
 ## A
 
@@ -4647,6 +4647,30 @@ title: "AUTOSAR API 函数清单"
 
 **[IEEE1722Tp_TxConfirmation](../communication/ieee1722tp/index.md#751-ieee1722tp_txconfirmation)**
 > 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[Ifl_DPSearch_f32](../libraries/ifl/index.md#75111-ifl_dpsearch_f32)**
+> 函数 · [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../libraries/ifl/index.md) · SWS_IFLLibrary · R23-11
+
+**[Ifl_GetVersionInfo](../libraries/ifl/index.md#761-ifl_getversioninfo)**
+> 函数 · [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../libraries/ifl/index.md) · SWS_IFLLibrary · R23-11
+
+**[Ifl_Interpolate_f32](../libraries/ifl/index.md#75141-ifl_interpolate_f32)**
+> 函数 · [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../libraries/ifl/index.md) · SWS_IFLLibrary · R23-11
+
+**[Ifl_IntIpoCur_f32_f32](../libraries/ifl/index.md#75211-ifl_intipocur_f32_f32)**
+> 函数 · [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../libraries/ifl/index.md) · SWS_IFLLibrary · R23-11
+
+**[Ifl_IntIpoMap_f32f32_f32](../libraries/ifl/index.md#75221-ifl_intipomap_f32f32_f32)**
+> 函数 · [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../libraries/ifl/index.md) · SWS_IFLLibrary · R23-11
+
+**[Ifl_IpoCub_f32](../libraries/ifl/index.md#75231-ifl_ipocub_f32)**
+> 函数 · [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../libraries/ifl/index.md) · SWS_IFLLibrary · R23-11
+
+**[Ifl_IpoCur_f32](../libraries/ifl/index.md#75121-ifl_ipocur_f32)**
+> 函数 · [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../libraries/ifl/index.md) · SWS_IFLLibrary · R23-11
+
+**[Ifl_IpoMap_f32](../libraries/ifl/index.md#75131-ifl_ipomap_f32)**
+> 函数 · [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../libraries/ifl/index.md) · SWS_IFLLibrary · R23-11
 
 **[IncrementCounter](../system_services/operating_system/index.md#7417-incrementcounter)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11

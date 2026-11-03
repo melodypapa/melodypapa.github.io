@@ -94,10 +94,17 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] ifl (SWS_IFLLibrary · R23-11 markdown · ❌ new article, short name Ifl)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-04 batch run — committed without the per-article Step 5 gate (batch-end joint confirmation), same as the crc/e2e/bfx rows.
+  - Note: source ch.6 Requirements Tracing + appendix A dropped per mandate; ch.9 "Not applicable" omitted per the placeholder rule (ch.10 → §8, 8.1 发布信息 + 8.2 配置选项 per source order); source 8.6 Examples "None" omitted (8.7–8.10 renumbered to §7.6–§7.9; 8.9 title 调度例程 per source "Scheduled routines"); 8.10 intro "None." omitted (subsections keep one-sentence statements).
+  - Note: 11 API entries (DPSearch, IpoCur/IpoMap/Interpolate, IntIpoCur/IntIpoMap, IpoCub_f32, 3 mixed-type templated groups 91001–91003 with routine-ID tables, GetVersionInfo); jumbled fence requirements (00011–00016, 00042–00050, 00231/00234 implementation blocks) un-nested into ordered prose + fences; the duplicated dpResult->Index/Ratio lines in 00011 are a converter duplication — rendered once.
+  - Note: figures — Figure1-1 (layered architecture, c8707ddb) + Figure8-2 (linear interpolation, 831×320) embedded; Figure 8.1's image is LOST in the source conversion (its label text "Val result = yo + (V1-Yo) · …" spilled as chrome and dropped); image_000036 (cuboid slices) is 344×36 chrome — slice matrices rendered as text fences.
+  - Note: §7.5.3.1's "See section 8.4.2" is a dangling source reference (no 8.4.2 exists in R23-11) — kept as prose, census UNRESOLVED; [1] IFL_RecordLayout_Blueprint registry entry + §7.5.3.2 Remark cite it.
+  - Note: glossary — IFL entry already existed (from the Macro Encapsulation EXP run); its 来源 line extended with SWS_IFLLibrary (one-term-once rule, definition kept).
+  - Note: gen_api_list entity-heading limitation (Backlog 2026-11-04) also applies — ifl contributes 8/11 identifiers.
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] ifx (SWS_IFXLibrary · R23-11 markdown · ❌ new article, short name Ifx)

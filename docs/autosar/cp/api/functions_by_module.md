@@ -2542,6 +2542,21 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**Mfx_GetVersionInfo**](../libraries/mfx/index.md#781-mfx_getversioninfo) | 返回本库的版本信息。 |
 | [**Mfx_Sgn_s32_s8**](../libraries/mfx/index.md#75161-mfx_sgn_s32_s8) | 符号函数（Signum function）。 |
 
+## Specification of Floating Point Interpolation Routines（浮点插值例程规范）（8）
+
+来源：[Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../libraries/ifl/index.md) · SWS_IFLLibrary
+
+| 函数 | 简述 |
+|---|---|
+| [**Ifl_DPSearch_f32**](../libraries/ifl/index.md#75111-ifl_dpsearch_f32) | 本例程在给定的分布数组 X_array 中搜索输入 Xin 的位置，并返回插值所需的索引和比率。 |
+| [**Ifl_GetVersionInfo**](../libraries/ifl/index.md#761-ifl_getversioninfo) | 返回本库的版本信息。 |
+| [**Ifl_Interpolate_f32**](../libraries/ifl/index.md#75141-ifl_interpolate_f32) | 返回根据以下等式确定的线性插值结果（Result）。 |
+| [**Ifl_IntIpoCur_f32_f32**](../libraries/ifl/index.md#75211-ifl_intipocur_f32_f32) | 本例程使用以下等式计算曲线在位置 Xin 处的插值。 |
+| [**Ifl_IntIpoMap_f32f32_f32**](../libraries/ifl/index.md#75221-ifl_intipomap_f32f32_f32) | 本例程使用以下等式计算映射在位置 X 和 Y 处的插值。 |
+| [**Ifl_IpoCub_f32**](../libraries/ifl/index.md#75231-ifl_ipocub_f32) | 基于使用相关的 Ifl_DPSearch_f32 例程搜索到的索引和比率信息，本例程计算并返回 3D 长方体的插值结果。 |
+| [**Ifl_IpoCur_f32**](../libraries/ifl/index.md#75121-ifl_ipocur_f32) | 基于搜索到的索引和比率信息，本例程计算并返回曲线的插值。 |
+| [**Ifl_IpoMap_f32**](../libraries/ifl/index.md#75131-ifl_ipomap_f32) | 基于使用 Ifl_DPSearch_f32 例程搜索到的索引和比率信息，本例程计算并返回映射的插值结果。 |
+
 ## Specification of Floating Point Math Routines（浮点数学例程规范）（84）
 
 来源：[Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary

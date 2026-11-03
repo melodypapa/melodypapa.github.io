@@ -13,6 +13,7 @@ AUTOSAR 库是一组为相关目的而提供的函数集合（如 CRC 计算、E
 - [Specification of Basic Software Multicore Library（基础软件多核库规范）](bmc/index.md)
 - [Specification of Floating Point Math Routines（浮点数学例程规范）](mfl/index.md)
 - [Specification of Fixed Point Math Routines（定点数学例程规范）](mfx/index.md)
+- [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](ifl/index.md)
 
 ## 相关内容
 
