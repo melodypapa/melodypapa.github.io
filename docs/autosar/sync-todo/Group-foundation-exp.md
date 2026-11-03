@@ -10,7 +10,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 > Directory slug = `<type>_<snake_name>` after the `tr_glossary` precedent (`rs_main`, `prs_e2e_protocol`, `tps_generic_structure_template`) — the type prefix disambiguates the same-named RS/PRS pairs (SOMEIPProtocol, SOMEIPServiceDiscoveryProtocol, IntrusionDetectionSystem, TimeSync, SecurityExtractTemplate, StandardizationTemplate, FeatureModelExchangeFormat). The slug is a proposal: an acronym-ambiguous name still goes to the user at Step 1 (mapping.md naming rule). Front-matter `spec:` = `AUTOSAR_FO_<Type>_<Name>`, `release: R23-11`.
 > Row order = source size ascending (index.md rule), except the in-flight TR Glossary row first (exp group only). Sizes are R23-11 markdown line / `![` figure-ref / item-ID counts for planning only.
 
-> Item-ID note: TPS/ASWS rows that carry specification items share the open keep-or-drop decision recorded in the [Group-foundation-rs-prs.md](Group-foundation-rs-prs.md) header — resolve both at the first such row.
+> Item-ID note: TPS/ASWS rows that carry specification items share the decision recorded in the [Group-foundation-rs-prs.md](Group-foundation-rs-prs.md) header — DECIDED 2026-11-03: item IDs are dropped, titles translate only.
 
 ## Queue
 - [ ] tr_glossary (AUTOSAR_FO_TR_Glossary · General · R23-11 markdown · 📖 partial — ch.2 done, ch.4 14/343 terms)
@@ -34,16 +34,21 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp_system_health_monitoring (AUTOSAR_FO_EXP_SystemHealthMonitoring · HealthMonitoring · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [x] exp_system_health_monitoring (AUTOSAR_FO_EXP_SystemHealthMonitoring · HealthMonitoring · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Explanation of System Health Monitoring（系统健康监控说明）; target `foundation/health_monitoring/exp_system_health_monitoring/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)
   - Note: source `HealthMonitoring/AUTOSAR_FO_EXP_SystemHealthMonitoring.md` — 408 lines, 22 figure refs, no item IDs
   - Note: related site content: cp/safety/watchdog_manager (WdgM) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: Step 1 gap analysis (2026-11-03): no article → full translation mirroring source numbering ch.1–ch.5 (1 · 1.1 · 2 · 2.1 · 2.2 · 3 · 4 · 4.1–4.5.3.1 · 5 · 5.1–5.3); `A Appendix` is "This chapter is empty" → omitted under the placeholder rule; doc-meta chrome (title/status/change-history tables, Contents, Disclaimer) dropped per EXP precedent; ch.3 Related Documentation is a mid-document numbered chapter → keeps `## 3. 相关文档` with the `<a id="ref-n">` registry format (cdd precedent), not a trailing 参考文献 chapter
+  - Note: figures — 22 refs, 6 distinct small (~7.9 KB) chrome hashes (cover/section separators) vs 5 content diagrams (55–138 KB) = Figure 4.1/4.2/4.3/5.1/5.2; the source's caption text is carried as the image alt text (the site renders no visible caption lines — cdd/vfb precedent), 4.1 additionally referenced by its prose ("下图")
+  - Note: formulas — ch.5.1's 3 equations are `<!-- formula-not-decoded -->` in the markdown; recovered verbatim from the R23-11 PDF (`Foundation/Releases/R23-11/HealthMonitoring/AUTOSAR_FO_EXP_SystemHealthMonitoring.pdf` p.13–14, eq. 5.1 + PerSen + SubSen) and rendered as fenced blocks (the site has no math extension)
+  - Note: Step 3 Phase A (2026-11-03) all green: `mkdocs build --strict` exit 0 / zero real WARNINGs (only the `NO_MKDOCS_2_WARNING` notice); `check_heading_lang.py` OK; `check_indexes.py` OK (249 nav targets, 0 broken links); `gen_api_list.py --check` "up to date"; hygiene 0 × `^# `, 0 × requirement ID/`{DRAFT}`, 0 × `\<`; ch.2 slice 0 tables, 9 + 10 term lines = source rows; 5 images embedded
+  - Note: Step 4 Phase B (2026-11-03): coverage map ch.1 → §1, 1.1 → §1.1, ch.2 → §2 (2.1 缩略语 / 2.2 术语定义), ch.3 → §3, ch.4 → §4 (4.1–4.5.3.1), ch.5 → §5 (5.1–5.3); deliberate omission: `A Appendix` (源文档明写 "This chapter is empty", 占位规则 2026-10-28) — user to verify; doc-meta chrome (title/status/change-history tables, Contents, Disclaimer) dropped per EXP precedent. Terminology cell-by-cell: 2.1 9 rows and 2.2 10 rows in source order/values. Link census: 5 `[n]` → `#ref-n` (5 linked), 0 identifier mentions (no API chapter), 1 参见-type report-only line, cross-article report-only BswM ×6 (SITE), no external URLs. Not linkable/unlinked as candidates: WdgM/BswM mentions stay prose (cross-article class = user decision)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (2026-11-03: approved — scope limited to the EXP document, item IDs dropped/titles only)
+  - [x] Step 6 — TODO.md row + commit/PR (issue #255 · commit 4320445 · PR #256)
 - [ ] tr_predefined_names (AUTOSAR_FO_TR_PredefinedNames · General · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Predefined Names in AUTOSAR（AUTOSAR 预定义名称）; target `foundation/general/tr_predefined_names/`; technical report (TR) — prose; no specification items
   - Note: source `General/AUTOSAR_FO_TR_PredefinedNames.md` — 423 lines, 23 figure refs, no item IDs

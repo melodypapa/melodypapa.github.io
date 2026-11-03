@@ -445,6 +445,7 @@ nav:
         - autosar/foundation/diagnostics/index.md
       - 健康监控:
         - autosar/foundation/health_monitoring/index.md
+        - "System Health Monitoring": autosar/foundation/health_monitoring/exp_system_health_monitoring/index.md
       - 方法论与模板:
         - autosar/foundation/methodology_templates/index.md
       - 协议:
