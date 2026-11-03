@@ -257,7 +257,7 @@ The "existing article" rows are completed/aligned first (gaps in each row's Note
 
 ## Not queued (deliberately skipped)
 - 📖 fvm/fvm.md — topic article derived from SecOC appendix A (no standalone specification)
-- 📖 can_driver/full_can_vs_basic_can.md — topic sub-page
+- 📖 cp/others/full_can_vs_basic_can/ — topic sub-page (moved out of can_driver 2026-11-04)
 - 📖 can_network_management/r21_11/ — R21-11 historical snapshot
 > Suggested backbone order: Com → CanTp → CanSM → Nm → TcpIp → EthSM → IpduM → SomeIpXf → SomeIpTp
 > (CanSM/Nm/EthSM depend on terminology already translated in CanIf/CanNm; the sources cross-reference heavily — check existing article wording before translating a cross-reference.)

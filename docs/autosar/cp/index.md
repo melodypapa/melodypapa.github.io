@@ -10,7 +10,6 @@ title: "CP AUTOSAR"
 
 * [通信（Communication）](communication/index.md)
   * [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)
-    * [Full-CAN 与 Basic-CAN 的区别](communication/can_driver/full_can_vs_basic_can.md)
   * [AUTOSAR CAN Interface](communication/can_interface/index.md)
   * [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)
   * [AUTOSAR J1939Nm（SAE J1939 网络管理）](communication/j1939nm/index.md)
@@ -205,8 +204,11 @@ title: "CP AUTOSAR"
 ### 模板
 
 * [模板（Templates）](template/index.md)
-  * [通用结构（Generic Structure）一段话总结](template/generic_structure/index.md)
-  * [Specification of Timing Extensions for Classic Platform（经典平台时序扩展规范）](template/timimg_extension/indx.md)
+
+### 其他
+
+* [其他（Others）](others/index.md)
+  * [Full-CAN 与 Basic-CAN 的区别](others/full_can_vs_basic_can/index.md)
 
 ## 相关内容
 
