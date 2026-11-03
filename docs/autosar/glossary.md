@@ -530,6 +530,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](cp/globaltime/eth_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverEthernet）
 {: .glossary-source}
 
+**Bmc**
+> 基础软件多核库（**Basic Software Multicore Library**）
+>
+> 来源：[Specification of Basic Software Multicore Library（基础软件多核库规范）](cp/libraries/bmc/index.md)（AUTOSAR_CP_SWS_BSWMulticoreLibrary）
+{: .glossary-source}
+
 **BndM**
 > 大容量非易失性数据管理器（**Bulk Non-Volatile Data Manager**）
 >
@@ -1730,6 +1736,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）
 {: .glossary-source}
 
+**Efx**
+> 扩展定点数学库（**Extended Mathematical library - Fixed point**）。
+>
+> 来源：[Specification of Extended Fixed Point Routines（扩展定点例程规范）](cp/libraries/efx/index.md)（AUTOSAR_CP_SWS_EFXLibrary）
+{: .glossary-source}
+
 **EcuM**
 > **ECU** 状态管理器（**ECU State Manager**）
 >
@@ -2738,13 +2750,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **IFL**
 > 浮点插值库（**Floating Point Interpolation Routines**）的模块 ID 前缀；浮点插值例程名称以 Ifl 开头。
 >
-> 来源：[Macro Encapsulation of Interpolation Calls（插值调用宏封装）](cp/libraries/macro_encapsulation_of_interpolation_calls/index.md)（AUTOSAR_CP_EXP_MacroEncapsulationofInterpolationCalls）
+> 来源：[Macro Encapsulation of Interpolation Calls（插值调用宏封装）](cp/libraries/macro_encapsulation_of_interpolation_calls/index.md)（AUTOSAR_CP_EXP_MacroEncapsulationofInterpolationCalls）、[Specification of Floating Point Interpolation Routines（浮点插值例程规范）](cp/libraries/ifl/index.md)（AUTOSAR_CP_SWS_IFLLibrary）
 {: .glossary-source}
 
 **IFX**
 > 定点插值库（**Fixed Point Interpolation Routines**）的模块 ID 前缀；整数插值例程名称以 Ifx 开头。
 >
-> 来源：[Macro Encapsulation of Interpolation Calls（插值调用宏封装）](cp/libraries/macro_encapsulation_of_interpolation_calls/index.md)（AUTOSAR_CP_EXP_MacroEncapsulationofInterpolationCalls）
+> 来源：[Macro Encapsulation of Interpolation Calls（插值调用宏封装）](cp/libraries/macro_encapsulation_of_interpolation_calls/index.md)（AUTOSAR_CP_EXP_MacroEncapsulationofInterpolationCalls）、[Specification of Fixed Point Interpolation Routines（定点插值例程规范）](cp/libraries/ifx/index.md)（AUTOSAR_CP_SWS_IFXLibrary）
 {: .glossary-source}
 
 **IIDC**
@@ -3431,6 +3443,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > Master Input Slave Output（主入从出）。
 >
 > 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](cp/communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）
+{: .glossary-source}
+
+**MFL**
+> 浮点数学库（**Mathematical Floating point Library**），**AUTOSAR** 库中提供浮点算术例程的模块简称 Mfl。
+>
+> 来源：[Specification of Floating Point Math Routines（浮点数学例程规范）](cp/libraries/mfl/index.md)（AUTOSAR_CP_SWS_MFLLibrary）
+{: .glossary-source}
+
+**Mfx**
+> 定点数学库（**Math - Fixed Point library**）。
+>
+> 来源：[Specification of Fixed Point Math Routines（定点数学例程规范）](cp/libraries/mfx/index.md)（AUTOSAR_CP_SWS_MFXLibrary）
 {: .glossary-source}
 
 **MISRA**

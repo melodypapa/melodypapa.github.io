@@ -200,6 +200,12 @@ title: "CP AUTOSAR"
   * [Specification of CRC Routines（CRC 例程规范）](libraries/crc/index.md)
   * [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](libraries/e2e/index.md)
   * [Specification of Bit Handling Routines（位处理例程规范）](libraries/bfx/index.md)
+  * [Specification of Basic Software Multicore Library（基础软件多核库规范）](libraries/bmc/index.md)
+  * [Specification of Floating Point Math Routines（浮点数学例程规范）](libraries/mfl/index.md)
+  * [Specification of Fixed Point Math Routines（定点数学例程规范）](libraries/mfx/index.md)
+  * [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](libraries/ifl/index.md)
+  * [Specification of Fixed Point Interpolation Routines（定点插值例程规范）](libraries/ifx/index.md)
+  * [Specification of Extended Fixed Point Routines（扩展定点例程规范）](libraries/efx/index.md)
 
 ### 模板
 

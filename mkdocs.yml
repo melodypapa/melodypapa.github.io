@@ -425,6 +425,12 @@ nav:
         - "CRC": autosar/cp/libraries/crc/index.md
         - "E2E": autosar/cp/libraries/e2e/index.md
         - "Bfx": autosar/cp/libraries/bfx/index.md
+        - "Bmc": autosar/cp/libraries/bmc/index.md
+        - "Mfl": autosar/cp/libraries/mfl/index.md
+        - "Mfx": autosar/cp/libraries/mfx/index.md
+        - "Ifl": autosar/cp/libraries/ifl/index.md
+        - "Ifx": autosar/cp/libraries/ifx/index.md
+        - "Efx": autosar/cp/libraries/efx/index.md
       - 模板:
         - autosar/cp/template/index.md
       - 其他:

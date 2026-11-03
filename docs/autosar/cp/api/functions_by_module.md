@@ -2455,6 +2455,44 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**SoAd_TxConfirmation**](../communication/soad/index.md#743-soad_txconfirmation) | C |
 | [**SoAd_WriteDhcpHostNameOption**](../communication/soad/index.md#73419-soad_writedhcphostnameoption) | C |
 
+## Specification of Basic Software Multicore Library（基础软件多核库规范）（31）
+
+来源：[Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary
+
+| 函数 | 简述 |
+|---|---|
+| [**Bmc_CompareExchange**](../libraries/bmc/index.md#7424-bmc_compareexchange) | — |
+| [**Bmc_CompareExchange_s**](../libraries/bmc/index.md#74242-bmc_compareexchange_s) | 该函数原子地将 Object 所指向的值与 Expected 中的值进行相等比较，若相等，则用 Desired 替换 Object 所指向的值；若不相等，则用 Object 所指向的值更新 Expected 中的值。 |
+| [**Bmc_CompareExchange_u**](../libraries/bmc/index.md#74241-bmc_compareexchange_u) | 该函数原子地将 Object 所指向的值与 Expected 中的值进行相等比较，若相等，则用 Desired 替换 Object 所指向的值；若不相等，则用 Object 所指向的值更新 Expected 中的值。 |
+| [**Bmc_Exchange**](../libraries/bmc/index.md#7423-bmc_exchange) | — |
+| [**Bmc_Exchange_s**](../libraries/bmc/index.md#74232-bmc_exchange_s) | 该函数原子地用 Desired 的值替换 Object 所指向的值，并返回操作生效前 Object 所指向的值。 |
+| [**Bmc_Exchange_u**](../libraries/bmc/index.md#74231-bmc_exchange_u) | 该函数原子地用 Desired 的值替换 Object 所指向的值，并返回操作生效前 Object 所指向的值。 |
+| [**Bmc_FetchAdd**](../libraries/bmc/index.md#7431-bmc_fetchadd) | — |
+| [**Bmc_FetchAdd_s**](../libraries/bmc/index.md#74312-bmc_fetchadd_s) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用加法所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FetchAdd_u**](../libraries/bmc/index.md#74311-bmc_fetchadd_u) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用加法所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FetchAnd**](../libraries/bmc/index.md#7435-bmc_fetchand) | — |
+| [**Bmc_FetchAnd_s**](../libraries/bmc/index.md#74352-bmc_fetchand_s) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用与运算所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FetchAnd_u**](../libraries/bmc/index.md#74351-bmc_fetchand_u) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用与运算所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FetchOr**](../libraries/bmc/index.md#7433-bmc_fetchor) | — |
+| [**Bmc_FetchOr_s**](../libraries/bmc/index.md#74332-bmc_fetchor_s) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用或运算所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FetchOr_u**](../libraries/bmc/index.md#74331-bmc_fetchor_u) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用或运算所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FetchSub**](../libraries/bmc/index.md#7432-bmc_fetchsub) | — |
+| [**Bmc_FetchSub_s**](../libraries/bmc/index.md#74322-bmc_fetchsub_s) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用减法所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FetchSub_u**](../libraries/bmc/index.md#74321-bmc_fetchsub_u) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用减法所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FetchXor**](../libraries/bmc/index.md#7434-bmc_fetchxor) | — |
+| [**Bmc_FetchXor_s**](../libraries/bmc/index.md#74342-bmc_fetchxor_s) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用异或运算所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FetchXor_u**](../libraries/bmc/index.md#74341-bmc_fetchxor_u) | 该函数原子地用对 Object 所指向的值与给定 Operand 应用异或运算所得的结果替换 Object 所指向的值。 |
+| [**Bmc_FlagClear**](../libraries/bmc/index.md#7412-bmc_flagclear) | 该函数原子地将 Object 所指向的值设置为 false。 |
+| [**Bmc_FlagTestAndSet**](../libraries/bmc/index.md#7411-bmc_flagtestandset) | 该函数原子地将 Object 所指向的值设置为 true。 |
+| [**Bmc_GetVersionInfo**](../libraries/bmc/index.md#7451-bmc_getversioninfo) | 该函数返回本库的版本信息。 |
+| [**Bmc_Load**](../libraries/bmc/index.md#7421-bmc_load) | — |
+| [**Bmc_Load_s**](../libraries/bmc/index.md#74212-bmc_load_s) | 该函数原子地加载 Object 所指向的值并将其返回。 |
+| [**Bmc_Load_u**](../libraries/bmc/index.md#74211-bmc_load_u) | 该函数原子地加载 Object 所指向的值并将其返回。 |
+| [**Bmc_Store**](../libraries/bmc/index.md#7422-bmc_store) | — |
+| [**Bmc_Store_s**](../libraries/bmc/index.md#74222-bmc_store_s) | 该函数原子地用 Desired 的值替换 Object 所指向的值。 |
+| [**Bmc_Store_u**](../libraries/bmc/index.md#74221-bmc_store_u) | 该函数原子地用 Desired 的值替换 Object 所指向的值。 |
+| [**Bmc_ThreadFence**](../libraries/bmc/index.md#7441-bmc_threadfence) | 该函数创建一个顺序一致的获取（acquire）与释放（release）栅栏。 |
+
 ## Specification of Bit Handling Routines（位处理例程规范）（25）
 
 来源：[Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary
@@ -2494,6 +2532,208 @@ title: "AUTOSAR API 函数清单（按模块）"
 | 函数 | 简述 |
 |---|---|
 | [**Crc_GetVersionInfo**](../libraries/crc/index.md#735-crc_getversioninfo) | 此服务返回本模块的版本信息。 |
+
+## Specification of Extended Fixed Point Routines（扩展定点例程规范）（72）
+
+来源：[Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary
+
+| 函数 | 简述 |
+|---|---|
+| [**Efx_ArcCos_s16_u16**](../libraries/efx/index.md#751042-efx_arccos_s16_u16) | 本服务计算一个值的反余弦。 |
+| [**Efx_ArcCos_s32_u32**](../libraries/efx/index.md#751041-efx_arccos_s32_u32) | 本服务计算一个值的反余弦。 |
+| [**Efx_ArcCos_s8_u8**](../libraries/efx/index.md#751043-efx_arccos_s8_u8) | 本服务计算一个值的反余弦。 |
+| [**Efx_ArcSin_s32_s32**](../libraries/efx/index.md#751031-efx_arcsin_s32_s32) | 本服务计算一个值的反正弦。 |
+| [**Efx_ArcSin_s8_s8**](../libraries/efx/index.md#751033-efx_arcsin_s8_s8) | 本服务计算一个值的反正弦。 |
+| [**Efx_ArsSin_s16_s16**](../libraries/efx/index.md#751032-efx_arssin_s16_s16) | 本服务计算一个值的反正弦。 |
+| [**Efx_Average_s32_s32**](../libraries/efx/index.md#7561-efx_average_s32_s32) | 该例程返回平均值。 |
+| [**Efx_CalcTeQ_s32**](../libraries/efx/index.md#75334-efx_calcteq_s32) | 本例程计算时间等效系数。 |
+| [**Efx_CalcTeQApp_s32**](../libraries/efx/index.md#75335-efx_calcteqapp_s32) | 本例程计算时间等效系数。 |
+| [**Efx_Cos_s16_s16**](../libraries/efx/index.md#751022-efx_cos_s16_s16) | 本服务计算角度的余弦。 |
+| [**Efx_Cos_s32_s32**](../libraries/efx/index.md#751021-efx_cos_s32_s32) | 本服务计算角度的余弦。 |
+| [**Efx_Cos_s8_s8**](../libraries/efx/index.md#751023-efx_cos_s8_s8) | 本服务计算角度的余弦。 |
+| [**Efx_CtrlSetLimits**](../libraries/efx/index.md#75363-efx_ctrlsetlimits) | 更新限幅结构。 |
+| [**Efx_Debounce**](../libraries/efx/index.md#75141-efx_debounce) | — |
+| [**Efx_Debounce_u8_u8**](../libraries/efx/index.md#751411-efx_debounce_u8_u8) | 本例程对数字输入信号进行去抖，并以布尔值返回信号的状态。 |
+| [**Efx_DebounceInit**](../libraries/efx/index.md#75142-efx_debounceinit) | — |
+| [**Efx_DebounceSetparam**](../libraries/efx/index.md#75143-efx_debouncesetparam) | — |
+| [**Efx_DT1Typ1Calc**](../libraries/efx/index.md#75341-efx_dt1typ1calc) | 本例程使用微分方程计算 DT1 控制器输出值：Y<sub>n</sub> = exp(-dT/T1) * Y<sub>n−1</sub> + K * (1- exp(-dT/T1)) * ((X<sub>n−1</sub> - X<s… |
+| [**Efx_DT1Typ1SetState**](../libraries/efx/index.md#75343-efx_dt1typ1setstate) | 该例程初始化 DT1 组件的内部状态变量。 |
+| [**Efx_DT1Typ2Calc**](../libraries/efx/index.md#75342-efx_dt1typ2calc) | 本例程使用微分方程计算 DT1 控制器输出值：Y<sub>n</sub> = exp(-dT/T1) * Y<sub>n−1</sub> + K * (1- exp(-dT/T1)) * ((X<sub>n</sub> - X<sub… |
+| [**Efx_DT1Typ2SetState**](../libraries/efx/index.md#75344-efx_dt1typ2setstate) | 该例程初始化 DT1 组件的内部状态变量。 |
+| [**Efx_EdgeBipol_u8_u8**](../libraries/efx/index.md#751811-efx_edgebipol_u8_u8) | 本例程检测信号自上次调用以来是否发生了变化，若发生变化则返回 TRUE。 |
+| [**Efx_EdgeFalling_u8_u8**](../libraries/efx/index.md#751821-efx_edgefalling_u8_u8) | 当信号具有下降沿（即信号在上次调用时为 TRUE，而在此例程的当前调用时为 FALSE）时返回 TRUE。 |
+| [**Efx_EdgeRising_u8_u8**](../libraries/efx/index.md#751831-efx_edgerising_u8_u8) | 当信号具有上升沿（即信号在上次调用时为 FALSE，而在此例程的当前调用时为 TRUE）时返回 TRUE。 |
+| [**Efx_Exp_s32_s32**](../libraries/efx/index.md#7551-efx_exp_s32_s32) | 该例程返回输入值的指数值。 |
+| [**Efx_GetVersionInfo**](../libraries/efx/index.md#791-efx_getversioninfo) | 返回本库的版本信息。 |
+| [**Efx_HpFilter_s16_s32**](../libraries/efx/index.md#7524-efx_hpfilter_s16_s32) | 本服务计算一阶高通滤波器的输出。 |
+| [**Efx_HpFilter_s8_s16**](../libraries/efx/index.md#7522-efx_hpfilter_s8_s16) | 本服务计算一阶高通滤波器的输出。 |
+| [**Efx_HpFilter_u16_s32**](../libraries/efx/index.md#7523-efx_hpfilter_u16_s32) | 本服务计算一阶高通滤波器的输出。 |
+| [**Efx_HpFilter_u8_s16**](../libraries/efx/index.md#7521-efx_hpfilter_u8_s16) | 本服务计算一阶高通滤波器的输出。 |
+| [**Efx_Hypot_u16u16_u16**](../libraries/efx/index.md#7592-efx_hypot_u16u16_u16) | 本服务计算向量的长度。 |
+| [**Efx_Hypot_u32u32_u32**](../libraries/efx/index.md#7591-efx_hypot_u32u32_u32) | 本服务计算向量的长度。 |
+| [**Efx_Hypot_u8u8_u8**](../libraries/efx/index.md#7593-efx_hypot_u8u8_u8) | 本服务计算向量的长度。 |
+| [**Efx_ICalc**](../libraries/efx/index.md#75361-efx_icalc) | 本例程使用微分方程计算「I」控制器输出值：Y<sub>n</sub> = Y<sub>n−1</sub> + K * dT * X<sub>n−1</sub>。 |
+| [**Efx_ILimCalc**](../libraries/efx/index.md#75362-efx_ilimcalc) | 本例程使用微分方程计算 DT1 控制器输出值：Y<sub>n</sub> = Y<sub>n−1</sub> + K * dT * X<sub>n−1</sub>。 |
+| [**Efx_ISetState**](../libraries/efx/index.md#75364-efx_isetstate) | 该例程初始化 I 组件的内部状态变量。 |
+| [**Efx_PCalc**](../libraries/efx/index.md#75321-efx_pcalc) | 本例程计算微分方程。 |
+| [**Efx_PDCalc**](../libraries/efx/index.md#75351-efx_pdcalc) | 本例程使用微分方程计算比例加微分控制器的输出值：Y<sub>n</sub> = K(1+Tv/dT) * X<sub>n</sub> - K(Tv/dT) * X<sub>n−1</sub>。 |
+| [**Efx_PDSetParam**](../libraries/efx/index.md#75353-efx_pdsetparam) | 该例程设置 PD 组件的参数结构。 |
+| [**Efx_PDSetState**](../libraries/efx/index.md#75352-efx_pdsetstate) | 该例程初始化 PD 组件的内部状态变量。 |
+| [**Efx_PIDSetParam**](../libraries/efx/index.md#75386-efx_pidsetparam) | 该例程设置 PID 组件的参数结构。 |
+| [**Efx_PIDSetState**](../libraries/efx/index.md#75385-efx_pidsetstate) | 该例程初始化 PID 组件的内部状态变量。 |
+| [**Efx_PIDTyp1Calc**](../libraries/efx/index.md#75381-efx_pidtyp1calc) | 本例程使用微分方程计算比例加积分加微分控制器（隐式类型）的输出值：Y<sub>n</sub> = Y<sub>n−1</sub> + K * (1 + Tv/dT) * X<sub>n</sub> - K * (1 - dT/Tn +… |
+| [**Efx_PIDTyp1LimCalc**](../libraries/efx/index.md#75382-efx_pidtyp1limcalc) | 本例程使用微分方程计算比例加积分加微分控制器（隐式类型）的输出值：Y<sub>n</sub> = Y<sub>n−1</sub> + K * (1 + Tv/dT) * X<sub>n</sub> - K * (1 - dT/Tn +… |
+| [**Efx_PIDTyp2Calc**](../libraries/efx/index.md#75383-efx_pidtyp2calc) | 本例程使用微分方程计算比例加积分加微分控制器（显式类型）的输出值：Y<sub>n</sub> = Y<sub>n−1</sub> + K * (1 + dT/Tn + Tv/dT) * X<sub>n</sub> - K * (1 +… |
+| [**Efx_PIDTyp2LimCalc**](../libraries/efx/index.md#75384-efx_pidtyp2limcalc) | 本例程使用微分方程计算比例加积分加微分控制器（显式类型）的输出值：Y<sub>n</sub> = Y<sub>n−1</sub> + K * (1 + dT/Tn + Tv/dT) * X<sub>n</sub> - K * (1 +… |
+| [**Efx_PISetParam**](../libraries/efx/index.md#75376-efx_pisetparam) | 该例程设置 PI 组件的参数结构。 |
+| [**Efx_PISetState**](../libraries/efx/index.md#75375-efx_pisetstate) | 该例程初始化 PI 组件的内部状态变量。 |
+| [**Efx_PITyp1Calc**](../libraries/efx/index.md#75371-efx_pityp1calc) | 本例程使用微分方程计算比例加积分控制器（隐式类型）的输出值：Y<sub>n</sub> = Y<sub>n−1</sub> + K * X<sub>n</sub> - K * (1 - dT/Tn) * X<sub>n−1</sub>。 |
+| [**Efx_PITyp1LimCalc**](../libraries/efx/index.md#75372-efx_pityp1limcalc) | 本例程使用微分方程计算比例加积分控制器（隐式类型）的输出值：Y<sub>n</sub> = Y<sub>n−1</sub> + K * X<sub>n</sub> - K * (1 - dT/Tn) * X<sub>n−1</sub>。 |
+| [**Efx_PITyp2Calc**](../libraries/efx/index.md#75373-efx_pityp2calc) | 本例程使用微分方程计算比例加积分控制器（显式类型）的输出值：Y<sub>n</sub> = Y<sub>n−1</sub> + K * (1 + dT/Tn) * X<sub>n</sub> - K * X<sub>n−1</sub>。 |
+| [**Efx_PITyp2LimCalc**](../libraries/efx/index.md#75374-efx_pityp2limcalc) | 本例程使用微分方程计算比例加积分控制器（显式类型）的输出值：Y<sub>n</sub> = Y<sub>n−1</sub> + K * (1 + dT/Tn) * X<sub>n</sub> - K * X<sub>n−1</sub>。 |
+| [**Efx_PSetState**](../libraries/efx/index.md#75322-efx_psetstate) | 该例程设置 P 组件的内部状态变量。 |
+| [**Efx_PT1Calc**](../libraries/efx/index.md#75331-efx_pt1calc) | 本例程使用以下差分方程计算 PT1 控制器输出值：Y<sub>n</sub> = exp(-dT/T1) * Y<sub>n−1</sub> + K(1 - exp(-dT/T1)) * X<sub>n−1</sub>。 |
+| [**Efx_PT1SetState**](../libraries/efx/index.md#75333-efx_pt1setstate) | 该例程初始化 PT1 组件的内部状态变量。 |
+| [**Efx_PT1Typ1Calc**](../libraries/efx/index.md#75332-efx_pt1typ1calc) | 本例程使用以下差分方程计算 PT1 控制器输出值：Y<sub>n</sub> = exp(-dT/T1) * Y<sub>n−1</sub> + K(1 - exp(-dT/T1)) * X<sub>n</sub>。 |
+| [**Efx_RampCalc**](../libraries/efx/index.md#751211-efx_rampcalc) | 斜坡输出值根据 (State\_cpst-&gt;State\_s32 &lt; X\_s32) 还是 (State\_cpst-&gt;State\_s32 &gt; X\_s32)，以斜率 * dT_s32 增加或减小一个值。 |
+| [**Efx_RampCalcJump**](../libraries/efx/index.md#751251-efx_rampcalcjump) | 本例程在主斜坡函数 Efx_RampCalc 的基础上工作，以提供对目标值的更快适配。 |
+| [**Efx_RampCalcSwitch**](../libraries/efx/index.md#751261-efx_rampcalcswitch) | 本例程基于 Switch 参数在斜坡服务的两个目标值之间切换。 |
+| [**Efx_RampCheckActivity**](../libraries/efx/index.md#751281-efx_rampcheckactivity) | 本例程检查斜坡的状态，如果斜坡处于活动状态则返回 TRUE，否则返回 FALSE。 |
+| [**Efx_RampGetSwitchPos**](../libraries/efx/index.md#751271-efx_rampgetswitchpos) | 获取斜坡开关函数的当前开关位置。 |
+| [**Efx_RampInitState**](../libraries/efx/index.md#751221-efx_rampinitstate) | 初始化斜坡的状态、方向和开关参数。 |
+| [**Efx_RampOut_s32**](../libraries/efx/index.md#751241-efx_rampout_s32) | 返回斜坡组件的内部状态。 |
+| [**Efx_RampSetParam**](../libraries/efx/index.md#751231-efx_rampsetparam) | 为结构 Efx\_ParamRamp\_Type 所提供的斜坡设置斜率参数。 |
+| [**Efx_RSFlipFlop**](../libraries/efx/index.md#75211-efx_rsflipflop) | RS 触发器可以通过输入开关 R_Val 和 S_Val 进行置位和复位。 |
+| [**Efx_Sgn_s64_s8**](../libraries/efx/index.md#752381-efx_sgn_s64_s8) | 符号函数（Signum function）。 |
+| [**Efx_Sin_s16_s16**](../libraries/efx/index.md#751012-efx_sin_s16_s16) | 本服务计算角度的正弦。 |
+| [**Efx_Sin_s32_s32**](../libraries/efx/index.md#751011-efx_sin_s32_s32) | 本服务计算角度的正弦。 |
+| [**Efx_Sin_s8_s8**](../libraries/efx/index.md#751013-efx_sin_s8_s8) | 本服务计算角度的正弦。 |
+| [**Efx_Sqrt_u16_u16**](../libraries/efx/index.md#7542-efx_sqrt_u16_u16) | 本服务计算一个值的平方根。 |
+| [**Efx_Sqrt_u32_u32**](../libraries/efx/index.md#7541-efx_sqrt_u32_u32) | 本服务计算一个值的平方根。 |
+| [**Efx_Sqrt_u8_u8**](../libraries/efx/index.md#7543-efx_sqrt_u8_u8) | 本服务计算一个值的平方根。 |
+
+## Specification of Fixed Point Interpolation Routines（定点插值例程规范）（1）
+
+来源：[Specification of Fixed Point Interpolation Routines（定点插值例程规范）](../libraries/ifx/index.md) · SWS_IFXLibrary
+
+| 函数 | 简述 |
+|---|---|
+| [**Ifx_GetVersionInfo**](../libraries/ifx/index.md#761-ifx_getversioninfo) | 返回本库的版本信息。 |
+
+## Specification of Fixed Point Math Routines（定点数学例程规范）（2）
+
+来源：[Specification of Fixed Point Math Routines（定点数学例程规范）](../libraries/mfx/index.md) · SWS_MFXLibrary
+
+| 函数 | 简述 |
+|---|---|
+| [**Mfx_GetVersionInfo**](../libraries/mfx/index.md#781-mfx_getversioninfo) | 返回本库的版本信息。 |
+| [**Mfx_Sgn_s32_s8**](../libraries/mfx/index.md#75161-mfx_sgn_s32_s8) | 符号函数（Signum function）。 |
+
+## Specification of Floating Point Interpolation Routines（浮点插值例程规范）（8）
+
+来源：[Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../libraries/ifl/index.md) · SWS_IFLLibrary
+
+| 函数 | 简述 |
+|---|---|
+| [**Ifl_DPSearch_f32**](../libraries/ifl/index.md#75111-ifl_dpsearch_f32) | 本例程在给定的分布数组 X_array 中搜索输入 Xin 的位置，并返回插值所需的索引和比率。 |
+| [**Ifl_GetVersionInfo**](../libraries/ifl/index.md#761-ifl_getversioninfo) | 返回本库的版本信息。 |
+| [**Ifl_Interpolate_f32**](../libraries/ifl/index.md#75141-ifl_interpolate_f32) | 返回根据以下等式确定的线性插值结果（Result）。 |
+| [**Ifl_IntIpoCur_f32_f32**](../libraries/ifl/index.md#75211-ifl_intipocur_f32_f32) | 本例程使用以下等式计算曲线在位置 Xin 处的插值。 |
+| [**Ifl_IntIpoMap_f32f32_f32**](../libraries/ifl/index.md#75221-ifl_intipomap_f32f32_f32) | 本例程使用以下等式计算映射在位置 X 和 Y 处的插值。 |
+| [**Ifl_IpoCub_f32**](../libraries/ifl/index.md#75231-ifl_ipocub_f32) | 基于使用相关的 Ifl_DPSearch_f32 例程搜索到的索引和比率信息，本例程计算并返回 3D 长方体的插值结果。 |
+| [**Ifl_IpoCur_f32**](../libraries/ifl/index.md#75121-ifl_ipocur_f32) | 基于搜索到的索引和比率信息，本例程计算并返回曲线的插值。 |
+| [**Ifl_IpoMap_f32**](../libraries/ifl/index.md#75131-ifl_ipomap_f32) | 基于使用 Ifl_DPSearch_f32 例程搜索到的索引和比率信息，本例程计算并返回映射的插值结果。 |
+
+## Specification of Floating Point Math Routines（浮点数学例程规范）（84）
+
+来源：[Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary
+
+| 函数 | 简述 |
+|---|---|
+| [**Mfl**](../libraries/mfl/index.md#75183-mfl) | 返回相应浮点输入的整数值。 |
+| [**Mfl_Abs_f32**](../libraries/mfl/index.md#7551-mfl_abs_f32) | 返回根据以下等式确定的参数的绝对值（ValAbs）。 |
+| [**Mfl_arcCos_f32**](../libraries/mfl/index.md#7586-mfl_arccos_f32) | 返回角度的反余弦，范围为 0.0 到 pi。 |
+| [**Mfl_arcSin_f32**](../libraries/mfl/index.md#7584-mfl_arcsin_f32) | 返回角度的反正弦，范围为 -pi/2 到 pi/2。 |
+| [**Mfl_arcTan2_f32**](../libraries/mfl/index.md#75810-mfl_arctan2_f32) | 返回角度的反正切，范围为 [-pi 到 pi]。 |
+| [**Mfl_arcTan_f32**](../libraries/mfl/index.md#7588-mfl_arctan_f32) | 返回角度的反正切，范围为 -pi/2 到 pi/2。 |
+| [**Mfl_ArrayAverage_f32_f32**](../libraries/mfl/index.md#75101-mfl_arrayaverage_f32_f32) | 该例程返回数组的平均值。 |
+| [**Mfl_Average_f32_f32**](../libraries/mfl/index.md#7591-mfl_average_f32_f32) | 该例程返回平均值。 |
+| [**Mfl_Bitpat_f32_u32**](../libraries/mfl/index.md#75191-mfl_bitpat_f32_u32) | 返回单精度浮点值的位表示。 |
+| [**Mfl_CalcTeQ_f32**](../libraries/mfl/index.md#75433-mfl_calcteq_f32) | 本例程计算时间等效系数。 |
+| [**Mfl_CalcTeQApp_f32**](../libraries/mfl/index.md#75434-mfl_calcteqapp_f32) | 本例程计算时间等效系数。 |
+| [**Mfl_Ceil_f32**](../libraries/mfl/index.md#7533-mfl_ceil_f32) | 返回通过将参数向正无穷方向舍入而确定的整数值。 |
+| [**Mfl_Cos_f32**](../libraries/mfl/index.md#7582-mfl_cos_f32) | 计算参数的余弦。 |
+| [**Mfl_Cos_s32_f32**](../libraries/mfl/index.md#75211-mfl_cos_s32_f32) | 快速余弦计算。 |
+| [**Mfl_CtrlSetLimit**](../libraries/mfl/index.md#75463-mfl_ctrlsetlimit) | 更新限幅结构。 |
+| [**Mfl_CtrlSetLimits**](../libraries/mfl/index.md#75464-mfl_ctrlsetlimits) | 更新限幅结构。 |
+| [**Mfl_DeadTime**](../libraries/mfl/index.md#7514-mfl_deadtime) | — |
+| [**Mfl_DeadTime_f32_f32**](../libraries/mfl/index.md#75141-mfl_deadtime_f32_f32) | 本例程返回具有指定延迟时间的输入值。 |
+| [**Mfl_Debounce**](../libraries/mfl/index.md#75151-mfl_debounce) | — |
+| [**Mfl_Debounce_u8_u8**](../libraries/mfl/index.md#751511-mfl_debounce_u8_u8) | 本例程对数字输入信号进行去抖，并以布尔值返回信号的状态。 |
+| [**Mfl_DebounceInit**](../libraries/mfl/index.md#75152-mfl_debounceinit) | — |
+| [**Mfl_DebounceSetParam**](../libraries/mfl/index.md#75153-mfl_debouncesetparam) | — |
+| [**Mfl_DivLim_f32**](../libraries/mfl/index.md#75185-mfl_divlim_f32) | 将 X_f32 除以 Y_f32，并将结果限制在 min_f32 和 max_f32 值之内。 |
+| [**Mfl_DT1Typ1Calc**](../libraries/mfl/index.md#75441-mfl_dt1typ1calc) | 本例程使用微分方程计算 DT1 控制器输出值。 |
+| [**Mfl_DT1Typ1Out_f32**](../libraries/mfl/index.md#75445-mfl_dt1typ1out_f32) | 本例程返回「DT1」控制器的输出值。 |
+| [**Mfl_DT1Typ1SetState**](../libraries/mfl/index.md#75443-mfl_dt1typ1setstate) | 该例程初始化 DT1 组件的内部状态变量。 |
+| [**Mfl_DT1Typ2Calc**](../libraries/mfl/index.md#75442-mfl_dt1typ2calc) | 本例程使用微分方程计算 DT1 控制器输出值。 |
+| [**Mfl_DT1Typ2Out_f32**](../libraries/mfl/index.md#75446-mfl_dt1typ2out_f32) | 本例程返回「DT1」控制器的输出值。 |
+| [**Mfl_DT1Typ2SetState**](../libraries/mfl/index.md#75444-mfl_dt1typ2setstate) | 该例程初始化 DT1 组件的内部状态变量。 |
+| [**Mfl_Exp_f32**](../libraries/mfl/index.md#7573-mfl_exp_f32) | 返回根据以下等式确定的操作数的指数（ValExp）。 |
+| [**Mfl_Floor_f32**](../libraries/mfl/index.md#7534-mfl_floor_f32) | 返回通过将参数向负无穷方向舍入而确定的自然数值。 |
+| [**Mfl_GetVersionInfo**](../libraries/mfl/index.md#761-mfl_getversioninfo) | 返回本库的版本信息。 |
+| [**Mfl_Hypot_f32f32_f32**](../libraries/mfl/index.md#75111-mfl_hypot_f32f32_f32) | 本服务计算向量的长度。 |
+| [**Mfl_HystCenterHalfDelta_f32_u8**](../libraries/mfl/index.md#751311-mfl_hystcenterhalfdelta_f32_u8) | 具有中心及左右两侧 halfDelta 切换点的滞回。 |
+| [**Mfl_HystDeltaRight_f32_u8**](../libraries/mfl/index.md#751331-mfl_hystdeltaright_f32_u8) | 具有右切换点和到左切换点增量的滞回。 |
+| [**Mfl_HystLeftDelta_f32_u8**](../libraries/mfl/index.md#751341-mfl_hystleftdelta_f32_u8) | 具有左切换点和到右切换点增量的滞回。 |
+| [**Mfl_HystLeftRight_f32_u8**](../libraries/mfl/index.md#751321-mfl_hystleftright_f32_u8) | 具有左、右切换点的滞回。 |
+| [**Mfl_ICalc**](../libraries/mfl/index.md#75461-mfl_icalc) | 本例程使用微分方程计算 I 控制器输出值。 |
+| [**Mfl_ILimCalc**](../libraries/mfl/index.md#75462-mfl_ilimcalc) | 本例程使用微分方程计算 I 控制器输出值。 |
+| [**Mfl_IOut_f32**](../libraries/mfl/index.md#75466-mfl_iout_f32) | 本例程返回「I」控制器的输出值。 |
+| [**Mfl_ISetState**](../libraries/mfl/index.md#75465-mfl_isetstate) | 该例程初始化 I 组件的内部状态变量。 |
+| [**Mfl_Limit_f32**](../libraries/mfl/index.md#7564-mfl_limit_f32) | 返回根据以下等式确定的有界值（newVal）。 |
+| [**Mfl_Log_f32**](../libraries/mfl/index.md#7574-mfl_log_f32) | 返回根据以下等式确定的操作数的自然（以 e 为底）对数（ValLog）。 |
+| [**Mfl_Max_f32**](../libraries/mfl/index.md#7561-mfl_max_f32) | 返回根据以下等式确定的两个参数中较大者的值（ValMax）。 |
+| [**Mfl_MedianSort_f32_f32**](../libraries/mfl/index.md#75181-mfl_mediansort_f32_f32) | 本例程按升序对数组的值进行排序。 |
+| [**Mfl_Min_f32**](../libraries/mfl/index.md#7562-mfl_min_f32) | 返回根据以下等式确定的两个参数中较小者的值（Min）。 |
+| [**Mfl_Mod_f32**](../libraries/mfl/index.md#75184-mfl_mod_f32) | 本例程返回值 x_f32 - (n*y_f32)，其中 n 为某一整数，使得当 y_f32 非零时，结果与 x_f32 同号且幅值小于 y_f32 的幅值。 |
+| [**Mfl_PCalc**](../libraries/mfl/index.md#75421-mfl_pcalc) | 微分方程：Y = K * X。 |
+| [**Mfl_PDCalc**](../libraries/mfl/index.md#75451-mfl_pdcalc) | 本例程使用微分方程计算比例加微分控制器的输出值。 |
+| [**Mfl_PDOut_f32**](../libraries/mfl/index.md#75454-mfl_pdout_f32) | 本例程返回「PD」控制器的输出值。 |
+| [**Mfl_PDSetParam**](../libraries/mfl/index.md#75453-mfl_pdsetparam) | 该例程设置 PD 组件的参数结构。 |
+| [**Mfl_PDSetState**](../libraries/mfl/index.md#75452-mfl_pdsetstate) | 该例程初始化 PD 组件的内部状态变量。 |
+| [**Mfl_PIDOut_f32**](../libraries/mfl/index.md#75487-mfl_pidout_f32) | 本例程返回「PID」控制器的输出值。 |
+| [**Mfl_PIDSetParam**](../libraries/mfl/index.md#75486-mfl_pidsetparam) | 该例程设置 PID 组件的参数结构。 |
+| [**Mfl_PIDSetState**](../libraries/mfl/index.md#75485-mfl_pidsetstate) | 该例程初始化 PID 组件的内部状态变量。 |
+| [**Mfl_PIDTyp1Calc**](../libraries/mfl/index.md#75481-mfl_pidtyp1calc) | 本例程使用微分方程计算比例加积分加微分控制器（隐式类型）的输出值。 |
+| [**Mfl_PIDTyp1LimCalc**](../libraries/mfl/index.md#75482-mfl_pidtyp1limcalc) | 本例程使用微分方程计算比例加积分加微分控制器（隐式类型）的输出值。 |
+| [**Mfl_PIDTyp2Calc**](../libraries/mfl/index.md#75483-mfl_pidtyp2calc) | 本例程使用微分方程计算比例加积分加微分控制器（显式类型）的输出值。 |
+| [**Mfl_PIDTyp2LimCalc**](../libraries/mfl/index.md#75484-mfl_pidtyp2limcalc) | 本例程使用微分方程计算比例加积分加微分控制器（显式类型）的输出值。 |
+| [**Mfl_POut_f32**](../libraries/mfl/index.md#75422-mfl_pout_f32) | 本例程返回受返回数据类型限制的「P」控制器输出值。 |
+| [**Mfl_Pow_f32**](../libraries/mfl/index.md#7571-mfl_pow_f32) | 返回根据以下等式确定的 ValBase 的 ValExp 次幂。 |
+| [**Mfl_PT1Calc**](../libraries/mfl/index.md#75431-mfl_pt1calc) | 本例程使用以下差分方程计算 PT1 控制器输出值。 |
+| [**Mfl_PT1Out_f32**](../libraries/mfl/index.md#75435-mfl_pt1out_f32) | 本例程返回「PT1」控制器的输出值。 |
+| [**Mfl_PT1SetState**](../libraries/mfl/index.md#75432-mfl_pt1setstate) | 该例程初始化 PT1 组件的内部状态变量。 |
+| [**Mfl_RampCalc**](../libraries/mfl/index.md#751211-mfl_rampcalc) | 斜坡输出值根据 (State\_cpst-&gt;State\_f32 &gt; X\_f32) 还是 (State\_cpst-&gt;State\_f32 &lt; X\_f32)，以斜率 * dT_f32 增加或减小一个值。 |
+| [**Mfl_RampCalcJump**](../libraries/mfl/index.md#751251-mfl_rampcalcjump) | 本例程在主斜坡函数 Mfl_RampCalc 的基础上工作，以提供对目标值的更快适配。 |
+| [**Mfl_RampCalcSwitch**](../libraries/mfl/index.md#751262-mfl_rampcalcswitch) | 本例程基于 Switch 参数在斜坡服务的两个目标值之间切换。 |
+| [**Mfl_RampCalcSwitch_f32**](../libraries/mfl/index.md#751261-mfl_rampcalcswitch_f32) | 本例程基于 Switch 值在两个目标值之间切换斜坡。 |
+| [**Mfl_RampCheckActivity**](../libraries/mfl/index.md#751281-mfl_rampcheckactivity) | 本例程检查斜坡的状态，如果斜坡处于活动状态则返回 TRUE，否则返回 FALSE。 |
+| [**Mfl_RampGetSwitchPos**](../libraries/mfl/index.md#751271-mfl_rampgetswitchpos) | 获取斜坡开关函数的当前开关位置。 |
+| [**Mfl_RampInitState**](../libraries/mfl/index.md#751221-mfl_rampinitstate) | 初始化斜坡的状态、方向和开关参数。 |
+| [**Mfl_RampOut_f32**](../libraries/mfl/index.md#751241-mfl_rampout_f32) | 返回斜坡组件的内部状态。 |
+| [**Mfl_RampSetParam**](../libraries/mfl/index.md#751231-mfl_rampsetparam) | 为结构 Mfl\_ParamRamp\_Type 所提供的斜坡设置斜率参数。 |
+| [**Mfl_RateLimiter_f32**](../libraries/mfl/index.md#7563-mfl_ratelimiter_f32) | 增加的值和减小的值受 maxdif 速率限制。 |
+| [**Mfl_Round_f32**](../libraries/mfl/index.md#7532-mfl_round_f32) | 返回通过将参数向最接近的整数舍入而确定的整数值。 |
+| [**Mfl_RSqrt_f32**](../libraries/mfl/index.md#75201-mfl_rsqrt_f32) | 操作数的快速平方根倒数（ValSqrt）。 |
+| [**Mfl_Sign_f32**](../libraries/mfl/index.md#7552-mfl_sign_f32) | 返回根据以下等式确定的参数的符号（ValSign）。 |
+| [**Mfl_Sin_f32**](../libraries/mfl/index.md#7581-mfl_sin_f32) | 计算参数的正弦。 |
+| [**Mfl_Sin_s32_f32**](../libraries/mfl/index.md#75212-mfl_sin_s32_f32) | 快速正弦计算。 |
+| [**Mfl_SortAscend_f32**](../libraries/mfl/index.md#75161-mfl_sortascend_f32) | 排序算法将给定的输入数组按升序修改，并通过指针返回排序后的数组结果。 |
+| [**Mfl_SortDescend_f32**](../libraries/mfl/index.md#75171-mfl_sortdescend_f32) | 排序算法将给定的输入数组按降序修改，并通过指针返回排序后的数组结果。 |
+| [**Mfl_Sqrt_f32**](../libraries/mfl/index.md#7572-mfl_sqrt_f32) | 返回根据以下等式确定的操作数的平方根（ValSqrt）。 |
+| [**Mfl_Tan_f32**](../libraries/mfl/index.md#7583-mfl_tan_f32) | 计算参数的正切。 |
+| [**Mfl_Trunc_f32**](../libraries/mfl/index.md#7531-mfl_trunc_f32) | 返回通过将参数向零舍入而确定的整数值。 |
 
 ## Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）（91）
 
