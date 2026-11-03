@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **536** 个条目。
+共 **662** 个条目。
 
 ## A
 
@@ -146,6 +146,60 @@ title: "AUTOSAR API 类型清单"
 
 **[Can_TimeStampType](../communication/can_driver/index.md#7210-can_timestamptype)**
 > 类型 · [AUTOSAR CAN Driver（CAN驱动程序）](../communication/can_driver/index.md) · SWS_CANDriver · R23-11
+
+**[Can_TTErrorLevelEnumType](../communication/ttcan_driver/index.md#725-can_tterrorlevelenumtype)**
+> 类型 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTErrorLevelType](../communication/ttcan_driver/index.md#726-can_tterrorleveltype)**
+> 类型 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTMasterSlaveModeType](../communication/ttcan_driver/index.md#722-can_ttmasterslavemodetype)**
+> 类型 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTMasterStateType](../communication/ttcan_driver/index.md#724-can_ttmasterstatetype)**
+> 类型 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTSyncModeEnumType](../communication/ttcan_driver/index.md#723-can_ttsyncmodeenumtype)**
+> 类型 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTTimeSourceType](../communication/ttcan_driver/index.md#727-can_tttimesourcetype)**
+> 类型 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTTimeType](../communication/ttcan_driver/index.md#721-can_tttimetype)**
+> 类型 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTTURType](../communication/ttcan_driver/index.md#728-can_ttturtype)**
+> 类型 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[CanIf_TTErrorLevelEnumType](../communication/ttcan_interface/index.md#725-canif_tterrorlevelenumtype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTErrorLevelType](../communication/ttcan_interface/index.md#726-canif_tterrorleveltype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTEventEnumType](../communication/ttcan_interface/index.md#729-canif_tteventenumtype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTMasterSlaveModeType](../communication/ttcan_interface/index.md#722-canif_ttmasterslavemodetype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTMasterStateType](../communication/ttcan_interface/index.md#724-canif_ttmasterstatetype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTSevereErrorEnumType](../communication/ttcan_interface/index.md#727-canif_ttsevereerrorenumtype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTSyncModeEnumType](../communication/ttcan_interface/index.md#723-canif_ttsyncmodeenumtype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTTimeSourceType](../communication/ttcan_interface/index.md#728-canif_tttimesourcetype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTTimeType](../communication/ttcan_interface/index.md#721-canif_tttimetype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTTimingErrorIRQType](../communication/ttcan_interface/index.md#7210-canif_tttimingerrorirqtype)**
+> 类型 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
 
 **[CanNm_ConfigType](../communication/can_network_management/index.md#721-cannm_configtype)**
 > 类型 · [AUTOSAR CAN NM（CAN网络管理）](../communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
@@ -589,6 +643,192 @@ title: "AUTOSAR API 类型清单"
 
 ## E
 
+**[E2E_P01CheckStateType](../libraries/e2e/index.md#7214-e2e_p01checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P01CheckStatusType](../libraries/e2e/index.md#7215-e2e_p01checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P01ConfigType](../libraries/e2e/index.md#7211-e2e_p01configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P01DataIDMode](../libraries/e2e/index.md#7212-e2e_p01dataidmode)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P01ProtectStateType](../libraries/e2e/index.md#7213-e2e_p01protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P02CheckStateType](../libraries/e2e/index.md#7223-e2e_p02checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P02CheckStatusType](../libraries/e2e/index.md#7224-e2e_p02checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P02ConfigType](../libraries/e2e/index.md#7221-e2e_p02configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P02ProtectStateType](../libraries/e2e/index.md#7222-e2e_p02protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04CheckStateType](../libraries/e2e/index.md#7233-e2e_p04checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04CheckStatusType](../libraries/e2e/index.md#7234-e2e_p04checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04ConfigType](../libraries/e2e/index.md#7231-e2e_p04configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04mCheckStateType](../libraries/e2e/index.md#7243-e2e_p04mcheckstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04mCheckStatusType](../libraries/e2e/index.md#7244-e2e_p04mcheckstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04mConfigType](../libraries/e2e/index.md#7241-e2e_p04mconfigtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04mProtectStateType](../libraries/e2e/index.md#7242-e2e_p04mprotectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04ProtectStateType](../libraries/e2e/index.md#7232-e2e_p04protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P05CheckStateType](../libraries/e2e/index.md#7253-e2e_p05checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P05CheckStatusType](../libraries/e2e/index.md#7254-e2e_p05checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P05ConfigType](../libraries/e2e/index.md#7251-e2e_p05configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P05ProtectStateType](../libraries/e2e/index.md#7252-e2e_p05protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P06CheckStateType](../libraries/e2e/index.md#7263-e2e_p06checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P06CheckStatusType](../libraries/e2e/index.md#7264-e2e_p06checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P06ConfigType](../libraries/e2e/index.md#7261-e2e_p06configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P06ProtectStateType](../libraries/e2e/index.md#7262-e2e_p06protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07CheckStateType](../libraries/e2e/index.md#7273-e2e_p07checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07CheckStatusType](../libraries/e2e/index.md#7274-e2e_p07checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07ConfigType](../libraries/e2e/index.md#7271-e2e_p07configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07mCheckStateType](../libraries/e2e/index.md#7283-e2e_p07mcheckstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07mCheckStatusType](../libraries/e2e/index.md#7284-e2e_p07mcheckstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07mConfigType](../libraries/e2e/index.md#7281-e2e_p07mconfigtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07mProtectStateType](../libraries/e2e/index.md#7282-e2e_p07mprotectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07ProtectStateType](../libraries/e2e/index.md#7272-e2e_p07protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08CheckStateType](../libraries/e2e/index.md#7293-e2e_p08checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08CheckStatusType](../libraries/e2e/index.md#7294-e2e_p08checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08ConfigType](../libraries/e2e/index.md#7291-e2e_p08configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08mCheckStateType](../libraries/e2e/index.md#72103-e2e_p08mcheckstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08mCheckStatusType](../libraries/e2e/index.md#72104-e2e_p08mcheckstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08mConfigType](../libraries/e2e/index.md#72101-e2e_p08mconfigtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08mProtectStateType](../libraries/e2e/index.md#72102-e2e_p08mprotectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08ProtectStateType](../libraries/e2e/index.md#7292-e2e_p08protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P11CheckStateType](../libraries/e2e/index.md#72114-e2e_p11checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P11CheckStatusType](../libraries/e2e/index.md#72115-e2e_p11checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P11ConfigType](../libraries/e2e/index.md#72111-e2e_p11configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P11DataIDMode](../libraries/e2e/index.md#72112-e2e_p11dataidmode)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P11ProtectStateType](../libraries/e2e/index.md#72113-e2e_p11protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P22CheckStateType](../libraries/e2e/index.md#72123-e2e_p22checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P22CheckStatusType](../libraries/e2e/index.md#72124-e2e_p22checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P22ConfigType](../libraries/e2e/index.md#72121-e2e_p22configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P22ProtectStateType](../libraries/e2e/index.md#72122-e2e_p22protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44CheckStateType](../libraries/e2e/index.md#72133-e2e_p44checkstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44CheckStatusType](../libraries/e2e/index.md#72134-e2e_p44checkstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44ConfigType](../libraries/e2e/index.md#72131-e2e_p44configtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44mCheckStateType](../libraries/e2e/index.md#72143-e2e_p44mcheckstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44mCheckStatusType](../libraries/e2e/index.md#72144-e2e_p44mcheckstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44mConfigType](../libraries/e2e/index.md#72141-e2e_p44mconfigtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44mProtectStateType](../libraries/e2e/index.md#72142-e2e_p44mprotectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44ProtectStateType](../libraries/e2e/index.md#72132-e2e_p44protectstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_PCheckStatusType](../libraries/e2e/index.md#72151-e2e_pcheckstatustype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_SMCheckStateType](../libraries/e2e/index.md#72153-e2e_smcheckstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_SMConfigType](../libraries/e2e/index.md#72152-e2e_smconfigtype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_SMStateType](../libraries/e2e/index.md#72154-e2e_smstatetype)**
+> 类型 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
 **[E2EXf_ConfigType](../communication/e2e_transformer/index.md#721-e2exf_configtype)**
 > 类型 · [E2E Transformer (E2E转换器)](../communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
 
@@ -886,6 +1126,66 @@ title: "AUTOSAR API 类型清单"
 **[IdleModeType](../system_services/operating_system/index.md#7321-idlemodetype)**
 > 类型 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
+**[IEEE1722Tp_CommonStreamHeaderType](../communication/ieee1722tp/index.md#734-ieee1722tp_commonstreamheadertype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_ConfigType](../communication/ieee1722tp/index.md#731-ieee1722tp_configtype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_RxAafAes3Type](../communication/ieee1722tp/index.md#7316-ieee1722tp_rxaafaes3type)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_RxAafPcmType](../communication/ieee1722tp/index.md#7314-ieee1722tp_rxaafpcmtype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_RxCrfType](../communication/ieee1722tp/index.md#7320-ieee1722tp_rxcrftype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_RxIec68133CipNoSphType](../communication/ieee1722tp/index.md#7310-ieee1722tp_rxiec68133cipnosphtype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_RxIec68133CipWithSphType](../communication/ieee1722tp/index.md#7312-ieee1722tp_rxiec68133cipwithsphtype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_RxIec68133IidcType](../communication/ieee1722tp/index.md#736-ieee1722tp_rxiec68133iidctype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_RxIec68133Type](../communication/ieee1722tp/index.md#738-ieee1722tp_rxiec68133type)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_RxRvfType](../communication/ieee1722tp/index.md#7318-ieee1722tp_rxrvftype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_StreamIndexType](../communication/ieee1722tp/index.md#732-ieee1722tp_streamindextype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_StreamStateType](../communication/ieee1722tp/index.md#733-ieee1722tp_streamstatetype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_TxAafAes3Type](../communication/ieee1722tp/index.md#7315-ieee1722tp_txaafaes3type)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_TxAafPcmType](../communication/ieee1722tp/index.md#7313-ieee1722tp_txaafpcmtype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_TxCrfType](../communication/ieee1722tp/index.md#7319-ieee1722tp_txcrftype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_TxIec68133CipNoSphType](../communication/ieee1722tp/index.md#739-ieee1722tp_txiec68133cipnosphtype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_TxIec68133CipWithSphType](../communication/ieee1722tp/index.md#7311-ieee1722tp_txiec68133cipwithsphtype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_TxIec68133IidcType](../communication/ieee1722tp/index.md#735-ieee1722tp_txiec68133iidctype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_TxIec68133Type](../communication/ieee1722tp/index.md#737-ieee1722tp_txiec68133type)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_TxRvfType](../communication/ieee1722tp/index.md#7317-ieee1722tp_txrvftype)**
+> 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
 **[ISRType](../system_services/operating_system/index.md#7311-isrtype)**
 > 类型 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
@@ -896,6 +1196,27 @@ title: "AUTOSAR API 类型清单"
 
 **[J1939Dcm_StateType](../diagnostics/j1939dcm/index.md#722-j1939dcm_statetype)**
 > 类型 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
+**[J1939Nm_ConfigType](../communication/j1939nm/index.md#731-j1939nm_configtype)**
+> 类型 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Rm_AckCode](../communication/j1939rm/index.md#7841-j1939rm_ackcode)**
+> 类型 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_ConfigType](../communication/j1939rm/index.md#731-j1939rm_configtype)**
+> 类型 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_ExtIdInfoType](../communication/j1939rm/index.md#7843-j1939rm_extidinfotype)**
+> 类型 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_ExtIdType](../communication/j1939rm/index.md#7842-j1939rm_extidtype)**
+> 类型 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_StateType](../communication/j1939rm/index.md#732-j1939rm_statetype)**
+> 类型 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Tp_ConfigType](../communication/j1939tp/index.md#731-j1939tp_configtype)**
+> 类型 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
 
 ## K
 
@@ -952,11 +1273,29 @@ title: "AUTOSAR API 类型清单"
 **[LinIf_SchHandleType](../communication/lin_interface/index.md#721-linif_schhandletype)**
 > 类型 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11
 
+**[LinSM_ConfigType](../communication/linsm/index.md#722-linsm_configtype)**
+> 类型 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
+**[LinSM_ModeType](../communication/linsm/index.md#721-linsm_modetype)**
+> 类型 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
 **[LinTp_ConfigType](../communication/lin_interface/index.md#723-lintp_configtype)**
 > 类型 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11
 
 **[LinTp_Mode](../communication/lin_interface/index.md#724-lintp_mode)**
 > 类型 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11
+
+**[LinTrcv_ConfigType](../communication/lintrcv/index.md#721-lintrcv_configtype)**
+> 类型 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
+
+**[LinTrcv_TrcvModeType](../communication/lintrcv/index.md#722-lintrcv_trcvmodetype)**
+> 类型 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
+
+**[LinTrcv_TrcvWakeupModeType](../communication/lintrcv/index.md#723-lintrcv_trcvwakeupmodetype)**
+> 类型 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
+
+**[LinTrcv_TrcvWakeupReasonType](../communication/lintrcv/index.md#724-lintrcv_trcvwakeupreasontype)**
+> 类型 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
 
 **[ListElemStructType](../general/communication_stack_types/index.md#7114-listelemstructtype)**
 > 类型 · [AUTOSAR Communication Stack Types（通信栈类型）](../general/communication_stack_types/index.md) · SWS_CommunicationStackTypes · R23-11
@@ -1127,6 +1466,45 @@ title: "AUTOSAR API 类型清单"
 
 **[Mirror_NetworkType](../communication/mirror/index.md#7811-mirror_networktype)**
 > 类型 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
+
+**[Mka_ConfidentialityOffsetType](../communication/macsec/index.md#723-mka_confidentialityoffsettype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_ConfigType](../communication/macsec/index.md#7213-mka_configtype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_MacSecConfigType](../communication/macsec/index.md#721-mka_macsecconfigtype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_MkaStatusType](../communication/macsec/index.md#7212-mka_mkastatustype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_PaeStatusType](../communication/macsec/index.md#7211-mka_paestatustype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_PermissiveModeType](../communication/macsec/index.md#729-mka_permissivemodetype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_SakKeyPtrType](../communication/macsec/index.md#728-mka_sakkeyptrtype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_Stats_Rx_ScType](../communication/macsec/index.md#727-mka_stats_rx_sctype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_Stats_Rx_SecYType](../communication/macsec/index.md#725-mka_stats_rx_secytype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_Stats_SecYType](../communication/macsec/index.md#7210-mka_stats_secytype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_Stats_Tx_ScType](../communication/macsec/index.md#726-mka_stats_tx_sctype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_Stats_Tx_SecYType](../communication/macsec/index.md#724-mka_stats_tx_secytype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_ValidateFramesType](../communication/macsec/index.md#722-mka_validateframestype)**
+> 类型 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
 
 ## N
 

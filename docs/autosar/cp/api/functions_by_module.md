@@ -1686,6 +1686,87 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**Icu_StopSignalMeasurement**](../io/icu_driver/index.md#7321-icu_stopsignalmeasurement) | 停止给定通道的信号测量。 |
 | [**Icu_StopTimestamp**](../io/icu_driver/index.md#7312-icu_stoptimestamp) | 停止给定通道的时间戳测量。 |
 
+## AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）（11）
+
+来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer
+
+| 函数 | 简述 |
+|---|---|
+| [**IEEE1722Tp_ActivateStream**](../communication/ieee1722tp/index.md#7421-ieee1722tp_activatestream) | — |
+| [**IEEE1722Tp_DeactivateStream**](../communication/ieee1722tp/index.md#7422-ieee1722tp_deactivatestream) | — |
+| [**IEEE1722Tp_DeInit**](../communication/ieee1722tp/index.md#7412-ieee1722tp_deinit) | — |
+| [**IEEE1722Tp_GetVersionInfo**](../communication/ieee1722tp/index.md#7413-ieee1722tp_getversioninfo) | — |
+| [**IEEE1722Tp_Init**](../communication/ieee1722tp/index.md#7411-ieee1722tp_init) | — |
+| [**IEEE1722Tp_MainFunctionRx**](../communication/ieee1722tp/index.md#762-ieee1722tp_mainfunctionrx) | — |
+| [**IEEE1722Tp_MainFunctionTx**](../communication/ieee1722tp/index.md#761-ieee1722tp_mainfunctiontx) | — |
+| [**IEEE1722Tp_ReleaseRxBuffer**](../communication/ieee1722tp/index.md#7432-ieee1722tp_releaserxbuffer) | — |
+| [**IEEE1722Tp_RxIndication**](../communication/ieee1722tp/index.md#752-ieee1722tp_rxindication) | — |
+| [**IEEE1722Tp_Transmit**](../communication/ieee1722tp/index.md#7431-ieee1722tp_transmit) | — |
+| [**IEEE1722Tp_TxConfirmation**](../communication/ieee1722tp/index.md#751-ieee1722tp_txconfirmation) | — |
+
+## AUTOSAR J1939Nm（SAE J1939 网络管理）（12）
+
+来源：[AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement
+
+| 函数 | 简述 |
+|---|---|
+| [**J1939Nm_DeInit**](../communication/j1939nm/index.md#742-j1939nm_deinit) | — |
+| [**J1939Nm_GetBusOffDelay**](../communication/j1939nm/index.md#747-j1939nm_getbusoffdelay) | — |
+| [**J1939Nm_GetState**](../communication/j1939nm/index.md#746-j1939nm_getstate) | — |
+| [**J1939Nm_GetVersionInfo**](../communication/j1939nm/index.md#743-j1939nm_getversioninfo) | — |
+| [**J1939Nm_Init**](../communication/j1939nm/index.md#741-j1939nm_init) | — |
+| [**J1939Nm_MainFunction**](../communication/j1939nm/index.md#761-j1939nm_mainfunction) | — |
+| [**J1939Nm_NetworkRelease**](../communication/j1939nm/index.md#745-j1939nm_networkrelease) | — |
+| [**J1939Nm_NetworkRequest**](../communication/j1939nm/index.md#744-j1939nm_networkrequest) | — |
+| [**J1939Nm_PassiveStartUp**](../communication/j1939nm/index.md#748-j1939nm_passivestartup) | — |
+| [**J1939Nm_RequestIndication**](../communication/j1939nm/index.md#753-j1939nm_requestindication) | — |
+| [**J1939Nm_RxIndication**](../communication/j1939nm/index.md#751-j1939nm_rxindication) | — |
+| [**J1939Nm_TxConfirmation**](../communication/j1939nm/index.md#752-j1939nm_txconfirmation) | — |
+
+## AUTOSAR J1939Rm（SAE J1939 请求管理器）（20）
+
+来源：[AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager
+
+| 函数 | 简述 |
+|---|---|
+| [**AppAckIndication**](../communication/j1939rm/index.md#7834-appackindication) | — |
+| [**AppCancelRequestTimeout**](../communication/j1939rm/index.md#7833-appcancelrequesttimeout) | — |
+| [**AppRequestIndication**](../communication/j1939rm/index.md#7835-apprequestindication) | — |
+| [**AppRequestTimeoutIndication**](../communication/j1939rm/index.md#7836-apprequesttimeoutindication) | — |
+| [**AppSendAck**](../communication/j1939rm/index.md#7831-appsendack) | — |
+| [**AppSendRequest**](../communication/j1939rm/index.md#7832-appsendrequest) | — |
+| [**J1939Rm_AckIndication**](../communication/j1939rm/index.md#7821-j1939rm_ackindication) | — |
+| [**J1939Rm_CancelRequestTimeout**](../communication/j1939rm/index.md#746-j1939rm_cancelrequesttimeout) | — |
+| [**J1939Rm_CheckReceivedComIPdu**](../communication/j1939rm/index.md#753-j1939rm_checkreceivedcomipdu) | — |
+| [**J1939Rm_DeInit**](../communication/j1939rm/index.md#742-j1939rm_deinit) | — |
+| [**J1939Rm_GetVersionInfo**](../communication/j1939rm/index.md#743-j1939rm_getversioninfo) | — |
+| [**J1939Rm_Init**](../communication/j1939rm/index.md#741-j1939rm_init) | — |
+| [**J1939Rm_MainFunction**](../communication/j1939rm/index.md#761-j1939rm_mainfunction) | — |
+| [**J1939Rm_RequestIndication**](../communication/j1939rm/index.md#7822-j1939rm_requestindication) | — |
+| [**J1939Rm_RequestTimeoutIndication**](../communication/j1939rm/index.md#7823-j1939rm_requesttimeoutindication) | — |
+| [**J1939Rm_RxIndication**](../communication/j1939rm/index.md#751-j1939rm_rxindication) | — |
+| [**J1939Rm_SendAck**](../communication/j1939rm/index.md#747-j1939rm_sendack) | — |
+| [**J1939Rm_SendRequest**](../communication/j1939rm/index.md#745-j1939rm_sendrequest) | — |
+| [**J1939Rm_SetState**](../communication/j1939rm/index.md#744-j1939rm_setstate) | — |
+| [**J1939Rm_TxConfirmation**](../communication/j1939rm/index.md#752-j1939rm_txconfirmation) | — |
+
+## AUTOSAR J1939Tp（SAE J1939 传输层）（10）
+
+来源：[AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer
+
+| 函数 | 简述 |
+|---|---|
+| [**J1939Tp_CancelReceive**](../communication/j1939tp/index.md#746-j1939tp_cancelreceive) | — |
+| [**J1939Tp_CancelTransmit**](../communication/j1939tp/index.md#745-j1939tp_canceltransmit) | — |
+| [**J1939Tp_ChangeParameter**](../communication/j1939tp/index.md#747-j1939tp_changeparameter) | — |
+| [**J1939Tp_GetVersionInfo**](../communication/j1939tp/index.md#743-j1939tp_getversioninfo) | — |
+| [**J1939Tp_Init**](../communication/j1939tp/index.md#741-j1939tp_init) | — |
+| [**J1939Tp_MainFunction**](../communication/j1939tp/index.md#761-j1939tp_mainfunction) | — |
+| [**J1939Tp_RxIndication**](../communication/j1939tp/index.md#751-j1939tp_rxindication) | — |
+| [**J1939Tp_Shutdown**](../communication/j1939tp/index.md#742-j1939tp_shutdown) | — |
+| [**J1939Tp_Transmit**](../communication/j1939tp/index.md#744-j1939tp_transmit) | — |
+| [**J1939Tp_TxConfirmation**](../communication/j1939tp/index.md#752-j1939tp_txconfirmation) | — |
+
 ## AUTOSAR Key Manager（密钥管理器）（41）
 
 来源：[AUTOSAR Key Manager（密钥管理器）](../crypto/key_manager/index.md) · SWS_KeyManager
@@ -1821,6 +1902,37 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**LinTp_Shutdown**](../communication/lin_interface/index.md#7318-lintp_shutdown) | 关闭 LIN TP。 |
 | [**LinTp_Transmit**](../communication/lin_interface/index.md#7316-lintp_transmit) | 请求发送一个 PDU。 |
 
+## AUTOSAR LinSM（LIN 状态管理器）（10）
+
+来源：[AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager
+
+| 函数 | 简述 |
+|---|---|
+| [**LinSM_GetCurrentComMode**](../communication/linsm/index.md#734-linsm_getcurrentcommode) | — |
+| [**LinSM_GetVersionInfo**](../communication/linsm/index.md#733-linsm_getversioninfo) | — |
+| [**LinSM_GotoSleepConfirmation**](../communication/linsm/index.md#753-linsm_gotosleepconfirmation) | — |
+| [**LinSM_GotoSleepIndication**](../communication/linsm/index.md#752-linsm_gotosleepindication) | — |
+| [**LinSM_Init**](../communication/linsm/index.md#731-linsm_init) | — |
+| [**LinSM_MainFunction**](../communication/linsm/index.md#741-linsm_mainfunction) | — |
+| [**LinSM_RequestComMode**](../communication/linsm/index.md#735-linsm_requestcommode) | — |
+| [**LinSM_ScheduleRequest**](../communication/linsm/index.md#732-linsm_schedulerequest) | — |
+| [**LinSM_ScheduleRequestConfirmation**](../communication/linsm/index.md#751-linsm_schedulerequestconfirmation) | — |
+| [**LinSM_WakeupConfirmation**](../communication/linsm/index.md#754-linsm_wakeupconfirmation) | — |
+
+## AUTOSAR LinTrcv（LIN 收发器驱动程序）（7）
+
+来源：[AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver
+
+| 函数 | 简述 |
+|---|---|
+| [**LinTrcv_CheckWakeup**](../communication/lintrcv/index.md#736-lintrcv_checkwakeup) | — |
+| [**LinTrcv_GetBusWuReason**](../communication/lintrcv/index.md#734-lintrcv_getbuswureason) | — |
+| [**LinTrcv_GetOpMode**](../communication/lintrcv/index.md#733-lintrcv_getopmode) | — |
+| [**LinTrcv_GetVersionInfo**](../communication/lintrcv/index.md#735-lintrcv_getversioninfo) | — |
+| [**LinTrcv_Init**](../communication/lintrcv/index.md#731-lintrcv_init) | — |
+| [**LinTrcv_SetOpMode**](../communication/lintrcv/index.md#732-lintrcv_setopmode) | — |
+| [**LinTrcv_SetWakeupMode**](../communication/lintrcv/index.md#737-lintrcv_setwakeupmode) | — |
+
 ## AUTOSAR MCU Driver（微控制器单元驱动）（11）
 
 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](../mcal/mcu_driver/index.md) · SWS_MCUDriver
@@ -1900,6 +2012,31 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**Mem_Resume**](../memory/memory_driver/index.md#7316-mem_resume) | 服务 ID 0x0d。 |
 | [**Mem_Suspend**](../memory/memory_driver/index.md#7315-mem_suspend) | 服务 ID 0x0c。 |
 | [**Mem_Write**](../memory/memory_driver/index.md#7322-mem_write) | 服务 ID 0x06。 |
+
+## AUTOSAR Mka（MACsec 密钥协商）（18）
+
+来源：[AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement
+
+| 函数 | 简述 |
+|---|---|
+| [**Mka_GetCknStatus**](../communication/macsec/index.md#734-mka_getcknstatus) | — |
+| [**Mka_GetEnable**](../communication/macsec/index.md#736-mka_getenable) | — |
+| [**Mka_GetMacSecStatistics**](../communication/macsec/index.md#7310-mka_getmacsecstatistics) | — |
+| [**Mka_GetMacSecStatisticsNotification**](../communication/macsec/index.md#741-mka_getmacsecstatisticsnotification) | — |
+| [**Mka_GetPaeStatus**](../communication/macsec/index.md#737-mka_getpaestatus) | — |
+| [**Mka_GetVersionInfo**](../communication/macsec/index.md#732-mka_getversioninfo) | — |
+| [**Mka_Init**](../communication/macsec/index.md#731-mka_init) | — |
+| [**Mka_LinkStateChange**](../communication/macsec/index.md#7311-mka_linkstatechange) | — |
+| [**Mka_MacSecAddRxSaNotification**](../communication/macsec/index.md#746-mka_macsecaddrxsanotification) | — |
+| [**Mka_MacSecAddTxSaNotification**](../communication/macsec/index.md#745-mka_macsecaddtxsanotification) | — |
+| [**Mka_MacSecUpdateSecYNotification**](../communication/macsec/index.md#744-mka_macsecupdatesecynotification) | — |
+| [**Mka_MainFunction**](../communication/macsec/index.md#751-mka_mainfunction) | — |
+| [**Mka_RxIndication**](../communication/macsec/index.md#742-mka_rxindication) | — |
+| [**Mka_SetCknStatus**](../communication/macsec/index.md#733-mka_setcknstatus) | — |
+| [**Mka_SetEnable**](../communication/macsec/index.md#735-mka_setenable) | — |
+| [**Mka_SetPaePermissiveMode**](../communication/macsec/index.md#738-mka_setpaepermissivemode) | — |
+| [**Mka_StartPae**](../communication/macsec/index.md#739-mka_startpae) | — |
+| [**Mka_TxConfirmation**](../communication/macsec/index.md#743-mka_txconfirmation) | — |
 
 ## AUTOSAR Nm（网络管理接口）（1）
 
@@ -2318,6 +2455,144 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**SoAd_TxConfirmation**](../communication/soad/index.md#743-soad_txconfirmation) | C |
 | [**SoAd_WriteDhcpHostNameOption**](../communication/soad/index.md#73419-soad_writedhcphostnameoption) | C |
 
+## Specification of Bit Handling Routines（位处理例程规范）（25）
+
+来源：[Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary
+
+| 函数 | 简述 |
+|---|---|
+| [**Bfx_ClrBit**](../libraries/bfx/index.md#742-bfx_clrbit) | 该函数应将输入数据在请求的位位置上的逻辑状态清除为「0」。 |
+| [**Bfx_ClrBitMask**](../libraries/bfx/index.md#747-bfx_clrbitmask) | 该函数应按照掩码的规定，将输入数据所有位位置的逻辑状态清除为「0」。 |
+| [**Bfx_CopyBit**](../libraries/bfx/index.md#7417-bfx_copybit) | 该函数应将一个位从源数据的某个位位置复制到目标数据的某个位位置。 |
+| [**Bfx_CountLeadingOnes**](../libraries/bfx/index.md#7422-bfx_countleadingones) | 从最高有效位开始统计数据中连续 1 的数量并返回结果。 |
+| [**Bfx_CountLeadingSigns**](../libraries/bfx/index.md#7423-bfx_countleadingsigns) | 从 msb 减一的位置开始，统计数据中与最高有效位具有相同值的连续位的数量。 |
+| [**Bfx_CountLeadingZeros**](../libraries/bfx/index.md#7424-bfx_countleadingzeros) | 从最高有效位开始统计数据中连续 0 的数量并返回结果。 |
+| [**Bfx_GetBit**](../libraries/bfx/index.md#743-bfx_getbit) | 该函数应返回输入数据在请求的位位置上的逻辑状态。 |
+| [**Bfx_GetBits**](../libraries/bfx/index.md#745-bfx_getbits) | 该函数应返回输入数据从「BitStartPn」开始、长度为「BitLn」的各个位。 |
+| [**Bfx_GetVersionInfo**](../libraries/bfx/index.md#781-bfx_getversioninfo) | 返回本库的版本信息。 |
+| [**Bfx_PutBit**](../libraries/bfx/index.md#7420-bfx_putbit) | 该函数应按照「Status」值，将输入数据中由 BitPn 指定的位更新为「1」或「0」。 |
+| [**Bfx_PutBits**](../libraries/bfx/index.md#7418-bfx_putbits) | 该函数应按照 Pattern 中的规定，将位从指定的位位置开始放入输入 Data 中。 |
+| [**Bfx_PutBitsMask**](../libraries/bfx/index.md#7419-bfx_putbitsmask) | 该函数应将 Pattern 中定义的、且相应 Mask 位置位为 1 的所有位放入输入 Data 中。 |
+| [**Bfx_RotBitLt**](../libraries/bfx/index.md#7416-bfx_rotbitlt) | 该函数应将数据向左循环移位 ShiftCnt 位。 |
+| [**Bfx_RotBitRt**](../libraries/bfx/index.md#7415-bfx_rotbitrt) | 该函数应将数据向右循环移位 ShiftCnt 位。 |
+| [**Bfx_SetBit**](../libraries/bfx/index.md#741-bfx_setbit) | 该函数应将输入数据在请求的位位置上的逻辑状态设置为「1」。 |
+| [**Bfx_SetBitMask**](../libraries/bfx/index.md#746-bfx_setbitmask) | 该函数应按照相应的 Mask 位设置为 1 的情况，将数据设置为逻辑状态「1」，其余位保持其原始值。 |
+| [**Bfx_SetBits**](../libraries/bfx/index.md#744-bfx_setbits) | 该函数应按照「Status」值，从「BitStartPn」开始、以「BitLn」为长度，将输入数据设置为「1」或「0」。 |
+| [**Bfx_ShiftBitLt**](../libraries/bfx/index.md#7414-bfx_shiftbitlt) | 该函数应将数据左移 ShiftCnt 位。 |
+| [**Bfx_ShiftBitRt**](../libraries/bfx/index.md#7413-bfx_shiftbitrt) | 该函数应将数据右移 ShiftCnt 位。 |
+| [**Bfx_ShiftBitSat**](../libraries/bfx/index.md#7421-bfx_shiftbitsat) | 带饱和的算术移位。 |
+| [**Bfx_ToggleBitMask**](../libraries/bfx/index.md#7412-bfx_togglebitmask) | 当掩码的相应位被启用并置为 1 时，该函数切换数据的相应位。 |
+| [**Bfx_ToggleBits**](../libraries/bfx/index.md#7411-bfx_togglebits) | 该函数切换数据的所有位（数据的 1 的补码）。 |
+| [**Bfx_TstBitLnMask**](../libraries/bfx/index.md#749-bfx_tstbitlnmask) | 该函数对输入数据进行测试，如果按照掩码至少有一个位被置位，则该函数应返回 TRUE，否则应返回 FALSE。 |
+| [**Bfx_TstBitMask**](../libraries/bfx/index.md#748-bfx_tstbitmask) | 如果掩码值中定义的所有位都在输入 Data 值中被置位，则该函数应返回 TRUE。 |
+| [**Bfx_TstParityEven**](../libraries/bfx/index.md#7410-bfx_tstparityeven) | 该函数测试被置位为 1 的位的数量。 |
+
+## Specification of CRC Routines（CRC 例程规范）（1）
+
+来源：[Specification of CRC Routines（CRC 例程规范）](../libraries/crc/index.md) · SWS_CRCLibrary
+
+| 函数 | 简述 |
+|---|---|
+| [**Crc_GetVersionInfo**](../libraries/crc/index.md#735-crc_getversioninfo) | 此服务返回本模块的版本信息。 |
+
+## Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）（91）
+
+来源：[Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary
+
+| 函数 | 简述 |
+|---|---|
+| [**E2E_GetVersionInfo**](../libraries/e2e/index.md#73161-e2e_getversioninfo) | 返回本模块的版本信息。 |
+| [**E2E_P01Check**](../libraries/e2e/index.md#7314-e2e_p01check) | 使用 E2E profile 1 校验接收到的 Data。 |
+| [**E2E_P01CheckInit**](../libraries/e2e/index.md#7315-e2e_p01checkinit) | 初始化校验状态。 |
+| [**E2E_P01Forward**](../libraries/e2e/index.md#7313-e2e_p01forward) | 使用 E2E profile 01 保护被转发的数据。 |
+| [**E2E_P01MapStatusToSM**](../libraries/e2e/index.md#7316-e2e_p01mapstatustosm) | 该函数将 Profile 1 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P01Protect**](../libraries/e2e/index.md#7311-e2e_p01protect) | 使用 E2E profile 1 保护要发送的数组/缓冲区。 |
+| [**E2E_P01ProtectInit**](../libraries/e2e/index.md#7312-e2e_p01protectinit) | 初始化保护状态。 |
+| [**E2E_P02Check**](../libraries/e2e/index.md#7324-e2e_p02check) | 使用 E2E profile 2 校验数组/缓冲区。 |
+| [**E2E_P02CheckInit**](../libraries/e2e/index.md#7325-e2e_p02checkinit) | 初始化校验状态。 |
+| [**E2E_P02Forward**](../libraries/e2e/index.md#7323-e2e_p02forward) | 使用 E2E profile 02 保护被转发的数据。 |
+| [**E2E_P02MapStatusToSM**](../libraries/e2e/index.md#7326-e2e_p02mapstatustosm) | 该函数将 Profile 2 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P02Protect**](../libraries/e2e/index.md#7321-e2e_p02protect) | 使用 E2E profile 2 保护要发送的数组/缓冲区。 |
+| [**E2E_P02ProtectInit**](../libraries/e2e/index.md#7322-e2e_p02protectinit) | 初始化保护状态。 |
+| [**E2E_P04Check**](../libraries/e2e/index.md#7334-e2e_p04check) | 使用 E2E profile 4 校验接收到的 Data。 |
+| [**E2E_P04CheckInit**](../libraries/e2e/index.md#7335-e2e_p04checkinit) | 初始化校验状态。 |
+| [**E2E_P04Forward**](../libraries/e2e/index.md#7333-e2e_p04forward) | 使用 E2E profile 04 保护被转发的数据。 |
+| [**E2E_P04MapStatusToSM**](../libraries/e2e/index.md#7336-e2e_p04mapstatustosm) | 该函数将 Profile 4 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P04mCheckInit**](../libraries/e2e/index.md#7346-e2e_p04mcheckinit) | 初始化校验状态。 |
+| [**E2E_P04mForward**](../libraries/e2e/index.md#7343-e2e_p04mforward) | 使用 E2E profile 4m 保护被转发的数据。 |
+| [**E2E_P04mMapStatusToSM**](../libraries/e2e/index.md#7347-e2e_p04mmapstatustosm) | 该函数将 Profile 4m 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P04mProtect**](../libraries/e2e/index.md#7341-e2e_p04mprotect) | 使用 E2E profile 4m 保护要发送的数组/缓冲区。 |
+| [**E2E_P04mProtectInit**](../libraries/e2e/index.md#7342-e2e_p04mprotectinit) | 初始化保护状态。 |
+| [**E2E_P04mSinkCheck**](../libraries/e2e/index.md#7345-e2e_p04msinkcheck) | 使用 E2E profile 4m 校验接收到的 Data。 |
+| [**E2E_P04mSourceCheck**](../libraries/e2e/index.md#7344-e2e_p04msourcecheck) | 使用 E2E profile 4m 校验接收到的 Data。 |
+| [**E2E_P04Protect**](../libraries/e2e/index.md#7331-e2e_p04protect) | 使用 E2E profile 4 保护要发送的数组/缓冲区。 |
+| [**E2E_P04ProtectInit**](../libraries/e2e/index.md#7332-e2e_p04protectinit) | 初始化保护状态。 |
+| [**E2E_P05Check**](../libraries/e2e/index.md#7354-e2e_p05check) | 使用 E2E profile 5 校验接收到的 Data。 |
+| [**E2E_P05CheckInit**](../libraries/e2e/index.md#7355-e2e_p05checkinit) | 初始化校验状态。 |
+| [**E2E_P05Forward**](../libraries/e2e/index.md#7353-e2e_p05forward) | 使用 E2E profile 05 保护被转发的数据。 |
+| [**E2E_P05MapStatusToSM**](../libraries/e2e/index.md#7356-e2e_p05mapstatustosm) | 该函数将 Profile 5 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P05Protect**](../libraries/e2e/index.md#7351-e2e_p05protect) | 使用 E2E profile 5 保护要发送的数组/缓冲区。 |
+| [**E2E_P05ProtectInit**](../libraries/e2e/index.md#7352-e2e_p05protectinit) | 初始化保护状态。 |
+| [**E2E_P06Check**](../libraries/e2e/index.md#7364-e2e_p06check) | 使用 E2E profile 6 校验接收到的 Data。 |
+| [**E2E_P06CheckInit**](../libraries/e2e/index.md#7365-e2e_p06checkinit) | 初始化校验状态。 |
+| [**E2E_P06Forward**](../libraries/e2e/index.md#7363-e2e_p06forward) | 使用 E2E profile 06 保护被转发的数据。 |
+| [**E2E_P06MapStatusToSM**](../libraries/e2e/index.md#7366-e2e_p06mapstatustosm) | 该函数将 Profile 6 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P06Protect**](../libraries/e2e/index.md#7361-e2e_p06protect) | 使用 E2E profile 6 保护要发送的数组/缓冲区。 |
+| [**E2E_P06ProtectInit**](../libraries/e2e/index.md#7362-e2e_p06protectinit) | 初始化保护状态。 |
+| [**E2E_P07Check**](../libraries/e2e/index.md#7374-e2e_p07check) | 使用 E2E profile 7 校验接收到的 Data。 |
+| [**E2E_P07CheckInit**](../libraries/e2e/index.md#7375-e2e_p07checkinit) | 初始化校验状态。 |
+| [**E2E_P07Forward**](../libraries/e2e/index.md#7373-e2e_p07forward) | 使用 E2E profile 07 保护被转发的数据。 |
+| [**E2E_P07MapStatusToSM**](../libraries/e2e/index.md#7376-e2e_p07mapstatustosm) | 该函数将 Profile 7 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P07mCheckInit**](../libraries/e2e/index.md#7386-e2e_p07mcheckinit) | 初始化校验状态。 |
+| [**E2E_P07mForward**](../libraries/e2e/index.md#7383-e2e_p07mforward) | 使用 E2E profile 7m 保护被转发的数据。 |
+| [**E2E_P07mMapStatusToSM**](../libraries/e2e/index.md#7387-e2e_p07mmapstatustosm) | 该函数将 Profile 7m 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P07mProtect**](../libraries/e2e/index.md#7381-e2e_p07mprotect) | 使用 E2E profile 7m 保护要发送的数组/缓冲区。 |
+| [**E2E_P07mProtectInit**](../libraries/e2e/index.md#7382-e2e_p07mprotectinit) | 初始化保护状态。 |
+| [**E2E_P07mSinkCheck**](../libraries/e2e/index.md#7385-e2e_p07msinkcheck) | 使用 E2E profile 7m 校验接收到的 Data。 |
+| [**E2E_P07mSourceCheck**](../libraries/e2e/index.md#7384-e2e_p07msourcecheck) | 使用 E2E profile 7m 校验接收到的 Data。 |
+| [**E2E_P07Protect**](../libraries/e2e/index.md#7371-e2e_p07protect) | 使用 E2E profile 7 保护要发送的数组/缓冲区。 |
+| [**E2E_P07ProtectInit**](../libraries/e2e/index.md#7372-e2e_p07protectinit) | 初始化保护状态。 |
+| [**E2E_P08Check**](../libraries/e2e/index.md#7394-e2e_p08check) | 使用 E2E profile 08 校验接收到的 Data。 |
+| [**E2E_P08CheckInit**](../libraries/e2e/index.md#7395-e2e_p08checkinit) | 初始化校验状态。 |
+| [**E2E_P08Forward**](../libraries/e2e/index.md#7393-e2e_p08forward) | 使用 E2E profile 08 保护被转发的数据。 |
+| [**E2E_P08MapStatusToSM**](../libraries/e2e/index.md#7396-e2e_p08mapstatustosm) | 该函数将 Profile 08 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P08mCheckInit**](../libraries/e2e/index.md#73106-e2e_p08mcheckinit) | 初始化校验状态。 |
+| [**E2E_P08mForward**](../libraries/e2e/index.md#73103-e2e_p08mforward) | 使用 E2E profile 08m 保护被转发的数据。 |
+| [**E2E_P08mMapStatusToSM**](../libraries/e2e/index.md#73107-e2e_p08mmapstatustosm) | 该函数将 Profile 08m 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P08mProtect**](../libraries/e2e/index.md#73101-e2e_p08mprotect) | 使用 E2E profile 08m 保护要发送的数组/缓冲区。 |
+| [**E2E_P08mProtectInit**](../libraries/e2e/index.md#73102-e2e_p08mprotectinit) | 初始化保护状态。 |
+| [**E2E_P08mSinkCheck**](../libraries/e2e/index.md#73105-e2e_p08msinkcheck) | 使用 E2E profile 8m 校验接收到的 Data。 |
+| [**E2E_P08mSourceCheck**](../libraries/e2e/index.md#73104-e2e_p08msourcecheck) | 使用 E2E profile 8m 校验接收到的 Data。 |
+| [**E2E_P08Protect**](../libraries/e2e/index.md#7391-e2e_p08protect) | 使用 E2E profile 08 保护要发送的数组/缓冲区。 |
+| [**E2E_P08ProtectInit**](../libraries/e2e/index.md#7392-e2e_p08protectinit) | 初始化保护状态。 |
+| [**E2E_P11Check**](../libraries/e2e/index.md#73114-e2e_p11check) | 使用 E2E profile 11 校验接收到的 Data。 |
+| [**E2E_P11CheckInit**](../libraries/e2e/index.md#73115-e2e_p11checkinit) | 初始化校验状态。 |
+| [**E2E_P11Forward**](../libraries/e2e/index.md#73113-e2e_p11forward) | 使用 E2E profile 11 保护被转发的数据。 |
+| [**E2E_P11MapStatusToSM**](../libraries/e2e/index.md#73116-e2e_p11mapstatustosm) | 该函数将 Profile 11 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P11Protect**](../libraries/e2e/index.md#73111-e2e_p11protect) | 使用 E2E profile 11 保护要发送的数组/缓冲区。 |
+| [**E2E_P11ProtectInit**](../libraries/e2e/index.md#73112-e2e_p11protectinit) | 初始化保护状态。 |
+| [**E2E_P22Check**](../libraries/e2e/index.md#73124-e2e_p22check) | 使用 E2E profile 22 校验接收到的 Data。 |
+| [**E2E_P22CheckInit**](../libraries/e2e/index.md#73125-e2e_p22checkinit) | 初始化校验状态。 |
+| [**E2E_P22Forward**](../libraries/e2e/index.md#73123-e2e_p22forward) | 使用 E2E profile 22 保护被转发的数据。 |
+| [**E2E_P22MapStatusToSM**](../libraries/e2e/index.md#73126-e2e_p22mapstatustosm) | 该函数将 Profile 22 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P22Protect**](../libraries/e2e/index.md#73121-e2e_p22protect) | 使用 E2E profile 22 保护要发送的数组/缓冲区。 |
+| [**E2E_P22ProtectInit**](../libraries/e2e/index.md#73122-e2e_p22protectinit) | 初始化保护状态。 |
+| [**E2E_P44Check**](../libraries/e2e/index.md#73134-e2e_p44check) | 使用 E2E profile 44 校验接收到的 Data。 |
+| [**E2E_P44CheckInit**](../libraries/e2e/index.md#73135-e2e_p44checkinit) | 初始化校验状态。 |
+| [**E2E_P44Forward**](../libraries/e2e/index.md#73133-e2e_p44forward) | 使用 E2E profile 44 保护被转发的数据。 |
+| [**E2E_P44MapStatusToSM**](../libraries/e2e/index.md#73136-e2e_p44mapstatustosm) | 该函数将 Profile 44 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P44mCheckInit**](../libraries/e2e/index.md#73146-e2e_p44mcheckinit) | 初始化校验状态。 |
+| [**E2E_P44mForward**](../libraries/e2e/index.md#73143-e2e_p44mforward) | 使用 E2E profile 44m 保护被转发的数据。 |
+| [**E2E_P44mMapStatusToSM**](../libraries/e2e/index.md#73147-e2e_p44mmapstatustosm) | 该函数将 Profile 44m 的校验状态映射为一个通用校验状态，E2E 状态机校验函数可以使用该状态。 |
+| [**E2E_P44mProtect**](../libraries/e2e/index.md#73141-e2e_p44mprotect) | 使用 E2E profile 44m 保护要发送的数组/缓冲区。 |
+| [**E2E_P44mProtectInit**](../libraries/e2e/index.md#73142-e2e_p44mprotectinit) | 初始化保护状态。 |
+| [**E2E_P44mSinkCheck**](../libraries/e2e/index.md#73145-e2e_p44msinkcheck) | 使用 E2E profile 44m 校验接收到的 Data。 |
+| [**E2E_P44mSourceCheck**](../libraries/e2e/index.md#73144-e2e_p44msourcecheck) | 使用 E2E profile 44m 校验接收到的 Data。 |
+| [**E2E_P44Protect**](../libraries/e2e/index.md#73131-e2e_p44protect) | 使用 E2E profile 44 保护要发送的数组/缓冲区。 |
+| [**E2E_P44ProtectInit**](../libraries/e2e/index.md#73132-e2e_p44protectinit) | 初始化保护状态。 |
+| [**E2E_SMCheck**](../libraries/e2e/index.md#73151-e2e_smcheck) | 校验通信信道。 |
+| [**E2E_SMCheckInit**](../libraries/e2e/index.md#73152-e2e_smcheckinit) | 初始化状态机。 |
+
 ## AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）（17）
 
 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](../communication/spi_handler_driver/index.md) · SWS_SPIHandlerDriver
@@ -2491,6 +2766,63 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**FrTSyn_RxIndication**](../globaltime/fr_tsyn/index.md#741-frtsyn_rxindication) | 指示从下层通信接口模块接收到 PDU。 |
 | [**FrTSyn_SetTransmissionMode**](../globaltime/fr_tsyn/index.md#733-frtsyn_settransmissionmode) | 本 API 用于启用和禁用 FrTSyn 的 TX 能力。 |
 | [**FrTSyn_TriggerTransmit**](../globaltime/fr_tsyn/index.md#742-frtsyn_triggertransmit) | 在此 API 中，上层模块（称为调用模块）应检查可用数据是否适合 PduInfoPtr->SduLength 所报告的缓冲区大小。 |
+
+## AUTOSAR TTCAN Driver（TTCAN 驱动程序）（19）
+
+来源：[AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver
+
+| 函数 | 简述 |
+|---|---|
+| [**Can_TTAckTimeMark**](../communication/ttcan_driver/index.md#744-can_ttacktimemark) | — |
+| [**Can_TTCancelTimeMark**](../communication/ttcan_driver/index.md#743-can_ttcanceltimemark) | — |
+| [**Can_TTDisableTimeMarkIRQ**](../communication/ttcan_driver/index.md#746-can_ttdisabletimemarkirq) | — |
+| [**Can_TTEnableTimeMarkIRQ**](../communication/ttcan_driver/index.md#745-can_ttenabletimemarkirq) | — |
+| [**Can_TTGetControllerTime**](../communication/ttcan_driver/index.md#731-can_ttgetcontrollertime) | — |
+| [**Can_TTGetErrorLevel**](../communication/ttcan_driver/index.md#734-can_ttgeterrorlevel) | — |
+| [**Can_TTGetMasterState**](../communication/ttcan_driver/index.md#732-can_ttgetmasterstate) | — |
+| [**Can_TTGetNTUActual**](../communication/ttcan_driver/index.md#733-can_ttgetntuactual) | — |
+| [**Can_TTGetSyncQuality**](../communication/ttcan_driver/index.md#741-can_ttgetsyncquality) | — |
+| [**Can_TTGetTimeMarkIRQStatus**](../communication/ttcan_driver/index.md#747-can_ttgettimemarkirqstatus) | — |
+| [**Can_TTGlobalTimePreset**](../communication/ttcan_driver/index.md#738-can_ttglobaltimepreset) | — |
+| [**Can_TTMainFunction_IRQ**](../communication/ttcan_driver/index.md#751-can_ttmainfunction_irq) | — |
+| [**Can_TTReceive**](../communication/ttcan_driver/index.md#748-can_ttreceive) | — |
+| [**Can_TTSetEndOfGap**](../communication/ttcan_driver/index.md#736-can_ttsetendofgap) | — |
+| [**Can_TTSetExtClockSyncCommand**](../communication/ttcan_driver/index.md#739-can_ttsetextclocksynccommand) | — |
+| [**Can_TTSetNextIsGap**](../communication/ttcan_driver/index.md#735-can_ttsetnextisgap) | — |
+| [**Can_TTSetNTUAdjust**](../communication/ttcan_driver/index.md#7310-can_ttsetntuadjust) | — |
+| [**Can_TTSetTimeCommand**](../communication/ttcan_driver/index.md#737-can_ttsettimecommand) | — |
+| [**Can_TTSetTimeMark**](../communication/ttcan_driver/index.md#742-can_ttsettimemark) | — |
+
+## AUTOSAR TTCAN Interface（TTCAN 接口）（24）
+
+来源：[AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface
+
+| 函数 | 简述 |
+|---|---|
+| [**CanIf_TTAckTimeMark**](../communication/ttcan_interface/index.md#745-canif_ttacktimemark) | — |
+| [**CanIf_TTApplWatchdogError**](../communication/ttcan_interface/index.md#761-canif_ttapplwatchdogerror) | — |
+| [**CanIf_TTCancelTimeMark**](../communication/ttcan_interface/index.md#744-canif_ttcanceltimemark) | — |
+| [**CanIf_TTDisableTimeMarkIRQ**](../communication/ttcan_interface/index.md#747-canif_ttdisabletimemarkirq) | — |
+| [**CanIf_TTEnableTimeMarkIRQ**](../communication/ttcan_interface/index.md#746-canif_ttenabletimemarkirq) | — |
+| [**CanIf_TTGap**](../communication/ttcan_interface/index.md#764-canif_ttgap) | — |
+| [**CanIf_TTGetControllerTime**](../communication/ttcan_interface/index.md#731-canif_ttgetcontrollertime) | — |
+| [**CanIf_TTGetErrorLevel**](../communication/ttcan_interface/index.md#734-canif_ttgeterrorlevel) | — |
+| [**CanIf_TTGetMasterState**](../communication/ttcan_interface/index.md#732-canif_ttgetmasterstate) | — |
+| [**CanIf_TTGetNTUActual**](../communication/ttcan_interface/index.md#733-canif_ttgetntuactual) | — |
+| [**CanIf_TTGetSyncQuality**](../communication/ttcan_interface/index.md#742-canif_ttgetsyncquality) | — |
+| [**CanIf_TTGetTimeMarkIRQStatus**](../communication/ttcan_interface/index.md#748-canif_ttgettimemarkirqstatus) | — |
+| [**CanIf_TTGlobalTimePreset**](../communication/ttcan_interface/index.md#738-canif_ttglobaltimepreset) | — |
+| [**CanIf_TTMasterStateChange**](../communication/ttcan_interface/index.md#767-canif_ttmasterstatechange) | — |
+| [**CanIf_TTSetEndOfGap**](../communication/ttcan_interface/index.md#736-canif_ttsetendofgap) | — |
+| [**CanIf_TTSetExtClockSyncCommand**](../communication/ttcan_interface/index.md#739-canif_ttsetextclocksynccommand) | — |
+| [**CanIf_TTSetNextIsGap**](../communication/ttcan_interface/index.md#735-canif_ttsetnextisgap) | — |
+| [**CanIf_TTSetNTUAdjust**](../communication/ttcan_interface/index.md#7310-canif_ttsetntuadjust) | — |
+| [**CanIf_TTSetTimeCommand**](../communication/ttcan_interface/index.md#737-canif_ttsettimecommand) | — |
+| [**CanIf_TTSetTimeMark**](../communication/ttcan_interface/index.md#743-canif_ttsettimemark) | — |
+| [**CanIf_TTSevereError**](../communication/ttcan_interface/index.md#763-canif_ttsevereerror) | — |
+| [**CanIf_TTStartOfCycle**](../communication/ttcan_interface/index.md#765-canif_ttstartofcycle) | — |
+| [**CanIf_TTTimeDisc**](../communication/ttcan_interface/index.md#766-canif_tttimedisc) | — |
+| [**CanIf_TTTimingError**](../communication/ttcan_interface/index.md#762-canif_tttimingerror) | — |
 
 ## AUTOSAR UdpNm (UDP Network Management)（25）
 

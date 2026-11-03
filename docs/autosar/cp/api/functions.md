@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2026** 个条目。
+共 **2274** 个条目。
 
 ## A
 
@@ -71,7 +71,100 @@ title: "AUTOSAR API 函数清单"
 **[API](../system_services/default_error_tracer/index.md#71-api)**
 > 函数 · [AUTOSAR Default Error Tracer（默认错误跟踪器）](../system_services/default_error_tracer/index.md) · SWS_DefaultErrorTracer · R23-11
 
+**[AppAckIndication](../communication/j1939rm/index.md#7834-appackindication)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[AppCancelRequestTimeout](../communication/j1939rm/index.md#7833-appcancelrequesttimeout)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[AppRequestIndication](../communication/j1939rm/index.md#7835-apprequestindication)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[AppRequestTimeoutIndication](../communication/j1939rm/index.md#7836-apprequesttimeoutindication)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[AppSendAck](../communication/j1939rm/index.md#7831-appsendack)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[AppSendRequest](../communication/j1939rm/index.md#7832-appsendrequest)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
 ## B
+
+**[Bfx_ClrBit](../libraries/bfx/index.md#742-bfx_clrbit)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_ClrBitMask](../libraries/bfx/index.md#747-bfx_clrbitmask)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_CopyBit](../libraries/bfx/index.md#7417-bfx_copybit)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_CountLeadingOnes](../libraries/bfx/index.md#7422-bfx_countleadingones)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_CountLeadingSigns](../libraries/bfx/index.md#7423-bfx_countleadingsigns)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_CountLeadingZeros](../libraries/bfx/index.md#7424-bfx_countleadingzeros)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_GetBit](../libraries/bfx/index.md#743-bfx_getbit)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_GetBits](../libraries/bfx/index.md#745-bfx_getbits)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_GetVersionInfo](../libraries/bfx/index.md#781-bfx_getversioninfo)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_PutBit](../libraries/bfx/index.md#7420-bfx_putbit)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_PutBits](../libraries/bfx/index.md#7418-bfx_putbits)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_PutBitsMask](../libraries/bfx/index.md#7419-bfx_putbitsmask)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_RotBitLt](../libraries/bfx/index.md#7416-bfx_rotbitlt)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_RotBitRt](../libraries/bfx/index.md#7415-bfx_rotbitrt)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_SetBit](../libraries/bfx/index.md#741-bfx_setbit)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_SetBitMask](../libraries/bfx/index.md#746-bfx_setbitmask)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_SetBits](../libraries/bfx/index.md#744-bfx_setbits)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_ShiftBitLt](../libraries/bfx/index.md#7414-bfx_shiftbitlt)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_ShiftBitRt](../libraries/bfx/index.md#7413-bfx_shiftbitrt)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_ShiftBitSat](../libraries/bfx/index.md#7421-bfx_shiftbitsat)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_ToggleBitMask](../libraries/bfx/index.md#7412-bfx_togglebitmask)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_ToggleBits](../libraries/bfx/index.md#7411-bfx_togglebits)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_TstBitLnMask](../libraries/bfx/index.md#749-bfx_tstbitlnmask)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_TstBitMask](../libraries/bfx/index.md#748-bfx_tstbitmask)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bfx_TstParityEven](../libraries/bfx/index.md#7410-bfx_tstparityeven)**
+> 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
 
 **[BndM_GetBlockPtr](../memory/bulk_nv_data_manager/index.md#733-bndm_getblockptr)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
@@ -309,8 +402,137 @@ title: "AUTOSAR API 函数清单"
 **[Can_SetControllerMode](../communication/can_driver/index.md#7322-can_setcontrollermode)**
 > 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](../communication/can_driver/index.md) · SWS_CANDriver · R23-11
 
+**[Can_TTAckTimeMark](../communication/ttcan_driver/index.md#744-can_ttacktimemark)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTCancelTimeMark](../communication/ttcan_driver/index.md#743-can_ttcanceltimemark)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTDisableTimeMarkIRQ](../communication/ttcan_driver/index.md#746-can_ttdisabletimemarkirq)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTEnableTimeMarkIRQ](../communication/ttcan_driver/index.md#745-can_ttenabletimemarkirq)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTGetControllerTime](../communication/ttcan_driver/index.md#731-can_ttgetcontrollertime)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTGetErrorLevel](../communication/ttcan_driver/index.md#734-can_ttgeterrorlevel)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTGetMasterState](../communication/ttcan_driver/index.md#732-can_ttgetmasterstate)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTGetNTUActual](../communication/ttcan_driver/index.md#733-can_ttgetntuactual)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTGetSyncQuality](../communication/ttcan_driver/index.md#741-can_ttgetsyncquality)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTGetTimeMarkIRQStatus](../communication/ttcan_driver/index.md#747-can_ttgettimemarkirqstatus)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTGlobalTimePreset](../communication/ttcan_driver/index.md#738-can_ttglobaltimepreset)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTMainFunction_IRQ](../communication/ttcan_driver/index.md#751-can_ttmainfunction_irq)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTReceive](../communication/ttcan_driver/index.md#748-can_ttreceive)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTSetEndOfGap](../communication/ttcan_driver/index.md#736-can_ttsetendofgap)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTSetExtClockSyncCommand](../communication/ttcan_driver/index.md#739-can_ttsetextclocksynccommand)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTSetNextIsGap](../communication/ttcan_driver/index.md#735-can_ttsetnextisgap)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTSetNTUAdjust](../communication/ttcan_driver/index.md#7310-can_ttsetntuadjust)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTSetTimeCommand](../communication/ttcan_driver/index.md#737-can_ttsettimecommand)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
+**[Can_TTSetTimeMark](../communication/ttcan_driver/index.md#742-can_ttsettimemark)**
+> 函数 · [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../communication/ttcan_driver/index.md) · SWS_TTCANDriver · R23-11
+
 **[Can_Write](../communication/can_driver/index.md#7331-can_write)**
 > 函数 · [AUTOSAR CAN Driver（CAN驱动程序）](../communication/can_driver/index.md) · SWS_CANDriver · R23-11
+
+**[CanIf_TTAckTimeMark](../communication/ttcan_interface/index.md#745-canif_ttacktimemark)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTApplWatchdogError](../communication/ttcan_interface/index.md#761-canif_ttapplwatchdogerror)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTCancelTimeMark](../communication/ttcan_interface/index.md#744-canif_ttcanceltimemark)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTDisableTimeMarkIRQ](../communication/ttcan_interface/index.md#747-canif_ttdisabletimemarkirq)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTEnableTimeMarkIRQ](../communication/ttcan_interface/index.md#746-canif_ttenabletimemarkirq)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTGap](../communication/ttcan_interface/index.md#764-canif_ttgap)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTGetControllerTime](../communication/ttcan_interface/index.md#731-canif_ttgetcontrollertime)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTGetErrorLevel](../communication/ttcan_interface/index.md#734-canif_ttgeterrorlevel)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTGetMasterState](../communication/ttcan_interface/index.md#732-canif_ttgetmasterstate)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTGetNTUActual](../communication/ttcan_interface/index.md#733-canif_ttgetntuactual)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTGetSyncQuality](../communication/ttcan_interface/index.md#742-canif_ttgetsyncquality)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTGetTimeMarkIRQStatus](../communication/ttcan_interface/index.md#748-canif_ttgettimemarkirqstatus)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTGlobalTimePreset](../communication/ttcan_interface/index.md#738-canif_ttglobaltimepreset)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTMasterStateChange](../communication/ttcan_interface/index.md#767-canif_ttmasterstatechange)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTSetEndOfGap](../communication/ttcan_interface/index.md#736-canif_ttsetendofgap)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTSetExtClockSyncCommand](../communication/ttcan_interface/index.md#739-canif_ttsetextclocksynccommand)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTSetNextIsGap](../communication/ttcan_interface/index.md#735-canif_ttsetnextisgap)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTSetNTUAdjust](../communication/ttcan_interface/index.md#7310-canif_ttsetntuadjust)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTSetTimeCommand](../communication/ttcan_interface/index.md#737-canif_ttsettimecommand)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTSetTimeMark](../communication/ttcan_interface/index.md#743-canif_ttsettimemark)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTSevereError](../communication/ttcan_interface/index.md#763-canif_ttsevereerror)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTStartOfCycle](../communication/ttcan_interface/index.md#765-canif_ttstartofcycle)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTTimeDisc](../communication/ttcan_interface/index.md#766-canif_tttimedisc)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
+
+**[CanIf_TTTimingError](../communication/ttcan_interface/index.md#762-canif_tttimingerror)**
+> 函数 · [AUTOSAR TTCAN Interface（TTCAN 接口）](../communication/ttcan_interface/index.md) · SWS_TTCANInterface · R23-11
 
 **[CanNm_ActivateTxPnShutdownMsg](../communication/can_network_management/index.md#7321-cannm_activatetxpnshutdownmsg)**
 > 函数 · [AUTOSAR CAN NM（CAN网络管理）](../communication/can_network_management/index.md) · SWS_CANNetworkManagement · R23-11
@@ -983,6 +1205,9 @@ title: "AUTOSAR API 函数清单"
 
 **[CPU_TYPE](../general/platform_types/index.md#721-cpu_type)**
 > 函数 · [AUTOSAR Platform Types（平台类型）](../general/platform_types/index.md) · SWS_PlatformTypes · R23-11
+
+**[Crc_GetVersionInfo](../libraries/crc/index.md#735-crc_getversioninfo)**
+> 函数 · [Specification of CRC Routines（CRC 例程规范）](../libraries/crc/index.md) · SWS_CRCLibrary · R23-11
 
 **[CryIf_CallbackNotification](../crypto/crypto_interface/index.md#741-cryif_callbacknotification)**
 > 函数 · [AUTOSAR Crypto Interface（加密接口）](../crypto/crypto_interface/index.md) · SWS_CryptoInterface · R23-11
@@ -2082,6 +2307,279 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
 ## E
+
+**[E2E_GetVersionInfo](../libraries/e2e/index.md#73161-e2e_getversioninfo)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P01Check](../libraries/e2e/index.md#7314-e2e_p01check)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P01CheckInit](../libraries/e2e/index.md#7315-e2e_p01checkinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P01Forward](../libraries/e2e/index.md#7313-e2e_p01forward)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P01MapStatusToSM](../libraries/e2e/index.md#7316-e2e_p01mapstatustosm)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P01Protect](../libraries/e2e/index.md#7311-e2e_p01protect)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P01ProtectInit](../libraries/e2e/index.md#7312-e2e_p01protectinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P02Check](../libraries/e2e/index.md#7324-e2e_p02check)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P02CheckInit](../libraries/e2e/index.md#7325-e2e_p02checkinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P02Forward](../libraries/e2e/index.md#7323-e2e_p02forward)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P02MapStatusToSM](../libraries/e2e/index.md#7326-e2e_p02mapstatustosm)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P02Protect](../libraries/e2e/index.md#7321-e2e_p02protect)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P02ProtectInit](../libraries/e2e/index.md#7322-e2e_p02protectinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04Check](../libraries/e2e/index.md#7334-e2e_p04check)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04CheckInit](../libraries/e2e/index.md#7335-e2e_p04checkinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04Forward](../libraries/e2e/index.md#7333-e2e_p04forward)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04MapStatusToSM](../libraries/e2e/index.md#7336-e2e_p04mapstatustosm)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04mCheckInit](../libraries/e2e/index.md#7346-e2e_p04mcheckinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04mForward](../libraries/e2e/index.md#7343-e2e_p04mforward)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04mMapStatusToSM](../libraries/e2e/index.md#7347-e2e_p04mmapstatustosm)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04mProtect](../libraries/e2e/index.md#7341-e2e_p04mprotect)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04mProtectInit](../libraries/e2e/index.md#7342-e2e_p04mprotectinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04mSinkCheck](../libraries/e2e/index.md#7345-e2e_p04msinkcheck)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04mSourceCheck](../libraries/e2e/index.md#7344-e2e_p04msourcecheck)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04Protect](../libraries/e2e/index.md#7331-e2e_p04protect)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P04ProtectInit](../libraries/e2e/index.md#7332-e2e_p04protectinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P05Check](../libraries/e2e/index.md#7354-e2e_p05check)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P05CheckInit](../libraries/e2e/index.md#7355-e2e_p05checkinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P05Forward](../libraries/e2e/index.md#7353-e2e_p05forward)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P05MapStatusToSM](../libraries/e2e/index.md#7356-e2e_p05mapstatustosm)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P05Protect](../libraries/e2e/index.md#7351-e2e_p05protect)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P05ProtectInit](../libraries/e2e/index.md#7352-e2e_p05protectinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P06Check](../libraries/e2e/index.md#7364-e2e_p06check)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P06CheckInit](../libraries/e2e/index.md#7365-e2e_p06checkinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P06Forward](../libraries/e2e/index.md#7363-e2e_p06forward)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P06MapStatusToSM](../libraries/e2e/index.md#7366-e2e_p06mapstatustosm)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P06Protect](../libraries/e2e/index.md#7361-e2e_p06protect)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P06ProtectInit](../libraries/e2e/index.md#7362-e2e_p06protectinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07Check](../libraries/e2e/index.md#7374-e2e_p07check)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07CheckInit](../libraries/e2e/index.md#7375-e2e_p07checkinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07Forward](../libraries/e2e/index.md#7373-e2e_p07forward)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07MapStatusToSM](../libraries/e2e/index.md#7376-e2e_p07mapstatustosm)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07mCheckInit](../libraries/e2e/index.md#7386-e2e_p07mcheckinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07mForward](../libraries/e2e/index.md#7383-e2e_p07mforward)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07mMapStatusToSM](../libraries/e2e/index.md#7387-e2e_p07mmapstatustosm)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07mProtect](../libraries/e2e/index.md#7381-e2e_p07mprotect)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07mProtectInit](../libraries/e2e/index.md#7382-e2e_p07mprotectinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07mSinkCheck](../libraries/e2e/index.md#7385-e2e_p07msinkcheck)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07mSourceCheck](../libraries/e2e/index.md#7384-e2e_p07msourcecheck)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07Protect](../libraries/e2e/index.md#7371-e2e_p07protect)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P07ProtectInit](../libraries/e2e/index.md#7372-e2e_p07protectinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08Check](../libraries/e2e/index.md#7394-e2e_p08check)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08CheckInit](../libraries/e2e/index.md#7395-e2e_p08checkinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08Forward](../libraries/e2e/index.md#7393-e2e_p08forward)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08MapStatusToSM](../libraries/e2e/index.md#7396-e2e_p08mapstatustosm)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08mCheckInit](../libraries/e2e/index.md#73106-e2e_p08mcheckinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08mForward](../libraries/e2e/index.md#73103-e2e_p08mforward)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08mMapStatusToSM](../libraries/e2e/index.md#73107-e2e_p08mmapstatustosm)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08mProtect](../libraries/e2e/index.md#73101-e2e_p08mprotect)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08mProtectInit](../libraries/e2e/index.md#73102-e2e_p08mprotectinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08mSinkCheck](../libraries/e2e/index.md#73105-e2e_p08msinkcheck)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08mSourceCheck](../libraries/e2e/index.md#73104-e2e_p08msourcecheck)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08Protect](../libraries/e2e/index.md#7391-e2e_p08protect)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P08ProtectInit](../libraries/e2e/index.md#7392-e2e_p08protectinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P11Check](../libraries/e2e/index.md#73114-e2e_p11check)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P11CheckInit](../libraries/e2e/index.md#73115-e2e_p11checkinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P11Forward](../libraries/e2e/index.md#73113-e2e_p11forward)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P11MapStatusToSM](../libraries/e2e/index.md#73116-e2e_p11mapstatustosm)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P11Protect](../libraries/e2e/index.md#73111-e2e_p11protect)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P11ProtectInit](../libraries/e2e/index.md#73112-e2e_p11protectinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P22Check](../libraries/e2e/index.md#73124-e2e_p22check)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P22CheckInit](../libraries/e2e/index.md#73125-e2e_p22checkinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P22Forward](../libraries/e2e/index.md#73123-e2e_p22forward)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P22MapStatusToSM](../libraries/e2e/index.md#73126-e2e_p22mapstatustosm)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P22Protect](../libraries/e2e/index.md#73121-e2e_p22protect)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P22ProtectInit](../libraries/e2e/index.md#73122-e2e_p22protectinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44Check](../libraries/e2e/index.md#73134-e2e_p44check)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44CheckInit](../libraries/e2e/index.md#73135-e2e_p44checkinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44Forward](../libraries/e2e/index.md#73133-e2e_p44forward)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44MapStatusToSM](../libraries/e2e/index.md#73136-e2e_p44mapstatustosm)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44mCheckInit](../libraries/e2e/index.md#73146-e2e_p44mcheckinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44mForward](../libraries/e2e/index.md#73143-e2e_p44mforward)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44mMapStatusToSM](../libraries/e2e/index.md#73147-e2e_p44mmapstatustosm)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44mProtect](../libraries/e2e/index.md#73141-e2e_p44mprotect)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44mProtectInit](../libraries/e2e/index.md#73142-e2e_p44mprotectinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44mSinkCheck](../libraries/e2e/index.md#73145-e2e_p44msinkcheck)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44mSourceCheck](../libraries/e2e/index.md#73144-e2e_p44msourcecheck)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44Protect](../libraries/e2e/index.md#73131-e2e_p44protect)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_P44ProtectInit](../libraries/e2e/index.md#73132-e2e_p44protectinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_SMCheck](../libraries/e2e/index.md#73151-e2e_smcheck)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
+
+**[E2E_SMCheckInit](../libraries/e2e/index.md#73152-e2e_smcheckinit)**
+> 函数 · [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../libraries/e2e/index.md) · SWS_E2ELibrary · R23-11
 
 **[E2EXf_DeInit](../communication/e2e_transformer/index.md#734-e2exf_deinit)**
 > 函数 · [E2E Transformer (E2E转换器)](../communication/e2e_transformer/index.md) · SWS_E2ETransformer · R23-11
@@ -4024,6 +4522,39 @@ title: "AUTOSAR API 函数清单"
 **[Icu_StopTimestamp](../io/icu_driver/index.md#7312-icu_stoptimestamp)**
 > 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](../io/icu_driver/index.md) · SWS_ICUDriver · R23-11
 
+**[IEEE1722Tp_ActivateStream](../communication/ieee1722tp/index.md#7421-ieee1722tp_activatestream)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_DeactivateStream](../communication/ieee1722tp/index.md#7422-ieee1722tp_deactivatestream)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_DeInit](../communication/ieee1722tp/index.md#7412-ieee1722tp_deinit)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_GetVersionInfo](../communication/ieee1722tp/index.md#7413-ieee1722tp_getversioninfo)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_Init](../communication/ieee1722tp/index.md#7411-ieee1722tp_init)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_MainFunctionRx](../communication/ieee1722tp/index.md#762-ieee1722tp_mainfunctionrx)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_MainFunctionTx](../communication/ieee1722tp/index.md#761-ieee1722tp_mainfunctiontx)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_ReleaseRxBuffer](../communication/ieee1722tp/index.md#7432-ieee1722tp_releaserxbuffer)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_RxIndication](../communication/ieee1722tp/index.md#752-ieee1722tp_rxindication)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_Transmit](../communication/ieee1722tp/index.md#7431-ieee1722tp_transmit)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
+**[IEEE1722Tp_TxConfirmation](../communication/ieee1722tp/index.md#751-ieee1722tp_txconfirmation)**
+> 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
+
 **[IncrementCounter](../system_services/operating_system/index.md#7417-incrementcounter)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
@@ -4115,6 +4646,114 @@ title: "AUTOSAR API 函数清单"
 
 **[J1939Dcm_TxConfirmation](../diagnostics/j1939dcm/index.md#743-j1939dcm_txconfirmation)**
 > 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
+
+**[J1939Nm_DeInit](../communication/j1939nm/index.md#742-j1939nm_deinit)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_GetBusOffDelay](../communication/j1939nm/index.md#747-j1939nm_getbusoffdelay)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_GetState](../communication/j1939nm/index.md#746-j1939nm_getstate)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_GetVersionInfo](../communication/j1939nm/index.md#743-j1939nm_getversioninfo)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_Init](../communication/j1939nm/index.md#741-j1939nm_init)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_MainFunction](../communication/j1939nm/index.md#761-j1939nm_mainfunction)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_NetworkRelease](../communication/j1939nm/index.md#745-j1939nm_networkrelease)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_NetworkRequest](../communication/j1939nm/index.md#744-j1939nm_networkrequest)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_PassiveStartUp](../communication/j1939nm/index.md#748-j1939nm_passivestartup)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_RequestIndication](../communication/j1939nm/index.md#753-j1939nm_requestindication)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_RxIndication](../communication/j1939nm/index.md#751-j1939nm_rxindication)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Nm_TxConfirmation](../communication/j1939nm/index.md#752-j1939nm_txconfirmation)**
+> 函数 · [AUTOSAR J1939Nm（SAE J1939 网络管理）](../communication/j1939nm/index.md) · SWS_SAEJ1939NetworkManagement · R23-11
+
+**[J1939Rm_AckIndication](../communication/j1939rm/index.md#7821-j1939rm_ackindication)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_CancelRequestTimeout](../communication/j1939rm/index.md#746-j1939rm_cancelrequesttimeout)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_CheckReceivedComIPdu](../communication/j1939rm/index.md#753-j1939rm_checkreceivedcomipdu)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_DeInit](../communication/j1939rm/index.md#742-j1939rm_deinit)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_GetVersionInfo](../communication/j1939rm/index.md#743-j1939rm_getversioninfo)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_Init](../communication/j1939rm/index.md#741-j1939rm_init)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_MainFunction](../communication/j1939rm/index.md#761-j1939rm_mainfunction)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_RequestIndication](../communication/j1939rm/index.md#7822-j1939rm_requestindication)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_RequestTimeoutIndication](../communication/j1939rm/index.md#7823-j1939rm_requesttimeoutindication)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_RxIndication](../communication/j1939rm/index.md#751-j1939rm_rxindication)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_SendAck](../communication/j1939rm/index.md#747-j1939rm_sendack)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_SendRequest](../communication/j1939rm/index.md#745-j1939rm_sendrequest)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_SetState](../communication/j1939rm/index.md#744-j1939rm_setstate)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Rm_TxConfirmation](../communication/j1939rm/index.md#752-j1939rm_txconfirmation)**
+> 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[J1939Tp_CancelReceive](../communication/j1939tp/index.md#746-j1939tp_cancelreceive)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
+
+**[J1939Tp_CancelTransmit](../communication/j1939tp/index.md#745-j1939tp_canceltransmit)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
+
+**[J1939Tp_ChangeParameter](../communication/j1939tp/index.md#747-j1939tp_changeparameter)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
+
+**[J1939Tp_GetVersionInfo](../communication/j1939tp/index.md#743-j1939tp_getversioninfo)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
+
+**[J1939Tp_Init](../communication/j1939tp/index.md#741-j1939tp_init)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
+
+**[J1939Tp_MainFunction](../communication/j1939tp/index.md#761-j1939tp_mainfunction)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
+
+**[J1939Tp_RxIndication](../communication/j1939tp/index.md#751-j1939tp_rxindication)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
+
+**[J1939Tp_Shutdown](../communication/j1939tp/index.md#742-j1939tp_shutdown)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
+
+**[J1939Tp_Transmit](../communication/j1939tp/index.md#744-j1939tp_transmit)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
+
+**[J1939Tp_TxConfirmation](../communication/j1939tp/index.md#752-j1939tp_txconfirmation)**
+> 函数 · [AUTOSAR J1939Tp（SAE J1939 传输层）](../communication/j1939tp/index.md) · SWS_SAEJ1939TransportLayer · R23-11
 
 ## K
 
@@ -4393,6 +5032,36 @@ title: "AUTOSAR API 函数清单"
 **[LinIf_WakeupConfirmation](../communication/lin_interface/index.md#741-linif_wakeupconfirmation)**
 > 函数 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11
 
+**[LinSM_GetCurrentComMode](../communication/linsm/index.md#734-linsm_getcurrentcommode)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
+**[LinSM_GetVersionInfo](../communication/linsm/index.md#733-linsm_getversioninfo)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
+**[LinSM_GotoSleepConfirmation](../communication/linsm/index.md#753-linsm_gotosleepconfirmation)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
+**[LinSM_GotoSleepIndication](../communication/linsm/index.md#752-linsm_gotosleepindication)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
+**[LinSM_Init](../communication/linsm/index.md#731-linsm_init)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
+**[LinSM_MainFunction](../communication/linsm/index.md#741-linsm_mainfunction)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
+**[LinSM_RequestComMode](../communication/linsm/index.md#735-linsm_requestcommode)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
+**[LinSM_ScheduleRequest](../communication/linsm/index.md#732-linsm_schedulerequest)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
+**[LinSM_ScheduleRequestConfirmation](../communication/linsm/index.md#751-linsm_schedulerequestconfirmation)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
+**[LinSM_WakeupConfirmation](../communication/linsm/index.md#754-linsm_wakeupconfirmation)**
+> 函数 · [AUTOSAR LinSM（LIN 状态管理器）](../communication/linsm/index.md) · SWS_LINStateManager · R23-11
+
 **[LinTp_ChangeParameter](../communication/lin_interface/index.md#7319-lintp_changeparameter)**
 > 函数 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11
 
@@ -4407,6 +5076,27 @@ title: "AUTOSAR API 函数清单"
 
 **[LinTp_Transmit](../communication/lin_interface/index.md#7316-lintp_transmit)**
 > 函数 · [AUTOSAR LinIf (LIN Interface)](../communication/lin_interface/index.md) · SWS_LINInterface · R23-11
+
+**[LinTrcv_CheckWakeup](../communication/lintrcv/index.md#736-lintrcv_checkwakeup)**
+> 函数 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
+
+**[LinTrcv_GetBusWuReason](../communication/lintrcv/index.md#734-lintrcv_getbuswureason)**
+> 函数 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
+
+**[LinTrcv_GetOpMode](../communication/lintrcv/index.md#733-lintrcv_getopmode)**
+> 函数 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
+
+**[LinTrcv_GetVersionInfo](../communication/lintrcv/index.md#735-lintrcv_getversioninfo)**
+> 函数 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
+
+**[LinTrcv_Init](../communication/lintrcv/index.md#731-lintrcv_init)**
+> 函数 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
+
+**[LinTrcv_SetOpMode](../communication/lintrcv/index.md#732-lintrcv_setopmode)**
+> 函数 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
+
+**[LinTrcv_SetWakeupMode](../communication/lintrcv/index.md#737-lintrcv_setwakeupmode)**
+> 函数 · [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../communication/lintrcv/index.md) · SWS_LINTransceiverDriver · R23-11
 
 **[LogTraceSessionControl](../communication/diagnostic_log_and_trace/index.md#7713-logtracesessioncontrol)**
 > 函数 · [AUTOSAR Dlt（诊断日志与跟踪）](../communication/diagnostic_log_and_trace/index.md) · SWS_DiagnosticLogAndTrace · R23-11
@@ -4667,6 +5357,60 @@ title: "AUTOSAR API 函数清单"
 
 **[MirrorControl](../communication/mirror/index.md#7821-mirrorcontrol)**
 > 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
+
+**[Mka_GetCknStatus](../communication/macsec/index.md#734-mka_getcknstatus)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_GetEnable](../communication/macsec/index.md#736-mka_getenable)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_GetMacSecStatistics](../communication/macsec/index.md#7310-mka_getmacsecstatistics)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_GetMacSecStatisticsNotification](../communication/macsec/index.md#741-mka_getmacsecstatisticsnotification)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_GetPaeStatus](../communication/macsec/index.md#737-mka_getpaestatus)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_GetVersionInfo](../communication/macsec/index.md#732-mka_getversioninfo)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_Init](../communication/macsec/index.md#731-mka_init)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_LinkStateChange](../communication/macsec/index.md#7311-mka_linkstatechange)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_MacSecAddRxSaNotification](../communication/macsec/index.md#746-mka_macsecaddrxsanotification)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_MacSecAddTxSaNotification](../communication/macsec/index.md#745-mka_macsecaddtxsanotification)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_MacSecUpdateSecYNotification](../communication/macsec/index.md#744-mka_macsecupdatesecynotification)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_MainFunction](../communication/macsec/index.md#751-mka_mainfunction)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_RxIndication](../communication/macsec/index.md#742-mka_rxindication)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_SetCknStatus](../communication/macsec/index.md#733-mka_setcknstatus)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_SetEnable](../communication/macsec/index.md#735-mka_setenable)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_SetPaePermissiveMode](../communication/macsec/index.md#738-mka_setpaepermissivemode)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_StartPae](../communication/macsec/index.md#739-mka_startpae)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
+
+**[Mka_TxConfirmation](../communication/macsec/index.md#743-mka_txconfirmation)**
+> 函数 · [AUTOSAR Mka（MACsec 密钥协商）](../communication/macsec/index.md) · SWS_MACsecKeyAgreement · R23-11
 
 **[ModeCondition](../diagnostics/j1939dcm/index.md#7743-modecondition)**
 > 函数 · [AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](../diagnostics/j1939dcm/index.md) · SWS_SAEJ1939DiagnosticCommunicationManager · R23-11
