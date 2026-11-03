@@ -125,7 +125,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] asws_health_monitoring (AUTOSAR_FO_ASWS_HealthMonitoring · HealthMonitoring · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [x] asws_health_monitoring (AUTOSAR_FO_ASWS_HealthMonitoring · HealthMonitoring · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Abstract Specification of Health Monitoring（健康监控抽象规范）; target `foundation/health_monitoring/asws_health_monitoring/`; abstract software specification (ASWS) — platform-independent SWS-like items
   - Note: source `HealthMonitoring/AUTOSAR_FO_ASWS_HealthMonitoring.md` — 1,434 lines, 67 figure refs, 85 item IDs
   - Note: related site content: cp/safety/watchdog_manager (WdgM) (cross-link candidates, report-only until the run decides)
@@ -140,8 +140,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: translation written 2026-11-03 — ch.1–4 + 5 (源 6) + 6 (源 7) + 7 (源 8) + 8 (源 9) + D; all ASWS item blocks rendered as plain prose (IDs, glyph delimiters and `(RS_HM_…)` back-references dropped); ch.7 pseudo-code listings as fenced C blocks; ch.9 ten type tables + 2 port tables + 2 service-interface tables (merged PDF header cells normalized: 种类 ProvidedPort + separate 接口 row)
   - Note: Phase A (2026-11-03) — `mkdocs build --strict` exit 0, only the known `NO_MKDOCS_2_WARNING` notice; `check_heading_lang.py` OK; hygiene 0/0/0 (`^# `, requirement IDs, `{DRAFT}`); ch.2 0 tables / 28 term lines (28 source rows, order verified cell by cell); 17 figure refs each resolving to a copied PNG; `check_indexes.py` OK (250 nav targets, 0 broken links); `gen_api_list.py --check` up to date; link census: 0 identifier mentions, 5 chapter-number refs applied + 4 hand-linked for consistency, 13 citation links already resolved, 1 remaining candidate is the source-chapter mention inside the file comment (intentionally plain), cross-article `Mcu` ×1 NO-ARTICLE; iso.org probes 403 (anti-bot, curl-blocked — kept, authoritative URL)
   - Note: Phase B coverage — source 1/1.1 → §1; 2 → §2; 3 → §3; 4.1–4.2 → §4; 6 → §5 (6.1→5.1, 6.1.1–5 → 5.1.1–5 with 5.1.3.1–3, 5.1.4.1–3; 6.2→5.2 with 5.2.1.1–5.2.3.2; 6.3→5.3 with 5.3.1–4); 7 → §6 (7.1.1–5→6.1.1–5, 7.2.1–2→6.2.1–2); 8 → §7 (8.1, 8.2.1, 8.3.1–4 → 7.1, 7.2.1, 7.3.1–4); 9 → §8 (9.1 10 types, 9.2.1–2); D.1/D.2 → §D. Deliberate omissions: ch.5 (user decision), annex A/B/C (`None.` placeholder rule — user to verify). Deviations: source typos normalized (Rule "Pocessing"→处理, "preempeted"→抢占, `montoringData`→`monitoringData`); figure numbers keep source numbering (图6.x/图8.x).
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 5 — User confirmation gate (2026-11-03: approved)
+  - [x] Step 6 — TODO.md row + commit/PR (issue #257 · commit e956feb · PR #258)
 - [ ] tps_abstract_platform_specification (AUTOSAR_FO_TPS_AbstractPlatformSpecification · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Abstract Platform Specification（抽象平台规范）; target `foundation/methodology_templates/tps_abstract_platform_specification/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_TPS_AbstractPlatformSpecification.md` — 1,598 lines, 78 figure refs, 67 item IDs
