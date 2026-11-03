@@ -142,15 +142,21 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Phase B coverage — source 1/1.1 → §1; 2 → §2; 3 → §3; 4.1–4.2 → §4; 6 → §5 (6.1→5.1, 6.1.1–5 → 5.1.1–5 with 5.1.3.1–3, 5.1.4.1–3; 6.2→5.2 with 5.2.1.1–5.2.3.2; 6.3→5.3 with 5.3.1–4); 7 → §6 (7.1.1–5→6.1.1–5, 7.2.1–2→6.2.1–2); 8 → §7 (8.1, 8.2.1, 8.3.1–4 → 7.1, 7.2.1, 7.3.1–4); 9 → §8 (9.1 10 types, 9.2.1–2); D.1/D.2 → §D. Deliberate omissions: ch.5 (user decision), annex A/B/C (`None.` placeholder rule — user to verify). Deviations: source typos normalized (Rule "Pocessing"→处理, "preempeted"→抢占, `montoringData`→`monitoringData`); figure numbers keep source numbering (图6.x/图8.x).
   - [x] Step 5 — User confirmation gate (2026-11-03: approved)
   - [x] Step 6 — TODO.md row + commit/PR (issue #257 · commit e956feb · PR #258)
-- [ ] tps_abstract_platform_specification (AUTOSAR_FO_TPS_AbstractPlatformSpecification · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [x] tps_abstract_platform_specification (AUTOSAR_FO_TPS_AbstractPlatformSpecification · MethodologyAndTemplates · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Abstract Platform Specification（抽象平台规范）; target `foundation/methodology_templates/tps_abstract_platform_specification/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_TPS_AbstractPlatformSpecification.md` — 1,598 lines, 78 figure refs, 67 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: Step 1 gap analysis (2026-11-04): no article → full translation of the front-matter References registry + §1–§4 + annexes A–F; annex A is abbreviations only (A.1, 6 rows), B is 15 mentioned-class tables, C is ARXML examples (Listing C-1 / C-2-1 / C-2-2 + Figure C-1), D is split-element lead-in text only (its table is missing in the PDF→markdown conversion), E is variant points (Table E.1, 3 rows), F is change history (F.1–F.5 with Tables F.1–F.13)
+  - Note: technical shape — inline spec items `[TPS_APSD_xxxxx] glyph[ceilingleft] … glyph[floorright]` → **bold translated title**: prose, IDs and glyph delimiters dropped (batch item-ID decision), but IDs the source prose names as references are kept (e.g. `参照 [TPS_APSD_01019]`); constraints rendered as `**约束：<title>**：`; class tables use the two-table form (属性|值 + 属性|类型|多重性|种类|备注) with source caption numbering 3.1–3.17 and B.1–B.15; abbreviations in A.1 use bold-term + blockquote (6 rows, source order, no GFM table)
+  - Note: figures — 78 figure refs collapse to 15 content diagrams vs page-chrome images (~1–10 KB, recurring hashes); copied as `Figure2-1..2-3`, `Figure3-1..3-8`, `ListingC-1`, `ListingC-2-1/-2`, `FigureC-1`
+  - Note: deviations — annex D table absent from the source markdown (noted in §D); annex F tables keep only the translated heading column (ID/Number columns dropped per decision); source captions sit after their content in the markdown (e.g. Table 3.12), so the article follows the caption numbers as source truth; `constr_6812` 9-column table loses some `x` placements in PDF merged cells (rendered conservatively); source quirks kept faithfully (`TPS_APSD_01038` "category XP_PORT_APPLICATION represents a port to a safety entity"; 3.5.6.1 repeats the "Deferred Data Type" heading)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - Note: Phase A (2026-11-04) — `mkdocs build --strict` exit 0, only the known `NO_MKDOCS_2_WARNING` notice; `check_heading_lang.py` OK; `check_indexes.py` OK (251 nav targets, 171 AUTOSAR pages, 30 landing pages, 0 broken links); hygiene `[TPS_APSD_…]`/`[constr_…]` labels 0, `{DRAFT}` 0, `glyph[` 0, body h1 0; 15 figure refs each resolve to a copied PNG; all 36 anchors resolve in the built HTML (27 citation + 9 chapter); `gen_api_list.py --check` up to date; glossary +17 terms; `link_candidates.py --apply` idempotent (checksum unchanged) — its 3 unresolved C.x anchors are false positives (the ids exist in the generated HTML)
+  - Note: Phase B coverage — source References → 参考文献 (ref-1..ref-7); 1/1.1–1.3 → §1; 2/2.1–2.3.3 (incl. 2.3.2.1–2) → §2; 3/3.1–3.5.6.1 (incl. 3.1.1, 3.2.1–2, 3.3.1–3.3.5 + 3.3.2.1, 3.4.1–3.4.2.1, 3.5.1–3.5.6.1 incl. 3.5.5.1) → §3; 4/4.1 → §4; A.1 → §A; B.1–B.15 → §B; C.1–C.3 → §C; D → §D; E/Table E.1 → §E; F.1–F.5/Tables F.1–F.13 → §F. Deliberate omissions: none (every annex translates); the only unrenderable object is the missing annex D table
+  - [x] Step 5 — User confirmation gate (2026-11-04: approved)
+  - [x] Step 6 — TODO.md row + commit/PR (issue #259 · commit 510c6d7 · PR #260)
 - [ ] tps_xml_schema_production_rules (AUTOSAR_FO_TPS_XMLSchemaProductionRules · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: XML Schema Production Rules（XML 模式生成规则）; target `foundation/methodology_templates/tps_xml_schema_production_rules/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_TPS_XMLSchemaProductionRules.md` — 1,848 lines, 145 figure refs, 43 item IDs

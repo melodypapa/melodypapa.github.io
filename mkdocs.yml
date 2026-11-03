@@ -306,13 +306,13 @@ nav:
         - "LinIf": autosar/cp/communication/lin_interface/index.md
         - "LinSM": autosar/cp/communication/linsm/index.md
         - "LinTrcv": autosar/cp/communication/lintrcv/index.md
-        - "LsDu": autosar/cp/communication/lsdu_router/index.md
+        - "L-SDU Router": autosar/cp/communication/lsdu_router/index.md
         - "Mka": autosar/cp/communication/macsec/index.md
         - "Mirror": autosar/cp/communication/mirror/index.md
         - "IpduM": autosar/cp/communication/ipdum/index.md
         - "PduR": autosar/cp/communication/pdu_router/index.md
         - "SecOC": autosar/cp/communication/sec_oc/index.md
-        - "SD": autosar/cp/communication/service_discovery/index.md
+        - "Sd": autosar/cp/communication/service_discovery/index.md
         - "Spi": autosar/cp/communication/spi_handler_driver/index.md
         - "SomeIpTp": autosar/cp/communication/someiptp/index.md
         - "SomeIpXf": autosar/cp/communication/someipxf/index.md
@@ -329,7 +329,6 @@ nav:
         - "EthTSyn": autosar/cp/globaltime/eth_tsyn/index.md
         - "FrTSyn": autosar/cp/globaltime/fr_tsyn/index.md
       - 信息安全:
-
         - autosar/cp/crypto/index.md
         - "Crypto": autosar/cp/crypto/crypto_driver/index.md
         - "CryIf": autosar/cp/crypto/crypto_interface/index.md
@@ -382,7 +381,7 @@ nav:
         - "MemMap": autosar/cp/memory/memory_mapping/index.md
         - "NV数据处理指南": autosar/cp/memory/nv_data_handling_guideline/index.md
         - "NvM": autosar/cp/memory/nvram_manager/index.md
-        - "FOTA": autosar/cp/memory/firmware_over_the_air/index.md
+        - "Fota": autosar/cp/memory/firmware_over_the_air/index.md
       - 方法论与模板:
         - autosar/cp/methodology_templates/index.md
         - "BSWMDT": autosar/cp/methodology_templates/basic_software_module_description_template/index.md
@@ -398,7 +397,7 @@ nav:
         - "FiM": autosar/cp/system_services/function_inhibition_manager/index.md
         - "Os": autosar/cp/system_services/operating_system/index.md
         - "Tm": autosar/cp/system_services/time_service/index.md
-        - "SwCluC": autosar/cp/system_services/sw_cluster_design_and_integration/index.md
+        - "软件集群设计与集成指南": autosar/cp/system_services/sw_cluster_design_and_integration/index.md
       - 功能安全:
         - autosar/cp/safety/index.md
         - "WdgM": autosar/cp/safety/watchdog_manager/index.md
@@ -449,6 +448,7 @@ nav:
         - "Health Monitoring": autosar/foundation/health_monitoring/asws_health_monitoring/index.md
       - 方法论与模板:
         - autosar/foundation/methodology_templates/index.md
+        - "Abstract Platform": autosar/foundation/methodology_templates/tps_abstract_platform_specification/index.md
       - 协议:
         - autosar/foundation/protocols/index.md
       - 发布文档:
