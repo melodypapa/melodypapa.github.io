@@ -90,7 +90,7 @@ EL2 侧（`p15, 4, ...`）：`HMPUIR` / `HPRSELR` / `HPRBAR` / `HPRLAR` / `HPREN
 | Normal WB RA | `001` | 1 | 1 | S |
 | Normal NC | `001` | 0 | 0 | S |
 
-### R52：MAIR 值（S32K5 方案）
+### R52：MAIR 属性槽位映射（S32K566 示例）
 
 | AttrIndx | 值 | 含义 | 用途 |
 | --- | --- | --- | --- |
@@ -98,7 +98,7 @@ EL2 侧（`p15, 4, ...`）：`HMPUIR` / `HPRSELR` / `HPRBAR` / `HPRLAR` / `HPREN
 | 1 | `0x00` | Device-nGnRnE（最严格） | PPB |
 | 2 | `0xBB` | Normal, RW, WT（no WA） | 保留 |
 | 3 | `0x04` | Device-nGnRE | 外设桥 |
-| 4 | `0x44` | Normal, Non-cacheable | LPE_SRAM Code 只读视图 |
+| 4 | `0x44` | Normal, Non-cacheable | LPE_SRAM Code（只读权限由区域 AP 设置） |
 
 Device 严格度：`0x00` nGnRnE > `0x04` nGnRE > `0x0C` nGRE > `0x0F` GRE。
 

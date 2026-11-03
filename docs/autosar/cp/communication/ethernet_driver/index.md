@@ -81,7 +81,7 @@ release: R23-11
     > AUTOSAR_SWS_DiagnosticEventManager
 18. Specification of ECU State Manager
     > AUTOSAR_SWS_ECUStateManager.pdf
-19. General Specification of Basic Software Modules
+19. <a id="ref-19"></a> General Specification of Basic Software Modules
     > AUTOSAR_SWS_BSWGeneral.pdf    
 
 ### 3.2. 相关标准及规范
@@ -94,7 +94,7 @@ release: R23-11
 
 ### 3.3. 相关的规范
 
-AUTOSAR提供了基础软件模块[19](SWS BSW General)的通用规范，它也适用于以太网驱动程序。因此，AUTOSAR_SWS_BSWGeneral应该被认为是以太网驱动程序的附加和必需的规范。
+AUTOSAR提供了基础软件模块[19](#ref-19)（**SWS BSW General**）的通用规范，它也适用于以太网驱动程序。因此，AUTOSAR_SWS_BSWGeneral应该被认为是以太网驱动程序的附加和必需的规范。
 
 ## 4. 约束和假设
 

@@ -2,6 +2,7 @@
 .workbuddy/memory/*.md
 .zcode/
 .trae
+.private
 site/
 .venv/
 __pycache__/
