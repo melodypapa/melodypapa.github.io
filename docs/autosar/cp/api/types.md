@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **780** 个条目。
+共 **831** 个条目。
 
 ## A
 
@@ -2331,6 +2331,159 @@ title: "AUTOSAR API 类型清单"
 
 **[V2xDM_ConfigType](../communication/v2x_datamgr/index.md#731-v2xdm_configtype)**
 > 类型 · [AUTOSAR V2X Data Manager（V2X数据管理器）](../communication/v2x_datamgr/index.md) · SWS_V2XDataManager · R23-11
+
+**[V2xFac_ActionIdType](../communication/v2x_facilities/index.md#77329-v2xfac_actionidtype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_AlacarteContainerPresenceType](../communication/v2x_facilities/index.md#773320-v2xfac_alacartecontainerpresencetype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_AlacarteContainerType](../communication/v2x_facilities/index.md#773318-v2xfac_alacartecontainertype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_AltitudeConfidenceType](../communication/v2x_facilities/index.md#77324-v2xfac_altitudeconfidencetype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_AltitudeType](../communication/v2x_facilities/index.md#77323-v2xfac_altitudetype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_CauseCodeType](../communication/v2x_facilities/index.md#773215-v2xfac_causecodetype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_ClosedLanesPresenceType](../communication/v2x_facilities/index.md#773212-v2xfac_closedlanespresencetype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_ClosedLanesType](../communication/v2x_facilities/index.md#773211-v2xfac_closedlanestype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_DeltaReferencePositionType](../communication/v2x_facilities/index.md#77322-v2xfac_deltareferencepositiontype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_DenmMessageRootType](../communication/v2x_facilities/index.md#77331-v2xfac_denmmessageroottype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_DenMsgPresenceType](../communication/v2x_facilities/index.md#77333-v2xfac_denmsgpresencetype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_DenMsgType](../communication/v2x_facilities/index.md#77332-v2xfac_denmsgtype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_DrivingLaneStatusType](../communication/v2x_facilities/index.md#773214-v2xfac_drivinglanestatustype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_EnergyStorageType](../communication/v2x_facilities/index.md#773327-v2xfac_energystoragetype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_EventHistoryType](../communication/v2x_facilities/index.md#773311-v2xfac_eventhistorytype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_EventPointPresenceType](../communication/v2x_facilities/index.md#773313-v2xfac_eventpointpresencetype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_EventPointType](../communication/v2x_facilities/index.md#773312-v2xfac_eventpointtype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_GnAreaShapeType](../communication/v2x_facilities/index.md#77313-v2xfac_gnareashapetype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_GnDestinationAreaType](../communication/v2x_facilities/index.md#77312-v2xfac_gndestinationareatype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_HardShoulderStatusType](../communication/v2x_facilities/index.md#773213-v2xfac_hardshoulderstatustype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_HeadingType](../communication/v2x_facilities/index.md#77326-v2xfac_headingtype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_ImpactReductionContainerType](../communication/v2x_facilities/index.md#773321-v2xfac_impactreductioncontainertype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_ItsPduHeaderType](../communication/v2x_facilities/index.md#77321-v2xfac_itspduheadertype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_LocationContainerPresenceType](../communication/v2x_facilities/index.md#773317-v2xfac_locationcontainerpresencetype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_LocationContainerType](../communication/v2x_facilities/index.md#773314-v2xfac_locationcontainertype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_ManagementContainerPresenceType](../communication/v2x_facilities/index.md#77338-v2xfac_managementcontainerpresencetype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_ManagementContainerType](../communication/v2x_facilities/index.md#77334-v2xfac_managementcontainertype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_PathHistoryType](../communication/v2x_facilities/index.md#773210-v2xfac_pathhistorytype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_PosConfidenceEllipseType](../communication/v2x_facilities/index.md#77325-v2xfac_posconfidenceellipsetype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_PositioningSolutionTypeType](../communication/v2x_facilities/index.md#773319-v2xfac_positioningsolutiontypetype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_PositionOfOccupantsType](../communication/v2x_facilities/index.md#773323-v2xfac_positionofoccupantstype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_PositionOfPillarsType](../communication/v2x_facilities/index.md#773322-v2xfac_positionofpillarstype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_ReferencePositionType](../communication/v2x_facilities/index.md#77328-v2xfac_referencepositiontype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_RelevanceDistanceType](../communication/v2x_facilities/index.md#77336-v2xfac_relevancedistancetype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_RelevanceTrafficDirectionType](../communication/v2x_facilities/index.md#77337-v2xfac_relevancetrafficdirectiontype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_RequestResponseIndicationType](../communication/v2x_facilities/index.md#773324-v2xfac_requestresponseindicationtype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_RoadTypeType](../communication/v2x_facilities/index.md#773315-v2xfac_roadtypetype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_RxParamsType](../communication/v2x_facilities/index.md#721-v2xfac_rxparamstype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_SituationContainerPresenceType](../communication/v2x_facilities/index.md#773310-v2xfac_situationcontainerpresencetype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_SituationContainerType](../communication/v2x_facilities/index.md#77339-v2xfac_situationcontainertype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_SpeedType](../communication/v2x_facilities/index.md#77327-v2xfac_speedtype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_StationarySinceType](../communication/v2x_facilities/index.md#773326-v2xfac_stationarysincetype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_StationaryVehicleContainerPresenceType](../communication/v2x_facilities/index.md#773328-v2xfac_stationaryvehiclecontainerpresencetype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_StationaryVehicleContainerType](../communication/v2x_facilities/index.md#773325-v2xfac_stationaryvehiclecontainertype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_TerminationType](../communication/v2x_facilities/index.md#77335-v2xfac_terminationtype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_TracesType](../communication/v2x_facilities/index.md#773316-v2xfac_tracestype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_TrafficClassIdType](../communication/v2x_facilities/index.md#77311-v2xfac_trafficclassidtype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_VdsType](../communication/v2x_facilities/index.md#773332-v2xfac_vdstype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_VehicleIdentificationPresenceType](../communication/v2x_facilities/index.md#773330-v2xfac_vehicleidentificationpresencetype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_VehicleIdentificationType](../communication/v2x_facilities/index.md#773329-v2xfac_vehicleidentificationtype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_WmiNumberType](../communication/v2x_facilities/index.md#773331-v2xfac_wminumbertype)**
+> 类型 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
 
 **[VoidPtr](../general/platform_types/index.md#7118-voidptr)**
 > 类型 · [AUTOSAR Platform Types（平台类型）](../general/platform_types/index.md) · SWS_PlatformTypes · R23-11

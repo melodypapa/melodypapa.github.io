@@ -89,6 +89,7 @@ title: "通信（Communication）"
 * [AUTOSAR Chinese V2X Security（中国V2X安全）](chinesev2x_sec/index.md)
 * [AUTOSAR V2X Basic Transport（V2X基本传输协议）](v2x_basictp/index.md)
 * [AUTOSAR V2X Data Manager（V2X数据管理器）](v2x_datamgr/index.md)
+* [AUTOSAR V2X Facilities（V2X设施层）](v2x_facilities/index.md)
 
 ## 相关内容
 

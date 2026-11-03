@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2367** 个条目。
+共 **2382** 个条目。
 
 ## A
 
@@ -6903,6 +6903,51 @@ title: "AUTOSAR API 函数清单"
 
 **[V2xDM_V2xStackRxIndication](../communication/v2x_datamgr/index.md#752-v2xdm_v2xstackrxindication)**
 > 函数 · [AUTOSAR V2X Data Manager（V2X数据管理器）](../communication/v2x_datamgr/index.md) · SWS_V2XDataManager · R23-11
+
+**[V2xFac_CaBs_MainFunction](../communication/v2x_facilities/index.md#751-v2xfac_cabs_mainfunction)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_DenBs](../communication/v2x_facilities/index.md#7741-v2xfac_denbs)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_DenBs_MainFunction](../communication/v2x_facilities/index.md#752-v2xfac_denbs_mainfunction)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_GetVersionInfo](../communication/v2x_facilities/index.md#732-v2xfac_getversioninfo)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_Init](../communication/v2x_facilities/index.md#731-v2xfac_init)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_RxIndication](../communication/v2x_facilities/index.md#741-v2xfac_rxindication)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_RxS_MainFunction](../communication/v2x_facilities/index.md#753-v2xfac_rxs_mainfunction)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_V2xM_AbortPseudonymChange](../communication/v2x_facilities/index.md#735-v2xfac_v2xm_abortpseudonymchange)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_V2xM_CommitPseudonymChange](../communication/v2x_facilities/index.md#734-v2xfac_v2xm_commitpseudonymchange)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_V2xM_PreparePseudonymChange](../communication/v2x_facilities/index.md#733-v2xfac_v2xm_preparepseudonymchange)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_V2xM_SetCaBsOperation](../communication/v2x_facilities/index.md#737-v2xfac_v2xm_setcabsoperation)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_V2xM_SetTGenCamDcc](../communication/v2x_facilities/index.md#736-v2xfac_v2xm_settgencamdcc)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_Vdp](../communication/v2x_facilities/index.md#7742-v2xfac_vdp)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFacDenBs](../communication/v2x_facilities/index.md#7721-v2xfacdenbs)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFacVdp](../communication/v2x_facilities/index.md#7711-v2xfacvdp)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
 
 **[VerificationStatus](../communication/sec_oc/index.md#7843-verificationstatus)**
 > 函数 · [AUTOSAR SecOC (Secure Onboard Communication)](../communication/sec_oc/index.md) · SWS_SecOc · R23-11

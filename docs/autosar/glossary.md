@@ -279,7 +279,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **API**
 > 应用编程接口（**Application Programming Interface**）
 >
-> 来源：[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Standard Types（标准类型）](cp/general/standard_types/index.md)（SWS_StandardTypes）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）
+> 来源：[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Standard Types（标准类型）](cp/general/standard_types/index.md)（SWS_StandardTypes）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **APID**
@@ -521,7 +521,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **BS**
 > 块大小（**Block Size**）
 >
-> 来源：[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **BSAS**
@@ -545,7 +545,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **BSW**
 > 基础软件（**Basic Software**）
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](cp/memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping）、[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR PduR (PDU Router)](cp/communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR TTCAN Driver（TTCAN 驱动程序）](cp/communication/ttcan_driver/index.md)（AUTOSAR_CP_SWS_TTCANDriver）、[AUTOSAR J1939Nm（SAE J1939 网络管理）](cp/communication/j1939nm/index.md)（AUTOSAR_CP_SWS_SAEJ1939NetworkManagement）、[AUTOSAR J1939Rm（SAE J1939 请求管理器）](cp/communication/j1939rm/index.md)（AUTOSAR_CP_SWS_SAEJ1939RequestManager）、[AUTOSAR J1939Tp（SAE J1939 传输层）](cp/communication/j1939tp/index.md)（AUTOSAR_CP_SWS_SAEJ1939TransportLayer）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](cp/memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping）、[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR PduR (PDU Router)](cp/communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR TTCAN Driver（TTCAN 驱动程序）](cp/communication/ttcan_driver/index.md)（AUTOSAR_CP_SWS_TTCANDriver）、[AUTOSAR J1939Nm（SAE J1939 网络管理）](cp/communication/j1939nm/index.md)（AUTOSAR_CP_SWS_SAEJ1939NetworkManagement）、[AUTOSAR J1939Rm（SAE J1939 请求管理器）](cp/communication/j1939rm/index.md)（AUTOSAR_CP_SWS_SAEJ1939RequestManager）、[AUTOSAR J1939Tp（SAE J1939 传输层）](cp/communication/j1939tp/index.md)（AUTOSAR_CP_SWS_SAEJ1939TransportLayer）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **BSW driver**
@@ -569,7 +569,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **BTP**
 > 基本传输协议（**Basic Transport Protocol**）。
 >
-> 来源：[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）
+> 来源：[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **BTP-A**
@@ -649,7 +649,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CA**
 > 控制器应用（**Controller Application**），与一个地址绑定的 **ECU** 角色。
 >
-> 来源：[AUTOSAR J1939Rm（SAE J1939 请求管理器）](cp/communication/j1939rm/index.md)（AUTOSAR_CP_SWS_SAEJ1939RequestManager）、[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）
+> 来源：[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）、[AUTOSAR J1939Rm（SAE J1939 请求管理器）](cp/communication/j1939rm/index.md)（AUTOSAR_CP_SWS_SAEJ1939RequestManager）、[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）
 {: .glossary-source}
 
 **CAK**
@@ -679,7 +679,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CAM**
 > 协作感知消息（**Cooperative Awareness Message**）。
 >
-> 来源：[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **Camel case**
@@ -1359,7 +1359,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DCC**
 > 分布式拥塞控制（**Decentralized Congestion Control**）。
 >
-> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **DCM**
@@ -1383,7 +1383,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DE**
 > 数据元素（**Data Element**）。
 >
-> 来源：[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）
+> 来源：[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **Deadline End Checkpoint**（**Deadline Stop Checkpoint**）
@@ -1425,7 +1425,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DEM**
 > 诊断事件管理器（**Diagnostic Event Manager**）。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](cp/mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](cp/communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](cp/communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[E2E Transformer (E2E转换器)](cp/communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR J1939Nm（SAE J1939 网络管理）](cp/communication/j1939nm/index.md)（AUTOSAR_CP_SWS_SAEJ1939NetworkManagement）、[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](cp/mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](cp/communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](cp/communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[E2E Transformer (E2E转换器)](cp/communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR J1939Nm（SAE J1939 网络管理）](cp/communication/j1939nm/index.md)（AUTOSAR_CP_SWS_SAEJ1939NetworkManagement）、[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **Dem-internal data value**
@@ -1440,10 +1440,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**DEN**
+> 分布式环境通知（**Decentralized Environmental Notification**）。
+>
+> 来源：[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
+{: .glossary-source}
+
 **DENM**
 > 分布式环境通知消息（**Decentralized Environmental Notification Message**）。
 >
-> 来源：[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **Denominator**
@@ -1461,7 +1467,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DET**
 > 默认错误跟踪器（**Default Error Tracer**），实现报告开发错误的模块。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](cp/mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR Crypto Driver（加密驱动程序）](cp/crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](cp/crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Default Error Tracer（默认错误跟踪器）](cp/system_services/default_error_tracer/index.md)（SWS_DefaultErrorTracer）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](cp/communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](cp/communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR Crypto Service Manager（加密服务管理器）](cp/crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR J1939Nm（SAE J1939 网络管理）](cp/communication/j1939nm/index.md)（AUTOSAR_CP_SWS_SAEJ1939NetworkManagement）、[AUTOSAR J1939Rm（SAE J1939 请求管理器）](cp/communication/j1939rm/index.md)（AUTOSAR_CP_SWS_SAEJ1939RequestManager）、[AUTOSAR J1939Tp（SAE J1939 传输层）](cp/communication/j1939tp/index.md)（AUTOSAR_CP_SWS_SAEJ1939TransportLayer）、[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](cp/mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR Crypto Driver（加密驱动程序）](cp/crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](cp/crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Default Error Tracer（默认错误跟踪器）](cp/system_services/default_error_tracer/index.md)（SWS_DefaultErrorTracer）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](cp/communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](cp/communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR Crypto Service Manager（加密服务管理器）](cp/crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR J1939Nm（SAE J1939 网络管理）](cp/communication/j1939nm/index.md)（AUTOSAR_CP_SWS_SAEJ1939NetworkManagement）、[AUTOSAR J1939Rm（SAE J1939 请求管理器）](cp/communication/j1939rm/index.md)（AUTOSAR_CP_SWS_SAEJ1939RequestManager）、[AUTOSAR J1939Tp（SAE J1939 传输层）](cp/communication/j1939tp/index.md)（AUTOSAR_CP_SWS_SAEJ1939TransportLayer）、[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **Det**
@@ -1473,7 +1479,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DF**
 > 数据帧（**Data Frame**）。
 >
-> 来源：[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）
+> 来源：[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **DHCP**
@@ -1817,7 +1823,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **EcuM**
 > **ECU** 状态管理器（**ECU State Manager**）
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）、[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）、[AUTOSAR J1939Tp（SAE J1939 传输层）](cp/communication/j1939tp/index.md)（AUTOSAR_CP_SWS_SAEJ1939TransportLayer）、[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）、[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）、[AUTOSAR J1939Tp（SAE J1939 传输层）](cp/communication/j1939tp/index.md)（AUTOSAR_CP_SWS_SAEJ1939TransportLayer）、[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **EDP**
@@ -1944,7 +1950,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ETSI**
 > 欧洲电信标准协会（**European Telecommunications Standards Institute**）。
 >
-> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **EV**
@@ -2834,7 +2840,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **IF**
 > 接口（**Interface**）。
 >
-> 来源：[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）
+> 来源：[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **IF-PDU**
@@ -3032,7 +3038,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ITS**
 > 智能交通系统（**Intelligent Transport System**）。
 >
-> 来源：[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **ITS-G5**
@@ -3044,13 +3050,25 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ITS-S**
 > ITS 站（**ITS-Station**）。
 >
-> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **IUMPR**
 > 在使用中的监控性能比（**In-Use-Monitor Performance Ratio**）。
 >
 > 来源：[AUTOSAR Key Manager（密钥管理器）](cp/crypto/key_manager/index.md)（SWS_KeyManager）
+{: .glossary-source}
+
+**IVI**
+> 基础设施到车辆信息（**Infrastructure to Vehicle Information**）。
+>
+> 来源：[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
+{: .glossary-source}
+
+**IVIM**
+> 基础设施到车辆信息消息（**Infrastructure to Vehicle Information Message**）。
+>
+> 来源：[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 ## J
@@ -3092,6 +3110,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 ## K
+
+**KAF**
+> **DENM** 保活转发（**DENM Keep Alive Forwarding**）。
+>
+> 来源：[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
+{: .glossary-source}
 
 **KaY**
 > **MAC** 安全密钥协商实体（**MAC Security Key Agreement Entity**）。
@@ -3201,6 +3225,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > LIN 描述文件（**LIN Description File**）。
 >
 > 来源：[AUTOSAR LinIf (LIN Interface)](cp/communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
+{: .glossary-source}
+
+**LDM**
+> 局部动态地图（**Local Dynamic Map**）。
+>
+> 来源：[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **LED**
@@ -3401,6 +3431,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 通过 ECUC 参数 ComMManageReference 引用 1..n 个其他通道的 ComM 通道（**A ComM channel that references 1..n other channels by ECUC parameter ComMManageReference**）。
 >
 > 来源：[AUTOSAR Communication Manager（通信管理器）](cp/system_services/comm/index.md)（SWS_COMManager）
+{: .glossary-source}
+
+**MAPEM**
+> **MAP** 扩展消息（**MAP Extended Message**）。
+>
+> 来源：[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **Master**
@@ -4624,7 +4660,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **POTI**
 > 位置与时间（**Position and Time**）。
 >
-> 来源：[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **PPA**
@@ -4821,6 +4857,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](cp/application_interfaces/body_and_comfort/index.md)（AUTOSAR_CP_EXP_AIBodyAndComfort）
 {: .glossary-source}
 
+**RLT**
+> 道路与车道拓扑（**Road and Lane Topology**）。
+>
+> 来源：[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
+{: .glossary-source}
+
 **RNG**
 > 随机数发生器（**Random Number Generator**）。
 >
@@ -4908,7 +4950,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **RSU**
 > 路侧单元（**Roadside Unit**）。
 >
-> 来源：[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **RTE**
@@ -5375,6 +5417,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）
 {: .glossary-source}
 
+**SPATEM**
+> 信号相位与配时扩展消息（**Signal Phase And Timing Extended Message**）。
+>
+> 来源：[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
+{: .glossary-source}
+
 **SPDU**
 > 安全协议数据单元（**Secured protocol data Unit**）。
 >
@@ -5815,6 +5863,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
+**TLM**
+> 交通灯操控（**Traffic Light Maneuver**）。
+>
+> 来源：[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
+{: .glossary-source}
+
 **TLS**
 > 传输层安全（**Transport Layer Security**）。
 >
@@ -6140,13 +6194,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **V2X**
 > 车联网（**Vehicle to Everything**）。
 >
-> 来源：[AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](cp/communication/cellularv2x_driver/index.md)（AUTOSAR_CP_SWS_CellularV2XDriver）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](cp/communication/cellularv2x_driver/index.md)（AUTOSAR_CP_SWS_CellularV2XDriver）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **V2xBtp**
 > **Vehicle-2-X** 基本传输协议（**Vehicle-2-X Basic Transport Protocol**）。
 >
-> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **V2xDM**
@@ -6158,19 +6212,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **V2xFac**
 > **Vehicle-2-X** 设施（**Vehicle-2-X Facilities**）。
 >
-> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **V2xGn**
 > **Vehicle-2-X** 地理网络（**Vehicle-2-X Geo Networking**）。
 >
-> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **V2xM**
 > **Vehicle-2-X** 管理（**Vehicle-2-X Management**）。
 >
-> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **V2xML**
@@ -6218,7 +6272,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **VDP**
 > 车辆数据提供者（**Vehicle Data provider**）。
 >
-> 来源：[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
 **VERB**

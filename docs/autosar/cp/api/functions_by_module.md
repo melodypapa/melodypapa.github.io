@@ -3005,6 +3005,28 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**V2xDM_RxIndication**](../communication/v2x_datamgr/index.md#751-v2xdm_rxindication) | 来自下层通信接口模块（PduR）的接收 PDU 指示。 |
 | [**V2xDM_V2xStackRxIndication**](../communication/v2x_datamgr/index.md#752-v2xdm_v2xstackrxindication) | 由底层 V2x 协议栈调用，向 V2x Data Manager 提供 V2x 消息。 |
 
+## AUTOSAR V2X Facilities（V2X设施层）（15）
+
+来源：[AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities
+
+| 函数 | 简述 |
+|---|---|
+| [**V2xFac_CaBs_MainFunction**](../communication/v2x_facilities/index.md#751-v2xfac_cabs_mainfunction) | 这是 CA 基本服务的主处理函数。 |
+| [**V2xFac_DenBs**](../communication/v2x_facilities/index.md#7741-v2xfac_denbs) | — |
+| [**V2xFac_DenBs_MainFunction**](../communication/v2x_facilities/index.md#752-v2xfac_denbs_mainfunction) | 这是 DEN 基本服务的主处理函数。 |
+| [**V2xFac_GetVersionInfo**](../communication/v2x_facilities/index.md#732-v2xfac_getversioninfo) | 返回本模块的版本信息。 |
+| [**V2xFac_Init**](../communication/v2x_facilities/index.md#731-v2xfac_init) | 初始化 V2xFac 模块。 |
+| [**V2xFac_RxIndication**](../communication/v2x_facilities/index.md#741-v2xfac_rxindication) | V2xBtp 模块调用本 API 原语，将接收到的 BTP 包的数据和 GeoNetworking 参数提供给 V2xFac 模块。 |
+| [**V2xFac_RxS_MainFunction**](../communication/v2x_facilities/index.md#753-v2xfac_rxs_mainfunction) | 这是 Facilities 消息接收服务的主处理函数。 |
+| [**V2xFac_V2xM_AbortPseudonymChange**](../communication/v2x_facilities/index.md#735-v2xfac_v2xm_abortpseudonymchange) | 当并非所有模块都同意假名更改且该更改将被回退时，V2xM 调用本函数。 |
+| [**V2xFac_V2xM_CommitPseudonymChange**](../communication/v2x_facilities/index.md#734-v2xfac_v2xm_commitpseudonymchange) | 当所有模块都同意假名更改且该更改将被提交时，V2xM 调用本函数。 |
+| [**V2xFac_V2xM_PreparePseudonymChange**](../communication/v2x_facilities/index.md#733-v2xfac_v2xm_preparepseudonymchange) | 通过本 API 原语，V2xFac 模块获得一个指示：给定的假名以及由此而来的 StationId 即将被更改。 |
+| [**V2xFac_V2xM_SetCaBsOperation**](../communication/v2x_facilities/index.md#737-v2xfac_v2xm_setcabsoperation) | 通过本 API 原语，V2xFac 模块获得 CA 基本服务当前操作状态的指示。 |
+| [**V2xFac_V2xM_SetTGenCamDcc**](../communication/v2x_facilities/index.md#736-v2xfac_v2xm_settgencamdcc) | 通过本 API 原语，V2xFac 模块获得当前 TGenCamDcc 值的指示。 |
+| [**V2xFac_Vdp**](../communication/v2x_facilities/index.md#7742-v2xfac_vdp) | — |
+| [**V2xFacDenBs**](../communication/v2x_facilities/index.md#7721-v2xfacdenbs) | — |
+| [**V2xFacVdp**](../communication/v2x_facilities/index.md#7711-v2xfacvdp) | — |
+
 ## AUTOSAR Watchdog Driver（看门狗驱动）（4）
 
 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](../safety/watchdog_driver/index.md) · SWS_WatchdogDriver
