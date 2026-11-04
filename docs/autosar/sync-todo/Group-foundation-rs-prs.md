@@ -62,12 +62,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 - [ ] prs_v2x_remote_access_layer (AUTOSAR_FO_PRS_V2XRemoteAccessLayer · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）; target `foundation/protocols/prs_v2x_remote_access_layer/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_V2XRemoteAccessLayer.md` — 512 lines, 25 figure refs, no item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — 2 of 25 figure refs are content figures (Figure2-1 communication setup, Figure6-1 message layout), embedded by source figure number; the rest are page decoration, incl. the §2/§6.1 diagram-label spill dropped as conversion noise; no protocol item IDs existed as headings (10 inline [FO_PRS_V2xRAL_*] items are prose paragraphs, IDs dropped); source ch.4 Requirements Traceability = pure ID tracing table → omitted per ASWS precedent (5→4, 6→5, 7→6, 8→7); appendix B Not Applicable Requirements = droppable NA appendix, omitted; A.1.1's single [FO_PRS_V2xRAL_NA] placeholder row → 无; A.1 heading "compared to R22-11" vs R23-11 subsections is a source quirk kept as-is; message-format tables 6.1-6.3 translated as GFM with the *Dir* footnote as blockquote; glossary: 12 existing entries gained this document as additional source, 6 new (IPC, ITS-G5 merged-duplicate, L2ID, LTE-PC5, LTE-Uu, MDR, PHY, V2xRAL)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_ipsec_protocol (AUTOSAR_FO_RS_IPsecProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on IPsec Protocol（IPsec 协议需求）; target `foundation/protocols/rs_ipsec_protocol/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Protocols/AUTOSAR_FO_RS_IPsecProtocol.md` — 515 lines, 20 figure refs, 108 item IDs

@@ -587,7 +587,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **BSM**
 > 基本安全消息（**Basic Safety Message**）。
 >
-> 来源：[AUTOSAR Chinese V2X Management（中国V2X管理）](cp/communication/chinesev2x_mgmt/index.md)（AUTOSAR_CP_SWS_ChineseV2XManagement）、[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR Chinese V2X Management（中国V2X管理）](cp/communication/chinesev2x_mgmt/index.md)（AUTOSAR_CP_SWS_ChineseV2XManagement）、[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
 {: .glossary-source}
 
 **BSTS**
@@ -691,7 +691,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **C-V2X**
 > 基于蜂窝的车联网（**Cellular based Vehicle to Everything**）。
 >
-> 来源：[AUTOSAR Chinese V2X Management（中国V2X管理）](cp/communication/chinesev2x_mgmt/index.md)（AUTOSAR_CP_SWS_ChineseV2XManagement）、[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）
+> 来源：[AUTOSAR Chinese V2X Management（中国V2X管理）](cp/communication/chinesev2x_mgmt/index.md)（AUTOSAR_CP_SWS_ChineseV2XManagement）、[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）、[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
 {: .glossary-source}
 
 **C/S**
@@ -733,7 +733,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CAM**
 > 协作感知消息（**Cooperative Awareness Message**）。
 >
-> 来源：[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）、[AUTOSAR V2X Management（V2X管理）](cp/communication/v2x_mgmt/index.md)（AUTOSAR_CP_SWS_V2XManagement）
+> 来源：[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）、[AUTOSAR V2X Management（V2X管理）](cp/communication/v2x_mgmt/index.md)（AUTOSAR_CP_SWS_V2XManagement）、[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
 {: .glossary-source}
 
 **Camel case**
@@ -901,7 +901,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CBR**
 > 信道忙闲比（**Channel Busy Ratio**）。
 >
-> 来源：[AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](cp/communication/wlan_transceiver_driver/index.md)（SWS_WirelessEthernetTransceiverDriver）、[AUTOSAR Ethernet Interface（以太网接口）](cp/communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](cp/communication/cellularv2x_driver/index.md)（AUTOSAR_CP_SWS_CellularV2XDriver）
+> 来源：[AUTOSAR Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](cp/communication/wlan_transceiver_driver/index.md)（SWS_WirelessEthernetTransceiverDriver）、[AUTOSAR Ethernet Interface（以太网接口）](cp/communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](cp/communication/cellularv2x_driver/index.md)（AUTOSAR_CP_SWS_CellularV2XDriver）、[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
 {: .glossary-source}
 
 **CBV**
@@ -1425,7 +1425,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DCC**
 > 分布式拥塞控制（**Decentralized Congestion Control**）。
 >
-> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）、[AUTOSAR V2X Management（V2X管理）](cp/communication/v2x_mgmt/index.md)（AUTOSAR_CP_SWS_V2XManagement）
+> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）、[AUTOSAR V2X Management（V2X管理）](cp/communication/v2x_mgmt/index.md)（AUTOSAR_CP_SWS_V2XManagement）、[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
 {: .glossary-source}
 
 **DCM**
@@ -1521,7 +1521,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **DENM**
 > 分布式环境通知消息（**Decentralized Environmental Notification Message**）。
 >
-> 来源：[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）、[AUTOSAR V2X Management（V2X管理）](cp/communication/v2x_mgmt/index.md)（AUTOSAR_CP_SWS_V2XManagement）
+> 来源：[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）、[AUTOSAR V2X Management（V2X管理）](cp/communication/v2x_mgmt/index.md)（AUTOSAR_CP_SWS_V2XManagement）、[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
 {: .glossary-source}
 
 **Denominator**
@@ -2578,13 +2578,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **3GPP**
 > 第三代合作伙伴项目（**The 3rd Generation Partnership Project**），提供制定定义 3GPP 技术的报告和规范的环境。
 >
-> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
 {: .glossary-source}
 
 **5GAA**
 > 5G 汽车协会（**The 5G Automotive Association**），一个开发未来出行和运输服务的全球性跨行业组织。
 >
-> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
 {: .glossary-source}
 
 **GAC**
@@ -3149,6 +3149,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR DoIP（基于 IP 的诊断）](cp/communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR Ethernet Interface（以太网接口）](cp/communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](cp/communication/cellularv2x_driver/index.md)（AUTOSAR_CP_SWS_CellularV2XDriver）、[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）
 {: .glossary-source}
 
+**IPC**
+> 进程间通信（**Inter Process Communication**）。
+>
+> 来源：[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
+{: .glossary-source}
+
 **IpduM**
 > I-PDU多路复用器。
 >
@@ -3210,9 +3216,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **ITS-G5**
-> **ETSI** 规定的无线通信。
+> 基于 **IEEE** 802.11p 的无线通信技术。
 >
-> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
 {: .glossary-source}
 
 **ITS-S**
@@ -3363,6 +3369,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 第二级存储器（**2nd level memory**）
 >
 > 来源：[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）
+{: .glossary-source}
+
+**L2ID**
+> 层 2 ID（**Layer 2 ID**），相当于以太网的「消息认证码」。
+>
+> 来源：[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
 {: .glossary-source}
 
 **LampStatus**
@@ -3545,6 +3557,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Chinese V2X Management（中国V2X管理）](cp/communication/chinesev2x_mgmt/index.md)（AUTOSAR_CP_SWS_ChineseV2XManagement）
 {: .glossary-source}
 
+**LTE-PC5**
+> 通过蜂窝调制解调器的侧行链路（**Sidelink**）通信（蜂窝调制解调器之间的直接通信，无需基站介入）。
+>
+> 来源：[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
+{: .glossary-source}
+
+**LTE-Uu**
+> 由基站控制的蜂窝通信。
+>
+> 来源：[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
+{: .glossary-source}
+
 **LTE-V2X**
 > 基于长期演进的车联网技术（**Long Term Evolution based Vehicle to Everything**）。
 >
@@ -3677,6 +3701,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 管理数据输入/输出（**Management Data Input/Output**）。
 >
 > 来源：[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）
+{: .glossary-source}
+
+**MDR**
+> 最大数据速率（**Maximum Data Rate**）。
+>
+> 来源：[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
 {: .glossary-source}
 
 **MDT**
@@ -4729,6 +4759,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）
 {: .glossary-source}
 
+**PHY**
+> 物理层（**Physical Layer**）。
+>
+> 来源：[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
+{: .glossary-source}
+
 **Physical Addressing**
 > 物理寻址：特定通信网络中的一个节点从一个发送节点接收消息（1:1）的诊断通信模型，也称为单播。
 >
@@ -4912,7 +4948,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **PPPP**
 > ProSe 按包优先级（**ProSe Per-Packet Priority**）。
 >
-> 来源：[AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](cp/communication/cellularv2x_driver/index.md)（AUTOSAR_CP_SWS_CellularV2XDriver）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）
+> 来源：[AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](cp/communication/cellularv2x_driver/index.md)（AUTOSAR_CP_SWS_CellularV2XDriver）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
 {: .glossary-source}
 
 **PRF**
@@ -6160,7 +6196,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **TLV**
 > 标签-长度-值（**Tag-Length-Value**）。
 >
-> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）
+> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
 {: .glossary-source}
 
 **TM**
@@ -6500,7 +6536,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **V2X**
 > 车联网（**Vehicle to Everything**）。
 >
-> 来源：[AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](cp/communication/cellularv2x_driver/index.md)（AUTOSAR_CP_SWS_CellularV2XDriver）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
+> 来源：[AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](cp/communication/cellularv2x_driver/index.md)（AUTOSAR_CP_SWS_CellularV2XDriver）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）、[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
 {: .glossary-source}
 
 **V2xBtp**
@@ -6543,6 +6579,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > **Vehicle-2-X** 网络层（**Vehicle-2-X Network Layer**）。
 >
 > 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+{: .glossary-source}
+
+**V2xRAL**
+> **V2x** 远程访问层（**V2x Remote Access Layer**）——一个能够通过 **LTE-PC5** 或 **ITS-G5** 与车外单元通信的逻辑单元。
+>
+> 来源：[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
 {: .glossary-source}
 
 **Variant**
