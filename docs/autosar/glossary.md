@@ -2351,6 +2351,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](cp/communication/flexray_driver/index.md)（SWS_FlexRayDriver）
 {: .glossary-source}
 
+**Filter Chain**
+> 施加于安全事件的一组连续过滤器（**A set of consecutive filters which is applied to Security Events**）。
+>
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
+{: .glossary-source}
+
 **FIM**
 > 功能禁用管理器
 >
@@ -3032,13 +3038,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **IDS**
 > 入侵检测系统（**Intrusion Detection System**）——对车辆电子系统中安全事件的检测体系。
 >
-> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）
+> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）、[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
 {: .glossary-source}
 
 **IdsM**
 > 入侵检测系统管理器（**Intrusion Detection System Manager**）。
 >
-> 来源：[AUTOSAR Key Manager（密钥管理器）](cp/crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）
+> 来源：[AUTOSAR Key Manager（密钥管理器）](cp/crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）、[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
+{: .glossary-source}
+
+**IdsR**
+> 入侵检测系统报告器（**Intrusion Detection System Reporter**）——处理从 **IdsM** 实例接收到的合格安全事件。
+>
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
 {: .glossary-source}
 
 **&lt;Ie&gt;**
@@ -5107,6 +5119,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
 
+## Q
+
+**QSEv**
+> 合格安全事件（**Qualified Security Event**）——通过其过滤器链的安全事件。
+>
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
+{: .glossary-source}
+
 ## R
 
 **RA**
@@ -5564,7 +5584,25 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Security Event**
 > 安全事件（**Security Event**）——由 **IdsM** 检测并上报的安全相关的观测事件，由安全提取定义和配置。
 >
-> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）
+> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）、[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
+{: .glossary-source}
+
+**Security Event Type**
+> 安全事件类型（**Security Event Type**）——可通过其安全事件类型 ID 标识；其实例称为安全事件并共享同一类型 ID。
+>
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
+{: .glossary-source}
+
+**Security Sensors**
+> 安全传感器（**Security Sensors**）——向 **IdsM** 上报安全事件的 **BSW** 或 **SWC**。
+>
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
+{: .glossary-source}
+
+**SecXT**
+> 安全提取（**Security Extract**）——规定哪些安全事件由 **IdsM** 实例处理及其配置参数。
+>
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
 {: .glossary-source}
 
 **SecY**
@@ -5583,6 +5621,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 见[2]。
 >
 > 来源：[AUTOSAR IpduM（I-PDU多路复用器）](cp/communication/ipdum/index.md)（AUTOSAR_CP_SWS_IPDUMultiplexer）
+{: .glossary-source}
+
+**Sem**
+> 安全事件存储器（**Security Event Memory**）——独立于主诊断事件存储器的用户定义诊断事件存储器。
+>
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
 {: .glossary-source}
 
 **Sender-receiver communication**
@@ -5657,6 +5701,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](cp/communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）、[Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）](foundation/protocols/rs_someip_service_discovery_protocol/index.md)（AUTOSAR_FO_RS_SOMEIPServiceDiscoveryProtocol）
 {: .glossary-source}
 
+**SEv**
+> 安全事件（**Security Event**）——由 **BSW** 或 **SWC** 向 **IdsM** 上报的安全事件类型的实例。
+>
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
+{: .glossary-source}
+
 **SF**
 > 单帧，传输协议术语。
 >
@@ -5702,7 +5752,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SIEM**
 > 安全事件与事件管理（**Security Incident and Event Management**）系统，作为安全运营中心的一部分，解读从 **IdsM** 实例接收到的二进制数据。
 >
-> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）
+> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）、[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
 {: .glossary-source}
 
 **Signal**
@@ -5786,7 +5836,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SOC**
 > 安全运营中心（**Security Operation Center**）。
 >
-> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）
+> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）、[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
 {: .glossary-source}
 
 **Software Trigger**

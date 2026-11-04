@@ -485,6 +485,7 @@ nav:
         - autosar/foundation/safety/index.md
       - 信息安全:
         - autosar/foundation/security/index.md
+        - "IDS": autosar/foundation/security/rs_intrusion_detection_system/index.md
       - 系统服务:
         - autosar/foundation/system_services/index.md
   - EB Tresos:

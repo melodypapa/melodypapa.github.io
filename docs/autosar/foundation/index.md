@@ -31,6 +31,7 @@ title: "基础标准（Foundation）"
 * [发布文档（Release Documentation）](release_documentation/index.md)
 * [功能安全（Safety）](safety/index.md)
 * [信息安全（Security）](security/index.md)
+  * [Requirements on Intrusion Detection System（入侵检测系统需求）](security/rs_intrusion_detection_system/index.md)
 * [系统服务（System Services）](system_services/index.md)
 
 ## 相关内容

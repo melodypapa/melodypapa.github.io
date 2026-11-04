@@ -4,7 +4,7 @@
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
 > Layout (2026-11-02): CP articles live under `cp/<section>/`, Foundation under `foundation/<topic>/`; article links below are relative to `docs/autosar/`.
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-05 (Foundation rs-prs batch: Project Objectives (RS) + IEEE1722 (RS) + Debug Trace Profile (RS) + SOME/IP-SD (RS) + V2X Remote Access Layer (PRS) + IPsec (RS) + Security Extract Template (RS) + Feature Model Exchange Format (RS) + SecOc (PRS) + DDS (RS) + NM Protocol (PRS) + E2E (RS) new-article translations; 2026-11-04: Foundation methodology_templates: Abstract Platform Specification (TPS) new-article translation; 2026-11-03: Foundation health_monitoring: ASWS Health Monitoring new-article translation (EXP System Health Monitoring earlier the same day); libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-05 (Foundation rs-prs batch: Project Objectives (RS) + IEEE1722 (RS) + Debug Trace Profile (RS) + SOME/IP-SD (RS) + V2X Remote Access Layer (PRS) + IPsec (RS) + Security Extract Template (RS) + Feature Model Exchange Format (RS) + SecOc (PRS) + DDS (RS) + NM Protocol (PRS) + E2E (RS) + Intrusion Detection System (RS) new-article translations; 2026-11-04: Foundation methodology_templates: Abstract Platform Specification (TPS) new-article translation; 2026-11-03: Foundation health_monitoring: ASWS Health Monitoring new-article translation (EXP System Health Monitoring earlier the same day); libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
 
 ## Backlog
 
@@ -337,7 +337,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 ### foundation/security (Security)
 
 - ❌ Requirements on Firewall（防火墙需求） — AUTOSAR_FO_RS_Firewall (`foundation/security/`)
-- ❌ Requirements on Intrusion Detection System（入侵检测系统需求） — AUTOSAR_FO_RS_IntrusionDetectionSystem (`foundation/security/`)
+- ✅ Requirements on Intrusion Detection System（入侵检测系统需求） — AUTOSAR_FO_RS_IntrusionDetectionSystem (`foundation/security/rs_intrusion_detection_system/`)
 - ❌ List of Known Issues of Secure Hardware Extensions（安全硬件扩展已知问题清单） — AUTOSAR_FO_TR_ListOfKnownIssuesSecureHardwareExtensions (`foundation/security/`)
 - ❌ Specification of Secure Hardware Extensions（安全硬件扩展规范） — AUTOSAR_FO_TR_SecureHardwareExtensions (`foundation/security/`)
 
