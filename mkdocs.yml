@@ -319,6 +319,18 @@ nav:
         - "TtCan": autosar/cp/communication/ttcan_driver/index.md
         - "TtCanIf": autosar/cp/communication/ttcan_interface/index.md
         - "UdpNm": autosar/cp/communication/udp_network_management/index.md
+        - "V2X":
+          - "CV2x": autosar/cp/communication/cellularv2x_driver/index.md
+          - "ChrgM": autosar/cp/communication/chargingmanager/index.md
+          - "CnV2xM": autosar/cp/communication/chinesev2x_mgmt/index.md
+          - "CnV2xMsg": autosar/cp/communication/chinesev2x_msg/index.md
+          - "CnV2xNet": autosar/cp/communication/chinesev2x_net/index.md
+          - "CnV2xSec": autosar/cp/communication/chinesev2x_sec/index.md
+          - "V2xBtp": autosar/cp/communication/v2x_basictp/index.md
+          - "V2xDM": autosar/cp/communication/v2x_datamgr/index.md
+          - "V2xFac": autosar/cp/communication/v2x_facilities/index.md
+          - "V2xGn": autosar/cp/communication/v2x_geonet/index.md
+          - "V2xM": autosar/cp/communication/v2x_mgmt/index.md
       - 全局时间:
         - autosar/cp/globaltime/index.md
         - "StbM": autosar/cp/globaltime/stbm/index.md

@@ -279,6 +279,131 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**CanSM_TransceiverModeIndication**](../communication/cansm/index.md#743-cansm_transceivermodeindication) | C |
 | [**CanSM_TxTimeoutException**](../communication/cansm/index.md#744-cansm_txtimeoutexception) | C |
 
+## AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）（13）
+
+来源：[AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver
+
+| 函数 | 简述 |
+|---|---|
+| [**CV2x_GetBufCV2xPC5RxParams**](../communication/cellularv2x_driver/index.md#739-cv2x_getbufcv2xpc5rxparams) | 读取与接收到的包相关的值。 |
+| [**CV2x_GetBufCV2xPC5TxParams**](../communication/cellularv2x_driver/index.md#7310-cv2x_getbufcv2xpc5txparams) | 读取与所发送包的接收方向相关的值。 |
+| [**CV2x_GetChanCV2xPC5TxParams**](../communication/cellularv2x_driver/index.md#7312-cv2x_getchancv2xpc5txparams) | 读取与信道接收方向相关的值。 |
+| [**CV2x_GetControllerMode**](../communication/cellularv2x_driver/index.md#734-cv2x_getcontrollermode) | 获取被索引控制器的状态。 |
+| [**CV2x_GetVersionInfo**](../communication/cellularv2x_driver/index.md#732-cv2x_getversioninfo) | 返回本模块的版本信息。 |
+| [**CV2x_Init**](../communication/cellularv2x_driver/index.md#731-cv2x_init) | 初始化 Cellular V2X 驱动程序。 |
+| [**CV2x_MainFunction**](../communication/cellularv2x_driver/index.md#751-cv2x_mainfunction) | 支持间接发送（扩展帧时序约束）。 |
+| [**CV2x_ProvideTxBuffer**](../communication/cellularv2x_driver/index.md#735-cv2x_providetxbuffer) | 提供对指定控制器发送缓冲区的访问。 |
+| [**CV2x_Receive**](../communication/cellularv2x_driver/index.md#738-cv2x_receive) | 触发帧接收。 |
+| [**CV2x_SetBufCV2xPC5TxParams**](../communication/cellularv2x_driver/index.md#7311-cv2x_setbufcv2xpc5txparams) | 为特定缓冲区（待发送的包）设置与发送方向相关的值。 |
+| [**CV2x_SetControllerMode**](../communication/cellularv2x_driver/index.md#733-cv2x_setcontrollermode) | 启用/禁用被索引的控制器。 |
+| [**CV2x_Transmit**](../communication/cellularv2x_driver/index.md#736-cv2x_transmit) | 触发发送一个先前已填充的发送缓冲区。 |
+| [**CV2x_TxConfirmation**](../communication/cellularv2x_driver/index.md#737-cv2x_txconfirmation) | 触发发送确认。 |
+
+## AUTOSAR Charging Manager（充电管理器）（17）
+
+来源：[AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager
+
+| 函数 | 简述 |
+|---|---|
+| [**ChrgM_CpLineStatus**](../communication/chargingmanager/index.md#733-chrgm_cplinestatus) | 上层调用本 API 向 ChrgM 通报 CP 线状态。 |
+| [**ChrgM_DataLinkIndication**](../communication/chargingmanager/index.md#734-chrgm_datalinkindication) | 本 API 由 EthSM 调用，向 ChrgM 通报数据链路连接的状态。 |
+| [**ChrgM_ErrorIndication**](../communication/chargingmanager/index.md#735-chrgm_errorindication) | ChrgM 向上层通报错误。 |
+| [**ChrgM_Init**](../communication/chargingmanager/index.md#731-chrgm_init) | 本服务初始化 ChrgM 模块。 |
+| [**ChrgM_MainFunction_Rx**](../communication/chargingmanager/index.md#736-chrgm_mainfunction_rx) | 本函数执行 AUTOSAR ChrgM 模块的接收处理。 |
+| [**ChrgM_MainFunction_Tx**](../communication/chargingmanager/index.md#737-chrgm_mainfunction_tx) | 本函数执行 AUTOSAR ChrgM 模块的发送处理。 |
+| [**ChrgM_PaymentServiceSelectionIndication**](../communication/chargingmanager/index.md#738-chrgm_paymentserviceselectionindication) | ChrgM 向上层通报 SECC 提供的支付方式。 |
+| [**ChrgM_SessionSetupIndication**](../communication/chargingmanager/index.md#739-chrgm_sessionsetupindication) | ChrgM 向上层通报 V2G 会话建立信息。 |
+| [**ChrgM_SessionStopIndication**](../communication/chargingmanager/index.md#7310-chrgm_sessionstopindication) | ChrgM 向上层通报 V2G 会话的状态。 |
+| [**ChrgM_StartProcess**](../communication/chargingmanager/index.md#732-chrgm_startprocess) | 上层调用本 API 以启动充电过程：如果布尔参数设置为 TRUE，ChrgM 将启动 IP 地址分配过程，否则不启动。 |
+| [**ChrgM_V2GTpCopyRxData**](../communication/chargingmanager/index.md#7311-chrgm_v2gtpcopyrxdata) | 调用本函数以向上层提供 I-PDU 段（N-PDU）的接收数据。 |
+| [**ChrgM_V2GTpCopyTxData**](../communication/chargingmanager/index.md#7312-chrgm_v2gtpcopytxdata) | 调用本函数以获取 I-PDU 段（N-PDU）的发送数据。 |
+| [**ChrgM_V2GTpLocalIpAddrAssignmentChg**](../communication/chargingmanager/index.md#741-chrgm_v2gtplocalipaddrassignmentchg) | SoAd 调用本 API 向 ChrgM 通报 IP 地址的状态。 |
+| [**ChrgM_V2GTpRxIndication**](../communication/chargingmanager/index.md#742-chrgm_v2gtprxindication) | 在收到 I-PDU 之后（分段情况下为收到最后一个 I-PDU 之后）由下层调用。 |
+| [**ChrgM_V2GTpSoConModeChg**](../communication/chargingmanager/index.md#743-chrgm_v2gtpsoconmodechg) | SoAd 调用本 API 向 ChrgM 通报套接字连接的状态。 |
+| [**ChrgM_V2GTpStartOfReception**](../communication/chargingmanager/index.md#744-chrgm_v2gtpstartofreception) | 在开始接收 N-SDU 时调用本函数。 |
+| [**ChrgM_V2GTpTxConfirmation**](../communication/chargingmanager/index.md#745-chrgm_v2gtptxconfirmation) | 下层调用 ChrgM 的本 API 向 ChrgM 通报所发送 PDU 的状态。 |
+
+## AUTOSAR Chinese V2X Management（中国V2X管理）（4）
+
+来源：[AUTOSAR Chinese V2X Management（中国V2X管理）](../communication/chinesev2x_mgmt/index.md) · SWS_ChineseV2XManagement
+
+| 函数 | 简述 |
+|---|---|
+| [**CnV2xM_GetChanTxParams**](../communication/chinesev2x_mgmt/index.md#733-cnv2xm_getchantxparams) | 读取与信道接收方向相关的值。 |
+| [**CnV2xM_GetVersionInfo**](../communication/chinesev2x_mgmt/index.md#732-cnv2xm_getversioninfo) | 返回本模块的版本信息。 |
+| [**CnV2xM_Init**](../communication/chinesev2x_mgmt/index.md#731-cnv2xm_init) | 初始化 CnV2xM 模块。 |
+| [**CnV2xM_MainFunction**](../communication/chinesev2x_mgmt/index.md#751-cnv2xm_mainfunction) | CnV2xM 模块的主函数，用于周期性执行协议操作。 |
+
+## AUTOSAR Chinese V2X Message（中国V2X消息）（35）
+
+来源：[AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage
+
+| 函数 | 简述 |
+|---|---|
+| [**CnV2xApplRxIndicationBsm**](../communication/chinesev2x_msg/index.md#7712-cnv2xapplrxindicationbsm) | — |
+| [**CnV2xApplRxIndicationMap**](../communication/chinesev2x_msg/index.md#7716-cnv2xapplrxindicationmap) | — |
+| [**CnV2xApplRxIndicationRsm**](../communication/chinesev2x_msg/index.md#7714-cnv2xapplrxindicationrsm) | — |
+| [**CnV2xApplRxIndicationSpat**](../communication/chinesev2x_msg/index.md#7715-cnv2xapplrxindicationspat) | — |
+| [**CnV2xApplRxIndicationzRsi**](../communication/chinesev2x_msg/index.md#7713-cnv2xapplrxindicationzrsi) | — |
+| [**CnV2xMsg_AbortPseudonymChange**](../communication/chinesev2x_msg/index.md#738-cnv2xmsg_abortpseudonymchange) | 当并非所有模块都同意假名证书更改且该更改将被回退时，CnV2xSec 模块调用本函数。 |
+| [**CnV2xMsg_BsmBs_MainFunction**](../communication/chinesev2x_msg/index.md#751-cnv2xmsg_bsmbs_mainfunction) | 这是 BSM 基本服务的主处理函数。 |
+| [**CnV2xMsg_CheckDistance**](../communication/chinesev2x_msg/index.md#734-cnv2xmsg_checkdistance) | 检查当前地理位置点与 CnV2xSec 在海拔 0 处提交假名证书更改时的点之间的距离。 |
+| [**CnV2xMsg_CnV2xApplRxIndicationBSM**](../communication/chinesev2x_msg/index.md#7742-cnv2xmsg_cnv2xapplrxindicationbsm) | — |
+| [**CnV2xMsg_CnV2xApplRxIndicationMAP**](../communication/chinesev2x_msg/index.md#7747-cnv2xmsg_cnv2xapplrxindicationmap) | — |
+| [**CnV2xMsg_CnV2xApplRxIndicationRSI**](../communication/chinesev2x_msg/index.md#7744-cnv2xmsg_cnv2xapplrxindicationrsi) | — |
+| [**CnV2xMsg_CnV2xApplRxIndicationRSM**](../communication/chinesev2x_msg/index.md#7745-cnv2xmsg_cnv2xapplrxindicationrsm) | — |
+| [**CnV2xMsg_CnV2xApplRxIndicationSPAT**](../communication/chinesev2x_msg/index.md#7746-cnv2xmsg_cnv2xapplrxindicationspat) | — |
+| [**CnV2xMsg_CommitPseudonymChange**](../communication/chinesev2x_msg/index.md#737-cnv2xmsg_commitpseudonymchange) | 当所有模块都同意假名证书更改且该更改将被提交时，CnV2xSec 模块调用本函数。 |
+| [**CnV2xMsg_DecapConfirmation**](../communication/chinesev2x_msg/index.md#744-cnv2xmsg_decapconfirmation) | 当解封装完成时，CnV2xSec 模块调用本函数。 |
+| [**CnV2xMsg_EncapConfirmation**](../communication/chinesev2x_msg/index.md#743-cnv2xmsg_encapconfirmation) | 当封装完成时，V2xSecCN 模块调用本函数。 |
+| [**CnV2xMsg_GetRefTimePtr**](../communication/chinesev2x_msg/index.md#733-cnv2xmsg_getreftimeptr) | 提供指向中国 V2X 协议栈时间基准的指针。 |
+| [**CnV2xMsg_GetTime32**](../communication/chinesev2x_msg/index.md#739-cnv2xmsg_gettime32) | 获取当前参考时间的服务。 |
+| [**CnV2xMsg_GetVehickeEventFlagsStatus**](../communication/chinesev2x_msg/index.md#735-cnv2xmsg_getvehickeeventflagsstatus) | 提供指向当前车辆事件状态的指针。 |
+| [**CnV2xMsg_GetVersionInfo**](../communication/chinesev2x_msg/index.md#732-cnv2xmsg_getversioninfo) | 返回本模块的版本信息。 |
+| [**CnV2xMsg_Init**](../communication/chinesev2x_msg/index.md#731-cnv2xmsg_init) | 初始化 CnV2xMsg 模块。 |
+| [**CnV2xMsg_MapS_MainFunction**](../communication/chinesev2x_msg/index.md#756-cnv2xmsg_maps_mainfunction) | 这是 MAP 服务的主处理函数。 |
+| [**CnV2xMsg_Mgt_MainFunction**](../communication/chinesev2x_msg/index.md#752-cnv2xmsg_mgt_mainfunction) | CnV2xMsg 的调度管理函数。 |
+| [**CnV2xMsg_Poti**](../communication/chinesev2x_msg/index.md#7743-cnv2xmsg_poti) | — |
+| [**CnV2xMsg_PreparePseudonymChange**](../communication/chinesev2x_msg/index.md#736-cnv2xmsg_preparepseudonymchange) | 通过本 API 原语，CnV2xMsg 模块获得一个指示：给定的假名证书以及由此而来的 Msg count 和 Vehicle ID 即将被更改。 |
+| [**CnV2xMsg_RsiS_MainFunction**](../communication/chinesev2x_msg/index.md#753-cnv2xmsg_rsis_mainfunction) | 这是 RSI 服务的主处理函数。 |
+| [**CnV2xMsg_RsmS_MainFunction**](../communication/chinesev2x_msg/index.md#754-cnv2xmsg_rsms_mainfunction) | 这是 RSM 服务的主处理函数。 |
+| [**CnV2xMsg_RxIndication**](../communication/chinesev2x_msg/index.md#742-cnv2xmsg_rxindication) | 通过本 API 原语，CnV2xMsg 模块获得一个确认：具有某一 ID 的 V2X 消息已成功发送。 |
+| [**CnV2xMsg_RxS_MainFunction**](../communication/chinesev2x_msg/index.md#757-cnv2xmsg_rxs_mainfunction) | 当接收到的 V2X 消息经 V2xDm 模块发送到应用层或 PDUR 时，这是消息接收服务的主处理函数。 |
+| [**CnV2xMsg_SetPositionAndTime**](../communication/chinesev2x_msg/index.md#7310-cnv2xmsg_setpositionandtime) | 用于设置与 V2X-Stack 相关的位置和时间信息的服务。 |
+| [**CnV2xMsg_SpatS_MainFunction**](../communication/chinesev2x_msg/index.md#755-cnv2xmsg_spats_mainfunction) | 这是 SPAT 服务的主处理函数。 |
+| [**CnV2xMsg_TxConfirmation**](../communication/chinesev2x_msg/index.md#741-cnv2xmsg_txconfirmation) | 通过本 API 原语，CnV2xMsg 模块获得一个确认：具有某一 ID 的 V2X 消息已成功发送。 |
+| [**CnV2xMsg_Vdp**](../communication/chinesev2x_msg/index.md#7741-cnv2xmsg_vdp) | — |
+| [**CnV2xMsgPoti**](../communication/chinesev2x_msg/index.md#7721-cnv2xmsgpoti) | — |
+| [**CnV2xMsgVdp**](../communication/chinesev2x_msg/index.md#7711-cnv2xmsgvdp) | — |
+
+## AUTOSAR Chinese V2X Network（中国V2X网络）（9）
+
+来源：[AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork
+
+| 函数 | 简述 |
+|---|---|
+| [**CnV2xNet_AbortAppLayerIdChange**](../communication/chinesev2x_net/index.md#736-cnv2xnet_abortapplayeridchange) | 当并非所有模块都同意假名证书更改且该更改将被回退时，CnV2xMsg 模块调用本函数。 |
+| [**CnV2xNet_CommitAppLayerIdChange**](../communication/chinesev2x_net/index.md#735-cnv2xnet_commitapplayeridchange) | 当所有模块都同意假名证书更改且该更改将被提交时，CnV2xMsg 模块调用本函数。 |
+| [**CnV2xNet_GetVersionInfo**](../communication/chinesev2x_net/index.md#732-cnv2xnet_getversioninfo) | 返回本模块的版本信息。 |
+| [**CnV2xNet_Init**](../communication/chinesev2x_net/index.md#731-cnv2xnet_init) | 初始化 CnV2xNet 模块。 |
+| [**CnV2xNet_PrepareAppLayerIdChange**](../communication/chinesev2x_net/index.md#734-cnv2xnet_prepareapplayeridchange) | 通过本 API 原语，CnV2xNet 模块获得一个指示：应用层 Id 即将更改，因此源 Layer-2 ID 即将更改。 |
+| [**CnV2xNet_RxIndication**](../communication/chinesev2x_net/index.md#741-cnv2xnet_rxindication) | 指示以太网帧的接收。 |
+| [**CnV2xNet_Transmit**](../communication/chinesev2x_net/index.md#733-cnv2xnet_transmit) | CvxMsgCN 模块调用本 API 以请求向对端网络实体发送一个网络层 V2X PDU。 |
+| [**CnV2xNet_TxConfirmation**](../communication/chinesev2x_net/index.md#742-cnv2xnet_txconfirmation) | 确认以太网帧的发送。 |
+| [**CnV2xNetMainFunction**](../communication/chinesev2x_net/index.md#751-cnv2xnetmainfunction) | CnV2xNet 模块的主函数，用于周期性执行协议操作。 |
+
+## AUTOSAR Chinese V2X Security（中国V2X安全）（5）
+
+来源：[AUTOSAR Chinese V2X Security（中国V2X安全）](../communication/chinesev2x_sec/index.md) · SWS_ChineseV2XSecurity
+
+| 函数 | 简述 |
+|---|---|
+| [**CnV2xSec_GetVersionInfo**](../communication/chinesev2x_sec/index.md#732-cnv2xsec_getversioninfo) | 返回本模块的版本信息。 |
+| [**CnV2xSec_Init**](../communication/chinesev2x_sec/index.md#731-cnv2xsec_init) | 初始化 CnV2xSec 模块。 |
+| [**CnV2xSec_MainFunction**](../communication/chinesev2x_sec/index.md#751-cnv2xsec_mainfunction) | CnV2xSec 的调度主函数。 |
+| [**CnV2xSec_ReqDecap**](../communication/chinesev2x_sec/index.md#734-cnv2xsec_reqdecap) | CnV2xMsg 调用本函数以解封装 SPDU。 |
+| [**CnV2xSec_ReqEncap**](../communication/chinesev2x_sec/index.md#733-cnv2xsec_reqencap) | CnV2xMsg 调用本函数以生成 SPDU，其中包含 V2X 消息、签名和假名。 |
+
 ## AUTOSAR COM Based Transformer（3）
 
 来源：[AUTOSAR COM Based Transformer](../communication/com_based_transformer/index.md) · SWS_COMBasedTransformer
@@ -3095,6 +3220,98 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**UdpNm_SoAdIfTriggerTransmit**](../communication/udp_network_management/index.md#743-udpnm_soadiftriggertransmit) | 在此API中，上层模块将检查可用数据是否适合PduInfoPtr->SduLength报告的缓冲区大小。 |
 | [**UdpNm_SoAdIfTxConfirmation**](../communication/udp_network_management/index.md#741-udpnm_soadiftxconfirmation) | 下层通信接口模块确认PDU的传输，或者PDU的传输失败。 |
 | [**UdpNm_Transmit**](../communication/udp_network_management/index.md#7318-udpnm_transmit) | 请求传输 PDU。 |
+
+## AUTOSAR V2X Basic Transport（V2X基本传输协议）（5）
+
+来源：[AUTOSAR V2X Basic Transport（V2X基本传输协议）](../communication/v2x_basictp/index.md) · SWS_V2XBasicTransport
+
+| 函数 | 简述 |
+|---|---|
+| [**V2xBtp_CopyTxData**](../communication/v2x_basictp/index.md#742-v2xbtp_copytxdata) | V2xGn 模块调用本 API 以请求 V2xBtp 模块将发送数据复制到特定位置。 |
+| [**V2xBtp_GetVersionInfo**](../communication/v2x_basictp/index.md#732-v2xbtp_getversioninfo) | 返回本模块的版本信息。 |
+| [**V2xBtp_Init**](../communication/v2x_basictp/index.md#731-v2xbtp_init) | 初始化 V2xBtp 模块。 |
+| [**V2xBtp_RxIndication**](../communication/v2x_basictp/index.md#741-v2xbtp_rxindication) | 通过本 API，V2xBtp 模块获取接收到的 GeoNetworking 包的数据（BTP-PDU）和 GeoNetworking 参数。 |
+| [**V2xBtp_Transmit**](../communication/v2x_basictp/index.md#733-v2xbtp_transmit) | V2xFac 模块调用本 API 以请求向对端 BTP 实体发送一个 BTP-PDU。 |
+
+## AUTOSAR V2X Data Manager（V2X数据管理器）（5）
+
+来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](../communication/v2x_datamgr/index.md) · SWS_V2XDataManager
+
+| 函数 | 简述 |
+|---|---|
+| [**V2xDM_GetVersionInfo**](../communication/v2x_datamgr/index.md#742-v2xdm_getversioninfo) | 返回组件的版本信息、供应商 ID 和 AUTOSAR 模块 ID。 |
+| [**V2xDM_Init**](../communication/v2x_datamgr/index.md#741-v2xdm_init) | 初始化模块 V2xDM 的服务。 |
+| [**V2xDM_MainFunction**](../communication/v2x_datamgr/index.md#761-v2xdm_mainfunction) | 按照指定的时间间隔周期性调用的函数。 |
+| [**V2xDM_RxIndication**](../communication/v2x_datamgr/index.md#751-v2xdm_rxindication) | 来自下层通信接口模块（PduR）的接收 PDU 指示。 |
+| [**V2xDM_V2xStackRxIndication**](../communication/v2x_datamgr/index.md#752-v2xdm_v2xstackrxindication) | 由底层 V2x 协议栈调用，向 V2x Data Manager 提供 V2x 消息。 |
+
+## AUTOSAR V2X Facilities（V2X设施层）（15）
+
+来源：[AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities
+
+| 函数 | 简述 |
+|---|---|
+| [**V2xFac_CaBs_MainFunction**](../communication/v2x_facilities/index.md#751-v2xfac_cabs_mainfunction) | 这是 CA 基本服务的主处理函数。 |
+| [**V2xFac_DenBs**](../communication/v2x_facilities/index.md#7741-v2xfac_denbs) | — |
+| [**V2xFac_DenBs_MainFunction**](../communication/v2x_facilities/index.md#752-v2xfac_denbs_mainfunction) | 这是 DEN 基本服务的主处理函数。 |
+| [**V2xFac_GetVersionInfo**](../communication/v2x_facilities/index.md#732-v2xfac_getversioninfo) | 返回本模块的版本信息。 |
+| [**V2xFac_Init**](../communication/v2x_facilities/index.md#731-v2xfac_init) | 初始化 V2xFac 模块。 |
+| [**V2xFac_RxIndication**](../communication/v2x_facilities/index.md#741-v2xfac_rxindication) | V2xBtp 模块调用本 API 原语，将接收到的 BTP 包的数据和 GeoNetworking 参数提供给 V2xFac 模块。 |
+| [**V2xFac_RxS_MainFunction**](../communication/v2x_facilities/index.md#753-v2xfac_rxs_mainfunction) | 这是 Facilities 消息接收服务的主处理函数。 |
+| [**V2xFac_V2xM_AbortPseudonymChange**](../communication/v2x_facilities/index.md#735-v2xfac_v2xm_abortpseudonymchange) | 当并非所有模块都同意假名更改且该更改将被回退时，V2xM 调用本函数。 |
+| [**V2xFac_V2xM_CommitPseudonymChange**](../communication/v2x_facilities/index.md#734-v2xfac_v2xm_commitpseudonymchange) | 当所有模块都同意假名更改且该更改将被提交时，V2xM 调用本函数。 |
+| [**V2xFac_V2xM_PreparePseudonymChange**](../communication/v2x_facilities/index.md#733-v2xfac_v2xm_preparepseudonymchange) | 通过本 API 原语，V2xFac 模块获得一个指示：给定的假名以及由此而来的 StationId 即将被更改。 |
+| [**V2xFac_V2xM_SetCaBsOperation**](../communication/v2x_facilities/index.md#737-v2xfac_v2xm_setcabsoperation) | 通过本 API 原语，V2xFac 模块获得 CA 基本服务当前操作状态的指示。 |
+| [**V2xFac_V2xM_SetTGenCamDcc**](../communication/v2x_facilities/index.md#736-v2xfac_v2xm_settgencamdcc) | 通过本 API 原语，V2xFac 模块获得当前 TGenCamDcc 值的指示。 |
+| [**V2xFac_Vdp**](../communication/v2x_facilities/index.md#7742-v2xfac_vdp) | — |
+| [**V2xFacDenBs**](../communication/v2x_facilities/index.md#7721-v2xfacdenbs) | — |
+| [**V2xFacVdp**](../communication/v2x_facilities/index.md#7711-v2xfacvdp) | — |
+
+## AUTOSAR V2X GeoNetworking（V2X地理网络）（10）
+
+来源：[AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking
+
+| 函数 | 简述 |
+|---|---|
+| [**V2xGn_GetVersionInfo**](../communication/v2x_geonet/index.md#732-v2xgn_getversioninfo) | 返回本模块的版本信息。 |
+| [**V2xGn_Init**](../communication/v2x_geonet/index.md#731-v2xgn_init) | 初始化 V2xGn 模块。 |
+| [**V2xGn_MainFunction**](../communication/v2x_geonet/index.md#751-v2xgn_mainfunction) | V2xGn 模块的主函数，用于周期性执行协议操作。 |
+| [**V2xGn_RxIndication**](../communication/v2x_geonet/index.md#743-v2xgn_rxindication) | 指示以太网帧的接收。 |
+| [**V2xGn_Transmit**](../communication/v2x_geonet/index.md#736-v2xgn_transmit) | 由 V2x_Btp 调用以发送消息。 |
+| [**V2xGn_V2xM_AbortPseudonymChange**](../communication/v2x_geonet/index.md#735-v2xgn_v2xm_abortpseudonymchange) | 当并非所有模块都同意假名更改且该更改将被回退时，V2xM 调用本函数。 |
+| [**V2xGn_V2xM_CommitPseudonymChange**](../communication/v2x_geonet/index.md#734-v2xgn_v2xm_commitpseudonymchange) | 当所有模块都同意假名更改且该更改将被提交时，V2xM 调用本函数。 |
+| [**V2xGn_V2xM_DecapConfirmation**](../communication/v2x_geonet/index.md#742-v2xgn_v2xm_decapconfirmation) | 当解封装完成时由 V2xM 调用本函数。 |
+| [**V2xGn_V2xM_EncapConfirmation**](../communication/v2x_geonet/index.md#741-v2xgn_v2xm_encapconfirmation) | 当封装完成时由 V2xM 调用本函数。 |
+| [**V2xGn_V2xM_PreparePseudonymChange**](../communication/v2x_geonet/index.md#733-v2xgn_v2xm_preparepseudonymchange) | 发生假名更改时由 V2xM 调用本函数，以在使用该假名的每个模块中准备该更改。 |
+
+## AUTOSAR V2X Management（V2X管理）（22）
+
+来源：[AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement
+
+| 函数 | 简述 |
+|---|---|
+| [**V2xM_CalcDistance**](../communication/v2x_mgmt/index.md#7312-v2xm_calcdistance) | 在假定两点海拔为 0 的前提下计算地球上两个地理位置点之间的距离。 |
+| [**V2xM_CalcHeadingInTolerance**](../communication/v2x_mgmt/index.md#7313-v2xm_calcheadingintolerance) | 计算航向值之差是否在容差值内。 |
+| [**V2xM_GeoMath**](../communication/v2x_mgmt/index.md#7713-v2xm_geomath) | — |
+| [**V2xM_GetPositionAndTime**](../communication/v2x_mgmt/index.md#733-v2xm_getpositionandtime) | 提供瞬时位置信息。 |
+| [**V2xM_GetRefTimePtr**](../communication/v2x_mgmt/index.md#734-v2xm_getreftimeptr) | 提供指向 V2X-Stack 时间基准的指针。 |
+| [**V2xM_GetTime**](../communication/v2x_mgmt/index.md#7318-v2xm_gettime) | 获取由 V2X-Stack 估计的 ITS 时间的服务。 |
+| [**V2xM_GetVersionInfo**](../communication/v2x_mgmt/index.md#732-v2xm_getversioninfo) | 提供本模块的版本信息。 |
+| [**V2xM_Init**](../communication/v2x_mgmt/index.md#731-v2xm_init) | 初始化 V2xM 模块。 |
+| [**V2xM_LockPseudonymChange**](../communication/v2x_mgmt/index.md#738-v2xm_lockpseudonymchange) | 由 V2xGn 或应用服务接口调用本函数以锁定假名更改。 |
+| [**V2xM_MainFunction**](../communication/v2x_mgmt/index.md#751-v2xm_mainfunction) | V2xM 的调度主函数。 |
+| [**V2xM_PseudonymChange**](../communication/v2x_mgmt/index.md#7712-v2xm_pseudonymchange) | — |
+| [**V2xM_SetTollingZoneInformation**](../communication/v2x_mgmt/index.md#7314-v2xm_settollingzoneinformation) | 设置可用的收费区域信息。 |
+| [**V2xM_TriggerPseudonymChange**](../communication/v2x_mgmt/index.md#737-v2xm_triggerpseudonymchange) | 由 V2xFac、V2xGn 或其他实体调用本函数以更改 V2X-Stack 使用的假名，例如由于 GeoNetworking 地址冲突。 |
+| [**V2xM_UnlockPseudonymChange**](../communication/v2x_mgmt/index.md#739-v2xm_unlockpseudonymchange) | 由 V2xGn 或应用服务接口调用本函数以解锁假名更改。 |
+| [**V2xM_V2xGn_GetGlobalTxParams**](../communication/v2x_mgmt/index.md#7311-v2xm_v2xgn_getglobaltxparams) | 由 V2xGn 调用本函数以获取指定信道的当前信道忙百分比。 |
+| [**V2xM_V2xGn_ReqDecap**](../communication/v2x_mgmt/index.md#736-v2xm_v2xgn_reqdecap) | V2xGn 调用本函数以解密并验证消息。 |
+| [**V2xM_V2xGn_ReqEncap**](../communication/v2x_mgmt/index.md#735-v2xm_v2xgn_reqencap) | V2xGn 调用本函数以签名和/或加密消息。 |
+| [**V2xM_V2xGn_SetGlobalRxParams**](../communication/v2x_mgmt/index.md#7310-v2xm_v2xgn_setglobalrxparams) | 由 V2xGn 调用本函数以设置指定信道的当前信道忙百分比。 |
+| [**V2xM_Vdp**](../communication/v2x_mgmt/index.md#7711-v2xm_vdp) | — |
+| [**V2xM_Vdp_GetNextLongTermCertificateExpirationDate**](../communication/v2x_mgmt/index.md#7315-v2xm_vdp_getnextlongtermcertificateexpirationdate) | 获取最近将过期的长期证书的证书过期日期的服务。 |
+| [**V2xM_Vdp_GetNextPseudonymCertificateExpirationDate**](../communication/v2x_mgmt/index.md#7316-v2xm_vdp_getnextpseudonymcertificateexpirationdate) | 获取最近将过期的假名证书的证书过期日期的服务。 |
+| [**V2xM_Vdp_SetPositionAndTime**](../communication/v2x_mgmt/index.md#7317-v2xm_vdp_setpositionandtime) | 用于设置与 V2X-Stack 相关的位置和时间信息的服务。 |
 
 ## AUTOSAR Watchdog Driver（看门狗驱动）（4）
 

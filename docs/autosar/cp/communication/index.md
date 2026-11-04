@@ -78,6 +78,20 @@ title: "通信（Communication）"
 * [AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](spi_handler_driver/index.md)
 * [Data Distribution Service for Classic Platform（经典平台数据分发服务）](data_distribution/index.md)
 
+### V2X
+
+* [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](cellularv2x_driver/index.md)
+* [AUTOSAR Charging Manager（充电管理器）](chargingmanager/index.md)
+* [AUTOSAR Chinese V2X Management（中国V2X管理）](chinesev2x_mgmt/index.md)
+* [AUTOSAR Chinese V2X Message（中国V2X消息）](chinesev2x_msg/index.md)
+* [AUTOSAR Chinese V2X Network（中国V2X网络）](chinesev2x_net/index.md)
+* [AUTOSAR Chinese V2X Security（中国V2X安全）](chinesev2x_sec/index.md)
+* [AUTOSAR V2X Basic Transport（V2X基本传输协议）](v2x_basictp/index.md)
+* [AUTOSAR V2X Data Manager（V2X数据管理器）](v2x_datamgr/index.md)
+* [AUTOSAR V2X Facilities（V2X设施层）](v2x_facilities/index.md)
+* [AUTOSAR V2X GeoNetworking（V2X地理网络）](v2x_geonet/index.md)
+* [AUTOSAR V2X Management（V2X管理）](v2x_mgmt/index.md)
+
 ## 相关内容
 
 * [CP AUTOSAR 总览](../index.md)

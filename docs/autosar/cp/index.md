@@ -64,6 +64,17 @@ title: "CP AUTOSAR"
   * [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](communication/ttcan_driver/index.md)
   * [AUTOSAR TTCAN Interface（TTCAN 接口）](communication/ttcan_interface/index.md)
   * [AUTOSAR UdpNm (UDP Network Management)](communication/udp_network_management/index.md)
+  * [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](communication/cellularv2x_driver/index.md)
+  * [AUTOSAR Charging Manager（充电管理器）](communication/chargingmanager/index.md)
+  * [AUTOSAR Chinese V2X Management（中国V2X管理）](communication/chinesev2x_mgmt/index.md)
+  * [AUTOSAR Chinese V2X Message（中国V2X消息）](communication/chinesev2x_msg/index.md)
+  * [AUTOSAR Chinese V2X Network（中国V2X网络）](communication/chinesev2x_net/index.md)
+  * [AUTOSAR Chinese V2X Security（中国V2X安全）](communication/chinesev2x_sec/index.md)
+  * [AUTOSAR V2X Basic Transport（V2X基本传输协议）](communication/v2x_basictp/index.md)
+  * [AUTOSAR V2X Data Manager（V2X数据管理器）](communication/v2x_datamgr/index.md)
+  * [AUTOSAR V2X Facilities（V2X设施层）](communication/v2x_facilities/index.md)
+  * [AUTOSAR V2X GeoNetworking（V2X地理网络）](communication/v2x_geonet/index.md)
+  * [AUTOSAR V2X Management（V2X管理）](communication/v2x_mgmt/index.md)
 
 ### 全局时间（Global Time）
 
