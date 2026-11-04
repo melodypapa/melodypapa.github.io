@@ -466,6 +466,7 @@ nav:
         - autosar/foundation/health_monitoring/index.md
         - "System Health Monitoring": autosar/foundation/health_monitoring/exp_system_health_monitoring/index.md
         - "Health Monitoring": autosar/foundation/health_monitoring/asws_health_monitoring/index.md
+        - "RS Health Monitoring": autosar/foundation/health_monitoring/rs_health_monitoring/index.md
       - 方法论与模板:
         - autosar/foundation/methodology_templates/index.md
         - "Security Extract": autosar/foundation/methodology_templates/rs_security_extract_template/index.md

@@ -178,12 +178,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Requirements on Health Monitoring（健康监控需求）; target `foundation/health_monitoring/rs_health_monitoring/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `HealthMonitoring/AUTOSAR_FO_RS_HealthMonitoring.md` — 759 lines, 31 figure refs, 126 item IDs
   - Note: related site content: cp/safety/watchdog_manager (WdgM — CP realization of supervision) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 31 figure refs are page-decoration chrome, 0 content figures; 22 requirement items get sequential §5.x.y numbering (IDs + {DRAFT} dropped); source ch.5 Requirements traceability omitted per ASWS precedent (6→5, 7→6); §1 keeps the source's duplicated sentence verbatim; ch.3 combines a 5-row abbreviation table and a 24-row acronym/term table (no 3.1/3.2 subsections in source — mirrored); appendix A has R23-11 (all none ×6) and R22-11 (Changed table 8 rows) sections; glossary: 11 existing entries gained this document as additional source, 5 new (CM, DM, PHM merged-duplicate, Platform Health Management, SHM); Supervised Entity + SE homonyms skipped (SE is a generic acronym, decision recorded)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_someip_protocol (AUTOSAR_FO_RS_SOMEIPProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on SOME/IP Protocol（SOME/IP 协议需求）; target `foundation/protocols/rs_someip_protocol/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Protocols/AUTOSAR_FO_RS_SOMEIPProtocol.md` — 810 lines, 28 figure refs, 82 item IDs

@@ -279,19 +279,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Alive Counter**
 > **WdgM** 中在**检查点**上下文内的独立数据资源，用于跟踪和处理该**检查点**的**存活指示**数量。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
 
 **Alive Indication**
 > 由**被监督实体**的**检查点**提供的指示，用于向**WdgM** 标识其存活状态。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）、[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
 
 **Alive Supervision**
 > 一种监督，用于检查**被监督实体**的执行是否足够频繁且不过于频繁（包括容差）。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）、[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
 
 **ALU**
@@ -989,9 +989,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **Checkpoint**
-> **被监督实体**控制流中的一个点，在该处向**WdgM** 报告活动。
+> 受监督实体控制流中报告活动的一个点（**A point in the control flow of a Supervised Entity where the activity is reported**）。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）、[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
 
 **CHI**
@@ -1052,6 +1052,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 多个相互连接的节点构成的通信系统。
 >
 > 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](cp/communication/flexray_driver/index.md)（SWS_FlexRayDriver）
+{: .glossary-source}
+
+**CM**
+> **AUTOSAR** 自适应通信管理（**AUTOSAR Adaptive Communication Management**）。
+>
+> 来源：[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
 
 **CMDT**
@@ -1491,7 +1497,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Deadline Supervision**
 > 一种监督，用于检查两个**检查点**之间的执行时间是否小于给定的执行时间上限。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）、[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
 
 **Debounce counter**
@@ -1678,6 +1684,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 一个 **Dlt** 用户代表一个生成的 **Dlt** 消息的来源。可能的用户是 **SW-C**、RTE（用于 **VFB** 跟踪）、**DEM** 或 **DET**。
 >
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+{: .glossary-source}
+
+**DM**
+> **AUTOSAR** 自适应诊断管理（**AUTOSAR Adaptive Diagnostic Management**）。
+>
+> 来源：[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
 
 **DME**
@@ -2692,7 +2704,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Global Supervision Status**
 > 汇总所有**被监督实体****局部监督状态**的状态。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）、[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
 
 **Global Time**
@@ -2844,7 +2856,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Health Channel**
 > 提供有关（子）系统健康状态信息的通道。它可能是应用的**全局监督状态**、任一测试例程的结果，或（子）系统报告的状态（例如电压监控、**OS** 内核、**ECU** 状态）。
 >
-> 来源：[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+> 来源：[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）、[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
 
 **Health Channel Supervision**
@@ -2880,7 +2892,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Health Status**
 > 与被监督软件相关的一组状态（例如电压状态、应用状态、**RAM** 监控算法的结果）。
 >
-> 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+> 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）、[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
 
 **Health Status Supervision**
@@ -3578,7 +3590,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Local Supervision Status**
 > 表示单个**被监督实体**当前存活监督结果的状态。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）、[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
 
 **Log and trace level**
@@ -3608,7 +3620,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Logical Supervision**
 > 一种对软件的在线监督，用于检查软件（**被监督实体**或一组**被监督实体**）是否按程序员（即已开发的代码）定义的顺序执行。
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）、[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
 
 **&lt;LoTp&gt;**
@@ -4867,6 +4879,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）
 {: .glossary-source}
 
+**PHM**
+> 平台健康管理（**Platform Health Management**）——自适应平台的健康监控。
+>
+> 来源：[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
+{: .glossary-source}
+
 **PHY**
 > 物理层（**Physical Layer**）。
 >
@@ -4901,6 +4919,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 公钥基础设施（**Public Key Infrastructure**）。
 >
 > 来源：[AUTOSAR Key Manager（密钥管理器）](cp/crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）
+{: .glossary-source}
+
+**Platform Health Management**
+> 健康监控（**Health Monitoring**）在自适应平台的实现。
+>
+> 来源：[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
 
 **Platform Health Management (PHM)**
@@ -5759,6 +5783,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 安全硬件扩展（**Security Hardware Extension**）。
 >
 > 来源：[AUTOSAR Crypto Driver（加密驱动程序）](cp/crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](cp/crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Crypto Service Manager（加密服务管理器）](cp/crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
+{: .glossary-source}
+
+**SHM**
+> 系统健康监控器（**System Health Monitor**）——跨多个平台聚合与转发健康信息的平台无关组件。
+>
+> 来源：[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
 
 **SID**

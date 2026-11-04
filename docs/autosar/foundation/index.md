@@ -17,6 +17,7 @@ title: "基础标准（Foundation）"
 * [健康监控（Health Monitoring）](health_monitoring/index.md)
   * [Explanation of System Health Monitoring（系统健康监控说明）](health_monitoring/exp_system_health_monitoring/index.md)
   * [Specification of Health Monitoring（健康监控规范）](health_monitoring/asws_health_monitoring/index.md)
+  * [Requirements on Health Monitoring（健康监控需求）](health_monitoring/rs_health_monitoring/index.md)
 * [方法论与模板（Methodology and Templates）](methodology_templates/index.md)
   * [Specification of Abstract Platform（抽象平台规范）](methodology_templates/tps_abstract_platform_specification/index.md)
   * [Requirements on Security Extract Template（安全提取模板需求）](methodology_templates/rs_security_extract_template/index.md)
