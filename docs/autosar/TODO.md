@@ -277,7 +277,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 ### foundation/communication_management (Communication Management)
 
-- ❌ Explanation of Time Sensitive Networking Features（时间敏感网络特性说明） — AUTOSAR_FO_EXP_TimeSensitiveNetworkFeatures (`foundation/communication_management/`)
+- ✅ [Explanation of Time Sensitive Networking Features（时间敏感网络特性说明）](foundation/communication_management/exp_time_sensitive_network_features/) — AUTOSAR_FO_EXP_TimeSensitiveNetworkFeatures (R23-11; EXP guide, skeleton-exempt; ch.1–4 + trailing 参考文献 registry (ref-1..12, 39 citation links + 1 chapter-ref); 19 acronym entries + 11 term definitions; 2026-11-05)
 - ✅ Requirements on Debug Trace Profile（调试跟踪配置文件需求） — AUTOSAR_FO_RS_DebugTraceProfile (`foundation/communication_management/rs_debug_trace_profile/`)
 - ✅ Requirements on E2E（端到端通信保护需求） — AUTOSAR_FO_RS_E2E (`foundation/communication_management/rs_e2e/`)
 - ❌ Requirements on IEEE 1722（IEEE 1722 需求） — AUTOSAR_FO_RS_IEEE1722 (`foundation/communication_management/`)

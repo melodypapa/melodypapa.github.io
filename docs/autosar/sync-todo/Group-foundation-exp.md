@@ -75,15 +75,20 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
   - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp_time_sensitive_network_features (AUTOSAR_FO_EXP_TimeSensitiveNetworkFeatures · CommunicationManagement · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [ ] exp_time_sensitive_network_features (AUTOSAR_FO_EXP_TimeSensitiveNetworkFeatures · CommunicationManagement · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Explanation of Time Sensitive Networking Features（时间敏感网络特性说明）; target `foundation/communication_management/exp_time_sensitive_network_features/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)
   - Note: source `CommunicationManagement/AUTOSAR_FO_EXP_TimeSensitiveNetworkFeatures.md` — 430 lines, 16 figure refs, no item IDs
   - Note: related site content: cp/communication/ethernet_switch_driver, cp/globaltime/eth_tsyn (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–4 (1/1.1–1.2 · 2/2.1 + 2.2.1–2.2.11 · 3/3.1 · 4/4.1–4.5.2.2); no specification items
+  - Note: technical shape — ch.2.1 acronym table rendered as bold-term + blockquote (exp_system_health_monitoring precedent; 19 rows, source order; the source's 3-column layout carries an empty Acronym column = PDF merged-cell artifact, normalized to 2 columns); 2.2 term headings translated with the English term kept in parentheses; 表4.1 9 rows incl. the duplicated IEEE 802.1Qbv row kept (row set strict); EthSwt* config identifiers verbatim
+  - Note: figures — 16 refs all page chrome (~8 KB recurring hashes), no content diagrams, dropped
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (271 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/glyph/`\<`
+  - Note: Phase B (2026-11-05) — coverage ch.1→§1, ch.2→§2, ch.3→§3, ch.4→§4, trailing 参考文献 (ref-1..12); 39 `[n]` citations + 1 chapter-number ref (表4.1 概览句) linked via --apply, idempotent; URL audit: ieee802.org/tsn 200, ieee802.org/3 200, ieeexplore.ieee.org 418 bare-UA → 200 browser-UA (anti-bot on bare UA, kept), avnu.org PDF 403 browser-UA also 403 (anti-bot, kept — authoritative URL from source); cross-article EthSwt/TSN mentions stay prose (report-only; no census cross-article hits)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp_security_overview (AUTOSAR_FO_EXP_SecurityOverview · General · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Security Overview（信息安全概览）; target `foundation/general/exp_security_overview/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)
