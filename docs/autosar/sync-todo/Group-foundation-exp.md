@@ -104,14 +104,19 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
   - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] tr_release_overview (AUTOSAR_FO_TR_ReleaseOverview · ReleaseDocumentation · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [ ] tr_release_overview (AUTOSAR_FO_TR_ReleaseOverview · ReleaseDocumentation · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Release Overview（发布概览）; target `foundation/release_documentation/tr_release_overview/`; technical report (TR) — prose; no specification items
   - Note: source `ReleaseDocumentation/AUTOSAR_FO_TR_ReleaseOverview.md` — 718 lines, 28 figure refs, 1 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–5 (1/1.1–1.5 incl. W3C license/disclaimer text, 2 schema tables, Figures 1.1–1.2 · 2/2.1–2.3 · 3 spec overview · 4 deficiencies · 5 release history)
+  - Note: technical shape — 表2.1 concept impact 54 rows (3 page fragments merged; the column-split "Requirements on Operating / System Interface" longName rejoined; PDF-merged Concept/Standard/Lifecycle cells kept as empty cells); ch.3 overview table ~50 rows (cluster header rows kept; the split Standardization Template row rejoined; PDF-broken file names rejoined); 表5.1 release history 49 deliverable rows; "none" lists → 无; "Document ID 781" page footers dropped as chrome
+  - Note: figures — 28 refs → 2 content diagrams (Figure 1.1 dependencies, Figure 1.2 life-cycle model) embedded as Figure1-1/1-2.png; 26 chrome dropped
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK (§4.1 heading = document-title citation translated with the English long name kept in parentheses); `check_indexes.py` OK (273 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/glyph in content
+  - Note: Phase B (2026-11-05) — coverage ch.1→§1 … ch.5→§5, trailing 参考文献 (ref-1); 1 citation + 9 chapter-number refs linked via --apply (idempotent); URL audit: w3.org license URL kept as plain text in §1.2.2 (source form); deliberate omissions: doc-meta chrome + Disclaimer + Contents — user to verify
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp_sw_architectural_decisions (AUTOSAR_FO_EXP_SWArchitecturalDecisions · General · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Explanation of Software Architectural Decisions（软件架构决策说明）; target `foundation/general/exp_sw_architectural_decisions/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)

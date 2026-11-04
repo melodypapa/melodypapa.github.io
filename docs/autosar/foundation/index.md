@@ -38,6 +38,7 @@ title: "基础标准（Foundation）"
   * [Network Management Protocol Specification（网络管理协议规范）](protocols/prs_network_management_protocol/index.md)
   * [Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](protocols/prs_intrusion_detection_system/index.md)
 * [发布文档（Release Documentation）](release_documentation/index.md)
+  * [Release Overview（发布概览）](release_documentation/tr_release_overview/index.md)
 * [功能安全（Safety）](safety/index.md)
 * [信息安全（Security）](security/index.md)
   * [Requirements on Intrusion Detection System（入侵检测系统需求）](security/rs_intrusion_detection_system/index.md)

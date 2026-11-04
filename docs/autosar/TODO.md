@@ -330,7 +330,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 ### foundation/release_documentation (Release Documentation)
 
-- ❌ Release Overview（发布概览） — AUTOSAR_FO_TR_ReleaseOverview (`foundation/release_documentation/`)
+- ✅ [Release Overview（发布概览）](foundation/release_documentation/tr_release_overview/) — AUTOSAR_FO_TR_ReleaseOverview (R23-11; TR, skeleton-exempt; ch.1–5 incl. concept-impact table (54 rows), schema-version tables, full specification overview (~50 rows), R23-11 release history (Table 5.1, 49 deliverables); Figures 1.1/1.2 embedded; 2026-11-05)
 
 ### foundation/safety (Safety)
 

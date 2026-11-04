@@ -504,6 +504,7 @@ nav:
         - "IDS Protocol": autosar/foundation/protocols/prs_intrusion_detection_system/index.md
       - 发布文档:
         - autosar/foundation/release_documentation/index.md
+        - autosar/foundation/release_documentation/tr_release_overview/index.md
       - 功能安全:
         - autosar/foundation/safety/index.md
       - 信息安全:
