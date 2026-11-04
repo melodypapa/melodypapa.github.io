@@ -13,7 +13,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 > Item-ID note: TPS/ASWS rows that carry specification items share the decision recorded in the [Group-foundation-rs-prs.md](Group-foundation-rs-prs.md) header — DECIDED 2026-11-03: item IDs are dropped, titles translate only.
 
 ## Queue
-- [ ] tr_glossary (AUTOSAR_FO_TR_Glossary · General · R23-11 markdown · 📖 ch.2 + ch.4 343/343 terms, awaiting batch gate)
+- [x] tr_glossary (AUTOSAR_FO_TR_Glossary · General · R23-11 markdown · 📖 ch.2 + ch.4 343/343 terms, awaiting batch gate)
   - Note: in-flight row placed first: article `foundation/general/tr_glossary/` exists (moved from general/ in PR #112); ch.2 缩略语 complete (201 acronyms), ch.4 术语定义 14/343 terms translated — remaining 329 terms translate in tranches
   - Note: row moved here from Group-general.md on 2026-11-02 (opened there as user-named run #78 before the platform restructure); its decision carries over — 术语表 mechanism (user decision 2026-10-24): entries come from `scripts/tr_glossary.json`, extracted from the SOURCE during each translation batch; gen_glossary never re-parses the translated article; tranches committed per batch
   - Note: source ch.2.1 has 206 acronym rows (201 distinct entries in tr_glossary.json after dedupe); ch.4 = 343 definition terms (6-row tables)
@@ -30,9 +30,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] tr_list_of_known_issues_secure_hardware_extensions (AUTOSAR_FO_TR_ListOfKnownIssuesSecureHardwareExtensions · Security · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 4596aaf · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
+- [x] tr_list_of_known_issues_secure_hardware_extensions (AUTOSAR_FO_TR_ListOfKnownIssuesSecureHardwareExtensions · Security · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: List of Known Issues of Secure Hardware Extensions（安全硬件扩展已知问题清单）; target `foundation/security/tr_list_of_known_issues_secure_hardware_extensions/`; technical report (TR) — prose; no specification items
   - Note: source `Security/AUTOSAR_FO_TR_ListOfKnownIssuesSecureHardwareExtensions.md` — 98 lines, 8 figure refs, no item IDs
   - Note: Step 1 gap analysis (2026-11-05): no article → full translation; source body = one 7-issue table (split across 3 PDF page-fragment tables by the converter → merged into one table) + the errata sheet's "Figure 1" corrected boot flow chart (referenced by issue 4); doc-meta chrome (cover/status/change-history tables, Disclaimer) dropped per EXP precedent; source has no numbered chapters — article carries a single unnumbered-level `## 已知问题清单` mirroring the document title
@@ -43,8 +43,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 1d31c32 · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
 - [x] exp_system_health_monitoring (AUTOSAR_FO_EXP_SystemHealthMonitoring · HealthMonitoring · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Explanation of System Health Monitoring（系统健康监控说明）; target `foundation/health_monitoring/exp_system_health_monitoring/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)
   - Note: source `HealthMonitoring/AUTOSAR_FO_EXP_SystemHealthMonitoring.md` — 408 lines, 22 figure refs, no item IDs
@@ -60,7 +60,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (2026-11-03: approved — scope limited to the EXP document, item IDs dropped/titles only)
   - [x] Step 6 — TODO.md row + commit/PR (issue #255 · commit 4320445 · PR #256)
-- [ ] tr_predefined_names (AUTOSAR_FO_TR_PredefinedNames · General · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
+- [x] tr_predefined_names (AUTOSAR_FO_TR_PredefinedNames · General · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Predefined Names in AUTOSAR（AUTOSAR 预定义名称）; target `foundation/general/tr_predefined_names/`; technical report (TR) — prose; no specification items
   - Note: source `General/AUTOSAR_FO_TR_PredefinedNames.md` — 423 lines, 23 figure refs, no item IDs
   - Note: related site content: glossary.md (cross-link candidates, report-only until the run decides)
@@ -73,9 +73,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp_time_sensitive_network_features (AUTOSAR_FO_EXP_TimeSensitiveNetworkFeatures · CommunicationManagement · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit f62dc14 · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
+- [x] exp_time_sensitive_network_features (AUTOSAR_FO_EXP_TimeSensitiveNetworkFeatures · CommunicationManagement · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Explanation of Time Sensitive Networking Features（时间敏感网络特性说明）; target `foundation/communication_management/exp_time_sensitive_network_features/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)
   - Note: source `CommunicationManagement/AUTOSAR_FO_EXP_TimeSensitiveNetworkFeatures.md` — 430 lines, 16 figure refs, no item IDs
   - Note: related site content: cp/communication/ethernet_switch_driver, cp/globaltime/eth_tsyn (cross-link candidates, report-only until the run decides)
@@ -88,9 +88,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp_security_overview (AUTOSAR_FO_EXP_SecurityOverview · General · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 7a7a21d · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
+- [x] exp_security_overview (AUTOSAR_FO_EXP_SecurityOverview · General · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Security Overview（信息安全概览）; target `foundation/general/exp_security_overview/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)
   - Note: source `General/AUTOSAR_FO_EXP_SecurityOverview.md` — 533 lines, 26 figure refs, no item IDs
   - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–4 (1/1.1–1.2 · 2/2.1 (one sentence, no acronym table in source) · 3/3.1 · 4/4.1.1–4.1.10 incl. Tables 4.1–4.10)
@@ -102,9 +102,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] tr_release_overview (AUTOSAR_FO_TR_ReleaseOverview · ReleaseDocumentation · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 359dd8c · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
+- [x] tr_release_overview (AUTOSAR_FO_TR_ReleaseOverview · ReleaseDocumentation · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Release Overview（发布概览）; target `foundation/release_documentation/tr_release_overview/`; technical report (TR) — prose; no specification items
   - Note: source `ReleaseDocumentation/AUTOSAR_FO_TR_ReleaseOverview.md` — 718 lines, 28 figure refs, 1 item IDs
   - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–5 (1/1.1–1.5 incl. W3C license/disclaimer text, 2 schema tables, Figures 1.1–1.2 · 2/2.1–2.3 · 3 spec overview · 4 deficiencies · 5 release history)
@@ -116,9 +116,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp_sw_architectural_decisions (AUTOSAR_FO_EXP_SWArchitecturalDecisions · General · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 6b343c9 · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
+- [x] exp_sw_architectural_decisions (AUTOSAR_FO_EXP_SWArchitecturalDecisions · General · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Explanation of Software Architectural Decisions（软件架构决策说明）; target `foundation/general/exp_sw_architectural_decisions/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)
   - Note: source `General/AUTOSAR_FO_EXP_SWArchitecturalDecisions.md` — 834 lines, 48 figure refs, 8 item IDs
   - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–5 (4 overview incl. Table 4.1 template · 5.1 common ×1 · 5.2 AP ×24 · 5.3 CP ×4 decisions); decision tables rendered as 字段|内容 two-column tables per the source's own template
@@ -130,9 +130,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] tps_log_and_trace_extract (AUTOSAR_FO_TPS_LogAndTraceExtract · MethodologyAndTemplates · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 70c1258 · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
+- [x] tps_log_and_trace_extract (AUTOSAR_FO_TPS_LogAndTraceExtract · MethodologyAndTemplates · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Log and Trace Extract Template（日志与跟踪提取模板）; target `foundation/methodology_templates/tps_log_and_trace_extract/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_TPS_LogAndTraceExtract.md` — 837 lines, 38 figure refs, 14 item IDs
   - Note: related site content: cp/communication/diagnostic_log_and_trace (Dlt) (cross-link candidates, report-only until the run decides)
@@ -145,9 +145,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp_safety_overview (AUTOSAR_FO_EXP_SafetyOverview · General · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 85ac689 · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
+- [x] exp_safety_overview (AUTOSAR_FO_EXP_SafetyOverview · General · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Safety Overview（功能安全概览）; target `foundation/general/exp_safety_overview/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)
   - Note: source `General/AUTOSAR_FO_EXP_SafetyOverview.md` — 862 lines, 50 figure refs, 6 item IDs
   - Note: related site content: cp/safety/functional_safety_measures (cross-link candidates, report-only until the run decides)
@@ -160,9 +160,9 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] tps_arxml_serialization_rules (AUTOSAR_FO_TPS_ARXMLSerializationRules · MethodologyAndTemplates · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 34a33ba · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
+- [x] tps_arxml_serialization_rules (AUTOSAR_FO_TPS_ARXMLSerializationRules · MethodologyAndTemplates · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: ARXML Serialization Rules（ARXML 序列化规则）; target `foundation/methodology_templates/tps_arxml_serialization_rules/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_TPS_ARXMLSerializationRules.md` — 915 lines, 35 figure refs, 40 item IDs
   - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–3 + annex A (8 release histories) + annex B (5 class/primitive tables); **annex A.6 (R21-11, all none) missing from the markdown conversion — recovered from the corpus PDF pages 26–27 (ASWS/TPS_LTET precedent)**
@@ -174,8 +174,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 90c3b30 · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
 - [x] asws_health_monitoring (AUTOSAR_FO_ASWS_HealthMonitoring · HealthMonitoring · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Abstract Specification of Health Monitoring（健康监控抽象规范）; target `foundation/health_monitoring/asws_health_monitoring/`; abstract software specification (ASWS) — platform-independent SWS-like items
   - Note: source `HealthMonitoring/AUTOSAR_FO_ASWS_HealthMonitoring.md` — 1,434 lines, 67 figure refs, 85 item IDs
@@ -208,7 +208,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Phase B coverage — source References → 参考文献 (ref-1..ref-7); 1/1.1–1.3 → §1; 2/2.1–2.3.3 (incl. 2.3.2.1–2) → §2; 3/3.1–3.5.6.1 (incl. 3.1.1, 3.2.1–2, 3.3.1–3.3.5 + 3.3.2.1, 3.4.1–3.4.2.1, 3.5.1–3.5.6.1 incl. 3.5.5.1) → §3; 4/4.1 → §4; A.1 → §A; B.1–B.15 → §B; C.1–C.3 → §C; D → §D; E/Table E.1 → §E; F.1–F.5/Tables F.1–F.13 → §F. Deliberate omissions: none (every annex translates); the only unrenderable object is the missing annex D table
   - [x] Step 5 — User confirmation gate (2026-11-04: approved)
   - [x] Step 6 — TODO.md row + commit/PR (issue #259 · commit 510c6d7 · PR #260)
-- [ ] tps_xml_schema_production_rules (AUTOSAR_FO_TPS_XMLSchemaProductionRules · MethodologyAndTemplates · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
+- [x] tps_xml_schema_production_rules (AUTOSAR_FO_TPS_XMLSchemaProductionRules · MethodologyAndTemplates · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: XML Schema Production Rules（XML 模式生成规则）; target `foundation/methodology_templates/tps_xml_schema_production_rules/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_TPS_XMLSchemaProductionRules.md` — 1,848 lines, 145 figure refs, 43 item IDs
   - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–5 + annex A; ch.3 tag tables (00036 tailoring table 20 tags, 00057/00058 constraint matrices, 00059 xml.*Element combinations 17 rows, 00056 default-configuration table 15 rows), ch.4 all 30 production rules (00000–00019, 00022–00029, 00036–00047, 00054–00059) rendered as field tables (适用对象/前置条件/目标模式/说明/XML 模式示例/XML 实例示例) with target patterns as fenced code
@@ -220,8 +220,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate (batch gate deferred per user instruction 2026-11-05 — user asked to stop after this row; confirmed together with rows 1–11 below)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 054ff1c · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
 - [ ] tr_secure_hardware_extensions (AUTOSAR_FO_TR_SecureHardwareExtensions · Security · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Specification of Secure Hardware Extensions（安全硬件扩展规范）; target `foundation/security/tr_secure_hardware_extensions/`; technical report (TR) — prose; no specification items
   - Note: source `Security/AUTOSAR_FO_TR_SecureHardwareExtensions.md` — 1,971 lines, 83 figure refs, no item IDs
