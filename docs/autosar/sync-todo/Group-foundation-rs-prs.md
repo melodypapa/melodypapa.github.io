@@ -74,12 +74,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Requirements on IPsec Protocol（IPsec 协议需求）; target `foundation/protocols/rs_ipsec_protocol/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Protocols/AUTOSAR_FO_RS_IPsecProtocol.md` — 515 lines, 20 figure refs, 108 item IDs
   - Note: related site content: cp/communication/tcpip (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 20 figure refs are page-decoration chrome, 0 content figures; item-ID decision applied (27 requirement items get sequential §4.2.1–4.2.27 numbering; items 00001/00002 had lost heading level in the markdown conversion — restored); source ch.5 Requirements Tracing omitted per ASWS precedent (References renumbered 6→5); the stray page-footer heading "AUTOSAR_CP_RS_Features" after the references is footer noise, dropped; {DRAFT} markers dropped with the IDs; garbled identifier spacing (ENCR_AES_GCM_16 etc.) reconstructed as code spans; "IETF RTF 4301" typo in item 00001 corrected to RFC (heading already says RFC); dependency IDs → intra-article §4.2.x links; glossary: 5 existing entries gained this document as additional source, 8 new (AH, ESP, IKE, IKEv2, PAD, PSK, SA, SAD, SPD — IPsec merged-duplicate)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_security_extract_template (AUTOSAR_FO_RS_SecurityExtractTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Security Extract Template（安全提取模板需求）; target `foundation/methodology_templates/rs_security_extract_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_RS_SecurityExtractTemplate.md` — 516 lines, 20 figure refs, 52 item IDs

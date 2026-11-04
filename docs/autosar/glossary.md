@@ -246,6 +246,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**AH**
+> 认证报头（**Authentication Header**），**IPsec** 的认证协议。
+>
+> 来源：[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）
+{: .glossary-source}
+
 **AI**
 > 存活指示（**Alive Indication**）
 >
@@ -2001,6 +2007,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](cp/application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis）
 {: .glossary-source}
 
+**ESP**
+> 封装安全载荷（**Encapsulating Security Payload**），**IPsec** 的加密/认证协议。
+>
+> 来源：[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）
+{: .glossary-source}
+
 **ET**
 > 以太网收发器（**Ethernet transceiver**）。
 >
@@ -2966,7 +2978,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ICV**
 > 完整性校验值（**Integrity Check Value**）。为时间同步报文提供完整性和真实性保护的校验值。
 >
-> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](cp/globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](cp/globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）
 {: .glossary-source}
 
 **ICVL**
@@ -3027,6 +3039,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 仪器与工业数码相机（**Instrumentation and Industrial Digital Camera**），由 IEEE 1722 定义。
 >
 > 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）、[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
+{: .glossary-source}
+
+**IKE**
+> 互联网密钥交换（**Internet Key Exchange**）。
+>
+> 来源：[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）
+{: .glossary-source}
+
+**IKEv2**
+> 互联网密钥交换版本 2（**Internet Key Exchange version 2**）。
+>
+> 来源：[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）
 {: .glossary-source}
 
 **In-Use performance ratio**
@@ -3170,7 +3194,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **IPsec**
 > 互联网协议安全（**Internet Protocol Security**）。
 >
-> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+> 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）
 {: .glossary-source}
 
 **IPv4**
@@ -4579,6 +4603,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](cp/communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）
 {: .glossary-source}
 
+**PAD**
+> 对端授权数据库（**Peer Authorization Database**），**IPsec** 的数据库。
+>
+> 来源：[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）
+{: .glossary-source}
+
 **PAE**
 > 端口访问实体（**Port Access Entity**）。
 >
@@ -4792,7 +4822,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **PKI**
 > 公钥基础设施（**Public Key Infrastructure**）。
 >
-> 来源：[AUTOSAR Key Manager（密钥管理器）](cp/crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+> 来源：[AUTOSAR Key Manager（密钥管理器）](cp/crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）
 {: .glossary-source}
 
 **Platform Health Management (PHM)**
@@ -4991,6 +5021,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 替代应用软件集群中一个 BSW 模块的模块，拆分为高代理与低代理（**Proxy Module**）
 >
 > 来源：[Software Cluster Design and Integration Guideline for Classic Platform（经典平台软件集群设计与集成指南）](cp/system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline）
+{: .glossary-source}
+
+**PSK**
+> 预共享密钥（**Pre-Shared Keys**）。
+>
+> 来源：[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）
 {: .glossary-source}
 
 **PTC**
@@ -5292,15 +5328,21 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **SA**
-> 源地址（**Source Address**）。
+> 安全关联（**Security Association**）。
 >
-> 来源：[AUTOSAR J1939Nm（SAE J1939 网络管理）](cp/communication/j1939nm/index.md)（AUTOSAR_CP_SWS_SAEJ1939NetworkManagement）、[AUTOSAR J1939Rm（SAE J1939 请求管理器）](cp/communication/j1939rm/index.md)（AUTOSAR_CP_SWS_SAEJ1939RequestManager）、[AUTOSAR J1939Tp（SAE J1939 传输层）](cp/communication/j1939tp/index.md)（AUTOSAR_CP_SWS_SAEJ1939TransportLayer）、[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）
+> 来源：[AUTOSAR J1939Nm（SAE J1939 网络管理）](cp/communication/j1939nm/index.md)（AUTOSAR_CP_SWS_SAEJ1939NetworkManagement）、[AUTOSAR J1939Rm（SAE J1939 请求管理器）](cp/communication/j1939rm/index.md)（AUTOSAR_CP_SWS_SAEJ1939RequestManager）、[AUTOSAR J1939Tp（SAE J1939 传输层）](cp/communication/j1939tp/index.md)（AUTOSAR_CP_SWS_SAEJ1939TransportLayer）、[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）
 {: .glossary-source}
 
 **SACK**
 > 选择性确认（**Selective Acknowledgment**）。
 >
 > 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+{: .glossary-source}
+
+**SAD**
+> 安全关联数据库（**Security Association Database**），**IPsec** 的数据库。
+>
+> 来源：[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）
 {: .glossary-source}
 
 **SAI**
@@ -5717,6 +5759,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
+**SPD**
+> 安全策略数据库（**Security Policy Database**），**IPsec** 的数据库。
+>
+> 来源：[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）
+{: .glossary-source}
+
 **SPDU**
 > 安全协议数据单元（**Secured protocol data Unit**）。
 >
@@ -6082,7 +6130,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **TCP/IP**
 > 计算机网络中使用的一族通信协议。
 >
-> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](cp/communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](cp/communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）
 {: .glossary-source}
 
 **TCP/IP Stack**
@@ -6536,7 +6584,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **V2X**
 > 车联网（**Vehicle to Everything**）。
 >
-> 来源：[AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](cp/communication/cellularv2x_driver/index.md)（AUTOSAR_CP_SWS_CellularV2XDriver）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）、[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
+> 来源：[AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](cp/communication/cellularv2x_driver/index.md)（AUTOSAR_CP_SWS_CellularV2XDriver）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）、[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）、[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）
 {: .glossary-source}
 
 **V2xBtp**

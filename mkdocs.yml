@@ -472,6 +472,7 @@ nav:
         - autosar/foundation/protocols/index.md
         - "SOME/IP-SD": autosar/foundation/protocols/rs_someip_service_discovery_protocol/index.md
         - "V2xRAL": autosar/foundation/protocols/prs_v2x_remote_access_layer/index.md
+        - "IPsec": autosar/foundation/protocols/rs_ipsec_protocol/index.md
       - 发布文档:
         - autosar/foundation/release_documentation/index.md
       - 功能安全:
