@@ -90,14 +90,19 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
   - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp_security_overview (AUTOSAR_FO_EXP_SecurityOverview · General · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [ ] exp_security_overview (AUTOSAR_FO_EXP_SecurityOverview · General · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Security Overview（信息安全概览）; target `foundation/general/exp_security_overview/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)
   - Note: source `General/AUTOSAR_FO_EXP_SecurityOverview.md` — 533 lines, 26 figure refs, no item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–4 (1/1.1–1.2 · 2/2.1 (one sentence, no acronym table in source) · 3/3.1 · 4/4.1.1–4.1.10 incl. Tables 4.1–4.10)
+  - Note: technical shape — §4.1 prose + 10 solution tables (DEP HW/OS, SSP/ASLR/CFI/CPI/PointerAuth compiler options, containers, sandboxing), PDF hyphenation rejoined; source "System Level: …" sub-heading labels kept as bold lines; footnotes rendered `<sup>N</sup>` + `> N …` blockquotes — **source conversion lost footnote texts 14–17 and 27–35, those markers were dropped** (no invented URLs), all present footnote texts carried; Table 4.2's [17]/[18] are document citations not footnotes; Table 4.10's OpenBSD row garbled at a page break → conservative translation with an in-row note (full behavior in ref [25])
+  - Note: figures — 26 refs → 1 content diagram (Figure 4.1 attack model, 122 KB) embedded as Figure4-1.png; 25 chrome dropped
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (272 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/glyph
+  - Note: Phase B (2026-11-05) — coverage ch.1→§1 … 4.1.10→§4.1.10, references registry in §3.1 (25 anchors auto-added, 33 citations + 7 chapter-number refs linked via --apply, idempotent); URL audit: 4 footnote URLs dead/418/403 — dslab.epfl.ch/proj/cpi 404 and grammatech.com/products/codesonar 404 (publisher moved; NOT re-guessed — Backlog), community.arm.com 403 (anti-bot, kept), ieeexplore-class 000s are sandbox network failures incl. github.com (kept); deliberate omissions: doc-meta chrome + Disclaimer + Contents — user to verify
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] tr_release_overview (AUTOSAR_FO_TR_ReleaseOverview · ReleaseDocumentation · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Release Overview（发布概览）; target `foundation/release_documentation/tr_release_overview/`; technical report (TR) — prose; no specification items

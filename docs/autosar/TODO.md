@@ -270,7 +270,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ✅ [TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/) — AUTOSAR_FO_TR_Glossary (R23-11; guide-type article, STANDARD.md §7 exempt; **complete** — ch.1–4 + trailing 参考文献 registry (ref-1..50, 177 citation links); ch.4 术语定义 343/343 terms with 8 content figures; terms flowed into glossary.md (2026-11-05 tranche; +313 entries — 30 same-named terms already carried definitions from other docs, left unmerged as user decisions))
 - ❌ Explanation of Software Architectural Decisions（软件架构决策说明） — AUTOSAR_FO_EXP_SWArchitecturalDecisions (`foundation/general/`)
 - ❌ Safety Overview（功能安全概览） — AUTOSAR_FO_EXP_SafetyOverview (`foundation/general/`)
-- ❌ Security Overview（信息安全概览） — AUTOSAR_FO_EXP_SecurityOverview (`foundation/general/`)
+- ✅ [Security Overview（信息安全概览）](foundation/general/exp_security_overview/) — AUTOSAR_FO_EXP_SecurityOverview (R23-11; EXP guide, skeleton-exempt; ch.1–4 (§4.1 PRE: memory-corruption attacks, secure coding, 4 attack classes, DEP/SSP/ASLR/CFI/CPI/PointerAuth solutions with 10 tables, isolation); Figure 4.1 embedded; footnotes as <sup>N</sup>+blockquote (14–17/27–35 texts lost in source conversion — markers dropped); 2026-11-05)
 - ❌ Main Requirements（主需求规范） — AUTOSAR_FO_RS_Main (`foundation/general/`)
 - ❌ Project Objectives（项目目标） — AUTOSAR_FO_RS_ProjectObjectives (`foundation/general/`)
 - ✅ [Predefined Names in AUTOSAR（AUTOSAR 预定义名称）](foundation/general/tr_predefined_names/) — AUTOSAR_FO_TR_PredefinedNames (R23-11; TR, skeleton-exempt; ch.1–4 keyword tables (5 virtual modules, 23 information categories, 99 document abbreviations) + annex A class tables A.1–A.4 + annex B (none→无) + trailing 参考文献 registry (ref-1..5, 12 citation links); 2026-11-05)
