@@ -472,6 +472,7 @@ nav:
         - autosar/foundation/methodology_templates/index.md
         - "Security Extract": autosar/foundation/methodology_templates/rs_security_extract_template/index.md
         - "Feature Model": autosar/foundation/methodology_templates/rs_feature_model_exchange_format/index.md
+        - "Methodology": autosar/foundation/methodology_templates/rs_methodology/index.md
         - "Abstract Platform": autosar/foundation/methodology_templates/tps_abstract_platform_specification/index.md
       - 协议:
         - autosar/foundation/protocols/index.md

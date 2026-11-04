@@ -5857,6 +5857,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR IpduM（I-PDU多路复用器）](cp/communication/ipdum/index.md)（AUTOSAR_CP_SWS_IPDUMultiplexer）
 {: .glossary-source}
 
+**SIL**
+> 安全完整性等级（**Safety Integrity Level**），**IEC 61508** 定义。
+>
+> 来源：[Requirements on Methodology（方法论需求）](foundation/methodology_templates/rs_methodology/index.md)（AUTOSAR_FO_RS_Methodology）
+{: .glossary-source}
+
 **Single connection**
 > CAN传输层一次只管理一个传输协议通信会话。
 >

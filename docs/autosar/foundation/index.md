@@ -23,6 +23,7 @@ title: "基础标准（Foundation）"
   * [Specification of Abstract Platform（抽象平台规范）](methodology_templates/tps_abstract_platform_specification/index.md)
   * [Requirements on Security Extract Template（安全提取模板需求）](methodology_templates/rs_security_extract_template/index.md)
   * [Requirements on Feature Model Exchange Format（特征模型交换格式需求）](methodology_templates/rs_feature_model_exchange_format/index.md)
+  * [Requirements on Methodology（方法论需求）](methodology_templates/rs_methodology/index.md)
 * [协议（Protocols）](protocols/index.md)
   * [Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）](protocols/rs_someip_service_discovery_protocol/index.md)
   * [Requirements on SOME/IP Protocol（SOME/IP 协议需求）](protocols/rs_someip_protocol/index.md)

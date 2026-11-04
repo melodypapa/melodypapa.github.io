@@ -214,12 +214,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Requirements on Methodology（方法论需求）; target `foundation/methodology_templates/rs_methodology/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_RS_Methodology.md` — 928 lines, 31 figure refs, 186 item IDs
   - Note: related site content: cp/methodology_templates/basic_software_module_description_template (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 30 figure refs are page-decoration chrome, 0 content figures; 26 requirement items get sequential §2.x.y.z numbering (IDs dropped); the unnumbered pre-chapter References mirrored with ref anchors; §1.3 Requirements Tracing omitted per ASWS precedent (no chapter renumbering needed); garbled/truncated cells of items 00066 and 00084 recovered from the R23-11 PDF; 00080's cross-doc item-ID supporting-material refs kept unbracketed (RS_SWCT_03065, RS_STDT_00034); ch.3 Change History covers 11 releases (R1.1.0–R23-11, ~90 table rows translated as Heading-only tables; §3.8 R20-11 is empty in source → 无); glossary: no new site-glossary terms (SIL/VFB/OEM/SWC/RTE all present)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_intrusion_detection_system (AUTOSAR_FO_PRS_IntrusionDetectionSystem · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Intrusion Detection System Protocol Specification（入侵检测系统协议规范）; target `foundation/protocols/prs_intrusion_detection_system/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_IntrusionDetectionSystem.md` — 998 lines, 42 figure refs, 16 item IDs
