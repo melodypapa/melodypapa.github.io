@@ -2,7 +2,7 @@
 title: "CP AUTOSAR"
 ---
 
-**AUTOSAR** Classic Platform（**CP**）R23-11 规范的中文翻译笔记：按通信、全局时间、加密、诊断、通用、I/O、MCAL、存储、方法论与模板、模式管理、系统服务、功能安全等类别组织，覆盖各基础软件模块（**BSW**）的功能、API、配置参数与集成约束，并收录 **RTE**、应用接口、**SW** 架构、库与模板等平台级内容。跨平台的 **Foundation** 标准另见[基础标准（Foundation）](../foundation/index.md)。下列按导航结构列出本节全部文章，便于快速跳转。
+**AUTOSAR** Classic Platform（**CP**）R23-11 规范的中文翻译笔记：按通信、全局时间、加密、诊断、通用、I/O、MCAL、存储、方法论与模板、模式管理、系统服务、功能安全等类别组织，覆盖各基础软件模块（**BSW**）的功能、API、配置参数与集成约束，并收录 **RTE**、应用接口、**SW** 架构、库与模板等平台级内容，以及不属于特定模块的「其他」专题文章。跨平台的 **Foundation** 标准另见[基础标准（Foundation）](../foundation/index.md)。下列按导航结构列出本节全部文章，便于快速跳转。
 
 ## 文章
 
@@ -10,7 +10,6 @@ title: "CP AUTOSAR"
 
 * [通信（Communication）](communication/index.md)
   * [AUTOSAR CAN Driver（CAN驱动程序）](communication/can_driver/index.md)
-    * [Full-CAN 与 Basic-CAN 的区别](communication/can_driver/full_can_vs_basic_can.md)
   * [AUTOSAR CAN Interface](communication/can_interface/index.md)
   * [AUTOSAR CAN NM（CAN网络管理）](communication/can_network_management/index.md)
   * [AUTOSAR J1939Nm（SAE J1939 网络管理）](communication/j1939nm/index.md)
@@ -212,12 +211,21 @@ title: "CP AUTOSAR"
   * [Specification of CRC Routines（CRC 例程规范）](libraries/crc/index.md)
   * [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](libraries/e2e/index.md)
   * [Specification of Bit Handling Routines（位处理例程规范）](libraries/bfx/index.md)
+  * [Specification of Basic Software Multicore Library（基础软件多核库规范）](libraries/bmc/index.md)
+  * [Specification of Floating Point Math Routines（浮点数学例程规范）](libraries/mfl/index.md)
+  * [Specification of Fixed Point Math Routines（定点数学例程规范）](libraries/mfx/index.md)
+  * [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](libraries/ifl/index.md)
+  * [Specification of Fixed Point Interpolation Routines（定点插值例程规范）](libraries/ifx/index.md)
+  * [Specification of Extended Fixed Point Routines（扩展定点例程规范）](libraries/efx/index.md)
 
 ### 模板
 
 * [模板（Templates）](template/index.md)
-  * [通用结构（Generic Structure）一段话总结](template/generic_structure/index.md)
-  * [Specification of Timing Extensions for Classic Platform（经典平台时序扩展规范）](template/timimg_extension/indx.md)
+
+### 其他
+
+* [其他（Others）](others/index.md)
+  * [Full-CAN 与 Basic-CAN 的区别](others/full_can_vs_basic_can/index.md)
 
 ## 相关内容
 

@@ -11,7 +11,6 @@ title: "通信（Communication）"
 ### CAN
 
 * [AUTOSAR CAN Driver（CAN驱动程序）](can_driver/index.md)
-  * [Full-CAN 与 Basic-CAN 的区别](can_driver/full_can_vs_basic_can.md)
 * [AUTOSAR CAN Interface](can_interface/index.md)
 * [AUTOSAR CAN NM（CAN网络管理）](can_network_management/index.md)
 * [AUTOSAR J1939Nm（SAE J1939 网络管理）](j1939nm/index.md)

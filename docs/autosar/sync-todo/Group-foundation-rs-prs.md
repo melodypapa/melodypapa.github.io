@@ -201,7 +201,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 - [ ] rs_timing_extensions (AUTOSAR_FO_RS_TimingExtensions · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Timing Extensions（时序扩展需求）; target `foundation/methodology_templates/rs_timing_extensions/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_RS_TimingExtensions.md` — 1,043 lines, 42 figure refs, 326 item IDs
-  - Note: related site content: cp/template/timimg_extension (CP TPS Timing Extensions summary — different document) (cross-link candidates, report-only until the run decides)
+  - Note: related site content: cp/template/timimg_extension (CP TPS Timing Extensions summary, deleted 2026-11-04 — different document) (cross-link candidates, report-only until the run decides)
   - [ ] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
