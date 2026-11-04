@@ -35,11 +35,15 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 - [ ] tr_list_of_known_issues_secure_hardware_extensions (AUTOSAR_FO_TR_ListOfKnownIssuesSecureHardwareExtensions · Security · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: List of Known Issues of Secure Hardware Extensions（安全硬件扩展已知问题清单）; target `foundation/security/tr_list_of_known_issues_secure_hardware_extensions/`; technical report (TR) — prose; no specification items
   - Note: source `Security/AUTOSAR_FO_TR_ListOfKnownIssuesSecureHardwareExtensions.md` — 98 lines, 8 figure refs, no item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation; source body = one 7-issue table (split across 3 PDF page-fragment tables by the converter → merged into one table) + the errata sheet's "Figure 1" corrected boot flow chart (referenced by issue 4); doc-meta chrome (cover/status/change-history tables, Disclaimer) dropped per EXP precedent; source has no numbered chapters — article carries a single unnumbered-level `## 已知问题清单` mirroring the document title
+  - Note: figures — 8 refs: 1 content diagram (382 KB, unique hash) embedded as `Figure1.png` with the issue-4 reference wording as alt text; 7 chrome refs (~13–15 KB, 2 recurring hashes) dropped
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (269 nav targets, 0 broken); `gen_api_list.py --check` up to date; link census: 0 identifier mentions, 0 chapter-number refs, 2 参见-type report-only lines, 0 citations, 0 cross-article mentions; no external URLs
+  - Note: Phase B (2026-11-05) — coverage: issues table (rows 1–7, cell values/positions mirror the source table incl. the merged page-fragment rows) + Figure 1 embed; deliberate omissions: doc-meta chrome + Disclaimer (dropped per EXP precedent) — user to verify; severity terms rendered 勘误（**erratum**）/ 细化说明（**detailing**）/ 修正（**amendment**）, command/error identifiers verbatim
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [x] exp_system_health_monitoring (AUTOSAR_FO_EXP_SystemHealthMonitoring · HealthMonitoring · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Explanation of System Health Monitoring（系统健康监控说明）; target `foundation/health_monitoring/exp_system_health_monitoring/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)

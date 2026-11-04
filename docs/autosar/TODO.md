@@ -340,7 +340,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 - ✅ Requirements on Firewall（防火墙需求） — AUTOSAR_FO_RS_Firewall (`foundation/security/rs_firewall/`)
 - ✅ Requirements on Intrusion Detection System（入侵检测系统需求） — AUTOSAR_FO_RS_IntrusionDetectionSystem (`foundation/security/rs_intrusion_detection_system/`)
-- ❌ List of Known Issues of Secure Hardware Extensions（安全硬件扩展已知问题清单） — AUTOSAR_FO_TR_ListOfKnownIssuesSecureHardwareExtensions (`foundation/security/`)
+- ✅ [List of Known Issues of Secure Hardware Extensions（安全硬件扩展已知问题清单）](foundation/security/tr_list_of_known_issues_secure_hardware_extensions/) — AUTOSAR_FO_TR_ListOfKnownIssuesSecureHardwareExtensions (R23-11; TR, skeleton-exempt; 7-issue table + the errata sheet's Figure 1 corrected boot flow chart; 2026-11-05)
 - ❌ Specification of Secure Hardware Extensions（安全硬件扩展规范） — AUTOSAR_FO_TR_SecureHardwareExtensions (`foundation/security/`)
 
 ### foundation/system_services (System Services)

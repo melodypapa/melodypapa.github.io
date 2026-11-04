@@ -507,6 +507,7 @@ nav:
         - autosar/foundation/security/index.md
         - "IDS": autosar/foundation/security/rs_intrusion_detection_system/index.md
         - "Firewall": autosar/foundation/security/rs_firewall/index.md
+        - autosar/foundation/security/tr_list_of_known_issues_secure_hardware_extensions/index.md
       - 系统服务:
         - autosar/foundation/system_services/index.md
   - EB Tresos:
