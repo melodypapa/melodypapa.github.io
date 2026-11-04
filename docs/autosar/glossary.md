@@ -536,6 +536,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR NVM（非易失性存储管理器）](cp/memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
 {: .glossary-source}
 
+**BER**
+> 误码率（**Bit Error Rate**）——字节流中被损坏比特的比率，例如 1e-5。
+>
+> 来源：[Requirements on E2E（端到端通信保护需求）](foundation/communication_management/rs_e2e/index.md)（AUTOSAR_FO_RS_E2E）
+{: .glossary-source}
+
 **Binary Manifest**
 > 软件集群的二进制对象的定义良好的接口，提供资源的元信息与访问此类资源的句柄（**Binary Manifest**）
 >
@@ -1830,6 +1836,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 端到端保护（**End-To-End Protection**）。
 >
 > 来源：[E2E Transformer (E2E转换器)](cp/communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）
+{: .glossary-source}
+
+**E2E Profile**
+> 作为特定通信栈的高效解决方案的一组组合 **E2E** 措施（**A set of combined E2E measures as efficient solution for a particular communication stack**）。
+>
+> 来源：[Requirements on E2E（端到端通信保护需求）](foundation/communication_management/rs_e2e/index.md)（AUTOSAR_FO_RS_E2E）
 {: .glossary-source}
 
 **EA**

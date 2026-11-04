@@ -144,12 +144,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Requirements on E2E（端到端通信保护需求）; target `foundation/communication_management/rs_e2e/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `CommunicationManagement/AUTOSAR_FO_RS_E2E.md` — 689 lines, 30 figure refs, 55 item IDs
   - Note: related site content: cp/communication/e2e_transformer (E2EXf) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 30 figure refs are page-decoration chrome, 0 content figures; 21 requirement items get sequential §5.x.y numbering (IDs + {DRAFT} dropped); source ch.5 Requirements tracing omitted per ASWS precedent AND source ch.7 Moved Requirements (SRS→RS ID-mapping table, both columns IDs) omitted under the same decision — both flagged for user verification; renumber 6→5, 8→6; the garbled §4.3.1 protection-principles numbered list reconstructed to its true nested structure from the R23-11 PDF (footnote 1 kept as blockquote); §4.1's 11-row communication-fault table as GFM; glossary: 2 new entries (E2E Profile, BER); E2E itself has 7 homonym glossary entries — source-append skipped as ambiguous (decision recorded)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_intrusion_detection_system (AUTOSAR_FO_RS_IntrusionDetectionSystem · Security · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Intrusion Detection System（入侵检测系统需求）; target `foundation/security/rs_intrusion_detection_system/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Security/AUTOSAR_FO_RS_IntrusionDetectionSystem.md` — 725 lines, 27 figure refs, 26 item IDs

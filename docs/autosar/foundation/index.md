@@ -12,6 +12,7 @@ title: "基础标准（Foundation）"
 * [通信管理（Communication Management）](communication_management/index.md)
   * [Requirements on IEEE1722（IEEE 1722 需求）](communication_management/rs_ieee1722/index.md)
   * [Requirements on Debug Trace Profile（调试跟踪配置文件需求）](communication_management/rs_debug_trace_profile/index.md)
+  * [Requirements on E2E（端到端通信保护需求）](communication_management/rs_e2e/index.md)
 * [诊断（Diagnostics）](diagnostics/index.md)
 * [健康监控（Health Monitoring）](health_monitoring/index.md)
   * [Explanation of System Health Monitoring（系统健康监控说明）](health_monitoring/exp_system_health_monitoring/index.md)
