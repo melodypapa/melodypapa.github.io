@@ -306,7 +306,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ✅ Abstract Platform Specification（抽象平台规范） — AUTOSAR_FO_TPS_AbstractPlatformSpecification (`foundation/methodology_templates/tps_abstract_platform_specification/`)
 - ❌ Feature Model Exchange Format（特征模型交换格式） — AUTOSAR_FO_TPS_FeatureModelExchangeFormat (`foundation/methodology_templates/`)
 - ❌ Generic Structure Template（通用结构模板） — AUTOSAR_FO_TPS_GenericStructureTemplate (`foundation/methodology_templates/`)
-- ❌ Log and Trace Extract Template（日志与跟踪提取模板） — AUTOSAR_FO_TPS_LogAndTraceExtract (`foundation/methodology_templates/`)
+- ✅ [Log and Trace Extract Template（日志与跟踪提取模板）](foundation/methodology_templates/tps_log_and_trace_extract/) — AUTOSAR_FO_TPS_LogAndTraceExtract (R23-11; TPS, skeleton-exempt; ch.1–3 (DltEcu/DltMessage class tables + 16 constraints/items) + annex A history + annex B class tables B.1–B.8 + 2 ARXML listings; 3 content figures; missing item bodies recovered from the corpus PDF (2026-11-05))
 - ❌ Security Extract Template（安全提取模板） — AUTOSAR_FO_TPS_SecurityExtractTemplate (`foundation/methodology_templates/`)
 - ❌ Standardization Template（标准化模板） — AUTOSAR_FO_TPS_StandardizationTemplate (`foundation/methodology_templates/`)
 - ❌ XML Schema Production Rules（XML 模式生成规则） — AUTOSAR_FO_TPS_XMLSchemaProductionRules (`foundation/methodology_templates/`)

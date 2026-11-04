@@ -132,15 +132,20 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
   - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] tps_log_and_trace_extract (AUTOSAR_FO_TPS_LogAndTraceExtract · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [ ] tps_log_and_trace_extract (AUTOSAR_FO_TPS_LogAndTraceExtract · MethodologyAndTemplates · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Log and Trace Extract Template（日志与跟踪提取模板）; target `foundation/methodology_templates/tps_log_and_trace_extract/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_TPS_LogAndTraceExtract.md` — 837 lines, 38 figure refs, 14 item IDs
   - Note: related site content: cp/communication/diagnostic_log_and_trace (Dlt) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–3 + annex A (3 release histories) + annex B (8 class tables); **R23-11 markdown conversion is missing the bodies of TPS_DLTXT_00009–00014 and constr_5098/5302/5303/5304 (they exist only in annex A's ID tables) — recovered from the corpus PDF pages 9/13–16 via pymupdf (ASWS formula-recovery precedent) and translated; recovery noted in the provenance comment**
+  - Note: technical shape — 7 class tables in the TPS two-table form (属性|值 + 属性|类型|多重性|种类|备注, Table 2.1–2.3/3.1–3.4 + annex B.1–B.8); 14 spec items + 17 constraints as bold-titled prose (IDs dropped per 2026-11-03 decision; prose-named IDs constr_5302/constr_5364/TPS_DLTXT_00002/TPS_DLTXT_00008/TPS_SWCT_01845 kept per TPS_APSD precedent); constr_5363/5364/5098 attribute-usage matrices as GFM tables; ARXML Listings 3.1/3.2 reconstructed readable from garbled fragments
+  - Note: figures — 38 refs → 3 content diagrams (Figure 1.1 methodological placement, Figure 2.1 DltEcu modeling, Figure 3.1 DltMessage modeling) embedded; 35 chrome dropped
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (275 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/glyph/`⌈⌋`
+  - Note: Phase B (2026-11-05) — coverage ch.1→§1, 1.1→§1.1, ch.2→§2, ch.3→§3, A.1–A.3→§A (heading-column tables per annex-F decision), B.1–B.8→§B, trailing 参考文献 (ref-1..5); 9 citations + 2 chapter refs linked via --apply, idempotent; deliberate omissions: doc-meta chrome + Disclaimer + Contents — user to verify
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp_safety_overview (AUTOSAR_FO_EXP_SafetyOverview · General · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Safety Overview（功能安全概览）; target `foundation/general/exp_safety_overview/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)
