@@ -28,6 +28,7 @@ title: "ARM Cortex"
 8. [系统控制（System Control）](m7_processor/system_control/index.md)
 9. [初始化（Initialization）](m7_processor/initialization/index.md)
 10. [内存保护单元（Memory Protection Unit）](m7_processor/mpu/index.md)
+11. [浮点单元（Floating Point Unit）](m7_processor/fpu/index.md)
 
 ## ARM Cortex R52+ 处理器
 
