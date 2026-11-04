@@ -12,6 +12,7 @@ title: "基础标准（Foundation）"
   * [Project Objectives（项目目标）](general/rs_project_objectives/index.md)
   * [Security Overview（信息安全概览）](general/exp_security_overview/index.md)
   * [Explanation of Software Architectural Decisions（软件架构决策说明）](general/exp_sw_architectural_decisions/index.md)
+  * [Safety Overview（功能安全概览）](general/exp_safety_overview/index.md)
 * [通信管理（Communication Management）](communication_management/index.md)
   * [Explanation of Time Sensitive Networking Features（时间敏感网络特性说明）](communication_management/exp_time_sensitive_network_features/index.md)
   * [Requirements on IEEE1722（IEEE 1722 需求）](communication_management/rs_ieee1722/index.md)

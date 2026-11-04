@@ -269,7 +269,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 - ✅ [TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/) — AUTOSAR_FO_TR_Glossary (R23-11; guide-type article, STANDARD.md §7 exempt; **complete** — ch.1–4 + trailing 参考文献 registry (ref-1..50, 177 citation links); ch.4 术语定义 343/343 terms with 8 content figures; terms flowed into glossary.md (2026-11-05 tranche; +313 entries — 30 same-named terms already carried definitions from other docs, left unmerged as user decisions))
 - ✅ [Explanation of Software Architectural Decisions（软件架构决策说明）](foundation/general/exp_sw_architectural_decisions/) — AUTOSAR_FO_EXP_SWArchitecturalDecisions (R23-11; EXP guide, skeleton-exempt; ch.1–5 with 29 architectural decisions (5.1 common ×1, 5.2 AP ×24, 5.3 CP ×4) as 11-field tables; 2026-11-05)
-- ❌ Safety Overview（功能安全概览） — AUTOSAR_FO_EXP_SafetyOverview (`foundation/general/`)
+- ✅ [Safety Overview（功能安全概览）](foundation/general/exp_safety_overview/) — AUTOSAR_FO_EXP_SafetyOverview (R23-11; EXP guide, skeleton-exempt; 已知限制 + ch.1–6 + annexes A/B (28 acronyms + 7 glossary terms); 9 content figures embedded; 2026-11-05)
 - ✅ [Security Overview（信息安全概览）](foundation/general/exp_security_overview/) — AUTOSAR_FO_EXP_SecurityOverview (R23-11; EXP guide, skeleton-exempt; ch.1–4 (§4.1 PRE: memory-corruption attacks, secure coding, 4 attack classes, DEP/SSP/ASLR/CFI/CPI/PointerAuth solutions with 10 tables, isolation); Figure 4.1 embedded; footnotes as <sup>N</sup>+blockquote (14–17/27–35 texts lost in source conversion — markers dropped); 2026-11-05)
 - ❌ Main Requirements（主需求规范） — AUTOSAR_FO_RS_Main (`foundation/general/`)
 - ❌ Project Objectives（项目目标） — AUTOSAR_FO_RS_ProjectObjectives (`foundation/general/`)

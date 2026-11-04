@@ -147,15 +147,20 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
   - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp_safety_overview (AUTOSAR_FO_EXP_SafetyOverview · General · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [ ] exp_safety_overview (AUTOSAR_FO_EXP_SafetyOverview · General · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Safety Overview（功能安全概览）; target `foundation/general/exp_safety_overview/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)
   - Note: source `General/AUTOSAR_FO_EXP_SafetyOverview.md` — 862 lines, 50 figure refs, 6 item IDs
   - Note: related site content: cp/safety/functional_safety_measures (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation: unnumbered Known Limitations (before §1, EcuM precedent, 5 sub-sections) + ch.1–6 + annex A (28 abbreviations) + annex B (7 glossary terms); List of Figures dropped as doc-meta
+  - Note: technical shape — RS_SAF/SUC/TLF/RS_SAF_1xxxx/SWS_CORE_00023 references kept as source-named citations (TPS_APSD precedent); §5.1 items as bold-titled requirements; 表5.2 two-header rows collapsed to one header (Use-Case|Failure|Safety Requirement|4 quality-attribute columns); §6.2.3–6.2.7 reconstructed from flattened markdown (they existed as plain text lines); 清单5.1 ASIL XML example as fenced block
+  - Note: figures — 50 refs → 9 content diagrams (Figure 1, 1.1, 1.2, 1.3, 2.2, 3.3, 3.4, 3.5, 3.6) embedded with source captions as alt text; 41 chrome dropped
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (276 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/glyph
+  - Note: Phase B (2026-11-05) — coverage 已知限制→§, ch.1→§1 … 6.2.7→§6.2.7, A→§A, B→§B, trailing 参考文献 (ref-1..18); 36 citations + 5 chapter refs linked via --apply, idempotent; URL audit: registry URLs (iso.org 403 anti-bot kept per precedent; wikipedia/doi/ieee/opengroup/autosar.org — source-authoritative, sandbox-blocked 000s kept); deliberate omissions: doc-meta chrome + Disclaimer + Contents + List of Figures — user to verify
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] tps_arxml_serialization_rules (AUTOSAR_FO_TPS_ARXMLSerializationRules · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: ARXML Serialization Rules（ARXML 序列化规则）; target `foundation/methodology_templates/tps_arxml_serialization_rules/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
