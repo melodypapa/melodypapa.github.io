@@ -16,12 +16,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 - [ ] rs_project_objectives (AUTOSAR_FO_RS_ProjectObjectives · General · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Project Objectives（项目目标）; target `foundation/general/rs_project_objectives/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `General/AUTOSAR_FO_RS_ProjectObjectives.md` — 288 lines, 16 figure refs, 26 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 16 figure refs are page-decoration chrome (345x36 recurring + 20px glyphs), 0 content figures embedded; item-ID decision applied (headings translated, IDs dropped; §3.5 garbled Rationale/Use-Case cells recovered from the R23-11 PDF); Dependencies cells rewritten as intra-article §3.x links (ID refs dropped per batch decision); constraint ref TPS_STDT_00078 kept unbracketed (hygiene); no new glossary terms (OEM/ECU/AUTOSAR/SOTIF all present)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05: commit per row without confirmation, single confirmation at end)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_ieee1722 (AUTOSAR_FO_RS_IEEE1722 · CommunicationManagement · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on IEEE 1722（IEEE 1722 需求）; target `foundation/communication_management/rs_ieee1722/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `CommunicationManagement/AUTOSAR_FO_RS_IEEE1722.md` — 473 lines, 21 figure refs, 1 item IDs

@@ -8,6 +8,7 @@ title: "基础标准（Foundation）"
 
 * [通用（General）](general/index.md)
   * [TR Glossary（AUTOSAR 术语表）](general/tr_glossary/index.md)
+  * [Project Objectives（项目目标）](general/rs_project_objectives/index.md)
 * [通信管理（Communication Management）](communication_management/index.md)
 * [诊断（Diagnostics）](diagnostics/index.md)
 * [健康监控（Health Monitoring）](health_monitoring/index.md)

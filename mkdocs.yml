@@ -454,6 +454,7 @@ nav:
       - 通用:
         - autosar/foundation/general/index.md
         - "TR Glossary": autosar/foundation/general/tr_glossary/index.md
+        - "Project Objectives": autosar/foundation/general/rs_project_objectives/index.md
       - 通信管理:
         - autosar/foundation/communication_management/index.md
       - 诊断:
