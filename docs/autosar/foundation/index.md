@@ -18,6 +18,7 @@ title: "基础标准（Foundation）"
   * [Specification of Health Monitoring（健康监控规范）](health_monitoring/asws_health_monitoring/index.md)
 * [方法论与模板（Methodology and Templates）](methodology_templates/index.md)
   * [Specification of Abstract Platform（抽象平台规范）](methodology_templates/tps_abstract_platform_specification/index.md)
+  * [Requirements on Security Extract Template（安全提取模板需求）](methodology_templates/rs_security_extract_template/index.md)
 * [协议（Protocols）](protocols/index.md)
   * [Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）](protocols/rs_someip_service_discovery_protocol/index.md)
   * [V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](protocols/prs_v2x_remote_access_layer/index.md)

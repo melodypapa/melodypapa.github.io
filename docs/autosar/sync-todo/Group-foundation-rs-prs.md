@@ -85,12 +85,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 - [ ] rs_security_extract_template (AUTOSAR_FO_RS_SecurityExtractTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Security Extract Template（安全提取模板需求）; target `foundation/methodology_templates/rs_security_extract_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_RS_SecurityExtractTemplate.md` — 516 lines, 20 figure refs, 52 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 20 figure refs are page-decoration chrome, 0 content figures; item-ID decision applied (22 requirement items get sequential §2.1.1–2.3.4 numbering; item 00001 had lost heading level in the markdown conversion — restored); the source References chapter is an UNNUMBERED pre-chapter (before ch.1) — mirrored as unnumbered ## 参考文献 with ref anchors; §1.4 Requirements Tracing omitted per ASWS precedent (no renumbering needed — a subsection, not a chapter); appendix A carries three release sections (R20-11 with a 7-row Added table of historical item titles, R22-11/R23-11 all none); glossary: IdsM gained this document as additional source, 4 new (IDS, SIEM, SOC, Security Event)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_feature_model_exchange_format (AUTOSAR_FO_RS_FeatureModelExchangeFormat · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Feature Model Exchange Format（特征模型交换格式需求）; target `foundation/methodology_templates/rs_feature_model_exchange_format/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_RS_FeatureModelExchangeFormat.md` — 571 lines, 24 figure refs, 34 item IDs

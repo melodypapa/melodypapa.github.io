@@ -4,7 +4,7 @@
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
 > Layout (2026-11-02): CP articles live under `cp/<section>/`, Foundation under `foundation/<topic>/`; article links below are relative to `docs/autosar/`.
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-05 (Foundation rs-prs batch: Project Objectives (RS) + IEEE1722 (RS) + Debug Trace Profile (RS) + SOME/IP-SD (RS) + V2X Remote Access Layer (PRS) + IPsec (RS) new-article translations; 2026-11-04: Foundation methodology_templates: Abstract Platform Specification (TPS) new-article translation; 2026-11-03: Foundation health_monitoring: ASWS Health Monitoring new-article translation (EXP System Health Monitoring earlier the same day); libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-05 (Foundation rs-prs batch: Project Objectives (RS) + IEEE1722 (RS) + Debug Trace Profile (RS) + SOME/IP-SD (RS) + V2X Remote Access Layer (PRS) + IPsec (RS) + Security Extract Template (RS) new-article translations; 2026-11-04: Foundation methodology_templates: Abstract Platform Specification (TPS) new-article translation; 2026-11-03: Foundation health_monitoring: ASWS Health Monitoring new-article translation (EXP System Health Monitoring earlier the same day); libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
 
 ## Backlog
 
@@ -297,7 +297,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 - ❌ Requirements on Feature Model Exchange Format（特征模型交换格式需求） — AUTOSAR_FO_RS_FeatureModelExchangeFormat (`foundation/methodology_templates/`)
 - ❌ Requirements on Methodology（方法论需求） — AUTOSAR_FO_RS_Methodology (`foundation/methodology_templates/`)
-- ❌ Requirements on Security Extract Template（安全提取模板需求） — AUTOSAR_FO_RS_SecurityExtractTemplate (`foundation/methodology_templates/`)
+- ✅ Requirements on Security Extract Template（安全提取模板需求） — AUTOSAR_FO_RS_SecurityExtractTemplate (`foundation/methodology_templates/rs_security_extract_template/`)
 - ❌ Requirements on Standardization Template（标准化模板需求） — AUTOSAR_FO_RS_StandardizationTemplate (`foundation/methodology_templates/`)
 - ❌ Requirements on Timing Extensions（时序扩展需求） — AUTOSAR_FO_RS_TimingExtensions (`foundation/methodology_templates/`)
 - ❌ ARXML Serialization Rules（ARXML 序列化规则） — AUTOSAR_FO_TPS_ARXMLSerializationRules (`foundation/methodology_templates/`)
