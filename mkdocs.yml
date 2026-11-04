@@ -458,6 +458,7 @@ nav:
       - 通信管理:
         - autosar/foundation/communication_management/index.md
         - "IEEE 1722": autosar/foundation/communication_management/rs_ieee1722/index.md
+        - "Debug Trace Profile": autosar/foundation/communication_management/rs_debug_trace_profile/index.md
       - 诊断:
         - autosar/foundation/diagnostics/index.md
       - 健康监控:

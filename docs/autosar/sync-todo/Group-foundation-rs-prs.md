@@ -39,12 +39,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 - [ ] rs_debug_trace_profile (AUTOSAR_FO_RS_DebugTraceProfile · CommunicationManagement · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Debug Trace Profile（调试跟踪配置文件需求）; target `foundation/communication_management/rs_debug_trace_profile/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `CommunicationManagement/AUTOSAR_FO_RS_DebugTraceProfile.md` — 475 lines, 18 figure refs, 44 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 18 figure refs are page-decoration chrome, 0 content figures; item-ID decision applied (19 requirement items get sequential §4.2.1–4.4.6 numbering; the 00019 heading had lost its heading level in the markdown conversion — restored); source ch.5 Requirements Tracing omitted per ASWS precedent (References renumbered 6→5); §4.5 Non-Functional Requirements (Qualities) is "No content." → omitted under the placeholder rule (USER: verify); §2.2 carries a real "Not applicable yet" statement + subsection list → translated, NOT omitted; garbled cells of items 00001/00002/00008/00016 and the §4.1 functional-element list recovered from the R23-11 PDF; dependency RS_ARTIFO_00014 → §4.4.1 links; glossary: ARTI + OS entries gained this document as additional source
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_someip_service_discovery_protocol (AUTOSAR_FO_RS_SOMEIPServiceDiscoveryProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）; target `foundation/protocols/rs_someip_service_discovery_protocol/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Protocols/AUTOSAR_FO_RS_SOMEIPServiceDiscoveryProtocol.md` — 511 lines, 23 figure refs, 70 item IDs

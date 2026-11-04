@@ -363,7 +363,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ARTI**
 > AUTOSAR 运行时接口——用于调试与跟踪嵌入式系统运行时行为的一组标准（**AUTOSAR Run-Time Interface**）
 >
-> 来源：[ARTI（AUTOSAR 运行时接口）](cp/sw_arch/arti/index.md)（AUTOSAR_CP_EXP_ARTI）
+> 来源：[ARTI（AUTOSAR 运行时接口）](cp/sw_arch/arti/index.md)（AUTOSAR_CP_EXP_ARTI）、[Requirements on Debug Trace Profile（调试跟踪配置文件需求）](foundation/communication_management/rs_debug_trace_profile/index.md)（AUTOSAR_FO_RS_DebugTraceProfile）
 {: .glossary-source}
 
 **arxml**
@@ -4478,7 +4478,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **OS**
 > 操作系统（**Operating System**）
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）、[Requirements on Debug Trace Profile（调试跟踪配置文件需求）](foundation/communication_management/rs_debug_trace_profile/index.md)（AUTOSAR_FO_RS_DebugTraceProfile）
 {: .glossary-source}
 
 **OSEK/VDX**

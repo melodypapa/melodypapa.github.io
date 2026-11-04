@@ -4,7 +4,7 @@
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
 > Layout (2026-11-02): CP articles live under `cp/<section>/`, Foundation under `foundation/<topic>/`; article links below are relative to `docs/autosar/`.
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-05 (Foundation rs-prs batch: Project Objectives (RS) + Requirements on IEEE1722 (RS) new-article translations; 2026-11-04: Foundation methodology_templates: Abstract Platform Specification (TPS) new-article translation; 2026-11-03: Foundation health_monitoring: ASWS Health Monitoring new-article translation (EXP System Health Monitoring earlier the same day); libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-05 (Foundation rs-prs batch: Project Objectives (RS) + Requirements on IEEE1722 (RS) + Requirements on Debug Trace Profile (RS) new-article translations; 2026-11-04: Foundation methodology_templates: Abstract Platform Specification (TPS) new-article translation; 2026-11-03: Foundation health_monitoring: ASWS Health Monitoring new-article translation (EXP System Health Monitoring earlier the same day); libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
 
 ## Backlog
 
@@ -276,7 +276,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 ### foundation/communication_management (Communication Management)
 
 - ❌ Explanation of Time Sensitive Networking Features（时间敏感网络特性说明） — AUTOSAR_FO_EXP_TimeSensitiveNetworkFeatures (`foundation/communication_management/`)
-- ❌ Requirements on Debug Trace Profile（调试跟踪配置文件需求） — AUTOSAR_FO_RS_DebugTraceProfile (`foundation/communication_management/`)
+- ✅ Requirements on Debug Trace Profile（调试跟踪配置文件需求） — AUTOSAR_FO_RS_DebugTraceProfile (`foundation/communication_management/rs_debug_trace_profile/`)
 - ❌ Requirements on E2E（端到端通信保护需求） — AUTOSAR_FO_RS_E2E (`foundation/communication_management/`)
 - ❌ Requirements on IEEE 1722（IEEE 1722 需求） — AUTOSAR_FO_RS_IEEE1722 (`foundation/communication_management/`)
 - ❌ Requirements on Log and Trace（日志与跟踪需求） — AUTOSAR_FO_RS_LogAndTrace (`foundation/communication_management/`)
