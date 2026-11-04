@@ -243,6 +243,7 @@ nav:
       - "ARM架构的内存模式": cortex/m7_processor/arm_architecture_memory_mode/index.md
       - "ARM 异常模型": cortex/m7_processor/exception_model/index.md
       - "Cortex-M7 指令集": cortex/m7_processor/instruction_set/index.md
+      - "初始化": cortex/m7_processor/initialization/index.md
       - "嵌套向量中断控制器": cortex/m7_processor/nested_vectored_interrupt_controller/index.md
       - "Cortex-M7 程序状态寄存器": cortex/m7_processor/program_status_register/index.md
       - "ARM Cortex MPU 内存保护单元": cortex/m7_processor/protected_memory_system_archi_pmsav7/index.md

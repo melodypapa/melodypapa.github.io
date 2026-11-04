@@ -26,6 +26,7 @@ title: "ARM Cortex"
 6. [ARM Cortex-M7 程序状态寄存器](m7_processor/program_status_register/index.md)
 7. [嵌套向量中断控制器（NVIC）](m7_processor/nested_vectored_interrupt_controller/index.md)
 8. [系统控制（System Control）](m7_processor/system_control/index.md)
+9. [初始化（Initialization）](m7_processor/initialization/index.md)
 
 ## ARM Cortex R52+ 处理器
 
