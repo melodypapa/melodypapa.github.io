@@ -132,12 +132,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Network Management Protocol Specification（网络管理协议规范）; target `foundation/protocols/prs_network_management_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_NetworkManagementProtocol.md` — 663 lines, 31 figure refs, 56 item IDs
   - Note: related site content: cp/communication/nm, cp/communication/can_network_management, cp/communication/udp_network_management (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — 3 of 31 figure refs are content figures (Figure1-1 NM interfaces, Figure5-1 communication request, Figure5-2 communication release), embedded by source figure number; sequence-diagram label spill dropped; 25 inline protocol items translated as prose paragraphs (IDs + {DRAFT} dropped); source ch.3 Protocol Requirements (traceability only) omitted per ASWS precedent (4→3 … 8→7); §1.3.2 "N/A" placeholder omitted (1.3.3→1.3.2); bracketed config-param mentions ([NmMessageLength] etc.) → code spans; appendix A.1.1/A.1.2 tables carry EMPTY heading columns → rendered as counts (added 3 / changed 2 / deleted 0), same run decision as the SecOC row; glossary: 5 existing entries gained this document as additional source, 3 new (Network Mode, PNC Gateway, Repeat Message State)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_e2e (AUTOSAR_FO_RS_E2E · CommunicationManagement · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on E2E（端到端通信保护需求）; target `foundation/communication_management/rs_e2e/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `CommunicationManagement/AUTOSAR_FO_RS_E2E.md` — 689 lines, 30 figure refs, 55 item IDs

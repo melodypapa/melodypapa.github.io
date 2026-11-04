@@ -919,7 +919,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CBV**
 > 控制位向量（**Control Bit Vector**）
 >
-> 来源：[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[Network Management Protocol Specification（网络管理协议规范）](foundation/protocols/prs_network_management_protocol/index.md)（AUTOSAR_FO_PRS_NetworkManagementProtocol）
 {: .glossary-source}
 
 **CC**
@@ -4191,6 +4191,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
 {: .glossary-source}
 
+**Network Mode**
+> 网络模式——网络被请求或处于活动状态的 **NM** 状态。
+>
+> 来源：[Network Management Protocol Specification（网络管理协议规范）](foundation/protocols/prs_network_management_protocol/index.md)（AUTOSAR_FO_PRS_NetworkManagementProtocol）
+{: .glossary-source}
+
 **NIT**
 > FlexRay 网络空闲时间（**FlexRay Network Idle Time**）。
 >
@@ -4200,7 +4206,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **NM**
 > 网络管理（**Network Management**）
 >
-> 来源：[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[Network Management Protocol Specification（网络管理协议规范）](foundation/protocols/prs_network_management_protocol/index.md)（AUTOSAR_FO_PRS_NetworkManagementProtocol）
 {: .glossary-source}
 
 **Nm**
@@ -4894,7 +4900,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **PNC**
 > 部分网络集群（**Partial Network Cluster**）。一组系统信号，用于支持分布在车辆网络多个 ECU 上的一个或多个车辆功能；表示把一组总线映射到一个或多个虚拟功能集群（VFC）的系统视图。
 >
-> 来源：[Layered Software Architecture（分层软件架构）](cp/general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+> 来源：[Layered Software Architecture（分层软件架构）](cp/general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[Network Management Protocol Specification（网络管理协议规范）](foundation/protocols/prs_network_management_protocol/index.md)（AUTOSAR_FO_PRS_NetworkManagementProtocol）
 {: .glossary-source}
 
 **PNC bit**
@@ -4915,6 +4921,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
 {: .glossary-source}
 
+**PNC Gateway**
+> **PNC** 网关——跨总线/通信信道边界跨越（逻辑）部分网络集群、转发 **PNC** 请求的网关功能。
+>
+> 来源：[Network Management Protocol Specification（网络管理协议规范）](foundation/protocols/prs_network_management_protocol/index.md)（AUTOSAR_FO_PRS_NetworkManagementProtocol）
+{: .glossary-source}
+
 **PNC leaf node**
 > PNC叶节点是既不充当顶层PNC协调器也不充当中间PNC协调器的ECU。它在网络中充当没有PNC网关的ECU，并将PN关闭消息作为普通NM消息处理。
 >
@@ -4930,19 +4942,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **PNI**
 > 部分网络信息（**Partial Network Information**）
 >
-> 来源：[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[Network Management Protocol Specification（网络管理协议规范）](foundation/protocols/prs_network_management_protocol/index.md)（AUTOSAR_FO_PRS_NetworkManagementProtocol）
 {: .glossary-source}
 
 **PNL**
 > 部分网络学习（**Partial Network Learning**）
 >
-> 来源：[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[Network Management Protocol Specification（网络管理协议规范）](foundation/protocols/prs_network_management_protocol/index.md)（AUTOSAR_FO_PRS_NetworkManagementProtocol）
 {: .glossary-source}
 
 **PN关闭消息**（**PN shutdown message**）
 > 顶级PNC协调器传输PN关闭消息以指示跨PN拓扑的同步PNC关闭。PN关闭消息是作为**NM**消息，它在控制位向量中具有**PNSR**位，并且所有被指示用于同步关闭的PNC都设置为**1**
 >
-> 来源：[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[Network Management Protocol Specification（网络管理协议规范）](foundation/protocols/prs_network_management_protocol/index.md)（AUTOSAR_FO_PRS_NetworkManagementProtocol）
 {: .glossary-source}
 
 **POC**
@@ -5155,6 +5167,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 评估由于不确定性而对系统的可信程度。
 >
 > 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+{: .glossary-source}
+
+**Repeat Message State**
+> 重复消息状态——通过重复传输 **NM** 消息确保向正常运行转换对总线上其他节点可见的 **NM** 状态。
+>
+> 来源：[Network Management Protocol Specification（网络管理协议规范）](foundation/protocols/prs_network_management_protocol/index.md)（AUTOSAR_FO_PRS_NetworkManagementProtocol）
 {: .glossary-source}
 
 **Request**

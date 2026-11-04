@@ -4,7 +4,7 @@
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
 > Layout (2026-11-02): CP articles live under `cp/<section>/`, Foundation under `foundation/<topic>/`; article links below are relative to `docs/autosar/`.
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-05 (Foundation rs-prs batch: Project Objectives (RS) + IEEE1722 (RS) + Debug Trace Profile (RS) + SOME/IP-SD (RS) + V2X Remote Access Layer (PRS) + IPsec (RS) + Security Extract Template (RS) + Feature Model Exchange Format (RS) + SecOc (PRS) + DDS (RS) new-article translations; 2026-11-04: Foundation methodology_templates: Abstract Platform Specification (TPS) new-article translation; 2026-11-03: Foundation health_monitoring: ASWS Health Monitoring new-article translation (EXP System Health Monitoring earlier the same day); libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-05 (Foundation rs-prs batch: Project Objectives (RS) + IEEE1722 (RS) + Debug Trace Profile (RS) + SOME/IP-SD (RS) + V2X Remote Access Layer (PRS) + IPsec (RS) + Security Extract Template (RS) + Feature Model Exchange Format (RS) + SecOc (PRS) + DDS (RS) + NM Protocol (PRS) new-article translations; 2026-11-04: Foundation methodology_templates: Abstract Platform Specification (TPS) new-article translation; 2026-11-03: Foundation health_monitoring: ASWS Health Monitoring new-article translation (EXP System Health Monitoring earlier the same day); libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
 
 ## Backlog
 
@@ -314,7 +314,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ❌ E2E Protocol Specification（端到端协议规范） — AUTOSAR_FO_PRS_E2EProtocol (`foundation/protocols/`)
 - ❌ Intrusion Detection System Protocol Specification（入侵检测系统协议规范） — AUTOSAR_FO_PRS_IntrusionDetectionSystem (`foundation/protocols/`)
 - ❌ Log and Trace Protocol Specification（日志与跟踪协议规范） — AUTOSAR_FO_PRS_LogAndTraceProtocol (`foundation/protocols/`)
-- ❌ Network Management Protocol Specification（网络管理协议规范） — AUTOSAR_FO_PRS_NetworkManagementProtocol (`foundation/protocols/`)
+- ✅ Network Management Protocol Specification（网络管理协议规范） — AUTOSAR_FO_PRS_NetworkManagementProtocol (`foundation/protocols/prs_network_management_protocol/`)
 - ❌ SOME/IP Protocol Specification（SOME/IP 协议规范） — AUTOSAR_FO_PRS_SOMEIPProtocol (`foundation/protocols/`)
 - ❌ SOME/IP Service Discovery Protocol Specification（SOME/IP 服务发现协议规范） — AUTOSAR_FO_PRS_SOMEIPServiceDiscoveryProtocol (`foundation/protocols/`)
 - ✅ Secure Onboard Communication Protocol Specification（安全车载通信协议规范） — AUTOSAR_FO_PRS_SecOcProtocol (`foundation/protocols/prs_secoc_protocol/`)
