@@ -315,7 +315,7 @@ Status: **0/2** completed
 
 ## Group system_services — system services section
 
-Status: **5/7** completed
+Status: **7/7** completed
 
 | Article                       | Status | Commit ID |
 | ------------------------------ | -------- | ---------- |
@@ -323,9 +323,9 @@ Status: **5/7** completed
 | `function_inhibition_manager`   | [x] Done | 534d5d1099 |
 | `time_service`                  | [x] Done | 5c57d0ae39 |
 | `comm`                          | [x] Done | bcf713dc1e |
-| `swcluc`                        | [ ] Pending | N/A |
-| `hwtestmanager`                 | [ ] Pending | N/A |
+| `swcluc`                        | [x] Done | f1a0b2aacb |
+| `hwtestmanager`                 | [x] Done | 04ea38b015 |
 | `operating_system`              | [x] Done | ca7ecda991 |
 
-**Total: 122/197 queue rows complete.**
+**Total: 124/197 queue rows complete.**
 
