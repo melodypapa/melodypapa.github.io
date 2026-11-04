@@ -6,10 +6,11 @@ title: "信息安全（Security）"
 
 ## 文章
 
-本类别尚无已翻译文章。R23-11 包含以下源文档（待翻译）：
+* [Requirements on Intrusion Detection System（入侵检测系统需求）](rs_intrusion_detection_system/index.md)
+* [Requirements on Firewall（防火墙需求）](rs_firewall/index.md)
 
-* **AUTOSAR_FO_RS_Firewall** — Requirements on Firewall（防火墙需求）
-* **AUTOSAR_FO_RS_IntrusionDetectionSystem** — Requirements on Intrusion Detection System（入侵检测系统需求）
+R23-11 中本类别的其余源文档（待翻译）：
+
 * **AUTOSAR_FO_TR_ListOfKnownIssuesSecureHardwareExtensions** — List of Known Issues of Secure Hardware Extensions（安全硬件扩展已知问题清单）
 * **AUTOSAR_FO_TR_SecureHardwareExtensions** — Specification of Secure Hardware Extensions（安全硬件扩展规范）
 

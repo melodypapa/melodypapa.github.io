@@ -7,6 +7,7 @@ title: "通用（General）"
 ## 文章
 
 * [TR Glossary（AUTOSAR 术语表）](tr_glossary/index.md)
+* [Project Objectives（项目目标）](rs_project_objectives/index.md)
 
 以下源文档尚未翻译：
 
@@ -14,7 +15,6 @@ title: "通用（General）"
 * **AUTOSAR_FO_EXP_SafetyOverview** — Safety Overview（功能安全概览）
 * **AUTOSAR_FO_EXP_SecurityOverview** — Security Overview（信息安全概览）
 * **AUTOSAR_FO_RS_Main** — Main Requirements（主需求规范）
-* **AUTOSAR_FO_RS_ProjectObjectives** — Project Objectives（项目目标）
 * **AUTOSAR_FO_TR_PredefinedNames** — Predefined Names in AUTOSAR（AUTOSAR 预定义名称）
 
 ## 相关内容

@@ -10,124 +10,149 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 > Directory slug = `<type>_<snake_name>` after the `tr_glossary` precedent (`rs_main`, `prs_e2e_protocol`, `tps_generic_structure_template`) — the type prefix disambiguates the same-named RS/PRS pairs (SOMEIPProtocol, SOMEIPServiceDiscoveryProtocol, IntrusionDetectionSystem, TimeSync, SecurityExtractTemplate, StandardizationTemplate, FeatureModelExchangeFormat). The slug is a proposal: an acronym-ambiguous name still goes to the user at Step 1 (mapping.md naming rule). Front-matter `spec:` = `AUTOSAR_FO_<Type>_<Name>`, `release: R23-11`.
 > Row order = source size ascending (index.md rule), except the in-flight TR Glossary row first (exp group only). Sizes are R23-11 markdown line / `![` figure-ref / item-ID counts for planning only.
 
+> Delivery: tracked by issue #273; part 1 (rows 1–20, commits 95d7986…234e015) pushed as PR #274 ("Part of #273"); rows 21–32 follow in a part-2 PR on the same branch.
 > **DECIDED 2026-11-03 (user decision, asked at the first HealthMonitoring run's Step 1) — item IDs are DROPPED, titles translate only, and this applies batch-wide (both this file and Group-foundation-exp's TPS/ASWS rows):** these documents *consist of* identified items (`[RS_Main_00001]`, `[PRS_E2E_00123]`; RS_Main carries 334, PRS_E2EProtocol 1,173). The user chose the Type A no-requirement-ID rule (STANDARD.md §4) and the EXP_VFB precedent over the appendix-B fence precedent: requirement prose translates, the `[<ID>] {DRAFT}` marker is dropped entirely (the `{DRAFT}` flag goes with it). Consequence: a translated RS/PRS/ASWS item cannot be looked up by its standard ID — the queue row Notes record that as an accepted trade-off.
 
 ## Queue
 - [ ] rs_project_objectives (AUTOSAR_FO_RS_ProjectObjectives · General · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Project Objectives（项目目标）; target `foundation/general/rs_project_objectives/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `General/AUTOSAR_FO_RS_ProjectObjectives.md` — 288 lines, 16 figure refs, 26 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 16 figure refs are page-decoration chrome (345x36 recurring + 20px glyphs), 0 content figures embedded; item-ID decision applied (headings translated, IDs dropped; §3.5 garbled Rationale/Use-Case cells recovered from the R23-11 PDF); Dependencies cells rewritten as intra-article §3.x links (ID refs dropped per batch decision); constraint ref TPS_STDT_00078 kept unbracketed (hygiene); no new glossary terms (OEM/ECU/AUTOSAR/SOTIF all present)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05: commit per row without confirmation, single confirmation at end)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_ieee1722 (AUTOSAR_FO_RS_IEEE1722 · CommunicationManagement · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on IEEE 1722（IEEE 1722 需求）; target `foundation/communication_management/rs_ieee1722/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `CommunicationManagement/AUTOSAR_FO_RS_IEEE1722.md` — 473 lines, 21 figure refs, 1 item IDs
   - Note: related site content: CP SWS_IEEE1722Tp queued in Group-communication-2 (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 21 figure refs are page-decoration chrome, 0 content figures; item-ID decision applied (15 requirement items get sequential §4.2.1–4.3.3 numbering); source ch.5 Requirements Tracing = pure ID tracing table → omitted per the ASWS precedent, References renumbered 6→5, per-item RS_Main_00280 back-refs dropped with it; dependency [FO_RS_IEEE1722_00015] → §4.3.3 link; comma-form citations [n, IEEE Std …] stay prose (unconvertible form); glossary: 11 existing entries gained this document as additional source, 5 new entries (ACF_CAN, ACF_CAN_BRIEF, ACF_LIN, TSpec, 61883_IIDC)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_debug_trace_profile (AUTOSAR_FO_RS_DebugTraceProfile · CommunicationManagement · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Debug Trace Profile（调试跟踪配置文件需求）; target `foundation/communication_management/rs_debug_trace_profile/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `CommunicationManagement/AUTOSAR_FO_RS_DebugTraceProfile.md` — 475 lines, 18 figure refs, 44 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 18 figure refs are page-decoration chrome, 0 content figures; item-ID decision applied (19 requirement items get sequential §4.2.1–4.4.6 numbering; the 00019 heading had lost its heading level in the markdown conversion — restored); source ch.5 Requirements Tracing omitted per ASWS precedent (References renumbered 6→5); §4.5 Non-Functional Requirements (Qualities) is "No content." → omitted under the placeholder rule (USER: verify); §2.2 carries a real "Not applicable yet" statement + subsection list → translated, NOT omitted; garbled cells of items 00001/00002/00008/00016 and the §4.1 functional-element list recovered from the R23-11 PDF; dependency RS_ARTIFO_00014 → §4.4.1 links; glossary: ARTI + OS entries gained this document as additional source
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_someip_service_discovery_protocol (AUTOSAR_FO_RS_SOMEIPServiceDiscoveryProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）; target `foundation/protocols/rs_someip_service_discovery_protocol/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Protocols/AUTOSAR_FO_RS_SOMEIPServiceDiscoveryProtocol.md` — 511 lines, 23 figure refs, 70 item IDs
   - Note: related site content: cp/communication/service_discovery (Sd) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — 22 of 23 figure refs are page-decoration chrome; the 1 content-sized image (899x522, 203KB) sits inside the dropped Requirements Tracing chapter as a PDF-table screenshot → omitted with the chapter; item-ID decision applied (25 requirement items get sequential §3.1.1–3.4.3 numbering); source ch.3 Requirements Tracing omitted per ASWS precedent (4→3, 5→4); ch.2 is a 15-row TERMS table (no true acronyms except TTL) → blockquote format; garbled Use-Case/AppliesTo cells of item 00015 recovered; glossary: 12 existing entries gained this document as additional source, 3 new (Notification Event, Offering a service instance, TTL)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_v2x_remote_access_layer (AUTOSAR_FO_PRS_V2XRemoteAccessLayer · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）; target `foundation/protocols/prs_v2x_remote_access_layer/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_V2XRemoteAccessLayer.md` — 512 lines, 25 figure refs, no item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — 2 of 25 figure refs are content figures (Figure2-1 communication setup, Figure6-1 message layout), embedded by source figure number; the rest are page decoration, incl. the §2/§6.1 diagram-label spill dropped as conversion noise; no protocol item IDs existed as headings (10 inline [FO_PRS_V2xRAL_*] items are prose paragraphs, IDs dropped); source ch.4 Requirements Traceability = pure ID tracing table → omitted per ASWS precedent (5→4, 6→5, 7→6, 8→7); appendix B Not Applicable Requirements = droppable NA appendix, omitted; A.1.1's single [FO_PRS_V2xRAL_NA] placeholder row → 无; A.1 heading "compared to R22-11" vs R23-11 subsections is a source quirk kept as-is; message-format tables 6.1-6.3 translated as GFM with the *Dir* footnote as blockquote; glossary: 12 existing entries gained this document as additional source, 6 new (IPC, ITS-G5 merged-duplicate, L2ID, LTE-PC5, LTE-Uu, MDR, PHY, V2xRAL)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_ipsec_protocol (AUTOSAR_FO_RS_IPsecProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on IPsec Protocol（IPsec 协议需求）; target `foundation/protocols/rs_ipsec_protocol/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Protocols/AUTOSAR_FO_RS_IPsecProtocol.md` — 515 lines, 20 figure refs, 108 item IDs
   - Note: related site content: cp/communication/tcpip (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 20 figure refs are page-decoration chrome, 0 content figures; item-ID decision applied (27 requirement items get sequential §4.2.1–4.2.27 numbering; items 00001/00002 had lost heading level in the markdown conversion — restored); source ch.5 Requirements Tracing omitted per ASWS precedent (References renumbered 6→5); the stray page-footer heading "AUTOSAR_CP_RS_Features" after the references is footer noise, dropped; {DRAFT} markers dropped with the IDs; garbled identifier spacing (ENCR_AES_GCM_16 etc.) reconstructed as code spans; "IETF RTF 4301" typo in item 00001 corrected to RFC (heading already says RFC); dependency IDs → intra-article §4.2.x links; glossary: 5 existing entries gained this document as additional source, 8 new (AH, ESP, IKE, IKEv2, PAD, PSK, SA, SAD, SPD — IPsec merged-duplicate)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_security_extract_template (AUTOSAR_FO_RS_SecurityExtractTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Security Extract Template（安全提取模板需求）; target `foundation/methodology_templates/rs_security_extract_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_RS_SecurityExtractTemplate.md` — 516 lines, 20 figure refs, 52 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 20 figure refs are page-decoration chrome, 0 content figures; item-ID decision applied (22 requirement items get sequential §2.1.1–2.3.4 numbering; item 00001 had lost heading level in the markdown conversion — restored); the source References chapter is an UNNUMBERED pre-chapter (before ch.1) — mirrored as unnumbered ## 参考文献 with ref anchors; §1.4 Requirements Tracing omitted per ASWS precedent (no renumbering needed — a subsection, not a chapter); appendix A carries three release sections (R20-11 with a 7-row Added table of historical item titles, R22-11/R23-11 all none); glossary: IdsM gained this document as additional source, 4 new (IDS, SIEM, SOC, Security Event)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_feature_model_exchange_format (AUTOSAR_FO_RS_FeatureModelExchangeFormat · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Feature Model Exchange Format（特征模型交换格式需求）; target `foundation/methodology_templates/rs_feature_model_exchange_format/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_RS_FeatureModelExchangeFormat.md` — 571 lines, 24 figure refs, 34 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — 2 of 24 figure refs are content figures (Figure2-1 restrictions example, Figure2-2 relations example), embedded by source figure number; the feature-tree label spill (garbled glyph lines) dropped as conversion noise; item-ID decision applied (16 use cases → §2.1–2.16, 16 requirements → §3.1–3.16; use-case cross-refs in prose and Use-Case/Dependencies cells → intra-article links); §1.2 Requirements Tracing omitted per ASWS precedent (no chapter renumbering needed); appendix A Glossary (37 methodology meta-model terms) translated in-article as bold-term + blockquote; NOT added to the site glossary — these are meta-model/methodology terms already covered by the TR Glossary article and the TPS methodology articles (recorded as a run decision, USER: verify); appendix B Change History all-none → 无
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_secoc_protocol (AUTOSAR_FO_PRS_SecOcProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Secure Onboard Communication Protocol Specification（安全车载通信协议规范）; target `foundation/protocols/prs_secoc_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_SecOcProtocol.md` — 579 lines, 34 figure refs, 39 item IDs
   - Note: related site content: cp/communication/sec_oc, cp/communication/fvm (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — 3 of 34 figure refs are content figures (Figure5-1 Secured I-PDU contents, Figure5-2 truncation example, Figure5-3 MAC verification), embedded by source figure number; the tracing-table screenshot (899x552) and the rest are decoration; 25 inline protocol items translated as prose paragraphs with IDs dropped; source ch.3 Protocol Requirements (traceability only) omitted per ASWS precedent (4→3 … 8→7); ch.7 "This chapter has no content." omitted under the placeholder rule (USER: verify); appendix A change history is BARE ID enumerations (no headings) — IDs unrenderable under the batch decision → rendered as counts (added 3 / changed 9 / deleted 24), RUN DECISION for user verification; the [UC_SecOC_00202] external use-case ref in §5.3.4 kept as unbracketed identifier; config-parameter table rebuilt (the SecOCDefaultAuthenticationInformationPattern row was split across a page break — rejoined); glossary: 7 existing entries gained this document as additional source
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_data_distribution_service (AUTOSAR_FO_RS_DataDistributionService · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Data Distribution Service（数据分发服务需求）; target `foundation/protocols/rs_data_distribution_service/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Protocols/AUTOSAR_FO_RS_DataDistributionService.md` — 591 lines, 23 figure refs, 7 item IDs
   - Note: related site content: cp/communication/data_distribution (DDS) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — 1 of 23 figure refs is a content figure (Figure4-1 DDS logical view), embedded by source figure number; the rest are decoration; 14 requirement items get sequential §4.2.x.y numbering (IDs + {DRAFT} dropped); source ch.5 Requirements Tracing omitted per ASWS precedent (References renumbered 6→5); placeholders omitted + renumbered: §2.2.1/2.2.2 (No content; 2.2.3→2.2.1), §3.2 (None), §4.3 (None.), appendix A (No content); item 00001's truncated Use-Case cell recovered from the R23-11 PDF; §2.2 group list chapter refs converted to article links; comma-form [5, AUTOSAR glossary] stays prose; glossary: no new site-glossary terms (DDS/Topic/QoS already present from CP data_distribution article, decision recorded)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_network_management_protocol (AUTOSAR_FO_PRS_NetworkManagementProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Network Management Protocol Specification（网络管理协议规范）; target `foundation/protocols/prs_network_management_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_NetworkManagementProtocol.md` — 663 lines, 31 figure refs, 56 item IDs
   - Note: related site content: cp/communication/nm, cp/communication/can_network_management, cp/communication/udp_network_management (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — 3 of 31 figure refs are content figures (Figure1-1 NM interfaces, Figure5-1 communication request, Figure5-2 communication release), embedded by source figure number; sequence-diagram label spill dropped; 25 inline protocol items translated as prose paragraphs (IDs + {DRAFT} dropped); source ch.3 Protocol Requirements (traceability only) omitted per ASWS precedent (4→3 … 8→7); §1.3.2 "N/A" placeholder omitted (1.3.3→1.3.2); bracketed config-param mentions ([NmMessageLength] etc.) → code spans; appendix A.1.1/A.1.2 tables carry EMPTY heading columns → rendered as counts (added 3 / changed 2 / deleted 0), same run decision as the SecOC row; glossary: 5 existing entries gained this document as additional source, 3 new (Network Mode, PNC Gateway, Repeat Message State)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_e2e (AUTOSAR_FO_RS_E2E · CommunicationManagement · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on E2E（端到端通信保护需求）; target `foundation/communication_management/rs_e2e/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `CommunicationManagement/AUTOSAR_FO_RS_E2E.md` — 689 lines, 30 figure refs, 55 item IDs
   - Note: related site content: cp/communication/e2e_transformer (E2EXf) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 30 figure refs are page-decoration chrome, 0 content figures; 21 requirement items get sequential §5.x.y numbering (IDs + {DRAFT} dropped); source ch.5 Requirements tracing omitted per ASWS precedent AND source ch.7 Moved Requirements (SRS→RS ID-mapping table, both columns IDs) omitted under the same decision — both flagged for user verification; renumber 6→5, 8→6; the garbled §4.3.1 protection-principles numbered list reconstructed to its true nested structure from the R23-11 PDF (footnote 1 kept as blockquote); §4.1's 11-row communication-fault table as GFM; glossary: 2 new entries (E2E Profile, BER); E2E itself has 7 homonym glossary entries — source-append skipped as ambiguous (decision recorded)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_intrusion_detection_system (AUTOSAR_FO_RS_IntrusionDetectionSystem · Security · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Intrusion Detection System（入侵检测系统需求）; target `foundation/security/rs_intrusion_detection_system/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Security/AUTOSAR_FO_RS_IntrusionDetectionSystem.md` — 725 lines, 27 figure refs, 26 item IDs
@@ -142,72 +167,87 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Requirements on Firewall（防火墙需求）; target `foundation/security/rs_firewall/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Security/AUTOSAR_FO_RS_Firewall.md` — 752 lines, 25 figure refs, 1 item IDs
   - Note: related site content: CP SWS_Firewall queued in Group-security (different document) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — 4 of 24 figure refs are content figures (Figure1-1 zonal E/E architecture, Figure4-1 ISO/OSI protocols, Figure4-2 filter rules, Figure4-3 firewall as IDS sensor — the 4.3 image is NOT the recurring deco hash, verified by size 455x412/40KB), embedded by source figure number; diagram-label spill (incl. the stray "## and/or" heading) dropped and folded back into its bullet list; 11 requirement items under 1:1 4.2.x sections (IDs dropped, tables direct under section headings; §4.2.11 keeps the differing item title as a bold line); source ch.5 Requirements Tracing omitted per ASWS precedent (References renumbered 6→5); glossary: 5 existing entries gained this document as additional source, 3 new (DPI, Firewall, IDPS); SPI has 2 homonym glossary entries — source-append skipped (decision recorded)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_health_monitoring (AUTOSAR_FO_RS_HealthMonitoring · HealthMonitoring · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Health Monitoring（健康监控需求）; target `foundation/health_monitoring/rs_health_monitoring/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `HealthMonitoring/AUTOSAR_FO_RS_HealthMonitoring.md` — 759 lines, 31 figure refs, 126 item IDs
   - Note: related site content: cp/safety/watchdog_manager (WdgM — CP realization of supervision) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 31 figure refs are page-decoration chrome, 0 content figures; 22 requirement items get sequential §5.x.y numbering (IDs + {DRAFT} dropped); source ch.5 Requirements traceability omitted per ASWS precedent (6→5, 7→6); §1 keeps the source's duplicated sentence verbatim; ch.3 combines a 5-row abbreviation table and a 24-row acronym/term table (no 3.1/3.2 subsections in source — mirrored); appendix A has R23-11 (all none ×6) and R22-11 (Changed table 8 rows) sections; glossary: 11 existing entries gained this document as additional source, 5 new (CM, DM, PHM merged-duplicate, Platform Health Management, SHM); Supervised Entity + SE homonyms skipped (SE is a generic acronym, decision recorded)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_someip_protocol (AUTOSAR_FO_RS_SOMEIPProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on SOME/IP Protocol（SOME/IP 协议需求）; target `foundation/protocols/rs_someip_protocol/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Protocols/AUTOSAR_FO_RS_SOMEIPProtocol.md` — 810 lines, 28 figure refs, 82 item IDs
   - Note: related site content: cp/communication/someipxf, cp/communication/someiptp (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 28 figure refs are page-decoration chrome, 0 content figures; 41 requirement items get sequential §3.1.1–3.3.16 numbering (IDs + {DRAFT} dropped); source ch.3 Requirements Tracing omitted per ASWS precedent (4→3, 5→4); garbled Rationale/Use-Case cells of items 00014 and 00025 recovered from the R23-11 PDF; glossary: SOME/IP entry gained this document as additional source, 3 new (RPC, Remote Procedure Call, Union); ch.2 shares 10 of its 15 terms with the SOME/IP-SD RS document (already appended there — not re-appended, one-translation rule)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_macsec (AUTOSAR_FO_RS_MACsec · CommunicationManagement · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on MACsec（MACsec 需求）; target `foundation/communication_management/rs_macsec/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `CommunicationManagement/AUTOSAR_FO_RS_MACsec.md` — 834 lines, 31 figure refs, 4 item IDs
   - Note: related site content: cp/communication/ethernet_interface, cp/communication/ethernet_driver (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — 2 of 28 figure refs are content figures (Figure4-1 MACsec frame layout, Figure4-2 MKA sequence with pre-shared key), embedded by source figure number; frame/sequence label spill dropped; 34 requirement items get sequential §4.2.x.y numbering (IDs + {DRAFT} dropped); §2.2.1-2.2.3 (all No content) and §4.3 (No content.) omitted under the placeholder rule; source ch.5 Requirements Tracing omitted per ASWS precedent (References renumbered 6→5, incl. its 6.1 Related-standards subsection); the source has NO change-history appendix; glossary: 11 existing entries gained this document as additional source, 3 new (ICK, KEK, XPN; KDF added as its own entry), SC has 2 homonyms — source-append skipped (decision recorded)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_methodology (AUTOSAR_FO_RS_Methodology · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Methodology（方法论需求）; target `foundation/methodology_templates/rs_methodology/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_RS_Methodology.md` — 928 lines, 31 figure refs, 186 item IDs
   - Note: related site content: cp/methodology_templates/basic_software_module_description_template (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 30 figure refs are page-decoration chrome, 0 content figures; 26 requirement items get sequential §2.x.y.z numbering (IDs dropped); the unnumbered pre-chapter References mirrored with ref anchors; §1.3 Requirements Tracing omitted per ASWS precedent (no chapter renumbering needed); garbled/truncated cells of items 00066 and 00084 recovered from the R23-11 PDF; 00080's cross-doc item-ID supporting-material refs kept unbracketed (RS_SWCT_03065, RS_STDT_00034); ch.3 Change History covers 11 releases (R1.1.0–R23-11, ~90 table rows translated as Heading-only tables; §3.8 R20-11 is empty in source → 无); glossary: no new site-glossary terms (SIL/VFB/OEM/SWC/RTE all present)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_intrusion_detection_system (AUTOSAR_FO_PRS_IntrusionDetectionSystem · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Intrusion Detection System Protocol Specification（入侵检测系统协议规范）; target `foundation/protocols/prs_intrusion_detection_system/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_IntrusionDetectionSystem.md` — 998 lines, 42 figure refs, 16 item IDs
   - Note: related site content: CP SWS_IntrusionDetectionSystemManager (IdsM) queued in Group-security (different document) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — 8 of 41 figure refs are content figures (Figure2-1 use case; Figure5-1 IDS message, Figure5-3 event frame, Figure5-4 timestamp, Figure5-5/5-6 context data, Figure5-7 signature, Figure5-8 separation header; there is NO source Figure5.2 — its content is the overview table), embedded by source figure number; architecture/sequence label spill dropped; ~46 inline protocol items translated as prose with IDs dropped; the garbled options list under §5.1 (stray "5./6." lines) merged back into option 4; source ch.3 Protocol Requirements (traceability only) omitted per ASWS precedent (4→3 … 7→6; in-text "refer to 5.1.x" renumbered); appendix A's three tables carry EMPTY heading columns → counts (added 2 / changed 3 / deleted 1), same run decision as SecOC row; the unnumbered trailing References chapter mirrored AFTER the appendix (source order); glossary: 4 existing generic entries (I-PDU, N-PDU, PDU Router, SoAd) gained this document as additional source, 7 new (Context Data, Context Data Buffer, Event Buffer, Event Frame, IDS Message, I-PDU Multiplexer, PRS IDS)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_timing_extensions (AUTOSAR_FO_RS_TimingExtensions · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Timing Extensions（时序扩展需求）; target `foundation/methodology_templates/rs_timing_extensions/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_RS_TimingExtensions.md` — 1,043 lines, 42 figure refs, 326 item IDs
   - Note: related site content: cp/template/timimg_extension (CP TPS Timing Extensions summary, deleted 2026-11-04 — different document) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 42 figure refs are page-decoration chrome, 0 content figures; 26 requirement items under 1:1 3.x.y sections (IDs + {DRAFT} dropped; 6 items had lost heading level in the markdown conversion — restored; item titles differing from section titles dropped, tables direct under section headings); source ch.2 Use Case and Requirements Tracing omitted per ASWS precedent (3→2, 4→3, 5→4; in-text "See also sections 4.x.y" renumbered); unnumbered pre-chapter References mirrored with ref anchors; truncated/garbled rationale cells of items 00006/00007/00010/00011/00023 recovered from the R23-11 PDF; 00014's cross-doc dependency RS_SWCT_00090 kept unbracketed; ch.4 Supported use cases (10 use cases incl. §3.3.2's two footnotes as blockquotes) fully translated; ch.5 Change History mirrors 13 releases incl. the two source-side table-misplacement quirks (4.1.3 "Added" holding the 4.1.2 removed table; 4.4.0 "Changed" holding the added table) kept source-faithful; glossary: 2 new entries (Event Chain, SL-LET; LET/WCET already present)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - Note: 2026-11-05 user instruction "stop when this translation finished" — batch PAUSED after this row; rows rs_safety..prs_e2e_protocol (12 rows) remain
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_safety (AUTOSAR_FO_RS_Safety · Safety · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Safety（功能安全需求）; target `foundation/safety/rs_safety/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Safety/AUTOSAR_FO_RS_Safety.md` — 1,149 lines, 40 figure refs, 78 item IDs
