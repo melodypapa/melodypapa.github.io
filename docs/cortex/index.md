@@ -29,5 +29,6 @@ title: "ARM Cortex"
 
 1. [程序员模型（Programmers Model）](r52p_processor/programmers_model/index.md)
 2. [系统控制（System Control）](r52p_processor/system_control/index.md)
-3. [内存系统（Memory System）](r52p_processor/memory_system/index.md)
-4. [内存保护单元（Memory Protection Unit）](r52p_processor/memory_protection_unit/index.md)
+3. [时钟与复位（Clocking and Resets）](r52p_processor/clocking_and_resets/index.md)
+4. [内存系统（Memory System）](r52p_processor/memory_system/index.md)
+5. [内存保护单元（Memory Protection Unit）](r52p_processor/memory_protection_unit/index.md)

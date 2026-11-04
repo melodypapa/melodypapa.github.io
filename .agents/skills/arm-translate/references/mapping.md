@@ -11,21 +11,24 @@ Source: `R52/cortex_r52_trm_100026_0100_00_en.md` (TRM r1p0), plus
 
 | Article | Source chapter | Evidence |
 | --- | --- | --- |
-| `programmers_model/` | TRM ch3 Programmers Model | `Table3-1` |
-| `system_control/` | TRM ch4 System Control | `Figure4-7`…`Figure4-10`, `Table4-48` |
+| `programmers_model/` | TRM ch2 Programmers Model | chapter heading; legacy images named `Table3-*` |
+| `system_control/` | TRM ch3 System Control | chapter heading; legacy images named `Figure4-*`, `Table4-48` |
 | `memory_system/` | TRM ch7 Memory System | chapter heading; legacy images named `Figure8_*` |
 | `memory_protection_unit/` | TRM ch8 Memory Protection Unit | chapter heading; source tables are `Table 8-1`…`Table 8-7`, legacy images named `Table9-*` |
 
-**Legacy image numbering does not follow the current PDF revision.** In
-`memory_protection_unit/` the images are named `Table9-*`, but they illustrate
-the chapter-8 tables (`Table 8-1 EL1-controlled MPU background region - …`) —
-chapter 9 in this revision is the Generic Interrupt Controller. Confirm a
-chapter by its heading and table text, never by a legacy file name, and do not
-rename existing files.
+**The legacy pages were translated from an older revision whose chapter numbers
+are current + 1.** The evidence is consistent: Programmers Model is chapter 2
+(images `Table3-*`), System Control chapter 3 (`Figure4-*`, `Table4-48`),
+Memory System chapter 7 (`Figure8_*`), MPU chapter 8 (`Table9-*`, content
+`Table 8-1 EL1-controlled MPU background region - …`). Chapter 9 in this
+revision is the Generic Interrupt Controller. Confirm a chapter by its heading
+and table text, never by a legacy file name, and do not rename existing files.
 
-Not yet translated from the R52 TRM (coverage backlog): clocking and resets,
-power management, initialization, generic interrupt controller, generic timer,
-debug, performance monitor unit, and the multi-core/implementation chapters.
+Not yet translated from the R52 TRM (coverage backlog, in chapter order):
+clocking and resets (ch4), power management (ch5), initialization (ch6),
+generic interrupt controller (ch9), generic timer (ch10), debug (ch11),
+performance monitor unit (ch12), cross trigger (ch13), ETM (ch14), Advanced
+SIMD and floating-point (ch15).
 
 ## Cortex-M7 (`docs/cortex/m7_processor/`)
 
