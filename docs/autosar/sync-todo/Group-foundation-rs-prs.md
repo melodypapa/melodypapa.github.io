@@ -96,12 +96,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 - [ ] rs_feature_model_exchange_format (AUTOSAR_FO_RS_FeatureModelExchangeFormat · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Feature Model Exchange Format（特征模型交换格式需求）; target `foundation/methodology_templates/rs_feature_model_exchange_format/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_RS_FeatureModelExchangeFormat.md` — 571 lines, 24 figure refs, 34 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — 2 of 24 figure refs are content figures (Figure2-1 restrictions example, Figure2-2 relations example), embedded by source figure number; the feature-tree label spill (garbled glyph lines) dropped as conversion noise; item-ID decision applied (16 use cases → §2.1–2.16, 16 requirements → §3.1–3.16; use-case cross-refs in prose and Use-Case/Dependencies cells → intra-article links); §1.2 Requirements Tracing omitted per ASWS precedent (no chapter renumbering needed); appendix A Glossary (37 methodology meta-model terms) translated in-article as bold-term + blockquote; NOT added to the site glossary — these are meta-model/methodology terms already covered by the TR Glossary article and the TPS methodology articles (recorded as a run decision, USER: verify); appendix B Change History all-none → 无
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_secoc_protocol (AUTOSAR_FO_PRS_SecOcProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Secure Onboard Communication Protocol Specification（安全车载通信协议规范）; target `foundation/protocols/prs_secoc_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_SecOcProtocol.md` — 579 lines, 34 figure refs, 39 item IDs
