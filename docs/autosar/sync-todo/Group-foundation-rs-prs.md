@@ -238,12 +238,15 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Requirements on Timing Extensions（时序扩展需求）; target `foundation/methodology_templates/rs_timing_extensions/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_RS_TimingExtensions.md` — 1,043 lines, 42 figure refs, 326 item IDs
   - Note: related site content: cp/template/timimg_extension (CP TPS Timing Extensions summary, deleted 2026-11-04 — different document) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 42 figure refs are page-decoration chrome, 0 content figures; 26 requirement items under 1:1 3.x.y sections (IDs + {DRAFT} dropped; 6 items had lost heading level in the markdown conversion — restored; item titles differing from section titles dropped, tables direct under section headings); source ch.2 Use Case and Requirements Tracing omitted per ASWS precedent (3→2, 4→3, 5→4; in-text "See also sections 4.x.y" renumbered); unnumbered pre-chapter References mirrored with ref anchors; truncated/garbled rationale cells of items 00006/00007/00010/00011/00023 recovered from the R23-11 PDF; 00014's cross-doc dependency RS_SWCT_00090 kept unbracketed; ch.4 Supported use cases (10 use cases incl. §3.3.2's two footnotes as blockquotes) fully translated; ch.5 Change History mirrors 13 releases incl. the two source-side table-misplacement quirks (4.1.3 "Added" holding the 4.1.2 removed table; 4.4.0 "Changed" holding the added table) kept source-faithful; glossary: 2 new entries (Event Chain, SL-LET; LET/WCET already present)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - Note: 2026-11-05 user instruction "stop when this translation finished" — batch PAUSED after this row; rows rs_safety..prs_e2e_protocol (12 rows) remain
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_safety (AUTOSAR_FO_RS_Safety · Safety · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Safety（功能安全需求）; target `foundation/safety/rs_safety/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Safety/AUTOSAR_FO_RS_Safety.md` — 1,149 lines, 40 figure refs, 78 item IDs

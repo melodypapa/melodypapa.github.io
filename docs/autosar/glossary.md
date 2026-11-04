@@ -2133,6 +2133,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](foundation/protocols/prs_intrusion_detection_system/index.md)（AUTOSAR_FO_PRS_IntrusionDetectionSystem）
 {: .glossary-source}
 
+**Event Chain**
+> 事件链——具有功能依赖关系的两个可观测事件（激励 **Stimulus** 与响应 **Response**）之间的时间关联，用作附加时序约束的主体。
+>
+> 来源：[Requirements on Timing Extensions（时序扩展需求）](foundation/methodology_templates/rs_timing_extensions/index.md)（AUTOSAR_FO_RS_TimingExtensions）
+{: .glossary-source}
+
 **Event combination**
 > 事件组合是将多个事件合并为一个特定组合 **DTC** 的方法。它用于将不同的监视器结果适配为一个显著的、在维修站可清晰评估的故障。
 >
@@ -5915,6 +5921,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 与连续传输相反，消息将仅被传输一次。
 >
 > 来源：[AUTOSAR TTCAN Driver（TTCAN 驱动程序）](cp/communication/ttcan_driver/index.md)（AUTOSAR_CP_SWS_TTCANDriver）
+{: .glossary-source}
+
+**SL-LET**
+> 系统级逻辑执行时间（**System Level Logical Execution Time**）——跨平台描述时间确定性数据流的 **LET** 扩展，指向被交换的数据类型。
+>
+> 来源：[Requirements on Timing Extensions（时序扩展需求）](foundation/methodology_templates/rs_timing_extensions/index.md)（AUTOSAR_FO_RS_TimingExtensions）
 {: .glossary-source}
 
 **Slave-to-slave**
