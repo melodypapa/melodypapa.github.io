@@ -444,6 +444,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SecOC (Secure Onboard Communication)](cp/communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
 {: .glossary-source}
 
+**Authenticator**
+> 认证器（**Authenticator**）——用于提供消息认证的数据；对称方法使用消息认证码（**MAC**），非对称方法使用签名。
+>
+> 来源：[Secure Onboard Communication Protocol Specification（安全车载通信协议规范）](foundation/protocols/prs_secoc_protocol/index.md)（AUTOSAR_FO_PRS_SecOcProtocol）
+{: .glossary-source}
+
 **Authenticator**（验证器）
 > 验证器是用于提供消息认证的数据。通常，术语消息验证码（**Message Authentication Code**，**MAC**）用于对称方法，而术语签名或数字签名（**Signature** 或 **Digital Signature**）指的是具有不同属性和约束的非对称方法。
 >
@@ -1408,6 +1414,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 数据帧：**SPI** 总线上与 SpiDataWidth 相关的位的物理帧。
 >
 > 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](cp/communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）
+{: .glossary-source}
+
+**Data integrity**
+> 数据完整性（**Data integrity**）——数据自被授权源创建、传输或存储之时起未曾以未经授权方式更改的特性。
+>
+> 来源：[Secure Onboard Communication Protocol Specification（安全车载通信协议规范）](foundation/protocols/prs_secoc_protocol/index.md)（AUTOSAR_FO_PRS_SecOcProtocol）
 {: .glossary-source}
 
 **Data integrity**（数据完整性）
@@ -2381,6 +2393,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Safety Use Case（安全用例）](cp/safety/safety_use_case/index.md)（AUTOSAR_CP_EXP_SafetyUseCase）
 {: .glossary-source}
 
+**FM**
+> 新鲜度管理器（**Freshness Manager**）——为每个安全通信链路向 **SecOC** 提供新鲜度的外部组件。
+>
+> 来源：[Secure Onboard Communication Protocol Specification（安全车载通信协议规范）](foundation/protocols/prs_secoc_protocol/index.md)（AUTOSAR_FO_PRS_SecOcProtocol）
+{: .glossary-source}
+
 **FMI**
 > 失效模式指示符（**Failure Mode Indicator**，SAE J1939）
 >
@@ -2444,7 +2462,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Freshness Value**
 > 用于确保经认证的时间同步报文新鲜度的单调计数器，可以是独立报文计数器（新鲜度计数器）或时间戳值（新鲜度时间戳）。
 >
-> 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
+> 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[Secure Onboard Communication Protocol Specification（安全车载通信协议规范）](foundation/protocols/prs_secoc_protocol/index.md)（AUTOSAR_FO_PRS_SecOcProtocol）
 {: .glossary-source}
 
 **Freshness Value Manager**
@@ -2571,6 +2589,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 功能：涵盖系统用户可见和用户不可见的功能方面（见 [2]）。在 **FiM** 上下文中，一个功能可以由一个或多个可运行实体的全部或部分内容、以同一组许可/禁止条件构成。
 >
 > 来源：[AUTOSAR FiM（功能禁止管理器）](cp/system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）
+{: .glossary-source}
+
+**FV**
+> 新鲜度值（**Freshness Value**）——用于确保安全 I-PDU 新鲜度的单调计数器或时间戳值。
+>
+> 来源：[Secure Onboard Communication Protocol Specification（安全车载通信协议规范）](foundation/protocols/prs_secoc_protocol/index.md)（AUTOSAR_FO_PRS_SecOcProtocol）
 {: .glossary-source}
 
 **FVL**
@@ -2993,6 +3017,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR LinIf (LIN Interface)](cp/communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
 {: .glossary-source}
 
+**IDS**
+> 入侵检测系统（**Intrusion Detection System**）——对车辆电子系统中安全事件的检测体系。
+>
+> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）
+{: .glossary-source}
+
 **IdsM**
 > 入侵检测系统管理器（**Intrusion Detection System Manager**）。
 >
@@ -3267,13 +3297,6 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 基础设施到车辆信息消息（**Infrastructure to Vehicle Information Message**）。
 >
 > 来源：[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
-{: .glossary-source}
-
-
-**IDS**
-> 入侵检测系统（**Intrusion Detection System**）——对车辆电子系统中安全事件的检测体系。
->
-> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）
 {: .glossary-source}
 
 ## J
@@ -3623,7 +3646,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **MAC**
 > 报文认证码（**Message Authentication Code**）。
 >
-> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](cp/globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR SecOC (Secure Onboard Communication)](cp/communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR V2X GeoNetworking（V2X地理网络）](cp/communication/v2x_geonet/index.md)（AUTOSAR_CP_SWS_V2XGeoNetworking）
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](cp/globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR SecOC (Secure Onboard Communication)](cp/communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR V2X GeoNetworking（V2X地理网络）](cp/communication/v2x_geonet/index.md)（AUTOSAR_CP_SWS_V2XGeoNetworking）、[Secure Onboard Communication Protocol Specification（安全车载通信协议规范）](foundation/protocols/prs_secoc_protocol/index.md)（AUTOSAR_FO_PRS_SecOcProtocol）
 {: .glossary-source}
 
 **Machine**
@@ -5466,6 +5489,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Charging Manager（充电管理器）](cp/communication/chargingmanager/index.md)（AUTOSAR_CP_SWS_ChargingManager）
 {: .glossary-source}
 
+**SecOC**
+> 安全车载通信（**Secure Onboard Communication**）——验证 **PDU** 级通信真实性与新鲜度的 **AUTOSAR** 协议。
+>
+> 来源：[Secure Onboard Communication Protocol Specification（安全车载通信协议规范）](foundation/protocols/prs_secoc_protocol/index.md)（AUTOSAR_FO_PRS_SecOcProtocol）
+{: .glossary-source}
+
 **SecOC**（**Secure Onboard Communication**）
 > 安全板载通信
 >
@@ -5500,6 +5529,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 受保护的 I-PDU 是一个 AUTOSAR I-PDU，它包含可信 I-PDU 的负载并附加了额外的认证信息。
 >
 > 来源：[AUTOSAR SecOC (Secure Onboard Communication)](cp/communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
+{: .glossary-source}
+
+**Security Event**
+> 安全事件（**Security Event**）——由 **IdsM** 检测并上报的安全相关的观测事件，由安全提取定义和配置。
+>
+> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）
 {: .glossary-source}
 
 **SecY**
@@ -5634,6 +5669,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR LinIf (LIN Interface)](cp/communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
 {: .glossary-source}
 
+**SIEM**
+> 安全事件与事件管理（**Security Incident and Event Management**）系统，作为安全运营中心的一部分，解读从 **IdsM** 实例接收到的二进制数据。
+>
+> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）
+{: .glossary-source}
+
 **Signal**
 > 在AUTOSAR COM模块的上下文中，信号（**Signal**）等同于[3]中的消息；另见[1]。
 >
@@ -5710,6 +5751,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 套接字适配器（**Socket Adaptor**）。
 >
 > 来源：[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
+{: .glossary-source}
+
+**SOC**
+> 安全运营中心（**Security Operation Center**）。
+>
+> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）
 {: .glossary-source}
 
 **Software Trigger**
@@ -6106,25 +6153,6 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 系统建模语言（**Systems Modelling Language**，**SYSML**）。面向系统工程的通用建模语言。
 >
 > 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
-{: .glossary-source}
-
-
-**SIEM**
-> 安全事件与事件管理（**Security Incident and Event Management**）系统，作为安全运营中心的一部分，解读从 **IdsM** 实例接收到的二进制数据。
->
-> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）
-{: .glossary-source}
-
-**SOC**
-> 安全运营中心（**Security Operation Center**）。
->
-> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）
-{: .glossary-source}
-
-**Security Event**
-> 安全事件（**Security Event**）——由 **IdsM** 检测并上报的安全相关的观测事件，由安全提取定义和配置。
->
-> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）
 {: .glossary-source}
 
 ## T

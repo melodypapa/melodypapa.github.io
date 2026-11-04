@@ -108,12 +108,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Secure Onboard Communication Protocol Specification（安全车载通信协议规范）; target `foundation/protocols/prs_secoc_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_SecOcProtocol.md` — 579 lines, 34 figure refs, 39 item IDs
   - Note: related site content: cp/communication/sec_oc, cp/communication/fvm (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — 3 of 34 figure refs are content figures (Figure5-1 Secured I-PDU contents, Figure5-2 truncation example, Figure5-3 MAC verification), embedded by source figure number; the tracing-table screenshot (899x552) and the rest are decoration; 25 inline protocol items translated as prose paragraphs with IDs dropped; source ch.3 Protocol Requirements (traceability only) omitted per ASWS precedent (4→3 … 8→7); ch.7 "This chapter has no content." omitted under the placeholder rule (USER: verify); appendix A change history is BARE ID enumerations (no headings) — IDs unrenderable under the batch decision → rendered as counts (added 3 / changed 9 / deleted 24), RUN DECISION for user verification; the [UC_SecOC_00202] external use-case ref in §5.3.4 kept as unbracketed identifier; config-parameter table rebuilt (the SecOCDefaultAuthenticationInformationPattern row was split across a page break — rejoined); glossary: 7 existing entries gained this document as additional source
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_data_distribution_service (AUTOSAR_FO_RS_DataDistributionService · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Data Distribution Service（数据分发服务需求）; target `foundation/protocols/rs_data_distribution_service/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Protocols/AUTOSAR_FO_RS_DataDistributionService.md` — 591 lines, 23 figure refs, 7 item IDs
