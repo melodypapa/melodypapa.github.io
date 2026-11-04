@@ -267,7 +267,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 ### foundation/general (General)
 
-- 📖 [TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/) — AUTOSAR_FO_TR_Glossary (R23-11; guide-type article, STANDARD.md §7 exempt; **partial** — ch.2 缩略语 complete (201 acronyms), ch.4 术语定义 14/343 terms, remaining tranches = first row of Group-foundation; terms also flow into glossary.md)
+- ✅ [TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/) — AUTOSAR_FO_TR_Glossary (R23-11; guide-type article, STANDARD.md §7 exempt; **complete** — ch.1–4 + trailing 参考文献 registry (ref-1..50, 177 citation links); ch.4 术语定义 343/343 terms with 8 content figures; terms flowed into glossary.md (2026-11-05 tranche; +313 entries — 30 same-named terms already carried definitions from other docs, left unmerged as user decisions))
 - ❌ Explanation of Software Architectural Decisions（软件架构决策说明） — AUTOSAR_FO_EXP_SWArchitecturalDecisions (`foundation/general/`)
 - ❌ Safety Overview（功能安全概览） — AUTOSAR_FO_EXP_SafetyOverview (`foundation/general/`)
 - ❌ Security Overview（信息安全概览） — AUTOSAR_FO_EXP_SecurityOverview (`foundation/general/`)

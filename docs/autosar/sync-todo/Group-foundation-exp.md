@@ -13,17 +13,24 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 > Item-ID note: TPS/ASWS rows that carry specification items share the decision recorded in the [Group-foundation-rs-prs.md](Group-foundation-rs-prs.md) header — DECIDED 2026-11-03: item IDs are dropped, titles translate only.
 
 ## Queue
-- [ ] tr_glossary (AUTOSAR_FO_TR_Glossary · General · R23-11 markdown · 📖 partial — ch.2 done, ch.4 14/343 terms)
+- [ ] tr_glossary (AUTOSAR_FO_TR_Glossary · General · R23-11 markdown · 📖 ch.2 + ch.4 343/343 terms, awaiting batch gate)
   - Note: in-flight row placed first: article `foundation/general/tr_glossary/` exists (moved from general/ in PR #112); ch.2 缩略语 complete (201 acronyms), ch.4 术语定义 14/343 terms translated — remaining 329 terms translate in tranches
   - Note: row moved here from Group-general.md on 2026-11-02 (opened there as user-named run #78 before the platform restructure); its decision carries over — 术语表 mechanism (user decision 2026-10-24): entries come from `scripts/tr_glossary.json`, extracted from the SOURCE during each translation batch; gen_glossary never re-parses the translated article; tranches committed per batch
   - Note: source ch.2.1 has 206 acronym rows (201 distinct entries in tr_glossary.json after dedupe); ch.4 = 343 definition terms (6-row tables)
   - Note: each tranche also extends `glossary.md` (one term translated once; repeat appearances append a 来源 line); tracking workfile `.agents/skills/autosar-translate/scripts/tr_glossary.json` (`zh` field per term)
   - Note: source `General/AUTOSAR_FO_TR_Glossary.md` — 4,647 lines, 202 figure refs, 1 item ID; related: glossary.md (site 术语表 — terms flow there, one term translated once)
+  - Note: Step 2 (2026-11-05): remaining 329 ch.4 terms (4.15–4.343) translated sequentially from the source; all 343 zh definitions merged into `tr_glossary.json`; article ~4,400 lines, 343 `### 4.N.` headings continuous 1–343
+  - Note: figures — 8 content diagrams embedded as `Figure4-1..Figure4-8.png` (4.43 Availability, 4.112 EEC, 4.113 EOC, 4.161 ICC2, 4.186 LET, 4.214 PDU, 4.309 SyncPoints, 4.320 TimedComm), caption text carried as alt text (cdd/vfb precedent); remaining ~195 figure refs are page chrome (recurring <8 KB hashes) dropped
+  - Note: trailing `## 参考文献` registry added (ref-1..ref-50, TPS_APSD precedent; source [17]/[34] rejoined across page breaks) — the source's unnumbered References chapter had been dropped by the earlier tranche; 177 `[n]` citations linked to `#ref-n` via `--apply` (idempotent, 0 unresolved)
+  - Note: URL audit — omg.org formal/05-07-04 http 500 (browser UA also 500) → smallest verified fix dropped `apps/` from the path (200, same document); iso.org 403 = anti-bot, kept (ASWS precedent)
+  - Note: glossary.md extended +313 TR Glossary entries (scripted merge into letter sections, 2026-10-30 entry format); 30 same-named terms already carried substantively different definitions from other documents (Abstract Platform, Callback, Client, Composition, Confirmation, Electrical Signal, Error, Event, Failure, Fault, Functionality, Indication, I-PDU, …) — left unmerged as user decisions for the gate
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK (ch.4 term headings exempt as glossary keys per TODO.md 2026-10-31 sweep); `check_indexes.py` OK (268 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/requirement ID/`{DRAFT}`/`\<`
+  - Note: Phase B (2026-11-05) — coverage ch.1→§1, ch.2→§2, ch.3→§3, ch.4→§4 (4.1–4.343) + trailing 参考文献; link census: 0 identifier mentions, 0 chapter-number refs, 399 参见-type report-only lines (table cells, definitional), 177/177 citations linked, cross-article report-only PORT ×26 / EcuM ×2 / DEM ×2 / Nm ×9 / CanIf ×2 / Det ×1 (all stay prose); every term's 6-row table mirrors the source cell set/order; Initiator values translated consistently from the 19-value source inventory
   - [x] Step 1 — Source resolution + gap analysis (gap = 329 untranslated ch.4 terms, verified 2026-11-02)
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] tr_list_of_known_issues_secure_hardware_extensions (AUTOSAR_FO_TR_ListOfKnownIssuesSecureHardwareExtensions · Security · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: List of Known Issues of Secure Hardware Extensions（安全硬件扩展已知问题清单）; target `foundation/security/tr_list_of_known_issues_secure_hardware_extensions/`; technical report (TR) — prose; no specification items
