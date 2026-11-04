@@ -120,12 +120,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Requirements on Data Distribution Service（数据分发服务需求）; target `foundation/protocols/rs_data_distribution_service/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Protocols/AUTOSAR_FO_RS_DataDistributionService.md` — 591 lines, 23 figure refs, 7 item IDs
   - Note: related site content: cp/communication/data_distribution (DDS) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — 1 of 23 figure refs is a content figure (Figure4-1 DDS logical view), embedded by source figure number; the rest are decoration; 14 requirement items get sequential §4.2.x.y numbering (IDs + {DRAFT} dropped); source ch.5 Requirements Tracing omitted per ASWS precedent (References renumbered 6→5); placeholders omitted + renumbered: §2.2.1/2.2.2 (No content; 2.2.3→2.2.1), §3.2 (None), §4.3 (None.), appendix A (No content); item 00001's truncated Use-Case cell recovered from the R23-11 PDF; §2.2 group list chapter refs converted to article links; comma-form [5, AUTOSAR glossary] stays prose; glossary: no new site-glossary terms (DDS/Topic/QoS already present from CP data_distribution article, decision recorded)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_network_management_protocol (AUTOSAR_FO_PRS_NetworkManagementProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Network Management Protocol Specification（网络管理协议规范）; target `foundation/protocols/prs_network_management_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_NetworkManagementProtocol.md` — 663 lines, 31 figure refs, 56 item IDs
