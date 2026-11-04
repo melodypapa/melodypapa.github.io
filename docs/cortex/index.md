@@ -32,6 +32,7 @@ title: "ARM Cortex"
 12. [调试（Debug）](m7_processor/debug/index.md)
 13. [交叉触发接口（Cross Trigger Interface）](m7_processor/cti/index.md)
 14. [数据观察点与跟踪单元（Data Watchpoint and Trace Unit）](m7_processor/dwt/index.md)
+15. [插桩跟踪宏单元（Instrumentation Trace Macrocell Unit）](m7_processor/itm/index.md)
 
 ## ARM Cortex R52+ 处理器
 
