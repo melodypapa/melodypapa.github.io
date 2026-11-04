@@ -240,6 +240,7 @@ nav:
         - "什么是SerDes": cortex/concept/communication/serdes/index.md
     - Cortex-M7 内核:
 
+      - "简介": cortex/m7_processor/introduction/index.md
       - "ARM架构的内存模式": cortex/m7_processor/arm_architecture_memory_mode/index.md
       - "交叉触发接口": cortex/m7_processor/cti/index.md
       - "插桩跟踪宏单元": cortex/m7_processor/itm/index.md
