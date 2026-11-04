@@ -28,12 +28,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Requirements on IEEE 1722（IEEE 1722 需求）; target `foundation/communication_management/rs_ieee1722/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `CommunicationManagement/AUTOSAR_FO_RS_IEEE1722.md` — 473 lines, 21 figure refs, 1 item IDs
   - Note: related site content: CP SWS_IEEE1722Tp queued in Group-communication-2 (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 21 figure refs are page-decoration chrome, 0 content figures; item-ID decision applied (15 requirement items get sequential §4.2.1–4.3.3 numbering); source ch.5 Requirements Tracing = pure ID tracing table → omitted per the ASWS precedent, References renumbered 6→5, per-item RS_Main_00280 back-refs dropped with it; dependency [FO_RS_IEEE1722_00015] → §4.3.3 link; comma-form citations [n, IEEE Std …] stay prose (unconvertible form); glossary: 11 existing entries gained this document as additional source, 5 new entries (ACF_CAN, ACF_CAN_BRIEF, ACF_LIN, TSpec, 61883_IIDC)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_debug_trace_profile (AUTOSAR_FO_RS_DebugTraceProfile · CommunicationManagement · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Debug Trace Profile（调试跟踪配置文件需求）; target `foundation/communication_management/rs_debug_trace_profile/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `CommunicationManagement/AUTOSAR_FO_RS_DebugTraceProfile.md` — 475 lines, 18 figure refs, 44 item IDs

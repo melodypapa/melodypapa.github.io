@@ -15,7 +15,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **AAF**
 > **AVTP** 音频格式（**AVTP Audio Format**），由 IEEE 1722 定义。
 >
-> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）、[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
 {: .glossary-source}
 
 **AB**
@@ -75,7 +75,25 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ACF**
 > **AVTP** 控制格式（**AVTP Control Format**），由 IEEE 1722 定义。
 >
-> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）、[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
+{: .glossary-source}
+
+**ACF_CAN**
+> 控制器局域网（**CAN**）/**CAN** 弹性数据率（**CAN FD**）消息（**Controller Area Network (CAN)/CAN with Flexible Data-Rate (CAN FD) message**），由 IEEE 1722 定义。
+>
+> 来源：[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
+{: .glossary-source}
+
+**ACF_CAN_BRIEF**
+> 缩略 **CAN**/**CAN FD** 消息（**Abbreviated CAN/CAN FD message**），由 IEEE 1722 定义。
+>
+> 来源：[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
+{: .glossary-source}
+
+**ACF_LIN**
+> **LIN** 消息（**LIN message**），由 IEEE 1722 定义。
+>
+> 来源：[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
 {: .glossary-source}
 
 **ACK**
@@ -459,13 +477,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **AVTP**
 > 音视频传输协议（**Audio/Video Transport Protocol**），由 IEEE 1722 定义。
 >
-> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）、[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
 {: .glossary-source}
 
 **AVTPDU**
 > 音视频传输协议数据单元（**Audio/Video Transport Protocol Data Unit**），由 IEEE 1722 定义。
 >
-> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）、[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
 {: .glossary-source}
 
 ## B
@@ -1243,7 +1261,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CRF**
 > 时钟参考格式（**Control Reference Format**），由 IEEE 1722 定义。
 >
-> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）、[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
 {: .glossary-source}
 
 **Cross-Cluster External Graph**
@@ -2674,7 +2692,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **gPTP**
 > 广义精确时间协议（**generalized Precision Time Protocol**，IEEE Std 802.1AS）。
 >
-> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）、[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
 {: .glossary-source}
 
 **Graph**
@@ -2855,6 +2873,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## I
 
+**61883_IIDC**
+> **IEC** 61883/**IIDC** 格式（**IEC 61883/IIDC format**），由 IEEE 1722 定义。
+>
+> 来源：[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
+{: .glossary-source}
+
 **I-**
 > 相对于AUTOSAR COM交互层（**Interaction Layer**）
 >
@@ -3002,7 +3026,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **IIDC**
 > 仪器与工业数码相机（**Instrumentation and Industrial Digital Camera**），由 IEEE 1722 定义。
 >
-> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）、[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
 {: .glossary-source}
 
 **In-Use performance ratio**
@@ -4236,7 +4260,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **NTSCF**
 > 非时间敏感控制格式（**None Time Sensitive Control Format**），由 IEEE 1722 定义。
 >
-> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）、[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
 {: .glossary-source}
 
 **Numerator**
@@ -5184,7 +5208,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **RVF**
 > 原始视频格式（**Raw Video Format**），由 IEEE 1722 定义。
 >
-> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）、[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
 {: .glossary-source}
 
 **RWW**
@@ -6262,13 +6286,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **TSCF**
 > 时间敏感控制格式（**Time Sensitive Control Format**），由 IEEE 1722 定义。
 >
-> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）、[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
 {: .glossary-source}
 
 **TSN**
 > 时间敏感网络（**Time-Sensitive Networking**）。
 >
-> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）
+> 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）、[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
+{: .glossary-source}
+
+**TSpec**
+> 流量规范（**Traffic specification**），定义于 IEEE Std 802.1Q-2022。
+>
+> 来源：[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
 {: .glossary-source}
 
 **TTCAN Controller**
