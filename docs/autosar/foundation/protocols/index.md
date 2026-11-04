@@ -7,6 +7,7 @@ title: "协议（Protocols）"
 ## 文章
 
 * [Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）](rs_someip_service_discovery_protocol/index.md)
+* [Requirements on SOME/IP Protocol（SOME/IP 协议需求）](rs_someip_protocol/index.md)
 * [V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](prs_v2x_remote_access_layer/index.md)
 * [Requirements on IPsec Protocol（IPsec 协议需求）](rs_ipsec_protocol/index.md)
 * [Secure Onboard Communication Protocol Specification（安全车载通信协议规范）](prs_secoc_protocol/index.md)
@@ -21,7 +22,6 @@ R23-11 中本类别的其余源文档（待翻译）：
 * **AUTOSAR_FO_PRS_SOMEIPProtocol** — SOME/IP Protocol Specification（SOME/IP 协议规范）
 * **AUTOSAR_FO_PRS_SOMEIPServiceDiscoveryProtocol** — SOME/IP Service Discovery Protocol Specification（SOME/IP 服务发现协议规范）
 * **AUTOSAR_FO_PRS_TimeSyncProtocol** — Time Synchronization Protocol Specification（时间同步协议规范）
-* **AUTOSAR_FO_RS_SOMEIPProtocol** — Requirements on SOME/IP Protocol（SOME/IP 协议需求）
 * **AUTOSAR_FO_RS_TimeSync** — Requirements on Time Synchronization（时间同步需求）
 
 ## 相关内容

@@ -190,12 +190,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Requirements on SOME/IP Protocol（SOME/IP 协议需求）; target `foundation/protocols/rs_someip_protocol/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Protocols/AUTOSAR_FO_RS_SOMEIPProtocol.md` — 810 lines, 28 figure refs, 82 item IDs
   - Note: related site content: cp/communication/someipxf, cp/communication/someiptp (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — all 28 figure refs are page-decoration chrome, 0 content figures; 41 requirement items get sequential §3.1.1–3.3.16 numbering (IDs + {DRAFT} dropped); source ch.3 Requirements Tracing omitted per ASWS precedent (4→3, 5→4); garbled Rationale/Use-Case cells of items 00014 and 00025 recovered from the R23-11 PDF; glossary: SOME/IP entry gained this document as additional source, 3 new (RPC, Remote Procedure Call, Union); ch.2 shares 10 of its 15 terms with the SOME/IP-SD RS document (already appended there — not re-appended, one-translation rule)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_macsec (AUTOSAR_FO_RS_MACsec · CommunicationManagement · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on MACsec（MACsec 需求）; target `foundation/communication_management/rs_macsec/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `CommunicationManagement/AUTOSAR_FO_RS_MACsec.md` — 834 lines, 31 figure refs, 4 item IDs

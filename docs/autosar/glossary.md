@@ -5243,6 +5243,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
+**Remote Procedure Call**
+> 远程过程调用（**RPC**）——从一个 **ECU** 到另一个 **ECU**、使用消息传输的方法调用。
+>
+> 来源：[Requirements on SOME/IP Protocol（SOME/IP 协议需求）](foundation/protocols/rs_someip_protocol/index.md)（AUTOSAR_FO_RS_SOMEIPProtocol）
+{: .glossary-source}
+
 **Repeat Message State**
 > 重复消息状态——通过重复传输 **NM** 消息确保向正常运行转换对总线上其他节点可见的 **NM** 状态。
 >
@@ -5337,6 +5343,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 「ROM 块」是「基本存储对象」。它代表驻留在 **ROM** 中的「NVRAM 块」的一部分。「ROM 块」是「NVRAM 块」的可选部分。
 >
 > 来源：[AUTOSAR NVM（非易失性存储管理器）](cp/memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
+{: .glossary-source}
+
+**RPC**
+> 远程过程调用（**Remote Procedure Call**）——从一个 **ECU** 到另一个 **ECU**、使用消息传输的方法调用。
+>
+> 来源：[Requirements on SOME/IP Protocol（SOME/IP 协议需求）](foundation/protocols/rs_someip_protocol/index.md)（AUTOSAR_FO_RS_SOMEIPProtocol）
 {: .glossary-source}
 
 **RQST**
@@ -5896,7 +5908,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SOME/IP**
 > 可扩展的面向服务的基于IP的中间件（**Scalable service-Oriented MiddlwarE over IP**）。
 >
-> 来源：[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR SomeIpXf（SOME/IP转换器）](cp/communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）、[AUTOSAR SomeIpTp（SOME/IP传输协议）](cp/communication/someiptp/index.md)（AUTOSAR_CP_SWS_SOMEIPTransportProtocol）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）
+> 来源：[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR SomeIpXf（SOME/IP转换器）](cp/communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）、[AUTOSAR SomeIpTp（SOME/IP传输协议）](cp/communication/someiptp/index.md)（AUTOSAR_CP_SWS_SOMEIPTransportProtocol）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Requirements on SOME/IP Protocol（SOME/IP 协议需求）](foundation/protocols/rs_someip_protocol/index.md)（AUTOSAR_FO_RS_SOMEIPProtocol）
 {: .glossary-source}
 
 **SOME/IP-SD**
@@ -6705,6 +6717,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 由承载**SdServerService**的ECU发送到单播端点的事件。该单播端点由已在Endpoint Option（见「Consumed Eventgroup unicast endpoint」）中引用的、订阅了该SdServerService的特定SdClientService提供。
 >
 > 来源：[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
+{: .glossary-source}
+
+**Union**
+> 联合（**Union**）——动态采用不同数据类型的数据结构。
+>
+> 来源：[Requirements on SOME/IP Protocol（SOME/IP 协议需求）](foundation/protocols/rs_someip_protocol/index.md)（AUTOSAR_FO_RS_SOMEIPProtocol）
 {: .glossary-source}
 
 **&lt;Up&gt;**

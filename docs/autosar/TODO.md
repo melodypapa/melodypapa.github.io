@@ -4,7 +4,7 @@
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
 > Layout (2026-11-02): CP articles live under `cp/<section>/`, Foundation under `foundation/<topic>/`; article links below are relative to `docs/autosar/`.
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-05 (Foundation rs-prs batch: Project Objectives (RS) + IEEE1722 (RS) + Debug Trace Profile (RS) + SOME/IP-SD (RS) + V2X Remote Access Layer (PRS) + IPsec (RS) + Security Extract Template (RS) + Feature Model Exchange Format (RS) + SecOc (PRS) + DDS (RS) + NM Protocol (PRS) + E2E (RS) + Intrusion Detection System (RS) + Firewall (RS) + Health Monitoring (RS) new-article translations; 2026-11-04: Foundation methodology_templates: Abstract Platform Specification (TPS) new-article translation; 2026-11-03: Foundation health_monitoring: ASWS Health Monitoring new-article translation (EXP System Health Monitoring earlier the same day); libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-05 (Foundation rs-prs batch: Project Objectives (RS) + IEEE1722 (RS) + Debug Trace Profile (RS) + SOME/IP-SD (RS) + SOME/IP (RS) + V2X Remote Access Layer (PRS) + IPsec (RS) + Security Extract Template (RS) + Feature Model Exchange Format (RS) + SecOc (PRS) + DDS (RS) + NM Protocol (PRS) + E2E (RS) + Intrusion Detection System (RS) + Firewall (RS) + Health Monitoring (RS) new-article translations; 2026-11-04: Foundation methodology_templates: Abstract Platform Specification (TPS) new-article translation; 2026-11-03: Foundation health_monitoring: ASWS Health Monitoring new-article translation (EXP System Health Monitoring earlier the same day); libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
 
 ## Backlog
 
@@ -322,7 +322,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ✅ V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范） — AUTOSAR_FO_PRS_V2XRemoteAccessLayer (`foundation/protocols/prs_v2x_remote_access_layer/`)
 - ✅ Requirements on Data Distribution Service（数据分发服务需求） — AUTOSAR_FO_RS_DataDistributionService (`foundation/protocols/rs_data_distribution_service/`)
 - ✅ Requirements on IPsec Protocol（IPsec 协议需求） — AUTOSAR_FO_RS_IPsecProtocol (`foundation/protocols/rs_ipsec_protocol/`)
-- ❌ Requirements on SOME/IP Protocol（SOME/IP 协议需求） — AUTOSAR_FO_RS_SOMEIPProtocol (`foundation/protocols/`)
+- ✅ Requirements on SOME/IP Protocol（SOME/IP 协议需求） — AUTOSAR_FO_RS_SOMEIPProtocol (`foundation/protocols/rs_someip_protocol/`)
 - ✅ Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求） — AUTOSAR_FO_RS_SOMEIPServiceDiscoveryProtocol (`foundation/protocols/rs_someip_service_discovery_protocol/`)
 - ❌ Requirements on Time Synchronization（时间同步需求） — AUTOSAR_FO_RS_TimeSync (`foundation/protocols/`)
 

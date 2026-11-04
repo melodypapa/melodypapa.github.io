@@ -475,6 +475,8 @@ nav:
       - 协议:
         - autosar/foundation/protocols/index.md
         - "SOME/IP-SD": autosar/foundation/protocols/rs_someip_service_discovery_protocol/index.md
+        - "RS SOME/IP": autosar/foundation/protocols/rs_someip_protocol/index.md
+        - "RS SOME/IP": autosar/foundation/protocols/rs_someip_protocol/index.md
         - "V2xRAL": autosar/foundation/protocols/prs_v2x_remote_access_layer/index.md
         - "IPsec": autosar/foundation/protocols/rs_ipsec_protocol/index.md
         - "SecOC": autosar/foundation/protocols/prs_secoc_protocol/index.md

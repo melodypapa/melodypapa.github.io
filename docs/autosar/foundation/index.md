@@ -24,6 +24,7 @@ title: "基础标准（Foundation）"
   * [Requirements on Feature Model Exchange Format（特征模型交换格式需求）](methodology_templates/rs_feature_model_exchange_format/index.md)
 * [协议（Protocols）](protocols/index.md)
   * [Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）](protocols/rs_someip_service_discovery_protocol/index.md)
+  * [Requirements on SOME/IP Protocol（SOME/IP 协议需求）](protocols/rs_someip_protocol/index.md)
   * [V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](protocols/prs_v2x_remote_access_layer/index.md)
   * [Requirements on IPsec Protocol（IPsec 协议需求）](protocols/rs_ipsec_protocol/index.md)
   * [Secure Onboard Communication Protocol Specification（安全车载通信协议规范）](protocols/prs_secoc_protocol/index.md)
