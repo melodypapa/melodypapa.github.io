@@ -6,7 +6,9 @@ title: "协议（Protocols）"
 
 ## 文章
 
-本类别尚无已翻译文章。R23-11 包含以下源文档（待翻译）：
+* [Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）](rs_someip_service_discovery_protocol/index.md)
+
+R23-11 中本类别的其余源文档（待翻译）：
 
 * **AUTOSAR_FO_PRS_E2EProtocol** — E2E Protocol Specification（端到端协议规范）
 * **AUTOSAR_FO_PRS_IntrusionDetectionSystem** — Intrusion Detection System Protocol Specification（入侵检测系统协议规范）
@@ -20,7 +22,6 @@ title: "协议（Protocols）"
 * **AUTOSAR_FO_RS_DataDistributionService** — Requirements on Data Distribution Service（数据分发服务需求）
 * **AUTOSAR_FO_RS_IPsecProtocol** — Requirements on IPsec Protocol（IPsec 协议需求）
 * **AUTOSAR_FO_RS_SOMEIPProtocol** — Requirements on SOME/IP Protocol（SOME/IP 协议需求）
-* **AUTOSAR_FO_RS_SOMEIPServiceDiscoveryProtocol** — Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）
 * **AUTOSAR_FO_RS_TimeSync** — Requirements on Time Synchronization（时间同步需求）
 
 ## 相关内容

@@ -19,6 +19,7 @@ title: "基础标准（Foundation）"
 * [方法论与模板（Methodology and Templates）](methodology_templates/index.md)
   * [Specification of Abstract Platform（抽象平台规范）](methodology_templates/tps_abstract_platform_specification/index.md)
 * [协议（Protocols）](protocols/index.md)
+  * [Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）](protocols/rs_someip_service_discovery_protocol/index.md)
 * [发布文档（Release Documentation）](release_documentation/index.md)
 * [功能安全（Safety）](safety/index.md)
 * [信息安全（Security）](security/index.md)

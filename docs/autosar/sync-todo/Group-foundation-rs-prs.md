@@ -51,12 +51,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）; target `foundation/protocols/rs_someip_service_discovery_protocol/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Protocols/AUTOSAR_FO_RS_SOMEIPServiceDiscoveryProtocol.md` — 511 lines, 23 figure refs, 70 item IDs
   - Note: related site content: cp/communication/service_discovery (Sd) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — 22 of 23 figure refs are page-decoration chrome; the 1 content-sized image (899x522, 203KB) sits inside the dropped Requirements Tracing chapter as a PDF-table screenshot → omitted with the chapter; item-ID decision applied (25 requirement items get sequential §3.1.1–3.4.3 numbering); source ch.3 Requirements Tracing omitted per ASWS precedent (4→3, 5→4); ch.2 is a 15-row TERMS table (no true acronyms except TTL) → blockquote format; garbled Use-Case/AppliesTo cells of item 00015 recovered; glossary: 12 existing entries gained this document as additional source, 3 new (Notification Event, Offering a service instance, TTL)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_v2x_remote_access_layer (AUTOSAR_FO_PRS_V2XRemoteAccessLayer · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）; target `foundation/protocols/prs_v2x_remote_access_layer/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_V2XRemoteAccessLayer.md` — 512 lines, 25 figure refs, no item IDs

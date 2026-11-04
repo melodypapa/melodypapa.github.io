@@ -470,6 +470,7 @@ nav:
         - "Abstract Platform": autosar/foundation/methodology_templates/tps_abstract_platform_specification/index.md
       - 协议:
         - autosar/foundation/protocols/index.md
+        - "SOME/IP-SD": autosar/foundation/protocols/rs_someip_service_discovery_protocol/index.md
       - 发布文档:
         - autosar/foundation/release_documentation/index.md
       - 功能安全:
