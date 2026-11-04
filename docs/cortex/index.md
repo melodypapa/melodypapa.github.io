@@ -30,6 +30,7 @@ title: "ARM Cortex"
 10. [内存保护单元（Memory Protection Unit）](m7_processor/mpu/index.md)
 11. [浮点单元（Floating Point Unit）](m7_processor/fpu/index.md)
 12. [调试（Debug）](m7_processor/debug/index.md)
+13. [交叉触发接口（Cross Trigger Interface）](m7_processor/cti/index.md)
 
 ## ARM Cortex R52+ 处理器
 
