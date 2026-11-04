@@ -1645,6 +1645,19 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**Gpt_StartTimer**](../mcal/gpt_driver/index.md#736-gpt_starttimer) | 启动一个定时器通道。 |
 | [**Gpt_StopTimer**](../mcal/gpt_driver/index.md#737-gpt_stoptimer) | 停止一个定时器通道。 |
 
+## Hardware Test Management startup shutdown（硬件测试管理启动和关闭）（6）
+
+来源：[Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager
+
+| 函数 | 简述 |
+|---|---|
+| [**HTMSS_GetTestStatus**](../system_services/hw_test_manager/index.md#733-htmss_getteststatus) | — |
+| [**HTMSS_GetVersionInfo**](../system_services/hw_test_manager/index.md#734-htmss_getversioninfo) | — |
+| [**HTMSS_Init**](../system_services/hw_test_manager/index.md#731-htmss_init) | — |
+| [**HTMSS_ShutdownTestErrorHook**](../system_services/hw_test_manager/index.md#782-htmss_shutdowntesterrorhook) | — |
+| [**HTMSS_StartTest**](../system_services/hw_test_manager/index.md#732-htmss_starttest) | — |
+| [**HTMSS_StartupTestErrorHook**](../system_services/hw_test_manager/index.md#781-htmss_startuptesterrorhook) | — |
+
 ## AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）（1）
 
 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](../io/iohwab/index.md) · SWS_IOHardwareAbstraction

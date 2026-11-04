@@ -163,6 +163,7 @@ title: "CP AUTOSAR"
   * [AUTOSAR Time Service（时间服务）](system_services/time_service/index.md)
   * [Software Cluster Design and Integration Guideline for Classic Platform（经典平台软件集群设计与集成指南）](system_services/sw_cluster_design_and_integration/index.md)
   * [Software Cluster Connection（软件集群连接）](system_services/software_cluster_connection/index.md)
+  * [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](system_services/hw_test_manager/index.md)
 
 ### 功能安全
 

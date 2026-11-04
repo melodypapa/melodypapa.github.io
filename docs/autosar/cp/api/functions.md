@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2306** 个条目。
+共 **2312** 个条目。
 
 ## A
 
@@ -4441,6 +4441,26 @@ title: "AUTOSAR API 函数清单"
 
 **[Gpt_StopTimer](../mcal/gpt_driver/index.md#737-gpt_stoptimer)**
 > 函数 · [AUTOSAR GPT Driver（通用定时器驱动）](../mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
+
+## H
+
+**[HTMSS_GetTestStatus](../system_services/hw_test_manager/index.md#733-htmss_getteststatus)**
+> 函数 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
+
+**[HTMSS_GetVersionInfo](../system_services/hw_test_manager/index.md#734-htmss_getversioninfo)**
+> 函数 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
+
+**[HTMSS_Init](../system_services/hw_test_manager/index.md#731-htmss_init)**
+> 函数 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
+
+**[HTMSS_ShutdownTestErrorHook](../system_services/hw_test_manager/index.md#782-htmss_shutdowntesterrorhook)**
+> 函数 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
+
+**[HTMSS_StartTest](../system_services/hw_test_manager/index.md#732-htmss_starttest)**
+> 函数 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
+
+**[HTMSS_StartupTestErrorHook](../system_services/hw_test_manager/index.md#781-htmss_startuptesterrorhook)**
+> 函数 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
 
 ## I
 

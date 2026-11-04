@@ -4,7 +4,7 @@
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
 > Layout (2026-11-02): CP articles live under `cp/<section>/`, Foundation under `foundation/<topic>/`; article links below are relative to `docs/autosar/`.
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-05 (system_services SwCluC new-article full Type A translation) (Foundation health_monitoring: EXP System Health Monitoring new-article translation; libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-05 (system_services batch: SwCluC + HWTestManager new-article full Type A translations) (Foundation health_monitoring: EXP System Health Monitoring new-article translation; libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
 
 ## Backlog
 
@@ -228,8 +228,9 @@
 
 - ✅ [ComM（通信管理器）](cp/system_services/comm/) — SWS_COMManager · R23-11 (new article 2026-11-01, full Type A: ch.2 缩略语和定义 in source order (16+19 rows), §6 PNC/channel state machines + module services with verbatim service/internal-behavior fences, §7 API (6 imported types incl. Std_ReturnType extension, 4 types, 21 functions, 19 callbacks in 5 groups, 6 C-S + 8 ports + mode declaration group), §8 时序图 7 figures, §9 8 containers in the Dcm attribute-table style; 19 figures; appendix A NA requirements dropped; [ECUC_ComM_*] prose cross-refs kept per OS precedent; identifier/chapter-ref/citation links applied)
 - ✅ [Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/) — SWS_SoftwareClusterConnection · R23-11 (2026-11-05 full Type A new article, 18.7k lines: ch.2 缩略语和缩写 62 term lines; §6 功能规格 = 二进制清单 + 基础配置检查 + 跨集群通信 (守护值计算全属性清单) + 代理模块 OS/NvM/Com/LdCom/Dcm/Dem/FiM + 标准化服务资源表 7.10–7.33 + 公共函数; §7 API 12 types / 22 函数+回调 / 调度 / 期望 / 服务接口; §8 配置规范 SwCluC 全容器 + Xcc/NvM/Os/Com/LdCom/Dcm/Dem/FiM 代理配置; §9 引用的元类 138 张表; §10 引用的 ECUC 配置参数 EcuC/RTE/Os/NvM/Dcm/Dem/FiM/Com/LdCom/WdgM; §11 引用的 C-API; §12 引用的服务接口; ## F 变更历史 ID fences; 65 figures; source ch.9 时序图 N/A. omitted; check_api_sync known-false-positive (8.3.1.1 subsections counted as functions; 33 说明 = 22 函数 + 11 符号名/子节条目); identifier/citation links --apply 890 lines, idempotent)
+- ✅ [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](cp/system_services/hw_test_manager/) — SWS_HWTestManager · R23-11 (2026-11-05 full Type A new article: ch.2 缩略语 10 terms; §3 三小节 输入文件/相关标准与规范/相关规范 (source splits §3 differently from the canonical combined heading); §6 功能规格 (一般行为 + 硬件测试管理 6.2.1 背景与理由/6.2.2 需求/6.2.3 状态表 6.1) + 6.3 错误分类 (4 dev errors); §7 API 3 imported types/4 types/4 functions (说明-fold, check_api_sync OK 4/4) + 期望接口 2 tables + 服务接口 GetTestStatus CSI + 2 调出 (7.8 调出定义); §8 时序图 7 figures (source ch.9 real content); §9 配置规范 HTTMS/HTTMSSGeneral/HTTMSSConfigSet + Figure10-1–3; 12 figures; source ch.6 traceability dropped; source quirk kept: §4 states AUTOSAR release 4.3.0; DevErrorDetect description 'Switch for enabling the DET.' recovered from PDF (markdown truncated); StartupTestErrorHook empty Available-via cell kept empty (PDF-confirmed); identifier/citation links --apply 13 lines, idempotent)
 
-❌ Missing (1): SWS_HWTestManager
+❌ Missing: none — all R23-11 SystemServices SWS docs translated
 
 ## safety
 

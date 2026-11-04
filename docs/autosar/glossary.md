@@ -497,7 +497,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **BIST**
 > 内建自测试（**Built in Self Test**）
 >
-> 来源：[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）、[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](cp/safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures）
+> 来源：[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）、[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](cp/safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures）、[Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](cp/system_services/hw_test_manager/index.md)（AUTOSAR_CP_SWS_HWTestManager）
 {: .glossary-source}
 
 **Block Management Type**
@@ -3484,7 +3484,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **MSTP（Microcontroller Specific Test Package）**
 > 微控制器特定测试包（**Microcontroller Specific Test Package**）
 >
-> 来源：[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](cp/safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures）
+> 来源：[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](cp/safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures）、[Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](cp/system_services/hw_test_manager/index.md)（AUTOSAR_CP_SWS_HWTestManager）
 {: .glossary-source}
 
 **MTU**

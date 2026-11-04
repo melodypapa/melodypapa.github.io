@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **674** 个条目。
+共 **678** 个条目。
 
 ## A
 
@@ -1084,6 +1084,20 @@ title: "AUTOSAR API 类型清单"
 
 **[Gpt_ValueType](../mcal/gpt_driver/index.md#723-gpt_valuetype)**
 > 类型 · [AUTOSAR GPT Driver（通用定时器驱动）](../mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
+
+## H
+
+**[HTMSS_TestCfgType](../system_services/hw_test_manager/index.md#721-htmss_testcfgtype)**
+> 类型 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
+
+**[HTMSS_TestGroupType](../system_services/hw_test_manager/index.md#723-htmss_testgrouptype)**
+> 类型 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
+
+**[HTMSS_TestResultType](../system_services/hw_test_manager/index.md#724-htmss_testresulttype)**
+> 类型 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
+
+**[HTMSS_TestStatusType](../system_services/hw_test_manager/index.md#722-htmss_teststatustype)**
+> 类型 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
 
 ## I
 
