@@ -467,6 +467,7 @@ nav:
       - 通用:
         - autosar/foundation/general/index.md
         - "TR Glossary": autosar/foundation/general/tr_glossary/index.md
+        - "Predefined Names": autosar/foundation/general/tr_predefined_names/index.md
         - "Project Objectives": autosar/foundation/general/rs_project_objectives/index.md
       - 通信管理:
         - autosar/foundation/communication_management/index.md

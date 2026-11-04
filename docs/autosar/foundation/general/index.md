@@ -7,6 +7,7 @@ title: "通用（General）"
 ## 文章
 
 * [TR Glossary（AUTOSAR 术语表）](tr_glossary/index.md)
+* [Predefined Names in AUTOSAR（AUTOSAR 预定义名称）](tr_predefined_names/index.md)
 * [Project Objectives（项目目标）](rs_project_objectives/index.md)
 
 以下源文档尚未翻译：

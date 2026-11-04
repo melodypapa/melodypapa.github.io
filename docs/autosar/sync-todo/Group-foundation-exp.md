@@ -60,15 +60,20 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (2026-11-03: approved — scope limited to the EXP document, item IDs dropped/titles only)
   - [x] Step 6 — TODO.md row + commit/PR (issue #255 · commit 4320445 · PR #256)
-- [ ] tr_predefined_names (AUTOSAR_FO_TR_PredefinedNames · General · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [ ] tr_predefined_names (AUTOSAR_FO_TR_PredefinedNames · General · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Predefined Names in AUTOSAR（AUTOSAR 预定义名称）; target `foundation/general/tr_predefined_names/`; technical report (TR) — prose; no specification items
   - Note: source `General/AUTOSAR_FO_TR_PredefinedNames.md` — 423 lines, 23 figure refs, no item IDs
   - Note: related site content: glossary.md (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–4 + annex A (4 meta-model class tables, real content — not a placeholder) + annex B (B.1.1–B.1.3 all `none` → 无, kept per appendix-B rule); item IDs [TR_PDN_x]/[TPS_STDT_x]/[TPS_GST_x] dropped per the 2026-11-03 decision
+  - Note: technical shape — 3 keyword tables (表2.1 virtual modules 5 rows, 表3.1 information categories 23 rows, 表4.1 document abbreviations 99 rows) verified row-by-row against the source (shortName+abbrName, order); PDF-split fragments merged; shortName values with PDF line breaks joined per the source's own rule ("the line breaks shall be ignored"); annex A class tables rendered in the TPS two-table form (属性|值 + 属性|类型|多重性|种类|备注), collapsed repeated PDF columns
+  - Note: figures — 23 refs all page chrome (recurring hashes + 1 unique 8de41666 8 KB) dropped; no content diagrams
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (270 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/glyph/`\<` in content (1 hit = provenance comment listing the dropped ID forms); row sets verified 5/23/99
+  - Note: Phase B (2026-11-05) — coverage ch.1→§1, ch.2→§2, ch.3→§3, ch.4→§4, A→§A (A.1–A.4), B→§B (B.1.1–3 → 无), trailing 参考文献 (ref-1..5, 12 citations linked via --apply, idempotent, all contexts verified to name the entry's own document); deliberate omissions: doc-meta chrome + Disclaimer + Contents (EXP precedent) — user to verify; source quirks kept verbatim: shortName `Pesistency` (typo), longName `Specifcation of Safety Extensions` (typo), 5× "Adaptive Platform - to be filled correclty" → translated with typo normalized (asws precedent) and noted here
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] exp_time_sensitive_network_features (AUTOSAR_FO_EXP_TimeSensitiveNetworkFeatures · CommunicationManagement · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Explanation of Time Sensitive Networking Features（时间敏感网络特性说明）; target `foundation/communication_management/exp_time_sensitive_network_features/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)

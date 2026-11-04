@@ -8,6 +8,7 @@ title: "基础标准（Foundation）"
 
 * [通用（General）](general/index.md)
   * [TR Glossary（AUTOSAR 术语表）](general/tr_glossary/index.md)
+  * [Predefined Names in AUTOSAR（AUTOSAR 预定义名称）](general/tr_predefined_names/index.md)
   * [Project Objectives（项目目标）](general/rs_project_objectives/index.md)
 * [通信管理（Communication Management）](communication_management/index.md)
   * [Requirements on IEEE1722（IEEE 1722 需求）](communication_management/rs_ieee1722/index.md)

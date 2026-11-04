@@ -273,7 +273,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ❌ Security Overview（信息安全概览） — AUTOSAR_FO_EXP_SecurityOverview (`foundation/general/`)
 - ❌ Main Requirements（主需求规范） — AUTOSAR_FO_RS_Main (`foundation/general/`)
 - ❌ Project Objectives（项目目标） — AUTOSAR_FO_RS_ProjectObjectives (`foundation/general/`)
-- ❌ Predefined Names in AUTOSAR（AUTOSAR 预定义名称） — AUTOSAR_FO_TR_PredefinedNames (`foundation/general/`)
+- ✅ [Predefined Names in AUTOSAR（AUTOSAR 预定义名称）](foundation/general/tr_predefined_names/) — AUTOSAR_FO_TR_PredefinedNames (R23-11; TR, skeleton-exempt; ch.1–4 keyword tables (5 virtual modules, 23 information categories, 99 document abbreviations) + annex A class tables A.1–A.4 + annex B (none→无) + trailing 参考文献 registry (ref-1..5, 12 citation links); 2026-11-05)
 
 ### foundation/communication_management (Communication Management)
 
