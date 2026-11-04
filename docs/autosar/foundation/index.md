@@ -32,6 +32,7 @@ title: "基础标准（Foundation）"
   * [Secure Onboard Communication Protocol Specification（安全车载通信协议规范）](protocols/prs_secoc_protocol/index.md)
   * [Requirements on Data Distribution Service（数据分发服务需求）](protocols/rs_data_distribution_service/index.md)
   * [Network Management Protocol Specification（网络管理协议规范）](protocols/prs_network_management_protocol/index.md)
+  * [Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](protocols/prs_intrusion_detection_system/index.md)
 * [发布文档（Release Documentation）](release_documentation/index.md)
 * [功能安全（Safety）](safety/index.md)
 * [信息安全（Security）](security/index.md)

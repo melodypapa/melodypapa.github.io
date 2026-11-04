@@ -484,6 +484,7 @@ nav:
         - "SecOC": autosar/foundation/protocols/prs_secoc_protocol/index.md
         - "DDS": autosar/foundation/protocols/rs_data_distribution_service/index.md
         - "NM Protocol": autosar/foundation/protocols/prs_network_management_protocol/index.md
+        - "IDS Protocol": autosar/foundation/protocols/prs_intrusion_detection_system/index.md
       - 发布文档:
         - autosar/foundation/release_documentation/index.md
       - 功能安全:

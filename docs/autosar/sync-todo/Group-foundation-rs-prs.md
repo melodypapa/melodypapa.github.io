@@ -226,12 +226,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Intrusion Detection System Protocol Specification（入侵检测系统协议规范）; target `foundation/protocols/prs_intrusion_detection_system/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_IntrusionDetectionSystem.md` — 998 lines, 42 figure refs, 16 item IDs
   - Note: related site content: CP SWS_IntrusionDetectionSystemManager (IdsM) queued in Group-security (different document) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — 8 of 41 figure refs are content figures (Figure2-1 use case; Figure5-1 IDS message, Figure5-3 event frame, Figure5-4 timestamp, Figure5-5/5-6 context data, Figure5-7 signature, Figure5-8 separation header; there is NO source Figure5.2 — its content is the overview table), embedded by source figure number; architecture/sequence label spill dropped; ~46 inline protocol items translated as prose with IDs dropped; the garbled options list under §5.1 (stray "5./6." lines) merged back into option 4; source ch.3 Protocol Requirements (traceability only) omitted per ASWS precedent (4→3 … 7→6; in-text "refer to 5.1.x" renumbered); appendix A's three tables carry EMPTY heading columns → counts (added 2 / changed 3 / deleted 1), same run decision as SecOC row; the unnumbered trailing References chapter mirrored AFTER the appendix (source order); glossary: 4 existing generic entries (I-PDU, N-PDU, PDU Router, SoAd) gained this document as additional source, 7 new (Context Data, Context Data Buffer, Event Buffer, Event Frame, IDS Message, I-PDU Multiplexer, PRS IDS)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_timing_extensions (AUTOSAR_FO_RS_TimingExtensions · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Timing Extensions（时序扩展需求）; target `foundation/methodology_templates/rs_timing_extensions/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_RS_TimingExtensions.md` — 1,043 lines, 42 figure refs, 326 item IDs
