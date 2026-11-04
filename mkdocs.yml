@@ -181,6 +181,7 @@ plugins:
         autosar/system_services/index.md: autosar/cp/system_services/index.md
         autosar/system_services/operating_system/index.md: autosar/cp/system_services/operating_system/index.md
         autosar/system_services/software_cluster_connection/index.md: autosar/cp/system_services/software_cluster_connection/index.md
+        autosar/system_services/hw_test_manager/index.md: autosar/cp/system_services/hw_test_manager/index.md
         autosar/system_services/sw_cluster_design_and_integration/index.md: autosar/cp/system_services/sw_cluster_design_and_integration/index.md
         autosar/system_services/time_service/index.md: autosar/cp/system_services/time_service/index.md
         autosar/template/generic_structure/index.md: autosar/cp/template/generic_structure/index.md
@@ -401,6 +402,7 @@ nav:
         - "Tm": autosar/cp/system_services/time_service/index.md
         - "SwCluC": autosar/cp/system_services/sw_cluster_design_and_integration/index.md
         - "SwCluC SWS": autosar/cp/system_services/software_cluster_connection/index.md
+        - "HwTestManager": autosar/cp/system_services/hw_test_manager/index.md
       - 功能安全:
         - autosar/cp/safety/index.md
         - "WdgM": autosar/cp/safety/watchdog_manager/index.md
