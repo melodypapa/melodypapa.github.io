@@ -118,14 +118,19 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
   - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp_sw_architectural_decisions (AUTOSAR_FO_EXP_SWArchitecturalDecisions · General · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [ ] exp_sw_architectural_decisions (AUTOSAR_FO_EXP_SWArchitecturalDecisions · General · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Explanation of Software Architectural Decisions（软件架构决策说明）; target `foundation/general/exp_sw_architectural_decisions/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)
   - Note: source `General/AUTOSAR_FO_EXP_SWArchitecturalDecisions.md` — 834 lines, 48 figure refs, 8 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–5 (4 overview incl. Table 4.1 template · 5.1 common ×1 · 5.2 AP ×24 · 5.3 CP ×4 decisions); decision tables rendered as 字段|内容 two-column tables per the source's own template
+  - Note: technical shape — 29 decision tables with 11 fields each (Applies to/Decision/Rationale/Category/Application affected/Assumptions/Constraints/Alternatives/Remarks/Related requirements/Release); source fragments flattened into stray headings at 5.2.15 (Alternatives/Remarks) and 5.3.3 (Alternatives garbled by column scramble) reconstructed conservatively with in-row notes; prose-named item references ([RS_AP_00129] etc., [SWS_CORE_00003]) kept per the TPS_APSD precedent; 5.2.7 C++ example as a fenced block (duplicated conversion line deduplicated); heading typos normalized (AP-PLICATION_LAYER → APPLICATION_LAYER, AUTOSARRuntime → AUTOSAR Runtime — noted)
+  - Note: figures — 48 refs all page chrome, no content diagrams, dropped
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (274 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/glyph
+  - Note: Phase B (2026-11-05) — coverage ch.1→§1 … 5.3.4→§5.3.4, trailing 参考文献 (ref-1..9); 23 citations + 3 chapter-number refs linked via --apply, idempotent (0 on re-run); no external URL content beyond the registry (researchgate/lwn/doi/github — registry prose, not checked live per EXP precedent); deliberate omissions: doc-meta chrome + Disclaimer + Contents — user to verify
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] tps_log_and_trace_extract (AUTOSAR_FO_TPS_LogAndTraceExtract · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Log and Trace Extract Template（日志与跟踪提取模板）; target `foundation/methodology_templates/tps_log_and_trace_extract/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)

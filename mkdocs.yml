@@ -470,6 +470,7 @@ nav:
         - "Predefined Names": autosar/foundation/general/tr_predefined_names/index.md
         - "Project Objectives": autosar/foundation/general/rs_project_objectives/index.md
         - "Security Overview": autosar/foundation/general/exp_security_overview/index.md
+        - "SW Architectural Decisions": autosar/foundation/general/exp_sw_architectural_decisions/index.md
       - 通信管理:
         - autosar/foundation/communication_management/index.md
         - autosar/foundation/communication_management/exp_time_sensitive_network_features/index.md
