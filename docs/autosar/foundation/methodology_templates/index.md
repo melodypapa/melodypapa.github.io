@@ -13,6 +13,7 @@ title: "方法论与模板（Methodology and Templates）"
 * [Requirements on Timing Extensions（时序扩展需求）](rs_timing_extensions/index.md)
 * [Log and Trace Extract Template（日志与跟踪提取模板）](tps_log_and_trace_extract/index.md)
 * [ARXML Serialization Rules（ARXML 序列化规则）](tps_arxml_serialization_rules/index.md)
+* [XML Schema Production Rules（XML 模式生成规则）](tps_xml_schema_production_rules/index.md)
 
 R23-11 中本类别的其余源文档（待翻译）：
 
@@ -23,7 +24,6 @@ R23-11 中本类别的其余源文档（待翻译）：
 * **AUTOSAR_FO_TPS_GenericStructureTemplate** — Generic Structure Template（通用结构模板）
 * **AUTOSAR_FO_TPS_SecurityExtractTemplate** — Security Extract Template（安全提取模板）
 * **AUTOSAR_FO_TPS_StandardizationTemplate** — Standardization Template（标准化模板）
-* **AUTOSAR_FO_TPS_XMLSchemaProductionRules** — XML Schema Production Rules（XML 模式生成规则）
 
 ## 相关内容
 

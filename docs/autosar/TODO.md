@@ -311,7 +311,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ✅ [Log and Trace Extract Template（日志与跟踪提取模板）](foundation/methodology_templates/tps_log_and_trace_extract/) — AUTOSAR_FO_TPS_LogAndTraceExtract (R23-11; TPS, skeleton-exempt; ch.1–3 (DltEcu/DltMessage class tables + 16 constraints/items) + annex A history + annex B class tables B.1–B.8 + 2 ARXML listings; 3 content figures; missing item bodies recovered from the corpus PDF (2026-11-05))
 - ❌ Security Extract Template（安全提取模板） — AUTOSAR_FO_TPS_SecurityExtractTemplate (`foundation/methodology_templates/`)
 - ❌ Standardization Template（标准化模板） — AUTOSAR_FO_TPS_StandardizationTemplate (`foundation/methodology_templates/`)
-- ❌ XML Schema Production Rules（XML 模式生成规则） — AUTOSAR_FO_TPS_XMLSchemaProductionRules (`foundation/methodology_templates/`)
+- ✅ [XML Schema Production Rules（XML 模式生成规则）](foundation/methodology_templates/tps_xml_schema_production_rules/) — AUTOSAR_FO_TPS_XMLSchemaProductionRules (R23-11; TPS, skeleton-exempt; ch.1–5 (design principles, tag configuration incl. 00056 default table, 30 production rules 00000–00059 as field tables with target patterns) + annex A (TR→TPS ID mapping + 3 release histories); 38 content figures embedded; rules 00008/00023 target patterns recovered from corpus PDF; 2026-11-05)
 
 ### foundation/protocols (Protocols)
 

@@ -208,14 +208,19 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Phase B coverage — source References → 参考文献 (ref-1..ref-7); 1/1.1–1.3 → §1; 2/2.1–2.3.3 (incl. 2.3.2.1–2) → §2; 3/3.1–3.5.6.1 (incl. 3.1.1, 3.2.1–2, 3.3.1–3.3.5 + 3.3.2.1, 3.4.1–3.4.2.1, 3.5.1–3.5.6.1 incl. 3.5.5.1) → §3; 4/4.1 → §4; A.1 → §A; B.1–B.15 → §B; C.1–C.3 → §C; D → §D; E/Table E.1 → §E; F.1–F.5/Tables F.1–F.13 → §F. Deliberate omissions: none (every annex translates); the only unrenderable object is the missing annex D table
   - [x] Step 5 — User confirmation gate (2026-11-04: approved)
   - [x] Step 6 — TODO.md row + commit/PR (issue #259 · commit 510c6d7 · PR #260)
-- [ ] tps_xml_schema_production_rules (AUTOSAR_FO_TPS_XMLSchemaProductionRules · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [ ] tps_xml_schema_production_rules (AUTOSAR_FO_TPS_XMLSchemaProductionRules · MethodologyAndTemplates · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: XML Schema Production Rules（XML 模式生成规则）; target `foundation/methodology_templates/tps_xml_schema_production_rules/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_TPS_XMLSchemaProductionRules.md` — 1,848 lines, 145 figure refs, 43 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–5 + annex A; ch.3 tag tables (00036 tailoring table 20 tags, 00057/00058 constraint matrices, 00059 xml.*Element combinations 17 rows, 00056 default-configuration table 15 rows), ch.4 all 30 production rules (00000–00019, 00022–00029, 00036–00047, 00054–00059) rendered as field tables (适用对象/前置条件/目标模式/说明/XML 模式示例/XML 实例示例) with target patterns as fenced code
+  - Note: technical shape — **rules 00008 (1111) and 00023 (1100) had their Target pattern/Description rows flattened out of the markdown conversion; recovered from the corpus PDF pages 59–66 (pymupdf, ASWS precedent)**; pseudo-code (2.7.2 sequence algorithm) and all XML patterns kept verbatim in fences; annex A.1 TR→TPS ID mapping table kept as data (the sanctioned item-ID exception, TPS_APSD precedent)
+  - Note: figures — 145 refs → 38 content diagrams embedded in order (Figure11-01..38), captions taken from the nearest source caption; 图 4.2 is a 3-part diagram (3 images); the rule diagrams inside 4.4.1–4.4.10 carry no numbered captions in the source markdown and are named by their rule; 图 4.5/4.7/4.8/4.10 captions exist in the source but no content image is present (noted in provenance comment); 107 chrome images dropped
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (278 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/glyph/`⌈⌋`; all 38 figure files referenced 1:1
+  - Note: Phase B (2026-11-05) — coverage ch.1→§1 … ch.5→§5, A.1–A.4→§A, trailing 参考文献 (ref-1..11); 18 citations + 14 chapter refs linked via --apply, idempotent; deliberate omissions: doc-meta chrome + Disclaimer + Contents — user to verify
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate (batch gate deferred per user instruction 2026-11-05 — user asked to stop after this row; confirmed together with rows 1–11 below)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] tr_secure_hardware_extensions (AUTOSAR_FO_TR_SecureHardwareExtensions · Security · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Specification of Secure Hardware Extensions（安全硬件扩展规范）; target `foundation/security/tr_secure_hardware_extensions/`; technical report (TR) — prose; no specification items
