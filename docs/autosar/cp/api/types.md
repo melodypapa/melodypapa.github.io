@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **662** 个条目。
+共 **674** 个条目。
 
 ## A
 
@@ -1908,6 +1908,42 @@ title: "AUTOSAR API 类型清单"
 
 **[Std_VersionInfoType](../general/standard_types/index.md#712-std_versioninfotype)**
 > 类型 · [AUTOSAR Standard Types（标准类型）](../general/standard_types/index.md) · SWS_StandardTypes · R23-11
+
+**[SwCluC_BManif_ConCtrlType](../system_services/software_cluster_connection/index.md#7213-swcluc_bmanif_conctrltype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_GlobalResourceIdType](../system_services/software_cluster_connection/index.md#7216-swcluc_bmanif_globalresourceidtype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_HandleIndexType](../system_services/software_cluster_connection/index.md#7219-swcluc_bmanif_handleindextype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_HandleType](../system_services/software_cluster_connection/index.md#72111-swcluc_bmanif_handletype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_HeaderType](../system_services/software_cluster_connection/index.md#72112-swcluc_bmanif_headertype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_MachineIdType](../system_services/software_cluster_connection/index.md#7212-swcluc_bmanif_machineidtype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_ResourceGuardValueType](../system_services/software_cluster_connection/index.md#7217-swcluc_bmanif_resourceguardvaluetype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_ResourcePropertiesType](../system_services/software_cluster_connection/index.md#7214-swcluc_bmanif_resourcepropertiestype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_ResourceTypeIdType](../system_services/software_cluster_connection/index.md#7215-swcluc_bmanif_resourcetypeidtype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_SwClusterIdType](../system_services/software_cluster_connection/index.md#7211-swcluc_bmanif_swclusteridtype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_TableIndexType](../system_services/software_cluster_connection/index.md#7218-swcluc_bmanif_tableindextype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_VoidFncPtrType](../system_services/software_cluster_connection/index.md#72110-swcluc_bmanif_voidfncptrtype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
 
 ## T
 

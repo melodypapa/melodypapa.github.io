@@ -12,6 +12,7 @@ title: "系统服务（System Services）"
 * [AUTOSAR Operating System（操作系统）](operating_system/index.md)
 * [AUTOSAR Time Service（时间服务）](time_service/index.md)
 * [Software Cluster Design and Integration Guideline for Classic Platform（经典平台软件集群设计与集成指南）](sw_cluster_design_and_integration/index.md)
+* [Software Cluster Connection（软件集群连接）](software_cluster_connection/index.md)
 
 ## 相关内容
 
