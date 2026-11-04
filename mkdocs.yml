@@ -194,6 +194,7 @@ exclude_docs: |
   autosar/STANDARD.md
   autosar/TODO.md
   autosar/sync-todo/
+  cortex/sync-todo/
 
 markdown_extensions:
   - attr_list
@@ -248,6 +249,7 @@ nav:
       - "系统地址映射": cortex/m7_processor/system_address_map/index.md
     - Cortex-R52+ 内核:
 
+      - "时钟与复位": cortex/r52p_processor/clocking_and_resets/index.md
       - "内存保护单元": cortex/r52p_processor/memory_protection_unit/index.md
       - "内存系统": cortex/r52p_processor/memory_system/index.md
       - "Cortex®-R52+ 程序员模型": cortex/r52p_processor/programmers_model/index.md
