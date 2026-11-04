@@ -162,14 +162,19 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
   - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] tps_arxml_serialization_rules (AUTOSAR_FO_TPS_ARXMLSerializationRules · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [ ] tps_arxml_serialization_rules (AUTOSAR_FO_TPS_ARXMLSerializationRules · MethodologyAndTemplates · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: ARXML Serialization Rules（ARXML 序列化规则）; target `foundation/methodology_templates/tps_arxml_serialization_rules/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_TPS_ARXMLSerializationRules.md` — 915 lines, 35 figure refs, 40 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–3 + annex A (8 release histories) + annex B (5 class/primitive tables); **annex A.6 (R21-11, all none) missing from the markdown conversion — recovered from the corpus PDF pages 26–27 (ASWS/TPS_LTET precedent)**
+  - Note: technical shape — 19 TPS_ASR items as bold-titled prose (IDs dropped; prose-named IDs kept: TPS_ASR_00017 inside 00018, TPS_ASR_00004/05 inside the BOM rationale, TPS_STDT_00053/00078, TPS_GST_00024/25/32/00169/00170, TPS_XMLSPR_00008..17); TPS_ASR_00019 format-strategy table as GFM; Examples 2.1–2.7 as bold lead-ins; Listings 2.1–2.3 reconstructed readable; ch.3 glossary as bold-term + blockquote (30 terms)
+  - Note: figures — 35 refs → 2 content diagrams (Figure 1.1 template-spec overview, Figure 1.2 relation to XMLSPR) embedded; 33 chrome dropped
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (277 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/glyph
+  - Note: Phase B (2026-11-05) — coverage ch.1→§1, 1.1→§1.1, ch.2→§2 (2.1–2.2.5), ch.3→§3, A.1–A.8→§A, B.1–B.5→§B, trailing 参考文献 (ref-1..12); 16 citations linked via --apply, idempotent; deliberate omissions: doc-meta chrome + Disclaimer + Contents — user to verify; source quirk kept: 00016/00017 share the heading "No empty wrappers" in the A.1.1 table (00017 is the namespace declaration, source table shows the duplicate heading)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate (batch gate deferred to end of run per user instruction 2026-11-05 — confirmed together with the other rows)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [x] asws_health_monitoring (AUTOSAR_FO_ASWS_HealthMonitoring · HealthMonitoring · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Abstract Specification of Health Monitoring（健康监控抽象规范）; target `foundation/health_monitoring/asws_health_monitoring/`; abstract software specification (ASWS) — platform-independent SWS-like items

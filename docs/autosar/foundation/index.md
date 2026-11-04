@@ -31,6 +31,7 @@ title: "基础标准（Foundation）"
   * [Requirements on Methodology（方法论需求）](methodology_templates/rs_methodology/index.md)
   * [Requirements on Timing Extensions（时序扩展需求）](methodology_templates/rs_timing_extensions/index.md)
   * [Log and Trace Extract Template（日志与跟踪提取模板）](methodology_templates/tps_log_and_trace_extract/index.md)
+  * [ARXML Serialization Rules（ARXML 序列化规则）](methodology_templates/tps_arxml_serialization_rules/index.md)
 * [协议（Protocols）](protocols/index.md)
   * [Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）](protocols/rs_someip_service_discovery_protocol/index.md)
   * [Requirements on SOME/IP Protocol（SOME/IP 协议需求）](protocols/rs_someip_protocol/index.md)
