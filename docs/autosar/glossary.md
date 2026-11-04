@@ -727,7 +727,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **CAK**
 > 安全连接关联密钥（**Secure Connectivity Association Key**）。
 >
-> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）
+> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
 {: .glossary-source}
 
 **Callback**
@@ -3017,6 +3017,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Layered Software Architecture（分层软件架构）](cp/general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）
 {: .glossary-source}
 
+**ICK**
+> 完整性校验值密钥（**Integrity Check Value Key**）——从相应 **CAK** 派生、用于传输/验证完整性受保护 **MKPDU** 的密钥。
+>
+> 来源：[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
+{: .glossary-source}
+
 **ICMP**
 > Internet Control Message Protocol —— 互联网控制消息协议。
 >
@@ -3044,7 +3050,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ICV**
 > 完整性校验值（**Integrity Check Value**）。为时间同步报文提供完整性和真实性保护的校验值。
 >
-> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](cp/globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](cp/globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）、[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
 {: .glossary-source}
 
 **ICVL**
@@ -3402,7 +3408,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **KaY**
 > **MAC** 安全密钥协商实体（**MAC Security Key Agreement Entity**）。
 >
-> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）
+> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
+{: .glossary-source}
+
+**KDF**
+> 密钥派生函数（**Key Derivation Function**）——**MKA** 使用、基于 **CMAC** 模式 **AES** 密码的密钥派生函数。
+>
+> 来源：[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
+{: .glossary-source}
+
+**KEK**
+> 密钥加密密钥（**Key Encrypting Key**）——从相应 **CAK** 派生、用于加密/解密安全关联密钥（**SAK**）的密钥。
+>
+> 来源：[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
 {: .glossary-source}
 
 **Key**
@@ -3718,7 +3736,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **MACsec**
 > 介质访问控制安全（**Media Access Control Security**）。
 >
-> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）
+> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
 {: .glossary-source}
 
 **Main Time Triple**
@@ -3940,7 +3958,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **MKA**
 > **MACsec** 密钥协商协议（**MACsec Key Agreement protocol**，IEEE Std 802.1X）。
 >
-> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）
+> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
 {: .glossary-source}
 
 **MKPDU**
@@ -4702,7 +4720,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **PAE**
 > 端口访问实体（**Port Access Entity**）。
 >
-> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）
+> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
 {: .glossary-source}
 
 **Page Burst**
@@ -4948,7 +4966,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **PN**
 > 包编号（**Packet Number**）。
 >
-> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）
+> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
 {: .glossary-source}
 
 **PN filter mask**
@@ -5488,7 +5506,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SAK**
 > 安全关联密钥（**Secure Association Key**）。
 >
-> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）
+> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
 {: .glossary-source}
 
 **Sampling rate**
@@ -5548,7 +5566,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SCI**
 > 安全通道标识符（**Secure Channel Identifier**）。
 >
-> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）
+> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
 {: .glossary-source}
 
 **SD**
@@ -5608,7 +5626,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SecTAG**
 > **MAC** 安全标签（**MAC Security TAG**）。
 >
-> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）
+> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
 {: .glossary-source}
 
 **Sector**
@@ -5662,7 +5680,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SecY**
 > **MAC** 安全实体（**MAC Security Entity**）。
 >
-> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）
+> 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
 {: .glossary-source}
 
 **segment**
@@ -7101,6 +7119,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 可扩展标记语言（**eXtensible Markup Language**）
 >
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
+{: .glossary-source}
+
+**XPN**
+> 扩展数据包编号（**Extended Packet Number**）——将数据包编号 **PN** 扩展到 64 位的 **MACsec** 特性。
+>
+> 来源：[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
 {: .glossary-source}
 
 **XSD**

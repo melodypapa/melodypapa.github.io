@@ -202,12 +202,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Requirements on MACsec（MACsec 需求）; target `foundation/communication_management/rs_macsec/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `CommunicationManagement/AUTOSAR_FO_RS_MACsec.md` — 834 lines, 31 figure refs, 4 item IDs
   - Note: related site content: cp/communication/ethernet_interface, cp/communication/ethernet_driver (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-05 run — 2 of 28 figure refs are content figures (Figure4-1 MACsec frame layout, Figure4-2 MKA sequence with pre-shared key), embedded by source figure number; frame/sequence label spill dropped; 34 requirement items get sequential §4.2.x.y numbering (IDs + {DRAFT} dropped); §2.2.1-2.2.3 (all No content) and §4.3 (No content.) omitted under the placeholder rule; source ch.5 Requirements Tracing omitted per ASWS precedent (References renumbered 6→5, incl. its 6.1 Related-standards subsection); the source has NO change-history appendix; glossary: 11 existing entries gained this document as additional source, 3 new (ICK, KEK, XPN; KDF added as its own entry), SC has 2 homonyms — source-append skipped (decision recorded)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_methodology (AUTOSAR_FO_RS_Methodology · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Methodology（方法论需求）; target `foundation/methodology_templates/rs_methodology/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_RS_Methodology.md` — 928 lines, 31 figure refs, 186 item IDs

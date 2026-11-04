@@ -9,12 +9,12 @@ title: "通信管理（Communication Management）"
 * [Requirements on IEEE1722（IEEE 1722 需求）](rs_ieee1722/index.md)
 * [Requirements on Debug Trace Profile（调试跟踪配置文件需求）](rs_debug_trace_profile/index.md)
 * [Requirements on E2E（端到端通信保护需求）](rs_e2e/index.md)
+* [Requirements on MACsec（MACsec 需求）](rs_macsec/index.md)
 
 R23-11 中本类别的其余源文档（待翻译）：
 
 * **AUTOSAR_FO_EXP_TimeSensitiveNetworkFeatures** — Explanation of Time Sensitive Networking Features（时间敏感网络特性说明）
 * **AUTOSAR_FO_RS_LogAndTrace** — Requirements on Log and Trace（日志与跟踪需求）
-* **AUTOSAR_FO_RS_MACsec** — Requirements on MACsec（MACsec 需求）
 * **AUTOSAR_FO_RS_NetworkManagement** — Requirements on Network Management（网络管理需求）
 
 ## 相关内容

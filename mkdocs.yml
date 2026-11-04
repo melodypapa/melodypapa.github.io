@@ -460,6 +460,7 @@ nav:
         - "IEEE 1722": autosar/foundation/communication_management/rs_ieee1722/index.md
         - "Debug Trace Profile": autosar/foundation/communication_management/rs_debug_trace_profile/index.md
         - "RS E2E": autosar/foundation/communication_management/rs_e2e/index.md
+        - "MACsec": autosar/foundation/communication_management/rs_macsec/index.md
       - 诊断:
         - autosar/foundation/diagnostics/index.md
       - 健康监控:
