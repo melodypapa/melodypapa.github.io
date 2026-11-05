@@ -97,6 +97,7 @@ title: "CP AUTOSAR"
 
 * [网络安全（Security）](security/index.md)
   * [Firewall（防火墙）](security/firewall/index.md)
+  * [Intrusion Detection System Manager（入侵检测系统管理器）](security/idsm/index.md)
 
 ### 诊断（Diagnostics）
 
