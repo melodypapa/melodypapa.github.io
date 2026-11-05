@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2312** 个条目。
+共 **2650** 个条目。
 
 ## A
 
@@ -165,6 +165,99 @@ title: "AUTOSAR API 函数清单"
 
 **[Bfx_TstParityEven](../libraries/bfx/index.md#7410-bfx_tstparityeven)**
 > 函数 · [Specification of Bit Handling Routines（位处理例程规范）](../libraries/bfx/index.md) · SWS_BFXLibrary · R23-11
+
+**[Bmc_CompareExchange](../libraries/bmc/index.md#7424-bmc_compareexchange)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_CompareExchange_s](../libraries/bmc/index.md#74242-bmc_compareexchange_s)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_CompareExchange_u](../libraries/bmc/index.md#74241-bmc_compareexchange_u)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_Exchange](../libraries/bmc/index.md#7423-bmc_exchange)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_Exchange_s](../libraries/bmc/index.md#74232-bmc_exchange_s)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_Exchange_u](../libraries/bmc/index.md#74231-bmc_exchange_u)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchAdd](../libraries/bmc/index.md#7431-bmc_fetchadd)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchAdd_s](../libraries/bmc/index.md#74312-bmc_fetchadd_s)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchAdd_u](../libraries/bmc/index.md#74311-bmc_fetchadd_u)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchAnd](../libraries/bmc/index.md#7435-bmc_fetchand)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchAnd_s](../libraries/bmc/index.md#74352-bmc_fetchand_s)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchAnd_u](../libraries/bmc/index.md#74351-bmc_fetchand_u)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchOr](../libraries/bmc/index.md#7433-bmc_fetchor)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchOr_s](../libraries/bmc/index.md#74332-bmc_fetchor_s)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchOr_u](../libraries/bmc/index.md#74331-bmc_fetchor_u)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchSub](../libraries/bmc/index.md#7432-bmc_fetchsub)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchSub_s](../libraries/bmc/index.md#74322-bmc_fetchsub_s)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchSub_u](../libraries/bmc/index.md#74321-bmc_fetchsub_u)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchXor](../libraries/bmc/index.md#7434-bmc_fetchxor)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchXor_s](../libraries/bmc/index.md#74342-bmc_fetchxor_s)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FetchXor_u](../libraries/bmc/index.md#74341-bmc_fetchxor_u)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FlagClear](../libraries/bmc/index.md#7412-bmc_flagclear)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_FlagTestAndSet](../libraries/bmc/index.md#7411-bmc_flagtestandset)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_GetVersionInfo](../libraries/bmc/index.md#7451-bmc_getversioninfo)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_Load](../libraries/bmc/index.md#7421-bmc_load)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_Load_s](../libraries/bmc/index.md#74212-bmc_load_s)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_Load_u](../libraries/bmc/index.md#74211-bmc_load_u)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_Store](../libraries/bmc/index.md#7422-bmc_store)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_Store_s](../libraries/bmc/index.md#74222-bmc_store_s)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_Store_u](../libraries/bmc/index.md#74221-bmc_store_u)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
+
+**[Bmc_ThreadFence](../libraries/bmc/index.md#7441-bmc_threadfence)**
+> 函数 · [Specification of Basic Software Multicore Library（基础软件多核库规范）](../libraries/bmc/index.md) · SWS_BSWMulticoreLibrary · R23-11
 
 **[BndM_GetBlockPtr](../memory/bulk_nv_data_manager/index.md#733-bndm_getblockptr)**
 > 函数 · [AUTOSAR BndM（非易失性大容量数据管理器）](../memory/bulk_nv_data_manager/index.md) · SWS_BulkNvDataManager · R23-11
@@ -855,6 +948,57 @@ title: "AUTOSAR API 函数清单"
 **[CheckTaskMemoryAccess](../system_services/operating_system/index.md#746-checktaskmemoryaccess)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
+**[ChrgM_CpLineStatus](../communication/chargingmanager/index.md#733-chrgm_cplinestatus)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_DataLinkIndication](../communication/chargingmanager/index.md#734-chrgm_datalinkindication)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_ErrorIndication](../communication/chargingmanager/index.md#735-chrgm_errorindication)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_Init](../communication/chargingmanager/index.md#731-chrgm_init)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_MainFunction_Rx](../communication/chargingmanager/index.md#736-chrgm_mainfunction_rx)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_MainFunction_Tx](../communication/chargingmanager/index.md#737-chrgm_mainfunction_tx)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_PaymentServiceSelectionIndication](../communication/chargingmanager/index.md#738-chrgm_paymentserviceselectionindication)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_SessionSetupIndication](../communication/chargingmanager/index.md#739-chrgm_sessionsetupindication)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_SessionStopIndication](../communication/chargingmanager/index.md#7310-chrgm_sessionstopindication)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_StartProcess](../communication/chargingmanager/index.md#732-chrgm_startprocess)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_V2GTpCopyRxData](../communication/chargingmanager/index.md#7311-chrgm_v2gtpcopyrxdata)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_V2GTpCopyTxData](../communication/chargingmanager/index.md#7312-chrgm_v2gtpcopytxdata)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_V2GTpLocalIpAddrAssignmentChg](../communication/chargingmanager/index.md#741-chrgm_v2gtplocalipaddrassignmentchg)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_V2GTpRxIndication](../communication/chargingmanager/index.md#742-chrgm_v2gtprxindication)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_V2GTpSoConModeChg](../communication/chargingmanager/index.md#743-chrgm_v2gtpsoconmodechg)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_V2GTpStartOfReception](../communication/chargingmanager/index.md#744-chrgm_v2gtpstartofreception)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
+**[ChrgM_V2GTpTxConfirmation](../communication/chargingmanager/index.md#745-chrgm_v2gtptxconfirmation)**
+> 函数 · [AUTOSAR Charging Manager（充电管理器）](../communication/chargingmanager/index.md) · SWS_ChargingManager · R23-11
+
 **[ClearDTC](../diagnostics/diagnostic_event_manager/index.md#76310-cleardtc)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
 
@@ -869,6 +1013,165 @@ title: "AUTOSAR API 函数清单"
 
 **[ClearPendingInterrupt](../system_services/operating_system/index.md#7436-clearpendinginterrupt)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
+
+**[CnV2xApplRxIndicationBsm](../communication/chinesev2x_msg/index.md#7712-cnv2xapplrxindicationbsm)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xApplRxIndicationMap](../communication/chinesev2x_msg/index.md#7716-cnv2xapplrxindicationmap)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xApplRxIndicationRsm](../communication/chinesev2x_msg/index.md#7714-cnv2xapplrxindicationrsm)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xApplRxIndicationSpat](../communication/chinesev2x_msg/index.md#7715-cnv2xapplrxindicationspat)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xApplRxIndicationzRsi](../communication/chinesev2x_msg/index.md#7713-cnv2xapplrxindicationzrsi)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xM_GetChanTxParams](../communication/chinesev2x_mgmt/index.md#733-cnv2xm_getchantxparams)**
+> 函数 · [AUTOSAR Chinese V2X Management（中国V2X管理）](../communication/chinesev2x_mgmt/index.md) · SWS_ChineseV2XManagement · R23-11
+
+**[CnV2xM_GetVersionInfo](../communication/chinesev2x_mgmt/index.md#732-cnv2xm_getversioninfo)**
+> 函数 · [AUTOSAR Chinese V2X Management（中国V2X管理）](../communication/chinesev2x_mgmt/index.md) · SWS_ChineseV2XManagement · R23-11
+
+**[CnV2xM_Init](../communication/chinesev2x_mgmt/index.md#731-cnv2xm_init)**
+> 函数 · [AUTOSAR Chinese V2X Management（中国V2X管理）](../communication/chinesev2x_mgmt/index.md) · SWS_ChineseV2XManagement · R23-11
+
+**[CnV2xM_MainFunction](../communication/chinesev2x_mgmt/index.md#751-cnv2xm_mainfunction)**
+> 函数 · [AUTOSAR Chinese V2X Management（中国V2X管理）](../communication/chinesev2x_mgmt/index.md) · SWS_ChineseV2XManagement · R23-11
+
+**[CnV2xMsg_AbortPseudonymChange](../communication/chinesev2x_msg/index.md#738-cnv2xmsg_abortpseudonymchange)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_BsmBs_MainFunction](../communication/chinesev2x_msg/index.md#751-cnv2xmsg_bsmbs_mainfunction)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_CheckDistance](../communication/chinesev2x_msg/index.md#734-cnv2xmsg_checkdistance)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_CnV2xApplRxIndicationBSM](../communication/chinesev2x_msg/index.md#7742-cnv2xmsg_cnv2xapplrxindicationbsm)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_CnV2xApplRxIndicationMAP](../communication/chinesev2x_msg/index.md#7747-cnv2xmsg_cnv2xapplrxindicationmap)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_CnV2xApplRxIndicationRSI](../communication/chinesev2x_msg/index.md#7744-cnv2xmsg_cnv2xapplrxindicationrsi)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_CnV2xApplRxIndicationRSM](../communication/chinesev2x_msg/index.md#7745-cnv2xmsg_cnv2xapplrxindicationrsm)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_CnV2xApplRxIndicationSPAT](../communication/chinesev2x_msg/index.md#7746-cnv2xmsg_cnv2xapplrxindicationspat)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_CommitPseudonymChange](../communication/chinesev2x_msg/index.md#737-cnv2xmsg_commitpseudonymchange)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_DecapConfirmation](../communication/chinesev2x_msg/index.md#744-cnv2xmsg_decapconfirmation)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_EncapConfirmation](../communication/chinesev2x_msg/index.md#743-cnv2xmsg_encapconfirmation)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_GetRefTimePtr](../communication/chinesev2x_msg/index.md#733-cnv2xmsg_getreftimeptr)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_GetTime32](../communication/chinesev2x_msg/index.md#739-cnv2xmsg_gettime32)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_GetVehickeEventFlagsStatus](../communication/chinesev2x_msg/index.md#735-cnv2xmsg_getvehickeeventflagsstatus)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_GetVersionInfo](../communication/chinesev2x_msg/index.md#732-cnv2xmsg_getversioninfo)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_Init](../communication/chinesev2x_msg/index.md#731-cnv2xmsg_init)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_MapS_MainFunction](../communication/chinesev2x_msg/index.md#756-cnv2xmsg_maps_mainfunction)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_Mgt_MainFunction](../communication/chinesev2x_msg/index.md#752-cnv2xmsg_mgt_mainfunction)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_Poti](../communication/chinesev2x_msg/index.md#7743-cnv2xmsg_poti)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_PreparePseudonymChange](../communication/chinesev2x_msg/index.md#736-cnv2xmsg_preparepseudonymchange)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_RsiS_MainFunction](../communication/chinesev2x_msg/index.md#753-cnv2xmsg_rsis_mainfunction)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_RsmS_MainFunction](../communication/chinesev2x_msg/index.md#754-cnv2xmsg_rsms_mainfunction)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_RxIndication](../communication/chinesev2x_msg/index.md#742-cnv2xmsg_rxindication)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_RxS_MainFunction](../communication/chinesev2x_msg/index.md#757-cnv2xmsg_rxs_mainfunction)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_SetPositionAndTime](../communication/chinesev2x_msg/index.md#7310-cnv2xmsg_setpositionandtime)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_SpatS_MainFunction](../communication/chinesev2x_msg/index.md#755-cnv2xmsg_spats_mainfunction)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_TxConfirmation](../communication/chinesev2x_msg/index.md#741-cnv2xmsg_txconfirmation)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsg_Vdp](../communication/chinesev2x_msg/index.md#7741-cnv2xmsg_vdp)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsgPoti](../communication/chinesev2x_msg/index.md#7721-cnv2xmsgpoti)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xMsgVdp](../communication/chinesev2x_msg/index.md#7711-cnv2xmsgvdp)**
+> 函数 · [AUTOSAR Chinese V2X Message（中国V2X消息）](../communication/chinesev2x_msg/index.md) · SWS_ChineseV2XMessage · R23-11
+
+**[CnV2xNet_AbortAppLayerIdChange](../communication/chinesev2x_net/index.md#736-cnv2xnet_abortapplayeridchange)**
+> 函数 · [AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork · R23-11
+
+**[CnV2xNet_CommitAppLayerIdChange](../communication/chinesev2x_net/index.md#735-cnv2xnet_commitapplayeridchange)**
+> 函数 · [AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork · R23-11
+
+**[CnV2xNet_GetVersionInfo](../communication/chinesev2x_net/index.md#732-cnv2xnet_getversioninfo)**
+> 函数 · [AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork · R23-11
+
+**[CnV2xNet_Init](../communication/chinesev2x_net/index.md#731-cnv2xnet_init)**
+> 函数 · [AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork · R23-11
+
+**[CnV2xNet_PrepareAppLayerIdChange](../communication/chinesev2x_net/index.md#734-cnv2xnet_prepareapplayeridchange)**
+> 函数 · [AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork · R23-11
+
+**[CnV2xNet_RxIndication](../communication/chinesev2x_net/index.md#741-cnv2xnet_rxindication)**
+> 函数 · [AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork · R23-11
+
+**[CnV2xNet_Transmit](../communication/chinesev2x_net/index.md#733-cnv2xnet_transmit)**
+> 函数 · [AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork · R23-11
+
+**[CnV2xNet_TxConfirmation](../communication/chinesev2x_net/index.md#742-cnv2xnet_txconfirmation)**
+> 函数 · [AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork · R23-11
+
+**[CnV2xNetMainFunction](../communication/chinesev2x_net/index.md#751-cnv2xnetmainfunction)**
+> 函数 · [AUTOSAR Chinese V2X Network（中国V2X网络）](../communication/chinesev2x_net/index.md) · SWS_ChineseV2XNetwork · R23-11
+
+**[CnV2xSec_GetVersionInfo](../communication/chinesev2x_sec/index.md#732-cnv2xsec_getversioninfo)**
+> 函数 · [AUTOSAR Chinese V2X Security（中国V2X安全）](../communication/chinesev2x_sec/index.md) · SWS_ChineseV2XSecurity · R23-11
+
+**[CnV2xSec_Init](../communication/chinesev2x_sec/index.md#731-cnv2xsec_init)**
+> 函数 · [AUTOSAR Chinese V2X Security（中国V2X安全）](../communication/chinesev2x_sec/index.md) · SWS_ChineseV2XSecurity · R23-11
+
+**[CnV2xSec_MainFunction](../communication/chinesev2x_sec/index.md#751-cnv2xsec_mainfunction)**
+> 函数 · [AUTOSAR Chinese V2X Security（中国V2X安全）](../communication/chinesev2x_sec/index.md) · SWS_ChineseV2XSecurity · R23-11
+
+**[CnV2xSec_ReqDecap](../communication/chinesev2x_sec/index.md#734-cnv2xsec_reqdecap)**
+> 函数 · [AUTOSAR Chinese V2X Security（中国V2X安全）](../communication/chinesev2x_sec/index.md) · SWS_ChineseV2XSecurity · R23-11
+
+**[CnV2xSec_ReqEncap](../communication/chinesev2x_sec/index.md#733-cnv2xsec_reqencap)**
+> 函数 · [AUTOSAR Chinese V2X Security（中国V2X安全）](../communication/chinesev2x_sec/index.md) · SWS_ChineseV2XSecurity · R23-11
 
 **[Com_CopyRxData](../communication/com/index.md#7347-com_copyrxdata)**
 > 函数 · [AUTOSAR COM（COM模块）](../communication/com/index.md) · SWS_COM · R23-11
@@ -1496,6 +1799,45 @@ title: "AUTOSAR API 函数清单"
 
 **[CsmSignatureVerify](../crypto/crypto_service_manager/index.md#7529-csmsignatureverify)**
 > 函数 · [AUTOSAR Crypto Service Manager（加密服务管理器）](../crypto/crypto_service_manager/index.md) · SWS_CryptoServiceManager · R23-11
+
+**[CV2x_GetBufCV2xPC5RxParams](../communication/cellularv2x_driver/index.md#739-cv2x_getbufcv2xpc5rxparams)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_GetBufCV2xPC5TxParams](../communication/cellularv2x_driver/index.md#7310-cv2x_getbufcv2xpc5txparams)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_GetChanCV2xPC5TxParams](../communication/cellularv2x_driver/index.md#7312-cv2x_getchancv2xpc5txparams)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_GetControllerMode](../communication/cellularv2x_driver/index.md#734-cv2x_getcontrollermode)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_GetVersionInfo](../communication/cellularv2x_driver/index.md#732-cv2x_getversioninfo)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_Init](../communication/cellularv2x_driver/index.md#731-cv2x_init)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_MainFunction](../communication/cellularv2x_driver/index.md#751-cv2x_mainfunction)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_ProvideTxBuffer](../communication/cellularv2x_driver/index.md#735-cv2x_providetxbuffer)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_Receive](../communication/cellularv2x_driver/index.md#738-cv2x_receive)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_SetBufCV2xPC5TxParams](../communication/cellularv2x_driver/index.md#7311-cv2x_setbufcv2xpc5txparams)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_SetControllerMode](../communication/cellularv2x_driver/index.md#733-cv2x_setcontrollermode)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_Transmit](../communication/cellularv2x_driver/index.md#736-cv2x_transmit)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
+
+**[CV2x_TxConfirmation](../communication/cellularv2x_driver/index.md#737-cv2x_txconfirmation)**
+> 函数 · [AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](../communication/cellularv2x_driver/index.md) · SWS_CellularV2XDriver · R23-11
 
 ## D
 
@@ -2841,6 +3183,222 @@ title: "AUTOSAR API 函数清单"
 
 **[Eep_Write](../memory/eep/index.md#734-eep_write)**
 > 函数 · [AUTOSAR Eep（EEPROM驱动程序）](../memory/eep/index.md) · SWS_EEPROMDriver · R23-11
+
+**[Efx_ArcCos_s16_u16](../libraries/efx/index.md#751042-efx_arccos_s16_u16)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_ArcCos_s32_u32](../libraries/efx/index.md#751041-efx_arccos_s32_u32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_ArcCos_s8_u8](../libraries/efx/index.md#751043-efx_arccos_s8_u8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_ArcSin_s32_s32](../libraries/efx/index.md#751031-efx_arcsin_s32_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_ArcSin_s8_s8](../libraries/efx/index.md#751033-efx_arcsin_s8_s8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_ArsSin_s16_s16](../libraries/efx/index.md#751032-efx_arssin_s16_s16)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Average_s32_s32](../libraries/efx/index.md#7561-efx_average_s32_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_CalcTeQ_s32](../libraries/efx/index.md#75334-efx_calcteq_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_CalcTeQApp_s32](../libraries/efx/index.md#75335-efx_calcteqapp_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Cos_s16_s16](../libraries/efx/index.md#751022-efx_cos_s16_s16)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Cos_s32_s32](../libraries/efx/index.md#751021-efx_cos_s32_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Cos_s8_s8](../libraries/efx/index.md#751023-efx_cos_s8_s8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_CtrlSetLimits](../libraries/efx/index.md#75363-efx_ctrlsetlimits)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Debounce](../libraries/efx/index.md#75141-efx_debounce)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Debounce_u8_u8](../libraries/efx/index.md#751411-efx_debounce_u8_u8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_DebounceInit](../libraries/efx/index.md#75142-efx_debounceinit)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_DebounceSetparam](../libraries/efx/index.md#75143-efx_debouncesetparam)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_DT1Typ1Calc](../libraries/efx/index.md#75341-efx_dt1typ1calc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_DT1Typ1SetState](../libraries/efx/index.md#75343-efx_dt1typ1setstate)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_DT1Typ2Calc](../libraries/efx/index.md#75342-efx_dt1typ2calc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_DT1Typ2SetState](../libraries/efx/index.md#75344-efx_dt1typ2setstate)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_EdgeBipol_u8_u8](../libraries/efx/index.md#751811-efx_edgebipol_u8_u8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_EdgeFalling_u8_u8](../libraries/efx/index.md#751821-efx_edgefalling_u8_u8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_EdgeRising_u8_u8](../libraries/efx/index.md#751831-efx_edgerising_u8_u8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Exp_s32_s32](../libraries/efx/index.md#7551-efx_exp_s32_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_GetVersionInfo](../libraries/efx/index.md#791-efx_getversioninfo)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_HpFilter_s16_s32](../libraries/efx/index.md#7524-efx_hpfilter_s16_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_HpFilter_s8_s16](../libraries/efx/index.md#7522-efx_hpfilter_s8_s16)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_HpFilter_u16_s32](../libraries/efx/index.md#7523-efx_hpfilter_u16_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_HpFilter_u8_s16](../libraries/efx/index.md#7521-efx_hpfilter_u8_s16)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Hypot_u16u16_u16](../libraries/efx/index.md#7592-efx_hypot_u16u16_u16)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Hypot_u32u32_u32](../libraries/efx/index.md#7591-efx_hypot_u32u32_u32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Hypot_u8u8_u8](../libraries/efx/index.md#7593-efx_hypot_u8u8_u8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_ICalc](../libraries/efx/index.md#75361-efx_icalc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_ILimCalc](../libraries/efx/index.md#75362-efx_ilimcalc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_ISetState](../libraries/efx/index.md#75364-efx_isetstate)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PCalc](../libraries/efx/index.md#75321-efx_pcalc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PDCalc](../libraries/efx/index.md#75351-efx_pdcalc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PDSetParam](../libraries/efx/index.md#75353-efx_pdsetparam)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PDSetState](../libraries/efx/index.md#75352-efx_pdsetstate)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PIDSetParam](../libraries/efx/index.md#75386-efx_pidsetparam)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PIDSetState](../libraries/efx/index.md#75385-efx_pidsetstate)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PIDTyp1Calc](../libraries/efx/index.md#75381-efx_pidtyp1calc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PIDTyp1LimCalc](../libraries/efx/index.md#75382-efx_pidtyp1limcalc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PIDTyp2Calc](../libraries/efx/index.md#75383-efx_pidtyp2calc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PIDTyp2LimCalc](../libraries/efx/index.md#75384-efx_pidtyp2limcalc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PISetParam](../libraries/efx/index.md#75376-efx_pisetparam)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PISetState](../libraries/efx/index.md#75375-efx_pisetstate)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PITyp1Calc](../libraries/efx/index.md#75371-efx_pityp1calc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PITyp1LimCalc](../libraries/efx/index.md#75372-efx_pityp1limcalc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PITyp2Calc](../libraries/efx/index.md#75373-efx_pityp2calc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PITyp2LimCalc](../libraries/efx/index.md#75374-efx_pityp2limcalc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PSetState](../libraries/efx/index.md#75322-efx_psetstate)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PT1Calc](../libraries/efx/index.md#75331-efx_pt1calc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PT1SetState](../libraries/efx/index.md#75333-efx_pt1setstate)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_PT1Typ1Calc](../libraries/efx/index.md#75332-efx_pt1typ1calc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_RampCalc](../libraries/efx/index.md#751211-efx_rampcalc)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_RampCalcJump](../libraries/efx/index.md#751251-efx_rampcalcjump)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_RampCalcSwitch](../libraries/efx/index.md#751261-efx_rampcalcswitch)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_RampCheckActivity](../libraries/efx/index.md#751281-efx_rampcheckactivity)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_RampGetSwitchPos](../libraries/efx/index.md#751271-efx_rampgetswitchpos)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_RampInitState](../libraries/efx/index.md#751221-efx_rampinitstate)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_RampOut_s32](../libraries/efx/index.md#751241-efx_rampout_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_RampSetParam](../libraries/efx/index.md#751231-efx_rampsetparam)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_RSFlipFlop](../libraries/efx/index.md#75211-efx_rsflipflop)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Sgn_s64_s8](../libraries/efx/index.md#752381-efx_sgn_s64_s8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Sin_s16_s16](../libraries/efx/index.md#751012-efx_sin_s16_s16)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Sin_s32_s32](../libraries/efx/index.md#751011-efx_sin_s32_s32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Sin_s8_s8](../libraries/efx/index.md#751013-efx_sin_s8_s8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Sqrt_u16_u16](../libraries/efx/index.md#7542-efx_sqrt_u16_u16)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Sqrt_u32_u32](../libraries/efx/index.md#7541-efx_sqrt_u32_u32)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
+
+**[Efx_Sqrt_u8_u8](../libraries/efx/index.md#7543-efx_sqrt_u8_u8)**
+> 函数 · [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../libraries/efx/index.md) · SWS_EFXLibrary · R23-11
 
 **[EnableCond](../diagnostics/diagnostic_event_manager/index.md#76416-enablecond)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
@@ -4575,6 +5133,33 @@ title: "AUTOSAR API 函数清单"
 **[IEEE1722Tp_TxConfirmation](../communication/ieee1722tp/index.md#751-ieee1722tp_txconfirmation)**
 > 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11
 
+**[Ifl_DPSearch_f32](../libraries/ifl/index.md#75111-ifl_dpsearch_f32)**
+> 函数 · [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../libraries/ifl/index.md) · SWS_IFLLibrary · R23-11
+
+**[Ifl_GetVersionInfo](../libraries/ifl/index.md#761-ifl_getversioninfo)**
+> 函数 · [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../libraries/ifl/index.md) · SWS_IFLLibrary · R23-11
+
+**[Ifl_Interpolate_f32](../libraries/ifl/index.md#75141-ifl_interpolate_f32)**
+> 函数 · [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../libraries/ifl/index.md) · SWS_IFLLibrary · R23-11
+
+**[Ifl_IntIpoCur_f32_f32](../libraries/ifl/index.md#75211-ifl_intipocur_f32_f32)**
+> 函数 · [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../libraries/ifl/index.md) · SWS_IFLLibrary · R23-11
+
+**[Ifl_IntIpoMap_f32f32_f32](../libraries/ifl/index.md#75221-ifl_intipomap_f32f32_f32)**
+> 函数 · [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../libraries/ifl/index.md) · SWS_IFLLibrary · R23-11
+
+**[Ifl_IpoCub_f32](../libraries/ifl/index.md#75231-ifl_ipocub_f32)**
+> 函数 · [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../libraries/ifl/index.md) · SWS_IFLLibrary · R23-11
+
+**[Ifl_IpoCur_f32](../libraries/ifl/index.md#75121-ifl_ipocur_f32)**
+> 函数 · [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../libraries/ifl/index.md) · SWS_IFLLibrary · R23-11
+
+**[Ifl_IpoMap_f32](../libraries/ifl/index.md#75131-ifl_ipomap_f32)**
+> 函数 · [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../libraries/ifl/index.md) · SWS_IFLLibrary · R23-11
+
+**[Ifx_GetVersionInfo](../libraries/ifx/index.md#761-ifx_getversioninfo)**
+> 函数 · [Specification of Fixed Point Interpolation Routines（定点插值例程规范）](../libraries/ifx/index.md) · SWS_IFXLibrary · R23-11
+
 **[IncrementCounter](../system_services/operating_system/index.md#7417-incrementcounter)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
@@ -5290,6 +5875,264 @@ title: "AUTOSAR API 函数清单"
 
 **[MemIf_Write](../memory/memory_abstraction_interface/index.md#732-memif_write)**
 > 函数 · [AUTOSAR MemIf（内存抽象接口）](../memory/memory_abstraction_interface/index.md) · SWS_MemoryAbstractionInterface · R23-11
+
+**[Mfl](../libraries/mfl/index.md#75183-mfl)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Abs_f32](../libraries/mfl/index.md#7551-mfl_abs_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_arcCos_f32](../libraries/mfl/index.md#7586-mfl_arccos_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_arcSin_f32](../libraries/mfl/index.md#7584-mfl_arcsin_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_arcTan2_f32](../libraries/mfl/index.md#75810-mfl_arctan2_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_arcTan_f32](../libraries/mfl/index.md#7588-mfl_arctan_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_ArrayAverage_f32_f32](../libraries/mfl/index.md#75101-mfl_arrayaverage_f32_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Average_f32_f32](../libraries/mfl/index.md#7591-mfl_average_f32_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Bitpat_f32_u32](../libraries/mfl/index.md#75191-mfl_bitpat_f32_u32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_CalcTeQ_f32](../libraries/mfl/index.md#75433-mfl_calcteq_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_CalcTeQApp_f32](../libraries/mfl/index.md#75434-mfl_calcteqapp_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Ceil_f32](../libraries/mfl/index.md#7533-mfl_ceil_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Cos_f32](../libraries/mfl/index.md#7582-mfl_cos_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Cos_s32_f32](../libraries/mfl/index.md#75211-mfl_cos_s32_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_CtrlSetLimit](../libraries/mfl/index.md#75463-mfl_ctrlsetlimit)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_CtrlSetLimits](../libraries/mfl/index.md#75464-mfl_ctrlsetlimits)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DeadTime](../libraries/mfl/index.md#7514-mfl_deadtime)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DeadTime_f32_f32](../libraries/mfl/index.md#75141-mfl_deadtime_f32_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Debounce](../libraries/mfl/index.md#75151-mfl_debounce)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Debounce_u8_u8](../libraries/mfl/index.md#751511-mfl_debounce_u8_u8)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DebounceInit](../libraries/mfl/index.md#75152-mfl_debounceinit)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DebounceSetParam](../libraries/mfl/index.md#75153-mfl_debouncesetparam)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DivLim_f32](../libraries/mfl/index.md#75185-mfl_divlim_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DT1Typ1Calc](../libraries/mfl/index.md#75441-mfl_dt1typ1calc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DT1Typ1Out_f32](../libraries/mfl/index.md#75445-mfl_dt1typ1out_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DT1Typ1SetState](../libraries/mfl/index.md#75443-mfl_dt1typ1setstate)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DT1Typ2Calc](../libraries/mfl/index.md#75442-mfl_dt1typ2calc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DT1Typ2Out_f32](../libraries/mfl/index.md#75446-mfl_dt1typ2out_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_DT1Typ2SetState](../libraries/mfl/index.md#75444-mfl_dt1typ2setstate)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Exp_f32](../libraries/mfl/index.md#7573-mfl_exp_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Floor_f32](../libraries/mfl/index.md#7534-mfl_floor_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_GetVersionInfo](../libraries/mfl/index.md#761-mfl_getversioninfo)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Hypot_f32f32_f32](../libraries/mfl/index.md#75111-mfl_hypot_f32f32_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_HystCenterHalfDelta_f32_u8](../libraries/mfl/index.md#751311-mfl_hystcenterhalfdelta_f32_u8)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_HystDeltaRight_f32_u8](../libraries/mfl/index.md#751331-mfl_hystdeltaright_f32_u8)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_HystLeftDelta_f32_u8](../libraries/mfl/index.md#751341-mfl_hystleftdelta_f32_u8)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_HystLeftRight_f32_u8](../libraries/mfl/index.md#751321-mfl_hystleftright_f32_u8)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_ICalc](../libraries/mfl/index.md#75461-mfl_icalc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_ILimCalc](../libraries/mfl/index.md#75462-mfl_ilimcalc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_IOut_f32](../libraries/mfl/index.md#75466-mfl_iout_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_ISetState](../libraries/mfl/index.md#75465-mfl_isetstate)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Limit_f32](../libraries/mfl/index.md#7564-mfl_limit_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Log_f32](../libraries/mfl/index.md#7574-mfl_log_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Max_f32](../libraries/mfl/index.md#7561-mfl_max_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_MedianSort_f32_f32](../libraries/mfl/index.md#75181-mfl_mediansort_f32_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Min_f32](../libraries/mfl/index.md#7562-mfl_min_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Mod_f32](../libraries/mfl/index.md#75184-mfl_mod_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PCalc](../libraries/mfl/index.md#75421-mfl_pcalc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PDCalc](../libraries/mfl/index.md#75451-mfl_pdcalc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PDOut_f32](../libraries/mfl/index.md#75454-mfl_pdout_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PDSetParam](../libraries/mfl/index.md#75453-mfl_pdsetparam)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PDSetState](../libraries/mfl/index.md#75452-mfl_pdsetstate)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PIDOut_f32](../libraries/mfl/index.md#75487-mfl_pidout_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PIDSetParam](../libraries/mfl/index.md#75486-mfl_pidsetparam)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PIDSetState](../libraries/mfl/index.md#75485-mfl_pidsetstate)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PIDTyp1Calc](../libraries/mfl/index.md#75481-mfl_pidtyp1calc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PIDTyp1LimCalc](../libraries/mfl/index.md#75482-mfl_pidtyp1limcalc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PIDTyp2Calc](../libraries/mfl/index.md#75483-mfl_pidtyp2calc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PIDTyp2LimCalc](../libraries/mfl/index.md#75484-mfl_pidtyp2limcalc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_POut_f32](../libraries/mfl/index.md#75422-mfl_pout_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Pow_f32](../libraries/mfl/index.md#7571-mfl_pow_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PT1Calc](../libraries/mfl/index.md#75431-mfl_pt1calc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PT1Out_f32](../libraries/mfl/index.md#75435-mfl_pt1out_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_PT1SetState](../libraries/mfl/index.md#75432-mfl_pt1setstate)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RampCalc](../libraries/mfl/index.md#751211-mfl_rampcalc)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RampCalcJump](../libraries/mfl/index.md#751251-mfl_rampcalcjump)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RampCalcSwitch](../libraries/mfl/index.md#751262-mfl_rampcalcswitch)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RampCalcSwitch_f32](../libraries/mfl/index.md#751261-mfl_rampcalcswitch_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RampCheckActivity](../libraries/mfl/index.md#751281-mfl_rampcheckactivity)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RampGetSwitchPos](../libraries/mfl/index.md#751271-mfl_rampgetswitchpos)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RampInitState](../libraries/mfl/index.md#751221-mfl_rampinitstate)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RampOut_f32](../libraries/mfl/index.md#751241-mfl_rampout_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RampSetParam](../libraries/mfl/index.md#751231-mfl_rampsetparam)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RateLimiter_f32](../libraries/mfl/index.md#7563-mfl_ratelimiter_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Round_f32](../libraries/mfl/index.md#7532-mfl_round_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_RSqrt_f32](../libraries/mfl/index.md#75201-mfl_rsqrt_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Sign_f32](../libraries/mfl/index.md#7552-mfl_sign_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Sin_f32](../libraries/mfl/index.md#7581-mfl_sin_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Sin_s32_f32](../libraries/mfl/index.md#75212-mfl_sin_s32_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_SortAscend_f32](../libraries/mfl/index.md#75161-mfl_sortascend_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_SortDescend_f32](../libraries/mfl/index.md#75171-mfl_sortdescend_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Sqrt_f32](../libraries/mfl/index.md#7572-mfl_sqrt_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Tan_f32](../libraries/mfl/index.md#7583-mfl_tan_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfl_Trunc_f32](../libraries/mfl/index.md#7531-mfl_trunc_f32)**
+> 函数 · [Specification of Floating Point Math Routines（浮点数学例程规范）](../libraries/mfl/index.md) · SWS_MFLLibrary · R23-11
+
+**[Mfx_GetVersionInfo](../libraries/mfx/index.md#781-mfx_getversioninfo)**
+> 函数 · [Specification of Fixed Point Math Routines（定点数学例程规范）](../libraries/mfx/index.md) · SWS_MFXLibrary · R23-11
+
+**[Mfx_Sgn_s32_s8](../libraries/mfx/index.md#75161-mfx_sgn_s32_s8)**
+> 函数 · [Specification of Fixed Point Math Routines（定点数学例程规范）](../libraries/mfx/index.md) · SWS_MFXLibrary · R23-11
 
 **[Mirror_AddCanMaskFilter](../communication/mirror/index.md#7424-mirror_addcanmaskfilter)**
 > 函数 · [AUTOSAR Bus Mirroring（总线镜像）](../communication/mirror/index.md) · SWS_BusMirroring · R23-11
@@ -6740,6 +7583,177 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
 
 ## V
+
+**[V2xBtp_CopyTxData](../communication/v2x_basictp/index.md#742-v2xbtp_copytxdata)**
+> 函数 · [AUTOSAR V2X Basic Transport（V2X基本传输协议）](../communication/v2x_basictp/index.md) · SWS_V2XBasicTransport · R23-11
+
+**[V2xBtp_GetVersionInfo](../communication/v2x_basictp/index.md#732-v2xbtp_getversioninfo)**
+> 函数 · [AUTOSAR V2X Basic Transport（V2X基本传输协议）](../communication/v2x_basictp/index.md) · SWS_V2XBasicTransport · R23-11
+
+**[V2xBtp_Init](../communication/v2x_basictp/index.md#731-v2xbtp_init)**
+> 函数 · [AUTOSAR V2X Basic Transport（V2X基本传输协议）](../communication/v2x_basictp/index.md) · SWS_V2XBasicTransport · R23-11
+
+**[V2xBtp_RxIndication](../communication/v2x_basictp/index.md#741-v2xbtp_rxindication)**
+> 函数 · [AUTOSAR V2X Basic Transport（V2X基本传输协议）](../communication/v2x_basictp/index.md) · SWS_V2XBasicTransport · R23-11
+
+**[V2xBtp_Transmit](../communication/v2x_basictp/index.md#733-v2xbtp_transmit)**
+> 函数 · [AUTOSAR V2X Basic Transport（V2X基本传输协议）](../communication/v2x_basictp/index.md) · SWS_V2XBasicTransport · R23-11
+
+**[V2xDM_GetVersionInfo](../communication/v2x_datamgr/index.md#742-v2xdm_getversioninfo)**
+> 函数 · [AUTOSAR V2X Data Manager（V2X数据管理器）](../communication/v2x_datamgr/index.md) · SWS_V2XDataManager · R23-11
+
+**[V2xDM_Init](../communication/v2x_datamgr/index.md#741-v2xdm_init)**
+> 函数 · [AUTOSAR V2X Data Manager（V2X数据管理器）](../communication/v2x_datamgr/index.md) · SWS_V2XDataManager · R23-11
+
+**[V2xDM_MainFunction](../communication/v2x_datamgr/index.md#761-v2xdm_mainfunction)**
+> 函数 · [AUTOSAR V2X Data Manager（V2X数据管理器）](../communication/v2x_datamgr/index.md) · SWS_V2XDataManager · R23-11
+
+**[V2xDM_RxIndication](../communication/v2x_datamgr/index.md#751-v2xdm_rxindication)**
+> 函数 · [AUTOSAR V2X Data Manager（V2X数据管理器）](../communication/v2x_datamgr/index.md) · SWS_V2XDataManager · R23-11
+
+**[V2xDM_V2xStackRxIndication](../communication/v2x_datamgr/index.md#752-v2xdm_v2xstackrxindication)**
+> 函数 · [AUTOSAR V2X Data Manager（V2X数据管理器）](../communication/v2x_datamgr/index.md) · SWS_V2XDataManager · R23-11
+
+**[V2xFac_CaBs_MainFunction](../communication/v2x_facilities/index.md#751-v2xfac_cabs_mainfunction)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_DenBs](../communication/v2x_facilities/index.md#7741-v2xfac_denbs)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_DenBs_MainFunction](../communication/v2x_facilities/index.md#752-v2xfac_denbs_mainfunction)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_GetVersionInfo](../communication/v2x_facilities/index.md#732-v2xfac_getversioninfo)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_Init](../communication/v2x_facilities/index.md#731-v2xfac_init)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_RxIndication](../communication/v2x_facilities/index.md#741-v2xfac_rxindication)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_RxS_MainFunction](../communication/v2x_facilities/index.md#753-v2xfac_rxs_mainfunction)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_V2xM_AbortPseudonymChange](../communication/v2x_facilities/index.md#735-v2xfac_v2xm_abortpseudonymchange)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_V2xM_CommitPseudonymChange](../communication/v2x_facilities/index.md#734-v2xfac_v2xm_commitpseudonymchange)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_V2xM_PreparePseudonymChange](../communication/v2x_facilities/index.md#733-v2xfac_v2xm_preparepseudonymchange)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_V2xM_SetCaBsOperation](../communication/v2x_facilities/index.md#737-v2xfac_v2xm_setcabsoperation)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_V2xM_SetTGenCamDcc](../communication/v2x_facilities/index.md#736-v2xfac_v2xm_settgencamdcc)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFac_Vdp](../communication/v2x_facilities/index.md#7742-v2xfac_vdp)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFacDenBs](../communication/v2x_facilities/index.md#7721-v2xfacdenbs)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xFacVdp](../communication/v2x_facilities/index.md#7711-v2xfacvdp)**
+> 函数 · [AUTOSAR V2X Facilities（V2X设施层）](../communication/v2x_facilities/index.md) · SWS_V2XFacilities · R23-11
+
+**[V2xGn_GetVersionInfo](../communication/v2x_geonet/index.md#732-v2xgn_getversioninfo)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xGn_Init](../communication/v2x_geonet/index.md#731-v2xgn_init)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xGn_MainFunction](../communication/v2x_geonet/index.md#751-v2xgn_mainfunction)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xGn_RxIndication](../communication/v2x_geonet/index.md#743-v2xgn_rxindication)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xGn_Transmit](../communication/v2x_geonet/index.md#736-v2xgn_transmit)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xGn_V2xM_AbortPseudonymChange](../communication/v2x_geonet/index.md#735-v2xgn_v2xm_abortpseudonymchange)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xGn_V2xM_CommitPseudonymChange](../communication/v2x_geonet/index.md#734-v2xgn_v2xm_commitpseudonymchange)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xGn_V2xM_DecapConfirmation](../communication/v2x_geonet/index.md#742-v2xgn_v2xm_decapconfirmation)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xGn_V2xM_EncapConfirmation](../communication/v2x_geonet/index.md#741-v2xgn_v2xm_encapconfirmation)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xGn_V2xM_PreparePseudonymChange](../communication/v2x_geonet/index.md#733-v2xgn_v2xm_preparepseudonymchange)**
+> 函数 · [AUTOSAR V2X GeoNetworking（V2X地理网络）](../communication/v2x_geonet/index.md) · SWS_V2XGeoNetworking · R23-11
+
+**[V2xM_CalcDistance](../communication/v2x_mgmt/index.md#7312-v2xm_calcdistance)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_CalcHeadingInTolerance](../communication/v2x_mgmt/index.md#7313-v2xm_calcheadingintolerance)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_GeoMath](../communication/v2x_mgmt/index.md#7713-v2xm_geomath)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_GetPositionAndTime](../communication/v2x_mgmt/index.md#733-v2xm_getpositionandtime)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_GetRefTimePtr](../communication/v2x_mgmt/index.md#734-v2xm_getreftimeptr)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_GetTime](../communication/v2x_mgmt/index.md#7318-v2xm_gettime)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_GetVersionInfo](../communication/v2x_mgmt/index.md#732-v2xm_getversioninfo)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_Init](../communication/v2x_mgmt/index.md#731-v2xm_init)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_LockPseudonymChange](../communication/v2x_mgmt/index.md#738-v2xm_lockpseudonymchange)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_MainFunction](../communication/v2x_mgmt/index.md#751-v2xm_mainfunction)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_PseudonymChange](../communication/v2x_mgmt/index.md#7712-v2xm_pseudonymchange)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_SetTollingZoneInformation](../communication/v2x_mgmt/index.md#7314-v2xm_settollingzoneinformation)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_TriggerPseudonymChange](../communication/v2x_mgmt/index.md#737-v2xm_triggerpseudonymchange)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_UnlockPseudonymChange](../communication/v2x_mgmt/index.md#739-v2xm_unlockpseudonymchange)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_V2xGn_GetGlobalTxParams](../communication/v2x_mgmt/index.md#7311-v2xm_v2xgn_getglobaltxparams)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_V2xGn_ReqDecap](../communication/v2x_mgmt/index.md#736-v2xm_v2xgn_reqdecap)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_V2xGn_ReqEncap](../communication/v2x_mgmt/index.md#735-v2xm_v2xgn_reqencap)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_V2xGn_SetGlobalRxParams](../communication/v2x_mgmt/index.md#7310-v2xm_v2xgn_setglobalrxparams)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_Vdp](../communication/v2x_mgmt/index.md#7711-v2xm_vdp)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_Vdp_GetNextLongTermCertificateExpirationDate](../communication/v2x_mgmt/index.md#7315-v2xm_vdp_getnextlongtermcertificateexpirationdate)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_Vdp_GetNextPseudonymCertificateExpirationDate](../communication/v2x_mgmt/index.md#7316-v2xm_vdp_getnextpseudonymcertificateexpirationdate)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
+
+**[V2xM_Vdp_SetPositionAndTime](../communication/v2x_mgmt/index.md#7317-v2xm_vdp_setpositionandtime)**
+> 函数 · [AUTOSAR V2X Management（V2X管理）](../communication/v2x_mgmt/index.md) · SWS_V2XManagement · R23-11
 
 **[VerificationStatus](../communication/sec_oc/index.md#7843-verificationstatus)**
 > 函数 · [AUTOSAR SecOC (Secure Onboard Communication)](../communication/sec_oc/index.md) · SWS_SecOc · R23-11

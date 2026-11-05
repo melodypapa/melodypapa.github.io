@@ -6,7 +6,7 @@ Status `Done` = all 6 queue steps complete (translation merged). Status `Aligned
 
 ## Group communication-2 — communication section — remaining missing documents (38)
 
-Status: **27/38** completed
+Status: **38/38** completed
 
 | Article                    | Status | Commit ID |
 | --------------------------- | -------- | ---------- |
@@ -37,17 +37,17 @@ Status: **27/38** completed
 | `j1939tp`                    | [x] Done | 983f3f3fd1 |
 | `ieee1722tp`                 | [x] Done | 862dfbd774 |
 | `macsec`                     | [x] Done | 70cf6ad088 |
-| `cellularv2x_driver`         | [ ] Pending | N/A |
-| `chargingmanager`            | [ ] Pending | N/A |
-| `chinesev2x_mgmt`            | [ ] Pending | N/A |
-| `chinesev2x_msg`             | [ ] Pending | N/A |
-| `chinesev2x_net`             | [ ] Pending | N/A |
-| `chinesev2x_sec`             | [ ] Pending | N/A |
-| `v2x_basictp`                | [ ] Pending | N/A |
-| `v2x_datamgr`                | [ ] Pending | N/A |
-| `v2x_facilities`             | [ ] Pending | N/A |
-| `v2x_geonet`                 | [ ] Pending | N/A |
-| `v2x_mgmt`                   | [ ] Pending | N/A |
+| `cellularv2x_driver`         | [x] Done | 6c135f8841 |
+| `chargingmanager`            | [x] Done | a466cf5646 |
+| `chinesev2x_mgmt`            | [x] Done | 26c6677958 |
+| `chinesev2x_msg`             | [x] Done | 716cb79d04 |
+| `chinesev2x_net`             | [x] Done | c71e12219d |
+| `chinesev2x_sec`             | [x] Done | 17badba165 |
+| `v2x_basictp`                | [x] Done | 87d8b401e7 |
+| `v2x_datamgr`                | [x] Done | 6fb566cf9f |
+| `v2x_facilities`             | [x] Done | 18b886ce9d |
+| `v2x_geonet`                 | [x] Done | ee33b94065 |
+| `v2x_mgmt`                   | [x] Done | 87179488b5 |
 
 ## Group communication — communication section — existing articles + backbone
 
@@ -131,7 +131,7 @@ Status: **21/21** completed
 
 ## Group foundation exp — Foundation R23-11 guide/template/report documents (20)
 
-Status: **1/20** completed
+Status: **3/20** completed
 
 | Article                                              | Status | Commit ID |
 | ----------------------------------------------------- | -------- | ---------- |
@@ -146,8 +146,8 @@ Status: **1/20** completed
 | `tps_log_and_trace_extract`                            | [ ] Pending | N/A |
 | `exp_safety_overview`                                  | [ ] Pending | N/A |
 | `tps_arxml_serialization_rules`                        | [ ] Pending | N/A |
-| `asws_health_monitoring`                               | [ ] Pending | N/A |
-| `tps_abstract_platform_specification`                  | [ ] Pending | N/A |
+| `asws_health_monitoring`                               | [x] Done | e956feb4ea |
+| `tps_abstract_platform_specification`                  | [x] Done | 510c6d7fdf |
 | `tps_xml_schema_production_rules`                      | [ ] Pending | N/A |
 | `tr_secure_hardware_extensions`                        | [ ] Pending | N/A |
 | `tps_security_extract_template`                        | [ ] Pending | N/A |
@@ -162,26 +162,26 @@ Status: **0/32** completed
 
 | Article                                 | Status | Commit ID |
 | ---------------------------------------- | -------- | ---------- |
-| `rs_project_objectives`                   | [ ] Pending | N/A |
-| `rs_ieee1722`                             | [ ] Pending | N/A |
-| `rs_debug_trace_profile`                  | [ ] Pending | N/A |
-| `rs_someip_service_discovery_protocol`    | [ ] Pending | N/A |
-| `prs_v2x_remote_access_layer`             | [ ] Pending | N/A |
-| `rs_ipsec_protocol`                       | [ ] Pending | N/A |
-| `rs_security_extract_template`            | [ ] Pending | N/A |
-| `rs_feature_model_exchange_format`        | [ ] Pending | N/A |
-| `prs_secoc_protocol`                      | [ ] Pending | N/A |
-| `rs_data_distribution_service`            | [ ] Pending | N/A |
-| `prs_network_management_protocol`         | [ ] Pending | N/A |
-| `rs_e2e`                                  | [ ] Pending | N/A |
-| `rs_intrusion_detection_system`           | [ ] Pending | N/A |
-| `rs_firewall`                             | [ ] Pending | N/A |
-| `rs_health_monitoring`                    | [ ] Pending | N/A |
-| `rs_someip_protocol`                      | [ ] Pending | N/A |
-| `rs_macsec`                               | [ ] Pending | N/A |
-| `rs_methodology`                          | [ ] Pending | N/A |
-| `prs_intrusion_detection_system`          | [ ] Pending | N/A |
-| `rs_timing_extensions`                    | [ ] Pending | N/A |
+| `rs_project_objectives`                   | [ ] Aligned 📖 | 95d7986cd1 |
+| `rs_ieee1722`                             | [ ] Aligned 📖 | 028dd7ea88 |
+| `rs_debug_trace_profile`                  | [ ] Aligned 📖 | f28eafa078 |
+| `rs_someip_service_discovery_protocol`    | [ ] Aligned 📖 | 0e536fd13a |
+| `prs_v2x_remote_access_layer`             | [ ] Aligned 📖 | 6e51384804 |
+| `rs_ipsec_protocol`                       | [ ] Aligned 📖 | 863e7bbaf1 |
+| `rs_security_extract_template`            | [ ] Aligned 📖 | 514a98594f |
+| `rs_feature_model_exchange_format`        | [ ] Aligned 📖 | 51b6edc43c |
+| `prs_secoc_protocol`                      | [ ] Aligned 📖 | 31f19c6170 |
+| `rs_data_distribution_service`            | [ ] Aligned 📖 | d4fc9c84a9 |
+| `prs_network_management_protocol`         | [ ] Aligned 📖 | e697220422 |
+| `rs_e2e`                                  | [ ] Aligned 📖 | 98449031eb |
+| `rs_intrusion_detection_system`           | [ ] Aligned 📖 | 9633fc6c49 |
+| `rs_firewall`                             | [ ] Aligned 📖 | 3eee29aad4 |
+| `rs_health_monitoring`                    | [ ] Aligned 📖 | 8963b6b02e |
+| `rs_someip_protocol`                      | [ ] Aligned 📖 | 192ba3b317 |
+| `rs_macsec`                               | [ ] Aligned 📖 | 869f13413b |
+| `rs_methodology`                          | [ ] Aligned 📖 | 7d20050f40 |
+| `prs_intrusion_detection_system`          | [ ] Aligned 📖 | 6f90eac477 |
+| `rs_timing_extensions`                    | [ ] Aligned 📖 | 234e015dcc |
 | `rs_safety`                               | [ ] Pending | N/A |
 | `rs_network_management`                   | [ ] Pending | N/A |
 | `rs_main`                                 | [ ] Pending | N/A |
@@ -233,19 +233,19 @@ Status: **7/7** completed
 
 ## Group libraries — libraries section (new section)
 
-Status: **3/9** completed
+Status: **9/9** completed
 
 | Article | Status | Commit ID |
 | ------ | -------- | ---------- |
 | `crc`   | [x] Done | 209cfc516e |
 | `e2e`   | [x] Done | cd14a65a1f |
 | `bfx`   | [x] Done | b11a2267b0 |
-| `bmc`   | [ ] Pending | N/A |
-| `mfl`   | [ ] Pending | N/A |
-| `mfx`   | [ ] Pending | N/A |
-| `ifl`   | [ ] Pending | N/A |
-| `ifx`   | [ ] Pending | N/A |
-| `efx`   | [ ] Pending | N/A |
+| `bmc`   | [x] Done | 18f9ee615e |
+| `mfl`   | [x] Done | f47a7eedbd |
+| `mfx`   | [x] Done | 71821da882 |
+| `ifl`   | [x] Done | da855e37e2 |
+| `ifx`   | [x] Done | 1089ec8205 |
+| `efx`   | [x] Done | bed2f8cc85 |
 
 ## Group mcal — MCAL section (new section)
 
@@ -327,5 +327,5 @@ Status: **7/7** completed
 | `hwtestmanager`                 | [x] Done | 04ea38b015 |
 | `operating_system`              | [x] Done | ca7ecda991 |
 
-**Total: 124/197 queue rows complete.**
+**Total: 143/197 queue rows complete.**
 
