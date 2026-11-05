@@ -287,7 +287,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 ### foundation/diagnostics (Diagnostics)
 
-- ❌ Requirements on Diagnostics（诊断需求） — AUTOSAR_FO_RS_Diagnostics (`foundation/diagnostics/`)
+- ✅ Requirements on Diagnostics（诊断需求） — AUTOSAR_FO_RS_Diagnostics (`foundation/diagnostics/rs_diagnostics/`; R23-11; RS, skeleton-exempt; 153 requirement items with IDs dropped; empty §4.4 Configuration omitted; tracing chapter omitted; 2026-11-06)
 
 ### foundation/health_monitoring (Health Monitoring)
 

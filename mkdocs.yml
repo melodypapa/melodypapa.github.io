@@ -484,6 +484,7 @@ nav:
         - "Log and Trace": autosar/foundation/communication_management/rs_log_and_trace/index.md
       - 诊断:
         - autosar/foundation/diagnostics/index.md
+        - "Diagnostics": autosar/foundation/diagnostics/rs_diagnostics/index.md
       - 健康监控:
         - autosar/foundation/health_monitoring/index.md
         - "System Health Monitoring": autosar/foundation/health_monitoring/exp_system_health_monitoring/index.md

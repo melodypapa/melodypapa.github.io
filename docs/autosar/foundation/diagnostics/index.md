@@ -6,9 +6,7 @@ title: "诊断（Diagnostics）"
 
 ## 文章
 
-本类别尚无已翻译文章。R23-11 包含以下源文档（待翻译）：
-
-* **AUTOSAR_FO_RS_Diagnostics** — Requirements on Diagnostics（诊断需求）
+* [Requirements on Diagnostics（诊断需求）](rs_diagnostics/index.md)
 
 ## 相关内容
 

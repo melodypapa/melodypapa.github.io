@@ -2035,7 +2035,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **DEM**
-> 诊断事件管理器（**Diagnostic Event Manager**）。
+> 诊断事件管理器（**Diagnostic Event Manager**）。、[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
 >
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](cp/mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](cp/communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](cp/communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[E2E Transformer (E2E转换器)](cp/communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR J1939Nm（SAE J1939 网络管理）](cp/communication/j1939nm/index.md)（AUTOSAR_CP_SWS_SAEJ1939NetworkManagement）、[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）、[AUTOSAR V2X Management（V2X管理）](cp/communication/v2x_mgmt/index.md)（AUTOSAR_CP_SWS_V2XManagement）
 {: .glossary-source}
@@ -2149,7 +2149,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **DID**
-> 数据标识符（**Data Identifier**）
+> 数据标识符（**Data Identifier**）、[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
@@ -2227,7 +2227,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **DM**
-> **AUTOSAR** 自适应诊断管理（**AUTOSAR Adaptive Diagnostic Management**）。
+> **AUTOSAR** 自适应诊断管理（**AUTOSAR Adaptive Diagnostic Management**）。、[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
 >
 > 来源：[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
@@ -2248,6 +2248,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > SAE J1939 诊断消息（**SAE J1939 Diagnostic Message**），定义于 SAE J1939-73，多数由灯状态（Lamp Status）与可变数量的 DTC 组成
 >
 > 来源：[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](cp/diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**DoIP**
+> 基于 **IP** 的诊断（**Diagnostic over IP**）——标准化为 ISO 13400 的诊断服务传输协议。
+>
+> 来源：[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
 {: .glossary-source}
 
 **DoS**
@@ -4013,6 +4019,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**IDL**
+> 接口描述语言（**Interface Description Language**）。
+>
+> 来源：[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
+{: .glossary-source}
+
 **IDPS**
 > 入侵检测与防御系统（**Intrusion Detection and Prevention System**）——针对 **IDS** 传感器检测并上报的合格安全事件采取预定义预防措施的安全控制。
 >
@@ -5724,7 +5736,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **OBD**
-> 车载诊断（**On-board Diagnostics**）。
+> 车载诊断（**On-board Diagnostics**）。、[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
 >
 > 来源：[AUTOSAR FiM（功能禁止管理器）](cp/system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
 {: .glossary-source}
@@ -7508,7 +7520,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **SID**
-> 服务标识符（**Service Identifier**）。
+> 服务标识符（**Service Identifier**）。、[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
 >
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR LinIf (LIN Interface)](cp/communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
 {: .glossary-source}
@@ -8060,7 +8072,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **SWC**
-> 软件组件（**SoftWare Component**）
+> 软件组件（**SoftWare Component**）、[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
 >
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）
 {: .glossary-source}
@@ -8216,6 +8228,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 ## T
+
+**TA**
+> 目标地址（**Target Address**，**ECU** 的诊断地址）。
+>
+> 来源：[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
+{: .glossary-source}
 
 **Target time**
 > 目标时间：到达该值时应有某事发生。其行为取决于配置和已启用的功能。
@@ -8676,7 +8694,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **UDS**
-> 统一诊断服务（**Unified Diagnostic Services**）。
+> 统一诊断服务（**Unified Diagnostic Services**）。、[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
 >
 > 来源：[AUTOSAR FiM（功能禁止管理器）](cp/system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}

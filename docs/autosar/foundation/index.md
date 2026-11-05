@@ -23,6 +23,7 @@ title: "基础标准（Foundation）"
   * [Requirements on Network Management（网络管理需求）](communication_management/rs_network_management/index.md)
   * [Requirements on Log and Trace（日志与跟踪需求）](communication_management/rs_log_and_trace/index.md)
 * [诊断（Diagnostics）](diagnostics/index.md)
+  * [Requirements on Diagnostics（诊断需求）](diagnostics/rs_diagnostics/index.md)
 * [健康监控（Health Monitoring）](health_monitoring/index.md)
   * [Explanation of System Health Monitoring（系统健康监控说明）](health_monitoring/exp_system_health_monitoring/index.md)
   * [Specification of Health Monitoring（健康监控规范）](health_monitoring/asws_health_monitoring/index.md)

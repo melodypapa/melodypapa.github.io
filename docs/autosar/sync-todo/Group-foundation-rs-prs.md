@@ -350,12 +350,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Requirements on Diagnostics（诊断需求）; target `foundation/diagnostics/rs_diagnostics/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Diagnostics/AUTOSAR_FO_RS_Diagnostics.md` — 2,751 lines, 86 figure refs, 400 item IDs
   - Note: related site content: cp/diagnostics/diagnostic_communication_manager (Dcm), cp/diagnostics/diagnostic_event_manager (Dem) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-06 run — all 86 figure refs are page decoration (257x27 strips + glyphs), 0 content figures; 153 requirement items (92 common §4.1 + 6 CP functional §4.2.1 + 19 fault-memory §4.2.2 + 2 DTC/event data §4.2.2.1 + 11 communication §4.2.3 + 24 AP §4.3 incl. 14 SOVD DRAFT items) as bold title lines + field tables under the numbered source group headings (avoids 5-level TOC depth, run decision USER: verify); IDs + {DRAFT} + tracing lines dropped; RS_Diag_*/RS_DEXT_* cross-refs kept unbracketed; source §4.4 Configuration is EMPTY (only decoration) → omitted under the placeholder rule (USER: verify); source ch.5 Requirements Tracing omitted per ASWS precedent (References 6→5 with its subsections 6.1/6.2/6.2.1/6.2.2 → 5.1/5.2/5.2.1/5.2.2); garbled field cells (04172/04239/04201/04179/04182/04222/04186/04006/04033/04135 rationales+use-cases) recovered from context; DM-message list (04113) rendered as a name-description bullet list; glossary: DoIP, IDL, TA new entries + DEM/DID/UDS/OBD/SID/DM/SWC gained this document as additional source; DTC homonym-skip (2 existing entries are Dlt/SWS-specific, decision recorded); rewrite_glossary.py normalization run after the scripted edit
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_someip_service_discovery_protocol (AUTOSAR_FO_PRS_SOMEIPServiceDiscoveryProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: SOME/IP Service Discovery Protocol Specification（SOME/IP 服务发现协议规范）; target `foundation/protocols/prs_someip_service_discovery_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_SOMEIPServiceDiscoveryProtocol.md` — 3,259 lines, 132 figure refs, 356 item IDs; **giant source** — segment plan before Step 2 (OS/RTE precedent)
