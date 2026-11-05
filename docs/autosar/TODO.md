@@ -322,7 +322,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ❌ SOME/IP Protocol Specification（SOME/IP 协议规范） — AUTOSAR_FO_PRS_SOMEIPProtocol (`foundation/protocols/`)
 - ❌ SOME/IP Service Discovery Protocol Specification（SOME/IP 服务发现协议规范） — AUTOSAR_FO_PRS_SOMEIPServiceDiscoveryProtocol (`foundation/protocols/`)
 - ✅ Secure Onboard Communication Protocol Specification（安全车载通信协议规范） — AUTOSAR_FO_PRS_SecOcProtocol (`foundation/protocols/prs_secoc_protocol/`)
-- ❌ Time Synchronization Protocol Specification（时间同步协议规范） — AUTOSAR_FO_PRS_TimeSyncProtocol (`foundation/protocols/`)
+- ✅ Time Synchronization Protocol Specification（时间同步协议规范） — AUTOSAR_FO_PRS_TimeSyncProtocol (`foundation/protocols/prs_time_sync_protocol/`; R23-11; PRS, skeleton-exempt; protocol items as prose paragraphs with IDs dropped; message-format byte tables + config-parameter table as GFM; Figures 4.1–4.8 embedded; formulas recovered from PDF; tracing chapter + 2 placeholder sections omitted; 2026-11-06)
 - ✅ V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范） — AUTOSAR_FO_PRS_V2XRemoteAccessLayer (`foundation/protocols/prs_v2x_remote_access_layer/`)
 - ✅ Requirements on Data Distribution Service（数据分发服务需求） — AUTOSAR_FO_RS_DataDistributionService (`foundation/protocols/rs_data_distribution_service/`)
 - ✅ Requirements on IPsec Protocol（IPsec 协议需求） — AUTOSAR_FO_RS_IPsecProtocol (`foundation/protocols/rs_ipsec_protocol/`)

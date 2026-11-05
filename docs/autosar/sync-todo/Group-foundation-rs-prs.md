@@ -326,12 +326,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Time Synchronization Protocol Specification（时间同步协议规范）; target `foundation/protocols/prs_time_sync_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_TimeSyncProtocol.md` — 1,847 lines, 75 figure refs, 282 item IDs
   - Note: related site content: cp/globaltime/stbm, cp/globaltime/can_tsyn, cp/globaltime/eth_tsyn, cp/globaltime/fr_tsyn (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-06 run — 8 of 75 figure refs are content figures (Figure4-1 Pdelay, Figure4-2/4-3 TAB overview, Figure4-4–4-8 message-flow/timestamping sequences), embedded by source figure number; the 2 large tracing-overview figures ride the omitted tracing chapter; protocol items translated as prose paragraphs with IDs + {DRAFT} + ⌋(…) dropped (prs_secoc precedent), PRS_TS_* cross-refs kept as unbracketed identifiers; source ch.2 Requirements Traceability omitted per ASWS precedent (renumber 3→2…7→6); source §4.3.2 Body/Payload format + §4.5 Services/Commands are "Placeholder for upcoming AUTOSAR releases." → omitted under the placeholder rule (USER: verify), sub-sections renumbered accordingly; message-format byte tables (spanning-title chrome dropped, garbled column shifts normalized) + config-parameter table 5.1 as GFM; 5 lost formulas (Eq. 4.1–4.6) recovered from the R23-11 PDF as text; in-text stale "Figure 5.x" references normalized to the actual figure numbers (source quirk, recorded); appendix A ID enumerations rendered as counts (+9/~10/无); acronym chapter (31 entries) as blockquote format — 10 terms already in glossary, not re-appended (one-translation rule), no new glossary entries needed (all generic IEEE/PTP terms or identical definitions)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_someip_protocol (AUTOSAR_FO_PRS_SOMEIPProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: SOME/IP Protocol Specification（SOME/IP 协议规范）; target `foundation/protocols/prs_someip_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_SOMEIPProtocol.md` — 2,201 lines, 95 figure refs, 372 item IDs
