@@ -49,6 +49,7 @@ title: "基础标准（Foundation）"
   * [Requirements on Intrusion Detection System（入侵检测系统需求）](security/rs_intrusion_detection_system/index.md)
   * [Requirements on Firewall（防火墙需求）](security/rs_firewall/index.md)
   * [List of Known Issues of Secure Hardware Extensions（安全硬件扩展已知问题清单）](security/tr_list_of_known_issues_secure_hardware_extensions/index.md)
+  * [Specification of Secure Hardware Extensions（安全硬件扩展规范）](security/tr_secure_hardware_extensions/index.md)
 * [系统服务（System Services）](system_services/index.md)
 
 ## 相关内容
