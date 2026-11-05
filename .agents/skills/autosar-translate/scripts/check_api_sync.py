@@ -68,6 +68,11 @@ ART_LEAF_RE = re.compile(
 ALIASES = {
     "可选接口": "Optional",
     "Std_ReturnType的扩展": "Extension",
+    # IdsM (R23-11): the source heading 8.3.11 spells the configurable-interface
+    # name without the underscore after the module prefix ("IdsMContextDataModifierCallout_Name")
+    # while the definition item and the article use the correct identifier
+    # IdsM_ContextDataModifierCallout_Name (CoreTest underscore-typo precedent).
+    "IdsMContextDataModifierCallout_Name": "IdsM_ContextDataModifierCallout_Name",
     # NvM (R23-11) names its two callback entries with prose headings ("NVRAM
     # Manager job end notification without/with error"); the article keeps the
     # pre-existing function-name headings (old-article 8.4.1/8.4.2 continuity,

@@ -360,6 +360,7 @@ nav:
       - 网络安全:
         - autosar/cp/security/index.md
         - "Firewall": autosar/cp/security/firewall/index.md
+        - "IdsM": autosar/cp/security/idsm/index.md
       - 诊断:
         - autosar/cp/diagnostics/index.md
         - "Dcm": autosar/cp/diagnostics/diagnostic_communication_manager/index.md

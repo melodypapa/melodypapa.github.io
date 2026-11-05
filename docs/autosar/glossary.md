@@ -1663,13 +1663,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Context Data**
 > 与安全事件（**SEv**）相关的可选信息，提供对安全事件的更广泛理解（例如被损坏的数据）；其内容和编码由传感器外部定义，**IdsM** 模块不知晓。
 >
-> 来源：[Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](foundation/protocols/prs_intrusion_detection_system/index.md)（AUTOSAR_FO_PRS_IntrusionDetectionSystem）
+> 来源：[Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](foundation/protocols/prs_intrusion_detection_system/index.md)（AUTOSAR_FO_PRS_IntrusionDetectionSystem）、[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **Context Data Buffer**
 > 大小可变的缓冲区，以适配 **SEv** 上下文数据的需要。
 >
-> 来源：[Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](foundation/protocols/prs_intrusion_detection_system/index.md)（AUTOSAR_FO_PRS_IntrusionDetectionSystem）
+> 来源：[Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](foundation/protocols/prs_intrusion_detection_system/index.md)（AUTOSAR_FO_PRS_IntrusionDetectionSystem）、[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **Context ID**
@@ -2766,7 +2766,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Event Buffer**
 > 临时存储已上报 **SEv** 的缓冲区。
 >
-> 来源：[Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](foundation/protocols/prs_intrusion_detection_system/index.md)（AUTOSAR_FO_PRS_IntrusionDetectionSystem）
+> 来源：[Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](foundation/protocols/prs_intrusion_detection_system/index.md)（AUTOSAR_FO_PRS_IntrusionDetectionSystem）、[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **Event Chain**
@@ -3143,10 +3143,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](cp/communication/flexray_driver/index.md)（SWS_FlexRayDriver）
 {: .glossary-source}
 
+**Filter**
+> 安全事件的修饰器，可以丢弃或改变传入的 **SEv**。
+>
+> 来源：[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
+{: .glossary-source}
+
 **Filter Chain**
 > 施加于安全事件的一组连续过滤器（**A set of consecutive filters which is applied to Security Events**）。
 >
-> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **FIM**
@@ -6606,7 +6612,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **QSEv**
 > 合格安全事件（**Qualified Security Event**）——通过其过滤器链的安全事件。
 >
-> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Requirements on Firewall（防火墙需求）](foundation/security/rs_firewall/index.md)（AUTOSAR_FO_RS_Firewall）
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Requirements on Firewall（防火墙需求）](foundation/security/rs_firewall/index.md)（AUTOSAR_FO_RS_Firewall）、[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 ## R
@@ -7276,7 +7282,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Security Event Type**
 > 安全事件类型（**Security Event Type**）——可通过其安全事件类型 ID 标识；其实例称为安全事件并共享同一类型 ID。
 >
-> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **Security Sensors**
@@ -7288,7 +7294,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SecXT**
 > 安全提取（**Security Extract**）——规定哪些安全事件由 **IdsM** 实例处理及其配置参数。
 >
-> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **SecY**
@@ -7312,7 +7318,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Sem**
 > 安全事件存储器（**Security Event Memory**）——独立于主诊断事件存储器的用户定义诊断事件存储器。
 >
-> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **Sender-Receiver Communication**
@@ -7331,6 +7337,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 发送方-接收方接口（**Sender-Receiver Interface**）是一种特殊的"端口接口"（**Port Interface**），用于"发送方-接收方通信"（**Sender-Receiver Communication**）的情形。发送方-接收方接口定义了由发送组件（拥有提供该发送方-接收方接口的 p 端口）发送、或由接收组件（拥有需要该发送方-接收方接口的 r 端口）接收的数据元素。
 >
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Sensor**
+> 向 **IdsM** 模块通知 **SEv** 的报告主体。它可以是一个 **BSW** 模块、一个专有的 **CDD** 或一个 **SW-C** 应用。
+>
+> 来源：[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **Sensor/Actuator SW-Component**
@@ -7450,7 +7462,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SEv**
 > 安全事件（**Security Event**）——由 **BSW** 或 **SWC** 向 **IdsM** 上报的安全事件类型的实例。
 >
-> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Requirements on Firewall（防火墙需求）](foundation/security/rs_firewall/index.md)（AUTOSAR_FO_RS_Firewall）、[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Requirements on Firewall（防火墙需求）](foundation/security/rs_firewall/index.md)（AUTOSAR_FO_RS_Firewall）、[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）、[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **SF**
@@ -7505,6 +7517,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 安全事件与事件管理（**Security Incident and Event Management**）系统，作为安全运营中心的一部分，解读从 **IdsM** 实例接收到的二进制数据。
 >
 > 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）、[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
+{: .glossary-source}
+
+**Sink**
+> **QSEv** 的目的地。根据配置，**QSEv** 可以被持久化、传播或二者兼有。
+>
+> 来源：[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **Signal**
@@ -8341,6 +8359,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 定时器实例：由 **API** 数据类型 Tm_PredefTimer...bitType 所对应的一个数据对象，即用户软件级别上的时间服务预定义定时器的实例化。
 >
 > 来源：[AUTOSAR Time Service（时间服务）](cp/system_services/time_service/index.md)（SWS_TimeService）
+{: .glossary-source}
+
+**Timestamp Provider**
+> 提供时间戳的服务或软件组件，例如 **CP** 中的 **StbM**。
+>
+> 来源：[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **Timesync**
