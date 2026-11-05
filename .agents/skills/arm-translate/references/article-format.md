@@ -46,15 +46,22 @@ Never add `spec:`, `release:` or tags — that convention belongs to `docs/autos
 
 ## Tables
 
-- Textual tables (bit fields, access rights, encodings, field descriptions)
-  render as GFM tables with a header row and `| --- |` separator.
+- Every table is text: a GFM table with a header row and `| --- |` separator,
+  translated cell by cell. Tables are never cropped as images — merged cells
+  included.
+- Merged cells are expanded, not mirrored: repeat the spanning value in each
+  row of the block so every row reads on its own, e.g. three regions sharing
+  one attribute each repeat `RW` instead of one `RW` cell spanning three rows.
+- Multi-tier headers flatten into one header row that names each column
+  (`| 位 | 名称 | 类型 | 复位值 | 描述 |`); the source's two-tier `位 / 名称`
+  header becomes two columns.
 - Access tables keep the source's three columns:
   `| EL0 | EL1 | EL2 |` with `-` / `RW` values.
-- Merged-cell layout tables that only exist in the PDF layout stay as cropped
-  PNG images (`![Table9-1](Table9-1.png)`).
-- Source table numbers are not repeated as visible captions; the file name
-  carries the number. (One legacy caption line `Table 4-48: …` survives in
-  `system_control`; do not add more.)
+- Bit-field bars (`Figure7-1`), block diagrams and timing diagrams are figures,
+  not tables — they stay as cropped images.
+- No visible `Table x-y:` caption line; the paragraph that introduces the table
+  carries it. Legacy `Table<chapter>-<n>.png` images in older directories are
+  converted to GFM tables as those articles are touched.
 
 ## Figures
 
@@ -62,12 +69,12 @@ Never add `spec:`, `release:` or tags — that convention belongs to `docs/autos
   `![Figure8-2](Figure8-2.png)` — no caption text, alt text is the source
   figure number.
 - The PNG sits in the same directory as `index.md`; no shared `images/` tree.
-- Naming: `Figure<chapter>-<sequence>.png` / `Table<chapter>-<sequence>.png`,
-  using the source document's own numbering (`Figure8-2`, `TableB3-1` for an
-  appendix). Legacy directories mix `Figure4_77.png` and `Table9-1.png` —
-  never rename existing files.
-- Crop from the sibling PDF with PyMuPDF at a resolution that keeps bit-field
-  text legible (scale ≥ 2× page zoom).
+- Naming: `Figure<chapter>-<sequence>.png`, using the source document's own
+  numbering (`Figure8-2`, `FigureB3-1` for an appendix). Legacy directories mix
+  `Figure4_77.png`, `FigureA3-1.png` and now-unused `Table9-1.png` — never
+  rename existing files.
+- Crop from the sibling PDF with PyMuPDF at a resolution that keeps bitmap text
+  legible (scale ≥ 2× page zoom).
 
 ## Landing pages and navigation
 
