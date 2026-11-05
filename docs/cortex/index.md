@@ -35,6 +35,7 @@ title: "ARM Cortex"
 15. [插桩跟踪宏单元（Instrumentation Trace Macrocell Unit）](m7_processor/itm/index.md)
 16. [简介（Introduction）](m7_processor/introduction/index.md)
 17. [故障检测与处理（Fault detection and handling）](m7_processor/fault_detection/index.md)
+18. [跟踪端口接口单元（Trace Port Interface Unit）](m7_processor/tpiu/index.md)
 
 ## ARM Cortex R52+ 处理器
 
