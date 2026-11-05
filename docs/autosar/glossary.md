@@ -402,6 +402,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
+**application mode manager**
+> 提供模式切换服务的 **AUTOSAR** 软件组件（**application mode manager**）。应用模式管理者的模式不必是标准化的。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Application Programming Interface**
 > 应用编程接口（API）是特定软件部分的既定方法，编写程序的程序员通过它可以向该软件部分发出请求。
 >
@@ -411,7 +416,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Application Software Cluster**
 > 主要包含软件组件、仅包含选定的 BSW 模块（例如服务模块、转换器等）的软件集群（**Application Software Cluster**）。
 >
-> 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
+> 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）、[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
 {: .glossary-source}
 
 **Application Software Component**
@@ -462,6 +467,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](cp/communication/xcp/index.md)（SWS_XCP）
 {: .glossary-source}
 
+**ASCR runnable**
+> 由至少一个 `AsynchronousServerCallReturnsEvent` 触发的可运行实体（**ASCR runnable**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **ASIL**
 > 汽车安全完整性等级（**Automotive Safety Integrity Level**）
 >
@@ -504,6 +514,21 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**associated Local Software Cluster Communication Plug-In**
+> 被分配给某个通信图、独占区、模式机实例或分布式共享模式队列，因而处理所有经由 **RTE API**、**SchM API** 或 **RTE** 内部代码的访问的本地软件集群通信插件（**Local Software Cluster Communication Plug-In**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**associated Cross Software Cluster Communication Plug-In**
+> 被分配给某个通信图或模式机实例，因而处理所有经由 **RTE API** 或 **RTE** 内部代码的访问的跨软件集群通信插件（**Cross Software Cluster Communication Plug-In**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**associated RTE Implementation Plug-In**
+> 被分配给某个通信图、独占区、模式机实例或分布式共享模式队列，因而处理所有经由 **RTE API**、**SchM API** 或 **RTE** 内部代码的访问的本地软件集群通信插件或跨软件集群通信插件（**associated RTE Implementation Plug-In**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Asynchronous Communication**
 > 异步通信不会阻塞发送方软件实体。发送方软件实体无需等待通信伙伴的响应即可继续其自身的操作。
 >
@@ -726,6 +751,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**AutosarDataPrototype implementation**
+> **RTE** 分配的、实现 `AutosarDataPrototype`（或其所属状态处理）的非自动内存对象的定义与声明（**AutosarDataPrototype implementation**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Availability**
 > 1. 可用性是系统按照其规范完整地执行某个功能 A 的能力。2. 在给定时间间隔内系统执行功能 A（按第 1 条定义）的总时间与该时间间隔长度之比。另一种表述：系统在指定时刻 t 正在执行功能 A 的概率。3. 在降级模式下，如果完整的 A 不可用，系统具有执行 A 的子集 B 的能力。此时，功能 B 是可用的。
 >
@@ -920,6 +950,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR BSW General（基础软件模块通用规范）](cp/general/bsw_general/index.md)（SWS_BSWGeneral）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）
 {: .glossary-source}
 
+**BswSchedulableEntity activation**
+> `BswSchedulableEntity` 的激活被定义为包含该 `BswSchedulableEntity` 的任务/ISR2 的激活，并最终包括置位一个标志，告知任务/ISR2 中的胶水代码应执行哪个 `BswSchedulableEntity`（**BswSchedulableEntity activation**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**BswSchedulableEntity start**
+> `BswSchedulableEntity` 的启动指在已启动的任务/ISR2 内调用实现该 `BswSchedulableEntity` 的 **C** 函数（**BswSchedulableEntity start**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **BTP**
 > 基本传输协议（**Basic Transport Protocol**）。
 >
@@ -1011,6 +1051,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 ## C
+
+**'C' typed PerInstanceMemory**
+> 以 `PerInstanceMemory` 类定义的 **C** 类型按实例内存（**'C' typed PerInstanceMemory**）；内存的类型由 `typeDefinition` 属性中的 **C** typedef 定义。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 
 **C-V2X**
 > 基于蜂窝的车联网（**Cellular based Vehicle to Everything**）。
@@ -1387,9 +1433,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Client**
 > 承载客户端服务（**ClientServices**）的ECU。
 >
-> 来源：[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）](foundation/protocols/rs_someip_service_discovery_protocol/index.md)（AUTOSAR_FO_RS_SOMEIPServiceDiscoveryProtocol）
+> 来源：[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）](foundation/protocols/rs_someip_service_discovery_protocol/index.md)（AUTOSAR_FO_RS_SOMEIPServiceDiscoveryProtocol）、[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
 {: .glossary-source}
 
+**Client Server Communication Graph**
+> 相互连接的各 `PortPrototype` 中实例化的操作上的所有 `ServerCallPoint` 之和，包括所属的服务器可运行实体（**Client Server Communication Graph**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Client Service**
 > 消费一个服务。
 >
@@ -1486,12 +1537,37 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**CodeGenerationTime variability**
+> 由最迟绑定时间为 `CodeGenerationTime` 的 `VariationPoint` 或 `AttributeValueVariationPoint` 定义的可变性（**CodeGenerationTime variability**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **CoG**
 > 重心（**Center of Gravity**）
 >
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](cp/application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis）
 {: .glossary-source}
 
+**coherency group**
+> 由 **RTE** 负责数据相干性的一组隐式读访问和隐式写访问（**coherency group**）。请注意在本规范的上下文中，相干性的定义包括：不同 `VariableDataPrototype` 的读数据值必须来自同一代，除非这些值由属于该相干组的隐式写访问改变；不同 `VariableDataPrototype` 的已写数据值，应在属于该相干组的最后一个隐式写访问之后才传送给不属于该相干组的读者。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**coherent implicit data access**
+> 属于某个相干组的隐式读访问或隐式写访问（**coherent implicit data access**）；因此它被某个 `RteImplicitCommunication` 容器中 `RteCoherentAccess` 参数设置为 true 的 `RteVariableReadAccessRef` 或 `RteVariableWriteAccessRef` 引用。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**coherent implicit read access**
+> 属于某个相干组的隐式读访问（**coherent implicit read access**）；因此它被某个 `RteImplicitCommunication` 容器中 `RteCoherentAccess` 参数设置为 true 的 `RteVariableReadAccessRef` 引用。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**coherent implicit write access**
+> 属于某个相干组的隐式写访问（**coherent implicit write access**）；因此它被某个 `RteImplicitCommunication` 容器中 `RteCoherentAccess` 参数设置为 true 的 `RteVariableReadAccessRef` 或 `RteVariableWriteAccessRef` 引用。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Com**
 > 通信（**Communication**）
 >
@@ -1522,6 +1598,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**common mode machine instance**
+> 由 **BSW** 模块和 **SW-C** 共享的特殊模式机实例（**common mode machine instance**）：当软件组件端口中实例化的某个 `ModeDeclarationGroupPrototype` 与某个基础软件模块实例的 `providedModeGroup` `ModeDeclarationGroupPrototype` 同步（`SwcBswMapping` 的 `synchronizedModeGroup`）时，**RTE** 生成器只创建一个模式机实例，即公共模式机实例。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Communication Attribute**
 > 通信属性按照开发阶段定义 AUTOSAR 通信模式的行为与实现两个方面。
 >
@@ -1534,6 +1615,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Communication Manager（通信管理器）](cp/system_services/comm/index.md)（SWS_COMManager）
 {: .glossary-source}
 
+**Communication Graph**
+> 相互连接的各 `PortPrototype` 中实例化的 `PortInterface` 元素上的所有 `AbstractAccessPoint` 之和，或相互连接的各 `BswModuleDescription` 中 `BswModuleEntity` 对接口元素的所有访问之和（**Communication Graph**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Communication Job**
 > TTCAN 通信作业定义特定的通信操作与所分配的执行时间。
 >
@@ -1726,12 +1812,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
 {: .glossary-source}
 
+**copy semantic**
+> 副本语义指访问实体能够以非并发、非抢占的方式从自己的执行上下文读取或写入"被复制的"数据（**copy semantic**）。如果所有访问实体位于同一抢占区内，这可能不需要真正的物理数据复制。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Core**
 > **CPU** 及其紧邻的功能资源。
 >
 > 来源：[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）
 {: .glossary-source}
 
+**core local mode user group**
+> 在模式使用者属于不同分区、而这些分区又被调度到不同微控制器核上的情况下，整体模式机实例需要跨核分布；此时某些限制只适用于在同一微控制器核上执行的模式使用者之间。属于同一模式管理者、且其 `EcucPartition` 属于引用同一 `EcucCoreDefinition` 的 `OsApplication` 的所有模式使用者，属于同一个核本地模式使用者组（**core local mode user group**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **CPU**
 > 中央处理器（**Central Processing Unit**）
 >
@@ -1756,6 +1852,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
 {: .glossary-source}
 
+**Cross Software Cluster Communication Plug-In**
+> 跨软件集群通信插件（**Cross Software Cluster Communication Plug-In**）是处理通往其他软件集群的通信的 **RTE** 实现插件；如果配置了 **ECU** 内转换，则也包括转换器的处理。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Cross-Cluster External Graph**
 > 一种特殊的**外部图**，在集群式软件架构下跨越多个**软件集群**（**Software Cluster**）。其配置依赖于模式（由**宿主软件集群**（**Host Software Cluster**）控制），并且另外具有专门的配置结构。注意：单个**软件集群**内的**外部图**可以在不使用集群式软件架构专门配置结构的情况下建模。
 >
@@ -1890,6 +1991,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**Data Communication Graph**
+> 相互连接的各 `PortPrototype` 中实例化的 `VariableDataPrototype` 上的所有 `VariableAccess` 之和，或 `InternalBehavior` 中对 `VariableDataPrototype` 的所有 `VariableAccess` 之和，或相互连接的各 `BswModuleDescription` 中对 `VariableDataPrototype` 的所有 `BswVariableAccess` 之和（**Data Communication Graph**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Data Element**
 > 数据元素（**Data Element**）在"发送方-接收方接口"（**Sender-Receiver Interface**）的上下文中声明。它们用作发送方与接收方之间交换的数据单元。
 >
@@ -1938,6 +2044,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SecOC (Secure Onboard Communication)](cp/communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
 {: .glossary-source}
 
+**data semantic**
+> 当数据被分布时，最后接收到的值是所关注的（last-is-best 语义）；因此 `SwDataDefProps` 的 `swImplPolicy` 属性所声明的软件实现策略不应为 `queued`（**data semantic**，数据语义）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Data Variant Coding**
 > 根据外部需求，通过设置某些特征数据来调整软件。
 >
@@ -2166,6 +2277,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）
 {: .glossary-source}
 
+**direct function call**
+> 直接函数调用（**direct function call**）是纯 **RTE** 代码之外的任何手段都不参与的函数调用。通常它是 **RTE API** 中的一个 **C** 函数调用（见 7.1.6、6.2.2.3.1 和 8.5.1.2 节）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Directed acyclic graph**
 > 没有循环依赖的依赖关系图。
 >
@@ -2799,6 +2915,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**event semantic**
+> 当事件被分布时，接收到的全部事件历史都是所关注的，因此它们必须在接收方排队；因此 `SwDataDefProps` 的 `swImplPolicy` 属性将取值 `queued`（对应于带队列的事件分布）（**event semantic**，事件语义）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Event status byte**
 > 按 ISO 14229-1 定义、基于事件级别的状态字节。
 >
@@ -2859,6 +2980,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**execution-instance**
+> 可执行实体的一个执行实例是该可执行实体在并发执行意义上的一个实例或调用上下文（**execution-instance**），见 6.2.2.3 节。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **EXI**
 > 高效 XML 交换（**Efficient XML Interchange**）。
 >
@@ -3651,6 +3777,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](cp/safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures）
 {: .glossary-source}
 
+**hard error runnable**
+> 由至少一个 `TransformerHardErrorEvent` 触发的可运行实体（**hard error runnable**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Hardware Abstraction Layer**
 > 硬件抽象层（**Hardware Abstraction Layer**）是介于物理硬件与其软件之间的抽象层软件。它允许通过编程接口访问硬件资源。
 >
@@ -3828,7 +3959,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Host Software Cluster**
 > 包含 BSW 主要部分（尤其是微控制器相关的下层 BSW 模块，例如 OS 和 MCAL）的唯一软件集群（**Host Software Cluster**）。
 >
-> 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
+> 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）、[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
 {: .glossary-source}
 
 **HSM**
@@ -4097,12 +4228,37 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**implicit read access**
+> 以 `dataReadAccess` 角色聚合到某个 `VariableDataPrototype` 的 `VariableAccess`（**implicit read access**，隐式读访问）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**implicit write access**
+> 以 `dataWriteAccess` 角色聚合到某个 `VariableDataPrototype` 的 `VariableAccess`（**implicit write access**，隐式写访问）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **In-Use performance ratio**
 > **OBD** 系统特定监视器 m 的实际使用性能比为：IUPRm = Numeratorm / Denominatorm。
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**incoherent implicit data access**
+> 不属于任何相干组的隐式读访问或隐式写访问（**incoherent implicit data access**）；因此它不被任何 `RteImplicitCommunication` 容器中 `RteCoherentAccess` 参数设置为 true 的 `RteVariableReadAccessRef` 或 `RteVariableWriteAccessRef` 引用。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**incoherent implicit read access**
+> 不属于任何相干组的隐式读访问（**incoherent implicit read access**）；因此它不被任何 `RteImplicitCommunication` 容器中 `RteCoherentAccess` 参数设置为 true 的 `RteVariableReadAccessRef` 引用。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**incoherent implicit write access**
+> 不属于任何相干组的隐式写访问（**incoherent implicit write access**）；因此它不被任何 `RteImplicitCommunication` 容器中 `RteCoherentAccess` 参数设置为 true 的 `RteVariableWriteAccessRef` 引用。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **IND**
 > 反向邻居发现（**Inverse Neighbor Discovery**）。
 >
@@ -4193,12 +4349,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**inter-ECU communication**
+> **ECU** 之间的通信（通常使用 **COM**），本文称为 **ECU** 间通信（**inter-ECU communication**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Inter-ECU-communication**
 > ECU间通信（**Inter-ECU-communication**）是两个或多个ECU之间的通信，例如经由CAN网络。
 >
 > 来源：[AUTOSAR COM（COM模块）](cp/communication/com/index.md)（AUTOSAR_CP_SWS_COM）
 {: .glossary-source}
 
+**inter-partition communication**
+> 同一 **ECU** 内不同分区（由不同的 **OS** application 表示）之间的通信，本文称为分区间通信（**inter-partition communication**）。它可能涉及 **IOC** 或可信函数调用等 **OS** 机制的使用。各分区可以位于不同的核上，或使用 **ECU** 的不同内存节。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Interface**
 > 两个功能单元（**Functional Unit**）之间的共享边界，由涉及功能、物理互连、信号交换及其他特性的各种特征（视情况而定）定义。
 >
@@ -4271,12 +4437,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**intra-ECU communication**
+> 一个 **ECU** 之内的通信，本文称为 **ECU** 内通信（**intra-ECU communication**）。它是分区间通信和分区内通信的超集。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Intra-ECU-communication**
 > ECU内通信（**Intra-ECU-communication**）是驻留在同一ECU上的软件组件之间的通信。
 >
 > 来源：[AUTOSAR COM（COM模块）](cp/communication/com/index.md)（AUTOSAR_CP_SWS_COM）
 {: .glossary-source}
 
+**intra-partition communication**
+> 一个 **ECU** 的一个分区之内的通信，称为分区内通信（**intra-partition communication**）。在这种情况下，**RTE** 可以使用内部缓冲区和队列进行通信。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Intrusion Detection System**
 > 负责检测、记录和报告安全事件的系统。
 >
@@ -4295,6 +4471,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**invalidateable**
+> 可失效的 `VariableDataPrototype` 是拥有 `invalidValue` 的 `VariableDataPrototype`（**invalidateable**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Inverse transformer**
 > 接收端的转换器，它反转在发送端应用的转换步骤。
 >
@@ -4379,6 +4560,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Memory Mapping（AUTOSAR 内存映射）](cp/memory/memory_mapping/index.md)（AUTOSAR_CP_SWS_MemoryMapping）、[AUTOSAR Wireless Ethernet Driver（无线以太网驱动程序）](cp/communication/wlan_driver/index.md)（SWS_WirelessEthernetDriver）、[AUTOSAR CAN Driver（CAN驱动程序）](cp/communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）、[AUTOSAR TTCAN Driver（TTCAN 驱动程序）](cp/communication/ttcan_driver/index.md)（AUTOSAR_CP_SWS_TTCANDriver）
 {: .glossary-source}
 
+**ISR body**
+> 使用宏 `ISR` 定义的任务函数（**ISR body**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**ISR2**
+> 类别 2 的中断服务例程（**ISR2**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **ITS**
 > 智能交通系统（**Intelligent Transport System**）。
 >
@@ -4649,6 +4840,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**LinkTime variability**
+> 由最迟绑定时间为 `LinkTime` 的 `VariationPoint` 或 `AttributeValueVariationPoint` 定义的可变性（**LinkTime variability**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **LinSM**
 > LIN 状态管理器（**LIN State Manager**）
 >
@@ -4685,6 +4881,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
 
+**Local Software Cluster Communication Plug-In**
+> 本地软件集群通信插件（**Local Software Cluster Communication Plug-In**）是处理软件集群内部本地通信的 **RTE** 实现插件；如果相应的通信图存在 `DataMapping`，则也包括转换器的处理。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Local Supervision Status**
 > 表示单个**被监督实体**当前存活监督结果的状态。
 >
@@ -5137,6 +5338,56 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR PduR (PDU Router)](cp/communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
 {: .glossary-source}
 
+**Mode Communication Graph**
+> 相互连接的各 `PortPrototype` 中实例化的 `ModeDeclarationGroupPrototype` 上的所有 `ModeAccessPoint` 和 `ModeSwitchPoint` 之和，或相互连接的各 `BswModuleDescription` 中对 `ModeDeclarationGroupPrototype` 的所有 `managedModeGroup` 和 `accessedModeGroup` 之和（**Mode Communication Graph**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**mode disabling**
+> 当某个模式禁用（**mode disabling**）活动时，**RTE** 和基础软件调度器禁用模式禁用依赖的可执行实体的激活。模式禁用在模式禁用依赖所引用的模式期间、以及进入和离开该模式的转换期间是活动的。另见 6.2.4.1 节。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**mode disabling dependency**
+> 启动 `RunnableEntity`（或 `BswSchedulableEntity`）的 `RTEEvent`（或 `BswEvent`）可以包含一个引用某个 `ModeDeclaration` 的 `disabledMode`（或 `disabledInMode`）关联。本规范称该关联为模式禁用依赖（**mode disabling dependency**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**mode disabling dependent ExecutableEntity**
+> 由带有模式禁用依赖的 `RTEEvent`（或 `BswEvent`）触发的 `RunnableEntity` 或 `BswSchedulableEntity`（**mode disabling dependent ExecutableEntity**）。当相应的模式禁用活动时，**RTE** 和基础软件调度器阻止这些 `RunnableEntity` 或 `BswSchedulableEntity` 被该 `RTEEvent`/`BswEvent` 激活。另见 6.2.4.1 节。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**mode machine instance**
+> 模式机或 `ModeDeclarationGroup` 的实例由模式管理者的 `ModeDeclarationGroupPrototype` 定义（**mode machine instance**）。由于模式切换不是瞬时完成的，**RTE** 或基础软件调度器必须维护自己的状态。对每个模式管理者的 `ModeDeclarationGroupPrototype`，**RTE** 或基础软件调度器有一个状态机，该状态机称为模式机实例。对同一模式管理者 `ModeDeclarationGroupPrototype` 的所有模式使用者，**RTE** 和基础软件调度器使用同一个模式机实例。另见 6.2.4.2 节。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**mode manager**
+> 进入和离开模式由模式管理者（**mode manager**）发起。模式管理者要么是提供一个由 `ModeSwitchInterface` 定义类型的 p-port 的软件组件，要么是在其 `BswModuleDescription` 中以 `providedModeGroup` 角色定义了 `ModeDeclarationGroupPrototype` 的 **BSW** 模块。另见 6.2.4.2 节。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**ModeSwitchAck ExecutableEntity**
+> 由连接到模式管理者 `ModeDeclarationGroupPrototype` 的 `ModeSwitchedAckEvent`（或 `BswModeSwitchedAckEvent`）触发的 `RunnableEntity` 或 `BswSchedulableEntity`（**ModeSwitchAck ExecutableEntity**）。另见 6.2.4.1 节。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**mode switch notification**
+> 使用 `ModeSwitchInterface` 或 `providedModeGroup` 与 `requiredModeGroup` `ModeDeclarationGroupPrototype`、从模式管理者到模式使用者的模式切换通信（**mode switch notification**，模式切换通知）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**mode switch port**
+> 用于接收（或发送）模式切换通知的端口（**mode switch port**，模式切换端口）；为此，模式切换端口由 `ModeSwitchInterface` 定义类型。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**mode user**
+> 依赖模式的 **AUTOSAR SW-C** 或 **AUTOSAR** 基础软件模块称为模式使用者（**mode user**）。该依赖可以经由 `SwcModeSwitchEvent`/`BswModeSwitchEvent`、针对提供/需求模式切换端口的 `ModeAccessPoint`、或针对 `providedModeGroup`/`requiredModeGroup` `ModeDeclarationGroupPrototype` 的 `accessedModeGroup` 产生。另见 6.2.4.1 节。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Module abbreviation**
 > 模块缩写（**Module abbreviation**）
 >
@@ -5655,6 +5906,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR NVM（非易失性存储管理器）](cp/memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
 {: .glossary-source}
 
+**NvBlockSwComponent**
+> `NvBlockSwComponent` 是由 `NvBlockSwComponentType` 定义类型的 `SwComponentPrototype`。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **NVH**
 > 噪声、振动、平顺性（**Noise, Vibration, Harshness**）
 >
@@ -5795,6 +6051,21 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Key Manager（密钥管理器）](cp/crypto/key_manager/index.md)（SWS_KeyManager）
 {: .glossary-source}
 
+**on-entry ExecutableEntity**
+> 由具有 `ModeActivationKind` 为 `entry` 的 `SwcModeSwitchEvent`（或 `BswModeSwitchEvent`）触发的 `RunnableEntity` 或 `BswSchedulableEntity`，在进入模式时被触发，称为进入时可执行实体（**on-entry ExecutableEntity**）。另见 6.2.4.1 节。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**on-exit ExecutableEntity**
+> 由具有 `ModeActivationKind` 为 `exit` 的 `SwcModeSwitchEvent`（或 `BswModeSwitchEvent`）触发的 `RunnableEntity` 或 `BswSchedulableEntity`，在退出模式时被触发，称为退出时可执行实体（**on-exit ExecutableEntity**）。另见 6.2.4.1 节。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**on-transition ExecutableEntity**
+> 由具有 `ModeActivationKind` 为 `transition` 的 `SwcModeSwitchEvent`（或 `BswModeSwitchEvent`）触发的 `RunnableEntity` 或 `BswSchedulableEntity`，在两个指定模式之间的转换中被触发，称为转换时可执行实体（**on-transition ExecutableEntity**）。另见 6.2.4.1 节。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Onboard Security Event**
 > 类比 ISO/IEC 27000:2018（[44]），车载安全事件（**SEv**）是已识别的车载系统、服务或网络状态的出现，它指示可能违反信息安全策略或控制措施失效，或者是先前未知的、可能具有安全相关性的情形。
 >
@@ -5947,6 +6218,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](cp/diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
 {: .glossary-source}
 
+**Parameter Communication Graph**
+> 相互连接的各 `PortPrototype` 中实例化的 `ParameterDataPrototype` 上的所有 `ParameterAccess` 之和，或 `InternalBehavior` 中对 `ParameterDataPrototype` 的所有 `ParameterAccess` 之和（**Parameter Communication Graph**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Partial test**
 > 部分测试定义为一个或多个「硬件资源」的测试。（部分测试是可中断的，因为它在后台模式下执行。）
 >
@@ -6367,6 +6643,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**post-build variability**
+> 由带有 `PostBuildVariantCriterion` 的 `VariationPoint` 定义的可变性（**post-build variability**，构建后可变性）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **POTI**
 > 位置与时间（**Position and Time**）。
 >
@@ -6397,18 +6678,33 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**pre-build variability**
+> 由最迟绑定时间为 `SystemDesignTime`、`CodeGenerationTime`、`PreCompileTime` 或 `LinkTime` 的 `VariationPoint` 或 `AttributeValueVariationPoint` 定义的可变性（**pre-build variability**，构建前可变性）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Pre-Compile Time Configuration**
 > SW 模块的配置在源代码级别完成，并在编译期之后生效。
 >
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**PreCompileTime variability**
+> 由最迟绑定时间为 `PreCompileTime` 的 `VariationPoint` 或 `AttributeValueVariationPoint` 定义的可变性（**PreCompileTime variability**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Predictabiliy**
 > 可预测性（**Predictability**）是指能够对系统的状态/行为做出正确的定性或定量预测或预估的程度。
 >
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**preemption area**
+> 抢占区（**preemption area**）定义了一组协作式调度的任务。因此一个抢占区的各任务只在专用的调度点相互抢占。调度点不允许出现在可运行实体的执行期间。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Pretended Networking**
 > 在不改变网络基础设施的情况下，降低现有活动网络中能耗的方法。
 >
@@ -6433,6 +6729,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Crypto Interface（加密接口）](cp/crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Crypto Service Manager（加密服务管理器）](cp/crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
+**primitive data type**
+> 基本数据类型（**primitive data type**）是由布尔量、整数（最多 32 位）、浮点数或不透明类型（最多 32 位）实现的类型。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Priority**
 > 优先级：作业的优先级定义其重要性，优先级（数值）越高，作业越需立即执行；加密作业的优先级是配置的一部分。
 >
@@ -6773,6 +7074,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
+**RIPS**
+> 缩写 **RIPS** 代表 **RTE Implementation Plug-In Service**，相关的 **API** 中缀 `Rips` 由此派生。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**RIPS FlatInstanceDescriptor**
+> 把通信图分配给某个 **RTE** 实现插件的 `FlatInstanceDescriptor`（**RIPS FlatInstanceDescriptor**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Risk**
 > 参见 ISO-DIS-26262-Part-1（[7]），ID 1.99
 >
@@ -6833,6 +7144,66 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR NVM（非易失性存储管理器）](cp/memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
 {: .glossary-source}
 
+**RP enabler flag**
+> 允许在运行时启用/禁用旁路的布尔标志（**RP enabler flag**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**RP event id**
+> 被旁路事件的标识符；作为参数传递给 **RP** 服务函数（**RP event id**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**RP global buffer**
+> 由 **RP** 读写的缓冲区（**RP global buffer**）。**RP** 全局缓冲区在概念上与保存变量数据原型值的 **RTE** 管理缓冲区分离。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**RP global measurement buffer**
+> **RP** 用于在用 **RP** 生成的值替换之前、为后续测量目的保存原始变量数据原型值的缓冲区（**RP global measurement buffer**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**RP runnable disabler flag**
+> 允许条件性 `RunnableEntity` 执行的布尔标志（**RP runnable disabler flag**）。配置了条件执行时，该标志为 `FALSE` 时可运行实体才被执行。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**RP service component**
+> 提供 **RP** 服务（例如 "XCP on CAN" 或 "XCP on Ethernet"）的 **AUTOSAR** 或供应商专有 **BSW** 模块（**RP service component**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**RP service profile**
+> 组合提供服务的函数符号与允许的 **RP** 服务点 ID 范围的服务定义（**RP service profile**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**RP service function**
+> 对由 **RP** 服务组件提供的函数的一次调用，其中数据被采样和/或激励（**RP service function**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**RP service point**
+> 调用由 **RP** 服务组件提供的一个或多个 **RP** 服务函数的位置（**RP service point**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**RP service point id**
+> **RP** 服务点的整数标识符（**RP service point id**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**RP service invocation wrapper**
+> 由 **RTE** 创建的、负责调用各 **RP** 服务函数的"包装"函数（**RP service invocation wrapper**）。由此引入的间接层使构建后工具能够用任意功能替换对 **RTE** 生成函数的调用。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**RP stimulation enabler flag**
+> 允许条件性 **RP** 激励的布尔标志（**RP stimulation enabler flag**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **RPC**
 > 远程过程调用（**Remote Procedure Call**）——从一个 **ECU** 到另一个 **ECU**、使用消息传输的方法调用。
 >
@@ -6896,7 +7267,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **RTE**
 > 运行时环境（**Runtime Environment**）
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR J1939Nm（SAE J1939 网络管理）](cp/communication/j1939nm/index.md)（AUTOSAR_CP_SWS_SAEJ1939NetworkManagement）、[AUTOSAR J1939Rm（SAE J1939 请求管理器）](cp/communication/j1939rm/index.md)（AUTOSAR_CP_SWS_SAEJ1939RequestManager）、[AUTOSAR J1939Tp（SAE J1939 传输层）](cp/communication/j1939tp/index.md)（AUTOSAR_CP_SWS_SAEJ1939TransportLayer）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR J1939Nm（SAE J1939 网络管理）](cp/communication/j1939nm/index.md)（AUTOSAR_CP_SWS_SAEJ1939NetworkManagement）、[AUTOSAR J1939Rm（SAE J1939 请求管理器）](cp/communication/j1939rm/index.md)（AUTOSAR_CP_SWS_SAEJ1939RequestManager）、[AUTOSAR J1939Tp（SAE J1939 传输层）](cp/communication/j1939tp/index.md)（AUTOSAR_CP_SWS_SAEJ1939TransportLayer）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
 {: .glossary-source}
 
 **RTE Event**
@@ -6905,12 +7276,32 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**RTE event identifier**
+> **RP** 用于标识与某个 **RP** 服务点关联的 **RTE** 事件的整数标识符（**RTE event identifier**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**RTE Implementation Plug-In**
+> **RTE** 实现插件（**RTE Implementation Plug-In**）是整体 **RTE** 实现的一部分，它不是由 **RTE** 生成器提供，而是来自附加来源（例如插件生成器或手工实现的源代码）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**RTE Implementation Plug-In Service**
+> **RTE** 实现插件服务（**RTE Implementation Plug-In Service**）是进入 **RTE** 实现插件、为 **RTE** 实现某个低层服务的单一入口点，例如对某个特定缓冲区的访问。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Runnable**
 > 可运行体。原子软件组件实现中的一段可由 RTE 启动的指令序列；在任务的上下文中运行。
 >
 > 来源：[VFB（虚拟功能总线）](cp/general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）
 {: .glossary-source}
 
+**runnable activation**
+> 可运行实体的激活与导致该可运行实体执行的 `RTEEvent` 相关联（**runnable activation**）。它被定义为该 `RTEEvent` 所指称的事件。例如，对于定时事件，当定时器到期时相应的可运行实体被激活；对于数据接收事件，当 **RTE** 接收到数据时可运行实体被激活。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Runnable Entity**
 > 可运行实体（**Runnable Entity**）是"原子软件组件"（**Atomic Software Component**）的一部分，可以独立于该原子软件组件的其他可运行实体被执行和调度。它由一串可由 RTE 启动的指令描述。每个可运行实体恰好关联一个"入口点"（**Entry Point**）。
 >
@@ -6923,6 +7314,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR FiM（功能禁止管理器）](cp/system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）
 {: .glossary-source}
 
+**runnable start**
+> 可运行实体的启动指在已启动的任务/ISR2 内调用实现该可运行实体的 **C** 函数（**runnable start**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **RVF**
 > 原始视频格式（**Raw Video Format**），由 IEEE 1722 定义。
 >
@@ -7312,9 +7708,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Server**
 > 承载服务器服务（**ServerServices**）的ECU。
 >
-> 来源：[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）](foundation/protocols/rs_someip_service_discovery_protocol/index.md)（AUTOSAR_FO_RS_SOMEIPServiceDiscoveryProtocol）
+> 来源：[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）](foundation/protocols/rs_someip_service_discovery_protocol/index.md)（AUTOSAR_FO_RS_SOMEIPServiceDiscoveryProtocol）、[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
 {: .glossary-source}
 
+**server ExecutableEntity**
+> 由 `OperationInvokedEvent` 或 `BswOperationInvokedEvent` 触发的服务器（**server ExecutableEntity**）。在某些情况下，**RTE** 可以把客户端-服务器通信实现为简单的函数调用。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**server runnable**
+> 由 `OperationInvokedEvent` 触发的服务器（**server runnable**）。它兼有可运行实体与函数调用的行为。在某些情况下，**RTE** 可以把客户端-服务器通信实现为简单的函数调用。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Server Service**
 > 提供一个服务。
 >
@@ -8137,6 +8543,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**SystemDesignTime variability**
+> 由最迟绑定时间为 `SystemDesignTime` 的 `VariationPoint` 或 `AttributeValueVariationPoint` 定义的可变性（**SystemDesignTime variability**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Systems Modelling Language**
 > 系统建模语言（**Systems Modelling Language**，**SYSML**）。面向系统工程的通用建模语言。
 >
@@ -8157,6 +8568,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**Task body**
+> 使用宏 `TASK` 定义的任务函数（**Task body**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **TC**
 > 流量类别（**Traffic Class**）。
 >
@@ -8433,6 +8849,46 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[E2E Transformer (E2E转换器)](cp/communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）
 {: .glossary-source}
 
+**Trigger Communication Graph**
+> 相互连接的各 `PortPrototype` 中实例化的触发器上的所有 `ExternalTriggeringPoint` 之和，包括所属的被触发可运行实体（**Trigger Communication Graph**）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**trigger emitter**
+> 触发器发出者（**trigger emitter**）具有释放触发器的能力，这些触发器进而激活被触发的可执行实体。触发器发出者在元模型中由提供触发器端口、`releasedTrigger` 角色中的 `Trigger`、`InternalTriggeringPoint` 和 `BswInternalTriggeringPoint` 描述。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**trigger port**
+> 由 `TriggerInterface` 定义类型的 `PortPrototype`（**trigger port**，触发器端口）。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**trigger sink**
+> 触发器汇（**trigger sink**）依赖在某个特定 `Trigger` 被引发时对可运行实体或基础软件可调度实体的激活。触发器汇拥有与触发器源通信的专用需求触发器端口和/或 `requiredTrigger` `Trigger`。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**trigger source**
+> 触发器源（**trigger source**）管理特定的 `Trigger`，并在该 `Trigger` 被引发时通知 **RTE** 或基础软件调度器。触发器源拥有与触发器汇通信的专用提供触发器端口和/或 `releasedTrigger` `Trigger`。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**triggered BswSchedulableEntity**
+> 由至少一个 `BswExternalTriggerOccurredEvent` 或 `BswInternalTriggerOccurredEvent` 触发的 `BswSchedulableEntity`（**triggered BswSchedulableEntity**）。在特定情况下，触发器事件通信或基础软件可调度实体间触发由基础软件调度器实现为触发方可执行实体对被触发可执行实体的直接或可信函数调用。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**triggered ExecutableEntity**
+> 由至少一个 `ExternalTriggerOccurredEvent`/`BswExternalTriggerOccurredEvent` 或 `InternalTriggerOccurredEvent`/`BswInternalTriggerOccurredEvent` 触发的可运行实体或基础软件可调度实体（**triggered ExecutableEntity**）。在特定情况下，触发器事件通信或可运行实体间触发由 **RTE** 或基础软件调度器实现为触发方可执行实体对被触发可执行实体的直接或可信函数调用。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
+**triggered runnable**
+> 由至少一个 `ExternalTriggerOccurredEvent` 或 `InternalTriggerOccurredEvent` 触发的可运行实体（**triggered runnable**）。在特定情况下，触发器事件通信或可运行实体间触发由 **RTE** 实现为触发方可运行实体对被触发可运行实体的直接或可信函数调用。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Triggered Time Base Customer**
 > 由同步时基管理器触发的时基客户；该功能目前仅限于 **OS** ScheduleTable 的同步。
 >
@@ -8445,6 +8901,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**trusted function call**
+> 可信函数调用（**trusted function call**）是经由 **OS** 的 `CallTrustedFunction()` **API** 执行的函数调用。在跨越分区边界时，通常需要它来实现类似直接函数调用的行为。
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **TS**
 > Time Stamp —— 时间戳。
 >
@@ -8597,6 +9058,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
 {: .glossary-source}
 
+**unconnected port**
+> 未被任何 `AssemblySwConnector` 和/或 `DelegationSwConnector` 引用的 `RPortPrototype` 或 `PPortPrototype`，或其端口接口的元素中至少没有任何 `DataMapping` 的端口（**unconnected port**，未连接端口）。提示：`PRPortPrototype` 始终被视为已连接端口。（见 **SWS_Rte_06030**）
+>
+> 来源：[AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md)（AUTOSAR_CP_SWS_RTE）
+{: .glossary-source}
 **Unicast event**
 > 由承载**SdServerService**的ECU发送到单播端点的事件。该单播端点由已在Endpoint Option（见「Consumed Eventgroup unicast endpoint」）中引用的、订阅了该SdServerService的特定SdClientService提供。
 >
