@@ -512,6 +512,7 @@ nav:
         - autosar/foundation/release_documentation/tr_release_overview/index.md
       - 功能安全:
         - autosar/foundation/safety/index.md
+        - "Safety": autosar/foundation/safety/rs_safety/index.md
       - 信息安全:
         - autosar/foundation/security/index.md
         - "IDS": autosar/foundation/security/rs_intrusion_detection_system/index.md

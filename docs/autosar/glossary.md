@@ -2588,6 +2588,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
+**EM**
+> 执行管理（**Execution Management**）。
+>
+> 来源：[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
+{: .glossary-source}
+
 **eMAID**
 > e-移动账户标识符（**e-Mobility Account Identifier**）。
 >
@@ -6085,6 +6091,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR PduR (PDU Router)](cp/communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
 {: .glossary-source}
 
+**PER**
+> 持久化（**Persistency**）。
+>
+> 来源：[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
+{: .glossary-source}
+
 **Performance**
 > 针对故障行为对性能进行评级。
 >
@@ -6961,6 +6973,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）
 {: .glossary-source}
 
+**S2S**
+> 信号到服务（**Signal to Service**）。
+>
+> 来源：[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
+{: .glossary-source}
+
 **SA**
 > 安全关联（**Security Association**）。
 >
@@ -7031,6 +7049,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 一种通信协议，定义了确保所传输数据完整性并检测任何与通信相关错误所需的机制。
 >
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**SG**
+> 安全目标（**Safety Goal**）。
+>
+> 来源：[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
 {: .glossary-source}
 
 **SAI**
@@ -7121,6 +7145,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 安全通道标识符（**Secure Channel Identifier**）。
 >
 > 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
+{: .glossary-source}
+
+**SM**
+> 状态管理（**State Management**）。
+>
+> 来源：[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
 {: .glossary-source}
 
 **SD**
@@ -8307,6 +8337,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
 {: .glossary-source}
 
+**TLSR**
+> 顶层安全需求（**Top Level Safety Requirement**）。
+>
+> 来源：[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
+{: .glossary-source}
+
 **TLV**
 > 标签-长度-值（**Tag-Length-Value**）。
 >
@@ -8529,6 +8565,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 微控制器（**Microcontroller**）
 >
 > 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](cp/mcal/mcu_driver/index.md)（SWS_MCUDriver）
+{: .glossary-source}
+
+**UCM**
+> 更新和配置管理（**Update and Configuration Management**）。
+>
+> 来源：[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
 {: .glossary-source}
 
 **UDP**
@@ -8970,7 +9012,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **WDG**
 > 看门狗（**Watchdog**，模块特定前缀）
 >
-> 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）
+> 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
 {: .glossary-source}
 
 **WdgM**

@@ -336,7 +336,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 ### foundation/safety (Safety)
 
-- ❌ Requirements on Safety（功能安全需求） — AUTOSAR_FO_RS_Safety (`foundation/safety/`)
+- ✅ Requirements on Safety（功能安全需求） — AUTOSAR_FO_RS_Safety (`foundation/safety/rs_safety/`; R23-11; RS, skeleton-exempt; 65 requirement items translated with IDs dropped per batch decision; tracing chapter omitted; 2026-11-06)
 
 ### foundation/security (Security)
 
