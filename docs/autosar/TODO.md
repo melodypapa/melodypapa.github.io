@@ -300,7 +300,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ✅ Requirements on Feature Model Exchange Format（特征模型交换格式需求） — AUTOSAR_FO_RS_FeatureModelExchangeFormat (`foundation/methodology_templates/rs_feature_model_exchange_format/`)
 - ✅ Requirements on Methodology（方法论需求） — AUTOSAR_FO_RS_Methodology (`foundation/methodology_templates/rs_methodology/`)
 - ✅ Requirements on Security Extract Template（安全提取模板需求） — AUTOSAR_FO_RS_SecurityExtractTemplate (`foundation/methodology_templates/rs_security_extract_template/`)
-- ❌ Requirements on Standardization Template（标准化模板需求） — AUTOSAR_FO_RS_StandardizationTemplate (`foundation/methodology_templates/`)
+- ✅ Requirements on Standardization Template（标准化模板需求） — AUTOSAR_FO_RS_StandardizationTemplate (`foundation/methodology_templates/rs_standardization_template/`; R23-11; RS, skeleton-exempt; 21 use cases + 66 requirement items numbered §2.x/§3.x.y with IDs dropped, UC/RS cross-refs linked intra-article; unnumbered pre-chapter References mirrored with ref anchors; tracing subsections §1.3/§1.4 omitted; annex A class tables → §4 numbered continuation; 2026-11-06)
 - ✅ Requirements on Timing Extensions（时序扩展需求） — AUTOSAR_FO_RS_TimingExtensions (`foundation/methodology_templates/rs_timing_extensions/`)
 - ❌ ARXML Serialization Rules（ARXML 序列化规则） — AUTOSAR_FO_TPS_ARXMLSerializationRules (`foundation/methodology_templates/`)
 - ❌ Requirements on Timing Extensions（时序扩展需求） — AUTOSAR_FO_RS_TimingExtensions (`foundation/methodology_templates/`)

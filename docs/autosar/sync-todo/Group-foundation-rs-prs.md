@@ -314,12 +314,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Requirements on Standardization Template（标准化模板需求）; target `foundation/methodology_templates/rs_standardization_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_RS_StandardizationTemplate.md` — 1,734 lines, 58 figure refs, 302 item IDs
   - Note: related site content: cp/methodology_templates/basic_software_module_description_template (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-06 run — all 58 figure refs are page decoration (258x28 strips + 15x15 glyphs), 0 content figures; 21 use cases → §2.1–2.21, 66 requirement items → §3.1.1–3.6.22 numbered 1:1 (26 blueprints + 1 keywords + 4 integration + 1 traceability + 12 spec-element documentation + 22 data-exchange-point profiles); UC_STDT_*/RS_STDT_* cross-refs in Use-Case/Dependencies cells rewritten as intra-article section links (rs_feature_model precedent); the source References chapter is an UNNUMBERED pre-chapter — mirrored as unnumbered ## 参考文献 with ref anchors; §1.3 Use Case Tracing + §1.4 Requirements Tracing omitted per ASWS precedent (subsections — no chapter renumbering); annex A Mentioned Class Tables (2 meta-class tables, PDF duplicate columns collapsed) → numbered continuation §4; annex B change history (R4.1.1–R23-11, 10 releases) → ## B. with Heading columns only; PDF-recovered cells: 00018/00025/00109/00110/00119/00122 rationales; no acronym chapter → no new site-glossary terms
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_time_sync_protocol (AUTOSAR_FO_PRS_TimeSyncProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Time Synchronization Protocol Specification（时间同步协议规范）; target `foundation/protocols/prs_time_sync_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_TimeSyncProtocol.md` — 1,847 lines, 75 figure refs, 282 item IDs

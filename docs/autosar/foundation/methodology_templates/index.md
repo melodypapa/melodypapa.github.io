@@ -10,6 +10,7 @@ title: "方法论与模板（Methodology and Templates）"
 * [Requirements on Security Extract Template（安全提取模板需求）](rs_security_extract_template/index.md)
 * [Requirements on Feature Model Exchange Format（特征模型交换格式需求）](rs_feature_model_exchange_format/index.md)
 * [Requirements on Methodology（方法论需求）](rs_methodology/index.md)
+* [Requirements on Standardization Template（标准化模板需求）](rs_standardization_template/index.md)
 * [Requirements on Timing Extensions（时序扩展需求）](rs_timing_extensions/index.md)
 * [Log and Trace Extract Template（日志与跟踪提取模板）](tps_log_and_trace_extract/index.md)
 * [ARXML Serialization Rules（ARXML 序列化规则）](tps_arxml_serialization_rules/index.md)
@@ -17,7 +18,6 @@ title: "方法论与模板（Methodology and Templates）"
 
 R23-11 中本类别的其余源文档（待翻译）：
 
-* **AUTOSAR_FO_RS_StandardizationTemplate** — Requirements on Standardization Template（标准化模板需求）
 * **AUTOSAR_FO_TPS_ARXMLSerializationRules** — ARXML Serialization Rules（ARXML 序列化规则）
 * **AUTOSAR_FO_RS_TimingExtensions** — Requirements on Timing Extensions（时序扩展需求）
 * **AUTOSAR_FO_TPS_FeatureModelExchangeFormat** — Feature Model Exchange Format（特征模型交换格式）
