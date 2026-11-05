@@ -12,11 +12,9 @@ title: "通信管理（Communication Management）"
 * [Requirements on E2E（端到端通信保护需求）](rs_e2e/index.md)
 * [Requirements on MACsec（MACsec 需求）](rs_macsec/index.md)
 * [Requirements on Network Management（网络管理需求）](rs_network_management/index.md)
+* [Requirements on Log and Trace（日志与跟踪需求）](rs_log_and_trace/index.md)
 
 R23-11 中本类别的其余源文档（待翻译）：
-
-
-* **AUTOSAR_FO_RS_LogAndTrace** — Requirements on Log and Trace（日志与跟踪需求）
 
 ## 相关内容
 

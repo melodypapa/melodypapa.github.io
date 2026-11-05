@@ -290,12 +290,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Requirements on Log and Trace（日志与跟踪需求）; target `foundation/communication_management/rs_log_and_trace/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `CommunicationManagement/AUTOSAR_FO_RS_LogAndTrace.md` — 1,305 lines, 46 figure refs, 181 item IDs
   - Note: related site content: cp/communication/diagnostic_log_and_trace (Dlt) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-06 run — all 46 figure refs are page decoration (15x15 glyphs + 258x27 strips), 0 content figures; 58 requirement items (all added in R23-11 per appendix A): 4.2.x numbered group headings kept (4.2.1–4.2.4 with their sub-groups), items carried as bold title lines + field tables (source leaf depth is 5 levels — too deep for headings, run decision USER: verify); §4.3's six items are themselves 4.3.x sections → numbered headings + field tables; the source puts requirement titles on the numbered headings and leaves the [RS_LT_*] ID headings title-less — titles taken from the numbered headings; IDs + {DRAFT} + ⌋(…) tracing lines dropped; intra-document ID refs (RS_LT_00030 etc.) kept unbracketed; source ch.5 Requirements Tracing omitted per ASWS precedent (References chapter renumbered 6→5, entry numbers [1]..[6] kept); PDF-recovered cells: 00047/00052/00006/00007/00008/00012/00030/00031/00033/00035/00038/00059 rationales+use-cases; appendix A "Change History": A.1.1 added 58 (54 rows with empty heading columns in the conversion → counts, 4 titled rows kept as a table); A.1.2/A.1.3 none; glossary: Log, Trace, Time new entries; 8 existing Dlt-defined entries (Log and trace message, ECU ID, Session ID, Application ID, Context ID, Message ID, Log and trace level, External client) gained this document as additional source; User homonym-skip (existing = ComM/EcuM requestor concept, decision recorded)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_time_sync (AUTOSAR_FO_RS_TimeSync · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Time Synchronization（时间同步需求）; target `foundation/protocols/rs_time_sync/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Protocols/AUTOSAR_FO_RS_TimeSync.md` — 1,470 lines, 54 figure refs, 117 item IDs

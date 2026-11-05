@@ -387,7 +387,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Application ID**
 > 一个应用/**SW-C** 的缩写，标识一条日志和跟踪消息所来自的应用/**SW-C**；由四个 8 位 ASCII 字符组成。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
 {: .glossary-source}
 
 **Application Interface**
@@ -1663,7 +1663,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Context ID**
 > 一个用户定义的标识符，用于对一个应用/**SW-C** 生成的日志和跟踪消息进行分组；Context ID 按 Application ID 分组，且在一个 Application ID 内唯一。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
 {: .glossary-source}
 
 **Continuous Transmission**
@@ -2501,7 +2501,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ECU ID**
 > 一个 ECU 的名称，由四个 8 位 ASCII 字符组成（例如 ABS0 或 COMB）。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
 {: .glossary-source}
 
 **ECU Instance**
@@ -2898,7 +2898,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **External client**
 > 一种控制、监视和存储使用 **Dlt** 模块的 ECU 所提供的日志/跟踪消息的工具。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
 {: .glossary-source}
 
 **External device**
@@ -4703,16 +4703,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**Log**
+> 用户按需生成的消息：每当用户想展示关于状态变化或值变化的某些信息时，向 **LT** 添加一个 **API** 调用。
+>
+> 来源：[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
+{: .glossary-source}
+
 **Log and trace level**
 > 日志级别为日志消息的严重程度定义了一种分类。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
 {: .glossary-source}
 
 **Log and trace message**
 > 包含描述软件中一个日志和跟踪事件的所有数据和选项的消息；由头部和载荷组成。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
 {: .glossary-source}
 
 **Log Channel**
@@ -4996,7 +5002,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Message ID**
 > 用于表征消息自身所传输信息的 ID；唯一地标识一种日志或跟踪消息，并在开发或配置时静态固定。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
 {: .glossary-source}
 
 **Meta-class**
@@ -7433,7 +7439,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Session ID**
 > 一个日志或跟踪会话的标识编号。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
 {: .glossary-source}
 
 **Setter**
@@ -8260,6 +8266,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR LinIf (LIN Interface)](cp/communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
 {: .glossary-source}
 
+**Time**
+> 每条日志和跟踪消息都可以包含的一个时间属性。它是一个自由定义的时间值，是自 **ECU** 启动以来的时间。
+>
+> 来源：[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
+{: .glossary-source}
+
 **Time Base Customer**
 > 同步时基管理器支持的 3 种时基客户：主动型客户、触发型客户、通知型客户。
 >
@@ -8450,6 +8462,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 数据传输消息（**Data Transfer message**）（**PGN** = 0x0EB00），由 **SAE J1939** 传输协议使用，对应于传输层的一个 **N-PDU**。
 >
 > 来源：[AUTOSAR J1939Tp（SAE J1939 传输层）](cp/communication/j1939tp/index.md)（AUTOSAR_CP_SWS_SAEJ1939TransportLayer）
+{: .glossary-source}
+
+**Trace**
+> 可以通过对代码插桩生成的消息（例如 **VFB** 跟踪）。被插桩的代码调用 **LT** 的 **API**。
+>
+> 来源：[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
 {: .glossary-source}
 
 **Trace Message**

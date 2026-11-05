@@ -281,7 +281,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ✅ Requirements on Debug Trace Profile（调试跟踪配置文件需求） — AUTOSAR_FO_RS_DebugTraceProfile (`foundation/communication_management/rs_debug_trace_profile/`)
 - ✅ Requirements on E2E（端到端通信保护需求） — AUTOSAR_FO_RS_E2E (`foundation/communication_management/rs_e2e/`)
 - ❌ Requirements on IEEE 1722（IEEE 1722 需求） — AUTOSAR_FO_RS_IEEE1722 (`foundation/communication_management/`)
-- ❌ Requirements on Log and Trace（日志与跟踪需求） — AUTOSAR_FO_RS_LogAndTrace (`foundation/communication_management/`)
+- ✅ Requirements on Log and Trace（日志与跟踪需求） — AUTOSAR_FO_RS_LogAndTrace (`foundation/communication_management/rs_log_and_trace/`; R23-11; RS, skeleton-exempt; 58 requirement items with IDs dropped per batch decision; tracing chapter omitted; 2026-11-06)
 - ✅ Requirements on MACsec（MACsec 需求） — AUTOSAR_FO_RS_MACsec (`foundation/communication_management/rs_macsec/`)
 - ✅ Requirements on Network Management（网络管理需求） — AUTOSAR_FO_RS_NetworkManagement (`foundation/communication_management/rs_network_management/`; R23-11; RS, skeleton-exempt; 60 requirement items with IDs dropped per batch decision, use-case table ch.4 as GFM; tracing chapter omitted; 2026-11-06)
 
