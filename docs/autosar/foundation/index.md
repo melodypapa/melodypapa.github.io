@@ -10,6 +10,7 @@ title: "基础标准（Foundation）"
   * [TR Glossary（AUTOSAR 术语表）](general/tr_glossary/index.md)
   * [Predefined Names in AUTOSAR（AUTOSAR 预定义名称）](general/tr_predefined_names/index.md)
   * [Project Objectives（项目目标）](general/rs_project_objectives/index.md)
+  * [Main Requirements（主需求规范）](general/rs_main/index.md)
   * [Security Overview（信息安全概览）](general/exp_security_overview/index.md)
   * [Explanation of Software Architectural Decisions（软件架构决策说明）](general/exp_sw_architectural_decisions/index.md)
   * [Safety Overview（功能安全概览）](general/exp_safety_overview/index.md)

@@ -469,6 +469,7 @@ nav:
         - "TR Glossary": autosar/foundation/general/tr_glossary/index.md
         - "Predefined Names": autosar/foundation/general/tr_predefined_names/index.md
         - "Project Objectives": autosar/foundation/general/rs_project_objectives/index.md
+        - "Main Requirements": autosar/foundation/general/rs_main/index.md
         - "Security Overview": autosar/foundation/general/exp_security_overview/index.md
         - "SW Architectural Decisions": autosar/foundation/general/exp_sw_architectural_decisions/index.md
         - "Safety Overview": autosar/foundation/general/exp_safety_overview/index.md

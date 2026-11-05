@@ -278,12 +278,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Main Requirements（主需求规范）; target `foundation/general/rs_main/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `General/AUTOSAR_FO_RS_Main.md` — 1,203 lines, 48 figure refs, 334 item IDs
   - Note: related site content: cp/general/layered_software_architecture, cp/general/vfb (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-06 run — 1 of 48 figure refs is a content figure (Figure1-1 Requirements Scope), embedded; the rest are page decoration (15x15 glyphs + 2 thin strips); 75 requirement items (24 in source ch.4 → §3.1–3.24, 51 platform-level candidates in ch.5 → §4.1–4.51, 1:1 numbered sections); IDs + {DRAFT} + ⌋(…) tracing lines dropped; source ch.3 Requirements Tracing omitted per ASWS precedent (renumber 4→3, 5→4, 6→5); the document's markdown has ~25 column-swap-garbled field cells (rationale/use-case interleaved) — ALL recovered from the R23-11 PDF; Wikipedia URLs and 「Concept 634 "Bus Mirroring"」 kept plain-text per source; ch.2.2 has NO acronym table (points to the TR Glossary) → no new site-glossary terms; appendix A has only an R23-11 section (A.1.3 Deleted = none); TODO.md reconciliation in same commit: rs_project_objectives row flipped ✅ (delivered in part 1, row was left ❌)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_log_and_trace (AUTOSAR_FO_RS_LogAndTrace · CommunicationManagement · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Log and Trace（日志与跟踪需求）; target `foundation/communication_management/rs_log_and_trace/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `CommunicationManagement/AUTOSAR_FO_RS_LogAndTrace.md` — 1,305 lines, 46 figure refs, 181 item IDs
