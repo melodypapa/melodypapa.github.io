@@ -510,6 +510,7 @@ nav:
         - "DDS": autosar/foundation/protocols/rs_data_distribution_service/index.md
         - "NM Protocol": autosar/foundation/protocols/prs_network_management_protocol/index.md
         - "IDS Protocol": autosar/foundation/protocols/prs_intrusion_detection_system/index.md
+        - "Time Sync": autosar/foundation/protocols/rs_time_sync/index.md
       - 发布文档:
         - autosar/foundation/release_documentation/index.md
         - autosar/foundation/release_documentation/tr_release_overview/index.md

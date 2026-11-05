@@ -302,12 +302,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Requirements on Time Synchronization（时间同步需求）; target `foundation/protocols/rs_time_sync/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Protocols/AUTOSAR_FO_RS_TimeSync.md` — 1,470 lines, 54 figure refs, 117 item IDs
   - Note: related site content: cp/globaltime/stbm, cp/globaltime/can_tsyn, cp/globaltime/eth_tsyn, cp/globaltime/fr_tsyn (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-06 run — 3 of 54 figure refs are content figures (Figure3-1 Terminology Example §3.2.9, Figure3-2 Time Correction Hierarchy §3.2.17, Figure3-3 Time Deviations RateCorrection §3.2.17), embedded by source figure number; the rest are 258x28 strips + glyphs; 75 requirement items (37 common §5.2.1, 17 Ethernet §5.2.2, 11 CAN §5.2.3, 9 FlexRay §5.2.4, 1 non-functional §5.3) as bold title lines + field tables under the numbered group headings (run decision USER: verify); 6 items with lost ## heading markers (00013/00014/00015/20036/20063/20073) restored as items; IDs + {DRAFT} + tracing lines dropped; source ch.6 Requirements Tracing omitted per ASWS precedent (References renumbered 7→6); 20072/20073/20074 truncated rationales recovered from the R23-11 PDF; the [6] citation in 20048 has no registry entry ([3] = IEEE 802.1AS is the actual target) — kept unresolved prose per the no-invented-links rule; ch.3.2 definitions (21 entries incl. Pure-Local special cases) translated in-article; glossary: 8 new entries (Clock, FVM, OFS, Sync, Time Base, Time Correction, Time Domain, TSP) + 12 existing entries gained this document as additional source; TS homonym-skip (existing = Time Stamp, decision recorded); rewrite_glossary.py normalization run after the scripted edit
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_standardization_template (AUTOSAR_FO_RS_StandardizationTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Standardization Template（标准化模板需求）; target `foundation/methodology_templates/rs_standardization_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_RS_StandardizationTemplate.md` — 1,734 lines, 58 figure refs, 302 item IDs

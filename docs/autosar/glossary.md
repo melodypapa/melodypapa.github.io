@@ -1420,6 +1420,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](cp/communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
 {: .glossary-source}
 
+**Clock**
+> 由时基（无论是否与外部源同步）与能够周期性改变其输出电平状态的硬件组合而成的单元。
+>
+> 来源：[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
+{: .glossary-source}
+
 **Cluster Signal**
 > 簇信号表示某个特定通信簇上的聚合系统信号。簇信号可以独立于帧来定义。这允许一种开发方法论：先定义信号，然后在后续阶段将信号分配到帧。
 >
@@ -1739,7 +1745,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **CRC**
-> 循环冗余校验（**Cyclic Redundancy Check**）
+> 循环冗余校验（**Cyclic Redundancy Check**）、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR RamTst（RAM测试）](cp/memory/ramtst/index.md)（AUTOSAR_CP_SWS_RAMTest）、[Specification of CRC Routines（CRC 例程规范）](cp/libraries/crc/index.md)（SWS_CRCLibrary）
 {: .glossary-source}
@@ -3462,7 +3468,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **FV**
-> 新鲜度值（**Freshness Value**）——用于确保安全 I-PDU 新鲜度的单调计数器或时间戳值。
+> 新鲜度值（**Freshness Value**）——用于确保安全 I-PDU 新鲜度的单调计数器或时间戳值。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[Secure Onboard Communication Protocol Specification（安全车载通信协议规范）](foundation/protocols/prs_secoc_protocol/index.md)（AUTOSAR_FO_PRS_SecOcProtocol）
 {: .glossary-source}
@@ -3471,6 +3477,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 新鲜度值长度（**Freshness Value Length**）。
 >
 > 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
+{: .glossary-source}
+
+**FVM**
+> 新鲜度值管理器（**Freshness Value Manager**）。
+>
+> 来源：[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 {: .glossary-source}
 
 **FV**（**Freshness Value**）
@@ -3554,7 +3566,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **Global Time Master**
-> 全局时间主节点（**Global Time Master**）。某时基的系统级源头，其时基值通过网络分发给各时基从节点。
+> 全局时间主节点（**Global Time Master**）。某时基的系统级源头，其时基值通过网络分发给各时基从节点。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
@@ -3972,7 +3984,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **ICV**
-> 完整性校验值（**Integrity Check Value**）。为时间同步报文提供完整性和真实性保护的校验值。
+> 完整性校验值（**Integrity Check Value**）。为时间同步报文提供完整性和真实性保护的校验值。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](cp/globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）、[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
 {: .glossary-source}
@@ -4697,16 +4709,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）、[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
 
-**Log and Trace**
-> 日志与跟踪（**Log and Trace**）为应用提供接口，用于将日志和跟踪信息转发到通信总线、控制台或文件系统。
->
-> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
-{: .glossary-source}
-
 **Log**
 > 用户按需生成的消息：每当用户想展示关于状态变化或值变化的某些信息时，向 **LT** 添加一个 **API** 调用。
 >
 > 来源：[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
+{: .glossary-source}
+
+**Log and Trace**
+> 日志与跟踪（**Log and Trace**）为应用提供接口，用于将日志和跟踪信息转发到通信总线、控制台或文件系统。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Log and trace level**
@@ -5487,10 +5499,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**Nm instance**
+> 一个 Nm 实例表示一个 Nm 节点内部一个 Nm 集群的当前状态。
+>
+> 来源：[Requirements on Network Management（网络管理需求）](foundation/communication_management/rs_network_management/index.md)（AUTOSAR_FO_RS_NetworkManagement）
+{: .glossary-source}
+
 **NM Message**
 > 最抽象的术语，指在NM算法的方法论中传输的任何单个信息项。
 >
 > 来源：[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[Requirements on Network Management（网络管理需求）](foundation/communication_management/rs_network_management/index.md)（AUTOSAR_FO_RS_NetworkManagement）
+{: .glossary-source}
+
+**Nm Node**
+> 连接到一个或多个 Nm 集群的 **ECU**（电子控制单元）。
+>
+> 来源：[Requirements on Network Management（网络管理需求）](foundation/communication_management/rs_network_management/index.md)（AUTOSAR_FO_RS_NetworkManagement）
 {: .glossary-source}
 
 **NM Packet**
@@ -5522,19 +5546,6 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 >
 > 来源：[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[Requirements on Network Management（网络管理需求）](foundation/communication_management/rs_network_management/index.md)（AUTOSAR_FO_RS_NetworkManagement）
 {: .glossary-source}
-
-**Nm Node**
-> 连接到一个或多个 Nm 集群的 **ECU**（电子控制单元）。
->
-> 来源：[Requirements on Network Management（网络管理需求）](foundation/communication_management/rs_network_management/index.md)（AUTOSAR_FO_RS_NetworkManagement）
-{: .glossary-source}
-
-**Nm instance**
-> 一个 Nm 实例表示一个 Nm 节点内部一个 Nm 集群的当前状态。
->
-> 来源：[Requirements on Network Management（网络管理需求）](foundation/communication_management/rs_network_management/index.md)（AUTOSAR_FO_RS_NetworkManagement）
-{: .glossary-source}
-
 
 **NM-Coordinator**
 > Nm的一项功能，它允许对多个NM通道的网络睡眠进行协调。
@@ -5797,7 +5808,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **Offset Time Base**
-> 只与其底层同步时基结合存在的时基；其绝对时间值由偏移时基的偏移时间值加上底层同步时基的时间值得到。
+> 只与其底层同步时基结合存在的时基；其绝对时间值由偏移时基的偏移时间值加上底层同步时基的时间值得到。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
@@ -5806,6 +5817,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 偏移调整报文（Offset adjustment message）。
 >
 > 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](cp/globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）
+{: .glossary-source}
+
+**OFS**
+> 偏移同步（**Offset synchronization**）。
+>
+> 来源：[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 {: .glossary-source}
 
 **OFS message**
@@ -6039,7 +6056,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **PDU**
-> 协议数据单元（**Protocol Data Unit**）
+> 协议数据单元（**Protocol Data Unit**）、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[Layered Software Architecture（分层软件架构）](cp/general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[VFB（虚拟功能总线）](cp/general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](cp/communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR PduR (PDU Router)](cp/communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](cp/diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）、[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）
 {: .glossary-source}
@@ -6643,7 +6660,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **Rate Correction**
-> 补偿速率偏差所需的因子。
+> 补偿速率偏差所需的因子。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
@@ -7070,12 +7087,6 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
-**SG**
-> 安全目标（**Safety Goal**）。
->
-> 来源：[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
-{: .glossary-source}
-
 **SAI**
 > 安全关联标识符（**Secure Association Identifier**）。
 >
@@ -7164,12 +7175,6 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 安全通道标识符（**Secure Channel Identifier**）。
 >
 > 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
-{: .glossary-source}
-
-**SM**
-> 状态管理（**State Management**）。
->
-> 来源：[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
 {: .glossary-source}
 
 **SD**
@@ -7472,6 +7477,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](cp/mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR CAN Driver（CAN驱动程序）](cp/communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）
 {: .glossary-source}
 
+**SG**
+> 安全目标（**Safety Goal**）。
+>
+> 来源：[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
+{: .glossary-source}
+
 **SGW**
 > 时间同步的「已同步到网关」（**Synchronized to Gateway**）状态。
 >
@@ -7584,6 +7595,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 对看门狗硬件的触发可以以较长的超时期限完成。例如，该模式可用于系统启动/初始化阶段。例如，看门狗硬件被配置为翻转模式（对触发的时间点没有约束）且超时期限为 20 毫秒。
 >
 > 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）
+{: .glossary-source}
+
+**SM**
+> 状态管理（**State Management**）。
+>
+> 来源：[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
 {: .glossary-source}
 
 **SN**
@@ -8084,6 +8101,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）
 {: .glossary-source}
 
+**Sync**
+> 时间同步消息（**Sync**）。
+>
+> 来源：[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
+{: .glossary-source}
+
 **SYNC Ingress Processing Delay**
 > 在 Timesync 模块一侧，从 **SYNC** 报文进入到通过 StbM_BusSetGlobalTime 将接收时间元组转发给 **StbM** 之间的时间区间。
 >
@@ -8272,20 +8295,38 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
 {: .glossary-source}
 
+**Time Base**
+> 一个唯一的时间实体，其特征在于：时间的推进（即速率以及时间值在某些时间点的绝对变化）、所有权、以及与物理世界的参照（相对时间或绝对时间）。
+>
+> 来源：[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
+{: .glossary-source}
+
 **Time Base Customer**
 > 同步时基管理器支持的 3 种时基客户：主动型客户、触发型客户、通知型客户。
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
 
+**Time Correction**
+> 在时间从节点中，时间校正是将时基本地实例的值调整到全局时基的值的过程；在时间主节点中，是消除偏移时钟相对于其对应同步时基的偏差的过程。分为速率校正与偏移校正（后者可再分为跳变校正和速率适配）。
+>
+> 来源：[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
+{: .glossary-source}
+
+**Time Domain**
+> 表示哪些组件（例如节点、通信系统）与某个时基相关联。一个时域可以包含零个或多个时子域。
+>
+> 来源：[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
+{: .glossary-source}
+
 **Time Gateway**
-> 被一个时基从节点和一个或多个时基主节点引用的时基；Timesync 报文不直接穿过时间网关路由，因为路由延迟需要被补偿。
+> 被一个时基从节点和一个或多个时基主节点引用的时基；Timesync 报文不直接穿过时间网关路由，因为路由延迟需要被补偿。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **Time Master**
-> 某时基的主节点实体，作为该时基的源，将其传播给通信网络某个区段内的一组时基从节点。
+> 某时基的主节点实体，作为该时基的源，将其传播给通信网络某个区段内的一组时基从节点。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
@@ -8303,7 +8344,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **Time Slave**
-> 基于由相应 Timesync 模块提供的全局时基值来更新其内部维护的本地时基的角色。
+> 基于由相应 Timesync 模块提供的全局时基值来更新其内部维护的本地时基的角色。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
@@ -8345,7 +8386,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **Timesync**
-> 时间同步（**Time Synchronization**）。
+> 时间同步（**Time Synchronization**）。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
@@ -8534,6 +8575,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 时间敏感网络（**Time-Sensitive Networking**）。
 >
 > 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）、[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
+{: .glossary-source}
+
+**TSP**
+> 时间同步提供者（**Time Synchronization Provider**）。
+>
+> 来源：[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 {: .glossary-source}
 
 **TSpec**
@@ -8961,7 +9008,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **Virtual Local Time**
-> **StbM** 从硬件时钟导出的本地时间参考，用于全局时间本地实例的推移。
+> **StbM** 从硬件时钟导出的本地时间参考，用于全局时间本地实例的推移。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}

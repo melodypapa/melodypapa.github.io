@@ -328,7 +328,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ✅ Requirements on IPsec Protocol（IPsec 协议需求） — AUTOSAR_FO_RS_IPsecProtocol (`foundation/protocols/rs_ipsec_protocol/`)
 - ✅ Requirements on SOME/IP Protocol（SOME/IP 协议需求） — AUTOSAR_FO_RS_SOMEIPProtocol (`foundation/protocols/rs_someip_protocol/`)
 - ✅ Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求） — AUTOSAR_FO_RS_SOMEIPServiceDiscoveryProtocol (`foundation/protocols/rs_someip_service_discovery_protocol/`)
-- ❌ Requirements on Time Synchronization（时间同步需求） — AUTOSAR_FO_RS_TimeSync (`foundation/protocols/`)
+- ✅ Requirements on Time Synchronization（时间同步需求） — AUTOSAR_FO_RS_TimeSync (`foundation/protocols/rs_time_sync/`; R23-11; RS, skeleton-exempt; 75 requirement items (37 common + 17 Ethernet + 11 CAN + 9 FlexRay + 1 non-functional) with IDs dropped; definitions ch.3.2 with Figures 3.1–3.3 embedded; tracing chapter omitted; 2026-11-06)
 
 ### foundation/release_documentation (Release Documentation)
 
