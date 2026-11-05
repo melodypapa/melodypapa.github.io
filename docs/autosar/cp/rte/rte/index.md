@@ -4784,8 +4784,6 @@ NvBlock `SwComponentPrototype` 的代码由 **RTE** 生成器实现。`NvBlockSw
 
 从 AUTOSAR 软件分层架构的角度看，**RTE** 实现插件是 **RTE** 的一部分。也就是说，由 **RTE** 生成器提供的"核心" **RTE** 加上 **RTE** 实现插件共同实现整体 **RTE**。尽管如此，"核心" **RTE** 与 **RTE** 实现插件之间的接口是标准化的，以便 **RTE** 生成器与 **RTE** 实现插件可以由不同供应商提供。
 
-图 7.1：经由 RTE 实现插件的隐式通信示例
-
 ![Figure7-1.png](Figure7-1.png)
 
 图 7.1 展示了经由 **RTE** 实现插件实现隐式通信的原理。基于软件组件描述，**RTE** 提供 `Rte_IRead` **API**。该 `Rte_IRead` **API** 使用 **RTE** 实现插件的 `Rte_Rips_IRBufferRef` **API** 获取隐式通信缓冲区 `Buf_Task1_dat1` 的地址。**RTE** 实现插件提供填充与清空例程以及隐式通信缓冲区实例。经由接口约定，它同样知道与该数据通信图相关的全局副本 `Rte_dataInstance1`。这支持为填充与清空例程创建相应的复制代码。
@@ -4824,8 +4822,6 @@ NvBlock `SwComponentPrototype` 的代码由 **RTE** 生成器实现。`NvBlockSw
 * 哪些文件（或更确切地说其内容）必须预期同时出现在其他文件中（重复声明、重复包含保护生效等的风险）。
 
 此处的"导出"意味着：被导出的定义或声明应在该包含导出头文件的文件中可见。至于该头文件自身执行这些声明或定义，还是由它包含的另一个头文件执行，并不重要。
-
-图 7.2：RTE 实现插件面向 RTE 的包含结构
 
 ![Figure7-2.png](Figure7-2.png)
 
@@ -6900,15 +6896,15 @@ RTE 实现插件工具应验证所请求的功能能否通过给定的事件到�
 
 当一个数据通信图包含来自某个跨软件集群通信插件与另一来源（无论是集群本地写入者、集群本地插件还是跨 ECU 连接）的扇入接收时，当读取方软件组件（SW-C）调用 `Rte_Read` 或 `Rte_IRead` API 时，RTE 无法确定应返回哪个数据。这是因为 RTE 代码无法得知哪个数据先被接收，因此没有信息来判断应返回哪个数据以实现 last-is-best 语义。
 
-图 7.3：含扇入与跨 ECU 通信的数据通信图
+![Figure7-3.png](Figure7-3.png)
 
 在 7.3 所示的情形中，由于跨集群通信采用轮询方式而跨 ECU 通信采用回调方式，RTE 无法实现 last-is-best 通信。因此 RTE 无法得知哪个值是最新的。
 
-图 7.4：含扇入与本地提供者的数据通信图
+![Figure7-4.png](Figure7-4.png)
 
 在 7.4 中，RTE 同样无法实现 last-is-best，因为跨集群通信的轮询特性意味着任何生成的 RTE API 都无法知道来自另一个集群的值是在本地提供者的值之前还是之后提供的。
 
-图 7.5：含扇入、本地 RIPS 与本地提供者的数据通信图
+![Figure7-5.png](Figure7-5.png)
 
 在 7.5 中，当确定如何基于 last-is-best 语义填充缓冲区时，RTE 有三个可选的候选值：本地提供者的值、本地 RIPS 插件的值或跨集群 RIPS 插件的值。同样，RTE 无法得知哪个值最后到达，因此无法实现这种通信模式。
 
@@ -6993,15 +6989,15 @@ RTE 实现插件的有效实例引用目标：某数据通信图的 RIPS FlatIns
 
 表 7.1：RIPS FlatInstanceDescriptor 的引用目标
 
-图 7.6：涉及跨集群通信的 1:N 数据通信图
+![Figure7-6.png](Figure7-6.png)
 
-图 7.7：涉及跨集群通信的 N:1 数据通信图
+![Figure7-7.png](Figure7-7.png)
 
 在存在转换的情形下，需要多个 RIPS FlatInstanceDescriptor 来为数据和/或数据状态的各个不同表示定义接口命名空间。然而，这些不同的表示不可能由不同的 RTE 实现插件处理。
 
 数据通信图至多由一个本地软件集群通信插件处理：在某数据通信图被多个 RIPS FlatInstanceDescriptor 引用的情形下，所有这些 RIPS FlatInstanceDescriptor 都应经由 `FlatInstanceDescriptor.rtePluginProps.associatedRtePlugin` 引用同一个 `RteRipsPluginProps` 容器。
 
-图 7.8：带转换的数据通信图
+![Figure7-8.png](Figure7-8.png)
 
 图 7.8 展示了一个带数据转换的数据通信图示例。此处应假定，在两个不同的 `SenderReceiverInterface` 中给出的 `dataElement` 数据由描述不同分辨率的 `ApplicationDataType` 定义类型（图中未显示）。
 
@@ -7023,7 +7019,7 @@ RTE 生成器和 RTE 实现插件应将以下各者视为属于同一个数据�
 
 RTE 生成器可以利用 **SWS_NvM_00347** 所述的事实，即 `NvBlockSwComponent` 内的所有 `ramBlock` 访问都在 `ExecutableEntity` `NvM_MainFunction` 的调用上下文中进行。
 
-图 7.9：涉及 NvBlockSwComponent 的数据通信图
+![Figure7-9.png](Figure7-9.png)
 
 图 7.9 展示了涉及 NvBlockSwComponent 的数据通信图示例。其中，RIPS FlatInstanceDescriptor `MyNvData1` 引用了 `NvBlockSwComponent` `myNvBlockSwc` 的 p-port `ppNvDat1`。这也为从原子软件组件 `myComponent` 的 p-port `ppNvDat1` 到该 `NvBlockSwComponent` 的 r-port `rpNvDat1` 的部分数据通信图启用了 RTE 实现插件。该 FlatInstanceDescriptor 的 `shortName` 定义了这个未被显式标记的数据通信图的 RTE 实现插件服务名称。
 
@@ -7031,7 +7027,7 @@ RTE 生成器可以利用 **SWS_NvM_00347** 所述的事实，即 `NvBlockSwComp
 
 RTE 生成器应支持数据通信图在 `ramBlock` 中的重叠。
 
-图 7.10：数据通信图在 ramBlock 中的重叠
+![Figure7-10.png](Figure7-10.png)
 
 图 7.10 展示了数据通信图在 `ramBlock` 中重叠的示例。在该示例中，数据通信图 `AllNvData` 由原子软件组件 `myComponent` 经由 p-port `ppNvAllData` 写入。此外，数据通信图 `AllNvData` 与作为 `ramBlock` 子元素的数据通信图 `MyNvData1` 和 `MyNvData2` 相重叠。
 
@@ -7543,7 +7539,7 @@ Std_ReturnType Rte_Read_myComponent_myRPort1_myExplicitSimpleData(uint32 * data)
 
 图 7.11 说明了 **RTE** 如何使用 `Rte_Rips_Read` 和 `Rte_Rips_Write` 服务访问由跨软件集群通信插件实现的队列。此外，跨软件集群通信插件还管理来自其他软件集群（无 **RTE**）的访问。
 
-图 7.11：跨软件集群通信插件的排队通信示例
+![Figure7-11.png](Figure7-11.png)
 
 保护块可以嵌套，例如当可运行实体在某个独占区内执行的同时使用显式通信时。因此建议普遍使用支持嵌套的保护块实现。至少在可能发生嵌套之处必须使用此类实现，而这需要事先分析。一方面，相关的是由访问数据通信图的可执行实体 (1) 直接使用的那些独占区。此外，相关的是由所有经由直接函数调用或可信函数调用、带数据通信图访问而调用可执行实体 (1) 的可执行实体所使用的那些独占区。
 
@@ -7577,7 +7573,7 @@ Std_ReturnType Rte_Read_myComponent_myRPort1_myExplicitSimpleData(uint32 * data)
 
 本地软件集群通信插件可以自由地使用复杂设备驱动（Complex Driver）的手段来实现 **SWS_Rte_70136** 和 **SWS_Rte_70137**。图 7.12 说明了这一点。
 
-图 7.12：经由 RTE 实现插件的隐式通信示例
+![Figure7-12.png](Figure7-12.png)
 
 当然，这种方式可能改变 **RTE** 所看到的通信多重性。另见 6.3.3.3.4 节。
 
