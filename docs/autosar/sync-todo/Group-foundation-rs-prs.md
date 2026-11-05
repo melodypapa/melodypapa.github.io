@@ -266,12 +266,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Requirements on Network Management（网络管理需求）; target `foundation/communication_management/rs_network_management/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `CommunicationManagement/AUTOSAR_FO_RS_NetworkManagement.md` — 1,169 lines, 44 figure refs, 181 item IDs
   - Note: related site content: cp/communication/nm, cp/communication/can_network_management, cp/communication/udp_network_management (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-06 run — all 44 figure refs are page-decoration glyphs (15x15 px, ~500 B), 0 content figures; 60 requirement items (5.1.1–5.2.4) translated as bold title lines + field tables under numbered source subsections (too deep for headings, run decision USER: verify); IDs + {DRAFT} + ⌋(…) tracing lines dropped; intra-document item-ID refs in Dependencies/Supporting-Material cells kept as unbracketed identifiers (RS_Nm_00047 etc.), 00150's prose ID list dropped — run decision USER: verify; source ch.6 Requirements Tracing omitted per ASWS precedent (References renumbered 7→6); ch.4 Use Cases table (7 rows) as GFM; PDF-recovered cells: 00151/00045 rationales, 02544 rationale, 02509 use-case cell reconstructed; 00046/02546/02548/02542/02544/02574 split tables rejoined; appendix A change tables keep Heading column only (Number column dropped per batch decision; A.1.2 = 51 rows); glossary: Nm Node + Nm instance new entries; NM, NM Message, NM-Cluster, PNI gained this document as additional source; Nm (module) and PN (Packet Number) homonym-skips recorded
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_main (AUTOSAR_FO_RS_Main · General · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Main Requirements（主需求规范）; target `foundation/general/rs_main/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `General/AUTOSAR_FO_RS_Main.md` — 1,203 lines, 48 figure refs, 334 item IDs

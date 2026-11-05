@@ -5460,7 +5460,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **NM**
 > 网络管理（**Network Management**）
 >
-> 来源：[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[Network Management Protocol Specification（网络管理协议规范）](foundation/protocols/prs_network_management_protocol/index.md)（AUTOSAR_FO_PRS_NetworkManagementProtocol）
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[Network Management Protocol Specification（网络管理协议规范）](foundation/protocols/prs_network_management_protocol/index.md)（AUTOSAR_FO_PRS_NetworkManagementProtocol）、[Requirements on Network Management（网络管理需求）](foundation/communication_management/rs_network_management/index.md)（AUTOSAR_FO_RS_NetworkManagement）
 {: .glossary-source}
 
 **Nm**
@@ -5484,7 +5484,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **NM Message**
 > 最抽象的术语，指在NM算法的方法论中传输的任何单个信息项。
 >
-> 来源：[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）
+> 来源：[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[Requirements on Network Management（网络管理需求）](foundation/communication_management/rs_network_management/index.md)（AUTOSAR_FO_RS_NetworkManagement）
 {: .glossary-source}
 
 **NM Packet**
@@ -5514,8 +5514,21 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **NM-Cluster**
 > 使用NM算法协调的NM节点的集合。
 >
-> 来源：[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+> 来源：[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[Requirements on Network Management（网络管理需求）](foundation/communication_management/rs_network_management/index.md)（AUTOSAR_FO_RS_NetworkManagement）
 {: .glossary-source}
+
+**Nm Node**
+> 连接到一个或多个 Nm 集群的 **ECU**（电子控制单元）。
+>
+> 来源：[Requirements on Network Management（网络管理需求）](foundation/communication_management/rs_network_management/index.md)（AUTOSAR_FO_RS_NetworkManagement）
+{: .glossary-source}
+
+**Nm instance**
+> 一个 Nm 实例表示一个 Nm 节点内部一个 Nm 集群的当前状态。
+>
+> 来源：[Requirements on Network Management（网络管理需求）](foundation/communication_management/rs_network_management/index.md)（AUTOSAR_FO_RS_NetworkManagement）
+{: .glossary-source}
+
 
 **NM-Coordinator**
 > Nm的一项功能，它允许对多个NM通道的网络睡眠进行协调。
@@ -6292,7 +6305,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **PNI**
 > 部分网络信息（**Partial Network Information**）
 >
-> 来源：[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[Network Management Protocol Specification（网络管理协议规范）](foundation/protocols/prs_network_management_protocol/index.md)（AUTOSAR_FO_PRS_NetworkManagementProtocol）
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[Network Management Protocol Specification（网络管理协议规范）](foundation/protocols/prs_network_management_protocol/index.md)（AUTOSAR_FO_PRS_NetworkManagementProtocol）、[Requirements on Network Management（网络管理需求）](foundation/communication_management/rs_network_management/index.md)（AUTOSAR_FO_RS_NetworkManagement）
 {: .glossary-source}
 
 **PNL**

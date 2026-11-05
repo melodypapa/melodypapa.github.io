@@ -479,6 +479,7 @@ nav:
         - "Debug Trace Profile": autosar/foundation/communication_management/rs_debug_trace_profile/index.md
         - "RS E2E": autosar/foundation/communication_management/rs_e2e/index.md
         - "MACsec": autosar/foundation/communication_management/rs_macsec/index.md
+        - "NM": autosar/foundation/communication_management/rs_network_management/index.md
       - 诊断:
         - autosar/foundation/diagnostics/index.md
       - 健康监控:
