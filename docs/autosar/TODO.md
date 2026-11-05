@@ -349,9 +349,13 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 - ❌ Timing Analysis（时序分析） — AUTOSAR_FO_TR_TimingAnalysis (`foundation/system_services/`)
 
+## rte (RTE / SWArch)
+
+- ✅ [AUTOSAR RTE（运行时环境）](cp/rte/rte/index.md) — SWS_RTE · R23-11 (translated 2026-10-25/26 via the staged L-loop, PR #116 merged; finishing pass 2026-11-06: §6.3 source-ch.7 figures embedded (12 content diagrams Figure7-1..12, 163 chrome refs dropped by hash+size triage); **finishing-pass audit finding — source ch.4 sections 4.3–4.10 (~5,200 lines) had been skipped by the original stage plan** and were translated in place as §6.2.3 通信范式 – §6.2.10 数据转换 (~5,000 lines, figures 4.40–4.56, examples 4.7–4.44, DET table 4.33 column placement PDF-recovered); heading audits: §7.2 60/60, §8 17/17, ch.5→7.1 API entries present with per-API field subsections folded into service-table entries, source appendix A → §4.1 per the D2 mapping, B–G → A–F; glossary 93 new terms + 5 source appends (source 1.4's full 97-term list); intra-article links --apply (721 lines, idempotent: 258 chapter refs + 182 citations + 35 registry anchors); known deviation recorded at gate: ch.5/6 material sits at `#### 7.1/7.2` inside the §6.3 tree with no `## 7. API规范` chapter — original run kept all headings ≤ h6; 34,325→39,320 lines; strict 0 WARNING)
+
 ## Missing sections (no articles at all)
 
-- **RTE / SWArch (2)**: SWS_RTE, SWS_ARTI
+- **RTE / SWArch (1)**: SWS_ARTI
 - ~~**Safety (2)**: SWS_WatchdogInterface (WdgIf), SWS_WatchdogDriver (Wdg)~~ — both translated 2026-10-27
 - **Security (2)**: SWS_Firewall, SWS_IntrusionDetectionSystemManager (IdsM)
 
