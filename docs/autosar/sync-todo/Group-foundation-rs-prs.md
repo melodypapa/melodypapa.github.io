@@ -157,12 +157,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Requirements on Intrusion Detection System（入侵检测系统需求）; target `foundation/security/rs_intrusion_detection_system/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Security/AUTOSAR_FO_RS_IntrusionDetectionSystem.md` — 725 lines, 27 figure refs, 26 item IDs
   - Note: related site content: CP SWS_IntrusionDetectionSystemManager (IdsM) queued in Group-security (different document) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-06 reconciliation — the article WAS delivered in part 1 (commit 9633fc6, PR #274 merged 2026-11-04; TODO.md row ✅, nav + landing + overview registered); the row steps were never ticked — stale state only, no content work owed
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR (9633fc6, PR #274)
 - [ ] rs_firewall (AUTOSAR_FO_RS_Firewall · Security · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Firewall（防火墙需求）; target `foundation/security/rs_firewall/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Security/AUTOSAR_FO_RS_Firewall.md` — 752 lines, 25 figure refs, 1 item IDs
