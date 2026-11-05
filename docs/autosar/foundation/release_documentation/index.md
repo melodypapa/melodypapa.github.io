@@ -6,9 +6,7 @@ title: "发布文档（Release Documentation）"
 
 ## 文章
 
-本类别尚无已翻译文章。R23-11 包含以下源文档（待翻译）：
-
-* **AUTOSAR_FO_TR_ReleaseOverview** — Release Overview（发布概览）
+* [Release Overview（发布概览）](tr_release_overview/)
 
 ## 相关内容
 

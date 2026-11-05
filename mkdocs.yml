@@ -467,9 +467,14 @@ nav:
       - 通用:
         - autosar/foundation/general/index.md
         - "TR Glossary": autosar/foundation/general/tr_glossary/index.md
+        - "Predefined Names": autosar/foundation/general/tr_predefined_names/index.md
         - "Project Objectives": autosar/foundation/general/rs_project_objectives/index.md
+        - "Security Overview": autosar/foundation/general/exp_security_overview/index.md
+        - "SW Architectural Decisions": autosar/foundation/general/exp_sw_architectural_decisions/index.md
+        - "Safety Overview": autosar/foundation/general/exp_safety_overview/index.md
       - 通信管理:
         - autosar/foundation/communication_management/index.md
+        - autosar/foundation/communication_management/exp_time_sensitive_network_features/index.md
         - "IEEE 1722": autosar/foundation/communication_management/rs_ieee1722/index.md
         - "Debug Trace Profile": autosar/foundation/communication_management/rs_debug_trace_profile/index.md
         - "RS E2E": autosar/foundation/communication_management/rs_e2e/index.md
@@ -488,6 +493,9 @@ nav:
         - "Methodology": autosar/foundation/methodology_templates/rs_methodology/index.md
         - "Timing Extensions": autosar/foundation/methodology_templates/rs_timing_extensions/index.md
         - "Abstract Platform": autosar/foundation/methodology_templates/tps_abstract_platform_specification/index.md
+        - "Log and Trace Extract": autosar/foundation/methodology_templates/tps_log_and_trace_extract/index.md
+        - "ARXML Serialization Rules": autosar/foundation/methodology_templates/tps_arxml_serialization_rules/index.md
+        - "XML Schema Production Rules": autosar/foundation/methodology_templates/tps_xml_schema_production_rules/index.md
       - 协议:
         - autosar/foundation/protocols/index.md
         - "SOME/IP-SD": autosar/foundation/protocols/rs_someip_service_discovery_protocol/index.md
@@ -501,12 +509,14 @@ nav:
         - "IDS Protocol": autosar/foundation/protocols/prs_intrusion_detection_system/index.md
       - 发布文档:
         - autosar/foundation/release_documentation/index.md
+        - autosar/foundation/release_documentation/tr_release_overview/index.md
       - 功能安全:
         - autosar/foundation/safety/index.md
       - 信息安全:
         - autosar/foundation/security/index.md
         - "IDS": autosar/foundation/security/rs_intrusion_detection_system/index.md
         - "Firewall": autosar/foundation/security/rs_firewall/index.md
+        - autosar/foundation/security/tr_list_of_known_issues_secure_hardware_extensions/index.md
       - 系统服务:
         - autosar/foundation/system_services/index.md
   - EB Tresos:

@@ -4,7 +4,7 @@
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
 > Layout (2026-11-02): CP articles live under `cp/<section>/`, Foundation under `foundation/<topic>/`; article links below are relative to `docs/autosar/`.
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-05 (system_services batch: SwCluC + HWTestManager new-article full Type A translations; Foundation rs-prs batch: Project Objectives (RS) + IEEE1722 (RS) + Debug Trace Profile (RS) + SOME/IP-SD (RS) + SOME/IP (RS) + MACsec (RS) + Timing Extensions (RS) + V2X Remote Access Layer (PRS) + IPsec (RS) + Security Extract Template (RS) + Feature Model Exchange Format (RS) + Methodology (RS) + SecOc (PRS) + DDS (RS) + NM Protocol (PRS) + IDS Protocol (PRS) + E2E (RS) + Intrusion Detection System (RS) + Firewall (RS) + Health Monitoring (RS) new-article translations; 2026-11-04: Foundation methodology_templates: Abstract Platform Specification (TPS) new-article translation; 2026-11-03: Foundation health_monitoring: ASWS Health Monitoring new-article translation (EXP System Health Monitoring earlier the same day); libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-05 (Foundation exp-group batch, rows 1–11 of Group-foundation-exp: TR Glossary ch.4 completed + glossary.md +313, 10 new articles across general/security/communication_management/release_documentation/methodology_templates; system_services batch: SwCluC + HWTestManager new-article full Type A translations; Foundation rs-prs batch: Project Objectives (RS) + IEEE1722 (RS) + Debug Trace Profile (RS) + SOME/IP-SD (RS) + SOME/IP (RS) + MACsec (RS) + Timing Extensions (RS) + V2X Remote Access Layer (PRS) + IPsec (RS) + Security Extract Template (RS) + Feature Model Exchange Format (RS) + Methodology (RS) + SecOc (PRS) + DDS (RS) + NM Protocol (PRS) + IDS Protocol (PRS) + E2E (RS) + Intrusion Detection System (RS) + Firewall (RS) + Health Monitoring (RS) new-article translations; 2026-11-04: Foundation methodology_templates: Abstract Platform Specification (TPS) new-article translation; 2026-11-03: Foundation health_monitoring: ASWS Health Monitoring new-article translation (EXP System Health Monitoring earlier the same day); libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
 
 ## Backlog
 
@@ -267,17 +267,17 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 ### foundation/general (General)
 
-- 📖 [TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/) — AUTOSAR_FO_TR_Glossary (R23-11; guide-type article, STANDARD.md §7 exempt; **partial** — ch.2 缩略语 complete (201 acronyms), ch.4 术语定义 14/343 terms, remaining tranches = first row of Group-foundation; terms also flow into glossary.md)
-- ❌ Explanation of Software Architectural Decisions（软件架构决策说明） — AUTOSAR_FO_EXP_SWArchitecturalDecisions (`foundation/general/`)
-- ❌ Safety Overview（功能安全概览） — AUTOSAR_FO_EXP_SafetyOverview (`foundation/general/`)
-- ❌ Security Overview（信息安全概览） — AUTOSAR_FO_EXP_SecurityOverview (`foundation/general/`)
+- ✅ [TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/) — AUTOSAR_FO_TR_Glossary (R23-11; guide-type article, STANDARD.md §7 exempt; **complete** — ch.1–4 + trailing 参考文献 registry (ref-1..50, 177 citation links); ch.4 术语定义 343/343 terms with 8 content figures; terms flowed into glossary.md (2026-11-05 tranche; +313 entries — 30 same-named terms already carried definitions from other docs, left unmerged as user decisions))
+- ✅ [Explanation of Software Architectural Decisions（软件架构决策说明）](foundation/general/exp_sw_architectural_decisions/) — AUTOSAR_FO_EXP_SWArchitecturalDecisions (R23-11; EXP guide, skeleton-exempt; ch.1–5 with 29 architectural decisions (5.1 common ×1, 5.2 AP ×24, 5.3 CP ×4) as 11-field tables; 2026-11-05)
+- ✅ [Safety Overview（功能安全概览）](foundation/general/exp_safety_overview/) — AUTOSAR_FO_EXP_SafetyOverview (R23-11; EXP guide, skeleton-exempt; 已知限制 + ch.1–6 + annexes A/B (28 acronyms + 7 glossary terms); 9 content figures embedded; 2026-11-05)
+- ✅ [Security Overview（信息安全概览）](foundation/general/exp_security_overview/) — AUTOSAR_FO_EXP_SecurityOverview (R23-11; EXP guide, skeleton-exempt; ch.1–4 (§4.1 PRE: memory-corruption attacks, secure coding, 4 attack classes, DEP/SSP/ASLR/CFI/CPI/PointerAuth solutions with 10 tables, isolation); Figure 4.1 embedded; footnotes as <sup>N</sup>+blockquote (14–17/27–35 texts lost in source conversion — markers dropped); 2026-11-05)
 - ❌ Main Requirements（主需求规范） — AUTOSAR_FO_RS_Main (`foundation/general/`)
 - ❌ Project Objectives（项目目标） — AUTOSAR_FO_RS_ProjectObjectives (`foundation/general/`)
-- ❌ Predefined Names in AUTOSAR（AUTOSAR 预定义名称） — AUTOSAR_FO_TR_PredefinedNames (`foundation/general/`)
+- ✅ [Predefined Names in AUTOSAR（AUTOSAR 预定义名称）](foundation/general/tr_predefined_names/) — AUTOSAR_FO_TR_PredefinedNames (R23-11; TR, skeleton-exempt; ch.1–4 keyword tables (5 virtual modules, 23 information categories, 99 document abbreviations) + annex A class tables A.1–A.4 + annex B (none→无) + trailing 参考文献 registry (ref-1..5, 12 citation links); 2026-11-05)
 
 ### foundation/communication_management (Communication Management)
 
-- ❌ Explanation of Time Sensitive Networking Features（时间敏感网络特性说明） — AUTOSAR_FO_EXP_TimeSensitiveNetworkFeatures (`foundation/communication_management/`)
+- ✅ [Explanation of Time Sensitive Networking Features（时间敏感网络特性说明）](foundation/communication_management/exp_time_sensitive_network_features/) — AUTOSAR_FO_EXP_TimeSensitiveNetworkFeatures (R23-11; EXP guide, skeleton-exempt; ch.1–4 + trailing 参考文献 registry (ref-1..12, 39 citation links + 1 chapter-ref); 19 acronym entries + 11 term definitions; 2026-11-05)
 - ✅ Requirements on Debug Trace Profile（调试跟踪配置文件需求） — AUTOSAR_FO_RS_DebugTraceProfile (`foundation/communication_management/rs_debug_trace_profile/`)
 - ✅ Requirements on E2E（端到端通信保护需求） — AUTOSAR_FO_RS_E2E (`foundation/communication_management/rs_e2e/`)
 - ❌ Requirements on IEEE 1722（IEEE 1722 需求） — AUTOSAR_FO_RS_IEEE1722 (`foundation/communication_management/`)
@@ -303,13 +303,15 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ❌ Requirements on Standardization Template（标准化模板需求） — AUTOSAR_FO_RS_StandardizationTemplate (`foundation/methodology_templates/`)
 - ✅ Requirements on Timing Extensions（时序扩展需求） — AUTOSAR_FO_RS_TimingExtensions (`foundation/methodology_templates/rs_timing_extensions/`)
 - ❌ ARXML Serialization Rules（ARXML 序列化规则） — AUTOSAR_FO_TPS_ARXMLSerializationRules (`foundation/methodology_templates/`)
+- ❌ Requirements on Timing Extensions（时序扩展需求） — AUTOSAR_FO_RS_TimingExtensions (`foundation/methodology_templates/`)
+- ✅ [ARXML Serialization Rules（ARXML 序列化规则）](foundation/methodology_templates/tps_arxml_serialization_rules/) — AUTOSAR_FO_TPS_ARXMLSerializationRules (R23-11; TPS, skeleton-exempt; ch.1–3 (19 TPS_ASR items, format-strategy table, 3 XML listings) + annex A (8 release histories; missing A.6 recovered from corpus PDF) + annex B (5 class/primitive tables); 2 content figures; 2026-11-05)
 - ✅ Abstract Platform Specification（抽象平台规范） — AUTOSAR_FO_TPS_AbstractPlatformSpecification (`foundation/methodology_templates/tps_abstract_platform_specification/`)
 - ❌ Feature Model Exchange Format（特征模型交换格式） — AUTOSAR_FO_TPS_FeatureModelExchangeFormat (`foundation/methodology_templates/`)
 - ❌ Generic Structure Template（通用结构模板） — AUTOSAR_FO_TPS_GenericStructureTemplate (`foundation/methodology_templates/`)
-- ❌ Log and Trace Extract Template（日志与跟踪提取模板） — AUTOSAR_FO_TPS_LogAndTraceExtract (`foundation/methodology_templates/`)
+- ✅ [Log and Trace Extract Template（日志与跟踪提取模板）](foundation/methodology_templates/tps_log_and_trace_extract/) — AUTOSAR_FO_TPS_LogAndTraceExtract (R23-11; TPS, skeleton-exempt; ch.1–3 (DltEcu/DltMessage class tables + 16 constraints/items) + annex A history + annex B class tables B.1–B.8 + 2 ARXML listings; 3 content figures; missing item bodies recovered from the corpus PDF (2026-11-05))
 - ❌ Security Extract Template（安全提取模板） — AUTOSAR_FO_TPS_SecurityExtractTemplate (`foundation/methodology_templates/`)
 - ❌ Standardization Template（标准化模板） — AUTOSAR_FO_TPS_StandardizationTemplate (`foundation/methodology_templates/`)
-- ❌ XML Schema Production Rules（XML 模式生成规则） — AUTOSAR_FO_TPS_XMLSchemaProductionRules (`foundation/methodology_templates/`)
+- ✅ [XML Schema Production Rules（XML 模式生成规则）](foundation/methodology_templates/tps_xml_schema_production_rules/) — AUTOSAR_FO_TPS_XMLSchemaProductionRules (R23-11; TPS, skeleton-exempt; ch.1–5 (design principles, tag configuration incl. 00056 default table, 30 production rules 00000–00059 as field tables with target patterns) + annex A (TR→TPS ID mapping + 3 release histories); 38 content figures embedded; rules 00008/00023 target patterns recovered from corpus PDF; 2026-11-05)
 
 ### foundation/protocols (Protocols)
 
@@ -330,7 +332,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 ### foundation/release_documentation (Release Documentation)
 
-- ❌ Release Overview（发布概览） — AUTOSAR_FO_TR_ReleaseOverview (`foundation/release_documentation/`)
+- ✅ [Release Overview（发布概览）](foundation/release_documentation/tr_release_overview/) — AUTOSAR_FO_TR_ReleaseOverview (R23-11; TR, skeleton-exempt; ch.1–5 incl. concept-impact table (54 rows), schema-version tables, full specification overview (~50 rows), R23-11 release history (Table 5.1, 49 deliverables); Figures 1.1/1.2 embedded; 2026-11-05)
 
 ### foundation/safety (Safety)
 
@@ -340,7 +342,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 - ✅ Requirements on Firewall（防火墙需求） — AUTOSAR_FO_RS_Firewall (`foundation/security/rs_firewall/`)
 - ✅ Requirements on Intrusion Detection System（入侵检测系统需求） — AUTOSAR_FO_RS_IntrusionDetectionSystem (`foundation/security/rs_intrusion_detection_system/`)
-- ❌ List of Known Issues of Secure Hardware Extensions（安全硬件扩展已知问题清单） — AUTOSAR_FO_TR_ListOfKnownIssuesSecureHardwareExtensions (`foundation/security/`)
+- ✅ [List of Known Issues of Secure Hardware Extensions（安全硬件扩展已知问题清单）](foundation/security/tr_list_of_known_issues_secure_hardware_extensions/) — AUTOSAR_FO_TR_ListOfKnownIssuesSecureHardwareExtensions (R23-11; TR, skeleton-exempt; 7-issue table + the errata sheet's Figure 1 corrected boot flow chart; 2026-11-05)
 - ❌ Specification of Secure Hardware Extensions（安全硬件扩展规范） — AUTOSAR_FO_TR_SecureHardwareExtensions (`foundation/security/`)
 
 ### foundation/system_services (System Services)

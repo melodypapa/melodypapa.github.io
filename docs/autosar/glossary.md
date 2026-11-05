@@ -66,6 +66,24 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interface of AD/ADAS Vehicle Motion Control（AD/ADAS 车辆运动控制应用接口说明）](cp/application_interfaces/adas_vmc/index.md)（AUTOSAR_CP_EXP_AIADASAndVMC）
 {: .glossary-source}
 
+**Acceptance Test Suite**
+> 在验收测试（**Acceptance Testing**）语境中使用的一种测试用例描述。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Access Control Decision**
+> 访问控制判定是一个布尔值，指示所请求的操作是否被允许。它基于调用者的身份以及"访问控制策略"（**Access Control Policy**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Access Control Policy**
+> 访问控制策略绑定到调用的目标（即服务接口），用于表达访问这些接口需要何种"身份信息"（**Identity Information**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Accuracy**
 > 精度（**Accuracy**）取决于用于采样或者生成的硬件外围设备。如：**ADC**转换器可以是 8/10/12/16 位转换器
 >
@@ -154,6 +172,30 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 活动状态：软件组件正在执行时的状态。活动状态以许可状态为前提条件，并叠加物理使能条件。它不由 **FiM** 计算，也不作为状态变量提供，只能通过观察或测量确定。
 >
 > 来源：[AUTOSAR FiM（功能禁止管理器）](cp/system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）
+{: .glossary-source}
+
+**Adaptability**
+> 适应性是系统调整自身以应对其环境变化、从而继续提供预期功能的能力。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Adaptive Application**
+> 遵循自适应 AUTOSAR 规范、因而可部署到自适应平台实例上的软件。它由其实现、运行数据（如地图数据）以及由应用设计模型给出的元数据组成。自适应应用至少包含一个可执行文件。为了能部署到不同的自适应平台上，它只使用 ARA 编程接口。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Adaptive Platform Foundation**
+> 自适应平台实现的一部分，通过软件接口（API）向应用提供标准化的平台功能。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Adaptive Platform Services**
+> 由属于 AUTOSAR 平台实现一部分的应用所提供的标准平台服务。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **ADC**
@@ -330,6 +372,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
 {: .glossary-source}
 
+**Application**
+> 为解决需要信息处理的最终用户问题而规定的软件（或程序）。一个软件实体的"软件配置"（**Software Configuration**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Application Data Type**
 > 应用数据类型（**Application Data Type**）。从应用视角定义的数据类型，描述物理含义（如测量单位）而不涉及位宽、字节序等实现细节；抽象平台只允许应用数据层的数据类型。
 >
@@ -354,16 +402,34 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
+**Application Programming Interface**
+> 应用编程接口（API）是特定软件部分的既定方法，编写程序的程序员通过它可以向该软件部分发出请求。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Application Software Cluster**
 > 主要包含软件组件、仅包含选定的 BSW 模块（例如服务模块、转换器等）的软件集群（**Application Software Cluster**）。
 >
 > 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
 {: .glossary-source}
 
+**Application Software Component**
+> 应用软件组件是一种特定的"软件组件"，它在应用层实现已定义的功能并运行于 AUTOSAR 基础设施之上。它只通过 AUTOSAR 运行时环境进行通信。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Applied Rate**
 > 用于设置/计算全局时间的本地实例所施加的速率。对于时基主节点，它与速率校正 r_rc 相同；对于时基从节点，对于同步时基为 r_rc 与 r_oc 之和，对于偏移时基分别为 (r_orc − 1) 与 r_oc。
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
+{: .glossary-source}
+
+**Architecture**
+> 体系结构是系统的基本组织方式，体现在其组件、组件之间及其与环境的静态与动态关系、以及指导其设计与演化的原则之中。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **ARP**
@@ -376,6 +442,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > AUTOSAR 运行时接口——用于调试与跟踪嵌入式系统运行时行为的一组标准（**AUTOSAR Run-Time Interface**）
 >
 > 来源：[ARTI（AUTOSAR 运行时接口）](cp/sw_arch/arti/index.md)（AUTOSAR_CP_EXP_ARTI）、[Requirements on Debug Trace Profile（调试跟踪配置文件需求）](foundation/communication_management/rs_debug_trace_profile/index.md)（AUTOSAR_FO_RS_DebugTraceProfile）
+{: .glossary-source}
+
+**Artifact**
+> 制品是一种工作产品定义（**Work Product Definition**），为有形的工作产品类型提供描述与定义。制品可以由其他制品组成。在高层次上，制品表示为单个概念性文件。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **arxml**
@@ -396,6 +468,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](cp/safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures）
 {: .glossary-source}
 
+**ASIL Decomposition**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.7
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **ASN.1**
 > 抽象语法标记一号（**Abstract Syntax Notation One**）：一种描述数据结构的标准记法，常与 DER 编码规则一起用于证书等密码学数据的编码。
 >
@@ -406,6 +484,36 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 组装连接器。在 VFB 层级把一个组件的 RPort/PRPort 与另一个组件的 PPort/PRPort 连接起来的连接器；恰好连接一个提供端口与一个要求端口。
 >
 > 来源：[VFB（虚拟功能总线）](cp/general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）
+{: .glossary-source}
+
+**Asserted Property**
+> 如果设计实体（例如软件组件或系统）保证该属性或质量得到满足，则称设计实体的该属性或质量是"已断言的"（**asserted**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Assessment**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.4
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Asset**
+> 为在多种上下文中使用而设计的条目。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Asynchronous Communication**
+> 异步通信不会阻塞发送方软件实体。发送方软件实体无需等待通信伙伴的响应即可继续其自身的操作。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Asynchronous Function**
+> 如果某个"函数"（**Function**）所描述的功能在其返回调用者时不能保证已完成，则该函数称为异步函数。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Atomic Sender/Receiver interface**
@@ -420,6 +528,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）
 {: .glossary-source}
 
+**Atomic Software Component**
+> 非组合的软件组件。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Attributes**
 > 属性（**Attributes**）是**ECU**中存在的每个**ECU**信号所包含的软件或者硬件特性。一些属性是固定的，由端口定义决定。还有一些属性是可以在**I/O**硬件抽象中进行配置的。
 >
@@ -430,6 +544,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 防盗警告系统（**Anti-Theft Warning System**）。可借助光学与声学信号警示未授权进入尝试、并可防止发动机被起动的防盗系统。
 >
 > 来源：[Explanation of Application Interfaces of the Body and Comfort Domain（车身与舒适域应用接口说明）](cp/application_interfaces/body_and_comfort/index.md)（AUTOSAR_CP_EXP_AIBodyAndComfort）
+{: .glossary-source}
+
+**Audit**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.5
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Authentic I-PDU**（可信 I-PDU）
@@ -462,10 +582,46 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SecOC (Secure Onboard Communication)](cp/communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
 {: .glossary-source}
 
+**Authenticity**
+> 数据确实来源于其所声称来源的特性。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Automotive Safety Integrity Levels**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.7
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **AUTOSAR**
 > 汽车开放系统架构（**AUTomotive Open System ARchitecture**）
 >
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
+{: .glossary-source}
+
+**AUTOSAR Adaptive Platform**
+> 由 AUTOSAR 标准化的自适应计算平台。狭义上指其规范；广义上可指自适应平台实现的一个实例。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**AUTOSAR Application Interface**
+> 由 AUTOSAR 标准化、可用于创建"应用"（**Application**）的"AUTOSAR 接口"（**AUTOSAR Interface**）的一组"蓝图"（**Blueprint**）。从标准化蓝图（**Standardized AUTOSAR Blueprint**）派生的 AUTOSAR 接口即标准化的 AUTOSAR 接口（**Standardized AUTOSAR Interface**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**AUTOSAR Authoring Tool**
+> 用于创建和修改"AUTOSAR XML 描述"（**AUTOSAR XML description**）的 AUTOSAR 工具（**AUTOSAR Tool**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**AUTOSAR Blueprint**
+> AUTOSAR 蓝图是 AUTOSAR 元素的"蓝图"（**Blueprint**）。它还包括：在 AUTOSAR 项目中规定，对于某一特定类别的 AUTOSAR 元素类型的蓝图，哪些属性是必须规定的，以及如何从该蓝图派生出 AUTOSAR 对象。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **AUTOSAR COM**
@@ -480,10 +636,100 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SoAd (Socket Adaptor)](cp/communication/soad/index.md)（SWS_SocketAdaptor）
 {: .glossary-source}
 
+**AUTOSAR Converter Tool**
+> 通过转换其他 AUTOSAR XML 文件中的信息来创建 AUTOSAR XML 文件的 AUTOSAR 工具。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**AUTOSAR Definition**
+> 这是对可以有取值的参数的定义。可以说，参数值是这些定义的实例。但在 AUTOSAR 的元模型层次结构中，定义本身也是元模型的实例，因此被视为一种描述。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Autosar EthTSyn**
 >  EthTSyn，**Ethernet** 的时间同步提供者模块。
 >
 > 来源：[AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](cp/globaltime/eth_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverEthernet）
+{: .glossary-source}
+
+**AUTOSAR Interface**
+> 软件组件的 AUTOSAR 接口（**AUTOSAR Interface**）指该组件中用于与其他组件交互的所有"端口"（**Port**）的集合。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**AUTOSAR Meta-model**
+> AUTOSAR 元模型是一个 UML2.0 模型，它定义了描述 AUTOSAR 系统及相关制品的语言。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**AUTOSAR Model**
+> 这是 AUTOSAR 元模型的一个实例。AUTOSAR 模型表示按照 AUTOSAR 方法论适合预期用途的各个方面。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**AUTOSAR Partial Model**
+> 在 AUTOSAR 中，模型可能的划分方式在元模型中用 &lt;&lt;atp Splitable&gt;&gt; 标记。一个部分模型在一个"AUTOSAR XML 描述"（**AUTOSAR XML description**）中由一个文件表示。部分模型不需要满足适用于 AUTOSAR 模型的全部语义约束。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**AUTOSAR Processor Tool**
+> 通过处理 AUTOSAR XML 文件中的信息来创建非 AUTOSAR 文件的 AUTOSAR 工具。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**AUTOSAR Run-Time Interface**
+> AUTOSAR 运行时接口（AUTOSAR Run-Time Interface）应定义构建工具与调试/跟踪工具之间的接口。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**AUTOSAR Runtime for Adaptive Applications**
+> 由功能簇（**Functional Cluster**）提供的一组标准应用接口，这些功能簇属于自适应平台基础（**Adaptive Platform Foundation**）或自适应平台服务（**Adaptive Platform Services**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**AUTOSAR Service**
+> "服务"（**service**）一词在分层软件架构中用于表示与应用交互的 AUTOSAR 软件架构的最高层。服务一词按面向服务架构（**service-oriented architecture**）中定义的含义使用。该含义与 AUTOSAR 自适应平台上服务一词的用法关联最强。服务一词也用于描述诊断服务的处理，例如 UDS 服务 ReadDataByIdentifier，用于诊断测试仪与（AUTOSAR）ECU 上的诊断协议栈之间的通信。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**AUTOSAR Software**
+> 按照 AUTOSAR 标准开发的应用软件或基础/平台软件。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**AUTOSAR Tool**
+> 这是一种软件工具，它支持方法论中定义的 AUTOSAR 任务中的一个或多个任务。根据所支持的任务，AUTOSAR 工具可以用作"AUTOSAR 编写工具"（**AUTOSAR Authoring Tool**）、"AUTOSAR 转换工具"（**AUTOSAR Converter Tool**）、"AUTOSAR 处理工具"（**AUTOSAR Processor Tool**），或它们的组合。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**AUTOSAR XML description**
+> 在 AUTOSAR 中，这是序列化的 AUTOSAR 模型。实际上，AUTOSAR XML 描述是"AUTOSAR 模型"（**AUTOSAR Model**）的 XML 表示。AUTOSAR XML 描述可以由多个文件组成。每个单独的文件表示一个"AUTOSAR 部分模型"（**AUTOSAR Partial Model**），并且必须能够针对"AUTOSAR XML 模式"（**AUTOSAR XML Schema**）成功通过校验。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**AUTOSAR XML Schema**
+> AUTOSAR XML 模式是用于交换 AUTOSAR 模型（**AUTOSAR Model**）及描述的 XML 语言定义。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Availability**
+> 1. 可用性是系统按照其规范完整地执行某个功能 A 的能力。2. 在给定时间间隔内系统执行功能 A（按第 1 条定义）的总时间与该时间间隔长度之比。另一种表述：系统在指定时刻 t 正在执行功能 A 的概率。3. 在降级模式下，如果完整的 A 不可用，系统具有执行 A 的子集 B 的能力。此时，功能 B 是可用的。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **AVB**
@@ -542,6 +788,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
 {: .glossary-source}
 
+**Basic Software**
+> 基础软件（**Basic Software**, BSW）提供"电子控制单元"（**Electronic Control Unit**）的基础设施功能（依赖于原理图的和独立于原理图的）。它由"集成代码"（**Integration Code**）和"标准软件"（**Standard Software**）组成。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Basic Software Module**
+> 在"电子控制单元"（**Electronic Control Unit**）上定义某个特定基础软件功能的软件文件（代码与描述）的集合。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Basic Storage Object**
 > 「基本存储对象」是 **NVRAM** 块的最小实体。多个基本存储对象可用于构建 **NVRAM** 块。「基本存储对象」可以驻留在不同的内存位置，包括：**RAM**、**ROM**、NV 内存（**NV memory**）中。
 >
@@ -572,10 +830,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）、[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](cp/safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures）、[Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](cp/system_services/hw_test_manager/index.md)（AUTOSAR_CP_SWS_HWTestManager）
 {: .glossary-source}
 
+**Bit Position**
+> 在 AUTOSAR 中，I-PDU 内的位位置 N 表示字节 J 中的位 I，其中 I = N mod 8，J = N / 8。字节 J 和位位置 I 按照 ISO 17356-4（OSEK/VDX 通信）中的定义进行解释。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Block Management Type**
 > NVRAM 块的类型。它取决于 NVRAM 块在不同强制/可选基本存储对象块中的（可配置）单独组合以及此 NVRAM 块的后续处理。
 >
 > 来源：[AUTOSAR NVM（非易失性存储管理器）](cp/memory/nvram_manager/index.md)（AUTOSAR_CP_SWS_NVRAMManager）
+{: .glossary-source}
+
+**Blueprint**
+> 这是一种模型，其他模型可以通过复制和细化从中派生。注意，与元模型及类型相对照，这一过程不是实例化。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Bmc**
@@ -680,6 +950,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Application Interfaces User Guide（应用接口用户指南）](cp/application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide）
 {: .glossary-source}
 
+**Bulk Data**
+> "批量数据"（**Bulk Data**）是指规模大到处理较小数据集的标准机制不再适用的一类数据。这意味着软件系统中的批量数据需要用不同于较小数据集的机制来建模、存储、访问和传输。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Bus**
 > NM节点/ECU所连接到的物理通信介质。
 >
@@ -690,6 +966,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 总线没有活动所持续流逝的时长。
 >
 > 来源：[AUTOSAR LinIf (LIN Interface)](cp/communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
+{: .glossary-source}
+
+**Bus Mirroring**
+> 将信息从车内内部总线转发到外部总线，例如诊断连接器。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Bus Off**
@@ -704,6 +986,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Communication Manager（通信管理器）](cp/system_services/comm/index.md)（SWS_COMManager）
 {: .glossary-source}
 
+**Bus Wake-Up**
+> 总线唤醒由专用通信标准（如 CAN、LIN、FR）规范中定义的总线上的特定唤醒脉冲引发。总线唤醒会促使收发器和控制器离开节能模式并进入正常模式，重新开始总线通信。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Bus-Off state**
 > 指没有电缆连接到以太网硬件的情况。
 >
@@ -714,6 +1002,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 所有互连的通信控制器均处于睡眠模式的网络模式。
 >
 > 来源：[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**Bypassing**
+> 在 ECU 镜像内以实验方式并入新功能。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 ## C
@@ -740,6 +1034,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 安全连接关联密钥（**Secure Connectivity Association Key**）。
 >
 > 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
+{: .glossary-source}
+
+**Calibration**
+> 标定是对实现控制功能的 SW-C 的参数（即 AUTOSAR SW-C、ECU 抽象或"复杂驱动"（**Complex Driver**）的参数）进行的调整。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Call Point**
+> "软件组件"（**Software Component**）中的一个位置，SW-C 在此强制另一 SW-C 中的执行实体（"入口点"（**Entry Point**））执行。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Callback**
@@ -874,6 +1180,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
 {: .glossary-source}
 
+**Can XL**
+> CAN XL 规定了一种具有更高数据速率和更清晰关注点分离的协议与物理层，它构建在 CAN 2.0/FD 之上，并支持以太网帧的隧道传输。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **CAN_DL**
 > CAN帧数据长度
 >
@@ -914,6 +1226,36 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > **CAN** 时间同步模块（**Time Synchronization over CAN** module）。通过 **CAN** 总线分发时间信息、实现 **CAN** 特定时间同步协议的模块。
 >
 > 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](cp/globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）
+{: .glossary-source}
+
+**Cascaded Switch**
+> 级联交换机（**Cascaded Switch**）是由至少两个以太网交换机组成的以太网交换机：一个主交换机和一个从交换机。主交换机与从交换机通过上行端口连接。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Cascading Failure**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.13
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Category 1 Interrupt**
+> 类别 1（Cat1）中断由 OS 支持，但其代码只允许调用 OS 函数的一个非常小的子集。此外，它们可以绕过 OS。类别 1 中断的代码（通常）取决于所使用的编译器和微控制器。类别 1 中断不允许使用 ISR() 宏。类别 1 中断需要自行实现/建立自己的中断帧（**Interrupt Frame**）。尽管如此，仍必须对它们进行配置，以便将其纳入中断向量表。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Category 2 Interrupt**
+> 类别 2（Cat2）中断由 OS 支持，其代码可以调用 OS 函数的一个子集。类别 2 中断的定义必须使用 ISR() 宏，以便被 OS 识别。类别 2 中断的中断帧由 OS 管理。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Causality of Transmission**
+> 来自源网络的、具有相同标识符的 PDU（PDU 实例）的发送顺序在目的网络中得以保持。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **CBC**
@@ -1036,6 +1378,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**Classic Platform**
+> AUTOSAR 为深度嵌入式系统以及对可预测性、安全性和响应性有高要求的应用软件定义的软件平台。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Client**
 > 承载客户端服务（**ClientServices**）的ECU。
 >
@@ -1048,16 +1396,34 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
 {: .glossary-source}
 
+**Client-Server Communication**
+> 一种可能分布在系统中的特定通信形式，其中软件实体充当客户端、服务器或二者兼有，通常由 1...n 个客户端通过特定协议向一个服务器请求服务。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Client-Server communication**
 > 客户端-服务器通信（**Client-Server communication**）涉及两个实体。客户端是要求服务的一方，服务器是提供服务的一方。客户端发起通信，请求服务器执行服务，必要时传输参数集合。服务器以**RTE**的形式，等待来自客户端的传入通信请求，执行请求的服务并发送对客户端请求的响应。因此服务启动的方向是用来对**AUTOSAR**软件组件是客户端还是服务器分类的主要标识。
 >
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）
 {: .glossary-source}
 
+**Client-Server Interface**
+> 客户端-服务器接口是一种特殊的"端口接口"（**Port Interface**），用于客户端-服务器通信的情形。客户端-服务器接口定义了"服务器"（**Server**）提供的、可被"客户端"（**Client**）使用的操作。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Client-Service-Instance-Entry**
 > 另一个ECU所提供的服务实例的配置和所需数据，在使用该服务（客户端）的ECU上被称为Client-Service-Instance-Entry。
 >
 > 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](cp/communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
+{: .glossary-source}
+
+**Cluster Signal**
+> 簇信号表示某个特定通信簇上的聚合系统信号。簇信号可以独立于帧来定义。这允许一种开发方法论：先定义信号，然后在后续阶段将信号分配到帧。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **cluster（集群）**
@@ -1108,6 +1474,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Chinese V2X Management（中国V2X管理）](cp/communication/chinesev2x_mgmt/index.md)（AUTOSAR_CP_SWS_ChineseV2XManagement）、[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）
 {: .glossary-source}
 
+**Code Generator**
+> 代码生成器（**Code Generator**）接收针对 BSW 模块的完整且格式正确的 XML，并生成配置该模块的代码和数据。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Code Variant Coding**
+> 根据外部需求，通过选择功能备选项来调整软件。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **CoG**
 > 重心（**Center of Gravity**）
 >
@@ -1138,6 +1516,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR Communication Manager（通信管理器）](cp/system_services/comm/index.md)（SWS_COMManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）、[AUTOSAR J1939Nm（SAE J1939 网络管理）](cp/communication/j1939nm/index.md)（AUTOSAR_CP_SWS_SAEJ1939NetworkManagement）
 {: .glossary-source}
 
+**Common Cause Failure**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.14
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Communication Attribute**
+> 通信属性按照开发阶段定义 AUTOSAR 通信模式的行为与实现两个方面。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Communication Channel**
 > 用于将信息从发送方（或发送器）传递到接收方的介质（**The medium used to convey information from a sender (or transmitter) to a receiver**）。
 >
@@ -1156,16 +1546,46 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Communication Manager（通信管理器）](cp/system_services/comm/index.md)（SWS_COMManager）
 {: .glossary-source}
 
+**Complex Driver**
+> AUTOSAR 未标准化的软件实体，它可以通过"AUTOSAR 接口"（**AUTOSAR Interface**）和/或"基础软件模块"（**Basic Software Module**）API 访问其他实体或被其他实体访问。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Composition**
 > 组合（**Composition**）。以类型-原型模式嵌套组织软件组件的结构；在抽象平台中用于按任意深度递归地定义组件层次。
 >
 > 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
 {: .glossary-source}
 
+**Compositionality**
+> 当系统中某个软件组件或子系统的行为与整个系统的负载和配置无关时，即具有可组合性（**Compositionality**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Concurrent TesterPresent**
 > 设置 suppressPosRspMsgIndicationBit（3E 80）并通过功能寻址接收的 **UDS** 服务 **TesterPresent**；也称为保活（keep-alive）逻辑。
 >
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**Conditioned Signal**
+> 处理后的信号（**Conditioned Signal**）是电信号在 ECU 内部的电气表示。它被传送给处理器，并以电压和时间表示（对于逻辑信号则以高电平或低电平表示）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Confidentiality**
+> 数据或信息不向未授权的人员或进程提供或泄露的特性。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Configuration**
+> 系统中硬件和/或软件元素的布置。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Confirmation**
@@ -1184,6 +1604,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > CAN传输层管理多个连接所使用的资源以节省RAM。当一个连接变为活动状态时，该连接使用的通道将对其他连接不可用。
 >
 > 来源：[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**Connector**
+> 连接器（**Connector**）连接软件组件（**Software Component**）的"端口"（**Port**），并表示这些端口之间的信息流。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Consumed Eventgroup multicast connection**
@@ -1252,6 +1678,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**Control Flow**
+> 多个实体之间信息的定向传输，直接导致接收实体的状态改变。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Controller**
 > （TTCAN）控制器是 **CPU** 片上或外部的独立硬件器件。一个控制器连接到一个物理通道。
 >
@@ -1274,6 +1706,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 严重离位（**Critical Out of Position**）
 >
 > 来源：[Explanation of Application Interfaces of Occupant and Pedestrian Safety Systems Domain（乘员与行人安全系统域应用接口说明）](cp/application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety）
+{: .glossary-source}
+
+**Coordinate**
+> 控制并协调两个或多个事件或操作，使其以有组织、可预测的方式运行。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Coordinated shutdown**
@@ -1446,10 +1884,28 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](cp/application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis）
 {: .glossary-source}
 
+**Data**
+> 以适合通信、解释或处理的形式化方式对信息的可重新解释的表示。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Data Element**
+> 数据元素（**Data Element**）在"发送方-接收方接口"（**Sender-Receiver Interface**）的上下文中声明。它们用作发送方与接收方之间交换的数据单元。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Data element**
 > 发送者和接收者之间交换的数据。**E2E** 转换器将数据元素一对一地映射到 **I-signal** 或 **I-signal** 组。
 >
 > 来源：[E2E Transformer (E2E转换器)](cp/communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）
+{: .glossary-source}
+
+**Data Flow**
+> 多个实体之间数据的定向传输。所传输的数据与接收方的状态改变没有直接关系。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Data frame**
@@ -1482,6 +1938,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SecOC (Secure Onboard Communication)](cp/communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
 {: .glossary-source}
 
+**Data Variant Coding**
+> 根据外部需求，通过设置某些特征数据来调整软件。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **DCC**
 > 分布式拥塞控制（**Decentralized Congestion Control**）。
 >
@@ -1512,6 +1974,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
+**Deadline**
+> 实体的某次执行必须结束的时间点。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Deadline End Checkpoint**（**Deadline Stop Checkpoint**）
 > 为其配置了**截止时间监督**、并且是某个特定**截止时间监督**终点的**检查点**。一个**检查点**可以同时是**截止时间起始检查点**和**截止时间结束检查点**——即当**截止时间监督**被串联时。
 >
@@ -1540,6 +2008,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 具有相同 **PDU** 的两条 **TX** 报文之间的最小间隔。
 >
 > 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](cp/globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
+{: .glossary-source}
+
+**Debugging**
+> 调试是在出现软件问题时收集信息的过程。所收集的信息用于分析该软件问题。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Default Error Tracer**
@@ -1590,10 +2064,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**Dependability**
+> 可信性（**Dependability**）定义为计算机系统的可信程度，使得对其所交付服务的依赖是正当合理的。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Dependent / Secondary ECUs**
 > 从属/辅助 **ECU**（dep. / sec. ECU）始终与一个 **Master** 或 **Primary ECU** 相关联。
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**Dependent Failure**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.22
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **DET**
@@ -1636,6 +2122,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 诊断通道：诊断工具与 **ECU** 之间可以进行数据传输的链路。例如，**ECU** 通过 **CAN** 连接时，诊断通道会分配一个 **CAN-ID**；连接至 **MOST**、**FlexRay**、**LIN** 等总线系统的诊断通道同样适用。
 >
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**Diagnostic Coverage**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.25
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Diagnostic Event**
+> 诊断事件（**Diagnostic Event**）定义了可由 DEM 模块处理的最小单元。诊断事件的状态表示某个监控器的结果。DEM 通过 RTE 或其他 BSW 模块从 SW-C 接收监控器的结果。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Diagnostic Event Manager**
@@ -1690,6 +2188,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 在单向认证（**unilateral authentication**）中，一方证明其身份。请求方甚至未被认证到可证明其有权请求认证的程度。在双向认证（**bilateral authentication**）中，请求方也至少被认证（见下文）以证明其请求的权限。基于上述双向认证，存在一种高效且更安全的双向端点认证方式。除了最初由接收方（在第一条消息中）请求的认证（在第二条消息中）之外，发送方也请求一次认证。接收方发送第三条消息，提供发送方所请求的认证。这仅需要三条消息（相比之下，两条单向消息需要四条）。
 >
 > 来源：[AUTOSAR SecOC (Secure Onboard Communication)](cp/communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
+{: .glossary-source}
+
+**Diversity**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.28
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **DLC**
@@ -1872,6 +2376,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR IpduM（I-PDU多路复用器）](cp/communication/ipdum/index.md)（AUTOSAR_CP_SWS_IPDUMultiplexer）
 {: .glossary-source}
 
+**Dynamic PDU**
+> 具有动态标识符的"协议数据单元"（**Protocol Data Unit**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Dynamic Routing**
+> 网关中信号或"协议数据单元"（**Protocol Data Unit**）的路由可以在整个运行期间改变，而无需改变网关的运行模式。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 ## E
 
 **e.g.**
@@ -1887,9 +2403,21 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **E2E Profile**
-> 作为特定通信栈的高效解决方案的一组组合 **E2E** 措施（**A set of combined E2E measures as efficient solution for a particular communication stack**）。
+> 对特定通信栈在数据结构、服务、行为状态机、错误处理方面的功能完整描述。E2E Profile 定义在 AUTOSAR E2E 库中。E2E Profile 可通过运行时参数配置。一组特定的运行时参数称为 E2E profile 变体（**E2E profile variant**）。为了实现互操作性，应用开发者应使用 E2E 库中定义的 E2E profile 变体。
 >
-> 来源：[Requirements on E2E（端到端通信保护需求）](foundation/communication_management/rs_e2e/index.md)（AUTOSAR_FO_RS_E2E）
+> 来源：[Requirements on E2E（端到端通信保护需求）](foundation/communication_management/rs_e2e/index.md)（AUTOSAR_FO_RS_E2E）、[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**E2E Protection Alive Counter**
+> 存活计数器（**Alive Counter**）是每次发送请求时递增的计数器。接收方检查计数值是否发生变化，但不检查计数器是否被正确递增。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**E2E Protection Sequence Counter**
+> 序列计数器（**Sequence Counter**）是每次发送请求时递增的计数器。接收方对每条报文检查计数值是否被正确递增。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **EA**
@@ -1946,10 +2474,40 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
 {: .glossary-source}
 
+**ECU Abstraction Layer**
+> ECU 抽象层（**ECU Abstraction Layer**）位于"微控制器抽象层"（**Microcontroller Abstraction Layer**）之上，对 ECU 原理图进行抽象。它为特定 ECU 实现，并提供访问外设和设备的 API，而无论其位置（片上/片下）及其与微控制器的连接方式（端口引脚、接口类型）如何。任务：使较高的软件层次独立于 ECU 硬件布局。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**ECU Configuration**
+> 集成并配置一个 ECU 软件的活动。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**ECU Configuration Description**
+> ECU 配置活动的输出，包含配置参数的取值和引用。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**ECU HW**
+> AP 机器与 CP ECU 的任意组合的容器术语。一般来说，ECU-HW 通常是对物理或虚拟实现的抽象/独立于物理或虚拟实现，并且不传递任何硬件壳体（**HW-Housing**）信息，即多个物理 ECU-HW 或一个物理 ECU-HW 提供多个虚拟 ECU-HW（除非另有说明）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **ECU ID**
 > 一个 ECU 的名称，由四个 8 位 ASCII 字符组成（例如 ABS0 或 COMB）。
 >
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+{: .glossary-source}
+
+**ECU Instance**
+> ECU 实例（**ECU Instance**）表示经典平台协议栈的一次单独实例化，它可以运行在物理 ECU-HW 上（无 hypervisor）或虚拟 ECU-HW 上（有 hypervisor）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **ECU pin**
@@ -2018,6 +2576,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）
 {: .glossary-source}
 
+**Electronic Control Unit**
+> 由至少一个 CPU 和相应外设组成、置于同一壳体内的嵌入式计算机系统。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Elementary Supervision Status**
 > 表示**存活监督**、**时限监督**或**逻辑监督**当前状态的状态，基于对该监督的评估（正确/错误）。
 >
@@ -2028,6 +2592,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > e-移动账户标识符（**e-Mobility Account Identifier**）。
 >
 > 来源：[AUTOSAR Charging Manager（充电管理器）](cp/communication/chargingmanager/index.md)（AUTOSAR_CP_SWS_ChargingManager）
+{: .glossary-source}
+
+**Empty Function**
+> 由 AUTOSAR 规范定义、但不实现或不改变完成其被指派的功能职责所需行为的任何 C 函数。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Endpoint Option**
@@ -2047,6 +2617,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > **注意：** 实体认证意味着证明存在性和操作就绪性。
 >
 > 来源：[AUTOSAR SecOC (Secure Onboard Communication)](cp/communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
+{: .glossary-source}
+
+**Entry Point**
+> "软件组件"（**Software Component**）中 SW-C 的某个执行实体开始的位置。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **EPB**
@@ -2073,6 +2649,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Application Level Error Handling（应用层错误处理）](cp/general/application_level_error_handling/index.md)（AUTOSAR_CP_EXP_ApplicationLevelErrorHandling）
 {: .glossary-source}
 
+**Error Detection Rate**
+> 检测到的丢失/故障字/符号/块的数量除以已发送的符号/字/块总数的比值。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **ESC**
 > 电子稳定控制（**Electronic Stability Control**）
 >
@@ -2095,6 +2677,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > Ethernet Controller Driver（**AUTOSAR BSW** 模块）。
 >
 > 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](cp/communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）、[AUTOSAR Ethernet Interface（以太网接口）](cp/communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
+{: .glossary-source}
+
+**Ethernet Switch Port Groups**
+> 以太网交换机端口组（**Ethernet Switch Port Groups**）是以太网交换机中被分组为所谓端口组的以太网交换机端口。以太网交换机端口组只与宿主 ECU（**host ECU**）相关。以太网交换机端口组按 VLAN 和 PNC 从模型中派生。宿主端口参与所有端口组。一个以太网交换机端口组可以是内部端口和外部端口的混合。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **EthIf**
@@ -2193,6 +2781,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**Event Message (SOME/IP)**
+> 事件（**Event**）——由实现某服务实例的 ECU 发送给使用该服务实例的 ECU 的报文（发布/订阅）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Event qualification**
 > 在通过或失败结果被置位时（**Dem** 内部或由另一个 **BSW** 模块或 **SW-C** 报告），诊断事件被鉴定。
 >
@@ -2241,10 +2835,40 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Application Interfaces User Guide（应用接口用户指南）](cp/application_interfaces/user_guide/index.md)（AUTOSAR_CP_EXP_AIUserGuide）
 {: .glossary-source}
 
+**Executable**
+> 应用的一部分，它要么是包含带已定义入口点的可执行代码、适合作为部署目标平台实例的文件（部署期），要么是已准备好为特定平台集成的软件代码。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Executable Entity Cluster**
+> 一组可执行实体（**Executable Entity**, EE）以及这些 EE 之间的一组执行顺序约束（**Execution Order Constraint**, EOC）的引用。构建可执行实体簇（**Executable Entity Cluster**, EEC）的目的是将 EE 映射到 LET 区间和任务。多个 EEC 可以映射到同一个 LET 区间。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Execution Order Constraint**
+> 定义同一 LET 区间内可执行实体（**Executable Entity**, EE）实例之间的执行顺序。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Execution Time**
+> 程序实际执行所经历的时间，或更精确地说，某个执行线程处于活动状态的时间。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **EXI**
 > 高效 XML 交换（**Efficient XML Interchange**）。
 >
 > 来源：[AUTOSAR Charging Manager（充电管理器）](cp/communication/chargingmanager/index.md)（AUTOSAR_CP_SWS_ChargingManager）
+{: .glossary-source}
+
+**Exit Point**
+> "软件组件"（**Software Component**）中 SW-C 的某个执行实体结束的位置。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Expired Supervision Cycle**
@@ -2289,6 +2913,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）
 {: .glossary-source}
 
+**External Port**
+> 外部端口（**External Port**）是汽车以太网交换机上用于通过以太网物理连接与其他 ECU 通信（例如 100BASE-TX、100BASE-T1）的端口。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **External Transition**
 > **外部转换**是两个**检查点**之间的**转换**，其中这两个**检查点**属于不同的**被监督实体**。
 >
@@ -2301,6 +2931,24 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 前轴（**Front Axle**）
 >
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](cp/application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis）
+{: .glossary-source}
+
+**Fail-operational**
+> 系统或功能单元的一种属性。描述系统或功能单元在存在硬件或软件故障的情况下，仍能在其输出接口上继续正常运行的能力。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Fail-safe**
+> 系统或功能单元的一种属性。在发生故障时，系统或功能单元转入安全状态。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Fail-silent**
+> 失效静默（**Fail-silent**）是系统的一种属性，即在存在故障时不产生任何输出。在汽车领域，失效静默系统通常只在下一个层级系统提供安全状态时才被使用。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Failed Supervision Reference Cycle**
@@ -2319,6 +2967,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 失效计数器表示 ISO 14229-1 定义的 Trip Counter。Trip Counter 对发生故障的运行周期（驾驶循环）数进行计数。当计数器达到阈值（例如 2 个驾驶循环）时，confirmed 位从 0 变为 1。
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**Failure Mode**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.40
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Failure Rate**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.41
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Fallback Virtual Local Time**
@@ -2345,10 +3005,40 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Application Level Error Handling（应用层错误处理）](cp/general/application_level_error_handling/index.md)（AUTOSAR_CP_EXP_ApplicationLevelErrorHandling）
 {: .glossary-source}
 
+**Fault Detection**
+> 监控错误并将故障状态设置为特定值的动作称为故障检测。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Fault Detection Counter**
 > ISO 和 **FDC API** 中使用的 sint8 值。
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**Fault Reaction**
+> 在 SW-C 发生失效（**Failure**）时，有一个需要执行的特定动作。该动作称为"故障反应"（**Fault Reaction**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Fault Reaction Time**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.44
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Fault Tolerance**
+> 在存在一个或多个规定故障的情况下交付规定功能的能力。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Fault Tolerant Time Interval**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.45
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **FC**
@@ -2385,6 +3075,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 故障检测、隔离与恢复（**Fault Detection, Isolation and Recovery**）。系统运行期间处理故障的过程：检测→隔离→恢复。
 >
 > 来源：[Application Level Error Handling（应用层错误处理）](cp/general/application_level_error_handling/index.md)（AUTOSAR_CP_EXP_ApplicationLevelErrorHandling）
+{: .glossary-source}
+
+**Feature**
+> 特性（**Feature**）是系统的一个显著特征。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **FEE**
@@ -2456,7 +3152,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Firewall**
 > 汽车以太网防火墙——监控流入/流出网络流量并授予或拒绝 **ECU** 之间或网络区域之间网络访问的网络安全设备。
 >
-> 来源：[Requirements on Firewall（防火墙需求）](foundation/security/rs_firewall/index.md)（AUTOSAR_FO_RS_Firewall）
+> 来源：[Requirements on Firewall（防火墙需求）](foundation/security/rs_firewall/index.md)（AUTOSAR_FO_RS_Firewall）、[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Flag**
+> 一种数据，可以取两个值之一，用于指示某个逻辑条件为真还是为假。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Flash access code**
@@ -2475,6 +3177,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 一次可以擦除的最小闪存量。闪存扇区的大小取决于闪存技术，因此取决于硬件。
 >
 > 来源：[AUTOSAR FLS（闪存驱动程序）](cp/memory/flash_driver/index.md)（AUTOSAR_CP_SWS_FlashDriver）
+{: .glossary-source}
+
+**FlexRay**
+> 在 ISO 17458（[29]）中标准化的汽车时间触发、容错网络通信协议，它既提供在可预测时间范围内到达的确定性数据，也支持动态的事件驱动数据。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **FLM**
@@ -2513,6 +3221,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）、[Explanation of Firmware Over-The-Air（固件远程升级说明）](cp/memory/firmware_over_the_air/index.md)（AUTOSAR_CP_EXP_FirmwareOverTheAir）
 {: .glossary-source}
 
+**Foundation**
+> Foundation 包含自适应平台与经典平台通用的制品，以确保以下二者之间的兼容性：• 经典平台与自适应平台 • 非 AUTOSAR 平台与 AUTOSAR 平台。在 AUTOSAR 中，这些通用制品的具体实现分别在自适应平台和经典平台中描述，并且可能不同。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **FR**
 > **FlexRay**。
 >
@@ -2543,10 +3257,34 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](cp/communication/flexray_iso_transport_layer/index.md)（SWS_FlexRayISOTransportLayer）
 {: .glossary-source}
 
+**Frame**
+> 按照数据链路协议规定在传输介质上传输序列中位或位域的排列与含义的数据单元。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Frame PDU**
+> 能放入 1 个帧实例的 PDU，例如在网络上传输时不需要跨多个帧分段。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Freedom from Interference**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.49
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Freeze frame**
 > 冻结帧被定义为数据的记录（**DID**/**PID**）。冻结帧与 ISO 14229-1 中的 SnapShotRecords 相同。
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（SWS_DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**Freshness**
+> 数据新鲜度（**Freshness**）意味着数据是最近的，它确保重放攻击中被重放的报文能够被检测出来。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Freshness Value**
@@ -2657,6 +3395,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](cp/safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures）
 {: .glossary-source}
 
+**Function**
+> 1. 为达到期望结果而必须完成的任务、动作或活动。2. 由程序的其他部分为达到期望目的而调用的程序代码的一部分。3. 在数学中，函数是两组值之间的关联，其中一组的每个元素在另一组中有一个被指派的对应元素，于是从该组中选出的任何元素成为自变量，其关联元素成为因变量。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Function Inhibition Manager**
 > 功能禁用管理器（**FIM**）代表事件的评估和分配，以及软件组件所需操作（例如禁用特定的「监控功能」）的分配。当事件状态发生变化时，DEM会通知并更新功能禁用管理器（**FIM**），以便根据分配的依赖关系停止或释放功能实体。功能实体的接口由模式管理器定义和支持。FIM不是DEM的一部分。
 >
@@ -2673,6 +3417,36 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 在传输层中，功能寻址指的是N_TAtype参数（它是用于编码通信模型的N_TA参数[1]的扩展）取值为functional的N-SDU。这意味着该N-SDU用于1到n的通信。因此，对于CAN协议，功能寻址仅支持单帧通信。在应用方面，如果外部（或内部）测试仪不知道应响应服务请求的ECU的物理地址，或者ECU的功能是作为分布在多个ECU上的分布式服务器实现的，则外部（或内部）测试仪会使用功能寻址。使用功能寻址时，通信是从外部测试仪到一个或多个ECU的通信广播（1到n通信）。用例有（例如）广播消息，如「ECUReset」或「Communication Control」。OBD通信将始终作为功能寻址的一部分执行。
 >
 > 来源：[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
+{: .glossary-source}
+
+**Functional Cluster**
+> 按照其所指的方面分组的一组需求。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Functional Network**
+> 特性（**Feature**）的已定义功能部分之间互连的一种逻辑结构。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Functional Safety Concept**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.52
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Functional Safety Requirement**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.53
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Functional Unit**
+> 能够完成特定目的的软件或硬件实体，或二者的结合。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Functionality**
@@ -2723,6 +3497,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 参见 ISO 11898-4。
 >
 > 来源：[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）
+{: .glossary-source}
+
+**Gateway**
+> 网关（**Gateway**）是经典平台 ECU 内的一种功能，它在两个通信系统之间执行帧或信号映射功能。这里的通信系统例如指 CAN 系统或 FlexRay 系统的一个通道。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Gateway ECU**
+> 网关 ECU（**Gateway ECU**）是连接到两个或多个通信信道并执行网关功能的"电子控制单元"（**Electronic Control Unit**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **GBC**
@@ -2821,6 +3607,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）、[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
 {: .glossary-source}
 
+**Graceful Degradation**
+> 优雅降级（**Graceful Degradation**）：系统在存在错误的情况下继续运行，在恢复或修理期间接受功能或性能的部分降级。文献中也称为"fail soft"。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Graph**
 > 控制流图（**Control Flow Graph**）。一组通过**转换**相连的**检查点**，其中至少有一个**检查点**是**初始检查点**。在该**图**的任意两个**检查点**之间都存在一条（通过**转换**的）路径。
 >
@@ -2859,10 +3651,40 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](cp/safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures）
 {: .glossary-source}
 
+**Hardware Abstraction Layer**
+> 硬件抽象层（**Hardware Abstraction Layer**）是介于物理硬件与其软件之间的抽象层软件。它允许通过编程接口访问硬件资源。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Hardware Connection**
+> 硬件连接（**HW Connection**）用于描述硬件元素（**Hardware Element**）彼此之间的连接。它定义/刻画硬件元素之间的相互关系（用于抽象建模）。硬件元素的"硬件端口"（**Hardware Port**）充当连接点。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Hardware Element**
+> 硬件元素（**HW Element**）是"电子控制单元"（**Electronic Control Unit**）的主要描述元素。它提供硬件端口（**Hardware Port**）以便彼此互连。通用硬件元素规定对所有特定硬件元素有效的定义。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Hardware Interrupt**
+> 由硬件事件触发的中断。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Hardware Object**
 > CAN硬件对象定义为CAN硬件单元/CAN控制器的CAN RAM中的一个PDU缓冲区。硬件对象定义为CAN硬件单元CAN RAM中的L-PDU缓冲器。
 >
 > 来源：[AUTOSAR CAN Driver（CAN驱动程序）](cp/communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）、[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）
+{: .glossary-source}
+
+**Hardware Port**
+> 硬件端口（**HW port**）向"硬件元素"（**Hardware Element**）的外部暴露功能。硬件元素可以通过"硬件连接"（**Hardware Connection**）互连。它为硬件元素定义一个连接端点。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Hardware Receive Handle (HRH)**
@@ -2917,6 +3739,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 检查被监督软件所登记的健康指标是否在容差/限值内的一类监督。
 >
 > 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+{: .glossary-source}
+
+**Health Indicator**
+> 健康指示器（**Health Indicators**, HI）是针对安全需求的当前系统性能的评估度量。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Health Indicator (HI)**
@@ -2979,6 +3807,24 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
 
+**Hook**
+> ECU 软件中用于交换数据的干预点。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Host ECU**
+> 宿主 ECU（**Host ECU**）是控制一个或多个汽车以太网交换机的 ECU（例如打开/关闭以太网交换机及其端口，读/写以太网交换机配置）。为此，宿主 ECU 通过公共控制接口（如 SPI、MDIO）连接到以太网交换机。宿主 ECU 也参与网络通信。为此，宿主 ECU 通过数据接口（如 MII）连接到特定的以太网交换机端口（宿主端口）。它发送和接收以太网帧。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Host Port**
+> 宿主端口（**host port**）是汽车以太网交换机上连接"宿主 ECU"（**Host ECU**）数据接口（如 MII）的端口。宿主端口可以是内部端口或外部端口。从软件的角度看，宿主端口具有特殊角色（参见链路汇聚和端口组）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Host Software Cluster**
 > 包含 BSW 主要部分（尤其是微控制器相关的下层 BSW 模块，例如 OS 和 MCAL）的唯一软件集群（**Host Software Cluster**）。
 >
@@ -3007,6 +3853,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 硬件（**Hardware**）
 >
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Crypto Driver（加密驱动程序）](cp/crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](cp/crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Crypto Service Manager（加密服务管理器）](cp/crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
+{: .glossary-source}
+
+**Hypervisor**
+> 在一台物理机中提供并管理多台虚拟机的底层软件。它可以是独立的软件，也可以作为 OS 的功能包含在内。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 ## I
@@ -3131,6 +3983,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR LinIf (LIN Interface)](cp/communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
 {: .glossary-source}
 
+**Identity and Access Management (IAM)**
+> IAM（身份与访问管理）是关于管理自适应应用对自适应平台基础与服务的接口的访问权限。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Identity Information**
+> 访问控制基于代表自适应应用属性的身份信息（**Identity Information**）来决策/执行。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **IDPS**
 > 入侵检测与防御系统（**Intrusion Detection and Prevention System**）——针对 **IDS** 传感器检测并上报的合格安全事件采取预定义预防措施的安全控制。
 >
@@ -3215,6 +4079,24 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）
 {: .glossary-source}
 
+**Implementation Conformance Class 1 (ICC1)**
+> ICC1 集群提供"软件组件接口"（**Software Component Interface**）和/或"网络接口"（**Network Interface**）。ICC1 集群的软件组件接口和网络接口提供 AUTOSAR 规范在 ICC3 级别所规定的功能行为。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Implementation Conformance Class 2 (ICC2)**
+> ICC2 集群将逻辑相关的 ICC3 基础软件（**BSW**）模块（2...N 个模块）组合在一起。ICC2 集群中集群特性（**Cluster Feature**）的数量是被集群的 ICC3 模块特性数量并集的子集。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Implementation Conformance Class 3 (ICC3)**
+> 对于 ICC3，AUTOSAR BSW 由基础软件模块列表中定义的 BSW 模块组成，包括 RTE。ICC3 是最高级别的粒度。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **In-Use performance ratio**
 > **OBD** 系统特定监视器 m 的实际使用性能比为：IUPRm = Numeratorm / Denominatorm。
 >
@@ -3225,6 +4107,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 反向邻居发现（**Inverse Neighbor Discovery**）。
 >
 > 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+{: .glossary-source}
+
+**Independence**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.61
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Independent Failures**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.62
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Indication**
@@ -3275,10 +4169,46 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Platform Types（平台类型）](cp/general/platform_types/index.md)（SWS_PlatformTypes）
 {: .glossary-source}
 
+**Integration**
+> 将系统组件逐步组装成整个系统。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Integration Code**
+> 集成者需要添加到 AUTOSAR 系统中以适配未标准化功能的代码。例如 ECU 状态管理器（**EcuM**）的 Callout（**Callout**）以及各种其他基础软件模块的回调（**Callback**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Integrity**
+> 数据或信息未以未授权方式被更改或销毁的特性。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Integrity Check Value**
+> 用于确保未授权的消息修改能够被检测到的密码学函数的结果。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Inter-ECU-communication**
 > ECU间通信（**Inter-ECU-communication**）是两个或多个ECU之间的通信，例如经由CAN网络。
 >
 > 来源：[AUTOSAR COM（COM模块）](cp/communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**Interface**
+> 两个功能单元（**Functional Unit**）之间的共享边界，由涉及功能、物理互连、信号交换及其他特性的各种特征（视情况而定）定义。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Intermediate PNC Coordinator**
+> 中间 PNC 协调器（**Intermediate PNC Coordinator**）在 PNC 网络中位于"顶层 PNC 协调器"（**Top-level PNC Coordinator**）或另一个中间 PNC 协调器之下、PNC 叶节点（**PNC Leaf Node**）或另一个中间 PNC 协调器之上。中间 PNC 协调器将收到的 PNC 请求和自己的 PNC 请求转发给其"顶层 PNC 协调器"。中间 PNC 协调器立即处理收到的 PN 关机报文，将其转发给其下级 ECU（另一个中间 PNC 协调器或 PNC 叶节点），释放所指示的 PNC 并为这些 PNC 重置 PN 复位定时器。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Intermediate PNC coordinator**
@@ -3299,16 +4229,70 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）
 {: .glossary-source}
 
+**Internal Port**
+> 内部端口（**Internal Port**）是汽车以太网交换机上用于本地通信（宿主 ECU 或级联交换机）的端口。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Internal Transition**
 > **内部转换**是同一个**被监督实体**内两个**检查点**之间的**转换**。
 >
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）
 {: .glossary-source}
 
+**Interrupt**
+> 强制处理器改变其状态的事件。这种中断导致正常的指令序列被停止。一旦发生中断，正在运行的软件实体被挂起，并调用一个"中断服务程序"（**Interrupt Service Routine**）（专用于该中断的那一个）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Interrupt Frames**
+> 中断帧（**Interrupt Frame**）是处理进入/离开（用 C 编写的）中断服务程序的代码。这段代码与微控制器相关，通常用汇编语言编写。中断帧通常由 OS 生成工具生成。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Interrupt Handler**
+> 对于类别 2 中断，ISR 与中断处理程序（**Interrupt Handler**）同义。对于类别 1 中断，中断处理程序是由硬件中断向量调用的函数。在这两种情况下，中断处理程序都是用户代码，通常是 BSW 模块的一部分。因此中断处理程序是用户级的一段代码。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Interrupt Service Routine**
+> 在发生"中断"（**Interrupt**）时被调用的软件例程。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Interrupt Vector Table**
+> 中断向量表（**Interrupt Vector Table**）是一张中断向量表，它将中断服务程序与相应的中断请求关联起来（通常通过跳转数组或类似机制）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Intra-ECU-communication**
 > ECU内通信（**Intra-ECU-communication**）是驻留在同一ECU上的软件组件之间的通信。
 >
 > 来源：[AUTOSAR COM（COM模块）](cp/communication/com/index.md)（AUTOSAR_CP_SWS_COM）
+{: .glossary-source}
+
+**Intrusion Detection System**
+> 负责检测、记录和报告安全事件的系统。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Invalid Flag**
+> 对于 PDU 中的信号，可以在 PDU 有效载荷布局中添加一个可选的无效标志（**Invalid Flag**）。该标志指示有效载荷中其他信号的有效性。当某个信号的无效标志在 PDU 实例中被置为 true 时，该 PDU 实例有效载荷中的相应信号不包含有效的信号值。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Invalid Value of Signal**
+> 对于 PDU 中的信号，可以定义一个可选的无效值（**Invalid Value**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Inverse transformer**
@@ -3623,10 +4607,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Software Cluster Design and Integration Guideline for Classic Platform（经典平台软件集群设计与集成指南）](cp/system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline）
 {: .glossary-source}
 
+**Life Cycle**
+> 模型元素在其生存期内的发展/演化阶段历程。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **LIN**
 > 局部互联网络（**Local Interconnect Network**）。
 >
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
+{: .glossary-source}
+
+**LIN Bus Idle**
+> 总线空闲（**Bus Idle**）定义为 LIN 总线上隐性位与显性位值之间没有跳变的状态。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **LIN TP**（**LinTp**）
@@ -3639,6 +4635,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > LIN 接口（**LIN Interface**）
 >
 > 来源：[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
+{: .glossary-source}
+
+**Link State Accumulation**
+> 通过汇总端口组中每个端口的链路状态来累积某个交换机端口组的链路状态。汇总链路状态的规则在以太网接口（**Ethernet Interface**）中规定。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Link Time Configuration**
+> SW 模块的配置在链接期之前完成。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **LinSM**
@@ -3683,6 +4691,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）、[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
 
+**Log and Trace**
+> 日志与跟踪（**Log and Trace**）为应用提供接口，用于将日志和跟踪信息转发到通信总线、控制台或文件系统。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Log and trace level**
 > 日志级别为日志消息的严重程度定义了一种分类。
 >
@@ -3705,6 +4719,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 包含诸如状态变化或值变化之类调试信息的消息。
 >
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+{: .glossary-source}
+
+**Logging**
+> 日志记录（**Logging**）是在运行期间收集系统中任意的、不必然相关的事件信息的活动。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Logical Execution Time**
+> 是一个固定的时间区间。输入数据在该区间的开始处读取，输出数据在该区间的结束处写出。数据的处理被限制在该时间区间内。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Logical Supervision**
@@ -3841,10 +4867,28 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Communication Manager（通信管理器）](cp/system_services/comm/index.md)（SWS_COMManager）
 {: .glossary-source}
 
+**Manifest**
+> 清单（**Manifest**）表示为支持 AUTOSAR 自适应平台产品的配置而创建的一段 AUTOSAR 模型描述，它被上传到 AUTOSAR 自适应平台产品，可能与其他包含清单所适用可执行代码的制品（如二进制文件）一起上传。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **MAPEM**
 > **MAP** 扩展消息（**MAP Extended Message**）。
 >
 > 来源：[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
+{: .glossary-source}
+
+**Mappable Element**
+> 可映射元素（**Mappable Element**）是 MCAL 模块的一部分，可以通过该模块基础软件模块描述中的引用参数将其分配到某个分区。可映射元素允许以形式化方式描述 MCAL 模块在分区（以及核）上的可用性/分布方式。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Mapping**
+> 映射（**Mapping**）指定逻辑视图中的元素到物理视图中的元素的分布。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Master**
@@ -3859,6 +4903,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**Master Switch**
+> 主交换机（**Master Switch**）是宿主端口所在的以太网交换机。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Maximum frame length**
 > 最大帧长度是 ISO 17987-3 [6] 中定义的 **T_FRAME_MAX**（即标称帧长度加上 40%）。
 >
@@ -3869,6 +4919,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 微机抽象层（**Microcomputer Abstraction Layer**）
 >
 > 来源：[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR BSW General（基础软件模块通用规范）](cp/general/bsw_general/index.md)（SWS_BSWGeneral）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR CAN Driver（CAN驱动程序）](cp/communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）、[AUTOSAR TTCAN Driver（TTCAN 驱动程序）](cp/communication/ttcan_driver/index.md)（AUTOSAR_CP_SWS_TTCANDriver）
+{: .glossary-source}
+
+**MCAL Signal**
+> MCAL 信号（**MCAL Signal**）是"处理后的信号"（**Conditioned Signal**）的软件表示。它由微控制器抽象层（**MCAL**）提供，并由 ECU 抽象进一步处理。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **MCD**
@@ -3943,6 +4999,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
 {: .glossary-source}
 
+**Meta-data**
+> 元数据（**Meta-data**）是关于数据的数据。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Meta-model**
 > 元模型（**Meta-model**）。定义建模语言本身的模型层（M2）；抽象平台复用 AUTOSAR 元模型，通过平台特定限制约束其工件。
 >
@@ -3985,6 +5047,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Specification of Fixed Point Math Routines（定点数学例程规范）](cp/libraries/mfx/index.md)（AUTOSAR_CP_SWS_MFXLibrary）
 {: .glossary-source}
 
+**Microcontroller**
+> 在单个芯片（包括存储器）中集成计算与通信资源以及外围电路的硬件元素。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Microcontroller Abstraction Layer**
+> 包含各类驱动程序的软件层，通过已定义的"应用编程接口"（**Application Programming Interface**）实现对微控制器片上外设和片下存储器映射外设的访问。任务：使较高的软件层次独立于微控制器。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **MII**
 > 媒体独立接口（**Media Independent Interface**，由以太网控制器提供的用于访问以太网收发器的标准化接口，参见 IEEE 802.3-2006）。
 >
@@ -4019,6 +5093,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 汽车工业软件可靠性协会（**Motor Industry Software Reliability Association**）。
 >
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](cp/communication/xcp/index.md)（SWS_XCP）
+{: .glossary-source}
+
+**Mistake**
+> 人为错误。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Mixed addressing format**
@@ -4183,6 +5263,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）
 {: .glossary-source}
 
+**Multimedia Stream**
+> 随时间变化的一致的数字数据序列，适合作为那些将这些数据转换为对人类连续可见或可听印象的设备的输入。通过物理链路传输时，多媒体流数据通常以与数据汇消耗它们相同的速率（由数据源）产生。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Multiple connection**
 > CAN传输层应同时管理多个传输协议通信会话。
 >
@@ -4193,6 +5279,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 见IpduM I-PDU。
 >
 > 来源：[AUTOSAR IpduM（I-PDU多路复用器）](cp/communication/ipdum/index.md)（AUTOSAR_CP_SWS_IPDUMultiplexer）
+{: .glossary-source}
+
+**Multiplexed PDU**
+> 多路复用 PDU（**Multiplexed PDU**）是具有可配置数量的不同有效载荷布局的 PDU。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 ## N
@@ -4329,10 +5421,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](cp/globaltime/eth_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverEthernet）
 {: .glossary-source}
 
+**Network**
+> AUTOSAR ECU/机器之间的通信基础设施。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **network**
 > 连接到同一总线的所有NM节点/ECU的实体。
 >
 > 来源：[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**Network Interface**
+> 网络接口（**Network Interface**）是"基础软件"（**Basic Software**）向其所连接的网络提供的全部接口的总和。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Network Mode**
@@ -4357,6 +5461,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 通用网络管理接口模块，本规范全文中用它作为该模块的缩写。
 >
 > 来源：[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+{: .glossary-source}
+
+**NM Coordination Cluster**
+> 协调关机的一组离散 NM 信道（**NM Channel**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**NM Coordinator**
+> 通用 NM 接口（**Generic NM Interface**）的一种功能，允许多个 NM 信道之间协调网络休眠。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **NM Message**
@@ -4441,6 +5557,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 节点与一个通道的连接。
 >
 > 来源：[AUTOSAR J1939Nm（SAE J1939 网络管理）](cp/communication/j1939nm/index.md)（AUTOSAR_CP_SWS_SAEJ1939NetworkManagement）
+{: .glossary-source}
+
+**Non-repudiation**
+> 信息安全中使用的一种概念，确保信息发送方获得送达证明，接收方获得发送方身份证明，从而使双方事后都不能否认处理过该信息。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **nop**
@@ -4673,6 +5795,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Key Manager（密钥管理器）](cp/crypto/key_manager/index.md)（SWS_KeyManager）
 {: .glossary-source}
 
+**Onboard Security Event**
+> 类比 ISO/IEC 27000:2018（[44]），车载安全事件（**SEv**）是已识别的车载系统、服务或网络状态的出现，它指示可能违反信息安全策略或控制措施失效，或者是先前未知的、可能具有安全相关性的情形。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **OOP**
 > 离位（**Out Of Position**）
 >
@@ -4725,6 +5853,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 操作系统（**Operating System**）
 >
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）、[Requirements on Debug Trace Profile（调试跟踪配置文件需求）](foundation/communication_management/rs_debug_trace_profile/index.md)（AUTOSAR_FO_RS_DebugTraceProfile）
+{: .glossary-source}
+
+**OS Application**
+> 包括任务、中断、钩子和用户服务在内、构成一个内聚功能单元的软件块。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**OS Event**
+> 事件机制：• 是一种同步手段 • 仅为扩展任务提供 • 引发任务在等待状态之间进行状态转换。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **OSEK/VDX**
@@ -4813,6 +5953,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）
 {: .glossary-source}
 
+**Partitioning**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.85
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **PASE**
 > 无源进入（**Passive Entry**）。帮助用户无需物理使用钥匙即可进入汽车的锁定系统。
 >
@@ -4873,10 +6019,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[Layered Software Architecture（分层软件架构）](cp/general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[VFB（虚拟功能总线）](cp/general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](cp/communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR PduR (PDU Router)](cp/communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](cp/diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）、[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）
 {: .glossary-source}
 
+**PDU Meta-Data**
+> "协议数据单元"（**Protocol Data Unit**）的附加数据，不属于有效载荷。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **PDU Router**
 > PDU路由器是在模块之间传输I-PDU的模块。PDU路由器可用于网关操作和内部路由目的。
 >
 > 来源：[AUTOSAR COM（COM模块）](cp/communication/com/index.md)（AUTOSAR_CP_SWS_COM）、[Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](foundation/protocols/prs_intrusion_detection_system/index.md)（AUTOSAR_FO_PRS_IntrusionDetectionSystem）
+{: .glossary-source}
+
+**PDU Timeout**
+> 超过一个 PDU 的两个实例被接收之间的最大时间。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **PDU1**
@@ -4939,10 +6097,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
+**Peripheral Hardware**
+> 集成在微控制器架构中、用于与环境交互的硬件设备。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Permission state**
 > 许可状态：包含由其 **FID** 表示的功能是否可以执行的信息。该状态由 **FiM** 基于已报告的事件控制。
 >
 > 来源：[AUTOSAR FiM（功能禁止管理器）](cp/system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）
+{: .glossary-source}
+
+**Personalization**
+> 用户特定的、被记忆保存的 SW 数据调整或功能备选项选择。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **PFC cycle**
@@ -5023,6 +6193,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
+**Plausibility**
+> 运行时合理性检查（**Plausibility**）是一种在运行期间验证计算/算法的输入或结果相对于简化参考模型的对应值是否合理的方法。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **PLC**
 > 导引线通信（**Pilot Line Communication**）。
 >
@@ -5083,6 +6259,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Network Management Protocol Specification（网络管理协议规范）](foundation/protocols/prs_network_management_protocol/index.md)（AUTOSAR_FO_PRS_NetworkManagementProtocol）
 {: .glossary-source}
 
+**PNC Leaf Node**
+> PNC 叶节点（**PNC Leaf Node**）位于"顶层 PNC 协调器"（**Top-level PNC Coordinator**）或"中间 PNC 协调器"（**Intermediate PNC Coordinator**）之下。PNC 叶节点代表 PN 拓扑层级中的最低层级。PNC 叶节点不跨其本地通信信道协调 PNC 请求。它接收和发送带 PN 信息的 Nm 帧，但不将收到的 PNC 请求转发到其他本地通信信道。PNC 叶节点将 PN 关机报文当作普通的带 PN 信息的 Nm 帧处理。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **PNC leaf node**
 > PNC叶节点是既不充当顶层PNC协调器也不充当中间PNC协调器的ECU。它在网络中充当没有PNC网关的ECU，并将PN关闭消息作为普通NM消息处理。
 >
@@ -5131,6 +6313,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interfaces of Occupant and Pedestrian Safety Systems Domain（乘员与行人安全系统域应用接口说明）](cp/application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety）
 {: .glossary-source}
 
+**Policy Decision Point (PDP)**
+> PDP（策略决策点）表示做出访问控制决策的逻辑。它确定是否允许应用执行所请求的任务。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Policy Enforcement Point (PEP)**
+> PEP（策略执行点）表示执行"访问控制判定"（**Access Control Decision**）的逻辑。它直接与相应的"策略决策点（**Policy Decision Point (PDP)**）"通信以接收访问控制判定。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Port**
 > Port module (SPAL module)
 >
@@ -5143,6 +6337,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
 {: .glossary-source}
 
+**Port Interface**
+> 端口接口（**Port Interface**）刻画"软件组件"（**Software Component**）的某个"端口"（**Port**）所提供或所需的信息。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Port-Interface**
 > 端口接口。定义提供或要求该接口的端口必须履行的契约；AUTOSAR 支持客户端-服务器、发送者-接收者、参数、非易失性数据、触发与模式切换六种端口接口。
 >
@@ -5153,6 +6353,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 如果需要在 Dem_Init 和 Dem_Shutdown 之间存储数据，**Dem** 模块应使用 **NVRAM** 管理器的 **API** NvM_WriteBlock 和 NvM_GetErrorStatus。此外，**API** NvM_GetErrorStatus 应等待块写入成功完成的肯定响应。
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**Post-build Hooking**
+> 将便于快速原型支持的钩子（**Hook**）插入（完整的）ECU hex 镜像。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Post-build Time Configuration**
+> SW 模块的配置可以在构建 SW 模块之后进行。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **POTI**
@@ -5179,6 +6391,30 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](cp/communication/cellularv2x_driver/index.md)（AUTOSAR_CP_SWS_CellularV2XDriver）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
 {: .glossary-source}
 
+**Pre-build Hooking**
+> 在创建 ECU hex 镜像之前，将便于快速原型支持的钩子（**Hook**）插入软件源代码。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Pre-Compile Time Configuration**
+> SW 模块的配置在源代码级别完成，并在编译期之后生效。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Predictabiliy**
+> 可预测性（**Predictability**）是指能够对系统的状态/行为做出正确的定性或定量预测或预估的程度。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Pretended Networking**
+> 在不改变网络基础设施的情况下，降低现有活动网络中能耗的方法。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **PRF**
 > 伪随机函数（**Pseudo Random Function**）。
 >
@@ -5203,16 +6439,76 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Crypto Driver（加密驱动程序）](cp/crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](cp/crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR CAN Driver（CAN驱动程序）](cp/communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）、[AUTOSAR Crypto Service Manager（加密服务管理器）](cp/crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
+**Private Interface**
+> 私有接口（**Private Interface**）是 AUTOSAR"基础软件"（**Basic Software**）内部的接口，既未被标准化也未在 AUTOSAR 中定义。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Probability of Failure**
+> 系统或功能单元中发生失效（**Failure**）的概率。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Procedure Call**
+> 一种简单的语句，它为过程（软件函数）的执行提供实际参数并调用该执行。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Process**
+> 由操作系统调度器管理的可执行单元，它拥有自己的命名空间和资源（包括内存），并受保护不被其他进程使用。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Processed Manifest**
+> 已处理清单（**Processed Manifest**）是以实现特定格式存储在 AUTOSAR 自适应平台产品上的清单。通常这与其他包含清单所适用可执行代码的制品（如二进制文件）一起完成。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Processing**
 > 处理：指示作业处理的类型。异步（**Asynchronous**）：调用相应函数时作业不会被立即处理，通常由后续的调度函数处理并通过回调通知结果；同步（**Synchronous**）：调用相应函数时作业被立即处理，函数返回时结果已可用。
 >
 > 来源：[AUTOSAR Crypto Interface（加密接口）](cp/crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Crypto Service Manager（加密服务管理器）](cp/crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
 {: .glossary-source}
 
+**Profiling**
+> 性能剖析（**Profiling**）指评估"性能"（**Performance**）的过程。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Protocol Control Information**
+> 将"服务数据单元"（**Service Data Unit**）从一个特定协议层的实例传递到另一个实例所需的信息。例如它包含源和目标信息。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Protocol Data Unit**
+> 协议数据单元（**Protocol Data Unit**, PDU）包含"服务数据单元"（**Service Data Unit**）和"协议控制信息"（**Protocol Control Information**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Prototype**
 > 原型。组件类型在一个组合（Composition）中的使用；组合经由相互连接的原型定义。
 >
 > 来源：[VFB（虚拟功能总线）](cp/general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）
+{: .glossary-source}
+
+**Proven In Use Argument**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.90
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Provide Port**
+> 提供数据或提供服务器服务的特定"端口"（**Port**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Proxy Module**
@@ -5291,6 +6587,30 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）
 {: .glossary-source}
 
+**Rapid Prototyping**
+> 以实验方式并入新功能。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Rapid Prototyping Memory Interface**
+> "快速原型工具"（**Rapid Prototyping Tool**）所必需的内存访问模式。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Rapid Prototyping Tool**
+> 支持"快速原型"（**Rapid Prototyping**）的软件和/或硬件工具。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Rate Conversion**
+> 改变同一 PduId 在一个物理网络上两次传输之间时序的操作。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Rate Correction**
 > 补偿速率偏差所需的因子。
 >
@@ -5301,6 +6621,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 速率偏差值表示时钟的频率偏离参考时钟速率的程度。
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
+{: .glossary-source}
+
+**Raw Data Stream**
+> 原始数据流（**Raw Data Stream**）是未处理的数据集合，基本上是一系列字节，不带有任何关于如何解释它们的信息。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **RBM cycle**
@@ -5321,6 +6647,24 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
 {: .glossary-source}
 
+**Recovery**
+> 在故障检测后恢复到预期功能，而不违反安全目标。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Redundancy**
+> 在足以使元素执行所需功能或表示信息的手段之外，还存在额外的手段。硬件元素冗余包括为支持容错而添加到系统中的复制或附加的硬件手段。软件元素冗余包括用于支持容错的附加软件单元和/或数据。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Reentrancy**
+> 在 AUTOSAR 中，如果一个函数可以在其执行过程中被中断，并且在其先前的调用完成执行之前被安全地再次调用（"重入"），则该函数称为可重入函数。AUTOSAR 区分：•（完全）可重入 • 不可重入 • 条件可重入。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Reference time**
 > 参考时间：为每个计时器实例存储的时间值，是 **API** 数据类型 Tm_PredefTimer...bitType 所对应的实现特定元素。
 >
@@ -5337,6 +6681,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 评估由于不确定性而对系统的可信程度。
 >
 > 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+{: .glossary-source}
+
+**Relocatability**
+> 软件部件能够在不同硬件环境中执行而不改变该软件部件代码的能力。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Remote Procedure Call**
@@ -5357,6 +6707,24 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](cp/communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
 {: .glossary-source}
 
+**Require Port**
+> 需要数据或需要服务器服务的特定"端口"（**Port**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Required Property**
+> 设计实体（例如软件组件或系统）的"被要求的属性或质量"（**Required Property**）是指必须由该设计实体的环境来满足的属性或质量。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Residual Error Rate**
+> 接收错误且未被检测到的位、单元元素或块的数量，除以已发送的位、单元元素、字符或块的总数所得的比值。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Resolution**
 > 分辨率（**Resolution**）属性适用于依赖于范围和数据类型的许多类别。如：(upperLimit - lowerLimit) / (2<sup>datatypelength</sup> -1)。 对于其他类别，它可能是已知和被定义的。如：[-12 Volts…+12Volts]，数据类型: 16 bits，**Resolution** 为 24 / 65535。
 >
@@ -5369,10 +6737,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）
 {: .glossary-source}
 
+**Resource-Management**
+> 控制"资源"（**Resource**）使用的实体。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Response**
 > 服务器发给客户端、传输方法调用结果的消息。
 >
 > 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](cp/communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
+{: .glossary-source}
+
+**Response Time**
+> 从接收激励到交付适当响应或反应之间的时间。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **REST Services Interface**
@@ -5393,6 +6773,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
+**Risk**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.99
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **RKE**
 > 遥控无钥匙进入（**Remote Keyless Entry**）。设计用于远程锁定或解锁汽车进入的系统；单向广播无线电波，实现加密与滚动码算法。
 >
@@ -5409,6 +6795,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 随机数发生器（**Random Number Generator**）。
 >
 > 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+{: .glossary-source}
+
+**Robustness**
+> 系统或功能单元即使在意外条件下也能按预期执行的能力。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **ROD**
@@ -5507,10 +6899,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR J1939Nm（SAE J1939 网络管理）](cp/communication/j1939nm/index.md)（AUTOSAR_CP_SWS_SAEJ1939NetworkManagement）、[AUTOSAR J1939Rm（SAE J1939 请求管理器）](cp/communication/j1939rm/index.md)（AUTOSAR_CP_SWS_SAEJ1939RequestManager）、[AUTOSAR J1939Tp（SAE J1939 传输层）](cp/communication/j1939tp/index.md)（AUTOSAR_CP_SWS_SAEJ1939TransportLayer）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
 {: .glossary-source}
 
+**RTE Event**
+> RTE 事件（**RTE Event**）涵盖能够触发 RTE 执行"可运行实体"（**Runnable Entity**）的所有可能情形。因此它们可以涉及时序、数据发送与接收、操作调用、服务器调用返回、模式切换或外部事件。RTE 事件可以激活一个可运行实体，或在其等待点唤醒一个可运行实体。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Runnable**
 > 可运行体。原子软件组件实现中的一段可由 RTE 启动的指令序列；在任务的上下文中运行。
 >
 > 来源：[VFB（虚拟功能总线）](cp/general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）
+{: .glossary-source}
+
+**Runnable Entity**
+> 可运行实体（**Runnable Entity**）是"原子软件组件"（**Atomic Software Component**）的一部分，可以独立于该原子软件组件的其他可运行实体被执行和调度。它由一串可由 RTE 启动的指令描述。每个可运行实体恰好关联一个"入口点"（**Entry Point**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Runnable entity**
@@ -5575,6 +6979,60 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）
 {: .glossary-source}
 
+**SAE J1939**
+> SAE J1939 是由 SAE（美国汽车工程师学会，美国的标准机构）为轿车和重型卡车行业创建的车载总线标准。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Safe State**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.102
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Safety**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.103
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Safety Analysis**
+> 安全分析的目的是在考虑其功能、行为和设计的前提下，检查故障和失效对项目与元素造成的后果。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Safety Case**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.106
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Safety Goal**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.108
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Safety Measure**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.110
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Safety Mechanism**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.111
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Safety Protocol**
+> 一种通信协议，定义了确保所传输数据完整性并检测任何与通信相关错误所需的机制。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **SAI**
 > 安全关联标识符（**Secure Association Identifier**）。
 >
@@ -5585,6 +7043,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 安全关联密钥（**Secure Association Key**）。
 >
 > 来源：[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
+{: .glossary-source}
+
+**Sample Application**
+> 用于评估目的的已定义系统。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Sampling rate**
@@ -5629,10 +7093,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）
 {: .glossary-source}
 
+**Scalability**
+> 资产能够按各种已定义的度量被适配到特定目标环境的程度。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Schedule entry is due**
 > 这意味着 LIN 接口已到达调度表中的新条目，并且将启动一个帧（接收或发送）。
 >
 > 来源：[AUTOSAR LinIf (LIN Interface)](cp/communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
+{: .glossary-source}
+
+**Scheduler**
+> 调度器（**Scheduler**）根据优先级和调度策略（预定义的或可配置的）处理任务/可运行实体（"任务"（**Task**）/"可运行实体"（**Runnable Entity**））的调度。它负责在运行期间决定哪个任务何时可以在 ECU 的 CPU 上运行。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **SchM**
@@ -5725,16 +7201,28 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
 {: .glossary-source}
 
+**Secure Channel**
+> 安全通道（**Secure Channel**）是两方之间的通信信道。安全通道至少应提供通信的完整性和真实性。它应提供至少对通信一方进行身份验证的手段。它可以提供对通信双方进行相互身份验证的手段。安全通道还可以额外提供通信的机密性。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Secured I-PDU**（受保护的 I-PDU）
 > 受保护的 I-PDU 是一个 AUTOSAR I-PDU，它包含可信 I-PDU 的负载并附加了额外的认证信息。
 >
 > 来源：[AUTOSAR SecOC (Secure Onboard Communication)](cp/communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）
 {: .glossary-source}
 
+**Security**
+> 保护数据、软件实体或资源免受意外或恶意行为的影响。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Security Event**
 > 安全事件（**Security Event**）——由 **IdsM** 检测并上报的安全相关的观测事件，由安全提取定义和配置。
 >
-> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）、[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
+> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）、[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Security Event Type**
@@ -5779,10 +7267,28 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
 {: .glossary-source}
 
+**Sender-Receiver Communication**
+> 一种通信模式，它提供信息的异步分发：发送方将信息传送给一个或多个接收方，或接收方从一个或多个发送方接收信息。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Sender-receiver communication**
 > 发送方-接收方通信涉及原子数据元素组成的信号的发送和接收，这些原子数据元素由一个组件发送给另一个或多个组件。发送方-接收方接口可以包含多个数据元素。发送方-接收方通信是单向的 接收方发送的任何回复都可以视为一个单独的发送方-接收方通信。接收方组件的端口可以读取接口描述定义的数据元素，而提供方组件的端口可以按照接口描述定义写入数据元素。
 >
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）
+{: .glossary-source}
+
+**Sender-Receiver Interface**
+> 发送方-接收方接口（**Sender-Receiver Interface**）是一种特殊的"端口接口"（**Port Interface**），用于"发送方-接收方通信"（**Sender-Receiver Communication**）的情形。发送方-接收方接口定义了由发送组件（拥有提供该发送方-接收方接口的 p 端口）发送、或由接收组件（拥有需要该发送方-接收方接口的 r 端口）接收的数据元素。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Sensor/Actuator SW-Component**
+> 专用于控制传感器或执行器的"软件组件"（**Software Component**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **SEooC**
@@ -5821,6 +7327,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Crypto Driver（加密驱动程序）](cp/crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](cp/crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Key Manager（密钥管理器）](cp/crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR SomeIpXf（SOME/IP转换器）](cp/communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）、[AUTOSAR Crypto Service Manager（加密服务管理器）](cp/crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）、[Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）](foundation/protocols/rs_someip_service_discovery_protocol/index.md)（AUTOSAR_FO_RS_SOMEIPServiceDiscoveryProtocol）
 {: .glossary-source}
 
+**Service Data Unit**
+> 服务数据单元（**Service Data Unit**）是上层为请求传输而传递的数据。它也是下层在接收后提取并传递给上层的数据。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Service Discovery**
+> 由通信管理（**Communication Management**）向应用提供的通用功能，允许应用在运行时找到提供所请求服务的、本地或远程可用的服务实例。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Service Instance**
 > 服务（**Service**）的单个实例。
 >
@@ -5831,6 +7349,36 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 服务的形式化规范，包括其方法、事件和字段。
 >
 > 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](cp/communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
+{: .glossary-source}
+
+**Service Oriented Communication**
+> 通信伙伴一般不在设计期定义、而是在运行期间动态发现和绑定的通信。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Service Port**
+> "原子软件组件"（**Atomic Software Component**）的一种特殊"端口"（**Port**），用于描述服务通信。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Service Proxy**
+> 从服务消费者的角度在代码级别代表特定服务的一个外观（**facade**），它为所代表服务提供的所有功能提供了相应的方法。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Service Skeleton**
+> 从服务实现的角度在代码级别对特定服务的表示，它按照服务定义提供功能，并允许将服务实现连接到通信管理的传输层，使服务实现能够被服务消费者联系。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Services Layer**
+> 服务层（**Services Layer**）是基础软件的最高层，这也决定了它与应用软件的相关性：对 I/O 信号的访问由硬件抽象层负责，而服务层提供：操作系统服务、车辆网络通信与管理服务、存储服务（NVRAM 管理）、诊断服务（包括 KWP2000 接口和错误存储器）、ECU 状态管理。任务：为应用和基础软件模块提供基础服务。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Session**
@@ -5935,6 +7483,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR IpduM（I-PDU多路复用器）](cp/communication/ipdum/index.md)（AUTOSAR_CP_SWS_IPDUMultiplexer）
 {: .glossary-source}
 
+**Signal Service Translation**
+> 信号服务转换（**Signal Service Translation**）是将基于信号的通信的定义映射到面向服务的通信、以及反向映射的标准化方式。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **SIL**
 > 安全完整性等级（**Safety Integrity Level**），**IEC 61508** 定义。
 >
@@ -5957,6 +7511,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 系统级逻辑执行时间（**System Level Logical Execution Time**）——跨平台描述时间确定性数据流的 **LET** 扩展，指向被交换的数据类型。
 >
 > 来源：[Requirements on Timing Extensions（时序扩展需求）](foundation/methodology_templates/rs_timing_extensions/index.md)（AUTOSAR_FO_RS_TimingExtensions）
+{: .glossary-source}
+
+**Slave Switch**
+> 从交换机（**Slave Switch**）是通过上行端口连接到主交换机的以太网交换机。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Slave-to-slave**
@@ -6013,6 +7573,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
 {: .glossary-source}
 
+**Software Cluster (Adaptive Platform)**
+> 自适应平台软件集群（**Software Cluster**）将所有与在自适应平台机器（**Machine**）上部署相关的 AUTOSAR 制品分组在一起。软件集群的内容取决于其类别，"可以"（但不限于）包含诸如以下制品：• 自适应平台应用（可执行文件） • 自适应平台功能簇（模块） • 清单 • 持久化存储数据库 • 平台库，例如转换器（**Transformers**）、加密（**Cryptographics**） • 引导加载程序
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Software Cluster Connection**
 > 提供以下特性的 BSW 模块：连接部署在同一机器上的二进制对象、通过代理模块替代应用软件集群中缺失的 BSW 模块、与 RTE 一起通过 RTE 实现插件实现软件集群之间的 VFB 通信（**Software Cluster Connection**）。
 >
@@ -6025,10 +7591,58 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
 {: .glossary-source}
 
+**Software Component**
+> 软件组件（**Software Component**）是提供和/或需要接口的架构元素，它们通过虚拟功能总线彼此连接，以履行架构职责。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Software Component Interface**
+> 软件组件接口（**SW-CI**）是"基础软件"（**Basic Software**）向"软件组件"（**Software Component**）提供的全部接口的总和。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Software Configuration**
+> SW 系统中软件元素的布置。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Software Interrupt**
+> 由软件事件触发的中断。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Software Package**
+> 用于将软件部署到自适应 AUTOSAR 平台实例上的单元，包含零个或多个可执行文件以及在该机器（**Machine**）上安装和执行它们的元数据。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Software Platform**
+> 执行应用软件的软件环境。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Software Signal**
+> 软件信号（**Software Signal**）是在进程与进程之间传输的异步事件。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Software Trigger**
 > 软件触发是一个软件**API**调用，用于启动转换一个**ADC**通道组或一系列连续**ADC**通道组转换的。
 >
 > 来源：[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）
+{: .glossary-source}
+
+**Software Unit**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.125
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **SOME/IP**
@@ -6089,6 +7703,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 安全协议数据单元（**Secured protocol data Unit**）。
 >
 > 来源：[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）
+{: .glossary-source}
+
+**Special Periphery Access**
+> 访问标准外设设备或特殊外设的特殊函数。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **SPEM**
@@ -6211,10 +7831,52 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](cp/application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis）
 {: .glossary-source}
 
+**Standard Periphery Access**
+> 针对汽车嵌入式应用中使用的 ECU（大多数为微控制器集成）上可用的典型标准外设设备的标准函数。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Standard Software**
+> 标准软件（**Standard Software**）是在 ECU 上提供独立于原理图的基础设施功能的软件。它只包含标准化的 AUTOSAR 接口（**Standardized AUTOSAR Interface**）、标准化接口（**Standardized Interface**）和/或私有接口（**Private Interface**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Standardized AUTOSAR Blueprint**
+> 标准化 AUTOSAR 蓝图（**Standardized AUTOSAR Blueprint**）是在 AUTOSAR 项目内标准化的"蓝图"（**Blueprint**）。其派生对象也被视为在 AUTOSAR 项目内标准化。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Standardized AUTOSAR Interface**
+> 这是在 AUTOSAR 项目内标准化的 AUTOSAR 接口（**AUTOSAR Interface**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Standardized Blueprint**
+> 如果"蓝图"（**Blueprint**）的派生对象也被视为标准化，则该蓝图称为标准化蓝图（**Standardized Blueprint**）。它还包括：额外存在具体的标准化规则，规定如何规定蓝图以及如何从该蓝图派生对象。这通常不是针对某个特定蓝图，而是针对同一类的所有蓝图进行的。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Standardized Interface**
+> 如果存在具体的标准化 API，则软件接口称为标准化接口（**Standardized Interface**）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **State Management (SM)**
 > 状态管理（**State Management**）。
 >
 > 来源：[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）
+{: .glossary-source}
+
+**Static Configuration**
+> 路由配置在网关正常运行期间无法改变的设置。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **static part**
@@ -6385,6 +8047,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](cp/globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
+**Synchronization Points**
+> 用于同步在同一 LET 区间内执行的不同任务的 EE 的执行。同步点（**Synchronization Point**）实现属于不同 EEC 的 EE 的执行顺序。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Synchronize**
+> 使两个或多个事件或操作在同一预定义时刻发生。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Synchronized Time Base**
 > 通过 Timesync 报文与其他节点上的时基同步的时基，由时基标识符 0..127 标识。
 >
@@ -6397,10 +8071,34 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](cp/communication/flexray_driver/index.md)（SWS_FlexRayDriver）
 {: .glossary-source}
 
+**Synchronous Communication**
+> 当调用方软件实体被阻塞、直到被调用的操作完成求值时，该通信是同步的。调用方软件实体通过获得结果继续其操作。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Synchronous Function**
+> 如果某函数所描述的功能在该函数返回调用者时保证已完成，则该函数称为同步函数。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **SyncLocal Time Tuple**
 > 时间元组 [TL_Sync, TV_Sync]，在 TV_Sync 时刻导出，或按公式 7.1 计算，或在支持时从受控硬件时钟导出。
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
+{: .glossary-source}
+
+**System**
+> 车辆中软件相关部分的表示，以及它们彼此通信的方式。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**System Constraint**
+> 限制（汽车 E/E）系统设计自由度的边界条件。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **System Description**
@@ -6409,16 +8107,34 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Specification of Abstract Platform（抽象平台规范）](foundation/methodology_templates/tps_abstract_platform_specification/index.md)（AUTOSAR_FO_TPS_AbstractPlatformSpecification）
 {: .glossary-source}
 
+**System Health Monitor**
+> 系统健康监控器（**System Health Monitor**, SHM）分析子系统的健康状况。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **System Health Monitor (SHM)**
 > **系统健康监控器**组件允许在若干 **Classic**、**Adaptive** 或任意第三方平台之间对错误处理进行系统级协调。
 >
 > 来源：[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
 
+**System Signal**
+> 系统信号（**System Signal**）表示通信系统对驻留在不同 ECU 上的 SW 组件之间交换的数据的视图。系统信号允许以扁平化的结构表示这种通信，为每个 SW 组件实例发送或接收的数据元素定义（至少）一个系统信号。如果数据必须经由网关发送，仍然只有一个系统信号表示该数据。数据在各个通信系统上的表示由簇信号（**Cluster Signal**）完成。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **System User**
 > 一种管理功能（一个在 ComM 内部上下文中生成的特定「用户」），用于发起默认请求以及覆盖用户请求（**An administration functionality for making a default request and for overriding the user requests**）。
 >
 > 来源：[AUTOSAR Communication Manager（通信管理器）](cp/system_services/comm/index.md)（SWS_COMManager）
+{: .glossary-source}
+
+**Systematic Fault**
+> 参见 ISO-DIS-26262-Part-1（[7]），ID 1.131
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Systems Modelling Language**
@@ -6433,6 +8149,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 目标时间：到达该值时应有某事发生。其行为取决于配置和已启用的功能。
 >
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）
+{: .glossary-source}
+
+**Task**
+> 任务（**Task**）是由 OS 管理的最小可调度单元。OS 决定哪个任务何时可以在 ECU 的 CPU 上运行。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **TC**
@@ -6469,6 +8191,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 牵引力控制系统（**Traction Control System**）
 >
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](cp/application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis）
+{: .glossary-source}
+
+**Technical Signal**
+> 技术信号（**Technical Signal**）是与 AUTOSAR 系统耦合的外部事件的物理值。技术信号以 SI 单位表示（例如压力以 Pa 表示）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **test interval**
@@ -6537,6 +8265,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
 
+**Timed Communication**
+> 在 LET 区间末尾逻辑发布、在 LET 区间开头逻辑读取的隐式通信。对于通过 EEC 引用该 LET 区间的所有 EE，都可以访问定时通信（**Timed Communication**）缓冲区。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Timeout**
+> 针对事件或任务的截止期限违反而给出的通知（例如在处理信息期间：接收、发送、处理等）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Timer channel**
 > 表示分配给一个定时器硬件的逻辑定时器实体。
 >
@@ -6595,6 +8335,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 发送机会（**Transmit Opportunity**）。
 >
 > 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](cp/communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）
+{: .glossary-source}
+
+**Top-level PNC Coordinator**
+> 顶层 PNC 协调器（**Top-level PNC Coordinator**）是 PN 拓扑中的最顶层协调器，是构成特定 PNC 的逻辑部分网络集群的有向无环图的唯一根。顶层 PNC 协调器负责所有 PNC 成员的协调关机，因为它是唯一拥有所有 PNC 状态完整概览的节点。只有 PNC 顶层协调器才允许发送 PN 关机报文。注意，对于不同的 PNC，可以有不同的顶层 PNC 协调器。对于同一个 PNC，只支持一个顶层协调器。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Top-level PNC coordinator**
@@ -6667,6 +8413,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 提供是否应发送跟踪消息的信息。
 >
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+{: .glossary-source}
+
+**Tracing**
+> 跟踪（**Tracing**）是在一定时间段内记录程序在系统中的可观测状态和执行路径的活动。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Transaction authentication**（事务认证）
@@ -6881,6 +8633,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
 {: .glossary-source}
 
+**Uplink Port**
+> 上行端口（**Uplink Port**）是汽车以太网交换机上连接到另一台汽车以太网交换机（级联交换机）的端口。上行端口可以是内部端口或外部端口。一个上行端口连接到另一个上行端口。从软件的角度看，上行端口具有特殊角色。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Upper Layer Modules（Up）**
 > 位于 L-SDU Router 之上的模块。该层通常包括 **IEEE1722Tp**。
 >
@@ -6891,6 +8649,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > Uniform Resource Locator —— 统一资源定位符。
 >
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](cp/communication/xcp/index.md)（SWS_XCP）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
+{: .glossary-source}
+
+**Use Case**
+> 用例（**Use Case**）定义了一组动作，用于刻画参与者与系统之间为达成某个目标而进行的交互。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **User**
@@ -6967,10 +8731,40 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](foundation/protocols/prs_v2x_remote_access_layer/index.md)（AUTOSAR_FO_PRS_V2XRemoteAccessLayer）
 {: .glossary-source}
 
+**Validation**
+> 通过检查和提供客观证据，确认针对特定预期用途的特定要求已得到满足。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Variability**
+> 系统的可变性（**Variability**）是系统描述一组变体的性质。这些变体的特征是变体特定的属性设置和/或选择。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Variant**
 > 由 **TransformationTechnology** 和 **EndToEndTransformationDescription** 的配置定义的转换器变体。基于同一变体的 **E2E** 转换器使用相同的 **E2E** 配置文件（profile）（参见 [4] 中的 **constr_03313**）。
 >
 > 来源：[E2E Transformer (E2E转换器)](cp/communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）
+{: .glossary-source}
+
+**Variant Coding**
+> 根据外部需求（例如国家相关或法律限制），通过选择功能备选项来调整软件。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Variation Binding**
+> 变体是变体绑定（**Variation Binding**）过程的结果，该过程通过为系统的所有属性赋以特定的取值/选择来消解系统的可变性。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Variation Binding Time**
+> 变体绑定时间（**Variation Binding Time**）确定方法论中由一组可变属性给出的可变性被消解的步骤。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **Variation Point**
@@ -7003,10 +8797,34 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）
 {: .glossary-source}
 
+**Vehicle State Manager**
+> 控制整车级别状态、并与车辆系统中各实体交互的 OEM 特定应用。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Vehicle Variant**
+> 车辆变体（**Vehicle Variant**）是一个被完整刻画的产品，是产品线制品的子集。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Vendor ID**
+> 供应商 ID（**Vendor ID**）是软件组件供应商的唯一标识。所有符合 AUTOSAR 标准的基础软件模块（**Basic Software Module**）都应提供一个可读的供应商 ID。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **VERB**
 > Verbose —— 详细模式。
 >
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+{: .glossary-source}
+
+**Verification**
+> 通过检查和提供客观证据，确认规定的要求已得到满足。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **VERS**
@@ -7019,6 +8837,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 虚拟功能总线（**Virtual Functional Bus**）。AUTOSAR 中允许组件相互交互的通信机制；应用被建模为相互连接的组件的组合，组件经由端口与端口接口交互。
 >
 > 来源：[VFB（虚拟功能总线）](cp/general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）
+{: .glossary-source}
+
+**VFB View**
+> VFB 视图（**VFB View**）独立于这些资源来描述汽车中的系统或子系统；换句话说，独立于：• 车中存在何种类型、多少个 ECU • VFB 视图中的实体运行在哪些 ECU 上 • ECU 如何互连：使用何种网络技术（CAN、LIN 等）以及何种拓扑（是否存在网关）。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **VFB++**
@@ -7051,10 +8875,28 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR DoIP（基于 IP 的诊断）](cp/communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）
 {: .glossary-source}
 
+**Virtual Functional Bus**
+> 虚拟功能总线（**Virtual Functional Bus**）是"原子软件组件"（**Atomic Software Component**）和"AUTOSAR 服务"（**AUTOSAR Service**）之间通信的抽象。这一抽象使得通信机制的规范独立于为实现通信所选定的具体技术。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Virtual Integration**
+> 形成一个"系统"（**System**）的软件实体的仿真、建模和/或计算出来的（非真实的）组合。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **Virtual Local Time**
 > **StbM** 从硬件时钟导出的本地时间参考，用于全局时间本地实例的推移。
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
+{: .glossary-source}
+
+**Virtualization**
+> 虚拟化（**Virtualization**）是一种向用户隐藏计算平台物理特性、而呈现另一个抽象计算平台的机制。它可以用于实现可用性、分区（**Partitioning**）、资源冲突管理、恢复（**Recovery**）等功能安全需求。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **VLAN**
@@ -7113,6 +8955,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## W
 
+**Wake-up and Sleep on Dataline**
+> 通过汽车以太网交换网络的数据线传输的唤醒请求或休眠请求。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
 **WCET**
 > 最坏情况执行时间（**Worst case execution time**）
 >
@@ -7159,6 +9007,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 警告指示器请求（**Warning Indicator Request**）
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**Worst Case Execution Time**
+> 程序实际执行的最大可能时间。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Worst Case Response Time**
+> 从接收激励到交付适当响应或反应之间的最大可能时间。
+>
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
 **WP**

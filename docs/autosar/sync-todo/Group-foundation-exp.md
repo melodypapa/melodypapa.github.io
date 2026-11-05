@@ -13,27 +13,38 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 > Item-ID note: TPS/ASWS rows that carry specification items share the decision recorded in the [Group-foundation-rs-prs.md](Group-foundation-rs-prs.md) header — DECIDED 2026-11-03: item IDs are dropped, titles translate only.
 
 ## Queue
-- [ ] tr_glossary (AUTOSAR_FO_TR_Glossary · General · R23-11 markdown · 📖 partial — ch.2 done, ch.4 14/343 terms)
+- [x] tr_glossary (AUTOSAR_FO_TR_Glossary · General · R23-11 markdown · 📖 ch.2 + ch.4 343/343 terms, awaiting batch gate)
   - Note: in-flight row placed first: article `foundation/general/tr_glossary/` exists (moved from general/ in PR #112); ch.2 缩略语 complete (201 acronyms), ch.4 术语定义 14/343 terms translated — remaining 329 terms translate in tranches
   - Note: row moved here from Group-general.md on 2026-11-02 (opened there as user-named run #78 before the platform restructure); its decision carries over — 术语表 mechanism (user decision 2026-10-24): entries come from `scripts/tr_glossary.json`, extracted from the SOURCE during each translation batch; gen_glossary never re-parses the translated article; tranches committed per batch
   - Note: source ch.2.1 has 206 acronym rows (201 distinct entries in tr_glossary.json after dedupe); ch.4 = 343 definition terms (6-row tables)
   - Note: each tranche also extends `glossary.md` (one term translated once; repeat appearances append a 来源 line); tracking workfile `.agents/skills/autosar-translate/scripts/tr_glossary.json` (`zh` field per term)
   - Note: source `General/AUTOSAR_FO_TR_Glossary.md` — 4,647 lines, 202 figure refs, 1 item ID; related: glossary.md (site 术语表 — terms flow there, one term translated once)
+  - Note: Step 2 (2026-11-05): remaining 329 ch.4 terms (4.15–4.343) translated sequentially from the source; all 343 zh definitions merged into `tr_glossary.json`; article ~4,400 lines, 343 `### 4.N.` headings continuous 1–343
+  - Note: figures — 8 content diagrams embedded as `Figure4-1..Figure4-8.png` (4.43 Availability, 4.112 EEC, 4.113 EOC, 4.161 ICC2, 4.186 LET, 4.214 PDU, 4.309 SyncPoints, 4.320 TimedComm), caption text carried as alt text (cdd/vfb precedent); remaining ~195 figure refs are page chrome (recurring <8 KB hashes) dropped
+  - Note: trailing `## 参考文献` registry added (ref-1..ref-50, TPS_APSD precedent; source [17]/[34] rejoined across page breaks) — the source's unnumbered References chapter had been dropped by the earlier tranche; 177 `[n]` citations linked to `#ref-n` via `--apply` (idempotent, 0 unresolved)
+  - Note: URL audit — omg.org formal/05-07-04 http 500 (browser UA also 500) → smallest verified fix dropped `apps/` from the path (200, same document); iso.org 403 = anti-bot, kept (ASWS precedent)
+  - Note: glossary.md extended +313 TR Glossary entries (scripted merge into letter sections, 2026-10-30 entry format); 30 same-named terms already carried substantively different definitions from other documents (Abstract Platform, Callback, Client, Composition, Confirmation, Electrical Signal, Error, Event, Failure, Fault, Functionality, Indication, I-PDU, …) — left unmerged as user decisions for the gate
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK (ch.4 term headings exempt as glossary keys per TODO.md 2026-10-31 sweep); `check_indexes.py` OK (268 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/requirement ID/`{DRAFT}`/`\<`
+  - Note: Phase B (2026-11-05) — coverage ch.1→§1, ch.2→§2, ch.3→§3, ch.4→§4 (4.1–4.343) + trailing 参考文献; link census: 0 identifier mentions, 0 chapter-number refs, 399 参见-type report-only lines (table cells, definitional), 177/177 citations linked, cross-article report-only PORT ×26 / EcuM ×2 / DEM ×2 / Nm ×9 / CanIf ×2 / Det ×1 (all stay prose); every term's 6-row table mirrors the source cell set/order; Initiator values translated consistently from the 19-value source inventory
   - [x] Step 1 — Source resolution + gap analysis (gap = 329 untranslated ch.4 terms, verified 2026-11-02)
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] tr_list_of_known_issues_secure_hardware_extensions (AUTOSAR_FO_TR_ListOfKnownIssuesSecureHardwareExtensions · Security · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 2304e43 · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
+- [x] tr_list_of_known_issues_secure_hardware_extensions (AUTOSAR_FO_TR_ListOfKnownIssuesSecureHardwareExtensions · Security · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: List of Known Issues of Secure Hardware Extensions（安全硬件扩展已知问题清单）; target `foundation/security/tr_list_of_known_issues_secure_hardware_extensions/`; technical report (TR) — prose; no specification items
   - Note: source `Security/AUTOSAR_FO_TR_ListOfKnownIssuesSecureHardwareExtensions.md` — 98 lines, 8 figure refs, no item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation; source body = one 7-issue table (split across 3 PDF page-fragment tables by the converter → merged into one table) + the errata sheet's "Figure 1" corrected boot flow chart (referenced by issue 4); doc-meta chrome (cover/status/change-history tables, Disclaimer) dropped per EXP precedent; source has no numbered chapters — article carries a single unnumbered-level `## 已知问题清单` mirroring the document title
+  - Note: figures — 8 refs: 1 content diagram (382 KB, unique hash) embedded as `Figure1.png` with the issue-4 reference wording as alt text; 7 chrome refs (~13–15 KB, 2 recurring hashes) dropped
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (269 nav targets, 0 broken); `gen_api_list.py --check` up to date; link census: 0 identifier mentions, 0 chapter-number refs, 2 参见-type report-only lines, 0 citations, 0 cross-article mentions; no external URLs
+  - Note: Phase B (2026-11-05) — coverage: issues table (rows 1–7, cell values/positions mirror the source table incl. the merged page-fragment rows) + Figure 1 embed; deliberate omissions: doc-meta chrome + Disclaimer (dropped per EXP precedent) — user to verify; severity terms rendered 勘误（**erratum**）/ 细化说明（**detailing**）/ 修正（**amendment**）, command/error identifiers verbatim
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 4f4954e · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
 - [x] exp_system_health_monitoring (AUTOSAR_FO_EXP_SystemHealthMonitoring · HealthMonitoring · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Explanation of System Health Monitoring（系统健康监控说明）; target `foundation/health_monitoring/exp_system_health_monitoring/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)
   - Note: source `HealthMonitoring/AUTOSAR_FO_EXP_SystemHealthMonitoring.md` — 408 lines, 22 figure refs, no item IDs
@@ -49,82 +60,122 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (2026-11-03: approved — scope limited to the EXP document, item IDs dropped/titles only)
   - [x] Step 6 — TODO.md row + commit/PR (issue #255 · commit 4320445 · PR #256)
-- [ ] tr_predefined_names (AUTOSAR_FO_TR_PredefinedNames · General · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [x] tr_predefined_names (AUTOSAR_FO_TR_PredefinedNames · General · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Predefined Names in AUTOSAR（AUTOSAR 预定义名称）; target `foundation/general/tr_predefined_names/`; technical report (TR) — prose; no specification items
   - Note: source `General/AUTOSAR_FO_TR_PredefinedNames.md` — 423 lines, 23 figure refs, no item IDs
   - Note: related site content: glossary.md (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp_time_sensitive_network_features (AUTOSAR_FO_EXP_TimeSensitiveNetworkFeatures · CommunicationManagement · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–4 + annex A (4 meta-model class tables, real content — not a placeholder) + annex B (B.1.1–B.1.3 all `none` → 无, kept per appendix-B rule); item IDs [TR_PDN_x]/[TPS_STDT_x]/[TPS_GST_x] dropped per the 2026-11-03 decision
+  - Note: technical shape — 3 keyword tables (表2.1 virtual modules 5 rows, 表3.1 information categories 23 rows, 表4.1 document abbreviations 99 rows) verified row-by-row against the source (shortName+abbrName, order); PDF-split fragments merged; shortName values with PDF line breaks joined per the source's own rule ("the line breaks shall be ignored"); annex A class tables rendered in the TPS two-table form (属性|值 + 属性|类型|多重性|种类|备注), collapsed repeated PDF columns
+  - Note: figures — 23 refs all page chrome (recurring hashes + 1 unique 8de41666 8 KB) dropped; no content diagrams
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (270 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/glyph/`\<` in content (1 hit = provenance comment listing the dropped ID forms); row sets verified 5/23/99
+  - Note: Phase B (2026-11-05) — coverage ch.1→§1, ch.2→§2, ch.3→§3, ch.4→§4, A→§A (A.1–A.4), B→§B (B.1.1–3 → 无), trailing 参考文献 (ref-1..5, 12 citations linked via --apply, idempotent, all contexts verified to name the entry's own document); deliberate omissions: doc-meta chrome + Disclaimer + Contents (EXP precedent) — user to verify; source quirks kept verbatim: shortName `Pesistency` (typo), longName `Specifcation of Safety Extensions` (typo), 5× "Adaptive Platform - to be filled correclty" → translated with typo normalized (asws precedent) and noted here
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 912e70e · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
+- [x] exp_time_sensitive_network_features (AUTOSAR_FO_EXP_TimeSensitiveNetworkFeatures · CommunicationManagement · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Explanation of Time Sensitive Networking Features（时间敏感网络特性说明）; target `foundation/communication_management/exp_time_sensitive_network_features/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)
   - Note: source `CommunicationManagement/AUTOSAR_FO_EXP_TimeSensitiveNetworkFeatures.md` — 430 lines, 16 figure refs, no item IDs
   - Note: related site content: cp/communication/ethernet_switch_driver, cp/globaltime/eth_tsyn (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp_security_overview (AUTOSAR_FO_EXP_SecurityOverview · General · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–4 (1/1.1–1.2 · 2/2.1 + 2.2.1–2.2.11 · 3/3.1 · 4/4.1–4.5.2.2); no specification items
+  - Note: technical shape — ch.2.1 acronym table rendered as bold-term + blockquote (exp_system_health_monitoring precedent; 19 rows, source order; the source's 3-column layout carries an empty Acronym column = PDF merged-cell artifact, normalized to 2 columns); 2.2 term headings translated with the English term kept in parentheses; 表4.1 9 rows incl. the duplicated IEEE 802.1Qbv row kept (row set strict); EthSwt* config identifiers verbatim
+  - Note: figures — 16 refs all page chrome (~8 KB recurring hashes), no content diagrams, dropped
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (271 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/glyph/`\<`
+  - Note: Phase B (2026-11-05) — coverage ch.1→§1, ch.2→§2, ch.3→§3, ch.4→§4, trailing 参考文献 (ref-1..12); 39 `[n]` citations + 1 chapter-number ref (表4.1 概览句) linked via --apply, idempotent; URL audit: ieee802.org/tsn 200, ieee802.org/3 200, ieeexplore.ieee.org 418 bare-UA → 200 browser-UA (anti-bot on bare UA, kept), avnu.org PDF 403 browser-UA also 403 (anti-bot, kept — authoritative URL from source); cross-article EthSwt/TSN mentions stay prose (report-only; no census cross-article hits)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 442b230 · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
+- [x] exp_security_overview (AUTOSAR_FO_EXP_SecurityOverview · General · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Security Overview（信息安全概览）; target `foundation/general/exp_security_overview/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)
   - Note: source `General/AUTOSAR_FO_EXP_SecurityOverview.md` — 533 lines, 26 figure refs, no item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] tr_release_overview (AUTOSAR_FO_TR_ReleaseOverview · ReleaseDocumentation · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–4 (1/1.1–1.2 · 2/2.1 (one sentence, no acronym table in source) · 3/3.1 · 4/4.1.1–4.1.10 incl. Tables 4.1–4.10)
+  - Note: technical shape — §4.1 prose + 10 solution tables (DEP HW/OS, SSP/ASLR/CFI/CPI/PointerAuth compiler options, containers, sandboxing), PDF hyphenation rejoined; source "System Level: …" sub-heading labels kept as bold lines; footnotes rendered `<sup>N</sup>` + `> N …` blockquotes — **source conversion lost footnote texts 14–17 and 27–35, those markers were dropped** (no invented URLs), all present footnote texts carried; Table 4.2's [17]/[18] are document citations not footnotes; Table 4.10's OpenBSD row garbled at a page break → conservative translation with an in-row note (full behavior in ref [25])
+  - Note: figures — 26 refs → 1 content diagram (Figure 4.1 attack model, 122 KB) embedded as Figure4-1.png; 25 chrome dropped
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (272 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/glyph
+  - Note: Phase B (2026-11-05) — coverage ch.1→§1 … 4.1.10→§4.1.10, references registry in §3.1 (25 anchors auto-added, 33 citations + 7 chapter-number refs linked via --apply, idempotent); URL audit: 4 footnote URLs dead/418/403 — dslab.epfl.ch/proj/cpi 404 and grammatech.com/products/codesonar 404 (publisher moved; NOT re-guessed — Backlog), community.arm.com 403 (anti-bot, kept), ieeexplore-class 000s are sandbox network failures incl. github.com (kept); deliberate omissions: doc-meta chrome + Disclaimer + Contents — user to verify
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 510d645 · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
+- [x] tr_release_overview (AUTOSAR_FO_TR_ReleaseOverview · ReleaseDocumentation · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Release Overview（发布概览）; target `foundation/release_documentation/tr_release_overview/`; technical report (TR) — prose; no specification items
   - Note: source `ReleaseDocumentation/AUTOSAR_FO_TR_ReleaseOverview.md` — 718 lines, 28 figure refs, 1 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp_sw_architectural_decisions (AUTOSAR_FO_EXP_SWArchitecturalDecisions · General · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–5 (1/1.1–1.5 incl. W3C license/disclaimer text, 2 schema tables, Figures 1.1–1.2 · 2/2.1–2.3 · 3 spec overview · 4 deficiencies · 5 release history)
+  - Note: technical shape — 表2.1 concept impact 54 rows (3 page fragments merged; the column-split "Requirements on Operating / System Interface" longName rejoined; PDF-merged Concept/Standard/Lifecycle cells kept as empty cells); ch.3 overview table ~50 rows (cluster header rows kept; the split Standardization Template row rejoined; PDF-broken file names rejoined); 表5.1 release history 49 deliverable rows; "none" lists → 无; "Document ID 781" page footers dropped as chrome
+  - Note: figures — 28 refs → 2 content diagrams (Figure 1.1 dependencies, Figure 1.2 life-cycle model) embedded as Figure1-1/1-2.png; 26 chrome dropped
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK (§4.1 heading = document-title citation translated with the English long name kept in parentheses); `check_indexes.py` OK (273 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/glyph in content
+  - Note: Phase B (2026-11-05) — coverage ch.1→§1 … ch.5→§5, trailing 参考文献 (ref-1); 1 citation + 9 chapter-number refs linked via --apply (idempotent); URL audit: w3.org license URL kept as plain text in §1.2.2 (source form); deliberate omissions: doc-meta chrome + Disclaimer + Contents — user to verify
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 55e2c99 · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
+- [x] exp_sw_architectural_decisions (AUTOSAR_FO_EXP_SWArchitecturalDecisions · General · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Explanation of Software Architectural Decisions（软件架构决策说明）; target `foundation/general/exp_sw_architectural_decisions/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)
   - Note: source `General/AUTOSAR_FO_EXP_SWArchitecturalDecisions.md` — 834 lines, 48 figure refs, 8 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] tps_log_and_trace_extract (AUTOSAR_FO_TPS_LogAndTraceExtract · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–5 (4 overview incl. Table 4.1 template · 5.1 common ×1 · 5.2 AP ×24 · 5.3 CP ×4 decisions); decision tables rendered as 字段|内容 two-column tables per the source's own template
+  - Note: technical shape — 29 decision tables with 11 fields each (Applies to/Decision/Rationale/Category/Application affected/Assumptions/Constraints/Alternatives/Remarks/Related requirements/Release); source fragments flattened into stray headings at 5.2.15 (Alternatives/Remarks) and 5.3.3 (Alternatives garbled by column scramble) reconstructed conservatively with in-row notes; prose-named item references ([RS_AP_00129] etc., [SWS_CORE_00003]) kept per the TPS_APSD precedent; 5.2.7 C++ example as a fenced block (duplicated conversion line deduplicated); heading typos normalized (AP-PLICATION_LAYER → APPLICATION_LAYER, AUTOSARRuntime → AUTOSAR Runtime — noted)
+  - Note: figures — 48 refs all page chrome, no content diagrams, dropped
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (274 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/glyph
+  - Note: Phase B (2026-11-05) — coverage ch.1→§1 … 5.3.4→§5.3.4, trailing 参考文献 (ref-1..9); 23 citations + 3 chapter-number refs linked via --apply, idempotent (0 on re-run); no external URL content beyond the registry (researchgate/lwn/doi/github — registry prose, not checked live per EXP precedent); deliberate omissions: doc-meta chrome + Disclaimer + Contents — user to verify
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit f3fd5cd · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
+- [x] tps_log_and_trace_extract (AUTOSAR_FO_TPS_LogAndTraceExtract · MethodologyAndTemplates · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Log and Trace Extract Template（日志与跟踪提取模板）; target `foundation/methodology_templates/tps_log_and_trace_extract/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_TPS_LogAndTraceExtract.md` — 837 lines, 38 figure refs, 14 item IDs
   - Note: related site content: cp/communication/diagnostic_log_and_trace (Dlt) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] exp_safety_overview (AUTOSAR_FO_EXP_SafetyOverview · General · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–3 + annex A (3 release histories) + annex B (8 class tables); **R23-11 markdown conversion is missing the bodies of TPS_DLTXT_00009–00014 and constr_5098/5302/5303/5304 (they exist only in annex A's ID tables) — recovered from the corpus PDF pages 9/13–16 via pymupdf (ASWS formula-recovery precedent) and translated; recovery noted in the provenance comment**
+  - Note: technical shape — 7 class tables in the TPS two-table form (属性|值 + 属性|类型|多重性|种类|备注, Table 2.1–2.3/3.1–3.4 + annex B.1–B.8); 14 spec items + 17 constraints as bold-titled prose (IDs dropped per 2026-11-03 decision; prose-named IDs constr_5302/constr_5364/TPS_DLTXT_00002/TPS_DLTXT_00008/TPS_SWCT_01845 kept per TPS_APSD precedent); constr_5363/5364/5098 attribute-usage matrices as GFM tables; ARXML Listings 3.1/3.2 reconstructed readable from garbled fragments
+  - Note: figures — 38 refs → 3 content diagrams (Figure 1.1 methodological placement, Figure 2.1 DltEcu modeling, Figure 3.1 DltMessage modeling) embedded; 35 chrome dropped
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (275 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/glyph/`⌈⌋`
+  - Note: Phase B (2026-11-05) — coverage ch.1→§1, 1.1→§1.1, ch.2→§2, ch.3→§3, A.1–A.3→§A (heading-column tables per annex-F decision), B.1–B.8→§B, trailing 参考文献 (ref-1..5); 9 citations + 2 chapter refs linked via --apply, idempotent; deliberate omissions: doc-meta chrome + Disclaimer + Contents — user to verify
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 61cda1d · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
+- [x] exp_safety_overview (AUTOSAR_FO_EXP_SafetyOverview · General · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Safety Overview（功能安全概览）; target `foundation/general/exp_safety_overview/`; explanatory document (EXP) — prose guide (EXP-guide flow, Group-exp precedent)
   - Note: source `General/AUTOSAR_FO_EXP_SafetyOverview.md` — 862 lines, 50 figure refs, 6 item IDs
   - Note: related site content: cp/safety/functional_safety_measures (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] tps_arxml_serialization_rules (AUTOSAR_FO_TPS_ARXMLSerializationRules · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation: unnumbered Known Limitations (before §1, EcuM precedent, 5 sub-sections) + ch.1–6 + annex A (28 abbreviations) + annex B (7 glossary terms); List of Figures dropped as doc-meta
+  - Note: technical shape — RS_SAF/SUC/TLF/RS_SAF_1xxxx/SWS_CORE_00023 references kept as source-named citations (TPS_APSD precedent); §5.1 items as bold-titled requirements; 表5.2 two-header rows collapsed to one header (Use-Case|Failure|Safety Requirement|4 quality-attribute columns); §6.2.3–6.2.7 reconstructed from flattened markdown (they existed as plain text lines); 清单5.1 ASIL XML example as fenced block
+  - Note: figures — 50 refs → 9 content diagrams (Figure 1, 1.1, 1.2, 1.3, 2.2, 3.3, 3.4, 3.5, 3.6) embedded with source captions as alt text; 41 chrome dropped
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (276 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/glyph
+  - Note: Phase B (2026-11-05) — coverage 已知限制→§, ch.1→§1 … 6.2.7→§6.2.7, A→§A, B→§B, trailing 参考文献 (ref-1..18); 36 citations + 5 chapter refs linked via --apply, idempotent; URL audit: registry URLs (iso.org 403 anti-bot kept per precedent; wikipedia/doi/ieee/opengroup/autosar.org — source-authoritative, sandbox-blocked 000s kept); deliberate omissions: doc-meta chrome + Disclaimer + Contents + List of Figures — user to verify
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 123e21b · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
+- [x] tps_arxml_serialization_rules (AUTOSAR_FO_TPS_ARXMLSerializationRules · MethodologyAndTemplates · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: ARXML Serialization Rules（ARXML 序列化规则）; target `foundation/methodology_templates/tps_arxml_serialization_rules/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_TPS_ARXMLSerializationRules.md` — 915 lines, 35 figure refs, 40 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–3 + annex A (8 release histories) + annex B (5 class/primitive tables); **annex A.6 (R21-11, all none) missing from the markdown conversion — recovered from the corpus PDF pages 26–27 (ASWS/TPS_LTET precedent)**
+  - Note: technical shape — 19 TPS_ASR items as bold-titled prose (IDs dropped; prose-named IDs kept: TPS_ASR_00017 inside 00018, TPS_ASR_00004/05 inside the BOM rationale, TPS_STDT_00053/00078, TPS_GST_00024/25/32/00169/00170, TPS_XMLSPR_00008..17); TPS_ASR_00019 format-strategy table as GFM; Examples 2.1–2.7 as bold lead-ins; Listings 2.1–2.3 reconstructed readable; ch.3 glossary as bold-term + blockquote (30 terms)
+  - Note: figures — 35 refs → 2 content diagrams (Figure 1.1 template-spec overview, Figure 1.2 relation to XMLSPR) embedded; 33 chrome dropped
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (277 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/glyph
+  - Note: Phase B (2026-11-05) — coverage ch.1→§1, 1.1→§1.1, ch.2→§2 (2.1–2.2.5), ch.3→§3, A.1–A.8→§A, B.1–B.5→§B, trailing 参考文献 (ref-1..12); 16 citations linked via --apply, idempotent; deliberate omissions: doc-meta chrome + Disclaimer + Contents — user to verify; source quirk kept: 00016/00017 share the heading "No empty wrappers" in the A.1.1 table (00017 is the namespace declaration, source table shows the duplicate heading)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit b1ec226 · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
 - [x] asws_health_monitoring (AUTOSAR_FO_ASWS_HealthMonitoring · HealthMonitoring · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: Abstract Specification of Health Monitoring（健康监控抽象规范）; target `foundation/health_monitoring/asws_health_monitoring/`; abstract software specification (ASWS) — platform-independent SWS-like items
   - Note: source `HealthMonitoring/AUTOSAR_FO_ASWS_HealthMonitoring.md` — 1,434 lines, 67 figure refs, 85 item IDs
@@ -157,15 +208,20 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Phase B coverage — source References → 参考文献 (ref-1..ref-7); 1/1.1–1.3 → §1; 2/2.1–2.3.3 (incl. 2.3.2.1–2) → §2; 3/3.1–3.5.6.1 (incl. 3.1.1, 3.2.1–2, 3.3.1–3.3.5 + 3.3.2.1, 3.4.1–3.4.2.1, 3.5.1–3.5.6.1 incl. 3.5.5.1) → §3; 4/4.1 → §4; A.1 → §A; B.1–B.15 → §B; C.1–C.3 → §C; D → §D; E/Table E.1 → §E; F.1–F.5/Tables F.1–F.13 → §F. Deliberate omissions: none (every annex translates); the only unrenderable object is the missing annex D table
   - [x] Step 5 — User confirmation gate (2026-11-04: approved)
   - [x] Step 6 — TODO.md row + commit/PR (issue #259 · commit 510c6d7 · PR #260)
-- [ ] tps_xml_schema_production_rules (AUTOSAR_FO_TPS_XMLSchemaProductionRules · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [x] tps_xml_schema_production_rules (AUTOSAR_FO_TPS_XMLSchemaProductionRules · MethodologyAndTemplates · R23-11 markdown · ✅ new article · 📖 skeleton-exempt)
   - Note: XML Schema Production Rules（XML 模式生成规则）; target `foundation/methodology_templates/tps_xml_schema_production_rules/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_TPS_XMLSchemaProductionRules.md` — 1,848 lines, 145 figure refs, 43 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: Step 1 gap analysis (2026-11-05): no article → full translation ch.1–5 + annex A; ch.3 tag tables (00036 tailoring table 20 tags, 00057/00058 constraint matrices, 00059 xml.*Element combinations 17 rows, 00056 default-configuration table 15 rows), ch.4 all 30 production rules (00000–00019, 00022–00029, 00036–00047, 00054–00059) rendered as field tables (适用对象/前置条件/目标模式/说明/XML 模式示例/XML 实例示例) with target patterns as fenced code
+  - Note: technical shape — **rules 00008 (1111) and 00023 (1100) had their Target pattern/Description rows flattened out of the markdown conversion; recovered from the corpus PDF pages 59–66 (pymupdf, ASWS precedent)**; pseudo-code (2.7.2 sequence algorithm) and all XML patterns kept verbatim in fences; annex A.1 TR→TPS ID mapping table kept as data (the sanctioned item-ID exception, TPS_APSD precedent)
+  - Note: figures — 145 refs → 38 content diagrams embedded in order (Figure11-01..38), captions taken from the nearest source caption; 图 4.2 is a 3-part diagram (3 images); the rule diagrams inside 4.4.1–4.4.10 carry no numbered captions in the source markdown and are named by their rule; 图 4.5/4.7/4.8/4.10 captions exist in the source but no content image is present (noted in provenance comment); 107 chrome images dropped
+  - Note: Phase A (2026-11-05) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (278 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/glyph/`⌈⌋`; all 38 figure files referenced 1:1
+  - Note: Phase B (2026-11-05) — coverage ch.1→§1 … ch.5→§5, A.1–A.4→§A, trailing 参考文献 (ref-1..11); 18 citations + 14 chapter refs linked via --apply, idempotent; deliberate omissions: doc-meta chrome + Disclaimer + Contents — user to verify
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 07a9324 · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
 - [ ] tr_secure_hardware_extensions (AUTOSAR_FO_TR_SecureHardwareExtensions · Security · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Specification of Secure Hardware Extensions（安全硬件扩展规范）; target `foundation/security/tr_secure_hardware_extensions/`; technical report (TR) — prose; no specification items
   - Note: source `Security/AUTOSAR_FO_TR_SecureHardwareExtensions.md` — 1,971 lines, 83 figure refs, no item IDs

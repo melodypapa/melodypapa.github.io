@@ -131,24 +131,24 @@ Status: **21/21** completed
 
 ## Group foundation exp — Foundation R23-11 guide/template/report documents (20)
 
-Status: **3/20** completed
+Status: **14/20** completed
 
 | Article                                              | Status | Commit ID |
 | ----------------------------------------------------- | -------- | ---------- |
-| `tr_glossary`                                          | [ ] Aligned 📖 | bce433256f |
-| `tr_list_of_known_issues_secure_hardware_extensions`   | [ ] Pending | N/A |
+| `tr_glossary`                                          | [x] Done | 2304e430af |
+| `tr_list_of_known_issues_secure_hardware_extensions`   | [x] Done | 4f4954edaf |
 | `exp_system_health_monitoring`                         | [x] Done | 4320445302 |
-| `tr_predefined_names`                                  | [ ] Pending | N/A |
-| `exp_time_sensitive_network_features`                  | [ ] Pending | N/A |
-| `exp_security_overview`                                | [ ] Pending | N/A |
-| `tr_release_overview`                                  | [ ] Pending | N/A |
-| `exp_sw_architectural_decisions`                       | [ ] Pending | N/A |
-| `tps_log_and_trace_extract`                            | [ ] Pending | N/A |
-| `exp_safety_overview`                                  | [ ] Pending | N/A |
-| `tps_arxml_serialization_rules`                        | [ ] Pending | N/A |
+| `tr_predefined_names`                                  | [x] Done | 912e70e784 |
+| `exp_time_sensitive_network_features`                  | [x] Done | 442b230f28 |
+| `exp_security_overview`                                | [x] Done | 510d645cab |
+| `tr_release_overview`                                  | [x] Done | 55e2c9981a |
+| `exp_sw_architectural_decisions`                       | [x] Done | f3fd5cdd27 |
+| `tps_log_and_trace_extract`                            | [x] Done | 61cda1da7e |
+| `exp_safety_overview`                                  | [x] Done | 123e21b1d7 |
+| `tps_arxml_serialization_rules`                        | [x] Done | b1ec226151 |
 | `asws_health_monitoring`                               | [x] Done | e956feb4ea |
 | `tps_abstract_platform_specification`                  | [x] Done | 510c6d7fdf |
-| `tps_xml_schema_production_rules`                      | [ ] Pending | N/A |
+| `tps_xml_schema_production_rules`                      | [x] Done | 07a9324cd2 |
 | `tr_secure_hardware_extensions`                        | [ ] Pending | N/A |
 | `tps_security_extract_template`                        | [ ] Pending | N/A |
 | `tps_feature_model_exchange_format`                    | [ ] Pending | N/A |
@@ -327,5 +327,5 @@ Status: **7/7** completed
 | `hwtestmanager`                 | [x] Done | 04ea38b015 |
 | `operating_system`              | [x] Done | ca7ecda991 |
 
-**Total: 143/197 queue rows complete.**
+**Total: 154/197 queue rows complete.**
 
