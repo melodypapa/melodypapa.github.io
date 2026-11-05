@@ -1513,6 +1513,20 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**FiM_MainFunction**](../system_services/function_inhibition_manager/index.md#7351-fim_mainfunction) | 该服务由基础软件模块调度程序直接调用。 |
 | [**FiM_SetFunctionAvailable**](../system_services/function_inhibition_manager/index.md#7322-fim_setfunctionavailable) | 该服务设置功能的可用性。 |
 
+## Firewall（防火墙）（7）
+
+来源：[Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall
+
+| 函数 | 简述 |
+|---|---|
+| [**Fw_GetVersionInfo**](../security/firewall/index.md#732-fw_getversioninfo) | 返回组件的版本信息、供应商 ID 和 AUTOSAR 模块 ID。 |
+| [**Fw_Init**](../security/firewall/index.md#731-fw_init) | 初始化 Fw 模块的服务。 |
+| [**Fw_InspectPacket**](../security/firewall/index.md#733-fw_inspectpacket) | 此函数根据预定义防火墙规则列表检查网络数据包，并在 InspectionResultPtr 中返回检查结果。 |
+| [**Fw_MainFunction**](../security/firewall/index.md#751-fw_mainfunction) | 此函数被周期性调用。 |
+| [**Fw_SetFirewallState**](../security/firewall/index.md#734-fw_setfirewallstate) | 此函数由 BswM 调用，用于指示 ECU 状态变化。 |
+| [**Fw_StreamHandleIdxConfiguration**](../security/firewall/index.md#742-fw_streamhandleidxconfiguration) | EthIf 成功设置交换机中的 StreamHandleIdx 后调用此函数。 |
+| [**Fw_StreamHandleIdxStatistics**](../security/firewall/index.md#741-fw_streamhandleidxstatistics) | EthIf 成功从交换机获取桶计数器值后调用此函数。 |
+
 ## AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）（11）
 
 来源：[AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer

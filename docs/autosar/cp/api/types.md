@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **875** 个条目。
+共 **877** 个条目。
 
 ## A
 
@@ -1421,6 +1421,12 @@ title: "AUTOSAR API 类型清单"
 
 **[FrTSyn_TransmissionModeType](../globaltime/fr_tsyn/index.md#722-frtsyn_transmissionmodetype)**
 > 类型 · [AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](../globaltime/fr_tsyn/index.md) · SWS_TimeSyncOverFlexRay · R23-11
+
+**[Fw_ConfigType](../security/firewall/index.md#721-fw_configtype)**
+> 类型 · [Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall · R23-11
+
+**[Fw_InspectionResultType](../security/firewall/index.md#722-fw_inspectionresulttype)**
+> 类型 · [Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall · R23-11
 
 ## G
 

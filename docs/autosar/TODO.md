@@ -79,11 +79,11 @@
 
 | Status | Count | Note |
 | --- | ---: | --- |
-| ✅ Type A-compliant | 25 | ready to use |
+| ✅ Type A-compliant | 26 | ready to use |
 | 🔶 Translated pending alignment | 8 | seven chapters present; legacy wording / forbidden-chapter residue |
 | ⚠️ Partial | 16 | missing ≥1 chapter (most miss the 「API规范」 chapter) |
 | ⛔ Stub | 4 | 9–19 lines only |
-| ❌ Missing (SWS) | 74 | R23-11 has 127 SWS docs in total; 53 covered (41.7%) |
+| ❌ Missing (SWS) | 73 | R23-11 has 127 SWS docs in total; 54 covered (42.5%) |
 | ❌ Missing (EXP) | 11 | R23-11 has 22 EXP docs in total; 11 covered |
 | 📖 Guide/topic | 8 | exempt from the Type A skeleton |
 | ❌ Missing (Foundation) | 51 | R23-11 has 52 FO docs (RS/PRS/TPS/TR/EXP/ASWS); 1 partially translated (TR Glossary 📖) — see `## foundation` and `sync-todo/Group-foundation-exp.md` / `Group-foundation-rs-prs.md` |
@@ -256,6 +256,10 @@
 - ✅ [WdgIf 看门狗接口](cp/safety/watchdog_interface/index.md) — SWS_WatchdogInterface (2026-10-27 full Type A translation from R23-11: new article + nav `"WdgIf"` + safety landing row; src ch.7 → §6 功能规格 (2 dev errors WDGIF_E_PARAM_DEVICE/POINTER), src ch.8 → §7 API规范 (1 type WdgIf_ModeType + 3 functions + 2 implementation-hint code fences), src ch.9 → §8 时序图 (bare cross-ref to the watchdog driver spec), src ch.10 → §9 配置规范 (3 containers, SWS 条目 cells filled with [ECUC_WdgIf_*]); 1 figure (Figure10-1 config tree); no glossary additions — source ch.2 is a no-local-acronyms note; WdgIf_SetMode error-code section links to the wdg article once both merged. 2026-10-30 audit: second §3.2 [3] marker and Service IDs 0x01/0x02/0x03 restored.)
 - ✅ [Wdg 看门狗驱动](cp/safety/watchdog_driver/index.md) — SWS_WatchdogDriver (2026-10-27 full Type A translation from R23-11: new article + nav `"Wdg"` + safety landing row; src ch.7 → §6 功能规格 (5 subsections incl. 触发概念以支持窗口看门狗; 扩展生产错误 WDG_E_MODE_FAILED / WDG_E_DISABLE_REJECTED after mcu_driver house), src ch.8 → §7 API规范 (1 type Wdg_ConfigType + 4 functions), src ch.9 → §8 时序图 (Figure9-1/9-2), src ch.10 → §9 配置规范 (faithful source order incl. module table at the end + 9.2.2 WdgSettingsFast group; 22 SWS Item cells with [ECUC_Wdg_*] IDs); garbled WdgMaxTimeout description restored from the R22-11 PDF p.38; src app. B → ## B. fence-style per EcuM precedent; src ch.7.4 「(see Figure 2)」 kept as prose — Figure 2 absent in R22-11 PDF too; glossary.md +6 terms (DIP/Fast-Mode/Off-Mode/Slow-Mode/SPI/WDG) + DEM/DET 来源 lines. 2026-10-30 audit: Wdg_ConfigType table corrected, ECUC_Wdg_00073 and Service IDs 0x00/0x01/0x03/0x04 restored.)
 
+## security
+
+- ✅ [Firewall（防火墙）](cp/security/firewall/) — SWS_Firewall · R23-11 (2026-11-06 full Type A new article + new cp/security section (landing page + nav group 网络安全): ch.2 缩略语 2.1 首字母缩略词 6 rows + 2.2 缩写 15 rows (Dem style), §6 功能规格 (模块处理/网络数据包检查 无状态+有状态+深度 (SOME/IP, DDS, DoIP, 通用)/过滤 (Allowlist+Blocklist, 速率限制漏桶, 状态相关)/交换机交互 (4 filter scenarios)/安全事件 (16 SEvs + SEV context-data tables 7.2–7.17 + protocol-matching example)/错误分类 1 dev-error table), §7 API 5 imported types/2 types (table style)/4 functions/2 callbacks/1 scheduled + 期望接口 (0 强制 + 4 可选 + 可配置接口) + 服务接口 none-sentence; §8 时序图 3 figures; §9 配置规范 Firewall×6 containers + 11 filter-rule subsections + 桶计数 + 安全事件 16 SEv refs, SWS 条目 cells filled with [ECUC_Fw_*] per new-article precedent; ## B. appendix R23-11 added-items fence; 26 figures by source caption number (7-1..5, 9-1..3, 10-1..18), deco 345×36 chrome excluded; source ch.6 Requirements Tracing + appendix A dropped; source quirks kept verbatim: FirwallEnableSecurityEventReporting, FirewallPaylodByteOffset/Value, FirewallITrafficClass, wrong copy-paste descriptions on FirewallDoipDest/SrcAddress + FirewallingWithPerStreamFiltering + FirewallNetworkLayerIpv4FilterConfig ('for IPv6'); Fw_InspectPacket truncated source Syntax reconstructed with Fw_InspectionResultType* out param; check_api_sync extended with module-prefix reconciliation (source bare headings Init/ConfigType vs article Fw_*); identifier/chapter-ref/citation links --apply 42 lines, idempotent)
+
 ## methodology_templates / template
 
 - 📄 [BSW 模块描述模板](cp/methodology_templates/basic_software_module_description_template/) — TPS_BSWModuleDescriptionTemplate (exempt)
@@ -353,7 +357,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 - **RTE / SWArch (2)**: SWS_RTE, SWS_ARTI
 - ~~**Safety (2)**: SWS_WatchdogInterface (WdgIf), SWS_WatchdogDriver (Wdg)~~ — both translated 2026-10-27
-- **Security (2)**: SWS_Firewall, SWS_IntrusionDetectionSystemManager (IdsM)
+- ~~**Security (2)**: SWS_Firewall, SWS_IntrusionDetectionSystemManager (IdsM)~~ — SWS_Firewall translated 2026-11-06; IdsM in progress
 
 ## Missing EXP guides (10)
 

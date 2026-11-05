@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2650** 个条目。
+共 **2657** 个条目。
 
 ## A
 
@@ -4871,6 +4871,27 @@ title: "AUTOSAR API 函数清单"
 
 **[FrTSyn_TriggerTransmit](../globaltime/fr_tsyn/index.md#742-frtsyn_triggertransmit)**
 > 函数 · [AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](../globaltime/fr_tsyn/index.md) · SWS_TimeSyncOverFlexRay · R23-11
+
+**[Fw_GetVersionInfo](../security/firewall/index.md#732-fw_getversioninfo)**
+> 函数 · [Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall · R23-11
+
+**[Fw_Init](../security/firewall/index.md#731-fw_init)**
+> 函数 · [Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall · R23-11
+
+**[Fw_InspectPacket](../security/firewall/index.md#733-fw_inspectpacket)**
+> 函数 · [Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall · R23-11
+
+**[Fw_MainFunction](../security/firewall/index.md#751-fw_mainfunction)**
+> 函数 · [Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall · R23-11
+
+**[Fw_SetFirewallState](../security/firewall/index.md#734-fw_setfirewallstate)**
+> 函数 · [Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall · R23-11
+
+**[Fw_StreamHandleIdxConfiguration](../security/firewall/index.md#742-fw_streamhandleidxconfiguration)**
+> 函数 · [Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall · R23-11
+
+**[Fw_StreamHandleIdxStatistics](../security/firewall/index.md#741-fw_streamhandleidxstatistics)**
+> 函数 · [Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall · R23-11
 
 ## G
 
