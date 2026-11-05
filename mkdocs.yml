@@ -522,6 +522,7 @@ nav:
         - "SHE": autosar/foundation/security/tr_secure_hardware_extensions/index.md
       - 系统服务:
         - autosar/foundation/system_services/index.md
+        - "Timing Analysis": autosar/foundation/system_services/tr_timing_analysis/index.md
   - EB Tresos:
     - eb_tresos/index.md
     - Guided Configuration: eb_tresos/guided_configuration/index.md

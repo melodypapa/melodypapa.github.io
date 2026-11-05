@@ -53,6 +53,7 @@ title: "基础标准（Foundation）"
   * [List of Known Issues of Secure Hardware Extensions（安全硬件扩展已知问题清单）](security/tr_list_of_known_issues_secure_hardware_extensions/index.md)
   * [Specification of Secure Hardware Extensions（安全硬件扩展规范）](security/tr_secure_hardware_extensions/index.md)
 * [系统服务（System Services）](system_services/index.md)
+  * [Timing Analysis（时序分析）](system_services/tr_timing_analysis/index.md)
 
 ## 相关内容
 

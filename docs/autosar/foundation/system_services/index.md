@@ -6,9 +6,7 @@ title: "系统服务（System Services）"
 
 ## 文章
 
-本类别尚无已翻译文章。R23-11 包含以下源文档（待翻译）：
-
-* **AUTOSAR_FO_TR_TimingAnalysis** — Timing Analysis（时序分析）
+* [Timing Analysis（时序分析）](tr_timing_analysis/index.md)
 
 ## 相关内容
 
