@@ -319,7 +319,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ✅ Intrusion Detection System Protocol Specification（入侵检测系统协议规范） — AUTOSAR_FO_PRS_IntrusionDetectionSystem (`foundation/protocols/prs_intrusion_detection_system/`)
 - ❌ Log and Trace Protocol Specification（日志与跟踪协议规范） — AUTOSAR_FO_PRS_LogAndTraceProtocol (`foundation/protocols/`)
 - ✅ Network Management Protocol Specification（网络管理协议规范） — AUTOSAR_FO_PRS_NetworkManagementProtocol (`foundation/protocols/prs_network_management_protocol/`)
-- ❌ SOME/IP Protocol Specification（SOME/IP 协议规范） — AUTOSAR_FO_PRS_SOMEIPProtocol (`foundation/protocols/`)
+- ✅ SOME/IP Protocol Specification（SOME/IP 协议规范） — AUTOSAR_FO_PRS_SOMEIPProtocol (`foundation/protocols/prs_someip_protocol/`; R23-11; PRS, skeleton-exempt; protocol items as prose paragraphs with IDs dropped; header/serialization byte tables + return-code + payload-compatibility tables as GFM; Figures 4.1, 4.3–4.22 embedded (Figure 4.2 lost in conversion); tracing chapter omitted; 2026-11-06)
 - ❌ SOME/IP Service Discovery Protocol Specification（SOME/IP 服务发现协议规范） — AUTOSAR_FO_PRS_SOMEIPServiceDiscoveryProtocol (`foundation/protocols/`)
 - ✅ Secure Onboard Communication Protocol Specification（安全车载通信协议规范） — AUTOSAR_FO_PRS_SecOcProtocol (`foundation/protocols/prs_secoc_protocol/`)
 - ✅ Time Synchronization Protocol Specification（时间同步协议规范） — AUTOSAR_FO_PRS_TimeSyncProtocol (`foundation/protocols/prs_time_sync_protocol/`; R23-11; PRS, skeleton-exempt; protocol items as prose paragraphs with IDs dropped; message-format byte tables + config-parameter table as GFM; Figures 4.1–4.8 embedded; formulas recovered from PDF; tracing chapter + 2 placeholder sections omitted; 2026-11-06)

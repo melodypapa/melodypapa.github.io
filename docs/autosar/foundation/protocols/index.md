@@ -16,12 +16,12 @@ title: "协议（Protocols）"
 * [Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](prs_intrusion_detection_system/index.md)
 * [Requirements on Time Synchronization（时间同步需求）](rs_time_sync/index.md)
 * [Time Synchronization Protocol Specification（时间同步协议规范）](prs_time_sync_protocol/index.md)
+* [SOME/IP Protocol Specification（SOME/IP 协议规范）](prs_someip_protocol/index.md)
 
 R23-11 中本类别的其余源文档（待翻译）：
 
 * **AUTOSAR_FO_PRS_E2EProtocol** — E2E Protocol Specification（端到端协议规范）
 * **AUTOSAR_FO_PRS_LogAndTraceProtocol** — Log and Trace Protocol Specification（日志与跟踪协议规范）
-* **AUTOSAR_FO_PRS_SOMEIPProtocol** — SOME/IP Protocol Specification（SOME/IP 协议规范）
 * **AUTOSAR_FO_PRS_SOMEIPServiceDiscoveryProtocol** — SOME/IP Service Discovery Protocol Specification（SOME/IP 服务发现协议规范）
 
 ## 相关内容

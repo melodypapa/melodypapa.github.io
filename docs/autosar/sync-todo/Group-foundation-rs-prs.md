@@ -338,12 +338,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: SOME/IP Protocol Specification（SOME/IP 协议规范）; target `foundation/protocols/prs_someip_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_SOMEIPProtocol.md` — 2,201 lines, 95 figure refs, 372 item IDs
   - Note: related site content: cp/communication/someipxf, cp/communication/someiptp (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-06 run — 21 of 95 figure refs are content figures (Figure4-1, Figure4-3–4-22) embedded by source figure number; Figure 4.2 (header+E2E layout) lost in the source conversion (only label spill remains) → dropped with its field layout described in prose (USER: verify); the rest are deco strips/glyphs; protocol items as prose paragraphs with IDs + {DRAFT} + tracing lines dropped (prs_secoc precedent), PRS_SOMEIP_* cross-refs kept unbracketed; source ch.2 Requirements Traceability omitted per ASWS precedent (renumber 3→2, 4→3, 5→4, 6→5; in-text chapter refs renumbered accordingly; table/figure numbers keep SOURCE numbering); the source's trailing unnumbered References mirrored as unnumbered ## 参考文献 with ref anchors; source §1.4's two unnumbered sub-section titles kept unnumbered; byte-layout tables (header fields, magic cookie, TP example) mostly lost in conversion — the diagrams (Figure 4.15–4.20) carry the content, spilled garbled label tables dropped; return-code table 4.11 + payload-compatibility table 4.12 (row merges normalized) as GFM; glossary: no new site-glossary terms (terms identical to TR Glossary/Dlt entries or SOME/IP-specific prose definitions kept in-article); appendix A: R22-11 tables mostly empty headings → counts (added 1 / changed 12 incl. 1 titled / deleted 2), R23-11 keeps titled rows (added 3 / changed 2 / none)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_diagnostics (AUTOSAR_FO_RS_Diagnostics · Diagnostics · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Diagnostics（诊断需求）; target `foundation/diagnostics/rs_diagnostics/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Diagnostics/AUTOSAR_FO_RS_Diagnostics.md` — 2,751 lines, 86 figure refs, 400 item IDs
