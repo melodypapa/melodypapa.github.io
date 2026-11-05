@@ -29,8 +29,8 @@ Read `references/source-resolution.md`. Summary:
 
 1. Primary source is the ima-parsed Markdown in `.private/ARM/<core>/`
    (`M7/`, `R52/`), paired with the original PDF of the same doc ID and
-   revision. Use the `.md` for text and the `.pdf` for figures and tables that
-   the parse flattened.
+   revision. Use the `.md` for text, the `.pdf` for figures, and the `.pdf` to
+   read the cell grid of a table the parse flattened.
 2. Confirm the pairing from `.private/ARM/README.md` — it records the doc ID,
    revision, media size and which pairs are complete. Filenames do not always
    match between `.md` and `.pdf` (the M7 TRM PDF drops `_r1p2`; the SDEN PDF
@@ -74,9 +74,10 @@ follow the source.
 ## Step 4 — Create the work todo list
 
 One run consumes one article. Emit an explicit checklist before writing:
-chapter sections in source order, figures/tables to crop, register entries,
-nav registration, landing-page update, verification commands. If the user names
-an article with no target directory, create the directory first.
+chapter sections in source order, figures to crop, tables to rebuild as GFM,
+register entries, nav registration, landing-page update, verification commands.
+If the user names an article with no target directory, create the directory
+first.
 
 ## Step 5 — Translate in place
 
@@ -94,9 +95,12 @@ an article with no target directory, create the directory first.
 - Source notes render as `**注意：**` paragraphs.
 - Register subsections keep the source's order: name, description,
   `**使用限制**`, access table (`| EL0 | EL1 | EL2 |`), field table.
-- Tables: render textual tables (bit fields, access rights, encodings) as GFM
-  tables; keep only merged-cell layout tables as cropped `Table<ch>-<n>.png`
-  images, matching the neighbouring article.
+- Tables: every table translates to a GFM table (header row + `| --- |`),
+  including bit-field, access-rights, encoding and register-summary tables.
+  Never crop a table as an image, merged cells included. Expand a merged cell
+  by repeating the spanning value in each row of the block, so every row reads
+  on its own; leave a cell blank only where the blank is unambiguous. A table
+  the parse flattened is rebuilt from the PDF layout, still as text.
 - Figures: every content figure in the chapter embeds, cropped and referenced
   without caption text (`![Figure8-2](Figure8-2.png)`).
 
@@ -109,11 +113,17 @@ neighbouring article to fill a gap.
 
 ## Step 6 — Produce the figures
 
-Read `references/article-format.md` for naming. Crop from the source PDF with
-PyMuPDF into the article directory (`Figure<chapter>-<n>.png`,
-`Table<chapter>-<n>.png`); keep source numbering so the figure can be traced
-back. Legacy directories mix `Figure4_77.png` and `FigureA3-1.png` — never
-rename existing files, only keep new ones consistent.
+Read `references/article-format.md` for naming. Figures only: crop from the
+source PDF with PyMuPDF into the article directory (`Figure<chapter>-<n>.png`),
+keeping source numbering so the figure can be traced back. Figures that are
+bit-field bars, block diagrams or timing diagrams stay images; anything with
+rows and columns is a table and goes through Step 5 as text.
+
+Legacy directories mix `Figure4_77.png` and `FigureA3-1.png` — never rename
+existing files, only keep new ones consistent. A legacy `Table<chapter>-<n>.png`
+in a directory you are already editing is converted to a GFM table in the same
+run: delete the PNG and its reference once the translated table is verified
+against the source, and only if nothing else links to it.
 
 ## Step 7 — Register the page
 
@@ -132,9 +142,10 @@ python3 .agents/skills/autosar-translate/scripts/check_indexes.py
 python3 .agents/skills/autosar-translate/scripts/check_heading_lang.py <article>
 ```
 
-Plus: every `![](...)` target exists in the article directory; no `# ` in the
-body; every `## ` heading is Chinese with the source number; no untranslated
-English paragraph left behind.
+Plus: every `![](...)` target exists in the article directory; no `![Table…]`
+table image left in the article (each table is a GFM table with a header row and
+`| --- |`); no `# ` in the body; every `## ` heading is Chinese with the source
+number; no untranslated English paragraph left behind.
 
 Phase B (fidelity): walk the chapter section by section — each source section
 has a translation, each register/figure/table is present, row sets and bit
@@ -154,6 +165,9 @@ attribution. Merge through a PR; `master` is protected.
 ## Common mistakes
 
 - Renumbering the article to the source chapter number (must restart at 1).
+- Cropping a table as `Table<ch>-<n>.png` because the cells are merged, or
+  leaving a legacy table image in place while editing the article — tables are
+  text, spans expanded row by row.
 - Pasted PDF text with broken table cells or hyphen splits left unrepaired.
 - Figures skipped "because the parse has no caption" — the figure still embeds.
 - Translating the proprietary notice or document history.

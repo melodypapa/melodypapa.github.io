@@ -30,9 +30,13 @@ revision suffix and the SDEN PDF carries a long descriptive name.
      artefacts split a heading into two `##` lines;
    - figures appear as `![...](2/<hash>/tmp_zip_img/<uuid>.png)` — the path
      does not resolve inside `.private/ARM`, it is a parse artefact;
-   - merged table cells arrive as HTML `<table>` inside the image alt text.
-3. **Figures and layout tables**: crop from the sibling `.pdf` (PyMuPDF
-   `fitz` is installed). Do not screenshot or re-create a diagram by hand.
+   - merged table cells arrive as HTML `<table>` markup (sometimes inside the
+     image alt text): read it as the cell grid, then rebuild the table as GFM
+     text — the parse's `<table>` is a source, not something to paste.
+3. **Figures**: crop from the sibling `.pdf` (PyMuPDF `fitz` is installed).
+   Do not screenshot or re-create a diagram by hand. Tables are never cropped —
+   when the parse flattened one, read the cell grid from the PDF to rebuild it
+   as GFM (see `article-format.md`).
 
 ## Verify the pairing
 
