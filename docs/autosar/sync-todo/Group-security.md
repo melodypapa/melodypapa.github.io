@@ -22,8 +22,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks (strict build 0 WARNING; check_indexes/heading-lang/api-sync OK; hygiene greps clean)
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate (batch gate — user asked for combined confirmation at batch end)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 5 — User confirmation gate (batch gate 2026-11-06 — user confirmed both rows together per batch instruction)
+  - [ ] Step 6 — TODO.md row + commit/PR (TODO.md row + article commit done: f9a5075 firewall / 27415df idsm)
 - [ ] idsm (SWS_IntrusionDetectionSystemManager · R23-11 markdown · ❌ new article, short name IdsM)
   - Note: 2026-11-06 run — source ch.2 has no 2.1/2.2 subsections; rendered flat with the source's own table order (32 Abbreviation/Acronym rows then 17 Terms rows) separated by the table-header lead-ins 「缩写 / 首字母缩略词」 / 「术语」
   - Note: source 3.1/3.2 order reversed vs canonical (3.1 Related Specification, 3.2 Input Documents) — mirrored as the source has it
@@ -38,8 +38,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks (strict build 0 WARNING; check_indexes/heading-lang/api-sync OK incl. alias; hygiene greps clean — IDs only in appendix A)
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate (batch gate — user asked for combined confirmation at batch end)
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 5 — User confirmation gate (batch gate 2026-11-06 — user confirmed both rows together per batch instruction)
+  - [ ] Step 6 — TODO.md row + commit/PR (TODO.md row + article commit done: f9a5075 firewall / 27415df idsm)
 
 ## Not queued (deliberately skipped)
 - (none)
