@@ -1,6 +1,6 @@
 # AUTOSAR translation queue — index
 
-> Generated: 2026-10-24 · Foundation batch added 2026-11-02 · Base: R23-11 (`~/Workspace/autosar_standard/markdown/` — `Classic_Platform/` for Group 1–16, `Foundation/` for Groups 17–18)
+> Generated: 2026-10-24 · Foundation batch added 2026-11-02 · CP methodology batch added 2026-11-06 · Base: R23-11 (`~/Workspace/autosar_standard/markdown/` — `Classic_Platform/` for Groups 1–16 and 19, `Foundation/` for Groups 17–18)
 > Model: Group queue modelled on py-armodel `sync-autosar-class` — one `Group-<section>.md`
 > per batch, one row per document, each row carrying a 6-step sub-checklist;
 > **resume = the first row still `[ ]` in the chosen batch file**; all rows `[x]` =
@@ -30,8 +30,9 @@
 | 16 | [Group-exp.md](Group-exp.md) | 20 | 20 missing EXP guides (the TPS template is exempt and not queued, same flow) |
 | 17 | [Group-foundation-exp.md](Group-foundation-exp.md) | 20 | **Foundation guides/templates/reports** (EXP 5 / TR 6 / TPS 8 / ASWS 1) — document-type counterpart of CP's Group-exp; 1 in-flight (TR Glossary, ch.4 14/343 terms); size-ascending |
 | 18 | [Group-foundation-rs-prs.md](Group-foundation-rs-prs.md) | 32 | **Foundation requirement/protocol specifications** (RS 23 / PRS 9) — size-ascending; the RS/PRS item-ID keep-or-drop decision is recorded in the file header |
+| 19 | [Group-cp-methodology.md](Group-cp-methodology.md) | 17 | **CP 方法论与模板** — the `MethodologyAndTemplates` folder (RS 6 / TPS 7 / TR 4), size-ascending; 1 existing-article alignment row (BSWMDT) + 16 new articles; the item-ID decision proposed in the file header is confirmed at the first run's Step 1 |
 
-Total 200 documents = CP 148 + Foundation 52. CP 148 = all **127 R23-11 SWS** (io 7 + general 4 + crypto 4 + system_services 7 + mode_management 2 + diagnostics 3 + memory 12 + communication 65 + globaltime 4 + libraries 9 + mcal 3 + rte-swarch 2 + safety 3 + security 2, 1 of them already done) + **20 missing EXP** + 1 TPS template (exempt, not queued — see Group-exp). Foundation 52 = every `AUTOSAR_FO_*` document of R23-11 (`Foundation/Releases/R23-11/`, 10 topics), all skeleton-exempt, 1 partially translated (TR Glossary) — split by document type on 2026-11-03 (user request, CP Group-exp model): Group 17 = 20 guide/template/report documents, Group 18 = 32 requirement/protocol specifications. Batch order is adjustable; row order inside a batch = suggested execution order (small/alignment work first, giant sources last).
+Total 217 documents = CP 165 + Foundation 52. CP 165 = all **127 R23-11 SWS** (io 7 + general 4 + crypto 4 + system_services 7 + mode_management 2 + diagnostics 3 + memory 12 + communication 65 + globaltime 4 + libraries 9 + mcal 3 + rte-swarch 2 + safety 3 + security 2, 1 of them already done) + **20 missing EXP** + **17 MethodologyAndTemplates documents** (Group 19, added 2026-11-06 — the original 2026-10-24 bootstrap scoped the CP batch to SWS + EXP and left the whole folder unqueued with only the BSWMDT exempt line in Group-exp; the user asked to close that gap). Foundation 52 = every `AUTOSAR_FO_*` document of R23-11 (`Foundation/Releases/R23-11/`, 10 topics), all skeleton-exempt, 1 partially translated (TR Glossary) — split by document type on 2026-11-03 (user request, CP Group-exp model): Group 17 = 20 guide/template/report documents, Group 18 = 32 requirement/protocol specifications. Batch order is adjustable; row order inside a batch = suggested execution order (small/alignment work first, giant sources last).
 
 ## Rules
 
