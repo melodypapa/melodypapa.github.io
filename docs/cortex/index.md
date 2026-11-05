@@ -24,6 +24,16 @@ title: "ARM Cortex"
 4. [ARM 异常模型](m7_processor/exception_model/index.md)
 5. [ARM Cortex-M7 指令集](m7_processor/instruction_set/index.md)
 6. [ARM Cortex-M7 程序状态寄存器](m7_processor/program_status_register/index.md)
+7. [嵌套向量中断控制器（NVIC）](m7_processor/nested_vectored_interrupt_controller/index.md)
+8. [系统控制（System Control）](m7_processor/system_control/index.md)
+9. [初始化（Initialization）](m7_processor/initialization/index.md)
+10. [内存保护单元（Memory Protection Unit）](m7_processor/mpu/index.md)
+11. [浮点单元（Floating Point Unit）](m7_processor/fpu/index.md)
+12. [调试（Debug）](m7_processor/debug/index.md)
+13. [交叉触发接口（Cross Trigger Interface）](m7_processor/cti/index.md)
+14. [数据观察点与跟踪单元（Data Watchpoint and Trace Unit）](m7_processor/dwt/index.md)
+15. [插桩跟踪宏单元（Instrumentation Trace Macrocell Unit）](m7_processor/itm/index.md)
+16. [简介（Introduction）](m7_processor/introduction/index.md)
 
 ## ARM Cortex R52+ 处理器
 
