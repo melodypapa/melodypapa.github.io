@@ -50,6 +50,7 @@ title: "基础标准（Foundation）"
   * [Requirements on Time Synchronization（时间同步需求）](protocols/rs_time_sync/index.md)
   * [Time Synchronization Protocol Specification（时间同步协议规范）](protocols/prs_time_sync_protocol/index.md)
   * [SOME/IP Protocol Specification（SOME/IP 协议规范）](protocols/prs_someip_protocol/index.md)
+  * [SOME/IP Service Discovery Protocol Specification（SOME/IP 服务发现协议规范）](protocols/prs_someip_service_discovery_protocol/index.md)
 * [发布文档（Release Documentation）](release_documentation/index.md)
   * [Release Overview（发布概览）](release_documentation/tr_release_overview/index.md)
 * [功能安全（Safety）](safety/index.md)

@@ -362,12 +362,14 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: SOME/IP Service Discovery Protocol Specification（SOME/IP 服务发现协议规范）; target `foundation/protocols/prs_someip_service_discovery_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_SOMEIPServiceDiscoveryProtocol.md` — 3,259 lines, 132 figure refs, 356 item IDs; **giant source** — segment plan before Step 2 (OS/RTE precedent)
   - Note: related site content: cp/communication/service_discovery (Sd) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-06 run — 26 of 132 figure refs are content figures (Figure1-1 dependencies, Figure5-1–5-18 message/entry/option formats + state machines + error handling, Figure5-19–5-23 pub/sub examples, Figure5-24–5-26 pub/sub state machines) embedded by source figure number; the rest are deco strips/glyphs (258x27/15x15); protocol items as prose paragraphs with IDs + {DRAFT} + tracing lines dropped (prs_secoc precedent), PRS_SOMEIPSD_* cross-refs kept unbracketed; source ch.3 Requirements Traceability omitted per ASWS precedent (renumber 4→3, 5→4, 6→5, 7→6, 8→7; source 7.1/7.2 → 6.1/6.2); byte-layout spills and the state-machine transition lists (§5.1.4.4, §5.1.6 pub/sub states) are garbled in the conversion — the diagrams (Figure5.16/5.17/5.24–5.26) carry the content, transition lists replaced by state inventories + figures (run decision USER: verify); tables 5.1–5.8 (allowed options per entry, entry types, reserved IDs/names) + config-param table 6.1 as GFM; no new site-glossary terms (acronym tables are SOME/IP-SD-specific prose definitions kept in-article); appendix A ID enumerations rendered as counts (+7/~12/无)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_log_and_trace_protocol (AUTOSAR_FO_PRS_LogAndTraceProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Log and Trace Protocol Specification（日志与跟踪协议规范）; target `foundation/protocols/prs_log_and_trace_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_LogAndTraceProtocol.md` — 3,373 lines, 111 figure refs, 450 item IDs; **giant source** — segment plan before Step 2 (OS/RTE precedent)
