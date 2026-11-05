@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **859** 个条目。
+共 **875** 个条目。
 
 ## A
 
@@ -1439,6 +1439,20 @@ title: "AUTOSAR API 类型清单"
 **[Gpt_ValueType](../mcal/gpt_driver/index.md#723-gpt_valuetype)**
 > 类型 · [AUTOSAR GPT Driver（通用定时器驱动）](../mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
+## H
+
+**[HTMSS_TestCfgType](../system_services/hw_test_manager/index.md#721-htmss_testcfgtype)**
+> 类型 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
+
+**[HTMSS_TestGroupType](../system_services/hw_test_manager/index.md#723-htmss_testgrouptype)**
+> 类型 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
+
+**[HTMSS_TestResultType](../system_services/hw_test_manager/index.md#724-htmss_testresulttype)**
+> 类型 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
+
+**[HTMSS_TestStatusType](../system_services/hw_test_manager/index.md#722-htmss_teststatustype)**
+> 类型 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
+
 ## I
 
 **[Icu_ActivationType](../io/icu_driver/index.md#725-icu_activationtype)**
@@ -2283,6 +2297,42 @@ title: "AUTOSAR API 类型清单"
 
 **[Std_VersionInfoType](../general/standard_types/index.md#712-std_versioninfotype)**
 > 类型 · [AUTOSAR Standard Types（标准类型）](../general/standard_types/index.md) · SWS_StandardTypes · R23-11
+
+**[SwCluC_BManif_ConCtrlType](../system_services/software_cluster_connection/index.md#7213-swcluc_bmanif_conctrltype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_GlobalResourceIdType](../system_services/software_cluster_connection/index.md#7216-swcluc_bmanif_globalresourceidtype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_HandleIndexType](../system_services/software_cluster_connection/index.md#7219-swcluc_bmanif_handleindextype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_HandleType](../system_services/software_cluster_connection/index.md#72111-swcluc_bmanif_handletype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_HeaderType](../system_services/software_cluster_connection/index.md#72112-swcluc_bmanif_headertype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_MachineIdType](../system_services/software_cluster_connection/index.md#7212-swcluc_bmanif_machineidtype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_ResourceGuardValueType](../system_services/software_cluster_connection/index.md#7217-swcluc_bmanif_resourceguardvaluetype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_ResourcePropertiesType](../system_services/software_cluster_connection/index.md#7214-swcluc_bmanif_resourcepropertiestype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_ResourceTypeIdType](../system_services/software_cluster_connection/index.md#7215-swcluc_bmanif_resourcetypeidtype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_SwClusterIdType](../system_services/software_cluster_connection/index.md#7211-swcluc_bmanif_swclusteridtype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_TableIndexType](../system_services/software_cluster_connection/index.md#7218-swcluc_bmanif_tableindextype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_VoidFncPtrType](../system_services/software_cluster_connection/index.md#72110-swcluc_bmanif_voidfncptrtype)**
+> 类型 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
 
 ## T
 

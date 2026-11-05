@@ -181,6 +181,8 @@ plugins:
         autosar/system_services/function_inhibition_manager/index.md: autosar/cp/system_services/function_inhibition_manager/index.md
         autosar/system_services/index.md: autosar/cp/system_services/index.md
         autosar/system_services/operating_system/index.md: autosar/cp/system_services/operating_system/index.md
+        autosar/system_services/software_cluster_connection/index.md: autosar/cp/system_services/software_cluster_connection/index.md
+        autosar/system_services/hw_test_manager/index.md: autosar/cp/system_services/hw_test_manager/index.md
         autosar/system_services/sw_cluster_design_and_integration/index.md: autosar/cp/system_services/sw_cluster_design_and_integration/index.md
         autosar/system_services/time_service/index.md: autosar/cp/system_services/time_service/index.md
         autosar/template/index.md: autosar/cp/template/index.md
@@ -418,6 +420,8 @@ nav:
         - "Os": autosar/cp/system_services/operating_system/index.md
         - "Tm": autosar/cp/system_services/time_service/index.md
         - "软件集群设计与集成指南": autosar/cp/system_services/sw_cluster_design_and_integration/index.md
+        - "SwCluC SWS": autosar/cp/system_services/software_cluster_connection/index.md
+        - "HwTestManager": autosar/cp/system_services/hw_test_manager/index.md
       - 功能安全:
         - autosar/cp/safety/index.md
         - "WdgM": autosar/cp/safety/watchdog_manager/index.md

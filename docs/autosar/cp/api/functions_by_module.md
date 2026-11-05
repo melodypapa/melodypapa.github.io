@@ -1770,6 +1770,19 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**Gpt_StartTimer**](../mcal/gpt_driver/index.md#736-gpt_starttimer) | 启动一个定时器通道。 |
 | [**Gpt_StopTimer**](../mcal/gpt_driver/index.md#737-gpt_stoptimer) | 停止一个定时器通道。 |
 
+## Hardware Test Management startup shutdown（硬件测试管理启动和关闭）（6）
+
+来源：[Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager
+
+| 函数 | 简述 |
+|---|---|
+| [**HTMSS_GetTestStatus**](../system_services/hw_test_manager/index.md#733-htmss_getteststatus) | — |
+| [**HTMSS_GetVersionInfo**](../system_services/hw_test_manager/index.md#734-htmss_getversioninfo) | — |
+| [**HTMSS_Init**](../system_services/hw_test_manager/index.md#731-htmss_init) | — |
+| [**HTMSS_ShutdownTestErrorHook**](../system_services/hw_test_manager/index.md#782-htmss_shutdowntesterrorhook) | — |
+| [**HTMSS_StartTest**](../system_services/hw_test_manager/index.md#732-htmss_starttest) | — |
+| [**HTMSS_StartupTestErrorHook**](../system_services/hw_test_manager/index.md#781-htmss_startuptesterrorhook) | — |
+
 ## AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）（1）
 
 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](../io/iohwab/index.md) · SWS_IOHardwareAbstraction
@@ -2579,6 +2592,45 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**SoAd_TpTransmit**](../communication/soad/index.md#7324-soad_tptransmit) | C |
 | [**SoAd_TxConfirmation**](../communication/soad/index.md#743-soad_txconfirmation) | C |
 | [**SoAd_WriteDhcpHostNameOption**](../communication/soad/index.md#73419-soad_writedhcphostnameoption) | C |
+
+## Software Cluster Connection（软件集群连接）（32）
+
+来源：[Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection
+
+| 函数 | 简述 |
+|---|---|
+| [**SwCluC_BManif_GetConSwClusterId**](../system_services/software_cluster_connection/index.md#7314-swcluc_bmanif_getconswclusterid) | — |
+| [**SwCluC_BManif_GetHandle**](../system_services/software_cluster_connection/index.md#7312-swcluc_bmanif_gethandle) | — |
+| [**SwCluC_BManif_GetNoOfHandleSets**](../system_services/software_cluster_connection/index.md#7316-swcluc_bmanif_getnoofhandlesets) | — |
+| [**SwCluC_BManif_GetValidityMarker**](../system_services/software_cluster_connection/index.md#7318-swcluc_bmanif_getvaliditymarker) | — |
+| [**SWCLUC_BMANIF_NO_OF_ENTRIES**](../system_services/software_cluster_connection/index.md#7319-swcluc_bmanif_no_of_entries) | — |
+| [**SWCLUC_BMANIF_NO_OF_NOTIFIER_SETS**](../system_services/software_cluster_connection/index.md#73110-swcluc_bmanif_no_of_notifier_sets) | — |
+| [**SwCluC_ComProxy_CbkInv**](../system_services/software_cluster_connection/index.md#74312-swcluc_comproxy_cbkinv) | — |
+| [**SwCluC_ComProxy_CbkRxAck**](../system_services/software_cluster_connection/index.md#74311-swcluc_comproxy_cbkrxack) | — |
+| [**SwCluC_ComProxy_CbkRxTOut**](../system_services/software_cluster_connection/index.md#74313-swcluc_comproxy_cbkrxtout) | — |
+| [**SwCluC_ComProxy_CbkTxAck**](../system_services/software_cluster_connection/index.md#74314-swcluc_comproxy_cbktxack) | — |
+| [**SwCluC_ComProxy_CbkTxErr**](../system_services/software_cluster_connection/index.md#74315-swcluc_comproxy_cbktxerr) | — |
+| [**SwCluC_ComProxy_CbkTxTOut**](../system_services/software_cluster_connection/index.md#74316-swcluc_comproxy_cbktxtout) | — |
+| [**SwCluC_ComProxy_Init**](../system_services/software_cluster_connection/index.md#7335-swcluc_comproxy_init) | — |
+| [**SwCluC_DcmProxy_Init**](../system_services/software_cluster_connection/index.md#7336-swcluc_dcmproxy_init) | — |
+| [**SwCluC_DemProxy_Init**](../system_services/software_cluster_connection/index.md#7337-swcluc_demproxy_init) | — |
+| [**SwCluC_FiMProxy_Init**](../system_services/software_cluster_connection/index.md#7338-swcluc_fimproxy_init) | — |
+| [**SwCluC_GetVersionInfo**](../system_services/software_cluster_connection/index.md#7341-swcluc_getversioninfo) | — |
+| [**SwCluC_LdComProxy_Init**](../system_services/software_cluster_connection/index.md#7334-swcluc_ldcomproxy_init) | — |
+| [**SwCluC_LdComProxy_LdComCbkCopyRxData**](../system_services/software_cluster_connection/index.md#74321-swcluc_ldcomproxy_ldcomcbkcopyrxdata) | — |
+| [**SwCluC_LdComProxy_LdComCbkCopyTxData**](../system_services/software_cluster_connection/index.md#74322-swcluc_ldcomproxy_ldcomcbkcopytxdata) | — |
+| [**SwCluC_LdComProxy_LdComCbkRxIndication**](../system_services/software_cluster_connection/index.md#74323-swcluc_ldcomproxy_ldcomcbkrxindication) | — |
+| [**SwCluC_LdComProxy_LdComCbkStartOfReception**](../system_services/software_cluster_connection/index.md#74324-swcluc_ldcomproxy_ldcomcbkstartofreception) | — |
+| [**SwCluC_LdComProxy_LdComCbkTpRxIndication**](../system_services/software_cluster_connection/index.md#74325-swcluc_ldcomproxy_ldcomcbktprxindication) | — |
+| [**SwCluC_LdComProxy_LdComCbkTpTxConfirmation**](../system_services/software_cluster_connection/index.md#74328-swcluc_ldcomproxy_ldcomcbktptxconfirmation) | — |
+| [**SwCluC_LdComProxy_LdComCbkTriggerTransmit**](../system_services/software_cluster_connection/index.md#74326-swcluc_ldcomproxy_ldcomcbktriggertransmit) | — |
+| [**SwCluC_LdComProxy_LdComCbkTxConfirmation**](../system_services/software_cluster_connection/index.md#74327-swcluc_ldcomproxy_ldcomcbktxconfirmation) | — |
+| [**SwCluC_NvMProxy_Init**](../system_services/software_cluster_connection/index.md#7332-swcluc_nvmproxy_init) | — |
+| [**SwCluC_NvMProxy_MultiBlockReadAllJobFinished**](../system_services/software_cluster_connection/index.md#7333-swcluc_nvmproxy_multiblockreadalljobfinished) | — |
+| [**SwCluC_OsProxy_Init**](../system_services/software_cluster_connection/index.md#7331-swcluc_osproxy_init) | — |
+| [**SwCluC_Xcc_Init1**](../system_services/software_cluster_connection/index.md#7321-swcluc_xcc_init1) | — |
+| [**SwCluC_Xcc_Init2**](../system_services/software_cluster_connection/index.md#7322-swcluc_xcc_init2) | — |
+| [**SwCluC_Xcc_MainFunction**](../system_services/software_cluster_connection/index.md#7521-swcluc_xcc_mainfunction) | — |
 
 ## Specification of Basic Software Multicore Library（基础软件多核库规范）（31）
 

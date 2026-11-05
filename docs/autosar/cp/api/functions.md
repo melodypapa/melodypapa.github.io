@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2612** 个条目。
+共 **2650** 个条目。
 
 ## A
 
@@ -5000,6 +5000,26 @@ title: "AUTOSAR API 函数清单"
 **[Gpt_StopTimer](../mcal/gpt_driver/index.md#737-gpt_stoptimer)**
 > 函数 · [AUTOSAR GPT Driver（通用定时器驱动）](../mcal/gpt_driver/index.md) · SWS_GPTDriver · R23-11
 
+## H
+
+**[HTMSS_GetTestStatus](../system_services/hw_test_manager/index.md#733-htmss_getteststatus)**
+> 函数 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
+
+**[HTMSS_GetVersionInfo](../system_services/hw_test_manager/index.md#734-htmss_getversioninfo)**
+> 函数 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
+
+**[HTMSS_Init](../system_services/hw_test_manager/index.md#731-htmss_init)**
+> 函数 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
+
+**[HTMSS_ShutdownTestErrorHook](../system_services/hw_test_manager/index.md#782-htmss_shutdowntesterrorhook)**
+> 函数 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
+
+**[HTMSS_StartTest](../system_services/hw_test_manager/index.md#732-htmss_starttest)**
+> 函数 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
+
+**[HTMSS_StartupTestErrorHook](../system_services/hw_test_manager/index.md#781-htmss_startuptesterrorhook)**
+> 函数 · [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../system_services/hw_test_manager/index.md) · SWS_HWTestManager · R23-11
+
 ## I
 
 **[Icu_CheckWakeup](../io/icu_driver/index.md#736-icu_checkwakeup)**
@@ -7293,6 +7313,102 @@ title: "AUTOSAR API 函数清单"
 
 **[StorageCondition](../diagnostics/diagnostic_event_manager/index.md#76337-storagecondition)**
 > 函数 · [AUTOSAR Diagnostic Event Manager（诊断事件管理器）](../diagnostics/diagnostic_event_manager/index.md) · SWS_DiagnosticEventManager · R23-11
+
+**[SwCluC_BManif_GetConSwClusterId](../system_services/software_cluster_connection/index.md#7314-swcluc_bmanif_getconswclusterid)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_GetHandle](../system_services/software_cluster_connection/index.md#7312-swcluc_bmanif_gethandle)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_GetNoOfHandleSets](../system_services/software_cluster_connection/index.md#7316-swcluc_bmanif_getnoofhandlesets)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_BManif_GetValidityMarker](../system_services/software_cluster_connection/index.md#7318-swcluc_bmanif_getvaliditymarker)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SWCLUC_BMANIF_NO_OF_ENTRIES](../system_services/software_cluster_connection/index.md#7319-swcluc_bmanif_no_of_entries)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SWCLUC_BMANIF_NO_OF_NOTIFIER_SETS](../system_services/software_cluster_connection/index.md#73110-swcluc_bmanif_no_of_notifier_sets)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_ComProxy_CbkInv](../system_services/software_cluster_connection/index.md#74312-swcluc_comproxy_cbkinv)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_ComProxy_CbkRxAck](../system_services/software_cluster_connection/index.md#74311-swcluc_comproxy_cbkrxack)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_ComProxy_CbkRxTOut](../system_services/software_cluster_connection/index.md#74313-swcluc_comproxy_cbkrxtout)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_ComProxy_CbkTxAck](../system_services/software_cluster_connection/index.md#74314-swcluc_comproxy_cbktxack)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_ComProxy_CbkTxErr](../system_services/software_cluster_connection/index.md#74315-swcluc_comproxy_cbktxerr)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_ComProxy_CbkTxTOut](../system_services/software_cluster_connection/index.md#74316-swcluc_comproxy_cbktxtout)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_ComProxy_Init](../system_services/software_cluster_connection/index.md#7335-swcluc_comproxy_init)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_DcmProxy_Init](../system_services/software_cluster_connection/index.md#7336-swcluc_dcmproxy_init)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_DemProxy_Init](../system_services/software_cluster_connection/index.md#7337-swcluc_demproxy_init)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_FiMProxy_Init](../system_services/software_cluster_connection/index.md#7338-swcluc_fimproxy_init)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_GetVersionInfo](../system_services/software_cluster_connection/index.md#7341-swcluc_getversioninfo)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_LdComProxy_Init](../system_services/software_cluster_connection/index.md#7334-swcluc_ldcomproxy_init)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_LdComProxy_LdComCbkCopyRxData](../system_services/software_cluster_connection/index.md#74321-swcluc_ldcomproxy_ldcomcbkcopyrxdata)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_LdComProxy_LdComCbkCopyTxData](../system_services/software_cluster_connection/index.md#74322-swcluc_ldcomproxy_ldcomcbkcopytxdata)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_LdComProxy_LdComCbkRxIndication](../system_services/software_cluster_connection/index.md#74323-swcluc_ldcomproxy_ldcomcbkrxindication)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_LdComProxy_LdComCbkStartOfReception](../system_services/software_cluster_connection/index.md#74324-swcluc_ldcomproxy_ldcomcbkstartofreception)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_LdComProxy_LdComCbkTpRxIndication](../system_services/software_cluster_connection/index.md#74325-swcluc_ldcomproxy_ldcomcbktprxindication)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_LdComProxy_LdComCbkTpTxConfirmation](../system_services/software_cluster_connection/index.md#74328-swcluc_ldcomproxy_ldcomcbktptxconfirmation)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_LdComProxy_LdComCbkTriggerTransmit](../system_services/software_cluster_connection/index.md#74326-swcluc_ldcomproxy_ldcomcbktriggertransmit)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_LdComProxy_LdComCbkTxConfirmation](../system_services/software_cluster_connection/index.md#74327-swcluc_ldcomproxy_ldcomcbktxconfirmation)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_NvMProxy_Init](../system_services/software_cluster_connection/index.md#7332-swcluc_nvmproxy_init)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_NvMProxy_MultiBlockReadAllJobFinished](../system_services/software_cluster_connection/index.md#7333-swcluc_nvmproxy_multiblockreadalljobfinished)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_OsProxy_Init](../system_services/software_cluster_connection/index.md#7331-swcluc_osproxy_init)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_Xcc_Init1](../system_services/software_cluster_connection/index.md#7321-swcluc_xcc_init1)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_Xcc_Init2](../system_services/software_cluster_connection/index.md#7322-swcluc_xcc_init2)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
+
+**[SwCluC_Xcc_MainFunction](../system_services/software_cluster_connection/index.md#7521-swcluc_xcc_mainfunction)**
+> 函数 · [Software Cluster Connection（软件集群连接）](../system_services/software_cluster_connection/index.md) · SWS_SoftwareClusterConnection · R23-11
 
 **[SyncScheduleTable](../system_services/operating_system/index.md#7414-syncscheduletable)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11

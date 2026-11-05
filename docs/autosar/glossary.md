@@ -354,6 +354,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
 
+**Application Software Cluster**
+> 主要包含软件组件、仅包含选定的 BSW 模块（例如服务模块、转换器等）的软件集群（**Application Software Cluster**）。
+>
+> 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
+{: .glossary-source}
+
 **Applied Rate**
 > 用于设置/计算全局时间的本地实例所施加的速率。对于时基主节点，它与速率校正 r_rc 相同；对于时基从节点，对于同步时基为 r_rc 与 r_oc 之和，对于偏移时基分别为 (r_orc − 1) 与 r_oc。
 >
@@ -530,6 +536,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](cp/application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis）
 {: .glossary-source}
 
+**Base Socket**
+> 在低层代理和高层代理之间链接通用基础设施（例如 BSW API 集合）的通用链接（**base socket**）。
+>
+> 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
+{: .glossary-source}
+
 **Basic Storage Object**
 > 「基本存储对象」是 **NVRAM** 块的最小实体。多个基本存储对象可用于构建 **NVRAM** 块。「基本存储对象」可以驻留在不同的内存位置，包括：**RAM**、**ROM**、NV 内存（**NV memory**）中。
 >
@@ -545,19 +557,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Binary Manifest**
 > 软件集群的二进制对象的定义良好的接口，提供资源的元信息与访问此类资源的句柄（**Binary Manifest**）
 >
-> 来源：[Software Cluster Design and Integration Guideline for Classic Platform（经典平台软件集群设计与集成指南）](cp/system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline）
+> 来源：[Software Cluster Design and Integration Guideline for Classic Platform（经典平台软件集群设计与集成指南）](cp/system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline）、[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
 {: .glossary-source}
 
 **Binary Object**
 > 一组文件的集合，包含在编程到目标 ECU 之前不会再被修改的二进制可执行代码与数据（**Binary Object**）
 >
-> 来源：[Software Cluster Design and Integration Guideline for Classic Platform（经典平台软件集群设计与集成指南）](cp/system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline）
+> 来源：[Software Cluster Design and Integration Guideline for Classic Platform（经典平台软件集群设计与集成指南）](cp/system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline）、[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
 {: .glossary-source}
 
 **BIST**
 > 内建自测试（**Built in Self Test**）
 >
-> 来源：[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）、[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](cp/safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures）
+> 来源：[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）、[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](cp/safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures）、[Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](cp/system_services/hw_test_manager/index.md)（AUTOSAR_CP_SWS_HWTestManager）
 {: .glossary-source}
 
 **Block Management Type**
@@ -1298,6 +1310,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 时钟参考格式（**Control Reference Format**），由 IEEE 1722 定义。
 >
 > 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）、[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
+{: .glossary-source}
+
+**Cross Cluster Communication**
+> 实现软件集群之间 VFB 通信的 Software Cluster Connection 功能块（**Cross Cluster Communication**）。
+>
+> 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
 {: .glossary-source}
 
 **Cross-Cluster External Graph**
@@ -2827,6 +2845,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
+**Guard Value**
+> 由对某些接口属性的哈希构成的守护信息，确保只有兼容的接口才会被连接（**Guard Value**）。
+>
+> 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
+{: .glossary-source}
+
 ## H
 
 **HARA**
@@ -2953,6 +2977,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 主时间源（通常）暂时不可用，而另一个时间源提供（可能降级的）时间信息的场景。
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
+{: .glossary-source}
+
+**Host Software Cluster**
+> 包含 BSW 主要部分（尤其是微控制器相关的下层 BSW 模块，例如 OS 和 MCAL）的唯一软件集群（**Host Software Cluster**）。
+>
+> 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
 {: .glossary-source}
 
 **HSM**
@@ -4126,7 +4156,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **MSTP（Microcontroller Specific Test Package）**
 > 微控制器特定测试包（**Microcontroller Specific Test Package**）
 >
-> 来源：[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](cp/safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures）
+> 来源：[Overview of Functional Safety Measures in AUTOSAR（AUTOSAR 功能安全措施概览）](cp/safety/functional_safety_measures/index.md)（AUTOSAR_CP_EXP_FunctionalSafetyMeasures）、[Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](cp/system_services/hw_test_manager/index.md)（AUTOSAR_CP_SWS_HWTestManager）
 {: .glossary-source}
 
 **MTU**
@@ -5188,7 +5218,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Proxy Module**
 > 替代应用软件集群中一个 BSW 模块的模块，拆分为高代理与低代理（**Proxy Module**）
 >
-> 来源：[Software Cluster Design and Integration Guideline for Classic Platform（经典平台软件集群设计与集成指南）](cp/system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline）
+> 来源：[Software Cluster Design and Integration Guideline for Classic Platform（经典平台软件集群设计与集成指南）](cp/system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline）、[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
 {: .glossary-source}
 
 **PRS IDS**
@@ -5977,6 +6007,24 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）、[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Requirements on Firewall（防火墙需求）](foundation/security/rs_firewall/index.md)（AUTOSAR_FO_RS_Firewall）
 {: .glossary-source}
 
+**Software Cluster**
+> 将所有与在机器上部署软件相关的 AUTOSAR 工件归为一组（**Software Cluster**）。
+>
+> 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
+{: .glossary-source}
+
+**Software Cluster Connection**
+> 提供以下特性的 BSW 模块：连接部署在同一机器上的二进制对象、通过代理模块替代应用软件集群中缺失的 BSW 模块、与 RTE 一起通过 RTE 实现插件实现软件集群之间的 VFB 通信（**Software Cluster Connection**）。
+>
+> 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
+{: .glossary-source}
+
+**Software Cluster Connector**
+> 读取未连接的二进制清单的信息并计算可修改的二进制清单部分（**Software Cluster Connector**）。
+>
+> 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
+{: .glossary-source}
+
 **Software Trigger**
 > 软件触发是一个软件**API**调用，用于启动转换一个**ADC**通道组或一系列连续**ADC**通道组转换的。
 >
@@ -6221,6 +6269,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 子地址区（**Sub Address Area**）是指逻辑地址空间中的连续存储区域，并映射到一个存储设备的一个扇区批次（**Sector Batch**）。
 >
 > 来源：[AUTOSAR Memory Access（存储访问）](cp/memory/memory_access/index.md)（AUTOSAR_CP_SWS_MemoryAccess）
+{: .glossary-source}
+
+**Substitution Software Cluster**
+> 出于缺陷修复目的可以覆盖其他软件集群所提供资源的唯一软件集群（**Substitution Software Cluster**）。
+>
+> 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
 {: .glossary-source}
 
 **Supervised Entity**
