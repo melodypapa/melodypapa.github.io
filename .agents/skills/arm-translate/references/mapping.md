@@ -39,11 +39,10 @@ is the errata notice.
 | Article | Source | Evidence |
 | --- | --- | --- |
 | `arm_architecture_memory_mode/` | Armv7-M ARM appendix A3 | `FigureA3-1`…`FigureA3-5` |
-| `exception_model/` | Armv7-M ARM exceptions chapter | `Figure2-1`, `Figure2-2`, `Table2-14-1` *(verify)* |
-| `program_status_register/` | M7 TRM programmers model (cross-check ARM B1.2) | `Table2-3`…`Table2-6A` *(verify)* |
+| `programmers_model/` | M7 TRM programmers model + Armv7-M ARM exceptions chapter (merged 2026-11-06) | `Table2-3`…`Table2-6A`, `Figure2-1`, `Figure2-2`, `Table2-14-1` *(verify)* |
 | `nested_vectored_interrupt_controller/` | M7 TRM NVIC chapter | no figures *(verify)* |
 | `instruction_set/` | Armv7-M ARM instruction-set chapters | no figures *(verify)* |
-| `protected_memory_system_archi_pmsav7/` | Armv7-M ARM appendix B3 | `TableB3-1`…`TableB3-11` |
+| `mpu/` | M7 TRM MPU chapter + Armv7-M ARM appendix B3 (merged 2026-11-06) | `TableB3-1`…`TableB3-11` |
 | `system_address_map/` | M7 TRM address-map chapter | `TableB3-3` *(verify)* |
 
 Not yet translated (coverage backlog): M7 TRM clocking/reset, power control,

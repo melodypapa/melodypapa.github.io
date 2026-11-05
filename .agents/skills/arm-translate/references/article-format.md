@@ -79,6 +79,14 @@ Never add `spec:`, `release:` or tags — that convention belongs to `docs/autos
 ## Landing pages and navigation
 
 - `docs/cortex/<core>_processor/<topic>/index.md` — one directory per topic.
+- One source chapter maps to exactly one article. Do not split a chapter across
+  directories (two articles for ch2's PSR and exception model, a separate MPU
+  page for ch6); merge the parts into one page, renumber the appended sections,
+  and keep old URLs alive through `redirect_maps`.
+- The document glossary goes in `docs/cortex/<core>_processor/glossary/index.md`
+  with the `title: "术语表（Glossary）"`, the sentence that the manual keeps no
+  local word list, and a single link to the Arm Glossary. It is registered last
+  in the core group (appendix position).
 - `mkdocs.yml`, group `ARM Cortex` → `Cortex-M7 内核` / `Cortex-R52+ 内核`: add
   `- "<中文标题>": cortex/<core>_processor/<topic>/index.md`.
 - `docs/cortex/index.md`: numbered link under the matching core heading

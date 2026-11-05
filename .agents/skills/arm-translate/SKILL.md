@@ -130,6 +130,21 @@ against the source, and only if nothing else links to it.
 - `mkdocs.yml`: add the page under the `ARM Cortex` group of the right core
   (`Cortex-M7 内核` / `Cortex-R52+ 内核`).
 - `docs/cortex/index.md`: add the numbered link under the matching core section.
+- Insert both entries at the page's **source chapter position** — the nav group
+  and the landing list are ordered by chapter number (ch1 → ch14 → appendix),
+  not by arrival time. Never append a new page at the end of the group; a
+  concept article takes the position of the closest chapter it supports. See
+  `references/article-format.md`.
+- **One source chapter = one article.** When a chapter is currently split across
+  two directories (the PSR/exception split under TRM ch2, the TRM ch6 MPU and
+  the Armv7-M PMSAv7 extract), merge them into a single `index.md`: keep the
+  first article's directory and title, append the second article's sections
+  with their numbers shifted by the first article's last chapter number, move
+  its images with `git mv`, delete the retired directory, and add
+  `redirect_maps` entries in `mkdocs.yml` for every retired `…/index.md`.
+  Internal `#anchor` links inside moved sections must be renumbered with the
+  new heading number. Fix any reference to the old paths in the article tree and
+  in `docs/cortex/sync-todo/`.
 - Concept articles that cite external sources stay outside this skill.
 
 ## Step 8 — Verify (two-phase gate)
