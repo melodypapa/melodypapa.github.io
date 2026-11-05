@@ -494,6 +494,7 @@ nav:
         - "Timing Extensions": autosar/foundation/methodology_templates/rs_timing_extensions/index.md
         - "Abstract Platform": autosar/foundation/methodology_templates/tps_abstract_platform_specification/index.md
         - "Security Extract Template": autosar/foundation/methodology_templates/tps_security_extract_template/index.md
+        - "Feature Model Exchange Format": autosar/foundation/methodology_templates/tps_feature_model_exchange_format/index.md
         - "Log and Trace Extract": autosar/foundation/methodology_templates/tps_log_and_trace_extract/index.md
         - "ARXML Serialization Rules": autosar/foundation/methodology_templates/tps_arxml_serialization_rules/index.md
         - "XML Schema Production Rules": autosar/foundation/methodology_templates/tps_xml_schema_production_rules/index.md

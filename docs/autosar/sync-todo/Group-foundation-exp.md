@@ -255,10 +255,16 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 - [ ] tps_feature_model_exchange_format (AUTOSAR_FO_TPS_FeatureModelExchangeFormat · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Feature Model Exchange Format（特征模型交换格式）; target `foundation/methodology_templates/tps_feature_model_exchange_format/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_TPS_FeatureModelExchangeFormat.md` — 2,861 lines, 103 figure refs, 200 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: Step 1 gap analysis (2026-11-06): no article → full translation mirroring source numbering: References registry (ref-1..5) + ch.1–ch.7 + annexes A/C/D; annex B (Reference Material / Requirements Tracing) omitted under the droppable set; doc-meta chrome dropped; 200 item IDs → bold translated titles (prose-named IDs kept: [TPS_STDT_00053]/[00078] §1.5, [TPS_GST_00001]/[00100]/[00103]/[00280] prose citations, [TPS_SWCT_01431] in table C.18 data cell, prose-named constr_5001..5028)
+  - Note: figures — 103 refs = 9 content diagrams (Figure 1.1, 2.1, 4.1, 5.1, 6.1–6.4, 7.1) copied with source captions as alt text; 94 chrome dropped
+  - Note: formulas — 18 `formula-not-decoded` recovered from corpus PDF pp.28–30/32/33/36/42/44/45/59/64 (ASWS precedent): underlying graph V/E, the 4 decomposition-category conditions, restriction ∨-condition, 4.5.2 example `f1&&f2&&f3`, REQUIRES/EXCLUDES/PROVIDES ∀-conditions, constr_5027 `min≤v≤max`, constr_5028/5018 ∀-conditions, inclusion graph V/E, recursive feature set union, affected-variation-points unions, and the 5.2.3.1 example `f1.pc + f2.pc + f3.pc + f4.pc < f.pc` — all as fenced blocks; footnotes keep the source's per-page numbering (same number may recur with its own text)
+  - Note: technical shape — 20 class/enumeration tables in the TPS two-table form; flattened item headings ([TPS_FMDT_00064] Usage of Life Cycle, the 7 ch.2 term definitions, MANDATORY/OPTIONAL/ALTERNATIVE/MULTIPLEFEATURE category labels) rendered as bold-titled prose; 表5.1 sample selection's two-dimensional group layout reflowed to a single table with 「/」 separators (noted in-article); the two state-combination summary tables ([TPS_FMDT_00065]/[00066]: 9 and 27 rows) carried cell-for-cell; annex C's truncated Sdg/Referrable attribute cells recovered from PDF p.78; annex D heading-only tables (Number column dropped per TPS_APSD annex-F precedent) with the D.1.4 stray-caption + column-scramble quirk noted
+  - Note: Phase A (2026-11-06) — `mkdocs build --strict` exit 0, 0 WARNINGs (known banner only); `check_heading_lang.py` OK; `check_indexes.py` OK (313 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`\<` in content (comment mentions only); link census: 45 identifier mentions applied (FMFormula/FMCondition ×4 classes → their §7.2 headings), 24 chapter-ref links + 11/11 citations linked (--apply idempotent, 0 changed on re-run), 1 参见-type report-only, cross-article PORT ×1 report-only
+  - Note: Phase B (2026-11-06) — coverage References→参考文献, ch.1→§1 … ch.7→§7 (7.1–7.2.5), A→§A (30 glossary terms), C→§C (20 class tables), D→§D (D.1–D.11); deliberate omission: annex B Requirements Tracing (droppable set — user to verify) + doc-meta chrome; source quirks kept: 表 D.2 caption mislabeled by the source PDF, [TPS_FMDT_00041]/[00042] and [00053]/[00054] headings scrambled in the D.1.4 table (conservatively split, noted)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] tr_timing_analysis (AUTOSAR_FO_TR_TimingAnalysis · SystemServices · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)

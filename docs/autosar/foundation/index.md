@@ -28,6 +28,7 @@ title: "基础标准（Foundation）"
   * [Specification of Abstract Platform（抽象平台规范）](methodology_templates/tps_abstract_platform_specification/index.md)
   * [Requirements on Security Extract Template（安全提取模板需求）](methodology_templates/rs_security_extract_template/index.md)
   * [Requirements on Feature Model Exchange Format（特征模型交换格式需求）](methodology_templates/rs_feature_model_exchange_format/index.md)
+  * [Feature Model Exchange Format（特征模型交换格式）](methodology_templates/tps_feature_model_exchange_format/index.md)
   * [Requirements on Methodology（方法论需求）](methodology_templates/rs_methodology/index.md)
   * [Requirements on Timing Extensions（时序扩展需求）](methodology_templates/rs_timing_extensions/index.md)
   * [Security Extract Template（安全提取模板）](methodology_templates/tps_security_extract_template/index.md)
