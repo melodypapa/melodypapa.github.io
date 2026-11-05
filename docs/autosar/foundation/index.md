@@ -30,6 +30,7 @@ title: "基础标准（Foundation）"
   * [Requirements on Feature Model Exchange Format（特征模型交换格式需求）](methodology_templates/rs_feature_model_exchange_format/index.md)
   * [Requirements on Methodology（方法论需求）](methodology_templates/rs_methodology/index.md)
   * [Requirements on Timing Extensions（时序扩展需求）](methodology_templates/rs_timing_extensions/index.md)
+  * [Security Extract Template（安全提取模板）](methodology_templates/tps_security_extract_template/index.md)
   * [Log and Trace Extract Template（日志与跟踪提取模板）](methodology_templates/tps_log_and_trace_extract/index.md)
   * [ARXML Serialization Rules（ARXML 序列化规则）](methodology_templates/tps_arxml_serialization_rules/index.md)
   * [XML Schema Production Rules（XML 模式生成规则）](methodology_templates/tps_xml_schema_production_rules/index.md)
