@@ -25,8 +25,13 @@ Never add `spec:`, `release:` or tags — that convention belongs to `docs/autos
   `## 2. MPU 区域`, `### 2.1. …`, `#### 4.2.1. …`. The number reflects the
   source's relative structure, not the source's absolute chapter number.
 - Never write `# ` in the body — the front-matter title is the only h1.
+- Numbering is contiguous: every `## N.` and `### N.M.` has its predecessor. A
+  jump (`## 3.` with no `## 2.`, or a `### 7.10` with no `### 7.9`) is a defect,
+  not a style choice — fix it even when the page is otherwise complete.
 - Preserve the source's section order and nesting; do not invent overview or
-  summary sections.
+  summary sections. A source overview section is not invented content: keep it
+  on the chapter page (TRM 2.1, 2.2, 2.5) even when a sibling page carries the
+  deeper topic.
 - No table of contents, no document history, no proprietary notice, no footer
   banner.
 
