@@ -4,7 +4,7 @@
 > Execution queue (the one-article-at-a-time order): [sync-todo/index.md](sync-todo/index.md) — this file is the status ledger, the queue is the execution order.
 > Status: ✅ Type A-compliant · 🔶 Translated pending alignment · ⚠️ Partial · ⛔ Stub · ❌ Missing · 📖 Guide/topic (exempt from the skeleton)
 > Layout (2026-11-02): CP articles live under `cp/<section>/`, Foundation under `foundation/<topic>/`; article links below are relative to `docs/autosar/`.
-> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-05 (Foundation exp-group batch, rows 1–11 of Group-foundation-exp: TR Glossary ch.4 completed + glossary.md +313, 10 new articles across general/security/communication_management/release_documentation/methodology_templates; system_services batch: SwCluC + HWTestManager new-article full Type A translations; Foundation rs-prs batch: Project Objectives (RS) + IEEE1722 (RS) + Debug Trace Profile (RS) + SOME/IP-SD (RS) + SOME/IP (RS) + MACsec (RS) + Timing Extensions (RS) + V2X Remote Access Layer (PRS) + IPsec (RS) + Security Extract Template (RS) + Feature Model Exchange Format (RS) + Methodology (RS) + SecOc (PRS) + DDS (RS) + NM Protocol (PRS) + IDS Protocol (PRS) + E2E (RS) + Intrusion Detection System (RS) + Firewall (RS) + Health Monitoring (RS) new-article translations; 2026-11-04: Foundation methodology_templates: Abstract Platform Specification (TPS) new-article translation; 2026-11-03: Foundation health_monitoring: ASWS Health Monitoring new-article translation (EXP System Health Monitoring earlier the same day); libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
+> Baseline: R23-11 (`~/Workspace/autosar_standard/markdown/`) · Last updated: 2026-11-06 (Foundation exp-group batch-2, rows 15–19 of Group-foundation-exp: Secure Hardware Extensions (TR) + Security Extract Template (TPS) + Feature Model Exchange Format (TPS) + Timing Analysis (TR) + Standardization Template (TPS) new-article translations; 2 stale ❌ duplicates dropped from methodology_templates ledger); 2026-11-05 (Foundation exp-group batch, rows 1–11 of Group-foundation-exp: TR Glossary ch.4 completed + glossary.md +313, 10 new articles across general/security/communication_management/release_documentation/methodology_templates; system_services batch: SwCluC + HWTestManager new-article full Type A translations; Foundation rs-prs batch: Project Objectives (RS) + IEEE1722 (RS) + Debug Trace Profile (RS) + SOME/IP-SD (RS) + SOME/IP (RS) + MACsec (RS) + Timing Extensions (RS) + V2X Remote Access Layer (PRS) + IPsec (RS) + Security Extract Template (RS) + Feature Model Exchange Format (RS) + Methodology (RS) + SecOc (PRS) + DDS (RS) + NM Protocol (PRS) + IDS Protocol (PRS) + E2E (RS) + Intrusion Detection System (RS) + Firewall (RS) + Health Monitoring (RS) new-article translations; 2026-11-04: Foundation methodology_templates: Abstract Platform Specification (TPS) new-article translation; 2026-11-03: Foundation health_monitoring: ASWS Health Monitoring new-article translation (EXP System Health Monitoring earlier the same day); libraries batch: Crc/E2E/Bfx full Type A translations, Foundation ledger added; 2026-11-01: Group-system_services ComM new-article translation; diagnostics batch j1939dcm + Dcm completion earlier the same day)
 
 ## Backlog
 
@@ -79,14 +79,14 @@
 
 | Status | Count | Note |
 | --- | ---: | --- |
-| ✅ Type A-compliant | 25 | ready to use |
+| ✅ Type A-compliant | 27 | ready to use |
 | 🔶 Translated pending alignment | 8 | seven chapters present; legacy wording / forbidden-chapter residue |
 | ⚠️ Partial | 16 | missing ≥1 chapter (most miss the 「API规范」 chapter) |
 | ⛔ Stub | 4 | 9–19 lines only |
-| ❌ Missing (SWS) | 74 | R23-11 has 127 SWS docs in total; 53 covered (41.7%) |
+| ❌ Missing (SWS) | 72 | R23-11 has 127 SWS docs in total; 55 covered (43.3%) |
 | ❌ Missing (EXP) | 11 | R23-11 has 22 EXP docs in total; 11 covered |
 | 📖 Guide/topic | 8 | exempt from the Type A skeleton |
-| ❌ Missing (Foundation) | 51 | R23-11 has 52 FO docs (RS/PRS/TPS/TR/EXP/ASWS); 1 partially translated (TR Glossary 📖) — see `## foundation` and `sync-todo/Group-foundation-exp.md` / `Group-foundation-rs-prs.md` |
+| ❌ Missing (Foundation) | 15 | R23-11 has 52 FO docs (RS/PRS/TPS/TR/EXP/ASWS); 37 covered (71.2%) — see `## foundation` and `sync-todo/Group-foundation-exp.md` / `Group-foundation-rs-prs.md` |
 
 ## communication
 
@@ -256,6 +256,15 @@
 - ✅ [WdgIf 看门狗接口](cp/safety/watchdog_interface/index.md) — SWS_WatchdogInterface (2026-10-27 full Type A translation from R23-11: new article + nav `"WdgIf"` + safety landing row; src ch.7 → §6 功能规格 (2 dev errors WDGIF_E_PARAM_DEVICE/POINTER), src ch.8 → §7 API规范 (1 type WdgIf_ModeType + 3 functions + 2 implementation-hint code fences), src ch.9 → §8 时序图 (bare cross-ref to the watchdog driver spec), src ch.10 → §9 配置规范 (3 containers, SWS 条目 cells filled with [ECUC_WdgIf_*]); 1 figure (Figure10-1 config tree); no glossary additions — source ch.2 is a no-local-acronyms note; WdgIf_SetMode error-code section links to the wdg article once both merged. 2026-10-30 audit: second §3.2 [3] marker and Service IDs 0x01/0x02/0x03 restored.)
 - ✅ [Wdg 看门狗驱动](cp/safety/watchdog_driver/index.md) — SWS_WatchdogDriver (2026-10-27 full Type A translation from R23-11: new article + nav `"Wdg"` + safety landing row; src ch.7 → §6 功能规格 (5 subsections incl. 触发概念以支持窗口看门狗; 扩展生产错误 WDG_E_MODE_FAILED / WDG_E_DISABLE_REJECTED after mcu_driver house), src ch.8 → §7 API规范 (1 type Wdg_ConfigType + 4 functions), src ch.9 → §8 时序图 (Figure9-1/9-2), src ch.10 → §9 配置规范 (faithful source order incl. module table at the end + 9.2.2 WdgSettingsFast group; 22 SWS Item cells with [ECUC_Wdg_*] IDs); garbled WdgMaxTimeout description restored from the R22-11 PDF p.38; src app. B → ## B. fence-style per EcuM precedent; src ch.7.4 「(see Figure 2)」 kept as prose — Figure 2 absent in R22-11 PDF too; glossary.md +6 terms (DIP/Fast-Mode/Off-Mode/Slow-Mode/SPI/WDG) + DEM/DET 来源 lines. 2026-10-30 audit: Wdg_ConfigType table corrected, ECUC_Wdg_00073 and Service IDs 0x00/0x01/0x03/0x04 restored.)
 
+## security
+
+- ✅ [Firewall（防火墙）](cp/security/firewall/) — SWS_Firewall · R23-11 (2026-11-06 full Type A new article + new cp/security section (landing page + nav group 网络安全): ch.2 缩略语 2.1 首字母缩略词 6 rows + 2.2 缩写 15 rows (Dem style), §6 功能规格 (模块处理/网络数据包检查 无状态+有状态+深度 (SOME/IP, DDS, DoIP, 通用)/过滤 (Allowlist+Blocklist, 速率限制漏桶, 状态相关)/交换机交互 (4 filter scenarios)/安全事件 (16 SEvs + SEV context-data tables 7.2–7.17 + protocol-matching example)/错误分类 1 dev-error table), §7 API 5 imported types/2 types (table style)/4 functions/2 callbacks/1 scheduled + 期望接口 (0 强制 + 4 可选 + 可配置接口) + 服务接口 none-sentence; §8 时序图 3 figures; §9 配置规范 Firewall×6 containers + 11 filter-rule subsections + 桶计数 + 安全事件 16 SEv refs, SWS 条目 cells filled with [ECUC_Fw_*] per new-article precedent; ## B. appendix R23-11 added-items fence; 26 figures by source caption number (7-1..5, 9-1..3, 10-1..18), deco 345×36 chrome excluded; source ch.6 Requirements Tracing + appendix A dropped; source quirks kept verbatim: FirwallEnableSecurityEventReporting, FirewallPaylodByteOffset/Value, FirewallITrafficClass, wrong copy-paste descriptions on FirewallDoipDest/SrcAddress + FirewallingWithPerStreamFiltering + FirewallNetworkLayerIpv4FilterConfig ('for IPv6'); Fw_InspectPacket truncated source Syntax reconstructed with Fw_InspectionResultType* out param; check_api_sync extended with module-prefix reconciliation (source bare headings Init/ConfigType vs article Fw_*); identifier/chapter-ref/citation links --apply 42 lines, idempotent)
+
+## security
+
+- ✅ [Firewall（防火墙）](cp/security/firewall/) — SWS_Firewall · R23-11 (2026-11-06 full Type A new article + new cp/security section (landing page + nav group 网络安全): ch.2 缩略语 2.1 首字母缩略词 6 rows + 2.2 缩写 15 rows (Dem style), §6 功能规格 (模块处理/网络数据包检查 无状态+有状态+深度 (SOME/IP, DDS, DoIP, 通用)/过滤 (Allowlist+Blocklist, 速率限制漏桶, 状态相关)/交换机交互 (4 filter scenarios)/安全事件 (16 SEvs + SEV context-data tables 7.2–7.17 + protocol-matching example)/错误分类 1 dev-error table), §7 API 5 imported types/2 types (table style)/4 functions/2 callbacks/1 scheduled + 期望接口 (0 强制 + 4 可选 + 可配置接口) + 服务接口 none-sentence; §8 时序图 3 figures; §9 配置规范 Firewall×6 containers + 11 filter-rule subsections + 桶计数 + 安全事件 16 SEv refs, SWS 条目 cells filled with [ECUC_Fw_*] per new-article precedent; ## B. appendix R23-11 added-items fence; 26 figures by source caption number (7-1..5, 9-1..3, 10-1..18), deco 345×36 chrome excluded; source ch.6 Requirements Tracing + appendix A dropped; source quirks kept verbatim: FirwallEnableSecurityEventReporting, FirewallPaylodByteOffset/Value, FirewallITrafficClass, wrong copy-paste descriptions on FirewallDoipDest/SrcAddress + FirewallingWithPerStreamFiltering + FirewallNetworkLayerIpv4FilterConfig ('for IPv6'); Fw_InspectPacket truncated source Syntax reconstructed with Fw_InspectionResultType* out param; check_api_sync extended with module-prefix reconciliation (source bare headings Init/ConfigType vs article Fw_*); identifier/chapter-ref/citation links --apply 42 lines, idempotent)
+- ✅ [Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/) — SWS_IntrusionDetectionSystemManager · R23-11 (2026-11-06 full Type A new article: ch.2 缩略语 flat chapter = source tables in order (32 Abbreviation/Acronym rows + 17 Terms rows as group lead-ins, source has no 2.1/2.2 subsections); §4 constraint prose before 4.1 假设 / 4.2 汽车域的适用性; §5 接口 5.1.1–5.1.7 + 文件结构 5 header-include requirements + Figure5-1 (source 5.2 file-structure image is page chrome — dropped); §6 功能规格 = 接收与缓冲 (标准/智能传感器服务, 事件定义 IdsMExternalEventId/IdsMSensorInstanceId/IdsMInternalEventId, 事件+上下文缓冲区, 上下文数据修饰器) + IdsM 内部 SEv 表 (5 SEvs incl. new 87 NoQualifiedEventBuffer) + 鉴定 (QSEv buffers) + 过滤链 (报告模式表 7.1 五级, 阻止状态, 每第 N 个, 聚合, 阈值, 事件速率/流量限制) + 时间戳 (None/AUTOSAR/Custom + 62-bit truncation) + 报告与持久化 (QSEv 结构表 7.2, IdsR 签名 Csm, IDS 服务接口选项, IF/TP 协议, Dem/Sem) + NvM 持久化 + 诊断 (Dcm 报告模式读写) + 错误分类 5 dev errors + API 参数检查; §7 API 16 imported types/5 types/11 functions/6 callbacks/调度函数 prose-only/期望接口 (0 强制 + StbM_GetCurrentTime 可选) + 服务接口 (IdsMService/IdsMSmartSensorService/IdsM_CustomTimestamp CSI tables verbatim Variation exprs + 2 实现数据类型 + 3 ports); §8 时序图 3 figures (Dem sink + StbM/自定义时间戳); §9 配置规范 IdsM×28 containers (SWS 条目 cells [ECUC_IdsM_*], 9.1.23 IdsMReportingModeFilter figure-only kept) + 配置约束 + 发布信息; ## A. appendix per source letter = 变更历史 tables A.1/A.2 (GFM, sanctioned ID location); 22 figures; source ch.6 Requirements Tracing dropped; source heading typo kept: 10.1.17 IdsMEventTpTxPdu (container IdsMTpTxPdu), 8.3.11 IdsMContextDataModifierCallout_Name missing-underscore → article correct name + check_api_sync alias; source quirk: 9.1/9.2/9.3 时序图 refs renumbered (§8.2 merges source 9.2+9.3); identifier/chapter-ref/citation links --apply 104 lines, idempotent)
+
 ## methodology_templates / template
 
 - 📄 [BSW 模块描述模板](cp/methodology_templates/basic_software_module_description_template/) — TPS_BSWModuleDescriptionTemplate (exempt)
@@ -271,8 +280,8 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ✅ [Explanation of Software Architectural Decisions（软件架构决策说明）](foundation/general/exp_sw_architectural_decisions/) — AUTOSAR_FO_EXP_SWArchitecturalDecisions (R23-11; EXP guide, skeleton-exempt; ch.1–5 with 29 architectural decisions (5.1 common ×1, 5.2 AP ×24, 5.3 CP ×4) as 11-field tables; 2026-11-05)
 - ✅ [Safety Overview（功能安全概览）](foundation/general/exp_safety_overview/) — AUTOSAR_FO_EXP_SafetyOverview (R23-11; EXP guide, skeleton-exempt; 已知限制 + ch.1–6 + annexes A/B (28 acronyms + 7 glossary terms); 9 content figures embedded; 2026-11-05)
 - ✅ [Security Overview（信息安全概览）](foundation/general/exp_security_overview/) — AUTOSAR_FO_EXP_SecurityOverview (R23-11; EXP guide, skeleton-exempt; ch.1–4 (§4.1 PRE: memory-corruption attacks, secure coding, 4 attack classes, DEP/SSP/ASLR/CFI/CPI/PointerAuth solutions with 10 tables, isolation); Figure 4.1 embedded; footnotes as <sup>N</sup>+blockquote (14–17/27–35 texts lost in source conversion — markers dropped); 2026-11-05)
-- ❌ Main Requirements（主需求规范） — AUTOSAR_FO_RS_Main (`foundation/general/`)
-- ❌ Project Objectives（项目目标） — AUTOSAR_FO_RS_ProjectObjectives (`foundation/general/`)
+- ✅ Main Requirements（主需求规范） — AUTOSAR_FO_RS_Main (`foundation/general/rs_main/`; R23-11; RS, skeleton-exempt; 75 requirement items (24 + 51 platform-level candidates) numbered §3.x/§4.x with IDs dropped per batch decision; tracing chapter (source ch.3) omitted, renumber 4→3/5→4/6→5; Figure 1.1 embedded; ~25 PDF-garbled table cells recovered; 2026-11-06)
+- ✅ Project Objectives（项目目标） — AUTOSAR_FO_RS_ProjectObjectives (`foundation/general/rs_project_objectives/`; R23-11; RS, skeleton-exempt; delivered in part 1 (PR #274) — row was left ❌, reconciled 2026-11-06)
 - ✅ [Predefined Names in AUTOSAR（AUTOSAR 预定义名称）](foundation/general/tr_predefined_names/) — AUTOSAR_FO_TR_PredefinedNames (R23-11; TR, skeleton-exempt; ch.1–4 keyword tables (5 virtual modules, 23 information categories, 99 document abbreviations) + annex A class tables A.1–A.4 + annex B (none→无) + trailing 参考文献 registry (ref-1..5, 12 citation links); 2026-11-05)
 
 ### foundation/communication_management (Communication Management)
@@ -281,13 +290,13 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ✅ Requirements on Debug Trace Profile（调试跟踪配置文件需求） — AUTOSAR_FO_RS_DebugTraceProfile (`foundation/communication_management/rs_debug_trace_profile/`)
 - ✅ Requirements on E2E（端到端通信保护需求） — AUTOSAR_FO_RS_E2E (`foundation/communication_management/rs_e2e/`)
 - ❌ Requirements on IEEE 1722（IEEE 1722 需求） — AUTOSAR_FO_RS_IEEE1722 (`foundation/communication_management/`)
-- ❌ Requirements on Log and Trace（日志与跟踪需求） — AUTOSAR_FO_RS_LogAndTrace (`foundation/communication_management/`)
+- ✅ Requirements on Log and Trace（日志与跟踪需求） — AUTOSAR_FO_RS_LogAndTrace (`foundation/communication_management/rs_log_and_trace/`; R23-11; RS, skeleton-exempt; 58 requirement items with IDs dropped per batch decision; tracing chapter omitted; 2026-11-06)
 - ✅ Requirements on MACsec（MACsec 需求） — AUTOSAR_FO_RS_MACsec (`foundation/communication_management/rs_macsec/`)
-- ❌ Requirements on Network Management（网络管理需求） — AUTOSAR_FO_RS_NetworkManagement (`foundation/communication_management/`)
+- ✅ Requirements on Network Management（网络管理需求） — AUTOSAR_FO_RS_NetworkManagement (`foundation/communication_management/rs_network_management/`; R23-11; RS, skeleton-exempt; 60 requirement items with IDs dropped per batch decision, use-case table ch.4 as GFM; tracing chapter omitted; 2026-11-06)
 
 ### foundation/diagnostics (Diagnostics)
 
-- ❌ Requirements on Diagnostics（诊断需求） — AUTOSAR_FO_RS_Diagnostics (`foundation/diagnostics/`)
+- ✅ Requirements on Diagnostics（诊断需求） — AUTOSAR_FO_RS_Diagnostics (`foundation/diagnostics/rs_diagnostics/`; R23-11; RS, skeleton-exempt; 153 requirement items with IDs dropped; empty §4.4 Configuration omitted; tracing chapter omitted; 2026-11-06)
 
 ### foundation/health_monitoring (Health Monitoring)
 
@@ -300,17 +309,15 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ✅ Requirements on Feature Model Exchange Format（特征模型交换格式需求） — AUTOSAR_FO_RS_FeatureModelExchangeFormat (`foundation/methodology_templates/rs_feature_model_exchange_format/`)
 - ✅ Requirements on Methodology（方法论需求） — AUTOSAR_FO_RS_Methodology (`foundation/methodology_templates/rs_methodology/`)
 - ✅ Requirements on Security Extract Template（安全提取模板需求） — AUTOSAR_FO_RS_SecurityExtractTemplate (`foundation/methodology_templates/rs_security_extract_template/`)
-- ❌ Requirements on Standardization Template（标准化模板需求） — AUTOSAR_FO_RS_StandardizationTemplate (`foundation/methodology_templates/`)
+- ✅ Requirements on Standardization Template（标准化模板需求） — AUTOSAR_FO_RS_StandardizationTemplate (`foundation/methodology_templates/rs_standardization_template/`; R23-11; RS, skeleton-exempt; 21 use cases + 66 requirement items numbered §2.x/§3.x.y with IDs dropped, UC/RS cross-refs linked intra-article; unnumbered pre-chapter References mirrored with ref anchors; tracing subsections §1.3/§1.4 omitted; annex A class tables → §4 numbered continuation; 2026-11-06)
 - ✅ Requirements on Timing Extensions（时序扩展需求） — AUTOSAR_FO_RS_TimingExtensions (`foundation/methodology_templates/rs_timing_extensions/`)
-- ❌ ARXML Serialization Rules（ARXML 序列化规则） — AUTOSAR_FO_TPS_ARXMLSerializationRules (`foundation/methodology_templates/`)
-- ❌ Requirements on Timing Extensions（时序扩展需求） — AUTOSAR_FO_RS_TimingExtensions (`foundation/methodology_templates/`)
 - ✅ [ARXML Serialization Rules（ARXML 序列化规则）](foundation/methodology_templates/tps_arxml_serialization_rules/) — AUTOSAR_FO_TPS_ARXMLSerializationRules (R23-11; TPS, skeleton-exempt; ch.1–3 (19 TPS_ASR items, format-strategy table, 3 XML listings) + annex A (8 release histories; missing A.6 recovered from corpus PDF) + annex B (5 class/primitive tables); 2 content figures; 2026-11-05)
 - ✅ Abstract Platform Specification（抽象平台规范） — AUTOSAR_FO_TPS_AbstractPlatformSpecification (`foundation/methodology_templates/tps_abstract_platform_specification/`)
-- ❌ Feature Model Exchange Format（特征模型交换格式） — AUTOSAR_FO_TPS_FeatureModelExchangeFormat (`foundation/methodology_templates/`)
+- ✅ [Feature Model Exchange Format（特征模型交换格式）](foundation/methodology_templates/tps_feature_model_exchange_format/) — AUTOSAR_FO_TPS_FeatureModelExchangeFormat (R23-11; TPS, skeleton-exempt; References registry + ch.1–7 (variant handling, terminology, feature model FMFeatureModel/FMFeature/decompositions/restrictions/relations, feature selection incl. state-combination tables, feature map, common concepts) + annexes A/C/D (glossary, 20 mentioned class tables, constraint history); 9 content figures; 18 formulas recovered from corpus PDF; annex B (requirements tracing) omitted; 2026-11-06)
 - ❌ Generic Structure Template（通用结构模板） — AUTOSAR_FO_TPS_GenericStructureTemplate (`foundation/methodology_templates/`)
 - ✅ [Log and Trace Extract Template（日志与跟踪提取模板）](foundation/methodology_templates/tps_log_and_trace_extract/) — AUTOSAR_FO_TPS_LogAndTraceExtract (R23-11; TPS, skeleton-exempt; ch.1–3 (DltEcu/DltMessage class tables + 16 constraints/items) + annex A history + annex B class tables B.1–B.8 + 2 ARXML listings; 3 content figures; missing item bodies recovered from the corpus PDF (2026-11-05))
-- ❌ Security Extract Template（安全提取模板） — AUTOSAR_FO_TPS_SecurityExtractTemplate (`foundation/methodology_templates/`)
-- ❌ Standardization Template（标准化模板） — AUTOSAR_FO_TPS_StandardizationTemplate (`foundation/methodology_templates/`)
+- ✅ [Security Extract Template（安全提取模板）](foundation/methodology_templates/tps_security_extract_template/) — AUTOSAR_FO_TPS_SecurityExtractTemplate (R23-11; TPS, skeleton-exempt; References registry + ch.1–4 (IdsDesign/SecurityEventDefinition/filter chain/limitation filters/context mappings/IdsmInstance) + annexes B–H (23 mentioned class tables, 39 upstream-mapping blocks as 属性|值 tables, splitable elements, variation points, change histories, glossary, 124 security events); 18 content figures; annex A (requirements tracing) omitted; PortPrototype truncated note recovered from corpus PDF; 2026-11-06)
+- ✅ [Standardization Template（标准化模板）](foundation/methodology_templates/tps_standardization_template/) — AUTOSAR_FO_TPS_StandardizationTemplate (R23-11; TPS, skeleton-exempt; References registry (ref-1..20) + ch.1–6 (documentation model & traceable items, life cycles, blueprints incl. name patterns & blueprint formula & 27 blueprintable element chapters, keywords, data exchange points incl. profiles/tailoring/compatibility) + annexes B–E (ARXML listings B.1–B.21, ALL 105 mentioned class tables, variation points, change histories E.1–E.10); 50 content figures + 4 listing renders; annex A (requirements tracing) omitted; 2026-11-06)
 - ✅ [XML Schema Production Rules（XML 模式生成规则）](foundation/methodology_templates/tps_xml_schema_production_rules/) — AUTOSAR_FO_TPS_XMLSchemaProductionRules (R23-11; TPS, skeleton-exempt; ch.1–5 (design principles, tag configuration incl. 00056 default table, 30 production rules 00000–00059 as field tables with target patterns) + annex A (TR→TPS ID mapping + 3 release histories); 38 content figures embedded; rules 00008/00023 target patterns recovered from corpus PDF; 2026-11-05)
 
 ### foundation/protocols (Protocols)
@@ -319,16 +326,16 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ✅ Intrusion Detection System Protocol Specification（入侵检测系统协议规范） — AUTOSAR_FO_PRS_IntrusionDetectionSystem (`foundation/protocols/prs_intrusion_detection_system/`)
 - ❌ Log and Trace Protocol Specification（日志与跟踪协议规范） — AUTOSAR_FO_PRS_LogAndTraceProtocol (`foundation/protocols/`)
 - ✅ Network Management Protocol Specification（网络管理协议规范） — AUTOSAR_FO_PRS_NetworkManagementProtocol (`foundation/protocols/prs_network_management_protocol/`)
-- ❌ SOME/IP Protocol Specification（SOME/IP 协议规范） — AUTOSAR_FO_PRS_SOMEIPProtocol (`foundation/protocols/`)
-- ❌ SOME/IP Service Discovery Protocol Specification（SOME/IP 服务发现协议规范） — AUTOSAR_FO_PRS_SOMEIPServiceDiscoveryProtocol (`foundation/protocols/`)
+- ✅ SOME/IP Protocol Specification（SOME/IP 协议规范） — AUTOSAR_FO_PRS_SOMEIPProtocol (`foundation/protocols/prs_someip_protocol/`; R23-11; PRS, skeleton-exempt; protocol items as prose paragraphs with IDs dropped; header/serialization byte tables + return-code + payload-compatibility tables as GFM; Figures 4.1, 4.3–4.22 embedded (Figure 4.2 lost in conversion); tracing chapter omitted; 2026-11-06)
+- ✅ SOME/IP Service Discovery Protocol Specification（SOME/IP 服务发现协议规范） — AUTOSAR_FO_PRS_SOMEIPServiceDiscoveryProtocol (`foundation/protocols/prs_someip_service_discovery_protocol/`; R23-11; PRS, skeleton-exempt; protocol items as prose paragraphs with IDs dropped; message-format/options/entry tables + reserved-ID + config-param tables as GFM; Figures 1.1, 5.1–5.26 embedded; tracing chapter omitted; 2026-11-06)
 - ✅ Secure Onboard Communication Protocol Specification（安全车载通信协议规范） — AUTOSAR_FO_PRS_SecOcProtocol (`foundation/protocols/prs_secoc_protocol/`)
-- ❌ Time Synchronization Protocol Specification（时间同步协议规范） — AUTOSAR_FO_PRS_TimeSyncProtocol (`foundation/protocols/`)
+- ✅ Time Synchronization Protocol Specification（时间同步协议规范） — AUTOSAR_FO_PRS_TimeSyncProtocol (`foundation/protocols/prs_time_sync_protocol/`; R23-11; PRS, skeleton-exempt; protocol items as prose paragraphs with IDs dropped; message-format byte tables + config-parameter table as GFM; Figures 4.1–4.8 embedded; formulas recovered from PDF; tracing chapter + 2 placeholder sections omitted; 2026-11-06)
 - ✅ V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范） — AUTOSAR_FO_PRS_V2XRemoteAccessLayer (`foundation/protocols/prs_v2x_remote_access_layer/`)
 - ✅ Requirements on Data Distribution Service（数据分发服务需求） — AUTOSAR_FO_RS_DataDistributionService (`foundation/protocols/rs_data_distribution_service/`)
 - ✅ Requirements on IPsec Protocol（IPsec 协议需求） — AUTOSAR_FO_RS_IPsecProtocol (`foundation/protocols/rs_ipsec_protocol/`)
 - ✅ Requirements on SOME/IP Protocol（SOME/IP 协议需求） — AUTOSAR_FO_RS_SOMEIPProtocol (`foundation/protocols/rs_someip_protocol/`)
 - ✅ Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求） — AUTOSAR_FO_RS_SOMEIPServiceDiscoveryProtocol (`foundation/protocols/rs_someip_service_discovery_protocol/`)
-- ❌ Requirements on Time Synchronization（时间同步需求） — AUTOSAR_FO_RS_TimeSync (`foundation/protocols/`)
+- ✅ Requirements on Time Synchronization（时间同步需求） — AUTOSAR_FO_RS_TimeSync (`foundation/protocols/rs_time_sync/`; R23-11; RS, skeleton-exempt; 75 requirement items (37 common + 17 Ethernet + 11 CAN + 9 FlexRay + 1 non-functional) with IDs dropped; definitions ch.3.2 with Figures 3.1–3.3 embedded; tracing chapter omitted; 2026-11-06)
 
 ### foundation/release_documentation (Release Documentation)
 
@@ -336,18 +343,18 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 ### foundation/safety (Safety)
 
-- ❌ Requirements on Safety（功能安全需求） — AUTOSAR_FO_RS_Safety (`foundation/safety/`)
+- ✅ Requirements on Safety（功能安全需求） — AUTOSAR_FO_RS_Safety (`foundation/safety/rs_safety/`; R23-11; RS, skeleton-exempt; 65 requirement items translated with IDs dropped per batch decision; tracing chapter omitted; 2026-11-06)
 
 ### foundation/security (Security)
 
 - ✅ Requirements on Firewall（防火墙需求） — AUTOSAR_FO_RS_Firewall (`foundation/security/rs_firewall/`)
 - ✅ Requirements on Intrusion Detection System（入侵检测系统需求） — AUTOSAR_FO_RS_IntrusionDetectionSystem (`foundation/security/rs_intrusion_detection_system/`)
 - ✅ [List of Known Issues of Secure Hardware Extensions（安全硬件扩展已知问题清单）](foundation/security/tr_list_of_known_issues_secure_hardware_extensions/) — AUTOSAR_FO_TR_ListOfKnownIssuesSecureHardwareExtensions (R23-11; TR, skeleton-exempt; 7-issue table + the errata sheet's Figure 1 corrected boot flow chart; 2026-11-05)
-- ❌ Specification of Secure Hardware Extensions（安全硬件扩展规范） — AUTOSAR_FO_TR_SecureHardwareExtensions (`foundation/security/`)
+- ✅ [Specification of Secure Hardware Extensions（安全硬件扩展规范）](foundation/security/tr_secure_hardware_extensions/) — AUTOSAR_FO_TR_SecureHardwareExtensions (R23-11; TR, skeleton-exempt; ch.1–4 (conventions, algorithms incl. AES-MP/KDF formulas recovered from corpus PDF, memory slots & security flags, 19 user-accessible commands as parameter tables + pseudo-code, error codes, memory update protocol, secure booting, failure analysis, constants, test vectors incl. one block completed from NIST SP 800-38B, overview tables 4.3–4.7); 11 content figures; appendix A + §2.2 omitted as placeholders; 2026-11-06)
 
 ### foundation/system_services (System Services)
 
-- ❌ Timing Analysis（时序分析） — AUTOSAR_FO_TR_TimingAnalysis (`foundation/system_services/`)
+- ✅ [Timing Analysis（时序分析）](foundation/system_services/tr_timing_analysis/) — AUTOSAR_FO_TR_TimingAnalysis (R23-11; TR, skeleton-exempt; References registry (ref-1..22) + ch.1–11 (intro/example, basic concepts incl. LET, requirements decomposition, function/E2E/network/ECU use cases with SPEM figures, SL-LET, timing properties & methods, artifacts) + annexes A–E (Timing Reference Platform, TIMEX–ARTI mapping tables, LET interval constraints, LET composability, histories); 86 content figures reconciled against the source List of Figures; 7 CAN formulas recovered from corpus PDF; annex F dropped as doc-meta; 2026-11-06)
 
 ## rte (RTE / SWArch)
 
@@ -358,7 +365,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 - **RTE / SWArch (0)**: none — SWS_RTE and SWS_ARTI both translated (2026-11-06)
 - ~~**Safety (2)**: SWS_WatchdogInterface (WdgIf), SWS_WatchdogDriver (Wdg)~~ — both translated 2026-10-27
-- **Security (2)**: SWS_Firewall, SWS_IntrusionDetectionSystemManager (IdsM)
+- ~~**Security (2)**: SWS_Firewall, SWS_IntrusionDetectionSystemManager (IdsM)~~ — both translated 2026-11-06
 
 ## Missing EXP guides (10)
 

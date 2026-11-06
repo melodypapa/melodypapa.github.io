@@ -6,9 +6,7 @@ title: "功能安全（Safety）"
 
 ## 文章
 
-本类别尚无已翻译文章。R23-11 包含以下源文档（待翻译）：
-
-* **AUTOSAR_FO_RS_Safety** — Requirements on Safety（功能安全需求）
+* [Requirements on Safety（功能安全需求）](rs_safety/index.md)
 
 ## 相关内容
 

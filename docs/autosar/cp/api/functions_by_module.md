@@ -1522,6 +1522,20 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**FiM_MainFunction**](../system_services/function_inhibition_manager/index.md#7351-fim_mainfunction) | 该服务由基础软件模块调度程序直接调用。 |
 | [**FiM_SetFunctionAvailable**](../system_services/function_inhibition_manager/index.md#7322-fim_setfunctionavailable) | 该服务设置功能的可用性。 |
 
+## Firewall（防火墙）（7）
+
+来源：[Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall
+
+| 函数 | 简述 |
+|---|---|
+| [**Fw_GetVersionInfo**](../security/firewall/index.md#732-fw_getversioninfo) | 返回组件的版本信息、供应商 ID 和 AUTOSAR 模块 ID。 |
+| [**Fw_Init**](../security/firewall/index.md#731-fw_init) | 初始化 Fw 模块的服务。 |
+| [**Fw_InspectPacket**](../security/firewall/index.md#733-fw_inspectpacket) | 此函数根据预定义防火墙规则列表检查网络数据包，并在 InspectionResultPtr 中返回检查结果。 |
+| [**Fw_MainFunction**](../security/firewall/index.md#751-fw_mainfunction) | 此函数被周期性调用。 |
+| [**Fw_SetFirewallState**](../security/firewall/index.md#734-fw_setfirewallstate) | 此函数由 BswM 调用，用于指示 ECU 状态变化。 |
+| [**Fw_StreamHandleIdxConfiguration**](../security/firewall/index.md#742-fw_streamhandleidxconfiguration) | EthIf 成功设置交换机中的 StreamHandleIdx 后调用此函数。 |
+| [**Fw_StreamHandleIdxStatistics**](../security/firewall/index.md#741-fw_streamhandleidxstatistics) | EthIf 成功从交换机获取桶计数器值后调用此函数。 |
+
 ## AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）（11）
 
 来源：[AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer
@@ -1850,6 +1864,33 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**IEEE1722Tp_RxIndication**](../communication/ieee1722tp/index.md#752-ieee1722tp_rxindication) | — |
 | [**IEEE1722Tp_Transmit**](../communication/ieee1722tp/index.md#7431-ieee1722tp_transmit) | — |
 | [**IEEE1722Tp_TxConfirmation**](../communication/ieee1722tp/index.md#751-ieee1722tp_txconfirmation) | — |
+
+## Intrusion Detection System Manager（入侵检测系统管理器）（20）
+
+来源：[Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager
+
+| 函数 | 简述 |
+|---|---|
+| [**IdsM_BswM_StateChanged**](../security/idsm/index.md#741-idsm_bswm_statechanged) | 此回调函数由 BswM 调用，用于指示 ECU 状态变化。 |
+| [**IdsM_ContextDataModifierCallout_Name**](../security/idsm/index.md#7311-idsm_contextdatamodifiercallout_name) | 在此调出中，应用可以修改 SEv 的原始上下文数据。 |
+| [**IdsM_CopyTxData**](../security/idsm/index.md#734-idsm_copytxdata) | 调用此函数以请求 TP IdsM-UpperLayerTxPdu 的传输数据。 |
+| [**IdsM_CustomTimestamp**](../security/idsm/index.md#774-idsm_customtimestamp) | — |
+| [**IdsM_Dcm_GetReportingMode_RequestResults**](../security/idsm/index.md#744-idsm_dcm_getreportingmode_requestresults) | 此函数是 DCM 向 IdsM 发出的请求，用于读取由函数 IdsM_Dcm_GetReportingMode_Start() 触发的例程结果。 |
+| [**IdsM_Dcm_GetReportingMode_Start**](../security/idsm/index.md#745-idsm_dcm_getreportingmode_start) | 此函数是 DCM 向 IdsM 发出的请求，用于启动例程执行以请求特定安全事件 ID 的当前报告模式。 |
+| [**IdsM_Dcm_SetReportingMode_Start**](../security/idsm/index.md#746-idsm_dcm_setreportingmode_start) | 此函数是 DCM 向 IdsM 发出的请求，用于启动例程执行以设置特定安全事件 ID 的报告模式。 |
+| [**IdsM_GetVersionInfo**](../security/idsm/index.md#732-idsm_getversioninfo) | 返回组件的版本信息、供应商 ID 和 AUTOSAR 模块 ID。 |
+| [**IdsM_IdsMService**](../security/idsm/index.md#772-idsm_idsmservice) | — |
+| [**IdsM_Init**](../security/idsm/index.md#731-idsm_init) | 初始化 IdsM 模块的服务。 |
+| [**IdsM_MainFunction**](../security/idsm/index.md#733-idsm_mainfunction) | 此函数被周期性调用。 |
+| [**IdsM_SetSecurityEvent**](../security/idsm/index.md#735-idsm_setsecurityevent) | 此 API 是向 IdsM 报告安全事件的应用接口。 |
+| [**IdsM_SetSecurityEventWithContextData**](../security/idsm/index.md#736-idsm_setsecurityeventwithcontextdata) | 此 API 是向 IdsM 报告带上下文数据的安全事件的应用接口。 |
+| [**IdsM_SetSecurityEventWithCount**](../security/idsm/index.md#737-idsm_setsecurityeventwithcount) | 此 API 是供智能传感器向 IdsM 报告带计数值的安全事件的应用接口。 |
+| [**IdsM_SetSecurityEventWithCountContextData**](../security/idsm/index.md#738-idsm_setsecurityeventwithcountcontextdata) | 此 API 是供智能传感器向 IdsM 报告带计数值和上下文数据的安全事件的应用接口。 |
+| [**IdsM_SetSecurityEventWithTimestampCount**](../security/idsm/index.md#739-idsm_setsecurityeventwithtimestampcount) | 此 API 是供智能传感器向 IdsM 报告带时间戳和计数值的安全事件的应用接口。 |
+| [**IdsM_SetSecurityEventWithTimestampCountContextData**](../security/idsm/index.md#7310-idsm_setsecurityeventwithtimestampcountcontextdata) | 此 API 是供智能传感器向 IdsM 报告带时间戳、计数值和上下文数据的安全事件的应用接口。 |
+| [**IdsM_SmartSensorService**](../security/idsm/index.md#773-idsm_smartsensorservice) | — |
+| [**IdsM_TpTxConfirmation**](../security/idsm/index.md#742-idsm_tptxconfirmation) | 调用此函数以确认 TP IdsM-UpperLayerTxPdu 的成功传输，或报告传输期间发生的错误。 |
+| [**IdsM_TxConfirmation**](../security/idsm/index.md#743-idsm_txconfirmation) | 调用此函数以确认 IF IdsM-UpperLayerTxPdu 的完整传输。 |
 
 ## AUTOSAR J1939Nm（SAE J1939 网络管理）（12）
 

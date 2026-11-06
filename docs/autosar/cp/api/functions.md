@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2652** 个条目。
+共 **2677** 个条目。
 
 ## A
 
@@ -4878,6 +4878,27 @@ title: "AUTOSAR API 函数清单"
 **[FrTSyn_TriggerTransmit](../globaltime/fr_tsyn/index.md#742-frtsyn_triggertransmit)**
 > 函数 · [AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](../globaltime/fr_tsyn/index.md) · SWS_TimeSyncOverFlexRay · R23-11
 
+**[Fw_GetVersionInfo](../security/firewall/index.md#732-fw_getversioninfo)**
+> 函数 · [Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall · R23-11
+
+**[Fw_Init](../security/firewall/index.md#731-fw_init)**
+> 函数 · [Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall · R23-11
+
+**[Fw_InspectPacket](../security/firewall/index.md#733-fw_inspectpacket)**
+> 函数 · [Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall · R23-11
+
+**[Fw_MainFunction](../security/firewall/index.md#751-fw_mainfunction)**
+> 函数 · [Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall · R23-11
+
+**[Fw_SetFirewallState](../security/firewall/index.md#734-fw_setfirewallstate)**
+> 函数 · [Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall · R23-11
+
+**[Fw_StreamHandleIdxConfiguration](../security/firewall/index.md#742-fw_streamhandleidxconfiguration)**
+> 函数 · [Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall · R23-11
+
+**[Fw_StreamHandleIdxStatistics](../security/firewall/index.md#741-fw_streamhandleidxstatistics)**
+> 函数 · [Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall · R23-11
+
 ## G
 
 **[GeneralCallbackEventDataChanged](../diagnostics/diagnostic_event_manager/index.md#76322-generalcallbackeventdatachanged)**
@@ -5105,6 +5126,66 @@ title: "AUTOSAR API 函数清单"
 
 **[Icu_StopTimestamp](../io/icu_driver/index.md#7312-icu_stoptimestamp)**
 > 函数 · [AUTOSAR ICU Driver（输入捕获驱动）](../io/icu_driver/index.md) · SWS_ICUDriver · R23-11
+
+**[IdsM_BswM_StateChanged](../security/idsm/index.md#741-idsm_bswm_statechanged)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_ContextDataModifierCallout_Name](../security/idsm/index.md#7311-idsm_contextdatamodifiercallout_name)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_CopyTxData](../security/idsm/index.md#734-idsm_copytxdata)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_CustomTimestamp](../security/idsm/index.md#774-idsm_customtimestamp)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_Dcm_GetReportingMode_RequestResults](../security/idsm/index.md#744-idsm_dcm_getreportingmode_requestresults)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_Dcm_GetReportingMode_Start](../security/idsm/index.md#745-idsm_dcm_getreportingmode_start)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_Dcm_SetReportingMode_Start](../security/idsm/index.md#746-idsm_dcm_setreportingmode_start)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_GetVersionInfo](../security/idsm/index.md#732-idsm_getversioninfo)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_IdsMService](../security/idsm/index.md#772-idsm_idsmservice)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_Init](../security/idsm/index.md#731-idsm_init)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_MainFunction](../security/idsm/index.md#733-idsm_mainfunction)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_SetSecurityEvent](../security/idsm/index.md#735-idsm_setsecurityevent)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_SetSecurityEventWithContextData](../security/idsm/index.md#736-idsm_setsecurityeventwithcontextdata)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_SetSecurityEventWithCount](../security/idsm/index.md#737-idsm_setsecurityeventwithcount)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_SetSecurityEventWithCountContextData](../security/idsm/index.md#738-idsm_setsecurityeventwithcountcontextdata)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_SetSecurityEventWithTimestampCount](../security/idsm/index.md#739-idsm_setsecurityeventwithtimestampcount)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_SetSecurityEventWithTimestampCountContextData](../security/idsm/index.md#7310-idsm_setsecurityeventwithtimestampcountcontextdata)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_SmartSensorService](../security/idsm/index.md#773-idsm_smartsensorservice)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_TpTxConfirmation](../security/idsm/index.md#742-idsm_tptxconfirmation)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_TxConfirmation](../security/idsm/index.md#743-idsm_txconfirmation)**
+> 函数 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
 
 **[IEEE1722Tp_ActivateStream](../communication/ieee1722tp/index.md#7421-ieee1722tp_activatestream)**
 > 函数 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11

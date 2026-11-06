@@ -25,8 +25,13 @@ Never add `spec:`, `release:` or tags — that convention belongs to `docs/autos
   `## 2. MPU 区域`, `### 2.1. …`, `#### 4.2.1. …`. The number reflects the
   source's relative structure, not the source's absolute chapter number.
 - Never write `# ` in the body — the front-matter title is the only h1.
+- Numbering is contiguous: every `## N.` and `### N.M.` has its predecessor. A
+  jump (`## 3.` with no `## 2.`, or a `### 7.10` with no `### 7.9`) is a defect,
+  not a style choice — fix it even when the page is otherwise complete.
 - Preserve the source's section order and nesting; do not invent overview or
-  summary sections.
+  summary sections. A source overview section is not invented content: keep it
+  on the chapter page (TRM 2.1, 2.2, 2.5) even when a sibling page carries the
+  deeper topic.
 - No table of contents, no document history, no proprietary notice, no footer
   banner.
 
@@ -79,6 +84,14 @@ Never add `spec:`, `release:` or tags — that convention belongs to `docs/autos
 ## Landing pages and navigation
 
 - `docs/cortex/<core>_processor/<topic>/index.md` — one directory per topic.
+- One source chapter maps to exactly one article. Do not split a chapter across
+  directories (two articles for ch2's PSR and exception model, a separate MPU
+  page for ch6); merge the parts into one page, renumber the appended sections,
+  and keep old URLs alive through `redirect_maps`.
+- The document glossary goes in `docs/cortex/<core>_processor/glossary/index.md`
+  with the `title: "术语表（Glossary）"`, the sentence that the manual keeps no
+  local word list, and a single link to the Arm Glossary. It is registered last
+  in the core group (appendix position).
 - `mkdocs.yml`, group `ARM Cortex` → `Cortex-M7 内核` / `Cortex-R52+ 内核`: add
   `- "<中文标题>": cortex/<core>_processor/<topic>/index.md`.
 - `docs/cortex/index.md`: numbered link under the matching core heading
