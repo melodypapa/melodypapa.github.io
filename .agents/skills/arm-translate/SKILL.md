@@ -7,7 +7,8 @@ description: >
   Armv7-M/Armv8-M architecture reference manual, SDEN errata) from the local
   `.private/ARM` mirror into a docs/cortex page; or when asked about coverage of
   a Cortex core chapter such as MPU, cache, memory system, programmers model,
-  exception model, instruction set, or system address map.
+  exception model, instruction set, or system address map; or when merging split
+  chapter pages and registering a document glossary.
 ---
 
 # Arm Document → Cortex Article Sync
@@ -51,12 +52,15 @@ A source chapter becomes one article at
 straddles two chapters or could be split.
 
 ## Step 3 — Gap analysis before any writing
-
 Compare the article's `## ` headings against the source chapter's section list:
 
 - **Missing article** → plan a full translation of that chapter.
 - **Partial / stub** → plan in-place completion; insert translations where the
-  source has them, never rewrite translated text.
+  source has them, in source order, and renumber the sections that follow.
+- **Covered elsewhere** → before writing off a section as "another article has
+  it", confirm the sibling page actually carries it and record the mapping.
+  Overview, modes and monitor sections stay on the chapter page even when the
+  sibling page covers the deeper topic.
 - **Complete** → report alignment; check for sections the article dropped.
 
 The droppable set is the document chrome only: cover page, proprietary notice,
@@ -130,6 +134,31 @@ against the source, and only if nothing else links to it.
 - `mkdocs.yml`: add the page under the `ARM Cortex` group of the right core
   (`Cortex-M7 内核` / `Cortex-R52+ 内核`).
 - `docs/cortex/index.md`: add the numbered link under the matching core section.
+- Insert both entries at the page's **source chapter position** — the nav group
+  and the landing list are ordered by chapter number (ch1 → ch14 → appendix),
+  not by arrival time. Never append a new page at the end of the group; a
+  concept article takes the position of the closest chapter it supports. See
+  `references/article-format.md`.
+- **One source chapter = one article.** When a chapter is currently split across
+  two directories (the PSR/exception split under TRM ch2, the TRM ch6 MPU and
+  the Armv7-M PMSAv7 extract), merge them into a single `index.md`: keep the
+  first article's directory and title, append the second article's sections
+  with their numbers shifted by the first article's last chapter number, move
+  its images with `git mv`, delete the retired directory, and add
+  `redirect_maps` entries in `mkdocs.yml` for every retired `…/index.md`.
+  Internal `#anchor` links inside moved sections must be renumbered with the
+  new heading number. Fix any reference to the old paths in the article tree and
+  in `docs/cortex/sync-todo/`.
+- A merged chapter page must still be **chapter-complete**: the source's
+  overview, mode/state and monitor sections (TRM 2.1, 2.2, 2.5) belong on the
+  chapter page even when the chapter also points at sibling pages for other
+  topics (2.3 instruction set → `instruction_set`, 2.4 address map →
+  `system_address_map`). Insert them at their source position and renumber
+  every later section, or the page silently drops the chapter's own front
+  matter.
+- The document glossary is its own page: `docs/cortex/<core>_processor/glossary/index.md`,
+  `title: "术语表（Glossary）"`, no local word list, one link to the Arm
+  Glossary, registered last in the core group (appendix position).
 - Concept articles that cite external sources stay outside this skill.
 
 ## Step 8 — Verify (two-phase gate)
@@ -150,7 +179,9 @@ number; no untranslated English paragraph left behind.
 Phase B (fidelity): walk the chapter section by section — each source section
 has a translation, each register/figure/table is present, row sets and bit
 ranges match the source, and deprecated Chinese-only wording is not used where
-the source is a proper noun.
+the source is a proper noun. Also check **numbering continuity**: every numbered
+heading has its predecessor (`### 7.10` implies `### 7.9`, `## 3.` implies
+`## 2.`); a jump is a defect even when the text reads fine.
 
 Report both phases with concrete evidence; do not claim completion without the
 build output. Run the gate even when the requester says they will verify it

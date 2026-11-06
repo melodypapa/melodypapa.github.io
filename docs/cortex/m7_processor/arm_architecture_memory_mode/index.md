@@ -488,6 +488,6 @@ If the only memory type mismatch is between Strongly-ordered and Device memory, 
 #### 1.8.3. 缓存对应用程序程序员的影响
 #### 1.8.4. 预加载缓存
 
-## 3. 参考文献
+## 2. 参考文献
 
 1. [STM32H7的CACHE和MPU](https://www.freesion.com/article/6133190980/)
