@@ -287,10 +287,15 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Standardization Template（标准化模板）; target `foundation/methodology_templates/tps_standardization_template/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_TPS_StandardizationTemplate.md` — 7,281 lines, 301 figure refs, 590 item IDs; **giant source** — segment plan before Step 2 (OS/RTE precedent)
   - Note: related site content: cp/methodology_templates/basic_software_module_description_template (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: Step 1 gap analysis (2026-11-06): no article → full translation mirroring source numbering: References registry (ref-1..20) + ch.1–ch.6 + 附录 A–E; 附录 A（Reference Material / Requirements Tracing）omitted under the droppable set; doc-meta chrome dropped; 590 item IDs → bold translated titles per batch decision（正文名义引用保留：[TPS_GST_*]、[TPS_SWCT_*]、[SWS_BSW_00102]、[SWS_RamTst_00192]、constr_2540/2553/2554/2557-2559/2563/2566/2567/2570/2571、示例条目 [SWS_FOO_07711]/[ATR_FOO_04711]/[RS_BSW_*]/[RS_CANIF_*]（图 2.7 追溯表数据）、[TPS_XMLSPR_00003/00036/00046]、[TPS_SAFEX_*]（清单 B.16 数据）; 附录 E 变更历史 Number 列丢弃）
+  - Note: figures — 301 refs = 50 content diagrams（图 2.1/2.2/2.5/2.8、4.1–4.21、5.1、6.1–6.25 除源中缺图的 6.8/6.10）+ 4 张清单渲染图（Listing B.8/B.14/B.15/B.21——这四条清单正文在 markdown 转换中缺失或截断，以渲染图补足并注记）；图 2.3/2.4/2.6/2.7 源中以排版文本给出、无独立内容图 → 按站点表格规则以 GFM 表呈现并保留源图号；其余 ~247 张装饰图丢弃
+  - Note: technical shape — ch.2 的八类条目（规范项/约束项/建议项/非模板约束/需求/测试项/TraceableText/StructuredReq）全部译出；分页切断的条目闭合行（glyph[floorright] (RS_…) 单独成行）按上下文合并；扁平标题（References to other documents…、In this pattern…、A PortPrototypeBlueprint has the following characteristics 等）按正文导语处理；清单 4.1（ANTLR 语法）、4.2–4.4（表达式模式）、6.1–6.3、B.1–B.21 以可读缩进重构（B.16/B.19/B.20/B.21 在分页处损坏，按结构摘要保守重建并逐一注记）；附录 C 105 张类表全部译出（表题在源中位于表内容之后，按编号置顶；转换截断的备注单元格标注「（源单元格被截断）」，不臆造）；约束表（图 2.3 需求表示例）中源条目标题自带 {DRAFT} 生命周期标记 → 以 &#123;DRAFT&#125; 实体呈现以通过 hygiene grep
+  - Note: Phase A (2026-11-06) — `mkdocs build --strict` exit 0, 0 WARNINGs；本页 2 条 unrecognized-relative-link INFO（XSD pattern 正则片段被误判为链接）→ 以行内代码包裹修复后归零；`check_heading_lang.py` OK；`check_indexes.py` OK（315 nav targets, 0 broken）；`gen_api_list.py --check` up to date；hygiene：内容 0 × `^# `/`{DRAFT}`/`\<`/glyph 标记（provenance 注记除外）；link census：0 identifier mentions，19 chapter-ref links + 41 citations linked（--apply 幂等），1 UNRESOLVED（L512 的 [1] 为 XPath 起始索引说明、非引用上下文，保留），cross-article report-only PORT ×11 / Dcm ×1 SITE + CanIf ×2 / Sd ×1 NO-ARTICLE
+  - Note: Phase B (2026-11-06) — coverage References→参考文献, ch.1→§1（1.1）, ch.2→§2（2.1–2.3）, ch.3→§3, ch.4→§4（4.1.1–4.1.7、4.2.1–4.2.27、4.3）, ch.5→§5, ch.6→§6（6.1–6.6），附录 A 省略、B→§B（B.1–B.4，清单 B.1–B.21）、C→§C（105 张表）、D→§D（10 行表）、E→§E（E.1–E.10，标题列表）；deliberate omission：附录 A Requirements Tracing（droppable set — user to verify）+ doc-meta chrome；源 quirk 记录：E.3.1 表中 [TPS_STDT_00090]/[00091] 同名双行、[TPS_STDT_00146]/[00147] 并置行、表 C.66 recommendedPackage 拼写 LifeCycleStateDefintionGroups、C.68 avaliable 笔误、C.24 drivedFrom 笔误、C.90 包名 AuxillaryObjects——均按源保留并注记
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] tps_generic_structure_template (AUTOSAR_FO_TPS_GenericStructureTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
