@@ -31,7 +31,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate (confirmed 2026-11-06, batch-level combined gate)
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] arti (SWS_ARTI · R23-11 markdown · ❌ new article)
   - Note: 2026-11-06 run (same worktree/branch as the rte finishing pass; Step 5 deferred to the batch-level combined gate per user instruction) — source `SWArch/AUTOSAR_CP_SWS_ARTI.md` 3,900 lines, 106 image refs (triage: 10 real content figures + chrome), 0 figure caption captions beyond ch.1/8/10 class diagrams. Target dir: `cp/sw_arch/arti_sws/` — the sibling EXP guide `cp/sw_arch/arti` (AUTOSAR_CP_EXP_ARTI) already occupies the plain `arti` slug, so the SWS article takes the suffixed one (per Foundation `<type>_<snake_name>` disambiguation precedent); nav label "ARTI SWS".
@@ -45,7 +45,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - [x] Step 5 — User confirmation gate (confirmed 2026-11-06, batch-level combined gate)
   - [x] Step 6 — TODO.md row + commit/PR
 
 ## Not queued (deliberately skipped)
