@@ -311,12 +311,12 @@ Status: **1/2** completed
 
 ## Group rte-swarch — RTE / SWArch section (new section)
 
-Status: **0/2** completed
+Status: **2/2** completed
 
 | Article | Status | Commit ID |
 | ------- | -------- | ---------- |
-| `rte`    | [ ] Aligned | 67b0783783 |
-| `arti`   | [ ] Aligned | 05b2b4d283 |
+| `rte`    | [x] Done | 67b0783783 |
+| `arti`   | [x] Done | b4861ac7df |
 
 ## Group safety — safety section (new section)
 
@@ -351,5 +351,5 @@ Status: **7/7** completed
 | `hwtestmanager`                 | [x] Done | 04ea38b015 |
 | `operating_system`              | [x] Done | ca7ecda991 |
 
-**Total: 154/214 queue rows complete.**
+**Total: 156/214 queue rows complete.**
 
