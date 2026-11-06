@@ -551,9 +551,19 @@ def census(article: str, self_dir: str = ""):
     resolutions = {}
     modules = {}
     acro = acronym_span(headings)
+    in_comment = False
     for i, ln in enumerate(lines):
         if ln.startswith("```"):
             fence = not fence
+            continue
+        # HTML comments (translator run notes) are never link candidates
+        if in_comment:
+            if "-->" in ln:
+                in_comment = False
+            continue
+        if "<!--" in ln:
+            if "-->" not in ln:
+                in_comment = True
             continue
         m = re.match(r"^## (\d+)\.", ln)
         if m:
@@ -677,9 +687,19 @@ def apply_links(article: str, ref_skip=frozenset()):
     changed = 0
     chref_changed = 0
     fence = False
+    in_comment = False
     for i, ln in enumerate(lines):
         if ln.startswith("```"):
             fence = not fence
+            continue
+        # HTML comments (translator run notes) are never link candidates
+        if in_comment:
+            if "-->" in ln:
+                in_comment = False
+            continue
+        if "<!--" in ln:
+            if "-->" not in ln:
+                in_comment = True
             continue
         if fence or ln.startswith("#") or i < fm_end or (stop is not None and i >= stop):
             continue

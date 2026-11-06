@@ -476,6 +476,7 @@ nav:
         - "TR Glossary": autosar/foundation/general/tr_glossary/index.md
         - "Predefined Names": autosar/foundation/general/tr_predefined_names/index.md
         - "Project Objectives": autosar/foundation/general/rs_project_objectives/index.md
+        - "Main Requirements": autosar/foundation/general/rs_main/index.md
         - "Security Overview": autosar/foundation/general/exp_security_overview/index.md
         - "SW Architectural Decisions": autosar/foundation/general/exp_sw_architectural_decisions/index.md
         - "Safety Overview": autosar/foundation/general/exp_safety_overview/index.md
@@ -486,8 +487,11 @@ nav:
         - "Debug Trace Profile": autosar/foundation/communication_management/rs_debug_trace_profile/index.md
         - "RS E2E": autosar/foundation/communication_management/rs_e2e/index.md
         - "MACsec": autosar/foundation/communication_management/rs_macsec/index.md
+        - "NM": autosar/foundation/communication_management/rs_network_management/index.md
+        - "Log and Trace": autosar/foundation/communication_management/rs_log_and_trace/index.md
       - 诊断:
         - autosar/foundation/diagnostics/index.md
+        - "Diagnostics": autosar/foundation/diagnostics/rs_diagnostics/index.md
       - 健康监控:
         - autosar/foundation/health_monitoring/index.md
         - "System Health Monitoring": autosar/foundation/health_monitoring/exp_system_health_monitoring/index.md
@@ -498,6 +502,7 @@ nav:
         - "Security Extract": autosar/foundation/methodology_templates/rs_security_extract_template/index.md
         - "Feature Model": autosar/foundation/methodology_templates/rs_feature_model_exchange_format/index.md
         - "Methodology": autosar/foundation/methodology_templates/rs_methodology/index.md
+        - "Standardization Template": autosar/foundation/methodology_templates/rs_standardization_template/index.md
         - "Timing Extensions": autosar/foundation/methodology_templates/rs_timing_extensions/index.md
         - "Abstract Platform": autosar/foundation/methodology_templates/tps_abstract_platform_specification/index.md
         - "Log and Trace Extract": autosar/foundation/methodology_templates/tps_log_and_trace_extract/index.md
@@ -514,11 +519,16 @@ nav:
         - "DDS": autosar/foundation/protocols/rs_data_distribution_service/index.md
         - "NM Protocol": autosar/foundation/protocols/prs_network_management_protocol/index.md
         - "IDS Protocol": autosar/foundation/protocols/prs_intrusion_detection_system/index.md
+        - "Time Sync": autosar/foundation/protocols/rs_time_sync/index.md
+        - "TS Protocol": autosar/foundation/protocols/prs_time_sync_protocol/index.md
+        - "SOME/IP Protocol": autosar/foundation/protocols/prs_someip_protocol/index.md
+        - "SOME/IP-SD": autosar/foundation/protocols/prs_someip_service_discovery_protocol/index.md
       - 发布文档:
         - autosar/foundation/release_documentation/index.md
         - autosar/foundation/release_documentation/tr_release_overview/index.md
       - 功能安全:
         - autosar/foundation/safety/index.md
+        - "Safety": autosar/foundation/safety/rs_safety/index.md
       - 信息安全:
         - autosar/foundation/security/index.md
         - "IDS": autosar/foundation/security/rs_intrusion_detection_system/index.md

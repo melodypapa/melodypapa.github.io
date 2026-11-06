@@ -280,8 +280,8 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ✅ [Explanation of Software Architectural Decisions（软件架构决策说明）](foundation/general/exp_sw_architectural_decisions/) — AUTOSAR_FO_EXP_SWArchitecturalDecisions (R23-11; EXP guide, skeleton-exempt; ch.1–5 with 29 architectural decisions (5.1 common ×1, 5.2 AP ×24, 5.3 CP ×4) as 11-field tables; 2026-11-05)
 - ✅ [Safety Overview（功能安全概览）](foundation/general/exp_safety_overview/) — AUTOSAR_FO_EXP_SafetyOverview (R23-11; EXP guide, skeleton-exempt; 已知限制 + ch.1–6 + annexes A/B (28 acronyms + 7 glossary terms); 9 content figures embedded; 2026-11-05)
 - ✅ [Security Overview（信息安全概览）](foundation/general/exp_security_overview/) — AUTOSAR_FO_EXP_SecurityOverview (R23-11; EXP guide, skeleton-exempt; ch.1–4 (§4.1 PRE: memory-corruption attacks, secure coding, 4 attack classes, DEP/SSP/ASLR/CFI/CPI/PointerAuth solutions with 10 tables, isolation); Figure 4.1 embedded; footnotes as <sup>N</sup>+blockquote (14–17/27–35 texts lost in source conversion — markers dropped); 2026-11-05)
-- ❌ Main Requirements（主需求规范） — AUTOSAR_FO_RS_Main (`foundation/general/`)
-- ❌ Project Objectives（项目目标） — AUTOSAR_FO_RS_ProjectObjectives (`foundation/general/`)
+- ✅ Main Requirements（主需求规范） — AUTOSAR_FO_RS_Main (`foundation/general/rs_main/`; R23-11; RS, skeleton-exempt; 75 requirement items (24 + 51 platform-level candidates) numbered §3.x/§4.x with IDs dropped per batch decision; tracing chapter (source ch.3) omitted, renumber 4→3/5→4/6→5; Figure 1.1 embedded; ~25 PDF-garbled table cells recovered; 2026-11-06)
+- ✅ Project Objectives（项目目标） — AUTOSAR_FO_RS_ProjectObjectives (`foundation/general/rs_project_objectives/`; R23-11; RS, skeleton-exempt; delivered in part 1 (PR #274) — row was left ❌, reconciled 2026-11-06)
 - ✅ [Predefined Names in AUTOSAR（AUTOSAR 预定义名称）](foundation/general/tr_predefined_names/) — AUTOSAR_FO_TR_PredefinedNames (R23-11; TR, skeleton-exempt; ch.1–4 keyword tables (5 virtual modules, 23 information categories, 99 document abbreviations) + annex A class tables A.1–A.4 + annex B (none→无) + trailing 参考文献 registry (ref-1..5, 12 citation links); 2026-11-05)
 
 ### foundation/communication_management (Communication Management)
@@ -290,13 +290,13 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ✅ Requirements on Debug Trace Profile（调试跟踪配置文件需求） — AUTOSAR_FO_RS_DebugTraceProfile (`foundation/communication_management/rs_debug_trace_profile/`)
 - ✅ Requirements on E2E（端到端通信保护需求） — AUTOSAR_FO_RS_E2E (`foundation/communication_management/rs_e2e/`)
 - ❌ Requirements on IEEE 1722（IEEE 1722 需求） — AUTOSAR_FO_RS_IEEE1722 (`foundation/communication_management/`)
-- ❌ Requirements on Log and Trace（日志与跟踪需求） — AUTOSAR_FO_RS_LogAndTrace (`foundation/communication_management/`)
+- ✅ Requirements on Log and Trace（日志与跟踪需求） — AUTOSAR_FO_RS_LogAndTrace (`foundation/communication_management/rs_log_and_trace/`; R23-11; RS, skeleton-exempt; 58 requirement items with IDs dropped per batch decision; tracing chapter omitted; 2026-11-06)
 - ✅ Requirements on MACsec（MACsec 需求） — AUTOSAR_FO_RS_MACsec (`foundation/communication_management/rs_macsec/`)
-- ❌ Requirements on Network Management（网络管理需求） — AUTOSAR_FO_RS_NetworkManagement (`foundation/communication_management/`)
+- ✅ Requirements on Network Management（网络管理需求） — AUTOSAR_FO_RS_NetworkManagement (`foundation/communication_management/rs_network_management/`; R23-11; RS, skeleton-exempt; 60 requirement items with IDs dropped per batch decision, use-case table ch.4 as GFM; tracing chapter omitted; 2026-11-06)
 
 ### foundation/diagnostics (Diagnostics)
 
-- ❌ Requirements on Diagnostics（诊断需求） — AUTOSAR_FO_RS_Diagnostics (`foundation/diagnostics/`)
+- ✅ Requirements on Diagnostics（诊断需求） — AUTOSAR_FO_RS_Diagnostics (`foundation/diagnostics/rs_diagnostics/`; R23-11; RS, skeleton-exempt; 153 requirement items with IDs dropped; empty §4.4 Configuration omitted; tracing chapter omitted; 2026-11-06)
 
 ### foundation/health_monitoring (Health Monitoring)
 
@@ -309,7 +309,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ✅ Requirements on Feature Model Exchange Format（特征模型交换格式需求） — AUTOSAR_FO_RS_FeatureModelExchangeFormat (`foundation/methodology_templates/rs_feature_model_exchange_format/`)
 - ✅ Requirements on Methodology（方法论需求） — AUTOSAR_FO_RS_Methodology (`foundation/methodology_templates/rs_methodology/`)
 - ✅ Requirements on Security Extract Template（安全提取模板需求） — AUTOSAR_FO_RS_SecurityExtractTemplate (`foundation/methodology_templates/rs_security_extract_template/`)
-- ❌ Requirements on Standardization Template（标准化模板需求） — AUTOSAR_FO_RS_StandardizationTemplate (`foundation/methodology_templates/`)
+- ✅ Requirements on Standardization Template（标准化模板需求） — AUTOSAR_FO_RS_StandardizationTemplate (`foundation/methodology_templates/rs_standardization_template/`; R23-11; RS, skeleton-exempt; 21 use cases + 66 requirement items numbered §2.x/§3.x.y with IDs dropped, UC/RS cross-refs linked intra-article; unnumbered pre-chapter References mirrored with ref anchors; tracing subsections §1.3/§1.4 omitted; annex A class tables → §4 numbered continuation; 2026-11-06)
 - ✅ Requirements on Timing Extensions（时序扩展需求） — AUTOSAR_FO_RS_TimingExtensions (`foundation/methodology_templates/rs_timing_extensions/`)
 - ❌ ARXML Serialization Rules（ARXML 序列化规则） — AUTOSAR_FO_TPS_ARXMLSerializationRules (`foundation/methodology_templates/`)
 - ❌ Requirements on Timing Extensions（时序扩展需求） — AUTOSAR_FO_RS_TimingExtensions (`foundation/methodology_templates/`)
@@ -328,16 +328,16 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 - ✅ Intrusion Detection System Protocol Specification（入侵检测系统协议规范） — AUTOSAR_FO_PRS_IntrusionDetectionSystem (`foundation/protocols/prs_intrusion_detection_system/`)
 - ❌ Log and Trace Protocol Specification（日志与跟踪协议规范） — AUTOSAR_FO_PRS_LogAndTraceProtocol (`foundation/protocols/`)
 - ✅ Network Management Protocol Specification（网络管理协议规范） — AUTOSAR_FO_PRS_NetworkManagementProtocol (`foundation/protocols/prs_network_management_protocol/`)
-- ❌ SOME/IP Protocol Specification（SOME/IP 协议规范） — AUTOSAR_FO_PRS_SOMEIPProtocol (`foundation/protocols/`)
-- ❌ SOME/IP Service Discovery Protocol Specification（SOME/IP 服务发现协议规范） — AUTOSAR_FO_PRS_SOMEIPServiceDiscoveryProtocol (`foundation/protocols/`)
+- ✅ SOME/IP Protocol Specification（SOME/IP 协议规范） — AUTOSAR_FO_PRS_SOMEIPProtocol (`foundation/protocols/prs_someip_protocol/`; R23-11; PRS, skeleton-exempt; protocol items as prose paragraphs with IDs dropped; header/serialization byte tables + return-code + payload-compatibility tables as GFM; Figures 4.1, 4.3–4.22 embedded (Figure 4.2 lost in conversion); tracing chapter omitted; 2026-11-06)
+- ✅ SOME/IP Service Discovery Protocol Specification（SOME/IP 服务发现协议规范） — AUTOSAR_FO_PRS_SOMEIPServiceDiscoveryProtocol (`foundation/protocols/prs_someip_service_discovery_protocol/`; R23-11; PRS, skeleton-exempt; protocol items as prose paragraphs with IDs dropped; message-format/options/entry tables + reserved-ID + config-param tables as GFM; Figures 1.1, 5.1–5.26 embedded; tracing chapter omitted; 2026-11-06)
 - ✅ Secure Onboard Communication Protocol Specification（安全车载通信协议规范） — AUTOSAR_FO_PRS_SecOcProtocol (`foundation/protocols/prs_secoc_protocol/`)
-- ❌ Time Synchronization Protocol Specification（时间同步协议规范） — AUTOSAR_FO_PRS_TimeSyncProtocol (`foundation/protocols/`)
+- ✅ Time Synchronization Protocol Specification（时间同步协议规范） — AUTOSAR_FO_PRS_TimeSyncProtocol (`foundation/protocols/prs_time_sync_protocol/`; R23-11; PRS, skeleton-exempt; protocol items as prose paragraphs with IDs dropped; message-format byte tables + config-parameter table as GFM; Figures 4.1–4.8 embedded; formulas recovered from PDF; tracing chapter + 2 placeholder sections omitted; 2026-11-06)
 - ✅ V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范） — AUTOSAR_FO_PRS_V2XRemoteAccessLayer (`foundation/protocols/prs_v2x_remote_access_layer/`)
 - ✅ Requirements on Data Distribution Service（数据分发服务需求） — AUTOSAR_FO_RS_DataDistributionService (`foundation/protocols/rs_data_distribution_service/`)
 - ✅ Requirements on IPsec Protocol（IPsec 协议需求） — AUTOSAR_FO_RS_IPsecProtocol (`foundation/protocols/rs_ipsec_protocol/`)
 - ✅ Requirements on SOME/IP Protocol（SOME/IP 协议需求） — AUTOSAR_FO_RS_SOMEIPProtocol (`foundation/protocols/rs_someip_protocol/`)
 - ✅ Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求） — AUTOSAR_FO_RS_SOMEIPServiceDiscoveryProtocol (`foundation/protocols/rs_someip_service_discovery_protocol/`)
-- ❌ Requirements on Time Synchronization（时间同步需求） — AUTOSAR_FO_RS_TimeSync (`foundation/protocols/`)
+- ✅ Requirements on Time Synchronization（时间同步需求） — AUTOSAR_FO_RS_TimeSync (`foundation/protocols/rs_time_sync/`; R23-11; RS, skeleton-exempt; 75 requirement items (37 common + 17 Ethernet + 11 CAN + 9 FlexRay + 1 non-functional) with IDs dropped; definitions ch.3.2 with Figures 3.1–3.3 embedded; tracing chapter omitted; 2026-11-06)
 
 ### foundation/release_documentation (Release Documentation)
 
@@ -345,7 +345,7 @@ Foundation R23-11 (52 documents, 10 topics). Articles live under `foundation/<to
 
 ### foundation/safety (Safety)
 
-- ❌ Requirements on Safety（功能安全需求） — AUTOSAR_FO_RS_Safety (`foundation/safety/`)
+- ✅ Requirements on Safety（功能安全需求） — AUTOSAR_FO_RS_Safety (`foundation/safety/rs_safety/`; R23-11; RS, skeleton-exempt; 65 requirement items translated with IDs dropped per batch decision; tracing chapter omitted; 2026-11-06)
 
 ### foundation/security (Security)
 

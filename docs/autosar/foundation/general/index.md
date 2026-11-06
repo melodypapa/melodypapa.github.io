@@ -9,14 +9,10 @@ title: "通用（General）"
 * [TR Glossary（AUTOSAR 术语表）](tr_glossary/index.md)
 * [Predefined Names in AUTOSAR（AUTOSAR 预定义名称）](tr_predefined_names/index.md)
 * [Project Objectives（项目目标）](rs_project_objectives/index.md)
+* [Main Requirements（主需求规范）](rs_main/index.md)
 * [Security Overview（信息安全概览）](exp_security_overview/index.md)
 * [Explanation of Software Architectural Decisions（软件架构决策说明）](exp_sw_architectural_decisions/index.md)
 * [Safety Overview（功能安全概览）](exp_safety_overview/index.md)
-
-以下源文档尚未翻译：
-
-* **AUTOSAR_FO_RS_Main** — Main Requirements（主需求规范）
-* **AUTOSAR_FO_TR_PredefinedNames** — Predefined Names in AUTOSAR（AUTOSAR 预定义名称）
 
 ## 相关内容
 
