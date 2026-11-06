@@ -175,6 +175,7 @@ plugins:
         autosar/safety/watchdog_interface/index.md: autosar/cp/safety/watchdog_interface/index.md
         autosar/safety/watchdog_manager/index.md: autosar/cp/safety/watchdog_manager/index.md
         autosar/sw_arch/arti/index.md: autosar/cp/sw_arch/arti/index.md
+        autosar/sw_arch/arti_sws/index.md: autosar/cp/sw_arch/arti_sws/index.md
         autosar/sw_arch/index.md: autosar/cp/sw_arch/index.md
         autosar/system_services/comm/index.md: autosar/cp/system_services/comm/index.md
         autosar/system_services/default_error_tracer/index.md: autosar/cp/system_services/default_error_tracer/index.md
@@ -436,6 +437,7 @@ nav:
       - SW 架构:
         - autosar/cp/sw_arch/index.md
         - "ARTI": autosar/cp/sw_arch/arti/index.md
+        - "ARTI SWS": autosar/cp/sw_arch/arti_sws/index.md
       - 应用接口:
         - autosar/cp/application_interfaces/index.md
         - "ADAS and VMC": autosar/cp/application_interfaces/adas_vmc/index.md

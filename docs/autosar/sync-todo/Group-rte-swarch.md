@@ -34,12 +34,19 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] arti (SWS_ARTI · R23-11 markdown · ❌ new article)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-06 run (same worktree/branch as the rte finishing pass; Step 5 deferred to the batch-level combined gate per user instruction) — source `SWArch/AUTOSAR_CP_SWS_ARTI.md` 3,900 lines, 106 image refs (triage: 10 real content figures + chrome), 0 figure caption captions beyond ch.1/8/10 class diagrams. Target dir: `cp/sw_arch/arti_sws/` — the sibling EXP guide `cp/sw_arch/arti` (AUTOSAR_CP_EXP_ARTI) already occupies the plain `arti` slug, so the SWS article takes the suffixed one (per Foundation `<type>_<snake_name>` disambiguation precedent); nav label "ARTI SWS".
+  - Note: D2 structure mapping: source ch.1→§1, 2→§2 (ORTI acronym + Debugging/Tracing/Timing Measurement/Profiling terms), 3→§3, 4→§4 (4.1 限制), 5→§5, 7→§6 (7.1–7.5 → 6.1–6.5), 8→§7 (8.1–8.8 → 7.1–7.8), 10→§8 配置规范 (10.1–10.8 → 8.1–8.8); source ch.9 Sequence diagrams = "Not applicable yet." → omitted (placeholder rule, reported); source app. A Not applicable requirements = "No content." → omitted (placeholder rule, reported); app. B Example → §9 示例 (numbered continuation, STANDARD §1), app. C Expression Syntax → §10 表达式语法, app. D Change history → ## B. 可追溯项变更历史 (ID fences).
+  - Note: Step 1 finding — 106 image refs size/hash-triaged to 10 content figures (Figure 1.1/1.2 data flow + work flow, 8.1/8.2 CAT1ISR state machines, 10.1–10.6 Ecuc class diagrams); all 16 ch.1–7 inline images are 342–345×36–37 px chrome and dropped; source Example 10.6/10.9 reconstructed from source (initial draft had invented values — corrected against source before commit).
+  - Note: Step 2 — article 2,936 lines: ch.2 bold+blockquote format; §6 incl. the 5-step RTE VFB trace client config with Example 7.1 ARXML; §7 incl. ARTI_TRACE/_N macro formats with all OS examples, 4 trace classes + AR_CP_BSW_API; §8 17 containers with Example 10.1–10.10; §9 Listings B.1–B.7 + Examples B.1–B.5; §10 EBNF grammar + term table.
+  - Note: Step 3 — strict build exit 0 / 0 WARNING; check_heading_lang OK; hygiene clean (3 `# ` hits verified as fenced C directives); check_indexes OK (311 nav targets, 0 broken); api listing regen: sw_arch/arti_sws 0 types/2 funcs (Arti_Init, Arti_GetVersionInfo); link census --apply 25+6 lines, idempotent (15 chapter refs + 6 citations + 3 registry anchors); 3 UNRESOLVED chapter refs found and fixed before final apply (my own 9.7.x→8.7.x renumbering slips in §6 prose).
+  - Note: glossary — Timing Measurement NEW entry; ORTI/Debugging/Tracing/Profiling gained SWS_ARTI in their 来源 lines (ARTI definitions are more specific than TR Glossary's — flagged as merge decision for the user at the combined gate).
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-06)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 
 ## Not queued (deliberately skipped)
 - (none)

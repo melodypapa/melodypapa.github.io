@@ -2124,7 +2124,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Debugging**
 > 调试是在出现软件问题时收集信息的过程。所收集的信息用于分析该软件问题。
 >
-> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）、[AUTOSAR ARTI（运行时接口）](cp/sw_arch/arti_sws/index.md)（AUTOSAR_CP_SWS_ARTI）
 {: .glossary-source}
 
 **Default Error Tracer**
@@ -6117,7 +6117,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ORTI**
 > OSEK 运行时接口——针对 OSEK 平台将跟踪工具对 OS 内部的访问标准化的标准（**OSEK Run-Time Interface**）
 >
-> 来源：[ARTI（AUTOSAR 运行时接口）](cp/sw_arch/arti/index.md)（AUTOSAR_CP_EXP_ARTI）
+> 来源：[ARTI（AUTOSAR 运行时接口）](cp/sw_arch/arti/index.md)（AUTOSAR_CP_EXP_ARTI）、[AUTOSAR ARTI（运行时接口）](cp/sw_arch/arti_sws/index.md)（AUTOSAR_CP_SWS_ARTI）
 {: .glossary-source}
 
 **OS**
@@ -6779,7 +6779,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Profiling**
 > 性能剖析（**Profiling**）指评估"性能"（**Performance**）的过程。
 >
-> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）、[AUTOSAR ARTI（运行时接口）](cp/sw_arch/arti_sws/index.md)（AUTOSAR_CP_SWS_ARTI）
 {: .glossary-source}
 
 **Protocol Control Information**
@@ -8711,6 +8711,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
+**Timing Measurement**
+> 时序测量（**Timing Measurement**）指捕获时序信息：通过插桩（例如经由 Pre-/PostTaskHooks 或其他钩子或调出）或通过专用的硬件支持（例如硬件性能计数器）；不停止执行。
+>
+> 来源：[AUTOSAR ARTI（运行时接口）](cp/sw_arch/arti_sws/index.md)（AUTOSAR_CP_SWS_ARTI）
+{: .glossary-source}
 **TLM**
 > 交通灯操控（**Traffic Light Maneuver**）。
 >
@@ -8834,7 +8839,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Tracing**
 > 跟踪（**Tracing**）是在一定时间段内记录程序在系统中的可观测状态和执行路径的活动。
 >
-> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）、[AUTOSAR ARTI（运行时接口）](cp/sw_arch/arti_sws/index.md)（AUTOSAR_CP_SWS_ARTI）
 {: .glossary-source}
 
 **Transaction authentication**（事务认证）

@@ -194,6 +194,7 @@ title: "CP AUTOSAR"
 
 * [SW 架构（SW Architecture）](sw_arch/index.md)
   * [ARTI（AUTOSAR 运行时接口）](sw_arch/arti/index.md)
+  * [AUTOSAR ARTI（运行时接口）](sw_arch/arti_sws/index.md)
 
 ### 应用接口
 
