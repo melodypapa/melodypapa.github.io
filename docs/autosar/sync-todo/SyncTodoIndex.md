@@ -311,12 +311,12 @@ Status: **1/2** completed
 
 ## Group rte-swarch — RTE / SWArch section (new section)
 
-Status: **0/2** completed
+Status: **2/2** completed
 
 | Article | Status | Commit ID |
 | ------- | -------- | ---------- |
-| `rte`    | [ ] Aligned | 67b0783783 |
-| `arti`   | [ ] Aligned | 05b2b4d283 |
+| `rte`    | [x] Done | 67b0783783 |
+| `arti`   | [x] Done | b4861ac7df |
 
 ## Group safety — safety section (new section)
 

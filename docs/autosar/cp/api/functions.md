@@ -89,6 +89,12 @@ title: "AUTOSAR API 函数清单"
 **[AppSendRequest](../communication/j1939rm/index.md#7832-appsendrequest)**
 > 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
 
+**[Arti_GetVersionInfo](../sw_arch/arti_sws/index.md#742-arti_getversioninfo)**
+> 函数 · [AUTOSAR ARTI（运行时接口）](../sw_arch/arti_sws/index.md) · SWS_ARTI · R23-11
+
+**[Arti_Init](../sw_arch/arti_sws/index.md#741-arti_init)**
+> 函数 · [AUTOSAR ARTI（运行时接口）](../sw_arch/arti_sws/index.md) · SWS_ARTI · R23-11
+
 ## B
 
 **[Bfx_ClrBit](../libraries/bfx/index.md#742-bfx_clrbit)**

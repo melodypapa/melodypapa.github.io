@@ -7,7 +7,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 
 ## Queue
 
-- [ ] rte (SWS_RTE · R23-11 markdown · ❌ new article, giant source)
+- [x] rte (SWS_RTE · R23-11 markdown · ❌ new article, giant source)
   - Note: source is large, present a chapter-by-chapter plan first per SKILL.md Step 3; propose the landing page/nav layout first
   - Note: Step 1 done 2026-10-25 — source 43,058 lines / 9.4 MB, 2,716 SWS_Rte items, 352 cross-refs, 227 content diagrams; full plan in [rte-plan.md](rte-plan.md)
   - Note: D1 (user, 2026-10-25) section = `docs/autosar/cp/rte/`, article `index.md` registered directly in nav (no landing page); ARTI row decides its own directory later
@@ -25,19 +25,29 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: **run 2026-10-26 (loop mode, pool recovered)** — L2 ✅ (S12 complete), L3+L4 ✅ (§8 配置规范 complete, 17 sections, ~180 param/container tables), L5 ✅ (A/B appendices), L6+L7 ✅ (appendix C 引用的元类 — 312 metaclass entries, D→C), L8 ✅ (appendix D ECUC part 1, 23 entries). **Translated 37,756/43,058 source lines (87.7%); article 30,116 lines**; strict build 0 WARNING per stitch. Remaining L9 (appendix E part 2, 2,017 lines — starts mid-table), L10 (示例 1,289), L11 (变更历史 1,016). Pool note: sequential dispatch works; 3-parallel → user-concurrency limit; one `exceed quota limit` seen.
   - Note: **run 2026-10-26 (loop mode) — TRANSLATION COMPLETE.** L9 ✅ (appendix D ECUC part 2, mid-table seam handled), L10 ✅ (E 示例, 7 listings), L11 ✅ (F 可追溯项变更历史, 15 releases, 4,365 IDs verified 0 missing). **Article 34,329 lines; 42,078/43,058 source lines translated (97.7%; remainder = TOC + ch.1.6 by design); strict build exit 0 / 0 WARNING; hygiene clean.** Step 2 (in-place translation) is now substantively done pending the figure pass; Steps 3–6 = next run (finishing pass: figures, Phase A/B, glossary +97, api_reference, Step 5 gate, commit/PR). Working-tree note: a parallel session is migrating tr_glossary → foundation/ (transiently broke the nav mid-run; now consistent) — do NOT touch those files.
   - Note: **2026-10-26 delivery** — translation committed on `feature/rte-translation` (worktree off origin/master 31f6dc1; commit 67b0783) → **PR #116 (Closes issue #115) MERGED** — article now on master. Pending before the run closes: §6.3.3 figure pass, remaining 4 chapter audits (quota), full Phase A/B, glossary +97, api_reference, Step 5 gate.
+  - Note: **2026-11-06 finishing pass (worktree ~/Workspace/mpt-rte-swarch, branch feature/rte-swarch-batch, batch gate instruction: commit per step without per-step confirmation, combined gate at batch end)** — figure pass: source ch.7's 185 image refs triaged by hash+pixel-size → 12 real content diagrams (Figure 7.1–7.12, all captioned) embedded as Figure7-1..12.png at the caption-text positions, captions dropped per site convention; 163 chrome refs + 9 chrome-variant/glyph singletons dropped (commit bc7d8e6). **AUDIT FINDING: source ch.4 sections 4.3–4.10 (~5,171 lines: Communication Paradigms / Modes / External and Internal Trigger / Initialization and Finalization / Variant Handling / Development error / Bypass Support / Data Transformation) were NEVER translated — the original stage plan S2 stopped at 6.2.2.10 and S8 jumped to ch.7; the "97.7% translated" claim was wrong and the article's own prose referenced the nonexistent 6.2.3/6.2.3.5/6.2.3.7.** Translated in place as §6.2.3–§6.2.10 (~5,000 lines, 14 chunks written by the main session; figures 4.40–4.56 embedded, 17 content figures; examples 4.7–4.44; 表4.33 column placement rebuilt from PDF x-coords: SchM_Init X→IVCV, SchM_Exit→INEA, rest→UNINIT) — commit 585938b. Chapter audits: §7.2 60/60 heading match, §8 17/17, source appendix A → §4.1 (D2 mapping, present), B–G → A–F; §7.1 (ch.5) 288/308 — the missing 7.1.8.x.y numbers are source per-API field subsections (Signature/Existence/Description/Return Value/Notes) folded into the article's service-table entries, content present; §6.3 (ch.7) 354 vs 303 headings = SWS requirement headings folded into API entries + glyph/AND/OR artifacts dropped. Glossary: source 1.4's 97-term list — 93 new entries + 5 source appends (Application Software Cluster/Client/Host Software Cluster/Server/RTE), rewrite_glossary --check clean (commit 278e287). Phase A: strict 0 WARNING, check_heading_lang OK, hygiene clean, check_indexes OK (310 nav targets, 0 broken), api listing up to date (rte/rte 2 types/64 funcs), link census + --apply 721 lines idempotent (258 chapter refs + 182 citations + 35 registry anchors); 2 mis-numbered refs 6.2.9.3.7→6.2.2.9.3.7 fixed (commit 8f94429). Census report-only residue: 5 UNRESOLVED chapter refs (bold-leaf targets + 3 pre-existing artifacts), 4 `[0]` array-subscript false positives, cross-article mentions unapplied (ComM/Det/Sd/Nm/Mcu listed NO-ARTICLE by stale MODULE_LINKS — Mcu/Sd articles exist). KNOWN DEVIATION for the gate: ch.5/6 material sits at `#### 7.1`/`#### 7.2` inside the §6.3 heading tree, no `## 7. API规范` chapter — the original run kept every heading ≤ h6; restructuring to the D2 skeleton would convert ~583 headings to bold leaves and break anchors (user decision at the combined gate).
+  - Note: 2026-11-06 delivery — commit b4861ac (+ fd6b6ae api listing) on feature/rte-swarch-batch → PR #295 (Closes issue #294); Step 5 confirmed at the batch-level combined gate 2026-11-06
   - [x] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] arti (SWS_ARTI · R23-11 markdown · ❌ new article)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (confirmed 2026-11-06, batch-level combined gate)
+  - Note: 2026-11-06 delivery — commits bc7d8e6/585938b/278e287/8f94429/9143a4a/011c599 on feature/rte-swarch-batch (worktree ~/Workspace/mpt-rte-swarch) → PR #295 (Closes issue #294); batch gate confirmed 2026-11-06
+  - [x] Step 6 — TODO.md row + commit/PR
+- [x] arti (SWS_ARTI · R23-11 markdown · ❌ new article)
+  - Note: 2026-11-06 run (same worktree/branch as the rte finishing pass; Step 5 deferred to the batch-level combined gate per user instruction) — source `SWArch/AUTOSAR_CP_SWS_ARTI.md` 3,900 lines, 106 image refs (triage: 10 real content figures + chrome), 0 figure caption captions beyond ch.1/8/10 class diagrams. Target dir: `cp/sw_arch/arti_sws/` — the sibling EXP guide `cp/sw_arch/arti` (AUTOSAR_CP_EXP_ARTI) already occupies the plain `arti` slug, so the SWS article takes the suffixed one (per Foundation `<type>_<snake_name>` disambiguation precedent); nav label "ARTI SWS".
+  - Note: D2 structure mapping: source ch.1→§1, 2→§2 (ORTI acronym + Debugging/Tracing/Timing Measurement/Profiling terms), 3→§3, 4→§4 (4.1 限制), 5→§5, 7→§6 (7.1–7.5 → 6.1–6.5), 8→§7 (8.1–8.8 → 7.1–7.8), 10→§8 配置规范 (10.1–10.8 → 8.1–8.8); source ch.9 Sequence diagrams = "Not applicable yet." → omitted (placeholder rule, reported); source app. A Not applicable requirements = "No content." → omitted (placeholder rule, reported); app. B Example → §9 示例 (numbered continuation, STANDARD §1), app. C Expression Syntax → §10 表达式语法, app. D Change history → ## B. 可追溯项变更历史 (ID fences).
+  - Note: Step 1 finding — 106 image refs size/hash-triaged to 10 content figures (Figure 1.1/1.2 data flow + work flow, 8.1/8.2 CAT1ISR state machines, 10.1–10.6 Ecuc class diagrams); all 16 ch.1–7 inline images are 342–345×36–37 px chrome and dropped; source Example 10.6/10.9 reconstructed from source (initial draft had invented values — corrected against source before commit).
+  - Note: Step 2 — article 2,936 lines: ch.2 bold+blockquote format; §6 incl. the 5-step RTE VFB trace client config with Example 7.1 ARXML; §7 incl. ARTI_TRACE/_N macro formats with all OS examples, 4 trace classes + AR_CP_BSW_API; §8 17 containers with Example 10.1–10.10; §9 Listings B.1–B.7 + Examples B.1–B.5; §10 EBNF grammar + term table.
+  - Note: Step 3 — strict build exit 0 / 0 WARNING; check_heading_lang OK; hygiene clean (3 `# ` hits verified as fenced C directives); check_indexes OK (311 nav targets, 0 broken); api listing regen: sw_arch/arti_sws 0 types/2 funcs (Arti_Init, Arti_GetVersionInfo); link census --apply 25+6 lines, idempotent (15 chapter refs + 6 citations + 3 registry anchors); 3 UNRESOLVED chapter refs found and fixed before final apply (my own 9.7.x→8.7.x renumbering slips in §6 prose).
+  - Note: glossary — Timing Measurement NEW entry; ORTI/Debugging/Tracing/Profiling gained SWS_ARTI in their 来源 lines (ARTI definitions are more specific than TR Glossary's — flagged as merge decision for the user at the combined gate).
+  - Note: 2026-11-06 delivery — commit b4861ac (+ fd6b6ae api listing) on feature/rte-swarch-batch → PR #295 (Closes issue #294); Step 5 confirmed at the batch-level combined gate 2026-11-06
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (confirmed 2026-11-06, batch-level combined gate)
+  - [x] Step 6 — TODO.md row + commit/PR
 
 ## Not queued (deliberately skipped)
 - (none)

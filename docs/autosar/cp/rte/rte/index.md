@@ -6,7 +6,7 @@ release: R23-11
 
 ## 1. 简介和功能概述
 
-本文档包含 AUTOSAR 运行时环境（**RTE**，**Run-Time Environment**）和基础软件调度器（**Basic Software Scheduler**）的软件规范。基本上，**RTE** 与 **OS**、AUTOSAR **COM** 以及其他基础软件模块一起，构成了虚拟功能总线（**VFB**，**Virtual Functional Bus**）概念（参见[1]）的实现。**RTE** 实现 AUTOSAR 虚拟功能总线的接口，从而实现 AUTOSAR 软件组件（**software-component**）之间的通信。
+本文档包含 AUTOSAR 运行时环境（**RTE**，**Run-Time Environment**）和基础软件调度器（**Basic Software Scheduler**）的软件规范。基本上，**RTE** 与 **OS**、AUTOSAR **COM** 以及其他基础软件模块一起，构成了虚拟功能总线（**VFB**，**Virtual Functional Bus**）概念（参见[\[1\]](#ref-1)）的实现。**RTE** 实现 AUTOSAR 虚拟功能总线的接口，从而实现 AUTOSAR 软件组件（**software-component**）之间的通信。
 
 本文档描述这些概念在 **RTE** 内部是如何实现的。此外，还规定了 **RTE** 的应用程序编程接口（**API**，**Application Programming Interface**）以及 **RTE** 与其他基础软件模块的交互。
 
@@ -19,15 +19,15 @@ release: R23-11
 
 ### 1.1. 范围
 
-本文档旨在成为 **RTE** 生成器工具开发人员或具体 **RTE** 实现开发人员的主要参考。对于与 **RTE** 交互的 AUTOSAR 软件组件和基础软件模块的开发人员而言，本文档同样是参考，因为它规定了 **RTE** 的应用程序编程接口，进而规定了访问 **RTE** 功能的机制。此外，与 **RTE** 密切相关的 AUTOSAR 工作组也应阅读本规范（参见第 5 章），因为它描述了 **RTE** 与这些模块的接口，以及 **RTE** 期望这些模块提供的行为/功能。
+本文档旨在成为 **RTE** 生成器工具开发人员或具体 **RTE** 实现开发人员的主要参考。对于与 **RTE** 交互的 AUTOSAR 软件组件和基础软件模块的开发人员而言，本文档同样是参考，因为它规定了 **RTE** 的应用程序编程接口，进而规定了访问 **RTE** 功能的机制。此外，与 **RTE** 密切相关的 AUTOSAR 工作组也应阅读本规范（参见第 [5](#5-对其他模块的依赖) 章），因为它描述了 **RTE** 与这些模块的接口，以及 **RTE** 期望这些模块提供的行为/功能。
 
-本文档的结构如下。在总体介绍之后，1.3 节至 1.6 节更详细地介绍了 **RTE** 的概念。**RTE** 是如何在整体 AUTOSAR 方法论（**AUTOSAR Methodology**）的上下文中生成的，见 6.1 节。6.2 节是本文档的核心部分，详细规定了 **RTE** 的功能。**RTE** 的 **API** 见 7.1 节。本文档所依赖的对 AUTOSAR 元模型（**meta-model**）的限制（**restriction**）见 4.1 节。
+本文档的结构如下。在总体介绍之后，[1.3](#13-rte-在-autosar-上下文中的位置) 节至 [1.6](#16-设计决策) 节更详细地介绍了 **RTE** 的概念。**RTE** 是如何在整体 AUTOSAR 方法论（**AUTOSAR Methodology**）的上下文中生成的，见 [6.1](#61-rte-生成过程) 节。[6.2](#62-rte-功能规格) 节是本文档的核心部分，详细规定了 **RTE** 的功能。**RTE** 的 **API** 见 [7.1](#71-rte-参考) 节。本文档所依赖的对 AUTOSAR 元模型（**meta-model**）的限制（**restriction**）见 [4.1](#41-限制) 节。
 
 本文档的附录由六个部分组成：附录 A 明确列出了所有外部需求（**external requirement**），即所有并非针对 **RTE** 本身、而是规定了对环境和 **RTE** 生成器输入所做假设的需求。附录 B 列出了一些 **RTE** 代码可能违反的 MISRA-C 规则，以及可能发生这些违反的理由。附录 C 和附录 D 分别列出本文档引用的元类（**meta class**）和 ECUC 配置参数（**ECUC configuration parameter**）。附录 E 给出若干示例。附录 F 记录可追溯项（**traceable item**）的变更历史。
 
-请注意，第 1 章以及附录 B 不包含任何需求，因此仅供参考。
+请注意，第 [1](#1-简介和功能概述) 章以及附录 B 不包含任何需求，因此仅供参考。
 
-6.2 节和 7.1 节可能对 **RTE** 生成器的开发人员最有用。1.3 节至 1.6 节、6.1 节和 7.1 节对 AUTOSAR 软件组件和基础软件模块的开发人员很重要。对于相关的 AUTOSAR 工作包而言，最重要的部分是 6.2 节、7.1 节以及附录 A。
+[6.2](#62-rte-功能规格) 节和 [7.1](#71-rte-参考) 节可能对 **RTE** 生成器的开发人员最有用。[1.3](#13-rte-在-autosar-上下文中的位置) 节至 [1.6](#16-设计决策) 节、[6.1](#61-rte-生成过程) 节和 [7.1](#71-rte-参考) 节对 AUTOSAR 软件组件和基础软件模块的开发人员很重要。对于相关的 AUTOSAR 工作包而言，最重要的部分是 [6.2](#62-rte-功能规格) 节、[7.1](#71-rte-参考) 节以及附录 A。
 
 本规范并不定义具体 **RTE** 或 **RTE** 生成器的实现细节。此外，ECU 生成和系统生成过程的各个方面（例如 **SW-C** 到 **ECU** 的映射，或可调度性分析）也不在本规范的范围之内。尽管如此，本规范仍规定了 **RTE** 生成器期望从这些配置阶段获得的输入。
 
@@ -78,7 +78,7 @@ AUTOSAR 软件组件由定义该组件接口的类型定义来定义。当组件
 
 **RTE** 既支持源代码可用的 AUTOSAR 软件组件（"源代码软件组件"，**source-code software-component**），也支持仅有目标代码可用的 AUTOSAR 软件组件（"目标代码软件组件"，**object-code software component**）。
 
-AUTOSAR 软件组件与 **RTE** 相关的细节见 6.2.1.3 节。
+AUTOSAR 软件组件与 **RTE** 相关的细节见 [6.2.1.3](#6213-rte-与-autosar-软件组件) 节。
 
 #### 1.4.2. 基础软件模块
 
@@ -98,7 +98,7 @@ AUTOSAR 软件组件的通信接口由若干端口（**port**）组成（端口�
 
 每种通信范式都可以应用于分区内软件组件分布（包括同一分区内的任务内分布和任务间分布）、分区间软件组件分布以及 ECU 间软件组件分布。任务内通信发生在映射到同一 **OS** 任务的可运行实体之间；任务间通信发生在映射到同一分区不同任务的可运行实体之间，因而可能涉及上下文切换。分区间通信发生在映射到同一 **ECU** 不同分区的组件中的可运行实体之间，因此涉及上下文切换并跨越保护边界（内存保护、时间保护、核上的隔离）。ECU 间通信发生在映射到不同 **ECU** 的组件中的可运行实体之间，因此本质上是并发的，并且涉及可能不可靠的通信。
 
-**RTE** 所支持的通信范式的细节见 6.2.3 节。
+**RTE** 所支持的通信范式的细节见 [6.2.3](#623-通信范式) 节。
 
 ##### 1.4.3.2. 通信模式
 
@@ -109,7 +109,7 @@ AUTOSAR 软件组件的通信接口由若干端口（**port**）组成（端口�
 
 这里之所以使用"隐式"一词，是因为可运行实体并不主动发起数据的接收或发送。
 
-隐式通信和显式通信在 6.2.3.1.5 节中有更详细的讨论。
+隐式通信和显式通信在 [6.2.3.1.5](#62315-隐式与显式数据接收和发送) 节中有更详细的讨论。
 
 ##### 1.4.3.3. 静态通信
 
@@ -134,15 +134,15 @@ AUTOSAR 软件组件的通信接口由若干端口（**port**）组成（端口�
 
 AUTOSAR 软件组件不能直接访问 **OS**，因此在 AUTOSAR 应用中没有"任务"（**task**）的概念。相反，AUTOSAR 中的并发活动围绕组件内、由 **RTE** 调用的可运行实体（`RunnableEntity`）展开。
 
-AUTOSAR VFB 规范[1]将可运行实体定义为"可以由运行时环境启动的指令序列"。组件通常提供一个<sup>3</sup>或多个可运行实体，每个可运行实体恰好有一个入口点（**entry point**）。入口点定义了软件组件代码中提供可运行实体实现的符号。
+AUTOSAR VFB 规范[\[1\]](#ref-1)将可运行实体定义为"可以由运行时环境启动的指令序列"。组件通常提供一个<sup>3</sup>或多个可运行实体，每个可运行实体恰好有一个入口点（**entry point**）。入口点定义了软件组件代码中提供可运行实体实现的符号。
 
 **RTE** 负责调用可运行实体——AUTOSAR 软件组件不能（动态地）创建私有的控制线程。因此，AUTOSAR 应用内的所有活动都由 **RTE** 因 `RTEEvent` 而触发可运行实体所发起。
 
-`RTEEvent` 涵盖 **RTE** 能够触发可运行实体执行的所有可能情形。`RTEEvent` 的不同类别在 7.1.7.5 节中定义。
+`RTEEvent` 涵盖 **RTE** 能够触发可运行实体执行的所有可能情形。`RTEEvent` 的不同类别在 [7.1.7.5](#7175-触发事件) 节中定义。
 
 **RTE** 支持任何具有 AUTOSAR 接口的组件中的可运行实体——这包括 AUTOSAR 软件组件和基础软件模块<sup>4</sup>。
 
-可运行实体划分为多个类别，每个类别支持不同的设施。**RTE** 所支持的类别在 6.2.2.3 节中描述。
+可运行实体划分为多个类别，每个类别支持不同的设施。**RTE** 所支持的类别在 [6.2.2.3](#6223-executableentity-的激活与启动) 节中描述。
 
 > 3 存在这样的用例：某个 **SW-C** 可能不包含任何 `RunnableEntity`。
 >
@@ -161,7 +161,7 @@ AUTOSAR VFB 规范[1]将可运行实体定义为"可以由运行时环境启动�
 
 两阶段的开发模型确保：**RTE** 生成的应用头文件既可供源代码形式的 AUTOSAR 软件组件使用，也可供目标代码形式的 AUTOSAR 软件组件使用，两类组件都能访问 **RTE** 生成过程中创建的所有定义。
 
-**RTE** 生成过程以及各阶段所需的输入在 6.1 节中有更详细的讨论。
+**RTE** 生成过程以及各阶段所需的输入在 [6.1](#61-rte-生成过程) 节中有更详细的讨论。
 
 > 5 **RTE** 生成器与其他工具（例如 **OS** 生成器和 **COM** 生成器）协同工作，以完整实现 AUTOSAR VFB。
 
@@ -174,13 +174,13 @@ AUTOSAR VFB 规范[1]将可运行实体定义为"可以由运行时环境启动�
 3. **RTE** 没有足够的信息来推导出可运行实体到 **OS** 任务的映射。因此决定要求将该映射作为 **RTE** 输入的一部分来规定。
 4. 对 C++ 的支持是通过让 C 的 **RTE API** 对 C++ 组件可用，而不是规定一套完全独立的面向对象 **API** 来实现的。作出这一决定有两个原因：首先，C 和 C++ 使用同一接口可以降低学习曲线；其次，单一接口极大地简化了规范本身以及后续的任何实现。
 5. 本规范不支持 Java。
-6. AUTOSAR 元模型是一种表达力很强的系统定义语言，但出于实用性考虑，对元模型的使用施加了某些限制和约束。这些限制见 4.1 节。
+6. AUTOSAR 元模型是一种表达力很强的系统定义语言，但出于实用性考虑，对元模型的使用施加了某些限制和约束。这些限制见 [4.1](#41-限制) 节。
 
 ## 2. 定义和缩略语
 
 ### 2.1. 定义
 
-本文档中使用的所有技术术语（此处列出的除外）均可在 AUTOSAR 官方术语表[11]或软件组件模板规范[2]中找到。
+本文档中使用的所有技术术语（此处列出的除外）均可在 AUTOSAR 官方术语表[\[11\]](#ref-11)或软件组件模板规范[\[2\]](#ref-2)中找到。
 
 **application mode manager**
 > 应用模式管理器（**application mode manager**）是提供模式切换服务的 AUTOSAR 软件组件。应用模式管理器的模式不必标准化。
@@ -261,7 +261,7 @@ AUTOSAR VFB 规范[1]将可运行实体定义为"可以由运行时环境启动�
 > 当事件被分发时，关注的是所接收事件的完整历史，因此必须在接收方排队。所以，`SwDataDefProps` 的 `swImplPolicy` 属性中所给出的软件实现策略将取值为 'queued'（对应于带队列的事件分发）。
 
 **execution-instance**
-> `ExecutableEntity` 的执行实例（**execution-instance**）是该 `ExecutableEntity` 关于并发执行的一个实例或调用上下文，参见 6.2.3 节。
+> `ExecutableEntity` 的执行实例（**execution-instance**）是该 `ExecutableEntity` 关于并发执行的一个实例或调用上下文，参见 [6.2.3](#623-通信范式) 节。
 
 **hard error runnable**
 > 由至少一个 `TransformerHardErrorEvent` 触发的可运行实体。
@@ -306,22 +306,22 @@ AUTOSAR VFB 规范[1]将可运行实体定义为"可以由运行时环境启动�
 > 使用绑定时间最晚为 `LinkTime` 的 `VariationPoint` 或 `AttributeValueVariationPoint` 定义的变体性。
 
 **mode disabling**
-> 当"模式禁用"（**mode disabling**）生效时，**RTE** 和基础软件调度器禁止激活依赖于模式禁用的 `ExecutableEntity`。"模式禁用"在模式禁用依赖所引用的模式期间、以及进入和离开该模式的转换期间生效。另见 6.2.4.1 节。
+> 当"模式禁用"（**mode disabling**）生效时，**RTE** 和基础软件调度器禁止激活依赖于模式禁用的 `ExecutableEntity`。"模式禁用"在模式禁用依赖所引用的模式期间、以及进入和离开该模式的转换期间生效。另见 [6.2.4.1](#6241-模式使用者) 节。
 
 **mode disabling dependency**
 > 启动 `RunnableEntity`（或 `BswSchedulableEntity`）的 `RTEEvent`（或 `BswEvent`）可以包含一个 `disabledMode`（或 `disabledInMode`）关联，该关联引用一个 `ModeDeclaration`。该关联在本文档中称为模式禁用依赖（**mode disabling dependency**）。
 
 **mode disabling dependent ExecutableEntity**
-> 由带有模式禁用依赖的 `RTEEvent`（或 `BswEvent`）触发的、依赖于模式禁用的 `RunnableEntity` 或 `BswSchedulableEntity`。当相应的模式禁用生效时，**RTE** 和基础软件调度器阻止该 `RTEEvent`/`BswEvent` 激活这些 `RunnableEntity` 或 `BswSchedulableEntity`。另见 6.2.4.1 节。
+> 由带有模式禁用依赖的 `RTEEvent`（或 `BswEvent`）触发的、依赖于模式禁用的 `RunnableEntity` 或 `BswSchedulableEntity`。当相应的模式禁用生效时，**RTE** 和基础软件调度器阻止该 `RTEEvent`/`BswEvent` 激活这些 `RunnableEntity` 或 `BswSchedulableEntity`。另见 [6.2.4.1](#6241-模式使用者) 节。
 
 **mode machine instance**
-> 模式机或 `ModeDeclarationGroup` 的实例由模式管理器（**mode manager**）的 `ModeDeclarationGroupPrototype` 定义。由于模式切换不是瞬时执行的，**RTE** 或基础软件调度器必须维护自己的状态。对于每个模式管理器的 `ModeDeclarationGroupPrototype`，**RTE** 或基础软件调度器拥有一个状态机。该状态机称为模式机实例（**mode machine instance**）。对于同一模式管理器的 `ModeDeclarationGroupPrototype` 的所有模式用户，**RTE** 和基础软件调度器使用同一个模式机实例。另见 6.2.4.2 节。
+> 模式机或 `ModeDeclarationGroup` 的实例由模式管理器（**mode manager**）的 `ModeDeclarationGroupPrototype` 定义。由于模式切换不是瞬时执行的，**RTE** 或基础软件调度器必须维护自己的状态。对于每个模式管理器的 `ModeDeclarationGroupPrototype`，**RTE** 或基础软件调度器拥有一个状态机。该状态机称为模式机实例（**mode machine instance**）。对于同一模式管理器的 `ModeDeclarationGroupPrototype` 的所有模式用户，**RTE** 和基础软件调度器使用同一个模式机实例。另见 [6.2.4.2](#6242-模式管理者) 节。
 
 **mode manager**
-> 进入和离开模式由模式管理器（**mode manager**）发起。模式管理器要么是一个提供由 `ModeSwitchInterface` 类型化的 `p-port` 的软件组件，要么是一个在其 `BswModuleDescription` 中于 `providedModeGroup` 角色里定义了 `ModeDeclarationGroupPrototype` 的 **BSW** 模块。另见 6.2.4.2 节。
+> 进入和离开模式由模式管理器（**mode manager**）发起。模式管理器要么是一个提供由 `ModeSwitchInterface` 类型化的 `p-port` 的软件组件，要么是一个在其 `BswModuleDescription` 中于 `providedModeGroup` 角色里定义了 `ModeDeclarationGroupPrototype` 的 **BSW** 模块。另见 [6.2.4.2](#6242-模式管理者) 节。
 
 **ModeSwitchAck ExecutableEntity**
-> 由连接到模式管理器的 `ModeDeclarationGroupPrototype` 的 `ModeSwitchedAckEvent`（或 `BswModeSwitchedAckEvent`）触发的 `RunnableEntity` 或 `BswSchedulableEntity`。它称为 ModeSwitchAck ExecutableEntity。另见 6.2.4.1 节。
+> 由连接到模式管理器的 `ModeDeclarationGroupPrototype` 的 `ModeSwitchedAckEvent`（或 `BswModeSwitchedAckEvent`）触发的 `RunnableEntity` 或 `BswSchedulableEntity`。它称为 ModeSwitchAck ExecutableEntity。另见 [6.2.4.1](#6241-模式使用者) 节。
 
 **mode switch notification**
 > 模式管理器使用 `ModeSwitchInterface` 或 `providedModeGroup`/`requiredModeGroup` 的 `ModeDeclarationGroupPrototype`，向模式用户传送模式切换，这称为模式切换通知（**mode switch notification**）。
@@ -330,19 +330,19 @@ AUTOSAR VFB 规范[1]将可运行实体定义为"可以由运行时环境启动�
 > 用于接收（或发送）模式切换通知的端口。为此，模式切换端口由 `ModeSwitchInterface` 类型化。
 
 **mode user**
-> 依赖于模式的 AUTOSAR **SW-C** 或 AUTOSAR 基础软件模块称为模式用户（**mode user**）。这种依赖可以通过 `SwcModeSwitchEvent`/`BswModeSwitchEvent`、针对提供的/需要的模式切换端口的 `ModeAccessPoint`，或针对 `providedModeGroup`/`requiredModeGroup` `ModeDeclarationGroupPrototype` 的 `accessedModeGroup` 产生。另见 6.2.4.1 节。
+> 依赖于模式的 AUTOSAR **SW-C** 或 AUTOSAR 基础软件模块称为模式用户（**mode user**）。这种依赖可以通过 `SwcModeSwitchEvent`/`BswModeSwitchEvent`、针对提供的/需要的模式切换端口的 `ModeAccessPoint`，或针对 `providedModeGroup`/`requiredModeGroup` `ModeDeclarationGroupPrototype` 的 `accessedModeGroup` 产生。另见 [6.2.4.1](#6241-模式使用者) 节。
 
 **NvBlockSwComponent**
 > `NvBlockSwComponent` 是由 `NvBlockSwComponentType` 类型化的 `SwComponentPrototype`。
 
 **on-entry ExecutableEntity**
-> 由 `SwcModeSwitchEvent`（或 `BswModeSwitchEvent`）、且 `ModeActivationKind` 为 'entry' 触发、在进入模式时被触发的 `RunnableEntity` 或 `BswSchedulableEntity`。它称为 on-entry ExecutableEntity。另见 6.2.4.1 节。
+> 由 `SwcModeSwitchEvent`（或 `BswModeSwitchEvent`）、且 `ModeActivationKind` 为 'entry' 触发、在进入模式时被触发的 `RunnableEntity` 或 `BswSchedulableEntity`。它称为 on-entry ExecutableEntity。另见 [6.2.4.1](#6241-模式使用者) 节。
 
 **on-exit ExecutableEntity**
-> 由 `SwcModeSwitchEvent`（或 `BswModeSwitchEvent`）、且 `ModeActivationKind` 为 'exit' 触发、在离开模式时被触发的 `RunnableEntity` 或 `BswSchedulableEntity`。它称为 on-exit ExecutableEntity。另见 6.2.4.1 节。
+> 由 `SwcModeSwitchEvent`（或 `BswModeSwitchEvent`）、且 `ModeActivationKind` 为 'exit' 触发、在离开模式时被触发的 `RunnableEntity` 或 `BswSchedulableEntity`。它称为 on-exit ExecutableEntity。另见 [6.2.4.1](#6241-模式使用者) 节。
 
 **on-transition ExecutableEntity**
-> 由 `SwcModeSwitchEvent`（或 `BswModeSwitchEvent`）、且 `ModeActivationKind` 为 'transition' 触发、在两个指定模式之间的转换过程中被触发的 `RunnableEntity` 或 `BswSchedulableEntity`。它称为 on-transition ExecutableEntity。另见 6.2.4.1 节。
+> 由 `SwcModeSwitchEvent`（或 `BswModeSwitchEvent`）、且 `ModeActivationKind` 为 'transition' 触发、在两个指定模式之间的转换过程中被触发的 `RunnableEntity` 或 `BswSchedulableEntity`。它称为 on-transition ExecutableEntity。另见 [6.2.4.1](#6241-模式使用者) 节。
 
 **post-build variability**
 > 使用带有 `postBuildVariantCriterion` 的 `VariationPoint` 定义的变体性。
@@ -468,127 +468,127 @@ AUTOSAR VFB 规范[1]将可运行实体定义为"可以由运行时环境启动�
 > 未连接端口（**unconnected port**）是没有被任何 `AssemblySwConnector` 和/或 `DelegationSwConnector` 引用的 `RPortPrototype` 或 `PPortPrototype`，或者其端口接口中任何元素都没有 `DataMapping` 的端口。提示：`PRPortPrototype` 始终被视为已连接端口。
 
 **direct function call**
-> 直接函数调用（**direct function call**）是不通过纯 **RTE** 代码之外的任何其他手段执行的函数调用。通常，这是 **RTE API** 中的 C 函数调用（参见 7.1.6 节、6.2.3.1 节和 8.5.1.2 节）。
+> 直接函数调用（**direct function call**）是不通过纯 **RTE** 代码之外的任何其他手段执行的函数调用。通常，这是 **RTE API** 中的 C 函数调用（参见 [7.1.6](#716-api-参考) 节、[6.2.3.1](#6231-发送方-接收方) 节和 [8.5.1.2](#8512-直接与受信函数调用) 节）。
 
 **trusted function call**
 > 可信函数调用（**trusted function call**）是通过 **OS** 的 `CallTrustedFunction()` API 执行的函数调用。当跨越分区边界时，通常需要它来实现类似直接函数调用的行为。
 
 ### 2.2. 缩略语
 
-本文档中使用的所有缩写（此处列出的除外）均可在 AUTOSAR 官方术语表[11]中找到。
+本文档中使用的所有缩写（此处列出的除外）均可在 AUTOSAR 官方术语表[\[11\]](#ref-11)中找到。
 
 ## 3. 相关文档
 
 ### 3.1. 输入文件和相关标准与规范
 
-[1] Virtual Functional Bus
+<a id="ref-1"></a>[1] Virtual Functional Bus
 > AUTOSAR_CP_EXP_VFB
 
-[2] Software Component Template
+<a id="ref-2"></a>[2] Software Component Template
 > AUTOSAR_CP_TPS_SoftwareComponentTemplate
 
-[3] Specification of Communication
+<a id="ref-3"></a>[3] Specification of Communication
 > AUTOSAR_CP_SWS_COM
 
-[4] Specification of Operating System
+<a id="ref-4"></a>[4] Specification of Operating System
 > AUTOSAR_CP_SWS_OS
 
-[5] Specification of ECU Configuration
+<a id="ref-5"></a>[5] Specification of ECU Configuration
 > AUTOSAR_CP_TPS_ECUConfiguration
 
-[6] Methodology for Classic Platform
+<a id="ref-6"></a>[6] Methodology for Classic Platform
 > AUTOSAR_CP_TR_Methodology
 
-[7] Specification of ECU State Manager
+<a id="ref-7"></a>[7] Specification of ECU State Manager
 > AUTOSAR_CP_SWS_ECUStateManager
 
-[8] System Template
+<a id="ref-8"></a>[8] System Template
 > AUTOSAR_CP_TPS_SystemTemplate
 
-[9] Basic Software Module Description Template
+<a id="ref-9"></a>[9] Basic Software Module Description Template
 > AUTOSAR_CP_TPS_BSWModuleDescriptionTemplate
 
-[10] Generic Structure Template
+<a id="ref-10"></a>[10] Generic Structure Template
 > AUTOSAR_FO_TPS_GenericStructureTemplate
 
-[11] Glossary
+<a id="ref-11"></a>[11] Glossary
 > AUTOSAR_FO_TR_Glossary
 
-[12] General Requirements on Basic Software Modules
+<a id="ref-12"></a>[12] General Requirements on Basic Software Modules
 > AUTOSAR_CP_SRS_BSWGeneral
 
-[13] Requirements on Runtime Environment
+<a id="ref-13"></a>[13] Requirements on Runtime Environment
 > AUTOSAR_CP_SRS_RTE
 
-[14] Specification of Timing Extensions for Classic Platform
+<a id="ref-14"></a>[14] Specification of Timing Extensions for Classic Platform
 > AUTOSAR_CP_TPS_TimingExtensions
 
-[15] Layered Software Architecture
+<a id="ref-15"></a>[15] Layered Software Architecture
 > AUTOSAR_CP_EXP_LayeredSoftwareArchitecture
 
-[16] Specification of ECU Resource Template
+<a id="ref-16"></a>[16] Specification of ECU Resource Template
 > AUTOSAR_CP_TPS_ECUResourceTemplate
 
-[17] Specification of Large Data COM
+<a id="ref-17"></a>[17] Specification of Large Data COM
 > AUTOSAR_CP_SWS_LargeDataCOM
 
-[18] Specification of I/O Hardware Abstraction
+<a id="ref-18"></a>[18] Specification of I/O Hardware Abstraction
 > AUTOSAR_CP_SWS_IOHardwareAbstraction
 
-[19] Requirements on Operating System
+<a id="ref-19"></a>[19] Requirements on Operating System
 > AUTOSAR_CP_SRS_OS
 
-[20] Requirements on Communication
+<a id="ref-20"></a>[20] Requirements on Communication
 > AUTOSAR_CP_SRS_COM
 
-[21] ASAM MCD-2 MC (ASAP2 / A2L)
+<a id="ref-21"></a>[21] ASAM MCD-2 MC (ASAP2 / A2L)
 > [http://www.asam.net](http://www.asam.net) ASAM_AE_MCD-2_MC_BS_V1-7-1.pdf
 
-[22] Specification of NVRAM Manager
+<a id="ref-22"></a>[22] Specification of NVRAM Manager
 > AUTOSAR_CP_SWS_NVRAMManager
 
-[23] Collection of blueprints for AUTOSAR M1 models
+<a id="ref-23"></a>[23] Collection of blueprints for AUTOSAR M1 models
 > AUTOSAR_FO_MOD_GeneralBlueprints
 
-[24] Specification of COM Based Transformer
+<a id="ref-24"></a>[24] Specification of COM Based Transformer
 > AUTOSAR_CP_SWS_COMBasedTransformer
 
-[25] Guide to BSW Distribution
+<a id="ref-25"></a>[25] Guide to BSW Distribution
 > AUTOSAR_CP_EXP_BSWDistributionGuide
 
-[26] Specification of Default Error Tracer
+<a id="ref-26"></a>[26] Specification of Default Error Tracer
 > AUTOSAR_CP_SWS_DefaultErrorTracer
 
-[27] General Specification of Transformers
+<a id="ref-27"></a>[27] General Specification of Transformers
 > AUTOSAR_CP_ASWS_TransformerGeneral
 
-[28] Specification of Module E2E Transformer
+<a id="ref-28"></a>[28] Specification of Module E2E Transformer
 > AUTOSAR_CP_SWS_E2ETransformer
 
-[29] Guidelines for the use of the C language in critical systems
+<a id="ref-29"></a>[29] Guidelines for the use of the C language in critical systems
 > ISBN 978-1-90640010-1 MISRA_C_2012.pdf
 
-[30] Specification of Memory Mapping
+<a id="ref-30"></a>[30] Specification of Memory Mapping
 > AUTOSAR_CP_SWS_MemoryMapping
 
-[31] General Specification of Basic Software Modules
+<a id="ref-31"></a>[31] General Specification of Basic Software Modules
 > AUTOSAR_CP_SWS_BSWGeneral
 
-[32] Specification of Standard Types
+<a id="ref-32"></a>[32] Specification of Standard Types
 > AUTOSAR_CP_SWS_StandardTypes
 
-[33] Specification of Bit Handling Routines
+<a id="ref-33"></a>[33] Specification of Bit Handling Routines
 > AUTOSAR_CP_SWS_BFXLibrary
 
-[34] Specification of Software Cluster Connection module
+<a id="ref-34"></a>[34] Specification of Software Cluster Connection module
 > AUTOSAR_CP_SWS_SoftwareClusterConnection
 
-[35] Collection of constraints on AUTOSAR M1 models
+<a id="ref-35"></a>[35] Collection of constraints on AUTOSAR M1 models
 > AUTOSAR_FO_TR_AutosarModelConstraints
 
 ### 3.2. 相关规范
 
-AUTOSAR 提供了基础软件模块的通用需求和通用规范（参见相关文档[12]和[31]），它们也适用于 **RTE** 和基础软件调度器，应被视为本文档的附加和必需规范。此外，本文档还涉及非 AUTOSAR 的标准 [21]（ASAM MCD-2 MC，用于测量与标定数据的交换）和 [29]（MISRA C 2012；**RTE** 代码可能违反的 MISRA-C 规则见附录 B）。
+AUTOSAR 提供了基础软件模块的通用需求和通用规范（参见相关文档[\[12\]](#ref-12)和[\[31\]](#ref-31)），它们也适用于 **RTE** 和基础软件调度器，应被视为本文档的附加和必需规范。此外，本文档还涉及非 AUTOSAR 的标准 [\[21\]](#ref-21)（ASAM MCD-2 MC，用于测量与标定数据的交换）和 [\[29\]](#ref-29)（MISRA C 2012；**RTE** 代码可能违反的 MISRA-C 规则见附录 B）。
 
 ## 4. 约束和假设
 
@@ -611,7 +611,7 @@ AUTOSAR 提供了基础软件模块的通用需求和通用规范（参见相关
 
 #### 4.1.2. 关于 RTEEvent 的限制
 
-1. 如果一个 `RunnableEntity` 由多个 `OperationInvokedEvent` 触发，但违反了文档[2]中定义的 `[constr_2000]`（触发同一 `RunnableEntity` 的 `ClientServerOperation` 的兼容性）约束，则 **RTE** 生成器应拒绝这类配置。
+1. 如果一个 `RunnableEntity` 由多个 `OperationInvokedEvent` 触发，但违反了文档[\[2\]](#ref-2)中定义的 `[constr_2000]`（触发同一 `RunnableEntity` 的 `ClientServerOperation` 的兼容性）约束，则 **RTE** 生成器应拒绝这类配置。
     **理由**：`RunnableEntity` 的签名取决于与之相连的 `RTEEvent`。仅当所有被引用的 `ClientServerOperation` 都会产生相同的服务器可运行实体原型时，才支持多个 `OperationInvokedEvent`（参见 7.1.7.5.6 节）。
 
 2. 一个可运行实体在其 `WaitPoint` 上只应由一个 `RTEEvent` 恢复。**RTE** 不支持一个可运行实体的 `WaitPoint` 连接多个 `RTEEvent`。
@@ -632,19 +632,19 @@ AUTOSAR 提供了基础软件模块的通用需求和通用规范（参见相关
     该限制还意味着拒绝这样的配置：某个 `DataReceivedEvent` 被 `WaitPoint` 引用，且引用了被 `NvDataInterface` 引用的 `VariableDataPrototype`。
 
 2. 通过一个 `PPortPrototype` 引用同一个 `VariableDataPrototype` 的、处于 `dataSendPoint` 角色的所有 `VariableAccess`，在发送和确认接收方面被视为具有相同行为。引用处于 `dataSendPoint` 角色、且指向同一 `VariableDataPrototype` 的 `VariableAccess` 的所有 `DataSendCompletedEvent` 被视为等价。
-    **理由**：`Rte_Send`/`Rte_Write` **API** 取决于端口名称和 `VariableDataPrototype` 名称，而不取决于 `VariableAccess`。对于 `VariableDataPrototype` 与端口的每种组合，只会为发送或确认接收生成并实现一个 **API**。
+    **理由**：`[Rte_Send](#7165-rte_send)`/`[Rte_Write](#7164-rte_write)` **API** 取决于端口名称和 `VariableDataPrototype` 名称，而不取决于 `VariableAccess`。对于 `VariableDataPrototype` 与端口的每种组合，只会为发送或确认接收生成并实现一个 **API**。
 
 #### 4.1.4. 关于 ServerCallPoint 的限制
 
 1. 通过一个 `RPortPrototype` 引用同一个 `ClientServerOperation` 的所有 `ServerCallPoint`，在调用服务方面被视为具有相同行为。**RTE** 生成器应拒绝违反这一点的配置。
-    **理由**：`Rte_Call` **API** 取决于端口名称和操作名称，而不取决于 `ServerCallPoint`。对于操作与端口的每种组合，只会为调用服务生成并实现一个 **API**。例如，对于同一 `ClientServerOperation` 的不同 `ServerCallPoint`，不可能规定不同的超时值。也不允许为同一 `ClientServerOperation` 实例同时规定同步和异步服务器调用点。
+    **理由**：`[Rte_Call](#71613-rte_call)` **API** 取决于端口名称和操作名称，而不取决于 `ServerCallPoint`。对于操作与端口的每种组合，只会为调用服务生成并实现一个 **API**。例如，对于同一 `ClientServerOperation` 的不同 `ServerCallPoint`，不可能规定不同的超时值。也不允许为同一 `ClientServerOperation` 实例同时规定同步和异步服务器调用点。
 
 2. 如果软件组件的多个需求端口由同一客户端/服务器接口分类，则该接口同一操作的所有调用必须要么全部同步，要么全部异步。在以下条件下适用此限制：
 
     * 为至少一个相应端口原型规定了使用间接 **API**（**indirect API**），和/或
     * 软件组件支持多重实例化，且 **RTE** 生成需在兼容模式（**compatibility mode**）下执行。
    
-    **理由**：`Rte_Call` 的签名以及 `Rte_Result` 是否存在取决于调用的种类。
+    **理由**：`[Rte_Call](#71613-rte_call)` 的签名以及 `[Rte_Result](#71614-rte_result)` 是否存在取决于调用的种类。
 
 3. **RTE** 生成器应拒绝违反 `[constr_2006]` 的配置。
     **理由**：若每个 `AsynchronousServerCallPoint` 支持多个 `AsynchronousServerCallResultPoint`，则可能同时支持多个 `AsynchronousServerCallReturnsEvent` 以及针对同一 `AsynchronousServerCallPoint` 的多个 `WaitPoint`。
@@ -715,11 +715,11 @@ AUTOSAR 提供了基础软件模块的通用需求和通用规范（参见相关
    
     **理由**：该限制简化了异步模式切换语义的实现。
 
-8. 如果某个模式被用来触发一个进入或离开该模式的可运行实体，但该可运行实体对同一模式具有模式禁用依赖，则模式禁用依赖会抑制该可运行实体在转换时的激活（参见 6.2.4.4 节）。
+8. 如果某个模式被用来触发一个进入或离开该模式的可运行实体，但该可运行实体对同一模式具有模式禁用依赖，则模式禁用依赖会抑制该可运行实体在转换时的激活（参见 [6.2.4.4](#6244-rte-基础软件调度器截获模式切换通知后采取动作的顺序) 节）。
 
     为防止此类误导性配置，强烈建议不要为使用同一模式的 on-entry `ExecutableEntity` 或 on-exit `ExecutableEntity` 配置模式禁用依赖。
 
-9. 在模式机实例由 `Rte_Init` API 初始化的情况下，`initialMode` 的相关 on-entry 可运行实体必须在 `Rte_Init` API 的上下文中执行。为实现向 `initialMode` 的完整转换，要求所有 on-entry 可运行实体都被映射到 `RteInitializationRunnableBatch` 容器，否则部分 on-entry 可运行实体将不会在向 `initialMode` 的转换期间被调度。
+9. 在模式机实例由 `[Rte_Init](#7183-rte_init)` API 初始化的情况下，`initialMode` 的相关 on-entry 可运行实体必须在 `[Rte_Init](#7183-rte_init)` API 的上下文中执行。为实现向 `initialMode` 的完整转换，要求所有 on-entry 可运行实体都被映射到 `RteInitializationRunnableBatch` 容器，否则部分 on-entry 可运行实体将不会在向 `initialMode` 的转换期间被调度。
 
     对于 `initialMode` 的 on-entry 可运行实体的完整映射：特定模式机实例中 `initialMode` 的所有 on-entry 可运行实体，应全部或全部不映射到 `RteInitializationRunnableBatch` 容器。
 
@@ -789,7 +789,7 @@ AUTOSAR 提供了基础软件模块的通用需求和通用规范（参见相关
 
     如果某个独占区（**exclusive area**）的 `ExclusiveAreaImplMechanism` 配置值为 `InterruptBlocking` 或 `OsResource`，则任何可运行实体都不得在该独占区内包含任何 `WaitPoint`。
 
-    请注意，等待点既可以是建模（**modelling**）等待点，例如由使用阻塞式 **API**（如 `Rte_Receive`）而在 **SW-C** 描述中引起的 `WaitPoint`；也可以是实现等待点，例如为满足 **ECU** 配置的需求（如可运行实体到任务的映射）而由特定实现引起的等待点。
+    请注意，等待点既可以是建模（**modelling**）等待点，例如由使用阻塞式 **API**（如 `[Rte_Receive](#71612-rte_receive)`）而在 **SW-C** 描述中引起的 `WaitPoint`；也可以是实现等待点，例如为满足 **ECU** 配置的需求（如可运行实体到任务的映射）而由特定实现引起的等待点。
 
     **理由**：操作系统存在限制：在中断被禁用时不允许调用 `WaitEvent`。因此，如果独占区包含 `WaitPoint`，就不能使用 `InterruptBlocking` 实现机制。
 
@@ -811,12 +811,12 @@ AUTOSAR 提供了基础软件模块的通用需求和通用规范（参见相关
 #### 4.1.18. 关于大型和动态数据类型的限制
 
 1. 如果某个数据元素包含带 `subElement`、且 `arraySizeSemantics` 等于 `variableSize` 的 `ImplementationDataType`，且其解析为 `uint8[n]` 之外的类型，则 **RTE** 应拒绝该配置。
-    **理由**：**COM** 将动态信号限制为 `ComSignalType` `UINT_8DYN`（参见需求 COM569）。**COM** 不支持将动态信号包含在信号组中。更多说明见 6.2.3.1.14 节。
+    **理由**：**COM** 将动态信号限制为 `ComSignalType` `UINT_8DYN`（参见需求 COM569）。**COM** 不支持将动态信号包含在信号组中。更多说明见 [6.2.3.1.14](#623114-动态数据类型) 节。
 
 2. 如果某个 `ImplementationDataType` 未定义 `dynamicArraySizeProfile`，且包含类别为 `ARRAY`、其自身又包含 `arraySizeSemantics` 被设置为 `variableSize` 的子元素的子元素，则 **RTE** 应拒绝该配置。
 
 3. 如果映射到 `ComIPduType` 等于 TP 的 **COM** I-PDU 的数据元素的 `swImplPolicy` 不为 `queued`，且 `PortAPIOption` 的 `supportedFeatures` 未设置为 `supportsBufferLocking`，则 **RTE** 应拒绝这类配置。
-    **理由**：否则 **COM** 可能返回 `COM_BUSY`。更多说明见 6.2.3.1.15 节。
+    **理由**：否则 **COM** 可能返回 `COM_BUSY`。更多说明见 [6.2.3.1.15](#623115-经由-tp-的-ecu-间通信) 节。
 
 4. 如果映射到 `LdComApiType` 等于 `LdCom_TP` 的 **LdCom** I-PDU 的数据元素的 `swImplPolicy` 不为 `queued`，且 `PortAPIOption` 的 `supportedFeatures` 未设置为 `supportsBufferLocking`，则 **RTE** 应拒绝这类配置。
 
@@ -825,7 +825,7 @@ AUTOSAR 提供了基础软件模块的通用需求和通用规范（参见相关
 6. 如果映射到 `LdComApiType` 等于 `LdCom_TP` 的 **LdCom** I-PDU 的 `ClientServerOperation` 的 `PortAPIOption` 的 `supportedFeatures` 未设置为 `supportsBufferLocking`，则 **RTE** 应拒绝这类配置。
 
 7. 如果包含 `subElement`（其 `arraySizeSemantics` 等于 `variableSize`）的 `ImplementationDataType` 的数据元素的 `swImplPolicy` 不为 `queued`，则 **RTE** 应拒绝该配置。
-    **理由**：否则 **COM** 可能返回 `COM_BUSY`。更多说明见 6.2.3.1.15 节。
+    **理由**：否则 **COM** 可能返回 `COM_BUSY`。更多说明见 [6.2.3.1.15](#623115-经由-tp-的-ecu-间通信) 节。
 
 #### 4.1.19. 关于 REFERENCE 类型的限制
 
@@ -835,7 +835,7 @@ AUTOSAR 提供了基础软件模块的通用需求和通用规范（参见相关
 #### 4.1.20. 关于 ModeDeclarationGroup 的类别和值特性的限制
 
 1. 如果违反约束 `[constr_1298]`，**RTE** 生成器应拒绝该配置；如果违反约束 `[constr_1299]`，**RTE** 生成器应拒绝该配置；如果违反约束 `[constr_1181]`，**RTE** 生成器应拒绝该配置。
-    **理由**：在类别为 `EXPLICIT_ORDER` 的情况下，为生成相应的定义需要 `onTransitionValue` 和 `value` 特性（参见 7.1.5.3 节和 7.2.4.2 节），因此需要唯一的编号。在 `ALPHABETIC_ORDER` 的情况下，这些值的定义没有意义，并且会造成与按字母顺序排序所产生编号不一致的风险。
+    **理由**：在类别为 `EXPLICIT_ORDER` 的情况下，为生成相应的定义需要 `onTransitionValue` 和 `value` 特性（参见 [7.1.5.3](#7153-rte-模式) 节和 [7.2.4.2](#7242-基础软件模式) 节），因此需要唯一的编号。在 `ALPHABETIC_ORDER` 的情况下，这些值的定义没有意义，并且会造成与按字母顺序排序所产生编号不一致的风险。
 
 #### 4.1.21. 关于 C/S 接口的限制
 
@@ -845,7 +845,7 @@ AUTOSAR 提供了基础软件模块的通用需求和通用规范（参见相关
 2. 在集群生成模式（**Cluster Generation Mode**）下，如果某个 `SynchronousServerCallPoint` 要求对服务器调用进行阻塞式串行化，则 **RTE** 生成器应拒绝这类配置。
 
     请注意，该限制并不阻止使用直接函数调用或可信函数调用的配置。
-    **理由**：应用软件集群中不应出现阻塞式 **API**，以避免阻塞公共调度。另见 4.1.1 节第 3 条。
+    **理由**：应用软件集群中不应出现阻塞式 **API**，以避免阻塞公共调度。另见 [4.1.1](#411-关于-waitpoint-的限制) 节第 3 条。
 
 #### 4.1.22. 关于 S/R 特性的限制
 
@@ -867,28 +867,28 @@ AUTOSAR 提供了基础软件模块的通用需求和通用规范（参见相关
 
 ## 5. 对其他模块的依赖
 
-作为 **RTE** 规范输入的主要文档是虚拟功能总线规范[1]和软件组件模板规范[2]。与 **RTE** 密切相关（或反之）的基础软件模块的规范同样具有首要重要性，尤其是通信模块[3]和操作系统[4]。**RTE** 生成器的主要输入（除其他内容之外）在 **ECU** 配置描述中规定，因此相应的规范[5]对 **RTE** 规范也很重要。此外，由于 **RTE** 生成过程是整体 AUTOSAR 方法论的重要组成部分，相应的文档[6]也被纳入考虑。
+作为 **RTE** 规范输入的主要文档是虚拟功能总线规范[\[1\]](#ref-1)和软件组件模板规范[\[2\]](#ref-2)。与 **RTE** 密切相关（或反之）的基础软件模块的规范同样具有首要重要性，尤其是通信模块[\[3\]](#ref-3)和操作系统[\[4\]](#ref-4)。**RTE** 生成器的主要输入（除其他内容之外）在 **ECU** 配置描述中规定，因此相应的规范[\[5\]](#ref-5)对 **RTE** 规范也很重要。此外，由于 **RTE** 生成过程是整体 AUTOSAR 方法论的重要组成部分，相应的文档[\[6\]](#ref-6)也被纳入考虑。
 
 以下列表给出了与 **RTE** 规范密切相互依赖的规范：
 
-* 虚拟功能总线规范[1]
-* 软件组件模板规范[2]
-* AUTOSAR **COM** 规范[3]
-* AUTOSAR **OS** 规范[4]
-* **ECU** 状态管理器和通信管理器规范[7]
-* **ECU** 配置规范[5]
-* 系统描述/生成规范[8]
-* AUTOSAR 方法论[6]
-* **BSW** 模块描述模板规范[9]
-* AUTOSAR 通用结构模板[10]
+* 虚拟功能总线规范[\[1\]](#ref-1)
+* 软件组件模板规范[\[2\]](#ref-2)
+* AUTOSAR **COM** 规范[\[3\]](#ref-3)
+* AUTOSAR **OS** 规范[\[4\]](#ref-4)
+* **ECU** 状态管理器和通信管理器规范[\[7\]](#ref-7)
+* **ECU** 配置规范[\[5\]](#ref-5)
+* 系统描述/生成规范[\[8\]](#ref-8)
+* AUTOSAR 方法论[\[6\]](#ref-6)
+* **BSW** 模块描述模板规范[\[9\]](#ref-9)
+* AUTOSAR 通用结构模板[\[10\]](#ref-10)
 
 ## 6. 功能规格
 
-本章规定 **RTE** 和基础软件调度器的功能行为。6.1 节描述 **RTE** 与基础软件调度器的生成过程，6.2 节是本文档的核心部分，详细规定 **RTE** 的功能，6.3 节描述 **RTE** 实现插件（**RTE Implementation Plug-In**）的功能。
+本章规定 **RTE** 和基础软件调度器的功能行为。[6.1](#61-rte-生成过程) 节描述 **RTE** 与基础软件调度器的生成过程，[6.2](#62-rte-功能规格) 节是本文档的核心部分，详细规定 **RTE** 的功能，[6.3](#63-rte-实现插件) 节描述 **RTE** 实现插件（**RTE Implementation Plug-In**）的功能。
 
 ### 6.1. RTE 生成过程
 
-本章描述 **RTE** 和基础软件调度器的生成方法学。关于整体 AUTOSAR 方法学的详细描述，请参阅方法学文档[6]。
+本章描述 **RTE** 和基础软件调度器的生成方法学。关于整体 AUTOSAR 方法学的详细描述，请参阅方法学文档[\[6\]](#ref-6)。
 
 **RTE** 生成器在输入信息相同时，应产生相同的 **RTE API**、**RTE** 代码、**SchM API** 和 **SchM** 代码。
 
@@ -910,21 +910,21 @@ AUTOSAR 提供了基础软件模块的通用需求和通用规范（参见相关
 
 ![Figure3-1.png](Figure3-1.png)
 
-整个整车功能通过 `CompositionSwComponent`、`SwComponentPrototype` 和 `AtomicSwComponent` 来描述[2]。在 `CompositionSwComponent` 描述中也定义了软件组件端口之间的连接。这样一组相互连接、但尚未映射到实际 **ECU** 上的软件组件称为 **VFB** 视图。
+整个整车功能通过 `CompositionSwComponent`、`SwComponentPrototype` 和 `AtomicSwComponent` 来描述[\[2\]](#ref-2)。在 `CompositionSwComponent` 描述中也定义了软件组件端口之间的连接。这样一组相互连接、但尚未映射到实际 **ECU** 上的软件组件称为 **VFB** 视图。
 
 在"配置系统"（**Configure System**）步骤中，所需的软件组件、可用的 **ECU** 以及系统约束（**System Constraint**）被解析为系统配置描述（**System Configuration Description**）。此时 `SwComponentPrototype` 以及与之关联的 `AtomicSwComponent` 被映射到可用的 **ECU** 上。
 
-由于 **VFB** 视图中已经描述了 `AtomicSwComponent` 之间的通信关系，并且每个 `SwComponentPrototype` 和 `AtomicSwComponent` 到特定 **ECU** 的映射已经确定，因此可以生成通信矩阵（**communication matrix**）。在 `SwComponentType` 描述中（使用 AUTOSAR 软件组件模板[2]的格式），通过端口交换的数据以抽象方式定义。现在"系统配置生成器"需要定义系统信号（包括实际的信号长度以及传输这些信号的帧），以便通过网络传输应用数据。与系统信号对应的 **COM** 信号随后由"**RTE** 生成器"用来实际传输应用数据。
+由于 **VFB** 视图中已经描述了 `AtomicSwComponent` 之间的通信关系，并且每个 `SwComponentPrototype` 和 `AtomicSwComponent` 到特定 **ECU** 的映射已经确定，因此可以生成通信矩阵（**communication matrix**）。在 `SwComponentType` 描述中（使用 AUTOSAR 软件组件模板[\[2\]](#ref-2)的格式），通过端口交换的数据以抽象方式定义。现在"系统配置生成器"需要定义系统信号（包括实际的信号长度以及传输这些信号的帧），以便通过网络传输应用数据。与系统信号对应的 **COM** 信号随后由"**RTE** 生成器"用来实际传输应用数据。
 
 在下一步中，"系统配置描述"被拆分为每个单独 **ECU** 的描述。在生成 **ECU Extract** 的过程中，**VFB** 视图中 `CompositionSwComponent` 的层次结构也被展平，**ECU Extract** 中的 `SwComponentPrototype` 表示实际的实例。**ECU Extract** 只包含单独配置一个 **ECU** 所需的信息，并被送入每个 **ECU** 的 **ECU** 配置中。
 
 **RTE** 是针对每个 **ECU** 实例单独配置和生成的。
 
-"**ECU** 配置编辑器"（**ECU Configuration Editor**，另见 6.1.5 节）迭代地处理"**ECU** 配置值"，直到所有配置问题都得到解决。这里需要多个配置编辑器，每个编辑器专门负责 **ECU** 配置的特定部分。因此，一个编辑器可能配置 **COM** 栈（不是通信矩阵，而是各模块之间的交互），而另一个编辑器用于配置 **RTE**。
+"**ECU** 配置编辑器"（**ECU Configuration Editor**，另见 [6.1.5](#615-编辑-rte-的-ecu-配置) 节）迭代地处理"**ECU** 配置值"，直到所有配置问题都得到解决。这里需要多个配置编辑器，每个编辑器专门负责 **ECU** 配置的特定部分。因此，一个编辑器可能配置 **COM** 栈（不是通信矩阵，而是各模块之间的交互），而另一个编辑器用于配置 **RTE**。
 
 由于特定基础软件模块的配置并不完全独立于其他模块，因此需要多次将编辑器应用于"**ECU** 配置值"，以确保所有配置参数一致。
 
-只有当配置问题全部解决之后，才会使用"**RTE** 生成器"生成实际的 **RTE** 代码（另见 6.1.6.2 节），该代码随后与其他基础软件模块以及软件组件代码一起被编译和链接。
+只有当配置问题全部解决之后，才会使用"**RTE** 生成器"生成实际的 **RTE** 代码（另见 [6.1.6.2](#6162-rte-生成阶段) 节），该代码随后与其他基础软件模块以及软件组件代码一起被编译和链接。
 
 "**RTE** 生成器"需要处理多种信息来源，因为 **RTE** 生成器所需的信息基于"**ECU** 配置值"，而这些值可能分布在多个文件中，并且本身又引用多个其他 AUTOSAR 描述。
 
@@ -970,7 +970,7 @@ AUTOSAR **XML** 描述可以分布在多个文件中。有些文件可能包含�
 * `IncidentUrl` —— 指向错误所在构件的 URL
 * `Value` —— 导致问题的实际发现值
 
-以上只是构建 AUTOSAR **ECU** 所需主要步骤、以及 **RTE** 参与该方法学的方式的粗略概述。关于 AUTOSAR 方法学的更详细描述，请参阅方法学文档[6]。接下来的各节将更详细地说明与 **RTE** 交互的步骤。
+以上只是构建 AUTOSAR **ECU** 所需主要步骤、以及 **RTE** 参与该方法学的方式的粗略概述。关于 AUTOSAR 方法学的更详细描述，请参阅方法学文档[\[6\]](#ref-6)。接下来的各节将更详细地说明与 **RTE** 交互的步骤。
 
 #### 6.1.2. 用于基础软件调度器的 RTE 生成器
 
@@ -978,7 +978,7 @@ AUTOSAR **XML** 描述可以分布在多个文件中。有些文件可能包含�
 
 ![Figure3-2.png](Figure3-2.png)
 
-**ECU** 配置阶段是基础软件调度器配置的起点，在此阶段收集不同基础软件模块的所有需求。输入信息在各自基础软件模块的 **BSW** 模块描述[9]中提供。
+**ECU** 配置阶段是基础软件调度器配置的起点，在此阶段收集不同基础软件模块的所有需求。输入信息在各自基础软件模块的 **BSW** 模块描述[\[9\]](#ref-9)中提供。
 
 基础软件调度器配置随后被生成到基础软件调度器代码中，并被编译、构建到 **ECU** 可执行文件中。
 
@@ -998,7 +998,7 @@ AUTOSAR **XML** 描述可以分布在多个文件中。有些文件可能包含�
 
 当软件组件成功编译后，"组件实现描述生成"（**Component Implementation Description Generation**）工具会分析生成的目标文件，并用特定实现的信息增强软件组件描述。这包括 **ROM** 和 **RAM** 实际内存需求的信息，并写入 AUTOSAR 软件组件模板的"组件实现描述"（**Component Implementation Description**）部分。
 
-请注意，在实现了 **PreCompileTime** 变体性的情况下，还需要 **PreBuild** 数据集契约阶段（6.1.4 节）才能编译该软件组件。
+请注意，在实现了 **PreCompileTime** 变体性的情况下，还需要 **PreBuild** 数据集契约阶段（[6.1.4](#614-prebuild-数据集契约阶段) 节）才能编译该软件组件。
 
 因此，一个软件组件交付时由以下部分组成：
 
@@ -1011,7 +1011,7 @@ AUTOSAR **XML** 描述可以分布在多个文件中。有些文件可能包含�
 
 ##### 6.1.3.2. 基础软件调度器契约阶段
 
-为了能够使用基础软件调度器特定的 **API** 来支持基础软件模块开发，**RTE** 生成器在所谓"基础软件调度器契约阶段"（**Basic Software Scheduler Contract Phase**）中生成模块互连头文件（**Module Interlink Header**，见 7.2.3.2 节）和模块互连类型头文件（**Module Interlink Types Header**，见 7.2.3.1 节），其中包含与单个基础软件模块实例相关的基础软件调度器 **API** 的定义和声明。
+为了能够使用基础软件调度器特定的 **API** 来支持基础软件模块开发，**RTE** 生成器在所谓"基础软件调度器契约阶段"（**Basic Software Scheduler Contract Phase**）中生成模块互连头文件（**Module Interlink Header**，见 [7.2.3.2](#7232-模块互链头文件) 节）和模块互连类型头文件（**Module Interlink Types Header**，见 [7.2.3.1](#7231-模块互链类型头文件) 节），其中包含与单个基础软件模块实例相关的基础软件调度器 **API** 的定义和声明。
 
 所需的输入为：
 
@@ -1019,7 +1019,7 @@ AUTOSAR **XML** 描述可以分布在多个文件中。有些文件可能包含�
 * 基础软件模块内部行为，以及
 * 基础软件模块实现
 
-请注意，在实现了 **PreCompileTime** 变体性的情况下，还需要 **PreBuild** 数据集契约阶段（6.1.4 节）才能编译该基础软件模块。
+请注意，在实现了 **PreCompileTime** 变体性的情况下，还需要 **PreBuild** 数据集契约阶段（[6.1.4](#614-prebuild-数据集契约阶段) 节）才能编译该基础软件模块。
 
 #### 6.1.4. PreBuild 数据集契约阶段
 
@@ -1027,7 +1027,7 @@ AUTOSAR **XML** 描述可以分布在多个文件中。有些文件可能包含�
 
 具体的值通过 `PredefinedVariant` 定义。这些 `PredefinedVariant` 元素包含 `SwSystemconst` 的 `SwSystemconstValue` 定义，这些值应在 **ECU** 配置期间解析变体性时被应用。
 
-本阶段的输出是 **RTE** 配置头文件（**RTE Configuration Header File**，7.1.3.8 节）。该文件是使用 **PreCompileTime** 变体性编译特定软件组件变体所必需的。条件值宏用于通过预处理器语句实现 **PreCompileTime** 变体性，因此需要它们来运行 C 预处理器，以解析所实现的变体性。
+本阶段的输出是 **RTE** 配置头文件（**RTE Configuration Header File**，[7.1.3.8](#7138-rte-配置头文件) 节）。该文件是使用 **PreCompileTime** 变体性编译特定软件组件变体所必需的。条件值宏用于通过预处理器语句实现 **PreCompileTime** 变体性，因此需要它们来运行 C 预处理器，以解析所实现的变体性。
 
 #### 6.1.5. 编辑 RTE 的 ECU 配置
 
@@ -1035,9 +1035,9 @@ AUTOSAR **XML** 描述可以分布在多个文件中。有些文件可能包含�
 
 因此，首先"**RTE** 配置编辑器"（**RTE Configuration Editor**）需要收集建立可运行的 **RTE** 所需的全部信息。这种收集包括软件组件实例及其通信关系、可运行实体以及所涉及的 **RTE** 事件等信息。所有这些信息的主要来源是"**ECU** 配置值"，它可能提供对软件组件描述或系统配置描述等进一步描述的引用。
 
-另一个输入源是时序扩展规范（**Specification of Timing Extensions**）[14]。该模板可用于规定可运行实体的执行顺序（参见"执行顺序约束"（**Execution order constraint**）一节）。"**RTE** 配置编辑器"可以利用这些信息来创建和检查 **RTE** 事件到 **OS** 任务的映射配置（参见 8.5.1 节）。
+另一个输入源是时序扩展规范（**Specification of Timing Extensions**）[\[14\]](#ref-14)。该模板可用于规定可运行实体的执行顺序（参见"执行顺序约束"（**Execution order constraint**）一节）。"**RTE** 配置编辑器"可以利用这些信息来创建和检查 **RTE** 事件到 **OS** 任务的映射配置（参见 [8.5.1](#851-rte-事件到任务isr-的映射) 节）。
 
-覆盖"**ECU** 配置值"不同部分的"**ECU** 配置编辑器"的使用，在没有不收敛的循环依赖的情况下，将收敛到稳定的配置，随后 **ECU** 配置过程结束。**ECU** 配置的详细描述可参见[5]。下一阶段是生成实际的 **RTE** 代码。
+覆盖"**ECU** 配置值"不同部分的"**ECU** 配置编辑器"的使用，在没有不收敛的循环依赖的情况下，将收敛到稳定的配置，随后 **ECU** 配置过程结束。**ECU** 配置的详细描述可参见[\[5\]](#ref-5)。下一阶段是生成实际的 **RTE** 代码。
 
 #### 6.1.6. 生成阶段
 
@@ -1069,31 +1069,31 @@ AUTOSAR **XML** 描述可以分布在多个文件中。有些文件可能包含�
 
 在基础软件调度器生成阶段，**RTE** 生成器应提供其 **BSW** 模块描述，以记录所生成的 **RTE**/**BSW** 调度器的特性。
 
-关于 **BSW** 模块描述生成的细节见 6.1.6.4 节。
+关于 **BSW** 模块描述生成的细节见 [6.1.6.4](#6164-bsw-模块描述生成) 节。
 
 在基础软件调度器生成阶段，**RTE** 生成器应作为 **BSW** 模块描述的一部分提供 MC 支持（测量与标定，**Measurement and Calibration**）描述。
 
-关于 MC 支持的细节见 6.2.9.4 节。
+关于 MC 支持的细节见 [6.2.9.4](#6294-扩展缓冲区访问方法) 节。
 
-对于包含软件组件的软件构建，适用 **RTE** 生成阶段（6.1.6.2 节），在该阶段也会生成 **RTE** 的基础软件调度器部分。
+对于包含软件组件的软件构建，适用 **RTE** 生成阶段（[6.1.6.2](#6162-rte-生成阶段) 节），在该阶段也会生成 **RTE** 的基础软件调度器部分。
 
 ##### 6.1.6.2. RTE 生成阶段
 
 实际的 AUTOSAR 软件组件和基础软件模块代码将与 **RTE** 和基础软件调度器代码一起链接，以构建整个 **ECU** 软件。
 
-请注意，在实现了 **PreCompileTime** 变体性的情况下，还需要 **PreBuild** 数据集生成阶段（见 6.1.7 节）才能编译 **ECU** 软件；此外，在实现了 post-build 变体性的情况下，需要 **PostBuild** 数据集生成阶段（见 6.1.8 节）才能链接完整的 **ECU** 软件。
+请注意，在实现了 **PreCompileTime** 变体性的情况下，还需要 **PreBuild** 数据集生成阶段（见 [6.1.7](#617-prebuild-数据集生成阶段) 节）才能编译 **ECU** 软件；此外，在实现了 post-build 变体性的情况下，需要 **PostBuild** 数据集生成阶段（见 [6.1.8](#618-postbuild-数据集生成阶段) 节）才能链接完整的 **ECU** 软件。
 
 处于生成阶段的 **RTE** 生成器还负责生成有助于 **ECU** 软件后续构建、部署和标定的附加构件。
 
 在生成阶段，**RTE** 生成器应提供其 **BSW** 模块描述，以记录所生成 **RTE** 的特性。
 
-关于 **BSW** 模块描述生成的细节见 6.1.6.4 节。
+关于 **BSW** 模块描述生成的细节见 [6.1.6.4](#6164-bsw-模块描述生成) 节。
 
 在生成阶段，**RTE** 生成器应作为 **BSW** 模块描述的一部分提供 MC 支持（测量与标定）描述。
 
-关于 MC 支持的细节见 6.2.9.4 节。
+关于 MC 支持的细节见 [6.2.9.4](#6294-扩展缓冲区访问方法) 节。
 
-如果使用了 `Ioc` 模块，则在生成阶段 **RTE** 生成器应提供 `Ioc` 模块[4]的配置。
+如果使用了 `Ioc` 模块，则在生成阶段 **RTE** 生成器应提供 `Ioc` 模块[\[4\]](#ref-4)的配置。
 
 **RTE** 生成 **IOC** 配置时使用实现特定的确定性生成方案。该生成方案可被实现方用来复用这些 **IOC** 配置（例如在使用配置开关 `strictConfigurationCheck` 时）。
 
@@ -1103,29 +1103,29 @@ AUTOSAR **XML** 描述可以分布在多个文件中。有些文件可能包含�
 
 更换 **RTE** 生成器将需要重新生成 **IOC** 配置。
 
-关于 `Ioc` 模块的细节见 6.2.3.4.1 节。
+关于 `Ioc` 模块的细节见 [6.2.3.4.1](#62341-使用-ioc-的分区间数据通信) 节。
 
 在生成阶段，**RTE** 生成器应忽略归类为 ICS 的 `XMLContent`。
 
-类别为 ICS 的 `ARPackage` 描述实现一致性声明（**Implementation Conformance Statement**，更多细节参见 **TPS** **BSW** 模块描述[9]）。
+类别为 ICS 的 `ARPackage` 描述实现一致性声明（**Implementation Conformance Statement**，更多细节参见 **TPS** **BSW** 模块描述[\[9\]](#ref-9)）。
 
 ##### 6.1.6.3. 集群生成阶段
 
 实际的 AUTOSAR 软件组件和基础软件模块代码将与 **RTE** 和基础软件调度器代码一起链接，以构建整个 `CpSoftwareCluster`。
 
-请注意，在实现了 **PreCompileTime** 变体性的情况下，还需要 **PreBuild** 数据集生成阶段（见 6.1.7 节）才能编译 `CpSoftwareCluster` 代码；此外，在实现了 post-build 变体性的情况下，需要 **PostBuild** 数据集生成阶段（见 6.1.8 节）才能链接 `CpSoftwareCluster` 代码。
+请注意，在实现了 **PreCompileTime** 变体性的情况下，还需要 **PreBuild** 数据集生成阶段（见 [6.1.7](#617-prebuild-数据集生成阶段) 节）才能编译 `CpSoftwareCluster` 代码；此外，在实现了 post-build 变体性的情况下，需要 **PostBuild** 数据集生成阶段（见 [6.1.8](#618-postbuild-数据集生成阶段) 节）才能链接 `CpSoftwareCluster` 代码。
 
 处于集群生成阶段的 **RTE** 生成器还负责生成有助于 `CpSoftwareCluster` 后续构建、部署和标定的附加构件。
 
 在集群生成阶段，**RTE** 生成器应提供其 **BSW** 模块描述，以记录所生成 **RTE** 的特性。
 
-关于 **BSW** 模块描述生成的细节见 6.1.6.4 节。
+关于 **BSW** 模块描述生成的细节见 [6.1.6.4](#6164-bsw-模块描述生成) 节。
 
 在集群生成阶段，**RTE** 生成器应作为 **BSW** 模块描述的一部分提供 MC 支持（测量与标定）描述。
 
-关于 MC 支持的细节见 6.2.9.4 节。
+关于 MC 支持的细节见 [6.2.9.4](#6294-扩展缓冲区访问方法) 节。
 
-如果使用了 **IOC** 模块，则在集群生成阶段 **RTE** 生成器应提供 `Ioc` 模块[4]的配置。
+如果使用了 **IOC** 模块，则在集群生成阶段 **RTE** 生成器应提供 `Ioc` 模块[\[4\]](#ref-4)的配置。
 
 **RTE** 生成 **IOC** 配置时使用实现特定的确定性生成方案。该生成方案可被实现方用来复用这些 **IOC** 配置（例如在使用配置开关 `strictConfigurationCheck` 时）。
 
@@ -1133,19 +1133,19 @@ AUTOSAR **XML** 描述可以分布在多个文件中。有些文件可能包含�
 
 更换 **RTE** 生成器将需要重新生成 **IOC** 配置。
 
-关于 **IOC** 模块的细节见 6.2.3.4.1 节。
+关于 **IOC** 模块的细节见 [6.2.3.4.1](#62341-使用-ioc-的分区间数据通信) 节。
 
 ##### 6.1.6.4. BSW 模块描述生成
 
-**RTE** 生成器在生成阶段生成的 **BSW** 模块描述[9]描述了实际 **RTE** 代码的特性。以下规定明确了 **BSW** 模块描述中哪些元素必须由 **RTE** 生成器生成。
+**RTE** 生成器在生成阶段生成的 **BSW** 模块描述[\[9\]](#ref-9)描述了实际 **RTE** 代码的特性。以下规定明确了 **BSW** 模块描述中哪些元素必须由 **RTE** 生成器生成。
 
 ###### 6.1.6.4.1. Bsw 模块描述
 
 在生成阶段，**RTE** 生成器应为所生成的 **RTE** 提供 **BSW** 模块描述的 `BswModuleDescription` 元素。
 
-根据 AUTOSAR 通用结构模板[10]（"在包中标识 M1 元素"一章），**RTE** 的 `BswModuleDescription` 应提供在 `ARPackage` `AUTOSAR_Rte` 中。
+根据 AUTOSAR 通用结构模板[\[10\]](#ref-10)（"在包中标识 M1 元素"一章），**RTE** 的 `BswModuleDescription` 应提供在 `ARPackage` `AUTOSAR_Rte` 中。
 
-在生成阶段，对于 **RTE** 提供的每个标准化接口（参见分层软件架构[15]），**RTE** 生成器应提供 `BswModuleEntry`，并在 `BswModuleDescription` 的 `implementedEntry` 角色中引用它。所提供的标准化接口是 `Rte` 生命周期 **API** 和 `SchM` 生命周期 **API**。
+在生成阶段，对于 **RTE** 提供的每个标准化接口（参见分层软件架构[\[15\]](#ref-15)），**RTE** 生成器应提供 `BswModuleEntry`，并在 `BswModuleDescription` 的 `implementedEntry` 角色中引用它。所提供的标准化接口是 `Rte` 生命周期 **API** 和 `SchM` 生命周期 **API**。
 
 在生成阶段，对于 **RTE** 提供并由相应基础软件模块调用的每个回调 **API**，**RTE** 生成器应在 `BswModuleDescription` 的 `bswModuleDependency` 角色中提供 `BswModuleDependency`。从 `BswModuleDependency` 到 `BswModuleEntry` 的引用应位于 `calledEntry` 角色中。调用方基础软件模块由 `BswModuleDependency` 的 `targetModuleId` 特性指定。
 
@@ -1153,7 +1153,7 @@ AUTOSAR **XML** 描述可以分布在多个文件中。有些文件可能包含�
 
 在生成阶段，对于 **RTE** 在另一个基础软件模块中调用的每个 **API**，**RTE** 生成器应在 `BswModuleDescription` 的 `bswModuleDependency` 角色中提供 `BswModuleDependency`。从 `BswModuleDependency` 到 `BswModuleEntry` 的引用应位于 `calledEntry` 角色中。被调用的基础软件模块由 `BswModuleDependency` 的 `targetModuleId` 特性指定。
 
-如果所生成 **RTE** 的 **BSW** 模块描述依赖于其他基础软件模块 **BSW** 模块描述中的元素，则 **RTE** 生成器应按照 AUTOSAR 通用结构模板[10]中"在包中标识 M1 元素"的规则，使用到这些元素的完全限定路径名。
+如果所生成 **RTE** 的 **BSW** 模块描述依赖于其他基础软件模块 **BSW** 模块描述中的元素，则 **RTE** 生成器应按照 AUTOSAR 通用结构模板[\[10\]](#ref-10)中"在包中标识 M1 元素"的规则，使用到这些元素的完全限定路径名。
 
 例如，钩子函数的描述
 
@@ -1226,7 +1226,7 @@ AUTOSAR_OS/ImplementationDataTypes/TaskType
 
 `RteCodeVendorId` 规定 **RTE** 生成器实际用户的供应商 ID，而不是 **RTE** 供应商本身的 ID。
 
-如果所生成的 **RTE** 代码与硬件相关（由于 **RTE** 生成器的供应商特定优化），则应在 `BswImplementation` 元素的 `hwElement` 角色中提供对 **ECU** 资源描述[16]中适用 `HwElement` 的引用。
+如果所生成的 **RTE** 代码与硬件相关（由于 **RTE** 生成器的供应商特定优化），则应在 `BswImplementation` 元素的 `hwElement` 角色中提供对 **ECU** 资源描述[\[16\]](#ref-16)中适用 `HwElement` 的引用。
 
 在生成阶段，对于编译 **RTE** 代码所需的所有 C 文件和头文件，**RTE** 生成器应在 `BswImplementation` 的 `generatedArtifact` 角色中提供 `DependencyOnArtifact` 元素。这不包括其他基础软件模块或应用软件。
 
@@ -1234,20 +1234,20 @@ AUTOSAR_OS/ImplementationDataTypes/TaskType
 
 在此上下文中，各特性应按如下方式使用：
 
-* `category` 应按通用结构模板[10]中的定义使用（例如 `SWSRC`、`SWOBJ`、`SWHDR`）
+* `category` 应按通用结构模板[\[10\]](#ref-10)中的定义使用（例如 `SWSRC`、`SWOBJ`、`SWHDR`）
 * `domain` 是可选的，可以自由选择
 * `revisionLabel` 应包含 **RTE** 配置中的修订标签
 * `shortLabel` 是构件的名称
 
-关于 `DependencyOnArtifact` 描述的细节可参见通用结构模板[10]。
+关于 `DependencyOnArtifact` 描述的细节可参见通用结构模板[\[10\]](#ref-10)。
 
-**BSW** 模块描述中还应导出的其他元素在后续规定中给出，例如 6.2.9.4 节。
+**BSW** 模块描述中还应导出的其他元素在后续规定中给出，例如 [6.2.9.4](#6294-扩展缓冲区访问方法) 节。
 
 ##### 6.1.6.5. Com 与 LdCom 的使用
 
 ###### 6.1.6.5.1. Com 用户生成
 
-文档[3]中阐述的 **Com** 用户（**Com user**）概念支持数量可变的回调，并使用 **Com** 用户特定的 **Com** 用户回调句柄 ID（**Com user callback handle Id**）。这些句柄 ID 标识通知属于哪个信号或信号组，并用于直接索引 **RTE** 的内部数据结构。由于通知的种类强烈依赖于所集成 **SW-C** 使用的特性以及 **RTE** 的实现策略，`ComUserModuleCnf` 容器下的配置参数并不打算由集成人员手工设置。因此，**RTE** 生成器有责任向 **Com** 模块表达其需求。为此，预定义的 `ComUserModuleCnf` 容器使得能够通过 **COM** 模块中的 `ComUserModule`、`ComUserModuleCnfRef` 引用静态地配置 **Com** 用户。
+文档[\[3\]](#ref-3)中阐述的 **Com** 用户（**Com user**）概念支持数量可变的回调，并使用 **Com** 用户特定的 **Com** 用户回调句柄 ID（**Com user callback handle Id**）。这些句柄 ID 标识通知属于哪个信号或信号组，并用于直接索引 **RTE** 的内部数据结构。由于通知的种类强烈依赖于所集成 **SW-C** 使用的特性以及 **RTE** 的实现策略，`ComUserModuleCnf` 容器下的配置参数并不打算由集成人员手工设置。因此，**RTE** 生成器有责任向 **Com** 模块表达其需求。为此，预定义的 `ComUserModuleCnf` 容器使得能够通过 **COM** 模块中的 `ComUserModule`、`ComUserModuleCnfRef` 引用静态地配置 **Com** 用户。
 
 如果外部配置开关 `strictConfigurationCheck` 被设置为 false，则 **RTE** 生成器应根据其内部实现需求，在预定义的 `ComUserModuleCnf` 容器中提供以下内容：
 
@@ -1260,7 +1260,7 @@ AUTOSAR_OS/ImplementationDataTypes/TaskType
 
 ###### 6.1.6.5.2. LdCom 用户生成
 
-与 **Com** 用户类似，文档[17]中阐述的 **LdCom** 用户概念支持数量可变的回调，并使用 **LdCom** 用户特定的 **LdCom** 用户回调句柄 ID（**LdCom user callback handle Id**）。这些句柄 ID 标识通知属于哪个 **LdCom** IPdu，并用于直接索引 **RTE** 的内部数据结构。与 **Com** 用户一样，`LdComUserModuleCnf` 容器也应由集成人员手工设置，以通过 **LdCom** 模块中的 `LdComUserModule`、`LdComUserModuleCnfRef` 引用静态配置 **LdCom** 用户。由于通知的种类强烈依赖于所集成 **SW-C** 使用的特性以及 **RTE** 的实现策略，因此 **RTE** 生成器有责任创建 `LdComUserModuleCnf` 容器下的配置参数。
+与 **Com** 用户类似，文档[\[17\]](#ref-17)中阐述的 **LdCom** 用户概念支持数量可变的回调，并使用 **LdCom** 用户特定的 **LdCom** 用户回调句柄 ID（**LdCom user callback handle Id**）。这些句柄 ID 标识通知属于哪个 **LdCom** IPdu，并用于直接索引 **RTE** 的内部数据结构。与 **Com** 用户一样，`LdComUserModuleCnf` 容器也应由集成人员手工设置，以通过 **LdCom** 模块中的 `LdComUserModule`、`LdComUserModuleCnfRef` 引用静态配置 **LdCom** 用户。由于通知的种类强烈依赖于所集成 **SW-C** 使用的特性以及 **RTE** 的实现策略，因此 **RTE** 生成器有责任创建 `LdComUserModuleCnf` 容器下的配置参数。
 
 如果外部配置开关 `strictConfigurationCheck` 被设置为 false，则 **RTE** 生成器应根据其内部实现需求，在预定义的 `LdComUserModuleCnf` 容器中提供以下内容：
 
@@ -1270,7 +1270,7 @@ AUTOSAR_OS/ImplementationDataTypes/TaskType
 
 如果外部配置开关 `strictConfigurationCheck` 被设置为 true，且 **RTE** 生成器的输入包含引用了某个 `LdComUserIPdu` 的 **RTE** 配置，而所提供的 **LdCom** 配置中没有为该 `LdComUserIPdu` 定义 `LdComUserCbkHandleId`，则 **RTE** 生成器应将该输入作为无效配置拒绝。
 
-如果外部配置开关 `strictConfigurationCheck` 被设置为 true，则 **RTE** 生成器应拒绝违反 **LdCom** 规范[17]中相应约束（涉及回调句柄 ID、回调名称与 IPdu 的一致性）的配置。
+如果外部配置开关 `strictConfigurationCheck` 被设置为 true，则 **RTE** 生成器应拒绝违反 **LdCom** 规范[\[17\]](#ref-17)中相应约束（涉及回调句柄 ID、回调名称与 IPdu 的一致性）的配置。
 
 #### 6.1.7. PreBuild 数据集生成阶段
 
@@ -1282,13 +1282,13 @@ AUTOSAR_OS/ImplementationDataTypes/TaskType
 
 **RTE** 生成器应验证解析后的 pre-build 变体，并检查其相对于元模型的完整性。任何元模型违反都应导致输入配置被拒绝。
 
-本阶段的输出是 **RTE** 配置头文件（7.1.3.8 节）。该文件是使用 **PreCompileTime** 变体性编译包含软件组件代码和 **RTE** 代码的特定 **ECU** 软件变体所必需的。条件值宏用于通过预处理器语句实现 **PreCompileTime** 变体性，因此需要它们来运行 C 预处理器，以解析所实现的变体性。
+本阶段的输出是 **RTE** 配置头文件（[7.1.3.8](#7138-rte-配置头文件) 节）。该文件是使用 **PreCompileTime** 变体性编译包含软件组件代码和 **RTE** 代码的特定 **ECU** 软件变体所必需的。条件值宏用于通过预处理器语句实现 **PreCompileTime** 变体性，因此需要它们来运行 C 预处理器，以解析所实现的变体性。
 
 #### 6.1.8. PostBuild 数据集生成阶段
 
 在可选的 **PostBuild** 数据集生成阶段（**PostBuild Data Set Generation Phase**）中生成 `PredefinedVariant` 值，这些值用于解析软件组件和所生成 **RTE** 所实现的 post-build 变体性。
 
-本阶段的输出是 **RTE** **PostBuild** 变体集（**RTE Post Build Variant Sets**，7.1.3.10 节）。该文件用于链接 **ECU** 软件，并在启动时、基础软件调度器初始化期间，在所生成的 **RTE** 代码中选择特定的 **PostBuild** 变体。
+本阶段的输出是 **RTE** **PostBuild** 变体集（**RTE Post Build Variant Sets**，[7.1.3.10](#71310-rte-post-build-变体集) 节）。该文件用于链接 **ECU** 软件，并在启动时、基础软件调度器初始化期间，在所生成的 **RTE** 代码中选择特定的 **PostBuild** 变体。
 
 如果启用了 **DET**，则 **RTE** 应生成校验代码，在运行时（即初始化期间）校验解析后的 post-build 变体，并检查其相对于活动变体的完整性。如果检测到违反，**RTE** 应向 **DET** 报告一个开发错误。为执行该校验，**RTE** 初始化将获得指向 `EcucPostBuildVariants` 实例的指针，以便校验所选择的变体。
 
@@ -1296,7 +1296,7 @@ AUTOSAR_OS/ImplementationDataTypes/TaskType
 
 请注意，`Rte_PBcfg.h` 是在 **RTE** 生成阶段生成的。为保留内存（使用默认值），同一时间可能还需要生成 `Rte_PBcfg.c`。
 
-关于这些配置文件的更多细节见 7.1.3.10 节。
+关于这些配置文件的更多细节见 [7.1.3.10](#71310-rte-post-build-变体集) 节。
 
 一个 **RTE** 变体可以由 `PredefinedVariant` 的集合组成。每个 `PredefinedVariant` 包含一组 `PostBuildVariantCriterionValue`，为特定的 `PostBuildVariantCriterion` 赋值，而后者又用于在运行时通过求值 `PostBuildVariantCondition` 来解析变体性。不同的 `PredefinedVariant` 可能为同一个 `PostBuildVariantCriterion` 赋予不同的值，从而为特定的 `PostBuildVariantCriterionValueSet` 造成冲突。如果这些赋值赋予相同的值，则允许存在不同的赋值。
 
@@ -1304,7 +1304,7 @@ AUTOSAR_OS/ImplementationDataTypes/TaskType
 
 **RTE** 生成器应拒绝这样的配置：使用了多个 `ParameterDataPrototype` 的 post-build 变体实例，但没有在某个 `EcucPostBuildVariants` 中恰好选择一个实例。
 
-更多信息见 6.2.9.3.7 节。
+更多信息见 6.2.2.9.3.7 节。
 
 #### 6.1.9. RTE 配置与其他 BSW 模块的交互
 
@@ -1332,12 +1332,12 @@ AUTOSAR **BSW** 模块的代码生成方法学严重依赖于配置编辑器（*
 **示例 2**：如果 **RTE** 配置引用了一个 `ComUserSignal`、需要为其生成通知回调，但所提供的 **Com** 配置中没有配置 `ComUserCbkHandleId`，则 **RTE** 生成器的预期行为如下：
 
 * 在严格检查生效的情况下（即 `strictConfigurationCheck` 为 true）：报出一条错误消息。
-* 在 `strictConfigurationCheck` 为 false 的情况下：报出一条警告消息。这应提示用户必须修改 **Com** 配置（见 6.1.6.5.1 节），使其包含 **RTE** 生成代码中为该 `ComUserSignal` 所使用的 `ComUserCbkHandleId`。请注意，这将要求集成人员用更新后的配置重新生成 **Com** 模块。
+* 在 `strictConfigurationCheck` 为 false 的情况下：报出一条警告消息。这应提示用户必须修改 **Com** 配置（见 [6.1.6.5.1](#61651-com-用户生成) 节），使其包含 **RTE** 生成代码中为该 `ComUserSignal` 所使用的 `ComUserCbkHandleId`。请注意，这将要求集成人员用更新后的配置重新生成 **Com** 模块。
 
 **示例 3**：如果 **RTE** 配置引用了一个 `LdComUserIPdu`、需要为其生成强制通知回调，但所提供的 **LdCom** 配置中没有配置带 `LdComUserCallbackName` 的 `LdComUserCallback`，则 **RTE** 生成器的预期行为如下：
 
 * 在严格检查生效的情况下（即 `strictConfigurationCheck` 为 true）：报出一条错误消息。
-* 在 `strictConfigurationCheck` 为 false 的情况下：报出一条警告消息。这应提示用户必须修改 **LdCom** 配置（见 6.1.6.5.2 节），使其包含 **RTE** 生成代码中为该 `LdComUserIPdu` 所使用的、带 `LdComUserCallbackName` 的 `LdComUserCallback`。请注意，这将要求集成人员用更新后的配置重新生成 **LdCom** 模块。
+* 在 `strictConfigurationCheck` 为 false 的情况下：报出一条警告消息。这应提示用户必须修改 **LdCom** 配置（见 [6.1.6.5.2](#61652-ldcom-用户生成) 节），使其包含 **RTE** 生成代码中为该 `LdComUserIPdu` 所使用的、带 `LdComUserCallbackName` 的 `LdComUserCallback`。请注意，这将要求集成人员用更新后的配置重新生成 **LdCom** 模块。
 
 ### 6.2. RTE 功能规格
 
@@ -1347,7 +1347,7 @@ AUTOSAR **BSW** 模块的代码生成方法学严重依赖于配置编辑器（*
 
 本节介绍 AUTOSAR 软件组件的概念及其在 **RTE** 中的使用方式。
 
-AUTOSAR 软件组件模板[2]定义了 AUTOSAR 上下文中的软件组件种类，如图 4.1 所示。抽象类 `SwComponentType` 不能被实例化，因此只能存在 `CompositionSwComponentType`、`ParameterSwComponentType`，或者抽象类 `AtomicSwComponentType` 的特化类 `ApplicationSwComponentType`、`ServiceProxySwComponentType`、`SensorActuatorSwComponentType`、`NvBlockSwComponentType`、`ServiceSwComponentType`、`ComplexDeviceDriverSwComponentType` 或 `EcuAbstractionSwComponentType`。
+AUTOSAR 软件组件模板[\[2\]](#ref-2)定义了 AUTOSAR 上下文中的软件组件种类，如图 4.1 所示。抽象类 `SwComponentType` 不能被实例化，因此只能存在 `CompositionSwComponentType`、`ParameterSwComponentType`，或者抽象类 `AtomicSwComponentType` 的特化类 `ApplicationSwComponentType`、`ServiceProxySwComponentType`、`SensorActuatorSwComponentType`、`NvBlockSwComponentType`、`ServiceSwComponentType`、`ComplexDeviceDriverSwComponentType` 或 `EcuAbstractionSwComponentType`。
 
 在下文中，术语 `AtomicSwComponentType` 用作上述所有非抽象派生元类的统称。
 
@@ -1375,8 +1375,8 @@ AUTOSAR 元模型定义了 `ApplicationDataType` 和 `ImplementationDataType`。
 
 尽管如此，`ApplicationDataType` 所给属性的一个子集仍与 **RTE** 生成器相关，例如：
 
-* 用于创建 `McSupportData`（测量与标定支持数据，见 6.2.9.4 节）信息；
-* 在数据转换（**data conversion**）的情形下计算转换公式（见 6.2.3.5 节和 6.2.3.7 节）；
+* 用于创建 `McSupportData`（测量与标定支持数据，见 [6.2.9.4](#6294-扩展缓冲区访问方法) 节）信息；
+* 在数据转换（**data conversion**）的情形下计算转换公式（见 [6.2.3.5](#6235-端口接口元素映射与数据转换) 节和 [6.2.3.7](#6237-数据转换) 节）；
 * 计算 **RTE** 代码所需、但以物理表示定义的数值表示（例如 `initialValue` 和 `invalidValue`）。
 
 当 **RTE** 代码需要某个值、而该值以 `ApplicationValueSpecification` 提供时，如果存在适用的 `ConstantSpecificationMapping`，则 **RTE** 生成器应使用其 `implConstant` 所引用的 `ValueSpecification` 作为该值最终的数值表示，而不考虑任何 `compuMethod`。
@@ -1396,7 +1396,7 @@ AUTOSAR 软件组件的描述划分为以下几个部分：
 
 以下各节将分别讨论它们。
 
-**RTE** 生成器应遵守通过 `SwDataDefProps` 定义的数据属性的优先级，如软件组件模板[2]所定义。
+**RTE** 生成器应遵守通过 `SwDataDefProps` 定义的数据属性的优先级，如软件组件模板[\[2\]](#ref-2)所定义。
 
 该规定意味着：
 
@@ -1420,13 +1420,13 @@ AUTOSAR 软件组件的描述划分为以下几个部分：
 
 ###### 6.2.1.3.2. 端口、接口与连接
 
-每个 AUTOSAR 软件组件（`SwComponentType`）都可以拥有端口（`PortPrototype`）。AUTOSAR 软件组件拥有提供端口（`PPortPrototype`）和/或需求端口（`RPortPrototype`），用于与其他 AUTOSAR 软件组件通信。`requiredInterface` 或 `providedInterface`（`PortInterface`）决定该端口是发送方/接收方端口还是客户端/服务器端口。特性 `isService` 用于 AUTOSAR 服务（见 6.2.1.5 节）。
+每个 AUTOSAR 软件组件（`SwComponentType`）都可以拥有端口（`PortPrototype`）。AUTOSAR 软件组件拥有提供端口（`PPortPrototype`）和/或需求端口（`RPortPrototype`），用于与其他 AUTOSAR 软件组件通信。`requiredInterface` 或 `providedInterface`（`PortInterface`）决定该端口是发送方/接收方端口还是客户端/服务器端口。特性 `isService` 用于 AUTOSAR 服务（见 [6.2.1.5](#6215-rte-与-autosar-服务) 节）。
 
 图 4.3 展示了软件组件与端口。
 
 ![Figure4-3.png](Figure4-3.png)
 
-在由实例构建组合时，端口可以在组合内部连接，也可以暴露给组合外部。组合内部的连接使用 `AssemblySwConnector`，而将组合内部的端口连接到外部则使用 `DelegationSwConnector`。未连接的端口按相应需求处理（参见 4.1.11 节）。
+在由实例构建组合时，端口可以在组合内部连接，也可以暴露给组合外部。组合内部的连接使用 `AssemblySwConnector`，而将组合内部的端口连接到外部则使用 `DelegationSwConnector`。未连接的端口按相应需求处理（参见 [4.1.11](#4111-关于未连接-r-port-的限制) 节）。
 
 下一步是将 **SW-C** 实例映射到 **ECU** 上并建立通信关系。由这一步推导出实际的通信，即此时已确定两个实例端口之间的连接是通过通信总线进行，还是在同一个 **ECU** 内部本地进行。
 
@@ -1454,7 +1454,7 @@ AUTOSAR 元模型强制每个 `AtomicSwComponentType` 至多有一个 `SwcIntern
 
 **RTE** 应支持 AUTOSAR 软件组件中的多个 `RunnableEntity`。
 
-`RunnableEntity` 在 **OS** 任务/ISR2 的上下文中执行，其执行由 `RTEEvent` 触发。6.2.2.3 节更详细地描述了 `RunnableEntity` 的概念，6.2.2.6 节讨论将 `RunnableEntity` 映射到 **OS** 任务的问题。`RTEEvent` 以及 `RTEEvent` 对 `RunnableEntity` 的激活在 6.2.2.4 节中讨论。
+`RunnableEntity` 在 **OS** 任务/ISR2 的上下文中执行，其执行由 `RTEEvent` 触发。[6.2.2.3](#6223-executableentity-的激活与启动) 节更详细地描述了 `RunnableEntity` 的概念，[6.2.2.6](#6226-数据一致性) 节讨论将 `RunnableEntity` 映射到 **OS** 任务的问题。`RTEEvent` 以及 `RTEEvent` 对 `RunnableEntity` 的激活在 [6.2.2.4](#6224-executableentity-的周期性执行) 节中讨论。
 
 **RTE** 应按照所连接的 `RTEEvent` 触发 `RunnableEntity` 的执行。
 
@@ -1498,13 +1498,13 @@ AUTOSAR 元模型强制每个 `AtomicSwComponentType` 至多有一个 `SwcIntern
 
 就 AUTOSAR 而言，可以区分四个建模层次，称为 M3 到 M0。
 
-M3 层描述用于推导 M2 层 AUTOSAR 元模型的概念。M2 层的元模型定义了一种语言，以便能够描述 M1 层模型的特定属性，例如描述一个特定类型的 AUTOSAR 软件组件。例如，AUTOSAR 元模型的一部分称为软件组件模板（**Software Component Template**，简称 **SW-C-T**），在[2]中规定，并在 6.2.1.3 节中更详细地讨论。
+M3 层描述用于推导 M2 层 AUTOSAR 元模型的概念。M2 层的元模型定义了一种语言，以便能够描述 M1 层模型的特定属性，例如描述一个特定类型的 AUTOSAR 软件组件。例如，AUTOSAR 元模型的一部分称为软件组件模板（**Software Component Template**，简称 **SW-C-T**），在[\[2\]](#ref-2)中规定，并在 6.2.1.3 节中更详细地讨论。
 
-在 M1 层，工程师将使用所定义的语言来设计组件、接口或组合，比如描述一个特定类型的 `LightManager`。其中，（原子）软件组件的描述如 6.2.1.3 节所述，也包含内部行为和实现部分。
+在 M1 层，工程师将使用所定义的语言来设计组件、接口或组合，比如描述一个特定类型的 `LightManager`。其中，（原子）软件组件的描述如 [6.2.1.3](#6213-rte-与-autosar-软件组件) 节所述，也包含内部行为和实现部分。
 
-这些描述是 **RTE** 生成器在所谓"契约阶段"（见 6.1.3.1 节）的输入。由这些信息将生成访问端口和接口的具体 **API**（以某种编程语言表示）。
+这些描述是 **RTE** 生成器在所谓"契约阶段"（见 [6.1.3.1](#6131-rte-契约阶段) 节）的输入。由这些信息将生成访问端口和接口的具体 **API**（以某种编程语言表示）。
 
-软件组件通常由一组可运行实体组成。它们随后可以用编程语言具体地描述，这可以称为"实现"。如 6.2.1.3 节所示，该"实现"恰好对应一个实现描述以及一个内部行为描述。
+软件组件通常由一组可运行实体组成。它们随后可以用编程语言具体地描述，这可以称为"实现"。如 [6.2.1.3](#6213-rte-与-autosar-软件组件) 节所示，该"实现"恰好对应一个实现描述以及一个内部行为描述。
 
 M0 指某辆具体汽车上运行的具体实例。
 
@@ -1514,7 +1514,7 @@ M0 指某辆具体汽车上运行的具体实例。
 
 ###### 6.2.1.4.2. 实例化的概念
 
-尽管 AUTOSAR 软件组件的实例化原则上可以按系统粒度完成，但 **RTE** 生成器将其视角限制为按 **ECU** 定制（见 6.1.1 节）。
+尽管 AUTOSAR 软件组件的实例化原则上可以按系统粒度完成，但 **RTE** 生成器将其视角限制为按 **ECU** 定制（见 [6.1.1](#611-用于软件组件的-rte-生成器) 节）。
 
 一般而言，存在两种不同的实例化方式：
 
@@ -1591,17 +1591,17 @@ TASK(Task1){
 
 AUTOSAR **SW-C** 可以定义只能由 **SW-C** 实例自身访问的内部内存。这一概念称为 `PerInstanceMemory`。该内存只能由这个特定实例的可运行实体访问。这反过来意味着，其他实例无法访问该内存。
 
-`PerInstanceMemory` 的 **API** 原则在 7.1.2.5 节中说明。
+`PerInstanceMemory` 的 **API** 原则在 [7.1.2.5](#7125-每实例内存) 节中说明。
 
-`PerInstanceMemory` 的 **API** 在 7.1.6.15 节中规定。
+`PerInstanceMemory` 的 **API** 在 [7.1.6.15](#71615-rte_pim) 节中规定。
 
 ##### 6.2.1.5. RTE 与 AUTOSAR 服务
 
-根据 AUTOSAR 术语表[11]，"AUTOSAR 服务是基础软件的一个逻辑实体，提供可供各种 AUTOSAR 软件组件使用的通用功能。该功能通过标准化的 AUTOSAR 接口访问"。
+根据 AUTOSAR 术语表[\[11\]](#ref-11)，"AUTOSAR 服务是基础软件的一个逻辑实体，提供可供各种 AUTOSAR 软件组件使用的通用功能。该功能通过标准化的 AUTOSAR 接口访问"。
 
 因此，AUTOSAR 服务提供标准化的 AUTOSAR 接口：由标准化 `PortInterface` 类型化的端口。
 
-在将 AUTOSAR 服务端口连接到 AUTOSAR 软件组件的端口时，**RTE** 将标准的 **RTE API** 调用映射到 **RTE** 输入（即 **XML**）中为 **BSW** 的 AUTOSAR 服务可运行实体所定义的符号。区分 AUTOSAR 服务 **ECU** 相关标识符的关键技术称为"端口定义的实参值"（**port-defined argument values**），在 6.2.3.2.4 节中描述。目前"端口定义的实参值"只支持客户端-服务器通信，无法用预定义符号来发送或接收数据。
+在将 AUTOSAR 服务端口连接到 AUTOSAR 软件组件的端口时，**RTE** 将标准的 **RTE API** 调用映射到 **RTE** 输入（即 **XML**）中为 **BSW** 的 AUTOSAR 服务可运行实体所定义的符号。区分 AUTOSAR 服务 **ECU** 相关标识符的关键技术称为"端口定义的实参值"（**port-defined argument values**），在 [6.2.3.2.4](#62324-端口定义的参数值) 节中描述。目前"端口定义的实参值"只支持客户端-服务器通信，无法用预定义符号来发送或接收数据。
 
 **RTE** 不向基于 C 的 AUTOSAR 服务 **API** 传递实例句柄，因为后者只能单实例化。
 
@@ -1625,7 +1625,7 @@ ECU 抽象为 AUTOSAR 软件组件提供到物理值的接口。它抽象信号�
 
 **RTE** 生成器应拒绝这样的配置：要求从某个 AUTOSAR 软件组件到位于远程 **ECU** 的 **ECU** 抽象建立通信路径。
 
-关于 **ECU** 抽象的更多信息见相应规范文档[18]。
+关于 **ECU** 抽象的更多信息见相应规范文档[\[18\]](#ref-18)。
 
 ##### 6.2.1.7. RTE 与复杂设备驱动
 
@@ -1641,7 +1641,7 @@ ECU 抽象为 AUTOSAR 软件组件提供到物理值的接口。它抽象信号�
 * 内部行为
 * 实现
 
-更多细节见文档[9]。
+更多细节见文档[\[9\]](#ref-9)。
 
 ###### 6.2.1.8.2. 基础软件接口
 
@@ -1677,7 +1677,7 @@ ECU 抽象为 AUTOSAR 软件组件提供到物理值的接口。它抽象信号�
 
 ###### 6.2.1.8.6. AUTOSAR 服务 / ECU 抽象 / 复杂设备驱动
 
-AUTOSAR 服务、**ECU** 抽象和复杂设备驱动是 AUTOSAR 软件组件与基础软件模块的混合体。这些种类的模块既可以使用 AUTOSAR 接口经由 **RTE** 通信，也可以使用 C **API** 直接访问其他基础软件模块。由于 AUTOSAR 元模型的结构，'C' 实现的某些实体必须被描述两次：一方面用软件组件模板[2]，另一方面用 **BSW** 模块描述模板[9]。此外，软件组件基于端口的通信与基础软件模块之间无端口的通信这一二元性，在某些情况下要求两种原则之间的协调与同步。关于哪些元素彼此对应的信息由所谓的 `SwcBswMapping` 提供。
+AUTOSAR 服务、**ECU** 抽象和复杂设备驱动是 AUTOSAR 软件组件与基础软件模块的混合体。这些种类的模块既可以使用 AUTOSAR 接口经由 **RTE** 通信，也可以使用 C **API** 直接访问其他基础软件模块。由于 AUTOSAR 元模型的结构，'C' 实现的某些实体必须被描述两次：一方面用软件组件模板[\[2\]](#ref-2)，另一方面用 **BSW** 模块描述模板[\[9\]](#ref-9)。此外，软件组件基于端口的通信与基础软件模块之间无端口的通信这一二元性，在某些情况下要求两种原则之间的协调与同步。关于哪些元素彼此对应的信息由所谓的 `SwcBswMapping` 提供。
 
 **6.2.1.8.6.1 RunnableEntity / BswModuleEntity 映射**
 
@@ -1685,11 +1685,11 @@ AUTOSAR 服务、**ECU** 抽象和复杂设备驱动是 AUTOSAR 软件组件与�
 
 **6.2.1.8.6.2 同步的 ModeDeclarationGroupPrototype**
 
-两个同步的 `ModeDeclarationGroupPrototype` 会产生一个公共模式机实例的实现。因此，调用相应的 `Rte_Switch` **API** 与调用 `SchM_Switch` **API** 具有相同的效果。出于优化目的，`Rte_Switch` **API** 可以直接引用 `SchM_Switch` **API**。
+两个同步的 `ModeDeclarationGroupPrototype` 会产生一个公共模式机实例的实现。因此，调用相应的 `[Rte_Switch](#7166-rte_switch)` **API** 与调用 `[SchM_Switch](#7257-schm_switch)` **API** 具有相同的效果。出于优化目的，`[Rte_Switch](#7166-rte_switch)` **API** 可以直接引用 `[SchM_Switch](#7257-schm_switch)` **API**。
 
 **6.2.1.8.6.3 同步的触发器**
 
-两个同步的 `Trigger` 表现得像一个公共的 `Trigger`。因此，调用相应的 `Rte_Trigger` **API** 与调用 `SchM_Trigger` **API** 具有相同的效果。出于优化目的，`Rte_Trigger` **API** 可以直接引用 `SchM_Trigger` **API**。
+两个同步的 `Trigger` 表现得像一个公共的 `Trigger`。因此，调用相应的 `[Rte_Trigger](#71634-rte_trigger)` **API** 与调用 `[SchM_Trigger](#72511-schm_trigger)` **API** 具有相同的效果。出于优化目的，`[Rte_Trigger](#71634-rte_trigger)` **API** 可以直接引用 `[SchM_Trigger](#72511-schm_trigger)` **API**。
 
 #### 6.2.2. RTE 与基础软件调度器的实现相关方面
 
@@ -1703,8 +1703,8 @@ AUTOSAR 服务、**ECU** 抽象和复杂设备驱动是 AUTOSAR 软件组件与�
 
 因此，本节还将涉及 AUTOSAR **RTE** 和基础软件调度器与 AUTOSAR 基础软件中两个具有标准化接口的模块之间的交互（见图 4.9）：
 
-* AUTOSAR 操作系统模块[19][4]；
-* AUTOSAR **COM** 模块[20][3]。
+* AUTOSAR 操作系统模块[\[19\]](#ref-19)[\[4\]](#ref-4)；
+* AUTOSAR **COM** 模块[\[20\]](#ref-20)[\[3\]](#ref-3)。
 
 图 4.9 展示了基础软件模块一节的范围。
 
@@ -1814,7 +1814,7 @@ AUTOSAR 服务、**ECU** 抽象和复杂设备驱动是 AUTOSAR 软件组件与�
 
 其中 `<sadm>` 是 `OsAlarmCallback` 的 `OsMemoryMappingCodeLocationRef` 所引用的 `SwAddrMethod` 的 `shortName`。
 
-**注意：** 上述四条内存映射规定是内存分配关键字包裹通用规定（见 7.1.1 节）的例外。
+**注意：** 上述四条内存映射规定是内存分配关键字包裹通用规定（见 [7.1.1](#711-范围) 节）的例外。
 
 如果某个 `OsApplication`、`OsIsr`（ISR2）或 `OsTask` 未引用 `SwAddrMethod`（通过各自的 `OsMemoryMappingCodeLocationRef`），则 **RTE** 应拒绝该配置。
 
@@ -1878,7 +1878,7 @@ TASK(Task3)
 
 本节描述 **RTE** + 基础软件调度器与 AUTOSAR **OS** 之间的交互。该交互通过 **OS** 的标准化接口（即 AUTOSAR **OS API**）实现，见图 4.9。
 
-**OS** 由 **ECU** 配置静态配置。但可以允许 **RTE** 生成器创建运行环境所需的任务和其他 **OS** 对象（见 6.1.9 节）。`RunnableEntity` 和 **BSW** 可调度实体到 **OS** 任务/ISR2 的映射不是 **RTE** 生成器的职责。该映射必须在此之前、在 **RTE** 配置阶段的一个配置步骤中完成。**RTE** 生成器负责生成包含 `RunnableEntity` 和 **BSW** 可调度实体调用的 **OS** 任务体或 ISR2 体。`RunnableEntity` 和 **BSW** 可调度实体本身与 **OS** 无关，不允许使用 **OS** 服务调用。**RTE** 和基础软件调度器必须通过标准化的 **RTE API** 或基础软件调度器 **API** 来封装这类调用。
+**OS** 由 **ECU** 配置静态配置。但可以允许 **RTE** 生成器创建运行环境所需的任务和其他 **OS** 对象（见 [6.1.9](#619-rte-配置与其他-bsw-模块的交互) 节）。`RunnableEntity` 和 **BSW** 可调度实体到 **OS** 任务/ISR2 的映射不是 **RTE** 生成器的职责。该映射必须在此之前、在 **RTE** 配置阶段的一个配置步骤中完成。**RTE** 生成器负责生成包含 `RunnableEntity` 和 **BSW** 可调度实体调用的 **OS** 任务体或 ISR2 体。`RunnableEntity` 和 **BSW** 可调度实体本身与 **OS** 无关，不允许使用 **OS** 服务调用。**RTE** 和基础软件调度器必须通过标准化的 **RTE API** 或基础软件调度器 **API** 来封装这类调用。
 
 ###### 6.2.2.2.1. OS 对象
 
@@ -1942,21 +1942,21 @@ AUTOSAR **OS** 规范定义了钩子函数，但 **RTE SWS** 并未标准化这�
 
 `BswSchedulableEntity` 是专为被 **BSW** 调度器控制而设计的基础软件模块实体，实现主处理函数。基础软件调度器的配置允许将 `BswSchedulableEntity` 映射到两种任务（基本任务和扩展任务）以及类别 2 的中断。
 
-未映射到 `RunnableEntity` 的 `BswSchedulableEntity` 不允许进入等待状态，因此这类 `BswSchedulableEntity` 相当于类别 1 的 `RunnableEntity`。映射到 `RunnableEntity` 的 `BswSchedulableEntity` 可以通过使用 **RTE API** 进入等待状态，这类 `BswSchedulableEntity` 必须按所映射 `RunnableEntity` 的类别对待。`BswSchedulableEntity` 到 `RunnableEntity` 的映射通常用于 AUTOSAR 服务、**ECU** 抽象和复杂设备驱动，见 6.2.1.8.6 节。
+未映射到 `RunnableEntity` 的 `BswSchedulableEntity` 不允许进入等待状态，因此这类 `BswSchedulableEntity` 相当于类别 1 的 `RunnableEntity`。映射到 `RunnableEntity` 的 `BswSchedulableEntity` 可以通过使用 **RTE API** 进入等待状态，这类 `BswSchedulableEntity` 必须按所映射 `RunnableEntity` 的类别对待。`BswSchedulableEntity` 到 `RunnableEntity` 的映射通常用于 AUTOSAR 服务、**ECU** 抽象和复杂设备驱动，见 [6.2.1.8.6](#62186-autosar-服务-ecu-抽象-复杂设备驱动) 节。
 
 ###### 6.2.2.2.3. 可运行实体
 
-本节描述 `RunnableEntity`、它们的类别以及其任务/ISR2 映射相关方面。实现 `RunnableEntity` 的函数原型在 7.1.7 节中描述。
+本节描述 `RunnableEntity`、它们的类别以及其任务/ISR2 映射相关方面。实现 `RunnableEntity` 的函数原型在 [7.1.7](#717-可运行实体参考) 节中描述。
 
 可运行实体是 **SW-C** 的可调度部分。可运行实体要么被映射到任务/ISR2，要么在其他 **Rte API** 的上下文中通过直接或可信函数调用被激活，例如通过直接函数调用调用的服务器可运行实体。
 
 该映射必须在 **ECU** 配置描述中描述。这一配置（或其中与 **RTE** 相关的部分）是 **RTE** 生成器的输入。
 
-所有 `RunnableEntity` 都由 **RTE** 因某个 `RTEEvent` 而激活。可能的激活事件在元模型中通过 `RTEEvent` 描述（见 6.2.2.2.4 节）。
+所有 `RunnableEntity` 都由 **RTE** 因某个 `RTEEvent` 而激活。可能的激活事件在元模型中通过 `RTEEvent` 描述（见 [6.2.2.2.4](#62224-rte-事件) 节）。
 
-如果没有 `RTEEvent` 在 `startOnEvent` 角色中指定某个特定的 `RunnableEntity`，则该 `RunnableEntity` 永远不会被 **RTE** 激活。请注意，`RunnableEntity` 可以按 6.2.2.2.2 节所述映射到 `BswSchedulableEntity`，这可能导致由 **BSW** 调度器激活。
+如果没有 `RTEEvent` 在 `startOnEvent` 角色中指定某个特定的 `RunnableEntity`，则该 `RunnableEntity` 永远不会被 **RTE** 激活。请注意，`RunnableEntity` 可以按 [6.2.2.2.2](#62222-基础软件可调度实体) 节所述映射到 `BswSchedulableEntity`，这可能导致由 **BSW** 调度器激活。
 
-`RunnableEntity` 的类别在[2]中描述。但软件组件模板只基于 `RunnableEntity` 的直接属性来描述类别，例如若 `RunnableEntity` 拥有 `WaitPoint`，它就被视为类别 2。而在集成了已配置 **RTE** 的系统中，可能出现直接调用等场景，允许一个可运行实体在另一个可运行实体的上下文中运行。此时，不仅该可运行实体所附着的 `WaitPoint` 有意义，被直接调用的可运行实体的 `WaitPoint` 也有意义。还可能存在其他情形：虽然没有 `WaitPoint`，但 **Rte** 仍需要使用 `WaitEvent()`，例如跨核边界实现 `SynchronousServerCallPoint`，或者激活优先级低于客户端任务的服务器任务。
+`RunnableEntity` 的类别在[\[2\]](#ref-2)中描述。但软件组件模板只基于 `RunnableEntity` 的直接属性来描述类别，例如若 `RunnableEntity` 拥有 `WaitPoint`，它就被视为类别 2。而在集成了已配置 **RTE** 的系统中，可能出现直接调用等场景，允许一个可运行实体在另一个可运行实体的上下文中运行。此时，不仅该可运行实体所附着的 `WaitPoint` 有意义，被直接调用的可运行实体的 `WaitPoint` 也有意义。还可能存在其他情形：虽然没有 `WaitPoint`，但 **Rte** 仍需要使用 `WaitEvent()`，例如跨核边界实现 `SynchronousServerCallPoint`，或者激活优先级低于客户端任务的服务器任务。
 
 `RunnableEntity` 和 `BswSchedulableEntity` 被 `ExecutableEntity` 泛化。
 
@@ -1992,9 +1992,9 @@ AUTOSAR **OS** 规范定义了钩子函数，但 **RTE SWS** 并未标准化这�
 
 元模型不限制 `WaitPoint` 可以引用哪些种类的 `RTEEvent`。其结果是，将需要 **RTE API** 函数来为每种 `RTEEvent` 建立 `WaitPoint`。
 
-尽管如此，在某些情况下，实现通用元模型的所有可能组合似乎并无意义，例如建立一个应由周期性 `TimingEvent` 解析的 `WaitPoint`。因此 **RTE SWS** 定义了一些限制，这些限制同样在 4.1 节中描述。
+尽管如此，在某些情况下，实现通用元模型的所有可能组合似乎并无意义，例如建立一个应由周期性 `TimingEvent` 解析的 `WaitPoint`。因此 **RTE SWS** 定义了一些限制，这些限制同样在 [4.1](#41-限制) 节中描述。
 
-元模型还允许同一个 `RunnableEntity` 由多个 `RTEEvent` 触发。关于 **RTE** 的当前处理方式与限制见 6.2.2.7 节。
+元模型还允许同一个 `RunnableEntity` 由多个 `RTEEvent` 触发。关于 **RTE** 的当前处理方式与限制见 [6.2.2.7](#6227-可运行实体与基础软件可调度实体的多重触发) 节。
 
 表 4.2：`RunnableEntity` 的激活取决于 `RTEEvent` 的种类
 
@@ -2014,10 +2014,10 @@ AUTOSAR **OS** 规范定义了钩子函数，但 **RTE SWS** 并未标准化这�
 
 下面的列表给出了为建立 `WaitPoint` 所需调用的 **RTE API** 函数：
 
-* `DataReceivedEvent`：`Rte_Receive()`
-* `DataSendCompletedEvent`：`Rte_Feedback()`
-* `ModeSwitchedAckEvent`：`Rte_SwitchAck()`
-* `AsynchronousServerCallReturnsEvent`：`Rte_Result()`
+* `DataReceivedEvent`：`[Rte_Receive](#71612-rte_receive)()`
+* `DataSendCompletedEvent`：`[Rte_Feedback](#7168-rte_feedback)()`
+* `ModeSwitchedAckEvent`：`[Rte_SwitchAck](#7169-rte_switchack)()`
+* `AsynchronousServerCallReturnsEvent`：`[Rte_Result](#71614-rte_result)()`
 
 当某个 `DataReceivedEvent` 引用了一个 `RunnableEntity` 和一个需求的 `VariableDataPrototype`，且没有 `WaitPoint` 引用该 `DataReceivedEvent` 时，该 `RunnableEntity` 应在数据被接收时激活。
 
@@ -2031,7 +2031,7 @@ AUTOSAR **OS** 规范定义了钩子函数，但 **RTE SWS** 并未标准化这�
 
 ![Figure4-11.png](Figure4-11.png)
 
-与 `RTEEvent` 类似，每种 `BswEvent` 都可以激活基础软件可调度实体。对于 `BswSchedulableEntity` 的激活，被激活的 `BswSchedulableEntity` 中不需要显式的基础软件调度器 **API**。基础软件调度器自身负责根据基础软件模块描述中的配置激活 `BswSchedulableEntity`。与 `RTEEvent` 不同的是，任何 `BswEvent` 都不支持 `WaitPoint`。更多细节见文档[9]。
+与 `RTEEvent` 类似，每种 `BswEvent` 都可以激活基础软件可调度实体。对于 `BswSchedulableEntity` 的激活，被激活的 `BswSchedulableEntity` 中不需要显式的基础软件调度器 **API**。基础软件调度器自身负责根据基础软件模块描述中的配置激活 `BswSchedulableEntity`。与 `RTEEvent` 不同的是，任何 `BswEvent` 都不支持 `WaitPoint`。更多细节见文档[\[9\]](#ref-9)。
 
 ###### 6.2.2.2.6. 可运行实体与基础软件可调度实体到任务的映射（资料性）
 
@@ -2049,7 +2049,7 @@ AUTOSAR **OS** 规范定义了钩子函数，但 **RTE SWS** 并未标准化这�
 
 ![Figure4-12.png](Figure4-12.png)
 
-**注意：** 以下示例只展示 `RunnableEntity`。但考虑到 6.2.2.2.3 节定义的 `BswSchedulableEntity` 类别划分，这些场景同样适用于 `BswSchedulableEntity`。
+**注意：** 以下示例只展示 `RunnableEntity`。但考虑到 [6.2.2.2.3](#62223-可运行实体) 节定义的 `BswSchedulableEntity` 类别划分，这些场景同样适用于 `BswSchedulableEntity`。
 
 **注意：** 本节描述的实现仅为示例，仅供参考。这些示例不得被视为对实现的规范。其意图是作为某一种可能实现的示例，而不是对唯一允许实现的规范。
 
@@ -2515,15 +2515,15 @@ void TaskC(void)
 
 `InitEvent` 用于在 **RTE** 启动时激活以初始化为目的的 `RunnableEntity`。
 
-**RTE** 应在 `Rte_Start` 执行时激活由 `InitEvent` 触发的 `RunnableEntity` 一次。
+**RTE** 应在 `[Rte_Start](#7181-rte_start)` 执行时激活由 `InitEvent` 触发的 `RunnableEntity` 一次。
 
 以初始化为目的的 `RunnableEntity` 激活基本上有两种实现方式：`InitEvent` 映射到一个 `OsTask`，或映射到一个 `RteInitializationRunnableBatch`。
 
 映射到 `OsTask` 的情况下，`RunnableEntity` 在相关任务变为活动时被调度一次。此时 `RtePositionInTask` 决定 `RunnableEntity` 在整个任务中被调度的顺序。例如，如果 `InitEvent` 映射在某个 `TimingEvent` 之后，而该 `TimingEvent` 在 `OsTask` 变为活动时已经触发，则初始化可运行实体会在周期性可运行实体之后被调用。因此，确保正确且符合预期的顺序是 **ECU** 集成人员的责任。
 
-在 `InitEvent` 被映射到 `RteInitializationRunnableBatch` 的情况下，`RunnableEntity` 在调用相应的 `Rte_Init` 函数时被调度。此时 `RtePositionInTask` 决定 `RunnableEntity` 在同一个 `Rte_Init` 函数中被调度的顺序。
+在 `InitEvent` 被映射到 `RteInitializationRunnableBatch` 的情况下，`RunnableEntity` 在调用相应的 `[Rte_Init](#7183-rte_init)` 函数时被调度。此时 `RtePositionInTask` 决定 `RunnableEntity` 在同一个 `[Rte_Init](#7183-rte_init)` 函数中被调度的顺序。
 
-周期性 `RTEEvent` 的触发随 `Rte_Start` 中时序部分的调用而释放。
+周期性 `RTEEvent` 的触发随 `[Rte_Start](#7181-rte_start)` 中时序部分的调用而释放。
 
 ###### 6.2.2.2.12. OsTaskExecutionEvent 激活的可运行实体
 
@@ -2577,7 +2577,7 @@ void TaskC(void)
 
 ![Figure4-19.png](Figure4-19.png)
 
-如果 **RTE** 按 6.2.2.3.1 节所述以直接或可信函数调用实现 `ExecutableEntity` 执行实例，则简化状态机见图 4.22。
+如果 **RTE** 按 [6.2.2.3.1](#62231-通过直接函数调用激活) 节所述以直接或可信函数调用实现 `ExecutableEntity` 执行实例，则简化状态机见图 4.22。
 
 `ExecutableEntity` 执行实例的状态机与包含该执行实例的任务的状态机并不相同，但二者存在依赖关系。例如，只有当相应任务处于"运行"状态时，`ExecutableEntity` 执行实例才能处于"运行"状态。
 
@@ -2674,7 +2674,7 @@ LongLastingRunnable()
 
 在许多情况下，如果 `canBeInvokedConcurrently` 允许，**RTE** 可以通过直接或可信函数调用来实现 `ExecutableEntity` 执行实例。在这些情况下，`ExecutableEntity` 执行实例的激活和启动合并为一个事件。"待启动"、"去抖激活"和"已激活"状态被立即穿过。
 
-显然，此时不可能有去抖激活（见元模型限制，4.1.6 节）。
+显然，此时不可能有去抖激活（见元模型限制，[4.1.6](#416-关于可运行实体的限制) 节）。
 
 每个调用点、触发点、模式切换点等各有一个 `ExecutableEntity` 执行实例。状态图简化为图 4.22。
 
@@ -2684,7 +2684,7 @@ LongLastingRunnable()
 
 受触发 `ExecutableEntity` 至少由一个 `ExternalTriggerOccurredEvent` 或 `InternalTriggerOccurredEvent` 激活。在某些情况下，**RTE** 生成器把触发事件通信或可运行实体间触发实现为触发 `ExecutableEntity` 对受触发 `ExecutableEntity` 的直接或可信函数调用。
 
-on-entry `ExecutableEntity`、on-transition `ExecutableEntity`、on-exit `ExecutableEntity` 或 ModeSwitchAck `ExecutableEntity` 可能在 `Rte_Switch` **API** 的上下文中执行（当实现异步模式切换过程时）。
+on-entry `ExecutableEntity`、on-transition `ExecutableEntity`、on-exit `ExecutableEntity` 或 ModeSwitchAck `ExecutableEntity` 可能在 `[Rte_Switch](#7166-rte_switch)` **API** 的上下文中执行（当实现异步模式切换过程时）。
 
 服务器可运行实体只由 `OperationInvokedEvent` 激活，在客户端-服务器通信中实现服务器。在某些情况下，**RTE** 把客户端-服务器通信实现为客户端对服务器的直接或可信函数调用。
 
@@ -2704,7 +2704,7 @@ on-entry `ExecutableEntity`、on-transition `ExecutableEntity`、on-exit `Execut
 * 模式禁用依赖（**Mode Disabling Dependencies**）
 * 服务器和客户端位于不同分区（需要使用 `CallTrustedFunction()`）
 
-以客户端-服务器上下文中的激活原因（6.2.2.3.3 节）为例。**RTE** 的职责是识别是哪个事件导致服务器被调用，以及是否有必要生成比示例 4.5 更多的 C 代码。因此，应用头文件中的 **API** `Rte_Call_<api_extension>` 仍必须映射到 `Rte.c` 文件中 **RTE** 生成的函数 `Rte_Call_<cts>_<api_extension>`，以处理这些额外复杂度。下面是直接函数调用与激活原因相结合的示例 4.6：
+以客户端-服务器上下文中的激活原因（[6.2.2.3.3](#62233-提供激活用的-rte-事件) 节）为例。**RTE** 的职责是识别是哪个事件导致服务器被调用，以及是否有必要生成比示例 4.5 更多的 C 代码。因此，应用头文件中的 **API** `Rte_Call_<api_extension>` 仍必须映射到 `Rte.c` 文件中 **RTE** 生成的函数 `Rte_Call_<cts>_<api_extension>`，以处理这些额外复杂度。下面是直接函数调用与激活原因相结合的示例 4.6：
 
 **示例 4.6**
 
@@ -2784,7 +2784,7 @@ Std_ReturnType Rte_Call_cSwc_cPort_cOp(T argin0, T argin1, T_ argOut2)
 
 如果启用"提供激活事件"特性，则处于契约阶段的 **RTE** 生成器应生成类型 `Rte_ActivatingEvent_<name>`（激活向量），其中 `<name>` 是描述该可运行实体入口点的符号，用于存储激活位。根据该可运行实体的 `ExecutableEntityActivationReason` `bitPosition` 的最大值，该类型应为 `uint8`、`uint16` 或 `uint32`，使 `bitPosition` 的最大值能放入该数据类型。
 
-请注意，如果 `ExecutableEntityActivationReason` 的 `bitPosition` 值高于 31，则视为无效配置（参见软件组件模板[2]中的 `[constr_1226]`）。
+请注意，如果 `ExecutableEntityActivationReason` 的 `bitPosition` 值高于 31，则视为无效配置（参见软件组件模板[\[2\]](#ref-2)中的 `[constr_1226]`）。
 
 如果启用"提供激活 **RTE** 事件"特性，则处于契约阶段的 **RTE** 生成器应为一个可执行实体的每个 `ExecutableEntityActivationReason` 生成一个定义，以提供 `Rte_ActivatingEvent_<name>` 数据类型中的特定位位置：
 
@@ -2819,7 +2819,7 @@ xx 的值由位位置定义，xx = 2^bitPosition。
 
 ###### 6.2.2.4. `ExecutableEntity` 的周期性执行
 
-在 `ExecutableEntity` 的激活与启动之间通常存在直接的因果关系：要么该 `ExecutableEntity` 由起激活作用的 **RTE API** 或基础软件调度器 **API**（例如 `SchM_Trigger` 或 `Rte_Switch`）中的直接函数调用执行；要么起激活作用的 **RTE API** 或基础软件调度器 **API** 激活一个任务，由该任务执行该 `ExecutableEntity`。`TimingEvent` 和 `BackgroundEvent` 是特例，它们的激活不是由 **RTE API** 或基础软件调度器 **API** 提供的，而是由 **OS** 提供的。
+在 `ExecutableEntity` 的激活与启动之间通常存在直接的因果关系：要么该 `ExecutableEntity` 由起激活作用的 **RTE API** 或基础软件调度器 **API**（例如 `[SchM_Trigger](#72511-schm_trigger)` 或 `[Rte_Switch](#7166-rte_switch)`）中的直接函数调用执行；要么起激活作用的 **RTE API** 或基础软件调度器 **API** 激活一个任务，由该任务执行该 `ExecutableEntity`。`TimingEvent` 和 `BackgroundEvent` 是特例，它们的激活不是由 **RTE API** 或基础软件调度器 **API** 提供的，而是由 **OS** 提供的。
 
 有些情况下不希望激活与执行之间存在这种直接因果关系。原因可能是为了更好地控制系统动态行为（例如在明确定义的时点执行 `ExecutableEntity`），或者仅仅是为了减少资源消耗（例如在突发情形下减少任务激活次数）。为此，通过把 `ExecutableEntity` 的激活与其执行完全分离来放松这种因果关系。也就是说，`ExecutableEntity` 的激活只传递"它必须被执行"这一信息，而执行上下文（即 `OsTask`）在期望的时刻在别处被触发。
 
@@ -2880,7 +2880,7 @@ TASK(Task10ms)
 
 ###### 6.2.2.5.1. 通知的基本原则
 
-存在若干 **BSW** 模块，其功能不是由 AUTOSAR 软件组件直接激活、触发或调用的，而是由其他情形引起的，例如数字输入端口电平变化、复杂驱动动作、**CAN** 信号接收等。在大多数情况下，中断是这些情形的结果。关于中断的定义见 **VFB**[1]。
+存在若干 **BSW** 模块，其功能不是由 AUTOSAR 软件组件直接激活、触发或调用的，而是由其他情形引起的，例如数字输入端口电平变化、复杂驱动动作、**CAN** 信号接收等。在大多数情况下，中断是这些情形的结果。关于中断的定义见 **VFB**[\[1\]](#ref-1)。
 
 这些 **BSW** 功能中的一部分会制造必须让 AUTOSAR **SW-C** 参与的情形，并由一个中断来指示。为了把这些情形告知 AUTOSAR 软件组件，AUTOSAR 软件组件中的可运行实体通过通知（**notification**）被激活。因此，基础软件中发生的中断必须被转换为 AUTOSAR 软件组件的通知。这样的转换最迟必须在 **RTE** 层进行！哪个中断连接到哪个通知，要么在系统配置/生成期间决定，要么作为复杂设备驱动或微控制器抽象层设计的一部分决定。
 
@@ -2891,17 +2891,17 @@ TASK(Task10ms)
 1. 带标准化接口（**Standardized interface**）的 **BSW**。用于 **COM** 和 **OS**。带标准化接口的基础软件模块不能创建 `RTEEvent`，因此必须选择另一种机制："回调"（**callback**）。在 C/C++ 环境中，典型的回调实现是一个函数调用。
 2. 带 AUTOSAR 接口（**AUTOSAR interface**）的 **BSW**：用于所有其他 **BSW** 模块。
 
-带 AUTOSAR 接口的基础软件模块，其接口在 AUTOSAR **BSW** 描述 **XML** 文件中规定，其中包含符合 AUTOSAR 规范的信号规格。这些 **BSW** 模块可以使用诸如 `Rte_Send` 的 **RTE API** 调用（见 7.1.6.5 节）。`RTEEvent` 可以与这些 **RTE API** 调用相连，从而实现 AUTOSAR **SW-C** 的激活。
+带 AUTOSAR 接口的基础软件模块，其接口在 AUTOSAR **BSW** 描述 **XML** 文件中规定，其中包含符合 AUTOSAR 规范的信号规格。这些 **BSW** 模块可以使用诸如 `[Rte_Send](#7165-rte_send)` 的 **RTE API** 调用（见 [7.1.6.5](#7165-rte_send) 节）。`RTEEvent` 可以与这些 **RTE API** 调用相连，从而实现 AUTOSAR **SW-C** 的激活。
 
 请注意，AUTOSAR 软件组件只能通过 AUTOSAR 接口向另一个 AUTOSAR 软件组件或 **BSW** 模块发送通知。
 
 ###### 6.2.2.5.2. 中断
 
-如 **VFB** 规范[1]所述，AUTOSAR 概念不允许 AUTOSAR 软件组件在中断上下文中运行。只有微控制器抽象层、复杂设备驱动和 **OS** 允许直接与中断交互并实现中断服务例程。这保证了硬件无关性和确定性。
+如 **VFB** 规范[\[1\]](#ref-1)所述，AUTOSAR 概念不允许 AUTOSAR 软件组件在中断上下文中运行。只有微控制器抽象层、复杂设备驱动和 **OS** 允许直接与中断交互并实现中断服务例程。这保证了硬件无关性和确定性。
 
 如果允许 AUTOSAR 软件组件在中断上下文中运行，一个 AUTOSAR 软件组件可能长时间阻塞整个系统调度，时间长到不可接受。但主要原因是：AUTOSAR 软件组件应与底层硬件无关，以保证 **ECU** 之间的可交换性。如果中断的时序影响被限制在该 **ECU** 的基础软件内，则 **ECU** 的调度更可预测、也更可测试。
 
-此外，不允许 AUTOSAR 软件组件显式阻塞中断来作为保证数据一致性的手段。它们必须为此使用 **RTE** 函数，见 6.2.2.6 节。
+此外，不允许 AUTOSAR 软件组件显式阻塞中断来作为保证数据一致性的手段。它们必须为此使用 **RTE** 函数，见 [6.2.2.6](#6226-数据一致性) 节。
 
 ###### 6.2.2.5.3. 在 RTE 层解耦中断
 
@@ -2948,15 +2948,15 @@ AUTOSAR **SW-C** 中的可运行实体可以作为中断的结果而运行，但
 
 类别 1 中断不得访问 **RTE**。
 
-大多数 **OS** 服务也可以从类别 2 中断服务例程中调用（见[4]）。与任务的主要区别在于：ISR 不能进入等待状态，并且总是由外部源激活（从不由 **Rte** 激活）。此外，ISR 的优先级总是高于任务。因此，**Rte** 应允许在某些情况下运行 `ExecutableEntity`。ISR2 的激活不在 **Rte** 的范围之内。
+大多数 **OS** 服务也可以从类别 2 中断服务例程中调用（见[\[4\]](#ref-4)）。与任务的主要区别在于：ISR 不能进入等待状态，并且总是由外部源激活（从不由 **Rte** 激活）。此外，ISR 的优先级总是高于任务。因此，**Rte** 应允许在某些情况下运行 `ExecutableEntity`。ISR2 的激活不在 **Rte** 的范围之内。
 
 如果 `ExecutableEntity` 的 `ExternalTriggerOccurredEvent` 或 `BswExternalTriggerOccurredEvent` 被映射到一个 ISR2（通过 `RteEventToIsrMapping`），则 **RTE** 应激活该 `ExecutableEntity`。
 
 **RTE** 生成器应拒绝这样的配置：某个触发类别 2 `ExecutableEntity` 的事件被映射到一个 ISR2。
 
-**注意：** 类别 2 的 `ExecutableEntity` 需要等待点，而 ISR2 不允许进入等待状态。关于 `ExecutableEntity` 基于时间的激活请参见 6.2.2.2.8 节。
+**注意：** 类别 2 的 `ExecutableEntity` 需要等待点，而 ISR2 不允许进入等待状态。关于 `ExecutableEntity` 基于时间的激活请参见 [6.2.2.2.8](#62228-timingevent-激活的可运行实体) 节。
 
-本节所在的功能行为涉及以下配置定义（**ECU** 配置参数的完整清单亦汇集于第 8 章）：
+本节所在的功能行为涉及以下配置定义（**ECU** 配置参数的完整清单亦汇集于第 [8](#8-配置规范) 章）：
 
 容器 `RteEventToTaskMapping`（父容器：`RteSwComponentInstance`）：基于起激活作用的 `RTEEvent`，把一个 `RunnableEntity` 实例映射到一个 `OsTask`。当 `RunnableEntity` 通过直接或可信函数调用执行时，仍会规定该 `RteEventToTaskMapping`，但不包含 `RteMappedToTask` 元素。`RtePositionInTask` 参数用于为同一 **RTE API** 触发的事件提供排序。
 
@@ -3203,9 +3203,9 @@ AUTOSAR **SW-C** 中的可运行实体可以作为中断的结果而运行，但
 
 **RTE** 和基础软件调度器在某些特殊情况下支持通过直接或可信函数调用调用受触发的 `ExecutableEntity`。尽管如此，必须防止这样的情况：来自某个特定执行上下文的 `ExecutableEntity` 调用一个需要更高权限执行上下文的受触发 `ExecutableEntity`。
 
-文档[9]中的约束 `[constr_4086]` 描述了依据 `BswExecutionContext`、通过直接或可信函数调用调用 `ExecutableEntity` 的可能情形。
+文档[\[9\]](#ref-9)中的约束 `[constr_4086]` 描述了依据 `BswExecutionContext`、通过直接或可信函数调用调用 `ExecutableEntity` 的可能情形。
 
-这适用于通过 `SchM_Trigger`、`SchM_ActMain` 或 `Rte_Trigger` **API** 对受触发 `ExecutableEntity` 的调用，也适用于通过 `SchM_Switch` 或 `Rte_Switch` **API** 对 on-entry `ExecutableEntity`、on-transition `ExecutableEntity`、on-exit `ExecutableEntity` 或 ModeSwitchAck `ExecutableEntity` 的调用。
+这适用于通过 `[SchM_Trigger](#72511-schm_trigger)`、`SchM_ActMain` 或 `[Rte_Trigger](#71634-rte_trigger)` **API** 对受触发 `ExecutableEntity` 的调用，也适用于通过 `[SchM_Switch](#7257-schm_switch)` 或 `[Rte_Switch](#7166-rte_switch)` **API** 对 on-entry `ExecutableEntity`、on-transition `ExecutableEntity`、on-exit `ExecutableEntity` 或 ModeSwitchAck `ExecutableEntity` 的调用。
 
 **6.2.2.5.5.1 COM 的中断解耦**
 
@@ -3217,7 +3217,7 @@ AUTOSAR **SW-C** 中的可运行实体可以作为中断的结果而运行，但
 
 **RTE** 应支持类别 2 可运行实体因 **COM** 回调而从等待点唤醒。
 
-**RTE** 回调 **API** 见 7.1.9 节。
+**RTE** 回调 **API** 见 [7.1.9](#719-rte-回调参考) 节。
 
 ###### 6.2.2.6. 数据一致性
 
@@ -3258,7 +3258,7 @@ AUTOSAR 系统使用的操作系统符合 AUTOSAR-OS 规范（由 OSEK-OS 规范
 
 * 分区间通信
 
-**RTE** 必须保证数据一致性。提供给 **RTE** 的分区间通信的不同可能性在 6.2.3.4 节中讨论。
+**RTE** 必须保证数据一致性。提供给 **RTE** 的分区间通信的不同可能性在 [6.2.3.4](#6234-分区间通信) 节中讨论。
 
 * AUTOSAR **SW-C** 与带 AUTOSAR 接口的 **BSW** 模块之间的 ECU 内通信：
 
@@ -3272,16 +3272,16 @@ AUTOSAR 系统使用的操作系统符合 AUTOSAR-OS 规范（由 OSEK-OS 规范
 
 **6.2.2.6.3 概念**
 
-在 AUTOSAR **SW-C** 模板[2]"一个组件内可运行实体之间的交互"一章中，引入了以下概念：
+在 AUTOSAR **SW-C** 模板[\[2\]](#ref-2)"一个组件内可运行实体之间的交互"一章中，引入了以下概念：
 
 1. 独占区（见下文 6.2.2.6.5 节）；
 2. 可运行实体间变量（见下文 6.2.2.6.6 节）。
 
 它们允许用户（**SW** 设计人员）指定 **RTE** 应在何处为 AUTOSAR **SW-C** 内部通信和执行环境保证数据一致性。后续各节将更详细地讨论。
 
-此外，基础软件模块也可以使用独占区来保护对模块内部数据的访问，见[9]。基础软件模块的独占区由基础软件调度器处理。
+此外，基础软件模块也可以使用独占区来保护对模块内部数据的访问，见[\[9\]](#ref-9)。基础软件模块的独占区由基础软件调度器处理。
 
-AUTOSAR **SW-C** 模板规范[2]还指出，AUTOSAR **SW-C** 可以定义 `PerInstanceMemory` 或 `arTypedPerInstanceMemory`，允许为 **SW-C** 预留静态（永久）的全局 **RAM** 需求。对于可运行实体如何访问这些内存没有任何规定。**RTE** 只提供对这块内存的引用（见 7.1.6 节），但不为其保证数据一致性。
+AUTOSAR **SW-C** 模板规范[\[2\]](#ref-2)还指出，AUTOSAR **SW-C** 可以定义 `PerInstanceMemory` 或 `arTypedPerInstanceMemory`，允许为 **SW-C** 预留静态（永久）的全局 **RAM** 需求。对于可运行实体如何访问这些内存没有任何规定。**RTE** 只提供对这块内存的引用（见 [7.1.6](#716-api-参考) 节），但不为其保证数据一致性。
 
 AUTOSAR **SW-C** 的实现者必须自行确保：运行在不同任务/ISR2 上下文中的可运行实体对预留为 `PerInstanceMemory` 的 **RAM** 的访问不会导致数据不一致。另一方面，这为内存的使用提供了更多自由。
 
@@ -3289,7 +3289,7 @@ AUTOSAR **SW-C** 的实现者必须自行确保：运行在不同任务/ISR2 上
 
 独占区和可运行实体间变量只在 AUTOSAR **SW-C** 内部通信的语境下提及。但其背后的数据一致性机制也可以应用于 AUTOSAR **SW-C** 之间、或 AUTOSAR **SW-C** 与 **BSW** 模块之间的通信——即 **RTE** 必须保证数据一致性的所有地方。
 
-这里列出的数据一致性保证机制源自 AUTOSAR **SW-C** 模板以及进一步的讨论。可能还有更多机制（分区间通信涉及的机制见 6.2.3.4 节）。
+这里列出的数据一致性保证机制源自 AUTOSAR **SW-C** 模板以及进一步的讨论。可能还有更多机制（分区间通信涉及的机制见 [6.2.3.4](#6234-分区间通信) 节）。
 
 **RTE** 有责任在需要时应用这些机制。如何应用这些机制的细节留给 **RTE** 供应商。
 
@@ -3353,15 +3353,15 @@ AUTOSAR **SW-C** 的实现者必须自行确保：运行在不同任务/ISR2 上
 
 **6.2.2.6.5 独占区**
 
-独占区概念更像一种工作模型，而不是一种具体的实现方法，尽管 AUTOSAR **SW-C** 模板规范[2]列出了具体可行的机制。
+独占区概念更像一种工作模型，而不是一种具体的实现方法，尽管 AUTOSAR **SW-C** 模板规范[\[2\]](#ref-2)列出了具体可行的机制。
 
 独占区概念的关注点是通过阻塞潜在的并发访问来获得数据一致性。独占区实现临界区（**critical section**）。
 
 独占区与 `RunnableEntity` 关联。当 `RunnableEntity` 在独占区内运行时，**RTE** 被强制保证数据一致性。`RunnableEntity` 可以完整地运行在一个或多个独占区内，也可以在执行期间一次或多次进入一个或多个独占区。
 
-* 如果 AUTOSAR **SW-C** 请求 **RTE** 使用独占区概念为其内部使用的数据（部分或全部）保证数据一致性，**SW** 设计人员可以使用 **API** 调用 `Rte_Enter()`（见 7.1.6.30 节）和 `Rte_Exit()`（见 7.1.6.31 节）来指定希望由 **RTE** 施加保护的位置。
+* 如果 AUTOSAR **SW-C** 请求 **RTE** 使用独占区概念为其内部使用的数据（部分或全部）保证数据一致性，**SW** 设计人员可以使用 **API** 调用 `[Rte_Enter](#71630-rte_enter)()`（见 [7.1.6.30](#71630-rte_enter) 节）和 `[Rte_Exit](#71631-rte_exit)()`（见 [7.1.6.31](#71631-rte_exit) 节）来指定希望由 **RTE** 施加保护的位置。
 
-`Rte_Enter()` 定义包含数据访问的代码序列的开始，`Rte_Exit()` 定义其结束，**RTE** 必须为这段代码序列保证数据一致性。
+`[Rte_Enter](#71630-rte_enter)()` 定义包含数据访问的代码序列的开始，`[Rte_Exit](#71631-rte_exit)()` 定义其结束，**RTE** 必须为这段代码序列保证数据一致性。
 
 * 如果 **SW** 设计人员希望对完整的 `RunnableEntity` 施加互斥，可以在 AUTOSAR **SW-C** 描述中使用 `runsInside` 角色中的独占区来指定。
 
@@ -3373,7 +3373,7 @@ AUTOSAR **SW-C** 的实现者必须自行确保：运行在不同任务/ISR2 上
 
 如果访问同一独占区的可运行实体被指派为在不同任务/ISR2 上下文中执行，**RTE** 可以采用合适的机制（例如任务/ISR2 阻塞）来保证公共独占区内数据访问的数据一致性。不过，可以设置一些特殊属性来要求数据一致性机制，此时 **RTE** 生成器被迫采用所选的机制。
 
-基础软件调度器为基础软件模块提供独占区。基础软件模块必须使用 **API** 调用 `SchM_Enter()`（见 7.2.5.1 节）和 `SchM_Exit()`（见 7.2.5.2 节）来指定必须由基础软件调度器施加保护的位置。
+基础软件调度器为基础软件模块提供独占区。基础软件模块必须使用 **API** 调用 `[SchM_Enter](#7251-schm_enter)()`（见 [7.2.5.1](#7251-schm_enter) 节）和 `[SchM_Exit](#7252-schm_exit)()`（见 [7.2.5.2](#7252-schm_exit) 节）来指定必须由基础软件调度器施加保护的位置。
 
 基础软件调度器必须为由标记了同一独占区的 `BswModuleEntity` 所访问的数据项的任意访问保证数据一致性。
 
@@ -3431,7 +3431,7 @@ AUTOSAR **SW-C** 的实现者必须自行确保：运行在不同任务/ISR2 上
 
 如果某个独占区的配置参数 `RteExclusiveAreaImplMechanism` 设置为 `NONE`，则 **RTE** 生成器应为所有必需的 **API** 创建功能为空的实现。
 
-**注意：** 通过 **RTE** 实现插件机制实现独占区（`RteExclusiveAreaImplMechanism` 设置为 `RTE_PLUGIN`）在 6.3.3.5 节中描述。
+**注意：** 通过 **RTE** 实现插件机制实现独占区（`RteExclusiveAreaImplMechanism` 设置为 `RTE_PLUGIN`）在 [6.3.3.5](#6335-互斥区域) 节中描述。
 
 **注意：** 配置参数 `RteExclusiveAreaImplMechanism` 可以针对每个 **SWC** 实例规定，因此每个 **API** 的实现可能不同。"功能为空"的描述意味着没有锁定/解锁独占区的代码，但可以存在其他代码，例如 **VFB** 跟踪。如果所有 **SWC** 实例的实现相同（例如都为空），**RTE** 生成器可以在 **RTE API** 映射中提供类函数宏，以进一步优化所生成的 **API**。当实现不同时无法进行这种优化，因为 **API** 映射是按类型生成的。
 
@@ -3441,7 +3441,7 @@ AUTOSAR **SW-C** 的实现者必须自行确保：运行在不同任务/ISR2 上
 
 **6.2.2.6.6 可运行实体间变量**
 
-原子 **SW 组件**（`NvBlockComponent` 除外）可以预留可运行实体间变量，由该原子 **SW 组件** 的可运行实体访问（另见 6.2.3.3.1 节）。可以进行读和写访问。每个 AUTOSAR **SW-C** 实例都有单独的一组这样的变量。
+原子 **SW 组件**（`NvBlockComponent` 除外）可以预留可运行实体间变量，由该原子 **SW 组件** 的可运行实体访问（另见 [6.2.3.3.1](#62331-可运行实体间变量) 节）。可以进行读和写访问。每个 AUTOSAR **SW-C** 实例都有单独的一组这样的变量。
 
 同样，**RTE** 必须保证数据一致性。合适的手段取决于在 **ECU** 配置期间做出的可运行实体布置决策。
 
@@ -3481,7 +3481,7 @@ AUTOSAR **SW-C** 的实现者必须自行确保：运行在不同任务/ISR2 上
 
 `implicitInterRunnableVariable` 的使用允许用于所有类别的可运行实体。对类别 2 的可运行实体，只有在其执行时间有限时行为才得到保证。永远运行的类别 2 可运行实体的数据不会被更新。
 
-`implicitInterRunnableVariable` 的 **API** 见 7.1.6.24 节和 7.1.6.26 节。
+`implicitInterRunnableVariable` 的 **API** 见 [7.1.6.24](#71624-rte_irviread) 节和 [7.1.6.26](#71626-rte_irviwrite) 节。
 
 关于该机制如何工作的更多细节见 6.2.2.6.4 节的"复制策略"。
 
@@ -3503,19 +3503,19 @@ AUTOSAR **SW-C** 的实现者必须自行确保：运行在不同任务/ISR2 上
 
 **RTE** 应为隐式行为可运行实体间变量和显式行为可运行实体间变量提供不同的 **API**。
 
-显式行为可运行实体间变量的 **API** 见 7.1.6.28 节和 7.1.6.29 节。
+显式行为可运行实体间变量的 **API** 见 [7.1.6.28](#71628-rte_irvread) 节和 [7.1.6.29](#71629-rte_irvwrite) 节。
 
 ##### 6.2.2.7. 可运行实体与基础软件可调度实体的多重触发
 
 **并发激活**
 
-AUTOSAR **SW-C** 模板规范[2]指出：如果可运行实体（下文称"可运行实体"）的 `canBeInvokedConcurrently` 特性被设置，则它可能被并发地多次调用。此时，确保可运行实体被多次并行激活时数据不被破坏是 AUTOSAR **SW-C** 设计人员的责任。
+AUTOSAR **SW-C** 模板规范[\[2\]](#ref-2)指出：如果可运行实体（下文称"可运行实体"）的 `canBeInvokedConcurrently` 特性被设置，则它可能被并发地多次调用。此时，确保可运行实体被多次并行激活时数据不被破坏是 AUTOSAR **SW-C** 设计人员的责任。
 
 如果某个 **SW-C** 有多个实例，它们拥有各自不同的可运行实体。在下文中，两个使用同一 `SwcInternalBehavior` 描述中同一 `RunnableEntity` 描述、但以两个不同 **SW-C** 实例实例化的可运行实体，被视为两个不同的可运行实体。这种并发在 **SW-C** 之间始终是允许的，即使这些可运行实体的 `canBeInvokedConcurrently` 特性为 false。
 
 如果关联特性 `canBeInvokedConcurrently` 设置为 TRUE，则 **RTE** 应支持同一个可运行实体实例的并发激活，包括在多个任务/ISR2 中的并发激活。如果该特性未设置（或设置为 FALSE），则禁止该可运行实体的并发激活。
 
-基础软件模块描述模板[9]通过特性 `isReentrant` 规定 `BswModuleEntity` 的可能并发激活。
+基础软件模块描述模板[\[9\]](#ref-9)通过特性 `isReentrant` 规定 `BswModuleEntity` 的可能并发激活。
 
 如果 `implementedEntry` 角色中所引用 `BswModuleEntry` 的 `isReentrant` 特性（或可选 `BswModuleClientServerEntry` 的 `isReentrant` 特性，见 **TPS BSWMDT**）设置为 true，则基础软件调度器应支持同一个 `BswModuleEntity` 实例的并发激活，包括在多个任务/ISR2 中的并发激活。如果该特性设置为 false，则禁止该 `BswModuleEntity` 的并发激活。
 
@@ -3527,11 +3527,11 @@ AUTOSAR **SW-C** 模板规范[2]指出：如果可运行实体（下文称"可�
 
 **RTE** 应支持由多个 `RTEEvent` 激活同一个可运行实体实例。
 
-`RTEEvent` 触发可运行实体激活，并可以提供 0..多个角色参数（见 7.1.7.3 节）。角色参数在可运行实体签名中不可见，由 `OperationInvokedEvent` 触发的除外。除 `OperationInvokedEvent` 之外，所有角色参数都可以由用户通过隐式或显式接收 **API** 访问。
+`RTEEvent` 触发可运行实体激活，并可以提供 0..多个角色参数（见 [7.1.7.3](#7173-角色参数) 节）。角色参数在可运行实体签名中不可见，由 `OperationInvokedEvent` 触发的除外。除 `OperationInvokedEvent` 之外，所有角色参数都可以由用户通过隐式或显式接收 **API** 访问。
 
 **RTE** 应支持由不同种类的 `RTEEvent` 激活同一个可运行实体实例。
 
-**RTE** 不支持由 `OperationInvokedEvent` 触发的可运行实体再被任何其他 `RTEEvent` 触发（该操作的其他兼容 `OperationInvokedEvent` 除外）。该限制在附录 4.1.2 节中说明。
+**RTE** 不支持由 `OperationInvokedEvent` 触发的可运行实体再被任何其他 `RTEEvent` 触发（该操作的其他兼容 `OperationInvokedEvent` 除外）。该限制在附录 [4.1.2](#412-关于-rteevent-的限制) 节中说明。
 
 与 `RunnableEntity` 上述配置类似的配置也可用于 `BswSchedulableEntity`。因此，即使是 `implementedEntry` 角色中所引用 `BswModuleEntry` 的 `isReentrant` 特性为 false 的 `BswSchedulableEntity`，也可以由多个 `BswEvent` 激活。
 
@@ -3547,7 +3547,7 @@ AUTOSAR **SW-C** 模板规范[2]指出：如果可运行实体（下文称"可�
 
 ###### 6.2.2.8.2. 兼容性规则
 
-需求端口只能连接到兼容的提供端口。兼容性规则在 AUTOSAR 软件组件模板[2]中说明。兼容性主要取决于附加在接口元素上的 `swImplPolicy` 特性。表 4.7 给出了兼容性规则的概览。
+需求端口只能连接到兼容的提供端口。兼容性规则在 AUTOSAR 软件组件模板[\[2\]](#ref-2)中说明。兼容性主要取决于附加在接口元素上的 `swImplPolicy` 特性。表 4.7 给出了兼容性规则的概览。
 
 表 4.7：`ParameterDataPrototype` 与 `VariableDataPrototype` 兼容性概览（结合表 4.8 的图例）
 
@@ -3584,7 +3584,7 @@ AUTOSAR **SW-C** 模板规范[2]指出：如果可运行实体（下文称"可�
 
 ###### 6.2.2.8.4. VariableDataPrototype 的初始化
 
-原则上，任何 `VariableDataPrototype` 是否需要初始化由定义该 `VariableDataPrototype` 的软件组件描述规定。该信息基本上由 `initValue` 的存在与否以及相关 `SwAddrMethod` 的 `sectionInitializationPolicy` 定义。如 8.12 节所述，此外 **RTE** 的集成人员还可以调整初始化策略，使其行为与启动代码相匹配。
+原则上，任何 `VariableDataPrototype` 是否需要初始化由定义该 `VariableDataPrototype` 的软件组件描述规定。该信息基本上由 `initValue` 的存在与否以及相关 `SwAddrMethod` 的 `sectionInitializationPolicy` 定义。如 [8.12](#812-初始化的配置) 节所述，此外 **RTE** 的集成人员还可以调整初始化策略，使其行为与启动代码相匹配。
 
 以下情况中，实现 `VariableDataPrototype` 的变量应被初始化：定义了 `initValue`，且未为该 `VariableDataPrototype` 定义 `SwAddrMethod`。
 
@@ -3607,7 +3607,7 @@ AUTOSAR **SW-C** 模板规范[2]指出：如果可运行实体（下文称"可�
 
 **6.2.2.8.5.2 ImplementationDataType**
 
-当为某个由类别为 `STRUCTURE`、且 `isStructWithOptionalElement` 设置为 TRUE 的 `ImplementationDataType` 类型化的 `DataPrototype` 提供初始值时，[2]在 **TPS SWCT** 中定义了初始化策略。这导致为所有结构成员显式定义初始值，包括其中定义的 `availabilityBitfield`。
+当为某个由类别为 `STRUCTURE`、且 `isStructWithOptionalElement` 设置为 TRUE 的 `ImplementationDataType` 类型化的 `DataPrototype` 提供初始值时，[\[2\]](#ref-2)在 **TPS SWCT** 中定义了初始化策略。这导致为所有结构成员显式定义初始值，包括其中定义的 `availabilityBitfield`。
 
 如果为某个由类别为 `STRUCTURE`、且 `isStructWithOptionalElement` 设置为 TRUE 的 `ImplementationDataType` 类型化的 `DataPrototype` 提供初始值，则 `availabilityBitfield` 的初始值应取自 `shortName` 为 "availabilityBitfield" 的 `ImplementationDataTypeElement` 的初始值。
 
@@ -3618,7 +3618,7 @@ AUTOSAR **SW-C** 模板规范[2]指出：如果可运行实体（下文称"可�
 * `ApplicationRuleBasedValueSpecification`
 * `NumericalRuleBasedValueSpecification`
 
-`ApplicationRuleBasedValueSpecification` 以物理表示定义值，而 `NumericalRuleBasedValueSpecification` 以数值表示定义值（见文档[2]"数据描述"一节）。但二者都使用 `RuleBasedValueSpecification` 基于一条规则及该规则的参数来定义一组值。
+`ApplicationRuleBasedValueSpecification` 以物理表示定义值，而 `NumericalRuleBasedValueSpecification` 以数值表示定义值（见文档[\[2\]](#ref-2)"数据描述"一节）。但二者都使用 `RuleBasedValueSpecification` 基于一条规则及该规则的参数来定义一组值。
 
 尤其是在大数组的情形下需要大量初始值。但许多数组用相同的值初始化，或至少到末尾都用相同的值填充。对于这类用例，可以使用类别为 `FILL_UNTIL_END` 的 `RuleBasedValueSpecification`，避免创建和维护冗余的 `ValueSpecification`。
 
@@ -3658,7 +3658,7 @@ AUTOSAR 只对规则 `FILL_UNTIL_END` 和 `FILL_UNTIL_MAX_SIZE` 定义了标准�
 
 尽管如此，也支持实例化聚合 `SwDataDefProps`（特性 `swCalibrationAccess` = `readWrite`、`swImplPolicy` = `standard`）的 `VariableDataPrototype`。但此时这种 `VariableDataPrototype` 的实现按 `swCalibrationAccess` = `readOnly` 对待，**RTE** 生成器不必实现进一步的措施（例如"软件支持的数据仿真"，6.2.2.9.3.5 节）。
 
-可能为某个 `VariableDataPrototype` 及其引用的 `AutosarDataType` 规定不同的 `SwDataDefProps` 设置。此时应应用 **SWC-T** 中规定的规则，另见 6.2.1.3 节的规定。
+可能为某个 `VariableDataPrototype` 及其引用的 `AutosarDataType` 规定不同的 `SwDataDefProps` 设置。此时应应用 **SWC-T** 中规定的规则，另见 [6.2.1.3](#6213-rte-与-autosar-软件组件) 节的规定。
 
 `SwDataDefProps` 还包含更多信息，说明外部标定工具应如何解释和呈现测量值或特性。这些信息是生成 ASAM2（即 A2L）文件所必需的。随后 **A2L** 文件被 **ECU** 外部的测量与标定工具使用，使这些工具知道例如如何解释从 **ECU** 收到的原始数据以及如何获取它们。
 
@@ -3708,7 +3708,7 @@ AUTOSAR 只对规则 `FILL_UNTIL_END` 和 `FILL_UNTIL_MAX_SIZE` 定义了标准�
 
 **6.2.2.9.2.1 可测量的对象**
 
-AUTOSAR **SW-C** 模板规范[2]说明了测量模式可以应用于哪些 AUTOSAR 原型。
+AUTOSAR **SW-C** 模板规范[\[2\]](#ref-2)说明了测量模式可以应用于哪些 AUTOSAR 原型。
 
 **RTE** 为以下对象提供测量支持：
 
@@ -3720,7 +3720,7 @@ AUTOSAR **SW-C** 模板规范[2]说明了测量模式可以应用于哪些 AUTOS
 3. AUTOSAR `NvBlockSwComponent` 内部的数据结构。可测量的有 `NvBlockSwComponent` 的 `NvBlock` 的 `ramBlock` 和 `romBlock`。
 4. AUTOSAR 基础软件模块内部的通信。可测量的有以 `arTypedPerInstanceMemory` 角色定义的 `VariableDataPrototype`。
 
-此外，AUTOSAR **SW-C** 和基础软件模块可以定义不由 **RTE** 实例化的可测量对象。它们由 `staticMemory` 角色中的 `VariableDataPrototype` 描述。因此这类可测量对象不会出现在 **RTE** 生成的 `McSupportData` 中（见 6.2.2.9.4 节）。
+此外，AUTOSAR **SW-C** 和基础软件模块可以定义不由 **RTE** 实例化的可测量对象。它们由 `staticMemory` 角色中的 `VariableDataPrototype` 描述。因此这类可测量对象不会出现在 **RTE** 生成的 `McSupportData` 中（见 [6.2.2.9.4](#62294-mcsupportdata-的生成) 节）。
 
 **6.2.2.9.2.2 RTE 对测量的支持**
 
@@ -3738,7 +3738,7 @@ AUTOSAR **SW-C** 模板规范[2]说明了测量模式可以应用于哪些 AUTOS
 
 请注意，对 `swImplPolicy` = `measurementPoint` 的 `VariableDataPrototype`，为其提供内存位置的支持没有附加条件。在允许 **MCD** 系统访问这样的 `VariableDataPrototype` 的情况下，即使输入配置中没有消费该数据的软件组件，**RTE** 也不得进行会阻碍这种测量的优化。
 
-包含测量值的内存位置按照 6.2.2.8.4 节的初始化规定进行初始化。
+包含测量值的内存位置按照 [6.2.2.8.4](#62284-variabledataprototype-的初始化) 节的初始化规定进行初始化。
 
 **RTE** 生成器应拒绝这样的输入配置：某个 `RunnableEntity` 对 `swImplPolicy` 设置为 `measurementPoint` 的 `VariableDataPrototype` 定义了读访问（`readLocalVariable`、`dataReadAccess`、`dataReceivePointByValue` 或 `dataReceivePointByArgument` 角色的 `VariableAccess`）。
 
@@ -3808,7 +3808,7 @@ AUTOSAR **SW-C** 模板规范[2]说明了测量模式可以应用于哪些 AUTOS
 
 **未连接端口或兼容接口**
 
-如 7.1.2.7 节所述，**RTE** 支持对未连接端的处理。
+如 [7.1.2.7](#7127-未连接的端口) 节所述，**RTE** 支持对未连接端的处理。
 
 对未连接的发送方-接收方提供端口提供测量支持是有意义的，因为端口可能就是为了监控目的而特意添加的。
 
@@ -3838,13 +3838,13 @@ AUTOSAR **SW-C** 模板规范[2]说明了测量模式可以应用于哪些 AUTOS
 
 当由于上述排队规定而无法进行客户端-服务器通信的测量时，`McSupportData` 需要反映这一点（见 6.2.2.9.4.3 节）。
 
-原则上，上述同样的考虑也适用于发送方-接收方通信中未被使用的 `VariableDataPrototype`，此时连接的端口接口兼容但不相同。对客户端-服务器通信而言这不是问题，因为按照客户端-服务器接口的兼容性规则，兼容的客户端-服务器接口中所有 `ClientServerOperation` 都必须同时存在于提供端口和需求端口（见 AUTOSAR **SW-C** 模板[2]）。
+原则上，上述同样的考虑也适用于发送方-接收方通信中未被使用的 `VariableDataPrototype`，此时连接的端口接口兼容但不相同。对客户端-服务器通信而言这不是问题，因为按照客户端-服务器接口的兼容性规则，兼容的客户端-服务器接口中所有 `ClientServerOperation` 都必须同时存在于提供端口和需求端口（见 AUTOSAR **SW-C** 模板[\[2\]](#ref-2)）。
 
 对于发送方-接收方通信，当提供端口与需求端口接口不相同（但兼容）时，**RTE** 生成器应遵守已连接端口中那些 `VariableDataPrototype` 的测量需求，即使提供端口中的某个 `VariableDataPrototype` 在需求端口中没有指派的 `VariableDataPrototype`。
 
 **测量总开关**
 
-对于完全不需要测量、而其中包含的 AUTOSAR **SW-C** 却带有要求测量的 `SwDataDefProps` 的项目，为了节省 **ECU** 资源，应可以关闭对测量的支持。这不得影响对标定的支持（见 6.2.2.9.3 节）。
+对于完全不需要测量、而其中包含的 AUTOSAR **SW-C** 却带有要求测量的 `SwDataDefProps` 的项目，为了节省 **ECU** 资源，应可以关闭对测量的支持。这不得影响对标定的支持（见 [6.2.2.9.3](#62293-标定) 节）。
 
 **RTE** 生成器应具有为所生成 **RTE** 代码关闭测量支持的选项。该选项应一次性影响完整的 **RTE** 代码。
 
@@ -3866,9 +3866,9 @@ AUTOSAR **SW-C** 模板规范[2]说明了测量模式可以应用于哪些 AUTOS
 
 **RTE** 和基础软件调度器必须支持标定参数的分配，以及使用它们的软件对它们的访问。如后文所述，对于某些标定方法，**RTE** 和基础软件调度器本身也必须包含支持软件（见 6.2.2.9.3.5 节）。但一般而言，**RTE** 和基础软件调度器不负责标定数据值的交换、以及它们在 **ECU** 与外部标定工具之间的传输。
 
-以下各节只提及 **RTE**，但这应理解为：对标定的支持是同样影响 **RTE** 中基础软件调度器部分的功能。在基础软件调度器生成阶段（见 6.1.6.1 节），这一功能甚至可以在没有任何其他软件组件相关 **RTE** 功能的情况下提供。
+以下各节只提及 **RTE**，但这应理解为：对标定的支持是同样影响 **RTE** 中基础软件调度器部分的功能。在基础软件调度器生成阶段（见 [6.1.6.1](#6161-基础软件调度器生成阶段) 节），这一功能甚至可以在没有任何其他软件组件相关 **RTE** 功能的情况下提供。
 
-在 AUTOSAR 中，标定参数（AUTOSAR **SW-C** 模板规范[2]称之为 `ParameterSwComponentType`）用 `ParameterDataPrototype` 实例化，该原型聚合一个 `SwDataDefProps`，其特性为 `swCalibrationAccess` = `readWrite` 且 `swImplPolicy` = `standard`。本章适用于这种 `ParameterSwComponentType`。对于这些特性的其他组合，参见 6.2.2.8 节。
+在 AUTOSAR 中，标定参数（AUTOSAR **SW-C** 模板规范[\[2\]](#ref-2)称之为 `ParameterSwComponentType`）用 `ParameterDataPrototype` 实例化，该原型聚合一个 `SwDataDefProps`，其特性为 `swCalibrationAccess` = `readWrite` 且 `swImplPolicy` = `standard`。本章适用于这种 `ParameterSwComponentType`。对于这些特性的其他组合，参见 [6.2.2.8](#6228-参数与数据元素的实现) 节。
 
 **6.2.2.9.3.1 标定参数**
 
@@ -3917,7 +3917,7 @@ AUTOSAR **SW-C** 模板规范[2]说明了测量模式可以应用于哪些 AUTOS
 
 对于未连接的参数 r-port，**RTE** 应按照该 r-port 的 `ParameterRequireComSpec` 中引用该 `ParameterDataPrototype` 的 `initValue` 设置该 r-port 的 `ParameterDataPrototype` 的值。
 
-如果端口未连接，**RTE** 期望一个初始值（见 4.1.11 节）。
+如果端口未连接，**RTE** 期望一个初始值（见 [4.1.11](#4111-关于未连接-r-port-的限制) 节）。
 
 **`romBlock` 角色中的 ParameterDataPrototype**
 
@@ -3940,7 +3940,7 @@ AUTOSAR **SW-C** 模板规范[2]说明了测量模式可以应用于哪些 AUTOS
 
 **RTE** 标定支持指的是按 6.2.2.9.3.5 节"软件支持的数据仿真"的规定创建软件。
 
-`ParameterSwComponentType` 上的需求端口没有意义。`ParameterSwComponentType` 只需向其他组件类型提供标定参数。因此 **RTE** 生成器应拒绝包含附着在 `ParameterSwComponentType` 上的需求端口的配置（见 4.1.14 节）。
+`ParameterSwComponentType` 上的需求端口没有意义。`ParameterSwComponentType` 只需向其他组件类型提供标定参数。因此 **RTE** 生成器应拒绝包含附着在 `ParameterSwComponentType` 上的需求端口的配置（见 [4.1.14](#4114-关于测量与标定的限制) 节）。
 
 **6.2.2.9.3.1.1 标定参数的分离**
 
@@ -3950,7 +3950,7 @@ AUTOSAR **SW-C** 模板规范[2]说明了测量模式可以应用于哪些 AUTOS
 
 **6.2.2.9.3.2 对离线标定的支持**
 
-如 6.2.2.9.1 节所述，使用离线标定过程时，测量与向 **ECU** 软件提供新标定参数是解耦的。在测量阶段收集信息，用于确定标定参数最好设置为哪些值。随后把新的标定参数集带入 **ECU**，例如通过引导加载程序。
+如 [6.2.2.9.1](#62291-概述) 节所述，使用离线标定过程时，测量与向 **ECU** 软件提供新标定参数是解耦的。在测量阶段收集信息，用于确定标定参数最好设置为哪些值。随后把新的标定参数集带入 **ECU**，例如通过引导加载程序。
 
 **RTE** 生成器应具有为所生成 **RTE** 代码关闭所有数据仿真支持的选项。该选项应一次性影响完整的 **RTE** 代码。
 
@@ -3958,7 +3958,7 @@ AUTOSAR **SW-C** 模板规范[2]说明了测量模式可以应用于哪些 AUTOS
 
 从 **RTE** 的视角看，此时的情形与使用无软件支持的数据仿真（见 6.2.2.9.3.4 节）时相同：
 
-**RTE** 只负责按 7.1.6 节的规定通过 **RTE API** 提供对标定参数的访问。`ParameterDataPrototype` 内容的交换对 **ECU** 程序流程不可见，因此对 **RTE** 也不可见。
+**RTE** 只负责按 [7.1.6](#716-api-参考) 节的规定通过 **RTE API** 提供对标定参数的访问。`ParameterDataPrototype` 内容的交换对 **ECU** 程序流程不可见，因此对 **RTE** 也不可见。
 
 当不需要数据仿真支持时，对于来自单一实例化 AUTOSAR **SW-C** 或基础软件模块的访问，对存放在 **FLASH** 中的标定参数的标定参数访问可以直接读内存完成，不需要任何间接。尽管如此，本规范的目标不是要求直接访问，因为这触及实现。采用其他访问方式是否更高效或具有其他显著优势，可能取决于 **ECU** 硬件甚至项目。
 
@@ -3979,7 +3979,7 @@ AUTOSAR **SW-C** 模板规范[2]说明了测量模式可以应用于哪些 AUTOS
 
 **6.2.2.9.3.4 无软件支持的数据仿真（直接访问）**
 
-对于"在线标定"（见 6.2.2.9.1 节），为 **ECU** 附加由控制逻辑和内存组成的硬件，用于存放修改后的标定参数。在 **ECU** 执行期间，引入的控制逻辑把内存访问重定向到新引入的内存，其内容由外部工具修改而不干扰正常的 **ECU** 程序流程。一些微控制器包含支持这一点的特性，许多较小的微控制器则没有。因此该方法高度依赖硬件。
+对于"在线标定"（见 [6.2.2.9.1](#62291-概述) 节），为 **ECU** 附加由控制逻辑和内存组成的硬件，用于存放修改后的标定参数。在 **ECU** 执行期间，引入的控制逻辑把内存访问重定向到新引入的内存，其内容由外部工具修改而不干扰正常的 **ECU** 程序流程。一些微控制器包含支持这一点的特性，许多较小的微控制器则没有。因此该方法高度依赖硬件。
 
 为支持这些情形，**RTE** 不必提供例如 6.2.2.9.3.5 节所述的引用表。`ParameterDataPrototype` 内容的交换对程序流程和 **RTE** 都不可见。
 
@@ -3987,7 +3987,7 @@ AUTOSAR **SW-C** 模板规范[2]说明了测量模式可以应用于哪些 AUTOS
 
 **6.2.2.9.3.5 软件支持的数据仿真**
 
-在需要"在线标定"（见 6.2.2.9.1 节）时，很多时候无法实现不借助特殊软件结构的数据仿真。存在多种方法，它们的共同后果是需要额外的 **ECU** 资源，如 **RAM**、**ROM/FLASH** 和运行时间。
+在需要"在线标定"（见 [6.2.2.9.1](#62291-概述) 节）时，很多时候无法实现不借助特殊软件结构的数据仿真。存在多种方法，它们的共同后果是需要额外的 **ECU** 资源，如 **RAM**、**ROM/FLASH** 和运行时间。
 
 软件支持的数据仿真可以以不同方式实现。在标定过程中，这些方法通常都把修改后的标定数据值保存在 **RAM** 中。修改由 **ECU** 外部工具控制，并由位于 AUTOSAR 基础软件或复杂驱动中的 **ECU** 内部软件支持。
 
@@ -3995,7 +3995,7 @@ AUTOSAR **SW-C** 模板规范[2]说明了测量模式可以应用于哪些 AUTOS
 
 由于要支持多重实例化，必须分配同一个 `ParameterDataPrototype` 的多个实例。由于 **RTE** 是 AUTOSAR **ECU** 中唯一能够处理不同实例的软件，对这些标定参数的访问只能由 **RTE** 处理。因此 **RTE** 必须提供标定的软件支持数据仿真所需的额外软件结构。
 
-然而 **RTE** 不知道一次标定会话中要标定 **ECU** 的哪些功能。为了昂贵的 **RAM** 能够在一次或多次在线标定会话（见 6.2.2.9.1 节）中复用于标定不同的 **ECU** 功能，在下文描述的单指针和双指针方法中，**RTE** 只需在运行时提供对 `ParameterDataPrototype` 的访问，同时允许其他软件（一个 **BSW** 模块或复杂驱动）把访问重定向到替代标定参数值（例如位于 **RAM** 中），且对应用不可见。
+然而 **RTE** 不知道一次标定会话中要标定 **ECU** 的哪些功能。为了昂贵的 **RAM** 能够在一次或多次在线标定会话（见 [6.2.2.9.1](#62291-概述) 节）中复用于标定不同的 **ECU** 功能，在下文描述的单指针和双指针方法中，**RTE** 只需在运行时提供对 `ParameterDataPrototype` 的访问，同时允许其他软件（一个 **BSW** 模块或复杂驱动）把访问重定向到替代标定参数值（例如位于 **RAM** 中），且对应用不可见。
 
 **RTE** 既不是为 `ParameterDataPrototype` 提供替代值的主体，在指针方法中也不是执行到替代值重定向的主体。
 
@@ -4009,7 +4009,7 @@ AUTOSAR **SW-C** 模板规范[2]说明了测量模式可以应用于哪些 AUTOS
 
 **ParameterElementGroup**
 
-为了在单指针方法和双指针方法中节省 **RAM/ROM/FLASH** 资源，`ParameterDataPrototype` 按组分配。标定引用表的一个条目引用一组 `ParameterDataPrototype` 的起始。为了便于理解下文，这个组称为 `ParameterElementGroup`（它不是 AUTOSAR **SW-C** 模板规范[2]中的术语）。一个 `ParameterElementGroup` 可以包含一个或多个 `ParameterDataPrototype`。
+为了在单指针方法和双指针方法中节省 **RAM/ROM/FLASH** 资源，`ParameterDataPrototype` 按组分配。标定引用表的一个条目引用一组 `ParameterDataPrototype` 的起始。为了便于理解下文，这个组称为 `ParameterElementGroup`（它不是 AUTOSAR **SW-C** 模板规范[\[2\]](#ref-2)中的术语）。一个 `ParameterElementGroup` 可以包含一个或多个 `ParameterDataPrototype`。
 
 如果启用了软件支持的数据仿真，**RTE** 生成器应把 `ParameterSwComponentType` 一个实例中标记了相同 `swAddrMethod` 特性的所有 `ParameterDataPrototype` 连续分配（顺序见参数 `RteComponentTypeParameterGroup`）。它们共同构成一个单独的 `ParameterElementGroup`。
 
@@ -4118,13 +4118,13 @@ AUTOSAR **SW-C** 模板规范[2]说明了测量模式可以应用于哪些 AUTOS
 
 如果启用了单指针或双指针方法的软件支持数据仿真，则 **RTE** 应为所有附加了相同 `swAddrMethod` 特性值的 `ParameterDataPrototype` 创建一个单独的实例专属 `ParameterElementGroup`。没有附加 `swAddrMethod` 特性的 `ParameterDataPrototype` 也应分组在一起。
 
-为了外部工具的可追溯性，`ParameterElementGroup` 中 `ParameterDataPrototype` 的顺序以及引用表中 `ParameterElementGroup` 的顺序，将由 **RTE** 生成器通过 `McSwEmulationMethodSupport` 记录，见 6.2.2.9.4.4 节和 8.6.2 节。
+为了外部工具的可追溯性，`ParameterElementGroup` 中 `ParameterDataPrototype` 的顺序以及引用表中 `ParameterElementGroup` 的顺序，将由 **RTE** 生成器通过 `McSwEmulationMethodSupport` 记录，见 6.2.2.9.4.4 节和 [8.6.2](#862-组件类型标定) 节。
 
 **6.2.2.9.3.5.6 标定参数访问**
 
 标定参数由 `ParameterDataPrototype` 派生。**RTE** 必须通过单独的 **API** 调用提供对每个标定参数的访问。
 
-**API** 在 7.1.6 节中规定。
+**API** 在 [7.1.6](#716-api-参考) 节中规定。
 
 如果启用了软件支持的数据仿真且为单指针或双指针方法，**RTE** 生成器应导出标定引用表的标签。
 
@@ -4140,13 +4140,13 @@ AUTOSAR **SW-C** 模板规范[2]说明了测量模式可以应用于哪些 AUTOS
 
 由于只有 **RTE** 知道 **ECU** 上存在哪些 AUTOSAR **SW-C**、`ParameterSwComponentType` 和基础软件模块的实例，**RTE** 必须分配标定参数并为它们保留内存。这一方法也覆盖多重实例化目标代码集成的需要。因此实例化 `ParameterDataPrototype` 的内存既不由 `ParameterSwComponentType` 提供，也不由 AUTOSAR **SW-C** 提供。
 
-尽管如此，AUTOSAR **SW-C** 和基础软件模块可以定义不由 **RTE** 实例化的标定参数。它们由 `constantMemory` 角色中的 `ParameterDataPrototype` 描述。此外，**RTE** 无法为这类标定参数实现任何数据仿真软件支持。因此这类标定参数不会出现在 **RTE** 生成的 `McSupportData` 中（见 6.2.2.9.4 节）。
+尽管如此，AUTOSAR **SW-C** 和基础软件模块可以定义不由 **RTE** 实例化的标定参数。它们由 `constantMemory` 角色中的 `ParameterDataPrototype` 描述。此外，**RTE** 无法为这类标定参数实现任何数据仿真软件支持。因此这类标定参数不会出现在 **RTE** 生成的 `McSupportData` 中（见 [6.2.2.9.4](#62294-mcsupportdata-的生成) 节）。
 
 **RTE** 应为标定参数分配内存。
 
 一个 `ParameterDataPrototype` 可以定义为实例专属，也可以在一个 AUTOSAR **SW-C** 或 `ParameterSwComponentType` 的所有实例间共享。**RTE** 生成器的输入包含 **RTE** 应用于标定参数的值。
 
-为了支持在线和离线标定（见 6.2.2.9.1 节），必须提供所有实例的所有参数值。背景：
+为了支持在线和离线标定（见 [6.2.2.9.1](#62291-概述) 节），必须提供所有实例的所有参数值。背景：
 
 * 对于在线标定，通常最初可以对标定参数应用相同的默认值，差异随后由后链接工具处理。**ECU** 的初始启动不受影响。这允许例如由 AUTOSAR **SW-C** 或 `ParameterSwComponentType` 供应商为一个 `ParameterDataPrototype` 的所有实例使用一个默认值。
 * 另一方面，为一个 `ParameterDataPrototype` 的不同实例应用各自的默认值，对在线标定也常常是必需的，以便让车辆初始就能运行。这需要额外的配置工作，例如由集成人员完成。
@@ -4182,9 +4182,9 @@ AUTOSAR **SW-C** 模板规范[2]说明了测量模式可以应用于哪些 AUTOS
 
 标定参数也可以位于 **NVRAM** 中。一个用例是可以经由诊断服务修改标定参数，而不需要专门的标定工具。
 
-为了允许访问 **NVRAM** 标定参数，必须定义带有静态分配 **RAM** 缓冲区（以标定参数 **PIM** 内存的形式）的 **NVRAM**，或 `NvBlockSwComponentType` 的 `ramBlock` 为 **MCD** 系统定义 `readWrite` 访问。另见 6.2.2.2.8 节与 6.2.2.9.2.2 节中的相应规定。
+为了允许访问 **NVRAM** 标定参数，必须定义带有静态分配 **RAM** 缓冲区（以标定参数 **PIM** 内存的形式）的 **NVRAM**，或 `NvBlockSwComponentType` 的 `ramBlock` 为 **MCD** 系统定义 `readWrite` 访问。另见 [6.2.2.2.8](#62228-timingevent-激活的可运行实体) 节与 6.2.2.9.2.2 节中的相应规定。
 
-**注意：** 由于在多核环境中 **NVRAM** 管理器可能无法跨核边界访问 `PerInstanceMemory`，多核控制器对 **NVRAM** 中标定参数的支持受到限制。另见 6.2.2.10.1 节中的注意。
+**注意：** 由于在多核环境中 **NVRAM** 管理器可能无法跨核边界访问 `PerInstanceMemory`，多核控制器对 **NVRAM** 中标定参数的支持受到限制。另见 [6.2.2.10.1](#622101-概述) 节中的注意。
 
 **6.2.2.9.3.7 多个标定参数实例**
 
@@ -4192,13 +4192,13 @@ AUTOSAR **SW-C** 模板规范[2]说明了测量模式可以应用于哪些 AUTOS
 
 **RTE** 生成器应为根软件组合中指向同一 `ParameterDataPrototype` 实例的每个 `FlatInstanceDescriptor` 提供一个单独的内存位置。
 
-为此，这些 `FlatInstanceDescriptor` 需要具有不同的 `postBuildVariantCondition`（如 `[constr_3114]` 所述）。其后果是：在一个特定的 post-build 变体中，按上述规定创建的内存位置中至多一个可以是活动的。相应的 **RTE API**（访问参数的 `Rte_CData` 和 `Rte_Prm`）需要访问该值。
+为此，这些 `FlatInstanceDescriptor` 需要具有不同的 `postBuildVariantCondition`（如 `[constr_3114]` 所述）。其后果是：在一个特定的 post-build 变体中，按上述规定创建的内存位置中至多一个可以是活动的。相应的 **RTE API**（访问参数的 `[Rte_CData](#71616-rte_cdata)` 和 `[Rte_Prm](#71617-rte_prm)`）需要访问该值。
 
 对于对某个 `ParameterDataPrototype` 的访问，**RTE API** 应返回属于当前所选 post-build 变体的那个内存位置的值。
 
-为了确保 `Rte_CData` 和 `Rte_Prm` 依赖 post-build 变体性的功能正确，必须保证：当 **RTE** 生成器创建 **RTE PostBuild** 数据集时（见 6.1.8 节），在一个特定的 post-build 变体中恰好选择一个 `FlatInstanceDescriptor`。
+为了确保 `[Rte_CData](#71616-rte_cdata)` 和 `[Rte_Prm](#71617-rte_prm)` 依赖 post-build 变体性的功能正确，必须保证：当 **RTE** 生成器创建 **RTE PostBuild** 数据集时（见 [6.1.8](#618-postbuild-数据集生成阶段) 节），在一个特定的 post-build 变体中恰好选择一个 `FlatInstanceDescriptor`。
 
-post-build 变体性的绑定在调用 `SchM_Init` 时按传入的 post-build 数据集完成，如 6.2.2.7.2 节和 7.1.3.10 节所述。
+post-build 变体性的绑定在调用 `[SchM_Init](#7271-schm_init)` 时按传入的 post-build 数据集完成，如 6.2.2.7.2 节和 [7.1.3.10](#71310-rte-post-build-变体集) 节所述。
 
 请注意，关于 `CalibrationParameterValue` 初始化的上述规定同样适用于该场景，因此由多个 `FlatInstanceDescriptor` 导致的不同内存位置可以获得不同的初始值。
 
@@ -4243,15 +4243,15 @@ post-build 变体性的绑定在调用 `SchM_Init` 时按传入的 post-build �
 
 ###### 6.2.2.9.4. McSupportData 的生成
 
-**RTE** 生成器支持为软件组件以及基础软件定义、分配和访问测量与标定数据。但对测量与标定工具的具体支持既不是 **RTE** 生成器也不是 AUTOSAR 的关注点。那需要生成一个"A2L"文件（如[21]所规定）——它是该领域的标准，但不在 AUTOSAR 的关注范围内。
+**RTE** 生成器支持为软件组件以及基础软件定义、分配和访问测量与标定数据。但对测量与标定工具的具体支持既不是 **RTE** 生成器也不是 AUTOSAR 的关注点。那需要生成一个"A2L"文件（如[\[21\]](#ref-21)所规定）——它是该领域的标准，但不在 AUTOSAR 的关注范围内。
 
-不过 **RTE** 生成器应支持一种称为 `McSupportData` 的中间交换格式，它在 **ECU** 软件与测量标定工具所需的最终"A2L"文件之间架起桥梁。关于 `McSupportData` 格式及相关方法学的细节在基础软件模块描述模板文档[9]中描述。
+不过 **RTE** 生成器应支持一种称为 `McSupportData` 的中间交换格式，它在 **ECU** 软件与测量标定工具所需的最终"A2L"文件之间架起桥梁。关于 `McSupportData` 格式及相关方法学的细节在基础软件模块描述模板文档[\[9\]](#ref-9)中描述。
 
 本节汇集对 **RTE** 生成器的需求：`McSupportData` 元素中应提供哪些元素。
 
 **6.2.2.9.4.1 McSupportData 的导出**
 
-图 4.32 展示了 `McSupportData` 元素的结构。`McSupportData` 元素及其子内容是 `Implementation` 元素的一部分。对 **RTE** 而言，这是由 **RTE** 生成器在生成阶段生成/更新的 `BswImplementation` 元素（见 6.1.6.2 节）。
+图 4.32 展示了 `McSupportData` 元素的结构。`McSupportData` 元素及其子内容是 `Implementation` 元素的一部分。对 **RTE** 而言，这是由 **RTE** 生成器在生成阶段生成/更新的 `BswImplementation` 元素（见 [6.1.6.2](#6162-rte-生成阶段) 节）。
 
 在生成阶段，**RTE** 生成器应创建 `McSupportData` 元素，作为所生成 **RTE** 的 `BswImplementation` 描述的一部分。
 
@@ -4263,7 +4263,7 @@ post-build 变体性的绑定在调用 `SchM_Init` 时按传入的 post-build �
 
 **FlatMap 的使用**
 
-FlatMap 是系统描述 **ECU Extract** 的一部分，包含 `FlatInstanceDescriptor` 元素的集合。FlatMap 的细节在系统模板规范[8]中描述。
+FlatMap 是系统描述 **ECU Extract** 的一部分，包含 `FlatInstanceDescriptor` 元素的集合。FlatMap 的细节在系统模板规范[\[8\]](#ref-8)中描述。
 
 特别地，如 6.2.2.9.3.7 节所述，FlatMap 可能为同一 `ParameterDataPrototype` 包含多个参数实例。
 
@@ -4283,7 +4283,7 @@ FlatMap 是系统描述 **ECU Extract** 的一部分，包含 `FlatInstanceDescr
 
 `McSupportData` 元素及其子结构应是自包含的：即为了以后生成最终的"A2L"文件，无需交付 **ECU** 的全部上游描述（包括 **ECU Extract**、软件组件描述、基础软件模块描述、**ECU** 配置值描述、Flat Map 等）。这意味着 **RTE** 生成器必须把所需信息从上游描述复制到 `McSupportData` 元素中。
 
-在生成阶段，**RTE** 生成器应为每个 `McDataInstance` 导出有效的 `SwDataDefProps`（包括所有被引用和聚合的子元素，例如 `CompuMethod` 或 `SwRecordLayout`），放入 `resultingProperties` 角色，其前提是已解析软件组件模板[2]"数据定义的特性"一章中定义的优先级规则。由于 `ImplementationDataType` 特性 `compuMethod` 和 `dataConstraint` 具有 C 和 AI 的细化性质，在 `McDataInstance` 的有效 `SwDataDefProps` 中不考虑它们。
+在生成阶段，**RTE** 生成器应为每个 `McDataInstance` 导出有效的 `SwDataDefProps`（包括所有被引用和聚合的子元素，例如 `CompuMethod` 或 `SwRecordLayout`），放入 `resultingProperties` 角色，其前提是已解析软件组件模板[\[2\]](#ref-2)"数据定义的特性"一章中定义的优先级规则。由于 `ImplementationDataType` 特性 `compuMethod` 和 `dataConstraint` 具有 C 和 AI 的细化性质，在 `McDataInstance` 的有效 `SwDataDefProps` 中不考虑它们。
 
 如果某个 `ParameterDataPrototype` 与一个 `ParameterAccess` 关联，则应导出相应的 `SwDataDefProps` 及其子结构。
 
@@ -4413,7 +4413,7 @@ FlatMap 是系统描述 **ECU Extract** 的一部分，包含 `FlatInstanceDescr
 
 **6.2.2.9.4.4 标定方法的导出**
 
-**RTE** 提供多种软件仿真方法，可在 **RTE** 的 **ECU** 配置中选择（见 8.2 节）。
+**RTE** 提供多种软件仿真方法，可在 **RTE** 的 **ECU** 配置中选择（见 [8.2](#82-rte-生成参数) 节）。
 
 某次 **RTE** 生成使用了哪种软件仿真方法，应记录在 `McSupportData` 中，以便测量与标定工具能够支持 **RTE** 的软件仿真方法。此外，**RTE** 供应商也可以添加自定义的软件仿真方法，这同样需要记录。`McSwEmulationMethodSupport` 的结构见图 4.33。
 
@@ -4431,7 +4431,7 @@ FlatMap 是系统描述 **ECU Extract** 的一部分，包含 `FlatInstanceDescr
 * `INITIALIZED_RAM`
 * 自定义类别名：供应商特定的软件仿真方法
 
-对所生成结构的描述使用基础软件模块描述模板[9]中已有的机制。
+对所生成结构的描述使用基础软件模块描述模板[\[9\]](#ref-9)中已有的机制。
 
 **ParameterElementGroup 的描述**
 
@@ -4538,16 +4538,16 @@ FlatMap 是系统描述 **ECU Extract** 的一部分，包含 `FlatInstanceDescr
 
 AUTOSAR **SW-C** 有多种方法可以访问存储在 **NVRAM** 中的数据。
 
-* "标定数据"——标定数据可以存储在 **NVRAM** 中，但在 **ECU** 的"正常"执行期间不被修改。标定数据通常直接从其内存位置读取，但在需要优化访问时间时（例如插值表）也可以从 **RAM** 缓冲区读取。它们在 6.2.2.9 节中描述。
+* "标定数据"——标定数据可以存储在 **NVRAM** 中，但在 **ECU** 的"正常"执行期间不被修改。标定数据通常直接从其内存位置读取，但在需要优化访问时间时（例如插值表）也可以从 **RAM** 缓冲区读取。它们在 [6.2.2.9](#6229-测量与标定) 节中描述。
 * "对 NVRAM 块的访问"——该方法使用 `PerInstanceMemory` 作为 NVRAM 块的 **RAM Block**。这种方法高效，但使用受限。
 
-**NVRAM** 管理器[22]是一个 **BSW** 模块，为 **SW-C** 提供在运行时访问 NVRAM 块的服务。NVM 块数据不被直接访问，而是通过一个 **RAM Block** 访问，该 **RAM Block** 可以是由 **RTE** 实例化的 `PerInstanceMemory`，也可以是 **SW-C** 内部缓冲区。使用这种方法时，**RTE** 不提供任何数据一致性机制（即 **SW-C** 与 **NVM** 的不同可运行实体可以并发访问 **RAM Block**，而不受 **RTE** 保护）。
+**NVRAM** 管理器[\[22\]](#ref-22)是一个 **BSW** 模块，为 **SW-C** 提供在运行时访问 NVRAM 块的服务。NVM 块数据不被直接访问，而是通过一个 **RAM Block** 访问，该 **RAM Block** 可以是由 **RTE** 实例化的 `PerInstanceMemory`，也可以是 **SW-C** 内部缓冲区。使用这种方法时，**RTE** 不提供任何数据一致性机制（即 **SW-C** 与 **NVM** 的不同可运行实体可以并发访问 **RAM Block**，而不受 **RTE** 保护）。
 
 **注意：** 该机制允许高效地使用 **NVRAM** 数据，但要求数 **SW-C** 设计人员注意：来自不同任务上下文的访问访问同一 `PerInstanceMemory` 不会导致数据不一致。"对 NVRAM 块的访问"不应在多核环境中使用。在 AUTOSAR 4.0 版本中，不能期望 **NVRAM** 管理器能够访问另一个核的 `PerInstanceMemory`。AUTOSAR 并不要求存在共享内存段。只有对 `arTypedPerInstanceMemory`，才有 `SwDataDefProps` 项可以把 `PerInstanceMemory` 指派给共享内存段。
 
 * "通过 `NvBlockSwComponentType` 访问 NVRAM 数据"——数据通过连接到 `NvBlockSwComponentType` 的 `NvDataInterface` 访问。这种访问在 **VFB** 层建模，必要时由 **RTE** 保护免受并发访问。本节将进一步描述。
 
-请注意，本文档中使用的术语 **NVRAM Block**、NV Block、**RAM Block**、**ROM Block** 和 **RAM mirror** 在 **NVRAM** 管理器规范[22]中定义。
+请注意，本文档中使用的术语 **NVRAM Block**、NV Block、**RAM Block**、**ROM Block** 和 **RAM mirror** 在 **NVRAM** 管理器规范[\[22\]](#ref-22)中定义。
 
 如果 **RTE** 必须访问 **NvM API**，则应包含 `NvM.h` 文件。
 
@@ -4577,7 +4577,7 @@ NvBlock `SwComponentPrototype` 的代码由 **RTE** 生成器实现。`NvBlockSw
 
 **RTE** 应为 `NvBlockDescriptor` 实例的 `ramBlock` `VariableDataPrototype` 分配内存。
 
-如果满足 6.2.2.8.4 节的一般初始化条件，则为 `ramBlock` 分配的变量应被初始化。初始化应在 `Rte_Start` 期间依据已配置的 `RteInitializationStrategy` 施加。
+如果满足 [6.2.2.8.4](#62284-variabledataprototype-的初始化) 节的一般初始化条件，则为 `ramBlock` 分配的变量应被初始化。初始化应在 `[Rte_Start](#7181-rte_start)` 期间依据已配置的 `RteInitializationStrategy` 施加。
 
 **注意：** 当块被配置为由 `NvM_ReadAll` 读取时，初始化可能擦除 **NVM** 读出的值。这些块不应有 `initValue`。
 
@@ -4610,7 +4610,7 @@ NvBlock `SwComponentPrototype` 的代码由 **RTE** 生成器实现。`NvBlockSw
 
 与 `NvBlockSwComponentType` 之 **RAM Block** 相关的 NvMBlockDescriptor 应使用 NvmBlockUseSyncMechanism：与 `NvBlockSwComponentType` 的 `NvBlockDescriptor` 关联的 **NVRAM Block** 应配置为启用 `NvMBlockUseSyncMechanism` 特性，并把 `NvMWriteRamBlockToNvCallback` 和 `NvMReadRamBlockFromNvCallback` 参数设置为该 `NvBlockDescriptor` 的 `Rte_GetMirror` 和 `Rte_SetMirror` **API**。
 
-一个 `NvBlockSwComponentType` 可以有未连接的 p-port 或 r-port（见 6.2.1.3.2 节的相应处理）。
+一个 `NvBlockSwComponentType` 可以有未连接的 p-port 或 r-port（见 [6.2.1.3.2](#62132-端口接口与连接) 节的相应处理）。
 
 带未连接 r-port 的 `NvBlockSwComponentType` 应表现得像该未连接 r-port 的 `VariableDataPrototype` 没有接收到更新数据一样。
 
@@ -4622,15 +4622,15 @@ NvBlock `SwComponentPrototype` 的代码由 **RTE** 生成器实现。`NvBlockSw
 
 与 `SenderReceiverInterface` 一样，这些 `NvDataInterface` 中的每一个都可以提供对多个 `VariableDataPrototype` 的访问。
 
-访问这些 `VariableDataPrototype` 使用的 `Rte_Read`、`Rte_IRead`、`Rte_DRead`、`Rte_Write`、`Rte_IWrite`、`Rte_IWriteRef` **API** 与 `SenderReceiverInterface` 相同。
+访问这些 `VariableDataPrototype` 使用的 `[Rte_Read](#71610-rte_read)`、`[Rte_IRead](#71618-rte_iread)`、`[Rte_DRead](#71611-rte_dread)`、`[Rte_Write](#7164-rte_write)`、`[Rte_IWrite](#71620-rte_iwrite)`、`[Rte_IWriteRef](#71621-rte_iwriteref)` **API** 与 `SenderReceiverInterface` 相同。
 
-由于使用隐式 **API** `Rte_IRead` 和 `Rte_IWriteRef`，可以避免多重缓冲，即应用 **SW-C** 的 `RunnableEntity` 或 **BSW** 模块（例如 **DCM**）的 `ExecutableEntity` 可以直接访问 **RAM Block** 上的 `VariableDataPrototype`。为保证这一行为，必须满足以下前提条件之一：
+由于使用隐式 **API** `[Rte_IRead](#71618-rte_iread)` 和 `[Rte_IWriteRef](#71621-rte_iwriteref)`，可以避免多重缓冲，即应用 **SW-C** 的 `RunnableEntity` 或 **BSW** 模块（例如 **DCM**）的 `ExecutableEntity` 可以直接访问 **RAM Block** 上的 `VariableDataPrototype`。为保证这一行为，必须满足以下前提条件之一：
 
 * **RAM Block** 上的 `VariableDataPrototype` 只被 `dataReadAccess` 访问；
 * **RAM Block** 上的 `VariableDataPrototype` 被 `dataReadAccess` 和 `dataWriteAccess` 访问，且写访问之间、或写与读访问之间没有相互抢占，包括 `Rte_SetMirror` 和 `Rte_GetMirror` 造成的抢占；
 * 未应用需要数据转换的 `PortInterfaceMapping`。
 
-关于一致性需求的更多内容见 6.2.3.1.5.1 节。
+关于一致性需求的更多内容见 [6.2.3.1.5.1](#623151-隐式) 节。
 
 **RTE** 生成器应拒绝这样的配置：某个由 `NvDataInterface` 类型化的 r-port 未连接，且没有为该 `NvDataInterface` 的每个 `VariableDataPrototype` 提供带 `initValue` 的 `NvRequireComSpec`。如果该 r-port 属于某个 `NvBlockSwComponentType`，则本规定不适用。
 
@@ -4650,21 +4650,21 @@ NvBlock `SwComponentPrototype` 的代码由 **RTE** 生成器实现。`NvBlockSw
 
 如果 `NvBlockNeeds.storeOnChange` 特性设置为 true，则为某个 `NvBlockDescriptor` 启用变化时写入策略。
 
-如果使用带 `NvDataInterface` 的 `PortPrototype` 的原子组件类型调用显式 **API** `Rte_Write`，且 `NvBlockDescriptor.supportDirtyFlag` 特性设置为 true、且关机写入策略（`storeAtShutDown`）已启用，则 **RTE** 应通过调用 **NvM** 模块的 `NvM_SetRamBlockStatus` 函数（`BlockChanged` 参数设置为 true）把相关 **RAM Block** 标记为 CHANGED。**RTE** 应在 `Rte_Write` 函数所访问的数据写回 **RAM Block** 之后调用 `NvM_SetRamBlockStatus` 函数。
+如果使用带 `NvDataInterface` 的 `PortPrototype` 的原子组件类型调用显式 **API** `[Rte_Write](#7164-rte_write)`，且 `NvBlockDescriptor.supportDirtyFlag` 特性设置为 true、且关机写入策略（`storeAtShutDown`）已启用，则 **RTE** 应通过调用 **NvM** 模块的 `NvM_SetRamBlockStatus` 函数（`BlockChanged` 参数设置为 true）把相关 **RAM Block** 标记为 CHANGED。**RTE** 应在 `[Rte_Write](#7164-rte_write)` 函数所访问的数据写回 **RAM Block** 之后调用 `NvM_SetRamBlockStatus` 函数。
 
-如果使用带 `NvDataInterface` 的 `PortPrototype` 的原子组件类型调用隐式 **API** `Rte_IWrite`/`Rte_IWriteRef`，且 `NvBlockDescriptor.supportDirtyFlag` 特性设置为 true、且关机写入策略（`storeAtShutDown`）已启用，则 **RTE** 应通过调用 **NvM** 模块的 `NvM_SetRamBlockStatus` 函数（`BlockChanged` 参数设置为 true）把相关 **RAM Block** 标记为 CHANGED。**RTE** 应在 `Rte_IWrite`/`Rte_IWriteRef` 函数所访问的数据从抢占区缓冲区写回 **RAM Block** 之后调用 `NvM_SetRamBlockStatus` 函数。
+如果使用带 `NvDataInterface` 的 `PortPrototype` 的原子组件类型调用隐式 **API** `[Rte_IWrite](#71620-rte_iwrite)`/`[Rte_IWriteRef](#71621-rte_iwriteref)`，且 `NvBlockDescriptor.supportDirtyFlag` 特性设置为 true、且关机写入策略（`storeAtShutDown`）已启用，则 **RTE** 应通过调用 **NvM** 模块的 `NvM_SetRamBlockStatus` 函数（`BlockChanged` 参数设置为 true）把相关 **RAM Block** 标记为 CHANGED。**RTE** 应在 `[Rte_IWrite](#71620-rte_iwrite)`/`[Rte_IWriteRef](#71621-rte_iwriteref)` 函数所访问的数据从抢占区缓冲区写回 **RAM Block** 之后调用 `NvM_SetRamBlockStatus` 函数。
 
-如果使用带 `NvDataInterface` 的 `PortPrototype` 的原子组件类型调用显式 **API** `Rte_Write`，且该特性设置为 true、且周期写入策略（`storeCyclic`）已启用，则 **RTE** 应在 `Rte_Write` 函数所访问的数据写回 **RAM Block** 之后，在某个周期性活动的下一个周期中调用 **NvM** 模块的 `NvM_WritePRAMBlock` 函数，把相关 **RAM Block** 写入 NV 内存。该周期性活动应在某个 `NvBlockDescriptor` 的 `RunnableEntity` 上下文中实现（见下文 NvBlock 可运行实体的实现规定），周期为 `NvBlockDescriptor.timingEvent.period` 特性定义的周期。
+如果使用带 `NvDataInterface` 的 `PortPrototype` 的原子组件类型调用显式 **API** `[Rte_Write](#7164-rte_write)`，且该特性设置为 true、且周期写入策略（`storeCyclic`）已启用，则 **RTE** 应在 `[Rte_Write](#7164-rte_write)` 函数所访问的数据写回 **RAM Block** 之后，在某个周期性活动的下一个周期中调用 **NvM** 模块的 `NvM_WritePRAMBlock` 函数，把相关 **RAM Block** 写入 NV 内存。该周期性活动应在某个 `NvBlockDescriptor` 的 `RunnableEntity` 上下文中实现（见下文 NvBlock 可运行实体的实现规定），周期为 `NvBlockDescriptor.timingEvent.period` 特性定义的周期。
 
-如果使用带 `NvDataInterface` 的 `PortPrototype` 的原子组件类型调用隐式 **API** `Rte_IWrite`/`Rte_IWriteRef`，且 `NvBlockDescriptor.supportDirtyFlag` 特性设置为 true、且周期写入策略（`storeCyclic`）已启用，则 **RTE** 应在 `Rte_IWrite`/`Rte_IWriteRef` 函数所访问的数据从抢占区缓冲区写回 **RAM Block** 之后，在某个周期性活动的周期中调用 **NvM** 模块的 `NvM_WritePRAMBlock` 函数，把相关 **RAM Block** 写入 NV 内存。该周期性活动应在某个 `NvBlockDescriptor` 的 `RunnableEntity` 上下文中实现（见下文），周期为 `NvBlockDescriptor.timingEvent.period` 特性定义的周期。
+如果使用带 `NvDataInterface` 的 `PortPrototype` 的原子组件类型调用隐式 **API** `[Rte_IWrite](#71620-rte_iwrite)`/`[Rte_IWriteRef](#71621-rte_iwriteref)`，且 `NvBlockDescriptor.supportDirtyFlag` 特性设置为 true、且周期写入策略（`storeCyclic`）已启用，则 **RTE** 应在 `[Rte_IWrite](#71620-rte_iwrite)`/`[Rte_IWriteRef](#71621-rte_iwriteref)` 函数所访问的数据从抢占区缓冲区写回 **RAM Block** 之后，在某个周期性活动的周期中调用 **NvM** 模块的 `NvM_WritePRAMBlock` 函数，把相关 **RAM Block** 写入 NV 内存。该周期性活动应在某个 `NvBlockDescriptor` 的 `RunnableEntity` 上下文中实现（见下文），周期为 `NvBlockDescriptor.timingEvent.period` 特性定义的周期。
 
-如果使用带 `NvDataInterface` 的 `PortPrototype` 的原子组件类型调用显式 **API** `Rte_Write`，且 `NvBlockDescriptor.supportDirtyFlag` 特性设置为 true、且立即写入策略（`storeImmediate`）已启用，则 **RTE** 应通过调用 **NvM** 模块的 `NvM_WritePRAMBlock` 函数把相关 **RAM Block** 写入 NV 内存。`NvM_WritePRAMBlock` 函数应在某个 `NvBlockDescriptor` 的 `RunnableEntity` 上下文中调用（见下文），时机是在 `Rte_Write` 函数所访问的数据写回 **RAM Block** 之后。
+如果使用带 `NvDataInterface` 的 `PortPrototype` 的原子组件类型调用显式 **API** `[Rte_Write](#7164-rte_write)`，且 `NvBlockDescriptor.supportDirtyFlag` 特性设置为 true、且立即写入策略（`storeImmediate`）已启用，则 **RTE** 应通过调用 **NvM** 模块的 `NvM_WritePRAMBlock` 函数把相关 **RAM Block** 写入 NV 内存。`NvM_WritePRAMBlock` 函数应在某个 `NvBlockDescriptor` 的 `RunnableEntity` 上下文中调用（见下文），时机是在 `[Rte_Write](#7164-rte_write)` 函数所访问的数据写回 **RAM Block** 之后。
 
-如果使用带 `NvDataInterface` 的 `PortPrototype` 的原子组件类型调用隐式 **API** `Rte_IWrite`/`Rte_IWriteRef`，且 `NvBlockDescriptor.supportDirtyFlag` 特性设置为 true、且立即写入策略（`storeImmediate`）已启用，则 **RTE** 应通过调用 **NvM** 模块的 `NvM_WritePRAMBlock` 函数把相关 **RAM Block** 写入 NV 内存。`NvM_WritePRAMBlock` 函数应在某个 `NvBlockDescriptor` 的 `RunnableEntity` 上下文中调用（见下文），时机是在 `Rte_IWrite`/`Rte_IWriteRef` 函数所访问的数据从抢占区缓冲区写回 **RAM Block** 之后。
+如果使用带 `NvDataInterface` 的 `PortPrototype` 的原子组件类型调用隐式 **API** `[Rte_IWrite](#71620-rte_iwrite)`/`[Rte_IWriteRef](#71621-rte_iwriteref)`，且 `NvBlockDescriptor.supportDirtyFlag` 特性设置为 true、且立即写入策略（`storeImmediate`）已启用，则 **RTE** 应通过调用 **NvM** 模块的 `NvM_WritePRAMBlock` 函数把相关 **RAM Block** 写入 NV 内存。`NvM_WritePRAMBlock` 函数应在某个 `NvBlockDescriptor` 的 `RunnableEntity` 上下文中调用（见下文），时机是在 `[Rte_IWrite](#71620-rte_iwrite)`/`[Rte_IWriteRef](#71621-rte_iwriteref)` 函数所访问的数据从抢占区缓冲区写回 **RAM Block** 之后。
 
-当使用带 `NvDataInterface` 的 `PortPrototype` 的原子组件类型调用隐式 **API** `Rte_IWrite`/`Rte_IWriteRef`、且 `NvBlockDescriptor.supportDirtyFlag` 特性设置为 true、且变化时写入策略（`storeOnChange`）已启用时，如果通过 `Rte_IWrite`/`Rte_IWriteRef` **API** 写入的值与相关 **RAM Block** 中当前存储的值不同，则 **RTE** 应通过调用 **NvM** 模块的 `NvM_WritePRAMBlock` 函数把相关 **RAM Block** 写入 NV 内存。`NvM_WritePRAMBlock` 函数应在某个 `NvBlockDescriptor` 的 `RunnableEntity` 上下文中调用（见下文），时机是在 `Rte_IWrite`/`Rte_IWriteRef` 函数所访问的数据从抢占区缓冲区写回 **RAM Block** 之后。
+当使用带 `NvDataInterface` 的 `PortPrototype` 的原子组件类型调用隐式 **API** `[Rte_IWrite](#71620-rte_iwrite)`/`[Rte_IWriteRef](#71621-rte_iwriteref)`、且 `NvBlockDescriptor.supportDirtyFlag` 特性设置为 true、且变化时写入策略（`storeOnChange`）已启用时，如果通过 `[Rte_IWrite](#71620-rte_iwrite)`/`[Rte_IWriteRef](#71621-rte_iwriteref)` **API** 写入的值与相关 **RAM Block** 中当前存储的值不同，则 **RTE** 应通过调用 **NvM** 模块的 `NvM_WritePRAMBlock` 函数把相关 **RAM Block** 写入 NV 内存。`NvM_WritePRAMBlock` 函数应在某个 `NvBlockDescriptor` 的 `RunnableEntity` 上下文中调用（见下文），时机是在 `[Rte_IWrite](#71620-rte_iwrite)`/`[Rte_IWriteRef](#71621-rte_iwriteref)` 函数所访问的数据从抢占区缓冲区写回 **RAM Block** 之后。
 
-当使用带 `NvDataInterface` 的 `PortPrototype` 的原子组件类型调用显式 **API** `Rte_Write`、且 `NvBlockDescriptor.supportDirtyFlag` 特性设置为 true、且变化时写入策略（`storeOnChange`）已启用时，如果通过 `Rte_Write` **API** 写入的值与相关 **RAM Block** 中当前存储的值不同，则 **RTE** 应通过调用 **NvM** 模块的 `NvM_WritePRAMBlock` 函数把相关 **RAM Block** 写入 NV 内存。`NvM_WritePRAMBlock` 函数应在某个 `NvBlockDescriptor` 的 `RunnableEntity` 上下文中调用（见下文），时机是在 `Rte_Write` 函数所访问的数据写回 **RAM Block** 之后。
+当使用带 `NvDataInterface` 的 `PortPrototype` 的原子组件类型调用显式 **API** `[Rte_Write](#7164-rte_write)`、且 `NvBlockDescriptor.supportDirtyFlag` 特性设置为 true、且变化时写入策略（`storeOnChange`）已启用时，如果通过 `[Rte_Write](#7164-rte_write)` **API** 写入的值与相关 **RAM Block** 中当前存储的值不同，则 **RTE** 应通过调用 **NvM** 模块的 `NvM_WritePRAMBlock` 函数把相关 **RAM Block** 写入 NV 内存。`NvM_WritePRAMBlock` 函数应在某个 `NvBlockDescriptor` 的 `RunnableEntity` 上下文中调用（见下文），时机是在 `[Rte_Write](#7164-rte_write)` 函数所访问的数据写回 **RAM Block** 之后。
 
 **注意：** 从 **NVM** 模块接收的通知（例如 `NvMNotifyJobFinished`）不会由脏标志机制转发给 **SW-C**。如果某个 **SW-C** 需要获知 **NvM** 作业结果，可以使用标准化的 **NvM** 客户端-服务器接口（见 6.2.2.10.3.3 节）。
 
@@ -4674,9 +4674,9 @@ NvBlock `SwComponentPrototype` 的代码由 **RTE** 生成器实现。`NvBlockSw
 
 与 `SenderReceiverInterface` 一样，这些 `NvDataInterface` 中的每一个都可以提供对多个 `VariableDataPrototype` 的访问。
 
-访问这些 `VariableDataPrototype` 使用的 `Rte_Read`、`Rte_IRead` 或 `Rte_DRead` **API** 与 `SenderReceiverInterface` 相同。
+访问这些 `VariableDataPrototype` 使用的 `[Rte_Read](#71610-rte_read)`、`[Rte_IRead](#71618-rte_iread)` 或 `[Rte_DRead](#71611-rte_dread)` **API** 与 `SenderReceiverInterface` 相同。
 
-由于使用隐式 **API** `Rte_IRead`，可以直接访问 flash 块。
+由于使用隐式 **API** `[Rte_IRead](#71618-rte_iread)`，可以直接访问 flash 块。
 
 **RTE** 应为每个 `BulkNvDataDescriptor` 在 **BndM** 模块中创建一个 `BndMBlockDescriptor`。相应的 `BlockId` 值应用于 **BndM API** 函数的调用。
 
@@ -4684,7 +4684,7 @@ NvBlock `SwComponentPrototype` 的代码由 **RTE** 生成器实现。`NvBlockSw
 
 **6.2.2.10.3.3 NVM 接口**
 
-`NvBlockSwComponentType` 还可以拥有用于 NV 数据管理、并由从 **NVRAM** 管理器[22]标准化接口派生的客户端-服务器接口类型化的端口。注意这些端口应始终具有 `isService` 特性为 FALSE 的 `PortInterface`。这些接口的蓝图定义见文档 MOD_GeneralBlueprints[23] 的 `ARPackage` `AUTOSAR/NvBlockSoftwareComponentType/ClientServerInterfaces_Blueprint`。
+`NvBlockSwComponentType` 还可以拥有用于 NV 数据管理、并由从 **NVRAM** 管理器[\[22\]](#ref-22)标准化接口派生的客户端-服务器接口类型化的端口。注意这些端口应始终具有 `isService` 特性为 FALSE 的 `PortInterface`。这些接口的蓝图定义见文档 MOD_GeneralBlueprints[\[23\]](#ref-23) 的 `ARPackage` `AUTOSAR/NvBlockSoftwareComponentType/ClientServerInterfaces_Blueprint`。
 
 标准化的 **NvM** 客户端-服务器接口的组成如下：
 
@@ -4704,7 +4704,7 @@ NvBlock `SwComponentPrototype` 的代码由 **RTE** 生成器实现。`NvBlockSw
 
 该接口用于向 **NVM** 下达一些管理操作。`NvBlockSwComponentType` 提供一个服务器端口，供该 `NvBlockSwComponentType` 的 **SW-C** 用户使用。
 
-对拥有 **NvM** 服务端口的 `NvBlockSwComponentType` 的实现，**RTE** 必须调用 **NvM** 的 **API**。为了访问 **NvM API**，必须包含 `NvM.h` 文件（见 6.2.2.10.1 节）。
+对拥有 **NvM** 服务端口的 `NvBlockSwComponentType` 的实现，**RTE** 必须调用 **NvM** 的 **API**。为了访问 **NvM API**，必须包含 `NvM.h` 文件（见 [6.2.2.10.1](#622101-概述) 节）。
 
 **注意：** 未对 **NVM** 接口添加任何限制。但 **NVM** 的某些操作可能需要 `NvBlockSwComponentType` 的不同用户之间协作。例如，`ReadBlock` 操作会覆盖 **RAM Block**，这可能影响多个 **SW-C**。
 
@@ -4726,7 +4726,7 @@ NvBlock `SwComponentPrototype` 的代码由 **RTE** 生成器实现。`NvBlockSw
 
 **RTE** 所调用 **NvM API** `NvM_WriteBlock` 和 `NvM_SetRAMBlockStatus` 的返回值应被忽略。
 
-由 `NvBlockSwComponentType` 的 `OperationInvokedEvent` 触发的 `RunnableEntity` 的 `symbol` 特性，应被 **RTE** 生成器用来标识要调用的 **NvM API** 函数（参见软件组件模板[2]中的 `[constr_1234]`）。
+由 `NvBlockSwComponentType` 的 `OperationInvokedEvent` 触发的 `RunnableEntity` 的 `symbol` 特性，应被 **RTE** 生成器用来标识要调用的 **NvM API** 函数（参见软件组件模板[\[2\]](#ref-2)中的 `[constr_1234]`）。
 
 `NvBlockSwComponentType` 可以定义 `PortDefinedArgumentValue`，以便在该 `NvBlockSwComponentType` 定义了用于调用 **NvM** 服务的服务器端口时提供 `BlockId` 值。直到 R4.2 这都是提供 `BlockId` 值的唯一可能。但这些值不再是强制的，已被 `RteNvRamAllocation` 的配置取代，见下述两条。
 
@@ -4743,7 +4743,7 @@ NvBlock `SwComponentPrototype` 的代码由 **RTE** 生成器实现。`NvBlockSw
 
 除了通过 **NvM** 服务端口把 **SW-C** 侧的请求转发给 **NVM** 模块之外，`NvBlockSwComponentType` 还支持 6.2.2.10.3.1 节所述的脏标志机制。为了实现脏标志机制的行为，**RTE** 为每个 `NvBlockDescriptor` 实现 `RunnableEntity`，这些实体可由 `RTEEvent` 触发。根据写入策略的不同，将使用不同种类的 `RTEEvent` 来触发这些 `RunnableEntity`。
 
-`NvBlockSwComponentType` 的配置（即为触发 `NvBlockDescriptor` 的 `RunnableEntity` 而定义 `RTEEvent`，以及 `RTEEvent` 到任务的映射）通常不是 **SW-C** 开发人员的职责。因此 **SW-C** 开发人员可以在 `SwcServiceDependency` 的 `serviceNeeds` 中提供所需的写入策略，使用特性 `storeAtShutdown`、`storeCyclic`、`cyclicWritingPeriod`、`storeEmergency`、`storeImmediate` 和 `storeOnChange`（更多细节见软件组件模板[2]）。
+`NvBlockSwComponentType` 的配置（即为触发 `NvBlockDescriptor` 的 `RunnableEntity` 而定义 `RTEEvent`，以及 `RTEEvent` 到任务的映射）通常不是 **SW-C** 开发人员的职责。因此 **SW-C** 开发人员可以在 `SwcServiceDependency` 的 `serviceNeeds` 中提供所需的写入策略，使用特性 `storeAtShutdown`、`storeCyclic`、`cyclicWritingPeriod`、`storeEmergency`、`storeImmediate` 和 `storeOnChange`（更多细节见软件组件模板[\[2\]](#ref-2)）。
 
 **RTE** 生成器应为 `NvBlockSwComponentType` 的每个 `supportDirtyFlag` 特性设置为 true 的 `NvBlockDescriptor` 实现 `RunnableEntity`。
 
@@ -4755,7 +4755,7 @@ NvBlock `SwComponentPrototype` 的代码由 **RTE** 生成器实现。`NvBlockSw
 
 对于需要组合多种写入策略的 `NvBlockDescriptor`（见周期、关机、立即写入策略规定），该 `NvBlockDescriptor` 的 `RunnableEntity` 应按每种写入策略分别由一个 `TimingEvent` 或 `DataReceivedEvent` 激活，遵循上述两条的规定。
 
-如果没有为负责激活 `NvBlockDescriptor` 之 `RunnableEntity` 的 `DataReceivedEvent` 或 `SwcModeSwitchEvent` 定义 `RteEventToTaskMapping`（见上述激活规定），则相应的活动应在发出这些 `DataReceivedEvent` 或 `SwcModeSwitchEvent` 的 **RTE** 代码中处理。对显式通信，这应在相关的 `Rte_Write` 函数中完成；对隐式通信，在处理抢占缓冲区的任务体中完成。对使用异步模式切换过程的 `SwcModeSwitchEvent`，这应在相关的 `Rte_Switch` 函数中完成。
+如果没有为负责激活 `NvBlockDescriptor` 之 `RunnableEntity` 的 `DataReceivedEvent` 或 `SwcModeSwitchEvent` 定义 `RteEventToTaskMapping`（见上述激活规定），则相应的活动应在发出这些 `DataReceivedEvent` 或 `SwcModeSwitchEvent` 的 **RTE** 代码中处理。对显式通信，这应在相关的 `[Rte_Write](#7164-rte_write)` 函数中完成；对隐式通信，在处理抢占缓冲区的任务体中完成。对使用异步模式切换过程的 `SwcModeSwitchEvent`，这应在相关的 `[Rte_Switch](#7166-rte_switch)` 函数中完成。
 
 **注意：** 对 `SwcModeSwitchEvent` 而言，直接调用要求异步模式切换。
 
@@ -4763,9 +4763,5005 @@ NvBlock `SwComponentPrototype` 的代码由 **RTE** 生成器实现。`NvBlockSw
 
 `NvBlockSwComponentType` 中包含的 `VariableDataPrototype` 在 **SW-C** 读取值或写入新值时被访问。在 **NVM** 为相关块处理读或写请求时，它也会访问该原型。
 
-**NVM** 不直接访问 `VariableDataPrototype`，而应使用 7.1.9.3 节规定的 `Rte_GetMirror` 和 `Rte_SetMirror` **API**。
+**NVM** 不直接访问 `VariableDataPrototype`，而应使用 [7.1.9.3](#7193-nvm-服务回调) 节规定的 `Rte_GetMirror` 和 `Rte_SetMirror` **API**。
 
-**RTE** 必须用 6.2.2.6 节定义的任何数据一致性机制保证这些 `VariableDataPrototype` 的数据一致性。根据用户的输入，使用隐式 **API** 的高效调度应允许低资源（**OS** 资源、**RAM** 和代码）的实现。
+**RTE** 必须用 [6.2.2.6](#6226-数据一致性) 节定义的任何数据一致性机制保证这些 `VariableDataPrototype` 的数据一致性。根据用户的输入，使用隐式 **API** 的高效调度应允许低资源（**OS** 资源、**RAM** 和代码）的实现。
+
+### 6.2.3. 通信范式
+
+**AUTOSAR** 支持两种基本通信范式：客户端-服务器（**Client-Server**）和发送方-接收方（**Sender-Receiver**）。**AUTOSAR** 软件组件通过定义良好的端口进行通信，其行为由属性静态定义。部分属性在建模层面定义，另一些属性则与网络拓扑密切相关，必须在实现层面定义。
+
+**RTE** 提供这些通信范式的实现。对于 **ECU** 间通信，**RTE** 使用 **COM** 提供的功能。对于分区间通信（同一 **ECU** 内），**RTE** 可以使用 **IOC** 模块提供的功能。对于分区内通信，**RTE** 自行提供该功能。
+
+两种通信范式都可以与数据转换（在 [6.2.10](#6210-数据转换) 节中描述）结合使用。
+
+对于发送方-接收方通信，存在两种主要原则：数据分布（**Data Distribution**）与事件分布（**Event Distribution**）。当数据被分布时，最后接收到的值是所关注的（last-is-best 语义）。当事件被分布时，接收到的全部事件历史都是所关注的，因此它们必须在接收方排队。因此，软件实现策略可以是排队的（**queued**）或非排队的（**non-queued**）。这由 `SwDataDefProps` 的 `swImplPolicy` 属性声明，该属性可以取值 `queued`（对应于带队列的事件分布）或 `standard`（对应于 last-is-best 数据分布）。如果数据元素具有事件语义，则 `swImplPolicy` 被设置为 `queued`。该属性的其他可能取值对应于数据语义。
+
+**RTE** 生成器应拒绝这样的配置：某个 r-port 经由 `AssemblySwConnector` 连接到另一个 r-port，或某个 p-port 经由 `AssemblySwConnector` 连接到另一个 p-port。
+
+例如，由 **AUTOSAR** 发送方-接收方接口定义类型的组件的需求端口（**r-port**）可以读取该接口的数据元素；由 **AUTOSAR** 发送方-接收方接口定义类型的组件的提供端口（**p-port**）可以写入该接口的数据元素。
+
+**RTE** 生成器应拒绝违反 [constr_1032] 的配置，即某个 r-port 经由 `DelegationSwConnector` 连接到一个 p-port，或某个 p-port 经由 `DelegationSwConnector` 连接到一个 r-port。
+
+在功能依赖于 **ComSpec** 属性的情形下，**RTE** 生成器应只考虑在 `AtomicSwComponentType` 或 `ParameterSwComponentType` 上下文中定义的 **ComSpec**。
+
+#### 6.2.3.1. 发送方-接收方
+
+##### 6.2.3.1.1. 概述
+
+发送方-接收方通信涉及由一个组件发送、由一个或多个组件接收的、由原子数据元素构成的信号的传输与接收。发送方-接收方接口可以包含多个数据元素。发送方-接收方通信是单向的——接收方发出的任何应答都作为独立的发送方-接收方通信发送。
+
+由 **AUTOSAR** 发送方-接收方接口定义类型的组件的需求端口（**r-port**）可以读取该接口的数据元素；由 **AUTOSAR** 发送方-接收方接口定义类型的组件的提供端口（**p-port**）可以写入该接口的数据元素。
+
+##### 6.2.3.1.2. 接收模式
+
+**RTE** 支持多种将数据传递给接收方的接收模式。四种可能的接收模式是：
+
+* "隐式数据读访问"（**implicit data read access**）——当接收方的可运行实体执行时，它应能访问在可运行实体执行期间保持不变的该数据的一个"副本"。
+
+**RTE** 应通过副本（**copy**）的语义使接收数据对可运行实体可用，用于以隐式数据读访问指定的数据元素。
+
+对于以隐式数据读访问指定的数据元素，接收数据在可运行实体执行期间不得改变。
+
+当使用"隐式数据读访问"时，**RTE** 需要将数据作为"副本"提供。并不一定要求为每个可运行实体使用唯一的副本。因此，**RTE** 可以为每个可运行实体使用数据的一个唯一副本，或者，如果多个可运行实体（甚至来自不同组件）需要相同的数据，可以在这些可运行实体之间共享同一个副本。仅当调度结构能够确保数据内容受到保护、不被任何其他方修改时，可运行实体才能共享同一数据的副本。
+
+**RTE** 应在关联的可运行实体被调用之前读取以隐式数据读访问指定的数据元素。
+
+复合数据类型的处理方式与基本数据类型相同，即 **RTE** 应为 `RunnableEntity` 提供一个可用的"副本"。
+
+"隐式数据读访问"接收模式应对所有类别的可运行实体（即 1A、1B 和 2 类）有效。
+
+* "显式数据读访问"（**explicit data read access**）——**RTE** 生成器创建一个非阻塞 **API** 调用，使接收方能够轮询（并读取）数据。该接收模式是一种"显式"模式，因为接收方会调用一个显式 **API** 调用。
+
+显式"数据读访问"接收模式仅对 1B 或 2 类可运行实体有效。
+
+* "等待点唤醒"（**wake up of wait point**）——**RTE** 生成器创建一个阻塞 **API** 调用，接收方调用该调用以读取数据。
+
+"等待点唤醒"接收模式应支持超时，以在没有数据可用时防止无限阻塞。
+
+"等待点唤醒"接收模式本质上仅对 2 类可运行实体有效。
+
+由于实现可能需要在没有数据可用时挂起调用者的执行，因此需要一个 2 类可运行实体。
+
+* "可运行实体激活"（**activation of runnable entity**）——只要新数据可用，**RTE** 就会自动调用接收方的可运行实体。为访问新数据，该可运行实体必须使用"隐式数据读访问"或"显式数据读访问"，即根据输入配置调用 `[Rte_IRead](#71618-rte_iread)`、`[Rte_Read](#71610-rte_read)`、`[Rte_DRead](#71611-rte_dread)` 或 `[Rte_Receive](#71612-rte_receive)` 调用。该接收模式与"隐式数据读访问"的不同之处在于：接收方是由 **RTE** 响应 `DataReceivedEvent` 而调用的。
+
+"可运行实体激活"接收模式应对 1A、1B 和 2 类可运行实体有效。
+
+接收模式与不同类别可运行实体结合使用的有效性总结在表 4.10 中。
+
+表 4.10：接收模式的有效性
+
+| 接收模式 | 1 类 A | 1 类 B | 2 类 |
+| --- | --- | --- | --- |
+| 隐式数据读访问 | 是 | 是 | 是 |
+| 显式数据读访问 | 否 | 是 | 是 |
+| 等待点唤醒 | 否 | 否 | 是 |
+| 可运行实体激活 | 是 | 是 | 是 |
+
+可运行实体的类别并不是其固有属性，而是由可运行实体的特性决定的。因此，显式 **API** 调用的存在使可运行实体至少是 1B 类，而 `WaitPoint` 的存在则强制可运行实体为 2 类。
+
+###### 6.2.3.1.2.1. 适用性
+
+不同的接收模式不仅用于发送方-接收方通信中的接收方。相同的语义也应用于以下情形：
+
+* 发送成功反馈（**Success feedback**）——用于向组件返回传输确认的机制。见 7.1.2.6.9 节。
+* 异步客户端-服务器结果（**Asynchronous client-server result**）——用于向组件返回异步客户端-服务器调用结果的机制。见 7.1.7.5.4 节。
+
+###### 6.2.3.1.2.2. 在软件组件模板中的表示
+
+以下列表可作为 **RTE** 生成器如何从其输入中确定接收模式的参考。请注意，本小节中对 `VariableDataPrototype` 的引用隐含地表示"正在为其生成 **API** 的那个 `VariableDataPrototype`"。
+
+* "等待点唤醒"——`dataReceivePointByValue` 或 `dataReceivePointByArgument` 角色中的 `VariableAccess` 引用一个 `VariableDataPrototype`，并且一个 `WaitPoint` 引用一个 `DataReceivedEvent`，该事件又引用同一个 `VariableDataPrototype`。
+* "可运行实体激活"——一个 `DataReceivedEvent` 引用该 `VariableDataPrototype` 以及数据接收时要启动的可运行实体。
+* "显式数据读访问"——`dataReceivePointByValue` 或 `dataReceivePointByArgument` 角色中的 `VariableAccess` 引用该 `VariableDataPrototype`。
+* "隐式数据读访问"——`dataReadAccess` 角色中的 `VariableAccess` 引用该 `VariableDataPrototype`。
+
+某些访问方式是可以组合的；例如"可运行实体激活"可以与"显式"或"隐式"数据读访问组合（事实上，这两种配对之一是让 **API** 生成真正产生读取该数据的代码所必需的），但如果"可运行实体激活"与"等待点唤醒"组合（即一个 `WaitPoint` 引用一个引用了可运行实体的 `DataReceivedEvent`），则属于输入错误。同时指定隐式和显式数据读访问也是可能的。
+
+"隐式数据读访问"和"显式数据读访问"语义的细节见 [6.2.3.1.5](#62315-隐式与显式数据接收和发送) 节。
+
+##### 6.2.3.1.3. 多个数据元素
+
+发送方-接收方接口可以包含一个或多个数据元素。各元素的发送与接收是相互独立的——每个数据元素（例如 **AUTOSAR** 信号）都可以被视为在"提供"端口与"需求"端口之间形成一条独立的逻辑数据通道。
+
+发送方-接收方接口中的每个数据元素应被单独发送。
+
+**示例 4.7**：考虑一个具有两个数据元素 `speed` 和 `freq` 的接口，且某个组件模板定义了一个由该接口定义类型的提供端口。**RTE** 生成器随后将创建两个 **API** 调用：一个用于发送 `speed`，另一个用于发送 `freq`。
+
+在多个数据元素必须同时发送的情况下，应将它们组合成一个复合数据结构（见 [6.2.3.1.11.1](#6231111-ecu-间映射) 节）。发送方随后创建该数据结构的一个实例，在调用 **RTE** 发送数据之前用所需的数据填充它。
+
+###### 6.2.3.1.3.1. 初始值
+
+对于以数据语义指定的接口中的每个数据元素，**RTE** 应支持 `initValue` 属性。
+
+`initValue` 属性用于确保 **AUTOSAR** 软件组件始终访问有效数据，即使尚未接收到任何值。**ECU** 间、分区间和分区内通信都需要该信息。对于 **ECU** 间通信，初始值可以由 **COM** 处理；但对于 **ECU** 内通信，**RTE** 必须保证 `initValue` 得到处理。
+
+一般而言，对每个具有数据语义的数据元素原型都必须规定 `initValue`，见 **SWS_Rte_07642**。如果所有发送方和接收方都位于同一分区内，则该限制放宽，见 **SWS_Rte_04501**。
+
+另请注意：在 1:N 通信的情况下，可以为每个 `VariableDataPrototype` 分配不同的 `initValue`。但这会导致资源开销，因为 **RTE** 需要为每个已配置的 `initValue` 分配一个缓冲区。
+
+**RTE** 应使用任何已规定的初始值来防止接收方基于无效（即未初始化的）值进行计算，前提是 `swImplPolicy` 不是 `queued`，并且 **SWS_Rte_07046** 中的一般初始化条件得到满足。
+
+上述要求确保 **RTE API** 调用在接收到"真实"值（可能经由通信服务）之前返回已初始化的值。当使用"事件"语义时该要求不适用，因为接收到事件数据时隐含的状态改变意味着接收方不会开始处理无效数据，因而永远不会看到已初始化的值。
+
+并不强制要求用户提供发送方/接收方通信的初始值。但是，如果不存在初始值，则在第一次通信发生之前返回给接收方的值是未定义的。
+
+当实现策略设置为 `queued` 时，不能规定初始值。
+
+对发送方而言，**RTE** 不直接使用初始值（因为 **AUTOSAR SW-C** 必须使用 `[Rte_Send](#7165-rte_send)` 提供一个值），但配置通信服务时可能需要它——例如，如果多个信号映射到同一个帧，且通信服务在应用发送任何一个所包含的信号时发送整个帧，则可能发送一个未初始化的信号。注意，配置通信服务不是 **RTE** 生成器的职责。
+
+允许只为发送方或接收方之一规定初始值。在这种情况下，通信双方使用相同的初始值。
+
+如果在同一分区的上下文中，发送方规定了初始值而接收方没有（或反之），则通信双方使用相同的初始值。
+
+请注意：当 **SWS_Rte_04501** 与数据转换（6.2.3.7 节）结合适用时，接收方的初始值需要从发送方的表示转换得到。
+
+也允许发送方和接收方都规定初始值。在这种情况下，**RTE** 生成器使用接收方的初始值用于通信双方。
+
+如果在同一分区的上下文中接收方和发送方都规定了初始值，则以接收方的规定为准。
+
+当为启用了转换的发送方/接收方通信提供了初始值时，如果在调用相关接收 **API** 时尚未接收到任何数据，则应按规定返回已配置的初始值，而不将其通过已配置的转换器链。
+
+##### 6.2.3.1.4. 多个接收方和发送方
+
+发送方-接收方通信不限于单个发送方与单个接收方之间的通信连接。相反，发送方-接收方通信连接可以具有多个发送方（"n:1"通信）或多个接收方（"1:m"通信），其限制是模式切换通知（**mode switch notification**）不允许有多个发送方，见元模型限制 **SWS_Rte_02670**。
+
+**RTE** 不对发送方施加任何协调——发送方的行为独立于其他发送方的行为。例如，考虑两个发送方 A 和 B 都向同一个接收方发送数据（即"n:1"通信）。任一发送方可以在任何时刻发送，并且不要求发送方协调其发送。虽然 **RTE** 不对发送方施加任何协调，但它确保同时的发送不会相互冲突。
+
+与 **RTE** 不对发送方施加协调一样，对接收方也不施加协调。例如，考虑两个接收方 P 和 Q 都接收由单个发送方发送的同一数据（即"1:m"通信）。**RTE** 不保证多个接收方同时看到该数据，即使所有接收方都在同一 **ECU** 上。
+##### 6.2.3.1.5. 隐式与显式数据接收和发送
+
+**RTE** 应支持"显式"与"隐式"的数据接收和发送。
+
+隐式数据访问发送意味着可运行实体不主动发起数据的接收或发送。相反，所需数据在可运行实体启动时被自动接收，并且最早在其终止时才可供其他可运行实体使用。
+
+显式数据接收和发送意味着可运行实体使用显式 **API** 调用来发送或接收某些数据元素。根据可运行实体的类别和相关端口的配置，这些 **API** 调用可以是阻塞的或非阻塞的。
+
+###### 6.2.3.1.5.1. 隐式
+
+**隐式读**
+
+对于数据的隐式读取，即聚合了 `dataReadAccess` 角色中 `VariableAccess` 的情形，数据在可运行实体启动时通过副本操作的语义变为可用，并且 **RTE** 确保该"副本"在可运行实体终止之前不会被修改。
+
+如果该数据元素需要执行数据转换，则数据转换在从 **Com** 栈接收到数据之后、可运行实体开始执行之前进行。（见 **SWS_Rte_08570**、**SWS_Rte_08108**）
+
+当可运行实体 R 启动时，**RTE** 读取 `dataReadAccess` 角色中 `VariableAccess` 所引用的所有 `VariableDataPrototype`；如果这些数据元素可能被其他可运行实体改变，则创建一个可供可运行实体 R 使用的副本。可运行实体 R 可以使用隐式读 **RTE API** 读取该数据元素（见 [7.1.6](#716-api-参考) 节中的 **API** 描述）。这样，在 R 的整个生命周期内，数据被保证不会改变（例如被其他可运行实体的写操作改变）。如果多个可运行实体（甚至来自不同组件）需要该数据，它们可以共享同一个缓冲区。这仅适用于调度结构能够确保数据内容受到保护、不被任何其他方修改的情形。
+
+**注意：** 该概念隐含着可运行实体会实际终止。因此，虽然隐式读对 1A、1B 类以及 2 类可运行实体都是允许的，但只有前者被保证具有有限的执行时间。一个永远运行的 2 类可运行实体将看不到任何更新的数据。
+
+`dataReadAccess` 角色中的 `VariableAccess` 仅允许用于 `swImplPolicy` 不是 `queued` 的 `VariableDataPrototype`（[constr_2020]）。
+
+**隐式写**
+
+隐式写是相反的概念，即聚合了 `dataWriteAccess` 角色中 `VariableAccess` 的情形。`dataWriteAccess` 角色中 `VariableAccess` 所引用的 `VariableDataPrototype` 由 **RTE** 在可运行实体终止后发送。可运行实体可以使用隐式写 **RTE API** 写入该数据元素（见 [7.1.6](#716-api-参考) 节中的 **API** 描述）。发送与 `[Rte_IWrite](#71620-rte_iwrite)` 在可运行实体内部执行流中的位置无关。在可运行实体执行期间对同一数据元素执行多次写访问时，只有最后一次会被识别。这里采用的是 last-is-best 语义。
+
+如果该数据元素需要执行数据转换，则数据转换在可运行实体终止之后、数据发送到 **Com** 栈之前进行。（见 **SWS_Rte_08571**、**SWS_Rte_08109**）
+
+专用于对某个 `VariableDataPrototype` 进行隐式写访问的抢占区特定缓冲区的内容，应由生成的 **RTE** 在任务的开始与该任务/ISR2 中第一个访问此 `VariableDataPrototype` 的 `RunnableEntity` 执行之间，用全局缓冲区的副本进行初始化。
+
+**注意：**
+
+**SWS_Rte_08418** 确保当某个 `VariableDataPrototype` 被 `dataWriteAccess` 角色中的 `VariableAccess` 引用、且在该可运行实体的一次执行期间没有调用用于该 `VariableDataPrototype` 隐式写的 **RTE API** 时，在可运行实体终止时不会向抢占区特定缓冲区写回未定义的值。对于抢占区的首次进入，"全局缓冲区"将包含该 `VariableDataPrototype` 的 `initValue`（如果未配置 `initValue`，则该值取决于启动代码的初始化策略）。对于第二次及后续进入，"全局缓冲区"将包含先前写入的值（如果有）。
+
+对于 `dataWriteAccess` 角色中的 `VariableAccess`，**RTE** 应以副本的语义使发送的数据可供其他方（其他可运行实体、其他 **AUTOSAR SWC**、基础软件等）使用。
+
+对于 `dataWriteAccess` 角色中的 `VariableAccess`，**RTE** 应最早在可运行实体终止时使发送的数据可供其他方（其他可运行实体、其他 **AUTOSAR SWC**、基础软件等）使用。
+
+对于 `dataWriteAccess` 角色中的 `VariableAccess`，在可运行实体的一次执行内对同一 `VariableDataPrototype` 的多次访问应只导致该 `VariableDataPrototype` 的一次发送。
+
+如果在可运行实体执行期间，`dataWriteAccess` 角色中引用同一 `VariableDataPrototype` 的多个 `VariableAccess` 在该可运行实体内部执行，则 **RTE** 应使用最后写入的值（last-is-best 语义）。
+
+`dataWriteAccess` 角色中的 `VariableAccess` 只对被保证终止的可运行实体（即 1A 和 1B 类）是有意义的。如果将其用于不终止的 2 类可运行实体，则不会发生任何数据写回。
+
+`dataWriteAccess` 角色中的 `VariableAccess` 应对所有类别的可运行实体有效。
+
+为了使不同供应商的 **RTE** 具有共同的行为，还存在进一步定义隐式通信语义的要求：
+
+**注意：** 隐式通信的行为可以通过 **ECU** 配置进行调整。更多信息见 [8.7](#87-隐式通信配置) 节。
+
+**非相干隐式数据访问情形下的隐式通信行为**
+
+**RTE** 生成器应为非相干隐式数据访问（**incoherent implicit data access**）副本语义的实现，每个抢占区（**preemption area**）使用恰好一个缓冲区来存放同一 `VariableDataPrototype` 的数据副本。
+
+要求 **SWS_Rte_03954** 意味着：映射到同一抢占区的任务/ISR2 上、具有非相干隐式读访问或非相干隐式写访问的所有可运行实体，都访问相同的缓冲区。
+
+对于隐式通信，当没有映射到该抢占区任务/ISR2 的可运行实体同时具有引用同一 `VariableDataPrototype` 的非相干隐式读访问和非相干隐式写访问时，**RTE** 应提供一个共享的读/写缓冲区。
+
+如果发送方或接收方之一使用带状态（**with status**）的数据元素，而另一方使用不带状态的数据元素，则在需要指向不带状态数据元素的指针时，可以在组件数据结构中实现带状态的数据元素并进行类型转换。
+
+对于隐式通信，在使用专用 `RPortPrototype` 和 `PPortPrototype` 的情况下，当映射到该抢占区任务/ISR2 的至少一个 `RunnableEntity` 具有引用同一 `VariableDataPrototype` 的隐式读访问和隐式写访问时，应使用独立的读缓冲区和写缓冲区。
+
+在 `RunnableEntity` 在 `PRPortPrototype` 的上下文中定义了对同一 `VariableDataPrototype` 的 `dataWriteAccess` 和 `dataReadAccess` 的情形下，**SWS_Rte_03955** 不适用。在这种配置中，进行写的 `RunnableEntity` 会在其尚未终止之前就立即看到自己对数据值的更新。
+
+如果 `RunnableEntity` 在 `PRPortPrototype` 的上下文中同时对某个 `VariableDataPrototype` 具有 `dataWriteAccess` 和 `dataReadAccess`，则写访问的结果应对同一 `RunnableEntity` 内后续的读访问立即可见。
+
+**注意：** 写缓冲区的内容在具有写访问的 `RunnableEntity` 终止后会被复制到该抢占区的读缓冲区中（见 **SWS_Rte_07041**）。因此写缓冲区可以实现为临时缓冲区。
+
+对于具有非相干隐式数据访问的隐式通信，一个抢占区内的所有读者应访问同一个缓冲区。
+
+对于具有非相干隐式数据访问的隐式通信，一个抢占区内的所有写者应访问同一个缓冲区。
+
+共享缓冲区（见 **SWS_Rte_03598**）的内容不保证在整个任务/ISR2 期间保持不变，因为写者会改变共享副本，因而映射在该任务中、位于写者之后的读者将访问更新后的副本。当缓冲区被共享时，写入的数据在同一任务/ISR2 的执行内对其他 `RunnableEntity` 可见。但由于任务/ISR2 内没有可运行实体既读又写同一缓冲区（**SWS_Rte_03598** 和 **SWS_Rte_03955**），单个可运行实体内的一致性得到了保证。
+
+当隐式通信使用独立缓冲区时（见 **SWS_Rte_03955**），在数据于可运行实体终止后被写回之前，可运行实体写入的任何数据（对该可运行实体自身或其他 `RunnableEntity`）均不可见。
+
+**相干隐式数据访问情形下的隐式通信行为**
+
+**RTE** 生成器应为相干隐式数据访问（**coherent implicit data access**）副本语义的实现，每个相干组（**coherency group**）使用恰好一个缓冲区来存放同一 `VariableDataPrototype` 的数据副本。
+
+要求 **SWS_Rte_07062** 意味着：具有相干隐式数据访问的所有可运行实体都访问相同的缓冲区。请注意，仅支持对在同一 **OS** 任务/ISR2 中执行的可运行实体的隐式读访问或隐式写访问进行分组。因此，相干隐式数据访问会产生一个任务本地缓冲区，这与之前的 **AUTOSAR** 版本中的规定一致。通过这种方式可以确保 **RTE** 的向后兼容行为。
+
+**注意：** **SWS_Rte_03955** 同样适用于相干隐式数据访问。**SWS_Rte_07062** 已经包含：当没有可运行实体对同一相干组同时具有相干隐式读访问和相干隐式写访问时，应使用单一的共享读/写缓冲区。
+
+**隐式通信缓冲区处理**
+
+抢占区特定缓冲区不应比所需的更频繁地更新或变为可用。以下要求详细说明了如何对读访问和写访问实现这一点。
+
+用于对数据元素进行非相干隐式读访问的抢占区特定缓冲区的内容，应通过复制动作在任务/ISR2 的开始与该任务/ISR2 中第一个访问该数据元素的 `RunnableEntity` 执行之间填充为实际数据。
+
+如果为对数据元素的非相干隐式读访问配置了 `RteImmediateBufferUpdate = TRUE`，则用于该 `VariableAccess` 的抢占区特定缓冲区的内容，应在具有相关隐式读访问的 `RunnableEntity` 启动之前立即通过复制动作填充为实际数据。
+
+由 `RunnableEntity` 的非相干隐式写访问修改的独立写缓冲区（见 **SWS_Rte_03955**）的内容，应在具有相关隐式写访问的 `RunnableEntity` 执行结束之后立即，提供给分配在同一抢占区内、使用隐式读访问的 `RunnableEntity`。
+
+在一个任务中由非相干隐式写访问修改的抢占区特定缓冲区的内容，最迟应在映射到该任务/ISR2 的最后一个 `RunnableEntity` 执行之后，提供给分配在其他抢占区中、使用隐式读访问的 `RunnableEntity`。
+
+如果为非相干隐式写访问配置了 `RteImmediateBufferUpdate = TRUE`，则抢占区特定缓冲区的内容应在具有相关隐式写访问的 `RunnableEntity` 执行结束之后立即，提供给分配在其他抢占区中、使用隐式读访问的 `RunnableEntity`。
+
+**注意：**
+
+隐式通信的语义是：`dataWriteAccess` 角色中的 `VariableAccess` 被解释为写入整个 `dataElement`。
+
+由 `RteOsSchedulePoint` 定义的显式调度点（**Schedule Point**）位于可运行实体之间：在可运行实体以隐式写访问写入的数据传播到其他可运行实体之后，且在后继可运行实体用于隐式读访问的抢占区特定缓冲区依据 **SWS_Rte_07020** 通过复制动作填充实际数据之前。这确保了一个 `RunnableEntity` 产生的数据在由于显式调度点引起的任务调度而激活分配给其他 **OS** 任务/ISR2 的可运行实体之前被传播。另见 **SWS_Rte_07042** 和 **SWS_Rte_07043**。
+
+关于隐式通信缓冲区处理的要求不适用于过滤器。**RTE** 对过滤器的缓冲区处理在 [6.2.3.1.9](#62319-过滤器) 节中规定（要求：**SWS_Rte_08077** 和 **SWS_Rte_08079**）。
+
+**相干隐式数据访问的隐式通信缓冲区处理**
+
+用于对属于某相干组的一个或多个数据元素进行相干隐式读访问的相干组特定缓冲区的内容，应通过复制动作在任务的开始与该任务/ISR2 中第一个具有属于该相干组的相干隐式读访问的 `RunnableEntity` 执行之间填充为实际数据。
+
+如果为相干隐式读访问配置了 `RteImmediateBufferUpdate = TRUE`，则用于这些 `VariableAccess` 的相干组特定缓冲区的内容，应在该任务/ISR2 中第一个具有属于该相干组的相干隐式读访问的 `RunnableEntity` 启动之前立即通过复制动作填充为实际数据。
+
+由 `RunnableEntity` 的相干隐式写访问修改的独立写缓冲区（见 **SWS_Rte_03955**）的内容，应在具有相关相干隐式写访问的 `RunnableEntity` 执行结束之后立即，提供给使用属于同一相干组的相干隐式读访问的 `RunnableEntity`。
+
+在一个任务/ISR2 中由相干隐式写访问修改的相干组特定缓冲区的内容，最早应在具有属于该相干组的相干隐式写访问的最后一个 `RunnableEntity` 执行之后，提供给其他 `RunnableEntity`。
+
+在一个任务/ISR2 中由相干隐式写访问修改的相干组特定缓冲区的内容，最迟应在映射到该任务/ISR2 的最后一个 `RunnableEntity` 执行之后，提供给其他 `RunnableEntity`。
+
+如果为相干隐式写访问配置了 `RteImmediateBufferUpdate = TRUE`，则在一个任务/ISR2 中由相干隐式写访问修改的相干组特定缓冲区的内容，应在具有属于该相干组的相干隐式写访问的最后一个 `RunnableEntity` 执行结束之后立即，提供给不属于该相干组的其他读者。
+
+**对 NvBlockComponent 的 RamMirror 的直接访问**
+
+**RTE** 生成器应允许对同一分区内 `NvBlockSwComponent` 的 `ramMirror` 进行直接访问而不需要额外的缓冲，前提是数据通信路径中的各访问不能相互中断。应使用 `RteExclusiveAccessOptimization` 容器来指定参与对该 **RAM** 镜像独占访问的 **BSW** 实体（`RteAccessingEntityRef`，例如指向 **NvM** 主函数）以及读访问（`RteSoftwareComponentReadRef`，例如 `ApplicationSwComponentType`）和写访问（`RteSoftwareComponentWriteRef`，例如 **Dcm** 服务组件）。
+
+**ConsistencyNeeds 的处理**
+
+`ConsistencyNeeds` 不由 **RTE** 生成器直接处理，但它们为 **RTE** 和 **OS** 在抢占、`RteEventToTaskMapping`/`RteEventToIsrMapping` 与 `RteImplicitCommunication` 方面的正确配置提供了重要信息。因此适用以下约束：
+
+**约束（dpgRequiresCoherency 角色中的整个 `DataPrototypeGroup` 应相干传播）：** 在 `RunnableEntityGroup` 中、对属于 `dpgRequiresCoherency` 角色中同一 `DataPrototypeGroup` 的数据具有 `dataWriteAccess` 的所有 `RunnableEntity` 应：
+
+* 被映射到相同的 **OS** 任务/ISR2；
+
+并且应：
+
+* A) 以这些可运行实体不会被对（多个）属于该 `DataPrototypeGroup` 的数据具有 `dataReadAccess` 的可运行实体中断的方式进行调度；
+* B) 或者将 `RteImplicitCommunication` 配置为确保读取方可运行实体的相干传播（`RteCoherentAccess == true`）。
+
+**注意：** 同时对属于该 `DataPrototypeGroup` 的数据也具有 `dataWriteAccess` 的可运行实体被排除在外，因为在计算链内部最新的数据值是可见的。
+
+请注意，可运行实体之间及其内部的中断取决于许多因素，例如 **OS** 的配置和 **RTE** 的配置（例如 `RteOsSchedulePoint`）。
+
+**约束（`regRequiresStability` 角色中的整个 `DataPrototypeGroup` 应为整个 `RunnableEntityGroup` 保持读稳定）：** 对属于同一 `DataPrototypeGroup` 的数据具有 `dataReadAccess`、且属于 `regRequiresStability` 角色中同一 `RunnableEntityGroup` 的所有可运行实体应：
+
+* 要么以如下方式配置：对 `DataPrototypeGroup` 数据具有 `dataReadAccess` 的可运行实体链不会被任何对该 `DataPrototypeGroup` 数据具有 `dataWriteAccess` 的可运行实体中断；
+* 要么将 `RteImplicitCommunication` 配置为确保属于该 `RunnableEntityGroup` 的读取方可运行实体的数据值稳定（`RteCoherentAccess == true`）。
+
+**示例**
+
+以下示例说明如何通过调度或相干组来实现 `ConsistencyNeeds`。
+
+**示例 4.8**：**PortInterface 的公共定义**
+
+为简化示例，所有 `PortInterface` 都是 `SenderReceiverInterface` 类型，并且恰好包含一个 `shortName` 相同的 `VariableDataPrototype`。例如 `SenderReceiverInterface` "A" 包含 `VariableDataPrototype` "A"。
+
+此外，`SenderReceiverInterface` 的 `shortName` 与 `PortPrototype` 的 `shortName` 相同。例如 `PPortPrototype` "A" 由 `SenderReceiverInterface` "A" 定义类型。
+
+**示例 4.9**：**接收数据的稳定性需求**
+
+**SWC 的设置**
+
+`ApplicationSwComponentType` "ASWC_A"，具有 `PPortPrototype`："A"、"B"，以及可运行实体 "ASWC_A_RUN1"，后者依次具有以下 `dataWriteAccess`：
+
+* "DWP_ASWC_A_RUN1_A_A" 引用 `PPortPrototype` "A" 中的 `VariableDataPrototype` "A"
+* "DWP_ASWC_A_RUN1_B_B" 引用 `PPortPrototype` "B" 中的 `VariableDataPrototype` "B"
+
+`ApplicationSwComponentType` "ASWC_B"，具有 `RPortPrototype`："A"、"B"，以及可运行实体 "ASWC_B_RUN1"，后者依次具有 `dataReadAccess`：
+
+* "DRP_ASWC_B_RUN1_A_A" 引用 `RPortPrototype` "A" 中的 `VariableDataPrototype` "A"
+* "DRP_ASWC_B_RUN1_B_B" 引用 `RPortPrototype` "B" 中的 `VariableDataPrototype` "B"
+
+`ApplicationSwComponentType` "ASWC_C"，具有 `RPortPrototype`："A"、"B"，以及可运行实体 "ASWC_C_RUN1"，后者依次具有 `dataReadAccess`：
+
+* "DRP_ASWC_C_RUN1_A_A" 引用 `RPortPrototype` "A" 中的 `VariableDataPrototype` "A"
+* "DRP_ASWC_C_RUN1_B_B" 引用 `RPortPrototype` "B" 中的 `VariableDataPrototype` "B"
+
+`ConsistencyNeeds` "CN_BC" 在 `regRequiresStability` 角色中定义了一个由成员 "ASWC_B_RUN1"、"ASWC_C_RUN1" 组成的 `RunnableEntityGroup`。此外，`ConsistencyNeeds` "CN_BC" 在 `dpgDoesNotRequireCoherency` 角色中针对 `VariableDataPrototype` ASWC_B.A.A.A、ASWC_C.A.A.A、ASWC_B.B.B.B 和 ASWC_C.B.B.B 定义了一个 `DataPrototypeGroup`。完整示例以 **ARXML** 形式列于附录 F.2。
+
+**假定如下配置：**
+
+ASWC_A_RUN1 映射到 **OsTask** T10MS；ASWC_B_RUN1 映射到 **OsTask** T100MS；ASWC_C_RUN1 映射到 **OsTask** T100MS；其中 T10MS 在 ASWC_B_RUN1 和 ASWC_C_RUN1 执行期间不能中断 T100MS。该配置由于调度条件而满足了 "CN_BC" 对应的稳定性约束。由于 "A" 和 "B" 的生产者不能中断具有 `dataReadAccess` 的可运行实体，因此可以保证：在 **OsTask** T100MS 的一次执行期间，ASWC_B_RUN1 和 ASWC_C_RUN1 对同一数据的所有访问所得到的值是相同的（因而是稳定的）。
+
+**再假定如下配置：**
+
+ASWC_A_RUN1 映射到 **OsTask** T10MS；ASWC_B_RUN1 映射到 **OsTask** T100MS + `RteOsSchedulePoint == UNCONDITIONAL`；ASWC_C_RUN1 映射到 **OsTask** T100MS；其中 T10MS 可以在 ASWC_B_RUN1 执行之后中断 T100MS。若无其他手段，该配置会由于调度条件而违反稳定性约束。由于 "A" 和 "B" 的生产者可以中断具有 `dataReadAccess` 的可运行实体，因此无法保证在 **OsTask** T100MS 的一次执行期间，ASWC_B_RUN1 和 ASWC_C_RUN1 对同一数据的所有访问都保持稳定。
+
+附加配置 `RteImplicitCommunication` "CN_BC_A"：
+
+* `RteVariableReadAccessRef` 引用 "DRP_ASWC_B_RUN1_A_A"
+* `RteVariableReadAccessRef` 引用 "DRP_ASWC_C_RUN1_A_A"
+* `RteCoherentAccess = true`
+
+以及 `RteImplicitCommunication` "CN_BC_B"：
+
+* `RteVariableReadAccessRef` 引用 "DRP_ASWC_B_RUN1_B_B"
+* `RteVariableReadAccessRef` 引用 "DRP_ASWC_C_RUN1_B_B"
+* `RteCoherentAccess = true`
+
+此时 "ASWC_B_RUN1_A_A" 与 "ASWC_C_RUN1_A_A" 以及 "ASWC_B_RUN1_B_B" 与 "ASWC_C_RUN1_B_B" 处于同一相干组中。因此在 **OsTask** T100MS 的一次执行中，ASWC_B_RUN1 和 ASWC_C_RUN1 读取的 "A" 和 "B" 数据值来自同一代（**same age**）。
+
+请注意，由于并不要求 "A" 和 "B" 相干地通信，"A" 和 "B" 的 `RteImplicitCommunication` 设置可以彼此独立地处理。特别是，如果还有其他对 "A" 或 "B" 具有 `dataReadAccess` 的可运行实体映射到 **OsTask** T100MS，则 "A" 和 "B" 的缓冲区可以在执行序列的不同点加载。此外，本示例中也不要求 "A" 和 "B" 以相同的周期产生。
+
+**示例 4.10**：**接收数据的相干性需求与稳定性需求**
+
+**SWC 的设置**
+
+`ApplicationSwComponentType` "ASWC_H"，具有 `PPortPrototype`："X"，以及可运行实体 "ASWC_H_RUN1"，后者依次具有以下 `dataWriteAccess`：
+
+* "DWP_ASWC_H_RUN1_X_X" 引用 `PPortPrototype` "X" 中的 `VariableDataPrototype` "X"
+
+`ApplicationSwComponentType` "ASWC_I"，具有 `RPortPrototype`："Y"，以及可运行实体 "ASWC_I_RUN1"，后者依次具有以下 `dataWriteAccess`：
+
+* "DWP_ASWC_I_RUN1_Y_Y" 引用 `RPortPrototype` "Y" 中的 `VariableDataPrototype` "Y"
+
+`ApplicationSwComponentType` "ASWC_J"，具有 `RPortPrototype`："X"、"Y"，以及可运行实体 "ASWC_J_RUN1"，后者依次具有以下 `dataReadAccess`：
+
+* "DRP_ASWC_J_RUN1_X_X" 引用 `RPortPrototype` "X" 中的 `VariableDataPrototype` "X"
+* "DRP_ASWC_J_RUN1_Y_Y" 引用 `RPortPrototype` "Y" 中的 `VariableDataPrototype` "Y"
+
+`ApplicationSwComponentType` "ASWC_K"，具有 `RPortPrototype`："X"，以及可运行实体 "ASWC_K_RUN1"，后者依次具有以下 `dataReadAccess`：
+
+* "DRP_ASWC_K_RUN1_X_X" 引用 `RPortPrototype` "X" 中的 `VariableDataPrototype` "X"
+
+`ConsistencyNeeds` "CN_J" 在 `regDoesNotRequireStability` 角色中定义了一个由成员 "ASWC_I_RUN1" 组成的 `RunnableEntityGroup`。此外，`ConsistencyNeeds` "CN_J" 在 `dpgRequiresCoherency` 角色中针对 `VariableDataPrototype` ASWC_J.X.X.X、ASWC_K.Y.Y.Y 定义了一个 `DataPrototypeGroup`。
+
+`ConsistencyNeeds` "CN_JK" 在 `regRequiresStability` 角色中定义了一个由成员 "ASWC_I_RUN1"、"ASWC_J_RUN1" 组成的 `RunnableEntityGroup`。此外，`ConsistencyNeeds` "CN_JK" 在 `dpgDoesNotRequireCoherency` 角色中针对 `VariableDataPrototype` ASWC_J.X.X.X、ASWC_K.X.X.X 定义了一个 `DataPrototypeGroup`。
+
+**假定如下配置：**
+
+ASWC_H_RUN1 映射到 **OsTask** T100MS + `RteOsSchedulePoint == UNCONDITIONAL`；ASWC_I_RUN1 映射到 **OsTask** T100MS；ASWC_J_RUN1 映射到 **OsTask** T10MS；ASWC_K_RUN1 映射到 **OsTask** T10MS；其中 T10MS 可以中断 T100MS。若无其他手段，该配置会由于调度条件而违反 "CN_J" 对应的相干性约束。由于 "X" 和 "Y" 的消费者可以中断生产 "X" 和 "Y" 的可运行实体，因此无法保证在 **OsTask** T10MS 的一次执行期间，ASWC_J_RUN1 和 ASWC_K_RUN1 的所有访问返回同一代的数据。"CN_JK" 已经得到满足，因为消费者 "ASWC_J_RUN1" 和 "ASWC_K_RUN1" 不会被生产 `RunnableEntity` ASWC_H_RUN1 中断。
+
+附加配置 `RteImplicitCommunication` "CN_J"：
+
+* `RteVariableWriteAccessRef` 引用 "DWP_ASWC_H_RUN1_X_X"
+* `RteVariableWriteAccessRef` 引用 "DWP_ASWC_I_RUN1_Y_Y"
+* `RteCoherentAccess = true`
+
+此时对 "X" 和 "Y" 的写访问处于同一相干组中。由此 "CN_J" 得到满足，因为 "X" 和 "Y" 的传播被延迟到 ASWC_I_RUN1 终止为止。
+###### 6.2.3.1.5.2. 显式
+
+显式接收的行为取决于可运行实体的类别以及相关端口的配置。
+
+显式 **API** 调用既可以是非阻塞的，也可以是阻塞的。如果调用是非阻塞的（即存在 `dataReceivePointByValue` 或 `dataReceivePointByArgument` 角色中引用该 `VariableDataPrototype` 的 `VariableAccess`，但没有 `WaitPoint` 引用指向该 `VariableDataPrototype` 的 `DataReceivedEvent`），该 **API** 调用立即返回下一个要读取的值，并且如果通信是排队的（事件接收），它将数据从接收方侧的队列中移除，见 [6.2.3.1.10](#623110-缓冲) 节。
+
+非阻塞的 **RTE API** "读"调用应指示是否没有数据可用。
+
+相反，阻塞调用（即由 `dataReceivePointByArgument` 角色中的 `VariableAccess` 引用、且为其生成 **API** 的那个 `VariableDataPrototype`，被一个 `DataReceivedEvent` 引用，而该事件又被一个 `WaitPoint` 引用）会挂起调用者的执行，直到新数据到达相关端口（或发生超时）。当接收到新数据时，**RTE** 恢复等待中的可运行实体的执行。
+
+为防止无限等待，阻塞的 **RTE API** 调用可以应用超时。**RTE** 监视该超时，如果在没有接收到数据的情况下超时到期，则返回一个特定的错误状态。
+
+阻塞的 **RTE API** "读"调用应指示超时到期。
+
+"超时到期"指示同时表明在超时到期之前没有接收到任何数据。
+
+数据的阻塞接收（"等待点唤醒"接收模式，见 [6.2.3.1.2](#62312-接收模式) 节）仅适用于 2 类可运行实体，而非阻塞接收（"显式数据读访问"接收模式）可由 2 类或 1B 类可运行实体采用。阻塞与非阻塞的显式接收都不适用于 1A 类可运行实体，因为它们不得调用执行时间未知的函数（见表 4.10）。
+
+用于显式发送的 **RTE API** 调用（`dataSendPoint` 角色中的 `VariableAccess`）应为非阻塞。
+
+使用该 **API** 调用，可运行实体可以显式发送 `VariableDataPrototype` 的新值。
+
+显式写仅对 1B 和 2 类可运行实体有效。1A 类可运行实体不允许显式写，因为它们要求执行时间恒定的 **API** 调用（即宏）。
+
+尽管用于显式发送的 **API** 调用是非阻塞的，2 类可运行实体仍可能阻塞以等待（显式）发送操作是否成功的通知。这由 `AcknowledgementRequest` 属性规定，并通过独立的 **API** 调用 `[Rte_Feedback](#7168-rte_feedback)` 实现。如果反馈方式为 `wake_up_of_wait_point`，则该可运行实体将阻塞，并在肯定或否定确认到达时、或在 `WaitPoint` 关联的超时到期时由 **RTE** 恢复执行。
+
+###### 6.2.3.1.5.3. 数据访问概念
+
+表 4.11 和表 4.12 总结了隐式与显式数据接收和发送的特性。
+
+表 4.11：隐式读与显式读
+
+| 隐式读 | 显式读 |
+| --- | --- |
+| 数据元素值的接收只在可运行实体启动时执行一次 | 可运行实体决定何时以及以何种频率接收数据元素值 |
+| 数据元素的值在可运行实体运行期间不改变 | 可运行实体总是可以决定接收最新的值 |
+| 对同一信号的多次 **API** 调用总是得到相同的数据元素值 | 对同一信号的多次 **API** 调用可能得到不同的数据元素值 |
+| 可运行实体必须终止（所有类别） | 可运行实体为 1B 或 2 类 |
+
+表 4.12：隐式写与显式写
+
+| 隐式写 | 显式写 |
+| --- | --- |
+| 数据元素值的发送只在可运行实体返回之后执行一次 | 可运行实体可以决定何时经由 **API** 调用发送数据元素值 |
+| 可运行实体内部对 **API** 调用的多次使用只导致一次数据元素发送 | 可运行实体内部对 **API** 调用的多次使用导致多次数据元素内容发送。（取决于 **COM** 的行为，**API** 调用次数与发送次数不一定相等。） |
+| 可运行实体必须终止（所有类别） | 可运行实体为 1B 或 2 类 |
+
+##### 6.2.3.1.6. 发送确认
+
+当规定了 `TransmissionAcknowledgementRequest` 时，**RTE** 将通知发送组件数据是否已被正确发送。注意，肯定的发送确认并不保证数据实际在物理总线上发送，也不保证相应的接收方 **AUTOSAR** 软件组件正确接收了数据。发送确认只是确认数据已被接受发送，且后续的发送不会覆盖已发送的数据。
+
+**RTE** 应针对 **AUTOSAR** 软件组件的 **AUTOSAR** 接口的每个数据项独立支持 `TransmissionAcknowledgementRequest` 的使用。
+
+**RTE** 生成器应拒绝违反系统模板[\[8\]](#ref-8)中 [constr_3074] 的配置。
+
+**RTE** 生成器应拒绝违反软件组件模板[\[2\]](#ref-2)中 [constr_1256] 的配置。
+
+反馈的结果可以使用"等待点唤醒"、"显式数据读访问"、"隐式数据读访问"或"可运行实体激活"来收集。
+
+`TransmissionAcknowledgementRequest` 允许规定一个超时。
+
+如果规定了 `TransmissionAcknowledgementRequest`，**RTE** 应确保执行超时监视，而不论确认的接收模式如何。
+
+对于 **ECU** 间通信，**AUTOSAR COM** 提供了必要的功能；对于经 **LdCom** 的 **ECU** 间通信以及 **ECU** 内通信，**RTE** 必须自行实现超时监视。
+
+如果规定了一个用于收集确认的 `WaitPoint`，则必须规定两个超时值：一个用于 `TransmissionAcknowledgementRequest`，一个用于 `WaitPoint`。
+
+**RTE** 生成器应拒绝违反 [constr_2033] 的配置。
+
+与 `VariableDataPrototype` 的 `dataSendPoint` 角色中 `VariableAccess` 关联的 `DataSendCompletedEvent` 应表明发送成功或发送不成功（见 [6.2.3.1.17](#623117-确认事件的处理) 节）。关于发送成功与否的状态信息应作为生成的 **RTE API** 调用（`[Rte_Feedback](#7168-rte_feedback)` 或 `[Rte_IFeedback](#71636-rte_ifeedback)`）的返回值提供。
+
+对于 `VariableDataPrototype` 的每次发送，**RTE** 只应向发送组件传递一个确认。该确认表明发送成功或发送不成功。
+
+关于发送成功或失败的状态信息应作为检索确认的 **RTE API** 调用的返回值提供。
+
+关于发送成功或失败的状态信息应以 last-is-best 语义缓冲。当某个数据项被发送时，状态信息被复位。
+
+**SWS_Rte_03604** 意味着：一旦 `DataSendCompletedEvent` 已经发生，重复调用检索确认的 **API** 应始终返回相同的结果，直到下一个数据项被发送。
+
+如果 `TransmissionAcknowledgementRequest` 的超时值为 0，则不执行超时监视。
+
+##### 6.2.3.1.7. 通信超时
+
+当发送方-接收方通信经由某种物理网络执行时，该通信可能失败，接收方没有（及时或根本没有）得到数据的更新。为了允许数据元素的接收方对这种状态做出适当反应，**SW-C** 模板允许规定一个超时，基础设施应监视该超时并向相关的软件组件指示。
+
+数据元素是发送方-接收方通信中实际交换的信息。在 **COM** 规范中，它由 `ComSignal` 表示。在 **SW-C** 模板中，数据元素由 `VariableDataPrototype` 的实例表示。
+
+当存在时，`aliveTimeout` 属性<sup>5</sup>支持对经由网络传输的、具有数据语义的数据元素的及时接收进行监视。
+
+> 5 该属性在 **VFB** 规范中称为"LIVELIHOOD"。
+
+如果存在 `aliveTimeout` 属性，**RTE** 应提供 `Rte_COMCbkRxTOut` 通知回调。
+
+监视功能由 **COM** 模块提供，**RTE** 将接收超时事件以"数据元素过时"（**data element outdated**）的形式传递给软件组件。软件组件既可以订阅该事件（可运行实体激活），也可以通过隐式和显式状态信息（使用 **API** 调用）获知该情形。
+
+如果 **COM** 指示了一个接收超时（经由 **RTE COM** 接收超时回调），**RTE** 应以"数据元素过时"的形式向软件组件引发一个接收超时事件。
+
+**RTE** 应对分区本地的通信禁用超时监视，而不论 `aliveTimeout` 是否存在。
+
+在这种情况下，**RTE** 不会向软件组件引发接收超时事件。
+
+因此，软件组件不得在其功能上依赖超时通知，因为对本地通信而言该通知永远不会发生。超时通知仅作为纯错误报告。
+
+如果存在 `aliveTimeout`，且通信发生在同一 **ECU** 的不同分区之间，则超时监视被禁用。取而代之的是，当发送方的分区停止时，接收方会立即发生一次超时通知，并且应向软件组件提供最后一个正确接收的值。
+
+因此，软件组件不得在其功能上依赖超时通知，因为对本地通信而言该通知永远不会发生。超时通知仅作为纯错误报告。
+
+如果 `aliveTimeout` 属性为 0，则不执行超时监视。
+
+如果接收到一个信号，即使该信号被标记为无效，同一信号的超时也应重新启动。
+
+**注意：** 超时检测可能已由 **COM** 实现。尽管如此，这仍是对软件组件的预期行为。
+
+**COM** 提供的超时支持（在 **COM** 中称为"deadline monitoring"）存在一些限制，使用该机制时必须遵守。由于 **COM** 模块是基于系统描述配置的，这些限制主要来自数据元素到 **I-PDU** 的映射。这一点在开发系统描述时就必须考虑，**RTE** 生成器只能在检测到不一致时提供警告。因此 **RTE** 生成器需要能够访问 **COM** 的配置信息。
+
+在启用了对带更新位的数据元素的超时的情况下，每个带更新位的数据元素应有单独的超时监视。
+
+对于不带更新位的数据元素，应存在基于 **I-PDU** 的超时。对于同一 **I-PDU** 内所有不带更新位的数据元素，选择相关数据元素中已配置的最小超时作为该 **I-PDU** 的超时。从 **COM** 到 **RTE** 的通知按数据元素执行。
+
+在来自 **COM** 的一个数据元素需要分发给多个 **AUTOSAR** 软件组件的情况下，**AUTOSAR** 软件组件模板允许在每个端口配置不同的 `aliveTimeout` 值。在这种情况下，**RTE** 必须确保每个端口的超时通知按照 `NonqueuedReceiverComSpec` 中配置的 `aliveTimeout` 值发生。
+
+**RTE** 应根据 `NonqueuedReceiverComSpec` 中配置的 `aliveTimeout` 值向 **SW-C** 传递超时通知。根据 **COM** 模块的配置，适用以下规则：
+
+* `ComSignal.ComTimeout` / `ComSignalGroup.ComTimeout` 配置为 0：不应发生超时通知。
+* `ComSignal.ComTimeout` / `ComSignalGroup.ComTimeout` 未配置为 0（带更新位的 `ComSignal`/`ComSignalGroup`）：超时通知应按照关联 `ComSignal`/`ComSignalGroup` 的 `ComSignal.ComTimeout` / `ComSignalGroup.ComTimeout` 值中小于等于 `NonqueuedReceiverComSpec` 中 `aliveTimeout` 值的最大倍数发生。
+* 基于 **I-PDU** 的超时不等于 0（不带更新位的 `ComSignal`/`ComSignalGroup`）：超时通知应按照小于等于 `NonqueuedReceiverComSpec` 中 `aliveTimeout` 值的、基于 **I-PDU** 超时值的最大倍数发生。
+
+以下示例说明：在来自 **COM** 的一个数据元素需要分发给多个 **SW-C** 的情况下，`ComSignal` 的 `ComTimeout` 参数值是如何推导的，以及 **RTE** 中的超时监视是如何执行的。
+
+考虑 3 个接收同一数据元素的 **SW-C**，它们在 `NonqueuedReceiverComSpec` 中规定了不同的 `aliveTimeout` 值：
+
+* SW-C1：aliveTimeout = 500ms
+* SW-C2：aliveTimeout = 0ms（或未规定）
+* SW-C3：aliveTimeout = 1200ms
+
+该数据元素所映射的 `ComSignal` 的推导 `ComTimeout` 值在此情况下为 500ms，即相关 **SW-C** 中最小的 `aliveTimeout` 值（该值必须大于等于 **COM** 模块主函数的周期）。
+
+当 **COM** 指示接收超时后，**RTE** 将向 3 个 **SW-C** 按如下方式传递超时通知：
+
+* SW-C1：直接传递
+* SW-C2：无超时通知
+* SW-C3：在 500ms 之后（即 **RTE** 必须在通知 SW-C3 之前内部再计时 500ms）
+
+**RTE** 应按照每个接收 **SWC** 中 `NonqueuedReceiverComSpec` 定义的 `handleTimeoutType` 属性实现一个替换策略：
+
+* `handleTimeoutType` 配置为 `none`：**SWC** 观察最后接收到的值。
+* `handleTimeoutType` 配置为 `replace`：**SWC** 观察 `NonqueuedReceiverComSpec` 的 `initValue`。
+
+**注意：** 在接收 **SWC** 具有不同 `handleTimeoutType` 值的情况下，相关的 `ComSignal`/`ComSignalGroup` 应具有等于 `NONE` 的 `ComSignal.ComRxDataTimeoutAction` / `ComSignalGroup.ComRxDataTimeoutAction` 属性，以确保 **RTE** 始终能够访问最后接收的值。
+##### 6.2.3.1.8. 数据元素失效
+
+软件组件模板允许规定 **AUTOSAR** 接口中定义的数据元素是否可以被发送方失效（**invalidate**）。通信基础设施应提供把数据元素置为无效的手段，并向接收方软件组件指示无效的数据元素。该功能称为"数据元素失效"（**data element invalidation**）。概述见图 4.46。
+
+如果 `InvalidationPolicy` 的 `handleInvalid` 属性（当存在时）被设置为 `keep`、`replace` 或 `externalReplacement`，则该数据元素的发送方侧启用了失效支持。用于表示无效数据元素的实际值应在数据元素定义的数据语义部分中规定，即 `invalidValue`<sup>6</sup>。
+
+> 6 当 `InvalidationPolicy` 设置为 `keep`、`replace` 或 `externalReplacement` 但未规定 `invalidValue` 时，被视为无效配置。
+
+对于数据元素失效，其意图是由软件组件使用 `[Rte_Invalidate](#7167-rte_invalidate)()` **API**。不过，把无效值作为 `[Rte_Write](#7164-rte_write)()` **API** 的参数传递也可能是有意为之。在这种情况下，为了避免 **RTE** 实现中不期望的行为和额外的开销，`handleInvalid` 只允许设置为 `dontInvalidate`（见 **TPS_SWCT_01646** 和 [constr_1390]）。
+
+在接收方侧，关联 `InvalidationPolicy` 的 `handleInvalid` 属性规定如何处理无效值的接收。
+
+数据元素失效仅支持 `swImplPolicy` 不是 `queued` 的数据元素。违反该约束的配置被 **RTE** 生成器拒绝，见 **SWS_Rte_06727**。
+
+**RTE** 生成器应拒绝违反 [constr_1219] 的配置。
+
+用于把 `dataElement` 置为无效的 **API** 应在数据元素级别提供给 `RunnableEntity`。
+
+在接收到已失效的数据元素时，可以使用可运行实体激活来通知软件组件。如果 **SW-C** 读取了已失效的数据元素，则失效状态应在 **API** 的状态码中指示。
+
+如果非排队数据元素的 `initValue` 等于 `invalidValue`、`handleInvalid` 设置为 `keep`、且 `handleNeverReceived` 设置为 `FALSE`，则 **RTE API** `[Rte_Read](#71610-rte_read)()` 和 `[Rte_IStatus](#71623-rte_istatus)()` 在第一次接收到数据元素之前应返回 `RTE_E_INVALID`。在这种情况下，**API** `[Rte_Read](#71610-rte_read)()` 和 `[Rte_IRead](#71618-rte_iread)()` 应提供 `invalidValue`。
+
+如果非排队数据元素的 `initValue` 等于 `invalidValue`、`handleInvalid` 设置为 `keep`、且 `handleNeverReceived` 未定义，则 **RTE API** `[Rte_Read](#71610-rte_read)()` 和 `[Rte_IStatus](#71623-rte_istatus)()` 在第一次接收到数据元素之前应返回 `RTE_E_INVALID`。在这种情况下，**API** `[Rte_Read](#71610-rte_read)()` 和 `[Rte_IRead](#71618-rte_iread)()` 应提供 `invalidValue`。
+
+如果非排队数据元素的 `initValue` 等于 `invalidValue`、`handleInvalid` 设置为 `keep`、且 `handleNeverReceived` 设置为 `TRUE`，则 **RTE API** `[Rte_Read](#71610-rte_read)()` 和 `[Rte_IStatus](#71623-rte_istatus)()` 在第一次接收到数据元素之前应返回 `RTE_E_NEVER_RECEIVED`。在这种情况下，**API** `[Rte_Read](#71610-rte_read)()` 和 `[Rte_IRead](#71618-rte_iread)()` 应提供 `initValue`。
+
+**RTE** 生成器应拒绝这样的配置：非排队数据元素的 `initValue` 等于 `invalidValue` 且 `handleInvalid` 设置为 `replace`。
+
+如果非排队数据元素的 `initValue` 等于 `invalidValue`、`handleInvalid` 设置为 `dontInvalidate`、且 `handleNeverReceived` 设置为 `FALSE`，则 **RTE API** `[Rte_Read](#71610-rte_read)()` 和 `[Rte_IStatus](#71623-rte_istatus)()` 在第一次接收到数据元素之前应返回 `RTE_E_OK`。在这种情况下，**API** `[Rte_Read](#71610-rte_read)()` 和 `[Rte_IRead](#71618-rte_iread)()` 应提供 `initValue`。
+
+如果非排队数据元素的 `initValue` 等于 `invalidValue`、`handleInvalid` 设置为 `dontInvalidate`、且 `handleNeverReceived` 未定义，则 **RTE API** `[Rte_Read](#71610-rte_read)()` 和 `[Rte_IStatus](#71623-rte_istatus)()` 在第一次接收到数据元素之前应返回 `RTE_E_OK`。在这种情况下，**API** `[Rte_Read](#71610-rte_read)()` 和 `[Rte_IRead](#71618-rte_iread)()` 应提供 `initValue`。
+
+如果非排队数据元素的 `initValue` 等于 `invalidValue`、`handleInvalid` 设置为 `dontInvalidate`、且 `handleNeverReceived` 设置为 `TRUE`，则 **RTE API** `[Rte_Read](#71610-rte_read)()` 和 `[Rte_IStatus](#71623-rte_istatus)()` 在第一次接收到数据元素之前应返回 `RTE_E_NEVER_RECEIVED`。在这种情况下，**API** `[Rte_Read](#71610-rte_read)()` 和 `[Rte_IRead](#71618-rte_iread)()` 应提供 `initValue`。
+
+如果非排队数据元素的 `initValue` 等于 `invalidValue`、`handleInvalid` 设置为 `externalReplacement`、且 `handleNeverReceived` 设置为 `FALSE`，则 **RTE API** `[Rte_Read](#71610-rte_read)()` 和 `[Rte_IStatus](#71623-rte_istatus)()` 在第一次接收到数据元素之前应返回 `RTE_E_OK`。在这种情况下，**API** `[Rte_Read](#71610-rte_read)()` 和 `[Rte_IRead](#71618-rte_iread)()` 应提供取自 `ReceiverComSpec.replaceWith` 的值。
+
+如果非排队数据元素的 `initValue` 等于 `invalidValue`、`handleInvalid` 设置为 `externalReplacement`、且 `handleNeverReceived` 未定义，则 **RTE API** `[Rte_Read](#71610-rte_read)()` 和 `[Rte_IStatus](#71623-rte_istatus)()` 在第一次接收到数据元素之前应返回 `RTE_E_OK`。在这种情况下，**API** `[Rte_Read](#71610-rte_read)()` 和 `[Rte_IRead](#71618-rte_iread)()` 应提供取自 `ReceiverComSpec.replaceWith` 的值。
+
+如果非排队数据元素的 `initValue` 等于 `invalidValue`、`handleInvalid` 设置为 `externalReplacement`、且 `handleNeverReceived` 设置为 `TRUE`，则 **RTE API** `[Rte_Read](#71610-rte_read)()` 和 `[Rte_IStatus](#71623-rte_istatus)()` 在第一次接收到数据元素之前应返回 `RTE_E_NEVER_RECEIVED`。在这种情况下，**API** `[Rte_Read](#71610-rte_read)()` 和 `[Rte_IRead](#71618-rte_iread)()` 应提供取自 `ReceiverComSpec.replaceWith` 的值。
+
+###### 6.2.3.1.8.1. ECU 间通信情形下的数据元素失效
+
+发送方：
+
+如果启用了数据元素失效且通信为 **ECU** 间：
+
+* 显式数据发送：
+  * 该通信启用了数据转换：数据元素失效将由 **RTE** 执行。
+  * 未启用数据转换：数据元素失效将由 **COM** 执行（**COM** 需要正确配置）。
+* 隐式数据发送：**RTE** 负责在失效时标记隐式缓冲区。隐式有效发送可能在任务结束时的写回之前发生，从而复位失效标志。可运行实体终止后的实际数据元素失效在 **COM** 中完成。
+
+接收方：
+
+如果启用了数据元素失效且通信为 **ECU** 间，并且：
+
+* 如果所有接收方软件组件对关联到同一 `dataElement` 的 `InvalidationPolicy` 的 `handleInvalid` 属性请求相同的值，且该通信未配置数据转换：数据元素失效将由 **COM** 执行（**COM** 需要正确配置），见 **SWS_Rte_05026**、**SWS_Rte_05048**。
+* 如果接收方软件组件对关联到同一 `dataElement` 的 `InvalidationPolicy` 的 `handleInvalid` 属性请求不同的值，或该通信配置了数据转换：数据元素失效将由 **RTE** 执行，见 **SWS_Rte_07031**、**SWS_Rte_07032**。这可能发生在 1:n 通信中，即对一个连接器将 `VariableAndParameterInterfaceMapping` 应用于两个 `SenderReceiverInterface`，而映射的 `VariableDataPrototype` 具有不同的 `InvalidationPolicy`。
+
+如果在 **ECU** 间通信中接收到已失效的数据元素，且所有接收方软件组件的 `handleInvalid` 属性都设置为 `keep`、且该通信未配置数据转换——则值的查询应返回 **COM** 提供的值以及无效情形的指示。
+
+在 **ECU** 间通信且所有接收方软件组件的 `handleInvalid` 属性设置为 `keep` 的情况下，在接收到无效数据元素时，**RTE** 应引发一个 `DataReceiveErrorEvent`。
+
+如果在 **ECU** 间通信中接收到已失效的数据元素，且所有接收方软件组件的 `handleInvalid` 属性都设置为 `replace`——则值的查询应返回 `initValue`（`ComDataInvalidAction` 为 `REPLACE`）。
+
+在 **ECU** 间通信且所有接收方软件组件的 `handleInvalid` 属性设置为 `replace` 的情况下，在接收到无效数据元素时，**RTE** 应引发一个 `DataReceivedEvent`，就像接收到有效值一样。
+
+如果在 **ECU** 间通信中数据元素已被失效、各接收方软件组件对 `handleInvalid` 请求不同的值、且特定 r-port 的 `handleInvalid` 属性设置为 `keep`——则该 r-port 的值查询应返回与 **COM** 处理失效时相同的值（复制 **COM** 行为）。
+
+在 **ECU** 间通信、各接收方软件组件对 `handleInvalid` 属性请求不同的值、且特定 R-Port 的该属性设置为 `keep` 的情况下，在接收到无效数据元素时，**RTE** 应引发一个 `DataReceiveErrorEvent`。
+
+如果在 **ECU** 间通信中接收到已失效的数据元素、各接收方软件组件对 `handleInvalid` 请求不同的值、且特定 r-port 的 `handleInvalid` 属性设置为 `replace`——**RTE** 应为该 r-port 使用 `initValue` 执行"无效值替换"。随后该接收将被视为接收到有效值来处理（使用 `DataReceivedEvent` 激活可运行实体）。
+
+如果在 **ECU** 间通信中接收到已失效的数据元素，且 `handleInvalid` 属性设置为 `dontInvalidate`——则值的查询应返回 **COM** 提供的值。随后该接收将被视为接收到有效值来处理（使用 `DataReceivedEvent` 激活可运行实体）。
+
+如果在 **ECU** 间通信中接收到已失效的数据元素，且所有接收方软件组件的 `handleInvalid` 属性都设置为 `externalReplacement`——则值的查询应返回取自 `ReceiverComSpec.replaceWith` 的值（例如常量、**NVRAM** 参数）。
+
+在 **ECU** 间通信且所有接收方软件组件的 `handleInvalid` 属性设置为 `externalReplacement` 的情况下，在接收到无效数据元素时，**RTE** 应引发一个 `DataReceivedEvent`，就像接收到有效值一样。
+
+如果在 **ECU** 间通信中接收到已失效的数据元素、各接收方软件组件对 `handleInvalid` 请求不同的值、且特定 r-port 的 `handleInvalid` 属性设置为 `externalReplacement`——**RTE** 应为该 r-port 使用取自 `ReceiverComSpec.replaceWith` 的值执行"无效值替换"。随后该接收将被视为接收到有效值来处理（使用 `DataReceivedEvent` 激活可运行实体）。
+
+###### 6.2.3.1.8.2. ECU 内通信情形下的数据元素失效
+
+发送方：
+
+如果启用了数据元素失效且通信为 **ECU** 内，则数据元素失效应由 **RTE** 实现。
+
+实际的无效值在 **SW-C** 模板的 `invalidValue` 中规定。
+
+接收方：
+
+如果在 **ECU** 内通信中数据元素已被失效，且 `handleInvalid` 属性设置为 `keep`——则值的查询应返回与 **COM** 处理失效时相同的值（复制 **COM** 行为）。随后无效值的接收将被作为错误处理，可运行实体的激活可以使用 `DataReceiveErrorEvent` 进行。
+
+如果在 **ECU** 内通信中接收到已失效的数据元素，且 `handleInvalid` 属性设置为 `replace`——**RTE** 应使用 `initValue` 执行"无效值替换"。随后该接收将被视为接收到有效值来处理（使用 `DataReceivedEvent` 激活可运行实体）。
+
+如果在 **ECU** 内通信中接收到已失效的数据元素，且 `handleInvalid` 属性设置为 `dontInvalidate`——则值的查询应返回接收到的值。随后该接收将被视为接收到有效值来处理（使用 `DataReceivedEvent` 激活可运行实体）。
+
+如果为复合 `VariableDataPrototype` 启用了数据失效，且通信为 **ECU** 内，则 **RTE** 应使该 `VariableDataPrototype` 的所有可失效的基本元素失效。
+
+**RTE** 生成器应拒绝违反 [constr_1302] 的配置。
+
+如果在 **ECU** 内通信中接收到已失效的数据元素，且 `handleInvalid` 属性设置为 `externalReplacement`——**RTE** 应使用取自 `ReceiverComSpec.replaceWith` 的值（例如常量、**NVRAM** 参数）执行"无效值替换"。随后该接收将被视为接收到有效值来处理（使用 `DataReceivedEvent` 激活可运行实体）。
+
+##### 6.2.3.1.9. 过滤器
+
+借助 `filter` 属性，可以在非排队 S/R 通信的接收方侧增加一个额外的过滤层。可以定义基于值的过滤器，即只有满足特定条件的信号值才提供给接收组件。可能的过滤算法取自 **OSEK COM** 3.0.2 版。它们列在元模型中（见[\[2\]](#ref-2)）。根据 **SW-C** 模板[\[2\]](#ref-2)，过滤器只允许用于与 **C** 语言无符号整数类型兼容的信号（即字符、无符号整数和枚举）。因此，过滤器不能应用于复合数据类型，例如 `ApplicationRecordDataType` 或 `ApplicationArrayDataType`。
+
+**RTE** 应按 **SW-C** 模板[\[2\]](#ref-2)的规定为非排队 S/R 通信提供基于值的过滤器。
+
+对于 **ECU** 间通信，过滤器的实现由 **COM** 模块完成。对于 **ECU** 内通信和分区间通信，**RTE** 应自行执行过滤。
+
+**RTE** 应为组件 **AUTOSAR** 接口中的每个 `dataElement` 支持不同的过滤器规定。
+
+如果在发送方侧和接收方侧都定义了过滤器，则发送方侧的过滤器先于接收方侧的过滤器适用。
+
+在过滤适用的情形下，输入值应在 `RunnableEntity` 启动之前从"未过滤缓冲区"（**unfiltered buffer**）计算得到，过滤计算的结果应存储在"已过滤缓冲区"（**filtered buffer**）中，而经由带过滤器的接收端口访问 `dataElement` 的 `RunnableEntity` 应访问"已过滤缓冲区"而非"未过滤缓冲区"。
+
+**注意：** 出于优化原因，只有当某个 `dataElement` 的过滤适用、且"未过滤缓冲区"完全不被使用时，才应提供"已过滤缓冲区"。
+
+如果同一个 `dataElement` 被 `RunnableEntity` 经由不同的接收端口访问、且每个端口应用了语义不同的过滤器，则应提供独立的"已过滤缓冲区"。
+
+##### 6.2.3.1.10. 缓冲
+
+发送方-接收方通信的缓冲应在接收方侧完成。这并不意味着 **COM** 在发送方侧不做缓冲。在接收方侧，根据软件实现策略的取值，对"数据"和"事件"的缓冲采取两种不同的方式。
+
+###### 6.2.3.1.10.1. "数据"接收的 last-is-best 语义
+
+在接收方侧，"数据"（`swImplPolicy` 不是 `queued`）的缓冲应由 **RTE** 通过为每个数据元素实例维护单一数据集来实现。
+
+使用单一数据集提供了所需的单元素队列加覆盖语义（新数据替换旧数据）。由于 **RTE** 需要确保数据一致性，生成的 **RTE** 应确保对数据集的非原子读和写（例如对复合数据类型）受到保护、免受冲突的并发访问。**RTE** 可以使用 **COM** 等下层来实现该缓冲区。
+
+**RTE** 应在 **SWS_Rte_07046** 中的一般初始化条件得到满足时，用取决于端口属性的启动值初始化该数据集。
+
+隐式或显式读访问应始终返回最后接收的数据。
+
+要求 **SWS_Rte_02518** 适用于是否存在引用为其生成 **API** 的 `VariableDataPrototype` 的 `DataReceivedEvent` 的两种情形。
+
+显式读访问应是非阻塞的，即不等待新数据到达。**RTE** 应提供对该数据读访问与写访问的互斥，例如通过独占区（**ExclusiveArea**）。
+
+当接收到新数据时，**RTE** 应静默丢弃该数据的前一个值，无论其是否已被读取。
+
+###### 6.2.3.1.10.2. "事件"接收的排队
+
+在 `swImplPolicy` 设置为 `queued` 的情况下，接收到的"事件"必须缓冲在队列中。
+
+**注意：** 即使接收方队列长度足够，**ECU** 间通信中也可能发生事件丢失。系统的时序必须设置为确保发送方侧的 **COM** 栈在发送方写入下一个事件之前得到处理。
+
+**RTE** 应为接收端口的每个类事件数据元素（`swImplPolicy = queued`）实现一个接收队列。
+
+引用该事件的 `QueuedReceiverComSpec` 的 `queueLength` 属性为接收队列分配一个恒定长度。
+
+事件应写入队列末尾并从队列头部读取（消耗性读取），即队列是先进先出（**first-in-first-out**）的。
+
+当队列已满时接收到新事件，**RTE** 应丢弃接收到的事件并置位一个错误标志。
+
+**SWS_Rte_02523** 所描述的错误标志应在下一次对队列的显式读访问期间复位。在这种情况下，状态值 `RTE_E_LOST_DATA` 应连同数据一起呈现给应用。
+
+如果轮询空队列，**RTE** 应以状态 `RTE_E_NO_DATA` 返回轮询函数。
+
+队列的最小长度为 1。
+
+**RTE** 生成器应拒绝 `QueuedReceiverComSpec` 的队列长度为 0 的 `queueLength` 属性。
+
+###### 6.2.3.1.10.3. 模式切换的排队
+
+模式切换通知的通信通常是事件驱动的。因此，**RTE** 提供与上述"排队"发送方-接收方通信类似的排队机制。
+
+**RTE** 应为每个模式机实例（**mode machine instance**）的模式切换通知实现一个接收队列。
+
+引用该模式机实例的 `ModeSwitchSenderComSpec` 的 `queueLength` 属性为接收队列分配一个恒定长度。与事件通信不同，对模式切换通信而言，队列长度关联到发送方侧——模式管理器（**mode manager**），因为它对模式机实例是唯一的。
+
+模式切换通知应写入队列末尾并从队列头部读取（消耗性读取），即队列是先进先出的。
+
+当队列已满时接收到新的模式切换通知，**RTE** 应丢弃接收到的通知。在这种情况下，`[Rte_Switch](#7166-rte_switch)` 将返回错误，见 **SWS_Rte_02675**。
+
+当模式切换完成时，**RTE** 应将模式切换通知出队。
+
+队列的最小长度为 1。
+
+**RTE** 生成器应拒绝 `ModeSwitchSenderComSpec` 的队列长度为 0 的 `queueLength` 属性。
+
+在队列长度为 1 的情况下，**RTE** 将在模式转换期间拒绝新的模式切换通知。
+##### 6.2.3.1.11. 运算
+
+###### 6.2.3.1.11.1. ECU 间映射
+
+本节描述发送方-接收方通信中从 `VariableDataPrototype` 到 **COM** 信号或 **COM** 信号组的映射。该映射在 **RTE** 生成器的输入中描述，位于系统模板[\[8\]](#ref-8)的 **DataMapping** 部分。
+
+如果一个 `VariableDataPrototype` 被映射到 **COM** 信号或 **COM** 信号组，但通信是本地的，则 **RTE** 生成器既可以使用该 **COM** 信号/**COM** 信号组进行发送，也可以使用其自己的通信直接实现进行发送。
+
+如果发送方/接收方通信是 **ECU** 间的，则每个数据元素的 **DataMappings** 元素应包含到至少一个 **COM** 信号或 **COM** 信号组的映射，否则该数据元素应被视为属于某个未连接端口的一部分。
+
+该映射定义了配置通信服务所需的信号的所有方面，例如网络信号字节序和通信总线——通过 **COM** 配置或已配置的数据转换。**RTE** 生成器只需要 **COM** 信号句柄 ID，因为这是调用 **COM API** 以及配置数据转换以执行它所必需的。
+
+**6.2.3.1.11.1.1 基本数据类型**
+
+**RTE** 应在为信号调用 **COM API** 时使用对应 `ComSignal` 的 **Com Symbolic Name**（见 **TPS_ECUC_02108**）。
+
+实际的 **Com Symbolic Name** 必须从 **COM** 模块的 **ECU** 配置中获取。**Com Symbolic Name** 用于在 **COM** 模块配置的 `ComSignal` 与系统模板中对应的 `ISignal` 之间建立链接。
+
+**6.2.3.1.11.1.2 复合数据类型**
+
+当数据原型具有复合数据类型时，**RTE** 必须对数据进行编组（**marshall**）。这可以通过两种方式实现：将复合类型的原子子元素显式映射到它们各自的 **COM** 信号，或者在使用数据转换时将整个复合类型映射到一个 **COM** 信号。
+
+**ECU** 配置的 **DataMappings** 元素和数据转换器的配置包含（或引用）足够的信息，通过指示要使用的 **COM** 信号或信号组，使数据项或操作参数能够被发送。不必为复合类型内的每个基本类型的叶子元素提供映射。
+
+**RTE** 生成器应支持把 **PPort** 中（由复合数据类型定义类型的）`VariableDataPrototype` 的叶子元素部分映射到 `SystemSignal`。
+
+部分映射（**partial mapping**）是指复合数据类型的叶子元素的一个子集被映射到相关 `SystemSignalGroup` 中的 `SystemSignal`（例如一个具有叶子元素 A、B、C、D 的记录，其中只有 B 和 C 被映射到 `SystemSignalGroup` 的 `SystemSignal`）。部分映射中被省略的元素被 **RTE** 生成器简单地忽略。
+
+对于 RPort，需要定义 **RTE** 生成器如何处理复合数据类型的部分映射，特别是如何对待映射中被省略的元素。
+
+对于从 `SystemSignal` 到 **RPort** 中（由复合数据类型定义类型的）`VariableDataPrototype` 叶子元素的部分映射中包含的元素，**RTE** 生成器应使用 **COM** 提供的数据。
+
+对于从 `SystemSignal` 到 **RPort** 中（由复合数据类型定义类型的）`VariableDataPrototype` 叶子元素的部分映射中被省略的元素，**RTE** 生成器在接收复合数据类型时应使用初始值。
+
+如果数据元素是复合数据类型、通信为 **ECU** 间且使用了数据转换（**COM Based Transformer** 除外），则 **DataMapping** 元素应把复合数据类型直接映射到一个 **COM** 信号以使用数据转换。
+
+上述将原子子元素各自映射到不同 **COM** 信号的要求有两个关键特征：第一，**COM** 负责基本类型的字节序转换（如果需要）；第二，发送方与接收方之间不同的结构成员对齐方式无关紧要，因为 **COM** 信号由 **COM** 配置打包进 **I-PDU**。
+
+**DataMappings** 应包含足够的 **COM** 信号来映射 **AUTOSAR** 信号的每个基本元素<sup>7</sup>。
+
+> 7 基本数据类型的 **AUTOSAR** 信号恰好包含一个基本元素，而复合数据类型的信号包含一个或多个基本元素。
+
+而将整个复合数据类型映射到一个 **COM** 信号的上述要求则把这些特征留给数据转换处理。
+
+**SWS_Rte_02557**：
+
+1. 映射到同一复合数据项元素的每个信号应映射到同一信号组。
+2. 如果两个信号未映射到同一复合数据项的元素，则它们不得映射到同一信号组。
+3. 如果一个信号未映射到复合数据项的元素，则它不得映射到信号组。
+
+**RTE** 应在为信号组调用 **COM API** 时使用对应 `ComSignalGroup` 的 **Com Symbolic Name**（见 **TPS_ECUC_02108**）。这也适用于使用 `Com_SendSignalGroupArray()` 和 `Com_ReceiveSignalGroupArray()` 的基于数组的信号组访问。
+
+**RTE** 应在为组信号调用 **COM API** 时使用对应 `ComGroupSignal` 的 **Com Symbolic Name**（见 **TPS_ECUC_02108**）。
+
+实际的 **Com Symbolic Name** 必须从 **COM** 模块的 **ECU** 配置中获取。**Com Symbolic Name** 用于在 **COM** 模块配置的 `ComSignalGroup` 与系统模板中对应的 `ISignalGroup` 之间建立链接。
+
+组信号的 **Com Symbolic Name** 用于在 **COM** 模块配置的 `ComGroupSignal` 与系统模板中对应的 `ISignal` 之间建立链接。
+
+**RTE** 应在为 **LdCom** 信号调用 **LdCom API** 时使用对应 `LdComIPdu` 的 **LdCom Symbolic Name**（见 **TPS_ECUC_02108**）。
+
+###### 6.2.3.1.11.2. 原子性
+
+**RTE** 需要将使用发送方-接收方通信发送的 **AUTOSAR** 信号作为原子处理。为实现这一点：
+
+* 要么使用 **COM** 提供的"信号组"机制。映射见 **SWS_Rte_02557**。
+* 要么使用"数据转换"方式。
+
+**RTE** 按上文所述把复合数据类型分解为单个信号，并通过 **COM API** 调用 `Com_SendSignal` 将它们传递给 **COM** 模块。由于这组单个信号必须作为原子处理，因此它被放入一个"信号组"中。信号组必须始终放置在单个 **I-PDU** 中。由此建立起原子性。当所有信号都已更新后，**RTE** 使用 **COM API** 调用 `Com_SendSignalGroup` 发起信号组的发送。
+
+正如预期的那样，接收方侧与发送方侧正好相反：**RTE** 必须先对信号组恰好调用一次 `Com_ReceiveSignalGroup`，然后调用 `Com_ReceiveSignal` 提取信号组内每个信号的值。
+
+信号组还有一个附加特性：**COM** 保证只有在属于该信号组的所有信号都被解包到缓冲区之后，才通过调用回调通知接收方其到达。
+
+数据转换方式在 [6.2.10](#6210-数据转换) 节中描述。
+
+###### 6.2.3.1.11.3. 扇出
+
+扇出（**fan-out**）可分为两种场景：**PDU** 扇出——同一 **I-PDU** 被发送到多个目的地；信号扇出——同一信号（即数据元素）在不同的 **I-PDU** 中被发送给多个接收方。
+
+对于 **ECU** 间通信，**RTE** 不执行 **PDU** 扇出。相反，**RTE** 对基本数据元素或已转换的数据调用一次 `Com_SendSignal`，并期望到多个 **PDU** 目的地的扇出在 **AUTOSAR** 通信栈的更下层发生。但是，**RTE** 必须支持信号扇出，因为这在 **AUTOSAR** 通信栈的任何下层都无法完成。
+
+系统模板[\[8\]](#ref-8)中的数据映射基于 `SystemSignal` 和 `SystemSignalGroup`。而 **COM** 模块使用对应的 `ISignal` 和 `ISignalGroup`（即 `ComSignal`、`ComSignalGroup`、`ComGroupSignal`）来定义 **COM API**。**RTE** 生成器需要识别是否为某个 `SystemSignal` 或 `SystemSignalGroup` 定义了多个 `ISignal` 或 `ISignalGroup` 元素，并相应地实现扇出。随后需要 **COM ECU** 配置中的对应元素（`ComSignal`、`ComSignalGroup`、`ComGroupSignal`）来建立 **RTE** 与 **COM** 之间的交互。
+
+**注意：** 在扇出的情况下，只需要考虑由 **RTE** 所运行的 `EcuInstance` 发送的 `ISignal` 或 `ISignalGroup` 元素。
+
+通过使用"数据转换"，**RTE** 中的信号扇出可以混合使用不同的序列化技术。这由 `ISignal` 或 `ISignalGroup` 与 `DataTransformation` 的关联决定。
+
+**RTE** 需要为一个 `SystemSignal` 和若干与之相连的、在 **Ecu Extract** 中满足以下条件的 `ISignal` 执行 **RTE** 信号扇出：
+
+* 这些 `ISignal` 在 `systemSignal` 角色中引用该 `SystemSignal`，并且
+* 某个 `DataMapping` 引用该 `SystemSignal`，并且
+* 该 `DataMapping` 引用某个 `PPortPrototype` 中的元素，并且
+* 这些 `ISignal` 由该 `EcuInstance` 发送，即 **COM** 配置中的 `ComSignal` 经由 `ComSystemTemplateSystemSignalRef` 引用到 `ISignalToIPduMapping`，后者又引用该 `ISignal` 以及派生出 `ComIPdu`（其 `ComIPduDirection = SEND`）的 `ISignalIPdu`。
+
+换言之，如果两个 `ISignal` 引用同一个 `SystemSignal`，但其中一个被接收、另一个被发送，则不执行 **RTE** 信号扇出。只有当多个被发送的 `ISignal` 引用同一个 `SystemSignal` 时，才执行 **RTE** 信号扇出。
+
+**RTE** 需要为一个 `SystemSignalGroup` 和若干与之相连的、在 **Ecu Extract** 中满足以下条件的 `ISignalGroup` 执行 **RTE** 信号扇出：
+
+* 这些 `ISignalGroup` 在 `systemSignalGroup` 角色中引用该 `SystemSignalGroup`，并且
+* 某个 `DataMapping` 引用该 `SystemSignalGroup`，并且
+* 该 `DataMapping` 引用某个 `PPortPrototype` 中的元素，并且
+* 每个 `ISignalGroup` 所包含的 `ISignal` 引用其对应的、属于该 `SystemSignalGroup` 的 `SystemSignal`，并且
+* 这些 `ISignalGroup` 由该 `EcuInstance` 发送，即 **COM** 配置中的 `ComSignalGroup` 及其对应的 `ComGroupSignal` 经由 `ComSystemTemplateSignalGroupRef` 或 `ComSystemTemplateSystemSignalRef` 引用到 `ISignalToIPduMapping`，后者又引用该 `ISignalGroup` 或 `ISignal` 以及派生出 `ComIPdu`（其 `ComIPduDirection = SEND`）的 `ISignalIPdu`。
+
+换言之，如果两个 `ISignalGroup` 引用同一个 `SystemSignalGroup`，但其中一个被接收、另一个被发送，则不执行 **RTE** 信号扇出。只有当多个被发送的 `ISignalGroup` 引用同一个 `SystemSignalGroup` 时，才执行 **RTE** 信号扇出。
+
+对于基本数据类型的 **ECU** 间发送，**RTE** 应对基本数据元素所映射到的每个 `ISignal` 执行：
+
+* 转换（如果该 `ISignal` 引用了 `TransformationTechnology`）；
+* `Com_SendSignal` 的调用。
+
+如果数据元素由复合数据类型定义类型，则基于 `ISignal` 或 `ISignalGroup` 与 `DataTransformation` 的关联，对每个信号扇出需要考虑以下几种场景：
+
+* 无"数据转换"：**RTE** 对复合数据类型中的每个基本元素（`ISignal`）及其映射到的每个 **COM** 信号调用 `Com_SendSignal`，并对数据元素所映射到的、不需要"数据转换"的每个 `ISignalGroup` 调用 `Com_SendSignalGroup`。
+* 不带 **COM Based Transformer** 的"数据转换"：**RTE** 执行转换，然后对每个具有到所定义 `DataTransformation` 的 `dataTransformation` 关联的 `ISignal` 调用 `Com_SendSignal`。
+* 带 **COM Based Transformer** 的"数据转换"：**RTE** 执行转换，然后对每个具有到所定义 `DataTransformation` 的 `comBasedSignalGroupTransformation` 关联的 `ISignalGroup` 调用 `Com_SendSignalGroupArray`。
+
+**注意：** 也可以把系统配置为同时使用上述多种场景。此时 **RTE** 执行所有已配置的场景。
+
+**SWS_Rte_04526**（复合数据的 ECU 间发送，无数据转换）：对于复合数据类型的 ECU 间发送，若
+
+* 定义了到该 `VariableDataPrototype` 的 `SenderReceiverToSignalGroupMapping`，并且
+* 相应的 `ISignalGroup` 未定义 `comBasedSignalGroupTransformation`，
+
+则 **RTE** 应对复合数据类型中元素所映射到的每个 `ISignal` 调用 `Com_SendSignal`，并对复合数据元素所映射到的每个 `ISignalGroup` 调用 `Com_SendSignalGroup`。
+
+**SWS_Rte_08586**（复合数据的 ECU 间发送，带基于 COM 的数据转换）：对于复合数据类型的 ECU 间发送，若
+
+* 定义了到该 `VariableDataPrototype` 的 `SenderReceiverToSignalGroupMapping`，并且
+* 相应的 `ISignalGroup` 定义了 `comBasedSignalGroupTransformation` 引用，
+
+则 **RTE** 应执行转换，然后对复合数据类型所映射到的 `ISignalGroup` 调用 `Com_SendSignalGroupArray`。
+
+**SWS_Rte_08587**（复合数据的 ECU 间发送，带数据转换）：对于复合数据类型的 ECU 间发送，若
+
+* 定义了到该 `VariableDataPrototype` 的 `SenderReceiverToSignalMapping`，并且
+* 相应的 `ISignal` 定义了 `dataTransformation` 引用，
+
+则 **RTE** 应执行转换，然后对复合数据类型所映射到的 `ISignal` 调用 `Com_SendSignal`。
+
+**注意：** 可以在 `transformingSystemSignal` 角色中把一个 `SystemSignal` 加入 `SystemSignalGroup`，以支持复杂的数据元素经由发送方/接收方通信、同时使用转换和传统的 **RTE** 与 **COM** 映射进行传输的配置。
+
+对于数据元素的 **ECU** 内发送，情况稍有不同：**RTE** 自行处理通信（不使用 **AUTOSAR** 通信栈的下层），因此必须确保数据元素被路由到所有接收方。对于分区间通信，**RTE** 可以使用 **IOC**。
+
+对于数据元素的分区间发送，**RTE** 应对每个接收方执行扇出。
+
+###### 6.2.3.1.11.4. 扇入
+
+在 **ECU** 间通信中从多个发送方接收数据时，要么由接收方侧的 **RTE** 收集在不同 **COM** 信号或 **COM** 信号组中接收到的数据并传递给一个接收方，要么由发送方侧的 **RTE** 向多个发送方提供对一个 **COM** 信号或 **COM** 信号组的共享访问。必须处理多个 **COM** 信号或信号组的接收方 **RTE** 会针对每个 **COM** 信号或 **COM** 信号组分别收到传入数据的通知，但在把数据传递给接收方时必须确保数据一致性。必须处理多个共享 **COM** 信号或信号组的发送方的发送方 **RTE**，必须确保对 **COM API** 的一致性访问，因为针对同一信号的 **COM API** 调用不是可重入的。
+
+**RTE** 需要为一个 `SystemSignal` 和若干与之相连的、在 **Ecu Extract** 中满足以下条件的 `ISignal` 执行 **RTE** 信号扇入：
+
+* 这些 `ISignal` 在 `systemSignal` 角色中引用该 `SystemSignal`，并且
+* 某个 `DataMapping` 引用该 `SystemSignal`，并且
+* 该 `DataMapping` 引用某个 `RPortPrototype` 中的元素，并且
+* 这些 `ISignal` 由该 `EcuInstance` 接收，即 **COM** 配置中的 `ComSignal` 经由 `ComSystemTemplateSystemSignalRef` 引用到 `ISignalToIPduMapping`，后者又引用该 `ISignal` 以及派生出 `ComIPdu`（其 `ComIPduDirection = RECEIVE`）的 `ISignalIPdu`。
+
+换言之，如果两个 `ISignal` 引用同一个 `SystemSignal`，但其中一个被接收、另一个被发送，则不执行 **RTE** 信号扇入。只有当多个被接收的 `ISignal` 引用同一个 `SystemSignal` 时，才执行 **RTE** 信号扇入。
+
+**RTE** 需要为一个 `SystemSignalGroup` 和若干与之相连的、在 **Ecu Extract** 中满足以下条件的 `ISignalGroup` 执行 **RTE** 信号扇入：
+
+* 这些 `ISignalGroup` 在 `systemSignalGroup` 角色中引用该 `SystemSignalGroup`，并且
+* 某个 `DataMapping` 引用该 `SystemSignalGroup`，并且
+* 该 `DataMapping` 引用某个 `RPortPrototype` 中的元素，并且
+* 每个 `ISignalGroup` 所包含的 `ISignal` 引用其对应的、属于该 `SystemSignalGroup` 的 `SystemSignal`，并且
+* 这些 `ISignalGroup` 由该 `EcuInstance` 接收，即 **COM** 配置中的 `ComSignalGroup` 及其对应的 `ComGroupSignal` 经由 `ComSystemTemplateSignalGroupRef` 或 `ComSystemTemplateSystemSignalRef` 引用到 `ISignalToIPduMapping`，后者又引用该 `ISignalGroup` 或 `ISignal` 以及派生出 `ComIPdu`（其 `ComIPduDirection = RECEIVE`）的 `ISignalIPdu`。
+
+换言之，如果两个 `ISignalGroup` 引用同一个 `SystemSignalGroup`，但其中一个被接收、另一个被发送，则不执行 **RTE** 信号扇入。只有当多个被接收的 `ISignalGroup` 引用同一个 `SystemSignalGroup` 时，才执行 **RTE** 信号扇入。
+
+如果多个发送方使用不同的 **COM** 信号或信号组，向一个接收方进行 `swImplPolicy` 不是 `queued` 的数据元素原型的 **ECU** 间发送，则接收方侧的 **RTE** 必须在确保数据一致性的同时，把最后接收的值传递给接收方组件。
+
+如果多个发送方使用不同的 **COM** 信号或信号组，向一个接收方进行具有事件语义的数据元素原型的 **ECU** 间发送，则接收方侧的 **RTE** 必须在确保数据一致性的同时，对所有传入值进行排队。
+
+如果多个发送方共享 **COM** 信号或信号组，向一个接收方进行数据元素原型的 **ECU** 间发送，则发送方侧的 **RTE** 应确保不并发调用这些信号的 **COM API**。
+
+###### 6.2.3.1.11.5. 发送方-接收方通信的时序图
+
+图 4.40 展示了 **RTE** 如何实现数据发送与非阻塞接收的发送方-接收方通信的时序图。该时序图还展示了规定了 `initValue` 时 `[Rte_Read](#71610-rte_read)` **API** 的行为。
+
+如果使用 **COM Based Transformer**[\[24\]](#ref-24)，图 4.40 中的序列相同，只是用 `Com_SendSignalGroupArray()` 替代 `Com_SendSignal()`，用 `Com_ReceiveSignalGroupArray()` 替代 `Com_ReceiveSignal()`。
+
+![Figure4-40.png](Figure4-40.png)
+
+图 4.41 展示了 **RTE** 如何实现事件发送与非阻塞接收的发送方-接收方通信的时序图。该时序图展示了队列为空时 `[Rte_Receive](#71612-rte_receive)` **API** 的行为。
+
+如果使用 **COM Based Transformer**[\[24\]](#ref-24)，图 4.41 中的序列相同，只是用 `Com_SendSignalGroupArray()` 替代 `Com_SendSignal()`，用 `Com_ReceiveSignalGroupArray()` 替代 `Com_ReceiveSignal()`。
+
+![Figure4-41.png](Figure4-41.png)
+
+图 4.42 展示了 **RTE** 如何实现事件发送与接收方侧可运行实体激活的发送方-接收方通信的时序图。
+
+如果使用 **COM Based Transformer**[\[24\]](#ref-24)，图 4.42 中的序列相同，只是用 `Com_SendSignalGroupArray()` 替代 `Com_SendSignal()`，用 `Com_ReceiveSignalGroupArray()` 替代 `Com_ReceiveSignal()`。
+
+![Figure4-42.png](Figure4-42.png)
+
+图 4.43 展示了使用 **LdCom** 时 **RTE** 如何实现数据发送与非阻塞接收的发送方-接收方通信的时序图。
+
+![Figure4-43.png](Figure4-43.png)
+
+##### 6.2.3.1.12. 数据元素的"从未接收"状态
+
+软件组件模板允许规定 **AUTOSAR** 接口中定义的非排队数据自系统启动以来是否被更新过。这个附加的可选状态使得检查数据元素自系统启动以来是否被改变成为可能。
+
+在接收方侧，`NonqueuedReceiverComSpec` 的 `handleNeverReceived` 属性应规定"从未接收"状态（**never received status**）的处理。
+
+`handleNeverReceived` 属性设置为 `TRUE` 的数据元素的初始状态应为 `RTE_E_NEVER_RECEIVED`。
+
+`handleNeverReceived` 属性设置为 `TRUE` 的数据元素的初始状态应在第一次接收发生时清除（即该数据元素已被另一个 **SW-C** 写入/更新，或已从闪存填充）。
+##### 6.2.3.1.13. 数据元素的"更新标志"
+
+软件组件模板允许规定 **AUTOSAR** 接口中定义的非排队数据自上次读取以来是否被更新过。这个附加的可选状态使得检查数据元素自上次读取以来是否被更新成为可能。
+
+在接收方侧，`NonqueuedReceiverComSpec` 的 `enableUpdate` 属性必须激活更新标志（**update flag**）的处理。
+
+对于 `RPortPrototype` 中 `NonqueuedReceiverComSpec` 的 `enableUpdate` 属性设置为 true、且至少一个 `RunnableEntity` 定义了 `dataReceivePointByArgument` 或 `dataReceivePointByValue` 角色中 `VariableAccess` 的每个 `dataElement`，**RTE** 应提供一个更新标志。
+
+配置了 `enableUpdate` 属性的数据元素的更新标志应在从 **COM** 或从本地软件组件（包括 `NvBlockSwComponentType`）接收到新数据时置位。
+
+在配置了 `enableUpdate` 属性的数据元素被作为"无效"接收的情况下，其更新标志的状态应根据 `DataReceivedEvent`/`DataReceiveErrorEvent` 的处理来确定：
+
+* 如果触发了 `DataReceivedEvent`，则更新标志应置位。
+* 如果触发了 `DataReceiveErrorEvent`，则更新标志应保持先前状态。
+
+**注意：** 数据元素的"更新标志"仅对显式通信可用，见 **SWS_Rte_07391**。
+
+`RPortPrototype` 中特定 `dataElement` 的更新标志应在每次通过 `[Rte_Read](#71610-rte_read)` 或 `[Rte_DRead](#71611-rte_dread)` 读取该数据元素之后清除。
+
+更新标志应在 **RTE** 启动时清除。
+
+更新标志可以通过 `[Rte_IsUpdated](#71637-rte_isupdated)` **API** 查询，见 [7.1.6.37](#71637-rte_isupdated) 节。
+
+由 `NvBlockSwComponentType` 接收的数据元素的更新标志，应在数据通过执行相应的 `Rte_SetMirror` 回调从 **NvM** 模块复制到 **NVRAM Block** 之后、或在某个 **SW-C** 通过执行 `[Rte_Write](#7164-rte_write)` **API** 向 **NVRAM Block** 写入新数据之后，置为 `TRUE`。
+
+##### 6.2.3.1.14. 动态数据类型
+
+动态数据是其长度在运行时变化的数据。
+
+这包括：
+
+* 元素数量可变的数组
+* 包含元素数量可变的数组的结构体
+
+这不包括：
+
+* 元素数量可变的结构体
+
+指明动态长度数组中有多少个元素有效的长度信息必须由 **SWC** 提供给 **RTE**。这通过使用带显式大小指示符（**size indicator**）的动态长度数组来实现（见[\[2\]](#ref-2)的"ApplicationArrayDataType"一章）。
+
+动态长度数组在实现中由一个结构体表示，该结构体包含大小指示符和带有有效载荷的动态长度数组。**SWC** 必须保持大小指示符与动态长度数组中有效元素数量的一致。
+
+在 **ECU** 间通信的情况下，动态数据被映射到动态信号，并通过 **COM** 栈经由 **TP** 接收/发送。
+
+在当前 **SWS_COM** 版本中，**COM** 将动态信号限制为 `ComSignalType` `UINT8DYN`（见要求 COM569）。
+
+将动态长度数组与 **ECU** 间通信的数据转换结合使用可以绕过这些限制，并使动态长度数组也适用于其他数据类型，因为数据转换的输出是 **COM** 支持的 `uint8[n]` 类型。
+
+为了遵循 **VFB** 概念，**ECU** 间与 **ECU** 内通信的能力应当相等。因此决定将 **COM** 的这些限制同样扩展到 **ECU** 内通信。
+
+由此，不同于 `uint8[n]` 的动态数据类型只有在使用 **ECU** 间通信的数据转换时才受 **RTE** 支持（无论通信是 **ECU** 内还是 **ECU** 间）。见 **SWS_Rte_07810**。
+
+如果数据元素的值从 **COM** 或 **LdCom** 获取，且该数据元素
+
+* 由 `uint8` 可变长度数组定义类型，并且
+* 通过 `SenderReceiverToSignalMapping` 映射到一个 `SystemSignal`，并且
+* 相应的 `ISignal` 未引用 `DataTransformation`，
+
+则 **RTE** 应将可变长度数组的大小指示符的值设置为动态长度信号的长度。
+
+如果数据元素的值向 **COM** 或 **LdCom** 发送，且该数据元素
+
+* 由 `uint8` 可变长度数组定义类型，并且
+* 通过 `SenderReceiverToSignalMapping` 映射到一个 `SystemSignal`，并且
+* 相应的 `ISignal` 未引用 `DataTransformation`，
+
+则 **RTE** 应将动态长度信号的长度值设置为可变长度数组中已定义大小指示符的值。
+
+**SWS_Rte_CONSTR_04584**（可变长度数组中大小指示符的数据类型）：如果 **SWS_Rte_04583** 或 **SWS_Rte_04584** 适用，则可变长度数组中大小指示符的数据类型必须与动态长度信号长度的数据类型匹配。
+
+##### 6.2.3.1.15. 经由 TP 的 ECU 间通信
+
+**ECU** 间通信可以在 **COM** 中配置为由 **TP** 支持。这在以下情况下尤为必要：
+
+* 信号的大小超过 **L-PDU** 的大小（大信号）
+* 信号组的大小超过 **L-PDU** 的大小
+
+在当前 **SWS_COM** 版本中，访问信号值的 **COM API** 对映射到 **N-PDU** 的信号可能返回错误码 `COM_BUSY`。该错误码表示对信号值的访问失败（被 **COM** 内部拒绝），应稍后重试。只有在请求访问信号值时相应 **PDU** 的发送或接收正在 **COM** 中进行时，才可能出现这种情况。
+
+这对具有数据语义（last is best 行为）的数据的处理是个问题，因为：
+
+* 类似 `COM_BUSY` 的错误与应具有可预测响应时间的实时系统不兼容。
+* 将该错误码转发给应用意味着每个应用都必须处理它（实现重试），即使它永远不会出现（数据未映射到 **N-PDU**）。
+* 在直接读或隐式写的情况下，错误码无法转发给应用。
+
+这对具有事件语义（排队行为）的数据的处理不是问题，因为：
+
+* 在 **COM** 回调（接收指示和发送确认，**RTE** 可用它们来处理队列）的执行期间不应出现 `COM_BUSY` 错误。
+* 数据由 **RTE** 内部排队，应用可以随时访问。
+
+**注意：** 第一点在 `ComIPduSignalProcessing` 配置为 `IMMEDIATE` 时尤其成立。但如果 `ComIPduSignalProcessing` 配置为 `DEFFERED` 且两个事件被紧密接收，则当 **RTE** 尝试访问相应的 **COM** 信号时，第二个事件的接收可能已经开始。在这种情况下，**RTE** 会收到 `COM_BUSY` 并且该事件会丢失，但这更多是配置问题而非 **COM** 的限制。
+
+由此决定将映射到 **N-PDU** 的数据限制为事件语义（排队行为）。见 **SWS_Rte_07811**。
+
+**注意：** 由于数据映射对 **RTE** 契约阶段不是强制的，因此某个配置可能在契约阶段被接受，而在生成阶段（当数据映射已知时）被拒绝。
+
+动态数据在 **ECU** 间通信时总是映射到 **N-PDU**。因此，为了避免这种情况（生成阶段的延迟拒绝）并遵循 **VFB** 概念（**ECU** 内和 **ECU** 间应相等），决定将该限制扩展到每个动态数据，无论通信是 **ECU** 内还是 **ECU** 间。见 **SWS_Rte_07812**。
+
+##### 6.2.3.1.16. 字节数组的 ECU 间通信
+
+###### 6.2.3.1.16.1. COM
+
+一般而言，在 **ECU** 间通信的情况下，数组的通信必须利用信号组机制将数组发送给 **COM**。这意味着用 `Com_SendSignal()` **API** 把每个数组元素发送到 **COM** 中的一个缓冲区，最后用 `Com_SendSignalGroup()` **API** 发送信号组。
+
+这条一般规则的一个例外是字节数组。在这种情况下，**RTE** 应使用 **COM** 的原生接口直接发送数据。
+
+如果相应的 `VariableDataPrototype` 映射到一个 `SystemSignal`，则 **RTE** 应使用 `Com_SendSignal` 或 `Com_ReceiveSignal` **API** 发送或接收定长字节数组。
+
+如果相应的 `VariableDataPrototype` 映射到一个 `SystemSignal`，则 **RTE** 应使用 `Com_SendDynSignal` 或 `Com_ReceiveDynSignal` **API** 发送或接收变长字节数组。
+
+如果定长或变长数组的 `VariableDataPrototype` 映射到一个 `SystemSignalGroup`，则要求 **SWS_Rte_04526** 适用。
+
+###### 6.2.3.1.16.2. 面向大数据的高效 COM
+
+是否使用面向大数据的高效 **COM**（**LdCom**）的决策规则在系统模板[\[8\]](#ref-8)第 6.2 章中描述。
+
+如果相应的 `ISignal` 映射到 `LdComIPdu`，则 **RTE** 应使用 **LdCom** 发送/接收字节数组。
+
+**发送**
+
+如果 `LdComIPdu` 中的 `LdComApiType` 设置为 `LDCOM_IF`，则 **RTE** 应使用 `LdCom_Transmit` **API**。
+
+在 `LdCom_Transmit` 使用 If-**API** 的情况下，发送请求立即传递给下层。**API** 返回后，数据无需被锁定。
+
+如果 `LdComIPdu` 中的 `LdComApiType` 设置为 `LDCOM_TP`，则 **RTE** 应使用 `LdCom_Transmit` **API**。
+
+在使用 TP-**API** 的情况下，`LdCom_Transmit` 之后，**LdCom** 会异步地进行一次或多次相应 `Rte_LdComCbkCopyTxData` 通知回调的调用。发送同样由 `Rte_LdComCbkTpTxConfirmation` 通知回调的调用结束。
+
+在此期间，数据必须保持可用以传递给 **LdCom**。
+
+**RTE** 应在其发起了一次 **Tp** 发送之后（`LdCom_Transmit` 返回 `E_OK`）锁定信号缓冲区。
+
+在信号缓冲区被锁定期间，不允许对该项进行进一步的发送请求。对于数据语义，这意味着 `[Rte_Write](#7164-rte_write)`/`[Rte_Call](#71613-rte_call)` 将返回 `RTE_E_COM_BUSY`。
+
+**RTE** 应在 `Rte_LdComCbkTpTxConfirmation` 通知回调被调用之后（无论结果如何）解锁信号缓冲区。
+
+**RTE** 应在每次 `Rte_LdComCbkCopyTxData` 通知回调的调用中，把指定数量的字节复制到所提供的目的地。
+
+对于配置了 `Rte_LdComCbkTriggerTransmit` 通知回调的信号，相应信号的数据必须在 **RTE** 的整个运行期间可用。
+
+**理由：** 对 `TriggerTransmit` 的调用可能随时发生，因为它源自更下层的 **BSW** 层。
+
+**提示：** **SWS_Rte_01382** 的主要用例是在 **ServiceDiscovery** 中向新（迟）订阅的接收方发送当前值。
+
+如果 `Rte_LdComCbkTriggerTransmit` 通知回调被调用，则应把数据复制到所提供的目的地。
+
+**接收**
+
+如果 `Rte_LdComCbkRxIndication` 通知回调被调用，**RTE** 应执行以下步骤：
+
+* 把传递的信号数据复制到缓冲区
+* 触发相应的 `DataReceivedEvent`（如果已配置）
+* 返回
+
+如果 `Rte_LdComCbkStartOfReception` 通知回调被调用，**RTE** 应锁定相应的接收缓冲区。
+
+如果 `Rte_LdComCbkCopyRxData` 通知回调被调用，**RTE** 应把传递的信号数据（或指示的部分）复制到先前锁定的接收缓冲区。
+
+如果 `Rte_LdComCbkTpRxIndication` 通知回调被调用，**RTE** 应解锁先前锁定的接收缓冲区。
+
+当 `Rte_LdComCbkTpRxIndication` 通知回调被调用且传递的结果码为 `RTE_E_OK` 时，应触发 `DataReceivedEvent`。对于其他结果码，如果为数据元素配置了 `invalidValue`，则信号值应被设置为该 `invalidValue`。
+
+##### 6.2.3.1.17. 确认事件的处理
+
+作为一般规则，确认事件 `DataWriteCompletedEvent` 和 `DataSendCompletedEvent` 应在向所有接收方的发送执行完毕之后、且在 **ECU** 间通信的情况下从 **COM** 或 **LdCom** 收到所有确认之后立即引发。
+
+引用一个 `RunnableEntity` 且被一个 `WaitPoint` 引用的 `DataSendCompletedEvent` 应为无效配置，被 **RTE** 生成器拒绝。
+
+如果 `DataSendCompletedEvent` 引用的 `VariableDataPrototype` 未启用发送确认，则 **RTE** 生成器应拒绝该配置。
+
+作为实现的一部分，必须考虑以下通信场景的详细规则：
+
+**分区内通信**
+
+对于具有隐式 `dataWriteAccess` 的分区内通信，当且仅当任务/ISR2 终止且到全局 **RTE** 缓冲区的写回复制动作完成时，才引发 `DataWriteCompletedEvent`。发送状态应为 `RTE_E_TRANSMIT_ACK`，可以通过 `[Rte_IFeedback](#71636-rte_ifeedback)` **API** 收集。
+
+对于具有非相干隐式 `dataWriteAccess` 的分区内通信，如果所涉及的可运行实体全部运行在一个抢占区内，则不会执行到全局 **RTE** 缓冲区的写回复制动作。在这种情况下，`DataWriteCompletedEvent` 应在发送任务/ISR2 中最后一个发送可运行实体终止之后引发。发送状态应为 `RTE_E_TRANSMIT_ACK`，可以通过 `[Rte_IFeedback](#71636-rte_ifeedback)` **API** 收集。
+
+对于具有显式 `dataSendPoint` 的分区内通信，当且仅当向所有接收方的发送执行完毕时，才引发 `DataSendCompletedEvent`。发送状态应为 `RTE_E_TRANSMIT_ACK`，可以通过 `[Rte_Feedback](#7168-rte_feedback)` **API** 收集。
+
+**分区间通信**
+
+对于具有隐式 `dataWriteAccess` 的分区间通信，当且仅当任务/ISR2 终止且到全局 **RTE** 缓冲区的写回复制动作完成时，才引发 `DataWriteCompletedEvent`。此外，数据接收分区处的数据写操作的执行必须已经发生。由此可以忽略 **IOC** 对各写操作的返回状态。发送状态应为 `RTE_E_TRANSMIT_ACK`，可以通过 `[Rte_IFeedback](#71636-rte_ifeedback)` **API** 收集。
+
+对于具有非相干隐式 `dataWriteAccess` 的分区间通信，如果所涉及的可运行实体全部运行在一个抢占区内，则不会执行到全局 **RTE** 缓冲区的写回复制动作。在这种情况下，`DataWriteCompletedEvent` 应在发送任务/ISR2 中最后一个发送可运行实体终止之后、且数据接收分区处的数据写操作执行完毕之后引发。由此可以忽略 **IOC** 对各写操作的返回状态。发送状态应为 `RTE_E_TRANSMIT_ACK`，可以通过 `[Rte_IFeedback](#71636-rte_ifeedback)` **API** 收集。
+
+对于具有显式 `dataSendPoint` 的分区间通信，当且仅当向所有接收方的发送执行完毕且数据接收分区处的数据写操作执行完毕时，才引发 `DataSendCompletedEvent`。由此可以忽略 **IOC** 对各写操作的返回状态。发送状态应为 `RTE_E_TRANSMIT_ACK`，可以通过 `[Rte_Feedback](#7168-rte_feedback)` **API** 收集。
+
+**ECU 间通信**
+
+单个 **COM** 信号（组）或 **LdCom IPdu** 的发送在发生以下情形之一时被视为完成：
+
+* 调用了相关的发送确认回调（`Rte_COMCbkTAck`、`Rte_LdComCbkTxConfirmation` 或 `Rte_LdComCbkTpTxConfirmation`）
+* 调用了相关的发送错误回调（`Rte_COMCbkTErr`）
+* 发生了发送超时（`Rte_COMCbkTxTOut` 或 **RTE** 内部超时监督）
+
+对于具有隐式 `dataWriteAccess` 的 **ECU** 间通信，当且仅当任务/ISR2 终止且到全局 **RTE** 缓冲区的写回复制动作完成时，才引发 `DataWriteCompletedEvent`。此外，所有相关 **COM** 信号（组）和 **LdCom IPdu** 的发送必须已完成。发送状态（成功或错误类型）可以通过 `[Rte_IFeedback](#71636-rte_ifeedback)` **API** 收集。
+
+对于具有非相干隐式 `dataWriteAccess` 的 **ECU** 间通信，如果所涉及的可运行实体全部运行在一个抢占区内，则不会执行到全局 **RTE** 缓冲区的写回复制动作。在这种情况下，`DataWriteCompletedEvent` 应在发送任务/ISR2 中最后一个发送可运行实体终止之后、且所有相关 **COM** 信号（组）和 **LdCom IPdu** 的发送完成之后引发。发送状态（成功或错误类型）可以通过 `[Rte_IFeedback](#71636-rte_ifeedback)` **API** 收集。
+
+对于具有显式 `dataSendPoint` 的 **ECU** 间通信，当且仅当向所有接收方的发送执行完毕且所有相关 **COM** 信号（组）和 **LdCom IPdu** 的发送完成时，才引发 `DataSendCompletedEvent`。发送状态（成功或错误类型）可以通过 `[Rte_Feedback](#7168-rte_feedback)` **API** 收集。
+
+注意，`[Rte_Write](#7164-rte_write)`、`[Rte_Send](#7165-rte_send)` 或 `[Rte_IWrite](#71620-rte_iwrite)` **API** 内部发生的错误不会导致引发 `DataWriteCompletedEvent` 或 `DataSendCompletedEvent`。
+
+##### 6.2.3.1.18. 面向应用的元数据
+
+如果数据元素
+
+* 用于 **ECU** 间通信，并且
+* 被其 `SenderReceiverInterface` 的某个 `MetaDataItemSet` 引用，
+
+则 **RTE** 应在 **COM** 或 **LdCom** 与应用之间转发该数据元素的元数据（**meta data**）。
+
+**注意：** 如果数据元素的数据由 **RTE** 缓冲，则元数据也必须被缓冲。
+
+软件组件模板规范[\[2\]](#ref-2)描述了 `SenderReceiverInterface` 上下文中元数据的建模。**AUTOSAR COM** 规范[\[3\]](#ref-3)描述了扩展的 **COM API**，而对于 **LdCom**，应使用 `PduInfoType` 中已有的 `SduMetaDataPtr` 结构成员。
+
+如果数据元素被其 `SenderReceiverInterface` 的某个 `MetaDataItemSet` 引用，则 **RTE** 应提供对单个元数据项的访问。
+#### 6.2.3.2. 客户端-服务器
+
+##### 6.2.3.2.1. 概述
+
+客户端-服务器通信涉及两个实体：作为服务的需求方（或使用方）的客户端（**client**），以及提供服务的服务器（**server**）。
+
+客户端发起通信，请求服务器执行某项服务，必要时传递一组参数。服务器以 **RTE** 的形式等待来自客户端的传入通信请求，执行所请求的服务，并对客户端的请求分派响应。因此，发起的方向被用于归类某个 **AUTOSAR** 软件组件是客户端还是服务器。
+
+单个组件可以既是客户端又是服务器，取决于软件的具体实现。
+
+当客户端发出请求时，由 **RTE** 自身执行对服务器的调用。该调用相对于 **RTE** 是同步发生的（通常经由函数调用），但客户端的调用相对于服务器可以是同步的（等待服务器完成）或异步的。
+
+**注意：** 应避免具有异步操作的服务器（即它们接受一个请求、又通过调用调用方的服务器提供反馈），因为 **RTE** 不知道这两次客户端-服务器通信之间的链接。特别地，服务器不应有 OUT（或 INOUT）参数，因为当请求被处理时，**RTE** 无法在调用方的环境中完成结果的复制。
+
+服务器被调用的唯一机制是来自客户端的客户端-服务器调用请求。
+
+上述要求意味着不允许在 **RTE** 的作用域之外直接调用实现服务器的函数。
+
+由属性 `canBeInvokedConcurrently` 设置为 `FALSE` 的 `RunnableEntity` 实现的服务器不允许被并发调用，并且由于一个服务器可以有一个或多个客户端，服务器可能必须处理并发的服务调用（n:1 通信），**RTE** 必须确保并发调用不会相互干扰。
+
+当服务器可运行实体属性 `canBeInvokedConcurrently` 或 `BswModuleClientServerEntry` 属性 `isReentrant` 为 `FALSE` 时，**RTE** 应确保强制执行操作的调用串行化（**call serialization**）<sup>8</sup>（见 **SWS_Rte_05083**）。
+
+> 8 调用串行化确保在任一时刻至多只有一个控制线程在执行某个可执行实体的一个实例。**AUTOSAR** 软件组件可以有多个实例（因此可运行实体也可以有多个实例）。每个实例代表一个不同的服务器，可以由不同的控制线程并行执行，因此串行化只适用于可运行实体的单个实例——同一组件实例内的多个可运行实体也可以并行执行。
+
+**注意：** 同一个服务器可以同时使用同步和异步通信进行调用。
+
+还要注意，即使 `canBeInvokedConcurrently` 为 `FALSE`，一个 `AtomicSwComponentType` 也可能被多次实例化。在这种情况下，`RunnableEntity` 的实现仍然可能被多个任务并发调用。但是，不会有针对相同实例句柄的实现的并发调用。
+
+**RTE** 的客户端-服务器通信实现应确保：当多个客户端使用同一服务时，服务结果被分派给正确的客户端。
+
+客户端/服务器操作的结果可以使用"等待点唤醒"、"显式数据读访问"或"可运行实体激活"来收集。
+
+**SWS_Rte_07409**：如果以下所有条件都满足：
+
+* 服务器可运行实体的属性 `canBeInvokedConcurrently` 设置为 `TRUE`
+* 客户端和服务器在同一分区中执行，即分区内客户端-服务器通信
+* `ServerCallPoint` 为 `Synchronous`
+* `OperationInvokedEvent` 未映射到 **OsTask**
+
+则 **RTE** 生成器应将客户端-服务器通信实现为直接函数调用（**direct function call**）。
+
+**SWS_Rte_08904**：如果以下所有条件都满足：
+
+* 服务器可运行实体的属性 `canBeInvokedConcurrently` 设置为 `TRUE`
+* 客户端和服务器在不同分区中执行，即分区间客户端-服务器通信
+* `ServerCallPoint` 为 `Synchronous`
+* `OperationInvokedEvent` 未映射到 **OsTask**
+
+则 **RTE** 生成器应将客户端-服务器通信实现为可信函数调用（**trusted function call**）。
+
+**注意：** 在相关的 `RteEventToTaskMapping` 不允许被调用的服务器可运行实体并行调用或重入调用的情况下，即使服务器可运行实体的属性 `canBeInvokedConcurrently` 设置为 `FALSE`，**RTE** 生成器也可以实现为直接或可信函数调用的客户端-服务器调用。
+
+由于通信在概念上经由 **RTE** 发生（它通过一个 **RTE API** 调用发起），该优化并不违反服务器只能经由客户端-服务器请求调用的要求（见 [7.1.6.13](#71613-rte_call) 节、**SWS_Rte_06019**）。
+
+**RTE** 生成器应拒绝这样的配置：某个 `ClientServerOperation` 具有一个 `ImplementationDataType` 类别为 `DATA_REFERENCE`、方向为 INOUT 或 OUT 的 `ArgumentDataPrototype`。
+
+如果串行化调用的返回值不等于 `E_OK`，则 **RTE** 不得调用 `Com_SendSignal`。
+
+##### 6.2.3.2.2. 多重性
+
+客户端-服务器接口包含两个维度的多重性：多个客户端调用单个服务器，以及客户端-服务器接口内的多个操作。
+
+###### 6.2.3.2.2.1. 多个客户端单个服务器
+
+客户端-服务器通信涉及一个 **AUTOSAR** 软件组件调用另一个 **AUTOSAR** 软件组件中定义的"服务器"操作，该操作可能返回也可能不返回应答。
+
+**RTE** 应支持多个客户端调用同一服务器操作（"n:1"通信，n ≥ 1）。
+
+###### 6.2.3.2.2.2. 多个操作
+
+客户端-服务器接口包含一个或多个操作。需要 **AUTOSAR** 客户端-服务器接口的 **AUTOSAR** 软件组件的端口可以独立地调用该接口中定义的任何操作。
+
+**RTE API** 应支持对客户端-服务器接口中操作的独立访问。
+
+**示例 4.11**：考虑一个具有两个操作 `op1` 和 `op2` 的客户端-服务器接口，且某个 **AUTOSAR** 软件组件定义需要一个由该接口定义类型的端口。因此，**RTE** 生成器将创建两个 **API** 调用：一个用于调用 `op1`，另一个用于调用 `op2`。根据配置，这些调用可以同步或异步地调用服务器操作。
+
+回顾一下，发送方-接收方接口中的每个数据元素都是独立发送的（见 [6.2.3.1.3](#62313-多个数据元素) 节），多个数据项的相干发送通过将多个项组合成单个复合数据类型来实现。客户端-服务器接口中操作参数的发送与记录类似，因为 **RTE** 保证所有参数被原子地处理。
+
+**RTE** 应将客户端-服务器操作的参数和结果作为原子处理。
+
+然而，与发送方-接收方接口不同，没有提供把多个客户端-服务器操作组合为一个组来调用的设施。
+
+###### 6.2.3.2.2.3. 单个客户端多个服务器
+
+**RTE** 不要求支持由单个客户端组件请求调用的多个服务器操作（"1:n"通信，n > 1）（见[\[2\]](#ref-2)中的 [constr_1037]）。
+
+###### 6.2.3.2.2.4. 调用串行化
+
+每个客户端都可以同时调用服务器，因此 **RTE** 需要支持对服务器的多个请求。
+
+**RTE** 应支持对服务器操作的并发调用请求。
+
+有两种在 `RteEventToTaskMapping`/`RteEventToIsrMapping` 中映射 `OperationInvokedEvent`、或在 `RteBswEventToTaskMapping`/`RteBswEventToIsrMapping` 中映射 `BswOperationInvokedEvent` 的方式，允许用户选择如何处理并发请求：
+
+* 将它们映射到任务/ISR2，以及
+* 不将它们映射到任务/ISR2。
+
+**映射到任务/ISR2 的（Bsw）OperationInvokedEvent**
+
+在 `OperationInvokedEvent`/`BswOperationInvokedEvent` 映射到任务/ISR2 的情况下，同一服务器 `ExecutableEntity` 的、同样打算在任务/ISR2 中执行的所有其他 `OperationInvokedEvent`/`BswOperationInvokedEvent` 必须映射到同一任务/ISR2 中的相同位置（见 **SWS_Rte_CONSTR_03873**）。随后，对于经由这些 `OperationInvokedEvent` 所引用端口（或这些 `BswOperationInvokedEvent` 所引用 `BswModuleEntity`）进行的调用，服务器被调用串行化（见 **SWS_Rte_08002**）。
+
+在这种情况下，调用串行化确保经由这组 `OperationInvokedEvent`/`BswOperationInvokedEvent` 到达服务器的所有传入请求按其接收顺序排队并分派，且服务器永远不会被重入调用。
+
+**注意：** 如果上述要求生效，则被执行的服务器 `ExecutableEntity` 上的 `canBeInvokedConcurrently` 或 `isReentrant` 属性的值无关紧要。在这种情况下，**RTE** 必须无视这些设置对调用进行串行化。
+
+如果实现服务器操作的 `RunnableEntity`/`BswCalledEntity` 映射到 **OsTask**，则参数 `RteServerNumberOfRequestProcessing`（设置在 `RteEventToTaskMapping` 上）或 `RteBswServerNumberOfRequestProcessing`（设置在 `RteBswEventToTaskMapping` 上）可用于限制每次 **OsTask** 执行可以处理多少个排队请求。
+
+如果实现服务器操作的 `RunnableEntity` 映射到 **OsTask**，且相关 `RteEventToTaskMapping` 的 `RteServerNumberOfRequestProcessing` 未配置，则 **RTE** 应在一次 **OsTask** 执行内将所有待处理请求出队并处理。
+
+如果实现服务器操作的 `RunnableEntity` 映射到 **OsTask**，且相关 `RteEventToTaskMapping` 的 `RteServerNumberOfRequestProcessing` 已配置，则 **RTE** 应在每次 **OsTask** 执行中仅出队并处理 X 个（X 为 `RteServerNumberOfRequestProcessing` 参数的配置值）待处理请求。
+
+如果实现服务器操作的 `BswCalledEntity` 映射到 **OsTask**，且相关 `RteBswEventToTaskMapping` 的 `RteBswServerNumberOfRequestProcessing` 未配置，则 **RTE** 应在一次 **OsTask** 执行内将所有待处理请求出队并处理。
+
+如果实现服务器操作的 `BswCalledEntity` 映射到 **OsTask**，且相关 `RteBswEventToTaskMapping` 的 `RteBswServerNumberOfRequestProcessing` 已配置，则 **RTE** 应在每次 **OsTask** 执行中仅出队并处理 X 个（X 为 `RteBswServerNumberOfRequestProcessing` 参数的配置值）待处理请求。
+
+**未映射到任务/ISR2 的（Bsw）OperationInvokedEvent**
+
+在不把 `OperationInvokedEvent`/`BswOperationInvokedEvent` 映射到任务/ISR2 的情况下，对于经由该 `OperationInvokedEvent` 所引用端口（或该 `BswOperationInvokedEvent` 所引用 `BswModuleClientServerEntry`）进行的调用，服务器以直接函数调用（见 **SWS_Rte_07409**）或可信函数调用（见 **SWS_Rte_08904**）执行（见 **SWS_Rte_06798** 和 **SWS_Rte_06799**）。这样的服务器执行可能与其他 `OperationInvokedEvent`/`BswOperationInvokedEvent` 引起的同一服务器的执行并发发生，甚至与经由同一 `OperationInvokedEvent`/`BswOperationInvokedEvent` 的执行并发发生（例如不同执行上下文中的不同客户端连接到同一服务器端口时）。
+
+只有当 `RunnableEntity` 的 `canBeInvokedConcurrently` 或 `BswModuleClientServerEntry` 的 `isReentrant` 属性设置为 `TRUE` 时（见 **SWS_Rte_03523** 和 **SWS_Rte_07525**），才允许同一服务器 `ExecutableEntity` 的并发执行——否则它们被拒绝（见 **SWS_Rte_05083**）。
+
+**注意：** 即使 `RunnableEntity.canBeInvokedConcurrently` 或 `BswModuleClientServerEntry.isReentrant` 属性设置为 `FALSE`，如果客户端 `ExecutableEntity` 到任务/ISR2 的映射不会隐含服务器的并发执行，**RTE** 生成器仍可以使用直接或可信函数调用（见 **SWS_Rte_05083** 与 **SWS_Rte_08612**）。
+
+##### 6.2.3.2.3. 通信超时
+
+`ServerCallPoint` 允许规定一个超时，以便可以通知客户端服务器未响应并做出相应反应。如果客户端同步调用服务器，调用服务器的 **RTE API** 调用会报告超时。如果客户端异步调用服务器，超时通知由 **RTE** 作为收集服务器操作结果的 **API** 调用的返回值传递给客户端。
+
+**RTE** 应确保对客户端-服务器通信执行超时监视，而不论结果的接收模式如何。
+
+如果服务器被异步调用，且规定了一个用于收集结果的 `WaitPoint`，则必须规定两个超时值：一个用于 `ServerCallPoint`，一个用于 `WaitPoint`。
+
+**RTE** 生成器应拒绝这样的配置：为 `AsynchronousServerCallPoint` 与为该 `AsynchronousServerCallPoint` 关联 `AsynchronousServerCallReturnsEvent` 的 `WaitPoint` 规定了不同的超时值。
+
+在异步客户端-服务器通信中，与某个 `ClientServerOperation` 的 `AsynchronousServerCallPoint` 关联的 `AsynchronousServerCallReturnsEvent` 表明服务器通信已完成或发生了超时。关于服务器操作成功与否的状态信息作为为收集结果而生成的 **RTE API** 调用的返回值提供。
+
+对于操作原型的每次异步调用，**RTE** 只应向客户端组件传递一个 `AsynchronousServerCallReturnsEvent`。该事件应表明发送成功或发送不成功。
+
+关于异步服务器调用成功或失败的状态信息应作为检索结果的 **RTE API** 调用的返回值提供。
+
+检测到超时之后，不得向客户端传递任何结果。
+
+在 `[Rte_Call](#71613-rte_call)` **API** 返回 `RTE_E_LIMIT`、`RTE_E_TRANSFORMER_LIMIT`、`RTE_E_COM_STOPPED`、`RTE_E_TIMEOUT`、`RTE_E_UNCONNECTED`、`RTE_E_IN_EXCLUSIVE_AREA` 或 `RTE_E_SEG_FAULT` 的情况下，**RTE** 不得修改 OUT 和 INOUT 参数。
+
+在 `[Rte_Result](#71614-rte_result)` **API** 返回 `RTE_E_NO_DATA`、`RTE_E_HARD_TRANSFORMER_ERROR`、`RTE_E_COM_STOPPED`、`RTE_E_TIMEOUT`、`RTE_E_UNCONNECTED`、`RTE_E_IN_EXCLUSIVE_AREA` 或 `RTE_E_SEG_FAULT` 的情况下，**RTE** 不得修改 OUT 和 INOUT 参数。
+
+由于异步客户端一次只能有一个未完成的服务器调用，**RTE** 必须监视何时可以再次安全地调用服务器。
+
+如果服务器被异步调用、未发生超时且存在 `AsynchronousServerCallResultPoint`，则在服务器的结果成功传递给客户端之前，**RTE** 对后续 `[Rte_Call](#71613-rte_call)` **API** 调用返回 `RTE_E_LIMIT`（见 **SWS_Rte_01105**）。
+
+如果服务器被异步调用、未发生超时且不存在 `AsynchronousServerCallResultPoint`，则在服务器完成对客户端最后一个请求的处理之前，**RTE** 对后续 `[Rte_Call](#71613-rte_call)` **API** 调用返回 `RTE_E_LIMIT`（见 **SWS_Rte_01105**）。
+
+在分区内客户端-服务器通信中，**RTE** 可以确定服务器可运行实体是否仍在运行。
+
+如果在异步分区内客户端-服务器通信中检测到超时，则 **RTE** 应确保在服务器可运行实体终止之前，同一客户端不会再次调用该服务器。
+
+在 **ECU** 间通信中，客户端 **RTE** 不知道服务器的实际状态。服务器的响应可能因通信错误或服务器本身未响应而丢失。由于客户端侧的 **RTE** 无法区分这两种情况，客户端必须能够在超时到期后再次调用服务器。由于同一 **ECU** 中的分区以与独立 **ECU** 类似的方式解耦，客户端-服务器通信对 **ECU** 间和分区内通信应表现相似。
+
+如果在异步 **ECU** 间或分区间客户端-服务器通信中检测到超时，则 **RTE** 应确保在超时通知传递给客户端之后，同一客户端可以再次调用该服务器。
+
+注意，这可能导致客户端与服务器失步，即服务器的响应属于客户端前一个已超时的调用。应用必须在超时发生后处理客户端与服务器的同步。
+
+如果 `ServerCallPoint` 的超时值为 0，则不执行超时监视。
+
+如果服务器可运行实体的 `canBeInvokedConcurrently` 属性设置为 `TRUE`，且调用服务器的 **RTE API** 调用实现为直接或可信函数调用，则不执行超时监视。
+
+**注意：** 在 **ECU** 间或分区间客户端-服务器通信的情况下，建议在使用同步服务器调用时始终规定大于 0 的超时。否则，在服务器队列已满的情况下，客户端将无限等待服务器响应。
+
+##### 6.2.3.2.4. 端口定义的参数值
+
+端口定义的参数值（**port-defined argument values**）的存在是为了支持应用软件组件与基础软件模块之间的交互。
+
+多个基础软件模块使用整数标识符来表示应当被操作的对象。例如，**NVRAM** 管理器使用一个整数标识符来表示要访问的 **NVRAM** 块。客户端不知道该标识符，因为客户端必须是位置无关的，而给定应用软件组件要访问哪个 **NVRAM** 块，只有当组件映射到 **ECU** 之后才能确定。
+
+因此，客户端可用的信息与服务器所需的信息之间存在失配。端口定义的参数值弥补了这一差距。
+
+所需的端口定义参数（它们是必需的这一事实、它们的数据类型及其值）在 **RTE** 生成器的输入中规定。
+
+在调用为某个 `OperationInvokedEvent` 规定的可运行实体时，**RTE** 应按照软件组件模板规范[\[2\]](#ref-2)中给出的顺序，把端口定义的参数值置于实例句柄（如果包含）与操作特定参数之间。
+
+要求 **SWS_Rte_01360** 意味着：客户端在需求（客户端-服务器）端口上请求某个操作时只包括其实例句柄（如果需要）和显式的操作参数，而服务器会按其所需被传递隐式参数。
+
+注意，隐式参数的值对特定的服务器可运行实体是恒定的；因此预期使用端口定义的参数值不会带来 **RAM** 开销（除了存储额外参数所需的额外栈之外）。
+
+##### 6.2.3.2.5. 缓冲
+
+客户端-服务器通信是双向通信。请求从客户端发送到服务器，响应再发送回来。
+
+这里描述的缓冲机制也适用于基础软件调度器中服务器调用的串行化。
+
+除非服务器调用实现为直接或可信函数调用，**RTE** 必须在相应的接收侧存储或缓冲通信——请求缓冲在服务器侧，响应缓冲在客户端侧：
+
+* 除非服务器调用实现为直接或可信函数调用，**RTE** 应按照排队数据元素所描述的方式，在服务器侧把请求缓冲在一个先进先出队列中。
+
+**注意：** 需要缓冲的数据是实现特定的，但 **RTE** 至少应存储 IN 参数、IN/OUT 参数和一个客户端标识符。排队数据元素的缓冲在 [6.2.3.1.10.2](#6231102-事件接收的排队) 节中描述。
+
+* 除非服务器调用实现为直接或可信函数调用，**RTE** 应在客户端侧把响应保存在一个队列长度为 1 的队列中。
+
+**注意：** 需要缓冲的数据是实现特定的，但 **RTE** 至少应存储 IN/OUT 参数、OUT 参数和错误码。
+
+**RTE** 应按以下优先级规则确定服务器侧的队列长度（优先级从高到低）：
+
+1. **ECU-C** 参数 `RteServerQueueLength` 的值
+2. `ServerComSpec` 的 `queueLength` 属性的值
+
+基础软件调度器应从 **ECU-C** 参数 `RteBswServerQueueLength` 获取服务器的队列长度。
+
+**RTE** 生成器应拒绝这样的输入配置：对于由引用某个 `ClientServerOperation` 的 `OperationInvokedEvent` 触发的 `RunnableEntity` 所在的 `PPortPrototype` 中的该 `ClientServerOperation`，既未定义 `ServerComSpec` 的 `queueLength` 属性，也未定义 `RteServerQueueLength`。
+
+**RTE** 生成器应拒绝这样的输入配置：为服务器侧推导的队列长度（见 **SWS_Rte_02314**）的值等于 0。
+
+**RTE** 应使用请求队列对服务器的访问进行调用串行化。
+
+服务器的缓冲区溢出不向客户端报告。客户端将收到超时。
+
+如果服务器调用以直接函数调用实现，**RTE** 不应为按引用传递的参数创建任何副本。
+
+因此，必要时为按引用传递的参数提供一致性机制是应用的责任。
+
+##### 6.2.3.2.6. ECU 间和分区间响应与请求的映射
+
+**RTE** 负责把响应映射到对应的请求。通过该映射，**RTE** 可以激活或恢复相应的可运行实体，并把响应提供给正确的客户端。可以区分以下情形：
+
+* 在一个 **ECU** 内把响应映射到正确的请求。一般而言，这已由调用栈解决。细节是实现特定的，本文不讨论。
+* 对来自不同分区或不同 **ECU** 的响应的映射。
+
+**ECU** 间和分区间通信中请求到响应映射的问题可以分解为：
+
+* 把响应映射到正确的客户端。这在 [6.2.3.2.6.1](#623261-客户端标识符) 节中讨论。
+* 把响应映射到一个客户端内正确的请求。这在 [6.2.3.2.6.2](#623262-序列计数器) 节中讨论。
+
+**ECU** 间和分区间请求-响应映射的一般方法是使用事务句柄（**transaction handle**）。
+
+在 **ECU** 间客户端-服务器通信的情况下，事务句柄应包含两个无符号整数类型的部分：
+
+* 客户端标识符（**Client Identifier**）
+* 客户端序列计数器（**Client Sequence Counter**）
+
+用于 **ECU** 间客户端-服务器通信的事务句柄的客户端标识符应为 `uint16` 类型。
+
+用于 **ECU** 间客户端-服务器通信的事务句柄的客户端标识符可以在 **Ecu Extract** 中属于该操作实例的 `ClientIdDefinition` 处定义。如果已定义，**RTE** 生成器应从 `ClientIdDefinition` 获取 `clientId`；如果未定义，**RTE** 生成器应将 `clientId` 设置为 0。
+
+用于 **ECU** 间客户端-服务器通信的事务句柄的客户端序列计数器部分应为 `uint16` 类型。
+
+在 **ECU** 间客户端-服务器通信的情况下，事务句柄应用于标识经由 **COM** 或 **LdCom** 通信的客户端-服务器事务。
+
+如果有多个客户端连接到该 `responseSignal`、该客户端-服务器通信图不由 **RTE** 实现插件处理、且无法检索到有效的事务句柄（例如由于转换器硬错误或 **RTE** 无法分配缓冲区来转换数据），则 **RTE** 应忽略接收到的 `responseSignal`。
+
+如果有多个客户端连接到该 `responseSignal`、该客户端-服务器通信图由该 **RTE** 实现插件处理、且无法检索到有效的事务句柄（例如由于转换器硬错误或 **RTE** 无法分配缓冲区来转换数据），则该 **RTE** 实现插件应忽略接收到的 `responseSignal`。
+
+**理由：** 在这种情况下，**RTE** 不知道响应发给了哪个客户端，也不知道响应是否具有正确的序列计数器。把这个错误转发给任何一个客户端都可能是错误的选择（例如选错了客户端，或选对了客户端但响应已过时），应当避免。而忽略接收到的信号并不是错误的选择，因为正确的客户端随后会通过超时安全地得到通知。另请注意，**ECU** 间客户端-服务器通信的客户端应始终定义超时。不定义超时很容易导致系统停顿。
+
+服务器侧的 **RTE** 应将请求的事务句柄不加修改地连同响应一起返回。
+
+由于每个客户端最多只有一个未完成的请求（见 **SWS_Rte_02658**），事务句柄和元数据可以保存在 **RTE** 内部，而不必暴露给 **AUTOSAR SW-C**。
+
+在为 **PDU** 配置了元数据的 **ECU** 间客户端-服务器通信的情况下，服务器侧的 **RTE** 应保留请求的元数据，并在传递响应时不加修改地一并传递元数据。
+
+由于客户端-服务器操作的元数据对应用 **SW-C** 和转换器操作都不是必需的，它可以保存在 **RTE** 内部。
+
+###### 6.2.3.2.6.1. 客户端标识符
+
+在一个 **ECU** 上的服务器有其他 **ECU** 上的客户端的情况下，**ECU** 间客户端-服务器通信使用一个 `SystemSignal` 传输调用、一个 `SystemSignal` 传输响应。元数据用于区分发起调用的 **ECU**。请注意，在以前的 **AUTOSAR** 版本中，曾使用每个客户端 **ECU** 不同的 `SystemSignal` 来标识客户端 **ECU**。**AUTOSAR** 系统模板[\[8\]](#ref-8)不再支持这种方式，使用元数据区分发起调用的 **ECU** 是强制性的。
+
+采用该机制后，服务器侧的 **RTE** 必须处理扇入。其处理方式与发送方-接收方通信相同。
+
+但是，如果使用客户端标识符区分不同的客户端（见 [constr_3264]），则允许一个客户端 **ECU** 中的多个客户端经由 **ECU** 间客户端-服务器通信与不同 **ECU** 上的服务器通信。
+
+如果多个客户端访问同一服务器，则服务器侧的 **RTE** 必须在确保数据一致性的同时，对所有传入的服务器调用进行排队。
+
+###### 6.2.3.2.6.2. 序列计数器
+
+序列计数器（**sequence counter**）的目的是把响应映射到已知客户端的正确请求。
+
+在 **ECU** 间和分区间通信的情况下，**RTE** 在任一时刻对每个客户端和服务器操作应只允许一个请求。
+
+**SWS_Rte_02658** 不适用于分区内通信，因为可能存在多个执行实例。
+
+**SWS_Rte_02658** 在正常运行下隐含着响应可以映射到前一个请求。但是，当请求或响应丢失或延迟时，这个顺序可能失步。为了允许从丢失或延迟的信号中恢复，使用序列计数器。序列计数器还可用于在客户端侧 **RTE** 和 **SW-C** 重启后检测过时的响应。
+
+**RTE** 应支持 **ECU** 间客户端-服务器连接的序列计数器，前提是在输入信息中已配置。
+
+**RTE** 应在 `[Rte_Start](#7181-rte_start)` 期间将所有序列计数器初始化为零。
+
+**RTE** 应在客户端-服务器操作成功完成或超时之后，以循环方式递增每个序列计数器。
+
+**RTE** 应忽略与序列计数器不匹配的传入响应。
+
+##### 6.2.3.2.7. ECU 间响应通道扇出
+
+在某个被映射为 `ClientServerToSignalMapping` 中 `callSignal` 的 `SystemSignal` 从多个 `ISignal` 扇入、且关联的 `returnSignal` 向多个 `ISignal` 扇出的情况下，**RTE** 不应把任何服务器响应发送给所有响应 `ISignal`，而应基于任意给定服务器调用的传入 `ISignal`，确保服务器响应被传递给正确的响应 `ISignal`。
+
+可以通过遍历模型并查看相关的 `ISignalTriggering` 和 `PhysicalChannel`，把调用 `ISignal` 映射到正确的响应 `ISignal`。这将把调用 `ISignal` 与一个响应 `ISignal` 关联起来，使 **RTE** 能够正确路由 **ECU** 间客户端/服务器响应。
+
+当服务器可运行实体被配置为从位于另一 **ECU** 上的多个调用方接收请求、所有调用方的信号扇入到单个 `SystemSignal`、且相关响应信号从单个 `SystemSignal` 扇出时，**RTE** 应确保对任何传入调用，服务器返回值经由基于 `ISignalTriggering` 和 `PhysicalChannel` 配置所确定的响应 `ISignal` 发送。
+
+系统设计者必须确保在 `ClientServerToSignalMapping` 配置链中进行的任何 `ISignalTriggering`/`PhysicalChannel` 配对配置都无歧义地把一个调用 `ISignal` 映射到一个响应 `ISignal`。
+
+为确保调用与返回路径无歧义，设计者必须确保不违反 **AUTOSAR** 系统模板的 [constr_5273] 和 [constr_5274]。如果这些约束不成立，**RTE** 将无法为 **ECU** 间服务器调用消歧调用/响应路径。
+
+**RTE** 生成器应在违反 [constr_5273] 或 [constr_5274] 时报告错误。
+
+##### 6.2.3.2.8. 参数串行化
+
+在输入配置中，未连接的或 **ECU** 内的客户端具有零个 `ClientServerToSignalMapping`，而 **ECU** 间的客户端恰好有一个这样的映射（因为客户端只能连接到一个服务器）。客户端不支持扇出，因此不允许多个映射。
+
+**RTE** 生成器应拒绝这样的输入配置：某个 `RPortPrototype` 拥有的 `ClientServerOperation` 被多于一个具有相同 `ClientServerOperation` 属性值的 `ClientServerToSignalMapping` 引用。
+
+对于 **ECU** 间客户端-服务器通信，客户端 **ECU** 的 **RTE** 应使用引用该操作实例的 `ClientServerToSignalMapping` 的 `callSignal` 将请求发送给远程服务器。
+
+对于 **ECU** 间客户端-服务器通信，客户端 **ECU** 的 **RTE** 应使用引用该操作实例的 `ClientServerToSignalMapping` 的 `returnSignal` 接收远程服务器的结果。
+
+对于 **ECU** 间客户端-服务器通信，服务器 **ECU** 的 **RTE** 应使用引用该操作实例的 `ClientServerToSignalMapping` 的 `callSignal` 接收远程客户端的请求。
+
+对于 **ECU** 间客户端-服务器通信，服务器 **ECU** 的 **RTE** 应使用引用该操作实例的 `ClientServerToSignalMapping` 的 `returnSignal` 将结果发送给远程客户端。
+
+##### 6.2.3.2.9. 运算
+
+###### 6.2.3.2.9.1. ECU 间映射
+
+客户端-服务器协议定义了在 **ECU** 间通信的情况下，客户端调用与服务器响应如何映射到 **AUTOSAR** 的通信基础设施上。这使不同供应商的 **RTE** 实现能够以相同的方式解释客户端-服务器通信。
+
+**AUTOSAR** 系统模板[\[8\]](#ref-8)确实为 **AUTOSAR** 中的客户端-服务器通信规定了一个协议。
+
+###### 6.2.3.2.9.2. 原子性
+
+[6.2.3.1.11.2](#6231112-原子性) 节中关于原子性的要求也适用于 [6.2.3.2.9.1](#623291-ecu-间映射) 节中描述的复合数据类型。
+
+###### 6.2.3.2.9.3. 故障检测与报告
+
+客户端-服务器通信可能遇到如下中断：
+
+* 转换时的缓冲区溢出
+* 服务器侧的缓冲区溢出
+* 通信中断
+* 服务器可能因某种原因不可访问
+
+客户端规定一个超时，当服务器或通信未能在规定时间内完成时该超时到期。超时到期的报告方法取决于通信属性：
+
+* 如果客户端-服务器通信是同步的，**RTE** 在 `[Rte_Call](#71613-rte_call)` 函数上返回 `RTE_E_TIMEOUT`（见 [7.1.6.13](#71613-rte_call) 节）。
+* 如果客户端-服务器通信是异步的，**RTE** 在 `[Rte_Result](#71614-rte_result)` 函数上返回 `RTE_E_TIMEOUT`（见 [7.1.6.14](#71614-rte_result) 节）。
+
+在 **RTE** 检测到 **COM** 服务不可用而向 **COM** 转发信号的情况下，**RTE** 在 `[Rte_Call](#71613-rte_call)` 上返回 `RTE_E_COM_STOPPED`（见 [7.1.6.13](#71613-rte_call) 节）。
+
+在向 **LdCom** 转发信号时发送正在进行（例如使用带未决 TxConfirmation 的 TP-**API** 的 **LdCom** 发送）的情况下，**RTE** 在 `[Rte_Call](#71613-rte_call)` 上返回 `RTE_E_COM_BUSY`（见 [7.1.6.13](#71613-rte_call) 节）。
+
+如果客户端在服务器再次被调用时仍有未完成的服务器调用，**RTE** 在 `[Rte_Call](#71613-rte_call)` 上返回 `RTE_E_LIMIT`（见 [7.1.6.13](#71613-rte_call) 节）。
+
+在没有结构性错误的情况下，如果存在应用错误则会报告应用错误。
+
+###### 6.2.3.2.9.4. 异步客户端-服务器通信
+
+图 4.44 展示了 **RTE** 如何实现异步客户端-服务器通信的时序图。
+
+![Figure4-44.png](Figure4-44.png)
+
+###### 6.2.3.2.9.5. 同步客户端-服务器通信
+
+图 4.45 展示了 **RTE** 如何实现同步客户端-服务器通信的时序图。
+
+![Figure4-45.png](Figure4-45.png)
+#### 6.2.3.3. SWC 内部通信
+
+##### 6.2.3.3.1. 可运行实体间变量
+
+经由 **AUTOSAR** 端口的发送方/接收方与客户端/服务器通信是 **AUTOSAR SW-C** 之间通信的模型。
+
+对于 **AUTOSAR SW-C** 内部可运行实体之间的通信，**AUTOSAR SW-C** 模板[\[2\]](#ref-2)建立了一个独立的机制。`AtomicSwComponent`（`NvBlockComponent` 除外）可以预留可运行实体间变量（**InterRunnableVariable**），它只能由这同一个 `AtomicSwComponent` 的可运行实体访问。这些可运行实体可能运行在相同或不同的任务/ISR2 上下文中。可以进行读和写访问。
+
+**RTE** 应支持单个实例和多个实例的 **AUTOSAR SW-C** 的可运行实体间变量。
+
+生成的 **RTE** 应按照定义该 `implicitInterRunnableVariable` 或 `explicitInterRunnableVariable` 的 `VariableDataPrototype` 的 `ValueSpecification` 初始化已定义的 `implicitInterRunnableVariable` 和 `explicitInterRunnableVariable`，前提是 **SWS_Rte_07046** 和 **SWS_Rte_03852** 中的一般初始化条件得到满足。
+
+可运行实体间变量的行为对应于 **AUTOSAR SW-C** 之间（或更准确地说，不同 **AUTOSAR SW-C** 的可运行实体之间）的发送方/接收方通信。
+
+但为什么不直接使用发送方/接收方通信呢？其目的是数据封装/数据隐藏。其他 **AUTOSAR SWC** 无法访问某个 **AUTOSAR SW-C** 的可运行实体间变量，**RTE** 也不支持这种访问。可运行实体间变量的内容保持在 **SW-C** 内部，因此其他 **SW-C** 不能使用它，尤其不能在不理解数据行为的情况下误用它。
+
+与 **AUTOSAR SW-C** 之间的发送方/接收方（S/R）通信一样，存在两种不同的行为：
+
+1. 具有隐式行为的可运行实体间变量（`implicitInterRunnableVariable`）
+
+该行为对应于发送方/接收方通信中 `dataReadAccess` 和 `dataWriteAccess` 角色中的 `VariableAccess`，并受本规范中的隐式 S/R **API** 支持。
+
+更多细节见 6.2.2.6.6.1 节。**API** 见 [7.1.6.24](#71624-rte_irviread) 节和 [7.1.6.26](#71626-rte_irviwrite) 节。
+
+**注意 2：** 与隐式发送方/接收方通信一样，可运行实体间变量的隐式概念隐含着可运行实体会终止。对 2 类可运行实体而言，只有当其执行时间有限时行为才有保证。一个永远运行的 2 类可运行实体的数据将不会被更新。
+
+2. 具有显式行为的可运行实体间变量（`explicitInterRunnableVariable`）
+
+该行为对应于发送方/接收方通信中 `dataSendPoint`、`dataReceivePointByValue` 或 `dataReceivePointByArgument` 角色中的 `VariableAccess`，并由本规范中的显式 S/R **API** 支持。
+
+更多细节见 6.2.2.6.6.2 节。**API** 见 [7.1.6.28](#71628-rte_irvread) 节和 [7.1.6.29](#71629-rte_irvwrite) 节。
+
+#### 6.2.3.4. 分区间通信
+
+分区（**Partition**）用于把一个 **ECU** 分解为多个功能单元。分区既可以包含 **SW-C**，也可以包含 **BSW** 模块。进行分区或者是为了保护各分区中包含的软件免受彼此影响，或者是通过在多核控制器的不同核上运行各分区来提高性能。
+
+由于各分区可能被核边界或内存边界隔开，对于 **SW-C** 而言，不同分区之间通信的可观察行为更类似于 **ECU** 间通信而非分区内通信。**RTE** 需要使用特殊的机制从一个分区向另一个分区通信。
+
+与 **ECU** 间通信一样，分区间通信使用无连接的通信范式。这意味着，即使接收分区已停止，发送操作对发送方而言也是成功的。只有借助超时，接收方才会在发送方的分区停止时得到通知。
+
+与大多数基础软件不同，**RTE** 没有主处理函数。**RTE** 的执行逻辑包含在生成的任务体中，即 **RTE** 管理其执行的可运行实体周围的包装代码中。
+
+由于包含 **SW-C** 可运行实体的任务被唯一地分配给各分区，**RTE** 的执行逻辑被拆分到各分区之中。不能期望在一个分区中运行的、由 **RTE** 生成的包装代码可以直接访问分配给另一个分区的 **RTE** 部分的内存对象。
+
+在这个意义上，每个包含可运行实体的分区都有一个 **RTE**。
+
+尽管如此，**RTE** 仍有责任支持分配到不同分区的 **SW-C** 之间的通信。根据 **AUTOSAR** 软件分层架构，**RTE** 必须独立于微控制器架构。**AUTOSAR** 支持多种多样的多核与内存保护架构。
+
+**RTE** 生成器应支持一种生成代码独立于微控制器的模式。
+
+一般不能假定分区之间的通信可以使用缓存一致性的共享内存。跨分区边界的直接内存访问和函数调用通常是不可能的。在极端情况下，通信甚至可能仅限于消息传递接口。
+
+尽管有微控制器独立性要求，为了支持内存保护和多核，**AUTOSAR OS** 提供了一系列可用于跨核通信的机制（见[\[4\]](#ref-4)）。特别是，**IOC** 的设计旨在以不引入额外运行时开销的方式支持 **RTE** 的通信需求。
+
+如果基础软件模块之间需要 **IOC** 无法满足的通信，例如发送方-接收方或客户端-服务器通信，基础软件调度器也提供了相应的机制。这些机制遵循 **VFB** 的客户端-服务器通信模式或发送方-接收方通信模式，但不能用于 **ECU** 间通信。基础软件调度器可以在内部使用 **IOC** 来跨越分区边界。见[\[25\]](#ref-25)。
+
+以下各节描述一些为分区间通信设计的 **OS** 机制的使用。
+
+##### 6.2.3.4.1. 使用 IOC 的分区间数据通信
+
+允许以最高效的方式、同时保持与微控制器实现无关地进行分区间数据通信的总体思路是：把分区内通信情形下的缓冲区和队列拿出来，在分区间通信的情形下用所谓的 **IOC** 通信对象（**IOC communication object**）替代它们。
+
+在理想情况下，对 **IOC** 通信对象的访问宏解析为对共享内存的直接访问。
+
+**IOC**（**Inter OS-Application Communication**）是 **AUTOSAR OS** 的一项特性，它在分区之间提供面向数据的通信机制。**IOC** 提供通信缓冲区、队列以及这些缓冲区的受保护访问函数/宏，可由任何预配置的分区并发使用。
+
+**IOC** 提供向另一个核、或内存受保护的分区之间传送数据的通信，并保证数据一致性。
+
+包括客户端-服务器通信中参数和返回值的传递在内的所有数据通信，都可以通过使用 **IOC** 来实现。使用 **IOC** 的基本原则是用 **IOC** 缓冲区替代 **RTE** 内部的通信缓冲区。
+
+**IOC** 支持 1:1 和 N:1 通信。对于 1:N 通信，必须使用 N 个 **IOC** 通信对象。**IOC** 被配置并为每个 **IOC** 通信对象提供生成的 **API**。在 N:1 通信的情况下，每个发送方都有一个独立的 **API**。
+
+**IOC API** 不是可重入的。
+
+**RTE** 应防止不同的可执行实体执行实例并发访问同一 **IOC API**。
+
+**IOC** 将使用适当的机制在分区之间通信，无论是与另一个核通信、与具有不同信任级别的分区通信，还是与另一个内存分区通信。
+
+**IOC** 通道在 **OS** 配置中配置。当外部配置开关 `strictConfigurationCheck`（**SWS_Rte_05148**）设置为 true 时，其配置必须作为 **RTE** 生成器的输入提供；当 `strictConfigurationCheck` 设置为 false 时，可以由 **RTE** 生成器或 **RTE** 配置编辑器提供（见 **SWS_Rte_05150**）。
+
+**IOC API** 使用：
+
+1. 用户在 **RTE** 的输入中声明的类型（跨 `OsApplication` 边界的发送方-接收方通信）。
+2. **RTE** 创建的、用于把客户端-服务器操作参数收集到单一数据结构中的类型。
+
+对于第二项，**RTE** 使用必须描述为 `ImplementationDataType` 的内部类型（见 **SWS_Rte_08400**）。
+
+分区之间的信令（**signaling**）不在 **IOC** 的覆盖范围内。**IOC** 的回调处于中断上下文中，主要供 **BSW** 直接使用。对于分区之间的信令，**RTE** 可以使用任务的激活或事件的置位，见 [6.2.3.4.5](#62345-分区间通信的信令与控制流支持) 节。
+
+**RTE** 不得在 **IOC** 回调的上下文中执行可执行实体。
+
+##### 6.2.3.4.2. 使用基础软件调度器的分区间数据通信
+
+基础软件调度器为不同分区中基础软件模块之间的通信提供发送方-接收方和客户端-服务器通信机制。因此，这些通信范式可以在多核环境中被基础软件模块使用。
+
+其使用方式在[\[9\]](#ref-9)中描述。
+
+对于发送方-接收方通信，目前只支持具有"事件"语义（排队）的数据元素的"显式"发送。
+
+对于 **ECU** 间发送方-接收方通信，队列的长度由 `BswQueuedDataReceptionPolicy` 的 `queueLength` 属性规定，该属性通过 `receivedData` 引用发送方-接收方通信的 `VariableDataPrototype`。
+
+**RTE** 生成器应拒绝 `BswQueuedDataReceptionPolicy` 的队列长度为 0 的 `queueLength` 属性。
+
+##### 6.2.3.4.3. 多核/多分区配置中对 (Ld)Com 和 Det 的访问
+
+在多核 **ECU** 中，软件组件可能需要经由通信栈向另一个 **ECU** 发送数据，而通信栈可能与发送方软件组件位于不同的分区。同样，可能必须调用 **Det**，而它位于不同的分区。
+
+对于 **LdCom** 和 **Det**，**RTE** 可以采用不同的方式：
+
+1. 假定 **LdCom** 和 **Det** 可以从任何地方调用——在为 **ECU** 提供共享缓冲区的情况下，它们位于每个分区中。
+2. **LdCom** 和 **Det** 经由可信函数调用调用。假定它们可以从每个核调用，但它们位于不同的分区。在这种情况下，**LdCom** 或 **Det** 位于一个受信任的 `OsApplication` 中。这种方式需要 **MPU** 配置。
+3. **LdCom** 和 **Det** 只位于一个分区中。此时，**RTE** 可以先把数据传输到 **LdCom** 分区，然后在 **LdCom** 分区的上下文中（例如经由一个 **OsTask**）调用所需的 **LdCom API**。
+
+对于发送方向的 **ECU** 间通信，可能存在以下场景：
+
+1. 数据生产者与负责相关信号的 **COM** 实例位于不同核上的不同分区。
+
+**RTE** 必须把数据传输到 **COM** 实例的分区。它可以使用 **IOC** 来做到这一点。在那里，它必须使用 **COM API** 把数据传递给 **COM**。一种选择是在每次数据生产时调用 **COM API**。在数据生产速率是突发性的或高于 **COM** 发送频率的情况下，这会导致很高的资源消耗。为了减轻负载，**COM** 实例提供了配置发送准备回调（`Rte_COMCbkTxPrep_mn`）的选项，**COM** 在开始信号求值并把数据交给 **PduR** 之前调用该回调。如果有新数据可用，**RTE** 可以在那里调用 **COM API**。
+
+2. 数据生产者与负责相关信号的 **COM** 实例位于同一核上的不同分区。
+
+**RTE** 可以使用与上述相同的机制。它也可以使用可信函数调用（见 [6.2.3.4.6](#62346-可信函数) 节）来调用 **COM API**。
+
+3. 数据生产者与负责相关信号的 **COM** 实例位于同一分区。
+
+**RTE** 可以直接调用 **COM API**。但取决于 **RTE** 的实现，**RTE** 也可以在 `Rte_COMCbk` 通知回调的上下文中使用 **COM API**。
+
+对于接收方向的 **ECU** 间通信，可能存在以下场景：
+
+1. 数据消费者与负责相关信号的 **COM** 实例位于不同核上的不同分区。**RTE** 可以经由通知回调（`Rte_COMCbk`）得知信号或信号组的接收。该回调由负责该信号或信号组的 **COM** 实例调用。如果 `ComIPduSignalProcessing` 配置为 `DEFERRED`，则通知回调由相关的 `ComMainFunctionRx` 调用（见 **SWS_Com_00301**）。如果 `ComIPduSignalProcessing` 配置为 `IMMEDIATE`，则通知回调由 **COM** 实例分区中相关的 `Com_RxIndication` 调用（见 **SWS_Com_00300**）。**RTE** 可以在回调中直接调用 **COM API** 接收信号数据，然后使用 **IOC** 把数据传入消费者的分区。
+2. 数据消费者与负责相关信号的 **COM** 实例位于同一核上的不同分区。**RTE** 可以使用与上述相同的机制。它也可以使用可信函数调用（见 [6.2.3.4.6](#62346-可信函数) 节）从数据消费者分区的任意位置调用 **COM API**。
+3. 数据消费者与负责相关信号的 **COM** 实例位于同一分区。**RTE** 可以从数据消费者分区的任意位置直接调用 **COM API**。但它也可以使用 **COM** 通知回调（`Rte_COMCbk`）来进行运行时优化。
+
+##### 6.2.3.4.4. 多核/多分区配置中对 NvM 的访问
+
+使用多核或 `EcucPartition` 的系统可能把 **NVBlock** 映射到特定的 `EcucPartition`。基于这些映射，**RTE** 在某些情况下应实现保护（例如使用 **IOC** 或 `CallTrustedFunction`）以跨越分区保护边界。
+
+**NVBlock** 通过设置在 `NvBlockDescriptor` 上的 **ECUC** 参数 `NvMBlockEcucPartitionRef`（**ECUC_NvM_00564**）映射到特定分区。该参数是可选的，如果缺失，**RTE** 应假定该 **NVBlock** 映射到 `EcucDefaultBswPartition`（**ECUC_EcuC_00037**）参数所引用的 `EcucPartition`。
+
+**RTE** 生成器应拒绝这样的配置：经由 `EcucPartitionSoftwareComponentInstanceRef` **ECUC** 参数引用某个 `NvBlockSwComponentType` 的 `EcucPartition`，与该 `NvBlockSwComponentType` 关联的所有 `NvMBlockDescriptor`（经由 **ECUC** 参数 `NvMBlockEcucPartitionRef`）所引用的 `EcucPartition` 不匹配。
+
+**注意：** 与某个 `NvBlockSwComponentType` 关联的 `NvBlockDescriptor` 可以经由 **ECUC** 容器 `RteNvRamAllocation` 找到。具体而言，`NvBlockDescriptor` 由一个 `NvBlockSwComponentType` 聚合，然后由一个 `RteNvRamAllocation` 经由 **ECUC** 参数 `RteSwNvBlockDescriptorRef` 和 `RteNvmBlockRef` 映射到（来自 **NvM** 的）相应的 `NvMBlockDescriptor`。
+
+**RTE** 生成器应支持这样的配置：某个 `NvBlockSwComponentType` 在 `NvBlockDescriptor.ramBlock` 角色中的 `VariableDataPrototype` 实例被不同分区的 **SW-C** 实例访问。
+
+**注意：** 对这些通信场景的支持遵循基于端口、跨越 `EcucPartition` 边界的通信的一般规则，并且必须遵守 [6.2.3.4](#6234-分区间通信) 节中的要求。
+
+**RTE** 必须向 **NvM** 模块提供若干回调，用于更新/读取 **RTE** 数据镜像或向 **RTE** 通知 **NvM** 任务的状态。所有这些回调都与特定的 `NvBlockDescriptor` 关联，因此这些回调必须在标记自其关联 `NvBlockDescriptor` 的 `EcucPartition` 内执行（更多细节见 [7.1.9.3](#7193-nvm-服务回调) 节）。
+
+##### 6.2.3.4.5. 分区间通信的信令与控制流支持
+
+分区的 **OS** 表示是一个 **OS Application**。
+
+以下是可用于跨分区边界信令与控制流的 **OS** 特性（非详尽）摘要：
+
+* 任务的激活
+* 调度表的启动与停止
+* 事件置位
+* 报警（**Alarm**）
+* 自旋锁（用于核间同步）
+
+以下特性不可用于核间信令：
+
+* **OS** 资源（**OS Resource**）
+* `DisableAllInterrupts`
+
+对于核间同步，提供了自旋锁。但出于效率原因，应当谨慎使用。
+
+##### 6.2.3.4.6. 可信函数
+
+**AUTOSAR OS** 的调用可信函数机制可以在内存受保护的控制器中，用于实现从同一核上的受信任或非受信任分区到受信任分区的函数调用。
+
+注意，该机制不能用于两个非受信任分区之间或两个核之间。还要注意，由于 **SWS_OS** 中的不确定性，不同 **OS** 供应商的可信函数实现可能存在差异。集成者在决定使用可信函数之前，必须仔细考虑由此对某些属性或能力产生的可能约束。
+
+可信函数在 **OS** 配置中配置。当外部配置开关 `strictConfigurationCheck`（**SWS_Rte_05148**）设置为 true 时，其配置应作为 **RTE** 生成器的输入提供；当 `strictConfigurationCheck` 设置为 false 时，可以由 **RTE** 生成器或 **RTE** 配置编辑器提供（见 **SWS_Rte_05150**）。
+
+**RTE** 生成器应使用可信函数来调用 `RteSwComponentInstance` 或 `RteBswModuleInstance` 的、位于不同于该可执行实体调用上下文（**OsTask**、`OsIsr` 或 **RTE API**）所在分区中的可执行实体，前提是两个分区位于同一核上。
+
+请注意，上述要求中的"使用"一词意味着 **RTE** 必须使用 **OS** 的调用可信函数机制，并且必须实现所使用的可信函数。在 `strictConfigurationCheck` 设置为 `FALSE` 的情况下，它还必须在 **OS** 中配置所使用的可信函数。
+
+注意，并不严格要求为每个可执行实体调用点使用一个专用的可信函数。**RTE** 实现也可以决定对同一个可执行实体的多个调用点使用同一个可信函数，甚至对多个可执行实体使用同一个可信函数。这尤其可以用于在同一分区的多个可执行实体连续执行的情况下降低运行时开销。由于完整的调用点被移入可信函数中，**VFB** 跟踪钩子也必须在那里执行，并且可能还有相关的 **RTE** 实现特定的标志操作（例如用于 `[Rte_IsUpdated](#71637-rte_isupdated)`）或隐式缓冲代码。
+
+**通过可信函数直接启动可执行实体的执行实例，只应用于启动受信任分区（**Trusted Partition**）中的可执行实体。**
+
+##### 6.2.3.4.7. 内存保护与 RTE API 中的指针类型参数
+
+在内存受保护的 **ECU** 中，非受信任分区的 **SW-C** 可能会滥用到受信任上下文的转换来修改另一个分区中的内存。这可能在从非受信任分区向受信任上下文传递指向另一个内存分区的指针时发生。**RTE** 应至少通过检查指针地址的有效性来避免这种滥用，并在可能的情况下同时检查关联内存对象的完整性。
+
+当非受信任分区中的 **SW-C** 接收（OUT 参数）或提供（具有复合数据类型的 IN 参数）一个 `ArgumentDataPrototype` 或 `VariableDataPrototype` 时，它会把指向某个内存对象的指针交给一个 **RTE API**。**RTE** 只有在检查了整个内存对象属于调用方分区之后，才应把该指针转发给受信任的 **SW-C**。
+
+当非受信任分区中的 **SW-C** 把一个 `ArgumentDataPrototype` 或 `VariableDataPrototype` 作为引用类型传递给受信任分区中的 **SW-C**（`DATA_REFERENCE` 作为 IN 参数）时，**RTE** 只应检查调用方的分区拥有被引用内存的起始地址。
+
+**SWS_Rte_02753 的说明：** **RTE** 只检查 `DataPrototype` 直接引用的起始地址是否属于调用方分区。由于 **RTE** 不了解被指针引用的语义，它无法检查被引用的对象是否完全包含在调用方分区中（例如，**RTE** 不知道大小，也不知道被引用的对象是否还包含对其他对象的引用）。**BSW** 负责确保被引用的内存对象不跨越内存节边界。
+
+**OS API** `CheckTaskMemoryAccess` 可用于满足 **SWS_Rte_02752** 和 **SWS_Rte_02753**。
+
+#### 6.2.3.5. 端口接口元素映射与数据转换
+
+**AUTOSAR** 支持把一个 R-port 连接到一个 **P-port**，其接口在 **AUTOSAR** 兼容性规则的意义上不兼容。此外，对于发送方-接收方通信，在通信需要使用专用通信总线的情况下，可以规定数据元素如何表示。在这些情况下，生成的 **RTE** 必须支持数据的转换与重新缩放（**re-scaling**）。
+
+##### 6.2.3.5.1. 端口接口元素映射
+
+默认情况下，`PortInterface` 元素的 `shortName` 用于标识相连端口的匹配元素对。在名称不匹配的情况下——可能由分布式开发、现成软件开发或软件组件复用引起——需要显式规定哪些 `PortInterface` 元素应当相互关联。这通过 `PortInterfaceMapping` 建模。两个端口的连接可以关联一组 `PortInterfaceMapping`。如果两个端口相连，且针对这两个端口接口对的 `PortInterfaceMapping` 关联到该连接，则接口元素按该 `PortInterfaceMapping` 的规定进行映射和转换。如果没有针对相应接口对的 `PortInterfaceMapping` 关联到该连接，则应用普通的接口兼容性规则。
+
+一般的方法是在实现 R-port 的 **ECU** 的 **RTE** 中执行数据转换。该设计决策的原因是：在 1:n 发送方-接收方通信的情况下，在发送方侧为多个接收方执行所有数据转换、然后在通信总线上以不同表示发送多组相同数据的做法是低效的。
+
+**RTE** 应支持发送方-接收方接口、参数接口、非易失数据接口元素以及 `NvBlockDescriptor` 的映射。
+
+如果由 `SenderReceiverInterface` 或 `NvDataInterface` 规定的 **P-port** 连接到一个接口不兼容的 R-port，且针对这两个接口的 `VariableAndParameterInterfaceMapping` 关联到该连接，则实现该 R-port 的 **ECU** 的 **RTE** 应把发送方接口的数据元素映射并转换为接收方接口的数据元素。
+
+**RTE** 应支持在 `SenderReceiverInterface`、`NvDataInterface` 或 `ParameterInterface` 元素映射的上下文中对复合数据类型元素的映射。
+
+如果由 `SenderReceiverInterface`、`NvDataInterface` 或 `ParameterInterface` 规定的 **P-port** 连接到一个接口不兼容的 R-port，且这两个接口都存在 `VariableAndParameterInterfaceMapping` 并关联到该连接，且该 `SubElementMapping` 把提供接口的复合数据类型元素映射到需求接口的复合数据类型元素，则实现该 R-port 的 **ECU** 的 **RTE** 应按照该 `SubElementMapping` 把发送方接口 `DataPrototype` 的复合数据类型元素映射并转换为接收方接口 `DataPrototype` 的复合数据类型元素。
+
+**RTE** 应按照该 `SubElementMapping` 把发送方接口 `DataPrototype` 的复合数据类型元素映射并转换为接收方接口的基本 `DataPrototype`：
+
+如果由 `SenderReceiverInterface`、`NvDataInterface` 或 `ParameterInterface` 规定的 **P-port** 连接到一个接口不兼容的 R-port，且这两个接口都存在 `VariableAndParameterInterfaceMapping` 并关联到该连接，且该 `SubElementMapping` 仅把提供接口的一个复合数据类型元素进行映射。
+
+根据 **TPS_SWCT_01551**，对于非排队通信，当接收方侧未映射的 `dataElement` 具有 `initValue` 时，允许不完整的 `SubElementMapping`。
+
+请注意，提供端口的 `DataPrototype` 和需求端口的 `DataPrototype` 可能只使用 `ApplicationDataType`、只使用 `ImplementationDataType`，或以混合方式同时使用两种 `AutosarDataType`。
+
+**RTE** 生成器应拒绝违反 [constr_1300] 的配置。
+
+如果由 `SenderReceiverInterface` 或 `NvDataInterface` 规定的 **P-port** 连接到一个接口不兼容的 R-port，且没有针对这对接口的 `VariableAndParameterInterfaceMapping` 关联到该连接，则 **RTE** 生成器应把输入作为无效配置拒绝。
+
+**RTE** 应支持客户端-服务器接口元素的映射。
+
+如果由 `ClientServerInterface` 规定的 **P-port** 连接到一个接口不兼容的 R-port，且针对这两个接口的 `ClientServerInterfaceMapping` 关联到该连接，则实现该 R-port 的 **ECU**（即客户端）的 **RTE** 应映射操作，并把客户端接口的操作参数映射并转换为服务器接口的操作参数。
+
+如果存在 `ClientServerApplicationErrorMapping`，则 **RTE** 应把服务器的错误码翻译为该映射所描述的相应错误码。
+
+如果存在 `ClientServerApplicationErrorMapping` 且服务器的某个特定错误未被映射，则该错误应被翻译为 `RTE_E_OK`。
+
+如果由 `ClientServerInterface` 规定的 **P-port** 连接到一个接口不兼容的 R-port，且没有针对这对接口的 `ClientServerInterfaceMapping` 关联到该连接，则 **RTE** 生成器应把输入作为无效配置拒绝。
+
+**RTE** 应支持模式切换接口（**ModeSwitchInterface**）元素的映射。
+
+如果由 `ModeSwitchInterface` 规定的 **P-port** 连接到一个接口不兼容的 R-port，且针对这两个接口的 `ModeInterfaceMapping` 关联到该连接，则实现该 R-port 的 **ECU** 的 **RTE** 应把发送方接口的模式元素映射并转换为接收方接口的模式元素。
+
+如果由 `ModeSwitchInterface` 规定的 **P-port** 连接到一个接口不兼容的 R-port，且没有针对这对接口的 `ModeInterfaceMapping` 关联到该连接，则 **RTE** 生成器应把输入作为无效配置拒绝。
+
+**RTE** 应支持触发器接口元素的映射。
+
+如果由 `TriggerInterface` 规定的 **P-port** 连接到一个接口不兼容的 R-port，且针对这两个接口的 `TriggerInterfaceMapping` 关联到该连接，则实现该 R-port 的 **ECU** 的 **RTE** 应把发送方接口的触发器映射到接收方接口的触发器。
+
+如果由 `TriggerInterface` 规定的 **P-port** 连接到一个接口不兼容的 R-port，且没有针对这对接口的 `TriggerInterfaceMapping` 关联到该连接，则 **RTE** 生成器应把输入作为无效配置拒绝。
+
+如果由 `NvDataInterface` 规定的 `PPortPrototype` 映射到一个 `NvBlockDescriptor.ramBlock`，且相应的 `NvBlockDataMapping` 定义了位域的映射（见 **TPS_SWCT_01799**），则 **RTE** 应把 `NvBlockDescriptor.ramBlock` 的数据元素转换为 `NvDataInterface` 的数据元素。
+
+如果由 `NvDataInterface` 规定的 `RPortPrototype` 映射到一个 `NvBlockDescriptor.ramBlock`，且相应的 `NvBlockDataMapping` 定义了位域的映射（见 **TPS_SWCT_01799**），则 **RTE** 应把 `NvDataInterface` 的数据元素转换为 `NvBlockDescriptor.ramBlock` 的数据元素。
+
+如果由 `NvDataInterface` 规定的 `PRPortPrototype` 映射到一个 `NvBlockDescriptor.ramBlock`，且相应的 `NvBlockDataMapping` 定义了位域的映射（见 **TPS_SWCT_01799**），则 **RTE** 应把 `NvBlockDescriptor.ramBlock` 的数据元素转换为 `NvDataInterface` 的数据元素，并把 `NvDataInterface` 的数据元素转换为 `NvBlockDescriptor.ramBlock` 的数据元素。
+
+为了为实现各 R-port 的 **ECU** 生成 **RTE**，**RTE** 生成器必须知道经由总线相连的各 **P-port** 的接口。该信息在 **ECU extract** 中经由表示数据元素的 `ISignal` 上所规定的 `networkRepresentationProps`（见 [6.2.3.6](#6236-网络表示) 节）提供。
+#### 6.2.3.6. 网络表示
+
+在 `ISignal` 或 `SystemSignal` 上规定的 `networkRepresentationProps` 和 `physicalProps`（通过属性 `baseType` 和 `compuMethod` 描述数据元素在通信总线上的表示）是 **RTE** 查找用于转换与变换的网络表示的地方。其他位置（如各 **ComSpec** 或 outerPort 的 `PortInterface`，数据转换的特殊情形除外，见 [6.2.3.6.2](#62362-带数据转换的网络表示) 节）对 **RTE** 而言无关。但是，**RTE** 仍必须考虑各 outerPort 以及 `DelegationSwConnector` 上可能存在的 `PortInterfaceMapping`，以便找到从/到 innerPort 的通信元素（例如某个 `VariableDataPrototype`）到/自相关总线信号的通信图。同样重要的是要注意：在 **RTE** 生成阶段，**ECU** 间通信总是涉及一个 outerPort，而绝不会把 innerPort 直接连接到 `SystemSignal`（组）（见系统模板[\[8\]](#ref-8)的"External Communication"一章）。与某个 `SystemSignal`（组）相关的、可能存在的 `senderToSignalTextTableMapping` 或 `signalToReceiverTextTableMapping` 必须为转换加以考虑。
+
+##### 6.2.3.6.1. 无数据转换的网络表示
+
+对于不适用数据转换的发送方-接收方通信，在通信需要使用专用通信总线的情况下，可以规定数据元素如何表示。为此，可以在 `ISignal` 或 `SystemSignal` 上规定 `networkRepresentationProps` 和 `physicalProps`，通过属性 `baseType` 和 `compuMethod` 描述数据元素在通信总线上的表示。
+
+**RTE** 生成器应把任何违反 **TPS_SYST_02001** 的输入作为无效配置拒绝。
+
+如果 `ISignal` 的 `dataTypePolicy` 未设置为 `transformingISignal`，则发送 **ECU** 的 **RTE** 应把必须经由通信总线发送的数据元素，转换为该 `ISignal` 的 `networkRepresentationProps` 的 `baseType` 与相应 `SystemSignal` 的 `physicalProps` 的 `compuMethod` 所规定的表示。
+
+如果 `ISignal` 的 `dataTypePolicy` 未设置为 `transformingISignal`，则接收 **ECU** 的 **RTE** 应把经由通信总线接收的数据元素，从该 `ISignal` 的 `networkRepresentationProps` 的 `baseType` 与相应 `SystemSignal` 的 `physicalProps` 的 `compuMethod` 所规定的表示，转换为该数据元素的应用数据类型。在这种情况下，**SWS_Rte_03816** 不适用。
+
+##### 6.2.3.6.2. 带数据转换的网络表示
+
+对于适用数据转换的发送方-接收方通信，在通信需要使用专用通信总线的情况下，可以规定数据元素如何表示。为此，可以规定 `ISignal.TransformationISignalProps.DataPrototypeTransformationProps.networkRepresentationProps`，通过属性 `baseType` 和 `compuMethod` 描述数据元素在通信总线上的表示。
+
+如果 `ISignal` 的 `dataTypePolicy` 设置为 `transformingISignal`，则发送 **ECU** 的 **RTE** 应把属于要转换并经由通信总线发送的数据的每个基本元素，转换为该 `ISignal` 的 `TransformationISignalProps.DataPrototypeTransformationProps.networkRepresentationProps` 中针对该基本元素规定的 `baseType` 和 `compuMethod` 所表示的表示。转换后的数据应传递给链中的第一个转换器。
+
+如果 `ISignal` 的 `dataTypePolicy` 设置为 `transformingISignal`，则接收 **ECU** 的 **RTE** 应把经由通信总线接收的数据传递给逆转换器（**retransformer**），然后把每个基本元素从该 `ISignal` 的 `TransformationISignalProps.DataPrototypeTransformationProps.networkRepresentationProps` 规定的 `baseType` 和 `compuMethod` 表示进行转换。
+
+#### 6.2.3.7. 数据转换
+
+**RTE** 应支持从一种相同或线性缩放的数据表示到另一种相同或线性缩放的数据表示的转换。在此上下文中，"线性缩放数据表示"一词也包括浮点数据表示。
+
+请注意，**AUTOSAR** 支持由发送方侧确定初始值的配置。在这种情况下，数据转换同样适用于初始值。
+
+**RTE** 应支持整数到浮点以及浮点到整数的转换。建议考虑 **MISRA-C** 规则 10.3 的影响，特别是不得隐式转换的要求。
+
+目前 **RTE** 规范没有定义支持浮点到整数和整数到浮点转换的任何特定行为。这使 **RTE** 的实现者能够开发最高效、最稳定和最健壮的解决方案。
+
+**RTE** 应支持从一种文本表（**texttable**）数据表示（枚举或位域）到另一种文本表数据表示的转换。
+
+**RTE** 应支持从一种线性缩放与文本表混合的数据表示到另一种线性缩放与文本表混合的数据表示的转换。
+
+**RTE** 应支持文本表数据表示（枚举）与线性缩放和文本表混合数据表示之间的转换。在这种情况下，只应转换数据表示的枚举部分，线性缩放部分应作为越界数据处理。
+
+**RTE** 应支持相同或线性缩放数据表示与线性缩放和文本表混合数据表示之间的转换。如果到某个值的映射未由 `TextTableMapping` 定义，则带有 `compuConst` 的刻度应作为越界数据处理。
+
+**RTE** 应支持复合数据表示的转换。在这种情况下，相应的要求 **SWS_Rte_03829**、**SWS_Rte_03830**、**SWS_Rte_03855**、**SWS_Rte_03856**、**SWS_Rte_03857**、**SWS_Rte_03831**、**SWS_Rte_03832** 和 **SWS_Rte_03833** 适用于各个复合元素。
+
+**RTE** 生成器应把任何要求 **SWS_Rte_03829**、**SWS_Rte_03830**、**SWS_Rte_03855**、**SWS_Rte_03856** 或 **SWS_Rte_03860** 不支持的转换的输入作为无效配置拒绝。
+
+数据转换应支持引用以下 `CompuMethod` 类别的数据类型：`LINEAR`、`IDENTICAL`、`SCALE_LINEAR_AND_TEXTTABLE`、`TEXTTABLE`、`BITFIELD_TEXTTABLE`，以及具有倒数线性数据缩放（**reciprocal linear data scaling**）的 `RAT_FUNC` 类别 `CompuMethod`。
+
+**注意：** 倒数线性数据缩放的定义见软件组件模板[\[2\]](#ref-2)，**TPS_SWCT_01550**。
+
+对于两个具有线性缩放的数据表示之间的转换——由 `ApplicationDataType`、或由 `BaseType` 与 `CompuMethod` 的组合（用于在各 **ComSpec** 或 `SystemSignal` 处规定网络表示）描述——**RTE** 生成器应从两个表示所引用的 `CompuMethod` 自动推导数据转换代码。在此上下文中，如果所引用的 `CompuMethod` 属于 `IDENTICAL`、`LINEAR`、`RAT_FUNC` 或 `SCALE_LINEAR_AND_TEXTTABLE` 类别，则数据表示的缩放是线性的。对于 `SCALE_LINEAR_AND_TEXTTABLE` 类别的 `CompuMethod`，该要求只适用于线性缩放部分。
+
+对于线性转换，线性转换因子可以由所引用的 `Unit` 的 `factorSiToUnit` 和 `offsetSiToUnit` 属性以及所引用 `CompuMethod` 的 `compuInternalToPhys` 的 `CompuRationalCoeffs` 计算得出。
+
+关于线性数据缩放的更多信息见软件组件模板[\[2\]](#ref-2)。
+
+**示例 4.12**：
+
+**ECU** EcuA 上的软件组件 SwcA 经由其端口 `SenderPort` 发送一个 `uint16` 类型 `t_VoltageAtSender` 的数据元素 u。所引用的 `CompuMethod` 是 `cm_VoltageAtSender`，描述一个偏移为 0、LSB 为 1/4 = 2⁻² 的定点表示。端口 `SenderPort` 连接到部署在不同 **ECU** EcuB 上的软件组件 SwcB 的端口 `ReceiverPort`。发送的数据元素 u 在接收侧映射到一个 `uint16` 类型 `t_VoltageAtReceiver` 的数据元素 u，后者引用名为 `cm_VoltageAtReceiver` 的 `CompuMethod`。`cm_VoltageAtReceiver` 描述一个偏移为 16/8 = 2、LSB 为 1/8 = 2⁻³ 的定点表示。为了在总线上传输，规定了一个引用 `uint8` 类型 `t_VoltageOnNetwork` 的网络表示，使用由 `CompuMethod` `cm_VoltageOnNetwork` 描述的定点表示，其偏移为 1/2 = 0.5、LSB 为 1/2 = 2⁻¹。
+
+`CompuMethod` 的 XML 定义：
+
+```xml
+<COMPU-METHOD>
+  <SHORT-NAME>cm_VoltageAtSender</SHORT-NAME>
+  <CATEGORY>LINEAR</CATEGORY>
+  <COMPU-INTERNAL-TO-PHYS>
+    <COMPU-SCALES>
+      <COMPU-SCALE>
+        <COMPU-RATIONAL-COEFFS>
+          <COMPU-NUMERATOR><V>0</V><V>1</V></COMPU-NUMERATOR>
+          <COMPU-DENOMINATOR><V>4</V></COMPU-DENOMINATOR>
+        </COMPU-RATIONAL-COEFFS>
+      </COMPU-SCALE>
+    </COMPU-SCALES>
+  </COMPU-INTERNAL-TO-PHYS>
+</COMPU-METHOD>
+<COMPU-METHOD>
+  <SHORT-NAME>cm_VoltageAtReceiver</SHORT-NAME>
+  <CATEGORY>LINEAR</CATEGORY>
+  <COMPU-INTERNAL-TO-PHYS>
+    <COMPU-SCALES>
+      <COMPU-SCALE>
+        <COMPU-RATIONAL-COEFFS>
+          <COMPU-NUMERATOR><V>16</V><V>1</V></COMPU-NUMERATOR>
+          <COMPU-DENOMINATOR><V>8</V></COMPU-DENOMINATOR>
+        </COMPU-RATIONAL-COEFFS>
+      </COMPU-SCALE>
+    </COMPU-SCALES>
+  </COMPU-INTERNAL-TO-PHYS>
+</COMPU-METHOD>
+<COMPU-METHOD>
+  <SHORT-NAME>cm_VoltageOnNetwork</SHORT-NAME>
+  <CATEGORY>LINEAR</CATEGORY>
+  <COMPU-INTERNAL-TO-PHYS>
+    <COMPU-SCALES>
+      <COMPU-SCALE>
+        <COMPU-RATIONAL-COEFFS>
+          <COMPU-NUMERATOR><V>1</V><V>1</V></COMPU-NUMERATOR>
+          <COMPU-DENOMINATOR><V>2</V></COMPU-DENOMINATOR>
+        </COMPU-RATIONAL-COEFFS>
+      </COMPU-SCALE>
+    </COMPU-SCALES>
+  </COMPU-INTERNAL-TO-PHYS>
+</COMPU-METHOD>
+```
+
+发送 **ECU** EcuA 上 `[Rte_Send](#7165-rte_send)` 的实现：
+
+```c
+1  Std_ReturnType
+2  Rte_Send_SwcA_SenderPort_u(t_voltageAtSender u)
+3  {
+4    ...
+5    /*
+6      u_NetworkRepresentation
+7        = ((u * LSB_sender + off_sender) - off_network) / LSB_network
+8        = ((u / 4 + 0) - 0.5) * 2
+9        = (u / 2) - 1
+10   */
+11   u_NetworkRepresentation = (uint8)((u >> 1) - 1);
+12   ...
+13 }
+```
+
+接收 **ECU** EcuB 上 `[Rte_Receive](#71612-rte_receive)` 的实现：
+
+```c
+1  Std_ReturnType
+2  Rte_Receive_SwcB_ReceiverPort_u(t_voltageAtReceiver *u)
+3  {
+4    ...
+5    /*
+6      *u = ((u_NetworkRepresentation * LSB_network + off_network)
+7            - off_receiver) / LSB_receiver
+8         = ((u_NetworkRepresentation / 2 + 0.5) - 2) * 8
+9         = u_NetworkRepresentation * 4 + 4 - 16
+10        = u_NetworkRepresentation * 4 - 12
+11   */
+12   *u = (uint16)((u_NetworkRepresentation << 2) - 12);
+13   ...
+14 }
+```
+
+以下示例展示了当涉及具有 `BITFIELD_TEXTTABLE` 类别 `CompuMethod` 的 `DataPrototype` 时，表转换的可能实现。
+
+**示例 4.13**：
+
+具有 `TEXTTABLE` 类别 `CompuMethod`（在此情形下描述一个布尔量）的 `DataPrototype` 与具有 `BITFIELD_TEXTTABLE` 类别 `CompuMethod` 的 `DataPrototype` 之间的转换：
+
+`TextTableMapping` 的 XML 定义：
+
+```xml
+<PORT-INTERFACE-MAPPING-SET>
+  <SHORT-NAME>PortMappingSet</SHORT-NAME>
+  <PORT-INTERFACE-MAPPINGS>
+    <VARIABLE-AND-PARAMETER-INTERFACE-MAPPING>
+      <SHORT-NAME>Mapping_LDW_BF</SHORT-NAME>
+      <DATA-MAPPINGS>
+        <DATA-PROTOTYPE-MAPPING>
+          <FIRST-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">
+            /Example/Interfaces/One/LDW</FIRST-DATA-PROTOTYPE-REF>
+          <SECOND-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">
+            /Example/Interfaces/Two/bitfield</SECOND-DATA-PROTOTYPE-REF>
+          <TEXT-TABLE-MAPPINGS>
+            <TEXT-TABLE-MAPPING>
+              <IDENTICAL-MAPPING>false</IDENTICAL-MAPPING>
+              <MAPPING-DIRECTION>bidirectional</MAPPING-DIRECTION>
+              <BITFIELD-TEXTTABLE-MASK-SECOND>0b00000100</BITFIELD-TEXTTABLE-MASK-SECOND>
+              <VALUE-PAIRS>
+                <TEXT-TABLE-VALUE-PAIR>
+                  <FIRST-VALUE>0</FIRST-VALUE>
+                  <SECOND-VALUE>0</SECOND-VALUE>
+                </TEXT-TABLE-VALUE-PAIR>
+                <TEXT-TABLE-VALUE-PAIR>
+                  <FIRST-VALUE>1</FIRST-VALUE>
+                  <SECOND-VALUE>4</SECOND-VALUE>
+                </TEXT-TABLE-VALUE-PAIR>
+              </VALUE-PAIRS>
+            </TEXT-TABLE-MAPPING>
+          </TEXT-TABLE-MAPPINGS>
+        </DATA-PROTOTYPE-MAPPING>
+      </DATA-MAPPINGS>
+    </VARIABLE-AND-PARAMETER-INTERFACE-MAPPING>
+  </PORT-INTERFACE-MAPPINGS>
+</PORT-INTERFACE-MAPPING-SET>
+```
+
+`[Rte_Write](#7164-rte_write)` 实现的 C 代码：
+
+```c
+1  Std_ReturnType Rte_Write_<p>_<o>(boolean v) {
+2    /* fetch the bit field from the RAM Block */
+3    uint32 *bitfield = Rte_RamBlk_<BlkNr>.bitfield;
+4    /* data consistency block on */
+5    /* bit operation (masking & conversion) - bit position 6 is deduced
+6       from BITFIELD-TEXTTABLE-MASK-SECOND */
+7    if(v == 0) Bfx_ClrBit_u8u8(*bitfield, 6);
+8    else Bfx_SetBit_u8u8(*bitfield, 6);
+9    /* data consistency block off */
+10 }
+```
+
+`[Rte_Read](#71610-rte_read)` 实现的 C 代码：
+
+```c
+1  Std_ReturnType Rte_Read_<p>_<o>(boolean *v) {
+2    /* fetch the bit field from the RAM Block */
+3    uint32 bitfield = Rte_RamBlk_<BlkNr>.bitfield;
+4    /* bit operation (masking & conversion) - bit position 6 is deduced
+5       from BITFIELD-TEXTTABLE-MASK-SECOND */
+6    *v = Bfx_GetBit_u8u8u8(bitfield, 6);
+7  }
+```
+
+**示例 4.14**：
+
+两个具有 `BITFIELD_TEXTTABLE` 类别 `CompuMethod` 的 `DataPrototype` 之间的转换（`uint32` 类型的 32 位位域映射到 `uint8` 类型的 4 位位域）：
+
+`TextTableMapping` 的 XML 定义：
+
+```xml
+<PORT-INTERFACE-MAPPING-SET>
+  <SHORT-NAME>PortMappingSet</SHORT-NAME>
+  <PORT-INTERFACE-MAPPINGS>
+    <VARIABLE-AND-PARAMETER-INTERFACE-MAPPING>
+      <SHORT-NAME>Mapping_BF32_BF4</SHORT-NAME>
+      <DATA-MAPPINGS>
+        <DATA-PROTOTYPE-MAPPING>
+          <FIRST-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">
+            /Example/Interfaces/One/BF32</FIRST-DATA-PROTOTYPE-REF>
+          <SECOND-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">
+            /Example/Interfaces/Two/BF4</SECOND-DATA-PROTOTYPE-REF>
+          <TEXT-TABLE-MAPPINGS>
+            <TEXT-TABLE-MAPPING>
+              <IDENTICAL-MAPPING>true</IDENTICAL-MAPPING>
+              <MAPPING-DIRECTION>firstToSecond</MAPPING-DIRECTION>
+              <BITFIELD-TEXTTABLE-MASK-FIRST>0b00000000000000000000000000001111</BITFIELD-TEXTTABLE-MASK-FIRST>
+              <BITFIELD-TEXTTABLE-MASK-SECOND>0b00001111</BITFIELD-TEXTTABLE-MASK-SECOND>
+            </TEXT-TABLE-MAPPING>
+          </TEXT-TABLE-MAPPINGS>
+        </DATA-PROTOTYPE-MAPPING>
+      </DATA-MAPPINGS>
+    </VARIABLE-AND-PARAMETER-INTERFACE-MAPPING>
+  </PORT-INTERFACE-MAPPINGS>
+</PORT-INTERFACE-MAPPING-SET>
+```
+
+`[Rte_Read](#71610-rte_read)` 实现的 C 代码（掩码与移位——起始位置 28 和长度 4 从 `BITFIELD-TEXTTABLE-MASK-FIRST` 推导）：
+
+```c
+1  Std_ReturnType Rte_Read_<p>_<o>(uint8 *v) {
+2    /* fetch the bit field from the RAM Block */
+3    uint32 bitfield = Rte_RamBlk_<BlkNr>.bitfield;
+4    /* bit operation (masking & shifting) - start position 28 and length
+5       4 are deduced from BITFIELD-TEXTTABLE-MASK-FIRST */
+6    *v = Bfx_GetBits_u8u8u8_u32(bitfield, 28, 4) &
+7         BitfieldTexttableMaskSecond;
+8  }
+```
+
+本规范的意图不是描述任何为每个 **RTE** 生成器实现生成完全相同转换代码的机制。即使为转换生成的 **C** 代码相同，转换的数值结果仍然取决于微控制器目标和编译器。
+
+处理超出目标表示范围的值的转换的策略在 [6.2.3.8](#6238-运行时范围检查) 节中描述。
+
+对于两个文本表数据表示（枚举或位域）之间的转换——由 `ApplicationDataType` 或 `ImplementationDataType`（用于网络表示的规定）描述——**RTE** 生成器应根据 `TextTableMapping` 生成数据转换代码。该要求同样适用于线性缩放与文本表混合数据表示的文本表部分。
+
+#### 6.2.3.8. 运行时范围检查
+
+软件组件可能试图发送一个超出某个 `dataElement` 或 `ISignal` 上所规定范围的值。在不同范围的情况下，数据转换的结果也可能是一个超出目标表示范围的值。为了安全地处理这些用例，**RTE** 提供运行时范围检查（**range checks during runtime**）。概述见图 4.46。
+
+运行时范围检查应在数据失效之后进行，即首先执行 `handleNeverReceived` 检查，然后是失效检查，最后执行范围检查。
+
+**SWS_Rte_03861**：范围检查预期按以下规则执行：如果在 `DataConstr` 上规定了上限/下限，则范围检查取该值。如果 `DataConstr` 上未规定，则使用数据类型的最高/最低可表示值。
+
+是否需要范围检查，在 **ECU** 内通信的情况下由相应 `SenderComSpec` 或 `ReceiverComSpec` 的 `handleOutOfRange` 属性规定；在 **ECU** 间通信的情况下由发送或接收 `ISignal` 的 `ISignalProps` 的 `handleOutOfRange` 属性规定。
+
+**发送方侧的范围检查**
+
+**ECU** 内通信在发送方侧的运行时范围检查由以下要求描述：
+
+如果 `handleOutOfRange` 定义在 `SenderComSpec` 上且取 `none` 以外的任何值，则 **RTE** 应在特定组件的发送路径中实现所发送数据的范围检查。在这种情况下，所有接收方都在范围检查应用之后接收该值。
+
+如果 `handleOutOfRange` 定义在 `SenderComSpec` 上，则 **RTE** 应使用来自 `PPortPrototype` 或 `PRPortPrototype` 中 `DataPrototype` 的前置限值（**SWS_Rte_07196**）对特定组件发送路径中发送的数据进行范围检查。
+
+如果为要发送的 `dataElement` 提供了 `handleOutOfRange = ignore` 的 `SenderComSpec`，则应在发送组件中实现范围检查。如果值越界，则该 `dataElement` 的发送不应被传播。这意味着对非排队通信而言将传播最后一个有效值，对排队通信而言不会有任何值入队。
+
+在复合数据类型的情况下，如果任何一个复合元素越界，则整个 `dataElement` 的发送不应被传播。
+
+如果为要发送的 `dataElement` 提供了 `handleOutOfRange = saturate` 的 `SenderComSpec`，则应在发送组件中实现范围检查。如果值越界，则实际发送的值应被设置为下限或上限。
+
+在复合数据类型的情况下，实际值越界的每个复合元素都应被饱和处理。
+
+如果为要发送的 `dataElement` 提供了 `handleOutOfRange = default` 的 `NonqueuedSenderComSpec`，则应在发送组件中实现范围检查。如果值越界且 `initValue` 不等于 `invalidValue`，则实际发送的值应被设置为 `initValue`。
+
+在复合数据类型的情况下，实际值越界的每个复合元素都应被设置为 `initValue`。
+
+如果为要发送的 `dataElement` 提供了 `handleOutOfRange = invalid` 的 `NonqueuedSenderComSpec`，则应在发送组件中实现范围检查。如果值越界，则实际发送的值应被设置为 `invalidValue`。
+
+在复合数据类型的情况下，实际值越界的每个复合元素都应被设置为 `invalidValue`。
+
+如果为要发送的 `dataElement` 提供了 `handleOutOfRange` 设置为 `default` 或 `invalid` 的 `QueuedSenderComSpec`，则 **RTE** 生成器应把输入作为无效配置拒绝，因为 `QueuedSenderComSpec` 未定义 `initValue` 属性（见 **SW-C** 模板[\[2\]](#ref-2)）且不支持数据失效（见 **SWS_Rte_06727**）。
+
+**ECU** 间通信在发送方侧的运行时范围检查由以下要求描述：
+
+如果 `handleOutOfRange` 定义在 `ISignalProps` 上且取 `none` 以外的任何值，则 **RTE** 应在特定信号的发送路径中实现所发送数据的范围检查。在这种情况下，只有该特定 `ISignal` 的接收方在范围检查应用之后接收该值。
+
+如果 `handleOutOfRange` 定义在 `ISignalProps` 上，则 **RTE** 应使用来自该 `ISignal` 的限值对特定信号发送路径中发送的数据进行范围检查。
+
+如果为要发送的 `ISignal` 提供了 `handleOutOfRange = ignore` 的 `ISignalProps`，则应在发送信号中实现范围检查。如果值越界，则该 `ISignal` 的发送不应被传播。在这种情况下，**RTE** 的行为应如同没有发生发送一样。
+
+如果为要发送的 `ISignal` 提供了 `handleOutOfRange = saturate` 的 `ISignalProps`，则应在发送信号中实现范围检查。如果值越界，则实际发送的值应被设置为下限或上限。
+
+如果为要发送的 `ISignal` 提供了 `handleOutOfRange = default` 的 `ISignalProps`，则应在发送信号中实现范围检查。如果值越界且 `initValue` 不等于 `invalidValue`，则实际发送的值应被设置为 `initValue`。
+
+如果为要发送的 `ISignal` 提供了 `handleOutOfRange = invalid` 的 `ISignalProps`，则应在发送信号中实现范围检查。如果值越界，则实际发送的值应被设置为 `invalidValue`。
+
+**接收方侧的范围检查**
+
+**ECU** 内通信在接收方侧的运行时范围检查由以下要求描述：
+
+如果 `handleOutOfRange` 定义在 `ReceiverComSpec` 上且取 `none` 以外的任何值，则 **RTE** 应在特定组件的接收路径中实现范围检查。在这种情况下，范围检查只适用于该特定组件接收的数据。
+
+如果 `handleOutOfRange` 定义在 `ReceiverComSpec` 上，则 **RTE** 应使用来自该 rPort 中 `DataPrototype` 的前置限值（**SWS_Rte_07196**）对特定组件接收路径中接收的数据进行范围检查。
+
+如果为要接收的 `dataElement` 提供了 `handleOutOfRange = ignore` 的 `ReceiverComSpec`，则应在接收组件中实现范围检查。如果值越界，则该 `dataElement` 的接收不应被传播。这意味着对非排队通信而言将传播最后一个有效值，对排队通信而言不会有任何值入队。
+
+如果接收到的 `dataElement` 的值越界，且提供了 `handleOutOfRangeStatus = indicate` 的 `NonqueuedReceiverComSpec`，则 **RTE** 的返回值应为 `RTE_E_OUT_OF_RANGE`。
+
+在复合数据类型的情况下，如果任何一个复合元素越界，则整个 `dataElement` 的接收不应被传播。如果 `handleOutOfRangeStatus` 属性设置为 `indicate`，则 **RTE** 的返回值应为 `RTE_E_OUT_OF_RANGE`。
+
+如果为要接收的 `dataElement` 提供了 `handleOutOfRange = saturate` 的 `ReceiverComSpec`，则应在接收组件中实现范围检查。如果值越界，则实际接收的值应被设置为下限或上限。
+
+如果接收到的 `dataElement` 的值越界，且提供了 `handleOutOfRangeStatus = indicate` 的 `NonqueuedReceiverComSpec`，则 **RTE** 的返回值应为 `RTE_E_OUT_OF_RANGE`。
+
+在复合数据类型的情况下，实际值越界的每个复合元素都应被饱和处理。如果 `handleOutOfRangeStatus` 属性设置为 `indicate`，则只要任何一个复合元素越界，**RTE** 的返回值就应为 `RTE_E_OUT_OF_RANGE`。
+
+如果为要接收的 `dataElement` 提供了 `handleOutOfRange = default` 的 `NonqueuedReceiverComSpec`，则应在接收组件中实现范围检查。如果值越界且 `initValue` 不等于 `invalidValue`，则实际接收的值应被设置为 `initValue`。
+
+如果接收到的 `dataElement` 的值越界，且提供了 `handleOutOfRangeStatus = indicate` 的 `NonqueuedReceiverComSpec`，则 **RTE** 的返回值应为 `RTE_E_OUT_OF_RANGE`。
+
+在复合数据类型的情况下，实际值越界的每个复合元素都应被设置为 `initValue`。如果 `handleOutOfRangeStatus` 属性设置为 `indicate`，则只要任何一个复合元素越界，**RTE** 的返回值就应为 `RTE_E_OUT_OF_RANGE`。
+
+如果为要接收的 `dataElement` 提供了 `handleOutOfRange = invalid` 的 `NonqueuedReceiverComSpec`，则应在接收组件中实现范围检查。如果值越界，则实际接收的值应被设置为 `invalidValue`。
+
+如果接收到的 `dataElement` 的值越界，且提供了 `handleOutOfRangeStatus = indicate` 的 `ReceiverComSpec`，则 **RTE** 的返回值应为 `RTE_E_INVALID`。
+
+在复合数据类型的情况下，实际值越界的每个复合元素都应被设置为 `invalidValue`。如果 `handleOutOfRangeStatus` 属性设置为 `indicate`，则只要任何一个复合元素越界，**RTE** 的返回值就应为 `RTE_E_INVALID`。
+
+如果为要接收的 `dataElement` 提供了 `handleOutOfRange = externalReplacement` 的 `ReceiverComSpec`，则应在接收组件中实现范围检查。如果值越界，则实际接收的值应被替换为取自 `ReceiverComSpec.replaceWith` 的值（例如常量、**NVRAM** 参数）。
+
+如果接收到的 `dataElement` 的值越界，且提供了 `handleOutOfRangeStatus = indicate` 的 `NonqueuedReceiverComSpec`，则 **RTE** 的返回值应为 `RTE_E_OUT_OF_RANGE`。
+
+在复合数据类型的情况下，如果任何一个复合元素越界，则实际接收的值应被外部值完全替换。如果 `handleOutOfRangeStatus` 属性设置为 `indicate`，则 **RTE** 的返回值应为 `RTE_E_OUT_OF_RANGE`。
+
+如果为要接收的 `dataElement` 提供了 `handleOutOfRange` 设置为 `default` 或 `invalid` 的 `QueuedReceiverComSpec`，则 **RTE** 生成器应把输入作为无效配置拒绝，因为 `QueuedReceiverComSpec` 未定义 `initValue` 属性（见 **SW-C** 模板[\[2\]](#ref-2)）且不支持数据失效（见 **SWS_Rte_06727**）。
+
+如果为要接收的 `dataElement` 提供了 `QueuedReceiverComSpec` 且 `handleOutOfRangeStatus` 属性设置为 `indicate`，则 **RTE** 生成器应把输入作为无效配置拒绝。
+
+**ECU** 间通信在接收方侧的运行时范围检查由以下要求描述：
+
+如果 `handleOutOfRange` 定义在 `ISignalProps` 上且取 `none` 以外的任何值，则 **RTE** 应在特定信号的接收路径中实现范围检查。在这种情况下，该 **ECU** 上该特定 `ISignal` 的所有接收方都在范围检查应用之后接收该值。
+
+如果 `handleOutOfRange` 定义在 `ISignalProps` 上，则 **RTE** 应使用来自该 `ISignal` 的限值对特定信号接收路径中接收的数据进行范围检查。
+
+如果为要接收的 `ISignal` 提供了 `handleOutOfRange = ignore` 的 `ISignalProps`，则应在接收信号中实现范围检查。如果值越界，则该 `ISignal` 的接收不应被传播。在这种情况下，**RTE** 的行为应如同没有发生接收一样。
+
+如果为要接收的 `ISignal` 提供了 `handleOutOfRange = saturate` 的 `ISignalProps`，则应在接收信号中实现范围检查。如果值越界，则实际接收的值应被设置为下限或上限。
+
+如果为要接收的 `ISignal` 提供了 `handleOutOfRange = default` 的 `ISignalProps`，则应在接收信号中实现范围检查。如果值越界且 `initValue` 不等于 `invalidValue`，则实际接收的值应被设置为 `initValue`。
+
+如果为要接收的 `ISignal` 提供了 `handleOutOfRange = invalid` 的 `ISignalProps`，则应在接收信号中实现范围检查。如果值越界，则实际接收的值应被设置为 `invalidValue`。
+
+如果为要接收的 `ISignal` 提供了 `handleOutOfRange = externalReplacement` 的 `ISignalProps`，则应在接收信号中实现范围检查。如果值越界，则实际接收的值应被替换为取自 `ReceiverComSpec.replaceWith` 的值（例如常量、**NVRAM** 参数）。
+
+![Figure4-46.png](Figure4-46.png)
+#### 6.2.4. 模式
+
+![Figure4-47.png](Figure4-47.png)
+
+模式的目的是在模式之间的转换中启动 `RunnableEntity` 和基础软件可调度实体（**Basic Software Schedulable Entity**），并在特定模式下禁用（/启用）`RunnableEntity` 和基础软件可调度实体的指定触发器。这里我们使用软件组件模板规范[\[2\]](#ref-2)中模式的定义。而 **BSW** 模块描述模板规范[\[9\]](#ref-9)则描述了如何为基础软件模块描述模式。
+
+第一个子节 [6.2.4.1](#6241-模式使用者) 描述 **AUTOSAR** 软件组件或基础软件模块如何作为模式使用者（**mode user**）使用模式。发起模式切换的模式管理者（**mode manager**）的角色在 [6.2.4.2](#6242-模式管理者) 节中描述。`ModeDeclaration` 如何连接到状态机在子节 [6.2.4.3](#6243-modedeclaration-和-modedeclarationgroup-语义的精化) 中描述。**RTE** 和基础软件调度器关于模式切换的行为在子节 [6.2.4.4](#6244-rte-基础软件调度器截获模式切换通知后采取动作的顺序) 中详细说明。
+
+模式的一个用例在 [6.2.6.2](#6262-autosar-软件组件的初始化与终结) 节中描述，用于 **AUTOSAR** 软件组件的初始化与终结。模式既可用于通信状态的处理，也可用于特定的应用目的。模式的具体定义及其使用不在本文的范围之内。
+
+模式的状态将通过模式通信——模式切换通知（**mode switch notification**）——通知给 **AUTOSAR** 软件组件模式使用者，如子节 [6.2.4.7](#6247-模式切换的通知) 所述。用于接收（或发送）模式切换通知的端口称为模式切换端口（**mode switch port**）。
+
+基础软件模块模式使用者和基础软件模块模式管理者不一定使用端口。没有 **AUTOSAR** 接口的基础软件模块经由基础软件调度器的配置连接。
+
+##### 6.2.4.1. 模式使用者
+
+为了使用模式，**AUTOSAR** 软件组件（模式使用者）必须由需求模式切换端口（**require mode switch port**）的 `ModeDeclarationGroupPrototype` 引用一个 `ModeDeclarationGroup`，见 [6.2.4.7](#6247-模式切换的通知) 节。该 `ModeDeclarationGroup` 包含所需的模式。或者，模式管理者也可以在提供的模式切换端口中包含一个 `ModeAccessPoint`，从而针对同一个 `ModeDeclarationGroupPrototype` 同时承担模式使用者和模式管理者的角色。
+
+基础软件模块（模式使用者）必须定义一个 `requiredModeGroup` `ModeDeclarationGroupPrototype`。这些 `ModeDeclarationGroupPrototype` 所引用的 `ModeDeclarationGroup` 包含所需的模式。与软件组件模式使用者类似，基础软件模块模式管理者也可以为 `providedModeGroup` `ModeDeclarationGroupPrototype` 包含一个 `accessedModeGroup`。由此，它针对同一个 `ModeDeclarationGroupPrototype` 同时承担模式使用者和模式管理者的角色。
+
+模式使用者可以以两种方式使用 `ModeDeclaration`（另见图 4.47）：
+
+1. 模式可用于触发可运行实体：**AUTOSAR SW-C** 的 `SwcInternalBehavior` 或 **BSW** 模块的 `BswInternalBehavior` 可以定义引用所需 `ModeDeclaration` 的 `SwcModeSwitchEvent` 或 `BswModeSwitchEvent`。该 `SwcModeSwitchEvent` 或 `BswModeSwitchEvent` 随后可用作 `RunnableEntity`/`BswSchedulableEntity` 的触发器。`SwcModeSwitchEvent` 和 `BswModeSwitchEvent` 都携带一个 `ModeActivationKind` 属性，取值可以为 `exit`、`entry` 或 `transition`。
+
+由具有 `ModeActivationKind` 为 `exit` 的 `SwcModeSwitchEvent` 或 `BswModeSwitchEvent` 触发的 `RunnableEntity` 或 `BswSchedulableEntity` 在退出模式时被触发。为简单起见，它将被称为退出时（**on-exit**）可执行实体。相应地，转换时（**on-transition**）可执行实体由具有 `ModeActivationKind` 为 `transition` 的 `SwcModeSwitchEvent` 或 `BswModeSwitchEvent` 触发，并将在两个模式之间的转换期间执行；进入时（**on-entry**）可执行实体由具有 `ModeActivationKind` 为 `entry` 的 `SwcModeSwitchEvent` 或 `BswModeSwitchEvent` 触发，并将在进入模式时执行。
+
+由于 `RunnableEntity` 和 `BswSchedulableEntity` 都可以由多个 `RTEEvent`/`BswEvent` 触发，两者可以同时是退出时、转换时和进入时可执行实体。
+
+**RTE** 不支持 `SwcModeSwitchEvent` 的 `WaitPoint`（见 **SWS_Rte_01358**）。
+
+2. 启动可执行实体的 `RTEEvent` 或 `BswEvent` 可以包含一个模式禁用依赖（**mode disabling dependency**）。
+
+**SWS_Rte_02503**：如果可运行实体 r 被某个对模式 m 具有模式禁用依赖的 `RTEEvent` e 以 `startOnEvent` 引用，则在模式 m 活动期间，**RTE** 不得在任何 e 的出现时激活可运行实体 r。
+
+**SWS_Rte_07530**：如果基础软件可调度实体 r 被某个对模式 m 具有模式禁用依赖的 `BswEvent` e 以 `startsOnEvent` 引用，则在模式 m 活动期间，基础软件调度器不得在任何 e 的出现时激活基础软件可调度实体 r。
+
+**注意：** 作为 **SWS_Rte_02503** 和 **SWS_Rte_07530** 与 **SWS_Rte_02661** 相结合的结果，在模式 m 活动期间，**RTE** 或基础软件调度器不会在任何 e 的出现时启动可运行实体或基础软件可调度实体 r。
+
+模式禁用在向某个模式转换期间、该模式自身期间以及退出该模式的转换期间是活动的。精确定义见 [6.2.4.4](#6244-rte-基础软件调度器截获模式切换通知后采取动作的顺序) 节。
+
+模式禁用依赖的存在阻止 **RTE** 在模式禁用依赖所引用的模式期间、以及进出该模式的转换期间，由被禁用的 `RTEEvent`/`BswEvent` 启动模式禁用依赖的可执行实体。模式禁用依赖覆盖被禁用的 `RTEEvent`/`BswEvent` 对 `RunnableEntity` 和 `BswSchedulableEntity` 的任何激活。这对 `SwcModeSwitchEvent` 和 `BswModeSwitchEvent` 同样成立。
+
+`RunnableEntity` 和 `BswSchedulableEntity` 不能被显式"启用"。只有不存在任何活动的模式禁用依赖时，它们才处于"启用"状态。
+
+注意，模式禁用依赖不会阻止被"禁用"的 `RTEEvent` 对 `WaitPoint` 的唤醒。这允许被唤醒的可运行实体在转换发生期间运行至完成。
+
+模式禁用依赖的存在不应指示 **RTE** 在模式切换时终止一个正在运行的可运行实体。
+
+模式禁用依赖的存在不应指示基础软件调度器在模式切换时终止一个正在运行的基础软件可调度实体。
+
+**RTE** 和基础软件调度器可以配置为切换调度表（**schedule table**），以实现 `RunnableEntity` 或基础软件可调度实体的周期触发器的模式禁用依赖。互斥模式（**mutual exclusive modes**）的集合可以映射到不同的调度表。**RTE** 应按照 `RteModeScheduleTableRef` 中模式到调度表的映射实现调度表之间的切换，见 **SWS_Rte_05146**。
+
+模式使用者可以在 `ModeSwitchReceiverComSpec`（软件组件）或 `BswModeReceiverPolicy`（**BSW** 模块）中规定它能够处理异步模式切换行为（`supportsAsynchronousModeSwitch == TRUE`）。如果连接到模式管理者的同一 `ModeDeclarationGroupPrototype` 的所有模式使用者都支持异步模式切换行为，则相关的模式机实例可以用异步模式切换过程实现。否则，必须应用同步模式切换过程（见 **SWS_Rte_07150**）。
+
+##### 6.2.4.2. 模式管理者
+
+进入和离开模式由模式管理者发起。模式管理者可以是一个基础软件模块，例如基础软件模式管理者（**BswM**）、通信管理者（**ComM**）或 **ECU** 状态管理者（**EcuM**）。模式管理者也可以是 **AUTOSAR SW-C**。在这种情况下，它被称为应用模式管理者（**application mode manager**）。
+
+模式管理者包含表示模式的主状态机。
+
+为了提供模式，**AUTOSAR** 软件组件（模式管理者）必须由提供模式切换端口（**provide mode switch port**）的 `ModeDeclarationGroupPrototype` 引用一个 `ModeDeclarationGroup`，见 [6.2.4.7](#6247-模式切换的通知) 节。该 `ModeDeclarationGroup` 包含所提供的模式。
+
+基础软件模块（模式管理者）必须定义一个 `providedModeGroup` `ModeDeclarationGroupPrototype`。这些 `ModeDeclarationGroupPrototype` 所引用的 `ModeDeclarationGroup` 包含所提供的模式。
+
+**RTE**/基础软件调度器将执行在模式之间切换所需的动作。这包括终止和执行连接到模式管理者的同一 `ModeDeclarationGroupPrototype` 的所有模式使用者的若干可执行实体。为此，**RTE**/基础软件调度器需要一个状态机来跟踪当前活动的模式以及由模式管理者发起的转换。**RTE**/基础软件调度器的模式机称为模式机实例（**mode machine instance**）。模式管理者的提供模式切换端口的每个 `ModeDeclarationGroupPrototype`（或 `providedModeGroup` `ModeDeclarationGroupPrototype`）恰好有一个模式机实例。
+
+由模式管理者负责通过向模式使用者发送模式切换通知来推进 **RTE**/基础软件调度器的模式机实例。模式切换通知由一个非阻塞 **API** 实现（见 [7.1.6.6](#7166-rte_switch) 节 / [7.2.5.7](#7257-schm_switch) 节）。因此，模式切换通知本身只在模式管理者的状态机与 **RTE**/基础软件调度器的模式机实例之间提供松耦合。为防止模式机实例滞后、模式管理者与 **RTE**/基础软件调度器的状态失步，模式管理者可以对模式切换通知使用确认反馈。**RTE**/基础软件调度器可以配置为在所请求的转换完成时向模式管理者发送模式切换通知的确认。
+
+在模式管理者处，确认产生一个 `ModeSwitchedAckEvent`。与 `DataSendCompletedEvent` 一样，该事件可以通过轮询或阻塞的 `[Rte_SwitchAck](#7169-rte_switchack)` **API** 获取，并且该事件可用于触发一个 `ModeSwitchAck` 可执行实体来获取状态。**注意：** 基础软件调度器不支持 `WaitPoint`。因此 `[SchM_SwitchAck](#72510-schm_switchack)` 永不阻塞。
+
+确认的一些可能的使用模式是：
+
+* 最直接的方法是使用 `[Rte_Switch](#7166-rte_switch)` 和阻塞的 `[Rte_SwitchAck](#7169-rte_switchack)` 的序列来发送模式切换通知并等待完成。这需要使用扩展任务。
+* 另一种可能性是让一个周期性的 `RunnableEntity`/`BswSchedulableEntity`（也许正是通过 `[Rte_Switch](#7166-rte_switch)`/`[SchM_Switch](#7257-schm_switch)` 切换模式的那个）使用 `[Rte_SwitchAck](#7169-rte_switchack)`/`[SchM_SwitchAck](#72510-schm_switchack)` 轮询确认。
+* 确认也可以由一个由 `ModeSwitchedAckEvent` 启动的 `RunnableEntity` 或 `BswSchedulableEntity` 轮询。
+
+模式管理者还可以使用 `[Rte_Mode](#71632-rte_mode)`/`[SchM_Mode](#7258-schm_mode)` **API** 从 **RTE**/基础软件调度器的视角读取当前活动的模式。
+
+##### 6.2.4.3. ModeDeclaration 和 ModeDeclarationGroup 语义的精化
+
+为了实现模式切换的逻辑，**RTE**/基础软件调度器需要关于可用模式的一些基本信息。为此，**RTE**/基础软件调度器将对一个 `ModeDeclarationGroup` 的模式做以下附加假定：
+
+1. **SWS_Rte_CONSTR_09013**（恰好一个模式或一个模式转换应当是活动的）：只要任何 `RunnableEntity` 或 `BswSchedulableEntity` 正在运行，每个 `ModeDeclarationGroupPrototype` 都应始终恰好有一个模式或一个模式转换是活动的。
+2. 在模式机实例初始化之后，**RTE**/基础软件调度器将立即执行到每个 `ModeDeclarationGroupPrototype` 的初始模式的转换（见 **SWS_Rte_02544**）。
+
+**RTE**/基础软件调度器将在 **RTE**/基础软件调度器初始化之后立即强制执行初始模式的模式禁用，并触发每个 `ModeDeclarationGroupPrototype` 的初始模式的进入时可执行实体（如果定义了的话）。
+
+换言之，**RTE**/基础软件调度器假定：一个 `ModeDeclarationGroupPrototype` 的模式属于恰好一个没有嵌套状态的状态机。这些状态机覆盖原子 **AUTOSAR SW-C**<sup>9</sup>和模式相关的 **AUTOSAR** 基础软件模块<sup>10</sup>的整个生命周期。
+
+> 9 原子 **AUTOSAR SW-C** 的生命周期被视为该 **SW-C** 的可运行实体正在执行的时间跨度。
+> 10 模式相关的 **AUTOSAR** 基础软件模块的生命周期被视为其基础软件可调度实体正在执行的时间跨度。
+
+##### 6.2.4.4. RTE / 基础软件调度器截获模式切换通知后采取动作的顺序
+
+本节描述向模式使用者"通知"一次模式切换实际上做了什么。**RTE**/基础软件调度器为切换模式做了什么，尤其是以何种顺序。
+
+**模式切换过程**
+
+根据模式使用者对同步性的需求，模式机实例可以用两种不同的实现来实现。
+
+* 同步模式切换过程（**synchronous mode switching procedure**）
+* 异步模式切换过程（**asynchronous mode switching procedure**）
+
+这两种实现的区别在于异步模式切换过程省略了等待条件。例如，在异步行为下，软件组件不能依赖前一个模式的所有模式禁用依赖的可执行实体在进入时和退出时可执行实体启动之前终止。一方面，这可能给软件组件设计者带来一些额外工作，使组件的实现能够支持这种调度；另一方面，它使快速而精简的模式切换成为可能。
+
+**SWS_Rte_07150**：如果模式机实例的至少一个模式使用者不支持异步模式切换行为，则 **RTE** 生成器应使用同步模式切换过程。
+
+**SWS_Rte_07151**：如果所有模式使用者都支持异步模式切换行为、且相关模式机实例已进行相应配置，则 **RTE** 生成器应采用异步模式切换行为。
+
+**保护资源的典型模式用法**
+
+**RTE**/基础软件调度器可以启动 `RunnableEntity` 和 `BswSchedulableEntity` 的执行，也可以阻止它们。在模式切换的上下文中：
+
+* **RTE**/基础软件调度器启动退出时可执行实体以离开前一个模式。这通常由"清理可执行实体"使用，以释放在前一个模式中使用的资源。
+* **RTE**/基础软件调度器启动进入时可执行实体以进入下一个模式。这通常由"初始化可执行实体"使用，以分配在下一个模式中使用的资源。
+* 并且 **RTE**/基础软件调度器可以在某个模式内阻止模式禁用依赖的可执行实体的执行。这通常与时间触发的"工作可执行实体"一起使用，后者使用某个资源而在特定模式下该资源不可用。
+
+根据该用例，在"清理可执行实体"和"初始化可执行实体"执行期间，应禁用"工作可执行实体"以保护资源。此外，如果同一资源在两个相继的模式中被（不同 **SWC**）使用，则"清理可执行实体"应在下一个模式的"初始化可执行实体"执行之前安全地终止（同步模式切换过程）。总之，这会导致 **RTE**/基础软件调度器在接收到模式切换通知后按以下动作顺序执行：
+
+1. 为下一个模式激活模式禁用；
+2. 在同步模式切换过程的情况下，等待新被禁用的可执行实体终止；
+3. 执行"清理可执行实体"；
+4. 在同步模式切换过程的情况下，等待"清理可执行实体"终止；
+5. 执行"初始化可执行实体"；
+6. 在同步模式切换过程的情况下，等待"初始化可执行实体"终止；
+7. 停用前几个模式的模式禁用，并启用在前一个模式中被禁用的可执行实体。
+
+**RTE**/基础软件调度器还可以在两个模式之间的转换中启动转换时可执行实体，这在本用例示例中未展示。
+
+通常，一个 **ECU** 的 **SW-C**、可运行实体、基础软件模块和基础软件可调度实体中只有一小部分依赖于被切换的模式。因此，应当能够把系统设计成模式切换不影响其余软件的性能的方式。
+
+图 4.48：该图应说明在同步模式转换期间，哪类可执行实体将以何种顺序运行。方框表示被激活的可执行实体。模式禁用依赖的可执行实体以蓝色（旧模式）和粉色（新模式）印刷。退出时、转换时和进入时可执行实体以红色、黄色和绿色印刷。
+
+![Figure4-48.png](Figure4-48.png)
+
+图 4.49：该图应说明在异步模式转换期间（其中在模式变更时触发的可执行实体被映射到比模式相关可执行实体优先级更高的任务），哪类可执行实体将以何种顺序运行。方框表示被激活的可执行实体。模式禁用依赖的可执行实体以蓝色（旧模式）和粉色（新模式）印刷。退出时、转换时和进入时可执行实体以红色、黄色和绿色印刷。
+
+![Figure4-49.png](Figure4-49.png)
+
+本节的其余部分列出保证上述行为的要求。
+
+对模式有依赖关系的所有可运行实体必须在模式转换期间被执行或终止。限制 **SWS_Rte_02500** 要求这些可运行实体属于类别 1，以保证有限的执行时间。
+
+为了实现的简单性以保证可运行实体执行的顺序，限制 **SWS_Rte_02662** 适用。
+
+实现异步模式切换过程的模式机实例可以完全在 `[Rte_Switch](#7166-rte_switch)` 或 `[SchM_Switch](#7257-schm_switch)` **API** 内部实现。在这种情况下，进入时、转换时、退出时和 `ModeSwitchAck` 可执行实体不像 [8.5.1](#851-rte-事件到任务isr-的映射) 节中描述的那样映射到任务。
+
+**SWS_Rte_07173**：如果以下所有条件都满足，则 **RTE** 生成器应支持经由直接函数调用调用进入时、转换时、退出时和 `ModeSwitchAck` 可执行实体：
+
+* 配置了异步模式切换行为（见 **SWS_Rte_07151**）
+* 进入时、转换时、退出时和 `ModeSwitchAck` 可执行实体未定义"最小启动距离"
+* 模式管理者和模式使用者在同一分区中
+* [constr_4086] 的前提条件得到满足
+
+**SWS_Rte_08905**：如果以下所有条件都满足，则 **RTE** 生成器应支持经由可信函数调用调用进入时、转换时、退出时和 `ModeSwitchAck` 可执行实体：
+
+* 配置了异步模式切换行为（见 **SWS_Rte_07151**）
+* 进入时、转换时、退出时和 `ModeSwitchAck` 可执行实体未定义"最小启动距离"
+* 模式管理者和模式使用者在同一核的不同分区中
+* [constr_4086] 的前提条件得到满足
+
+此外，必须考虑要求 **SWS_Rte_05083**、**SWS_Rte_07155** 和 **SWS_Rte_07157**。
+
+**SWS_Rte_02667**：在模式管理者用于指示模式切换的 `[Rte_Switch](#7166-rte_switch)`/`[SchM_Switch](#7257-schm_switch)` **API** 调用内，应执行以下操作之一：
+
+1. 如果相应的模式机实例处于转换中，且模式切换通知队列已满，则 `[Rte_Switch](#7166-rte_switch)`/`[SchM_Switch](#7257-schm_switch)` 应立即返回错误。
+2. 如果相应的模式机实例处于转换中，且模式切换通知队列未满，则模式切换通知应被排队。
+3. 如果模式机实例不处于转换中，则 `[Rte_Switch](#7166-rte_switch)`/`[SchM_Switch](#7257-schm_switch)` 应按照 **SWS_Rte_02665** 中的序列发起该转换，该序列随之激活下一个模式的模式禁用（见 **SWS_Rte_02661**）。
+
+以下列表包含模式转换各步骤的要求。
+
+**SWS_Rte_02661**：在模式机实例的转换开始时，如果为下一个模式定义了任何模式禁用依赖，则 **RTE**/基础软件调度器应激活该下一个模式的模式禁用（另见 **SWS_Rte_02503**）。
+
+**SWS_Rte_07152**：如果为下一个模式定义了任何模式禁用依赖（如 **SWS_Rte_02661** 所规定），则在同步模式切换过程的情况下，**RTE**/基础软件调度器应等待新被禁用的 `RunnableEntity` 和基础软件可调度实体终止。
+
+**注意：** 为在同步模式切换的情况下保证本核本地模式使用者组的所有被激活的模式禁用依赖可执行实体在转换的退出时可执行实体启动之前都已终止，**RTE** 生成器可以利用限制 **SWS_Rte_02663**：模式禁用依赖的可执行实体以高于或等于退出时可执行实体和进入时可执行实体的优先级运行。
+
+**SWS_Rte_02562**：**RTE**/基础软件调度器应执行前一个模式的退出时可执行实体。
+
+**SWS_Rte_07153**：如果配置了任何退出时可执行实体，则在同步模式切换过程的情况下，**RTE**/基础软件调度器应在其执行（**SWS_Rte_02562**）之后等待，直到所有退出时可执行实体终止。
+
+**SWS_Rte_02707**：**RTE**/基础软件调度器应执行为从前一个模式到下一个模式的转换所配置的转换时可执行实体。
+
+**SWS_Rte_02708**：如果配置了任何转换时可执行实体，则在同步模式切换过程的情况下，**RTE**/基础软件调度器应在其执行（**SWS_Rte_02707**）之后等待，直到所有转换时可执行实体终止。
+
+**SWS_Rte_02564**：**RTE**/基础软件调度器应执行下一个模式的进入时可执行实体。
+
+**SWS_Rte_07154**：如果配置了任何进入时可执行实体，则在同步模式切换过程的情况下，**RTE** 应在其执行（**SWS_Rte_02564**）之后等待，直到所有进入时可执行实体终止。
+
+**SWS_Rte_02563**：**RTE**/基础软件调度器应停用前一个模式的模式禁用，只保留下一个模式的模式禁用。
+
+至此，转换完成。
+
+**SWS_Rte_02587**：在转换结束时，**RTE**/基础软件调度器应触发连接到模式管理者 `ModeDeclarationGroupPrototype` 的 `ModeSwitchedAckEvent`。
+
+这将在模式管理者侧产生一个确认，使模式管理者能够等待模式切换的完成。
+
+模式切换通知的出队也应在转换结束时完成，见 **SWS_Rte_02721**。
+
+**SWS_Rte_02665**：在模式机实例的转换期间，针对一个核本地模式使用者组，以下适用的每个步骤：
+
+1. **SWS_Rte_02661**（转换与本步骤并行进入），
+2. **SWS_Rte_07152**，
+3. **SWS_Rte_02562**，
+4. **SWS_Rte_07153**，
+5. **SWS_Rte_02707**，
+6. **SWS_Rte_02708**，
+7. **SWS_Rte_02564**，
+8. **SWS_Rte_07154**，
+9. **SWS_Rte_02563**（转换随本步骤完成），以及
+10. 紧随其后的 **SWS_Rte_02587**
+
+应按所列顺序执行。如果某个步骤不适用，其余步骤的顺序应保持不变。
+
+如果模式使用者属于不同的核本地模式使用者组，则步骤 1.–9. 可以在不同核上并行执行。当步骤 1.–9. 对整个模式机实例完成时，执行步骤 10.。
+
+在属于同一模式机实例的模式使用者被映射到不同分区、而这些分区又被调度到不同微控制器核上的情况下，**SWS_Rte_02665** 中描述的序列可以并行化。
+
+**SWS_Rte_02668**：在如 **SWS_Rte_02665** 所述的转换执行之后，**RTE**/基础软件调度器应立即检查该模式机实例的待处理模式切换通知队列。如果可以有一个模式切换通知出队，则该模式机实例应按照 **SWS_Rte_02665** 中的序列直接进入相应的转换。
+
+在两个模式切换的快速序列中，如果在前一个中间模式的转换完成之前已指示了到下一个模式的模式切换通知，则 `[Rte_Mode](#71632-rte_mode)` 或 `[SchM_Mode](#7258-schm_mode)` **API** 将不会指示该中间模式。
+
+**SWS_Rte_02630**：在同步模式切换过程的情况下，**RTE** 应为整个模式机实例同步地执行模式切换的所有步骤（见 **SWS_Rte_02665**）。
+
+即，模式转换将对连接到同一模式管理者 `ModeDeclarationGroupPrototype` 的所有模式使用者同步执行。
+
+**SWS_Rte_02669**：如果一个转换的下一个模式与前一个模式相同，该转换仍应执行。
+
+##### 6.2.4.5. 模式机实例到 RTE 与基础软件调度器的分配
+
+如果相关的 `ModeDeclarationGroupPrototype` 在软件组件的端口中被实例化，且该 `ModeDeclarationGroupPrototype` 未与某个基础软件模块实例的 `providedModeGroup` `ModeDeclarationGroupPrototype` 同步（`SwcBswMapping` 的 `synchronizedModeGroup`），则该模式机实例应分配给 **RTE**。
+
+如果相关的 `ModeDeclarationGroupPrototype` 是某个基础软件模块实例的 `providedModeGroup` `ModeDeclarationGroupPrototype`，则该模式机实例应分配给基础软件调度器。
+
+如果软件组件端口中实例化的 `ModeDeclarationGroupPrototype` 与某个基础软件模块实例的 `providedModeGroup` `ModeDeclarationGroupPrototype` 同步（`SwcBswMapping` 的 `synchronizedModeGroup`），则 **RTE** 生成器应只创建一个模式机实例。相关的公共模式机实例应分配给基础软件调度器。
+
+在同步的 `ModeDeclarationGroupPrototype` 的情况下，相关的公共模式机实例在 `[SchM_Init](#7271-schm_init)` 执行期间初始化。此时，由于 **RTE** 尚未初始化，`RunnableEntity` 的调度尚未启用。因此会出现这样的情形：如果模式机实例已初始化，作为进入时可执行实体的 `RunnableEntity` 不会被调用。此外，此类模式机实例的当前模式在 **RTE** 初始化之前可能仍会被切换。尽管如此，当前活动模式的进入时可运行实体会被执行。
+
+**SWS_Rte_07582**：对于公共模式机实例，如果该公共模式机实例不在转换中，则当前活动模式的进入时可运行实体应在 **RTE** 初始化期间执行。
+
+**SWS_Rte_07583**：如果公共模式机实例具有进入时可运行实体、转换时可运行实体或退出时可运行实体，则该公共模式机实例在 **RTE** 初始化期间不允许进入转换阶段。
+
+**注意：** **SWS_Rte_07582** 和 **SWS_Rte_07583** 应确保确定性行为：从公共模式机实例接收模式切换请求的软件组件在 **RTE** 初始化期间接收到当前活动模式。
+
+**RTE** 生成器应拒绝这样的配置：模式切换端口中引用某个 `ModeDeclarationGroupPrototype` 的 `ModeSwitchPoint` 与关联到某个 `providedModeGroup` `ModeDeclarationGroupPrototype` 的 `managedModeGroup` 关联，未对两个同步的 `ModeDeclarationGroupPrototype` 之一互斥地定义。
+
+**SWS_Rte_CONSTR_09014**（对同步的 `ModeDeclarationGroupPrototype`，`ModeSwitchPoint` 与 `managedModeGroup` 互斥）：两个同步的 `ModeDeclarationGroupPrototype` 中只应有一个被 `ModeSwitchPoint` 或 `managedModeGroup` 关联互斥地引用。
+
+**注意：** **SWS_Rte_CONSTR_09014** 与 `[Rte_Switch](#7166-rte_switch)`、`[Rte_Mode](#71632-rte_mode)`、`[Rte_SwitchAck](#7169-rte_switchack)`、`[SchM_Switch](#7257-schm_switch)`、`[SchM_Mode](#7258-schm_mode)` 和 `[SchM_SwitchAck](#72510-schm_switchack)` 的存在条件相结合，应确保向模式管理者的实现提供基于端口的 **RTE API** 或基础软件调度器 **API** 之一（**SWS_Rte_07201** 和 **SWS_Rte_07264**）。
+
+##### 6.2.4.6. 模式机实例的初始化
+
+模式机实例既可以在 `[Rte_Start](#7181-rte_start)` 期间初始化，也可以在 `[Rte_Init](#7183-rte_init)` 期间初始化。在 `[Rte_Init](#7183-rte_init)` 期间的初始化能够确定在何时以何种顺序初始化哪个模式机实例以及调度相应的进入时可运行实体。
+
+**RTE** 应在 `[Rte_Start](#7181-rte_start)` 期间发起从属于 **RTE** 的每个模式机实例到其初始模式的转换，如果 `initialMode` 的进入时可运行实体未映射到任何 `RteInitializationRunnableBatch` 容器。
+
+**RTE** 应在 `[Rte_Init](#7183-rte_init)` 期间发起从属于 **RTE** 的每个模式机实例到其初始模式的转换，如果 `initialMode` 的进入时可运行实体映射到一个或多个 `RteInitializationRunnableBatch` 容器。
+
+**注意：** 请注意映射到 `RteInitializationRunnableBatch` 容器的限制 **SWS_Rte_CONSTR_09062**、**SWS_Rte_CONSTR_09063** 和 **SWS_Rte_CONSTR_09064**。
+
+**SWS_Rte_02544**：在从属于 **RTE** 的模式机实例到其初始模式的转换期间，由于没有定义前一个模式，必须省略以下要求定义的步骤：
+
+* **SWS_Rte_02562**、
+* **SWS_Rte_07153**、
+* **SWS_Rte_02707**、
+* **SWS_Rte_02708**、
+* **SWS_Rte_02563**、
+* **SWS_Rte_02587**
+
+如果适用，以下要求描述的步骤仍必须为进入初始模式而执行：
+
+* **SWS_Rte_02661**、
+* **SWS_Rte_02564**
+
+**SWS_Rte_07532**：基础软件调度器应在 `[SchM_Init](#7271-schm_init)` 期间发起从属于基础软件调度器的每个模式机实例到其初始模式的转换。在到初始模式的转换期间，由于没有定义前一个模式，必须省略以下要求定义的步骤：
+
+* **SWS_Rte_02562**、
+* **SWS_Rte_07153**、
+* **SWS_Rte_02707**、
+* **SWS_Rte_02708**、
+* **SWS_Rte_02563**、
+* **SWS_Rte_02587**
+
+如果适用，以下要求描述的步骤仍必须为进入初始模式而执行：
+
+* **SWS_Rte_02661**、
+* **SWS_Rte_02564**
+
+##### 6.2.4.7. 模式切换的通知
+
+图 4.50：`ModeSwitchInterface` 的定义。
+
+![Figure4-50.png](Figure4-50.png)
+
+* **SWS_Rte_02549**：模式切换应经由 **RTE**、以[\[2\]](#ref-2)中定义的 `ModeSwitchInterface` 的 `ModeDeclarationGroupPrototype` 进行通信。见图 4.50。
+
+模式管理者和模式使用者的模式切换端口属于 `ModeSwitchInterface` 类型。
+
+* **SWS_Rte_07538**：模式切换应经由基础软件调度器、以[\[9\]](#ref-9)中定义的 `providedModeGroup` 和 `requiredModeGroup` `ModeDeclarationGroupPrototype` 进行通信。哪些 `ModeDeclarationGroupPrototype` 相互连接由基础软件调度器的配置定义。见图 4.50。
+* **RTE**/基础软件调度器只要求模式之间切换的通知。
+* **AUTOSAR** 不支持模式切换通知的 **ECU** 间通信。
+
+对于分布式模式管理，模式请求可以经由 `ServiceProxySwComponentType` 和每个目标 **ECU** 的 **BswM** 分发到各 **BswM** 的模式使用者。
+
+* **SWS_Rte_02508**：模式切换应按 `ModeSwitchInterface` 的使用所指示的那样异步地通知。
+
+**理由：** 这简化了通信。模式切换通知的通信是 **ECU** 本地的，不需要握手来保证可靠传输。
+
+**RTE** 为模式管理者提供 `[Rte_Switch](#7166-rte_switch)` **API** 进行该通知，见 [7.1.6.6](#7166-rte_switch) 节。
+
+基础软件调度器为模式管理者提供 `[SchM_Switch](#7257-schm_switch)` **API** 进行该通知，见 [7.2.5.7](#7257-schm_switch) 节。
+
+* 模式管理者可能仍需要反馈，以使其内部状态机与 **RTE**/基础软件调度器关于活动模式的视图保持同步。
+
+**RTE** 生成器应支持来自模式管理者的模式切换端口/`providedModeGroup` `ModeDeclarationGroupPrototype` 的 `AcknowledgementRequest`，见 **SWS_Rte_02587**，以通知模式管理者模式切换的完成。
+
+* **SWS_Rte_02566**：`ModeSwitchInterface` 应支持 1:n 通信。
+
+**理由：** 这简化了配置和通信。一次模式切换可以同时通知所有接收方。
+
+`ModeSwitchInterface` 不支持 n:1 通信，见 **SWS_Rte_02670**。
+
+* **SWS_Rte_07539**：`providedModeGroup` 与 `requiredModeGroup` `ModeDeclarationGroupPrototype` 的连接应支持 1:n 通信。
+* **SWS_Rte_02624**：模式切换应以事件语义通知，即模式切换通知应由该模式机实例所分配到的 **RTE** 或基础软件调度器缓冲。
+
+模式切换（和 `SwcModeSwitchEvent`）的排队与 `DataReceivedEvent` 的排队一样，取决于接收端口的设置，见 [6.2.3.1.10.2](#6231102-事件接收的排队) 节。
+
+* **SWS_Rte_02567**：`ModeSwitchInterface` 应只指示转换的下一个模式。
+* **SWS_Rte_07541**：`providedModeGroup` `ModeDeclarationGroupPrototype` 应只指示转换的下一个模式。
+
+该 **API** 接受一个指示所请求"下一个模式"的参数（以及可选的实例句柄）。为此，**RTE** 和基础软件调度器将使用 **SWS_Rte_02568** 和 **SWS_Rte_07294** 中定义的模式标识符。
+
+* **SWS_Rte_02546**：**RTE** 应跟踪分配给 **RTE** 的模式管理者的 `ModeDeclarationGroupPrototype`（模式机实例）的活动模式。
+* **SWS_Rte_07540**：基础软件调度器应跟踪分配给基础软件调度器的模式管理者的 `ModeDeclarationGroupPrototype`（模式机实例）的活动模式。
+
+**理由：** 这使 **RTE**/基础软件调度器能够在不向具有细粒度转换子状态的模式管理者添加额外接口的情况下，保证引发 `SwcModeSwitchEvent`/`BswModeSwitchEvent` 的时序与通过模式禁用依赖禁用可执行实体启动之间的一致性。
+
+* **RTE** 向 **SW-C** 提供 `[Rte_Mode](#71632-rte_mode)` **API** 以获取活动模式的信息，见 [7.1.6.32](#71632-rte_mode) 节。
+* 基础软件调度器向基础软件模块提供 `[SchM_Mode](#7258-schm_mode)` **API** 以获取活动模式的信息，见 [7.2.5.8](#7258-schm_mode) 节。
+* 除模式切换端口外，模式管理者还可以提供一个 **AUTOSAR** 接口用于请求和释放模式，作为保持模式存续的手段，如 **ComM** 和 **EcuM**。
+
+##### 6.2.4.8. 模式切换确认
+
+在模式切换通信的情况下，模式管理者可以规定一个 `ModeSwitchedAckEvent` 或 `BswModeSwitchedAckEvent`，以从 **RTE** 接收模式转换已完成的通知，见 **SWS_Rte_02679** 和 **SWS_Rte_07559**。
+
+`ModeSwitchedAckEvent` 由 **RTE** 触发，而不论是哪个可运行实体请求了该模式切换通知，即使元模型隐含了到特定 `ModeSwitchPoint` 的链接。
+
+**SWS_Rte_02679**：如果为提供的 `ModeDeclarationGroupPrototype` 启用了确认，且某个 `ModeSwitchedAckEvent` 引用一个 `RunnableEntity` 以及该 `ModeDeclarationGroupPrototype`，则该 `RunnableEntity` 应在模式切换确认发生时、或在 **RTE** 检测到超时时被激活。
+
+相关的入口点原型定义在 **SWS_Rte_02512** 中。
+
+**SWS_Rte_07559**：如果为提供的（`providedModeGroup`）`ModeDeclarationGroupPrototype` 启用了确认，且某个 `BswModeSwitchedAckEvent` 引用一个 `BswSchedulableEntity` 以及该 `ModeDeclarationGroupPrototype`，则该 `BswSchedulableEntity` 应在模式切换确认发生时、或在基础软件调度器检测到超时时被激活（**SWS_Rte_02587**）。
+
+相关的入口点原型定义在 **SWS_Rte_04542** 中。
+
+要求 **SWS_Rte_02679** 和 **SWS_Rte_07559** 只影响可运行实体何时被激活。根据要求 **SWS_Rte_02678** 和 **SWS_Rte_07558**，仍应创建 `[Rte_SwitchAck](#7169-rte_switchack)` 和 `[SchM_SwitchAck](#72510-schm_switchack)` 以实际读取确认。
+
+引用一个 `RunnableEntity` 且被一个 `WaitPoint` 引用的 `ModeSwitchedAckEvent` 应为无效配置，被 **RTE** 生成器拒绝。
+
+属性 `ModeSwitchedAckRequest` 和 `BswModeSwitchAckRequest` 允许规定一个超时。
+
+**SWS_Rte_07056**：如果规定了超时大于零的 `ModeSwitchedAckRequest` 或 `BswModeSwitchAckRequest`，则 **RTE** 应确保执行超时监视，而不论确认的接收模式如何。
+
+**SWS_Rte_07060**：无论模式转换期间是否发生超时，**RTE** 都应按 **SWS_Rte_02665** 中的定义完成模式机实例的转换。
+
+如果规定了一个用于收集确认的 `WaitPoint`，则必须规定两个超时值：一个用于 `ModeSwitchedAckRequest`，一个用于 `WaitPoint`。
+
+**RTE** 生成器应拒绝违反软件组件模板[\[2\]](#ref-2)中 [constr_4012] 的配置。
+
+**SWS_Rte_07058**：关于模式转换成功或失败的状态信息应以 last-is-best 语义缓冲。当发送新的模式切换通知、或模式切换通知在超时后完成时，状态信息被覆盖。
+
+**SWS_Rte_07058** 意味着：一旦 `ModeSwitchedAckEvent` 或 `BswModeSwitchedAckEvent` 已经发生，重复调用（`[Rte_SwitchAck](#7169-rte_switchack)` 或 `[SchM_SwitchAck](#72510-schm_switchack)`）检索确认的 **API** 可能返回不同的值。
+
+**SWS_Rte_07059**：如果 `ModeSwitchedAckRequest` 或 `BswModeSwitchAckRequest` 的超时值为 0，则不执行超时监视。
+
+##### 6.2.4.9. ModeDeclaration 的映射
+
+存在若干用例（尤其在软件复用时），其中模式使用者连接到的模式管理者所提供的 `ModeDeclarationGroup` 与使用者自己的 `ModeDeclaration` 不同。
+
+**示例：**
+
+* 模式管理者能够区分比通用模式使用者所需更细粒度的子状态。但由于模式通信的定义，不能在模式管理者处使用两个 p-port，因为这会导致 **RTE** 中两个独立且不同步的模式机实例。
+* 通用模式使用者可以额外支持并非所有模式管理者都使用的模式。
+
+这通常会因为连接了不兼容的端口而导致错误。为克服该限制，软件组件模板[\[2\]](#ref-2)提供了不同 `ModeDeclaration` 之间的映射，使 **RTE** 能够把一个模式翻译为另一个。
+
+**SWS_Rte_08511**：如果模式使用者的一个 `ModeDeclaration` 映射到模式管理者的单个 `ModeDeclaration`，则当被映射的模式管理者的模式进入或退出时，模式使用者的相关模式进入或退出。
+
+**SWS_Rte_08512**：如果模式使用者的一个 `ModeDeclaration` 映射到模式管理者的多个 `ModeDeclaration`，则当被同一个 `modeDeclarationMapping` 映射的任意一个模式管理者的模式进入时，模式使用者的相关模式进入；当被同一个 `modeDeclarationMapping` 映射的任意一个模式管理者的模式退出、且新模式未被同一个 `modeDeclarationMapping` 映射到模式使用者的相关模式时，模式使用者的相关模式退出。
+
+**注意：** 如果模式使用者的一个 `ModeDeclaration` 经由多个 `modeDeclarationMapping` 映射到模式管理者的多个 `ModeDeclaration`，则其语义定义为：模式管理者的各个单独模式转换以"退出"和"进入"事件的形式对模式使用者可见。此外，在这种转换期间调用 `[Rte_Mode](#71632-rte_mode)` **API** 时，转换阶段会以 `RTE_TRANSITION` 返回值的形式可见。
+
+如果模式使用者的一个 `ModeDeclaration` 经由单个 `modeDeclarationMapping` 映射到模式管理者的多个 `ModeDeclaration`，则其语义定义为：模式管理者的各个单独模式转换对模式使用者不可见。
+
+**示例：**
+
+模式管理者和模式使用者具有不同的 `ModeDeclarationGroup`，它们经由多个 `modeDeclarationMapping` 映射。模式管理者的 `ModeDeclarationGroup` 粒度更细，因此它的多个 `ModeDeclaration` 必须映射到模式使用者的同一个 `ModeDeclaration`。这些 `modeDeclarationMapping` 见表 4.13。完整示例以 **ARXML** 形式列于附录 F.1。
+
+表 4.13：把模式管理者的 `ModeDeclaration` 映射到模式使用者的 `ModeDeclaration` 的 `modeDeclarationMapping` 示例
+
+| modeDeclarationMapping | 模式管理者的 ModeDeclaration | 映射到的模式使用者的 ModeDeclaration |
+| --- | --- | --- |
+| StartUp_2_STARTUP | StartUp | STARTUP |
+| Run_2_RUN | Run | RUN |
+| PostRunX_2_POST_RUN | PostRun1、PostRun2 | POST_RUN |
+| ShutDown_2_SHUTDOWN | ShutDown | SHUTDOWN |
+| Sleep_Hibernate_2_SHUTDOWN | Sleep、Hibernate | SHUTDOWN |
+
+表 4.14 展示了一种可能的场景：当 `modeDeclarationMapping` 把模式管理者 `ModeDeclarationGroup` 的多个 `ModeDeclaration` 映射到模式使用者 `ModeDeclarationGroup` 的同一个 `ModeDeclaration` 时，从模式使用者的视角如何看待模式管理者的模式转换。
+
+表 4.14：模式管理者的模式转换与模式使用者视角下产生的转换的可能场景
+
+| 模式管理者的模式转换 | 映射产生的模式使用者的模式转换 |
+| --- | --- |
+| Undefined → StartUp | Undefined → STARTUP |
+| StartUp → Run | STARTUP → RUN |
+| Run → PostRun1 | RUN → POST_RUN |
+| PostRun1 → PostRun2 | ——（无转换） |
+| PostRun2 → ShutDown | POST_RUN → SHUTDOWN |
+| ShutDown → Sleep | SHUTDOWN → SHUTDOWN |
+| Sleep → Hibernate | ——（无转换） |
+
+把模式使用者的多个 `ModeDeclaration` 映射到代表模式管理者的某个模式的单个 `ModeDeclaration` 的配置应被拒绝（另见 [constr_1209]）。这是无效的，因为它违反了模式互斥的原则。
+
+**SWS_Rte_08513**：**RTE** 生成器应拒绝违反 [constr_1209] 的配置。
+
+如果存在引用代表模式管理者某个模式的 `ModeDeclaration` 的 `modeDeclarationMapping`，则应存在把模式管理者的所有 `ModeDeclaration` 映射到模式使用者的 `ModeDeclaration` 的 `ModeDeclarationMapping`（另见 [constr_1210]）。
+
+**SWS_Rte_08514**：**RTE** 生成器应拒绝违反 [constr_1210] 的配置。
+
+**注意：** 只支持模式使用者的模式可以不被映射。
+
+##### 6.2.4.10. 分布式共享模式队列
+
+在多个不同的模式状态机经由同步模式切换进行切换的情况下，它们的执行顺序基本上是未定义的。为不同的模式状态机使用独立的任务可以提供有限的可能性。但这会在全局上让一个模式机实例的切换比另一个模式机实例的切换具有更高的优先级。在某些情况下，需要保持模式切换的严格顺序，而不论它们属于哪个模式状态机。一个例子可以是钥匙状态（ON、OFF）和发动机状态（RUNNING、STOPPED），它们在技术上相互独立的模式机实例，但在功能上相关联。如果从钥匙 ON 到 OFF 的切换先发生，随后是从发动机 RUNNING 到 STOPPED 的切换，则显然用户的意图是熄火。如果这两个转换以相反的顺序执行，系统会看到在钥匙状态仍为 ON 时发生从发动机 RUNNING 到 STOPPED 的切换，这表明发动机熄火，而起停系统可能会尝试重新启动。这个例子说明应用软件能够按请求的顺序看到模式切换的执行有多么重要。因此，需要有一种机制来为 **ECU** 中至少一部分模式机的模式切换定义 FIFO 顺序。
+
+在多核系统中会出现类似的问题，其中多个核上的用户组件必须直接或间接地对模式切换做出反应。一方面，如果多个核上存在模式禁用依赖，为满足这些禁用依赖同步切换的要求，必须为每个具有模式禁用依赖的分区提供一个模式切换任务。但另一方面，即使只是不同分区组件中存在对同一模式机实例切换做出反应的 `SwcModeSwitchEvent`，也必须有多个任务执行这些切换，因为把分配给一个分区的软件组件的 `RunnableEntity` 放到属于另一个分区的任务中执行是不合法的。为避免一个分区已经进入新状态而另一个分区甚至还没有开始转换，还必须同步多个分区的模式切换任务，尤其当它们位于不同核上时。其原因与上面相同。组件可能期望系统在某种状态下有某种行为。如果一个分区仍处于旧状态而另一个分区已处于新状态，期望与现实不符，从而造成功能失灵。
+
+分布式共享模式队列（**distributed shared mode queue**）的特征是一组模式机实例和一组 **OsTask**，参与的模式状态机的模式切换将在这些 **OsTask** 中执行。
+
+**RTE** 生成器应从 `RteDSMQModeMachineInstanceRef` 的集合中检索属于一个分布式共享模式队列的模式机实例集合。
+
+**RTE** 生成器应从 `RteDSMQOsTaskRef` 的集合中检索属于一个分布式共享模式队列的 **DSMQ** 转换 **OsTask** 集合。
+
+参与单个分布式共享模式队列的 **OsTask** 可以属于也可以不属于一个单独的分区。如果此类 **OsTask** 属于在同一微控制器核上执行的 `OsApplication`，则这些 **DSMQ** 转换 **OsTask** 必须经由 **EcuC** 配置链接（**task chaining**）。但不一定每个分区都有一个参与分布式共享模式队列的 **OsTask**。
+
+参与单个分布式共享模式队列的 **OsTask** 将只包含经由引用该分布式共享模式队列中参与模式机实例之一的 `SwcModeSwitchEvent`、`BswModeSwitchEvent`、`ModeSwitchedAckEvent` 或 `BswModeSwitchedAckEvent` 映射到这些 **OsTask** 的可执行实体。
+
+**SWS_Rte_CONSTR_09102**（用于分布式共享模式队列的 **OsTask** 的独占使用）：属于分布式共享模式队列的 **OsTask** 应只映射有由属于同一分布式共享模式队列的模式机实例触发的进入时、转换时、退出时和 `ModeSwitchAck` 可执行实体。
+
+由此，**SWS_Rte_06839** 约束事件到任务的映射顺序。
+
+与 **SWS_Rte_02665** 中定义的行为类似，模式切换的执行可以为每个分区并行触发。如果各分区在同一微控制器核上执行，则顺序取决于各 **OsTask** 的优先级或已配置的任务链接。在各分区于不同微控制器核上执行的情况下，进入时、转换时和退出时可执行实体的执行可以并发运行。
+
+**SWS_Rte_06834**：**RTE** 应同时触发属于一个分布式共享模式队列的所有 **OsTask**，但被链接到属于该分布式共享模式队列的另一 **OsTask** 之后的那些除外。
+
+**SWS_Rte_06835**：**RTE** 应按照相关 `[Rte_Switch](#7166-rte_switch)` 或 `[SchM_Switch](#7257-schm_switch)` **API** 的调用顺序，执行参与分布式共享模式队列的模式机实例的模式切换。
+
+由此，同一分布式共享模式队列的模式机实例的排队模式切换按照 FIFO 原则逐个处理。
+
+**SWS_Rte_06838**：**RTE** 在同一时刻最多应把参与分布式共享模式队列的模式机实例集合中的一个模式机实例切换到转换中。
+
+**SWS_Rte_06835** 所定义行为的实现需要一个单一的模式队列，为所有模式机实例处理模式切换的排队。与模式机实例本地队列相反，这样的共享队列必须记住在哪个模式机实例中通知了哪个转换。
+
+**SWS_Rte_06836**：分布式共享模式队列的模式队列的大小应为参与该分布式共享模式队列的所有模式机实例各自队列长度之和。
+
+尽管如此，**RTE** 仍必须检查每个模式机实例各自的队列大小。这确保每个模式管理者始终能够把为该模式机实例预留的最大数量的模式切换通知入队。
+
+**SWS_Rte_06840**：如果接收到新的模式切换通知，**RTE** 应检查某个特定模式机实例的、已排队的模式切换通知数量是否不超过该模式机实例的队列大小所支持的数量。如果将超出队列大小，则 **RTE** 应丢弃接收到的通知。
+
+在这种情况下，`[Rte_Switch](#7166-rte_switch)` 将返回错误，见 **SWS_Rte_02675**。
+
+**SWS_Rte_02665** 所描述的行为有一个后果：**RTE**/基础软件调度器在每个核上异步地停用前一个模式的模式禁用。但分布式共享模式队列的一个主要用例正是跨分区活动的同步。因此，**RTE** 应在所有退出时可执行实体执行完毕之后才停用前一个模式的模式禁用。
+
+**SWS_Rte_06837**：在属于某个分布式共享模式队列的模式机实例的转换期间，适用以下步骤：
+
+1. **SWS_Rte_02661**，
+2. **SWS_Rte_07152**，
+3. **SWS_Rte_02562**，
+4. **SWS_Rte_07153**，
+5. **SWS_Rte_02707**，
+6. **SWS_Rte_02708**，
+7. **SWS_Rte_02564**，
+8. **SWS_Rte_07154**，
+9. **SWS_Rte_02563**（转换随本步骤完成），以及
+10. 紧随其后的 **SWS_Rte_02587**
+#### 6.2.5. 外部与内部触发器
+
+##### 6.2.5.1. 外部触发器事件通信
+
+###### 6.2.5.1.1. 概述
+
+借助触发器事件通信机制，作为触发源（**trigger source**）的软件组件或基础软件模块能够请求激活相连的触发汇（**trigger sink**）的可运行实体或基础软件可调度实体。通常（但非必须）这些可运行实体和基础软件可调度实体按顺序执行。
+
+**RTE** 应支持外部触发器事件通信（**External Trigger Event Communication**）。
+
+基础软件调度器应支持在出现外部触发器事件时激活基础软件可调度实体。
+
+图 4.51：**AUTOSAR** 软件组件与基础软件模块对 `Trigger` 的使用摘要（按软件组件模板规范[\[2\]](#ref-2)与 **BSW** 模块描述模板规范[\[9\]](#ref-9)的定义）。
+
+![Figure4-51.png](Figure4-51.png)
+
+###### 6.2.5.1.2. 触发汇
+
+**AUTOSAR** 软件组件触发汇有一个专用的需求触发器端口（**require trigger port**）。该触发器端口由声明一个或多个 `Trigger` 的 `TriggerInterface` 定义类型。见图 4.51。软件组件的可运行实体在外部事件出现时借助 `ExternalTriggerOccurredEvent` 被激活。
+
+基础软件模块触发汇必须定义一个 `requiredTrigger` `Trigger`。基础软件模块的基础软件可调度实体在外部事件出现时借助 `BswExternalTriggerOccurredEvent` 被激活。见图 4.51。
+
+实现被触发的可执行实体的激活基本上有两种方式。一种情形是：由触发源的一个 `Trigger` 触发的各触发汇的被触发可执行实体被映射到一个或多个任务/ISR2。在这种情况下，事件通信可以通过激活一个 **OS** 任务来实现。请注意，这些任务/ISR2 可能属于不同的分区。
+
+**RTE** 生成器应支持经由 **OS** 任务/ISR2 调用被触发的可执行实体。
+
+另一种情形是：事件通信被映射为一个函数调用，这意味着触发汇的被触发可执行实体在用于在触发汇中引发触发器事件的 `[Rte_Trigger](#71634-rte_trigger)` **API** 或 `[SchM_Trigger](#72511-schm_trigger)` **API** 中执行。
+
+**SWS_Rte_07214**：如果以下所有条件都满足，则 **RTE** 生成器应支持经由直接函数调用调用被触发的可执行实体：
+
+* 被触发的可执行实体未定义"最小启动距离"
+* 触发汇与触发源在同一分区中
+* 未定义 `BswTriggerDirectImplementation`
+* [constr_4086] 的前提条件得到满足
+
+**SWS_Rte_08906**：如果以下所有条件都满足，则 **RTE** 生成器应支持经由可信函数调用调用被触发的可执行实体：
+
+* 被触发的可执行实体未定义"最小启动距离"
+* 触发汇与触发源在同一核的不同分区中
+* 未定义 `BswTriggerDirectImplementation`
+* [constr_4086] 的前提条件得到满足
+
+###### 6.2.5.1.3. 触发源
+
+**AUTOSAR** 软件组件触发源有一个专用的提供触发器端口（**provide trigger port**）。该触发器端口由声明一个或多个 `Trigger` 的 `TriggerInterface` 定义类型。见图 4.51。为了能够连接提供触发器端口与需求触发器端口，两个端口必须按相同或兼容的 `TriggerInterface` 分类。
+
+基础软件模块触发源必须定义一个 `releasedTrigger` `Trigger`。见图 4.51。`releasedTrigger` 与 `requiredTrigger` `Trigger` 的连接由基础软件调度器的 **ECU** 配置定义。
+
+为了向 **RTE** 通报外部触发器事件的出现，**RTE** 向 **AUTOSAR** 软件组件触发源提供 `[Rte_Trigger](#71634-rte_trigger)`。
+
+如果触发器队列为空，则 `[Rte_Trigger](#71634-rte_trigger)` **API** 的调用应激活由与触发源的相连 `Trigger` 关联的 `ExternalTriggerOccurredEvent` 激活的所有可运行实体。
+
+对于基础软件模块触发源，定义了与基础软件调度器交互的两个选项。
+
+第一个选项是：基础软件模块触发源通过调用 `[SchM_Trigger](#72511-schm_trigger)` **API** 向基础软件调度器通报外部触发器事件的出现。
+
+如果触发器队列为空，则 `[SchM_Trigger](#72511-schm_trigger)` **API** 的调用应激活由与触发源的相连 `Trigger` 关联的 `ExternalTriggerOccurredEvent` 激活的所有可执行实体。
+
+第二个选项是：基础软件模块触发源直接负责激活被触发可执行实体的 `ExternalTriggerOccurredEvent` 所映射到的特定 **OS** 任务。在这种情况下，触发源必须定义一个 `BswTriggerDirectImplementation`。所用 **OS** 任务的名称由 `task` 属性标注。如果定义了 `BswTriggerDirectImplementation`，则 **RTE** 生成器不生成 `[SchM_Trigger](#72511-schm_trigger)` **API**。见 **SWS_Rte_07548** 和 **SWS_Rte_07264**。
+
+**RTE** 生成器应拒绝这样的配置：规定了 `BswTriggerDirectImplementation`，而由与触发源的相连 `Trigger` 关联的 `ExternalTriggerOccurredEvent` 激活的某个可执行实体被映射到与 `BswTriggerDirectImplementation` 的 `task` 属性所定义任务不同的 **OS** 任务。
+
+**RTE** 生成器应拒绝这样的配置：为同一个 `releasedTrigger` `Trigger` 定义了 `issuedTrigger` 关联和 `BswTriggerDirectImplementation`。
+
+**SWS_Rte_CONSTR_09007**（`issuedTrigger` 与 `BswTriggerDirectImplementation` 互斥）：一个 `releasedTrigger` `Trigger` 不应同时被 `issuedTrigger` 和 `BswTriggerDirectImplementation` 引用。
+
+**注意：** 这应与 `[SchM_Trigger](#72511-schm_trigger)` 的存在条件（**SWS_Rte_07264**）相结合，确保向触发源的实现提供 `Trigger` **API** 或直接任务激活之一。
+
+还要注意，可以使用多个 **OS** 任务来实现一个 `Trigger`（可以为同一个 `releasedTrigger` 定义多个 `BswTriggerDirectImplementation`）。
+
+如果 `BswTriggerDirectImplementation` 为 `swImplPolicy` 属性设置为 `queued` 的 `releasedTrigger` 定义，则实现队列、或使用 **OS** 的手段（`OsTaskActivation > 1`）来对已引发的触发器数量排队的责任属于触发源。关于触发器排队的更多细节在 [6.2.5.5](#6255-触发器的排队) 节中描述。
+
+###### 6.2.5.1.4. 多重性
+
+###### 6.2.5.1.4.1. 多个触发器
+
+触发器接口包含一个或多个 `Trigger`。向组件提供 **AUTOSAR** 触发器接口的 **AUTOSAR** 软件组件的端口可以独立地引发与该接口中定义的每个 `Trigger` 相关的事件。
+
+**RTE API** 应支持对触发器接口中每个 `Trigger` 的独立事件引发。
+
+此外，基础软件模块触发源可以定义多个可独立引发的 `releasedTrigger` `Trigger`。
+
+基础软件调度器 **API** 应支持对每个 `releasedTrigger` `Trigger` 的独立事件引发。
+
+###### 6.2.5.1.4.2. 多个触发汇单个触发源
+
+外部事件通信的概念支持：一个触发源激活一个或多个触发汇中的一个或多个被触发可执行实体。
+
+**RTE** 生成器应支持由触发源的同一 `Trigger` 触发的被触发可执行实体（"1:n"通信，n ≥ 1）。
+
+触发汇中被触发可执行实体的执行顺序取决于 [8.5.1](#851-rte-事件到任务isr-的映射) 节描述的 `RteEventToTaskMapping` 以及操作系统的已配置优先级。
+
+###### 6.2.5.1.4.3. 多个触发源单个触发汇
+
+**RTE** 生成器不支持多个触发源向一个触发汇中的同一 `Trigger` 通信事件（"n:1"通信，n > 1）。
+
+**RTE** 生成器应拒绝违反 [constr_1104] 的配置。
+
+###### 6.2.5.1.5. 同步的触发器
+
+如果两个 `Trigger` 通过 `SwcBswSynchronizedTrigger` 的定义被同步，则被引用的提供触发器端口中的 `Trigger` 与被引用的 `releasedTrigger` `Trigger` 被视为一个公共 `Trigger`。这意味着由与任一相连 `Trigger` 关联的 `ExternalTriggerOccurredEvent` 激活的所有可执行实体一起被激活。
+
+**RTE** 和基础软件调度器应一起激活由与同步的相连 `Trigger` 关联的 `ExternalTriggerOccurredEvent` 激活的所有可执行实体。
+
+**RTE** 生成器应拒绝这样的配置：一个同步的 `Trigger` 被多于一种访问方法类型引用，类型为以下之一：
+
+1. `ExternalTriggeringPoint`
+2. `issuedTrigger`
+3. `BswTriggerDirectImplementation`
+
+**SWS_Rte_CONSTR_09009**（同步的 `Trigger` 不应被多于一种访问方法类型引用）：一个同步的 `Trigger` 只应被 `ExternalTriggeringPoint`、`issuedTrigger` 或 `BswTriggerDirectImplementation` 之一引用。
+
+**注意：** 这应与 `[Rte_Trigger](#71634-rte_trigger)` 和 `[SchM_Trigger](#72511-schm_trigger)` 的存在条件相结合，确保向触发源的实现只提供一种 `Trigger` **API**（**SWS_Rte_07201** 和 **SWS_Rte_07264**）或直接任务激活。
+
+##### 6.2.5.2. 可运行实体间触发
+
+借助可运行实体间触发（**Inter Runnable Triggering**）机制，一个可运行实体能够请求激活同一软件组件实例的可运行实体。
+
+**RTE** 应支持可运行实体间触发。
+
+与外部触发器事件通信（在 [6.2.5.1](#6251-外部触发器事件通信) 节中描述）类似，被触发可运行实体的激活可以通过激活 **OS** 任务或通过直接或可信函数调用实现。
+
+如果触发器队列为空，则 `[Rte_IrTrigger](#71635-rte_irtrigger)` **API** 的调用应激活其 `InternalTriggerOccurredEvent` 与同一软件组件实例的相关 `InternalTriggeringPoint` 关联的所有被触发可运行实体。
+
+**RTE** 应支持可运行实体间触发中被触发可运行实体经由 **OS** 任务激活调用。
+
+如果以下所有条件都满足，**RTE** 应支持可运行实体间触发中被触发可运行实体经由直接函数调用调用：
+
+* 由该 `InternalTriggeringPoint` 激活的被触发 `BswSchedulableEntity` 均未定义"最小启动距离"
+
+###### 6.2.5.2.1. 多重性
+
+一个 `InternalTriggeringPoint` 可能被多于一个 `InternalTriggerOccurredEvent` 引用。因此，一个 `RunnableEntity` 能够以可运行实体间触发机制同时请求激活多个 `RunnableEntity`。
+
+**RTE** 应支持由同一 `InternalTriggeringPoint` 触发的多个 `RunnableEntity`（"1:n"可运行实体间触发，n ≥ 1）。
+
+触发汇中可运行实体的执行顺序取决于 [8.5.1](#851-rte-事件到任务isr-的映射) 节描述的可运行实体到任务映射以及操作系统的已配置优先级。
+
+##### 6.2.5.3. 基础软件模块实体间触发
+
+基础软件模块实体间触发（**Inter Basic Software Module Entity Triggering**）与可运行实体间触发机制（见 [6.2.5.2](#6252-可运行实体间触发) 节）类似，区别在于它用于基础软件模块内部。它可用于由同一基础软件模块实例的基础软件实体请求激活一个 `BswSchedulableEntity`。
+
+基础软件调度器应支持基础软件模块实体间触发。
+
+与外部触发器事件通信（在 [6.2.5.1](#6251-外部触发器事件通信) 节中描述）类似，被触发 `BswSchedulableEntity` 的激活可以通过激活 **OS** 任务或通过直接或可信函数调用实现。
+
+如果触发器队列为空，则 `[SchM_ActMainFunction](#72512-schm_actmainfunction)` **API** 的调用应激活其 `BswInternalTriggerOccurredEvent` 与同一基础软件模块实例的相关 `activationPoint` 关联的所有被触发 `BswSchedulableEntity`。
+
+基础软件调度器应支持基础软件模块实体间触发中被触发 `BswSchedulableEntity` 经由 **OS** 任务激活调用。
+
+基础软件调度器应支持基础软件模块实体间触发中被触发 `BswSchedulableEntity` 经由直接或可信函数调用调用，如果：
+
+* 被触发的 `BswSchedulableEntity` 未定义"最小启动距离"
+* 约束 [constr_4086] 的前提条件得到满足
+
+**注意：** 基础软件模块实体间触发特性通常用于解耦基础软件实体的执行上下文。但这种解耦是否真正需要取决于具体的调度概念和微控制器性能。
+
+##### 6.2.5.4. ECU 间触发器通信
+
+在 **ECU** 间通信的情况下，触发器通信也是可能的。在这种情况下，一个 **ECU** 上的软件组件可以作为另一个 **ECU** 上软件组件的触发源，从而请求激活另一个 **ECU** 上的软件组件。
+
+**RTE** 应支持 **ECU** 间触发器通信。
+
+**RTE** 应支持在来自另一个 **ECU** 的触发器事件出现时激活 `RunnableEntity`。
+
+在发出（**issued**）`Trigger` 的情况下，**RTE** 应把与该 `Trigger` 关联的 `ISignal` 发送给 **Com** 栈。
+
+在不使用数据转换的情况下，`Com_SendSignal` 的 **API** 调用参数没有意义。在使用数据转换的情况下，第一个转换器在没有输入数据的情况下执行。
+
+在接收 `Trigger` 且不使用数据转换的情况下，**RTE** 应只关心指示接收到零长信号的 **COM** 通知。此类信号的值不应被读取（不应调用 `Com_ReceiveSignal`）。
+
+在接收 `Trigger` 且使用数据转换的情况下，**RTE** 对从 **Com** 栈接收的数据执行逆数据转换。（见 **SWS_Rte_08597**。）这是识别转换错误所必需的。
+
+请注意，在 `swImplPolicy` 设置为 `queued` 的 `Trigger` 的 **ECU** 间触发器通信中，发送方不会得到任何关于接收方队列已满的指示。
+
+##### 6.2.5.5. 触发器的排队
+
+在概念上，触发器总是被排队的。触发器的排队确保被触发可执行实体的执行次数等于已引发触发器的次数。此外，如果关联的被触发可执行实体不由其他 `RTEEvent` 激活，它还确保一个触发器发出者（**trigger emitter**）的所有关联被触发可执行实体的激活次数相等。
+
+**注意：** 概念上的队列可以以多种方式实现，取决于 **SWC** 或 **BSWM** 的集成以及 **RTE** 供应商的选择。在某些情况下，触发器队列可以由简单的计数器实现。而在另一些情况下，队列甚至根本不在 **RTE** 中实现。例如，在使用 **OS** 任务队列作为触发器队列的情况下（见本章后文），触发器入队操作归结为调用 `ActivateTask`，出队操作归结为被激活任务的终止。在触发器事件未映射到 **OsTask** 的情况下，入队和出队操作甚至都归结为同一时刻——相关 `RunnableEntity` 在 `Trigger` **API** 中的执行开始之时。
+
+**RTE** 应支持以下情形的触发器排队：
+
+* 外部触发器事件通信
+* 可运行实体间触发
+* 基础软件模块实体间触发
+
+不论触发器实体的 `swImplPolicy` 属性取值如何、也不论 `RteTriggerSourceQueueLength`/`RteBswTriggerSourceQueueLength` 是否存在及其取值如何。
+
+当 **RTE** 通过相关 **API**（`[Rte_IrTrigger](#71635-rte_irtrigger)`、`[Rte_Trigger](#71634-rte_trigger)`、`[SchM_Trigger](#72511-schm_trigger)`、`[SchM_ActMainFunction](#72512-schm_actmainfunction)`）的调用得知触发器的出现时，如果未超出最大队列长度（`RteTriggerSourceQueueLength`/`RteBswTriggerSourceQueueLength`），**RTE** 应将该触发器入队。
+
+当 **RTE** 得知由该触发器发出者触发的所有被触发可执行实体执行结束时，**RTE** 应将该触发器出队。在执行被模式禁用依赖禁用的被触发可执行实体的情形下，该触发器如同实体已运行一样出队。此行为防止出队操作被无限阻塞。
+
+当 **RTE** 成功地从触发器发出者的触发器队列中把一个触发器出队时，除了最后一个出队的触发器之外，**RTE** 应激活与该触发器发出者关联的所有被触发可执行实体。
+
+图 4.52：可执行实体的排队激活
+
+![Figure4-52.png](Figure4-52.png)
+
+图 4.52 展示了触发器队列的基本行为。
+
+* 在"A"处，**RTE** 通过 **API** 调用得知一个 `Trigger` 的出现。由于队列中没有触发器，所有关联的被触发可执行实体被激活（**SWS_Rte_07544**、**SWS_Rte_07555**、**SWS_Rte_07552**），并且该触发器入队（**SWS_Rte_07088**）。
+* 在"B"处，由该触发器发出者触发的所有被触发可执行实体都已终止。**RTE** 将该触发器出队，但由于它是最后一个出队的触发器，关联的被触发可执行实体不会被再次激活。
+* 在"C"处，**RTE** 通过 **API** 调用得知一个 `Trigger` 的出现。触发器入队和被触发可执行实体的激活与"A"中相同。
+* 在"D"处，**RTE** 再次因触发器的出现而得到通知。由于队列中已有一个触发器，关联的被触发可执行实体不会被激活（**SWS_Rte_07544**、**SWS_Rte_07555**、**SWS_Rte_07552**）。尽管如此，该触发器仍入队（**SWS_Rte_07088**）。
+* 在"E"处，由该触发器发出者触发的所有被触发可执行实体都已终止。**RTE** 将该触发器出队（**SWS_Rte_07089**）并激活所有关联的被触发可执行实体（**SWS_Rte_07090**）。
+* 在"E"处（再一次），由该触发器发出者触发的所有被触发可执行实体都已终止。触发器出队与"B"中相同。
+
+**实现提示：**
+
+实现已引发触发器数量队列的一种可能方案是利用操作系统的手段——**OS** 本已可以对一个 **OS** 任务的激活请求排队（`OsTaskActivation > 1`）。当然，这只有在连接到同一触发器发出者的所有 `ExternalTriggerOccurredEvent`、`InternalTriggerOccurredEvent`、`BswExternalTriggerOccurredEvent` 和 `BswInternalTriggerOccurredEvent` 都独占地映射到一个 **OS** 任务时才可能。
+
+##### 6.2.5.6. 被触发可执行实体的激活
+
+被触发可执行实体的激活按照 [6.2.2.3](#6223-executableentity-的激活与启动) 节的描述进行。另见图 4.18。
+
+被触发的可执行实体是同步还是异步激活，取决于 `RTEEvent` 和 `BswEvent` 如何映射到 **OS** 任务。
+
+如果触发汇的、与触发源的相连 `Trigger` 关联的所有 `ExternalTriggerOccurredEvent`：
+
+* 要么映射到优先级高于调用 `[Rte_Trigger](#71634-rte_trigger)` 或 `[SchM_Trigger](#72511-schm_trigger)` **API** 的可执行实体所在的 **OS** 任务的 **OS** 任务，
+* 要么经由直接或可信函数调用激活，
+
+则触发行为是同步的。这意味着触发汇的所有"被触发"可执行实体都在 `[Rte_Trigger](#71634-rte_trigger)` 或 `[SchM_Trigger](#72511-schm_trigger)` **API** 返回之前执行。
+
+如果触发汇的、与触发源的相连 `Trigger` 关联的任何 `ExternalTriggerOccurredEvent` 被映射到优先级低于调用 `[Rte_Trigger](#71634-rte_trigger)` 或 `[SchM_Trigger](#72511-schm_trigger)` **API** 的可执行实体所在 **OS** 任务的 **OS** 任务，则触发行为是异步的。这意味着并非触发汇的所有被触发可执行实体都在 `[Rte_Trigger](#71634-rte_trigger)` 或 `[SchM_Trigger](#72511-schm_trigger)` **API** 返回之前执行。
+
+#### 6.2.6. 初始化与终结
+
+##### 6.2.6.1. RTE 的初始化与终结
+
+**RTE** 和基础软件调度器具有嵌套的生命周期。只有当基础软件调度器已初始化时，才允许初始化 **RTE**（**SWS_Rte_CONSTR_09036**）。此外，只有在 **RTE** 已终结之后，才支持终结基础软件调度器（**SWS_Rte_CONSTR_09056**）。
+
+图 4.53：**RTE** 与基础软件调度器的嵌套生命周期
+
+![Figure4-53.png](Figure4-53.png)
+
+###### 6.2.6.1.1. 基础软件调度器的初始化
+
+在基础软件调度器被初始化之前，只有 `[SchM_Enter](#7251-schm_enter)` 和 `[SchM_Exit](#7252-schm_exit)` **API** 调用可用（**SWS_Rte_07578**）。
+
+**ECU** 状态管理者在任何基础软件模块需要被调度之前，调用基础软件调度器的启动例程 `[SchM_Init](#7271-schm_init)`。
+
+基础软件调度器的初始化例程将在有限的执行时间内返回（见 **SWS_Rte_07273**）。
+
+基础软件调度器将初始化分配给基础软件调度器的模式机实例（**SWS_Rte_02544**）。这将在 `[SchM_Init](#7271-schm_init)` 期间激活所有初始模式的模式禁用，并触发初始模式的进入时可执行实体的执行。在基础软件调度器内部数据结构和模式机实例初始化之后，由 `BswTimingEvent` 触发的基础软件可调度实体的激活开始。
+
+`[SchM_StartTiming](#7273-schm_starttiming)` 的调用应启动由 `BswTimingEvent` 触发的 `BswSchedulableEntity` 的激活。
+
+`[SchM_Init](#7271-schm_init)` 的调用应启动由 `BswBackgroundEvent` 触发的 `BswSchedulableEntity` 的激活。
+
+**注意：** 在 `BswEvent` 和 `RTEEvent` 被映射到的 **OS** 任务中，**RTE** 生成器必须确保 `RunnableEntity` 不会在 **RTE** 初始化之前或 **RTE** 终结之后被激活。见 **SWS_Rte_07580** 和 **SWS_Rte_02538**。
+
+**SWS_Rte_07580**：基础软件调度器必须防止 **RTE** 初始化之前 `RunnableEntity` 的激活。
+
+###### 6.2.6.1.2. RTE 的初始化
+
+**ECU** 状态管理者在启动阶段 II 的末尾——此时 **OS** 可用且所有基础软件模块已初始化——调用 **RTE** 的启动例程 `[Rte_Start](#7181-rte_start)`。
+
+**RTE** 的初始化例程将在有限的执行时间内返回（见 **SWS_Rte_02585**）。
+
+在 **RTE** 完全初始化之前，**RTE** 处理来自 **COM** 的传入数据的能力是有限的：
+
+**RTE** 将初始化分配给 **RTE** 的模式机实例（**SWS_Rte_02544**）。这将在 `[Rte_Start](#7181-rte_start)` 期间激活所有初始模式的模式禁用，并触发初始模式的进入时可执行实体的执行。此外，对于公共模式机实例，当前活动模式的进入时可运行实体在 **RTE** 初始化期间执行（**SWS_Rte_07582**）。公共模式机实例在 **RTE** 初始化期间不能进入转换阶段（**SWS_Rte_07583**）。
+
+如果 `[Rte_StartTiming](#7184-rte_starttiming)` **API** 不存在，则 `[Rte_Start](#7181-rte_start)` 的调用应启动由 `TimingEvent` 触发的 `RunnableEntity` 的激活。
+
+如果 `[Rte_StartTiming](#7184-rte_starttiming)` **API** 不存在，则 `[Rte_Start](#7181-rte_start)` 的调用应启动由 `BackgroundEvent` 触发的 `RunnableEntity` 的激活。
+
+如果 `[Rte_StartTiming](#7184-rte_starttiming)` **API** 存在，则 `[Rte_StartTiming](#7184-rte_starttiming)` 的调用应启动由 `TimingEvent` 触发的 `RunnableEntity` 的激活。
+
+如果 `[Rte_StartTiming](#7184-rte_starttiming)` **API** 存在，则 `[Rte_StartTiming](#7184-rte_starttiming)` 的调用应启动由 `BackgroundEvent` 触发的 `RunnableEntity` 的激活。
+
+`[Rte_Start](#7181-rte_start)` 的调用应在每个核上独立执行。
+
+`[Rte_Start](#7181-rte_start)` 包含 **RTE** 对映射到调用 `[Rte_Start](#7181-rte_start)` 的核的所有分区的分区特定启动活动。
+
+###### 6.2.6.1.3. RTE 的终结
+
+**RTE** 的终结例程 `[Rte_Stop](#7182-rte_stop)` 由 **ECU** 状态管理者在关闭阶段 I 的开始——此时 **OS** 仍可用——调用。（**ECU** 状态管理者的细节见[\[7\]](#ref-7)。`[Rte_Start](#7181-rte_start)` 和 `[Rte_Stop](#7182-rte_stop)` 的细节见 [7.1.8](#718-rte-生命周期-api-参考) 节。）
+
+**SWS_Rte_02538**：在某个核上调用 `[Rte_Stop](#7182-rte_stop)` 之后，**RTE** 不得在该核上激活、启动或释放 `RunnableEntity`。
+
+**注意：** **RTE** 不会在可运行实体"运行"状态期间终止任务。
+
+在 **RTE** 完全初始化之前和停止之后，**RTE** 应忽略传入的客户端-服务器通信请求。
+
+在 **RTE** 完全初始化之前和停止之后，应忽略来自发送方-接收方通信的传入数据和事件。
+
+###### 6.2.6.1.4. 基础软件调度器的终结
+
+如果必须停止基础软件模块的调度，**ECU** 状态管理者调用基础软件调度器的终结例程 `[SchM_Deinit](#7274-schm_deinit)`。
+
+**SWS_Rte_07586**：在某个核上调用 `[SchM_Deinit](#7274-schm_deinit)` 之后，**BSW** 调度器不得在该核上激活或启动 `BswSchedulableEntity`。
+
+**注意：** **BSW** 调度器不会在 `BswSchedulableEntity`"运行"状态期间终止任务。
+
+在基础软件调度器完全初始化之前或停止之后，基础软件调度器应忽略传入的客户端-服务器通信请求。
+
+##### 6.2.6.2. AUTOSAR 软件组件的初始化与终结
+
+对于 **AUTOSAR** 软件组件的初始化与终结，**RTE** 提供模式切换机制。一个适当 `ModeDeclaration` 的 `SwcModeSwitchEvent` 可用于触发相应的初始化或终结可运行实体（见 **SWS_Rte_02562**）。不应在初始化或终结期间运行的可运行实体，可以通过模式禁用依赖在相应模式中被禁用（见 **SWS_Rte_02503**）。
+
+由于 2 类可运行实体没有可预测的执行时间且不能使用 `ModeDisablingDependencies` 终止，为 2 类可运行实体设置有意义的终止标准是实现者的责任。这些标准可以包括模式信息。最迟所有可运行实体都会在 **RTE** 关闭期间被 **RTE** 终止，见 **SWS_Rte_02538**。
+
+使用由专有的应用模式管理者处理的用户自定义模式是合适的。
+
+所有由进入初始模式触发的可运行实体都在 **RTE** 初始化之后立即激活。它们可用于初始化。在许多情况下，更可取的做法是由一系列不同的初始化模式支持的多步初始化。
+
+除基于模式的方式之外，用于初始化目的的 `RunnableEntity` 也可以由 `InitEvent` 激活。更多信息见 [6.2.2.2.11](#622211-initevent-激活的可运行实体) 节。
+#### 6.2.7. 变体处理支持
+
+##### 6.2.7.1. 概述
+
+**AUTOSAR** 模板支持在其模型元素的一个子集中创建变体（**Variant**）。**AUTOSAR** 模板中的变体处理支持的出发点是在多个方面描述 **AUTOSAR** 系统中的可变性，例如：
+
+* 虚拟功能总线（**Virtual Functional Bus**）
+* 组件的 `SwcInternalBehavior` 和 `SwcImplementation`
+* 软件组件到各 **ECU** 的部署
+* 通信矩阵（**Communication Matrix**）
+* 基础软件模块
+
+这种方式要求 **RTE** 生成器能够处理输入配置中描述的可变性，并部分地在生成的 **RTE** 和基础软件调度器代码中实现所描述的可变性。
+
+在元模型中，所有可能呈现可变性的位置都用构造型 «`atpVariation`» 标注。这允许定义可能的变体点（**Variation Point**）。标签值（**Tagged Value**）用于规定附加信息。
+
+元模型中有四种可能呈现可变性的位置类型：
+
+* 聚合（**Aggregation**）
+* 关联（**Association**）
+* 属性值（**Attribute Value**）
+* 提供属性集的类（**Classes providing property sets**）
+
+关于 **AUTOSAR** 变体处理概念的更多细节见 **AUTOSAR** 通用结构模板[\[10\]](#ref-10)。
+
+**RTE** 生成器应支持 **AUTOSAR** 元模型中定义的 `VariationPoint`。
+
+`VariationPoint` 的列表应概述影响生成的 **RTE** 代码的那些最突出的变体点。此外，下文的表格将展示哪些可变性的实现因与契约阶段相关而被标准化（见表 4.17、4.19、4.20、4.21、4.22、4.23、4.27、4.28、4.30 和 4.31）。但请注意，这些表格并未列出输入配置的所有可能变体。为此，相关的模板规范才是权威。
+
+##### 6.2.7.2. 选择变体与绑定可变性
+
+为了理解后面的定义，需要澄清"选择变体"（**Choosing a Variant**）与"解决可变性"（**Resolving Variability**）之间的区别。
+
+在变体丰富的输入配置中，通过借助 `PredefinedVariant` 及其关联的 `SwSystemconstantValueSet` 为各 `SwSystemconst` 分配特定值来选择特定的 PreBuild 变体。利用该信息可以求值 `SwSystemconstDependentFormula`，从而确定 `VariationPoint` 和属性值的 PreBuild 条件。尽管如此，输入配置仍然包含所有潜在变体的信息。
+
+在变体丰富的输入配置中，通过借助 `PredefinedVariant` 及其关联的 `PostBuildVariantCriterionValueSet` 为 `PostBuildVariantCriterion` 分配特定值来选择特定的 PostBuild 变体。利用该信息可以对 `PostBuildVariantCondition` 求值，例如检查所选 PostBuild 变体的一致性。尽管如此，输入配置仍然包含所有潜在变体的信息。
+
+从 **RTE** 的视角来看，该信息主要用于生成 **RTE Post Build Variant Set**，它们在 **RTE** 初始化（`[SchM_Init](#7271-schm_init)` 调用）期间用于绑定构建后可变性。
+
+当与其他变体相关的信息被移除、只保留被绑定变体的信息时，输入配置的可变性就被绑定（**bound**）。在本规范的范围内，绑定/解决可变性意味着生成的代码只实现由输入配置中所选变体产生的特定变体。
+
+如果可变性无法在 **RTE** 生成过程的某个特定阶段（见第 [6.1](#61-rte-生成过程) 节）解决，则生成的 **RTE** 文件必须能够通过实现所有潜在变体来支持这些潜在变体。
+
+如果可变性与软件组件契约相关，**RTE** 生成器使用标准化的条件值宏（**Condition Value Macro**）来实现构建前可变性（**pre-build variability**）。这些条件值宏在 **RTE PreBuild Data Set Contract Phase** 和 **RTE PreBuild Data Set Generation Phase** 中被设置为相关 `VariationPoint` 的已求值 `ConditionByFormula` 的结果值。
+
+进一步的定义见 6.2.7.2.3、6.2.7.2.4、6.2.7.2.5、[6.2.7.2.6](#62726-linktime) 和 [6.2.7.2.7](#62727-postbuild) 节。
+
+###### 6.2.7.2.1. 绑定时间对 RTE 生成的一般影响
+
+在 **AUTOSAR** 元模型中，每个 `VariationPoint` 都与一个名为 `vh.latestBindingTime` 的标签关联。该标签的值给出该 `VariationPoint` 适用的最迟绑定时间。
+
+每个具有 `swSyscond` 的 `VariationPoint` 在其 `ConditionByFormula` 中有一个 `bindingTime` 属性，它定义了该 `VariationPoint` 的构建前条件最早可以在何时求值。这控制了软件实现最早在某个时点绑定变体的能力。
+
+即使可变性更早地被选定（例如通过为 `VariationPoint` 条件所用的 `SwSystemconst` 分配 `SwSystemconstValue`），**RTE** 生成器仍必须尊重 `VariationPoint` 潜在的更晚绑定。
+
+请注意，`bindingTime` 为 `PreCompileTime` 的可变性和 `postBuildVariantCondition` 对 **RTE** 生成具有特定的语义，并影响生成的输出。
+
+例如，在 `PreCompileTime` 绑定的条件性存在 **RTE API** 要求 **RTE** 生成器插入特定的预处理器语句。
+
+表 4.15：绑定时间对 **RTE** 生成的影响概览
+
+| RTE 阶段 | 系统设计时间 | 代码生成时间 | 预编译时间 | 链接时间 | 构建后 |
+| --- | --- | --- | --- | --- | --- |
+| RTE 契约阶段 | R | R | I | 不适用 | 不适用 |
+| 基础软件调度器契约阶段 | R | R | I | 不适用 | 不适用 |
+| RTE PreBuild 数据集契约阶段 | 不适用 | 不适用 | RV | 不适用 | 不适用 |
+| 基础软件调度器生成阶段 | R | R | I | 不适用 | I |
+| RTE 生成阶段 | R | R | I | 不适用 | I |
+| RTE PreBuild 数据集生成阶段 | 不适用 | 不适用 | RV | 不适用 | 不适用 |
+| RTE PostBuild 数据集生成阶段 | 不适用 | 不适用 | 不适用 | 不适用 | RV |
+
+表 4.16：表"绑定时间对 **RTE** 生成的影响概览"的图例
+
+* R——解决可变性，输出一个特定变体
+* I——实现可变性，输出中包含所有可能的变体
+* RV——提供值以解决（在构建前或构建后）已实现的可变性
+* 不适用——不适用
+
+###### 6.2.7.2.2. 选择特定变体
+
+变体丰富输入配置的特定变体经由 **ECU** 配置来选择。为此，配置一组 `PredefinedVariant` 以在输入配置中选择一个变体，并在 **RTE** 生成过程的后续阶段绑定可变性。更多信息见文档[\[10\]](#ref-10)。
+
+对于输入配置中的每个构建前可变性，**RTE** 生成器应按照参数 `EcucVariationResolver` 所选择的 `PredefinedVariant` 选择特定变体。
+
+对于输入配置中的每个构建后可变性，**RTE** 生成器应按照参数 `EcucPostBuildVariants` 所选择的 `PredefinedVariant` 选择特定变体。
+
+变体选定后，**RTE** 生成器可以对特定变体应用进一步的一致性检查。
+
+###### 6.2.7.2.3. SystemDesignTime
+
+最迟绑定时间为 `SystemDesignTime` 的可变性（称为 SystemDesignTime 可变性）必须在 **RTE** 契约阶段或基础软件调度器契约阶段之前绑定。这类可变性由 **RTE** 生成器在所有生成阶段解决。因此这类可变性总是产生一个特定变体，**RTE** 生成器不需要特殊的代码生成规则。
+
+**RTE** 生成器应在 **RTE** 契约阶段、基础软件调度器契约阶段、**RTE** 生成阶段和基础软件调度器生成阶段绑定 SystemDesignTime 可变性。
+
+**RTE** 生成器应在 **RTE** 契约阶段拒绝这样的输入配置：没有为每个影响软件组件契约的 SystemDesignTime 可变性选择特定变体。
+
+**RTE** 生成器应在基础软件调度器契约阶段拒绝这样的输入配置：没有为每个影响基础软件调度器契约的 SystemDesignTime 可变性选择特定变体。
+
+**RTE** 生成器应在基础软件调度器生成阶段拒绝这样的输入配置：没有为每个影响基础软件调度器生成的 SystemDesignTime 可变性选择特定变体。
+
+**RTE** 生成器应在 **RTE** 生成阶段拒绝这样的输入配置：没有为每个影响 **RTE** 生成的 SystemDesignTime 可变性选择特定变体。
+
+###### 6.2.7.2.4. CodeGenerationTime
+
+在 **RTE** 契约阶段、**RTE** 生成阶段和基础软件调度器生成阶段期间，最迟绑定时间为 `CodeGenerationTime` 的可变性（称为 CodeGenerationTime 可变性）必须被绑定，且 **RTE** 生成器解决该可变性。这表示代码是为特定变体生成的。为此，必须为每个 CodeGenerationTime 可变性选择一个特定变体。
+
+**RTE** 生成器应在 **RTE** 契约阶段、基础软件调度器契约阶段、**RTE** 生成阶段和基础软件调度器生成阶段绑定 CodeGenerationTime 可变性。
+
+**RTE** 生成器应在 **RTE** 契约阶段拒绝这样的输入配置：没有为每个影响软件组件契约的 CodeGenerationTime 可变性选择特定变体。
+
+**RTE** 生成器应在基础软件调度器契约阶段拒绝这样的输入配置：没有为每个影响基础软件调度器契约的 CodeGenerationTime 可变性选择特定变体。
+
+**RTE** 生成器应在基础软件调度器生成阶段拒绝这样的输入配置：没有为每个影响基础软件调度器生成的 CodeGenerationTime 可变性选择特定变体。
+
+**RTE** 生成器应在 **RTE** 生成阶段拒绝这样的输入配置：没有为每个影响 **RTE** 生成的 CodeGenerationTime 可变性选择特定变体。
+
+###### 6.2.7.2.5. PreCompileTime
+
+最迟绑定时间为 `PreCompileTime` 的可变性（称为 PreCompileTime 可变性）与 **RTE** 契约阶段和基础软件调度器契约阶段以及 **RTE** 生成阶段和基础软件调度器生成阶段相关。应用头文件（**Application Header File**）、应用类型头文件（**Application Types Header File**）、模块互联头文件（**Module Interlink Header**）与模块互联类型头文件（**Module Interlink Types Header**）以及生成的 **RTE**/基础软件调度器必须支持软件组件和基础软件模块的潜在可变性。该可变性在 **C** 编译器的预处理器执行期间解决。
+
+**RTE** 生成器应在 **RTE** 契约阶段、基础软件调度器契约阶段、**RTE** 生成阶段和基础软件调度器生成阶段中，经由生成的 **RTE** 代码中的预处理器语句实现 PreCompileTime 可变性。
+
+**RTE** 生成器应使用已定义的属性值宏（**Attribute Value Macro**）而非立即值，如果该值依赖于 `bindingTime` 设置为 `preCompileTime` 的 `AttributeValueVariationPoint`。
+
+###### 6.2.7.2.6. LinkTime
+
+对与 **RTE** 生成器相关的 `VariationPoint`，不支持最迟绑定时间 `LinkTime`。
+
+**RTE** 生成器应拒绝定义了与 **RTE** 或基础软件调度器相关的 LinkTime 可变性的配置。
+
+###### 6.2.7.2.7. PostBuild
+
+最迟绑定时间为 `PostBuild` 的可变性（称为构建后可变性，**post-build variability**）可以在生成的 **RTE** 被编译并链接到可执行文件之后绑定/重新绑定。生成的 **RTE** 二进制代码必须包含所有变体。**ECU** 运行时执行哪个变体由变体选择器（**variant selector**）决定。
+
+**RTE** 生成器应在 **RTE** 生成阶段和基础软件调度器生成阶段中，经由生成的 **RTE** 代码中的 **C** 语句实现构建后可变性。
+
+**构建前与构建后可变性的组合**
+
+根据文档[\[10\]](#ref-10)，支持一个 `VariationPoint` 将构建前可变性与构建后可变性结合定义。如果构建前条件为假，则预期受可变性支配的元素——包括对构建后条件求值的代码——根本不被实现。
+
+在 `VariationPoint` 将 SystemDesignTime 可变性或 CodeGenerationTime 可变性与构建后可变性结合定义的情况下，只有当构建前可变性的条件求值为真时，**RTE** 生成器才应在生成的 **RTE** 代码中实现该构建后可变性。
+
+在 `VariationPoint` 将 PreCompileTime 可变性与构建后可变性结合定义的情况下，只有当 PreCompileTime 可变性的条件求值为真时，该构建后可变性才应在 **RTE** 可执行文件中生效。
+
+在这种情况下，依据 **SWS_Rte_06512** 实现的构建后可变性依赖于依据 **SWS_Rte_06510** 实现的 PreCompileTime 可变性。
+
+##### 6.2.7.3. 影响 RTE 生成的可变性
+
+###### 6.2.7.3.1. 软件组合
+
+本节描述变体点的存在对组合（**composition**）的影响。虽然应用软件组合在分配到 **ECU** 之后已被扁平化并实际上被消除，但 **RTE** 仍有一个组合需要考虑（即 `RootSwCompositionPrototype`）。`RootSwCompositionPrototype` 包含分配到相应 **ECU** 的原子软件组件、其装配连接、其委托连接，以及委托端口到系统信号的连接。一旦某个变体点的可变性被解决，它就必须遵守适用于没有任何变体的模型的约束与限制。例如，不允许悬空连接器（**dangling connector**），因此如果在解决构建后变体点之后仍然存在此类配置，它们的存在将导致未定义行为。
+
+同样，在本规范节的表述中，"某个变体被启用或禁用"是指该变体点的 `SwSystemconstDependentFormula` 和/或 `PostBuildVariantCondition` 分别求值为"真或假"。
+
+###### 6.2.7.3.1.1. SwComponentPrototype 的变体存在性
+
+**SWS_Rte_06601**：如果某个变体对于 `CompositionSwComponentType` 中某个 `SwComponentPrototype` 的聚合被禁用，则所有发往相应 `SwComponentPrototype` 中可运行实体的 `RTEEvent` 都应被阻断；不允许任何 `RTEEvent` 到达包含在"被禁用"的 `SwComponentPrototype` 中的任何可运行实体。
+
+连接到"被禁用" **SWC** 端口的连接器的潜在错误配置将导致未定义行为；考虑 `SwComponentPrototype` 可变性的人员有责任使这些连接同样是可变的，并且当某个变体选择导致 `SwComponentPrototype` 从组合中被消除时连接仍然有效。建议使用预定义变体以确保建立正确的配置。
+
+###### 6.2.7.3.1.2. SwConnector 的变体存在性
+
+**SWS_Rte_06602**：如果某个变体对于聚合在 `CompositionSwComponentType` 中的某个 `SwConnector`（即 `AssemblySwConnector` 或 `DelegationSwConnector`）被禁用，则在该变体未被其他变体在这些端口之间启用的 `SwConnector` 的情况下，连接器两端的 `PortPrototype` 应表现为未连接端口。
+
+未连接端口的 **RTE** 行为定义见 [7.1.2.7](#7127-未连接的端口) 节。
+
+###### 6.2.7.3.1.3. COM 相关的变体存在性
+
+本节描述 `DataMapping`（即 `SystemMapping` 中的 `SenderReceiverToSignalMapping` 和 `SenderReceiverToSignalGroupMapping`）的可变性以及 `ISignal` 的变体存在性对 **RTE** 与 **COM** 层交互的影响。元模型允许把同一数据映射到不同的 `SystemSignal`，也允许把一个 `SystemSignal` 与一个或多个 `ISignal` 关联。
+
+**SWS_Rte_06603**：如果某个变体对于聚合某个 `DataMapping` 的 `SystemMapping` 被启用，则 **RTE** 应为适用的映射类型调用相应的 **API**。
+
+应基于 `SystemSignal` 所关联 `ISignal` 的变体存在性来确定相应的 **API**。对于每个被启用的 `ISignal`，**RTE** 应调用适当的 **COM API** 来发送和接收 `SystemSignal` 数据。
+
+例如，对于从 `VariableDataPrototype` 到 `SystemSignal` 的实例映射，**RTE** 应基于所选变体的 `DataMapping`，使用正确的 `SignalId` 和 `SignalDataPtr` 调用相应的 `Com_SendSignal`。
+
+`ISignal` 变体的存在性由 **System** 元素决定（另见 [constr_3028]）。
+
+**SWS_Rte_06605**：`RootSwCompositionPrototype` 上不存在 `DataMapping`（即没有变体 `DataMapping` 被启用）的委托端口应被视为未连接，因为不存在到指定 `SystemSignal` 的路径。由于这是委托端口，所有把 **SWC** R-port 链接到相应委托端口的、被启用的委托连接器都必须被视为未连接。**P-Port** 应按 **SWS_Rte_06602** 中定义的方式表现。
+
+未连接端口的 **RTE** 行为定义见 [7.1.2.7](#7127-未连接的端口) 节。
+
+###### 6.2.7.3.1.4. PortPrototype 的变体存在性
+
+**SWS_Rte_06606**：如果 `RootSwCompositionPrototype` 上的某个委托端口没有启用任何变体，则所有使用 `DelegationSwConnector` 连接到该委托端口的已连接 R-Port 都应被视为未连接。**P-port** 的行为应按 **SWS_Rte_06602** 中定义的方式表现。
+
+未连接端口的 **RTE** 行为定义见 [7.1.2.7](#7127-未连接的端口) 节。
+
+**关于变体禁用判据的说明：** 在正确的变体配置中，应遵循以下原则：当某个 `PortPrototype` 从任何 `SwComponentType` 中被消除时，任何关联的 `SwConnector` 也应有一个移除该连接的变体点，因为该连接是非法的。
+
+###### 6.2.7.3.2. 原子软件组件及其内部行为
+
+**受可变性支配的 RTE API**
+
+元模型中的以下 `VariationPoint` 控制软件组件 **RTE API** 的变体存在性。如果某个 **RTE API** 是变体存在的，则 **API** 映射和组件数据结构中的相关条目也是"变体"的。这意味着，如果某个 **RTE API** 不存在，其 **API** 映射也不存在。组件数据结构条目的一部分与端口的存在性相关。在这些情况下，组件数据结构条目依赖于 `PortPrototype` 的存在性。
+
+**SWS_Rte_07701**：
+
+表 4.17：**RTE API** 的变体存在性
+
+| 变体点条件值宏 | 受可变性支配的 RTE API | 形式 | 类别中缀 |
+| --- | --- | --- | --- |
+| `ExclusiveArea`（**SWS_Rte_06518**） | `[Rte_Enter](#71630-rte_enter)`、`[Rte_Exit](#71631-rte_exit)` | 组件内部 | ExAr |
+| `arTypedPerInstanceMemory` 角色中的 `VariableDataPrototype`（**SWS_Rte_06518**） | `[Rte_Pim](#71615-rte_pim)` | 组件内部 | PIM |
+| `PerInstanceMemory`（**SWS_Rte_06518**） | `[Rte_Pim](#71615-rte_pim)` | 组件内部 | PIM |
+| `perInstanceParameter` 角色中的 `ParameterDataPrototype`（**SWS_Rte_06518**） | `[Rte_CData](#71616-rte_cdata)` | 组件内部 | Prm |
+| `sharedParameter` 角色中的 `ParameterDataPrototype`（**SWS_Rte_06518**） | `[Rte_CData](#71616-rte_cdata)` | 组件内部 | Prm |
+| `ServerCallPoint`（**SWS_Rte_06515**） | `[Rte_Call](#71613-rte_call)` | 组件端口 | |
+| `AsynchronousServerCallResultPoint`（**SWS_Rte_06515**） | `[Rte_Result](#71614-rte_result)` | 组件端口 | |
+| `InternalTriggeringPoint`（**SWS_Rte_06519**） | `[Rte_IrTrigger](#71635-rte_irtrigger)` | 实体内部 | IRT |
+| `ExternalTriggeringPoint`（**SWS_Rte_06515**） | `[Rte_Trigger](#71634-rte_trigger)` | 组件端口 | |
+| `ModeSwitchPoint`（**SWS_Rte_06515**） | `[Rte_Switch](#7166-rte_switch)`、`[Rte_SwitchAck](#7169-rte_switchack)` | 组件端口 | |
+| `ModeAccessPoint`（**SWS_Rte_06515**） | `[Rte_Mode](#71632-rte_mode)` | 组件端口 | |
+| `dataReadAccess` 角色中的 `VariableAccess`（**SWS_Rte_06515**） | `[Rte_IRead](#71618-rte_iread)`、`[Rte_IStatus](#71623-rte_istatus)`、`[Rte_IsUpdated](#71637-rte_isupdated)` | 实体端口 | |
+| `dataWriteAccess` 角色中的 `VariableAccess`（**SWS_Rte_06515**） | `[Rte_IWrite](#71620-rte_iwrite)`、`[Rte_IWriteRef](#71621-rte_iwriteref)`、`[Rte_IInvalidate](#71622-rte_iinvalidate)`、`[Rte_IFeedback](#71636-rte_ifeedback)` | 实体端口 | |
+| `dataSendPoint` 角色中的 `VariableAccess`（**SWS_Rte_06515**） | `[Rte_Write](#7164-rte_write)`、`[Rte_Invalidate](#7167-rte_invalidate)`、`[Rte_Feedback](#7168-rte_feedback)` | 组件端口 | |
+| `dataReceivePointByArgument` 角色中的 `VariableAccess`（**SWS_Rte_06515**） | `[Rte_Read](#71610-rte_read)` | 组件端口 | |
+| `dataReceivePointByValue` 角色中的 `VariableAccess`（**SWS_Rte_06515**） | `[Rte_DRead](#71611-rte_dread)` | 组件端口 | |
+| `readLocalVariable` 角色中引用 `explicitInterRunnableVariable` 的 `VariableAccess`（**SWS_Rte_06518**） | `[Rte_IrvRead](#71628-rte_irvread)` | 组件内部 | IRV |
+| `writtenLocalVariable` 角色中引用 `explicitInterRunnableVariable` 的 `VariableAccess`（**SWS_Rte_06518**） | `[Rte_IrvWrite](#71629-rte_irvwrite)` | 组件内部 | IRV |
+| `readLocalVariable` 角色中引用 `implicitInterRunnableVariable` 的 `VariableAccess`（**SWS_Rte_06519**） | `[Rte_IrvIRead](#71624-rte_irviread)` | 实体内部 | IRV |
+| `writtenLocalVariable` 角色中引用 `implicitInterRunnableVariable` 的 `VariableAccess`（**SWS_Rte_06519**） | `[Rte_IrvIWrite](#71626-rte_irviwrite)`、`[Rte_IrvIWriteRef](#71627-rte_irviwriteref)` | 实体内部 | IRV |
+| 引用 `ParameterInterface` 的 `PortPrototype`（**SWS_Rte_06515**） | `[Rte_Prm](#71617-rte_prm)` | 组件端口 | |
+| 带属性 `indirectAPI` 的 `PortAPIOption`（**SWS_Rte_06520**） | `[Rte_Port](#7163-rte_port)` | | |
+
+表 4.18：表"**RTE API** 的变体存在性"的图例
+
+| 列 | 说明 |
+| --- | --- |
+| 类别中缀 | "类别中缀"列定义了用于区分属于不同 **API** 集的变体点条件值宏的中缀字符串 |
+| 形式 | "形式"列规定把哪些条件值宏的名称拼接起来，以确保宏的唯一命名空间 |
+
+"形式"列的说明：
+
+* 组件端口——相关 **API** 为整个软件组件提供，属于软件组件的端口
+* 实体端口——相关 **API** 为特定 `RunnableEntity` 提供，属于软件组件的端口
+* 组件内部——相关 **API** 为整个软件组件提供，属于软件组件内部功能
+* 实体内部——相关 **API** 为每个 `RunnableEntity` 提供，属于软件组件内部功能
+
+**RTE** 生成器只应在控制同一 **RTE API** 存在性的输入配置中的所有元素（例如 `VariableAccess`）都受可变性支配时，才将该 **RTE API** 视为变体 **RTE API**。
+
+###### 6.2.7.3.2.2. 条件 API 选项
+
+元模型中的以下变体点控制 **RTE API** 或已分配内存的变体属性。
+
+表 4.19：条件 **API** 选项
+
+| 变体点条件值宏 | 受可变性支配者 |
+| --- | --- |
+| 带属性 `portArgValue` 的 `PortAPIOption`（未标准化） | `PortDefinedArgumentValue` 被传递给一个 `RunnableEntity` |
+| 带属性 `indirectAPI` 的 `PortAPIOption`（未标准化） | 支持间接 **API** 的端口数量，见 `[Rte_NPorts](#7162-rte_nports)` 和 `[Rte_Ports](#7161-rte_ports)` |
+
+###### 6.2.7.3.2.3. 可运行实体与 RTEEvent
+
+元模型中的以下变体点控制 `RunnableEntity` 的变体存在性和激活。
+
+**SWS_Rte_07706**：
+
+表 4.20：`RunnableEntity` 与 `RTEEvent` 上的变体
+
+| 变体点条件值宏 | 受可变性支配者 |
+| --- | --- |
+| `RunnableEntity`（**SWS_Rte_06530**） | 可运行实体原型的存在性 |
+| `RTEEvent`（未标准化） | 可运行实体的激活 |
+
+###### 6.2.7.3.2.4. 条件内存分配
+
+元模型中的以下变体点控制软件组件实例 **RTE** 内存分配的变体存在性。
+
+表 4.21：条件内存分配
+
+| 变体点条件值宏 | 受可变性支配者 |
+| --- | --- |
+| `implicitInterRunnableVariable`（未标准化） | 实现 `implicitInterRunnableVariable` 的变量定义 |
+| `explicitInterRunnableVariable`（未标准化） | 实现 `explicitInterRunnableVariable` 的变量定义 |
+| `arTypedPerInstanceMemory`（未标准化） | 实现 `arTypedPerInstanceMemory` 的变量定义 |
+| `PerInstanceMemory`（未标准化） | 实现 `PerInstanceMemory` 的变量定义 |
+| `perInstanceParameter`（未标准化） | 实现 `perInstanceParameter` 的常量定义 |
+| `sharedParameter`（未标准化） | 实现 `sharedParameter` 的变量定义 |
+| `InstantiationDataDefProps`、`SwDataDefProps`（未标准化） | 经由 `swAddrMethod` 描述的内存对象分配、经由 `swCalibrationAccess` 描述的 **MCD** 系统可访问性、`displayFormat`、`mcFunction` |
+
+###### 6.2.7.3.3. NvBlockComponent 及其内部行为
+
+表 4.22：`NvBlockSwComponentType` 中的变体
+
+| 变体点条件值宏 | 受可变性支配者 |
+| --- | --- |
+| 由 `NvDataInterface` 定义类型的 `NvBlockSwComponentType` 的 `PortPrototype`（未标准化） | 访问 `ramBlock` 内存对象能力的相关性 |
+| `NvBlockDescriptor` 的 `NvBlockDataMapping`（未标准化） | 访问 `ramBlock` 内存对象能力的相关性 |
+| 由 `ClientServerInterface` 定义类型、引用 `OperationInvokedEvent` 的 `NvBlockSwComponentType` 的提供 `PortPrototype`（未标准化） | 块管理端口的存在性以及访问 **NvRAM** 管理器的块管理 **API** 的能力 |
+| 由 `ClientServerInterface` 定义类型、`RoleBasedPortAssignment` 引用该 `PortPrototype` 的 `NvBlockSwComponentType` 的需求 `PortPrototype`（未标准化） | 回调通知端口的存在性 |
+| `ramBlock` 或 `romBlock` 的 `initValue` `ValueSpecification` 的 `NumericalValueSpecification` 或 `TextValueSpecification`（聚合的或被引用的）（未标准化） | 实现 `ramBlock` 或 `romBlock` 的内存对象的初始化值 |
+| `InstantiationDataDefProps` | 实现 `ramBlock` 或 `romBlock` 的内存对象分配——经由 `swAddrMethod` 描述，经由 `swCalibrationAccess` 描述的 **MCD** 系统可访问性、`displayFormat`、`mcFunction` |
+
+###### 6.2.7.3.4. 参数组件
+
+表 4.23：`ParameterSwComponentType` 中的变体
+
+| 变体点条件值宏 | 受可变性支配者 |
+| --- | --- |
+| `ParameterSwComponentType` 的 `PortPrototype`（未标准化） | 与该 `PortPrototype` 所引用 `PortInterface` 中 `ParameterDataPrototype` 相关的内存对象/定义的存在性 |
+| `ParameterProvideComSpec` 的 `initValue` `ValueSpecification` 的 `NumericalValueSpecification` 或 `TextValueSpecification`（聚合的或被引用的）（未标准化） | 与 `ParameterDataPrototype` 相关的内存对象/定义的初始化值 |
+
+###### 6.2.7.3.5. 数据类型
+
+元模型中的以下变体点控制数据类型的变体生成。
+
+**SWS_Rte_07703**：
+
+表 4.24：`ImplementationDataType` 中的变体
+
+| 变体点 | 受可变性支配者 |
+| --- | --- |
+| `ImplementationDataTypeElement`（**SWS_Rte_06542**） | 结构或联合元素的存在性 |
+| `arraySize`（**SWS_Rte_06541**） | 数组中的元素数量 |
+| `CompuMethod` 的 `upperLimit` | `ImplementationDataType` 的上限 |
+| `CompuMethod` 的 `lowerLimit` | `ImplementationDataType` 的下限 |
+| `CompuMethod` 的 `v` 属性 | 分子与分母的系数 |
+
+表 4.25：`ApplicationDataType` 及相关元类中的变体
+
+| 变体点条件值宏 | 受可变性支配者 |
+| --- | --- |
+| `DataConstr` 的 `upperLimit`（**SWS_Rte_06551**） | `ApplicationPrimitiveDataType` 的上限 |
+| `DataConstr` 的 `lowerLimit`（**SWS_Rte_06552**） | `ApplicationPrimitiveDataType` 的下限 |
+| `CompuMethod` 的 `upperLimit` | `ApplicationPrimitiveDataType` 的上限 |
+| `CompuMethod` 的 `lowerLimit` | `ApplicationPrimitiveDataType` 的下限 |
+| `CompuMethod` 的 `v` 属性 | 分子与分母的系数 |
+
+###### 6.2.7.3.6. 常量
+
+表 4.26：`ValueSpecification` 中的变体
+
+| 变体点条件值宏 | 受可变性支配者 |
+| --- | --- |
+| `NumericalValueSpecification` 的 `value` | 数值 |
+| `ApplicationValueSpecification` 的 `v`（`swArraysize`） | 复合基本类型的大小 |
+| `ApplicationValueSpecification` 的 `v`（`value`）属性 | 物理值 |
+
+###### 6.2.7.3.7. 基础软件模块及其内部行为
+
+###### 6.2.7.3.7.1. 基础软件接口
+
+表 4.27：影响基础软件接口的可变性
+
+| 变体点条件值宏 | 受可变性支配者 |
+| --- | --- |
+| `providedEntry`（未标准化） | 提供的 `BswModuleEntry` 的存在性 |
+| `outgoingCallback`（未标准化） | 期望的 `BswModuleEntry` 的存在性 |
+| `providedModeGroup` 角色中的 `ModeDeclarationGroupPrototype`（未标准化） | 提供的 `ModeDeclarationGroupPrototype` 的存在性 |
+| `requiredModeGroup` 角色中的 `ModeDeclarationGroupPrototype`（未标准化） | 需求的 `ModeDeclarationGroupPrototype` 的存在性 |
+| `releasedTrigger` 角色中的 `Trigger`（未标准化） | 释放的 `Trigger` 的存在性 |
+| `requiredTrigger` 角色中的 `Trigger`（未标准化） | 需求的 `Trigger` 的存在性 |
+
+###### 6.2.7.3.8. 平坦实例描述符
+
+可以指示 **RTE** 生成器在组件描述中为一个 `ParameterDataPrototype` 提供多个实例。为此，每个预期的参数实例需要一个 `FlatInstanceDescriptor` 指向该 `ParameterDataPrototype`。由此，这些 `FlatInstanceDescriptor` 需要定义构建后变体点，以解析对各个参数实例的访问。
+
+更多细节在 6.2.2.9.3.7 节中描述。
+
+##### 6.2.7.4. 影响基础软件调度器生成的可变性
+
+###### 6.2.7.4.1. 受可变性支配的基础软件调度器 API
+
+输入配置中列在表 4.28 中的 `VariationPoint` 控制基础软件调度器 **API** 的变体存在性。
+
+**SWS_Rte_07702**：
+
+表 4.28：基础软件调度器 **API** 的变体存在性
+
+| 变体点条件值宏 | 受可变性支配的基础软件调度器 API | 形式 | 类别中缀 |
+| --- | --- | --- | --- |
+| `ExclusiveArea`（**SWS_Rte_06535**） | `[SchM_Enter](#7251-schm_enter)`、`[SchM_Exit](#7252-schm_exit)` | 模块内部 | ExAr |
+| 到 `providedModeGroup` `ModeDeclarationGroupPrototype` 的 `managedModeGroup` 关联（**SWS_Rte_06536**） | `[SchM_Switch](#7257-schm_switch)`、`SwitchAck` | 模块外部 | MMod |
+| 到 `providedModeGroup` 或 `requiredModeGroup` `ModeDeclarationGroupPrototype` 的 `accessedModeGroup` 关联（**SWS_Rte_06536**） | `[SchM_Mode](#7258-schm_mode)` | 模块外部 | AMod |
+| 到 `releasedTrigger` `Trigger` 的 `issuedTrigger` 关联（**SWS_Rte_06536**） | `[SchM_Trigger](#72511-schm_trigger)` | 模块外部 | Tr |
+| `BswModuleCallPoint`（**SWS_Rte_06536**） | `[SchM_Call](#7253-schm_call)` | 模块外部 | SrvCall |
+| `BswAsynchronousServerCallResultPoint`（**SWS_Rte_06536**） | `[SchM_Result](#7254-schm_result)` | 模块外部 | SrvRes |
+| 到 `providedData` 的 `dataSendPoint` 关联（**SWS_Rte_06536**） | `[SchM_Send](#7255-schm_send)` | 模块外部 | DSP |
+| 到 `requiredData` 的 `dataReceivePoint` 关联（**SWS_Rte_06536**） | `[SchM_Receive](#7256-schm_receive)` | 模块外部 | DRP |
+| `BswInternalTriggeringPoint`（**SWS_Rte_06536**） | `[SchM_ActMainFunction](#72512-schm_actmainfunction)` | 实体内部 | ITr |
+| `perInstanceParameter` `ParameterDataPrototype`（**SWS_Rte_06535**） | `[SchM_CData](#72513-schm_cdata)` | 模块内部 | PIP |
+
+表 4.29：表"基础软件调度器 **API** 的变体存在性"的图例
+
+| 列 | 说明 |
+| --- | --- |
+| 类别中缀 | "类别中缀"列定义了用于区分属于不同 **API** 集的变体点条件值宏的中缀字符串 |
+| 形式 | "形式"列规定把哪些条件值宏的名称拼接起来，以确保宏的唯一命名空间 |
+
+"形式"列的说明：
+
+* 模块外部——相关 **API** 为整个模块提供，属于模块接口
+* 模块内部——相关 **API** 为整个模块提供，属于模块内部功能
+* 实体内部——相关 **API** 为每个可执行实体提供，属于模块内部功能
+
+**RTE** 生成器只应在控制同一基础软件调度器 **API** 存在性的输入配置中的所有元素（例如 `managedModeGroup` 关联）都受可变性支配时，才将该基础软件调度器 **API** 的存在性视为受可变性支配。
+
+###### 6.2.7.4.2. 基础软件实体
+
+输入配置中列在表 4.30 中的 `VariationPoint` 控制各 `BswModuleEntity` 的变体存在性和各 `BswSchedulableEntity` 的变体激活。
+
+**SWS_Rte_07705**：
+
+表 4.30：影响 `BswSchedulableEntity` 的可变性
+
+| 变体点条件值宏 | 受可变性支配者 |
+| --- | --- |
+| `BswSchedulableEntity`（**SWS_Rte_06532**） | `BswSchedulableEntity` 原型的存在性 |
+| `BswEvent`（未标准化） | `BswSchedulableEntity` 的激活 |
+
+###### 6.2.7.4.3. API 行为
+
+输入配置中列在表 4.31 中的 `VariationPoint` 控制基础软件调度器 **API** 的变体行为。
+
+表 4.31：`BswSchedulableEntity` 的变体存在性
+
+| 变体点条件值宏 | 受可变性支配者 |
+| --- | --- |
+| `BswModeSenderPolicy`（未标准化） | 模式机实例中依赖于该属性的队列长度 |
+| `BswModeReceiverPolicy`（未标准化） | 属性 `supportsAsynchronousModeSwitch` 必须根据被绑定的变体加以考虑 |
+
+##### 6.2.7.5. 影响 SWC 实现的可变性
+
+本节给出一些示例，以描述可变性对 **SWC** 实现的影响。**SWC** 中实现的可变性经由 `VariationPointProxy` 描述，可以通过构建前求值、构建后求值或两者的组合来解决。此外，对每个 `VariationPointProxy`，**AUTOSAR** 定义了 `VALUE` 和 `CONDITION` 两个类别（见软件组件模板[\[2\]](#ref-2)）。在以下代码示例中，将描述每个类别的一个场景。第一个场景针对构建后情形，第二个针对构建前与构建后组合的情形。
+
+**类别 VALUE 的场景**
+
+`VariationPointProxy` FRIDA `postBuildValueAccess` `Rte_PBCon_FRIDA = 3` 可能产生的结果例如：
+
+```c
+/* Generated RTE-Code */
+const Rte_PBCon_FRIDA
+
+/* SWC-Code */
+if (Rte_PBCon_FRIDA == 3) {
+  /* code depending on proxy FRIDA */
+}
+else {
+  /* functional alternative, if FRIDA is not selected */
+}
+```
+
+**类别 CONDITION 的场景**
+
+`SystemConstant` FRANZ = 10、`VariationPointProxy` HUGO `conditionAccess` `Rte_SysCon_HUGO = (FRANZ == 10)`、`postBuildVariantCondition` A = 3、`postBuildVariantCondition` B = 5 可能产生的结果例如：
+
+```c
+/* Generated RTE-Code */
+#define Rte_SysCon_HUGO 1
+
+#define Rte_PBCon_HUGO (
+  Rte_SysCon_HUGO &&
+  RteInternal_EvalPostBuildVariantCondition_HUGO_A &&
+  RteInternal_EvalPostBuildVariantCondition_HUGO_B
+)
+
+/*SWC-Code*/
+/* ensure that no code for HUGO remains in
+   the binary, if HUGO is not selected */
+#if Rte_SysCon_HUGO
+/* check during run time, if HUGO is
+   active due to post-build conditions */
+if (Rte_PBCon_HUGO) {
+  /* code depending on proxy HUGO */
+}
+else {
+  /* functional alternative, if HUGO is not selected */
+}
+
+#else
+/* functional alternative is always
+   active since HUGO is not selected */
+#endif
+```
+
+由于构建后数据结构未被标准化，表达式 `RteInternal_EvalPostBuildVariantCondition_HUGO_A` 和 `RteInternal_EvalPostBuildVariantCondition_HUGO_B` 的求值算法由实现者决定。
+
+与 `Rte_SysCon` 相比，`[Rte_PBCon](#71638-rte_pbcon)` **API** 没有能在预处理器中解析的保证。减小代码尺寸取决于编译器的优化。如果想绝对确保即使在不做优化的编译器下也不存在多余代码，则需要在此外实现一个预处理器指令（见示例）。
+
+#### 6.2.8. 开发错误
+
+**RTE** 中在运行时可能发生的错误被归类为开发错误。**RTE** 使用一个 **BSW** 模块向 **DET**[\[26\]](#ref-26)（**Default Error Tracer**）报告这些类型的错误。
+
+##### 6.2.8.1. DET 报告标识符
+
+**RTE** 应使用 **OS Application** 标识符作为实例 ID（**Instance Id**），使开发者能够识别错误发生在 **RTE** 的哪个运行时段。该实例 ID 在多核之间也是唯一的，因此隐含地允许把开发错误追踪到特定的核。
+
+**RTE** 应使用 **SWS_Rte_07709** 中标识的服务 ID（**Service Id**）。每个 **RTE API** 模板、**RTE** 回调模板和 **RTE API** 都有一个标识符。在相应 **RTE** 调用的上下文中运行代码时，必须使用该服务 ID。
+
+##### 6.2.8.2. DET 错误标识符
+
+目前只识别有限的一组开发标识符。其中每个都需要在运行时或在 **RTE** 初始化期间检测。为报告这些错误，**RTE** 生成器必须生成额外的开发代码。
+
+**SWS_Rte_06633**：当 **RTE** 接收到一个带有 **Com** 用户回调句柄 ID 的 **COM** 通知回调（例如 `Rte_COMCbk`、`Rte_COMCbkTAck`），且该信号或信号组在当前所选的 postBuild 变体的上下文中并非预期时，**RTE** 应在运行时报告 `[RTE_E_DET_ILLEGAL_SIGNAL_ID](#628-开发错误)`（0x01）。
+
+可能的 **COM** 回调模板 **API** 列表见 7.1.9.2.1 节。
+
+**SWS_Rte_06634**：当 **RTE** 确定某个为变体判据分配的值不在该判据的可能值列表中时，**RTE** 应报告 `[RTE_E_DET_ILLEGAL_VARIANT_CRITERION_VALUE](#628-开发错误)`（0x02）。该错误应在 **RTE** 初始化阶段检测。
+
+**SWS_Rte_07684**：当以 `NULL` 参数调用 `[SchM_Init](#7271-schm_init)` **API** 时，基础软件调度器应报告 `[RTE_E_DET_ILLEGAL_VARIANT_CRITERION_VALUE](#628-开发错误)`（0x02）。
+
+**SWS_Rte_06635**：当 **RTE** 确定某个不应调用该 **RTE API** 的可运行实体调用了该 **API** 时，**RTE** 应报告 `[RTE_E_DET_ILLEGAL_INVOCATION](#628-开发错误)`（0x03）。**RTE** 在分派 **RTE** 事件时可以识别活动的可运行实体，如果随后收到来自该可运行实体的、对其契约之外的 **API** 的调用，则必须记录该特定错误 ID。
+
+**SWS_Rte_06637**：当应用已调用某个 `[Rte_Enter](#71630-rte_enter)` **API**、随后又请求 **RTE** 进入等待状态时，**RTE** 应报告 `[RTE_E_DET_WAIT_IN_EXCLUSIVE_AREA](#628-开发错误)`（0x04）。这是非法的，因为它会锁定 **ECU**。
+
+**SWS_Rte_07675**：当应用违反 **SWS_Rte_CONSTR_09029** 时，**RTE** 应报告 `[RTE_E_DET_ILLEGAL_NESTED_EXCLUSIVE_AREA](#628-开发错误)`（0x05）。
+
+**SWS_Rte_07682**：如果启用了 `RteDevErrorDetectUninit`，当以下 **API** 之一：
+
+* 提供给 **AUTOSAR** 软件组件的 **RTE API**
+* `Rte_NvMNotifyInitBlock`
+
+在 `[Rte_Start](#7181-rte_start)` 之前、`[Rte_Stop](#7182-rte_stop)` 之后、或在该 **API** 所属分区被终止之后被调用时，**RTE** 应报告 `[RTE_E_UNINIT](#628-开发错误)`（0x07）。
+
+提供给 **AUTOSAR** 软件组件的 **RTE API** 规定在 [7.1.6](#716-api-参考) 节中。
+
+**注意：**
+
+* 在生产模式下，不执行任何检查。
+* 在开发模式下，如果检测到错误，则 **API** 行为未定义，由 **RTE** 实现者决定。
+
+**理由：** 引入该开发检查不应给生产模式配置带来大的变化。
+
+**SWS_Rte_07683**：如果启用了 `RteDevErrorDetectUninit`，当 **API** `[SchM_Switch](#7257-schm_switch)`、`[SchM_Mode](#7258-schm_mode)`、`[SchM_SwitchAck](#72510-schm_switchack)`、`[SchM_Trigger](#72511-schm_trigger)`、`[SchM_Send](#7255-schm_send)`、`[SchM_Receive](#7256-schm_receive)`、`[SchM_Call](#7253-schm_call)`、`[SchM_Result](#7254-schm_result)`、`[SchM_ActMainFunction](#72512-schm_actmainfunction)`、`[SchM_StartTiming](#7273-schm_starttiming)` 或 `[Rte_Start](#7181-rte_start)` 之一在 `[SchM_Init](#7271-schm_init)` 之前被调用时，基础软件调度器/**RTE** 应报告 `[RTE_E_UNINIT](#628-开发错误)`（0x07）。
+
+##### 6.2.8.3. DET 错误分类
+
+以下缩写用于标识表 4.33 中的 **DET** 错误。
+
+表 4.32：各 **API** 的 **RTE DET** 错误缩写
+
+| 缩写 | RTE DET 错误 |
+| --- | --- |
+| ISI | `[RTE_E_DET_ILLEGAL_SIGNAL_ID](#628-开发错误)` |
+| IVCV | `[RTE_E_DET_ILLEGAL_VARIANT_CRITERION_VALUE](#628-开发错误)` |
+| II | `[RTE_E_DET_ILLEGAL_INVOCATION](#628-开发错误)` |
+| INEA | `[RTE_E_DET_ILLEGAL_NESTED_EXCLUSIVE_AREA](#628-开发错误)` |
+| WIEA | `[RTE_E_DET_WAIT_IN_EXCLUSIVE_AREA](#628-开发错误)` |
+| UNINIT | `[RTE_E_UNINIT](#628-开发错误)` |
+
+表 4.33 指出哪些 **DET** 错误与各种 **RTE API** 相关，以及与这些 **RTE API** 关联的服务 ID（见 **SWS_Rte_06632**）：
+
+**SWS_Rte_07709**：
+
+表 4.33：**RTE DET** 错误对各 **API** 的适用性
+
+| API 名称 | 服务 ID | ISI | IVCV | II | INEA | WIEA | UNINIT |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `[Rte_Ports](#7161-rte_ports)` API | 0x10 | | | | | | X |
+| `[Rte_NPorts](#7162-rte_nports)` API | 0x11 | | | | | | X |
+| `[Rte_Port](#7163-rte_port)` API | 0x12 | | | | | | X |
+| `[Rte_Send](#7165-rte_send)` API | 0x13 | | | | | | X |
+| `[Rte_Write](#7164-rte_write)` API | 0x14 | | | | | | X |
+| `[Rte_Switch](#7166-rte_switch)` API | 0x15 | | | | | | X |
+| `[Rte_Invalidate](#7167-rte_invalidate)` API | 0x16 | | | | | | X |
+| `[Rte_Feedback](#7168-rte_feedback)` API | 0x17 | | | | | X | X |
+| `[Rte_SwitchAck](#7169-rte_switchack)` API | 0x18 | | | | | X | X |
+| `[Rte_Read](#71610-rte_read)` API | 0x19 | | | | | | X |
+| `[Rte_DRead](#71611-rte_dread)` API | 0x1A | | | | | | X |
+| `[Rte_Receive](#71612-rte_receive)` API | 0x1B | | | | | X | X |
+| `[Rte_Call](#71613-rte_call)` API | 0x1C | | | | | X | X |
+| `[Rte_Result](#71614-rte_result)` API | 0x1D | | | | | X | X |
+| `[Rte_Pim](#71615-rte_pim)` API | 0x1E | | | | | | X |
+| `[Rte_CData](#71616-rte_cdata)` API | 0x1F | | | | | | X |
+| `[Rte_Prm](#71617-rte_prm)` API | 0x20 | | | | | | X |
+| `[Rte_IRead](#71618-rte_iread)` API | 0x21 | | | | | | X |
+| `[Rte_IWrite](#71620-rte_iwrite)` API | 0x22 | | | | | | X |
+| `[Rte_IWriteRef](#71621-rte_iwriteref)` API | 0x23 | | | | | | X |
+| `[Rte_IReadRef](#71619-rte_ireadref)` API | 0x32 | | | | | | X |
+| `[Rte_IInvalidate](#71622-rte_iinvalidate)` API | 0x24 | | | | | | X |
+| `[Rte_IStatus](#71623-rte_istatus)` API | 0x25 | | | | | | X |
+| `[Rte_IrvIRead](#71624-rte_irviread)` API | 0x26 | | | | | | X |
+| `[Rte_IrvIWrite](#71626-rte_irviwrite)` API | 0x27 | | | | | | X |
+| `[Rte_IrvIWriteRef](#71627-rte_irviwriteref)` API | 0x31 | | | | | | X |
+| `[Rte_IrvRead](#71628-rte_irvread)` API | 0x28 | | | | | | X |
+| `[Rte_IrvWrite](#71629-rte_irvwrite)` API | 0x29 | | | | | | X |
+| `[Rte_Enter](#71630-rte_enter)` API | 0x2A | | | | | | X |
+| `[Rte_Exit](#71631-rte_exit)` API | 0x2B | | | | | | X |
+| `[Rte_Mode](#71632-rte_mode)` API | 0x2C | | | | | | |
+| `[Rte_Trigger](#71634-rte_trigger)` API | 0x2D | | | | | | X |
+| `[Rte_IrTrigger](#71635-rte_irtrigger)` API | 0x2E | | | | | | X |
+| `[Rte_IFeedback](#71636-rte_ifeedback)` API | 0x2F | | | | | | X |
+| `[Rte_IsUpdated](#71637-rte_isupdated)` API | 0x30 | | | | | | X |
+| 由 `TimingEvent` 触发 | 0x50 | | | | | | |
+| 由 `BackgroundEvent` 触发 | 0x51 | | | | | | |
+| 由 `SwcModeSwitchEvent` 触发 | 0x52 | | | | | | |
+| 由 `AsynchronousServerCallReturnsEvent` 触发 | 0x53 | | | | | | |
+| 由 `DataReceiveErrorEvent` 触发 | 0x54 | | | | | | |
+| 由 `OperationInvokedEvent` 触发 | 0x55 | | | | | | |
+| 由 `DataReceivedEvent` 触发 | 0x56 | | | | | | |
+| 由 `DataSendCompletedEvent` 触发 | 0x57 | | | | | | |
+| 由 `ExternalTriggerOccurredEvent` 触发 | 0x58 | | | | | | |
+| 由 `InternalTriggerOccurredEvent` 触发 | 0x59 | | | | | | |
+| 由 `DataWriteCompletedEvent` 触发 | 0x5A | | | | | | |
+| 由 `OsTaskExecutionEvent` 触发 | 0x5B | | | | | | |
+| `[Rte_Start](#7181-rte_start)` API | 0x70 | | | | | | X |
+| `[Rte_Stop](#7182-rte_stop)` API | 0x71 | | | | | | |
+| `[Rte_Init](#7183-rte_init)` API | 0x75 | | | | | | |
+| `[Rte_StartTiming](#7184-rte_starttiming)` API | 0x76 | | | | | | |
+| `Rte_COMCbkTAck` 回调（DRAFT） | 0x90 | X | | | | | |
+| `Rte_COMCbkTErr` 回调（DRAFT） | 0x91 | X | | | | | |
+| `Rte_COMCbkInv` 回调（DRAFT） | 0x92 | X | | | | | |
+| `Rte_COMCbkRxTOut` 回调（DRAFT） | 0x93 | X | | | | | |
+| `Rte_COMCbkTxTOut` 回调（DRAFT） | 0x94 | X | | | | | |
+| `Rte_LdComCbkRxIndication` 回调（DRAFT） | 0xA0 | X | | | | | X |
+| `Rte_LdComCbkStartOfReception` 回调（DRAFT） | 0xA1 | X | | | | | X |
+| `Rte_LdComCbkCopyRxData` 回调（DRAFT） | 0xA2 | X | | | | | X |
+| `Rte_LdComCbkTpRxIndication` 回调（DRAFT） | 0xA3 | X | | | | | X |
+| `Rte_LdComCbkCopyTxData` 回调（DRAFT） | 0xA4 | X | | | | | X |
+| `Rte_LdComCbkTpTxConfirmation` 回调（DRAFT） | 0xA5 | X | | | | | X |
+| `Rte_LdComCbkTriggerTransmit` 回调（DRAFT） | 0xA6 | X | | | | | X |
+| `Rte_LdComCbkTxConfirmation` 回调（DRAFT） | 0xA7 | X | | | | | X |
+| `Rte_SetMirror` 回调 | 0x9B | | | | | | |
+| `Rte_GetMirror` 回调 | 0x9C | | | | | | |
+| `Rte_NvMNotifyJobFinished` 回调 / `Rte_NvMNotifyInitBlock` 回调 | 0x9D / 0x9E | | | | | | X |
+| `[SchM_Init](#7271-schm_init)` API | 0x00 | | X | | | | |
+| `[SchM_Start](#7272-schm_start)` API | 0x70 | | | | | | |
+| `[SchM_StartTiming](#7273-schm_starttiming)` API | 0x76 | | | | | | X |
+| `[SchM_Deinit](#7274-schm_deinit)` API | 0x01 | | | | | | |
+| `[SchM_GetVersionInfo](#7275-schm_getversioninfo)` API | 0x02 | | | | | | |
+| `[SchM_Enter](#7251-schm_enter)` API | 0x03 | | | | | | |
+| `[SchM_Exit](#7252-schm_exit)` API | 0x04 | | | | X | | |
+| `[SchM_ActMainFunction](#72512-schm_actmainfunction)` API | 0x05 | | | | | | X |
+| `[SchM_Switch](#7257-schm_switch)` API | 0x06 | | | | | | X |
+| `[SchM_Mode](#7258-schm_mode)` API | 0x07 | | | | | | X |
+| `[SchM_SwitchAck](#72510-schm_switchack)` API | 0x08 | | | | | | X |
+| `[SchM_Trigger](#72511-schm_trigger)` API | 0x09 | | | | | | X |
+| `[SchM_Send](#7255-schm_send)` API | 0x0A | | | | | | X |
+| `[SchM_Receive](#7256-schm_receive)` API | 0x0B | | | | | | X |
+| `[SchM_Call](#7253-schm_call)` API | 0x0C | | | | | | X |
+| `[SchM_Result](#7254-schm_result)` API | 0x0D | | | | | | X |
+#### 6.2.9. 旁路支持
+
+快速原型（**Rapid prototyping**）可在电子控制单元开发期间用于评估和测试各种功能的新软件控制算法。
+
+使用 Fullpass（全通）技术时，原始 **ECU** 被快速原型单元（**RPU**）完全替代。
+
+使用旁路（**Bypass**）技术时，原始 **ECU** 及其软件保留在控制回路中，以支持大多数控制算法并与传感器、执行器和通信总线交互：只有需要原型化的特定控制算法被移植到 **RPU** 中（外部旁路），甚至直接在原始 **ECU** 中执行（内部旁路）。旁路主要在于：在运行时用被测原型算法计算的值替换原始软件算法的输入和/或输出。
+
+**RTE** 不直接实现旁路，但 **RTE** 为 **CDD** 和/或集成代码实现此类集成提供支持。
+
+##### 6.2.9.1. 旁路描述
+
+为了把快速原型系统描述为一个 **Autosar** 软件组件，使用类别为 `RPT_SYSTEM` 的系统描述。该系统描述与 **RTE** 自身无关，只是 **ECU** 集成者搭建快速原型方案的支持。
+
+**RTE** 应忽略类别为 `RPT_SYSTEM` 的系统描述中的定义。
+
+##### 6.2.9.2. 组件包装方法
+
+组件包装方法（**component wrapper method**）在于用一个实现旁路的 **CDD** 包装原始软件组件实现。使用该方法，**CDD** 能够接管软件组件的 **AUTOSAR** 接口的控制权，因为 **RTE** 与 **SWC** 之间不再有直接调用，一切都经由 **CDD** 进行。
+
+图 4.54：组件包装方法
+
+![Figure4-54.png](Figure4-54.png)
+
+**RTE** 通过为被旁路的 **SWC**（即图 4.54 中的 **SWC** B）生成带有一个附加 `[Byps_]` 中缀的 **C** 命名空间的 **SWC** 接口来支持组件包装方法。这包括：
+
+* 应用头文件的命名
+* 应用类型头文件的命名
+* **RTE API** 的命名（生命周期 **API** 除外）
+* 可运行实体的命名
+* 实例句柄的命名
+* 组件数据结构类型的命名
+* 内存节的命名
+
+旁路支持的组件包装方法按软件组件类型启用。
+
+**SWS_Rte_07840**：如果通用开关 `RteBypassSupport` 设置为 `COMPONENT_WRAPPER` 且该软件组件类型的单独开关 `RteBypassSupportEnabled` 设置为 true，则该软件组件类型的旁路支持组件包装方法被启用。
+
+**SWS_Rte_07841**：如果通用开关 `RteBypassSupport` 设置为 `COMPONENT_WRAPPER` 以外的值，或该软件组件类型的单独开关 `RteBypassSupportEnabled` 未配置或设置为 false，则该软件组件类型的旁路支持组件包装方法被禁用。
+
+**SWS_Rte_07834**：如果某个软件组件类型的旁路支持组件包装方法被启用，则 **RTE** 生成器应把可选中缀 `[Byps_]` 加入为本规范中带可选中缀 `[Byps_]` 定义的、为该软件组件类型生成的所有元素的名称中。
+
+**SWS_Rte_07835**：如果某个软件组件类型的旁路支持组件包装方法被禁用，则 **RTE** 生成器应把可选中缀 `[Byps_]` 从为本规范中带可选中缀 `[Byps_]` 定义的、为该软件组件类型生成的所有元素的名称中移除。
+
+##### 6.2.9.3. 直接缓冲区访问方法
+
+直接缓冲区访问方法（**direct buffer access method**）提供对实现 **ECU** 通信基础设施的 **RTE** 缓冲区的运行时直接读和写访问。
+
+**RTE** 通过为这些缓冲区生成 `McSupportData` 来支持直接缓冲区访问方法。这已由 **RTE** 测量与标定支持提供，但出于快速原型的目的，还应生成额外的元素。
+
+旁路支持的组件包装方法按软件组件类型启用。
+
+如果该软件组件类型的单独开关 `RteBypassSupportEnabled` 设置为 true，则该软件组件类型的旁路支持组件包装方法被启用。
+
+**SWS_Rte_07836**：如果某个软件组件类型的旁路支持直接缓冲区访问方法被启用，则 **RTE** 生成器应为实现该软件组件类型隐式通信的每个抢占区特定缓冲区生成带 `mcDataAccessDetails` 的 `McSupportData`。
+
+##### 6.2.9.4. 扩展缓冲区访问方法
+
+扩展缓冲区访问方法（**extended buffer access method**）增强了对快速原型（**RP**）的支持，以支持旁路使用者无法重新生成 **RTE** 的旁路用例。目标是确保所有经由 **RTE API** 通信的 `VariableDataPrototype` 都写入一个可由快速原型工具（**RPT**）修改的 **RP** 全局缓冲区（**RP global buffer**）并从中读回。该方法适用于所有 **RTE API**，而不仅仅是隐式访问的 **API**，因此称为扩展缓冲区访问方法。
+
+图 4.55：扩展缓冲区访问方法
+
+![Figure4-55.png](Figure4-55.png)
+
+在扩展缓冲区访问方法中，一个 `VariableDataPrototype`、一个 `RTEEvent` 或一个完整的 `SwComponentPrototype` 可以在三个级别之一被标记为可快速原型，具体取决于是否使用构建后挂钩（**post-build hooking**）。`rptLevel1` 供构建后挂钩工具使用，`rptLevel2` 和 `rptLevel3` 供非构建后挂钩使用。从 **RTE API** 类别到所支持级别的映射由表 4.34 定义。
+
+表 4.34：**API** 类别与所支持的 **RPT** 级别表
+
+| API 类别 | rptLevel1 | rptLevel2 | rptLevel3 |
+| --- | --- | --- | --- |
+| 显式 S/R | 是 | 是 | 是 |
+| 隐式 S/R | 是 | 是 | 是 |
+| C/S | 是 | 是 | 是 |
+| 模式 | 是 | 是 | 是 |
+| 触发器 | 否 | 否 | 否 |
+| 显式 IRV | 是 | 是 | 是 |
+| 隐式 IRV | 是 | 是 | 是 |
+
+###### 6.2.9.4.1. 全局启用
+
+**SWS_Rte_06086**：如果通用开关 `RteBypassSupport` 设置为 `EXTENDED_BUFFER_ACCESS`，则扩展缓冲区访问方法被启用。
+
+当 `RteBypassSupport` 设置为 `EXTENDED_BUFFER_ACCESS` 以外的值时，不生成任何旁路支持，即不使用 **RP** 内存接口、不使用 **RP** 服务点等。
+
+当 `RteBypassSupport` 设置为 `EXTENDED_BUFFER_ACCESS` 时，还必须把 `RteBypassSupportEnabled` 和/或 `RteServicePointSupportEnabled` 设置为 true，才能为某个软件组件生成扩展缓冲区访问旁路支持。
+
+配置选项总结在表 4.35 中。
+
+表 4.35：扩展缓冲区访问方法的启用/禁用选项摘要
+
+| RteBypassSupport（全局） | RteBypassSupportEnabled（每 SWC） | RteServicePointSupportEnabled（每 SWC） | 效果 |
+| --- | --- | --- | --- |
+| `NONE` 或 `COMPONENT_WRAPPER` | 任意 | 任意 | **RTE** 不生成旁路支持。**RTE** 不生成 **RP** 导出 |
+| `EXTENDED_BUFFER_ACCESS` | FALSE | FALSE | **RTE** 在代码中不为 **SWC** 类型生成旁路支持（即无服务点、不使用 **RP** 内存接口）。**RP** 导出仅描述 **SWC** 内部服务点 |
+| `EXTENDED_BUFFER_ACCESS` | FALSE | TRUE | 为 **SWC** 生成服务点。不使用 **RP** 内存接口。**RP** 导出描述由此产生的 **SWC** 内部服务点和 **RTE** 分配的服务点 |
+| `EXTENDED_BUFFER_ACCESS` | TRUE | FALSE | 不为 **SWC** 生成服务点。为 **RTE API** 生成 **RP** 内存接口。**RP** 导出描述 **SWC** 内部服务点以及由此产生的 **RP** 缓冲区和启用标志 |
+| `EXTENDED_BUFFER_ACCESS` | TRUE | TRUE | 为 **SWC** 生成服务点。为 **RTE API** 生成 **RP** 内存接口。**RP** 导出描述由此产生的 **SWC** 内部服务点和 **RTE** 分配的服务点、**RP** 缓冲区和启用标志 |
+
+###### 6.2.9.4.2. RPT 准备
+
+`RptImplPolicy.rptPreparationLevel` 支持三个准备级别：
+
+* 级别 1——当 `RptImplPolicy.rptPreparationLevel` 设置为 `rptLevel1` 时，生成的 **RTE** 使用特定的内存访问模式（由 **RTE** 生成器创建的访问代码内的写-读周期），适合构建后挂钩工具对缓冲区的补丁写入。
+* 级别 2——当 `RptImplPolicy.rptPreparationLevel` 设置为 `rptLevel2` 时，除使用 **RP** 全局缓冲区（如 `rptLevel1`）之外，生成的代码还包含一个 **RP** 启用标志（**RP enabler flag**），用于使对 **RP** 全局缓冲区的更新成为条件性的。
+
+**RP** 启用标志可以位于（可标定的）**ROM** 或 **RAM** 中，取决于 `RptContainer.rptEnablerImplType`。
+
+* 级别 3——当 `RptImplPolicy.rptPreparationLevel` 设置为 `rptLevel3` 时，除 `rptLevel2` 的要求外，生成的代码还记录 **ECU** 生成的原始值以及 **RP** 替换值。
+
+当使用 `RptContainer` 的 `rptImplPolicy` 时，该 `RptContainer` 可以引用：
+
+* `VariableDataPrototype`——准备级别适用于单个数据项（因此例如相关的发送方-接收方 **API**）。
+* `ArgumentDataPrototype`——准备级别适用于单个操作参数（因此相关的客户端-服务器 **API**）。
+* `ModeDeclarationGroupPrototype`——准备级别适用于单个 `ModeDeclaration` 参数（因此相关的模式 **API**）。
+* 操作——准备级别适用于所有 `ClientServerOperation` 的 `ArgumentDataPrototype`（因此相关的客户端-服务器 **API**）。
+* `RunnableEntity`——准备级别适用于该 `RunnableEntity` 访问的所有数据项/参数。
+* `SwComponentPrototype`——准备级别适用于软件组件中的所有 `RunnableEntity`（因此所有被访问的数据项和参数）。
+
+###### 6.2.9.4.3. 级别 1——构建后挂钩
+
+该级别预期供构建后挂钩工具使用，后者对缓冲区的写入打补丁，使旁路值被写入缓冲区而非 **ECU** 计算的值。
+
+逻辑上，这意味着把类似以下的 **C** 语句：
+
+```c
+buffer = ecu_value;
+```
+
+打补丁为：
+
+```c
+buffer = f(ecu_value);
+```
+
+其中 `f()` 是由 **RP** 系统计算的函数，例如在外部 **RP** 硬件上。注意，示例中的函数调用在现实中可能只是对 **RP** 系统计算的值的一次简单访问，而非实际的函数调用。
+
+**显式发送方-接收方与 IRV API**
+
+作为启用扩展缓冲区访问方法的 `rptLevel1` 时生成的 **RTE** 代码变化的一个示例，考虑一个经由端口 P 以显式语义发送 `VariableDataPrototype` D 的 `[Rte_Write](#7164-rte_write)` **API**。"典型"的实现可能类似示例 4.15：
+
+**示例 4.15**：
+
+```c
+Std_ReturnType Rte_Write_P_D(<type> data)
+{
+   <send> data;
+   return <result of send>;
+}
+```
+
+其中 `<type>` 是该 `VariableDataPrototype` 的实现数据类型，`<send>` 表示发送过程（例如经由 **COM** 或直接访问），`<result of send>` 表示该 **RTE API** 的返回值。
+
+为支持 **RP**，示例 4.15 的实现修改如下：
+
+**示例 4.16**：
+
+```c
+/* RP global buffer */
+volatile <type> SWCA_Bypass_P_D;
+
+Std_ReturnType Rte_Write_P_D(<type> data)
+{
+   SWCA_Bypass_P_D = data;
+   <send> SWCA_Bypass_P_D;
+   return <result of send>;
+}
+```
+
+`rptLevel1` 支持带来的变化围绕对 **RP** 全局缓冲区的读/写。这些变化由以下两个要求总结：
+
+**SWS_Rte_06033**：当对以显式语义访问的 `VariableDataPrototype` 启用 `rptLevel1` 支持时，**RTE** 生成器应把每个关联的 IN 或 INOUT **API** 参数写入一个 **RP** 全局缓冲区。
+
+在生成的函数内对实际参数的后续访问改为使用该 **RP** 全局缓冲区。
+
+**SWS_Rte_06034**：当对以显式语义访问的 `VariableDataPrototype` 启用 `rptLevel1` 支持时，在 **RTE API** 内，**RTE** 生成器应从 **RP** 全局缓冲区读取关联 IN 和 INOUT 参数的值，而非使用形式参数。
+
+这些修改确保：如果 **RP** 工具对 **RP** 全局缓冲区 `SWCA_Bypass_P_D` 的写入打补丁，则 **RP** 工具写入 `SWCA_Bypass_P_D` 的值将被发送，而不是实际的函数参数 `data`。
+
+这些要求本身导致 **RP** 全局缓冲区存在，因此没有创建全局缓冲区的显式要求。但该缓冲区的特性受以下约束。
+
+**SWS_Rte_06035**：用于 `rptLevel1` 数据的 **RP** 全局缓冲区应标记为 `volatile`。
+
+`volatile` 关键字对于确保编译器优化不会消除 `<send> SWCA_Bypass_P_D` 中对 `SWCA_Bypass_P_D` 的读取至关重要。
+
+**SWS_Rte_06036**：**RP** 全局缓冲区的内容至少应在访问它的 **RTE** 函数的生命周期（即调用该 **RTE** 函数的可运行实体的生命周期）以及任何相关的测量与激励服务期间保持有效。
+
+**SWS_Rte_06037**：对于相同的 SWCI/**API** 类型/端口/变量数据原型，应始终使用同一个 **RP** 全局缓冲区。
+
+要求 **SWS_Rte_06037** 确保了构建后挂钩工具的稳定性，例如：如果我们有 SWCA 的 `Rte_Write_P_D`，则无论 SWCA 何时或如何调用 `Rte_Write_P_D`，都使用同一个 **RP** 全局缓冲区。由于 **RTE API** 是按 **SWC** 实例创建的，因此不同实例将使用不同的 **RP** 全局缓冲区。
+
+注意，要求 **SWS_Rte_06036** 指出的是所需的最低生命周期；在实现中，实际生命周期可能更长。
+
+上述要求并不表示必须创建专用的 **RP** 全局缓冲区。特别是，如果生成的 **RTE** 已包含一个特性满足 **RP** 全局缓冲区要求的缓冲区，则实现可以自由地复用现有缓冲区。
+
+作为另一个示例，考虑一个经由端口 P 接收 `VariableDataPrototype` D 的 `[Rte_Read](#71610-rte_read)` **API**。"典型"的实现可能类似示例 4.17：
+
+**示例 4.17**：
+
+```c
+Std_ReturnType Rte_Read_P_D(<type>* const data)
+{
+   *data = <receive>;
+   <notifications>;
+   return <result of receive>;
+}
+```
+
+其中 `<type>` 是该 `VariableDataPrototype` 的实现数据类型，`<receive>` 表示接收过程（例如来自 **COM** 或直接访问），`<notifications>` 表示（如果有的话）通知接收已发生的步骤，`<result of receive>` 表示该 **RTE API** 的返回值。
+
+当使用扩展缓冲区访问方法且 `rptPreparationLevel` 为 `rptLevel1`、`RptContainer` 引用 D 且 `rptReadAccess` 为 `rptReadAccess` 时，示例 4.17 的生成 **RTE API** 修改为示例 4.18：
+
+**示例 4.18**：
+
+```c
+volatile <type> SWCB_Bypass_P_D; /* RP global buffer */
+Std_ReturnType Rte_Read_P_D(<type>* const data)
+{
+   SWCB_Bypass_P_D = <receive>;
+   *data = SWCB_Bypass_P_D;
+   <notifications>;
+   return <result of receive>;
+}
+```
+
+**SWS_Rte_06038**：当对以显式语义访问的 `VariableDataPrototype` 启用 `rptLevel1` 支持时，**RTE** 生成器应把把接收数据写入关联 OUT 或 INOUT **API** 参数的操作，替换为对一个 **RP** 全局缓冲区的写入。
+
+**SWS_Rte_06039**：当对以显式语义访问的 `VariableDataPrototype` 启用 `rptLevel1` 支持时，**RTE** 生成器应在执行任何 **AUTOSAR** 数据接收通知之前（因此如果没有通知，则在 **API** 返回之前）把 **RP** 全局缓冲区的值复制到 OUT 或 INOUT **API** 参数。
+
+与显式写一样，这些要求确保：如果 **RP** 工具对 `SWCB_Bypass_P_D` 的写入打补丁，则该工具写入的值将返回给 **API** 调用方，而不是最初接收的值。
+
+**RP** 全局缓冲区的特性已在上文 `<send>` 过程中定义。特别是，`volatile` 关键字对于确保编译器优化不会消除 `*data = SWCB_Bypass_P_D` 中对 **RP** 全局缓冲区的读取至关重要。
+
+额外的 `volatile` **RP** 全局缓冲区也以与发送方-接收方 `[Rte_Read](#71610-rte_read)` 和 `[Rte_Write](#7164-rte_write)` **API** 类似的方式用于 **IRV** 参数。
+
+**与数据转换的交互**
+
+**SWS_Rte_06088**：在 `VariableDataPrototype` 在发送前需要数据转换的情况下，转换应在写入 **RP** 全局缓冲区之前发生。
+
+假定数据转换由函数 `f(x)` 表示，则示例中的 `[Rte_Write](#7164-rte_write)` **API** 将变为示例 4.19：
+
+**示例 4.19**：
+
+```c
+/* RP global buffer */
+volatile <type2> SWCA_Bypass_P_D;
+
+Std_ReturnType Rte_Write_P_D(<type> data)
+{
+   SWCA_Bypass_P_D = f(data);
+   <send> SWCA_Bypass_P_D;
+   return <result of send>;
+}
+```
+
+其中 `<type2>` 是转换后的数据类型。
+
+**隐式发送方-接收方与 IRV**
+
+对于隐式发送方-接收方与 **IRV** 通信，在上下文本地隐式通信缓冲区被初始化和写回时使用 **RP** 全局缓冲区。考虑一个经由端口 P 发送 `VariableDataPrototype` D 的 `[Rte_IWrite](#71620-rte_iwrite)` **API** 和一个经由端口 Q 读取 `VariableDataPrototype` E 的 `[Rte_IRead](#71618-rte_iread)` **API**。"典型"的实现可能类似：
+
+```c
+local_P_D = global_P_D;
+local_Q_E = global_Q_E;
+Runnable();
+global_P_D = local_P_D;
+```
+
+其中 `Runnable()` 使用 `Rte_IWrite_P_D()` 和 `Rte_IRead_Q_E()`，它们进而访问上下文本地缓冲区 `local_P_D` 和 `local_Q_E` 以提供所需的语义。
+
+当 `rptPreparationLevel` 为 `rptLevel1` 且容器引用以隐式方式访问的 `VariableDataPrototype` 时，修改如下：
+
+```c
+volatile <type> Bypass_P_D; /* RP global buffer */
+volatile <type> Bypass_Q_E; /* RP global buffer */
+```
+
+生成的任务体内部：
+
+```c
+TASK(...)
+{
+   volatile <type> local_P_D;
+   volatile <type> local_Q_E;
+
+   /* ... */
+
+   local_P_D = global_P_D;   /* Not changed */
+   Bypass_Q_E = global_Q_E;  /* Setup via RP global buffer */
+   local_Q_E = Bypass_Q_E;
+   Runnable();
+   Bypass_P_D = local_P_D;   /* Write-back via RP global buffer */
+   global_P_D = Bypass_P_D;
+}
+```
+
+为了使 **RP** 工具能够截获对隐式 **API** 所用上下文本地缓冲区的更新，扩展缓冲区访问方法以与显式 **API** 类似的方式使用一个 **RP** 全局缓冲区。
+
+**SWS_Rte_06040**：当对以隐式语义访问的 `VariableDataPrototype` 启用 `rptLevel1` 支持时，**RTE** 生成器应先把 **RP** 全局缓冲区从 **RTE** 全局变量/**COM** 信号更新，然后在可运行实体调用之前把抢占区特定缓冲区从 **RP** 全局缓冲区更新。
+
+**SWS_Rte_06087**：当对以隐式语义访问的 `VariableDataPrototype` 启用 `rptLevel1` 支持时，**RTE** 生成器应在可运行实体终止后，先把抢占区特定缓冲区写入 **RP** 全局缓冲区，然后从 **RP** 全局缓冲区更新 **RTE** 全局变量/**COM** 信号来执行任何写回。
+
+`Runnable()` 序列可以由对不同的可运行实体的一次或多次调用组成。每个可运行实体都有唯一的隐式 **API**，因此可能访问不同的上下文本地缓冲区。
+
+最后，对抢占区特定缓冲区的写入及其后的使用可以用作构建后挂钩所需的写-读周期。因此，在某些情况下，一个独立的 **RP** 全局缓冲区可以被优化掉，而使用抢占区特定缓冲区来强制实现所需的内存访问模式。
+
+**SWS_Rte_06091**：当启用 `rptLevel1` 支持时，**RTE** 生成器应通过按照对一个 **RP** 全局缓冲区的（实现）要求（**SWS_Rte_06035**、**SWS_Rte_06036**）实现抢占区特定缓冲区，来避免为隐式通信设置专用的 **RP** 全局缓冲区变量。
+
+例如在这种情况下，抢占区特定缓冲区需要声明为 `volatile`。
+
+**模式 API**
+
+模式 **API** 的处理方式与显式发送方-接收方 **API** 类似，实际函数参数在使用前被写入一个关联的 **RP** 全局缓冲区。
+
+**SWS_Rte_06107**：当对某个 `ModeDeclarationGroupPrototype` 启用 `rptLevel1` 支持时，**RTE** 生成器应把 **API** 参数写入一个 **RP** 全局缓冲区。
+
+在生成的函数内对实际参数的后续访问改为使用该 **RP** 全局缓冲区。
+
+**SWS_Rte_06108**：当对某个 `ModeDeclarationGroupPrototype` 启用 `rptLevel1` 支持时，在 **RTE API** 内，**RTE** 生成器应从 **RP** 全局缓冲区读取关联参数的值，而非使用形式参数。
+
+这些修改确保：如果 **RP** 工具对 **RP** 全局缓冲区的写入打补丁，则 **RP** 工具写入的值将被用作新模式，而不是实际的函数参数。
+
+作为另一个示例，考虑 `[Rte_Switch](#7166-rte_switch)` **API** 的典型实现（为清晰起见省略了错误处理），如示例 4.20 所示：
+
+**示例 4.20**：
+
+```c
+Std_ReturnType Rte_Switch_P_M( <type> newMode )
+{
+   if ( ! <in_transition> )
+   {
+      mode = newMode;
+      <notifications>
+   }
+   else
+   {
+      <enQueue>( newMode );
+   }
+   return E_OK;
+}
+```
+
+当使用扩展缓冲区访问方法且 `rptPreparationLevel` 为 `rptLevel1` 时，示例 4.20 的生成 **RTE API** 修改为示例 4.21：
+
+**示例 4.21**：
+
+```c
+/* RP global buffer */
+volatile <type> SWCA_Bypass_P_M;
+
+Std_ReturnType Rte_Switch_P_M( <type> newMode )
+{
+   SWCA_Bypass_P_M = newMode;
+
+   if ( ! <in_transition> )
+   {
+      mode = SWCA_Bypass_P_M;
+      <notifications>
+   }
+   else
+   {
+      <enQueue>( SWCA_Bypass_P_M );
+   }
+   return E_OK;
+}
+```
+
+**客户端-服务器 API**
+
+可以为操作内的单个参数启用 `rptLevel1` 支持。生成的支持因参数方向而异。
+
+**IN 参数**
+
+方向为 IN 的客户端-服务器参数在使用前被复制到一个专用的 **RP** 全局缓冲区变量，以确保所需的写-读周期。对按引用传递的 IN 参数使用深拷贝（**deep-copy**）。
+
+**SWS_Rte_06092**：当对方向为 IN 的 `ArgumentDataPrototype` 启用 `rptLevel1` 支持时，生成的 **RTE API** 应把该参数写入一个 **RP** 全局缓冲区。
+
+在生成的 **RTE** 函数内对实际参数的后续访问改为使用该 **RP** 全局缓冲区。
+
+**SWS_Rte_06093**：当对方向为 IN 的 `ArgumentDataPrototype` 启用 `rptLevel1` 支持时，**RTE** 生成器应从 **RP** 全局缓冲区读取关联参数的值，而非使用形式参数。
+
+这些修改确保：如果 **RP** 工具对 **RP** 全局缓冲区 `SWCA_Bypass_P_OP_a` 的写入打补丁，则 **RP** 工具写入 `SWCA_Bypass_P_OP_a` 的值将被服务器看到，而不是实际的函数参数 `a`。
+
+作为启用扩展缓冲区访问方法的 `rptLevel1` 时生成的 **RTE** 代码变化的一个示例，考虑一个经由端口 P 调用 `ClientServerOperation` OP 的 `[Rte_Call](#71613-rte_call)` **API**。"典型"的实现可能类似示例 4.22：
+
+**示例 4.22**：
+
+```c
+Std_ReturnType Rte_Call_P_OP([IN] <type> a)
+{
+   Server( a );
+   return E_OK;
+}
+```
+
+**SWS_Rte_06092** 和 **SWS_Rte_06093** 把示例 4.22 修改如下：
+
+**示例 4.23**：
+
+```c
+/* RP global buffer */
+volatile <type> SWCA_Bypass_P_OP_a;
+
+Std_ReturnType Rte_Call_P_OP([IN] <type> a)
+{
+   /* Copy to RP global buffer */
+   SWCA_Bypass_P_OP_a = a;
+   Server( SWCA_Bypass_P_OP_a );
+   return E_OK;
+}
+```
+
+**RP** 全局缓冲区依据 **SWS_Rte_06035** 为 `volatile`。
+
+**OUT 参数**
+
+当对方向为 OUT 的客户端-服务器参数启用 `rptLevel1` 支持时，服务器生成的值可以被 **RPT** 生成的值替换。在生成的代码中，服务器生成的值被捕获到一个专用的 **RP** 全局缓冲区中，然后在服务器完成后，经由一次允许 **RPT** 影响返回值的复制返回给客户端。
+
+**SWS_Rte_06094**：当对方向为 OUT 的 `ArgumentDataPrototype` 启用 `rptLevel1` 支持时，生成的 **RTE API** 应以指向一个 **RP** 全局缓冲区的引用替换该 OUT 参数来调用服务器。
+
+服务器调用之后，生成的 **RTE API** 必须把 **RPT** 生成的结果或服务器生成的结果返回给客户端。
+
+**SWS_Rte_06095**：当对方向为 OUT 的 `ArgumentDataPrototype` 启用 `rptLevel1` 支持时，**RTE** 生成器应从 **RP** 全局缓冲区复制关联参数的值。
+
+这些修改确保：如果 **RP** 工具对 **RP** 全局缓冲区 `SWCA_Bypass_P_OP_a` 的写入打补丁，则 **RP** 工具写入 `SWCA_Bypass_P_OP_a` 的值将被服务器看到，而不是实际的函数参数 `a`。
+
+作为启用扩展缓冲区访问方法的 `rptLevel1` 时生成的 **RTE** 代码变化的一个示例，考虑一个经由端口 P 调用 `ClientServerOperation` OP 的 `[Rte_Call](#71613-rte_call)` **API**。"典型"的实现可能类似示例 4.24：
+
+**示例 4.24**：
+
+```c
+Std_ReturnType Rte_Call_P_OP([OUT] <type> a)
+{
+   Server( a );
+   return E_OK;
+}
+```
+
+**SWS_Rte_06094** 和 **SWS_Rte_06095** 把示例 4.24 修改如下：
+
+**示例 4.25**：
+
+```c
+/* RP global buffer */
+volatile <type> SWCA_Bypass_P_OP_a;
+
+Std_ReturnType Rte_Call_P_OP([OUT] <type> a)
+{
+   /* Pass reference to RP global buffer to server */
+   Server( &SWCA_Bypass_P_OP_a );
+
+   /* Copy server value (possible modified by RPT) to client */
+   <deep-copy>( a, &SWCA_Bypass_P_OP_a );
+   return E_OK;
+}
+```
+
+**IN-OUT 参数**
+
+当对方向为 IN-OUT 的客户端-服务器参数启用 `rptLevel1` 支持时，服务器生成的值可以被 **RPT** 生成的值替换，同时服务器看到的值也可以被 **RPT** 修改。因此，除对 OUT 参数的支持外，还需要在服务器调用之前进行一次初始复制。
+
+**SWS_Rte_06096**：当对方向为 IN-OUT 的 `ArgumentDataPrototype` 启用 `rptLevel1` 支持时，生成的 **RTE API** 应在服务器调用之前用实际参数初始化 **RP** 全局缓冲区。
+
+服务器调用之后，生成的 **RTE API** 必须把 **RPT** 生成的结果或服务器生成的结果返回给客户端。
+
+**SWS_Rte_06097**：当对方向为 IN-OUT 的 `ArgumentDataPrototype` 启用 `rptLevel1` 支持时，**RTE** 生成器应从 **RP** 全局缓冲区复制关联参数的值。
+
+作为启用扩展缓冲区访问方法的 `rptLevel1` 时生成的 **RTE** 代码变化的一个示例，考虑一个经由端口 P 调用 `ClientServerOperation` OP 的 `[Rte_Call](#71613-rte_call)` **API**。"典型"的实现可能类似示例 4.26：
+
+**示例 4.26**：
+
+```c
+Std_ReturnType Rte_Call_P_OP([IN-OUT] <type> a)
+{
+   Server( a );
+   return E_OK;
+}
+```
+
+**SWS_Rte_06094** 和 **SWS_Rte_06095** 把示例 4.26 修改如下：
+
+**示例 4.27**：
+
+```c
+/* RP global buffer */
+volatile <type> SWCA_Bypass_P_OP_a;
+
+Std_ReturnType Rte_Call_P_OP([IN-OUT] <type> a)
+{
+   /* Copy in value (possible modified by RPT) to RP global buffer */
+   <deep-copy>( &SWCA_Bypass_P_OP_a, a );
+
+   /* Pass reference to RP global buffer to server */
+   Server( &SWCA_Bypass_P_OP_a );
+
+   /* Copy server value (possible modified by RPT) to client */
+   <deep-copy>( a, &SWCA_Bypass_P_OP_a );
+   return E_OK;
+}
+```
+
+###### 6.2.9.4.4. 级别 2——非构建后挂钩
+
+该级别用于 **RTE** 生成之后二进制代码保持不变的旁路场景——特别是与旁路相关的任何代码级要求都在生成 **RTE** 时插入。例如，可以像 `rptLevel1` 那样插入 **RP** 全局缓冲区，但同时添加运行时 **RP** 启用标志以控制缓冲区的使用方式。
+
+典型的 `[Rte_Write](#7164-rte_write)` 示例 4.15 变为示例 4.28：
+
+**示例 4.28**：
+
+```c
+/* RP global buffer */
+volatile <type> SWCA_Bypass_P_D;
+
+/* RP enabler flag */
+volatile <flag> SWCA_Bypass_P_D_Enable = FALSE;
+
+Std_ReturnType Rte_Write_P_D(<type> data)
+{
+   if ( FALSE == SWCA_Bypass_P_D_Enable )
+   {
+      SWCA_Bypass_P_D = data;
+   }
+   <send> SWCA_Bypass_P_D;
+   <notifications>;
+   return <result of send>;
+}
+```
+
+其中 `<type>`、`<send>`、`<notifications>` 和 `<result of send>` 与前相同。
+
+`rptLevel2` 在概念上与 `rptLevel1` 类似，但有一个附加约束：只有在 **RP** 启用标志被禁用<sup>11</sup>时，生成的 **RTE** 函数内才更新 **RP** 全局缓冲区。因此，当 **RP** 启用标志被禁用时，`rptLevel2` 与 `rptLevel1` 具有相同的语义。
+
+> 11 **RP** 启用标志使用反转逻辑描述，以反映旁路启用/禁用的要求。当 `rptLevel2`/`rptLevel3` 旁路被禁用时，我们希望 **API** 使用 **API** 的"data"参数中的值；而当 `rptLevel2`/`rptLevel3` 旁路被启用时，我们不希望 **API** 使用"data"参数中的值，因为 **RP** 服务点会在包含该 **API** 的可运行实体运行之前把旁路值写入 **RP** 全局缓冲区。
+
+**SWS_Rte_06041**：当对某个 `ModeDeclarationGroupPrototype` 或以显式语义访问的 `VariableDataPrototype` 启用 `rptLevel2` 支持且 **RP** 启用标志被禁用时，**RTE** 生成器应把每个关联的 IN 或 INOUT **API** 参数写入一个 **RP** 全局缓冲区，时机是在生成的函数内以其他方式使用该实际参数之前。
+
+在生成的函数内对实际参数的后续访问改为使用该 **RP** 全局缓冲区。
+
+**SWS_Rte_06042**：当对某个 `ModeDeclarationGroupPrototype` 或以显式语义访问的 `VariableDataPrototype` 启用 `rptLevel2` 支持时，在 **RTE API** 内，**RTE** 生成器应从 **RP** 全局缓冲区读取关联 IN 和 INOUT 参数的值，而非使用形式参数。
+
+典型的 `[Rte_Read](#71610-rte_read)` 示例 4.17 变为示例 4.29：
+
+**示例 4.29**：
+
+```c
+/* RP global buffer */
+volatile <type> SWCB_Bypass_P_D;
+
+/* RP enabler flag */
+volatile <flag> SWCB_Bypass_P_D_Enable = FALSE;
+
+Std_ReturnType Rte_Read_P_D(<type>* const data)
+{
+   <type> temp = <receive>;
+   if ( FALSE == SWCB_Bypass_P_D_Enable )
+   {
+      SWCB_Bypass_P_D = temp;
+   }
+   *data = SWCB_Bypass_P_D;
+   <notifications>;
+   return <result of receive>;
+}
+```
+
+**SWS_Rte_06043**：当对某个 `ModeDeclarationGroupPrototype` 或以显式语义访问的 `VariableDataPrototype` 启用 `rptLevel2` 支持且 **RP** 启用标志被禁用时，**RTE** 生成器应把发往每个关联 OUT 或 INOUT **API** 参数的值写入一个关联的 **RP** 全局缓冲区，时机是在生成的函数内接收到该值之后。
+
+**SWS_Rte_06044**：当对以显式语义访问的 `VariableDataPrototype` 启用 `rptLevel2` 支持时，在 **RTE API** 内，**RTE** 生成器应从各 **RP** 全局缓冲区读取关联 OUT 和 INOUT 参数的值，而非直接使用在生成的函数内接收到的值。
+
+可以为操作内的单个参数启用 `rptLevel2` 支持。生成的 **RP** 启用标志控制在生成的 **RTE API** 内服务器调用之前和/或之后的参数复制。
+
+对于 IN 和 IN-OUT 参数，生成的代码在服务器调用之前有条件地覆盖关联 **RP** 全局缓冲区中的值。该覆盖发生在 **RP** 启用标志被禁用时，因此旁路——使用 **RP** 生成的值——被启用。
+
+**SWS_Rte_06098**：当对方向为 IN 或 IN-OUT 的 `ArgumentDataPrototype` 启用 `rptLevel2` 支持且 **RP** 启用标志被禁用时，**RTE** 生成器应把发往每个 IN 或 IN-OUT **API** 参数的实际参数值写入一个关联的 **RP** 全局缓冲区，时机是在生成的函数内接收到该值之后。
+
+为了能够用 **RPT** 生成的值替换服务器生成的值，可以基于 **RP** 启用标志进行选择。
+
+**SWS_Rte_06099**：当对方向为 IN-OUT 或 OUT 的 `ArgumentDataPrototype` 启用 `rptLevel2` 支持且 **RP** 启用标志被禁用时，**RTE** 生成器应在把 **RP** 全局缓冲区复制到客户端的 IN-OUT 或 OUT 参数之前，先把服务器生成的值复制到该 **RP** 全局缓冲区。
+
+**SWS_Rte_06100**：当对方向为 IN-OUT 或 OUT 的 `ArgumentDataPrototype` 启用 `rptLevel2` 支持且 **RP** 启用标志被启用时，**RTE** 生成器应在服务器调用完成之后，把 **RP** 全局缓冲区复制到客户端的 IN-OUT 或 OUT 参数。注意，此时服务器生成的值被忽略。
+
+要求 **SWS_Rte_06099** 和 **SWS_Rte_06100** 要求输出来自两个不同的地方：旁路被禁用时的服务器生成值、以及旁路被启用时的 **RPT** 生成值。这隐含着使用一个传递给服务器的临时数据存储，以避免覆盖保存在 **RP** 全局缓冲区中的 **RPT** 值。
+
+**SWS_Rte_06101**：当对方向为 IN-OUT 的 `ArgumentDataPrototype` 启用 `rptLevel2` 支持时，生成的代码应为输入侧和输出侧旁路使用独立的 **RP** 启用标志。
+
+于是，`[Rte_Call](#71613-rte_call)` 示例 4.26 修改如下：
+
+**示例 4.30**：
+
+```c
+/* Input-side bypass */
+volatile <type> SWCA_BypassIN_P_OP_a;
+volatile <flag> SWCA_BypassIN_P_OP_Enable = FALSE;
+
+/* Output-side bypass */
+volatile <type> SWCA_BypassOUT_P_OP_a;
+volatile <flag> SWCA_BypassOUT_P_OP_Enable = FALSE;
+
+Std_ReturnType Rte_Call_P_OP([IN-OUT] <type> a)
+{
+   if ( FALSE == SWCA_BypassIN_P_OP_Enable )
+   {
+      /* RP disabled... use IN value */
+      <deep-copy>( &SWCA_BypassIN_P_OP_a, a );
+   }
+
+   /* Pass reference to RP global buffer to server */
+   Server( &SWCA_BypassIN_P_OP_a );
+
+   if ( FALSE == SWCA_BypassOUT_P_OP_Enable )
+   {
+      /* Output-side bypass disabled: use server value */
+      <deep-copy>( a, &SWCA_BypassIN_P_OP_a );
+   }
+   else
+   {
+      /* Copy RPT-initialized value to client */
+      <deep-copy>( a, &SWCA_BypassOUT_P_OP_a );
+   }
+
+   return E_OK;
+}
+```
+
+**注意：** `SWCA_BypassOUT_P_OP_a` 的更新在后台发生，未在示例 4.30 中展示。其发生的确切时点未定义，但会在它被生成的函数使用之前。
+
+对于 IN 和 OUT 参数，生成的代码与示例 4.30 类似，只是按需省略输入侧或输出侧旁路。
+
+**RP 启用标志**
+
+**RP** 启用标志根据标志状态控制生成的 **API** 如何与各 **RP** 全局缓冲区（例如由构建后挂钩工具更新的）交互：
+
+* 禁用——当某个 `VariableDataPrototype` 的 **RP** 启用标志被禁用时，**API** 接收到的值被写入各 **RP** 全局缓冲区，**API** 表现如常。
+* 启用——当某个 `VariableDataPrototype` 的 **RP** 启用标志被启用时，**SWS_Rte_06043** 定义的写不会发生，因此 **API** 忽略由可运行实体生成的数据，而使用写入各 **RP** 全局缓冲区的旁路值。
+
+**SWS_Rte_06075**：当对某个 `ModeDeclarationGroupPrototype` 或以显式语义访问的 `VariableDataPrototype` 启用 `rptLevel2` 支持时，在 **RTE API** 内，**RTE** 生成器应支持 **RP** 启用标志，以允许禁用对 **RP** 全局缓冲区的写入。
+
+**RP** 启用标志可以是 **RAM** 中的变量（如示例所示）、标定特性或两者——如输入配置所规定。用于 **RP** 启用标志的 `<type>` 取决于实现，例如 **AUTOSAR** 布尔量或位打包类型，但它会在生成的 **RP** 描述中描述，以便 **RPT** 访问。
+
+**SWS_Rte_06073**：当 `rptEnablerImplType` 为 `rptEnablerRam` 或 `rptEnablerRamAndRom` 时，**RTE** 生成器应在 **RAM** 中创建 **RP** 启用标志。
+
+**SWS_Rte_06074**：当 `rptEnablerImplType` 为 `rptEnablerRom` 时，**RTE** 生成器应把 **RP** 启用标志创建为标定特性。
+
+为了使旁路生效，生成的 **API** 必须在生成的代码内使用各 **RP** 全局缓冲区（按 **SWS_Rte_06043**、**SWS_Rte_06073** 和 **SWS_Rte_06074** 更新的），而非 **API** 输入时的值。
+
+**SWS_Rte_06079**：当 `rptEnablerImplType` 为 `rptEnablerRamAndRom` 时，两个 **RP** 启用标志在逻辑上相与（**AND**）。
+
+当同时使用 **RAM** 和标定特性时，其表述类似：
+
+**示例 4.31**：
+
+```c
+/* RP enabler flag (in RAM) */
+volatile <flag> SWCA_Bypass_P_D_Enable = FALSE;
+
+/* RP enabler flag (as a characteristic) */
+volatile const <flag> SWCA_Bypass_P_D_Enable_Char = FALSE;
+
+if ( ( FALSE == SWCA_Bypass_P_D_Enable ) &&
+     ( FALSE == SWCA_Bypass_P_D_Enable_Char ) )
+{
+   SWCA_Bypass_P_D = data;
+}
+```
+
+在上述示例中，`<flag>` 表示 **RP** 启用标志的数据类型。实现可以根据已知的硬件特性自由地提供启用器的优化实现，例如把多个启用标志打包进单个变量。
+
+###### 6.2.9.4.5. 级别 3——扩展的非构建后挂钩
+
+`rptLevel3` 是 `rptLevel2` 的扩展，但它还记录 **ECU** 计算的值。例如：
+
+**示例 4.32**：
+
+```c
+/* RP global buffer */
+volatile <type> SWCA_Bypass_P_D;
+
+/* RP global measurement buffer */
+volatile <type> SWCA_Bypass_P_D_Original;
+
+/* RP enabler flag */
+volatile <flag> SWCA_Bypass_P_D_Enable = FALSE;
+
+Std_ReturnType Rte_Write_P_D(<type> data)
+{
+   SWCA_Bypass_P_D_Original = data;
+   if ( FALSE == SWCA_Bypass_P_D_Enable )
+   {
+      SWCA_Bypass_P_D = data;
+   }
+   <send> SWCA_Bypass_P_D
+   return <result of send>
+}
+```
+
+**SWS_Rte_06045**：当对某个 `ModeDeclarationGroupPrototype` 或以显式语义访问的 `VariableDataPrototype` 启用 `rptLevel3` 支持时，**RTE** 生成器应在进入生成的函数时把关联的 IN 或 INOUT **API** 参数写入一个 **RP** 全局测量缓冲区（**RP global measurement buffer**）。
+
+**SWS_Rte_06046**：当对某个 `ModeDeclarationGroupPrototype` 或以显式语义访问的 `VariableDataPrototype` 启用 `rptLevel3` 支持且 **RP** 启用标志被禁用时，**RTE** 生成器应把每个关联的 IN 或 INOUT **API** 参数写入一个 **RP** 全局缓冲区，时机是在 **RP** 全局测量缓冲区更新之后、且在生成的函数内以其他方式使用该 **RP** 全局缓冲区之前。
+
+**SWS_Rte_06102**：当对某个 `ArgumentDataPrototype` 启用 `rptLevel3` 支持时，**RTE** 生成器应在进入生成的函数时把关联的 IN 或 INOUT **API** 参数写入一个 **RP** 全局测量缓冲区。
+
+**SWS_Rte_06103**：当对某个 `ArgumentDataPrototype` 启用 `rptLevel3` 支持且 **RP** 启用标志被禁用时，**RTE** 生成器应把每个关联的 IN 或 INOUT **API** 参数写入一个 **RP** 全局缓冲区，时机是在 **RP** 全局测量缓冲区更新之后、且在生成的函数内以其他方式使用该 **RP** 全局缓冲区之前。
+
+在生成的函数内对实际参数的后续访问改为使用该 **RP** 全局缓冲区。
+
+**SWS_Rte_06047**：当对某个 `ModeDeclarationGroupPrototype` 或以显式语义访问的 `VariableDataPrototype` 启用 `rptLevel3` 支持时，在 **RTE API** 内，**RTE** 生成器应从 **RP** 全局缓冲区读取关联 IN 和 INOUT 参数的值，而非使用形式参数。
+
+**SWS_Rte_06104**：当对某个 `ArgumentDataPrototype` 启用 `rptLevel3` 支持时，在 **RTE API** 内，**RTE** 生成器应从 **RP** 全局缓冲区读取关联 IN 和 INOUT 参数的值，而非使用形式参数。
+
+`[Rte_Read](#71610-rte_read)` **API** 同理：
+
+**示例 4.33**：
+
+```c
+/* RP global buffer */
+volatile <type> SWCB_Bypass_P_D;
+
+/* RP global measurement buffer */
+volatile <type> SWCB_Bypass_P_D_Original;
+
+/* RP enabler flag */
+volatile <flag> SWCB_Bypass_P_D_Enable = FALSE;
+
+Std_ReturnType Rte_Read_P_D(<type>* const data)
+{
+   <type> temp = <receive>;
+   SWCB_Bypass_P_D_Original = temp;
+   if ( FALSE == SWCB_Bypass_P_D_Enable )
+   {
+      SWCB_Bypass_P_D = temp;
+   }
+   *data = SWCB_Bypass_P_D;
+   return <result of receive>;
+}
+```
+
+**SWS_Rte_06048**：当对某个 `ModeDeclarationGroupPrototype` 或以显式语义访问的 `VariableDataPrototype` 启用 `rptLevel3` 支持时，**RTE** 生成器应把发往每个关联 OUT 或 INOUT **API** 参数的值写入一个关联的 **RP** 全局测量缓冲区，时机是在生成的函数内接收到该值之后。
+
+**SWS_Rte_06105**：当对某个 `ArgumentDataPrototype` 启用 `rptLevel3` 支持时，**RTE** 生成器应把发往每个关联 OUT 或 INOUT **API** 参数的值写入一个关联的 **RP** 全局测量缓冲区，时机是在生成的函数内服务器返回该值之后。
+
+**SWS_Rte_06049**：当对某个 `ModeDeclarationGroupPrototype` 或以显式语义访问的 `VariableDataPrototype` 启用 `rptLevel3` 支持且 **RP** 启用标志被禁用时，**RTE** 生成器应把发往每个关联 OUT 或 INOUT **API** 参数的值写入一个关联的 **RP** 全局缓冲区，时机是在 **RP** 全局测量缓冲区更新之后。
+
+**SWS_Rte_06106**：当对某个 `ArgumentDataPrototype` 启用 `rptLevel3` 支持且 **RP** 启用标志被禁用时，**RTE** 生成器应把发往每个关联 OUT 或 INOUT **API** 参数的值写入一个关联的 **RP** 全局缓冲区，时机是在 **RP** 全局测量缓冲区更新之后。
+
+**SWS_Rte_06050**：当对以显式语义访问的 `VariableDataPrototype` 启用 `rptLevel3` 支持时，在 **RTE API** 内，**RTE** 生成器应从各 **RP** 全局缓冲区读取关联 OUT 和 INOUT 参数的值，而非直接使用在生成的函数内接收到的值。
+
+于是，`[Rte_Call](#71613-rte_call)` 示例 4.26 修改如下：
+
+**示例 4.34**：
+
+```c
+/* Input-side bypass */
+volatile <type> SWCA_BypassIN_P_OP_a;
+volatile <type> SWCA_BypassINMeasurementBuf_P_OP_a;
+volatile <flag> SWCA_BypassIN_P_OP_Enable = FALSE;
+
+/* Output-side bypass */
+volatile <type> SWCA_BypassOUT_P_OP_a;
+volatile <type> SWCA_BypassOUTMeasurementBuf_P_OP_a;
+volatile <flag> SWCA_BypassOUT_P_OP_Enable = FALSE;
+
+Std_ReturnType Rte_Call_P_OP([IN-OUT] <type> a)
+{
+   /* rptLevel3: Retain input value */
+   <deep-copy>( &SWCA_BypassINMeasurementBuf_P_OP_a, a );
+   if ( FALSE == SWCA_BypassIN_P_OP_Enable )
+   {
+      /* RP disabled... use IN value */
+      <deep-copy>( &SWCA_BypassIN_P_OP_a, a );
+   }
+   else
+   {
+      /* RP enabled... do nothing & use value from RPT */
+   }
+
+   /* Pass reference to RP global buffer to server */
+   Server( &SWCA_BypassIN_P_OP_a );
+
+   /* rptLevel3: Retain server generated value */
+   <deep-copy>( &SWCA_BypassOUTMeasurementBuf_P_OP_a, &SWCA_BypassIN_P_OP_a );
+
+   if ( FALSE == SWCA_BypassOUT_P_OP_Enable )
+   {
+      /* Output-side bypass disabled: use server value */
+      <deep-copy>( a, &SWCA_BypassIN_P_OP_a );
+   }
+   else
+   {
+      /* Copy RPT-initialized value to client */
+      <deep-copy>( a, &SWCA_BypassOUT_P_OP_a );
+   }
+
+   return E_OK;
+}
+```
+
+对于 IN 和 OUT 参数，生成的代码与示例 4.34 类似，只是按需省略输入侧或输出侧旁路。
+
+###### 6.2.9.4.6. 级别 2 和 3——非构建后挂钩与隐式通信
+
+对于隐式通信，如果 **RP** 启用标志被禁用，则上下文本地缓冲区经由一次拦截从全局主副本（**global master**）更新。对 `rptLevel3`，原始（主副本）数据也被保存在 **RP** 全局测量缓冲区中。因此，任务内上下文本地缓冲区初始化的典型实现（在启用 `rptLevel3` 支持时）类似：
+
+**示例 4.35**：
+
+```c
+/* RP global buffer */
+volatile <type> SWCB_Bypass_P_D;
+
+/* RP global measurement buffer */
+volatile <type> SWCB_Bypass_P_D_Original;
+
+/* RP enabler flag */
+volatile <flag> SWCB_Bypass_P_D_Enable = FALSE;
+
+TASK(X)
+{
+   /* RP global measurement buffer = global master data */
+   SWCB_Bypass_P_D_Original = global_P_D;
+
+   if ( FALSE == SWCB_Bypass_P_D_Enable )
+   {
+      /* RP global buffer = global master data */
+      SWCB_Bypass_P_D = global_P_D;
+   }
+
+   /* context-local buffer */
+   local_P_D = SWCB_Bypass_P_D;
+   ...
+}
+```
+
+当 **RP** 启用标志被禁用时，全局主副本数据用于更新 `SWCB_Bypass_P_D`，因此 **RP** 生成的值不被使用。相反，当旁路被启用时，使用 **RPT** 写入 `SWCB_Bypass_P_D` 的值，而不是用全局主副本覆盖。
+
+**SWS_Rte_06051**：当对以隐式语义访问的 `VariableDataPrototype` 启用 `rptLevel3` 时，**RTE** 生成器应在上下文本地缓冲区（经由 **RP** 全局缓冲区）被更新之前更新 **RP** 全局测量缓冲区。
+
+**SWS_Rte_06052**：当对以隐式语义访问的 `VariableDataPrototype` 启用 `rptLevel2` 或 `rptLevel3` 且 **RP** 启用标志被禁用时，**RTE** 生成器应把全局主副本数据中的值写入 **RP** 全局缓冲区。
+
+**SWS_Rte_06053**：当对以隐式语义访问的 `VariableDataPrototype` 启用 `rptLevel2` 或 `rptLevel3` 时，**RTE** 生成器应在 **RP** 全局缓冲区被更新之后，把该 **RP** 全局缓冲区中的值写入上下文本地缓冲区。
+
+**SWS_Rte_06054**：**RTE** 生成器应按 **SWS_Rte_06051**、**SWS_Rte_06052**、**SWS_Rte_06053** 的顺序执行上述要求。
+
+可运行实体终止后，产生的值必须写回全局主副本。如果 **RP** 启用标志被禁用，写回经由一次拦截发生。对 `rptLevel3`，可运行实体产生的原始数据也被保存在 **RP** 全局测量缓冲区中。因此，任务内上下文本地缓冲区初始化的典型实现（在启用 `rptLevel3` 支持时）类似：
+
+**示例 4.36**：
+
+```c
+/* RP global buffer */
+volatile <type> SWCB_Bypass_P_D;
+
+/* RP global measurement buffer */
+volatile <type> SWCB_Bypass_P_D_Original;
+
+/* RP enabler flag */
+volatile <flag> SWCB_Bypass_P_D_Enable = FALSE;
+
+TASK(X)
+{
+   ...
+
+   /* RP global measurement buffer = context-local buffer */
+   SWCB_Bypass_P_D_Original = local_P_D;
+
+   if ( FALSE == SWCB_Bypass_P_D_Enable )
+   {
+      /* RP global buffer = context-local buffer */
+      SWCB_Bypass_P_D = local_P_D;
+   }
+
+   global_P_D = SWCB_Bypass_P_D;
+}
+```
+
+**SWS_Rte_06055**：当对以隐式语义访问的 `VariableDataPrototype` 启用 `rptLevel3` 时，**RTE** 生成器应使用上下文本地缓冲区更新 **RP** 全局测量缓冲区。
+
+**SWS_Rte_06056**：当对以隐式语义访问的 `VariableDataPrototype` 启用 `rptLevel2` 或 `rptLevel3` 且 **RP** 启用标志被禁用时，**RTE** 生成器应把上下文本地缓冲区中的值写入 **RP** 全局缓冲区。
+
+**SWS_Rte_06057**：当对以隐式语义访问的 `VariableDataPrototype` 启用 `rptLevel2` 或 `rptLevel3` 时，**RTE** 生成器应在 **RP** 全局缓冲区被更新之后，把该 **RP** 全局缓冲区中的值写入全局主副本。
+
+**SWS_Rte_06058**：**RTE** 生成器应按 **SWS_Rte_06055**、**SWS_Rte_06056**、**SWS_Rte_06057** 的顺序执行上述要求。
+
+###### 6.2.9.4.7. 导出
+
+**RTE** 生成器必须描述为支持某个 `VariableDataPrototype` 的已配置 `RptImplPolicy.rptPreparationLevel` 而创建的各种缓冲区和标志，以便该信息在 **RTE** 生成之后可被 **RP** 系统访问<sup>12</sup>。
+
+> 12 为被 **RPT** 系统完全使用，**RTE** 生成器导出的信息可能需要后续增补 **RTE** 生成器未知的细节，例如地址信息。
+
+生成的 **RP** 缓冲区、标志等由一个带有特定角色的单独 `McDataInstance` 描述，例如 `RP_GLOBAL_BUFFER`，用以说明其用途。该角色可以描述以下内容：
+
+1. **RP** 全局缓冲区。
+2. **RP** 启用标志（`rptLevel2`/`rptLevel3`）。
+3. **RP** 全局测量缓冲区（`rptLevel3`）。
+4. **RP** 激励启用标志。
+
+该 `McDataInstance` 包含对相关 `FlatInstanceDescriptor` 的引用。该引用与 **RTE** 缓冲区的 `McDataInstance` 中包含的引用相同，因此允许 **RP** 工具在 **RTE** 管理的缓冲区与 **RP** 缓冲区/标志之间建立关联。
+
+##### 6.2.9.5. 基于服务的原型化
+
+对 **RP** 全局缓冲区和 **RP** 全局测量缓冲区的访问可以通过使用基于服务的 **ECU** 接口来实现，其中向 **ECU** 应用添加一个额外的 **RP** 服务组件（**RP service component**），例如"XCP on CAN"或"XCP on Ethernet"服务。
+
+该服务的集成可以在构建前通过基于源代码的集成方式执行，例如添加一个 **XCP** 或自定义 **BSW** 组件；也可以在构建后通过对已编译 **ECU** 镜像的二进制代码打补丁来执行。
+
+在基于服务的场景中，数据在 **RP** 服务点（**RP service point**）被采样和/或激励。在采样或激励期间，数据在 **RP** 服务点执行期间从与 `VariableDataPrototype` 关联的内存读取和/或写入到本地缓冲区，从而传输到/来自 **RP** 工具。在 **RTE** 的上下文中，被 **RP** 服务点激励的数据是各 **RP** 全局缓冲区和 **RP** 全局测量缓冲区，但任何可测量的数据都可能被读取。
+
+**RP** 服务点只是一次对 **RP** 服务函数（**RP service function**）的调用，该函数由 **RP** 服务组件提供。**RP** 服务函数负责采样（读取）和激励（写入）旁路数据。采样的动作随后可能触发 **RP** 系统执行旁路（这可能涉及把采样的数据传送到外部系统进行计算），以便在激励发生时读取。
+
+###### 6.2.9.5.1. 快速原型场景
+
+扩展缓冲区访问方法对 `RapidPrototypingScenario` 进行增强以支持基于服务的旁路。一个 `RapidPrototypingScenario` 聚合一个或多个 `RptContainer` 和一个或多个 `RptProfile`。
+
+* `RptProfile`——每个 profile 定义一个 **RP** 服务 profile，包括：
+  * 允许的 **RP** 服务点 ID 范围，定义为 `minServicePointId` 到 `maxServicePointId`。
+  * 在可运行实体之前和之后调用的 **RP** 服务函数的 **C** 符号。
+* `RptContainer`——每个 `RptContainer` 定义要被对 **RP** 服务函数的调用所封装的实体。单个 `RptContainer` 实例可以引用一个完整的 **SW-C**（在这种情况下，其可运行实体的所有调用都被对 **RP** 服务函数的调用封装）、单个 `RTEEvent` 或单个 `VariableDataPrototype`。
+
+一个 `RptContainer` 可以可选地定义一个或多个 `explicitRptProfileSelection` 引用。当存在时，这些引用提供实现 **RPT** 支持时需要应用的 `RptProfile` 列表。当没有定义 `explicitRptProfileSelection` 引用时，`RapidPrototypingScenario` 中定义的所有 `RptProfile` 都适用。
+
+`RptContainer` 中的 `RptExecutableEntityProperties` 聚合 **RP** 服务点所适用的可执行实体的属性信息。这包括定义 **RP** 服务点生成开关的 `rptServicePoint`，从而允许各 profile 定义可变的准备和/或服务点支持。
+
+对每个适用的 `RptProfile`（即经由 `explicitRptProfileSelection` 引用选择的、或在无此类引用时通过使用所有 profile），**RTE** 生成器在由每个聚合的 `RptContainer` 所引用 `RTEEvent` 启动的可运行实体（或多个可运行实体）的调用前后插入对 **RP** 服务函数的调用。
+
+**示例 4.37**：
+
+作为 `RptProfile` 与 `RptContainer` 如何交互的示例，考虑以下场景：
+
+* 一个 `RapidPrototypingScenario` 实例聚合单个 `RptProfile` 实例。
+* 一个 `RptProfile` 实例聚合两个 **RP** 服务函数：
+  * `servicePointSymbolPre` 定义 `ServiceFunc1_pre`。
+  * `servicePointSymbolPost` 定义 `ServiceFunc1_post`。
+* 一个 `RptContainer` 实例（无 `explicitRptProfileSelection` 引用）：
+  * 零个 `explicitRptProfileSelection` 引用。
+  * 使用 `byPassPoint` 引用触发可运行实体 re1 的单个 `RTEEvent` Event1。
+
+**RTE** 随后将生成：
+
+```c
+ServiceFunc1_pre(<rptEventId>, <spId1>, <stim>);
+re1();
+ServiceFunc1_post(<rptEventId>, <spId2>, <stim>);
+```
+
+其中：
+
+* **RTE** 事件标识符 `<rptEventId>` 标识该 **RTE** 事件，并且位于 `RptExecutableEntityProperties` 的区间 [`minRptEventId..maxRptEventId`) 内。
+* **RP** 服务点 ID `<spId1>` 和 `<spId2>` 标识服务点，并且位于该 `RptProfile` 的区间 [`minServicePointId..maxServicePointId`) 内。
+* `<stim>` 是用于控制 **RP** 激励的 **RP** 激励启用标志。
+
+为扩展示例 4.37，向该 `RapidPrototypingScenario` 添加一个引用 **RP** 服务函数 `ServiceFunc2`（前与后）的额外 `RptProfile`。
+
+**示例 4.38**：
+
+**RTE** 随后将生成：
+
+```c
+ServiceFunc1_pre(<rptEventId>, <spId1>, <stim>);
+ServiceFunc2(<rptEventId>, <spId2>, <stim>);
+re1();
+ServiceFunc1_post(<rptEventId>, <spId3>, <stim>);
+ServiceFunc2(<rptEventId>, <spId4>, <stim>);
+```
+
+每个 **RP** 服务函数使用相同的 **RTE** 事件标识符（即 `<rptEventId>`），因为所有四个调用封装的是同一个可运行实体调用，但每个使用不同的 **RP** 服务点 ID。
+
+多个 `RptProfile` 可以为同一个 `RTEEvent` 导致多个 **RP** 服务函数。所有此类调用按字母顺序排序（**SWS_Rte_06061**），具有相同的 **RTE** 事件标识符但不同的 **RP** 服务点 ID。
+
+###### 6.2.9.5.2. 服务函数
+
+**RP** 服务函数负责采样所需的数据。**RP** 服务函数的参数不包含数据，相反，参数标识 **RTE** 事件和服务点：
+
+* `<rptEventId>`——指示相关 **RTE** 事件的 **RTE** 事件标识符。
+
+该参数由 `RptContainer` 的 `RptExecutableEntityProperties` 定义，因此对该 `RptContainer` 内聚合的所有 `RptProfile` 相同。
+
+* `<servicePointId>`——**RP** 服务点 ID，由 **RP** 服务组件用于标识特定服务点。
+
+该参数由 `RptProfile` 定义，因此对每个 profile 不同。
+
+* `<stimEnabler>`——控制 **RP** 激励的可标定值。该参数是可选的，如果未配置，则向 **RP** 服务函数传递零。
+
+该参数由 `RptProfile` 定义，因此对每个 profile 不同。
+
+**SWS_Rte_06059**：**RP** 服务点 ID 应具有 `uint16` 类型。
+
+**SWS_Rte_06060**：对 **RP** 服务函数的一次调用应符合原型：
+
+```c
+void <RptServiceSymbol>( uint16 <rptEventId>, uint16 <servicePointId>, uint8 <stimEnabler> );
+```
+
+其中 `<RptServiceSymbol>` 被规定为 `RptProfile.servicePointSymbolPre` 或 `RptProfile.servicePointSymbolPost`，`<servicePointId>` 是 **RP** 服务点 ID。`<stimEnabler>` 提供对 **RP** 激励的运行时控制。
+
+注意，鉴于已定义的类型，**RP** 服务点 ID 的范围为 [0..65535]。
+
+**SWS_Rte_06061**：对于输入配置定义的所有 **RP** 服务函数，**RTE** 生成器应按字母顺序（**ASCII**/ISO 8859-1 代码升序）调用各 **RP** 服务函数。
+
+为避免歧义，两个 `RptProfile` 不允许声明相同的 `<RptServiceSymbol>`。
+
+**SWS_Rte_06076**：**RTE** 生成器应拒绝 `RptProfile.servicePointSymbolPre` 或 `RptProfile.servicePointSymbolPost` 不全局唯一的配置。
+
+"前"（pre）与"后"（post）位置提供了区分在可运行实体调用之前和之后调用的 **RP** 服务点的能力（如果需要）。这两次调用将具有相同的 **RP** 事件 ID，但不同的 **RP** 服务点 ID。
+
+为允许一个 `RptProfile` 描述可变的准备和/或服务点，`RptContainer` 内的 `rptServicePoint` 定义了一个启用/禁用开关：
+
+**SWS_Rte_06120**：**RTE** 生成器应只在 `RptContainer` 的 `rptServicePoint` 参数为启用时，创建对由某个 `RptProfile` 定义的 **RP** 服务函数的调用。
+
+###### 6.2.9.5.2.1. RP 激励启用器
+
+**RP** 激励启用标志参数提供由 **RP** 服务函数对 **RP** 激励的运行时控制。示例 4.39 展示了同一个值作为 `<stimEnabler>` 参数传递给前和后 **RP** 服务点。
+
+**示例 4.39**：
+
+```c
+ServiceFunc1_pre(<rptEventId>, <spId1>, <stimEnabler>);
+if (! <rp_disabler_flag>)
+{
+   re1();
+}
+ServiceFunc1_post(<rptEventId>, <spId2>, <stimEnabler>);
+```
+
+`<stimEnabler>` 参数具有固定的 `uint8` 数据类型，并且在配置后作为可标定项导出到 `RptSupportData` 中。
+
+**SWS_Rte_06111**：当 `RptProfile.stimEnabler` 为 `rptEnablerRam` 或 `rptEnablerRom` 时，`<stimEnabler>` 的值应作为 **RP** 服务函数调用的第三个参数传递。
+
+**SWS_Rte_06112**：当 `RptProfile.stimEnabler` 为 `none` 时，**RP** 服务函数调用的第三个参数应为 0（零）。
+
+**SWS_Rte_06115**：**RTE** 生成器应拒绝 `RptProfile.stimEnabler` 为 `rptEnablerRamAndRom` 的配置。
+
+每个 **RP** 服务点都有自己的 `<stimEnabler>` 参数。因此，有多少个被启用的 **RP** 服务点，就有多少个 `<stimEnabler>` 参数，即 1000 个启用了 `RptProfile.stimEnabler` 的服务点将产生 1000 个可标定的 `<stimEnabler>` 参数。
+
+除了实例化 `<stimEnabler>` 参数之外，**RTE** 生成还必须在生成的 `RptSupportData` 中输出信息，以便下游工具能够定位该可标定参数。
+
+**SWS_Rte_06110**：当 `RptProfile.stimEnabler` 不是 `none` 时，`<stimEnabler>` 的描述应导出到 `RptSupportData` 中。
+
+可标定的 `<stimEnabler>` 参数由 **MC** 或 **RP** 工具访问。为了能够标识不同的参数，生成的可标定值的名称包括被挂钩的 **RTE**/**BSW** 事件的名称。
+
+**SWS_Rte_06109**：生成的 `<stimEnabler>` 参数的名称应包括被引用的被挂钩 `SwComponentPrototype` 和 `RTEEvent`/`BswEvent` 的名称。
+
+###### 6.2.9.5.3. 集成
+
+构建前集成 **RP** 服务点有两种可能：要么作为由 **SWC** 开发者插入的 **SWC** 内部（**SWC Internal**）服务点，要么作为由 **RTE** 生成器创建的 **RTE** 分配（**RTE Assigned**）服务点。
+
+**SWC 内部**：在此场景中，提供该服务的 **BSW** 的 **RP** 服务函数签名是 **SWC** 开发者已知的。
+
+**SWC** 开发者在 `RunnableEntity` 代码内的所需位置实现 **RP** 服务函数调用，通常在每个需要准备旁路的区域之前和之后各一个。该机制通常用于迁移场景，其中单个 `RunnableEntity` 包含多个功能。
+
+**SWC** 开发者必须在 **AUTOSAR SWC** 描述的 `RunnableEntity` 信息上下文中记录集成的 **RP** 服务点，无论其用于采样还是激励 **RP** 数据。
+
+在此场景中，不要求 **RTE** 生成器在生成的代码内插入 **RP** 服务点调用。此外，**RTE** 生成器不负责分配 **RP** 服务点 ID，这些 ID 在创建 **RP** 服务函数调用时被选择。但是 **RTE** 生成器必须确保 **SWC** 服务钩子的描述被导出以供后续工具使用。
+
+* **RTE 分配**：在此场景中，**RTE** 生成器对 **SWC** 描述进行评估以找到所需的 **SWC RP** 服务点，并把它们添加到可运行实体调用之前和之后的专用位置。
+
+在下面的讨论中，**SWC RP** 服务点调用的位置由以下伪代码定义（用于可运行实体的调用）：
+
+**示例 4.40**：
+
+```c
+[Point A]
+<update context-local buffers>
+<VFB Runnable Start>();
+[runnable invocation]
+<VFB Runnable Return>();
+[Point B]
+<update global buffers>
+<RTE notifications>
+```
+
+**SWS_Rte_06064**：当某个 `RptContainer` 引用一个 `SwComponentPrototype` 时，**RTE** 生成器应在 [Point A] 和 [Point B] 两处、为每个适用的 `RTEEvent`/`BswEvent`、为每个 `RptProfile` 插入 **RP** 服务点。
+
+**SWS_Rte_06089**：当某个 `RptContainer` 引用一个 `SwComponentPrototype` 中的 `RTEEvent`/`BswEvent` 时，**RTE** 生成器应在 [Point A] 和 [Point B] 两处、为每个适用的 `RptProfile` 插入 **RP** 服务点。
+
+**SWS_Rte_06090**：当某个 `RptContainer` 引用一个 `VariableDataPrototype` 时，**RTE** 生成器应在 [Point A] 和 [Point B] 两处、为每个适用的 `RptProfile`、为每个能够读/写该 `VariableDataPrototype` 的 `RTEEvent`/`BswEvent` 插入 **RP** 服务点。
+
+`RunnableEntity` 的调用可能是条件性的，例如当多个 `RTEEvent` 映射到任务时作为执行预分频（**pre-scaling**）的结果。如果是这样，则 **RP** 服务点的执行具有相同的条件性。
+
+**SWS_Rte_06065**：**RTE** 生成器只应在该可执行实体在 [runnable invocation] 处受调用支配时，才在 [Point A] 和 [Point B] 调用 **SWC RP** 服务点。
+
+注意，如果执行会与旁路功能冲突，可执行实体的调用仍可能被省略；见下文。
+
+###### 6.2.9.5.4. 服务点 ID
+
+**RTE** 输入配置可能包含来自多个供应商的 **SWC**，每个 **SWC** 都包含 **SWC** 内部 **RP** 服务点 ID。同一个 **RP** 服务点 ID 绝不能在同一 **ECU** 应用中被使用两次，因此 **RTE** 生成器必须拒绝导致重复的输入配置——不允许重新映射 **RP** 服务点 ID。
+
+**RTE** 生成器应拒绝包含具有重复 **SWC** 内部 **RP** 服务点 ID 的 **SWC** 的配置。
+
+除 **SWC** 内部 **RP** 服务点 ID 之外，**RTE** 生成器还必须分配用于 **RTE** 钩子的 **RP** 服务点 ID。为避免与 **SWC** 内部 **RP** 服务点 ID 冲突，输入配置为此类 **RP** 服务点描述了允许的 ID 范围。
+
+为了区分前与后 **RP** 服务点调用，使用不同的 **RP** 服务点 ID——每次 **RP** 服务点调用使用一个唯一 ID。
+
+**SWS_Rte_06067**：**RTE** 生成器应为 [Point A] 和 [Point B] 处的 **RP** 服务点调用，从允许的范围内分配下一个未使用的 **RP** 服务点 ID。
+
+**SWS_Rte_06068**：允许的范围定义为 `minServicePointId` 到 `maxServicePointId`（含）。
+
+**RTE** 生成器分配的 **RP** 服务点 ID 作为 `RptProfile` 的一部分记录在生成的配置中。[Point A] 和 [Point B] 的位置见示例 4.40。
+
+###### 6.2.9.5.5. 条件性 RunnableEntity 调用
+
+除数据旁路之外，在 [Point A]（见示例 4.40）处对 **RP** 服务函数的调用可能触发替代原始 `RunnableEntity` 执行的计算，原因可以是执行将是冗余的或具有不期望的副作用。因此，可以把执行设为条件性的，从而上述伪代码的 [runnable invocation] 元素被替换为：
+
+**示例 4.41**：
+
+```c
+if ( FALSE == <RPRunnableDisablerFlag> )
+{
+   [VFB Trace event - runnable start]
+   symbol() /* runnable invocation */
+   [VFB Trace event - runnable return]
+}
+```
+
+原始 `symbol` 的条件执行与调用的正常条件性无关，例如由于当多个 `RTEEvent` 映射到任务时由 **RTE** 生成器创建的预分频器。即使 **RP** 可运行实体禁用标志为 `TRUE`，预分频器的修改（例如递增）也应发生。示例 4.42 展示了 **RP** 可运行实体禁用标志与 **RTE** 生成的条件执行（每五次任务激活调用一次可运行实体）的组合。
+
+**示例 4.42**：
+
+```c
+if ( --Rte_RunnableDivide == 0 )
+{
+   Rte_RunnableDivide = 5u;
+   if ( FALSE == <RPRunnableDisablerFlag> )
+   {
+      [VFB Trace event - runnable start]
+      symbol() /* runnable invocation */
+      [VFB Trace event - runnable return]
+   }
+}
+```
+
+**SWS_Rte_06069**：当输入的 `rptExecutionControl` 为 conditional 时，**RTE** 生成器只应在可运行实体禁用标志为 `FALSE` 时调用该 `symbol`。
+
+注意，没有控制 `RTEEvent` 执行的能力，因为其意图是无论触发事件是什么都避免可运行实体的副作用，因此相同的条件性适用于该可运行实体的所有使用。
+
+**SWS_Rte_06077**：对于输入 `rptExecutionControl` 中的每个 conditional，**RTE** 生成器应在导出的 `RptSupportData` 中记录生成的 **RP** 可运行实体禁用标志。
+
+###### 6.2.9.5.6. 与 RTE 管理的缓冲区的交互
+
+`<update context-local buffers>` 伪代码负责基于 **RP** 服务函数调用所执行的更新来操纵 **RTE** 管理的上下文本地缓冲区（即用于隐式通信的那些），因此它必须发生在 [Point A] 和 [Point B] 的调用之后（[Point A] 和 [Point B] 的位置见示例 4.40）。
+
+`<update context-local buffers>` 伪代码使用各 **RP** 全局缓冲区更新上下文本地缓冲区，因此潜在地使用 **RP** 服务函数在 [Point A] 提供的值。
+
+作为 `rptLevel3` 旁路（包括在运行时启用/禁用旁路的能力）的一个示例，`<update context-local buffers>` 伪代码可以实现如下：
+
+**示例 4.43**：
+
+```c
+/* RP global measurement buffer = global master data */
+SWCB_Bypass_P1_D_Original = global_P1_D;
+
+if ( FALSE == SWCB_Bypass_P1_D_Enable )
+{
+   /* Bypass disabled */
+   /* RP global buffer = global master data */
+   SWCB_Bypass_P1_D = SWCB_Bypass_P1_D_Original;
+}
+
+/* context-local buffer */
+local_P1_D = SWCB_Bypass_P1_D;
+```
+
+类似地，[Point B] 之后的 `<update global buffers>` 伪代码使用 **RTE** 管理的上下文本地缓冲区来更新 **RTE** 管理的全局缓冲区，使用 **RP** 全局缓冲区值或上下文本地值（如果使用包含运行时旁路启用/禁用的 `rptLevel2` 或 `rptLevel3` 旁路）。因此，`<update global buffers>` 必须发生在 **RP** 服务点 [Point B] 之后、但在 `<RTE notifications>` 处已配置的通知发出之前。
+
+**示例 4.44**：
+
+```c
+/* RP global measurement buffer = context-local buffer */
+SWCB_Bypass_P2_D_Original = local_P2_D;
+
+if ( FALSE == SWCB_Bypass_P2_D_Enable )
+{
+   /* Bypass disabled */
+   /* RP global buffer = context-local buffer */
+   SWCB_Bypass_P2_D = local_P2_D;
+}
+
+global_P2_D = SWCB_Bypass_P2_D;
+```
+
+###### 6.2.9.5.7. 导出
+
+对于 **SWC** 内部和 **RTE** 分配的 **RP** 服务点 ID，**RTE** 生成器必须描述被调用的 **RP** 服务函数，以便该信息在 **RTE** 生成之后可被 **RP** 系统访问<sup>13</sup>。
+
+> 13 为被 **RPT** 系统完全使用，**RTE** 生成器导出的信息可能需要后续增补 **RTE** 生成器未知的细节，例如地址信息。
+
+导出的 **RTE** `McSupportData` 用于描述生成的配置，包括：
+
+* 描述 **RP** 执行上下文的 `RptSupportData`
+* 被调用的 **RP** 服务点（无论 **SWC** 内部还是 **RTE** 分配的）
+* `RptExecutableEntityEvent` 与前功能 **RP** 服务点之间的关系
+* `RptExecutableEntityEvent` 与后功能 **RP** 服务点之间的关系
+* `RptExecutableEntityEvent` 与 **RP** 可运行实体禁用标志之间的关系
+
+在以下要求中，[Point A] 和 [Point B] 指示例 4.40 中定义的位置。
+
+**SWS_Rte_06080**：当某个 `RunnableEntity` 对某个按 **SWS_Rte_06064** 生成 **RP** 服务点的 `VariableDataPrototype` 具有隐式读访问时，**RTE** 生成器应在相应的 `RptExecutableEntityEvent` 处导出 `rptServicePointPre`，记录在 [Point A] 生成的 **RP** 服务点。
+
+**SWS_Rte_06081**：当某个 `RunnableEntity` 对某个按 **SWS_Rte_06064** 生成 **RP** 服务点的 `VariableDataPrototype` 具有隐式写访问时，**RTE** 生成器应在相应的 `RptExecutableEntityEvent` 处导出 `rptServicePointPost`，记录在 [Point B] 生成的 **RP** 服务点。
+
+**SWS_Rte_06082**：当某个 `RunnableEntity` 对某个按 **SWS_Rte_06064** 生成 **RP** 服务点的 `VariableDataPrototype` 具有显式读访问时，**RTE** 生成器应在相应的 `RptExecutableEntityEvent` 处导出 `rptServicePointPost`，记录在 [Point B] 生成的 **RP** 服务点。
+
+**SWS_Rte_06083**：当某个 `RunnableEntity` 对某个按 **SWS_Rte_06064**、**SWS_Rte_06089** 或 **SWS_Rte_06090** 生成服务点的 `VariableDataPrototype` 具有显式写访问时，**RTE** 生成器应在相应的 `RptExecutableEntityEvent` 处导出 `rptServicePointPre`，记录在 [Point A] 生成的 **RP** 服务点。
+
+**SWS_Rte_06084**：当某个 `RunnableEntity` 对某个按 **SWS_Rte_06064**、**SWS_Rte_06089** 或 **SWS_Rte_06090** 生成服务点的 `VariableDataPrototype` 具有显式读或写访问时，**RTE** 生成器应在相应的 `RptExecutableEntityEvent` 处导出 `rptServicePointPre`，记录在 [Point A] 生成的 **RP** 服务点。
+
+**SWS_Rte_06085**：当某个 `RunnableEntity` 对某个按 **SWS_Rte_06064**、**SWS_Rte_06089** 或 **SWS_Rte_06090** 生成 **RP** 服务点的 `VariableDataPrototype` 具有显式读或写访问时，**RTE** 生成器应在相应的 `RptExecutableEntityEvent` 处导出 `rptServicePointPost`，记录在 [Point B] 生成的 **RP** 服务点。
+#### 6.2.10. 数据转换
+
+转换器（**Transformer**）使 **AUTOSAR** 系统能够使用数据转换机制来线性化和变换数据。它们可以串联成转换器链（**transformer chain**），并由 **RTE** 为被配置为转换的 **ECU** 间通信执行。链中第一个转换器的输入从 **RTE** 获取数据。每个后续转换器使用前一个转换器的输出作为输入。第一个转换器之后的所有转换器都具有只以字节数组作为 IN 和 OUT 参数的通用签名。这样的架构可用于设计能够灵活地向序列化数据流添加安全（**safety**）或信息安全（**security**）保护等功能的系统。
+
+**ECU** 间通信的转换器在系统描述中配置。
+
+此外，**RTE** 可以执行 **ECU** 内通信的转换器，以在一个 **ECU** 内的软件组件或基础软件模块之间变换数据结构的不同表示。**ECU** 内通信的转换器限于非排队的 S/R 通信。此外，不适用转换器链。提出这些限制是因为对当前已知的用例而言，不需要引入该功能。
+
+转换器的执行和必要的缓冲区处理由 **RTE** 协调。
+
+##### 6.2.10.1. 转换器的执行
+
+###### 6.2.10.1.1. 用于 ECU 间通信的转换器
+
+**SWS_Rte_08794**：如果某个 `DataTransformation` 被一个 `ISignal` 引用，且该 `ISignal` 引用的 `SystemSignal`：
+
+1. 被某个 `SenderReceiverToSignalMapping`、`ClientServerToSignalMapping` 或 `TriggerToSignalMapping` 引用，
+2. 或者作为 `transformingSystemSignal` 角色被某个 `SystemSignalGroup` 引用，且该 `SystemSignalGroup` 被某个 `SenderReceiverToSignalGroupMapping` 引用，
+
+则 **RTE** 应为 **ECU** 间通信执行数据转换。
+
+**注意：**
+
+在 **ECU** 间通信发生扇入、且各 `ISignal` 使用不同数据转换的情况下，**RTE** 必须确保执行属于该特定 `ISignal` 的正确的转换器链。这例如可以通过在 **Com** 回调中记住接收到的数据属于哪个 `DataTransformation` 来实现。
+
+**SWS_Rte_08795**：对于排队（事件语义）的发送方-接收方通信，即使队列为空（因为没有数据可用），如果 `DataTransformation` 的 `executeDespiteDataUnavailability` 被启用且 `[Rte_Receive](#71612-rte_receive)` **API** 依据 **SWS_Rte_01288** 具有非阻塞特性，**RTE** 也应按执行顺序执行转换器链的所有转换器。链中所有转换器的输入应为 `NULL` 且 `dataLength` 等于 0。
+
+**请注意：** 该功能仅在排队发送方/接收方通信的接收侧可用。此外，如果使用信号扇入，则任何信号都不得把 `executeDespiteDataUnavailability` 属性设置为 true（见 [constr_3208]）。
+
+在 `executeDespiteDataUnavailability` 重要的情形中，有两个主要情况：排队 S/R 通信中队列为空，以及 **COM** 栈中发生错误以致 **RTE** 没有从 **Com** 或 **LdCom** 获得数据。
+
+**SWS_Rte_08796**：对于 `dataReceivePointByArgument`、`dataReceivePointByValue` 或 `dataSendPoint` 角色中的 `VariableAccess`，**RTE** 应在所调用的 **RTE API** 内执行数据转换。
+
+在显式发送方-接收方通信的情况下，数据转换的执行发生在 **SWC** 调用的 **RTE API** 内部。
+
+在隐式发送方-接收方通信的情况下，数据转换的执行发生在发送方侧的可运行实体执行与把数据交给 **Com** 栈之间，以及接收方侧的从 **Com** 栈接收数据与可运行实体启动之间。
+
+**SWS_Rte_08570**：对于 `dataReadAccess` 角色中的 `VariableAccess`，**RTE** 应在从 **Com** 栈接收数据之后、可运行实体/相干组启动之前执行数据转换。
+
+**SWS_Rte_08571**：对于 `dataWriteAccess` 角色中的 `VariableAccess`，**RTE** 应在可运行实体/相干组终止之后、把数据交给 **Com** 栈之前执行数据转换。
+
+**SWS_Rte_08596**：对于各 `ExternalTriggeringPoint`，**RTE** 应在所调用的 **RTE API** `[Rte_Trigger](#71634-rte_trigger)` 内执行数据转换。
+
+在外部触发器通信的情况下，数据转换的执行发生在 **SWC** 调用的 **RTE API** 内部。
+
+**SWS_Rte_08797**：如果转换器被配置为可以访问原始数据，则 **RTE** 应确保这些数据在转换器链执行结束之前保持不变。
+
+###### 6.2.10.1.2. 用于 ECU 内通信的转换器
+
+**SWS_Rte_08105**：如果某个 `DataTransformation` 被某个 `DataPrototypeMapping` 引用，则 **RTE** 应为 **ECU** 内通信执行数据转换。
+
+**SWS_Rte_08107**：对于 `dataReceivePointByArgument`、`dataReceivePointByValue` 或 `dataSendPoint` 角色中的 `VariableAccess`，**RTE** 应在所调用的 **RTE API** 内执行数据转换。
+
+在隐式发送方-接收方通信的情况下，数据转换的执行发生在发送方侧的 `RunnableEntity`/`BswSchedulableEntity` 执行之后，以及接收方侧的 `RunnableEntity`/`BswSchedulableEntity` 启动之前。
+
+**SWS_Rte_08108**：对于 `dataReadAccess` 角色中的 `VariableAccess`，**RTE** 应在 `RunnableEntity`/`BswSchedulableEntity` 启动之前执行数据转换。
+
+**SWS_Rte_08109**：对于 `dataWriteAccess` 角色中的 `VariableAccess`，**RTE** 应在 `RunnableEntity`/`BswSchedulableEntity` 终止之后执行数据转换。
+
+##### 6.2.10.2. 转换器链
+
+**SWS_Rte_08798**：**RTE** 应支持长度最多为 255 个 `TransformationTechnology` 转换器的转换器链（`DataTransformation`）。
+
+**SWS_Rte_08110**：**RTE** 应只对 **ECU** 间数据转换支持转换器链（`DataTransformation`）。
+
+**SWS_Rte_08799**：发送方侧的 **RTE** 应按顺序执行链中的转换器。
+
+**SWS_Rte_08588**：接收方侧的 **RTE** 应按相反顺序执行链中的逆转换器（**retransformer**）。
+
+**SWS_Rte_08589**：客户端侧的 **RTE** 应按顺序对服务器调用的所有 IN 和 IN/OUT 参数执行链中的转换器。
+
+**SWS_Rte_08590**：服务器侧的 **RTE** 应按相反顺序对服务器调用的所有 IN 和 IN/INOUT 参数执行链中的逆转换器。
+
+IN 参数和 IN/OUT 参数都从客户端传输到服务器。
+
+**SWS_Rte_08515**：服务器侧的 **RTE** 应按顺序对服务器操作的所有 IN/OUT 和 OUT 参数以及返回码执行链中的转换器。
+
+**SWS_Rte_08516**：客户端侧的 **RTE** 应按相反顺序对服务器操作的所有 IN/OUT 和 OUT 参数以及返回码执行链中的逆转换器。
+
+所有 IN/OUT 参数、OUT 参数和返回值都从服务器传输到客户端。IN/OUT 参数必须包含在两个通信方向中，因为这些参数代表双向通信。
+
+**SWS_Rte_08517**：如果数据转换不适用，则发送方-接收方通信中发送方侧第一个转换器（按执行顺序）的输入应为 **SWC** 提供的该 `VariableDataPrototype` 的数据。
+
+**SWS_Rte_04540**：如果数据转换适用，则发送方-接收方通信中发送方侧第一个转换器（按执行顺序）的输入应为 **SWC** 提供的该 `VariableDataPrototype` 的已转换数据。
+
+**SWS_Rte_08518**：**ECU** 间发送方-接收方通信中接收方侧第一个转换器（按执行顺序）的输入应为从 **Com** 栈接收的数据。
+
+**SWS_Rte_08519**：客户端-服务器通信中客户端侧第一个转换器（按执行顺序）的输入应为 **SWC** 提供的该 `ClientServerOperation` 的数据。
+
+**SWS_Rte_08520**：客户端-服务器通信请求中服务器侧第一个转换器（按执行顺序）的输入应为从 **Com** 栈接收的数据。
+
+**SWS_Rte_08521**：客户端-服务器通信响应中服务器侧第一个转换器（按执行顺序）的输入应为 **SWC** 提供的该 `ClientServerOperation` 的数据。
+
+**SWS_Rte_08522**：客户端-服务器通信响应中客户端侧第一个转换器（按执行顺序）的输入应为从 **Com** 栈接收的数据。
+
+外部触发器通信中触发源侧第一个转换器（按执行顺序）的输入不包含有效载荷数据（见[\[27, ASWS Transformer General\]](#ref-27)中的 **SWS_Xfrm_00102**）。
+
+**SWS_Rte_08597**：外部触发器通信中触发汇侧第一个转换器（按执行顺序）的输入应为从 **Com** 栈接收的数据。
+
+**SWS_Rte_08523**：**ECU** 间发送方-接收方通信中发送方侧最后一个转换器（按执行顺序）的输出应传输到 **Com** 栈。
+
+**SWS_Rte_08524**：如果数据转换不适用，则发送方-接收方通信中接收方侧最后一个转换器（按执行顺序）的输出应交给 **SWC**。
+
+**SWS_Rte_04541**：如果数据转换适用，则 **RTE** 应在把发送方-接收方通信中接收方侧最后一个转换器（按执行顺序）的输出交给 **SWC** 之前对它进行转换。
+
+**SWS_Rte_08525**：客户端-服务器通信请求中客户端侧最后一个转换器（按执行顺序）的输出应传输到 **COM** 或 **Com** 栈。
+
+**SWS_Rte_08598**：外部触发器通信中触发源侧最后一个转换器（按执行顺序）的输出应传输到 **Com** 栈。
+
+**SWS_Rte_08599**：在外部触发器通信的触发汇侧，如果转换器链中没有转换器返回硬错误，则 **RTE** 应触发被触发 `RunnableEntity` 的执行。
+
+这意味着如果发生了硬转换器错误，则只应触发 `TransformerHardErrorEvent` 的 `RunnableEntity`，而不触发 `ExternalTriggerOccurredEvent` 的 `RunnableEntity`。
+
+**SWS_Rte_08526**：在客户端/服务器通信的服务器侧，当且仅当转换器链中没有转换器返回硬错误时，**RTE** 应触发被触发 `RunnableEntity` 的执行并把最后一个转换器的输出交给被触发的 `RunnableEntity`。
+
+**SWS_Rte_08527**：客户端-服务器通信响应中服务器侧最后一个转换器（按执行顺序）的输出应传输到 **Com** 栈。
+
+**SWS_Rte_08528**：客户端-服务器通信响应中客户端侧最后一个转换器（按执行顺序）的输出应交给 **SWC**。
+
+**SWS_Rte_08529**：转换器链中非最后一个转换器（按执行顺序）的输出应作为链执行顺序中下一个转换器的输入。
+
+如果存在信号扇出，可以优化转换器的执行。在信号扇出的情况下，如果多个转换器链在链的开头具有相同的转换器集合，则 **RTE** 进行优化，只为所有转换器链一起执行这些转换器一次。其结果可以在所有转换器链之间共享。这只有在没有涉及 `ComBasedTransformer` 时才可能。
+
+**SWS_Rte_08530**：如果某个 `XfrmImplementationMapping`（见 **ECUC_Xfrm_00001**）把多个转换器（用于转换不同的 `ISignal`）映射到同一个 `BswModuleEntry`，则 **RTE** 应使用映射的 `BswModuleEntry` 只执行这些首个转换器一次，并把结果作为这些 `ISignal` 的后续转换器的输入。
+
+图 4.56：转换器优化的示例
+
+![Figure4-56.png](Figure4-56.png)
+
+##### 6.2.10.3. 缓冲区处理
+
+**SWS_Rte_08531**：如果某个 `TransformationTechnology` 的 `BufferProperties` 中的 `inPlace` 属性设置为 `FALSE`，则 **RTE** 应为各转换器提供一个独立的缓冲区，转换器可以把自己的输出写入其中。
+
+**SWS_Rte_08532**：如果某个 `TransformationTechnology` 的 `BufferProperties` 中的 `inPlace` 属性设置为 `TRUE`，则 **RTE** 应为该转换器提供一个缓冲区。
+
+**理由：** 使用就地（**inplace**）缓冲处理时，转换器从一个缓冲区读取输入数据并把输出写入同一个缓冲区。为此，**RTE** 向转换器传递一个指针和一个长度，它们同时表示输入和输出缓冲区。
+
+**SWS_Rte_03867**：**RTE** 应按以下方式计算 `InputBufferLength`：
+
+* 对于外部触发器：`InputBufferLength` 应为 0。
+* 对于发送方/接收方通信：`InputBufferLength` 应等于要转换的 `SenderReceiverInterface` 的 `dataElement` 的 `VariableDataPrototype` 所需的大小。
+* 对于客户端/服务器通信：`InputBufferLength` 应为以下之和：
+  * `TransactionHandle` 的大小；
+  * 对请求：该 `ClientServerInterface` 的 `ClientServerOperation` 的所有 IN 和 INOUT 参数的 `VariableDataPrototype` 的大小；
+  * 或对响应：
+    * 该 `ClientServerInterface` 的 `ClientServerOperation` 的所有 INOUT 和 OUT 参数的 `VariableDataPrototype` 的大小；
+    * 如果为该 `ClientServerInterface` 定义了至少一个 `possibleError`，则为该 `ClientServerOperation` 的返回码保留 1 字节。
+
+**SWS_Rte_06150**：**RTE** 应使用以下公式计算应用了 SOME/IP 数据转换的输出缓冲区所需的缓冲区大小：OutputBufferLength = ( ISignal.Length / 8 )。
+
+**SWS_Rte_06151**：**RTE** 应使用以下公式计算应用了基于 **COM** 的数据转换的输出缓冲区所需的缓冲区大小：OutputBufferLength = ( ISignalIPdu.Length )，其中该 `ISignalIPdu` 引用相应的 `ISignalGroup`。
+
+**SWS_Rte_08536**：如果设置了 `BufferProperties` 中的 `inPlace`，**RTE** 应考虑 `BufferProperties` 中的 `headerLength` 信息：
+
+* 在发送侧（转换）：**RTE** 应从缓冲区开头把缓冲区扩大 `headerLength` 给出的大小。
+* 在接收侧（逆转换）：**RTE** 应从缓冲区开头把缓冲区缩小 `headerLength` 给出的大小。
+
+例如，如果发送侧一个带就地缓冲的转换器被配置为添加一个头部，则 **RTE** 负责传递一个足够大的缓冲区。因此，如果第二个转换器也带就地缓冲地添加一个头部，则缓冲区在两个转换器之间增长。为实现这一点，**RTE** 可以拥有一个大小不变、足以容纳最后一个转换器输出的缓冲区，但根据链中特定转换器的缓冲区大小需求，只把该缓冲区的子集交给各转换器。这可以通过指针实现。可以通过减小传递给转换器的指针地址来提供现有数据前面的空闲空间以插入头部。这会在缓冲区开头增加一个空闲空间。头部应为多长可以由 `BufferProperties` 的 `headerLength` 确定。
+
+接收侧相应的逆转换器（实现逆操作）必须移除该头部。为此，转换器只需确保其输出的任何部分都不位于要移除的头部的位置。从该转换器到下一个转换器，**RTE** 把指针地址增加头部的长度，从而用该机制移除头部。
+
+**SWS_Rte_08537**：如果某个 `TransformationTechnology` 的 `BufferProperties` 中的 `inPlace` 属性被设置、且在该转换器之前直接进行了转换器优化中的扇出，则 **RTE** 应预先复制缓冲区。
+
+**SWS_Rte_08550**：如果 `needsOriginalData` 属性设置为 true，则 **RTE** 应把软件组件提供的原始数据交给发送侧的转换器。
+
+##### 6.2.10.4. 到转换器的接口
+
+转换器的接口取决于该转换器所在的转换器链和被转换的数据。它们规定在[\[27, ASWS Transformer General\]](#ref-27)中。
+
+另见 [7.1.10.4](#71104-数据转换的期望接口) 节。
+
+**SWS_Rte_08538**：**RTE** 应使用 `PortInterfaceMapping` 或 `ISignal.TransformationISignalProps.DataPrototypeTransformationProps.networkRepresentationProps` 来确定哪些数据从转换器向上传递给 **SWC**（见 [6.2.3.6.2](#62362-带数据转换的网络表示) 节）。
+
+##### 6.2.10.5. 错误处理
+
+**SWS_Rte_08539**：**RTE** 应评估转换器的返回码。
+
+转换器依据其转换器类别有一个固定的错误集合。一个转换器类别的每个转换器只能产生这些错误。
+
+错误可以是软错误（**soft error**）和硬错误（**hard error**）。软错误对应于警告，硬错误会停止转换器链的执行。对于客户端-服务器通信，可以在服务器侧触发一个自主错误反应，它无需任何可运行实体的参与即可自动生成客户端-服务器通信的响应。
+
+**SWS_Rte_03608**：如果存在一个 `errorHandling` 属性设置为 `transformerErrorHandling`、且引用了一个不适用任何数据转换的 `PortPrototype` 的 `PortAPIOption`，则 `Std_TransformerClass` 应被设置为 `STD_TRANSFORMER_UNSPECIFIED`，`Std_TransformerErrorCode` 被设置为 `E_OK`。
+
+**理由：** 可选的 OUT 参数 `transformerError` 的生成条件只依赖于 `errorHandling` 属性。尽管如此，可以在没有任何转换器的情况下集成支持 `transformerErrorHandling` 的此类 **SWC**。在这种情况下，数据转换在逻辑上始终被视为成功。
+
+**SWS_Rte_08540**：如果某个转换器返回软错误，**RTE** 应继续执行转换器链。
+
+**SWS_Rte_08541**：如果某个转换器返回硬错误且该 `DataTransformation` 的 `executeDespiteDataUnavailability` 设置为 false，**RTE** 应中止转换器链的执行。
+
+**SWS_Rte_08424**：如果某个转换器返回硬错误且该 `DataTransformation` 的 `executeDespiteDataUnavailability` 设置为 true，**RTE** 应继续执行转换器链。
+
+当转换器向 **RTE** 返回硬错误时，它不得修改其输出缓冲区（见 **SWS_Xfrm_00051**）。
+
+为了把转换器错误返回给可运行实体，能够触发转换器执行的各 **RTE API** 都有一个参数，当 `PortAPIOption` 的 `errorHandling` 属性设置为 `transformerErrorHandling` 时，该参数由 **RTE** 写入、由 **SWC** 读取。
+
+**SWS_Rte_08558**：如果一个不在服务器侧转换客户端-服务器通信请求的转换器（即在客户端侧转换客户端-服务器通信请求的转换器、或转换客户端-服务器通信响应的转换器、或转换发送方-接收方通信的转换器）返回硬错误，则 **RTE** 应把该硬错误通知给调用了触发该转换器执行的 **RTE API** 的可运行实体。
+
+**SWS_Rte_07417**：如果一个在服务器侧转换客户端-服务器通信请求的转换器返回硬错误，则 **RTE** 不应为服务器可运行实体触发所分配的 `OperationInvokedEvent`。
+
+**SWS_Rte_07418**：如果一个在服务器侧转换客户端-服务器通信请求的转换器返回硬错误，则 **RTE** 应触发所分配的 `TransformerHardErrorEvent`。
+
+**SWS_Rte_07419**：如果一个在服务器侧转换客户端-服务器通信请求的转换器返回硬错误，且相应的 `csErrorReaction` 设置为 `autonomous`，则 **RTE** 应触发一个自主错误反应。
+
+**SWS_Rte_07420**：对于自主错误反应，**RTE** 应以以下参数执行服务器侧客户端-服务器通信响应的转换器链：
+
+* `TransactionHandle` 应不加改动地传递；
+* 作为返回值，使用发出该硬错误的转换器的错误码；
+* 所有按值传递的参数应等于 0；
+* 所有按引用传递的参数应等于 `NULL_PTR`。
+
+**注意：** 执行该转换器链的结果可以由 **RTE** 像常规响应一样处理。
+
+**SWS_Rte_08559**：如果转换器链中没有转换器返回硬错误、且至少一个转换器返回了软错误，则 **RTE** 应把第一个软错误（按转换器执行顺序）通知给 **SWC**。
+
+**SWS_Rte_08584**：如果转换器链（`transformerClass` 设置为 `custom` 的 `TransformationTechnology`）中的多个自定义转换器产生多于一个错误、且所有错误都是软错误，则 **RTE** 应把所有自定义转换器的第一个软错误（按执行顺序）交给 **SWC**。
+
+**SWS_Rte_08585**：如果转换器链（`transformerClass` 设置为 `custom` 的 `TransformationTechnology`）中的多个自定义转换器产生多于一个错误、且其中一个是硬错误，则 **RTE** 应把该硬错误（导致转换器链执行中止的那个）交给 **SWC**。
+
+##### 6.2.10.6. 转换器代码转发
+
+存在应用软件需要影响发送侧转换器链行为的用例。一个突出的例子是信号到服务的翻译应用，其中需要把 **E2E** 状态信息转发到发送侧的 **E2E** 转换器。在一个通信路径上应用 **E2E** 保护、且途中进行信号到服务翻译的情况下，为接收数据评估的 **E2E** 状态需要转发到为发送侧生成的 **E2E** 信息中。这样，将要使用该数据的应用可以通过使用标准的 **E2E** 检查函数来识别数据交换故障。
+
+**SWS_Rte_04572**：如果某个 `PortPrototype` 被一个 `transformerStatusForwarding` 属性设置为 `transformerStatusForwarding` 的 `PortAPIOption` 引用，则 **RTE** 应为与该端口相关的 **API** 生成一个 `Std_TransformerForwardCode` 类型的可选 IN 参数，并按照其规范[\[28\]](#ref-28)定义的 **API** 把该参数转发给 **E2E** 转换器。
+
+##### 6.2.10.7. 转换器事务处理
+
+存在转换器与其相应的逆转换器并非完全独立、而实际上是一个事务链的一部分的用例。一个突出的例子是在处理 `ClientServerOperation` 的 **ECU** 间调用时，接收请求的逆转换器与发送应答的转换器。在这些场景中，通常需要在这种事务链的相应转换器之间传递信息。在 `ClientServerOperation` 的 **ECU** 间调用的情况下，有时需要把信息从接收请求的逆转换器传递到发送应答的转换器。
+
+为满足该需求，转换器的每个实现可以通过专用配置元素 `XfrmCSTansactionHandleImplementationDataTypeRef` 声明这种信息传递的需求。如果存在，该配置元素引用该转换器的 **BSWMD** 中 `STRUCTURE` 类别的一个 `ImplementationDataType`。这个被引用的 `ImplementationDataType` 定义了所谓的事务句柄（**transaction handle**）的类型（依据 **SWS_Rte_07114** 和 **SWS_Rte_06812**），该事务句柄由 **RTE** 分配、由接收请求的逆转换器填充、并由 **RTE** 不加修改地转发给发送响应的转换器。
+
+**SWS_Rte_03885**（确保事务句柄的类型正确）：**RTE** 生成器应拒绝这样的配置：某个 `XfrmImplementationMapping`（见 **ECUC_Xfrm_00001**）的已有的 `XfrmCSTansactionHandleImplementationDataTypeRef` 属性（见 **ECUC_Xfrm_00021**）引用的不是 `STRUCTURE` 类别的 `ImplementationDataType`。
+
+**SWS_Rte_03886**（确保事务句柄的一致性）：**RTE** 生成器应拒绝这样的配置：相应转换器实现（即处理接收请求的逆转换器的实现和处理待发送响应的转换器的实现）的各 `XfrmImplementationMapping`（见 **ECUC_Xfrm_00001**）的 `XfrmCSTansactionHandleImplementationDataTypeRef` 属性（见 **ECUC_Xfrm_00021**）引用不同的 `ImplementationDataType`。
+
+**SWS_Rte_03887**（事务句柄的分配）：如果某个转换器的 `XfrmImplementationMapping`（见 **ECUC_Xfrm_00001**）包含 `XfrmCSTansactionHandleImplementationDataTypeRef` 属性（见 **ECUC_Xfrm_00021**），则 **RTE** 应分配一个由该被引用 `ImplementationDataType` 所定义类型（依据 **SWS_Rte_07114** 和 **SWS_Rte_06812**）的事务句柄。
+
+**SWS_Rte_03888**（传递事务句柄——逆转换器——服务器）：如果逆转换器的 `XfrmImplementationMapping`（见 **ECUC_Xfrm_00001**）包含 `XfrmCSTansactionHandleImplementationDataTypeRef` 属性（见 **ECUC_Xfrm_00021**），则 **RTE** 应把指向已分配事务句柄（见 **SWS_Rte_03887**）的引用作为附加参数 `csTransactionHandle` 传递给 `<Mip>_Inv_<transformerId>` 的调用（见 **SWS_Xfrm_00044** 和 **SWS_Xfrm_00046**）。
+
+**注意：** `<Mip>_Inv_<transformerId>` 将根据其需要填充经由 `csTransactionHandle` 传递的事务句柄。
+
+**SWS_Rte_03889**（传播事务句柄）：**RTE** 应把事务句柄的内容传播给相应的 `<Mip>_<transformerId>`，而不改变其内容。
+
+**SWS_Rte_03890**（传递事务句柄——转换器——服务器）：如果该转换器的 `XfrmImplementationMapping`（见 **ECUC_Xfrm_00001**）包含 `XfrmCSTansactionHandleImplementationDataTypeRef` 属性（见 **ECUC_Xfrm_00021**），则 **RTE** 应把指向已分配事务句柄（见 **SWS_Rte_03887**）的引用作为附加参数 `csTransactionHandle` 传递给 `<Mip>_<transformerId>` 的调用（见 **SWS_Xfrm_00038** 和 **SWS_Xfrm_00040**）。
 
 ### 6.3. RTE 实现插件
 
@@ -4784,11 +9780,9 @@ NvBlock `SwComponentPrototype` 的代码由 **RTE** 生成器实现。`NvBlockSw
 
 从 AUTOSAR 软件分层架构的角度看，**RTE** 实现插件是 **RTE** 的一部分。也就是说，由 **RTE** 生成器提供的"核心" **RTE** 加上 **RTE** 实现插件共同实现整体 **RTE**。尽管如此，"核心" **RTE** 与 **RTE** 实现插件之间的接口是标准化的，以便 **RTE** 生成器与 **RTE** 实现插件可以由不同供应商提供。
 
-图 7.1：经由 RTE 实现插件的隐式通信示例
-
 ![Figure7-1.png](Figure7-1.png)
 
-图 7.1 展示了经由 **RTE** 实现插件实现隐式通信的原理。基于软件组件描述，**RTE** 提供 `Rte_IRead` **API**。该 `Rte_IRead` **API** 使用 **RTE** 实现插件的 `Rte_Rips_IRBufferRef` **API** 获取隐式通信缓冲区 `Buf_Task1_dat1` 的地址。**RTE** 实现插件提供填充与清空例程以及隐式通信缓冲区实例。经由接口约定，它同样知道与该数据通信图相关的全局副本 `Rte_dataInstance1`。这支持为填充与清空例程创建相应的复制代码。
+图 7.1 展示了经由 **RTE** 实现插件实现隐式通信的原理。基于软件组件描述，**RTE** 提供 `[Rte_IRead](#71618-rte_iread)` **API**。该 `[Rte_IRead](#71618-rte_iread)` **API** 使用 **RTE** 实现插件的 `Rte_Rips_IRBufferRef` **API** 获取隐式通信缓冲区 `Buf_Task1_dat1` 的地址。**RTE** 实现插件提供填充与清空例程以及隐式通信缓冲区实例。经由接口约定，它同样知道与该数据通信图相关的全局副本 `Rte_dataInstance1`。这支持为填充与清空例程创建相应的复制代码。
 
 也可以规定某个 **RTE** 实现插件只负责处理它所处理的某个通信图中的一部分通信。据此，**RTE** 生成器必须实现该插件不负责的图元素。**RTE** 实现插件必须通过配置参数 `RteRipsPluginCommunicationTypeSupport` 告知 **RTE** 它们负责图的哪些元素。
 
@@ -4824,8 +9818,6 @@ NvBlock `SwComponentPrototype` 的代码由 **RTE** 生成器实现。`NvBlockSw
 * 哪些文件（或更确切地说其内容）必须预期同时出现在其他文件中（重复声明、重复包含保护生效等的风险）。
 
 此处的"导出"意味着：被导出的定义或声明应在该包含导出头文件的文件中可见。至于该头文件自身执行这些声明或定义，还是由它包含的另一个头文件执行，并不重要。
-
-图 7.2：RTE 实现插件面向 RTE 的包含结构
 
 ![Figure7-2.png](Figure7-2.png)
 
@@ -4917,7 +9909,7 @@ extern uint16 Rte_someInternalNameForParameter;
 
 **RTE** 实现插件头文件应导出该 **RTE** 实现插件生命周期 **API** 的声明。
 
-请注意：**RTE** 实现插件的生命周期 **API** 在 6.3.2.4.15 节中定义。
+请注意：**RTE** 实现插件的生命周期 **API** 在 [6.3.2.4.15](#632415-rte-实现插件生命周期-api) 节中定义。
 
 **RTE** 实现插件头文件应导出该 **RTE** 实现插件的 `Rte_Rips_FillFlushRoutine` 的声明。
 
@@ -4935,7 +9927,7 @@ extern uint16 Rte_someInternalNameForParameter;
 
 对满足以下条件之一的每个软件组件或 **BSW** 模块，**RTE** 实现插件都应为其生成 **RIPS SWC-BSW** 实例头文件：
 
-* 有一个启用了 **RTE** 实现插件支持、并映射到该 **RTE** 实现插件的独占区（见 6.3.3.5 节），或
+* 有一个启用了 **RTE** 实现插件支持、并映射到该 **RTE** 实现插件的独占区（见 [6.3.3.5](#6335-互斥区域) 节），或
 * 有一个对启用了 **RTE** 实现插件支持、并映射到该 **RTE** 实现插件的数据通信图的访问，或
 * 有一个对启用了 **RTE** 实现插件支持、并映射到该 **RTE** 实现插件的参数通信图的访问，
 
@@ -4993,13 +9985,13 @@ extern uint16 Rte_someInternalNameForParameter;
 
 本小节描述启用 **RTE** 实现插件模式时对 **RTE** 应用头文件的附加需求。
 
-如果存在的话，某个软件组件的应用头文件应包含适用于该组件实例的所有 **RTE** 实现插件的 **RIPS SWC-BSW** 实例头文件（见 6.3.2.1.4 节）。
+如果存在的话，某个软件组件的应用头文件应包含适用于该组件实例的所有 **RTE** 实现插件的 **RIPS SWC-BSW** 实例头文件（见 [6.3.2.1.4](#63214-rips-swc-bsw-实例头文件) 节）。
 
 ###### 6.3.2.1.8. 模块互连头文件
 
 本小节描述启用 **RTE** 实现插件模式时对基础软件调度器模块互连头文件的附加需求。
 
-如果存在的话，某个 **BSW** 模块的模块互连头文件应包含适用于该基础软件模块实例的所有 **RTE** 实现插件的 **RIPS SWC-BSW** 实例头文件（见 6.3.2.1.4 节）。
+如果存在的话，某个 **BSW** 模块的模块互连头文件应包含适用于该基础软件模块实例的所有 **RTE** 实现插件的 **RIPS SWC-BSW** 实例头文件（见 [6.3.2.1.4](#63214-rips-swc-bsw-实例头文件) 节）。
 
 ###### 6.3.2.1.9. RTE 数据句柄类型头文件
 
@@ -5047,7 +10039,7 @@ Rte_Rips_<PlugIn>_<useCase>_[<SwcBswI>][Partition] [_<ExE>]_<elementInstance>
 
 `IRead`、`IWrite`、`IRBufferRef`、`IWBufferRef`、`StartRead`、`StopRead`、`StartWrite`、`StopWrite`、`Read`、`DRead`、`Write`、`Enter`、`Exit`、`EnterModeQueue`、`ExitModeQueue`、`Switch`、`DequeueModeSwitch`、`Trigger`、`Invoke`、`ReturnResult`、`Prm`。
 
-更多细节见 6.3.2.4 节。
+更多细节见 [6.3.2.4](#6324-api-参考) 节。
 
 `<SwcBswI>`（**SWC-BSW** 实例名）或者是（**ECU Extract** 的根软件组合中的）`SwComponentPrototype` 的 `shortName`，或者是按相应命名规定得到的 **BSW** 模块实例名。
 
@@ -5077,7 +10069,7 @@ Rte_Rips_<PlugIn>_<useCase>_[<SwcBswI>][Partition] [_<ExE>]_<elementInstance>
 
 **6.3.2.2.3.1 宏 API 实现**
 
-作为类函数宏的 **API** 实现可能有奇怪的副作用。一个特例是 **API** 的嵌套调用，例如把 `Rte_DRead` 作为 `Rte_Write` 的参数。用户自然期望 `Rte_DRead` 的代码在进入 `Rte_Write` **API** 之前执行。但由于宏只是文本替换，技术上并非如此。相反，`Rte_DRead` 会在 `Rte_Write` 内部使用该参数的位置执行。这可能导致各种效果，例如（**RTE** 或 **RTE** 实现插件的）保护代码的非预期嵌套，或 `Rte_DRead` 的多次执行且结果不同。必须避免这种情况。
+作为类函数宏的 **API** 实现可能有奇怪的副作用。一个特例是 **API** 的嵌套调用，例如把 `[Rte_DRead](#71611-rte_dread)` 作为 `[Rte_Write](#7164-rte_write)` 的参数。用户自然期望 `[Rte_DRead](#71611-rte_dread)` 的代码在进入 `[Rte_Write](#7164-rte_write)` **API** 之前执行。但由于宏只是文本替换，技术上并非如此。相反，`[Rte_DRead](#71611-rte_dread)` 会在 `[Rte_Write](#7164-rte_write)` 内部使用该参数的位置执行。这可能导致各种效果，例如（**RTE** 或 **RTE** 实现插件的）保护代码的非预期嵌套，或 `[Rte_DRead](#71611-rte_dread)` 的多次执行且结果不同。必须避免这种情况。
 
 **RTE** 实现其代码的方式应能抵御不期望的嵌套，即把作为宏参数传入的代码嵌套进由 **RTE** 实现插件服务调用（例如 `Rte_Rips_StartRead`、`Rte_Rips_StopRead`、`Rte_Rips_StartWrite` 和 `Rte_Rips_StopWrite`）保护的临界区。
 
@@ -5118,7 +10110,7 @@ Rte_Rips_<PlugIn>_<useCase>_[<SwcBswI>][Partition] [_<ExE>]_<elementInstance>
 
 * 相关数据通信图已启用本地软件集群通信插件支持；且
 * 该数据实例由原始数据类型类型化；且
-* 按 6.3.3.4 节的状态分类，该数据实例是无状态数据元素；且
+* 按 [6.3.3.4](#6334-数据通信) 节的状态分类，该数据实例是无状态数据元素；且
 * 对关联的本地软件集群通信插件，`RtePluginSupportsIReadIWrite` 为 true。
 
 如果满足与上条相同的条件，**RTE** 应调用 `Rte_Rips_IRead` 服务来隐式读取数据。
@@ -5144,7 +10136,7 @@ Rte_Rips_<PlugIn>_<useCase>_[<SwcBswI>][Partition] [_<ExE>]_<elementInstance>
 
 * 相关数据通信图已启用本地软件集群通信插件支持；且
 * 该数据实例由原始数据类型类型化；且
-* 按 6.3.3.4 节的状态分类，该数据实例是无状态数据元素；且
+* 按 [6.3.3.4](#6334-数据通信) 节的状态分类，该数据实例是无状态数据元素；且
 * 对关联的 **RTE** 实现插件，`RtePluginSupportsIReadIWrite` 为 true。
 
 如果满足与上条相同的条件，**RTE** 应调用 `Rte_Rips_IWrite` 服务来隐式写入数据。
@@ -5172,7 +10164,7 @@ Rte_Rips_<PlugIn>_<useCase>_[<SwcBswI>][Partition] [_<ExE>]_<elementInstance>
 
 **RTE** 应调用 `Rte_Rips_IRBufferRef` 服务以获取内存地址，从中可以读取隐式读取数据实例的值和/或状态。其中 `Rte_Rips_IRBufferRef` 只应在不适用 `Rte_Rips_IRead` 时使用（见上文 `Rte_Rips_IRead` 的调用规定）。
 
-如果隐式数据访问需要经由数据句柄区或可运行实体间变量句柄区中的数据句柄实现，则 **RTE** 应用 `Rte_Rips_IRBufferRef` 初始化组件数据结构中用于隐式只读访问的相关数据句柄（另见 6.3.3.4 节）。
+如果隐式数据访问需要经由数据句柄区或可运行实体间变量句柄区中的数据句柄实现，则 **RTE** 应用 `Rte_Rips_IRBufferRef` 初始化组件数据结构中用于隐式只读访问的相关数据句柄（另见 [6.3.3.4](#6334-数据通信) 节）。
 
 请注意：当 `RunnableEntity` 访问 `RPortPrototype` 或 `PRPortPrototype` 中的数据元素，或该 `RunnableEntity` 对某个 `implicitInterRunnableVariable` 拥有独占读访问时，需要只读隐式访问。
 
@@ -5197,7 +10189,7 @@ Rte_Rips_<PlugIn>_<useCase>_[<SwcBswI>][Partition] [_<ExE>]_<elementInstance>
 
 **RTE** 应调用 `Rte_Rips_IWBufferRef` 服务以获取内存地址，向其写入隐式写入数据实例的值和/或状态。其中 `Rte_Rips_IWBufferRef` 只应在不适用 `Rte_Rips_IWrite` 时使用（见上文 `Rte_Rips_IWrite` 的调用规定）。
 
-如果隐式数据访问需要经由数据句柄区或可运行实体间变量句柄区中的数据句柄实现，则 **RTE** 应用 `Rte_Rips_IWBufferRef` 初始化组件数据结构中用于隐式写或隐式读写访问的相关数据句柄（另见 6.3.3.4 节）。
+如果隐式数据访问需要经由数据句柄区或可运行实体间变量句柄区中的数据句柄实现，则 **RTE** 应用 `Rte_Rips_IWBufferRef` 初始化组件数据结构中用于隐式写或隐式读写访问的相关数据句柄（另见 [6.3.3.4](#6334-数据通信) 节）。
 
 请注意：当 `RunnableEntity` 访问 `PRPortPrototype` 中的数据元素，或该 `RunnableEntity` 对某个 `implicitInterRunnableVariable` 拥有读和写访问时，需要读写隐式访问。对读写隐式访问同样适用 `Rte_Rips_IWBufferRef` 服务。
 
@@ -5356,14 +10348,14 @@ Rte_Rips_<PlugIn>_<useCase>_[<SwcBswI>][Partition] [_<ExE>]_<elementInstance>
 
 | 服务名 | `Rte_Rips_<PlugIn>_Read_[<SwcBswI>][Partition][_<ExE>]_<CGI>` |
 | --- | --- |
-| 语法 | `Std_ReturnType Rte_Rips_<PlugIn>_Read_[<SwcBswI>][Partition][_<ExE>]_<CGI> ( OUT <data>, [Std_TransformerError transformerError] )` |
+| 语法 | `[Std_ReturnType](#7151-std_returntype) Rte_Rips_<PlugIn>_Read_[<SwcBswI>][Partition][_<ExE>]_<CGI> ( OUT <data>, [Std_TransformerError transformerError] )` |
 | 服务 ID [hex] | 0xEA |
 | 同步/异步 | 同步 |
 | 可重入性 | 可重入 |
 | 输入参数 | 无 |
 | 输入输出参数 | 无 |
 | 输出参数 | `<data>`：OUT 参数 `<data>` 传回接收到的数据。`transformerError`：OUT 参数 `transformerError` 包含在转换器链执行期间发生的转换器错误 |
-| 返回值 | `Std_ReturnType`：用于指示通信错误 |
+| 返回值 | `[Std_ReturnType](#7151-std_returntype)`：用于指示通信错误 |
 | 描述 | `Rte_Rips_Read` 对一个发送方-接收方通信数据元素执行"显式"读取 |
 | 可用头文件 | `Rte_Rips_<PlugIn>_<SwcBswI>.h` |
 
@@ -5378,7 +10370,7 @@ Rte_Rips_<PlugIn>_<useCase>_[<SwcBswI>][Partition] [_<ExE>]_<elementInstance>
 
 或：
 
-* 按 6.3.3.4 节（数据转换）配置了数据转换。
+* 按 [6.3.3.4](#6334-数据通信) 节（数据转换）配置了数据转换。
 
 如果满足以下条件，关联的本地软件集群通信插件应为 `BswModuleEntity` 在 `dataReceivePoint` 角色中的每个 `BswVariableAccess` 提供 `Rte_Rips_Read` 服务：
 
@@ -5399,11 +10391,11 @@ Rte_Rips_<PlugIn>_<useCase>_[<SwcBswI>][Partition] [_<ExE>]_<elementInstance>
 
 如果满足以下条件，关联的跨软件集群通信插件应为每个映射有软件组件的分区提供一次 `Rte_Rips_Read` 服务：该软件组件在某个 `AbstractProvidedPortPrototype` 中存在 `RunnableEntity` 在 `dataWriteAccess` 角色 `VariableAccess` 的 `VariableDataPrototype` 实例。
 
-请注意，跨软件集群通信适用时必须有这一条，以满足抢占区缓冲区初始化的规定（见 6.2.3.1.5 节）。
+请注意，跨软件集群通信适用时必须有这一条，以满足抢占区缓冲区初始化的规定（见 [6.2.3.1.5](#62315-隐式与显式数据接收和发送) 节）。
 
 在上述两条跨集群存在条件成立时，相关 `Rte_Rips_Read` 服务存在可选名称部分 `[Partition]`。
 
-`Rte_Rips_Read` 服务的可选 OUT 参数 `transformerError` 应按 6.3.3.4 节的相应规定生成。
+`Rte_Rips_Read` 服务的可选 OUT 参数 `transformerError` 应按 [6.3.3.4](#6334-数据通信) 节的相应规定生成。
 
 返回值用于指示 **RTE** 实现插件在执行 `Rte_Rips_Read` 服务调用期间检测到的错误，或通信系统检测到的错误：
 
@@ -5429,11 +10421,11 @@ Rte_Rips_<PlugIn>_<useCase>_[<SwcBswI>][Partition] [_<ExE>]_<elementInstance>
 如果满足以下条件，**RTE** 应在该位置调用 `Rte_Rips_Read` 或 `Rte_Rips_DRead`，以替代 **RTE** 对已转换数据的常规访问：
 
 * 相关数据通信图已启用本地软件集群通信插件支持；且
-* 按 6.3.3.4 节（数据转换）配置了数据转换。
+* 按 [6.3.3.4](#6334-数据通信) 节（数据转换）配置了数据转换。
 
 如果相关数据通信图已启用跨软件集群通信插件支持，则 **RTE** 应在该位置调用 `Rte_Rips_Read`，以替代 **RTE** 对数据的常规读访问。
 
-对显式通信（排队或最后为最佳），预期在 `Rte_Receive` 或 `Rte_Read` **API** 的上下文中使用。
+对显式通信（排队或最后为最佳），预期在 `[Rte_Receive](#71612-rte_receive)` 或 `[Rte_Read](#71610-rte_read)` **API** 的上下文中使用。
 
 对隐式通信，预期在以下上下文中使用：**RTE** 在 **OS** 任务中填充抢占区缓冲区之处，即对相关数据通信图有隐式访问的 `RunnableEntity` 所映射的任务。
 
@@ -5450,14 +10442,14 @@ Rte_Rips_<PlugIn>_<useCase>_[<SwcBswI>][Partition] [_<ExE>]_<elementInstance>
 
 | 服务名 | `Rte_Rips_<PlugIn>_Write_[<SwcBswI>][Partition][_<ExE>]_<CGI>` |
 | --- | --- |
-| 语法 | `Std_ReturnType Rte_Rips_<PlugIn>_Write_[<SwcBswI>][Partition][_<ExE>]_<CGI> ( IN <data>, [Std_TransformerError transformerError] )` |
+| 语法 | `[Std_ReturnType](#7151-std_returntype) Rte_Rips_<PlugIn>_Write_[<SwcBswI>][Partition][_<ExE>]_<CGI> ( IN <data>, [Std_TransformerError transformerError] )` |
 | 服务 ID [hex] | 0xEB |
 | 同步/异步 | 同步 |
 | 可重入性 | 可重入 |
 | 输入参数 | `<data>`：IN 参数 `<data>` 传递要发送的数据 |
 | 输入输出参数 | 无 |
 | 输出参数 | `transformerError`：OUT 参数 `transformerError` 包含在转换器链执行期间发生的转换器错误 |
-| 返回值 | `Std_ReturnType`：用于指示通信错误 |
+| 返回值 | `[Std_ReturnType](#7151-std_returntype)`：用于指示通信错误 |
 | 描述 | `Rte_Rips_Write` 对一个发送方-接收方通信数据元素执行"显式"写入 |
 | 可用头文件 | `Rte_Rips_<PlugIn>_<SwcBswI>.h` |
 
@@ -5470,7 +10462,7 @@ Rte_Rips_<PlugIn>_<useCase>_[<SwcBswI>][Partition] [_<ExE>]_<elementInstance>
 
 或：
 
-* 按 6.3.3.4 节（数据转换）配置了数据转换。
+* 按 [6.3.3.4](#6334-数据通信) 节（数据转换）配置了数据转换。
 
 如果满足以下条件，关联的本地软件集群通信插件应为 `BswModuleEntity` 在 `dataSendPoint` 角色中的每个 `BswVariableAccess` 提供 `Rte_Rips_Write` 服务：
 
@@ -5491,7 +10483,7 @@ Rte_Rips_<PlugIn>_<useCase>_[<SwcBswI>][Partition] [_<ExE>]_<elementInstance>
 
 在该存在条件成立时，相关 `Rte_Rips_Write` 服务存在可选名称部分 `[Partition]`。
 
-`Rte_Rips_Write` 服务的可选 OUT 参数 `transformerError` 应按 6.3.3.4 节的相应规定生成。
+`Rte_Rips_Write` 服务的可选 OUT 参数 `transformerError` 应按 [6.3.3.4](#6334-数据通信) 节的相应规定生成。
 
 返回值用于指示 **RTE** 实现插件在执行 `Rte_Rips_Write` 服务调用期间检测到的错误，或通信系统检测到的错误：
 
@@ -5514,11 +10506,11 @@ Rte_Rips_<PlugIn>_<useCase>_[<SwcBswI>][Partition] [_<ExE>]_<elementInstance>
 如果满足以下条件，**RTE** 应在该位置调用 `Rte_Rips_Write`，以替代 **RTE** 对数据转换器的常规访问：
 
 * 相关数据通信图已启用本地软件集群通信插件支持；且
-* 按 6.3.3.4 节（数据转换）配置了数据转换。
+* 按 [6.3.3.4](#6334-数据通信) 节（数据转换）配置了数据转换。
 
 如果相关数据通信图已启用跨软件集群通信插件支持，则 **RTE** 应在该位置调用 `Rte_Rips_Write`，以替代 **RTE** 对数据的常规读访问。
 
-对显式通信（排队或最后为最佳），预期在 `Rte_Send` 或 `Rte_Write` **API** 的上下文中使用。
+对显式通信（排队或最后为最佳），预期在 `[Rte_Send](#7165-rte_send)` 或 `[Rte_Write](#7164-rte_write)` **API** 的上下文中使用。
 
 对隐式通信，预期在以下上下文中使用：**RTE** 在 **OS** 任务中清空抢占区缓冲区之处，即对相关数据通信图有隐式访问的 `RunnableEntity` 所映射的任务。
 
@@ -5554,7 +10546,7 @@ Rte_Rips_<PlugIn>_<useCase>_[<SwcBswI>][Partition] [_<ExE>]_<elementInstance>
 
 或：
 
-* 按 6.3.3.4 节（数据转换）配置了数据转换。
+* 按 [6.3.3.4](#6334-数据通信) 节（数据转换）配置了数据转换。
 
 如果满足以下条件，关联的跨软件集群通信插件应为每个映射有软件组件的分区提供一次 `Rte_Rips_DRead` 服务：该软件组件在某个 `AbstractRequiredPortPrototype` 中存在 `VariableDataPrototype` 实例，其中：
 
@@ -5805,14 +10797,14 @@ Rte_Rips_<PlugIn>_<useCase>_[<SwcBswI>][Partition] [_<ExE>]_<elementInstance>
 
 | 服务名 | `Rte_Rips_<PlugIn>_Invoke_<SwcBswI>_<CGI>` |
 | --- | --- |
-| 语法 | `Std_ReturnType Rte_Rips_<PlugIn>_Invoke_<SwcBswI>_<CGI> ( [IN&#124;IN/OUT&#124;OUT] <data_1>, [IN&#124;IN/OUT&#124;OUT] ..., [IN&#124;IN/OUT&#124;OUT] <data_n>, [Std_TransformerError transformerError] )` |
+| 语法 | `[Std_ReturnType](#7151-std_returntype) Rte_Rips_<PlugIn>_Invoke_<SwcBswI>_<CGI> ( [IN&#124;IN/OUT&#124;OUT] <data_1>, [IN&#124;IN/OUT&#124;OUT] ..., [IN&#124;IN/OUT&#124;OUT] <data_n>, [Std_TransformerError transformerError] )` |
 | 服务 ID [hex] | 0xEC |
 | 同步/异步 | 同步 |
 | 可重入性 | 可重入 |
 | 输入参数 | `<data_1>`：`Rte_Rips_Invoke` API 按照 **SWS_Rte_01102** 包含零个或多个 IN、IN/OUT 和 OUT 参数，对于触发器（**trigger**）则没有参数 |
 | 输入输出参数 | `...`：同上，按照 **SWS_Rte_01102** 包含零个或多个 IN、IN/OUT 和 OUT 参数，对于触发器则没有参数 |
 | 输出参数 | `<data_n>`：同上，按照 **SWS_Rte_01102** 包含零个或多个 IN、IN/OUT 和 OUT 参数，对于触发器则没有参数。`transformerError`：OUT 参数 `transformerError` 包含在转换器链执行期间发生的转换器错误 |
-| 返回值 | `Std_ReturnType`：用于指示通信错误 |
+| 返回值 | `[Std_ReturnType](#7151-std_returntype)`：用于指示通信错误 |
 | 描述 | `Rte_Rips_Invoke` 为客户端或触发源执行转换器调用或跨软件集群调用 |
 | 可用头文件 | `Rte_Rips_<PlugIn>_<SwcBswI>.h` |
 
@@ -5848,14 +10840,14 @@ Rte_Rips_<PlugIn>_<useCase>_[<SwcBswI>][Partition] [_<ExE>]_<elementInstance>
 
 | 服务名 | `Rte_Rips_<PlugIn>_ReturnResult_<SwcBswI>_<CGI>` |
 | --- | --- |
-| 语法 | `Std_ReturnType Rte_Rips_<PlugIn>_ReturnResult_<SwcBswI>_<CGI> ( [IN/OUT&#124;OUT] <param_1>, [IN/OUT&#124;OUT] <param_n>, [Std_TransformerError transformerError] )` |
+| 语法 | `[Std_ReturnType](#7151-std_returntype) Rte_Rips_<PlugIn>_ReturnResult_<SwcBswI>_<CGI> ( [IN/OUT&#124;OUT] <param_1>, [IN/OUT&#124;OUT] <param_n>, [Std_TransformerError transformerError] )` |
 | 服务 ID [hex] | 0xED |
 | 同步/异步 | 同步 |
 | 可重入性 | 可重入 |
 | 输入参数 | 无 |
 | 输入输出参数 | `<param_1>`：`Rte_Rips_ReturnResult` API 按照 **SWS_Rte_01111** 包含零个或多个 IN/OUT 和 OUT 参数 |
 | 输出参数 | `<param_n>`：同上，按照 **SWS_Rte_01111** 包含零个或多个 IN/OUT 和 OUT 参数。`transformerError`：OUT 参数 `transformerError` 包含在转换器链执行期间发生的转换器错误 |
-| 返回值 | `Std_ReturnType`：用于指示通信错误 |
+| 返回值 | `[Std_ReturnType](#7151-std_returntype)`：用于指示通信错误 |
 | 描述 | `Rte_Rips_ReturnResult` 为客户端获取已执行的转换器调用或跨软件集群调用的服务器结果 |
 | 可用头文件 | `Rte_Rips_<PlugIn>_<SwcBswI>.h` |
 
@@ -5874,7 +10866,7 @@ Rte_Rips_<PlugIn>_<useCase>_[<SwcBswI>][Partition] [_<ExE>]_<elementInstance>
 * `RTE_E_SOFT_TRANSFORMER_ERROR` — 转换器链中至少有一个转换器的返回值是软错误，且转换器链中未发生硬错误。
 * `RTE_E_COM_STOPPED` — **RTE** 实现插件无法执行该操作，因为通信服务当前不可用。
 * `RTE_E_COM_BUSY` — **RTE** 实现插件无法执行该操作，因为由于当前正在进行的接收，结果查询被拒绝。无法进行结果查询。
-* `RTE_E_NO_DATA` —（非阻塞读取）无法获得服务器的结果，但 API 调用中没有发生其他错误，或自 `Rte_Start` 以来服务器未被调用。
+* `RTE_E_NO_DATA` —（非阻塞读取）无法获得服务器的结果，但 API 调用中没有发生其他错误，或自 `[Rte_Start](#7181-rte_start)` 以来服务器未被调用。
 * `RTE_E_TIMEOUT` — 在指定的超时时间内无法获得服务器的结果，但 API 调用中没有发生其他错误。IN/OUT 和 OUT 参数的缓冲区不得被修改。
 * 应用错误——只有当上述基础设施错误或指示均未发生时，才返回服务器的错误代码。
 
@@ -6184,14 +11176,14 @@ void Rte_Rips_NotifyRxAck_CGI_3()
 
 | 服务名 | `Rte_Rips_<PlugIn>_NotifyTriggerTransmit_<CGI>` |
 | --- | --- |
-| 语法 | `Std_ReturnType Rte_Rips_<PlugIn>_NotifyTriggerTransmit_<CGI> ( PduInfoType * PduInfoPtr )` |
+| 语法 | `[Std_ReturnType](#7151-std_returntype) Rte_Rips_<PlugIn>_NotifyTriggerTransmit_<CGI> ( PduInfoType * PduInfoPtr )` |
 | 服务 ID [hex] | 0xTBD |
 | 同步/异步 | 同步 |
 | 可重入性 | 对同一 sn 不可重入，其余情况可重入 |
 | 输入参数 | 无 |
 | 输入输出参数 | `PduInfoPtr`：包含指向 SDU 数据应复制到的缓冲区的指针（`SduDataPtr`）以及 `SduLengh` 中给出的可用缓冲区大小。返回时，服务将在 `SduLength` 中指示已复制的 SDU 数据的长度 |
 | 输出参数 | 无 |
-| 返回值 | `Std_ReturnType`：`E_OK`：SDU 已被复制，且 `SduLength` 指示已复制的字节数。`E_NOT_OK`：未复制任何 SDU 数据。不得使用 `PduInfoPtr`，因为它可能包含 `NULL` 指针或指向无效数据 |
+| 返回值 | `[Std_ReturnType](#7151-std_returntype)`：`E_OK`：SDU 已被复制，且 `SduLength` 指示已复制的字节数。`E_NOT_OK`：未复制任何 SDU 数据。不得使用 `PduInfoPtr`，因为它可能包含 `NULL` 指针或指向无效数据 |
 | 描述 | `Rte_Rips_NotifyTriggerTransmit` 通知 **RTE** 实现插件：用于需要转换的数据通信图的 LdCom 信号已触发将可用数据复制到 `SduDataPtr`。该函数被设计为 `LdCom_IF` 的 `Rte_LdComCbkTriggerTransmit` 回调的插件代理。有关该回调功能的更多细节，请参见 **SWS_LDCOM_00033** |
 | 可用头文件 | `Rte_Rips_<PlugIn>.h` |
 
@@ -6234,7 +11226,7 @@ void Rte_Rips_NotifyRxAck_CGI_3()
 
 | 服务名 | `Rte_Rips_<PlugIn>_NotifyTxConfirmation_<CGI>` |
 | --- | --- |
-| 语法 | `void Rte_Rips_<PlugIn>_NotifyTxConfirmation_<CGI> ( Std_ReturnType result )` |
+| 语法 | `void Rte_Rips_<PlugIn>_NotifyTxConfirmation_<CGI> ( [Std_ReturnType](#7151-std_returntype) result )` |
 | 服务 ID [hex] | 0xTBD |
 | 同步/异步 | 同步 |
 | 可重入性 | 对同一 sn 不可重入，其余情况可重入 |
@@ -6446,7 +11438,7 @@ void Rte_Rips_NotifyRxAck_CGI_3()
 
 | 服务名 | `Rte_Rips_<PlugIn>_NotifyTpRxIndication_<CGI>` |
 | --- | --- |
-| 语法 | `void Rte_Rips_<PlugIn>_NotifyTpRxIndication_<CGI> ( Std_ReturnType result )` |
+| 语法 | `void Rte_Rips_<PlugIn>_NotifyTpRxIndication_<CGI> ( [Std_ReturnType](#7151-std_returntype) result )` |
 | 服务 ID [hex] | 0xTBD |
 | 同步/异步 | 同步 |
 | 可重入性 | 对同一 sn 不可重入，其余情况可重入 |
@@ -6494,7 +11486,7 @@ void Rte_Rips_NotifyRxAck_CGI_3()
 
 | 服务名 | `Rte_Rips_<PlugIn>_NotifyTpTxConfirmation_<CGI>` |
 | --- | --- |
-| 语法 | `void Rte_Rips_<PlugIn>_NotifyTpTxConfirmation_<CGI> ( Std_ReturnType result )` |
+| 语法 | `void Rte_Rips_<PlugIn>_NotifyTpTxConfirmation_<CGI> ( [Std_ReturnType](#7151-std_returntype) result )` |
 | 服务 ID [hex] | 0xTBD |
 | 同步/异步 | 同步 |
 | 可重入性 | 对同一 sn 不可重入，其余情况可重入 |
@@ -6563,14 +11555,14 @@ void Rte_Rips_NotifyRxAck_CGI_3()
 
 | 服务名 | `Rte_Rips_<PlugIn>_Feedback_[<SwcBswI>][Partition]_<CGI>` |
 | --- | --- |
-| 语法 | `Std_ReturnType Rte_Rips_<PlugIn>_Feedback_[<SwcBswI>][Partition]_<CGI> ( void )` |
+| 语法 | `[Std_ReturnType](#7151-std_returntype) Rte_Rips_<PlugIn>_Feedback_[<SwcBswI>][Partition]_<CGI> ( void )` |
 | 服务 ID [hex] | 0xB6 |
 | 同步/异步 | 同步 |
 | 可重入性 | 可重入 |
 | 输入参数 | 无 |
 | 输入输出参数 | 无 |
 | 输出参数 | 无 |
-| 返回值 | `Std_ReturnType`：返回值用于传递错误通知。 |
+| 返回值 | `[Std_ReturnType](#7151-std_returntype)`：返回值用于传递错误通知。 |
 | 描述 | Rte_Rips_Feedback API 为显式和隐式发送者-接收者通信提供对确认通知的访问，并向软件集群中的发送者传递错误通知。 |
 | 可用头文件 | `Rte_Rips_<PlugIn>_<SwcBswI>.h` |
 
@@ -6751,7 +11743,7 @@ RTE 应按照 `RteRipsPluginConfigurationRef` 的索引所给定的顺序，调�
 | 描述 | `Rte_Rips_SchM_Init` 初始化与 SchM 相关操作有关的那些 RTE 实现插件部分 |
 | 可用头文件 | `Rte_Rips_<PlugIn>.h` |
 
-RTE 应在 `SchM_Init` 中调用所有参与的 RTE 实现插件的初始化函数 `Rte_Rips_SchM_Init`。
+RTE 应在 `[SchM_Init](#7271-schm_init)` 中调用所有参与的 RTE 实现插件的初始化函数 `Rte_Rips_SchM_Init`。
 
 **6.3.2.4.15.2 Rte_Rips_Rte_Start**
 
@@ -6768,7 +11760,7 @@ RTE 应在 `SchM_Init` 中调用所有参与的 RTE 实现插件的初始化函�
 | 描述 | `Rte_Rips_Rte_Start` 初始化与 RTE 相关操作有关的那些 RTE 实现插件部分 |
 | 可用头文件 | `Rte_Rips_<PlugIn>.h` |
 
-RTE 应在 `Rte_Start` 中调用所有参与的 RTE 实现插件的初始化函数 `Rte_Rips_Rte_Start`，调用时机为变量初始化完成之后、任何可运行实体（**RunnableEntity**）执行之前（例如入口处的可执行实体（**ExecutableEntity**））。
+RTE 应在 `[Rte_Start](#7181-rte_start)` 中调用所有参与的 RTE 实现插件的初始化函数 `Rte_Rips_Rte_Start`，调用时机为变量初始化完成之后、任何可运行实体（**RunnableEntity**）执行之前（例如入口处的可执行实体（**ExecutableEntity**））。
 
 **6.3.2.4.15.3 Rte_Rips_Rte_Stop**
 
@@ -6785,7 +11777,7 @@ RTE 应在 `Rte_Start` 中调用所有参与的 RTE 实现插件的初始化函�
 | 描述 | `Rte_Rips_Rte_Stop` 去初始化与 RTE 相关操作有关的那些 RTE 实现插件部分 |
 | 可用头文件 | `Rte_Rips_<PlugIn>.h` |
 
-RTE 应在 `Rte_Stop` 中调用所有参与的 RTE 实现插件的停止函数 `Rte_Rips_Rte_Stop`。
+RTE 应在 `[Rte_Stop](#7182-rte_stop)` 中调用所有参与的 RTE 实现插件的停止函数 `Rte_Rips_Rte_Stop`。
 
 **6.3.2.4.15.4 Rte_Rips_SchM_Deinit**
 
@@ -6802,7 +11794,7 @@ RTE 应在 `Rte_Stop` 中调用所有参与的 RTE 实现插件的停止函数 `
 | 描述 | `Rte_Rips_SchM_Deinit` 去初始化与 SchM 相关操作有关的那些 RTE 实现插件部分 |
 | 可用头文件 | `Rte_Rips_<PlugIn>.h` |
 
-RTE 应在 `SchM_Deinit` 中调用所有参与的 RTE 实现插件的去初始化函数 `Rte_Rips_SchM_Deinit`。
+RTE 应在 `[SchM_Deinit](#7274-schm_deinit)` 中调用所有参与的 RTE 实现插件的去初始化函数 `Rte_Rips_SchM_Deinit`。
 
 #### 6.3.3. RTE 实现插件功能规格
 
@@ -6898,17 +11890,17 @@ RTE 实现插件工具应验证所请求的功能能否通过给定的事件到�
 
 当全局启用 RTE 实现插件支持（`RteRipsSupport`）且某个通信图已分配给某个 RTE 实现插件时，RTE 生成器应将其对输入配置在通信多重性方面所施加的验证，限制在与 RTE 代码生成相关的方面。
 
-当一个数据通信图包含来自某个跨软件集群通信插件与另一来源（无论是集群本地写入者、集群本地插件还是跨 ECU 连接）的扇入接收时，当读取方软件组件（SW-C）调用 `Rte_Read` 或 `Rte_IRead` API 时，RTE 无法确定应返回哪个数据。这是因为 RTE 代码无法得知哪个数据先被接收，因此没有信息来判断应返回哪个数据以实现 last-is-best 语义。
+当一个数据通信图包含来自某个跨软件集群通信插件与另一来源（无论是集群本地写入者、集群本地插件还是跨 ECU 连接）的扇入接收时，当读取方软件组件（SW-C）调用 `[Rte_Read](#71610-rte_read)` 或 `[Rte_IRead](#71618-rte_iread)` API 时，RTE 无法确定应返回哪个数据。这是因为 RTE 代码无法得知哪个数据先被接收，因此没有信息来判断应返回哪个数据以实现 last-is-best 语义。
 
-图 7.3：含扇入与跨 ECU 通信的数据通信图
+![Figure7-3.png](Figure7-3.png)
 
 在 7.3 所示的情形中，由于跨集群通信采用轮询方式而跨 ECU 通信采用回调方式，RTE 无法实现 last-is-best 通信。因此 RTE 无法得知哪个值是最新的。
 
-图 7.4：含扇入与本地提供者的数据通信图
+![Figure7-4.png](Figure7-4.png)
 
 在 7.4 中，RTE 同样无法实现 last-is-best，因为跨集群通信的轮询特性意味着任何生成的 RTE API 都无法知道来自另一个集群的值是在本地提供者的值之前还是之后提供的。
 
-图 7.5：含扇入、本地 RIPS 与本地提供者的数据通信图
+![Figure7-5.png](Figure7-5.png)
 
 在 7.5 中，当确定如何基于 last-is-best 语义填充缓冲区时，RTE 有三个可选的候选值：本地提供者的值、本地 RIPS 插件的值或跨集群 RIPS 插件的值。同样，RTE 无法得知哪个值最后到达，因此无法实现这种通信模式。
 
@@ -6932,7 +11924,7 @@ RTE 实现插件工具应验证所请求的功能能否通过给定的事件到�
 
 ###### 6.3.3.4.1. 为通信图启用 RTE 实现插件支持
 
-根据文档 [8]，数据通信图通过 FlatInstanceDescriptor 被分配给某个 RTE 实现插件，该 FlatInstanceDescriptor 一方面指向某个 `VariableDataPrototype` 实例，另一方面经由 `FlatInstanceDescriptor.rtePluginProps.associatedRtePlugin` 或 `FlatInstanceDescriptor.rtePluginProps.associatedCrossSwClusterComRtePlugin` 指向容器 `RteRipsPluginProps`。
+根据文档 [\[8\]](#ref-8)，数据通信图通过 FlatInstanceDescriptor 被分配给某个 RTE 实现插件，该 FlatInstanceDescriptor 一方面指向某个 `VariableDataPrototype` 实例，另一方面经由 `FlatInstanceDescriptor.rtePluginProps.associatedRtePlugin` 或 `FlatInstanceDescriptor.rtePluginProps.associatedCrossSwClusterComRtePlugin` 指向容器 `RteRipsPluginProps`。
 
 如果某个带 `rtePluginProps` 的 FlatInstanceDescriptor 引用了某数据通信图，则 RTE 生成器应为该数据通信图启用 RTE 实现插件支持。
 
@@ -6993,15 +11985,15 @@ RTE 实现插件的有效实例引用目标：某数据通信图的 RIPS FlatIns
 
 表 7.1：RIPS FlatInstanceDescriptor 的引用目标
 
-图 7.6：涉及跨集群通信的 1:N 数据通信图
+![Figure7-6.png](Figure7-6.png)
 
-图 7.7：涉及跨集群通信的 N:1 数据通信图
+![Figure7-7.png](Figure7-7.png)
 
 在存在转换的情形下，需要多个 RIPS FlatInstanceDescriptor 来为数据和/或数据状态的各个不同表示定义接口命名空间。然而，这些不同的表示不可能由不同的 RTE 实现插件处理。
 
 数据通信图至多由一个本地软件集群通信插件处理：在某数据通信图被多个 RIPS FlatInstanceDescriptor 引用的情形下，所有这些 RIPS FlatInstanceDescriptor 都应经由 `FlatInstanceDescriptor.rtePluginProps.associatedRtePlugin` 引用同一个 `RteRipsPluginProps` 容器。
 
-图 7.8：带转换的数据通信图
+![Figure7-8.png](Figure7-8.png)
 
 图 7.8 展示了一个带数据转换的数据通信图示例。此处应假定，在两个不同的 `SenderReceiverInterface` 中给出的 `dataElement` 数据由描述不同分辨率的 `ApplicationDataType` 定义类型（图中未显示）。
 
@@ -7023,7 +12015,7 @@ RTE 生成器和 RTE 实现插件应将以下各者视为属于同一个数据�
 
 RTE 生成器可以利用 **SWS_NvM_00347** 所述的事实，即 `NvBlockSwComponent` 内的所有 `ramBlock` 访问都在 `ExecutableEntity` `NvM_MainFunction` 的调用上下文中进行。
 
-图 7.9：涉及 NvBlockSwComponent 的数据通信图
+![Figure7-9.png](Figure7-9.png)
 
 图 7.9 展示了涉及 NvBlockSwComponent 的数据通信图示例。其中，RIPS FlatInstanceDescriptor `MyNvData1` 引用了 `NvBlockSwComponent` `myNvBlockSwc` 的 p-port `ppNvDat1`。这也为从原子软件组件 `myComponent` 的 p-port `ppNvDat1` 到该 `NvBlockSwComponent` 的 r-port `rpNvDat1` 的部分数据通信图启用了 RTE 实现插件。该 FlatInstanceDescriptor 的 `shortName` 定义了这个未被显式标记的数据通信图的 RTE 实现插件服务名称。
 
@@ -7031,7 +12023,7 @@ RTE 生成器可以利用 **SWS_NvM_00347** 所述的事实，即 `NvBlockSwComp
 
 RTE 生成器应支持数据通信图在 `ramBlock` 中的重叠。
 
-图 7.10：数据通信图在 ramBlock 中的重叠
+![Figure7-10.png](Figure7-10.png)
 
 图 7.10 展示了数据通信图在 `ramBlock` 中重叠的示例。在该示例中，数据通信图 `AllNvData` 由原子软件组件 `myComponent` 经由 p-port `ppNvAllData` 写入。此外，数据通信图 `AllNvData` 与作为 `ramBlock` 子元素的数据通信图 `MyNvData1` 和 `MyNvData2` 相重叠。
 
@@ -7191,7 +12183,7 @@ RTE 生成器应支持数据通信图在 `ramBlock` 中的重叠。
 
 **RTE** 实现插件接口假定 **RTE** 实现了一个保存通信数据实际值的变量，读取者和写入者可以对该变量进行读写。在与 **RTE** 实现插件相关的各节中，该变量被称为全局副本（global copy）。此外，隐式通信概念还需要额外的缓冲区来保证特定访问可运行实体的数据稳定性，这些缓冲区被称为隐式通信缓冲区（implicit communication buffers）。
 
-如 6.3.3.4.2 节所述，一个或多个 **RIPS** `FlatInstanceDescriptor` 可以指向一个数据通信图以启用 **RTE** 实现插件支持。由此，**RIPS** `FlatInstanceDescriptor` 的数量决定了数据可能的不同表示的数量。此外，**RIPS** `FlatInstanceDescriptor` 的 `shortName` 定义了这样的全局副本以及所属 **RTE** 实现插件服务的名称空间。
+如 [6.3.3.4.2](#63342-数据通信图的-rips-flatinstancedescriptor-详细信息) 节所述，一个或多个 **RIPS** `FlatInstanceDescriptor` 可以指向一个数据通信图以启用 **RTE** 实现插件支持。由此，**RIPS** `FlatInstanceDescriptor` 的数量决定了数据可能的不同表示的数量。此外，**RIPS** `FlatInstanceDescriptor` 的 `shortName` 定义了这样的全局副本以及所属 **RTE** 实现插件服务的名称空间。
 
 如果关联的本地软件集群通信插件已将 `RteRipsGlobalCopyInstantiationPolicy` 设置为 `RTE_RIPS_INSTANTIATION_BY_RTE`，则 **RTE** 应为每个引用该数据通信图的 **RIPS** `FlatInstanceDescriptor` 提供一个独立的全局副本。
 
@@ -7241,7 +12233,7 @@ RTE 生成器应支持数据通信图在 `ramBlock` 中的重叠。
 
 **RTE** 实现插件应支持适用于软件组件的各类 `ValueSpecification`。
 
-`ValueSpecification` 定义于文档 [2]。
+`ValueSpecification` 定义于文档 [\[2\]](#ref-2)。
 
 ###### 6.3.3.4.6. 显式通信与 RTE 实现插件
 
@@ -7272,7 +12264,7 @@ RTE 生成器应支持数据通信图在 `ramBlock` 中的重叠。
 
 **6.3.3.4.6.1.1. 非排队读写的简单示例**
 
-下面的示例代码展示了数据未分配任何状态、软件组件不支持多重实例化并以源代码形式交付时的基本实现。此外，64 位访问在底层平台上不是原子的，以演示一个保护场景。与其他示例不同的是，`Rte_DRead` 没有实现为宏，以便展示另一种实现风格。
+下面的示例代码展示了数据未分配任何状态、软件组件不支持多重实例化并以源代码形式交付时的基本实现。此外，64 位访问在底层平台上不是原子的，以演示一个保护场景。与其他示例不同的是，`[Rte_DRead](#71611-rte_dread)` 没有实现为宏，以便展示另一种实现风格。
 
 **示例 7.4**
 
@@ -7525,11 +12517,11 @@ Std_ReturnType Rte_Read_myComponent_myRPort1_myExplicitSimpleData(uint32 * data)
 
 **6.3.3.4.6.2. 由 RTE 实现插件提供全局副本**
 
-在全局副本由 **RTE** 实现插件提供的情况下，**RTE** 实现插件必须提供读写 **RTE** 实现插件服务 `Rte_Rips_Read`、`Rte_Rips_DRead` 和 `Rte_Rips_Write`。这些访问服务以受保护的方式实现对 **RTE** 实现插件所提供全局副本的纯数据访问。这里假定，在 **ECU** 内通信场景中数据访问总是成功的。在 `Rte_Rips_Read`、`Rte_Rips_DRead` 和 `Rte_Rips_Write` 服务用于变换器访问的情况下，可能出现相应的错误码（见 6.3.3.11.1 节）。
+在全局副本由 **RTE** 实现插件提供的情况下，**RTE** 实现插件必须提供读写 **RTE** 实现插件服务 `Rte_Rips_Read`、`Rte_Rips_DRead` 和 `Rte_Rips_Write`。这些访问服务以受保护的方式实现对 **RTE** 实现插件所提供全局副本的纯数据访问。这里假定，在 **ECU** 内通信场景中数据访问总是成功的。在 `Rte_Rips_Read`、`Rte_Rips_DRead` 和 `Rte_Rips_Write` 服务用于变换器访问的情况下，可能出现相应的错误码（见 [6.3.3.11.1](#633111-数据通信图的-datatransformation-处理) 节）。
 
-此外，关于存在性和使用的要求已在 6.3.2.4.5 节中说明。
+此外，关于存在性和使用的要求已在 [6.3.2.4.5](#63245-显式数据访问服务) 节中说明。
 
-全局副本的创建在 6.3.3.4.5 节中描述。
+全局副本的创建在 [6.3.3.4.5](#63345-全局副本的实例化) 节中描述。
 
 对于对数据通信图的任何显式访问，**RTE** 都应使用数据访问 **RTE** 实现插件服务 `Rte_Rips_Read`、`Rte_Rips_DRead` 和 `Rte_Rips_Write`。
 
@@ -7543,7 +12535,7 @@ Std_ReturnType Rte_Read_myComponent_myRPort1_myExplicitSimpleData(uint32 * data)
 
 图 7.11 说明了 **RTE** 如何使用 `Rte_Rips_Read` 和 `Rte_Rips_Write` 服务访问由跨软件集群通信插件实现的队列。此外，跨软件集群通信插件还管理来自其他软件集群（无 **RTE**）的访问。
 
-图 7.11：跨软件集群通信插件的排队通信示例
+![Figure7-11.png](Figure7-11.png)
 
 保护块可以嵌套，例如当可运行实体在某个独占区内执行的同时使用显式通信时。因此建议普遍使用支持嵌套的保护块实现。至少在可能发生嵌套之处必须使用此类实现，而这需要事先分析。一方面，相关的是由访问数据通信图的可执行实体 (1) 直接使用的那些独占区。此外，相关的是由所有经由直接函数调用或可信函数调用、带数据通信图访问而调用可执行实体 (1) 的可执行实体所使用的那些独占区。
 
@@ -7551,11 +12543,11 @@ Std_ReturnType Rte_Read_myComponent_myRPort1_myExplicitSimpleData(uint32 * data)
 
 ###### 6.3.3.4.7. 隐式通信与 RTE 实现插件
 
-通常，隐式访问 **API** 直接指向某个内存地址或直接在其上工作（任务缓冲区或全局副本）。因此，目标是提供一种可能性，让本地软件集群通信插件定义该内存地址。这意味着缓冲区同步（即填充和清空）也必须由本地软件集群通信插件完成。为此，它需要一种能在可运行实体调用上下文（可能是任务体，但也可能是调用者的 `Rte_Call`、`Rte_Trigger` 或 `Rte_Switch` **API**）中的期望位置插入相应代码的途径。反过来，**RTE** 必须对由关联本地软件集群通信插件处理的数据通信图禁用其相应的模型检查（例如在某个中断场景下是否允许隐式通信）以及缓冲区创建。
+通常，隐式访问 **API** 直接指向某个内存地址或直接在其上工作（任务缓冲区或全局副本）。因此，目标是提供一种可能性，让本地软件集群通信插件定义该内存地址。这意味着缓冲区同步（即填充和清空）也必须由本地软件集群通信插件完成。为此，它需要一种能在可运行实体调用上下文（可能是任务体，但也可能是调用者的 `[Rte_Call](#71613-rte_call)`、`[Rte_Trigger](#71634-rte_trigger)` 或 `[Rte_Switch](#7166-rte_switch)` **API**）中的期望位置插入相应代码的途径。反过来，**RTE** 必须对由关联本地软件集群通信插件处理的数据通信图禁用其相应的模型检查（例如在某个中断场景下是否允许隐式通信）以及缓冲区创建。
 
-对于以源代码形式交付的软件组件，并非所有隐式访问宏都严格必须在内存地址上工作，但对于 `Rte_IWrite` 或 `Rte_IRead`，可能存在更优化的实现。为了使这样的实现成为可能，对于不因源代码交付而需要兼容模式的软件组件，**RTE** 不应提供组件数据结构——反正在这种情况下 **RTE** 本来也不应提供组件数据结构，以降低 **ROM** 消耗。
+对于以源代码形式交付的软件组件，并非所有隐式访问宏都严格必须在内存地址上工作，但对于 `[Rte_IWrite](#71620-rte_iwrite)` 或 `[Rte_IRead](#71618-rte_iread)`，可能存在更优化的实现。为了使这样的实现成为可能，对于不因源代码交付而需要兼容模式的软件组件，**RTE** 不应提供组件数据结构——反正在这种情况下 **RTE** 本来也不应提供组件数据结构，以降低 **ROM** 消耗。
 
-相应 **RTE** 实现插件服务的使用在 6.3.2.4.2 和 6.3.2.4.1 节中描述。
+相应 **RTE** 实现插件服务的使用在 [6.3.2.4.2](#63242-隐式缓冲区地址访问) 和 [6.3.2.4.1](#63241-隐式缓冲区值访问) 节中描述。
 
 只有当特定软件组件因以目标代码交付而需要兼容模式，或该特定软件组件支持多重实例化时，**RTE** 才应将数据句柄区和可运行实体间变量句柄区用于隐式通信。
 
@@ -7577,9 +12569,9 @@ Std_ReturnType Rte_Read_myComponent_myRPort1_myExplicitSimpleData(uint32 * data)
 
 本地软件集群通信插件可以自由地使用复杂设备驱动（Complex Driver）的手段来实现 **SWS_Rte_70136** 和 **SWS_Rte_70137**。图 7.12 说明了这一点。
 
-图 7.12：经由 RTE 实现插件的隐式通信示例
+![Figure7-12.png](Figure7-12.png)
 
-当然，这种方式可能改变 **RTE** 所看到的通信多重性。另见 6.3.3.3.4 节。
+当然，这种方式可能改变 **RTE** 所看到的通信多重性。另见 [6.3.3.3.4](#63334-对通信多重性的验证影响) 节。
 
 **6.3.3.4.7.1. 填充与清空例程**
 
@@ -7982,13 +12974,13 @@ TASK(TASK_PREEMPT_1MS)
 
 ###### 6.3.3.4.8. 可运行实体间变量与 RTE 实现插件
 
-除了可运行实体间变量（InterRunnableVariable）由软件组件内部使用并使用自己的一组 **API**（即 `Rte_IrvIRead`、`Rte_IrvIWrite` 和 `Rte_IrvIWriteRef`）这一事实之外，与常规数据实例相比，其实现代码以及对保护和缓冲的需求没有任何差异。因此，不应将其与常规的软件组件间隐式通信区别对待。也就是说，可运行实体间变量同样会被某个 **RIPS** `FlatInstanceDescriptor` 引用，其访问 **API** 也会像常规隐式访问一样经由相同的 **RTE** 实现插件服务进行路由。
+除了可运行实体间变量（InterRunnableVariable）由软件组件内部使用并使用自己的一组 **API**（即 `[Rte_IrvIRead](#71624-rte_irviread)`、`[Rte_IrvIWrite](#71626-rte_irviwrite)` 和 `[Rte_IrvIWriteRef](#71627-rte_irviwriteref)`）这一事实之外，与常规数据实例相比，其实现代码以及对保护和缓冲的需求没有任何差异。因此，不应将其与常规的软件组件间隐式通信区别对待。也就是说，可运行实体间变量同样会被某个 **RIPS** `FlatInstanceDescriptor` 引用，其访问 **API** 也会像常规隐式访问一样经由相同的 **RTE** 实现插件服务进行路由。
 
 由于隐式通信和显式通信的需求已经覆盖了可运行实体间变量，因此没有针对它们的特定需求。例如 **SWS_Rte_70015**、**SWS_Rte_70016**、**SWS_Rte_70017**、**SWS_Rte_70018**、**SWS_Rte_70019**、**SWS_Rte_70021**、**SWS_Rte_70023**、**SWS_Rte_70025**、**SWS_Rte_70050**、**SWS_Rte_70056**。
 
 ###### 6.3.3.4.9. RTE 实现插件与 NvBlockSwComponent
 
-当数据通信图涉及 `NvBlockSwComponent` 时（另见 6.3.3.4.3 节），数据还会通过 **RTE** 为该 `NvBlock` 提供的以下回调函数被额外访问：
+当数据通信图涉及 `NvBlockSwComponent` 时（另见 [6.3.3.4.3](#63343-涉及-nvblockswcomponent-的数据通信图) 节），数据还会通过 **RTE** 为该 `NvBlock` 提供的以下回调函数被额外访问：
 
 * `Rte_GetMirror`（读取）；
 * `Rte_SetMirror`（写入）；
@@ -8523,7 +13515,7 @@ void Rips_Fill_Runnable2(void)
 
 为克服这一局限，RTE 实现插件必须选择一种合适的实现方式，而 RTE 则必须暂停其相关的模型验收检查。由于并非每个互斥区域都需要超出 RTE 内部机制的处理方式，因此可以将各个互斥区域单独指派给某个特定的 RTE 实现插件。
 
-就互斥区域而言，源代码集成与目标代码集成的软件组件之间没有差别，区别仅在于：对于源代码集成的软件组件，RTE 可以自由地直接在应用头文件中实现 Rte_Enter 与 Rte_Exit API。因此本章的论述同时适用于源代码集成和目标代码集成的软件组件。
+就互斥区域而言，源代码集成与目标代码集成的软件组件之间没有差别，区别仅在于：对于源代码集成的软件组件，RTE 可以自由地直接在应用头文件中实现 [Rte_Enter](#71630-rte_enter) 与 [Rte_Exit](#71631-rte_exit) API。因此本章的论述同时适用于源代码集成和目标代码集成的软件组件。
 
 互斥区域有两类：一类可以在 ExecutableEntity 内部被显式进入和退出（canEnter 角色），另一类保护完整的 ExecutableEntity（runsInside 角色）。相关示例在各自的小节中给出。
 
@@ -8540,7 +13532,7 @@ void Rips_Fill_Runnable2(void)
 
 * common。
 
-如果某个 ExecutableEntity 定义了 canEnter 关联，则 RTE 生成器应在相应的 Rte_Enter 与 Rte_Exit API 内部调用对应的 Rte_Rips_Enter 与 Rte_Rips_Exit 服务。
+如果某个 ExecutableEntity 定义了 canEnter 关联，则 RTE 生成器应在相应的 [Rte_Enter](#71630-rte_enter) 与 [Rte_Exit](#71631-rte_exit) API 内部调用对应的 Rte_Rips_Enter 与 Rte_Rips_Exit 服务。
 
 如果某个 ExecutableEntity 定义了 runsInside 关联，则 RTE 应在因某个特定 RTEEvent 或 BswEvent 的激活而调用相应 RunnableEntity 或 BswModuleEntity 的位置调用对应的 Rte_Rips_Enter 与 Rte_Rips_Exit 服务。
 
@@ -8704,7 +13696,7 @@ TASK(TASK_COOP_10MS)
 
 ###### 6.3.3.6.1. 模式与本地软件集群通信插件
 
-在没有本地软件集群通信插件的情况下，模式队列的保护是 RTE 生成器的职责。由于对模式机器实例和分布式共享模式队列的要求包括通过 Rte_Mode API 对一组模式值（当前模式、前一模式、下一模式）进行排队并一致地读取，其实现很可能需要某种保护机制。
+在没有本地软件集群通信插件的情况下，模式队列的保护是 RTE 生成器的职责。由于对模式机器实例和分布式共享模式队列的要求包括通过 [Rte_Mode](#71632-rte_mode) API 对一组模式值（当前模式、前一模式、下一模式）进行排队并一致地读取，其实现很可能需要某种保护机制。
 
 但如果使用了本地软件集群通信插件，则出于以下两个基本原因，需要能够控制所采用的保护机制：
 
@@ -8721,9 +13713,9 @@ TASK(TASK_COOP_10MS)
 
 如果需要将某个模式切换通知传递给另一个软件集群，则实现跨越软件集群边界的传送功能是跨软件集群通信插件的职责。
 
-在软件集群接收模式切换通知的情况下，常规的 Rte_Switch API 就足以向 RTE 通告正在进行的模式切换。与完全在应用软件集群内部处理的模式切换相比，唯一的差别在于：模式切换任务的任务激活由宿主软件集群在后台进行协调。
+在软件集群接收模式切换通知的情况下，常规的 [Rte_Switch](#7166-rte_switch) API 就足以向 RTE 通告正在进行的模式切换。与完全在应用软件集群内部处理的模式切换相比，唯一的差别在于：模式切换任务的任务激活由宿主软件集群在后台进行协调。
 
-在软件集群提供（发出）模式切换通知的情况下，跨集群通信一方面需要被告知新入队的模式切换通知。为此，Rte_Switch API 会调用跨软件集群通信插件相应的 Rte_Rips_Switch 服务。当模式切换开始后，它会在所有接收方软件集群上执行，并且必须在这些软件集群上被完整处理之后，才能出队下一个模式切换。为此，软件集群连接通过 Rte_Rips_DequeueModeSwitch 服务通知 RTE。
+在软件集群提供（发出）模式切换通知的情况下，跨集群通信一方面需要被告知新入队的模式切换通知。为此，[Rte_Switch](#7166-rte_switch) API 会调用跨软件集群通信插件相应的 Rte_Rips_Switch 服务。当模式切换开始后，它会在所有接收方软件集群上执行，并且必须在这些软件集群上被完整处理之后，才能出队下一个模式切换。为此，软件集群连接通过 Rte_Rips_DequeueModeSwitch 服务通知 RTE。
 
 ###### 6.3.3.6.3. 为模式机器实例启用 RTE 实现插件支持
 
@@ -8737,7 +13729,7 @@ RTE 实现插件的模式组实例引用 I：如果配置中包含该模式通�
 
 RTE 实现插件的有效模式组实例引用 II：如果配置中仅包含该模式通信图的模式使用者，则该模式通信图的 RIPS FlatInstanceDescriptor 应引用 Ecu Extract 的 rootSoftwareComposition 处 CompositionSwComponentType 上 RPortPrototype 中的 modeGroup 实例。
 
-请注意，上述两条约束针对的是跨软件集群通信插件按文档 [34] 所述提供"代理"模式管理器之前的配置。
+请注意，上述两条约束针对的是跨软件集群通信插件按文档 [\[34\]](#ref-34) 所述提供"代理"模式管理器之前的配置。
 
 RTE 实现插件的有效模式组实例引用 III：仅当 rtePluginProps.associatedCrossSwClusterComRtePlugin 引用了某个跨软件集群通信插件时，针对某个 modeGroup 的 RIPS FlatInstanceDescriptor 才适用。
 
@@ -8745,15 +13737,15 @@ RTE 实现插件的有效模式组实例引用 III：仅当 rtePluginProps.assoc
 
 **6.3.3.6.4.1 Rte_Rips_Switch 指示**
 
-如果针对某个模式通信图启用了跨软件集群通信插件支持，则 RTE 应在该模式机器实例相关模式管理器的 Rte_Switch API 中调用 Rte_Rips_Switch 服务。
+如果针对某个模式通信图启用了跨软件集群通信插件支持，则 RTE 应在该模式机器实例相关模式管理器的 [Rte_Switch](#7166-rte_switch) API 中调用 Rte_Rips_Switch 服务。
 
 此时，参数按以下要求设置：
 
-如果 Rte_Switch API 入队到空的模式队列中，则 RTE 应将相关模式机器实例的当前模式作为参数 previousmode、所请求的模式作为参数 nextmode、RTE_SWITCH_NOTIFCATION_ENQUEUED_FIRST 作为参数 switchNotificationStatus 传递给 Rte_Rips_Switch 服务。
+如果 [Rte_Switch](#7166-rte_switch) API 入队到空的模式队列中，则 RTE 应将相关模式机器实例的当前模式作为参数 previousmode、所请求的模式作为参数 nextmode、RTE_SWITCH_NOTIFCATION_ENQUEUED_FIRST 作为参数 switchNotificationStatus 传递给 Rte_Rips_Switch 服务。
 
-如果 Rte_Switch API 入队到非空的模式队列中，则 RTE 应将所请求的模式作为参数 nextmode、RTE_SWTICH_NOTIFICATION_ENQUEUED_NOT_FIRST 作为参数 switchNotificationStatus 传递给 Rte_Rips_Switch 服务。
+如果 [Rte_Switch](#7166-rte_switch) API 入队到非空的模式队列中，则 RTE 应将所请求的模式作为参数 nextmode、RTE_SWTICH_NOTIFICATION_ENQUEUED_NOT_FIRST 作为参数 switchNotificationStatus 传递给 Rte_Rips_Switch 服务。
 
-如果 Rte_Switch API 无法入队到模式队列中，则 RTE 应将所请求的模式作为参数 nextmode、RTE_SWTICH_NOTIFICATION_ENQUEUE_FAILED 作为参数 switchNotificationStatus 传递给 Rte_Rips_Switch 服务。
+如果 [Rte_Switch](#7166-rte_switch) API 无法入队到模式队列中，则 RTE 应将所请求的模式作为参数 nextmode、RTE_SWTICH_NOTIFICATION_ENQUEUE_FAILED 作为参数 switchNotificationStatus 传递给 Rte_Rips_Switch 服务。
 
 请注意：在前两种情况下，该模式机器实例的模式转换可能正在进行中。因此参数 previousmode 不可靠，因为它可能在 Rte_Rips_Switch 服务执行期间的任意时刻发生变化。因此，在模式切换已在进行的情况下，参数 previousmode 的取值取决于具体实现，RTE 实现插件不会对其求值。
 
@@ -8804,15 +13796,15 @@ RTE 实现插件的有效模式组实例引用 III：仅当 rtePluginProps.assoc
 
 **6.3.3.6.6.2 Rte_Rips_DsmqSwitch 指示**
 
-如果针对某个分布式共享模式队列启用了 RTE 实现插件支持，则 RTE 应在该模式机器实例相关模式管理器的 Rte_Switch API 中调用 Rte_Rips_DsmqSwitch 服务。
+如果针对某个分布式共享模式队列启用了 RTE 实现插件支持，则 RTE 应在该模式机器实例相关模式管理器的 [Rte_Switch](#7166-rte_switch) API 中调用 Rte_Rips_DsmqSwitch 服务。
 
 此时，参数按以下要求设置：
 
-如果 Rte_Switch API 入队到空的分布式共享模式队列中，则 RTE 应将相关模式机器实例的当前模式作为参数 previousmode、所请求的模式作为参数 nextmode、RTE_DSMQ_ENQUEUED_FIRST 作为参数 dsmqstatus 传递给 Rte_Rips_DsmqSwitch 服务。
+如果 [Rte_Switch](#7166-rte_switch) API 入队到空的分布式共享模式队列中，则 RTE 应将相关模式机器实例的当前模式作为参数 previousmode、所请求的模式作为参数 nextmode、RTE_DSMQ_ENQUEUED_FIRST 作为参数 dsmqstatus 传递给 Rte_Rips_DsmqSwitch 服务。
 
-如果 Rte_Switch API 入队到非空的分布式共享模式队列中，则 RTE 应将所请求的模式作为参数 nextmode、RTE_DSMQ_ENQUEUED_NOT_FIRST 作为参数 dsmqstatus 传递给 Rte_Rips_DsmqSwitch 服务。
+如果 [Rte_Switch](#7166-rte_switch) API 入队到非空的分布式共享模式队列中，则 RTE 应将所请求的模式作为参数 nextmode、RTE_DSMQ_ENQUEUED_NOT_FIRST 作为参数 dsmqstatus 传递给 Rte_Rips_DsmqSwitch 服务。
 
-如果 Rte_Switch API 无法入队到分布式共享模式队列中，则 RTE 应将所请求的模式作为参数 nextmode、RTE_DSMQ_ENQUEUE_FAILED 作为参数 dsmqstatus 传递给 Rte_Rips_DsmqSwitch 服务。
+如果 [Rte_Switch](#7166-rte_switch) API 无法入队到分布式共享模式队列中，则 RTE 应将所请求的模式作为参数 nextmode、RTE_DSMQ_ENQUEUE_FAILED 作为参数 dsmqstatus 传递给 Rte_Rips_DsmqSwitch 服务。
 
 请注意：在后两种情况下，该模式机器实例的模式转换可能正在进行中。因此参数 previousmode 不可靠，因为它可能在 Rte_Rips_DsmqSwitch 服务执行期间的任意时刻发生变化。因此，参数 previousmode 的取值取决于具体实现，RTE 实现插件不会对其求值。
 
@@ -8873,7 +13865,7 @@ RTE 应将当前模式切换的出队操作与当前模式切换的 Rte_Rips_Dsm
 
 ###### 6.3.3.7.1. 为参数通信图启用 RTE 实现插件支持
 
-根据文档 [8]，一个参数通信图（**Parameter Communication Graph**）通过一个 `FlatInstanceDescriptor` 被指派给某个 **RTE** 实现插件：该 `FlatInstanceDescriptor` 一方面指向某个 `ParameterDataPrototype` 的实例，另一方面经由 `FlatInstanceDescriptor.rtePluginProps.associatedCrossSwClusterComRtePlugin` 指向容器 `RteRipsPluginProps`。
+根据文档 [\[8\]](#ref-8)，一个参数通信图（**Parameter Communication Graph**）通过一个 `FlatInstanceDescriptor` 被指派给某个 **RTE** 实现插件：该 `FlatInstanceDescriptor` 一方面指向某个 `ParameterDataPrototype` 的实例，另一方面经由 `FlatInstanceDescriptor.rtePluginProps.associatedCrossSwClusterComRtePlugin` 指向容器 `RteRipsPluginProps`。
 
 请注意，参数通信图仅支持用于跨集群通信的 **RTE** 实现插件！
 
@@ -8987,15 +13979,15 @@ AUTOSAR 提供了描述软件组件交付内容的手段，也描述了源代码
 
 当某个触发器需要被传递到另一个软件集群时，实现跨越软件集群边界之功能是跨软件集群通信插件的职责。
 
-当触发器被软件集群接收时，常规的 `Rte_Trigger` **API** 就足以把已触发的触发器告知 **RTE**。与完全在应用软件集群内部本地处理的触发器相比，唯一的区别在于：执行被触发可执行实体（**ExecutableEntity**）的任务，其任务激活由宿主软件集群在后台进行协调。
+当触发器被软件集群接收时，常规的 `[Rte_Trigger](#71634-rte_trigger)` **API** 就足以把已触发的触发器告知 **RTE**。与完全在应用软件集群内部本地处理的触发器相比，唯一的区别在于：执行被触发可执行实体（**ExecutableEntity**）的任务，其任务激活由宿主软件集群在后台进行协调。
 
-当触发器由软件集群提供时，跨集群通信一方面需要被告知新触发的触发器。为此，`Rte_Trigger` **API** 会调用跨软件集群通信插件的相应 `Rte_Rips_Trigger` 服务。
+当触发器由软件集群提供时，跨集群通信一方面需要被告知新触发的触发器。为此，`[Rte_Trigger](#71634-rte_trigger)` **API** 会调用跨软件集群通信插件的相应 `Rte_Rips_Trigger` 服务。
 
 对于由应用软件集群提供的任何触发器，宿主软件集群也会被告知已触发的触发器。这使宿主软件集群能够激活执行被触发可执行实体的所有任务。当触发器需要排队时，该队列在宿主软件集群的 **RTE** 中配置并实现。
 
 **6.3.3.10.2.1 Rte_Rips_Trigger 指示**
 
-如果某个触发器通信图启用了跨软件集群通信插件支持，则 **RTE** 应在相关触发器源的 `Rte_Trigger` **API** 中调用 `Rte_Rips_Trigger` 服务。
+如果某个触发器通信图启用了跨软件集群通信插件支持，则 **RTE** 应在相关触发器源的 `[Rte_Trigger](#71634-rte_trigger)` **API** 中调用 `Rte_Rips_Trigger` 服务。
 
 **触发器队列仅在宿主软件集群中受支持**：对于在软件集群之间传递的触发器，按照 **SWS_Rte_07087** 配置的触发器队列仅在宿主软件集群中受支持。
 
@@ -9015,11 +14007,11 @@ AUTOSAR 提供了描述软件组件交付内容的手段，也描述了源代码
 
 此时，调用相应转换器的职责由 **RTE** 转移到 **RTE** 实现插件，由后者按正确顺序调用相应的转换器。尽管如此，把这一功能剥离到 **RTE** 实现插件中，可以支持依赖精确调度场景的精细缓冲区复用优化，以及在特定调用上下文中对转换器调用的明确传递。
 
-由此，**RTE** 实现插件服务 `Rte_Rips_Read`、`Rte_Rips_DRead` 和 `Rte_Rips_Write` 在相关的 `Rte_Read`、`Rte_DRead` 和 `Rte_Write` **API** 的上下文中被调用。
+由此，**RTE** 实现插件服务 `Rte_Rips_Read`、`Rte_Rips_DRead` 和 `Rte_Rips_Write` 在相关的 `[Rte_Read](#71610-rte_read)`、`[Rte_DRead](#71611-rte_dread)` 和 `[Rte_Write](#7164-rte_write)` **API** 的上下文中被调用。
 
 被指派给某个数据通信图的 **RTE** 实现插件应以功能正确的方式调用转换器。这包括对 `transformerError` 和返回值的处理。
 
-关于转换器调用之功能行为的细节见 4.10.1 节。对 `transformerError` 和返回值的处理在 7.2.4.5 节中描述。
+关于转换器调用之功能行为的细节见 4.10.1 节。对 `transformerError` 和返回值的处理在 [7.2.4.5](#7245-带位域转换的数据类型) 节中描述。
 
 ###### 6.3.3.11.2. 客户端-服务器通信图与触发器通信图的处理
 
@@ -9031,7 +14023,7 @@ AUTOSAR 提供了描述软件组件交付内容的手段，也描述了源代码
 
 * 按照 **SWS_Rte_08794** 或 **SWS_Rte_08105** 配置了一次转换。
 
-在客户端/触发器源一侧，**RTE** 在相应 **RTE API**（`Rte_Call` 或 `Rte_Trigger`）的上下文中调用相应的 `Rte_Rips_Invoke` 服务。在存在 `AsynchronousServerCallPoint` 和 `AsynchronousServerCallResultPoint` 的情况下，**RTE** 从 `Rte_Result` **API** 调用 `Rte_Rips_ReturnResult` 服务。在存在 `SynchronousServerCallPoint` 的情况下，**RTE** 可能从 `Rte_Call` **API** 调用 `Rte_Rips_ReturnResult` 服务。
+在客户端/触发器源一侧，**RTE** 在相应 **RTE API**（`[Rte_Call](#71613-rte_call)` 或 `[Rte_Trigger](#71634-rte_trigger)`）的上下文中调用相应的 `Rte_Rips_Invoke` 服务。在存在 `AsynchronousServerCallPoint` 和 `AsynchronousServerCallResultPoint` 的情况下，**RTE** 从 `[Rte_Result](#71614-rte_result)` **API** 调用 `Rte_Rips_ReturnResult` 服务。在存在 `SynchronousServerCallPoint` 的情况下，**RTE** 可能从 `[Rte_Call](#71613-rte_call)` **API** 调用 `Rte_Rips_ReturnResult` 服务。
 
 在客户端一侧，**RTE** 实现插件代替 **RTE** 调用 **ASCR** 可运行实体（**ASCR runnable**）。
 
@@ -9182,7 +14174,7 @@ AUTOSAR 提供了描述软件组件交付内容的手段，也描述了源代码
 
 本章从 AUTOSAR 应用和基础软件的视角介绍 **RTE** API——无论是 AUTOSAR 软件组件还是基础软件，同一 API 适用于所有软件。
 
-7.1.2 节介绍 API 的基本原则，包括命名约定和支持的编程语言。7.1.3 节描述 **RTE** 所使用的头文件以及 **RTE** 生成器所创建的文件。API 所使用的数据类型在 7.1.5 节中描述；7.1.6 节和 7.1.7 节给出 **RTE** API 本身的参考，包括可运行实体（**runnable entity**）的定义。7.1.11 节定义在 VFB 跟踪期间可以监控的事件。
+[7.1.2](#712-api-原则) 节介绍 API 的基本原则，包括命名约定和支持的编程语言。[7.1.3](#713-rte-模块) 节描述 **RTE** 所使用的头文件以及 **RTE** 生成器所创建的文件。API 所使用的数据类型在 [7.1.5](#715-api-数据类型) 节中描述；[7.1.6](#716-api-参考) 节和 [7.1.7](#717-可运行实体参考) 节给出 **RTE** API 本身的参考，包括可运行实体（**runnable entity**）的定义。[7.1.11](#7111-vfb-跟踪参考) 节定义在 VFB 跟踪期间可以监控的事件。
 
 ###### 7.1.1.1. 编程语言
 
@@ -9190,15 +14182,15 @@ AUTOSAR 提供了描述软件组件交付内容的手段，也描述了源代码
 
 **RTE** 应以 C 语言生成。
 
-**RTE** 的所有代码，无论是否生成，均应符合 MISRA C 标准 [29]。在技术上合理的例外情形下，允许违反 MISRA。除 MISRA 规则 #5.1 至 #5.5 以及指令 #1.1 之外，此类违规均应被清晰地识别并形成文档。已声明的 MISRA 违规定义于附录 B。在实际使用场景中，**RTE** 会生成名称超过 MISRA C 标准所支持最大长度（规则 #5.1 至 #5.5 以及指令 #1.1）的 C 标识符（函数、类型、变量等）。用户应对 **RTE** 进行配置，指明其工具链所支持的 C 标识符最大长度，以确保这些 MISRA 违规不会引发问题。
+**RTE** 的所有代码，无论是否生成，均应符合 MISRA C 标准 [\[29\]](#ref-29)。在技术上合理的例外情形下，允许违反 MISRA。除 MISRA 规则 #5.1 至 #5.5 以及指令 #[1.1](#11-范围) 之外，此类违规均应被清晰地识别并形成文档。已声明的 MISRA 违规定义于附录 B。在实际使用场景中，**RTE** 会生成名称超过 MISRA C 标准所支持最大长度（规则 #5.1 至 #5.5 以及指令 #1.1）的 C 标识符（函数、类型、变量等）。用户应对 **RTE** 进行配置，指明其工具链所支持的 C 标识符最大长度，以确保这些 MISRA 违规不会引发问题。
 
 如果配置了 `RteToolChainSignificantCharacters` 上限，**RTE** 生成器应提供如下 C **RTE** 标识符的清单：在仅考虑前 `RteToolChainSignificantCharacters` 个字符时名称不唯一的标识符。
 
-7.1.6 节中给出的 **RTE** API 以 C 语言描述。对于以 C++ 编写的 AUTOSAR 软件组件，只要所有 API 函数和数据结构实例均以 C 链接（**C linkage**）导入，也可以直接访问该 API。
+[7.1.6](#716-api-参考) 节中给出的 **RTE** API 以 C 语言描述。对于以 C++ 编写的 AUTOSAR 软件组件，只要所有 API 函数和数据结构实例均以 C 链接（**C linkage**）导入，也可以直接访问该 API。
 
 对于以 C++ 编写的组件，**RTE** 生成器应确保所有导入的 **RTE** 符号均以 C 链接声明。
 
-对于 C 和 C++ 组件的 **RTE** API，符号的导入发生在应用头文件（application header file，见 7.1.3.3 节）内。
+对于 C 和 C++ 组件的 **RTE** API，符号的导入发生在应用头文件（application header file，见 [7.1.3.3](#7133-应用头文件) 节）内。
 
 ###### 7.1.1.2. 生成器原则
 
@@ -9212,7 +14204,7 @@ AUTOSAR 提供了描述软件组件交付内容的手段，也描述了源代码
 
 **7.1.1.2.1.1 兼容模式**
 
-兼容模式要么作为 **RTE** 生成器的默认操作模式启用，要么针对以目标码形式交付的 SW-C（即目标码 SW-C）专门启用；它通过使用定义完善的“标准化”数据结构，保证即使是不同供应商的 **RTE** 生成器之间也能兼容。兼容模式下生成的 **RTE** 所使用的数据结构定义于 7.1.4 节。
+兼容模式要么作为 **RTE** 生成器的默认操作模式启用，要么针对以目标码形式交付的 SW-C（即目标码 SW-C）专门启用；它通过使用定义完善的“标准化”数据结构，保证即使是不同供应商的 **RTE** 生成器之间也能兼容。兼容模式下生成的 **RTE** 所使用的数据结构定义于 [7.1.4](#714-rte-数据结构) 节。
 
 对兼容模式的支持是强制性的，因此可以保证所有 **RTE** 生成器都会实现该模式。
 
@@ -9252,13 +14244,13 @@ AUTOSAR 提供了描述软件组件交付内容的手段，也描述了源代码
 
 生成的 **RTE** 代码必须遵守若干规则，才能在构建过程中与其他 AUTOSAR 软件集成。
 
-**RTE** 分配的所有内存¹都应使用内存映射规范 [30] 所定义的内存分配关键字（**Memory Allocation Keyword**）加以包装。**RTE** 对该定义进行了扩展，使用 `RTE_<SCOPE>` 作为 `<PREFIX>`，其中 `<SCOPE>` 在 **SWS_Rte_07421**、**SWS_Rte_07422**、**SWS_Rte_07423**、**SWS_Rte_07424** 和 **SWS_Rte_04615** 中规定。
+**RTE** 分配的所有内存¹都应使用内存映射规范 [\[30\]](#ref-30) 所定义的内存分配关键字（**Memory Allocation Keyword**）加以包装。**RTE** 对该定义进行了扩展，使用 `RTE_<SCOPE>` 作为 `<PREFIX>`，其中 `<SCOPE>` 在 **SWS_Rte_07421**、**SWS_Rte_07422**、**SWS_Rte_07423**、**SWS_Rte_07424** 和 **SWS_Rte_04615** 中规定。
 
 注 1：此处“内存”是指所生成 **RTE** 中之后将占用 ECU 内存空间并与 **RTE** 直接关联的所有元素，包括代码、静态数据、参数等。
 
 由于 AUTOSAR 元模型的结构，输入配置中可能包含若干个最终只对应一个内存对象的 `DataPrototype`。在这种情况下，需要定义规则来确定使用哪个 `SwAddrMethod` 来分配内存并决定其初始化。为此，**SWS_Rte_07590** 和 **SWS_Rte_07591** 定义了 `SwAddrMethod` 的优先级规则。
 
-为确保 **RTE** 所实例化的变量和代码得到恰当的分配，**RTE** 代码采用文档 [30] 所描述的内存映射机制。下列需求遵循文档 [30] 中“对使用内存映射头文件的 BSW 模块和软件组件的实现的要求”一节的原则。不过，由输入配置中的 `DataPrototype` 所产生的常量和变量的基本粒度取决于所用数据类型的属性以及所应用的 `SwAddrMethod`。
+为确保 **RTE** 所实例化的变量和代码得到恰当的分配，**RTE** 代码采用文档 [\[30\]](#ref-30) 所描述的内存映射机制。下列需求遵循文档 [\[30\]](#ref-30) 中“对使用内存映射头文件的 BSW 模块和软件组件的实现的要求”一节的原则。不过，由输入配置中的 `DataPrototype` 所产生的常量和变量的基本粒度取决于所用数据类型的属性以及所应用的 `SwAddrMethod`。
 
 对于组件数据结构（CDS）实例，内存分配关键字的 `<SCOPE>` 应设置为其所属 `AtomicSwComponentType` 的 shortName。
 
@@ -9293,7 +14285,7 @@ AUTOSAR 提供了描述软件组件交付内容的手段，也描述了源代码
 
 表 5.1：**RTE** 回调实现的内存分配关键字之 `<SCOPE>`
 
-内存分配关键字的 `<NAME>` 部分（见内存映射规范 [30]）应遵循以下模式：`<SEGMENT>[_<ALIGNMENT>]`。
+内存分配关键字的 `<NAME>` 部分（见内存映射规范 [\[30\]](#ref-30)）应遵循以下模式：`<SEGMENT>[_<ALIGNMENT>]`。
 
 对于 `AutosarDataPrototype` 实现，如果定义了前导 `SwAddrMethod` 且 **SWS_Rte_07592** 不适用，则内存分配关键字的 `<SEGMENT>` 中缀应设置为该前导 `SwAddrMethod` 的 shortName。
 
@@ -9335,9 +14327,9 @@ AUTOSAR 提供了描述软件组件交付内容的手段，也描述了源代码
 
 `ramBlock` 的 `SwAddrMethod` 始终具有比 `PortPrototype` 中 `VariableDataPrototype` 所分配的 `SwAddrMethod` 更高的优先级。
 
-**RTE** 生成器应在生成的基础软件模块描述（见 **SWS_Rte_05086**）中提供 **SWS_Rte_05088** 所用内存段及其属性的信息。该信息应提供于基础软件模块描述 [9] 的 `MemorySection` 元素中。
+**RTE** 生成器应在生成的基础软件模块描述（见 **SWS_Rte_05086**）中提供 **SWS_Rte_05088** 所用内存段及其属性的信息。该信息应提供于基础软件模块描述 [\[9\]](#ref-9) 的 `MemorySection` 元素中。
 
-**RTE** 生成器应使用生成的基础软件模块描述（见 **SWS_Rte_05086**）提供有关 **RTE** 生成期间所产生的生成工件（**generated artifact**）的信息。该信息应提供于基础软件模块描述 [9] 的 `BswImplementation::generatedArtifact` 元素中。
+**RTE** 生成器应使用生成的基础软件模块描述（见 **SWS_Rte_05086**）提供有关 **RTE** 生成期间所产生的生成工件（**generated artifact**）的信息。该信息应提供于基础软件模块描述 [\[9\]](#ref-9) 的 `BswImplementation::generatedArtifact` 元素中。
 
 **7.1.1.2.4 软件组件命名空间**
 
@@ -9365,7 +14357,7 @@ RTE 概念要求与某个软件组件相关的对象和定义生成在一个全�
 
 **RTE** 生成器应支持外部配置开关 `strictConfigurationCheck`；该开关启用后，将强制 **RTE** 生成器把缺失的输入配置信息视为错误。如果未提供外部配置开关 `strictConfigurationCheck`，其值应视为 `true`。
 
-有关这些用例的详细信息，请参见 6.1.7 节。
+有关这些用例的详细信息，请参见 [6.1.7](#617-prebuild-数据集生成阶段) 节。
 
 **缺失初始化值**
 
@@ -9419,7 +14411,7 @@ RTE 概念要求与某个软件组件相关的对象和定义生成在一个全�
 
 ###### 7.1.2.2. 直接 API
 
-直接调用形式是 7.1.6 节中呈现 **RTE** API 所采用的形式。**RTE** 直接 API 映射的设计使其可被优化：当 **RTE** 生成器能够确定某个组件恰好只有一个实例映射到某个 ECU 时，实例句柄（**instance handle**）可以被省略（因而不产生任何运行时开销）。
+直接调用形式是 [7.1.6](#716-api-参考) 节中呈现 **RTE** API 所采用的形式。**RTE** 直接 API 映射的设计使其可被优化：当 **RTE** 生成器能够确定某个组件恰好只有一个实例映射到某个 ECU 时，实例句柄（**instance handle**）可以被省略（因而不产生任何运行时开销）。
 
 AUTOSAR 软件组件类型的所有可运行实体都会被传入相同的实例句柄类型（作为第一个形式参数），因此可以使用该组件应用头文件中相同的类型定义。
 
@@ -9449,9 +14441,9 @@ AUTOSAR 软件组件类型的所有可运行实体都会被传入相同的实例
 
 ###### 7.1.2.3.1. 访问端口句柄
 
-AUTOSAR SW-C 需要先使用实例句柄获取端口句柄，然后才能使用间接 API。7.1.4.2 节中实例句柄的定义包含了组件数据结构的“端口 API（**Port API**）”部分，无论目标码组件还是源码组件，都可以使用这些条目来访问端口句柄。
+AUTOSAR SW-C 需要先使用实例句柄获取端口句柄，然后才能使用间接 API。[7.1.4.2](#7142-组件数据结构) 节中实例句柄的定义包含了组件数据结构的“端口 API（**Port API**）”部分，无论目标码组件还是源码组件，都可以使用这些条目来访问端口句柄。
 
-API `Rte_Ports` 和 `Rte_NPorts` 提供给定接口的端口数据句柄。示例 5.1 展示了如何在循环中使用间接 API，将同一操作应用于组件中的多个端口。
+API `[Rte_Ports](#7161-rte_ports)` 和 `[Rte_NPorts](#7162-rte_nports)` 提供给定接口的端口数据句柄。示例 5.1 展示了如何在循环中使用间接 API，将同一操作应用于组件中的多个端口。
 
 **示例 5.1**
 
@@ -9469,7 +14461,7 @@ void TT1(Rte_Instance instance)
 }
 ```
 
-注意，如果 `csInterface1` 是带有操作 `op` 的客户端/服务器接口，示例 5.1 所勾勒的机制只有在所有客户端同步调用 `op` 或所有客户端异步调用 `op` 时才有效，因为 `Rte_Call` 的签名以及 `Rte_Result` 是否存在取决于调用的种类（见限制 **SWS_Rte_03605**）。
+注意，如果 `csInterface1` 是带有操作 `op` 的客户端/服务器接口，示例 5.1 所勾勒的机制只有在所有客户端同步调用 `op` 或所有客户端异步调用 `op` 时才有效，因为 `[Rte_Call](#71613-rte_call)` 的签名以及 `[Rte_Result](#71614-rte_result)` 是否存在取决于调用的种类（见限制 **SWS_Rte_03605**）。
 
 ###### 7.1.2.4. dataReadAccess 和 dataWriteAccess 角色中的 VariableAccess
 
@@ -9486,7 +14478,7 @@ void TT1(Rte_Instance instance)
 
 在本例中，**RTE** 将创建两个不同的副本来容纳 `a`，以防止 `re2` 的更新“破坏”`re1` 所访问的值，因为后者在 `re1` 的生命周期内必须保持不变。
 
-**RTE** API 包含三个 API 调用，用于支持软件组件在 dataReadAccess 和 dataWriteAccess 角色中的 `VariableAccess`：`Rte_IRead`（见 7.1.6.18 节）、`Rte_IWrite` 和 `Rte_IWriteRef`（见 7.1.6.20 和 7.1.6.21 节）。API 调用 `Rte_IRead` 和 `Rte_IWrite` 分别访问读取和写入的数据副本。API 调用 `Rte_IWriteRef` 返回指向数据副本的引用，从而使可运行实体能够直接写入数据。这对结构实现数据类型和数组实现数据类型尤其有用。为读取和写入使用 API 调用，使得可以在不影响软件组件代码的情况下，根据任务和可运行实体映射修改其定义。
+**RTE** API 包含三个 API 调用，用于支持软件组件在 dataReadAccess 和 dataWriteAccess 角色中的 `VariableAccess`：`[Rte_IRead](#71618-rte_iread)`（见 [7.1.6.18](#71618-rte_iread) 节）、`[Rte_IWrite](#71620-rte_iwrite)` 和 `[Rte_IWriteRef](#71621-rte_iwriteref)`（见 [7.1.6.20](#71620-rte_iwrite) 和 [7.1.6.21](#71621-rte_iwriteref) 节）。API 调用 `[Rte_IRead](#71618-rte_iread)` 和 `[Rte_IWrite](#71620-rte_iwrite)` 分别访问读取和写入的数据副本。API 调用 `[Rte_IWriteRef](#71621-rte_iwriteref)` 返回指向数据副本的引用，从而使可运行实体能够直接写入数据。这对结构实现数据类型和数组实现数据类型尤其有用。为读取和写入使用 API 调用，使得可以在不影响软件组件代码的情况下，根据任务和可运行实体映射修改其定义。
 
 **示例 5.3**
 
@@ -9501,23 +14493,23 @@ void Rte_IWrite_re2_p_a(Rte_Instance instance, <type> val);
 
 `re1` 和 `re2` 按需使用这些 API 调用。API 的定义取决于数据副本定义的位置。如果 `re1` 和 `re2` 被映射到同一任务，则二者可以访问同一个副本；而如果 `re1` 和 `re2` 被映射到不同的（可抢占的）任务，**RTE** 将确保每个 API 访问不同的副本。
 
-`Rte_IRead` 和 `Rte_IWrite` 使用组件数据结构（见 7.1.4.2 节）中定义的“数据句柄（**data handle**）”。
+`[Rte_IRead](#71618-rte_iread)` 和 `[Rte_IWrite](#71620-rte_iwrite)` 使用组件数据结构（见 [7.1.4.2](#7142-组件数据结构) 节）中定义的“数据句柄（**data handle**）”。
 
 ###### 7.1.2.5. 每实例内存
 
 **RTE** 需支持每实例内存（**Per Instance Memory**）。
 
-组件的实例句柄标识组件的特定实例，因此在通过 `Rte_Pim` API 访问每实例内存时需要使用它。
+组件的实例句柄标识组件的特定实例，因此在通过 `[Rte_Pim](#71615-rte_pim)` API 访问每实例内存时需要使用它。
 
-`Rte_Pim` API 不要求 **RTE** 为每实例内存的访问应用数据一致性机制。应用需自行负责所访问数据的一致性。这一设计决策允许在需要时实现高效（零开销）的访问。如果某个组件拥有多个需要并发访问同一每实例内存的可运行实体，可以使用独占区（**exclusive area**）来确保数据一致性——或者通过显式的 `Rte_Enter` 和 `Rte_Exit` API 调用，或者通过声明可运行实体隐式地运行在独占区内。
+`[Rte_Pim](#71615-rte_pim)` API 不要求 **RTE** 为每实例内存的访问应用数据一致性机制。应用需自行负责所访问数据的一致性。这一设计决策允许在需要时实现高效（零开销）的访问。如果某个组件拥有多个需要并发访问同一每实例内存的可运行实体，可以使用独占区（**exclusive area**）来确保数据一致性——或者通过显式的 `[Rte_Enter](#71630-rte_enter)` 和 `[Rte_Exit](#71631-rte_exit)` API 调用，或者通过声明可运行实体隐式地运行在独占区内。
 
 因此，每实例内存由特定的软件组件实例独占地使用，需要（静态地）声明和分配。
 
-通常有两种不同种类的每实例内存可用，其区别在于类型化机制。'C' 类型化的 `PerInstanceMemory` 由某个 'C' typedef 的描述进行类型化，而 `arTypedPerInstanceMemory`（**AUTOSAR Typed Per Instance Memory**）则通过 `AutosarDataType` 进行类型化。不过，两种每实例内存都通过 `Rte_Pim` API 访问。
+通常有两种不同种类的每实例内存可用，其区别在于类型化机制。'C' 类型化的 `PerInstanceMemory` 由某个 'C' typedef 的描述进行类型化，而 `arTypedPerInstanceMemory`（**AUTOSAR Typed Per Instance Memory**）则通过 `AutosarDataType` 进行类型化。不过，两种每实例内存都通过 `[Rte_Pim](#71615-rte_pim)` API 访问。
 
 生成的 **RTE** 应按照特定 `arTypedPerInstanceMemory` 关联的 `ImplementationDataType` 声明该 `arTypedPerInstanceMemory`。
 
-注：相关的 AUTOSAR 数据类型将在 **RTE** 类型头文件（RTE Types Header File，见 7.1.3.6 节）中生成。
+注：相关的 AUTOSAR 数据类型将在 **RTE** 类型头文件（RTE Types Header File，见 [7.1.3.6](#7136-应用类型头文件) 节）中生成。
 
 生成的 **RTE** 应按照特定 `PerInstanceMemory` 的 `type` 属性声明 'C' 类型化的 `PerInstanceMemory`。
 
@@ -9639,7 +14631,7 @@ typedef Rte_PimType_TheSwc_MyMemType MyMemType;
 Rte_PimType_TheSwc_MyMemType mem1;
 ```
 
-注意，用于定义 `PerInstanceMemory` 的名称可以在 **RTE** 之外使用。一个用例是支持定义 NvRam 管理器的永久块与软件组件之间的链接。`RteNvmRamBlockLocationSymbol` 中的名称用于配置 NvRam 管理器存储和读取永久块内容的位置。详细描述请参见 AUTOSAR 软件组件模板 [2]。
+注意，用于定义 `PerInstanceMemory` 的名称可以在 **RTE** 之外使用。一个用例是支持定义 NvRam 管理器的永久块与软件组件之间的链接。`RteNvmRamBlockLocationSymbol` 中的名称用于配置 NvRam 管理器存储和读取永久块内容的位置。详细描述请参见 AUTOSAR 软件组件模板 [\[2\]](#ref-2)。
 
 ###### 7.1.2.6. API 映射
 
@@ -9653,7 +14645,7 @@ API 映射应实现在应用头文件中。
 
 **7.1.2.6.1 “RTE 契约”阶段**
 
-在“RTE 契约”阶段，API 映射需完成从源 API 调用（如 7.1.6 节所定义）到软件组件提供的可运行实体、或 **RTE** 生成器所创建的 API 函数实现的转换。
+在“RTE 契约”阶段，API 映射需完成从源 API 调用（如 [7.1.6](#716-api-参考) 节所定义）到软件组件提供的可运行实体、或 **RTE** 生成器所创建的 API 函数实现的转换。
 
 针对“RTE 契约”阶段头文件编译时，可多实例化的软件组件需使用一种通用 API 映射，该映射使用实例句柄访问组件数据结构中定义的函数表。
 
@@ -9697,7 +14689,7 @@ API 映射应实现在应用头文件中。
 
 如果软件组件不支持 `supportsMultipleInstantiation`，“RTE 契约”阶段的 API 映射应直接访问生成的 **RTE** 函数。
 
-在兼容模式或“RTE 契约”阶段，`Rte_PBCon` 的 API 映射应直接访问生成的 **RTE** 函数。
+在兼容模式或“RTE 契约”阶段，`[Rte_PBCon](#71638-rte_pbcon)` 的 API 映射应直接访问生成的 **RTE** 函数。
 
 直接访问时，生成函数的名称按照以下规则构成：
 
@@ -9705,10 +14697,10 @@ API 映射应实现在应用头文件中。
 
 在兼容模式下，以下 API 调用应实现为宏：
 
-* `Rte_Pim`；
-* `Rte_IrvIRead`；
-* `Rte_IrvIWrite`；
-* `Rte_IrvIWriteRef`。
+* `[Rte_Pim](#71615-rte_pim)`；
+* `[Rte_IrvIRead](#71624-rte_irviread)`；
+* `[Rte_IrvIWrite](#71626-rte_irviwrite)`；
+* `[Rte_IrvIWriteRef](#71627-rte_irviwriteref)`。
 
 为这些 API 调用生成的宏应映射到组件数据结构的相关字段。
 
@@ -9718,13 +14710,13 @@ API 映射应实现在应用头文件中。
 
 在兼容模式下，基于 `enableTakeAddress` 属性的状态（见 **SWS_Rte_07100**），以下 API 调用应实现为宏（直接映射到组件数据结构的相关字段）或 C 函数（可以使用组件数据结构的字段）：
 
-* `Rte_IRead`；
-* `Rte_IReadRef`；
-* `Rte_IWrite`；
-* `Rte_IWriteRef`；
-* `Rte_IStatus`；
-* `Rte_IFeedback`；
-* `Rte_IInvalidate`。
+* `[Rte_IRead](#71618-rte_iread)`；
+* `[Rte_IReadRef](#71619-rte_ireadref)`；
+* `[Rte_IWrite](#71620-rte_iwrite)`；
+* `[Rte_IWriteRef](#71621-rte_iwriteref)`；
+* `[Rte_IStatus](#71623-rte_istatus)`；
+* `[Rte_IFeedback](#71636-rte_ifeedback)`；
+* `[Rte_IInvalidate](#71622-rte_iinvalidate)`。
 
 注：对于 **SWS_Rte_01156** 和 **SWS_Rte_06831**，当这些 API 实现为宏时，应用头文件中的 API 映射直接使用组件数据结构的相关字段。而 `enableTakeAddress` 属性仅适用于单实例化的 SWC，因此所生成函数的函数体可以在需要时直接访问相关数据，而无需经由组件数据结构间接访问。
 
@@ -9767,7 +14759,7 @@ Std_ReturnType s;
 s = Rte_Send_p1_a(instance,23);
 ```
 
-进一步假设通信属性的规定使得发送者-接收者通信可以作为一个直接赋值来执行，因此无需生成 **RTE** API 调用。然而，组件源码不可修改，并且期望收到 `Std_ReturnType` 类型的返回值。此时“RTE 生成”阶段的 API 映射可以改写为：
+进一步假设通信属性的规定使得发送者-接收者通信可以作为一个直接赋值来执行，因此无需生成 **RTE** API 调用。然而，组件源码不可修改，并且期望收到 `[Std_ReturnType](#7151-std_returntype)` 类型的返回值。此时“RTE 生成”阶段的 API 映射可以改写为：
 
 ```c
 #define Rte_Send_p1_a(s,a) (<var> = (a), RTE_E_OK)
@@ -9793,7 +14785,7 @@ AUTOSAR 软件组件通过端口与其他组件（包括基础软件）通信，
 
 这些参数的类型取自类型化该端口的接口中的数据元素原型（**data element prototype**）或操作原型（**operation prototype**），API 正是为该端口生成的。
 
-在下文中，需求 **SWS_Rte_06806** 反映了 [31] 所定义的标准。其余要求旨在确保不同 **RTE** 实现之间的一致性。下述关于默认实参传递策略的规则可能被更具体的要求覆盖，例如 `serverArgumentImplPolicy`。
+在下文中，需求 **SWS_Rte_06806** 反映了 [\[31\]](#ref-31) 所定义的标准。其余要求旨在确保不同 **RTE** 实现之间的一致性。下述关于默认实参传递策略的规则可能被更具体的要求覆盖，例如 `serverArgumentImplPolicy`。
 
 所有输出和双向参数（即既是输入又是输出）应使用 `foo *`，其中 `foo` 为指针的类型。
 
@@ -9837,7 +14829,7 @@ AUTOSAR 软件组件通过端口与其他组件（包括基础软件）通信，
 
 **示例 5.9**
 
-这将是为示例 5.5（由某个 `ImplementationDataType` 类型化的二维数组的示例）生成的 `Rte_Write` API：
+这将是为示例 5.5（由某个 `ImplementationDataType` 类型化的二维数组的示例）生成的 `[Rte_Write](#7164-rte_write)` API：
 
 ```c
 Std_ReturnType Rte_Write_<p>_<o>(const uint8 *data)
@@ -9857,9 +14849,9 @@ status = Rte_Write_<p>_<o> (&array[0][0]);
 
 如果指针不用于修改其寻址的对象，**RTE** API 的指针返回值应借助 `const foo *`（其中 `foo` 为指针的类型）声明为指向 const 的指针。
 
-需求 **SWS_Rte_08300** 适用于例如 **RTE** API `Rte_Prm`、`Rte_CData`、`Rte_IrvRead`、`Rte_IrvIRead` 中 API 授予对复合数据（数组、结构体、联合体）访问的情形。
+需求 **SWS_Rte_08300** 适用于例如 **RTE** API `[Rte_Prm](#71617-rte_prm)`、`[Rte_CData](#71616-rte_cdata)`、`[Rte_IrvRead](#71628-rte_irvread)`、`[Rte_IrvIRead](#71624-rte_irviread)` 中 API 授予对复合数据（数组、结构体、联合体）访问的情形。
 
-请注意，C 数据类型的实现规定于 7.1.3.4 节“**RTE** 类型头文件”。
+请注意，C 数据类型的实现规定于 [7.1.3.4](#7134-rte-类型头文件) 节“**RTE** 类型头文件”。
 
 如果 `DataPrototype` 与原始实现数据类型关联，**RTE** API 应返回 API 为之提供访问的 `DataPrototype` 的值。类型名应等于该 `ImplementationDataType` 的 shortName。
 
@@ -9919,7 +14911,7 @@ const uint8 * Rte_IRead_<re>_<p>_<o>(void);
 
 **RTE** 生成器应根据 API 为之提供访问的 `DataPrototype` 所适用的 `ImplementationDataType` 确定 `<return reference>` 类型。
 
-请注意，C 数据类型的实现规定于 7.1.3.4 节“**RTE** 类型头文件”。
+请注意，C 数据类型的实现规定于 [7.1.3.4](#7134-rte-类型头文件) 节“**RTE** 类型头文件”。
 
 如果 `DataPrototype` 与原始实现数据类型关联，**RTE** API 应返回指向保存 API 为之提供访问的 `DataPrototype` 值的数据的变量的指针。类型名应等于该 `ImplementationDataType` 的 shortName。
 
@@ -9967,7 +14959,7 @@ uint8 * Rte_IWriteRef_<re>_<p>_<o>(void);
 
 **7.1.2.6.8 错误处理**
 
-在 **RTE** 中，错误和状态信息用数据类型 `Std_ReturnType` 定义，见 7.1.5.1 节。
+在 **RTE** 中，错误和状态信息用数据类型 `[Std_ReturnType](#7151-std_returntype)` 定义，见 [7.1.5.1](#7151-std_returntype) 节。
 
 可以区分基础设施错误和应用错误。基础设施错误由资源故障或无效的输入参数引起，通常发生在数据元素通信路径上的基础软件或硬件中。应用错误由 SW-C 或 AUTOSAR 服务报告。**RTE** 具备处理以下方式转发的应用错误的能力：
 
@@ -9987,7 +14979,7 @@ uint8 * Rte_IWriteRef_<re>_<p>_<o>(void);
 
 **RTE** 支持向 AUTOSAR 软件组件通知传输尝试的结果。
 
-`Rte_Feedback` API（见 **SWS_Rte_01083**）或 `Rte_IFeedback` API（见 **SWS_Rte_07367**）可以配置为以阻塞或非阻塞 API 的形式、或通过激活可运行实体来返回传输结果。
+`[Rte_Feedback](#7168-rte_feedback)` API（见 **SWS_Rte_01083**）或 `[Rte_IFeedback](#71636-rte_ifeedback)` API（见 **SWS_Rte_07367**）可以配置为以阻塞或非阻塞 API 的形式、或通过激活可运行实体来返回传输结果。
 
 ###### 7.1.2.7. 未连接的端口
 
@@ -10007,71 +14999,71 @@ uint8 * Rte_IWriteRef_<re>_<p>_<o>(void);
 
 **7.1.2.7.1.1 显式通信**
 
-对于由 `SenderReceiverInterface` 或 `NvDataInterface` 类型化的未连接需求端口，`Rte_Read` API 应返回 `RTE_E_UNCONNECTED` 代码，并提供 `initValue`，如同一个发送者已连接但未发送任何内容一样。
+对于由 `SenderReceiverInterface` 或 `NvDataInterface` 类型化的未连接需求端口，`[Rte_Read](#71610-rte_read)` API 应返回 `RTE_E_UNCONNECTED` 代码，并提供 `initValue`，如同一个发送者已连接但未发送任何内容一样。
 
-对于由 `SenderReceiverInterface` 或 `NvDataInterface` 类型化的未连接需求端口，`Rte_DRead` API 应返回 `initValue`，如同一个发送者已连接但未发送任何内容一样。
+对于由 `SenderReceiverInterface` 或 `NvDataInterface` 类型化的未连接需求端口，`[Rte_DRead](#71611-rte_dread)` API 应返回 `initValue`，如同一个发送者已连接但未发送任何内容一样。
 
 需求 **SWS_Rte_01330** 和 **SWS_Rte_07663** 适用于具有“数据（data）”语义、因而具有“最后者优先（last is best）”语义的元素。这意味着将返回初始值。
 
-对于由 `SenderReceiverInterface` 类型化的未连接需求端口，阻塞或非阻塞的 `Rte_Receive` API 应立即返回 `RTE_E_UNCONNECTED`。
+对于由 `SenderReceiverInterface` 类型化的未连接需求端口，阻塞或非阻塞的 `[Rte_Receive](#71612-rte_receive)` API 应立即返回 `RTE_E_UNCONNECTED`。
 
-阻塞和非阻塞的 `Rte_Read`、`Rte_DRead` 与 `Rte_Receive` API 调用是否存在，由 SW-C 描述中 dataReceivePointByValue 或 dataReceivePointByArgument 角色的 `VariableAccess`、`DataReceivedEvent` 和 `WaitPoint` 的存在与否控制（见 **SWS_Rte_01288**、**SWS_Rte_01289** 和 **SWS_Rte_01290**）。
+阻塞和非阻塞的 `[Rte_Read](#71610-rte_read)`、`[Rte_DRead](#71611-rte_dread)` 与 `[Rte_Receive](#71612-rte_receive)` API 调用是否存在，由 SW-C 描述中 dataReceivePointByValue 或 dataReceivePointByArgument 角色的 `VariableAccess`、`DataReceivedEvent` 和 `WaitPoint` 的存在与否控制（见 **SWS_Rte_01288**、**SWS_Rte_01289** 和 **SWS_Rte_01290**）。
 
-对于未连接提供端口的 `VariableDataPrototype`，阻塞或非阻塞的 `Rte_Feedback` API 应立即返回 `RTE_E_UNCONNECTED`。
+对于未连接提供端口的 `VariableDataPrototype`，阻塞或非阻塞的 `[Rte_Feedback](#7168-rte_feedback)` API 应立即返回 `RTE_E_UNCONNECTED`。
 
-对于启用了确认（**acknowledgement**）的 `VariableDataPrototype`，阻塞和非阻塞的 `Rte_Feedback` API 是否存在，由 SW-C 描述中 dataSendPoint 角色的 `VariableAccess`、`DataSendCompletedEvent` 和 `WaitPoint` 的存在与否控制（见 **SWS_Rte_01283**、**SWS_Rte_01284** 和 **SWS_Rte_01285**）。
+对于启用了确认（**acknowledgement**）的 `VariableDataPrototype`，阻塞和非阻塞的 `[Rte_Feedback](#7168-rte_feedback)` API 是否存在，由 SW-C 描述中 dataSendPoint 角色的 `VariableAccess`、`DataSendCompletedEvent` 和 `WaitPoint` 的存在与否控制（见 **SWS_Rte_01283**、**SWS_Rte_01284** 和 **SWS_Rte_01285**）。
 
-对于由 `SenderReceiverInterface` 或 `NvDataInterface` 类型化的未连接提供端口，`Rte_Send` 或 `Rte_Write` API 应丢弃输入参数并返回 `RTE_E_OK`。
+对于由 `SenderReceiverInterface` 或 `NvDataInterface` 类型化的未连接提供端口，`[Rte_Send](#7165-rte_send)` 或 `[Rte_Write](#7164-rte_write)` API 应丢弃输入参数并返回 `RTE_E_OK`。
 
-`Rte_Send` 或 `Rte_Write` 是否存在，由 SW-C 描述中 dataSendPoint 角色的 `VariableAccess` 的存在与否控制（见 **SWS_Rte_01280** 和 **SWS_Rte_01281**）。
+`[Rte_Send](#7165-rte_send)` 或 `[Rte_Write](#7164-rte_write)` 是否存在，由 SW-C 描述中 dataSendPoint 角色的 `VariableAccess` 的存在与否控制（见 **SWS_Rte_01280** 和 **SWS_Rte_01281**）。
 
-对于由 `SenderReceiverInterface` 类型化的未连接提供端口，`Rte_Invalidate` API 应返回 `RTE_E_OK`。
+对于由 `SenderReceiverInterface` 类型化的未连接提供端口，`[Rte_Invalidate](#7167-rte_invalidate)` API 应返回 `RTE_E_OK`。
 
-`Rte_Invalidate` 是否存在，由 SW-C 描述中 dataSendPoint 角色的 `VariableAccess` 的存在与否控制，前提是相关 `VariableDataPrototype` 被关联的 `InvalidationPolicy` 标记为可失效（**invalidatable**）。`InvalidationPolicy` 的 `handleInvalid` 属性必须设置为 `keep`、`replace` 或 `externalReplacement`，才能为该数据元素启用失效支持（见 **SWS_Rte_01282**）。
+`[Rte_Invalidate](#7167-rte_invalidate)` 是否存在，由 SW-C 描述中 dataSendPoint 角色的 `VariableAccess` 的存在与否控制，前提是相关 `VariableDataPrototype` 被关联的 `InvalidationPolicy` 标记为可失效（**invalidatable**）。`InvalidationPolicy` 的 `handleInvalid` 属性必须设置为 `keep`、`replace` 或 `externalReplacement`，才能为该数据元素启用失效支持（见 **SWS_Rte_01282**）。
 
 **7.1.2.7.1.2 隐式通信**
 
-对于未连接提供端口的 `VariableDataPrototype`，`Rte_IFeedback` API 应立即返回 `RTE_E_UNCONNECTED`。
+对于未连接提供端口的 `VariableDataPrototype`，`[Rte_IFeedback](#71636-rte_ifeedback)` API 应立即返回 `RTE_E_UNCONNECTED`。
 
-对于启用了确认的 `VariableDataPrototype`，`Rte_IFeedback` API 是否存在，由 SW-C 描述中 dataWriteAccess 角色的 `VariableAccess` 和 `DataWriteCompletedEvent` 的存在与否控制（见 **SWS_Rte_07646**、**SWS_Rte_07647**）。
+对于启用了确认的 `VariableDataPrototype`，`[Rte_IFeedback](#71636-rte_ifeedback)` API 是否存在，由 SW-C 描述中 dataWriteAccess 角色的 `VariableAccess` 和 `DataWriteCompletedEvent` 的存在与否控制（见 **SWS_Rte_07646**、**SWS_Rte_07647**）。
 
-对于由 `SenderReceiverInterface` 或 `NvDataInterface` 类型化的未连接需求端口，`Rte_IRead` API 应返回初始值。
+对于由 `SenderReceiverInterface` 或 `NvDataInterface` 类型化的未连接需求端口，`[Rte_IRead](#71618-rte_iread)` API 应返回初始值。
 
-`Rte_IRead` 是否存在，由 SW-C 描述中 dataReadAccess 角色的 `VariableAccess` 的存在与否控制（见 **SWS_Rte_01301**）。
+`[Rte_IRead](#71618-rte_iread)` 是否存在，由 SW-C 描述中 dataReadAccess 角色的 `VariableAccess` 的存在与否控制（见 **SWS_Rte_01301**）。
 
-对于由 `SenderReceiverInterface` 或 `NvDataInterface` 类型化的未连接提供端口，`Rte_IWrite` API 应丢弃写入的数据。
+对于由 `SenderReceiverInterface` 或 `NvDataInterface` 类型化的未连接提供端口，`[Rte_IWrite](#71620-rte_iwrite)` API 应丢弃写入的数据。
 
-`Rte_IWrite` 是否存在，由 SW-C 描述中 dataWriteAccess 角色的 `VariableAccess` 的存在与否控制（见 **SWS_Rte_01302**）。
+`[Rte_IWrite](#71620-rte_iwrite)` 是否存在，由 SW-C 描述中 dataWriteAccess 角色的 `VariableAccess` 的存在与否控制（见 **SWS_Rte_01302**）。
 
-对于由 `SenderReceiverInterface` 类型化的未连接提供端口，`Rte_IInvalidate` API 应不执行任何操作。
+对于由 `SenderReceiverInterface` 类型化的未连接提供端口，`[Rte_IInvalidate](#71622-rte_iinvalidate)` API 应不执行任何操作。
 
-`Rte_IInvalidate` 是否存在，由 SW-C 描述中 dataWriteAccess 角色的 `VariableAccess` 的存在与否控制，前提是相关 `VariableDataPrototype` 被关联的 `InvalidationPolicy` 标记为可失效。`InvalidationPolicy` 的 `handleInvalid` 属性必须设置为 `keep`、`replace` 或 `externalReplacement`，才能为该数据元素启用失效支持（见 **SWS_Rte_03801**）。
+`[Rte_IInvalidate](#71622-rte_iinvalidate)` 是否存在，由 SW-C 描述中 dataWriteAccess 角色的 `VariableAccess` 的存在与否控制，前提是相关 `VariableDataPrototype` 被关联的 `InvalidationPolicy` 标记为可失效。`InvalidationPolicy` 的 `handleInvalid` 属性必须设置为 `keep`、`replace` 或 `externalReplacement`，才能为该数据元素启用失效支持（见 **SWS_Rte_03801**）。
 
-对于由 `SenderReceiverInterface` 类型化的未连接需求端口，`Rte_IStatus` API 应返回 `RTE_E_UNCONNECTED`。
+对于由 `SenderReceiverInterface` 类型化的未连接需求端口，`[Rte_IStatus](#71623-rte_istatus)` API 应返回 `RTE_E_UNCONNECTED`。
 
-`Rte_IStatus` 是否存在，由 SW-C 描述中 dataReadAccess 角色的 `VariableAccess` 的存在与否控制，前提是该 `VariableDataPrototype` 具有数据元素过时通知或数据元素失效（见 **SWS_Rte_02600**）。
+`[Rte_IStatus](#71623-rte_istatus)` 是否存在，由 SW-C 描述中 dataReadAccess 角色的 `VariableAccess` 的存在与否控制，前提是该 `VariableDataPrototype` 具有数据元素过时通知或数据元素失效（见 **SWS_Rte_02600**）。
 
 ###### 7.1.2.7.2. 模式切换端口
 
 对于模式用户（**mode user**）而言，未连接的模式切换端口表现得如同它连接到一个从不发送模式切换通知的模式管理器（**mode manager**）一样。
 
-对于模式用户的未连接模式切换端口，`Rte_Mode` API 应返回初始状态。
+对于模式用户的未连接模式切换端口，`[Rte_Mode](#71632-rte_mode)` API 应返回初始状态。
 
 对于模式用户的未连接模式切换端口，就其模式而言，对初始模式的模式禁用依赖（**mode disabling dependency**）应永久处于活动状态，而对所有其他模式的模式禁用依赖应处于非活动状态。
 
 对于模式用户的未连接模式切换端口，就其模式而言，**RTE** 将只为进入初始模式生成 `SwcModeSwitchEvent`，该事件在启动后直接发生。
 
-对于模式管理器的未连接模式切换端口，`Rte_Switch` API 应丢弃输入参数并返回 `RTE_E_OK`。
+对于模式管理器的未连接模式切换端口，`[Rte_Switch](#7166-rte_switch)` API 应丢弃输入参数并返回 `RTE_E_OK`。
 
-对于模式管理器的未连接模式切换端口，阻塞或非阻塞的 `Rte_SwitchAck` API 应立即返回 `RTE_E_UNCONNECTED`。
+对于模式管理器的未连接模式切换端口，阻塞或非阻塞的 `[Rte_SwitchAck](#7169-rte_switchack)` API 应立即返回 `RTE_E_UNCONNECTED`。
 
 只有当组合层面不存在任何连接、该提供模式切换端口不存在 `ModeAccessPoint`、且没有 `synchronizedModeGroup` 引用该提供模式切换端口时，模式管理器的提供模式切换端口才应被视为未连接。
 
 ###### 7.1.2.7.3. 客户端-服务器
 
-对于由 `ClientServerInterface` 类型化的未连接异步需求端口，`Rte_Result` API 应立即返回 `RTE_E_UNCONNECTED`。
+对于由 `ClientServerInterface` 类型化的未连接异步需求端口，`[Rte_Result](#71614-rte_result)` API 应立即返回 `RTE_E_UNCONNECTED`。
 
-对于由 `ClientServerInterface` 类型化的未连接需求端口，`Rte_Call` API 应立即返回 `RTE_E_UNCONNECTED`。
+对于由 `ClientServerInterface` 类型化的未连接需求端口，`[Rte_Call](#71613-rte_call)` API 应立即返回 `RTE_E_UNCONNECTED`。
 
 如果客户端/服务器通信是跨 ECU 的，则对于每个 `ClientServerOperation`，`DataMappings` 元素应包含至少一个指向 COM 信号的映射，或至少被一个 LdCom I-PDU 引用；否则该 `ClientServerOperation` 应按其属于未连接端口的情况处理。
 
@@ -10079,11 +15071,11 @@ uint8 * Rte_IWriteRef_<re>_<p>_<o>(void);
 
 对于未连接的 `RPortPrototype`，关联的 `ExternalTriggerOccurredEvent` 永远不会被触发（即其表现得如同远程通信伙伴从不触发该事件一样）。
 
-对于由 `TriggerInterface` 类型化的未连接 `PPortPrototype`，`Rte_Trigger` API 应丢弃触发请求并返回 `RTE_E_OK`。
+对于由 `TriggerInterface` 类型化的未连接 `PPortPrototype`，`[Rte_Trigger](#71634-rte_trigger)` API 应丢弃触发请求并返回 `RTE_E_OK`。
 
 ###### 7.1.2.8. 非同一端口接口
 
-只要两个端口由兼容但不必然相同的接口表征，就允许连接这两个端口。关于两个接口是否兼容的完整定义，请参见软件组件模板 [2]。
+只要两个端口由兼容但不必然相同的接口表征，就允许连接这两个端口。关于两个接口是否兼容的完整定义，请参见软件组件模板 [\[2\]](#ref-2)。
 
 如果违反 **SWS_Rte_CONSTR_1036** 和 **SWS_Rte_CONSTR_1069**，即两个已连接的端口由不兼容的接口连接，**RTE** 生成器应报告错误。
 
@@ -10093,19 +15085,19 @@ uint8 * Rte_IWriteRef_<re>_<p>_<o>(void);
 
 对于提供接口中的每个数据元素或操作，每个具有“未连接元素”的已连接需求方都必须按其未连接处理。
 
-注意，需求 **SWS_Rte_01369** 意味着在 1:n 的发送者-接收者情形下，`Rte_Write` 调用可能只传输到部分而非全部接收者。
+注意，需求 **SWS_Rte_01369** 意味着在 1:n 的发送者-接收者情形下，`[Rte_Write](#7164-rte_write)` 调用可能只传输到部分而非全部接收者。
 
 极端情况是所有已连接需求方都具有“未连接元素”：
 
-对于提供接口中的某个数据元素或操作，如果它在每个已连接的 R-Port 中都是未连接元素，则生成的 `Rte_Send`、`Rte_Write`、`Rte_IWrite` 或 `Rte_IWriteRef` API 必须表现得如同端口未连接一样。
+对于提供接口中的某个数据元素或操作，如果它在每个已连接的 R-Port 中都是未连接元素，则生成的 `[Rte_Send](#7165-rte_send)`、`[Rte_Write](#7164-rte_write)`、`[Rte_IWrite](#71620-rte_iwrite)` 或 `[Rte_IWriteRef](#71621-rte_iwriteref)` API 必须表现得如同端口未连接一样。
 
-此情况下的要求行为见 7.1.2.7 节。
+此情况下的要求行为见 [7.1.2.7](#7127-未连接的端口) 节。
 
 ###### 7.1.2.9. 返回类型 Std_ReturnType
 
-许多 API 使用 `Std_ReturnType` 类型的返回值来指示通信错误。此类错误可能因为端口未连接、CAN 总线不工作、OS 无法接受更多任务激活等而发生。然而，也存在一些集成场景，其中根本不会发生错误。例如，触发源发出触发的频率低于触发接收器（**trigger sink**）能够消费的频率，或者发送者-接收者通信是没有转换器的纯分区内通信。ECU 中的许多组件是为特定系统设计的，因此可以假定某种集成场景并省略对 **RTE** API 返回的错误代码的求值。这样，这些组件可以通过省略状态求值来降低 CPU 资源消耗，同时 **RTE** 也不必计算状态。
+许多 API 使用 `[Std_ReturnType](#7151-std_returntype)` 类型的返回值来指示通信错误。此类错误可能因为端口未连接、CAN 总线不工作、OS 无法接受更多任务激活等而发生。然而，也存在一些集成场景，其中根本不会发生错误。例如，触发源发出触发的频率低于触发接收器（**trigger sink**）能够消费的频率，或者发送者-接收者通信是没有转换器的纯分区内通信。ECU 中的许多组件是为特定系统设计的，因此可以假定某种集成场景并省略对 **RTE** API 返回的错误代码的求值。这样，这些组件可以通过省略状态求值来降低 CPU 资源消耗，同时 **RTE** 也不必计算状态。
 
-**RTE** 通常无法检查这种优化在给定的 SWC 集成中是否有效，因为它并不完全了解例如触发或写入 API 的调用频率等信息。确保 SWC 的假设得到满足是 SWC 集成者的职责。但 **RTE** 提供了省略 `Std_ReturnType`、改为生成返回类型为 `void` 的 API 的技术可能。这通过属性 `returnValueProvision` 实现，该属性可设置为 `noReturnValueProvided`。如果未设置或设置为 `returnValueProvided`，则使用返回类型 `Std_ReturnType` 的标准行为。请注意，`returnValueProvision` 仅对产生返回类型为 `Std_ReturnType` 的 API 的 `AccessPoint` 有意义。还要注意，以获取通信状态为目的的 API（例如 `Rte_Feedback` 或 `Rte_IStatus`）不受 `returnValueProvision` 任何设置的影响，因为请求状态的同时又忽略它是没有意义的。
+**RTE** 通常无法检查这种优化在给定的 SWC 集成中是否有效，因为它并不完全了解例如触发或写入 API 的调用频率等信息。确保 SWC 的假设得到满足是 SWC 集成者的职责。但 **RTE** 提供了省略 `[Std_ReturnType](#7151-std_returntype)`、改为生成返回类型为 `void` 的 API 的技术可能。这通过属性 `returnValueProvision` 实现，该属性可设置为 `noReturnValueProvided`。如果未设置或设置为 `returnValueProvided`，则使用返回类型 `[Std_ReturnType](#7151-std_returntype)` 的标准行为。请注意，`returnValueProvision` 仅对产生返回类型为 `[Std_ReturnType](#7151-std_returntype)` 的 API 的 `AccessPoint` 有意义。还要注意，以获取通信状态为目的的 API（例如 `[Rte_Feedback](#7168-rte_feedback)` 或 `[Rte_IStatus](#71623-rte_istatus)`）不受 `returnValueProvision` 任何设置的影响，因为请求状态的同时又忽略它是没有意义的。
 
 ##### 7.1.3. RTE 模块
 
@@ -10131,7 +15123,7 @@ RTE 头文件定义了 RTE 中无需针对每个 ECU 进行生成或配置的固
 
 RTE 头文件应包含文件 `Std_Types.h`。
 
-文件 `Std_Types.h` 是标准的 AUTOSAR 文件 [32]，它定义了基本数据类型，包括无符号整数和有符号整数的平台特定定义。
+文件 `Std_Types.h` 是标准的 AUTOSAR 文件 [\[32\]](#ref-32)，它定义了基本数据类型，包括无符号整数和有符号整数的平台特定定义。
 
 RTE 头文件应包含文件 `ComStack_Types.h`。
 
@@ -10342,7 +15334,7 @@ RTE 类型头文件应针对所有 AUTOSAR 数据类型包含相应的类型声�
 RTE 的类型生成大致分为以下几类：
 
 * RTE 实现特定的内部类型。这些类型不会被建模，因此无法覆盖其类型生成器（type emitter）。RTE 必须决定其定义最合适的位置。如果用户重定义了与某个内部 RTE 类型同名的建模类型，可能会导致名称冲突。示例包括服务器队列类型、模式机实例类型等。
-* 来自 RTE 规范的类型，这些类型可能被建模也可能不被建模，但由于规范的要求，RTE 必须在需要时生成它们。这些类型常用于 RTE 接口中，因此可能存在于模型中。存在于模型中不会改变 RTE 的行为，RTE 必须生成它们，并且无论 `typeEmitter` 设置如何，它们都不应存在于任何非 RTE 头文件中，因为在其他模块中生成这些类型会导致名称冲突。例如，参见 `Rte_Cs_TransactionHandleType`（**SWS_Rte_08732**）或 `Rte_Instance`（**SWS_Rte_01150**）。
+* 来自 RTE 规范的类型，这些类型可能被建模也可能不被建模，但由于规范的要求，RTE 必须在需要时生成它们。这些类型常用于 RTE 接口中，因此可能存在于模型中。存在于模型中不会改变 RTE 的行为，RTE 必须生成它们，并且无论 `typeEmitter` 设置如何，它们都不应存在于任何非 RTE 头文件中，因为在其他模块中生成这些类型会导致名称冲突。例如，参见 `Rte_Cs_TransactionHandleType`（**SWS_Rte_08732**）或 `[Rte_Instance](#7152-rte_instance)`（**SWS_Rte_01150**）。
 * RTE 需要使用、但由于其 `typeEmitter` 参数的值而不负责生成的建模类型（例如 AUTOSAR 平台类型）。在这种情况下，RTE 应包含另一个头文件以访问该类型的定义（见 **SWS_Rte_04632**）。
 * RTE 必须生成（由于 `typeEmitter` 参数的设置）但内部不使用的建模类型（例如由应用组件指定的类型，见 5.3.4.2–5.3.4.10 节）。
 
@@ -10913,7 +15905,7 @@ RTE 类型头文件的名称定义在 5.3.4 节中。
 
 AUTOSAR 支持将结构体实现数据类型的元素定义为可选的。在元模型中，这些 `ImplementationDataTypeElement` 的 `isOptional` 属性被设置为 True。这些成员在运行时可能存在，也可能不存在。
 
-带可选成员的结构体实现数据类型必须满足特殊的结构要求（详见 [2]）。可用性信息存储在一个特殊的 `ImplementationDataTypeElement` 中，其 shortName 为 `availabilityBitfield`，它是一个 `uint8` 类型的定长数组。
+带可选成员的结构体实现数据类型必须满足特殊的结构要求（详见 [\[2\]](#ref-2)）。可用性信息存储在一个特殊的 `ImplementationDataTypeElement` 中，其 shortName 为 `availabilityBitfield`，它是一个 `uint8` 类型的定长数组。
 
 软件组件需要获得支持，以评估和设置可选成员的可用性信息。
 
@@ -11185,7 +16177,7 @@ RTE 配置头文件应包含文件 `Std_Types.h`。
 
 在兼容模式下，生成的 RTE 模块应包含各 VFB 跟踪头文件。
 
-除组件入口点的声明（见 **SWS_Rte_07194**）之外，RTE 应使用 AUTOSAR 内存映射机制（见 [30]）将其内存对象映射到 RTE 自身命名空间中的文件中。
+除组件入口点的声明（见 **SWS_Rte_07194**）之外，RTE 应使用 AUTOSAR 内存映射机制（见 [\[30\]](#ref-30)）将其内存对象映射到 RTE 自身命名空间中的文件中。
 
 生成的 RTE 模块应执行模块间检查（Inter Module Checks）以避免集成不兼容的文件。所导入的被包含文件应通过预处理指令进行检查。
 
@@ -11242,7 +16234,7 @@ RTE 配置头文件应包含文件 `Std_Types.h`。
 
 **SWS_Rte_03712** 中提到的软件组件实例名称从不对生成的 RTE 的用户可见。因此无需规定该唯一名称所采用的确切形式。强制要求 `Rte_Instance_` 前缀是为了确保不发生名称冲突，并确保这些结构在 map 文件、调试器等中易于识别。
 
-`Rte_Instance_` 前缀并不意味着该组件数据结构实例与 5.5.2 节所述的实例句柄类型 `Rte_Instance` 相同；强制要求该前缀是为了确保不发生名称冲突，并确保这些结构在 map 文件、调试器等中易于识别。
+`Rte_Instance_` 前缀并不意味着该组件数据结构实例与 5.5.2 节所述的实例句柄类型 `[Rte_Instance](#7152-rte_instance)` 相同；强制要求该前缀是为了确保不发生名称冲突，并确保这些结构在 map 文件、调试器等中易于识别。
 
 **7.1.3.9.3.2 生成的 API**
 
@@ -11294,7 +16286,7 @@ RTE 生成器应在 `Rte_PBcfg.h` 文件中生成预定义 post-build 变体数�
 
 RTE 生成器必须生成一个 `Rte_PBcfg.c` 文件，其中包含一个或多个 RTE post-build 变体的声明和初始化。在运行时这些变体中只能有一个处于活动状态。
 
-在带 post-build 变体的 RTE 中，将存在一个活动的 `EcucPostBuildVariants`。应将指向该结构的指针传递给 `SchM_Init`。另请注意，容器 `PredefinedVariant` 只是一种元模型构造，用于允许设计者创建赋给某个判据（criterion）的值的经验证集合。RTE 生成器的实现者可以自行决定，通过对 `PostBuildVariantCriterionValue` 使用不同级别的间接寻由来针对大小和/或性能优化变体配置。例如，为了实现最少的间接寻由，可以将判据值放在 `SchM_ConfigType` 这一级。如果使用 post-build 可加载（loadable），则可能希望通过在两个或更多预定义变体之间重用保持不变的变体集来减少内存存储。
+在带 post-build 变体的 RTE 中，将存在一个活动的 `EcucPostBuildVariants`。应将指向该结构的指针传递给 `[SchM_Init](#7271-schm_init)`。另请注意，容器 `PredefinedVariant` 只是一种元模型构造，用于允许设计者创建赋给某个判据（criterion）的值的经验证集合。RTE 生成器的实现者可以自行决定，通过对 `PostBuildVariantCriterionValue` 使用不同级别的间接寻由来针对大小和/或性能优化变体配置。例如，为了实现最少的间接寻由，可以将判据值放在 `SchM_ConfigType` 这一级。如果使用 post-build 可加载（loadable），则可能希望通过在两个或更多预定义变体之间重用保持不变的变体集来减少内存存储。
 
 以下小节提供的 `SchM_ConfigType` 声明和实例化示例仅用于演示目的，不隐含任何要求。
 
@@ -11368,7 +16360,7 @@ const struct SchM_ConfigType Rte_VarCfg_2 =
 .
 ```
 
-当调用 `SchM_Init` 时，将传递一个指向活动的 `SchM_ConfigType` 的指针，该指针应被赋给名为 `Rte_VarCfgPtr`、类型为 `SchM_ConfigType*` 的变量。该指针应用于确定实际使用的 `PostBuildVariantCriterion` 的值，并在启用 DET 时用于变体验证。
+当调用 `[SchM_Init](#7271-schm_init)` 时，将传递一个指向活动的 `SchM_ConfigType` 的指针，该指针应被赋给名为 `Rte_VarCfgPtr`、类型为 `SchM_ConfigType*` 的变量。该指针应用于确定实际使用的 `PostBuildVariantCriterion` 的值，并在启用 DET 时用于变体验证。
 
 **示例 1：评估判据的伪代码**
 
@@ -11416,7 +16408,7 @@ BufferedVarCri_1 = Rte_VarCfgPtr->VarSet_1->VarCri_1;
 
 **RTE** 需要支持目标代码组件，以及映射到某个 **ECU** 上的同一 AUTOSAR 软件组件的多个实例。为了将内存开销降到最低，**ECU** 上一个组件的所有实例共享代码，因此 **RTE** 和组件实例都需要一种区分不同实例的手段。
 
-对目标代码组件和多重实例两者的支持都需要一层间接机制，以便在组件执行操作时调用正确的生成 **RTE** 定制函数。该间接机制由实例句柄与 7.1.2.6 节中定义的 **API** 映射共同提供。
+对目标代码组件和多重实例两者的支持都需要一层间接机制，以便在组件执行操作时调用正确的生成 **RTE** 定制函数。该间接机制由实例句柄与 [7.1.2.6](#7126-api-映射) 节中定义的 **API** 映射共同提供。
 
 组件实例句柄应标识组件的特定实例。
 
@@ -11432,7 +16424,7 @@ BufferedVarCri_1 = Rte_VarCfgPtr->VarSet_1->VarCri_1;
 
 如果软件组件不支持多重实例化，则组件数据实例的名称应为 `Rte_Inst_<cts>`，其中 `<cts>` 是 `AtomicSwComponentType` 的组件类型符号（**component type symbol**）。
 
-实例句柄的数据类型在 7.1.5.2 节中定义。
+实例句柄的数据类型在 [7.1.5.2](#7152-rte_instance) 节中定义。
 
 **示例 5.23**
 
@@ -11546,7 +16538,7 @@ ANSI C 不允许空的结构定义，而 **RTE** 的运行又需要实例句柄�
 
 **7.1.4.2.1 数据句柄节**
 
-数据句柄节用于支持 `Rte_IRead` 和 `Rte_IWrite` 调用（见 7.1.2.4 节）。
+数据句柄节用于支持 `[Rte_IRead](#71618-rte_iread)` 和 `[Rte_IWrite](#71620-rte_iwrite)` 调用（见 [7.1.2.4](#7124-datareadaccess-和-datawriteaccess-角色中的-variableaccess) 节）。
 
 在兼容模式下，当且仅当软件组件支持多重实例化或以目标代码形式交付时，数据句柄节才应存在。
 
@@ -11568,7 +16560,7 @@ ANSI C 不允许空的结构定义，而 **RTE** 的运行又需要实例句柄�
 
 这些术语的定义见下文。
 
-如果需实现变体性，则 **RTE** 生成器应将组件数据结构中变体存在的 `Rte_IRead` 或 `Rte_IWrite` **API** 的每个数据句柄节条目包裹起来：
+如果需实现变体性，则 **RTE** 生成器应将组件数据结构中变体存在的 `[Rte_IRead](#71618-rte_iread)` 或 `[Rte_IWrite](#71620-rte_iwrite)` **API** 的每个数据句柄节条目包裹起来：
 
 ```c
 #if (<condition>)
@@ -11578,7 +16570,7 @@ ANSI C 不允许空的结构定义，而 **RTE** 的运行又需要实例句柄�
 #endif
 ```
 
-其中 `condition` 是与该 `Rte_IRead` 或 `Rte_IWrite` **API** 的变体存在性相关的变体点（**VariationPoint**）的条件值宏（见 **SWS_Rte_06515**），`Data Handles Section Entry` 是按照不变式数据句柄节条目得到的代码（另见 **SWS_Rte_03733**、**SWS_Rte_02608**、**SWS_Rte_02588**）。
+其中 `condition` 是与该 `[Rte_IRead](#71618-rte_iread)` 或 `[Rte_IWrite](#71620-rte_iwrite)` **API** 的变体存在性相关的变体点（**VariationPoint**）的条件值宏（见 **SWS_Rte_06515**），`Data Handles Section Entry` 是按照不变式数据句柄节条目得到的代码（另见 **SWS_Rte_03733**、**SWS_Rte_02608**、**SWS_Rte_02588**）。
 
 **7.1.4.2.1.1 无状态数据元素**
 
@@ -11602,7 +16594,7 @@ ANSI C 不允许空的结构定义，而 **RTE** 的运行又需要实例句柄�
 
 每个带状态的数据元素的第二个成员应命名为 'status'。
 
-带状态的数据元素的 `status` 成员应为 `Std_ReturnType` 类型。
+带状态的数据元素的 `status` 成员应为 `[Std_ReturnType](#7151-std_returntype)` 类型。
 
 在读访问的情况下，带状态的数据元素的 `status` 成员应包含与 `value` 成员对应的错误状态。
 
@@ -11620,11 +16612,11 @@ ANSI C 不允许空的结构定义，而 **RTE** 的运行又需要实例句柄�
 
 每个带扩展状态的数据元素的第二个成员应命名为 'status'。
 
-带扩展状态的数据元素的 `status` 成员应为 `Std_ReturnType` 类型。
+带扩展状态的数据元素的 `status` 成员应为 `[Std_ReturnType](#7151-std_returntype)` 类型。
 
 每个带扩展状态的数据元素的第三个成员应命名为 'feedback'。
 
-带扩展状态的数据元素的 `feedback` 成员应为 `Std_ReturnType` 类型。
+带扩展状态的数据元素的 `feedback` 成员应为 `[Std_ReturnType](#7151-std_returntype)` 类型。
 
 在读访问的情况下，带扩展状态的数据元素的 `status` 成员应包含与 `value` 成员对应的错误状态。
 
@@ -11632,7 +16624,7 @@ ANSI C 不允许空的结构定义，而 **RTE** 的运行又需要实例句柄�
 
 **7.1.4.2.1.4 用法**
 
-每个所需的带状态数据元素、每个无状态数据元素以及每个带扩展状态的数据元素的定义都会输出到 **RTE** 数据句柄类型头文件中（见 7.1.3.5 节）。
+每个所需的带状态数据元素、每个无状态数据元素以及每个带扩展状态的数据元素的定义都会输出到 **RTE** 数据句柄类型头文件中（见 [7.1.3.5](#7135-rte-数据句柄类型头文件) 节）。
 
 **示例 5.24**
 
@@ -11671,7 +16663,7 @@ Rte_DES_uint8* re2_p_a;
 Rte_DEX_uint16* re3_pr_d;
 ```
 
-以目标代码交付或被多重实例化的软件组件需要 `Rte_IRead`、`Rte_IWrite`、`Rte_IStatus` 和 `Rte_IFeedback` 的"通用"定义，这些定义使用数据句柄访问在生成的 **RTE** 内创建的数据副本。例如：
+以目标代码交付或被多重实例化的软件组件需要 `[Rte_IRead](#71618-rte_iread)`、`[Rte_IWrite](#71620-rte_iwrite)`、`[Rte_IStatus](#71623-rte_istatus)` 和 `[Rte_IFeedback](#71636-rte_ifeedback)` 的"通用"定义，这些定义使用数据句柄访问在生成的 **RTE** 内创建的数据副本。例如：
 
 ```c
 #define Rte_IWrite_re1_p_a(instance,v)   ((instance)->re1_p_a->value = (v))
@@ -11684,11 +16676,11 @@ Rte_DEX_uint16* re3_pr_d;
 #define Rte_IFeedback_re3_pr_d(instance) ((instance)->re3_pr_d->feedback)
 ```
 
-由于任何对不正确类型的赋值企图都会被编译器检测到，因此 `Rte_IRead`、`Rte_IWrite`、`Rte_IStatus` 和 `Rte_IFeedback` 的定义是类型安全的。
+由于任何对不正确类型的赋值企图都会被编译器检测到，因此 `[Rte_IRead](#71618-rte_iread)`、`[Rte_IWrite](#71620-rte_iwrite)`、`[Rte_IStatus](#71623-rte_istatus)` 和 `[Rte_IFeedback](#71636-rte_ifeedback)` 的定义是类型安全的。
 
-对于不使用多重实例化的源代码组件，`Rte_IRead`、`Rte_IWrite`、`Rte_IStatus` 和 `Rte_IFeedback` 的定义可以保持如上，或者可以应用供应商特定的优化而不损失可移植性。
+对于不使用多重实例化的源代码组件，`[Rte_IRead](#71618-rte_iread)`、`[Rte_IWrite](#71620-rte_iwrite)`、`[Rte_IStatus](#71623-rte_istatus)` 和 `[Rte_IFeedback](#71636-rte_ifeedback)` 的定义可以保持如上，或者可以应用供应商特定的优化而不损失可移植性。
 
-在生成的 **RTE** 内创建的组件数据结构实例中赋给数据句柄的值，取决于任务和可运行实体的映射，见 7.1.2.4 节。
+在生成的 **RTE** 内创建的组件数据结构实例中赋给数据句柄的值，取决于任务和可运行实体的映射，见 [7.1.2.4](#7124-datareadaccess-和-datawriteaccess-角色中的-variableaccess) 节。
 
 **7.1.4.2.2 每实例内存句柄节**
 
@@ -11700,7 +16692,7 @@ Rte_DEX_uint16* re3_pr_d;
 
 每个每实例内存句柄的数据类型应是一个指针，指向在应用头文件中定义的该每实例内存的类型。
 
-**RTE** 通过 `Rte_Pim` **API** 支持对每实例内存的访问。
+**RTE** 通过 `[Rte_Pim](#71615-rte_pim)` **API** 支持对每实例内存的访问。
 
 如果需实现变体性，则 **RTE** 生成器应将组件数据结构中变体存在的 `PerInstanceMemory` 或 `arTypedPerInstanceMemory` 的每个每实例内存句柄节条目包裹起来：
 
@@ -11712,7 +16704,7 @@ Rte_DEX_uint16* re3_pr_d;
 #endif
 ```
 
-其中 `condition` 是与该 `Rte_Pim` **API** 的变体存在性相关的变体点条件值宏（见 **SWS_Rte_06518**），`Per-instance Memory Handles Section Entry` 是按照不变式每实例内存句柄节条目得到的代码（另见 **SWS_Rte_02301**、**SWS_Rte_02302**）。
+其中 `condition` 是与该 `[Rte_Pim](#71615-rte_pim)` **API** 的变体存在性相关的变体点条件值宏（见 **SWS_Rte_06518**），`Per-instance Memory Handles Section Entry` 是按照不变式每实例内存句柄节条目得到的代码（另见 **SWS_Rte_02301**、**SWS_Rte_02302**）。
 
 **示例 5.25**
 
@@ -11758,7 +16750,7 @@ const Rte_CDS_c Rte_Instance_c1 = {
 
 每个可运行实体间变量句柄成员的数据类型应是一个指针，指向该可运行实体间变量的类型。
 
-如果需实现变体性，则 **RTE** 生成器应将组件数据结构中变体存在的 `Rte_IrvRead` 或 `Rte_IrvWrite` 的每个可运行实体间变量句柄节条目包裹起来：
+如果需实现变体性，则 **RTE** 生成器应将组件数据结构中变体存在的 `[Rte_IrvRead](#71628-rte_irvread)` 或 `[Rte_IrvWrite](#71629-rte_irvwrite)` 的每个可运行实体间变量句柄节条目包裹起来：
 
 ```c
 #if (<condition> [|| <condition>])
@@ -11768,7 +16760,7 @@ const Rte_CDS_c Rte_Instance_c1 = {
 #endif
 ```
 
-其中 `condition` 是与访问同一可运行实体间变量的 `Rte_IrvRead` 或 `Rte_IrvWrite` **API** 的变体存在性相关的变体点条件值宏（见 **SWS_Rte_06519**），`Inter Runnable Variable Handles Section Entry` 是按照不变式可运行实体间变量句柄节条目得到的代码（另见 **SWS_Rte_02636**、**SWS_Rte_01350**、**SWS_Rte_01351**）。
+其中 `condition` 是与访问同一可运行实体间变量的 `[Rte_IrvRead](#71628-rte_irvread)` 或 `[Rte_IrvWrite](#71629-rte_irvwrite)` **API** 的变体存在性相关的变体点条件值宏（见 **SWS_Rte_06519**），`Inter Runnable Variable Handles Section Entry` 是按照不变式可运行实体间变量句柄节条目得到的代码（另见 **SWS_Rte_02636**、**SWS_Rte_01350**、**SWS_Rte_01351**）。
 
 如果软件组件既不支持多重实例化也不需要兼容模式，则可运行实体间变量句柄节应为空。
 
@@ -11782,7 +16774,7 @@ const Rte_CDS_c Rte_Instance_c1 = {
 
 互斥区域 API 节中每个条目的数据类型应是一个函数指针，指向为该 **SW-C** 生成的 **RTE API** 函数。
 
-如果需实现变体性，则 **RTE** 生成器应按照 **SWS_Rte_07701** 将互斥区域 API 节中变体存在的 `Rte_Enter` 和 `Rte_Exit` 的每个定义包裹起来：
+如果需实现变体性，则 **RTE** 生成器应按照 **SWS_Rte_07701** 将互斥区域 API 节中变体存在的 `[Rte_Enter](#71630-rte_enter)` 和 `[Rte_Exit](#71631-rte_exit)` 的每个定义包裹起来：
 
 ```c
 #if (<condition>)
@@ -11792,7 +16784,7 @@ const Rte_CDS_c Rte_Instance_c1 = {
 #endif
 ```
 
-其中 `condition` 是与 `Rte_Enter` 和 `Rte_Exit` **API** 的变体存在性相关的变体点条件值宏（见 **SWS_Rte_06518**），`Exclusive-area API section entry` 是按照不变式互斥区域节条目得到的代码（另见 **SWS_Rte_03739**、**SWS_Rte_03740**）。
+其中 `condition` 是与 `[Rte_Enter](#71630-rte_enter)` 和 `[Rte_Exit](#71631-rte_exit)` **API** 的变体存在性相关的变体点条件值宏（见 **SWS_Rte_06518**），`Exclusive-area API section entry` 是按照不变式互斥区域节条目得到的代码（另见 **SWS_Rte_03739**、**SWS_Rte_03740**）。
 
 互斥区域 API 节中的条目应按字母顺序（ASCII / ISO 8859-1 代码升序）排序。
 
@@ -11860,7 +16852,7 @@ const Rte_CDS_c Rte_Instance_c1 = {
 
 **RTE** 应支持 **SWS_Rte_07704** 中所列端口访问函数的间接 **API**。
 
-端口数据结构应针对 **SWS_Rte_07704** 中引用的与该端口关联的每个 **API** 函数包含一个函数表条目。纯 **API** 宏（如 `Rte_IRead` 和其他隐式 **API** 函数）没有函数表条目。
+端口数据结构应针对 **SWS_Rte_07704** 中引用的与该端口关联的每个 **API** 函数包含一个函数表条目。纯 **API** 宏（如 `[Rte_IRead](#71618-rte_iread)` 和其他隐式 **API** 函数）没有函数表条目。
 
 **SWS_Rte_07704**
 
@@ -11896,7 +16888,7 @@ const Rte_CDS_c Rte_Instance_c1 = {
 
 端口数据结构中每个函数表条目的数据类型应是一个函数指针，指向生成的 **RTE** 函数。
 
-生成函数的签名（即函数指针类型的定义）与相应 **RTE API** 调用的签名相同（见 7.1.6 节），唯一区别是省略了实例句柄。
+生成函数的签名（即函数指针类型的定义）与相应 **RTE API** 调用的签名相同（见 [7.1.6](#716-api-参考) 节），唯一区别是省略了实例句柄。
 
 **示例 5.26**
 
@@ -11978,7 +16970,7 @@ struct Rte_PDS_c_i2_P *ph = &(inst->p1);
 
 端口句柄类型应写入应用头文件中。
 
-**RTE** 通过宏 `Rte_Ports`（见 7.1.6.1 节）提供用于访问同一接口类型和提供/接收方向的端口数据结构数组的端口句柄，并通过宏 `Rte_NPorts`（见 7.1.6.1 节）提供对相似端口数量的访问。
+**RTE** 通过宏 `[Rte_Ports](#7161-rte_ports)`（见 [7.1.6.1](#7161-rte_ports) 节）提供用于访问同一接口类型和提供/接收方向的端口数据结构数组的端口句柄，并通过宏 `[Rte_NPorts](#7162-rte_nports)`（见 [7.1.6.1](#7161-rte_ports) 节）提供对相似端口数量的访问。
 
 **示例 5.28**
 
@@ -12012,17 +17004,17 @@ for(p=0;p<Rte_NPorts_i_P(inst);p++) {
 }
 ```
 
-软件组件也可能希望建立自己的端口句柄数组，以迭代遍历比具有相同接口和方向的所有端口更小的子集。`Rte_Port` 可用于选取某个特定端口的端口句柄，见 7.1.6.3 节。
+软件组件也可能希望建立自己的端口句柄数组，以迭代遍历比具有相同接口和方向的所有端口更小的子集。`[Rte_Port](#7163-rte_port)` 可用于选取某个特定端口的端口句柄，见 [7.1.6.3](#7163-rte_port) 节。
 
 **7.1.4.2.6 标定参数句柄节**
 
-**RTE** 需要支持通过 `Rte_CData`（见 7.1.6.16 节）访问由每实例 `ParameterDataPrototype` 派生的标定参数（见 4.2.9.3 节）。
+**RTE** 需要支持通过 `[Rte_CData](#71616-rte_cdata)`（见 [7.1.6.16](#71616-rte_cdata) 节）访问由每实例 `ParameterDataPrototype` 派生的标定参数（见 4.2.9.3 节）。
 
 每个标定参数句柄的名称应为 `CData_<name>`，其中 `<name>` 是 `ParameterDataPrototype` 的名称。
 
 每个标定参数句柄的类型应是一个函数指针，指向生成的 **RTE** 函数。
 
-请注意，对 `ParameterSwComponentType` 内 `ParameterDataPrototype` 的访问不会在该节中产生任何句柄，因为生成的 `Rte_Prm`（见 7.1.6.17 节）**API** 或者被直接访问（单一实例化），或者通过端口 API 节中的句柄访问（多重实例化）。同样，对共享 `ParameterDataPrototype` 的访问也不会在标定参数句柄节中产生任何句柄，因为按定义不存在每实例数据。
+请注意，对 `ParameterSwComponentType` 内 `ParameterDataPrototype` 的访问不会在该节中产生任何句柄，因为生成的 `[Rte_Prm](#71617-rte_prm)`（见 [7.1.6.17](#71617-rte_prm) 节）**API** 或者被直接访问（单一实例化），或者通过端口 API 节中的句柄访问（多重实例化）。同样，对共享 `ParameterDataPrototype` 的访问也不会在标定参数句柄节中产生任何句柄，因为按定义不存在每实例数据。
 
 如果软件组件既不支持多重实例化也不需要兼容模式，则标定参数句柄节应为空。
 
@@ -12036,7 +17028,7 @@ for(p=0;p<Rte_NPorts_i_P(inst);p++) {
 
 每个函数表条目的数据类型应是一个函数指针，指向生成的 **RTE** 函数。
 
-生成函数的签名（即函数指针类型的定义）与相应 **RTE API** 调用的签名相同（见 7.1.6 节），唯一区别是省略了实例句柄。
+生成函数的签名（即函数指针类型的定义）与相应 **RTE API** 调用的签名相同（见 [7.1.6](#716-api-参考) 节），唯一区别是省略了实例句柄。
 
 如果组件支持多重实例化或需要兼容模式，则可运行实体间变量 API 节应包含指向 **SWS_Rte_07711** 所列 **API** 函数的指针。
 
@@ -12049,7 +17041,7 @@ for(p=0;p<Rte_NPorts_i_P(inst);p++) {
 | `Rte_IrvRead_<re>_<o>` | **SWS_Rte_03560** |
 | `Rte_IrvWrite_<re>_<o>` | **SWS_Rte_03565** |
 
-如果需实现变体性，则 **RTE** 生成器应将组件数据结构中变体存在的 `Rte_IrvRead` 或 `Rte_IrvWrite` **API** 的每个可运行实体间变量 API 节条目包裹起来：
+如果需实现变体性，则 **RTE** 生成器应将组件数据结构中变体存在的 `[Rte_IrvRead](#71628-rte_irvread)` 或 `[Rte_IrvWrite](#71629-rte_irvwrite)` **API** 的每个可运行实体间变量 API 节条目包裹起来：
 
 ```c
 #if (<condition>)
@@ -12059,7 +17051,7 @@ for(p=0;p<Rte_NPorts_i_P(inst);p++) {
 #endif
 ```
 
-其中 `condition` 是与该 `Rte_IrvRead` 或 `Rte_IrvWrite` **API** 的变体存在性相关的变体点条件值宏（见 **SWS_Rte_06519**），`Inter Runnable Variable API Section Entry` 是按照不变式可运行实体间变量 API 节条目得到的代码（另见 **SWS_Rte_03725**、**SWS_Rte_03752**、**SWS_Rte_02623**）。
+其中 `condition` 是与该 `[Rte_IrvRead](#71628-rte_irvread)` 或 `[Rte_IrvWrite](#71629-rte_irvwrite)` **API** 的变体存在性相关的变体点条件值宏（见 **SWS_Rte_06519**），`Inter Runnable Variable API Section Entry` 是按照不变式可运行实体间变量 API 节条目得到的代码（另见 **SWS_Rte_03725**、**SWS_Rte_03752**、**SWS_Rte_02623**）。
 
 如果软件组件既不支持多重实例化也不需要兼容模式，则可运行实体间变量 API 节应为空。
 
@@ -12071,9 +17063,9 @@ for(p=0;p<Rte_NPorts_i_P(inst);p++) {
 
 每个可运行实体间触发句柄条目的数据类型应是一个函数指针，指向生成的 **RTE API** 函数。
 
-可运行实体间触发 **API** 在 7.1.6.35 节中定义。
+可运行实体间触发 **API** 在 [7.1.6.35](#71635-rte_irtrigger) 节中定义。
 
-如果需实现变体性，则 **RTE** 生成器应将组件数据结构中变体存在的 `Rte_IrTrigger` **API** 的每个可运行实体间触发句柄条目包裹起来：
+如果需实现变体性，则 **RTE** 生成器应将组件数据结构中变体存在的 `[Rte_IrTrigger](#71635-rte_irtrigger)` **API** 的每个可运行实体间触发句柄条目包裹起来：
 
 ```c
 #if (<condition>)
@@ -12083,7 +17075,7 @@ for(p=0;p<Rte_NPorts_i_P(inst);p++) {
 #endif
 ```
 
-其中 `condition` 是与该 `Rte_IrTrigger` **API** 的变体存在性相关的变体点条件值宏（见 **SWS_Rte_06519**），`Inter Runnable Triggering API Section Entry` 是按照不变式可运行实体间触发 API 节条目得到的代码（另见 **SWS_Rte_03725**、**SWS_Rte_03752**、**SWS_Rte_02623**）。
+其中 `condition` 是与该 `[Rte_IrTrigger](#71635-rte_irtrigger)` **API** 的变体存在性相关的变体点条件值宏（见 **SWS_Rte_06519**），`Inter Runnable Triggering API Section Entry` 是按照不变式可运行实体间触发 API 节条目得到的代码（另见 **SWS_Rte_03725**、**SWS_Rte_03752**、**SWS_Rte_02623**）。
 
 可运行实体间触发句柄节中的条目应按字母顺序（ASCII / ISO 8859-1 代码升序）排序。
 
@@ -12116,11 +17108,11 @@ RAM 块数据已更新句柄节用于在使用 `NvBlockSwComponentType` 时（�
 
 每个 RAM 块数据已更新句柄的数据类型应是指向 `boolean` 的指针。
 
-**RTE** 通过调用 `Rte_IWrite` 和 `Rte_IWriteRef` **API** 来支持对隐式通信脏标志的访问。
+**RTE** 通过调用 `[Rte_IWrite](#71620-rte_iwrite)` 和 `[Rte_IWriteRef](#71621-rte_iwriteref)` **API** 来支持对隐式通信脏标志的访问。
 
-对属于由 `SwcServiceDependency` 在 `NvDataPort` 角色中引用的 `PPortPrototype`/`PRPortPrototype` 的数据调用任何 `Rte_IWrite` 或 `Rte_IWriteRef` **API** 时，应将由 RAM 块已更新句柄寻址的相关脏标志置为 `TRUE`。
+对属于由 `SwcServiceDependency` 在 `NvDataPort` 角色中引用的 `PPortPrototype`/`PRPortPrototype` 的数据调用任何 `[Rte_IWrite](#71620-rte_iwrite)` 或 `[Rte_IWriteRef](#71621-rte_iwriteref)` **API** 时，应将由 RAM 块已更新句柄寻址的相关脏标志置为 `TRUE`。
 
-对属于由 `SwcServiceDependency` 在 `NvDataElement` 角色中引用的 `RoleBasedDataAssignment` 的数据调用任何 `Rte_IWrite` 或 `Rte_IWriteRef` **API** 时，应将由 RAM 块已更新句柄寻址的相关脏标志置为 `TRUE`。
+对属于由 `SwcServiceDependency` 在 `NvDataElement` 角色中引用的 `RoleBasedDataAssignment` 的数据调用任何 `[Rte_IWrite](#71620-rte_iwrite)` 或 `[Rte_IWriteRef](#71621-rte_iwriteref)` **API** 时，应将由 RAM 块已更新句柄寻址的相关脏标志置为 `TRUE`。
 
 对于属于由 `SwcServiceDependency` 在 `NvDataPort` 角色中引用的 `PPortPrototype`/`PRPortPrototype` 的 `VariableDataPrototype`，**RTE** 应在通知 **NvM** 之后，将由 RAM 块已更新句柄寻址的相关脏标志置为 `FALSE`。
 
@@ -12140,7 +17132,7 @@ RAM 块数据已更新句柄节用于在使用 `NvBlockSwComponentType` 时（�
 #endif
 ```
 
-其中 `condition` 是与 `Rte_IWrite` 和 `Rte_IWriteRef` **API** 的变体存在性相关的各变体点条件值宏（见 **SWS_Rte_06518**）；各条件值宏用逻辑或（`||`）运算符连接，以确保只要任一相关 **API** 存在句柄即可用；`RAM Block Data Updated Handles Section Entry` 是按照不变式 RAM 块数据已更新句柄节条目得到的代码，其中的条件值宏用逻辑或（`||`）运算符连接（另见 **SWS_Rte_08092**、**SWS_Rte_08093**）。
+其中 `condition` 是与 `[Rte_IWrite](#71620-rte_iwrite)` 和 `[Rte_IWriteRef](#71621-rte_iwriteref)` **API** 的变体存在性相关的各变体点条件值宏（见 **SWS_Rte_06518**）；各条件值宏用逻辑或（`||`）运算符连接，以确保只要任一相关 **API** 存在句柄即可用；`RAM Block Data Updated Handles Section Entry` 是按照不变式 RAM 块数据已更新句柄节条目得到的代码，其中的条件值宏用逻辑或（`||`）运算符连接（另见 **SWS_Rte_08092**、**SWS_Rte_08093**）。
 
 如果软件组件既不支持多重实例化也不需要兼容模式，则 RAM 块数据已更新句柄节应为空。
 
@@ -12156,7 +17148,7 @@ RAM 块数据已更新句柄节用于在使用 `NvBlockSwComponentType` 时（�
 
 ###### 7.1.5.1. Std_ReturnType
 
-规范 [32] 定义了标准的 **API** 返回类型 `Std_ReturnType`。`Std_ReturnType` 定义了 **API** 函数返回的"状态"和"错误值"。它被定义为 `uint8` 类型。值 '0' 保留给"未发生错误"。
+规范 [\[32\]](#ref-32) 定义了标准的 **API** 返回类型 `Std_ReturnType`。`Std_ReturnType` 定义了 **API** 函数返回的"状态"和"错误值"。它被定义为 `uint8` 类型。值 '0' 保留给"未发生错误"。
 
 图 5.13：`Std_ReturnType` 的位布局。
 
@@ -12455,7 +17447,7 @@ typedef uint8 Std_ReturnType;
 
 实例句柄的底层数据类型应是指向组件数据结构（**Component Data Structure**）的指针。
 
-组件数据结构（见 7.1.4.2 节）对于组件类型是唯一定义的，因此实例句柄的数据类型对每个组件类型自动是唯一的。
+组件数据结构（见 [7.1.4.2](#7142-组件数据结构) 节）对于组件类型是唯一定义的，因此实例句柄的数据类型对每个组件类型自动是唯一的。
 
 实例句柄类型在应用头文件中定义（**SWS_Rte_01007**）。
 
@@ -12538,7 +17530,7 @@ typedef uint8 Std_ReturnType;
 
 ###### 7.1.5.4. 枚举数据类型
 
-枚举（**enumeration**）并不是一种普通的基本 `ImplementationDataType`。相反，可以使用一个整数范围作为结构化描述。整数到枚举中"标签"的映射实际上是在 **SWC** 模板中通过 `SwDataDefProps` 的语义类 `CompuMethod` 建模的 [2]。枚举数据类型被建模为 `ImplementationDataType`，其 `SwDataDefProps` 引用一个仅包含点范围（即 `CompuScale` 的下限和上限相同）`CompuScale` 的 `CompuMethod`。
+枚举（**enumeration**）并不是一种普通的基本 `ImplementationDataType`。相反，可以使用一个整数范围作为结构化描述。整数到枚举中"标签"的映射实际上是在 **SWC** 模板中通过 `SwDataDefProps` 的语义类 `CompuMethod` 建模的 [\[2\]](#ref-2)。枚举数据类型被建模为 `ImplementationDataType`，其 `SwDataDefProps` 引用一个仅包含点范围（即 `CompuScale` 的下限和上限相同）`CompuScale` 的 `CompuMethod`。
 
 应用类型头文件应包含该软件组件使用的每个 `ImplementationDataType`/`ApplicationDataType`（关于"使用"一词的含义见 **SWS_Rte_08802**）的所有常量的定义。
 
@@ -12643,7 +17635,7 @@ if (attribute symbol of CompuScale is available and not empty) {
 
 请注意，前缀的定义方式可以是：带有 `literalPrefix` 属性的 `IncludedDataTypeSet` 引用 `ApplicationDataType`，或者引用 `ImplementationDataType`。
 
-**理由**：以 `ApplicationPrimitiveDataType`（而不是相应的 `ImplementationDataType`）作为生成限值的基础，是因为定义在 `ImplementationDataType` 上的限值可能比 `ApplicationPrimitiveDataType` 的限值更宽（参见 AUTOSAR **SW-C** 模板 [2] 的"Single Values 的数据类型"小节）。
+**理由**：以 `ApplicationPrimitiveDataType`（而不是相应的 `ImplementationDataType`）作为生成限值的基础，是因为定义在 `ImplementationDataType` 上的限值可能比 `ApplicationPrimitiveDataType` 的限值更宽（参见 AUTOSAR **SW-C** 模板 [\[2\]](#ref-2) 的"Single Values 的数据类型"小节）。
 
 对于规定了 `invalidValue` 的 AUTOSAR 数据类型，应用类型头文件应包含如下定义：
 
@@ -12665,7 +17657,7 @@ if (attribute symbol of CompuScale is available and not empty) {
 
 ###### 7.1.5.6. 带位域转换的数据类型
 
-与类别为 "BITFIELD_TEXTTABLE" 的 `CompuMethod` 关联的 `AutosarDataType` 支持在单个标量变量内拼接一个值集合。由此，单个位可以获得独立的（布尔）含义，或者一组位被用来承载一个枚举。请注意，这些数据类型不是映射到 C 位域（**bit field**），而是映射到标量（例如 `uint8`）。因此，**RTE** 生成器提供了一组关于"位掩码"（**Bit Mask**）、"位起始位置"（**Bit Start Position**）和"位数"（**Number of Bits**）的定义，以支持对此类数据类型使用 AUTOSAR 位处理例程（**Bit Handling Routines**）[33]。对于对一组位（该集合可能只包含 1 位）的某些操作，AUTOSAR 位域库要求单个连续的位域，即 `CompuScale.mask` 特性值中所有置 1 的位是相邻的，例如 `0b00010000` 或 `0b00111100`。
+与类别为 "BITFIELD_TEXTTABLE" 的 `CompuMethod` 关联的 `AutosarDataType` 支持在单个标量变量内拼接一个值集合。由此，单个位可以获得独立的（布尔）含义，或者一组位被用来承载一个枚举。请注意，这些数据类型不是映射到 C 位域（**bit field**），而是映射到标量（例如 `uint8`）。因此，**RTE** 生成器提供了一组关于"位掩码"（**Bit Mask**）、"位起始位置"（**Bit Start Position**）和"位数"（**Number of Bits**）的定义，以支持对此类数据类型使用 AUTOSAR 位处理例程（**Bit Handling Routines**）[\[33\]](#ref-33)。对于对一组位（该集合可能只包含 1 位）的某些操作，AUTOSAR 位域库要求单个连续的位域，即 `CompuScale.mask` 特性值中所有置 1 的位是相邻的，例如 `0b00010000` 或 `0b00111100`。
 
 对于按照 **SWS_Rte_03809** 被类别为 "BITFIELD_TEXTTABLE" 的 `ImplementationDataType` 或 `ApplicationPrimitiveDataType` 引用的、位于 `CompuMethod` 的 `compuInternalToPhys` 容器中的每个 `CompuScale`，针对每个唯一的 `CompuScale.shortLabel`/`CompuScale.mask` 值对，应用类型头文件应包含位域掩码（**bit field mask**）的定义：
 
@@ -12715,7 +17707,7 @@ if (attribute symbol of CompuScale is available and not empty) {
 
 `<prefix>` 是引用使用该 `CompuMethod` 的 `AutosarDataType` 的 `IncludedDataTypeSet` 定义的可选 `literalPrefix` 属性。
 
-请注意 F.3 节中的示例。
+请注意 F.[3](#3-相关文档) 节中的示例。
 
 需求 **SWS_Rte_07410**、**SWS_Rte_07411** 和 **SWS_Rte_07412** 仅适用于定义了 `shortLabel` 特性的 `CompuScale`。
 
@@ -13125,9 +18117,9 @@ Std_ReturnType Rte_[Byps_]Feedback_<p>_<o>( [IN Rte_Instance <instance>])
 
 * 调用 `Rte_Feedback` 不得改变 `Rte_Feedback` 返回的状态。
 
-`Rte_Feedback` **API** 的返回值仅在进行新的传输请求（`Rte_Send` 或 `Rte_Write`）时或收到来自 **COM** 的通知时才会改变。
+`Rte_Feedback` **API** 的返回值仅在进行新的传输请求（`[Rte_Send](#7165-rte_send)` 或 `[Rte_Write](#7164-rte_write)`）时或收到来自 **COM** 的通知时才会改变。
 
-在 `Rte_Send` 或 `Rte_Write` 传输请求之后，对于给定的 **Signal** 或 **SignalGroup**，只有来自 **COM** 的第一个通知应被纳入考虑（**SWS_Rte_07635**）。
+在 `[Rte_Send](#7165-rte_send)` 或 `[Rte_Write](#7164-rte_write)` 传输请求之后，对于给定的 **Signal** 或 **SignalGroup**，只有来自 **COM** 的第一个通知应被纳入考虑（**SWS_Rte_07635**）。
 
 需求 **SWS_Rte_07635** 在周期传输的情况下是必需的，因为周期传输可能导致具有不同状态的多次传输。
 
@@ -13142,7 +18134,7 @@ Std_ReturnType Rte_[Byps_]Feedback_<p>_<o>( [IN Rte_Instance <instance>])
 * `RTE_E_NO_DATA` - 在调用 `Rte_Feedback` **API** 时（非阻塞调用）或在 `WaitPoint` 超时到期时（阻塞调用），未从 **COM** 收到任何确认或错误通知。
 
 * `RTE_E_COM_STOPPED` - 在以下情况之一返回：
-    * （仅限 **ECU** 间通信）上一次传输被拒绝（在调用 `Rte_Send` 或 `Rte_Write` **API** 时），返回码为 `RTE_E_COM_STOPPED`。
+    * （仅限 **ECU** 间通信）上一次传输被拒绝（在调用 `[Rte_Send](#7165-rte_send)` 或 `[Rte_Write](#7164-rte_write)` **API** 时），返回码为 `RTE_E_COM_STOPPED`。
     * （仅限 **ECU** 间通信）在任何超时通知之前收到了来自 **COM** 的错误通知。
 
 * `RTE_E_TIMEOUT` -（仅限 **ECU** 间和分区间通信）在任何错误通知之前收到了来自 **COM** 或 **IOC** 的超时通知。
@@ -13577,8 +18569,8 @@ void Rte_[Byps_]Call_<p>_<o>([IN Rte_Instance <instance>], [IN|IN/OUT|OUT] <data
 在异步通信的情况下：
 
 * `Rte_Call` 仅包含 **IN** 和 **IN/OUT** 参数；
-* `Rte_Result` 仅包含 **IN/OUT** 和 **OUT** 参数，用于收集服务器调用的结果；
-* 在 `Rte_Call` 期间提供的 **IN/OUT** 参数可以与在 `Rte_Result` 期间传递的 **IN/OUT** 参数地址不同。
+* `[Rte_Result](#71614-rte_result)` 仅包含 **IN/OUT** 和 **OUT** 参数，用于收集服务器调用的结果；
+* 在 `Rte_Call` 期间提供的 **IN/OUT** 参数可以与在 `[Rte_Result](#71614-rte_result)` 期间传递的 **IN/OUT** 参数地址不同。
 
 ###### 7.1.6.14. Rte_Result
 
@@ -13604,11 +18596,11 @@ void Rte_[Byps_]Result_<p>_<o>([IN Rte_Instance <instance>], [IN/OUT|OUT <param 
 
 存在性：
 
-* 如果为特定 `RunnableEntity` 存在 `AsynchronousServerCallResultPoint`，且该 `AsynchronousServerCallResultPoint` 引用了某个 `AsynchronousServerCallPoint`（按照 **SWS_Rte_01294**，该引用导致生成异步 `Rte_Call` **API**），但该 `RunnableEntity` 的任何 `WaitPoint` 都没有引用引用了该 `AsynchronousServerCallResultPoint` 的 `AsynchronousServerCallReturnsEvent`，则应生成非阻塞式 `Rte_Result` **API**。
+* 如果为特定 `RunnableEntity` 存在 `AsynchronousServerCallResultPoint`，且该 `AsynchronousServerCallResultPoint` 引用了某个 `AsynchronousServerCallPoint`（按照 **SWS_Rte_01294**，该引用导致生成异步 `[Rte_Call](#71613-rte_call)` **API**），但该 `RunnableEntity` 的任何 `WaitPoint` 都没有引用引用了该 `AsynchronousServerCallResultPoint` 的 `AsynchronousServerCallReturnsEvent`，则应生成非阻塞式 `Rte_Result` **API**。
 
 请注意，非阻塞式 `Rte_Result` **API** 不需要 `AsynchronousServerCallReturnsEvent` 的存在。如果 `AsynchronousServerCallReturnsEvent` 存在，它可用于触发某个 `RunnableEntity` 的执行，在该 `RunnableEntity` 中可以调用非阻塞 `Rte_Result` **API** 函数。
 
-* 如果为特定 `RunnableEntity` 存在 `AsynchronousServerCallResultPoint`，且该 `AsynchronousServerCallResultPoint` 引用了某个 `AsynchronousServerCallPoint`（按照 **SWS_Rte_01294**，该引用导致生成异步 `Rte_Call` **API**），并且该 `RunnableEntity` 的某个 `WaitPoint` 引用了引用该 `AsynchronousServerCallResultPoint` 的 `AsynchronousServerCallReturnsEvent`，则应生成阻塞式 `Rte_Result` **API**。
+* 如果为特定 `RunnableEntity` 存在 `AsynchronousServerCallResultPoint`，且该 `AsynchronousServerCallResultPoint` 引用了某个 `AsynchronousServerCallPoint`（按照 **SWS_Rte_01294**，该引用导致生成异步 `[Rte_Call](#71613-rte_call)` **API**），并且该 `RunnableEntity` 的某个 `WaitPoint` 引用了引用该 `AsynchronousServerCallResultPoint` 的 `AsynchronousServerCallReturnsEvent`，则应生成阻塞式 `Rte_Result` **API**。
 
 * 阻塞式 `Rte_Result` **API** 只能由包含相应 `WaitPoint` 的可运行实体使用。
 
@@ -13642,9 +18634,9 @@ void Rte_[Byps_]Result_<p>_<o>([IN Rte_Instance <instance>], [IN/OUT|OUT <param 
 
 * `RTE_E_SOFT_TRANSFORMER_ERROR` - 转换器链中至少有一个转换器的返回值为软错误，且转换器链中未发生硬错误。
 
-* `RTE_E_NO_DATA` -（非阻塞读取）服务器的结果不可用，但 **API** 调用中未发生其他错误；或者自 `Rte_Start` 以来服务器尚未被调用。**IN/OUT** 和 **OUT** 参数的缓冲区不得被修改。
+* `RTE_E_NO_DATA` -（非阻塞读取）服务器的结果不可用，但 **API** 调用中未发生其他错误；或者自 `[Rte_Start](#7181-rte_start)` 以来服务器尚未被调用。**IN/OUT** 和 **OUT** 参数的缓冲区不得被修改。
 
-* `RTE_E_NO_DATA` -（非阻塞读取）前一次 `Rte_Call` 返回了 `RTE_E_SEG_FAULT`、`RTE_E_TRANSFORMER_LIMIT` 或 `RTE_E_HARD_TRANSFORMER_ERROR`。
+* `RTE_E_NO_DATA` -（非阻塞读取）前一次 `[Rte_Call](#71613-rte_call)` 返回了 `RTE_E_SEG_FAULT`、`RTE_E_TRANSFORMER_LIMIT` 或 `RTE_E_HARD_TRANSFORMER_ERROR`。
 
 * `RTE_E_TIMEOUT` - 在所指定的超时时间内服务器的结果不可用，但 **API** 调用中未发生其他错误。**IN/OUT** 和 **OUT** 参数的缓冲区不得被修改。
 
@@ -13976,9 +18968,9 @@ Rte_IInvalidate **API** 除实例句柄外不接受任何参数——返回值�
 
 描述：
 
-如果在对同一 `VariableDataPrototype` 调用 Rte_IInvalidate 之后调用 Rte_IWrite，或者反之，**RTE** 应在可运行实体终止之前使用最后写入的值（last-is-best 语义）。
+如果在对同一 `VariableDataPrototype` 调用 Rte_IInvalidate 之后调用 [Rte_IWrite](#71620-rte_iwrite)，或者反之，**RTE** 应在可运行实体终止之前使用最后写入的值（last-is-best 语义）。
 
-**SWS_Rte_03778** 指出，如果 Rte_IWrite 在 Rte_IInvalidate 之后发生，则 Rte_IWrite 会覆盖 Rte_IInvalidate 调用，因为 Rte_IWrite 在该数据元素原型的内容被通告给其他可运行实体之前会覆写内部缓冲区的内容。
+**SWS_Rte_03778** 指出，如果 [Rte_IWrite](#71620-rte_iwrite) 在 Rte_IInvalidate 之后发生，则 [Rte_IWrite](#71620-rte_iwrite) 会覆盖 Rte_IInvalidate 调用，因为 [Rte_IWrite](#71620-rte_iwrite) 在该数据元素原型的内容被通告给其他可运行实体之前会覆写内部缓冲区的内容。
 
 返回值：无。
 
@@ -14295,11 +19287,11 @@ Rte_Enter **API** 调用由 AUTOSAR 软件组件调用，用于定义互斥区�
 
 **RTE** 不要求支持对同一互斥区域嵌套调用 Rte_Enter。
 
-**RTE** 应允许 Rte_Enter 与 Rte_Exit 调用嵌套，只要不同的互斥区域按与进入相反的顺序退出。
+**RTE** 应允许 Rte_Enter 与 [Rte_Exit](#71631-rte_exit) 调用嵌套，只要不同的互斥区域按与进入相反的顺序退出。
 
-Rte_Enter 与 Rte_Exit **API** 只能由包含相应 canEnter 关联的可运行实体使用。
+Rte_Enter 与 [Rte_Exit](#71631-rte_exit) **API** 只能由包含相应 canEnter 关联的可运行实体使用。
 
-Rte_Enter 与 Rte_Exit **API** 仅可在调用不同互斥区域时嵌套调用；在这种情况下，互斥区域应按与进入相反的顺序退出。
+Rte_Enter 与 [Rte_Exit](#71631-rte_exit) **API** 仅可在调用不同互斥区域时嵌套调用；在这种情况下，互斥区域应按与进入相反的顺序退出。
 
 在 AUTOSAR **OS** 中，锁定资源的尝试不会因为锁已被持有而失败。锁定尝试只会因配置错误（例如调用者未被声明为访问该资源）或无效句柄而失败。因此，该函数的返回类型为 void。
 
@@ -14327,11 +19319,11 @@ Rte_Exit **API** 调用由 AUTOSAR 软件组件调用，用于定义互斥区域
 
 **RTE** 不要求支持对同一互斥区域嵌套调用 Rte_Exit。
 
-需求 **SWS_Rte_01122** 允许 Rte_Enter 与 Rte_Exit 调用嵌套，只要不同的互斥区域按与进入相反的顺序退出。
+需求 **SWS_Rte_01122** 允许 [Rte_Enter](#71630-rte_enter) 与 Rte_Exit 调用嵌套，只要不同的互斥区域按与进入相反的顺序退出。
 
 ###### 7.1.6.32. Rte_Mode
 
-Rte_Mode **API** 存在两个版本。根据软件组件描述中的 enhancedModeApi 特性，应提供该 **API** 的不同版本（另见 7.1.6.33 节）。
+Rte_Mode **API** 存在两个版本。根据软件组件描述中的 enhancedModeApi 特性，应提供该 **API** 的不同版本（另见 [7.1.6.33](#71633-增强型-rte_mode) 节）。
 
 目的：提供模式切换端口当前激活的模式。
 
@@ -14371,9 +19363,9 @@ Rte_Mode 的返回值用于向调用者告知模式机器实例（**mode machine
 
 在跨分区模式管理中，模式管理器一侧分区上的 **RTE** 可能无法直接访问模式机器实例的状态变量。
 
-在跨分区模式管理中，Rte_Mode **API** 向模式管理器返回的值应与由 Rte_Switch **API** 开始的切换以及 `ModeSwitchedAckEvent` 的跨分区通信保持一致。
+在跨分区模式管理中，Rte_Mode **API** 向模式管理器返回的值应与由 [Rte_Switch](#7166-rte_switch) **API** 开始的切换以及 `ModeSwitchedAckEvent` 的跨分区通信保持一致。
 
-在模式管理器尚未通过 Rte_SwitchAck 获取 `ModeSwitchedAckEvent` 之前，Rte_Mode **API** 可能已经指示下一个 `ModeDeclaration`。这与前述一致性需求并不矛盾。
+在模式管理器尚未通过 [Rte_SwitchAck](#7169-rte_switchack) 获取 `ModeSwitchedAckEvent` 之前，Rte_Mode **API** 可能已经指示下一个 `ModeDeclaration`。这与前述一致性需求并不矛盾。
 
 **RTE** 应支持在基础软件调度器初始化之后、**RTE** 初始化完成之前调用 Rte_Mode。
 
@@ -14389,23 +19381,23 @@ Rte_Mode 的返回值用于向调用者告知模式机器实例（**mode machine
 
 其中 `<p>` 是端口名，`<o>` 是对该端口进行分类的 `ModeSwitchInterface` 内的 `ModeDeclarationGroupPrototype` 名称。`[Byps_]` 是可选的中缀，当为相关软件组件类型启用了用于旁路支持的组件包装方法时使用。
 
-存在性：如果存在 `ModeAccessPoint`，并且 `ModeSwitchSenderComSpec` 或 `ModeSwitchReceiverComSpec` 的 enhancedModeApi 特性被设置为 true，则应生成一个符合前述签名的 Rte_Mode **API**。
+存在性：如果存在 `ModeAccessPoint`，并且 `ModeSwitchSenderComSpec` 或 `ModeSwitchReceiverComSpec` 的 enhancedModeApi 特性被设置为 true，则应生成一个符合前述签名的 [Rte_Mode](#71632-rte_mode) **API**。
 
-Rte_Mode **API** 只能由包含相应 `ModeAccessPoint` 的可运行实体使用。
+[Rte_Mode](#71632-rte_mode) **API** 只能由包含相应 `ModeAccessPoint` 的可运行实体使用。
 
 描述：
 
-Rte_Mode **API** 告知 AUTOSAR 软件组件：给定端口的 `ModeDeclarationGroup` 当前激活的是哪个模式。这正是 **RTE** 用于模式禁用依赖（**mode disabling dependency**）的信息。在从模式管理器（**mode manager**）接收到模式切换通知之后，新模式不会立即被指示，见 6.4.4 节。在模式切换期间，即在由退出某一模式或进入下一模式所触发的可运行实体执行期间，两个模式的重叠模式禁用同时处于活动状态。在这种情况下，Rte_Mode 将返回 `RTE_TRANSITION_<ModeDeclarationGroup>`。此时参数 `<previousmode>` 包含当前正被离开的模式，参数 `<nextmode>` 包含正在进入的模式。
+[Rte_Mode](#71632-rte_mode) **API** 告知 AUTOSAR 软件组件：给定端口的 `ModeDeclarationGroup` 当前激活的是哪个模式。这正是 **RTE** 用于模式禁用依赖（**mode disabling dependency**）的信息。在从模式管理器（**mode manager**）接收到模式切换通知之后，新模式不会立即被指示，见 6.4.4 节。在模式切换期间，即在由退出某一模式或进入下一模式所触发的可运行实体执行期间，两个模式的重叠模式禁用同时处于活动状态。在这种情况下，[Rte_Mode](#71632-rte_mode) 将返回 `RTE_TRANSITION_<ModeDeclarationGroup>`。此时参数 `<previousmode>` 包含当前正被离开的模式，参数 `<nextmode>` 包含正在进入的模式。
 
-对于连接到模式管理器同一模式切换端口的所有模式切换端口，Rte_Mode 将返回相同的模式（见 **SWS_Rte_02630**）。
+对于连接到模式管理器同一模式切换端口的所有模式切换端口，[Rte_Mode](#71632-rte_mode) 将返回相同的模式（见 **SWS_Rte_02630**）。
 
 支持让 `ModeAccessPoint` 引用模式管理器所提供的模式切换端口，以便为模式管理器提供对 **RTE** 用于模式禁用依赖的信息的访问。
 
 返回值：
 
-Rte_Mode 的返回类型取决于该 `ModeDeclarationGroup` 的 `ImplementationDataType`。它应返回该 `ModeDeclarationGroupPrototype` 的值。类型名应等于该 `ImplementationDataType` 的 shortName。Rte_Mode 的返回值以及参数 `<previousmode>` 和 `<nextmode>` 用于向调用者告知模式机器实例的当前模式。
+[Rte_Mode](#71632-rte_mode) 的返回类型取决于该 `ModeDeclarationGroup` 的 `ImplementationDataType`。它应返回该 `ModeDeclarationGroupPrototype` 的值。类型名应等于该 `ImplementationDataType` 的 shortName。[Rte_Mode](#71632-rte_mode) 的返回值以及参数 `<previousmode>` 和 `<nextmode>` 用于向调用者告知模式机器实例的当前模式。
 
-在模式机器实例的切换期间，Rte_Mode 应返回以下值：
+在模式机器实例的切换期间，[Rte_Mode](#71632-rte_mode) 应返回以下值：
 
 * 返回值应为 `RTE_TRANSITION_<ModeDeclarationGroup>`；
 * `<previousmode>` 应包含正被离开的模式的 `RTE_MODE_<ModeDeclarationGroup>_<ModeDeclaration>` 值；
@@ -14413,7 +19405,7 @@ Rte_Mode 的返回类型取决于该 `ModeDeclarationGroup` 的 `ImplementationD
 
 其中 `<ModeDeclarationGroup>` 是该 `ModeDeclarationGroup` 的短名，`<ModeDeclaration>` 是该 `ModeDeclaration` 的短名。
 
-当模式机器实例处于某个已定义的模式时，Rte_Mode 应返回以下值：
+当模式机器实例处于某个已定义的模式时，[Rte_Mode](#71632-rte_mode) 应返回以下值：
 
 * 返回值应包含 `RTE_MODE_<ModeDeclarationGroup>_<ModeDeclaration>` 的值；
 * `<previousmode>` 应包含 `RTE_MODE_<ModeDeclarationGroup>_<ModeDeclaration>` 的值；
@@ -14421,7 +19413,7 @@ Rte_Mode 的返回类型取决于该 `ModeDeclarationGroup` 的 `ImplementationD
 
 其中 `<ModeDeclarationGroup>` 是该 `ModeDeclarationGroup` 的短名，`<ModeDeclaration>` 是当前激活的 `ModeDeclaration` 的短名。
 
-对于分配给 **RTE** 的模式机器实例（见 **SWS_Rte_07533**），在 **RTE** 完成初始化之前，增强版 Rte_Mode **API** 应返回以下值：
+对于分配给 **RTE** 的模式机器实例（见 **SWS_Rte_07533**），在 **RTE** 完成初始化之前，增强版 [Rte_Mode](#71632-rte_mode) **API** 应返回以下值：
 
 * 返回值应为 `RTE_TRANSITION_<ModeDeclarationGroup>`；
 * `<previousmode>` 应包含该 `ModeDeclarationGroup` 的 initialMode 的 `RTE_MODE_<ModeDeclarationGroup>_<ModeDeclaration>` 值；
@@ -14429,15 +19421,15 @@ Rte_Mode 的返回类型取决于该 `ModeDeclarationGroup` 的 `ImplementationD
 
 其中 `<ModeDeclarationGroup>` 是该 `ModeDeclarationGroup` 的短名。
 
-对于公共模式机器实例，在基础软件调度器初始化之后，增强版 Rte_Mode **API** 即应按照前述两条需求返回值。
+对于公共模式机器实例，在基础软件调度器初始化之后，增强版 [Rte_Mode](#71632-rte_mode) **API** 即应按照前述两条需求返回值。
 
 在跨分区模式管理中，模式管理器一侧分区上的 **RTE** 可能无法直接访问模式机器实例的状态变量。
 
-在跨分区模式管理中，Rte_Mode **API** 向模式管理器返回的值以及参数 `<previousmode>` 和 `<nextmode>` 的内容应与由 Rte_Switch **API** 开始的切换以及 `ModeSwitchedAckEvent` 的跨分区通信保持一致。
+在跨分区模式管理中，[Rte_Mode](#71632-rte_mode) **API** 向模式管理器返回的值以及参数 `<previousmode>` 和 `<nextmode>` 的内容应与由 [Rte_Switch](#7166-rte_switch) **API** 开始的切换以及 `ModeSwitchedAckEvent` 的跨分区通信保持一致。
 
-在模式管理器尚未通过 Rte_SwitchAck 获取 `ModeSwitchedAckEvent` 之前，Rte_Mode **API** 可能已经指示下一个 `ModeDeclaration`。这与 **SWS_Rte_02732** 并不矛盾。
+在模式管理器尚未通过 [Rte_SwitchAck](#7169-rte_switchack) 获取 `ModeSwitchedAckEvent` 之前，[Rte_Mode](#71632-rte_mode) **API** 可能已经指示下一个 `ModeDeclaration`。这与 **SWS_Rte_02732** 并不矛盾。
 
-**RTE** 应支持在基础软件调度器初始化之后、**RTE** 初始化完成之前调用增强版 Rte_Mode。
+**RTE** 应支持在基础软件调度器初始化之后、**RTE** 初始化完成之前调用增强版 [Rte_Mode](#71632-rte_mode)。
 
 ###### 7.1.6.34. Rte_Trigger
 
@@ -14568,7 +19560,7 @@ Rte_IFeedback **API** 提供对数据元素传输反馈的访问，这些数据�
 
 注：
 
-见 7.1.6.8 节中 Rte_Feedback **API** 的注释。
+见 [7.1.6.8](#7168-rte_feedback) 节中 [Rte_Feedback](#7168-rte_feedback) **API** 的注释。
 
 ###### 7.1.6.37. Rte_IsUpdated
 
@@ -14615,7 +19607,7 @@ Rte_IsUpdated **API** 仅适用于发送方-接收者通信。
 
 描述：
 
-根据该 `VariationPointProxy` 的类别（见软件组件模板 [2]），Rte_PBCon **API** 或者提供对 `PostBuildVariantCriterion` 的访问，或者提供针对该 `PostBuildVariantCriterion` 评估各 `PostBuildVariantCondition` 所得结果的访问。
+根据该 `VariationPointProxy` 的类别（见软件组件模板 [\[2\]](#ref-2)），Rte_PBCon **API** 或者提供对 `PostBuildVariantCriterion` 的访问，或者提供针对该 `PostBuildVariantCriterion` 评估各 `PostBuildVariantCondition` 所得结果的访问。
 
 返回值：
 
@@ -14649,7 +19641,7 @@ boolean Rte_IsAvailable_<i>_<e>(IN <data>)
 
 描述：
 
-Rte_IsAvailable **API** 以引用方式接收一个具体变量作为输入（例如 Rte_Read 返回的数据）。该变量的类型必须为 `<i>`。返回值用于指示类型为 `<i>` 的变量中可选成员 `<e>` 是否可用。
+Rte_IsAvailable **API** 以引用方式接收一个具体变量作为输入（例如 [Rte_Read](#71610-rte_read) 返回的数据）。该变量的类型必须为 `<i>`。返回值用于指示类型为 `<i>` 的变量中可选成员 `<e>` 是否可用。
 
 返回值：
 
@@ -14674,7 +19666,7 @@ void Rte_SetAvailable_<i>_<e>(IN/OUT <data>, boolean available)
 
 描述：
 
-Rte_SetAvailable **API** 以引用方式接收一个具体变量作为输入（例如将被传递给某个 Rte_Write 调用的变量）。该变量的类型必须为 `<i>`。该 **API** 将变量中结构体成员 `<e>` 的可用性设置为 available 参数所定义的值。
+Rte_SetAvailable **API** 以引用方式接收一个具体变量作为输入（例如将被传递给某个 [Rte_Write](#7164-rte_write) 调用的变量）。该变量的类型必须为 `<i>`。该 **API** 将变量中结构体成员 `<e>` 的可用性设置为 available 参数所定义的值。
 
 返回值：无。
 
@@ -14764,7 +19756,7 @@ AUTOSAR 组件定义一个或多个『可运行实体』。可运行实体是一
 
 注：可运行实体在 AUTOSAR 软件组件模板中有两个与之关联的『名称』：可运行实体的标识符（identifier）和入口点的符号（symbol）。标识符用于在输入数据中引用可运行实体，符号则在代码中用于标识可运行实体的实现。在可运行实体原型的上下文中，'name' 是可运行实体的入口点符号。
 
-角色参数的定义在 7.1.7.3 节中给出。
+角色参数的定义在 [7.1.7.3](#7173-角色参数) 节中给出。
 
 7.1.2.6.4 节包含基于触发可运行实体的 RTEEvent 的、针对可运行实体的推荐命名约定的详细内容。该推荐命名约定显式地指出了实现可运行实体的函数，并将可运行实体与适用的数据元素或操作清晰地关联起来。
 
@@ -14803,7 +19795,7 @@ RTE 生成器应使用内存映射（Memory Mapping）宏将应用头文件中�
 
 `Rte_ActivatingEvent` 的使用是可选的，在 **SWS_Rte_08051** 中定义。如果多个入口点原型引用同一个 `swAddrMethod`，内存映射宏可以将它们包裹在一起。如果 `RunnableEntity` 未引用任何 `swAddrMethod`，则 `<sadm>` 设置为默认值 `CODE`。`[Byps_]` 是一个可选的中缀，当为相关软件组件类型启用了用于旁路支持的组件包装方法时使用。
 
-角色参数的定义在 7.1.7.3 节中给出。
+角色参数的定义在 [7.1.7.3](#7173-角色参数) 节中给出。
 
 如果应实现可变性，则 RTE 生成器应使用变体存在性条件包裹变体存在的 `RunnableEntity` 在应用头文件中的每个入口点原型：
 
@@ -14859,7 +19851,7 @@ RTE_RUNNABLE_FOO()
 
 ###### 7.1.7.3. 角色参数
 
-角色参数是可选的，其存在与否及类型取决于触发可运行实体执行的 RTEEvent。每个触发型 RTEEvent 所需的角色参数在 7.1.7.5 节中定义。
+角色参数是可选的，其存在与否及类型取决于触发可运行实体执行的 RTEEvent。每个触发型 RTEEvent 所需的角色参数在 [7.1.7.5](#7175-触发事件) 节中定义。
 
 如果为相关 `RunnableEntity` 定义了 `RunnableEntityArgument`，且未定义到 `BswModuleEntry` 的映射，则 RTE 生成器应根据 `RunnableEntityArgument` 的 `symbol` 特性的值为角色参数命名。
 
@@ -14869,7 +19861,7 @@ RTE_RUNNABLE_FOO()
 
 如果既未为 `RunnableEntity` 定义 `RunnableEntityArgument`，也未定义到 `BswModuleEntry` 的映射，则 RTE 生成器应生成无名的角色参数。
 
-关于 `RunnableEntity` 与 `BswModuleEntry` 映射的更多细节，可参见文档 [9] 中的『与相应 SWC 的同步』（Synchronization with a Corresponding SWC）一节。
+关于 `RunnableEntity` 与 `BswModuleEntry` 映射的更多细节，可参见文档 [\[9\]](#ref-9) 中的『与相应 SWC 的同步』（Synchronization with a Corresponding SWC）一节。
 
 ###### 7.1.7.4. 返回值
 
@@ -14885,7 +19877,7 @@ RTE 是唯一能够触发可运行实体执行的实体。RTE 响应不同的 RT
 
 以下小节描述能够触发可运行实体执行的条件。对每个触发事件，都定义了实现该可运行实体的函数（即『入口点』）的签名。签名定义为每个函数包含两类参数：
 
-1. 实例句柄 —— 参数类型始终为 `Rte_Instance`（**SWS_Rte_01016**）。
+1. 实例句柄 —— 参数类型始终为 `[Rte_Instance](#7152-rte_instance)`（**SWS_Rte_01016**）。
 2. 角色参数 —— 用于传递由触发条件引起的、可运行实体所需的信息。角色参数的存在与否（及其数量）仅取决于触发条件。
 
 **7.1.7.5.1 TimingEvent**
@@ -14928,7 +19920,7 @@ void <name>([IN Rte_Instance <instance>])
 void <name>([IN Rte_Instance <instance>])
 ```
 
-注意：由 AsynchronousServerCallReturnsEvent RTEEvent 触发的可运行实体应使用 `Rte_Result` API 来实际接收服务器操作的结果和状态。
+注意：由 AsynchronousServerCallReturnsEvent RTEEvent 触发的可运行实体应使用 `[Rte_Result](#71614-rte_result)` API 来实际接收服务器操作的结果和状态。
 
 **7.1.7.5.5 DataReceiveErrorEvent**
 
@@ -14940,7 +19932,7 @@ void <name>([IN Rte_Instance <instance>])
 void <name>([IN Rte_Instance <instance>])
 ```
 
-注意：由 DataReceiveErrorEvent RTEEvent 触发的可运行实体应使用 `Rte_IStatus` API 来实际读取状态。
+注意：由 DataReceiveErrorEvent RTEEvent 触发的可运行实体应使用 `[Rte_IStatus](#71623-rte_istatus)` API 来实际读取状态。
 
 **7.1.7.5.6 OperationInvokedEvent**
 
@@ -14966,7 +19958,7 @@ void <name>([IN Rte_Instance <instance>])
 
 如果 `serverArgumentImplPolicy` 设置为 `useArgumentType`，则 `<param>` 的数据类型派生自该 `ArgumentDataPrototype` 的 `ImplementationDataType`。
 
-在 **SWS_Rte_07024** 的情况下，`RunnableEntity` 的参数与 7.1.2.6.5 节所述 `Rte_Call` API 的参数具有相同的类型。
+在 **SWS_Rte_07024** 的情况下，`RunnableEntity` 的参数与 7.1.2.6.5 节所述 `[Rte_Call](#71613-rte_call)` API 的参数具有相同的类型。
 
 仅当端口 `<p>` 的 `PortPrototype` 被某个 `errorHandling` 特性设置为 `transformerErrorHandling` 的 `PortAPIOption` 引用时，才应生成该 API 的可选 IN 参数 `transformerError`。
 
@@ -14980,7 +19972,7 @@ IN 参数 `transformerError` 包含在转换器链执行期间发生的转换器
 
 RTE 生成器应拒绝违反 [constr_1286] 的配置。
 
-返回值：如果客户端-服务器操作的 AUTOSAR 接口描述列出了潜在的应用错误，则其可运行实体入口点的签名必须返回 `Std_ReturnType`（即使应用错误仅包含 `E_OK`）。如果未列出潜在的应用错误，则返回类型应为 `void`。
+返回值：如果客户端-服务器操作的 AUTOSAR 接口描述列出了潜在的应用错误，则其可运行实体入口点的签名必须返回 `[Std_ReturnType](#7151-std_returntype)`（即使应用错误仅包含 `E_OK`）。如果未列出潜在的应用错误，则返回类型应为 `void`。
 
 **7.1.7.5.7 DataReceivedEvent**
 
@@ -15006,7 +19998,7 @@ void <name>([IN Rte_Instance <instance>])
 void <name>([IN Rte_Instance <instance>])
 ```
 
-注意：由 DataSendCompletedEvent RTEEvent 触发的可运行实体应使用 `Rte_Feedback` API 来实际接收确认的状态。
+注意：由 DataSendCompletedEvent RTEEvent 触发的可运行实体应使用 `[Rte_Feedback](#7168-rte_feedback)` API 来实际接收确认的状态。
 
 **7.1.7.5.9 ModeSwitchedAckEvent**
 
@@ -15018,7 +20010,7 @@ void <name>([IN Rte_Instance <instance>])
 void <name>([IN Rte_Instance <instance>])
 ```
 
-注意：由 ModeSwitchedAckEvent 触发的可运行实体应使用 `Rte_SwitchAck` API 来实际接收确认的状态。
+注意：由 ModeSwitchedAckEvent 触发的可运行实体应使用 `[Rte_SwitchAck](#7169-rte_switchack)` API 来实际接收确认的状态。
 
 **7.1.7.5.10 SwcModeManagerErrorEvent**
 
@@ -15064,7 +20056,7 @@ void <name>([IN Rte_Instance <instance>])
 void <name>([IN Rte_Instance <instance>])
 ```
 
-注意：由 DataWriteCompletedEvent RTEEvent 触发的可运行实体应使用 `Rte_IFeedback` API 来实际接收确认的状态。
+注意：由 DataWriteCompletedEvent RTEEvent 触发的可运行实体应使用 `[Rte_IFeedback](#71636-rte_ifeedback)` API 来实际接收确认的状态。
 
 **7.1.7.5.14 InitEvent**
 
@@ -15126,7 +20118,7 @@ API `Rte_Start` 初始化 RTE 自身。
 
 | 服务名 | `Rte_Start` |
 | --- | --- |
-| 语法 | `Std_ReturnType Rte_Start ( void )` |
+| 语法 | `[Std_ReturnType](#7151-std_returntype) Rte_Start ( void )` |
 | 服务 ID [hex] | 0x70 |
 | 同步/异步 | 同步 |
 | 可重入性 | 不可重入 |
@@ -15153,7 +20145,7 @@ Std_ReturnType Rte_Start(void)
 
 `Rte_Start` API 不得从 AUTOSAR 软件组件中调用。
 
-`Rte_Start` API 只能在基础软件调度器初始化之后（`SchM_Init` 终止之后）使用。
+`Rte_Start` API 只能在基础软件调度器初始化之后（`[SchM_Init](#7271-schm_init)` 终止之后）使用。
 
 `Rte_Start` API 应在 ECU 上承载 AUTOSAR 软件组件的每个核上被调用。
 
@@ -15174,7 +20166,7 @@ API `Rte_Stop` 终结 RTE 自身。
 
 | 服务名 | `Rte_Stop` |
 | --- | --- |
-| 语法 | `Std_ReturnType Rte_Stop ( void )` |
+| 语法 | `[Std_ReturnType](#7151-std_returntype) Rte_Stop ( void )` |
 | 服务 ID [hex] | 0x71 |
 | 同步/异步 | 同步 |
 | 可重入性 | 不可重入 |
@@ -15245,7 +20237,7 @@ void Rte_Init_<InitContainer>(void)
 
 `Rte_Init` 应实现为函数。
 
-`Rte_Init` API 只能在 RTE 初始化之后（`Rte_Start` 终止之后）使用。
+`Rte_Init` API 只能在 RTE 初始化之后（`[Rte_Start](#7181-rte_start)` 终止之后）使用。
 
 返回值：无。
 
@@ -15265,7 +20257,7 @@ API `Rte_StartTiming` 开始周期性事件的触发。
 | 输入输出参数 | 无 |
 | 输出参数 | 无 |
 | 返回值 | 无 |
-| 描述 | `Rte_StartTiming` API 用于在最后一次调用某个 `Rte_Init` 函数之后，释放由 TimingEvent 和 BackgroundEvent 触发的可运行实体的激活。 |
+| 描述 | `Rte_StartTiming` API 用于在最后一次调用某个 `[Rte_Init](#7183-rte_init)` 函数之后，释放由 TimingEvent 和 BackgroundEvent 触发的可运行实体的激活。 |
 | 可用头文件 | `Rte.h` |
 
 签名：
@@ -15274,7 +20266,7 @@ API `Rte_StartTiming` 开始周期性事件的触发。
 void Rte_StartTiming(void)
 ```
 
-存在条件：如果创建了任何 `Rte_Init` API，则应创建一个 `Rte_StartTiming` API。
+存在条件：如果创建了任何 `[Rte_Init](#7183-rte_init)` API，则应创建一个 `Rte_StartTiming` API。
 
 描述：`Rte_StartTiming` API 应释放由 TimingEvent 和 BackgroundEvent 触发的可运行实体的激活。另见 **SWS_Rte_06759** 和 **SWS_Rte_06760**。
 
@@ -15282,7 +20274,7 @@ void Rte_StartTiming(void)
 
 `Rte_StartTiming` 应实现为函数。
 
-`Rte_StartTiming` API 只能在 RTE 初始化之后（`Rte_Start` 终止之后）使用。
+`Rte_StartTiming` API 只能在 RTE 初始化之后（`[Rte_Start](#7181-rte_start)` 终止之后）使用。
 
 返回值：无。
 
@@ -15608,7 +20600,7 @@ BufReq_ReturnType Rte_[<Partition>_]LdComCbkCopyRxData ( IN CbkHandleIdType LdCo
 
 | 服务名 | `Rte_[<Partition>_]LdComCbkTpRxIndication`（草案） |
 | --- | --- |
-| 语法 | `void Rte_[<Partition>_]LdComCbkTpRxIndication ( CbkHandleIdType LdComUserCbkHandleId, Std_ReturnType result )` |
+| 语法 | `void Rte_[<Partition>_]LdComCbkTpRxIndication ( CbkHandleIdType LdComUserCbkHandleId, [Std_ReturnType](#7151-std_returntype) result )` |
 | 服务 ID [hex] | 0x103 |
 | 同步/异步 | 同步 |
 | 可重入性 | 对相同的 sn 不可重入，否则可重入 |
@@ -15662,7 +20654,7 @@ BufReq_ReturnType Rte_[<Partition>_]LdComCbkCopyTxData ( IN CbkHandleIdType LdCo
 
 | 服务名 | `Rte_[<Partition>_]LdComCbkTpTxConfirmation`（草案） |
 | --- | --- |
-| 语法 | `void Rte_[<Partition>_]LdComCbkTpTxConfirmation ( CbkHandleIdType LdComUserCbkHandleId, Std_ReturnType result )` |
+| 语法 | `void Rte_[<Partition>_]LdComCbkTpTxConfirmation ( CbkHandleIdType LdComUserCbkHandleId, [Std_ReturnType](#7151-std_returntype) result )` |
 | 服务 ID [hex] | 0xA5 |
 | 同步/异步 | 同步 |
 | 可重入性 | 对相同的 `LdComUserCbkHandleId` 不可重入，否则可重入 |
@@ -15687,14 +20679,14 @@ void Rte_[<Partition>_]LdComCbkTpTxConfirmation ( IN CbkHandleIdType LdComUserCb
 
 | 服务名 | `Rte_[<Partition>_]LdComCbkTriggerTransmit`（草案） |
 | --- | --- |
-| 语法 | `Std_ReturnType Rte_[<Partition>_]LdComCbkTriggerTransmit ( CbkHandleIdType LdComUserCbkHandleId, PduInfoType* PduInfoPtr )` |
+| 语法 | `[Std_ReturnType](#7151-std_returntype) Rte_[<Partition>_]LdComCbkTriggerTransmit ( CbkHandleIdType LdComUserCbkHandleId, PduInfoType* PduInfoPtr )` |
 | 服务 ID [hex] | 0x104 |
 | 同步/异步 | 同步 |
 | 可重入性 | 对相同的 `LdComUserCbkHandleId` 不可重入，否则可重入 |
 | 输入参数 | `LdComUserCbkHandleId`：与请求发送的 SDU 的 ID 对应的 LdCom 用户回调句柄 ID；`PduInfoPtr`：包含一个指向缓冲区的指针（SduDataPtr，SDU 数据应复制到该缓冲区）以及 `SduLengh` 中的可用缓冲区大小。返回时，该服务将在 `SduLength` 中指示已复制的 SDU 数据的长度。 |
 | 输入输出参数 | 无 |
 | 输出参数 | 无 |
-| 返回值 | `Std_ReturnType`：`E_OK` —— SDU 已被复制，`SduLength` 指示复制的字节数。`E_NOT_OK` —— 未复制任何 SDU 数据，不得使用 `PduInfoPtr`，因为它可能包含 `NULL` 指针或指向无效数据。 |
+| 返回值 | `[Std_ReturnType](#7151-std_returntype)`：`E_OK` —— SDU 已被复制，`SduLength` 指示复制的字节数。`E_NOT_OK` —— 未复制任何 SDU 数据，不得使用 `PduInfoPtr`，因为它可能包含 `NULL` 指针或指向无效数据。 |
 | 描述 | 在该 API 中，上层模块（被调用模块）应检查可用数据是否适合 `PduInfoPtr->SduLength` 报告的缓冲区大小。如果适合，则应将其数据复制到 `PduInfoPtr->SduDataPtr` 提供的缓冲区中，并在 `PduInfoPtr->SduLength` 中更新实际复制的数据长度；如果不适合，则返回 `E_NOT_OK` 且不改变 `PduInfoPtr`。 |
 | 可用头文件 | `Rte_Cbk.h` |
 
@@ -15718,7 +20710,7 @@ Std_ReturnType Rte_[<Partition>_]LdComCbkTriggerTransmit ( IN CbkHandleIdType Ld
 
 | 服务名 | `Rte_[<Partition>_]LdComCbkTxConfirmation`（草案） |
 | --- | --- |
-| 语法 | `void Rte_[<Partition>_]LdComCbkTxConfirmation ( CbkHandleIdType LdComUserCbkHandleId, Std_ReturnType result )` |
+| 语法 | `void Rte_[<Partition>_]LdComCbkTxConfirmation ( CbkHandleIdType LdComUserCbkHandleId, [Std_ReturnType](#7151-std_returntype) result )` |
 | 服务 ID [hex] | 0xA7 |
 | 同步/异步 | 同步 |
 | 可重入性 | 对相同的 `LdComUserCbkHandleId` 不可重入，否则可重入 |
@@ -15751,14 +20743,14 @@ void Rte_[<Partition>_]LdComCbkTxConfirmation ( IN CbkHandleIdType LdComUserCbkH
 
 | 服务名 | `Rte_SetMirror_<b>_<d>` |
 | --- | --- |
-| 语法 | `Std_ReturnType Rte_SetMirror_<b>_<d> ( const void* NVMBuffer )` |
+| 语法 | `[Std_ReturnType](#7151-std_returntype) Rte_SetMirror_<b>_<d> ( const void* NVMBuffer )` |
 | 服务 ID [hex] | 0x9b |
 | 同步/异步 | 同步 |
 | 可重入性 | 不可重入 |
 | 输入参数 | `NVMBuffer`：源缓冲区指针 |
 | 输入输出参数 | 无 |
 | 输出参数 | 无 |
-| 返回值 | `Std_ReturnType`：`E_OK` —— 复制成功。`E_NOT_OK` —— 无法执行复制。 |
+| 返回值 | `[Std_ReturnType](#7151-std_returntype)`：`E_OK` —— 复制成功。`E_NOT_OK` —— 无法执行复制。 |
 | 描述 | `Rte_SetMirror` API 将 `NvBlockDescriptor` 中包含的 `VariableDataPrototype` 的值从 NVM 内部缓冲区复制到它们在 RTE 中的位置。 |
 | 可用头文件 | `Rte_Cbk.h` |
 
@@ -15778,7 +20770,7 @@ Std_ReturnType Rte_SetMirror_<b>_<d> (const void *NVMBuffer)
 
 RTE 负责确保数据一致性，参见 4.2.6 节。特别地，对于 `NvBlockDescriptor`，发送者-接收者端口、`Rte_SetMirror` 和 `Rte_GetMirror` 可能并发地访问相同的 `VariableDataPrototype`。
 
-`Rte_SetMirror` API 应在 RTE 启动（通过 `Rte_Start`）之前可被调用，并且可以依赖正在运行的 OS。
+`Rte_SetMirror` API 应在 RTE 启动（通过 `[Rte_Start](#7181-rte_start)`）之前可被调用，并且可以依赖正在运行的 OS。
 
 NVM 模块使用 `Rte_SetMirror` API 的返回值来检查复制是否成功。在失败的情况下，NVM 可以稍后重试。
 
@@ -15788,20 +20780,20 @@ NVM 模块使用 `Rte_SetMirror` API 的返回值来检查复制是否成功。�
 
 `Rte_SetMirror` API 应在关联的 `NvBlockDescriptor` 的 `NvMBlockEcucPartitionRef` 参数所引用的 `EcucPartition` 中执行。如果该参数不存在，则 `Rte_SetMirror` API 应在 ECUC 参数 `EcucDefaultBswPartition` 所引用的 `EcucPartition` 中执行。
 
-应将 NVM 配置为在处理 ReadBlock 请求时使用该函数（参见 [22] 中的 NvmWriteRamBlockFromNvm）。
+应将 NVM 配置为在处理 ReadBlock 请求时使用该函数（参见 [\[22\]](#ref-22) 中的 NvmWriteRamBlockFromNvm）。
 
 **7.1.9.3.2 Rte_GetMirror**
 
 | 服务名 | `Rte_GetMirror_<b>_<d>` |
 | --- | --- |
-| 语法 | `Std_ReturnType Rte_GetMirror_<b>_<d> ( void* NVMBuffer )` |
+| 语法 | `[Std_ReturnType](#7151-std_returntype) Rte_GetMirror_<b>_<d> ( void* NVMBuffer )` |
 | 服务 ID [hex] | 0x9c |
 | 同步/异步 | 同步 |
 | 可重入性 | 不可重入 |
 | 输入参数 | 无 |
 | 输入输出参数 | 无 |
 | 输出参数 | `NVMBuffer`：目标缓冲区指针 |
-| 返回值 | `Std_ReturnType`：`E_OK` —— 复制成功。`E_NOT_OK` —— 无法执行复制。 |
+| 返回值 | `[Std_ReturnType](#7151-std_returntype)`：`E_OK` —— 复制成功。`E_NOT_OK` —— 无法执行复制。 |
 | 描述 | `Rte_GetMirror` API 将 `NvBlockDescriptor` 中包含的 `VariableDataPrototype` 的值复制到指定的 NVM 内部缓冲区。 |
 | 可用头文件 | `Rte_Cbk.h` |
 
@@ -15823,7 +20815,7 @@ Std_ReturnType Rte_GetMirror_<b>_<d> (void *NVMBuffer)
 
 RTE 负责确保数据一致性，参见 4.2.6 节。特别地，对于 `NvBlockDescriptor`，发送者-接收者端口、`Rte_SetMirror` 和 `Rte_GetMirror` 可能并发地访问相同的 `VariableDataPrototype`。
 
-`Rte_GetMirror` API 应在 RTE 停止（通过 `Rte_Stop`）之后可被调用，并且可以依赖正在运行的 OS。
+`Rte_GetMirror` API 应在 RTE 停止（通过 `[Rte_Stop](#7182-rte_stop)`）之后可被调用，并且可以依赖正在运行的 OS。
 
 NVM 模块使用 `Rte_GetMirror` API 的返回值来检查复制是否成功。在失败的情况下，NVM 可以稍后重试。
 
@@ -15833,20 +20825,20 @@ NVM 模块使用 `Rte_GetMirror` API 的返回值来检查复制是否成功。�
 
 `Rte_GetMirror` API 应在关联的 `NvBlockDescriptor` 的 `NvMBlockEcucPartitionRef` 参数所引用的 `EcucPartition` 中执行。如果该参数不存在，则 `Rte_GetMirror` API 应在 ECUC 参数 `EcucDefaultBswPartition` 所引用的 `EcucPartition` 中执行。
 
-应将 NVM 配置为在处理 WriteBlock 请求时使用该函数（参见 [22] 中的 NvmWriteRamBlockToNvm）。
+应将 NVM 配置为在处理 WriteBlock 请求时使用该函数（参见 [\[22\]](#ref-22) 中的 NvmWriteRamBlockToNvm）。
 
 **7.1.9.3.3 Rte_NvMNotifyJobFinished**
 
 | 服务名 | `Rte_NvMNotifyJobFinished_<b>_<d>` |
 | --- | --- |
-| 语法 | `Std_ReturnType Rte_NvMNotifyJobFinished_<b>_<d> ( NvM_BlockRequestType BlockRequest, NvM_RequestResultType JobResult )` |
+| 语法 | `[Std_ReturnType](#7151-std_returntype) Rte_NvMNotifyJobFinished_<b>_<d> ( NvM_BlockRequestType BlockRequest, NvM_RequestResultType JobResult )` |
 | 服务 ID [hex] | 0x9d |
 | 同步/异步 | 同步 |
 | 可重入性 | 不可重入 |
 | 输入参数 | `BlockRequest`：前一个已处理的块作业的请求类型（读、写等）；`JobResult`：涵盖已处理的 NvM 作业的作业结果。 |
 | 输入输出参数 | 无 |
 | 输出参数 | 无 |
-| 返回值 | `Std_ReturnType`：`Rte_NvMNotifyJobFinished` API 应返回 `E_OK`。 |
+| 返回值 | `[Std_ReturnType](#7151-std_returntype)`：`Rte_NvMNotifyJobFinished` API 应返回 `E_OK`。 |
 | 描述 | `Rte_NvMNotifyJobFinished` 在作业完成时接收来自 NvM 的通知，并将其转发给 SW-C。 |
 | 可用头文件 | `Rte_Cbk.h` |
 
@@ -15870,20 +20862,20 @@ Std_ReturnType Rte_NvMNotifyJobFinished_<b>_<d> ( NvM_BlockRequestType BlockRequ
 
 `Rte_NvMNotifyJobFinished` API 应在关联的 `NvBlockDescriptor` 的 `NvMBlockEcucPartitionRef` 参数所引用的 `EcucPartition` 中执行。如果该参数不存在，则 `Rte_NvMNotifyJobFinished` API 应在 ECUC 参数 `EcucDefaultBswPartition` 所引用的 `EcucPartition` 中执行。
 
-应将 NVM 配置为使用该函数（参见 [22] 中的 NvmSingleBlockCallback）。
+应将 NVM 配置为使用该函数（参见 [\[22\]](#ref-22) 中的 NvmSingleBlockCallback）。
 
 **7.1.9.3.4 Rte_NvMNotifyInitBlock**
 
 | 服务名 | `Rte_NvMNotifyInitBlock_<b>_<d>` |
 | --- | --- |
-| 语法 | `Std_ReturnType Rte_NvMNotifyInitBlock_<b>_<d> ( NvM_InitBlockRequestType InitBlockRequest )` |
+| 语法 | `[Std_ReturnType](#7151-std_returntype) Rte_NvMNotifyInitBlock_<b>_<d> ( NvM_InitBlockRequestType InitBlockRequest )` |
 | 服务 ID [hex] | 0x9e |
 | 同步/异步 | 同步 |
 | 可重入性 | 不可重入 |
 | 输入参数 | `InitBlockRequest`：当前处理的块的请求类型（读、恢复等）。 |
 | 输入输出参数 | 无 |
 | 输出参数 | 无 |
-| 返回值 | `Std_ReturnType`：如果该 `NvBlockDescriptor` 的 RAM 块未被更改，`Rte_NvMNotifyInitBlock` API 应返回 `RTE_E_RAM_UNCHANGED`，否则应返回 `E_OK`。 |
+| 返回值 | `[Std_ReturnType](#7151-std_returntype)`：如果该 `NvBlockDescriptor` 的 RAM 块未被更改，`Rte_NvMNotifyInitBlock` API 应返回 `RTE_E_RAM_UNCHANGED`，否则应返回 `E_OK`。 |
 | 描述 | 当请求初始化 RAM 块时，`Rte_NvMNotifyInitBlock` API 接收来自 NvM 的通知。 |
 | 可用头文件 | `Rte_Cbk.h` |
 
@@ -15911,7 +20903,7 @@ Std_ReturnType Rte_NvMNotifyInitBlock_<b>_<d> ( NvM_InitBlockRequestType InitBlo
 
 `Rte_NvMNotifyInitBlock` API 应在关联的 `NvBlockDescriptor` 的 `NvMBlockEcucPartitionRef` 参数所引用的 `EcucPartition` 中执行。如果该参数不存在，则 `Rte_NvMNotifyInitBlock` API 应在 ECUC 参数 `EcucDefaultBswPartition` 所引用的 `EcucPartition` 中执行。
 
-应将 NVM 配置为使用该函数（参见 [22] 中的 InitBlockCallbackFunction）。
+应将 NVM 配置为使用该函数（参见 [\[22\]](#ref-22) 中的 InitBlockCallbackFunction）。
 
 ##### 7.1.10. 期望接口
 
@@ -15954,9 +20946,9 @@ RTE 的规范要求使用以下 LdCom API 函数。
 
 ###### 7.1.10.3. 来自 Os 的期望接口
 
-Os 模块 [4] 所提供 API 的使用取决于特定 RTE 生成器、系统描述和 ECU 配置的实现。一般而言，RTE 可以使用任何标准化 API。因此此处不规定专门的期望 API 列表。
+Os 模块 [\[4\]](#ref-4) 所提供 API 的使用取决于特定 RTE 生成器、系统描述和 ECU 配置的实现。一般而言，RTE 可以使用任何标准化 API。因此此处不规定专门的期望 API 列表。
 
-在多核的情况下，RTE 可以使用 IOC 模块 [4] 来实现核间通信。IOC 模块被规定为 Os 的一部分。因此此处不列出具体的 API。
+在多核的情况下，RTE 可以使用 IOC 模块 [\[4\]](#ref-4) 来实现核间通信。IOC 模块被规定为 Os 的一部分。因此此处不列出具体的 API。
 
 ###### 7.1.10.4. 数据转换的期望接口
 
@@ -16017,12 +21009,12 @@ RTE 生成器的"跟踪（trace）"模式通过 RTE 配置中的参数 `RteVfbTr
 
 "调试（debug）"模式下的 VFB 跟踪由一系列"钩子"函数实现，这些函数在"值得关注的事件"发生时由生成的 RTE 自动调用。每个钩子函数对应单个事件。
 
-所支持的跟踪事件定义在 7.1.11.5 节中。7.1.11.6 节描述了一种机制，用于在众多潜在跟踪事件中配置哪些事件是感兴趣的。
+所支持的跟踪事件定义在 [7.1.11.5](#71115-跟踪事件) 节中。[7.1.11.6](#71116-配置) 节描述了一种机制，用于在众多潜在跟踪事件中配置哪些事件是感兴趣的。
 
 整体 VFB 跟踪工作流由三个阶段组成：配置阶段、RTE 生成阶段和跟踪客户端生成阶段。
 
 1. 在配置阶段，每个跟踪客户端创建自己的 `RteVfbTraceClient` 容器，在其 `RteVfbTraceFunction` 中配置覆盖所有感兴趣跟踪钩子的前缀，并可选择通过 `RteVfbTraceHooksRef` 引用一个容器，RTE 将在该容器中放置所创建钩子的扩展信息。
-2. 在 RTE 生成阶段，生成一个调用所有已配置跟踪钩子的 RTE。RTE 的 BSWMD 至少会在 RTE 能够判断其属性的范围内包含所调用跟踪钩子的描述。也就是说，RTE 知道它调用哪些钩子以及它们的签名是什么，但它不知道它们的 swServiceImplPolicy 或 MemorySection。见 7.1.11.4 节。此外，跟踪客户端配置中被引用的容器将包含为相应客户端生成的钩子的扩展描述。
+2. 在 RTE 生成阶段，生成一个调用所有已配置跟踪钩子的 RTE。RTE 的 BSWMD 至少会在 RTE 能够判断其属性的范围内包含所调用跟踪钩子的描述。也就是说，RTE 知道它调用哪些钩子以及它们的签名是什么，但它不知道它们的 swServiceImplPolicy 或 MemorySection。见 [7.1.11.4](#71114-对基础软件模块描述及客户端配置的贡献) 节。此外，跟踪客户端配置中被引用的容器将包含为相应客户端生成的钩子的扩展描述。
 3. 在跟踪客户端生成阶段，跟踪客户端将检查 RTE 的 BSWMD 和/或 RTE 生成器在客户端自身配置中为所调用跟踪钩子创建的 `RteVfbTraceHook`，并创建它们的实现。它还将用缺失的信息（即 swServiceImplPolicy 和 MemorySection）更新 RTE 的 BSWMD。
 
 注意，（与 RIPS 插件一样）从功能角度看，跟踪客户端被视为 RTE 的一部分，即使它们可能由不同于 RTE 供应商的一方实现。因此，跟踪客户端可以充实 RTE 的 BSWMD。
@@ -16296,7 +21288,7 @@ VFB 跟踪客户端必须为其实现的钩子函数补全 RTE 的基础软件�
 
 描述：
 
-RTE API Start 由 RTE 在组件进行 API 调用时调用。对于隐式 S/R 通信，相应的跟踪事件在数据元素副本被填充（`Rte_IRead`）或刷新（`Rte_IWrite`）之前被调用。
+RTE API Start 由 RTE 在组件进行 API 调用时调用。对于隐式 S/R 通信，相应的跟踪事件在数据元素副本被填充（`[Rte_IRead](#71618-rte_iread)`）或刷新（`[Rte_IWrite](#71620-rte_iwrite)`）之前被调用。
 
 签名：
 
@@ -16312,13 +21304,13 @@ void Rte_[<client>_]<api>Hook_<cts>_[<reName>_]<ap>_Start ([const Rte_CDS_<cts>*
 
 `<reName>` 是可运行实体名称，仅在隐式 S/R 通信的情况下存在。
 
-API 的参数应与相应的 RTE API 相同。与 API 本身一样，当且仅当软件组件的 supportsMultipleInstantiation 属性设置为 true 且该 RTE API 函数是 per-instance 函数时，才包含实例句柄。因此，对于支持单实例化的 SWC，以及对于支持多实例化的 SWC 的 per-SWC 函数（如用于共享 `ParameterDataPrototype` 的 `Rte_CData`），实例句柄总是被省略。注意，不能直接使用 `Rte_Instance`，因为在单个 VFB 跟踪头文件中会存在指向多个组件结构类型的指针，`Rte_Instance` 因此会产生歧义。
+API 的参数应与相应的 RTE API 相同。与 API 本身一样，当且仅当软件组件的 supportsMultipleInstantiation 属性设置为 true 且该 RTE API 函数是 per-instance 函数时，才包含实例句柄。因此，对于支持单实例化的 SWC，以及对于支持多实例化的 SWC 的 per-SWC 函数（如用于共享 `ParameterDataPrototype` 的 `[Rte_CData](#71616-rte_cdata)`），实例句柄总是被省略。注意，不能直接使用 `[Rte_Instance](#7152-rte_instance)`，因为在单个 VFB 跟踪头文件中会存在指向多个组件结构类型的指针，`[Rte_Instance](#7152-rte_instance)` 因此会产生歧义。
 
 **7.1.11.5.1.2 RTE API Return**
 
 描述：
 
-RTE API Return 是一个跟踪事件，由 RTE 在 API 调用将控制权返回给组件之前调用。对于隐式 S/R 通信，相应的跟踪事件在数据元素副本被填充（`Rte_IRead`）或刷新（`Rte_IWrite`）之前被调用。
+RTE API Return 是一个跟踪事件，由 RTE 在 API 调用将控制权返回给组件之前调用。对于隐式 S/R 通信，相应的跟踪事件在数据元素副本被填充（`[Rte_IRead](#71618-rte_iread)`）或刷新（`[Rte_IWrite](#71620-rte_iwrite)`）之前被调用。
 
 签名：
 
@@ -16336,7 +21328,7 @@ void Rte_[<client>_]<api>Hook_<cts>_[<reName>_]<ap>_Return ([const Rte_CDS_<cts>
 
 API 的参数与相应的 RTE API 相同，并包含函数退出时 OUT 和 INOUT 参数的值。
 
-与 API 本身一样，当且仅当软件组件的 supportsMultipleInstantiation 属性设置为 true 且该 RTE API 函数是 per-instance 函数时，才包含实例句柄。因此，对于支持单实例化的 SWC，以及对于支持多实例化的 SWC 的 per-SWC 函数（如用于共享 `ParameterDataPrototype` 的 `Rte_CData`），实例句柄总是被省略。注意，不能直接使用 `Rte_Instance`，因为在单个 VFB 跟踪头文件中会存在指向多个组件结构类型的指针，`Rte_Instance` 因此会产生歧义。
+与 API 本身一样，当且仅当软件组件的 supportsMultipleInstantiation 属性设置为 true 且该 RTE API 函数是 per-instance 函数时，才包含实例句柄。因此，对于支持单实例化的 SWC，以及对于支持多实例化的 SWC 的 per-SWC 函数（如用于共享 `ParameterDataPrototype` 的 `[Rte_CData](#71616-rte_cdata)`），实例句柄总是被省略。注意，不能直接使用 `[Rte_Instance](#7152-rte_instance)`，因为在单个 VFB 跟踪头文件中会存在指向多个组件结构类型的指针，`[Rte_Instance](#7152-rte_instance)` 因此会产生歧义。
 
 **7.1.11.5.2 BSW 调度器 API 跟踪事件**
 
@@ -16396,7 +21388,7 @@ API 的参数应与相应的 BSW 调度器 API 相同。
 
 **7.1.11.5.3 模式切换跟踪事件**
 
-当 AUTOSAR 软件组件与生成的 `Rte_Switch` API 交互，或 AUTOSAR 基础软件模块与生成的 BSW 调度器 `SchM_Switch` API 交互时，会发生模式切换跟踪事件。
+当 AUTOSAR 软件组件与生成的 `[Rte_Switch](#7166-rte_switch)` API 交互，或 AUTOSAR 基础软件模块与生成的 BSW 调度器 `[SchM_Switch](#7257-schm_switch)` API 交互时，会发生模式切换跟踪事件。
 
 **7.1.11.5.3.1 RTE 模式切换请求终止 API**
 
@@ -16416,11 +21408,11 @@ void Rte_[<client>_]<api>Hook_<cts>_<md>_Terminate ([const Rte_CDS_<cts>*, ]<par
 
 `<md>` 是 `ModeSwitchInterface` 内的 `ModeDeclarationGroupPrototype`。
 
-API 的参数应与相应的 `Rte_Switch` API 相同（见 **SWS_Rte_02631**）。与 API 本身一样，当且仅当软件组件的 supportsMultipleInstantiation 属性设置为 true 且该 RTE API 函数是 per-instance 函数时，才包含实例句柄。
+API 的参数应与相应的 `[Rte_Switch](#7166-rte_switch)` API 相同（见 **SWS_Rte_02631**）。与 API 本身一样，当且仅当软件组件的 supportsMultipleInstantiation 属性设置为 true 且该 RTE API 函数是 per-instance 函数时，才包含实例句柄。
 
 因此，对于支持单实例化的 SWC 以及 per-SWC 函数，实例句柄总是被省略。
 
-注意，不能直接使用 `Rte_Instance`，因为在单个 VFB 跟踪头文件中会存在指向多个组件结构类型的指针，`Rte_Instance` 因此会产生歧义。
+注意，不能直接使用 `[Rte_Instance](#7152-rte_instance)`，因为在单个 VFB 跟踪头文件中会存在指向多个组件结构类型的指针，`[Rte_Instance](#7152-rte_instance)` 因此会产生歧义。
 
 **7.1.11.5.3.2 BSW 调度器模式切换请求终止 API**
 
@@ -16627,7 +21619,7 @@ void Rte_[<client>_]Task_WaitEventRet_<task> (EventMaskType ev)
 
 描述：
 
-由 RTE 在可运行实体的执行通过其入口点开始之前调用的事件。该跟踪事件发生在为支持 `Rte_IRead` API 调用而完成数据元素的所有副本复制之后。
+由 RTE 在可运行实体的执行通过其入口点开始之前调用的事件。该跟踪事件发生在为支持 `[Rte_IRead](#71618-rte_iread)` API 调用而完成数据元素的所有副本复制之后。
 
 签名：
 
@@ -16639,13 +21631,13 @@ void Rte_[<client>_]Runnable_<cts>_<reName>_Start ([const Rte_CDS_<cts>*])
 
 `<reName>` 是可运行实体名称。
 
-当且仅当软件组件的 supportsMultipleInstantiation 属性设置为 true 时，才包含实例句柄。注意，不能直接使用 `Rte_Instance`，因为在单个 VFB 跟踪头文件中会存在指向多个组件结构类型的指针，`Rte_Instance` 因此会产生歧义。
+当且仅当软件组件的 supportsMultipleInstantiation 属性设置为 true 时，才包含实例句柄。注意，不能直接使用 `[Rte_Instance](#7152-rte_instance)`，因为在单个 VFB 跟踪头文件中会存在指向多个组件结构类型的指针，`[Rte_Instance](#7152-rte_instance)` 因此会产生歧义。
 
 **7.1.11.5.6.2 可运行实体终止**
 
 描述：
 
-由 RTE 在执行从可运行实体返回到 RTE 代码之后立即调用的事件。该跟踪事件发生在为支持 `Rte_IWrite` API 调用而对数据元素进行任何写回之前。
+由 RTE 在执行从可运行实体返回到 RTE 代码之后立即调用的事件。该跟踪事件发生在为支持 `[Rte_IWrite](#71620-rte_iwrite)` API 调用而对数据元素进行任何写回之前。
 
 签名：
 
@@ -16657,7 +21649,7 @@ void Rte_[<client>_]Runnable_<cts>_<reName>_Return ([const Rte_CDS_<cts>*])
 
 `<reName>` 是可运行实体名称。
 
-当且仅当软件组件的 supportsMultipleInstantiation 属性设置为 true 时，才包含实例句柄。注意，不能直接使用 `Rte_Instance`，因为在单个 VFB 跟踪头文件中会存在指向多个组件结构类型的指针，`Rte_Instance` 因此会产生歧义。
+当且仅当软件组件的 supportsMultipleInstantiation 属性设置为 true 时，才包含实例句柄。注意，不能直接使用 `[Rte_Instance](#7152-rte_instance)`，因为在单个 VFB 跟踪头文件中会存在指向多个组件结构类型的指针，`[Rte_Instance](#7152-rte_instance)` 因此会产生歧义。
 
 **7.1.11.5.7 BSW 可调度实体跟踪事件**
 
@@ -16731,7 +21723,7 @@ void Rte_[<client>_]RptHook_<cts>_<var>_Transmit ([const Rte_CDS_<cts>*], <type>
 
 其中 `<cts>` 是 `AtomicSwComponentType` 的组件类型符号，`<var>` 是 RP 全局缓冲区的标识名称（如端口和数据元素名称），`<buffer>` 是对 RP 全局缓冲区的引用。
 
-当且仅当软件组件的 supportsMultipleInstantiation 属性设置为 true 时，才包含实例句柄。注意，不能直接使用 `Rte_Instance`，因为在单个 VFB 跟踪头文件中会存在指向多个组件结构类型的指针，`Rte_Instance` 因此会产生歧义。
+当且仅当软件组件的 supportsMultipleInstantiation 属性设置为 true 时，才包含实例句柄。注意，不能直接使用 `[Rte_Instance](#7152-rte_instance)`，因为在单个 VFB 跟踪头文件中会存在指向多个组件结构类型的指针，`[Rte_Instance](#7152-rte_instance)` 因此会产生歧义。
 
 **7.1.11.5.8.2 接收**
 
@@ -16749,13 +21741,13 @@ void Rte_[<client>_]RptHook_<cts>_<var>_Reception ([const Rte_CDS_<cts>*], <type
 
 其中 `<cts>` 是 `AtomicSwComponentType` 的组件类型符号，`<var>` 是 RP 全局缓冲区的标识名称（如端口和数据元素名称），`<buffer>` 是对 RP 全局缓冲区的引用。
 
-当且仅当软件组件的 supportsMultipleInstantiation 属性设置为 true 时，才包含实例句柄。注意，不能直接使用 `Rte_Instance`，因为在单个 VFB 跟踪头文件中会存在指向多个组件结构类型的指针，`Rte_Instance` 因此会产生歧义。
+当且仅当软件组件的 supportsMultipleInstantiation 属性设置为 true 时，才包含实例句柄。注意，不能直接使用 `[Rte_Instance](#7152-rte_instance)`，因为在单个 VFB 跟踪头文件中会存在指向多个组件结构类型的指针，`[Rte_Instance](#7152-rte_instance)` 因此会产生歧义。
 
 ###### 7.1.11.6. 配置
 
 VFB 跟踪机制的工作方式是：每当跟踪事件发生时，RTE 调用跟踪点钩子函数。
 
-所支持的跟踪事件及其钩子函数的名称和签名定义在 7.1.11.5 节中。潜在的跟踪事件很多，而在任一时刻可能只有少数几个是感兴趣的。因此，RTE 生成器支持一种机制来配置哪些跟踪事件是感兴趣的。
+所支持的跟踪事件及其钩子函数的名称和签名定义在 [7.1.11.5](#71115-跟踪事件) 节中。潜在的跟踪事件很多，而在任一时刻可能只有少数几个是感兴趣的。因此，RTE 生成器支持一种机制来配置哪些跟踪事件是感兴趣的。
 
 为了将 RTE 开销降至最低，未启用的跟踪事件应对生成的系统没有运行时影响。这是通过 RTE 不向未配置为感兴趣的钩子函数发出函数调用来实现的。如果一个跟踪函数的名称以相应跟踪客户端的 `RteVfbTraceFunction` 参数中定义的字符串之一开头，则该跟踪函数被配置为感兴趣的。
 
@@ -16765,7 +21757,7 @@ VFB 跟踪机制的工作方式是：每当跟踪事件发生时，RTE 调用跟
 
 ###### 7.1.11.7. 与目标代码软件组件的交互
 
-VFB 跟踪仅在"RTE 生成（RTE Generation）"或"基础软件调度器生成（Basic Software Scheduler Generation）"阶段（**SWS_Rte_01319**）可用，因此钩子函数绝不会出现在"RTE 契约（RTE Contract）"或"基础软件调度器契约（Basic Software Scheduler Contract）"阶段创建的应用头文件或模块互接头文件中。然而，目标代码（object-code）软件组件和/或基础软件模块是针对"RTE 契约"或"基础软件调度器契约"阶段的头文件编译的，因此只能跟踪被插入到生成的 RTE 中的事件。特别是，它们无法跟踪那些需要将钩子函数的调用插入到 API 映射中的事件，例如 `Rte_Pim` API。不过，许多跟踪事件仍适用于目标代码软件组件，包括与显式通信 API、任务活动以及可运行实体的启动和停止相关的跟踪事件。
+VFB 跟踪仅在"RTE 生成（RTE Generation）"或"基础软件调度器生成（Basic Software Scheduler Generation）"阶段（**SWS_Rte_01319**）可用，因此钩子函数绝不会出现在"RTE 契约（RTE Contract）"或"基础软件调度器契约（Basic Software Scheduler Contract）"阶段创建的应用头文件或模块互接头文件中。然而，目标代码（object-code）软件组件和/或基础软件模块是针对"RTE 契约"或"基础软件调度器契约"阶段的头文件编译的，因此只能跟踪被插入到生成的 RTE 中的事件。特别是，它们无法跟踪那些需要将钩子函数的调用插入到 API 映射中的事件，例如 `[Rte_Pim](#71615-rte_pim)` API。不过，许多跟踪事件仍适用于目标代码软件组件，包括与显式通信 API、任务活动以及可运行实体的启动和停止相关的跟踪事件。
 
 这种方法意味着：可以在不修改交付的目标代码、也不暴露软件组件内部活动的情况下，监控目标代码软件组件的外部交互。因此，该方法被认为与促使软件组件以目标代码形式交付的 IP 保护诉求相一致。最后，对于生产构建可以轻松地禁用跟踪，而不会使对目标代码软件组件的测试失效。
 
@@ -16775,7 +21767,7 @@ VFB 跟踪仅在"RTE 生成（RTE Generation）"或"基础软件调度器生成�
 
 本章从**AUTOSAR**基础软件模块（**Basic Software Module**）的视角介绍基础软件调度器（**Basic Software Scheduler**）API——这些 API 不适用于 **AUTOSAR** 软件组件（**software components**）。
 
-第 7.2.2 节介绍该 API 的基本原则，包括命名约定和所支持的编程语言。第 7.2.3 节描述基础软件调度器所使用的头文件以及 **RTE** 生成器所创建的文件。该 API 所使用的数据类型在第 7.2.4 节中描述，第 7.2.5 节和第 7.2.6 节提供基础软件调度器 API 本身的参考，包括基础软件模块实体（**Basic Software Module Entities**）的定义。
+第 [7.2.2](#722-api-原则) 节介绍该 API 的基本原则，包括命名约定和所支持的编程语言。第 [7.2.3](#723-基础软件调度器模块) 节描述基础软件调度器所使用的头文件以及 **RTE** 生成器所创建的文件。该 API 所使用的数据类型在第 [7.2.4](#724-api-数据类型) 节中描述，第 [7.2.5](#725-api-参考) 节和第 [7.2.6](#726-bsw-模块实体参考) 节提供基础软件调度器 API 本身的参考，包括基础软件模块实体（**Basic Software Module Entities**）的定义。
 
 ##### 7.2.2. API 原则
 
@@ -16787,15 +21779,15 @@ VFB 跟踪仅在"RTE 生成（RTE Generation）"或"基础软件调度器生成�
 
 属于基础软件调度器接口的所有基础软件调度器符号（例如函数名、数据类型等）都必须使用 `SchM_` 前缀。
 
-在基础软件模块支持同一基础软件模块的多个实例的情况下，与基础软件模块的一个实例相关的 `BswSchedulableEntity` 和基础软件调度器 API 的命名空间会以 `vendorId` 和 `vendorApiInfix` 扩展。参见文档[12]。在后续章节中，这个可选部分用方括号 `[_<vi>_<ai>]` 表示。
+在基础软件模块支持同一基础软件模块的多个实例的情况下，与基础软件模块的一个实例相关的 `BswSchedulableEntity` 和基础软件调度器 API 的命名空间会以 `vendorId` 和 `vendorApiInfix` 扩展。参见文档[\[12\]](#ref-12)。在后续章节中，这个可选部分用方括号 `[_<vi>_<ai>]` 表示。
 
 如果某个基础软件模块存在属性 `vendorApiInfix`，则 **RTE** 生成器应在标记为 `[_<vi>_<ai>]` 的位置插入带前导下划线的 `vendorId`（`<vi>`）和 `vendorApiInfix`（`<ai>`）。
 
 ###### 7.2.2.2. BSW 调度器名称前缀与节名称前缀
 
-由于基础软件模块描述（**Basic Software Module Description**）支持对 **BSW** 模块簇（**BSW Module Clusters**）的描述，一个基础软件模块描述可以包含多个 **BSW** 模块的内容。为了通过簇接口满足标准化接口，一个簇内可能出现不同的 **ICC3** 模块缩写（**Module abbreviations**）[9]。对于基础软件调度器，模块缩写被用作 **SchM** API 中的 **BSW** 调度器名称前缀（**BSW Scheduler Name Prefix**）。尽管如此，`BswModuleDescription` 的 `shortName` 同样可以描述 **BSW** 调度器名称前缀和节名称前缀（**Section Name Prefix**），以便在 **ICC3** 模块的情况下提供一个统一的前缀。
+由于基础软件模块描述（**Basic Software Module Description**）支持对 **BSW** 模块簇（**BSW Module Clusters**）的描述，一个基础软件模块描述可以包含多个 **BSW** 模块的内容。为了通过簇接口满足标准化接口，一个簇内可能出现不同的 **ICC3** 模块缩写（**Module abbreviations**）[\[9\]](#ref-9)。对于基础软件调度器，模块缩写被用作 **SchM** API 中的 **BSW** 调度器名称前缀（**BSW Scheduler Name Prefix**）。尽管如此，`BswModuleDescription` 的 `shortName` 同样可以描述 **BSW** 调度器名称前缀和节名称前缀（**Section Name Prefix**），以便在 **ICC3** 模块的情况下提供一个统一的前缀。
 
-在元模型（**Meta Model**）中，与调度管理器 API 相关的模块缩写由元类 `BswSchedulerNamePrefix` 显式表达。更多信息见文档[9]。
+在元模型（**Meta Model**）中，与调度管理器 API 相关的模块缩写由元类 `BswSchedulerNamePrefix` 显式表达。更多信息见文档[\[9\]](#ref-9)。
 
 图 6.1：BswSchedulerNamePrefix 与 SectionNamePrefix
 
@@ -16807,7 +21799,7 @@ VFB 跟踪仅在"RTE 生成（RTE Generation）"或"基础软件调度器生成�
 
 请注意，无论 `<bsnp>` 是通过 `BswModuleDescription.shortName`（见 **SWS_Rte_07593**）派生，还是通过 `BswSchedulerNamePrefix.symbol`（见 **SWS_Rte_07594**）派生，**TPS_BSWMDT_04001** 都要求该值大写。
 
-此外，一个簇内部的内存映射（**Memory Mapping**）可以保留或取消 **ICC3** 边界。在某些情况下（例如入口点原型），**RTE** 必须知道内存分配所使用的前缀。在元模型中，这些前缀由元类 `SectionNamePrefix` 表达。更多信息见文档[9]。
+此外，一个簇内部的内存映射（**Memory Mapping**）可以保留或取消 **ICC3** 边界。在某些情况下（例如入口点原型），**RTE** 必须知道内存分配所使用的前缀。在元模型中，这些前缀由元类 `SectionNamePrefix` 表达。更多信息见文档[\[9\]](#ref-9)。
 
 如果实现相关 `BswModuleEntry` 的 `BswModuleEntity` 未定义 `SectionNamePrefix`，则节名称前缀 `<snp>` 应按如下方式构成：
 
@@ -16910,11 +21902,11 @@ void NvM_MainFunction (void);
 
 **7.2.3.1.3 文件内容**
 
-模块互链类型头文件应包含 **RTE** 类型头文件（**RTE Types Header File**）。**RTE** 类型头文件的名称在第 7.1.3.4 节中定义。
+模块互链类型头文件应包含 **RTE** 类型头文件（**RTE Types Header File**）。**RTE** 类型头文件的名称在第 [7.1.3.4](#7134-rte-类型头文件) 节中定义。
 
 **7.2.3.1.4 基础软件调度器模式**
 
-模块互链类型头文件应包含 `ModeDeclaration` 的标识符以及第 7.2.4.2 节中定义的 `ModeDeclarationGroup` 的类型定义。
+模块互链类型头文件应包含 `ModeDeclaration` 的标识符以及第 [7.2.4.2](#7242-基础软件模式) 节中定义的 `ModeDeclarationGroup` 的类型定义。
 
 ###### 7.2.3.2. 模块互链头文件
 
@@ -16981,7 +21973,7 @@ void NvM_MainFunction (void);
 
 **7.2.3.2.3 文件内容**
 
-模块互链头文件应包含模块互链类型头文件。模块互链类型头文件的名称在第 7.2.3.1 节中定义。
+模块互链头文件应包含模块互链类型头文件。模块互链类型头文件的名称在第 [7.2.3.1](#7231-模块互链类型头文件) 节中定义。
 
 **7.2.3.2.3.1 入口点原型**
 
@@ -17007,7 +21999,7 @@ void NvM_MainFunction (void);
 
 其中 `condition` 是与该 **RTE** **API** 的条件存在相关的各 `VariationPoint` 的条件值宏（见 **SWS_Rte_07702**），`Basic Software Scheduler API Definition` 是按照不变式基础软件调度器 **API** 定义的代码（另见 **SWS_Rte_07510**、**SWS_Rte_07250**、**SWS_Rte_07253**、**SWS_Rte_07255**、**SWS_Rte_07260**、**SWS_Rte_07556**、**SWS_Rte_07263**、**SWS_Rte_07266**）。
 
-面向基础软件模块的基础软件调度器 **API** 在第 7.2.5 节中定义。
+面向基础软件模块的基础软件调度器 **API** 在第 [7.2.5](#725-api-参考) 节中定义。
 
 如果基础软件模块以目标代码（**object code**）交付，则该基础软件模块实例的基础软件调度器 **API** 应以函数形式实现。
 
@@ -17021,7 +22013,7 @@ void NvM_MainFunction (void);
 
 如果启用了提供激活事件特性，**RTE** 生成器在契约阶段应生成类型 `SchM_ActivatingEvent_<bsnp>[_<vi>_<ai>]` 以及每个相关 `BswEvent` 的 `activationReason` 的 `xx` 值。`xx` 的值由 `bitPosition` 定义：`xx = 2^bitPosition`。
 
-更多细节见第 6.2.2.3.3 节（提供激活 **RTE** 事件）。
+更多细节见第 [6.2.2.3.3](#62233-提供激活用的-rte-事件) 节（提供激活 **RTE** 事件）。
 
 **7.2.3.2.3.4 映射到 BswModuleEntity 的 RunnableEntity**
 
@@ -17059,7 +22051,7 @@ void NvM_MainFunction (void);
 
 ###### 7.2.4.1. Std_ReturnType 的预定义错误代码
 
-文档[32]规定了一个标准 **API** 返回类型 `Std_ReturnType`。`Std_ReturnType` 定义了 **API** 函数返回的"状态"和"错误值"。它被定义为 `uint8` 类型。值 `0` 保留用于"未发生错误"。
+文档[\[32\]](#ref-32)规定了一个标准 **API** 返回类型 `[Std_ReturnType](#7151-std_returntype)`。`[Std_ReturnType](#7151-std_returntype)` 定义了 **API** 函数返回的"状态"和"错误值"。它被定义为 `uint8` 类型。值 `0` 保留用于"未发生错误"。
 
 表6.1：基础软件调度器错误与状态值（**Basic Software Scheduler Error and Status values**）
 
@@ -17073,7 +22065,7 @@ void NvM_MainFunction (void);
 | SCHM_E_TIMEOUT | 129 | **SWS_Rte_07054** |
 | SCHM_E_LOST_DATA | 64 | **SWS_Rte_02312** |
 
-出于兼容性原因，`Std_ReturnType` 的底层类型定义为 `uint8`。因此，错误值使用 `#define` 声明：
+出于兼容性原因，`[Std_ReturnType](#7151-std_returntype)` 的底层类型定义为 `uint8`。因此，错误值使用 `#define` 声明：
 
 ```c
 typedef uint8 Std_ReturnType; /* defined in Std_Types.h */
@@ -17203,7 +22195,7 @@ typedef uint8 Std_ReturnType; /* defined in Std_Types.h */
 
 ###### 7.2.4.3. 枚举数据类型
 
-枚举（**enumeration**）不是一种纯原始实现数据类型。相反，一个整数范围可以用作其结构描述。整数到枚举中"标签"的映射实际上是在 **SwC-T** 中通过 `SwDataDefProps` 的语义类 `CompuMethod` 建模的[2]。枚举数据类型被建模为这样的 `ImplementationDataType`：其 `SwDataDefProps` 引用一个仅包含带点范围（**point range**，即 `CompuScale` 的下限与上限相同）的 `CompuScale` 的 `CompuMethod`。
+枚举（**enumeration**）不是一种纯原始实现数据类型。相反，一个整数范围可以用作其结构描述。整数到枚举中"标签"的映射实际上是在 **SwC-T** 中通过 `SwDataDefProps` 的语义类 `CompuMethod` 建模的[\[2\]](#ref-2)。枚举数据类型被建模为这样的 `ImplementationDataType`：其 `SwDataDefProps` 引用一个仅包含带点范围（**point range**，即 `CompuScale` 的下限与上限相同）的 `CompuScale` 的 `CompuMethod`。
 
 对于本基础软件模块所"使用"（"used"一词的含义见 **SWS_Rte_08803**）的每个 `ImplementationDataType`/`ApplicationDataType`，模块互链类型头文件应包含其所有常量的定义。这包括被基础软件模块直接引用的 `ImplementationDataType` 的 `ImplementationDataTypeElement` 所引用的 `CompuMethod` 的常量，以及通过 `TYPE_REFERENCE` 类别的 `ImplementationDataType`/`ImplementationDataTypeElement` 被间接引用的 `ImplementationDataType` 的 `CompuMethod` 的常量。
 
@@ -17287,7 +22279,7 @@ if (attribute symbol of CompuScale is available and not empty) {
 
 请注意，前缀既可以这样定义：带 `literalPrefix` 属性的 `IncludedDataTypeSet` 引用 `ApplicationDataType`；也可以该 `IncludedDataTypeSet` 引用 `ImplementationDataType`。
 
-理由：以 `ApplicationPrimitiveDataType`（而非对应的 `ImplementationDataType`）作为生成限值的基础，是因为定义在 `ImplementationDataType` 上的限值可能比 `ApplicationPrimitiveDataType` 的限值更宽（见 **AUTOSAR** **SwC** 模板[2]中的"单值数据类型"小节）。
+理由：以 `ApplicationPrimitiveDataType`（而非对应的 `ImplementationDataType`）作为生成限值的基础，是因为定义在 `ImplementationDataType` 上的限值可能比 `ApplicationPrimitiveDataType` 的限值更宽（见 **AUTOSAR** **SwC** 模板[\[2\]](#ref-2)中的"单值数据类型"小节）。
 
 对于指定了 `invalidValue` 的 **AUTOSAR** 数据类型，模块互链类型头文件应包含定义：
 
@@ -17301,7 +22293,7 @@ if (attribute symbol of CompuScale is available and not empty) {
 
 ###### 7.2.4.5. 带位域转换的数据类型
 
-与类别为 `BITFIELD_TEXTTABLE` 的 `CompuMethod` 相关联的 `AutosarDataType` 支持在单个标量变量内拼接一个值集。由此，单个位可以具有独立的（布尔）含义，或者一组位用于承载一个枚举。请注意，这些数据类型不会映射为 **C** 位域，而是映射为标量（例如 `uint8`）。因此，**RTE** 生成器为"位掩码"（**Bit Mask**）、"位起始位置"（**Bit Start Position**）和"位数"（**Number of Bits**）提供一组定义，以支持对这类数据类型使用 **AUTOSAR** 位处理例程（**Bit Handling Routines**）[33]。对于位集上的某些操作（该集合可以只含 1 个位），**AUTOSAR** 位域库要求一个单一的连续位域，即 `CompuScale.mask` 属性值中所有置 1 的位彼此相邻，例如 `0b00010000` 或 `0b00111100`。
+与类别为 `BITFIELD_TEXTTABLE` 的 `CompuMethod` 相关联的 `AutosarDataType` 支持在单个标量变量内拼接一个值集。由此，单个位可以具有独立的（布尔）含义，或者一组位用于承载一个枚举。请注意，这些数据类型不会映射为 **C** 位域，而是映射为标量（例如 `uint8`）。因此，**RTE** 生成器为"位掩码"（**Bit Mask**）、"位起始位置"（**Bit Start Position**）和"位数"（**Number of Bits**）提供一组定义，以支持对这类数据类型使用 **AUTOSAR** 位处理例程（**Bit Handling Routines**）[\[33\]](#ref-33)。对于位集上的某些操作（该集合可以只含 1 个位），**AUTOSAR** 位域库要求一个单一的连续位域，即 `CompuScale.mask` 属性值中所有置 1 的位彼此相邻，例如 `0b00010000` 或 `0b00111100`。
 
 对于每个唯一的 `CompuScale.shortLabel`/`CompuScale.mask` 值对——该 `CompuScale` 位于按 **SWS_Rte_03984** 被引用的 `ImplementationDataType` 或 `ApplicationPrimitiveDataType` 所引用的、类别为 `BITFIELD_TEXTTABLE` 的 `CompuMethod` 的 `compuInternalToPhys` 容器中——模块互链类型头文件应包含位域掩码的定义：
 
@@ -17366,11 +22358,11 @@ void SchM_Enter_<bsnp>[_<vi>_<ai>]_[<me>_]<name>()
 注意：
 
 * 基础软件调度器不需要支持对同一互斥区域的 `SchM_Enter` 嵌套调用。
-* 只要不同的互斥区域按与其进入相反的顺序退出，基础软件调度器应允许 `SchM_Enter` 与 `SchM_Exit` 调用相互嵌套。
-* `SchM_Enter` 和 `SchM_Exit` API 只能被描述了其用法的 `BswModuleEntity` 使用（即该 `BswModuleEntity` 包含指向所涉互斥区域的 `canEnter` 关联）。
-* `SchM_Enter` 和 `SchM_Exit` API 只有在不同互斥区域按相反顺序退出时才允许嵌套调用。
-* 基础软件调度器应支持在 **OS** 初始化之后、基础软件调度器自身初始化之前调用 `SchM_Enter` 和 `SchM_Exit`。
-* 基础软件调度器应支持在 **OS** 任务、I 类和 II 类中断的上下文中调用 `SchM_Enter` 和 `SchM_Exit`。
+* 只要不同的互斥区域按与其进入相反的顺序退出，基础软件调度器应允许 `SchM_Enter` 与 `[SchM_Exit](#7252-schm_exit)` 调用相互嵌套。
+* `SchM_Enter` 和 `[SchM_Exit](#7252-schm_exit)` API 只能被描述了其用法的 `BswModuleEntity` 使用（即该 `BswModuleEntity` 包含指向所涉互斥区域的 `canEnter` 关联）。
+* `SchM_Enter` 和 `[SchM_Exit](#7252-schm_exit)` API 只有在不同互斥区域按相反顺序退出时才允许嵌套调用。
+* 基础软件调度器应支持在 **OS** 初始化之后、基础软件调度器自身初始化之前调用 `SchM_Enter` 和 `[SchM_Exit](#7252-schm_exit)`。
+* 基础软件调度器应支持在 **OS** 任务、I 类和 II 类中断的上下文中调用 `SchM_Enter` 和 `[SchM_Exit](#7252-schm_exit)`。
 
 注意：在这种情形下，此类互斥区域的可能实现机制仅限于相关上下文种类可用的机制，例如 `SuspendAllInterrupts`/`ResumeAllInterrupts`。
 
@@ -17386,7 +22378,7 @@ void SchM_Enter_<bsnp>[_<vi>_<ai>]_[<me>_]<name>()
 void SchM_Exit_<bsnp>[_<vi>_<ai>]_[<me>_]<name>()
 ```
 
-其中各通配符的含义与 `SchM_Enter` 相同；方括号中的子部分 `[<me>_]` 仅在 `BswExclusiveAreaPolicy.apiPrinciple` 设置为 `perExecutable` 时生成。
+其中各通配符的含义与 `[SchM_Enter](#7251-schm_enter)` 相同；方括号中的子部分 `[<me>_]` 仅在 `BswExclusiveAreaPolicy.apiPrinciple` 设置为 `perExecutable` 时生成。
 
 存在条件：对于在 `BswInternalBehavior` 中声明的、且具有 `canEnter` 关联的每个互斥区域，应创建一个 `SchM_Exit` API。
 
@@ -17488,7 +22480,7 @@ Std_ReturnType SchM_Result_<bsnp>[_<vi>_<ai>]_<name>(
 返回值：返回值用于指示来自 `SchM_Result` 调用本身的错误，或在 **API** 调用发起之前检测到的通信错误：
 
 * `SCHM_E_OK` — **API** 调用成功完成。
-* `SCHM_E_NO_DATA` — `BswModuleEntry` 的结果不可用，但 **API** 调用内部未发生其他错误，或该 `BswModuleEntry` 未通过 `SchM_Call` 被调用。IN/OUT 和 OUT 参数的缓冲区不得被修改。
+* `SCHM_E_NO_DATA` — `BswModuleEntry` 的结果不可用，但 **API** 调用内部未发生其他错误，或该 `BswModuleEntry` 未通过 `[SchM_Call](#7253-schm_call)` 被调用。IN/OUT 和 OUT 参数的缓冲区不得被修改。
 * `SCHM_E_TIMEOUT` — 如果该调用按照 **SWS_Rte_04552** 被忽略。
 
 返回值 `SCHM_E_NO_DATA` 不被视为错误，而是表示 **API** 调用的正常操作。当发生 `SCHM_E_NO_DATA` 时，**BSW** 模块可以再次调用 `SchM_Result`，从而重复尝试读取结果。
@@ -17553,7 +22545,7 @@ Std_ReturnType SchM_Receive_<bsnp>[_<vi>_<ai>]_<name>(OUT <data>)
 
 `SchM_Receive` API 只能在通过 `dataReceivePoint` 引用该 `VariableDataPrototype` 的 `BswModuleEntity` 内部使用。
 
-描述：当 **BSW** 模块在 **BSW** 运行于多个分区的系统上处理某个 `BswDataReceivedEvent` 时，应调用 `SchM_Receive_<bsnp>[_<vi>_<ai>]_<name>(<data>)`。对于跨越分区边界的发送方-接收方连接，**SchM** 随后应从共享缓冲区读取数据，该数据是由 `SchM_Send` 放入共享缓冲区的。
+描述：当 **BSW** 模块在 **BSW** 运行于多个分区的系统上处理某个 `BswDataReceivedEvent` 时，应调用 `SchM_Receive_<bsnp>[_<vi>_<ai>]_<name>(<data>)`。对于跨越分区边界的发送方-接收方连接，**SchM** 随后应从共享缓冲区读取数据，该数据是由 `[SchM_Send](#7255-schm_send)` 放入共享缓冲区的。
 
 `SchM_Receive` API 调用包含 OUT 参数 `<data>`，用于传回所接收的数据元素。
 
@@ -17610,7 +22602,7 @@ Std_ReturnType SchM_Switch_<bsnp>[_<vi>_<ai>]_<name>(IN <mode>)
 
 ###### 7.2.5.8. SchM_Mode
 
-`SchM_Mode` API 存在两个版本。根据基础软件模块描述中的 `enhancedModeApi` 属性，应提供不同版本的该 API（另见 7.2.5.9 节）。
+`SchM_Mode` API 存在两个版本。根据基础软件模块描述中的 `enhancedModeApi` 属性，应提供不同版本的该 API（另见 [7.2.5.9](#7259-增强型-schm_mode) 节）。
 
 目的：提供（`requiredModeGroup` 或 `providedModeGroup`）`ModeDeclarationGroupPrototype` 的当前活动模式。
 
@@ -17667,19 +22659,19 @@ Std_ReturnType SchM_Switch_<bsnp>[_<vi>_<ai>]_<name>(IN <mode>)
 
 方括号中的子部分 `[_<vi>_<ai>]` 在未为基础软件模块定义 `vendorApiInfix` 时省略。参见 **SWS_Rte_07528**。
 
-存在条件：如果存在指向 `providedModeGroup` 或 `requiredModeGroup` 角色 `ModeDeclarationGroupPrototype` 的 `accessedModeGroup` 关联，且 `BswModeSenderPolicy` 或 `BswModeReceiverPolicy` 的 `enhancedModeApi` 属性设置为 true，则应生成按照 **SWS_Rte_07694** 的 `SchM_Mode` API。
+存在条件：如果存在指向 `providedModeGroup` 或 `requiredModeGroup` 角色 `ModeDeclarationGroupPrototype` 的 `accessedModeGroup` 关联，且 `BswModeSenderPolicy` 或 `BswModeReceiverPolicy` 的 `enhancedModeApi` 属性设置为 true，则应生成按照 **SWS_Rte_07694** 的 `[SchM_Mode](#7258-schm_mode)` API。
 
-注：这确保了模式管理器和模式用户可以使用 `SchM_Mode` API。
+注：这确保了模式管理器和模式用户可以使用 `[SchM_Mode](#7258-schm_mode)` API。
 
-`SchM_Mode` API 只能被包含相应 `managedModeGroup` 关联或 `accessedModeGroup` 关联的 `BswModuleEntity` 使用。
+`[SchM_Mode](#7258-schm_mode)` API 只能被包含相应 `managedModeGroup` 关联或 `accessedModeGroup` 关联的 `BswModuleEntity` 使用。
 
-描述：`SchM_Mode` API 告知基础软件模块某个需求的或提供的 `ModeDeclarationGroupPrototype` 的哪个模式当前是活动的。这是 **RTE** 用于 `ModeDisablingDependency` 的信息。在从模式管理器接收到模式切换通知之后，新模式不会立即被指示，参见 4.4.4 节。在模式转换期间，即在执行因退出一个模式或进入下一个模式而被触发的可运行实体期间，两个模式的重叠模式禁用处于活动状态。在这种情况下，`SchM_Mode` API 将返回 `RTE_TRANSITION_<ModeDeclarationGroup>`。此时参数 `<previousmode>` 包含当前正在离开的模式，参数 `<nextmode>` 包含正在进入的模式。
+描述：`[SchM_Mode](#7258-schm_mode)` API 告知基础软件模块某个需求的或提供的 `ModeDeclarationGroupPrototype` 的哪个模式当前是活动的。这是 **RTE** 用于 `ModeDisablingDependency` 的信息。在从模式管理器接收到模式切换通知之后，新模式不会立即被指示，参见 4.4.4 节。在模式转换期间，即在执行因退出一个模式或进入下一个模式而被触发的可运行实体期间，两个模式的重叠模式禁用处于活动状态。在这种情况下，`[SchM_Mode](#7258-schm_mode)` API 将返回 `RTE_TRANSITION_<ModeDeclarationGroup>`。此时参数 `<previousmode>` 包含当前正在离开的模式，参数 `<nextmode>` 包含正在进入的模式。
 
-对于所有已连接的需求的或提供的 `ModeDeclarationGroupPrototype`，`SchM_Mode` 将返回相同的模式（参见 **SWS_Rte_02630**）。
+对于所有已连接的需求的或提供的 `ModeDeclarationGroupPrototype`，`[SchM_Mode](#7258-schm_mode)` 将返回相同的模式（参见 **SWS_Rte_02630**）。
 
-返回值：`SchM_Mode` 的返回类型取决于 `ModeDeclarationGroup` 的 `ImplementationDataType`。它应返回 `ModeDeclarationGroupPrototype` 的值。类型名应与 `ImplementationDataType` 符号相同。
+返回值：`[SchM_Mode](#7258-schm_mode)` 的返回类型取决于 `ModeDeclarationGroup` 的 `ImplementationDataType`。它应返回 `ModeDeclarationGroupPrototype` 的值。类型名应与 `ImplementationDataType` 符号相同。
 
-在转换期间，`SchM_Mode` API 应返回以下值：
+在转换期间，`[SchM_Mode](#7258-schm_mode)` API 应返回以下值：
 
 * 返回值应为 `RTE_TRANSITION_<ModeDeclarationGroup>`；
 * `<previousmode>` 应包含正在离开的模式的 `RTE_MODE_<ModeDeclarationGroup>_<ModeDeclaration>`；
@@ -17687,7 +22679,7 @@ Std_ReturnType SchM_Switch_<bsnp>[_<vi>_<ai>]_<name>(IN <mode>)
 
 其中 `<ModeDeclarationGroup>` 是 `ModeDeclarationGroup` 的 shortName。
 
-如果模式机实例处于已定义的模式，则 `SchM_Mode` 应返回以下值：
+如果模式机实例处于已定义的模式，则 `[SchM_Mode](#7258-schm_mode)` 应返回以下值：
 
 * 返回值应包含 `RTE_MODE_<ModeDeclarationGroup>_<ModeDeclaration>` 的值；
 * `<previousmode>` 应包含 `RTE_MODE_<ModeDeclarationGroup>_<ModeDeclaration>` 的值；
@@ -18105,10 +23097,10 @@ void SchM_Start(void)
 | 输入输出参数 | 无 |
 | 输出参数 | 无 |
 | 返回值 | 无 |
-| 描述 | 为 BSW/SWC 启动周期性事件。必须先调用 `SchM_Init()` |
+| 描述 | 为 BSW/SWC 启动周期性事件。必须先调用 `[SchM_Init](#7271-schm_init)()` |
 | 可用头文件 | `Rte_Main.h` |
 
-`SchM_StartTiming` 启动 **RTE** 的基础软件调度器部分。它为 **BSW**/**SWC** 启动周期性事件，且必须先调用 `SchM_Init()`。
+`SchM_StartTiming` 启动 **RTE** 的基础软件调度器部分。它为 **BSW**/**SWC** 启动周期性事件，且必须先调用 `[SchM_Init](#7271-schm_init)()`。
 
 签名：
 
@@ -18123,7 +23115,7 @@ void SchM_StartTiming(void)
 * `SchM_StartTiming` 应在有限的执行时间内返回——它不得进入无限循环。
 * `SchM_StartTiming` 可以实现为函数或宏。
 * `SchM_StartTiming` 在生命周期头文件 `Rte_Main.h` 中声明。
-* `SchM_Init`、`SchM_Start`、`SchM_StartTiming` 应在 **RTE** 的基础软件调度器部分所需的基础软件模块初始化之后，由 EcuStateManager 在每个核上仅调用一次。这些模块包括 **OS**。
+* `[SchM_Init](#7271-schm_init)`、`[SchM_Start](#7272-schm_start)`、`SchM_StartTiming` 应在 **RTE** 的基础软件调度器部分所需的基础软件模块初始化之后，由 EcuStateManager 在每个核上仅调用一次。这些模块包括 **OS**。
 
 ###### 7.2.7.4. SchM_Deinit
 
@@ -18152,7 +23144,7 @@ void SchM_Deinit(void)
 
 注意：
 
-* `SchM_Deinit` 只能在 **RTE** 终结之后（即在 `Rte_Stop` 终止之后）使用。
+* `SchM_Deinit` 只能在 **RTE** 终结之后（即在 `[Rte_Stop](#7182-rte_stop)` 终止之后）使用。
 * `SchM_Deinit` 应在基础软件调度器部分所需的基础软件模块关闭之前由 EcuStateManager 调用。这些模块包括 **OS**。
 * `SchM_Deinit` 应在有限的执行时间内返回。
 * `SchM_Deinit` 可以实现为函数或宏。
@@ -18206,9 +23198,9 @@ RTE 在 AUTOSAR 软件组件与基础软件之间提供粘合层，从而使多�
 
 RTE 配置参数的总体结构如图 8.2 所示。需要区分 RTE 生成器的配置参数与所生成的 RTE 本身的配置参数。
 
-生成 RTE 所需的大部分信息已经存在于系统描述的 **ECU Extract**[8] 中。从该提取物中还可以获得指向 AUTOSAR 软件组件描述和 ECU 资源描述的链接。因此，ECU 配置描述只需提供上述三种格式未覆盖的附加信息。
+生成 RTE 所需的大部分信息已经存在于系统描述的 **ECU Extract**[\[8\]](#ref-8) 中。从该提取物中还可以获得指向 AUTOSAR 软件组件描述和 ECU 资源描述的链接。因此，ECU 配置描述只需提供上述三种格式未覆盖的附加信息。
 
-此外，为了给 RTE 的实现留出最大的灵活性与自由度，ECU 配置参数定义中仅标准化所有实现都通用的配置参数。配置一个功能完整的 RTE 可能需要的任何附加配置参数，必须使用 ECU 配置规范文档[5]中描述的供应商特定参数定义机制来指定。
+此外，为了给 RTE 的实现留出最大的灵活性与自由度，ECU 配置参数定义中仅标准化所有实现都通用的配置参数。配置一个功能完整的 RTE 可能需要的任何附加配置参数，必须使用 ECU 配置规范文档[\[5\]](#ref-5)中描述的供应商特定参数定义机制来指定。
 
 ### 8.1. RTE 模块配置
 
@@ -18243,7 +23235,7 @@ RTE 配置参数的总体结构如图 8.2 所示。需要区分 RTE 生成器的
 
 为了标识 RTE 配置的版本，已从 RTE 配置信息生成了专门的 RTE 代码；RTE 配置的 `ECUC-MODULE-CONFIGURATION-VALUES` 元素中可以包含一个或多个 `DOC-REVISION` 元素（参见示例 8.1）。
 
-`REVISION-LABEL` 应按照通用结构模板[10]中为 `RevisionLabelString` 定义的规则进行解析，以便解析出 AUTOSAR 的三个版本信息：
+`REVISION-LABEL` 应按照通用结构模板[\[10\]](#ref-10)中为 `RevisionLabelString` 定义的规则进行解析，以便解析出 AUTOSAR 的三个版本信息：
 
 * 主版本（major version）：`REVISION-LABEL` 的第一部分；
 * 次版本（minor version）：`REVISION-LABEL` 的第二部分；
@@ -19016,7 +24008,7 @@ PostBuildVariantCriterion 的实际取值按两步方式定义：
 
 ### 8.5. 软件组件实例的处理
 
-当需要配置软件组件的实体时，需要实际寻址 AtomicSwComponentType 的实例。由于系统描述的 **ECU Extract**[8] 包含对 ECU 软件组件的扁平视图，ECU Extract 中的 SwComponentPrototype 已经表示软件组件的实例。
+当需要配置软件组件的实体时，需要实际寻址 AtomicSwComponentType 的实例。由于系统描述的 **ECU Extract**[\[8\]](#ref-8) 包含对 ECU 软件组件的扁平视图，ECU Extract 中的 SwComponentPrototype 已经表示软件组件的实例。
 
 图 8.9：ECU 配置中的服务
 
@@ -19813,7 +24805,7 @@ NVRam 访问的配置涉及多个模板，因为它填补了 AUTOSAR 软件组�
 
 对于 RTE 生成，需要向 RTE 生成器提供每个 SwComponentType 所用 SwcImplementation 的信息（无论该信息来自 ECU Extract 还是 ECU 配置）。
 
-SwcImplementation 到 SwComponentType 的映射在 Rte 的 ECU 配置中使用 `RteComponentTypeRef` 和 `RteImplementationRef` 两个引用完成（见图 8.20）。关于 ECU Extract 中的映射，请参考系统模板规范[8]。
+SwcImplementation 到 SwComponentType 的映射在 Rte 的 ECU 配置中使用 `RteComponentTypeRef` 和 `RteImplementationRef` 两个引用完成（见图 8.20）。关于 ECU Extract 中的映射，请参考系统模板规范[\[8\]](#ref-8)。
 
 图 8.20：AtomicSwComponentType 实现的选择
 
@@ -20118,7 +25110,7 @@ SwcImplementation 到 SwComponentType 的映射在 Rte 的 ECU 配置中使用 `
 
 ### 8.9. 通信基础设施
 
-通信基础设施（RTE 与 Com 协议栈的交互）的配置完全由作为输入提供的 **ECU Extract** 预先确定。所需的输入可在 AUTOSAR 系统模板[8]的「Data Mapping」和「Communication」章节中找到。
+通信基础设施（RTE 与 Com 协议栈的交互）的配置完全由作为输入提供的 **ECU Extract** 预先确定。所需的输入可在 AUTOSAR 系统模板[\[8\]](#ref-8)的「Data Mapping」和「Communication」章节中找到。
 
 如果 RTE 确实利用 Com 模块进行 ECU 内通信，则由 RTE 的供应商特定配置来确保配置一致性。
 
@@ -21171,7 +26163,7 @@ RTE 生成器应拒绝违反 **SWS_Rte_CONSTR_09064** 的配置。
 
 #### 8.15.1. Uri 引用的一般配置定义
 
-请注意，为了在结构上解耦 RTE 的配置与 RTE 实现插件的配置，使用了 URI 引用（Uri Reference）。参见文档[5]的「Uri Reference」章节。由此，每个 RTE 实现插件定义自己的 `EcucModuleDef`。AUTOSAR 本身并不标准化这些 `EcucModuleDef`。相反，RTE 的 ECU 配置中所需的引用被定义为 `EcucUriReferenceDef`，而对于引用目标容器，`EcucDestinationUriDef` 已在 `RteRipsUriDefSet` 中被标准化。
+请注意，为了在结构上解耦 RTE 的配置与 RTE 实现插件的配置，使用了 URI 引用（Uri Reference）。参见文档[\[5\]](#ref-5)的「Uri Reference」章节。由此，每个 RTE 实现插件定义自己的 `EcucModuleDef`。AUTOSAR 本身并不标准化这些 `EcucModuleDef`。相反，RTE 的 ECU 配置中所需的引用被定义为 `EcucUriReferenceDef`，而对于引用目标容器，`EcucDestinationUriDef` 已在 `RteRipsUriDefSet` 中被标准化。
 
 | EcucDestinationUriDefSet 名称 | `RteRipsUriDefSet` |
 | --- | --- |
@@ -21445,7 +26437,7 @@ RTE 实现插件应使用一个 `RteRipsPluginProps` 实例来描述其属性。
 
 ### 8.16. Com 用户的配置
 
-随着使得 AUTOSAR Classic 平台架构软件可被拆分为更小单元的软件簇（Software Cluster）概念的出现，Com 模块现在可以拥有任意数量的用户，RTE 即是其中之一。因此，Com 模块依靠 URI 引用（参见文档[5]的「URI Reference」章节）在模型中与其各自的用户建立链接。
+随着使得 AUTOSAR Classic 平台架构软件可被拆分为更小单元的软件簇（Software Cluster）概念的出现，Com 模块现在可以拥有任意数量的用户，RTE 即是其中之一。因此，Com 模块依靠 URI 引用（参见文档[\[5\]](#ref-5)的「URI Reference」章节）在模型中与其各自的用户建立链接。
 
 为了保证 Com 模块配置与 RTE 配置之间的兼容性，所需的参数和容器由 `ComUserUriDefSet` 定义。这意味着，RTE 作为 Com 用户应配置 `ComUserModuleCnf` 容器（包括其子容器），该容器保存其发送和接收（经由专门的通知回调）的 `ComSignal` 和/或 `ComSignalGroup` 的配置。
 
@@ -21506,7 +26498,7 @@ RTE 作为 ComUserModule 应为 RTE 提供兼容的配置结构和内容。它�
 
 ### 8.17. LdCom 用户的配置
 
-随着使得 AUTOSAR Classic 平台架构软件可被拆分为更小单元的软件簇（Software Cluster）概念的出现，LdCom 模块现在可以拥有任意数量的用户，RTE 即是其中之一。因此，LdCom 模块依靠 URI 引用（参见文档[5]的「URI Reference」章节）在模型中与其各自的用户建立链接。
+随着使得 AUTOSAR Classic 平台架构软件可被拆分为更小单元的软件簇（Software Cluster）概念的出现，LdCom 模块现在可以拥有任意数量的用户，RTE 即是其中之一。因此，LdCom 模块依靠 URI 引用（参见文档[\[5\]](#ref-5)的「URI Reference」章节）在模型中与其各自的用户建立链接。
 
 为了保证 LdCom 模块配置与 RTE 配置之间的兼容性，所需的参数和容器由 `LdComUserUriDefSet` 定义。这意味着，RTE 作为 LdCom 用户应配置 `LdComUserModuleCnf` 容器（包括其子容器），该容器保存其发送和接收（经由专门的通知回调）的 `LdComIPdu` 的配置。
 
@@ -21577,11 +26569,11 @@ RTE 作为 LdComUserModule 应为 RTE 提供兼容的配置结构和内容。它
 
 ## A. 外部需求
 
-文档[35]提供了关于模型约束的摘要。
+文档[\[35\]](#ref-35)提供了关于模型约束的摘要。
 
 ## B. MISRA C 合规性
 
-一般来说，所有 **RTE** 代码（无论是否为生成的代码）均应符合 MISRA C 标准 **SWS_Rte_01168** [29]。本章列出了所生成的 **RTE** 可能违反的所有 MISRA C 规则。
+一般来说，所有 **RTE** 代码（无论是否为生成的代码）均应符合 MISRA C 标准 **SWS_Rte_01168** [\[29\]](#ref-29)。本章列出了所生成的 **RTE** 可能违反的所有 MISRA C 规则。
 
 MISRA C 标准主要是针对手写代码而制定的。部分 MISRA C 规则仅适用于手写代码，它们在自动代码生成的语境下并无太大意义。此外，还有一些规则因技术原因（主要是为了降低 **RTE** 开销）而被违反。
 
@@ -23359,7 +28351,7 @@ MISRA C 标准主要是针对手写代码而制定的。部分 MISRA C 规则仅
 | 属性 | `v`（有序） |
 | 类型 | `Numerical` |
 | 多重性 | `*` |
-| 描述 | 这是多项式系数的列表。注意，第一个 vf 表示 power=0。多项式为 v[0] * xˆ0 + v[1] * xˆ1 ... 构造型: atpVariation 标签: vh.latestBindingTime=preCompileTime xml.roleElement=true xml.roleWrapperElement=false xml.sequenceOffset=20 xml.typeElement=false xml.typeWrapperElement=false |
+| 描述 | 这是多项式系数的列表。注意，第一个 vf 表示 power=0。多项式为 v[0] * xˆ0 + v[\[1\]](#ref-1) * xˆ1 ... 构造型: atpVariation 标签: vh.latestBindingTime=preCompileTime xml.roleElement=true xml.roleWrapperElement=false xml.sequenceOffset=20 xml.typeElement=false xml.typeWrapperElement=false |
 
 ### C.92. CompuRationalCoeffs
 
@@ -32660,7 +37652,7 @@ struct Rte_struct_DataSet
 
 ### E.5. 多个标定参数实例
 
-以下 ARXML 中的多个标定参数实例（Multiple calibration parameters instances）示例展示了 6.2.9.3.7 节中所解释的多个标定数据实例的示例。
+以下 ARXML 中的多个标定参数实例（Multiple calibration parameters instances）示例展示了 6.2.2.9.3.7 节中所解释的多个标定数据实例的示例。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
