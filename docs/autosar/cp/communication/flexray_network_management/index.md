@@ -1,5 +1,5 @@
 ---
-title: "AUTOSAR FlexRay 网络管理（FlexRay Network Management）"
+title: "AUTOSAR FlexRay Network Management（FlexRay 网络管理）"
 spec: AUTOSAR_CP_SWS_FlexRayNetworkManagement
 release: R23-11
 ---

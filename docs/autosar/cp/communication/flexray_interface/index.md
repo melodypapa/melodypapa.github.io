@@ -1,5 +1,5 @@
 ---
-title: "AUTOSAR FlexRay 接口（FlexRay Interface）"
+title: "AUTOSAR FlexRay Interface（FlexRay 接口）"
 spec: AUTOSAR_CP_SWS_FlexRayInterface
 release: R23-11
 ---

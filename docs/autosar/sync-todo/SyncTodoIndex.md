@@ -206,16 +206,16 @@ Status: **0/32** completed
 | `rs_methodology`                          | [ ] Aligned 📖 | 7d20050f40 |
 | `prs_intrusion_detection_system`          | [ ] Aligned 📖 | 6f90eac477 |
 | `rs_timing_extensions`                    | [ ] Aligned 📖 | 234e015dcc |
-| `rs_safety`                               | [ ] Pending | N/A |
-| `rs_network_management`                   | [ ] Pending | N/A |
-| `rs_main`                                 | [ ] Pending | N/A |
-| `rs_log_and_trace`                        | [ ] Pending | N/A |
-| `rs_time_sync`                            | [ ] Pending | N/A |
-| `rs_standardization_template`             | [ ] Pending | N/A |
-| `prs_time_sync_protocol`                  | [ ] Pending | N/A |
-| `prs_someip_protocol`                     | [ ] Pending | N/A |
-| `rs_diagnostics`                          | [ ] Pending | N/A |
-| `prs_someip_service_discovery_protocol`   | [ ] Pending | N/A |
+| `rs_safety`                               | [ ] Aligned 📖 | 0ae9150bf0 |
+| `rs_network_management`                   | [ ] Aligned 📖 | fcdd8a2007 |
+| `rs_main`                                 | [ ] Aligned 📖 | 7ad3830486 |
+| `rs_log_and_trace`                        | [ ] Aligned 📖 | 975c0ba615 |
+| `rs_time_sync`                            | [ ] Aligned 📖 | a6f903b9bb |
+| `rs_standardization_template`             | [ ] Aligned 📖 | 1bf275287a |
+| `prs_time_sync_protocol`                  | [ ] Aligned 📖 | 1b6f4abca2 |
+| `prs_someip_protocol`                     | [ ] Aligned 📖 | 7b544a5ad8 |
+| `rs_diagnostics`                          | [ ] Aligned 📖 | 32a73fcaa6 |
+| `prs_someip_service_discovery_protocol`   | [ ] Aligned 📖 | 39b985fcca |
 | `prs_log_and_trace_protocol`              | [ ] Pending | N/A |
 | `prs_e2e_protocol`                        | [ ] Pending | N/A |
 
@@ -330,12 +330,12 @@ Status: **3/3** completed
 
 ## Group security — security section (new section)
 
-Status: **0/2** completed
+Status: **2/2** completed
 
 | Article    | Status | Commit ID |
 | ----------- | -------- | ---------- |
-| `firewall`   | [ ] Pending | N/A |
-| `idsm`       | [ ] Pending | N/A |
+| `firewall`   | [x] Done | f9a5075929 |
+| `idsm`       | [x] Done | 27415df07b |
 
 ## Group system_services — system services section
 
@@ -351,5 +351,5 @@ Status: **7/7** completed
 | `hwtestmanager`                 | [x] Done | 04ea38b015 |
 | `operating_system`              | [x] Done | ca7ecda991 |
 
-**Total: 159/197 queue rows complete.**
+**Total: 163/214 queue rows complete.**
 

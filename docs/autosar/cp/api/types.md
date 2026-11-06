@@ -1387,34 +1387,34 @@ title: "AUTOSAR API 类型清单"
 > 类型 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](../communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **[FrIf_ConfigType](../communication/flexray_interface/index.md#721-frif_configtype)**
-> 类型 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 类型 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_StateTransitionType](../communication/flexray_interface/index.md#723-frif_statetransitiontype)**
-> 类型 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 类型 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_StateType](../communication/flexray_interface/index.md#722-frif_statetype)**
-> 类型 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 类型 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrNm_ConfigType](../communication/flexray_network_management/index.md#7221-frnm_configtype)**
-> 类型 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 类型 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrSM_BswM_StateType](../communication/flexray_state_manager/index.md#722-frsm_bswm_statetype)**
-> 类型 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
+> 类型 · [AUTOSAR FlexRay State Manager（FlexRay 状态管理器）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
 
 **[FrSM_ConfigType](../communication/flexray_state_manager/index.md#721-frsm_configtype)**
-> 类型 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
+> 类型 · [AUTOSAR FlexRay State Manager（FlexRay 状态管理器）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
 
 **[FrTp_ConfigType](../communication/flexray_iso_transport_layer/index.md#721-frtp_configtype)**
 > 类型 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
 
 **[FrTrcv_ConfigType](../communication/flexray_transceiver_driver/index.md#721-frtrcv_configtype)**
-> 类型 · [AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
 
 **[FrTrcv_TrcvModeType](../communication/flexray_transceiver_driver/index.md#722-frtrcv_trcvmodetype)**
-> 类型 · [AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
 
 **[FrTrcv_TrcvWUReasonType](../communication/flexray_transceiver_driver/index.md#723-frtrcv_trcvwureasontype)**
-> 类型 · [AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
+> 类型 · [AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
 
 **[FrTSyn_ConfigType](../globaltime/fr_tsyn/index.md#721-frtsyn_configtype)**
 > 类型 · [AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](../globaltime/fr_tsyn/index.md) · SWS_TimeSyncOverFlexRay · R23-11

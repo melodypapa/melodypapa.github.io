@@ -6,7 +6,7 @@ title: "通信管理（Communication Management）"
 
 ## 文章
 
-* [Explanation of Time Sensitive Networking Features（时间敏感网络特性说明）](exp_time_sensitive_network_features/)
+* [Explanation of Time Sensitive Networking Features（时间敏感网络特性说明）](exp_time_sensitive_network_features/index.md)
 * [Requirements on IEEE1722（IEEE 1722 需求）](rs_ieee1722/index.md)
 * [Requirements on Debug Trace Profile（调试跟踪配置文件需求）](rs_debug_trace_profile/index.md)
 * [Requirements on E2E（端到端通信保护需求）](rs_e2e/index.md)

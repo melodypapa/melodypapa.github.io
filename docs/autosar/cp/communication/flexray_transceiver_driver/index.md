@@ -1,5 +1,5 @@
 ---
-title: "AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）"
+title: "AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）"
 spec: AUTOSAR_CP_SWS_FlexRayTransceiverDriver
 release: R23-11
 ---

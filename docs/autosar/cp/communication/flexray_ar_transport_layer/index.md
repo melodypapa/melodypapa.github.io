@@ -1,5 +1,5 @@
 ---
-title: "AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）"
+title: "AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）"
 spec: AUTOSAR_CP_SWS_FlexRayARTransportLayer
 release: R23-11
 ---
