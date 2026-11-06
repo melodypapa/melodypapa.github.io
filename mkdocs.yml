@@ -246,11 +246,13 @@ nav:
       - "ARM架构的内存模式": cortex/m7_processor/arm_architecture_memory_mode/index.md
       - "交叉触发接口": cortex/m7_processor/cti/index.md
       - "插桩跟踪宏单元": cortex/m7_processor/itm/index.md
+      - "跟踪端口接口单元": cortex/m7_processor/tpiu/index.md
       - "ARM 异常模型": cortex/m7_processor/exception_model/index.md
       - "调试": cortex/m7_processor/debug/index.md
       - "浮点单元": cortex/m7_processor/fpu/index.md
       - "Cortex-M7 指令集": cortex/m7_processor/instruction_set/index.md
       - "初始化": cortex/m7_processor/initialization/index.md
+      - "内存系统": cortex/m7_processor/memory_system/index.md
       - "内存保护单元": cortex/m7_processor/mpu/index.md
       - "嵌套向量中断控制器": cortex/m7_processor/nested_vectored_interrupt_controller/index.md
       - "Cortex-M7 程序状态寄存器": cortex/m7_processor/program_status_register/index.md
@@ -258,6 +260,7 @@ nav:
       - "数据观察点与跟踪单元": cortex/m7_processor/dwt/index.md
       - "系统控制": cortex/m7_processor/system_control/index.md
       - "系统地址映射": cortex/m7_processor/system_address_map/index.md
+      - "故障检测与处理": cortex/m7_processor/fault_detection/index.md
     - Cortex-R52+ 内核:
 
       - "时钟与复位": cortex/r52p_processor/clocking_and_resets/index.md
@@ -357,6 +360,10 @@ nav:
         - "Csm": autosar/cp/crypto/crypto_service_manager/index.md
         - "KeyM": autosar/cp/crypto/key_manager/index.md
         - "加密服务使用指南": autosar/cp/crypto/utilization_of_crypto_services/index.md
+      - 网络安全:
+        - autosar/cp/security/index.md
+        - "Firewall": autosar/cp/security/firewall/index.md
+        - "IdsM": autosar/cp/security/idsm/index.md
       - 诊断:
         - autosar/cp/diagnostics/index.md
         - "Dcm": autosar/cp/diagnostics/diagnostic_communication_manager/index.md

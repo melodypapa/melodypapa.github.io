@@ -68,6 +68,11 @@ ART_LEAF_RE = re.compile(
 ALIASES = {
     "可选接口": "Optional",
     "Std_ReturnType的扩展": "Extension",
+    # IdsM (R23-11): the source heading 8.3.11 spells the configurable-interface
+    # name without the underscore after the module prefix ("IdsMContextDataModifierCallout_Name")
+    # while the definition item and the article use the correct identifier
+    # IdsM_ContextDataModifierCallout_Name (CoreTest underscore-typo precedent).
+    "IdsMContextDataModifierCallout_Name": "IdsM_ContextDataModifierCallout_Name",
     # NvM (R23-11) names its two callback entries with prose headings ("NVRAM
     # Manager job end notification without/with error"); the article keeps the
     # pre-existing function-name headings (old-article 8.4.1/8.4.2 continuity,
@@ -151,6 +156,29 @@ def slice_section(text: str, start_re: str, end_re: str) -> str:
     return "\n".join(lines[start : end if end is not None else len(lines)])
 
 
+def _reconcile_module_prefix(src: list[str], art: list[str]) -> tuple[list[str], list[str]]:
+    """Some SWS documents head their API entries with bare names ("8.3.1 Init",
+    "8.2.1 ConfigType") while the article headings carry the full identifier
+    ("Fw_Init", "Fw_ConfigType") — the Firewall R23-11 precedent. When every
+    article entry is positionally the source entry with one shared prefix
+    (e.g. "Fw_"), lift the source names by that prefix so the comparison is
+    name-preserving instead of failing on the missing module qualifier."""
+    if not src or len(src) != len(art):
+        return src, art
+    prefix = None
+    for a, s in zip(art, src):
+        if not a.endswith(s):
+            return src, art
+        p = a[: len(a) - len(s)]
+        if prefix is None:
+            prefix = p
+        elif p != prefix:
+            return src, art
+    if not prefix:
+        return src, art
+    return [prefix + s for s in src], art
+
+
 def diff_names(src: list[str], art: list[str], label: str) -> list[str]:
     problems: list[str] = []
     missing = [n for n in src if n not in art]
@@ -194,6 +222,7 @@ def main() -> int:
                 "article has entries — check for an unparseable source structure "
                 "(see gen_api_list.py's known `!` documents) before overriding"
             )
+        src, art = _reconcile_module_prefix(src, art)
         problems.extend(diff_names(src, art, label))
         if chap == "3":
             body = slice_section(art_text, r"^### 7\.3\.", r"^### 7\.[4-9]\.")

@@ -1,0 +1,176 @@
+# Sync todo: Group cp-methodology — CP R23-11 methodology and template documents (17)
+
+Base: R23-11 (`~/Workspace/autosar_standard/markdown/Classic_Platform/Releases/R23-11/MethodologyAndTemplates/`) · Generated: 2026-11-06 · Queue order = row order (source size ascending)
+(Resume = the first row still `[ ]`; all `[x]` = batch complete)
+Steps: ① source resolution + gap analysis · ② in-place translation/completion · ③ Phase A mechanical checks · ④ Phase B evidence · ⑤ user confirmation gate · ⑥ TODO.md row + commit
+> Scope (user request 2026-11-06): the 17 non-SWS CP documents of the `MethodologyAndTemplates` folder — 6 RS + 7 TPS + 4 TR — deliberately outside the original CP 148 scope when the queue was bootstrapped 2026-10-24 (index.md recorded only "1 TPS template exempt"; BSWMDT's exempt line lived in [Group-exp.md](Group-exp.md) "Not queued"). This batch closes that gap; the Group-exp exempt line now points here.
+> Source path: `Classic_Platform/Releases/R23-11/MethodologyAndTemplates/AUTOSAR_CP_<Type>_<Name>.md` (SKILL.md Step 1 names the Classic Platform tree — this is the same tree, non-SWS folder). No PDFs are bundled under `docs/autosar_pdf/`; the raw PDFs are in the corpus repo `~/Workspace/autosar_standard/Classic_Platform/Releases/R23-11/MethodologyAndTemplates/` (Git LFS) — same garbled-cell recovery route as the Foundation runs.
+> Article shape: **all documents are skeleton-exempt** (STANDARD.md §7 — RS/TPS/TR are not module SWS): mirror the source's own chapter numbering, EXP-guide flow (Group-exp / Group-foundation-exp precedent: doc-meta chrome dropped, references chapter kept as an unnumbered `## 参考文献` registry so `[n]` citations link, figures deduplicated by content hash, source tables as GFM).
+> Target dir: `cp/methodology_templates/<slug>/` (the section landing and nav subgroup 方法论与模板 exist since the BSWMDT article). Each run adds its article to the section landing `## 文章`, the nav (`方法论与模板` subgroup of the CP tab, label = short name), and runs `check_indexes.py`.
+> Slug rule: the Foundation precedent `<type>_<snake_name>` disambiguates the same-named RS/TPS pairs (BSWModuleDescriptionTemplate, DiagnosticExtractTemplate, ECUConfiguration, ECUResourceTemplate, SoftwareComponentTemplate, SystemTemplate). The existing `basic_software_module_description_template` article KEEPS its slug (no rename, no redirect churn). The slug is a proposal: an ambiguous name still goes to the user at Step 1 (mapping.md naming rule). Front-matter `spec:` = `AUTOSAR_CP_<Type>_<Name>`, `release: R23-11`.
+> OPEN decision (confirm at the first run's Step 1, Foundation precedent proposed as default): item IDs are DROPPED, titles translate only — the 2026-11-03 Foundation decision (recorded in Group-foundation-rs-prs.md). These CP RS/TPS/TR documents consist of identified items just like their FO counterparts; applying the same rule keeps the corpus consistent, but it is not yet user-confirmed for CP.
+
+## Queue
+- [ ] rs_ecu_resource_template (AUTOSAR_CP_RS_ECUResourceTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Requirements on ECU Resource Template（ECU 资源模板需求）; target `cp/methodology_templates/rs_ecu_resource_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
+  - Note: source `MethodologyAndTemplates/AUTOSAR_CP_RS_ECUResourceTemplate.md` — 499 lines, 20 figure refs, 25 item IDs
+  - Note: related site content: none yet (TPS_ECUResourceTemplate queued below — cross-link candidates, report-only until the run decides)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] rs_ecu_configuration (AUTOSAR_CP_RS_ECUConfiguration · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Requirements on ECU Configuration（ECU 配置需求）; target `cp/methodology_templates/rs_ecu_configuration/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
+  - Note: source `MethodologyAndTemplates/AUTOSAR_CP_RS_ECUConfiguration.md` — 1,103 lines, 36 figure refs, 47 item IDs
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] rs_bsw_module_description_template (AUTOSAR_CP_RS_BSWModuleDescriptionTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Requirements on BSW Module Description Template（基础软件模块描述模板需求）; target `cp/methodology_templates/rs_bsw_module_description_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
+  - Note: source `MethodologyAndTemplates/AUTOSAR_CP_RS_BSWModuleDescriptionTemplate.md` — 1,389 lines, 47 figure refs, 84 item IDs
+  - Note: related site content: cp/methodology_templates/basic_software_module_description_template (the TPS counterpart article — cross-link candidates, report-only until the run decides)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] rs_system_template (AUTOSAR_CP_RS_SystemTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Requirements on System Template（系统模板需求）; target `cp/methodology_templates/rs_system_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
+  - Note: source `MethodologyAndTemplates/AUTOSAR_CP_RS_SystemTemplate.md` — 1,498 lines, 48 figure refs, 88 item IDs
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] tps_ecu_resource_template (AUTOSAR_CP_TPS_ECUResourceTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: ECU Resource Template（ECU 资源模板）; target `cp/methodology_templates/tps_ecu_resource_template/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
+  - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TPS_ECUResourceTemplate.md` — 1,566 lines, 68 figure refs, 62 item IDs
+  - Note: related site content: none yet (rs_ecu_resource_template queued above — cross-link candidates, report-only until the run decides)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] rs_diagnostic_extract_template (AUTOSAR_CP_RS_DiagnosticExtractTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Requirements on Diagnostic Extract Template（诊断提取模板需求）; target `cp/methodology_templates/rs_diagnostic_extract_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
+  - Note: source `MethodologyAndTemplates/AUTOSAR_CP_RS_DiagnosticExtractTemplate.md` — 1,692 lines, 49 figure refs, 81 item IDs
+  - Note: related site content: none yet (tps_diagnostic_extract_template queued below — cross-link candidates, report-only until the run decides)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] rs_software_component_template (AUTOSAR_CP_RS_SoftwareComponentTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Requirements on Software Component Template（软件组件模板需求）; target `cp/methodology_templates/rs_software_component_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
+  - Note: source `MethodologyAndTemplates/AUTOSAR_CP_RS_SoftwareComponentTemplate.md` — 1,877 lines, 60 figure refs, 107 item IDs
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] tr_franca_integration (AUTOSAR_CP_TR_FrancaIntegration · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Franca Integration（Franca 集成）; target `cp/methodology_templates/tr_franca_integration/`; technical report (TR) — informational, no numbered requirement items
+  - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TR_FrancaIntegration.md` — 2,346 lines, 87 figure refs, 0 item IDs
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] tr_general_blueprints_supplement (AUTOSAR_CP_TR_GeneralBlueprintsSupplement · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: General Blueprints Supplement（通用蓝图补充）; target `cp/methodology_templates/tr_general_blueprints_supplement/`; technical report (TR) — informational, no numbered requirement items
+  - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TR_GeneralBlueprintsSupplement.md` — 2,801 lines, 115 figure refs, 1 item ID
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] tr_modeling_show_cases (AUTOSAR_CP_EXP_ModelingShowCases · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Modeling Show Cases（建模展示案例）; target `cp/methodology_templates/tr_modeling_show_cases/`; showcase report (the R23-11 file carries an EXP_ id but ships in the MethodologyAndTemplates folder — treated as TR-type informational)
+  - Note: source `MethodologyAndTemplates/AUTOSAR_CP_EXP_ModelingShowCases.md` — 5,346 lines, 201 figure refs, 2 item IDs
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] tps_timing_extensions (AUTOSAR_CP_TPS_TimingExtensions · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Timing Extensions（时序扩展）; target `cp/methodology_templates/tps_timing_extensions/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type)
+  - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TPS_TimingExtensions.md` — 8,752 lines, 384 figure refs, 113 item IDs
+  - Note: related site content: none (the Foundation RS_TimingExtensions counterpart is queued in Group-foundation-rs-prs.md — cross-link candidates, report-only until the run decides)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] tps_ecu_configuration (AUTOSAR_CP_TPS_ECUConfiguration · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: ECU Configuration（ECU 配置）; target `cp/methodology_templates/tps_ecu_configuration/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type)
+  - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TPS_ECUConfiguration.md` — 9,579 lines, 408 figure refs, 296 item IDs
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] basic_software_module_description_template (AUTOSAR_CP_TPS_BSWModuleDescriptionTemplate · MethodologyAndTemplates · R23-11 markdown · 🔶 existing article · 📖 skeleton-exempt)
+  - Note: BSW Module Description Template（基础软件模块描述模板）; target = the existing `cp/methodology_templates/basic_software_module_description_template/` (row name = the actual article dir so the index resolves it; a type-prefixed slug is NOT adopted — no rename, no redirect churn); template specification (TPS) — meta-model class tables, constraints and ARXML examples
+  - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TPS_BSWModuleDescriptionTemplate.md` — 10,999 lines, 480 figure refs, 237 item IDs
+  - Note: pre-queue translation (Group-exp.md formerly carried the exempt 📄 line) — this row is an ALIGNMENT pass: verify the article against the R23-11 source and fill any drift; prior exempt note "methodology_templates/basic_software_mode_manager template" carried a name typo
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] tr_methodology (AUTOSAR_CP_TR_Methodology · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Methodology（方法论）; target `cp/methodology_templates/tr_methodology/`; technical report (TR) — informational, no numbered requirement items
+  - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TR_Methodology.md` — 13,206 lines, 751 figure refs, 208 item IDs
+  - Note: related site content: foundation Methodology articles (rs_methodology etc. in Group-foundation-rs-prs.md — cross-link candidates, report-only until the run decides)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] tps_diagnostic_extract_template (AUTOSAR_CP_TPS_DiagnosticExtractTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Diagnostic Extract Template（诊断提取模板）; target `cp/methodology_templates/tps_diagnostic_extract_template/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type)
+  - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TPS_DiagnosticExtractTemplate.md` — 29,451 lines, 1,150 figure refs, 296 item IDs (giant)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] tps_software_component_template (AUTOSAR_CP_TPS_SoftwareComponentTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Software Component Template（软件组件模板）; target `cp/methodology_templates/tps_software_component_template/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type)
+  - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TPS_SoftwareComponentTemplate.md` — 39,695 lines, 1,734 figure refs, 1,021 item IDs (giant)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+- [ ] tps_system_template (AUTOSAR_CP_TPS_SystemTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: System Template（系统模板）; target `cp/methodology_templates/tps_system_template/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type)
+  - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TPS_SystemTemplate.md` — 76,751 lines, 3,024 figure refs, 759 item IDs (giant — largest source in the whole queue)
+  - [ ] Step 1 — Source resolution + gap analysis
+  - [ ] Step 2 — In-place translation/completion
+  - [ ] Step 3 — Phase A mechanical checks
+  - [ ] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate
+  - [ ] Step 6 — TODO.md row + commit/PR
+
+## Not queued (deliberately skipped)
+- 📄 `MOD_ECUConfigurationParameters` ships as a zip in the corpus folder, not a markdown document — parameter definitions live in the ECUConfiguration TPS context; revisit only if a markdown conversion appears.
