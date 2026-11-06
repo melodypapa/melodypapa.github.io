@@ -29,6 +29,15 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**Adc_StartGroupConversion**](../io/adc_driver/index.md#734-adc_startgroupconversion) | 启动所请求ADC通道组所有通道的转换。 |
 | [**Adc_StopGroupConversion**](../io/adc_driver/index.md#735-adc_stopgroupconversion) | 停止所请求ADC通道组的转换。 |
 
+## AUTOSAR ARTI（运行时接口）（2）
+
+来源：[AUTOSAR ARTI（运行时接口）](../sw_arch/arti_sws/index.md) · SWS_ARTI
+
+| 函数 | 简述 |
+|---|---|
+| [**Arti_GetVersionInfo**](../sw_arch/arti_sws/index.md#742-arti_getversioninfo) | — |
+| [**Arti_Init**](../sw_arch/arti_sws/index.md#741-arti_init) | — |
+
 ## AUTOSAR Basic Software Mode Manager（BSW模式管理器）（36）
 
 来源：[AUTOSAR Basic Software Mode Manager（BSW模式管理器）](../mode_management/basic_software_mode_manager/index.md) · SWS_BSWModeManager

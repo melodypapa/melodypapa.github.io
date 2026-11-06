@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2650** 个条目。
+共 **2652** 个条目。
 
 ## A
 
@@ -88,6 +88,12 @@ title: "AUTOSAR API 函数清单"
 
 **[AppSendRequest](../communication/j1939rm/index.md#7832-appsendrequest)**
 > 函数 · [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../communication/j1939rm/index.md) · SWS_SAEJ1939RequestManager · R23-11
+
+**[Arti_GetVersionInfo](../sw_arch/arti_sws/index.md#742-arti_getversioninfo)**
+> 函数 · [AUTOSAR ARTI（运行时接口）](../sw_arch/arti_sws/index.md) · SWS_ARTI · R23-11
+
+**[Arti_Init](../sw_arch/arti_sws/index.md#741-arti_init)**
+> 函数 · [AUTOSAR ARTI（运行时接口）](../sw_arch/arti_sws/index.md) · SWS_ARTI · R23-11
 
 ## B
 
