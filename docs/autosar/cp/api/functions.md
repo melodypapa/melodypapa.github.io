@@ -4,7 +4,7 @@ title: "AUTOSAR API 函数清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**函数**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **2677** 个条目。
+共 **2679** 个条目。
 
 ## A
 
@@ -4528,37 +4528,37 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](../communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
 **[FrArTp_CancelReceive](../communication/flexray_ar_transport_layer/index.md#8333-frartp_cancelreceive)**
-> 函数 · [AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
+> 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
 **[FrArTp_CancelTransmit](../communication/flexray_ar_transport_layer/index.md#8332-frartp_canceltransmit)**
-> 函数 · [AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
+> 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
 **[FrArTp_ChangeParameter](../communication/flexray_ar_transport_layer/index.md#8334-frartp_changeparameter)**
-> 函数 · [AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
+> 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
 **[FrArTp_GetVersionInfo](../communication/flexray_ar_transport_layer/index.md#8311-frartp_getversioninfo)**
-> 函数 · [AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
+> 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
 **[FrArTp_Init](../communication/flexray_ar_transport_layer/index.md#8321-frartp_init)**
-> 函数 · [AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
+> 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
 **[FrArTp_MainFunction](../communication/flexray_ar_transport_layer/index.md#851-frartp_mainfunction)**
-> 函数 · [AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
+> 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
 **[FrArTp_RxIndication](../communication/flexray_ar_transport_layer/index.md#842-frartp_rxindication)**
-> 函数 · [AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
+> 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
 **[FrArTp_Shutdown](../communication/flexray_ar_transport_layer/index.md#8322-frartp_shutdown)**
-> 函数 · [AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
+> 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
 **[FrArTp_Transmit](../communication/flexray_ar_transport_layer/index.md#8331-frartp_transmit)**
-> 函数 · [AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
+> 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
 **[FrArTp_TriggerTransmit](../communication/flexray_ar_transport_layer/index.md#841-frartp_triggertransmit)**
-> 函数 · [AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
+> 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
 **[FrArTp_TxConfirmation](../communication/flexray_ar_transport_layer/index.md#843-frartp_txconfirmation)**
-> 函数 · [AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
+> 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
 **[FreshnessManagement](../communication/sec_oc/index.md#7832-freshnessmanagement)**
 > 函数 · [AUTOSAR SecOC (Secure Onboard Communication)](../communication/sec_oc/index.md) · SWS_SecOc · R23-11
@@ -4567,226 +4567,226 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](../globaltime/stbm/index.md) · SWS_SynchronizedTimeBaseManager · R23-11
 
 **[FrIf_AbortCommunication](../communication/flexray_interface/index.md#738-frif_abortcommunication)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_AckAbsoluteTimerIRQ](../communication/flexray_interface/index.md#735-frif_ackabsolutetimerirq)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_AllowColdstart](../communication/flexray_interface/index.md#7315-frif_allowcoldstart)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_AllSlots](../communication/flexray_interface/index.md#741-frif_allslots)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_CancelAbsoluteTimer](../communication/flexray_interface/index.md#7323-frif_cancelabsolutetimer)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_CancelTransmit](../communication/flexray_interface/index.md#747-frif_canceltransmit)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_CheckWakeupByTransceiver](../communication/flexray_interface/index.md#761-frif_checkwakeupbytransceiver)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_ClearTransceiverWakeup](../communication/flexray_interface/index.md#7322-frif_cleartransceiverwakeup)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_ControllerInit](../communication/flexray_interface/index.md#732-frif_controllerinit)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_DisableAbsoluteTimerIRQ](../communication/flexray_interface/index.md#7325-frif_disableabsolutetimerirq)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_DisableLPdu](../communication/flexray_interface/index.md#748-frif_disablelpdu)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_DisableTransceiverBranch](../communication/flexray_interface/index.md#7411-frif_disabletransceiverbranch)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_EnableAbsoluteTimerIRQ](../communication/flexray_interface/index.md#734-frif_enableabsolutetimerirq)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_EnableBusMirroring](../communication/flexray_interface/index.md#7416-frif_enablebusmirroring)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_EnableTransceiverBranch](../communication/flexray_interface/index.md#7410-frif_enabletransceiverbranch)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_GetAbsoluteTimerIRQStatus](../communication/flexray_interface/index.md#7324-frif_getabsolutetimerirqstatus)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_GetChannelStatus](../communication/flexray_interface/index.md#742-frif_getchannelstatus)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_GetClockCorrection](../communication/flexray_interface/index.md#743-frif_getclockcorrection)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_GetCycleLength](../communication/flexray_interface/index.md#7326-frif_getcyclelength)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_GetGlobalTime](../communication/flexray_interface/index.md#7314-frif_getglobaltime)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_GetMacrotickDuration](../communication/flexray_interface/index.md#7317-frif_getmacrotickduration)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_GetMacroticksPerCycle](../communication/flexray_interface/index.md#7316-frif_getmacrotickspercycle)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_GetNmVector](../communication/flexray_interface/index.md#7413-frif_getnmvector)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_GetNumOfStartupFrames](../communication/flexray_interface/index.md#745-frif_getnumofstartupframes)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_GetPOCStatus](../communication/flexray_interface/index.md#7313-frif_getpocstatus)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_GetState](../communication/flexray_interface/index.md#739-frif_getstate)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_GetSyncFrameList](../communication/flexray_interface/index.md#744-frif_getsyncframelist)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_GetTransceiverError](../communication/flexray_interface/index.md#749-frif_gettransceivererror)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_GetTransceiverMode](../communication/flexray_interface/index.md#7320-frif_gettransceivermode)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_GetTransceiverWUReason](../communication/flexray_interface/index.md#7321-frif_gettransceiverwureason)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_GetVersionInfo](../communication/flexray_interface/index.md#7414-frif_getversioninfo)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_GetWakeupRxStatus](../communication/flexray_interface/index.md#746-frif_getwakeuprxstatus)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_HaltCommunication](../communication/flexray_interface/index.md#737-frif_haltcommunication)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_Init](../communication/flexray_interface/index.md#731-frif_init)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_ReadCCConfig](../communication/flexray_interface/index.md#7415-frif_readccconfig)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_ReconfigLPdu](../communication/flexray_interface/index.md#7412-frif_reconfiglpdu)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_SendWUP](../communication/flexray_interface/index.md#7312-frif_sendwup)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_SetAbsoluteTimer](../communication/flexray_interface/index.md#733-frif_setabsolutetimer)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_SetState](../communication/flexray_interface/index.md#7310-frif_setstate)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_SetTransceiverMode](../communication/flexray_interface/index.md#7319-frif_settransceivermode)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_SetWakeupChannel](../communication/flexray_interface/index.md#7311-frif_setwakeupchannel)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_StartCommunication](../communication/flexray_interface/index.md#736-frif_startcommunication)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrIf_Transmit](../communication/flexray_interface/index.md#7318-frif_transmit)**
-> 函数 · [AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
+> 函数 · [AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface · R23-11
 
 **[FrNm_ActivateTxPnShutdownMsg](../communication/flexray_network_management/index.md#7321-frnm_activatetxpnshutdownmsg)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_CheckRemoteSleepIndication](../communication/flexray_network_management/index.md#7312-frnm_checkremotesleepindication)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_DeactivateTxPnShutdownMsg](../communication/flexray_network_management/index.md#7322-frnm_deactivatetxpnshutdownmsg)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_DisableCommunication](../communication/flexray_network_management/index.md#7318-frnm_disablecommunication)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_EnableCommunication](../communication/flexray_network_management/index.md#7317-frnm_enablecommunication)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_GetLocalNodeIdentifier](../communication/flexray_network_management/index.md#7310-frnm_getlocalnodeidentifier)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_GetNodeIdentifier](../communication/flexray_network_management/index.md#739-frnm_getnodeidentifier)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_GetPduData](../communication/flexray_network_management/index.md#737-frnm_getpdudata)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_GetState](../communication/flexray_network_management/index.md#7313-frnm_getstate)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_GetUserData](../communication/flexray_network_management/index.md#736-frnm_getuserdata)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_GetVersionInfo](../communication/flexray_network_management/index.md#7314-frnm_getversioninfo)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_Init](../communication/flexray_network_management/index.md#731-frnm_init)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_NetworkRelease](../communication/flexray_network_management/index.md#734-frnm_networkrelease)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_NetworkRequest](../communication/flexray_network_management/index.md#733-frnm_networkrequest)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_PassiveStartUp](../communication/flexray_network_management/index.md#732-frnm_passivestartup)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_PnLearningRequest](../communication/flexray_network_management/index.md#7320-frnm_pnlearningrequest)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_RepeatMessageRequest](../communication/flexray_network_management/index.md#738-frnm_repeatmessagerequest)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_RequestBusSynchronization](../communication/flexray_network_management/index.md#7311-frnm_requestbussynchronization)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_RxIndication](../communication/flexray_network_management/index.md#741-frnm_rxindication)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_SetSleepReadyBit](../communication/flexray_network_management/index.md#7319-frnm_setsleepreadybit)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_SetUserData](../communication/flexray_network_management/index.md#735-frnm_setuserdata)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_StartupError](../communication/flexray_network_management/index.md#7315-frnm_startuperror)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_Transmit](../communication/flexray_network_management/index.md#7316-frnm_transmit)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_TriggerTransmit](../communication/flexray_network_management/index.md#742-frnm_triggertransmit)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrNm_TxConfirmation](../communication/flexray_network_management/index.md#743-frnm_txconfirmation)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[FrSM_AllSlots](../communication/flexray_state_manager/index.md#735-frsm_allslots)**
-> 函数 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
+> 函数 · [AUTOSAR FlexRay State Manager（FlexRay 状态管理器）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
 
 **[FrSM_GetCurrentComMode](../communication/flexray_state_manager/index.md#733-frsm_getcurrentcommode)**
-> 函数 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
+> 函数 · [AUTOSAR FlexRay State Manager（FlexRay 状态管理器）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
 
 **[FrSM_GetVersionInfo](../communication/flexray_state_manager/index.md#734-frsm_getversioninfo)**
-> 函数 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
+> 函数 · [AUTOSAR FlexRay State Manager（FlexRay 状态管理器）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
 
 **[FrSM_Init](../communication/flexray_state_manager/index.md#731-frsm_init)**
-> 函数 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
+> 函数 · [AUTOSAR FlexRay State Manager（FlexRay 状态管理器）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
 
 **[FrSM_RequestComMode](../communication/flexray_state_manager/index.md#732-frsm_requestcommode)**
-> 函数 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
+> 函数 · [AUTOSAR FlexRay State Manager（FlexRay 状态管理器）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
 
 **[FrSM_SetEcuPassive](../communication/flexray_state_manager/index.md#736-frsm_setecupassive)**
-> 函数 · [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
+> 函数 · [AUTOSAR FlexRay State Manager（FlexRay 状态管理器）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager · R23-11
 
 **[FrTp_CancelReceive](../communication/flexray_iso_transport_layer/index.md#7334-frtp_cancelreceive)**
 > 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
@@ -4822,37 +4822,37 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer · R23-11
 
 **[FrTrcv_CheckWakeupByTransceiver](../communication/flexray_transceiver_driver/index.md#737-frtrcv_checkwakeupbytransceiver)**
-> 函数 · [AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
 
 **[FrTrcv_ClearTransceiverWakeup](../communication/flexray_transceiver_driver/index.md#736-frtrcv_cleartransceiverwakeup)**
-> 函数 · [AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
 
 **[FrTrcv_DisableTransceiverBranch](../communication/flexray_transceiver_driver/index.md#739-frtrcv_disabletransceiverbranch)**
-> 函数 · [AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
 
 **[FrTrcv_EnableTransceiverBranch](../communication/flexray_transceiver_driver/index.md#7310-frtrcv_enabletransceiverbranch)**
-> 函数 · [AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
 
 **[FrTrcv_GetTransceiverError](../communication/flexray_transceiver_driver/index.md#738-frtrcv_gettransceivererror)**
-> 函数 · [AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
 
 **[FrTrcv_GetTransceiverMode](../communication/flexray_transceiver_driver/index.md#733-frtrcv_gettransceivermode)**
-> 函数 · [AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
 
 **[FrTrcv_GetTransceiverWUReason](../communication/flexray_transceiver_driver/index.md#734-frtrcv_gettransceiverwureason)**
-> 函数 · [AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
 
 **[FrTrcv_GetVersionInfo](../communication/flexray_transceiver_driver/index.md#735-frtrcv_getversioninfo)**
-> 函数 · [AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
 
 **[FrTrcv_Init](../communication/flexray_transceiver_driver/index.md#731-frtrcv_init)**
-> 函数 · [AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
 
 **[FrTrcv_MainFunction](../communication/flexray_transceiver_driver/index.md#751-frtrcv_mainfunction)**
-> 函数 · [AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
 
 **[FrTrcv_SetTransceiverMode](../communication/flexray_transceiver_driver/index.md#732-frtrcv_settransceivermode)**
-> 函数 · [AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
+> 函数 · [AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver · R23-11
 
 **[FrTSyn_GetVersionInfo](../globaltime/fr_tsyn/index.md#732-frtsyn_getversioninfo)**
 > 函数 · [AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](../globaltime/fr_tsyn/index.md) · SWS_TimeSyncOverFlexRay · R23-11
@@ -6368,7 +6368,7 @@ title: "AUTOSAR API 函数清单"
 ## N
 
 **[NetworkStartIndication](../communication/flexray_network_management/index.md#7631-networkstartindication)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[NextScheduleTable](../system_services/operating_system/index.md#7412-nextscheduletable)**
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
@@ -6540,7 +6540,7 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR PduR (PDU Router)](../communication/pdu_router/index.md) · SWS_PduR · R23-11
 
 **[PduRxIndication](../communication/flexray_network_management/index.md#7632-pdurxindication)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[Port_GetVersionInfo](../io/port_driver/index.md#734-port_getversioninfo)**
 > 函数 · [AUTOSAR Port Driver（端口驱动）](../io/port_driver/index.md) · SWS_PortDriver · R23-11
@@ -6680,10 +6680,10 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
 
 **[RemoteSleepCancellation](../communication/flexray_network_management/index.md#7633-remotesleepcancellation)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[RemoteSleepIndication](../communication/flexray_network_management/index.md#7634-remotesleepindication)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[RequestControlServices](../diagnostics/diagnostic_communication_manager/index.md#786-requestcontrolservices)**
 > 函数 · [AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](../diagnostics/diagnostic_communication_manager/index.md) · SWS_DiagnosticCommunicationManager · R23-11
@@ -7581,7 +7581,7 @@ title: "AUTOSAR API 函数清单"
 > 函数 · [AUTOSAR Time Service（时间服务）](../system_services/time_service/index.md) · SWS_TimeService · R23-11
 
 **[TransmissionTimeoutException](../communication/flexray_network_management/index.md#7635-transmissiontimeoutexception)**
-> 函数 · [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
+> 函数 · [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement · R23-11
 
 **[TriggerTransmit](../communication/large_data_com/index.md#813-triggertransmit)**
 > 函数 · [AUTOSAR Large Data COM（大数据 COM）](../communication/large_data_com/index.md) · SWS_LargeDataCOM · R23-11

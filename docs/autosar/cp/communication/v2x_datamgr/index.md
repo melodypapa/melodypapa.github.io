@@ -396,7 +396,7 @@ V2x 对象元素的引用配置为 [V2xDMLink](#914-v2xdmlink)。容器的每个
 
 如果一条消息通过 **PduR** 或区域性 V2x 协议栈提供给 **V2xDM**，且 V2x 目录项被分配给该消息的一个 V2x 对象，则 **V2xDM** 将按照 [V2xDMMessage](#9113-v2xdmmessage) 的配置开始解码该消息，并将映射到相应 V2XCatalogItem 的 V2x 对象的 VariableDataPrototype 填充完毕。
 
-在解码 **ASN.1** 编码的 V2x 消息期间，对于每个设置了 CallbackEnabled 标志的 StructuredType（参见 V2xDMStructuredTypeSequenceOfCallbackEnabled、V2xDMStructuredTypeChoiceCallbackEnabled 或 V2xDMStructuredTypeSequenceCallbackEnabled），解码器应调用一个生成的回调函数。该回调函数的实现应是用户特定的（参见第 [7.7.4](#774-v2xdm_callback_stack_msg_type) 节）。如果该函数返回 E_OK，解码器继续其操作并解码 V2x 消息的下一个序列。任何其他返回值都会中止解码过程，且分配给该 V2x 消息的任何 V2x 对象都不会被指示给 **RTE**。
+在解码 **ASN.1** 编码的 V2x 消息期间，对于每个设置了 CallbackEnabled 标志的 StructuredType（参见 V2xDMStructuredTypeSequenceOfCallbackEnabled、V2xDMStructuredTypeChoiceCallbackEnabled 或 V2xDMStructuredTypeSequenceCallbackEnabled），解码器应调用一个生成的回调函数。该回调函数的实现应是用户特定的（参见第 [7.7.4](#774-v2xdm_callback_stackmsgtype) 节）。如果该函数返回 E_OK，解码器继续其操作并解码 V2x 消息的下一个序列。任何其他返回值都会中止解码过程，且分配给该 V2x 消息的任何 V2x 对象都不会被指示给 **RTE**。
 
 如果在 V2x 消息解码期间发生错误，则 **V2xDM** 应生成一个 RuntimeError，并以错误代码 V2xDM_E_DECODING_FAILURE 调用 Det_ReportRuntimeError。
 
@@ -473,7 +473,7 @@ V2x 对象元素的引用配置为 [V2xDMLink](#914-v2xdmlink)。容器的每个
 | 类别 | Structure | | |
 | 元素 | implementation specific | 类型 | - |
 | 元素 | 注释 | - | |
-| 描述 | 这是一个在生成的回调中使用的生成数据结构（参见第 [7.7.4](#774-v2xdm_callback_stack_msg_type) 节）。生成的结构名称将从 **EcuC** 配置中定义的各种容器名称派生：&lt;Stack&gt;：[V2xDMStack](#9112-v2xdmstack) 的容器名称；&lt;Msg&gt;：[V2xDMMessage](#9113-v2xdmmessage) 的容器名称；&lt;Type&gt;：回调所引用的 [V2xDMStructuredType](#9116-v2xdmstructuredtype) 的容器名称。 | | |
+| 描述 | 这是一个在生成的回调中使用的生成数据结构（参见第 [7.7.4](#774-v2xdm_callback_stackmsgtype) 节）。生成的结构名称将从 **EcuC** 配置中定义的各种容器名称派生：&lt;Stack&gt;：[V2xDMStack](#9112-v2xdmstack) 的容器名称；&lt;Msg&gt;：[V2xDMMessage](#9113-v2xdmmessage) 的容器名称；&lt;Type&gt;：回调所引用的 [V2xDMStructuredType](#9116-v2xdmstructuredtype) 的容器名称。 | | |
 | 可通过 | V2xDM.h 获得 | | |
 
 ### 7.4. 函数定义

@@ -6,7 +6,7 @@ title: "发布文档（Release Documentation）"
 
 ## 文章
 
-* [Release Overview（发布概览）](tr_release_overview/)
+* [Release Overview（发布概览）](tr_release_overview/index.md)
 
 ## 相关内容
 

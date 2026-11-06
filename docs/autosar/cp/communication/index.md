@@ -53,12 +53,12 @@ title: "通信（Communication）"
 ### FlexRay
 
 * [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](flexray_driver/index.md)
-* [AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）](flexray_ar_transport_layer/index.md)
-* [AUTOSAR FlexRay 接口（FlexRay Interface）](flexray_interface/index.md)
-* [AUTOSAR FlexRay 网络管理（FlexRay Network Management）](flexray_network_management/index.md)
-* [AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](flexray_state_manager/index.md)
+* [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](flexray_ar_transport_layer/index.md)
+* [AUTOSAR FlexRay Interface（FlexRay 接口）](flexray_interface/index.md)
+* [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](flexray_network_management/index.md)
+* [AUTOSAR FlexRay State Manager（FlexRay 状态管理器）](flexray_state_manager/index.md)
 * [AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](flexray_iso_transport_layer/index.md)
-* [AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）](flexray_transceiver_driver/index.md)
+* [AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）](flexray_transceiver_driver/index.md)
 
 ### 数据处理与安全
 

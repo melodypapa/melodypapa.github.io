@@ -1536,9 +1536,9 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**Fw_StreamHandleIdxConfiguration**](../security/firewall/index.md#742-fw_streamhandleidxconfiguration) | EthIf 成功设置交换机中的 StreamHandleIdx 后调用此函数。 |
 | [**Fw_StreamHandleIdxStatistics**](../security/firewall/index.md#741-fw_streamhandleidxstatistics) | EthIf 成功从交换机获取桶计数器值后调用此函数。 |
 
-## AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）（11）
+## AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）（11）
 
-来源：[AUTOSAR FlexRay AUTOSAR 传输层（FlexRay AUTOSAR Transport Layer）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer
+来源：[AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer
 
 | 函数 | 简述 |
 |---|---|
@@ -1593,27 +1593,9 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**Fr_StartCommunication**](../communication/flexray_driver/index.md#743-fr_startcommunication) | 启动通信。 |
 | [**Fr_TransmitTxLPdu**](../communication/flexray_driver/index.md#7411-fr_transmittxlpdu) | 在 FlexRay 网络上发送数据。 |
 
-## AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）（11）
+## AUTOSAR FlexRay Interface（FlexRay 接口）（43）
 
-来源：[AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer
-
-| 函数 | 简述 |
-|---|---|
-| [**FrTp_CancelReceive**](../communication/flexray_iso_transport_layer/index.md#7334-frtp_cancelreceive) | C |
-| [**FrTp_CancelTransmit**](../communication/flexray_iso_transport_layer/index.md#7332-frtp_canceltransmit) | C |
-| [**FrTp_ChangeParameter**](../communication/flexray_iso_transport_layer/index.md#7333-frtp_changeparameter) | C |
-| [**FrTp_GetVersionInfo**](../communication/flexray_iso_transport_layer/index.md#7311-frtp_getversioninfo) | C |
-| [**FrTp_Init**](../communication/flexray_iso_transport_layer/index.md#7321-frtp_init) | C |
-| [**FrTp_MainFunction**](../communication/flexray_iso_transport_layer/index.md#751-frtp_mainfunction) | C |
-| [**FrTp_RxIndication**](../communication/flexray_iso_transport_layer/index.md#742-frtp_rxindication) | C |
-| [**FrTp_Shutdown**](../communication/flexray_iso_transport_layer/index.md#7322-frtp_shutdown) | C |
-| [**FrTp_Transmit**](../communication/flexray_iso_transport_layer/index.md#7331-frtp_transmit) | C |
-| [**FrTp_TriggerTransmit**](../communication/flexray_iso_transport_layer/index.md#741-frtp_triggertransmit) | C |
-| [**FrTp_TxConfirmation**](../communication/flexray_iso_transport_layer/index.md#743-frtp_txconfirmation) | C |
-
-## AUTOSAR FlexRay 接口（FlexRay Interface）（43）
-
-来源：[AUTOSAR FlexRay 接口（FlexRay Interface）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface
+来源：[AUTOSAR FlexRay Interface（FlexRay 接口）](../communication/flexray_interface/index.md) · SWS_FlexRayInterface
 
 | 函数 | 简述 |
 |---|---|
@@ -1661,40 +1643,27 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**FrIf_StartCommunication**](../communication/flexray_interface/index.md#736-frif_startcommunication) | — |
 | [**FrIf_Transmit**](../communication/flexray_interface/index.md#7318-frif_transmit) | — |
 
-## AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）（11）
+## AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）（11）
 
-来源：[AUTOSAR FlexRay 收发器驱动（FlexRay Transceiver Driver）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver
-
-| 函数 | 简述 |
-|---|---|
-| [**FrTrcv_CheckWakeupByTransceiver**](../communication/flexray_transceiver_driver/index.md#737-frtrcv_checkwakeupbytransceiver) | — |
-| [**FrTrcv_ClearTransceiverWakeup**](../communication/flexray_transceiver_driver/index.md#736-frtrcv_cleartransceiverwakeup) | — |
-| [**FrTrcv_DisableTransceiverBranch**](../communication/flexray_transceiver_driver/index.md#739-frtrcv_disabletransceiverbranch) | — |
-| [**FrTrcv_EnableTransceiverBranch**](../communication/flexray_transceiver_driver/index.md#7310-frtrcv_enabletransceiverbranch) | — |
-| [**FrTrcv_GetTransceiverError**](../communication/flexray_transceiver_driver/index.md#738-frtrcv_gettransceivererror) | — |
-| [**FrTrcv_GetTransceiverMode**](../communication/flexray_transceiver_driver/index.md#733-frtrcv_gettransceivermode) | — |
-| [**FrTrcv_GetTransceiverWUReason**](../communication/flexray_transceiver_driver/index.md#734-frtrcv_gettransceiverwureason) | — |
-| [**FrTrcv_GetVersionInfo**](../communication/flexray_transceiver_driver/index.md#735-frtrcv_getversioninfo) | — |
-| [**FrTrcv_Init**](../communication/flexray_transceiver_driver/index.md#731-frtrcv_init) | — |
-| [**FrTrcv_MainFunction**](../communication/flexray_transceiver_driver/index.md#751-frtrcv_mainfunction) | — |
-| [**FrTrcv_SetTransceiverMode**](../communication/flexray_transceiver_driver/index.md#732-frtrcv_settransceivermode) | — |
-
-## AUTOSAR FlexRay 状态管理器（FlexRay State Manager）（6）
-
-来源：[AUTOSAR FlexRay 状态管理器（FlexRay State Manager）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager
+来源：[AUTOSAR FlexRay ISO Transport Layer（FlexRay ISO 传输层）](../communication/flexray_iso_transport_layer/index.md) · SWS_FlexRayISOTransportLayer
 
 | 函数 | 简述 |
 |---|---|
-| [**FrSM_AllSlots**](../communication/flexray_state_manager/index.md#735-frsm_allslots) | — |
-| [**FrSM_GetCurrentComMode**](../communication/flexray_state_manager/index.md#733-frsm_getcurrentcommode) | — |
-| [**FrSM_GetVersionInfo**](../communication/flexray_state_manager/index.md#734-frsm_getversioninfo) | — |
-| [**FrSM_Init**](../communication/flexray_state_manager/index.md#731-frsm_init) | — |
-| [**FrSM_RequestComMode**](../communication/flexray_state_manager/index.md#732-frsm_requestcommode) | — |
-| [**FrSM_SetEcuPassive**](../communication/flexray_state_manager/index.md#736-frsm_setecupassive) | — |
+| [**FrTp_CancelReceive**](../communication/flexray_iso_transport_layer/index.md#7334-frtp_cancelreceive) | C |
+| [**FrTp_CancelTransmit**](../communication/flexray_iso_transport_layer/index.md#7332-frtp_canceltransmit) | C |
+| [**FrTp_ChangeParameter**](../communication/flexray_iso_transport_layer/index.md#7333-frtp_changeparameter) | C |
+| [**FrTp_GetVersionInfo**](../communication/flexray_iso_transport_layer/index.md#7311-frtp_getversioninfo) | C |
+| [**FrTp_Init**](../communication/flexray_iso_transport_layer/index.md#7321-frtp_init) | C |
+| [**FrTp_MainFunction**](../communication/flexray_iso_transport_layer/index.md#751-frtp_mainfunction) | C |
+| [**FrTp_RxIndication**](../communication/flexray_iso_transport_layer/index.md#742-frtp_rxindication) | C |
+| [**FrTp_Shutdown**](../communication/flexray_iso_transport_layer/index.md#7322-frtp_shutdown) | C |
+| [**FrTp_Transmit**](../communication/flexray_iso_transport_layer/index.md#7331-frtp_transmit) | C |
+| [**FrTp_TriggerTransmit**](../communication/flexray_iso_transport_layer/index.md#741-frtp_triggertransmit) | C |
+| [**FrTp_TxConfirmation**](../communication/flexray_iso_transport_layer/index.md#743-frtp_txconfirmation) | C |
 
-## AUTOSAR FlexRay 网络管理（FlexRay Network Management）（30）
+## AUTOSAR FlexRay Network Management（FlexRay 网络管理）（30）
 
-来源：[AUTOSAR FlexRay 网络管理（FlexRay Network Management）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement
+来源：[AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../communication/flexray_network_management/index.md) · SWS_FlexRayNetworkManagement
 
 | 函数 | 简述 |
 |---|---|
@@ -1728,6 +1697,37 @@ title: "AUTOSAR API 函数清单（按模块）"
 | [**RemoteSleepCancellation**](../communication/flexray_network_management/index.md#7633-remotesleepcancellation) | — |
 | [**RemoteSleepIndication**](../communication/flexray_network_management/index.md#7634-remotesleepindication) | — |
 | [**TransmissionTimeoutException**](../communication/flexray_network_management/index.md#7635-transmissiontimeoutexception) | — |
+
+## AUTOSAR FlexRay State Manager（FlexRay 状态管理器）（6）
+
+来源：[AUTOSAR FlexRay State Manager（FlexRay 状态管理器）](../communication/flexray_state_manager/index.md) · SWS_FlexRayStateManager
+
+| 函数 | 简述 |
+|---|---|
+| [**FrSM_AllSlots**](../communication/flexray_state_manager/index.md#735-frsm_allslots) | — |
+| [**FrSM_GetCurrentComMode**](../communication/flexray_state_manager/index.md#733-frsm_getcurrentcommode) | — |
+| [**FrSM_GetVersionInfo**](../communication/flexray_state_manager/index.md#734-frsm_getversioninfo) | — |
+| [**FrSM_Init**](../communication/flexray_state_manager/index.md#731-frsm_init) | — |
+| [**FrSM_RequestComMode**](../communication/flexray_state_manager/index.md#732-frsm_requestcommode) | — |
+| [**FrSM_SetEcuPassive**](../communication/flexray_state_manager/index.md#736-frsm_setecupassive) | — |
+
+## AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）（11）
+
+来源：[AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）](../communication/flexray_transceiver_driver/index.md) · SWS_FlexRayTransceiverDriver
+
+| 函数 | 简述 |
+|---|---|
+| [**FrTrcv_CheckWakeupByTransceiver**](../communication/flexray_transceiver_driver/index.md#737-frtrcv_checkwakeupbytransceiver) | — |
+| [**FrTrcv_ClearTransceiverWakeup**](../communication/flexray_transceiver_driver/index.md#736-frtrcv_cleartransceiverwakeup) | — |
+| [**FrTrcv_DisableTransceiverBranch**](../communication/flexray_transceiver_driver/index.md#739-frtrcv_disabletransceiverbranch) | — |
+| [**FrTrcv_EnableTransceiverBranch**](../communication/flexray_transceiver_driver/index.md#7310-frtrcv_enabletransceiverbranch) | — |
+| [**FrTrcv_GetTransceiverError**](../communication/flexray_transceiver_driver/index.md#738-frtrcv_gettransceivererror) | — |
+| [**FrTrcv_GetTransceiverMode**](../communication/flexray_transceiver_driver/index.md#733-frtrcv_gettransceivermode) | — |
+| [**FrTrcv_GetTransceiverWUReason**](../communication/flexray_transceiver_driver/index.md#734-frtrcv_gettransceiverwureason) | — |
+| [**FrTrcv_GetVersionInfo**](../communication/flexray_transceiver_driver/index.md#735-frtrcv_getversioninfo) | — |
+| [**FrTrcv_Init**](../communication/flexray_transceiver_driver/index.md#731-frtrcv_init) | — |
+| [**FrTrcv_MainFunction**](../communication/flexray_transceiver_driver/index.md#751-frtrcv_mainfunction) | — |
+| [**FrTrcv_SetTransceiverMode**](../communication/flexray_transceiver_driver/index.md#732-frtrcv_settransceivermode) | — |
 
 ## AUTOSAR FlsTst（闪存测试驱动程序）（15）
 

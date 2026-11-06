@@ -1,5 +1,5 @@
 ---
-title: "AUTOSAR FlexRay 状态管理器（FlexRay State Manager）"
+title: "AUTOSAR FlexRay State Manager（FlexRay 状态管理器）"
 spec: AUTOSAR_CP_SWS_FlexRayStateManager
 release: R23-11
 ---
