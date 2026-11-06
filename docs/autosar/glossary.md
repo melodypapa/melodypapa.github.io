@@ -348,6 +348,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Specification of CRC Routines（CRC 例程规范）](cp/libraries/crc/index.md)（SWS_CRCLibrary）
 {: .glossary-source}
 
+**Allowlist**
+> 在模式匹配的情况下允许网络数据包通过的 Firewall Rule 的集合。
+>
+> 来源：[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
+{: .glossary-source}
+
 **AN**
 > 关联编号（**Association Number**）。
 >
@@ -393,7 +399,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Application ID**
 > 一个应用/**SW-C** 的缩写，标识一条日志和跟踪消息所来自的应用/**SW-C**；由四个 8 位 ASCII 字符组成。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
 {: .glossary-source}
 
 **Application Interface**
@@ -818,6 +824,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Requirements on E2E（端到端通信保护需求）](foundation/communication_management/rs_e2e/index.md)（AUTOSAR_FO_RS_E2E）
 {: .glossary-source}
 
+**Blocklist**
+> 在模式匹配的情况下阻止网络数据包的 Firewall Rule 的集合。
+>
+> 来源：[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
+{: .glossary-source}
+
 **Binary Manifest**
 > 软件集群的二进制对象的定义良好的接口，提供资源的元信息与访问此类资源的句柄（**Binary Manifest**）
 >
@@ -917,7 +929,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **BswM**
 > 基础软件模式管理器（**Basic Software Mode Manager**）
 >
-> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR J1939Nm（SAE J1939 网络管理）](cp/communication/j1939nm/index.md)（AUTOSAR_CP_SWS_SAEJ1939NetworkManagement）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）
+> 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR J1939Nm（SAE J1939 网络管理）](cp/communication/j1939nm/index.md)（AUTOSAR_CP_SWS_SAEJ1939NetworkManagement）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
 {: .glossary-source}
 
 **BSWMD**
@@ -1426,6 +1438,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR SomeIpXf（SOME/IP转换器）](cp/communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）
 {: .glossary-source}
 
+**Clock**
+> 由时基（无论是否与外部源同步）与能够周期性改变其输出电平状态的硬件组合而成的单元。
+>
+> 来源：[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
+{: .glossary-source}
+
 **Cluster Signal**
 > 簇信号表示某个特定通信簇上的聚合系统信号。簇信号可以独立于帧来定义。这允许一种开发方法论：先定义信号，然后在后续阶段将信号分配到帧。
 >
@@ -1663,19 +1681,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Context Data**
 > 与安全事件（**SEv**）相关的可选信息，提供对安全事件的更广泛理解（例如被损坏的数据）；其内容和编码由传感器外部定义，**IdsM** 模块不知晓。
 >
-> 来源：[Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](foundation/protocols/prs_intrusion_detection_system/index.md)（AUTOSAR_FO_PRS_IntrusionDetectionSystem）
+> 来源：[Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](foundation/protocols/prs_intrusion_detection_system/index.md)（AUTOSAR_FO_PRS_IntrusionDetectionSystem）、[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **Context Data Buffer**
 > 大小可变的缓冲区，以适配 **SEv** 上下文数据的需要。
 >
-> 来源：[Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](foundation/protocols/prs_intrusion_detection_system/index.md)（AUTOSAR_FO_PRS_IntrusionDetectionSystem）
+> 来源：[Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](foundation/protocols/prs_intrusion_detection_system/index.md)（AUTOSAR_FO_PRS_IntrusionDetectionSystem）、[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **Context ID**
 > 一个用户定义的标识符，用于对一个应用/**SW-C** 生成的日志和跟踪消息进行分组；Context ID 按 Application ID 分组，且在一个 Application ID 内唯一。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
 {: .glossary-source}
 
 **Continuous Transmission**
@@ -1751,7 +1769,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **CRC**
-> 循环冗余校验（**Cyclic Redundancy Check**）
+> 循环冗余校验（**Cyclic Redundancy Check**）、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR RamTst（RAM测试）](cp/memory/ramtst/index.md)（AUTOSAR_CP_SWS_RAMTest）、[Specification of CRC Routines（CRC 例程规范）](cp/libraries/crc/index.md)（SWS_CRCLibrary）
 {: .glossary-source}
@@ -1974,6 +1992,18 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
 {: .glossary-source}
 
+**DDS**
+> 数据分发服务（**Data Distribution Service**）。
+>
+> 来源：[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
+{: .glossary-source}
+
+**DDS-RTPS**
+> DDS 实时发布订阅协议（**DDS Real-Time Publish Subscribe Protocol**）。
+>
+> 来源：[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
+{: .glossary-source}
+
 **DDS PDU** / **非 DDS PDU**
 > 包含/不包含 **DDS** 数据的 **PDU**（例如：列出或未列在 **DdsAppDataTxPduCollection**、**DdsAppDataRxPduCollection**、**DdsDomainParticipantUnicastRtpsPduCollection** 或 **DdsDomainParticipantMulticastRtpsPduCollection** 容器中的 **PDU**）。
 >
@@ -2041,7 +2071,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **DEM**
-> 诊断事件管理器（**Diagnostic Event Manager**）。
+> 诊断事件管理器（**Diagnostic Event Manager**）。、[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
 >
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR ADC Driver（模数转换器驱动）](cp/io/adc_driver/index.md)（SWS_ADCDriver）、[AUTOSAR MCU Driver（微控制器单元驱动）](cp/mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR CoreTest（内核测试）](cp/mcal/core_test/index.md)（SWS_CoreTest）、[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](cp/communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR Large Data COM（大数据 COM）](cp/communication/large_data_com/index.md)（SWS_LargeDataCOM）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[E2E Transformer (E2E转换器)](cp/communication/e2e_transformer/index.md)（AUTOSAR_CP_SWS_E2ETransformer）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR J1939Nm（SAE J1939 网络管理）](cp/communication/j1939nm/index.md)（AUTOSAR_CP_SWS_SAEJ1939NetworkManagement）、[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）、[AUTOSAR V2X Management（V2X管理）](cp/communication/v2x_mgmt/index.md)（AUTOSAR_CP_SWS_V2XManagement）
 {: .glossary-source}
@@ -2155,7 +2185,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **DID**
-> 数据标识符（**Data Identifier**）
+> 数据标识符（**Data Identifier**）、[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
@@ -2233,7 +2263,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **DM**
-> **AUTOSAR** 自适应诊断管理（**AUTOSAR Adaptive Diagnostic Management**）。
+> **AUTOSAR** 自适应诊断管理（**AUTOSAR Adaptive Diagnostic Management**）。、[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
 >
 > 来源：[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
@@ -2254,6 +2284,15 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > SAE J1939 诊断消息（**SAE J1939 Diagnostic Message**），定义于 SAE J1939-73，多数由灯状态（Lamp Status）与可变数量的 DTC 组成
 >
 > 来源：[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](cp/diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）
+{: .glossary-source}
+
+**DoIP**
+> 基于 **IP** 的诊断（**Diagnostic over IP**）——标准化为 ISO 13400 的诊断服务传输协议。
+>
+> 来源：[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
+> 基于 IP 的诊断（**Diagnostics over IP**）。
+>
+> 来源：[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
 {: .glossary-source}
 
 **DoS**
@@ -2519,7 +2558,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ECU ID**
 > 一个 ECU 的名称，由四个 8 位 ASCII 字符组成（例如 ABS0 或 COMB）。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
 {: .glossary-source}
 
 **ECU Instance**
@@ -2604,6 +2643,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 表示**存活监督**、**时限监督**或**逻辑监督**当前状态的状态，基于对该监督的评估（正确/错误）。
 >
 > 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
+{: .glossary-source}
+
+**EM**
+> 执行管理（**Execution Management**）。
+>
+> 来源：[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
 {: .glossary-source}
 
 **eMAID**
@@ -2706,7 +2751,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **EthIf**
 > Ethernet Interface（**AUTOSAR BSW** 模块）。
 >
-> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](cp/communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR Ethernet Interface（以太网接口）](cp/communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）
+> 来源：[AUTOSAR Ethernet Transceiver Driver（以太网收发器驱动程序）](cp/communication/eth_trcv/index.md)（SWS_EthernetTransceiverDriver）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR Ethernet Interface（以太网接口）](cp/communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
 {: .glossary-source}
 
 **EthSM**
@@ -2754,7 +2799,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Event Buffer**
 > 临时存储已上报 **SEv** 的缓冲区。
 >
-> 来源：[Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](foundation/protocols/prs_intrusion_detection_system/index.md)（AUTOSAR_FO_PRS_IntrusionDetectionSystem）
+> 来源：[Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](foundation/protocols/prs_intrusion_detection_system/index.md)（AUTOSAR_FO_PRS_IntrusionDetectionSystem）、[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **Event Chain**
@@ -2910,7 +2955,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **External client**
 > 一种控制、监视和存储使用 **Dlt** 模块的 ECU 所提供的日志/跟踪消息的工具。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
 {: .glossary-source}
 
 **External device**
@@ -3131,10 +3176,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR FlexRay Driver（FlexRay 驱动程序）](cp/communication/flexray_driver/index.md)（SWS_FlexRayDriver）
 {: .glossary-source}
 
+**Filter**
+> 安全事件的修饰器，可以丢弃或改变传入的 **SEv**。
+>
+> 来源：[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
+{: .glossary-source}
+
 **Filter Chain**
 > 施加于安全事件的一组连续过滤器（**A set of consecutive filters which is applied to Security Events**）。
 >
-> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **FIM**
@@ -3170,7 +3221,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Firewall**
 > 汽车以太网防火墙——监控流入/流出网络流量并授予或拒绝 **ECU** 之间或网络区域之间网络访问的网络安全设备。
 >
-> 来源：[Requirements on Firewall（防火墙需求）](foundation/security/rs_firewall/index.md)（AUTOSAR_FO_RS_Firewall）、[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+> 来源：[Requirements on Firewall（防火墙需求）](foundation/security/rs_firewall/index.md)（AUTOSAR_FO_RS_Firewall）、[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）、[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
+{: .glossary-source}
+
+**Firewall Rule**
+> 网络数据包的期望值模式，以及在网络数据包匹配该模式时所执行的相关联的动作（例如阻止或允许该网络数据包）。
+>
+> 来源：[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
+{: .glossary-source}
+
+**Firewall State**
+> 反映车辆当前状态（例如行驶中、处于诊断会话中等）的防火墙状态，可由用户应用设置；基于当前激活的 Firewall State，与当前车辆状态匹配的特定一组 Firewall Rule 处于激活状态。
+>
+> 来源：[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
 {: .glossary-source}
 
 **Flag**
@@ -3474,7 +3537,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **FV**
-> 新鲜度值（**Freshness Value**）——用于确保安全 I-PDU 新鲜度的单调计数器或时间戳值。
+> 新鲜度值（**Freshness Value**）——用于确保安全 I-PDU 新鲜度的单调计数器或时间戳值。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[Secure Onboard Communication Protocol Specification（安全车载通信协议规范）](foundation/protocols/prs_secoc_protocol/index.md)（AUTOSAR_FO_PRS_SecOcProtocol）
 {: .glossary-source}
@@ -3483,6 +3546,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 新鲜度值长度（**Freshness Value Length**）。
 >
 > 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
+{: .glossary-source}
+
+**FVM**
+> 新鲜度值管理器（**Freshness Value Manager**）。
+>
+> 来源：[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 {: .glossary-source}
 
 **FV**（**Freshness Value**）
@@ -3566,7 +3635,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **Global Time Master**
-> 全局时间主节点（**Global Time Master**）。某时基的系统级源头，其时基值通过网络分发给各时基从节点。
+> 全局时间主节点（**Global Time Master**）。某时基的系统级源头，其时基值通过网络分发给各时基从节点。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
@@ -3990,7 +4059,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **ICV**
-> 完整性校验值（**Integrity Check Value**）。为时间同步报文提供完整性和真实性保护的校验值。
+> 完整性校验值（**Integrity Check Value**）。为时间同步报文提供完整性和真实性保护的校验值。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](cp/globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on IPsec Protocol（IPsec 协议需求）](foundation/protocols/rs_ipsec_protocol/index.md)（AUTOSAR_FO_RS_IPsecProtocol）、[Requirements on MACsec（MACsec 需求）](foundation/communication_management/rs_macsec/index.md)（AUTOSAR_FO_RS_MACsec）
 {: .glossary-source}
@@ -4019,6 +4088,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**IDL**
+> 接口描述语言（**Interface Description Language**）。
+>
+> 来源：[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
+{: .glossary-source}
+
 **IDPS**
 > 入侵检测与防御系统（**Intrusion Detection and Prevention System**）——针对 **IDS** 传感器检测并上报的合格安全事件采取预定义预防措施的安全控制。
 >
@@ -4028,7 +4103,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **IDS**
 > 入侵检测系统（**Intrusion Detection System**）——对车辆电子系统中安全事件的检测体系。
 >
-> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）、[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Requirements on Firewall（防火墙需求）](foundation/security/rs_firewall/index.md)（AUTOSAR_FO_RS_Firewall）
+> 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）、[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Requirements on Firewall（防火墙需求）](foundation/security/rs_firewall/index.md)（AUTOSAR_FO_RS_Firewall）、[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
 {: .glossary-source}
 
 **IDS Message**
@@ -4040,13 +4115,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **IdsM**
 > 入侵检测系统管理器（**Intrusion Detection System Manager**）。
 >
-> 来源：[AUTOSAR Key Manager（密钥管理器）](cp/crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）、[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Requirements on Firewall（防火墙需求）](foundation/security/rs_firewall/index.md)（AUTOSAR_FO_RS_Firewall）
+> 来源：[AUTOSAR Key Manager（密钥管理器）](cp/crypto/key_manager/index.md)（SWS_KeyManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR Mka（MACsec 密钥协商）](cp/communication/macsec/index.md)（AUTOSAR_CP_SWS_MACsecKeyAgreement）、[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）、[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Requirements on Firewall（防火墙需求）](foundation/security/rs_firewall/index.md)（AUTOSAR_FO_RS_Firewall）、[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
 {: .glossary-source}
 
 **IdsR**
 > 入侵检测系统报告器（**Intrusion Detection System Reporter**）——处理从 **IdsM** 实例接收到的合格安全事件。
 >
-> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
 {: .glossary-source}
 
 **&lt;Ie&gt;**
@@ -4340,7 +4415,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **IP**
 > Internet Protocol —— 互联网协议。
 >
-> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](cp/communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR Ethernet Interface（以太网接口）](cp/communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](cp/communication/cellularv2x_driver/index.md)（AUTOSAR_CP_SWS_CellularV2XDriver）、[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](cp/communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR Ethernet Interface（以太网接口）](cp/communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR Cellular V2X Driver（蜂窝V2X驱动程序）](cp/communication/cellularv2x_driver/index.md)（AUTOSAR_CP_SWS_CellularV2XDriver）、[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）、[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
 {: .glossary-source}
 
 **IPC**
@@ -4721,6 +4796,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）、[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
 
+**Log**
+> 用户按需生成的消息：每当用户想展示关于状态变化或值变化的某些信息时，向 **LT** 添加一个 **API** 调用。
+>
+> 来源：[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
+{: .glossary-source}
+
 **Log and Trace**
 > 日志与跟踪（**Log and Trace**）为应用提供接口，用于将日志和跟踪信息转发到通信总线、控制台或文件系统。
 >
@@ -4730,13 +4811,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Log and trace level**
 > 日志级别为日志消息的严重程度定义了一种分类。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
 {: .glossary-source}
 
 **Log and trace message**
 > 包含描述软件中一个日志和跟踪事件的所有数据和选项的消息；由头部和载荷组成。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
 {: .glossary-source}
 
 **Log Channel**
@@ -5017,7 +5098,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Message ID**
 > 用于表征消息自身所传输信息的 ID；唯一地标识一种日志或跟踪消息，并在开发或配置时静态固定。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
 {: .glossary-source}
 
 **Meta-class**
@@ -5481,7 +5562,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **NM**
 > 网络管理（**Network Management**）
 >
-> 来源：[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[Network Management Protocol Specification（网络管理协议规范）](foundation/protocols/prs_network_management_protocol/index.md)（AUTOSAR_FO_PRS_NetworkManagementProtocol）
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[Network Management Protocol Specification（网络管理协议规范）](foundation/protocols/prs_network_management_protocol/index.md)（AUTOSAR_FO_PRS_NetworkManagementProtocol）、[Requirements on Network Management（网络管理需求）](foundation/communication_management/rs_network_management/index.md)（AUTOSAR_FO_RS_NetworkManagement）
 {: .glossary-source}
 
 **Nm**
@@ -5502,10 +5583,22 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**Nm instance**
+> 一个 Nm 实例表示一个 Nm 节点内部一个 Nm 集群的当前状态。
+>
+> 来源：[Requirements on Network Management（网络管理需求）](foundation/communication_management/rs_network_management/index.md)（AUTOSAR_FO_RS_NetworkManagement）
+{: .glossary-source}
+
 **NM Message**
 > 最抽象的术语，指在NM算法的方法论中传输的任何单个信息项。
 >
-> 来源：[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）
+> 来源：[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[Requirements on Network Management（网络管理需求）](foundation/communication_management/rs_network_management/index.md)（AUTOSAR_FO_RS_NetworkManagement）
+{: .glossary-source}
+
+**Nm Node**
+> 连接到一个或多个 Nm 集群的 **ECU**（电子控制单元）。
+>
+> 来源：[Requirements on Network Management（网络管理需求）](foundation/communication_management/rs_network_management/index.md)（AUTOSAR_FO_RS_NetworkManagement）
 {: .glossary-source}
 
 **NM Packet**
@@ -5535,7 +5628,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **NM-Cluster**
 > 使用NM算法协调的NM节点的集合。
 >
-> 来源：[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）
+> 来源：[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[Requirements on Network Management（网络管理需求）](foundation/communication_management/rs_network_management/index.md)（AUTOSAR_FO_RS_NetworkManagement）
 {: .glossary-source}
 
 **NM-Coordinator**
@@ -5715,7 +5808,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **OBD**
-> 车载诊断（**On-board Diagnostics**）。
+> 车载诊断（**On-board Diagnostics**）。、[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
 >
 > 来源：[AUTOSAR FiM（功能禁止管理器）](cp/system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）
 {: .glossary-source}
@@ -5799,7 +5892,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **Offset Time Base**
-> 只与其底层同步时基结合存在的时基；其绝对时间值由偏移时基的偏移时间值加上底层同步时基的时间值得到。
+> 只与其底层同步时基结合存在的时基；其绝对时间值由偏移时基的偏移时间值加上底层同步时基的时间值得到。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
@@ -5808,6 +5901,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 偏移调整报文（Offset adjustment message）。
 >
 > 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](cp/globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）
+{: .glossary-source}
+
+**OFS**
+> 偏移同步（**Offset synchronization**）。
+>
+> 来源：[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 {: .glossary-source}
 
 **OFS message**
@@ -5820,6 +5919,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 对象标识符（**Object Identifier**）。
 >
 > 来源：[AUTOSAR Key Manager（密钥管理器）](cp/crypto/key_manager/index.md)（SWS_KeyManager）
+{: .glossary-source}
+
+**OSI Layer**
+> 按照 ISO/IEC 7498 中规定的 **ISO OSI** 模型的网络层。
+>
+> 来源：[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
 {: .glossary-source}
 
 **Onboard Security Event**
@@ -6041,7 +6146,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **PDU**
-> 协议数据单元（**Protocol Data Unit**）
+> 协议数据单元（**Protocol Data Unit**）、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[Layered Software Architecture（分层软件架构）](cp/general/layered_software_architecture/index.md)（AUTOSAR_CP_EXP_LayeredSoftwareArchitecture）、[VFB（虚拟功能总线）](cp/general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）、[AUTOSAR L-SDU Router（链路层 SDU 路由模块）](cp/communication/lsdu_router/index.md)（SWS_LSduRouter）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR PduR (PDU Router)](cp/communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR CanTp（CAN传输层）](cp/communication/cantp/index.md)（AUTOSAR_CP_SWS_CANTransportLayer）、[AUTOSAR SAE J1939 Diagnostic Communication Manager（SAE J1939 诊断通信管理器）](cp/diagnostics/j1939dcm/index.md)（SWS_SAEJ1939DiagnosticCommunicationManager）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）、[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）
 {: .glossary-source}
@@ -6110,6 +6215,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 将**I-PDU**从一个模块传输到另一个模块的模块。PDU路由器模块可用于网关操作和内部路由目的。
 >
 > 来源：[AUTOSAR PduR (PDU Router)](cp/communication/pdu_router/index.md)（AUTOSAR_CP_SWS_PduR）
+{: .glossary-source}
+
+**PER**
+> 持久化（**Persistency**）。
+>
+> 来源：[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
 {: .glossary-source}
 
 **Performance**
@@ -6307,7 +6418,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **PNI**
 > 部分网络信息（**Partial Network Information**）
 >
-> 来源：[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[Network Management Protocol Specification（网络管理协议规范）](foundation/protocols/prs_network_management_protocol/index.md)（AUTOSAR_FO_PRS_NetworkManagementProtocol）
+> 来源：[AUTOSAR CAN NM（CAN网络管理）](cp/communication/can_network_management/index.md)（AUTOSAR_CP_SWS_CANNetworkManagement）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[Network Management Protocol Specification（网络管理协议规范）](foundation/protocols/prs_network_management_protocol/index.md)（AUTOSAR_FO_PRS_NetworkManagementProtocol）、[Requirements on Network Management（网络管理需求）](foundation/communication_management/rs_network_management/index.md)（AUTOSAR_FO_RS_NetworkManagement）
 {: .glossary-source}
 
 **PNL**
@@ -6591,7 +6702,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **QSEv**
 > 合格安全事件（**Qualified Security Event**）——通过其过滤器链的安全事件。
 >
-> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Requirements on Firewall（防火墙需求）](foundation/security/rs_firewall/index.md)（AUTOSAR_FO_RS_Firewall）
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Requirements on Firewall（防火墙需求）](foundation/security/rs_firewall/index.md)（AUTOSAR_FO_RS_Firewall）、[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 ## R
@@ -6645,7 +6756,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **Rate Correction**
-> 补偿速率偏差所需的因子。
+> 补偿速率偏差所需的因子。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
@@ -6994,6 +7105,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）
 {: .glossary-source}
 
+**S2S**
+> 信号到服务（**Signal to Service**）。
+>
+> 来源：[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
+{: .glossary-source}
+
 **SA**
 > 安全关联（**Security Association**）。
 >
@@ -7261,7 +7378,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Security Event Type**
 > 安全事件类型（**Security Event Type**）——可通过其安全事件类型 ID 标识；其实例称为安全事件并共享同一类型 ID。
 >
-> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **Security Sensors**
@@ -7273,7 +7390,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SecXT**
 > 安全提取（**Security Extract**）——规定哪些安全事件由 **IdsM** 实例处理及其配置参数。
 >
-> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **SecY**
@@ -7297,7 +7414,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Sem**
 > 安全事件存储器（**Security Event Memory**）——独立于主诊断事件存储器的用户定义诊断事件存储器。
 >
-> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **Sender-Receiver Communication**
@@ -7316,6 +7433,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 发送方-接收方接口（**Sender-Receiver Interface**）是一种特殊的"端口接口"（**Port Interface**），用于"发送方-接收方通信"（**Sender-Receiver Communication**）的情形。发送方-接收方接口定义了由发送组件（拥有提供该发送方-接收方接口的 p 端口）发送、或由接收组件（拥有需要该发送方-接收方接口的 r 端口）接收的数据元素。
 >
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+{: .glossary-source}
+
+**Sensor**
+> 向 **IdsM** 模块通知 **SEv** 的报告主体。它可以是一个 **BSW** 模块、一个专有的 **CDD** 或一个 **SW-C** 应用。
+>
+> 来源：[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **Sensor/Actuator SW-Component**
@@ -7423,7 +7546,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Session ID**
 > 一个日志或跟踪会话的标识编号。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
 {: .glossary-source}
 
 **Setter**
@@ -7435,7 +7558,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SEv**
 > 安全事件（**Security Event**）——由 **BSW** 或 **SWC** 向 **IdsM** 上报的安全事件类型的实例。
 >
-> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Requirements on Firewall（防火墙需求）](foundation/security/rs_firewall/index.md)（AUTOSAR_FO_RS_Firewall）
+> 来源：[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）、[Requirements on Firewall（防火墙需求）](foundation/security/rs_firewall/index.md)（AUTOSAR_FO_RS_Firewall）、[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）、[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **SF**
@@ -7454,6 +7577,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 特殊功能寄存器（**Special Function Register**），**MCU** 寄存器
 >
 > 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](cp/mcal/mcu_driver/index.md)（SWS_MCUDriver）、[AUTOSAR CAN Driver（CAN驱动程序）](cp/communication/can_driver/index.md)（AUTOSAR_CP_SWS_CANDriver）
+{: .glossary-source}
+
+**SG**
+> 安全目标（**Safety Goal**）。
+>
+> 来源：[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
 {: .glossary-source}
 
 **SGW**
@@ -7478,7 +7607,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **SID**
-> 服务标识符（**Service Identifier**）。
+> 服务标识符（**Service Identifier**）。、[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
 >
 > 来源：[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）、[AUTOSAR LinIf (LIN Interface)](cp/communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
 {: .glossary-source}
@@ -7487,6 +7616,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 安全事件与事件管理（**Security Incident and Event Management**）系统，作为安全运营中心的一部分，解读从 **IdsM** 实例接收到的二进制数据。
 >
 > 来源：[Requirements on Security Extract Template（安全提取模板需求）](foundation/methodology_templates/rs_security_extract_template/index.md)（AUTOSAR_FO_RS_SecurityExtractTemplate）、[Requirements on Intrusion Detection System（入侵检测系统需求）](foundation/security/rs_intrusion_detection_system/index.md)（AUTOSAR_FO_RS_IntrusionDetectionSystem）
+{: .glossary-source}
+
+**Sink**
+> **QSEv** 的目的地。根据配置，**QSEv** 可以被持久化、传播或二者兼有。
+>
+> 来源：[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
 {: .glossary-source}
 
 **Signal**
@@ -7565,6 +7700,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 对看门狗硬件的触发可以以较长的超时期限完成。例如，该模式可用于系统启动/初始化阶段。例如，看门狗硬件被配置为翻转模式（对触发的时间点没有约束）且超时期限为 20 毫秒。
 >
 > 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）
+{: .glossary-source}
+
+**SM**
+> 状态管理（**State Management**）。
+>
+> 来源：[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
 {: .glossary-source}
 
 **SN**
@@ -7678,7 +7819,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SOME/IP**
 > 可扩展的面向服务的基于IP的中间件（**Scalable service-Oriented MiddlwarE over IP**）。
 >
-> 来源：[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR SomeIpXf（SOME/IP转换器）](cp/communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）、[AUTOSAR SomeIpTp（SOME/IP传输协议）](cp/communication/someiptp/index.md)（AUTOSAR_CP_SWS_SOMEIPTransportProtocol）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Requirements on SOME/IP Protocol（SOME/IP 协议需求）](foundation/protocols/rs_someip_protocol/index.md)（AUTOSAR_FO_RS_SOMEIPProtocol）
+> 来源：[AUTOSAR SD（服务发现）](cp/communication/service_discovery/index.md)（AUTOSAR_CP_SWS_ServiceDiscovery）、[AUTOSAR SomeIpXf（SOME/IP转换器）](cp/communication/someipxf/index.md)（AUTOSAR_CP_SWS_SOMEIPTransformer）、[AUTOSAR SomeIpTp（SOME/IP传输协议）](cp/communication/someiptp/index.md)（AUTOSAR_CP_SWS_SOMEIPTransportProtocol）、[Explanation of System Health Monitoring（系统健康监控说明）](foundation/health_monitoring/exp_system_health_monitoring/index.md)（AUTOSAR_FO_EXP_SystemHealthMonitoring）、[Requirements on SOME/IP Protocol（SOME/IP 协议需求）](foundation/protocols/rs_someip_protocol/index.md)（AUTOSAR_FO_RS_SOMEIPProtocol）、[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
 {: .glossary-source}
 
 **SOME/IP-SD**
@@ -8024,7 +8165,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **SWC**
-> 软件组件（**SoftWare Component**）
+> 软件组件（**SoftWare Component**）、[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
 >
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）
 {: .glossary-source}
@@ -8063,6 +8204,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > ECU信号的符号名称（**Symbolic name**）在**I/O**硬件抽象模块中是用来建立链接的。（包括：功能、引脚等）
 >
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）
+{: .glossary-source}
+
+**Sync**
+> 时间同步消息（**Sync**）。
+>
+> 来源：[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 {: .glossary-source}
 
 **SYNC Ingress Processing Delay**
@@ -8175,6 +8322,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 
 ## T
 
+**TA**
+> 目标地址（**Target Address**，**ECU** 的诊断地址）。
+>
+> 来源：[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
+{: .glossary-source}
+
 **Target time**
 > 目标时间：到达该值时应有某事发生。其行为取决于配置和已启用的功能。
 >
@@ -8193,10 +8346,16 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR V2X GeoNetworking（V2X地理网络）](cp/communication/v2x_geonet/index.md)（AUTOSAR_CP_SWS_V2XGeoNetworking）
 {: .glossary-source}
 
+**TCAM**
+> 三态内容寻址存储器（**Ternary content-addressable memory**）。
+>
+> 来源：[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
+{: .glossary-source}
+
 **TCP**
 > Transmission Control Protocol —— 传输控制协议。
 >
-> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](cp/communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR Ethernet Interface（以太网接口）](cp/communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](cp/communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR Ethernet Interface（以太网接口）](cp/communication/ethernet_interface/index.md)（AUTOSAR_CP_SWS_EthernetInterface）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
 {: .glossary-source}
 
 **TCP socket connection**
@@ -8247,20 +8406,44 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR GPT Driver（通用定时器驱动）](cp/mcal/gpt_driver/index.md)（SWS_GPTDriver）、[AUTOSAR LinIf (LIN Interface)](cp/communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
 {: .glossary-source}
 
+**Time**
+> 每条日志和跟踪消息都可以包含的一个时间属性。它是一个自由定义的时间值，是自 **ECU** 启动以来的时间。
+>
+> 来源：[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
+{: .glossary-source}
+
+**Time Base**
+> 一个唯一的时间实体，其特征在于：时间的推进（即速率以及时间值在某些时间点的绝对变化）、所有权、以及与物理世界的参照（相对时间或绝对时间）。
+>
+> 来源：[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
+{: .glossary-source}
+
 **Time Base Customer**
 > 同步时基管理器支持的 3 种时基客户：主动型客户、触发型客户、通知型客户。
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
 
+**Time Correction**
+> 在时间从节点中，时间校正是将时基本地实例的值调整到全局时基的值的过程；在时间主节点中，是消除偏移时钟相对于其对应同步时基的偏差的过程。分为速率校正与偏移校正（后者可再分为跳变校正和速率适配）。
+>
+> 来源：[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
+{: .glossary-source}
+
+**Time Domain**
+> 表示哪些组件（例如节点、通信系统）与某个时基相关联。一个时域可以包含零个或多个时子域。
+>
+> 来源：[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
+{: .glossary-source}
+
 **Time Gateway**
-> 被一个时基从节点和一个或多个时基主节点引用的时基；Timesync 报文不直接穿过时间网关路由，因为路由延迟需要被补偿。
+> 被一个时基从节点和一个或多个时基主节点引用的时基；Timesync 报文不直接穿过时间网关路由，因为路由延迟需要被补偿。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
 
 **Time Master**
-> 某时基的主节点实体，作为该时基的源，将其传播给通信网络某个区段内的一组时基从节点。
+> 某时基的主节点实体，作为该时基的源，将其传播给通信网络某个区段内的一组时基从节点。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
@@ -8278,7 +8461,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **Time Slave**
-> 基于由相应 Timesync 模块提供的全局时基值来更新其内部维护的本地时基的角色。
+> 基于由相应 Timesync 模块提供的全局时基值来更新其内部维护的本地时基的角色。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
@@ -8319,8 +8502,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Time Service（时间服务）](cp/system_services/time_service/index.md)（SWS_TimeService）
 {: .glossary-source}
 
+**Timestamp Provider**
+> 提供时间戳的服务或软件组件，例如 **CP** 中的 **StbM**。
+>
+> 来源：[Intrusion Detection System Manager（入侵检测系统管理器）](cp/security/idsm/index.md)（SWS_IntrusionDetectionSystemManager）
+{: .glossary-source}
+
 **Timesync**
-> 时间同步（**Time Synchronization**）。
+> 时间同步（**Time Synchronization**）。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
@@ -8335,6 +8524,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 传输层安全（**Transport Layer Security**）。
 >
 > 来源：[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）
+{: .glossary-source}
+
+**TLSR**
+> 顶层安全需求（**Top Level Safety Requirement**）。
+>
+> 来源：[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
 {: .glossary-source}
 
 **TLV**
@@ -8437,6 +8632,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 可信平台模块（**Trusted Platform Module**）
 >
 > 来源：[Specification of Secure Hardware Extensions（安全硬件扩展规范）](foundation/security/tr_secure_hardware_extensions/index.md)（AUTOSAR_FO_TR_SecureHardwareExtensions）
+
+**Trace**
+> 可以通过对代码插桩生成的消息（例如 **VFB** 跟踪）。被插桩的代码调用 **LT** 的 **API**。
+>
+> 来源：[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
 {: .glossary-source}
 
 **Trace Message**
@@ -8511,6 +8711,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](cp/communication/ieee1722tp/index.md)（AUTOSAR_CP_SWS_IEEE1722TransportLayer）、[Requirements on IEEE1722（IEEE 1722 需求）](foundation/communication_management/rs_ieee1722/index.md)（AUTOSAR_FO_RS_IEEE1722）
 {: .glossary-source}
 
+**TSP**
+> 时间同步提供者（**Time Synchronization Provider**）。
+>
+> 来源：[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
+{: .glossary-source}
+
 **TSpec**
 > 流量规范（**Traffic specification**），定义于 IEEE Std 802.1Q-2022。
 >
@@ -8573,10 +8779,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR MCU Driver（微控制器单元驱动）](cp/mcal/mcu_driver/index.md)（SWS_MCUDriver）
 {: .glossary-source}
 
+**UCM**
+> 更新和配置管理（**Update and Configuration Management**）。
+>
+> 来源：[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
+> 更新与配置管理（**Update & Configuration Management**）。
+>
+> 来源：[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
+{: .glossary-source}
+
 **UDP**
 > User Datagram Protocol —— 用户数据报协议。
 >
-> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](cp/communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）、[AUTOSAR V2X GeoNetworking（V2X地理网络）](cp/communication/v2x_geonet/index.md)（AUTOSAR_CP_SWS_V2XGeoNetworking）
+> 来源：[AUTOSAR DoIP（基于 IP 的诊断）](cp/communication/diagnostic_over_ip/index.md)（SWS_DiagnosticOverIP）、[AUTOSAR UdpNm (UDP Network Management)](cp/communication/udp_network_management/index.md)（AUTOSAR_CP_SWS_UDPNetworkManagement）、[AUTOSAR TcpIp（TCP/IP协议栈）](cp/communication/tcpip/index.md)（AUTOSAR_CP_SWS_TcpIp）、[AUTOSAR V2X Basic Transport（V2X基本传输协议）](cp/communication/v2x_basictp/index.md)（AUTOSAR_CP_SWS_V2XBasicTransport）、[AUTOSAR V2X GeoNetworking（V2X地理网络）](cp/communication/v2x_geonet/index.md)（AUTOSAR_CP_SWS_V2XGeoNetworking）、[Firewall（防火墙）](cp/security/firewall/index.md)（SWS_Firewall）
 {: .glossary-source}
 
 **UDP socket connection**
@@ -8598,7 +8813,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **UDS**
-> 统一诊断服务（**Unified Diagnostic Services**）。
+> 统一诊断服务（**Unified Diagnostic Services**）。、[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
 >
 > 来源：[AUTOSAR FiM（功能禁止管理器）](cp/system_services/function_inhibition_manager/index.md)（SWS_FunctionInhibitionManager）、[AUTOSAR Diagnostic Communication Manager（诊断通信管理器）](cp/diagnostics/diagnostic_communication_manager/index.md)（AUTOSAR_CP_SWS_DiagnosticCommunicationManager）
 {: .glossary-source}
@@ -8936,7 +9151,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **Virtual Local Time**
-> **StbM** 从硬件时钟导出的本地时间参考，用于全局时间本地实例的推移。
+> **StbM** 从硬件时钟导出的本地时间参考，用于全局时间本地实例的推移。、[Requirements on Time Synchronization（时间同步需求）](foundation/protocols/rs_time_sync/index.md)（AUTOSAR_FO_RS_TimeSync）
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
@@ -9018,7 +9233,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **WDG**
 > 看门狗（**Watchdog**，模块特定前缀）
 >
-> 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）
+> 来源：[AUTOSAR Watchdog Driver（看门狗驱动）](cp/safety/watchdog_driver/index.md)（SWS_WatchdogDriver）、[Requirements on Safety（功能安全需求）](foundation/safety/rs_safety/index.md)（AUTOSAR_FO_RS_Safety）
 {: .glossary-source}
 
 **WdgM**

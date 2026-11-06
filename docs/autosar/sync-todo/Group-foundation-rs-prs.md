@@ -10,7 +10,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 > Directory slug = `<type>_<snake_name>` after the `tr_glossary` precedent (`rs_main`, `prs_e2e_protocol`, `tps_generic_structure_template`) — the type prefix disambiguates the same-named RS/PRS pairs (SOMEIPProtocol, SOMEIPServiceDiscoveryProtocol, IntrusionDetectionSystem, TimeSync, SecurityExtractTemplate, StandardizationTemplate, FeatureModelExchangeFormat). The slug is a proposal: an acronym-ambiguous name still goes to the user at Step 1 (mapping.md naming rule). Front-matter `spec:` = `AUTOSAR_FO_<Type>_<Name>`, `release: R23-11`.
 > Row order = source size ascending (index.md rule), except the in-flight TR Glossary row first (exp group only). Sizes are R23-11 markdown line / `![` figure-ref / item-ID counts for planning only.
 
-> Delivery: tracked by issue #273; part 1 (rows 1–20, commits 95d7986…234e015) pushed as PR #274 ("Part of #273"); rows 21–32 follow in a part-2 PR on the same branch.
+> Delivery: tracked by issue #273; part 1 (rows 1–20, commits 95d7986…234e015) pushed as PR #274 ("Part of #273"); part 2 (rows 21–30, commits f694ff4…39b985f) pushed as PR #289 (Closes #288); row 31/32 (prs_log_and_trace_protocol, prs_e2e_protocol) remain.
 > **DECIDED 2026-11-03 (user decision, asked at the first HealthMonitoring run's Step 1) — item IDs are DROPPED, titles translate only, and this applies batch-wide (both this file and Group-foundation-exp's TPS/ASWS rows):** these documents *consist of* identified items (`[RS_Main_00001]`, `[PRS_E2E_00123]`; RS_Main carries 334, PRS_E2EProtocol 1,173). The user chose the Type A no-requirement-ID rule (STANDARD.md §4) and the EXP_VFB precedent over the appendix-B fence precedent: requirement prose translates, the `[<ID>] {DRAFT}` marker is dropped entirely (the `{DRAFT}` flag goes with it). Consequence: a translated RS/PRS/ASWS item cannot be looked up by its standard ID — the queue row Notes record that as an accepted trade-off.
 
 ## Queue
@@ -23,7 +23,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_ieee1722 (AUTOSAR_FO_RS_IEEE1722 · CommunicationManagement · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on IEEE 1722（IEEE 1722 需求）; target `foundation/communication_management/rs_ieee1722/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
@@ -35,7 +35,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_debug_trace_profile (AUTOSAR_FO_RS_DebugTraceProfile · CommunicationManagement · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Debug Trace Profile（调试跟踪配置文件需求）; target `foundation/communication_management/rs_debug_trace_profile/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
@@ -46,7 +46,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_someip_service_discovery_protocol (AUTOSAR_FO_RS_SOMEIPServiceDiscoveryProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）; target `foundation/protocols/rs_someip_service_discovery_protocol/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
@@ -58,7 +58,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_v2x_remote_access_layer (AUTOSAR_FO_PRS_V2XRemoteAccessLayer · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）; target `foundation/protocols/prs_v2x_remote_access_layer/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
@@ -69,7 +69,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_ipsec_protocol (AUTOSAR_FO_RS_IPsecProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on IPsec Protocol（IPsec 协议需求）; target `foundation/protocols/rs_ipsec_protocol/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
@@ -81,7 +81,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_security_extract_template (AUTOSAR_FO_RS_SecurityExtractTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Security Extract Template（安全提取模板需求）; target `foundation/methodology_templates/rs_security_extract_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
@@ -92,7 +92,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_feature_model_exchange_format (AUTOSAR_FO_RS_FeatureModelExchangeFormat · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Feature Model Exchange Format（特征模型交换格式需求）; target `foundation/methodology_templates/rs_feature_model_exchange_format/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
@@ -103,7 +103,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_secoc_protocol (AUTOSAR_FO_PRS_SecOcProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Secure Onboard Communication Protocol Specification（安全车载通信协议规范）; target `foundation/protocols/prs_secoc_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
@@ -115,7 +115,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_data_distribution_service (AUTOSAR_FO_RS_DataDistributionService · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Data Distribution Service（数据分发服务需求）; target `foundation/protocols/rs_data_distribution_service/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
@@ -127,7 +127,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_network_management_protocol (AUTOSAR_FO_PRS_NetworkManagementProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Network Management Protocol Specification（网络管理协议规范）; target `foundation/protocols/prs_network_management_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
@@ -139,7 +139,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_e2e (AUTOSAR_FO_RS_E2E · CommunicationManagement · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on E2E（端到端通信保护需求）; target `foundation/communication_management/rs_e2e/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
@@ -151,18 +151,20 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_intrusion_detection_system (AUTOSAR_FO_RS_IntrusionDetectionSystem · Security · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Intrusion Detection System（入侵检测系统需求）; target `foundation/security/rs_intrusion_detection_system/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Security/AUTOSAR_FO_RS_IntrusionDetectionSystem.md` — 725 lines, 27 figure refs, 26 item IDs
   - Note: related site content: CP SWS_IntrusionDetectionSystemManager (IdsM) queued in Group-security (different document) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: 2026-11-06 reconciliation — the article WAS delivered in part 1 (commit 9633fc6, PR #274 merged 2026-11-04; TODO.md row ✅, nav + landing + overview registered); the row steps were never ticked — stale state only, no content work owed
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+- [x] Step 5 — User confirmation gate (PR #289)
+  - [x] Step 6 — TODO.md row + commit/PR (9633fc6, PR #274)
 - [ ] rs_firewall (AUTOSAR_FO_RS_Firewall · Security · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Firewall（防火墙需求）; target `foundation/security/rs_firewall/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Security/AUTOSAR_FO_RS_Firewall.md` — 752 lines, 25 figure refs, 1 item IDs
@@ -173,7 +175,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_health_monitoring (AUTOSAR_FO_RS_HealthMonitoring · HealthMonitoring · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Health Monitoring（健康监控需求）; target `foundation/health_monitoring/rs_health_monitoring/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
@@ -185,7 +187,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_someip_protocol (AUTOSAR_FO_RS_SOMEIPProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on SOME/IP Protocol（SOME/IP 协议需求）; target `foundation/protocols/rs_someip_protocol/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
@@ -197,7 +199,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_macsec (AUTOSAR_FO_RS_MACsec · CommunicationManagement · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on MACsec（MACsec 需求）; target `foundation/communication_management/rs_macsec/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
@@ -209,7 +211,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_methodology (AUTOSAR_FO_RS_Methodology · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Methodology（方法论需求）; target `foundation/methodology_templates/rs_methodology/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
@@ -221,7 +223,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_intrusion_detection_system (AUTOSAR_FO_PRS_IntrusionDetectionSystem · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Intrusion Detection System Protocol Specification（入侵检测系统协议规范）; target `foundation/protocols/prs_intrusion_detection_system/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
@@ -233,7 +235,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_timing_extensions (AUTOSAR_FO_RS_TimingExtensions · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Timing Extensions（时序扩展需求）; target `foundation/methodology_templates/rs_timing_extensions/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
@@ -246,108 +248,128 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_safety (AUTOSAR_FO_RS_Safety · Safety · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Safety（功能安全需求）; target `foundation/safety/rs_safety/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Safety/AUTOSAR_FO_RS_Safety.md` — 1,149 lines, 40 figure refs, 78 item IDs
   - Note: related site content: cp/safety/functional_safety_measures, cp/safety/safety_use_case (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: 2026-11-06 run — all 40 figure refs are page-decoration chrome, 0 content figures; 65 requirement items (7 top-level §4.1.1–4.1.7, 16 functional §4.2.1–4.2.16, 42 technical as bold title lines + field tables under the 4.3.x.y clusters — too deep for headings, run decision USER: verify); IDs + {DRAFT} + (State/Upstream Requirements) parentheticals + ⌋(…) tracing lines dropped per batch decision; source ch.5 Requirements Tracing omitted per ASWS precedent (References renumbered 6→5); PDF-recovered cells: 4.1.4/4.1.6/4.1.7 rationales, 4.2.2 rationale (+ cybersecurity note), 4.2.8/4.2.15 rationales, PER descriptions, appendix A.2.3 ID list; §2.2.1 coding-pattern list reconstructed from the PDF layout; appendix A ID enumerations rendered as counts (A.1: +5/~14/−19; A.2: 无/~14/−3); glossary: 7 new entries (EM, PER, S2S, SG, SM, TLSR, UCM) + WDG gained this document as additional source; CM homonym-skip (existing entry = AUTOSAR Adaptive Communication Management, decision recorded)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+- [x] Step 5 — User confirmation gate (PR #289)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_network_management (AUTOSAR_FO_RS_NetworkManagement · CommunicationManagement · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Network Management（网络管理需求）; target `foundation/communication_management/rs_network_management/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `CommunicationManagement/AUTOSAR_FO_RS_NetworkManagement.md` — 1,169 lines, 44 figure refs, 181 item IDs
   - Note: related site content: cp/communication/nm, cp/communication/can_network_management, cp/communication/udp_network_management (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: 2026-11-06 run — all 44 figure refs are page-decoration glyphs (15x15 px, ~500 B), 0 content figures; 60 requirement items (5.1.1–5.2.4) translated as bold title lines + field tables under numbered source subsections (too deep for headings, run decision USER: verify); IDs + {DRAFT} + ⌋(…) tracing lines dropped; intra-document item-ID refs in Dependencies/Supporting-Material cells kept as unbracketed identifiers (RS_Nm_00047 etc.), 00150's prose ID list dropped — run decision USER: verify; source ch.6 Requirements Tracing omitted per ASWS precedent (References renumbered 7→6); ch.4 Use Cases table (7 rows) as GFM; PDF-recovered cells: 00151/00045 rationales, 02544 rationale, 02509 use-case cell reconstructed; 00046/02546/02548/02542/02544/02574 split tables rejoined; appendix A change tables keep Heading column only (Number column dropped per batch decision; A.1.2 = 51 rows); glossary: Nm Node + Nm instance new entries; NM, NM Message, NM-Cluster, PNI gained this document as additional source; Nm (module) and PN (Packet Number) homonym-skips recorded
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+- [x] Step 5 — User confirmation gate (PR #289)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_main (AUTOSAR_FO_RS_Main · General · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Main Requirements（主需求规范）; target `foundation/general/rs_main/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `General/AUTOSAR_FO_RS_Main.md` — 1,203 lines, 48 figure refs, 334 item IDs
   - Note: related site content: cp/general/layered_software_architecture, cp/general/vfb (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: 2026-11-06 run — 1 of 48 figure refs is a content figure (Figure1-1 Requirements Scope), embedded; the rest are page decoration (15x15 glyphs + 2 thin strips); 75 requirement items (24 in source ch.4 → §3.1–3.24, 51 platform-level candidates in ch.5 → §4.1–4.51, 1:1 numbered sections); IDs + {DRAFT} + ⌋(…) tracing lines dropped; source ch.3 Requirements Tracing omitted per ASWS precedent (renumber 4→3, 5→4, 6→5); the document's markdown has ~25 column-swap-garbled field cells (rationale/use-case interleaved) — ALL recovered from the R23-11 PDF; Wikipedia URLs and 「Concept 634 "Bus Mirroring"」 kept plain-text per source; ch.2.2 has NO acronym table (points to the TR Glossary) → no new site-glossary terms; appendix A has only an R23-11 section (A.1.3 Deleted = none); TODO.md reconciliation in same commit: rs_project_objectives row flipped ✅ (delivered in part 1, row was left ❌)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+- [x] Step 5 — User confirmation gate (PR #289)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_log_and_trace (AUTOSAR_FO_RS_LogAndTrace · CommunicationManagement · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Log and Trace（日志与跟踪需求）; target `foundation/communication_management/rs_log_and_trace/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `CommunicationManagement/AUTOSAR_FO_RS_LogAndTrace.md` — 1,305 lines, 46 figure refs, 181 item IDs
   - Note: related site content: cp/communication/diagnostic_log_and_trace (Dlt) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: 2026-11-06 run — all 46 figure refs are page decoration (15x15 glyphs + 258x27 strips), 0 content figures; 58 requirement items (all added in R23-11 per appendix A): 4.2.x numbered group headings kept (4.2.1–4.2.4 with their sub-groups), items carried as bold title lines + field tables (source leaf depth is 5 levels — too deep for headings, run decision USER: verify); §4.3's six items are themselves 4.3.x sections → numbered headings + field tables; the source puts requirement titles on the numbered headings and leaves the [RS_LT_*] ID headings title-less — titles taken from the numbered headings; IDs + {DRAFT} + ⌋(…) tracing lines dropped; intra-document ID refs (RS_LT_00030 etc.) kept unbracketed; source ch.5 Requirements Tracing omitted per ASWS precedent (References chapter renumbered 6→5, entry numbers [1]..[6] kept); PDF-recovered cells: 00047/00052/00006/00007/00008/00012/00030/00031/00033/00035/00038/00059 rationales+use-cases; appendix A "Change History": A.1.1 added 58 (54 rows with empty heading columns in the conversion → counts, 4 titled rows kept as a table); A.1.2/A.1.3 none; glossary: Log, Trace, Time new entries; 8 existing Dlt-defined entries (Log and trace message, ECU ID, Session ID, Application ID, Context ID, Message ID, Log and trace level, External client) gained this document as additional source; User homonym-skip (existing = ComM/EcuM requestor concept, decision recorded)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+- [x] Step 5 — User confirmation gate (PR #289)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_time_sync (AUTOSAR_FO_RS_TimeSync · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Time Synchronization（时间同步需求）; target `foundation/protocols/rs_time_sync/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Protocols/AUTOSAR_FO_RS_TimeSync.md` — 1,470 lines, 54 figure refs, 117 item IDs
   - Note: related site content: cp/globaltime/stbm, cp/globaltime/can_tsyn, cp/globaltime/eth_tsyn, cp/globaltime/fr_tsyn (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: 2026-11-06 run — 3 of 54 figure refs are content figures (Figure3-1 Terminology Example §3.2.9, Figure3-2 Time Correction Hierarchy §3.2.17, Figure3-3 Time Deviations RateCorrection §3.2.17), embedded by source figure number; the rest are 258x28 strips + glyphs; 75 requirement items (37 common §5.2.1, 17 Ethernet §5.2.2, 11 CAN §5.2.3, 9 FlexRay §5.2.4, 1 non-functional §5.3) as bold title lines + field tables under the numbered group headings (run decision USER: verify); 6 items with lost ## heading markers (00013/00014/00015/20036/20063/20073) restored as items; IDs + {DRAFT} + tracing lines dropped; source ch.6 Requirements Tracing omitted per ASWS precedent (References renumbered 7→6); 20072/20073/20074 truncated rationales recovered from the R23-11 PDF; the [6] citation in 20048 has no registry entry ([3] = IEEE 802.1AS is the actual target) — kept unresolved prose per the no-invented-links rule; ch.3.2 definitions (21 entries incl. Pure-Local special cases) translated in-article; glossary: 8 new entries (Clock, FVM, OFS, Sync, Time Base, Time Correction, Time Domain, TSP) + 12 existing entries gained this document as additional source; TS homonym-skip (existing = Time Stamp, decision recorded); rewrite_glossary.py normalization run after the scripted edit
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+- [x] Step 5 — User confirmation gate (PR #289)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_standardization_template (AUTOSAR_FO_RS_StandardizationTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Standardization Template（标准化模板需求）; target `foundation/methodology_templates/rs_standardization_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_RS_StandardizationTemplate.md` — 1,734 lines, 58 figure refs, 302 item IDs
   - Note: related site content: cp/methodology_templates/basic_software_module_description_template (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: 2026-11-06 run — all 58 figure refs are page decoration (258x28 strips + 15x15 glyphs), 0 content figures; 21 use cases → §2.1–2.21, 66 requirement items → §3.1.1–3.6.22 numbered 1:1 (26 blueprints + 1 keywords + 4 integration + 1 traceability + 12 spec-element documentation + 22 data-exchange-point profiles); UC_STDT_*/RS_STDT_* cross-refs in Use-Case/Dependencies cells rewritten as intra-article section links (rs_feature_model precedent); the source References chapter is an UNNUMBERED pre-chapter — mirrored as unnumbered ## 参考文献 with ref anchors; §1.3 Use Case Tracing + §1.4 Requirements Tracing omitted per ASWS precedent (subsections — no chapter renumbering); annex A Mentioned Class Tables (2 meta-class tables, PDF duplicate columns collapsed) → numbered continuation §4; annex B change history (R4.1.1–R23-11, 10 releases) → ## B. with Heading columns only; PDF-recovered cells: 00018/00025/00109/00110/00119/00122 rationales; no acronym chapter → no new site-glossary terms
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+- [x] Step 5 — User confirmation gate (PR #289)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_time_sync_protocol (AUTOSAR_FO_PRS_TimeSyncProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Time Synchronization Protocol Specification（时间同步协议规范）; target `foundation/protocols/prs_time_sync_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_TimeSyncProtocol.md` — 1,847 lines, 75 figure refs, 282 item IDs
   - Note: related site content: cp/globaltime/stbm, cp/globaltime/can_tsyn, cp/globaltime/eth_tsyn, cp/globaltime/fr_tsyn (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: 2026-11-06 run — 8 of 75 figure refs are content figures (Figure4-1 Pdelay, Figure4-2/4-3 TAB overview, Figure4-4–4-8 message-flow/timestamping sequences), embedded by source figure number; the 2 large tracing-overview figures ride the omitted tracing chapter; protocol items translated as prose paragraphs with IDs + {DRAFT} + ⌋(…) dropped (prs_secoc precedent), PRS_TS_* cross-refs kept as unbracketed identifiers; source ch.2 Requirements Traceability omitted per ASWS precedent (renumber 3→2…7→6); source §4.3.2 Body/Payload format + §4.5 Services/Commands are "Placeholder for upcoming AUTOSAR releases." → omitted under the placeholder rule (USER: verify), sub-sections renumbered accordingly; message-format byte tables (spanning-title chrome dropped, garbled column shifts normalized) + config-parameter table 5.1 as GFM; 5 lost formulas (Eq. 4.1–4.6) recovered from the R23-11 PDF as text; in-text stale "Figure 5.x" references normalized to the actual figure numbers (source quirk, recorded); appendix A ID enumerations rendered as counts (+9/~10/无); acronym chapter (31 entries) as blockquote format — 10 terms already in glossary, not re-appended (one-translation rule), no new glossary entries needed (all generic IEEE/PTP terms or identical definitions)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+- [x] Step 5 — User confirmation gate (PR #289)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_someip_protocol (AUTOSAR_FO_PRS_SOMEIPProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: SOME/IP Protocol Specification（SOME/IP 协议规范）; target `foundation/protocols/prs_someip_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_SOMEIPProtocol.md` — 2,201 lines, 95 figure refs, 372 item IDs
   - Note: related site content: cp/communication/someipxf, cp/communication/someiptp (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: 2026-11-06 run — 21 of 95 figure refs are content figures (Figure4-1, Figure4-3–4-22) embedded by source figure number; Figure 4.2 (header+E2E layout) lost in the source conversion (only label spill remains) → dropped with its field layout described in prose (USER: verify); the rest are deco strips/glyphs; protocol items as prose paragraphs with IDs + {DRAFT} + tracing lines dropped (prs_secoc precedent), PRS_SOMEIP_* cross-refs kept unbracketed; source ch.2 Requirements Traceability omitted per ASWS precedent (renumber 3→2, 4→3, 5→4, 6→5; in-text chapter refs renumbered accordingly; table/figure numbers keep SOURCE numbering); the source's trailing unnumbered References mirrored as unnumbered ## 参考文献 with ref anchors; source §1.4's two unnumbered sub-section titles kept unnumbered; byte-layout tables (header fields, magic cookie, TP example) mostly lost in conversion — the diagrams (Figure 4.15–4.20) carry the content, spilled garbled label tables dropped; return-code table 4.11 + payload-compatibility table 4.12 (row merges normalized) as GFM; glossary: no new site-glossary terms (terms identical to TR Glossary/Dlt entries or SOME/IP-specific prose definitions kept in-article); appendix A: R22-11 tables mostly empty headings → counts (added 1 / changed 12 incl. 1 titled / deleted 2), R23-11 keeps titled rows (added 3 / changed 2 / none)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+- [x] Step 5 — User confirmation gate (PR #289)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_diagnostics (AUTOSAR_FO_RS_Diagnostics · Diagnostics · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Diagnostics（诊断需求）; target `foundation/diagnostics/rs_diagnostics/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `Diagnostics/AUTOSAR_FO_RS_Diagnostics.md` — 2,751 lines, 86 figure refs, 400 item IDs
   - Note: related site content: cp/diagnostics/diagnostic_communication_manager (Dcm), cp/diagnostics/diagnostic_event_manager (Dem) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: 2026-11-06 run — all 86 figure refs are page decoration (257x27 strips + glyphs), 0 content figures; 153 requirement items (92 common §4.1 + 6 CP functional §4.2.1 + 19 fault-memory §4.2.2 + 2 DTC/event data §4.2.2.1 + 11 communication §4.2.3 + 24 AP §4.3 incl. 14 SOVD DRAFT items) as bold title lines + field tables under the numbered source group headings (avoids 5-level TOC depth, run decision USER: verify); IDs + {DRAFT} + tracing lines dropped; RS_Diag_*/RS_DEXT_* cross-refs kept unbracketed; source §4.4 Configuration is EMPTY (only decoration) → omitted under the placeholder rule (USER: verify); source ch.5 Requirements Tracing omitted per ASWS precedent (References 6→5 with its subsections 6.1/6.2/6.2.1/6.2.2 → 5.1/5.2/5.2.1/5.2.2); garbled field cells (04172/04239/04201/04179/04182/04222/04186/04006/04033/04135 rationales+use-cases) recovered from context; DM-message list (04113) rendered as a name-description bullet list; glossary: DoIP, IDL, TA new entries + DEM/DID/UDS/OBD/SID/DM/SWC gained this document as additional source; DTC homonym-skip (2 existing entries are Dlt/SWS-specific, decision recorded); rewrite_glossary.py normalization run after the scripted edit
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+- [x] Step 5 — User confirmation gate (PR #289)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_someip_service_discovery_protocol (AUTOSAR_FO_PRS_SOMEIPServiceDiscoveryProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: SOME/IP Service Discovery Protocol Specification（SOME/IP 服务发现协议规范）; target `foundation/protocols/prs_someip_service_discovery_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_SOMEIPServiceDiscoveryProtocol.md` — 3,259 lines, 132 figure refs, 356 item IDs; **giant source** — segment plan before Step 2 (OS/RTE precedent)
   - Note: related site content: cp/communication/service_discovery (Sd) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: 2026-11-06 run — 26 of 132 figure refs are content figures (Figure1-1 dependencies, Figure5-1–5-18 message/entry/option formats + state machines + error handling, Figure5-19–5-23 pub/sub examples, Figure5-24–5-26 pub/sub state machines) embedded by source figure number; the rest are deco strips/glyphs (258x27/15x15); protocol items as prose paragraphs with IDs + {DRAFT} + tracing lines dropped (prs_secoc precedent), PRS_SOMEIPSD_* cross-refs kept unbracketed; source ch.3 Requirements Traceability omitted per ASWS precedent (renumber 4→3, 5→4, 6→5, 7→6, 8→7; source 7.1/7.2 → 6.1/6.2); byte-layout spills and the state-machine transition lists (§5.1.4.4, §5.1.6 pub/sub states) are garbled in the conversion — the diagrams (Figure5.16/5.17/5.24–5.26) carry the content, transition lists replaced by state inventories + figures (run decision USER: verify); tables 5.1–5.8 (allowed options per entry, entry types, reserved IDs/names) + config-param table 6.1 as GFM; no new site-glossary terms (acronym tables are SOME/IP-SD-specific prose definitions kept in-article); appendix A ID enumerations rendered as counts (+7/~12/无)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+- [x] Step 5 — User confirmation gate (PR #289)
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] prs_log_and_trace_protocol (AUTOSAR_FO_PRS_LogAndTraceProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Log and Trace Protocol Specification（日志与跟踪协议规范）; target `foundation/protocols/prs_log_and_trace_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_LogAndTraceProtocol.md` — 3,373 lines, 111 figure refs, 450 item IDs; **giant source** — segment plan before Step 2 (OS/RTE precedent)
@@ -356,7 +378,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] prs_e2e_protocol (AUTOSAR_FO_PRS_E2EProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: E2E Protocol Specification（端到端协议规范）; target `foundation/protocols/prs_e2e_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
@@ -366,5 +388,5 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+- [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR

@@ -300,6 +300,6 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 6 — TODO.md row + commit/PR (commit 26625e4; batch PR pending)
 
 ## Not queued (deliberately skipped)
-- 📄 methodology_templates/basic_software_mode_manager template — TPS_BSWModuleDescriptionTemplate (existing article, exempt)
+- 📄 methodology_templates/ — moved 2026-11-06 to [Group-cp-methodology.md](Group-cp-methodology.md) (user request): all 17 MethodologyAndTemplates documents now queued there; TPS_BSWModuleDescriptionTemplate stays an existing-article alignment row (the old note here carried a name typo: "basic_software_mode_manager")
 - 📖 template/ — template example pages removed 2026-11-04 (landing only)
 - 📖 power/ — bespoke topic article (no standalone specification)

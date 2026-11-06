@@ -4,7 +4,7 @@ title: "AUTOSAR API 类型清单"
 
 本页汇总站内已翻译 AUTOSAR 文章中定义的**类型**，按字母排序，便于查找；点击标识符直达站内文章中该条目的定义小节，每条另标注所属文档与发布版本。**由脚本自动生成，请勿手工编辑**（`python .agents/skills/autosar-translate/scripts/gen_api_list.py`；源：站内已翻译文章的章节标题）。
 
-共 **875** 个条目。
+共 **884** 个条目。
 
 ## A
 
@@ -1422,6 +1422,12 @@ title: "AUTOSAR API 类型清单"
 **[FrTSyn_TransmissionModeType](../globaltime/fr_tsyn/index.md#722-frtsyn_transmissionmodetype)**
 > 类型 · [AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](../globaltime/fr_tsyn/index.md) · SWS_TimeSyncOverFlexRay · R23-11
 
+**[Fw_ConfigType](../security/firewall/index.md#721-fw_configtype)**
+> 类型 · [Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall · R23-11
+
+**[Fw_InspectionResultType](../security/firewall/index.md#722-fw_inspectionresulttype)**
+> 类型 · [Firewall（防火墙）](../security/firewall/index.md) · SWS_Firewall · R23-11
+
 ## G
 
 **[Gpt_ChannelType](../mcal/gpt_driver/index.md#722-gpt_channeltype)**
@@ -1493,6 +1499,27 @@ title: "AUTOSAR API 类型清单"
 
 **[IdleModeType](../system_services/operating_system/index.md#7321-idlemodetype)**
 > 类型 · [AUTOSAR Operating System（操作系统）](../system_services/operating_system/index.md) · SWS_OS · R23-11
+
+**[IdsM_ConfigType](../security/idsm/index.md#721-idsm_configtype)**
+> 类型 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_ContextDataType](../security/idsm/index.md#776-idsm_contextdatatype)**
+> 类型 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_ExternalSecurityEventIdType](../security/idsm/index.md#725-idsm_externalsecurityeventidtype)**
+> 类型 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_Filters_BlockStateType](../security/idsm/index.md#722-idsm_filters_blockstatetype)**
+> 类型 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_Filters_ReportingModeType](../security/idsm/index.md#723-idsm_filters_reportingmodetype)**
+> 类型 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_SecurityEventIdType](../security/idsm/index.md#777-idsm_securityeventidtype)**
+> 类型 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
+
+**[IdsM_TimestampType](../security/idsm/index.md#724-idsm_timestamptype)**
+> 类型 · [Intrusion Detection System Manager（入侵检测系统管理器）](../security/idsm/index.md) · SWS_IntrusionDetectionSystemManager · R23-11
 
 **[IEEE1722Tp_CommonStreamHeaderType](../communication/ieee1722tp/index.md#734-ieee1722tp_commonstreamheadertype)**
 > 类型 · [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../communication/ieee1722tp/index.md) · SWS_IEEE1722TransportLayer · R23-11

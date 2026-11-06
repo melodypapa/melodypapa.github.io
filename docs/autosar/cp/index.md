@@ -2,7 +2,7 @@
 title: "CP AUTOSAR"
 ---
 
-**AUTOSAR** Classic Platform（**CP**）R23-11 规范的中文翻译笔记：按通信、全局时间、加密、诊断、通用、I/O、MCAL、存储、方法论与模板、模式管理、系统服务、功能安全等类别组织，覆盖各基础软件模块（**BSW**）的功能、API、配置参数与集成约束，并收录 **RTE**、应用接口、**SW** 架构、库与模板等平台级内容，以及不属于特定模块的「其他」专题文章。跨平台的 **Foundation** 标准另见[基础标准（Foundation）](../foundation/index.md)。下列按导航结构列出本节全部文章，便于快速跳转。
+**AUTOSAR** Classic Platform（**CP**）R23-11 规范的中文翻译笔记：按通信、全局时间、加密、网络安全、诊断、通用、I/O、MCAL、存储、方法论与模板、模式管理、系统服务、功能安全等类别组织，覆盖各基础软件模块（**BSW**）的功能、API、配置参数与集成约束，并收录 **RTE**、应用接口、**SW** 架构、库与模板等平台级内容，以及不属于特定模块的「其他」专题文章。跨平台的 **Foundation** 标准另见[基础标准（Foundation）](../foundation/index.md)。下列按导航结构列出本节全部文章，便于快速跳转。
 
 ## 文章
 
@@ -92,6 +92,12 @@ title: "CP AUTOSAR"
   * [AUTOSAR Crypto Service Manager（加密服务管理器）](crypto/crypto_service_manager/index.md)
   * [AUTOSAR Key Manager（密钥管理器）](crypto/key_manager/index.md)
   * [Utilization of Crypto Services（加密服务使用指南）](crypto/utilization_of_crypto_services/index.md)
+
+### 网络安全（Security）
+
+* [网络安全（Security）](security/index.md)
+  * [Firewall（防火墙）](security/firewall/index.md)
+  * [Intrusion Detection System Manager（入侵检测系统管理器）](security/idsm/index.md)
 
 ### 诊断（Diagnostics）
 

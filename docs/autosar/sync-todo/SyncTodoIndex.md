@@ -80,6 +80,30 @@ Status: **24/24** completed
 | `someipxf`                 | [x] Done | e4115620c1 |
 | `someiptp`                 | [x] Done | af4d193edc |
 
+## Group cp-methodology — CP R23-11 methodology and template documents (17)
+
+Status: **0/17** completed
+
+| Article                                      | Status | Commit ID |
+| --------------------------------------------- | -------- | ---------- |
+| `rs_ecu_resource_template`                     | [ ] Pending | N/A |
+| `rs_ecu_configuration`                         | [ ] Pending | N/A |
+| `rs_bsw_module_description_template`           | [ ] Pending | N/A |
+| `rs_system_template`                           | [ ] Pending | N/A |
+| `tps_ecu_resource_template`                    | [ ] Pending | N/A |
+| `rs_diagnostic_extract_template`               | [ ] Pending | N/A |
+| `rs_software_component_template`               | [ ] Pending | N/A |
+| `tr_franca_integration`                        | [ ] Pending | N/A |
+| `tr_general_blueprints_supplement`             | [ ] Pending | N/A |
+| `tr_modeling_show_cases`                       | [ ] Pending | N/A |
+| `tps_timing_extensions`                        | [ ] Pending | N/A |
+| `tps_ecu_configuration`                        | [ ] Pending | N/A |
+| `basic_software_module_description_template`   | [ ] Aligned 🔶 | 05b2b4d283 |
+| `tr_methodology`                               | [ ] Pending | N/A |
+| `tps_diagnostic_extract_template`              | [ ] Pending | N/A |
+| `tps_software_component_template`              | [ ] Pending | N/A |
+| `tps_system_template`                          | [ ] Pending | N/A |
+
 ## Group crypto — crypto section
 
 Status: **4/4** completed
