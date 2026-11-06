@@ -131,7 +131,7 @@ Status: **21/21** completed
 
 ## Group foundation exp — Foundation R23-11 guide/template/report documents (20)
 
-Status: **14/20** completed
+Status: **19/20** completed
 
 | Article                                              | Status | Commit ID |
 | ----------------------------------------------------- | -------- | ---------- |
@@ -149,11 +149,11 @@ Status: **14/20** completed
 | `asws_health_monitoring`                               | [x] Done | e956feb4ea |
 | `tps_abstract_platform_specification`                  | [x] Done | 510c6d7fdf |
 | `tps_xml_schema_production_rules`                      | [x] Done | 07a9324cd2 |
-| `tr_secure_hardware_extensions`                        | [ ] Pending | N/A |
-| `tps_security_extract_template`                        | [ ] Pending | N/A |
-| `tps_feature_model_exchange_format`                    | [ ] Pending | N/A |
-| `tr_timing_analysis`                                   | [ ] Pending | N/A |
-| `tps_standardization_template`                         | [ ] Pending | N/A |
+| `tr_secure_hardware_extensions`                        | [x] Done | 7b7ea04490 |
+| `tps_security_extract_template`                        | [x] Done | 2329c2d702 |
+| `tps_feature_model_exchange_format`                    | [x] Done | 2c5f4f13fd |
+| `tr_timing_analysis`                                   | [x] Done | 66da8d4b1e |
+| `tps_standardization_template`                         | [x] Done | ceefe4f4c5 |
 | `tps_generic_structure_template`                       | [ ] Pending | N/A |
 
 ## Group foundation rs-prs — Foundation R23-11 requirement/protocol specifications (32)
@@ -327,5 +327,5 @@ Status: **7/7** completed
 | `hwtestmanager`                 | [x] Done | 04ea38b015 |
 | `operating_system`              | [x] Done | ca7ecda991 |
 
-**Total: 154/197 queue rows complete.**
+**Total: 159/197 queue rows complete.**
 
