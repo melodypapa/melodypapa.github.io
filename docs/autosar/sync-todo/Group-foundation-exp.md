@@ -222,53 +222,82 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (2026-11-05: approved — batch confirmation covering rows 1–11 of this run)
   - [x] Step 6 — TODO.md row + commit/PR (commit 07a9324 · 2026-11-05 · branch feature/foundation-exp-batch unpushed — push/PR on user request)
-- [ ] tr_secure_hardware_extensions (AUTOSAR_FO_TR_SecureHardwareExtensions · Security · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [x] tr_secure_hardware_extensions (AUTOSAR_FO_TR_SecureHardwareExtensions · Security · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Specification of Secure Hardware Extensions（安全硬件扩展规范）; target `foundation/security/tr_secure_hardware_extensions/`; technical report (TR) — prose; no specification items
   - Note: source `Security/AUTOSAR_FO_TR_SecureHardwareExtensions.md` — 1,971 lines, 83 figure refs, no item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] tps_security_extract_template (AUTOSAR_FO_TPS_SecurityExtractTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Step 1 gap analysis (2026-11-06): no article → full translation mirroring source numbering ch.1–ch.4 (1 · 2/2.1 · 3/3.1 · 4/4.1–4.14); appendix A content-free (page footers only) → omitted per placeholder rule; §2.2 术语定义 source table carries only a header and an empty "Term" template row → omitted per placeholder rule; doc-meta chrome (cover/status/change-history, Contents, Disclaimer) dropped per EXP precedent; ch.3 Related Documentation is a mid-document numbered chapter → `## 3. 相关文档` with `<a id="ref-n">` registry ([1]–[9]), cdd/exp_system_health_monitoring precedent
+  - Note: figures — 83 refs = 11 content diagrams (Figure 4.1–4.11, 10.3–263 KB) copied as `Figure4-1..4-11.png` with source captions as alt text; 70 chrome refs (recurring ≤10.3 KB hashes) + 2 ~100 KB PDF-page table screenshots at 4.14 (tables carried by the surrounding GFM tables) dropped
+  - Note: formulas — 4 `formula-not-decoded` recovered from the corpus PDF pp.11/14 (ASWS precedent): `"0...0"^128` notation, `AES-MP(x_i)` compression iteration, `C' = 0x01 | counter | "SHE" | 0x00`, `KDF(K,C) : AES-MP(K|C)` — rendered as fenced blocks (site has no math extension)
+  - Note: technical shape — 4.7's 19 command blocks decomposed from glued 3-column conversion tables into 参数|方向|宽度 tables + prose + operation fences + error-code lines; CEIL footnotes 1/2 recovered from PDF pp.31/32 (same definition, rendered `<sup>N</sup>` + blockquotes); 表4.1/4.2/4.3/4.4/4.6/4.7 + 4.13 test vectors as GFM tables; 表4.5's two-header span (非易失×5/易失×3/ROM×2) collapsed to one header row per exp_safety_overview precedent, noted in-article; pseudo-code verbatim in fences (subscripts reconstructed, SREG bits dotted per the sibling errata article)
+  - Note: source quirks kept + noted in-article: 表4.6 header ERC_NO_DEBUUGGING (3 u's — present in the source PDF itself), CMD_DEBUG error list's ERC_WRITE_PROTECTED (ch.4.8 defines ERC_KEY_WRITE_PROTECTED), stale chapter refs 第9/10/5.1.1/5.3/10.4章 in 4.7.7/4.7.10/4.7.11/4.7.13/4.7.14 (HIS-spec renumbering leftovers, UNRESOLVED in census, stay prose); 4.13.2.3 example-2 message block 3 truncated in the PDF layout → completed from cited NIST SP 800-38B A.2.2 with an in-table footnote
+  - Note: Phase A (2026-11-06) — `mkdocs build --strict` exit 0, 0 WARNINGs (3 pre-existing bare-form INFO notices remain from the previous batch); `check_heading_lang.py` OK; `check_indexes.py` OK (311 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/requirement ID/`{DRAFT}`/`\<`; ch.2 slice 0 tables, 12 term lines = 12 source rows in order; URL audit: 6×200; nvlpubs.nist.gov SP800-108 404 and bsi.bund.de ×2 400 with browser UA (publisher moved — kept per precedent, TODO.md Backlog)
+  - Note: Phase B (2026-11-06) — coverage ch.1→§1, ch.2→§2 (2.1), ch.3→§3 (3.1 registry), ch.4→§4 (4.1–4.14); deliberate omissions: appendix A + §2.2 (placeholder rule — user to verify) + doc-meta chrome/Disclaimer/Contents; link census: 0 identifier mentions, 66 chapter-ref links + 23 citation links applied (idempotent, 0 changed on re-run), 7 UNRESOLVED refs (source renumbering, prose), 11 参见-type report-only lines, 0 cross-article census hits (§1's TR_ListOfKnownIssues document mention stays prose; SITE article exists — cross-article class = user decision); glossary +9 new terms (AES/CMAC/ECB/HIS/IV/PRNG/TPM/TRNG/UID) + MAC/SHE 来源 appended; CBC NOT added (existing entry = 弯道制动控制, different domain term — substantively different definition = user decision)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (2026-11-06: approved — batch confirmation covering rows 15–19 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 7b7ea04 · 2026-11-06 · TODO.md row flipped + batch-confirmation commit · branch feature/foundation-exp-batch-2)
+- [x] tps_security_extract_template (AUTOSAR_FO_TPS_SecurityExtractTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Security Extract Template（安全提取模板）; target `foundation/methodology_templates/tps_security_extract_template/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_TPS_SecurityExtractTemplate.md` — 2,842 lines, 132 figure refs, 130 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] tps_feature_model_exchange_format (AUTOSAR_FO_TPS_FeatureModelExchangeFormat · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Step 1 gap analysis (2026-11-06): no article → full translation mirroring source numbering: References registry (ref-1..10, unnumbered 参考文献) + ch.1–ch.4 + annexes B–H; annex A (Reference Material / Requirements Tracing) omitted under the standard droppable set (STANDARD.md §1 requirement-traceability rule); doc-meta chrome dropped per EXP precedent; 130 item IDs → bold translated titles per the batch decision (prose-named IDs kept: [TPS_STDT_00053]/[TPS_STDT_00078] in §1.2, [TPS_SECXT_01016] named inside 01040; [ECUC_IdsM_*] kept as annex-C mapping data)
+  - Note: figures — 132 refs = 18 content diagrams (Figure 3.1, 4.1–4.16; 43–219 KB) copied with source captions as alt text (4.11 embeds two images); 114 chrome dropped
+  - Note: technical shape — 30 class/enumeration tables rendered in the TPS two-table form (属性|值 + 属性|类型|多重性|种类|备注, PDF merged duplicate columns collapsed); 15 constraints as **约束：<title>**： prose; annex C's 39 garbled mapping blocks (repeated-column tables + flattened ## BSW Description headings) reassembled into 39 属性|值 tables (11 rows each: BSW 模块/上下文/参数/类型/说明, 模板说明, M2 参数, 映射规则/类型/状态, ECUC 参数 ID); PortPrototype's truncated note cell recovered from corpus PDF p.65; annexes D/E as GFM tables, F as heading-only tables (Number column dropped per TPS_APSD annex-F precedent; source's old-name headings in F.1/F.2 kept verbatim — SecurityEventMapping naming from R20-11/R22-11), G as bold-term + blockquote, H as a 124-row table verified ID-sequence-identical to the source (Dcm and DM blocks both present, 21 rows each)
+  - Note: Phase A (2026-11-06) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (312 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/`\<` in content (comment mentions only); link census: 0 identifier mentions, 12 chapter-ref links + 14/14 citations linked (--apply idempotent), 4 参见-type report-only, cross-article report-only Dcm ×21 / SoAd ×5 / BswM ×3 / PORT ×1 (SITE, stay prose) + Sd/CanIf/Nm NO-ARTICLE
+  - Note: Phase B (2026-11-06) — coverage References→参考文献, ch.1→§1 … ch.4→§4 (4.1–4.7.4), B→§B (23 class tables), C→§C (39 blocks), D→§D, E→§E, F→§F (F.1–F.3), G→§G (12 terms + 15 acronyms), H→§H (124 rows); deliberate omission: annex A Requirements Tracing (droppable set — user to verify) + doc-meta chrome; landing-page fix rode along: stale 待翻译 entry for the already-translated ARXML Serialization Rules removed (previous batch leftover)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (2026-11-06: approved — batch confirmation covering rows 15–19 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 2329c2d · 2026-11-06 · TODO.md row flipped + batch-confirmation commit · branch feature/foundation-exp-batch-2)
+- [x] tps_feature_model_exchange_format (AUTOSAR_FO_TPS_FeatureModelExchangeFormat · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Feature Model Exchange Format（特征模型交换格式）; target `foundation/methodology_templates/tps_feature_model_exchange_format/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_TPS_FeatureModelExchangeFormat.md` — 2,861 lines, 103 figure refs, 200 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] tr_timing_analysis (AUTOSAR_FO_TR_TimingAnalysis · SystemServices · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Step 1 gap analysis (2026-11-06): no article → full translation mirroring source numbering: References registry (ref-1..5) + ch.1–ch.7 + annexes A/C/D; annex B (Reference Material / Requirements Tracing) omitted under the droppable set; doc-meta chrome dropped; 200 item IDs → bold translated titles (prose-named IDs kept: [TPS_STDT_00053]/[00078] §1.5, [TPS_GST_00001]/[00100]/[00103]/[00280] prose citations, [TPS_SWCT_01431] in table C.18 data cell, prose-named constr_5001..5028)
+  - Note: figures — 103 refs = 9 content diagrams (Figure 1.1, 2.1, 4.1, 5.1, 6.1–6.4, 7.1) copied with source captions as alt text; 94 chrome dropped
+  - Note: formulas — 18 `formula-not-decoded` recovered from corpus PDF pp.28–30/32/33/36/42/44/45/59/64 (ASWS precedent): underlying graph V/E, the 4 decomposition-category conditions, restriction ∨-condition, 4.5.2 example `f1&&f2&&f3`, REQUIRES/EXCLUDES/PROVIDES ∀-conditions, constr_5027 `min≤v≤max`, constr_5028/5018 ∀-conditions, inclusion graph V/E, recursive feature set union, affected-variation-points unions, and the 5.2.3.1 example `f1.pc + f2.pc + f3.pc + f4.pc < f.pc` — all as fenced blocks; footnotes keep the source's per-page numbering (same number may recur with its own text)
+  - Note: technical shape — 20 class/enumeration tables in the TPS two-table form; flattened item headings ([TPS_FMDT_00064] Usage of Life Cycle, the 7 ch.2 term definitions, MANDATORY/OPTIONAL/ALTERNATIVE/MULTIPLEFEATURE category labels) rendered as bold-titled prose; 表5.1 sample selection's two-dimensional group layout reflowed to a single table with 「/」 separators (noted in-article); the two state-combination summary tables ([TPS_FMDT_00065]/[00066]: 9 and 27 rows) carried cell-for-cell; annex C's truncated Sdg/Referrable attribute cells recovered from PDF p.78; annex D heading-only tables (Number column dropped per TPS_APSD annex-F precedent) with the D.1.4 stray-caption + column-scramble quirk noted
+  - Note: Phase A (2026-11-06) — `mkdocs build --strict` exit 0, 0 WARNINGs (known banner only); `check_heading_lang.py` OK; `check_indexes.py` OK (313 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`\<` in content (comment mentions only); link census: 45 identifier mentions applied (FMFormula/FMCondition ×4 classes → their §7.2 headings), 24 chapter-ref links + 11/11 citations linked (--apply idempotent, 0 changed on re-run), 1 参见-type report-only, cross-article PORT ×1 report-only
+  - Note: Phase B (2026-11-06) — coverage References→参考文献, ch.1→§1 … ch.7→§7 (7.1–7.2.5), A→§A (30 glossary terms), C→§C (20 class tables), D→§D (D.1–D.11); deliberate omission: annex B Requirements Tracing (droppable set — user to verify) + doc-meta chrome; source quirks kept: 表 D.2 caption mislabeled by the source PDF, [TPS_FMDT_00041]/[00042] and [00053]/[00054] headings scrambled in the D.1.4 table (conservatively split, noted)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (2026-11-06: approved — batch confirmation covering rows 15–19 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 2c5f4f1 · 2026-11-06 · TODO.md row flipped + batch-confirmation commit · branch feature/foundation-exp-batch-2)
+- [x] tr_timing_analysis (AUTOSAR_FO_TR_TimingAnalysis · SystemServices · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Timing Analysis（时序分析）; target `foundation/system_services/tr_timing_analysis/`; technical report (TR) — prose; no specification items
   - Note: source `SystemServices/AUTOSAR_FO_TR_TimingAnalysis.md` — 5,676 lines, 330 figure refs, no item IDs; **giant source** — segment plan before Step 2 (OS/RTE precedent)
   - Note: related site content: cp/template/timimg_extension (deleted 2026-11-04) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
-- [ ] tps_standardization_template (AUTOSAR_FO_TPS_StandardizationTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+  - Note: Step 1 gap analysis (2026-11-06): no article → full translation mirroring source numbering: References registry (ref-1..22) + ch.1–ch.11 + annexes A–E; annex F (List of figures, list of tables, and index) dropped as doc-meta; doc-meta chrome dropped per EXP precedent; no specification items; annex E histories are prose-only "no … in this release" statements (translated)
+  - Note: figures — 330 refs reconciled against the source's own List of Figures: 86 content diagrams embedded (Figure 1.1–1.6, 2.1–2.5, 3.1–3.4, 4.1–4.7, 5.1–5.8, 6.1–6.8, 7.1–7.10, 8.1–8.15, 9.1–9.8, 10.1, A.1–A.9, C.1–C.3, D.1–D.2) with source captions as alt text; conversion quirks repaired by PDF cross-check: Figure 1.4 (elk test) and 2.4/2.5 carried no separate captions in the markdown, 9.2/9.4 were duplicated-caption chrome, 7.3/7.4 are two distinct SPEM models (CP/AP); Figure 5.9's caption exists but its content image is absent from the conversion (noted in-article); ~244 chrome dropped
+  - Note: formulas — 7 `formula-not-decoded` recovered from the corpus PDF pp.186–187 (CAN frame/load/stuff-bit formulas 9.1–9.6, measurement = simulation formula) — rendered as fenced blocks with source equation numbers
+  - Note: technical shape — ch.1: 22-entry acronym table as GFM (source's own table form here, not the ch.2 blockquote style — the source has no ch.2 Definitions chapter), 28-term glossary table, 9 methodology-role tables as 属性|值; ch.4–7 use-case Characteristic Information tables as two-column tables; ch.9 placeholders `&lt;schedulable&gt;`/`&lt;resource&gt;` rendered as HTML entities; listings 9.1–9.3 + C.1 pseudo-code verbatim in fences (reconstructed readable); annex B's 30 TIMEX↔ARTI mapping tables as two-column tables with code identifiers verbatim; table 9.11/9.12 merged-cell rows (generic method + CAN-specific variant in one cell) noted in-article
+  - Note: Phase A (2026-11-06) — `mkdocs build --strict` exit 0, 0 WARNINGs (3 pre-existing bare-form INFO notices remain); `check_heading_lang.py` OK; `check_indexes.py` OK (314 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/`{DRAFT}`/`\<` in content; link census: 0 identifier mentions, 113 chapter-ref links + 54 citations linked (--apply idempotent, 0 changed on re-run), 1 UNRESOLVED [7] = alt-text occurrence inside a figure caption (not a citation context, stays), cross-article PORT ×18 report-only + CanSM ×1 NO-ARTICLE
+  - Note: Phase B (2026-11-06) — coverage References→参考文献, ch.1→§1 … ch.11→§11, A→§A (A.1–A.7), B→§B (B.1–B.3, 30 mapping tables), C→§C (C.1–C.3), D→§D, E→§E; deliberate omission: annex F (doc-meta — user to verify) + doc-meta chrome; URL audit: 2 dead URLs fixed with verified smallest replacements — omg.org formal/05-07-04 `cgi-bin/apps/doc` 500 (browser-UA also 500) → `cgi-bin/doc` 200 (same document, tr_glossary precedent), ieeexplore abstractAuthors.jsp?arnumber=6176662 404 with browser UA → document/6176662 202 (publisher's current URL, same document); dl.acm.org 403 = anti-bot kept
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (2026-11-06: approved — batch confirmation covering rows 15–19 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 66da8d4 · 2026-11-06 · TODO.md row flipped + batch-confirmation commit · branch feature/foundation-exp-batch-2)
+- [x] tps_standardization_template (AUTOSAR_FO_TPS_StandardizationTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Standardization Template（标准化模板）; target `foundation/methodology_templates/tps_standardization_template/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_TPS_StandardizationTemplate.md` — 7,281 lines, 301 figure refs, 590 item IDs; **giant source** — segment plan before Step 2 (OS/RTE precedent)
   - Note: related site content: cp/methodology_templates/basic_software_module_description_template (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: Step 1 gap analysis (2026-11-06): no article → full translation mirroring source numbering: References registry (ref-1..20) + ch.1–ch.6 + 附录 A–E; 附录 A（Reference Material / Requirements Tracing）omitted under the droppable set; doc-meta chrome dropped; 590 item IDs → bold translated titles per batch decision（正文名义引用保留：[TPS_GST_*]、[TPS_SWCT_*]、[SWS_BSW_00102]、[SWS_RamTst_00192]、constr_2540/2553/2554/2557-2559/2563/2566/2567/2570/2571、示例条目 [SWS_FOO_07711]/[ATR_FOO_04711]/[RS_BSW_*]/[RS_CANIF_*]（图 2.7 追溯表数据）、[TPS_XMLSPR_00003/00036/00046]、[TPS_SAFEX_*]（清单 B.16 数据）; 附录 E 变更历史 Number 列丢弃）
+  - Note: figures — 301 refs = 50 content diagrams（图 2.1/2.2/2.5/2.8、4.1–4.21、5.1、6.1–6.25 除源中缺图的 6.8/6.10）+ 4 张清单渲染图（Listing B.8/B.14/B.15/B.21——这四条清单正文在 markdown 转换中缺失或截断，以渲染图补足并注记）；图 2.3/2.4/2.6/2.7 源中以排版文本给出、无独立内容图 → 按站点表格规则以 GFM 表呈现并保留源图号；其余 ~247 张装饰图丢弃
+  - Note: technical shape — ch.2 的八类条目（规范项/约束项/建议项/非模板约束/需求/测试项/TraceableText/StructuredReq）全部译出；分页切断的条目闭合行（glyph[floorright] (RS_…) 单独成行）按上下文合并；扁平标题（References to other documents…、In this pattern…、A PortPrototypeBlueprint has the following characteristics 等）按正文导语处理；清单 4.1（ANTLR 语法）、4.2–4.4（表达式模式）、6.1–6.3、B.1–B.21 以可读缩进重构（B.16/B.19/B.20/B.21 在分页处损坏，按结构摘要保守重建并逐一注记）；附录 C 105 张类表全部译出（表题在源中位于表内容之后，按编号置顶；转换截断的备注单元格标注「（源单元格被截断）」，不臆造）；约束表（图 2.3 需求表示例）中源条目标题自带 {DRAFT} 生命周期标记 → 以 &#123;DRAFT&#125; 实体呈现以通过 hygiene grep
+  - Note: Phase A (2026-11-06) — `mkdocs build --strict` exit 0, 0 WARNINGs；本页 2 条 unrecognized-relative-link INFO（XSD pattern 正则片段被误判为链接）→ 以行内代码包裹修复后归零；`check_heading_lang.py` OK；`check_indexes.py` OK（315 nav targets, 0 broken）；`gen_api_list.py --check` up to date；hygiene：内容 0 × `^# `/`{DRAFT}`/`\<`/glyph 标记（provenance 注记除外）；link census：0 identifier mentions，19 chapter-ref links + 41 citations linked（--apply 幂等），1 UNRESOLVED（L512 的 [1] 为 XPath 起始索引说明、非引用上下文，保留），cross-article report-only PORT ×11 / Dcm ×1 SITE + CanIf ×2 / Sd ×1 NO-ARTICLE
+  - Note: Phase B (2026-11-06) — coverage References→参考文献, ch.1→§1（1.1）, ch.2→§2（2.1–2.3）, ch.3→§3, ch.4→§4（4.1.1–4.1.7、4.2.1–4.2.27、4.3）, ch.5→§5, ch.6→§6（6.1–6.6），附录 A 省略、B→§B（B.1–B.4，清单 B.1–B.21）、C→§C（105 张表）、D→§D（10 行表）、E→§E（E.1–E.10，标题列表）；deliberate omission：附录 A Requirements Tracing（droppable set — user to verify）+ doc-meta chrome；源 quirk 记录：E.3.1 表中 [TPS_STDT_00090]/[00091] 同名双行、[TPS_STDT_00146]/[00147] 并置行、表 C.66 recommendedPackage 拼写 LifeCycleStateDefintionGroups、C.68 avaliable 笔误、C.24 drivedFrom 笔误、C.90 包名 AuxillaryObjects——均按源保留并注记
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (2026-11-06: approved — batch confirmation covering rows 15–19 of this run)
+  - [x] Step 6 — TODO.md row + commit/PR (commit ceefe4f · 2026-11-06 · TODO.md row flipped + batch-confirmation commit · branch feature/foundation-exp-batch-2)
 - [ ] tps_generic_structure_template (AUTOSAR_FO_TPS_GenericStructureTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Generic Structure Template（通用结构模板）; target `foundation/methodology_templates/tps_generic_structure_template/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_FO_TPS_GenericStructureTemplate.md` — 15,110 lines, 663 figure refs, 578 item IDs; **giant source** — segment plan before Step 2 (OS/RTE precedent)

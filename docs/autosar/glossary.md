@@ -270,6 +270,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interface of AD/ADAS Vehicle Motion Control（AD/ADAS 车辆运动控制应用接口说明）](cp/application_interfaces/adas_vmc/index.md)（AUTOSAR_CP_EXP_AIADASAndVMC）
 {: .glossary-source}
 
+**AES**
+> 高级加密标准（**Advanced Encryption Standard**）
+>
+> 来源：[Specification of Secure Hardware Extensions（安全硬件扩展规范）](foundation/security/tr_secure_hardware_extensions/index.md)（AUTOSAR_FO_TR_SecureHardwareExtensions）
+{: .glossary-source}
+
 **AF**
 > 确认帧（Acknowledge Frame，请参阅 ISO 10681-2）。
 >
@@ -1456,6 +1462,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Requirements on Health Monitoring（健康监控需求）](foundation/health_monitoring/rs_health_monitoring/index.md)（AUTOSAR_FO_RS_HealthMonitoring）
 {: .glossary-source}
 
+**CMAC**
+> 基于分组密码的消息认证码（**Cipher-based Message Authentication Code**）
+>
+> 来源：[Specification of Secure Hardware Extensions（安全硬件扩展规范）](foundation/security/tr_secure_hardware_extensions/index.md)（AUTOSAR_FO_TR_SecureHardwareExtensions）
+{: .glossary-source}
+
 **CMDT**
 > **Connection Mode Data Transfer**，又称 **RTS**/**CTS**，**SAE J1939** 传输协议的点对点变体。
 >
@@ -2493,6 +2505,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 紧急呼叫（**Emergency Call**）
 >
 > 来源：[Explanation of Application Interfaces of Occupant and Pedestrian Safety Systems Domain（乘员与行人安全系统域应用接口说明）](cp/application_interfaces/occupant_safety/index.md)（AUTOSAR_CP_EXP_AIOccupantAndPedestrianSafety）
+{: .glossary-source}
+
+**ECB**
+> 电子密码本（**Electronic Code Book**）
+>
+> 来源：[Specification of Secure Hardware Extensions（安全硬件扩展规范）](foundation/security/tr_secure_hardware_extensions/index.md)（AUTOSAR_FO_TR_SecureHardwareExtensions）
 {: .glossary-source}
 
 **ECC**
@@ -3858,6 +3876,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](cp/application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis）
 {: .glossary-source}
 
+**HIS**
+> 汽车制造商倡议软件（**Hersteller Initiative Software**）
+>
+> 来源：[Specification of Secure Hardware Extensions（安全硬件扩展规范）](foundation/security/tr_secure_hardware_extensions/index.md)（AUTOSAR_FO_TR_SecureHardwareExtensions）
+{: .glossary-source}
+
 **HLC**
 > 高层通信（**High Level Communication**）。
 >
@@ -4478,6 +4502,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR Key Manager（密钥管理器）](cp/crypto/key_manager/index.md)（SWS_KeyManager）
 {: .glossary-source}
 
+**IV**
+> 初始化向量（**Initialization Vector**）
+>
+> 来源：[Specification of Secure Hardware Extensions（安全硬件扩展规范）](foundation/security/tr_secure_hardware_extensions/index.md)（AUTOSAR_FO_TR_SecureHardwareExtensions）
+{: .glossary-source}
+
 **IVI**
 > 基础设施到车辆信息（**Infrastructure to Vehicle Information**）。
 >
@@ -4894,10 +4924,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR BSW General（基础软件模块通用规范）](cp/general/bsw_general/index.md)（SWS_BSWGeneral）
 {: .glossary-source}
 
-**MAC**
-> 报文认证码（**Message Authentication Code**）。
->
-> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](cp/globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR SecOC (Secure Onboard Communication)](cp/communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR V2X GeoNetworking（V2X地理网络）](cp/communication/v2x_geonet/index.md)（AUTOSAR_CP_SWS_V2XGeoNetworking）、[Secure Onboard Communication Protocol Specification（安全车载通信协议规范）](foundation/protocols/prs_secoc_protocol/index.md)（AUTOSAR_FO_PRS_SecOcProtocol）
+> 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](cp/globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR SecOC (Secure Onboard Communication)](cp/communication/sec_oc/index.md)（AUTOSAR_CP_SWS_SecOc）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）、[AUTOSAR V2X GeoNetworking（V2X地理网络）](cp/communication/v2x_geonet/index.md)（AUTOSAR_CP_SWS_V2XGeoNetworking）、[Secure Onboard Communication Protocol Specification（安全车载通信协议规范）](foundation/protocols/prs_secoc_protocol/index.md)（AUTOSAR_FO_PRS_SecOcProtocol）、来源：[Specification of Secure Hardware Extensions（安全硬件扩展规范）](foundation/security/tr_secure_hardware_extensions/index.md)（AUTOSAR_FO_TR_SecureHardwareExtensions）
 {: .glossary-source}
 
 **Machine**
@@ -6556,6 +6583,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
 
+**PRNG**
+> 伪随机数生成器（**Pseudo Random Number Generator**）
+>
+> 来源：[Specification of Secure Hardware Extensions（安全硬件扩展规范）](foundation/security/tr_secure_hardware_extensions/index.md)（AUTOSAR_FO_TR_SecureHardwareExtensions）
+{: .glossary-source}
+
 **Probability of Failure**
 > 系统或功能单元中发生失效（**Failure**）的概率。
 >
@@ -7564,10 +7597,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR V2X GeoNetworking（V2X地理网络）](cp/communication/v2x_geonet/index.md)（AUTOSAR_CP_SWS_V2XGeoNetworking）
 {: .glossary-source}
 
-**SHE**
-> 安全硬件扩展（**Security Hardware Extension**）。
->
-> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](cp/crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](cp/crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Crypto Service Manager（加密服务管理器）](cp/crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）
+> 来源：[AUTOSAR Crypto Driver（加密驱动程序）](cp/crypto/crypto_driver/index.md)（SWS_CryptoDriver）、[AUTOSAR Crypto Interface（加密接口）](cp/crypto/crypto_interface/index.md)（SWS_CryptoInterface）、[AUTOSAR Crypto Service Manager（加密服务管理器）](cp/crypto/crypto_service_manager/index.md)（SWS_CryptoServiceManager）、来源：[Specification of Secure Hardware Extensions（安全硬件扩展规范）](foundation/security/tr_secure_hardware_extensions/index.md)（AUTOSAR_FO_TR_SecureHardwareExtensions）
 {: .glossary-source}
 
 **SHM**
@@ -8598,6 +8628,11 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR J1939Tp（SAE J1939 传输层）](cp/communication/j1939tp/index.md)（AUTOSAR_CP_SWS_SAEJ1939TransportLayer）
 {: .glossary-source}
 
+**TPM**
+> 可信平台模块（**Trusted Platform Module**）
+>
+> 来源：[Specification of Secure Hardware Extensions（安全硬件扩展规范）](foundation/security/tr_secure_hardware_extensions/index.md)（AUTOSAR_FO_TR_SecureHardwareExtensions）
+
 **Trace**
 > 可以通过对代码插桩生成的消息（例如 **VFB** 跟踪）。被插桩的代码调用 **LT** 的 **API**。
 >
@@ -8644,6 +8679,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 如果需要在 Dem_Init 和 Dem_Shutdown 之间触发数据的存储，**Dem** 模块应使用 **NVRAM** 管理器的 **API** NvM_WriteBlock。此外，如果请求已被接受，**Dem** 模块应等待 NvM_WriteBlock 的肯定响应。
 >
 > 来源：[AUTOSAR Diagnostic Event Manager（诊断事件管理器）](cp/diagnostics/diagnostic_event_manager/index.md)（SWS_DiagnosticEventManager）
+{: .glossary-source}
+
+**TRNG**
+> 真随机数生成器（**True Random Number Generator**）
+>
+> 来源：[Specification of Secure Hardware Extensions（安全硬件扩展规范）](foundation/security/tr_secure_hardware_extensions/index.md)（AUTOSAR_FO_TR_SecureHardwareExtensions）
 {: .glossary-source}
 
 **TS**
@@ -8799,6 +8840,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 用户界面（**User Interface**）
 >
 > 来源：[Explanation of Application Interfaces of the HMI, Multimedia and Telematics Domain（HMI/多媒体/远程信息处理域应用接口说明）](cp/application_interfaces/hmi/index.md)（AUTOSAR_CP_EXP_AIHMIMultimediaAndTelematics）
+{: .glossary-source}
+
+**UID**
+> 唯一标识项（**Unique IDentification item**）
+>
+> 来源：[Specification of Secure Hardware Extensions（安全硬件扩展规范）](foundation/security/tr_secure_hardware_extensions/index.md)（AUTOSAR_FO_TR_SecureHardwareExtensions）
 {: .glossary-source}
 
 **UL**

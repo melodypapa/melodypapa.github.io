@@ -32,9 +32,12 @@ title: "基础标准（Foundation）"
   * [Specification of Abstract Platform（抽象平台规范）](methodology_templates/tps_abstract_platform_specification/index.md)
   * [Requirements on Security Extract Template（安全提取模板需求）](methodology_templates/rs_security_extract_template/index.md)
   * [Requirements on Feature Model Exchange Format（特征模型交换格式需求）](methodology_templates/rs_feature_model_exchange_format/index.md)
+  * [Standardization Template（标准化模板）](methodology_templates/tps_standardization_template/index.md)
+  * [Feature Model Exchange Format（特征模型交换格式）](methodology_templates/tps_feature_model_exchange_format/index.md)
   * [Requirements on Methodology（方法论需求）](methodology_templates/rs_methodology/index.md)
   * [Requirements on Standardization Template（标准化模板需求）](methodology_templates/rs_standardization_template/index.md)
   * [Requirements on Timing Extensions（时序扩展需求）](methodology_templates/rs_timing_extensions/index.md)
+  * [Security Extract Template（安全提取模板）](methodology_templates/tps_security_extract_template/index.md)
   * [Log and Trace Extract Template（日志与跟踪提取模板）](methodology_templates/tps_log_and_trace_extract/index.md)
   * [ARXML Serialization Rules（ARXML 序列化规则）](methodology_templates/tps_arxml_serialization_rules/index.md)
   * [XML Schema Production Rules（XML 模式生成规则）](methodology_templates/tps_xml_schema_production_rules/index.md)
@@ -59,7 +62,9 @@ title: "基础标准（Foundation）"
   * [Requirements on Intrusion Detection System（入侵检测系统需求）](security/rs_intrusion_detection_system/index.md)
   * [Requirements on Firewall（防火墙需求）](security/rs_firewall/index.md)
   * [List of Known Issues of Secure Hardware Extensions（安全硬件扩展已知问题清单）](security/tr_list_of_known_issues_secure_hardware_extensions/index.md)
+  * [Specification of Secure Hardware Extensions（安全硬件扩展规范）](security/tr_secure_hardware_extensions/index.md)
 * [系统服务（System Services）](system_services/index.md)
+  * [Timing Analysis（时序分析）](system_services/tr_timing_analysis/index.md)
 
 ## 相关内容
 
