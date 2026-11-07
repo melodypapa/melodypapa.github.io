@@ -11104,3 +11104,696 @@ ViewMap 的示例用例（参见 [TPS\_SYST\_01136]）：
 | role                    | Identifier   | 0..1   | attr | 该属性用于描述特定的映射场景，例如映射：AR\_AbstractSystemDescription\_SystemDescription；AR\_SystemDescription\_SystemExtract。标签：xml.sequenceOffset=10                                  |
 | secondElement           | Referrable   | *      | ref  | 指向“第二”侧上可标识元素的引用。标签：xml.sequenceOffset=30                                                                                                                              |
 | secondElementInstance   | AtpFeature   | *      | iref | 指向“第二”侧上元素的实例引用。标签：xml.sequenceOffset=60。InstanceRef 实现为：AnyInstanceRef                                                                                        |
+
+## A. 术语表（Glossary）
+
+**Artifact（制品）**
+> 这是一个工作产品定义（Work Product Definition），它为有形的工作产品类型提供描述与定义。制品可以由其他制品组成（[\[24\]](#ref-24)）。
+>
+> 在高层，一个制品表现为单一的概念性文件。
+
+**AUTOSAR Tool（AUTOSAR 工具）**
+> 这是一个支持方法论中定义为一个或多个 AUTOSAR 任务的软件工具。取决于所支持的任务，AUTOSAR 工具可以充当编写工具（authoring tool）、转换工具（converter tool）、处理工具（processor tool）或它们的组合（见各自的定义）。
+
+**AUTOSAR Authoring Tool（AUTOSAR 编写工具）**
+> 用于创建与修改 AUTOSAR XML 描述的 AUTOSAR 工具。示例：System Description Editor。
+
+**AUTOSAR Converter Tool（AUTOSAR 转换工具）**
+> 通过转换来自其他 AUTOSAR XML 文件的信息来创建 AUTOSAR XML 文件的 AUTOSAR 工具。示例：ECU Flattener。
+
+**AUTOSAR Definition（AUTOSAR 定义）**
+> 这是可以拥有取值的参数的定义。可以说参数取值是这些定义的实例（Instance）。但在 AUTOSAR 的元模型层次中，定义本身也是元模型的实例，因此被视为一种描述。AUTOSAR 定义的例子有：EcucParameterDef、PostBuildVariantCriterion、SwSystemconst。
+
+**AUTOSAR XML Description（AUTOSAR XML 描述）**
+> 在 AUTOSAR 中，这意味着“填好的模板（filled Template）”。实际上，AUTOSAR XML 描述是 AUTOSAR 模型的 XML 表示。
+>
+> AUTOSAR XML 描述可以由多个文件组成。每个单独的文件表示一个 AUTOSAR 部分模型，并且应当能够对照 AUTOSAR XML schema 校验成功。
+
+**AUTOSAR Meta-Model（AUTOSAR 元模型）**
+> 这是一个 UML 2.0 模型，它定义描述 AUTOSAR 系统的语言。AUTOSAR 元模型是 AUTOSAR 模板的 UML 表示。UML 2.0 类图用于描述属性及其相互关系。构型（stereotype）、UML 标签与 OCL 表达式（对象约束语言）用于定义特定的语义与约束。
+
+**AUTOSAR Meta-Model Tool（AUTOSAR 元模型工具）**
+> AUTOSAR 元模型工具是在 AUTOSAR 元模型上生成不同视图（类表、约束清单、图、XML Schema 等）的工具。
+
+**AUTOSAR Model（AUTOSAR 模型）**
+> 这是 AUTOSAR 产品的一个表示。AUTOSAR 模型按照 AUTOSAR 方法论表示适合预期用途的方面。
+>
+> 严格说来，这是 AUTOSAR 元模型的一个实例。AUTOSAR 模型中包含的信息可以是按照 AUTOSAR 元模型可表示的任何东西。
+
+**AUTOSAR Partial Model（AUTOSAR 部分模型）**
+> 在 AUTOSAR 中，模型可能的划分在元模型中以 **&lt;atpSplitable&gt;** 标注。一个部分模型在 AUTOSAR XML 描述中由一个文件表示。部分模型不需要满足适用于 AUTOSAR 模型的全部语义约束。
+
+**AUTOSAR Processor Tool（AUTOSAR 处理工具）**
+> 通过处理来自 AUTOSAR XML 文件的信息来创建非 AUTOSAR 文件的 AUTOSAR 工具。示例：RTE 生成器（RTE Generator）。
+
+**AUTOSAR Specification Element（AUTOSAR 规范元素）**
+> AUTOSAR 规范元素是 AUTOSAR 规范的一部分的命名元素。示例：需求、约束、规范项、元模型中的类或属性、方法论、交付物、方法论活动、模型元素、BSW 模块等。
+
+**AUTOSAR Template（AUTOSAR 模板）**
+> 术语“模板（Template）”在 AUTOSAR 中用于描述不同种类描述的格式。术语“模板”源于如下思想：AUTOSAR 定义一种表单，应当把它填好以描述一个模型。填好的表单随后被称为描述。
+>
+> 实际上，AUTOSAR 模板现在被定义为一个元模型。
+
+**AUTOSAR Validation Tool（AUTOSAR 校验工具）**
+> 一种专门的 AUTOSAR 工具，能够对照某个构型（profile）定义的规则检查 AUTOSAR 模型。
+
+**AUTOSAR XML Schema（AUTOSAR XML Schema）**
+> 这是一个 W3C XML schema，它定义交换 AUTOSAR 模型的语言。该 Schema 派生自 AUTOSAR 元模型。AUTOSAR XML Schema 定义 AUTOSAR 数据交换格式。
+
+**Blueprint（蓝图）**
+> 这是一个可以被其他模型通过复制与细化而派生的模型。注意，与元模型或类型相反，这一过程不是实例化。
+
+**Instance（实例）**
+> 一般而言，这是模型或类型的特定样本（exemplar）。
+
+**Life Cycle（生命周期）**
+> 生命周期是一个模型元素在其生命期内的发展/演化阶段的过程。
+
+**Meta-Model（元模型）**
+> 它定义模型的构造块。在这个意义上，元模型表示构建模型的语言。
+
+**Meta-Data（元数据）**
+> 这包括关于数据的相关信息，包括关于作者、版本、访问权限、时间戳等的信息。
+
+**Model（模型）**
+> 模型是现实的简化表示。模型表示适合预期目的的各个方面。
+
+**Partial Model（部分模型）**
+> 这是模型的一部分，预期被持久化在一个特定的制品中。
+
+**Pattern in GST（GST 中的模式）**
+> 这是一种通过应用模型转换来简化元模型定义的方法。该转换从一个带注记的模型产生一个增强的模型。
+
+**Profile Authoring Support Data（构型编写支持数据）**
+> 用于高效编写构型（profile）的数据。例如可引用约束的清单、元类、元属性或其他可复用的模型资产（蓝图）。
+
+**Profile Authoring Tool（构型编写工具）**
+> 一种专门的 AUTOSAR 工具，聚焦于为数据交换点编写构型。它例如提供从头创建构型、修改既有构型或组合既有构型的支持。
+
+**Profile Compatibility Checker Tool（构型兼容性检查工具）**
+> 一种专门的 AUTOSAR 工具，聚焦于检查数据交换构型的兼容性。注意，该兼容性检查包括工程师的手工兼容性检查以及使用更形式化算法的自动辅助。
+
+**Profile Consistency Checker Tool（构型一致性检查工具）**
+> 一种专门的 AUTOSAR 工具，聚焦于检查构型的一致性。
+
+**Property（属性）**
+> 属性是对象的一个结构特征。例如一个“连接器（connector）”拥有属性“接收端口（receive port）”与“发送端口（send port）”。
+>
+> 属性通过 **&lt;atpVariation&gt;** 成为可变体。
+
+**Prototype（原型）**
+> 这是在另一个类型的定义中一个类型角色的实现。换言之，一个类型可以包含原型，而这些原型又由“类型”定型。当该类型被实例化时，这些原型中的每一个都成为一个实例。
+
+**Type（类型）**
+> 类型提供可以出现在该类型各种角色中的特征。
+
+**Value（取值）**
+> 这是赋给某个“定义（Definition）”的一个特定取值。
+
+**Variability（可变性）**
+> 系统的可变性是其描述一组变体的性质。这些变体的特征是变体特定的属性设置和/或选择。例如，这样的系统属性选择表现为某个连接的特定“接收端口”。
+>
+> 这使用 **&lt;atpVariation&gt;** 实现。
+
+**Variant（变体）**
+> 系统变体是系统的一个具体实现，其全部属性都已被设置相应地选定。就施加时间而言，软件系统不再具有可变性。
+>
+> 这使用 EvaluatedVariantSet 实现。
+
+**Variation Binding（变体施加）**
+> 变体是变体施加过程的结果，该过程通过为系统的全部属性赋予特定的取值/选择来解析系统的可变性。
+>
+> 这由 VariationPoint 实现。
+
+**Variation Binding Time（变体施加时间）**
+> 变体施加时间决定方法论中由一组可变属性给出的可变性被解析的步骤。
+>
+> 这由相关属性上的 vh.LatestBindingtime 实现。
+
+**Variation Definition Time（变体定义时间）**
+> 变体定义时间决定方法论中变体点被定义的步骤。
+
+**Variation Point（变体点）**
+> 变体点表明一个属性受变体支配。此外，它与一个条件和一个施加时间相关联，后者定义选择/设置具体变体的系统上下文。
+>
+> 这由 VariationPoint 实现。
+
+## B. 参考材料（Reference Material）
+
+> **省略注记：** 附录 B（Reference Material）在 R23-11 源文档的 markdown 转换中仅有页码/框架残留（“406 of 535” 页脚），无正文内容。按需求可追溯性可省略集合（STANDARD.md §1，用户决定 2026-10-25）并对照 PDF 核实后省略——该附录在源 PDF 中对应需求追溯表。请在确认门核验此省略。
+
+## C. 本文档范围内的变体点
+
+本章包含元模型中所有带有构型 **&lt;atpVariation&gt;** 的模型元素的表。
+
+表中的每个条目由模型元素本身的标识以及标签值 vh.latestBindingTime 的适用取值组成。
+
+表C.1：变体点的使用（Usage of variation points）
+
+| 变体点（Variation Point） | 最晚施加时间 |
+|-------------------------------------------------------------------|------------------------|
+| AbstractCanCluster | postBuild |
+| AbstractCanCommunicationController | postBuild |
+| AbstractServiceInstance.capabilityRecord | postBuild |
+| AbstractServiceInstance.methodActivationRoutingGroup | postBuild |
+| AccessCount.value | preCompileTime |
+| AccessCountSet.accessCount | preCompileTime |
+| AliasNameSet.aliasName | preCompileTime |
+| ApplicationArrayElement.maxNumberOfElements | preCompileTime |
+| ApplicationRecordDataType.element | preCompileTime |
+| ARPackage.arPackage | blueprintDerivationTime |
+| ARPackage.element | systemDesignTime |
+| ArrayValueSpecification.element | preCompileTime |
+| AtomicSwComponentType.internalBehavior | preCompileTime |
+| AUTOSAR.arPackage | blueprintDerivationTime |
+| BlueprintPolicyList.maxNumberOfElements | blueprintDerivationTime |
+| BlueprintPolicyList.minNumberOfElements | blueprintDerivationTime |
+| BswInternalBehavior.arTypedPerInstanceMemory | preCompileTime |
+| BswInternalBehavior.bswPerInstanceMemoryPolicy | preCompileTime |
+| BswInternalBehavior.clientPolicy | preCompileTime |
+| BswInternalBehavior.distinguishedPartition | preCompileTime |
+| BswInternalBehavior.entity | preCompileTime |
+| BswInternalBehavior.event | preCompileTime |
+| BswInternalBehavior.exclusiveAreaPolicy | preCompileTime |
+| BswInternalBehavior.internalTriggeringPoint | preCompileTime |
+| BswInternalBehavior.internalTriggeringPointPolicy | preCompileTime |
+| BswInternalBehavior.modeReceiverPolicy | preCompileTime |
+| BswInternalBehavior.modeSenderPolicy | preCompileTime |
+| BswInternalBehavior.parameterPolicy | preCompileTime |
+| BswInternalBehavior.perInstanceParameter | preCompileTime |
+| BswInternalBehavior.receptionPolicy | preCompileTime |
+| BswInternalBehavior.releasedTriggerPolicy | preCompileTime |
+| BswInternalBehavior.schedulerNamePrefix | preCompileTime |
+| BswInternalBehavior.sendPolicy | preCompileTime |
+| BswInternalBehavior.serviceDependency | preCompileTime |
+| BswInternalBehavior.triggerDirectImplementation | preCompileTime |
+| BswModuleDependency.targetModuleRef | preCompileTime |
+| BswModuleDescription.bswModuleDependency | preCompileTime |
+| BswModuleDescription.bswModuleDocumentation | preCompileTime |
+| BswModuleDescription.expectedEntry | preCompileTime |
+| BswModuleDescription.implementedEntry | preCompileTime |
+| BswModuleDescription.providedClientServerEntry | preCompileTime |
+| BswModuleDescription.providedData | preCompileTime |
+| BswModuleDescription.providedModeGroup | preCompileTime |
+| BswModuleDescription.releasedTrigger | preCompileTime |
+| BswModuleDescription.requiredClientServerEntry | preCompileTime |
+| BswModuleDescription.requiredData | preCompileTime |
+| BswModuleDescription.requiredModeGroup | preCompileTime |
+| BswModuleDescription.requiredTrigger | preCompileTime |
+| BswModuleEntity.accessedModeGroup | preCompileTime |
+| BswModuleEntity.activationPoint | preCompileTime |
+| BswModuleEntity.callPoint | preCompileTime |
+| BswModuleEntity.dataReceivePoint | preCompileTime |
+| BswModuleEntity.dataSendPoint | preCompileTime |
+| BswModuleEntity.issuedTrigger | preCompileTime |
+| BswModuleEntity.managedModeGroup | preCompileTime |
+| BswModuleEntry.argument | blueprintDerivationTime |
+| BswServiceDependency.assignedData | preCompileTime |
+| BswServiceDependency.assignedEntryRole | preCompileTime |
+| BuildActionManifest.buildAction | blueprintDerivationTime |
+| BuildActionManifest.buildActionEnvironment | blueprintDerivationTime |
+| BulkNvDataDescriptor.nvBlockDataMapping | preCompileTime |
+| BusMirrorChannel.channel | systemDesignTime |
+| BusMirrorChannelMapping.targetPduTriggering | postBuild |
+| CalibrationParameterValueSet.calibrationParameterValue | preCompileTime |
+| CanCluster | postBuild |
+| CanCommunicationController | postBuild |
+| CanTpConfig.tpAddress | postBuild |
+| CanTpConfig.tpChannel | postBuild |
+| CanTpConfig.tpConnection | postBuild |
+| CanTpConfig.tpEcu | postBuild |
+| CanTpConfig.tpNode | postBuild |
+| ChapterOrMsrQuery.chapter | postBuild |
+| ClientIdDefinitionSet.clientIdDefinition | postBuild |
+| ClientIdRange.lowerLimit | preCompileTime |
+| ClientIdRange.upperLimit | preCompileTime |
+| ClientServerInterface.operation | blueprintDerivationTime |
+| ClientServerInterfaceToBswModuleEntryBlueprintMapping.operationMapping | preCompileTime |
+| ClientServerInterfaceToBswModuleEntryBlueprintMapping.portDefinedArgumentBlueprint | preCompileTime |
+| ClientServerOperation.argument | blueprintDerivationTime |
+| CommunicationCluster | postBuild |
+| CommunicationCluster.physicalChannel | systemDesignTime |
+| CommunicationController | postBuild |
+| CompositionSwComponentType.component | postBuild |
+| CompositionSwComponentType.connector | postBuild |
+| CompositionSwComponentType.instantiationRTEEventProps | codeGenerationTime |
+| CompuConstFormulaContent.vf | codeGenerationTime |
+| CompuNominatorDenominator.v | preCompileTime |
+| CompuScale.lowerLimit | preCompileTime |
+| CompuScale.upperLimit | preCompileTime |
+| CompuScales.compuScale | blueprintDerivationTime |
+| ConsistencyNeeds.dpgDoesNotRequireCoherency | preCompileTime |
+| ConsistencyNeeds.dpgRequiresCoherency | preCompileTime |
+| ConsistencyNeeds.regDoesNotRequireStability | preCompileTime |
+| ConsistencyNeeds.regRequiresStability | preCompileTime |
+| ConsistencyNeedsBlueprintSet.consistencyNeeds | preCompileTime |
+| ConsumedEventGroup.eventMulticastAddress | postBuild |
+| ConsumedEventGroup.sdClientTimerConfig | postBuild |
+| ConsumedProvidedServiceInstanceGroup.consumedServiceInstance | postBuild |
+| ConsumedProvidedServiceInstanceGroup.providedServiceInstance | postBuild |
+| ConsumedServiceInstance.allowedServiceProvider | postBuild |
+| ConsumedServiceInstance.consumedEventGroup | postBuild |
+| ConsumedServiceInstance.eventMulticastSubscriptionAddress | postBuild |
+| ConsumedServiceInstance.localUnicastAddress | postBuild |
+| ConsumedServiceInstance.remoteUnicastAddress | postBuild |
+| ConsumedServiceInstance.sdClientTimerConfig | postBuild |
+| CouplingElement.couplingElementDetails | postBuild |
+| CouplingElement.couplingPort | postBuild |
+| CouplingPortConnection.nodePort | postBuild |
+| CpSoftwareCluster.swComponentAssignment | postBuild |
+| CpSoftwareCluster.swComposition | systemDesignTime |
+| CpSoftwareClusterMappingSet.portElementToComResourceMapping | postBuild |
+| CpSoftwareClusterMappingSet.resourceToApplicationPartitionMapping | systemDesignTime |
+| CpSoftwareClusterMappingSet.softwareClusterToResourceMapping | preCompileTime |
+| CpSoftwareClusterMappingSet.swcToApplicationPartitionMapping | postBuild |
+| CpSoftwareClusterToEcuInstanceMapping.swCluster | systemDesignTime |
+| DataPrototypeGroup.dataPrototypeGroup | preCompileTime |
+| DataPrototypeGroup.implicitDataAccess | preCompileTime |
+| DataTransformationSet.dataTransformation | codeGenerationTime |
+| DataTransformationSet.transformationTechnology | codeGenerationTime |
+| DdsCpConsumedServiceInstance.consumedDdsOperation | systemDesignTime |
+| DdsCpConsumedServiceInstance.consumedDdsServiceEvent | systemDesignTime |
+| DdsCpConsumedServiceInstance.localUnicastAddress | systemDesignTime |
+| DdsCpConsumedServiceInstance.staticRemoteMulticastAddress | systemDesignTime |
+| DdsCpConsumedServiceInstance.staticRemoteUnicastAddress | systemDesignTime |
+| DdsCpProvidedServiceInstance.localUnicastAddress | systemDesignTime |
+| DdsCpProvidedServiceInstance.providedDdsOperation | systemDesignTime |
+| DdsCpProvidedServiceInstance.providedDdsServiceInstanceEvent | systemDesignTime |
+| DdsCpProvidedServiceInstance.staticRemoteMulticastAddress | systemDesignTime |
+| DdsCpProvidedServiceInstance.staticRemoteUnicastAddress | systemDesignTime |
+| DefList.defItem | postBuild |
+| DiagEventDebounceCounterBased.counterDecrementStepSize | preCompileTime |
+| DiagEventDebounceCounterBased.counterFailedThreshold | preCompileTime |
+| DiagEventDebounceCounterBased.counterIncrementStepSize | preCompileTime |
+| DiagEventDebounceCounterBased.counterJumpDown | preCompileTime |
+| DiagEventDebounceCounterBased.counterJumpDownValue | preCompileTime |
+| DiagEventDebounceCounterBased.counterJumpUp | preCompileTime |
+| DiagEventDebounceCounterBased.counterJumpUpValue | preCompileTime |
+| DiagEventDebounceCounterBased.counterPassedThreshold | preCompileTime |
+| DiagEventDebounceTimeBased.timeBasedFdcThresholdStorageValue | preCompileTime |
+| DiagEventDebounceTimeBased.timeFailedThreshold | preCompileTime |
+| DiagEventDebounceTimeBased.timePassedThreshold | preCompileTime |
+| DiagnosticAbstractDataIdentifier.id | preCompileTime |
+| DiagnosticAbstractParameter.dataElement | postBuild |
+| DiagnosticAging.agingCycle | preCompileTime |
+| DiagnosticAging.threshold | preCompileTime |
+| DiagnosticCommonProps | codeGenerationTime |
+| DiagnosticConnectedIndicator.healingCycleCounterThreshold | preCompileTime |
+| DiagnosticContributionSet.element | postBuild |
+| DiagnosticContributionSet.serviceTable | postBuild |
+| DiagnosticDataIdentifier.dataElement | postBuild |
+| DiagnosticDebounceAlgorithmProps.debounceBehavior | preCompileTime |
+| DiagnosticEnableConditionGroup.enableCondition | postBuild |
+| DiagnosticEvent.confirmationThreshold | preCompileTime |
+| DiagnosticEvent.connectedIndicator | postBuild |
+| DiagnosticFreezeFrame.recordNumber | preCompileTime |
+| DiagnosticIndicator.type | preCompileTime |
+| DiagnosticIumprGroup.iumprGroupIdentifier | postBuild |
+| DiagnosticMeasurementIdentifier.obdMid | preCompileTime |
+| DiagnosticParameterIdentifier.dataElement | postBuild |
+| DiagnosticProtocol.diagnosticConnection | postBuild |
+| DiagnosticProtocol.priority | preCompileTime |
+| DiagnosticProtocol.sendRespPendOnTransToBoot | preCompileTime |
+| DiagnosticProtocol.serviceTable | postBuild |
+| DiagnosticRoutine.id | preCompileTime |
+| DiagnosticServiceTable.diagnosticConnection | postBuild |
+| DiagnosticStorageConditionGroup.storageCondition | postBuild |
+| DiagnosticTestIdentifier.id | preCompileTime |
+| DiagnosticTestIdentifier.uasId | preCompileTime |
+| DiagnosticTestResult.diagnosticEvent | preCompileTime |
+| DiagnosticTroubleCodeGroup.dtc | postBuild |
+| DiagnosticTroubleCodeGroup.groupNumber | preCompileTime |
+| DiagnosticTroubleCodeObd.considerPtoStatus | preCompileTime |
+| DiagnosticTroubleCodeObd.eventReadinessGroup | postBuild |
+| DiagnosticTroubleCodeObd.obdDTCValue | preCompileTime |
+| DiagnosticTroubleCodeProps.extendedDataRecord | preCompileTime |
+| DiagnosticTroubleCodeProps.freezeFrame | preCompileTime |
+| DiagnosticTroubleCodeProps.legislatedFreezeFrameContentUdsObd | preCompileTime |
+| DiagnosticTroubleCodeProps.priority | preCompileTime |
+| DiagnosticTroubleCodeProps.snapshotRecordContent | preCompileTime |
+| DiagnosticTroubleCodeUds.considerPtoStatus | preCompileTime |
+| DiagnosticTroubleCodeUds.eventReadinessGroup | postBuild |
+| DiagnosticTroubleCodeUds.functionalUnit | preCompileTime |
+| DiagnosticTroubleCodeUds.obdDtcValue3Byte | preCompileTime |
+| DiagnosticTroubleCodeUds.severity | preCompileTime |
+| DiagnosticTroubleCodeUds.udsDtcValue | preCompileTime |
+| DiagnosticTroubleCodeUds.wwhObdDtcClass | preCompileTime |
+| DltApplication.context | systemDesignTime |
+| DltContext.dltMessage | systemDesignTime |
+| DltEcu.application | systemDesignTime |
+| DocumentationBlock.defList | postBuild |
+| DocumentationBlock.figure | postBuild |
+| DocumentationBlock.formula | postBuild |
+| DocumentationBlock.labeledList | postBuild |
+| DocumentationBlock.list | postBuild |
+| DocumentationBlock.note | postBuild |
+| DocumentationBlock.p | postBuild |
+| DocumentationBlock.structuredReq | postBuild |
+| DocumentationBlock.trace | postBuild |
+| DocumentationBlock.verbatim | postBuild |
+| EcucAbstractStringParamDef | codeGenerationTime |
+| EcucBooleanParamDef.defaultValue | codeGenerationTime |
+| EcucContainerValue.parameterValue | postBuild |
+| EcucContainerValue.referenceValue | postBuild |
+| EcucContainerValue.subContainer | postBuild |
+| EcucDefinitionElement.lowerMultiplicity | codeGenerationTime |
+| EcucDefinitionElement.upperMultiplicity | codeGenerationTime |
+| EcucDefinitionElement.upperMultiplicityInfinite | codeGenerationTime |
+| EcucFloatParamDef.defaultValue | codeGenerationTime |
+| EcucFloatParamDef.max | codeGenerationTime |
+| EcucFloatParamDef.min | codeGenerationTime |
+| EcucFunctionNameDef | codeGenerationTime |
+| EcucIntegerParamDef.defaultValue | codeGenerationTime |
+| EcucIntegerParamDef.max | codeGenerationTime |
+| EcucIntegerParamDef.min | codeGenerationTime |
+| EcucLinkerSymbolDef | codeGenerationTime |
+| EcucModuleConfigurationValues.container | postBuild |
+| EcucMultilineStringParamDef | codeGenerationTime |
+| EcucNumericalParamValue.value | preCompileTime |
+| EcucStringParamDef | codeGenerationTime |
+| EcucValueCollection.ecucValue | preCompileTime |
+| EcuInstance.associatedConsumedProvidedServiceInstanceGroup | postBuild |
+| EcuInstance.commController | postBuild |
+| EcuInstance.connector | postBuild |
+| EndToEndProtection.endToEndProtectionISignalIPdu | preCompileTime |
+| EndToEndProtection.endToEndProtectionVariablePrototype | preCompileTime |
+| EndToEndProtectionSet.endToEndProtection | preCompileTime |
+| EndToEndTransformationISignalProps | postBuild |
+| ErrorTracerNeeds.tracedFailure | preCompileTime |
+| EthernetCluster | postBuild |
+| EthernetCluster.couplingPortConnection | postBuild |
+| EthernetCommunicationController | postBuild |
+| EventHandler.eventMulticastAddress | postBuild |
+| EventHandler.sdServerEgTimingConfig | postBuild |
+| ExecutableEntity.canEnter | preCompileTime |
+| ExecutableEntity.runsInside | preCompileTime |
+| FlatMap.instance | postBuild |
+| FlexrayArTpConfig.tpAddress | postBuild |
+| FlexrayArTpConfig.tpChannel | postBuild |
+| FlexrayArTpConfig.tpNode | postBuild |
+| FlexrayCluster | postBuild |
+| FlexrayCommunicationController | postBuild |
+| FlexrayTpConfig.pduPool | postBuild |
+| FlexrayTpConfig.tpAddress | postBuild |
+| FlexrayTpConfig.tpConnection | postBuild |
+| FlexrayTpConfig.tpConnectionControl | postBuild |
+| FlexrayTpConfig.tpEcu | postBuild |
+| FlexrayTpConfig.tpNode | postBuild |
+| Frame.pduToFrameMapping | postBuild |
+| FrameTriggering.pduTriggering | postBuild |
+| Gateway.frameMapping | postBuild |
+| Gateway.iPduMapping | postBuild |
+| Gateway.signalMapping | postBuild |
+| GlobalTimeDomain.gateway | postBuild |
+| GlobalTimeDomain.globalTimeDomainProperty | postBuild |
+| GlobalTimeDomain.globalTimeMaster | postBuild |
+| GlobalTimeDomain.globalTimeSubDomain | postBuild |
+| GlobalTimeDomain.pduTriggering | postBuild |
+| GlobalTimeDomain.slave | postBuild |
+| HwAttributeValue.v | systemDesignTime |
+| HwDescriptionEntity.hwAttributeValue | systemDesignTime |
+| HwElement.hwElementConnection | systemDesignTime |
+| HwElement.hwPinGroup | systemDesignTime |
+| HwElement.nestedElement | systemDesignTime |
+| HwElementConnector.hwPinConnection | systemDesignTime |
+| HwElementConnector.hwPinGroupConnection | systemDesignTime |
+| HwPinGroupConnector.hwPinConnection | systemDesignTime |
+| HwPinGroupContent.hwPin | systemDesignTime |
+| HwPinGroupContent.hwPinGroup | systemDesignTime |
+| IdsDesign.element | systemDesignTime |
+| IdsmInstance.ecuInstance | systemDesignTime |
+| IdsmInstance.rateLimitationFilter | preCompileTime |
+| IdsmInstance.trafficLimitationFilter | preCompileTime |
+| IEEE1722TpAcfBus.acfPart | postBuild |
+| IEEE1722TpAcfConnection.acfTransportedBus | postBuild |
+| IEEE1722TpConfig.tpConnection | postBuild |
+| Implementation.buildActionManifest | codeGenerationTime |
+| Implementation.generatedArtifact | preCompileTime |
+| Implementation.requiredArtifact | preCompileTime |
+| Implementation.requiredGeneratorTool | preCompileTime |
+| ImplementationDataType.subElement | preCompileTime |
+| ImplementationDataTypeElement.arraySize | preCompileTime |
+| ImplementationDataTypeElement.subElement | preCompileTime |
+| InternalBehavior.constantMemory | preCompileTime |
+| InternalBehavior.exclusiveArea | preCompileTime |
+| InternalBehavior.exclusiveAreaNestingOrder | preCompileTime |
+| InternalBehavior.staticMemory | preCompileTime |
+| InternalConstrs.lowerLimit | preCompileTime |
+| InternalConstrs.upperLimit | preCompileTime |
+| ISignal.dataTransformation | codeGenerationTime |
+| ISignalGroup.comBasedSignalGroupTransformation | codeGenerationTime |
+| ISignalIPdu.iPduTimingSpecification | postBuild |
+| ISignalIPdu.iSignalToPduMapping | postBuild |
+| ISignalIPduGroup.iSignalIPdu | postBuild |
+| ISignalIPduGroup.nmPdu | postBuild |
+| J1939Cluster | postBuild |
+| J1939TpConfig.tpAddress | postBuild |
+| J1939TpConfig.tpConnection | postBuild |
+| J1939TpConfig.tpNode | postBuild |
+| LabeledList.labeledItem | postBuild |
+| LinCluster | postBuild |
+| LinCommunicationController | postBuild |
+| LinMaster | postBuild |
+| LinPhysicalChannel.scheduleTable | postBuild |
+| LinTpConfig.tpAddress | postBuild |
+| LinTpConfig.tpConnection | postBuild |
+| LinTpConfig.tpNode | postBuild |
+| List.item | postBuild |
+| LogAndTraceMessageCollectionSet.dltMessage | systemDesignTime |
+| McDataInstance.subElement | preCompileTime |
+| McFunctionDataRefSet | preCompileTime |
+| McGroupDataRefSet | preCompileTime |
+| McSupportData.emulationSupport | preCompileTime |
+| McSupportData.mcParameterInstance | postBuild |
+| McSupportData.mcVariableInstance | postBuild |
+| ModeDeclarationGroup.modeDeclaration | blueprintDerivationTime |
+| MultiplexedIPdu.dynamicPart | postBuild |
+| MultiplexedIPdu.staticPart | postBuild |
+| NmCluster.nmNode | postBuild |
+| NmConfig.nmCluster | postBuild |
+| NmConfig.nmClusterCoupling | postBuild |
+| NmConfig.nmIfEcu | preCompileTime |
+| NumericalOrText.vf | preCompileTime |
+| NumericalValueSpecification.value | preCompileTime |
+| NvBlockDescriptor.clientServerPort | preCompileTime |
+| NvBlockDescriptor.instantiationDataDefProps | preCompileTime |
+| NvBlockDescriptor.modeSwitchEventTriggeredActivity | preCompileTime |
+| NvBlockDescriptor.nvBlockDataMapping | preCompileTime |
+| NvBlockSwComponentType.bulkNvDataDescriptor | preCompileTime |
+| NvBlockSwComponentType.nvBlockDescriptor | preCompileTime |
+| ParameterSwComponentType.instantiationDataDefProps | preCompileTime |
+| PdurIPduGroup.iPdu | postBuild |
+| PduTriggering.iSignalTriggering | postBuild |
+| PerInstanceMemorySize.size | preCompileTime |
+| PhysConstrs.lowerLimit | preCompileTime |
+| PhysConstrs.upperLimit | preCompileTime |
+| PhysicalChannel.commConnector | postBuild |
+| PhysicalChannel.frameTriggering | postBuild |
+| PhysicalChannel.iSignalTriggering | postBuild |
+| PhysicalChannel.pduTriggering | postBuild |
+| PncMapping.pncConsumedProvidedServiceInstanceGroup | postBuild |
+| PortGroup.outerPort | preCompileTime |
+| PortInterface.isService | blueprintDerivationTime |
+| PortInterfaceMappingSet.portInterfaceMapping | blueprintDerivationTime |
+| PostBuildVariantCondition.value | preCompileTime |
+| PostBuildVariantCriterionValue.value | preCompileTime |
+| ProvidedServiceInstance.allowedServiceConsumer | postBuild |
+| ProvidedServiceInstance.eventHandler | postBuild |
+| ProvidedServiceInstance.localUnicastAddress | postBuild |
+| ProvidedServiceInstance.remoteMulticastSubscriptionAddress | postBuild |
+| ProvidedServiceInstance.remoteUnicastAddress | postBuild |
+| ProvidedServiceInstance.sdServerTimerConfig | postBuild |
+| RapidPrototypingScenario.rptContainer | preCompileTime |
+| ReceiverComSpec.maxDeltaCounterInit | preCompileTime |
+| ReceiverComSpec.usesEndToEndProtection | preCompileTime |
+| RecordValueSpecification.field | preCompileTime |
+| ResourceConsumption.accessCountSet | preCompileTime |
+| ResourceConsumption.executionTime | preCompileTime |
+| ResourceConsumption.heapUsage | preCompileTime |
+| ResourceConsumption.memorySection | preCompileTime |
+| ResourceConsumption.sectionNamePrefix | preCompileTime |
+| ResourceConsumption.stackUsage | preCompileTime |
+| RptComponent.rptExecutableEntity | preCompileTime |
+| RptContainer.byPassPoint | preCompileTime |
+| RptContainer.rptContainer | preCompileTime |
+| RptContainer.rptHook | preCompileTime |
+| RptExecutableEntity.rptExecutableEntityEvent | preCompileTime |
+| RptExecutableEntity.rptRead | preCompileTime |
+| RptExecutableEntity.rptWrite | preCompileTime |
+| RptSupportData.rptComponent | preCompileTime |
+| RptSupportData.rptServicePoint | preCompileTime |
+| RuleArguments.vf | preCompileTime |
+| RuleArguments.vtf | preCompileTime |
+| RuleBasedValueSpecification.arguments | preCompileTime |
+| RunnableEntity.asynchronousServerCallResultPoint | preCompileTime |
+| RunnableEntity.dataReadAccess | preCompileTime |
+| RunnableEntity.dataReceivePointByArgument | preCompileTime |
+| RunnableEntity.dataReceivePointByValue | preCompileTime |
+| RunnableEntity.dataSendPoint | preCompileTime |
+| RunnableEntity.dataWriteAccess | preCompileTime |
+| RunnableEntity.externalTriggeringPoint | preCompileTime |
+| RunnableEntity.internalTriggeringPoint | preCompileTime |
+| RunnableEntity.modeAccessPoint | preCompileTime |
+| RunnableEntity.modeSwitchPoint | preCompileTime |
+| RunnableEntity.parameterAccess | preCompileTime |
+| RunnableEntity.readLocalVariable | preCompileTime |
+| RunnableEntity.serverCallPoint | preCompileTime |
+| RunnableEntity.writtenLocalVariable | preCompileTime |
+| RunnableEntityGroup.runnableEntity | preCompileTime |
+| RunnableEntityGroup.runnableEntityGroup | preCompileTime |
+| ScaleConstr.lowerLimit | preCompileTime |
+| ScaleConstr.upperLimit | preCompileTime |
+| Sdf.value | preCompileTime |
+| SdgContents.sdg | postBuild |
+| SdgContents.sdxf | postBuild |
+| SecurityEventContextMapping.filterChain | preCompileTime |
+| SecurityEventContextMapping.idsmInstance | systemDesignTime |
+| SecurityEventContextMapping.mappedSecurityEvent | preCompileTime |
+| SecurityEventContextMappingCommConnector.commConnector | preCompileTime |
+| SecurityEventContextProps.contextData | systemDesignTime |
+| SecurityEventContextProps.securityEvent | systemDesignTime |
+| SenderComSpec.usesEndToEndProtection | preCompileTime |
+| ServiceDependency.assignedDataType | preCompileTime |
+| ServiceInstanceCollectionSet.serviceInstance | postBuild |
+| SoAdConfig.connection | postBuild |
+| SoAdConfig.connectionBundle | postBuild |
+| SoAdConfig.socketAddress | postBuild |
+| SocketAddress.staticSocketConnection | postBuild |
+| SOMEIPTransformationISignalProps | postBuild |
+| StaticSocketConnection.iPduIdentifier | postBuild |
+| StaticSocketConnection.remoteAddress | postBuild |
+| SubElementMapping.firstElement | preCompileTime |
+| SubElementMapping.secondElement | preCompileTime |
+| SupervisedEntityNeeds.checkpoints | preCompileTime |
+| SwAxisIndividual.swMaxAxisPoints | preCompileTime |
+| SwAxisIndividual.swMinAxisPoints | preCompileTime |
+| SwcBswMapping.runnableMapping | preCompileTime |
+| SwcBswMapping.synchronizedModeGroup | preCompileTime |
+| SwcBswMapping.synchronizedTrigger | preCompileTime |
+| SwcImplementation.perInstanceMemorySize | preCompileTime |
+| SwcInternalBehavior.arTypedPerInstanceMemory | preCompileTime |
+| SwcInternalBehavior.event | preCompileTime |
+| SwcInternalBehavior.exclusiveAreaPolicy | preCompileTime |
+| SwcInternalBehavior.explicitInterRunnableVariable | preCompileTime |
+| SwcInternalBehavior.implicitInterRunnableVariable | preCompileTime |
+| SwcInternalBehavior.instantiationDataDefProps | preCompileTime |
+| SwcInternalBehavior.perInstanceMemory | preCompileTime |
+| SwcInternalBehavior.perInstanceParameter | preCompileTime |
+| SwcInternalBehavior.portAPIOption | preCompileTime |
+| SwcInternalBehavior.runnable | preCompileTime |
+| SwcInternalBehavior.serviceDependency | preCompileTime |
+| SwcInternalBehavior.sharedParameter | preCompileTime |
+| SwComponentDocumentation.chapter | postBuild |
+| SwComponentType.consistencyNeeds | preCompileTime |
+| SwComponentType.port | preCompileTime |
+| SwComponentType.portGroup | preCompileTime |
+| SwComponentType.swComponentDocumentation | preCompileTime |
+| SwcServiceDependency.assignedData | preCompileTime |
+| SwcServiceDependency.assignedPort | preCompileTime |
+| SwDataDefProps | codeGenerationTime |
+| SwDataDefProps.swValueBlockSize | preCompileTime |
+| SwDataDefProps.swValueBlockSizeMult | preCompileTime |
+| SwGenericAxisParam.vf | preCompileTime |
+| SwSystemconstValue.value | preCompileTime |
+| SwTextProps.swMaxTextSize | preCompileTime |
+| SwValues.vf | preCompileTime |
+| SwValues.vtf | preCompileTime |
+| System.fibexElement | postBuild |
+| System.j1939SharedAddressCluster | postBuild |
+| System.mapping | postBuild |
+| System.rootSoftwareComposition | systemDesignTime |
+| System.swCluster | systemDesignTime |
+| System.systemDocumentation | systemDesignTime |
+| SystemMapping.applicationPartitionToEcuPartitionMapping | postBuild |
+| SystemMapping.comManagementMapping | systemDesignTime |
+| SystemMapping.cryptoServiceMapping | postBuild |
+| SystemMapping.dataMapping | postBuild |
+| SystemMapping.ddsISignalToTopicMapping | postBuild |
+| SystemMapping.ecuResourceMapping | systemDesignTime |
+| SystemMapping.mappingConstraint | systemDesignTime |
+| SystemMapping.pncMapping | systemDesignTime |
+| SystemMapping.portElementToComResourceMapping | postBuild |
+| SystemMapping.resourceEstimation | systemDesignTime |
+| SystemMapping.resourceToApplicationPartitionMapping | systemDesignTime |
+| SystemMapping.signalPathConstraint | systemDesignTime |
+| SystemMapping.softwareClusterToApplicationPartitionMapping | systemDesignTime |
+| SystemMapping.softwareClusterToResourceMapping | preCompileTime |
+| SystemMapping.swClusterMapping | systemDesignTime |
+| SystemMapping.swcToApplicationPartitionMapping | postBuild |
+| SystemMapping.swImplMapping | preCompileTime |
+| SystemMapping.swMapping | preCompileTime |
+| SystemMapping.systemSignalGroupToComResourceMapping | systemDesignTime |
+| SystemMapping.systemSignalToComResourceMapping | systemDesignTime |
+| Tbody.row | postBuild |
+| TDCpSoftwareClusterMappingSet.tdCpSoftwareClusterResourceToTdMapping | postBuild |
+| TDCpSoftwareClusterMappingSet.tdCpSoftwareClusterToTdMapping | postBuild |
+| TextTableMapping.bitfieldTextTableMaskFirst | preCompileTime |
+| TextTableMapping.bitfieldTextTableMaskSecond | preCompileTime |
+| TextTableValuePair.firstValue | preCompileTime |
+| TextTableValuePair.secondValue | preCompileTime |
+| TimingClock.platformTimeBase | postBuild |
+| TimingExtension.timingClock | postBuild |
+| TimingExtension.timingClockSyncAccuracy | postBuild |
+| TimingExtension.timingCondition | postBuild |
+| TimingExtension.timingDescription | postBuild |
+| TimingExtension.timingGuarantee | postBuild |
+| TimingExtension.timingRequirement | postBuild |
+| TimingExtensionResource.timingArgument | postBuild |
+| TimingExtensionResource.timingMode | postBuild |
+| TimingExtensionResource.timingVariable | postBuild |
+| TopicContent.table | postBuild |
+| TopicOrMsrQuery.topic1 | postBuild |
+| TransformationISignalProps | postBuild |
+| TransformationTechnology.transformationDescription | postBuild |
+| TtcanCluster | postBuild |
+| TtcanCommunicationController | postBuild |
+| UserDefinedCluster | postBuild |
+| UserDefinedCommunicationController | postBuild |
+| UserDefinedTransformationISignalProps | postBuild |
+| ValueList.vf | preCompileTime |
+
+（源表分多栏连排印刷；条目集合与源表完全一致，按字母序排列。源表中 ProvidedServiceInstance.eventHandler 与 localUnicastAddress、TimingExtension.timingClock 与 timingClockSyncAccuracy 各有两处因换栏并排成一行，此处按条目拆分。）
+
+## D. 本模板中的可拆分元素
+
+本章包含本文档范围内所有带有构型 **&lt;atpSplitable&gt;** 的模型元素的表。
+
+表中的每个条目由特定模型元素本身的标识以及标签值 atp.Splitkey 的适用取值组成。
+
+表D.1：可拆分元素的使用（Usage of splitable elements）
+
+| 可拆分元素名称 | Splitkey |
+|------------------------------------------------|--------------------------------------------------------------------------------------------|
+| AdminData.sdg | sdg.sdgCaption.shortName |
+| ARPackage.arPackage | arPackage.shortName, arPackage.variationPoint.shortLabel |
+| ARPackage.element | element.shortName, element.variationPoint.shortLabel |
+| ARPackage.referenceBase | referenceBase.shortLabel |
+| AUTOSAR.adminData | adminData |
+| AUTOSAR.arPackage | arPackage.shortName, arPackage.variationPoint.shortLabel |
+| BuildActionManifest.buildAction | buildAction.shortName, buildAction.variationPoint.shortLabel |
+| BuildActionManifest.buildActionEnvironment | buildActionEnvironment.shortName, buildActionEnvironment.variationPoint.shortLabel |
+| ChapterOrMsrQuery.chapter | chapter.shortName, chapter.variationPoint.shortLabel |
+| DefList.defItem | defItem.shortName, defItem.variationPoint.shortLabel |
+| Describable.adminData | adminData |
+| DocumentationBlock.defList | defList, defList.variationPoint.shortLabel |
+| DocumentationBlock.figure | figure, figure.variationPoint.shortLabel |
+| DocumentationBlock.formula | formula, formula.variationPoint.shortLabel |
+| DocumentationBlock.labeledList | labeledList, labeledList.variationPoint.shortLabel |
+| DocumentationBlock.list | list, list.variationPoint.shortLabel |
+| DocumentationBlock.note | note, note.variationPoint.shortLabel |
+| DocumentationBlock.p | p, p.variationPoint.shortLabel |
+| DocumentationBlock.structuredReq | structuredReq.shortName, structuredReq.variationPoint.shortLabel |
+| DocumentationBlock.trace | trace.shortName, trace.variationPoint.shortLabel |
+| DocumentationBlock.verbatim | verbatim, verbatim.variationPoint.shortLabel |
+| Identifiable.adminData | adminData |
+| LabeledList.labeledItem | labeledItem, labeledItem.variationPoint.shortLabel |
+| List.item | item, item.variationPoint.shortLabel |
+| SdgContents.sdg | sdg.sdgCaption.shortName, sdg.variationPoint.shortLabel |
+| SdgContents.sdxf | sdxf.referrable, sdxf.variationPoint.shortLabel |
+| SwDataDefProps.swPointerTargetProps | &lt;Not applicable due to atpVariation (PropertySet Pattern)&gt; |
+| SwPointerTargetProps.swDataDefProps | swDataDefProps |
+| SwServiceArg.swDataDefProps | swDataDefProps |
+| SwSystemconst.swDataDefProps | swDataDefProps |
+| Tbody.row | row, row.variationPoint.shortLabel |
+| TopicContent.table | table, table.variationPoint.shortLabel |
+| TopicOrMsrQuery.topic1 | topic1.shortName, topic1.variationPoint.shortLabel |
