@@ -11797,3 +11797,1288 @@ ViewMap 的示例用例（参见 [TPS\_SYST\_01136]）：
 | Tbody.row | row, row.variationPoint.shortLabel |
 | TopicContent.table | table, table.variationPoint.shortLabel |
 | TopicOrMsrQuery.topic1 | topic1.shortName, topic1.variationPoint.shortLabel |
+
+## E. 本文档提及的类表（Mentioned Class Tables）
+
+出于完整性的考虑，本章收录一组类表，它们表示本文档上下文中提及、但不直接处于描述特定元模型语义的范围内的元类。
+
+表E.1：AUTOSAR
+
+| 类         | AUTOSAR                                                                                                                                                   |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::AutosarTopLevelStructure                                                                                                                         |
+| 注意       | AUTOSAR 描述的根元素，也是相应 XML 文档中的根元素。标签：xml.globalElement=true                                                                                              |
+| 基类       | ARObject                                                                                                                                                              |
+
+| 属性        | 类型               | 多重性 | 类别 | 注意                                                                                                                                                                                |
+|-------------|---------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| adminData   | AdminData           | 0..1   | aggr | 这表示一个 Autosar 文件的管理数据。构型：atpSplitable 标签：atp.Splitkey=adminData xml.sequenceOffset=10                                                                                        |
+| arPackage   | ARPackage           | *      | aggr | 这是 AUTOSAR 模型中的顶层包。构型：atpSplitable；atpVariation 标签：atp.Splitkey=arPackage.shortName, arPackage.variationPoint.shortLabel vh.latestBindingTime=blueprintDerivationTime xml.sequenceOffset=30 |
+| fileInfoComment | FileInfoComment | 0..1   | aggr | 这表示在 AUTOSAR 文件中提供结构化注释的可能性。构型：atpStructuredComment 标签：xml.roleElement=true xml.sequenceOffset=-10 xml.typeElement=false                                                |
+| introduction| DocumentationBlock  | 0..1   | aggr | 这表示 Autosar 文件的一个介绍。它例如旨在表达免责声明与法律说明。标签：xml.sequenceOffset=20                                                                                                      |
+
+表E.2：AbstractEnumerationValueVariationPoint
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; AbstractEnumerationValueVariationPoint（抽象）                                                               |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling::AttributeValueVariationPoints                                                                    |
+| 注意       | 这是一个抽象的 EnumerationValueVariationPoint。引入它是为了支持为特定目的需要附加属性的情形。                                                                  |
+| 基类       | ARObject、AttributeValueVariationPoint、FormulaExpression、SwSystemconstDependentFormula                                                                        |
+| 聚合于     | VariationPointProxy.valueAccess                                                                                                                              |
+
+| 属性      | 类型       | 多重性 | 类别 | 注意                                                                                                    |
+|-----------|-------------|--------|------|------------------------------------------------------------------------------------------------------------------|
+| base      | Identifier  | 0..1   | attr | 该属性反映此引用在 EnumerationMappingTable 上下文中要使用的基础。标签：xml.attribute=true                            |
+| enumTable | Ref         | 0..1   | attr | 这表示被指派的枚举表。标签：xml.attribute=true                                                                        |
+
+表E.3：AbstractMultiplicityRestriction
+
+| 类         | AbstractMultiplicityRestriction（抽象）                                                                        |
+|------------|-------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::ModelRestrictionTypes                                          |
+| 注意       | 规定当前上下文中一个元素的有效出现次数的限制。                                                                                      |
+| 基类       | ARObject                                                                                                                  |
+| 子类       | AttributeCondition、MultiplicityRestrictionWithSeverity、SdgAttribute                                                            |
+
+| 属性                      | 类型            | 多重性 | 类别 | 注意                                                                                                                               |
+|---------------------------|------------------|--------|------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| lowerMultiplicity         | PositiveInteger  | 0..1   | attr | 规定一个对象应当出现的最少次数。若未设置该原始属性，则该对象是可选的。                                                                                  |
+| upperMultiplicity         | PositiveInteger  | 0..1   | attr | 规定一个对象可以出现的最多次数。若未设置该原始属性，则对最大出现次数没有限制。                                                                              |
+| upperMultiplicityInfinite | Boolean          | 0..1   | attr | 这显式规定多重性上限不受限制。注意：'upperMultiplicityInfinite' 与 'upperMultiplicity' 的使用互斥。                                                  |
+
+表E.4：AbstractRequiredPortPrototype
+
+| 类         | AbstractRequiredPortPrototype（抽象）                                                                                                            |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SWComponentTemplate::Components                                                                                                              |
+| 注意       | 该抽象类提供成为一个 require 端口原型（PortPrototype）的能力。                                                                                                |
+| 基类       | ARObject、AtpBlueprintable、AtpFeature、AtpPrototype、Identifiable、MultilanguageReferrable、PortPrototype、Referrable                                                |
+| 子类       | PRPortPrototype、RPortPrototype                                                                                                                                    |
+| 聚合于     | AtpClassifier.atpFeature、SwComponentType.port                                                                                                                          |
+
+| 属性            | 类型         | 多重性 | 类别 | 注意                                                                                  |
+|------------------|---------------|--------|------|--------------------------------------------------------------------------------------------------|
+| requiredComSpec  | RPortComSpec  | *      | aggr | 所需的通信属性，每个接口元素一个。构型：atpSplitable 标签：atp.Splitkey=requiredComSpec             |
+
+表E.5：AdditionalBindingTimeEnum
+
+| 枚举        | AdditionalBindingTimeEnum                                                                    |
+|-------------|--------------------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::VariantHandling                                                       |
+| 注意        | 该枚举规定适用于变体点 vh.latestBindingTime 的附加施加时间。                                                        |
+
+| 字面量                   | 说明                                                       |
+|---------------------------|---------------------------------------------------------------------|
+| blueprintDerivationTime   | 从蓝图创建对象的时间点。标签：atp.EnumerationLiteralIndex=0            |
+| postBuild                 | 可执行文件构建完成之后。标签：atp.EnumerationLiteralIndex=1            |
+
+表E.6：AnyServiceInstanceId
+
+| 原始类型    | AnyServiceInstanceId                                                                                                                                                                            |
+|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::PrimitiveTypes                                                                                                                              |
+| 注意        | 这是一个正整数或字面量 ALL（取值 ANY 在技术上受支持但已废弃），可以以十进制、八进制与十六进制表示。取值介于 0 与 65535 之间。标签：xml.xsd.customType=ANY-SERVICE-INSTANCE-ID xml.xsd.pattern=[1-9][0-9]*&#124;0[xX][0-9a-fA-F]+&#124;0[0-7]*&#124;0[bB][0-1]+&#124;ANY&#124;ALL xml.xsd.type=string |
+
+表E.7：AnyVersionString
+
+| 原始类型    | AnyVersionString                                                                                          |
+|-------------|----------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::PrimitiveTypes                                            |
+| 注意        | （源表无注释文本。）标签：xml.xsd.customType=ANY-VERSION-STRING xml.xsd.pattern=[0-9]+&#124;ANY xml.xsd.type=string           |
+
+表E.8：ApplicationSwComponentType
+
+| 类         | ApplicationSwComponentType                                                                                                                                                                                 |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SWComponentTemplate::Components                                                                                                                                                                            |
+| 注意       | ApplicationSwComponentType 用于表示应用软件。标签：atp.recommendedPackage=SwComponentTypes                                                                                                                                            |
+| 基类       | ARElement、ARObject、AtomicSwComponentType、AtpBlueprint、AtpBlueprintable、AtpClassifier、AtpType、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable、SwComponentType                                    |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                              |
+
+表E.9：AssemblySwConnector
+
+| 类         | AssemblySwConnector                                                                                                                                                                      |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SWComponentTemplate::Composition                                                                                                                                                            |
+| 注意       | AssemblySwConnector 专门用于在 CompositionSwComponentType 的上下文中连接 SwComponentPrototype。                                                                                                                            |
+| 基类       | ARObject、AtpClassifier、AtpFeature、AtpStructureElement、Identifiable、MultilanguageReferrable、Referrable、SwConnector                                                                                                        |
+| 聚合于     | AtpClassifier.atpFeature、CompositionSwComponentType.connector                                                                                                                                                              |
+
+| 属性      | 类型                           | 多重性 | 类别 | 注意                                                                                                  |
+|-----------|----------------------------------|--------|------|------------------------------------------------------------------------------------------------------------------|
+| provider  | AbstractProvidedPortPrototype    | 0..1   | iref | 提供端口的实例。InstanceRef 实现为：PPortInCompositionInstanceRef                                                    |
+| requester | AbstractRequiredPortPrototype    | 0..1   | iref | 需求端口的实例。InstanceRef 实现为：RPortInCompositionInstanceRef                                                    |
+
+表E.10：AtpBlueprint
+
+| 类         | AtpBlueprint（抽象）                                                                                                                                                                                                                                                                |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::CommonStructure::StandardizationTemplate::AbstractBlueprintStructure                                                                                                                                                                                                                  |
+| 注意       | 该元类表示充当蓝图（Blueprint）的能力。由于该类是抽象的，特定的蓝图元类继承自它。                                                                                                                                                                                                                            |
+| 基类       | ARObject、Identifiable、MultilanguageReferrable、Referrable                                                                                                                                                                                                                                                    |
+| 子类       | ARPackage、AbstractImplementationDataType、AclObjectSet、AclOperation、AclPermission、AclRole、AliasNameSet、ApplicationDataType、BswEntryRelationshipSet、BswModuleDescription、BswModuleEntry、BuildActionEntity、BuildActionEnvironment、BuildActionManifest、ClientServerInterfaceToBswModuleEntryBlueprintMapping、CompuMethod、ConsistencyNeeds、DataConstr、DataTypeMappingSet、EcucDefinitionCollection、EcucDestinationUriDefSet、EcucModuleDef、FlatMap、ImpositionTime、ImpositionTimeDefinitionGroup、KeywordSet、LifeCycleState、LifeCycleStateDefinitionGroup、ModeDeclarationGroup、PortInterface、PortInterfaceMapping、PortInterfaceMappingSet、PortPrototypeBlueprint、SwAddrMethod、SwBaseType、SwComponentType、VfbTiming |
+
+| 属性            | 类型             | 多重性 | 类别 | 注意                                                                     |
+|------------------|-------------------|--------|------|------------------------------------------------------------------------------------|
+| blueprintPolicy  | BlueprintPolicy   | *      | aggr | 该角色指示可蓝图化的元素将是可修改的还是不可修改的。                                      |
+
+表E.11：AtpBlueprintable
+
+| 类         | AtpBlueprintable（抽象）                                                                                                                                                                                                                                                            |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::CommonStructure::StandardizationTemplate::AbstractBlueprintStructure                                                                                                                                                                                                                  |
+| 注意       | 该元类表示从蓝图派生的能力。由于该类是抽象的，特定的可蓝图化元类继承自它。                                                                                                                                                                                                                                  |
+| 基类       | ARObject、Identifiable、MultilanguageReferrable、Referrable                                                                                                                                                                                                                                                    |
+| 子类       | ARPackage、AbstractImplementationDataType、AclObjectSet、AclOperation、AclPermission、AclRole、AliasNameSet、ApplicationDataType、BswEntryRelationshipSet、BswModuleDescription、BswModuleEntry、BuildActionEntity、BuildActionEnvironment、BuildActionManifest、CompuMethod、ConsistencyNeeds、DataConstr、DataTypeMappingSet、EcucDefinitionCollection、EcucDestinationUriDefSet、EcucModuleDef、FlatMap、ImpositionTime、ImpositionTimeDefinitionGroup、KeywordSet、LifeCycleState、LifeCycleStateDefinitionGroup、ModeDeclarationGroup、PortInterface、PortInterfaceMapping、PortInterfaceMappingSet、PortPrototype、SwAddrMethod、SwBaseType、SwComponentType、VfbTiming |
+
+表E.12：BlueprintGenerator
+
+| 类         | BlueprintGenerator                                                                                                                                             |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::CommonStructure::StandardizationTemplate::BlueprintGenerator                                                                                                |
+| 注意       | 该类表达在复杂描述中生成蓝图派生物的扩展语言。标签：atp.Status=valid                                                                                                              |
+| 基类       | ARObject                                                                                                                                                                      |
+| 聚合于     | VariationPoint.formalBlueprintGenerator                                                                                                                                             |
+
+| 属性         | 类型               | 多重性 | 类别 | 注意                                                                                                                               |
+|---------------|---------------------|--------|------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| expression    | VerbatimString      | 0..1   | attr | 这表示基于该扩展语言的表达式中的一个形式化项。标签：atp.Status=valid xml.sequenceOffset=20                                                        |
+| introduction  | DocumentationBlock  | 0..1   | aggr | 这表示一段描述，记录在从蓝图派生对象时蓝图生成器应当如何解析。标签：atp.Status=valid xml.sequenceOffset=10                                        |
+
+表E.13：Boolean
+
+| 原始类型    | Boolean                                                                                                          |
+|-------------|----------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::PrimitiveTypes                                                  |
+| 注意        | Boolean 取值表示一个逻辑条件，为 “true” 或 “false”。它可以取 “0”、“1”、“true”、“false” 之一。标签：xml.xsd.customType=BOOLEAN xml.xsd.pattern=0&#124;1&#124;true&#124;false xml.xsd.type=string |
+
+表E.14：BswImplementation
+
+| 类         | BswImplementation                                                                                                                                                                |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::BswModuleTemplate::BswImplementation                                                                                                                                          |
+| 注意       | 在通用规范（BswModuleDescription 与 BswBehavior）之外包含实现特定的信息。可以有多个不同的 BswImplementation 指向同一个 BswBehavior。标签：atp.recommendedPackage=BswImplementations                |
+| 基类       | ARElement、ARObject、CollectableElement、Identifiable、Implementation、MultilanguageReferrable、PackageableElement、Referrable                                                                        |
+| 聚合于     | ARPackage.element                                                                                                                                                                              |
+
+| 属性                        | 类型                            | 多重性 | 类别 | 注意                                                                                                                                                                     |
+|------------------------------|----------------------------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| arReleaseVersion             | RevisionLabelString              | 0..1   | attr | 该实现所基于的 AUTOSAR 发布版的版本。编号包含三个层次（major、minor、revision），由 AUTOSAR 定义。                                                                                    |
+| behavior                     | BswInternalBehavior              | 0..1   | ref  | 该实现的行为。该关系作为关联建立，因为：它遵循 SWCT 的模式；由于 ARElement 不可拆分，而我们希望稍后交付实现，BswImplementation 不被聚合在 BswBehavior 中。                        |
+| preconfiguredConfiguration   | EcucModuleConfigurationValues    | *      | ref  | 指向该 BswImplementation 的一组预配置（即固定）配置取值的引用。若 BswImplementation 表示多个模块的集群，可以引用多于一个 EcucModuleConfigurationValues 元素（每个模块至多一个），否则至多引用一个这样的元素。标签：xml.roleWrapperElement=true |
+| recommendedConfiguration     | EcucModuleConfigurationValues    | *      | ref  | 指向该模块或模块集群的一组或多组推荐配置取值的引用。                                                                                                                                  |
+| vendorApiInfix               | Identifier                       | 0..1   | attr | 在单个 ECU 上可以多次实例化的驱动模块中，SRS\_BSW\_00347 要求文件、API、已发布参数与内存分配关键字的名称以 vendorId 和一个厂商特定的名称扩展。该参数用于规定厂商特定的名称。总体上，实现特定的 API 名称按如下方式生成：&lt;Module Name&gt;\_&lt;vendorId&gt;\_&lt;vendorApiInfix&gt;\_&lt;API name from SWS&gt;。例如，假设实现者的 vendorId 为 123，实现者选择了 vendorApiInfix “v11r456”，则 SWS 中定义的 API 名称 Can\_Write 将变为 Can\_123\_v11r456\_Write。对多重性上限 &gt; 1 的模块，该属性是必需的。对多重性上限 = 1 的模块不得使用。另参见 SWS\_BSW\_00102。 |
+| vendorSpecificModuleDef      | EcucModuleDef                    | *      | ref  | 指向：该 Bsw Implementation 中使用的厂商特定 EcucModuleDef（若它表示单个模块）；该 Bsw Implementation 中使用的若干 EcucModuleDef（若它表示模块集群）；该 Bsw Implementation 中使用的一个或不使用 EcucModuleDef（若它表示库）。标签：xml.roleWrapperElement=true |
+
+表E.15：BswModuleDescription
+
+| 类         | BswModuleDescription                                                                                                                                                                                                            |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::BswModuleTemplate::BswOverview                                                                                                                                                                                                |
+| 注意       | 描述单个 BSW 模块或 BSW 集群的根元素。若它描述一个 BSW 模块，该元素的 short name 等于 BSW 模块的名称。标签：atp.recommendedPackage=BswModuleDescriptions                                                                                                      |
+| 基类       | ARElement、ARObject、AtpBlueprint、AtpBlueprintable、AtpClassifier、AtpFeature、AtpStructureElement、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                                    |
+| 聚合于     | ARPackage.element、AtpClassifier.atpFeature                                                                                                                                                                                                        |
+
+| 属性                       | 类型                              | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                                 |
+|-----------------------------|------------------------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| bswModuleDependency         | BswModuleDependency               | *      | aggr | 描述对另一个 BSW 模块的依赖。构型：atpSplitable；atpVariation 标签：atp.Splitkey=bswModuleDependency.shortName, bswModuleDependency.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=20                                                                 |
+| bswModuleDocumentation      | SwComponentDocumentation          | 0..1   | aggr | 这为 BSW 模块添加一个文档。构型：atpSplitable；atpVariation 标签：atp.Splitkey=bswModuleDocumentation, bswModuleDocumentation.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=6                                                                      |
+| expectedEntry               | BswModuleEntry                    | *      | ref  | 指示该模块所需的一个条目。取代 outgoingCallback / requiredEntry。构型：atpSplitable；atpVariation 标签：atp.Splitkey=expectedEntry.bswModuleEntry, expectedEntry.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                                                            |
+| implementedEntry            | BswModuleEntry                    | *      | ref  | 规定该模块提供的一个条目，它可以被其他模块调用。这包括 “main” 函数、中断例程与回调。取代 providedEntry / expectedCallback。构型：atpSplitable；atpVariation 标签：atp.Splitkey=implementedEntry.bswModuleEntry, implementedEntry.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| internalBehavior            | BswInternalBehavior               | *      | aggr | 与一个 BswModuleDescription 相关联的各个 BswInternalBehavior 可以分布在多个物理文件上。因此该聚合是 &lt;&lt;atpSplitable&gt;&gt;。构型：atpSplitable 标签：atp.Splitkey=internalBehavior.shortName                                                                                          |
+| moduleId                    | PositiveInteger                   | 0..1   | attr | 指向 AUTOSAR 标准定义的 BSW 模块标识符。对非标准化模块，可以选择一个专有标识符。                                                                                                                                                          |
+| providedClientServerEntry   | BswModuleClientServerEntry        | *      | aggr | 规定该模块提供一个可以被另一个分区或核心调用的 client/server 条目。该条目在此上下文中局部声明，并将通过 BSW Scheduler 的配置连接到另一个或同一模块的 requiredClientServerEntry。构型：atpSplitable；atpVariation 标签：atp.Splitkey=providedClientServerEntry.shortName, providedClientServerEntry.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| providedData                | VariableDataPrototype             | *      | aggr | 规定该模块提供的一个数据原型，以便从另一个分区或核心读取。providedData 在此上下文中局部声明，并将通过 BSW Scheduler 的配置连接到另一个或同一模块的 requiredData。构型：atpSplitable；atpVariation 标签：atp.Splitkey=providedData.shortName, providedData.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=55 |
+| providedModeGroup           | ModeDeclarationGroupPrototype     | *      | aggr | 由该模块或集群拥有并提供的一组模式。它可以通过 BswScheduler 的配置连接到其他模块或集群的 requiredModeGroup。它还可以与一个关联的 ServiceSwComponentType、EcuAbstractionSwComponentType 或 ComplexDeviceDriverSwComponentType 经由端口提供的模式同步。构型：atpSplitable；atpVariation 标签：atp.Splitkey=providedModeGroup.shortName, providedModeGroup.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=25 |
+| releasedTrigger             | Trigger                           | *      | aggr | 由该模块或集群释放的一个触发器。它可以通过 BswScheduler 的配置连接到其他模块或集群的 requiredTrigger。它还可以与一个关联的 ServiceSwComponentType、EcuAbstractionSwComponentType 或 ComplexDeviceDriverSwComponentType 经由端口提供的触发器同步。构型：atpSplitable；atpVariation 标签：atp.Splitkey=releasedTrigger.shortName, releasedTrigger.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=35 |
+| requiredClientServerEntry   | BswModuleClientServerEntry        | *      | aggr | 规定该模块需要一个可以在另一个分区或核心上实现的 client/server 条目。该条目在此上下文中局部声明，并将通过 BSW Scheduler 的配置连接到另一个或同一模块的 providedClientServerEntry。构型：atpSplitable；atpVariation 标签：atp.Splitkey=requiredClientServerEntry.shortName, requiredClientServerEntry.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=50 |
+| requiredData                | VariableDataPrototype             | *      | aggr | 规定该模块所需的一个数据原型，以便由另一个分区或核心提供。requiredData 在此上下文中局部声明，并将通过 BswScheduler 的配置连接到另一个或同一模块的 providedData。构型：atpSplitable；atpVariation 标签：atp.Splitkey=requiredData.shortName, requiredData.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=60 |
+| requiredModeGroup           | ModeDeclarationGroupPrototype     | *      | aggr | 规定该模块或集群依赖于某个特定的模式组。requiredModeGroup 对此上下文是局部的，并将通过 BswScheduler 的配置连接到另一个模块或集群的 providedModeGroup。构型：atpSplitable；atpVariation 标签：atp.Splitkey=requiredModeGroup.shortName, requiredModeGroup.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=30 |
+| requiredTrigger             | Trigger                           | *      | aggr | 规定该模块或集群对外部触发器作出反应。requiredTrigger 在此上下文中局部声明，并将通过 BswScheduler 的配置连接到另一个模块或集群的 providedTrigger。构型：atpSplitable；atpVariation 标签：atp.Splitkey=requiredTrigger.shortName, requiredTrigger.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=40 |
+
+表E.16：BswModuleEntity
+
+| 类         | BswModuleEntity（抽象）                                                                                                                                       |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::BswModuleTemplate::BswBehavior                                                                                                                            |
+| 注意       | 规定在 AUTOSAR 内可以为 BSW 模块或集群描述的最小代码片段。                                                                                                                          |
+| 基类       | ARObject、ExecutableEntity、Identifiable、MultilanguageReferrable、Referrable                                                                                                          |
+| 子类       | BswCalledEntity、BswInterruptEntity、BswSchedulableEntity                                                                                                                            |
+| 聚合于     | BswInternalBehavior.entity                                                                                                                                                            |
+
+| 属性                  | 类型                             | 多重性 | 类别 | 注意                                                                                                                                                                      |
+|------------------------|-----------------------------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| accessedModeGroup      | ModeDeclarationGroupPrototype     | *      | ref  | 该实体经由 API 调用访问的一个模式组。它应当是该模块或集群所需的 ModeDeclarationGroupPrototype。构型：atpSplitable；atpVariation 标签：atp.Splitkey=accessedModeGroup.modeDeclarationGroupPrototype, accessedModeGroup.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| activationPoint        | BswInternalTriggeringPoint        | *      | ref  | 模块实体用来激活一个或多个内部触发器的激活点。构型：atpSplitable；atpVariation 标签：atp.Splitkey=activationPoint.bswInternalTriggeringPoint, activationPoint.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                 |
+| callPoint              | BswModuleCallPoint                | *      | aggr | 该实体代码中使用的一个调用点。该关联的可变性尤其面向调试场景：可以让一个变体调用 AUTOSAR 调试模块，而另一个变体不调用。构型：atpSplitable；atpVariation 标签：atp.Splitkey=callPoint.shortName, callPoint.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| dataReceivePoint       | BswVariableAccess                 | *      | aggr | 数据经由 BSW Scheduler 接收。构型：atpSplitable；atpVariation 标签：atp.Splitkey=dataReceivePoint.shortName, dataReceivePoint.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                                                  |
+| dataSendPoint          | BswVariableAccess                 | *      | aggr | 数据经由 BSW Scheduler 发送。构型：atpSplitable；atpVariation 标签：atp.Splitkey=dataSendPoint.shortName, dataSendPoint.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                                                          |
+| implementedEntry       | BswModuleEntry                    | 0..1   | ref  | 由该模块实体实现的条目。                                                                                                                                                                |
+| issuedTrigger          | Trigger                           | *      | ref  | 该实体经由 BSW Scheduler API 调用发出的一个触发器。它应当是该模块或集群释放（即拥有）的 BswTrigger。构型：atpSplitable；atpVariation 标签：atp.Splitkey=issuedTrigger.trigger, issuedTrigger.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| managedModeGroup       | ModeDeclarationGroupPrototype     | *      | ref  | 由该实体管理的一个模式组。它应当是该模块或集群提供的 ModeDeclarationGroupPrototype。构型：atpSplitable；atpVariation 标签：atp.Splitkey=managedModeGroup.modeDeclarationGroupPrototype, managedModeGroup.variationPoint.shortLabel          |
+| schedulerNamePrefix    | BswSchedulerNamePrefix            | 0..1   | ref  | 在该 BswModuleEntity 的上下文中用于 BSW 调度器生成名称的一个前缀，例如入口点原型、处理独占区的宏、头文件名。细节在 SWS RTE 中定义。该前缀取代这些名称前缀的默认规则。                                              |
+
+表E.17：BswModuleEntry
+
+| 类         | BswModuleEntry                                                                                                                                                                                                                      |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::BswModuleTemplate::BswInterfaces                                                                                                                                                                                                |
+| 注意       | 该类表示进入 BSW 模块或集群的单个 API 条目（C 函数原型）。C 函数的名称等于该元素的 short name，有一个例外：在同一 CPU 上模块有多个实例的情况下，适用关于“中缀（infix）”的特殊规则，参见类 BswImplementation 的描述。                                                    |
+| 基类       | ARElement、ARObject、AtpBlueprint、AtpBlueprintable、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                                                                                |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                                                        |
+
+| 属性                       | 类型                        | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                  |
+|-----------------------------|------------------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| argument (ordered)          | SwServiceArg                 | *      | aggr | 属于该 BswModuleEntry 的一个参数。构型：atpSplitable；atpVariation 标签：atp.Splitkey=argument.shortName, argument.variationPoint.shortLabel vh.latestBindingTime=blueprintDerivationTime xml.sequenceOffset=45                                                                |
+| bswEntryKind                | BswEntryKindEnum             | 0..1   | attr | 这描述该条目是具体的还是抽象的。若缺少该属性，则该条目被视为具体的。标签：xml.sequenceOffset=40                                                                                                                                                                    |
+| callType                    | BswCallType                  | 0..1   | attr | 与该服务关联的调用类型。标签：xml.sequenceOffset=25                                                                                                                                                                                                          |
+| executionContext            | BswExecutionContext          | 0..1   | attr | 规定该服务所需的执行上下文（对该模块的条目而言）或所保证的执行上下文（对从该模块调用的条目而言）。标签：xml.sequenceOffset=30                                                                                                                                            |
+| functionPrototypeEmitter    | NameToken                    | 0..1   | attr | 该属性用于控制函数原型的生成。若置为 “RTE”，RTE 在 Module Interlink Header File 中生成函数原型。                                                                                                                                                    |
+| isReentrant                 | Boolean                      | 0..1   | attr | 从函数调用者角度看的可重入性：true = 允许在服务尚未完成时再次调用该服务；false = 在服务完成之前禁止再次调用该服务。标签：xml.sequenceOffset=15                                                                                                                            |
+| isSynchronous               | Boolean                      | 0..1   | attr | 从函数调用者角度看的同步性：true = 这调用一个同步服务，即调用返回时服务已完成；false = 调用返回时服务（在语义层次上）可能尚未完成。标签：xml.sequenceOffset=20                                                                                                              |
+| returnType                  | SwServiceArg                 | 0..1   | aggr | 属于该 bswModuleEntry 的返回类型。标签：xml.sequenceOffset=40                                                                                                                                                                                              |
+| role                        | Identifier                   | 0..1   | attr | 规定该条目在给定上下文中的角色。它应当等于服务调用的标准化名称，尤其是在未规定 ServiceIdentifier 的情况下（例如对回调）。注意，ShortName 并不总是足够的，因为它可能是厂商特定的（例如对可以有多个实例的回调）。标签：xml.sequenceOffset=10                                  |
+| serviceId                   | PositiveInteger              | 0..1   | attr | 指向 AUTOSAR 基础软件标准化接口的服务标识符。对非标准化接口，它可以选择性地用于专有标识。标签：xml.sequenceOffset=5                                                                                                                                            |
+| swServiceImplPolicy         | SwServiceImplPolicyEnum      | 0..1   | attr | 表示实现策略：标准函数调用、内联函数或宏。这必须在接口层次上规定，因为它决定调用的签名。标签：xml.sequenceOffset=35                                                                                                                                                |
+
+表E.18：Caption
+
+| 类         | Caption                                                                                                                                                        |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::BlockElements                                                                                                                                            |
+| 注意       | 该元类表示表达一个 caption（即一个标题）与一个 shortName 的能力。                                                                                                              |
+| 基类       | ARObject、MultilanguageReferrable、Referrable                                                                                                                                    |
+| 聚合于     | MlFigure.figureCaption、MlFormula.formulaCaption、Table.tableCaption                                                                                                              |
+
+| 属性 | 类型                             | 多重性 | 类别 | 注意                                                                                                                                                                  |
+|------|-----------------------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| desc | MultiLanguageOverviewParagraph    | 0..1   | aggr | 这表示关于相关对象是什么的一般但简短（单段）描述。它只有一个段落！该属性帮助人类读者识别相关对象。标签：xml.sequenceOffset=10                                                              |
+
+表E.19：ClientServerInterface
+
+| 类         | ClientServerInterface                                                                                                                                                                                             |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SWComponentTemplate::PortInterface                                                                                                                                                                                  |
+| 注意       | 一个 client/server 接口声明一组可以由客户端在服务器上调用的操作。标签：atp.recommendedPackage=PortInterfaces                                                                                                                                    |
+| 基类       | ARElement、ARObject、AtpBlueprint、AtpBlueprintable、AtpClassifier、AtpType、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、PortInterface、Referrable                                                                      |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                                              |
+
+| 属性          | 类型                   | 多重性 | 类别 | 注意                                                                                                                                                      |
+|----------------|-------------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| operation      | ClientServerOperation   | *      | aggr | 该 ClientServerInterface 的 ClientServerOperation。构型：atpSplitable；atpVariation 标签：atp.Splitkey=operation.shortName, operation.variationPoint.shortLabel vh.latestBindingTime=blueprintDerivationTime                      |
+| possibleError  | ApplicationError        | *      | aggr | 作为该接口一部分定义的应用错误。                                                                                                                                          |
+
+表E.20：ClientServerOperation
+
+| 类         | ClientServerOperation                                                                                                                                                                                                                                                                                          |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SWComponentTemplate::PortInterface                                                                                                                                                                                                                                                                          |
+| 注意       | 在一个 client/server 接口范围内声明的一个操作。                                                                                                                                                                                                                                                                                    |
+| 基类       | ARObject、AtpClassifier、AtpFeature、AtpStructureElement、Identifiable、MultilanguageReferrable、Referrable                                                                                                                                                                                                                            |
+| 聚合于     | ApplicationInterface.command、AtpClassifier.atpFeature、ClientServerInterface.operation、DiagnosticDataElementInterface.read、DiagnosticDataIdentifierInterface.read、DiagnosticDataIdentifierInterface.write、DiagnosticRoutineInterface.requestResult、DiagnosticRoutineInterface.start、DiagnosticRoutineInterface.stop、PhmRecoveryActionInterface.recovery、ServiceInterface.method |
+
+| 属性               | 类型                   | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                                           |
+|---------------------|-------------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| argument (ordered)  | ArgumentDataPrototype   | *      | aggr | 该 ClientServerOperation 的一个参数。构型：atpSplitable；atpVariation 标签：atp.Splitkey=argument.shortName, argument.variationPoint.shortLabel vh.latestBindingTime=blueprintDerivationTime                                                                                                        |
+| diagArgIntegrity    | Boolean                 | 0..1   | attr | 该属性只应在诊断例程的实现中使用，以支持如下情形：输入与输出参数被分配在一个共享缓冲区中，而对输出参数的尝试性写入操作可能无意地覆盖输入参数。这种情况可能发生在分片执行期间，或当输出参数是数组（按引用调用）时。取值 true 表示该 ClientServerOperation 知道共享缓冲区的使用，并采取预防措施避免无意覆盖输入参数。若该属性不存在或被置为 false，则 ClientServerOperation 不必考虑共享缓冲区的使用。 |
+| possibleError       | ApplicationError        | *      | ref  | 被引用操作可能引发的可能错误。                                                                                                                                                                                                                                            |
+
+表E.21：Colspec
+
+| 类         | Colspec                                                                                                                              |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::BlockElements::OasisExchangeTable                                                                                      |
+| 注意       | 该元类表示规定表格中一列的属性的能力。                                                                                                    |
+| 基类       | ARObject                                                                                                                              |
+| 聚合于     | Tgroup.colspec                                                                                                                            |
+
+| 属性     | 类型                  | 多重性 | 类别 | 注意                                                                                                                          |
+|-----------|------------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------|
+| align     | AlignEnum              | 0..1   | attr | 规定单元格条目在规定的列内应当如何水平对齐。默认为 “LEFT”。标签：xml.attribute=true                                                          |
+| colname   | String                 | 0..1   | attr | 规定列的名称。标签：xml.attribute=true                                                                                                  |
+| colnum    | String                 | 0..1   | attr | 列号（允许对列排序）。标签：xml.attribute=true                                                                                          |
+| colsep    | TableSeparatorString   | 0..1   | attr | 指示是否应当在列规范中该列的右侧显示线。标签：xml.attribute=true                                                                          |
+| colwidth  | String                 | 0..1   | attr | 列的宽度。可以输入绝对值（如 4 cm）或带 \* 的相对值（例如 2\* 表示列宽是 1\* 列的两倍）。单位可以附加在字符串中的数字后。可能的单位为：cm、mm、px、pt。标签：xml.attribute=true |
+| rowsep    | TableSeparatorString   | 0..1   | attr | 指示是否应当在 Colspec 定义的列的单元格底部显示线。标签：xml.attribute=true                                                              |
+
+表E.22：Compiler
+
+| 类         | Compiler                                                                                                                             |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::CommonStructure::Implementation                                                                                          |
+| 注意       | 规定编译器属性。对源代码，这规定应当如何调用编译器的需求；对目标代码，这记录所使用的编译器设置。                                                          |
+| 基类       | ARObject、Identifiable、MultilanguageReferrable、Referrable                                                                                      |
+| 聚合于     | Implementation.compiler                                                                                                                             |
+
+| 属性    | 类型   | 多重性 | 类别 | 注意                                       |
+|----------|---------|--------|------|-----------------------------------------------------|
+| name     | String  | 0..1   | attr | 编译器名称（如 gcc）。                                    |
+| options  | String  | 0..1   | attr | 规定编译器选项。                                            |
+| vendor   | String  | 0..1   | attr | 编译器厂商。                                                |
+| version  | String  | 0..1   | attr | 编译器可执行文件的精确版本。                                      |
+
+表E.23：CompositionSwComponentType
+
+| 类         | CompositionSwComponentType                                                                                                                                                                                                                                          |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SWComponentTemplate::Composition                                                                                                                                                                                                                               |
+| 注意       | CompositionSwComponentType 聚合 SwComponentPrototype（它们又由 SwComponentType 定型）以及 SwConnector——后者主要用于把 SwComponentPrototype 相互连接并连接到 CompositionSwComponentType 的表面。由此可以创建软件组件的层次结构。标签：atp.recommendedPackage=SwComponentTypes |
+| 基类       | ARElement、ARObject、AtpBlueprint、AtpBlueprintable、AtpClassifier、AtpType、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable、SwComponentType                                                                                                    |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                                                                                       |
+
+| 属性                      | 类型                             | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+|---------------------------|-----------------------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| component                 | SwComponentPrototype              | *      | aggr | 属于该组合的被实例化的组件。SwComponentPrototype 的聚合受变体支配，目的是支持 SwComponentPrototype 的条件存在。请注意：若 SwComponentPrototype 的条件存在被 post-build 解析，被取消选择的 SwComponentPrototype 仍包含在 ECU 构建中，但其实例是不活跃的——它们不被 RTE 调度。该聚合被标记为 atpSplitable，以便允许在 ECU 集成期间把服务组件添加到 ECU extract。让 CompositionSwComponentType 拥有 0 个组件的用例可能是：向（例如）供应商交付一个空的 CompositionSwComponentType 以填充内部结构。构型：atpSplitable；atpVariation 标签：atp.Splitkey=component.shortName, component.variationPoint.shortLabel vh.latestBindingTime=postBuild |
+| connector                 | SwConnector                       | *      | aggr | SwConnector 原则上能够在 PortPrototype 之间建立连接。在 CompositionSwComponentType 的上下文中它们可以有许多角色。细节由子类细化。SwConnector 的聚合受变体支配，目的是支持变体数据流。该聚合被标记为 atpSplitable，以便允许在 ECU 集成期间用 AssemblySwConnector 扩展 ECU extract（在 ApplicationSwComponentType 与 ServiceSwComponentType 之间）。构型：atpSplitable；atpVariation 标签：atp.Splitkey=connector.shortName, connector.variationPoint.shortLabel vh.latestBindingTime=postBuild                        |
+| constantValueMapping      | ConstantSpecificationMappingSet   | *      | ref  | 指向要应用于 PPortComSpec 与 RPortComSpec 的 initValues 的 ConstantSpecificationMapping 的引用。构型：atpSplitable 标签：atp.Splitkey=constantValueMapping                                                                                                                                                                                                                                                                                                    |
+| dataTypeMapping           | DataTypeMappingSet                | *      | ref  | 指向要应用于 PortInterface 中所使用的 ApplicationDataType 的 DataTypeMappingSet 的引用。背景：在开发子系统时，ApplicationDataType 可能被用在 CompositionSwComponentType 的表面上。在这种情况下，合理的是也能够提供到 ImplementationDataType 的预期映射。然而，该映射应当是非正式的、对实现者在技术上不具约束力的，主要因为 RTE 生成器不关心 CompositionSwComponentType。理由：若被委托与内部 PortPrototype 上 ApplicationDataType 的映射匹配，则到 ImplementationDataType 的映射不影响兼容性。构型：atpSplitable 标签：atp.Splitkey=dataTypeMapping |
+| instantiationRTEEventProps| InstantiationRTEEventProps        | *      | aggr | 这允许为 RTE 事件定义实例化特定的属性，尤其是实例特定的调度。构型：atpSplitable；atpVariation 标签：atp.Splitkey=instantiationRTEEventProps.shortLabel, instantiationRTEEventProps.variationPoint.shortLabel vh.latestBindingTime=codeGenerationTime                                                                                                                                                                      |
+| physicalDimensionMapping  | PhysicalDimensionMappingSet       | 0..1   | ref  | 该引用标识在外层 CompositionSwComponentType 的上下文中适用的 PhysicalDimensionMappingSet。在 CompositionSwComponentType 范围内创建 PortInterfaceMapping 时，评估 PhysicalDimension 的兼容性应当考虑 PhysicalDimensionMappingSet 中包含的 PhysicalDimensionMapping。                                                                                                                                      |
+
+表E.24：CompuMethod
+
+| 类         | CompuMethod                                                                                                                                                                        |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::AsamHdo::ComputationMethod                                                                                                                                                                      |
+| 注意       | 该元类表示表达物理取值与数学表示之间关系的能力。注意，它仍然独立于数据类型中的技术实现。它只规定内部取值如何对应其物理对应物的公式。标签：atp.recommendedPackage=CompuMethods                                        |
+| 基类       | ARElement、ARObject、AtpBlueprint、AtpBlueprintable、CollectableElement、Identifiable、Referrable、PackageableElement、Referrable                                                                              |
+| 聚合于     | ARPackage.element                                                                                                                                                                                          |
+
+| 属性                  | 类型                | 多重性 | 类别 | 注意                                                                                                                               |
+|------------------------|----------------------|--------|------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| compuInternalToPhys    | Compu                | 0..1   | aggr | 这规定从内部取值到物理取值的计算。构型：atpSplitable 标签：atp.Splitkey=compuInternalToPhys xml.sequenceOffset=80                              |
+| compuPhysToInternal    | Compu                | 0..1   | aggr | 这表示从物理取值到内部取值的计算。构型：atpSplitable 标签：atp.Splitkey=compuPhysToInternal xml.sequenceOffset=90                              |
+| displayFormat          | DisplayFormatString  | 0..1   | attr | 该属性规定物理取值应当如何显示，例如在文档或测量与标定工具中。标签：xml.sequenceOffset=20                                                            |
+| unit                   | Unit                 | 0..1   | ref  | 这是 CompuMethod 所适用的物理取值的物理单位。标签：xml.sequenceOffset=30                                                                          |
+
+表E.25：Describable
+
+| 类         | Describable（抽象）                                                                                                                                                                                                                                       |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::Identifiable                                                                                                                                                                                            |
+| 注意       | 该元类表示为不可标识元素添加描述性文档的能力。                                                                                                                                                                                                                              |
+| 基类       | ARObject                                                                                                                                                                                                                                                            |
+| 子类       | CyclicTiming、EventControlledTiming、HwElementConnector、HwPinConnector、HwPinGroupConnector、IPduTiming、Ipv4DhcpServerConfiguration、Ipv6DhcpServerConfiguration、PncMapping、SocketConnection、TransformationComSpecProps、TransformationDescription、TransformationISignalProps |
+| 属性       | adminData、category、desc、introduction                                                                                                                                                                                                                                  |
+
+| 属性        | 类型                             | 多重性 | 类别 | 注意                                                                                                                                                                                                                                            |
+|--------------|-----------------------------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| adminData    | AdminData                         | 0..1   | aggr | 这表示该可描述对象的管理数据。构型：atpSplitable 标签：atp.Splitkey=adminData xml.sequenceOffset=-20                                                                                                                                                            |
+| category     | CategoryString                    | 0..1   | attr | category 是一个特化 Describable 语义的关键字。它影响属性的预期存在性与约束的适用性。标签：xml.sequenceOffset=-50                                                                                                                                          |
+| desc         | MultiLanguageOverviewParagraph    | 0..1   | aggr | 这表示关于相关对象是什么的一般但简短（单段）描述。它只有一个段落！Desc 旨在被收集到概览表中。该属性帮助人类读者识别相关对象。更详尽的文档（特别是对象如何构建或使用）应当放到 “introduction”。标签：xml.sequenceOffset=-60                                          |
+| introduction | DocumentationBlock                | 0..1   | aggr | 这表示关于相关对象如何构建或使用的更多信息。因此它是一个 DocumentationBlock。标签：xml.sequenceOffset=-30                                                                                                                                                  |
+
+表E.26：DiagnosticDebounceAlgorithmProps
+
+| 类         | DiagnosticDebounceAlgorithmProps                                  |
+|------------|-----------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::DiagnosticExtract::Dem::DiagnosticDebouncingAlgorithm         |
+| 注意       | 定义防抖（debounce）算法类别的属性。                                            |
+| 基类       | ARObject、Identifiable、MultilanguageReferrable、Referrable                           |
+| 聚合于     | DiagnosticCommonProps.debounceAlgorithmProps                                            |
+
+| 属性                | 类型                              | 多重性 | 类别 | 注意                                                                                                                                |
+|----------------------|------------------------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| debounceAlgorithm    | DiagEventDebounceAlgorithm         | 0..1   | aggr | 这表示实际的防抖算法。                                                                                                                  |
+| debounceBehavior     | DiagnosticDebounceBehaviorEnum     | 0..1   | attr | 该属性定义当相关的使能条件不满足、或相关事件的 ControlDTCSetting 被禁用时，事件防抖算法将如何表现。构型：atpVariation 标签：vh.latestBindingTime=preCompileTime |
+| debounceCounterStorage | Boolean                          | 0..1   | attr | 是否把防抖计数器取值非易失存储的开关。true = 防抖计数器取值应当非易失存储；false = 防抖计数器取值是易失的。请注意，该属性对自适应平台无关。          |
+
+表E.27：DiagnosticDebounceBehaviorEnum
+
+| 枚举        | DiagnosticDebounceBehaviorEnum                                              |
+|-------------|--------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::DiagnosticExtract::Dem::DiagnosticDebouncingAlgorithm                        |
+| 注意        | 事件防抖算法行为选项。                                                                              |
+| 聚合于      | DiagnosticDebounceAlgorithmProps.debounceBehavior                                                        |
+
+| 字面量 | 说明                                                                                                                                                                                                                       |
+|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| freeze  | 在相关使能条件不满足、或相关事件的 ControlDTCSetting 被禁用期间，事件防抖计数器将被冻结在当前取值且不变化。在全部相关使能条件重新满足且相关事件的 ControlDTCSetting 重新启用后，事件限定将在下一次事件报告（即 SetEventStatus）时继续。标签：atp.EnumerationLiteralIndex=0 |
+| reset   | 若相关使能条件不满足、或相关事件的 ControlDTCSetting 被禁用，事件防抖计数器将被重置为初始值。事件限定将从下一次有效事件报告重新开始。标签：atp.EnumerationLiteralIndex=1                                                                                  |
+
+表E.28：Documentation
+
+| 类         | Documentation                                                                                                                                                                                             |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::DocumentationOnM1                                                                                                                                                                     |
+| 注意       | 该元类表示处理所谓独立文档的能力。独立意味着这样的文档不嵌入另一个 ARElement 或可标识对象中。独立文档是一个自身独立的实体，它通过引用其他对象与实例标注其上下文。标签：atp.recommendedPackage=Documentations                    |
+| 基类       | ARElement、ARObject、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable、UploadableDesignElement、UploadablePackageElement                                                                        |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                              |
+
+| 属性                 | 类型                 | 多重性 | 类别 | 注意                                                                                                  |
+|-----------------------|-----------------------|--------|------|------------------------------------------------------------------------------------------------------------------|
+| context               | DocumentationContext  | *      | aggr | 这是该特定文档的上下文。                                                                                             |
+| documentationContent  | PredefinedChapter     | 0..1   | aggr | 这是与规定的上下文相关的文档内容。标签：xml.sequenceOffset=200                                                            |
+
+表E.29：EcucContainerValue
+
+| 类         | EcucContainerValue                                                                                                     |
+|------------|------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::ECUCDescriptionTemplate                                                                                          |
+| 注意       | 表示 ECU 配置描述中的一个容器定义。                                                                                                  |
+| 基类       | ARObject、EcucIndexableValue、Identifiable、MultilanguageReferrable、Referrable                                                            |
+| 聚合于     | EcucContainerValue.subContainer、EcucModuleConfigurationValues.container                                                                  |
+
+| 属性           | 类型                        | 多重性 | 类别 | 注意                                                                                                                                                                          |
+|-----------------|------------------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| definition      | EcucContainerDef             | 0..1   | ref  | 指向 ECU 配置参数定义中该容器定义的引用。标签：xml.sequenceOffset=-10                                                                                                              |
+| parameterValue  | EcucParameterValue           | *      | aggr | 聚合该容器内的全部 ECU 配置取值。atpVariation：[RS\_ECUC\_00079]。构型：atpSplitable；atpVariation 标签：atp.Splitkey=parameterValue, parameterValue.variationPoint.shortLabel vh.latestBindingTime=postBuild |
+| referenceValue  | EcucAbstractReferenceValue   | *      | aggr | 聚合该容器内的全部引用。atpVariation：[RS\_ECUC\_00079]。构型：atpSplitable；atpVariation 标签：atp.Splitkey=referenceValue, referenceValue.variationPoint.shortLabel vh.latestBindingTime=postBuild    |
+| subContainer    | EcucContainerValue           | *      | aggr | 聚合该容器内的全部子容器。atpVariation：[RS\_ECUC\_00078]。构型：atpSplitable；atpVariation 标签：atp.Splitkey=subContainer.shortName, subContainer.variationPoint.shortLabel vh.latestBindingTime=postBuild |
+
+表E.30：EcucDefinitionElement
+
+| 类         | EcucDefinitionElement（抽象）                                                                                                                                                                             |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::ECUCParameterDefTemplate                                                                                                                                                                              |
+| 注意       | 用于表达配置参数、引用与容器共性的公共类。除非另有说明，默认多重性恰好是规定元素的一次必需出现。                                                                                                                              |
+| 基类       | ARObject、AtpDefinition、Identifiable、MultilanguageReferrable、Referrable                                                                                                                                                          |
+| 子类       | EcucCommonAttributes、EcucContainerDef、EcucModuleDef                                                                                                                                                                            |
+
+| 属性                        | 类型                          | 多重性 | 类别 | 注意                                                                                                                                                                      |
+|------------------------------|--------------------------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ecucCond                     | EcucConditionSpecification     | 0..1   | aggr | 若求值为 true，则该 ECU 参数定义应当按照规定处理。否则该参数定义应当被忽略。标签：xml.sequenceOffset=100                                                                    |
+| ecucValidationCond           | EcucValidationCondition        | *      | aggr | 校验条件的集合，全部需要求值为 true，才能指示 EcucDefinitionElement 的一个有效校验条件。                                                                  |
+| lowerMultiplicity            | PositiveInteger                | 0..1   | attr | 规定元素的下重数。0 = 可选；1 = 至少一次；n = 至少 n 次。atpVariation：[RS\_ECUC\_00082]。构型：atpVariation 标签：vh.latestBindingTime=codeGenerationTime xml.sequenceOffset=110              |
+| relatedTraceItem             | Traceable                      | 0..1   | ref  | 这包含指向该元素的 Autosar 兼容标识符（EcucId）的草率引用（sloppy reference）。构型：atpUriDef 标签：xml.sequenceOffset=-10                                            |
+| scope                        | EcucScopeEnum                  | 0..1   | attr | 规定该配置元素的作用范围。标签：xml.sequenceOffset=150                                                                                                                    |
+| upperMultiplicity            | PositiveInteger                | 0..1   | attr | 规定元素的上重数。0 = 无出现（用于 VSMD）；1 = 至多一次；m = 至多 m 次。若设置了 upperMultiplicity，则不得使用 upperMultiplicityInfinite。atpVariation：[RS\_ECUC\_00082]。构型：atpVariation 标签：vh.latestBindingTime=codeGenerationTime xml.sequenceOffset=120 |
+| upperMultiplicityInfinite    | Boolean                        | 0..1   | attr | 为表达该元素出现的无限次数，该属性必须置为 true。若设置了 upperMultiplicityInfinite，则不得使用 upperMultiplicity。atpVariation：[RS\_ECUC\_00082]。构型：atpVariation 标签：vh.latestBindingTime=codeGenerationTime |
+
+表E.31：EcucModuleConfigurationValues
+
+| 类         | EcucModuleConfigurationValues                                                                                                                                                                                                                |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::ECUCDescriptionTemplate                                                                                                                                                                                                                        |
+| 注意       | 一个模块配置的头部。模块可以是 BSW 模块，也可以是 RTE 与 ECU 基础设施。作为 BSW 模块描述的一部分，EcucModuleConfigurationValues 元素有两种不同的角色：recommendedConfiguration 包含由 BSW 模块厂商推荐的参数取值；preconfiguredConfiguration 包含由实现固定、不可更改的参数取值。这两种 EcucModuleConfigurationValues 在基础 EcucModuleConfigurationValues（源文句子在此截断）。 |
+| 基类       | ARElement、ARObject、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                                                                                                                        |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                                                                  |
+
+| 属性                          | 类型                          | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                                            |
+|--------------------------------|--------------------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| container                      | EcucContainerValue             | *      | aggr | 聚合属于该模块配置的全部容器。atpVariation：[RS\_ECUC\_00078]。构型：atpSplitable；atpVariation 标签：atp.Splitkey=container.shortName, container.variationPoint.shortLabel vh.latestBindingTime=postBuild xml.sequenceOffset=10                                                                                |
+| definition                     | EcucModuleDef                  | 0..1   | ref  | 指向该 EcucModuleConfigurationValues 元素的定义的引用。通常这是一个厂商特定的模块配置。                                                                                                                                                                                          |
+| ecucDefEdition                 | RevisionLabelString            | 0..1   | attr | 这是该取值所符合/所基于的 ModuleDef ECUC 参数定义的版本信息。对 ModuleDef ECUC 参数的定义，应当使用 AdminData 表达语义变更。定义与取值修订标签之间的兼容性规则由模块厂商决定。                                                                                                        |
+| implementationConfigVariant    | EcucConfigurationVariantEnum   | 0..1   | attr | 规定该 EcucModuleConfigurationValues 元素提供的交付物种类。若该元素未在特定角色中使用（例如 preconfiguredConfiguration 或 recommendedConfiguration），则取值应当是 VariantPreCompile、VariantLinkTime、VariantPostBuild 之一。            |
+| moduleDescription              | BswImplementation              | 0..1   | ref  | 指向该 EcucModuleConfigurationValues 元素正在配置的 BSW 模块描述。它是可选的，因为 EcucModuleConfigurationValues 元素也用于配置 ECU 基础设施（内存映射）或应用 SW-C。然而，若 EcucModuleConfigurationValues 用于配置该模块，则该引用是必需的，以便获取模块特定的“公共”已发布信息。 |
+| postBuildVariantUsed           | Boolean                        | 0..1   | attr | 指示一个模块实现是否已经或计划拥有（即在 link 或 post-build 时引入）新的 post-build 变体点。TRUE 表示是，FALSE 表示否。若未定义该属性，则应假定 FALSE 语义。                                                                                                              |
+
+表E.32：EcucNumericalParamValue
+
+| 类         | EcucNumericalParamValue                                       |
+|------------|-------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::ECUCDescriptionTemplate                                 |
+| 注意       | 持有受变体支配的取值。                                                              |
+| 基类       | ARObject、EcucIndexableValue、EcucParameterValue                                       |
+| 聚合于     | EcucContainerValue.parameterValue                                                        |
+
+| 属性  | 类型      | 多重性 | 类别 | 注意                                                                                              |
+|--------|------------|--------|------|----------------------------------------------------------------------------------------------------------------|
+| value  | Numerical  | 0..1   | attr | 受变体支配的取值。atpVariation：[RS\_ECUC\_00080]。构型：atpVariation 标签：vh.latestBindingTime=preCompileTime |
+
+表E.33：EcucParameterValue
+
+| 类         | EcucParameterValue（抽象）                                                                                                   |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::ECUCDescriptionTemplate                                                                                                  |
+| 注意       | 全部类型配置取值的公共类。                                                                                                            |
+| 基类       | ARObject、EcucIndexableValue                                                                                                                  |
+| 子类       | EcucAddInfoParamValue、EcucNumericalParamValue、EcucTextualParamValue                                                                           |
+| 聚合于     | EcucContainerValue.parameterValue                                                                                                                  |
+
+| 属性       | 类型               | 多重性 | 类别 | 注意                                                                                                                                                                |
+|-------------|---------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| annotation  | Annotation          | *      | aggr | 在定义 ECU 配置参数取值时提供附加注记的可能性。这些并非用作文档，而只是设计注记。标签：xml.sequenceOffset=10                                                              |
+| definition  | EcucParameterDef    | 0..1   | ref  | 指向 ECU 配置参数定义中该 EcucParameterValue 子类定义的引用。标签：xml.sequenceOffset=-10                                                                              |
+| isAutoValue | Boolean             | 0..1   | attr | 若该参数定义的 withAuto 置为 “true”，则 isAutoValue 可以置为 “true”。若 isAutoValue 置为 “true”，则实际取值在 ECU 配置期间不被考虑，而是由代码生成器（重新）计算并随后存储在 value 属性中。这些隐式更新的取值可能要求引用这些取值的其他模块重新生成。若 isAutoValue 不存在，默认为 “false”。标签：xml.sequenceOffset=20 |
+
+表E.34：EcucReferenceDef
+
+| 类         | EcucReferenceDef                                                                                                                                                                           |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::ECUCParameterDefTemplate                                                                                                                                                                  |
+| 注意       | 规定 ECU 配置描述内参数容器之间的引用。                                                                                                                                                                     |
+| 基类       | ARObject、AtpDefinition、EcucAbstractInternalReferenceDef、EcucAbstractReferenceDef、EcucCommonAttributes、EcucDefinitionElement、Identifiable、MultilanguageReferrable、Referrable                                          |
+| 聚合于     | EcucDestinationUriPolicy.reference、EcucParamConfContainerDef.reference                                                                                                                                              |
+
+| 属性       | 类型              | 多重性 | 类别 | 注意                                                                                              |
+|-------------|--------------------|--------|------|------------------------------------------------------------------------------------------------------------|
+| destination | EcucContainerDef   | 0..1   | ref  | 作为目标，恰好允许一个指向参数容器的引用。构型：atpUriDef                                                        |
+
+表E.35：EcucReferenceValue
+
+| 类         | EcucReferenceValue                                                                                                                                |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::ECUCDescriptionTemplate                                                                                                                             |
+| 注意       | 用于表示一个配置取值，其参数定义的类型为 EcucAbstractReferenceDef（用于其全部特化，EcucInstanceReferenceDef 除外）。                                                            |
+| 基类       | ARObject、EcucAbstractReferenceValue、EcucIndexableValue                                                                                                                        |
+| 聚合于     | EcucContainerValue.referenceValue                                                                                                                                                |
+
+| 属性 | 类型      | 多重性 | 类别 | 注意                             |
+|-------|------------|--------|------|--------------------------------------------|
+| value | Referrable | 0..1   | ref  | 规定引用的目标。                              |
+
+表E.36：EcucTextualParamValue
+
+| 类         | EcucTextualParamValue                                    |
+|------------|---------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::ECUCDescriptionTemplate                             |
+| 注意       | 持有一个不受变体支配的取值。                                                    |
+| 基类       | ARObject、EcucIndexableValue、EcucParameterValue                               |
+| 聚合于     | EcucContainerValue.parameterValue                                                  |
+
+| 属性  | 类型           | 多重性 | 类别 | 注意                                           |
+|--------|-----------------|--------|------|----------------------------------------------------------|
+| value  | VerbatimString  | 0..1   | attr | 参数的取值，不受变体支配。                                      |
+
+表E.37：EnumerationMappingEntry
+
+| 类         | EnumerationMappingEntry                                                                                                                                                                                 |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling::AttributeValueVariationPoints                                                                                                                                    |
+| 注意       | 该类规定枚举映射表的条目元素。注意，该类可能只在扩展元模型中使用。                                                                                                                                                    |
+| 基类       | ARObject                                                                                                                                                                                                              |
+| 聚合于     | EnumerationMappingTable.entry                                                                                                                                                                                              |
+
+| 属性            | 类型            | 多重性 | 类别 | 注意                                                                                                                                                                 |
+|------------------|------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| enumeratorValue  | NameToken        | 1      | attr | 该属性规定枚举条目的符号取值（例如 in、out）。标签：xml.sequenceOffset=20                                                                                                        |
+| numericalValue   | PositiveInteger  | 1      | attr | 该属性规定枚举条目的数值（例如 0、1）。numericalValue 在 M2 层次上标记一个索引。它不用于 C 代码或运行时。给出 numericalValue 只是为了能够计算出一个在数值表达式中表示该枚举字面量的取值。标签：xml.sequenceOffset=10 |
+
+表E.38：EnumerationMappingTable
+
+| 类         | EnumerationMappingTable                                                                                                                                  |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling::AttributeValueVariationPoints                                                                                    |
+| 注意       | 该类表示 Enumeration 属性的属性取值变体点。注意，该类可能只在扩展元模型中使用。标签：atp.recommendedPackage=EnumerationMappingTables                                    |
+| 基类       | ARObject、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                                            |
+| 聚合于     | ARPackage.element                                                                                                                                                             |
+
+| 属性  | 类型                     | 多重性 | 类别 | 注意                                                                                                                                    |
+|--------|---------------------------|--------|------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| entry  | EnumerationMappingEntry   | *      | aggr | 把枚举取值映射到唯一整数的键值对。标签：xml.roleElement=true xml.roleWrapperElement=true xml.typeElement=false xml.typeWrapperElement=false |
+
+表E.39：FMFeature
+
+| 类         | FMFeature                                                                                                                                                                               |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::FeatureModelTemplate                                                                                                                                                                    |
+| 注意       | 一个 FMFeature 描述产品的一个本质特性。每个 FMFeature 恰好包含在一个 FMFeatureModel 中。标签：atp.recommendedPackage=FMFeatureModels                                                                          |
+| 基类       | ARElement、ARObject、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                                                                    |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                 |
+
+| 属性                       | 类型                  | 多重性 | 类别 | 注意                                                                                                                               |
+|-----------------------------|------------------------|--------|------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| attributeDef                | FMAttributeDef         | *      | aggr | 这定义给定特征的属性。                                                                                                                          |
+| decomposition               | FMFeatureDecomposition | *      | aggr | 列出一个特征的子特征。                                                                                                                          |
+| maximumIntendedBindingTime  | BindingTimeEnum        | 0..1   | attr | 为与该 FMFeature 关联的变体点的施加时间定义一个上界。该属性旨在作为开发流程的提示。                                                              |
+| minimumIntendedBindingTime  | BindingTimeEnum        | 0..1   | attr | 为与该 FMFeature 关联的变体点的施加时间定义一个下界。该属性旨在作为开发流程的提示。                                                              |
+| relation                    | FMFeatureRelation      | *      | aggr | 定义 FMFeature 的关系，例如对其他 FMFeature 的依赖，或与其他 FMFeature 的冲突。只有当其全部关系都得到满足时，FMFeature 才能成为 FMFeatureSelectionSet 的一部分。 |
+| restriction                 | FMFeatureRestriction   | *      | aggr | 定义 FMFeature 的限制。只有当其至少一个限制求值为 true 时，FMFeature 才能成为 FMFeatureSelectionSet 的一部分。                                        |
+
+表E.40：FMFeatureModel
+
+| 类         | FMFeatureModel                                                                                                                       |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::FeatureModelTemplate                                                                                                            |
+| 注意       | 特征模型描述产品线的特征及其依赖。特征模型是 AUTOSAR 模型的可选部分。标签：atp.recommendedPackage=FMFeatureModels                                            |
+| 基类       | ARElement、ARObject、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                              |
+| 聚合于     | ARPackage.element                                                                                                                                          |
+
+| 属性    | 类型      | 多重性 | 类别 | 注意                                                                                                                                          |
+|----------|------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| feature  | FMFeature  | *      | ref  | “feature” 持有特征模型的特征列表。任何 FMFeature 不得在该列表中出现两次。此外，每个 FMFeature 只能包含在一个特征模型中。构型：atpSplitable 标签：atp.Splitkey=feature            |
+| root     | FMFeature  | 0..1   | ref  | 特征模型的特征定义一棵树。属性 root 指向该树的根。                                                                                                            |
+
+表E.41：FibexElement
+
+| 类         | FibexElement（抽象）                                                                                                            |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SystemTemplate::Fibex::FibexCore                                                                                             |
+| 注意       | 规定通信与拓扑的 ASAM FIBEX 元素。                                                                                                          |
+| 基类       | ARObject、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                  |
+| 子类       | BusMirrorChannelMapping、CommunicationCluster、ConsumedProvidedServiceInstanceGroup、CouplingElement、EcuInstance、EthernetWakeupSleepOnDatalineConfigSet、Frame、Gateway、GlobalTimeDomain、ISignal、ISignalGroup、ISignalIPduGroup、NmConfig、Pdu、PdurIPduGroup、SecureCommunicationPropsSet、ServiceInstanceCollectionSet、SoAdRoutingGroup、SocketConnectionIpduIdentifierSet、TpConfig |
+| 聚合于     | ARPackage.element                                                                                                                                   |
+
+表E.42：FlatMap
+
+| 类         | FlatMap                                                                                                                                                                                                                               |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::CommonStructure::FlatMap                                                                                                                                                                                                                |
+| 注意       | 包含一个指向软件对象的扁平引用列表。该列表用于标识实例并解决名称冲突。其范围由使用它的 RootSwCompositionPrototype 给出，即它可以应用于一个系统、系统抽取或 ECU extract。FlatMap 的实例也可以用在初步上下文中，例如在集成进系统之前、某个软件组件的范围内。此时它不被 RootSwCompositionPrototype 引用。标签：atp.recommendedPackage=FlatMaps |
+| 基类       | ARElement、ARObject、AtpBlueprint、AtpBlueprintable、CollectableElement、Identifiable、Referrable、PackageableElement、Referrable                                                                                                                                        |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                                                               |
+
+| 属性    | 类型                    | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                                                                          |
+|----------|--------------------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| instance | FlatInstanceDescriptor   | *      | aggr | 聚合在扁平映射中的一个描述符实例。变体点考虑到：范围内的系统可能受变体支配，因此某些实例的存在是可变的。该聚合被做成可拆分的，因为其内容可能由不同利益相关方在工作流程的不同时间贡献。此外，总体尺寸可能非常大，以至于分布在多个文件中最终更易于管理。构型：atpSplitable；atpVariation 标签：atp.Splitkey=instance.shortName, instance.variationPoint.shortLabel vh.latestBindingTime=postBuild |
+
+表E.43：FlexrayCommunicationController
+
+| 类         | &lt;&lt;atpVariation&gt;&gt; FlexrayCommunicationController                                                                                                       |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SystemTemplate::Fibex::Fibex4Flexray::FlexrayTopology                                                                                                            |
+| 注意       | FlexRay 总线特定的通信端口属性。                                                                                                                                                          |
+| 基类       | ARObject、CommunicationController、Identifiable、MultilanguageReferrable、Referrable                                                                                                          |
+| 聚合于     | EcuInstance.commController、MachineDesign.communicationController                                                                                                                              |
+
+| 属性                     | 类型    | 多重性 | 类别 | 注意                                                                                                                                                                                               |
+|---------------------------|----------|--------|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| acceptedStartupRange      | Integer  | 0..1   | attr | 集成期间允许的启动帧测量时钟偏差的扩展范围。单位：微节拍（microtick）。                                                                                                                              |
+| allowHaltDueToClock       | Boolean  | 0..1   | attr | 控制因时钟同步错误向 POC:halt 状态转换的布尔标志。若置为 true，通信控制器被允许转换到 POC:halt；若置为 false，通信控制器不转换到 POC:halt 状态，而是进入或保持正常 POC（被动状态）。                                  |
+| allowPassiveToActive      | Integer  | 0..1   | attr | 在通信控制器被允许从 POC:normal passive 状态转换到 POC:normal active 状态之前，应当拥有有效时钟校正项的连续偶/奇循环对的数量。若置为 0，通信控制器不允许从 POC:norm（源文在此截断）。                                  |
+| clusterDriftDamping       | Integer  | 0..1   | attr | 时钟同步速率校正中使用的（以微节拍计的）集群漂移阻尼因子。                                                                                                                              |
+| decodingCorrection        | Integer  | 0..1   | attr | 接收方用来计算主时间参考点与次时间参考点之差的取值。单位：微节拍（pDecodingCorrection）。                                                                                                  |
+| delayCompensationA        | Integer  | 0..1   | attr | 用于补偿通道 A 上接收延迟的取值。单位：微节拍。该可选参数只在通道 A 被使用时填写。                                                                                                      |
+| delayCompensationB        | Integer  | 0..1   | attr | 用于补偿通道 B 上接收延迟的取值。单位：微节拍。该可选参数只在通道 B 被使用时填写。                                                                                                      |
+| externalSync              | Boolean  | 0..1   | attr | 指示该节点是外部同步的（在 TT-E 时间触发外部同步集群中作为时间网关接收端运行）还是本地同步的。                                                                                          |
+| externOffsetCorrection    | Integer  | 0..1   | attr | 为便利外部偏移校正而加到或减自计算出的偏移校正项的固定量，以节点本地微节拍表示。                                                                                                      |
+| externRateCorrection      | Integer  | 0..1   | attr | 为便利外部速率校正而加到或减自计算出的速率校正项的固定量，以节点本地微节拍表示。                                                                                                      |
+| fallBackInternal          | Boolean  | 0..1   | attr | 指示时间网关接收端节点在与时间网关源节点的同步丢失时（pFallBackInternal = true）切换到本地时钟运行，还是转而进入 POC:ready（pFallBackInternal = false）。                            |
+| flexrayFifo               | FlexrayFifoConfiguration| * | aggr | 一个先进先出（FIFO）排队接收结构，定义进入 FIFO 的准入判据。                                                                                                                              |
+| keySlotID                 | PositiveInteger | 0..1 | attr | 用于发送启动帧、同步帧或指定的单时隙帧的时隙 ID。若属性 keySlotUsedForStartUp、keySlotUsedForSync 或 keySlotOnlyEnabled 置为 true，则关键时隙值是必需的。                          |
+| keySlotOnlyEnabled        | Boolean  | 0..1   | attr | 指示节点是否应当在启动后进入仅关键时隙模式的标志。                                                                                                                              |
+| keySlotUsedForStartUp     | Boolean  | 0..1   | attr | 指示关键时隙是否用于发送启动帧的标志。                                                                                                                                          |
+| keySlotUsedForSync        | Boolean  | 0..1   | attr | 指示关键时隙是否用于发送同步帧的标志。                                                                                                                                          |
+| latestTX                  | Integer  | 0..1   | attr | 对相应节点而言，动态段中可以开始发送的最后一个微时隙的编号。                                                                                                                          |
+| listenTimeout             | Integer  | 0..1   | attr | 启动监听超时与唤醒监听超时的取值。尽管这是节点本地参数，该值的实际时间等价量对集群中全部节点应当相同。单位：微节拍。                                                              |
+| macroInitialOffsetA       | Integer  | 0..1   | attr | 基于标称宏节拍时长、静态时隙边界与次时间参考点最近的宏节拍边界之间的宏节拍整数数量（pMacroInitialOffset）。该可选参数只在通道 A 被使用时填写。                                      |
+| macroInitialOffsetB       | Integer  | 0..1   | attr | 基于标称宏节拍时长、静态时隙边界与次时间参考点最近的宏节拍边界之间的宏节拍整数数量（pMacroInitialOffset）。该可选参数只在通道 B 被使用时填写。                                      |
+| maximumDynamicPayloadLength | Integer | 0..1  | attr | 帧的动态通道的最大负载长度，以 16 位 WORD 计。                                                                                                                              |
+| microInitialOffsetA       | Integer  | 0..1   | attr | gMacroInitialOffset 所描述的最近宏节拍边界与次时间参考点之间的微节拍数量。该参数依赖于 pDelayCompensationA，因此必须对每个通道独立设置。该可选参数只在通道 A 被使用时填写。              |
+| microInitialOffsetB       | Integer  | 0..1   | attr | gMacroInitialOffset 所描述的最近宏节拍边界与次时间参考点之间的微节拍数量。该参数依赖于 pDelayCompensationB，因此必须对每个通道独立设置。该可选参数只在通道 B 被使用时填写。              |
+| microPerCycle             | Integer  | 0..1   | attr | 一个通信周期中标称的微节拍数量。                                                                                                                                              |
+| microtickDuration         | TimeValue| 0..1   | attr | 一个微节拍的时长。该属性可以从 samplePerMicrotick 与 gdSampleClockPeriod 派生。单位：秒。                                                                                    |
+| nmVectorEarlyUpdate       | Boolean  | 0..1   | attr | 指示 CHI 中网络管理向量（Network Management Vector）的更新何时发生的标志。若置为 false，更新应当在 NIT 之后发生；若置为 true，更新应当在静态段结束后发生。                      |
+| offsetCorrectionOut       | Integer  | 0..1   | attr | 允许的偏移校正取值的最大幅度。单位：微节拍（pOffsetCorrectionOut）。                                                                                                        |
+| rateCorrectionOut         | Integer  | 0..1   | attr | 允许的速率校正取值的最大幅度，以及以未同步时钟运行的两个节点在一个通信周期内的最大漂移偏移。单位：微节拍（pRateCorrectionOut）。备注：该参数映射到 FlexRay 协议 2.1 Rev. A 的参数 pdMaxDrift。 |
+| samplesPerMicrotick       | Integer  | 0..1   | attr | 每微节拍的采样数量。                                                                                                                                                        |
+| secondKeySlotId           | PositiveInteger | 0..1 | attr | 第二关键时隙的 ID，在 TT-L 时间触发本地主同步或 TT-E 时间触发外部同步模式下，第二个启动帧将在其中发送。若该参数置为零，则节点没有第二关键时隙。                              |
+| twoKeySlotMode            | Boolean  | 0..1   | attr | 指示节点在 TT-E 时间触发外部同步或 TT-L 时间触发本地主同步集群中是否作为启动节点运行的标志。                                                                                |
+| wakeUpPattern             | Integer  | 0..1   | attr | 该节点在集群的 CC\_WakeupSend 状态期间要发送的 Tx 唤醒符号的重复次数。                                                                                                    |
+
+表E.44：Float
+
+| 原始类型    | Float                                                                                       |
+|-------------|---------------------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::PrimitiveTypes                                |
+| 注意        | Float 的实例是实数集合中的一个元素。标签：xml.xsd.customType=FLOAT xml.xsd.type=double                        |
+
+表E.45：FormulaExpression
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; FormulaExpression（抽象）                                                                                          |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::FormulaLanguage                                                                                                          |
+| 注意       | 该类表示公式语言的语法。该类被建模为抽象类，以便特化为特定用例。对每个用例，可引用的对象可以在特化中规定。                                                            |
+| 基类       | ARObject                                                                                                                                                        |
+| 子类       | CompuGenericMath、EcucConditionFormula、EcucParameterDerivationFormula、FMFormulaByFeaturesAndAttributes、SwSystemconstDependentFormula、TDEventOccurrenceExpressionFormula、TimingConditionFormula |
+
+| 属性                | 类型      | 多重性 | 类别 | 注意                                                                                              |
+|----------------------|------------|--------|------|----------------------------------------------------------------------------------------------------------------|
+| atpReference         | Referrable | *      | ref  | 该可引用对象应当产出一个数值/布尔取值。构型：atpAbstract                                                            |
+| atpStringReference   | Referrable | *      | ref  | 该可引用对象应当产出一个字符串取值。构型：atpAbstract                                                                |
+
+表E.46：GenericModelReference
+
+| 类         | GenericModelReference                                                                                                                                                                  |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::BuildActionManifest                                                                                                                                             |
+| 注意       | 该元类表示表达对模型元素的晚绑定引用的能力。该模型元素可以来自任何模型。即使它按照关联表示建模，它也不限于引用 AUTOSAR 模型元素。                                                                          |
+| 基类       | ARObject                                                                                                                                                                                              |
+
+| 属性 | 类型      | 多重性 | 类别 | 注意                                                                                                                                                      |
+|-------|------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| base  | NameToken  | 1      | attr | 这建立引用基础。标签：xml.attribute=true                                                                                                                              |
+| dest  | NameToken  | 1      | attr | 该属性表示被引用模型元素的类别。它是一个字符串，因为模型元素可以在任何模型中。因此这里不能做任何假设。标签：xml.attribute=true                                              |
+| ref   | Ref        | 1      | attr | 这是模型元素的全限定名。标签：xml.roleElement=true xml.roleWrapperElement=false xml.typeElement=false xml.typeWrapperElement=false                                                |
+
+表E.47：Implementation
+
+| 类         | Implementation（抽象）                                                                                                                                                                                                                                                       |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::CommonStructure::Implementation                                                                                                                                                                                                                                           |
+| 注意       | 对单个软件组件或模块的实现（implementation）的描述。                                                                                                                                                                                                                                                |
+| 基类       | ARElement、ARObject、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                                                                                                                                                            |
+| 子类       | BswImplementation、SwcImplementation                                                                                                                                                                                                                                                                        |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                                                                                                               |
+
+| 属性                    | 类型                    | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                                                                |
+|--------------------------|--------------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| buildActionManifest      | BuildActionManifest      | 0..1   | ref  | 一个清单，规定随该实现交付的软件预期的构建动作。构型：atpSplitable；atpVariation 标签：atp.Splitkey=buildActionManifest.buildActionManifest, buildActionManifest.variationPoint.shortLabel vh.latestBindingTime=codeGenerationTime                                                |
+| codeDescriptor           | Code                     | *      | aggr | 规定所提供的实现代码。                                                                                                                                                                                                                                                                                      |
+| compiler                 | Compiler                 | *      | aggr | 规定该实现为其发布的编译器。                                                                                                                                                                                                                                                                                |
+| generatedArtifact        | DependencyOnArtifact     | *      | aggr | 关联到一个在集成该实现期间将由关联的生成器工具生成的制品。注意，这是可选信息，因为提供该信息不一定总是在单个模块或组件的范围内。构型：atpSplitable；atpVariation 标签：atp.Splitkey=generatedArtifact.shortName, generatedArtifact.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                                    |
+| hwElement                | HwElement                | *      | ref  | 该实现所需的硬件元素（例如处理器）。                                                                                                                                                                                                                                                                          |
+| linker                   | Linker                   | *      | aggr | 规定该实现为其发布的链接器。                                                                                                                                                                                                                                                                                |
+| mcSupport                | McSupportData            | 0..1   | aggr | 属于该实现的测量与标定支持数据。该聚合是 &lt;&lt;atpSplitable&gt;&gt; 的，因为在既有的 BSW Implementation 模型的情况下，该描述将在流程中稍后添加，即在代码生成时。构型：atpSplitable 标签：atp.Splitkey=mcSupport（aggregtion 为源文如此）                                                                                  |
+| programmingLanguage      | ProgramminglanguageEnum  | 0..1   | attr | 创建该实现所用的编程语言。                                                                                                                                                                                                                                                                                |
+| requiredArtifact         | DependencyOnArtifact     | *      | aggr | 规定该实现依赖于另一个制品（例如库）的存在。DependencyOnArtifact 的该聚合受变体支配，目的是支持实现中的可变性。实现中的不同算法可能造成不同的依赖，例如所使用库的数量。构型：atpSplitable；atpVariation 标签：atp.Splitkey=requiredArtifact.shortName, requiredArtifact.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| requiredGeneratorTool    | DependencyOnArtifact     | *      | aggr | 把该实现关联到一个生成器工具，以便在集成期间生成附加制品。构型：atpSplitable；atpVariation 标签：atp.Splitkey=requiredGeneratorTool.shortName, requiredGeneratorTool.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                                                                                          |
+| resourceConsumption      | ResourceConsumption      | 0..1   | aggr | 每个实现的全部静态与动态资源都在 ResourceConsumption 类中描述。构型：atpSplitable 标签：atp.Splitkey=resourceConsumption.shortName                                                                                                                                                                            |
+| swcBswMapping            | SwcBswMapping            | 0..1   | ref  | 这允许把 SWC 与 BSW 行为之间的映射附着到一个实现描述上（用于 AUTOSAR 服务、ECU 抽象与复杂驱动组件）。由方法论决定该引用是否必须为 Swc- 或 BswImplementation 设置，或两者都设置。                                                                                                          |
+| swVersion                | RevisionLabelString      | 0..1   | attr | 该实现的软件版本。编号包含三个层次（如 major、minor、patch），其取值由厂商决定。                                                                                                                                                                                                                        |
+| usedCodeGenerator        | String                   | 0..1   | attr | 可选：所使用的代码生成器。                                                                                                                                                                                                                                                                                  |
+| vendorId                 | PositiveInteger          | 0..1   | attr | 按照 AUTOSAR 厂商清单的该实现的厂商 ID。                                                                                                                                                                                                                                                              |
+
+表E.48：ImplementationDataType
+
+| 类         | ImplementationDataType                                                                                                                                                                                                                                                                                                     |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::CommonStructure::ImplementationDataTypes                                                                                                                                                                                                                                                                                    |
+| 注意       | 描述实现层次上一个可复用的数据类型。这通常对应 C 代码中的一个 typedef。标签：atp.recommendedPackage=ImplementationDataTypes                                                                                                                                                                                                                              |
+| 基类       | ARElement、ARObject、AbstractImplementationDataType、AtpBlueprint、AtpBlueprintable、AtpClassifier、AtpType、AutosarDataType、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                                                                                                  |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                                                                                                                                              |
+
+| 属性                          | 类型                            | 多重性 | 类别 | 注意                                                                                                                                                                                              |
+|--------------------------------|----------------------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| dynamicArraySizeProfile        | String                           | 0..1   | attr | 规定若该数据类型是可变尺寸数组，数组将遵循的 profile。                                                                                                                                                    |
+| isStructWithOptionalElement    | Boolean                          | 0..1   | attr | 该属性只在属性 category 置为 STRUCTURE 时有效。若置为 true，该属性指示 ImplementationDataType 的创建意图是把结构的至少一个元素定义为可选。                                                            |
+| subElement (ordered)           | ImplementationDataTypeElement    | *      | aggr | 规定数组、结构或联合数据类型的一个元素。ImplementationDataTypeElement 的聚合受变体支配，目的是支持表示结构的 ImplementationDataType 内元素的条件存在。（ImplementionDataTypeElement 为源文如此）构型：atpSplitable；atpVariation 标签：atp.Splitkey=subElement.shortName, subElement.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| symbolProps                    | SymbolProps                      | 0..1   | aggr | 这表示该 ImplementationDataType 的 SymbolProps。构型：atpSplitable 标签：atp.Splitkey=symbolProps.shortName                                                                                          |
+| typeEmitter                    | NameToken                        | 0..1   | attr | 该属性用于规定 AUTOSAR 工具链的哪一部分应当触发数据类型定义。                                                                                                                                          |
+
+表E.49：ImplementationDataTypeElement
+
+| 类         | ImplementationDataTypeElement                                                                                                                                                                                                                                                                                  |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::CommonStructure::ImplementationDataTypes                                                                                                                                                                                                                                                                    |
+| 注意       | 声明一个局部聚合的数据对象。这样的元素只能在聚合它的范围内使用。该元素要么由进一步的 subElement 组成，要么通过其 swDataDefProps 进一步定义。在 ImplementationDataTypes 系统内，这样的局部声明有若干用例（fur 为源文如此，应为 for）：它可以表示数组的元素，定义元素类型与数组大小；它可以表示结构的元素，定义其类型。|
+| 基类       | ARObject、AbstractImplementationDataTypeElement、AtpClassifier、AtpFeature、AtpStructureElement、Identifiable、MultilanguageReferrable、Referrable                                                                                                                                                                                    |
+| 聚合于     | AtpClassifier.atpFeature、ImplementationDataType.subElement、ImplementationDataTypeElement.sub                                                                                                                                                                                                                                          |
+
+| 属性                  | 类型                            | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                          |
+|------------------------|----------------------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| arrayImplPolicy        | ArrayImplPolicyEnum              | 0..1   | attr | 该属性控制数组负载的实现。只应当在外层 ImplementationDataType 构成数组时使用。                                                                                                                              |
+| arraySize              | PositiveInteger                  | 0..1   | attr | 该属性的存在（若大于 0）定义数组的大小，并声明该 ImplementationDataTypeElement 表示每个数组元素的类型。构型：atpVariation 标签：vh.latestBindingTime=preCompileTime                                                              |
+| arraySizeHandling      | ArraySizeHandlingEnum            | 0..1   | attr | 可变尺寸数组情况下处理数组大小的方式。                                                                                                                                                          |
+| arraySizeSemantics     | ArraySizeSemanticsEnum           | 0..1   | attr | 该属性控制数组大小取值的含义。                                                                                                                                                                  |
+| isOptional             | Boolean                          | 0..1   | attr | 该属性表示把外层 ImplementationDataTypeElement 声明为可选的能力。这意味着在运行时，ImplementationDataTypeElement 可能有、也可能没有有效取值，因此应当被忽略。底层运行时软件提供手段，在通信发送端把 CppImplementationDataTypeElement 置为无效，并在接收端判定其有效性。 |
+| subElement (ordered)   | ImplementationDataTypeElement    | *      | aggr | 嵌套声明（即不使用 “typedef”）情况下数组、结构或联合的元素。ImplementationDataTypeElement 的聚合受变体支配，目的是支持表示结构的 ImplementationDataType 内元素的条件存在。（ImplementionDataTypeElement 为源文如此）构型：atpSplitable；atpVariation 标签：atp.Splitkey=subElement.shortName, subElement.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| swDataDefProps         | SwDataDefProps                   | 0..1   | aggr | 该 ImplementationDataTypeElement 的属性。构型：atpSplitable 标签：atp.Splitkey=swDataDefProps                                                                                                          |
+
+表E.50：Integer
+
+| 原始类型    | Integer                                                                                                                                                                                                                       |
+|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::PrimitiveTypes                                                                                                                                                                  |
+| 注意        | Integer 的实例是整数集合（…, -2, -1, 0, 1, 2, …）中的一个元素。取值可以以十进制、八进制、十六进制与二进制表示表示。负数只能以十进制记法表示。范围从 -2147483648 到 2147483647。标签：xml.xsd.customType=INTEGER xml.xsd.pattern=0&#124;[\+\-]?[1-9][0-9]*&#124;0[xX][0-9a-fA-F]+&#124;0[bB][0-1]+&#124;0[0-7]+ xml.xsd.type=string |
+
+表E.51：InternalBehavior
+
+| 类         | InternalBehavior（抽象）                                                                                                                                                                                                                                                                       |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::CommonStructure::InternalBehavior                                                                                                                                                                                                                                                                          |
+| 注意       | 软件组件与基础软件模块/集群两者的内部行为的公共基类（抽象）。                                                                                                                                                                                                                                                                        |
+| 基类       | ARObject、AtpClassifier、AtpFeature、AtpStructureElement、Identifiable、MultilanguageReferrable、Referrable                                                                                                                                                                                                                              |
+| 子类       | BswInternalBehavior、SwcInternalBehavior                                                                                                                                                                                                                                                                                                |
+| 聚合于     | AtpClassifier.atpFeature                                                                                                                                                                                                                                                                                                                  |
+
+| 属性                    | 类型                             | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                                            |
+|--------------------------|-----------------------------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| constantMemory           | ParameterDataPrototype            | *      | aggr | 描述一个只读内存对象，它包含由该 InternalBehavior 实现的特征值。ParameterDataPrototype 的 shortName 必须等于所描述常量的 'C' 标识符。特征值可以在同一 SwComponentType 的 SwComponentPrototype 之间共享。constantMemory 的聚合受变体支配，目的是支持软件组件或模块实现中的可变性。通常实现中的不同算法需要不同数量的内存对象。构型：atpSplitable；atpVariation 标签：atp.Splitkey=constantMemory.shortName, constantMemory.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| constantValueMapping     | ConstantSpecificationMappingSet   | *      | ref  | 指向要应用于该特定 InternalBehavior 的 ConstantSpecificationMapping 的引用。构型：atpSplitable 标签：atp.Splitkey=constantValueMapping                                                                                                                            |
+| dataTypeMapping          | DataTypeMappingSet                | *      | ref  | 指向要应用于该特定 InternalBehavior 的 DataTypeMapping 的引用。构型：atpSplitable 标签：atp.Splitkey=dataTypeMapping                                                                                                                                                    |
+| exclusiveArea            | ExclusiveArea                     | *      | aggr | 这为该 InternalBehavior 规定一个 ExclusiveArea。exclusiveArea 对组件相应地模块是局部的。ExclusiveArea 的聚合受变体支配。注意：ExclusiveArea 的数量可能因 RunnableEntity 或 BswModuleEntity 的条件存在而变化。构型：atpSplitable；atpVariation 标签：atp.Splitkey=exclusiveArea.shortName, exclusiveArea.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| exclusiveAreaNestingOrder| ExclusiveAreaNestingOrder         | *      | aggr | 这表示该 InternalBehavior 拥有的 ExclusiveAreaNestingOrder 集合。构型：atpSplitable；atpVariation 标签：atp.Splitkey=exclusiveAreaNestingOrder.shortName, exclusiveAreaNestingOrder.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                                              |
+| staticMemory             | VariableDataPrototype             | *      | aggr | 描述一个可读写的静态内存对象，它表示由该软件组件实现的测量变量。术语 “static” 在“非临时”的意义上使用，不一定规定链接器封装。只有当 supportsMultipleInstantiation 为 FALSE 时才支持这种内存。VariableDataPrototype 的 shortName 必须与所描述变量的 'C' 标识符相等。staticMemory 的聚合受变体支配，目的是支持软件组件实现中的可变性。通常实现中的不同算法需要不同数量的内存对象。构型：atpSplitable；atpVariation 标签：atp.Splitkey=staticMemory.shortName, staticMemory.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+
+表E.52：Keyword
+
+| 类         | Keyword                                                                                                                                                                                                                                                              |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::CommonStructure::StandardizationTemplate::Keyword                                                                                                                                                                                                                    |
+| 注意       | 该元类表示预定义关键字的能力，这些关键字随后可用于按照给定的命名约定（例如 AUTOSAR 命名约定）构造名称。注意，这样的名称不只是 shortName。它可以是符号（symbol），甚至是 longName。关键字的应用不限于特定名称。                                                                                |
+| 基类       | ARObject、Identifiable、MultilanguageReferrable、Referrable                                                                                                                                                                                                                                          |
+| 聚合于     | KeywordSet.keyword                                                                                                                                                                                                                                                                                             |
+
+| 属性          | 类型      | 多重性 | 类别 | 注意                                                                                                                                            |
+|----------------|------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| abbrName       | NameToken  | 1      | attr | 该属性规定关键字的缩写名。该缩写例如可以用于按照 AUTOSAR 命名约定构造有效的 shortName。与 shortName 不同，它可以包含任何名称令牌。例如它可以只由数字组成。 |
+| classification | NameToken  | *      | attr | 该属性允许为关键字附加分类，例如 MEAN、ACTION、CONDITION、INDEX、PREPOSITION。                                          |
+
+表E.53：Limit
+
+| 原始类型    | Limit                                                                                                                                                                                                                                                                         |
+|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::PrimitiveTypes                                                                                                                                                                                                                  |
+| 注意        | 该类表示表达数值界限的能力。注意，这实际上是一个 NumericalVariationPoint，但拥有附加属性 intervalType。标签：xml.xsd.customType=LIMIT-VALUE xml.xsd.pattern=(0[xX][0-9a-fA-F]+)&#124;(0[0-7]+)&#124;(0[bB][0-1]+)&#124;(([+\-]?[1-9][0-9]+(\.[0-9]+)?&#124;[+\-]?[0-9](\.[0-9]+)?)([eE]([+\-]?)[0-9]+)?)&#124;\.0&#124;INF&#124;-INF&#124;NaN xml.xsd.type=string |
+
+| 属性         | 类型              | 多重性 | 类别 | 注意                                                                                              |
+|---------------|--------------------|--------|------|----------------------------------------------------------------------------------------------------------------|
+| intervalType  | IntervalTypeEnum   | 0..1   | attr | 这规定区间的类型。若缺少该属性，区间应被视为 “CLOSED”。标签：xml.attribute=true                            |
+
+表E.54：McFunctionDataRefSet
+
+| 类         | &lt;&lt;atpVariation&gt;&gt; McFunctionDataRefSet                                                                                                                                                                                                  |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::CommonStructure::MeasurementCalibrationSupport::RptSupport                                                                                                                                                                                  |
+| 注意       | 指向以特定角色赋给一个 McFunction 的一组数据的引用。数据由以下方式给出：FlatMap 中的条目；或作为 MC 支持数据一部分的数据实例。这两种可能性在一个给定的 McFunctionDataRefSet 内是互斥的。使用哪一种取决于流程与工具环境。该集合受变体支配，因为同一个功能模型可以与数据的不同表示一起使用。标签：vh.latestBindingTime=preCompileTime |
+| 基类       | ARObject                                                                                                                                                                                                                                                            |
+| 聚合于     | McFunction.defCalprmSet、McFunction.inMeasurementSet、McFunction.locMeasurementSet、McFunction.outMeasurementSet、McFunction.refCalprmSet                                                                                                                                      |
+
+| 属性             | 类型                    | 多重性 | 类别 | 注意                                                                                                                                                                     |
+|-------------------|--------------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| flatMapEntry      | FlatInstanceDescriptor   | *      | ref  | 指向集合中 FlatMap 的一个条目的引用，例如一个标定参数或被测变量。注意：该 atpSplitable 属性因 atpVariation（PropertySetPattern）而没有 atp.Splitkey。构型：atpSplitable 标签：xml.sequenceOffset=10 |
+| mcDataInstance    | McDataInstance           | *      | ref  | 指向 MC 支持数据中属于该集合的一个数据实例（即标定参数或被测变量）的引用。注意：该 atpSplitable 属性因 atpVariation（PropertySetPattern）而没有 atp.Splitkey。构型：atpSplitable 标签：xml.sequenceOffset=20 |
+
+表E.55：MixedContentForUnitNames
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; MixedContentForUnitNames（抽象）                                                                                                                                      |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::TextModel::InlineTextModel                                                                                                                                                            |
+| 注意       | 这是带有下标与上标的条目（例如测量单位标志）的文本模型。其意图是：这样的模型可以容易地转写为纯文本模型——或通过使用适当的字符，或通过像 m² 那样的转写（源文作 mˆ2）。                      |
+| 基类       | ARObject                                                                                                                                                                                                    |
+| 子类       | SingleLanguageUnitNames                                                                                                                                                                                          |
+
+| 属性 | 类型        | 多重性 | 类别 | 注意                                    |
+|------|--------------|--------|------|--------------------------------------------------|
+| sub  | Superscript  | 1      | attr | 这是下标文本。标签：xml.sequenceOffset=40            |
+| sup  | Superscript  | 1      | attr | 这是上标文本。标签：xml.sequenceOffset=30            |
+
+表E.56：MsrQueryP2
+
+| 类         | MsrQueryP2                                                                                       |
+|------------|--------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::MsrQuery                                                                                   |
+| 注意       | 该元类表示表达一个查询的能力，其结果为 Documentation Block 的内容。                                                      |
+| 基类       | ARObject                                                                                                       |
+| 聚合于     | DocumentationBlock.msrQueryP2                                                                                       |
+
+| 属性                 | 类型               | 多重性 | 类别 | 注意                                                    |
+|-----------------------|---------------------|--------|------|------------------------------------------------------------------|
+| msrQueryProps         | MsrQueryProps       | 1      | aggr | 这是 Documentation Block 查询的参数与属性。标签：xml.sequenceOffset=20 |
+| msrQueryResultP2      | DocumentationBlock  | 0..1   | aggr | 这表示查询的结果。标签：xml.sequenceOffset=30                         |
+
+表E.57：NameToken
+
+| 原始类型    | NameToken                                                                                                                                                                                                                                                                                  |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::PrimitiveTypes                                                                                                                                                                                                                                  |
+| 注意        | 这是一个 XML 中使用的标识符，例如 XML 名称（xml-names）。典型的用法例如类型生成器、协议或构型（profile）的名称。细节参见 W3C 网站上的 NMTOKEN 定义（https://www.w3.org/TR/xml/#NT-Nmtoken）。注意：尽管 NameToken 支持很宽的字符范围，由 NameToken 定型的某个属性实际允许的模式可能被该属性的规范进一步限制。标签：xml.xsd.customType=NMTOKEN-STRING xml.xsd.type=NMTOKEN |
+
+表E.58：Numerical
+
+| 原始类型    | Numerical                                                                                                                                                                                                                                                                    |
+|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::PrimitiveTypes                                                                                                                                                                                                                  |
+| 注意        | 该原始类型规定一个数值。它可以用不同的格式表示，例如十进制、八进制、十六进制、浮点。细节参见 xsd 模式。取值可以以八进制、十六进制、二进制表示表示。负数只能以十进制或浮点记法表示。标签：xml.xsd.customType=NUMERICAL-VALUE xml.xsd.pattern=(0[xX][0-9a-fA-F]+)&#124;(0[0-7]+)&#124;(0[bB][0-1]+)&#124;(([+\-]?[1-9][0-9]+(\.[0-9]+)?&#124;[+\-]?[0-9](\.[0-9]+)?)([eE]([+\-]?)[0-9]+)?)&#124;\.0&#124;INF&#124;-INF&#124;NaN xml.xsd.type=string |
+
+表E.59：NvDataInterface
+
+| 类         | NvDataInterface                                                                                                                                                                                     |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SWComponentTemplate::PortInterface                                                                                                                                                                  |
+| 注意       | 一个非易失数据接口声明若干 VariableDataPrototype，用于在非易失块组件与原子软件组件之间交换。标签：atp.recommendedPackage=PortInterfaces                                                                                       |
+| 基类       | ARElement、ARObject、AtpBlueprint、AtpBlueprintable、AtpClassifier、AtpType、CollectableElement、DataInterface、Identifiable、MultilanguageReferrable、PackageableElement、PortInterface、Referrable                                          |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                              |
+
+| 属性 | 类型                   | 多重性 | 类别 | 注意                                           |
+|-------|--------------------------|--------|------|----------------------------------------------------------|
+| nvData| VariableDataPrototype    | *      | aggr | 该 nv 数据接口的 VariableDataPrototype。                          |
+
+表E.60：ParameterDataPrototype
+
+| 类         | ParameterDataPrototype                                                                                                                                                                                                                  |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SWComponentTemplate::Datatype::DataPrototypes                                                                                                                                                                                          |
+| 注意       | ParameterDataPrototype 表示一个形式化的通用信息片段，它通常对应用软件层不可变，但对测量与标定工具可变。ParameterDataPrototype 用于多种上下文，特定上下文赋予这个原本通用的 ParameterDataPrototype 专门的语义。            |
+| 基类       | ARObject、AtpFeature、AtpPrototype、AutosarDataPrototype、DataPrototype、Identifiable、MultilanguageReferrable、Referrable                                                                                                                                  |
+| 聚合于     | AtpClassifier.atpFeature、BswInternalBehavior.perInstanceParameter、InternalBehavior.constantMemory、NvBlockDescriptor.romBlock、ParameterInterface.parameter、SwcInternalBehavior.perInstanceParameter、SwcInternalBehavior.sharedParameter |
+
+| 属性     | 类型               | 多重性 | 类别 | 注意                                                     |
+|-----------|---------------------|--------|------|-----------------------------------------------------------------------|
+| initValue | ValueSpecification  | 0..1   | aggr | 规定 ParameterDataPrototype 的初始取值。                                  |
+
+表E.61：PortInterface
+
+| 类         | PortInterface（抽象）                                                                                                                                                                                           |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SWComponentTemplate::PortInterface                                                                                                                                                                                  |
+| 注意       | 由软件组件的端口提供或所需的接口的抽象基类。                                                                                                                                                                                              |
+| 基类       | ARElement、ARObject、AtpBlueprint、AtpBlueprintable、AtpClassifier、AtpType、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                                                |
+| 子类       | ClientServerInterface、DataInterface、ModeSwitchInterface、TriggerInterface                                                                                                                                                                    |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                                              |
+
+| 属性        | 类型                   | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                                                                  |
+|--------------|-------------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| isService    | Boolean                 | 0..1   | attr | 若 PortInterface 要用于同一个 ECU 上的 ApplicationSwComponentType、ServiceProxySwComponentType、SensorActuatorSwComponentType、ComplexDeviceDriverSwComponentType 之一与一个 ServiceSwComponentType（即一个 AUTOSAR 服务）之间的通信，则设置该标志。否则不设置。构型：atpVariation 标签：vh.latestBindingTime=blueprintDerivationTime |
+| serviceKind  | ServiceProviderEnum     | 0..1   | attr | 该属性提供关于所应用服务性质的更多细节。                                                                                                                                                                                                                                                  |
+
+表E.62：PortPrototype
+
+| 类         | PortPrototype（抽象）                                                                                                                                                                  |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SWComponentTemplate::Components                                                                                                                                                  |
+| 注意       | AUTOSAR 软件组件端口的基类。PortPrototype 的聚合受变体支配，目的是支持端口的条件存在。                                                                                                              |
+| 基类       | ARObject、AtpBlueprintable、AtpFeature、AtpPrototype、Identifiable、MultilanguageReferrable、Referrable                                                                                                  |
+| 子类       | AbstractProvidedPortPrototype、AbstractRequiredPortPrototype                                                                                                                                          |
+| 聚合于     | AtpClassifier.atpFeature、SwComponentType.port                                                                                                                                                          |
+
+| 属性                          | 类型                          | 多重性 | 类别 | 注意                                                   |
+|--------------------------------|--------------------------------|--------|------|---------------------------------------------------------------------|
+| clientServerAnnotation         | ClientServerAnnotation         | *      | aggr | 该 PortPrototype 关于 client/server 通信的注记。                          |
+| delegatedPortAnnotation        | DelegatedPortAnnotation        | 0..1   | aggr | 该委托端口上的注记。                                                          |
+| ioHwAbstractionServerAnnotation| IoHwAbstractionServerAnnotation| *      | aggr | 该 IO 硬件抽象端口上的注记。                                                  |
+| modePortAnnotation             | ModePortAnnotation             | *      | aggr | 该模式端口上的注记。                                                          |
+| nvDataPortAnnotation           | NvDataPortAnnotation           | *      | aggr | 该非易失数据端口上的注记。（voilatile 为源文如此，应为 non volatile）        |
+| parameterPortAnnotation        | ParameterPortAnnotation        | *      | aggr | 该参数端口上的注记。                                                          |
+| senderReceiverAnnotation       | SenderReceiverAnnotation       | *      | aggr | 该端口发送/接收通信的注记集合。                                                  |
+| triggerPortAnnotation          | TriggerPortAnnotation          | *      | aggr | 该触发器端口上的注记。                                                        |
+
+表E.63：PortPrototypeBlueprint
+
+| 类         | PortPrototypeBlueprint                                                                                                                                                                                                                                                                                    |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::CommonStructure::StandardizationTemplate::BlueprintDedicated::PortProtoypeBlueprint（Port Protoype 为源文如此）                                                                                                                                                                                              |
+| 注意       | 该元类表示通过引用一个特定的 PortInterface 表达 PortPrototype 蓝图的能力。该蓝图随后可以用作创建特定 PortPrototype 的指导——这些 PortPrototype 按照该蓝图定义。由此可以在不需要同时标准化由标准化 PortInterface 定型 PortPrototype 的软件组件的情况下，标准化应用接口。标签：atp.recommendedPackage=PortPrototypeBlueprints |
+| 基类       | ARElement、ARObject、AtpBlueprint、AtpClassifier、AtpFeature、AtpStructureElement、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                                                                                                                                |
+| 聚合于     | ARPackage.element、AtpClassifier.atpFeature                                                                                                                                                                                                                                                                                          |
+
+| 属性             | 类型                              | 多重性 | 类别 | 注意                                                                                      |
+|-------------------|------------------------------------|--------|------|------------------------------------------------------------------------------------------------------|
+| initValue         | PortPrototypeBlueprintInitValue    | *      | aggr | 这规定该特定 PortPrototypeBlueprint 中 dataElement 的初始取值。                                |
+| interface         | PortInterface                      | 1      | ref  | 这是为其定义蓝图的接口。它可以是一个蓝图本身，或一个标准化的 PortInterface。                  |
+| providedComSpec   | PPortComSpec                       | *      | aggr | 每个接口元素（数据元素或操作）的提供通信属性。                                                |
+| requiredComSpec   | RPortComSpec                       | *      | aggr | 所需的通信属性，每个接口元素一个。                                                            |
+
+表E.64：PositiveInteger
+
+| 原始类型    | PositiveInteger                                                                                                                                                                                                    |
+|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::PrimitiveTypes                                                                                                                                                          |
+| 注意        | 这是一个正整数，可以以十进制、二进制、八进制与十六进制表示。取值介于 0 与 4294967295 之间。标签：xml.xsd.customType=POSITIVE-INTEGER xml.xsd.pattern=0&#124;[\+]?[1-9][0-9]*&#124;0[xX][0-9a-fA-F]+&#124;0[bB][0-1]+&#124;0[0-7]+ xml.xsd.type=string |
+
+表E.65：PositiveUnlimitedInteger
+
+| 原始类型    | PositiveUnlimitedInteger                                                                                                                        |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::PrimitiveTypes                                                                                                  |
+| 注意        | 这是一个正的无限整数，可以以十进制、二进制、八进制与十六进制表示。标签：xml.xsd.customType=POSITIVE-UNLIMITED-INTEGER xml.xsd.pattern=0&#124;[\+]?[1-9][0-9]*&#124;0[xX][0-9a-fA-F]+&#124;0[bB][0-1]+&#124;0[0-7]+ xml.xsd.type=string |
+
+表E.66：RPortInCompositionInstanceRef
+
+| 类         | RPortInCompositionInstanceRef                                                                                                     |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SWComponentTemplate::Composition::InstanceRefs                                                                               |
+| 注意       | （源表无注释文本。）                                                                                                                              |
+| 基类       | ARObject、AtpInstanceRef、PortInCompositionTypeInstanceRef                                                                                              |
+| 聚合于     | AssemblySwConnector.requester、DelegationSwConnector.innerPort、SecurityEventReportToSecurityEventDefinitionMapping.reportedSecurityEvent                    |
+
+| 属性             | 类型                           | 多重性 | 类别 | 注意                             |
+|-------------------|---------------------------------|--------|------|------------------------------------------------------------------------------------------------------------|
+| contextComponent  | SwComponentPrototype            | 0..1   | ref  | 标签：xml.sequenceOffset=20                          |
+| targetRPort       | AbstractRequiredPortPrototype   | 0..1   | ref  | 标签：xml.sequenceOffset=30                          |
+
+表E.67：RPortPrototype
+
+| 类         | RPortPrototype                                                                                                                                               |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SWComponentTemplate::Components                                                                                                                                              |
+| 注意       | 需要某个端口接口的组件端口。                                                                                                                                                                    |
+| 基类       | ARObject、AbstractRequiredPortPrototype、AtpBlueprintable、AtpFeature、AtpPrototype、Identifiable、MultilanguageReferrable、PortPrototype、Referrable                                                      |
+| 聚合于     | AtpClassifier.atpFeature、SwComponentType.port                                                                                                                                                          |
+
+| 属性              | 类型         | 多重性 | 类别 | 注意                                                                                                                                                                 |
+|--------------------|---------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| mayBeUnconnected   | Boolean       | 0..1   | attr | 若置为 true，该属性指示外层 RPortPrototype 可以不连接，并且这一方面已经在软件组件的设计中被显式考虑。                                                                |
+| requiredInterface  | PortInterface | 0..1   | tref | 该端口需要的接口。构型：isOfType                                                                                                                              |
+
+表E.68：Ref
+
+| 原始类型    | Ref                                                                                                                                                                                                                                                                     |
+|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::PrimitiveTypes                                                                                                                                                                                                                  |
+| 注意        | 该原始类型表示一个基于名称的引用。详细语法参见 xsd.pattern：首个斜杠（相对或绝对引用）[可选]；标识符 [必需]；斜杠与标识符的序列 [可选]。该原始类型由元模型工具用于创建引用。标签：xml.xsd.customType=REF xml.xsd.pattern=/?[a-zA-Z][a-zA-Z0-9_]{0,127}(/[a-zA-Z][a-zA-Z0-9_]{0,127})* xml.xsd.type=string |
+
+| 属性           | 类型            | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                              |
+|-----------------|------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| base            | Identifier       | 0..1   | attr | 该属性反映该引用要使用的基础。标签：xml.attribute=true                                                                                                                                                                                                                          |
+| blueprintValue  | String           | 0..1   | attr | 这表示一段描述，记录在从蓝图派生对象时应当如何定义该取值。标签：atp.Status=draft xml.attribute=true                                                                                                                                                                                    |
+| index           | PositiveInteger  | 0..1   | attr | 该属性支持指向数组中特定元素的用例。当数组被用于实现特定数据对象时尤其需要。数组索引的计数从取值 0 开始，即第一个数组元素的索引为 0。标签：xml.attribute=true                                                                                                              |
+
+表E.69：RunnableEntity
+
+| 类         | RunnableEntity                                                                                                                                                                                                                                                                                                                                                       |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SWComponentTemplate::SwcInternalBehavior                                                                                                                                                                                                                                                                                                                            |
+| 注意       | RunnableEntity 表示由 AtomicSwComponentType 提供的、在 RTE 控制下执行的最小代码片段。RunnableEntities 的设置例如用于响应数据接收或服务器上的操作调用。                                                                                                                                                                                                    |
+| 基类       | ARObject、AtpClassifier、AtpFeature、AtpStructureElement、ExecutableEntity、Identifiable、MultilanguageReferrable、Referrable                                                                                                                                                                                                                |
+| 聚合于     | AtpClassifier.atpFeature、SwcInternalBehavior.runnable                                                                                                                                                                                                                                                                                                                                      |
+
+| 属性                                   | 类型                              | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+|-----------------------------------------|------------------------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| argument (ordered)                      | RunnableEntityArgument             | *      | aggr | 这表示 RunnableEntity 的一个参数的形式定义。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| asynchronousServerCallResultPoint       | AsynchronousServerCallResultPoint  | *      | aggr | 服务器调用结果点允许 runnable 获取异步服务器调用的结果。AsynchronousServerCallResultPoint 的聚合受变体支配，目的是支持 client/server PortPrototype 的条件存在以及实现中服务器调用结果点的变体存在。构型：atpSplitable；atpVariation 标签：atp.Splitkey=asynchronousServerCallResultPoint.shortName, asynchronousServerCallResultPoint.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                |
+| canBeInvokedConcurrently                | Boolean                            | 0..1   | attr | 若该属性的取值置为 “true”，则外层 RunnableEntity 可以被并发调用（即使对相应 AtomicSwComponentType 的一个实例也是如此）。这意味着照顾这种并发形式是 RunnableEntity 实现的责任。                                                                                                                                                                                                                                                          |
+| dataReadAccess                          | VariableAccess                     | *      | aggr | RunnableEntity 对发送/接收 PortPrototype 的 dataElement 或 nv 数据 PortPrototype 的 nv 数据拥有隐式读访问。dataReadAccess 的聚合受变体支配，目的是支持发送/接收端口的条件存在或实现中 dataReadAccess 的变体存在。构型：atpSplitable；atpVariation 标签：atp.Splitkey=dataReadAccess.shortName, dataReadAccess.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                    |
+| dataReceivePointByArgument              | VariableAccess                     | *      | aggr | RunnableEntity 对发送/接收 PortPrototype 的 dataElement 或 nv 数据 PortPrototype 的 nv 数据拥有显式读访问。结果经由函数签名中的一个参数传回应用。dataReceivePointByArgument 的聚合受变体支配，目的是支持发送/接收 PortPrototype 的条件存在或实现中数据接收点的变体存在。构型：atpSplitable；atpVariation 标签：atp.Splitkey=dataReceivePointByArgument.shortName, dataReceivePointByArgument.variationPoint.shortLabel vh.latestBindingTime=preCompileTime        |
+| dataReceivePointByValue                 | VariableAccess                     | *      | aggr | RunnableEntity 对发送/接收 PortPrototype 的 dataElement 或 nv 数据 PortPrototype 的 nv 数据拥有显式读访问。结果经由返回值传回应用。dataReceivePointByValue 的聚合受变体支配，目的是支持发送/接收端口的条件存在或实现中数据接收点的变体存在。构型：atpSplitable；atpVariation 标签：atp.Splitkey=dataReceivePointByValue.shortName, dataReceivePointByValue.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                |
+| dataSendPoint                           | VariableAccess                     | *      | aggr | RunnableEntity 对发送/接收 PortPrototype 的 dataElement 或 nv 数据 PortPrototype 的 nv 数据拥有显式写访问。dataSendPoint 的聚合受变体支配，目的是支持发送/接收 PortPrototype 的条件存在或实现中数据发送点的变体存在。构型：atpSplitable；atpVariation 标签：atp.Splitkey=dataSendPoint.shortName, dataSendPoint.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                    |
+| dataWriteAccess                         | VariableAccess                     | *      | aggr | RunnableEntity 对发送/接收 PortPrototype 的 dataElement 或 nv 数据 PortPrototype 的 nv 数据拥有隐式写访问。dataWriteAccess 的聚合受变体支配，目的是支持发送/接收端口的条件存在或实现中 dataWriteAccess 的变体存在。构型：atpSplitable；atpVariation 标签：atp.Splitkey=dataWriteAccess.shortName, dataWriteAccess.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                |
+| externalTriggeringPoint                 | ExternalTriggeringPoint            | *      | aggr | ExternalTriggeringPoint 的聚合受变体支配，目的是支持触发器端口的条件存在或实现中外部触发点的变体存在。构型：atpSplitable；atpVariation 标签：atp.Splitkey=externalTriggeringPoint.ident.shortName, externalTriggeringPoint.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                                                                                                                          |
+| internalTriggeringPoint                 | InternalTriggeringPoint            | *      | aggr | InternalTriggeringPoint 的聚合受变体支配，目的是支持实现中内部触发点的变体存在。构型：atpSplitable；atpVariation 标签：atp.Splitkey=internalTriggeringPoint.shortName, internalTriggeringPoint.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                                                                                                                                                    |
+| modeAccessPoint                         | ModeAccessPoint                    | *      | aggr | 该 runnable 拥有一个模式访问点。ModeAccessPoint 的聚合受变体支配，目的是支持模式端口的条件存在或实现中模式访问点的变体存在。构型：atpSplitable；atpVariation 标签：atp.Splitkey=modeAccessPoint.ident.shortName, modeAccessPoint.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                                                                                                                |
+| modeSwitchPoint                         | ModeSwitchPoint                    | *      | aggr | 该 runnable 拥有一个模式切换点。ModeSwitchPoint 的聚合受变体支配，目的是支持模式端口的条件存在或实现中模式切换点的变体存在。构型：atpSplitable；atpVariation 标签：atp.Splitkey=modeSwitchPoint.shortName, modeSwitchPoint.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                                                                                                                            |
+| parameterAccess                         | ParameterAccess                    | *      | aggr | ParameterAccess 的存在意味着 RunnableEntity 需要对一个 ParameterDataPrototype 的只读访问——后者可以是局部的，也可以在一个 PortPrototype 内。ParameterAccess 的聚合受变体支配，目的是支持参数端口与组件本地参数的条件存在以及实现中 ParameterAccess（点）的变体存在。构型：atpSplitable；atpVariation 标签：atp.Splitkey=parameterAccess.shortName, parameterAccess.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| readLocalVariable                       | VariableAccess                     | *      | aggr | readLocalVariable 的存在意味着 RunnableEntity 需要对角色为 implicitInterRunnableVariable 或 explicitInterRunnableVariable 的 VariableDataPrototype 的读访问。readLocalVariable 的聚合受变体支配，目的是支持 implicitInterRunnableVariable 与 explicitInterRunnableVariable 的条件存在或实现中 readLocalVariable（点）的变体存在。构型：atpSplitable；atpVariation 标签：atp.Splitkey=readLocalVariable.shortName, readLocalVariable.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| serverCallPoint                         | ServerCallPoint                    | *      | aggr | 该 RunnableEntity 拥有一个 ServerCallPoint。ServerCallPoint 的聚合受变体支配，目的是支持 client/server PortPrototype 的条件存在或实现中服务器调用点的变体存在。构型：atpSplitable；atpVariation 标签：atp.Splitkey=serverCallPoint.shortName, serverCallPoint.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                                                                                      |
+| symbol                                  | CIdentifier                        | 0..1   | attr | 描述该 RunnableEntity 入口点的符号。这被视为 RunnableEntity 的 API，在 RTE 合同阶段需要。                                                                                                                                                                                                                                                                                                              |
+| waitPoint                               | WaitPoint                          | *      | aggr | 与该 RunnableEntity 关联的 WaitPoint。                                                                                                                                                                                                                                                                                                                                                              |
+| writtenLocalVariable                    | VariableAccess                     | *      | aggr | writtenLocalVariable 的存在意味着 RunnableEntity 需要对角色为 implicitInterRunnableVariable 或 explicitInterRunnableVariable 的 VariableDataPrototype 的写访问。writtenLocalVariable 的聚合受变体支配，目的是支持 implicitInterRunnableVariable 与 explicitInterRunnableVariable 的条件存在或实现中 writtenLocalVariable（点）的变体存在。构型：atpSplitable；atpVariation 标签：atp.Splitkey=writtenLocalVariable.shortName, writtenLocalVariable.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+
+表E.70：SlOverviewParagraph
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; SlOverviewParagraph                                                                                       |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::TextModel::SingleLanguageData                                                                                                            |
+| 注意       | 某一种特定语言中的 MixedContentForOverviewParagraph。语言由上下文定义。属性 l 的存在只是为了向后兼容，应当被忽略。                                                            |
+| 基类       | ARObject、MixedContentForOverviewParagraph                                                                                                                            |
+| 聚合于     | MixedContentForOverviewParagraph.ft                                                                                                                                        |
+
+表E.71：SlParagraph
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; SlParagraph                                                                            |
+|------------|-------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::TextModel::SingleLanguageData                                                                          |
+| 注意       | 这是某一种特定语言中一个段落的文本。语言由上下文定义。属性 l 的存在只是为了向后兼容，应当被忽略。                                    |
+| 基类       | ARObject、MixedContentForParagraph                                                                                              |
+| 聚合于     | MixedContentForParagraph.ft                                                                                                          |
+
+表E.72：SwComponentDocumentation
+
+| 类         | SwComponentDocumentation                                                                                                                                                                                                                                                                           |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SWComponentTemplate::SoftwareComponentDocumentation                                                                                                                                                                                                                                                              |
+| 注意       | 该类规定按照 ASAM FSX 为一个组件类型编写专门文档的能力。                                                                                                                                                                                                                                                                                |
+| 基类       | ARObject                                                                                                                                                                                                                                                                                                                                      |
+| 聚合于     | BswModuleDescription.bswModuleDocumentation、SwComponentType.swComponentDocumentation                                                                                                                                                                                                                                                              |
+
+| 属性                 | 类型    | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                                    |
+|-----------------------|----------|--------|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| chapter               | Chapter  | *      | aggr | 这些章节提供关于该软件组件的、不适合放入其他章节的附加信息。注意，它受变体支配，因为一般而言文档中角色 chapter 的 Chapter 聚合是可变的。构型：atpSplitable；atpVariation 标签：atp.Splitkey=chapter.shortName, chapter.variationPoint.shortLabel vh.latestBindingTime=postBuild xml.roleElement=true xml.roleWrapperElement=false xml.sequenceOffset=100 xml.typeElement=false |
+| swCalibrationNotes    | Chapter  | 0..1   | aggr | 该元素包含面向标定工程师的标定指令与提示。标签：xml.roleElement=true xml.sequenceOffset=60 xml.typeElement=false                                                                                                                                                                          |
+| swCarbDoc             | Chapter  | 0..1   | aggr | 该元素记录 CARB 要求的文档。标签：xml.roleElement=true xml.sequenceOffset=80 xml.typeElement=false                                                                                                                                                                                          |
+| swDiagnosticsNotes    | Chapter  | 0..1   | aggr | 该元素包含组件内诊断事项的一般信息。标签：xml.roleElement=true xml.sequenceOffset=75 xml.typeElement=false                                                                                                                                                                                  |
+| swFeatureDef          | Chapter  | 0..1   | aggr | 该元素包含该软件组件物理功能的定义。该定义多少是形式化的，旨在由建模工具交付。标签：xml.roleElement=true xml.sequenceOffset=20 xml.typeElement=false                                                                                                                                          |
+| swFeatureDesc         | Chapter  | 0..1   | aggr | 该元素包含该软件组件软件功能的文字描述。该描述应当由专家编写。标签：xml.roleElement=true xml.sequenceOffset=30 xml.typeElement=false                                                                                                                                                        |
+| swMaintenanceNotes    | Chapter  | 0..1   | aggr | 该元素包含关于该组件软件维护的信息。标签：xml.roleElement=true xml.sequenceOffset=70 xml.typeElement=false                                                                                                                                                                                  |
+| swTestDesc            | Chapter  | 0..1   | aggr | 该元素包含该软件组件软件功能测试的建议与提示。标签：xml.roleElement=true xml.sequenceOffset=50 xml.typeElement=false                                                                                                                                                                        |
+
+表E.73：SwComponentPrototype
+
+| 类         | SwComponentPrototype                                                                             |
+|------------|--------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SWComponentTemplate::Composition                                                             |
+| 注意       | 软件组件在一个组合中的角色。                                                                                        |
+| 基类       | ARObject、AtpFeature、AtpPrototype、Identifiable、MultilanguageReferrable、Referrable                                    |
+| 聚合于     | AtpClassifier.atpFeature、CompositionSwComponentType.component                                                          |
+
+| 属性 | 类型           | 多重性 | 类别 | 注意                 |
+|-------|------------------|--------|------|-----------------------------|
+| type  | SwComponentType  | 0..1   | tref | 实例的类型。构型：isOfType    |
+
+表E.74：SwComponentType
+
+| 类         | SwComponentType（抽象）                                                                                                                                                                  |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SWComponentTemplate::Components                                                                                                                                                    |
+| 注意       | AUTOSAR 软件组件的基类。                                                                                                                                                                       |
+| 基类       | ARElement、ARObject、AtpBlueprint、AtpBlueprintable、AtpClassifier、AtpType、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                      |
+| 子类       | AtomicSwComponentType、CompositionSwComponentType、ParameterSwComponentType                                                                                                                              |
+| 聚合于     | ARPackage.element                                                                                                                                                                                          |
+
+| 属性                      | 类型                            | 多重性 | 类别 | 注意                                                                                                                                                                                                                                    |
+|---------------------------|-----------------------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| consistencyNeeds          | ConsistencyNeeds                  | *      | aggr | 这表示外层 SwComponentType 拥有的 ConsistencyNeeds 集合。构型：atpSplitable；atpVariation 标签：atp.Splitkey=consistencyNeeds.shortName, consistencyNeeds.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                                  |
+| port                      | PortPrototype                     | *      | aggr | 该 SwComponentType 借以通信的 PortPrototype。PortPrototype 的聚合受变体支配，目的是支持 PortPrototype 的条件存在。构型：atpSplitable；atpVariation 标签：atp.Splitkey=port.shortName, port.variationPoint.shortLabel vh.latestBindingTime=preCompileTime    |
+| portGroup                 | PortGroup                         | *      | aggr | 属于该组件的一个端口组。构型：atpSplitable；atpVariation 标签：atp.Splitkey=portGroup.shortName, portGroup.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                                                                                  |
+| swcMappingConstraint      | SwComponentMappingConstraints     | *      | ref  | 指向对该 SwComponentType 有效的约束的引用。                                                                                                                                                          |
+| swComponentDocumentation  | SwComponentDocumentation          | 0..1   | aggr | 这为 SwComponentType 添加一个文档。构型：atpSplitable；atpVariation 标签：atp.Splitkey=swComponentDocumentation, swComponentDocumentation.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=-10                      |
+| unitGroup                 | UnitGroup                         | *      | ref  | 这允许规定在引用 SwComponentType 的上下文中哪些 UnitGroup 是相关的。                                                                                                                              |
+
+表E.75：SwDataDefProps
+
+| 类         | &lt;&lt;atpVariation&gt;&gt; SwDataDefProps                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::DataDictionary::DataDefProperties                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| 注意       | 该类是各种方面下与数据对象相关的属性的集合。可以把该类视为“经由聚合的继承模式”。这些属性可以应用于聚合了 SwDataDefProps 的全部类中的全部对象。请注意，并非全部属性或关联元素在所有时候都有用。因此，流程定义（例如以 OCL 或文档控制实例 MSR-DCI 表达）承担施加限制的任务。SwDataDefProps 涵盖多个方面：用于标定用例的数据元素的结构——它是单值、曲线还是映射，以及规定这些元素如何映射/转换为编程语言（或 AUTOSAR 中）的数据类型的 recordLayout。这主要由 swRecordLayout 与 swCalprmAxisSet 等属性表达；实现方面，主要由 swImplPolicy、swVariableAccessImplPolicy、swAddrMethod、swPointerTagetProps、baseType、implementationDataType 与 additionalNativeTypeQualifier 表达；MCD 系统的访问策略，主要由 swCalibrationAccess 表达；数据元素的语义，主要由 compuMethod 和/或 unit、dataConstr、invalidValue 表达；由 swRecordLayout 提供的代码生成策略。标签：vh.latestBindingTime=codeGenerationTime（swPointerTagetProps 为源文如此） |
+| 基类       | ARObject                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 聚合于     | AutosarDataType.swDataDefProps、CompositeNetworkRepresentation.networkRepresentation、DataPrototype.swDataDefProps、DataPrototypeTransformationProps.networkRepresentationProps、DiagnosticDataElement.swDataDefProps、DiagnosticEnvDataElementCondition.swDataDefProps、DltArgument.networkRepresentation、FlatInstanceDescriptor.swDataDefProps、ImplementationDataTypeElement.swDataDefProps、InstantiationDataDefProps.swDataDefProps、ISignal.networkRepresentationProps、McDataInstance.resultingProperties、ParameterAccess.swDataDefProps、PerInstanceMemory.swDataDefProps、ReceiverComSpec.networkRepresentation、SenderComSpec.networkRepresentation、SomeipDataPrototypeTransformationProps.networkRepresentation、SwPointerTargetProps.swDataDefProps、SwServiceArg.swDataDefProps、SwSystemconst.swDataDefProps、SystemSignal.physicalProps |
+
+| 属性                            | 类型                              | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+|----------------------------------|------------------------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| additionalNativeTypeQualifier    | NativeDeclarationString            | 0..1   | attr | 该属性用于声明编程语言的原生限定符，它们既不能从 baseType 推导（例如因为数据对象描述一个指针），也不能从其他更抽象的属性推导。例子是 C 语言的 “volatile”、“strict” 或 “enum” 等限定符。全部这样的声明必须放进一个字符串。标签：xml.sequenceOffset=235                                                                                                                                                                  |
+| annotation                       | Annotation                         | *      | aggr | 该聚合允许添加与当前数据对象相关的注记（便签……）。标签：xml.roleElement=true xml.roleWrapperElement=true xml.sequenceOffset=20 xml.typeElement=false xml.typeWrapperElement=false                                                                                                                                                            |
+| baseType                         | SwBaseType                         | 0..1   | ref  | 与包含它的数据对象关联的基类型。标签：xml.sequenceOffset=50                                                                                                                                                                                                                                                                              |
+| compuMethod                      | CompuMethod                        | 0..1   | ref  | 与该数据对象的语义关联的计算方法。标签：xml.sequenceOffset=180                                                                                                                                                                                                                                                                      |
+| dataConstr                       | DataConstr                         | 0..1   | ref  | 该数据对象的数据约束。标签：xml.sequenceOffset=190                                                                                                                                                                                                                                                                                    |
+| displayFormat                    | DisplayFormatString                | 0..1   | attr | 该属性描述一个数应当如何呈现，例如在文档中或在测量与标定系统中。标签：xml.sequenceOffset=210                                                                                                                                                                                                                                                |
+| displayPresentation              | DisplayPresentationEnum            | 0..1   | attr | 该属性控制相关数据在测量与标定工具中的呈现。                                                                                                                                                                                                                                                                          |
+| implementationDataType           | AbstractImplementationDataType     | 0..1   | ref  | 该关联经由其聚合的 SwDataDefProps 标注一个数据声明的 ImplementationDataType。它用于数据声明不直接引用基类型的情况。特别是：经由 “typedef” 到另一个 ImplementationDataType 对 ImplementationDataType 的重定义；指针的目标类型（见 SwPointerTargetProps），若它不直接引用基类型；ImplementationDataType 内数组或记录元素的数据类型，若它不直接引用基类型；SwServiceArg 的数据类型，若它不直接引用基类型。标签：xml.sequenceOffset=215 |
+| invalidValue                     | ValueSpecification                 | 0..1   | aggr | 表达实际数据元素无效性的可选取值。                                                                                                                                                                                                                                                                                          |
+| stepSize                         | Float                              | 0..1   | attr | 该属性可用于定义一个取值：在标定时使用上/下键时，把它加到 DataPrototype 的取值上或从其减去。                                                                                                                                                                                                                          |
+| swAddrMethod                     | SwAddrMethod                       | 0..1   | ref  | 与该数据对象关联的寻址方法。经由指向同一 SwAddrMethod 的关联，可以规定若干 DataPrototype 应当位于同一内存中，而不必已经规定内存段本身。                                                                                                                                                                                  |
+| swAlignment                      | AlignmentType                      | 0..1   | attr | 该属性描述 DataPrototype 预期的典型对齐。若未定义该属性，对齐由 swBaseType 大小与被引用 SwAddrMethod 的 memoryAllocationKeywordPolicy 决定。标签：xml.sequenceOffset=33                                                                                                                                          |
+| swBitRepresentation              | SwBitRepresentation                | 0..1   | aggr | 位变量情况下二进制表示的描述。                                                                                                                                                                                                                                                                                          |
+| swCalibrationAccess              | SwCalibrationAccessEnum            | 0..1   | attr | 规定 MCD 工具对该数据对象的读或写访问。标签：xml.sequenceOffset=70                                                                                                                                                                                                                                                          |
+| swCalprmAxisSet                  | SwCalprmAxisSet                    | 0..1   | aggr | 这规定曲线或映射等情况下轴的属性。这主要适用于标定参数。                                                                                                                                                                                                                                                                  |
+| swComparisonVariable             | SwVariableRefProxy                 | *      | aggr | MCD 流程中用于比较的变量。标签：xml.sequenceOffset=170 xml.typeElement=false                                                                                                                                                                                                                                            |
+| swDataDependency                 | SwDataDependency                   | 0..1   | aggr | 描述（由 MCD 系统）如何从另一个数据对象的取值计算该数据对象的取值。标签：xml.sequenceOffset=200                                                                                                                                                                                                                              |
+| swHostVariable                   | SwVariableRefProxy                 | 0..1   | aggr | 包含指向一个变量的引用，该变量充当位变量的宿主变量（host-variable）。只适用于位对象。标签：xml.sequenceOffset=220 xml.typeElement=false                                                                                                                                                                              |
+| swImplPolicy                     | SwImplPolicyEnum                   | 0..1   | attr | 该数据对象的实现策略。标签：xml.sequenceOffset=230                                                                                                                                                                                                                                                                        |
+| swIntendedResolution             | Numerical                          | 0..1   | attr | 该元素的目的是在设计流程的早期描述对数据对象所要求的量化。分辨率最终经由现有的转换公式（compuMethod）发生——它规定从物理世界到标准化世界的过渡（反之亦然）（这里，“每位的斜率”隐含在转换公式中）。在没有固定转换公式的开发阶段的情况下，可以通过 swIntendedResolution 进行预规定。分辨率按照属性 “unit” 在物理域中规定。标签：xml.sequenceOffset=240 |
+| swInterpolationMethod            | Identifier                         | 0..1   | attr | 这是一个关键字，标识插值应当采用的数学方法。该关键字需要与需要调用的插值例程相关。标签：xml.sequenceOffset=250                                                                                                                                                                                                                    |
+| swIsVirtual                      | Boolean                            | 0..1   | attr | 该元素区分虚拟对象。虚拟对象不出现在内存中，它们的派生更依赖其他对象，因此它们应当拥有 swDataDependency。                                                                                                                                                                                                                  |
+| swPointerTargetProps             | SwPointerTargetProps               | 0..1   | aggr | 规定包含它的数据对象是一个指向另一个数据对象或 CPU 代码中函数的指针。注意：该 atpSplitable 属性因 atpVariation（PropertySetPattern）而没有 atp.Splitkey。构型：atpSplitable 标签：xml.sequenceOffset=280                                                                                                              |
+| swRecordLayout                   | SwRecordLayout                     | 0..1   | ref  | 该数据对象的记录布局。标签：xml.sequenceOffset=290                                                                                                                                                                                                                                                                          |
+| swRefreshTiming                  | MultidimensionalTime               | 0..1   | aggr | 该元素规定应当（或正在）调用或计算所涉及对象的频率。该时序可以从对变量执行写访问的任务收集。但 MCD 系统无法做到这一点。因此该属性可以在早期阶段用于表达期望的刷新时序，稍后用于规定真实的刷新时序。                                                                                                                  |
+| swTextProps                      | SwTextProps                        | 0..1   | aggr | 数据对象为文本对象时的特定属性。标签：xml.sequenceOffset=120                                                                                                                                                                                                                                                              |
+| swValueBlockSize                 | Numerical                          | 0..1   | attr | 这表示一个取值块（Value Block）的大小。构型：atpVariation 标签：vh.latestBindingTime=preCompileTime xml.sequenceOffset=80                                                                                                                                                                                              |
+| swValueBlockSizeMult (ordered)   | Numerical                          | *      | attr | 该属性用于在取值块（VAL\_BLK）有多于一个维度的情况下规定取值块的维度。该属性给出的维度是有序的：第一个条目表示第一维，第二个条目表示第二维，依此类推。对一维取值块，应当使用属性 swValueBlockSize，且该属性不得存在。构型：atpVariation 标签：vh.latestBindingTime=preCompileTime                                          |
+| unit                             | Unit                               | 0..1   | ref  | 与该数据对象语义关联的物理单位。该属性在未规定 compuMethod 时适用。若规定了两个单位（本属性以及经由 compuMethod），则单位应当兼容。标签：xml.sequenceOffset=350                                                                                                                                                              |
+| valueAxisDataType                | ApplicationPrimitiveDataType       | 0..1   | ref  | 被引用的 ApplicationPrimitiveDataType 表示复合原始类型（例如曲线、映射）中值轴的原始数据类型。它取代 CompuMethod、Unit 与 BaseType。标签：xml.sequenceOffset=355                                                                                                                                                              |
+
+表E.76：SwPointerTargetProps
+
+| 类         | SwPointerTargetProps                                                                                                                                                                                                                                                       |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::DataDictionary::DataDefProperties                                                                                                                                                                                                                                                  |
+| 注意       | 该元素定义：被聚合元素所规定的数据对象包含指向另一个数据对象或 CPU 代码中函数的引用。这对应 C 语言中的指针。该元素的属性描述目标的类别与详细属性——目标是数据描述或函数签名。                                                                                                                          |
+| 基类       | ARObject                                                                                                                                                                                                                                                                                            |
+| 聚合于     | SwDataDefProps.swPointerTargetProps                                                                                                                                                                                                                                                                          |
+
+| 属性                      | 类型            | 多重性 | 类别 | 注意                                                                                                                                                                      |
+|----------------------------|------------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| functionPointerSignature   | BswModuleEntry   | 0..1   | ref  | 被引用的 BswModuleEntry 充当函数指针定义的签名。主要用例：作为参数传给其他函数的函数指针。标签：xml.sequenceOffset=40                                                              |
+| swDataDefProps             | SwDataDefProps   | 0..1   | aggr | 目标数据类型的属性。构型：atpSplitable 标签：atp.Splitkey=swDataDefProps xml.sequenceOffset=30                                                                                  |
+| targetCategory             | Identifier       | 0..1   | attr | 这规定目标的类别：对数据指针，它应当规定被引用数据的类别；对函数指针，它可以用于标注被引用 BswModuleEntry 的类别。标签：xml.sequenceOffset=5                      |
+
+表E.77：SwServiceArg
+
+| 类         | SwServiceArg                                                                                                                                                                                                                                                                                                                       |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::DataDictionary::ServiceProcessTask                                                                                                                                                                                                                                                                                                                                                                |
+| 注意       | 规定在一次 SwService 调用期间交换的数据对象的属性，例如一个参数或一个返回值。SwServiceArg 也可以用在 C 宏的参数列表中。为此，category 应当置为 “MACRO”。若实际参数拥有 implementationDataType，可以选择性地添加指向 implementationDataType 的引用。                                                                                                                  |
+| 基类       | ARObject、Identifiable、MultilanguageReferrable、Referrable                                                                                                                                                                                                                                                                                                                                                      |
+| 聚合于     | BswModuleEntry.argument、BswModuleEntry.returnType                                                                                                                                                                                                                                                                                                                                                                  |
+
+| 属性             | 类型                    | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                             |
+|-------------------|--------------------------|--------|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| direction         | ArgumentDirectionEnum    | 0..1   | attr | 规定数据传输的方向。该方向应当指示调用者和/或被调用者所消费的实际信息的方向，而不是 C 中形式参数的方向。出于向后兼容的原因该属性是可选的。例如，若使用指针传递预期结果的内存地址，方向应当是 “out”；若使用指针传递内容将被被调用者读取的内存地址，其方向应当是 “in”。标签：xml.sequenceOffset=10 |
+| swArraysize       | ValueList                | 0..1   | aggr | 这把服务的参数变成一个数组。标签：xml.sequenceOffset=20                                                                                                                                                                                                                      |
+| swDataDefProps    | SwDataDefProps           | 0..1   | aggr | 该 SwServiceArg 的数据属性。构型：atpSplitable 标签：atp.Splitkey=swDataDefProps xml.sequenceOffset=30                                                                                                                                                              |
+
+表E.78：SwcInternalBehavior
+
+| 类         | SwcInternalBehavior                                                                                                                                                                                                                                                            |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SWComponentTemplate::SwcInternalBehavior                                                                                                                                                                                                                                    |
+| 注意       | AtomicSwComponentType 的 SwcInternalBehavior 从 RTE 的角度描述软件组件的相关方面，即 RunnableEntity 与它们响应的 RTEEvent。                                                                                                                                                                                |
+| 基类       | ARObject、AtpClassifier、AtpFeature、AtpStructureElement、Identifiable、InternalBehavior、MultilanguageReferrable、Referrable                                                                                                                                                                                    |
+| 聚合于     | AtomicSwComponentType.internalBehavior、AtpClassifier.atpFeature                                                                                                                                                                                                                                                  |
+
+| 属性                              | 类型                    | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|------------------------------------|--------------------------|--------|------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| arTypedPerInstanceMemory           | VariableDataPrototype    | *      | aggr | 定义每个 SW 组件实例都需要的一个 AUTOSAR 类型的内存块。这通常只在 supportsMultipleInstantiation 置为 “true” 或组件经由永久块定义 NVRAM 访问时才有用。arTypedPerInstanceMemory 的聚合受变体支配，目的是支持软件组件实现中的可变性。通常实现中的不同算法需要不同数量的内存对象。构型：atpSplitable；atpVariation 标签：atp.Splitkey=arTypedPerInstanceMemory.shortName, arTypedPerInstanceMemory.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| event                              | RTEEvent                 | *      | aggr | 这是为该特定 SwcInternalBehavior 规定的一个 RTEEvent。RTEEvent 的聚合受变体支配，目的是支持 RTE 事件的条件存在。注意：RTE 事件的数量可能因使用 DataReceivedEvent 的 PortPrototype 的条件存在或算法的不同调度需求而变化。构型：atpSplitable；atpVariation 标签：atp.Splitkey=event.shortName, event.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                                                |
+| exclusiveAreaPolicy                | SwcExclusiveAreaPolicy   | *      | aggr | 如何生成 ExclusiveArea 相关 API 的选项。当没有为某个 ExclusiveArea 规定 SwcExclusiveAreaPolicy 时，适用默认值。构型：atpSplitable；atpVariation 标签：atp.Splitkey=exclusiveAreaPolicy, exclusiveAreaPolicy.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                                                                                                                |
+| explicitInterRunnableVariable      | VariableDataPrototype    | *      | aggr | 实现状态消息语义，用于在同一组件的 runnable 之间建立通信。explicitInterRunnableVariable 的聚合受变体支配，目的是支持软件组件实现中的可变性。通常实现中的不同算法需要不同数量的内存对象。构型：atpSplitable；atpVariation 标签：atp.Splitkey=explicitInterRunnableVariable.shortName, explicitInterRunnableVariable.variationPoint.shortLabel vh.latestBindingTime=preCompileTime    |
+| implicitInterRunnableVariable      | VariableDataPrototype    | *      | aggr | 实现状态消息语义，用于在同一组件的 runnable 之间建立通信。implicitInterRunnableVariable 的聚合受变体支配，目的是支持软件组件实现中的可变性。通常实现中的不同算法需要不同数量的内存对象。构型：atpSplitable；atpVariation 标签：atp.Splitkey=implicitInterRunnableVariable.shortName, implicitInterRunnableVariable.variationPoint.shortLabel vh.latestBindingTime=preCompileTime    |
+| includedDataTypeSet                | IncludedDataTypeSet      | *      | aggr | includedDataTypeSet 由软件组件为其实现使用。构型：atpSplitable 标签：atp.Splitkey=includedDataTypeSet                                                                                                                                                                                                                                    |
+| includedModeDeclarationGroupSet    | IncludedModeDeclarationGroupSet | * | aggr | 该聚合表示被包含的模式声明组。构型：atpSplitable 标签：atp.Splitkey=includedModeDeclarationGroupSet                                                                                                                                                                                                                                              |
+| instantiationDataDefProps          | InstantiationDataDefProps| *      | aggr | 其目的是：在给定 SwComponentType 的上下文内，可以修改单个实例化的某些数据定义属性。InstantiationDataDefProps 的聚合受变体支配，目的是支持 PortPrototype 与组件本地内存（例如 “perInstanceParameter” 或 “arTypedPerInstanceMemory”）的条件存在。构型：atpSplitable；atpVariation 标签：atp.Splitkey=instantiationDataDefProps, instantiationDataDefProps.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| perInstanceMemory                  | PerInstanceMemory        | *      | aggr | 定义该软件组件需要的每实例内存对象。PerInstanceMemory 的聚合受变体支配，目的是支持软件组件实现中的可变性。通常实现中的不同算法需要不同数量的内存对象。构型：atpSplitable；atpVariation 标签：atp.Splitkey=perInstanceMemory.shortName, perInstanceMemory.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                |
+| perInstanceParameter               | ParameterDataPrototype   | *      | aggr | 定义软件组件的每个实例都需要的一个或多个参数或特征值。这通常只在 supportsMultipleInstantiation 置为 “true” 时有用。perInstanceParameter 的聚合受变体支配，目的是支持软件组件实现中的可变性。通常实现中的不同算法需要不同数量的内存对象。构型：atpSplitable；atpVariation 标签：atp.Splitkey=perInstanceParameter.shortName, perInstanceParameter.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| portAPIOption                      | PortAPIOption            | *      | aggr | 关于从 runnable 到 RTE（及反向）的端口相关调用签名如何生成的选项。PortPrototype 的聚合受变体支配，目的是支持端口的条件存在。构型：atpSplitable；atpVariation 标签：atp.Splitkey=portAPIOption, portAPIOption.variationPoint.shortLabel vh.latestBindingTime=preCompileTime                                                                                          |
+| runnable                           | RunnableEntity           | *      | aggr | 这是为该特定 SwcInternalBehavior 规定的一个 RunnableEntity。RunnableEntity 的聚合受变体支配，目的是支持 RunnableEntity 的条件存在。注意：RunnableEntity 的数量可能因使用 DataReceivedEvent 的 PortPrototype 的条件存在或算法的不同调度需求而变化。构型：atpSplitable；atpVariation 标签：atp.Splitkey=runnable.shortName, runnable.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| serviceDependency                  | SwcServiceDependency     | *      | aggr | 定义特定条目对 AUTOSAR 服务的要求。SwcServiceDependency 的聚合受变体支配，目的是支持端口的条件存在以及 ServiceNeeds 的条件存在。SwcInternalBehavior 拥有的 SwcServiceDependency 可以位于不同的物理文件中，以支持 SwcServiceDependency 可以在稍后的开发步骤中、甚至由不同的专家领域（例如 OBD 专家处理 OBD 相关的 Service Needs）工具提供。因此该聚合是 &lt;&lt;atpSplitable&gt;&gt;。构型：atpSplitable；atpVariation 标签：atp.Splitkey=serviceDependency.shortName, serviceDependency.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
+| sharedParameter                    | ParameterDataPrototype   | *      | aggr | 定义同一 SwComponentType 的 SwComponentPrototype 之间共享的一个或多个参数或特征值。sharedParameter 的聚合受变体支配，目的是支持软件组件实现中的可变性。通常实现中的不同算法需要不同数量的内存对象。构型：atpSplitable；atpVariation 标签：atp.Splitkey=sharedParameter.shortName, sharedParameter.variationPoint.shortLabel vh.latestBindingTime=preCompileTime    |
+| supportsMultipleInstantiation      | Boolean                  | 0..1   | attr | 指示相应的软件组件是否可以在一个 ECU 上多次实例化。在这种情况下，该属性将在编程语言层次上产生一个合适的组件 API（带或不带实例句柄）。                                                                                                                                                                                              |
+| variationPointProxy                | VariationPointProxy      | *      | aggr | C/C++ 实现中变体点的代理。构型：atpSplitable 标签：atp.Splitkey=variationPointProxy.shortName                                                                                                                                                                                                                                            |
+
+表E.79：System
+
+| 类         | System                                                                                                                                                                                                                                                  |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SystemTemplate                                                                                                                                                                                                                                        |
+| 注意       | 系统描述的顶层元素。系统描述定义五个主要元素：拓扑、软件、通信、映射与映射约束。System 元素直接聚合描述软件、映射与映射约束的元素；它包含一个指向规定通信与拓扑的 ASAM FIBEX 描述的引用。标签：atp.recommendedPackage=Systems                                                                          |
+| 基类       | ARElement、ARObject、AtpClassifier、AtpFeature、AtpStructureElement、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable、UploadableDesignElement、UploadablePackageElement                                                                                      |
+| 聚合于     | ARPackage.element、AtpClassifier.atpFeature                                                                                                                                                                                                                                |
+
+| 属性                             | 类型                          | 多重性 | 类别 | 注意                                                                                                                                                                                                                                      |
+|-----------------------------------|--------------------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| clientIdDefinitionSet             | ClientIdDefinitionSet          | *      | ref  | 系统中用于跨 ECU client-server 通信的客户端标识符集合。                                                                                                                                                                                            |
+| containerIPduHeaderByteOrder      | ByteOrderEnum                  | 0..1   | attr | 定义 ContainerIPdu 中头部的字节序。                                                                                                                                                                                                                    |
+| ecuExtractVersion                 | RevisionLabelString            | 0..1   | attr | ECU extract 的版本号。                                                                                                                                                                                                                                    |
+| fibexElement                      | FibexElement                   | *      | ref  | 指向规定通信与拓扑的 ASAM FIBEX 元素的引用。系统描述中使用的全部 Fibex 元素都应当从 System 元素引用。atpVariation：为了描述产品线，全部 Fibex 元素都可以是可选的。构型：atpSplitable；atpVariation 标签：atp.Splitkey=fibexElement.fibexElement, fibexElement.variationPoint.shortLabel vh.latestBindingTime=postBuild      |
+| interpolationRoutineMappingSet    | InterpolationRoutineMappingSet | *      | ref  | 该引用标识在外层 System 的上下文中相关的 InterpolationRoutineMappingSet。                                                                                                                                                                                    |
+| j1939SharedAddressCluster         | J1939SharedAddressCluster      | *      | aggr | 共享一个公共地址空间以进行消息路由的 J1939Cluster 集合。构型：atpSplitable；atpVariation 标签：atp.Splitkey=j1939SharedAddressCluster.shortName, j1939SharedAddressCluster.variationPoint.shortLabel vh.latestBindingTime=postBuild                              |
+| mapping                           | SystemMapping                  | *      | aggr | 全部映射方面（SW 组件到 ECU 的映射、数据元素到信号的映射、以及映射约束）的聚合。为了支持 OEM / Tier 1 交互以及一个公共系统的共同开发，该聚合是 atpSplitable 与 atpVariation 的。System Mapping 的内容可以由几方以不同的 SystemMapping 名称提供。当系统描述用于纯网络用例时，该元素不是必需的。构型：atpSplitable；atpVariation 标签：atp.Splitkey=mapping.shortName, mapping.variationPoint.shortLabel vh.latestBindingTime=postBuild |
+| pncVectorLength                   | PositiveInteger                | 0..1   | attr | 部分网络请求释放信息向量的长度（以字节计）。                                                                                                                                                                                                              |
+| pncVectorOffset                   | PositiveInteger                | 0..1   | attr | 部分网络请求释放信息向量相对于 NM-PDU 的绝对偏移，以字节为单位定义，索引从 0 开始。                                                                                                                                                                            |
+| rootSoftwareComposition           | RootSwCompositionPrototype     | 0..1   | aggr | 根软件组合的聚合，以层次结构包含系统中的全部软件组件。当系统描述用于纯网络用例时，该元素不是必需的。atpVariation：RootSwCompositionPrototype 可以变化。构型：atpSplitable；atpVariation 标签：atp.Splitkey=rootSoftwareComposition.shortName, rootSoftwareComposition.variationPoint.shortLabel vh.latestBindingTime=systemDesignTime |
+| swCluster                         | CpSoftwareCluster              | *      | ref  | 该系统的 CP 软件集群。构型：atpSplitable；atpVariation 标签：atp.Splitkey=swCluster.cpSoftwareCluster, swCluster.variationPoint.shortLabel vh.latestBindingTime=systemDesignTime                                                                                  |
+| systemDocumentation               | Chapter                        | *      | aggr | 在定义 System 时提供附加文档的可能性。System 文档可以由若干章节组成。构型：atpSplitable；atpVariation 标签：atp.Splitkey=systemDocumentation.shortName, systemDocumentation.variationPoint.shortLabel vh.latestBindingTime=systemDesignTime xml.sequenceOffset=-10 |
+| systemVersion                     | RevisionLabelString            | 0..1   | attr | 系统描述的版本号。                                                                                                                                                                                                                                          |
+
+表E.80：TimeValue
+
+| 原始类型    | TimeValue                                                                                                                  |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::PrimitiveTypes                                                              |
+| 注意        | 取该原始类型来表达时间取值。数值应当按物理单位秒解释。标签：xml.xsd.customType=TIME-VALUE xml.xsd.type=double                            |
+
+表E.81：TopicContent
+
+| 类         | &lt;&lt;atpMixed&gt;&gt; TopicContent                                                                                                    |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::Chapters                                                                                                              |
+| 注意       | 该元类表示一个主题的内容。它主要是一个文档块，但也可以是一个表格。                                                                                |
+| 基类       | ARObject                                                                                                                                    |
+| 聚合于     | MsrQueryP1.msrQueryResultP1、TopicContentOrMsrQuery.topicContent                                                                                  |
+
+| 属性            | 类型                | 多重性 | 类别 | 注意                                                                                          |
+|------------------|----------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------|
+| blockLevelContent| DocumentationBlock   | 1      | aggr | 这是内容中也可以出现在表格单元格中的那部分。标签：xml.roleElement=false                                            |
+| table            | Table                | 0..1   | aggr | 这表示主题内的一个表格。构型：atpSplitable；atpVariation 标签：atp.Splitkey=table, table.variationPoint.shortLabel vh.latestBindingTime=postBuild |
+| traceableTable   | TraceableTable       | 1      | aggr | 这表示主题内的一个可追溯表格。                                                                                            |
+
+表E.82：Unit
+
+| 类         | Unit                                                                                                                                                                                                                                                                          |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::AsamHdo::Units                                                                                                                                                                                                                                                                            |
+| 注意       | 这是一个物理测量单位。可能定义的全部单位都应当源自 SI 单位。为了把一个单位转换为另一个单位，定义了因子（factor）与偏移（offset）。从 SI 单位计算到定义的单位时，按如下方式应用因子（factorSiToUnit）与偏移（offsetSiToUnit）：x [{unit}] := y \* [{siUnit}] \* factorSiToUnit [[unit]/{siUnit}] + offsetSiToUnit [{unit}]。从某个单位计算到 SI 单位时，应用因子的倒数（factorSiToUnit）与偏移的取负。y {siUnit} := (x\*{unit} - offsetSiToUnit [{unit}]) / (factorSiToUnit [[unit]/{siUnit}]。标签：atp.recommendedPackage=Units |
+| 基类       | ARElement、ARObject、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                                                                                                                                                            |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                                                                                                    |
+
+| 属性              | 类型                    | 多重性 | 类别 | 注意                                                                                                                                        |
+|--------------------|--------------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| displayName        | SingleLanguageUnitNames  | 0..1   | aggr | 这规定单位应当如何显示在文档或工具的用户界面中。displayName 对应 ASAM MCD-2MC 文件中的 Unit.Display。标签：xml.sequenceOffset=20                                |
+| factorSiToUnit     | Float                    | 0..1   | attr | 这是从 SI 单位转换为单位的因子。反方向（从单位到 SI 单位）使用其倒数。标签：xml.sequenceOffset=30                                                              |
+| offsetSiToUnit     | Float                    | 0..1   | attr | 这是与 siUnits 相互转换的偏移。标签：xml.sequenceOffset=40                                                                                                    |
+| physicalDimension  | PhysicalDimension        | 0..1   | ref  | 该关联表示该单位所属的物理维度。注意，只有具有相同物理维度的单位的取值之间才可能转换。标签：xml.sequenceOffset=50                                              |
+
+表E.83：UnlimitedInteger
+
+| 原始类型    | UnlimitedInteger                                                                                                                                                                                            |
+|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::PrimitiveTypes                                                                                                                                                                  |
+| 注意        | UnlimitedInteger 的实例是整数集合（…, -2, -1, 0, 1, 2, …）中的一个元素。范围受约束 2534 限制。取值可以以十进制、八进制、十六进制与二进制表示表示。负数只能以十进制记法表示。标签：xml.xsd.customType=UNLIMITED-INTEGER xml.xsd.pattern=0&#124;[\+\-]?[1-9][0-9]*&#124;0[xX][0-9a-fA-F]+&#124;0[bB][0-1]+&#124;0[0-7]+ xml.xsd.type=string |
+
+表E.84：VariationPointProxy
+
+| 类         | VariationPointProxy                                                                                               |
+|------------|--------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::SWComponentTemplate::SwcInternalBehavior::VariantHandling                                                      |
+| 注意       | VariationPointProxy 表示 C/C++ 实现中的变体点。在 bindingTime = compileTime 的情况下，RTE 提供可用于预处理器指令的宏定义，以实现 compileTime 可变性。|
+| 基类       | ARObject、Identifiable、MultilanguageReferrable、Referrable                                                                            |
+| 聚合于     | BswInternalBehavior.variationPointProxy、SwcInternalBehavior.variationPointProxy                                                        |
+
+| 属性                       | 类型                          | 多重性 | 类别 | 注意                                                                                                                                                             |
+|-----------------------------|--------------------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| conditionAccess             | ConditionByFormula             | 0..1   | aggr | 该条件充当变体点的绑定函数。                                                                                                                                                    |
+| implementationDataType      | AbstractImplementationDataType | 0..1   | ref  | 指向 ImplementationDataType 的该关联应当被 RTE 生成器作为实现提示。                                                                                                      |
+| postBuildValueAccess        | PostBuildVariantCriterion      | 0..1   | ref  | 这表示 VariationPointProxy 上下文中适用的 PostBuildVariantCriterion。注意，如何访问该特定 postBuildValueAccess 的技术细节仍被视为（源文句子在此截断）。                              |
+| postBuildVariantCondition   | PostBuildVariantCondition      | *      | aggr | 这表示 VariationPointProxy 上下文中适用的 PostBuildVariantCondition。（PostBuoldVariant 为源文如此）                                                            |
+| valueAccess                 | AttributeValueVariationPoint   | 0..1   | aggr | 该取值充当 VariationPoint 的绑定函数。                                                                                                                                        |
