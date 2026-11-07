@@ -119,7 +119,7 @@ a. 复位值取决于实现的区域数量：0x00000000 表示 0 个区域；0x0
 区域的基址、大小和属性都是可配置的，一般规则是所有区域自然对齐。这可以表述为：
 
 ```
-RegionBaseAddress[(N-1):0] = 0，其中 N 为 log2(SizeofRegion_in_bytes)
+RegionBaseAddress[(N-1):0] = 0, 其中 N 为 log2(SizeofRegion_in_bytes)
 ```
 
 内存区域的大小可以变化为 2 的幂。支持的大小为 2<sup>N</sup>，其中 5 ≤ N ≤ 32。如果两个区域之间存在重叠，则具有最高区域编号的寄存器优先。
