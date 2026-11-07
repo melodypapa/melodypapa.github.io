@@ -51,22 +51,37 @@ Never add `spec:`, `release:` or tags — that convention belongs to `docs/autos
 
 ## Tables
 
-- Every table is text: a GFM table with a header row and `| --- |` separator,
-  translated cell by cell. Tables are never cropped as images — merged cells
-  included.
-- Merged cells are expanded, not mirrored: repeat the spanning value in each
-  row of the block so every row reads on its own, e.g. three regions sharing
-  one attribute each repeat `RW` instead of one `RW` cell spanning three rows.
-- Multi-tier headers flatten into one header row that names each column
-  (`| 位 | 名称 | 类型 | 复位值 | 描述 |`); the source's two-tier `位 / 名称`
-  header becomes two columns.
+- Every table is text, and GFM is the default: a Markdown table with a header
+  row and `| --- |` separator, translated cell by cell. Tables are never
+  cropped as images — merged cells included.
+- **HTML exception (narrow).** A raw HTML `<table>` is allowed only when GFM
+  cannot carry the structure without loss or unreadability: cells containing
+  block content (lists, code blocks, multiple paragraphs), a multi-tier header
+  whose flattened form is ambiguous, or merged cells whose spanning semantics
+  carry meaning that repeating values would obscure. A plain row/column grid,
+  however wide, stays GFM. These three cases are exhaustive; see the decision
+  log below.
+- HTML tables must use `<table>` with `<thead>`/`<tbody>`, `<th>` headers with
+  `scope="col"` or `scope="row"`, and real `rowspan`/`colspan` for spans.
+  Inline markup inside cells must be written as raw HTML (`<strong>`, `<code>`,
+  `<a href="…">`) — Markdown is **not** parsed inside HTML table cells even
+  with `md_in_html`, so `**bold**` and `[text](url)` would render literally.
+  Never paste the source parse's `<table>` markup verbatim; write clean HTML.
+- In GFM tables, merged cells are expanded, not mirrored: repeat the spanning
+  value in each row of the block so every row reads on its own, e.g. three
+  regions sharing one attribute each repeat `RW` instead of one `RW` cell
+  spanning three rows.
+- In GFM tables, multi-tier headers flatten into one header row that names each
+  column (`| 位 | 名称 | 类型 | 复位值 | 描述 |`); the source's two-tier
+  `位 / 名称` header becomes two columns.
 - Access tables keep the source's three columns:
   `| EL0 | EL1 | EL2 |` with `-` / `RW` values.
 - Bit-field bars (`Figure7-1`), block diagrams and timing diagrams are figures,
   not tables — they stay as cropped images.
 - No visible `Table x-y:` caption line; the paragraph that introduces the table
   carries it. Legacy `Table<chapter>-<n>.png` images in older directories are
-  converted to GFM tables as those articles are touched.
+  converted to text tables (GFM by default, HTML when the structure qualifies)
+  as those articles are touched.
 
 ## Figures
 
@@ -106,3 +121,13 @@ Never add `spec:`, `release:` or tags — that convention belongs to `docs/autos
 - No placeholder text, no `TODO`, no empty section bodies.
 - Row sets, bit ranges and register addresses match the source exactly — a
   dropped row is a defect, not a style choice.
+
+## Decision log
+
+- 2026-11-05, issue #283 — Raw HTML `<table>` permitted as a narrow exception
+  for structurally complex tables; GFM remains the default and the three
+  qualification cases in §Tables are exhaustive. Lifted by user decision after
+  verifying that Material styles a plain `<table>` identically to a GFM table
+  (`.md-typeset table:not([class])`) but that `md_in_html` does not parse
+  Markdown inside HTML cells. Supersedes the earlier unrestricted "every table
+  is a GFM table" wording.

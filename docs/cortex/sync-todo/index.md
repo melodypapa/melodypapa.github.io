@@ -46,3 +46,4 @@
 - Steps per row: **S1** source resolution + gap analysis · **S2** in-place translation (main session, never a subagent) · **S3** figures cropped from the PDF into the article dir · **S4** mkdocs nav + `docs/cortex/index.md` landing update · **S5** Phase A mechanical gate · **S6** Phase B fidelity · **S7** user confirmation gate · **S8** commit/PR.
 - Chapters whose parse span exceeds ~1500 lines are marked ⏸ in the row — present the per-run plan and get user confirmation before translating (skill Step 3).
 - Verify (S6-only) rows: no rewrite unless the source comparison finds real gaps; record the evidence, then `[x]`.
+- Table format policy: GFM is the default; a raw HTML `<table>` is a narrow exception for structurally complex tables — see `.agents/skills/arm-translate/references/article-format.md` §Tables for the exhaustive criteria.

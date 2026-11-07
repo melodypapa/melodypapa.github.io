@@ -11,7 +11,7 @@ Steps: S1 source resolution + gap analysis · S2 in-place translation · S3 figu
 ## Queue
 
 - [ ] errata notice → new article (text-only; e.g. `m7_processor/sden_errata/`; front-matter title proposes 每个条目以标识符加粗，分类小节 B/C 保留源分组)
-  - Note: translate the Errata summary table (GFM) + errata descriptions verbatim; drop Change Control history + document chrome. No figures in this run (blocker above); if the source turns out to reference a figure the parse lost, record it and defer to the genuine-PDF run.
+  - Note: translate the Errata summary table (GFM by default; raw HTML only when the structure qualifies) + errata descriptions verbatim; drop Change Control history + document chrome. No figures in this run (blocker above); if the source turns out to reference a figure the parse lost, record it and defer to the genuine-PDF run.
   - [ ] S1 [ ] S2 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 
 ## Not queued (deliberately)

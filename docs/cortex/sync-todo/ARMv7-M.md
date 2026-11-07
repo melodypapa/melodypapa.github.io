@@ -21,7 +21,7 @@ Existing-article mappings (mapping.md, evidence re-checked at census): `arm_arch
   - Note (S1): article has only `## 1.` + `## 3. 参考文献` at h2 level — likely blog-prose vs the chapter's real section tree; expect substantial in-place insertion.
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] instruction_set — content alignment (article 139 ln vs A4 + A5 + A6; heading repair is tracked in [M7-TRM](M7-TRM.md) as a hygiene row — do it in this run if it happens here first)
-  - Note: A5 encoding tables are textual — GFM tables; A7/C1 instruction-by-instruction details are NOT in this row (deferred tail).
+  - Note: A5 encoding tables are textual — GFM tables by default; raw HTML only when the structure qualifies (see .agents/skills/arm-translate/references/article-format.md §Tables). A7/C1 instruction-by-instruction details are NOT in this row (deferred tail).
   - [ ] S1 [ ] S2 [ ] S3 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] B2 → new article (System Memory Model — caches, branch predictors, memory-system pseudocode, 1,540 ln; e.g. `m7_processor/system_memory_model/`)
   - [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
