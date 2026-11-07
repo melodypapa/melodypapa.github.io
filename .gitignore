@@ -3,6 +3,7 @@
 .zcode/
 .trae
 .private
+internal/
 site/
 .venv/
 __pycache__/

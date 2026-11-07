@@ -292,7 +292,14 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
   - translate the source tables faithfully as GFM tables; normalize the
     PDF merged-cell artifacts (a value repeated across collapsed columns —
     IDs, headers — collapses to one column);
-  - bracketed `[SWS_*]` and `[ECUC_*]` IDs are dropped per the hygiene rule;
+  - bracketed `[SWS_*]` and `[ECUC_*]` IDs are dropped per the hygiene rule,
+    **except** a source-faithful inline requirement cross-reference inside
+    prose (e.g. `按照 [SWS_Csm_00024] …` / `在 [SWS_Crypto_00073] 中找到`):
+    these are the direct translation of the source's own normatively-referenced
+    IDs and are retained verbatim (STANDARD.md §4 sanctioned variant, user
+    decision 2026-11-07); IDs that are not present in the source are never
+    introduced; IDs in ```C fences and the appendix-B change-history item-ID
+    lists (§1) stay sanctioned separately;
     parameter/container NAMES (`AdcDeInitApi`, `AdcGeneral`) are code
     identifiers — never translated, kept verbatim in cells and headings;
   - boolean descriptions keep true/false and render per the site pattern
@@ -619,7 +626,10 @@ before every commit, the second is evidence for the Step 8 confirmation.
    flagged and must be translated. `--site` sweeps the whole corpus; use it
    to find the same defect in articles already published.
 3. Hygiene greps: no `^# ` in the body; no requirement IDs
-   (`\[[A-Z][A-Za-z]*_[A-Za-z0-9]*_[0-9]+\]`) and no `{DRAFT}`; a WeChat
+   (`\[[A-Z][A-Za-z]*_[A-Za-z0-9]*_[0-9]+\]`) and no `{DRAFT}` — **exception**:
+   a source-faithful inline requirement cross-reference inside prose is
+   retained (STANDARD.md §4 sanctioned variant, 2026-11-07); only
+   newly-introduced or non-source IDs are flagged; a WeChat
    footer, if present, is `<section id="wechat">` + `<h4>`, never a markdown
    heading; angle-bracket placeholders (`<X>`, `<Service>`, `<#channel>`)
    render as `&lt;…&gt;` — `grep -c '\\<' <article>` must be 0 (the

@@ -1588,9 +1588,9 @@ a &lt; b：C = 2<sup>(c-b)</sup> * |(x * 2<sup>(b-a)</sup>) - y|。
 | 0x1D9 | uint32 Mfx_AbsP2_s32_u32(sint32 x, sint16 a, sint16 c) |
 | 0x1DA | sint32 Mfx_AbsP2_s32_s32(sint32 x, sint16 a, sint16 c) |
 
-#### 7.7. 函数使用示例（**Examples of use of functions**）
+### 7.7. 函数使用示例（**Examples of use of functions**）
 
-##### 7.7.1. 乘法与右移的组合（**Combinations of multiplication and shift right**）
+#### 7.7.1. 乘法与右移的组合（**Combinations of multiplication and shift right**）
 
 将一个参数乘以给定范围的因子的函数，可以解释为乘法与右移的组合。
 
@@ -1610,7 +1610,7 @@ a &lt; b：C = 2<sup>(c-b)</sup> * |(x * 2<sup>(b-a)</sup>) - y|。
 Mfx_MulShRight_s16s16u8_s8(argument1, factor, 8)
 ```
 
-##### 7.7.2. 除法与左移的组合（**Combinations of division and shift left**）
+#### 7.7.2. 除法与左移的组合（**Combinations of division and shift left**）
 
 在动力总成（**power train**）领域，将两个参数相除以计算给定范围因子的函数，可以解释为除法与左移的组合。
 
@@ -1632,7 +1632,7 @@ Mfx_DivShLeft_u16u16u8_u16(argument1, argument2, 16)
 
 ### 7.8. 版本 API（**Version API**）
 
-##### 7.8.1. Mfx_GetVersionInfo
+#### 7.8.1. Mfx_GetVersionInfo
 
 **说明**: 返回本库的版本信息。服务 ID 0x1DB。本服务为同步调用，可重入。参数（in）：无。参数（inout）：无。参数 versioninfo（out）：指向存储本模块版本信息的位置，格式遵循 [BSW00321] 的规定。返回值：无。可通过 **Mfx.h** 获得。
 
