@@ -14307,3 +14307,1235 @@ globalInPackage 引用的最终目标元素——Chapter “Chap1”——见清
   </AR-PACKAGES>
 </AR-PACKAGE>
 ```
+
+
+> **变更历史注记：** 依照 tps_standardization_template 附录 E 的先例（TPS\_APSD 附录 F 先例），以下变更历史表仅保留标题列（标题作为数据按源文原样保留、不译；Number 列按批项决策丢弃）。各表标题中的发布版名称沿用源文写法（如 “19-11” 不带 “R” 前缀、源表用词 “Defintion” 等笔误不涉及）。
+
+## G. 变更历史
+
+本章包含按 AUTOSAR 发布版记录的本文档变更历史。本章中的清单可能包含在后续版本中已从规范中移除的可追溯项，因此它们不再作为超链接出现。
+
+## G.1. 本文档按照 AUTOSAR 发布版 R4.0.1 的变更历史
+
+## G.1.1. 新增的约束
+
+表G.1：4.0.1 中新增的约束
+
+| 标题 |
+|---|
+| Blueprint of blueprints are not supported |
+| Merged model shall be compliant to the meta-model. |
+| Bound model shall be compliant to the meta-model |
+| Constraint to latest binding time |
+| Multiplicity after binding |
+| Attributes in property set pattern |
+| EvaluatedVariantSet |
+| shortName |
+| ReferenceBase |
+| only one default ReferenceBase |
+| Named reference bases shall be available |
+| shortName uniqueness constraint for variants |
+| splitted variants shall have a shortLabel |
+| shortLabel in VariationPoint shall be unique |
+| Avoid conflicting package categories |
+| Return type of Formula |
+| postbuildVariantCondition only for PostBuild |
+| Binding time is constrained |
+| PredefinedVariants need to be consistent |
+| Nesting of lists shall be limited |
+| The shortLabel in VariationPoint shall be unique |
+| Notes should not be nested |
+| Used languages need to be consistent |
+| Non splitable elements in one file |
+| Non splitable elements shall not be repeated |
+| InstanceRefs shall be consistent |
+| AtpInstanceRef shall be close to the base |
+| Documentation context is either a feature or an identifiable |
+| Limits of unlimited Integer |
+
+## G.2. 本文档按照 AUTOSAR 发布版 R4.0.2 的变更历史
+
+## G.2.1. 新增的约束
+
+表G.2：4.0.2 中新增的约束
+
+| 标题 |
+|---|
+| Variation of packageable element is limited to components resp. modules |
+| Global reference is limited to certain elements |
+
+## G.2.2. 变更的约束
+
+表G.3：4.0.2 中变更的约束
+
+| 标题 |
+|---|
+| Named reference bases shall be available |
+| PredefinedVariants need to be consistent |
+
+## G.3. 本文档按照 AUTOSAR 发布版 R4.0.3 的变更历史
+
+## G.3.1. 新增的约束
+
+表G.4：4.0.3 中新增的约束
+
+| 标题 |
+|---|
+| ordered collections cannot be split into partial models |
+| no VariationPoint s with latestBindingTime set to BlueprintDeriva- tion in system configurations |
+| Only blueprintCondition / blueprintValue if vh.latestBindingTime is BlueprintDerivationTime |
+| no nested VariationPoint |
+| ICS may not contain blueprints |
+
+## G.3.2. 变更的约束
+
+表G.5：4.0.3 中变更的约束
+
+| 标题 |
+|---|
+| InstanceRefs shall be consistent |
+| Name space of shortName |
+
+## G.4. 本文档按照 AUTOSAR 发布版 R4.1.1 的变更历史
+
+## G.4.1. 新增的约束
+
+表G.6：4.1.1 中新增的约束
+
+| 标题 |
+|---|
+
+## G.4.2. 变更的约束
+
+表G.7：4.1.1 中变更的约束
+
+| 标题 |
+|---|
+
+## G.4.3. 删除的约束
+
+表G.8：4.1.1 中删除的约束
+
+| 标题 |
+|---|
+
+## G.4.4. 新增的规范项
+
+| 标题 |
+|---|
+| Inherited properties in mixed content |
+| Splitable collections |
+| Identification of Partial Models |
+| Splitable up to the Root |
+| atp.recommendedPackage |
+| atp.Splitkey |
+| atp.Status |
+| vh.latestBindingTime |
+| xml.xsd.* etc. |
+| xml.xsd.customType |
+| xml.attribute |
+| xml.attributeRef |
+| xml.enforceMinMultiplicity |
+| xml.enforceMaxMultiplicity |
+| xml.globalElement |
+| xml.mds.type |
+| xml.name |
+| xml.nsPrefix |
+| xml.nsUri |
+| xml.roleElement , xml.roleWrapperElement , xml.typeElement xml.typeWrapperElement |
+| xml.sequenceOffset |
+| xml.systemIdentifier |
+| admin.documentClassification |
+| admin.documentIdentificationNo |
+
+| admin.documentOwner |
+| admin.documentResponsibility |
+| admin.documentStatus |
+| admin.documentTitle |
+| admin.documentVersion |
+| admin.partOfRelease |
+| admin.releaseDate |
+| admin.revision |
+| Top-Level Structure of an AUTOSAR Model |
+| AUTOSAR top level AdminData |
+| Language Status of an Artifact |
+| Package Structure for AUTOSAR delivered Models |
+| Pattern for AUTOSAR delivered Models |
+| Package Structure for ECUC parameter definitions |
+| Pattern for AUTOSAR defined Model Elements |
+| Pattern for AUTOSAR defined Model Elements |
+| Pattern for AUTOSAR defined Model Elements |
+| Category of ARPackage |
+| BLUEPRINT |
+| STANDARD |
+| EXAMPLE |
+| Non Standardized Category of ARPackage |
+| ARObject |
+| The purpose of a ARPackage |
+| Collections |
+| Main Purpose of Identifiable |
+| Main Purpose of Referrable |
+| Purpose of shortName |
+| Recommendation to Choose Human Readable shortName s |
+| Purpose of longName |
+| Purpose of desc |
+| Purpose of adminData |
+| Purpose of introduction |
+|  | Purpose of annotation |
+| Control of the Document Language by AdminData |
+| Version Management |
+| Merge Operations in Version Management |
+| Special Information in Version Management |
+| Abstraction of Artifacts from Physical File Syetms |
+| EngineeringObject can be resolved via a container catalog as defined in [16] in order to find the physical File. |
+| Negation Operator |
+| Exponentiation Operator |
+| Multiplicative Operator / division |
+| Additive Operator |
+|  | Shift Operator |
+|  |
+| Ranking Operator Comparison: equality |
+| Bit-wise AND |
+| Bit-wise XOR Bit-wise OR |
+| Boolean |
+|  | AND |
+
+| Boolean XOR |
+| Boolean OR |
+| Round Function |
+| Round Up Function |
+| Round Down Function |
+| Absolute Value |
+| Natural Logarithm |
+| Decimal Logarithm |
+| Square Root |
+| Sinus |
+| Arcus Sinus |
+| Cosinus |
+| Arcus Cosiuns |
+| Sinus Hyperbolicus |
+| Cosinus Hyperbolicus |
+| Tangens |
+| Arcus Tangens |
+| Tangens Hyperbolicus |
+| Exponential |
+| Is Defined |
+| Signum |
+| Maximum Value |
+| Minimum Value |
+| Power Function |
+| Case Sensitive String Compare |
+| Non Case Insensitive String Compare |
+| Annotation |
+| Usage of MultiDimensionalTime |
+| Derived Attributes Do not Appear in the XML Schema |
+| Specializations of Derived Relations |
+| Derived Union |
+| Applying Abstract Structures |
+| Specialization of Relations |
+| Representation of Classifier and Feature |
+| Purpose of AtpClassifier |
+| Purpose of AtpPrototype |
+| structures |
+|  | Deriving features in abstract |
+| Instance Reference Definition of an instance ref |
+| Context path in instance ref |
+| Annotated meta-model |
+|  | Extended meta-model |
+|  |
+| specification of a transformation pattern |
+| Model Transformation for Primitives |
+| Case Sensitivity of References |
+| Representation of Type Reference |
+| Absolute shortName -path |
+|  | Identifying the ReferenceBase of a Relative Reference |
+| ReferenceBase in Partial Models |
+| Destination Type |
+| Variant Handling Terminology |
+
+| Variant-rich M1 model |
+| Bound M1 model |
+| Remove Deselected Objects |
+| Remove Binding Function upon Binding |
+| Scope of Variant Handling Specification |
+| Resolving Variation Points along the Development Steps |
+| Annotated meta-model for Variant Handling |
+| Notation of Latest Binding time on M2 |
+| Representation of Binding Time |
+| Transformation on meta-model |
+| Description of Variation on M1 |
+| Choosing a Particular Variant |
+| Resolving Variation Points |
+| Variation is Restricted to Specific Elements. |
+| Semantic of bindingTime |
+| Variant Handling Patterns can be Mixed |
+| Variant Handling Extends Upper Multiplicity |
+| Order of Pattern Resolution in Variant Handling |
+| Variation Points are Optional |
+| Annotated meta-model Defines Applicable Variation Points |
+| ICS |
+| Pure meta-model |
+| Attributes for all meta-classes |
+| Transformation defined by Aggregation Pattern |
+| Schema Generator avoids duplicate VariationPoint s |
+| Aggregation Pattern on Primitives |
+| Limitation of non post build |
+| Transformation defined by Association Pattern |
+| Handling of non variant associations |
+| Transformation defined by Attribute Value Pattern |
+| Special meta-classes for AttributeValueVariationPoint |
+| No Binding time required for Constants |
+| No postbuild variation for attribute values |
+| Multiplicity of AttributeValueVariationPoint |
+| AttributeValueVariationPoint does not support PostBuild Variation |
+| Existence of Attribute cannot be subject to Variation |
+| Arrays should have the same Binding Time |
+| Extending the Application of Attribute Value Pattern Rationale for BindingTime being optional in AttributeValueVariation- Point |
+| Approach on Property Set Pattern |
+| Transformation defined by Property Set Pattern |
+| Property Set pattern and Inheritance |
+| Binding Time for Property Set Pattern |
+| Attachment of Binding Time |
+| Attachment of Latest Binding Time |
+| Multiplicity in Property Set Pattern |
+| Use Cases for Sdg |
+| Applicable modeling support in Special Data Specification of roles in Special Data |
+| Access Control Relation |
+| AclPermission |
+|  | AclRole |
+
+| AclOperation |
+| AclObjectSet |
+| Context of AclPermission |
+| aclObjectClass |
+| collection |
+| object |
+| objectDefinition |
+| derivedFromBlueprint |
+| engineeringObject |
+| Specifying replacement approach in LifeCycleInfo |
+| Definition "Life Cycle" |
+| LifeCycleStateDefinitionGroup |
+| LifeCycleInfoSet |
+| LifeCycleInfo |
+| Informal references to traceable text |
+| Viability Period of Life Cycle Info |
+| PreBuild variation point |
+| PostBuild Variation Point |
+| BlueprintDerivation Variation Point |
+| Combined PreBuild and PostBuild Variation Point |
+| Variation Point without Conditions |
+| Multiplicity of VariationPoint |
+| Variant-Rich Model Violates [constr_2508] |
+| Split/Merge of Variant-Rich Model |
+| Distinguish codeGenerationTime Variation Points in RTE |
+| Referring to Variation Points from Outside Definition of PreBuild Variation Point |
+|  |
+| Definition of PostBuild Variation Point |
+| BindingTime constrained by vh.latestBindingTime |
+| Binding VariationPoint s early |
+| Evaluating PostBuildVariantCondition PreBuild configuration of PostBuild criteria |
+| Possible Values for PostBuildVariantCriterion |
+| Representation of SwSystemconst |
+| Assigning values to SwSystemconst |
+| System Constants in Formula |
+| PreBuild Disabling PostBuild support |
+| Only one BindingTime |
+| Rationale for Different Approach for PreBuild and PostBuild Variation |
+| Reference from invariant to variant parts. |
+| Variation Point in Blueprints |
+| blueprintCondition cannot be variant |
+| Semantics of BlueprintDerivationTime |
+| Resolve BlueprintVariationPoints on time |
+|  | Float Literals , |
+| atp.StatusComment |
+|  | INF NaN |
+| Purpose of Evaluated Variants |
+| Definition of a Predefined Variant |
+|  |
+|  | SwSystemconstantValueSet s from different sources |
+
+| Indirect value assignment for system constants |
+| Analogy between Predefined Variant for Pre Build and Post Build branch |
+| Validity of Post Build combined with Pre Build Variant |
+| Semantics of approvalStatus |
+| Purpose of includedVariant in PredefinedVariant |
+| REJECTED precedes APPROVED |
+| APPROVED for CollectableElement |
+| REJECTED for CollectableElement |
+| Definition of a Variant |
+| Definition of Valid Variants |
+| UML-tags for Configuration of XML schema production |
+| Administrative UML Tags |
+| Use Case Specific Extension of Formula Language |
+| Build Action Manifest Overview |
+| atp.StatusRevisionBegin |
+| atp.StatusRevisionEnd |
+| Tags to denote life cycle information |
+| Tags to denote Variant Handling Properties |
+| Tags to specify Upstream Mapping |
+| Single Paragraph |
+| Documentation Block |
+| Standalone Documentation |
+| Purpose of Chapter Purpose of Topic1 |
+| Synopsis of Chapters and Topics |
+| DocumentationBlock fits in a table cell |
+| Variation in Documentation |
+|  | Types of Paragraph |
+|  |
+| Purpose of Verbatim |
+| Rendering of inline elements of Verbatim Plain List |
+| Labeled List |
+| Definition List |
+| Figures in Documentation |
+| Details of Figures in Documentation |
+| Mathematical Subjects in Documentation |
+| Various Formula Representation |
+| Purpose of Note |
+| Inline Elements in Documentation |
+| Standalone Documentation |
+|  | Context of Standalone Documentation |
+| Chapter |
+| Predefined Chapter |
+| Tables in Documentation Partitions of a Table |
+|  | Table Row |
+|  |
+| Topics in Documentation |
+| Parameter Tables |
+| Support of Pagination of Documents View Approach |
+| Including generated |
+| Documentation Parts Multiple Languages |
+| Purpose of BuildActionEnvironment |
+
+表G.9：4.1.1 中新增的规范项
+
+| Data involved in Build Actions |
+| Sequence of Build Actions |
+| Input Data for Build Actions |
+| ECUC-Parameters in Build Actions |
+| ECUC-Containers in Build Actions |
+| General Model Elements in Build Actions |
+| Special Data in BuildActionIoElement |
+| Automatic Collections |
+| Expressing Relationships by collections |
+| Standardized category of Collection |
+| Standardized elementRole of Collection |
+| Model Transformation on Associations |
+| Associations in Splitkeys |
+| mmt.templateTable |
+| Semantics of CseCodeType |
+| Specialization of FormulaExpression |
+| Application of Sdg |
+| Usage of Special Data |
+| TagWithOptionalValue |
+| Compatibility of Numerical Values |
+
+## G.4.5. 变更的规范项
+
+表G.10：4.1.1 中变更的规范项
+
+| 标题 |
+|---|
+| Shift operation |
+| Types in Formula Expressions |
+| Keyword 'epsilon' |
+| Error handling in Formula Evaluator |
+| {module} denotes a Module Designator |
+| Establishing References |
+| glyph[lessmuch] atpDerived glyph[greatermuch] applicable to relations (associations, aggregations) |
+
+## G.4.6. 删除的规范项
+
+表G.11：4.1.1 中删除的规范项
+
+| 标题 |
+|---|
+
+## G.5. 本文档按照 AUTOSAR 发布版 R4.1.2 的变更历史
+
+## G.5.1. 从 4.1.1 到 4.1.2 新增的规范项
+
+| Id | Heading |
+| AUTOSAR Formula language |
+
+Table G.12: Added Traceables from 4.1.1 to 4.1.2
+
+| Return values of the BluePrintFormular.ecuc query |
+| Handling of the Sign |
+
+## G.5.2. 从 4.1.1 到 4.1.2 变更的规范项
+
+Table G.13: Changed Traceables from 4.1.1 to 4.1.2
+
+| Id | Heading |
+| Types in Formula Expressions |
+| {module} denotes a Module Designator |
+| Identification of Partial Models |
+| vh.latestBindingTime |
+| Notation of Latest Binding time on M2 |
+| Representation of Binding Time |
+| Limitation of non post build |
+| No postbuild variation for attribute values |
+| Attachment of Latest Binding Time |
+| BindingTime constrained by vh.latestBindingTime |
+| Semantics of BlueprintDerivationTime |
+| Tags to denote Variant Handling Properties |
+
+## G.5.3. 从 4.1.1 到 4.1.2 删除的规范项
+
+none
+
+## G.5.4. 从 4.1.1 到 4.1.2 新增的约束
+
+none
+
+## G.5.5. 从 4.1.1 到 4.1.2 变更的约束
+
+表G.14：从 4.1.1 到 4.1.2 变更的约束
+
+| Id | Heading |
+| Constraint to bindingTime |
+| shortLabel in VariationPoint must be unique |
+| postBuildVariantCondition only for PostBuild |
+| Binding time is constrained |
+| No VariationPoint s where vh.latestBindingTime set to Blueprint- DerivationTime in system configurations |
+| If vh.latestBindingTime is BlueprintDerivationTime then there shall only be blueprintCondition / blueprintValue |
+| Binding Time in Aggregation Pattern |
+| Binding Time in Association Pattern |
+| Binding Time in Attribute Value Pattern |
+| Binding Time in Property Set Pattern |
+
+## G.5.6. 从 4.1.1 到 4.1.2 删除的约束
+
+表G.15：从 4.1.1 到 4.1.2 删除的约束
+
+| Id | Heading |
+| splitted variants must have a shortLabel |
+
+## G.6. 本文档按照 AUTOSAR 发布版 R4.1.3 的变更历史
+
+## G.6.1. 4.1.3 中新增的规范项
+
+Table G.16: Added Traceables in 4.1.3
+
+| Id | Heading |
+| Representation of return type in float |
+
+## G.6.2. 4.1.3 中变更的规范项
+
+Table G.17: Changed Traceables in 4.1.3
+
+| Id | Heading |
+| true and false |
+| atp.Status |
+| xml.nsUri |
+| xml.systemIdentifier |
+| Return values of the BlueprintFormula .ecuc query |
+| No postbuild variation for attribute values |
+| AttributeValueVariationPoint does not support PostBuild Variation |
+| Distinguish codeGenerationTime Variation Points in RTE |
+| Definition of PreBuild Variation Point |
+| Binding VariationPoint s early |
+| PreBuild configuration of PostBuild criteria |
+| Variation Point in Blueprints |
+| blueprintCondition cannot be variant |
+| Resolve BlueprintVariationPoints on time |
+| Semantics of CseCodeType |
+
+## G.6.3. 4.1.3 中删除的规范项
+
+none
+
+## G.6.4. 4.1.3 中新增的约束
+
+none
+
+## G.6.5. 4.1.3 中变更的约束
+
+表G.18：4.1.3 中变更的约束
+
+| Id | Heading |
+| Merged model must be compliant to the meta-model. |
+
+## G.6.6. 4.1.3 中删除的约束
+
+none
+
+## G.7. 本文档按照 AUTOSAR 发布版 R4.2.1 的变更历史
+
+## G.7.1. 4.2.1 中新增的规范项
+
+Table G.19: Added Traceables in 4.2.1
+
+| Id | Heading |
+| Definition of PreBuild Variation Point with Blueprint conditions |
+| Propagation of LifeCycleState |
+| map.Status |
+| map.Id |
+
+## G.7.2. 4.2.1 中变更的规范项
+
+Table G.20: Changed Traceables in 4.2.1
+
+| Id | Heading |
+| Return values of the BlueprintFormula .ecuc query |
+| Notation of Latest Binding time on M2 |
+| Special Meta Classes for AttributeValueVariationPoint |
+| BindingTime constrained by vh.latestBindingTime |
+| Evaluating PostBuildVariantCondition |
+| Tags to denote life cycle information |
+| Various Formula Representation |
+| Semantics of CseCodeType |
+
+## G.7.3. 4.2.1 中删除的规范项
+
+none
+
+## G.7.4. 4.2.1 中新增的约束
+
+none
+
+## G.7.5. 4.2.1 中变更的约束
+
+表G.21：4.2.1 中变更的约束
+
+| Id | Heading |
+| Merged model shall be compliant to the meta-model |
+| blueprintValue in blueprints only |
+| Binding Time in Association Pattern |
+
+## G.7.6. 4.2.1 中删除的约束
+
+none
+
+## G.8. 本文档按照 AUTOSAR 发布版 R4.2.2 的变更历史
+
+## G.8.1. 4.2.2 中新增的规范项
+
+Table G.22: Added Traceables in 4.2.2
+
+| Id | Heading |
+| UML tags are attached to the target end of relations if suitable |
+| Purpose of uuid |
+| No View Specified |
+| Dedicated View Specified |
+| Multiple Views Specified |
+| Exclude content |
+
+## G.8.2. 4.2.2 中变更的规范项
+
+Table G.23: Changed Traceables in 4.2.2
+
+| Id | Heading |
+| Table Row |
+| View Approach |
+| Including generated Documentation Parts |
+
+## G.8.3. 4.2.2 中删除的规范项
+
+none
+
+## G.8.4. 4.2.2 中新增的约束
+
+| Id | Heading |
+| Cyclic value assignments to SwSystemconst is not allowed |
+
+表G.24：4.2.2 中新增的约束
+
+| Footnotes should not be nested |
+| Used colors of attributes color and bgcolor |
+
+## G.8.5. 4.2.2 中变更的约束
+
+表G.25：4.2.2 中变更的约束
+
+| Id | Heading |
+| Multiplicity after binding |
+| Binding Time in Aggregation Pattern |
+
+## G.8.6. 4.2.2 中删除的约束
+
+none
+
+## G.9. 本文档按照 AUTOSAR 发布版 R4.3.0 的变更历史
+
+## G.9.1. 4.3.0 中新增的规范项
+
+Table G.26: Added Traceables in 4.3.0
+
+| Id | Heading |
+| atp.EnumerationValue |
+| Tag to control the production of specification documents |
+| mmt.RestrictToStandards |
+| Default EnumerationMappingTable |
+| Purpose of SdgDef |
+| Purpose of SdgClass |
+| Purpose of Model Restriction Types |
+| Purpose of AbstractValueRestriction |
+| Purpose of AbstractMultiplicityRestriction |
+| Purpose of AbstractVariationRestriction |
+| Countably infinite number of elements |
+
+## G.9.2. 4.3.0 中变更的规范项
+
+| Id | Heading |
+| Connection between Formula and Model Elements |
+| aborting logical expressions |
+| AUTOSAR Formula language |
+| Function defined |
+| Establishing References |
+| glyph[lessmuch] atpDerived glyph[greatermuch] applicable to relations (associations, aggregations) |
+| Splitable collections |
+
+| atp.recommendedPackage |
+| atp.Splitkey |
+| atp.Status |
+| vh.latestBindingTime |
+| xml.xsd.* etc. |
+| xml.xsd.customType |
+| xml.attribute |
+| xml.attributeRef |
+| xml.enforceMinMultiplicity |
+| xml.enforceMaxMultiplicity |
+| xml.globalElement |
+| xml.mds.type |
+| xml.name |
+| xml.nsPrefix |
+| xml.nsUri |
+| xml.roleElement , xml.roleWrapperElement , xml.typeElement , xml.typeWrapperElement |
+| xml.sequenceOffset |
+| xml.systemIdentifier |
+| admin.documentClassification |
+| admin.documentIdentificationNo |
+| admin.documentOwner |
+| admin.documentResponsibility |
+| admin.documentStatus |
+| admin.documentTitle |
+| admin.documentVersion |
+| admin.partOfRelease |
+| admin.releaseDate |
+| admin.revision |
+| BLUEPRINT |
+| STANDARD |
+| EXAMPLE Return values of the BlueprintFormula .ecuc query |
+| Absolute shortName |
+| -path Relative shortName -path |
+| Identifying the ReferenceBase of a Relative Reference |
+| ICS |
+| Aggregation Pattern on Primitives |
+| Limitation of non post build |
+| Transformation defined by Attribute Value Pattern |
+| Special Meta Classes for AttributeValueVariationPoint |
+| AclOperation |
+| Context of AclPermission |
+| LifeCycleInfo |
+| Variant Rich Model Violates [constr_2508] |
+| UML-tags for Configuration of XML schema production |
+| atp.StatusRevisionBegin |
+| atp.StatusRevisionEnd |
+| Types of Paragraph |
+| Definition List |
+| Chapter |
+| Semantics of |
+|  | CseCodeType |
+
+Table G.27: Changed Traceables in 4.3.0
+
+| UML tags are attached to the target end of relations if suitable |
+| Compatibility of Numerical Values |
+
+## G.9.3. 4.3.0 中删除的规范项
+
+none
+
+## G.9.4. 4.3.0 中新增的约束
+
+表G.28：4.3.0 中新增的约束
+
+| Id | Heading |
+| Maximum one VariationPoints in glyph[lessmuch] atpMixed glyph[greatermuch] |
+| Value of AbstractEnumerationValueVariationPoint |
+| Completeness of AnyInstanceRef referencing ImplementationDataType- Element |
+| If a SdgClass is referenced then it shall have a caption |
+| Existence of upperMultiplicityInfinite and upperMultiplicity of Ab- stractMultiplicityRestriction is mutually exclusive |
+| lowerMultiplicity of AbstractMultiplicityRestriction shall be smaller or equal to upperMultiplicity |
+
+## G.9.5. 4.3.0 中变更的约束
+
+表G.29：4.3.0 中变更的约束
+
+| Id | Heading |
+| Bound model must be compliant to the pure meta model |
+| Multiplicity after binding |
+| Named reference bases shall be available |
+| globalInPackage for global elements only |
+| Binding Time in Aggregation Pattern |
+| Binding Time in Association Pattern |
+| Binding Time in Attribute Value Pattern |
+| Binding Time in Property Set Pattern |
+| No System in AnyInstanceRef |
+| Footnotes should not be nested |
+
+## G.9.6. 4.3.0 中删除的约束
+
+none
+
+## G.10. 本文档按照 AUTOSAR 发布版 R4.3.1 的变更历史
+
+## G.10.1. 4.3.1 中新增的规范项
+
+表G.30：4.3.1 中新增的规范项
+
+| 标题 |
+|---|
+| glyph[lessmuch] atpStructuredComment glyph[greatermuch] |
+| Interaction of glyph[lessmuch] atpStructuredComment glyph[greatermuch] and glyph[lessmuch] atpSplitable glyph[greatermuch] |
+| Ordered collections |
+| Naming conventions in variant handling patterns |
+
+## G.10.2. 4.3.1 中变更的规范项
+
+表G.31：4.3.1 中变更的规范项
+
+| 标题 |
+|---|
+| Inherited properties in mixed content |
+| Category of ARPackage |
+| Specializations of Derived Relations |
+
+## G.10.3. 4.3.1 中删除的规范项
+
+none
+
+## G.10.4. 4.3.1 中新增的约束
+
+表G.32：4.3.1 中新增的约束
+
+| 标题 |
+|---|
+| Existence of upperMultiplicityInfinite and upperMultiplicity of Ab- stractMultiplicityRestriction is mutually exclusive |
+
+## G.10.5. 4.3.1 中变更的约束
+
+表G.33：4.3.1 中变更的约束
+
+| 标题 |
+|---|
+| Categories of packages shall not conflict |
+| Non splitable elements shall not be repeated |
+| Ordered collections cannot be split into partial models |
+
+## G.10.6. 4.3.1 中删除的约束
+
+表G.34：4.3.1 中删除的约束
+
+| 标题 |
+|---|
+| lowerMultiplicity of AbstractMultiplicityRestriction shall be smaller or equal to upperMultiplicity |
+
+## G.11. 本文档按照 AUTOSAR 发布版 R4.4.0 的变更历史
+
+## G.11.1. 4.4.0 中新增的规范项
+
+| 标题 |
+|---|
+| Grammar of ARMQL |
+| atp.ManifestKind |
+| atpContextElement s of InstanceRefs shall be consistent |
+| AtpInstanceRef shall be close to the base |
+| Types and Values in ARMQL |
+| Type Coercion Rules |
+| Operators and Expressions |
+| Lambda Abstraction, Function and Pseudo-Method Invocation |
+| The Integer Range Expression |
+| Assigning Names to Values |
+| Definition of functions |
+| Single Line FOR Blocks |
+| Multi Line FOR Blocks |
+| Semantics of WHERE Blocks |
+| Type predicates |
+
+表G.35：4.4.0 中新增的规范项
+
+| 标题 |
+|---|
+| Checking if an expression is defined |
+| General Functions |
+| String predicates |
+| List processing functions |
+| Type coercion functions |
+| Acccess to ECUC Values |
+| DefinitionRefPath |
+| Acccess to Model Values |
+| Non-Strict evaluation |
+| General scoping rules |
+| Hierarchy levels within one EXPRESSION tag |
+| Hierarchy levels between EXPRESSION tags |
+| Multiplicity of Derived Elements |
+| Variable Interpolation |
+| Default value of atp.Status |
+| Modeling of splitable elements |
+
+## G.11.2. 4.4.0 中变更的规范项
+
+表G.36：4.4.0 中变更的规范项
+
+| 标题 |
+|---|
+| Identification of Partial Models |
+| atp.Status |
+
+## G.11.3. 4.4.0 中删除的规范项
+
+表G.37：4.4.0 中删除的规范项
+
+| 标题 |
+|---|
+| Return values of the BlueprintFormula .ecuc query |
+
+## G.11.4. 4.4.0 中新增的约束
+
+表G.38：4.4.0 中新增的约束
+
+| 标题 |
+|---|
+| atpTarget of InstanceRefs shall be consistent |
+| No reassigning of the same name within one LET Block |
+
+## G.11.5. 4.4.0 中变更的约束
+
+表G.39：4.4.0 中变更的约束
+
+| 标题 |
+|---|
+| The shortLabel in AttributeValueVariationPoint shall be unique |
+| No System in AnyInstanceRef |
+
+## G.11.6. 4.4.0 中删除的约束
+
+表G.40：4.4.0 中删除的约束
+
+| 标题 |
+|---|
+| InstanceRefs must be consistent |
+| AtpInstanceRef shall be close to the base |
+
+## G.12. 本文档按照 AUTOSAR 发布版 R19-11 的变更历史
+
+## G.12.1. 19-11 中新增的规范项
+
+| 标题 |
+|---|
+| Splitkey |
+| Rules for the definition of a splitkey at M2 level |
+| Merging of splitable elements from partial models |
+| Definition Splitkey Path |
+| Synopsis of TopicContent |
+| Matching identities up to the root |
+
+表G.41：19-11 中新增的规范项
+
+| 标题 |
+|---|
+| Categories of SdgPrimitiveAttribute and SdgPrimitiveAt- tributeWithVariation |
+| Specification of the value of SdgClass . extendsMetaClass and SdgAb- stractForeignReference . destMetaClass |
+
+## G.12.2. 19-11 中变更的规范项
+
+表G.42：19-11 中变更的规范项
+
+| 标题 |
+|---|
+| atp.Splitkey |
+| Transformation defined by Attribute Value Pattern |
+| Special Meta Classes for AttributeValueVariationPoint |
+| Transformation defined by Property Set Pattern |
+| BlueprintDerivation Variation Point |
+| BindingTime constrained by vh.latestBindingTime |
+| Purpose of Verbatim |
+| Definition of PreBuild Variation Point with Blueprint conditions |
+| atp.EnumerationLiteralIndex |
+| atp.ManifestKind |
+
+## G.12.3. 19-11 中删除的规范项
+
+none
+
+## G.12.4. 19-11 中新增的约束
+
+表G.43：19-11 中新增的约束
+
+| 标题 |
+|---|
+| Representation of xml.xsd.type=double data types |
+| Defined identity up to the root |
+| M1 elements with same identity but different type are not allowed |
+
+## G.12.5. 19-11 中变更的约束
+
+表G.44：19-11 中变更的约束
+
+| 标题 |
+|---|
+| The shortLabel in AttributeValueVariationPoint shall be unique |
+| If vh.latestBindingTime is BlueprintDerivationTime then there shall only be blueprintCondition or formalBlueprintGenerator respectively blueprintValue |
+
+## G.12.6. 19-11 中删除的约束
+
+none
+
+## G.13. 本文档按照 AUTOSAR 发布版 R20-11 的变更历史
+
+## G.13.1. R20-11 中新增的规范项
+
+表G.45：R20-11 中新增的规范项
+
+| 标题 |
+|---|
+| AUTOSAR Partial Model |
+| Variant aggregation of Abstract and Concrete subclasses |
+| Set SdgClass . caption = true if the Sdg on the value side shall be referrable |
+| glyph[lessmuch] instanceRef glyph[greatermuch] in combination with glyph[lessmuch] atpUriDef glyph[greatermuch] |
+| glyph[lessmuch] atpIdentityContributor glyph[greatermuch] applicable to aggregations, associations and primitive attributes |
+
+## G.13.2. R20-11 中变更的规范项
+
+| 标题 |
+|---|
+| Identification of M1 elements in partial models |
+| admin.partOfRelease |
+| admin.revision |
+| Main Purpose of Identifiable |
+| Special meta-classes for AttributeValueVariationPoint |
+
+表G.46：R20-11 中变更的规范项
+
+| 标题 |
+|---|
+| AttributeValueVariationPoint does not support PostBuild Variation |
+| Purpose of Chapter |
+| Details of Figures in Documentation |
+| Rules for the definition of a splitkey at M2 level |
+
+## G.13.3. R20-11 中删除的规范项
+
+表G.47：R20-11 中删除的规范项
+
+| 标题 |
+|---|
+| Recommendation to Choose Human Readable shortName s |
+| No postbuild variation for attribute values |
+| Associations in Splitkeys |
+| atp.ManifestKind |
+
+## G.13.4. R20-11 中新增的约束
+
+表G.48：R20-11 中新增的约束
+
+| 标题 |
+|---|
+| Usage of value ANY for AnyServiceInstanceId |
+| No postbuild variation for attribute values |
+
+## G.13.5. R20-11 中变更的约束
+
+表G.49：R20-11 中变更的约束
+
+| 标题 |
+|---|
+| Uniqueness of ReferenceBase . shortLabel in the scope of an ARPackage |
+
+## G.13.6. R20-11 中删除的约束
+
+表G.50：R20-11 中删除的约束
+
+| 标题 |
+|---|
+| If a SdgClass is referenced then it shall have a caption |
+
+## G.14. 本文档按照 AUTOSAR 发布版 R21-11 的变更历史
+
+## G.14.1. R21-11 中新增的规范项
+
+表G.51：R21-11 中新增的规范项
+
+| 标题 |
+|---|
+| Standards restriction on document level |
+| Application of a standards restriction for meta-model diagrams |
+| Application of a standards restriction for meta-model description fields |
+| Implications of a standards restriction on modelling level |
+| Semantics of a Collection |
+| Individual attributes in conditionals |
+| Expressing a set of elements by collections |
+
+## G.14.2. R21-11 中变更的规范项
+
+表G.52：R21-11 中变更的规范项
+
+| 标题 |
+|---|
+| atp.Status |
+| Collections |
+| Case Sensitivity of References |
+| Automatic Collections |
+| Expressing Relationships by collections |
+| Standardized category of Collection |
+| Standardized elementRole of Collection |
+| Rules for the definition of a splitkey at M2 level |
+
+## G.14.3. R21-11 中删除的规范项
+
+none
+
+## G.14.4. R21-11 中新增的约束
+
+表G.53：R21-11 中新增的约束
+
+| 标题 |
+|---|
+| Existence of reference decorated with stereotype glyph[lessmuch] isOfType glyph[greatermuch] |
+| Conditionals with ordered collections |
+| No custom values for Collection . category |
+| No custom values for Collection . elementRole |
+
+## G.14.5. R21-11 中变更的约束
+
+表G.54：R21-11 中变更的约束
+
+| 标题 |
+|---|
+| The shortName shall be unique in its name space |
+| atpTarget of InstanceRefs shall be consistent |
+
+## G.14.6. R21-11 中删除的约束
+
+表G.55：R21-11 中删除的约束
+
+| 标题 |
+|---|
+| Attributes in property set pattern |
+
+## G.15. 本文档按照 AUTOSAR 发布版 R22-11 的变更历史
+
+## G.15.1. R22-11 中新增的规范项
+
+表G.56：R22-11 中新增的规范项
+
+| 标题 |
+|---|
+| Constraints shall be applied to a bound pure meta-model |
+| Reference to model element using an absolute shortName -path |
+| Existence of ReferenceBase . package and ReferenceBase . globalInPackage |
+| Variant Dependency of Instance Ref |
+| Recursive iteration of references |
+
+## G.15.2. R22-11 中变更的规范项
+
+表G.57：R22-11 中变更的规范项
+
+| 标题 |
+|---|
+| Absolute shortName -path |
+| Relative shortName -path |
+| Identifying the ReferenceBase of a Relative Reference |
+| Variant-Rich Model Violates [constr_2508] |
+| Reference from invariant to variant parts. |
+| Tags to specify Upstream Mapping |
+| map.template |
+| map.param |
+| map.rule |
+| map.type |
+
+## G.15.3. R22-11 中删除的规范项
+
+表G.58：R22-11 中删除的规范项
+
+| 标题 |
+|---|
+| xml.systemIdentifier |
+| map.{template}.desc |
+| map.Id |
+
+## G.15.4. R22-11 中新增的约束
+
+表G.59：R22-11 中新增的约束
+
+| 标题 |
+|---|
+| Limits of PositiveUnlimitedInteger |
+| Variation points shall not exists in non-variant roles |
+
+## G.15.5. R22-11 中变更的约束
+
+表G.60：R22-11 中变更的约束
+
+| 标题 |
+|---|
+| Practically UnlimitedInteger shall be limited such that it fits into 64 bit. |
+
+## G.15.6. R22-11 中删除的约束
+
+表G.61：R22-11 中删除的约束
+
+| 标题 |
+|---|
+| Bound model shall be compliant to the pure meta-model |
+| globalInPackage for global elements only |
+
+## G.16. 本文档按照 AUTOSAR 发布版 R23-11 的变更历史
+
+## G.16.1. R23-11 中新增的规范项
+
+表G.62：R23-11 中新增的规范项
+
+| 标题 |
+|---|
+| Permitted LifeCycleState for a Meta-model (Aggregation/Reference/Attribute/Enumeration Literal) |
+| Permitted LifeCycleState for a Meta-model Meta-class |
+| Availability of Inline Text Model Elements |
+| vh.variationPointApplicable |
+
+## G.16.2. R23-11 中变更的规范项
+
+表G.63：R23-11 中变更的规范项
+
+| 标题 |
+|---|
+| Identification of M1 elements in partial models |
+| Splitable up to the Root |
+| Variation Point in Blueprints |
+| Resolve BlueprintVariationPoints on time |
+| Standardized values of CseCodeType |
+| Naming conventions in variant handling patterns |
+| Merging of splitable elements from partial models |
+
+## G.16.3. R23-11 中删除的规范项
+
+none
+
+## G.16.4. R23-11 中新增的约束
+
+表G.64：R23-11 中新增的约束
+
+| 标题 |
+|---|
+| Restriction for the value of the first character in an AnyVersionString |
+| Restriction for the length of the value of an AnyVersionString |
+
+## G.16.5. R23-11 中变更的约束
+
+表G.65：R23-11 中变更的约束
+
+| 标题 |
+|---|
+| shortLabel in VariationPoint shall be unique |
+| Binding Time in Association Pattern |
+
+## G.16.6. R23-11 中删除的约束
+
+表G.66：R23-11 中删除的约束
+
+| 标题 |
+|---|
+
