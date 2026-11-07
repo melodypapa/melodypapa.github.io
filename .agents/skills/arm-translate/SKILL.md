@@ -112,7 +112,9 @@ first.
   cells) — see `references/article-format.md` §Tables for the exhaustive
   criteria and the raw-HTML inline-markup requirement.
 - Figures: every content figure in the chapter embeds, cropped and referenced
-  without caption text (`![Figure8-2](Figure8-2.png)`).
+  without caption text (`![Figure8-2](Figure8-2.png)`); crops carry a margin
+  (~4% of the larger dimension per side, min 6pt — never flush, see
+  `references/article-format.md`).
 
 **Precedence.** The conventions in `references/` are the default. When the
 requester waives one — keep source numbering, skip figures, summarise tables,
@@ -125,7 +127,9 @@ neighbouring article to fill a gap.
 
 Read `references/article-format.md` for naming. Figures only: crop from the
 source PDF with PyMuPDF into the article directory (`Figure<chapter>-<n>.png`),
-keeping source numbering so the figure can be traced back. Figures that are
+keeping source numbering so the figure can be traced back — expand the clip by
+a margin (~4% of the larger dimension per side, min 6pt, clamped to the page)
+so the crop is never flush with its content. Figures that are
 bit-field bars, block diagrams or timing diagrams stay images; anything with
 rows and columns is a table and goes through Step 5 as text.
 

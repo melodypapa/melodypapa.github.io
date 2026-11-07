@@ -34,7 +34,9 @@ revision suffix and the SDEN PDF carries a long descriptive name.
      image alt text): read it as the cell grid, then rebuild the table as text
      (GFM by default; HTML only when the structure qualifies) — the parse's
      `<table>` is a source, not something to paste.
-3. **Figures**: crop from the sibling `.pdf` (PyMuPDF `fitz` is installed).
+3. **Figures**: crop from the sibling `.pdf` (PyMuPDF `fitz` is installed),
+   expanding the clip by a margin (~4% of the larger dimension per side, min
+   6pt — never flush with the content; see `article-format.md`).
    Do not screenshot or re-create a diagram by hand. Tables are never cropped —
    when the parse flattened one, read the cell grid from the PDF to rebuild it
    as text (see `article-format.md`).

@@ -95,6 +95,28 @@ Never add `spec:`, `release:` or tags — that convention belongs to `docs/autos
   rename existing files.
 - Crop from the sibling PDF with PyMuPDF at a resolution that keeps bitmap text
   legible (scale ≥ 2× page zoom).
+- **Leave a margin when cropping (user decision 2026-11-07)** — never crop a
+  figure flush to its content: expand the clip rect on all four sides by ~4% of
+  the larger of (width, height), minimum 6pt, clamped to the page rect. The
+  padding keeps cropped diagrams from rendering edge-to-edge (顶天立地) in the
+  page. Equivalent post-processing: pad the PNG with a uniform white border of
+  ~2% of its pixel width when the clip cannot be expanded (figure touching the
+  page edge):
+
+  ```python
+  import fitz  # pymupdf
+  page = doc[page_no]
+  r = figure_bbox + (-m, -m, m, m)   # m = max(6, 0.04 * max(w, h))
+  pix = page.get_pixmap(matrix=fitz.Matrix(2, 2), clip=r & page.rect)
+  ```
+
+  The same margin rule applies to any other figure-extraction flow (PPTX
+  region crops, image truncation) — a saved figure carries visible whitespace
+  around its content. **Converter-extracted PNGs are not exempt**: corpus
+  artifacts (`image_*.png`) are typically flush — at review, measure the border
+  whitespace of every embedded figure and replace any figure with less than
+  ~1% margin by padding it in place (white border, ~2% of pixel width, min
+  12px); never leave a flush figure in the article (user decision 2026-11-07).
 
 ## Landing pages and navigation
 

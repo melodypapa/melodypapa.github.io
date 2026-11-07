@@ -250,6 +250,12 @@ program-level fixes outside single-article runs (wording sweeps, hygiene).
     refs" were really 21 diagrams + deco); copy each content artifact into
     the article directory (`Figure<N>-<k>.png` by source chapter) and
     reference it wherever the source has it.
+  - **Figure margins (user decision 2026-11-07)**: at review, measure the
+    border whitespace of every embedded figure (PIL `ImageChops` bbox against
+    the corner pixel); converter-extracted artifacts are typically flush —
+    replace any figure with less than ~1% margin by padding it in place
+    (white border, ~2% of pixel width, min 12px). Never leave a flush
+    (顶天立地) figure in the article.
 - **Source tables translate as markdown tables, never as images** (user
   decision 2026-10-25, EcuM StartPreOS table request): the old
   tables-as-images convention (`Table7-1.png`) is retired — every content
