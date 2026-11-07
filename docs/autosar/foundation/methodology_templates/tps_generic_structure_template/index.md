@@ -652,3 +652,301 @@ AUTOSAR 区分外部与内部 AUTOSAR 发布版编号：
   ```
   示例：map.type=full
   ```
+
+## 3. AUTOSAR 顶层结构
+
+AUTOSAR 为所有 AUTOSAR 模板使用一个公共的顶层结构。这一做法为在 AUTOSAR 方法论中设计各制品保留了最大的灵活性。图 3.1 展示了 AUTOSAR 的顶层结构。
+
+![图 3.1：AUTOSAR 模板的顶层结构（Top level structure of AUTOSAR templates）](Figure3-1.png)
+
+**AUTOSAR 模型的顶层结构**
+
+元类 `AUTOSAR` 是所有模板的根。`AUTOSAR` 以 `arPackage` 的形式包含多个 `ARPackage`。
+
+由于元类 `AUTOSAR` 作为所有模板（进而也是相应 XML 文档）的根，`AUTOSAR` 的这一唯一角色还通过赋予 `xml.globalElement` 标签来体现，另参见 [TPS\_GST\_00059]。
+
+`ARPackage` 可以任意嵌套。这些包包含 `PackageableElement`，它们代表 AUTOSAR 模板中特定的自治实体。其中最突出的特化是 `ARElement`（参见第 4.2 章）。
+
+请注意，所有 AUTOSAR 元类都继承自 `ARObject`（参见第 4.1 章）。<sup>1</sup>
+
+**AUTOSAR 顶层的 AdminData**
+
+顶层结构还包含 AdminData，它规定了 AUTOSAR 制品的两个主要方面：
+
+- 以 `DocRevision` 规定的变更管理信息；
+- 文档的语言状态。
+
+更多细节参见第 4.5 章。
+
+聚合的 introduction 刻意不带有 **&lt;atpSplitable&gt;** 构型。它由类 `DocumentationBlock` 表示，后者带有指示混合内容模型的 **&lt;atpMixed&gt;** 构型，参见 [TPS\_GST\_00024]。
+
+**制品的语言状态**
+
+制品的语言状态规定：
+
+1. 文档的“主”语言，规定于顶层 AdminData 中的属性 `language`。
+2. 文档中存在的其他语言。这规定为 `usedLanguages`，它是一个 `MultiLanguagePlainText`，充当文档所用语言的列表。
+
+关于多语言方法的更多细节参见第 9.6 章。以下示例展示了一个 ARXML 文件的顶层结构。该文件同时以英语和德语维护，英语是主语言。
+
+清单3.1：ARXML 文件的顶层结构
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <ADMIN-DATA>
+    <LANGUAGE>EN</LANGUAGE>
+    <USED-LANGUAGES>
+      <L-10 L="EN" xml:space="default">English</L-10>
+      <L-10 L="DE" xml:space="default">German</L-10>
+    </USED-LANGUAGES>
+  </ADMIN-DATA>
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>demo</SHORT-NAME>
+      <ELEMENTS>
+        <!--autosar elements here-->
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+另参见 AUTOSAR。
+
+一个 AUTOSAR 制品按 `ARPackage` 组织，`ARPackage` 包含所谓的 `PackageableElement` 元素。这些元素按其自身的性质定义，彼此独立存在，并通过关联被使用。例如，一个计算方法（computation method）独立定义自身，并通过引用被数据定义所使用。
+
+关于 `ARPackage` 的更多细节请参见第 4.2 章。
+
+为了在顶层提供模型中没有语义的辅助信息，AUTOSAR 支持 **&lt;atpStructuredComment&gt;**，参见 [TPS\_GST\_00381]。
+
+> **1** 显然 `ARObject` 不继承自其自身。
+
+### 3.1. 标识包中的 M1 元素
+
+包用于组织 AUTOSAR M1 模型。AUTOSAR GBR 本身将 M1 模型作为已发布标准的一部分发布。为了清晰地标识这些模型元素，适用以下规则：
+
+**AUTOSAR 交付模型的包结构**
+
+由 AUTOSAR 标准化并以 ARXML 交付的模型元素位于 shortName 为 `AUTOSAR` 的顶层包中。
+
+这意味着由 OEM 或供应商定义的数据元素不应当位于名为 `AUTOSAR` 的顶层包中。
+
+**AUTOSAR 交付模型的结构模式**
+
+AUTOSAR 交付模型的包结构遵循以下模式：
+
+```
+/AUTOSAR
+  /{module}                       --标识规范
+    /{kind}s[_Blueprint | _Example] --标识对象的类别
+```
+
+请注意，AUTOSAR 通常交付 Blueprint。更多细节参见 [TPS\_STDT\_00067]。
+
+一个示例结构为：
+
+| /AUTOSAR                            |              |
+|-------------------------------------|--------------|
+| /ComM                               |              |
+| /ApplicationDataTypes_Blueprint     | [BLUEPRINT]  |
+| /BswModuleEntrys_Blueprint          | [BLUEPRINT]  |
+| /CompuMethods_Blueprint             | [BLUEPRINT]  |
+| /DataConstrs_Blueprint              | [BLUEPRINT]  |
+| /DataTypeMappingSets_Blueprint      | [BLUEPRINT]  |
+| /Documentations                     | [STANDARD]   |
+| /ImplementationDataTypes_Blueprint  | [BLUEPRINT]  |
+| /ImplementationDataTypes            | [STANDARD]   |
+| /ModeDeclarationGroups_Blueprint    | [BLUEPRINT]  |
+| /SwcBswMappings_Blueprint           | [BLUEPRINT]  |
+| /SwComponentTypes_Blueprint         | [BLUEPRINT]  |
+| /BswModuleDescriptions_Blueprint    | [BLUEPRINT]  |
+
+在此示例中，既有实现数据类型的 blueprint 包，也有最终实现为 STANDARD 的实现数据类型的包。
+
+另一个示例为：
+
+| /AUTOSAR                            |              |
+|-------------------------------------|--------------|
+| /AISpecification                    |              |
+| /DataConstrs                        | [STANDARD]   |
+| /PhysicalDimensions                 | [STANDARD]   |
+| /Units                              | [STANDARD]   |
+| /ApplicationDataTypes_Blueprint     | [BLUEPRINT]  |
+| /CompuMethods_Blueprint             | [BLUEPRINT]  |
+| /PortInterfaces_Blueprint           | [BLUEPRINT]  |
+| /PortPrototypeBlueprints_Blueprint  | [BLUEPRINT]  |
+| /ApplicationDataTypes_Example       | [EXAMPLE]    |
+| /BlueprintMappingSets_Example       | [EXAMPLE]    |
+| /CompuMethods_Example               | [EXAMPLE]    |
+| /PortInterfaces_Example             | [EXAMPLE]    |
+| /SwComponentTypes_Example           | [EXAMPLE]    |
+
+此示例展示了一个同时提供 STANDARD、BLUEPRINT 和 EXAMPLE 的用例。
+
+**ECUC 参数定义的包结构**
+
+请注意，出于兼容性原因，ECUC 包结构在 AUTOSAR 4.0 中保持为：
+
+```
+/AUTOSAR
+  /EcucDefs
+```
+
+**AUTOSAR 定义模型元素的结构模式**
+
+AUTOSAR 规范已经为其定义了标准化名称（例如平台类型）的模型元素，应当位于遵循以下模式的包路径中：
+
+```
+/AUTOSAR_{module}[_{postfix}]/{kind}s
+```
+
+在这些模式中，适用以下占位符：
+
+- **{module}** 表示一个模块标志符（**Module Designator**）。模块标志符是以下之一：
+
+  - 模块、库等（作为按照 [\[9\]](#ref-9) 的 API 服务前缀，例如 `CanIf`、`Ifx`、`Compiler`）；
+  - [\[8\]](#ref-8) 中集合 “VirtualModules” 里分类为 ModuleDesignator 的 Keyword 所定义的 abbrName（例如 `AISpecification`）。
+
+- **{postfix}** 表示特定的实现：当且仅当同一系统中出现同一 BSW 模块的多个实现时，才在包结构中附加一个后缀。
+- **{kind}** 表示元素的类别：取值是 `ARElement` 某个子类的名称加复数后缀 “s”。各 `ARElement` 特定的包名通过 UML 标签 `atp.recommendedPackage` 规定（参见 [TPS\_GST\_00049]），并照此显示在类表中（例如由 `BswModuleDescription` 派生的 `BswModuleDescriptions`）。
+
+**ARPackage 的类别**
+
+`ARPackage` 的 `category` 属性取值可以作为该 `ARPackage` 内容性质的一个指示。`category` 属性的某些取值由 AUTOSAR 标准化：`STANDARD`、`BLUEPRINT`、`EXAMPLE`、`ICS`。`category` 属性自定义取值的定义适用 [TPS\_GST\_00016]。
+
+- **BLUEPRINT**：此类包中的元素充当真实对象的一种“蓝图”。
+
+  这特别适用于诸如 `PortInterface` 这类对象——它们并非特意被建模为“蓝图”，但仍是 `AtpBlueprint` 或 `AtpBlueprintable` 的特化。
+
+  例如，编写工具会把这类预定义的 `PortInterface` 作为一种工具箱提供，从中可以把定义复制到真实的项目中。
+
+  这类包中的模型元素可以只定义一部分。因此可能适用特定的语义约束。更多细节参见 [\[2\]](#ref-2) 中的 [TPS\_STDT\_00002]。
+
+  **约束：不支持蓝图的蓝图**
+
+  请注意，特意建模为“蓝图”的对象（例如 `PortPrototypeBlueprint`）同样位于类别为 BLUEPRINT 的包中。严格说来，这意味着它们可以成为“蓝图的蓝图”。这种间接层次并非本意，不受支持。
+
+- **STANDARD**：由相关顶层包的提交方标准化、可以直接按原样用于处理（例如 ECU 参数定义）的元素。
+
+  请注意，这也允许表示利益相关方特定的标准元素，因为 STANDARD 不限于 AUTOSAR 内部应用。
+
+- **ICS**：构成实现一致性声明（**Implementation Conformance Statement**）的元素。
+
+  **约束：ICS 不得包含蓝图**
+
+  由于实现一致性声明始终描述一组一个或多个完整配置的软件模块，类别为 ICS 的包不允许在任何层次上包含类别为 BLUEPRINT 的子包。
+
+  **约束：ICS 不得引用示例**
+
+  ICS 如同生产模型，因此不得引用 EXAMPLE。这样的引用毫无用处，因为在 ICS 中目标需要被忽略。
+
+  关于实现一致性声明内容的更多细节，参见 [\[10\]](#ref-10)。
+
+- **EXAMPLE**：EXAMPLE 包中的元素展示如何应用（例如）STANDARD 或 BLUEPRINT 包中定义的元素。EXAMPLE 包中的元素应当被生成器等忽略。
+
+**ARPackage 的非标准化类别**
+
+不属于上述任一类别的模型元素应当位于一个类别由利益相关方共同商定的包中。在这种情况下也可以完全不设类别。
+
+**约束：包的类别不得冲突**
+
+**包类别冲突表（父类别 × 子类别，含间接子包）**
+
+| 父类别 \ 子类别（含间接子包） | 空 | BLUEPRINT | STANDARD | EXAMPLE | ICS | custom1 | custom2 |
+|-------------------------------|----|-----------|----------|---------|-----|---------|---------|
+| 空                            | ok | ok        | ok       | ok      | ok  | ok      | ok      |
+| BLUEPRINT                     | ok | ok        | conflict | conflict| conflict | conflict | conflict |
+| STANDARD                      | ok | conflict  | ok       | conflict| conflict | conflict | conflict |
+| EXAMPLE                       | ok | conflict  | conflict | ok      | conflict | conflict | conflict |
+| ICS                           | ok | conflict  | conflict | conflict| ok  | conflict | conflict |
+| custom1                       | ok | conflict  | conflict | conflict| conflict | ok   | conflict |
+| custom2                       | ok | conflict  | conflict | conflict| conflict | conflict | ok   |
+
+**特定类别包之间引用的规则表（引用源元素所在包的类别 × 目标包的类别）**
+
+| 引用源元素所在包的类别 | 空 | BLUEPRINT | STANDARD | EXAMPLE | ICS | custom1 | custom2 |
+|------------------------------------|----|-----------|----------|---------|-----|---------|---------|
+| 空                                 | ok | ok        | ok       | ok      | ok  | ok      | ok      |
+| BLUEPRINT                          | ok | ok        | ok       | conflict| ok  | conflict | conflict |
+| STANDARD                           | ok | conflict  | ok       | conflict| conflict | conflict | conflict |
+| EXAMPLE                            | ok | ok        | ok       | ok      | ok  | conflict | conflict |
+| ICS                                | ok | conflict  | ok       | conflict<sup>2</sup> | ok | conflict | conflict |
+| custom1                            | ok | ok        | ok       | ok      | ok  | ok      | ok      |
+| custom2                            | ok | ok        | ok       | ok      | ok  | ok      | ok      |
+
+> **2** 细节参见 [constr\_2573]。（表头注：目标包的类别为空时，应用父包的类别；引用源所在包同理。）
+
+第一张表：若为某个包定义了非空类别，则其所有子包应当具有空类别或相同的类别。
+
+第二张表：此外，“特定类别包中元素之间引用的规则”应当适用。
+
+可以从蓝图维护一个指向由该蓝图派生的“实际”对象的引用。元类 `BlueprintMappingSet` 可用于此目的。可能适用特定的兼容性规则，并在相应的模板中定义。更多细节参见 [\[2\]](#ref-2)。
+
+表3.1：BlueprintMappingSet
+
+| 类         | BlueprintMappingSet                                                                                                                            |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::CommonStructure::StandardizationTemplate::BlueprintMapping                                                                |
+| 注意       | 这表示“实际”模型元素与创建它们所采用的“蓝图”之间映射的容器。标签：atp.recommendedPackage=BlueprintMappingSets                                    |
+| 基类       | ARElement、ARObject、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                   |
+| 聚合于     | ARPackage.element                                                                                                                               |
+
+| 属性         | 类型                | 多重性 | 类别 | 注意                                       |
+|--------------|---------------------|--------|------|--------------------------------------------|
+| blueprintMap | AtpBlueprintMapping | *      | aggr | 这表示该集合中一个特定的蓝图映射。           |
+
+### 3.2. ARPackage、ARElement 与 Identifiable 等的角色
+
+AUTOSAR 元模型使用一些抽象类来表示与模型组织相关的各种能力。图 3.2 提供了它们的概览。
+
+![图 3.2：模型组织类概览（Synopsis of model organization classes）](Figure3-2.png)
+
+**关于 Referrable：**
+
+- `Referrable` 是一个抽象元类，拥有充当引用目标的 `shortName`。`Referrable` 主要用于占用空间小的引用目标，例如 `Sdg`。`Referrable` 特化为 `SingleLanguageReferrable` / `MultilanguageReferrable`。
+- `SingleLanguageReferrable` 的特化适用于嵌入在已经属于多语言对象的文本中的元素（即第 9.2.8 章所述的内联元素（inline elements））。
+- `MultilanguageReferrable` 的特化适用于占用空间相对较小的多语言对象，例如 `DefList`、`Traceable`。
+
+**关于 Describable：**
+
+- `Describable` 是一个抽象元类，表示提供描述但不作为 `Referrable` 或 `Identifiable` 的能力。此处提及仅为完整性。
+
+**关于 Identifiable：**
+
+- `Identifiable` 是继承自 `MultilanguageReferrable` 的抽象类。它用于标识 AUTOSAR 模型中的本质对象。相对于 `Referrable`，它提供了进一步标识元素的手段，例如 `desc`。显然，任何可被标识的东西也应当是可引用的，因此 `Identifiable` 是 `Referrable` 的特化。
+- 嵌套的 `Identifiable` 建立了一个层次化的命名空间（**name space**）。
+
+请注意，如果 `Referrable` 还能包含更进一步的 `Referrable`，那么它就不会构成层次化的命名空间，因为命名空间只由 `Identifiable` 建立。<sup>3</sup>
+
+更多细节参见第 4.3.1 章。
+
+- AUTOSAR 中的 `ARPackage` 是 AUTOSAR 模型中最顶层的 `Identifiable`。这个顶层 `ARPackage` 是命名空间层次的根。
+- `Identifiable`（更准确地说 `Referrable`）的 `shortName` 在其包含的 `Identifiable` 内应当（不区分大小写地）唯一。例如：
+
+  - `ARElement`（例如 `ApplicationSwComponentType`）的 `shortName` 在 `ARPackage`（它是一个 `Identifiable`）内应当唯一。但在另一个 `ARPackage` 中可能存在 `shortName` 相同的其他 `ApplicationSwComponentType`。
+  - `PortPrototype` 的 `shortName` 在一个 `ApplicationSwComponentType`（它是一个 `Identifiable`）内应当唯一。但在其他 `ApplicationSwComponentType` 中可能存在同名的 `PortPrototype`。
+
+**关于 CollectableElement：**
+
+- `CollectableElement` 表示成为集合一部分的能力（尤其是被一个集合引用）。该元类不引入更多属性，也不引入更多可能的聚合。
+- 尽管 `CollectableElement` 与 `ARElement` 相似，但两者并不相同，因为它处理的是完全不同的方面。
+
+**关于 ARPackage：**
+
+- `ARPackage` 可以嵌套：`ARPackage` 可以在 `arPackage` 角色中包含 `ARPackage`。
+- 由此，`ARPackage` 由嵌套的分支（`ARPackage`）和叶子（`PackageableElement` 的子类，尤其是 `ARElement` 的子类）组成。
+- `ARPackage` 是 `Identifiable` 的特化。否则它将无法参与命名空间层次。
+- `PackageableElement` 是一个抽象类，表示对象可以被独立定义的能力。这些对象不需要上下文。这样的对象有时被称为“一等公民”（**first class citizens**）。
+- `PackageableElement`（`ARElement`、`FibexElement`）不能包含更进一步的 `PackageableElement`（相应地即 `ARElement`、`FibexElement`）。
+
+**关于 ARElement 与 FibexElement：**
+
+- `ARElement` 是一个抽象类，通常对 AUTOSAR 模型有所贡献。
+- `FibexElement` 是一个抽象类，表示元素对系统通信与拓扑描述的特定贡献能力。
+- `ARElement` 与 `FibexElement` 都是 `Identifiable`。因此派生的元素也拥有 `shortName`。
+- `ARElement`、`FibexElement` 可以包含从 `Identifiable` 派生的更多元素。
+
+> **3** 尽管如此，AUTOSAR 元模型中并不出现这样的 `Referrable` 嵌套。
