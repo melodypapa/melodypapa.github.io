@@ -13,9 +13,9 @@ title: "内存保护单元（Memory Protection Unit）"
 
 每个内存区域定义了基地址（**base address**）、限制地址（**limit address**）、访问权限（**access permissions**）和内存属性（**memory attributes**）。
 
-有关 MPU 的更多信息，请参阅 Arm® 架构Armv8补充参考手册 （**Arm® Architecture Reference Manual Supplement Armv8**），了解更多 **Armv8-R AArch32** 架构配置文件。
+有关 MPU 的更多信息，请参阅《Arm® 架构参考手册补充 Armv8》（**Arm® Architecture Reference Manual Supplement Armv8**），了解更多 **Armv8-R AArch32** 架构配置文件。
 
-对于数据访问，MPU 检查当前转换机制（**current translation regime**）是否允许对某个区域进行访问（读取或写入）。对于指令访问，MPU 检查该区域是否允许访问，以及转换机制是否允许执行。对于数据和指令访问，如果允许访问，MPU 将分配为该区域定义的内存属性。如果不允许访问，则发生权限错误。发生转换错误的原因如下：
+对于数据访问，MPU 检查当前转换机制（**current translation regime**）是否允许对某个区域进行访问（读取或写入）。对于指令访问，MPU 检查该区域是否允许访问，以及转换机制是否允许执行。对于数据和指令访问，如果允许访问，MPU 将分配为该区域定义的内存属性。如果不允许访问，则发生权限错误。发生转换故障的原因如下：
 
 * 如果访问命中其中一个 **MPU** 中的多个区域。
 * 如果访问未命中任何 **MPU** 区域，并且无法使用背景区域（基于 **MPU** 配置和当前特权级别）。
@@ -24,19 +24,19 @@ title: "内存保护单元（Memory Protection Unit）"
 
 每个处理器内核都有一个 **EL1** 控制的 **MPU**，具有 **16**、**20** 或 **24** 个可编程区域，以及一个 **EL2** 控制的 **MPU**，后者可选地支持 **0**、**16**、**20** 或 **24** 个可编程区域。当 **EL2** 控制的 **MPU** 和虚拟化被使能时，所有使用 **EL0/EL1** 转换机制的事务都会在两个 **MPU** 中执行查找。将生成的属性组合起来，以便最少权限的属性（**least permissive attributes**）被采用。这两个阶段的保护允许虚拟机管理程序保留对 **EL0/EL1** 转换机制的控制，从而实现对虚拟化的支持。当软件执行使用 **EL2** 转换机制时，仅 **EL2** 控制的 **MPU**被使用。
 
-##  2. MPU 区域
+## 2. MPU 区域
 
-区域是从基地址（**base address**）开始延伸到限制地址（**limit address**）（包括：限制地址）的连续地址范围。
+区域是从基地址（**base address**）开始延伸到限制地址（**limit address**）（包含限制地址）的连续地址范围。
 
-基地址由 **PRBAR** （**EL2** 控制的 **MPU** 的 **HPBAR**）配置。限制地址由 **PRLAR**（**EL2** 控制的 **MPU** 的 配置）配置。基地址与 **64** 字节边界对齐，限制地址与 **64** 字节边界以下的字节对齐。基地址和限制地址都包括在内，这意味着区域内的地址由以下公式给出：
+基地址由 **PRBAR** （**EL2** 控制的 **MPU** 的 **HPBAR**）配置。限制地址由 **PRLAR**（**EL2** 控制的 **MPU** 的 **HPRLAR**）配置。基地址与 **64** 字节边界对齐，限制地址与 **64** 字节边界以下的字节对齐。基地址和限制地址都包括在内，这意味着区域内的地址由以下公式给出：
 
 ```C
 PRBAR.BASE:0b000000 <= address <= PRLAR.LIMIT:0b111111
 ```
 
-其中冒号（**：**）是位连接运算符。
+其中冒号（`:`）是位连接运算符。
 
-区域的最小为 **64** 个字节。
+区域的最小大小为 **64** 个字节。
 
 **PRBAR** 和 **PRLAR** 还包含：
 
@@ -65,13 +65,22 @@ PRBAR.BASE:0b000000 <= address <= PRLAR.LIMIT:0b111111
 
 下表显示了EL1控制的MPU背景区域的指令访问。
 
-![Table9-1](Table9-1.png)
+| 地址范围 | 指令缓存（SCTLR.I）启用 | 指令缓存（SCTLR.I）禁用 | 从不执行（XN） |
+| --- | --- | --- | --- |
+| 0x00000000-0x7FFFFFFF | 普通不可共享直写可缓存（Normal Non-shareable Write-Through, Cacheable） | 普通可共享不可缓存（Normal Shareable Non-cacheable） | 允许执行 |
+| 0x80000000-0xFFFFFFFF | - | - | 从不执行 |
 
 #### 2.1.2. EL1 控制的MPU背景区域，数据访问
 
 下表显示了EL1控制的MPU背景区域的数据访问。
 
-![Table9-2](Table9-2.png)
+| 地址范围 | 数据缓存（SCTLR.C）启用 | 数据缓存（SCTLR.C）禁用 |
+| --- | --- | --- |
+| 0x00000000-0x3FFFFFFF | 普通不可共享回写写分配可缓存（Normal Non-shareable Write-Back, Write-Allocate, Cacheable） | 普通可共享不可缓存（Normal Shareable Non-cacheable） |
+| 0x40000000-0x5FFFFFFF | 普通不可共享直写可缓存（Normal Non-shareable Write-Through, Cacheable） | 普通可共享不可缓存（Normal Shareable Non-cacheable） |
+| 0x60000000-0x7FFFFFFF | 普通可共享不可缓存（Normal Shareable Non-cacheable） | 普通可共享不可缓存（Normal Shareable Non-cacheable） |
+| 0x80000000-0xBFFFFFFF | Device-nGnRE | Device-nGnRE |
+| 0xC0000000-0xFFFFFFFF | Device-nGnRnE | Device-nGnRnE |
 
 ### 2.2. EL2控制的MPU背景区域
 
@@ -87,13 +96,22 @@ PRBAR.BASE:0b000000 <= address <= PRLAR.LIMIT:0b111111
 
 下表显示了用于指令访问的EL2控制的MPU背景区域。
 
-![Table9-3](Table9-3.png)
+| 地址范围 | 指令缓存（HSCTLR.I）启用 | 指令缓存（HSCTLR.I）禁用 | 从不执行（XN） |
+| --- | --- | --- | --- |
+| 0x00000000-0x7FFFFFFF | 普通不可共享直写可缓存（Normal Non-shareable Write-Through, Cacheable） | 普通可共享不可缓存（Normal Shareable Non-cacheable） | 允许执行 |
+| 0x80000000-0xFFFFFFFF | - | - | 从不执行 |
 
 #### 2.2.2. EL2控制的MPU背景区域，数据访问
 
 下表显示了用于数据访问的EL2控制的MPU背景区域。
 
-![Table9-4](Table9-4.png)
+| 地址范围 | 数据缓存（HSCTLR.C）启用 | 数据缓存（HSCTLR.C）禁用 |
+| --- | --- | --- |
+| 0x00000000-0x3FFFFFFF | 普通不可共享回写写分配可缓存（Normal Non-shareable Write-Back, Write-Allocate, Cacheable） | 普通可共享不可缓存（Normal Shareable Non-cacheable） |
+| 0x40000000-0x5FFFFFFF | 普通不可共享直写可缓存（Normal Non-shareable Write-Through, Cacheable） | 普通可共享不可缓存（Normal Shareable Non-cacheable） |
+| 0x60000000-0x7FFFFFFF | 普通可共享不可缓存（Normal Shareable Non-cacheable） | 普通可共享不可缓存（Normal Shareable Non-cacheable） |
+| 0x80000000-0xBFFFFFFF | Device-nGnRE | Device-nGnRE |
+| 0xC0000000-0xFFFFFFFF | Device-nGnRnE | Device-nGnRnE |
 
 ### 2.3. 默认缓存能力
 
@@ -123,19 +141,46 @@ PRBAR.BASE:0b000000 <= address <= PRLAR.LIMIT:0b111111
 
 下表显示了内存类型分配如何作为两阶段查找的一部分进行组合。
 
-![Table9-5](Table9-5.png)
+| EL1 控制的 MPU 分配 | EL2 控制的 MPU 分配 | 结果类型 |
+| --- | --- | --- |
+| Device-nGnRnE | 任意 | Device-nGnRnE |
+| Device-nGnRE | Device-nGnRnE | Device-nGnRnE |
+| Device-nGnRE | 不是 Device-nGnRnE | Device-nGnRE |
+| Device-nGRE | Device-nGnRnE | Device-nGnRnE |
+| Device-nGRE | Device-nGnRE | Device-nGnRE |
+| Device-nGRE | 不是（Device-nGnRnE 或 Device-nGnRE） | Device-nGRE |
+| Device-GRE | Device-nGnRnE | Device-nGnRnE |
+| Device-GRE | Device-nGnRE | Device-nGnRE |
+| Device-GRE | Device-nGRE | Device-nGRE |
+| Device-GRE | Device-GRE 或 Normal | Device-GRE |
+| Normal | 任意设备类型 | 第 2 阶段分配的设备类型 |
+| Normal | Normal | Normal |
 
 #### 3.1.2. 合并可缓存性属性
 
 下表显示了如何将可缓存性分配合并为两阶段查找的一部分。
 
-![Table9-6](Table9-6.png)
+| EL1 控制的 MPU 分配 | EL2 控制的 MPU 分配 | 结果可缓存性 |
+| --- | --- | --- |
+| 不可缓存（Non-cacheable） | 任意 | 不可缓存（Non-cacheable） |
+| 任意 | 不可缓存（Non-cacheable） | 不可缓存（Non-cacheable） |
+| 直写可缓存（Write-Through Cacheable） | 直写或回写可缓存 | 直写可缓存（Write-Through Cacheable） |
+| 直写或回写可缓存 | 直写可缓存（Write-Through Cacheable） | 直写可缓存（Write-Through Cacheable） |
+| 回写可缓存（Write-Back Cacheable） | 回写可缓存（Write-Back Cacheable） | 回写可缓存（Write-Back Cacheable） |
 
 #### 3.1.3. 合并可共享性属性
 
 下表显示了如何将可共享性分配合并为两阶段查找的一部分。
 
-![Table9-7](Table9-7.png)
+| EL1 控制的 MPU 分配 | EL2 控制的 MPU 分配 | 结果可共享性 |
+| --- | --- | --- |
+| 外部可共享（Outer Shareable） | 任意 | 外部可共享（Outer Shareable） |
+| 内部可共享（Inner Shareable） | 外部可共享（Outer Shareable） | 外部可共享（Outer Shareable） |
+| 内部可共享（Inner Shareable） | 内部可共享（Inner Shareable） | 内部可共享（Inner Shareable） |
+| 内部可共享（Inner Shareable） | 不可共享（Non-shareable） | 内部可共享（Inner Shareable） |
+| 不可共享（Non-shareable） | 外部可共享（Outer Shareable） | 外部可共享（Outer Shareable） |
+| 不可共享（Non-shareable） | 内部可共享（Inner Shareable） | 内部可共享（Inner Shareable） |
+| 不可共享（Non-shareable） | 不可共享（Non-shareable） | 不可共享（Non-shareable） |
 
 ## 4. MPU寄存器访问
 
@@ -165,99 +210,99 @@ op2 = 0b101，用于奇数区域。
 
 **PRBAR0-PRBAR15**
 
-```ARM
+```arm
 MCR p15, 0, <Rt>, c6, CRm, op2
 ```
 
 **PRLAR0-PRLAR15**
 
-```ARM
+```arm
 MCR p15, 0, <Rt>, c6, CRm, op2
 ```
 
 **HPRBAR0-HPRBAR15**
 
-```ARM
+```arm
 MCR p15, 4, <Rt>, c6, CRm, op2
 ```
 
 **HPRLAR0-HPRLAR15**
 
-```ARM
+```arm
 MCR p15, 4, <Rt>, c6, CRm, op2
 ```
 
 **PRBAR16-PRBAR23**
 
-```ARM
+```arm
 MCR p15, 1, <Rt>, c6, CRm, op2
 ```
 
 **PRLAR16-PRLAR23**
 
-```ARM
+```arm
 MCR p15, 1, <Rt>, c6, CRm, op2
 ```
 
 **HPRBAR16-HPRBAR23**
 
-```ARM
-MCR p15, 5, <Rt>，c6，CRm，op2
+```arm
+MCR p15, 5, <Rt>, c6, CRm, op2
 ```
 
 **HPRLAR16-HPRLAR23**
 
-```ARM
-MCR p15，5，<Rt>，c6，CRm，op2
+```arm
+MCR p15, 5, <Rt>, c6, CRm, op2
 ```
 
 #### 4.2.2. 读取基址和限制寄存器：
 
 **PRBAR0-PRBAR15**
 
-```ARM
+```arm
 MRC p15, 0, <Rt>, c6, CRm, op2
 ```
 
 **PRLAR0-PRLAR15**
 
-```ARM
+```arm
 MRC p15, 0, <Rt>, c6, CRm, op2
 ```
 
 **HPRBAR0-HPRBAR15**
 
-```ARM
+```arm
 MRC p15, 4, <Rt>, c6, CRm, op2
 ```
 
 **HPRLAR0-HPRLAR15**
 
-```ARM
+```arm
 MRC p15, 4, <Rt>, c6, CRm, op2
 ```
 
 **PRBAR16-PRBAR23**
 
-```ARM
+```arm
 MRC p15, 1, <Rt>, c6, CRm, op2
 ```
 
 **PRLAR16-PRLAR23**
 
-```ARM
+```arm
 MRC p15, 1, <Rt>, c6, CRm, op2
 ```
 
 **HPRBAR16-HPRBAR23**
 
-```ARM
+```arm
 MRC p15, 5, <Rt>, c6, CRm, op2
 ```
 
 **HPRLAR16-HPRLAR23**
 
-```ARM
+```arm
 MRC p15, 5, <Rt>, c6, CRm, op2
 ```
 
@@ -295,7 +340,10 @@ MRC p15, 5, <Rt>, c6, CRm, op2
 
 下表显示了如果实现了 0 或 16 个 EL2 控制的 MPU 区域，PRSELR 位的分配情况。
 
-![Table4-201](Table4-201.png)
+| 位 | 名称 | 功能 |
+| --- | --- | --- |
+| [31:4] | - | 保留，RES0。 |
+| [3:0] | REGION | PRBAR 和 PRLAR 中可见的当前区域编号。如果实现了 0 区域 MPU，则写入此寄存器的结果不可预测（**UNPREDICTABLE**）。写入大于或等于 16 的值结果不可预测。 |
 
 **20 或 24 个 EL2 控制的 MPU 区域**
 
@@ -305,13 +353,16 @@ MRC p15, 5, <Rt>, c6, CRm, op2
 
 下表显示了如果实现了 20 或 24 个 EL2 控制的 MPU 区域，PRSELR 位分配情况。
 
-![Table4-202](Table4-202.png)
+| 位 | 名称 | 功能 |
+| --- | --- | --- |
+| [31:5] | - | 保留，RES0。 |
+| [4:0] | REGION | PRBAR 和 PRLAR 中可见的当前区域编号。如果实现了 20 区域 MPU，则写入大于或等于 20 的值结果不可预测（**UNPREDICTABLE**）。如果实现了 24 区域 MPU，则写入大于或等于 24 的值结果不可预测。 |
 
 **访问 PRSELR：**
 
 ```arm
-MRC p15, 0, <Rt>, c6, c2, 1 ; Read PRSELR into Rt
-MCR p15, 0, <Rt>, c6, c2, 1 ; Write Rt to PRSELR
+MRC p15, 0, <Rt>, c6, c2, 1 ;将 PRSELR 读入 Rt
+MCR p15, 0, <Rt>, c6, c2, 1 ;将 Rt 写入 PRSELR
 ```
 
 ### 5.2. 保护区域基址寄存器（PRBAR）
@@ -344,30 +395,46 @@ MCR p15, 0, <Rt>, c6, c2, 1 ; Write Rt to PRSELR
 
 下表显示了 **PRBAR** 位分配：
 
-![Table4_195](Table4_195.png)
+| 位 | 名称 | 功能 |
+| --- | --- | --- |
+| [31:6] | BASE | 包含所选 EL1 控制的 MPU 内存区域下界（含）的位 [31:6]。该值零扩展以提供要检查的基地址。 |
+| [5] | - | 保留，RES0。 |
+| [4:3] | SH[1:0] | 可共享性字段。 |
+| [2:1] | AP[2:1] | 访问权限位。 |
+| [0] | XN | 从不执行。 |
 
 下表描述了普通存储器的 SH[1:0] 字段编码。
 
-![Table4_196](Table4_196.png)
+| SH[1:0] | 普通内存 |
+| --- | --- |
+| 0b00 | 不可共享（Non-shareable） |
+| 0b01 | **UNPREDICTABLE** |
+| 0b10 | 外部可共享（Outer Shareable） |
+| 0b11 | 内部可共享（Inner Shareable） |
 
 下表描述了 EL1 控制的 MPU 的数据访问权限。
 
-![Table4_197](Table4_197.png)
+| AP[2:1] | 来自 EL1 的访问 | 来自 EL0 的访问 |
+| --- | --- | --- |
+| 0b00 | 读取/写入 | 无 |
+| 0b01 | 读取/写入 | 读取/写入 |
+| 0b10 | 只读 | 无 |
+| 0b11 | 只读 | 只读 |
 
 此寄存器重置时为未知值。
 
 **要访问 PRSELR 选择的 PRBAR：**
 
 ```arm
-MRC p15, 0, <Rt>, c6, c3, 0 ；将 PRBAR 读入 Rt
-MCR p15, 0, <Rt>, c6, c3, 0 ；将 Rt 写入 PRBAR
+MRC p15, 0, <Rt>, c6, c3, 0 ;将 PRBAR 读入 Rt
+MCR p15, 0, <Rt>, c6, c3, 0 ;将 Rt 写入 PRBAR
 ```
 
 可直接访问 PRBAR0 至 PRBAR23。要访问 PRBARn，其中 n 以二进制数表示：
 
 ```arm
-MRC p15, 0+nDIV16, <Rt>, c6, c8+n[3:1], 4*n[0] ；将 PRBARn 读入 Rt
-MCR p15, 0+nDIV16, <Rt>, c6, c8+n[3:1], 4*n[0] ；将 Rt 写入 PRBARn
+MRC p15, 0+nDIV16, <Rt>, c6, c8+n[3:1], 4*n[0] ;将 PRBARn 读入 Rt
+MCR p15, 0+nDIV16, <Rt>, c6, c8+n[3:1], 4*n[0] ;将 Rt 写入 PRBARn
 ```
 
 ### 5.3. 保护区域限制地址寄存器（PRLAR）
@@ -400,7 +467,12 @@ MCR p15, 0+nDIV16, <Rt>, c6, c8+n[3:1], 4*n[0] ；将 Rt 写入 PRBARn
 
 下表显示了 **PRLAR** 位分配。
 
-![Table4_199](Table4_199.png)
+| 位 | 名称 | 功能 |
+| --- | --- | --- |
+| [31:6] | LIMIT | 包含所选 EL1 控制的 MPU 内存区域上界（含）的位 [31:6]。该值后缀为 0x3F 以提供要检查的限制地址。重置为 **UNKNOWN** 值。 |
+| [5:4] | - | 保留，RES0。 |
+| [3:1] | AttrIndx[2:0] | 索引 **MAIRx** 寄存器之一中的一组属性。重置为 **UNKNOWN** 值。 |
+| [0] | EN | 区域使能。0：区域禁用。1：区域启用。此字段重置为零。 |
 
 **要访问 PRLAR：**
 
@@ -424,6 +496,36 @@ MPUIR 表示由 EL1 控制的 MPU 实现的可编程内存区域的数量。
 
 此寄存器的访问方式如下：
 
+| EL0 | EL1 | EL2 |
+| --- | --- | --- |
+| -   | RO  | RO  |
+
+**捕获和启用**
+
+当设置 **HCR.TID1** 时，对 **MPUIR** 的 **EL1** 读访问会被捕获到 **EL2**。
+
+**配置**
+
+此寄存器在所有构建配置中都可用。
+
+**属性**
+
+**MPUIR** 是一个 32 位寄存器。
+
+| 位 | 名称 | 功能 |
+| --- | --- | --- |
+| [31:24] | - | 此字段为 RES0。 |
+| [23:16] | IREGION | 此字段为 RES0。 |
+| [15:8] | DREGION | 指示由 **EL1** 控制的 **MPU** 实现的可编程内存区域数量。该值可以是 16、20 或 24。 |
+| [7:1] | - | 此字段为 RES0。 |
+| [0] | nU | 非统一 MPU（Not Unified MPU）。指示 **MPU** 是否实现统一内存映射。0：统一内存映射。 |
+
+要访问 **MPUIR**：
+
+```arm
+MRC p15, 0, <Rt>, c0, c0, 4 ; 将 MPUIR 读入 Rt
+```
+
 ### 5.5. 内存属性间接寄存器 0 和 1 (MAIR0/MAIR1)
 
 **MAIR0** 和 **MAIR1** 提供与保护区域限制地址寄存器中可能的 **AttrIndx** 值相对应的内存属性编码。该寄存器为从 Hyp 模式以外的状态进行的内存访问提供值。
@@ -436,7 +538,7 @@ MPUIR 表示由 EL1 控制的 MPU 实现的可编程内存区域的数量。
 | --- | --- | --- |
 | -   | RW  | RW  |
 
-捕获和启用
+**捕获和启用**
 
 当设置 **HCR.TVM** 时，对这些寄存器的 **EL1** 写访问将被捕获到 **EL2**。当设置 **HCR.TRVM** 时，**EL1** 读访问将被捕获到 **EL2**。当设置 **HSTR.T10** 时，**EL1** 访问将被捕获到 **EL2**。
 
@@ -454,30 +556,51 @@ MPUIR 表示由 EL1 控制的 MPU 实现的可编程内存区域的数量。
 
 下表显示了 **MAIR0** 和 **MAIR1** 位分配。
 
-![Table4_162](Table4_162.png)
+| 位 | 名称 | 功能 |
+| --- | --- | --- |
+| [7:0] | Attr<n> | 保护区域限制地址寄存器中 AttrIndx[2:0] 条目的内存属性编码，其中：AttrIndx[2] 选择相应的 MAIR（为 0 选择 MAIR0，为 1 选择 MAIR1）；AttrIndx[2:0] 给出 Attr<n> 中的 <n> 值。 |
 
 下表显示了 Attr<n>[7:4] 位分配。
 
-![Table4_163](Table4_163.png)
+| 位 | 描述 |
+| --- | --- |
+| 0b0000 | 设备内存。设备内存类型见下表。 |
+| 0b00RW，RW 不为 00 | 普通内存，外部直写瞬态（Outer Write-Through transient）。 |
+| 0b0100 | 普通内存，外部不可缓存（Outer Non-Cacheable）。 |
+| 0b01RW，RW 不为 00 | 普通内存，外部回写瞬态（Outer Write-Back transient）。 |
+| 0b10RW | 普通内存，外部直写非瞬态（Outer Write-Through non-transient）。 |
+| 0b11RW | 普通内存，外部回写非瞬态（Outer Write-Back non-transient）。 |
 
 下表显示了 Attr<n>[3:0] 位分配。Attr<n>[3:0] 的编码取决于 Attr<n>[7:4] 的值。
 
-![Table4_164](Table4_164.png)
+| 位 | Attr<n>[7:4] 为 0000 时的描述 | Attr<n>[7:4] 不为 0000 时的描述 |
+| --- | --- | --- |
+| 0b0000 | Device-nGnRnE 内存 | **UNPREDICTABLE** |
+| 0b00RW，RW 不为 00 | **UNPREDICTABLE** | 普通内存，内部直写瞬态 |
+| 0b0100 | Device-nGnRE 内存 | 普通内存，内部不可缓存 |
+| 0b01RW，RW 不为 00 | **UNPREDICTABLE** | 普通内存，内部回写瞬态 |
+| 0b1000 | Device-nGRE 内存 | 普通内存，内部直写非瞬态（RW=00） |
+| 0b10RW，RW 不为 00 | **UNPREDICTABLE** | 普通内存，内部直写非瞬态 |
+| 0b1100 | Device-GRE 内存 | 普通内存，内部回写非瞬态（RW=00） |
+| 0b11RW，RW 不为 00 | **UNPREDICTABLE** | 普通内存，内部回写非瞬态 |
 
-下表显示了第 174 页表 4-163：Attr<n>[7:4] 位分配和第 174 页表 4-164：Attr<n>[3:0] 位分配中的某些 Attr<n> 编码中使用的 R 和 W 位的编码，分别用于定义读取分配和写入分配策略。
+下表显示了第 3-148 页表 3-106：Attr<n>[7:4] 位分配和表 3-107：Attr<n>[3:0] 位分配中的某些 Attr<n> 编码中使用的 R 和 W 位的编码，分别用于定义读取分配和写入分配策略。
 
-![Table4_165](Table4_165.png)
+| R 或 W | 描述 |
+| --- | --- |
+| 0 | 不分配（Do not allocate） |
+| 1 | 分配（Allocate） |
 
 **要访问 MAIR0：**
 
 ```arm
-MRC p15, 0, <Rt>, c10, c2, 0 ；将 MAIR0 读入 Rt
-MCR p15, 0, <Rt>, c10, c2, 0 ；将 Rt 写入 MAIR0
+MRC p15, 0, <Rt>, c10, c2, 0 ;将 MAIR0 读入 Rt
+MCR p15, 0, <Rt>, c10, c2, 0 ;将 Rt 写入 MAIR0
 ```
 
 **要访问 MAIR1：**
 
 ```arm
-MRC p15, 0, <Rt>, c10, c2, 1 ；将 MAIR1 读入 Rt
-MCR p15, 0, <Rt>, c10, c2, 1 ；将 Rt 写入 MAIR1
+MRC p15, 0, <Rt>, c10, c2, 1 ;将 MAIR1 读入 Rt
+MCR p15, 0, <Rt>, c10, c2, 1 ;将 Rt 写入 MAIR1
 ```
