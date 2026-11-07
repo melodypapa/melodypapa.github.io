@@ -6708,3 +6708,980 @@ AttributeValueVariationPoint 进一步分为八个（源文列七——此处按
 | 注意       | 该类表示为数值型时间值表达公式的能力。                                                                                          |
 | 基类       | ARObject、AttributeValueVariationPoint、FormulaExpression、SwSystemconstDependentFormula                                          |
 | 聚合于     | VariationPointProxy.valueAccess                                                                                                |
+
+#### 7.6.9. 组合 PreBuild 与 PostBuild 变体点
+
+如果某个特定变体点的 vh.latestBindingTime 被设为 PostBuild（[constr\_2517]），那么该变体点可以拥有一个由 PostBuildVariantCondition 表示的 PostBuild 分支<sup>9</sup>。然而，它也可以包含一个 PreBuild 分支。这是因为 VariationPoint 的 PreBuild 分支与 PostBuild 分支并不互斥。
+
+**PreBuild 禁用 PostBuild 支持**
+
+可以把一个变体点同时定义为 PreBuild 与 PostBuild。若 PreBuild 条件为 false，则不期望实现该变体对象（包括 PostBuild 条件）。
+
+换言之，变体点中的系统常量表达式可以甚至在 PreBuild 时就禁用 PostBuild 可变性。
+
+表 7.20 总结了 [TPS\_GST\_00266] 提供的选项。
+
+表7.20：组合 PreBuild 与 PostBuild 变体点
+
+| PreBuild                | PostBuild             | 结果                                              |
+|--------------------------|------------------------|-----------------------------------------------------|
+| 完全没有条件              |                        | VP 所附着的元素始终被选中                             |
+| 〃                       | 未施加的条件            | 纯 PostBuild 变体点                                   |
+| 〃                       | 条件被施加为 true       | 已施加、被选中的 PostBuild VP（在 ARXML 中不可见）      |
+| 〃                       | 条件被施加为 false      | 已施加、被取消选择的 PostBuild VP（在 ARXML 中不可见）  |
+| 未施加的条件              | 完全没有条件            | 纯 PreBuild VP                                       |
+| 〃                       | 未施加的条件            | PreBuild 可选择的 PostBuild VP                       |
+| 〃                       | 条件被施加为 true       | PreBuild 可选择的 PostBuild VP（在 ARXML 中不可见）    |
+| 〃                       | 条件被施加为 false      | PreBuild 可选择的 PostBuild VP（在 ARXML 中不可见）    |
+| 条件被施加为 true         | 完全没有条件            | VP 所附着的元素始终被选中                             |
+| 〃                       | 未施加的条件            | 纯 PostBuild VP                                      |
+| 〃                       | 条件被施加为 true       | 已施加、被选中的 PostBuild VP（在 ARXML 中不可见）      |
+| 〃                       | 条件被施加为 false      | 已施加、被取消选择的 PostBuild VP（在 ARXML 中不可见）  |
+| 条件被施加为 false        | 完全没有条件            | 被取消选择的 PreBuild VP，无 PostBuild VP             |
+| 〃                       | 未施加的条件            | 〃                                                  |
+| 〃                       | 条件被施加为 true       | 〃                                                  |
+| 〃                       | 条件被施加为 false      | 〃                                                  |
+
+> **9** 反之，一个变体点是否为 PostBuild 可以从它包含 PostBuildVariantCondition 这一事实识别。
+
+#### 7.6.10. 注记与限制
+
+1. 不支持（[TPS\_GST\_00199]、[TPS\_GST\_00200]）在同一位置聚合多于一个 VariationPoint。不过，为单个变体点同时定义 PreBuild 与 PostBuild 条件是可能的。
+2. **只能有一个施加时间**
+
+   无法为单个变体点声明多个施加时间。该限制的理由是：如果多个施加时间真的在同一位置被使用，那么它们的条件多半也不同。也就是说，不会存在一个带多个施加时间的变体点，而是会有若干变体点。
+
+3. 由于处理变体的固有性质，在全部 PreBuild 变体被解析之前，可能存在多个具有相同 ShortName 的元素。
+
+   这也意味着：在全部变体被解析之前，可能无法完全完成模型的一致性检查。这是因为变体处理的目的之一就是建模若干互不兼容的变体并提供手段来选择其一、丢弃其余，而这意味着模型在该选择做出之前无法完全一致。
+
+   关于这一问题的更多细节，另见第 7.6.2 节（[constr\_2512]）。
+
+4. **对 PreBuild 与 PostBuild 变体采用不同方法的理由**
+
+   对 PreBuild 与 PostBuild 变体点区别处理的原因是：如果在两种情况下都只使用 ConditionByFormula（即只有 PreBuild 分支），那么该条件就必须在启动时求值。然而这会带来通常不可接受的性能代价。因此我们对 PostBuild 变体点采用更简单的方法，它只需要一次比较。
+
+5. **从不变部分到变体部分的引用**
+
+   AUTOSAR 模型中的引用也可以是从不变（相应地 PreBuild 变体）元素指向 post build 变体元素的——只要变体元素的全部变体对不变元素都有意义（参见 [TPS\_GST\_00435]）。
+
+   一个示例用例是条件存在的 SwComponentPrototype，其 LatestBindingTime = postBuild。该变体 SwComponentPrototype 的 runnable 到 task 的映射是一个 preCompileTime 的 ECUC 参数。但这一映射对该变体 SwComponentPrototype 的所有变体都有意义，因为它在此之前已被解析，不需要任何附加条件。
+
+6. shortLabel 也可以通过把 VariationPoint 做成 Identifiable 来实现（见第 4.3 章）。但 Identifiable 对我们的目的而言代价过高：
+
+   - Identifiable 的 XML 占用远大于 shortLabel 属性。
+   - shortLabel 始终可选，而 Identifiable 添加一个必需的 shortName。
+
+   此外，shortLabel 面向局部标识（在下一个直接外层 Identifiable 内），而 Identifiable 面向引用目的。
+
+#### 7.6.11. 把变体点用于蓝图化
+
+如 [\[2\]](#ref-2) 的 [TPS\_STDT\_00028] 所规定，VariationPoint 与 AttributeValueVariationPoint 也用于规定从蓝图派生对象的细节。
+
+**蓝图中的变体点**
+
+蓝图中的变体处理与 AUTOSAR 其他地方的变体处理不同：
+
+- 处理蓝图可以视为一个单独的施加时间，它发生在 systemDesignTime 之前。
+- 模型不给出如何处理该变体的精确指令；相反，只有关于需要做什么的文字描述可用。
+- 变体点可以出现在蓝图中作为 ARElement 子类的全部元素上。
+
+##### 7.6.11.1. 变体点何时是蓝图变体点？
+
+类 VariationPoint（见表 7.8）聚合一个 blueprintCondition 或 formalBlueprintGenerator。该对象只能在蓝图中聚合——也就是说，只有当 VariationPoint 位于类别为 BLUEPRINT 的 AUTOSAR 包中时它才可能出现。它不得出现在系统配置中。
+
+如果这样的 DocumentationBlock 存在，那么它包含如何进一步处理该变体点的指令。这些指令的具体格式没有详细规定，因为它们面向人类或专门化的（可能是专有的）工具。
+
+类似地，AttributeValueVariationPoint 拥有一个属性 blueprintValue，其用途与角色 blueprintCondition 中的 DocumentationBlock 相同。
+
+**blueprintCondition 不能是变体**
+
+作为 [constr\_2559] 的后果，VariationPoint 所聚合的 DocumentationBlock 内不允许再有 VariationPoint。其理由是：这样的变体必须在 systemDesignTime 或更晚解析，而这在蓝图被处理之后。
+
+##### 7.6.11.2. BlueprintDerivationTime
+
+**BlueprintDerivationTime 的语义**
+
+为支持蓝图，标签 vh.latestBindingTime 可以取值 BluePrintDerivationTime。这样的变体点只能出现在蓝图中，不得被复制到系统配置。
+
+在这种情况下，变体点不能有 swSyscond 也不能有 postBuildVariantCondition（由 [\[2\]](#ref-2) 的 [constr\_2558] 定义），因为这些字段包含的信息无法在 BluePrintDerivationTime 处理。
+
+类似地，此时 AttributeValueVariationPoint 的取值没有意义。因此它不应当被求值，取值应当为 undefined。另见第 7.4.2 节。
+
+##### 7.6.11.3. 哪些 AUTOSAR 模型元素可以是蓝图变体点？
+
+非蓝图变体点——即在 systemDesignTime 或更晚解析的变体点——不能在模型的任意处使用。它们的适用性被元模型限制为带有构型 **&lt;atpVariation&gt;** 的那些位置。这样做有充分的理由；例如，RTE 应当能够在该位置处理变体点并生成合适的代码。
+
+AUTOSAR 元素 PackageableElement 以及派生自它的 ARElement 构成一个特例。由于 PackageableElement 以最晚施加时间 systemDesignTime 可变，任何 ARElement 都可能是可变的，这显然不是本意。
+
+在蓝图中，任何 ARElement 都可以是变体点。
+
+**按时解析 BlueprintVariationPoints**
+
+当元素从蓝图复制到系统配置时，只允许转移那些在 systemDesignTime 或更晚允许作为变体点的变体点。
+
+因此，蓝图中任何 ARElement（或派生自它的东西）的变体都隐含一个 bluePrintDerivationTime 的最晚施加时间。
+
+### 7.7. 已求值的变体（Evaluated Variants）
+
+#### 7.7.1. 动机
+
+变体处理并不止于描述变体在何处发生（即本章前面几节描述的那些模式）。这种描述往往隐含数量巨大的变体<sup>10</sup>，但其中只有一部分实际被使用。
+
+这可能是因为软件被构建为支持比某个特定 OEM 的选项更宽的范围。但由于供应商有几个 OEM 客户，他可能把软件设计为满足全部变体。交付给 OEM 的内容可以只包含其特定变体的制品<sup>11</sup>，或至少只针对这些变体通过认证。
+
+变体由系统常量取值的集合描述。因此，需要描述哪些系统常量取值的组合是有效的。这为 OEM 与供应商以标准化的方式就该主题交换信息提供了基础。
+
+> **10** 仅五个备选项、每个有三个互斥选项，就产出一共 3⁵ = 243 个选项。
+>
+> **11** 尤其当可变性在 systemDesignTime 或 preCompileTime 时；对 PostBuild 变体这通常不可行。
+
+#### 7.7.2. 示例
+
+表7.21：已求值变体示例，完整表
+
+| “APPROVED”              | Basic | Economy | Senior | Sportive | Junior |
+|--------------------------|-------|---------|--------|----------|--------|
+| Turbocharge              | 0     | 1       |        |          | 0      |
+| Automatic Transmission   | 0     | 1       | 0      | 1        | 0      |
+| Headlight                | 0     | 1       | 2      | 3        | 0      |
+| Sunroof                  | 0     |         |        | 1        |        |
+
+表 7.21 展示了一个示例：我们有四个系统常量（Turbocharge、Automatic Transmission、Headlight 与 Sunroof），它们可以取整数值。在此示例中，五个变体被求值并命名为 Basic、Economy、Senior、Sportive、Junior。
+
+Basic、Economy、Senior、Sportive、Junior 称为预定义变体（**predefined variants**）。每个预定义变体是系统常量取值的一个组合<sup>12</sup>。换言之，PredefinedVariant 是上表中代表全部已求值变体的一个列。
+
+求值的结果由 EvaluatedVariantSet 的属性 approvalStatus 陈述。对应于上面的示例，加粗的列可以表示为一个 approvalStatus 置为 ‘APPROVED’ 的 EvaluatedVariantSet，如表 7.22 所示。
+
+此外，假设供应商能够（内部）提供全部五种组合，而一个假想的 OEM 只对购买 Economy 与 Senior 感兴趣，如表 7.21 中加粗列所示。
+
+在这种情况下，OEM 与供应商之间交换的表将只包含两列（预定义变体）：Economy 与 Senior。
+
+表7.22：供应商与 OEM 之间交换的表
+
+| “APPROVED”              | Economy | Senior |
+|--------------------------|---------|--------|
+| Turbocharge              | 0       | 1      |
+| Automatic Transmission   | 1       | 0      |
+| Headlight                | 1       | 2      |
+| Sunroof                  | 0       |        |
+
+表 7.22 展示了 OEM 与供应商之间交换的表。这张表也是 7.7.5 节 XML 示例的基础。
+
+> **12** 预定义变体还包括 PostBuild 变体点的取值，为清晰起见表 7.21 中省略。
+
+##### 7.7.2.1. 超出示例的内容
+
+已求值变体的概念还有四个未在上例中展示的方面：
+
+1. 一个已求值变体可以引用一个特定的组件（或其他元素），表中的审批状态即针对它适用。
+2. 预定义变体不仅为系统常量定义取值，也可以为 PostBuild 变体判据定义取值。
+3. 表中的列——甚至是子列——可以被其他表复用。这通过以引用（而非聚合）实现该表来完成。当一张已求值变体表的数据被复用、或来自不同来源时，这两个特性都有帮助。
+4. 一个已求值变体可以有一个审批状态，进一步细化表的含义。已求值变体可以是 “approved”（此时表包含已知可工作的预定义变体），也可以是 “rejected”（此时预定义变体已知不能工作）。
+5. 一个 PredefinedVariant 可以通过 includedVariant 关联包含其他 PredefinedVariant。
+
+##### 7.7.2.2. 示例覆盖的用例
+
+上面的示例覆盖以下用例：
+
+- 集成者可以使用已求值变体表检查某个非变体系统（即变体已被解析的系统）是否基于某个预定义变体。
+- 系统设计者可以导入预配置的设置来构建某个特定变体。
+- 组件提供者可以使用该机制向组件用户交付一组有效的变体。这不必是全部有效变体的集合；例如，用户可能只有权查看（即获得关于）某个子集的信息。
+
+#### 7.7.3. 描述
+
+**已求值变体的用途**
+
+EvaluatedVariantSet 提供了一种方法，用于针对特定的一组 CollectableElement 描述某个特定产品变体及其审批状态（approved/rejected）。这使得可以陈述某个特定元素对某个给定变体是 approved 还是 rejected。
+
+![图 7.12：EvaluatedVariantSet](Figure7-12.png)
+
+表 7.21 与表 7.22 按如下方式转换为图 7.12：
+
+**EvaluatedVariantSet** 整张表由类 EvaluatedVariantSet 表示。EvaluatedVariantSet 是一个 ARElement，因此拥有自己的 shortName，即表的名称。
+
+**用 EvaluatedVariantSet 为不同侧面建立多重有效性**
+
+可以存在多个 EvaluatedVariantSet。若有若干这样的集合，每个集合为某个特定侧面建立有效性。各个侧面可以通过 shortName 寻址。例如，单元测试可以使用它们自己专用的 EvaluatedVariantSet。各个集合可以通过 shortName 寻址。
+
+**PredefinedVariant** 一个 EvaluatedVariantSet 包含若干 PredefinedVariant。每个 PredefinedVariant 及其 included variants 是表中的一列。列的名称是 PredefinedVariant 的 shortName。
+
+**预定义变体的定义**
+
+PredefinedVariant 把某个特定变体表示为变体选择器设置的一个给定组合——变体选择器由 SwSystemconstValue 相应地 PostBuildVariantCriterionValue 表示。
+
+对 ECU 配置适用的带 SwSystemconstantValueSet 的预定义变体的选择由 ECUC 变体解析器完成（见 ECU 配置中的 3.3.3 变体解析器描述）。
+
+带 PostBuildVariantCriterionValueSet 的 PredefinedVariant 的处理在 [\[19\]](#ref-19) 中描述（参见 [SWS\_Rte\_06638]）。
+
+**SwSystemconstantValueSet** 一个 PredefinedVariant 包含若干 SwSystemconstantValueSet 对象。在最简单的情况下，只有一个这样的对象，它代表该列的条目。更准确地说，PredefinedVariant 代表包括表头在内的整列，而 SwSystemconstantValueSet 是表头之下的全部内容。
+
+**来自不同来源的 SwSystemconstantValueSet**
+
+把一列的条目分布在若干 SwSystemconstantValueSet 对象上也是可能的。使用多个 SwSystemconstantValueSet 的原因是为了允许一个预定义变体由来自不同来源的系统常量赋值组成。
+
+延续图 7.21 中描绘的图景：此时每一列由若干 SwSystemconstantValueSet 组成，其内容被串联。
+
+**约束：PredefinedVariant 需要保持一致**
+
+若一个 PredefinedVariant 及其 includedVariant 引用了多于一个 SwSystemconstantValueSet，则针对某个特定 SwSystemconst 的 SwSystemconstValue 中的全部 value 属性应当完全相同。
+
+通过约束 [constr\_2519]，矛盾的取值赋值被正面地避免。
+
+**SwSystemconstValue** 一个 SwSystemconstantValueSet 包含若干 SwSystemconstValue 对象，每个代表表中的一个单元格，并且——如其名所示——实现单个系统常量的取值。
+
+单元格中存储的取值由属性 value 表示，它又通过属性取值模式受变体支配（见第 7.4 节）。
+
+**系统常量的间接取值赋值**
+
+在这里使用变体点的主要动机是便利：取值由一个表达式决定，而这正是属性取值变体点所做的。在实践中，该表达式多数时候应当由单个系统常量组成。
+
+**SwSystemconst** 每个 SwSystemconstValue 提供指向一个 SwSystemconst 的引用。这是 SwSystemconstValue 为其定义取值的系统常量。
+
+SwSystemconstantValueSet、SwSystemconstValue 与 SwSystemconst 定义 prebuild 变体。PostBuild 变体有第二个分支：
+
+**Pre Build 与 Post Build 分支的预定义变体之间的类比**
+
+PostBuildVariantCriterionValueSet 是 SwSystemconstantValueSet 的 postbuild 对应物。
+
+PostBuildVariantCriterionValue 是 SwSystemconstValue 的 postbuild 对应物。
+
+PostBuildVariantCriterion 是 SwSystemconst 的 postbuild 对应物。
+
+**Post Build 与 Pre Build 变体组合的有效性**
+
+当同时定义了 prebuild 与 postbuild 变体时，postbuild 变体适用于全部 prebuild 变体。
+
+此外，PredefinedVariant、SwSystemconstantValueSet 与 PostBuildVariantCriterionValueSet 是被引用的（而非聚合的），以支持变体的复用。例如，一个厂商可能拥有若干 PredefinedVariant 集合——每个 OEM 一个——并在不同的 EvaluatedVariantSet 中复用它们（参见 [TPS\_GST\_00280]）。
+
+##### 7.7.3.1. evaluatedElement
+
+一个 EvaluatedVariantSet 提供指向一个或多个 CollectableElement 的引用（见第 13 章）。这用于标识 PredefinedVariant 所覆盖的包与元素。注意 EvaluatedVariantSet 本身也是 CollectableElement。
+
+**约束：EvaluatedVariantSet 不得引用自身**
+
+一个 EvaluatedVariantSet 不得直接或经由其他 EvaluatedVariantSet 引用自身。
+
+更多细节见第 7.7.4 节。
+
+##### 7.7.3.2. approvalStatus
+
+**approvalStatus 的语义**
+
+EvaluatedVariantSet 的属性 approvalStatus 进一步细化已求值变体的状态。以下取值被标准化：
+
+1. APPROVED — 一个 “approved” 的变体已知可以工作。
+2. REJECTED — 一个 “rejected” 的变体已知不能工作。
+
+请注意，所有其他取值都是用例特定的。因此 approvalStatus 不是 APPROVED 或 REJECTED 的 EvaluatedVariantSet 不由标准定义，在评估系统时应当被忽略。见第 7.7.4 节。
+
+##### 7.7.3.3. includedVariant
+
+**PredefinedVariant 中 includedVariant 的用途**
+
+关联 includedVariant 定义：被引用的 PredefinedVariant 的设置被视为引用它的 PredefinedVariant 的设置的一部分。
+
+假设一个变体丰富的系统由多方交付的变体丰富的子系统组成。在这种情况下，各子系统的提供者需要为其交付定义合适的 EvaluatedVariantSet。此外，系统的责任方需要为整个系统规定 EvaluatedVariantSet。
+
+为此，他可以使用 includedVariant 来引用子系统 PredefinedVariant 的定义。否则他将不得不重复那些定义。那需要对子系统的了解，并降低系统的可维护性。通过使用 includedVariant，系统的创建者不需要任何关于子系统中使用的 SwSystemconstantValueSet 与 PostBuildVariantCriterionValueSet 的知识。
+
+#### 7.7.4. 一致性
+
+一个特定的 EvaluatedVariantSet 引用若干 CollectableElement 以表达它们的审批状态。由于 EvaluatedVariantSet 本身也是 CollectableElement，可能出现 EvaluatedVariantSet 的层次。
+
+另一方面，元模型通过对象的聚合建立了另一个层次。在考虑已求值变体时，清楚地区分这两个层次十分重要。
+
+本节定义与这类层次的一致性相关的细节。
+
+**REJECTED 优先于 APPROVED**
+
+一般而言，状态 REJECTED 优先于状态 APPROVED。也就是说，例如若一个 “approved” 的包包含一个 “rejected” 的软件组件，则对这张 EvaluatedVariantSet 而言整个包应当被视为 REJECTED。
+
+**CollectableElement 的 APPROVED**
+
+一个 CollectableElement 对某个给定变体被判为 rejected，如果：
+
+- 它被至少一个 approvalStatus 置为 REJECTED 的相应 EvaluatedVariantSet 引用；
+- 或它（可能跨多个层次）聚合了一个在相应 EvaluatedVariantSet 中被引用、approvalStatus 置为 REJECTED 的 CollectableElement。
+
+CollectableElement 的细节在第 3 章描述。
+
+**CollectableElement 的 REJECTED**
+
+一个 CollectableElement 对某个给定变体被判为 approved，如果：
+
+- 它被至少一个 approvalStatus 置为 APPROVED 的相应 EvaluatedVariantSet 引用，或者它不是一个 rejected 的 EvaluatedVariantSet。这保证 EvaluatedVariantSet 默认被视为 approved。
+- 并且它不是一个 rejected 的 CollectableElement。
+
+CollectableElement 的细节在第 3 章描述。
+
+#### 7.7.5. EvaluatedVariantSet 的 XML 示例
+
+以下清单展示 EvaluatedVariantSet 在 XML 中的表达：
+
+清单7.4：ARXML 中的已求值变体示例
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>Variants</SHORT-NAME>
+  <ELEMENTS>
+    <PREDEFINED-VARIANT>
+      <SHORT-NAME>Basic</SHORT-NAME>
+      <SW-SYSTEMCONSTANT-VALUE-SET-REFS>
+        <SW-SYSTEMCONSTANT-VALUE-SET-REF DEST="SW-SYSTEMCONSTANT-VALUESET">/SystemConstantValues/V1</SW-SYSTEMCONSTANT-VALUE-SET-REF>
+        <SW-SYSTEMCONSTANT-VALUE-SET-REF DEST="SW-SYSTEMCONSTANT-VALUESET">/SystemConstantValues/V2</SW-SYSTEMCONSTANT-VALUE-SET-REF>
+      </SW-SYSTEMCONSTANT-VALUE-SET-REFS>
+    </PREDEFINED-VARIANT>
+    <PREDEFINED-VARIANT>
+      <SHORT-NAME>Economy</SHORT-NAME>
+      <SW-SYSTEMCONSTANT-VALUE-SET-REFS>
+        <SW-SYSTEMCONSTANT-VALUE-SET-REF DEST="SW-SYSTEMCONSTANT-VALUESET">/SystemConstantValues/V1</SW-SYSTEMCONSTANT-VALUE-SET-REF>
+        <SW-SYSTEMCONSTANT-VALUE-SET-REF DEST="SW-SYSTEMCONSTANT-VALUESET">/SystemConstantValues/V3</SW-SYSTEMCONSTANT-VALUE-SET-REF>
+      </SW-SYSTEMCONSTANT-VALUE-SET-REFS>
+    </PREDEFINED-VARIANT>
+    <PREDEFINED-VARIANT>
+      <SHORT-NAME>Senior</SHORT-NAME>
+      <SW-SYSTEMCONSTANT-VALUE-SET-REFS>
+        <SW-SYSTEMCONSTANT-VALUE-SET-REF DEST="SW-SYSTEMCONSTANT-VALUESET">/SystemConstantValues/V4</SW-SYSTEMCONSTANT-VALUE-SET-REF>
+      </SW-SYSTEMCONSTANT-VALUE-SET-REFS>
+    </PREDEFINED-VARIANT>
+    <PREDEFINED-VARIANT>
+      <SHORT-NAME>Sportive</SHORT-NAME>
+      <SW-SYSTEMCONSTANT-VALUE-SET-REFS>
+        <SW-SYSTEMCONSTANT-VALUE-SET-REF DEST="SW-SYSTEMCONSTANT-VALUESET">/SystemConstantValues/V5</SW-SYSTEMCONSTANT-VALUE-SET-REF>
+      </SW-SYSTEMCONSTANT-VALUE-SET-REFS>
+    </PREDEFINED-VARIANT>
+  </ELEMENTS>
+</AR-PACKAGE>
+<!--now we have the systemconstant value sets-->
+<AR-PACKAGE>
+  <SHORT-NAME>SystemConstantValues</SHORT-NAME>
+  <ELEMENTS>
+    <SW-SYSTEMCONSTANT-VALUE-SET>
+      <SHORT-NAME>V1</SHORT-NAME>
+      <SW-SYSTEMCONSTANT-VALUES>
+        <SW-SYSTEMCONST-VALUE>
+          <SW-SYSTEMCONST-REF DEST="SW-SYSTEMCONST">/SwSystemconsts/Turbocharge</SW-SYSTEMCONST-REF>
+          <VALUE>0</VALUE>
+        </SW-SYSTEMCONST-VALUE>
+        <SW-SYSTEMCONST-VALUE>
+          <SW-SYSTEMCONST-REF DEST="SW-SYSTEMCONST">/SwSystemconsts/Sunroof</SW-SYSTEMCONST-REF>
+          <VALUE>0</VALUE>
+        </SW-SYSTEMCONST-VALUE>
+      </SW-SYSTEMCONSTANT-VALUES>
+    </SW-SYSTEMCONSTANT-VALUE-SET>
+    <SW-SYSTEMCONSTANT-VALUE-SET>
+      <SHORT-NAME>V2</SHORT-NAME>
+      <SW-SYSTEMCONSTANT-VALUES>
+        <SW-SYSTEMCONST-VALUE>
+          <SW-SYSTEMCONST-REF DEST="SW-SYSTEMCONST">/SwSystemconsts/Automatictransmission</SW-SYSTEMCONST-REF>
+          <VALUE>0</VALUE>
+        </SW-SYSTEMCONST-VALUE>
+        <SW-SYSTEMCONST-VALUE>
+          <SW-SYSTEMCONST-REF DEST="SW-SYSTEMCONST">/SwSystemconsts/Headlight</SW-SYSTEMCONST-REF>
+          <VALUE>0</VALUE>
+        </SW-SYSTEMCONST-VALUE>
+      </SW-SYSTEMCONSTANT-VALUES>
+    </SW-SYSTEMCONSTANT-VALUE-SET>
+    <SW-SYSTEMCONSTANT-VALUE-SET>
+      <SHORT-NAME>V3</SHORT-NAME>
+      <SW-SYSTEMCONSTANT-VALUES>
+        <SW-SYSTEMCONST-VALUE>
+          <SW-SYSTEMCONST-REF DEST="SW-SYSTEMCONST">/SwSystemconsts/Automatictransmission</SW-SYSTEMCONST-REF>
+          <VALUE>1</VALUE>
+        </SW-SYSTEMCONST-VALUE>
+        <SW-SYSTEMCONST-VALUE>
+          <SW-SYSTEMCONST-REF DEST="SW-SYSTEMCONST">/SwSystemconsts/Headlight</SW-SYSTEMCONST-REF>
+          <VALUE>1</VALUE>
+        </SW-SYSTEMCONST-VALUE>
+      </SW-SYSTEMCONSTANT-VALUES>
+    </SW-SYSTEMCONSTANT-VALUE-SET>
+    <!--note that this set is used in all variants above-->
+    <SW-SYSTEMCONSTANT-VALUE-SET>
+      <SHORT-NAME>V4</SHORT-NAME>
+      <SW-SYSTEMCONSTANT-VALUES>
+        <SW-SYSTEMCONST-VALUE>
+          <SW-SYSTEMCONST-REF DEST="SW-SYSTEMCONST">/SwSystemconsts/Turbocharge</SW-SYSTEMCONST-REF>
+          <VALUE>1</VALUE>
+        </SW-SYSTEMCONST-VALUE>
+        <SW-SYSTEMCONST-VALUE>
+          <SW-SYSTEMCONST-REF DEST="SW-SYSTEMCONST">/SwSystemconsts/Automatictransmission</SW-SYSTEMCONST-REF>
+          <VALUE>0</VALUE>
+        </SW-SYSTEMCONST-VALUE>
+        <SW-SYSTEMCONST-VALUE>
+          <SW-SYSTEMCONST-REF DEST="SW-SYSTEMCONST">/SwSystemconsts/Headlight</SW-SYSTEMCONST-REF>
+          <VALUE>2</VALUE>
+        </SW-SYSTEMCONST-VALUE>
+        <SW-SYSTEMCONST-VALUE>
+          <SW-SYSTEMCONST-REF DEST="SW-SYSTEMCONST">/SwSystemconsts/Sunroof</SW-SYSTEMCONST-REF>
+          <VALUE>0</VALUE>
+        </SW-SYSTEMCONST-VALUE>
+      </SW-SYSTEMCONSTANT-VALUES>
+    </SW-SYSTEMCONSTANT-VALUE-SET>
+    <SW-SYSTEMCONSTANT-VALUE-SET>
+      <SHORT-NAME>V5</SHORT-NAME>
+      <SW-SYSTEMCONSTANT-VALUES>
+        <SW-SYSTEMCONST-VALUE>
+          <SW-SYSTEMCONST-REF DEST="SW-SYSTEMCONST">/SwSystemconsts/Turbocharge</SW-SYSTEMCONST-REF>
+          <VALUE>1</VALUE>
+        </SW-SYSTEMCONST-VALUE>
+        <SW-SYSTEMCONST-VALUE>
+          <SW-SYSTEMCONST-REF DEST="SW-SYSTEMCONST">/SwSystemconsts/Automatictransmission</SW-SYSTEMCONST-REF>
+          <VALUE>1</VALUE>
+        </SW-SYSTEMCONST-VALUE>
+        <SW-SYSTEMCONST-VALUE>
+          <SW-SYSTEMCONST-REF DEST="SW-SYSTEMCONST">/SwSystemconsts/Headlight</SW-SYSTEMCONST-REF>
+          <VALUE>3</VALUE>
+        </SW-SYSTEMCONST-VALUE>
+        <SW-SYSTEMCONST-VALUE>
+          <SW-SYSTEMCONST-REF DEST="SW-SYSTEMCONST">/SwSystemconsts/Sunroof</SW-SYSTEMCONST-REF>
+          <VALUE>1</VALUE>
+        </SW-SYSTEMCONST-VALUE>
+      </SW-SYSTEMCONSTANT-VALUES>
+    </SW-SYSTEMCONSTANT-VALUE-SET>
+  </ELEMENTS>
+</AR-PACKAGE>
+<!--here we have the evaluated variants-->
+<AR-PACKAGE>
+  <SHORT-NAME>EvaluatedVariants</SHORT-NAME>
+  <ELEMENTS>
+    <EVALUATED-VARIANT-SET>
+      <SHORT-NAME>foobar</SHORT-NAME>
+      <EVALUATED-ELEMENT-REFS>
+        <EVALUATED-ELEMENT-REF DEST="APPLICATION-SW-COMPONENT-TYPE">Components/foo</EVALUATED-ELEMENT-REF>
+        <EVALUATED-ELEMENT-REF DEST="APPLICATION-SW-COMPONENT-TYPE">Components/bar</EVALUATED-ELEMENT-REF>
+      </EVALUATED-ELEMENT-REFS>
+      <EVALUATED-VARIANT-REFS>
+        <EVALUATED-VARIANT-REF DEST="PREDEFINED-VARIANT">/Variants/Economy</EVALUATED-VARIANT-REF>
+        <EVALUATED-VARIANT-REF DEST="PREDEFINED-VARIANT">/Variants/Senior</EVALUATED-VARIANT-REF>
+      </EVALUATED-VARIANT-REFS>
+    </EVALUATED-VARIANT-SET>
+  </ELEMENTS>
+</AR-PACKAGE>
+<!--here we have the components-->
+<AR-PACKAGE>
+  <SHORT-NAME>Components</SHORT-NAME>
+  <ELEMENTS>
+    <APPLICATION-SW-COMPONENT-TYPE>
+      <SHORT-NAME>foo</SHORT-NAME>
+    </APPLICATION-SW-COMPONENT-TYPE>
+    <APPLICATION-SW-COMPONENT-TYPE>
+      <SHORT-NAME>bar</SHORT-NAME>
+    </APPLICATION-SW-COMPONENT-TYPE>
+  </ELEMENTS>
+</AR-PACKAGE>
+```
+
+**注意：** 系统常量不仅由其名称标识（如表 7.21 所暗示的那样），实际上它们由完整引用标识。这避免了层次中的名称冲突，例如当两个（子）组件来自不同厂商、而它们出于某种原因使用了相同名称时。
+
+#### 7.7.6. 类表
+
+表7.23：EvaluatedVariantSet
+
+| 类         | EvaluatedVariantSet                                                                                                                                                                                                                                                                                                                                                                |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling                                                                                                                                                                                                                                                                                                                                          |
+| 注意       | 该元类表示表达一组 ARElement 是否能够支持一个或多个特定变体的能力。换言之，对给定的一组 evaluatedElement，该元类表示一张已求值变体的表，其中每个 PredefinedVariant 代表一列。在这一列中，每个后代 swSystemconstantValue 相应地 postbuildVariantCriterionValue 代表一个条目。在图形表示中，每个 swSystemconstantValueSet / postBuildVariantCriterionValueSet 可以用作表列中的一个中间标题。若 approvalStatus 为 “APPROVED”，它表达该 CollectableElement 集合已知对给定的 evaluatedVariants 有效。注意，EvaluatedVariantSet 是一个 CollectableElement。这允许建立 EvaluatedVariantSet 的层次。标签：atp.recommendedPackage=EvaluatedVariantSets |
+| 基类       | ARElement、ARObject、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                                                                                                                                                                                                                                                        |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                                                                                                                                                                                                 |
+
+| 属性               | 类型                | 多重性 | 类别 | 注意                                                                                                                                                                                                                      |
+|--------------------|---------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| approvalStatus     | NameToken           | 1      | attr | 定义预定义变体的审批状态。预定义了两个取值：“APPROVED” 与 “REJECTED”：approved 变体已知可以工作；rejected 变体已知不能工作。更多取值可以在每个公司的基础上得到认可；在 AUTOSAR 内只应识别 “APPROVED” 与 “REJECTED”。 |
+| evaluatedElement   | CollectableElement  | *      | ref  | 这表示在 EvaluatedVariants 的上下文中被求值的一个特定元素。approvalStatus 适用于该元素（及其全部后代）。换言之，被引用的元素是求值预定义变体时被考虑的那些元素。                                                              |
+| evaluatedVariant   | PredefinedVariant   | *      | ref  | 该元类表示一个被求值的特定变体。LowerMultiplicity 被置为 0 以支持渐进式方法。                                                                                                                                                |
+
+表7.24：PredefinedVariant
+
+| 类         | PredefinedVariant                                                                                                                                                                                                                                                                |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling                                                                                                                                                                                                                                        |
+| 注意       | 这规定一个预定义变体。它由全部被引用的系统常量取值集合与 post build 变体判据取值集合内聚合的全部系统常量取值与 post-build 变体判据取值的并集，加上被包含变体的取值集合来刻画。标签：atp.recommendedPackage=PredefinedVariants                                                                            |
+| 基类       | ARElement、ARObject、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                                                                                                                                                        |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                                                                                                |
+
+| 属性                                 | 类型                                | 多重性 | 类别 | 注意                                                                                                                                                                                                                            |
+|--------------------------------------|-------------------------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| includedVariant                      | PredefinedVariant                   | *      | ref  | 关联的变体被视为该 PredefinedVariant 的一部分。这意味着被包含变体的设置被并入引用它的 PredefinedVariant 的设置。尽管如此，被包含的变体可以包含在若干预定义变体中。                                                                              |
+| postBuildVariantCriterionValueSet    | PostBuildVariantCriterionValueSet   | *      | ref  | 这是为该预定义变体做出贡献的 postBuildVariantCriterionValueSet。                                                                                                                                                                              |
+| swSystemconstantValueSet             | SwSystemconstantValueSet            | *      | ref  | 这是为该预定义变体做出贡献的系统常量取值的集合。（This ist 为源文如此。）                                                                                                                                                                       |
+
+表7.25：SwSystemconstantValueSet
+
+| 类         | SwSystemconstantValueSet                                                                                                                            |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling                                                                                                          |
+| 注意       | 该元类表示规定一组系统常量取值的能力。标签：atp.recommendedPackage=SwSystemconstantValueSets                                                                          |
+| 基类       | ARElement、ARObject、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                        |
+| 聚合于     | ARPackage.element                                                                                                                                                |
+
+| 属性                   | 类型                | 多重性 | 类别 | 注意                                           |
+|------------------------|---------------------|--------|------|-----------------------------------------------------|
+| swSystemconstantValue  | SwSystemconstValue  | *      | aggr | 这是系统常量的一个特定取值。                             |
+
+另参见 SwSystemconstValue；另参见 SwSystemconst。
+
+表7.26：PostBuildVariantCriterionValueSet
+
+| 类         | PostBuildVariantCriterionValueSet                                                                                              |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling                                                                                      |
+| 注意       | 该元类表示标注一组 postBuildVariantCriterionValue 的能力。标签：atp.recommendedPackage=PostBuildVariantCriterionValueSets                     |
+| 基类       | ARElement、ARObject、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                 |
+| 聚合于     | ARPackage.element                                                                                                                           |
+
+| 属性                            | 类型                            | 多重性 | 类别 | 注意                                                                                   |
+|---------------------------------|----------------------------------|--------|------|-----------------------------------------------------------------------------------------------|
+| postBuildVariantCriterionValue  | PostBuildVariantCriterionValue   | *      | aggr | 这是 PostBuildVariantSet 中一个特定的 postbuild 变体判据/取值对。（This is is 为源文如此。） |
+
+表7.27：PostBuildVariantCriterionValue
+
+| 类         | PostBuildVariantCriterionValue                                                                                                                                          |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling                                                                                                                                  |
+| 注意       | 该类规定为了施加变体点而应当赋给某个特定变体判据的取值。若规定了多个判据/取值对，则它们必须全部匹配才能施加变体点。                                                                              |
+| 基类       | ARObject                                                                                                                                                                                  |
+| 聚合于     | PostBuildVariantCriterionValueSet.postBuildVariantCriterionValue                                                                                                                            |
+
+| 属性            | 类型                       | 多重性 | 类别 | 注意                                                                                                                              |
+|-----------------|----------------------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------|
+| annotation      | Annotation                 | *      | aggr | 这提供了说明取值为何如此设置的信息的可能性。标签：xml.sequenceOffset=30                                                                    |
+| value           | Integer                    | 1      | attr | 这是 post-build 变体判据的特定取值。构型：atpVariation 标签：vh.latestBindingTime=preCompileTime xml.sequenceOffset=20                      |
+| variantCriterion| PostBuildVariantCriterion  | 1      | ref  | 该关联选择规定了取值的那个变体判据。标签：xml.sequenceOffset=10                                                                              |
+
+另参见 PostBuildVariantCriterion。
+
+### 7.8. 选择变体
+
+本节描述如何表示 AUTOSAR 系统的一个特定变体。
+
+#### 7.8.1. 什么是变体？
+
+**变体的定义**
+
+变体是已施加变体点的集合。换言之，它由对系统常量相应地 post build 变体判据的一次完整赋值表示。
+
+更形式化地，变体由以下内容刻画：
+
+1. **施加时间**：变体与一个特定的施加时间绑定。该施加时间在以下模型元素中给出：
+   - ConditionByFormula——它在聚合模式（图 7.2）、关联模式（图 7.3）与属性集模式（图 7.7、7.6）中由 VariationPoint 聚合；
+   - 属性取值模式（图 7.4）中的 AttributeValueVariationPoint。
+
+   **约束：施加时间受约束**
+
+   请注意，该施加时间又受标签 vh.latestBindingTime 取值的约束。
+
+   细节见第 7.1.6 节。
+
+2. **变体点**：需要在变体的施加时间施加的变体点集合。在模型中，这影响以下元素：
+   - VariationPoint——用于聚合模式（图 7.2）、关联模式（图 7.3）与属性集模式（图 7.7、7.6）；
+   - 属性取值模式（图 7.4）中的 AttributeValueVariationPoint。
+3. **系统常量**：从变体点内部引用的系统常量集合。系统常量从 SwSystemconstDependentFormula 及其子类引用（第 7.6.8 节）。
+4. **取值赋值**：上一步确定的系统常量需要被赋值。
+
+#### 7.8.2. 有效变体
+
+**有效变体的定义（Defintion 为源文如此）**
+
+有效变体定义如下：
+
+1. 对施加时间 T 的有效变体 V 是对全部施加时间为 T 的变体点所引用的系统常量的一次取值赋值。
+2. 不存在覆盖 V 中系统的 PredefinedVariant、且其状态为 REJECTED。
+
+### 7.9. 示例
+
+本节提供四个变体处理示例，每个聚焦于单个模式。我们还给出可能的实现，以说明这些用例可以被翻译为实践的方式。但应当注意，这些只是示例实现，不一定是实现特定用例的唯一可行方式。
+
+#### 7.9.1. 聚合模式示例
+
+**描述** 带变体端口的软件组件类型。
+
+**用例** 一个车身控制应用使用两个灯光控制器之一：低端系统使用 low-end-light control，而高端系统使用 adaptive-curve light-control。
+
+**实现** 车身控制应用拥有一个用于与灯光控制器通信的端口。该端口的连接器有两个变体：一个低端变体与一个自适应曲线变体。这两个变体互斥。
+
+系统常量 CarType 用于在两个变体之间切换：取值 1 表示 “low end”，取值 2 表示 “adaptive curve”。
+
+![图 7.13：聚合模式示例（Example for Aggregation Pattern）](Figure7-13.png)
+
+清单7.5：ARXML 中的聚合模式示例
+
+```xml
+<TYPE-TREF BASE="default" DEST="APPLICATION-SW-COMPONENT-TYPE">LowEndLightControl1</TYPE-TREF>
+<VARIATION-POINT>
+  <SHORT-LABEL>LowEnd</SHORT-LABEL>
+  <SW-SYSCOND BINDING-TIME="SYSTEM-DESIGN-TIME">
+    <SYSC-REF DEST="SW-SYSTEMCONST">CarType</SYSC-REF> == 1
+  </SW-SYSCOND>
+</VARIATION-POINT>
+</SW-COMPONENT-PROTOTYPE>
+<SW-COMPONENT-PROTOTYPE>
+  <SHORT-NAME>AdaptiveCurveLightControl</SHORT-NAME>
+  <TYPE-TREF BASE="default" DEST="APPLICATION-SW-COMPONENT-TYPE">AdaptiveCurveLightControl1</TYPE-TREF>
+  <VARIATION-POINT>
+    <SHORT-LABEL>HighEnd</SHORT-LABEL>
+    <SW-SYSCOND BINDING-TIME="SYSTEM-DESIGN-TIME">
+      <SYSC-REF DEST="SW-SYSTEMCONST">CarType</SYSC-REF> == 2
+    </SW-SYSCOND>
+  </VARIATION-POINT>
+</SW-COMPONENT-PROTOTYPE>
+<SW-COMPONENT-PROTOTYPE>
+  <SHORT-NAME>BodyControl</SHORT-NAME>
+  <TYPE-TREF BASE="default" DEST="APPLICATION-SW-COMPONENT-TYPE">BodyControl1</TYPE-TREF>
+</SW-COMPONENT-PROTOTYPE>
+</COMPONENTS>
+<CONNECTORS>
+<ASSEMBLY-SW-CONNECTOR>
+  <SHORT-NAME>LightControl</SHORT-NAME>
+  <INTRODUCTION>
+    <P>
+      <L-1 L="EN">Note that the shortname in both variants is the same.</L-1>
+    </P>
+  </INTRODUCTION>
+  <VARIATION-POINT>
+    <SHORT-LABEL>LowEnd</SHORT-LABEL>
+    <SW-SYSCOND BINDING-TIME="SYSTEM-DESIGN-TIME">
+      <SYSC-REF BASE="default" DEST="SW-SYSTEMCONST">CarType</SYSC-REF> == 1
+    </SW-SYSCOND>
+  </VARIATION-POINT>
+  <PROVIDER-IREF>
+    <CONTEXT-COMPONENT-REF BASE="default" DEST="SW-COMPONENT-PROTOTYPE">MySystem/LowEndLightControl</CONTEXT-COMPONENT-REF>
+    <TARGET-P-PORT-REF DEST="P-PORT-PROTOTYPE">/AggregationPattern/LowEndLightControl1/ToLight</TARGET-P-PORT-REF>
+  </PROVIDER-IREF>
+  <REQUESTER-IREF>
+    <CONTEXT-COMPONENT-REF DEST="SW-COMPONENT-PROTOTYPE">MySystem/BodyControl</CONTEXT-COMPONENT-REF>
+    <TARGET-R-PORT-REF DEST="R-PORT-PROTOTYPE">/AggregationPattern/BodyControl1/LightControlInput</TARGET-R-PORT-REF>
+  </REQUESTER-IREF>
+</ASSEMBLY-SW-CONNECTOR>
+<ASSEMBLY-SW-CONNECTOR>
+  <SHORT-NAME>LightControl</SHORT-NAME>
+  <VARIATION-POINT>
+    <SHORT-LABEL>HighEnd</SHORT-LABEL>
+    <SW-SYSCOND BINDING-TIME="SYSTEM-DESIGN-TIME">
+      <SYSC-REF BASE="default" DEST="SW-SYSTEMCONST">CarType</SYSC-REF> == 2
+    </SW-SYSCOND>
+  </VARIATION-POINT>
+  <PROVIDER-IREF>
+    <CONTEXT-COMPONENT-REF BASE="default" DEST="SW-COMPONENT-PROTOTYPE">MySystem/AdaptiveCurveLightControl</CONTEXT-COMPONENT-REF>
+    <TARGET-P-PORT-REF DEST="P-PORT-PROTOTYPE">/AggregationPattern/AdaptiveCurveLightControl1/ToLight</TARGET-P-PORT-REF>
+  </PROVIDER-IREF>
+  <REQUESTER-IREF>
+    <CONTEXT-COMPONENT-REF BASE="default" DEST="SW-COMPONENT-PROTOTYPE">MySystem/BodyControl</CONTEXT-COMPONENT-REF>
+    <TARGET-R-PORT-REF DEST="R-PORT-PROTOTYPE">/AggregationPattern/BodyControl1/LightControlInput</TARGET-R-PORT-REF>
+  </REQUESTER-IREF>
+</ASSEMBLY-SW-CONNECTOR>
+</CONNECTORS>
+</COMPOSITION-SW-COMPONENT-TYPE>
+<APPLICATION-SW-COMPONENT-TYPE>
+  <SHORT-NAME>LowEndLightControl1</SHORT-NAME>
+  <PORTS>
+    <P-PORT-PROTOTYPE>
+      <SHORT-NAME>ToLight</SHORT-NAME>
+    </P-PORT-PROTOTYPE>
+  </PORTS>
+</APPLICATION-SW-COMPONENT-TYPE>
+<APPLICATION-SW-COMPONENT-TYPE>
+  <SHORT-NAME>AdaptiveCurveLightControl1</SHORT-NAME>
+  <PORTS>
+    <P-PORT-PROTOTYPE>
+      <SHORT-NAME>ToLight</SHORT-NAME>
+    </P-PORT-PROTOTYPE>
+  </PORTS>
+</APPLICATION-SW-COMPONENT-TYPE>
+<APPLICATION-SW-COMPONENT-TYPE>
+  <SHORT-NAME>BodyControl1</SHORT-NAME>
+  <PORTS>
+    <R-PORT-PROTOTYPE>
+      <SHORT-NAME>LightControlInput</SHORT-NAME>
+    </R-PORT-PROTOTYPE>
+  </PORTS>
+</APPLICATION-SW-COMPONENT-TYPE>
+</ELEMENTS>
+</AR-PACKAGE>
+```
+
+清单 7.5 包含两对 VARIATION-POINT 元素：一对在备选组件原型之间切换，另一对在备选连接器之间切换。
+
+以下取自上述 XML 的摘录展示了三个组件原型 LowEndLightControl、AdaptiveCurveLightControl 与 BodyControl 的代码：
+
+清单7.6：变体组件原型
+
+```xml
+<SHORT-NAME>MySystem</SHORT-NAME>
+<COMPONENTS>
+<SW-COMPONENT-PROTOTYPE>
+  <SHORT-NAME>LowEndLightControl</SHORT-NAME>
+  <TYPE-TREF BASE="default" DEST="APPLICATION-SW-COMPONENT-TYPE">LowEndLightControl1</TYPE-TREF>
+  <VARIATION-POINT>
+    <SHORT-LABEL>LowEnd</SHORT-LABEL>
+    <SW-SYSCOND BINDING-TIME="SYSTEM-DESIGN-TIME">
+      <SYSC-REF DEST="SW-SYSTEMCONST">CarType</SYSC-REF> == 1
+    </SW-SYSCOND>
+  </VARIATION-POINT>
+</SW-COMPONENT-PROTOTYPE>
+<SW-COMPONENT-PROTOTYPE>
+  <SHORT-NAME>AdaptiveCurveLightControl</SHORT-NAME>
+  <TYPE-TREF BASE="default" DEST="APPLICATION-SW-COMPONENT-TYPE">AdaptiveCurveLightControl1</TYPE-TREF>
+  <VARIATION-POINT>
+    <SHORT-LABEL>HighEnd</SHORT-LABEL>
+    <SW-SYSCOND BINDING-TIME="SYSTEM-DESIGN-TIME">
+      <SYSC-REF DEST="SW-SYSTEMCONST">CarType</SYSC-REF> == 2
+    </SW-SYSCOND>
+  </VARIATION-POINT>
+</SW-COMPONENT-PROTOTYPE>
+```
+
+LowEndLightControl 与 AdaptiveCurveLightControl 都包含一个 VARIATION-POINT 元素，它检查名为 CarType 的系统常量的取值。
+
+装配连接器原型的描述中嵌入了类似的变体点。注意，这些变体点拥有相同的 SHORT-NAME（LightControl），但使用不同的 SHORT-LABEL（LowEnd 与 HighEnd），如第 7.6.2 节所述。
+
+#### 7.9.2. 关联模式示例
+
+**描述** 带变体诊断流程的软件组件类型。
+
+**用例** 前一示例中的灯光控制器提供一个标准诊断方法与一个高端诊断方法。
+
+**实现** 存在两个诊断流程：standard\_light\_diagnostics\_proc 与 complex\_diagnostics\_proc。这些流程实现不同的算法，需要不同的 API 函数调用。standard\_light\_diagnostics\_proc 总是被调用，complex\_diagnostics\_proc 只在高端车辆中调用。
+
+系统常量 CarType 区分两类车辆：取值 1 表示标准车，取值 2 表示高端车。
+
+![图 7.14：关联模式示例（Example for association pattern）](Figure7-14.png)
+
+清单7.7：ARXML 中的关联模式示例
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>AssociationPattern</SHORT-NAME>
+  <REFERENCE-BASES>
+    <REFERENCE-BASE>
+      <SHORT-LABEL>default</SHORT-LABEL>
+      <PACKAGE-REF DEST="AR-PACKAGE">/AssociationPattern</PACKAGE-REF>
+    </REFERENCE-BASE>
+  </REFERENCE-BASES>
+  <ELEMENTS>
+    <BSW-MODULE-ENTRY>
+      <SHORT-NAME>standard_light_diagnostics_proc</SHORT-NAME>
+    </BSW-MODULE-ENTRY>
+    <BSW-MODULE-ENTRY>
+      <SHORT-NAME>complex_diagnostics_proc</SHORT-NAME>
+    </BSW-MODULE-ENTRY>
+    <BSW-MODULE-DESCRIPTION>
+      <SHORT-NAME>MyDiagnosticManager</SHORT-NAME>
+      <INTERNAL-BEHAVIORS>
+        <BSW-INTERNAL-BEHAVIOR>
+          <SHORT-NAME>Behavior</SHORT-NAME>
+          <ENTITYS>
+            <BSW-SCHEDULABLE-ENTITY>
+              <SHORT-NAME>TheMainFunc</SHORT-NAME>
+              <INTRODUCTION>
+                <P>
+                  <L-1 L="EN">complex_diagnostics_proc is called in case of Highend. standard_light_diagnostics_proc is always called.</L-1>
+                </P>
+              </INTRODUCTION>
+              <CALLED-ENTRYS>
+                <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                  <BSW-MODULE-ENTRY-REF BASE="default" DEST="BSW-MODULE-ENTRY">complex_diagnostics_proc</BSW-MODULE-ENTRY-REF>
+                  <VARIATION-POINT>
+                    <SW-SYSCOND BINDING-TIME="CODE-GENERATION-TIME">
+                      <SYSC-REF DEST="SW-SYSTEMCONST">/AggregationPattern/CarType</SYSC-REF> == 2
+                    </SW-SYSCOND>
+                  </VARIATION-POINT>
+                </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                  <BSW-MODULE-ENTRY-REF BASE="default" DEST="BSW-MODULE-ENTRY">standard_light_diagnostics_proc</BSW-MODULE-ENTRY-REF>
+                </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+              </CALLED-ENTRYS>
+            </BSW-SCHEDULABLE-ENTITY>
+          </ENTITYS>
+        </BSW-INTERNAL-BEHAVIOR>
+      </INTERNAL-BEHAVIORS>
+    </BSW-MODULE-DESCRIPTION>
+  </ELEMENTS>
+</AR-PACKAGE>
+```
+
+清单 7.7 中的变体位于 BswModuleEntity 调用 BswModuleEntry 的部分：
+
+清单7.8：ARXML 中的关联模式示例（节选）
+
+```xml
+<CALLED-ENTRYS>
+  <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+    <BSW-MODULE-ENTRY-REF BASE="default" DEST="BSW-MODULE-ENTRY">complex_diagnostics_proc</BSW-MODULE-ENTRY-REF>
+    <VARIATION-POINT>
+      <SW-SYSCOND BINDING-TIME="CODE-GENERATION-TIME">
+        <SYSC-REF DEST="SW-SYSTEMCONST">/AggregationPattern/CarType</SYSC-REF> == 2
+      </SW-SYSCOND>
+    </VARIATION-POINT>
+  </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+  <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+    <BSW-MODULE-ENTRY-REF BASE="default" DEST="BSW-MODULE-ENTRY">standard_light_diagnostics_proc</BSW-MODULE-ENTRY-REF>
+  </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+</CALLED-ENTRYS>
+```
+
+BswModuleEntity 拥有指向 BswModuleEntry 的变体引用（角色名为 calledEntry）。因此 &lt;BSW-MODULE-ENTITY&gt; 包含两个名为 &lt;BSW-MODULE-ENTRY-REF-CONDITIONAL&gt; 的元素，每个都包含一个指向被调用条目的引用。第一个包含一个 &lt;VARIATION-POINT&gt;。
+
+如果从 BswModuleEntity 到 BswModuleEntry 的引用不是可变的，那么只会有一个名为 &lt;BSW-MODULE-ENTRY-REF&gt; 的元素，当然也不会有 &lt;VARIATION-POINT&gt;。除此之外代码看起来是一样的。
+
+#### 7.9.3. 属性取值模式示例
+
+**描述** 用于变体数组大小的自适应算法。
+
+**用例** 一个发动机控制系统需要适应广泛的发动机。特别是，气缸数可能因发动机而异。实现需要为每个气缸存储数据。
+
+**实现** 气缸的数据存储在一个数组中，其大小对应于气缸的数量。由于我们在嵌入式系统中，不能使用动态数组，而应使用静态数组，例如 CylinderData cylinder\_measures[2*NO\_OF\_CYLINDERS]。在元模型中，数组的大小（2*NO\_OF\_CYLINDERS）是一个类的属性。该属性应当是变体的。
+
+![图 7.15：属性取值模式示例（Example for attribute value pattern）](Figure7-15.png)
+
+清单7.9：ARXML 中的属性取值模式示例
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>AttributeValuePattern</SHORT-NAME>
+  <REFERENCE-BASES>
+    <REFERENCE-BASE>
+      <SHORT-LABEL>default</SHORT-LABEL>
+      <PACKAGE-REF DEST="AR-PACKAGE">/AttributeValuePattern</PACKAGE-REF>
+    </REFERENCE-BASE>
+  </REFERENCE-BASES>
+  <ELEMENTS>
+    <SW-SYSTEMCONST>
+      <SHORT-NAME>NO_OF_CYLINDERS</SHORT-NAME>
+    </SW-SYSTEMCONST>
+    <APPLICATION-RECORD-DATA-TYPE>
+      <SHORT-NAME>CylinderMeasure</SHORT-NAME>
+    </APPLICATION-RECORD-DATA-TYPE>
+    <APPLICATION-ARRAY-DATA-TYPE>
+      <SHORT-NAME>Cylinder_measures</SHORT-NAME>
+      <ELEMENT>
+        <SHORT-NAME>Cylinder_Measure</SHORT-NAME>
+        <CATEGORY>VALUE</CATEGORY>
+        <TYPE-TREF BASE="default" DEST="APPLICATION-DATA-TYPE">CylinderMeasure</TYPE-TREF>
+        <MAX-NUMBER-OF-ELEMENTS BINDING-TIME="CODE-GENERATION-TIME">
+          2 * <SYSC-REF BASE="default" DEST="SW-SYSTEMCONST">NO_OF_CYLINDERS</SYSC-REF>
+        </MAX-NUMBER-OF-ELEMENTS>
+      </ELEMENT>
+    </APPLICATION-ARRAY-DATA-TYPE>
+  </ELEMENTS>
+</AR-PACKAGE>
+```
+
+在本示例中，变体位于数组 cylinder\_measures 的大小上。通常，该大小是一个取值；在本示例中，它是一个对系统常量的引用：
+
+```xml
+<MAX-NUMBER-OF-ELEMENTS BINDING-TIME="CODE-GENERATION-TIME">
+  2 * <SYSC-REF DEST="SW-SYSTEMCONST">NO_OF_CYLINDERS</SYSC-REF>
+</MAX-NUMBER-OF-ELEMENTS>
+```
+
+可以看到，没有 VARIATION-POINT 标签。变体点可以通过属性 BINDING-TIME 识别<sup>13</sup>。
+
+> **13** 因此，外层 XML 元素上没有 BINDING-TIME 属性的公式是一个错误。
+
+#### 7.9.4. 属性集模式示例
+
+**描述** FlexrayCommunicationController 的可变属性。
+
+**用例** 一个 ECU 以两种不同的配置（车型）连接到 FlexRay 总线，需要不同的 FlexrayCommunicationController 设置。
+
+**实现** FlexrayCommunicationController 的若干属性取值需要在一个配置步骤中被一致地设置或修改。
+
+在本示例中，FlexrayCommunicationController 的属性 microPerCycle、microtickDuration 与 samplesPerMicrotick 有两个变体。由于这三个属性在两种配置中相互依赖，它们的取值需要一起设置。
+
+系统常量 CarType 用于区分两个变体 CarType1 与 CarType2，如表 7.28 所示。
+
+本示例中所有其他属性都是非变体的。为简洁起见，XML 文件中只展示 FlexrayCommunicationController 的（按字母序）第一个与最后一个属性，即 acceptedStartupRange 与 wakeUpPattern，省略其余属性。
+
+表7.28：属性集模式示例：CarType
+
+|                     | CarType1 | CarType2   |
+|---------------------|----------|------------|
+| microPerCycle       | 320000   | 80000      |
+| microtickDuration   | 50E-9    | 12.5E-9    |
+| samplesPerMicrotick | 4        | 1          |
+
+本示例如图 7.16 所示。
+
+![图 7.16：属性集模式示例（Example for property set pattern）](Figure7-16.png)
+
+清单 7.10 展示了本示例的 XML 代码。
+
+清单7.10：属性集模式示例
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>PropertySetPattern</SHORT-NAME>
+  <ELEMENTS>
+    <ECU-INSTANCE>
+      <SHORT-NAME>iPhone</SHORT-NAME>
+      <COMM-CONTROLLERS>
+        <FLEXRAY-COMMUNICATION-CONTROLLER>
+          <SHORT-NAME>iFlex</SHORT-NAME>
+          <FLEXRAY-COMMUNICATION-CONTROLLER-VARIANTS>
+            <FLEXRAY-COMMUNICATION-CONTROLLER-CONDITIONAL>
+              <ACCEPTED-STARTUP-RANGE>1875</ACCEPTED-STARTUP-RANGE>
+              <WAKE-UP-PATTERN>5</WAKE-UP-PATTERN>
+            </FLEXRAY-COMMUNICATION-CONTROLLER-CONDITIONAL>
+            <FLEXRAY-COMMUNICATION-CONTROLLER-CONDITIONAL>
+              <MICRO-PER-CYCLE>320000</MICRO-PER-CYCLE>
+              <MICROTICK-DURATION>50E-9</MICROTICK-DURATION>
+              <SAMPLES-PER-MICROTICK>4</SAMPLES-PER-MICROTICK>
+              <VARIATION-POINT>
+                <SW-SYSCOND BINDING-TIME="CODE-GENERATION-TIME">
+                  <SYSC-REF DEST="SW-SYSTEMCONST">/AggregationPattern/CarType</SYSC-REF> == 1
+                </SW-SYSCOND>
+              </VARIATION-POINT>
+            </FLEXRAY-COMMUNICATION-CONTROLLER-CONDITIONAL>
+            <FLEXRAY-COMMUNICATION-CONTROLLER-CONDITIONAL>
+              <MICRO-PER-CYCLE>80000</MICRO-PER-CYCLE>
+              <MICROTICK-DURATION>12.5E-9</MICROTICK-DURATION>
+              <SAMPLES-PER-MICROTICK>1</SAMPLES-PER-MICROTICK>
+              <VARIATION-POINT>
+                <SW-SYSCOND BINDING-TIME="CODE-GENERATION-TIME">
+                  <SYSC-REF DEST="SW-SYSTEMCONST">/AggregationPattern/CarType</SYSC-REF> == 2
+                </SW-SYSCOND>
+              </VARIATION-POINT>
+            </FLEXRAY-COMMUNICATION-CONTROLLER-CONDITIONAL>
+          </FLEXRAY-COMMUNICATION-CONTROLLER-VARIANTS>
+        </FLEXRAY-COMMUNICATION-CONTROLLER>
+      </COMM-CONTROLLERS>
+    </ECU-INSTANCE>
+  </ELEMENTS>
+</AR-PACKAGE>
+```
+
+示例 7.10 的核心是以下构造，它为 FlexrayCommunicationController 定义了三组变体属性：
+
+```xml
+<FLEXRAY-COMMUNICATION-CONTROLLER>
+  <SHORT-NAME>iFlex</SHORT-NAME>
+  <FLEXRAY-COMMUNICATION-CONTROLLER-VARIANTS>
+    <FLEXRAY-COMMUNICATION-CONTROLLER-CONDITIONAL>
+      ...
+    </FLEXRAY-COMMUNICATION-CONTROLLER-CONDITIONAL>
+    <FLEXRAY-COMMUNICATION-CONTROLLER-CONDITIONAL>
+      ...
+      <VARIATION-POINT>
+        <SW-SYSCOND BINDING-TIME="CODE-GENERATION-TIME">
+          <SYSC-REF DEST="SW-SYSTEMCONST">/AggregationPattern/CarType</SYSC-REF> == 1
+        </SW-SYSCOND>
+      </VARIATION-POINT>
+    </FLEXRAY-COMMUNICATION-CONTROLLER-CONDITIONAL>
+    <FLEXRAY-COMMUNICATION-CONTROLLER-CONDITIONAL>
+      ...
+      <VARIATION-POINT>
+        <SW-SYSCOND BINDING-TIME="CODE-GENERATION-TIME">
+          <SYSC-REF DEST="SW-SYSTEMCONST">/AggregationPattern/CarType</SYSC-REF> == 2
+        </SW-SYSCOND>
+      </VARIATION-POINT>
+    </FLEXRAY-COMMUNICATION-CONTROLLER-CONDITIONAL>
+  </FLEXRAY-COMMUNICATION-CONTROLLER-VARIANTS>
+</FLEXRAY-COMMUNICATION-CONTROLLER>
+```
+
+可以看到，FLEXRAY-COMMUNICATION-CONTROLLER 包含一个包装元素 FLEXRAY-COMMUNICATION-CONTROLLER-VARIANTS，以及每个变体一个 FLEXRAY-COMMUNICATION-CONTROLLER-CONDITIONAL：
+
+- 第一个 CONDITIONAL 持有非变体属性（acceptedStartupRange 到 wakeUpPattern）。注意该 CONDITIONAL 不包含变体点。
+- 第二个 CONDITIONAL 持有 CarType 1 的第一组变体属性。
+- 第三个 CONDITIONAL 持有 CarType 2 的第一组（按上下文应为“第二组”）变体属性。
