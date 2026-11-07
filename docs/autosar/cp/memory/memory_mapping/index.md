@@ -117,7 +117,7 @@ release: R23-11
 
 #### 5.1.1. 头文件结构
 
-如果任何 **BSW** 模块描述中把某个依赖描述为 `requiredArtifact.[DependencyOnArtifact](#116-dependencyonartifact).category = MEMMAP`，则内存映射必须提供一个 **BSW** 内存映射头文件。此时，**BSW** 内存映射头文件的文件名由 **BSW** 模块描述中 `requiredArtifact.[DependencyOnArtifact](#116-dependencyonartifact).artifactDescriptor.shortLabel` 属性值定义。
+如果任何 **BSW** 模块描述中把某个依赖描述为 `requiredArtifact.[DependencyOnArtifact](#106-dependencyonartifact).category = MEMMAP`，则内存映射必须提供一个 **BSW** 内存映射头文件。此时，**BSW** 内存映射头文件的文件名由 **BSW** 模块描述中 `requiredArtifact.[DependencyOnArtifact](#106-dependencyonartifact).artifactDescriptor.shortLabel` 属性值定义。
 
 **注意：**允许多个 **BSW** 模块描述贡献到同一个文件（例如用于遗留代码的 `MemMap.h`），也允许同一个 **BSW** 模块描述指定一组具有不同名称的内存映射头文件，例如在 **ICC2** 集群的 **BSW** 模块描述的情形下。
 
@@ -138,9 +138,9 @@ release: R23-11
 
 其结果是在 `MemMap.h` 文件中生成所请求的内存分配关键字。
 
-对于属于输入配置的基础软件模块描述，如果 **BSW** 模块描述**未**把某个依赖描述为 `requiredArtifact.[DependencyOnArtifact](#116-dependencyonartifact).category = MEMMAP`，则内存映射必须为该基础软件模块提供一个基础软件模块特定的内存映射头文件 `{Mip}_MemMap.h`。其中 `{Mip}` 按照 `<Msn>[_<vi>_<ai>]` 针对基础软件模块构成：
+对于属于输入配置的基础软件模块描述，如果 **BSW** 模块描述**未**把某个依赖描述为 `requiredArtifact.[DependencyOnArtifact](#106-dependencyonartifact).category = MEMMAP`，则内存映射必须为该基础软件模块提供一个基础软件模块特定的内存映射头文件 `{Mip}_MemMap.h`。其中 `{Mip}` 按照 `<Msn>[_<vi>_<ai>]` 针对基础软件模块构成：
 
-- `<Msn>` 是 `[BswModuleDescription](#115-bswmoduledescription)` 的 shortName（区分大小写）
+- `<Msn>` 是 `[BswModuleDescription](#105-bswmoduledescription)` 的 shortName（区分大小写）
 - `<vi>` 是 **BSW** 模块的 vendorId
 - `<ai>` 是 **BSW** 模块的 vendorApiInfix
 
@@ -168,7 +168,7 @@ release: R23-11
 
 如果编译器/链接器不需要特定命令来实现 **SWS** 内存映射的功能，则内存分配关键字定义可以未定义而不产生进一步影响。
 
-如果编译器/链接器不支持 **BSW** 模块或软件组件所使用的 [**MemorySection**](#1114-memorysection) 种类所必需的强制性功能，则内存分配关键字应定义为引发错误。
+如果编译器/链接器不支持 **BSW** 模块或软件组件所使用的 [**MemorySection**](#1014-memorysection) 种类所必需的强制性功能，则内存分配关键字应定义为引发错误。
 
 **示例 7.1**
 
@@ -178,11 +178,11 @@ release: R23-11
 3 #endif
 ```
 
-如 [5.1.1](#511-头文件结构) 节所述，文件的数量取决于输入配置中 [**SwComponentType**](#1121-swcomponenttype) 的数量。为了确定 [**MemorySection**](#1114-memorysection) 的数量，必须已知适用的 [**SwcImplementation**](#1122-swcimplementation)。在 **AUTOSAR** 环境中，这些通过 [**SystemMapping**](#1125-systemmapping) 中的 [**SwcToImplMapping**](#1124-swctoimplmapping) 以及/或者 **RteSwComponentType** 容器中的 **ECU** 配置值 **RteImplementationRef** 来描述。
+如 [5.1.1](#511-头文件结构) 节所述，文件的数量取决于输入配置中 [**SwComponentType**](#1021-swcomponenttype) 的数量。为了确定 [**MemorySection**](#1014-memorysection) 的数量，必须已知适用的 [**SwcImplementation**](#1022-swcimplementation)。在 **AUTOSAR** 环境中，这些通过 [**SystemMapping**](#1025-systemmapping) 中的 [**SwcToImplMapping**](#1024-swctoimplmapping) 以及/或者 **RteSwComponentType** 容器中的 **ECU** 配置值 **RteImplementationRef** 来描述。
 
-已知 [**SwcImplementation**](#1122-swcimplementation) 也就提供了必须为 [6.2.2](#622-对内存映射头文件的要求) 节识别的 [**MemorySection**](#1114-memorysection) 的数量。关于 [**SwcImplementation**](#1122-swcimplementation) 内容的更多细节，请参阅文档 [\[4\]](#ref-4) 和 [\[5\]](#ref-5)。
+已知 [**SwcImplementation**](#1022-swcimplementation) 也就提供了必须为 [6.2.2](#622-对内存映射头文件的要求) 节识别的 [**MemorySection**](#1014-memorysection) 的数量。关于 [**SwcImplementation**](#1022-swcimplementation) 内容的更多细节，请参阅文档 [\[4\]](#ref-4) 和 [\[5\]](#ref-5)。
 
-此外，所使用的 [**MemorySection**](#1114-memorysection) 的总数还取决于所用 **BSW** 模块的数量。这些可以通过引用 **MemMap** 的 [**EcucModuleConfigurationValues**](#117-ecucmoduleconfigurationvalues) 的 **M1** 实例的 [**EcucValueCollection**](#118-ecucvaluecollection) 来确定。该 [**EcucValueCollection**](#118-ecucvaluecollection) 还引用其他 **Bsw** 模块的 [**EcucModuleConfigurationValues**](#117-ecucmoduleconfigurationvalues)，后者又通过模块描述引用再次引用 [**BswImplementation**](#114-bswimplementation)。已知 [**BswImplementation**](#114-bswimplementation) 也就提供了必须为 [6.2.2](#622-对内存映射头文件的要求) 节识别的 [**MemorySection**](#1114-memorysection) 的数量。关于 [**BswImplementation**](#114-bswimplementation) 内容的更多细节，请参阅文档 [\[5\]](#ref-5)。
+此外，所使用的 [**MemorySection**](#1014-memorysection) 的总数还取决于所用 **BSW** 模块的数量。这些可以通过引用 **MemMap** 的 [**EcucModuleConfigurationValues**](#107-ecucmoduleconfigurationvalues) 的 **M1** 实例的 [**EcucValueCollection**](#108-ecucvaluecollection) 来确定。该 [**EcucValueCollection**](#108-ecucvaluecollection) 还引用其他 **Bsw** 模块的 [**EcucModuleConfigurationValues**](#107-ecucmoduleconfigurationvalues)，后者又通过模块描述引用再次引用 [**BswImplementation**](#104-bswimplementation)。已知 [**BswImplementation**](#104-bswimplementation) 也就提供了必须为 [6.2.2](#622-对内存映射头文件的要求) 节识别的 [**MemorySection**](#1014-memorysection) 的数量。关于 [**BswImplementation**](#104-bswimplementation) 内容的更多细节，请参阅文档 [\[5\]](#ref-5)。
 
 在文档 [\[6\]](#ref-6) 中进一步说明了内存映射在 **AUTOSAR** 方法学中是如何使用的。
 
@@ -244,7 +244,7 @@ release: R23-11
 
 对于那些可能在程序流的后续时刻才被初始化的变量，也应使用 **INIT** 或 **CLEARED**。**POWER_ON_CLEARED** 仅用于那些只需在复位后保留的变量。
 
-为了优化启动时的初始化，软件供应商可以在 [**SwAddrMethod**](#1119-swaddrmethod) 名称内应用初始化策略细化，例如：
+为了优化启动时的初始化，软件供应商可以在 [**SwAddrMethod**](#1019-swaddrmethod) 名称内应用初始化策略细化，例如：
 
 - `<PREFIX>_SEC_VAR_POWER_ON_CLEARED_RSTSAFE_QM_8`，用于表达复位安全的变量。
 - `<PREFIX>_SEC_VAR_POWER_ON_CLEARED_NVRAM_QM_8`，用于表达该段包含 **NVRAM** 缓冲区。
@@ -252,7 +252,7 @@ release: R23-11
 - `<PREFIX>_SEC_VAR_INIT_INDETERMINATE_QM_8`，用于表达该段包含 **NVRAM** 缓冲区。
 - `<PREFIX>_SEC_VAR_INIT_SELFINIT_QM_8`，用于表达该存储器是专用的电池备份设备。
 
-根据所使用的 [**SwAddrMethod**](#1119-swaddrmethod)，可以导出映射到单个 **ModeSet** 从而映射到目标项目中不同存储设备的选项。
+根据所使用的 [**SwAddrMethod**](#1019-swaddrmethod)，可以导出映射到单个 **ModeSet** 从而映射到目标项目中不同存储设备的选项。
 
 **注意 1：**对于装备了纠错码（**ECC**）的微控制器/处理器，在因 **ECC** 丢失而发生欠压时，硬件需要初始化相应的存储器。这包括：
 
@@ -274,22 +274,22 @@ release: R23-11
 
 在包含内存映射头文件之前使用的关键字应采用模板 `<PREFIX>_START_SEC_<NAME>` 或 `<PREFIX>_STOP_SEC_<NAME>`，其中：
 
-- `<PREFIX>` 是 **BSW** 模块的 `<MIP>`，如果该 [**MemorySection**](#1114-memorysection) 未定义 [**SectionNamePrefix**](#1118-sectionnameprefix)。`<MIP>` 是按照 **SWS BSW General**（[\[2\]](#ref-2)）中规定的方式构建的大写模块实现前缀。
+- `<PREFIX>` 是 **BSW** 模块的 `<MIP>`，如果该 [**MemorySection**](#1014-memorysection) 未定义 [**SectionNamePrefix**](#1018-sectionnameprefix)。`<MIP>` 是按照 **SWS BSW General**（[\[2\]](#ref-2)）中规定的方式构建的大写模块实现前缀。
 
 或者
 
-- `<PREFIX>` 是 **BSW** 模块的 [**SectionNamePrefix**](#1118-sectionnameprefix) 的符号（区分大小写），如果该 [**MemorySection**](#1114-memorysection) 定义了 [**SectionNamePrefix**](#1118-sectionnameprefix)。或者
-- `<PREFIX>` 是软件组件的 [**AtomicSwComponentType**](#112-atomicswcomponenttype) 的 shortName（区分大小写）。
+- `<PREFIX>` 是 **BSW** 模块的 [**SectionNamePrefix**](#1018-sectionnameprefix) 的符号（区分大小写），如果该 [**MemorySection**](#1014-memorysection) 定义了 [**SectionNamePrefix**](#1018-sectionnameprefix)。或者
+- `<PREFIX>` 是软件组件的 [**AtomicSwComponentType**](#102-atomicswcomponenttype) 的 shortName（区分大小写）。
 
 并且
 
-- `<NAME>` 是基础软件模块描述或软件组件描述中所描述的 [**MemorySection**](#1114-memorysection) 的 shortName（区分大小写），如果该 [**MemorySection**](#1114-memorysection) 未定义 symbol 属性。
+- `<NAME>` 是基础软件模块描述或软件组件描述中所描述的 [**MemorySection**](#1014-memorysection) 的 shortName（区分大小写），如果该 [**MemorySection**](#1014-memorysection) 未定义 symbol 属性。
 
 或者
 
-- `<NAME>` 是基础软件模块描述或软件组件描述中所描述的 [**MemorySection**](#1114-memorysection) 的符号（区分大小写），如果该 [**MemorySection**](#1114-memorysection) 定义了 symbol 属性。
+- `<NAME>` 是基础软件模块描述或软件组件描述中所描述的 [**MemorySection**](#1014-memorysection) 的符号（区分大小写），如果该 [**MemorySection**](#1014-memorysection) 定义了 symbol 属性。
 
-**注意：**如果内存分配关键字在代码中应使用大写字母，那么基础软件模块描述或软件组件描述中的相关 [**MemorySection**](#1114-memorysection) 必须以大写字母命名。
+**注意：**如果内存分配关键字在代码中应使用大写字母，那么基础软件模块描述或软件组件描述中的相关 [**MemorySection**](#1014-memorysection) 必须以大写字母命名。
 
 `<NAME>` 部分可以包含以下 **ASIL** 关键字以表示限制/限定：{safety} = **QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。
 
@@ -297,7 +297,7 @@ release: R23-11
 
 `<NAME>` 部分应包含以下 {coreScope} 关键字，其值为 **GLOBAL** 作为不带内存访问限制的可选默认值，以及 **LOCAL** 作为限制到一个期望核的内存访问的强制替代设置。
 
-因此，**GLOBAL** 的 {coreScope} 值不应写入内存分配关键字以及 [**SwAddrMethod**](#1119-swaddrmethod) 名称中。
+因此，**GLOBAL** 的 {coreScope} 值不应写入内存分配关键字以及 [**SwAddrMethod**](#1019-swaddrmethod) 名称中。
 
 {coreScope} **LOCAL** 的使用仅限于为其指定的段类型。此外，对于段类型 **VAR**、**VAR_FAST**、**VAR_SLOW**、**INTERNAL_VAR**，{coreScope} 的使用仅允许用于 {INIT_POLICY} 等于 **CLEARED** 或 **INIT** 的情形。这一限制应降低内存布局的复杂性，并减少由于针对未初始化内存段的典型分配限制而产生的内存空洞数量。
 
@@ -305,7 +305,7 @@ release: R23-11
 
 表7.2：核范围行为汇总（**Summary of Core Scope Behavior**）
 
-| 内存分配关键字或 [**SwAddrMethod**](#1119-swaddrmethod) 中的核范围 | 有效用于 | 理由 | 适用于 |
+| 内存分配关键字或 [**SwAddrMethod**](#1019-swaddrmethod) 中的核范围 | 有效用于 | 理由 | 适用于 |
 |---|---|---|---|
 | 未设置或 **GLOBAL** | 变量、代码、常量、配置数据、标定常量 | 符号可以由全局地址空间中的任意核访问（读、写、执行）。可以使用具有 **GLOBAL** 核范围的任何 **ModeSet** 作为分配目标。因此，可以使用其 **GLOBAL** **ModeSet** 将符号分配到靠近某个特定核的位置。**GLOBAL** 范围应用于任何应对其他 **BSW** 模块、**SWC** 或 **RTE** 可用的用户 **API**。 | **SWC**、**BSW**、**RTE**、**CDD** |
 | **LOCAL** | 变量、代码、常量 | 局部符号只能由其被映射到的那个核访问（读、写、执行）。只能使用期望核的具有 **LOCAL** 核范围的 **ModeSet** 作为分配目标。 | **BSW**、**CDD** |
@@ -325,7 +325,7 @@ release: R23-11
 
 对于所有段类型，`<NAME>` 部分都可以包含一个可选的厂商特定 {refinement} 标签。它应用于细化分配或初始化行为（仅变量）。所使用的值是厂商特定的，可自由选择。
 
-**注意：**`<NAME>` 部分由 [**MemorySection**](#1114-memorysection).shortName 或 [**MemorySection**](#1114-memorysection).symbol 提供。为了提供安全信息，相应部分的名称必须是 [**MemorySection**](#1114-memorysection).shortName 或 [**MemorySection**](#1114-memorysection).symbol 的一部分。为了提供核范围限定，相应部分的名称必须是 [**MemorySection**](#1114-memorysection).shortName 或 [**MemorySection**](#1114-memorysection).symbol 的一部分。
+**注意：**`<NAME>` 部分由 [**MemorySection**](#1014-memorysection).shortName 或 [**MemorySection**](#1014-memorysection).symbol 提供。为了提供安全信息，相应部分的名称必须是 [**MemorySection**](#1014-memorysection).shortName 或 [**MemorySection**](#1014-memorysection).symbol 的一部分。为了提供核范围限定，相应部分的名称必须是 [**MemorySection**](#1014-memorysection).shortName 或 [**MemorySection**](#1014-memorysection).symbol 的一部分。
 
 因此，内存分配关键字的常用模式为
 
@@ -350,13 +350,13 @@ release: R23-11
 
 当一个 **BSW** 模块被拆分为可分配内存部分时，如 [6.2.1](#621-对使用内存映射头文件的-bsw-模块和软件组件的实现要求) 节所述的 `<PREFIX>` 应按照文档 [\[5\]](#ref-5) 中的 [constr_4103] 构建。
 
-当一个 **BSW** 模块被拆分为可分配内存部分时，所有相关的 [**MemorySection**](#1114-memorysection) 的 prefix 需要引用一个 [**SectionNamePrefix**](#1118-sectionnameprefix)。
+当一个 **BSW** 模块被拆分为可分配内存部分时，所有相关的 [**MemorySection**](#1014-memorysection) 的 prefix 需要引用一个 [**SectionNamePrefix**](#1018-sectionnameprefix)。
 
 **注意：**请参见 [6.3.5](#635-可分配内存部分) 节给出的示例。
 
 表7.3：**BSW** 模块的段名前缀汇总（**Summary of Section Name Prefix for BSW Modules**）
 
-| `<Msn>` | `<vi>` | `<ai>` | [SectionNamePrefix](#1118-sectionnameprefix).Symbol（如果定义了 [SectionNamePrefix](#1118-sectionnameprefix)） | 生成的前缀 |
+| `<Msn>` | `<vi>` | `<ai>` | [SectionNamePrefix](#1018-sectionnameprefix).Symbol（如果定义了 [SectionNamePrefix](#1018-sectionnameprefix)） | 生成的前缀 |
 |---|---|---|---|---|
 | Fls | 142 | Ext | FLS_142_EXT_FEATURE | FLS_142_EXT_FEATURE |
 | Fls | 142 | Ext | undefined | FLS_142_EXT |
@@ -378,7 +378,7 @@ release: R23-11
 
 见表7.11。
 
-2. 用于实现与 **AUTOSAR** 配置方法学无关的固定值的常量。对于非配置常量（即放置在 `<Mip>.[ch]` 或 `<Mip>_<[Implementation](#1111-implementation) Extension>.[ch]` 中的全部内容），内存分配关键字的语法为：
+2. 用于实现与 **AUTOSAR** 配置方法学无关的固定值的常量。对于非配置常量（即放置在 `<Mip>.[ch]` 或 `<Mip>_<[Implementation](#1011-implementation) Extension>.[ch]` 中的全部内容），内存分配关键字的语法为：
 
 ```
 {PREFIX}_START_SEC_CONST[_{refinement}][_{safety}][_{coreScope}]_{ALIGNMENT}
@@ -395,7 +395,7 @@ release: R23-11
 
 | 内存分配关键字语法 | `{PREFIX}_START_SEC_VAR_{INIT_POLICY}[_{refinement}][_{safety}][_{coreScope}]_{ALIGNMENT}`<br>`{PREFIX}_STOP_SEC_VAR_{INIT_POLICY}[_{refinement}][_{safety}][_{coreScope}]_{ALIGNMENT}` |
 |---|---|
-| 描述 | 用于全部全局或静态变量。名称部分 `_{refinement}` 应用于细化分配或初始化行为。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述核范围限定，可能的取值为 {coreGlobal, coreLocal}。在 **coreGlobal** 的情况下，该属性可以省略。 |
+| 描述 | 用于全部全局或静态变量。名称部分 `_{refinement}` 应用于细化分配或初始化行为。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述核范围限定，可能的取值为 {coreGlobal, coreLocal}。在 **coreGlobal** 的情况下，该属性可以省略。 |
 | 内存段类型 | VAR |
 | 段初始化策略 | {INIT_POLICY} |
 | 状态 | - |
@@ -404,7 +404,7 @@ release: R23-11
 
 | 内存分配关键字语法 | `{PREFIX}_START_SEC_VAR_FAST_{INIT_POLICY}[_{refinement}][_{safety}][_{coreScope}]_{ALIGNMENT}`<br>`{PREFIX}_STOP_SEC_VAR_FAST_{INIT_POLICY}[_{refinement}][_{safety}][_{coreScope}]_{ALIGNMENT}` |
 |---|---|
-| 描述 | 用于全部全局或静态变量。用于具有以下至少一种属性的全部全局或静态变量：• 按位访问 • 频繁使用 • 在源代码中访问次数很多<br>某些平台允许对位于这一特定 **RAM** 区域中的变量使用位指令，也允许使用较短的寻址指令。这节省了代码和运行时间。名称部分 `_{refinement}` 应用于细化分配或初始化行为。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述核范围限定，可能的取值为 {coreGlobal, coreLocal}。在 **coreGlobal** 的情况下，该属性可以省略。 |
+| 描述 | 用于全部全局或静态变量。用于具有以下至少一种属性的全部全局或静态变量：• 按位访问 • 频繁使用 • 在源代码中访问次数很多<br>某些平台允许对位于这一特定 **RAM** 区域中的变量使用位指令，也允许使用较短的寻址指令。这节省了代码和运行时间。名称部分 `_{refinement}` 应用于细化分配或初始化行为。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述核范围限定，可能的取值为 {coreGlobal, coreLocal}。在 **coreGlobal** 的情况下，该属性可以省略。 |
 | 内存段类型 | VAR |
 | 段初始化策略 | {INIT_POLICY} |
 | 状态 | - |
@@ -413,7 +413,7 @@ release: R23-11
 
 | 内存分配关键字语法 | `{PREFIX}_START_SEC_VAR_SLOW_{INIT_POLICY}[_{refinement}][_{safety}][_{coreScope}]_{ALIGNMENT}`<br>`{PREFIX}_STOP_SEC_VAR_SLOW_{INIT_POLICY}[_{refinement}][_{safety}][_{coreScope}]_{ALIGNMENT}` |
 |---|---|
-| 描述 | 用于访问不频繁的全部全局或静态变量。名称部分 `_{refinement}` 应用于细化分配或初始化行为。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述核范围限定，可能的取值为 {coreGlobal, coreLocal}。在 **coreGlobal** 的情况下，该属性可以省略。 |
+| 描述 | 用于访问不频繁的全部全局或静态变量。名称部分 `_{refinement}` 应用于细化分配或初始化行为。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述核范围限定，可能的取值为 {coreGlobal, coreLocal}。在 **coreGlobal** 的情况下，该属性可以省略。 |
 | 内存段类型 | VAR |
 | 段初始化策略 | {INIT_POLICY} |
 | 状态 | - |
@@ -422,7 +422,7 @@ release: R23-11
 
 | 内存分配关键字语法 | `{PREFIX}_START_SEC_INTERNAL_VAR_{INIT_POLICY}[_{refinement}][_{safety}][_{coreScope}]_{ALIGNMENT}`<br>`{PREFIX}_STOP_SEC_INTERNAL_VAR_{INIT_POLICY}[_{refinement}][_{safety}][_{coreScope}]_{ALIGNMENT}` |
 |---|---|
-| 描述 | 用于可从标定工具访问的全局或静态变量。名称部分 `_{refinement}` 应用于细化分配或初始化行为。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述核范围限定，可能的取值为 {coreGlobal, coreLocal}。在 **coreGlobal** 的情况下，该属性可以省略。 |
+| 描述 | 用于可从标定工具访问的全局或静态变量。名称部分 `_{refinement}` 应用于细化分配或初始化行为。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述核范围限定，可能的取值为 {coreGlobal, coreLocal}。在 **coreGlobal** 的情况下，该属性可以省略。 |
 | 内存段类型 | VAR |
 | 段初始化策略 | {INIT_POLICY} |
 | 状态 | - |
@@ -431,7 +431,7 @@ release: R23-11
 
 | 内存分配关键字语法 | `{PREFIX}_START_SEC_VAR_SAVED_ZONE_{refinement}[_{safety}]_{ALIGNMENT}`<br>`{PREFIX}_STOP_SEC_VAR_SAVED_ZONE_{refinement}[_{safety}]_{ALIGNMENT}` |
 |---|---|
-| 描述 | 用于保存在非易失性存储器中的变量的 **RAM** 缓冲区。名称部分 `_{refinement}` 应至少表示所保存区域的具体内容。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，sectionInitializationPolicy 属性应设置为 **POWER-ON-CLEARED**。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。 |
+| 描述 | 用于保存在非易失性存储器中的变量的 **RAM** 缓冲区。名称部分 `_{refinement}` 应至少表示所保存区域的具体内容。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，sectionInitializationPolicy 属性应设置为 **POWER-ON-CLEARED**。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。 |
 | 内存段类型 | VAR |
 | 段初始化策略 | POWER-ON-CLEARED |
 | 状态 | - |
@@ -444,7 +444,7 @@ release: R23-11
 
 | 内存分配关键字语法 | `{PREFIX}_START_SEC_CONST[_{refinement}][_{safety}]_{ALIGNMENT}`<br>`{PREFIX}_STOP_SEC_CONST[_{refinement}][_{safety}]_{ALIGNMENT}` |
 |---|---|
-| 描述 | 用于全局或静态常量。名称部分 `_{refinement}` 是该 [**MemorySection**](#1114-memorysection) 中 **ExecutableEntity** 的典型周期时间值和时间单位。名称部分 `_{refinement}` 是可选的。单位为：• US 微秒 • MS 毫秒 • S 秒<br>例如：100US、400US、1MS、5MS、10MS、20MS、100MS、1S。请注意，由于集成决策（例如 **RTEEvent** 到任务的映射），偏离这一典型周期时间是有可能的。此外，在 **ECU** 的特殊模式下，代码可能以更高或更低的周期被调度。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。 |
+| 描述 | 用于全局或静态常量。名称部分 `_{refinement}` 是该 [**MemorySection**](#1014-memorysection) 中 **ExecutableEntity** 的典型周期时间值和时间单位。名称部分 `_{refinement}` 是可选的。单位为：• US 微秒 • MS 毫秒 • S 秒<br>例如：100US、400US、1MS、5MS、10MS、20MS、100MS、1S。请注意，由于集成决策（例如 **RTEEvent** 到任务的映射），偏离这一典型周期时间是有可能的。此外，在 **ECU** 的特殊模式下，代码可能以更高或更低的周期被调度。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。 |
 | 内存段类型 | CONST |
 | 段初始化策略 | - |
 | 状态 | - |
@@ -453,7 +453,7 @@ release: R23-11
 
 | 内存分配关键字语法 | `{PREFIX}_START_SEC_CONST_SAVED_RECOVERY_ZONE_{refinement}[_{safety}]_{ALIGNMENT}`<br>`{PREFIX}_STOP_SEC_CONST_SAVED_RECOVERY_ZONE_{refinement}[_{safety}]_{ALIGNMENT}` |
 |---|---|
-| 描述 | 用于保存在非易失性存储器中的变量的 **ROM** 缓冲区。名称部分 `_{refinement}` 应至少表示所恢复区域的具体内容。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。 |
+| 描述 | 用于保存在非易失性存储器中的变量的 **ROM** 缓冲区。名称部分 `_{refinement}` 应至少表示所恢复区域的具体内容。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。 |
 | 内存段类型 | CONST |
 | 段初始化策略 | - |
 | 状态 | - |
@@ -462,7 +462,7 @@ release: R23-11
 
 | 内存分配关键字语法 | `{PREFIX}_START_SEC_CONFIG_DATA_{configClass}[_{refinement}][_{safety}]_{ALIGNMENT}`<br>`{PREFIX}_STOP_SEC_CONFIG_DATA_{configClass}[_{refinement}][_{safety}]_{ALIGNMENT}` |
 |---|---|
-| 描述 | 具有表明其位于模块配置的一个段中的属性的常量。名称部分 `_{configClass}` 应包含 configClass，取以下字符串之一：**PREBUILD** 或 **POSTBUILD**。名称部分 `_{refinement}` 应用于细化内存分配关键字，以允许单独分配。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述 configClass，可能的取值为 {configClassPreBuild, configClassPostBuild}。 |
+| 描述 | 具有表明其位于模块配置的一个段中的属性的常量。名称部分 `_{configClass}` 应包含 configClass，取以下字符串之一：**PREBUILD** 或 **POSTBUILD**。名称部分 `_{refinement}` 应用于细化内存分配关键字，以允许单独分配。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述 configClass，可能的取值为 {configClassPreBuild, configClassPostBuild}。 |
 | 内存段类型 | CONFIG-DATA |
 | 段初始化策略 | - |
 | 状态 | - |
@@ -471,7 +471,7 @@ release: R23-11
 
 | 内存分配关键字语法 | `{PREFIX}_START_SEC_CALIB[_{refinement}][_{safety}]_{ALIGNMENT}`<br>`{PREFIX}_STOP_SEC_CALIB[_{refinement}][_{safety}]_{ALIGNMENT}` |
 |---|---|
-| 描述 | 用于标定常量。名称部分 `_{refinement}` 应用于细化内存分配关键字，以允许单独分配。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。 |
+| 描述 | 用于标定常量。名称部分 `_{refinement}` 应用于细化内存分配关键字，以允许单独分配。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。 |
 | 内存段类型 | CALPRM |
 | 段初始化策略 | - |
 | 状态 | - |
@@ -484,7 +484,7 @@ release: R23-11
 
 | 内存分配关键字语法 | `{PREFIX}_START_SEC_CODE[_{refinement}][_{safety}][_{coreScope}]`<br>`{PREFIX}_STOP_SEC_CODE[_{refinement}][_{safety}][_{coreScope}]` |
 |---|---|
-| 描述 | 用于将代码映射到应用块、引导块、外部闪存等。名称部分 `_{refinement}` 是该 [**MemorySection**](#1114-memorysection) 中 **ExecutableEntity** 的典型周期时间值和时间单位。名称部分 `_{refinement}` 是可选的。单位为：• US 微秒 • MS 毫秒 • S 秒<br>例如：100US、400US、1MS、5MS、10MS、20MS、100MS、1S。请注意，由于集成决策（例如 **RTEEvent** 到任务的映射），偏离这一典型周期时间是有可能的。此外，在 **ECU** 的特殊模式下，代码可能以更高或更低的周期被调度。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C****、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。名称部分 `_{coreScope}` 应包含核范围限定，最多取以下字符串之一：**GLOBAL**、**LOCAL**。在 **GLOBAL** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述核范围限定，可能的取值为 {coreGlobal, coreLocal}。在 **coreGlobal** 的情况下，该属性可以省略。 |
+| 描述 | 用于将代码映射到应用块、引导块、外部闪存等。名称部分 `_{refinement}` 是该 [**MemorySection**](#1014-memorysection) 中 **ExecutableEntity** 的典型周期时间值和时间单位。名称部分 `_{refinement}` 是可选的。单位为：• US 微秒 • MS 毫秒 • S 秒<br>例如：100US、400US、1MS、5MS、10MS、20MS、100MS、1S。请注意，由于集成决策（例如 **RTEEvent** 到任务的映射），偏离这一典型周期时间是有可能的。此外，在 **ECU** 的特殊模式下，代码可能以更高或更低的周期被调度。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C****、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。名称部分 `_{coreScope}` 应包含核范围限定，最多取以下字符串之一：**GLOBAL**、**LOCAL**。在 **GLOBAL** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述核范围限定，可能的取值为 {coreGlobal, coreLocal}。在 **coreGlobal** 的情况下，该属性可以省略。 |
 | 内存段类型 | CODE |
 | 段初始化策略 | - |
 | 状态 | - |
@@ -493,7 +493,7 @@ release: R23-11
 
 | 内存分配关键字语法 | `{PREFIX}_START_SEC_CODE_FAST[_{refinement}][_{safety}][_{coreScope}]`<br>`{PREFIX}_STOP_SEC_CODE_FAST[_{refinement}][_{safety}][_{coreScope}]` |
 |---|---|
-| 描述 | 用于必须放入快速代码存储段的代码。当执行不是以明确的周期时间发生，而是已知访问非常频繁和/或执行时间很长时，应使用 **FAST** 段。例如，用于频繁通知的回调。名称部分 `_{refinement}` 应用于细化内存分配关键字，以允许单独分配。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。名称部分 `_{coreScope}` 应包含核范围限定，最多取以下字符串之一：**GLOBAL**、**LOCAL**。在 **GLOBAL** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的的情况下，该属性可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述核范围限定，可能的取值为 {coreGlobal, coreLocal}。在 **coreGlobal** 的情况下，该属性可以省略。 |
+| 描述 | 用于必须放入快速代码存储段的代码。当执行不是以明确的周期时间发生，而是已知访问非常频繁和/或执行时间很长时，应使用 **FAST** 段。例如，用于频繁通知的回调。名称部分 `_{refinement}` 应用于细化内存分配关键字，以允许单独分配。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。名称部分 `_{coreScope}` 应包含核范围限定，最多取以下字符串之一：**GLOBAL**、**LOCAL**。在 **GLOBAL** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的的情况下，该属性可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述核范围限定，可能的取值为 {coreGlobal, coreLocal}。在 **coreGlobal** 的情况下，该属性可以省略。 |
 | 内存段类型 | CODE |
 | 段初始化策略 | - |
 | 状态 | - |
@@ -502,7 +502,7 @@ release: R23-11
 
 | 内存分配关键字语法 | `{PREFIX}_START_SEC_CODE_SLOW[_{refinement}][_{safety}][_{coreScope}]`<br>`{PREFIX}_STOP_SEC_CODE_SLOW[_{refinement}][_{safety}][_{coreScope}]` |
 |---|---|
-| 描述 | 用于必须放入慢速代码存储段的代码。当执行不是以明确的周期时间发生，而是已知访问不频繁时，应使用 **SLOW** 段。例如，用于很少发生的错误情况下的回调。名称部分 `_{refinement}` 应用于细化内存分配关键字，以允许单独分配。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。名称部分 `_{coreScope}` 应包含核范围限定，最多取以下字符串之一：**GLOBAL**、**LOCAL**。在 **GLOBAL** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述核范围限定，可能的取值为 {coreGlobal, coreLocal}。在 **coreGlobal** 的情况下，该属性可以省略。 |
+| 描述 | 用于必须放入慢速代码存储段的代码。当执行不是以明确的周期时间发生，而是已知访问不频繁时，应使用 **SLOW** 段。例如，用于很少发生的错误情况下的回调。名称部分 `_{refinement}` 应用于细化内存分配关键字，以允许单独分配。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。名称部分 `_{coreScope}` 应包含核范围限定，最多取以下字符串之一：**GLOBAL**、**LOCAL**。在 **GLOBAL** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述核范围限定，可能的取值为 {coreGlobal, coreLocal}。在 **coreGlobal** 的情况下，该属性可以省略。 |
 | 内存段类型 | CODE |
 | 段初始化策略 | - |
 | 状态 | - |
@@ -511,7 +511,7 @@ release: R23-11
 
 | 内存分配关键字语法 | `{PREFIX}_START_SEC_CALLOUT_CODE[_{refinement}][_{safety}][_{coreScope}]`<br>`{PREFIX}_STOP_SEC_CALLOUT_CODE[_{refinement}][_{safety}][_{coreScope}]` |
 |---|---|
-| 描述 | 用于映射 **BSW** 模块的回调（**callout**），这些回调通常应使用回调的全局链接器设置。名称部分 `_{refinement}` 应用于细化内存分配关键字，以允许单独分配。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。名称部分 `_{coreScope}` 应包含核范围限定，最多取以下字符串之一：**GLOBAL**、**LOCAL**。在 **GLOBAL** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。在相关的 [**SwAddrMethod**](#1119-swaddrmethod) 中，一个 option 属性应描述核范围限定，可能的取值为 {coreGlobal, coreLocal}。在 **coreGlobal** 的情况下，该属性可以省略。 |
+| 描述 | 用于映射 **BSW** 模块的回调（**callout**），这些回调通常应使用回调的全局链接器设置。名称部分 `_{refinement}` 应用于细化内存分配关键字，以允许单独分配。名称部分 `_{safety}` 应包含安全完整性等级，最多取以下字符串之一：**QM**、**ASIL_A**、**ASIL_B**、**ASIL_C**、**ASIL_D**。在 **QM** 的情况下，该名称部分可以省略。名称部分 `_{coreScope}` 应包含核范围限定，最多取以下字符串之一：**GLOBAL**、**LOCAL**。在 **GLOBAL** 的情况下，该名称部分可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述安全完整性等级，可能的取值为 {safetyQM, safetyAsilA, safetyAsilB, safetyAsilC, safetyAsilD}。在安全等级为 **QM** 的情况下，该属性可以省略。在相关的 [**SwAddrMethod**](#1019-swaddrmethod) 中，一个 option 属性应描述核范围限定，可能的取值为 {coreGlobal, coreLocal}。在 **coreGlobal** 的情况下，该属性可以省略。 |
 | 内存段类型 | CODE |
 | 段初始化策略 | - |
 | 状态 | - |
@@ -532,7 +532,7 @@ release: R23-11
 
 **提示：**对于使用 “Compiler.h” 的 **LOCAL_INLINE** 宏实现的代码，要求使用内存分配关键字进行包装。如果 **LOCAL_INLINE** 被设置为编译器的 inline 关键字，则相关的内存分配关键字不应定义任何链接器段赋值，也不应改变寻址行为，因为这已经由内联代码所在调用函数的环境所设置。如果 **LOCAL_INLINE** 被设置为空，则相关的内存分配关键字应像常规代码一样进行配置。对于使用 “Compiler.h” 的 **INLINE** 宏实现的代码，至少对于在 **INLINE** 被设置为空时仍然保留的代码，要求使用内存分配关键字进行包装。
 
-**注意：**同样请注意，在基础软件模块描述中，与所用内存分配关键字相关的 [**MemorySection**](#1114-memorysection) 必须在 option 属性中说明 **INLINE** 和 **LOCAL_INLINE** 的使用。更多信息请参阅文档 [\[5\]](#ref-5)。
+**注意：**同样请注意，在基础软件模块描述中，与所用内存分配关键字相关的 [**MemorySection**](#1014-memorysection) 必须在 option 属性中说明 **INLINE** 和 **LOCAL_INLINE** 的使用。更多信息请参阅文档 [\[5\]](#ref-5)。
 
 在文档 [\[4\]](#ref-4) 中预先定义了附加的 option 属性值 [TPS_SWCT_-01456]。
 
@@ -573,7 +573,7 @@ release: R23-11
 
 **提示：关于回调段的说明：**
 
-根据文档 [\[2\]](#ref-2)，每个回调函数应使用一组独立的内存分配关键字。这在一方面为内存分配的配置提供了很高的灵活性。另一方面，这带来了为 **MemMap** 模块进行高配置工作量的风险，因为所有独立的内存段都必须为 **MemMap** 头文件生成而配置。为了简化这类回调段的集成，建议在基础软件模块描述中，所有描述回调且通常以相同链接器属性处理的 [**MemorySection**](#1114-memorysection) 都引用相同的 [**SwAddrMethod**](#1119-swaddrmethod)。按照 [6.2.1.5](#6215-代码段) 节“代码段”中推荐的内存段，由 **AUTOSAR** 定义的 [**SwAddrMethod**](#1119-swaddrmethod) 将具有以下引用路径：
+根据文档 [\[2\]](#ref-2)，每个回调函数应使用一组独立的内存分配关键字。这在一方面为内存分配的配置提供了很高的灵活性。另一方面，这带来了为 **MemMap** 模块进行高配置工作量的风险，因为所有独立的内存段都必须为 **MemMap** 头文件生成而配置。为了简化这类回调段的集成，建议在基础软件模块描述中，所有描述回调且通常以相同链接器属性处理的 [**MemorySection**](#1014-memorysection) 都引用相同的 [**SwAddrMethod**](#1019-swaddrmethod)。按照 [6.2.1.5](#6215-代码段) 节“代码段”中推荐的内存段，由 **AUTOSAR** 定义的 [**SwAddrMethod**](#1019-swaddrmethod) 将具有以下引用路径：
 
 ```
 /AUTOSAR_MemMap/SwAddrMethods/CALLOUT_CODE
@@ -596,21 +596,21 @@ release: R23-11
 
 内存映射头文件应提供一种机制，通过检查用于开始某个段的模块特定内存分配关键字（见 [6.2.1](#621-对使用内存映射头文件的-bsw-模块和软件组件的实现要求) 节）来选择不同的代码段、变量段或常量段。在此选择之后声明的代码、变量或常量应被映射到该段。
 
-每个 **BSW** 内存映射头文件都应支持用于开始和停止段的内存分配关键字，以覆盖属于输入配置中某个 [**BswImplementation**](#114-bswimplementation) 的每一个相关 [**MemorySection**](#1114-memorysection)。
+每个 **BSW** 内存映射头文件都应支持用于开始和停止段的内存分配关键字，以覆盖属于输入配置中某个 [**BswImplementation**](#104-bswimplementation) 的每一个相关 [**MemorySection**](#1014-memorysection)。
 
-如果 [**BswImplementation**](#114-bswimplementation) **未**包含 `requiredArtifact.[DependencyOnArtifact](#116-dependencyonartifact).category = MEMMAP` 的 [**DependencyOnArtifact**](#116-dependencyonartifact)，则在 [**BswImplementation**](#114-bswimplementation) 中定义的所有 [**MemorySection**](#1114-memorysection) 都属于 `{Mip}_MemMap.h` 内存映射头文件。
-
-**注意：**另请参见 [5.1.1](#511-头文件结构) 节。
-
-如果 [**BswImplementation**](#114-bswimplementation) 包含恰好一个 `requiredArtifact.[DependencyOnArtifact](#116-dependencyonartifact).category = MEMMAP` 的 [**DependencyOnArtifact**](#116-dependencyonartifact)，则在 [**BswImplementation**](#114-bswimplementation) 中定义的所有 [**MemorySection**](#1114-memorysection) 都属于由该 [**DependencyOnArtifact**](#116-dependencyonartifact) 的 `requiredArtifact.artifactDescriptor.shortLabel` 属性所定义的内存映射头文件。
+如果 [**BswImplementation**](#104-bswimplementation) **未**包含 `requiredArtifact.[DependencyOnArtifact](#106-dependencyonartifact).category = MEMMAP` 的 [**DependencyOnArtifact**](#106-dependencyonartifact)，则在 [**BswImplementation**](#104-bswimplementation) 中定义的所有 [**MemorySection**](#1014-memorysection) 都属于 `{Mip}_MemMap.h` 内存映射头文件。
 
 **注意：**另请参见 [5.1.1](#511-头文件结构) 节。
 
-如果 [**BswImplementation**](#114-bswimplementation) 包含恰好一个 `requiredArtifact.[DependencyOnArtifact](#116-dependencyonartifact).category = MEMMAP` 的 [**DependencyOnArtifact**](#116-dependencyonartifact)，则在 [**BswImplementation**](#114-bswimplementation) 中定义并与相同 [**SectionNamePrefix**](#1118-sectionnameprefix) 相关联的所有 [**MemorySection**](#1114-memorysection) 都属于由该 [**DependencyOnArtifact**](#116-dependencyonartifact) 的 `requiredArtifact.artifactDescriptor.shortLabel` 属性所定义的内存映射头文件，其中该 [**DependencyOnArtifact**](#116-dependencyonartifact) 由带有 `implementedIn` 引用的 [**SectionNamePrefix**](#1118-sectionnameprefix) 引用。
+如果 [**BswImplementation**](#104-bswimplementation) 包含恰好一个 `requiredArtifact.[DependencyOnArtifact](#106-dependencyonartifact).category = MEMMAP` 的 [**DependencyOnArtifact**](#106-dependencyonartifact)，则在 [**BswImplementation**](#104-bswimplementation) 中定义的所有 [**MemorySection**](#1014-memorysection) 都属于由该 [**DependencyOnArtifact**](#106-dependencyonartifact) 的 `requiredArtifact.artifactDescriptor.shortLabel` 属性所定义的内存映射头文件。
 
-在这种情况下，[**BswImplementation**](#114-bswimplementation) 可以包含多个 `requiredArtifact.[DependencyOnArtifact](#116-dependencyonartifact).category = MEMMAP` 的 [**DependencyOnArtifact**](#116-dependencyonartifact)。这用于描述带有一个 [**BswModuleDescription**](#115-bswmoduledescription) 的 **ICC2** 集群。**注意：**另请参见 [5.1.1](#511-头文件结构) 节。
+**注意：**另请参见 [5.1.1](#511-头文件结构) 节。
 
-软件组件类型特定的内存映射头文件 `{componentTypeName}_MemMap.h` 应支持用于开始和停止段的内存分配关键字，以覆盖与该软件组件类型相关联的 [**SwcImplementation**](#1122-swcimplementation) 中定义的每一个 [**MemorySection**](#1114-memorysection)。
+如果 [**BswImplementation**](#104-bswimplementation) 包含恰好一个 `requiredArtifact.[DependencyOnArtifact](#106-dependencyonartifact).category = MEMMAP` 的 [**DependencyOnArtifact**](#106-dependencyonartifact)，则在 [**BswImplementation**](#104-bswimplementation) 中定义并与相同 [**SectionNamePrefix**](#1018-sectionnameprefix) 相关联的所有 [**MemorySection**](#1014-memorysection) 都属于由该 [**DependencyOnArtifact**](#106-dependencyonartifact) 的 `requiredArtifact.artifactDescriptor.shortLabel` 属性所定义的内存映射头文件，其中该 [**DependencyOnArtifact**](#106-dependencyonartifact) 由带有 `implementedIn` 引用的 [**SectionNamePrefix**](#1018-sectionnameprefix) 引用。
+
+在这种情况下，[**BswImplementation**](#104-bswimplementation) 可以包含多个 `requiredArtifact.[DependencyOnArtifact](#106-dependencyonartifact).category = MEMMAP` 的 [**DependencyOnArtifact**](#106-dependencyonartifact)。这用于描述带有一个 [**BswModuleDescription**](#105-bswmoduledescription) 的 **ICC2** 集群。**注意：**另请参见 [5.1.1](#511-头文件结构) 节。
+
+软件组件类型特定的内存映射头文件 `{componentTypeName}_MemMap.h` 应支持用于开始和停止段的内存分配关键字，以覆盖与该软件组件类型相关联的 [**SwcImplementation**](#1022-swcimplementation) 中定义的每一个 [**MemorySection**](#1014-memorysection)。
 
 如果段宏在包含内存映射头文件之前被定义，则所选择的段应被激活。
 
@@ -742,7 +742,7 @@ release: R23-11
 
 #### 6.3.1. 代码段
 
-下面的示例展示 [**ApplicationSwComponentType**](#111-applicationswcomponenttype) “MySwc”，其 [**SwcInternalBehavior**](#1123-swcinternalbehavior) 中包含一个 [**RunnableEntity**](#1117-runnableentity) “Run1”。[**RunnableEntity**](#1117-runnableentity) “Run1” 引用 [**SwAddrMethod**](#1119-swaddrmethod) “CODE”，后者的 sectionType 属性被设置为 code。这表达了对该 [**RunnableEntity**](#1117-runnableentity) 的代码分配到名为 “CODE” 的代码段中的请求。
+下面的示例展示 [**ApplicationSwComponentType**](#101-applicationswcomponenttype) “MySwc”，其 [**SwcInternalBehavior**](#1023-swcinternalbehavior) 中包含一个 [**RunnableEntity**](#1017-runnableentity) “Run1”。[**RunnableEntity**](#1017-runnableentity) “Run1” 引用 [**SwAddrMethod**](#1019-swaddrmethod) “CODE”，后者的 sectionType 属性被设置为 code。这表达了对该 [**RunnableEntity**](#1017-runnableentity) 的代码分配到名为 “CODE” 的代码段中的请求。
 
 ![Figure7_1](Figure7_1.png)
 
@@ -762,13 +762,13 @@ release: R23-11
 7 #include "MySwc_MemMap.h"
 ```
 
-**注意：**请注意，对于“MySwc_Run1”函数的定义以及软件组件中所有其他应定位到相同 [**MemorySection**](#1114-memorysection) 的函数，必须使用相同的内存分配关键字。
+**注意：**请注意，对于“MySwc_Run1”函数的定义以及软件组件中所有其他应定位到相同 [**MemorySection**](#1014-memorysection) 的函数，必须使用相同的内存分配关键字。
 
-与 [**ApplicationSwComponentType**](#111-applicationswcomponenttype) “MySwc” 相关联的 [**SwcImplementation**](#1122-swcimplementation) “Impl_MySwc” 定义了它使用名为 CODE 的 [**MemorySection**](#1114-memorysection)。[**MemorySection**](#1114-memorysection) “CODE” 引用 [**SwAddrMethod**](#1119-swaddrmethod) “CODE”。这表明模块特定的（抽象）内存段 CODE 与由 [**SwAddrMethod**](#1119-swaddrmethod) “CODE” 定义的共同寻址策略相结合。
+与 [**ApplicationSwComponentType**](#101-applicationswcomponenttype) “MySwc” 相关联的 [**SwcImplementation**](#1022-swcimplementation) “Impl_MySwc” 定义了它使用名为 CODE 的 [**MemorySection**](#1014-memorysection)。[**MemorySection**](#1014-memorysection) “CODE” 引用 [**SwAddrMethod**](#1019-swaddrmethod) “CODE”。这表明模块特定的（抽象）内存段 CODE 与由 [**SwAddrMethod**](#1019-swaddrmethod) “CODE” 定义的共同寻址策略相结合。
 
 ![Figure7_2](Figure7_2.png)
 
-借助 [**MemMapGenericMapping**](#825-memmapgenericmapping) “CNF_SEC_CODE”，内存映射被配置为：所有引用 [**SwAddrMethod**](#1119-swaddrmethod) “CODE” 的模块特定（抽象）内存段都使用 [**MemMapAddressingModeSet**](#822-memmapaddressingmodeset) “CODE_INTERNAL”。[**MemMapAddressingModeSet**](#822-memmapaddressingmodeset) “CODE_INTERNAL” 通过使用相关的内存分配关键字，定义了开始和停止将代码映射到特定链接器段所需的适当语句。
+借助 [**MemMapGenericMapping**](#825-memmapgenericmapping) “CNF_SEC_CODE”，内存映射被配置为：所有引用 [**SwAddrMethod**](#1019-swaddrmethod) “CODE” 的模块特定（抽象）内存段都使用 [**MemMapAddressingModeSet**](#822-memmapaddressingmodeset) “CODE_INTERNAL”。[**MemMapAddressingModeSet**](#822-memmapaddressingmodeset) “CODE_INTERNAL” 通过使用相关的内存分配关键字，定义了开始和停止将代码映射到特定链接器段所需的适当语句。
 
 借助内存分配头文件中这些信息，可以为软件组件生成如下内容：
 
@@ -790,23 +790,23 @@ release: R23-11
 
 #### 6.3.2. 快速变量段
 
-下面的示例展示 [**ApplicationSwComponentType**](#111-applicationswcomponenttype) “MySwc”，其 [**SwcInternalBehavior**](#1123-swcinternalbehavior) 中包含两个 [**VariableDataPrototype**](#1126-variabledataprototype) “FooBar” 和“EngSpd”。
+下面的示例展示 [**ApplicationSwComponentType**](#101-applicationswcomponenttype) “MySwc”，其 [**SwcInternalBehavior**](#1023-swcinternalbehavior) 中包含两个 [**VariableDataPrototype**](#1026-variabledataprototype) “FooBar” 和“EngSpd”。
 
-[**VariableDataPrototype**](#1126-variabledataprototype) “FooBar” 引用一个 [**ImplementationDataType**](#1112-implementationdatatype)，该类型与定义 baseTypeSize = 8 的 [**SwBaseType**](#1120-swbasetype) 相关联。这表示实现“FooBar”的数据具有 8 位的变量大小。
+[**VariableDataPrototype**](#1026-variabledataprototype) “FooBar” 引用一个 [**ImplementationDataType**](#1012-implementationdatatype)，该类型与定义 baseTypeSize = 8 的 [**SwBaseType**](#1020-swbasetype) 相关联。这表示实现“FooBar”的数据具有 8 位的变量大小。
 
-[**VariableDataPrototype**](#1126-variabledataprototype) “EngSpd” 引用一个 [**ImplementationDataType**](#1112-implementationdatatype)，该类型与定义 baseTypeSize = 16 的 [**SwBaseType**](#1120-swbasetype) 相关联。这表示实现“EngSpd”的数据具有 16 位的变量大小。
+[**VariableDataPrototype**](#1026-variabledataprototype) “EngSpd” 引用一个 [**ImplementationDataType**](#1012-implementationdatatype)，该类型与定义 baseTypeSize = 16 的 [**SwBaseType**](#1020-swbasetype) 相关联。这表示实现“EngSpd”的数据具有 16 位的变量大小。
 
-两个 [**VariableDataPrototype**](#1126-variabledataprototype) 都引用 [**SwAddrMethod**](#1119-swaddrmethod) “VAR_FAST_INIT”，后者的 sectionType 属性被设置为“var”，且 memoryAllocationKeywordPolicy 被设置为 addrMethodShortNameAndAlignment。
+两个 [**VariableDataPrototype**](#1026-variabledataprototype) 都引用 [**SwAddrMethod**](#1019-swaddrmethod) “VAR_FAST_INIT”，后者的 sectionType 属性被设置为“var”，且 memoryAllocationKeywordPolicy 被设置为 addrMethodShortNameAndAlignment。
 
-这表示实现相关 [**VariableDataPrototype**](#1126-variabledataprototype) 的变量必须按其大小排序到不同的 [**MemorySection**](#1114-memorysection) 中。
+这表示实现相关 [**VariableDataPrototype**](#1026-variabledataprototype) 的变量必须按其大小排序到不同的 [**MemorySection**](#1014-memorysection) 中。
 
 ![Figure7_3](Figure7_3.png)
 
-**注意：**请注意，在本示例中两个 [**VariableDataPrototype**](#1126-variabledataprototype) 都必须由 **RTE** 实现。**RTE** 同样必须提供定义所用 [**MemorySection**](#1114-memorysection) 的 **BSW** 模块描述。此外，**RTE** 可能分配额外的缓冲区，例如用于实现隐式通信行为。在本示例中，**RTE** 使用四个不同的 [**MemorySection**](#1114-memorysection) “VAR_FAST_INIT_8”、“VAR_FAST_INIT_16”、“VAR_FAST_INIT_TASK_BUF_8” 和“VAR_FAST_INIT_TASK_BUF_16”来按大小排序变量并分配额外的缓冲区。
+**注意：**请注意，在本示例中两个 [**VariableDataPrototype**](#1026-variabledataprototype) 都必须由 **RTE** 实现。**RTE** 同样必须提供定义所用 [**MemorySection**](#1014-memorysection) 的 **BSW** 模块描述。此外，**RTE** 可能分配额外的缓冲区，例如用于实现隐式通信行为。在本示例中，**RTE** 使用四个不同的 [**MemorySection**](#1014-memorysection) “VAR_FAST_INIT_8”、“VAR_FAST_INIT_16”、“VAR_FAST_INIT_TASK_BUF_8” 和“VAR_FAST_INIT_TASK_BUF_16”来按大小排序变量并分配额外的缓冲区。
 
 ![Figure7_4](Figure7_4.png)
 
-所有这些 [**MemorySection**](#1114-memorysection) 都与 [**SwAddrMethod**](#1119-swaddrmethod) “VAR_FAST_INIT” 相关联。这表明模块特定的（抽象）内存段“VAR_FAST_INIT_8”、“VAR_FAST_INIT_16”、“VAR_FAST_INIT_TASK_BUF_8”和“VAR_FAST_INIT_TASK_BUF_16”与由 [**SwAddrMethod**](#1119-swaddrmethod) “VAR_FAST_INIT” 定义的共同寻址策略相结合。
+所有这些 [**MemorySection**](#1014-memorysection) 都与 [**SwAddrMethod**](#1019-swaddrmethod) “VAR_FAST_INIT” 相关联。这表明模块特定的（抽象）内存段“VAR_FAST_INIT_8”、“VAR_FAST_INIT_16”、“VAR_FAST_INIT_TASK_BUF_8”和“VAR_FAST_INIT_TASK_BUF_16”与由 [**SwAddrMethod**](#1019-swaddrmethod) “VAR_FAST_INIT” 定义的共同寻址策略相结合。
 
 ![Figure7_5](Figure7_5.png)
 
@@ -814,7 +814,7 @@ release: R23-11
 
 ![Figure7_6](Figure7_6.png)
 
-借助 [**MemMapGenericMapping**](#825-memmapgenericmapping) “CNF_VAR_FAST_INIT”，内存映射被配置为：所有引用 [**SwAddrMethod**](#1119-swaddrmethod) “VAR_FAST_INIT” 的模块特定（抽象）内存段都使用 [**MemMapAddressingModeSet**](#822-memmapaddressingmodeset) “VAR_NEAR_INIT”。[**MemMapAddressingModeSet**](#822-memmapaddressingmodeset) “VAR_NEAR_INIT” 通过使用相关的内存分配关键字，定义了开始和停止将具有不同对齐方式（在本示例中为 8 和 16）的变量映射到特定链接器段所需的适当语句。
+借助 [**MemMapGenericMapping**](#825-memmapgenericmapping) “CNF_VAR_FAST_INIT”，内存映射被配置为：所有引用 [**SwAddrMethod**](#1019-swaddrmethod) “VAR_FAST_INIT” 的模块特定（抽象）内存段都使用 [**MemMapAddressingModeSet**](#822-memmapaddressingmodeset) “VAR_NEAR_INIT”。[**MemMapAddressingModeSet**](#822-memmapaddressingmodeset) “VAR_NEAR_INIT” 通过使用相关的内存分配关键字，定义了开始和停止将具有不同对齐方式（在本示例中为 8 和 16）的变量映射到特定链接器段所需的适当语句。
 
 借助内存分配头文件中这些信息，可以为 **BSW** 生成如下内容：
 
@@ -908,7 +908,7 @@ release: R23-11
 7 #ifdef COM_STOP_SEC_CALLOUT_CODE_COM_RXIPDUCALLOUT
 ```
 
-尽管如此，两个内存段的实现是相同的，因为两者都引用相同的 [**SwAddrMethod**](#1119-swaddrmethod)，并且 **MemMap** 模块是使用 [**MemMapGenericMapping**](#825-memmapgenericmapping) 配置的。
+尽管如此，两个内存段的实现是相同的，因为两者都引用相同的 [**SwAddrMethod**](#1019-swaddrmethod)，并且 **MemMap** 模块是使用 [**MemMapGenericMapping**](#825-memmapgenericmapping) 配置的。
 
 #### 6.3.5. 可分配内存部分
 
@@ -942,7 +942,7 @@ release: R23-11
 19 #ifdef ADC_AUTOSCANKERNEL_STOP_SEC_VAR_INIT_QM_LOCAL_16
 ```
 
-尽管如此，两个内存段的实现是相同的，因为两者都引用相同的 [**SwAddrMethod**](#1119-swaddrmethod)，并且 **MemMap** 模块是使用 [**MemMapGenericMapping**](#825-memmapgenericmapping) 配置的。
+尽管如此，两个内存段的实现是相同的，因为两者都引用相同的 [**SwAddrMethod**](#1019-swaddrmethod)，并且 **MemMap** 模块是使用 [**MemMapGenericMapping**](#825-memmapgenericmapping) 配置的。
 
 ## 7. API规范
 
@@ -1227,11 +1227,11 @@ release: R23-11
 
 详情请参阅 **SWS_BSWGeneral**（[\[2\]](#ref-2)）第 10.3 章「发布信息」（**Published Information**）。
 
-## 10. 分析
+## 9. 分析
 
 本章不包含需求，只给出在不同编译器中所用关键字及其语法的概览。该分析对于方法和关键字的正确且完整的规范是必需的，并且基于文档 [\[9\]](#ref-9)、[\[10\]](#ref-10)、[\[11\]](#ref-11)、[\[12\]](#ref-12) 和 [\[13\]](#ref-13)。
 
-### 10.1. 变量的内存分配
+### 9.1. 变量的内存分配
 
 用于开始/停止变量内存段的编译器分析：
 
@@ -1247,7 +1247,7 @@ release: R23-11
 | ADS, ST30 | `#pragma arm section [sort_type[[=]"name"]] [,sort_type="name"]*`<br>sort_type="rwdata, zidata<br>通过关键字进行对齐控制：<br>__packed、__align() |
 | DIABDATA, MPC5554 | `#pragma section class_name [init_name] [uninit_name] [address_mode] [access]`<br>`#pragma section class_name`<br>Pragma 应在声明之前使用。<br>变量的 class_name：<br>BSS、DATA、SDATA |
 
-### 10.2. 常量变量的内存分配
+### 9.2. 常量变量的内存分配
 
 用于开始/停止常量变量内存段的编译器分析：
 
@@ -1263,7 +1263,7 @@ release: R23-11
 | ADS, ST30 | `#pragma arm section [sort_type[[=]"name"]] [,sort_type="name"]*`<br>sort_type="rodata<br>通过关键字进行对齐控制：<br>__packed、__align() |
 | DIABDATA, MPC5554 | `#pragma section class_name [init_name] [uninit_name] [address_mode] [access]`<br>`#pragma section class_name`<br>Pragma 应在声明之前使用。<br>常量变量的 class_name：<br>CONST、SCONST、STRING |
 
-### 10.3. 代码的内存分配
+### 9.3. 代码的内存分配
 
 用于开始/停止代码内存段的编译器分析：
 
@@ -1279,9 +1279,9 @@ release: R23-11
 | ADS, ST30 | `#pragma arm section [sort_type[[=]"name"]] [,sort_type="name"]*`<br>sort_type="code |
 | DIABDATA, MPC5554 | `#pragma section class_name [init_name] [uninit_name] [address_mode] [access]`<br>`#pragma section class_name`<br>Pragma 应在声明之前使用。<br>代码的 class_name：<br>CODE |
 
-## 11. 引用的元类
+## 10. 引用的元类
 
-### 11.1. ApplicationSwComponentType
+### 10.1. ApplicationSwComponentType
 
 | 属性 | 值 |
 | --- | --- |
@@ -1291,7 +1291,7 @@ release: R23-11
 | 基类 | `ARElement`, `ARObject`, `AtomicSwComponentType`, `AtpBlueprint`, `AtpBlueprintable`, `AtpClassifier`, `AtpType`, `CollectableElement`, `Identifiable`, `MultilanguageReferrable`, `PackageableElement`, `Referrable`, `SwComponentType` |
 | 聚合自 | `ARPackage.element` |
 
-### 11.2. AtomicSwComponentType
+### 10.2. AtomicSwComponentType
 
 | 属性 | 值 |
 | --- | --- |
@@ -1310,7 +1310,7 @@ release: R23-11
 | 多重性 | `0..1` |
 | 描述 | 表示该 `AtomicSwComponentType` 的 `SymbolProps`。构造型: atpSplitable 标签: atp.Splitkey=symbolProps.shortName |
 
-### 11.3. BaseTypeDirectDefinition
+### 10.3. BaseTypeDirectDefinition
 
 | 属性 | 值 |
 | --- | --- |
@@ -1340,7 +1340,7 @@ release: R23-11
 | 多重性 | `0..1` |
 | 描述 | 该属性描述此类基础类型在原生编程语言（主要是 C 编程语言）中的声明。代码生成器随后可以利用它把必要的声明包含进头文件。例如：shortName 为 "MyUnsignedInt"、nativeDeclaration 为 "unsigned short" 的 `BaseType` 会生成 typedef unsigned short MyUnsignedInt;。如果未定义该属性，**RTE** 将不会把引用它的 `ImplementationDataType` 生成为 typedef。如果给定了 nativeDeclaration 类型，它应满足 `basetypeEncoding` 和 `baseTypeSize` 所给出的特征。这是为了保证软件组件、**RTE**、**COM** 和 **MCM** 系统对其进行一致的处理和解释所必需的。标签: xml.sequenceOffset=120 |
 
-### 11.4. BswImplementation
+### 10.4. BswImplementation
 
 | 属性 | 值 |
 | --- | --- |
@@ -1374,7 +1374,7 @@ release: R23-11
 | 多重性 | `*` |
 | 描述 | 引用：• 当该 `BswImplementation` 表示单个模块时，其所使用的供应商特定 `EcucModuleDef`；• 当其表示模块集群时，其所使用的多个 `EcucModuleDef`；• 当其表示库时，其所使用的一个或零个 `EcucModuleDef`。标签: xml.roleWrapperElement=true |
 
-### 11.5. BswModuleDescription
+### 10.5. BswModuleDescription
 
 | 属性 | 值 |
 | --- | --- |
@@ -1440,7 +1440,7 @@ release: R23-11
 | 多重性 | `*` |
 | 描述 | 规定本模块或集群对某个外部触发器做出反应。该 `requiredTrigger` 在本语境中局部声明，并将通过 **BswScheduler** 的配置连接到另一个模块或集群的 `providedTrigger`。构造型: atpSplitable; atpVariation 标签: atp.Splitkey=requiredTrigger.shortName, requiredTrigger.variationPoint.shortLabel vh.latestBindingTime=preCompileTime xml.sequenceOffset=40 |
 
-### 11.6. DependencyOnArtifact
+### 10.6. DependencyOnArtifact
 
 | 属性 | 值 |
 | --- | --- |
@@ -1458,7 +1458,7 @@ release: R23-11
 | 多重性 | `*` |
 | 描述 | 规定该依赖是为哪些过程步骤所需的。 |
 
-### 11.7. EcucModuleConfigurationValues
+### 10.7. EcucModuleConfigurationValues
 
 | 属性 | 值 |
 | --- | --- |
@@ -1492,7 +1492,7 @@ release: R23-11
 | 多重性 | `0..1` |
 | 描述 | 指示某个模块实现是否具有或计划具有（即在链接或 post-build 时引入）新的 post-build 变体点。**TRUE** 表示是，**FALSE** 表示否。如果未定义该属性，则应假定 **FALSE** 语义。 |
 
-### 11.8. EcucValueCollection
+### 10.8. EcucValueCollection
 
 | 属性 | 值 |
 | --- | --- |
@@ -1510,7 +1510,7 @@ release: R23-11
 | 多重性 | `0..1` |
 | 描述 | 表示与为该 **ECU** 配置描述所配置的 **ECU** 相关的系统配置提取。 |
 
-### 11.9. EngineeringObject
+### 10.9. EngineeringObject
 
 | 属性 | 值 |
 | --- | --- |
@@ -1536,7 +1536,7 @@ release: R23-11
 | 多重性 | `1` |
 | 描述 | 这是工程对象的短名。注意，它被建模为 NameToken 而非 Identifier，因为在 ASAM-CC 中它也是 NameToken。标签: xml.sequenceOffset=10 |
 
-### 11.10. Identifiable
+### 10.10. Identifiable
 
 | 属性 | 值 |
 | --- | --- |
@@ -1570,7 +1570,7 @@ release: R23-11
 | 多重性 | `0..1` |
 | 描述 | 该属性的用途是为元类的实例提供一个全局唯一的标识符。该属性的值应是带有标识符类型前缀的全局唯一字符串。例如，要包含由 The Open Group 定义的 DCE UUID，该 UUID 应以 "DCE:" 为前缀。该属性的值可用于支持不同 **AUTOSAR** 模型的合并。UUID（Universally Unique Identifier）的形式取自 The Open Group（原 Open Software Foundation）定义的标准。该标准被广泛使用，包括被 Microsoft 用于 **COM**（GUID）、被多个公司用于基于 **CORBA** 的 DCE。生成这些 128 位 ID 的方法已在标准中发布，其有效性和唯一性在实践中没有争议。如果省略 id 命名空间，则假定 DCE。示例为 "DCE:2fac1234-31f8-11b4-a222-08002b34c003"。uuid 属性对 **AUTOSAR** 模型没有语义含义，也不要求 **AUTOSAR** 工具管理其时间戳。标签: xml.attribute=true |
 
-### 11.11. Implementation
+### 10.11. Implementation
 
 | 属性 | 值 |
 | --- | --- |
@@ -1641,7 +1641,7 @@ release: R23-11
 | 多重性 | `0..1` |
 | 描述 | 依据 **AUTOSAR** 供应商列表的该实现的供应商 ID。 |
 
-### 11.12. ImplementationDataType
+### 10.12. ImplementationDataType
 
 | 属性 | 值 |
 | --- | --- |
@@ -1671,7 +1671,7 @@ release: R23-11
 | 多重性 | `0..1` |
 | 描述 | 该属性用于控制 **AUTOSAR** 工具链中的哪一部分应触发数据类型定义。 |
 
-### 11.13. MemoryAllocationKeywordPolicyType
+### 10.13. MemoryAllocationKeywordPolicyType
 
 | 属性 | 值 |
 | --- | --- |
@@ -1684,7 +1684,7 @@ release: R23-11
 | `addrMethodShortName` | 所引用的各 `MemorySection` 的 shortName，以及代码中所属的内存分配关键字，均以 `SwAddrMethod` 的 shortName 构成。当该属性不存在时，此值为默认值。标签: atp.EnumerationLiteralIndex=0 |
 | `addrMethodShortNameAndAlignment` | 所引用的各 `MemorySection` 的 shortName，以及代码中所属的内存分配关键字，均以 `SwAddrMethod` 的 shortName 加上一个可变的对齐后缀构成。其中，对齐后缀需要与相关 `MemorySection` 的 alignment 属性保持一致。标签: atp.EnumerationLiteralIndex=1 |
 
-### 11.14. MemorySection
+### 10.14. MemorySection
 
 | 属性 | 值 |
 | --- | --- |
@@ -1722,7 +1722,7 @@ release: R23-11
 | 多重性 | `0..1` |
 | 描述 | 按主描述中所说明的那样定义段名。通过在代码生成中使用该属性（而非 shortName），可以定义多个具有相同名称但使用不同 `SectionNamePrefix` 的不同 `MemorySection`，例如 symbol = CODE。 |
 
-### 11.15. MemorySectionType
+### 10.15. MemorySectionType
 
 | 属性 | 值 |
 | --- | --- |
@@ -1740,7 +1740,7 @@ release: R23-11
 | `excludeFromFlash` | 此内存段保留给用于计算所谓依赖参数之值的 MCD 系统的“虚拟参数”。不是同时为“虚拟参数”的依赖参数被分配在 **ECU** 内存中。而虚拟参数则不分配在 **ECU** 内存中。虚拟参数存在于 **ECU** Hex 文件中，目的是在离线标定会话期间被考虑（用于计算依赖参数的值）。标签: atp.EnumerationLiteralIndex=7 |
 | `var` | 用于全局或静态变量。预期初始化由 sectionInitializationPolicy 属性规定。标签: atp.EnumerationLiteralIndex=9 |
 
-### 11.16. Referrable
+### 10.16. Referrable
 
 | 属性 | 值 |
 | --- | --- |
@@ -1758,7 +1758,7 @@ release: R23-11
 | 多重性 | `*` |
 | 描述 | 规定 `Referrable.shortName` 如何由若干个 shortNameFragment 组成。标签: xml.sequenceOffset=-90 |
 
-### 11.17. RunnableEntity
+### 10.17. RunnableEntity
 
 | 属性 | 值 |
 | --- | --- |
@@ -1840,7 +1840,7 @@ release: R23-11
 | 多重性 | `*` |
 | 描述 | `writtenLocalVariable` 的存在意味着某个 `RunnableEntity` 需要对以 implicitInterRunnableVariable 或 explicitInterRunnableVariable 角色的 `VariableDataPrototype` 的写访问。`writtenLocalVariable` 的聚合受变体（variability）约束，目的是支持 implicitInterRunnableVariable 和 explicitInterRunnableVariable 的条件存在，或实现中 writtenLocalVariable（点）的变体存在。构造型: atpSplitable; atpVariation 标签: atp.Splitkey=writtenLocalVariable.shortName, writtenLocalVariable.variationPoint.shortLabel vh.latestBindingTime=preCompileTime |
 
-### 11.18. SectionNamePrefix
+### 10.18. SectionNamePrefix
 
 | 属性 | 值 |
 | --- | --- |
@@ -1854,7 +1854,7 @@ release: R23-11
 | 多重性 | `0..1` |
 | 描述 | 可选的引用，允许指示包含带有该前缀内存段预处理实现的代码工件（头文件）。该链接的使用优先于使用默认名称（由 `BswModuleDescription` 的 shortName 派生）的内存映射头文件。 |
 
-### 11.19. SwAddrMethod
+### 10.19. SwAddrMethod
 
 | 属性 | 值 |
 | --- | --- |
@@ -1880,7 +1880,7 @@ release: R23-11
 | 多重性 | `0..1` |
 | 描述 | 定义可与该寻址方法相关联的内存段的类型。 |
 
-### 11.20. SwBaseType
+### 10.20. SwBaseType
 
 | 属性 | 值 |
 | --- | --- |
@@ -1890,7 +1890,7 @@ release: R23-11
 | 基类 | `ARElement`, `ARObject`, `AtpBlueprint`, `AtpBlueprintable`, `BaseType`, `CollectableElement`, `Identifiable`, `MultilanguageReferrable`, `PackageableElement`, `Referrable` |
 | 聚合自 | `ARPackage.element` |
 
-### 11.21. SwComponentType
+### 10.21. SwComponentType
 
 | 属性 | 值 |
 | --- | --- |
@@ -1925,7 +1925,7 @@ release: R23-11
 | 多重性 | `*` |
 | 描述 | 这允许规定在引用 `SwComponentType` 的上下文中哪些 UnitGroup 是有关的。 |
 
-### 11.22. SwcImplementation
+### 10.22. SwcImplementation
 
 | 属性 | 值 |
 | --- | --- |
@@ -1947,7 +1947,7 @@ release: R23-11
 | 多重性 | `0..1` |
 | 描述 | 标识特定的 **RTE** 供应商。该信息在将应用代码与 **RTE** 集成（特别是链接）时可能很重要。其语义是：（如果该关联存在）相应的代码是为适配由该特定供应商提供的 vendor-mode **RTE** 而创建的。尝试将该代码与另一个以 vendor 模式生成的 **RTE** 集成通常是不可能的。 |
 
-### 11.23. SwcInternalBehavior
+### 10.23. SwcInternalBehavior
 
 | 属性 | 值 |
 | --- | --- |
@@ -2021,7 +2021,7 @@ release: R23-11
 | 多重性 | `*` |
 | 描述 | C/C++ 实现中变体点的代理。构造型: atpSplitable 标签: atp.Splitkey=variationPointProxy.shortName |
 
-### 11.24. SwcToImplMapping
+### 10.24. SwcToImplMapping
 
 | 属性 | 值 |
 | --- | --- |
@@ -2039,7 +2039,7 @@ release: R23-11
 | 多重性 | `0..1` |
 | 描述 | 对特定 **Implementation** 描述的引用。由所指定的软件组件实例所使用的 **Implementation**。这允许对因将原子软件组件的实例映射到 **ECU** 而产生的资源消耗作出更精确的估算。 |
 
-### 11.25. SystemMapping
+### 10.25. SystemMapping
 
 | 属性 | 值 |
 | --- | --- |
@@ -2145,7 +2145,7 @@ release: R23-11
 | 多重性 | `*` |
 | 描述 | 将一个通信资源映射到一个 `SystemSignal`。构造型: atpSplitable; atpVariation 标签: atp.Splitkey=systemSignalToComResourceMapping.shortName, systemSignalToComResourceMapping.variationPoint.shortLabel vh.latestBindingTime=systemDesignTime |
 
-### 11.26. VariableDataPrototype
+### 10.26. VariableDataPrototype
 
 | 属性 | 值 |
 | --- | --- |

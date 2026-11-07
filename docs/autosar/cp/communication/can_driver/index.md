@@ -156,7 +156,7 @@ Can模块需与其他模块进行直接的交互。如：默认错误跟踪（**
 
 **Can_GeneralTypes.h**应包含**AUTOSAR CAN**模块（**Can**、**CanIf**和**CanTrcv**）之间共享的所有类型和常量。
 
-## 6. 功能规范
+## 6. 功能规格
 
 在**L-PDU**传输时，**Can**模块将**L-PDU**写入Can控制器硬件内部的适当缓冲区。在**L-PDU**接收时，**Can**模块以ID、数据长度和L-SDU指针为参数调用接收指示回调函数（**RX indication callback function**）。
 

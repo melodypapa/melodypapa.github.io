@@ -4527,37 +4527,37 @@ title: "AUTOSAR API 函数清单"
 **[Fr_TransmitTxLPdu](../communication/flexray_driver/index.md#7411-fr_transmittxlpdu)**
 > 函数 · [AUTOSAR FlexRay Driver（FlexRay 驱动程序）](../communication/flexray_driver/index.md) · SWS_FlexRayDriver · R23-11
 
-**[FrArTp_CancelReceive](../communication/flexray_ar_transport_layer/index.md#8333-frartp_cancelreceive)**
+**[FrArTp_CancelReceive](../communication/flexray_ar_transport_layer/index.md#7333-frartp_cancelreceive)**
 > 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
-**[FrArTp_CancelTransmit](../communication/flexray_ar_transport_layer/index.md#8332-frartp_canceltransmit)**
+**[FrArTp_CancelTransmit](../communication/flexray_ar_transport_layer/index.md#7332-frartp_canceltransmit)**
 > 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
-**[FrArTp_ChangeParameter](../communication/flexray_ar_transport_layer/index.md#8334-frartp_changeparameter)**
+**[FrArTp_ChangeParameter](../communication/flexray_ar_transport_layer/index.md#7334-frartp_changeparameter)**
 > 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
-**[FrArTp_GetVersionInfo](../communication/flexray_ar_transport_layer/index.md#8311-frartp_getversioninfo)**
+**[FrArTp_GetVersionInfo](../communication/flexray_ar_transport_layer/index.md#7311-frartp_getversioninfo)**
 > 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
-**[FrArTp_Init](../communication/flexray_ar_transport_layer/index.md#8321-frartp_init)**
+**[FrArTp_Init](../communication/flexray_ar_transport_layer/index.md#7321-frartp_init)**
 > 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
-**[FrArTp_MainFunction](../communication/flexray_ar_transport_layer/index.md#851-frartp_mainfunction)**
+**[FrArTp_MainFunction](../communication/flexray_ar_transport_layer/index.md#751-frartp_mainfunction)**
 > 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
-**[FrArTp_RxIndication](../communication/flexray_ar_transport_layer/index.md#842-frartp_rxindication)**
+**[FrArTp_RxIndication](../communication/flexray_ar_transport_layer/index.md#742-frartp_rxindication)**
 > 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
-**[FrArTp_Shutdown](../communication/flexray_ar_transport_layer/index.md#8322-frartp_shutdown)**
+**[FrArTp_Shutdown](../communication/flexray_ar_transport_layer/index.md#7322-frartp_shutdown)**
 > 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
-**[FrArTp_Transmit](../communication/flexray_ar_transport_layer/index.md#8331-frartp_transmit)**
+**[FrArTp_Transmit](../communication/flexray_ar_transport_layer/index.md#7331-frartp_transmit)**
 > 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
-**[FrArTp_TriggerTransmit](../communication/flexray_ar_transport_layer/index.md#841-frartp_triggertransmit)**
+**[FrArTp_TriggerTransmit](../communication/flexray_ar_transport_layer/index.md#741-frartp_triggertransmit)**
 > 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
-**[FrArTp_TxConfirmation](../communication/flexray_ar_transport_layer/index.md#843-frartp_txconfirmation)**
+**[FrArTp_TxConfirmation](../communication/flexray_ar_transport_layer/index.md#743-frartp_txconfirmation)**
 > 函数 · [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../communication/flexray_ar_transport_layer/index.md) · SWS_FlexRayARTransportLayer · R23-11
 
 **[FreshnessManagement](../communication/sec_oc/index.md#7832-freshnessmanagement)**

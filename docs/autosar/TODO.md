@@ -8,6 +8,8 @@
 
 ## Backlog
 
+**Compound chapter-2 headings (user decision 2026-11-07, issue #296)** — STANDARD.md §2 now sanctions the full direct translation of a compound source ch.2 heading (`缩略语和简称` / `缩略语和定义` / `缩略语和缩写` / `首字母缩略词、缩略语和术语` / `缩略语、缩写和定义`); the 11 articles inventoried in `sync-todo/VerifyFinished.md` are compliant and were **not** renamed. `standard_types` ch.5 软件架构 is exempt in §7 (its source has no *Dependencies to other modules* chapter). `can_driver` ch.6 功能规范 → 功能规格 corrected. `flexray_ar_transport_layer` and `memory_mapping` chapter gaps renumbered with a full anchor sweep (issue #296). SKILL.md Phase A checks 2/5 amended in the same change.
+
 - **gen_api_list entity-headings (2026-11-04)**: the API-listing identifier scan does not recognize identifier-shaped headings that carry HTML entities (`Mfx_Add_&lt;InTypeMn1&gt;…`) — the mfl/mfx articles' templated API entries are absent from `cp/api/` (mfl 84/97, mfx 2/33 recognized). Extend the identifier-shape regex to unescape `&lt;`/`&gt;` before the shape test, then regenerate; same applies to future templated-API library articles (ifl/ifx/efx).
 **Placeholder-section sweep (user decision 2026-10-28 — STANDARD.md §1 placeholder exception: a source section whose entire content is `None.`/`N.A.` is omitted entirely, no heading + lone 无/不适用 body; KeyM precedent, generalized to every section class)**
 
