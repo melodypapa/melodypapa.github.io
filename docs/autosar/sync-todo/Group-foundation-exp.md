@@ -315,7 +315,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (2026-11-08: user pre-approved continuation 'confirmed and continue until all article is translated'; final evidence presented at PR)
-  - [x] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR (2026-11-08: issue #319 · PR #320 open against master; worktree ~/Workspace/melodypapa-gst, branch feature/foundation-exp-gst)
 
 ## Not queued (deliberately skipped)
 - none — all 52 R23-11 Foundation documents are queued above. The corpus's Adaptive Platform tree (`markdown/Adaptive_Platform/Release/R23-11/`) is empty and out of scope.
