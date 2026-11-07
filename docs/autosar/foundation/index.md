@@ -33,6 +33,7 @@ title: "基础标准（Foundation）"
   * [Requirements on Security Extract Template（安全提取模板需求）](methodology_templates/rs_security_extract_template/index.md)
   * [Requirements on Feature Model Exchange Format（特征模型交换格式需求）](methodology_templates/rs_feature_model_exchange_format/index.md)
   * [Standardization Template（标准化模板）](methodology_templates/tps_standardization_template/index.md)
+  * [Generic Structure Template（通用结构模板）](methodology_templates/tps_generic_structure_template/index.md)
   * [Feature Model Exchange Format（特征模型交换格式）](methodology_templates/tps_feature_model_exchange_format/index.md)
   * [Requirements on Methodology（方法论需求）](methodology_templates/rs_methodology/index.md)
   * [Requirements on Standardization Template（标准化模板需求）](methodology_templates/rs_standardization_template/index.md)
