@@ -10002,3 +10002,1105 @@ include = selectedViews ∈ declaredViews
 排除内容的意思是“不向任何受众呈现它”。这可以通过规定一个任意命名的视图（例如 DONOTPRESENT）来实现——它永远不会在生产中被选择。
 
 若选择了 ViewToken “DETAILED”（表 9.101），则只有以该专门视图规定的文本与未规定任何视图的文本会出现。以 ViewToken “INTERNAL” 规定的文本将被排除出内容（见图 9.18）。
+
+## 10. 构建动作清单（The Build Action Manifest）
+
+### 10.1. 引言
+
+任何 BSW 模块的交换都包含 ECU 配置代码生成器（又称 ECUC 处理器、模块生成器）的交换。
+
+- 把这些模块生成器无缝集成到软件构建框架中，需要关于输入/输出数据的精确知识。
+- 有了这一知识，外部栈（foreign stacks）的集成被简化、更不易出错。
+- 若没有这一知识的形式化规范，“外部”模块生成器的集成是低效且易错的。
+
+有了这样的形式化规范，BSW 模块集成者可以获得以下好处：
+
+- 显著降低集成工作量与歧义。
+- 由于代码生成不再绑定到专门的编辑器应用，整个项目可以使用单一的配置编辑器。
+
+![图 10.1：通用配置编辑器（Generic Configuration Editor）](Figure10-1.png)
+
+主要针对以下用例：
+
+- 一级供应商（tier 1）必须集成来自多个 BSW 厂商的 BSW 模块。
+- BSW 厂商不仅可以销售完整的 BSW 解决方案，也可以销售单个 BSW 模块。
+
+BuildActionManifest 可以在模块的 Implementation（实现）中标注 [TPS\_BSWMDT\_04085]。
+
+以下图展示所应用处理器的序列。
+
+![图 10.2：被应用的处理器（Applied Processors）](Figure10-2.png)
+
+一般序列是：初始化（Initialize）→ 执行构建（Perform build）→ 拆除构建（Tear down build）。
+
+### 10.2. BuildActionManifest 概览
+
+![图 10.3：构建动作清单概览（Build Action Manifest Overview）](Figure10-3.png)
+
+表10.1：BuildActionManifest
+
+| 类         | BuildActionManifest                                                                                                                                                                     |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::BuildActionManifest                                                                                                                                            |
+| 注意       | 该元类表示规定用于处理制品的清单的能力。示例用例是 ECUC 参数值的处理。标签：atp.recommendedPackage=BuildActionManifests xml.globalElement=false                                                              |
+| 基类       | ARElement、ARObject、AtpBlueprint、AtpBlueprintable、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                                          |
+| 聚合于     | ARPackage.element                                                                                                                                                                                          |
+
+| 属性                     | 类型                    | 多重性 | 类别 | 注意                                                                                                                                                                                                                                    |
+|---------------------------|--------------------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| buildAction               | BuildAction              | *      | aggr | 这表示构建链中的一个特定动作。构型：atpSplitable；atpVariation 标签：atp.Splitkey=buildAction.shortName, buildAction.variationPoint.shortLabel vh.latestBindingTime=blueprintDerivationTime                                                                    |
+| buildActionEnvironment    | BuildActionEnvironment   | *      | aggr | 这表示一个构建动作环境。构型：atpSplitable；atpVariation 标签：atp.Splitkey=buildActionEnvironment.shortName, buildActionEnvironment.variationPoint.shortLabel vh.latestBindingTime=blueprintDerivationTime                                                        |
+| dynamicAction             | BuildAction              | *      | ref  | 这表示将作为动态动作集合的一部分执行的动作。                                                                                                                                                                                                              |
+| startAction               | BuildAction              | *      | ref  | 这规定在过程开始时要执行的动作列表。标签：xml.sequenceOffset=-90                                                                                                                                                                                          |
+| tearDownAction            | BuildAction              | *      | ref  | 这规定在清单中全部其他动作执行完毕后应当执行的动作集合。标签：xml.sequenceOffset=-80                                                                                                                                                                          |
+
+**构建动作清单概览**
+
+BuildActionManifest 是一个 ARElement，它提供描述在给定环境中要执行的特定步骤的能力——这些步骤例如需要在生成 AUTOSAR 可执行文件时执行。它主要由两个实体组成：
+
+- BuildAction 是为（例如）生成 ECU 可执行文件做出贡献而执行的一个特定动作。
+- BuildActionEnvironment 提供关于用于执行各 BuildAction 的环境的信息。
+
+由此，清单定义了三组动作：
+
+- startAction：应当在任何其他动作执行之前按给定顺序执行。
+- tearDownAction：应当在全部其他动作完成后按给定顺序执行。
+- dynamicAction：属于本质构建过程的一部分。这些动作应当在 startAction 完成后执行。它们的顺序由输入/输出关系、相应地 followUpAction / predecessorAction 确定。若顺序无法确定或未规定，则[每个 dynamicAction]的结果应当与执行顺序无关。
+
+#### 10.2.1. BuildAction
+
+这表示为生成 ECU 可执行文件的活动做出贡献的一个特定动作。
+
+![图 10.4：构建动作细节（Build Action Details）](Figure10-4.png)
+
+表10.2：BuildAction
+
+| 类         | BuildAction                                                                                                                                                                      |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::BuildActionManifest                                                                                                                                        |
+| 注意       | 该元类表示规定一个构建动作的能力。                                                                                                                                                                    |
+| 基类       | ARObject、AtpBlueprint、AtpBlueprintable、BuildActionEntity、Identifiable、MultilanguageReferrable、Referrable                                                                                          |
+| 聚合于     | BuildActionManifest.buildAction                                                                                                                                                                        |
+
+| 属性                 | 类型                    | 多重性 | 类别 | 注意                                                                                                                                                  |
+|-----------------------|--------------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| createdData           | BuildActionIoElement     | *      | aggr | 这表示由处理器创建的制品。                                                                                                                                                |
+| followUpAction        | BuildAction              | *      | ref  | 该关联规定一组后续动作。标签：xml.sequenceOffset=-80                                                                                                                      |
+| inputData             | BuildActionIoElement     | *      | aggr | 这表示由处理器读取的制品。                                                                                                                                                |
+| modifiedData          | BuildActionIoElement     | *      | aggr | 这表示被该动作修改的数据。                                                                                                                                                |
+| predecessorAction     | BuildAction              | *      | ref  | 该关联规定一组前驱。这些动作应当在给定动作之前完成（但不必紧接着）。这些动作需要按规定的顺序执行。标签：xml.sequenceOffset=-90                                                  |
+| requiredEnvironment   | BuildActionEnvironment   | 1      | ref  | 这表示使用规定的处理器所需的环境。                                                                                                                                          |
+
+**BuildActionEnvironment 的用途**
+
+一个构建动作引用它应当在其中执行的环境。注意，构建动作不提供用于错误处理与中止条件的专门属性。这由执行构建动作的环境负责。
+
+**构建动作涉及的数据**
+
+一个构建动作以聚合的 BuildActionIoElement 的形式规定涉及的数据。BuildAction 中 BuildActionIoElement 聚合的角色决定数据是只读、被修改，还是第一次被创建。
+
+**构建动作的序列**
+
+BuildAction 中涉及的数据可以用来确定一个合适的执行顺序。适用以下提示：
+
+- 消费数据的动作应当在生产或修改同一数据的动作之后执行。
+- 既消费又生产同一数据的动作应当使用 modifiedData。否则该动作会成为自己的前驱/后继。
+- modifiedData 特别支持动作操作或校验既有数据的情形。这些动作应当在任何消费动作之前执行。
+- BuildAction 之间的隐式相互依赖可以使用 predecessorAction 相应地 followUpAction 规定。
+
+实现/调用的细节使用超类 BuildActionEntity 的属性规定。
+
+#### 10.2.2. BuildActionIoElement
+
+这表示一个 BuildAction 中涉及的数据。
+
+![图 10.5：构建动作清单输入/输出（Build Action Manifest Input/Output）](Figure10-5.png)
+
+表10.3：BuildActionIoElement
+
+| 类         | BuildActionIoElement                                                                                                  |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::BuildActionManifest                                                                               |
+| 注意       | 该元类表示规定 BuildAction 的输入/输出实体的能力。                                                                                          |
+| 基类       | ARObject                                                                                                                                |
+| 聚合于     | BuildAction.createdData、BuildAction.inputData、BuildAction.modifiedData                                                                      |
+
+| 属性                   | 类型                    | 多重性 | 类别 | 注意                                                                                                                                                                          |
+|-------------------------|--------------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| category                | NameToken                | 1      | attr | 该元素为父元素指派一个类别。它旨在特化对象的用法和/或内容。这样的特化也可能对整个子结构施加特定的语义约束。另参见 Identifiable。标签：xml.sequenceOffset=-100                                                |
+| ecucDefinition          | EcucDefinitionElement    | 0..1   | ref  | 该关联标注一个 ECUC 参数定义。这样被引用的参数是构建动作输入/输出的对象。注意，对定义的引用表示构建动作有权读取和/或写入该定义及全部被包含定义的取值。                                                |
+| engineeringObject       | BuildEngineeringObject   | 0..1   | aggr | 这表示一个适用于该构建动作的制品。                                                                                                                                                              |
+| foreignModelReference   | ForeignModelReference    | 0..1   | aggr | 这是对一个外部模型元素的引用。注意，它没有被建模为关联，因为它也应当能够引用非 AUTOSAR 模型。                                                                                                      |
+| role                    | Identifier               | 0..1   | attr | 该属性允许标注该集合的一个特定角色。注意，适用的语义应当由双方共同约定。标签：xml.sequenceOffset=30                                                                                                  |
+| sdg                     | Sdg                      | *      | aggr | 该特殊数据组允许标注特定的数据。其结构由各方共同约定。标签：xml.sequenceOffset=-90                                                                                                                |
+
+**构建动作中的输入数据**
+
+该模型涵盖三类数据：
+
+1. 制品（Artifacts）——表示为 BuildEngineeringObject；
+2. ECUC 参数——表示为对 EcucDefinitionElement 的引用；
+3. 对任意模型元素的引用——表示为 GenericModelReference。
+
+**构建动作中的 ECUC 参数**
+
+请注意，若引用了容器，则该动作也可以触达该容器中的参数/子容器。
+
+**构建动作中的 ECUC 容器**
+
+还需注意，若角色为 createdData 的 BuildActionIoElement 中引用了一个容器，则创建一个新的容器。
+
+**构建动作中的通用模型元素**
+
+对于通用模型元素，假定模型元素可以像 AUTOSAR 模型内的引用那样被引用。这也意味着被引用的模型元素位于一个专有模型中。
+
+[TPS\_GST\_00344] 的一个示例是在工作流模型中设置状态信息。
+
+**BuildActionIoElement 中的特殊数据**
+
+sdg 可以用于把环境特定的属性附着到 BuildActionIoElement 上。
+
+#### 10.2.3. BuildActionEnvironment
+
+该实体规定构建环境。主要目的是提供让构建动作标注所需环境的可能性。该模型支持规定任意属性，可用于支持环境的安装与测试。
+
+表10.4：BuildActionEnvironment
+
+| 类         | BuildActionEnvironment                                                                                                             |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::BuildActionManifest                                                                                        |
+| 注意       | 该元类表示规定一个构建动作环境的能力。                                                                                                                |
+| 基类       | ARObject、AtpBlueprint、AtpBlueprintable、Identifiable、MultilanguageReferrable、Referrable                                                               |
+| 聚合于     | BuildActionManifest.buildActionEnvironment                                                                                                              |
+
+| 属性 | 类型 | 多重性 | 类别 | 注意                                                               |
+|------|------|--------|------|---------------------------------------------------------------------------|
+| sdg  | Sdg  | *      | aggr | 这表示一个通用数据结构，用于标注 BuildActionEnvironment 的参数。 |
+
+#### 10.2.4. BuildActionEntity
+
+BuildActionEntity 规定必要的实现/调用属性。
+
+![图 10.6：构建动作实体（Build Action Entity）](Figure10-6.png)
+
+表10.5：BuildActionEntity
+
+| 类         | BuildActionEntity（抽象）                                                                                                                                                |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::BuildActionManifest                                                                                                                               |
+| 注意       | 该元类表示描述一个构建动作实体的能力，它既可以特化为环境，也可以特化为单个构建动作。                                                                                                            |
+| 基类       | ARObject、AtpBlueprint、AtpBlueprintable、Identifiable、MultilanguageReferrable、Referrable                                                                                                    |
+| 子类       | BuildAction                                                                                                                                                                                 |
+
+| 属性             | 类型                     | 多重性 | 类别 | 注意                                                                     |
+|-------------------|---------------------------|--------|------|----------------------------------------------------------------------------------|
+| deliveryArtifact  | AutosarEngineeringObject  | *      | aggr | 这表示该实体用于引用目的的交付制品。                                                      |
+| invocation        | BuildActionInvocator      | 0..1   | aggr | 这规定如何在给定的环境中调用一个构建动作。                                                  |
+
+**特殊数据的使用**
+
+BuildActionManifest 内特殊数据（Sdg）的使用特定于具体应用，因此不被标准化。清单 10.1 展示了如何在 BuildAction 中标注一个制品的更具体角色的示例。
+
+![图 10.7：BuildAction 特殊数据的使用（BuildAction Usage of Special Data）](Figure10-7.png)
+
+表10.6：BuildActionInvocator
+
+| 类         | BuildActionInvocator                                                                                                                                    |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::BuildActionManifest                                                                                                                  |
+| 注意       | 该元类表示规定构建动作中任务调用的能力。                                                                                                                                        |
+| 基类       | ARObject                                                                                                                                                                      |
+| 聚合于     | BuildActionEntity.invocation                                                                                                                                                       |
+
+| 属性   | 类型           | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                            |
+|---------|-----------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| command | VerbatimString  | 0..1   | attr | 这表示调用处理器的命令。注意，这是一个通用字符串，可以在处理器环境中被恰当地解释。注意它是可选的，因为某些动作被硬编码在环境中，不需要显式的命令。另一方面，调用器的属性可能很复杂且不被标准化。                                                                                          |
+| sdg     | Sdg             | *      | aggr | 这表示一个通用数据结构，用于标注 BuildAction 的参数。                                                                                                                                                                                                                         |
+
+表10.7：BuildEngineeringObject
+
+| 类         | BuildEngineeringObject                                                                                                                        |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::BuildActionManifest                                                                                                                     |
+| 注意       | 该元类表示标注一个在特定构建动作中被处理的制品的能力。                                                                                                                              |
+| 基类       | ARObject、EngineeringObject                                                                                                                                                          |
+| 聚合于     | BuildActionIoElement.engineeringObject                                                                                                                                                |
+
+| 属性               | 类型              | 多重性 | 类别 | 注意                                                                                                                                                                                                                                          |
+|---------------------|--------------------|--------|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| fileType            | NameToken          | 1      | attr | 该属性指示应当用于该工程对象的文件类型。注意，一个工程对象可以交付同一制品的多种表示。该属性可以选择提供的表示之一。                                                                                                                                            |
+| fileTypePattern     | RegularExpression  | 1      | attr | 该属性允许把对各个工程对象的 filetype 施行基于模式的搜索，从而定义一组工程对象。标签：xml.sequenceOffset=90                                                                                                                                              |
+| intendedFilename    | UriString          | 0..1   | attr | 该属性表示新创建时文件的名称。注意，工程对象解析 category + ShortLabel 主要用于指向一个既有文件。若文件是新创建的，文件名可以由内建策略确定，也可以在此预定义。注意，即使扩展名可以从 fileType 派生，它也应当是文件名的一部分。                                      |
+| parentCategory      | NameToken          | 0..1   | attr | 这表示父对象的类别。                                                                                                                                                                                                                                  |
+| parentShortLabel    | NameToken          | 0..1   | attr | 这表示父对象的 shortLabel。这允许在一个层次化组织的系统中规定输出位置。                                                                                                                                                                              |
+| shortLabelPattern   | RegularExpression  | 1      | attr | 该属性允许把对各个工程对象的 shortLabel 施行基于模式的搜索，从而定义一组工程对象。标签：xml.sequenceOffset=80                                                                                                                                              |
+
+#### 10.2.6. 示例
+
+本示例应当说明在 arxml 文件中的表示。
+
+清单10.1：构建动作清单中的特殊数据示例（清单号沿用源文）
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <ADMIN-DATA>
+    <USED-LANGUAGES/>
+  </ADMIN-DATA>
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>AUTOSAR</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>GenericStructureTemplate</SHORT-NAME>
+          <CATEGORY>EXAMPLE</CATEGORY>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>BuildActionManifests</SHORT-NAME>
+              <ELEMENTS>
+                <BUILD-ACTION-MANIFEST>
+                  <SHORT-NAME>CanIf</SHORT-NAME>
+                  <BUILD-ACTIONS>
+                    <BUILD-ACTION>
+                      <SHORT-NAME>CanIf_Generate</SHORT-NAME>
+                      <CATEGORY>GENERATOR</CATEGORY>
+                      <INVOCATION/>
+                      <CREATED-DATAS>
+                        <BUILD-ACTION-IO-ELEMENT>
+                          <CATEGORY>ARTIFACT</CATEGORY>
+                          <ENGINEERING-OBJECT>
+                            <SHORT-LABEL>CanIf_Cfg</SHORT-LABEL>
+                            <CATEGORY>SWSRC</CATEGORY>
+                            <DOMAIN>ARDEMO</DOMAIN>
+                            <FILE-TYPE>c</FILE-TYPE>
+                            <INTENDED-FILENAME>CanIf_Cfg.c</INTENDED-FILENAME>
+                          </ENGINEERING-OBJECT>
+                        </BUILD-ACTION-IO-ELEMENT>
+                        <BUILD-ACTION-IO-ELEMENT>
+                          <CATEGORY>ARTIFACT</CATEGORY>
+                          <ENGINEERING-OBJECT>
+                            <SHORT-LABEL>CanIf_Cfg</SHORT-LABEL>
+                            <CATEGORY>SWHDR</CATEGORY>
+                            <DOMAIN>ARDEMO</DOMAIN>
+                            <FILE-TYPE>h</FILE-TYPE>
+                            <INTENDED-FILENAME>CanIf_Cfg.h</INTENDED-FILENAME>
+                          </ENGINEERING-OBJECT>
+                        </BUILD-ACTION-IO-ELEMENT>
+                        <BUILD-ACTION-IO-ELEMENT>
+                          <CATEGORY>ARTIFACT</CATEGORY>
+                          <ENGINEERING-OBJECT>
+                            <SHORT-LABEL>CanIf_Cfg_Doc</SHORT-LABEL>
+                            <CATEGORY>Doc</CATEGORY>
+                            <DOMAIN>ARDEMO</DOMAIN>
+                            <FILE-TYPE>arxml</FILE-TYPE>
+                            <INTENDED-FILENAME>CanIf_Cfg_Doc.arxml</INTENDED-FILENAME>
+                          </ENGINEERING-OBJECT>
+                        </BUILD-ACTION-IO-ELEMENT>
+                      </CREATED-DATAS>
+                      <INPUT-DATAS>
+                        <BUILD-ACTION-IO-ELEMENT>
+                          <CATEGORY>ARTIFACT</CATEGORY>
+                          <SDGS>
+                            <SDG>
+                              <SD GID="USED_ACTION_ROLE">PROCESSOR</SD>
+                            </SDG>
+                          </SDGS>
+                          <ENGINEERING-OBJECT>
+                            <SHORT-LABEL>CanIf_Generator</SHORT-LABEL>
+                            <CATEGORY>CONFWF</CATEGORY>
+                            <DOMAIN>ARDEMO</DOMAIN>
+                            <FILE-TYPE>oaw</FILE-TYPE>
+                          </ENGINEERING-OBJECT>
+                        </BUILD-ACTION-IO-ELEMENT>
+                      </INPUT-DATAS>
+                      <REQUIRED-ENVIRONMENT-REF DEST="BUILD-ACTION-ENVIRONMENT">/AUTOSAR/GenericStructureTemplate/BuildActionManifests/CanIf/ARDEMO_ENV_CODE</REQUIRED-ENVIRONMENT-REF>
+                    </BUILD-ACTION>
+                    <BUILD-ACTION>
+                      <SHORT-NAME>Compile_Doc</SHORT-NAME>
+                      <CATEGORY>GENERATOR</CATEGORY>
+                      <INVOCATION>
+                        <COMMAND>DOC_FORMATTER {CanIf_Static_Doc} {CanIf_Doc}</COMMAND>
+                      </INVOCATION>
+                      <CREATED-DATAS>
+                        <BUILD-ACTION-IO-ELEMENT>
+                          <CATEGORY>ARTIFACT</CATEGORY>
+                          <ENGINEERING-OBJECT>
+                            <SHORT-LABEL>CanIf_Doc</SHORT-LABEL>
+                            <CATEGORY>Doc</CATEGORY>
+                            <DOMAIN>ARDEMO</DOMAIN>
+                            <FILE-TYPE>pdf</FILE-TYPE>
+                            <INTENDED-FILENAME>CanIf_Doc.pdf</INTENDED-FILENAME>
+                            <PARENT-CATEGORY>PRJ</PARENT-CATEGORY>
+                            <PARENT-SHORT-LABEL>CanIf</PARENT-SHORT-LABEL>
+                          </ENGINEERING-OBJECT>
+                        </BUILD-ACTION-IO-ELEMENT>
+                      </CREATED-DATAS>
+                      <INPUT-DATAS>
+                        <BUILD-ACTION-IO-ELEMENT>
+                          <CATEGORY>ARTIFACT</CATEGORY>
+                          <ENGINEERING-OBJECT>
+                            <SHORT-LABEL>CanIf_Cfg_Doc</SHORT-LABEL>
+                            <CATEGORY>Doc</CATEGORY>
+                            <DOMAIN>ARDEMO</DOMAIN>
+                            <FILE-TYPE>arxml</FILE-TYPE>
+                          </ENGINEERING-OBJECT>
+                        </BUILD-ACTION-IO-ELEMENT>
+                        <BUILD-ACTION-IO-ELEMENT>
+                          <CATEGORY>ARTIFACT</CATEGORY>
+                          <ENGINEERING-OBJECT>
+                            <SHORT-LABEL>CanIf_Static_Doc</SHORT-LABEL>
+                            <CATEGORY>Doc</CATEGORY>
+                            <DOMAIN>ARDEMO</DOMAIN>
+                            <FILE-TYPE>arxml</FILE-TYPE>
+                          </ENGINEERING-OBJECT>
+                        </BUILD-ACTION-IO-ELEMENT>
+                      </INPUT-DATAS>
+                      <REQUIRED-ENVIRONMENT-REF DEST="BUILD-ACTION-ENVIRONMENT">/AUTOSAR/GenericStructureTemplate/BuildActionManifests/CanIf/ARDEMO_ENV_DOC</REQUIRED-ENVIRONMENT-REF>
+                    </BUILD-ACTION>
+                  </BUILD-ACTIONS>
+                  <BUILD-ACTION-ENVIRONMENTS>
+                    <BUILD-ACTION-ENVIRONMENT>
+                      <SHORT-NAME>ARDEMO_ENV_CODE</SHORT-NAME>
+```
+
+清单10.2：构建动作清单示例
+
+#### 10.3. 约束和假设
+
+在软件交换的情况下，也必须向接收方的构建环境提供相应的贡献。同时假定各方对全部细节达成共同约定。清单有助于把这些约定形式化，使得——一旦环境被建立——软件交换可以按常规进行。交换依赖某个处理器的软件的情形也受到支持。
+
+## 11. 角色与权限（Roles and Rights）
+
+为了管理协作式工程方法，AUTOSAR 支持为相关方规定对对象的访问权限。该方法适用于诸如以下的用例：
+
+- 软件共享：制品被交付给合作方。根据双方选择的业务场景与合作模式，交付的文件应当以只读方式使用，或允许（甚至期望）集成者/供应商对规定的属性做规定的变更/添加。
+- 在协作的应用软件开发中，AUTOSAR 描述可以被拆分到多个文件。由于 AUTOSAR 不规定特定的流程，应当有一种通用的方式允许规定开发流程中的角色。基于这样的角色，可以执行 AUTOSAR XML 描述的初始拆分。它还允许基于元类派生访问控制。
+- 某些 ECU 参数值可能属于不同的责任类别。因此基于 ECU 参数定义，该责任可以被规定为访问控制。此外，访问控制也可以以制品的形式规定。这最终甚至允许定义一个拆分/合并策略。
+
+**访问控制关系**
+
+总体而言，角色与权限被概念化为一个关系：
+
+```
+Permission = f(role, operation, object, context)
+```
+
+图 11.1 描绘了按照 [TPS\_GST\_00226] 实现访问控制关系的元类：
+
+- **AclPermission**：这表示 [TPS\_GST\_00226] 中提到的关系。
+- **AclRole**：这表示角色与权限定义中可能的角色。该角色可能与方法论中定义的角色有关系。另一方面，这些角色的技术定义高度依赖本地环境。又由于 LDAP 组非常普遍，ldapUrl 允许指向一个事先约定的 LDAP 组。
+- **AclOperation**：这用于规定一个角色可以对一组对象执行的可能活动。该活动可能与方法论中的活动有关系。操作之间的关系以 implies / blocks 表达。例如写访问蕴含读访问。一个 Operation 还通过 aclScope 规定其作用范围。
+- **AclObjectSet**：这用于规定权限适用的对象。该定义既可以基于元层次 M1，也可以基于 M2。
+- **AclPermission 的上下文**：AclPermission 可以应用的上下文在属性 aclContext 中规定。更复杂的上下文可以使用 sdg 或经由 Collection 实现。可能的取值由利益相关方共同约定。
+
+![图 11.1：角色与权限概览（Roles and Rights Overview）](Figure11-1.png)
+
+图 11.2 展示了如何规定对象集合。这既可以基于元层次 M1，也可以基于 M2。支持以下方法：
+
+- **aclObjectClass**：这表示受访问控制的对象被规定为对某个元类或元类属性（M2）的引用的情形。如此定义的权限适用于该元类的全部模型元素（实例）。
+- **collection**：这表示受访问控制的对象由一个 Collection 规定的情形。被引用 Collection 引用的对象属于受访问控制的对象集合。
+- **object**：这表示显式引用 M1 对象的情形。注意，除 Collection 之外，这也可以指向 Referrable。
+- **objectDefinition**：AUTOSAR 元模型有这样一个模式：在 M1 上我们拥有定义/描述（Definition/Description）对。在这种情况下，一个被引用定义的全部描述都属于对象集合。
+
+[TPS\_GST\_00235] 的示例如：
+
+- EcucDefinitionElement ↔ ECUC 参数值（Value）
+- SwSystemconst ↔ SwSystemconstValue
+- PostBuildVariantCriterion ↔ PostBuildVariantCriterionValue
+
+- **derivedFromBlueprint**：在这种情况下，从一个被引用蓝图派生的全部对象都属于对象集合。
+
+  请注意，不支持 instanceRef，因为没有用例。它可以通过 FlatMap 得到支持。
+
+- **engineeringObject**：这表示一个工程对象。规定的权限适用于存储在该 AutosarEngineeringObject 中的部分模型内的全部对象。
+
+![图 11.2：角色与权限对象集合（Roles and Rights Object Set）](Figure11-2.png)
+
+清单 11.1 展示了如何把角色与权限方法应用于控制 AUTOSAR 描述中对象的访问。它定义：
+
+- 一个名为 “Integrator” 的权限集合，它表示基于下述定义的 [TPS\_GST\_00226] 中的关系；
+- 一个名为 “ECU\_Integrator” 的角色；
+- 一个名为 “MemoryStackConfiguration” 的对象集合；
+- 两个操作。
+
+清单11.1：访问控制示例
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>GenericStructureTemplate</SHORT-NAME>
+  <CATEGORY>EXAMPLE</CATEGORY>
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>AclPermissions</SHORT-NAME>
+      <ELEMENTS>
+        <ACL-PERMISSION>
+          <SHORT-NAME>Integrator</SHORT-NAME>
+          <ACL-OBJECT-REFS>
+            <ACL-OBJECT-REF DEST="ACL-OBJECT-SET">/AUTOSAR/GenericStructureTemplate/AccessObjectSets/MemoryStackConfiguration</ACL-OBJECT-REF>
+          </ACL-OBJECT-REFS>
+          <ACL-OPERATION-REFS>
+            <ACL-OPERATION-REF DEST="ACL-OPERATION">/AUTOSAR/GenericStructureTemplate/AclOperations/AssignValue</ACL-OPERATION-REF>
+            <ACL-OPERATION-REF DEST="ACL-OPERATION">/AUTOSAR/GenericStructureTemplate/AclOperations/ReassignValue</ACL-OPERATION-REF>
+          </ACL-OPERATION-REFS>
+          <ACL-ROLE-REFS>
+            <ACL-ROLE-REF DEST="ACL-ROLE">/AUTOSAR/GenericStructureTemplate/AclRoles/ECU_Integrator</ACL-ROLE-REF>
+          </ACL-ROLE-REFS>
+        </ACL-PERMISSION>
+      </ELEMENTS>
+    </AR-PACKAGE>
+    <AR-PACKAGE>
+      <SHORT-NAME>AccessObjectSets</SHORT-NAME>
+      <ELEMENTS>
+        <ACL-OBJECT-SET>
+          <SHORT-NAME>MemoryStackConfiguration</SHORT-NAME>
+          <ACL-SCOPE>DESCENDANT</ACL-SCOPE>
+          <OBJECT-DEFINITION-REFS>
+            <OBJECT-DEFINITION-REF DEST="ECUC-MODULE-DEF">/AUTOSAR/EcucDefs/MemIf</OBJECT-DEFINITION-REF>
+            <OBJECT-DEFINITION-REF DEST="ECUC-MODULE-DEF">/AUTOSAR/EcucDefs/MemMap</OBJECT-DEFINITION-REF>
+            <OBJECT-DEFINITION-REF DEST="ECUC-MODULE-DEF">/AUTOSAR/EcucDefs/NvM</OBJECT-DEFINITION-REF>
+          </OBJECT-DEFINITION-REFS>
+        </ACL-OBJECT-SET>
+      </ELEMENTS>
+    </AR-PACKAGE>
+    <AR-PACKAGE>
+      <SHORT-NAME>AclOperations</SHORT-NAME>
+      <REFERENCE-BASES>
+        <REFERENCE-BASE>
+          <SHORT-LABEL>op</SHORT-LABEL>
+          <BASE-IS-THIS-PACKAGE>true</BASE-IS-THIS-PACKAGE>
+        </REFERENCE-BASE>
+      </REFERENCE-BASES>
+      <ELEMENTS>
+        <ACL-OPERATION>
+          <SHORT-NAME>AssignValue</SHORT-NAME>
+        </ACL-OPERATION>
+        <ACL-OPERATION>
+          <SHORT-NAME>ReassignValue</SHORT-NAME>
+          <IMPLIED-OPERATION-REFS>
+            <IMPLIED-OPERATION-REF DEST="ACL-OPERATION" BASE="op">AssignValue</IMPLIED-OPERATION-REF>
+          </IMPLIED-OPERATION-REFS>
+        </ACL-OPERATION>
+      </ELEMENTS>
+    </AR-PACKAGE>
+    <AR-PACKAGE>
+      <SHORT-NAME>AclRoles</SHORT-NAME>
+      <ELEMENTS>
+        <ACL-ROLE>
+          <SHORT-NAME>ECU_Integrator</SHORT-NAME>
+          <LONG-NAME>
+            <L-4 L="EN">See <TT>ECU Integrator</TT></L-4>
+          </LONG-NAME>
+        </ACL-ROLE>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AR-PACKAGE>
+```
+
+表11.1：AclPermission
+
+| 类         | AclPermission                                                                                                                                                               |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::RolesAndRights                                                                                                                                        |
+| 注意       | 该元类表示表示对 AUTOSAR 模型中对象授予的权限的能力。标签：atp.recommendedPackage=AclPermissions                                                                                              |
+| 基类       | ARElement、ARObject、AtpBlueprint、AtpBlueprintable、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                        |
+| 聚合于     | ARPackage.element                                                                                                                                                                              |
+
+| 属性        | 类型          | 多重性 | 类别 | 注意                                                                                                                                          |
+|--------------|----------------|--------|------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| aclContext   | NameToken      | *      | attr | 该属性用于规定 AclPermission 适用的上下文。取值由相关利益相关方共同约定。例如取值可以是施加时间的名称。（AclPemission 为源文如此）                                    |
+| aclObject    | AclObjectSet   | *      | ref  | 这表示 AclPermission 适用的对象。                                                                                                                            |
+| aclOperation | AclOperation   | *      | ref  | 这表示给定 AclPermission 授予的操作。                                                                                                                          |
+| aclRole      | AclRole        | *      | ref  | 这表示为其授予 AclPermission 的角色（个人甚至组织）。                                                                                                          |
+| aclScope     | AclScopeEnum   | 1      | attr | 这表示所应用权限的范围：explicit、descendant、dependent。                                                                                                        |
+
+表11.2：AclObjectSet
+
+| 类         | AclObjectSet                                                                                                                                                                                                                                    |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::RolesAndRights                                                                                                                                                                                                                |
+| 注意       | 该元类表示为一个对象集合定义角色与权限（访问控制列表）的能力。它基本上可以基于以下内容定义对象：对象的性质；所涉及的蓝图；对象被序列化到的制品；对象的定义（在定义-取值模式中）；单独的引用对象。                                                                                        |
+| 基类       | ARElement、ARObject、AtpBlueprint、AtpBlueprintable、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                                                                                                        |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                                                                         |
+
+| 属性                    | 类型                     | 多重性 | 类别 | 注意                                                                                                                                                                                                                                  |
+|--------------------------|---------------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| aclObjectClass           | ReferrableSubtypesEnum    | *      | attr | 这规定把被考虑的对象作为所标注元类的实例。                                                                                                                                                                                                                      |
+| aclScope                 | AclScopeEnum              | 1      | attr | 这表示被引用对象的作用范围。                                                                                                                                                                                                                                  |
+| collection               | Collection                | 0..1   | ref  | 这表示相关对象经由一个集合规定。                                                                                                                                                                                                                              |
+| derivedFromBlueprint     | AtpBlueprint              | *      | ref  | 该关联指示被考虑的对象是从关联的蓝图派生的那些对象。构型：atpUriDef                                                                                                                                                                                            |
+| engineeringObject        | AutosarEngineeringObject  | *      | aggr | 这表示一个工程对象。AclPermission 关联到该部分模型中的全部对象。这也意味着该集合中的其他对象应当被放置在规定的工程对象中。注意，关于 &lt;&lt;atpSplitable&gt;&gt; 适用语义约束。                                                                                          |
+| object                   | Referrable                | *      | ref  | 该关联应用于一个特定（通常很小）的对象集合（例如单个包）。主要用途是不想专门为访问控制创建一个集合的情形。                                                                                                                                                            |
+| objectDefinition         | AtpDefinition             | *      | ref  | 这通过对象的定义标注该对象。例如操作某个特定 ecuc 参数取值的权限通过引用该参数的定义来标注。注意，这也可以是指向一个标准模块定义的引用。因此它带有构型 atpUriDef。构型：atpUriDef                                                                                        |
+
+表11.3：AtpDefinition
+
+| 类         | AtpDefinition（抽象）                                                                                                                                                                      |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::RolesAndRights                                                                                                                                                      |
+| 注意       | 该抽象元类表示标识相应取值的“定义”元素。例如某个特定系统常量的取值由该系统常量的定义标识。                                                                                                                    |
+| 基类       | ARObject、Referrable                                                                                                                                                                                        |
+| 子类       | EcucDefinitionElement、HwCategory、PostBuildVariantCriterion、SwSystemconst                                                                                                                                    |
+
+表11.4：AclOperation
+
+| 类         | AclOperation                                                                                                                                                                                             |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::RolesAndRights                                                                                                                                                                       |
+| 注意       | 该元类表示标注一个可以在 AUTOSAR 模型中对象上执行的特定操作的能力。标签：atp.recommendedPackage=AclOperations                                                                                                                          |
+| 基类       | ARElement、ARObject、AtpBlueprint、AtpBlueprintable、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                                                              |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                              |
+
+| 属性              | 类型         | 多重性 | 类别 | 注意                                                                                                        |
+|--------------------|---------------|--------|------|------------------------------------------------------------------------------------------------------------------------|
+| impliedOperation   | AclOperation  | *      | ref  | 这表示相关联的操作也被蕴含。因此权限也被授予该操作。                                                                            |
+
+表11.5：AclRole
+
+| 类         | AclRole                                                                                                                                                                                                            |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::RolesAndRights                                                                                                                                                                                    |
+| 注意       | 该元类表示规定一个用于授予对 AUTOSAR 模型访问权限的特定角色的能力。该元类的目的是支持相关各方之间的共同约定。标签：atp.recommendedPackage=AclRoles                                                                                                      |
+| 基类       | ARElement、ARObject、AtpBlueprint、AtpBlueprintable、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                                                                      |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                                              |
+
+| 属性    | 类型      | 多重性 | 类别 | 注意                                                                         |
+|----------|------------|--------|------|--------------------------------------------------------------------------------------|
+| ldapUrl  | UriString  | 0..1   | attr | 这是一个 URL，允许表示承担该特定角色的用户或组织。                                            |
+
+表11.6：AclScopeEnum
+
+| 枚举        | AclScopeEnum                                                                                                                                  |
+|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::RolesAndRights                                                                                                          |
+| 注意        | 该枚举器表示访问控制上下文中定义的作用范围。                                                                                                                        |
+| 聚合于      | AclObjectSet.aclScope、AclPermission.aclScope                                                                                                                        |
+
+| 字面量    | 说明                                                                                                                                          |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| dependant  | 这规定 AclPermission 也适用于依赖的（尤其是被引用的）操作/对象。注意这包括后代。标签：atp.EnumerationLiteralIndex=0                                                  |
+| descendant | 这规定 AclPermission 也适用于后代操作/对象。标签：atp.EnumerationLiteralIndex=1                                                                                  |
+| explicit   | 这表示 AclPermission 只适用于显式的对象/操作。标签：atp.EnumerationLiteralIndex=2                                                                                  |
+
+## 12. 生命周期支持（Life Cycle Support）
+
+### 12.1. 引言
+
+为了支持 AUTOSAR 模型元素（例如端口原型蓝图、端口接口、关键字缩写、示例 SW-C（ASW 中）或 BSW 模块的 API 等）的演化和向后兼容，AUTOSAR 支持生命周期。
+
+所提供的方法也可以应用于标准化（参见 [TPS\_STDT\_00038]，源文作 [TPS\_STDT\_-00038]）以及厂商特定的开发。生命周期呈现诸如“过时/废弃/遗留（outdated/deprecated/legacy）”、“无效/不再是标准的一部分（invalid/not part of standard anymore）”、“已废弃/将在不久的将来过时（obsolete/will be outdated in near future）”这样的信息。它不等同于“开发中（in work）”、“已发布（released）”等版本状态信息。
+
+生命周期方法也可以用于两个发布版之间的中间开发，例如给它附加一个“实验性（experimental）”的生命周期。但对于最终发布版而言，仍然带有这样的生命周期的元素不会是发布版的一部分。
+
+由于向后兼容性要求，仅仅删除一个模型元素并添加一个新元素，或者更糟——不通知就更改模型元素——可能并不合适。诸如 “obsolete” 这样的生命周期状态可以用来处理这种情况。
+
+不能期望所有既有元素与所有新元素都同样“好”。因此支持向用户给出提示：哪些元素更宜使用，即使另一些并未被禁止使用、仍是标准的一部分。
+
+请注意，生命周期状态不允许在同一个 ARPackage 内拥有两个相同 shortName 的元素。特别地，元模型的命名空间概念（见第 4.3.1 章）不受影响。
+
+**“生命周期”的定义**
+
+生命周期（**Life Cycle**）是一个模型元素在其生命期内的发展/演化阶段的过程。
+
+一个生命周期由一组生命周期状态组成。生命周期状态可以在版本信息之外并行地附着到一个元素上。
+
+一个典型的生命周期是 {valid, obsolete}，含义是：一个有效元素在首次引入时是最新的，但随后被新的替代，因此获得生命周期状态 “obsolete”。
+
+按照图 12.1，生命周期支持提供两个基本手段：
+
+- 生命周期的定义（LifeCycleStateDefinitionGroup），见第 12.2 章；
+- 生命周期的应用（LifeCycleInfoSet），见第 12.3 章。
+
+![图 12.1：生命周期的定义（Definition of Life Cycles）](Figure12-1.png)
+
+### 12.2. 生命周期的定义
+
+**LifeCycleStateDefinitionGroup**
+
+这用于通过规定一组 LifeCycleState 来定义一个特定的生命周期。生命周期的目的使用 LifeCycleStateDefinitionGroup 的 desc 表达。特定的概览细节可以在 LifeCycleStateDefinitionGroup 的 introduction 中表达。
+
+关于某个特定 LifeCycleState 的目的的信息规定在 LifeCycleState 的 introduction 中。
+
+以下提示适用：
+
+- 一个模型可以同时使用多个生命周期，以支持不同的方面。
+- 建议在各 LifeCycleStateDefinitionGroup 之间保持 shortName 唯一。
+
+清单 12.1 展示了按照 [TPS\_GST\_00051] 的生命周期定义的 ARXML 表示。
+
+清单12.1：AUTOSAR 标准生命周期定义（LifeCycleDefintion 为源文如此）
+
+```xml
+<!--LifeCycleStateDefinitionGroup: AutosarLifeCycleStates-->
+<LIFE-CYCLE-STATE-DEFINITION-GROUP>
+  <SHORT-NAME>AutosarLifeCycleStates</SHORT-NAME>
+  <LONG-NAME>
+    <L-4 L="EN">Life Cycle Definitions used in AUTOSAR Standards</L-4>
+  </LONG-NAME>
+  <DESC>
+    <L-2 L="EN">
+      This set represents the life cycle definitions used by AUTOSAR on M1
+      and M2 level. See also [TPS_GST_00051] respectively [TPS_GST_00064].
+    </L-2>
+  </DESC>
+  <LC-STATES>
+    <!--LifeCycleState: valid-->
+    <LIFE-CYCLE-STATE>
+      <SHORT-NAME>valid</SHORT-NAME>
+      <LONG-NAME><L-4 L="EN">VALID</L-4></LONG-NAME>
+      <DESC>
+        <L-2 L="EN">
+          This indicates that the related entity is a valid part of the
+          document. This is the default.
+        </L-2>
+      </DESC>
+    </LIFE-CYCLE-STATE>
+    <!--LifeCycleState: draft-->
+    <LIFE-CYCLE-STATE>
+      <SHORT-NAME>draft</SHORT-NAME>
+      <LONG-NAME><L-4 L="EN">DRAFT</L-4></LONG-NAME>
+      <DESC>
+        <L-2 L="EN">
+          This indicates that the related entity is introduced newly in the
+          (meta) model but still experimental. This information is published
+          but is subject to be changed without backward compatibility
+          management.
+        </L-2>
+      </DESC>
+    </LIFE-CYCLE-STATE>
+    <!--LifeCycleState: candidate-->
+    <LIFE-CYCLE-STATE>
+      <SHORT-NAME>candidate</SHORT-NAME>
+      <LONG-NAME><L-4 L="EN">CANDIDATE</L-4></LONG-NAME>
+      <DESC>
+        <L-2 L="EN">
+          This indicates that the entity was introduced by a concept result
+          and is still not validated.
+        </L-2>
+      </DESC>
+    </LIFE-CYCLE-STATE>
+    <!--LifeCycleState: obsolete-->
+    <LIFE-CYCLE-STATE>
+      <SHORT-NAME>obsolete</SHORT-NAME>
+      <LONG-NAME><L-4 L="EN">OBSOLETE</L-4></LONG-NAME>
+      <DESC>
+        <L-2 L="EN">
+          This indicates that the related entity is obsolete and kept in the
+          (meta) model for compatibility reasons.
+        </L-2>
+      </DESC>
+      <INTRODUCTION>
+        <P>
+          <L-1 L="EN">
+            If this life cycle state is set, the
+            <TT TYPE="ARMetaClassRole">LifeCycleInfo.remark</TT>
+            shall express the recommended alternative solution.
+          </L-1>
+        </P>
+      </INTRODUCTION>
+    </LIFE-CYCLE-STATE>
+    <!--LifeCycleState: removed-->
+    <LIFE-CYCLE-STATE>
+      <SHORT-NAME>removed</SHORT-NAME>
+      <LONG-NAME><L-4 L="EN">REMOVED</L-4></LONG-NAME>
+      <DESC>
+        <L-2 L="EN">
+          This indicates that the related entity is still in the (meta) model
+          for whatever reason. It shall not be used and should not even appear
+          in documents.
+        </L-2>
+      </DESC>
+      <INTRODUCTION>
+        <P>
+```
+
+表12.1：LifeCycleStateDefinitionGroup
+
+| 类         | LifeCycleStateDefinitionGroup                                                                                                     |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::LifeCycles                                                                                                |
+| 注意       | 该元类表示定义一个特定生命周期的状态与属性的能力。标签：atp.recommendedPackage=LifeCycleStateDefintionGroups（源文如此）                              |
+| 基类       | ARElement、ARObject、AtpBlueprint、AtpBlueprintable、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable            |
+| 聚合于     | ARPackage.element                                                                                                                                    |
+
+| 属性   | 类型           | 多重性 | 类别 | 注意                                                               |
+|---------|-----------------|--------|------|-----------------------------------------------------------------------------|
+| lcState | LifeCycleState  | *      | aggr | 描述该生命周期状态定义组的单个生命周期状态。                                        |
+
+表12.2：LifeCycleState
+
+| 类         | LifeCycleState                                                                                              |
+|------------|----------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::LifeCycles                                                                          |
+| 注意       | 该元类表示生命周期中的一个特定状态。                                                                                        |
+| 基类       | ARObject、AtpBlueprint、AtpBlueprintable、Identifiable、MultilanguageReferrable、Referrable                                        |
+| 聚合于     | LifeCycleStateDefinitionGroup.lcState                                                                                          |
+
+### 12.3. 生命周期的应用
+
+图 12.1 也展示了把生命周期状态指派给特定对象。这一指派由元类 LifeCycleInfoSet 完成。
+
+#### 12.3.1. LifeCycleInfoSet
+
+**LifeCycleInfoSet**
+
+这表示把生命周期状态实际指派给特定对象。除此之外，它定义生命周期状态与有效期的适用默认值。
+
+**约束：默认生命周期状态应当被正确定义**
+
+LifeCycleInfoSet 中的 defaultLcState 应当引用 usedLifeCycleStateDefinitionGroup 所引用的 LifeCycleStateDefinitionGroup 中定义的一个 lcState。
+
+#### 12.3.2. LifeCycleInfo
+
+**LifeCycleInfo**
+
+该元类规定由 lcObject 标注的特定对象的生命周期状态。若未提供生命周期状态，则适用 defaultLcState。
+
+**约束：LifeCycleInfo 应当无歧义**
+
+在一个特定的 LifeCycleInfoSet 内，lifeCycleInfo.lcObject 应当唯一。这保证 LifeCycleState 与 Referrable 的关联无歧义。
+
+该约束针对某个特定时点、考虑 [TPS\_GST\_00244] 的有效期而适用。
+
+**约束：使用的生命周期状态应当被正确定义**
+
+LifeCycleInfo 中的 defaultLcState 应当引用其包含的 LifeCycleInfoSet 的 usedLifeCycleStateDefinitionGroup 所引用的 LifeCycleStateDefinitionGroup 中定义的一个 lcState。
+
+**生命周期信息的有效期**
+
+LifeCycleInfo 的有效性可以通过 periodBegin 相应地 periodEnd 限制在特定的时间段内。适用以下条目：
+
+- 若未提供 periodBegin，则适用 defaultPeriodBegin。
+- 若未提供 periodEnd，则适用 defaultPeriodEnd。
+- 若同样未规定 defaultPeriodBegin 相应地 defaultPeriodEnd，则时间段无限制（例如从 2013-01-01 起永远有效）。
+- 开始与结束被视为包含在时间段内。因此在给定时点 t，LifeCycleInfo 的定义是有效的，当且仅当
+
+```
+periodBegin <= t <= periodEnd
+```
+
+**约束：LifeCyclePeriod 上的约束**
+
+LifeCyclePeriod 中的属性 date、arReleaseVersion、productRelease 相互排斥。
+
+**在 LifeCycleInfo 中规定替代方法**
+
+如果生命周期状态表明该对象不再是推荐使用的对象，则 LifeCycleInfo.useInstead 指向应当取代 lcObject 所标注对象来使用的对象。在这种情况下，可以使用 remark 记录替代的细节。
+
+清单 12.2 展示了把生命周期状态指派给特定对象。
+
+清单12.2：生命周期指派示例
+
+```xml
+<LIFE-CYCLE-INFO-SET>
+  <SHORT-NAME>AutosarObsoleteKeywords</SHORT-NAME>
+  <LIFE-CYCLE-INFOS>
+    <LIFE-CYCLE-INFO>
+      <LC-OBJECT-REF DEST="KEYWORD">/AUTOSAR/AISpecification/KeywordSets/KeywordListLc/Abs</LC-OBJECT-REF>
+      <LC-STATE-REF DEST="LIFE-CYCLE-STATE">/AUTOSAR/GeneralDefinitions/LifeCycleStateDefintionGroups/AutosarLifeCycleStates/obsolete</LC-STATE-REF>
+      <PERIOD-BEGIN>
+        <AR-RELEASE-VERSION>3.1.1</AR-RELEASE-VERSION>
+      </PERIOD-BEGIN>
+      <REMARK>
+        <P>
+          <L-1 L="EN">use Abs3 instead, obsolete since R3</L-1>
+        </P>
+      </REMARK>
+      <USE-INSTEAD-REFS>
+        <USE-INSTEAD-REF DEST="KEYWORD">/AUTOSAR/AISpecification/KeywordSets/KeywordListLc/Abs3</USE-INSTEAD-REF>
+      </USE-INSTEAD-REFS>
+    </LIFE-CYCLE-INFO>
+  </LIFE-CYCLE-INFOS>
+```
+
+#### 12.3.3. LifeCycleState 的传播
+
+**LifeCycleState 的传播**
+
+LifeCycleState 隐式地传播到全部被包含的子元素。LifeCycleState 不传播到被引用的对象（出向引用）。LifeCycleState 不传播到引用它的对象（入向引用）。
+
+![图 12.2：LifeCycleState 的传播（Propagation of LifeCycleState）](Figure12-2.png)
+
+图 12.2 展示了当 SwComponentType 被置为 obsolete 时 LifeCycleState 的传播：
+
+1. 全部被包含的端口也被隐式置为 obsolete；
+2. 全部被引用的对象（出向引用）PortInterface 不会隐式变 obsolete；
+3. 全部引用它的对象（入向引用），例如由该 SwComponentType 定型的 SwComponentPrototype，也不会隐式变 obsolete。
+
+对 1) 与 3)，软件组件开发者需要做出专门的决策。
+
+表12.3：LifeCycleInfoSet
+
+| 类         | LifeCycleInfoSet                                                                                                                                                                                                                      |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::LifeCycles                                                                                                                                                                                                          |
+| 注意       | 该元类表示把生命周期信息附着到一组特定元素的能力。信息可以为特定的时间段定义。这支持过渡计划的定义。若未规定时间段，则生命周期状态永远适用。标签：atp.recommendedPackage=LifeCycleInfoSets                                                                        |
+| 基类       | ARElement、ARObject、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                                                                                                                |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                                                               |
+
+| 属性                                | 类型                            | 多重性 | 类别 | 注意                                                                                                                                                                                |
+|--------------------------------------|----------------------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| defaultLcState                       | LifeCycleState                   | 1      | ref  | 这表示默认的生命周期状态。当 LifeCycleInfoSet 内的 LifeCycleInfo 元素未显式声明生命周期状态时使用它。即 defaultLcState 可以被 LifeCycleInfo 元素覆盖。                                                    |
+| defaultPeriodBegin                   | LifeCyclePeriod                  | 0..1   | aggr | 全部指定的 lifeCycleInfo 适用的时间段的默认起点。注意，默认时间段可以为每个 lifeCycleInfo 单独覆盖。                                                                                              |
+| defaultPeriodEnd                     | LifeCyclePeriod                  | 0..1   | aggr | 默认到期日，即全部指定的 lifeCycleInfo 适用的时间段的默认终点。注意，默认时间段可以为每个 lifeCycleInfo 单独覆盖。                                                                                |
+| lifeCycleInfo                        | LifeCycleInfo                    | *      | aggr | 这表示一个特定的生命周期信息。                                                                                                                                                                    |
+| usedLifeCycleStateDefinitionGroup    | LifeCycleStateDefinitionGroup    | 1      | ref  | 这表示适用于当前生命周期信息集合的生命周期状态。                                                                                                                                                    |
+
+表12.4：LifeCyclePeriod
+
+| 类         | LifeCyclePeriod                                                                                                                                                                            |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::LifeCycles                                                                                                                                                             |
+| 注意       | 该元类表示规定一个指定时间段内的时点的能力，例如一个特定生命周期状态有效/适用的起点或终点。                                                                                                                          |
+| 基类       | ARObject                                                                                                                                                                                                            |
+| 聚合于     | LifeCycleInfo.periodBegin、LifeCycleInfo.periodEnd、LifeCycleInfoSet.defaultPeriodBegin、LifeCycleInfoSet.defaultPeriodEnd                                                                                                |
+
+| 属性              | 类型                | 多重性 | 类别 | 注意                                                                                      |
+|--------------------|----------------------|--------|------|------------------------------------------------------------------------------------------------------|
+| arReleaseVersion   | RevisionLabelString  | 0..1   | attr | 所引用元素所属的 AUTOSAR 发布版的版本。编号包含三个层次（major、minor、revision），由 AUTOSAR 定义。标签：xml.sequenceOffset=20 |
+| date               | DateTime             | 0..1   | attr | 时间段内的日期。标签：xml.sequenceOffset=10                                                                |
+| productRelease     | RevisionLabelString  | 0..1   | attr | 时间段内产品的版本。标签：xml.sequenceOffset=30                                                            |
+
+表12.5：LifeCycleInfo
+
+| 类         | LifeCycleInfo                                                                                                             |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::LifeCycles                                                                                            |
+| 注意       | LifeCycleInfo 描述一个元素的生命周期状态，以及诸如“应当用什么取代”之类的附加信息。                                                                    |
+| 基类       | ARObject                                                                                                                                    |
+| 聚合于     | LifeCycleInfoSet.lifeCycleInfo                                                                                                                    |
+
+| 属性        | 类型               | 多重性 | 类别 | 注意                                                                                                                                                                                  |
+|--------------|---------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| lcObject     | Referrable          | 1      | ref  | 元素拥有 lcState 所描述的生命周期。                                                                                                                                                             |
+| lcState      | LifeCycleState      | 0..1   | ref  | 这表示指派给该对象的特定状态。若未给出 lcState，则假定 LifeCycleInfoSet 的默认生命周期状态。                                                                                                      |
+| periodBegin  | LifeCyclePeriod     | 0..1   | aggr | 元素拥有所标注生命周期状态 lcState 的时间段的起点。若未给出 periodBegin，则假定 LifeCycleInfoSet 的默认时间段起点。                                                                                    |
+| periodEnd    | LifeCyclePeriod     | 0..1   | aggr | 到期日，即元素不再拥有所标注生命周期状态 lcState 的时间段的终点。若未给出 periodEnd，则假定 LifeCycleInfoSet 的默认时间段起点（源文如此，应为默认时间段终点）。                                            |
+| remark       | DocumentationBlock  | 0..1   | aggr | 说明例如该元素为何被给予指定的生命周期、useInstead 的语义的备注。                                                                                                                              |
+| useInstead   | Referrable          | *      | ref  | 应当用来取代 referrable 中所标注元素的元素。只在生命周期状态 lcState 非 “valid” 的情况下相关。若存在多个引用，其确切语义应当在 remark 中单独描述。                                                          |
+
+## 13. 集合与可收集元素（Collections and Collectable Elements）
+
+**集合（Collections）**
+
+对某些用例而言，有必要建立一个元素的集合。这样的集合与包正交。因此一个集合驻留在一个包中，但通过对被收集元素的关联建立。
+
+一个集合由任意数量的、指向 Referrable 的扁平引用和/或指向 AtpFeature 的实例引用组成，其角色取决于 category 与 collectionSemantics。细节参见 [TPS\_GST\_00432]、[TPS\_GST\_00434] 与 [TPS\_GST\_00347]。
+
+![图 13.1：集合（Collection）](Figure13-1.png)
+
+Collection 的示例用例：
+
+- 已求值变体（见第 7.7 章）；
+- 定义具有特定语义的模型元素集合 [TPS\_GST\_00434]；
+- 建立对象之间的关系 [TPS\_GST\_00347]；
+- 定义模型的子集（模型上的 VIEW）[TPS\_GST\_00348]。
+
+**自动集合**
+
+autoCollect 规定被收集元素与 collectedInstance 中引用的目标是否也被视为集合的一部分。特定细节参见 AutoCollectEnum。
+
+**以集合表达元素集合**
+
+集合可以用于建立一个元素集合。在这种情况下：
+
+- Collection 的 category 为 SET；
+- element 代表属于该集合的元素的扁平引用；
+- collectedInstance 代表属于该集合的元素的实例引用；
+- elementRole 是可选的，规定被收集元素和/或 collectedInstance 的角色。见 [TPS\_GST\_00349]；
+- collectionSemantics 是可选的，规定 Collection 在预期用例中的语义。见 [TPS\_GST\_00432]。
+
+**以集合表达关系**
+
+集合也可以用于建立对象之间的关系。在这种情况下：
+
+- Collection 的 category 为 RELATION；
+- sourceElement 或 sourceInstance 之一是必需的，代表关系的源端；
+- element 和/或 collectedInstance（被收集元素）代表关系的目标端；
+- 若应用 autoCollect，则 elementRole 是必需的，规定被收集元素和/或 collectedInstance 的角色。见 [TPS\_GST\_00349]；
+- collectionSemantics 是可选的，规定 Collection 在预期用例中的语义。见 [TPS\_GST\_00432]。
+
+**Collection 的标准化 category**
+
+以下取值为 Collection 的 category 标准化取值：
+
+- RELATION——这表示该集合用于表达一个关系（见 [TPS\_GST\_00347]）。
+- SET——这表示该集合只是元素的一个集合。未规定 category 时这是默认值。
+
+**约束：Collection.category 不得有自定义取值**
+
+不允许定义属性 Collection.category 的任何自定义或项目特定的取值。
+
+**Collection 的语义**
+
+属性 collectionSemantics 可以用于按照预期用例表达 Collection 的语义。collectionSemantics 必须得到全部利益相关方的同意。
+
+collectionSemantics 的一个典型示例是：使用 category 为 SET、collectionSemantics = SO\_SERVICE\_INTERFACE 的 Collection 为经典平台定义 ServiceInterface，如 [TPS\_SYST\_02283] 所述。
+
+**Collection 的标准化 elementRole**
+
+以下取值为 Collection 的 elementRole 标准化取值：
+
+- AUTO\_COLLECTED\_FROM——若 Collection 表示两个等价集合之间的关系，其中之一使用被引用元素的自动纳入、另一个是等价的已解析集合，则应用此值。Collection 的 category 为 RELATION（[TPS\_GST\_00347]）。
+- PART\_OF\_SUBSET——这表示 Collection 中的元素相应地 collectedInstance 是模型某个特定子集的一部分。Collection 的 category 为 SET。
+
+**约束：Collection.elementRole 不得有自定义取值**
+
+不允许定义属性 Collection.elementRole 的任何自定义或项目特定的取值。
+
+图 13.2 展示了按照 [TPS\_GST\_00349] 的一个关系示例<sup>1</sup>。此时我们有两个集合，都表示同一个视图（即使 elementRole 未在图中显示）。一个表示使用 “auto collect”，另一个是已解析的表示。
+
+> **1** 不要被“集合建立了集合之间的关系”这一点迷惑。
+
+![图 13.2：作为关系的 Collection 示例（Example for Collection as Relation）](Figure13-2.png)
+
+清单 13.1 展示 ARXML 中的表示。
+
+清单13.1：作为关系的 Collection 示例（1）
+
+```xml
+<COLLECTION>
+  <SHORT-NAME>DefinedView</SHORT-NAME>
+  <CATEGORY>SET</CATEGORY>
+  <AUTO-COLLECT>REF-ALL</AUTO-COLLECT>
+  <ELEMENT-ROLE>PART_OF_SUBSET</ELEMENT-ROLE>
+  <ELEMENT-REFS>
+    <ELEMENT-REF BASE="OPEN" DEST="PORT-PROTOTYPE-BLUEPRINT">EngN</ELEMENT-REF>
+  </ELEMENT-REFS>
+</COLLECTION>
+<COLLECTION>
+  <SHORT-NAME>ExpandedView</SHORT-NAME>
+  <CATEGORY>SET</CATEGORY>
+  <AUTO-COLLECT>REF-NONE</AUTO-COLLECT>
+  <ELEMENT-ROLE>PART_OF_SUBSET</ELEMENT-ROLE>
+  <ELEMENT-REFS>
+    <ELEMENT-REF BASE="OPEN" DEST="PORT-PROTOTYPE-BLUEPRINT">EngN</ELEMENT-REF>
+    <ELEMENT-REF BASE="OPEN" DEST="PORT-INTERFACE">EngN1</ELEMENT-REF>
+    <ELEMENT-REF BASE="OPEN" DEST="APPLICATION-PRIMITIVE-DATA-TYPE">N1</ELEMENT-REF>
+    <!--futher elements are not shown in this example-->
+  </ELEMENT-REFS>
+</COLLECTION>
+<COLLECTION>
+  <SHORT-NAME>ViewRelation</SHORT-NAME>
+  <CATEGORY>RELATION</CATEGORY>
+  <ELEMENT-ROLE>AUTO_COLLECTED_FROM</ELEMENT-ROLE>
+  <ELEMENT-REFS>
+    <ELEMENT-REF BASE="Coll" DEST="COLLECTION">ExpandedView</ELEMENT-REF>
+  </ELEMENT-REFS>
+  <SOURCE-ELEMENT-REFS>
+    <SOURCE-ELEMENT-REF BASE="Coll" DEST="COLLECTION">DefinedView</SOURCE-ELEMENT-REF>
+  </SOURCE-ELEMENT-REFS>
+</COLLECTION>
+```
+
+清单 13.2 展示按照 [TPS\_GST\_00349] 的另一个关系示例。此处展示两个关键字的“词干（stem）”关系。
+
+清单13.2：作为关系的 Collection 示例（2）
+
+```xml
+<COLLECTION>
+  <SHORT-NAME>Drv_declinations</SHORT-NAME>
+  <CATEGORY>RELATION</CATEGORY>
+  <COLLECTION-SEMANTICS>DECLINATION_OF</COLLECTION-SEMANTICS>
+  <ELEMENT-REFS>
+    <ELEMENT-REF BASE="KW" DEST="KEYWORD">KeywordList/Drvr</ELEMENT-REF>
+    <ELEMENT-REF BASE="KW" DEST="KEYWORD">KeywordList/Drvg</ELEMENT-REF>
+  </ELEMENT-REFS>
+  <SOURCE-ELEMENT-REFS>
+    <SOURCE-ELEMENT-REF BASE="KW" DEST="KEYWORD">KeywordList/Drv</SOURCE-ELEMENT-REF>
+  </SOURCE-ELEMENT-REFS>
+</COLLECTION>
+```
+
+表13.1：Collection
+
+| 类         | Collection                                                                                                                                                                                                                                                                                        |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::ElementCollection                                                                                                                                                                                                                                            |
+| 注意       | 该元类规定一个元素的集合。集合可以用于为一组元素表达附加的方面。注意 Collection 是一个 ARElement。因此它例如适用于 EvaluatedVariant，即使这一点并不明显。通常 Collection 的 category 是 “SET”。另一方面，Collection 也可以表达元素之间的任意关系。这由类别 “RELATION” 标注（另见 [TPS_GST_00347]）。在这种情况下，集合表示从 “sourceElement” 到角色 “role” 中 “targetElement” 的关联。标签：atp.recommendedPackage=Collections |
+| 基类       | ARElement、ARObject、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                                                                                                                                                                                    |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                                                                                                                                     |
+
+| 属性                 | 类型            | 多重性 | 类别 | 注意                                                                                                                                                                                                                                  |
+|-----------------------|------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| autoCollect           | AutoCollectEnum  | 0..1   | attr | 该属性反映被引用对象在多大程度上属于该集合。标签：xml.sequenceOffset=20                                                                                                                                                                                                                                      |
+| collectedInstance     | AtpFeature       | *      | iref | 该实例引用支持一个特定实例是集合一部分的用例。标签：xml.sequenceOffset=60。InstanceRef 实现为：AnyInstanceRef                                                                                                                                                                                    |
+| collectionSemantics   | NameToken        | 0..1   | attr | 提供按照预期用例表达 Collection 语义的能力。collectionSemantics 规定为一个 NameToken，必须得到全部利益相关方的同意。标签：xml.sequenceOffset=25                                                                                                                                                                    |
+| element               | Identifiable     | *      | ref  | 这是集合中的一个元素。注意 Collection 本身是可收集的。因此集合可以嵌套。在 category="RELATION" 的情况下，这表示关系的目标端。标签：xml.sequenceOffset=40                                                                                                                                                                |
+| elementRole           | Identifier       | 0..1   | attr | 该属性允许标注集合的一个特定角色。注意，适用的语义应当由双方共同约定。特别是它表示 sourceElement 上下文中 element 的角色。标签：xml.sequenceOffset=30                                                                                                                                                              |
+| sourceElement         | Identifiable     | *      | ref  | 仅当 Category = "RELATION"。这表示一个关系的源。标签：xml.sequenceOffset=50                                                                                                                                                                                                                                     |
+| sourceInstance        | AtpFeature       | *      | iref | 仅当 Category = "RELATION"。这表示一个关系的源实例。标签：xml.sequenceOffset=70。InstanceRef 实现为：AnyInstanceRef                                                                                                                                                                                            |
+
+表13.2：AutoCollectEnum
+
+| 枚举        | AutoCollectEnum                                                                                                                                                           |
+|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::ElementCollection                                                                                                            |
+| 注意        | 该枚举器定义确定集合中最终元素集合的可能方法。                                                                                                                                        |
+| 聚合于      | Collection.autoCollect                                                                                                                                                                     |
+
+| 字面量        | 说明                                                                                                                                           |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| refAll         | 从集合中直接提及的对象（递归地）引用的全部对象也被视为集合的一部分。标签：atp.EnumerationLiteralIndex=0                                                            |
+| refNone        | 这表示只有集合中直接提及的对象属于该集合。不再考虑其他对象。标签：atp.EnumerationLiteralIndex=1                                                                  |
+| refNonStandard | 这表示由集合中直接提及的对象（递归地）引用的非标准对象（[TPS\_GST\_00088]）也被视为集合的一部分。标签：atp.EnumerationLiteralIndex=2                                |
+
+表13.3：CollectableElement
+
+| 类         | CollectableElement（抽象）                                                                                                                                                                                  |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::ElementCollection                                                                                                                                            |
+| 注意       | 该元类规定成为特定 AUTOSAR 集合（ARPackage 或 ARElement 的集合）的一部分的能力。集合的范围在 4.0.3 版被扩展到 CollectableElement 之外。出于兼容性原因，该元类的名称未改变。                                                            |
+| 基类       | ARObject、Identifiable、MultilanguageReferrable、Referrable                                                                                                                                                                        |
+| 子类       | ARPackage、PackageableElement                                                                                                                                                                                                        |
+
+## 14. 映射视图（Mapping Views）
+
+在 AUTOSAR 系统的开发过程中，模型内部可能发生各种转换。这导致模型表示对同一系统的不同视图。借助 ViewMap，这些不同的视图可以相互映射。
+
+**不同视图的模型元素映射**
+
+ViewMap 表示两个模型元素之间的非定向关系。一般语义是：被映射的元素主要是同一实体，但表示不同的视图。映射的细化语义可以在 role 中规定。
+
+请注意，即使它被称为“视图”，DocumentViewSelectable 中的 view 表示的是另一个概念，不应当与 ViewMap 混淆。
+
+还需注意，ViewMap 表示一种特定的关系，与 [TPS\_GST\_00347] 中的 Collection 相反——后者可以用来表示任意但有向的关系。
+
+![图 14.1：视图映射（View Map）](Figure14-1.png)
+
+ViewMap 的示例用例（参见 [TPS\_SYST\_01136]）：
+
+- 抽象系统描述（Abstract System Description）到系统描述（System Description）的映射；
+- 系统描述与系统抽取（System Extract）之间的映射。
+
+表14.1：ViewMapSet
+
+| 类         | ViewMapSet                                                                                                                              |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::ViewMapSet                                                                                                          |
+| 注意       | 用于建立不同 AUTOSAR 制品之间关系的 ViewMap 集合。标签：atp.recommendedPackage=ViewMapSets                                                                          |
+| 基类       | ARElement、ARObject、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                            |
+| 聚合于     | ARPackage.element                                                                                                                                            |
+
+| 属性    | 类型    | 多重性 | 类别 | 注意                                                     |
+|----------|----------|--------|------|------------------------------------------------------------------|
+| viewMap  | ViewMap  | *      | aggr | 被 ViewMapSet 收集的 ViewMap。                                          |
+
+表14.2：ViewMap
+
+| 类         | ViewMap                                                                                                                                                                                                                                                                                                                                                   |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::ViewMapSet                                                                                                                                                                                                                                                                                                                            |
+| 注意       | ViewMap 允许把“第一”侧上的任意数量的元素关联到“第二”侧上的任意数量的元素。由于 ViewMap 不针对特定的映射用例，角色 “first” 与 “second” 应当体现这种通用性。这一映射允许在 AUTOSAR 环境内追踪制品的转换。指向被映射元素的引用可以是普通引用和/或 InstanceRef。                                                                                                                              |
+| 基类       | ARObject、Identifiable、MultilanguageReferrable、Referrable                                                                                                                                                                                                                                                                                                                        |
+| 聚合于     | ViewMapSet.viewMap                                                                                                                                                                                                                                                                                                                                                                     |
+
+| 属性                   | 类型        | 多重性 | 类别 | 注意                                                                                                                                                                  |
+|-------------------------|--------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| firstElement            | Referrable   | *      | ref  | 指向“第一”侧上可标识元素的引用。标签：xml.sequenceOffset=20                                                                                                                              |
+| firstElementInstance    | AtpFeature   | *      | iref | 指向“第一”侧上元素的实例引用。标签：xml.sequenceOffset=50。InstanceRef 实现为：AnyInstanceRef                                                                                        |
+| role                    | Identifier   | 0..1   | attr | 该属性用于描述特定的映射场景，例如映射：AR\_AbstractSystemDescription\_SystemDescription；AR\_SystemDescription\_SystemExtract。标签：xml.sequenceOffset=10                                  |
+| secondElement           | Referrable   | *      | ref  | 指向“第二”侧上可标识元素的引用。标签：xml.sequenceOffset=30                                                                                                                              |
+| secondElementInstance   | AtpFeature   | *      | iref | 指向“第二”侧上元素的实例引用。标签：xml.sequenceOffset=60。InstanceRef 实现为：AnyInstanceRef                                                                                        |
