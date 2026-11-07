@@ -1542,17 +1542,17 @@ title: "AUTOSAR API 函数清单（按模块）"
 
 | 函数 | 简述 |
 |---|---|
-| [**FrArTp_CancelReceive**](../communication/flexray_ar_transport_layer/index.md#8333-frartp_cancelreceive) | — |
-| [**FrArTp_CancelTransmit**](../communication/flexray_ar_transport_layer/index.md#8332-frartp_canceltransmit) | — |
-| [**FrArTp_ChangeParameter**](../communication/flexray_ar_transport_layer/index.md#8334-frartp_changeparameter) | — |
-| [**FrArTp_GetVersionInfo**](../communication/flexray_ar_transport_layer/index.md#8311-frartp_getversioninfo) | — |
-| [**FrArTp_Init**](../communication/flexray_ar_transport_layer/index.md#8321-frartp_init) | — |
-| [**FrArTp_MainFunction**](../communication/flexray_ar_transport_layer/index.md#851-frartp_mainfunction) | — |
-| [**FrArTp_RxIndication**](../communication/flexray_ar_transport_layer/index.md#842-frartp_rxindication) | — |
-| [**FrArTp_Shutdown**](../communication/flexray_ar_transport_layer/index.md#8322-frartp_shutdown) | — |
-| [**FrArTp_Transmit**](../communication/flexray_ar_transport_layer/index.md#8331-frartp_transmit) | — |
-| [**FrArTp_TriggerTransmit**](../communication/flexray_ar_transport_layer/index.md#841-frartp_triggertransmit) | — |
-| [**FrArTp_TxConfirmation**](../communication/flexray_ar_transport_layer/index.md#843-frartp_txconfirmation) | — |
+| [**FrArTp_CancelReceive**](../communication/flexray_ar_transport_layer/index.md#7333-frartp_cancelreceive) | — |
+| [**FrArTp_CancelTransmit**](../communication/flexray_ar_transport_layer/index.md#7332-frartp_canceltransmit) | — |
+| [**FrArTp_ChangeParameter**](../communication/flexray_ar_transport_layer/index.md#7334-frartp_changeparameter) | — |
+| [**FrArTp_GetVersionInfo**](../communication/flexray_ar_transport_layer/index.md#7311-frartp_getversioninfo) | — |
+| [**FrArTp_Init**](../communication/flexray_ar_transport_layer/index.md#7321-frartp_init) | — |
+| [**FrArTp_MainFunction**](../communication/flexray_ar_transport_layer/index.md#751-frartp_mainfunction) | — |
+| [**FrArTp_RxIndication**](../communication/flexray_ar_transport_layer/index.md#742-frartp_rxindication) | — |
+| [**FrArTp_Shutdown**](../communication/flexray_ar_transport_layer/index.md#7322-frartp_shutdown) | — |
+| [**FrArTp_Transmit**](../communication/flexray_ar_transport_layer/index.md#7331-frartp_transmit) | — |
+| [**FrArTp_TriggerTransmit**](../communication/flexray_ar_transport_layer/index.md#741-frartp_triggertransmit) | — |
+| [**FrArTp_TxConfirmation**](../communication/flexray_ar_transport_layer/index.md#743-frartp_txconfirmation) | — |
 
 ## AUTOSAR FlexRay Driver（FlexRay 驱动程序）（32）
 

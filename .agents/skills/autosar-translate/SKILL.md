@@ -594,8 +594,13 @@ before every commit, the second is evidence for the Step 8 confirmation.
    §2 forbids (`可配置的接口`, `周期函数`, `适用于汽车领域`, `输入文件`, …),
    `grep -nE '^#+.*VARIANT'` on the article must return 0 hits (canonical:
    `可配置接口`, `调度函数`, `汽车域的适用性`, `输入文件和相关标准与规范`). §2 governs chapter heading
-   wording (章节标题用词), so
-   scope the grep to heading lines — faithful prose is not in scope. A stale
+   wording (章节标题用词), so scope the grep to heading lines — faithful prose is not in scope.
+   **Chapter 2 compound headings are exempt from this sweep**: when the source ch.2 reads
+   *Acronyms and Abbreviations* / *Acronyms and definitions* / *Acronyms, abbreviations and terms*
+   / *Acronyms, Abbreviations, and Definitions*, the full direct translation
+   (`缩略语和简称` / `缩略语和定义` / `首字母缩略词、缩略语和术语` / `缩略语、缩写和定义`)
+   is a sanctioned §2 variant (STANDARD.md §2, user decision 2026-11-07, issue #296) —
+   do not shorten it to `缩略语` and do not flag it as a §2 violation. A stale
    §2 line is exactly how a rejected wording re-enters a new article — the
    grep, not judgment, is what catches it.
    **Sub-heading language**: every `###`+ heading title is a direct translation
@@ -628,7 +633,9 @@ before every commit, the second is evidence for the Step 8 confirmation.
    site home agree (Step 6.3). A page present in nav but missing from its
    landing page or the overview is a failed gate, not a pass — the build
    cannot see it.
-5. Acronym chapter: inside the `sed -n '/^## 2\. 缩略语/,/^## 3\./p' <article>`
+5. Acronym chapter: inside the `sed -n '/^## 2\./,/^## 3\./p' <article>` slice (the ch.2
+   heading may be a sanctioned compound variant — see check 2 — so match `## 2.` not
+   `## 2. 缩略语`)
    slice the `^| ` line count must be 0 (tables forbidden); the
    `^\*\*[^*]+\*\*\s*$` term-line count == the source table's data-row count
    (check row set and order line by line — this chapter drifts most easily in
@@ -828,6 +835,7 @@ open.
 | Finishing on the strict build alone — or opening the PR before the Step 8 gate | The build is blind to coverage, fidelity and wording; the user reviews a PR that was never confirmed | Phase A ≠ done; present Phase A + Phase B evidence and wait for confirmation, then commit/PR (Step 8) |
 | Writing "confirmation deferred" / `确认待补` on a todo item | Creates a backlog of rows whose real state nobody knows | Capture the confirmation when given, or leave the item `[ ]` (Step 8) |
 | Letting the 缩略语 chapter drift on format or row set (2026-10-24 finding: 6 articles render it as a table, adc_driver dropped API/HW/SW + reordered DET/DEM + split Conversion Mode — 18 source rows became 16 entries, all under ✅ status) | Site-wide format split; silent content loss in the one chapter whose rows are pure lookups | Step 5 acronym-chapter rules; Phase A check 5 makes table-vs-blockquote and row count mechanical. Baseline tests (2026-10-24) show fresh agents comply — the drift happens in long loaded sessions, which is exactly why the check must be a grep, not judgment |
+| Shortening a compound source ch.2 heading to the canonical `缩略语` (11 articles carried source-faithful titles such as `缩略语和简称` / `缩略语和定义` while STANDARD.md §2 named only `缩略语`; flagged as deviations in the 2026-11-06 verification pass) | The canonical line ends up codifying the drift it was meant to prevent — headings stop being direct translations of their source headings, exactly the 2026-10-25 §3.1 failure mode | Headings are direct translations of the source headings; a compound source ch.2 heading is translated in full, never shortened. STANDARD.md §2 records the sanctioned variants (user decision 2026-11-07, issue #296) | 
 | Trusting the API chapter's shape without checking it entry by entry (PWM run 2026-10-24: ✅-rated article carried `Pwm_ChannelType` with the neighbor type's "8..32 bit" range, and a `PWM_FULL_POWER (0x00)` row that R23-11 does not define — it only exists from R25-11 on) | Silent infidelity in the chapter readers use as a lookup reference; a wrong Range or an unsourced enum value is indistinguishable from the standard to a site reader | Step 5 API-chapter rules: cell-by-cell type-table read; per-requirement function text mapping; Phase A check 7 `check_api_sync.py` for count/name/order; content-vs-source mismatches go to the user as decisions |
 | Realigning only the measurable chapters (ch.2/§3/API/new ch.8-9) and leaving a pre-existing §6 with legacy internal structure — the ADC article carried a topical 6.1.x layout under R23-11's Background-&-Rationale/Requirements convention, and its source 7.3 State Diagrams were never translated (found 2026-10-25) | The chapter-level coverage map passes while the body diverges from the source's structure; embedded diagram chapters get skipped as "figures" | Phase B: internal-structure verification per pre-existing chapter (see Coverage map); a realignment that cannot verify internal structure says so in its gate evidence |
 | Writing a rule as Phase B prose without a mechanical trigger (potential-links lived as a Phase B bullet for six runs — dio/port/pwm/ocu/icu/ecu/bswm — and was never executed once; its own "user decision" semantics made doing nothing always compliant) | Codified rules that only a gate presentation could surface get dropped when presentations lengthen; the omission is invisible in a deviations-framing | Any new rule gets (a) a tick-box in the step it executes in, and/or (b) a mechanical counter whose zero-output is explicit. Test rules at RUN level ("did a full sync execute it?"), not comprehension level |

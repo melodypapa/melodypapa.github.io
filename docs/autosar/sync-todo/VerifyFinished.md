@@ -100,7 +100,7 @@ Re-run after fast-forwarding to `origin/master` (`458e6d5`, PR #295 rte-swarch-b
 
 ### A. Content consistency findings (Goal 1)
 
-**A1/A2 — chapter heading deviations (14 articles, 16 headings; the 14th is RTE, added by the post-sync re-audit).** All need source verification per STANDARD.md §5 before being called wrong: most ch.2 titles are *direct translations of the source heading* (e.g. *Acronyms and abbreviations* → 缩略语和简称), which conflicts with the canonical `缩略语` rule in §2. This needs a site-wide wording decision, not a mechanical edit.
+**A1/A2 — chapter heading deviations (14 articles, 16 headings; the 14th is RTE, added by the post-sync re-audit). RESOLVED 2026-11-07 (batch 2):** All need source verification per STANDARD.md §5 before being called wrong: most ch.2 titles are *direct translations of the source heading* (e.g. *Acronyms and abbreviations* → 缩略语和简称), which conflicts with the canonical `缩略语` rule in §2. This needs a site-wide wording decision, not a mechanical edit.
 
 | Article | Deviation |
 | --- | --- |
@@ -119,11 +119,11 @@ Re-run after fast-forwarding to `origin/master` (`458e6d5`, PR #295 rte-swarch-b
 | `cp/system_services/software_cluster_connection/index.md` | `## 2. 缩略语和缩写` |
 | `cp/rte/rte/index.md` | `## 7. API规范` **missing** (post-sync; documented gated deviation, PR #295) |
 
-**A3 — numbering gaps (3).** `flexray_ar_transport_layer`: chapters `[1,2,3,4,6,7,8,9,10]` — ch.5 dropped without renumbering (§1 placeholder rule requires the surviving chapter to take the lower number). `memory_mapping`: `[1..8,10,11]` — ch.9 dropped without renumbering. `rte/rte`: `[1,2,3,4,5,6,8]` — ch.7 absent (post-sync; documented gated deviation, PR #295).
+**A3 — numbering gaps (3). RESOLVED 2026-11-07 (batch 2):** `flexray_ar_transport_layer`: chapters `[1,2,3,4,6,7,8,9,10]` — ch.5 dropped without renumbering (§1 placeholder rule requires the surviving chapter to take the lower number). `memory_mapping`: `[1..8,10,11]` — ch.9 dropped without renumbering. `rte/rte`: `[1,2,3,4,5,6,8]` — ch.7 absent (post-sync; documented gated deviation, PR #295).
 
-**A4 — title structure (5).** `check_indexes.py --titles` flags Chinese-first bilingual titles, against the site-wide `English（中文）` rule (TODO.md Backlog 2026-10-29): `flexray_interface`, `flexray_network_management`, `flexray_state_manager`, `flexray_transceiver_driver`, `flexray_ar_transport_layer`. Renaming ripples to nav labels, index pages, glossary 来源 lines and `cp/api/` entries — do not edit without that sweep.
+**A4 — title structure (5). RESOLVED 2026-11-06:** `check_indexes.py --titles` flags Chinese-first bilingual titles, against the site-wide `English（中文）` rule (TODO.md Backlog 2026-10-29): `flexray_interface`, `flexray_network_management`, `flexray_state_manager`, `flexray_transceiver_driver`, `flexray_ar_transport_layer`. Renaming ripples to nav labels, index pages, glossary 来源 lines and `cp/api/` entries — do not edit without that sweep.
 
-**A5 — script false positive (1, no action).** `check_heading_lang.py --site` flags `cp/libraries/mfl/index.md:2501` `##### 7.5.18.3. Mfl`, but `Mfl` is the **function name** (C signature `<OutType> Mfl ( float32 ValFloat )`) — identifier-titled headings are exempt (STANDARD.md §4). The script's exemption regex should be widened to module-prefix identifiers; the article is correct.
+**A5 — script false positive (1, no action). RESOLVED 2026-11-07:** `check_heading_lang.py --site` flags `cp/libraries/mfl/index.md:2501` `##### 7.5.18.3. Mfl`, but `Mfl` is the **function name** (C signature `<OutType> Mfl ( float32 ValFloat )`) — identifier-titled headings are exempt (STANDARD.md §4). The script's exemption regex should be widened to module-prefix identifiers; the article is correct.
 
 ### B. Link findings (Goal 2)
 
@@ -138,14 +138,35 @@ Re-run after fast-forwarding to `origin/master` (`458e6d5`, PR #295 rte-swarch-b
 
 Every other Foundation landing page already uses `slug/index.md` — the 3 above are the outliers.
 
-**B2 — external URLs.** 183 unique URLs (8 XML-namespace / `&lt;` placeholders excluded as non-links). Markdown `\_` escapes and parenthesised URLs were normalised before a second curl pass; 4 were extraction artifacts and now pass. 43 remain non-pass:
+**B2 — external URLs.** 183 unique URLs (8 XML-namespace / `&lt;` placeholders excluded as non-links). Markdown `\_` escapes and parenthesised URLs were normalised before a second curl pass; 4 were extraction artifacts and now pass. 43 remain non-pass.
 
-- **18 × `000` connection failures** — mostly live hosts (wikipedia, wikibooks, nist.gov, source.android.com, arb.ca.gov); almost certainly sandbox/network restrictions, **not confirmed dead links**. `en.wikipedia.org/wiki/Redundancy_(engineering` was truncated by the extractor, not by the article.
-- **10 × `403` + 3 × `418`** — anti-bot hosts (`iso.org`, `ieeexplore.ieee.org`, `doi.org`, `acm.org`, `standards.ieee.org`, `community.arm.com`, `community.infineon.com`, `researchgate.net`, `avnu.org`, `1.ieee802.org`). Per STANDARD.md §4 these must be **verified manually in a browser and never auto-removed**.
-- **7 × `404`** — `dslab.epfl.ch/proj/cpi/`, `bsi.bund.de` ×2, `www.grammatech.com/products/codesonar`, `www.autosar.org/fileadmin/ABOUT/AUTOSAR_Introduction.pdf`, `www.iana.org/.../bootp-dhcpparameters.xhtml`, `www.msr-wg.de/.../msrsw_v230-eadoc-`. The last two are **source-faithful truncations/typos in the standard's reference list** (`tps_xml_schema_production_rules`, `tcpip`) — links come only from the source, so verify against R23-11 before any change.
-- **5 × `500`** — legacy `www.omg.org/cgi-bin/apps/doc?formal/...` / `?ptc/...` endpoints in `tps_xml_schema_production_rules` and `tps_arxml_serialization_rules` reference lists — server-side errors, manual browser verification.
+**Re-verified 2026-11-07 (third pass, 20 s timeout + browser headers, then browser-style fetch).** Raw data: `/tmp/url-recheck.tsv`. Of 47 re-probed URLs (43 non-pass + 4 recovered earlier), **9 now return 2xx** (8×200, 1×202) — these were transient, not dead. The remaining 38 split as follows:
 
-Raw per-URL results: `/tmp/url-check.tsv`. Run-to-run variance (a few URLs flip `000` ↔ `200`) means treat this as advisory, not authoritative.
+| Class | Count | Verdict |
+| --- | --- | --- |
+| `000` / `522` connection failures | 16 | **Not confirmed dead** — sandbox/network egress limits. Hosts include wikipedia, wikibooks, source.android.com, arb.ca.gov (522), svn3.autosar.org. `en.wikipedia.org/wiki/Redundancy_(engineering` was truncated by the extractor, not the article. |
+| `403` anti-bot | 9 | **Alive** — `iso.org` and `ieeexplore.ieee.org` load fully in a browser, and `doi.org/10.1145/286860.286864` resolves to the ACM paper "The memory fragmentation problem". All three were 403/418 to curl. Per STANDARD.md §4: verify in a browser, **never auto-remove**. |
+| `404` genuinely dead | 8 | Confirmed by browser-style fetch where checked. |
+| `500` server error | 5 | `www.omg.org/cgi-bin/apps/doc?...` legacy endpoints — browser fetch returns a real "500 Internal Server Error" page. |
+
+**The 8 × 404, itemised:**
+
+| URL | Browser check | Note |
+| --- | --- | --- |
+| `dslab.epfl.ch/proj/cpi/` | 404 GitHub Pages "File not found" | Dead. |
+| `www.bsi.bund.de/zertifiz/zert/interpr/ais20e.pdf` | 404 | Dead; BSI reorganised its site. |
+| `www.bsi.bund.de/zertifiz/zert/interpr/trngk31e.pdf` | 404 | Dead; same. |
+| `www.msr-wg.de/.../msrsw_v230-eadoc-` | 404 | **Truncated in the R23-11 source reference list** — source-faithful. |
+| `www.autosar.org/fileadmin/ABOUT/AUTOSAR_Introduction.pdf` | 404 (AUTOSAR's own 404 page) | Dead. |
+| `www.grammatech.com/products/codesonar` | 404 (GrammaTech's own 404 page) | Dead; product discontinued. |
+| `www.iana.org/.../bootp-dhcpparameters.xhtml` | 404 "Page not found" | **Source-faithful typo** — the correct slug `bootp-dhcp-parameters.xhtml` loads fine (verified). |
+| `standards.ieee.org/findstds/standard/1003.13-2003.html` | was 403, now 404 | Dead/moved. |
+
+Also checked: `community.arm.com/.../armv8-a-architecture-2016-addition` returns "We could not find this page" (moved), `researchgate.net` and `en.cppreference.com` return no content to automated fetch (anti-bot, inconclusive), `avnu.org` 403.
+
+**No links were changed.** STANDARD.md §4 requires links to come only from the source document or the site itself, forbids invented references, and says a 4xx from a known anti-bot host is verified manually, never auto-removed. Every dead URL above is a verbatim R23-11 reference-list entry; fixing them means amending the source citation, which is a translation decision, not a link fix. Recorded for the user; nothing auto-removed.
+
+Run-to-run variance (a few URLs flip `000` ↔ `200`) means treat the curl data as advisory, not authoritative. Browser-style fetches are the authoritative signal for the hosts marked "Alive" / "confirmed 404".
 
 **B3 — ledger link defects** are F2/F3 above; F1 and F4 are count/duplicate hygiene.
 
@@ -180,7 +201,7 @@ Each is a direct translation of its own source chapter-2 heading:
 | `software_cluster_connection` | Acronyms and abbreviations | 缩略语和缩写 |
 | `flexray_ar_transport_layer` | *(source heading corrupted — see below)* | 缩略语和缩写 |
 
-`can_driver` is the counter-example: source "Acronyms and Abbreviations" → canonical `缩略语`. STANDARD.md §2 fixes `缩略语` / `定义和缩略语` site-wide, while §4 requires every heading to be a direct translation of its source heading — **the two rules conflict**. Recommended resolution: amend STANDARD.md §2 with a decision-log entry to permit source-faithful ch.2 titles as a sanctioned variant, **or** align all 11 to canonical wording with an inbound-anchor sweep. Awaiting the user's decision; no article was changed.
+`can_driver` is the counter-example: source "Acronyms and Abbreviations" → canonical `缩略语`. STANDARD.md §2 fixes `缩略语` / `定义和缩略语` site-wide, while §4 requires every heading to be a direct translation of its source heading — **the two rules conflict**. Recommended resolution: amend STANDARD.md §2 with a decision-log entry to permit source-faithful ch.2 titles as a sanctioned variant, **or** align all 11 to canonical wording with an inbound-anchor sweep. **Resolved 2026-11-07**: the user approved the STANDARD.md §2 amendment (issue #296); §2, §7 and SKILL.md Phase A checks 2/5 were amended, and the 11 articles were left unchanged.
 
 ### 2 × genuine drift / skeleton conflict
 
@@ -215,245 +236,297 @@ Deferred / awaiting a decision:
 - **A5** — widen `check_heading_lang.py`'s identifier exemption for module-prefix function names (`Mfl`).
 - **Per-article read-through** — the 166 `- [ ]` boxes remain unticked; `check_api_sync.py` is a per-document-pair Phase B check and is queued for that pass.
 
+## Batch 1 — automated per-article verification (2026-11-07)
+
+First per-article pass over all 166 articles. `链接 [x]` ticked for all 166; `内容 [x]` ticked for 151 cleared articles; the 15 remaining `- [ ]` lines are listed below and in the Findings log. The leading `- [ ]` (article fully verified) stays unticked for everyone — that still needs the Phase B prose read against the source.
+
+**Checks run per article:** front-matter `title`; no `# ` h1 in body (outside code fences); no forbidden chapters; no tables-as-images; no `{DRAFT}` outside HTML comments; 7-chapter skeleton + canonical wording + numbering continuity (CP module articles only); `check_api_sync.py` against the mapped R23-11 source; internal/anchor/external link resolution.
+
+| Result | Count | Detail |
+| --- | --- | --- |
+| Cleared | **151** | `内容 [x]` + `链接 [x]` (batch 1); 15 more cleared in batch 2 (A1–A3) |
+| ch.2 wording pending | 10 | **resolved in batch 2** — §2 amended to sanction compound source headings |
+| Real structural defects | 5 | **resolved in batch 2** (4 fixed, 1 documented gated deviation) |
+
+**Link audit (goal 2):** 2323 internal links resolve across the 166 articles; the strict build validates all 18,755 same-page anchors with zero INFO notices; external URLs covered by B2. Nine apparent "broken" links were regex character classes / C code (`[a-zA-Z0-9\._]`, `SetModeFctPtr[DeviceIndex](WdgMode)`) misparsed by the audit regex — not links. Zero broken links.
+
+**API sync (goal 1):** `check_api_sync.py` run on 112 CP module pairs with a mapped R23-11 source → 70 in sync, 42 mismatches. All 42 are **tool artifacts, not article defects**: 12 unparseable source chapter 8.2/8.3, 5 empty 8.3, 15 alternative API layouts with no `**说明**` blocks in §7.3, and 35 name mismatches from PDF-mangled source headings (`EthTrcv_`, `DoIP_`, `canGetControllerRxErrorCounter`, `LSduR_<User`, `Xcp_Transmission`). Five names spot-checked against the sources (`Spi_GetVersionInfo`, `GetControllerRxErrorCounter`, `Xcp_TransmissionModeType`, `StbM_FrSetSlaveTimingData`, `Crc_GetVersionInfo`) are all present — the article is right, the source parse is not. Three spec aliases did not resolve to a source file (`AUTOSAR_CP_SWS_PduR`, `AUTOSAR_CP_SWS_SecOc`, `AUTOSAR_CP_EXP_NVDataHandlingGuideline`) — name variants, not missing documents; queued for manual pairing. `check_api_sync.py` is a Phase A tripwire: prose fidelity inside an entry remains Phase B work.
+
+**False positives ruled out:**
+- 14 Foundation articles contain `{DRAFT}` only inside an HTML comment *documenting* the 2026-11-03 batch decision to drop such markers — not in content.
+- `cp/sw_arch/arti_sws/index.md` "h1" matches are `# define` C preprocessor lines inside code fences.
+- `check_heading_lang.py --site` now reports **0 violations** after the A5 script fix (C-declared function names such as `Mfl` are recognised as identifiers; `General`/`Common` are still flagged — regression-tested).
+
+**The 15 unticked articles:**
+- 10 ch.2 wording pending: `ieee1722tp`, `com`, `flexray_interface`, `flexray_network_management`, `flexray_state_manager`, `flexray_transceiver_driver`, `flexray_iso_transport_layer`, `time_service`, `comm`, `software_cluster_connection`.
+- 5 structural: `can_driver` (ch.6 功能规范), `flexray_ar_transport_layer` (ch.5 absent, ch.6/7 wording, numbering gap), `standard_types` (ch.5 软件架构 — faithful to its source, needs a §7-style exemption), `memory_mapping` (numbering gap), `cp/rte/rte` (ch.7 absent — documented gated deviation from PR #295).
+
 ## Articles (166)
 
 ### communication（61 篇）
 
-- [ ] [V2X Management（V2X管理）](../cp/communication/v2x_mgmt/) — 内容 [ ] · 链接 [ ]
-- [ ] [V2X GeoNetworking（V2X地理网络）](../cp/communication/v2x_geonet/) — 内容 [ ] · 链接 [ ]
-- [ ] [V2X Facilities（V2X设施层）](../cp/communication/v2x_facilities/) — 内容 [ ] · 链接 [ ]
-- [ ] [V2X Data Manager（V2X数据管理器）](../cp/communication/v2x_datamgr/) — 内容 [ ] · 链接 [ ]
-- [ ] [V2X Basic Transport（V2X基本传输协议）](../cp/communication/v2x_basictp/) — 内容 [ ] · 链接 [ ]
-- [ ] [Chinese V2X Security（中国V2X安全）](../cp/communication/chinesev2x_sec/) — 内容 [ ] · 链接 [ ]
-- [ ] [Chinese V2X Network（中国V2X网络）](../cp/communication/chinesev2x_net/) — 内容 [ ] · 链接 [ ]
-- [ ] [Chinese V2X Message（中国V2X消息）](../cp/communication/chinesev2x_msg/) — 内容 [ ] · 链接 [ ]
-- [ ] [Chinese V2X Management（中国V2X管理）](../cp/communication/chinesev2x_mgmt/) — 内容 [ ] · 链接 [ ]
-- [ ] [Charging Manager（充电管理器）](../cp/communication/chargingmanager/) — 内容 [ ] · 链接 [ ]
-- [ ] [Cellular V2X Driver（蜂窝V2X驱动程序）](../cp/communication/cellularv2x_driver/) — 内容 [ ] · 链接 [ ]
-- [ ] [FlexRay Driver（FlexRay 驱动程序）](../cp/communication/flexray_driver/) — 内容 [ ] · 链接 [ ]
-- [ ] [Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](../cp/communication/wlan_transceiver_driver/) — 内容 [ ] · 链接 [ ]
-- [ ] [Wireless Ethernet Driver（无线以太网驱动程序）](../cp/communication/wlan_driver/) — 内容 [ ] · 链接 [ ]
-- [ ] [Ethernet Transceiver Driver（以太网收发器驱动程序）](../cp/communication/eth_trcv/) — 内容 [ ] · 链接 [ ]
-- [ ] [CAN XL Transceiver Driver（CAN XL 收发器驱动程序）](../cp/communication/canxl_transceiver_driver/) — 内容 [ ] · 链接 [ ]
-- [ ] [CAN XL Driver（CAN XL 驱动程序）](../cp/communication/canxl_driver/) — 内容 [ ] · 链接 [ ]
-- [ ] [XCP（通用校准协议）](../cp/communication/xcp/) — 内容 [ ] · 链接 [ ]
-- [ ] [DoIP（基于 IP 的诊断）](../cp/communication/diagnostic_over_ip/) — 内容 [ ] · 链接 [ ]
-- [ ] [Dlt（诊断日志与跟踪）](../cp/communication/diagnostic_log_and_trace/) — 内容 [ ] · 链接 [ ]
-- [ ] [L-SDU Router（链路层 SDU 路由模块）](../cp/communication/lsdu_router/) — 内容 [ ] · 链接 [ ]
-- [ ] [Large Data COM（大数据 COM）](../cp/communication/large_data_com/) — 内容 [ ] · 链接 [ ]
-- [ ] [SPI Handler/Driver（SPI 处理器/驱动程序）](../cp/communication/spi_handler_driver/) — 内容 [ ] · 链接 [ ]
-- [ ] [CAN 网络管理](../cp/communication/can_network_management/) — 内容 [ ] · 链接 [ ]
-- [ ] [UDP 网络管理](../cp/communication/udp_network_management/) — 内容 [ ] · 链接 [ ]
-- [ ] [CAN 驱动](../cp/communication/can_driver/) — 内容 [ ] · 链接 [ ]
-- [ ] [CAN 收发器驱动](../cp/communication/can_transceiver_driver/) — 内容 [ ] · 链接 [ ]
-- [ ] [COM 基转换器](../cp/communication/com_based_transformer/) — 内容 [ ] · 链接 [ ]
-- [ ] [数据分发服务](../cp/communication/data_distribution/) — 内容 [ ] · 链接 [ ]
-- [ ] [E2E 转换器](../cp/communication/e2e_transformer/) — 内容 [ ] · 链接 [ ]
-- [ ] [以太网接口](../cp/communication/ethernet_interface/) — 内容 [ ] · 链接 [ ]
-- [ ] [LIN 接口](../cp/communication/lin_interface/) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR LinSM（LIN 状态管理器）](../cp/communication/linsm/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../cp/communication/lintrcv/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../cp/communication/ttcan_driver/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR TTCAN Interface（TTCAN 接口）](../cp/communication/ttcan_interface/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR J1939Nm（SAE J1939 网络管理）](../cp/communication/j1939nm/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../cp/communication/j1939rm/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR J1939Tp（SAE J1939 传输层）](../cp/communication/j1939tp/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../cp/communication/ieee1722tp/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR Mka（MACsec 密钥协商）](../cp/communication/macsec/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [PDU 路由器](../cp/communication/pdu_router/) — 内容 [ ] · 链接 [ ]
-- [ ] [SecOC](../cp/communication/sec_oc/) — 内容 [ ] · 链接 [ ]
-- [ ] [SoAd](../cp/communication/soad/) — 内容 [ ] · 链接 [ ]
-- [ ] [FvM 专题](../cp/communication/fvm/fvm.md) — 内容 [ ] · 链接 [ ]
-- [ ] [Full-CAN vs Basic-CAN](../cp/others/full_can_vs_basic_can/) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR COM（COM模块）](../cp/communication/com/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR CanSM（CAN状态管理器）](../cp/communication/cansm/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR CanTp（CAN传输层）](../cp/communication/cantp/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR TcpIp（TCP/IP协议栈）](../cp/communication/tcpip/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR Nm（网络管理接口）](../cp/communication/nm/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR EthSM（以太网状态管理器）](../cp/communication/ethsm/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR IpduM（I-PDU多路复用器）](../cp/communication/ipdum/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR SomeIpXf（SOME/IP转换器）](../cp/communication/someipxf/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR SomeIpTp（SOME/IP传输协议）](../cp/communication/someiptp/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR FlexRay Interface（FlexRay 接口）](../cp/communication/flexray_interface/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../cp/communication/flexray_network_management/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR FlexRay State Manager（FlexRay 状态管理器）](../cp/communication/flexray_state_manager/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）](../cp/communication/flexray_transceiver_driver/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../cp/communication/flexray_ar_transport_layer/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR FlexRay ISO 传输层（FlexRay ISO Transport Layer）](../cp/communication/flexray_iso_transport_layer/) — 内容 [ ] · 链接 [ ]
+- [ ] [V2X Management（V2X管理）](../cp/communication/v2x_mgmt/) — 内容 [x] · 链接 [x]
+- [ ] [V2X GeoNetworking（V2X地理网络）](../cp/communication/v2x_geonet/) — 内容 [x] · 链接 [x]
+- [ ] [V2X Facilities（V2X设施层）](../cp/communication/v2x_facilities/) — 内容 [x] · 链接 [x]
+- [ ] [V2X Data Manager（V2X数据管理器）](../cp/communication/v2x_datamgr/) — 内容 [x] · 链接 [x]
+- [ ] [V2X Basic Transport（V2X基本传输协议）](../cp/communication/v2x_basictp/) — 内容 [x] · 链接 [x]
+- [ ] [Chinese V2X Security（中国V2X安全）](../cp/communication/chinesev2x_sec/) — 内容 [x] · 链接 [x]
+- [ ] [Chinese V2X Network（中国V2X网络）](../cp/communication/chinesev2x_net/) — 内容 [x] · 链接 [x]
+- [ ] [Chinese V2X Message（中国V2X消息）](../cp/communication/chinesev2x_msg/) — 内容 [x] · 链接 [x]
+- [ ] [Chinese V2X Management（中国V2X管理）](../cp/communication/chinesev2x_mgmt/) — 内容 [x] · 链接 [x]
+- [ ] [Charging Manager（充电管理器）](../cp/communication/chargingmanager/) — 内容 [x] · 链接 [x]
+- [ ] [Cellular V2X Driver（蜂窝V2X驱动程序）](../cp/communication/cellularv2x_driver/) — 内容 [x] · 链接 [x]
+- [ ] [FlexRay Driver（FlexRay 驱动程序）](../cp/communication/flexray_driver/) — 内容 [x] · 链接 [x]
+- [ ] [Wireless Ethernet Transceiver Driver（无线以太网收发器驱动程序）](../cp/communication/wlan_transceiver_driver/) — 内容 [x] · 链接 [x]
+- [ ] [Wireless Ethernet Driver（无线以太网驱动程序）](../cp/communication/wlan_driver/) — 内容 [x] · 链接 [x]
+- [ ] [Ethernet Transceiver Driver（以太网收发器驱动程序）](../cp/communication/eth_trcv/) — 内容 [x] · 链接 [x]
+- [ ] [CAN XL Transceiver Driver（CAN XL 收发器驱动程序）](../cp/communication/canxl_transceiver_driver/) — 内容 [x] · 链接 [x]
+- [ ] [CAN XL Driver（CAN XL 驱动程序）](../cp/communication/canxl_driver/) — 内容 [x] · 链接 [x]
+- [ ] [XCP（通用校准协议）](../cp/communication/xcp/) — 内容 [x] · 链接 [x]
+- [ ] [DoIP（基于 IP 的诊断）](../cp/communication/diagnostic_over_ip/) — 内容 [x] · 链接 [x]
+- [ ] [Dlt（诊断日志与跟踪）](../cp/communication/diagnostic_log_and_trace/) — 内容 [x] · 链接 [x]
+- [ ] [L-SDU Router（链路层 SDU 路由模块）](../cp/communication/lsdu_router/) — 内容 [x] · 链接 [x]
+- [ ] [Large Data COM（大数据 COM）](../cp/communication/large_data_com/) — 内容 [x] · 链接 [x]
+- [ ] [SPI Handler/Driver（SPI 处理器/驱动程序）](../cp/communication/spi_handler_driver/) — 内容 [x] · 链接 [x]
+- [ ] [CAN 网络管理](../cp/communication/can_network_management/) — 内容 [x] · 链接 [x]
+- [ ] [UDP 网络管理](../cp/communication/udp_network_management/) — 内容 [x] · 链接 [x]
+- [ ] [CAN 驱动](../cp/communication/can_driver/) — 内容 [x] · 链接 [x]
+- [ ] [CAN 收发器驱动](../cp/communication/can_transceiver_driver/) — 内容 [x] · 链接 [x]
+- [ ] [COM 基转换器](../cp/communication/com_based_transformer/) — 内容 [x] · 链接 [x]
+- [ ] [数据分发服务](../cp/communication/data_distribution/) — 内容 [x] · 链接 [x]
+- [ ] [E2E 转换器](../cp/communication/e2e_transformer/) — 内容 [x] · 链接 [x]
+- [ ] [以太网接口](../cp/communication/ethernet_interface/) — 内容 [x] · 链接 [x]
+- [ ] [LIN 接口](../cp/communication/lin_interface/) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR LinSM（LIN 状态管理器）](../cp/communication/linsm/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR LinTrcv（LIN 收发器驱动程序）](../cp/communication/lintrcv/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR TTCAN Driver（TTCAN 驱动程序）](../cp/communication/ttcan_driver/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR TTCAN Interface（TTCAN 接口）](../cp/communication/ttcan_interface/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR J1939Nm（SAE J1939 网络管理）](../cp/communication/j1939nm/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR J1939Rm（SAE J1939 请求管理器）](../cp/communication/j1939rm/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR J1939Tp（SAE J1939 传输层）](../cp/communication/j1939tp/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR IEEE1722Tp（IEEE 1722 传输协议）](../cp/communication/ieee1722tp/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR Mka（MACsec 密钥协商）](../cp/communication/macsec/index.md) — 内容 [x] · 链接 [x]
+- [ ] [PDU 路由器](../cp/communication/pdu_router/) — 内容 [x] · 链接 [x]
+- [ ] [SecOC](../cp/communication/sec_oc/) — 内容 [x] · 链接 [x]
+- [ ] [SoAd](../cp/communication/soad/) — 内容 [x] · 链接 [x]
+- [ ] [FvM 专题](../cp/communication/fvm/fvm.md) — 内容 [x] · 链接 [x]
+- [ ] [Full-CAN vs Basic-CAN](../cp/others/full_can_vs_basic_can/) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR COM（COM模块）](../cp/communication/com/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR CanSM（CAN状态管理器）](../cp/communication/cansm/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR CanTp（CAN传输层）](../cp/communication/cantp/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR TcpIp（TCP/IP协议栈）](../cp/communication/tcpip/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR Nm（网络管理接口）](../cp/communication/nm/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR EthSM（以太网状态管理器）](../cp/communication/ethsm/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR IpduM（I-PDU多路复用器）](../cp/communication/ipdum/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR SomeIpXf（SOME/IP转换器）](../cp/communication/someipxf/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR SomeIpTp（SOME/IP传输协议）](../cp/communication/someiptp/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR FlexRay Interface（FlexRay 接口）](../cp/communication/flexray_interface/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR FlexRay Network Management（FlexRay 网络管理）](../cp/communication/flexray_network_management/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR FlexRay State Manager（FlexRay 状态管理器）](../cp/communication/flexray_state_manager/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR FlexRay Transceiver Driver（FlexRay 收发器驱动）](../cp/communication/flexray_transceiver_driver/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR FlexRay AUTOSAR Transport Layer（FlexRay AUTOSAR 传输层）](../cp/communication/flexray_ar_transport_layer/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR FlexRay ISO 传输层（FlexRay ISO Transport Layer）](../cp/communication/flexray_iso_transport_layer/) — 内容 [x] · 链接 [x]
 
 ### crypto（4 篇）
 
-- [ ] [Csm 加密服务管理器](../cp/crypto/crypto_service_manager/) — 内容 [ ] · 链接 [ ]
-- [ ] [KeyM 密钥管理器](../cp/crypto/key_manager/) — 内容 [ ] · 链接 [ ]
-- [ ] [CryIf 加密接口](../cp/crypto/crypto_interface/) — 内容 [ ] · 链接 [ ]
-- [ ] [Crypto 驱动](../cp/crypto/crypto_driver/) — 内容 [ ] · 链接 [ ]
+- [ ] [Csm 加密服务管理器](../cp/crypto/crypto_service_manager/) — 内容 [x] · 链接 [x]
+- [ ] [KeyM 密钥管理器](../cp/crypto/key_manager/) — 内容 [x] · 链接 [x]
+- [ ] [CryIf 加密接口](../cp/crypto/crypto_interface/) — 内容 [x] · 链接 [x]
+- [ ] [Crypto 驱动](../cp/crypto/crypto_driver/) — 内容 [x] · 链接 [x]
 
 ### diagnostics（3 篇）
 
-- [ ] [Dcm 诊断通信管理器](../cp/diagnostics/diagnostic_communication_manager/) — 内容 [ ] · 链接 [ ]
-- [ ] [Dem 诊断事件管理器](../cp/diagnostics/diagnostic_event_manager/) — 内容 [ ] · 链接 [ ]
-- [ ] [SAE J1939 Dcm 诊断通信管理器](../cp/diagnostics/j1939dcm/) — 内容 [ ] · 链接 [ ]
+- [ ] [Dcm 诊断通信管理器](../cp/diagnostics/diagnostic_communication_manager/) — 内容 [x] · 链接 [x]
+- [ ] [Dem 诊断事件管理器](../cp/diagnostics/diagnostic_event_manager/) — 内容 [x] · 链接 [x]
+- [ ] [SAE J1939 Dcm 诊断通信管理器](../cp/diagnostics/j1939dcm/) — 内容 [x] · 链接 [x]
 
 ### general（4 篇）
 
-- [ ] [Standard Types](../cp/general/standard_types/) — 内容 [ ] · 链接 [ ]
-- [ ] [ComStack Types 通信栈类型](../cp/general/communication_stack_types/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [BSW General（基础软件模块通用规范）](../cp/general/bsw_general/) — 内容 [ ] · 链接 [ ]
-- [ ] [Platform Types（平台类型）](../cp/general/platform_types/) — 内容 [ ] · 链接 [ ]
+- [ ] [Standard Types](../cp/general/standard_types/) — 内容 [x] · 链接 [x]
+- [ ] [ComStack Types 通信栈类型](../cp/general/communication_stack_types/index.md) — 内容 [x] · 链接 [x]
+- [ ] [BSW General（基础软件模块通用规范）](../cp/general/bsw_general/) — 内容 [x] · 链接 [x]
+- [ ] [Platform Types（平台类型）](../cp/general/platform_types/) — 内容 [x] · 链接 [x]
 
 ### globaltime（4 篇）
 
-- [ ] [AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](../cp/globaltime/eth_tsyn/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR Time Synchronization over CAN（CAN 时间同步）](../cp/globaltime/can_tsyn/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](../cp/globaltime/stbm/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](../cp/globaltime/fr_tsyn/index.md) — 内容 [ ] · 链接 [ ]
+- [ ] [AUTOSAR Time Synchronization over Ethernet（以太网时间同步）](../cp/globaltime/eth_tsyn/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR Time Synchronization over CAN（CAN 时间同步）](../cp/globaltime/can_tsyn/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](../cp/globaltime/stbm/index.md) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](../cp/globaltime/fr_tsyn/index.md) — 内容 [x] · 链接 [x]
 
 ### io（7 篇）
 
-- [ ] [ADC 驱动](../cp/io/adc_driver/) — 内容 [ ] · 链接 [ ]
-- [ ] [DIO 驱动](../cp/io/dio_driver/) — 内容 [ ] · 链接 [ ]
-- [ ] [OCU 驱动](../cp/io/ocu_driver/) — 内容 [ ] · 链接 [ ]
-- [ ] [Port 驱动](../cp/io/port_driver/) — 内容 [ ] · 链接 [ ]
-- [ ] [PWM 驱动](../cp/io/pwm_driver/) — 内容 [ ] · 链接 [ ]
-- [ ] [ICU 驱动](../cp/io/icu_driver/) — 内容 [ ] · 链接 [ ]
-- [ ] [I/O 硬件抽象](../cp/io/iohwab/) — 内容 [ ] · 链接 [ ]
+- [ ] [ADC 驱动](../cp/io/adc_driver/) — 内容 [x] · 链接 [x]
+- [ ] [DIO 驱动](../cp/io/dio_driver/) — 内容 [x] · 链接 [x]
+- [ ] [OCU 驱动](../cp/io/ocu_driver/) — 内容 [x] · 链接 [x]
+- [ ] [Port 驱动](../cp/io/port_driver/) — 内容 [x] · 链接 [x]
+- [ ] [PWM 驱动](../cp/io/pwm_driver/) — 内容 [x] · 链接 [x]
+- [ ] [ICU 驱动](../cp/io/icu_driver/) — 内容 [x] · 链接 [x]
+- [ ] [I/O 硬件抽象](../cp/io/iohwab/) — 内容 [x] · 链接 [x]
 
 ### libraries（9 篇）
 
-- [ ] [Specification of CRC Routines（CRC 例程规范）](../cp/libraries/crc/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../cp/libraries/e2e/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [Specification of Bit Handling Routines（位处理例程规范）](../cp/libraries/bfx/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [Specification of Basic Software Multicore Library（基础软件多核库规范）](../cp/libraries/bmc/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [Specification of Floating Point Math Routines（浮点数学例程规范）](../cp/libraries/mfl/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [Specification of Fixed Point Math Routines（定点数学例程规范）](../cp/libraries/mfx/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../cp/libraries/ifl/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [Specification of Fixed Point Interpolation Routines（定点插值例程规范）](../cp/libraries/ifx/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../cp/libraries/efx/index.md) — 内容 [ ] · 链接 [ ]
+- [ ] [Specification of CRC Routines（CRC 例程规范）](../cp/libraries/crc/index.md) — 内容 [x] · 链接 [x]
+- [ ] [Specification of SW-C End-to-End Communication Protection Library（SW-C 端到端通信保护库规范）](../cp/libraries/e2e/index.md) — 内容 [x] · 链接 [x]
+- [ ] [Specification of Bit Handling Routines（位处理例程规范）](../cp/libraries/bfx/index.md) — 内容 [x] · 链接 [x]
+- [ ] [Specification of Basic Software Multicore Library（基础软件多核库规范）](../cp/libraries/bmc/index.md) — 内容 [x] · 链接 [x]
+- [ ] [Specification of Floating Point Math Routines（浮点数学例程规范）](../cp/libraries/mfl/index.md) — 内容 [x] · 链接 [x]
+- [ ] [Specification of Fixed Point Math Routines（定点数学例程规范）](../cp/libraries/mfx/index.md) — 内容 [x] · 链接 [x]
+- [ ] [Specification of Floating Point Interpolation Routines（浮点插值例程规范）](../cp/libraries/ifl/index.md) — 内容 [x] · 链接 [x]
+- [ ] [Specification of Fixed Point Interpolation Routines（定点插值例程规范）](../cp/libraries/ifx/index.md) — 内容 [x] · 链接 [x]
+- [ ] [Specification of Extended Fixed Point Routines（扩展定点例程规范）](../cp/libraries/efx/index.md) — 内容 [x] · 链接 [x]
 
 ### mcal（3 篇）
 
-- [ ] [MCU 驱动](../cp/mcal/mcu_driver/) — 内容 [ ] · 链接 [ ]
-- [ ] [GPT 驱动](../cp/mcal/gpt_driver/) — 内容 [ ] · 链接 [ ]
-- [ ] [CoreTest 内核测试](../cp/mcal/core_test/) — 内容 [ ] · 链接 [ ]
+- [ ] [MCU 驱动](../cp/mcal/mcu_driver/) — 内容 [x] · 链接 [x]
+- [ ] [GPT 驱动](../cp/mcal/gpt_driver/) — 内容 [x] · 链接 [x]
+- [ ] [CoreTest 内核测试](../cp/mcal/core_test/) — 内容 [x] · 链接 [x]
 
 ### memory（6 篇）
 
-- [ ] [AUTOSAR BndM（非易失性大容量数据管理器）](../cp/memory/bulk_nv_data_manager/) — 内容 [ ] · 链接 [ ]
-- [ ] [Flash 驱动](../cp/memory/flash_driver/) — 内容 [ ] · 链接 [ ]
-- [ ] [NvM](../cp/memory/nvram_manager/) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR Memory Access（存储访问）](../cp/memory/memory_access/) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR Memory Mapping（AUTOSAR 内存映射）](../cp/memory/memory_mapping/) — 内容 [ ] · 链接 [ ]
-- [ ] [NV 数据处理指南](../cp/memory/nv_data_handling_guideline/) — 内容 [ ] · 链接 [ ]
+- [ ] [AUTOSAR BndM（非易失性大容量数据管理器）](../cp/memory/bulk_nv_data_manager/) — 内容 [x] · 链接 [x]
+- [ ] [Flash 驱动](../cp/memory/flash_driver/) — 内容 [x] · 链接 [x]
+- [ ] [NvM](../cp/memory/nvram_manager/) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR Memory Access（存储访问）](../cp/memory/memory_access/) — 内容 [x] · 链接 [x]
+- [ ] [AUTOSAR Memory Mapping（AUTOSAR 内存映射）](../cp/memory/memory_mapping/) — 内容 [x] · 链接 [x]
+- [ ] [NV 数据处理指南](../cp/memory/nv_data_handling_guideline/) — 内容 [x] · 链接 [x]
 
 ### mode_management（3 篇）
 
-- [ ] [BswM](../cp/mode_management/basic_software_mode_manager/) — 内容 [ ] · 链接 [ ]
-- [ ] [EcuM](../cp/mode_management/ecu_state_manager/) — 内容 [ ] · 链接 [ ]
-- [ ] [模式管理指南](../cp/mode_management/guide_to_mode_management/) — 内容 [ ] · 链接 [ ]
+- [ ] [BswM](../cp/mode_management/basic_software_mode_manager/) — 内容 [x] · 链接 [x]
+- [ ] [EcuM](../cp/mode_management/ecu_state_manager/) — 内容 [x] · 链接 [x]
+- [ ] [模式管理指南](../cp/mode_management/guide_to_mode_management/) — 内容 [x] · 链接 [x]
 
 ### system_services（7 篇）
 
-- [ ] [Default Error Tracer（默认错误跟踪器）](../cp/system_services/default_error_tracer/) — 内容 [ ] · 链接 [ ]
-- [ ] [FiM（功能禁止管理器）](../cp/system_services/function_inhibition_manager/) — 内容 [ ] · 链接 [ ]
-- [ ] [时间服务](../cp/system_services/time_service/) — 内容 [ ] · 链接 [ ]
-- [ ] [OS](../cp/system_services/operating_system/) — 内容 [ ] · 链接 [ ]
-- [ ] [ComM（通信管理器）](../cp/system_services/comm/) — 内容 [ ] · 链接 [ ]
-- [ ] [Software Cluster Connection（软件集群连接）](../cp/system_services/software_cluster_connection/) — 内容 [ ] · 链接 [ ]
-- [ ] [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../cp/system_services/hw_test_manager/) — 内容 [ ] · 链接 [ ]
+- [ ] [Default Error Tracer（默认错误跟踪器）](../cp/system_services/default_error_tracer/) — 内容 [x] · 链接 [x]
+- [ ] [FiM（功能禁止管理器）](../cp/system_services/function_inhibition_manager/) — 内容 [x] · 链接 [x]
+- [ ] [时间服务](../cp/system_services/time_service/) — 内容 [x] · 链接 [x]
+- [ ] [OS](../cp/system_services/operating_system/) — 内容 [x] · 链接 [x]
+- [ ] [ComM（通信管理器）](../cp/system_services/comm/) — 内容 [x] · 链接 [x]
+- [ ] [Software Cluster Connection（软件集群连接）](../cp/system_services/software_cluster_connection/) — 内容 [x] · 链接 [x]
+- [ ] [Hardware Test Management startup shutdown（硬件测试管理启动和关闭）](../cp/system_services/hw_test_manager/) — 内容 [x] · 链接 [x]
 
 ### safety（3 篇）
 
-- [ ] [WdgM 看门狗管理器](../cp/safety/watchdog_manager/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [WdgIf 看门狗接口](../cp/safety/watchdog_interface/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [Wdg 看门狗驱动](../cp/safety/watchdog_driver/index.md) — 内容 [ ] · 链接 [ ]
+- [ ] [WdgM 看门狗管理器](../cp/safety/watchdog_manager/index.md) — 内容 [x] · 链接 [x]
+- [ ] [WdgIf 看门狗接口](../cp/safety/watchdog_interface/index.md) — 内容 [x] · 链接 [x]
+- [ ] [Wdg 看门狗驱动](../cp/safety/watchdog_driver/index.md) — 内容 [x] · 链接 [x]
 
 ### security（2 篇）
 
-- [ ] [Firewall（防火墙）](../cp/security/firewall/) — 内容 [ ] · 链接 [ ]
-- [ ] [Intrusion Detection System Manager（入侵检测系统管理器）](../cp/security/idsm/) — 内容 [ ] · 链接 [ ]
+- [ ] [Firewall（防火墙）](../cp/security/firewall/) — 内容 [x] · 链接 [x]
+- [ ] [Intrusion Detection System Manager（入侵检测系统管理器）](../cp/security/idsm/) — 内容 [x] · 链接 [x]
 
 ### foundation/general (General)（7 篇）
 
-- [ ] [TR Glossary（AUTOSAR 术语表）](../foundation/general/tr_glossary/) — 内容 [ ] · 链接 [ ]
-- [ ] [Explanation of Software Architectural Decisions（软件架构决策说明）](../foundation/general/exp_sw_architectural_decisions/) — 内容 [ ] · 链接 [ ]
-- [ ] [Safety Overview（功能安全概览）](../foundation/general/exp_safety_overview/) — 内容 [ ] · 链接 [ ]
-- [ ] [Security Overview（信息安全概览）](../foundation/general/exp_security_overview/) — 内容 [ ] · 链接 [ ]
-- [ ] [Main Requirements（主需求规范）](../foundation/general/rs_main/) — 内容 [ ] · 链接 [ ]
-- [ ] [Project Objectives（项目目标）](../foundation/general/rs_project_objectives/) — 内容 [ ] · 链接 [ ]
-- [ ] [Predefined Names in AUTOSAR（AUTOSAR 预定义名称）](../foundation/general/tr_predefined_names/) — 内容 [ ] · 链接 [ ]
+- [ ] [TR Glossary（AUTOSAR 术语表）](../foundation/general/tr_glossary/) — 内容 [x] · 链接 [x]
+- [ ] [Explanation of Software Architectural Decisions（软件架构决策说明）](../foundation/general/exp_sw_architectural_decisions/) — 内容 [x] · 链接 [x]
+- [ ] [Safety Overview（功能安全概览）](../foundation/general/exp_safety_overview/) — 内容 [x] · 链接 [x]
+- [ ] [Security Overview（信息安全概览）](../foundation/general/exp_security_overview/) — 内容 [x] · 链接 [x]
+- [ ] [Main Requirements（主需求规范）](../foundation/general/rs_main/) — 内容 [x] · 链接 [x]
+- [ ] [Project Objectives（项目目标）](../foundation/general/rs_project_objectives/) — 内容 [x] · 链接 [x]
+- [ ] [Predefined Names in AUTOSAR（AUTOSAR 预定义名称）](../foundation/general/tr_predefined_names/) — 内容 [x] · 链接 [x]
 
 ### foundation/communication_management (Communication Management)（6 篇）
 
-- [ ] [Explanation of Time Sensitive Networking Features（时间敏感网络特性说明）](../foundation/communication_management/exp_time_sensitive_network_features/) — 内容 [ ] · 链接 [ ]
-- [ ] [Requirements on Debug Trace Profile（调试跟踪配置文件需求）](../foundation/communication_management/rs_debug_trace_profile/) — 内容 [ ] · 链接 [ ]
-- [ ] [Requirements on E2E（端到端通信保护需求）](../foundation/communication_management/rs_e2e/) — 内容 [ ] · 链接 [ ]
-- [ ] [Requirements on Log and Trace（日志与跟踪需求）](../foundation/communication_management/rs_log_and_trace/) — 内容 [ ] · 链接 [ ]
-- [ ] [Requirements on MACsec（MACsec 需求）](../foundation/communication_management/rs_macsec/) — 内容 [ ] · 链接 [ ]
-- [ ] [Requirements on Network Management（网络管理需求）](../foundation/communication_management/rs_network_management/) — 内容 [ ] · 链接 [ ]
+- [ ] [Explanation of Time Sensitive Networking Features（时间敏感网络特性说明）](../foundation/communication_management/exp_time_sensitive_network_features/) — 内容 [x] · 链接 [x]
+- [ ] [Requirements on Debug Trace Profile（调试跟踪配置文件需求）](../foundation/communication_management/rs_debug_trace_profile/) — 内容 [x] · 链接 [x]
+- [ ] [Requirements on E2E（端到端通信保护需求）](../foundation/communication_management/rs_e2e/) — 内容 [x] · 链接 [x]
+- [ ] [Requirements on Log and Trace（日志与跟踪需求）](../foundation/communication_management/rs_log_and_trace/) — 内容 [x] · 链接 [x]
+- [ ] [Requirements on MACsec（MACsec 需求）](../foundation/communication_management/rs_macsec/) — 内容 [x] · 链接 [x]
+- [ ] [Requirements on Network Management（网络管理需求）](../foundation/communication_management/rs_network_management/) — 内容 [x] · 链接 [x]
 
 ### foundation/diagnostics (Diagnostics)（1 篇）
 
-- [ ] [Requirements on Diagnostics（诊断需求）](../foundation/diagnostics/rs_diagnostics/) — 内容 [ ] · 链接 [ ]
+- [ ] [Requirements on Diagnostics（诊断需求）](../foundation/diagnostics/rs_diagnostics/) — 内容 [x] · 链接 [x]
 
 ### foundation/health_monitoring (Health Monitoring)（3 篇）
 
-- [ ] [Specification of Health Monitoring（健康监控规范）](../foundation/health_monitoring/asws_health_monitoring/) — 内容 [ ] · 链接 [ ]
-- [ ] [Explanation of System Health Monitoring（系统健康监控说明）](../foundation/health_monitoring/exp_system_health_monitoring/) — 内容 [ ] · 链接 [ ]
-- [ ] [Requirements on Health Monitoring（健康监控需求）](../foundation/health_monitoring/rs_health_monitoring/) — 内容 [ ] · 链接 [ ]
+- [ ] [Specification of Health Monitoring（健康监控规范）](../foundation/health_monitoring/asws_health_monitoring/) — 内容 [x] · 链接 [x]
+- [ ] [Explanation of System Health Monitoring（系统健康监控说明）](../foundation/health_monitoring/exp_system_health_monitoring/) — 内容 [x] · 链接 [x]
+- [ ] [Requirements on Health Monitoring（健康监控需求）](../foundation/health_monitoring/rs_health_monitoring/) — 内容 [x] · 链接 [x]
 
 ### foundation/methodology_templates (Methodology and Templates)（12 篇）
 
-- [ ] [Requirements on Feature Model Exchange Format（特征模型交换格式需求）](../foundation/methodology_templates/rs_feature_model_exchange_format/) — 内容 [ ] · 链接 [ ]
-- [ ] [Requirements on Methodology（方法论需求）](../foundation/methodology_templates/rs_methodology/) — 内容 [ ] · 链接 [ ]
-- [ ] [Requirements on Security Extract Template（安全提取模板需求）](../foundation/methodology_templates/rs_security_extract_template/) — 内容 [ ] · 链接 [ ]
-- [ ] [Requirements on Standardization Template（标准化模板需求）](../foundation/methodology_templates/rs_standardization_template/) — 内容 [ ] · 链接 [ ]
-- [ ] [Requirements on Timing Extensions（时序扩展需求）](../foundation/methodology_templates/rs_timing_extensions/) — 内容 [ ] · 链接 [ ]
-- [ ] [ARXML Serialization Rules（ARXML 序列化规则）](../foundation/methodology_templates/tps_arxml_serialization_rules/) — 内容 [ ] · 链接 [ ]
-- [ ] [Abstract Platform Specification（抽象平台规范）](../foundation/methodology_templates/tps_abstract_platform_specification/) — 内容 [ ] · 链接 [ ]
-- [ ] [Feature Model Exchange Format（特征模型交换格式）](../foundation/methodology_templates/tps_feature_model_exchange_format/) — 内容 [ ] · 链接 [ ]
-- [ ] [Log and Trace Extract Template（日志与跟踪提取模板）](../foundation/methodology_templates/tps_log_and_trace_extract/) — 内容 [ ] · 链接 [ ]
-- [ ] [Security Extract Template（安全提取模板）](../foundation/methodology_templates/tps_security_extract_template/) — 内容 [ ] · 链接 [ ]
-- [ ] [Standardization Template（标准化模板）](../foundation/methodology_templates/tps_standardization_template/) — 内容 [ ] · 链接 [ ]
-- [ ] [XML Schema Production Rules（XML 模式生成规则）](../foundation/methodology_templates/tps_xml_schema_production_rules/) — 内容 [ ] · 链接 [ ]
+- [ ] [Requirements on Feature Model Exchange Format（特征模型交换格式需求）](../foundation/methodology_templates/rs_feature_model_exchange_format/) — 内容 [x] · 链接 [x]
+- [ ] [Requirements on Methodology（方法论需求）](../foundation/methodology_templates/rs_methodology/) — 内容 [x] · 链接 [x]
+- [ ] [Requirements on Security Extract Template（安全提取模板需求）](../foundation/methodology_templates/rs_security_extract_template/) — 内容 [x] · 链接 [x]
+- [ ] [Requirements on Standardization Template（标准化模板需求）](../foundation/methodology_templates/rs_standardization_template/) — 内容 [x] · 链接 [x]
+- [ ] [Requirements on Timing Extensions（时序扩展需求）](../foundation/methodology_templates/rs_timing_extensions/) — 内容 [x] · 链接 [x]
+- [ ] [ARXML Serialization Rules（ARXML 序列化规则）](../foundation/methodology_templates/tps_arxml_serialization_rules/) — 内容 [x] · 链接 [x]
+- [ ] [Abstract Platform Specification（抽象平台规范）](../foundation/methodology_templates/tps_abstract_platform_specification/) — 内容 [x] · 链接 [x]
+- [ ] [Feature Model Exchange Format（特征模型交换格式）](../foundation/methodology_templates/tps_feature_model_exchange_format/) — 内容 [x] · 链接 [x]
+- [ ] [Log and Trace Extract Template（日志与跟踪提取模板）](../foundation/methodology_templates/tps_log_and_trace_extract/) — 内容 [x] · 链接 [x]
+- [ ] [Security Extract Template（安全提取模板）](../foundation/methodology_templates/tps_security_extract_template/) — 内容 [x] · 链接 [x]
+- [ ] [Standardization Template（标准化模板）](../foundation/methodology_templates/tps_standardization_template/) — 内容 [x] · 链接 [x]
+- [ ] [XML Schema Production Rules（XML 模式生成规则）](../foundation/methodology_templates/tps_xml_schema_production_rules/) — 内容 [x] · 链接 [x]
 
 ### foundation/protocols (Protocols)（12 篇）
 
-- [ ] [Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](../foundation/protocols/prs_intrusion_detection_system/) — 内容 [ ] · 链接 [ ]
-- [ ] [Network Management Protocol Specification（网络管理协议规范）](../foundation/protocols/prs_network_management_protocol/) — 内容 [ ] · 链接 [ ]
-- [ ] [SOME/IP Protocol Specification（SOME/IP 协议规范）](../foundation/protocols/prs_someip_protocol/) — 内容 [ ] · 链接 [ ]
-- [ ] [SOME/IP Service Discovery Protocol Specification（SOME/IP 服务发现协议规范）](../foundation/protocols/prs_someip_service_discovery_protocol/) — 内容 [ ] · 链接 [ ]
-- [ ] [Secure Onboard Communication Protocol Specification（安全车载通信协议规范）](../foundation/protocols/prs_secoc_protocol/) — 内容 [ ] · 链接 [ ]
-- [ ] [Time Synchronization Protocol Specification（时间同步协议规范）](../foundation/protocols/prs_time_sync_protocol/) — 内容 [ ] · 链接 [ ]
-- [ ] [V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](../foundation/protocols/prs_v2x_remote_access_layer/) — 内容 [ ] · 链接 [ ]
-- [ ] [Requirements on Data Distribution Service（数据分发服务需求）](../foundation/protocols/rs_data_distribution_service/) — 内容 [ ] · 链接 [ ]
-- [ ] [Requirements on IPsec Protocol（IPsec 协议需求）](../foundation/protocols/rs_ipsec_protocol/) — 内容 [ ] · 链接 [ ]
-- [ ] [Requirements on SOME/IP Protocol（SOME/IP 协议需求）](../foundation/protocols/rs_someip_protocol/) — 内容 [ ] · 链接 [ ]
-- [ ] [Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）](../foundation/protocols/rs_someip_service_discovery_protocol/) — 内容 [ ] · 链接 [ ]
-- [ ] [Requirements on Time Synchronization（时间同步需求）](../foundation/protocols/rs_time_sync/) — 内容 [ ] · 链接 [ ]
+- [ ] [Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](../foundation/protocols/prs_intrusion_detection_system/) — 内容 [x] · 链接 [x]
+- [ ] [Network Management Protocol Specification（网络管理协议规范）](../foundation/protocols/prs_network_management_protocol/) — 内容 [x] · 链接 [x]
+- [ ] [SOME/IP Protocol Specification（SOME/IP 协议规范）](../foundation/protocols/prs_someip_protocol/) — 内容 [x] · 链接 [x]
+- [ ] [SOME/IP Service Discovery Protocol Specification（SOME/IP 服务发现协议规范）](../foundation/protocols/prs_someip_service_discovery_protocol/) — 内容 [x] · 链接 [x]
+- [ ] [Secure Onboard Communication Protocol Specification（安全车载通信协议规范）](../foundation/protocols/prs_secoc_protocol/) — 内容 [x] · 链接 [x]
+- [ ] [Time Synchronization Protocol Specification（时间同步协议规范）](../foundation/protocols/prs_time_sync_protocol/) — 内容 [x] · 链接 [x]
+- [ ] [V2X Remote Access Layer Protocol Specification（V2X 远程访问层协议规范）](../foundation/protocols/prs_v2x_remote_access_layer/) — 内容 [x] · 链接 [x]
+- [ ] [Requirements on Data Distribution Service（数据分发服务需求）](../foundation/protocols/rs_data_distribution_service/) — 内容 [x] · 链接 [x]
+- [ ] [Requirements on IPsec Protocol（IPsec 协议需求）](../foundation/protocols/rs_ipsec_protocol/) — 内容 [x] · 链接 [x]
+- [ ] [Requirements on SOME/IP Protocol（SOME/IP 协议需求）](../foundation/protocols/rs_someip_protocol/) — 内容 [x] · 链接 [x]
+- [ ] [Requirements on SOME/IP Service Discovery Protocol（SOME/IP 服务发现协议需求）](../foundation/protocols/rs_someip_service_discovery_protocol/) — 内容 [x] · 链接 [x]
+- [ ] [Requirements on Time Synchronization（时间同步需求）](../foundation/protocols/rs_time_sync/) — 内容 [x] · 链接 [x]
 
 ### foundation/release_documentation (Release Documentation)（1 篇）
 
-- [ ] [Release Overview（发布概览）](../foundation/release_documentation/tr_release_overview/) — 内容 [ ] · 链接 [ ]
+- [ ] [Release Overview（发布概览）](../foundation/release_documentation/tr_release_overview/) — 内容 [x] · 链接 [x]
 
 ### foundation/safety (Safety)（1 篇）
 
-- [ ] [Requirements on Safety（功能安全需求）](../foundation/safety/rs_safety/) — 内容 [ ] · 链接 [ ]
+- [ ] [Requirements on Safety（功能安全需求）](../foundation/safety/rs_safety/) — 内容 [x] · 链接 [x]
 
 ### foundation/security (Security)（4 篇）
 
-- [ ] [Requirements on Firewall（防火墙需求）](../foundation/security/rs_firewall/) — 内容 [ ] · 链接 [ ]
-- [ ] [Requirements on Intrusion Detection System（入侵检测系统需求）](../foundation/security/rs_intrusion_detection_system/) — 内容 [ ] · 链接 [ ]
-- [ ] [List of Known Issues of Secure Hardware Extensions（安全硬件扩展已知问题清单）](../foundation/security/tr_list_of_known_issues_secure_hardware_extensions/) — 内容 [ ] · 链接 [ ]
-- [ ] [Specification of Secure Hardware Extensions（安全硬件扩展规范）](../foundation/security/tr_secure_hardware_extensions/) — 内容 [ ] · 链接 [ ]
+- [ ] [Requirements on Firewall（防火墙需求）](../foundation/security/rs_firewall/) — 内容 [x] · 链接 [x]
+- [ ] [Requirements on Intrusion Detection System（入侵检测系统需求）](../foundation/security/rs_intrusion_detection_system/) — 内容 [x] · 链接 [x]
+- [ ] [List of Known Issues of Secure Hardware Extensions（安全硬件扩展已知问题清单）](../foundation/security/tr_list_of_known_issues_secure_hardware_extensions/) — 内容 [x] · 链接 [x]
+- [ ] [Specification of Secure Hardware Extensions（安全硬件扩展规范）](../foundation/security/tr_secure_hardware_extensions/) — 内容 [x] · 链接 [x]
 
 ### foundation/system_services (System Services)（1 篇）
 
-- [ ] [Timing Analysis（时序分析）](../foundation/system_services/tr_timing_analysis/) — 内容 [ ] · 链接 [ ]
+- [ ] [Timing Analysis（时序分析）](../foundation/system_services/tr_timing_analysis/) — 内容 [x] · 链接 [x]
 
 ### rte (RTE / SWArch)（2 篇）
 
-- [ ] [AUTOSAR RTE（运行时环境）](../cp/rte/rte/index.md) — 内容 [ ] · 链接 [ ]
-- [ ] [AUTOSAR ARTI（运行时接口）](../cp/sw_arch/arti_sws/index.md) — 内容 [ ] · 链接 [ ]
+- [ ] [AUTOSAR RTE（运行时环境）](../cp/rte/rte/index.md) — 内容 [ ] · 链接 [x]
+- [ ] [AUTOSAR ARTI（运行时接口）](../cp/sw_arch/arti_sws/index.md) — 内容 [x] · 链接 [x]
+
+## Batch 2 — A1–A3 resolution (2026-11-07)
+
+User approved the STANDARD.md §2 amendment and the full content-fixing scope (issue #296).
+
+**Rule amendments** (both skill mirrors are hardlinks, so one edit covers both):
+
+| File | Change |
+| --- | --- |
+| `docs/autosar/STANDARD.md` §1 table row 2 | ch.2 may be the full direct translation of a compound source heading |
+| `docs/autosar/STANDARD.md` §2 | sanctioned variant clause + the five observed renderings |
+| `docs/autosar/STANDARD.md` §7 | `cp/general/standard_types` added — its source ch.5 is literally *Software Architecture* |
+| `docs/autosar/STANDARD.md` decision log | entry dated 2026-11-07, issue #296 |
+| `.agents/skills/autosar-translate/SKILL.md` Phase A check 2 | compound ch.2 headings exempt from the `不用` sweep |
+| `.agents/skills/autosar-translate/SKILL.md` Phase A check 5 | slice match widened from `## 2. 缩略语` to `## 2.` |
+| `.agents/skills/autosar-translate/SKILL.md` common mistakes | new row: never shorten a compound source ch.2 heading |
+
+**Content fixes:**
+
+- `can_driver`: `## 6. 功能规范` → `## 6. 功能规格` (§2 forbids 功能规范). No inbound anchors existed.
+- `flexray_ar_transport_layer`: chapters `[1,2,3,4,6,7,8,9,10]` → `[1..9]` (6→5 … 10→9); 119 headings renumbered, 111 slugs rewritten using `markdown.extensions.toc.slugify_unicode` (the configured slugifier), 19 self-references re-pointed. The FrArTp container headings (`#### 9.2.x`, source 10.2.x) were already at destination numbering and were deliberately kept.
+- `memory_mapping`: chapters `[1..8,10,11]` → `[1..10]` (10→9, 11→10); 31 headings renumbered, 31 slugs rewritten, 47 self-references re-pointed.
+- `standard_types`: no article change — documented §7 exemption instead.
+- `cp/rte/rte`: ch.7 gap is a documented gated deviation from PR #295; left untouched (the only `内容 [ ]` that remains, by design).
+- `cp/api/` regenerated from the merged state; `docs/autosar/TODO.md` backlog and `sync-todo/Group-communication-2.md` queue row updated.
+
+**Verification (2026-11-07):** `mkdocs build --strict` → EXIT 0, zero WARNINGs, zero INFO anchor notices. Independent anchor audit against the built HTML: 2679 function + 884 type anchors in `cp/api/` all resolve; 19 (flexray_ar) + 47 (memory_mapping) self-references all resolve; no duplicate slugs; both renumbered articles have continuous chapter numbering. `check_heading_lang.py --site` → 0 violations (A5 script fix); `check_indexes.py --titles` → 0 violations.
 
 ## Findings log
 

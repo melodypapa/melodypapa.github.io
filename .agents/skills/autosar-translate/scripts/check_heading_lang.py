@@ -23,7 +23,11 @@ Identifier-shaped title (exempt):
   - or, in a glossary file, it is a chapter-4 term heading (`### 4.1. Abstract
     Platform`): the English term is the entry key and stays verbatim
     (STANDARD.md §7); the Chinese gloss appears in the body
-    (`抽象平台（**Abstract Platform**）`).
+    (`抽象平台（**Abstract Platform**）`);
+  - or it is a function name declared in the article's own ```C signature blocks
+    (STANDARD.md §3: API headings carry the function name itself). This covers
+    short module-prefix names like `Mfl` — `<OutType> Mfl ( float32 ValFloat )` —
+    which look like plain English words to ENGLISH_WORD_RE but are identifiers.
 
 Everything else is prose and must carry Chinese. Single English words that are
 prose rather than identifiers — General, Common, Overview, Accuracy, Variants —
@@ -62,6 +66,17 @@ CONTAINER_NAME_RE = re.compile(
 # ISRType, IOC, IocSend, GlobalTime_Master, ReadPeripheral8, HSE_GPR2 — and
 # stays untranslated. Single letters and all-caps tokens are not English words.
 ENGLISH_WORD_RE = re.compile(r"^(?:[A-Z][a-z]{2,}|[a-z]{2,})$")
+# Function names declared in ```C signature blocks. STANDARD.md §3 titles API
+# headings with the function name itself, so a heading matching one of these is
+# an identifier even when the name is short and word-like (`Mfl`, `Crc`, `Bfx`).
+C_FUNC_RE = re.compile(r"\b([A-Za-z_][A-Za-z0-9_]*)\s*\(")
+C_KEYWORDS = frozenset(
+    "if for while switch return sizeof typedef struct union enum do else case "
+    "default goto break continue".split()
+)
+# Opening fence of a C signature block; the site uses both ```C and ```c.
+# A bare ``` closes the block, so it must not be mistaken for an opening.
+OPEN_C_FENCE_RE = re.compile(r"^\s*```[cC]\s*$")
 
 
 def is_identifier_titled(title: str, container_names: set[str]) -> bool:
@@ -136,10 +151,20 @@ def declared_names(lines: list[str]) -> set[str]:
     class. A heading whose title is one of these names stands for that entity.
     """
     names: set[str] = set()
+    in_c_fence = False
     for line in lines:
         m = CONTAINER_NAME_RE.match(line)
         if m:
             names.add((m.group(1) or m.group(2)).replace("`", "").strip())
+        if FENCE_RE.match(line):
+            # Only a ```C / ```c opening starts a signature block; a bare ```
+            # closes it (STANDARD.md §3 titles API headings with these names).
+            in_c_fence = bool(OPEN_C_FENCE_RE.match(line)) if not in_c_fence else False
+            continue
+        if in_c_fence:
+            for name in C_FUNC_RE.findall(line):
+                if name not in C_KEYWORDS:
+                    names.add(name)
     return names
 
 
