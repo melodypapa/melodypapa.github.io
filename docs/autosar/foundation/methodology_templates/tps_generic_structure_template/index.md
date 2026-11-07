@@ -4685,3 +4685,547 @@ TagWithOptionalValue 提供了把带取值的标签与不带取值的标签附�
 | key            | String  | 0..1   | attr | 定义一个键。                                                                                                                                                                                                                                                                                                                |
 | sequenceOffset | Integer | 0..1   | attr | sequenceOffset 属性支持 TagWithOptionalValue 作为可拆分元素聚合的用例。如果多个聚合定义了属性 key 的相同取值，那么合并取值集合时的顺序可能很重要。例如考虑用元类 TagWithOptionalValue 建模 $PATH 环境变量。sequenceOffset 描述每个贡献在拼接值中的相对位置。各贡献按整数升序排序。                                                            |
 | value          | String  | 0..1   | attr | 定义对应的取值。                                                                                                                                                                                                                                                                                                              |
+
+## 5. 抽象结构（AbstractStructure）
+
+抽象结构用于定义一种通过特化应用的模式。抽象结构由以下内容建立：
+
+- 抽象元类；
+- 这些元类之间的关系：
+  - 标记为 **&lt;atpAbstract&gt;**（参见 [TPS\_GST\_00022]）和/或 **&lt;atpDerived&gt;**（参见 [TPS\_GST\_00023]）；
+  - 若关系为 **&lt;atpDerived&gt;**，则关系的目标被标记为派生（derived）。在图中通过角色名前的斜杠显示。
+
+**派生属性不出现在 XML Schema 中**
+
+派生意味着该属性并不直接存在于模型中，而是以某种方式从模型中的其他信息计算得到。例如 `AtpInstanceRef` 中的 base 被计算为第一个 `atpContext` 的容器。
+
+其后果是：派生关系不出现在 XML schema 中。
+
+**派生关系的特化**
+
+派生关系的特化只有在显式注明的情况下才是派生的。**&lt;atpDerived&gt;** 表示一种隐式关系，它不在模型中显式表达（例如不在 xml-schema 的 as 元素中）。派生关系的非抽象特化的动机应当被很好地记录。
+
+**派生并集（Derived Union）**
+
+可选地，关系的目标可以被标记为 derived union。在这种情况下，该属性被计算为所有具体关系的并集。这在图中以关系端的花括号显示。注意，对这类关系而言，多重性上限显然需要大于一。
+
+抽象结构通过以下方式应用：
+
+**抽象结构的应用**
+
+- 前文提到的抽象元类的子类；
+- 这些子类之间的关系。这些关系特化抽象元类之间的关系。
+
+**关系的特化**
+
+特化分为两类：
+
+- **redefines** — 重定义完全替换抽象关系；
+- **subset** — 子集化为抽象关系做出贡献，使得它可以派生为所有子集的并集。
+
+特化在图中以关系端的花括号显示。注意，多重性上限等于 1 的关系只能“重定义”而不能“子集化”；反之，多重性上限大于 1 的关系只能“子集化”而不能“重定义”。
+
+图 5.1 展示了这一方法。
+
+![图 5.1：抽象结构的定义与使用（Definition and usage of abstract structures）](Figure5-1.png)
+
+### 5.1. 可复用的结构层次
+
+#### 5.1.1. 动机
+
+在设计系统时，运行时空间中的元素共享同一结构的情况很常见。一个著名的示例领域是面向对象编程：从同一个类实例化的对象都具有该类所规定的相同结构。把结构规定一次然后在设计中的多个位置使用的能力在汽车领域中同样有用。为此，类型（**type**）与原型（**prototype**）的概念被引入 AUTOSAR 元模型。类型表示一个可复用的结构，原型表示该结构在一个类型内部以某一角色的使用。
+
+考虑图 5.2 中的 M1 模型。它展示了一个应用组件类型 ‘WindowControllerType’，带有一个由 ‘ControlInterface’ 定型的端口原型 ‘ctrl’；以及一个组合类型 ‘PowerWindowType’，它拥有两个名为 ‘leftController’ 与 ‘rightController’ 的组件原型，二者都由 ‘WindowControllerType’ 定型。因此类型 ‘WindowControllerType’ 在 ‘PowerWindowType’ 组合中被使用了两次——一次扮演左侧控制器角色，一次扮演右侧控制器角色。请注意，尽管端口 ‘ctrl’ 在图中出现两次，但它实际上只在 ‘WindowControllerType’ 的结构中规定了一次。
+
+![图 5.2：可复用类型示例（Reusable type example）](Figure5-2.png)
+
+可复用类型的概念导致如下情形：一个扁平的 M1 模型规定深的、树状的 M0 实例。‘PowerWindowType’ 的 M0 实例的结构（部分地）如图 5.3 所示。可以看到，有两个实例对应于 ‘ctrl’ 端口，而该端口在 M1 中只定义了一次。
+
+![图 5.3：可复用类型的 M0 实例（M0 instances of reusable types）](Figure5-3.png)
+
+事实证明，这种结构在不同角色中的重复在 M1 模型的层次上也有后果。回到图 5.2：‘PowerWindowType’ 组合还包含一个由 ‘MainControllerType’ 定型的组件原型 ‘mainController’，后者拥有左、右控制端口。组合内的连接器把左车窗控制器的端口连接到主控制器的左端口，把右车窗控制器的端口连接到主控制器的右端口。
+
+回顾一下：尽管左、右控制器的 ‘ctrl’ 端口在图中出现两次，它们在 M1 规范中实际上只出现一次——在类型 ‘WindowControllerType’ 中。但为了良定义连接器（例如在 XML 描述中），应当有一种方法在 M1 模型规范中区分那两个未来的 M0 实例。这是因为我们需要把左侧实例连接到主控制器的 ‘leftCtrl’ 端口、右侧实例连接到 ‘rightCtrl’ 端口。于是问题在于：如何引用源自同一 M1 模型元素的不同未来 M0 实例。这由实例引用（**instance refs**）的概念解决。
+
+下一节引入类型、原型与结构元素的抽象层，并对这些概念给出更详细的说明；再下一节引入实例引用的抽象层并更详细地解释该概念。
+
+#### 5.1.2. 类型、原型与结构元素
+
+图 5.4 展示了带内部结构的元素的抽象层。
+
+**Classifier 与 Feature 的表示**
+
+分类器（**classifier**）按其特征（**feature**）对实例分类。这里“分类器”指（M2 元模型类 `AtpClassifier` 的某个具体子类的）M1 实例，“特征”指（M2 元模型类 `AtpFeature` 的具体子类的）实例。
+
+![图 5.4：抽象结构（Abstract structure）](Figure5-4.png)
+
+分类器的一个例子是某个给定的组件类型，特征的一个例子是某个给定的端口。例如图 5.2 中的组件类型 ‘WindowControllerType’ 拥有特征 ‘ctrl’，它是控制信号到达所经由的端口。这些元素是 M1 元素，它们的作用是刻画“运行时”系统中的 M0 元素。因此运行时系统将拥有若干个 ‘WindowControllerType’ 的实例（每个 ‘PowerWindowType’ 实例中有两个），每个实例都拥有一个控制端口。
+
+一个给定系统的全部 M0 实例的集合可以按每个实例的特征加以划分（即分类）。分类器把这些特征组装成一个有意义的整体。
+
+**AtpClassifier 的用途**
+
+M2 元类 `AtpClassifier` 是一个“纵向”概念：它的语义贯穿多个抽象层次——这个 M2 类的含义是，它的 M1 实例对 M0 实例空间进行分类。
+
+分类器与特征相互作用的方式是：一个特征对它所属的分类器的规范做出贡献的途径，是经由另一个规定该特征结构的分类器。
+
+**AtpPrototype 的用途**
+
+元类 `AtpPrototype` 代表由另一个对它们定型的分类器给出结构的特征。元类 `AtpType` 代表对原型定型的分类器。
+
+有些分类器不需要是可复用的。这种情况由结构元素（**structure elements**）的概念刻画。
+
+**AtpStructureElement 的用途**
+
+结构元素既是特征又是分类器，因此规定自身的结构而不引用类型。
+
+![图 5.5：具体类型-原型（Concrete type-prototype）](Figure5-5.png)
+
+这类元素的抽象类是 `AtpStructureElement`。结构元素更容易定义，因为单个元素同时完成类型与原型两项工作。
+
+类型与结构元素都是分类器，即都有 M0 实例。区别在于：类型在一个 M1 模型内是可复用的——一个给定类型（例如 ‘WindowControllerType’）可以用于在一个给定模型中为许多原型定型。这些原型代表 ‘WindowControllerType’ 的实例（即车窗控制器组件）在其所属组合中扮演的不同角色。例如，一个实例扮演 ‘leftLifter’ 角色，另一个扮演 ‘rightLifter’ 角色。
+
+元类 `AtpType`、`AtpPrototype`、`AtpStructureElement` 都是抽象的。它们在元模型中用作具体元类的父类。图 5.5 展示了一个例子：组合类型被定义为组件原型的容器，而组件原型又由组件类型定型。
+
+图中所示的组件结构是图 5.4 所示一般结构的特化。
+
+**在抽象结构中派生特征**
+
+除了对类进行特化之外，关联角色 ‘atpType’ 与 ‘atpFeature’ 也被特化。‘atpType’ 被重定义，而 ‘atpFeature’ 被子集化——这符合前者是抽象的、后者是派生并集的事实。
+
+具体的 ‘type’ 关联重定义抽象的 ‘atpType’ 关联。
+
+![图 5.6：具体结构元素（Concrete structure element）](Figure5-6.png)
+
+具体特征关联（注意是复数）的并集产生派生的 atpFeature。
+
+因此，例如一个给定组件类型的特征包括其全部组件原型与端口。出于技术原因，特征的子集化不在元模型图中指示。
+
+图 5.6 展示了一个具体结构元素的例子。
+
+表5.1：AtpClassifier
+
+| 类         | AtpClassifier（抽象）                                                                              |
+|------------|---------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::AbstractStructure                                                 |
+| 注意       | 分类器按其特征对 M0 实例分类。或者说：分类器是拥有实例的东西——一个 M1 分类器拥有 M0 实例。                   |
+| 基类       | ARObject、Identifiable、MultilanguageReferrable、Referrable                                                 |
+| 子类       | AtpStructureElement、AtpType                                                                                |
+
+| 属性       | 类型       | 多重性 | 类别 | 注意                                                 |
+|------------|------------|--------|------|-----------------------------------------------------------|
+| atpFeature | AtpFeature | *      | aggr | 这是分类器的一个特征。构型：atpDerived                       |
+
+表5.2：AtpFeature
+
+| 类         | AtpFeature（抽象）                                                                                      |
+|------------|--------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::AbstractStructure                                                        |
+| 注意       | 特征是分类器借以对实例分类的属性。或者说：分类器拥有特征，它的每个 M0 实例都将拥有这些特征。                          |
+| 基类       | ARObject、Identifiable、MultilanguageReferrable、Referrable                                                       |
+| 子类       | AtpPrototype、AtpStructureElement                                                                                |
+| 聚合于     | AtpClassifier.atpFeature                                                                                          |
+
+表5.3：AtpInstanceRef
+
+| 类         | AtpInstanceRef（抽象）                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::AbstractStructure                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 注意       | 分类器的一个 M0 实例可以表示为一棵以该实例为根的树，每个节点之下是以该节点特征身份出现的实例所对应的子树。实例引用规定一条从基础（base，它是一个分类器）的任何 M0 树实例到某个叶子（它是目标的实例）的导航路径。                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| 基类       | ARObject                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 子类       | AnyInstanceRef、ApplicationCompositeElementInPortInterfaceInstanceRef、ComponentInCompositionInstanceRef、ComponentInSystemInstanceRef、DataPrototypeInPortInterfaceInstanceRef、DataPrototypeInSystemInstanceRef、InnerDataPrototypeGroupInCompositionInstanceRef、InnerPortGroupInCompositionInstanceRef、InnerRunnableEntityGroupInCompositionInstanceRef、InstanceEventInCompositionInstanceRef、ModeDeclarationGroupPrototypeInSystemInstanceRef、ModeGroupInAtomicSwcInstanceRef、ModeInBswModuleDescriptionInstanceRef、ModeInSwcInstanceRef、OperationArgumentInComponentInstanceRef、OperationInAtomicSwcInstanceRef、OperationInSystemInstanceRef、PModeInSystemInstanceRef、ParameterDataPrototypeInSystemInstanceRef、ParameterInAtomicSWCTypeInstanceRef、PortGroupInSystemInstanceRef、PortInCompositionTypeInstanceRef、RModeInAtomicSwcInstanceRef、RteEventInCompositionInstanceRef、RteEventInEcuInstanceRef、RteEventInSystemInstanceRef、RunnableEntityInCompositionInstanceRef、SwcServiceDependencyInSystemInstanceRef、TriggerInAtomicSwcInstanceRef、TriggerInSystemInstanceRef、VariableAccessInEcuInstanceRef、VariableDataPrototypeInCompositionInstanceRef、VariableDataPrototypeInSystemInstanceRef、VariableInAtomicSWCTypeInstanceRef、VariableInAtomicSwcInstanceRef、VariableInComponent |
+| 属性       | atpBase、atpContextElement、atpTarget                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+
+| 属性                        | 类型          | 多重性 | 类别 | 注意                                                                        |
+|-----------------------------|---------------|--------|------|----------------------------------------------------------------------------------|
+| atpBase                     | AtpClassifier | 1      | ref  | 这是导航路径出发的基础。构型：atpAbstract；atpDerived                              |
+| atpContextElement (ordered) | AtpPrototype  | *      | ref  | 这是导航路径中的一个特定步骤。构型：atpAbstract                                    |
+| atpTarget                   | AtpFeature    | 1      | ref  | 这是实例引用的目标。换言之，它是导航路径的终点。构型：atpAbstract                    |
+
+表5.4：AtpPrototype
+
+| 类         | AtpPrototype（抽象）                                                                                                                                                                                    |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::AbstractStructure                                                                                                                                                            |
+| 注意       | 原型是被定型的特征。分类器中的一个原型表明：该分类器的实例将拥有一个特征，该特征的结构由其类型给出。该类型的一个实例将在拥有该特征的分类器中扮演特征所指示的角色。特征不是实例，而是对未来实例的指示。                                |
+| 基类       | ARObject、AtpFeature、Identifiable、MultilanguageReferrable、Referrable                                                                                                                                                  |
+| 子类       | DataPrototype、ModeDeclarationGroupPrototype、PortPrototype、RootSwCompositionPrototype、SwComponentPrototype                                                                                                              |
+| 聚合于     | AtpClassifier.atpFeature                                                                                                                                                                                                  |
+
+| 属性    | 类型    | 多重性 | 类别 | 注意                                     |
+|---------|---------|--------|------|-----------------------------------------------|
+| atpType | AtpType | 1      | ref  | 这是该特征的类型。构型：atpAbstract             |
+
+表5.5：AtpStructureElement
+
+| 类         | AtpStructureElement（抽象）                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::AbstractStructure                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| 注意       | 结构元素既是分类器又是特征。作为特征，它的结构由它作为分类器所拥有的特征给出。                                                                                                                                                                                                                                                                                                                                                                                                    |
+| 基类       | ARObject、AtpClassifier、AtpFeature、Identifiable、MultilanguageReferrable、Referrable                                                                                                                                                                                                                                                                                                                                                                                            |
+| 子类       | AbstractAccessPoint、AbstractImplementationDataTypeElement、AsynchronousServerCallResultPoint、BswModuleDescription、BulkNvDataDescriptor、ClientServerOperation、DataPrototypeGroup、IdentCaption、InternalBehavior、InternalTriggeringPoint、ModeDeclaration、ModeDeclarationMapping、ModeSwitchPoint、ModeTransition、NvBlockDescriptor、ParameterAccess、PerInstanceMemory、PortGroup、PortPrototypeBlueprint、RTEEvent、RunnableEntity、RunnableEntityGroup、ServerCallPoint、SwConnector、SwcBswMapping、SwcServiceDependency、System、Trigger、VariableAccess |
+| 聚合于     | AtpClassifier.atpFeature                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+
+表5.6：AtpType
+
+| 类         | AtpType（抽象）                                                                                          |
+|------------|---------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::AbstractStructure                                                        |
+| 注意       | 类型是可以为原型定型的分类器。它是一个可复用的分类器。                                                              |
+| 基类       | ARObject、AtpClassifier、Identifiable、MultilanguageReferrable、Referrable                                          |
+| 子类       | AutosarDataType、ModeDeclarationGroup、ModeDeclarationMappingSet、PortInterface、SwComponentType                     |
+
+#### 5.1.3. 实例引用（Instance Refs）
+
+**实例引用**
+
+实例引用是 M1 元素，它定义在 M1 分类的未来 M0 实例树内的一个特定导航。
+
+图 5.7 展示了一个名为 ‘ctrlInRightControllerInPowerWindowType’ 的 M1 实例引用。在 ‘PowerWindowType’ 的每个 M0 实例（其结构如图 5.3 所示）中，该实例引用标识该图右侧最底部的实例。它以组合类型 ‘PowerWindowType’ 为 base，以组件原型 ‘rightController’ 为 context，以端口 ‘ctrl’ 为 target。context 的作用是沿一条特定的路径导航实例树，本例中即右侧路径。
+
+![图 5.7：M1 实例引用（M1 Instance Ref）](Figure5-7.png)
+
+M1 实例引用是元类 `AtpInstanceRef` 某个具体子类的实例。图 5.8 展示了实例引用的抽象层。
+
+**实例引用的定义**
+
+每个实例引用都相对于一个作为分类器的基础（base）定义。实例引用所做的事情是规定一条特定的导航，从基础的任何 M0 实例的根导向树内的某个内部实例。一个实例引用（即一条导航）对该基础的任何 M0 实例都有效。导航经由一系列 context 元素（它们是特征）与一个同样为特征的 target 规定。
+
+**实例引用中的 context 路径**
+
+有序的 context 特征集合加上 target 构成从根到所规定的内部实例的路径。换言之，context 从 InstanceRef 的第一个元素开始。target 始终是 InstanceRef 类中的最后一个元素。
+
+**InstanceRef 的 atpContextElement 应当一致**
+
+路径中的第一个 `atpContextElement` 应当是 `atpBase` 的一个 `atpFeature`。对于所有后续的 `atpContextElement`，它们应当是前一个元素（它是一个 `AtpPrototype`）的 `atpType` 的 `atpFeature`。
+
+**约束：InstanceRef 的 atpTarget 应当一致**
+
+实例引用的 `atpTarget` 应当是以下之一：
+
+- 最后一个 `atpContextElement` 的 `atpType` 所拥有的一个 `atpFeature`；或
+- 最后一个 `atpContextElement` 的 `atpType` 所拥有的某个 `AtpStructureElement` 所拥有的一个 `atpFeature`。
+
+**实例引用的变体依赖**
+
+如果一个带有 **&lt;instanceRef&gt;** 构型的依赖需要成为可变体的，那么需要遵守以下后果：
+
+- 该依赖应当带有构型 **&lt;instanceRef, atpVariation&gt;**；
+- 实例引用类在实例引用拥有者处的聚合应当带有构型 **&lt;atpVariation&gt;**。
+
+**AtpInstanceRef 应当贴近基础**
+
+`AtpInstanceRef` 的聚合方式应当使其与角色 `atpBase` 中引用的 `AtpClassifier` 的关系无歧义。以下情形之一即满足：
+
+- `AtpInstanceRef` 聚合在角色 `atpBase` 中引用的 `AtpFeature` 内；
+- `atpBase` 是实例树的根。它是聚合第一个（最外层）`atpContextElement` 所对应的第一个 `AtpFeature` 的 `AtpClassifier`。
+
+![图 5.8：抽象实例引用（Abstract instance Refs）](Figure5-8.png)
+
+图 5.9 展示了 `AtpInstanceRef` 的一个具体子类，名为 RPortInCompositionInstanceRef，用于定义经由一个内部组件原型导航到组合类型内某个端口的实例引用。这个具体元类规定：base 应当是一个组合类型；应当恰好有一个作为组件原型的 context 元素；target 是一个端口。实例引用 ‘ctrlInRightControllerInPowerWindowType’ 就是 RPortInCompositionInstanceRef 的一个实例。
+
+图 5.9 还展示了这样的实例引用在元模型中的应用方式：
+
+**实例引用的应用**
+
+实例引用在元模型中通过两种必须同时存在的表示来应用：
+
+- 一个带 **&lt;instanceRef&gt;** 构型的依赖，它表达意图并为文档与类表做出贡献；
+- 在引用的源处对 `AtpInstanceRef` 具体子类的相应聚合，它表示实现并因此为 xml schema 做出贡献。
+
+请注意，两种表示都是相关的，并且应当同时存在于元模型中。
+
+**相应实例引用表示的标识**
+
+用于建模实例引用的依赖的目标角色名与相应聚合的目标角色名（如 [TPS\_GST\_00043] 所述）应当相同。<sup>1</sup>
+
+图 5.9 给出了 [TPS\_GST\_00044] 应用的示例。从 AssemblySwConnector 到 AbstractRequiredPortPrototype 的依赖的目标角色名（即 requester）与 AssemblySwConnector 处 RPortInCompositionInstanceRef 聚合的目标角色名相同。
+
+清单 5.1 展示了图 5.9 场景的 ARXML 表示，特别是示例末尾 AssemblySwConnector 中的实例引用。
+
+![图 5.9：实例引用的应用（Application of an instance Ref）](Figure5-9.png)
+
+清单5.1：实例引用的应用
+
+```xml
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <ADMIN-DATA>
+    <USED-LANGUAGES>
+      <L-10 xml:space="preserve" L="EN">English</L-10>
+    </USED-LANGUAGES>
+  </ADMIN-DATA>
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>Example</SHORT-NAME>
+      <INTRODUCTION>
+        <P>
+          <L-1 L="EN">This example fragment illustrates an instance ref</L-1>
+        </P>
+      </INTRODUCTION>
+      <ELEMENTS>
+        <APPLICATION-SW-COMPONENT-TYPE>
+          <SHORT-NAME>MainControllerType</SHORT-NAME>
+          <PORTS>
+            <P-PORT-PROTOTYPE>
+              <SHORT-NAME>leftCtrl</SHORT-NAME>
+            </P-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE>
+              <SHORT-NAME>rightCtrl</SHORT-NAME>
+            </P-PORT-PROTOTYPE>
+          </PORTS>
+        </APPLICATION-SW-COMPONENT-TYPE>
+        <APPLICATION-SW-COMPONENT-TYPE>
+          <SHORT-NAME>WindowControllerType</SHORT-NAME>
+          <PORTS>
+            <R-PORT-PROTOTYPE>
+              <SHORT-NAME>ctrl</SHORT-NAME>
+            </R-PORT-PROTOTYPE>
+          </PORTS>
+        </APPLICATION-SW-COMPONENT-TYPE>
+        <COMPOSITION-SW-COMPONENT-TYPE>
+          <SHORT-NAME>PowerWindowType</SHORT-NAME>
+          <COMPONENTS>
+            <SW-COMPONENT-PROTOTYPE>
+              <SHORT-NAME>rightController</SHORT-NAME>
+              <TYPE-TREF DEST="APPLICATION-SW-COMPONENT-TYPE">/Example/WindowControllerType</TYPE-TREF>
+            </SW-COMPONENT-PROTOTYPE>
+            <SW-COMPONENT-PROTOTYPE>
+              <SHORT-NAME>mainController</SHORT-NAME>
+              <TYPE-TREF DEST="APPLICATION-SW-COMPONENT-TYPE">/Example/MainControllerType</TYPE-TREF>
+            </SW-COMPONENT-PROTOTYPE>
+          </COMPONENTS>
+          <CONNECTORS>
+            <ASSEMBLY-SW-CONNECTOR>
+              <SHORT-NAME>rightControl</SHORT-NAME>
+              <PROVIDER-IREF>
+                <CONTEXT-COMPONENT-REF DEST="SW-COMPONENT-PROTOTYPE">/Example/PowerWindowType/mainController</CONTEXT-COMPONENT-REF>
+                <TARGET-P-PORT-REF DEST="P-PORT-PROTOTYPE">/Example/MainControllerType/rightCtrl</TARGET-P-PORT-REF>
+              </PROVIDER-IREF>
+              <REQUESTER-IREF>
+                <CONTEXT-COMPONENT-REF DEST="SW-COMPONENT-PROTOTYPE">/Example/PowerWindowType/rightController</CONTEXT-COMPONENT-REF>
+                <TARGET-R-PORT-REF DEST="R-PORT-PROTOTYPE">/Example/WindowControllerType/ctrl</TARGET-R-PORT-REF>
+              </REQUESTER-IREF>
+            </ASSEMBLY-SW-CONNECTOR>
+          </CONNECTORS>
+        </COMPOSITION-SW-COMPONENT-TYPE>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+> **1** 注意，用于生成图的 UML 工具允许在依赖上规定角色名，即使 UML 本身不支持这一点。
+
+#### 5.1.4. 任意实例引用（Any Instance Refs）
+
+元类 `AnyInstanceRef` 提供了一种通用的能力：描述指向作为 `AtpFeature` 的任意目标的 InstanceRef。但这样的 InstanceRef 的 M1 模型需要遵循 5.1.3 节描述的规则。
+
+另参见 AtpInstanceRef。
+
+一个 System 可以用作 `AtpFeature`，例如作为 AnyInstanceRef 的第一个 contextElement。对 AnyInstanceRef 的 base 求派生将返回 System 的拥有者，即一个 `ARPackage`。但 `ARPackage` 不是 `AtpClassifier`，这与 AnyInstanceRef 的规范相矛盾——后者定义 AnyInstanceRef 的派生 base 引用应当返回一个 `AtpClassifier`。为避免这种不一致，适用 [constr\_2587]。
+
+**约束：AnyInstanceRef 中不得使用 System**
+
+作为 [TPS\_GST\_00387] 的后果，System 不得作为 AnyInstanceRef 的 contextElement 或 target。否则 atpBase 将无法确定。
+
+##### 5.1.4.1. AnyInstanceRef 应用于 ImplementationDataTypeElement
+
+若 AnyInstanceRef 以一个 `ImplementationDataTypeElement` 作为目标，则需要适用进一步的约束以保证模型一致。在这种情况下，即使不出现类型-原型序列，也可能需要提供附加的 context。
+
+**约束：引用 ImplementationDataTypeElement 的 AnyInstanceRef 的完整性**
+
+若目标引用一个 `ImplementationDataTypeElement`，则 AnyInstanceRef 应当为以下对象定义 contextElement 引用：
+
+1. 引用型 ImplementationDataType 链中除目标之外的每个叶子 `ImplementationDataTypeElement`；
+2. 引用型 ImplementationDataType 链中类别为 ARRAY 的每个 `ImplementationDataTypeElement`。
+
+由此，context 按照 [TPS\_GST\_00162] 从根创建到叶子 ImplementationDataTypeElement——后者或者被定型（直接地或经由类别为 TYPE\_REFERENCE 的 ImplementationDataType 间接地）、或者拥有 target。
+
+**注意：** 从技术上讲，可以为层次中的一维数组省略 context。仍然要求 context 的原因是：这样 context 存在性的规则就简单得多。
+
+![图 5.10：AnyInstanceRef 应用于 ImplementationDataTypeElement（AnyInstanceRef applied to ImplementationDataTypeElement）](Figure5-10.png)
+
+## 6. 元建模模式与模型转换
+
+元建模模式（**meta-modeling pattern**）是一种参数化结构，当应用到实际参数时产出一个规则的、非参数化的结构。结构就是由关联和聚合相关的元类的集合。模式的好处是：允许反复使用重现出现的结构，而无需重复其定义。本章描述元建模模式的概念，以及它们在 AUTOSAR 元模型中的使用与记法。另一个好处是：元模型的原始结构得以保留，不被实现细节所模糊。
+
+![图 6.1：元建模模式与模型转换概览（Meta-modeling Patterns and Model Transformation Overview）](Figure6-1.png)
+
+图 6.1 给出了该方法的快速概览，其中以 AUTOSAR 中的变体处理为例<sup>1</sup>：
+
+1. **纯元模型** — AUTOSAR 首先定义一个表示总体方法、不带注记与转换的元模型（例如不支持变体）。
+
+   请注意，最终只有带注记的元模型被手工维护，并成为 AUTOSAR 交付物的一部分。
+
+2. **带注记的元模型** — 随后使用构型与 UML 标签对纯元模型进行注记，以描述预期的转换（例如 **&lt;atpVariation&gt;** 与 UML 标签 vh.latestBindingTime）。
+3. **扩展元模型** — 一个模型转换把带注记的元模型转换为扩展元模型，后者随后用于生成 schema。
+
+   扩展元模型与带注记元模型的差别在于：它添加了若干更多的元素，这些元素提供完整描述（例如）一个变体点所需的全部信息。它还引入附加的约束，例如以支持变体点。
+
+   这些附加元素通过把模式应用到带注记元模型中被标注为（例如）变体点的那些位置来生成。
+
+> **1** 注意，此处的“模型”是一个概念实体，与其表示无关。在这个意义上，XML、C 与 PDF 等都被视为“模型”的表示。术语“模型”指 AUTOSAR 相关的内容，而非物理实体。
+
+为了说明，考虑图 6.2 中的模式 VHUnboundedAggregationPattern。它展示了一个由四个类及它们之间的若干聚合构成的参数化结构。参数（图中以花括号（{}）显示）为：
+
+- WholeClass，一个类；
+- PartClass，一个被聚合的类；
+- partRole，被聚合的类的角色；
+- vh.latestBindingTime，枚举类型 BindingTimeEnum 的一个取值。
+
+![图 6.2：模式示例（Pattern Example，VHUnboundedAggregationPattern）](Figure6-2.png)
+
+现在可以把该模式应用到实际参数以产出一个非参数化的结构。例如，通过赋予实际参数
+
+- WholeClass = SwComponentType
+- PartClass = PortPrototype
+- partRole = port
+- vh.latestBindingTime = systemDesignTime
+
+我们得到图 6.3 中的结构。把同一模式应用到不同参数可以得到许多不同的结构。
+
+![图 6.3：模式应用结果示例（Pattern Application Result Example）](Figure6-3.png)
+
+### 6.1. 模式应用的记法
+
+被抽象为模式的重现结构通常具有以参数扮演的角色来解释的、良定义的语义。这一语义通常会自然引出一种用于模式应用的直观记法，它当然是特定于手头模式的。
+
+图 6.4 展示了 VHUnboundedAggregationPattern 应用于组件类型与端口的一种记法。该记法使用扮演 WholeClass 角色的类与扮演 PartClass 角色的类之间的一条聚合箭头，并以 **&lt;atpVariation&gt;** 构型修饰。这一记法表明：类 SwComponentType 在角色 port 上“语义地聚合”类 PortPrototype，同时允许变体。这张图是一次模式应用的记法，其结果产生图 6.3 中的图。
+
+![图 6.4：模式应用记法示例（Pattern Application Notation Example）](Figure6-4.png)
+
+类似的记法用于所有与变体相关的模式。各特定模式将在下文连同它们的记法一起描述。这类记法的一个主要好处是：它类似于无变体的聚合。这使得可以在常规的、无变化的设计“之上”规定变体，而不去搅动概念设计本身。然而重要的是要记住：由 **&lt;atpVariation&gt;** 修饰的聚合箭头（如图 6.4 中那样）并不是真实的聚合：它们是模式应用的记法（其结果包含真实的聚合）。
+
+### 6.2. 模式规范
+
+**转换模式的规范**
+
+模式的规范包括：
+
+- 模式的名称；
+- 参数列表；
+- 参数化结构；
+- 模式应用的记法。
+
+上述元素全部经由单张图规定，图 6.5 以无界聚合模式为例进行了说明。
+
+![图 6.5：模式规范示例（Pattern Specification Example）](Figure6-5.png)
+
+### 6.3. 元模型中应用的模型转换
+
+模型转换模式机制在元模型中用于：
+
+- 变体处理（第 7 章）；
+- 其他特定目的，例如引用（第 4.4 章）。
+
+#### 6.3.1. 实现 &lt;primitive&gt;
+
+本节说明原始类型的实现，尽管它尚未（R4.0）作为真正的模型转换实现。
+
+**原始类型的模型转换**
+
+一个 **&lt;primitive&gt;** 元类被转换为以下元素：
+
+1. 另一个同名、名字加后缀 ‘\_simple’ 的原始类型。对 XML 而言，该原始类型在生成的 schema 中产生一个简单类型（simple type），并规定实现细节，例如模式（pattern）与 facet。该元类用于带有 `xml.attribute=true` 标签的属性，也用作带有 `xml.roleElement=false`、`xml.roleWrapperElement=false`、`xml.typeElement=false`、`xml.typeWrapperElement=false` 标签的属性的原始类型。
+2. 一个同名的元类。与所有其他元类一样，该元类继承自 **&lt;atpObject&gt;**。因此，除非带有 `xml.attribute=true` 标签，元模型中的 UML 属性最终被实现为对该元类的聚合。
+
+**&lt;atpObject&gt;** 的细节在第 6.3.3 章中描述。
+
+![图 6.6：实现原始类型的模式（Pattern to implement Primitives）](Figure6-6.png)
+
+#### 6.3.2. 把关联实现为引用
+
+本节说明关联的实现，尽管它尚未（R4.0）作为真正的模型转换实现。
+
+**建立引用**
+
+元类之间的引用表示为关联。被引用的元类派生自 `Referrable`，多数是 `Identifiable`。由此它们定义了一个应当在其命名空间内唯一的 `shortName`（参见 [constr\_2508]）。因此引用（元模型中的关联）通过以下方式表达：
+
+1. 规定一个区分大小写的 `shortName` 路径（绝对的或相对的）；
+2. 引用的目标类型；
+3. 相对引用的情况下，区分大小写的引用基础名称。
+
+命名空间层次在元模型中由派生自 `Identifiable` 的类的组合关联定义。每个 `Identifiable` 是其直接或间接关联（组合关联）类的命名空间。
+
+**引用的大小写敏感性**
+
+请注意，术语“区分大小写”表示字符集合
+
+```
+{a b c d e f g h i j k l m n o p q r s t u v w x y z}
+{A B C D E F G H I J K L M N O P Q R S T U V W X Y Z}
+```
+
+中的字符分别被视为不同。short name 的任何使用都应当采用与 short name 实际定义相同的大小写敏感性。
+
+**类型引用的表示**
+
+请注意，对带有 **&lt;isOfType&gt;** 构型的关联，引用类的角色是 {theRole}Tref。
+
+**关联上的模型转换**
+
+一个关联被转换为一个匿名<sup>2</sup>元类的聚合，该元类带有属性 dest。在按照原始类型规则执行转换之后，该元类继承自 Ref。Ref 由此提供取值，该取值表示指向被引用对象的 shortName 路径。图 6.7 展示了等价的模式。
+
+> **2** 这一捷径是可能的，因为所描述的方法不是作为模型转换实现，而是在 schema 生成器中实现。如果应用模型转换，则需要为每个特定引用创建一个特定的元类。
+
+![图 6.7：实现引用的模式（Pattern to implement references）](Figure6-7.png)
+
+##### 6.3.2.1. 目标类型
+
+**目标类型**
+
+目标类型（规定为引用元素中的属性 dest）定义被引用对象的类型。目标类型也可以引用子类（抽象的与具体的）。该属性的取值是：
+
+- 若元模型中的引用指向一个抽象类，则 dest 的取值是该抽象类的 XML 名称或其任何子类的 XML 名称。即使 dest 是一个抽象类的 XML 名称，引用的目标也可以是派生自该抽象类的任何具体类的实例。
+- 若元模型中的引用指向一个具体类，则 dest 的取值是该类的名称。引用的目标只能是该类的实例。
+
+目标类型提高了 XML 描述的健壮性，例如：
+
+- 工具可以找到引用了错误类型对象的引用。
+- 若被引用对象不可用，工具可以指示正确的类型，或实例化一个合适的代理。
+
+但如果 dest 的可能取值不包含抽象类，则会造成以下问题：
+
+- 若引用目标被改为另一个子类，即使该引用并不关心这一点，也需要维护这些引用；
+- 它不会把元模型的信息传播到 XML schema。
+
+图 6.8 展示了一个关联的实现。
+
+![图 6.8：链接示例（Example for linking）](Figure6-8.png)
+
+```xml
+<D>
+  <THE-B-REFS>
+    <THE-B-REF DEST="B-1">/package1/package2/instance1</THE-B-REF>
+    <THE-B-REF DEST="B-2">/package1/package2/instance2</THE-B-REF>
+  </THE-B-REFS>
+</D>
+```
+
+#### 6.3.3. &lt;atpObject&gt;：ARObject
+
+**所有元类的属性**
+
+在 AUTOSAR 元模型中，应当存在适用于所有具体元类的属性。这可以视为一个模型转换：把所有 **&lt;atpObject&gt;** 的元类（尤其是 ARObject）作为超类应用到所有基类。
+
+该转换模式的细节参见图 6.9。
+
+**注意：** 该模式实际上并不要求参数。
+
+表6.1：ARObject
+
+| 类         | ARObject（抽象）                                                 |
+|------------|---------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::ArObject |
+| 注意       | 元模型中所有类的隐式基类。                                              |
+| 基类       | （无）                                                               |
+| 子类       | -所有具体元类-                                                        |
+
+| 属性      | 类型     | 多重性 | 类别 | 注意                                                                                                                                                                                                                       |
+|-----------|----------|--------|------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| checksum  | String   | 0..1   | attr | 由用户的工具环境为 ArObject 计算的校验和。可以在自己的工具环境中用它判断 ArObject 是否已变更。checksum 对 AUTOSAR 模型没有任何语义含义，也不要求 AUTOSAR 工具管理校验和。标签：xml.attribute=true xml.name=S                          |
+| timestamp | DateTime | 0..1   | attr | 由用户的工具环境为 ArObject 计算的时间戳。可以在自己的工具环境中用它判断 ArObject 的最近变更。timestamp 对 AUTOSAR 模型没有任何语义含义，也不要求 AUTOSAR 工具管理时间戳。标签：xml.attribute=true xml.name=T                          |
+
+![图 6.9：&lt;atpObject&gt; 的模式（Pattern for &lt;atpObject&gt;）](Figure6-9.png)
