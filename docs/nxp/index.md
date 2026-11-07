@@ -7,10 +7,6 @@ title: NXP
 
 NXP 汽车芯片的应用笔记与设计方案。
 
-## S32K5xx
-
-- [S32K5xx 文档索引](s32k5xx/index.md)
-
 ## S32G2
 
 - [Boot](s32g2/boot/index.md)
