@@ -2,7 +2,6 @@
 .workbuddy/memory/*.md
 .zcode/
 .trae
-.private
 internal/
 site/
 .venv/

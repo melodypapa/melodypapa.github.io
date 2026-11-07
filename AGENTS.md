@@ -8,6 +8,7 @@ Personal knowledge base 「米多papa的小屋」: a Material-for-MkDocs site (C
 - `docs/autosar/` — one subtree per AUTOSAR platform (since 2026-11-02): `cp/<section>/<article>/` for Classic Platform (SWS/EXP/TPS translations + the generated API listing `cp/api/`), `foundation/<topic>/<article>/` for Foundation (RS/PRS/TPS/TR/EXP; 10 topic landings, TR Glossary translated), plus the hub `index.md`, the shared `glossary.md`, and the excluded working files (`STANDARD.md`, `TODO.md`, `sync-todo/`). Nav: one `AUTOSAR` tab → `CP（经典平台）` / `Foundation（基础标准）` groups. Old pre-move URLs are served by `mkdocs-redirects` (`redirect_maps` in `mkdocs.yml`; pinned `==1.2.2` — 1.2.3 pulls in the `properdocs` fork).
 - `mkdocs.yml` — site config + explicit `nav`. Every page must be registered here or `--strict` fails; removing a page requires removing its nav entry.
 - `overrides/` — Material theme customization (sidebar 常用链接 block).
+- `.private/` — internal/unpublished corpus (S32K5/ARM study notes, NXP RM PDFs). **Git submodule** → `melodypapa/private-docs` (private; binaries pdf/pptx/xlsx/zip via Git LFS). Content work happens inside `.private/` and is pushed there separately (SSH remote, branch `main`). Cloning the parent needs `--recurse-submodules`, but CI builds never read `.private/`, so the deploy workflow runs without submodules.
 - `.github/workflows/ci.yml` — deploy. **Triggers on push to `master` only; PRs build nothing.**
 - `.zcode/` — gitignored agent workspace; implementation plans live in `.zcode/plans/`.
 - `site/` — build output, gitignored.
