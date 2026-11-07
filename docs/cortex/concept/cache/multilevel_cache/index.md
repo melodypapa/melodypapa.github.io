@@ -37,7 +37,7 @@ title: "多级缓存架构（Multilevel Cache Organisation）"
 
 从以上 **3** 种情况我们可以看出，我们正在尝试减少主内存引用的数量，从而减少未命中惩罚（**Miss Penalty**）以提高整体系统性能。此外，需要注意的是，在多级缓存设计中，**L1** 缓存是附加在 **CPU** 上的，它体积小但速度快。而 **L2** 缓存附加到主缓存，即 **L1** 缓存，它的大小更大且速度较慢，但仍比主内存快。
 
-```
+```text
 Effective Access Time = Hit rate * Cache access time
                       + Miss rate * Lower level access time
 ```
