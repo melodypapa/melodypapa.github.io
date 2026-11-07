@@ -18,8 +18,12 @@ Existing-article mappings (mapping.md, evidence re-checked at census): `arm_arch
   - S1 result: structure matches B3.5 exactly — `## 4.` ← B3.5 intro, `## 5.` ← B3.5.1, `## 6.` ← B3.5.2, `## 7.` ← B3.5.3 (7.1 sub-region / 7.2 Armv7-M specific / 7.3 MPU pseudocode / 7.4 MPU fault support), `## 8.` ← B3.5.4, `## 9.` ← B3.5.5 MPU_TYPE, `## 10.` ← B3.5.6 MPU_CTRL (10.3 = TRM-derived non-privileged instruction impact), `## 11.` ← B3.5.7 MPU_RNR, `## 12.` ← B3.5.8 MPU_RBAR, `## 13.` ← B3.5.9 MPU_RASR (13.3 sub-regions / 13.4 attributes / 13.5 XN), `## 14.` ← B3.5.10 alias support.
   - S6 result: Tables B3-11…B3-16 all present as GFM; the 5 images are bit-field bars, which stay images. Three defects fixed: stray `**` on the `XN：MPU_RASR[28]` bullet (broken bold run), garbled Table B3-12 lead sentence, garbled Region 0–15 alias sentence.
   - [x] S1 [x] S6 [ ] S7 (if changed) [ ] S8 (if changed)
-- [ ] system_address_map — completion (article 157 ln vs B3.1–B3.4; B3.4 NVIC detail overlaps the `nvic` article — decide the split boundary at S1 and record it)
-  - [ ] S1 [ ] S2 [ ] S3 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] system_address_map — completed (article `m7_processor/system_address_map/index.md`, 2,392 ln, 33 bit-bar imgs vs B3.1–B3.4)
+  - S1 result (split decision): **no split against the sibling pages.** `nested_vectored_interrupt_controller` and `system_control` are TRM implementation pages whose own prose defers the architectural register definitions to the ARM, so B3.2 (2.2–2.26 SCB/ID registers), B3.3 (SysTick) and B3.4 (NVIC) were translated in full here. Page tree = B3.1 (## 1) → B3.2 (## 2) → B3.3 (## 3) → B3.4 (## 4); only cross-link added is the PMSAv7 pointer to `mpu/`.
+  - S2 result: §2.2–§2.26 added (Tables B3-4/B3-5/B3-6; CPUID, ICSR, VTOR, AIRCR, SCR, CCR, SHPR1–3, SHCSR, CFSR + MMFSR/BFSR/UFSR, HFSR, MMFAR, BFAR, AFSR, CPACR + FP enable, FPCCR, FPCAR, FPDSCR, ICTR, ACTLR, STIR); §3 added (SysTick operation, Table B3-7, SYST_CSR/RVR/CVR/CALIB); §4 added (NVIC operation + external-interrupt-input pseudocode, implemented interrupts, Tables B3-8/B3-9/B3-10, NVIC_ISER/ICER/ISPR/ICPR/IABR/IPR). Stale §2 overview bullet list replaced with pointers to the new subsections.
+  - S3 result: 33 bit bars cropped from the ARM PDF (the chapter has no raster figures; the bars are vector) named by register, `CPUID.png` … `NVIC_IPR.png`; no other figures in B3.1–B3.4.
+  - S6 result: every numbered table (B3-4 … B3-10) rendered as GFM.
+  - [x] S1 [x] S2 [x] S3 [x] S5 [x] S6 [x] S8
 - [ ] ⏸ arm_architecture_memory_mode — completion (article 493 ln vs A3 The Memory Model, 2,039 ln — >1500-line rule: present the run plan first)
   - Note (S1): article has only `## 1.` + `## 3. 参考文献` at h2 level — likely blog-prose vs the chapter's real section tree; expect substantial in-place insertion.
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S5 [ ] S6 [ ] S7 [ ] S8
