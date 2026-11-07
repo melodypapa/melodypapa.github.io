@@ -5,7 +5,7 @@ description: >
   technical-reference articles under docs/cortex/ of the melodypapa.github.io
   MkDocs site; when syncing a Cortex-M7 or Cortex-R52 Arm document (TRM,
   Armv7-M/Armv8-M architecture reference manual, SDEN errata) from the local
-  `.private/ARM` mirror into a docs/cortex page; or when asked about coverage of
+  `private-docs/ARM` mirror into a docs/cortex page; or when asked about coverage of
   a Cortex core chapter such as MPU, cache, memory system, programmers model,
   exception model, instruction set, or system address map; or when merging split
   chapter pages and registering a document glossary.
@@ -14,7 +14,7 @@ description: >
 # Arm Document → Cortex Article Sync
 
 Translate or complete the Chinese articles under `docs/cortex/` from the Arm
-documents mirrored in `.private/ARM/`. Follow the steps in order; the
+documents mirrored in `private-docs/ARM/`. Follow the steps in order; the
 conventions live in `references/`, not in this file.
 
 ## Step 0 — Read the law of the land
@@ -28,11 +28,11 @@ tree so the new page matches its tone and structure.
 
 Read `references/source-resolution.md`. Summary:
 
-1. Primary source is the ima-parsed Markdown in `.private/ARM/<core>/`
+1. Primary source is the ima-parsed Markdown in `private-docs/ARM/<core>/`
    (`M7/`, `R52/`), paired with the original PDF of the same doc ID and
    revision. Use the `.md` for text, the `.pdf` for figures, and the `.pdf` to
    read the cell grid of a table the parse flattened.
-2. Confirm the pairing from `.private/ARM/README.md` — it records the doc ID,
+2. Confirm the pairing from `private-docs/ARM/README.md` — it records the doc ID,
    revision, media size and which pairs are complete. Filenames do not always
    match between `.md` and `.pdf` (the M7 TRM PDF drops `_r1p2`; the SDEN PDF
    carries the long `cortex_m7_at610_and_...` name).

@@ -1,7 +1,7 @@
-# Source resolution — `.private/ARM`
+# Source resolution — `private-docs/ARM`
 
 The Arm corpus is a local mirror of the ima knowledge base export (2026-11-03).
-It lives at the repo root in `.private/ARM/` (git-ignored) and is read-only.
+It lives at the repo root in `private-docs/ARM/` (a private git submodule, outside the parent repo's content) and is read-only.
 
 ## Layout
 
@@ -29,7 +29,7 @@ revision suffix and the SDEN PDF carries a long descriptive name.
    - chapters are flattened (`# Chapter 8`, `## 8.1.2 …`), some parser
      artefacts split a heading into two `##` lines;
    - figures appear as `![...](2/<hash>/tmp_zip_img/<uuid>.png)` — the path
-     does not resolve inside `.private/ARM`, it is a parse artefact;
+     does not resolve inside `private-docs/ARM`, it is a parse artefact;
    - merged table cells arrive as HTML `<table>` markup (sometimes inside the
      image alt text): read it as the cell grid, then rebuild the table as text
      (GFM by default; HTML only when the structure qualifies) — the parse's
@@ -59,4 +59,4 @@ revision suffix and the SDEN PDF carries a long descriptive name.
 - Do not translate from the PDF text layer when a `.md` exists.
 - The PDF is also the source for revision-sensitive content; record the
   revision (`r1p0`, `r1p2`, `B.y`, `E.e`) in the PR text when it matters.
-- `.private/` is git-ignored: never commit a source file or a PDF.
+- `private-docs/` is a private submodule: never commit a source file or a PDF to the parent repo; its own content is pushed to `melodypapa/private-docs`.

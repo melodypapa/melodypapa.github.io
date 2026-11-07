@@ -2,9 +2,9 @@
 
 > Maintained per the [arm-translate](../../../.agents/skills/arm-translate/SKILL.md) skill; update the touched row and this index after every sync.
 > Execution queue: the Group files below, one-article-at-a-time — **resume = the first `[ ]` row in group order**; all `[x]` = batch complete.
-> Census: 2026-11-04, generated from `.private/ARM/` (mirror 2026-11-03) vs `docs/cortex/*_processor/` headings. This directory is excluded from the site build (`exclude_docs` in `mkdocs.yml`).
+> Census: 2026-11-04, generated from `private-docs/ARM/` (mirror 2026-11-03) vs `docs/cortex/*_processor/` headings. This directory is excluded from the site build (`exclude_docs` in `mkdocs.yml`).
 
-## Sources (`.private/ARM/`, read-only)
+## Sources (`private-docs/ARM/`, read-only)
 
 | Document | Revision | Parse lines | PDF pair | Status |
 | --- | --- | ---: | --- | --- |
@@ -14,7 +14,7 @@
 | `R52/cortex_r52_trm_100026_0100_00_en` | r1p0 | 44,511 | ✅ byte-identical (3,696,889 B) | pair complete |
 | `R52/DDI0553B_y_armv8m_arm` | B.y | 37,382 | ✅ size = ima media_size (9,561,121 B) | pair complete — README "⏳ retrying" row is STALE |
 
-`README.md` is the recorded pairing ledger but predates the finished downloads and the bad SDEN fetch; this table supersedes it. Never edit `.private/ARM/`.
+`README.md` is the recorded pairing ledger but predates the finished downloads and the bad SDEN fetch; this table supersedes it. Never edit `private-docs/ARM/`.
 
 ## Parse quirks (plan-level)
 
