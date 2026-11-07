@@ -13082,3 +13082,1228 @@ ViewMap 的示例用例（参见 [TPS\_SYST\_01136]）：
 | postBuildValueAccess        | PostBuildVariantCriterion      | 0..1   | ref  | 这表示 VariationPointProxy 上下文中适用的 PostBuildVariantCriterion。注意，如何访问该特定 postBuildValueAccess 的技术细节仍被视为（源文句子在此截断）。                              |
 | postBuildVariantCondition   | PostBuildVariantCondition      | *      | aggr | 这表示 VariationPointProxy 上下文中适用的 PostBuildVariantCondition。（PostBuoldVariant 为源文如此）                                                            |
 | valueAccess                 | AttributeValueVariationPoint   | 0..1   | aggr | 该取值充当 VariationPoint 的绑定函数。                                                                                                                                        |
+
+## F. 示例（Examples）
+
+本章包含前述各章中给出的示例的更详细信息。
+
+### F.1. 变体点中的 ShortLabel
+
+#### F.1.1 拥有相同 shortName 的 Identifiable
+
+以下 ARXML 文件说明：在 shortName 相同、且分布在三个部分模型（即三个不同文件）中的情况下 shortLabel 的使用。
+
+例如，一个软件组件的 InternalBehavior（Ib\_MySWC）受变体支配。在这种情况下，VariationPoint 也需要被考虑 [TPS\_GST\_00047]。
+
+![图 F.1：带变体与可拆分元素的 M1 模型（M1 Model with variants and splitable elements）](FigureF-1.png)
+
+图 F.1 展示了一个 InternalBehavior（Ib\_MySWC）的两个 VariationPoint（VP1、VP2），分布在三个文件（清单）F.1、F.2 与 F.3 中。
+
+清单 F.1 包含与清单 F.2 相同的 shortName，但二者存在于各自的部分模型中。二者拥有相同的 atp.splitkey——由 shortName（Ib\_MySwc）与 shortLabel（VP1）的组合给出。
+
+清单F.1：部分模型 1 中相同 shortName 的示例
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>Demo</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>SwComponentTypes</SHORT-NAME>
+          <ELEMENTS>
+            <APPLICATION-SW-COMPONENT-TYPE>
+              <SHORT-NAME>MySWC</SHORT-NAME>
+              <INTERNAL-BEHAVIORS>
+                <SWC-INTERNAL-BEHAVIOR>
+                  <SHORT-NAME>Ib_MySWC</SHORT-NAME>
+                  <RUNNABLES>
+                    <RUNNABLE-ENTITY>
+                      <SHORT-NAME>Run1</SHORT-NAME>
+                    </RUNNABLE-ENTITY>
+                  </RUNNABLES>
+                  <VARIATION-POINT>
+                    <SHORT-LABEL>VP1</SHORT-LABEL>
+                    <SW-SYSCOND BINDING-TIME="CODE-GENERATION-TIME">
+                      <SYSC-REF DEST="SW-SYSTEMCONST">/Demo/SystemConstants/SY_TURBO</SYSC-REF> == 0
+                    </SW-SYSCOND>
+                  </VARIATION-POINT>
+                </SWC-INTERNAL-BEHAVIOR>
+              </INTERNAL-BEHAVIORS>
+            </APPLICATION-SW-COMPONENT-TYPE>
+          </ELEMENTS>
+        </AR-PACKAGE>
+        <AR-PACKAGE>
+          <SHORT-NAME>SystemConstants</SHORT-NAME>
+          <ELEMENTS>
+            <SW-SYSTEMCONST>
+              <SHORT-NAME>SY_TURBO</SHORT-NAME>
+              <SW-DATA-DEF-PROPS>
+                <SW-DATA-DEF-PROPS-VARIANTS>
+                  <SW-DATA-DEF-PROPS-CONDITIONAL>
+                    <SW-CALIBRATION-ACCESS>NOT-ACCESSIBLE</SW-CALIBRATION-ACCESS>
+                  </SW-DATA-DEF-PROPS-CONDITIONAL>
+                </SW-DATA-DEF-PROPS-VARIANTS>
+              </SW-DATA-DEF-PROPS>
+            </SW-SYSTEMCONST>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+清单F.2：部分模型 2 中相同 shortName 的示例
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>Demo</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>SwComponentTypes</SHORT-NAME>
+          <ELEMENTS>
+            <APPLICATION-SW-COMPONENT-TYPE>
+              <SHORT-NAME>MySWC</SHORT-NAME>
+              <INTERNAL-BEHAVIORS>
+                <SWC-INTERNAL-BEHAVIOR>
+                  <SHORT-NAME>Ib_MySWC</SHORT-NAME>
+                  <RUNNABLES>
+                    <RUNNABLE-ENTITY>
+                      <SHORT-NAME>Run2</SHORT-NAME>
+                    </RUNNABLE-ENTITY>
+                  </RUNNABLES>
+                  <VARIATION-POINT>
+                    <SHORT-LABEL>VP1</SHORT-LABEL>
+                  </VARIATION-POINT>
+                </SWC-INTERNAL-BEHAVIOR>
+              </INTERNAL-BEHAVIORS>
+            </APPLICATION-SW-COMPONENT-TYPE>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+清单 F.3 拥有组合的 atp.splitkey（Ib\_MySWC/VP2）与 shortLabel（VP2）。它包含与清单 F.1 相同的 shortName，但 shortLabel 不同（VP2）。该 VariationPoint 在清单 F.3 中提供两个 RunnableEntity（Run1、Run3）。
+
+清单F.3：相同 shortName 但不同 shortLabel 的示例
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>Demo</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>SwComponentTypes</SHORT-NAME>
+          <ELEMENTS>
+            <APPLICATION-SW-COMPONENT-TYPE>
+              <SHORT-NAME>MySWC</SHORT-NAME>
+              <INTERNAL-BEHAVIORS>
+                <SWC-INTERNAL-BEHAVIOR>
+                  <SHORT-NAME>Ib_MySWC</SHORT-NAME>
+                  <RUNNABLES>
+                    <RUNNABLE-ENTITY>
+                      <SHORT-NAME>Run1</SHORT-NAME>
+                    </RUNNABLE-ENTITY>
+                    <RUNNABLE-ENTITY>
+                      <SHORT-NAME>Run3</SHORT-NAME>
+                    </RUNNABLE-ENTITY>
+                  </RUNNABLES>
+                  <VARIATION-POINT>
+                    <SHORT-LABEL>VP2</SHORT-LABEL>
+                    <SW-SYSCOND BINDING-TIME="CODE-GENERATION-TIME">
+                      <SYSC-REF DEST="SW-SYSTEMCONST">/Demo/SystemConstants/SY_TURBO</SYSC-REF> == 1
+                    </SW-SYSCOND>
+                  </VARIATION-POINT>
+                </SWC-INTERNAL-BEHAVIOR>
+              </INTERNAL-BEHAVIORS>
+            </APPLICATION-SW-COMPONENT-TYPE>
+          </ELEMENTS>
+        </AR-PACKAGE>
+        <AR-PACKAGE>
+          <SHORT-NAME>SystemConstants</SHORT-NAME>
+          <ELEMENTS>
+            <SW-SYSTEMCONST>
+              <SHORT-NAME>SY_TURBO</SHORT-NAME>
+              <SW-DATA-DEF-PROPS>
+                <SW-DATA-DEF-PROPS-VARIANTS>
+                  <SW-DATA-DEF-PROPS-CONDITIONAL>
+                    <SW-CALIBRATION-ACCESS>NOT-ACCESSIBLE</SW-CALIBRATION-ACCESS>
+                  </SW-DATA-DEF-PROPS-CONDITIONAL>
+                </SW-DATA-DEF-PROPS-VARIANTS>
+              </SW-DATA-DEF-PROPS>
+            </SW-SYSTEMCONST>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+由于 [constr\_2512]，变体元素的 shortName 与 shortLabel 应当在外围 Identifiable 建立的命名空间内唯一。此外，若这些 shortName 被描述在部分模型中，部分模型中的 shortLabel 指示哪些元素属于一起，并且需要一致地重复 shortLabel。
+
+合并可拆分元素（清单）F.1、F.2、F.3 之后，合并后的模型（清单）F.4 再次包含 InternalBehavior（Ib\_MySWC）的两个 VariationPoint（VP1、VP2）。
+
+**注意：** 合并后的模型只在 AUTOSAR 工具内部存在。列出该清单仅为说明。
+
+清单F.4：合并模型的示例
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>Demo</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>SwComponentTypes</SHORT-NAME>
+          <ELEMENTS>
+            <APPLICATION-SW-COMPONENT-TYPE>
+              <SHORT-NAME>MySWC</SHORT-NAME>
+              <INTERNAL-BEHAVIORS>
+                <SWC-INTERNAL-BEHAVIOR>
+                  <SHORT-NAME>Ib_MySWC</SHORT-NAME>
+                  <RUNNABLES>
+                    <RUNNABLE-ENTITY>
+                      <SHORT-NAME>Run1</SHORT-NAME>
+                    </RUNNABLE-ENTITY>
+                    <RUNNABLE-ENTITY>
+                      <SHORT-NAME>Run2</SHORT-NAME>
+                    </RUNNABLE-ENTITY>
+                  </RUNNABLES>
+                  <VARIATION-POINT>
+                    <SHORT-LABEL>VP1</SHORT-LABEL>
+                    <SW-SYSCOND BINDING-TIME="CODE-GENERATION-TIME">
+                      <SYSC-REF DEST="SW-SYSTEMCONST">/Demo/SystemConstants/SY_TURBO</SYSC-REF> == 0
+                    </SW-SYSCOND>
+                  </VARIATION-POINT>
+                </SWC-INTERNAL-BEHAVIOR>
+                <SWC-INTERNAL-BEHAVIOR>
+                  <SHORT-NAME>Ib_MySWC</SHORT-NAME>
+                  <RUNNABLES>
+                    <RUNNABLE-ENTITY>
+                      <SHORT-NAME>Run1</SHORT-NAME>
+                    </RUNNABLE-ENTITY>
+                    <RUNNABLE-ENTITY>
+                      <SHORT-NAME>Run3</SHORT-NAME>
+                    </RUNNABLE-ENTITY>
+                  </RUNNABLES>
+                  <VARIATION-POINT>
+                    <SHORT-LABEL>VP2</SHORT-LABEL>
+                    <SW-SYSCOND BINDING-TIME="CODE-GENERATION-TIME">
+                      <SYSC-REF DEST="SW-SYSTEMCONST">/Demo/SystemConstants/SY_TURBO</SYSC-REF> == 1
+                    </SW-SYSCOND>
+                  </VARIATION-POINT>
+                </SWC-INTERNAL-BEHAVIOR>
+              </INTERNAL-BEHAVIORS>
+            </APPLICATION-SW-COMPONENT-TYPE>
+          </ELEMENTS>
+        </AR-PACKAGE>
+        <AR-PACKAGE>
+          <SHORT-NAME>SystemConstants</SHORT-NAME>
+          <ELEMENTS>
+            <SW-SYSTEMCONST>
+              <SHORT-NAME>SY_TURBO</SHORT-NAME>
+              <SW-DATA-DEF-PROPS>
+                <SW-DATA-DEF-PROPS-VARIANTS>
+                  <SW-DATA-DEF-PROPS-CONDITIONAL>
+                    <SW-CALIBRATION-ACCESS>NOT-ACCESSIBLE</SW-CALIBRATION-ACCESS>
+                  </SW-DATA-DEF-PROPS-CONDITIONAL>
+                </SW-DATA-DEF-PROPS-VARIANTS>
+              </SW-DATA-DEF-PROPS>
+            </SW-SYSTEMCONST>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+最后，施加变体之后，只有变体条件为 true 的元素保留下来。
+
+### F.2. 可拆分元素的使用
+
+#### F.2.1. 引入示例
+
+以下 ARXML 文件说明 8.1 节“引言”中给出的示例<sup>1</sup>。
+
+组合 A 不包含任何原子软件组件，将被持久化在一个 ARXML 文件中，见清单 F.5。
+
+清单F.5：组合 A 的示例（DOC\_GST\_ExampleForSplitableCompA.arxml）
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>Composition</SHORT-NAME>
+      <ELEMENTS>
+        <COMPOSITION-SW-COMPONENT-TYPE>
+          <SHORT-NAME>CompositionA</SHORT-NAME>
+          <PORTS>
+            <P-PORT-PROTOTYPE>
+              <SHORT-NAME>PPort_CompositionA</SHORT-NAME>
+            </P-PORT-PROTOTYPE>
+            <R-PORT-PROTOTYPE>
+              <SHORT-NAME>RPort_CompositionA</SHORT-NAME>
+            </R-PORT-PROTOTYPE>
+          </PORTS>
+        </COMPOSITION-SW-COMPONENT-TYPE>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+原子软件组件（SW-C X）将被持久化在一个专用 ARXML 文件中，见清单 F.6。
+
+> **1** 第一个清单带 XML 声明与根元素打印；其余清单不带。
+
+清单F.6：SW-C X 的示例（DOC\_GST\_ExampleForSplitableSWCX.arxml）
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>SwComponentTypes</SHORT-NAME>
+  <ELEMENTS>
+    <APPLICATION-SW-COMPONENT-TYPE>
+      <SHORT-NAME>SWCX</SHORT-NAME>
+      <PORTS>
+        <P-PORT-PROTOTYPE>
+          <SHORT-NAME>PPort_SWCX</SHORT-NAME>
+        </P-PORT-PROTOTYPE>
+        <R-PORT-PROTOTYPE>
+          <SHORT-NAME>RPort_SWCX</SHORT-NAME>
+        </R-PORT-PROTOTYPE>
+      </PORTS>
+      <INTERNAL-BEHAVIORS>
+        <SWC-INTERNAL-BEHAVIOR>
+          <SHORT-NAME>SwcInternalBehavior_SWCX</SHORT-NAME>
+          <RUNNABLES>
+            <RUNNABLE-ENTITY>
+              <SHORT-NAME>Runnable1_SWCX</SHORT-NAME>
+              <SYMBOL>RunnableEntity_X1_func</SYMBOL>
+            </RUNNABLE-ENTITY>
+            <RUNNABLE-ENTITY>
+              <SHORT-NAME>Runnable2_SWCX</SHORT-NAME>
+              <SYMBOL>RunnableEntity_X2_func</SYMBOL>
+            </RUNNABLE-ENTITY>
+          </RUNNABLES>
+        </SWC-INTERNAL-BEHAVIOR>
+      </INTERNAL-BEHAVIORS>
+    </APPLICATION-SW-COMPONENT-TYPE>
+  </ELEMENTS>
+</AR-PACKAGE>
+```
+
+对原子软件组件 SW-C Y 做同样的处理，见清单 F.7。
+
+清单F.7：SW-C Y 的示例（DOC\_GST\_ExampleForSplitableSWCY.arxml）
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>SwComponentTypes</SHORT-NAME>
+  <ELEMENTS>
+    <APPLICATION-SW-COMPONENT-TYPE>
+      <SHORT-NAME>SWCY</SHORT-NAME>
+      <INTERNAL-BEHAVIORS>
+        <SWC-INTERNAL-BEHAVIOR>
+          <SHORT-NAME>SwcInternalBehavior_SWCY</SHORT-NAME>
+        </SWC-INTERNAL-BEHAVIOR>
+      </INTERNAL-BEHAVIORS>
+    </APPLICATION-SW-COMPONENT-TYPE>
+  </ELEMENTS>
+</AR-PACKAGE>
+```
+
+ARPackage SW-C Y 被拆分，例如拆分为单独的端口定义。它们保证与组合 A 以及原子软件组件（SW-C X）的交互，见清单 F.8 与清单 F.9。
+
+清单F.8：SW-C Y 的 P 端口示例（DOC\_GST\_ExampleForSplitableSWCY\_PP.arxml）
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>SwComponentTypes</SHORT-NAME>
+  <ELEMENTS>
+    <APPLICATION-SW-COMPONENT-TYPE>
+      <SHORT-NAME>SWCY</SHORT-NAME>
+      <PORTS>
+        <P-PORT-PROTOTYPE>
+          <SHORT-NAME>PPort_SWCY</SHORT-NAME>
+        </P-PORT-PROTOTYPE>
+      </PORTS>
+    </APPLICATION-SW-COMPONENT-TYPE>
+  </ELEMENTS>
+</AR-PACKAGE>
+```
+
+清单F.9：SW-C Y 的 R 端口示例（DOC\_GST\_ExampleForSplitableSWCY\_RP.arxml）
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>SwComponentTypes</SHORT-NAME>
+  <ELEMENTS>
+    <APPLICATION-SW-COMPONENT-TYPE>
+      <SHORT-NAME>SWCY</SHORT-NAME>
+      <PORTS>
+        <R-PORT-PROTOTYPE>
+          <SHORT-NAME>RPort_SWCY</SHORT-NAME>
+        </R-PORT-PROTOTYPE>
+      </PORTS>
+    </APPLICATION-SW-COMPONENT-TYPE>
+  </ELEMENTS>
+</AR-PACKAGE>
+```
+
+由于进一步的优化，SW-C Y 的 runnable 使用两个可拆分制品很有用（见清单 F.10 与清单 F.11）。
+
+清单F.10：SW-C Y 的 Runnable 1 示例（DOC\_GST\_ExampleForSplitableSWCY\_IBRun1.arxml）
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>SwComponentTypes</SHORT-NAME>
+  <ELEMENTS>
+    <APPLICATION-SW-COMPONENT-TYPE>
+      <SHORT-NAME>SWCY</SHORT-NAME>
+      <INTERNAL-BEHAVIORS>
+        <SWC-INTERNAL-BEHAVIOR>
+          <SHORT-NAME>SwcInternalBehavior_SWCY</SHORT-NAME>
+          <RUNNABLES>
+            <RUNNABLE-ENTITY>
+              <SHORT-NAME>Runnable1_SWCY</SHORT-NAME>
+              <SYMBOL>RunnableEntity_Y1_func</SYMBOL>
+            </RUNNABLE-ENTITY>
+          </RUNNABLES>
+        </SWC-INTERNAL-BEHAVIOR>
+      </INTERNAL-BEHAVIORS>
+    </APPLICATION-SW-COMPONENT-TYPE>
+  </ELEMENTS>
+</AR-PACKAGE>
+```
+
+清单F.11：SW-C Y 的 Runnable 2 示例（DOC\_GST\_ExampleForSplitableSWCY\_IBRun2.arxml）
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>SwComponentTypes</SHORT-NAME>
+  <ELEMENTS>
+    <APPLICATION-SW-COMPONENT-TYPE>
+      <SHORT-NAME>SWCY</SHORT-NAME>
+      <INTERNAL-BEHAVIORS>
+        <SWC-INTERNAL-BEHAVIOR>
+          <SHORT-NAME>SwcInternalBehavior_SWCY</SHORT-NAME>
+          <RUNNABLES>
+            <RUNNABLE-ENTITY>
+              <SHORT-NAME>Runnable2_SWCY</SHORT-NAME>
+              <SYMBOL>RunnableEntity_Y2_func</SYMBOL>
+            </RUNNABLE-ENTITY>
+          </RUNNABLES>
+        </SWC-INTERNAL-BEHAVIOR>
+      </INTERNAL-BEHAVIORS>
+    </APPLICATION-SW-COMPONENT-TYPE>
+  </ELEMENTS>
+</AR-PACKAGE>
+```
+
+最后，SWC-Y 的“合并模型”见清单 F.12。
+
+**注意：** 合并后的模型只在 AUTOSAR 工具内部存在。列出该清单仅为说明。
+
+清单F.12：SW-C Y 合并模型的示例（DOC\_GST\_ExampleForSplitableSWCY\_Merged.arxml）
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>SwComponentTypes</SHORT-NAME>
+  <ELEMENTS>
+    <APPLICATION-SW-COMPONENT-TYPE>
+      <SHORT-NAME>SWCY</SHORT-NAME>
+      <PORTS>
+        <P-PORT-PROTOTYPE>
+          <SHORT-NAME>PPort_SWCY</SHORT-NAME>
+        </P-PORT-PROTOTYPE>
+        <R-PORT-PROTOTYPE>
+          <SHORT-NAME>RPort_SWCY</SHORT-NAME>
+        </R-PORT-PROTOTYPE>
+      </PORTS>
+      <INTERNAL-BEHAVIORS>
+        <SWC-INTERNAL-BEHAVIOR>
+          <SHORT-NAME>SwcInternalBehavior_SWCY</SHORT-NAME>
+          <RUNNABLES>
+            <RUNNABLE-ENTITY>
+              <SHORT-NAME>Runnable1_SWCY</SHORT-NAME>
+              <SYMBOL>RunnableEntity_Y1_func</SYMBOL>
+            </RUNNABLE-ENTITY>
+            <RUNNABLE-ENTITY>
+              <SHORT-NAME>Runnable2_SWCY</SHORT-NAME>
+              <SYMBOL>RunnableEntity_Y2_func</SYMBOL>
+            </RUNNABLE-ENTITY>
+          </RUNNABLES>
+        </SWC-INTERNAL-BEHAVIOR>
+      </INTERNAL-BEHAVIORS>
+    </APPLICATION-SW-COMPONENT-TYPE>
+  </ELEMENTS>
+</AR-PACKAGE>
+```
+
+出于说明的目的，上述示例完整“合并模型”的 ARXML 见清单 F.13。
+
+清单F.13：Comp A 合并模型的示例（DOC\_GST\_ExampleForSplitableCompA\_Merged.arxml）
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>Composition</SHORT-NAME>
+  <ELEMENTS>
+    <COMPOSITION-SW-COMPONENT-TYPE>
+      <SHORT-NAME>CompositionA</SHORT-NAME>
+      <PORTS>
+        <P-PORT-PROTOTYPE>
+          <SHORT-NAME>PPort_CompositionA</SHORT-NAME>
+        </P-PORT-PROTOTYPE>
+        <R-PORT-PROTOTYPE>
+          <SHORT-NAME>RPort_CompositionA</SHORT-NAME>
+        </R-PORT-PROTOTYPE>
+      </PORTS>
+      <COMPONENTS>
+        <SW-COMPONENT-PROTOTYPE>
+          <SHORT-NAME>CPT_SWCX</SHORT-NAME>
+          <TYPE-TREF DEST="APPLICATION-SW-COMPONENT-TYPE">/SwComponentTypes/SWCX</TYPE-TREF>
+        </SW-COMPONENT-PROTOTYPE>
+        <SW-COMPONENT-PROTOTYPE>
+          <SHORT-NAME>CPT_SWCY</SHORT-NAME>
+          <TYPE-TREF DEST="APPLICATION-SW-COMPONENT-TYPE">/SwComponentTypes/SWCY</TYPE-TREF>
+        </SW-COMPONENT-PROTOTYPE>
+      </COMPONENTS>
+    </COMPOSITION-SW-COMPONENT-TYPE>
+  </ELEMENTS>
+</AR-PACKAGE>
+<AR-PACKAGE>
+  <SHORT-NAME>SwComponentTypes</SHORT-NAME>
+  <ELEMENTS>
+    <APPLICATION-SW-COMPONENT-TYPE>
+      <SHORT-NAME>SWCX</SHORT-NAME>
+      <PORTS>
+        <P-PORT-PROTOTYPE>
+          <SHORT-NAME>PPort_SWCX</SHORT-NAME>
+        </P-PORT-PROTOTYPE>
+        <R-PORT-PROTOTYPE>
+          <SHORT-NAME>RPort_SWCX</SHORT-NAME>
+        </R-PORT-PROTOTYPE>
+      </PORTS>
+      <INTERNAL-BEHAVIORS>
+        <SWC-INTERNAL-BEHAVIOR>
+          <SHORT-NAME>SwcInternalBehavior_SWCX</SHORT-NAME>
+          <RUNNABLES>
+            <RUNNABLE-ENTITY>
+              <SHORT-NAME>Runnable1_SWCX</SHORT-NAME>
+              <SYMBOL>RunnableEntity_X1_func</SYMBOL>
+            </RUNNABLE-ENTITY>
+            <RUNNABLE-ENTITY>
+              <SHORT-NAME>Runnable2_SWCX</SHORT-NAME>
+              <SYMBOL>RunnableEntity_X2_func</SYMBOL>
+            </RUNNABLE-ENTITY>
+          </RUNNABLES>
+        </SWC-INTERNAL-BEHAVIOR>
+      </INTERNAL-BEHAVIORS>
+    </APPLICATION-SW-COMPONENT-TYPE>
+    <APPLICATION-SW-COMPONENT-TYPE>
+      <SHORT-NAME>SWCY</SHORT-NAME>
+      <PORTS>
+        <P-PORT-PROTOTYPE>
+          <SHORT-NAME>PPort_SWCY</SHORT-NAME>
+        </P-PORT-PROTOTYPE>
+        <R-PORT-PROTOTYPE>
+          <SHORT-NAME>RPort_SWCY</SHORT-NAME>
+        </R-PORT-PROTOTYPE>
+      </PORTS>
+      <INTERNAL-BEHAVIORS>
+        <SWC-INTERNAL-BEHAVIOR>
+          <SHORT-NAME>SwcInternalBehavior_SWCY</SHORT-NAME>
+          <RUNNABLES>
+            <RUNNABLE-ENTITY>
+              <SHORT-NAME>Runnable1_SWCY</SHORT-NAME>
+              <SYMBOL>RunnableEntity_Y1_func</SYMBOL>
+            </RUNNABLE-ENTITY>
+            <RUNNABLE-ENTITY>
+              <SHORT-NAME>Runnable2_SWCY</SHORT-NAME>
+              <SYMBOL>RunnableEntity_Y2_func</SYMBOL>
+            </RUNNABLE-ENTITY>
+          </RUNNABLES>
+        </SWC-INTERNAL-BEHAVIOR>
+      </INTERNAL-BEHAVIORS>
+    </APPLICATION-SW-COMPONENT-TYPE>
+  </ELEMENTS>
+</AR-PACKAGE>
+```
+
+表F.1：上述示例的可拆分元素
+
+| 可拆分元素名称                       | Splitkey                              | 示例中 Splitkey 路径的取值                                                                                                                                        |
+|----------------------------------------|--------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| SwComponentType.port                   | shortName, variationPoint.shortLabel        | ("SwComponentTypes","SWCY","PPort\_SWCY")、("SwComponentTypes","SWCY","RPort\_SWCY")                                                                                          |
+| SwcInternalBehavior.runnable           | shortName, variationPoint.shortLabel        | ("SwComponentTypes","SWCY","SwcInternalBehavior\_SWCY","Runnable1\_SWCY")、("SwComponentTypes","SWCY","SwcInternalBehavior\_SWCY","Runnable2\_SWCY")                                |
+
+图 F.2 展示上述示例中使用的元模型的类。
+
+![图 F.2：带可拆分元素的元模型（Meta-model with splitables）](FigureF-2.png)
+
+#### F.2.2. 多重性上限为 1 的聚合的 Splitkey
+
+按照 [TPS\_GST\_00047]，聚合的角色应当用作多重性上限为 1 的聚合的 splitkey。该用例的一个例子是属于某个实现的测量与标定支持数据。该聚合是 **&lt;atpSplitable&gt;** 的，因为在既有 BswImplementation 模型的情况下，描述 mcSupport 将在流程中稍后添加。
+
+![图 F.3：带聚合的可拆分元素 M1 模型（M1 Model splitable elements with Aggregation）](FigureF-3.png)
+
+图 F.3 的上半部分展示一个既有 BswImplementation（Impl1），带一个指向 Compiler 的聚合。该 BswImplementation 将被扩展一个 mcSupport 描述（下半部分）。splitkey 是角色名 “mcSupport”。
+
+以下 ARXML 文件说明该用例以及到两个部分模型的分布。清单 F.14 包含 BswImplementation（Impl1）的一个既有部分。
+
+清单F.14：部分模型 1 中可拆分元素（聚合）的示例
+
+```xml
+<?xml version="1.0"?>
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>Supplier</SHORT-NAME>
+      <ELEMENTS>
+        <BSW-IMPLEMENTATION>
+          <SHORT-NAME>Impl1</SHORT-NAME>
+          <COMPILERS>
+            <COMPILER>
+              <SHORT-NAME>CompilerA</SHORT-NAME>
+            </COMPILER>
+          </COMPILERS>
+        </BSW-IMPLEMENTATION>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+清单 F.15 包含 BswImplementation（Impl1）中带 mcSupport 的扩展部分。
+
+清单F.15：部分模型 2 中可拆分元素（聚合）的示例
+
+```xml
+<?xml version="1.0"?>
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>Supplier</SHORT-NAME>
+      <ELEMENTS>
+        <BSW-IMPLEMENTATION>
+          <SHORT-NAME>Impl1</SHORT-NAME>
+          <MC-SUPPORT>
+            <MC-PARAMETER-INSTANCES>
+              <MC-DATA-INSTANCE>
+                <SHORT-NAME>McData_A</SHORT-NAME>
+              </MC-DATA-INSTANCE>
+            </MC-PARAMETER-INSTANCES>
+          </MC-SUPPORT>
+        </BSW-IMPLEMENTATION>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+合并可拆分元素 F.14、F.15 之后，合并后的模型 F.16 包含 BswImplementation 的两个部分。
+
+**注意：** 合并后的模型只在 AUTOSAR 工具内部存在。列出该清单仅为说明。
+
+清单F.16：可拆分元素（聚合）的示例
+
+```xml
+<?xml version="1.0"?>
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>Supplier</SHORT-NAME>
+      <ELEMENTS>
+        <BSW-IMPLEMENTATION>
+          <SHORT-NAME>Impl1</SHORT-NAME>
+          <COMPILERS>
+            <COMPILER>
+              <SHORT-NAME>CompilerA</SHORT-NAME>
+            </COMPILER>
+          </COMPILERS>
+          <MC-SUPPORT>
+            <MC-PARAMETER-INSTANCES>
+              <MC-DATA-INSTANCE>
+                <SHORT-NAME>McData_A</SHORT-NAME>
+              </MC-DATA-INSTANCE>
+            </MC-PARAMETER-INSTANCES>
+          </MC-SUPPORT>
+        </BSW-IMPLEMENTATION>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+#### F.2.3. 关联的 Splitkey
+
+若 **&lt;atpSplitable&gt;** 属性表示一个关联，则 splitkey 的取值由关联的角色名与被引用元素的全限定路径名给出。
+
+例如 FMFeatureModel（FM）引用两个 FMFeature 元素（Feature1、Feature2）。
+
+![图 F.4：带关联的可拆分元素 M1 模型（M1 Model splitable elements with Association）](FigureF-4.png)
+
+图 F.4 展示一个 FMFeatureModel（FM）带两个指向 FMFeature（Feature1、Feature2）的引用，分布在两个文件 F.17 与 F.18 中。多重性为 2，split key 是角色名 “feature” 加全限定路径名（/Y/Feature1、/Y/Feature2）。
+
+以下 ARXML 文件说明该用例以及到两个部分模型的分布。清单 F.17 包含指向 FMFeature（Feature1）的引用。
+
+清单F.17：部分模型 1 中可拆分元素（关联角色）的示例（assciation 为源文如此）
+
+```xml
+<?xml version="1.0"?>
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>x</SHORT-NAME>
+      <ELEMENTS>
+        <FM-FEATURE-MODEL>
+          <SHORT-NAME>FM</SHORT-NAME>
+          <FEATURE-REFS>
+            <FEATURE-REF DEST="FM-FEATURE">/Y/Feature1</FEATURE-REF>
+          </FEATURE-REFS>
+        </FM-FEATURE-MODEL>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+清单 F.18 包含指向 FMFeature（Feature2）的引用。
+
+清单F.18：部分模型 2 中可拆分元素（关联角色）的示例
+
+```xml
+<?xml version="1.0"?>
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>x</SHORT-NAME>
+      <ELEMENTS>
+        <FM-FEATURE-MODEL>
+          <SHORT-NAME>FM</SHORT-NAME>
+          <FEATURE-REFS>
+            <FEATURE-REF DEST="FM-FEATURE">/Y/Feature2</FEATURE-REF>
+          </FEATURE-REFS>
+        </FM-FEATURE-MODEL>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+合并可拆分元素 F.17 与 F.18 之后，合并后的模型 F.19 再次包含指向 FMFeature（Feature1、Feature2）的两个引用。
+
+**注意：** 合并后的模型只在 AUTOSAR 工具内部存在。列出该清单仅为说明。
+
+清单F.19：合并模型的示例（关联角色）
+
+```xml
+<?xml version="1.0"?>
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>x</SHORT-NAME>
+      <ELEMENTS>
+        <FM-FEATURE-MODEL>
+          <SHORT-NAME>FM</SHORT-NAME>
+          <FEATURE-REFS>
+            <FEATURE-REF DEST="FM-FEATURE">/Y/Feature1</FEATURE-REF>
+            <FEATURE-REF DEST="FM-FEATURE">/Y/Feature2</FEATURE-REF>
+          </FEATURE-REFS>
+        </FM-FEATURE-MODEL>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+#### F.2.4. ECUC 参数
+
+允许把类型为 EcucContainerValue 的定义拆分到不同的 ECUC 取值文件，因为元模型中的聚合带有构型 **&lt;atpSplitable&gt;**。此外，聚合在 EcucContainerValue 内部的 EcucParameterValue 又可以被拆分到单独的文件。例如 NvmBlockDescriptor 的类型是 EcucContainerValue，因此可以被拆分到若干文件。
+
+图 F.5 中的实例化在清单 F.20 与 F.21 中说明。两个文件都持有 NvM\_ConfigId 的 EcucContainerValue。图 F.5 的上半部分反映 ParamDef 视角。
+
+![图 F.5：ECUC 取值文件中的可拆分元素 M1 模型（M1 Model splitable elements in ECUC Value files）](FigureF-5.png)
+
+第一个文件（清单）F.20 的输入是取值为 0 的 EcucNumericalParamValue（NvMBlockDescriptor/NvMNvramDeviceId）。
+
+清单F.20：部分模型 1 中带 ECUC 参数的可拆分元素示例
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>EcucModuleConfigurationValuess</SHORT-NAME>
+      <ELEMENTS>
+        <ECUC-MODULE-CONFIGURATION-VALUES>
+          <SHORT-NAME>NvM</SHORT-NAME>
+          <DEFINITION-REF DEST="ECUC-MODULE-DEF">/AUTOSAR/EcucDefs/NvM</DEFINITION-REF>
+          <CONTAINERS>
+            <ECUC-CONTAINER-VALUE>
+              <SHORT-NAME>NvM_ConfigId</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-NUMERICAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-INTEGER-PARAM-DEF">/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMNvramDeviceId</DEFINITION-REF>
+                  <VALUE>0</VALUE>
+                </ECUC-NUMERICAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+            </ECUC-CONTAINER-VALUE>
+          </CONTAINERS>
+        </ECUC-MODULE-CONFIGURATION-VALUES>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+第二个文件（清单）F.21 的输入是取值为 NVM\_BLOCK\_NATIVE 的 EcucTextualParamValue（NvMBlockDescriptor/NvMBlockManagementType）。
+
+清单F.21：部分模型 2 中带 ECUC 参数的可拆分元素示例
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>EcucModuleConfigurationValuess</SHORT-NAME>
+      <ELEMENTS>
+        <ECUC-MODULE-CONFIGURATION-VALUES>
+          <SHORT-NAME>NvM</SHORT-NAME>
+          <DEFINITION-REF DEST="ECUC-MODULE-DEF">/AUTOSAR/EcucDefs/NvM</DEFINITION-REF>
+          <CONTAINERS>
+            <ECUC-CONTAINER-VALUE>
+              <SHORT-NAME>NvM_ConfigId</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockManagementType</DEFINITION-REF>
+                  <VALUE>NVM_BLOCK_NATIVE</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+            </ECUC-CONTAINER-VALUE>
+          </CONTAINERS>
+        </ECUC-MODULE-CONFIGURATION-VALUES>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+EcucNumericalParamValue 与 EcucTextualParamValue 不可拆分。两个类的多重性都置为 1。例如，一个 EcucTextualParamValue 不能被拆分到单独的文件——一个描述定义、另一个描述取值——因为这些元素没有标记为 **&lt;atpSplitable&gt;**，参见 [constr\_2525]。
+
+即使两个文件（清单）（F.20、F.21）都包含带不同取值的 EcucTextualParamValue NvMBlockDescriptor/NvMBlockManagementType（例如 NVM\_BLOCK\_NATIVE 与 NVM\_BLOCK\_REDUNDANT），工具的校验也会因多重性为 1 而抛出错误。
+
+合并可拆分元素 F.20 与 F.21 之后，合并后的模型 F.22 包含两个 EcucContainerValue、EcucNumericalParamValue 与 EcucTextualParamValue。
+
+**注意：** 合并后的模型只在 AUTOSAR 工具内部存在。列出该清单仅为说明。
+
+清单F.22：合并模型的示例（ECUC 参数）
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>EcucModuleConfigurationValuess</SHORT-NAME>
+      <ELEMENTS>
+        <ECUC-MODULE-CONFIGURATION-VALUES>
+          <SHORT-NAME>NvM</SHORT-NAME>
+          <DEFINITION-REF DEST="ECUC-MODULE-DEF">/AUTOSAR/EcucDefs/NvM</DEFINITION-REF>
+          <CONTAINERS>
+            <ECUC-CONTAINER-VALUE>
+              <SHORT-NAME>NvM_ConfigId</SHORT-NAME>
+              <DEFINITION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor</DEFINITION-REF>
+              <PARAMETER-VALUES>
+                <ECUC-NUMERICAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-INTEGER-PARAM-DEF">/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMNvramDeviceId</DEFINITION-REF>
+                  <VALUE>0</VALUE>
+                </ECUC-NUMERICAL-PARAM-VALUE>
+                <ECUC-TEXTUAL-PARAM-VALUE>
+                  <DEFINITION-REF DEST="ECUC-ENUMERATION-PARAM-DEF">/AUTOSAR/EcucDefs/NvM/NvMBlockDescriptor/NvMBlockManagementType</DEFINITION-REF>
+                  <VALUE>NVM_BLOCK_NATIVE</VALUE>
+                </ECUC-TEXTUAL-PARAM-VALUE>
+              </PARAMETER-VALUES>
+            </ECUC-CONTAINER-VALUE>
+          </CONTAINERS>
+        </ECUC-MODULE-CONFIGURATION-VALUES>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+#### F.2.5. 无标识的情形
+
+以下 ARXML 文件说明 8.3 节中关于“无标识的类型”的示例。
+
+清单 F.23 包含三个 McFunctionDataRefSet：各带一个 flatMapEntry，一个不带 shortLabel，两个带 shortLabel。
+
+清单F.23：部分模型 1 中无标识类型的示例（DOC\_GST\_ExampleMcDataSupplier1.arxml）
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>McData</SHORT-NAME>
+      <ELEMENTS>
+        <MC-FUNCTION>
+          <SHORT-NAME>McFunction_Foo</SHORT-NAME>
+          <DEF-CALPRM-SET>
+            <MC-FUNCTION-DATA-REF-SET-VARIANTS>
+              <MC-FUNCTION-DATA-REF-SET-CONDITIONAL>
+                <FLAT-MAP-ENTRY-REFS>
+                  <FLAT-MAP-ENTRY-REF DEST="FLAT-INSTANCE-DESCRIPTOR">/Path/FlatMap/A</FLAT-MAP-ENTRY-REF>
+                </FLAT-MAP-ENTRY-REFS>
+              </MC-FUNCTION-DATA-REF-SET-CONDITIONAL>
+              <MC-FUNCTION-DATA-REF-SET-CONDITIONAL>
+                <FLAT-MAP-ENTRY-REFS>
+                  <FLAT-MAP-ENTRY-REF DEST="FLAT-INSTANCE-DESCRIPTOR">/Path/FlatMap/B</FLAT-MAP-ENTRY-REF>
+                </FLAT-MAP-ENTRY-REFS>
+                <VARIATION-POINT>
+                  <SHORT-LABEL>Variant_X</SHORT-LABEL>
+                </VARIATION-POINT>
+              </MC-FUNCTION-DATA-REF-SET-CONDITIONAL>
+              <MC-FUNCTION-DATA-REF-SET-CONDITIONAL>
+                <FLAT-MAP-ENTRY-REFS>
+                  <FLAT-MAP-ENTRY-REF DEST="FLAT-INSTANCE-DESCRIPTOR">/Path/FlatMap/E</FLAT-MAP-ENTRY-REF>
+                </FLAT-MAP-ENTRY-REFS>
+                <VARIATION-POINT>
+                  <SHORT-LABEL>Variant_Y</SHORT-LABEL>
+                </VARIATION-POINT>
+              </MC-FUNCTION-DATA-REF-SET-CONDITIONAL>
+            </MC-FUNCTION-DATA-REF-SET-VARIANTS>
+          </DEF-CALPRM-SET>
+        </MC-FUNCTION>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+清单 F.24 包含一个 McFunctionDataRefSet，带两个 flatMapEntry 与一个 shortLabel。
+
+清单F.24：部分模型 2 中无标识类型的示例（DOC\_GST\_ExampleMcDataSupplier2.arxml）
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>McData</SHORT-NAME>
+      <ELEMENTS>
+        <MC-FUNCTION>
+          <SHORT-NAME>McFunction_Foo</SHORT-NAME>
+          <DEF-CALPRM-SET>
+            <MC-FUNCTION-DATA-REF-SET-VARIANTS>
+              <MC-FUNCTION-DATA-REF-SET-CONDITIONAL>
+                <FLAT-MAP-ENTRY-REFS>
+                  <FLAT-MAP-ENTRY-REF DEST="FLAT-INSTANCE-DESCRIPTOR">/Path/FlatMap/C</FLAT-MAP-ENTRY-REF>
+                  <FLAT-MAP-ENTRY-REF DEST="FLAT-INSTANCE-DESCRIPTOR">/Path/FlatMap/D</FLAT-MAP-ENTRY-REF>
+                </FLAT-MAP-ENTRY-REFS>
+                <VARIATION-POINT>
+                  <SHORT-LABEL>Variant_X</SHORT-LABEL>
+                </VARIATION-POINT>
+              </MC-FUNCTION-DATA-REF-SET-CONDITIONAL>
+            </MC-FUNCTION-DATA-REF-SET-VARIANTS>
+          </DEF-CALPRM-SET>
+        </MC-FUNCTION>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+合并两个部分模型（清单 F.23 与清单 F.24）之后，带 shortLabel Variant\_X 的 flatMapEntry 进入清单 F.25 给出的公共集合。
+
+清单F.25：无标识类型合并模型的示例（DOC\_GST\_ExampleMcDataMerged.arxml）
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>McData</SHORT-NAME>
+      <ELEMENTS>
+        <MC-FUNCTION>
+          <SHORT-NAME>McFunction_Foo</SHORT-NAME>
+          <DEF-CALPRM-SET>
+            <MC-FUNCTION-DATA-REF-SET-VARIANTS>
+              <MC-FUNCTION-DATA-REF-SET-CONDITIONAL>
+                <FLAT-MAP-ENTRY-REFS>
+                  <FLAT-MAP-ENTRY-REF DEST="FLAT-INSTANCE-DESCRIPTOR">/Path/FlatMap/A</FLAT-MAP-ENTRY-REF>
+                </FLAT-MAP-ENTRY-REFS>
+              </MC-FUNCTION-DATA-REF-SET-CONDITIONAL>
+              <MC-FUNCTION-DATA-REF-SET-CONDITIONAL>
+                <FLAT-MAP-ENTRY-REFS>
+                  <FLAT-MAP-ENTRY-REF DEST="FLAT-INSTANCE-DESCRIPTOR">/Path/FlatMap/B</FLAT-MAP-ENTRY-REF>
+                  <FLAT-MAP-ENTRY-REF DEST="FLAT-INSTANCE-DESCRIPTOR">/Path/FlatMap/C</FLAT-MAP-ENTRY-REF>
+                  <FLAT-MAP-ENTRY-REF DEST="FLAT-INSTANCE-DESCRIPTOR">/Path/FlatMap/D</FLAT-MAP-ENTRY-REF>
+                </FLAT-MAP-ENTRY-REFS>
+                <VARIATION-POINT>
+                  <SHORT-LABEL>Variant_X</SHORT-LABEL>
+                </VARIATION-POINT>
+              </MC-FUNCTION-DATA-REF-SET-CONDITIONAL>
+              <MC-FUNCTION-DATA-REF-SET-CONDITIONAL>
+                <FLAT-MAP-ENTRY-REFS>
+                  <FLAT-MAP-ENTRY-REF DEST="FLAT-INSTANCE-DESCRIPTOR">/Path/FlatMap/E</FLAT-MAP-ENTRY-REF>
+                </FLAT-MAP-ENTRY-REFS>
+                <VARIATION-POINT>
+                  <SHORT-LABEL>Variant_Y</SHORT-LABEL>
+                </VARIATION-POINT>
+              </MC-FUNCTION-DATA-REF-SET-CONDITIONAL>
+            </MC-FUNCTION-DATA-REF-SET-VARIANTS>
+          </DEF-CALPRM-SET>
+        </MC-FUNCTION>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+### F.3. 引用基础的使用
+
+#### F.3.1. 引入示例
+
+以下 ARXML 文件说明 4.4.1 节“引言”中给出的示例。
+
+包 “C” 拥有 ReferenceBase，包 “D” 聚合拥有该引用的 RPortPrototype “RP”，见清单 F.26。
+
+清单F.26：带相对路径的 ReferenceBase 示例（DOC\_ExampleRelativeReferences06.arxml）
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>C</SHORT-NAME>
+  <REFERENCE-BASES>
+    <REFERENCE-BASE>
+      <SHORT-LABEL>myRB</SHORT-LABEL>
+      <PACKAGE-REF DEST="AR-PACKAGE">/L/M/N</PACKAGE-REF>
+    </REFERENCE-BASE>
+  </REFERENCE-BASES>
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>D</SHORT-NAME>
+      <ELEMENTS>
+        <APPLICATION-SW-COMPONENT-TYPE>
+          <SHORT-NAME>SWC</SHORT-NAME>
+          <PORTS>
+            <R-PORT-PROTOTYPE>
+              <SHORT-NAME>RP</SHORT-NAME>
+              <REQUIRED-INTERFACE-TREF DEST="NV-DATA-INTERFACE" BASE="myRB">O/NVI</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
+          </PORTS>
+        </APPLICATION-SW-COMPONENT-TYPE>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AR-PACKAGE>
+```
+
+引用的最终目标元素 NvDataInterface 见清单 F.27。
+
+清单F.27：ReferenceBase 引用最终目标元素的示例（DOC\_ExampleRelativeReferences06.arxml）
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>L</SHORT-NAME>
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>M</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>N</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE>
+              <SHORT-NAME>O</SHORT-NAME>
+              <ELEMENTS>
+                <NV-DATA-INTERFACE>
+                  <SHORT-NAME>NVI</SHORT-NAME>
+                </NV-DATA-INTERFACE>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AR-PACKAGE>
+```
+
+数据段灵活处理的方面见图 4.7。清单 F.28 表明：只需把包取值改为 “/R/S”，就能实现数据段的移动。RPortPrototype “RP” 无需任何变更（neccessary 为源文如此）。
+
+清单F.28：带相对路径的 ReferenceBase 示例（DOC\_ExampleRelativeReferences07.arxml）
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>C</SHORT-NAME>
+  <REFERENCE-BASES>
+    <REFERENCE-BASE>
+      <SHORT-LABEL>myRB</SHORT-LABEL>
+      <PACKAGE-REF DEST="AR-PACKAGE">/R/S</PACKAGE-REF>
+    </REFERENCE-BASE>
+  </REFERENCE-BASES>
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>D</SHORT-NAME>
+      <ELEMENTS>
+        <APPLICATION-SW-COMPONENT-TYPE>
+          <SHORT-NAME>SWC</SHORT-NAME>
+          <PORTS>
+            <R-PORT-PROTOTYPE>
+              <SHORT-NAME>RP</SHORT-NAME>
+              <REQUIRED-INTERFACE-TREF DEST="NV-DATA-INTERFACE" BASE="myRB">O/NVI</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
+          </PORTS>
+        </APPLICATION-SW-COMPONENT-TYPE>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AR-PACKAGE>
+```
+
+引用的最终目标元素 NvDataInterface 见清单 F.29。
+
+清单F.29：ReferenceBase 引用最终目标元素的示例（DOC\_ExampleRelativeReferences07.arxml）
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>R</SHORT-NAME>
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>S</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>O</SHORT-NAME>
+          <ELEMENTS>
+            <NV-DATA-INTERFACE>
+              <SHORT-NAME>NVI</SHORT-NAME>
+            </NV-DATA-INTERFACE>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AR-PACKAGE>
+```
+
+使用 globalInPackage 引用附加包的示意见图 4.8。清单 F.30 包含 globalInPackage “/R/S”。此外，ApplicationSwComponentType 包含一个 desc，后者拥有指向 Chapter “Chap1” 的引用。
+
+清单F.30：使用 globalInPackage 的 ReferenceBase 示例（DOC\_ExampleRelativeReferences08.arxml）
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>C</SHORT-NAME>
+  <REFERENCE-BASES>
+    <REFERENCE-BASE>
+      <SHORT-LABEL>myRB</SHORT-LABEL>
+      <GLOBAL-IN-PACKAGE-REFS>
+        <GLOBAL-IN-PACKAGE-REF DEST="AR-PACKAGE">/R/S</GLOBAL-IN-PACKAGE-REF>
+      </GLOBAL-IN-PACKAGE-REFS>
+      <GLOBAL-ELEMENTS>
+        <GLOBAL-ELEMENT>CHAPTER</GLOBAL-ELEMENT>
+      </GLOBAL-ELEMENTS>
+      <PACKAGE-REF DEST="AR-PACKAGE">/L/M/N</PACKAGE-REF>
+    </REFERENCE-BASE>
+  </REFERENCE-BASES>
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>D</SHORT-NAME>
+      <ELEMENTS>
+        <APPLICATION-SW-COMPONENT-TYPE>
+          <SHORT-NAME>SWC</SHORT-NAME>
+          <DESC>
+            <L-2 L="EN">
+              <XREF>
+                <REFERRABLE-REF DEST="CHAPTER" BASE="myRB">Chap1</REFERRABLE-REF>
+              </XREF>
+            </L-2>
+          </DESC>
+          <PORTS>
+            <R-PORT-PROTOTYPE>
+              <SHORT-NAME>RP</SHORT-NAME>
+              <REQUIRED-INTERFACE-TREF DEST="NV-DATA-INTERFACE" BASE="myRB">O/NVI</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
+          </PORTS>
+        </APPLICATION-SW-COMPONENT-TYPE>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AR-PACKAGE>
+```
+
+globalInPackage 引用的最终目标元素——Chapter “Chap1”——见清单 F.31。
+
+清单F.31：使用 globalInPackage “/R/S/Comp/Chap1” 的 ReferenceBase 示例（DOC\_ExampleRelativeReferences08.arxml）
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>R</SHORT-NAME>
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>S</SHORT-NAME>
+      <ELEMENTS>
+        <APPLICATION-SW-COMPONENT-TYPE>
+          <SHORT-NAME>Comp</SHORT-NAME>
+          <SW-COMPONENT-DOCUMENTATIONS>
+            <SW-COMPONENT-DOCUMENTATION>
+              <CHAPTER>
+                <SHORT-NAME>Chap1</SHORT-NAME>
+              </CHAPTER>
+            </SW-COMPONENT-DOCUMENTATION>
+          </SW-COMPONENT-DOCUMENTATIONS>
+        </APPLICATION-SW-COMPONENT-TYPE>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AR-PACKAGE>
+```
