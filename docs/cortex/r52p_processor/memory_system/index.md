@@ -1015,3 +1015,36 @@ TCM 具有 ECC 逻辑，可以检测和纠正从 RAM 读取的数据中的单比
 * 7.1 Flash 接口超时。
 * 5.7 AXIM 接口超时。
 
+## 12. 外设内存映射
+
+**GIC Distributor** 寄存器和 **PMC-R52+** 寄存器可以使用内存映射地址访问，其物理基地址由 **CFGPERIPHBASE[31:21]** 指定。
+
+**CFGPERIPHBASE** 值在复位期间被采样到设备中每个内核的 **CBAR** 中。
+
+| 相对于 CFGPERIPHBASE[31:21] 的偏移范围 | 区域 |
+| --- | --- |
+| 0x000000-0x00FFFF | **Distributor** 寄存器（GICD_*）。 |
+| 0x010000-0x0FFFFF | **PMC-R52+** 寄存器。<br>• 当 **PMC** 参数设为 0 时：保留。<br>• 当 **PMC** 参数设为 1 时：用于编程集成 **PMC** 的基地址。 |
+| 0x100000-0x10FFFF | 用于控制目标 0 的 **Redistributor** 寄存器（GICR_*）。 |
+| 0x110000-0x11FFFF | 用于目标 0 的 SGIs 和 PPIs 的 **Redistributor** 寄存器（GICR_*）。 |
+| 0x120000-0x12FFFF | 用于控制目标 1 的 **Redistributor** 寄存器（GICR_*）。 |
+| 0x130000-0x13FFFF | 用于目标 1 的 SGIs 和 PPIs 的 **Redistributor** 寄存器（GICR_*）。 |
+| 0x140000-0x14FFFF | 用于控制目标 2 的 **Redistributor** 寄存器（GICR_*）。 |
+| 0x150000-0x15FFFF | 用于目标 2 的 SGIs 和 PPIs 的 **Redistributor** 寄存器（GICR_*）。 |
+| 0x160000-0x16FFFF | 用于控制目标 3 的 **Redistributor** 寄存器（GICR_*）。 |
+| 0x170000-0x17FFFF | 用于目标 3 的 SGIs 和 PPIs 的 **Redistributor** 寄存器（GICR_*）。 |
+| 0x180000-0x18FFFF | 用于控制目标 4 的 **Redistributor** 寄存器（GICR_*）。 |
+| 0x190000-0x19FFFF | 用于目标 4 的 SGIs 的 **Redistributor** 寄存器（GICR_*）。 |
+
+有关 **GIC Distributor** 的更多信息，请参阅第 284 页的 10.2 GIC 功能描述，以及第 285 页的 10.2.1 GIC Distributor 内存映射。
+
+有关 PMC-R52+ 的更多信息，请参阅第 653 页的 D. PMC-R52+。
+
+## 13. 在线 MBIST
+
+**Cortex®-R52+** 处理器支持在正常处理器执行期间使用 **MBIST** 接口进行 RAM 测试。这称为在线 MBIST（**on-line MBIST**）。
+
+在线内存测试通常用于安全关键型应用。在线 **MBIST** 使用 **PMC-R52+**，后者使用与生产 MBIST 测试相同的逻辑以及与 RAM 之间的数据路径。**PMC-R52+** 可以集成在系统中并连接到在线 **MBIST** 接口（当 **PMC** 配置参数设为 0 时），也可以在 **Cortex®-R52+** 集群内预先集成（当 **PMC** 配置参数设为 1 时）。
+
+有关 PMC-R52+ 的更多信息，请参阅第 653 页的 D. PMC-R52+。
+

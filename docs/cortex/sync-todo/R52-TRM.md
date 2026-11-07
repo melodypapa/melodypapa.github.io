@@ -17,6 +17,7 @@ Chapter span map (parse lines, incl. running headers — re-locate by title, fir
   - [ ] S1 [ ] S6 [ ] S7 (if changed) [ ] S8 (if changed)
 - [ ] memory_system — verify-only (article 362 ln, 13 `##` vs ch7, 2,932 ln)
   - Note (S6): article sections (TCM / L1 caches / AXIM / LLPP / Flash / AXIS / error handling / exclusive access / bus timeouts / peripherals map / MBIST) look chapter-complete; confirm no dropped section.
+  - Resolved 2026-11-07: 8.12 Peripherals memory map and 8.13 On-line MBIST are absent from the R52 TRM (ch7 ends at 7.11); sections 12/13 were restored from the Cortex-R52+ TRM (`R52/arm_cortex_r52plus_processor_trm_102199_0001_03_en.pdf`, ch8.12/8.13).
   - [ ] S1 [ ] S6 [ ] S7 (if changed) [ ] S8 (if changed)
 - [ ] ⏸ system_control — completion (article 236 ln vs ch3 System Control ~11.1k parse ln: 3.1 About / 3.2 Register summary / 3.3 AArch32 register descriptions — the largest single item in the corpus)
   - Note: >1500-line rule — segment the chapter (register groups) and agree the run plan before S2; deliberate overlap + dedupe at segment boundaries (RTE pattern) only if the user approves a multi-run scope.
