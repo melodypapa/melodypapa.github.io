@@ -9,12 +9,15 @@ Existing-article mappings (mapping.md, evidence re-checked at census): `arm_arch
 
 ## Queue
 
-- [ ] exception_model — verify/complete (article `m7_processor/programmers_model/`, 333 ln, 5 imgs vs B1.5 subset of a 4,344-ln chapter)
-  - Note (S1): confirm the B1.5 boundary first (mapping.md evidence `Figure2-1/2-2`/`Table2-14-1` carries *(verify)*); missing exception-model sections (fault handling, locking) translate in place.
-  - [ ] S1 [ ] S2 (gaps only) [ ] S3 [ ] S5 [ ] S6 [ ] S7 (if changed) [ ] S8 (if changed)
-- [ ] protected_memory_system_archi_pmsav7 — verify-only (article `m7_processor/mpu/` sections 4–14, 13 imgs vs B3.5)
-  - Note (S6): article covers PMSAv7 concept → MPU registers (MPU_TYPE…MPU_RASR + aliasing) — confirm against B3.5 subsection list; record evidence.
-  - [ ] S1 [ ] S6 [ ] S7 (if changed) [ ] S8 (if changed)
+- [x] exception_model — completed (article `m7_processor/programmers_model/index.md`, 1,834 ln, 5 imgs vs B1.5 of the 4,344-ln chapter B1)
+  - S1 result: mapping confirmed at the figure/table evidence — `Figure2-1`/`Figure2-2`/`Table 2-14` are TRM ch2 derivatives, and the exception-model prose aligns with B1.5.1–B1.5.19, so the page was completed in place against B1.5.
+  - S2 result: §6–§8 kept (TRM ch2 front matter, aligned to B1.5.1 and completed: DebugMonitor inserted, disable/escalation notes, ICSR control bits, 496 external interrupts), §9 异常编号定义 (Table B1-4) added, §10 向量表 completed (Table B1-5), §11 异常优先级与抢占 (Table B1-6), §12 中断优先级分组 (Table B1-7), §13 执行优先级与优先级提升 (Example B1-1, ExecutionPriority pseudocode, priority escalation, SVCall/PendSV model), §14 复位行为 (TakeReset), §15 异常进入和返回 (ExceptionEntry/PushStack/ExceptionTaken/ReturnAddress/UpdateFPCCR, stack alignment, EXC_RETURN Tables B1-8/B1-9, ExceptionReturn/DeActivate/PopStack), §16–§26 = B1.5.9–B1.5.19, §27 参考文献.
+  - S3 result: `FigureB1-3.png` (p536) and `FigureB1-4.png` (p538) cropped; all six numbered tables (B1-4…B1-9) and the three unnumbered fault tables rendered as GFM.
+  - [x] S1 [x] S2 (gaps only) [x] S3 [x] S5 [x] S6 [ ] S7 (if changed) [ ] S8 (if changed)
+- [x] protected_memory_system_archi_pmsav7 — verified (article `m7_processor/mpu/index.md`, 611 ln, 5 bit-field images vs B3.5)
+  - S1 result: structure matches B3.5 exactly — `## 4.` ← B3.5 intro, `## 5.` ← B3.5.1, `## 6.` ← B3.5.2, `## 7.` ← B3.5.3 (7.1 sub-region / 7.2 Armv7-M specific / 7.3 MPU pseudocode / 7.4 MPU fault support), `## 8.` ← B3.5.4, `## 9.` ← B3.5.5 MPU_TYPE, `## 10.` ← B3.5.6 MPU_CTRL (10.3 = TRM-derived non-privileged instruction impact), `## 11.` ← B3.5.7 MPU_RNR, `## 12.` ← B3.5.8 MPU_RBAR, `## 13.` ← B3.5.9 MPU_RASR (13.3 sub-regions / 13.4 attributes / 13.5 XN), `## 14.` ← B3.5.10 alias support.
+  - S6 result: Tables B3-11…B3-16 all present as GFM; the 5 images are bit-field bars, which stay images. Three defects fixed: stray `**` on the `XN：MPU_RASR[28]` bullet (broken bold run), garbled Table B3-12 lead sentence, garbled Region 0–15 alias sentence.
+  - [x] S1 [x] S6 [ ] S7 (if changed) [ ] S8 (if changed)
 - [ ] system_address_map — completion (article 157 ln vs B3.1–B3.4; B3.4 NVIC detail overlaps the `nvic` article — decide the split boundary at S1 and record it)
   - [ ] S1 [ ] S2 [ ] S3 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] ⏸ arm_architecture_memory_mode — completion (article 493 ln vs A3 The Memory Model, 2,039 ln — >1500-line rule: present the run plan first)
