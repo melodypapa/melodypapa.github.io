@@ -12,7 +12,7 @@ Chapter span map (parse lines, incl. running headers): ch1 Introduction L482–1
   - Note: live defect — `## ARM=-0987654321   yhn 4esx1` under §1 指令集总结; replace with a proper heading (or drop if it duplicates §1). Content alignment to the Armv7-M instruction chapters is tracked in [ARMv7-M](ARMv7-M.md); this row is the 1-line hygiene fix only, can ride any other M7 row's PR.
   - [x] S1 (heading target) [x] S2 [x] S5 [x] S8
 - [x] nvic — completion (M7 TRM ch7 NVIC, 242 ln; article = 26-ln stub `m7_processor/nested_vectored_interrupt_controller/`)
-  - Note (S1): source ch7 L4404–4645; architectural cross-check Armv7-M B3.4 NVIC (`.private/ARM/M7/DDI0403E_e_armv7m_arm.md`, B3 = L34504–38282). TRM = implementation (priorities, interrupt interfaces), ARM = architectural rules; state the choice in the PR.
+  - Note (S1): source ch7 L4404–4645; architectural cross-check Armv7-M B3.4 NVIC (`private-docs/ARM/M7/DDI0403E_e_armv7m_arm.md`, B3 = L34504–38282). TRM = implementation (priorities, interrupt interfaces), ARM = architectural rules; state the choice in the PR.
   - Note: `docs/cortex/index.md` M7 list misses the NVIC link — add in this run (skill Step 7). mkdocs nav already registers the page.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] program_status_register — completion/alignment (M7 TRM ch2.6 Processor core registers + ch2.7 Exceptions; article 86 ln `m7_processor/program_status_register/`)
