@@ -265,12 +265,12 @@ nav:
       - "故障检测与处理": cortex/m7_processor/fault_detection/index.md
       - "术语表": cortex/m7_processor/glossary/index.md
     - Cortex-R52+ 内核:
-
-      - "时钟与复位": cortex/r52p_processor/clocking_and_resets/index.md
-      - "内存保护单元": cortex/r52p_processor/memory_protection_unit/index.md
-      - "内存系统": cortex/r52p_processor/memory_system/index.md
       - "Cortex®-R52+ 程序员模型": cortex/r52p_processor/programmers_model/index.md
       - "系统控制": cortex/r52p_processor/system_control/index.md
+      - "时钟与复位": cortex/r52p_processor/clocking_and_resets/index.md
+      - "初始化": cortex/r52p_processor/initialization/index.md
+      - "内存系统": cortex/r52p_processor/memory_system/index.md
+      - "内存保护单元": cortex/r52p_processor/memory_protection_unit/index.md
   - AUTOSAR:
     - autosar/index.md
     - "术语表": autosar/glossary.md

@@ -24,8 +24,9 @@ Chapter span map (parse lines, incl. running headers — re-locate by title, fir
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] ch4 → new article (Clocking and Resets, 364 ln; e.g. `clocking_and_resets/`)
   - [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] ch6 → new article (Initialization, 304 ln; e.g. `initialization/`)
-  - [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] ch6 → new article `r52p_processor/initialization/` (Initialization, 304 ln; 6.1 Initialization + 6.1.1 MPU / 6.1.2 FPU / 6.1.3 Caches, 6.2 TCM + 6.2.1-6.2.3, 6.3 Booting into EL1 — no figures, no tables)
+  - Note (S1): the mirror moved from `private-docs/ARM/` to `reference-docs/arm/cortex-r52/`; the parse loses the whole 6.1 body (heading only), so that section was read from the PDF pages 6-201 to 6-204. Nav and landing reordered to chapter order while inserting the new page.
+  - [x] S1 [x] S2 [x] S3 (n/a — no figures) [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] ch5 → new article (Power Management, 620 ln; e.g. `power_management/`)
   - [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] ch10 → new article (Generic Timer, 344 ln; e.g. `generic_timer/`)
