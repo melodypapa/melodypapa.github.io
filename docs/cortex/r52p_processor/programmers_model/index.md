@@ -35,9 +35,9 @@ title: "Cortex®-R52+ 程序员模型（Programmers Model）"
 
 ### 1.2. 通用中断控制器
 
-**Cortex®-R52+** 处理器不支持以下 **GIC** 版本3的功能：
+**Cortex®-R52+** 处理器不支持以下 **GIC** 版本 3 的功能：
 
-* 1 of N 中断分配（**1of N interrupt distribution**）。
+* 1 of N 中断分配（**1 of N interrupt distribution**）。
 * 特定于位置的外设中断（**Locality-specific Peripheral Interrupts**） (LPI)。
 * 中断转换服务（**Interrupt Translation Service**） (ITS)。
 
@@ -52,7 +52,7 @@ title: "Cortex®-R52+ 程序员模型（Programmers Model）"
 
 ### 1.4. 指令集状态
 
-处理器操作由 PSTATE.T 位控制的两个指令集状态：
+处理器操作由 **CPSR.T** 位控制的两个指令集状态：
 
 * **A32**：处理器执行 32 位、字对齐(**word-aligned**)的 A32 指令。
 * **T32**：处理器执行 16 位和 32 位、半字对齐(**halfword-aligned**)的 T32 指令。
@@ -93,7 +93,7 @@ title: "Cortex®-R52+ 程序员模型（Programmers Model）"
 * 支持的寄存器宽度。
 * 支持的指令集。
 * 重要方面：
-  * 执行模型。7
+  * 执行模型。
   * PMSA。
   * 程序员模型。
 
@@ -110,7 +110,7 @@ Armv8-R AArch32 异常模型定义了异常级别 EL0-EL2，其中：
 * 发生异常时，异常级别要么增加，要么保持不变。发生异常时，异常级别不能降低。
 * 从异常返回时，异常级别要么降低，要么保持不变。从异常返回时，异常级别不能增加。
 
-发生异常时，执行更改到（execution changes to）或保持（reminds in）或正发生的异常级别称为异常的目标异常级别，并且：
+发生异常时，执行更改到（**execution changes to**）或保持（**remains in**）的异常级别称为异常的目标异常级别，并且：
 
 * 每种异常类型都有一个目标异常级别，该级别可以是：
   * 隐含在异常的性质中。
@@ -186,7 +186,7 @@ Armv8 架构将设备内存（**Device memory**）细分为几种子类型。这
 | 内存类型 | 注释                                                                                                           |
 | -------- | -------------------------------------------------------------------------------------------------------------- |
 | GRE      | 与 Normal 不可缓存（**Normal non-cacheable**）类似，但不允许推测访问（**speculative access**）。               |
-| nGRE     | 在 Cortex®-R52+ 处理器中被视为**nGnRE**，但可以通过外部互连（b）重新排序。                                     |
+| nGRE     | 在 Cortex®-R52+ 处理器中被视为 **nGnRE**，但可以通过外部互连重新排序。                                          |
 | nGnRE    | 对应于 Armv7 中的设备。                                                                                        |
 | nGnRnE   | 对应于 Armv7 中的强排序。在 Cortex®-R52+ 处理器中与 nGnRE 相同，但在 **ARCACHE** 或 **AWCACHE** 上的报告不同。 |
 
@@ -231,7 +231,7 @@ Armv8 架构将设备内存（**Device memory**）细分为几种子类型。这
 * 在中止模式（abort mode）下，对 SP 的访问会访问物理寄存器 SP_abt。
 * 在用户模式（user mode）下，对 SP 的访问会访问物理寄存器 SP_usr。
 
-在超级visor模式（Hypervisor mode）下，还有一个专用的链接寄存器 ELR_hyp。
+在虚拟机管理程序模式（**Hypervisor mode**）下，还有一个专用的链接寄存器 ELR_hyp。
 
 高级 SIMD 和浮点指令使用另一组寄存器。这些寄存器可以作为 32 位单精度寄存器 S0-S31、64 位双精度寄存器 D0-D31 或 128 位四字寄存器 Q0-Q15 访问，但它们是同一数据的不同视图。数据可以在高级 SIMD 和浮点寄存器与整数寄存器之间传输。
 

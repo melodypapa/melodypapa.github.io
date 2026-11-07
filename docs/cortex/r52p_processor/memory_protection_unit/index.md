@@ -13,9 +13,9 @@ title: "内存保护单元（Memory Protection Unit）"
 
 每个内存区域定义了基地址（**base address**）、限制地址（**limit address**）、访问权限（**access permissions**）和内存属性（**memory attributes**）。
 
-有关 MPU 的更多信息，请参阅 Arm® 架构Armv8补充参考手册 （**Arm® Architecture Reference Manual Supplement Armv8**），了解更多 **Armv8-R AArch32** 架构配置文件。
+有关 MPU 的更多信息，请参阅《Arm® 架构参考手册补充 Armv8》（**Arm® Architecture Reference Manual Supplement Armv8**），了解更多 **Armv8-R AArch32** 架构配置文件。
 
-对于数据访问，MPU 检查当前转换机制（**current translation regime**）是否允许对某个区域进行访问（读取或写入）。对于指令访问，MPU 检查该区域是否允许访问，以及转换机制是否允许执行。对于数据和指令访问，如果允许访问，MPU 将分配为该区域定义的内存属性。如果不允许访问，则发生权限错误。发生转换错误的原因如下：
+对于数据访问，MPU 检查当前转换机制（**current translation regime**）是否允许对某个区域进行访问（读取或写入）。对于指令访问，MPU 检查该区域是否允许访问，以及转换机制是否允许执行。对于数据和指令访问，如果允许访问，MPU 将分配为该区域定义的内存属性。如果不允许访问，则发生权限错误。发生转换故障的原因如下：
 
 * 如果访问命中其中一个 **MPU** 中的多个区域。
 * 如果访问未命中任何 **MPU** 区域，并且无法使用背景区域（基于 **MPU** 配置和当前特权级别）。
@@ -26,7 +26,7 @@ title: "内存保护单元（Memory Protection Unit）"
 
 ## 2. MPU 区域
 
-区域是从基地址（**base address**）开始延伸到限制地址（**limit address**）（包括：限制地址）的连续地址范围。
+区域是从基地址（**base address**）开始延伸到限制地址（**limit address**）（包含限制地址）的连续地址范围。
 
 基地址由 **PRBAR** （**EL2** 控制的 **MPU** 的 **HPBAR**）配置。限制地址由 **PRLAR**（**EL2** 控制的 **MPU** 的 **HPRLAR**）配置。基地址与 **64** 字节边界对齐，限制地址与 **64** 字节边界以下的字节对齐。基地址和限制地址都包括在内，这意味着区域内的地址由以下公式给出：
 
@@ -34,9 +34,9 @@ title: "内存保护单元（Memory Protection Unit）"
 PRBAR.BASE:0b000000 <= address <= PRLAR.LIMIT:0b111111
 ```
 
-其中冒号（**：**）是位连接运算符。
+其中冒号（`:`）是位连接运算符。
 
-区域的最小为 **64** 个字节。
+区域的最小大小为 **64** 个字节。
 
 **PRBAR** 和 **PRLAR** 还包含：
 
@@ -584,7 +584,7 @@ MRC p15, 0, <Rt>, c0, c0, 4 ; 将 MPUIR 读入 Rt
 | 0b1100 | Device-GRE 内存 | 普通内存，内部回写非瞬态（RW=00） |
 | 0b11RW，RW 不为 00 | **UNPREDICTABLE** | 普通内存，内部回写非瞬态 |
 
-下表显示了第 174 页表 4-163：Attr<n>[7:4] 位分配和第 174 页表 4-164：Attr<n>[3:0] 位分配中的某些 Attr<n> 编码中使用的 R 和 W 位的编码，分别用于定义读取分配和写入分配策略。
+下表显示了第 3-148 页表 3-106：Attr<n>[7:4] 位分配和表 3-107：Attr<n>[3:0] 位分配中的某些 Attr<n> 编码中使用的 R 和 W 位的编码，分别用于定义读取分配和写入分配策略。
 
 | R 或 W | 描述 |
 | --- | --- |

@@ -18,15 +18,15 @@ title: "系统地址映射"
 
 该体系结构分配物理地址以用作事件入口点（向量）、系统控制（**system control**）和配置。事件入口点（**event entry points**）都是相对于表基地址定义的，在复位时配置为实现定义（**IMPLEMENTATION DEFINED**）的值，然后维护在为系统配置和控制保留的地址空间中。为了满足这个和其他系统需求，地址空间**0xE0000000**到**0xFFFFFFFF**被保留供系统级使用。
 
-表 **B3-1** 显示了 **Armv7-M** 默认地址映射，以及该映射中内存区域的属性。在[此表](#11-表b3-1-armv7-m-地址映射)以及[表B3-2](#12-表b3-2-armv7-m-地址映射的system区域细分)中。
+表 **B3-1** 显示了 **Armv7-M** 默认地址映射，以及该映射中内存区域的属性。以下说明适用于[此表](#11-表b3-1-armv7-m-地址映射)以及[表B3-2](#12-表b3-2-armv7-m-地址映射的system区域细分)。
 
-* **XN**表示从非执行区域。任何从**XN**区域执行代码的尝试都会出错，从而生成**MemManage**的异常。
+* **XN** 表示执行从不（**Execute Never**）。任何从 **XN** 区域执行代码的尝试都会出错，从而生成 **MemManage** 异常。
 * 缓存列（**Cache column**）表示普通内存区域的缓存策略，用于内部和外部缓存，以支持系统缓存。声明的缓存类型可以降级但不能提升，如下所示：
   * WT   : 直写（**Write-Through**）。可以被视为非缓存（**non-cached**）。
   * WBWA : 回写（**Write-Back**）写分配（**write allocate**），可被视为直写（**Write-Through**）或者非缓存（**non-cached**）。
 * 在设备栏（**Device column**）中：
   * Shareable: 表示该区域支持多个代理在一致的内存域中共享使用。这些代理可以是处理器和 DMA 代理的任意组合。
-  * SO       ：表示强秩序内存。强秩序内存始终是可共享的。
+  * SO       ：表示强秩序内存（**Strongly-ordered**）。强秩序内存始终是可共享的。
 * 指定地址空间的哪些部分由实现定义（**IMPLEMENTATION DEFINED**）：
   * 可读可写（**Read/Write**）。
   * 只读（**Read-only**）。例如：闪存空间。
@@ -35,16 +35,16 @@ title: "系统地址映射"
 
 ### 1.1. 表B3-1 Armv7-M 地址映射
 
-| Address                 | Name       | Device type           | XN? | Cache | Description                                                                     |
-| ----------------------- | ---------- | --------------------- | --- | ----- | ------------------------------------------------------------------------------- |
-| 0x00000000 - 0x1FFFFFFF | Code       | Normal                | -   | WT    | Typically ROM or flash memory.                                                  |
-| 0x20000000 - 0x3FFFFFFF | SRAM       | Normal                | -   | WBWA  | SRAM region typically used for on-chip RAM.                                     |
-| 0x40000000 - 0x5FFFFFFF | Peripheral | Device                | XN  | -     | On-chip peripheral address space.                                               |
-| 0x60000000 - 0x7FFFFFFF | RAM        | Normal                | -   | WBWA  | Memory with write-back, write allocate cache attribute for L2/L3 cache support. |
-| 0x80000000 - 0x9FFFFFFF | RAM        | Normal                | -   | WT    | Memory with Write-Through cache attribute.                                      |
-| 0xA0000000 - 0xBFFFFFFF | Device     | Device, shareable     | XN  | -     | Shared device space.                                                            |
-| 0xC0000000 - 0xDFFFFFFF | Device     | Device, Non-shareable | XN  | -     | Non-shared device space.                                                        |
-| 0xE0000000 - 0xFFFFFFFF | System     | See Description       | XN  | -     | System segment for the PPB and vendor system peripherals, see Table B3-2.       |
+| 地址 | 名称 | 设备类型 | XN？ | 缓存 | 说明 |
+| --- | --- | --- | --- | --- | --- |
+| 0x00000000 - 0x1FFFFFFF | Code | Normal | - | WT | 通常为 ROM 或闪存。 |
+| 0x20000000 - 0x3FFFFFFF | SRAM | Normal | - | WBWA | SRAM 区域，通常用于片上 RAM。 |
+| 0x40000000 - 0x5FFFFFFF | Peripheral | Device | XN | - | 片上外设地址空间。 |
+| 0x60000000 - 0x7FFFFFFF | RAM | Normal | - | WBWA | 具有回写、写分配缓存属性，用于支持 L2/L3 缓存的内存。 |
+| 0x80000000 - 0x9FFFFFFF | RAM | Normal | - | WT | 具有直写缓存属性的内存。 |
+| 0xA0000000 - 0xBFFFFFFF | Device | Device, shareable | XN | - | 共享设备空间。 |
+| 0xC0000000 - 0xDFFFFFFF | Device | Device, Non-shareable | XN | - | 非共享设备空间。 |
+| 0xE0000000 - 0xFFFFFFFF | System | 见说明 | XN | - | 用于 PPB 和供应商系统外设的系统段，参见表 B3-2。 |
 
 内存映射的系统区域，从 0xE0000000 开始，细分如下：
 
@@ -60,10 +60,10 @@ title: "系统地址映射"
 
 ### 1.2. 表B3-2 Armv7-M 地址映射的System区域细分
 
-| Address                 | Name       | Memory type      | XN? | Description                                                                                                          |
-| ----------------------- | ---------- | ---------------- | --- | -------------------------------------------------------------------------------------------------------------------- |
-| 0xE0000000 - 0xE00FFFFF | PPB        | Strongly-ordered | XN  | 1MB region reserved as the PPB. This supports key resources, including the System Control Space, and debug features. |
-| 0xE0100000 - 0xFFFFFFFF | Vendor_SYS | Device           | XN  | Vendor system region, see the Arm recommendations in this section.                                                   |
+| 地址 | 名称 | 内存类型 | XN？ | 说明 |
+| --- | --- | --- | --- | --- |
+| 0xE0000000 - 0xE00FFFFF | PPB | Strongly-ordered | XN | 保留为 PPB 的 1MB 区域。它支持关键资源，包括系统控制空间和调试功能。 |
+| 0xE0100000 - 0xFFFFFFFF | Vendor_SYS | Device | XN | 供应商系统区域，参见本节中的 Arm 建议。 |
 
 支持识别非特权和特权访问的软件模型需要内存保护方案来控制访问权限。受保护的内存系统架构 (**PMSAv7**) 是提供此类方案的可选系统级功能，请参阅受保护的内存系统架构**PMSAv7**，**PMSAv7**的实现提供了内存保护单元 (**MPU**)。
 
@@ -87,14 +87,13 @@ title: "系统地址映射"
 
 * 该区域被定义为强秩序内存，请参阅[强秩序内存](../arm_architecture_memory_mode/index.md#156-强秩序内存strongly-ordered-memory)和[内存访问限制](../arm_architecture_memory_mode/index.md#157-内存访问限制)。
 * 无论处理器的字节序状态如何，寄存器访问总是小端字节序（**little endian**）。
-* 一般来说，除非另有说明，寄存器仅支持字访问，字节和半字访问不可预测。优先级和故障状态寄存器是影响不同资源的字节对齐位字段的串联。这样的寄存器可以作为字节或半字寄存器访问，具有适当的
-与 32 位寄存器基地址的地址偏移量。
+* 一般来说，除非另有说明，寄存器仅支持字访问，字节和半字访问不可预测。优先级和故障状态寄存器是影响不同资源的字节对齐位字段的串联。这样的寄存器可以作为字节或半字寄存器访问，具有适当的相对于 32 位寄存器基地址的地址偏移量。
 
 **注意：**
 
 只有当本手册中的寄存器描述明确声明它支持这些访问时，一个寄存器才支持字节和半字访问。
 
-* 当一个位被定义为在读取时被清除为0（**being cleared to 0 on a read**）。当读取该位与将该位设置为1的事件同时发生时，当前架构保证以下原子行为：
+* 当一个位被定义为读取时清零为 0（**being cleared to 0 on a read**）时，如果读取该位与将该位设置为 1 的事件同时发生，架构保证以下原子行为：
   * 如果该位读取为1，则读操作将该位清除为0。
   * 如果该位读取为0，则事件将该位设置为1。随后对该位的读取将返回1并将该位清除为 0。
 * 保留的寄存器或位域必须被视为**UNK/SBZP**。

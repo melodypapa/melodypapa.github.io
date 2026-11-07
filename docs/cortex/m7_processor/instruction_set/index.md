@@ -7,7 +7,7 @@ title: "Cortex-M7 指令集"
 
 ## 1. 指令集总结
 
-处理器实现了一个版本的 **Thumb** 指令集。 表 **3-1** 列出了支持的指令。
+处理器实现了一个版本的 **Thumb** 指令集。下表列出了支持的指令。
 
 | 助记符 | 操作数 | 简要说明 | 标志位 |
 | --- | --- | --- | --- |
@@ -31,7 +31,7 @@ title: "Cortex-M7 指令集"
 | CLZ | Rd, Rm | 统计前导零个数 | - |
 | CMN | Rn, Op2 | 比较取负 | N,Z,C,V |
 | CMP | Rn, Op2 | 比较 | N,Z,C,V |
-| CPS | Rd, Rn | 更改处理器状态 | - |
+| CPS | <effect> <iflags> | 更改处理器状态 | - |
 | CPY | Rd, Rn | 复制 | - |
 | DMB | {opt} | 数据内存屏障 | - |
 | DSB | {opt} | 数据同步屏障 | - |
@@ -63,17 +63,17 @@ title: "Cortex-M7 指令集"
 | LDRSH | Rt, label | 以有符号半字加载寄存器（PC 相对） | - |
 | LSL, LSLS | Rd, Rm, <Rs\| #n> | 逻辑左移 | N,Z,C |
 | LSR, LSRS | Rd, Rm, <Rs\| #n> | 逻辑右移 | N,Z,C |
-| MLA | Rd, Rn, Rm, Ra | 带累加的乘法，32 位结果 | N,Z |
+| MLA | Rd, Rn, Rm, Ra | 带累加的乘法，32 位结果 | - |
 | MLS | Rd, Rn, Rm, Ra | 乘减，32 位结果 | - |
 | MOV, MOVS | Rd, Op2 | 移动 | N,Z,C |
 | MOV, MOVS | Rd, Rm | 移动（寄存器） | N,Z |
 | MOVT | Rd, #imm16 | 移动高半字 | - |
-| MOVW | Rd, #imm16 | 移动 16 位常量 | N,Z,C |
+| MOVW | Rd, #imm16 | 移动 16 位常量 | - |
 | MRS | Rd, spec_reg | 从特殊寄存器移动到通用寄存器 | - |
 | MSR | spec_reg, Rn | 从通用寄存器移动到特殊寄存器 | - |
 | MUL, MULS | {Rd,} Rn, Rm | 乘法，32 位结果 | N,Z |
 | MVN, MVNS | Rd, Op2 | 按位取反 | N,Z,C |
-| NEG | {Rd,} Rm | 取负 | - |
+| NEG | {Rd,} Rm | 取负 | N,Z,C,V |
 | NOP | - | 空操作 | - |
 | ORN, ORNS | {Rd,} Rn, Op2 | 按位或非 | N,Z,C |
 | ORR, ORRS | {Rd,} Rn, Op2 | 按位或 | N,Z,C |
@@ -116,6 +116,7 @@ title: "Cortex-M7 指令集"
 | SMLAD, SMLADX | Rd, Rn, Rm, Ra | 双路有符号乘累加 | Q |
 | SMLAL | RdLo, RdHi, Rn, Rm | 有符号长乘累加（32 × 32 + 64），64 位结果 | - |
 | SMLALBB, SMLALBT, SMLALTB, SMLALTT | RdLo, RdHi, Rn, Rm | 半字有符号长乘累加 | - |
+| SMLALD, SMLALDX | RdLo, RdHi, Rn, Rm | 双路有符号长乘累加 | - |
 | SMLAWB, SMLAWT | Rd, Rn, Rm, Ra | 半字有符号乘累加（字 × 半字） | Q |
 | SMLSD, SMLSDX | Rd, Rn, Rm, Ra | 双路有符号乘减 | Q |
 | SMLSLD, SMLSLDX | RdLo, RdHi, Rn, Rm | 双路有符号长乘减 | - |
@@ -123,6 +124,7 @@ title: "Cortex-M7 指令集"
 | SMMLS, SMMLSR | Rd, Rn, Rm, Ra | 有符号最高字乘减 | - |
 | SMMUL, SMMULR | {Rd,} Rn, Rm | 有符号最高字乘法 | - |
 | SMUAD, SMUADX | {Rd,} Rn, Rm | 双路有符号乘加 | Q |
+| SMULL | RdLo, RdHi, Rn, Rm | 有符号长乘法，64 位结果 | - |
 | SMULBB, SMULBT, SMULTB, SMULTT | {Rd,} Rn, Rm | 半字有符号乘法 | - |
 | SMULWB, SMULWT | {Rd,} Rn, Rm | 字 × 半字有符号乘法 | - |
 | SMUSD, SMUSDX | {Rd,} Rn, Rm | 双路有符号乘减 | - |
@@ -131,6 +133,7 @@ title: "Cortex-M7 指令集"
 | SSUB16 | {Rd,} Rn, Rm | 有符号 16 位减法 | GE |
 | SSUB8 | {Rd,} Rn, Rm | 有符号 8 位减法 | GE |
 | STM, STMIA, STMEA | Rn{!}, reglist | 存储多个寄存器 | - |
+| STMDB, STMFD | Rn{!}, reglist | 存储多个寄存器，先减 | - |
 | STR, STRT | Rt, [Rn, #offset] | 以字存储寄存器（立即数偏移，非特权） | - |
 | STRB, STRBT | Rt, [Rn, #offset] | 以字节存储寄存器（立即数偏移，非特权） | - |
 | STRD | Rt, Rt2, [Rn, #offset] | 以双字存储寄存器（立即数偏移） | - |
@@ -139,7 +142,7 @@ title: "Cortex-M7 指令集"
 | SUB, SUBW | {Rd,} Rn, #imm12 | 减法 | - |
 | SVC | #imm24 | 主管调用 | - |
 | SXTB | Rd, Rm {, rotation} | 有符号字节扩展 | - |
-| SXTB16 | {Rd,} Rm {, rotation} | 有符号字节 16 扩展 | - |
+| SXTB16 | Rd, Rm {, rotation} | 有符号字节 16 扩展 | - |
 | SXTAB | {Rd,} Rn, Rm {, rotation} | 有符号字节扩展并相加 | - |
 | SXTAB16 | {Rd,} Rn, Rm {, rotation} | 有符号字节 16 扩展并相加 | - |
 | SXTAH | {Rd,} Rn, Rm {, rotation} | 有符号半字扩展并相加 | - |
@@ -160,7 +163,7 @@ title: "Cortex-M7 指令集"
 | UHSAX | {Rd,} Rn, Rm | 带交换的无符号减半减加 | - |
 | UHSUB16 | {Rd,} Rn, Rm | 无符号减半 16 位减法 | - |
 | UHSUB8 | {Rd,} Rn, Rm | 无符号减半 8 位减法 | - |
-| UMAAL | RdLo, RdHi, Rn, Rm | 无符号长乘累加累加 | - |
+| UMAAL | RdLo, RdHi, Rn, Rm | 无符号长乘双累加 | - |
 | UMLAL | RdLo, RdHi, Rn, Rm | 无符号长乘累加（32 × 32 + 64），64 位结果 | - |
 | UMULL | RdLo, RdHi, Rn, Rm | 无符号长乘法，64 位结果 | - |
 | UQADD16 | {Rd,} Rn, Rm | 无符号饱和 16 位加法 | - |
@@ -169,7 +172,7 @@ title: "Cortex-M7 指令集"
 | UQSAX | {Rd,} Rn, Rm | 带交换的无符号饱和减加 | - |
 | UQSUB16 | {Rd,} Rn, Rm | 无符号饱和 16 位减法 | - |
 | UQSUB8 | {Rd,} Rn, Rm | 无符号饱和 8 位减法 | - |
-| USAD8 | {Rd,} Rn, Rm | 无符号绝对差之和 | - |
+| USAD8 | Rd, Rn, Rm | 无符号绝对差之和 | - |
 | USADA8 | Rd, Rn, Rm, Ra | 无符号绝对差之和并累加 | - |
 | USAT | Rd, #imm, Rn {, shift} | 无符号饱和 | C,Q |
 | USAT16 | Rd, #imm, Rn | 16 位无符号饱和 | Q |
@@ -179,7 +182,7 @@ title: "Cortex-M7 指令集"
 | UXTAB16 | {Rd,} Rn, Rm {, rotation} | 无符号字节 16 扩展并相加 | - |
 | UXTAH | {Rd,} Rn, Rm {, rotation} | 无符号半字扩展并相加 | - |
 | UXTB | Rd, Rm {, rotation} | 无符号字节扩展 | - |
-| UXTB16 | {Rd,} Rm {, rotation} | 无符号字节 16 扩展 | - |
+| UXTB16 | Rd, Rm {, rotation} | 无符号字节 16 扩展 | - |
 | UXTH | Rd, Rm {, rotation} | 无符号半字扩展 | - |
 | VABS | Sd, Sm | 浮点绝对值 | - |
 | VADD | Sd, Sn, Sm | 浮点加法 | - |
