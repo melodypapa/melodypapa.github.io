@@ -28,7 +28,7 @@
 | 14 | [Group-rte-swarch.md](Group-rte-swarch.md) | 2 | **batch confirmed 2026-11-06 (2/2)** — RTE finishing pass (ch.7 figures + source 4.3–4.10 gap translation §6.2.3–§6.2.10 + glossary +93+5 + links 721 ln) + ARTI SWS new article (2,936 ln) |
 | 15 | [Group-communication-2.md](Group-communication-2.md) | 38 | **18/38 done 2026-11-01** (Spi/LdCom/LsDu/Dlt/DoIp/XCP/CanXL×2/EthTrcv/WEth×2/FlexRay×7 + flexray_iso_tp this branch) — remaining: LinSM/LinTrcv/TTCAN×2/J1939×3/IEEE1722/MACsec/CellularV2X/ChargingManager/ChineseV2X×4/V2X×5 |
 | 16 | [Group-exp.md](Group-exp.md) | 20 | 20 missing EXP guides (the TPS template is exempt and not queued, same flow) |
-| 17 | [Group-foundation-exp.md](Group-foundation-exp.md) | 20 | **Foundation guides/templates/reports** (EXP 5 / TR 6 / TPS 8 / ASWS 1) — document-type counterpart of CP's Group-exp; 1 in-flight (TR Glossary, ch.4 14/343 terms); size-ascending |
+| 17 | [Group-foundation-exp.md](Group-foundation-exp.md) | 20 | **20/20 complete 2026-11-08** (EXP 5 / TR 6 / TPS 8 / ASWS 1) — document-type counterpart of CP's Group-exp; last row tps_generic_structure_template (15,110-line giant) delivered 2026-11-08 |
 | 18 | [Group-foundation-rs-prs.md](Group-foundation-rs-prs.md) | 32 | **Foundation requirement/protocol specifications** (RS 23 / PRS 9) — size-ascending; the RS/PRS item-ID keep-or-drop decision is recorded in the file header |
 | 19 | [Group-cp-methodology.md](Group-cp-methodology.md) | 17 | **CP 方法论与模板** — the `MethodologyAndTemplates` folder (RS 6 / TPS 7 / TR 4), size-ascending; 1 existing-article alignment row (BSWMDT) + 16 new articles; the item-ID decision proposed in the file header is confirmed at the first run's Step 1 |
 
