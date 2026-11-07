@@ -8061,7 +8061,7 @@ AUTOSAR 中有两种不同的段落类型。它们的差别只在于可以包含
 
 另参见 MixedContentForParagraph。
 
-#### 9.2.2. Verbatim
+#### 9.2.2. 原样文本（Verbatim）
 
 **Verbatim 的用途**
 
