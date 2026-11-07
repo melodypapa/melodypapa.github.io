@@ -950,3 +950,1790 @@ AUTOSAR 元模型使用一些抽象类来表示与模型组织相关的各种能
 - `ARElement`、`FibexElement` 可以包含从 `Identifiable` 派生的更多元素。
 
 > **3** 尽管如此，AUTOSAR 元模型中并不出现这样的 `Referrable` 嵌套。
+
+## 4. 通用模板类
+
+下文给出的通用模板类，其性质类似于编译器的标准库：一组预定义的结构和元素，供 AUTOSAR 模板模型使用。
+
+### 4.1. ARObject——所有类的公共属性
+
+**ARObject**
+
+`ARObject` 是被所有其他元类继承的一个元类。
+
+相关模式如图 6.9 所示。
+
+另参见 ARObject。
+
+### 4.2. AUTOSAR 中的包
+
+AUTOSAR M1 模型可以组织为若干个包，由类 `ARPackage` 表示。它允许把模型元素放在一起，例如以一个 OEM 或项目特定的包的形式，包含诸如风窗刮水器软件组件之类的实体。
+
+自聚合（角色 `arPackage`）表明包实际上可以包含其他包。除此之外，一个包可以包含任意数量的元素，由抽象类 `ARElement` 表示。这样的 AUTOSAR 元素是在其自身的语义上下文中独立（stand-alone）定义有意义的实体。这类 `ARElement` 的一个例子是可复用软件组件类型的定义。另一方面，一个操作的参数独立定义并无意义，因为其语义定义于其所在上下文之内、因而高度依赖于外层上下文：该操作。
+
+**ARPackage 的用途**
+
+`ARPackage` 的用途是：
+
+- 组织 AUTOSAR M1 模型，并为包内的元素建立命名空间（如同所有 `Identifiable` 所做的那样）；
+- 定义相对引用的基础。
+
+关于相对引用的细节，参见第 4.4.3.2 章。
+
+![图 4.1：AUTOSAR 包（AUTOSAR package）](Figure4-1.png)
+
+请注意，`ARPackage` 中对 `ARElement` 的聚合是可变体化的（subject to variation）。其主要用例是在产品线架构中规定具有不同接口的组件备选项。
+
+表4.1：ARPackage
+
+| 类         | ARPackage                                                                                                   |
+|------------|--------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::ARPackage                                    |
+| 注意       | AUTOSAR 包，允许创建顶层包以结构化所包含的 ARElement。ARPackage 是开放集合。这意味着在基于文件的描述系统中，可以使用多个文件部分地描述一个包的内容。这是 MSR 的 SW-SYSTEM 的扩展版本。 |
+| 基类       | ARObject、AtpBlueprint、AtpBlueprintable、CollectableElement、Identifiable、MultilanguageReferrable、Referrable |
+| 聚合于     | ARPackage.arPackage、AUTOSAR.arPackage                                                                        |
+
+| 属性          | 类型                | 多重性 | 类别 | 注意                                                                                                                                                     |
+|---------------|---------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| arPackage     | ARPackage           | *      | aggr | 这表示 ARPackage 内的一个子包，从而允许无限的包层次。构型：atpSplitable；atpVariation 标签：atp.Splitkey=arPackage.shortName, arPackage.variationPoint.shortLabel vh.latestBindingTime=blueprintDerivationTime xml.sequenceOffset=30 |
+| element       | PackageableElement  | *      | aggr | 属于本包的元素。构型：atpSplitable；atpVariation 标签：atp.Splitkey=element.shortName, element.variationPoint.shortLabel vh.latestBindingTime=systemDesignTime xml.sequenceOffset=20 |
+| referenceBase | ReferenceBase       | *      | aggr | 这表示该包的引用基础（reference base）。它是包内所有相对引用的基础。基础需要按照引用中的 base 属性来选择。构型：atpSplitable 标签：atp.Splitkey=referenceBase.shortLabel xml.sequenceOffset=10 |
+
+表4.2：PackageableElement
+
+| 类         | PackageableElement（抽象）                                                        |
+|------------|-------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::ARPackage           |
+| 注意       | 该元类规定成为 AUTOSAR 包成员的能力。                                                 |
+| 基类       | ARObject、CollectableElement、Identifiable、MultilanguageReferrable、Referrable      |
+| 子类       | ARElement、EnumerationMappingTable、FibexElement                                    |
+| 聚合于     | ARPackage.element                                                                   |
+
+表4.3：ARElement
+
+| 类         | ARElement（抽象）                                                                                                       |
+|------------|--------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::ARPackage                                                |
+| 注意       | 可以独立定义的元素，即无需作为另一个元素的一部分（当然包除外）。                                                            |
+| 基类       | ARObject、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                        |
+| 子类       | AclObjectSet、AclOperation、AclPermission、AclRole、AliasNameSet、ApplicabilityInfoSet、ApplicationPartition、AutosarDataType、BaseType、BlueprintMappingSet、BswEntryRelationshipSet、BswModuleDescription、BswModuleEntry、BuildActionManifest、CalibrationParameterValueSet、ClientIdDefinitionSet、ClientServerInterfaceToBswModuleEntryBlueprintMapping、Collection、CompuMethod、ConsistencyNeedsBlueprintSet、ConstantSpecification、ConstantSpecificationMappingSet、CpSoftwareCluster、CpSoftwareClusterBinaryManifestDescriptor、CpSoftwareClusterMappingSet、CpSoftwareClusterResourcePool、CryptoEllipticCurveProps、CryptoServiceCertificate、CryptoServiceKey、CryptoServicePrimitive、CryptoServiceQueue、CryptoSignatureScheme、DataConstr、DataExchangePoint、DataTransformationSet、DataTypeMappingSet、DdsCpConfig、DiagnosticCommonElement、DiagnosticConnection、DiagnosticContributionSet、DltContext、DltEcu、Documentation、E2EProfileCompatibilityProps、EcucDefinitionCollection、EcucDestinationUriDefSet、EcucModuleConfigurationValues、EcucModuleDef、EcucValueCollection、EndToEndProtectionSet、EthIpProps、EthTcpIpIcmpProps、EthTcpIpProps、EvaluatedVariantSet、FMFeature、FMFeatureMap、FMFeatureModel、FMFeatureSelectionSet、FirewallRule、FlatMap、GeneralPurposeConnection、HwCategory、HwElement、HwType、IEEE1722TpConnection、IPSecConfigProps、IPv6ExtHeaderFilterSet、IdsCommonElement、IdsDesign、Implementation、ImpositionTimeDefinitionGroup、InterpolationRoutineMappingSet、J1939ControllerApplication、KeywordSet、LifeCycleInfoSet、LifeCycleStateDefinitionGroup、LogAndTraceMessageCollectionSet、MacSecGlobalKayProps、MacSecParticipantSet、McFunction、McGroup、ModeDeclarationGroup、ModeDeclarationMappingSet、OsTaskProxy、PhysicalDimension、PhysicalDimensionMappingSet、PortInterface、PortInterfaceMappingSet、PortPrototypeBlueprint、PostBuildVariantCriterion、PostBuildVariantCriterionValueSet、PredefinedVariant、RapidPrototypingScenario、SdgDef、SignalServiceTranslationPropsSet、SomeipSdClientEventGroupTimingConfig、SomeipSdClientServiceInstanceConfig、SomeipSdServerEventGroupTimingConfig、SomeipSdServerServiceInstanceConfig、SwAddrMethod、SwAxisType、SwComponentMappingConstraints、SwComponentType、SwRecordLayout、SwSystemconst、SwSystemconstantValueSet、SwcBswMapping、System、SystemSignal、SystemSignalGroup、TDCpSoftwareClusterMappingSet、TcpOptionFilterSet、TimingExtension、TlsConnectionGroup、TlvDataIdDefinitionSet、TransformationPropsSet、Unit、UnitGroup、UploadablePackageElement、ViewMapSet |
+| 聚合于     | ARPackage.element                                                                                                        |
+
+### 4.3. Referrable 与 Identifiable
+
+`Identifiable` 的主要直接抽象基类是 `Referrable` 和 `MultilanguageReferrable`。
+
+**Referrable 的主要用途**
+
+抽象基类 `Referrable` 表示成为引用目标的能力。这样的引用可以是文档中的简单链接，也可以是为 AUTOSAR 系统数据模型做出贡献的关联。
+
+`Referrable` 的本质属性是 `shortName`。
+
+**shortName 的用途**
+
+`shortName`（由 `Referrable` 提供）在第一个祖先 `Identifiable` 给定的上下文内无歧义地标识该对象。
+
+`MultilanguageReferrable` 的本质属性是 `longName`。
+
+**longName 的用途**
+
+`longName`（由 `MultilanguageReferrable` 提供）以单行文本的形式包含对象的标题。`longName` 的内容面向人类读者。因此长名可以用不同的语言描述。
+
+理解 `Identifiable` 各属性的全貌十分重要。
+
+**Identifiable 的主要用途**
+
+抽象基类 `Identifiable` 在 `Referrable` 之上扩展了描述性与管理性特性。
+
+**desc 的用途**
+
+`desc` 包含该对象是什么的简要描述。其目的是帮助人类识别该对象。它是单个段落，同样以多种语言提供。
+
+**adminData 的用途**
+
+`adminData` 包含关于该对象的管理性信息，例如版本信息、语言设置等。这些信息也具有标识性质。
+
+**uuid 的用途**
+
+`uuid` 可以在用户的工具环境中用于唯一地标识 AUTOSAR 元素，例如在把 AUTOSAR 元素合并入某个公司专有数据库时。`uuid` 对 AUTOSAR 模型没有任何语义含义，也不要求 AUTOSAR 工具管理 `uuid`。
+
+除这些标识性属性之外，`Identifiable` 还携带一些以规范为目的的属性。为简化模型，这些属性定义在 `Identifiable` 中，因为它们适用于几乎所有表示 AUTOSAR 系统技术结构的可标识对象：
+
+**category 的用途**
+
+`category` 包含一个表达该 `Identifiable` 特定用例的关键字。在某种程度上，`category` 可以与 UML 中的构型（stereotype）类比。适用的类别在相关对象的约束中规定。
+
+**category 的取值**
+
+一般而言，允许以用户自定义的取值扩展各模板规范中定义的类别。在这种情况下，用户有责任避免与既有或将来自动定义的 AUTOSAR 类别发生任何冲突。例如可以通过使用合适的前缀来实现。
+
+不过，特定元素的约束可能把 category 限定为恰好那些已定义的取值，此时不允许扩展。
+
+**introduction 的用途**
+
+`introduction` 包含关于该被标识对象如何构建或可能如何使用的介绍性文档。
+
+**annotation 的用途**
+
+`annotation` 包含开发注记（development annotations）。
+
+关于 Annotation 的更多细节参见第 4.12 章。
+
+作为示例，AUTOSAR 项目的这些属性为：
+
+- `shortName`：AUTOSAR
+- `longName`：AUTomotive Open System ARchitecture
+- `desc`：AUTOSAR 是一个开放且标准化的汽车软件架构，由汽车制造商、供应商和工具开发者共同开发。
+- `introduction`：AUTOSAR 为进一步提升性能、安全性与环境友好性的创新电子系统铺平道路；AUTOSAR 是一个强大的全球合作伙伴关系，它创造了一个共同的标准：“在标准上合作，在实现上竞争”。
+
+基类 `Identifiable` 还有更多与内容相关的属性，如图 4.2 所示：
+
+![图 4.2：Identifiable](Figure4-2.png)
+
+基类 `Referrable` 及其特化如图 4.3 所示：
+
+![图 4.3：Referrable](Figure4-3.png)
+
+如果 `shortName` 由不同的组件组装而成，那么提供 `ShortNameFragment` 作为组装指令的形式化规范是一种良好实践。
+
+在第 4.1 章中，组合而成的 shortName 是 “A\_\_B”。第一个 `ShortNameFragment` 是 “A”，其角色（role）为 “prefix”。第二个 `ShortNameFragment` 是 “B”，其角色为 “suffix”。“prefix” 与 “suffix” 只是示例，不属于标准化的对象。它们仅用于说明本示例。AUTOSAR 不标准化 `role` 属性的任何取值。
+
+清单4.1：shortNameFragments 示例
+
+```xml
+<SHORT-NAME>A__B</SHORT-NAME>
+<SHORT-NAME-FRAGMENTS>
+  <SHORT-NAME-FRAGMENT>
+    <ROLE>prefix</ROLE>
+    <FRAGMENT>A</FRAGMENT>
+  </SHORT-NAME-FRAGMENT>
+  <SHORT-NAME-FRAGMENT>
+    <ROLE>suffix</ROLE>
+    <FRAGMENT>B</FRAGMENT>
+  </SHORT-NAME-FRAGMENT>
+</SHORT-NAME-FRAGMENTS>
+```
+
+这一流程允许组合与拆分原子的和组合的 `shortName` 而不丢失原始信息。
+
+关于 DocumentationBlock 的更多内容请参见第 9.2 章。
+
+各属性在以下类表中给出：
+
+表4.4：Identifiable
+
+| 类         | Identifiable（抽象）                                                                                                  |
+|------------|------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::Identifiable                                            |
+| 注意       | 该类的实例可以通过其标识符（在命名空间边界内）被引用。此外，Identifiable 是对 AUTOSAR 描述的整体结构有显著贡献的对象。特别是，Identifiable 可以包含 Identifiable。 |
+| 基类       | ARObject、MultilanguageReferrable、Referrable                                                                            |
+| 子类       | ARPackage、AbstractDoIpLogicAddressProps、AbstractEvent、AbstractImplementationDataTypeElement、AbstractSecurityEventFilter、AbstractSecurityIdsmInstanceFilter、AbstractServiceInstance、AppOsTaskProxyToEcuTaskProxyMapping、ApplicationEndpoint、ApplicationError、ApplicationPartitionToEcuPartitionMapping、AppliedStandard、AsynchronousServerCallResultPoint、AtpBlueprint、AtpBlueprintable、AtpClassifier、AtpFeature、AutosarOperationArgumentInstance、AutosarVariableInstance、BinaryManifestAddressableObject、BinaryManifestItemDefinition、BinaryManifestResource、BinaryManifestResourceDefinition、BlockState、BswInternalTriggeringPoint、BswModuleDependency、BuildActionEntity、BuildActionEnvironment、CanTpAddress、CanTpChannel、CanTpNode、Chapter、ClassContentConditional、ClientIdDefinition、ClientServerOperation、Code、CollectableElement、ComManagementMapping、CommConnectorPort、CommunicationConnector、CommunicationController、Compiler、ConsistencyNeeds、ConsumedEventGroup、CouplingElementAbstractDetails、CouplingPort、CouplingPortAbstractShaper、CouplingPortStructuralElement、CpSoftwareClusterResource、CpSoftwareClusterResourceToApplicationPartitionMapping、CpSoftwareClusterToApplicationPartitionMapping、CpSoftwareClusterToEcuInstanceMapping、CpSoftwareClusterToResourceMapping、CryptoServiceMapping、DataPrototypeGroup、DataTransformation、DdsCpDomain、DdsCpPartition、DdsCpQosProfile、DdsCpTopic、DependencyOnArtifact、DiagEventDebounceAlgorithm、DiagnosticAuthTransmitCertificateEvaluation、DiagnosticConnectedIndicator、DiagnosticDataElement、DiagnosticDebounceAlgorithmProps、DiagnosticFunctionInhibitSource、DiagnosticParameterElement、DiagnosticRoutineSubfunction、DltApplication、DltArgument、DltLogChannel、DltMessage、DoIpInterface、DoIpLogicAddress、DoIpRoutingActivation、ECUMapping、EOCExecutableEntityRefAbstract、EcuPartition、EcucContainerValue、EcucDefinitionElement、EcucDestinationUriDef、EcucEnumerationLiteralDef、EcucQuery、EcucValidationCondition、EndToEndProtection、EthernetWakeupSleepOnDatalineConfig、EventHandler、ExclusiveArea、ExecutableEntity、ExecutionTime、FMAttributeDef、FMFeatureMapAssertion、FMFeatureMapCondition、FMFeatureMapElement、FMFeatureRelation、FMFeatureRestriction、FMFeatureSelection、FlatInstanceDescriptor、FlexrayArTpNode、FlexrayTpConnectionControl、FlexrayTpNode、FlexrayTpPduPool、FrameTriggering、GeneralParameter、GlobalTimeGateway、GlobalTimeMaster、GlobalTimeSlave、HeapUsage、HwAttributeDef、HwAttributeLiteralDef、HwPin、HwPinGroup、IEEE1722TpAcfBus、IEEE1722TpAcfBusPart、IPSecRule、IPv6ExtHeaderFilterList、ISignalToIPduMapping、ISignalTriggering、IdentCaption、ImpositionTime、InternalTriggeringPoint、J1939SharedAddressCluster、J1939TpNode、Keyword、LifeCycleState、LinScheduleTable、LinTpNode、Linker、MacMulticastGroup、MacSecKayParticipant、McDataInstance、MemorySection、ModeDeclaration、ModeDeclarationMapping、ModeSwitchPoint、NetworkEndpoint、NmCluster、NmEcu、NmNode、NvBlockDescriptor、PackageableElement、ParameterAccess、PduActivationRoutingGroup、PduToFrameMapping、PduTriggering、PerInstanceMemory、PhysicalChannel、PortElementToCommunicationResourceMapping、PortGroup、PortInterfaceMapping、PossibleErrorReaction、ResourceConsumption、RootSwCompositionPrototype、RptComponent、RptContainer、RptExecutableEntity、RptExecutableEntityEvent、RptExecutionContext、RptProfile、RptServicePoint、RteEventInCompositionSeparation、RteEventInCompositionToOsTaskProxyMapping、RteEventInSystemSeparation、RteEventInSystemToOsTaskProxyMapping、RunnableEntityGroup、SdgAttribute、SdgClass、SecureCommunicationAuthenticationProps、SecureCommunicationFreshnessProps、SecurityEventContextProps、ServerCallPoint、ServiceNeeds、SignalServiceTranslationElementProps、SignalServiceTranslationEventProps、SignalServiceTranslationProps、SocketAddress、SomeipTpChannel、SpecElementReference、StackUsage、StaticSocketConnection、StructuredReq、SwGenericAxisParamType、SwServiceArg、SwcServiceDependency、SwcToApplicationPartitionMapping、SwcToEcuMapping、SwcToImplMapping、SwitchAsynchronousTrafficShaperGroupEntry、SwitchFlowMeteringEntry、SwitchStreamFilterActionDestPortModification、SwitchStreamFilterEntry、SwitchStreamFilterRule、SwitchStreamGateEntry、SwitchStreamIdentification、SystemMapping、SystemSignalGroupToCommunicationResourceMapping、SystemSignalToCommunicationResourceMapping、TDCpSoftwareClusterMapping、TDCpSoftwareClusterResourceMapping、TcpOptionFilterList、TimingClock、TimingClockSyncAccuracy、TimingExtension 等从 `Identifiable` 派生的全部元类（源表以两栏连排印刷，此处按转换结果合并） |
+
+| 属性        | 类型                             | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                                       |
+|-------------|----------------------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| adminData   | AdminData                        | 0..1   | aggr | 这表示该可标识对象的管理数据。标签：atp.Splitkey=adminData xml.sequenceOffset=-40 构型：atpSplitable                                                                                                                                                                          |
+| annotation  | Annotation                       | *      | aggr | 在定义模型元素（例如 ECU 配置参数值）时提供附加注记的可能性。这些并非用作文档，而只是设计注记。标签：xml.sequenceOffset=-25                                                                                                                                                      |
+| category    | CategoryString                   | 0..1   | attr | category 是一个特化 Identifiable 语义的关键字。它影响属性的预期存在性与约束的适用性。标签：xml.sequenceOffset=-50                                                                                                                                                               |
+| desc        | MultiLanguageOverviewParagraph   | 0..1   | aggr | 这表示关于相关对象是什么的一般但简短（单段）描述。它只有一个段落！Desc 旨在被收集到概览表中。该属性帮助人类读者识别相关对象。更详尽的文档（特别是对象如何构建或使用）应当放到 “introduction”。标签：xml.sequenceOffset=-60                                                          |
+| introduction| DocumentationBlock               | 0..1   | aggr | 这表示关于相关对象如何构建或使用的更多信息。因此它是一个 DocumentationBlock。标签：xml.sequenceOffset=-30                                                                                                                                                                       |
+| uuid        | String                           | 0..1   | attr | 该属性的目的是为元类的实例提供一个全局唯一标识符。该属性的取值应当是全局唯一的字符串，并以标识符的类型为前缀。例如，要包含 The Open Group 定义的 DCE UUID，UUID 将以 “DCE:” 为前缀。该属性的取值可用于支持不同 AUTOSAR 模型的合并。UUID（Universally Unique Identifier）的形式取自 The Open Group（原 Open Software Foundation）定义的标准。该标准被广泛使用，包括 Microsoft 用于 COM（GUID），以及许多公司用于基于 CORBA 的 DCE。生成这些 128 位 ID 的方法已在该标准中公布，其有效性与唯一性在实践中没有争议。若省略 id 命名空间，则假定 DCE。例如 “DCE:2fac1234-31f8-11b4-a222-08002b34c003”。uuid 属性对 AUTOSAR 模型没有任何语义含义，也不要求 AUTOSAR 工具管理该时间戳。标签：xml.attribute=true |
+
+表4.5：Identifier
+
+| 原始类型    | Identifier                                                                                                                                                          |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::PrimitiveTypes                                                                                       |
+| 注意        | Identifier 是一个带有若干外观约束的字符串，满足典型编程语言对其标识符（Identifier）的要求。该数据类型表示一个可用作 C 标识符的字符串。它应当以字母开头，可以由字母、数字和下划线组成。标签：xml.xsd.customType=IDENTIFIER xml.xsd.maxLength=128 xml.xsd.pattern=[a-zA-Z][a-zA-Z0-9_]* xml.xsd.type=string |
+
+| 属性           | 类型   | 多重性 | 类别 | 注意                                                                                                             |
+|----------------|--------|--------|------|-------------------------------------------------------------------------------------------------------------------|
+| blueprintValue | String | 0..1   | attr | 这表示一段描述，记录在从蓝图派生对象时应当如何定义该取值。标签：atp.Status=draft xml.attribute=true                  |
+| namePattern    | String | 0..1   | attr | 该属性表示一个模式；若相关标识符是蓝图的一部分，应当使用该模式来定义标识符的取值。更多细节参见 TPS_StandardizationTemplate。标签：xml.attribute=true |
+
+表4.6：MultilanguageLongName
+
+| 类         | MultilanguageLongName                                                                                                     |
+|------------|----------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::TextModel::MultilanguageData                                                                       |
+| 注意       | 该元类表示规定一个充当标题（headline）角色的长名的能力。它面向人类读者。每种语言应不超过约 80 个字符。                          |
+| 基类       | ARObject                                                                                                                   |
+| 聚合于     | AliasNameAssignment.label、GeneralAnnotation.label、MultilanguageReferrable.longName、Note.label、Prms.label、ValueGroup.label |
+
+| 属性 | 类型       | 多重性 | 类别 | 注意                                                                                                                                                                                  |
+|------|------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| l4   | LLongName  | 1..*   | aggr | 这是某一种特定语言中的长名。标签：xml.roleElement=true xml.roleWrapperElement=false xml.sequenceOffset=20 xml.typeElement=false xml.typeWrapperElement=false                              |
+
+表4.7：SingleLanguageLongName
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; SingleLanguageLongName                       |
+|------------|--------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::TextModel::SingleLanguageData                          |
+| 注意       | SingleLanguageLongName                                                         |
+| 基类       | ARObject、MixedContentForLongName                                              |
+| 聚合于     | SingleLanguageReferrable.longName1、Xref.label1                                 |
+
+表4.8：LLongName
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; LLongName                                              |
+|------------|------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::TextModel::LanguageDataModel                                      |
+| 注意       | 某一种特定语言中的 MixedContentForLongName。语言在属性 `l` 中标注。                         |
+| 基类       | ARObject、LanguageSpecific、MixedContentForLongName                                        |
+| 聚合于     | MultilanguageLongName.l4                                                                  |
+
+| 属性           | 类型   | 多重性 | 类别 | 注意                                                                                              |
+|----------------|--------|--------|------|-----------------------------------------------------------------------------------------------------|
+| blueprintValue | String | 0..1   | attr | 这表示一段描述，记录在从蓝图派生对象时应当如何定义该取值。标签：atp.Status=draft xml.attribute=true    |
+
+表4.9：MixedContentForLongName
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; MixedContentForLongName（抽象）                                                                                                                                                                     |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::TextModel::InlineTextModel                                                                                                                                                                                       |
+| 注意       | 这是标题与长名的模型。它允许一些强调与索引条目，但没有引用目标（引用目标由相关的 identifiable 提供）。其意图是该内容模型也可以呈现为纯文本。该抽象类既可用于单语言元素，也可用于多语言元素。                                                              |
+| 基类       | ARObject                                                                                                                                                                                                                                 |
+| 子类       | LLongName、SingleLanguageLongName                                                                                                                                                                                                          |
+
+| 属性 | 类型         | 多重性 | 类别 | 注意                                   |
+|------|--------------|--------|------|------------------------------------------|
+| e    | EmphasisText | 1      | aggr | 这是强调文本。标签：xml.sequenceOffset=40  |
+| ie   | IndexEntry   | 1      | aggr | 这是一个索引条目。标签：xml.sequenceOffset=70 |
+| sub  | Superscript  | 1      | attr | 这是下标文本。标签：xml.sequenceOffset=60   |
+| sup  | Superscript  | 1      | attr | 这是上标文本。标签：xml.sequenceOffset=50   |
+| tt   | Tt           | 1      | aggr | 这是一个技术术语。标签：xml.sequenceOffset=30 |
+
+另参见 MultiLanguageOverviewParagraph；另参见 LOverviewParagraph。
+
+表4.10：Referrable
+
+| 类         | Referrable（抽象）                                                                                                                                                                                                                                       |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::Identifiable                                                                                                                                                                                 |
+| 注意       | 该类的实例可以通过其标识符（在遵守命名空间边界的前提下）被引用。                                                                                                                                                                                              |
+| 基类       | ARObject                                                                                                                                                                                                                                                     |
+| 子类       | AtpDefinition、BswDistinguishedPartition、BswModuleCallPoint、BswModuleClientServerEntry、BswVariableAccess、CouplingPortTrafficClassAssignment、DiagnosticEnvModeElement、EthernetPriorityRegeneration、ExclusiveAreaNestingOrder、HwDescriptionEntity、ImplementationProps、LinSlaveConfigIdent、ModeTransition、MultilanguageReferrable、PncMappingIdent、SingleLanguageReferrable、SoConIPduIdentifier、SocketConnectionBundle、TimeSyncServerConfiguration、TpConnectionIdent |
+| 属性       | shortName、shortNameFragment                                                                                                                                                                                                                                  |
+
+| 属性              | 类型              | 多重性 | 类别 | 注意                                                                                                                                                     |
+|-------------------|-------------------|--------|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| shortName         | Identifier        | 1      | attr | 这为对象规定一个标识用的 shortName。它需要在其上下文内唯一，面向人类但更多面向技术引用。构型：atpIdentityContributor 标签：xml.enforceMinMultiplicity=true xml.sequenceOffset=-100 |
+| shortNameFragment | ShortNameFragment | *      | aggr | 这规定 `Referrable.shortName` 如何由若干 shortNameFragment 组合而成。标签：xml.sequenceOffset=-90                                                            |
+
+表4.11：MultilanguageReferrable
+
+| 类         | MultilanguageReferrable（抽象）                                                                                                                                                                                                    |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::Identifiable                                                                                                                                                               |
+| 注意       | 该类的实例可以通过其标识符（在遵守命名空间边界的前提下）被引用。它们还可以拥有 longName。但它们不被认为对 AUTOSAR 描述的整体结构有实质贡献。特别地，它不包含其他 Referrable。                                                                      |
+| 基类       | ARObject、Referrable                                                                                                                                                                                                                        |
+| 子类       | Caption、DefItem、DocumentationContext、Identifiable、SdgCaption、TraceReferrable、Traceable                                                                                                                                                  |
+
+| 属性     | 类型                  | 多重性 | 类别 | 注意                                                                                     |
+|----------|-----------------------|--------|------|--------------------------------------------------------------------------------------------|
+| longName | MultilanguageLongName | 0..1   | aggr | 这规定对象的长名。长名面向人类读者，其作用类似于标题。                                        |
+
+表4.12：SingleLanguageReferrable
+
+| 类         | SingleLanguageReferrable（抽象）                                                                                                                                                                                                                                                  |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::Identifiable                                                                                                                                                                                                              |
+| 注意       | 该类的实例可以通过其标识符（在遵守命名空间边界的前提下）被引用。它们也可以拥有 longName，但只能是一种语言。该类的特化只作为某一种特定语言中的内联元素出现。但它们不被认为对 AUTOSAR 描述的整体结构有实质贡献。特别地，它不包含其他 Referrable。（源表此处的句子因转换存在残缺，按上下文合并。） |
+| 基类       | ARObject、Referrable                                                                                                                                                                                                                                                                       |
+| 子类       | Std、Xdoc、Xfile、XrefTarget                                                                                                                                                                                                                                                                |
+
+| 属性     | 类型                   | 多重性 | 类别 | 注意                                                                                      |
+|----------|------------------------|--------|------|----------------------------------------------------------------------------------------------|
+| longName1| SingleLanguageLongName | 0..1   | aggr | 这规定对象的长名。角色名为 longName1 是为了与 ASAM FSX 兼容。                                   |
+
+表4.13：ShortNameFragment
+
+| 类         | ShortNameFragment                                                                              |
+|------------|----------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::Identifiable                        |
+| 注意       | 该类描述 `Referrable.shortName` 如何由若干 shortNameFragment 组合而成。                              |
+| 基类       | ARObject                                                                                           |
+| 聚合于     | Referrable.shortNameFragment                                                                        |
+
+| 属性     | 类型       | 多重性 | 类别 | 注意                                                                               |
+|----------|------------|--------|------|---------------------------------------------------------------------------------------|
+| fragment | Identifier | 1      | attr | 这规定作为组合 shortName 一部分的单个 shortName（片段）。标签：xml.sequenceOffset=20      |
+| role     | String     | 1      | attr | 这规定片段的角色，例如用于定义片段的顺序。标签：xml.sequenceOffset=10                     |
+
+### 4.3.1. 命名空间与 shortName 的唯一性
+
+`Referrable` 中的 `shortName` 有助于对 `Referrable` 各特化（尤其是 `Identifiable`）的标识。
+
+**Identifiable 建立的命名空间**
+
+`Identifiable` 由此建立一个命名空间，在其中所包含的 `Identifiable` 或 `Referrable` 可以通过其 `shortName` 无歧义地标识。在某些情况下，存在派生自 `Identifiable` 的元类聚合了并非派生自 `Identifiable`、但转而聚合了一个派生自 `Referrable` 的元类的元类。换言之，存在 `Identifiable` 只被间接聚合的情况。
+
+无论如何，解释已建立命名空间的规则在这种情况同样适用。特别是，对于一个给定的 `Referrable` 实例，命名空间由最近的祖先（不仅是父元素）中作为 `Identifiable` 的元素建立。这表现为 [constr\_2508] 中的措辞“在一个给定的 Identifiable 内”。
+
+**Referrable 不建立命名空间**
+
+请注意，`Referrable` 不建立命名空间。在 `Identifiable` 之外，不存在 `Referrable` 聚合另一个 `Referrable` 的用例。但如果存在，被聚合者的 `shortName` 将需要在最近的祖先 `Identifiable`（而非最近的祖先 `Referrable`）内唯一。
+
+请注意，可以为特定元素扩展命名空间以支持全局引用。更多细节参见 [constr\_2538]。
+
+**shortName 的大小写敏感性**
+
+`shortName` 应当：
+
+- 基本上按区分大小写解释（参见 [TPS\_GST\_00020]）；
+- 但唯一性检查按不区分大小写进行（[constr\_2508]）。
+
+**约束：shortName 应当在其命名空间内唯一**
+
+`shortName` 的内容在由父元素给定的命名空间内需要唯一（不区分大小写）。
+
+请注意，shortName 的唯一性检查应当不区分大小写地执行。这支持一种良好实践：名称不应当只在大小写上不同，那会造成大量混淆。
+
+术语“不区分大小写”表示字符集合
+
+```
+{a b c d e f g h i j k l m n o p q r s t u v w x y z}
+{A B C D E F G H I J K L M N O P Q R S T U V W X Y Z}
+```
+
+中的字符分别被视为相同。换言之，对 shortName 唯一性的不区分大小写检查导致如下结果：例如 shortName 为 “X” 与 “x” 的元素被视为相同，不得存在于同一个命名空间中。
+
+清单 4.2 展示了有效的情况：命名空间 `SwComp` 中的 `SR_1` 与 `SR_2`。
+
+清单4.2：有效命名空间用例示例
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>SwComp</SHORT-NAME>
+  <ELEMENTS>
+    <APPLICATION-SW-COMPONENT-TYPE>
+      <SHORT-NAME>SwComp1</SHORT-NAME>
+      <PORTS>
+        <P-PORT-PROTOTYPE>
+          <SHORT-NAME>PPortA</SHORT-NAME>
+          <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/SwComp/SR_1</PROVIDED-INTERFACE-TREF>
+        </P-PORT-PROTOTYPE>
+        <R-PORT-PROTOTYPE>
+          <SHORT-NAME>RPortB</SHORT-NAME>
+          <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/SwComp/SR_2</REQUIRED-INTERFACE-TREF>
+        </R-PORT-PROTOTYPE>
+      </PORTS>
+    </APPLICATION-SW-COMPONENT-TYPE>
+    <SENDER-RECEIVER-INTERFACE>
+      <SHORT-NAME>SR_1</SHORT-NAME>
+      <IS-SERVICE>false</IS-SERVICE>
+    </SENDER-RECEIVER-INTERFACE>
+    <SENDER-RECEIVER-INTERFACE>
+      <SHORT-NAME>SR_2</SHORT-NAME>
+      <IS-SERVICE>false</IS-SERVICE>
+    </SENDER-RECEIVER-INTERFACE>
+  </ELEMENTS>
+</AR-PACKAGE>
+```
+
+清单 4.3 展示了无效的情况：尽管对 `SR_1` 与 `Sr_1` 的引用按照 [TPS\_GST\_00167] 是唯一的，命名空间 `SwComp` 中的 shortName 违反了 [constr\_2508]。
+
+清单4.3：无效命名空间用例示例
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>SwComp</SHORT-NAME>
+  <ELEMENTS>
+    <APPLICATION-SW-COMPONENT-TYPE>
+      <SHORT-NAME>SwComp1</SHORT-NAME>
+      <PORTS>
+        <P-PORT-PROTOTYPE>
+          <SHORT-NAME>PPortA</SHORT-NAME>
+          <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/SwComp/SR_1</PROVIDED-INTERFACE-TREF>
+        </P-PORT-PROTOTYPE>
+        <R-PORT-PROTOTYPE>
+          <SHORT-NAME>RPortB</SHORT-NAME>
+          <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/SwComp/Sr_1</REQUIRED-INTERFACE-TREF>
+        </R-PORT-PROTOTYPE>
+      </PORTS>
+    </APPLICATION-SW-COMPONENT-TYPE>
+    <SENDER-RECEIVER-INTERFACE>
+      <SHORT-NAME>SR_1</SHORT-NAME>
+      <IS-SERVICE>false</IS-SERVICE>
+    </SENDER-RECEIVER-INTERFACE>
+    <SENDER-RECEIVER-INTERFACE>
+      <SHORT-NAME>Sr_1</SHORT-NAME>
+      <IS-SERVICE>false</IS-SERVICE>
+    </SENDER-RECEIVER-INTERFACE>
+  </ELEMENTS>
+</AR-PACKAGE>
+```
+
+### 4.4. 引用基础（Reference Base）
+
+#### 4.4.1. 引言
+
+AUTOSAR 元模型和生成的 schema 用于支持模块化、灵活性与可扩展性。AUTOSAR 提供了引用基础（**Reference Base**）的方法学途径来实现这一点。
+
+复杂度较高的模型结构由指向更小模型结构的引用组合而成（为了复用）。这些数据段在完整结构中的位置应当是灵活且可交换的。ReferenceBase 的概念为创建指向模型其他部分的可移植引用提供了一个强大的机制。模型中的元素承担不同的角色，其定义见下图例。
+
+![图 4.4：ReferenceBase 图示的图例（Legend of ReferenceBase illustrations）](Figure4-4.png)
+
+从使用绝对路径的引用开始（参见图 4.5），后续将依次展示更复杂的模式。
+
+![图 4.5：按绝对路径引用（Reference by absolute path）](Figure4-5.png)
+
+引用的最终目标的完整路径由拥有该引用的元素提供。
+
+下一个模式使用带相对路径的 ReferenceBase。
+
+![图 4.6：带相对路径的 ReferenceBase（ReferenceBase with relative path）](Figure4-6.png)
+
+`ReferenceBase` 的属性 `shortLabel` “myRB” 与包 “/L/M/N” 定义了相对路径的起点。由此，由拥有引用的元素所提供的相对路径 “O/NVI” 在 `ARPackage` “/L/M/N” 中解析。被引用元素的结果完整路径为 “/L/M/N/O/NVI”。相应的清单参见 F.26 与 F.27。
+
+为了突出数据段灵活处理这一侧面，`ARPackage` “O” 与 `NvDataInterface` “NVI” 被移动到第三个分支，并由 `ARPackage` “S” 聚合。
+
+![图 4.7：带相对路径且数据段被移动的 ReferenceBase（ReferenceBase with relative path and moved data section）](Figure4-7.png)
+
+把 `ReferenceBase` 中的包从 “/L/M/N”（参见图 4.6）改为 “/R/S”（参见图 4.7），就足以实现把数据段移动到第三个分支。拥有引用的元素无需任何变更。这凸显了 ReferenceBase 机制所建立方法的威力。相应的清单参见 F.28 与 F.29。
+
+ReferenceBase 机制还提供了定义一个或多个用于搜索全局元素的 `ARPackage` 的可能性。这通过属性 `globalInPackage` 实现，它可以在 `ReferenceBase.package` 之外附加使用。
+
+为说明这一点，把带相对路径的 ReferenceBase 的既有数据结构（参见图 4.6）扩展以属性 `globalInPackage`，它规定全局元素应当在 `ARPackage` “/R/S” 中解析。
+
+![图 4.8：带相对路径并用 globalInPackage 指派附加包的 ReferenceBase（ReferenceBase with relative path and globalInPackage to assign additional packages）](Figure4-8.png)
+
+这样，就可以创建一个软件组件 “SWC” 的描述，其中包含一个仅凭 `shortName` 指向 Chapter “Chap1” 的 Xref。该 Chapter 在 “/R/S” 之下全局解析为由软件组件 “Comp” 聚合的 SwComponentDocumentation 中的成员。
+
+ReferenceBase 的扩展（`globalInPackage` 为 “/R/S”）与由拥有引用 “XREF” 的元素所提供的引用 “Chap1” 共同构成被引用元素的完整路径 “/R/S/Comp/Chap1”。相应的清单参见 F.30 与 F.31。
+
+#### 4.4.2. Reference Base 属性
+
+类 `ReferenceBase` 拥有以下属性：`globalElement`、`globalInPackage`、`isDefault`、`package` 和 `shortLabel`。
+
+这些属性的详细用法在本节中定义。
+
+表4.14：ReferenceBase
+
+| 类         | ReferenceBase                                                                                        |
+|------------|---------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::ARPackage                               |
+| 注意       | 该元类建立相对引用的基础。引用基础由 shortLabel 标识，shortLabel 应当在当前包内唯一。                      |
+| 基类       | ARObject                                                                                                |
+| 聚合于     | ARPackage.referenceBase                                                                                 |
+
+| 属性           | 类型                   | 多重性 | 类别 | 注意                                                                                                                                                                  |
+|----------------|------------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| globalElement  | ReferrableSubtypesEnum | *      | attr | 该属性表示一个元类，经由该引用基础支持对它的全局引用。标签：xml.sequenceOffset=29                                                                                              |
+| globalInPackage| ARPackage              | *      | ref  | 这表示可以表达全局元素位于没有共同祖先包的多个包中的能力。ReferenceBase.globalInPackage 所提及的包在 ReferenceBase.package 之外附加使用。标签：xml.sequenceOffset=28             |
+| isDefault      | Boolean                | 1      | attr | 该属性表示当前的 ReferenceBase 是否为默认。注意，一个包内只能有一个默认引用基础。标签：atp.Status=obsolete xml.sequenceOffset=20                                                 |
+| package        | ARPackage              | 0..1   | ref  | 该关联规定 base 等于 shortLabel 的所有相对引用的基础。标签：xml.sequenceOffset=30                                                                                                |
+| shortLabel     | Identifier             | 1      | attr | 这是引用基础的名称。通过这个名称，特定的引用可以指明适用的基础。构型：atpIdentityContributor 标签：xml.sequenceOffset=10                                                          |
+
+属性 `globalElement` 显式地规定 [constr\_2538] 所定义列表中的全局元素。
+
+**约束：全局引用限于某些元素**
+
+执行全局引用的能力限于：
+
+- `Chapter`、
+- `Topic1`、
+- `Caption`、
+- `Traceable`、
+- `XrefTarget`、
+- `Std`、
+- `Xdoc`、
+- `Xfile`
+
+**注意：** 属性 `globalElement` 规定哪些 `Referrable` 共享全局命名空间。换言之，这些 shortName 应当在所标注的类中唯一。[constr\_2538] 限制了属性 `globalElement` 的取值。这是刻意的，以避免出现庞大的全局命名空间。例如在文档的上下文中，这一做法保证了章节是“可移动的”，即可以在不影响引用定义的情况下重新编排。
+
+```xml
+<GLOBAL-ELEMENTS>
+  <GLOBAL-ELEMENT>TRACEABLE</GLOBAL-ELEMENT>
+  <GLOBAL-ELEMENT>CHAPTER</GLOBAL-ELEMENT>
+  <GLOBAL-ELEMENT>CAPTION</GLOBAL-ELEMENT>
+</GLOBAL-ELEMENTS>
+```
+
+表4.15：ReferrableSubtypesEnum
+
+| 原始类型    | ReferrableSubtypesEnum                                                                                                                            |
+|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::PrimitiveTypes                                                                        |
+| 注意        | 该原始类型是 MMT 生成的一个枚举的代理。它允许引用 `Referrable` 的任意子类。由于技术原因，可能的取值不在此类表中显示。标签：xml.mds.type=REFERRABLE-SUBTYPES-ENUM xml.xsd.type=string |
+
+**ReferenceBase.package 与 ReferenceBase.globalInPackage 的共存**
+
+`ReferenceBase.package` 与 `ReferenceBase.globalInPackage` 可以在 ReferenceBase 的上下文中共存。
+
+**注意：** 属性 `isDefault` 的存在受到质疑，因为它建立了一条捷径：当使用能够无额外代价地填入正确 base 属性的 AUTOSAR 编写工具时，它并不能带来效用。因此，该属性的生命周期状态在 R22-11 中被置为 “obsolete”。它可以很容易地被替代，例如用一个 shortLabel 为 “default” 的具名 ReferenceBase。
+
+属性 `isDefault` 可以置为 `true`（情形 1）或 `false`（情形 2）。
+
+情形 1：`isDefault = true`：当前的 ReferenceBase 是默认的。
+
+在下面的清单中，第一个 ReferenceBase “RefBase1” 是默认的。由于 [constr\_2510]，只能有一个 ReferenceBase 被设为默认。因此在 ReferenceBase “RefBase2” 的上下文中，属性 `isDefault` 置为 `false`。也可能所有 ReferenceBase 都未定义为默认的 ReferenceBase。
+
+```xml
+<REFERENCE-BASES>
+  <REFERENCE-BASE>
+    <SHORT-LABEL>RefBase1</SHORT-LABEL>
+    <IS-DEFAULT>true</IS-DEFAULT>
+    ...
+  </REFERENCE-BASE>
+  <REFERENCE-BASE>
+    <SHORT-LABEL>RefBase2</SHORT-LABEL>
+    <IS-DEFAULT>false</IS-DEFAULT>
+    ...
+  </REFERENCE-BASE>
+</REFERENCE-BASES>
+```
+
+如果引用
+
+```xml
+<PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">MyInterface</PROVIDED-INTERFACE-TREF>
+```
+
+没有 base 属性，则使用默认的 ReferenceBase 来解析该引用。这意味着可以省略 base 属性而不影响引用的解析。
+
+而引用
+
+```xml
+<PROVIDED-INTERFACE-TREF BASE="RefBase2" DEST="SENDER-RECEIVER-INTERFACE">MyInterface</PROVIDED-INTERFACE-TREF>
+```
+
+带有 base 属性，解析该引用时将采用它。
+
+情形 2：`isDefault = false`：非默认的 ReferenceBase 只适用于那些在 base 属性中显式指明该 ReferenceBase 的 shortLabel 的引用。
+
+**约束：ReferenceBase.shortLabel 在 ARPackage 范围内的唯一性**
+
+在某个 `ARPackage` 范围内定义的任何给定 `ReferenceBase` 的 `shortLabel` 应当在该外层 `ARPackage` 的范围内唯一。
+
+请注意，包层次的每一层都可以拥有一组独立的 ReferenceBase。
+
+**约束：只能有一个默认的 ReferenceBase**
+
+每个 `ARPackage` 只能定义一个默认的 ReferenceBase（`isDefault = true`）。
+
+#### 4.4.3. Reference Base 用例
+
+##### 4.4.3.1. 绝对 ShortName 路径
+
+ShortName 路径由以 “/” 分隔的 `shortName` 序列组成。以下规则适用于 AUTOSAR 中使用的 shortName 路径：
+
+**绝对 shortName 路径**
+
+绝对 shortName 路径通过沿包含关系从根元素遍历到给定元素并执行以下步骤创建：
+
+1. 每个元素的 `shortName` 应当前置一个斜杠（由此形成所谓的前置 shortName（prepended shortName））；
+2. 按给定顺序串联所有前置 shortName。
+
+绝对路径可以通过以下步骤转换为相对路径：
+
+- 移除绝对 shortName 路径中与 base 属性所引用的绝对 shortName 路径相同的前导部分；
+- 从剩余的 shortName 路径中移除前导斜杠。
+
+**使用绝对 shortName 路径对模型元素的引用**
+
+对于使用绝对 shortName 路径的对模型元素的引用，可选的 base 属性不是必需的，应当被忽略。
+
+##### 4.4.3.2. 相对 ShortName 路径
+
+**相对 shortName 路径**
+
+相对引用路径不以字符 “/” 开头。相对引用路径可以通过在相对 shortName 路径前面添加由适用的 ReferenceBase 所规定的 `ARPackage` 的相应 shortName 路径，转换为绝对路径。
+
+**标识相对引用的 ReferenceBase**
+
+适当的 ReferenceBase 通过以下方式标识：
+
+- 属性 `base`。它表示从该引用到模型根的方向上、第一个（可见的）拥有 shortLabel 等于 `base` 的 referenceBase 的包含 `ARPackage`。换言之：由于 `ARPackage` 是嵌套的，适当的 referenceBase 自底向上搜索。
+- 或者，在指向模型根的方向上、拥有 `isDefault` 置为 `true` 的 referenceBase 的最内层 `ARPackage`。
+
+请注意，指向模型根方向上其他具有相同 shortLabel 的 ReferenceBase 应当被忽略。
+
+**约束：具名引用基础应当可用**
+
+如果存在相对引用，则包含该引用的某个包应当拥有一个 shortLabel 等于该引用 base 的 referenceBase。
+
+**部分模型中的 ReferenceBase**
+
+请注意 `ReferenceBase` 是 **&lt;atpSplitable&gt;** 的。因此，有必要在整个模型中搜索适当的 ReferenceBase。换言之，应当在所有部分模型中搜索 ReferenceBase。
+
+清单 4.4 展示了相对引用最简单的形式。在这种情况下，`ARPackage` 内的相对引用应当独立于该 `ARPackage` 的 shortName。请注意以 XML 注释形式指定的标注 `&lt;!--1--&gt;`：
+
+1. `&lt;!--1--&gt;`：这是一个相对引用的基础。
+2. `&lt;!--2--&gt;`：这是一个相对引用。该引用使用 `&lt;!--1--&gt;` 中规定的 shortLabel 为 “default” 的基础来解析。
+
+清单4.4：base 为 “default” 的相对引用
+
+```xml
+<?xml version="1.0"?>
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>MyComponent</SHORT-NAME>
+      <REFERENCE-BASES>
+        <!--1-->
+        <REFERENCE-BASE>
+          <SHORT-LABEL>default</SHORT-LABEL>
+          <PACKAGE-REF DEST="AR-PACKAGE">/MyComponent</PACKAGE-REF>
+        </REFERENCE-BASE>
+      </REFERENCE-BASES>
+      <ELEMENTS>
+        <SENDER-RECEIVER-INTERFACE>
+          <SHORT-NAME>MyInterface</SHORT-NAME>
+          <DATA-ELEMENTS>
+            <VARIABLE-DATA-PROTOTYPE>
+              <SHORT-NAME>MyData</SHORT-NAME>
+              <CATEGORY>VALUE</CATEGORY>
+            </VARIABLE-DATA-PROTOTYPE>
+          </DATA-ELEMENTS>
+        </SENDER-RECEIVER-INTERFACE>
+        <APPLICATION-SW-COMPONENT-TYPE>
+          <SHORT-NAME>MyComponent</SHORT-NAME>
+          <PORTS>
+            <P-PORT-PROTOTYPE>
+              <SHORT-NAME>MyPort</SHORT-NAME>
+              <!--2-->
+              <!--/MyComponent/MyInterface-->
+              <PROVIDED-INTERFACE-TREF BASE="default" DEST="SENDER-RECEIVER-INTERFACE">MyInterface</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+          </PORTS>
+        </APPLICATION-SW-COMPONENT-TYPE>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+清单 4.5 展示了可以存在多个 ReferenceBase。在这种情况下，除前面的示例外，还为 CompuMethod 提供了另一个基础，因为它们位于一个单独的 `ARPackage` 中。
+
+1. `&lt;!--1.1--&gt;`：这是相对引用的另一个基础。注意 `isDefault` 属性缺失。它与被显式规定为 `false` 等效。
+2. `&lt;!--2.1--&gt;`：这是一个相对引用。属性 `base` 表明应当把 shortLabel 为 compum（定义于 `&lt;!--1.1--&gt;`）的基础用于该相对引用。对应的绝对引用是 /CompuMethods/MyCompu。
+
+清单4.5：带显式 base 的相对引用
+
+```xml
+<?xml version="1.0"?>
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>MyComponent</SHORT-NAME>
+      <REFERENCE-BASES>
+        <!--1-->
+        <REFERENCE-BASE>
+          <SHORT-LABEL>default</SHORT-LABEL>
+          <PACKAGE-REF DEST="AR-PACKAGE">/MyComponent</PACKAGE-REF>
+        </REFERENCE-BASE>
+        <REFERENCE-BASE>
+          <SHORT-LABEL>compum</SHORT-LABEL>
+          <!--1.1-->
+          <PACKAGE-REF DEST="AR-PACKAGE">/CompuMethods</PACKAGE-REF>
+        </REFERENCE-BASE>
+      </REFERENCE-BASES>
+      <ELEMENTS>
+        <SENDER-RECEIVER-INTERFACE>
+          <SHORT-NAME>MyInterface</SHORT-NAME>
+          <DATA-ELEMENTS>
+            <VARIABLE-DATA-PROTOTYPE>
+              <SHORT-NAME>MyData</SHORT-NAME>
+              <CATEGORY>VALUE</CATEGORY>
+              <SW-DATA-DEF-PROPS>
+                <SW-DATA-DEF-PROPS-VARIANTS>
+                  <SW-DATA-DEF-PROPS-CONDITIONAL>
+                    <!--2.1-->
+                    <!--/CompuMethods/MyCompu-->
+                    <COMPU-METHOD-REF DEST="COMPU-METHOD" BASE="compum">MyCompu</COMPU-METHOD-REF>
+                  </SW-DATA-DEF-PROPS-CONDITIONAL>
+                </SW-DATA-DEF-PROPS-VARIANTS>
+              </SW-DATA-DEF-PROPS>
+            </VARIABLE-DATA-PROTOTYPE>
+          </DATA-ELEMENTS>
+        </SENDER-RECEIVER-INTERFACE>
+        <APPLICATION-SW-COMPONENT-TYPE>
+          <SHORT-NAME>MyComponent</SHORT-NAME>
+          <PORTS>
+            <P-PORT-PROTOTYPE>
+              <SHORT-NAME>MyPort</SHORT-NAME>
+              <!--2-->
+              <!--/MyComponent/MyInterface-->
+              <PROVIDED-INTERFACE-TREF BASE="default" DEST="SENDER-RECEIVER-INTERFACE">MyInterface</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+          </PORTS>
+        </APPLICATION-SW-COMPONENT-TYPE>
+      </ELEMENTS>
+    </AR-PACKAGE>
+    <AR-PACKAGE>
+      <SHORT-NAME>CompuMethods</SHORT-NAME>
+      <ELEMENTS>
+        <COMPU-METHOD>
+          <SHORT-NAME>MyCompu</SHORT-NAME>
+          <CATEGORY>RATFUNC</CATEGORY>
+        </COMPU-METHOD>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+清单 4.6 展示了 ReferenceBase 可以嵌套。在这种情况下，CompuMethod 的基础是相对于默认基础定义的。这使得可以在一个 `ARPackage` 的开头维护全部包关系。
+
+它还进一步表明，ReferenceBase 需要从内向外搜索。
+
+1. `&lt;!--1.1.1--&gt;`：这是相对引用的另一个基础。注意 base 属性现在被显式规定。在这里引用默认机制本来也是可行的。
+2. `&lt;!--1.2--&gt;`：这是单位（Unit）的基础。注意这个基础同样是相对于默认定义的。
+3. `&lt;!--2.2--&gt;`：这是一个相对引用。属性 `base` 表明应当把 shortLabel 为 compum（定义于 `&lt;!--1.1.1--&gt;`）的基础用于该相对引用。对应的绝对引用是 /MyComponent/NestedCompuMethods/MyCompu。
+4. `&lt;!--3--&gt;`：这是包含 CompuMethod 的 `ARPackage`。它现在作为嵌套的 `ARPackage` 位于 /MyComponent 中。
+5. `&lt;!--3.1--&gt;`：这是对 Unit 的一个引用，它相对于名为 units 的基础，该基础定义于 `&lt;!--1.2--&gt;`。注意该引用位于一个没有 ReferenceBase 的内层 `ARPackage` 中。
+
+这说明了 ReferenceBase 的 base 位于某个外层 `ARPackage` 中，但不一定在直接包含的 `ARPackage` 中。
+
+6. `&lt;!--4--&gt;`：这是包含 Unit 的 `ARPackage`。它位于 /MyComponent 的一个兄弟 `ARPackage` 中。
+
+清单4.6：带多个嵌套基础的相对引用
+
+```xml
+<?xml version="1.0"?>
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>MyComponent</SHORT-NAME>
+      <REFERENCE-BASES>
+        <!--1-->
+        <REFERENCE-BASE>
+          <SHORT-LABEL>default</SHORT-LABEL>
+          <PACKAGE-REF DEST="AR-PACKAGE">/MyComponent</PACKAGE-REF>
+        </REFERENCE-BASE>
+        <!--1.1-->
+        <REFERENCE-BASE>
+          <SHORT-LABEL>compum</SHORT-LABEL>
+          <!--1.1.1-->
+          <PACKAGE-REF BASE="default" DEST="AR-PACKAGE">NestedCompuMethods</PACKAGE-REF>
+        </REFERENCE-BASE>
+        <REFERENCE-BASE>
+          <SHORT-LABEL>units</SHORT-LABEL>
+          <!--1.2-->
+          <PACKAGE-REF DEST="AR-PACKAGE">/MyUnits</PACKAGE-REF>
+        </REFERENCE-BASE>
+      </REFERENCE-BASES>
+      <ELEMENTS>
+        <SENDER-RECEIVER-INTERFACE>
+          <SHORT-NAME>MyInterface</SHORT-NAME>
+          <DATA-ELEMENTS>
+            <VARIABLE-DATA-PROTOTYPE>
+              <SHORT-NAME>MyData</SHORT-NAME>
+              <CATEGORY>VALUE</CATEGORY>
+              <SW-DATA-DEF-PROPS>
+                <SW-DATA-DEF-PROPS-VARIANTS>
+                  <SW-DATA-DEF-PROPS-CONDITIONAL>
+                    <!--2.2-->
+                    <!--/MyComponent/NestedCompuMethods/MyCompu-->
+                    <COMPU-METHOD-REF DEST="COMPU-METHOD" BASE="compum">MyCompu</COMPU-METHOD-REF>
+                  </SW-DATA-DEF-PROPS-CONDITIONAL>
+                </SW-DATA-DEF-PROPS-VARIANTS>
+              </SW-DATA-DEF-PROPS>
+            </VARIABLE-DATA-PROTOTYPE>
+          </DATA-ELEMENTS>
+        </SENDER-RECEIVER-INTERFACE>
+        <APPLICATION-SW-COMPONENT-TYPE>
+          <SHORT-NAME>MyComponent</SHORT-NAME>
+          <PORTS>
+            <P-PORT-PROTOTYPE>
+              <SHORT-NAME>MyPort</SHORT-NAME>
+              <!--2-->
+              <!--/MyComponent/MyInterface-->
+              <PROVIDED-INTERFACE-TREF BASE="default" DEST="SENDER-RECEIVER-INTERFACE">MyInterface</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+          </PORTS>
+        </APPLICATION-SW-COMPONENT-TYPE>
+      </ELEMENTS>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <!--3-->
+          <SHORT-NAME>NestedCompuMethods</SHORT-NAME>
+          <ELEMENTS>
+            <COMPU-METHOD>
+              <SHORT-NAME>MyCompu</SHORT-NAME>
+              <CATEGORY>RATFUNC</CATEGORY>
+              <!--3.1-->
+              <!--/MyUnits/kmh-->
+              <UNIT-REF BASE="units" DEST="UNIT">kmh</UNIT-REF>
+            </COMPU-METHOD>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+    <!--4-->
+    <AR-PACKAGE>
+      <SHORT-NAME>MyUnits</SHORT-NAME>
+      <ELEMENTS>
+        <UNIT>
+          <SHORT-NAME>kmh</SHORT-NAME>
+        </UNIT>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+清单 4.7 展示了带全局目标的相对引用。
+
+1. `&lt;!--1--&gt;` 表示 referenceBase。由此它声明经由该基础，Chapter 与 Traceable 是全局唯一的。
+2. `&lt;!--2--&gt;` “ChR\_4711” 是一个可全局引用的目标。
+3. `&lt;!--3--&gt;` 经由 `&lt;!--1--&gt;` 中的基础引用一个 TraceableText（“constr\_0815”）。
+4. `&lt;!--5--&gt;` “constr\_0815” 是一个可全局引用的 TraceableText。
+5. `&lt;!--6--&gt;` 经由 `&lt;!--1--&gt;` 中的基础引用一个章节（“ChR\_4711”）。
+
+清单4.7：带全局引用的相对引用
+
+```xml
+<?xml version="1.0"?>
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://autosar.org/schema/r4.0"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00052.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>Demo</SHORT-NAME>
+      <REFERENCE-BASES>
+        <!--1-->
+        <REFERENCE-BASE>
+          <SHORT-LABEL>globals</SHORT-LABEL>
+          <BASE-IS-THIS-PACKAGE>true</BASE-IS-THIS-PACKAGE>
+          <GLOBAL-IN-PACKAGE-REFS>
+            <GLOBAL-IN-PACKAGE-REF DEST="AR-PACKAGE">/Demo</GLOBAL-IN-PACKAGE-REF>
+          </GLOBAL-IN-PACKAGE-REFS>
+          <GLOBAL-ELEMENTS>
+            <GLOBAL-ELEMENT>TRACEABLE</GLOBAL-ELEMENT>
+            <GLOBAL-ELEMENT>CHAPTER</GLOBAL-ELEMENT>
+          </GLOBAL-ELEMENTS>
+        </REFERENCE-BASE>
+      </REFERENCE-BASES>
+      <AR-PACKAGES>
+        <AR-PACKAGE>
+          <SHORT-NAME>mySupPackage</SHORT-NAME>
+          <ELEMENTS>
+            <DOCUMENTATION>
+              <SHORT-NAME>myDoc</SHORT-NAME>
+              <DOCUMENTATION-CONTENT>
+                <!--2-->
+                <CHAPTER>
+                  <SHORT-NAME>ChR_4711</SHORT-NAME>
+                  <LONG-NAME>
+                    <L-4 L="EN">More details on Requirement 4711</L-4>
+                  </LONG-NAME>
+                  <P>
+                    <L-1 L="EN">
+                      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+                      eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+                      <XREF>
+                        <!--3-->
+                        <!--/Demo/mySubPackage/myDoc/Ch_001/Constr_0815 global: /Demo@/Constr_0815-->
+                        <REFERRABLE-REF BASE="globals" DEST="TRACEABLE">Constr_0815</REFERRABLE-REF>
+                      </XREF>
+                      autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
+                      consequat, vel illum dolore eu
+                    </L-1>
+                  </P>
+                </CHAPTER>
+                <CHAPTER>
+                  <SHORT-NAME>Ch_001</SHORT-NAME>
+                  <LONG-NAME>
+                    <L-4 L="EN">an implementation</L-4>
+                  </LONG-NAME>
+                  <!--5-->
+                  <TRACE>
+                    <SHORT-NAME>Constr_0815</SHORT-NAME>
+                    <LONG-NAME>
+                      <L-4 L="EN">This is my specific constraint</L-4>
+                    </LONG-NAME>
+                    <P>
+                      <L-1 L="EN">
+                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+                        eirmod tempor invidunt
+                        <XREF>
+                          <!--6-->
+                          <!--/Demo/mySupPackage/myDoc/ChR_4711 global: /Demo@/ChR_4711-->
+                          <REFERRABLE-REF BASE="globals" DEST="CHAPTER">ChR_4711</REFERRABLE-REF>
+                        </XREF>
+                        autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
+                        consequat, vel illum dolore eu
+                      </L-1>
+                    </P>
+                  </TRACE>
+                </CHAPTER>
+              </DOCUMENTATION-CONTENT>
+            </DOCUMENTATION>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
+```
+
+#### 4.4.4. 层次化的引用基础
+
+ReferenceBase 可以层次化地使用。这意味着一个 base 属性等于适用的 ReferenceBase 之 shortLabel 的引用，又以一个 base 属性指向另一个 `ARPackage`。
+
+下面的示例展示了对 `PortPrototypeBlueprint` “BrkPedlVal” 的引用，它涉及两个嵌套的 ReferenceBase：
+
+```xml
+<ELEMENT-REF BASE="PortPrototypeBlueprints" DEST="PORT-PROTOTYPE-BLUEPRINT">BrkPedlVal</ELEMENT-REF>
+...
+<REFERENCE-BASE>
+  <SHORT-LABEL>PortPrototypeBlueprints</SHORT-LABEL>
+  <PACKAGE-REF BASE="AISpec" DEST="AR-PACKAGE">PortPrototypeBlueprints_Blueprint</PACKAGE-REF>
+</REFERENCE-BASE>
+...
+<REFERENCE-BASE>
+  <SHORT-LABEL>AISpec</SHORT-LABEL>
+  <PACKAGE-REF DEST="AR-PACKAGE">/AUTOSAR/AISpecification</PACKAGE-REF>
+</REFERENCE-BASE>
+```
+
+目标元素得到的绝对 AUTOSAR 路径是 /AUTOSAR/AISpecification/PortPrototypeBlueprints\_Blueprint/BrkPedlVal。
+
+**引用的递归迭代**
+
+层次化引用结构从一个 base 属性等于适用的 ReferenceBase 之 shortLabel 的 Ref 开始。若该 ReferenceBase 不包含带 base 属性的包引用，则层次化引用到此结束（中止判据）。否则，递归迭代通过解析指向下一个 ReferenceBase 的 base 属性继续。ReferenceBase 的链条最终指向某个 `ARPackage`，原始引用的目标元素可以在其中解析。
+
+出于实用原因，层次化引用结构的嵌套层次不应被大量使用。
+
+### 4.5. 管理数据（Administrative Data）
+
+AdminData 用于为对象标注管理性元数据。它涵盖多个方面：
+
+**通过 AdminData 控制文档语言**
+
+对文档中语言的控制（参见第 3 章与第 9.6 章）。
+
+**约束：文档语言控制的唯一性**
+
+多语言的设置只在顶层 AdminData 中规定。
+
+**版本管理**
+
+版本与变更管理通过 `DocRevision` 执行。请注意，当前修订的条目排在第一位。关于先前修订的信息可以作为变更历史提供。
+
+**版本管理中的合并操作**
+
+`DocRevision` 允许规定其前驱的修订标签，以记录合并操作。
+
+**版本管理中的特殊信息**
+
+`Sdg` 允许在 AUTOSAR 标准化模型之外标注特定信息。`Sdg` 的使用应当由相关各方共同商定。
+
+![图 4.9：AdminData](Figure4-9.png)
+
+表4.16：AdminData
+
+| 类         | AdminData                                                                                                                                                                                                                                                                                          |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::AsamHdo::AdminData                                                                                                                                                                                                                                                                             |
+| 注意       | AdminData 表示为元素表达管理性信息与自定义扩展的能力。该管理信息应当作为元数据处理，例如修订号或文件状态。基本上有以下几类元数据：语言和/或所用语言；涵盖例如修订号、状态、发布日期、变更的修订信息（注意，该信息既可以一般性地给出，也可以与特定公司相关联）；特定于公司的文档元数据。除此之外，还可以通过特殊数据（Special Data）对模型数据进行自定义扩展。 |
+| 基类       | ARObject                                                                                                                                                                                                                                                                                                |
+| 聚合于     | AUTOSAR.adminData、Describable.adminData、Identifiable.adminData                                                                                                                                                                                                                                         |
+
+| 属性                   | 类型                    | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                                                     |
+|------------------------|-------------------------|--------|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| docRevision (ordered)  | DocRevision             | *      | aggr | 这允许标注关于对象当前修订的信息。注意，关于先前修订的信息也可以记录于此。这些条目应当按日期降序排序以反映历史。因此，表示当前版本的最新条目排在第一位。标签：xml.roleElement=true xml.roleWrapperElement=true xml.sequenceOffset=50 xml.typeElement=false xml.typeWrapperElement=false                |
+| language               | LEnum                   | 0..1   | attr | 该属性规定文档或文档片段的主语言。主语言是维护文档并从中派生其他语言的语言。特别是在出现不一致的情况下，主语言中的信息具有优先级。标签：xml.sequenceOffset=20                                                                                                                                             |
+| sdg                    | Sdg                     | *      | aggr | 该属性允许保留标准模型未表示的特殊数据。它可用于保存例如工具特定的数据。构型：atpSplitable 标签：atp.Splitkey=sdg.sdgCaption.shortName xml.roleElement=true xml.roleWrapperElement=true xml.sequenceOffset=60 xml.typeElement=false xml.typeWrapperElement=false                                        |
+| usedLanguages          | MultiLanguagePlainText  | 0..1   | aggr | 该属性规定文档中提供的语言。因此它只应当在顶层 admin 数据中规定。文档中提供的每种语言在 MultilanguagePlainText 中有一个条目。每个条目的内容可用于展示该语言。所用语言本身取决于条目中的 language 属性。标签：xml.sequenceOffset=30                                                                          |
+
+表4.17：DocRevision
+
+| 类         | DocRevision                                                                           |
+|------------|------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::AsamHdo::AdminData                                                              |
+| 注意       | 该元类表示维护与文档或对象的修订管理相关的信息的能力。                                       |
+| 基类       | ARObject                                                                                |
+| 聚合于     | AdminData.docRevision                                                                    |
+
+| 属性             | 类型                | 多重性 | 类别 | 注意                                                                                                                                                  |
+|------------------|---------------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| date             | DateTime            | 1      | attr | 这规定相关对象发布时的日期与时间。标签：xml.sequenceOffset=80                                                                                                |
+| issuedBy         | String              | 0..1   | attr | 这是发布文档或文档片段当前修订的个人或组织的名称。标签：xml.sequenceOffset=60                                                                                      |
+| modification     | Modification        | *      | aggr | 该属性表示相对于其前驱的一项特定修改。标签：xml.roleElement=true xml.roleWrapperElement=true xml.sequenceOffset=100 xml.typeElement=false xml.typeWrapperElement=false |
+| revisionLabel    | RevisionLabelString | 0..1   | attr | 该属性表示对象的版本号。标签：xml.sequenceOffset=20                                                                                                            |
+| revisionLabelP1  | RevisionLabelString | 0..1   | attr | 该属性表示对象第一个前驱的版本号。标签：xml.sequenceOffset=30                                                                                                    |
+| revisionLabelP2  | RevisionLabelString | 0..1   | attr | 该属性表示对象第二个前驱的版本号。当对象是一个合并过程的结果——即两个分支合并为一个新的修订——时使用该属性。标签：xml.sequenceOffset=40                                    |
+| state            | NameToken           | 0..1   | attr | 属性 state 按照配置管理计划表示当前文件的当前状态。在可能的状态被标准化之前，它是一个 NameToken。标签：xml.sequenceOffset=50                                          |
+
+表4.18：Modification
+
+| 类         | Modification                                                                               |
+|------------|-----------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::AsamHdo::AdminData                                                                    |
+| 注意       | 该元类表示记录文档相对于其前驱发生了什么变更的能力。                                              |
+| 基类       | ARObject                                                                                      |
+| 聚合于     | DocRevision.modification                                                                       |
+
+| 属性   | 类型                             | 多重性 | 类别 | 注意                                                 |
+|--------|----------------------------------|--------|------|--------------------------------------------------------|
+| change | MultiLanguageOverviewParagraph   | 1      | aggr | 该属性表示对对象执行的那项特定变更。标签：xml.sequenceOffset=20 |
+| reason | MultiLanguageOverviewParagraph   | 0..1   | aggr | 该属性表示该特定变更的理由。标签：xml.sequenceOffset=30        |
+
+### 4.6. 特殊数据——扩展机制
+
+#### 4.6.1. 特殊数据
+
+特殊数据组（`Sdg`）提供了一种标准化机制，用于存储数据模型中不存在其他元素可承载的任意数据。
+
+**Sdg 的用例**
+
+特殊数据的预期用例如：
+
+- 在 AUTOSAR 模型中表示专有信息，而无需“随附（sidecar）”文件；
+- 表示用于规避 AUTOSAR 元模型缺陷或缺失特性的信息；
+- 在模型中的专用位置表示用例（例如 `BuildActionIoElement`）。
+
+`Sdg` 的应用取决于相关各方之间的共同约定。
+
+**特殊数据中可用的建模支持**
+
+基本上，`Sdg` 允许对任意模型进行通用表示（类似于“well-formed XML”），而无需显式的元模型。它提供以下途径：
+
+- 聚合在 `SdgContents` 之外的 `Sdg` 表示特殊数据的根容器。
+- 角色 `SdgContents.sdg` 中的 `Sdg` 表示结构化信息的容器。它可以包含 `sdg`、`sd` 与 `sdx` 的任意混合。
+- 角色 `Sdg.sdg` 中的 `Sd` 表示原始信息。与 `TagWithOptionalValue` 相反，其值是隐式表示的，因此不能是可选的（参见 [TPS\_GST\_00358]）。
+- `Sdg.sdx`（对 `Referrable` 的引用）表示一个关联。
+
+**Sdg 的应用**
+
+`Sdg` 的应用有一处细微差别：
+
+- `AdminData.sdg` 用于纯粹的专有目的；
+- 其他元类中的专用聚合，其目的在相应的模板中描述。
+
+**特殊数据中角色的规定**
+
+特殊数据中元素的特定角色标注在 `Sd` 或 `Sdg` 的属性 `gid` 中。注意 `sdx` 没有这样的属性。如果需要标注特定角色，则需要把一个额外的容器 `sdg` 包裹在 `sdx` 外面。
+
+以下提示适用：
+
+- 按共同约定创建单独的 `sdg`。这可以在 `gid` 中以组织名或指示特定语义的名称标注。
+- 为 `gid` 选择有区分度的名称，因为 `Sdg` 不建立命名空间。
+- 选择合适的容器（`sdg`）布局：既不要每个 `sd` 一个容器，也不要把所有 `sd` 放进一个“巨型容器”。
+- 不要用 `sdg` 表示元模型已经支持的信息。
+- 注意 `sd` 保留空白字符。
+
+示例 4.8 展示了一个用例 “tracing-info” 作为较完整的示例。它规定了文档相对于需求追溯的一些属性。它是一个带有一组属性的简单容器。
+
+清单4.8：特殊数据的简单示例
+
+```xml
+<SDG GID="TRACING-INFO">
+  <SD GID="ITEM-PREFIX">BswM</SD>
+  <SD GID="CONTRIBUTES-TO-GENERAL">SRS_BSWGeneral</SD>
+  <SD GID="CONTRIBUTES-TO">SRS_ModeManagement</SD>
+  <SD GID="INCLUDES">SWS_BSWGeneral</SD>
+</SDG>
+```
+
+示例 4.9 展示了一个用例 “Relation” 作为简单示例。该示例展示了如何使用 `Sdg` 表示一个需求与相关开发对象之间的关系。该示例特别展示：
+
+- 一个带有 `sdgCaption`（其中包含 shortName 与 desc）的 `Sdg`；
+- 由 `sdx` 表示的任意关联；
+- 引用 /My/Mypackage 的 `sdx` 的角色未被显式规定；
+- 这些关联的语义由外层的 `sdg` 表达；
+- `SdgContents` 中 `sdg`、`sd` 与 `sdx` 的任意混合。
+
+清单4.9：带引用的特殊数据示例
+
+```xml
+<SDG GID="EXAMPLE-RELATION">
+  <SDG-CAPTION>
+    <SHORT-NAME>Rel_90</SHORT-NAME>
+    <LONG-NAME>
+      <L-4 L="AA">This is the relationship no 90</L-4>
+    </LONG-NAME>
+    <DESC>
+      <L-2 L="AA">This relationship specifies objects related to requirement 90.</L-2>
+    </DESC>
+  </SDG-CAPTION>
+  <SDX-REF DEST="AR-PACKAGE">/My/Mypackage</SDX-REF>
+  <SD GID="SEVERITY">significant</SD>
+  <SDG GID="SOURCE">
+    <SDX-REF DEST="TRACEABLE" BASE="ArTrace">RS_MyReq_0090</SDX-REF>
+  </SDG>
+  <SDG GID="TARGETS">
+    <SDX-REF DEST="SW-COMPONENT-TYPE" BASE="MyComponent">SwComponentTypes/MyComponent</SDX-REF>
+    <SDX-REF DEST="COMPU-METHOD" BASE="MyComponent">CompuMethods/MyMethod</SDX-REF>
+    <SDX-REF DEST="AUTOSAR-DATA-TYPE" BASE="MyComponent">ImplementationDataTypes/MyType</SDX-REF>
+  </SDG>
+  <SD GID="Path">maintenance</SD>
+</SDG>
+```
+
+关于在特殊数据组中表达可变性，参见清单 4.10。
+
+清单4.10：带端口引用与变体的特殊数据示例
+
+```xml
+<SDG GID="EXAMPLE-PORT-REF">
+  <SDXF>
+    <REFERRABLE-REF DEST="P-PORT-PROTOTYPE" BASE="MyComponent">SwComponentTypes/MyComponent/PData1</REFERRABLE-REF>
+    <VARIATION-POINT>
+      <SW-SYSCOND BINDING-TIME="PRE-COMPILE-TIME">
+        <SYSC-REF DEST="SW-SYSTEMCONST" BASE="MySwSystemconsts">SwSystemconsts/ScVar1</SYSC-REF>
+        &gt;= 1
+      </SW-SYSCOND>
+    </VARIATION-POINT>
+  </SDXF>
+  <SDF GID="EXAMPLE-VARIANT-SD">
+    <VALUE><SYSC-REF DEST="SW-SYSTEMCONST" BASE="MySwSystemconsts">SwSystemconsts/ScVar2</SYSC-REF> +4</VALUE>
+  </SDF>
+  <SDG GID="EXAMPLE-VARIANT-SDG">
+    <SD GID="Path">maintenance</SD>
+    <VARIATION-POINT>
+      <SW-SYSCOND BINDING-TIME="PRE-COMPILE-TIME">
+        <SYSC-REF DEST="SW-SYSTEMCONST" BASE="MySwSystemconsts">SwSystemconsts/ScVar3</SYSC-REF>
+        &lt; 1
+      </SW-SYSCOND>
+    </VARIATION-POINT>
+  </SDG>
+</SDG>
+```
+
+![图 4.10：SpecialData](Figure4-10.png)
+
+表4.19：Sdg
+
+| 类         | Sdg                                                                                                                                                                                                                                                                                                                                                       |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::AsamHdo::SpecialData                                                                                                                                                                                                                                                                                                                                   |
+| 注意       | Sdg（SpecialDataGroup）是一个通用模型，可用于保存元模型中未显式建模的任意信息。Sdg 可以具有 sdgContentsType 定义的各种内容。特殊数据应当只被适度使用，因为所有元素都应当在元模型中定义。因此，SDG 应当被视为在尚无显式模型可用时的临时解决方案。若存在 sdgCaption，则可以建立指向该 sdg 结构的引用。                                                                                  |
+| 基类       | ARObject                                                                                                                                                                                                                                                                                                                                                         |
+| 聚合于     | AdminData.sdg、BuildActionEnvironment.sdg、BuildActionInvocator.sdg、BuildActionIoElement.sdg、FileInfoComment.sdg、RptHook.sdg、SdgContents.sdg、VariationPoint.sdg                                                                                                                                                                                              |
+
+| 属性             | 类型        | 多重性 | 类别 | 注意                                                                                                                                                                                              |
+|------------------|-------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| gid              | NameToken   | 1      | attr | 该属性规定一个标识符。Gid 来自 SGML/XML 术语“Generic Identifier”，即 XML 中的元素名。该属性的角色与 XML 元素的名称相同。标签：xml.attribute=true                                                            |
+| sdgCaption       | SdgCaption  | 0..1   | aggr | 该聚合允许把 Identifiable 的属性指派给 sdg。由此可以为 Sdg 指派 shortName 等。构型：atpIdentityContributor 标签：xml.sequenceOffset=20                                                                       |
+| sdgContentsType  | SdgContents | 0..1   | aggr | 这是 Sdg 的内容。标签：xml.roleElement=false xml.roleWrapperElement=false xml.sequenceOffset=30 xml.typeElement=false xml.typeWrapperElement=false                                                         |
+
+表4.20：SdgContents
+
+| 类         | &lt;&lt;atpMixed&gt;&gt; SdgContents                                                                                    |
+|------------|-----------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::AsamHdo::SpecialData                                                                                                 |
+| 注意       | 该元类表示特殊数据组的可能内容。它可以是对引用、原始特殊数据与嵌套特殊数据组的任意混合。                                          |
+| 基类       | ARObject                                                                                                                     |
+| 聚合于     | Sdg.sdgContentsType                                                                                                          |
+
+| 属性 | 类型      | 多重性 | 类别 | 注意                                                                                                                                                                                                                                |
+|------|-----------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| sd   | Sd        | 0..1   | aggr | 这是一个特定的特殊数据元素。标签：xml.sequenceOffset=40                                                                                                                                                                                        |
+| sdf  | Sdf       | 0..1   | aggr | 这是一个特定的特殊数据元素。标签：xml.sequenceOffset=60                                                                                                                                                                                        |
+| sdg  | Sdg       | 0..1   | aggr | 该聚合允许表达嵌套的特殊数据组。由此，任何结构都可以在 SpeicalData（源文如此）中表示。构型：atpSplitable；atpVariation 标签：atp.Splitkey=sdg.sdgCaption.shortName, sdg.variationPoint.shortLabel vh.latestBindingTime=postBuild xml.sequenceOffset=50 |
+| sdx  | Referrable| 0..1   | ref  | 对任何可标识元素的引用。这使得 Sdg 甚至可以用来建立任意的关联关系。                                                                                                                                                                                |
+| sdxf | Referrable| 0..1   | ref  | 带变体支持的附加引用。构型：atpSplitable；atpVariation 标签：atp.Splitkey=sdxf.referrable, sdxf.variationPoint.shortLabel vh.latestBindingTime=postBuild                                                                                              |
+
+表4.21：SdgCaption
+
+| 类         | SdgCaption                                                                                                       |
+|------------|----------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::AsamHdo::SpecialData                                                                                          |
+| 注意       | 该元类表示特殊数据组的标题（caption）。这使得特殊数据的某些部分可以成为可标识的。                                          |
+| 基类       | ARObject、MultilanguageReferrable、Referrable                                                                            |
+| 聚合于     | Sdg.sdgCaption                                                                                                          |
+
+| 属性 | 类型                             | 多重性 | 类别 | 注意                                                                                                                                                      |
+|------|----------------------------------|--------|------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| desc | MultiLanguageOverviewParagraph   | 0..1   | aggr | 这表示关于相关特殊数据是什么的一般但简短（单段）描述。它只有一个段落！Desc 旨在被收集到概览表中。该属性帮助人类读者识别相关特殊数据。                                |
+
+表4.22：Sd
+
+| 类         | Sd                                                                                              |
+|------------|------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::AsamHdo::SpecialData                                                                          |
+| 注意       | 该类表示特殊数据组中的一个原始元素。                                                                     |
+| 基类       | ARObject                                                                                              |
+| 聚合于     | SdgContents.sd                                                                                          |
+
+| 属性     | 类型                | 多重性 | 类别 | 注意                                                                                                                                                                                          |
+|----------|---------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| gid      | NameToken           | 1      | attr | 该属性规定一个标识符。Gid 来自 SGML/XML 术语“Generic Identifier”，即 XML 中的元素名。该属性的角色与 XML 元素的名称相同。标签：xml.attribute=true                                                            |
+| value    | VerbatimStringPlain | 1      | attr | 这是特殊数据的取值。标签：xml.roleElement=false xml.roleWrapperElement=false xml.typeElement=false xml.typeWrapperElement=false                                                                          |
+| xmlSpace | XmlSpaceEnum        | 0..1   | attr | 该属性用于表示一个意图：在该元素中，应用程序应当保留空白字符。它按照 W3C 声明的 xml:space 定义。标签：xml.attribute=true xml.attributeRef=true xml.enforceMinMultiplicity=true xml.name=space xml.nsPrefix=xml |
+
+表4.23：Sdf
+
+| 类         | Sdf                                                                                        |
+|------------|-------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::AsamHdo::SpecialData                                                                    |
+| 注意       | 该类表示特殊数据组中一个可能受可变性支配的数值。                                                    |
+| 基类       | ARObject                                                                                        |
+| 聚合于     | SdgContents.sdf                                                                                   |
+
+| 属性  | 类型      | 多重性 | 类别 | 注意                                                                                                                                                                |
+|-------|-----------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| gid   | NameToken | 1      | attr | 该属性规定一个标识符。Gid 来自 SGML/XML 术语“Generic Identifier”，即 XML 中的元素名。该属性的角色与 XML 元素的名称相同。标签：xml.attribute=true                                    |
+| value | Numerical | 0..1   | attr | 这是特殊数据的取值。构型：atpVariation 标签：vh.latestBindingTime=preCompileTime                                                                                                  |
+
+#### 4.6.2. 特殊数据定义
+
+**SdgDef 的用途**
+
+特殊数据组定义（**Special Data Group Definition**，SdgDef）规定 AUTOSAR 模型中所接受的 `Sdg` 的结构。该结构通过使用 `SdgClass` 及其 `SdgAttribute`（`SdgPrimitiveAttribute`、`SdgPrimitiveAttributeWithVariation`、`SdgReference`、`SdgAggregationWithVariation`、`SdgForeignReference` 和 `SdgForeignReferenceWithVariation`）规定一个元模型来定义。
+
+`SdgDef` 是 UML 构型（Profile）的 AUTOSAR 对应物。
+
+**SdgPrimitiveAttribute 与 SdgPrimitiveAttributeWithVariation 的类别**
+
+`SdgPrimitiveAttribute` 的标准化类别为 INTEGER、BOOLEAN、FLOAT、STRING、ENUMERATION。`SdgPrimitiveAttributeWithVariation` 的标准化类别为 INTEGER、BOOLEAN、FLOAT、ENUMERATION 之一。
+
+清单 4.12 展示了一个枚举属性 “severity” 的定义。枚举属性的建模使用 `SdgPrimitiveAttribute.pattern` 完成，它定义有效的枚举字面量。
+
+**SdgClass 的用途**
+
+`SdgClass` 规定具有特定 `gid` 的 `Sdg` 的结构。
+
+`SdgClass` 是 UML 构型（Stereotype）的 AUTOSAR 对应物。
+
+**SdgClass.extendsMetaClass 与 SdgAbstractForeignReference.destMetaClass 取值的规定**
+
+作为 `SdgClass.extendsMetaClass` 与 `SdgAbstractForeignReference.destMetaClass` 取值输入的字符串应当遵循 XML schema 中定义的 M2 类名的格式，且被引用的类需要（直接或间接）派生自 `Referrable`。
+
+![图 4.11：特殊数据组定义（Special Data Group Definition）](Figure4-11.png)
+
+示例 4.11 规定了一个特殊数据组定义 `SdgDef`，它接受如示例 4.8 所述的简单扩展。
+
+清单4.11：特殊数据定义示例
+
+```xml
+<SDG-DEF>
+  <SHORT-NAME>TracingInfoExtension</SHORT-NAME>
+  <SDG-CLASSES>
+    <SDG-CLASS>
+      <SHORT-NAME>TracingInfo</SHORT-NAME>
+      <GID>TRACING-INFO</GID>
+      <EXTENDS-META-CLASS>Documentation</EXTENDS-META-CLASS>
+      <ATTRIBUTES>
+        <SDG-PRIMITIVE-ATTRIBUTE>
+          <SHORT-NAME>ItemPrefix</SHORT-NAME>
+          <GID>ITEM-PREFIX</GID>
+        </SDG-PRIMITIVE-ATTRIBUTE>
+        <SDG-PRIMITIVE-ATTRIBUTE>
+          <SHORT-NAME>ContributesToGeneral</SHORT-NAME>
+          <GID>CONTRIBUTES-TO-GENERAL</GID>
+        </SDG-PRIMITIVE-ATTRIBUTE>
+        <SDG-PRIMITIVE-ATTRIBUTE>
+          <SHORT-NAME>ContributesTo</SHORT-NAME>
+          <GID>CONTRIBUTES-TO</GID>
+        </SDG-PRIMITIVE-ATTRIBUTE>
+        <SDG-PRIMITIVE-ATTRIBUTE>
+          <SHORT-NAME>Includes</SHORT-NAME>
+          <GID>INCLUDES</GID>
+        </SDG-PRIMITIVE-ATTRIBUTE>
+      </ATTRIBUTES>
+    </SDG-CLASS>
+  </SDG-CLASSES>
+</SDG-DEF>
+```
+
+示例 4.12 规定了一个特殊数据组定义 `SdgDef`，它接受带嵌套 `Sdg` 容器和对 AUTOSAR 模型对象的引用的扩展。一个被接受的 `Sdg` 的示例见 4.9。
+
+清单4.12：规定带子组与引用的特殊数据结构的特殊数据定义示例
+
+```xml
+<SDG-DEF>
+  <SHORT-NAME>ExampleSdgDefWithForeignReferencesAndSubSdgs</SHORT-NAME>
+  <SDG-CLASSES>
+    <SDG-CLASS>
+      <SHORT-NAME>ExampleRelation</SHORT-NAME>
+      <GID>EXAMPLE-RELATION</GID>
+      <EXTENDS-META-CLASS>ARPackage</EXTENDS-META-CLASS>
+      <CAPTION>true</CAPTION>
+      <ATTRIBUTES>
+        <SDG-FOREIGN-REFERENCE>
+          <SHORT-NAME>packageRef</SHORT-NAME>
+          <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+          <DEST-META-CLASS>ArPackage</DEST-META-CLASS>
+        </SDG-FOREIGN-REFERENCE>
+        <SDG-PRIMITIVE-ATTRIBUTE>
+          <SHORT-NAME>severity</SHORT-NAME>
+          <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+          <GID>SEVERITY</GID>
+          <PATTERN>critical|significant|minor|low</PATTERN>
+        </SDG-PRIMITIVE-ATTRIBUTE>
+        <SDG-AGGREGATION-WITH-VARIATION>
+          <SHORT-NAME>source</SHORT-NAME>
+          <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+          <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+          <GID>SOURCE</GID>
+          <VARIATION>false</VARIATION>
+          <SUB-SDG-REF DEST="SDG-CLASS" BASE="Extensions">ExampleSdgDefWithForeignReferencesAndSubSdgs/SourceRefContainer</SUB-SDG-REF>
+        </SDG-AGGREGATION-WITH-VARIATION>
+        <SDG-AGGREGATION-WITH-VARIATION>
+          <SHORT-NAME>target</SHORT-NAME>
+          <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+          <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+          <GID>TARGETS</GID>
+          <VARIATION>false</VARIATION>
+          <SUB-SDG-REF DEST="SDG-CLASS" BASE="Extensions">ExampleSdgDefWithForeignReferencesAndSubSdgs/TargetsRefContainer</SUB-SDG-REF>
+        </SDG-AGGREGATION-WITH-VARIATION>
+        <SDG-PRIMITIVE-ATTRIBUTE>
+          <SHORT-NAME>path</SHORT-NAME>
+          <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+          <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+          <GID>Path</GID>
+        </SDG-PRIMITIVE-ATTRIBUTE>
+      </ATTRIBUTES>
+    </SDG-CLASS>
+    <SDG-CLASS>
+      <SHORT-NAME>SourceRefContainer</SHORT-NAME>
+      <GID>SOURCE-REF-CONTAINER</GID>
+      <EXTENDS-META-CLASS>ARPackage</EXTENDS-META-CLASS>
+      <CAPTION>true</CAPTION>
+      <ATTRIBUTES>
+        <SDG-FOREIGN-REFERENCE>
+          <SHORT-NAME>sourceRef</SHORT-NAME>
+          <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+          <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+          <DEST-META-CLASS>Traceable</DEST-META-CLASS>
+        </SDG-FOREIGN-REFERENCE>
+      </ATTRIBUTES>
+    </SDG-CLASS>
+    <SDG-CLASS>
+      <SHORT-NAME>TargetsRefContainer</SHORT-NAME>
+      <GID>STARGET-REF-CONTAINER</GID>
+      <EXTENDS-META-CLASS>ARPackage</EXTENDS-META-CLASS>
+      <CAPTION>true</CAPTION>
+      <ATTRIBUTES>
+        <SDG-FOREIGN-REFERENCE>
+          <SHORT-NAME>targetRef</SHORT-NAME>
+          <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+          <UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+          <DEST-META-CLASS>Referrable</DEST-META-CLASS>
+        </SDG-FOREIGN-REFERENCE>
+      </ATTRIBUTES>
+    </SDG-CLASS>
+  </SDG-CLASSES>
+</SDG-DEF>
+```
+
+示例 4.13 规定了一个特殊数据组定义 `SdgDef`，它接受带变体的扩展。一个被接受的 `Sdg` 的示例见 4.10。
+
+清单4.13：规定带变体的特殊数据结构的特殊数据定义示例
+
+```xml
+<SDG-DEF>
+  <SHORT-NAME>ExampleSdgDefWithVariation</SHORT-NAME>
+  <SDG-CLASSES>
+    <SDG-CLASS>
+      <SHORT-NAME>ExampleSdgWithVariation</SHORT-NAME>
+      <GID>EXAMPLE-PORT-REF</GID>
+      <ATTRIBUTES>
+        <SDG-FOREIGN-REFERENCE-WITH-VARIATION>
+          <SHORT-NAME>exampleVariantSfxf</SHORT-NAME>
+          <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+          <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+          <DEST-META-CLASS>PortPrototype</DEST-META-CLASS>
+          <VARIATION>true</VARIATION>
+          <VALID-BINDING-TIMES>
+            <VALID-BINDING-TIME>PRE-COMPILE-TIME</VALID-BINDING-TIME>
+            <VALID-BINDING-TIME>SYSTEM-DESIGN-TIME</VALID-BINDING-TIME>
+          </VALID-BINDING-TIMES>
+        </SDG-FOREIGN-REFERENCE-WITH-VARIATION>
+        <SDG-PRIMITIVE-ATTRIBUTE-WITH-VARIATION>
+          <SHORT-NAME>ExampleVariantSd</SHORT-NAME>
+          <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+          <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+          <GID>EXAMPLE-VARIANT-SD</GID>
+          <VARIATION>true</VARIATION>
+          <VALID-BINDING-TIMES>
+            <VALID-BINDING-TIME>PRE-COMPILE-TIME</VALID-BINDING-TIME>
+            <VALID-BINDING-TIME>SYSTEM-DESIGN-TIME</VALID-BINDING-TIME>
+          </VALID-BINDING-TIMES>
+        </SDG-PRIMITIVE-ATTRIBUTE-WITH-VARIATION>
+        <SDG-AGGREGATION-WITH-VARIATION>
+          <SHORT-NAME>ExampleVariantSdg</SHORT-NAME>
+          <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+          <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+          <GID>EXAMPLE-VARIANT-SDG</GID>
+          <VARIATION>true</VARIATION>
+          <VALID-BINDING-TIMES>
+            <VALID-BINDING-TIME>PRE-COMPILE-TIME</VALID-BINDING-TIME>
+            <VALID-BINDING-TIME>SYSTEM-DESIGN-TIME</VALID-BINDING-TIME>
+          </VALID-BINDING-TIMES>
+          <SUB-SDG-REF DEST="SDG-CLASS" BASE="Extensions">ExampleSdgDefWithVariation/ExampleVariantSdgContainer</SUB-SDG-REF>
+        </SDG-AGGREGATION-WITH-VARIATION>
+      </ATTRIBUTES>
+    </SDG-CLASS>
+    <SDG-CLASS>
+      <SHORT-NAME>ExampleVariantSdgContainer</SHORT-NAME>
+      <ATTRIBUTES>
+        <SDG-PRIMITIVE-ATTRIBUTE>
+          <SHORT-NAME>Path</SHORT-NAME>
+          <GID>Path</GID>
+        </SDG-PRIMITIVE-ATTRIBUTE>
+      </ATTRIBUTES>
+    </SDG-CLASS>
+  </SDG-CLASSES>
+</SDG-DEF>
+```
+
+**若取值侧的 Sdg 应当可引用，则置 SdgClass.caption = true**
+
+如果某个 `SdgClass` 所定义的 `Sdg` 应当是可引用的，则属性 `SdgClass.caption` 应当置为 `true`。在这种情况下，一个有效的 `Sdg` 实例必须拥有 `SdgCaption`。若属性 `SdgClass.caption` 未设置，或设置的值为 `false`，则 `SdgCaption` 的使用是可选的。
+
+[TPS\_GST\_00425] 必须区分定义侧（示例 4.14）与取值侧（示例 4.15）。caption 的存在是一种引用 `Sdg` 的机制，用于标准化引用方式无法适用的情况。
+
+清单4.14：特殊数据定义侧示例
+
+```xml
+<SDG-DEF>
+  <SHORT-NAME>InstanceExtensions</SHORT-NAME>
+  <SDG-CLASSES>
+    <SDG-CLASS>
+      <SHORT-NAME>ProvidedUserDefinedServiceInstance</SHORT-NAME>
+      <GID>acme:instanceExtensions</GID>
+      <EXTENDS-META-CLASS>ProvidedUserDefinedServiceInstance</EXTENDS-META-CLASS>
+      <CAPTION>true</CAPTION>
+      <ATTRIBUTES>
+        <SDG-FOREIGN-REFERENCE>
+          <SHORT-NAME>SdServerTimeConfig</SHORT-NAME>
+          <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+          <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+          <GID>acme:sdServerTimeConfig</GID>
+          <DEST-META-CLASS>SomeipSdServerServiceInstanceConfig</DEST-META-CLASS>
+        </SDG-FOREIGN-REFERENCE>
+      </ATTRIBUTES>
+    </SDG-CLASS>
+  </SDG-CLASSES>
+</SDG-DEF>
+```
+
+清单4.15：特殊数据取值侧示例
+
+```xml
+<PROVIDED-USER-DEFINED-SERVICE-INSTANCE>
+  <SHORT-NAME>UDSI</SHORT-NAME>
+  <ADMIN-DATA>
+    <SDGS>
+      <SDG GID="acme:instanceExtensions">
+        <SDG GID="acme:sdServerTimeConfig">
+          <SDG-CAPTION>
+            <SHORT-NAME>MyConfigRef</SHORT-NAME>
+          </SDG-CAPTION>
+          <SDX-REF DEST="SOMEIP-SD-SERVER-SERVICE-INSTANCE-CONFIG">MyConf</SDX-REF>
+        </SDG>
+      </SDG>
+    </SDGS>
+  </ADMIN-DATA>
+</PROVIDED-USER-DEFINED-SERVICE-INSTANCE>
+```
+
+类 `SdgReference` 可以在定义侧用于建模一个指向取值侧某个 `Sdg` 的引用。在定义侧，属性 `SdgReference.destSdg` 指向一个 `SdgClass`，后者描述被引用 `Sdg` 的目标类型。注意，在取值侧，该引用通过源 `Sdg` 定义一个指向被引用 `Sdg` 的 `sdgCaption` 的 `sdx` 属性来实现。为了在取值侧强制 `SdgCaption` 的存在，`SdgReference.destSdg` 所引用的 `SdgClass` 的属性 `SdgClass.caption` 必须置为 `true`，参见 [TPS\_GST\_00425]。
+
+假设一个 SWC（示例 4.16），其中要把一些自定义的安全指南和一个指向安全等级的引用规定为特殊数据。
+
+清单4.16：SWC 中特殊数据用法示例
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>SwComponentTypes</SHORT-NAME>
+  <ELEMENTS>
+    <APPLICATION-SW-COMPONENT-TYPE>
+      <SHORT-NAME>SwcFoo</SHORT-NAME>
+      <ADMIN-DATA>
+        <SDGS>
+          <SDG GID="CustomSafetyGuidelines">
+            <SDX-REF DEST="SDG-CAPTION">/SwComponentTypes/SwcFoo/ASIL_B</SDX-REF>
+            <SD GID="Rule">R00042</SD>
+          </SDG>
+          <SDG GID="SafetyLevel">
+            <SDG-CAPTION>
+              <SHORT-NAME>ASIL_B</SHORT-NAME>
+            </SDG-CAPTION>
+            <SD GID="ASIL">B</SD>
+          </SDG>
+        </SDGS>
+      </ADMIN-DATA>
+    </APPLICATION-SW-COMPONENT-TYPE>
+  </ELEMENTS>
+</AR-PACKAGE>
+```
+
+这可以用以下 `Sdg` 定义建模（示例 4.17）：
+
+清单4.17：对应的特殊数据定义示例
+
+```xml
+<AR-PACKAGE>
+  <SHORT-NAME>SdgDefs</SHORT-NAME>
+  <ELEMENTS>
+    <SDG-DEF>
+      <SHORT-NAME>CustomSafetyExtensionDef</SHORT-NAME>
+      <SDG-CLASSES>
+        <SDG-CLASS>
+          <SHORT-NAME>CustomSafetyGuidelines</SHORT-NAME>
+          <GID>CustomSafetyGuidelines</GID>
+          <ATTRIBUTES>
+            <SDG-REFERENCE>
+              <SHORT-NAME>SafetyLevelRef</SHORT-NAME>
+              <DEST-SDG-REF DEST="SDG-CLASS">/SdgDefs/CustomSafetyExtensionDef/SafetyLevelDef</DEST-SDG-REF>
+            </SDG-REFERENCE>
+            <SDG-PRIMITIVE-ATTRIBUTE>
+              <SHORT-NAME>RuleDef</SHORT-NAME>
+              <CATEGORY>STRING</CATEGORY>
+              <UPPER-MULTIPLICITY-INFINITE>true</UPPER-MULTIPLICITY-INFINITE>
+              <GID>Rule</GID>
+            </SDG-PRIMITIVE-ATTRIBUTE>
+          </ATTRIBUTES>
+        </SDG-CLASS>
+        <SDG-CLASS>
+          <SHORT-NAME>SafetyLevelDef</SHORT-NAME>
+          <GID>SafetyLevel</GID>
+          <CAPTION>true</CAPTION>
+          <ATTRIBUTES>
+            <SDG-PRIMITIVE-ATTRIBUTE>
+              <SHORT-NAME>AsilDef</SHORT-NAME>
+              <CATEGORY>ENUMERATION</CATEGORY>
+              <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+              <GID>ASIL</GID>
+              <PATTERN>A|B|C|D</PATTERN>
+            </SDG-PRIMITIVE-ATTRIBUTE>
+          </ATTRIBUTES>
+        </SDG-CLASS>
+      </SDG-CLASSES>
+    </SDG-DEF>
+  </ELEMENTS>
+</AR-PACKAGE>
+```
+
+表4.24：SdgDef
+
+| 类         | SdgDef                                                                                                                                          |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::SpecialDataDef                                                                          |
+| 注意       | 一个 SdgDef 把属于同一扩展的若干 SdgClass 组合在一起。SdgDef 的概念类似于 UML Profile。标签：atp.recommendedPackage=SdgDefs                              |
+| 基类       | ARElement、ARObject、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                            |
+| 聚合于     | ARPackage.element                                                                                                                                        |
+
+| 属性     | 类型      | 多重性 | 类别 | 注意                                                       |
+|----------|-----------|--------|------|----------------------------------------------------------------|
+| sdgClass | SdgClass  | *      | aggr | 所拥有的 sdgClass，它们定义 Sdg 的结构。标签：xml.namePlural=SDG-CLASSES |
+
+表4.25：SdgElementWithGid
+
+| 类         | SdgElementWithGid（抽象）                                                                 |
+|------------|-----------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::SpecialDataDef                  |
+| 注意       | 带 gid 的特殊数据组元素是一个应当拥有名称（gid，“Generic Identifier”）的抽象元素。                  |
+| 基类       | ARObject                                                                                      |
+| 子类       | SdgAbstractForeignReference、SdgAbstractPrimitiveAttribute、SdgAggregationWithVariation、SdgClass |
+
+| 属性 | 类型      | 多重性 | 类别 | 注意                             |
+|------|-----------|--------|------|--------------------------------------|
+| gid  | NameToken | 0..1   | attr | 规定标识该元素的名称。                   |
+
+表4.26：SdgClass
+
+| 类         | SdgClass                                                                                                  |
+|------------|----------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::SpecialDataDef                                   |
+| 注意       | 一个 SdgClass 规定 SDG 的名称与结构，SDG 可用于在 AUTOSAR 模型中存储专有数据。SdgClass 类似于 UML 构型（stereotype）。 |
+| 基类       | ARObject、Identifiable、MultilanguageReferrable、Referrable、SdgElementWithGid                                    |
+| 聚合于     | SdgDef.sdgClass                                                                                                   |
+
+| 属性                 | 类型          | 多重性 | 类别 | 注意                                                                          |
+|----------------------|---------------|--------|------|------------------------------------------------------------------------------------|
+| attribute (ordered)  | SdgAttribute  | *      | aggr | Sdg 结构的定义。标签：xml.sequenceOffset=30（Defintion 为源文如此）                     |
+| caption              | Boolean       | 0..1   | attr | 规定是否需要 caption。注意：只有拥有 caption 的 Sdg 才能被引用。标签：xml.sequenceOffset=20 |
+| extendsMetaClass     | MetaClassName | 0..1   | attr | 可以被该 SdgClass 扩展的 AUTOSAR 元类。标签：xml.sequenceOffset=10                      |
+| sdgConstraint        | TraceableText | *      | ref  | 限制特殊数据组结构的语义约束。标签：xml.sequenceOffset=40                               |
+
+表4.27：SdgAttribute
+
+| 类         | SdgAttribute（抽象）                                                                                       |
+|------------|---------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::SpecialDataDef                                   |
+| 注意       | 描述 Sdg 的属性。                                                                                                 |
+| 基类       | ARObject、AbstractMultiplicityRestriction、Identifiable、MultilanguageReferrable、Referrable                       |
+| 子类       | SdgAbstractForeignReference、SdgAbstractPrimitiveAttribute、SdgAggregationWithVariation、SdgReference               |
+| 聚合于     | SdgClass.attribute                                                                                                 |
+
+表4.28：SdgAbstractPrimitiveAttribute
+
+| 类         | SdgAbstractPrimitiveAttribute（抽象）                                                                                                                                                                |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::SpecialDataDef                                                                                                                              |
+| 注意       | 描述特殊数据组的原始属性。                                                                                                                                                                                    |
+| 基类       | ARObject、AbstractMultiplicityRestriction、AbstractValueRestriction、Identifiable、MultilanguageReferrable、Referrable、SdgAttribute、SdgElementWithGid                                                          |
+| 子类       | SdgPrimitiveAttribute、SdgPrimitiveAttributeWithVariation                                                                                                                                                      |
+| 聚合于     | SdgClass.attribute                                                                                                                                                                                             |
+
+表4.29：SdgPrimitiveAttribute
+
+| 类         | SdgPrimitiveAttribute                                                                                                                                                                                  |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::SpecialDataDef                                                                                                                                  |
+| 注意       | 描述不带变体的原始特殊数据属性。该类接受特殊数据 “sd” 属性。                                                                                                                                                      |
+| 基类       | ARObject、AbstractMultiplicityRestriction、AbstractValueRestriction、Identifiable、MultilanguageReferrable、Referrable、SdgAbstractPrimitiveAttribute、SdgAttribute、SdgElementWithGid                                |
+| 聚合于     | SdgClass.attribute                                                                                                                                                                                               |
+
+表4.30：SdgPrimitiveAttributeWithVariation
+
+| 类         | SdgPrimitiveAttributeWithVariation                                                                                                                                                                      |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::SpecialDataDef                                                                                                                                   |
+| 注意       | 描述带变体的原始数值特殊数据属性。该类接受特殊数据 “sdf” 元素。                                                                                                                                                    |
+| 基类       | ARObject、AbstractMultiplicityRestriction、AbstractValueRestriction、AbstractVariationRestriction、Identifiable、MultilanguageReferrable、Referrable、SdgAbstractPrimitiveAttribute、SdgAttribute、SdgElementWithGid |
+| 聚合于     | SdgClass.attribute                                                                                                                                                                                                 |
+
+表4.31：SdgAggregationWithVariation
+
+| 类         | SdgAggregationWithVariation                                                                                                                                                                    |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::SpecialDataDef                                                                                                                         |
+| 注意       | 描述 Sdg 可以包含另一个 Sdg。嵌套 Sdg 的 gid 由 subSdg 定义。表示 “sdg”。                                                                                                                                |
+| 基类       | ARObject、AbstractMultiplicityRestriction、AbstractVariationRestriction、Identifiable、MultilanguageReferrable、Referrable、SdgAttribute、SdgElementWithGid                                                |
+| 聚合于     | SdgClass.attribute                                                                                                                                                                                      |
+
+| 属性   | 类型      | 多重性 | 类别 | 注意                       |
+|--------|-----------|--------|------|--------------------------------|
+| subSdg | SdgClass  | 0..1   | ref  | 受支持的子 Sdg 类。             |
+
+表4.32：SdgReference
+
+| 类         | SdgReference                                                                                                                                                    |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::SpecialDataDef                                                                                            |
+| 注意       | 描述 SdgClass 的一个属性，用于在定义侧建模从取值侧的一个 Sdg 到另一个 Sdg 的引用。                                                                                            |
+| 基类       | ARObject、AbstractMultiplicityRestriction、Identifiable、MultilanguageReferrable、Referrable、SdgAttribute                                                                  |
+| 聚合于     | SdgClass.attribute                                                                                                                                                           |
+
+| 属性    | 类型      | 多重性 | 类别 | 注意                                                                                                                                                                                                              |
+|---------|-----------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| destSdg | SdgClass  | 0..1   | ref  | 指向一个 SdgClass，用于在定义侧建模被引用 Sdg 的目标类型。在取值侧，该引用通过源 Sdg 定义一个指向被引用 Sdg 的 sdgCaption 的 sdgx 属性来实现。                                                                                        |
+
+表4.33：SdgAbstractForeignReference
+
+| 类         | SdgAbstractForeignReference（抽象）                                                                                                                  |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::SpecialDataDef                                                                                |
+| 注意       | 一个可以指向 AUTOSAR 模型中任何可引用对象的抽象引用。                                                                                                            |
+| 基类       | ARObject、AbstractMultiplicityRestriction、Identifiable、MultilanguageReferrable、Referrable、SdgAttribute、SdgElementWithGid                                     |
+| 子类       | SdgForeignReference、SdgForeignReferenceWithVariation                                                                                                            |
+| 聚合于     | SdgClass.attribute                                                                                                                                               |
+
+| 属性          | 类型          | 多重性 | 类别 | 注意                                       |
+|---------------|---------------|--------|------|------------------------------------------------|
+| destMetaClass | MetaClassName | 0..1   | attr | 规定该引用的目标元类。                            |
+
+表4.34：SdgForeignReference
+
+| 类         | SdgForeignReference                                                                                                                                                                |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::SpecialDataDef                                                                                                                |
+| 注意       | 一个不带变体支持的引用，可以指向 AUTOSAR 模型中任何可引用对象。该类接受特殊数据 “Sdx” 引用。                                                                                                    |
+| 基类       | ARObject、AbstractMultiplicityRestriction、Identifiable、MultilanguageReferrable、Referrable、SdgAbstractForeignReference、SdgAttribute、SdgElementWithGid                                         |
+| 聚合于     | SdgClass.attribute                                                                                                                                                                              |
+
+表4.35：SdgForeignReferenceWithVariation
+
+| 类         | SdgForeignReferenceWithVariation                                                                                                                                                        |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::SpecialDataDef                                                                                                                    |
+| 注意       | 一个带变体支持的引用，可以指向 AUTOSAR 模型中任何可引用对象。该类接受特殊数据 “Sdxf” 引用。                                                                                                        |
+| 基类       | ARObject、AbstractMultiplicityRestriction、AbstractVariationRestriction、Identifiable、MultilanguageReferrable、Referrable、SdgAbstractForeignReference、SdgAttribute、SdgElementWithGid              |
+| 聚合于     | SdgClass.attribute                                                                                                                                                                                 |
+
+表4.36：MetaClassName
+
+| 原始类型    | MetaClassName                                                                                        |
+|-------------|----------------------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::PrimitiveTypes                             |
+| 注意        | AUTOSAR 元模型中类的名称。标签：xml.xsd.customType=META-CLASS-NAME xml.xsd.pattern=[A-Z][a-zA-Z0-9_]* xml.xsd.type=string |
+
+### 4.7. 模型限制类型
+
+**模型限制类型的用途**
+
+模型限制类型（**Model Restriction Types**）规定限制 AUTOSAR 模型内容的规则。这些限制例如用于特殊数据组定义或数据交换点 [\[2\]](#ref-2) 的上下文中。与特殊数据组定义相应的细节见 4.6.2。
+
+![图 4.12：模型限制类型（Model Restriction Types）](Figure4-12.png)
+
+#### 4.7.1. 简单原始值的限制
+
+**AbstractValueRestriction 的用途**
+
+`AbstractValueRestriction` 对简单原始数据类型的值空间定义约束。该类的属性表示 XML Schema 规范 [\[11\]](#ref-11) 意义上的约束性 facet（constraining facets）。若一个值按照所有已定义的约束均有效，则该值有效。
+
+表4.37：AbstractValueRestriction
+
+| 类         | AbstractValueRestriction（抽象）                                                                            |
+|------------|----------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::ModelRestrictionTypes                            |
+| 注意       | 限制原始值。若该限制定义的所有规则均取值为真，则一个值有效。                                                        |
+| 基类       | ARObject                                                                                                       |
+| 子类       | PrimitiveAttributeCondition、SdgAbstractPrimitiveAttribute、ValueRestrictionWithSeverity                          |
+
+| 属性      | 类型             | 多重性 | 类别 | 注意                                                     |
+|-----------|------------------|--------|------|----------------------------------------------------------------|
+| max       | Limit            | 0..1   | attr | 规定数值的上界。                                                 |
+| maxLength | PositiveInteger  | 0..1   | attr | 规定文本型值的最大字符数。                                         |
+| min       | Limit            | 0..1   | attr | 规定数值的下界。                                                 |
+| minLength | PositiveInteger  | 0..1   | attr | 规定文本型值的最小字符数。                                         |
+| pattern   | RegularExpression| 0..1   | attr | 定义可接受字符的精确序列。                                         |
+
+#### 4.7.2. 多重性的限制
+
+**AbstractMultiplicityRestriction 的用途**
+
+`AbstractMultiplicityRestriction` 规定一个元素可以出现的次数。通过两个属性 `lowerMultiplicity` 与 `upperMultiplicity` 规定配置元素的最小与最大出现次数。
+
+**可数的无限数量元素**
+
+为了表达元素出现次数的可数无限，元素 `upperMultiplicityInfinite` 应当存在且被置为 `true`。
+
+**约束：AbstractMultiplicityRestriction 的 upperMultiplicityInfinite 与 upperMultiplicity 互斥**
+
+元素 `upperMultiplicityInfinite` 与 `AbstractMultiplicityRestriction` 的 `upperMultiplicity` 的存在应当互斥。
+
+**约束：AbstractMultiplicityRestriction 的 lowerMultiplicity 应当小于或等于 upperMultiplicity**
+
+`AbstractMultiplicityRestriction` 的 `lowerMultiplicity` 应当小于或等于 `upperMultiplicity`。
+
+#### 4.7.3. 变体使用的限制
+
+**AbstractVariationRestriction 的用途**
+
+`AbstractVariationRestriction` 对变体的使用以及有效的施加时间（binding times）定义约束。
+
+表4.38：AbstractVariationRestriction
+
+| 类         | AbstractVariationRestriction（抽象）                                                                                                                                              |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::ModelRestrictionTypes                                                                                                     |
+| 注意       | 对变体的使用以及有效施加时间定义约束。                                                                                                                                                      |
+| 基类       | ARObject                                                                                                                                                                                 |
+| 子类       | SdgAggregationWithVariation、SdgForeignReferenceWithVariation、SdgPrimitiveAttributeWithVariation、VariationRestrictionWithSeverity                                                          |
+
+| 属性             | 类型                | 多重性 | 类别 | 注意                                                             |
+|------------------|---------------------|--------|------|------------------------------------------------------------------------|
+| validBindingTime | FullBindingTimeEnum | *      | attr | 有效施加时间的列表。标签：xml.sequenceOffset=20                         |
+| variation        | Boolean             | 0..1   | attr | 规定 AUTOSAR 模型是否可以在该位置定义一个变体点。标签：xml.sequenceOffset=10 |
+
+表4.39：FullBindingTimeEnum
+
+| 枚举        | FullBindingTimeEnum                                                                     |
+|-------------|----------------------------------------------------------------------------------------------|
+| 包          | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::ModelRestrictionTypes          |
+| 注意        | 该枚举规定可以在 AUTOSAR 模型中使用的施加时间（BindingTimes）。                                  |
+| 聚合于      | AbstractVariationRestriction.validBindingTime                                                   |
+
+| 字面量                   | 说明                                                                                                                                                                                                       |
+|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| blueprintDerivationTime  | 从蓝图创建对象的时间点。标签：atp.EnumerationLiteralIndex=0                                                                                                                                                        |
+| codeGenerationTime       | 基于需求文档的手工编码；基于工具的代码生成（例如从模型生成）；模型可以包含变体；只为所选变体实际生成代码。标签：atp.EnumerationLiteralIndex=2                                                                            |
+| linkTime                 | 配置目标代码中包含什么、省略什么——基于选择了哪些变体。例如对以目标代码（而非源代码）交付的模块。标签：atp.EnumerationLiteralIndex=4                                                                                      |
+| postBuild                | PostBuild 是最晚在 ECU 启动时施加的施加时间。换言之，这是从可执行程序的创建到 ECU 启动之间的一切。标签：atp.EnumerationLiteralIndex=5                                                                                   |
+| preCompileTime           | 这通常是 C 预处理器。把代码的某些部分排除出编译过程，例如因为所选变体不需要它们、它们与所选变体不兼容，或它们需要所选变体中不存在的资源。只为所选变体生成目标代码。在这一阶段被排除的代码在后续阶段将不可用。标签：atp.EnumerationLiteralIndex=3 |
+| systemDesignTime         | 设计 VFB；软件组件类型（PortInterface）；SWC 原型及 SWC 原型之间的连接；设计拓扑；ECU 与互连网络；设计通信矩阵与数据映射。标签：atp.EnumerationLiteralIndex=1                                                              |
