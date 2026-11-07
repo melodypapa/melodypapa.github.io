@@ -8794,3 +8794,1211 @@ AUTOSAR 文档支持包括在文本元素之间执行追溯的能力。这种追
 | 属性 | 类型   | 多重性 | 类别 | 注意                                                                                                                                      |
 |------|--------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------|
 | term | String | 1      | attr | 这是术语本身。标签：xml.roleElement=false xml.roleWrapperElement=false xml.typeElement=false xml.typeWrapperElement=false                                |
+
+#### 9.2.8（续）——内联元素的其余类表
+
+表9.40：Xdoc
+
+| 类         | Xdoc                                                                                              |
+|------------|-------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::TextModel::InlineTextElements                                                            |
+| 注意       | 该元类表示引用一个可以呈现为印刷品的外部文档的能力。                                                                  |
+| 基类       | ARObject、Referrable、SingleLanguageReferrable                                                                        |
+| 聚合于     | MixedContentForParagraph.xdoc                                                                                          |
+
+| 属性      | 类型     | 多重性 | 类别 | 注意                                                                       |
+|-----------|----------|--------|------|--------------------------------------------------------------------------------------|
+| date      | DateTime | 0..1   | attr | 该元素规定外部文档的发布日期（如适用）。标签：xml.sequenceOffset=50                            |
+| number    | String   | 0..1   | attr | 这表示被引用的外部文档的文档编号。保留为字符串。标签：xml.sequenceOffset=30                    |
+| position  | String   | 0..1   | attr | 这表示对标准相关位置的引用。保留为字符串。标签：xml.sequenceOffset=80                          |
+| publisher | String   | 0..1   | attr | 这表示被引用的外部文档的发布者。保留为字符串。标签：xml.sequenceOffset=60                      |
+| state     | String   | 0..1   | attr | 这表示外部文档的版本与状态。保留为字符串。标签：xml.sequenceOffset=40                          |
+| url       | Url      | 0..1   | aggr | 这规定外部文档的 URL。标签：xml.sequenceOffset=70                                              |
+
+表9.41：Xfile
+
+| 类         | Xfile                                                                     |
+|------------|-------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::TextModel::InlineTextElements                                     |
+| 注意       | 这表示在文档中引用一个外部文件。                                                              |
+| 基类       | ARObject、Referrable、SingleLanguageReferrable                                                  |
+| 聚合于     | MixedContentForParagraph.xfile                                                                   |
+
+| 属性        | 类型 | 多重性 | 类别 | 注意                                                                                                      |
+|-------------|------|--------|------|--------------------------------------------------------------------------------------------------------------------|
+| tool        | String | 0..1 | attr | 该元素描述用于生成相应 Xfile 的工具。保留为字符串，因为无法提供标注工具的特定语法。标签：xml.sequenceOffset=50              |
+| toolVersion | String | 0..1 | attr | 该元素描述用于生成相应 xfile 的工具版本。保留为字符串，因为无法规定特定的语法。标签：xml.sequenceOffset=60                 |
+| url         | Url  | 0..1 | aggr | 这表示外部文件的 URL。标签：xml.sequenceOffset=30                                                                            |
+
+![图 9.7：Xref 概览（Xref overview）](Figure9-7.png)
+
+表9.42：Xref
+
+| 类         | Xref                                                                    |
+|------------|----------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::TextModel::InlineTextElements                                  |
+| 注意       | 这表示文档内的一个交叉引用。                                                                |
+| 基类       | ARObject                                                                              |
+| 聚合于     | MixedContentForOverviewParagraph.xref、MixedContentForParagraph.xref、MixedContentForVerbatim.xref  |
+
+| 属性                    | 类型                        | 多重性 | 类别 | 注意                                                                                                                                                                              |
+|--------------------------|------------------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| label1                   | SingleLanguageLongName       | 0..1   | aggr | 这允许规定一段替代文本，当 showContent 被选中时应当呈现它。                                                                                                                                      |
+| referrable               | Referrable                   | 0..1   | ref  | 这以 AUTOSAR 风格建立引用。                                                                                                                                                                    |
+| resolutionPolicy         | ResolutionPolicyEnum         | 0..1   | attr | 指示 xref 元素的内容是否遵循一个专门的解析策略。默认为 “NO-SLOPPY”。标签：xml.attribute=true                                                                                                    |
+| showContent              | ShowContentEnum              | 0..1   | attr | 指示是否应当呈现 xref 元素的内容。默认为 “NO-SHOW-CONTENT”。标签：xml.attribute=true                                                                                                            |
+| showResourceAliasName    | ShowResourceAliasNameEnum    | 0..1   | attr | 这指示是否应当呈现被引用对象的别名（alias name）。这意味着这是一种反向搜索：查看被引用对象是否存在别名，若有则打印它。若有多于一个 AliasNameSet，Xref 可以把它们全部呈现。若未找到别名且 showResourceShortName 被置为 NoShowShortName，则应当显示引用目标的 shortName。由此 showResourceAliasName 类似于 showResourceShortName，但显示 aliasName 而非 shortName。默认为 NO-SHOW-ALIAS-NAME。标签：xml.attribute=true |
+| showResourceCategory     | ShowResourceCategoryEnum     | 0..1   | attr | 指示是否应当呈现被引用资源的类别。默认为 “NO-SHOW-CATEGORY”。标签：xml.attribute=true                                                                                                            |
+| showResourceLongName     | ShowResourceLongNameEnum     | 0..1   | attr | 指示是否应当呈现被引用资源的 longName。默认为 “SHOW-LONG-NAME”。标签：xml.attribute=true                                                                                                          |
+| showResourceNumber       | ShowResourceNumberEnum       | 0..1   | attr | 指示是否应当显示被引用资源的编号（Number）。默认为 “SHOW-NUMBER”。标签：xml.attribute=true                                                                                                        |
+| showResourcePage         | ShowResourcePageEnum         | 0..1   | attr | 指示是否应当显示被引用资源的页码。默认为 “SHOW-PAGE”。标签：xml.attribute=true                                                                                                                    |
+| showResourceShortName    | ShowResourceShortNameEnum    | 0..1   | attr | 指示是否应当显示被引用资源的 shortName（shortJName 为源文如此）。默认为 “SHOW-SHORT-NAME”。标签：xml.attribute=true                                                                                |
+| showResourceType         | ShowResourceTypeEnum         | 0..1   | attr | 指示是否应当显示被引用资源的类型。默认为 “SHOW-TYPE”。标签：xml.attribute=true                                                                                                                    |
+| showSee                  | ShowSeeEnum                  | 0..1   | attr | 指示是否应当在引用之前显示单词 “see”。默认为 “NO-SHOW-SEE”。注意，它的存在只是为了兼容性。标签：xml.attribute=true                                                                                  |
+
+表9.43：XrefTarget
+
+| 类         | XrefTarget                                                                |
+|------------|-------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::TextModel::InlineTextElements                                     |
+| 注意       | 该元素规定一个可以散布在文本中的引用目标。                                                      |
+| 基类       | ARObject、Referrable、SingleLanguageReferrable                                                  |
+| 聚合于     | MixedContentForOverviewParagraph.xrefTarget、MixedContentForParagraph.xrefTarget                  |
+
+表9.44：EEnumFont
+
+| 枚举        | EEnumFont                                                                   |
+|-------------|--------------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::TextModel::InlineAttributeEnums                                    |
+| 注意        | 这规定用于强调的可能的字体种类。                                                                |
+| 聚合于      | EmphasisText.font                                                                               |
+
+| 字面量  | 说明                                                            |
+|---------|----------------------------------------------------------------------|
+| default | 强调使用默认字体。标签：atp.EnumerationLiteralIndex=0                   |
+| mono    | 强调使用等宽字体。标签：atp.EnumerationLiteralIndex=1                   |
+
+表9.45：EEnum
+
+| 枚举        | EEnum                                                                                                                                                                                                                                                                              |
+|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::TextModel::InlineAttributeEnums                                                                                                                                                                                                                                          |
+| 注意        | 这规定可能的强调种类，作为如何在纸张或屏幕上呈现它的提案。注意，使用 plain、weak（斜体）、strong（粗体）、veryStrong（粗斜体）……本来会更好，但用户对此抱怨过。                                                                                                                                                    |
+| 聚合于      | EmphasisText.type                                                                                                                                                                                                                                                                                     |
+
+| 字面量     | 说明                                                                                                        |
+|------------|------------------------------------------------------------------------------------------------------------------------|
+| bold       | 强调最好以粗体表示。标签：atp.EnumerationLiteralIndex=0                                                                    |
+| bolditalic | 强调最好以粗体加斜体表示。标签：atp.EnumerationLiteralIndex=1                                                                |
+| italic     | 强调最好以斜体表示。标签：atp.EnumerationLiteralIndex=2                                                                    |
+| plain      | 强调没有特定的呈现方式。例如当语义信息被应用到强调文本上时使用。标签：atp.EnumerationLiteralIndex=3                                |
+
+表9.46：ResolutionPolicyEnum
+
+| 枚举        | ResolutionPolicyEnum                                                |
+|-------------|------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::TextModel::InlineAttributeEnums                            |
+| 注意        | 这规定 xref 元素的内容是否遵循一个专门的解析策略。                                      |
+| 聚合于      | Xref.resolutionPolicy                                                                 |
+
+| 字面量   | 说明                                                                     |
+|----------|----------------------------------------------------------------------------------|
+| noSloppy | xref 元素的内容不由草率引用（sloppy reference）链接。标签：atp.EnumerationLiteralIndex=0 |
+| sloppy   | xref 元素的内容由草率引用链接。标签：atp.EnumerationLiteralIndex=1                      |
+
+表9.47：ShowContentEnum
+
+| 枚举        | ShowContentEnum                                                      |
+|-------------|--------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::TextModel::InlineAttributeEnums                              |
+| 注意        | 这规定是否应当呈现 xref 元素的内容。                                                        |
+| 聚合于      | Xref.showContent                                                                        |
+
+| 字面量        | 说明                                                                            |
+|---------------|--------------------------------------------------------------------------------------------|
+| noShowContent | Xref.label 的内容不在引用处呈现。标签：atp.EnumerationLiteralIndex=0                           |
+| showContent   | 元素的内容在引用处呈现。标签：atp.EnumerationLiteralIndex=1                                   |
+
+表9.48：ShowResourceAliasNameEnum
+
+| 枚举        | ShowResourceAliasNameEnum                                                             |
+|-------------|--------------------------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::TextModel::InlineAttributeEnums                                                |
+| 注意        | 该枚举器规定是否应当连同 xref 呈现引用目标的别名。                                                            |
+| 聚合于      | Xref.showResourceAliasName                                                                                |
+
+| 字面量          | 说明                                                                            |
+|------------------|--------------------------------------------------------------------------------------------|
+| noShowAliasName  | 这表示被引用对象的别名不在引用处呈现。标签：atp.EnumerationLiteralIndex=0                        |
+| showAliasName    | 这表示被引用对象的别名在引用处呈现。标签：atp.EnumerationLiteralIndex=1                        |
+
+表9.49：ShowResourceCategoryEnum
+
+| 枚举        | ShowResourceCategoryEnum                                                              |
+|-------------|---------------------------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::TextModel::InlineAttributeEnums                                                 |
+| 注意        | 该枚举器规定是否应当连同 xref 呈现引用目标的类别。                                                            |
+| 聚合于      | Xref.showResourceCategory                                                                                  |
+
+| 字面量         | 说明                                                                 |
+|-----------------|--------------------------------------------------------------------------------|
+| noShowCategory  | 目标的类别不在引用处呈现。标签：atp.EnumerationLiteralIndex=0                       |
+| showCategory    | 目标的类别在引用处呈现。标签：atp.EnumerationLiteralIndex=1                        |
+
+表9.50：ShowResourceLongNameEnum
+
+| 枚举        | ShowResourceLongNameEnum                                                              |
+|-------------|----------------------------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::TextModel::InlineAttributeEnums                                                 |
+| 注意        | 该枚举器规定是否应当连同 xref 呈现引用目标的长名。                                                            |
+| 聚合于      | Xref.showResourceLongName                                                                                   |
+
+| 字面量         | 说明                                                             |
+|-----------------|-----------------------------------------------------------------------------|
+| noShowLongName  | 目标的长名不在引用处呈现。标签：atp.EnumerationLiteralIndex=0                    |
+| showLongName    | 目标的长名在引用处呈现。标签：atp.EnumerationLiteralIndex=1                    |
+
+表9.51：ShowResourceNumberEnum
+
+| 枚举        | ShowResourceNumberEnum                                                                          |
+|-------------|------------------------------------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::TextModel::InlineAttributeEnums                                                           |
+| 注意        | 该枚举器规定是否应当连同 xref 呈现引用目标的编号（例如章节号）。                                                          |
+| 聚合于      | Xref.showResourceNumber                                                                                        |
+
+| 字面量       | 说明                                                             |
+|---------------|-----------------------------------------------------------------------------|
+| noShowNumber  | 目标的编号不在引用处呈现。标签：atp.EnumerationLiteralIndex=0                   |
+| showNumber    | 目标的编号在引用处呈现。标签：atp.EnumerationLiteralIndex=1                   |
+
+表9.52：ShowResourcePageEnum
+
+| 枚举        | ShowResourcePageEnum                                                            |
+|-------------|----------------------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::TextModel::InlineAttributeEnums                                            |
+| 注意        | 该枚举器规定是否应当连同 xref 呈现引用目标的页码。                                                            |
+| 聚合于      | Xref.showResourcePage                                                                              |
+
+| 字面量     | 说明                                                       |
+|-------------|------------------------------------------------------------------------|
+| noShowPage  | 目标的页码不在引用处呈现。标签：atp.EnumerationLiteralIndex=0               |
+| showPage    | 目标的页码在引用处呈现。标签：atp.EnumerationLiteralIndex=1             |
+
+表9.53：ShowResourceShortNameEnum
+
+| 枚举        | ShowResourceShortNameEnum                                                             |
+|-------------|----------------------------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::TextModel::InlineAttributeEnums                                                 |
+| 注意        | 该枚举器规定是否应当连同 xref 呈现引用目标的短名。                                                            |
+| 聚合于      | Xref.showResourceShortName                                                                                  |
+
+| 字面量          | 说明                                                             |
+|------------------|-----------------------------------------------------------------------------|
+| noShowShortName  | 目标的短名不在引用处呈现。标签：atp.EnumerationLiteralIndex=0                   |
+| showShortName    | 目标的短名在引用处呈现。标签：atp.EnumerationLiteralIndex=1                   |
+
+表9.54：ShowResourceTypeEnum
+
+| 枚举        | ShowResourceTypeEnum                                                                             |
+|-------------|----------------------------------------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::TextModel::InlineAttributeEnums                                                               |
+| 注意        | 该枚举器规定是否应当连同 xref 呈现引用目标的类型（例如派生自哪个类）。                                                        |
+| 聚合于      | Xref.showResourceType                                                                                               |
+
+| 字面量    | 说明                                                       |
+|------------|------------------------------------------------------------------------|
+| noShowType | 目标的类型不在引用处呈现。标签：atp.EnumerationLiteralIndex=0               |
+| showType   | 目标的类型在引用处呈现。标签：atp.EnumerationLiteralIndex=1             |
+
+表9.55：ShowSeeEnum
+
+| 枚举        | ShowSeeEnum                                                                    |
+|-------------|-------------------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::TextModel::InlineAttributeEnums                                          |
+| 注意        | 该枚举器规定是否应当在 xref 之前呈现单词 “see”。                                                        |
+| 聚合于      | Xref.showSee                                                                                       |
+
+| 字面量    | 说明                                                                     |
+|------------|----------------------------------------------------------------------------------|
+| noShowSee  | 单词 “see” 不在引用之前呈现。标签：atp.EnumerationLiteralIndex=0                   |
+| showSee    | 单词 “see” 在引用之前呈现。标签：atp.EnumerationLiteralIndex=1                   |
+
+### 9.3. 独立文档（Standalone Documentation）
+
+**独立文档**
+
+独立文档提供与 AUTOSAR 系统的结构无关地记录文档的手段。为实现这一点，它扩展 introduction：添加章节、主题、可视化表格与通用参数集（prms）。可以说，它把 DocumentationBlock 包装进章节、主题与表格。
+
+除此之外，它允许引用 AUTOSAR 对象——它们是文档的上下文。
+
+它还以 Documentation 的形式提供——后者本身就是一个 ARElement，允许指向文档的上下文。
+
+![图 9.8：独立文档概览（Standalone Documentation Overview）](Figure9-8.png)
+
+#### 9.3.1. 文档的上下文
+
+**独立文档的上下文**
+
+独立文档可以规定它所关联的上下文。该上下文有两个用途：
+
+- 作为引用目标，使文档自含（self contained）；
+- 支持组装完整的文档，例如在一个项目内。
+
+图 9.9 描绘了如何记录文档上下文。AUTOSAR 提供 Documentation——它是一个 PackageableElement，可用于在（例如）任何可标识元素乃至 M1 实例的上下文中呈现文档。
+
+![图 9.9：作为 ARElement 的独立文档（Standalone documentation as ARElement）](Figure9-9.png)
+
+**约束：文档上下文要么是 feature 要么是 identifiable**
+
+一个特定的 DocumentationContext 应当要么是 feature、要么是 identifiable，但不得同时是二者。若需要二者，应当创建多个 DocumentationContext。
+
+表9.56：DocumentationContext
+
+| 类         | DocumentationContext                                                                                                                          |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::DocumentationOnM1                                                                                                     |
+| 注意       | 该类表示标注所谓独立文档上下文的能力。注意，这是一个 &lt;&lt;atpMixed&gt;&gt;。其内容应当被视为有序的。                                                              |
+| 基类       | ARObject、MultilanguageReferrable、Referrable                                                                                                                    |
+| 聚合于     | Documentation.context                                                                                                                                               |
+
+| 属性         | 类型       | 多重性 | 类别 | 注意                                                                                                                            |
+|--------------|------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------|
+| feature      | AtpFeature | 0..1   | iref | 这引用一个特定的 feature（M0 模型中的实例），它是文档的上下文。InstanceRef 实现为：AnyInstanceRef                                                  |
+| identifiable | Identifiable | 0..1 | ref  | 这是文档上下文中的一个可标识对象。                                                                                                      |
+
+表9.57：AnyInstanceRef
+
+| 类         | AnyInstanceRef                                                                                                                                                                                                                    |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::GeneralTemplateClasses::AnyInstanceRef                                                                                                                                                                         |
+| 注意       | 描述对 AUTOSAR 模型中任何实例的引用。这是实例引用最通用的形式。更多细节参见超类的注释。                                                                                                                                                                    |
+| 基类       | ARObject、AtpInstanceRef                                                                                                                                                                                                                               |
+| 聚合于     | Collection.collectedInstance、Collection.sourceInstance、DocumentationContext.feature、EcucInstanceReferenceValue.value、FlatInstanceDescriptor.ecuExtractReference、FlatInstanceDescriptor.upstreamReference、RptContainer.byPassPoint、RptHook.rptArHook、ViewMap.firstElementInstance、ViewMap.secondElementInstance |
+
+| 属性                     | 类型          | 多重性 | 类别 | 注意                                                              |
+|--------------------------|---------------|--------|------|-------------------------------------------------------------------------|
+| base                     | AtpClassifier | 1      | ref  | 这是导航路径开始的基础。构型：atpDerived                                  |
+| contextElement (ordered) | AtpFeature    | *      | ref  | 这是实例引用所规定导航路径中的一个步骤。                                    |
+| target                   | AtpFeature    | 1      | ref  | 这是实例引用的目标。                                                      |
+
+#### 9.3.2. 章节（Chapter）
+
+**Chapter**
+
+chapter 元素由其 caption（由 Identifiable 提供）、其直接内容 chapterContent，以及分组为主题 topic1 与子章节 chapter 的更多逻辑块组成。章节的内容由参数、表格与文档块组成。
+
+**预定义章节**
+
+PredefinedChapter 是一个不能被嵌套的章节，因为它表达一种特定的语义。但它内部可以有嵌套的章节。
+
+![图 9.10：章节概览（Chapter Overview）](Figure9-10.png)
+
+表9.58：Chapter
+
+| 类         | Chapter                                                                                                                                                                                                                                                    |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::Chapters                                                                                                                                                                                                                                          |
+| 注意       | 该元类表示文档的一个章节。章节是文档中的主要结构化元素。                                                                                                                                                                                                                          |
+| 基类       | ARObject、DocumentViewSelectable、Identifiable、MultilanguageReferrable、Paginateable、Referrable                                                                                                                                                                                |
+| 聚合于     | ChapterOrMsrQuery.chapter、MsrQueryResultChapter.chapter、SwComponentDocumentation.chapter、SwComponentDocumentation.swCalibrationNotes、SwComponentDocumentation.swCarbDoc、SwComponentDocumentation.swDiagnosticsNotes、SwComponentDocumentation.swFeatureDef、SwComponentDocumentation.swFeatureDesc、SwComponentDocumentation.swMaintenanceNotes、SwComponentDocumentation.swTestDesc、System.systemDocumentation |
+
+| 属性       | 类型          | 多重性 | 类别 | 注意                                                                                                                                                                                  |
+|------------|---------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| chapterModel | ChapterModel | 1      | aggr | 这表示章节的全部内容。标签：xml.roleElement=false xml.roleWrapperElement=false xml.typeElement=false xml.typeWrapperElement=false                                                              |
+| helpEntry  | String        | 0..1   | attr | 这规定在线帮助系统中与父类链接的一个入口点。语法应当由所应用的帮助系统或帮助系统生成器定义。它可以是一个串联的标识符，但目前把它保留为任意字符串。标签：xml.attribute=true                                  |
+
+表9.59：ChapterModel
+
+| 类         | ChapterModel                                                                                                                                                                                                                                    |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::Chapters                                                                                                                                                                                                                                 |
+| 注意       | 这是章节（除 Chapter 标题外）的基本内容模型。它可以用于一般章节，也可以用于预定义章节。一个章节在三个层次上拥有内容：1. 章节内容；2. 主题；3. 子章节。                                                                                                                        |
+| 基类       | ARObject                                                                                                                                                                                                                                                            |
+| 聚合于     | Chapter.chapterModel、PredefinedChapter.chapterModel                                                                                                                                                                                                                  |
+
+| 属性           | 类型               | 多重性 | 类别 | 注意                                                                                                                                                                                                  |
+|----------------|--------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| chapter        | ChapterOrMsrQuery  | 0..1   | aggr | 这是一个特定的子章节。标签：xml.roleElement=false xml.roleWrapperElement=false xml.sequenceOffset=200 xml.typeElement=false xml.typeWrapperElement=false                                                              |
+| chapterContent | ChapterContent     | 0..1   | aggr | 这是既非主题也非子章节的章节内容。它是直接位于章节中的内容。标签：xml.roleElement=false xml.roleWrapperElement=false xml.sequenceOffset=30 xml.typeElement=false xml.typeWrapperElement=false                              |
+| topic1         | TopicOrMsrQuery    | 0..1   | aggr | 这是章节中的一个主题。标签：xml.roleElement=false xml.roleWrapperElement=false xml.sequenceOffset=170 xml.typeElement=false xml.typeWrapperElement=false                                                                  |
+
+表9.60：ChapterContent
+
+| 类         | &lt;&lt;atpMixed&gt;&gt; ChapterContent                                                                                                                                  |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::Chapters                                                                                                                                                             |
+| 注意       | 该类表示直接位于章节中的内容。它与 Topic 中的内容基本相同，但可以拥有额外的复杂结构（例如概要 Synopsis）。                                                                                |
+| 基类       | ARObject                                                                                                                                                                                  |
+| 聚合于     | ChapterModel.chapterContent                                                                                                                                                                    |
+
+| 属性        | 类型                    | 多重性 | 类别 | 注意                                                                                                                                                    |
+|-------------|--------------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| prms        | Prms                     | 1      | aggr | 这是章节中的一个参数表格。标签：xml.sequenceOffset=150                                                                                                                    |
+| topicContent| TopicContentOrMsrQuery   | 0..1   | aggr | 这是章节内容中既可以出现在章节、也可以出现在主题中的那一部分。标签：xml.roleElement=false xml.roleWrapperElement=false xml.sequenceOffset=40 xml.typeElement=false xml.typeWrapperElement=false |
+
+表9.61：ChapterEnumBreak
+
+| 枚举        | ChapterEnumBreak                                                        |
+|-------------|----------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::BlockElements::PaginationAndView                              |
+| 注意        | 这允许规定一个可分页元素的换页策略。                                                            |
+| 聚合于      | Paginateable.break                                                                               |
+
+| 字面量  | 说明                                                                        |
+|---------|------------------------------------------------------------------------------------|
+| break   | 这表示应当在当前块之前应用换页。标签：atp.EnumerationLiteralIndex=0                     |
+| noBreak | 这表示无需在该块之前强制换页。标签：atp.EnumerationLiteralIndex=1                       |
+
+表9.62：PredefinedChapter
+
+| 类         | PredefinedChapter                                                     |
+|------------|------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::Chapters                                                   |
+| 注意       | 这表示一个预定义章节。                                                                  |
+| 基类       | ARObject                                                                           |
+| 聚合于     | Documentation.documentationContent                                                        |
+
+| 属性         | 类型         | 多重性 | 类别 | 注意                                                                                                        |
+|--------------|--------------|--------|------|----------------------------------------------------------------------------------------------------------------------|
+| chapterModel | ChapterModel | 1      | aggr | 这是预定义章节的内容。标签：xml.roleElement=false xml.roleWrapperElement=false xml.typeElement=false xml.typeWrapperElement=false |
+
+#### 9.3.3. 文档中的表格
+
+**文档中的表格**
+
+AUTOSAR 支持通过元类 Table 在文档中使用表格——它是 Oasis 交换表格模型（[\[23\]](#ref-23)）的一个实现。模型如图 9.11 所示。
+
+**表格的分区**
+
+一个表格（Table）包含一个或多个分区（Tgroup）。第一个分区拥有列规范（Colspec），它规定该分区内各列的属性。
+
+后续的分区可以定义自己的列规范，或从上一个拥有规范的分区继承。一个分区恰好由一个体（tbody）、一个可选的表头（thead）与一个可选的表尾（tfoot）组成。
+
+**表格行**
+
+表格的分区（体、表头与表尾）由一行或多行（Row）组成。在表格行的层次上可以控制换页与视图。每个 Row 由一个或多个条目（Entry）组成，其中包含一个文档块。
+
+表格也可以有一个标题（caption）。
+
+可以添加 MultiLanguageOverviewParagraph 以进一步描述标题：
+
+- 这允许提供对相关表更详尽的描述；
+- 这允许提供对其他条目（如 trace、相关表等）的引用。
+
+![图 9.11：表格模型概览（Table Model Overview）](Figure9-11.png)
+
+表9.63：Table
+
+| 类         | Table                                                                                                                                            |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::BlockElements::OasisExchangeTable                                                                                                          |
+| 注意       | 该类按照 OASIS Technical Resolution TR 9503:1995 实现一个交换表格。http://www.oasis-open.org/specs/a503.htm                                                        |
+| 基类       | ARObject、DocumentViewSelectable、Paginateable                                                                                                                          |
+| 聚合于     | TopicContent.table、TraceableTable.table                                                                                                                              |
+
+| 属性          | 类型                  | 多重性 | 类别 | 注意                                                                                                                                                                          |
+|----------------|------------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| colsep         | TableSeparatorString   | 0..1   | attr | 指示默认情况下是否应当在该表的各列之间绘制线。标签：xml.attribute=true                                                                                                                  |
+| float          | FloatEnum              | 1      | attr | 指示是否允许断开该元素。标签：xml.attribute=true                                                                                                                                        |
+| frame          | FrameEnum              | 0..1   | attr | 用于定义表格周围的边框线。标签：xml.attribute=true                                                                                                                                      |
+| helpEntry      | String                 | 0..1   | attr | 这规定在线帮助系统中与父类链接的一个入口点。语法应当由所应用的帮助系统或帮助系统生成器定义。标签：xml.attribute=true                                                                        |
+| orient         | OrientEnum             | 0..1   | attr | 指示表格应当以横向还是纵向表示。land = 横向；port = 纵向。标签：xml.attribute=true                                                                                                          |
+| pgwide         | NameToken              | 0..1   | attr | 用于指示图是否应当占满整个页宽（值 = “pgwide”）或不占满（值 = “noPgwide”）。标签：xml.attribute=true                                                                                      |
+| rowsep         | TableSeparatorString   | 0..1   | attr | 指示默认情况下是否应当在表格行的底部绘制线。标签：xml.attribute=true                                                                                                                      |
+| tableCaption   | Caption                | 0..1   | aggr | 该元素规定表格的标题。标签：xml.sequenceOffset=20                                                                                                                                        |
+| tabstyle       | NameToken              | 0..1   | attr | 指示一个外部表格样式。标签：xml.attribute=true                                                                                                                                            |
+| tgroup (ordered)| Tgroup                | 1..*   | aggr | 表格可以由独立的段（segment）构成。这样的段称为 tgroup。标签：xml.roleElement=true xml.roleWrapperElement=false xml.sequenceOffset=30 xml.typeElement=false xml.typeWrapperElement=false |
+
+表9.64：FloatEnum
+
+| 枚举        | FloatEnum                                                                                                                              |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::BlockElements::OasisExchangeTable                                                                                                |
+| 注意        | 该枚举器规定对象在页面上浮动（float）的策略。                                                                                                                |
+| 聚合于      | MultiLanguageVerbatim.float、Table.float                                                                                                                    |
+
+| 字面量  | 说明                                                                                          |
+|---------|--------------------------------------------------------------------------------------------------------|
+| float   | 这表示允许页面格式化器浮动该表以优化分页。例如 TeX 支持这一点。标签：atp.EnumerationLiteralIndex=0             |
+| noFloat | 这表示不允许页面格式化器浮动该对象以优化分页。标签：atp.EnumerationLiteralIndex=1                          |
+
+表9.65：FrameEnum
+
+| 枚举        | FrameEnum                                                                           |
+|-------------|--------------------------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::BlockElements::OasisExchangeTable                                              |
+| 注意        | 该枚举器规定在表格周围何处放置边框的策略。                                                                    |
+| 聚合于      | MlFigure.frame、Table.frame                                                                                |
+
+| 字面量 | 说明                                          |
+|--------|--------------------------------------------------------|
+| all    | 表格四周的边框。标签：atp.EnumerationLiteralIndex=0      |
+| bottom | 表格底部的边框。标签：atp.EnumerationLiteralIndex=1      |
+| none   | 表格周围无边框。标签：atp.EnumerationLiteralIndex=2      |
+| sides  | 表格两侧的边框。标签：atp.EnumerationLiteralIndex=3      |
+| top    | 表格顶部的边框。标签：atp.EnumerationLiteralIndex=4      |
+| topbot | 表格顶部与底部的边框。标签：atp.EnumerationLiteralIndex=5 |
+
+表9.66：Tgroup
+
+| 类         | Tgroup                                                                                                            |
+|------------|-----------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::BlockElements::OasisExchangeTable                                                                          |
+| 注意       | 该元类表示标注表格段的能力。                                                                                                    |
+| 基类       | ARObject                                                                                                                    |
+| 聚合于     | Table.tgroup                                                                                                                     |
+
+| 属性             | 类型                  | 多重性 | 类别 | 注意                                                                                                                                                                                                                                          |
+|-------------------|------------------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| align             | AlignEnum              | 0..1   | attr | 规定单元格条目在指定的 TGROUP 内应当如何水平对齐。默认为 “LEFT”。标签：xml.attribute=true                                                                                                                                                                  |
+| cols              | Integer                | 1      | attr | 该属性表示表格中的列数。标签：xml.attribute=true                                                                                                                                                                                                              |
+| colsep            | TableSeparatorString   | 0..1   | attr | 指示默认情况下是否应当在该表格组的各列之间绘制线。标签：xml.attribute=true                                                                                                                                                                                      |
+| colspec (ordered) | Colspec                | *      | aggr | 这规定表格中一个特定的列规范。每一列应当有一个条目。标签：xml.roleElement=true xml.roleWrapperElement=false xml.sequenceOffset=20 xml.typeElement=false xml.typeWrapperElement=false                                                                              |
+| rowsep            | TableSeparatorString   | 0..1   | attr | 指示默认情况下是否应当在该表格组各行的底部绘制线。标签：xml.attribute=true                                                                                                                                                                                      |
+| tbody             | Tbody                  | 1      | aggr | 这是表格段的主要部分，称为表格体。标签：xml.sequenceOffset=60                                                                                                                                                                                                    |
+| tfoot             | Tbody                  | 0..1   | aggr | 这表示表格段的表尾。该段打印在表格的末尾或换页之前。标签：xml.sequenceOffset=50                                                                                                                                                                                  |
+| thead             | Tbody                  | 0..1   | aggr | 这表示表格段的表头。表头通常在每个新页面的开头重复。标签：xml.sequenceOffset=40                                                                                                                                                                                  |
+
+表9.67：AlignEnum
+
+| 枚举        | AlignEnum                                                                                                                                  |
+|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::BlockElements::OasisExchangeTable                                                                                                      |
+| 注意        | 该枚举器规定水平对齐方式。                                                                                                                                          |
+| 聚合于      | Colspec.align、Entry.align、Tgroup.align                                                                                                                              |
+
+| 字面量  | 说明                                                                                                                             |
+|----------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| center   | 表格的内容水平居中。标签：atp.EnumerationLiteralIndex=0                                                                              |
+| justify  | 这表示表格单元格的内容应当两端对齐（呈现为一个块，其中空白被扩展使所有行填满）。标签：atp.EnumerationLiteralIndex=1                              |
+| left     | 这表示表格单元格的内容左对齐。标签：atp.EnumerationLiteralIndex=2                                                                      |
+| right    | 这表示表格单元格的内容左对齐（源文如此，应为右对齐）。标签：atp.EnumerationLiteralIndex=3                                                              |
+
+表9.68：Tbody
+
+| 类         | Tbody                                                                                                                                                                    |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::BlockElements::OasisExchangeTable                                                                                                                                  |
+| 注意       | 该元类表示表格组中的一个部分。这样的部分可以是表头、表体或表尾。                                                                                                                          |
+| 基类       | ARObject                                                                                                                                                                                  |
+| 聚合于     | Tgroup.tbody、Tgroup.tfoot、Tgroup.thead                                                                                                                                                       |
+
+| 属性        | 类型        | 多重性 | 类别 | 注意                                                                                                                                                                                                                                          |
+|--------------|--------------|--------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| row (ordered)| Row          | 1..*   | aggr | 这是表格中的一个特定行。构型：atpSplitable；atpVariation 标签：atp.Splitkey=row, row.variationPoint.shortLabel vh.latestBindingTime=postBuild xml.roleElement=true xml.roleWrapperElement=false xml.sequenceOffset=20 xml.typeElement=false xml.typeWrapperElement=false |
+| valign       | ValignEnum   | 0..1   | attr | 指示行中各单元格应当如何对齐。默认从 tbody 继承，否则为 “TOP”。标签：xml.attribute=true                                                                                                                                                                        |
+
+表9.69：ValignEnum
+
+| 枚举        | ValignEnum                                                                          |
+|-------------|--------------------------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::BlockElements::OasisExchangeTable                                              |
+| 注意        | 该枚举器规定垂直对齐方式。                                                                                    |
+| 聚合于      | Entry.valign、Row.valign、Tbody.valign                                                                    |
+
+| 字面量 | 说明                                                                      |
+|--------|------------------------------------------------------------------------------------|
+| bottom | 表格单元格的内容底部对齐。标签：atp.EnumerationLiteralIndex=0                            |
+| middle | 表格的内容垂直居中。标签：atp.EnumerationLiteralIndex=1                                 |
+| top    | 表格单元格的内容顶部对齐。标签：atp.EnumerationLiteralIndex=2                            |
+
+表9.70：Row
+
+| 类         | Row                                                                                                                       |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::BlockElements::OasisExchangeTable                                                                                    |
+| 注意       | 该元类表示表达表格中一行的能力。                                                                                                    |
+| 基类       | ARObject、DocumentViewSelectable、Paginateable                                                                                                 |
+| 聚合于     | Tbody.row                                                                                                                            |
+
+| 属性           | 类型                  | 多重性 | 类别 | 注意                                                                                                                                                                    |
+|-----------------|------------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| entry (ordered) | Entry                  | 1..*   | aggr | 这表示一个特定的表格单元格。它是表格中的一个条目。标签：xml.roleElement=true xml.roleWrapperElement=false xml.sequenceOffset=20 xml.typeElement=false xml.typeWrapperElement=false            |
+| rowsep          | TableSeparatorString   | 0..1   | attr | 指示默认情况下是否应当在该行下方显示线。标签：xml.attribute=true                                                                                                                            |
+| valign          | ValignEnum             | 0..1   | attr | 指示行中各单元格应当如何对齐。默认从 tbody 继承，否则为 “TOP”。标签：xml.attribute=true                                                                                                        |
+
+表9.71：Entry
+
+| 类         | Entry                                                                                     |
+|------------|-----------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::BlockElements::OasisExchangeTable                                                |
+| 注意       | 这表示一个特定的表格单元格。                                                                                    |
+| 基类       | ARObject                                                                                                |
+| 聚合于     | Row.entry                                                                                                   |
+
+| 属性         | 类型                  | 多重性 | 类别 | 注意                                                                                                                             |
+|---------------|------------------------|--------|------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| align         | AlignEnum              | 0..1   | attr | 规定单元格 ENTRY 应当如何水平对齐。默认为 “LEFT”。标签：xml.attribute=true                                                                          |
+| bgcolor       | String                 | 1      | attr | 这允许推荐条目的背景色。它基于 6 位 RGB 十六进制编码规定。标签：xml.attribute=true                                                                    |
+| colname       | String                 | 0..1   | attr | 指示条目应当出现的列的名称。标签：xml.attribute=true                                                                                              |
+| colsep        | TableSeparatorString   | 0..1   | attr | 指示是否应当在该条目的末尾显示线。标签：xml.attribute=true                                                                                          |
+| entryContents | DocumentationBlock     | 1      | aggr | 这是 TableEntry 的内容。标签：xml.roleElement=false xml.roleWrapperElement=false xml.typeElement=false xml.typeWrapperElement=false             |
+| morerows      | String                 | 0..1   | attr | 附加的行数。默认为 “0”。标签：xml.attribute=true                                                                                                  |
+| nameend       | String                 | 0..1   | attr | 当一个条目跨越多列时，这是最后一列的名称。标签：xml.attribute=true                                                                                  |
+| namest        | String                 | 0..1   | attr | 当一个条目跨越多列时，这是第一列的名称。标签：xml.attribute=true                                                                                    |
+| rotate        | String                 | 0..1   | attr | 指示单元格内容是否应当旋转。默认为 0；1 将把内容逆时针旋转 90 度。该属性由 OASIS 定义。标签：xml.attribute=true                                        |
+| rowsep        | TableSeparatorString   | 0..1   | attr | 指示是否应当在单元格的底部显示线。标签：xml.attribute=true                                                                                          |
+| spanname      | String                 | 0..1   | attr | 记录合并多列的条目的名称。标签：xml.attribute=true                                                                                                  |
+| valign        | ValignEnum             | 0..1   | attr | 指示单元格的内容应当如何对齐。默认从 row 或 tbody 继承，否则为 “TOP”。标签：xml.attribute=true                                                      |
+
+表9.72：TableSeparatorString
+
+| 原始类型    | TableSeparatorString                                                                                                                                                                            |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::BlockElements::OasisExchangeTable                                                                                                                                                        |
+| 注意        | 这表示标注 OASIS 交换表格内分隔字符串的能力。0 = 不显示线；1 = 显示线。标签：xml.xsd.customType=TABLE-SEPARATOR-STRING xml.xsd.pattern=[0-1] xml.xsd.type=string                                         |
+
+#### 9.3.4. 文档中的主题
+
+**文档中的主题**
+
+主题（Topic1）<sup>7</sup>是一个逻辑单元，它主要通过提供中间标题来细分章节的内容。注意，这些标题不是生成的目录的一部分。
+
+> **7** 主题的名称（Topic1）沿用 ASAM FSX。
+
+表9.73：Topic1
+
+| 类         | Topic1                                                                                                                                                                                                                                           |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::Chapters                                                                                                                                                                                                                                 |
+| 注意       | 该元类表示文档的一个主题。主题类似于章节，但不能嵌套。它们也不出现在目录中。主题可用于产生中间标题，从而在内部结构化一个章节。                                                                                                                                          |
+| 基类       | ARObject、DocumentViewSelectable、Identifiable、MultilanguageReferrable、Paginateable、Referrable                                                                                                                                                                      |
+| 聚合于     | MsrQueryResultTopic1.topic1、TopicOrMsrQuery.topic1                                                                                                                                                                                                                  |
+
+| 属性        | 类型                     | 多重性 | 类别 | 注意                                                                                                                                                                                  |
+|-------------|---------------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| helpEntry   | String                    | 0..1   | attr | 这规定在线帮助系统中与父类链接的一个入口点。语法应当由所应用的帮助系统或帮助系统生成器定义。标签：xml.attribute=true                                                                              |
+| topicContent| TopicContentOrMsrQuery    | 0..1   | aggr | 这是主题的内容。标签：xml.roleElement=false xml.roleWrapperElement=false xml.sequenceOffset=20 xml.typeElement=false xml.typeWrapperElement=false                                                |
+
+#### 9.3.5. 参数表格
+
+**参数表格**
+
+参数表格可以用于在文档中收集数值或文本参数。这样的参数不应当与 ECU 软件中的参数混淆。参数表格旨在创建一种数据表单（data sheet）。
+
+表9.74：Prms
+
+| 类         | Prms                                                                                                                                              |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::BlockElements::GerneralParameters（源文如此，应为 GeneralParameters）                                                                        |
+| 注意       | 该元类表示规定参数表格的能力。它例如可用于在数据表单中规定参数表格。                                                                                                  |
+| 基类       | ARObject、DocumentViewSelectable、Paginateable                                                                                                                          |
+| 聚合于     | ChapterContent.prms                                                                                                                                                    |
+
+| 属性  | 类型                  | 多重性 | 类别 | 注意                                                                                              |
+|-------|------------------------|--------|------|------------------------------------------------------------------------------------------------------------|
+| label | MultilanguageLongName  | 0..1   | aggr | 这表示参数表格的标题。标签：xml.sequenceOffset=20                                                              |
+| prm   | GeneralParameter       | 1..*   | aggr | 这表示表格中的一个特定参数。标签：xml.roleElement=true xml.roleWrapperElement=false xml.sequenceOffset=30 xml.typeElement=false xml.typeWrapperElement=false |
+
+#### 9.4. 文档生产
+
+（例如印刷）文档的生产使用文档处理器完成。这些处理器决定文档的内容与版面。尽管如此，有必要通过一些策略支持这一文档生产过程，以便微调最终的输出。
+
+**文档分页的支持**
+
+AUTOSAR 为分页策略（Paginateable）提供基本支持，它允许微调生成文档的换页。
+
+表9.75：Paginateable
+
+| 类         | Paginateable（抽象）                                                                                                                                                                                        |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::BlockElements::PaginationAndView                                                                                                                                                                    |
+| 注意       | 该元类表示在创建文档时控制分页策略的能力。                                                                                                                                                                              |
+| 基类       | ARObject、DocumentViewSelectable                                                                                                                                                                                            |
+| 子类       | Chapter、DefItem、DefList、Item、LabeledItem、LabeledList、List、MlFigure、MlFormula、MsrQueryChapter、MsrQueryP1、MsrQueryTopic1、MultiLanguageParagraph、MultiLanguageVerbatim、Note、Prms、Row、StructuredReq、Table、Topic1、TraceableTable、TraceableText |
+
+| 属性              | 类型                  | 多重性 | 类别 | 注意                                                                                                    |
+|--------------------|------------------------|--------|------|------------------------------------------------------------------------------------------------------------------|
+| break              | ChapterEnumBreak       | 0..1   | attr | 该属性允许规定一个强制的换页。标签：xml.attribute=true                                                              |
+| keepWithPrevious   | KeepWithPreviousEnum   | 0..1   | attr | 该属性表示分页策略。特别是它定义包含的文本块是否应当与前一个块保持在一起。标签：xml.attribute=true                          |
+
+另参见 ChapterEnumBreak。
+
+表9.76：KeepWithPreviousEnum
+
+| 枚举        | KeepWithPreviousEnum                                                                |
+|-------------|--------------------------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::BlockElements::PaginationAndView                                              |
+| 注意        | 该枚举器通过控制应当保持在一起的块来规定换页策略。                                                            |
+| 聚合于      | Paginateable.keepWithPrevious                                                                            |
+
+| 字面量 | 说明                                                                                          |
+|--------|--------------------------------------------------------------------------------------------------------|
+| keep   | 这表示该块应当与前一个块保持在一起。标签：atp.EnumerationLiteralIndex=0                                   |
+| noKeep | 这表示无需把该块与前一个块保持在一起。这与属性本身缺失等效。标签：atp.EnumerationLiteralIndex=1              |
+
+表9.77：DocumentViewSelectable
+
+| 类         | DocumentViewSelectable（抽象）                                                                                                                                                             |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::BlockElements::PaginationAndView                                                                                                                                                      |
+| 注意       | 该元类表示被专用于特定受众或文档视图的能力。                                                                                                                                                              |
+| 基类       | ARObject                                                                                                                                                                                                     |
+| 子类       | Paginateable                                                                                                                                                                                                  |
+
+| 属性 | 类型       | 多重性 | 类别 | 注意                                                                                                                                                                                  |
+|------|-------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| si   | NameTokens  | 1      | attr | 该属性允许标注一个语义信息，用于标识要在可自定义的文档视图中选择的文档对象。它应当由相关各方约定定义。标签：xml.attribute=true                                                              |
+| view | ViewTokens  | 0..1   | attr | 该属性列出对象应当出现的文档视图。若缺失，对象出现在全部文档视图中。标签：xml.attribute=true                                                                                                    |
+
+表9.78：ViewTokens
+
+| 原始类型    | ViewTokens                                                                                                                                      |
+|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::BlockElements::PaginationAndView                                                                                                            |
+| 注意        | 该原始类型规定用于规定文档视图的令牌。标签：xml.xsd.customType=VIEW-TOKENS xml.xsd.pattern=(-?[a-zA-Z_]+)(( )+-?[a-zA-Z_]+)* xml.xsd.type=string                        |
+
+#### 9.5. 包含生成的文档部分
+
+**包含生成的文档部分**
+
+AUTOSAR 支持一种方法：文档的部分内容被自动生成，并包含在文档内的特定位置。
+
+这一支持由所谓的 MSR 查询机制（MsrQueryP1、MsrQueryP2、MsrQueryTopic1 与 MsrQueryChapter）提供。这些类允许表示包含的属性以及包含的结果。由此，在生成的部分被包含之后，中间结果可以被可视化与交换。因此并不要求项目中涉及的所有各方都能够执行包含过程。
+
+细节由各方共同约定。
+
+![图 9.12：通过 MsrQuery 包含生成的文档部分（Including generated documentation parts by MsrQuery）](Figure9-12.png)
+
+以下元类表示手工编辑文档与包含生成部分之间的选择。
+
+表9.79：TopicContentOrMsrQuery
+
+| 类         | &lt;&lt;atpMixed&gt;&gt; TopicContentOrMsrQuery                                      |
+|------------|-----------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::Chapters                                                                   |
+| 注意       | 该元类表示使用查询生成的一个主题或主题内容。                                                            |
+| 基类       | ARObject                                                                                          |
+| 聚合于     | ChapterContent.topicContent、Topic1.topicContent                                                         |
+
+| 属性        | 类型         | 多重性 | 类别 | 注意                                                                    |
+|-------------|--------------|--------|------|--------------------------------------------------------------------------------|
+| msrQueryP1  | MsrQueryP1   | 1      | aggr | 这表示由一个 msrquery 自动提供的内容。                                              |
+| topicContent| TopicContent | 1      | aggr | 这是一个主题的内容。标签：xml.roleElement=false                                          |
+
+表9.80：TopicOrMsrQuery
+
+| 类         | &lt;&lt;atpMixed&gt;&gt; TopicOrMsrQuery                                              |
+|------------|-----------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::Chapters                                                                   |
+| 注意       | 该类提供 Topic 的替代：一个交付主题的 MsrQuery。                                                          |
+| 基类       | ARObject                                                                                          |
+| 聚合于     | ChapterModel.topic1                                                                                   |
+
+| 属性            | 类型            | 多重性 | 类别 | 注意                                                                                                                                                                                                                      |
+|------------------|------------------|--------|------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| msrQueryTopic1   | MsrQueryTopic1   | 1      | aggr | 这表示由一个 msrquery 自动提供的主题。标签：xml.sequenceOffset=190                                                                                                                                                                            |
+| topic1           | Topic1           | 1      | aggr | 这用于在章节内创建特定的主题。主题类似于子章节，但不能嵌套，也不会出现在文档的目录中。构型：atpSplitable；atpVariation 标签：atp.Splitkey=topic1.shortName, topic1.variationPoint.shortLabel vh.latestBindingTime=postBuild xml.sequenceOffset=180 |
+
+表9.81：ChapterOrMsrQuery
+
+| 类         | &lt;&lt;atpMixed&gt;&gt; ChapterOrMsrQuery                                            |
+|------------|--------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::Chapters                                                                      |
+| 注意       | 该元类表示标注一个特定章节或一个返回章节的查询的能力。                                                        |
+| 基类       | ARObject                                                                                          |
+| 聚合于     | ChapterModel.chapter                                                                                   |
+
+| 属性             | 类型             | 多重性 | 类别 | 注意                                                                                                                                                                                                                      |
+|-------------------|-------------------|--------|------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| chapter           | Chapter           | 1      | aggr | 这建立一个子章节。构型：atpSplitable；atpVariation 标签：atp.Splitkey=chapter.shortName, chapter.variationPoint.shortLabel vh.latestBindingTime=postBuild xml.sequenceOffset=210                                                            |
+| msrQueryChapter   | MsrQueryChapter   | 1      | aggr | 这表示由一个 msrquery 自动提供的章节。标签：xml.sequenceOffset=220                                                                                                                                                                            |
+
+以下元类表示被包含的生成部分。
+
+表9.82：MsrQueryP1
+
+| 类         | MsrQueryP1                                                                                      |
+|------------|------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::MsrQuery                                                                                 |
+| 注意       | 该元类表示表达一个查询的能力，其结果为主题的内容。                                                                    |
+| 基类       | ARObject、DocumentViewSelectable、Paginateable                                                                        |
+| 聚合于     | TopicContentOrMsrQuery.msrQueryP1                                                                                   |
+
+| 属性              | 类型          | 多重性 | 类别 | 注意                                                    |
+|--------------------|----------------|--------|------|-----------------------------------------------------------------|
+| msrQueryProps      | MsrQueryProps  | 1      | aggr | 这是段落查询的参数与属性。标签：xml.sequenceOffset=20                 |
+| msrQueryResultP1   | TopicContent   | 0..1   | aggr | 这表示查询的结果。标签：xml.sequenceOffset=30                         |
+
+表9.83：MsrQueryTopic1
+
+| 类         | MsrQueryTopic1                                                                                        |
+|------------|------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::MsrQuery                                                                                       |
+| 注意       | 该元类表示规定一个查询的能力，其结果为一组主题。                                                                            |
+| 基类       | ARObject、DocumentViewSelectable、Paginateable                                                                              |
+| 聚合于     | TopicOrMsrQuery.msrQueryTopic1                                                                                           |
+
+| 属性                    | 类型                 | 多重性 | 类别 | 注意                                                    |
+|---------------------------|-----------------------|--------|------|-----------------------------------------------------------------|
+| msrQueryProps             | MsrQueryProps         | 1      | aggr | 这是主题查询的参数与属性。标签：xml.sequenceOffset=20                 |
+| msrQueryResultTopic1      | MsrQueryResultTopic1  | 0..1   | aggr | 这表示查询的结果。标签：xml.sequenceOffset=30                         |
+
+表9.84：MsrQueryChapter
+
+| 类         | MsrQueryChapter                                                                                         |
+|------------|------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::MsrQuery                                                                                       |
+| 注意       | 该元类表示表达一个查询的能力，其结果为一组章节。                                                                            |
+| 基类       | ARObject、DocumentViewSelectable、Paginateable                                                                              |
+| 聚合于     | ChapterOrMsrQuery.msrQueryChapter                                                                                        |
+
+| 属性                    | 类型                  | 多重性 | 类别 | 注意                                                    |
+|---------------------------|------------------------|--------|------|-----------------------------------------------------------------|
+| msrQueryProps             | MsrQueryProps          | 1      | aggr | 这是章节查询的参数与属性。标签：xml.sequenceOffset=20                 |
+| msrQueryResultChapter     | MsrQueryResultChapter  | 0..1   | aggr | 这表示查询的结果。标签：xml.sequenceOffset=30                         |
+
+以下元类控制包含过程。
+
+表9.85：MsrQueryProps
+
+| 类         | MsrQueryProps                                                                                                                                                               |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::MsrQuery                                                                                                                                                                |
+| 注意       | 该元类表示规定一个查询的能力，该查询产出某些文档文本。结果的性质由使用查询的上下文决定。                                                                                                            |
+| 基类       | ARObject                                                                                                                                                                                          |
+| 聚合于     | MsrQueryChapter.msrQueryProps、MsrQueryP1.msrQueryProps、MsrQueryP2.msrQueryProps、MsrQueryTopic1.msrQueryProps                                                                                          |
+
+| 属性         | 类型         | 多重性 | 类别 | 注意                                                                                                                                           |
+|---------------|---------------|--------|------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| comment       | String        | 0..1   | attr | 该元素包含一段文本形式的评注。标签：xml.sequenceOffset=40                                                                                                      |
+| msrQueryArg   | MsrQueryArg   | *      | aggr | 该元素规定 MsrQuery 中的一个参数。标签：xml.roleElement=true xml.roleWrapperElement=false xml.sequenceOffset=30 xml.typeElement=false xml.typeWrapperElement=false |
+| msrQueryName  | String        | 1      | attr | 该元素规定被触发的 MSR-QUERY 的名称。标签：xml.sequenceOffset=20                                                                                                |
+
+表9.86：MsrQueryArg
+
+| 类         | MsrQueryArg                                                                                   |
+|------------|----------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::MsrQuery                                                                                             |
+| 注意       | 这表示查询的一个参数。注意，这些参数不被标准化，因此由各方共同约定。                                                              |
+| 基类       | ARObject                                                                                                                |
+| 聚合于     | MsrQueryProps.msrQueryArg                                                                                                    |
+
+| 属性 | 类型      | 多重性 | 类别 | 注意                                                                                                        |
+|------|------------|--------|------|----------------------------------------------------------------------------------------------------------------------|
+| arg  | String     | 1      | attr | 这是参数的取值。标签：xml.roleElement=false xml.roleWrapperElement=false xml.typeElement=false xml.typeWrapperElement=false |
+| si   | NameToken  | 1      | attr | 这表示查询参数的名称（语义信息）。标签：xml.attribute=true                                                                |
+
+以下元类表示被包含的结果。
+
+表9.87：MsrQueryResultChapter
+
+| 类         | MsrQueryResultChapter                                             |
+|------------|------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::MsrQuery                                                    |
+| 注意       | 该元类表示一个 msrquery 的结果——它是一组章节。                                            |
+| 基类       | ARObject                                                                           |
+| 聚合于     | MsrQueryChapter.msrQueryResultChapter                                                     |
+
+| 属性             | 类型    | 多重性 | 类别 | 注意                                                                                                                            |
+|-------------------|----------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------|
+| chapter (ordered) | Chapter  | *      | aggr | 这是查询结果中的一个特定章节。标签：xml.roleElement=true xml.roleWrapperElement=false xml.sequenceOffset=20 xml.typeElement=false xml.typeWrapperElement=false |
+
+表9.88：MsrQueryResultTopic1
+
+| 类         | MsrQueryResultTopic1                                                                            |
+|------------|----------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::MsrQuery                                                                                                  |
+| 注意       | 该元类表示表达一个查询结果的能力——它是一组主题。                                                                                      |
+| 基类       | ARObject                                                                                                                        |
+| 聚合于     | MsrQueryTopic1.msrQueryResultTopic1                                                                                                   |
+
+| 属性            | 类型    | 多重性 | 类别 | 注意                                                                                                                            |
+|------------------|----------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------|
+| topic1 (ordered) | Topic1   | *      | aggr | 这表示查询结果中的一个特定主题。标签：xml.roleElement=true xml.roleWrapperElement=false xml.sequenceOffset=20 xml.typeElement=false xml.typeWrapperElement=false |
+
+#### 9.6. 在 AUTOSAR 制品中处理多种语言
+
+**多语言**
+
+AUTOSAR 支持多语言文档<sup>8</sup>：文档的每个构造都可以拥有 LanguageSpecific 中的可选属性 l，其取值标注书写它的语言。文档中可用的语言在 adminData 中定义。
+
+细节见第 3 章。
+
+以下块级元素及其子构造支持多语言文本/图形：
+
+- paragraph
+- formula
+- figure
+- verbatim
+
+> **8** 基于 [\[22\]](#ref-22)。
+
+图 9.13 以 LongName 为例展示了多语言支持的方法。它展示了如何从一个公共模型派生出单语言与多语言版本。
+
+![图 9.13：MultilanguageLongname](Figure9-13.png)
+
+用书写语言对每个构造进行注记，使文档块的作者可以在单一来源文档中以两种或多种语言交错书写（interlinear），随后生成每种语言的文档块。
+
+**约束：所用语言需要保持一致**
+
+AUTOSAR 文件所用的语言在顶层 adminData 中规定。所有其他元素应当以文档规定的语言提供。更多细节见第 3 章。
+
+这一方法支持更好的可维护性。例如在一个以英语、法语与德语书写的文档块中，当每个段落之后紧跟其在其他语言中的译文时，维护三个版本的一致性比把它们放在完全不同的位置、甚至更糟地放在分离的文档中要容易得多。
+
+以下示例说明这一方法：
+
+清单9.2：ARXML 中多语言文档块节选示例
+
+```xml
+<P>
+  <L-1 L="EN">
+    In a documentation block written in English, French and German, for
+    example, it is easier to maintain the three versions consistent when each
+    paragraph is immediately followed by its translation in the other languages
+    as when they are found at completely different locations or worse separated
+    documents.
+  </L-1>
+  <L-1 L="FR">
+    Dans un bloque documentaire écrit en anglais, français et allemand, par
+    exemple, il est plus facile de maintenir les trois versions consistantes
+    entre elles, quand chaque paragraphe est suivi immédiatement de sa
+    traduction dans les autres langues que si ces dernières ce trouvaient dans
+    des endroits différents ou même pire dans des documents séparés.
+  </L-1>
+</P>
+</INTRODUCTION>
+</AR-PACKAGE>
+</AR-PACKAGES>
+</AUTOSAR>
+```
+
+（源文的法语译文经转换出现编码损伤（Ãc © 等），此处按可读形式复原。）
+
+另参见 MultiLanguageVerbatim。
+
+表9.89：LVerbatim
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; LVerbatim                                                     |
+|------------|--------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::TextModel::LanguageDataModel                                                         |
+| 注意       | 某一种特定语言中的 MixedContentForVerbatim。语言标注在属性 l 中（源文句子在 “attribute” 后截断）。                |
+| 基类       | ARObject、LanguageSpecific、MixedContentForVerbatim、WhitespaceControlled                                          |
+| 聚合于     | MultiLanguageVerbatim.l5                                                                                             |
+
+表9.90：MultiLanguageOverviewParagraph
+
+| 类         | MultiLanguageOverviewParagraph                                                                                                                                                                                     |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::TextModel::MultilanguageData                                                                                                                                                                                                 |
+| 注意       | 这是概览条目中一个多语言段落的内容。                                                                                                                                                                                                                      |
+| 基类       | ARObject                                                                                                                                                                                                                                                      |
+| 聚合于     | Caption.desc、CompuScale.desc、Describable.desc、Identifiable.desc、LabeledItem.itemLabel、Modification.change、Modification.reason、ScaleConstr.desc、SdgCaption.desc、SwRecordLayoutGroup.desc、SwRecordLayoutV.desc、VariationPoint.desc |
+
+| 属性 | 类型                | 多重性 | 类别 | 注意                                                                                                                                    |
+|------|----------------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| l2   | LOverviewParagraph   | 1..*   | aggr | 这表示某一种特定语言中的文本。标签：xml.roleElement=true xml.roleWrapperElement=false xml.sequenceOffset=20 xml.typeElement=false xml.typeWrapperElement=false |
+
+表9.91：LOverviewParagraph
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; LOverviewParagraph                                                       |
+|------------|---------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::TextModel::LanguageDataModel                                                                      |
+| 注意       | 某一种特定语言中的 MixedContentForOverviewParagraph。语言标注在属性 l 中。                                                  |
+| 基类       | ARObject、LanguageSpecific、MixedContentForOverviewParagraph                                                                    |
+| 聚合于     | IndentSample.l2、MultiLanguageOverviewParagraph.l2                                                                              |
+
+| 属性           | 类型   | 多重性 | 类别 | 注意                                                                                              |
+|-----------------|---------|--------|------|------------------------------------------------------------------------------------------------------------|
+| blueprintValue  | String  | 0..1   | attr | 这表示一段描述，记录在从蓝图派生对象时应当如何定义该取值。标签：atp.Status=draft xml.attribute=true           |
+
+另参见 MultiLanguageParagraph。
+
+表9.92：LParagraph
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; LParagraph                                                                       |
+|------------|---------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::TextModel::LanguageDataModel                                                                            |
+| 注意       | 这是某一种特定语言中一个段落的文本。语言标注在属性 l 中。                                                                              |
+| 基类       | ARObject、LanguageSpecific、MixedContentForParagraph                                                                                  |
+| 聚合于     | MultiLanguageParagraph.l1                                                                                                            |
+
+表9.93：PgwideEnum
+
+| 枚举        | PgwideEnum                                                                                                                                          |
+|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::BlockElements::OasisExchangeTable                                                                                                                 |
+| 注意        | 该枚举器规定表格是否应当横跨整页呈现，即使它被放置在侧标题（side-head）版式中。                                                                                                |
+| 聚合于      | MlFigure.pgwide、MultiLanguageVerbatim.pgwide                                                                                                                              |
+
+| 字面量   | 说明                                                                                                                           |
+|-----------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| noPgwide  | 这表示表格应当适配当前文本流。标签：atp.EnumerationLiteralIndex=0                                                                          |
+| pgwide    | 这表示表格可以使用整页宽度。这在所谓“侧标题版式”中特别重要，当表格位于列表或注记中时也是如此。标签：atp.EnumerationLiteralIndex=1                  |
+
+表9.94：MixedContentForPlainText
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; MixedContentForPlainText（抽象）                                        |
+|------------|------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::TextModel::InlineTextModel                                                                     |
+| 注意       | 这表示一个纯文本，概念上按混合内容处理。出于对称性的原因它被如此建模。                                                        |
+| 基类       | ARObject、WhitespaceControlled                                                                                             |
+| 子类       | LPlainText                                                                                                              |
+
+表9.95：MultiLanguagePlainText
+
+| 类         | MultiLanguagePlainText                                                                                                                                      |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::TextModel::MultilanguageData                                                                                                                                           |
+| 注意       | 这是一个多语言的纯文本。它旨在被呈现为一个段落。                                                                                                                                                |
+| 基类       | ARObject                                                                                                                                                                                            |
+| 聚合于     | AdminData.usedLanguages、MlFormula.genericMath、MlFormula.texMath                                                                                                                                    |
+
+| 属性 | 类型       | 多重性 | 类别 | 注意                                                                                                                                    |
+|------|-------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| l10  | LPlainText  | 1..*   | aggr | 这是某一种特定语言中的纯文本。标签：xml.roleElement=true xml.roleWrapperElement=false xml.sequenceOffset=20 xml.typeElement=false xml.typeWrapperElement=false |
+
+表9.96：LPlainText
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; LPlainText                                                                  |
+|------------|----------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::TextModel::LanguageDataModel                                                                       |
+| 注意       | 这表示某一种特定语言中的纯字符串。语言标注在属性 l 中。                                                                        |
+| 基类       | ARObject、LanguageSpecific、MixedContentForPlainText、WhitespaceControlled                                                       |
+| 聚合于     | MultiLanguagePlainText.l10                                                                                                    |
+
+表9.97：LanguageSpecific
+
+| 类         | LanguageSpecific（抽象）                                                                                                                                                                                                                                    |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::Documentation::TextModel::LanguageDataModel                                                                                                                                                                                                                            |
+| 注意       | 该元类表示标注一个对象所适用的特定语言的能力。                                                                                                                                                                                                                                  |
+| 基类       | ARObject                                                                                                                                                                                                                                                                      |
+| 子类       | LGraphic、LLongName、LOverviewParagraph、LParagraph、LPlainText、LVerbatim                                                                                                                                                                                                            |
+
+| 属性 | 类型  | 多重性 | 类别 | 注意                                                                                                                                                                                                                                                              |
+|------|--------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| l    | LEnum  | 1      | attr | 该属性标注语言特定文档实体所用的语言。注意，“FOR-ALL” 意味着该实体适用于所有语言——它是语言中立的。它遵循 ISO 639-1:2002，并以大写规定。标签：xml.attribute=true xml.enforceMinMultiplicity=true |
+
+表9.98：LEnum
+
+| 枚举        | LEnum                                                                              |
+|-------------|----------------------------------------------------------------------------------------------|
+| 包          | M2::MSR::Documentation::TextModel::LanguageDataModel                                                |
+| 注意        | 这表示按照 ISO 639 两位字母代码的可能的语言标志符。                                                          |
+| 聚合于      | AdminData.language、LanguageSpecific.l                                                                   |
+
+| 字面量 | 说明 | 字面量 | 说明 | 字面量 | 说明 |
+|--------|------|--------|------|--------|------|
+| aa | Afar（阿法尔语） | bh | Bihari（比哈尔语） | forAll | 内容适用于所有语言 |
+| ab | Abkhazian（阿布哈兹语） | bi | Bislama（比斯拉马语） | fr | French（法语） |
+| af | Afrikaans（南非语） | bn | Bengali（孟加拉语） | fy | Frisian（弗里西语） |
+| am | Amharic（阿姆哈拉语） | bo | Tibetian（藏语，源文如此） | ga | Irish（爱尔兰语） |
+| ar | Arabic（阿拉伯语） | br | Breton（布列塔尼语） | gd | Scots Gaelic（苏格兰盖尔语） |
+| as | Assamese（阿萨姆语） | ca | Catalan（加泰罗尼亚语） | gl | Galician（加利西亚语） |
+| ay | Aymara（艾马拉语） | co | Corsican（科西嘉语） | gn | Guarani（瓜拉尼语） |
+| az | Azerbaijani（阿塞拜疆语） | cs | Czech（捷克语） | gu | Gjarati（古吉拉特语，源文如此） |
+| ba | Bashkir（巴什基尔语） | cy | Welsh（威尔士语） | ha | Hausa（豪萨语） |
+| be | Byelorussian（白俄罗斯语） | da | Danish（丹麦语） | hi | Hindi（印地语） |
+| bg | Bulgarian（保加利亚语） | de | German（德语） | hr | Croatian（克罗地亚语） |
+| en | English（英语） | hu | Hungarian（匈牙利语） | ln | Lingala（林加拉语） |
+| eo | Esperanto（世界语） | hy | Armenian（亚美尼亚语） | lo | Laothian（老挝语） |
+| es | Spanish（西班牙语） | ia | Interlingua（国际语） | lt | Lithuanian（立陶宛语） |
+| et | Estonian（爱沙尼亚语） | ie | Interlingue（西方国际语） | lv | Lavian, Lettish（拉脱维亚语） |
+| eu | Basque（巴斯克语） | ik | Inupiak（伊努皮克语） | mg | Malagasy（马尔加什语） |
+| fa | Persian（波斯语） | in | Indonesian（印尼语） | mi | Maori（毛利语） |
+| fi | Finnish（芬兰语） | is | Icelandic（冰岛语） | mk | Macedonian（马其顿语） |
+| fj | Fiji（斐济语） | it | Italian（意大利语） | ml | Malayalam（马拉雅拉姆语） |
+| fo | Faeroese（法罗语） | iw | Hebrew（希伯来语） | mn | Mongolian（蒙古语） |
+| ja | Japanese（日语） | ji | Yiddish（意第绪语） | mo | Moldavian（摩尔多瓦语） |
+| jw | Javanese（爪哇语） | ka | Georgian（格鲁吉亚语） | mr | Marathi（马拉地语） |
+| kk | Kazakh（哈萨克语） | kl | Greenlandic（格陵兰语） | ms | Malay（马来语） |
+| km | Cambodian（高棉语） | kn | Kannada（卡纳达语） | mt | Maltese（马耳他语） |
+| ko | Korean（韩语） | ks | Kashmiri（克什米尔语） | my | Burmese（缅甸语） |
+| ku | Kurdish（库尔德语） | ky | Kirghiz（吉尔吉斯语） | na | Nauru（瑙鲁语） |
+| la | Latin（拉丁语） | ne | Nepali（尼泊尔语） | pt | Portuguese（葡萄牙语） |
+| nl | Dutch（荷兰语） | no | Norwegian（挪威语） | qu | Quechua（盖丘亚语） |
+| oc | Occitan（奥克语） | om | (Afan) Oromo（奥罗莫语） | rm | Rhaeto-Romance（罗曼什语） |
+| or | Oriya（奥里亚语） | pa | Punjabi（旁遮普语） | pl | Polish（波兰语） |
+| ps | Pashto, Pushto（普什图语） | rn | Kirundi（基隆迪语） | ro | Romanian（罗马尼亚语） |
+| ru | Russian（俄语） | rw | Kinyarwanda（卢旺达语） | sa | Sanskrit（梵语） |
+| sd | Sindhi（信德语） | sg | Sangro（桑戈语） | sh | Serbo-Croatian（塞尔维亚-克罗地亚语） |
+| si | Singhalese（僧伽罗语） | sk | Slovak（斯洛伐克语） | sl | Slovenian（斯洛文尼亚语） |
+| sm | Samoan（萨摩亚语） | sn | Shona（绍纳语） | so | Somali（索马里语） |
+| sq | Albanian（阿尔巴尼亚语） | sr | Serbian（塞尔维亚语） | ss | Siswati（斯瓦蒂语） |
+| st | Sesotho（塞索托语） | su | Sundanese（巽他语） | sv | Swedish（瑞典语） |
+| sw | Swahili（斯瓦希里语） | ta | Tamil（泰米尔语） | te | Tegulu（泰卢固语） |
+| tg | Tajik（塔吉克语） | th | Thai（泰语） | ti | Tigrinya（提格里尼亚语） |
+| tk | Turkmen（土库曼语） | tl | Tagalog（他加禄语） | tn | Setswana（茨瓦纳语） |
+| to | Tonga（汤加语） | tr | Turkish（土耳其语） | ts | Tsonga（聪加语） |
+| tt | Tatar（鞑靼语） | tw | Twi（契维语） | uk | Ukrainian（乌克兰语） |
+| ur | Urdu（乌尔都语） | uz | Uzbek（乌兹别克语） | vi | Vietnamese（越南语） |
+| vo | Volapuk（沃拉普克语） | wo | Wolof（沃洛夫语） | xh | Xhosa（科萨语） |
+| yo | Yoruba（约鲁巴语） | zh | Chinese（中文） | zu | Zulu（祖鲁语） |
+
+（源表分 8 栏连排印刷；此处为节省篇幅按行合并，字面量集合与源表完全一致，atp.EnumerationLiteralIndex 从 aa=0 递增至 zu=136、forAll=33。）
+
+#### 9.7. 文档视图
+
+**视图方法**
+
+AUTOSAR 支持多个文档视图。它们由 DocumentViewSelectable 支持。
+
+在下文中，图示的示例使用：
+
+- LanguageSpecific 使用 LEnum “en”；
+- 构型 **&lt;atpVariation&gt;** 使用 SwSystemconst “Country” 及其 SwSystemconstValue “1” 与 “2”；
+- DocumentViewSelectable 使用 ViewTokens “INTERNAL” 与 “DETAILED”。
+
+基于这些设置，文档表示定义在图 9.14 中蓝色标记的切片内。
+
+![图 9.14：视图方法（View Approach）](Figure9-14.png)
+
+除文档的 LanguageSpecific 方面与由构型 **&lt;atpVariation&gt;** 实现的系统固有的配置之外，DocumentViewSelectable 打开了第三个维度：为特定受众或文档视图生成文档。
+
+第一步，用对象应当出现的文档视图增强文档内容。在稍后的开发步骤中，选择一个专门的视图，确保满足预期的受众（见图 9.15）。
+
+![图 9.15：文档视图的应用（Application of document views）](Figure9-15.png)
+
+以下用例是可能的：
+
+- 未规定视图 [TPS\_GST\_00366]；
+- 规定了专门视图 [TPS\_GST\_00367]；
+- 规定了多个视图 [TPS\_GST\_00368]；
+- 排除内容 [TPS\_GST\_00369]。
+
+**未规定视图**
+
+未规定视图的文档应当向所有受众完整展示。
+
+图 9.16：用例——未做选择
+
+表9.99：用例——未做选择
+
+| LEnum==en | - | SwSystemconst Country==1 | SwSystemconst Country==2 |
+|-------------|------------|--------------------------------|---------------------------------|
+| ViewToken   | DETAILED   | -                              | -                               |
+|             | INTERNAL   | -                              | -                               |
+
+图 9.16 展示的文档内容为（特征描述 Passenger Lock）：
+
+1. 特征描述 Passenger Lock
+   1.1 乘员锁的功能
+
+乘员锁的特征 A 由函数 A1 与 A2 实现。特征 B 由函数 B1 与 B2 实现。
+
+函数 A1 始终可用。函数 A2 的使用取决于所选的系统配置。函数 A1 比较参数 P1 与 P2 并给出状态。
+
+函数 A2 仅在条件被置为 Country = 1 时活跃。FuncA2/SwSystemconsts/Country==1
+
+函数 B1 的使用取决于所选的系统配置。函数 B2 是面向服务目的的专用函数。
+
+函数 B1 仅在条件被置为 Country = 2 时活跃。FuncB1/SwSystemconsts/Country==2
+
+该函数的应用应当从给定的初始值开始。随后迭代逼近物理极限。FuncB1/SwSystemconsts/Country==2
+
+函数 B2 应当在标准服务期间执行。该函数的计算结果必须处于 +2 到 -3 的范围内。若超出该范围，遵循手册中的服务说明：仅在工程模式下使用该应用；参见服务说明 A2。
+
+函数 B2 的升级将通过实现 CRQ0815 完成。
+
+图 9.16 中黄色标记的文本表明这些段落包含一个带有 SwSystemconst “Country” 的 VariationPoint。
+
+清单9.3：段落包含带有 SwSystemconst “Country==1” 的 VariationPoint
+
+```xml
+<P>
+  <L-1 L="EN">The function A2 is only active in case the condition is set Country = 1.</L-1>
+  <L-1 L="DE">Die Funktion A2 wird nur aktiv, wenn die Bedingung Country = 1 gesetzt ist.</L-1>
+  <VARIATION-POINT>
+    <SHORT-LABEL>FuncA2</SHORT-LABEL>
+    <SW-SYSCOND BINDING-TIME="SYSTEM-DESIGN-TIME">
+      <SYSC-REF DEST="SW-SYSTEMCONST">/AR/SwSystemconsts/Country</SYSC-REF> == 1
+    </SW-SYSCOND>
+  </VARIATION-POINT>
+</P>
+```
+
+**规定了专门视图**
+
+为文档的某个部分规定面向特定受众的视图，意思是“只向该受众展示”，换言之“不向其他受众展示被标记的部分”。
+
+在文档中规定视图是对受影响文档部分的显式包含。为保证一个元素展示给所有预期的受众，它应当显式设置全部相应的视图（[TPS\_GST\_00368]）。
+
+```
+include = selectedViews ∈ declaredViews
+```
+
+图 9.17：用例——规定了专门视图并被选中（INTERNAL）
+
+表9.100：用例——规定了专门视图并被选中（INTERNAL）
+
+| LEnum==en | - | SwSystemconst Country==1 | SwSystemconst Country==2 |
+|-------------|------------|--------------------------------|---------------------------------|
+| ViewToken   | DETAILED   | -                              | -                               |
+|             | INTERNAL   | X                              | -                               |
+
+带有 ViewToken “INTERNAL” 的 DocumentViewSelectable 与带有 SwSystemconstValue “1” 的 SwSystemconst “Country” 被选中。以 ViewTokens “DETAILED” 规定的内容未被选中。
+
+这一用例揭示两个要点：
+
+图 9.17 中红色标记的文本表明这些段落包含带有 ViewToken “INTERNAL” 的 DocumentViewSelectable。
+
+清单9.4：段落包含带有 ViewToken “INTERNAL” 的 DocumentViewSelectable
+
+```xml
+<P VIEW="INTERNAL">
+  <L-1 L="EN">
+    The function B2 shall be executed during standard services. The
+    calculation result of this function must be in the range of +2 to -3.
+    If this range is exceeded follow the service instruction in the manual.
+  </L-1>
+  <L-1 L="DE">
+    Die Funktion B2 wird im Standardservice ausgeführt. Die
+    Berechnungsergebnisse dieser Funktion muss in Bereich von +2 bis -3 liegen.
+    Wird dieser Bereich überschritten, ist der Serviceanweiseung im Handbuch
+    zu folgen.
+  </L-1>
+</P>
+<LIST TYPE="UNNUMBER" VIEW="INTERNAL">
+  <ITEM VIEW="DETAILED">
+    <P>
+      <L-1 L="EN">Use this application only in engineering mode.</L-1>
+      <L-1 L="DE">Diese Anwendung ist nur im Engineering Mode zu verwenden.</L-1>
+    </P>
+  </ITEM>
+  <ITEM>
+    <P>
+      <L-1 L="EN">See service instruction A2.</L-1>
+      <L-1 L="DE">Siehe Serviceanweisung A2.</L-1>
+    </P>
+  </ITEM>
+</LIST>
+```
+
+列表的第一个条目被指派给 ViewToken “DETAILED”，因此它不出现在生成的文档中。
+
+图 9.17 中蓝色标记的文本表明该段落包含带有 ViewTokens “INTERNAL” 与 “DETAILED” 的 DocumentViewSelectable（见清单 9.5）。
+
+清单9.5：段落包含带有 ViewTokens “INTERNAL” 与 “DETAILED” 的 DocumentViewSelectable
+
+```xml
+<P VIEW="INTERNAL DETAILED">
+  <L-1 L="EN">The upgrade of function B2 will be done by implementation of CRQ0815.</L-1>
+  <L-1 L="DE">Die Erweiterung der Funktion B2 wird durch die Implementierung von CRQ0815 erfolgen.</L-1>
+</P>
+```
+
+选择 ViewToken “DETAILED” 时，蓝色标记的文本也因其声明而出现，如图 9.18 所示。
+
+**规定了多个视图**
+
+一个实体可以在一个视图列表中可见。这应当被解释为“若当前选中的视图在列表中，则显示该信息”。
+
+表9.101：用例——规定了专门视图并被选中（DETAILED）
+
+| LEnum==en | - | SwSystemconst Country==1 | SwSystemconst Country==2 |
+|-------------|------------|--------------------------------|---------------------------------|
+| ViewToken   | DETAILED   | X                              | -                               |
+|             | INTERNAL   | -                              | -                               |
+
+生成的输出将如图 9.18 所示。
+
+图 9.18：用例——规定了专门视图并被选中（DETAILED）
+
+（图 9.18 中的文档内容与图 9.16 相同，但不包含被标记为 INTERNAL 专属的两段红字内容：函数 B2 的服务说明段与 CRQ0815 升级说明段中的 INTERNAL 专属部分——后者因同时声明了 DETAILED 而保留。）
+
+**排除内容**
+
+排除内容的意思是“不向任何受众呈现它”。这可以通过规定一个任意命名的视图（例如 DONOTPRESENT）来实现——它永远不会在生产中被选择。
+
+若选择了 ViewToken “DETAILED”（表 9.101），则只有以该专门视图规定的文本与未规定任何视图的文本会出现。以 ViewToken “INTERNAL” 规定的文本将被排除出内容（见图 9.18）。
