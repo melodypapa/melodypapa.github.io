@@ -9,9 +9,11 @@ Existing-article mappings (mapping.md, evidence re-checked at census): `arm_arch
 
 ## Queue
 
-- [ ] exception_model — verify/complete (article `m7_processor/programmers_model/`, 333 ln, 5 imgs vs B1.5 subset of a 4,344-ln chapter)
-  - Note (S1): confirm the B1.5 boundary first (mapping.md evidence `Figure2-1/2-2`/`Table2-14-1` carries *(verify)*); missing exception-model sections (fault handling, locking) translate in place.
-  - [ ] S1 [ ] S2 (gaps only) [ ] S3 [ ] S5 [ ] S6 [ ] S7 (if changed) [ ] S8 (if changed)
+- [x] exception_model — completed (article `m7_processor/programmers_model/index.md`, 1,834 ln, 5 imgs vs B1.5 of the 4,344-ln chapter B1)
+  - S1 result: mapping confirmed at the figure/table evidence — `Figure2-1`/`Figure2-2`/`Table 2-14` are TRM ch2 derivatives, and the exception-model prose aligns with B1.5.1–B1.5.19, so the page was completed in place against B1.5.
+  - S2 result: §6–§8 kept (TRM ch2 front matter, aligned to B1.5.1 and completed: DebugMonitor inserted, disable/escalation notes, ICSR control bits, 496 external interrupts), §9 异常编号定义 (Table B1-4) added, §10 向量表 completed (Table B1-5), §11 异常优先级与抢占 (Table B1-6), §12 中断优先级分组 (Table B1-7), §13 执行优先级与优先级提升 (Example B1-1, ExecutionPriority pseudocode, priority escalation, SVCall/PendSV model), §14 复位行为 (TakeReset), §15 异常进入和返回 (ExceptionEntry/PushStack/ExceptionTaken/ReturnAddress/UpdateFPCCR, stack alignment, EXC_RETURN Tables B1-8/B1-9, ExceptionReturn/DeActivate/PopStack), §16–§26 = B1.5.9–B1.5.19, §27 参考文献.
+  - S3 result: `FigureB1-3.png` (p536) and `FigureB1-4.png` (p538) cropped; all six numbered tables (B1-4…B1-9) and the three unnumbered fault tables rendered as GFM.
+  - [x] S1 [x] S2 (gaps only) [x] S3 [x] S5 [x] S6 [ ] S7 (if changed) [ ] S8 (if changed)
 - [ ] protected_memory_system_archi_pmsav7 — verify-only (article `m7_processor/mpu/` sections 4–14, 13 imgs vs B3.5)
   - Note (S6): article covers PMSAv7 concept → MPU registers (MPU_TYPE…MPU_RASR + aliasing) — confirm against B3.5 subsection list; record evidence.
   - [ ] S1 [ ] S6 [ ] S7 (if changed) [ ] S8 (if changed)
