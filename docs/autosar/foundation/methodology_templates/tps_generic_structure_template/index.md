@@ -5229,3 +5229,1482 @@ M1 实例引用是元类 `AtpInstanceRef` 某个具体子类的实例。图 5.8 
 | timestamp | DateTime | 0..1   | attr | 由用户的工具环境为 ArObject 计算的时间戳。可以在自己的工具环境中用它判断 ArObject 的最近变更。timestamp 对 AUTOSAR 模型没有任何语义含义，也不要求 AUTOSAR 工具管理时间戳。标签：xml.attribute=true xml.name=T                          |
 
 ![图 6.9：&lt;atpObject&gt; 的模式（Pattern for &lt;atpObject&gt;）](Figure6-9.png)
+
+## 7. 变体处理（Variant Handling）
+
+### 7.1. 引言
+
+AUTOSAR 中变体处理的动机是：在 OEM 与供应商之间架起桥梁、避免制品之间的冗余，并为在 AUTOSAR 中表达基本产品线提供基础。
+
+当然，变体处理概念在多数公司中已经存在，但它们通常（在公司边界之外）没有标准化，因此 OEM 与供应商很难就这一主题相互沟通。
+
+考虑以下示例。一个 OEM 把一个包含变体的模型发给供应商。供应商从该模型生成代码，但并不解析全部变体。OEM 拿回的是一些变体已绑定、另一些变体保持“开放”（待装载时绑定）的目标代码。这只有在双方讲同一种语言、对变体有相同理解的情况下才能工作。而且经常涉及不止两方。
+
+因此，AUTOSAR 中的变体处理主要是关于变体的文档化：
+
+**变体处理术语**
+
+- 变体点（**Variation Points**）是模型中可变的位置。也就是说，它们可能并非在所有变体中都存在，或者在不同变体中具有不同的特性。
+- 施加时间（**Binding Time**）是一个变体点可以被施加（bind）的最晚可能时间。
+- 绑定表达式（**Binding Expressions**）规定可变元素在何种条件下存在，或确定某些可变特性。
+
+#### 7.1.1. 快速概览
+
+![图 7.1：快速概览（Quick Overview）](Figure7-1.png)
+
+本节继续第 6 章的元模型转换概览。
+
+1. （第 6 章的回顾。）AUTOSAR 从纯元模型出发。带注记的元模型具有相同的结构，但用构型（**&lt;atpVariation&gt;**）标记那些作为变体点的位置。本节将定义一些模式，展示如何把这些位置转换为一个拥有实现变体点所需全部信息的结构。
+2. 这一切都发生在 M2 模型上。XML schema 创建之后，焦点转向 M1——这是变体被施加（bind）的地方。
+3. **变体丰富的 M1 模型**
+
+   变体丰富的 M1 模型是一个（应当符合扩展元模型 [TPS\_GST\_00164] 定义的规则的）模型，它同时包含全部受支持的变体。变体由此通过 VariationPoint 或 AttributeValueVariationPoint 表达。
+
+4. **已施加的 M1 模型**
+
+   已施加的模型表示一个特定的变体。它从变体丰富的模型创建而来：通过施加各变体点，把后者转换为某个特定的变体。
+
+**约束应当应用于已施加的纯元模型**
+
+约束的执行应当在变体点的施加完成、且存在已施加模型之后进行。
+
+例如，在一个不变模型中，端口可以拥有 1:n 或 n:1 的连接。另一方面，该规则不适用于变体丰富的模型，因为变体可能彼此重叠，导致 m:n 连接。对变体丰富的模型施加并抽取某个特定变体之后，不变模型的规则重新适用。
+
+另一个例子：接口兼容性规则只能应用于特定的变体。
+
+请注意，PostBuild 变体点的存在实际上意味着：完全施加的 M1 模型不一定作为一个制品存在。原因是 PostBuild 变体点在 ECU 启动时施加，显然无法在 M1 模型中解析。然而，得到的 M0 模型符合已施加的 M1 模型。
+
+**移除被取消选择的对象**
+
+如果已施加的 M1 模型作为制品保存，那么被取消选择的对象应当被移除。
+
+**施加时移除绑定函数**
+
+被选中对象的 VariationPoint 是否保留在制品中取决于流程。如果保留，则绑定函数应当被移除、或在 AttributeValueVariationPoint 中被结果替换。由此，该变体点不再像一个未施加的变体点。
+
+#### 7.1.2. 变体处理与方法论
+
+如前所述，变体处理发生在方法论的不同层次与不同阶段，因此可能影响不同的工作产品。事实上，现在每个工作产品都可以包含变体。
+
+**变体处理规范的范围**
+
+在 AUTOSAR 中，我们只规定变体如何在 ARXML 中表示。其余一切都是实现特定的，不在 M2 层次上标准化。
+
+但总体而言，可以说：无变体的方法论可以通过把“变体的解析”作为每个活动的第一个动作引入，扩展为变体处理方法论。
+
+例如，一个变体丰富的软件组件描述（由 ARXML 文件表示）可以由变体解析工具预处理为已施加的软件组件描述，然后按无变体方法论中的定义处理。
+
+**沿开发步骤解析变体点**
+
+每个变体点都从 XML 表示开始，但不一定在 XML 表示中被解析。如果它在某个特定的处理步骤中未被解析，则它需要被传递到输出制品中。例如，这意味着生成的 C 头文件可能包含 #ifdef 语句（用于 PreCompile Time 可变性）。
+
+另一个例子是 PostBuild 变体：生成的目标代码包含用于实现 PostBuild 变体点的条件语句，如 XML 表示中所规定。
+
+关于施加时间与方法论关系的更多细节，请参见 [\[18\]](#ref-18) 中的 [TR\_METH\_00001]（任务）、[TR\_METH\_00002]（制品）、[TR\_METH\_00003]（任务用法）。
+
+#### 7.1.3. 变体处理如何在元模型中实现
+
+AUTOSAR 中的变体处理由以下步骤组成<sup>1</sup>：
+
+1. **变体处理的带注记元模型**
+
+   在带注记的元模型（参见 [TPS\_GST\_00163]）中——即在 M2 层次上——所有可能展现可变性的位置都被如此注记。这通过应用构型 **&lt;atpVariation&gt;** 实现。
+
+   元模型中可能展现可变性的位置有四类：
+
+   - 聚合（见第 7.2 节）
+   - 关联（见第 7.3 节）
+   - 属性取值（见第 7.4 节）
+   - 提供属性集的类（见第 7.5 节）
+
+   上述各节引用的每一段都描述一个模式，用于把构型 **&lt;atpVariation&gt;** 及其关联元素转换为一个提供描述变体点所需全部信息的结构。换言之，它们描述从带注记元模型到增强元模型的转换。
+
+   这种方法的好处——除了不让元模型被大量变体处理相关的信息所杂乱之外——是：构型 **&lt;atpVariation&gt;** 现在还充当了对元模型中所有可能出现变体的位置进行文档化的手段。
+
+   **注意：** 此时我们仍处于带注记的元模型中。因此我们只定义哪些变体是可能的，而不提供为该变体规定条件（即它何时发生）或选择特定变体的手段。
+
+2. **M2 上最晚施加时间的记法**
+
+   在所有与变体处理相关的模型转换模式中，都有一个 UML 标签 vh.latestBindingTime（参见 [TPS\_GST\_00052]）与该构型相关联。更准确地说，它附着在带有构型 **&lt;atpVariation&gt;** 的元素上。具体而言，即该元类、一个属性或一个聚合/关联（而非同一者的目标端）。
+
+   vh.latestBindingTime 的适用取值是 BindingTimeEnum 与 AdditionalBindingTimeEnum 二者定义的取值。
+
+   该标签应用于 M2 元素。它不规定变体点的施加时间，而是为变体点的施加时间的可能取值设置上限。
+
+   **施加时间的表示**
+
+   单个变体点的施加时间规定在其 ConditionByFormula 或 AttributeValueVariationPoint 元素的属性 bindingTime 中。因此称为“最晚”：vh.latestBindingTime 所定义的取值是可以赋给该元素的最晚施加时间。
+
+   vh.latestBindingTime 在第 7.1.6 节与第 7.6.4 节中有更详细的描述；施加时间在 [\[18\]](#ref-18) 中解释。
+
+3. **元模型上的转换**
+
+   在可以从元模型生成 XML schema 之前（例如由元模型工具生成），所有变体点都被转换为一个允许为每个变体点规定详细信息（[TPS\_GST\_00164]）的结构，包括其实际施加时间以及变体在何时发生的条件。
+
+   这是通过把第 1 步提到的模式应用到带注记的元模型来完成的。这一转换的结果是展开的元模型（expanded meta-model）。
+
+   换言之，单个变体在 M1 层次上使用 M2 层次提供的手段定义。
+
+   各模式的细节分别在 7.2、7.3、7.4、7.5 节描述，类 VariationPoint 在第 7.6 节解释。
+
+   **注意：** 如果存在带有构型 **&lt;atpVariation&gt;** 修饰的某个 {PartClass} 的聚合，那么指向该特定 {PartClass} 的所有聚合（即使它们没有 **&lt;atpVariation&gt;** 构型修饰）都会附着一个变体点。这导致所谓的“幽灵变体点”（**Ghost Variation Points**），它们与元模型不一致，不应使用。
+
+   **约束：变体点不得存在于非变体角色中**
+
+   如果在 AUTOSAR 元模型中聚合未带有构型 **&lt;atpVariation&gt;**，那么变体点不得在工作流的任何时刻存在。
+
+4. **M1 上变体的描述**
+
+   模型设计者最终为该变体规定条件与最晚施加时间。这在 M1 层次上的变体丰富模型中完成。
+
+   条件规定在何种情况下某个特定变体变为活跃。例如，它可以从多个备选项中选择一个；在这种情况下，这些条件最好相互排斥。简言之，这样的条件是一个以系统常量为操作数的表达式。
+
+   关于条件的更多细节见第 7.6.8 节与本文档前文的第 4.9 章。
+
+5. 下一步是选择一个特定的变体。这可以发生在为该变体定义的施加时间之前的任何时刻。
+
+   正如第 4 步所说，条件本质上是以系统常量为操作数的表达式。
+
+   **选择一个特定的变体**
+
+   因此，一个系统的特定变体通过为所有相关系统常量赋值来选择——即所有对该给定施加时间相关的变体点所引用的系统常量。
+
+   这里应当注意：并非所有变体都在同一时刻被选择。相反，可能（而且通常会）有多“波”变体施加，各在不同的时刻。类似地，并非所有系统常量都需要同时确定——这里唯一的限制是它们的取值应当在需要时可得。
+
+   此外，在这一阶段，模型仍然包含关于可能变体的信息。一开始，这是全部变体。在后面的阶段，其中一些变体已被施加（见第 6 步），模型只包含原始变体子集的信息。
+
+   本步骤在第 7.8 节中详细描述。
+
+6. **解析变体点**
+
+   当按 [TPS\_GST\_00187] 所述选择了某个特定变体后，该选择被实现，变体被解析。
+
+   这意味着：所有聚合了一个条件求值为 false 的 VariationPoint 的元素都被从模型中移除，所有 AttributeValueVariationPoint 元素的 value 属性被固定（参见 [TPS\_GST\_00178]）。
+
+   如第 6 章所示，并非所有变体都在同一（施加）时刻被施加。在每个施加步骤中，未施加的变体可能仍然存在，并可以在稍后的（施加）时刻被施加<sup>2</sup>。换言之，第 5 步与第 6 步通常会迭代多次。
+
+> **1** 在本节以及本章的其余部分，我们大量借用第 6 节的术语，尤其是图 6.1。
+>
+> **2** 当然，PostBuild 之后没有施加时间。
+
+#### 7.1.4. 并非元模型中的每个元素都可以是变体
+
+**变体限于特定元素**
+
+构型 **&lt;atpVariation&gt;** 只允许用于特定的元素。这些元素由相应的 AUTOSAR 模板定义。
+
+原因是：当构型 **&lt;atpVariation&gt;** 附着到一个元素时，会对其他元素产生后果。例如，当一个端口可变时，所有与该端口的连接也变为可变。相应的措施必须在相关的 AUTOSAR 模板中精确描述。因此，元模型中只有有限的位置支持变体。
+
+允许变体点的 UML 元素列表可以通过在元模型中查询构型 **&lt;atpVariation&gt;** 得到（见附录 C）。
+
+在技术上，这一限制实现如下：XML schema 等价于扩展元模型，它根本不允许把 VariationPoint 或其他变体处理相关元素附着到任意位置。schema 保证只有那些在带注记元模型中带有 **&lt;atpVariation&gt;** 标签的位置可以包含这样的元素（参见 [TPS\_GST\_00195] 与 [TPS\_GST\_00199]）。
+
+#### 7.1.5. 变体点是可选的，即使对可变元素亦然
+
+构型 **&lt;atpVariation&gt;** 在 M2 层次上把一个模型元素标记为可变。然而，该元素在 M1 层次上被使用时并不一定每次都可变——相反，可变性只应在需要时使用。
+
+这可能意味着：如果一个模型元素潜在可变，即使该元素以非变体方式使用，在 M1 层次上也有显著的开销。然而情况并非如此：作为可变性信息起点的 VariationPoint 元素始终是可选的。因此，只有在需要时才需要提供它——若缺席，则没有可变性。
+
+#### 7.1.6. 关于施加时间的说明
+
+在 AUTOSAR 中，我们在三个不同的层次上处理施加时间：
+
+1. 有 M1 层次上规定的施加时间。这是元素 ConditionByFormula（见图 7.8）与 AttributeValueVariationPoint（见图 7.4）的属性 bindingTime 的取值。
+
+   **bindingTime 的语义**
+
+   bindingTime 的取值为该特定变体点定义了最晚施加时间。一个变体可以更早地被选择和施加，但不能晚于 bindingTime。其后果是：一旦所有涉及的系统常量都有了取值，变体就可以被施加。
+
+   另一方面，一个系统常量应当在“最早”需要它的施加时间拥有取值。如果没有这一点，那么可能出现系统常量取值在开发周期中被更改的情况，进而导致不一致。
+
+2. **最晚施加时间的附着**
+
+   在 M2 层次的带注记元模型中，存在构型 **&lt;atpVariation&gt;** 的各次单独应用。对每一次这样的应用，都有一个标签 vh.latestBindingTime 与该构型相关联。
+
+   **施加时间的附着**
+
+   带有构型 **&lt;atpVariation&gt;** 标签的元素被转换为一个更精细的结构，它提供定义变体点所需的全部信息。这一转换总是引入一个 ConditionByFormula 或一个 AttributeValueVariationPoint，即一个拥有属性 bindingTime 的元素。
+
+   **对 bindingTime 的约束**
+
+   标签 vh.latestBindingTime 约束 [TPS\_GST\_00190] 中属性 bindingTime 的取值。因此，它定义了方法论中允许作为该次 **&lt;atpVariation&gt;** 应用的 bindingTime 取值的最晚时点。
+
+3. 存在一些模式，它们描述构型 **&lt;atpVariation&gt;** 如何被翻译为更精细的 UML 构造，后者提供定义变体点所需的全部信息。
+
+   这些模式可能再次限制 vh.latestBindingTime 的潜在取值范围。这些特定的限制定义在 7.2.2、7.3.2、7.4.4、7.5.3 节。
+
+#### 7.1.7. 关于变体处理对 XML Schema 影响的说明
+
+自然地，变体处理需要对 M1 AUTOSAR 模型的 XML schema 做一些变更与扩展。总体而言，这些变更保持得尽可能简单。除属性集模式（第 7.5 节）之外，这些变更不在 XML 中引入显著的结构性变化，而只是添加、有时重命名元素。
+
+各模式 XML 代码的特定问题在各个模式的小节（7.2.4、7.3.4、7.4.6、7.5.5 节）中记录。
+
+#### 7.1.8. 各模式相互独立
+
+我们定义了四个模式，用于为聚合、关联、属性取值与属性集定义变体点。这些模式描述 **&lt;atpVariation&gt;** 如何把一个既有的 UML 构造——通常是关系或属性——转换为支持描述变体的构造。
+
+**变体处理模式可以混合**
+
+变体处理的模型转换模式可以以任何方式组合。例如，一个带有变体属性的元素可以是一个变体聚合的一部分。或者，属性集模式中的单个属性自身也可以是变体。
+
+#### 7.1.9. 关于变体处理模式中多重性的说明
+
+**变体处理扩展多重性上限**
+
+变体处理模式需要在模式内转换某些聚合/关联的多重性上限。通常，聚合的多重性上限被提升为 ∗。
+
+这导致以下情形：
+
+1. 在纯元模型中，多重性是 m...n。
+2. 在带注记的元模型中，多重性仍是 m...n。
+3. 在扩展元模型中，多重性被提升为 m...∗。
+
+其中，扩展元模型是那个为描述所有可能变体而添加额外结构的模型。其后果是：对应于扩展（M2）元模型的变体丰富的 M1 模型，可以聚合或关联比纯元模型的原始 m...n 多重性所允许的更多的元素。
+
+换言之，变体丰富的 M1 模型违反了纯元模型中定义的多重性。
+
+然而，这并不像听起来那么严重，因为违反只发生在施加完成之前。变体丰富的 M1 模型从所有可能的变体开始，但如第 7.1.3 节所述，“多余的”变体在施加过程中被移除。
+
+施加完成之后——在已施加的 M1 模型中——多重性应当再次回到纯元模型定义的界限之内。这由作为模式一部分的语义约束保证，如 [TPS\_GST\_00435] 所述。
+
+#### 7.1.10. 关于变体处理模式应用顺序的说明
+
+**变体处理中模式解析的顺序**
+
+变体处理模式由 M2 上的模型转换（例如由元模型工具）按以下顺序解析：
+
+1. 属性集模式（Property Set Pattern）
+2. 聚合模式（Aggregation Pattern）
+3. 关联模式（Association Pattern）
+4. 属性取值模式（Attribute Value Pattern）
+
+应当注意，这并不是本文档呈现各模式的顺序；即属性集模式排在最后。这是因为我们的描述从最容易理解的模式开始，然后逐步进入更复杂的模式。
+
+**变体处理模式中的命名约定**
+
+在变体处理模型转换期间，会创建一些从参与变体处理模式的元类到其他元类的连接符。那些其他元类或者已存在于带注记的元模型中，或者在转换期间被创建。已存在的元类如下：
+
+- VariationPoint（用于属性集模式、聚合模式与关联模式）；
+- {Type}ValueVariationPoint（用于属性取值模式：{Type} 如 [TPS\_GST\_00205] 所述）；
+- AbstractEnumerationValueVariationPoint（用于属性取值模式）。
+
+在转换期间，这些元类按命名约定连接，即需要它们在带注记元模型中按类名被找到。因此该转换依赖这些元类的存在性与（按类名的）唯一性。
+
+### 7.2. 用于变体点的聚合模式
+
+#### 7.2.1. 描述
+
+图 7.2 展示元模型工具如何把一个聚合转换为带变体信息的 M2 模型。
+
+![图 7.2：聚合中的变体点（Variation Point in Aggregation）](Figure7-2.png)
+
+在左侧，{WholeClass} 聚合 {PartClass}。该聚合受变体支配：它可以在已施加的模型中存在，也可以不存在。这通过把构型 **&lt;atpVariation&gt;** 应用于该关联来指示。
+
+请注意，左侧只包含 {WholeClass}、**&lt;atpVariation&gt;** 与 {PartClass}，不包含判定该变体是否存在的条件。这样的条件作为 VariationPoint 的一部分加在右侧。无论如何，在这里规定这样的条件都没有意义，因为该图处于 M2 层次，而条件只能为某个具体的变体点（例如 M1 层次上的）填写。
+
+简言之，转换的工作方式如下：
+
+**聚合模式定义的转换**
+
+1. {WholeClass} 仍然直接聚合 {PartClass}。
+2. {partRole} 的多重性从 {n} 变为 {n}…∗。
+
+   多重性变化的原因是：包含变体的模型自然会比变体已施加的模型包含更多的 {PartClass} 元素。请注意，“多余”的 {PartClass} 元素（即“未使用”的变体）在施加过程中被删除。
+
+   这由约束 [constr\_2505] 指示。
+
+3. {PartClass} 聚合一个 VariationPoint。VariationPoint 聚合关于该可变性的更多信息，尤其是施加时间与守护该变体的条件。<sup>2</sup>
+
+   类 VariationPoint 的结构在第 7.6.1 节描述。
+
+> **2** 该条目在源文中编号为 “2.”，按上下文归入列表。
+
+**变体点是可选的**
+
+VariationPoint 的多重性是 0…1，意味着变体点是可选的。如果没有给出变体点，那么从 {WholeClass} 到 {PartClass} 的聚合是不变的。这可以视为等价于一个条件永远求值为 true 的变体点。
+
+**抽象子类与具体子类的变体聚合**
+
+如果一个类作为变体被聚合，则同一类的任何超类不得作为变体被聚合。
+
+**约束：&lt;atpMixed&gt; 中最多一个 VariationPoint**
+
+如果一个 **&lt;atpMixed&gt;** 元类作为 **&lt;atpVariation&gt;** 被聚合，则 VariationPoint 不得多于一个，且 VariationPoint 应当是最后被聚合的元素。
+
+把 VariationPoint 设为可选的原因是：该聚合可以是变体的，但不必是变体的。因此，如果该聚合用在没有可变性的上下文中——聚合总是存在——那么就不需要（在 M1 层次上）向模型添加变体点。这有助于降低所得模型的复杂度，并精简所得的 XML 表示。
+
+**约束：施加后的多重性**
+
+```
+若 Phase ≥ {partRole}.BindingTime，则 {partRole} 的数量 = n
+```
+
+其中 n 是 PartRole 元素的最终数量。
+
+#### 7.2.2. 施加时间
+
+**约束：聚合模式中的施加时间**
+
+在 VariationPoint 内，类 ConditionByFormula 拥有属性 bindingTime，它为该变体点定义最晚施加时间。该施加时间进一步受附着于该聚合的 UML 标签 vh.latestBindingTime 约束（参见 [TPS\_GST\_00190]、[TPS\_GST\_00220]、[TPS\_GST\_00221]）：
+
+```
+ConditionByFormula.bindingTime ≤ aggregation.vh.latestBindingTime
+```
+
+这保证元模型可以在 M2 层次上定义限制。实际的施加时间在 M1 层次上规定（当 bindingTime 属性的取值被固定时）。
+
+#### 7.2.3. {PartClass} 的多重性
+
+表 7.1 展示了 {PartClass} 的多重性在转换期间如何变化。
+
+表7.1：聚合模式中的多重性
+
+| 带注记元模型中的 {PartClass} | 扩展元模型中的 {PartClass} |
+|-------------------------------|-------------------------------|
+| 0…1                           | 0…∗                           |
+| 0…n                           | 0…∗                           |
+| 0…∗                           |                               |
+| 1…n                           | 1…∗                           |
+| 1…∗                           |                               |
+| m...n                         | m...∗                         |
+| n                             | n…∗                           |
+| ∗                             |                               |
+
+多重性的变化意味着：转换之后，模型比之前更宽松。转换前具有固定上限（或是常数）的多重性，被替换为上限无界的多重性。
+
+原因是：我们需要提供若干备选的 {PartClass} 元素，然后从中选择一个或多个。因此，我们需要放宽原始多重性——否则无法添加附加的元素。而且由于此时无法知道可供选择的附加 {PartClass} 元素的数量，多重性上限始终是 ∗。
+
+#### 7.2.4. XML 表示
+
+聚合模式对 M1 模型的 XML 表示影响很小。
+
+事实上，当一个“普通”聚合被改造成变体点时，唯一的差别是：与 {partRole} UML 元素对应的 XML 元素得到一个名为 &lt;VARIATION-POINT&gt; 的附加 XML 元素。
+
+聚合模式产生的 XML 代码示例见清单 7.5。
+
+#### 7.2.5. 注记与限制
+
+1. **带注记元模型定义适用的变体点**
+
+   如果从 {WholeClass} 到 {PartClass} 的关联带有 **&lt;atpVariation&gt;** 标签，那么 {PartClass} 的任何出现都可以聚合一个 VariationPoint。换言之，即使 {PartClass} 不是带有 **&lt;atpVariation&gt;** 标签的关联的末端，它也可以聚合 VariationPoint。
+
+   然而，以这种方式使用变体显然与带注记元模型中的定义不兼容。
+
+   这种情况的一个例子是：InternalBehavior 以 **&lt;atpVariation&gt;** 在角色 constantMemory 上聚合 ParameterDataPrototype；与此相对，PortInterface 也聚合 ParameterDataPrototype，但不带 **&lt;atpVariation&gt;**。XML Schema 允许在两个聚合上都有变体点，而带注记的元模型不允许。
+
+2. **Schema 生成器避免重复的 VariationPoint**
+
+   如果 {PartClass} 有一个子类（比如 SubPartClass）在别处（比如 AnotherWholeClass）被聚合，而且那一个聚合也带有 **&lt;atpVariation&gt;** 标签，那么 SubPartClass 将聚合两个变体点。
+
+   为避免这一点，schema 生成器（即元模型工具）使用一个专门的处理步骤来清理这类重复的 VariationPoint。
+
+3. **原始类型上的聚合模式**
+
+   聚合模式不能用于 **&lt;primitive&gt;** 元素。原因在于 [\[3\]](#ref-3) 第 4.1.1 节定义的 **&lt;primitive&gt;** 元素的特殊处理。
+
+   显而易见的变通办法是把该元素改为非原始类型。
+
+4. **非 post build 的限制**
+
+   如果 vh.latestBindingTime 早于 PostBuild，那么 Point 不能有 PostBuild 分支，即它不能聚合 VariantCondition（参见 [constr\_2517]）。
+
+   这在第 7.6.6 节中有更详细的解释。
+
+### 7.3. 用于变体点的关联模式
+
+图 7.2 展示了元模型工具如何把一个关联转换为带变体信息的 M2 模型。
+
+![图 7.3：关联中的变体点（Variation Point in Association）](Figure7-3.png)
+
+该模式与聚合模式（第 7.2 节）的主要差别是添加了 {ReferencedClass}RefConditional 类。VariationPoint 现在由 {ReferencedClass}RefConditional 聚合，而不是由 {ReferencedClass} 聚合。
+
+#### 7.3.1. 描述
+
+简言之，转换关联的模式工作方式如下：
+
+**关联模式定义的转换**
+
+1. {SourceClass} 聚合一个 {ReferencedClass}RefConditional 元素。这与非变体关联的实现非常相似，后者引入一个充当指向 {ReferencedClass} 的指针（即引用）的 {ReferencedClass}Ref 元素。
+2. {ReferencedClass}RefConditional 聚合一个 VariationPoint 元素。VariationPoint 控制 {ReferencedClass}RefConditional 元素是否存在。
+
+   该聚合的多重性是 0…1。即 VariationPoint 是可选的。若省略 VariationPoint 元素，则没有变体，{ReferencedClass}RefConditional 始终存在（这等价于条件永远求值为 true 的变体点。）
+
+3. {ReferencedClass}RefConditional 提供一个指向 {ReferencedClass} 的引用。
+
+   如前所述，非变体情形会改用 {ReferencedClass}Ref——它同样拥有指向 {ReferencedClass} 的引用，但缺少聚合的 VariationPoint。
+
+#### 7.3.2. 施加时间
+
+关联模式的施加时间遵循与聚合模式（第 7.2.2 节）相同的模式。
+
+**约束：关联模式中的施加时间**
+
+在 VariationPoint 内，类 ConditionByFormula 拥有属性 bindingTime，它为该变体点定义最晚施加时间。该施加时间进一步受附着于该关联的 UML 标签 vh.latestBindingTime 约束（参见 [TPS\_GST\_00190]、[TPS\_GST\_00220]、[TPS\_GST\_00221]）：
+
+```
+ConditionByFormula.bindingTime ≤ association.vh.latestBindingTime
+```
+
+#### 7.3.3. {ReferencedClass}RefConditional 的多重性
+
+关联模式中 {ReferencedClass}RefConditional 的多重性遵循与聚合模式中 {PartClass} 的多重性（第 7.2.3 节）相同的方案。
+
+#### 7.3.4. XML 表示
+
+关联模式对 M1 模型的 XML 表示影响很小。
+
+元素 {ReferencedClass}RefConditional 在 XML 层次上以角色名 {theRole}RefConditional 可见。这与使用角色名 {theRole}Ref 的非变体情形只有细微差别。两者服务于同一目的：它们是实际引用的容器。唯一差别是变体情形添加了可选的 &lt;VARIATION-POINT&gt;。
+
+关联模式产生的 XML 代码示例见图 7.7。
+
+#### 7.3.5. 注记与限制
+
+**非变体关联的处理**
+
+在 {ReferenceClass}RefConditional 中把 VariationPoint 设为可选的原因是：该关联可以是变体的，但不必是变体的。因此，如果该关联用在没有可变性的上下文中——关联总是存在——那么就不需要（在 M1 层次上）向模型添加变体点。这有助于降低所得模型的复杂度，并精简所得的 XML 表示。
+
+### 7.4. 用于变体点的属性取值模式
+
+前两个模式（7.2 与 7.3 节）处理两个元素之间关系的存在性。本节描述的模式实现另一种变体，即一个或多个属性取值的变体。
+
+#### 7.4.1. 描述
+
+![图 7.4：属性取值模式（attribute value pattern）](Figure7-4.png)
+
+表7.2：AttributeValueVariationPoint
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; AttributeValueVariationPoint（抽象）                                                             |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling::AttributeValueVariationPoints                                                  |
+| 注意       | 该类表示从系统常量（经由 SwSystemconstDependentFormula）派生 Attribute 取值的能力。它还提供一个 bindingTime。                          |
+| 基类       | ARObject、FormulaExpression、SwSystemconstDependentFormula                                                                                |
+| 子类       | AbstractEnumerationValueVariationPoint、AbstractNumericalVariationPoint、BooleanValueVariationPoint、FloatValueVariationPoint、IntegerValueVariationPoint、PositiveIntegerValueVariationPoint、TimeValueValueVariationPoint、UnlimitedIntegerValueVariationPoint |
+| 聚合于     | VariationPointProxy.valueAccess                                                                                                            |
+
+| 属性           | 类型             | 多重性 | 类别 | 注意                                                                                                                                                                                  |
+|----------------|------------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| bindingTime    | BindingTimeEnum  | 0..1   | attr | 这是属性取值需要被施加的施加时间。若缺少该属性，则该属性不是变体点。特别地，这意味着它需要是按纯模型中规定的类型的单一取值。若它仍是公式，则是错误。标签：xml.attribute=true                          |
+| blueprintValue | String           | 0..1   | attr | 这表示一段描述，记录在从蓝图派生对象时应当如何定义该取值。标签：xml.attribute=true                                                                                                            |
+| sd             | String           | 0..1   | attr | 提供该特殊数据是为了允许属性取值变体点与变体管理系统的同步。其使用由相关各方约定。标签：xml.attribute=true                                                                                        |
+| shortLabel     | PrimitiveIdentifier | 0..1 | attr | 这允许标识该变体点。它也旨在允许 RTE 对 CompileTime 变体点的支持。标签：xml.attribute=true                                                                                                  |
+
+在该模式中，构型 **&lt;atpVariation&gt;** 标记那些可变的属性<sup>3</sup>。转换的工作方式如下：
+
+**属性取值模式定义的转换**
+
+1. {ContainerClass} 被剥离全部变体属性。
+2. 对每个变体属性，为 AttributeValueVariationPoint 的相应子类生成一个元素 {Type}ValueVariationPoint。若该属性是枚举，{Type} 应当是描述该枚举的元类的名称。
+3. {Type}ValueVariationPoint 继承自：
+   - AttributeValueVariationPoint，若 {Type} 是 Integer、Float、Boolean、PositiveInteger、UnlimitedInteger、TimeValue 或 NameToken；
+   - AbstractNumericalVariationPoint，若 {Type} 是 Numerical 或 Limit；
+   - AbstractEnumerationValueVariationPoint，若 {Type} 是描述该枚举的元类的名称。
+
+   其属性 bindingTime 规定该变体属性（在 M1 层次上）的施加时间。
+
+4. AttributeValueVariationPoint 又继承自 SwSystemconstDependentFormula，后者实现一个公式。该公式为变体属性提供取值。
+
+> **3** 在图 7.4 中，列于 **&lt;atpVariation&gt;** 之下的全部属性都具有该构型。换言之，{a} 是非变体属性，而 {b} 带有构型 **&lt;atpVariation&gt;**。
+
+按照图 7.4 所示的模式，第 1 步只留下属性 {a}。第 3 步提到的类 {Type}ValueVariationPoint 在第 7.4.3 节描述。施加时间的继承在第 7.4.4 节更详细描述。
+
+#### 7.4.2. AttributeValueVariationPoint
+
+AttributeValueVariationPoint 包含四个属性，即 bindingTime、shortLabel、sd 与 blueprintValue：
+
+- bindingTime 在第 7.4.4 节描述。
+- shortLabel 的用途与 VariationPoint 的 shortLabel 属性相同。
+
+  **约束：AttributeValueVariationPoint 中的 shortLabel 应当唯一**
+
+  shortLabel 应当在下一个直接外层的 Identifiable 内唯一（不区分大小写），并用于在变体丰富的 M1 模型中单独寻址变体点。
+
+  请注意，shortLabel 唯一性检查应当不区分大小写地执行。这支持一种良好实践：shortLabel 不应当只在大小写上不同，那会造成大量混淆。
+
+  术语“不区分大小写”表示字符集合
+
+  ```
+  {a b c d e f g h i j k l m n o p q r s t u v w x y z}
+  {A B C D E F G H I J K L M N O P Q R S T U V W X Y Z}
+  ```
+
+  中的字符分别被视为相同。换言之，对 shortLabel 唯一性的不区分大小写检查导致如下结果：例如 shortLabel 为 ‘X’ 与 ‘x’ 的元素被视为相同，不得存在于同一上下文中。
+
+  细节见第 7.6.2 节。
+
+- sd 属性是 VariationPoint 的 sd 成员（见第 7.6.3 节）的精简版本。
+
+  sd 是一个字符串，外部应用可以用它添加自定义数据。
+
+  不像 VariationPoint 那样使用特殊数据组有两个原因。第一，属性取值的变体点在结构上不像完整元素那样重要，因此可以想见需要的数据更少。
+
+  第二，如果 AttributeValueVariationPoint 聚合一个特殊数据组，那么所得的 XML 表示将需要一个额外的包装元素——即使该聚合是可选的。这将比聚合模式与关联模式中的开销显著更高。
+
+- blueprintValue 在变体点属于蓝图的一部分时使用。它包含一段描述，提供如何从蓝图派生合适对象的指令。关于蓝图中变体点的更多细节，见第 7.6.11 节与 [\[2\]](#ref-2)。
+
+  **约束：属性取值蓝图中的 Undefined 取值**
+
+  若规定了 blueprintValue，则 AttributeValueVariationPoint 定义的取值不被使用，因此它应当至少包含一个待求项 undefined，在从该蓝图派生对象时被细化。
+
+shortLabel 与 sd 都是可选的。bindingTime 在 7.4.4 节描述的某些情况下可以省略。
+
+**约束：blueprintValue 只用于蓝图**
+
+blueprintValue 只允许出现在蓝图中，不得出现在系统描述中。
+
+#### 7.4.3. {Type}ValueVariationPoint
+
+图 4.15 同时反映了 {Type}ValueVariationPoint 的建模。
+
+**AttributeValueVariationPoint 的专用元类**
+
+类 AttributeValueVariationPoint 有若干种形态，即 IntegerValueVariationPoint、FloatValueVariationPoint、BooleanValueVariationPoint、LimitValueVariationPoint、NumericalValueVariationPoint、PositiveIntegerValueVariationPoint、UnlimitedIntegerValueVariationPoint 与 TimeValueValueVariationPoint，以及类 AbstractEnumerationValueVariationPoint 的全部具体子类。
+
+类 AbstractEnumerationValueVariationPoint 的具体子类按照属性取值模式自动生成（图 7.5）。
+
+![图 7.5：枚举取值模式（enumeration value pattern）](Figure7-5.png)
+
+**约束：AbstractEnumerationValueVariationPoint 的取值**
+
+AbstractEnumerationValueVariationPoint 的公式应当求值为一个取值，对该取值在其 base 与 enumTable 属性所引用的 EnumerationMappingTable 中定义了映射。
+
+**注意：** 通常，该约束只能在变异性被施加时的完整模型中检查。
+
+**默认的 EnumerationMappingTable**
+
+如果 AbstractEnumerationValueVariationPoint 的子类 {Type}ValueVariationPoint 没有给出 base 与 enumTable 的取值，则 base 应当被设为 EnumMappingTables，enumTable 应当被设为 {Type}。
+
+EnumerationMappingTable（包括 EnumerationMappingEntry）的默认取值可在 GeneralDefinitions [\[7\]](#ref-7) 中获得。
+
+添加这些额外类的原因如下。我们本可以在没有它们的情况下定义属性取值模式——只让 {ContainerClass}（图 7.4）聚合一个 AttributeValueVariationPoint。但那样，原始属性类型的任何痕迹都会丢失。
+
+#### 7.4.4. 施加时间
+
+**约束：属性取值模式中的施加时间**
+
+元类 AttributeValueVariationPoint 拥有属性 bindingTime，它为该变体点定义最晚施加时间。该施加时间进一步受附着于该属性的 UML 标签 vh.latestBindingTime 约束（参见 [TPS\_GST\_00190]、[TPS\_GST\_00220]、[TPS\_GST\_00221]）：
+
+```
+AttributeValueVariationPoint.bindingTime ≤ attribute.vh.latestBindingTime
+```
+
+属性取值的施加时间在 AttributeValueVariationPoint 的属性 bindingTime 中规定。每个属性可以有自己的施加时间。
+
+**常量无需施加时间**
+
+若 SwSystemconstDependentFormula 为该属性规定单一常量取值而非表达式，则属性 bindingTime 可以省略。即：公式不含对其他系统常量的任何引用，也不含任何函数或运算符，只有一个单一取值。在这种情况下，取值从一开始就是固定的。在所有其他情况下，属性 bindingTime 应当存在。
+
+**约束：属性取值不得有 postbuild 变体**
+
+在属性取值模式中，标签 vh.latestBindingTime 限于 preCompileTime 及更早的施加时间，即（blueprintDerivationTime、systemDesignTime 与 codeGenerationTime）。
+
+#### 7.4.5. AttributeValueVariationPoint 的多重性
+
+在 M1 AUTOSAR 模型中，应当为原始 {ContainerClass} 中的每个变体属性创建一个或多个 {Type}ValueVariationPoint 元素。确切数量按如下方式确定：
+
+**AttributeValueVariationPoint 的多重性**
+
+- 若原始属性的多重性为 1，则恰好生成一个 {Type}ValueVariationPoint。
+- 若原始属性是数组（即多重性为 [0…∗]、[1…∗] 或更一般地 [m...n]），则应当按照数组中的条目数创建同样多的 {Type}ValueVariationPoint。
+
+在这种情况下，相应 XML 元素的顺序可能很重要，此时它应当对应于数组中元素的实际先后顺序。
+
+#### 7.4.6. XML 表示
+
+在没有可变性的情况下，图 7.4 中的属性 {a} 与 {b} 都会在 XML schema 中表示为单个元素，各自持有一个常量取值。
+
+属性取值模式把变体属性替换为系统常量表达式。若该表达式只是一个取值，则所得的 XML 与非变体情形结构相同（除施加时间外；但对这类表达式连该属性也可省略）。复杂表达式相比非变体情形当然会增加显著的开销。
+
+shortLabel（表示为可选 XML 属性 SHORT-LABEL）、sd（表示为可选 XML 属性 SD）与 bindingTime（表示为可选 XML 属性 BINDING-TIME）是可选的，在缺席时不给 XML 表示增加任何开销。
+
+属性取值模式产生的 XML 代码示例见图 7.9。
+
+#### 7.4.7. 注记与限制
+
+1. **AttributeValueVariationPoint 不支持 PostBuild 变体**
+
+   AttributeValueVariationPoint 的施加时间至多是 preCompileTime。我们不支持把这样的变体点用于 postBuild 施加时间。这是因为这样的行为已经由标定参数覆盖。
+
+2. **属性的存在性不能受变体支配**
+
+   无法对属性的存在性建模。
+
+   显而易见的做法是把相关属性移到一个单独的元素中，聚合该元素，然后把该聚合作为变体点。
+
+   见聚合模式（第 7.2 节）。
+
+3. **数组应当具有相同的施加时间**
+
+   由于数组的每个元素由单独的 AttributeValueVariationPoint 元素规定，不再强制要求所有数组元素具有相同的施加时间。然而，为所有数组元素使用相同的施加时间被认为是良好实践。
+
+4. **扩展属性取值模式的应用**
+
+   属性取值模式只为类型 Integer、Float、Boolean、Numerical、Limit、PositiveInteger 与 UnlimitedInteger 的属性定义。向其他类型的扩展——只要它们被表达式语言覆盖——将需要变更元模型（以及元模型工具）。
+
+5. **AttributeValueVariationPoint 中 bindingTime 可选的理由**
+
+   把 bindingTime 设为可选的理由是：这使 XML 表示更简单。这对 EvaluatedVariantSet 特别有帮助——它们使用属性取值模式为系统常量定义取值。在典型用例中，这些取值是常量，不是公式。
+
+### 7.5. 用于变体点的属性集模式
+
+与前面的模式一样，本模式也处理属性中的变体。然而，第 7.4 节引入的模式要求每个变体属性都带有构型 **&lt;atpVariation&gt;** 注记。这也意味着 M2 元模型必须决定哪个属性是变体、哪个不是。这样的决定并不总是实际的，例如当存在大量属性、而每个都可能受变体支配时。本节定义的模式采用另一种方法。
+
+**属性集模式的方法**
+
+通过把构型 **&lt;atpVariation&gt;** 应用于拥有这些属性的元类（而不是元类的单个属性），我们可以把全部属性定义为潜在地受变体支配。属性随后被划分为若干变体属性集合，每个集合拥有一个变体点。
+
+#### 7.5.1. 示例
+
+考虑以下示例。一个名为 PropertiesClass 的类有六个属性：attr1、attr2、attr3、attr4、attr5 与 attr6。其中前四个属性是变体，attr5 与 attr6 是不变。
+
+一种解决方案是把 **&lt;atpVariation&gt;** 应用于 attr1、attr2、attr3 与 attr4。在这种情况下，每个属性都是自己的变体点，可以独立变化。
+
+然而，可能存在 attr1、attr2、attr3 与 attr4 的三组不同取值：
+
+表7.3：属性集模式示例
+
+|      | attr1 | attr2 | attr3 | attr4 |
+|------|-------|-------|-------|-------|
+| Set1 | 1     |       | 2     |       |
+| Set2 | 2     | 3     | 4     | 1     |
+| Set3 | 3     | 1     | 6     | 3     |
+
+属性集模式允许我们规定这三组取值。当构型 **&lt;atpVariation&gt;** 应用于 PropertiesClass（在带注记的元模型中）时，该类被转换（在扩展元模型中）为一个新的 PropertiesClass——它没有任何属性，但聚合一个或多个名为 PropertiesClassConditional 的类，属性现在包含在后者之中<sup>4</sup>。每个 PropertiesClassConditional 聚合一个变体点，非常类似聚合模式中的 {PartClass}（见第 7.3 节——按上下文应为第 7.2 节的模式形态）。
+
+其思想是：一个具体模型将包含一个 PropertiesClass 实例（不带属性），它聚合四个（而非三个！）PropertiesClassConditional 实例。前三个实例分别持有 Set1、Set2 与 Set3。剩下的 PropertiesClassConditional 实例包含不变属性，即 attr5 与 attr6。前三者的 VariationPoint 应当具有合适的条件，保证恰好可以选中前三个 PropertiesClassConditional 实例之一。最后一个 PropertiesClassConditional 可以省略它的 VariationPoint，因为那里定义的属性是不变的。
+
+前三个 PropertiesClassConditional 怎么会持有与最后一个不同的属性呢？实际上，PropertiesClassConditional 包含原始 PropertiesClass（带注记元模型中）全部属性的副本，但每个属性的下重数被降为 0——即所有属性都是可选的。这样，PropertiesClassConditional 的每个实例可以持有原始属性的任意子集。条件是：变体施加之后，全部属性之和应当等于原始属性集合<sup>5</sup>。
+
+属性集模式实际上比示例所示更灵活一些。第一，变体属性不需要在同一个集合中；它们也可以分布在多个 PropertiesClassConditional 类上。第二，该模式不仅适用于属性，还适用于聚合与关联元素。第三，该模式可以与属性取值模式（及其他模式）组合，以创建更强大的变体结构。
+
+> **4** 正如下一节将看到的，实际转换要更复杂一些，但总体思想与本示例概述的一致。
+>
+> **5** 为完整起见：纯元模型中本就可选的属性仍然可以省略。
+
+#### 7.5.2. 描述
+
+属性集模式所涉及的转换比前面各模式的转换更复杂。这一次，我们把构型 **&lt;atpVariation&gt;** 应用于一个类，而不是关系或属性。与其他模式不同，一个类可以从另一个类继承其构型（或聚合其他类），这需要特别的考虑。
+
+因此，我们分两步描述属性集模式。首先，我们展示转换如何作用于一个在元模型中显式带有构型 **&lt;atpVariation&gt;**、且不派生自带同一构型的类的类。第二步，我们把这一描述扩展，展示当一个类没有显式带有 **&lt;atpVariation&gt;** 标签、但派生自带该构型的类因而隐式拥有该构型时会发生什么。
+
+##### 7.5.2.1. &lt;atpVariation&gt; 直接应用于属性集类
+
+![图 7.6：{PropertySetClass} 无继承的属性集模式（Property Set Pattern without inheritance in {PropertySetClass}）](Figure7-6.png)
+
+该转换的带注记元模型围绕 {PropertySetClass}：
+
+1. {PropertySetClass} 基于 NonVariantSuperClass，该类不会被本模式改变。
+2. 类 {PropertySetClass} 带有构型 **&lt;atpVariation&gt;**，并包含一个名为 {attr} 的属性。
+3. {PropertySetClass} 聚合 AggregatedClass。应用模式时 AggregatedClass 本身不改变，尽管它之后将由另一个类聚合。
+
+**属性集模式定义的转换**
+
+转换工作方式如下：
+
+1. 全部属性与构型 **&lt;atpVariation&gt;** 从 {PropertySetClass} 中移除。
+2. 转换生成一个新类 {PropertySetClass}Content，它包含 {PropertySetClass} 的原始属性，但下重数变为 0。
+
+   多重性的变化源于：该类被设计为持有原始 {PropertySetClass} 属性的任意子集。
+
+   {PropertySetClass}Content 可以看作 {PropertySetClass} 的某种克隆，它缺少对 NonVariantSuperClass 的继承，且其属性具有不同的多重性。
+
+3. 生成一个名为 {PropertySetClass}Conditional 的新类。{PropertySetClass}Conditional 派生自 {PropertySetClass}Content，并聚合一个 VariationPoint。
+
+   由于它继承自 {PropertySetClass}Content，{PropertySetClass}Conditional 的每个实例持有带注记元模型中原始 {PropertySetClass} 属性的一个子集。
+
+4. {PropertySetClass} 聚合任意数量的 {PropertySetClass}Conditional 元素。其思想是：扩展元模型中某个特定的 {PropertySetClass}Conditional 实例包含带注记元模型中原始 {PropertySetClass} 属性的一个子集。但在施加之后，各 {PropertySetClass}Conditional 实例给出的全部属性的不相交和应当产出带注记元模型中 {PropertySetClass} 的全部属性集合。
+5. VariationPoint 最终决定某个 {PropertySetClass}Conditional 是否被包含在某个特定变体中。也就是说，从 {PropertySetClass} 到 {PropertySetClass}Conditional 的聚合本身受变体支配。
+6. AggregatedClass 现在由 {PropertySetClass}Content 聚合，下重数为 0。多重性变化的原因是：被聚合的类按与属性相同的方式处理。
+7. （上图中未显示）带注记元模型中指向 {PropertySetClass} 的引用在扩展元模型中仍然指向 {PropertySetClass}。
+
+##### 7.5.2.2. &lt;atpVariation&gt; 应用于属性集类的超类
+
+![图 7.7：{PropertySetClass} 带继承的属性集模式（Property Set Pattern with inheritance in {PropertySetClass}）](Figure7-7.png)
+
+**属性集模式与继承**
+
+当构型 **&lt;atpVariation&gt;** 应用于属性集类的超类时，情况会略微复杂：
+
+1. NonVariantSuperClass 与 AggregatedClass 与之前相同。
+2. {PropertySetClass1} 扮演上一节中 {PropertySetClass} 扮演的角色。然而，{PropertySetClass1} 现在派生自一个同样带有构型 **&lt;atpVariation&gt;** 标签的类 {PropertySetClass3}。{PropertySetClass2} 位于这两个类之间。
+
+图 7.7 与图 7.6 之间的实际转换没有太大差别。图 7.7 中唯一的新内容是：对直到 {PropertySetClass3} 的每个属性集类，我们创建一个 {PropertySetClass}Content 类的层次。这些类保留原始类的属性，以及它们的聚合与关联关系。
+
+##### 7.5.2.3. 约束
+
+一般而言，多个 conditional 可以并存，即使它们都没有变体点。在存在变体的情况下，属性集模式需要一条规则 [TPS\_GST\_00433] 与一条约束 [constr\_2634]，保证对任何变体，用这一方法定义的全部属性取值的集合是完整的，且没有重复定义。
+
+**各 conditional 中的单独属性**
+
+在一个变体的上下文中、且全部变体点都解析之后，单独属性应当只存在于各 conditional 之一中。若一个单独属性存在于多个 conditional 中，则 [TPS\_GST\_00417] 定义的规则适用于把这些 conditional 合并为一个 conditional。
+
+**约束：带有序集合的 conditional**
+
+有序集合不得被拆分到不同的 conditional 上。
+
+示例清单 7.1 展示了两个非变体属性与一个变体属性的集合，它们可以都存在于同一个属性集中。该示例代表一个有效情形。
+
+清单7.1：两个非变体属性与一个变体属性，有效情形
+
+```xml
+<APPLICATION-PRIMITIVE-DATA-TYPE>
+  <SHORT-NAME>MyDT</SHORT-NAME>
+  <SW-DATA-DEF-PROPS>
+    <SW-DATA-DEF-PROPS-VARIANTS>
+      <SW-DATA-DEF-PROPS-CONDITIONAL>
+        <SW-TEXT-PROPS>
+          <ARRAY-SIZE-SEMANTICS>FIXED-SIZE</ARRAY-SIZE-SEMANTICS>
+        </SW-TEXT-PROPS>
+      </SW-DATA-DEF-PROPS-CONDITIONAL>
+      <SW-DATA-DEF-PROPS-CONDITIONAL>
+        <INVALID-VALUE>
+          <APPLICATION-VALUE-SPECIFICATION>
+            <SW-VALUE-CONT>
+              <SW-VALUES-PHYS>
+                <V>42</V>
+              </SW-VALUES-PHYS>
+            </SW-VALUE-CONT>
+          </APPLICATION-VALUE-SPECIFICATION>
+        </INVALID-VALUE>
+      </SW-DATA-DEF-PROPS-CONDITIONAL>
+      <SW-DATA-DEF-PROPS-CONDITIONAL>
+        <BASE-TYPE-REF DEST="SW-BASE-TYPE">/A/B/C</BASE-TYPE-REF>
+        <VARIATION-POINT>
+          <SW-SYSCOND BINDING-TIME="CODE-GENERATION-TIME">
+            <SYSC-REF DEST="SW-SYSTEMCONST">/J/K/L</SYSC-REF> == 1
+          </SW-SYSCOND>
+        </VARIATION-POINT>
+      </SW-DATA-DEF-PROPS-CONDITIONAL>
+    </SW-DATA-DEF-PROPS-VARIANTS>
+  </SW-DATA-DEF-PROPS>
+</APPLICATION-PRIMITIVE-DATA-TYPE>
+```
+
+示例清单 7.2 展示了三个非变体属性（其中一个属性重复出现；取值等价）与一个变体属性的集合，它们可以都存在于同一个属性集中。重复的属性因取值等价而可以合并。该示例代表一个有效情形。
+
+清单7.2：三个非变体属性（等价值）与一个变体属性，有效情形
+
+```xml
+<APPLICATION-PRIMITIVE-DATA-TYPE>
+  <SHORT-NAME>MyDT</SHORT-NAME>
+  <SW-DATA-DEF-PROPS>
+    <SW-DATA-DEF-PROPS-VARIANTS>
+      <SW-DATA-DEF-PROPS-CONDITIONAL>
+        <SW-TEXT-PROPS>
+          <ARRAY-SIZE-SEMANTICS>FIXED-SIZE</ARRAY-SIZE-SEMANTICS>
+        </SW-TEXT-PROPS>
+      </SW-DATA-DEF-PROPS-CONDITIONAL>
+      <SW-DATA-DEF-PROPS-CONDITIONAL>
+        <SW-TEXT-PROPS>
+          <ARRAY-SIZE-SEMANTICS>FIXED-SIZE</ARRAY-SIZE-SEMANTICS>
+        </SW-TEXT-PROPS>
+        <INVALID-VALUE>
+          <APPLICATION-VALUE-SPECIFICATION>
+            <SW-VALUE-CONT>
+              <SW-VALUES-PHYS>
+                <V>42</V>
+              </SW-VALUES-PHYS>
+            </SW-VALUE-CONT>
+          </APPLICATION-VALUE-SPECIFICATION>
+        </INVALID-VALUE>
+      </SW-DATA-DEF-PROPS-CONDITIONAL>
+      <SW-DATA-DEF-PROPS-CONDITIONAL>
+        <BASE-TYPE-REF DEST="SW-BASE-TYPE">/A/B/C</BASE-TYPE-REF>
+        <VARIATION-POINT>
+          <SW-SYSCOND BINDING-TIME="CODE-GENERATION-TIME">
+            <SYSC-REF DEST="SW-SYSTEMCONST">/J/K/L</SYSC-REF> == 1
+          </SW-SYSCOND>
+        </VARIATION-POINT>
+      </SW-DATA-DEF-PROPS-CONDITIONAL>
+    </SW-DATA-DEF-PROPS-VARIANTS>
+  </SW-DATA-DEF-PROPS>
+</APPLICATION-PRIMITIVE-DATA-TYPE>
+```
+
+示例清单 7.3 展示了三个非变体属性（其中一个属性重复出现；取值不等价）与一个变体属性的集合，它们不能都存在于同一个属性集中。重复的属性因取值不等价而无法合并。该示例代表一个无效情形。
+
+清单7.3：三个非变体属性（非等价值）与一个变体属性，无效情形
+
+```xml
+<APPLICATION-PRIMITIVE-DATA-TYPE>
+  <SHORT-NAME>MyDT</SHORT-NAME>
+  <SW-DATA-DEF-PROPS>
+    <SW-DATA-DEF-PROPS-VARIANTS>
+      <SW-DATA-DEF-PROPS-CONDITIONAL>
+        <SW-TEXT-PROPS>
+          <ARRAY-SIZE-SEMANTICS>FIXED-SIZE</ARRAY-SIZE-SEMANTICS>
+        </SW-TEXT-PROPS>
+      </SW-DATA-DEF-PROPS-CONDITIONAL>
+      <SW-DATA-DEF-PROPS-CONDITIONAL>
+        <SW-TEXT-PROPS>
+          <ARRAY-SIZE-SEMANTICS>VARIABLE-SIZE</ARRAY-SIZE-SEMANTICS>
+        </SW-TEXT-PROPS>
+        <INVALID-VALUE>
+          <APPLICATION-VALUE-SPECIFICATION>
+            <SW-VALUE-CONT>
+              <SW-VALUES-PHYS>
+                <V>42</V>
+              </SW-VALUES-PHYS>
+            </SW-VALUE-CONT>
+          </APPLICATION-VALUE-SPECIFICATION>
+        </INVALID-VALUE>
+      </SW-DATA-DEF-PROPS-CONDITIONAL>
+      <SW-DATA-DEF-PROPS-CONDITIONAL>
+        <BASE-TYPE-REF DEST="SW-BASE-TYPE">/A/B/C</BASE-TYPE-REF>
+        <VARIATION-POINT>
+          <SW-SYSCOND BINDING-TIME="CODE-GENERATION-TIME">
+            <SYSC-REF DEST="SW-SYSTEMCONST">/J/K/L</SYSC-REF> == 1
+          </SW-SYSCOND>
+        </VARIATION-POINT>
+      </SW-DATA-DEF-PROPS-CONDITIONAL>
+    </SW-DATA-DEF-PROPS-VARIANTS>
+  </SW-DATA-DEF-PROPS>
+</APPLICATION-PRIMITIVE-DATA-TYPE>
+```
+
+与 Splitkey 相同的合并规则（见第 8.3 节）应当适用。
+
+#### 7.5.3. 施加时间
+
+**约束：属性集模式中的施加时间**
+
+元类 VariationPoint 拥有属性 bindingTime，它为该变体点定义最晚施加时间。该施加时间进一步受附着于被标记为 **&lt;atpVariation&gt;** 的元类的 UML 标签 vh.latestBindingTime 约束（参见 [TPS\_GST\_00190]、[TPS\_GST\_00220]、[TPS\_GST\_00221]）：
+
+```
+VariationPoint.bindingTime ≤ meta class.vh.latestBindingTime
+```
+
+**属性集模式的施加时间**
+
+属性集模式的最晚施加时间是 PostBuild。
+
+#### 7.5.4. 属性与被聚合元素的多重性
+
+**属性集模式中的多重性**
+
+在属性集模式中，属性（与被聚合元素）从带注记元模型中的 {PropertySetClass} 移动到扩展元模型中的 {PropertySetClass}Conditional。
+
+随着这一移动，下重数总是变为 0。
+
+#### 7.5.5. XML 表示
+
+属性集模式产生的 XML 代码示例见图 7.10。
+
+尽管图 7.6 与图 7.7 中的模式看起来复杂，属性集模式对 XML 代码的影响相当有限。如示例 7.10 所示，属性集模式在属性外添加一个 -VARIANTS 包装元素，并为每个（子）属性取值集合添加一个 -CONDITIONAL 元素。-CONDITIONAL 还包含一个 VARIATION-POINT 元素。
+
+因此，对 XML 代码的主要影响是属性取值的重复，而变体处理引入的开销应当只增加少量元素。
+
+#### 7.5.6. 与其他模式的比较
+
+本模式与属性取值模式（第 7.4 节）都以属性为目标，但有若干差别：
+
+- 属性集模式提供了一种把彼此相关的属性分组的方法。
+- 属性集模式更灵活：可变性不限于 M2 元模型“允许”可变性的那些属性。但有一个陷阱：由于更高的灵活性，哪些属性是不变的、哪些不是，无法先验地确定。
+- 属性取值模式可以使用表达式来定义属性的取值，而属性集模式只能使用固定取值（更准确地说，每个变体一个固定取值）。不过，属性集模式可以与属性取值模式组合来实现这一效果。
+- 属性取值模式只适用于有限数量的数据类型，即 Integer、Float、Boolean、Numerical、PositiveInteger 与 UnlimitedInteger。属性集模式没有这种限制。
+- 若属性是可选的，则属性集模式还可以决定该属性是否存在。这与属性取值模式不同——后者只能改变属性的取值。
+
+此外，属性集模式与聚合模式、关联模式的差别在于：前者一次作用于多个属性、聚合与关联，而后者只决定单个聚合或关联的存在性。
+
+#### 7.5.7. 属性取值模式与属性集模式的组合
+
+上一节我们说过，属性集模式无法用表达式规定属性的取值。虽然如此，有一种方法可以避开这一限制，即把属性集模式与属性取值模式组合。
+
+在这种情况下，属性集模式允许把完整的属性集合划分为若干不相交的子集。这些单个属性中的每一个都可以带有构型 **&lt;atpVariation&gt;**，这意味着属性取值模式被应用，属性的取值可以由表达式决定。
+
+此外，由于一个属性可以出现在多个集合中（在 M1 层次上），可能存在多个用于确定某特定属性取值的表达式，每个都为特定变体量身定制。
+
+### 7.6. VariationPoint
+
+VariationPoint 的结构如图 7.8 所示。
+
+![图 7.8：变体点（Variation Point）](Figure7-8.png)
+
+表7.4：VariationPoint
+
+| 类         | VariationPoint                                                                                                                                                                                |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling                                                                                                                                                 |
+| 注意       | 该元类表示表达“结构变体点”的能力。若 swSyscond 求值为 true 且每个 postBuildVariantCriterion 都得到满足，则该变体点的容器属于被选择的变体。                                                                 |
+| 基类       | ARObject                                                                                                                                                                                                |
+
+| 属性                       | 类型                          | 多重性 | 类别 | 注意                                                                                                                                                                                                                             |
+|----------------------------|-------------------------------|--------|------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| blueprintCondition         | DocumentationBlock            | 0..1   | aggr | 这表示一段描述，记录在从蓝图派生对象时该变体点应当如何解析。注意，blueprintCondition 内不允许有 variationPoint。标签：xml.sequenceOffset=28                                                                                                    |
+| desc                       | MultiLanguageOverviewParagraph| 0..1   | aggr | 这允许简要描述变体点的目的。标签：xml.sequenceOffset=20                                                                                                                                                                                        |
+| formalBlueprintGenerator   | BlueprintGenerator            | 0..1   | aggr | 这表示一段描述，记录在从蓝图派生对象时如何使用 ARMQL 解析该变体点。注意，formalBlueprintGenerator 内不允许有 variationPoint。标签：atp.Status=draft xml.sequenceOffset=30                                                                       |
+| postBuildVariantCondition  | PostBuildVariantCondition     | *      | aggr | 这是为了（postbuild）施加该变体点而必须全部得到满足的 post build 变体条件的集合。标签：xml.sequenceOffset=40                                                                                                                                    |
+| sdg                        | Sdg                           | 0..1   | aggr | 每个变体点都可以附带一个可选的特殊数据组。这些数据可被外部软件系统用来附加应用特定的数据。例如，变体管理系统可能添加一个标识符、一个 URL 或一个特定的分类器。标签：xml.sequenceOffset=50                                                              |
+| shortLabel                 | Identifier                    | 0..1   | attr | 这为该特定变体点提供一个名称，以支持 RTE 生成器。它对于支持可拆分聚合、施加时间晚于 codeGenerationTime 以及某些 RTE 条件是必需的。它需要在拥有相同 ShortName 的直接外层 Identifiable 内唯一。构型：atpIdentityContributor 标签：xml.sequenceOffset=10 |
+| swSyscond                  | ConditionByFormula            | 0..1   | aggr | 该条件充当变体点的绑定函数。注意多重性为 0..1，以支持纯 postBuild 变体。标签：xml.sequenceOffset=30                                                                                                                                            |
+
+#### 7.6.1. 类 VariationPoint 的结构
+
+类 VariationPoint 持有聚合模式（第 7.2 节）、关联模式（第 7.3 节）与属性集模式（第 7.5 节）中变体点的信息<sup>6</sup>。
+
+一个 VariationPoint 聚合一个 ConditionByFormula、一个 PostBuildVariantCondition，以及角色 blueprintCondition 中的一个 DocumentationBlock。这三个“分支”彼此独立。如图 7.8 中的多重性所示，它们也都是可选的：
+
+- **PreBuild 变体点**：若变体点聚合 ConditionByFormula，则该变体点是 PreBuild 变体点。细节见第 7.6.5 节。
+- **PostBuild 变体点**：若变体点聚合一个 PostBuildVariantCondition，则该变体点是 PostBuild 变体点。细节见第 7.6.6 节。
+- **BlueprintDerivation 变体点**：若变体点聚合 blueprintCondition 或 formalBlueprintGenerator，则该变体应当在派生对象时解析。细节参见 [\[2\]](#ref-2)。
+- **组合的 PreBuild 与 PostBuild 变体点**：变体点也可以同时聚合 ConditionByFormula 与 PostBuildVariantCondition。在这种情况下，它既是 PreBuild 变体点，也是 PostBuild 变体点。细节见第 7.6.5 节。
+- **无条件变体点**：从技术上讲，变体点也可以一个上述类都不聚合。在这种情况下，完全没有变体，附着变体点的元素始终存在。
+
+  这等价于一个 ConditionByFormula 施加时间为 systemDesignTime、且公式永远求值为 true 的纯 PreBuild 变体点。
+
+**VariationPoint 的多重性**
+
+在所有模式中，VariationPoint 元素的多重性为 [0…1]，即它是可选的。若省略变体点，则没有变体，相应元素始终存在。
+
+> **6** 属性取值模式（第 7.4 节）更简单，不使用类 VariationPoint。此外，它的最晚施加时间是 CompileTime，因此本节讨论的许多问题不适用于该模式。
+
+**约束：系统配置中不得有 vh.latestBindingTime 为 BlueprintDerivationTime 的 VariationPoint**
+
+蓝图不是系统配置的一部分。因此，在系统配置中不得存在被元模型把 vh.latestBindingTime 限定为 BlueprintDerivationTime 的 VariationPoint。
+
+**约束：若 vh.latestBindingTime 为 BlueprintDerivationTime，则只能有 blueprintCondition 或 formalBlueprintGenerator（相应地 blueprintValue）**
+
+vh.latestBindingTime 限定为 BlueprintDerivation 的 VariationPoint 不得拥有 swSyscond 或 postBuildVariantCondition。
+
+**约束：不得嵌套 VariationPoint**
+
+由于 blueprintCondition 是一个 DocumentationBlock，它可以再次包含 VariationPoint，从而允许 VariationPoint 的嵌套。这并非本意，不应使用。
+
+#### 7.6.2. VariationPoint 中的 shortLabel
+
+VariationPoint 拥有单个可选属性 shortLabel，它为变体点实现一个名称。
+
+**约束：VariationPoint 中的 shortLabel 应当唯一**
+
+shortName 与 shortLabel 的组合应当在下一个直接外层的 Identifiable {WholeClass} 内唯一。
+
+例如，在聚合模式（第 7.2 节）中，这个外层 Identifiable 通常就是 {WholeClass}。
+
+**变体丰富的模型违反 [constr\_2508]**
+
+按照 [TPS\_GST\_00097]，AUTOSAR 会使用下一个直接外层 Identifiable 的属性 shortName 作为唯一名称。这对变体点行不通。其原因根植于变体丰富的 M1 模型与已施加的 M1 模型之间的差别。
+
+变体丰富的 M1 模型可以为一个聚合定义若干备选变体。正如“备选”一词所暗示的，已施加的 M1 元模型中只留下其中一个，但它们全都拥有相同的 shortName。
+
+因此，一个（尚未施加的）变体丰富的 M1 模型通过拥有多个相同 shortName 的元素，违反了 AUTOSAR 的一致性条件（[constr\_2508]）。这只是可行的，因为我们要求已施加的 M1 模型（及相关代码）最终遵守那些一致性规则（参见 [TPS\_GST\_00435]）。
+
+对于变体丰富的模型，[constr\_2508] 被 [constr\_2512] 取代。
+
+有多种情形需要单独寻址变体丰富的 M1 模型中拥有相同 shortName 的变体：
+
+- **变体丰富模型的拆分/合并**
+
+  如果聚合带有构型 **&lt;atpSplitable&gt;**。其用例是：特定变体保存在单独的制品中。为了合并这些单独的制品，不仅需要考虑 shortName，还需要考虑某个 Identifiable 特定变体的 shortLabel（[constr\_2512]）。关于可拆分元素的更多细节见第 8 章。
+
+- **在 RTE 中区分 codeGenerationTime 变体点**
+
+  如果施加时间是 codeGenerationTime 或更晚，那么在实现 preCompileTime 可变性时，RTE 需要区分各个变体。
+
+- **从外部引用变体点**
+
+  从外部引用单个变体点常常是必要的。例如，配置管理系统可能需要标识单个变体点以实现可追溯性。
+
+此外，由于 shortLabel 是可选元素，它缺席时对 XML 的尺寸或复杂度没有影响。
+
+**约束：变体的 shortName 唯一性约束**
+
+变体元素的 shortName + shortLabel 应当在外围 Identifiable 建立的命名空间内唯一。
+
+VariationPoint 中的 shortLabel 在技术上只在 VariationPoint 用于在拥有相同 shortName 的 Identifiable 之间切换时才需要，见清单 F.1 与 F.3。此外若这些 Identifiable 描述在部分模型中，部分模型中的 shortLabel 指示哪些元素属于一起，见清单 F.1 与 F.2。
+
+如果 Identifiable 中的 shortLabel 用于改变 Identifiable 的存在性、而没有同名的备选项，则 VariationPoint 中的 shortLabel 不是必需的，但可以存在。若定义了 shortLabel 且该 Identifiable 描述在部分模型中，则需要在各部分模型中一致地重复该 shortLabel，见清单 F.2。若 shortLabel 未定义，则它不得出现在任何部分模型中。
+
+#### 7.6.3. VariationPoint 中的 sdg
+
+类 VariationPoint 聚合一个可选的 sdg 对象（见第 4.6.1 节），外部软件系统可以用它把应用特定的数据附着到变体点上。例如，变体管理系统可能向变体点添加一个标识符、一个 URL 或一个特定的分类器。
+
+由于这样的数据高度依赖应用与厂商，它无法被标准化，而需要用一个特殊数据组替代。
+
+同样，由于 sdg 是可选元素，它缺席时对 XML 表示的尺寸或复杂度没有影响。
+
+#### 7.6.4. （最晚）施加时间
+
+在第 7.1 节中我们看到，每个变体点都有一个施加时间。施加时间（见 [\[18\]](#ref-18)）可以进一步归类为 PreBuild 与 PostBuild 施加时间：
+
+**PreBuild 变体点的定义**
+
+该类别包含以下施加时间：systemDesignTime、codeGenerationTime、preCompileTime 与 linkTime。
+
+一个具体变体点（即在 M1 层次上）若包含一个 ConditionByFormula 元素，则受 PreBuild 变体支配。其施加时间规定在 ConditionByFormula 元素的 bindingTime 属性中。更多细节见第 7.6.5 节。
+
+**带蓝图条件的 PreBuild 变体点的定义**
+
+该类别只包含单一施加时间，即 blueprintDerivationTime。一个具体变体点若包含 blueprintCondition 或 formalBlueprintGenerator 属性，则受施加时间为 blueprintDerivationTime 的 PreBuild 变体支配。更多细节见第 7.6.11.2 节。
+
+**PostBuild 变体点的定义**
+
+该类别只包含单一施加时间，即 PostBuild。
+
+一个具体变体点若包含一个 PostBuildVariantCondition 元素，则为 PostBuild。由于 PostBuild 只有一个施加时间，不需要规定施加时间的专门属性。更多细节见第 7.6.6 节。
+
+施加时间进一步受 7.2 至 7.5 节各模式中引入的标签 vh.latestBindingTime 约束：
+
+**施加时间受 vh.latestBindingTime 约束**
+
+- 若 vh.latestBindingTime = PostBuild，则 M1 层次上的变体点可以有任何施加时间。它可以是 PreBuild 或 PostBuild 变体点（或二者），可以聚合 ConditionByFormula 或 PostBuildVariantCondition。
+- 若 vh.latestBindingTime &lt; PostBuild，则 M1 层次上的变体点只能是 PreBuild，而不能是 PostBuild 变体点。显然此时它只能聚合一个 ConditionByFormula。
+- 若 vh.latestBindingTime = BlueprintDerivationTime，则 M1 层次上的变体点只能聚合 blueprintCondition 或 formalBlueprintGenerator。另参见 [constr\_2557] 与 [constr\_2558]。
+
+显然，PreBuild 变体点的施加时间（即 ConditionByFormula 的属性 bindingTime 的取值）永远不得超过 vh.latestBindingTime。
+
+#### 7.6.5. PreBuild 变体点
+
+表7.5：ConditionByFormula
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; ConditionByFormula                                                                                              |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling                                                                                                    |
+| 注意       | 该类表示一个按规定的表达式基于系统常量计算的条件。预期结果被视为布尔值。表达式的结果被解释为条件：“0”代表“false”；非零值被视为“true”。                          |
+| 基类       | ARObject、FormulaExpression、SwSystemconstDependentFormula                                                                                                    |
+| 聚合于     | VariationPoint.swSyscond、VariationPointProxy.conditionAccess                                                                                                  |
+
+| 属性        | 类型            | 多重性 | 类别 | 注意                                                                                          |
+|-------------|-----------------|--------|------|-----------------------------------------------------------------------------------------------------|
+| bindingTime | BindingTimeEnum | 1      | attr | 该属性规定最早可以对条件求值的时点。此时所有被引用的系统常量应当已有取值。标签：xml.attribute=true |
+
+实现 PreBuild 变体点所需的全部信息由类 ConditionByFormula 提供：
+
+- ConditionByFormula 派生自 SwSystemconstDependentFormula。该类实现判定变体点“开”或“关”的（布尔）公式。
+
+  公式语言在第 4.9 节定义。关于公式在变体处理概念中的使用的进一步解释，另见第 7.6.8 节。
+
+- ConditionByFormula 有单一属性 bindingTime，它为该变体点定义最晚施加时间。施加时间在 [\[18\]](#ref-18) 中有更详细的描述。
+
+**尽早施加 VariationPoint**
+
+一个具体软件系统可以在技术上可行、且在合同限度内时，于更早的施加时间施加变体点<sup>7</sup>。我们定义以下附加限制：
+
+```
+晚于系统设计时间的变体点施加时间属于合同的一部分。
+```
+
+按照这一限制，RTE 生成器不允许解析应用头文件中的可变性，即使该可变性在 RTE 的输入中已被选定。
+
+如果施加时间是 systemDesignTime，则该可变性不被视为合同阶段的一部分，它应当在 systemDesignTime、合同之前被正确施加。
+
+> **7** 合同阶段的定义见 RTE 规范 [\[19\]](#ref-19) 第 3.1 章。
+
+#### 7.6.6. PostBuild 变体点
+
+表7.6：PostBuildVariantCondition
+
+| 类         | PostBuildVariantCondition                                                                                                                                                                                 |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling                                                                                                                                                                  |
+| 注意       | 该类规定为了施加变体点而应当赋给某个特定变体判据的取值。若规定了多个判据/取值对，则它们必须全部匹配才能施加变体点。换言之，施加可以表示为 (criterion1 == value1) && (condition2 == value2) …                                     |
+| 基类       | ARObject                                                                                                                                                                                                                  |
+| 聚合于     | VariationPoint.postBuildVariantCondition、VariationPointProxy.postBuildVariantCondition                                                                                                                                     |
+
+| 属性              | 类型                       | 多重性 | 类别 | 注意                                                                                                                              |
+|-------------------|----------------------------|--------|------|------------------------------------------------------------------------------------------------------------------------------------------|
+| matchingCriterion | PostBuildVariantCriterion  | 1      | ref  | 这是需要与取值匹配、从而使 PostBuildVariantCondition 为真的判据。                                                                      |
+| value             | Integer                    | 1      | attr | 这是 post-build 变体判据的特定取值。构型：atpVariation 标签：vh.latestBindingTime=preCompileTime                                          |
+
+表7.7：PostBuildVariantCriterion
+
+| 类         | PostBuildVariantCriterion                                                                                                          |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling                                                                                      |
+| 注意       | 该类规定一个特定的 PostBuildVariantSelector。标签：atp.recommendedPackage=PostBuildVariantCriterions                                            |
+| 基类       | ARElement、ARObject、AtpDefinition、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                    |
+| 聚合于     | ARPackage.element                                                                                                                            |
+
+| 属性       | 类型        | 多重性 | 类别 | 注意                                                                     |
+|------------|-------------|--------|------|--------------------------------------------------------------------------------|
+| compuMethod| CompuMethod | 1      | ref  | compuMethod 规定充当枚举器的变体判据的可能取值。                                 |
+
+一个 PostBuild 变体点包含角色 postBuildVariantCondition 中的多个 PostBuildVariantCondition，后者又拥有指向一个 PostBuildVariantCriterion 的引用。与由 ConditionByFormula 中定义的公式支配的 PreBuild 变体点不同，PostBuild 变体点由 PostBuildVariantCondition 的组合支配。
+
+**约束：postBuildVariantCondition 只用于 PostBuild**
+
+只有当带注记模型把 vh.latestBindingTime 规定为 PostBuild 时，才允许在 VariationPoint 中聚合 PostBuildVariantCondition。
+
+**PostBuild 判据的 PreBuild 配置**
+
+PostBuildVariantCondition 的属性取值受 PreBuild 变体支配。它使用属性取值模式，因此其最晚施加时间是 preCompileTime。也就是说，将与 PostBuildVariantCriterion 内容比较的取值至多在 preCompileTime 被计算<sup>8</sup>。
+
+而与 PostBuildVariantCriterion 内容的实际比较则基于 ECU 启动时的结果完成。
+
+> **8** 它可以是一个表达式，而不是常量取值或单一系统常量。
+
+**PostBuildVariantCondition 的求值**
+
+一个 VariationPoint 元素可以在角色 postBuildVariantCondition 中聚合任意数量的 PostBuildVariantCondition。这些元素之间隐含逻辑与：若对所有 postBuildVariantCondition 而言，PostBuildVariantCondition 中定义的取值与 RTE 为 PostBuildVariantCriterion 提供的取值匹配（参见 [SWS\_Rte\_06612]），则该 PostBuild 变体点被“启用”。
+
+![图 7.9：PostBuildVariantCriterion](Figure7-9.png)
+
+**PostBuildVariantCriterion 的可能取值**
+
+PostBuildVariantCriterion 还引用一个 compuMethod，它规定该判据的可能取值以及数据的物理表示与内部表示之间的转换（细节见软件组件模板 [\[20\]](#ref-20) 的 [TPS\_SWCT\_01243]、[TPS\_SWCT\_01278]）。
+
+RTE 负责管理 PostBuildVariantCriterion 的取值（[SWS\_Rte\_06612]）。
+
+#### 7.6.7. 系统常量
+
+对 PreBuild 变体点，绑定函数依赖于 SwSystemconst。这样的系统常量基本上是一个名称/取值对。系统常量的 shortName、dataConstr 与 compuMethod 在 SwSystemconst 中定义。与数据类型类似，单位可以通过单位引用显式表达。
+
+定义 dataConstr 是为了描述适用的 SwSystemconstValue 的界限。compuMethod 支持内部取值与文本字面量之间的转换，或内部取值与物理含义之间的转换。无论 compuMethod 是否存在，包含 SwSystemconst 的公式的求值都通过内部取值实现。因此 SwSystemconstValue 持有的也是内部取值。不过，工具可以使用 compuMethod 来显示物理取值。
+
+**SwSystemconst 的表示**
+
+SwSystemconst 的 SwDataDefProps 中的 compuMethod 只用于支持在工具与文档中恰当地表示取值。取值应当始终以内部表示设置。
+
+![图 7.10：SwSystemconst 的定义（Defintion of a SwSystemconst）](Figure7-10.png)
+
+表7.8：SwSystemconst
+
+| 类         | SwSystemconst                                                                                                                                                                                                    |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::MSR::DataDictionary::SystemConstant                                                                                                                                                                                       |
+| 注意       | 该元素定义一个系统常量，它充当选择特定变体点的输入。特别地，系统常量充当 Variation point 中绑定函数（swSyscond）的操作数。注意，只有当取值被赋给被引用的系统常量之后，施加过程才能发生。标签：atp.recommendedPackage=SwSystemconsts |
+| 基类       | ARElement、ARObject、AtpDefinition、CollectableElement、Identifiable、MultilanguageReferrable、PackageableElement、Referrable                                                                                                        |
+| 聚合于     | ARPackage.element                                                                                                                                                                                                              |
+
+| 属性           | 类型           | 多重性 | 类别 | 注意                                                                                                                                                                                            |
+|----------------|----------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| swDataDefProps | SwDataDefProps | 0..1   | aggr | 这表示系统常量的数据定义属性。它支持表达界限，并可选地通过 compu method 表达内部值到物理值的转换。构型：atpSplitable 标签：atp.Splitkey=swDataDefProps xml.sequenceOffset=40                                |
+
+**为 SwSystemconst 赋值**
+
+为了选择变体，需要为 SwSystemconst 赋值。注意，取值应当始终以“内部取值”规定。这在 SwSystemconstValue 中完成。
+
+**约束：SwSystemconst 不允许循环取值赋值**
+
+显式禁止为 SwSystemconst 赋予反过来直接或间接依赖该取值赋值的取值。
+
+SwSystemconst 的循环取值赋值因取值的循环依赖而无法解析。
+
+更多细节见第 7.8 节。
+
+![图 7.11：为 SwSystemconst 赋值（Assigning a value to a SwSystemconst）](Figure7-11.png)
+
+表7.9：SwSystemconstValue
+
+| 类         | SwSystemconstValue                                       |
+|------------|------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling            |
+| 注意       | 该元类为系统常量赋予一个特定取值。                                    |
+| 基类       | ARObject                                                          |
+| 聚合于     | SwSystemconstantValueSet.swSystemconstantValue                        |
+
+| 属性          | 类型          | 多重性 | 类别 | 注意                                                                                                                                                                                            |
+|---------------|---------------|--------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| annotation    | Annotation    | *      | aggr | 这提供了说明取值为何如此设置的信息的可能性。标签：xml.sequenceOffset=30                                                                                                                                      |
+| swSystemconst | SwSystemconst | 1      | ref  | 这是取值适用的系统常量。标签：xml.sequenceOffset=10                                                                                                                                                          |
+| value         | Numerical     | 1      | attr | 这是系统常量的特定取值。规定为 Numerical。系统常量的定义可能施加进一步的限制。value 属性定义 SwSystemconst 在公式语言中处理时的内部取值。构型：atpVariation 标签：vh.latestBindingTime=preCompileTime xml.sequenceOffset=20 |
+
+#### 7.6.8. 公式在变体点中的应用
+
+变体点的施加通过求值变体点中的公式完成。这些公式可以是图 4.15 中子类之一。
+
+**SwSystemconstDependentFormula 的用途**
+
+SwSystemconstDependentFormula 元素是一个以系统常量（通过对 SwSystemconst 的 sysc 引用）为操作数的公式。注意，图中的多重性 1 是技术细节（参见 [TPS\_GST\_00032]）；一个公式实际上可以使用多于一个系统常量。（见图 4.15）
+
+**公式中的系统常量**
+
+SwSystemconstDependentFormula.sysc 反映 SwSystemconst 的内部取值。
+
+SwSystemconstDependentFormula.syscString 反映 SwSystemconst 的字符串表示取值。这尤其是按照 [TPS\_SWCT\_01431] 确定的、C 中 CompuScale 表示所用的符号。
+
+带引用（sysc）的正确表达式示例如下：
+
+```xml
+<APPLICATION-VALUE-SPECIFICATION>
+  <SW-VALUE-CONT>
+    <SW-VALUES-PHYS>
+      <VF>
+        <SYSC-REF DEST="SW-SYSTEMCONST">/S/SY_ZYLZA</SYSC-REF>
+      </VF>
+    </SW-VALUES-PHYS>
+  </SW-VALUE-CONT>
+</APPLICATION-VALUE-SPECIFICATION>
+```
+
+序列化于 &lt;VF&gt; 标签内的公式语言是在替换 ARXML 引用之后定义的，即上述 ARXML 将被转换为以下表达式：
+
+```
+reference("SW-SYSTEMCONST:/S/SY_ZYLZA")
+```
+
+然后它被接受为正确的 SwSystemconstDependentFormula。
+
+```
+...
+<VF>
+  <SYSC-REF DEST="SW-SYSTEMCONST">/S/SY_ZYLZA</SYSC-REF>
+  +
+  <SYSC-REF DEST="SW-SYSTEMCONST">/S/SY_TURBO</SYSC-REF>
+</VF>
+...
+```
+
+被转换为：
+
+```
+reference("SW-SYSTEMCONST:/S/SY_ZYLZA") + reference("SW-SYSTEMCONST:/S/SY_TURBO")
+```
+
+```
+...
+<VF>defined(<SYSC-REF DEST="SW-SYSTEMCONST">/S/SY_ZYLZA</SYSC-REF>)</VF>
+...
+```
+
+被转换为：
+
+```
+defined(reference("SW-SYSTEMCONST:/S/SY_ZYLZA"))
+```
+
+```
+...
+<VF>1 / <SYSC-REF DEST="SW-SYSTEMCONST">/S/SY_ZYLZA</SYSC-REF></VF>
+...
+```
+
+被转换为：
+
+```
+1 / reference("SW-SYSTEMCONST:/S/SY_ZYLZA")
+```
+
+```xml
+<VARIATION-POINT>
+  <SW-SYSCOND>
+    defined(<SYSC-REF DEST="SW-SYSTEMCONST">SY_COUNT</SYSC-REF>)
+    &amp;&amp;
+    <SYSC-REF DEST="SW-SYSTEMCONST">SY_COUNT</SYSC-REF> &lt; 10
+  </SW-SYSCOND>
+</VARIATION-POINT>
+```
+
+请注意，该示例表明：当公式序列化为 ARXML 时，标记字符（“&lt;” 与 “&amp;”）需要表示为 XML 实体。上述公式被转换为：
+
+```
+defined(reference("SW-SYSTEMCONST:SY_COUNT") && reference("SW-SYSTEMCONST:SY_COUNT") < 10
+```
+
+带引用（syscString）的正确表达式示例如下：
+
+第一个示例：使用 conditionAccess 处理字符串 “Condition1”。
+
+```xml
+<VARIATION-POINT-PROXYS>
+  <VARIATION-POINT-PROXY>
+    <SHORT-NAME>MyVariationProxy</SHORT-NAME>
+    <LONG-NAME>
+      <L-4 L="EN">My Variation Point Proxy</L-4>
+    </LONG-NAME>
+    <CATEGORY>CONDITION</CATEGORY>
+    <CONDITION-ACCESS BINDING-TIME="PRE-COMPILE-TIME">
+      <SYSC-STRINGREF DEST="SW-SYSTEMCONST">/SwSystemconsts/MySysConst1_SY</SYSC-STRINGREF>=="Condition1"
+    </CONDITION-ACCESS>
+  </VARIATION-POINT-PROXY>
+</VARIATION-POINT-PROXYS>
+```
+
+以及基于数值取值的 SwSystemconstValue：
+
+```xml
+<SW-SYSTEMCONST-VALUE>
+  <SW-SYSTEMCONST-REF DEST="SW-SYSTEMCONST">/SwSystemconsts/MySysConst1_SY</SW-SYSTEMCONST-REF>
+  <VALUE>"Condition1"</VALUE>
+</SW-SYSTEMCONST-VALUE>
+```
+
+被转换为：
+
+```
+reference("SW-SYSTEMCONST:/SwSystemconsts/MySysConst1_SY") == Condition1
+```
+
+**提示：** RTE 生成器校验该表达式以定义 Rte\_VP\_MyVariationPoint1 (TRUE)。若字符串 “Condition1” 变为 “Condition2”，RTE 生成器校验该表达式以定义 Rte\_VP\_MyVariationPoint1 (FALSE)。
+
+第二个示例：使用 conditionAccess 处理引用类别为 TEXTTABLE 的 CompuMethod 的 SwSystemconst，另见 [TPS\_GST\_00013]：
+
+```xml
+<VARIATION-POINT-PROXYS>
+  <VARIATION-POINT-PROXY>
+    <SHORT-NAME>MyVariationProxy</SHORT-NAME>
+    <LONG-NAME>
+      <L-4 L="EN">My Variation Point Proxy</L-4>
+    </LONG-NAME>
+    <CATEGORY>CONDITION</CATEGORY>
+    <CONDITION-ACCESS BINDING-TIME="PRE-COMPILE-TIME">
+      <SYSC-STRINGREF DEST="SW-SYSTEMCONST">/SwSystemconsts/MySysConst5_SY</SYSC-STRINGREF>==Element1
+    </CONDITION-ACCESS>
+  </VARIATION-POINT-PROXY>
+</VARIATION-POINT-PROXYS>
+```
+
+以及基于字符串的 SwSystemconst：
+
+```xml
+<SW-SYSTEMCONST>
+  <SHORT-NAME>MySysConst5_SY</SHORT-NAME>
+  <LONG-NAME>
+    <L-4 L="EN">This is my fifth system constant</L-4>
+  </LONG-NAME>
+  <CATEGORY>VALUE</CATEGORY>
+  <SW-DATA-DEF-PROPS>
+    <SW-DATA-DEF-PROPS-VARIANTS>
+      <SW-DATA-DEF-PROPS-CONDITIONAL>
+        <SW-CALIBRATION-ACCESS>NOT-ACCESSIBLE</SW-CALIBRATION-ACCESS>
+        <COMPU-METHOD-REF DEST="COMPU-METHOD">/CompuMethods/MyTextTable</COMPU-METHOD-REF>
+      </SW-DATA-DEF-PROPS-CONDITIONAL>
+    </SW-DATA-DEF-PROPS-VARIANTS>
+  </SW-DATA-DEF-PROPS>
+</SW-SYSTEMCONST>
+```
+
+引用该 CompuMethod：
+
+```xml
+<COMPU-METHOD>
+  <SHORT-NAME>MyTextTable</SHORT-NAME>
+  <LONG-NAME>
+    <L-4 L="EN">My Texttable computation method</L-4>
+  </LONG-NAME>
+  <CATEGORY>TEXTTABLE</CATEGORY>
+  <COMPU-INTERNAL-TO-PHYS>
+    <COMPU-SCALES>
+      <COMPU-SCALE>
+        <LOWER-LIMIT INTERVAL-TYPE="CLOSED">1.0</LOWER-LIMIT>
+        <UPPER-LIMIT INTERVAL-TYPE="CLOSED">1.0</UPPER-LIMIT>
+        <COMPU-CONST>
+          <VT>Element1</VT>
+        </COMPU-CONST>
+      </COMPU-SCALE>
+    </COMPU-SCALES>
+  </COMPU-INTERNAL-TO-PHYS>
+</COMPU-METHOD>
+```
+
+被转换为：
+
+```
+reference("SW-SYSTEMCONST:/SwSystemconsts/MySysConst5_SY") == Element1
+```
+
+公式语言在第 4.9 节中详细描述。本节聚焦于派生自 SwSystemconstDependentFormula 的变体处理相关类，即 AttributeValueVariationPoint 与 ConditionByFormula：
+
+ConditionByFormula 由 VariationPoint 聚合，决定 VariationPoint 所附着的元素是否真实存在。这用于除属性取值模式之外的所有模式。
+
+该公式的返回值总是被解释为布尔值：0 等于 false，任何其他值被解释为 true。
+
+AttributeValueVariationPoint 主要用于在属性取值模式（第 7.4 节）中提供取值。由于属性取值模式被隐式用于定义 PostBuild 变体点的条件，它也可以用于其他任何模式。
+
+AttributeValueVariationPoint 进一步分为八个（源文列七——此处按源文列出）子类，即 NumericalValueVariationPoint、FloatValueVariationPoint、IntegerValueVariationPoint、BooleanValueVariationPoint、TimeValueValueVariationPoint、PositiveIntegerValueVariationPoint 与 UnlimitedIntegerValueVariationPoint。
+
+这些子类提供公式预期返回类型的信息（见第 4.9.2.4 章），并对应于 AUTOSAR 原始类型 Numerical、Float、Integer、Boolean、PositiveInteger 与 UnlimitedInteger。
+
+**约束：AttributeValueVariationPoint 的返回类型**
+
+当软件工具求值这样的公式时，公式的返回值应当与纯元模型中属性的类型兼容。
+
+表7.10：SwSystemconstDependentFormula
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; SwSystemconstDependentFormula（抽象）                       |
+|------------|---------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling                                                |
+| 注意       | 该类表示一个依赖于系统常量的表达式。                                                                     |
+| 基类       | ARObject、FormulaExpression                                                                              |
+| 子类       | AttributeValueVariationPoint、BlueprintFormula、ConditionByFormula、FMFormulaByFeaturesAndSwSystemconsts   |
+
+| 属性       | 类型          | 多重性 | 类别 | 注意                                                                                                |
+|------------|---------------|--------|------|-----------------------------------------------------------------------------------------------------------|
+| sysc       | SwSystemconst | 0..1   | ref  | 这引用一个系统常量。应当使用系统常量的内部（编码）取值。标签：xml.sequenceOffset=50                              |
+| syscString | SwSystemconst | 0..1   | ref  | syscString 指示被引用的系统常量应当按照 [TPS\_SWCT\_01431] 作为字符串求值。                                   |
+
+另参见 ConditionByFormula；另参见 AttributeValueVariationPoint。
+
+表7.11：AbstractNumericalVariationPoint
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; AbstractNumericalVariationPoint（抽象）                                                                     |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling::AttributeValueVariationPoints                                                                |
+| 注意       | 这是一个抽象的 NumericalValueVariationPoint。引入它是为了支持为特定目的需要附加属性的情形。                                                              |
+| 基类       | ARObject、AttributeValueVariationPoint、FormulaExpression、SwSystemconstDependentFormula                                                                  |
+| 子类       | LimitValueVariationPoint、NumericalValueVariationPoint                                                                                                    |
+| 聚合于     | VariationPointProxy.valueAccess                                                                                                                            |
+
+表7.12：BooleanValueVariationPoint
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; BooleanValueVariationPoint                                                        |
+|------------|--------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling::AttributeValueVariationPoints                                        |
+| 注意       | 该类表示 Boolean 属性的属性取值变体点。注意，该类可能只在扩展元模型中使用。                                                    |
+| 基类       | ARObject、AttributeValueVariationPoint、FormulaExpression、SwSystemconstDependentFormula                                          |
+| 聚合于     | VariationPointProxy.valueAccess                                                                                                |
+
+表7.13：FloatValueVariationPoint
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; FloatValueVariationPoint                                                          |
+|------------|--------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling::AttributeValueVariationPoints                                        |
+| 注意       | 该类表示 Float 属性的属性取值变体点。                                                                                            |
+| 基类       | ARObject、AttributeValueVariationPoint、FormulaExpression、SwSystemconstDependentFormula                                          |
+| 聚合于     | VariationPointProxy.valueAccess                                                                                                |
+
+表7.14：IntegerValueVariationPoint
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; IntegerValueVariationPoint                                                        |
+|------------|--------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling::AttributeValueVariationPoints                                        |
+| 注意       | 该类表示 Integer 属性的属性取值变体点。注意，该类可能只在扩展元模型中使用。                                                    |
+| 基类       | ARObject、AttributeValueVariationPoint、FormulaExpression、SwSystemconstDependentFormula                                          |
+| 聚合于     | VariationPointProxy.valueAccess                                                                                                |
+
+表7.15：LimitValueVariationPoint
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; LimitValueVariationPoint                                                                                                                                                              |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling::AttributeValueVariationPoints                                                                                                                                            |
+| 注意       | 该类表示表达数值界限的能力。注意，它实际上是一个 NumericalValueVariationPoint，但拥有附加属性 intervalType。注意，出于向后兼容的原因，xml.name 为 “LIMIT”。标签：xml.name=LIMIT                                                              |
+| 基类       | ARObject、AbstractNumericalVariationPoint、AttributeValueVariationPoint、FormulaExpression、SwSystemconstDependentFormula                                                                                                              |
+| 聚合于     | VariationPointProxy.valueAccess                                                                                                                                                                                                |
+
+| 属性         | 类型             | 多重性 | 类别 | 注意                                                                                              |
+|--------------|------------------|--------|------|---------------------------------------------------------------------------------------------------------|
+| intervalType | IntervalTypeEnum | 0..1   | attr | 这规定区间的类型。若缺少该属性，区间应被视为 “CLOSED”。标签：xml.attribute=true                                  |
+
+表7.16：NumericalValueVariationPoint
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; NumericalValueVariationPoint                                                        |
+|------------|--------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling::AttributeValueVariationPoints                                        |
+| 注意       | 该类表示 Numerical 属性的属性取值变体点。注意，该类可能只在扩展元模型中使用。                                                  |
+| 基类       | ARObject、AbstractNumericalVariationPoint、AttributeValueVariationPoint、FormulaExpression、SwSystemconstDependentFormula          |
+| 聚合于     | VariationPointProxy.valueAccess                                                                                                |
+
+表7.17：PositiveIntegerValueVariationPoint
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; PositiveIntegerValueVariationPoint                                                  |
+|------------|--------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling::AttributeValueVariationPoints                                        |
+| 注意       | 该类表示正 Integer 属性的属性取值变体点。                                                                                      |
+| 基类       | ARObject、AttributeValueVariationPoint、FormulaExpression、SwSystemconstDependentFormula                                          |
+| 聚合于     | VariationPointProxy.valueAccess                                                                                                |
+
+表7.18：UnlimitedIntegerValueVariationPoint
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; UnlimitedIntegerValueVariationPoint                                                  |
+|------------|--------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling::AttributeValueVariationPoints                                        |
+| 注意       | 该类表示无限 Integer 属性的属性取值变体点。注意，该类可能只在扩展元模型中使用。                                                |
+| 基类       | ARObject、AttributeValueVariationPoint、FormulaExpression、SwSystemconstDependentFormula                                          |
+| 聚合于     | VariationPointProxy.valueAccess                                                                                                |
+
+表7.19：TimeValueValueVariationPoint
+
+| 类         | &lt;&lt;atpMixedString&gt;&gt; TimeValueValueVariationPoint                                                        |
+|------------|--------------------------------------------------------------------------------------------------------------------------|
+| 包         | M2::AUTOSARTemplates::GenericStructure::VariantHandling::AttributeValueVariationPoints                                        |
+| 注意       | 该类表示为数值型时间值表达公式的能力。                                                                                          |
+| 基类       | ARObject、AttributeValueVariationPoint、FormulaExpression、SwSystemconstDependentFormula                                          |
+| 聚合于     | VariationPointProxy.valueAccess                                                                                                |
