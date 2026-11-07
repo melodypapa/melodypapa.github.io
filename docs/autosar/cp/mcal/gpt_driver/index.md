@@ -709,7 +709,7 @@ Std_ReturnType Gpt_GetPredefTimerValue (Gpt_PredefTimerType PredefTimer, uint32*
 
 本节列出了目标函数可配置的所有接口。目标函数通常是回调函数。此类接口的名称不固定，因为它们是可配置的。
 
-##### 7.6.3.1. GPT 通知
+##### 7.5.3.1. GPT 通知
 
 **说明**: 无。可通过**Gpt.h**获得。本服务为同步调用。可重入性取决于**GPT**用户实现。
 

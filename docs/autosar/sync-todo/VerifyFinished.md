@@ -72,7 +72,7 @@ Scope: 166 finished articles, all paths resolving. 114 CP module articles are su
 | File existence | path scan | 166/166 resolve |
 | External URLs | curl | 175 checked (+8 XML-namespace identifiers excluded); 43 remain non-pass |
 
-`check_api_sync.py` was **not** run — it is a per-document-pair Phase B check (`<source.markdown> <article-index.md>`); the R23-11 source corpus is present at `~/Workspace/autosar_standard/markdown/`, so it is queued for the per-article pass.
+`check_api_sync.py` was not run in this **original read-only pass**. It was later run across 112 CP module pairs in **Batch 1** (2026-11-07) — see the API sync paragraph there. Prose fidelity inside API entries remains Phase B work.
 
 ## Post-sync verification (2026-11-06)
 
@@ -229,16 +229,20 @@ Applied in this session:
 - **A4** — 5 FlexRay titles renamed to `English（中文）`; propagated to `cp/index.md`, `cp/communication/index.md`, `../TODO.md` and this checklist; `cp/api/` regenerated via `gen_api_list.py`. `check_indexes.py --titles` → 0 violations.
 - Checklist regenerated from the merged ledger: **166 articles, 24 sections, all paths resolving**; F4 ✅ recounted to 162; `cp/api/` regenerated from the merged state.
 
-Deferred / awaiting a decision:
+Resolved in batch 2 (2026-11-07, PR #301):
 
-- **A1–A3** — the source-check classification above; no article changed (user chose "check sources first").
-- **B2** — 43 external URLs need manual browser verification; anti-bot 403/418 must never be auto-removed; 7×404 / 5×500 are source-faithful legacy references.
-- **A5** — widen `check_heading_lang.py`'s identifier exemption for module-prefix function names (`Mfl`).
-- **Per-article read-through** — the 166 `- [ ]` boxes remain unticked; `check_api_sync.py` is a per-document-pair Phase B check and is queued for that pass.
+- **A1–A3** — STANDARD.md §1/§2/§7 and the decision log, plus SKILL.md Phase A checks 2/5, amended to sanction compound source ch.2 headings; `can_driver`, `flexray_ar_transport_layer` and `memory_mapping` fixed; `standard_types` exempted in §7. See **Batch 2**.
+- **B2** — all 47 URLs re-probed and browser-verified: 9 transient failures recovered, anti-bot hosts confirmed reachable, genuine 404/500s are source-faithful legacy references. No links changed. See the B2 section.
+- **A5** — `check_heading_lang.py` widened to recognise C-declared function names; `--site` now reports 0 violations (regression-tested).
+
+Still open:
+
+- **Per-article Phase B prose read-through** — the 166 leading `- [ ]` boxes stay unticked until each article is read against its R23-11 source. `check_api_sync.py` ran in batch 1 (112 pairs); prose fidelity inside API entries is not covered by that tripwire. Pilot: the `mcal` section — see **Phase B pilot**.
+- **`cp/rte/rte` ch.7** — documented gated deviation from PR #295; the sole `内容 [ ]` box, intentionally open.
 
 ## Batch 1 — automated per-article verification (2026-11-07)
 
-First per-article pass over all 166 articles. `链接 [x]` ticked for all 166; `内容 [x]` ticked for 151 cleared articles; the 15 remaining `- [ ]` lines are listed below and in the Findings log. The leading `- [ ]` (article fully verified) stays unticked for everyone — that still needs the Phase B prose read against the source.
+First per-article pass over all 166 articles. `链接 [x]` ticked for all 166; `内容 [x]` ticked for 151 cleared articles. The 15 articles batch 1 left open were all resolved in **Batch 2** except `cp/rte/rte`; they are listed below for reference. The leading `- [ ]` (article fully verified) stays unticked for everyone — that still needs the Phase B prose read against the source (pilot: `mcal`).
 
 **Checks run per article:** front-matter `title`; no `# ` h1 in body (outside code fences); no forbidden chapters; no tables-as-images; no `{DRAFT}` outside HTML comments; 7-chapter skeleton + canonical wording + numbering continuity (CP module articles only); `check_api_sync.py` against the mapped R23-11 source; internal/anchor/external link resolution.
 
@@ -257,7 +261,7 @@ First per-article pass over all 166 articles. `链接 [x]` ticked for all 166; `
 - `cp/sw_arch/arti_sws/index.md` "h1" matches are `# define` C preprocessor lines inside code fences.
 - `check_heading_lang.py --site` now reports **0 violations** after the A5 script fix (C-declared function names such as `Mfl` are recognised as identifiers; `General`/`Common` are still flagged — regression-tested).
 
-**The 15 unticked articles:**
+**The 15 articles batch 1 left open** (10 ch.2 wording + 4 structural resolved in batch 2; `cp/rte/rte` remains a documented gated deviation):
 - 10 ch.2 wording pending: `ieee1722tp`, `com`, `flexray_interface`, `flexray_network_management`, `flexray_state_manager`, `flexray_transceiver_driver`, `flexray_iso_transport_layer`, `time_service`, `comm`, `software_cluster_connection`.
 - 5 structural: `can_driver` (ch.6 功能规范), `flexray_ar_transport_layer` (ch.5 absent, ch.6/7 wording, numbering gap), `standard_types` (ch.5 软件架构 — faithful to its source, needs a §7-style exemption), `memory_mapping` (numbering gap), `cp/rte/rte` (ch.7 absent — documented gated deviation from PR #295).
 
@@ -378,9 +382,9 @@ First per-article pass over all 166 articles. `链接 [x]` ticked for all 166; `
 
 ### mcal（3 篇）
 
-- [ ] [MCU 驱动](../cp/mcal/mcu_driver/) — 内容 [x] · 链接 [x]
-- [ ] [GPT 驱动](../cp/mcal/gpt_driver/) — 内容 [x] · 链接 [x]
-- [ ] [CoreTest 内核测试](../cp/mcal/core_test/) — 内容 [x] · 链接 [x]
+- [x] [MCU 驱动](../cp/mcal/mcu_driver/) — 内容 [x] · 链接 [x]
+- [x] [GPT 驱动](../cp/mcal/gpt_driver/) — 内容 [x] · 链接 [x]
+- [x] [CoreTest 内核测试](../cp/mcal/core_test/) — 内容 [x] · 链接 [x]
 
 ### memory（6 篇）
 
@@ -528,6 +532,36 @@ User approved the STANDARD.md §2 amendment and the full content-fixing scope (i
 
 **Verification (2026-11-07):** `mkdocs build --strict` → EXIT 0, zero WARNINGs, zero INFO anchor notices. Independent anchor audit against the built HTML: 2679 function + 884 type anchors in `cp/api/` all resolve; 19 (flexray_ar) + 47 (memory_mapping) self-references all resolve; no duplicate slugs; both renumbered articles have continuous chapter numbering. `check_heading_lang.py --site` → 0 violations (A5 script fix); `check_indexes.py --titles` → 0 violations.
 
+## Phase B pilot — mcal section (2026-11-07)
+
+Pilot for the per-article prose read-through, run on the 3 `mcal` articles against their R23-11 SWS sources. The leading `- [ ]` box is defined by a **mechanical Phase B method** (a Phase B rule with no mechanical trigger is a known failure mode — see the SKILL.md common-mistakes row), applied identically to each article:
+
+1. Chapter tree vs source with the §1 mapping (source ch.6 dropped; 7→6, 8→7, 9→8, 10→9), allowing sections omitted under the placeholder exception (`None.` / `N/A.`).
+2. Every numbered heading's parent-prefix consistency (catches renumbering leftovers).
+3. API function / type coverage: source `8.3.x` and `8.2.x` names vs article `7.3.x` / `7.2.x`; `**说明**` + ```C block per function.
+4. Formatting hygiene: no text `[SWS_*]` IDs, no `{DRAFT}`, no `# ` h1, no tables-as-images, no long untranslated English prose outside code fences / reference lists.
+5. Per-chapter content volume (article chars / source chars) to flag chapters that may have lost content.
+6. Figure integrity: every referenced PNG exists; source UML-text regions replaced by real figures.
+7. **Spot prose reads** — three source passages read against their translations: `mcu_driver` source `7.1.1 Background and Rationale` ↔ article `6.1.1 背景与原理` (direct, faithful translation); `gpt_driver` source ch.4 ↔ article ch.4 (three `No …` statements → `无假设。/无限制。/无限制。`); `core_test` source ch.9 ↔ article ch.8 (PDF-extracted UML labels replaced by 4 real figures `Figure9-1..4`).
+
+| Article | Chapters | API coverage | Heading mismatches | Spot prose | Result |
+| --- | --- | --- | --- | --- | --- |
+| `mcu_driver` | 1–9 continuous | 11/11 functions, 8/8 types | 0 | faithful | cleared |
+| `gpt_driver` | 1–9 continuous | 14/14 functions, 5/5 types | 1 → **fixed** | faithful | cleared after fix |
+| `core_test` | 1–9 continuous | 9/9 functions, 7/7 types | 0 | faithful | cleared |
+
+**Genuine defect (1):** `gpt_driver/index.md:712` — `##### 7.6.3.1. GPT 通知` under parent `#### 7.5.3. 可配置接口`. The source `8.6.3.1 GPT Notification` should have become `7.5.3.1` when source `8.5 Scheduled functions` (`None.`) was dropped and `8.6` renumbered to `7.5`; the stale number was never swept. Renumbered to `7.5.3.1`; no inbound anchors referenced either slug.
+
+**Verified NOT defects (the low-volume / apparent-gap results):**
+- Source ch.8.5 `None.` in `gpt_driver`, and `10.1 How to read this chapter`, are legitimately omitted under §1; the surviving sections renumber down — this explains every `9.2.x` → `9.1.x` and `8.6/8.7` → `7.5/7.6` shift.
+- `[SWS_*]` IDs are absent from all 3 articles, as STANDARD.md §4 requires; the 72 CP articles that still contain them are a separate site-wide legacy question, not a pilot defect.
+- English `[n] <Document Title>` lines in `## 3. 相关文档` are source-faithful reference titles (the AUTOSAR file name is the blockquote below each), not untranslated prose.
+- `CorTst_GetState` / `CorTst_GetSignature` use the source's own C-signature spelling; the `CorTstGetState` variant appears only in a TOC/service table.
+- Per-chapter ratios of 0.09–0.4 are explained by Chinese compactness, dropped requirement IDs, large English config tables and PDF-extracted UML text; no chapter lost content. All referenced PNGs exist.
+- `core_test` source ch.11 *Not applicable requirements* (droppable) and `10.3 Published Information` → `9.2 发布信息` are correctly handled.
+
+All 3 leading boxes ticked. **Scaling to the remaining 163 articles** needs the same checks scripted (steps 1–6 are mechanical; step 7 is a sampled human read) — not done in this pilot.
+
 ## Findings log
 
 | Article (path) | Goal | Finding | Resolution |
@@ -540,8 +574,9 @@ User approved the STANDARD.md §2 amendment and the full content-fixing scope (i
 | `foundation/release_documentation/index.md:9` | 2 | Landing link `dir/` without `index.md` (build INFO) | **Resolved 2026-11-06** — `/index.md` appended |
 | `foundation/security/index.md:11` | 2 | Landing link `dir/` without `index.md` (build INFO) | **Resolved 2026-11-06** — `/index.md` appended |
 | `cp/communication/v2x_datamgr/index.md:399,476` | 2 | Broken intra-page anchor `#774-v2xdm_callback_stack_msg_type` | **Resolved 2026-11-06** — re-pointed to `#774-v2xdm_callback_stackmsgtype` |
-| 13 CP articles (A1/A2 table) | 1 | Chapter-2 wording deviations + 3 other chapter deviations | Source check done — 11 are source-faithful (rule conflict), 2 genuine drift/skeleton conflict; decision pending |
-| `flexray_ar_transport_layer`, `memory_mapping` | 1 | Numbering gaps (ch.5 / ch.9 dropped without renumber) | Source check done — both are genuine renumbering failures; renumber + anchor sweep pending |
+| 13 CP articles (A1/A2 table) | 1 | Chapter-2 wording deviations + 3 other chapter deviations | **Resolved 2026-11-07** — 11 source-faithful titles sanctioned by the §2 amendment; 2 genuine items fixed (`can_driver` wording, `standard_types` §7 exemption) |
+| `flexray_ar_transport_layer`, `memory_mapping` | 1 | Numbering gaps (ch.5 / ch.9 dropped without renumber) | **Resolved 2026-11-07** — renumbered with `slugify_unicode` anchor rewrites; all anchors resolve |
 | 5 FlexRay articles (A4) | 1 | Chinese-first bilingual titles | **Resolved 2026-11-06** — renamed + full ripple sweep; `--titles` 0 violations |
-| `cp/libraries/mfl/index.md:2501` | 1 | `check_heading_lang.py` false positive on `Mfl` | No article change; widen script identifier exemption — deferred |
-| 43 external URLs (B2) | 2 | 403/418 anti-bot, 000 connection failures, 7×404, 5×500 | Manual browser verification; never auto-remove — pending |
+| `cp/libraries/mfl/index.md:2501` | 1 | `check_heading_lang.py` false positive on `Mfl` | **Resolved 2026-11-07** — script widened; `--site` 0 violations |
+| 43 external URLs (B2) | 2 | 403/418 anti-bot, 000 connection failures, 7×404, 5×500 | **Resolved 2026-11-07** — re-probed + browser-verified; 9 transient recovered; anti-bot confirmed reachable; 404/500 source-faithful; no links changed |
+| `cp/mcal/gpt_driver/index.md:712` | 1 | Orphan subsection number `##### 7.6.3.1. GPT 通知` under parent `#### 7.5.3` (source `8.6.3.1` after the `None.` ch.8.5 was dropped) | **Resolved 2026-11-07** — renumbered to `7.5.3.1`; no inbound anchors existed |
