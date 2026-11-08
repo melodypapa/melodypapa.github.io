@@ -15,18 +15,30 @@ Chapter span map (PDF pages): ch1 Introduction 24–27 (4) · ch2 The Cortex-R52
   - S6 result: three real gaps fixed — 2.8 `相关参考` still carried the R52 numbers/pages (ch9 9-247 / ch10 10-332 / ch11 11-336 / ch12 12-383), replaced with the R52+ chapters (ch10 p284, ch11 p383, ch12 p386, ch13 p436); the `Related information` of 3.2 (`Supported standards on page 40`, i.e. 2.4) was missing, added; the `1.4 支持的标准（第 1-24 页）` reference closing 2.13 does not exist in R52+ ch3 (ch1.4 is Useful resources) and was removed. Wording aligned to r0p3: 1.4 reads `PSTATE.T` (was `CPSR.T`). Table 3-1/3-2 row sets match the source. Stray blank lines after the front matter removed.
   - S8 result: PR #350.
   - [x] S1 [x] S6 [x] S7 [x] S8
-- [ ] ch5 clocking_and_resets — verify-only (article 114 ln, 3 `##` vs 4 pp)
+- [x] ch5 clocking_and_resets — verified (article 124 ln, 3 `##` vs 4 pp, 2026-11-09)
   - Note (S6): ch5.1 Clock and clock enables / 5.2 Reset signals / 5.3 Reset-related signals; check every signal row against the R52+ set (the R52+ adds `Clock and clock enable signals` to appendix A, which this chapter summarises).
-  - [ ] S1 [ ] S6 [ ] S7 (if changed) [ ] S8 (if changed)
-- [ ] ch7 initialization — verify-only (article created 2026-11-07 from R52 ch6, 128 ln, 3 `##` vs 5 pp)
+  - S1 result: structure matches ch5.1–5.3; Tables 5-1/5-2/5-3/5-4/5-5 all present as GFM with the full R52+ signal sets (CLKIN/CLKINDCLS, eight clock enables, eight reset signals, five reset-related signals).
+  - S6 result: four fixes — core name `Cortex-R52` → `Cortex®-R52+` throughout; the clock-gating pointer retargeted from R52 `5-194 5.3` to R52+ `第 223 页的 6.3 Architectural clock gating`; the unnumbered `Reset assertion sequence` / `Reset deassertion sequence` subsections of 5.2 were missing and are now `2.1`/`2.2` with full text; bullet 2.1(1) wording corrected to `冷复位（Cold reset）`.
+  - S8 result: PR #350.
+  - [x] S1 [x] S6 [x] S7 [x] S8
+- [x] ch7 initialization — verified (article 141 ln, 3 `##` vs 5 pp, 2026-11-09)
   - Note (S6): R52+ renumbers 6.3 Booting into EL1 as **7.3 Entering EL1** — confirm the heading/section wording and that 7.1/7.2 carry no R52+-only text.
-  - [ ] S1 [ ] S6 [ ] S7 (if changed) [ ] S8 (if changed)
-- [ ] ch8 memory_system — verify-only (article 1050 ln, 13 `##` vs 40 pp)
+  - S1 result: structure matches ch7.1–7.3; source has one table (Table 7-1 speculation types), now present.
+  - S6 result: five gaps fixed — 7.1.4 Speculation (with Table 7-1) was missing entirely; the `CFGINITREG` paragraph was out of source order, lacked the 4.2 Register summary page ref and the Integration Manual citation; FPU/MPU/TCM page refs retargeted from R52 `3-x` to R52+ 4.3.1 p82 / 4.3.76 p182 / 4.3.92 p203 / 4.3.53 p147; `CFGRAMPROTEN` corrected to `CFGTCMBOOTx` in both 7.2.2 and 7.2.3; heading `引导进入 EL1` → `进入 EL1` and the missing `编程 SPSR` bullet restored.
+  - S8 result: PR #350.
+  - [x] S1 [x] S6 [x] S7 [x] S8
+- [x] ch8 memory_system — verified (article 1076 ln, 13 `##` vs 40 pp, 2026-11-09)
   - Note (S6): 8.12 Peripherals memory map and 8.13 On-line MBIST were already restored into the article on 2026-11-07 from this PDF (see [R52-TRM](R52-TRM.md)); confirm all other sections and tables (AXIM/LLPP/Flash/AXIS) match the R52+ text.
-  - [ ] S1 [ ] S6 [ ] S7 (if changed) [ ] S8 (if changed)
-- [ ] ch9 memory_protection_unit — verify-only (article 606 ln, 5 `##` vs 8 pp)
+  - S1 result: 8.1–8.13 all present (`Error detection and handling` is the R52+ name of the old 7.9 `Fault detection and handling`, already reflected); eight figures and every table (8-1 … AXIS/LLPP limits) are GFM.
+  - S6 result: four fixes — 8.1 `Related information` block added (TCM p238, AXIM p250, LLPP p256, Flash p264); 8.9.3 `相关参考` replaced the invented "第 3 章" sentence with the four record-register page refs (155/105/207/114); 8.9.4 `Related information` added (AXIM p250, AXIM signals p586, AXIS p267, AXIS signals p592); the stale `第 12 章 12.6 Events` pointer retargeted to `第 455 页的 13.6 Events`. Table 8-1 keeps the article's 32KB index `[12:6]` — the PDF prints `[10:6]`, which cannot address 128 sets and is an obvious source typo; recorded here rather than propagated.
+  - S8 result: PR #350.
+  - [x] S1 [x] S6 [x] S7 [x] S8
+- [x] ch9 memory_protection_unit — verified (article 624 ln, 5 `##` vs 8 pp, 2026-11-09)
   - Note (S6): ch9.3 Virtualization support (EL2 MPU registers) must be present; legacy `Table9-*` images carry R52 numbers — verify row sets by caption, never rename.
-  - [ ] S1 [ ] S6 [ ] S7 (if changed) [ ] S8 (if changed)
+  - S1 result: 9.3 with 9.3.1 attribute combining present; Tables 9-1 … 9-7 GFM and row sets match (memory-type 12 rows, cacheability 5, shareability 7).
+  - S6 result: three fixes — 9.5 register summaries (Tables 9-8/9-9, 9 + 16 rows) were missing and are now at the head of §5 with the direct-access summary; five junk inline PNGs of register-bit names (`SCTLR.M`, `SCTLR.BR`, `HSCTLR.M`, `HSCTLR.BR`, `HCR.DC`) removed with their files (the chapter has no figures); the stale `第 3-148 页表 3-106/3-107` pointer retargeted to `第 174 页表 4-163/4-164`.
+  - S8 result: PR #350.
+  - [x] S1 [x] S6 [x] S7 [x] S8
 - [ ] ⏸ ch4 system_control — completion (article 233 ln, 1 `##` vs 165 pp: 4.1 About, 4.2 Register summary, 4.3 AArch32 register descriptions)
   - Note: >1500-line rule — segment by register group (cache/MPU/EL2/timer/debug) and agree the run plan before S2.
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S5 [ ] S6 [ ] S7 [ ] S8
