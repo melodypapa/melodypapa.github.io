@@ -253,11 +253,15 @@ nav:
       - "程序员模型": cortex/m7_processor/programmers_model/index.md
       - "Cortex-M7 指令集": cortex/m7_processor/instruction_set/index.md
       - "Thumb 指令集编码": cortex/m7_processor/thumb_instruction_set_encoding/index.md
+      - "浮点指令集编码": cortex/m7_processor/fp_instruction_set_encoding/index.md
       - "系统控制": cortex/m7_processor/system_control/index.md
       - "初始化": cortex/m7_processor/initialization/index.md
       - "内存系统": cortex/m7_processor/memory_system/index.md
+      - "系统内存模型": cortex/m7_processor/system_memory_model/index.md
       - "系统地址映射": cortex/m7_processor/system_address_map/index.md
       - "内存保护单元": cortex/m7_processor/mpu/index.md
+      - "CPUID 方案": cortex/m7_processor/cpuid_scheme/index.md
+      - "系统指令详情": cortex/m7_processor/system_instructions/index.md
       - "嵌套向量中断控制器": cortex/m7_processor/nested_vectored_interrupt_controller/index.md
       - "浮点单元": cortex/m7_processor/fpu/index.md
       - "调试": cortex/m7_processor/debug/index.md

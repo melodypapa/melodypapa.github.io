@@ -25,14 +25,14 @@
 - **Legacy revision shift**: the three r52p articles and some m7 articles were built against an older TRM revision — `system_control` evidence `Table4-48` and `programmers_model` evidence `Table3-1` predate r1p0, where System Control = ch3 and Programmers Model = ch2; legacy images (`Figure8_*` in memory_system, `Table9-*` in memory_protection_unit) carry old chapter numbers. Confirm chapters by heading/caption text, never by file name; never rename existing images.
 - **Armv7-M / Armv8-M**: body chapters start after the TOC block (Armv7-M from L739; Armv8-M Part A from L3834); sections are `# Bx.y`-style h1.
 
-## Coverage summary (24 core articles — m7 18, r52p 6; `concept/` articles cite external sources — outside the skill, not queued)
+## Coverage summary (28 core articles — m7 22, r52p 6; `concept/` articles cite external sources — outside the skill, not queued)
 
 | Group | Doc | Articles | Mapped chapters | New-article chapters | Defects found at census |
 | --- | --- | ---: | ---: | ---: | --- |
-| [M7-TRM](M7-TRM.md) | DDI0489F r1p2 | 18 (all registered) | 3 (ch2, ch7, ch13) | 12 — all translated | none open (nvic stub fixed; batch shipped 2026-11-06) |
+| [M7-TRM](M7-TRM.md) | DDI0489F r1p2 | 22 (all registered) | 3 (ch2, ch7, ch13) | 12 — all translated | none open (nvic stub fixed; batch shipped 2026-11-06) |
 | [R52-TRM](R52-TRM.md) | 100026 r1p0 | 4 | 5 (ch2/ch7/ch8 verify-only pending; ch6 done) | 11 + appendices | system_control article 236 ln vs ~11k-ln chapter |
 | [R52plus-TRM](R52plus-TRM.md) | 102199 r0p3 | 6 | 6 (ch3, ch5, ch7, ch8, ch9 verify-only; ch4 completion) | 10 + appendix D | 9 chapters untranslated (GIC, Debug, PMU, CTM, ETM, SIMD/FP, timer, power, intro); system_control 233 ln vs 165 pp |
-| [ARMv7-M](ARMv7-M.md) | DDI0403E E.e | 6 | 5 complete (B1.5, A3, A4, B3.1–B3.5) | A5 done; A6 + B2/B4/B5 queued | none open (corrupted heading fixed; A3/A4/A5 shipped, PRs #322/#324/#327) |
+| [ARMv7-M](ARMv7-M.md) | DDI0403E E.e | 10 | 5 complete (B1.5, A3, A4, B3.1–B3.5) | A5, A6, B2, B4, B5 done | none open (corrupted heading fixed; A3/A4/A5 shipped in PRs #322/#324/#327, A6/B2/B4/B5 in this batch) |
 | [SDEN](SDEN.md) | SDEN-1068427 v11.0 | 0 | — | 1 (errata notice) | PDF mis-download blocks figure cropping |
 | [ARMv8-M](ARMv8-M.md) | DDI0553B B.y | 0 | — | deferred | no article cites it yet |
 
@@ -41,7 +41,7 @@
 1. [M7-TRM](M7-TRM.md) — complete (all rows `[x]`, batch finished 2026-11-06)
 2. [R52plus-TRM](R52plus-TRM.md) — **authoritative for `r52p_processor/`** (the site tree is the R52+ core); verify-only rows first, then the ch4 System Control completion, then new chapters
 3. [R52-TRM](R52-TRM.md) — older 100026 revision; keep as the provenance ledger for pages built before 2026-11-07, do not queue new work from it
-4. [ARMv7-M](ARMv7-M.md) — alignments done (A3/A4/A5); next run = A6, then B2/B4/B5; instruction-details tail deferred
+4. [ARMv7-M](ARMv7-M.md) — batch complete (A3–A6, B2, B4, B5); instruction-details tail (A7) deferred
 5. [SDEN](SDEN.md) — text-only run (figures blocked)
 6. [ARMv8-M](ARMv8-M.md) — deferred until an M-profile architecture series opens
 
