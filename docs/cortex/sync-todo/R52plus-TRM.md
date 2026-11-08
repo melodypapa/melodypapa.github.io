@@ -100,8 +100,14 @@ Chapter span map (PDF pages): ch1 Introduction 24–27 (4) · ch2 The Cortex-R52
   - S5/S6 result: strict build 0 WARNING; index and heading-language checks OK; 14 embedded figures all present.
   - S8 result: PR #352.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [ ] ⏸ ch12 → new article (Debug — 50 pp: system and memory-mapped register descriptions, external debug interface, ROM table)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] ch12 → new article (Debug) — `debug/index.md`, 2026-11-09
+  - S1 result: ch12.1 About Debug (1.1 external debug with 1.1.1–1.1.4, 1.2 self-hosted, 1.3 debug model with 1.3.1–1.3.2) / 12.2 register interfaces (2.1–2.4) / 12.3 system register summary / 12.4 DBGDIDR + DBGDEVID + DBGDEVID1 / 12.5 memory-mapped summary / 12.6 EDCCR, EDRCR, EDDEVID, EDDEVID1, EDPIDR0-4, EDCIDR0-3, EDAA32PFR, EDPFR, EDDFR / 12.7 external debug interface (7.1–7.4) / 12.8 ROM table (8.1–8.4). 31 figures (12-1 external debug system, 12-2…12-20 bit bars, 12-21 APBv3 interface, 12-22 ROMENTRY, 12-23…12-31 PIDR/CIDR), 65 tables.
+  - S2/S3 result: full translation; all 31 figures cropped from the same PDF (12-1, 12-18/19/20 needed explicit wide clips because their labels exceed the 150pt label-absorption threshold and the 64-bit bars split into two clusters); every table GFM with the summary tables' merged CRn/op1/CRm/op2 cells expanded per row.
+  - S4 result: nav entry between 通用定时器 and 性能监控单元, landing entry 11 (subsequent entries renumbered).
+  - S5/S6 result: strict build 0 WARNING; index and heading-language checks OK; 31 embedded figures all present.
+  - Source defects (correct values written, not propagated): Table 12-1 repeats 0x830/0x828 for DBGWVR4-7/DBGWCR4-7 and 0x450/0x458 for DBGBVR6-7/DBGBCR6-7 — Table 12-5 gives the correct 0x840/0x848/0x850/0x858/0x860/0x868/0x870/0x878 and 0x460/0x468/0x470/0x478; Table 12-5 names the extended-value registers at 0x464/0x474 `DBGBVR6/7` though the description and Table 12-1 say `DBGBXVR6/7`; Table 12-1 prints JMCR in the DBGDSAR `c2,0,c0,0` group (architecturally c14,7,c0,0) and omits the op2 column for the DBGDEVID/DBGCLAIMx group; Table 12-40 describes EDDFR[15:12] BRPs as "eight watchpoints" (should be breakpoints).
+  - S8 result: PR #352.
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] ⏸ ch10 → new article (Generic Interrupt Controller — 99 pp: GIC functional description, programmers model, distributor/redistributor registers; consider splitting GICD/GICR at the plan gate)
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] ⏸ ch15 → new article (Embedded Trace Macrocell — 84 pp: ETM resources, event connectivity, operation, register descriptions)

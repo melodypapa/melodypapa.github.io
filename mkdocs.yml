@@ -316,6 +316,7 @@ nav:
       - "内存系统": cortex/r52plus-trm/memory_system/index.md
       - "内存保护单元": cortex/r52plus-trm/memory_protection_unit/index.md
       - "通用定时器": cortex/r52plus-trm/generic_timer/index.md
+      - "调试": cortex/r52plus-trm/debug/index.md
       - "性能监控单元": cortex/r52plus-trm/performance_monitor_unit/index.md
       - "交叉触发": cortex/r52plus-trm/cross_trigger/index.md
       - "Advanced SIMD 与浮点支持": cortex/r52plus-trm/asimd_floating_point/index.md
