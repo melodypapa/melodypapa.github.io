@@ -92,8 +92,14 @@ Chapter span map (PDF pages): ch1 Introduction 24–27 (4) · ch2 The Cortex-R52
   - S5/S6 result: strict build 0 WARNING; index and heading-language checks OK; 36 embedded figures all present.
   - S8 result: PR #352.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [ ] ⏸ ch13 → new article (Performance Monitor Unit — 27 pp incl. 13.6 Events, 13.8 Exporting PMU events)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] ch13 → new article (Performance Monitor Unit) — `performance_monitor_unit/index.md`, 2026-11-09
+  - Note: 13.6 Events and 13.8 Exporting PMU events must be present; Table 13-29 is the large event table with footnotes 78-82.
+  - S1 result: 13.1 About the PMU (1.1-1.5) / 13.2 PMU register summary (Table 13-1, 24 rows) / 13.3 PMCR, PMCEID0, PMCEID1 / 13.4 memory-mapped register summary (Table 13-5, 42 rows) / 13.5 PMCFGR, PMPIDR0-7, PMCIDR0-3 / 13.6 Events (Tables 13-28/13-29, 116 event rows incl. the 26 ERREVENTx-only rows) / 13.7 Interrupts / 13.8 Exporting PMU events (8.1 external hardware, 8.2 debug trace hardware). Fourteen figures (13-1 … 13-14).
+  - S2/S3 result: full translation; all 14 figures cropped (13-1 block diagram, 13-2 … 13-14 bit bars); every table GFM with merged CRn/Op1/CRm cells repeated per row in Table 13-1 and the PMIDR/CIDR summaries. Footnotes 78-82 kept as 注 lines after the event table.
+  - S4 result: nav entry between 通用定时器 and 交叉触发, landing entry 11.
+  - S5/S6 result: strict build 0 WARNING; index and heading-language checks OK; 14 embedded figures all present.
+  - S8 result: PR #352.
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] ⏸ ch12 → new article (Debug — 50 pp: system and memory-mapped register descriptions, external debug interface, ROM table)
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] ⏸ ch10 → new article (Generic Interrupt Controller — 99 pp: GIC functional description, programmers model, distributor/redistributor registers; consider splitting GICD/GICR at the plan gate)
