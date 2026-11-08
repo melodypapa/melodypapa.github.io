@@ -10,39 +10,54 @@ Chapter span map (parse lines, incl. running headers): ch1 Introduction L482–1
 
 - [x] instruction_set — repair the corrupted heading (article `m7_processor/instruction_set/index.md`, 139 ln)
   - Note: live defect — `## ARM=-0987654321   yhn 4esx1` under §1 指令集总结; replace with a proper heading (or drop if it duplicates §1). Content alignment to the Armv7-M instruction chapters is tracked in [ARMv7-M](ARMv7-M.md); this row is the 1-line hygiene fix only, can ride any other M7 row's PR.
-  - [x] S1 (heading target) [x] S2 [x] S5 [x] S8
+  - S8 result: shipped as `d160f99`.
+  - [x] S1 (heading target) [x] S2 [x] S3 (N/A: no figures) [x] S4 (N/A: page already registered) [x] S5 [x] S6 (N/A: one-line hygiene fix) [x] S7 [x] S8
 - [x] nvic — completion (M7 TRM ch7 NVIC, 242 ln; article = 26-ln stub `m7_processor/nested_vectored_interrupt_controller/`)
   - Note (S1): source ch7 L4404–4645; architectural cross-check Armv7-M B3.4 NVIC (`private-docs/ARM/M7/DDI0403E_e_armv7m_arm.md`, B3 = L34504–38282). TRM = implementation (priorities, interrupt interfaces), ARM = architectural rules; state the choice in the PR.
   - Note: `docs/cortex/index.md` M7 list misses the NVIC link — add in this run (skill Step 7). mkdocs nav already registers the page.
+  - S8 result: shipped as `aca78d7`.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] program_status_register — completion/alignment (M7 TRM ch2.6 Processor core registers + ch2.7 Exceptions; article 86 ln `m7_processor/program_status_register/`)
   - Note: merged with `exception_model` into one-per-chapter article `m7_processor/programmers_model/` on 2026-11-06.
   - Note (S1): TRM ch2 L1105–1343; cross-check Armv7-M B1.4 Registers (mapping.md's "B1.2" evidence predates the current mirror). 6 legacy images — verify against the r1p2 PDF before re-cropping; keep file names.
-  - [x] S1 [x] S2 [x] S3 [x] S5 [x] S6 [x] S7 [x] S8
+  - S8 result: shipped as `853df31`.
+  - [x] S1 [x] S2 [x] S3 [x] S4 (N/A: merged into the existing programmers_model page) [x] S5 [x] S6 [x] S7 [x] S8
 - [x] ch3 → new article `m7_processor/system_control/` (System Control, 665 ln — register summary + register descriptions; naming collides with `r52p_processor/system_control/` only in text, different tree, OK)
+  - S8 result: shipped as `be6a7c5`.
   - [x] S1 [x] S2 [x] S3 [x] S4 (new nav entry) [x] S5 [x] S6 [x] S7 [x] S8
 - [x] ch4 → new article (Initialization, 263 ln; directory name proposed at S1, e.g. `initialization/`)
+  - S8 result: shipped as `b25aefb`.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] ch6 → new article (Memory Protection Unit, 206 ln; e.g. `mpu/` — distinct from the Armv7-M PMSAv7 article)
   - Note: the Armv7-M PMSAv7 article was merged into `m7_processor/mpu/` (sections 4–14) on 2026-11-06.
+  - S8 result: shipped as `6d8fbec`.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] ch8 → new article (Floating Point Unit, 252 ln; e.g. `fpu/`)
+  - S8 result: shipped as `319551a`.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] ch5 → new article (Memory System, 1,926 ln, sections 5.1–5.9 incl. AXIM/AHBP/AHBS interfaces; `memory_system/`)
+  - S8 result: shipped as `898f8b0`.
   - [x] plan gate (whole-chapter translation approved) [x] S1 [x] S2 [x] S3 (no figures, 38 tables as GFM) [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] ch9 → new article (Debug, 689 ln; e.g. `debug/`)
+  - S8 result: shipped as `bb45fd6`.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] ch10 → new article (Cross Trigger Interface, 482 ln; e.g. `cti/`)
+  - S8 result: shipped as `6fec217`.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] ch11 → new article (Data Watchpoint and Trace Unit, 382 ln; e.g. `dwt/`)
+  - S8 result: shipped as `d44f6bd`.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] ch12 → new article (Instrumentation Trace Macrocell Unit, 288 ln; e.g. `itm/`)
+  - S8 result: shipped as `4e4131f`.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] ch14 → new article (Fault detection and handling, 900 ln; `fault_detection/`)
+  - S8 result: shipped as `91d6243`.
   - [x] S1 [x] S2 [x] S3 (no figures, tables 14-1/14-2 as GFM) [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] ch13 → new article (Trace Port Interface Unit, 1,140 ln; `tpiu/`)
+  - S8 result: shipped as `1a13e66`.
   - [x] S1 [x] S2 [x] S3 (Figure13-1…13-12, 12 tables as GFM) [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] ch1 → new article (Introduction — about the processor, component blocks, configuration options, 623 ln; lowest value, last in this group; propose `introduction/` or fold its §1.2 Component blocks into an existing article at the gate)
+  - S8 result: shipped as `4c13559`.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 
 ## Not queued (deliberately)

@@ -178,7 +178,7 @@ Status: **19/20** completed
 | `tps_feature_model_exchange_format`                    | [x] Done | 2c5f4f13fd |
 | `tr_timing_analysis`                                   | [x] Done | 66da8d4b1e |
 | `tps_standardization_template`                         | [x] Done | ceefe4f4c5 |
-| `tps_generic_structure_template`                       | [ ] Pending | N/A |
+| `tps_generic_structure_template`                       | [ ] Aligned 📖 | 59a89a8fa4 |
 
 ## Group foundation rs-prs — Foundation R23-11 requirement/protocol specifications (32)
 
@@ -302,11 +302,11 @@ Status: **12/12** completed
 
 ## Group mode_management — mode management section
 
-Status: **1/2** completed
+Status: **2/2** completed
 
 | Article                       | Status | Commit ID |
 | ------------------------------ | -------- | ---------- |
-| `basic_software_mode_manager`   | [ ] Aligned ✅ | e7b893ebd0 |
+| `basic_software_mode_manager`   | [x] Done | e7b893ebd0 |
 | `ecu_state_manager`             | [x] Done | 37ee564d4a |
 
 ## Group rte-swarch — RTE / SWArch section (new section)
@@ -351,5 +351,5 @@ Status: **7/7** completed
 | `hwtestmanager`                 | [x] Done | 04ea38b015 |
 | `operating_system`              | [x] Done | ca7ecda991 |
 
-**Total: 163/214 queue rows complete.**
+**Total: 164/214 queue rows complete.**
 

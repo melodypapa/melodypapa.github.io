@@ -29,10 +29,10 @@
 
 | Group | Doc | Articles | Mapped chapters | New-article chapters | Defects found at census |
 | --- | --- | ---: | ---: | ---: | --- |
-| [M7-TRM](M7-TRM.md) | DDI0489F r1p2 | 3 (1 stub) | 2 (ch2 partial, ch7 stub) | 12 | nvic = 26-ln stub + missing from landing page; ch6+ chapters all untranslated |
-| [R52-TRM](R52-TRM.md) | 100026 r1p0 | 4 | 4 (ch3 covers ~2%) | 10 + appendices | system_control article 236 ln vs ~11k-ln chapter |
+| [M7-TRM](M7-TRM.md) | DDI0489F r1p2 | 18 (all registered) | 3 (ch2, ch7, ch13) | 12 — all translated | none open (nvic stub fixed; batch shipped 2026-11-06) |
+| [R52-TRM](R52-TRM.md) | 100026 r1p0 | 4 | 5 (ch2/ch7/ch8 verify-only pending; ch6 done) | 11 + appendices | system_control article 236 ln vs ~11k-ln chapter |
 | [R52plus-TRM](R52plus-TRM.md) | 102199 r0p3 | 6 | 6 (ch3, ch5, ch7, ch8, ch9 verify-only; ch4 completion) | 10 + appendix D | 9 chapters untranslated (GIC, Debug, PMU, CTM, ETM, SIMD/FP, timer, power, intro); system_control 233 ln vs 165 pp |
-| [ARMv7-M](ARMv7-M.md) | DDI0403E E.e | 4 | 4 partial | 3 + deferred tail | instruction_set carries a corrupted heading `## ARM=-0987654321   yhn 4esx1` |
+| [ARMv7-M](ARMv7-M.md) | DDI0403E E.e | 6 | 5 complete (B1.5, A3, A4, B3.1–B3.5) | A5 done; A6 + B2/B4/B5 queued | none open (corrupted heading fixed; A3/A4/A5 shipped, PRs #322/#324/#327) |
 | [SDEN](SDEN.md) | SDEN-1068427 v11.0 | 0 | — | 1 (errata notice) | PDF mis-download blocks figure cropping |
 | [ARMv8-M](ARMv8-M.md) | DDI0553B B.y | 0 | — | deferred | no article cites it yet |
 
@@ -41,7 +41,7 @@
 1. [M7-TRM](M7-TRM.md) — complete (all rows `[x]`, batch finished 2026-11-06)
 2. [R52plus-TRM](R52plus-TRM.md) — **authoritative for `r52p_processor/`** (the site tree is the R52+ core); verify-only rows first, then the ch4 System Control completion, then new chapters
 3. [R52-TRM](R52-TRM.md) — older 100026 revision; keep as the provenance ledger for pages built before 2026-11-07, do not queue new work from it
-4. [ARMv7-M](ARMv7-M.md) — alignments/completions, then new chapters; instruction-details tail deferred
+4. [ARMv7-M](ARMv7-M.md) — alignments done (A3/A4/A5); next run = A6, then B2/B4/B5; instruction-details tail deferred
 5. [SDEN](SDEN.md) — text-only run (figures blocked)
 6. [ARMv8-M](ARMv8-M.md) — deferred until an M-profile architecture series opens
 
@@ -50,4 +50,6 @@
 - Steps per row: **S1** source resolution + gap analysis · **S2** in-place translation (main session, never a subagent) · **S3** figures cropped from the PDF into the article dir · **S4** mkdocs nav + `docs/cortex/index.md` landing update · **S5** Phase A mechanical gate · **S6** Phase B fidelity · **S7** user confirmation gate · **S8** commit/PR.
 - Chapters whose parse span exceeds ~1500 lines are marked ⏸ in the row — present the per-run plan and get user confirmation before translating (skill Step 3).
 - Verify (S6-only) rows: no rewrite unless the source comparison finds real gaps; record the evidence, then `[x]`.
+- Row status: a row flips to `[x]` **only when every step is checked**; an inapplicable step is ticked with its reason (`S4 (N/A: page already registered)`), never deleted — on closure the step line carries all of S1–S8, so a verify-only row that planned only S1/S6/S7/S8 gains the N/A ticks when it closes.
+- Provenance: S8 ticks only once the commit exists, and every completed row carries `- S8 result: merged as `<sha>` (PR #N).` or `- S8 result: shipped as `<sha>`.` when the batch went straight to `master`; findings, counts and decisions go on `- Note:` / `- Sx result:` bullets, never on the row's checkbox line.
 - Table format policy: GFM is the default; a raw HTML `<table>` is a narrow exception for structurally complex tables — see `.agents/skills/arm-translate/references/article-format.md` §Tables for the exhaustive criteria.
