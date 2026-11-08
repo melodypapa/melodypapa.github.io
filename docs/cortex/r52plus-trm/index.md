@@ -20,5 +20,6 @@ title: "Cortex-R52+ TRM（102199 r0p3）"
 12. [调试（Debug）](debug/index.md)
 13. [性能监控单元（Performance Monitor Unit）](performance_monitor_unit/index.md)
 14. [交叉触发（Cross Trigger）](cross_trigger/index.md)
-15. [Advanced SIMD 与浮点支持（Advanced SIMD and floating-point support）](asimd_floating_point/index.md)
-16. [PMC-R52+（可编程 MBIST 控制器）](pmc_r52plus/index.md)
+15. [嵌入式跟踪宏单元（Embedded Trace Macrocell）](embedded_trace_macrocell/index.md)
+16. [Advanced SIMD 与浮点支持（Advanced SIMD and floating-point support）](asimd_floating_point/index.md)
+17. [PMC-R52+（可编程 MBIST 控制器）](pmc_r52plus/index.md)

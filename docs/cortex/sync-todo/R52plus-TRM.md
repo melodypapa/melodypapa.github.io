@@ -116,8 +116,14 @@ Chapter span map (PDF pages): ch1 Introduction 24–27 (4) · ch2 The Cortex-R52
   - Source defects (written as in the source, since they are self-consistent page-range/label quirks): Table 10-1 labels the last row `SGIs target 4` while every other row says `SGIs and PPIs target n`; the ICH summary table omits the CRn/Op1/CRm columns for most rows (reconstructed from the MCR encodings in each register section); `ICH_HCR.TSEI` and several vGIC bits are RES0 yet still described; the `ICH_AP0R1`/`ICC_AP0R1` warnings name a register that Cortex®-R52+ does not implement; `GICR_ICFGR1` is described as read-only in the usage constraints while the summary gives it type RW.
   - S8 result: PR #352.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [ ] ⏸ ch15 → new article (Embedded Trace Macrocell — 84 pp: ETM resources, event connectivity, operation, register descriptions)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] ch15 → new article (Embedded Trace Macrocell) — `embedded_trace_macrocell/index.md`, 2026-11-09
+  - S1 result: ch15.1 About the ETM (1.1 processor interface, 1.2 instruction trace generator, 1.3 data trace generator, 1.4 FIFO, 1.5 resources and filtering logic, 1.6 ATB interfaces, 1.7 APB interface, 1.8 global timestamping) / 15.2 ETM trace unit generation options and resources (Tables 15-1, 15-2) / 15.3 ETM event connectivity (Tables 15-3, 15-4) / 15.4 operation (4.1–4.12) / 15.5 modes of operation and execution (5.1–5.3) / 15.6 register summary (Table 15-6, 59 register rows) / 15.7 register descriptions (7.1 TRCPRGCTLR … 7.59 TRCCIDR0-3). 66 figures (15-1 block diagram, 15-3 programming flow, 15-4…15-66 bit bars), 127 tables.
+  - S2/S3 result: full translation; all 66 figures cropped from the same PDF; every table GFM, including the 34-row ETM register summary, the truncated PIDR/CIDR bit tables expanded to one row per field, and the ICC/ICH-style multi-register tables flattened.
+  - S4 result: nav entry between 交叉触发 and Advanced SIMD 与浮点支持, landing entry 15 (subsequent entries renumbered 15→17).
+  - S5/S6 result: strict build 0 WARNING; index and heading-language checks OK; 66 embedded figures all present.
+  - Source defects (written as in the source, since they are self-consistent labelling quirks): Table 15-6 gives TRCIDR0 a reset value of 0x08000EFF while 15.7.27 gives 0x0C000EFF (the register section value is used); TRCIDR3 describes a 5-bit `NUMPROC` value for the 2-bit `[13:12]` field while `[30:28]` carries the same field name; TRCOSLSR places `OSLM[1]` on bits `[3,0]` and `OSLM[0]` on bit `[0]`; 15.7.50 TRCDEVAFF0 has no usage constraints, bit assignment or access table (offset and reset appear only in Table 15-6); 15.7.41 repeats the TRCACATR1 figure caption twice.
+  - S8 result: PR #352.
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 
 ## Not queued (deliberately)
 

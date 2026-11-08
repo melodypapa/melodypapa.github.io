@@ -320,6 +320,7 @@ nav:
       - "调试": cortex/r52plus-trm/debug/index.md
       - "性能监控单元": cortex/r52plus-trm/performance_monitor_unit/index.md
       - "交叉触发": cortex/r52plus-trm/cross_trigger/index.md
+      - "嵌入式跟踪宏单元": cortex/r52plus-trm/embedded_trace_macrocell/index.md
       - "Advanced SIMD 与浮点支持": cortex/r52plus-trm/asimd_floating_point/index.md
       - "PMC-R52+": cortex/r52plus-trm/pmc_r52plus/index.md
   - AUTOSAR:
