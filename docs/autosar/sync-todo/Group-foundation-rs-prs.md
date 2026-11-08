@@ -374,10 +374,15 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Log and Trace Protocol Specification（日志与跟踪协议规范）; target `foundation/protocols/prs_log_and_trace_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_LogAndTraceProtocol.md` — 3,373 lines, 111 figure refs, 450 item IDs; **giant source** — segment plan before Step 2 (OS/RTE precedent)
   - Note: related site content: cp/communication/diagnostic_log_and_trace (Dlt) (cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-08 run — 12 of 111 figure refs are content figures (Figure 1.1, 2.1–2.4, 5.1, 5.2, 5.4–5.8) embedded by source figure number, padded 15–18px per the margin rule; ~99 chrome strips/glyphs dropped; diagram/byte-layout label spill dropped as conversion noise; ~50 protocol items as prose/bold-titled paragraphs with IDs dropped, PRS_Dlt_* cross-refs kept unbracketed; no chapter renumbering (§3.2 Requirements Traceability is a subsection — omitted per ASWS precedent; §5.5.1 States "N/A - does not specify any states" translated as prose, run decision); 19 service-command field tables + header/extension/payload/type byte tables as GFM
+  - Note: anomalies for the gate (USER: verify) — (a) source Figure 5.3 (Extension Header) garbled in conversion → rebuilt as a GFM table from corpus PDF p.30 transcription; (b) Table 5.18 (28-column Type-Info matrix) column alignment lost → transcribed from PDF p.57 with TYLE/TYFM/TYPR sub-columns collapsed; PDF shows TYFM x(2) for STRU while Table 5.19 leaves it empty — source-internal inconsistency kept as-is; (c) source quirks kept verbatim: SetLogLevelLong Service ID 0x000000025 (PDF p.61 confirms), SetTraceStatusLong 0x0000026 (p.63), BufferOverflowNotification "unit32", GetLogChannelNames "4*uin8[]", §5.6.1.3 "GetIseECUID", trace-Long commands' Description cells reused from the log-level commands, FLOA item's "Table 5-4" self-reference (actual: Table 5.11); (d) STRG payload table has no caption number in the conversion → rendered captionless; (e) reference [2] rejoined from a broken conversion line
+  - Note: Phase A (2026-11-08) — `mkdocs build --strict` exit 0, 0 WARNINGs; `check_heading_lang.py` OK; `check_indexes.py` OK (324 nav targets, 0 broken); `gen_api_list.py --check` up to date; hygiene 0 × `^# `/requirement ID/`{DRAFT}`/`\<`; ch.4 slice 0 tables (22 acronyms + 17 terms as blockquotes, source order); link census: 0 identifier mentions, 6 chapter-ref links applied (L1426 第 5.1 节 was UNRESOLVED — caught a missing `### 5.1. 消息格式` heading, restored before apply), comma-form citations [1,…]/[4,…] left prose per rs_ieee1722 precedent AND 2 uint8[4] array-type false positives reverted (--apply had converted all 12 — run decision), 11 参见-type report-only, 0 cross-article census hits; URL audit: iso.org 403 anti-bot, kept (authoritative from source)
+  - Note: glossary — 15 existing Dlt-family entries gained this document as additional source + 2 new (Verbose Mode, Non-Verbose Mode); "Log level" (source ch.4) NOT appended to the existing 「Log and trace level」 entry — naming variant, run decision for user verification; "string" definition kept in-article
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-05)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
 - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 - [ ] prs_e2e_protocol (AUTOSAR_FO_PRS_E2EProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)

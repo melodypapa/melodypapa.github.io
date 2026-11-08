@@ -399,7 +399,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Application ID**
 > 一个应用/**SW-C** 的缩写，标识一条日志和跟踪消息所来自的应用/**SW-C**；由四个 8 位 ASCII 字符组成。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）、[Log and Trace Protocol Specification（日志与跟踪协议规范）](foundation/protocols/prs_log_and_trace_protocol/index.md)（PRS_LogAndTraceProtocol）
 {: .glossary-source}
 
 **Application Interface**
@@ -1779,7 +1779,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Context ID**
 > 一个用户定义的标识符，用于对一个应用/**SW-C** 生成的日志和跟踪消息进行分组；Context ID 按 Application ID 分组，且在一个 Application ID 内唯一。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）、[Log and Trace Protocol Specification（日志与跟踪协议规范）](foundation/protocols/prs_log_and_trace_protocol/index.md)（PRS_LogAndTraceProtocol）
 {: .glossary-source}
 
 **Continuous Transmission**
@@ -2369,13 +2369,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Dlt**
 > Diagnostic Log and Trace —— 诊断日志与跟踪。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Log and Trace Protocol Specification（日志与跟踪协议规范）](foundation/protocols/prs_log_and_trace_protocol/index.md)（PRS_LogAndTraceProtocol）
 {: .glossary-source}
 
 **Dlt User**
 > 一个 **Dlt** 用户代表一个生成的 **Dlt** 消息的来源。可能的用户是 **SW-C**、RTE（用于 **VFB** 跟踪）、**DEM** 或 **DET**。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Log and Trace Protocol Specification（日志与跟踪协议规范）](foundation/protocols/prs_log_and_trace_protocol/index.md)（PRS_LogAndTraceProtocol）
 {: .glossary-source}
 
 **DM**
@@ -2674,7 +2674,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **ECU ID**
 > 一个 ECU 的名称，由四个 8 位 ASCII 字符组成（例如 ABS0 或 COMB）。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）、[Log and Trace Protocol Specification（日志与跟踪协议规范）](foundation/protocols/prs_log_and_trace_protocol/index.md)（PRS_LogAndTraceProtocol）
 {: .glossary-source}
 
 **ECU Instance**
@@ -3081,7 +3081,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **External client**
 > 一种控制、监视和存储使用 **Dlt** 模块的 ECU 所提供的日志/跟踪消息的工具。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）、[Log and Trace Protocol Specification（日志与跟踪协议规范）](foundation/protocols/prs_log_and_trace_protocol/index.md)（PRS_LogAndTraceProtocol）
 {: .glossary-source}
 
 **External device**
@@ -5006,7 +5006,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Log and Trace**
 > 日志与跟踪（**Log and Trace**）为应用提供接口，用于将日志和跟踪信息转发到通信总线、控制台或文件系统。
 >
-> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）、[Log and Trace Protocol Specification（日志与跟踪协议规范）](foundation/protocols/prs_log_and_trace_protocol/index.md)（PRS_LogAndTraceProtocol）
 {: .glossary-source}
 
 **Log and trace level**
@@ -5018,19 +5018,19 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Log and trace message**
 > 包含描述软件中一个日志和跟踪事件的所有数据和选项的消息；由头部和载荷组成。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）、[Log and Trace Protocol Specification（日志与跟踪协议规范）](foundation/protocols/prs_log_and_trace_protocol/index.md)（PRS_LogAndTraceProtocol）
 {: .glossary-source}
 
 **Log Channel**
 > 用于传输 **Dlt** 消息的物理通信总线。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Log and Trace Protocol Specification（日志与跟踪协议规范）](foundation/protocols/prs_log_and_trace_protocol/index.md)（PRS_LogAndTraceProtocol）
 {: .glossary-source}
 
 **Log Message**
 > 包含诸如状态变化或值变化之类调试信息的消息。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Log and Trace Protocol Specification（日志与跟踪协议规范）](foundation/protocols/prs_log_and_trace_protocol/index.md)（PRS_LogAndTraceProtocol）
 {: .glossary-source}
 
 **Logging**
@@ -5299,7 +5299,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Message ID**
 > 用于表征消息自身所传输信息的 ID；唯一地标识一种日志或跟踪消息，并在开发或配置时静态固定。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）、[Log and Trace Protocol Specification（日志与跟踪协议规范）](foundation/protocols/prs_log_and_trace_protocol/index.md)（PRS_LogAndTraceProtocol）
 {: .glossary-source}
 
 **Meta-class**
@@ -5935,6 +5935,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 >
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
+
+**Non-Verbose Mode**
+> 为了减少通信信道上的网络负载，日志和跟踪数据消息尽可能少地包含元数据。元数据之一是消息 ID，它唯一地标识该消息及其全部内容；所有元数据通过一个单独的提取文件交给接收方，结合消息 ID，接收方可以重组出完整内容。
+>
+> 来源：[Log and Trace Protocol Specification（日志与跟踪协议规范）](foundation/protocols/prs_log_and_trace_protocol/index.md)（PRS_LogAndTraceProtocol）
+{: .glossary-source}
+
 
 **nop**
 > 无操作（**No Operation**）。
@@ -7946,13 +7953,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Session**
 > 日志或跟踪消息来源的一个逻辑实体；如果一个应用/**SW-C** 打开了多个到 **Dlt** 的端口，则它可以拥有多个并发的日志或跟踪会话。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Log and Trace Protocol Specification（日志与跟踪协议规范）](foundation/protocols/prs_log_and_trace_protocol/index.md)（PRS_LogAndTraceProtocol）
 {: .glossary-source}
 
 **Session ID**
 > 一个日志或跟踪会话的标识编号。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Requirements on Log and Trace（日志与跟踪需求）](foundation/communication_management/rs_log_and_trace/index.md)（AUTOSAR_FO_RS_LogAndTrace）、[Log and Trace Protocol Specification（日志与跟踪协议规范）](foundation/protocols/prs_log_and_trace_protocol/index.md)（PRS_LogAndTraceProtocol）
 {: .glossary-source}
 
 **Setter**
@@ -9063,13 +9070,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Trace Message**
 > 包含已经过 **VFB** 的信息的消息。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Log and Trace Protocol Specification（日志与跟踪协议规范）](foundation/protocols/prs_log_and_trace_protocol/index.md)（PRS_LogAndTraceProtocol）
 {: .glossary-source}
 
 **Trace status**
 > 提供是否应发送跟踪消息的信息。
 >
-> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
+> 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）、[Log and Trace Protocol Specification（日志与跟踪协议规范）](foundation/protocols/prs_log_and_trace_protocol/index.md)（PRS_LogAndTraceProtocol）
 {: .glossary-source}
 
 **Tracing**
@@ -9554,6 +9561,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 >
 > 来源：[AUTOSAR Dlt（诊断日志与跟踪）](cp/communication/diagnostic_log_and_trace/index.md)（SWS_DiagnosticLogAndTrace）
 {: .glossary-source}
+
+**Verbose Mode**
+> 当 **Dlt** 模块将日志和跟踪信息发送到通信信道上时，所发送的数据消息还包含预定义的静态数据元素，如名称、单位、格式信息、长度等。
+>
+> 来源：[Log and Trace Protocol Specification（日志与跟踪协议规范）](foundation/protocols/prs_log_and_trace_protocol/index.md)（PRS_LogAndTraceProtocol）
+{: .glossary-source}
+
 
 **Verification**
 > 通过检查和提供客观证据，确认规定的要求已得到满足。
