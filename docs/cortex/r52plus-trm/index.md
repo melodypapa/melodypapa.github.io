@@ -6,9 +6,12 @@ title: "Cortex-R52+ TRM（102199 r0p3）"
 
 ## 1. 章节
 
-1. [Cortex®-R52+ 程序员模型（Programmers Model）](programmers_model/index.md)
-2. [系统控制（System Control）](system_control/index.md)
-3. [时钟与复位（Clocking and Resets）](clocking_and_resets/index.md)
-4. [初始化（Initialization）](initialization/index.md)
-5. [内存系统（Memory System）](memory_system/index.md)
-6. [内存保护单元（Memory Protection Unit）](memory_protection_unit/index.md)
+1. [简介（Introduction）](introduction/index.md)
+2. [Cortex®-R52+ 程序员模型（Programmers Model）](programmers_model/index.md)
+3. [系统控制（System Control）](system_control/index.md)
+4. [时钟与复位（Clocking and Resets）](clocking_and_resets/index.md)
+5. [电源管理（Power Management）](power_management/index.md)
+6. [初始化（Initialization）](initialization/index.md)
+7. [内存系统（Memory System）](memory_system/index.md)
+8. [内存保护单元（Memory Protection Unit）](memory_protection_unit/index.md)
+9. [通用定时器（Generic Timer）](generic_timer/index.md)

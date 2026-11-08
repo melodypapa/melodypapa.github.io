@@ -42,12 +42,27 @@ Chapter span map (PDF pages): ch1 Introduction 24–27 (4) · ch2 The Cortex-R52
 - [ ] ⏸ ch4 system_control — completion (article 233 ln, 1 `##` vs 165 pp: 4.1 About, 4.2 Register summary, 4.3 AArch32 register descriptions)
   - Note: >1500-line rule — segment by register group (cache/MPU/EL2/timer/debug) and agree the run plan before S2.
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] ch11 → new article (Generic Timer, 3 pp; e.g. `generic_timer/`)
-  - [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] ch1 → new article (Introduction — product revision, audience, conventions, useful resources, 4 pp; low value, propose folding vs standalone at S1)
-  - [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] ch6 → new article (Power Management — local/regional and architectural clock gating, power gating, 8 pp; e.g. `power_management/`)
-  - [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] ch11 → new article (Generic Timer) — `generic_timer/index.md`, 2026-11-09
+  - S1 result: ch11.1 About the Generic Timer / 11.2 Generic Timer functional description / 11.3 Generic Timer register summary (11.3.1). One figure (Figure 11-1 Architectural counter interface) and one table (Table 11-1, 15 registers).
+  - S2/S3 result: full translation; Figure 11-1 cropped from PDF p384; Table 11-1 rebuilt as GFM with the merged CRn/Op1 cells expanded per row.
+  - S4 result: nav entry after 内存保护单元, landing entry 9.
+  - S5/S6 result: strict build 0 WARNING; heading-language and index checks OK.
+  - S8 result: PR #352.
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
+- [x] ch1 → new article (Introduction) — `introduction/index.md`, 2026-11-09
+  - S1 result: ch1.1 Product revision status / 1.2 Intended audience / 1.3 Conventions (3.1 Glossary, 3.2 the conventions table, 3.3 Timing diagrams, 3.4 Signals) / 1.4 Useful resources (three document tables). One figure (Figure 1-1).
+  - S2/S3 result: full translation; the convention-icon column is rendered as named rows (推荐/要求/危险/注意/提示/提醒) because the source cells hold icons only; Figure 1-1 cropped.
+  - S4 result: nav entry first in the group, landing entry 1.
+  - S5/S6 result: strict build 0 WARNING; checks OK.
+  - S8 result: PR #352.
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] [x] S5 [x] S6 [x] S7 [x] S8
+- [x] ch6 → new article (Power Management) — `power_management/index.md`, 2026-11-09
+  - S1 result: ch6.1–6.4 with 6.3.1–6.3.4 and 6.4.1–6.4.6. One figure (Figure 6-1 Processor power domains), no tables; the boxed SEI/VSEI warning at 6.4.3 rendered as `**注意：**`.
+  - S2/S3 result: full translation; Figure 6-1 cropped from PDF p227.
+  - S4 result: nav entry between 时钟与复位 and 初始化, landing entry 5.
+  - S5/S6 result: strict build 0 WARNING; checks OK.
+  - S8 result: PR #352.
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] ch16 → new article (Advanced SIMD and floating-point support, 12 pp; e.g. `asimd_floating_point/`)
   - [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] ch2 → new article (The Cortex-R52+ processor — component blocks, interfaces, supported standards, design process, 17 pp; e.g. `introduction/` or fold into the ch1 page at S1)

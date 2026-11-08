@@ -306,12 +306,15 @@ nav:
       - "系统指令详情": cortex/armv7-m/system_instructions/index.md
     - Cortex-R52+ TRM（102199 r0p3）:
       - cortex/r52plus-trm/index.md
+      - "简介": cortex/r52plus-trm/introduction/index.md
       - "Cortex®-R52+ 程序员模型": cortex/r52plus-trm/programmers_model/index.md
       - "系统控制": cortex/r52plus-trm/system_control/index.md
       - "时钟与复位": cortex/r52plus-trm/clocking_and_resets/index.md
+      - "电源管理": cortex/r52plus-trm/power_management/index.md
       - "初始化": cortex/r52plus-trm/initialization/index.md
       - "内存系统": cortex/r52plus-trm/memory_system/index.md
       - "内存保护单元": cortex/r52plus-trm/memory_protection_unit/index.md
+      - "通用定时器": cortex/r52plus-trm/generic_timer/index.md
   - AUTOSAR:
     - autosar/index.md
     - "术语表": autosar/glossary.md
