@@ -108,8 +108,14 @@ Chapter span map (PDF pages): ch1 Introduction 24–27 (4) · ch2 The Cortex-R52
   - Source defects (correct values written, not propagated): Table 12-1 repeats 0x830/0x828 for DBGWVR4-7/DBGWCR4-7 and 0x450/0x458 for DBGBVR6-7/DBGBCR6-7 — Table 12-5 gives the correct 0x840/0x848/0x850/0x858/0x860/0x868/0x870/0x878 and 0x460/0x468/0x470/0x478; Table 12-5 names the extended-value registers at 0x464/0x474 `DBGBVR6/7` though the description and Table 12-1 say `DBGBXVR6/7`; Table 12-1 prints JMCR in the DBGDSAR `c2,0,c0,0` group (architecturally c14,7,c0,0) and omits the op2 column for the DBGDEVID/DBGCLAIMx group; Table 12-40 describes EDDFR[15:12] BRPs as "eight watchpoints" (should be breakpoints).
   - S8 result: PR #352.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [ ] ⏸ ch10 → new article (Generic Interrupt Controller — 99 pp: GIC functional description, programmers model, distributor/redistributor registers; consider splitting GICD/GICR at the plan gate)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] ch10 → new article (Generic Interrupt Controller) — `generic_interrupt_controller/index.md`, 2026-11-09
+  - S1 result: ch10.1 About the GIC / 10.2 functional description (2.1 distributor memory map with Tables 10-1/10-2, 2.2 interrupt sources with Table 10-3, 2.3 optional export interface with Figure 10-1) / 10.3 programmers model (3.1 GICD 3.1.1–3.1.15, 3.2 GICR 3.2.1–3.2.16, 3.3 ICH 3.3.1–3.3.10, 3.4 ICC 3.4.1–3.4.21, 3.5 ICV 3.5.1–3.5.16). 80 figures (10-1 block diagram, 10-2…10-64 bit bars, 10-65…10-80 ICV bit bars), 122 tables. Kept as a single article: the GICD/GICR split was rejected because the programmers-model chapter is one continuous register reference.
+  - S2/S3 result: full translation; all 80 figures cropped from the same PDF (10-3 and 10-19 needed explicit clips because their bar labels sit below the bar and are not absorbed by the caption-driven cropper); every table GFM with multi-level bit tables flattened and the SGI/LR repeat groups written once with a `P<n>`/`Status<n>` row.
+  - S4 result: nav entry between 内存保护单元 and 通用定时器, landing entry 10 (subsequent entries renumbered 10→16).
+  - S5/S6 result: strict build 0 WARNING; index and heading-language checks OK; 80 embedded figures all present.
+  - Source defects (written as in the source, since they are self-consistent page-range/label quirks): Table 10-1 labels the last row `SGIs target 4` while every other row says `SGIs and PPIs target n`; the ICH summary table omits the CRn/Op1/CRm columns for most rows (reconstructed from the MCR encodings in each register section); `ICH_HCR.TSEI` and several vGIC bits are RES0 yet still described; the `ICH_AP0R1`/`ICC_AP0R1` warnings name a register that Cortex®-R52+ does not implement; `GICR_ICFGR1` is described as read-only in the usage constraints while the summary gives it type RW.
+  - S8 result: PR #352.
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] ⏸ ch15 → new article (Embedded Trace Macrocell — 84 pp: ETM resources, event connectivity, operation, register descriptions)
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 

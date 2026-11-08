@@ -315,6 +315,7 @@ nav:
       - "初始化": cortex/r52plus-trm/initialization/index.md
       - "内存系统": cortex/r52plus-trm/memory_system/index.md
       - "内存保护单元": cortex/r52plus-trm/memory_protection_unit/index.md
+      - "通用中断控制器": cortex/r52plus-trm/generic_interrupt_controller/index.md
       - "通用定时器": cortex/r52plus-trm/generic_timer/index.md
       - "调试": cortex/r52plus-trm/debug/index.md
       - "性能监控单元": cortex/r52plus-trm/performance_monitor_unit/index.md
