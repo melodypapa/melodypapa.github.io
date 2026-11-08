@@ -399,4 +399,4 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
 - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR (commit 2d7fe61 · 2026-11-08 · branch feature/foundation-rs-prs-final unpushed — push/PR at the batch gate)
