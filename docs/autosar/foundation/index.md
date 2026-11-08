@@ -56,6 +56,7 @@ title: "基础标准（Foundation）"
   * [SOME/IP Protocol Specification（SOME/IP 协议规范）](protocols/prs_someip_protocol/index.md)
   * [SOME/IP Service Discovery Protocol Specification（SOME/IP 服务发现协议规范）](protocols/prs_someip_service_discovery_protocol/index.md)
   * [Log and Trace Protocol Specification（日志与跟踪协议规范）](protocols/prs_log_and_trace_protocol/index.md)
+  * [E2E Protocol Specification（端到端协议规范）](protocols/prs_e2e_protocol/index.md)
 * [发布文档（Release Documentation）](release_documentation/index.md)
   * [Release Overview（发布概览）](release_documentation/tr_release_overview/index.md)
 * [功能安全（Safety）](safety/index.md)

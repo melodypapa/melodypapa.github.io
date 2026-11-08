@@ -19,10 +19,8 @@ title: "协议（Protocols）"
 * [SOME/IP Protocol Specification（SOME/IP 协议规范）](prs_someip_protocol/index.md)
 * [SOME/IP Service Discovery Protocol Specification（SOME/IP 服务发现协议规范）](prs_someip_service_discovery_protocol/index.md)
 * [Log and Trace Protocol Specification（日志与跟踪协议规范）](prs_log_and_trace_protocol/index.md)
+* [E2E Protocol Specification（端到端协议规范）](prs_e2e_protocol/index.md)
 
-R23-11 中本类别的其余源文档（待翻译）：
-
-* **AUTOSAR_FO_PRS_E2EProtocol** — E2E Protocol Specification（端到端协议规范）
 
 ## 相关内容
 
