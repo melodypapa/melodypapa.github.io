@@ -13,7 +13,7 @@ title: "内存保护单元（Memory Protection Unit）"
 
 每个内存区域定义了基地址（**base address**）、限制地址（**limit address**）、访问权限（**access permissions**）和内存属性（**memory attributes**）。
 
-有关 MPU 的更多信息，请参阅《Arm® 架构参考手册补充 Armv8》（**Arm® Architecture Reference Manual Supplement Armv8**），了解更多 **Armv8-R AArch32** 架构配置文件。
+有关 MPU 的更多信息，请参阅《Arm® Architecture Reference Manual Supplement Armv8, for the Armv8-R AArch32 architecture profile》。
 
 对于数据访问，MPU 检查当前转换机制（**current translation regime**）是否允许对某个区域进行访问（读取或写入）。对于指令访问，MPU 检查该区域是否允许访问，以及转换机制是否允许执行。对于数据和指令访问，如果允许访问，MPU 将分配为该区域定义的内存属性。如果不允许访问，则发生权限错误。发生转换故障的原因如下：
 
@@ -57,10 +57,6 @@ PRBAR.BASE:0b000000 <= address <= PRLAR.LIMIT:0b111111
 
 当MPU启用时，可以通过设置 **SCTLR.BR** 来启用背景区域。在这种情况下，来自 EL1 转换机制的访问如果未触及任何可编程区域，则将使用背景区域。当 MPU 启用时，来自 EL0 转换机制的访问将出现故障。
 
-![SCTLR.M](SCTLR.M.png)
-
-![SCTLR.BR](SCTLR.BR.png)
-
 #### 2.1.1. EL1 控制的MPU背景区域，指令访问
 
 下表显示了EL1控制的MPU背景区域的指令访问。
@@ -88,10 +84,6 @@ PRBAR.BASE:0b000000 <= address <= PRLAR.LIMIT:0b111111
 
 当EL2控制的MPU启用时，通过设置背景区域启用（**HSCTLR.BR=1**），它还可用于未命中任何可编程区域的 EL2 访问。当 EL2 控制的 MPU 启用时，来自 EL0/EL1 转换机制的访问如果未命中 EL2 可编程区域，则会产生转换故障。这是两阶段转换的结果。
 
-![HSCTLR.M](HSCTLR.M.png)
-
-![HSCTLR.BR](HSCTLR.BR.png)
-
 #### 2.2.1. EL2控制的MPU背景区域，指令访问
 
 下表显示了用于指令访问的EL2控制的MPU背景区域。
@@ -116,8 +108,6 @@ PRBAR.BASE:0b000000 <= address <= PRLAR.LIMIT:0b111111
 ### 2.3. 默认缓存能力
 
 启用默认缓存能力 (**HCR.DC=1**) 后，使用 **EL1** 控制的 **MPU** 背景区域的事务将包含：**正常**(**Normal**)、**内部回写**(**Inner Write-Back**)、**外部回写**(**Outer Write-Back**)、**不可共享**(**Non-Shareable**)属性，同时启用**读取分配**(**Read-Allocate**)和**写入分配**(**Write-Allocate**)。当 **HCR.DC=1** 时，在背景区域中命中的指令访问始终可执行。
-
-![HCR.DC](HCR.DC.png)
 
 默认属性是最宽松的，这意味着当与来自 **EL2** 控制的 **MPU** 的任何属性结合时，生成的属性与 **EL2** 控制的 **MPU** 属性相同。这允许 **EL2** 控制的 **MPU** 有效地使 **EL1** 控制的 **MPU** 对来自背景区域中命中的 **EL1** 转换机制的事务透明。当 **HCR.DC=1** 时，来自 **EL0/EL1** 转换机制的所有转换都会执行两阶段 **MPU** 查找，处理器的行为就像设置了 **HCR.VM** 一样。
 
@@ -307,6 +297,43 @@ MRC p15, 5, <Rt>, c6, CRm, op2
 ```
 
 ## 5. MPU寄存器
+
+下表是影响 MPU 的寄存器汇总。所有寄存器均可通过 (coproc==0b1111) 访问。
+
+| 名称 | CRn | Op1 | CRm | Op2 | 复位 | 描述 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PRSELR | c6 | 0 | c2 | 1 | UNK | 第 198 页的 4.3.87 Protection Region Selection Register |
+| PRBAR | c6 | 0 | c3 | 0 | UNK | 第 194 页的 4.3.85 Protection Region Base Address Register |
+| PRLAR | c6 | 0 | c3 | 1 | UNK⁶³ | 第 196 页的 4.3.86 Protection Region Limit Address Register |
+| HPRBAR | c6 | 4 | c3 | 0 | UNK | 第 139 页的 4.3.48 Hyp Protection Region Base Address Register |
+| HPRLAR | c6 | 4 | c3 | 1 | UNK⁶³ | 第 141 页的 4.3.49 Hyp Protection Region Limit Address Register |
+| HPRSELR | c6 | 4 | c2 | 1 | UNK | 第 142 页的 4.3.50 Hyp Protection Region Selection Register |
+| HPRENR | c6 | 4 | c1 | 1 | 0x00000000 | 第 136 页的 4.3.46 Hyp MPU Region Enable Register |
+| HMPUIR | c0 | 4 | c0 | 4 | -⁵ | 第 138 页的 4.3.47 Hyp MPU Type Register |
+| MPUIR | c0 | 0 | c0 | 4 | -² | 第 184 页的 4.3.77 MPU Type Register |
+
+⁶³ 位 [0] 的复位值为 0。
+
+下表是 MPU 寄存器直接访问汇总。
+
+| 名称 | CRn | Op1 | CRm | Op2 | 复位 | 描述 |
+| --- | --- | --- | --- | --- | --- | --- |
+| PRBAR0-14（偶数） | c6 | 0 | c8-15 | 0 | UNK | 第 194 页的 4.3.85 Protection Region Base Address Register |
+| PRBAR1-15（奇数） | c6 | 0 | c8-15 | 4 | UNK | 第 194 页的 4.3.85 Protection Region Base Address Register |
+| PRBAR16-22（偶数） | c6 | 1 | c8-12 | 0 | UNK | 第 194 页的 4.3.85 Protection Region Base Address Register |
+| PRBAR17-23（奇数） | c6 | 1 | c8-11 | 4 | UNK | 第 194 页的 4.3.85 Protection Region Base Address Register |
+| PRLAR0-14（偶数） | c6 | 0 | c8-15 | 0 | UNK⁶³ | 第 196 页的 4.3.86 Protection Region Limit Address Register |
+| PRLAR1-15（奇数） | c6 | 0 | c8-15 | 4 | UNK⁶³ | 第 196 页的 4.3.86 Protection Region Limit Address Register |
+| PRLAR16-22（偶数） | c6 | 1 | c8-12 | 0 | UNK⁶³ | 第 196 页的 4.3.86 Protection Region Limit Address Register |
+| PRLAR17-23（奇数） | c6 | 1 | c8-11 | 4 | UNK⁶³ | 第 196 页的 4.3.86 Protection Region Limit Address Register |
+| HPRBAR0-14（偶数） | c6 | 4 | c8-15 | 0 | UNK | 第 139 页的 4.3.48 Hyp Protection Region Base Address Register |
+| HPRBAR1-15（奇数） | c6 | 4 | c8-15 | 4 | UNK | 第 139 页的 4.3.48 Hyp Protection Region Base Address Register |
+| HPRBAR16-22（偶数） | c6 | 5 | c8-12 | 0 | UNK | 第 139 页的 4.3.48 Hyp Protection Region Base Address Register |
+| HPRBAR17-23（奇数） | c6 | 5 | c8-11 | 4 | UNK | 第 139 页的 4.3.48 Hyp Protection Region Base Address Register |
+| HPRLAR0-14（偶数） | c6 | 4 | c8-15 | 0 | UNK⁶³ | 第 141 页的 4.3.49 Hyp Protection Region Limit Address Register |
+| HPRLAR1-15（奇数） | c6 | 4 | c8-15 | 4 | UNK⁶³ | 第 141 页的 4.3.49 Hyp Protection Region Limit Address Register |
+| HPRLAR16-22（偶数） | c6 | 5 | c8-12 | 0 | UNK⁶³ | 第 141 页的 4.3.49 Hyp Protection Region Limit Address Register |
+| HPRLAR17-23（奇数） | c6 | 5 | c8-11 | 4 | UNK⁶³ | 第 141 页的 4.3.49 Hyp Protection Region Limit Address Register |
 
 ### 5.1. 保护区域选择寄存器（PRSELR）
 
@@ -584,7 +611,7 @@ MRC p15, 0, <Rt>, c0, c0, 4 ; 将 MPUIR 读入 Rt
 | 0b1100 | Device-GRE 内存 | 普通内存，内部回写非瞬态（RW=00） |
 | 0b11RW，RW 不为 00 | **UNPREDICTABLE** | 普通内存，内部回写非瞬态 |
 
-下表显示了第 3-148 页表 3-106：Attr<n>[7:4] 位分配和表 3-107：Attr<n>[3:0] 位分配中的某些 Attr<n> 编码中使用的 R 和 W 位的编码，分别用于定义读取分配和写入分配策略。
+下表显示了第 174 页表 4-163：Attr<n>[7:4] bit assignments 和表 4-164：Attr<n>[3:0] bit assignments 中的某些 Attr<n> 编码中使用的 R 和 W 位的编码，分别用于定义读取分配和写入分配策略。
 
 | R 或 W | 描述 |
 | --- | --- |
