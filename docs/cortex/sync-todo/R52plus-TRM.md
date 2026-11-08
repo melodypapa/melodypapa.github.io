@@ -77,8 +77,13 @@ Chapter span map (PDF pages): ch1 Introduction 24–27 (4) · ch2 The Cortex-R52
   - S5/S6 result: strict build 0 WARNING; checks OK.
   - S8 result: PR #352.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [ ] ch14 → new article (Cross Trigger — trigger inputs/outputs, CTM, register summary/descriptions, 17 pp; e.g. `cross_trigger/`)
-  - [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] ch14 → new article (Cross Trigger) — `cross_trigger/index.md`, 2026-11-09
+  - S1 result: ch14.1 About the cross trigger / 14.2 Trigger inputs and outputs (Tables 14-1, 14-2) / 14.3 Cortex-R52+ CTM / 14.4 Cross trigger register summary (Table 14-3, 51 rows) with 14.4.1 External register access permissions / 14.5 Cross trigger register descriptions (14.5.1 CTIDEVID, 14.5.2 CTIITCTRL, 14.5.3 PIDR0-4 + 5-7 with 14.5.3.1-6, 14.5.4 CIDR0-3 with 14.5.4.1-4). Thirteen figures (14-1 block diagram, 14-2 CTM, 14-3 … 14-13 bit bars) and Tables 14-4 … 14-27.
+  - S2/S3 result: full translation; all thirteen figures cropped from PDF pp464-479; every table GFM (nested encoding rows kept in one cell via `<br>`), register sections use the 使用限制/陷阱与使能/配置/属性 skeleton.
+  - S4 result: nav entry between 通用定时器 and Advanced SIMD 与浮点支持, landing entry 11.
+  - S5/S6 result: strict build 0 WARNING; index and heading-language checks OK; 13 embedded figures all present.
+  - S8 result: PR #352.
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] D → new article (PMC-R52+ appendix — MBIST usage models, March algorithm, test code, programmers model, 63 pp; e.g. `pmc_r52plus/`)
   - Note: chapter 8.12 and 8.13 both point at appendix D; the memory-system article's "第 653 页的 D.PMC-R52+" references resolve here once this page exists.
   - [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
