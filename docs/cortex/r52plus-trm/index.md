@@ -18,3 +18,4 @@ title: "Cortex-R52+ TRM（102199 r0p3）"
 10. [通用定时器（Generic Timer）](generic_timer/index.md)
 11. [交叉触发（Cross Trigger）](cross_trigger/index.md)
 12. [Advanced SIMD 与浮点支持（Advanced SIMD and floating-point support）](asimd_floating_point/index.md)
+13. [PMC-R52+（可编程 MBIST 控制器）](pmc_r52plus/index.md)

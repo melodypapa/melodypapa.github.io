@@ -84,9 +84,14 @@ Chapter span map (PDF pages): ch1 Introduction 24–27 (4) · ch2 The Cortex-R52
   - S5/S6 result: strict build 0 WARNING; index and heading-language checks OK; 13 embedded figures all present.
   - S8 result: PR #352.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [ ] D → new article (PMC-R52+ appendix — MBIST usage models, March algorithm, test code, programmers model, 63 pp; e.g. `pmc_r52plus/`)
+- [x] D → new article (PMC-R52+) — `pmc_r52plus/index.md`, 2026-11-09
   - Note: chapter 8.12 and 8.13 both point at appendix D; the memory-system article's "第 653 页的 D.PMC-R52+" references resolve here once this page exists.
-  - [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+  - S1 result: D.1 Introduction (D.1.1 external integration, D.1.2 pre-integrated) / D.2 Features and benefits / D.3 MBIST usage models (3.1 production, 3.2 on-line off-line memory, 3.3 on-line on-line memory) / D.4 Short-burst software transparent algorithm (4.1 SRAM faults, 4.2 example algorithm, 4.3 Microcode) / D.5 Production test March algorithm (5.1 March algorithm + 5.1.1 notation, 5.2 March C-, 5.3 programming with 5.3.1-5.3.7) / D.6 Example test code / D.7 Functional description + 7.1 RTL constants / D.8 Programmers model (8.1 memory map, 8.2 summary, 8.3 CTRL + 8.3.1 state machine 8.3.1.1-8.3.1.5 + 8.3.2 modes, 8.4-8.15 registers, 8.16 CoreSight registers 8.16.1-8.16.14 incl. 8.16.13.1-8 and 8.16.14.1-4). Thirty-six figures (D-1 … D-36) and Tables D-1 … D-53.
+  - S2/S3 result: full translation; all 36 figures cropped from PDF pp654-715; every table GFM (multi-line cells keep `<br>`, `•` list marks preserved), register sections use the 使用限制/陷阱与使能/配置/属性 skeleton. Corpus typos recorded rather than propagated: Table D-19 prints `Y0-X7` for the Y data registers (article uses `Y0-Y7`), 8.16.11 prints `0x000000000` (article `0x00000000`), 8.16.14 prints `CIDR3-CIDR3` (article `CIDR3-CIDR0`). In-appendix references cite section + English title only — the PDF's page pointers for D.8.4/D.8.6/D.8.7/D.8.8/D.8.9/D.8.10 and the 8.16 registers are off by one against the printed pages.
+  - S4 result: nav entry last in the group (appendix position), landing entry 13.
+  - S5/S6 result: strict build 0 WARNING; index and heading-language checks OK; 36 embedded figures all present.
+  - S8 result: PR #352.
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] ⏸ ch13 → new article (Performance Monitor Unit — 27 pp incl. 13.6 Events, 13.8 Exporting PMU events)
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] ⏸ ch12 → new article (Debug — 50 pp: system and memory-mapped register descriptions, external debug interface, ROM table)
