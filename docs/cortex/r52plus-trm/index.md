@@ -15,3 +15,4 @@ title: "Cortex-R52+ TRM（102199 r0p3）"
 7. [内存系统（Memory System）](memory_system/index.md)
 8. [内存保护单元（Memory Protection Unit）](memory_protection_unit/index.md)
 9. [通用定时器（Generic Timer）](generic_timer/index.md)
+10. [Advanced SIMD 与浮点支持（Advanced SIMD and floating-point support）](asimd_floating_point/index.md)

@@ -63,8 +63,13 @@ Chapter span map (PDF pages): ch1 Introduction 24–27 (4) · ch2 The Cortex-R52
   - S5/S6 result: strict build 0 WARNING; checks OK.
   - S8 result: PR #352.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [ ] ch16 → new article (Advanced SIMD and floating-point support, 12 pp; e.g. `asimd_floating_point/`)
-  - [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] ch16 → new article (Advanced SIMD and floating-point support) — `asimd_floating_point/index.md`, 2026-11-09
+  - S1 result: ch16.1–16.6 with 16.6.1–16.6.6. Six figures (Figures 16-1 … 16-6, bit assignments) and six bit-assignment tables plus the 16.5 register summary; the FPINST/FPINST2 note is a `**注意：**` paragraph.
+  - S2/S3 result: full translation; all six bit bars cropped from PDF pp566/568/570/572/573/575; every table GFM with the multi-value Reset cells kept in one row via `<br>`.
+  - S4 result: nav entry last in the group (ch16), landing entry 10.
+  - S5/S6 result: strict build 0 WARNING; checks OK.
+  - S8 result: PR #352.
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] ch2 → new article (The Cortex-R52+ processor — component blocks, interfaces, supported standards, design process, 17 pp; e.g. `introduction/` or fold into the ch1 page at S1)
   - [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] ch14 → new article (Cross Trigger — trigger inputs/outputs, CTM, register summary/descriptions, 17 pp; e.g. `cross_trigger/`)
