@@ -384,7 +384,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
 - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR (commit 0ee8268 · 2026-11-08 · branch feature/foundation-rs-prs-final unpushed — push/PR at the batch gate)
 - [ ] prs_e2e_protocol (AUTOSAR_FO_PRS_E2EProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: E2E Protocol Specification（端到端协议规范）; target `foundation/protocols/prs_e2e_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_E2EProtocol.md` — 8,147 lines, 436 figure refs, 1173 item IDs; **giant source** — segment plan before Step 2 (OS/RTE precedent)
