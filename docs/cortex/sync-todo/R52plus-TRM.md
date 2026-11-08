@@ -9,9 +9,12 @@ Chapter span map (PDF pages): ch1 Introduction 24–27 (4) · ch2 The Cortex-R52
 
 ## Queue
 
-- [ ] ch3 programmers_model — verify-only (article `r52plus-trm/programmers_model/`, 292 ln, 2 `##` vs 9 pp)
+- [x] ch3 programmers_model — verified (article `r52plus-trm/programmers_model/index.md`, 289 ln, 2 `##` vs 9 pp, 2026-11-09)
   - Note (S6): R52+ ch3.1 About the programmers model + ch3.2 Armv8-R AArch32 architecture concepts; the article was built from R52 ch2 — compare section by section, fix only real gaps.
-  - [ ] S1 [ ] S6 [ ] S7 (if changed) [ ] S8 (if changed)
+  - S1 result: structure matches ch3 exactly — `## 1.` ← 3.1 with 1.1 Advanced SIMD and Floating-point … 1.6 Security state, `## 2.` ← 3.2 with 2.1 Execution state … 2.13 GIC Architecture (2.4.1–2.4.3 under 2.4). Source has no figures and two tables (Table 3-1 processor modes, Table 3-2 Armv8 memory types), both already GFM.
+  - S6 result: three real gaps fixed — 2.8 `相关参考` still carried the R52 numbers/pages (ch9 9-247 / ch10 10-332 / ch11 11-336 / ch12 12-383), replaced with the R52+ chapters (ch10 p284, ch11 p383, ch12 p386, ch13 p436); the `Related information` of 3.2 (`Supported standards on page 40`, i.e. 2.4) was missing, added; the `1.4 支持的标准（第 1-24 页）` reference closing 2.13 does not exist in R52+ ch3 (ch1.4 is Useful resources) and was removed. Wording aligned to r0p3: 1.4 reads `PSTATE.T` (was `CPSR.T`). Table 3-1/3-2 row sets match the source. Stray blank lines after the front matter removed.
+  - S8 result: PR #350.
+  - [x] S1 [x] S6 [x] S7 [x] S8
 - [ ] ch5 clocking_and_resets — verify-only (article 114 ln, 3 `##` vs 4 pp)
   - Note (S6): ch5.1 Clock and clock enables / 5.2 Reset signals / 5.3 Reset-related signals; check every signal row against the R52+ set (the R52+ adds `Clock and clock enable signals` to appendix A, which this chapter summarises).
   - [ ] S1 [ ] S6 [ ] S7 (if changed) [ ] S8 (if changed)
