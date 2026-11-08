@@ -70,8 +70,13 @@ Chapter span map (PDF pages): ch1 Introduction 24–27 (4) · ch2 The Cortex-R52
   - S5/S6 result: strict build 0 WARNING; checks OK.
   - S8 result: PR #352.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [ ] ch2 → new article (The Cortex-R52+ processor — component blocks, interfaces, supported standards, design process, 17 pp; e.g. `introduction/` or fold into the ch1 page at S1)
-  - [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] ch2 → new article (The Cortex®-R52+ processor) — `processor_overview/index.md`, 2026-11-09
+  - S1 result: ch2.1 (2.1.1 Features, 2.1.2 Interfaces, 2.1.3 Configuration options with 2.1.3.1 Processor configurations → 2.1.3.1.1 DCLS / 2.1.3.1.2 Split‑Lock) / 2.2 Component blocks (2.2.1–2.2.7) / 2.3 Interfaces (2.3.1 AMBA → 2.3.1.1–2.3.1.4, 2.3.2–2.3.6) / 2.4 Supported standards (2.4.1–2.4.6) / 2.5 Documentation / 2.6 Design process. Three figures (2-1 … 2-3) and two tables (2-1 configuration options, 2-2 Split‑Lock).
+  - S2/S3 result: full translation; the three block diagrams cropped from PDF pp28/30/33; Table 2-1 and 2-2 GFM; the in-table bus-protection note rendered as `**注意：**` after Table 2-1; every `Related information` block translated with the R52+ chapter and page.
+  - S4 result: nav entry second in the group, landing entry 2.
+  - S5/S6 result: strict build 0 WARNING; checks OK.
+  - S8 result: PR #352.
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] ch14 → new article (Cross Trigger — trigger inputs/outputs, CTM, register summary/descriptions, 17 pp; e.g. `cross_trigger/`)
   - [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] D → new article (PMC-R52+ appendix — MBIST usage models, March algorithm, test code, programmers model, 63 pp; e.g. `pmc_r52plus/`)

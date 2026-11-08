@@ -307,6 +307,7 @@ nav:
     - Cortex-R52+ TRM（102199 r0p3）:
       - cortex/r52plus-trm/index.md
       - "简介": cortex/r52plus-trm/introduction/index.md
+      - "Cortex®-R52+ 处理器": cortex/r52plus-trm/processor_overview/index.md
       - "Cortex®-R52+ 程序员模型": cortex/r52plus-trm/programmers_model/index.md
       - "系统控制": cortex/r52plus-trm/system_control/index.md
       - "时钟与复位": cortex/r52plus-trm/clocking_and_resets/index.md
