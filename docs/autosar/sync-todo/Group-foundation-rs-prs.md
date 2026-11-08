@@ -10,7 +10,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 > Directory slug = `<type>_<snake_name>` after the `tr_glossary` precedent (`rs_main`, `prs_e2e_protocol`, `tps_generic_structure_template`) — the type prefix disambiguates the same-named RS/PRS pairs (SOMEIPProtocol, SOMEIPServiceDiscoveryProtocol, IntrusionDetectionSystem, TimeSync, SecurityExtractTemplate, StandardizationTemplate, FeatureModelExchangeFormat). The slug is a proposal: an acronym-ambiguous name still goes to the user at Step 1 (mapping.md naming rule). Front-matter `spec:` = `AUTOSAR_FO_<Type>_<Name>`, `release: R23-11`.
 > Row order = source size ascending (index.md rule), except the in-flight TR Glossary row first (exp group only). Sizes are R23-11 markdown line / `![` figure-ref / item-ID counts for planning only.
 
-> Delivery: tracked by issue #273; part 1 (rows 1–20, commits 95d7986…234e015) pushed as PR #274 ("Part of #273"); part 2 (rows 21–30, commits f694ff4…39b985f) pushed as PR #289 (Closes #288); part 3 (rows 31/32, commits 0ee8268/2d7fe61) — batch gate approved 2026-11-08, batch complete.
+> Delivery: tracked by issue #273; part 1 (rows 1–20, commits 95d7986…234e015) pushed as PR #274 ("Part of #273"); part 2 (rows 21–30, commits f694ff4…39b985f) pushed as PR #289 (Closes #288); part 3 (rows 31/32, commits 0ee8268/2d7fe61) pushed as PR #328 (Closes #273); batch gate approved 2026-11-08, batch complete.
 > **DECIDED 2026-11-03 (user decision, asked at the first HealthMonitoring run's Step 1) — item IDs are DROPPED, titles translate only, and this applies batch-wide (both this file and Group-foundation-exp's TPS/ASWS rows):** these documents *consist of* identified items (`[RS_Main_00001]`, `[PRS_E2E_00123]`; RS_Main carries 334, PRS_E2EProtocol 1,173). The user chose the Type A no-requirement-ID rule (STANDARD.md §4) and the EXP_VFB precedent over the appendix-B fence precedent: requirement prose translates, the `[<ID>] {DRAFT}` marker is dropped entirely (the `{DRAFT}` flag goes with it). Consequence: a translated RS/PRS/ASWS item cannot be looked up by its standard ID — the queue row Notes record that as an accepted trade-off.
 
 ## Queue
@@ -384,7 +384,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
 - [x] Step 5 — User confirmation gate (2026-11-08: approved — batch confirmation covering this run and the deferred rows)
-  - [x] Step 6 — TODO.md row + commit/PR (commit 0ee8268 · 2026-11-08 · branch feature/foundation-rs-prs-final unpushed — push/PR at the batch gate)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 0ee8268 · 2026-11-08 · PR #328)
 - [x] prs_e2e_protocol (AUTOSAR_FO_PRS_E2EProtocol · Protocols · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: E2E Protocol Specification（端到端协议规范）; target `foundation/protocols/prs_e2e_protocol/`; protocol specification (PRS) — protocol items plus message-format tables and sequence/state figures
   - Note: source `Protocols/AUTOSAR_FO_PRS_E2EProtocol.md` — 8,147 lines, 436 figure refs, 1173 item IDs; **giant source** — segment plan before Step 2 (OS/RTE precedent)
@@ -399,4 +399,4 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
 - [x] Step 5 — User confirmation gate (2026-11-08: approved — batch confirmation covering this run and the deferred rows)
-  - [x] Step 6 — TODO.md row + commit/PR (commit 2d7fe61 · 2026-11-08 · branch feature/foundation-rs-prs-final unpushed — push/PR at the batch gate)
+  - [x] Step 6 — TODO.md row + commit/PR (commit 2d7fe61 · 2026-11-08 · PR #328)
