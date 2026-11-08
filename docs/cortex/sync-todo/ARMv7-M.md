@@ -51,38 +51,42 @@ Existing-article mappings (mapping.md, evidence re-checked at census): `arm_arch
   - S6 result: all 30 tables (A5-1 … A5-30) rendered as GFM with merged cells expanded by repeating the spanning value; footnotes as `a.` / `b.` lines; cross-references phrased as `MOV（立即数）（第 A7-291 页）`.
   - S8 result: merged as `de13acc` (PR #327).
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [x] A6 → new article (The Floating-point Instruction Set Encoding, 362 ln; `m7_processor/fp_instruction_set_encoding/`)
+- [ ] A6 → new article (The Floating-point Instruction Set Encoding, 362 ln; `m7_processor/fp_instruction_set_encoding/`)
   - S1 result: A6 = PDF pp. 160–170; structure fixed to 7 chapters — §1 概述, §2 浮点指令语法 (2.1 数据类型说明符, 2.2 寄存器说明符, 2.3 寄存器列表), §3 寄存器编码, §4 浮点数据处理指令 (4.1 修改立即数常量的运算), §5 扩展寄存器加载或存储指令, §6 32 位传送, §7 64 位传送. Census: 9 tables (A6-1 … A6-9) + 5 unnumbered encoding bars.
   - S2 result: article written in place; numbering restarts at 1; source typo `{<Dd[x]>,<Dd+2[x]}` preserved; table A6-5 rebuilt from the PDF cell grid (merged opc/instruction cells expanded per block).
   - S3 result: 5 encoding bars cropped at 3× — `EncodingA6-4.png` (p164 register encoding), `EncodingA6-5.png` (p165 data-processing), `EncodingA6-7.png` (p167 load/store), `EncodingA6-8.png` (p168 32-bit transfer), `EncodingA6-9.png` (p169 64-bit transfer).
   - S4 result: nav entry added after `thumb_instruction_set_encoding`; landing item inserted as Cortex-M7 no. 6 with 6–19 renumbered to 7–20.
   - S5 result: `--strict` build 0 WARNINGs; `check_indexes.py --root .` OK (0 broken links); `check_heading_lang.py` OK.
   - S6 result: all 9 tables (A6-1 … A6-9) rendered as GFM; Table A6-5 expanded to 22 rows from the merged-cell grid; footnotes as `a.` lines; cross-references phrased as `VSEL（第 A7-497 页）`.
-  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [ ] S7 [ ] S8
-- [x] B2 → new article (System Memory Model — caches, branch predictors, memory-system pseudocode, 1,540 ln; `m7_processor/system_memory_model/`)
+  - S7 result: confirmed by the user; shipped as PR #334 (issue #333).
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
+- [ ] B2 → new article (System Memory Model — caches, branch predictors, memory-system pseudocode, 1,540 ln; `m7_processor/system_memory_model/`)
   - S1 result: B2 = PDF pp. 570–590; structure fixed to 3 chapters — §1 关于系统内存模型, §2 缓存与分支预测器 (2.1–2.9, with 2.3/2.5/2.6/2.7 unnumbered source headings kept as bold sub-headings), §3 通用内存系统操作的伪代码细节 (3.1–3.11). Census: 1 table (B2-1) + 1 set/way format bar (unnumbered) + Example B2-1.
   - S2 result: article written in place; §3 keeps every pseudocode block verbatim in `arm` fences; terminology fixed as 一致性点 PoC / 统一化点 PoU / 按 MVA / 按 set/way.
   - S3 result: 1 bar cropped at 3× — `EncodingB2-1.png` (p580 set/way register format); Example B2-1 is an assembly listing, not a figure.
   - S4 result: nav entry added before `system_address_map` (source chapter B2 precedes B3); landing item inserted as Cortex-M7 no. 10 with 10–20 renumbered to 11–21.
   - S5 result: `--strict` build 0 WARNINGs; `check_indexes.py --root .` OK; `check_heading_lang.py` OK.
   - S6 result: Table B2-1 rendered as GFM (13 address rows incl. the three reserved entries), footnote `a.` kept; set/way fields A/B/L/S derived lines kept as in source.
-  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [ ] S7 [ ] S8
-- [x] B4 → new article (The CPUID Scheme, 1,632 ln; `m7_processor/cpuid_scheme/`)
+  - S7 result: confirmed by the user; shipped as PR #334 (issue #333).
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
+- [ ] B4 → new article (The CPUID Scheme, 1,632 ln; `m7_processor/cpuid_scheme/`)
   - S1 result: B4 = PDF pp. 644–668; structure fixed to 8 chapters — §1 关于 CPUID 方案 (1.1 约定, 1.2 汇总), §2 处理器特性 ID (2.1–2.2), §3 调试特性 ID (3.1), §4 辅助特性 ID (4.1), §5 内存模型特性 (5.1–5.4), §6 指令集属性 (6.1 描述约定 + 6.2–6.6, 含 同步原语支持), §7 浮点特性标识 (7.1–7.4), §8 缓存控制标识 (8.1–8.4). Census: 4 tables (B4-1 … B4-4) + 19 register bit bars.
   - S2 result: article written in place; register subsections follow the M7 house pattern (**用途** / **使用限制** / **配置** / **属性** + bar + 位/名称/值/功能 table); §1.2 Table B4-1 covers 19 register rows.
   - S3 result: 19 bars cropped at 3× — `FigureB4-1.png` … `FigureB4-19.png` (PFR0, PFR1, DFR0, AFR0, MMFR0–2, ISAR0–4, MVFR0–2, CLIDR, CCSIDR, CSSELR, CTR); ID_MMFR3 has no bar in the source and is rendered as a table only.
   - S4 result: nav entry added after `mpu` (source chapter B4 follows B3.5); landing item inserted as Cortex-M7 no. 13 with 13–21 renumbered to 14–22.
   - S5 result: `--strict` build 0 WARNINGs; `check_indexes.py --root .` OK (331 nav targets); `check_heading_lang.py` OK.
   - S6 result: Tables B4-1 … B4-4 rendered as GFM; every register field table uses the four-column `位 / 名称 / 值 / 功能` grid with one row per field value.
-  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [ ] S7 [ ] S8
-- [x] B5 → new article (System Instruction Details, 518 ln; `m7_processor/system_instructions/`)
+  - S7 result: confirmed by the user; shipped as PR #334 (issue #333).
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
+- [ ] B5 → new article (System Instruction Details, 518 ln; `m7_processor/system_instructions/`)
   - S1 result: B5 = PDF pp. 670–678; structure fixed to 2 chapters — §1 关于 Armv7-M 系统指令 (1.1 特殊寄存器编码), §2 系统指令描述 (2.1 CPS, 2.2 MRS, 2.3 MSR). Census: 2 tables (B5-1, B5-2) + 3 encoding bars (T1 for CPS/MRS/MSR) + assembler-syntax and operation pseudocode.
   - S2 result: article written in place; each instruction keeps the source order 汇编器语法 → 操作 → 异常 → 备注 → 编码 T1; pseudocode and assembler syntax verbatim in `arm` fences.
   - S3 result: 3 bars cropped at 3× — `EncodingB5-1.png` (CPS), `EncodingB5-2.png` (MRS), `EncodingB5-3.png` (MSR).
   - S4 result: nav entry added after `cpuid_scheme` (source chapter B5 follows B4); landing item inserted as Cortex-M7 no. 14 with 14–22 renumbered to 15–23.
   - S5 result: `--strict` build 0 WARNINGs; `check_indexes.py --root .` OK (332 nav targets); `check_heading_lang.py` OK.
   - S6 result: Tables B5-1 and B5-2 rendered as GFM; the two-bullet Note under §2 kept as a `**注意：**` block.
-  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [ ] S7 [ ] S8
+  - S7 result: confirmed by the user; shipped as PR #334 (issue #333).
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
 
 ## Not queued (deliberately deferred)
 
