@@ -534,6 +534,8 @@ nav:
         - "TS Protocol": autosar/foundation/protocols/prs_time_sync_protocol/index.md
         - "SOME/IP Protocol": autosar/foundation/protocols/prs_someip_protocol/index.md
         - "SOME/IP-SD": autosar/foundation/protocols/prs_someip_service_discovery_protocol/index.md
+        - "LT Protocol": autosar/foundation/protocols/prs_log_and_trace_protocol/index.md
+        - "E2E Protocol": autosar/foundation/protocols/prs_e2e_protocol/index.md
       - 发布文档:
         - autosar/foundation/release_documentation/index.md
         - autosar/foundation/release_documentation/tr_release_overview/index.md
