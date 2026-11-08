@@ -187,9 +187,38 @@ plugins:
         autosar/system_services/sw_cluster_design_and_integration/index.md: autosar/cp/system_services/sw_cluster_design_and_integration/index.md
         autosar/system_services/time_service/index.md: autosar/cp/system_services/time_service/index.md
         autosar/template/index.md: autosar/cp/template/index.md
-        cortex/m7_processor/program_status_register/index.md: cortex/m7_processor/programmers_model/index.md
-        cortex/m7_processor/exception_model/index.md: cortex/m7_processor/programmers_model/index.md
-        cortex/m7_processor/protected_memory_system_archi_pmsav7/index.md: cortex/m7_processor/mpu/index.md
+        cortex/m7_processor/program_status_register/index.md: cortex/m7-trm/programmers_model/index.md
+        cortex/m7_processor/exception_model/index.md: cortex/m7-trm/programmers_model/index.md
+        cortex/m7_processor/protected_memory_system_archi_pmsav7/index.md: cortex/m7-trm/mpu/index.md
+        cortex/m7_processor/arm_architecture_memory_mode/index.md: cortex/armv7-m/arm_architecture_memory_mode/index.md
+        cortex/m7_processor/cpuid_scheme/index.md: cortex/armv7-m/cpuid_scheme/index.md
+        cortex/m7_processor/cti/index.md: cortex/m7-trm/cti/index.md
+        cortex/m7_processor/debug/index.md: cortex/m7-trm/debug/index.md
+        cortex/m7_processor/dwt/index.md: cortex/m7-trm/dwt/index.md
+        cortex/m7_processor/fault_detection/index.md: cortex/m7-trm/fault_detection/index.md
+        cortex/m7_processor/fp_instruction_set_encoding/index.md: cortex/armv7-m/fp_instruction_set_encoding/index.md
+        cortex/m7_processor/fpu/index.md: cortex/m7-trm/fpu/index.md
+        cortex/m7_processor/glossary/index.md: cortex/m7-trm/glossary/index.md
+        cortex/m7_processor/initialization/index.md: cortex/m7-trm/initialization/index.md
+        cortex/m7_processor/instruction_set/index.md: cortex/m7-trm/instruction_set/index.md
+        cortex/m7_processor/introduction/index.md: cortex/m7-trm/introduction/index.md
+        cortex/m7_processor/itm/index.md: cortex/m7-trm/itm/index.md
+        cortex/m7_processor/memory_system/index.md: cortex/m7-trm/memory_system/index.md
+        cortex/m7_processor/mpu/index.md: cortex/m7-trm/mpu/index.md
+        cortex/m7_processor/nested_vectored_interrupt_controller/index.md: cortex/m7-trm/nested_vectored_interrupt_controller/index.md
+        cortex/m7_processor/programmers_model/index.md: cortex/m7-trm/programmers_model/index.md
+        cortex/m7_processor/system_address_map/index.md: cortex/armv7-m/system_address_map/index.md
+        cortex/m7_processor/system_control/index.md: cortex/m7-trm/system_control/index.md
+        cortex/m7_processor/system_instructions/index.md: cortex/armv7-m/system_instructions/index.md
+        cortex/m7_processor/system_memory_model/index.md: cortex/armv7-m/system_memory_model/index.md
+        cortex/m7_processor/thumb_instruction_set_encoding/index.md: cortex/armv7-m/thumb_instruction_set_encoding/index.md
+        cortex/m7_processor/tpiu/index.md: cortex/m7-trm/tpiu/index.md
+        cortex/r52p_processor/clocking_and_resets/index.md: cortex/r52plus-trm/clocking_and_resets/index.md
+        cortex/r52p_processor/initialization/index.md: cortex/r52plus-trm/initialization/index.md
+        cortex/r52p_processor/memory_protection_unit/index.md: cortex/r52plus-trm/memory_protection_unit/index.md
+        cortex/r52p_processor/memory_system/index.md: cortex/r52plus-trm/memory_system/index.md
+        cortex/r52p_processor/programmers_model/index.md: cortex/r52plus-trm/programmers_model/index.md
+        cortex/r52p_processor/system_control/index.md: cortex/r52plus-trm/system_control/index.md
 
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js
@@ -246,38 +275,43 @@ nav:
       - 通信:
 
         - "什么是SerDes": cortex/concept/communication/serdes/index.md
-    - Cortex-M7 内核:
+    - Cortex-M7 TRM（DDI0489F r1p2）:
 
-      - "简介": cortex/m7_processor/introduction/index.md
-      - "ARM架构的内存模式": cortex/m7_processor/arm_architecture_memory_mode/index.md
-      - "程序员模型": cortex/m7_processor/programmers_model/index.md
-      - "Cortex-M7 指令集": cortex/m7_processor/instruction_set/index.md
-      - "Thumb 指令集编码": cortex/m7_processor/thumb_instruction_set_encoding/index.md
-      - "浮点指令集编码": cortex/m7_processor/fp_instruction_set_encoding/index.md
-      - "系统控制": cortex/m7_processor/system_control/index.md
-      - "初始化": cortex/m7_processor/initialization/index.md
-      - "内存系统": cortex/m7_processor/memory_system/index.md
-      - "系统内存模型": cortex/m7_processor/system_memory_model/index.md
-      - "系统地址映射": cortex/m7_processor/system_address_map/index.md
-      - "内存保护单元": cortex/m7_processor/mpu/index.md
-      - "CPUID 方案": cortex/m7_processor/cpuid_scheme/index.md
-      - "系统指令详情": cortex/m7_processor/system_instructions/index.md
-      - "嵌套向量中断控制器": cortex/m7_processor/nested_vectored_interrupt_controller/index.md
-      - "浮点单元": cortex/m7_processor/fpu/index.md
-      - "调试": cortex/m7_processor/debug/index.md
-      - "交叉触发接口": cortex/m7_processor/cti/index.md
-      - "数据观察点与跟踪单元": cortex/m7_processor/dwt/index.md
-      - "插桩跟踪宏单元": cortex/m7_processor/itm/index.md
-      - "跟踪端口接口单元": cortex/m7_processor/tpiu/index.md
-      - "故障检测与处理": cortex/m7_processor/fault_detection/index.md
-      - "术语表": cortex/m7_processor/glossary/index.md
-    - Cortex-R52+ 内核:
-      - "Cortex®-R52+ 程序员模型": cortex/r52p_processor/programmers_model/index.md
-      - "系统控制": cortex/r52p_processor/system_control/index.md
-      - "时钟与复位": cortex/r52p_processor/clocking_and_resets/index.md
-      - "初始化": cortex/r52p_processor/initialization/index.md
-      - "内存系统": cortex/r52p_processor/memory_system/index.md
-      - "内存保护单元": cortex/r52p_processor/memory_protection_unit/index.md
+      - cortex/m7-trm/index.md
+      - "简介": cortex/m7-trm/introduction/index.md
+      - "程序员模型": cortex/m7-trm/programmers_model/index.md
+      - "Cortex-M7 指令集": cortex/m7-trm/instruction_set/index.md
+      - "系统控制": cortex/m7-trm/system_control/index.md
+      - "初始化": cortex/m7-trm/initialization/index.md
+      - "内存系统": cortex/m7-trm/memory_system/index.md
+      - "内存保护单元": cortex/m7-trm/mpu/index.md
+      - "嵌套向量中断控制器": cortex/m7-trm/nested_vectored_interrupt_controller/index.md
+      - "浮点单元": cortex/m7-trm/fpu/index.md
+      - "调试": cortex/m7-trm/debug/index.md
+      - "交叉触发接口": cortex/m7-trm/cti/index.md
+      - "数据观察点与跟踪单元": cortex/m7-trm/dwt/index.md
+      - "插桩跟踪宏单元": cortex/m7-trm/itm/index.md
+      - "跟踪端口接口单元": cortex/m7-trm/tpiu/index.md
+      - "故障检测与处理": cortex/m7-trm/fault_detection/index.md
+      - "术语表": cortex/m7-trm/glossary/index.md
+    - Armv7-M 架构参考手册（DDI0403E E.e）:
+
+      - cortex/armv7-m/index.md
+      - "ARM架构的内存模式": cortex/armv7-m/arm_architecture_memory_mode/index.md
+      - "Thumb 指令集编码": cortex/armv7-m/thumb_instruction_set_encoding/index.md
+      - "浮点指令集编码": cortex/armv7-m/fp_instruction_set_encoding/index.md
+      - "系统内存模型": cortex/armv7-m/system_memory_model/index.md
+      - "系统地址映射": cortex/armv7-m/system_address_map/index.md
+      - "CPUID 方案": cortex/armv7-m/cpuid_scheme/index.md
+      - "系统指令详情": cortex/armv7-m/system_instructions/index.md
+    - Cortex-R52+ TRM（102199 r0p3）:
+      - cortex/r52plus-trm/index.md
+      - "Cortex®-R52+ 程序员模型": cortex/r52plus-trm/programmers_model/index.md
+      - "系统控制": cortex/r52plus-trm/system_control/index.md
+      - "时钟与复位": cortex/r52plus-trm/clocking_and_resets/index.md
+      - "初始化": cortex/r52plus-trm/initialization/index.md
+      - "内存系统": cortex/r52plus-trm/memory_system/index.md
+      - "内存保护单元": cortex/r52plus-trm/memory_protection_unit/index.md
   - AUTOSAR:
     - autosar/index.md
     - "术语表": autosar/glossary.md

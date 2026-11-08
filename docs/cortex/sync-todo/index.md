@@ -39,7 +39,7 @@
 ## Group order (execution priority)
 
 1. [M7-TRM](M7-TRM.md) — complete (all rows `[x]`, batch finished 2026-11-06)
-2. [R52plus-TRM](R52plus-TRM.md) — **authoritative for `r52p_processor/`** (the site tree is the R52+ core); verify-only rows first, then the ch4 System Control completion, then new chapters
+2. [R52plus-TRM](R52plus-TRM.md) — **authoritative for `r52plus-trm/`** (the site tree is the R52+ core); verify-only rows first, then the ch4 System Control completion, then new chapters
 3. [R52-TRM](R52-TRM.md) — older 100026 revision; keep as the provenance ledger for pages built before 2026-11-07, do not queue new work from it
 4. [ARMv7-M](ARMv7-M.md) — batch complete (A3–A6, B2, B4, B5); instruction-details tail (A7) deferred
 5. [SDEN](SDEN.md) — text-only run (figures blocked)

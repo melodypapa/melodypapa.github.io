@@ -9,7 +9,7 @@ Chapter span map (PDF pages): ch1 Introduction 24–27 (4) · ch2 The Cortex-R52
 
 ## Queue
 
-- [ ] ch3 programmers_model — verify-only (article `r52p_processor/programmers_model/`, 292 ln, 2 `##` vs 9 pp)
+- [ ] ch3 programmers_model — verify-only (article `r52plus-trm/programmers_model/`, 292 ln, 2 `##` vs 9 pp)
   - Note (S6): R52+ ch3.1 About the programmers model + ch3.2 Armv8-R AArch32 architecture concepts; the article was built from R52 ch2 — compare section by section, fix only real gaps.
   - [ ] S1 [ ] S6 [ ] S7 (if changed) [ ] S8 (if changed)
 - [ ] ch5 clocking_and_resets — verify-only (article 114 ln, 3 `##` vs 4 pp)

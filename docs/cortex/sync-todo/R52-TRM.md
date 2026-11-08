@@ -9,7 +9,7 @@ Chapter span map (parse lines, incl. running headers — re-locate by title, fir
 
 ## Queue
 
-- [ ] programmers_model — verify-only (article `r52p_processor/programmers_model/`, 190 ln vs ch2, 479 ln)
+- [ ] programmers_model — verify-only (article `r52plus-trm/programmers_model/`, 190 ln vs ch2, 479 ln)
   - Note (S6): article's `##1 关于程序员模型` + `##2 Armv8-R AArch32 架构概念` mirror ch2's 2.1 + 2.2 — expect aligned; record evidence, fix only real gaps.
   - [ ] S1 [ ] S6 [ ] S7 (if changed) [ ] S8 (if changed)
 - [ ] memory_protection_unit — verify-only (article 483 ln, 27 imgs vs ch8, 770 ln)
@@ -24,7 +24,7 @@ Chapter span map (parse lines, incl. running headers — re-locate by title, fir
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] ch4 → new article (Clocking and Resets, 364 ln; e.g. `clocking_and_resets/`)
   - [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [x] ch6 → new article `r52p_processor/initialization/` (Initialization, 304 ln; 6.1 Initialization + 6.1.1 MPU / 6.1.2 FPU / 6.1.3 Caches, 6.2 TCM + 6.2.1-6.2.3, 6.3 Booting into EL1 — no figures, no tables)
+- [x] ch6 → new article `r52plus-trm/initialization/` (Initialization, 304 ln; 6.1 Initialization + 6.1.1 MPU / 6.1.2 FPU / 6.1.3 Caches, 6.2 TCM + 6.2.1-6.2.3, 6.3 Booting into EL1 — no figures, no tables)
   - Note (S1): the mirror moved from `private-docs/ARM/` to `reference-docs/arm/cortex-r52/`; the parse loses the whole 6.1 body (heading only), so that section was read from the PDF pages 6-201 to 6-204. Nav and landing reordered to chapter order while inserting the new page.
   - S8 result: merged as `22c5267` (PR #314).
   - [x] S1 [x] S2 [x] S3 (n/a — no figures) [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
