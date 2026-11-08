@@ -8,28 +8,28 @@ Chapter span map (parse lines, incl. running headers): ch1 Introduction L482–1
 
 ## Queue
 
-- [x] instruction_set — repair the corrupted heading (article `m7_processor/instruction_set/index.md`, 139 ln)
+- [x] instruction_set — repair the corrupted heading (article `m7-trm/instruction_set/index.md`, 139 ln)
   - Note: live defect — `## ARM=-0987654321   yhn 4esx1` under §1 指令集总结; replace with a proper heading (or drop if it duplicates §1). Content alignment to the Armv7-M instruction chapters is tracked in [ARMv7-M](ARMv7-M.md); this row is the 1-line hygiene fix only, can ride any other M7 row's PR.
   - S8 result: shipped as `d160f99`.
   - [x] S1 (heading target) [x] S2 [x] S3 (N/A: no figures) [x] S4 (N/A: page already registered) [x] S5 [x] S6 (N/A: one-line hygiene fix) [x] S7 [x] S8
-- [x] nvic — completion (M7 TRM ch7 NVIC, 242 ln; article = 26-ln stub `m7_processor/nested_vectored_interrupt_controller/`)
+- [x] nvic — completion (M7 TRM ch7 NVIC, 242 ln; article = 26-ln stub `m7-trm/nested_vectored_interrupt_controller/`)
   - Note (S1): source ch7 L4404–4645; architectural cross-check Armv7-M B3.4 NVIC (`private-docs/ARM/M7/DDI0403E_e_armv7m_arm.md`, B3 = L34504–38282). TRM = implementation (priorities, interrupt interfaces), ARM = architectural rules; state the choice in the PR.
   - Note: `docs/cortex/index.md` M7 list misses the NVIC link — add in this run (skill Step 7). mkdocs nav already registers the page.
   - S8 result: shipped as `aca78d7`.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [x] program_status_register — completion/alignment (M7 TRM ch2.6 Processor core registers + ch2.7 Exceptions; article 86 ln `m7_processor/program_status_register/`)
-  - Note: merged with `exception_model` into one-per-chapter article `m7_processor/programmers_model/` on 2026-11-06.
+- [x] program_status_register — completion/alignment (M7 TRM ch2.6 Processor core registers + ch2.7 Exceptions; article 86 ln `m7-trm/program_status_register/`)
+  - Note: merged with `exception_model` into one-per-chapter article `m7-trm/programmers_model/` on 2026-11-06.
   - Note (S1): TRM ch2 L1105–1343; cross-check Armv7-M B1.4 Registers (mapping.md's "B1.2" evidence predates the current mirror). 6 legacy images — verify against the r1p2 PDF before re-cropping; keep file names.
   - S8 result: shipped as `853df31`.
   - [x] S1 [x] S2 [x] S3 [x] S4 (N/A: merged into the existing programmers_model page) [x] S5 [x] S6 [x] S7 [x] S8
-- [x] ch3 → new article `m7_processor/system_control/` (System Control, 665 ln — register summary + register descriptions; naming collides with `r52p_processor/system_control/` only in text, different tree, OK)
+- [x] ch3 → new article `m7-trm/system_control/` (System Control, 665 ln — register summary + register descriptions; naming collides with `r52plus-trm/system_control/` only in text, different tree, OK)
   - S8 result: shipped as `be6a7c5`.
   - [x] S1 [x] S2 [x] S3 [x] S4 (new nav entry) [x] S5 [x] S6 [x] S7 [x] S8
 - [x] ch4 → new article (Initialization, 263 ln; directory name proposed at S1, e.g. `initialization/`)
   - S8 result: shipped as `b25aefb`.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] ch6 → new article (Memory Protection Unit, 206 ln; e.g. `mpu/` — distinct from the Armv7-M PMSAv7 article)
-  - Note: the Armv7-M PMSAv7 article was merged into `m7_processor/mpu/` (sections 4–14) on 2026-11-06.
+  - Note: the Armv7-M PMSAv7 article was merged into `m7-trm/mpu/` (sections 4–14) on 2026-11-06.
   - S8 result: shipped as `6d8fbec`.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] ch8 → new article (Floating Point Unit, 252 ln; e.g. `fpu/`)
