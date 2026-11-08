@@ -24,9 +24,12 @@ Existing-article mappings (mapping.md, evidence re-checked at census): `arm_arch
   - S3 result: 33 bit bars cropped from the ARM PDF (the chapter has no raster figures; the bars are vector) named by register, `CPUID.png` … `NVIC_IPR.png`; no other figures in B3.1–B3.4.
   - S6 result: every numbered table (B3-4 … B3-10) rendered as GFM.
   - [x] S1 [x] S2 [x] S3 [x] S5 [x] S6 [x] S8
-- [ ] ⏸ arm_architecture_memory_mode — completion (article 493 ln vs A3 The Memory Model, 2,039 ln — >1500-line rule: present the run plan first)
-  - Note (S1): article has only `## 1.` + `## 3. 参考文献` at h2 level — likely blog-prose vs the chapter's real section tree; expect substantial in-place insertion.
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] arm_architecture_memory_mode — completed (article `m7_processor/arm_architecture_memory_mode/index.md`, 1,194 ln, 7 imgs vs A3 The Memory Model, 2,039 ln)
+  - S1 result: the page already mirrored A3 at h2 level (`## 1.` = A3 intro, `### 1.1`–`### 1.8` = A3.1–A3.8 with the 1.x.y subsections), so the gaps were missing subsections rather than a restructuring: A3.2.1 对齐行为 absent, A3.4.1–A3.4.6 absent, A3.5.7 truncated after rule 2, and A3.6/A3.7/A3.8 present only as condensed paraphrase.
+  - S2 result: §1.2.1 added (faulting/non-faulting access lists, IMPLEMENTATION DEFINED note, alignment pseudocode, PC-update rules); §1.4.1–1.4.6 added (local monitor, global monitor, Tables A3-2/A3-3, 标记与标记内存块的大小, 上下文切换支持, 使用限制, 同步原语与内存顺序模型); §1.5.7 extended with rules 3–6, the software-coherency sub-rules and the race-condition note; §1.6 rewritten to A3.6.1/A3.6.2 (data/instruction privilege access control); §1.7 rewritten (reads and writes, observability/completion, address & control dependency, Figure A3-8, the six barriers CSDB/DMB/DSB/ISB/PSSBB/SSBB, SCS synchronization); §1.8.2/1.8.3 completed (Figure A3-9, hierarchy note, data/instruction coherency).
+  - S3 result: `FigureA3-6.png` (p71 local monitor state machine), `FigureA3-7.png` (p74 global monitor state machine), `FigureA3-9.png` (p97 memory hierarchy). Figure A3-8 is a plain row/column ordering matrix, so it was rendered as GFM instead of a crop.
+  - S6 result: Tables A3-2 and A3-3 (monitor state transitions) and the A3-8 matrix are GFM; the existing A3-1/A3-4 tables were already GFM.
+  - [x] S1 [x] S2 [x] S3 [x] S5 [x] S6 [x] [ ] S7 (if changed) [ ] S8
 - [ ] instruction_set — content alignment (article 139 ln vs A4 + A5 + A6; heading repair is tracked in [M7-TRM](M7-TRM.md) as a hygiene row — do it in this run if it happens here first)
   - Note: A5 encoding tables are textual — GFM tables by default; raw HTML only when the structure qualifies (see .agents/skills/arm-translate/references/article-format.md §Tables). A7/C1 instruction-by-instruction details are NOT in this row (deferred tail).
   - [ ] S1 [ ] S2 [ ] S3 [ ] S5 [ ] S6 [ ] S7 [ ] S8
