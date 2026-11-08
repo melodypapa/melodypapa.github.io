@@ -15,7 +15,7 @@ A slow sparrow should make an early start. Learning a endless life.
 - **[ARM Cortex](cortex/index.md)** — Cortex-M7 / Cortex-R52 处理器架构：内存保护（MPU）、异常模型、地址映射、缓存
 - **[AUTOSAR](autosar/index.md)** — AUTOSAR R23-11 标准的中文翻译：Classic Platform 各基础软件模块的原理与设计（通信 CAN/Ethernet/LIN、存储 NvM/Flash/EEP、模式管理 EcuM/BswM、I/O ADC/DIO/PWM、系统服务等），以及跨平台的 Foundation 基础标准
 - **[EB Tresos](eb_tresos/index.md)** — EB tresos Studio 配置工具的使用与 Safety OS 集成
-- **[NXP](nxp/index.md)** — S32K5xx 与 S32G2 芯片的应用笔记：MPU 设计、休眠方案、S32G2 各模块
+- **[NXP](nxp/index.md)** — S32K5xx、S32G2 与 S32G3 芯片的应用笔记：MPU 设计、休眠方案、S32G2 各模块，以及 S32G3 参考手册章节的中文翻译
 - **[语言](languages/index.md)** — 德语（Berliner Platz）与法语课程笔记
 - **[Linux](linux/embedded_linux/index.md)** — 嵌入式 Linux 概念
 - **[教育](education/index.md)** — 数学与信息科学

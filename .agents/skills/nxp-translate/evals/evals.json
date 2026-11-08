@@ -1,0 +1,153 @@
+{
+  "skill_name": "nxp-translate",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "盘点 NXP S32G3 Reference Manual（reference-docs/nxp/s32g3/reference_manual/RMS32G3.pdf）的章节覆盖情况：以该手册为基准，列出全部编号章节、PDF 页码范围、目标文章目录名，以及 docs/nxp/s32g3/ 下目前尚缺哪些文章。把盘点报告写成指定输出目录的 inventory.md。只读分析，不要修改仓库里的任何文件，不要做任何 git 操作。",
+      "expected_output": "An inventory report of all 81 numbered chapters with page ranges and target directories, plus a coverage gap list; no repo modifications",
+      "files": [],
+      "assertions": [
+        {
+          "text": "报告以 S32G3RM Rev. 5, 2025-09-17 为基准并引用源 PDF 路径",
+          "check": "report states S32G3RM Rev. 5 (2025-09-17) and the reference-docs/nxp/s32g3/reference_manual/RMS32G3.pdf source path"
+        },
+        {
+          "text": "明确说出编号章节恰好 81 个且连续为 1-81",
+          "check": "report states exactly 81 contiguous numbered chapters, 1-81"
+        },
+        {
+          "text": "给出至少 5 个具体的 chNN_<slug> 目标目录名及页码范围",
+          "check": ">=5 explicit chNN_<slug> directory names with PDF page ranges, matching references/chapter-map.md"
+        },
+        {
+          "text": "说明 11 个 group header 与 appendices A/B、Legal information 属于不可翻译的文档 chrome",
+          "check": "report names the 11 group headers or the grouping, and states appendices A/B and Legal information are chrome, not chapters"
+        },
+        {
+          "text": "指出 docs/nxp/s32g3/ 当前没有文章（或准确列出已有文章），不臆造已有页面",
+          "check": "report does not claim existing S32G3 articles unless they exist"
+        },
+        {
+          "text": "仅产出报告，仓库内被 git 跟踪的文件没有任何修改",
+          "check": "git status shows no tracked-file modifications after the run"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "把 S32G3 Reference Manual 的第 3 章 Memory Map（PDF 113 页，唯一一节 3.1 Introduction）完整翻译成中文文章，按 nxp-translate 技能的规范。把文章写到指定输出目录的 ch03_memory_map/index.md，正文使用 GFM 表格、中文标题。这是离线输出模式：不要修改仓库里的任何文件，不要编辑 mkdocs.yml 或任何站点页面，不要做任何 git 操作。",
+      "expected_output": "A bounded, complete chapter-3 article in an output directory; offline mode with no repo edits",
+      "files": [],
+      "assertions": [
+        {
+          "text": "输出文件路径为 ch03_memory_map/index.md（零填充 chNN 前缀，来自 chapter-map.md）",
+          "check": "output written to ch03_memory_map/index.md"
+        },
+        {
+          "text": "front-matter 只有 title，正文没有 '# ' 一级标题",
+          "check": "starts with --- title: --- and no line starts with '# '"
+        },
+        {
+          "text": "章节编号从 1 重新开始，不保留源编号 3.1",
+          "check": "headings start at '## 1.' and no heading is numbered '3.1'"
+        },
+        {
+          "text": "正文为中文，英文术语首次出现加粗并带中文注释",
+          "check": "prose is Chinese with bolded English terms on first mention"
+        },
+        {
+          "text": "表格为 GFM 文本表，没有 Table_*.png 图片，也没有空章节",
+          "check": "no '![Table' image references, GFM tables have a header row and | --- |, no empty section bodies"
+        },
+        {
+          "text": "离线模式生效：未声明已更新站点，仓库文件无任何修改",
+          "check": "no mkdocs.yml / docs/nxp edits, git status shows no tracked-file modifications"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "对第 43 章 Periodic Interrupt Timer (PIT) 做差距分析：用 nxp-translate 的 extract_chapter.py 导出该章的章节树，与指定输出目录里一份（故意删掉若干节的）ch43_periodic_interrupt_timer_pit/index.md 对照，列出缺失的章节、图表与寄存器条目。把差距报告写到 gap-report.md。只读分析，不要修改仓库里的任何文件，不要做任何 git 操作。",
+      "expected_output": "A gap report listing missing sections/figures/registers from the outline section tree; no repo modifications",
+      "files": [],
+      "assertions": [
+        {
+          "text": "运行了 scripts/extract_chapter.py 并取得第 43 章的章节树（PDF 2235-2252 页）",
+          "check": "tool call runs extract_chapter.py with chapter 43 and the correct PDF path; report states pages 2235-2252"
+        },
+        {
+          "text": "对照全部标题层级，而不只比较 '## ' 一级",
+          "check": "report cites ### / #### level sections, not only level-2 headings"
+        },
+        {
+          "text": "报告列出具体的缺失项（如 43.3 寄存器说明、Figure 256/257、Table 279）",
+          "check": "report names concrete missing sections, figures or tables from the chapter"
+        },
+        {
+          "text": "未把 cover/contents/release notes 等文档 chrome 当作缺失章节",
+          "check": "report does not list appendix A/B, Legal information or group headers as gaps"
+        },
+        {
+          "text": "仅产出报告，仓库文件无修改",
+          "check": "git status shows no tracked-file modifications after the run"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "用 nxp-translate 的 scripts/extract_chapter.py 以 --sections-only 模式导出第 78 章 Debug 的章节树，报告章节数、PDF 页码范围、目标文章目录名，以及该章 outline 中最深的标题层级。不要修改仓库里的任何文件，不要做任何 git 操作。",
+      "expected_output": "Script run reported with the chapter-78 section tree, page range, target directory and deepest outline level; no repo edits",
+      "files": [],
+      "assertions": [
+        {
+          "text": "运行了 extract_chapter.py，参数为第 78 章并带 --sections-only",
+          "check": "tool call runs extract_chapter.py with chapter 78 and --sections-only"
+        },
+        {
+          "text": "报告页码范围 4924-5014 且目标目录为 ch78_debug",
+          "check": "report states pages 4924-5014 and ch78_debug"
+        },
+        {
+          "text": "指出 Debug 是无 'Chapter NN-NN:' 前缀的 group header，不是章节",
+          "check": "report states Debug is a group header shared with p4924, not a numbered chapter"
+        },
+        {
+          "text": "说明 outline 最深可达 level 10，文章标题需钳制在 h6",
+          "check": "report mentions outline levels deeper than h6 and the h6 clamp / bold-paragraph rule"
+        },
+        {
+          "text": "未修改仓库文件、未做 git 操作",
+          "check": "no file edits, no git commands"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "回答一个检索问题：第 51 章 CAN (FlexCAN) 的文章应该放在哪个文件、注册到 mkdocs.yml 的哪个 nav 组、章节 landing page 是哪个、nav 标题怎么写？只回答，不要修改仓库里的任何文件，不要做任何 git 操作。",
+      "expected_output": "The exact article path, nav group, landing page and nav title for chapter 51, with no repo edits",
+      "files": [],
+      "assertions": [
+        {
+          "text": "文章路径为 docs/nxp/s32g3/ch51_can_flexcan/index.md",
+          "check": "answer states docs/nxp/s32g3/ch51_can_flexcan/index.md"
+        },
+        {
+          "text": "nav 组为 NXP 下的 S32G3:，且按章节号排在 ch50 与 ch52 之间",
+          "check": "answer names the S32G3 subgroup under NXP and states chapter-order placement (not appended at the end)"
+        },
+        {
+          "text": "landing page 为 nxp/s32g3/index.md，作为该组无标签的第一项",
+          "check": "answer states nxp/s32g3/index.md is the unlabeled first entry of the group"
+        },
+        {
+          "text": "nav 标题含 FlexCAN 且中文在前，并指出还需更新 docs/nxp/index.md 的 S32G3 链接列表",
+          "check": "answer includes a Chinese-first nav title with FlexCAN and mentions docs/nxp/index.md"
+        },
+        {
+          "text": "未修改仓库文件、未做 git 操作",
+          "check": "no file edits, no git commands"
+        }
+      ]
+    }
+  ]
+}

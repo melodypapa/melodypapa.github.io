@@ -201,6 +201,8 @@ exclude_docs: |
   autosar/TODO.md
   autosar/sync-todo/
   cortex/sync-todo/
+  nxp/s32g3/TODO.md
+  nxp/s32g3/sync-todo/
 
 markdown_extensions:
   - attr_list
@@ -567,6 +569,9 @@ nav:
       - "信息安全 (**Security**)": nxp/s32g2/security/index.md
       - "Semaphores2 (SEMA42)": nxp/s32g2/semaphores2/index.md
       - "系统定时器模块 (**STM**)": nxp/s32g2/system_timer_module/index.md
+    - S32G3:
+      - nxp/s32g3/index.md
+      - "复位 (**Reset**)": nxp/s32g3/ch29_reset/index.md
   - "语言":
     - languages/index.md
     - Deutsch:

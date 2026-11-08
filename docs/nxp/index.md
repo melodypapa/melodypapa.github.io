@@ -20,3 +20,7 @@ NXP 汽车芯片的应用笔记与设计方案。
 - [Semaphores](s32g2/semaphores2/index.md)
 - [Security](s32g2/security/index.md)
 - [System Timer Module](s32g2/system_timer_module/index.md)
+
+## S32G3
+
+- [复位（Reset）](s32g3/ch29_reset/index.md)
