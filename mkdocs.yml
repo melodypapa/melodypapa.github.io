@@ -250,6 +250,7 @@ nav:
       - "ARM架构的内存模式": cortex/m7_processor/arm_architecture_memory_mode/index.md
       - "程序员模型": cortex/m7_processor/programmers_model/index.md
       - "Cortex-M7 指令集": cortex/m7_processor/instruction_set/index.md
+      - "Thumb 指令集编码": cortex/m7_processor/thumb_instruction_set_encoding/index.md
       - "系统控制": cortex/m7_processor/system_control/index.md
       - "初始化": cortex/m7_processor/initialization/index.md
       - "内存系统": cortex/m7_processor/memory_system/index.md
