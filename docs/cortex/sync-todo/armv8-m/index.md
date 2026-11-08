@@ -16,8 +16,8 @@ Pairing note: the file lives under `R52/` in the mirror but documents the Armv8-
 | F | F1 | debug packet protocols |
 | G | — | glossary (chrome) |
 
-Parts C/D/E/F are reference material (instruction encodings, register payloads, pseudocode) — when this group opens, queue Parts A/B chapter-by-chapter first and treat C–F the way [ARMv7-M](ARMv7-M.md) treats its deferred tail.
+Parts C/D/E/F are reference material (instruction encodings, register payloads, pseudocode) — when this group opens, queue Parts A/B chapter-by-chapter first and treat C–F the way [ARMv7-M](../armv7-m/index.md) treats its deferred tail.
 
-## Queue
+## Chapter files
 
-- (empty — deferred)
+None — the group is deferred as a whole; this `index.md` holds the inventory only.

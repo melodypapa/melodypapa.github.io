@@ -1,7 +1,8 @@
 # Cortex sync-todo — Arm document → article queue
 
 > Maintained per the [arm-translate](../../../.agents/skills/arm-translate/SKILL.md) skill; update the touched row and this index after every sync.
-> Execution queue: the Group files below, one-article-at-a-time — **resume = the first `[ ]` row in group order**; all `[x]` = batch complete.
+> Layout (2026-11-08): **one folder per source document, one file per source chapter.** Each `<document>/` folder holds an `index.md` (source header, chapter span map, status/blockers, not-queued list, chapter-file table) plus one `<chapter>.md` per queue row; the row itself — title, notes, `- Sx result:` bullets and the S1–S8 step line — lives on that chapter file. Queues are independent per document because the chapter numbers of the revisions collide (R52 ch3 System Control vs R52+ ch4).
+> Execution queue: the document folders below, one-article-at-a-time — **resume = the first `[ ]` row in queue order inside the active folder**; all `[x]` = batch complete.
 > Census: 2026-11-04, generated from `private-docs/ARM/` (mirror 2026-11-03) vs `docs/cortex/*_processor/` headings; the corpus moved to `reference-docs/arm/` on 2026-11-07 and the R52+ TRM (102199) was catalogued then. This directory is excluded from the site build (`exclude_docs` in `mkdocs.yml`).
 
 ## Sources (`reference-docs/arm/`, read-only; formerly `private-docs/ARM/`)
@@ -29,25 +30,26 @@
 
 | Group | Doc | Articles | Mapped chapters | New-article chapters | Defects found at census |
 | --- | --- | ---: | ---: | ---: | --- |
-| [M7-TRM](M7-TRM.md) | DDI0489F r1p2 | 22 (all registered) | 3 (ch2, ch7, ch13) | 12 — all translated | none open (nvic stub fixed; batch shipped 2026-11-06) |
-| [R52-TRM](R52-TRM.md) | 100026 r1p0 | 4 | 5 (ch2/ch7/ch8 verify-only pending; ch6 done) | 11 + appendices | system_control article 236 ln vs ~11k-ln chapter |
-| [R52plus-TRM](R52plus-TRM.md) | 102199 r0p3 | 6 | 6 (ch3, ch5, ch7, ch8, ch9 verify-only; ch4 completion) | 10 + appendix D | 9 chapters untranslated (GIC, Debug, PMU, CTM, ETM, SIMD/FP, timer, power, intro); system_control 233 ln vs 165 pp |
-| [ARMv7-M](ARMv7-M.md) | DDI0403E E.e | 10 | 5 complete (B1.5, A3, A4, B3.1–B3.5) | A5, A6, B2, B4, B5 done | none open (corrupted heading fixed; A3/A4/A5 shipped in PRs #322/#324/#327, A6/B2/B4/B5 in this batch) |
-| [SDEN](SDEN.md) | SDEN-1068427 v11.0 | 0 | — | 1 (errata notice) | PDF mis-download blocks figure cropping |
-| [ARMv8-M](ARMv8-M.md) | DDI0553B B.y | 0 | — | deferred | no article cites it yet |
+| [M7-TRM](m7-trm/index.md) | DDI0489F r1p2 | 22 (all registered) | 3 (ch2, ch7, ch13) | 12 — all translated | none open (nvic stub fixed; batch shipped 2026-11-06) |
+| [R52-TRM](r52-trm/index.md) | 100026 r1p0 | 4 | 5 (ch2/ch7/ch8 verify-only pending; ch6 done) | 11 + appendices | system_control article 236 ln vs ~11k-ln chapter |
+| [R52plus-TRM](r52plus-trm/index.md) | 102199 r0p3 | 6 | 6 (ch3, ch5, ch7, ch8, ch9 verify-only; ch4 completion) | 10 + appendix D | 9 chapters untranslated (GIC, Debug, PMU, CTM, ETM, SIMD/FP, timer, power, intro); system_control 233 ln vs 165 pp |
+| [ARMv7-M](armv7-m/index.md) | DDI0403E E.e | 10 | 5 complete (B1.5, A3, A4, B3.1–B3.5) | A5, A6, B2, B4, B5 done | none open (corrupted heading fixed; A3/A4/A5 shipped in PRs #322/#324/#327, A6/B2/B4/B5 merged as `6c283e6` in PR #334) |
+| [SDEN](sden/index.md) | SDEN-1068427 v11.0 | 0 | — | 1 (errata notice) | PDF mis-download blocks figure cropping |
+| [ARMv8-M](armv8-m/index.md) | DDI0553B B.y | 0 | — | deferred | no article cites it yet |
 
 ## Group order (execution priority)
 
-1. [M7-TRM](M7-TRM.md) — complete (all rows `[x]`, batch finished 2026-11-06)
-2. [R52plus-TRM](R52plus-TRM.md) — **authoritative for `r52p_processor/`** (the site tree is the R52+ core); verify-only rows first, then the ch4 System Control completion, then new chapters
-3. [R52-TRM](R52-TRM.md) — older 100026 revision; keep as the provenance ledger for pages built before 2026-11-07, do not queue new work from it
-4. [ARMv7-M](ARMv7-M.md) — batch complete (A3–A6, B2, B4, B5); instruction-details tail (A7) deferred
-5. [SDEN](SDEN.md) — text-only run (figures blocked)
-6. [ARMv8-M](ARMv8-M.md) — deferred until an M-profile architecture series opens
+1. [M7-TRM](m7-trm/index.md) — complete (all rows `[x]`, batch finished 2026-11-06)
+2. [R52plus-TRM](r52plus-trm/index.md) — **authoritative for `r52p_processor/`** (the site tree is the R52+ core); verify-only rows first, then the ch4 System Control completion, then new chapters
+3. [R52-TRM](r52-trm/index.md) — older 100026 revision; keep as the provenance ledger for pages built before 2026-11-07, do not queue new work from it
+4. [ARMv7-M](armv7-m/index.md) — batch complete (A3–A6, B2, B4, B5, all rows `[x]`); instruction-details tail (A7) deferred
+5. [SDEN](sden/index.md) — text-only run (figures blocked)
+6. [ARMv8-M](armv8-m/index.md) — deferred until an M-profile architecture series opens
 
 ## Rules
 
 - Steps per row: **S1** source resolution + gap analysis · **S2** in-place translation (main session, never a subagent) · **S3** figures cropped from the PDF into the article dir · **S4** mkdocs nav + `docs/cortex/index.md` landing update · **S5** Phase A mechanical gate · **S6** Phase B fidelity · **S7** user confirmation gate · **S8** commit/PR.
+- One row = one chapter file. A `<document>/index.md` never carries a queue row; a `<chapter>.md` carries exactly one (plus its `- Sx result:` bullets). Moving a row between files is a restructure, not a status change.
 - Chapters whose parse span exceeds ~1500 lines are marked ⏸ in the row — present the per-run plan and get user confirmation before translating (skill Step 3).
 - Verify (S6-only) rows: no rewrite unless the source comparison finds real gaps; record the evidence, then `[x]`.
 - Row status: a row flips to `[x]` **only when every step is checked**; an inapplicable step is ticked with its reason (`S4 (N/A: page already registered)`), never deleted — on closure the step line carries all of S1–S8, so a verify-only row that planned only S1/S6/S7/S8 gains the N/A ticks when it closes.

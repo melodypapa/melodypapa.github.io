@@ -8,11 +8,15 @@ Steps: S1 source resolution + gap analysis · S2 in-place translation · S3 figu
 - **The PDF on disk is BOGUS**: `M7/cortex_m7_at610_and_cortex_m7_with_fpu_at611_software_developer_errata_notice_sden_1068427_v11_0_en.pdf` is byte-identical (md5 `f30dd19c331a3ee47bedde67ef73a104`, 1,251,689 B) to `DDI0489F_cortex_m7_trm.pdf` — a mis-download. Do NOT crop figures from it and do not trust any page whose content differs from the errata notice. The `private-docs/ARM/README.md` ".md only" row is the correct record; the reference in `source-resolution.md` that lists a PDF pair predates this discovery. Never edit `private-docs/ARM/` — re-download the genuine SDEN PDF externally if figures are needed (official PDF behind Akamai bot protection; older v8 mirrored at `state-machine.com/doc/ARM-AT610-611.pdf`).
 - Source shape: front matter (cover/notice/contents) · Change Control (v1.0→v11.0 history — chrome, droppable) · Errata summary table (L337+) · Errata descriptions (Category A implicit / **Category B (rare)** L90 / **Category C** L94) · Product and document information (L141+). The parse carries 1 `![` image ref (unresolved artefact path).
 
-## Queue
+> **Layout:** one folder per source document, one file per source chapter. This `index.md` carries the document-level material; every queue row (title, notes, `- Sx result:` bullets, S1–S8 step line) lives on its own chapter file. The previous single-file ledger was `SDEN.md`.
 
-- [ ] errata notice → new article (text-only; e.g. `m7_processor/sden_errata/`; front-matter title proposes 每个条目以标识符加粗，分类小节 B/C 保留源分组)
-  - Note: translate the Errata summary table (GFM by default; raw HTML only when the structure qualifies) + errata descriptions verbatim; drop Change Control history + document chrome. No figures in this run (blocker above); if the source turns out to reference a figure the parse lost, record it and defer to the genuine-PDF run.
-  - [ ] S1 [ ] S2 [ ] S3 (N/A: no figures in this notice) [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+## Chapter files
+
+Listed in **queue order** — resume = the first `[ ]` row in this order.
+
+| # | Chapter | File | Queue row | State |
+| --- | --- | --- | --- | --- |
+| 1 | Errata notice | [errata-notice](errata-notice.md) | `errata` | open |
 
 ## Not queued (deliberately)
 
