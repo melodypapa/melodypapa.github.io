@@ -1,3 +1,6 @@
 [submodule "private-docs"]
 	path = private-docs
 	url = git@github.com:melodypapa/private-docs.git
+[submodule "uncertainty"]
+	path = .agents/skills
+	url = git@github.com:melodypapa/uncertainty.git
