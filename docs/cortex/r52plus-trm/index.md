@@ -1,5 +1,5 @@
 ---
-title: "Cortex-R52+ TRM（102199 r0p3）"
+title: "Cortex-R52+ TRM"
 ---
 
 本专题收录《Cortex-R52+ Processor Technical Reference Manual》(102199_0001_03) 的章节中文翻译，章节按手册原章节顺序排列。译文最初依据《Cortex-R52 TRM》(100026) 的同名章节翻译，并已按本手册的章节编号与内容校对。

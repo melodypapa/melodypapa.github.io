@@ -1,5 +1,5 @@
 ---
-title: "Cortex-M7 TRM（DDI0489F r1p2）"
+title: "Cortex-M7 TRM"
 ---
 
 本专题收录《Cortex-M7 Technical Reference Manual》(DDI0489F r1p2) 的逐章中文翻译，章节按手册原章节顺序排列。

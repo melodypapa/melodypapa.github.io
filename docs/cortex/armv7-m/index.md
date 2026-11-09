@@ -1,5 +1,5 @@
 ---
-title: "Armv7-M 架构参考手册（DDI0403E E.e）"
+title: "Armv7-M 架构参考手册"
 ---
 
 本专题收录《Armv7-M Architecture Reference Manual》(DDI0403E E.e) 中与 Cortex-M7 相关的架构章节中文翻译，按手册原章节顺序排列（Part A 应用程序级模型在前，Part B 系统级程序员模型在后）。
