@@ -979,7 +979,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **BSWMD**
 > 基础软件模块描述（**Basic Software Module Description**）
 >
-> 来源：[AUTOSAR BSW General（基础软件模块通用规范）](cp/general/bsw_general/index.md)（SWS_BSWGeneral）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）
+> 来源：[AUTOSAR BSW General（基础软件模块通用规范）](cp/general/bsw_general/index.md)（SWS_BSWGeneral）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[Requirements on BSW Module Description Template（基础软件模块描述模板需求）](cp/methodology_templates/rs_bsw_module_description_template/index.md)（AUTOSAR_CP_RS_BSWModuleDescriptionTemplate）
+{: .glossary-source}
+
+**BSWMD-T**
+> 基础软件模块描述模板（**Basic Software Module Description Template**），规定实际的 basic software module description（**BSWMD**）能够提供哪些内容。
+>
+> 来源：[Requirements on BSW Module Description Template（基础软件模块描述模板需求）](cp/methodology_templates/rs_bsw_module_description_template/index.md)（AUTOSAR_CP_RS_BSWModuleDescriptionTemplate）
 {: .glossary-source}
 
 **BswSchedulableEntity activation**
@@ -4211,6 +4217,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 内部缓冲通道（**Internally buffered channels**）：包含待传输数据的缓冲区位于 SPI 处理器/驱动程序之内。
 >
 > 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](cp/communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
+{: .glossary-source}
+
+**ICS**
+> 实现一致性声明（**Implementation Conformance Statement**），对规范所声明选项的一个实现所作的一致性陈述。
+>
+> 来源：[Requirements on BSW Module Description Template（基础软件模块描述模板需求）](cp/methodology_templates/rs_bsw_module_description_template/index.md)（AUTOSAR_CP_RS_BSWModuleDescriptionTemplate）
 {: .glossary-source}
 
 **ICC**
@@ -8687,9 +8699,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **SWC**
-> 软件组件（**SoftWare Component**）、[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
+> 软件组件（**SoftWare Component**）
 >
-> 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）
+> 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
 {: .glossary-source}
 
 **SWCD**

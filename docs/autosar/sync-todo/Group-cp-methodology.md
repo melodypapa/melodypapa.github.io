@@ -34,16 +34,18 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
-- [ ] rs_bsw_module_description_template (AUTOSAR_CP_RS_BSWModuleDescriptionTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [x] rs_bsw_module_description_template (AUTOSAR_CP_RS_BSWModuleDescriptionTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on BSW Module Description Template（基础软件模块描述模板需求）; target `cp/methodology_templates/rs_bsw_module_description_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_RS_BSWModuleDescriptionTemplate.md` — 1,389 lines, 47 figure refs, 84 item IDs
   - Note: related site content: cp/methodology_templates/basic_software_module_description_template (the TPS counterpart article — cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-10 run — item-ID decision applied; 57 requirement items numbered §3.1.1–§3.4.4 across 4.1–4.4, titles translated, intra-item dependencies rewritten as §x.y.z links, cross-doc item refs kept unbracketed (RS_ECUC_00002, RS_ECUC_00068, RS_TIMEX_00013, SWS_BSW_00001) with citation links; ch.2.3 abbreviations (11 rows) in blockquote format; source ch.3 Requirements Tracing omitted per ASWS precedent (4→3, 5→4); RS_BSWMD_00043 heading level lost in the markdown conversion — restored; garbled cells of 15 items recovered from the R23-11 PDF; 1 content figure (Figure 1.1 methodology overview → Figure1-1.png, margin-padded), 46 refs are page chrome; change-history §4.1–§4.12 with titles-only tables (incl. the source's own duplicated "Make requirements applicable…" rows kept 1:1); cross-article census: DEM → diagnostic_event_manager x3, EcuM → ecu_state_manager x2 (report-only), CanIf/ComM NO-ARTICLE; glossary +2 (BSWMD-T, ICS) + BSWMD source appended + pre-existing malformed SWC entry fixed (source material had leaked into the definition line); source ch.2 typo "Related Documentationn" translated by its intended meaning
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-10)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_system_template (AUTOSAR_CP_RS_SystemTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on System Template（系统模板需求）; target `cp/methodology_templates/rs_system_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_RS_SystemTemplate.md` — 1,498 lines, 48 figure refs, 88 item IDs
