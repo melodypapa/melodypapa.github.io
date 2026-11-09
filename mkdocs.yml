@@ -473,6 +473,7 @@ nav:
         - "System Template Requirements": autosar/cp/methodology_templates/rs_system_template/index.md
         - "ECU Resource Template": autosar/cp/methodology_templates/tps_ecu_resource_template/index.md
         - "Diagnostic Extract Requirements": autosar/cp/methodology_templates/rs_diagnostic_extract_template/index.md
+        - "Software Component Requirements": autosar/cp/methodology_templates/rs_software_component_template/index.md
       - 模式管理:
         - autosar/cp/mode_management/index.md
         - "BswM": autosar/cp/mode_management/basic_software_mode_manager/index.md

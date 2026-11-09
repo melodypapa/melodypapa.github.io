@@ -81,15 +81,17 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
-- [ ] rs_software_component_template (AUTOSAR_CP_RS_SoftwareComponentTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [x] rs_software_component_template (AUTOSAR_CP_RS_SoftwareComponentTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Software Component Template（软件组件模板需求）; target `cp/methodology_templates/rs_software_component_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_RS_SoftwareComponentTemplate.md` — 1,877 lines, 60 figure refs, 107 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-10 run — item-ID decision applied; 69 items across §2.1 (13 — content is 'See requirement RS_Main_*' cross-refs, kept unbracketed per row-3 precedent; Main70 typo kept) / §2.2 (9 — 'See use case in [5] chapter 3.2.x', cross-doc SWCT dependency refs kept unbracketed) / §2.3 (47 — item titles LOST in the markdown conversion, restored from the R23-11 PDF item boxes; multi-item sections rendered as bold item-title line + table, single 'See …' sections as bare tables); §1.4 tracing table omitted per ASWS precedent; garbled cells of 2.3.4/2.3.23/2.3.35/2.3.39/2.3.45/2.3.47 recovered from the PDF; ch.3 Change history (numbered chapter) titles-only; 0 content figures (60 chrome refs); census: [10.2]/[10.3] release numbers in §2.3.20 use case correctly UNRESOLVED (release versions, not chapter refs); ComM NO-ARTICLE, PORT report-only
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-10)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] tr_franca_integration (AUTOSAR_CP_TR_FrancaIntegration · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Franca Integration（Franca 集成）; target `cp/methodology_templates/tr_franca_integration/`; technical report (TR) — informational, no numbered requirement items
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TR_FrancaIntegration.md` — 2,346 lines, 87 figure refs, 0 item IDs
