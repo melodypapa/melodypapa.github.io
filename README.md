@@ -43,6 +43,7 @@ If you already cloned the repository, synchronize the configured URLs and initia
 
 ```bash
 git submodule sync --recursive
+git submodule update --remote
 git submodule update --init --recursive
 ```
 

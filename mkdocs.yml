@@ -275,8 +275,7 @@ nav:
       - 通信:
 
         - "什么是SerDes": cortex/concept/communication/serdes/index.md
-    - Cortex-M7 TRM（DDI0489F r1p2）:
-
+    - Cortex-M7 TRM:
       - cortex/m7-trm/index.md
       - "简介": cortex/m7-trm/introduction/index.md
       - "程序员模型": cortex/m7-trm/programmers_model/index.md
@@ -294,8 +293,7 @@ nav:
       - "跟踪端口接口单元": cortex/m7-trm/tpiu/index.md
       - "故障检测与处理": cortex/m7-trm/fault_detection/index.md
       - "术语表": cortex/m7-trm/glossary/index.md
-    - Armv7-M 架构参考手册（DDI0403E E.e）:
-
+    - Armv7-M 架构参考手册:
       - cortex/armv7-m/index.md
       - "ARM架构的内存模式": cortex/armv7-m/arm_architecture_memory_mode/index.md
       - "Thumb 指令集编码": cortex/armv7-m/thumb_instruction_set_encoding/index.md
@@ -304,7 +302,7 @@ nav:
       - "系统地址映射": cortex/armv7-m/system_address_map/index.md
       - "CPUID 方案": cortex/armv7-m/cpuid_scheme/index.md
       - "系统指令详情": cortex/armv7-m/system_instructions/index.md
-    - Cortex-R52+ TRM（102199 r0p3）:
+    - Cortex-R52+ TRM:
       - cortex/r52plus-trm/index.md
       - "简介": cortex/r52plus-trm/introduction/index.md
       - "Cortex®-R52+ 处理器": cortex/r52plus-trm/processor_overview/index.md
