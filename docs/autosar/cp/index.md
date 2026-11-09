@@ -167,6 +167,7 @@ title: "CP AUTOSAR"
   * [ECU Resource Template（ECU 资源模板）](methodology_templates/tps_ecu_resource_template/index.md)
   * [Requirements on Diagnostic Extract Template（诊断提取模板需求）](methodology_templates/rs_diagnostic_extract_template/index.md)
   * [Requirements on Software Component Template（软件组件模板需求）](methodology_templates/rs_software_component_template/index.md)
+  * [Franca Integration（Franca 集成）](methodology_templates/tr_franca_integration/index.md)
 
 ### 模式管理
 

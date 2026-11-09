@@ -92,15 +92,17 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
-- [ ] tr_franca_integration (AUTOSAR_CP_TR_FrancaIntegration · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [x] tr_franca_integration (AUTOSAR_CP_TR_FrancaIntegration · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Franca Integration（Franca 集成）; target `cp/methodology_templates/tr_franca_integration/`; technical report (TR) — informational, no numbered requirement items
-  - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TR_FrancaIntegration.md` — 2,346 lines, 87 figure refs, 0 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TR_FrancaIntegration.md` — 2,346 lines, 87 figure refs, 0 item IDs (queue-note wrong: the doc carries TR_FRANCA_* spec items and constraints — treated as the TPS-shape items)
+  - Note: 2026-11-10 run — item-ID decision applied; chapters 1–4 + appendices A/B/C mirrored; TR_FRANCA items (goal/connector constraints/translation rules) rendered as **标题** + mapping tables (AR 元素/AR 容器/属性/条件) per the tps_standardization_template precedent; mapping tables normalized; 9 content figures embedded (Figure1-1–1-6, 2-1, 3-1, 3-2, trimmed+padding), 78 refs page chrome; UML sequence-diagram text spill in figure 1.1 dropped per figure convention; appendix A 4 listings reassembled from page-split fences (duplicate/escape fragments dropped); appendix B 29 mentioned class tables translated in full (caption-after-table conversion artifact — captions placed above the correct tables); appendix C change history all-无; intra-article anchors verified against built HTML slugs (Chinese+parenthetical heading slugs differ from naive expectation — fixed via build INFO sweep); external URLs franca Google Code + genivi commonapi return 000 on curl (likely dead/anti-bot) — kept verbatim from the source, flagged for user browser verification; cross-article census: PORT report-only
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-10)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] tr_general_blueprints_supplement (AUTOSAR_CP_TR_GeneralBlueprintsSupplement · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: General Blueprints Supplement（通用蓝图补充）; target `cp/methodology_templates/tr_general_blueprints_supplement/`; technical report (TR) — informational, no numbered requirement items
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TR_GeneralBlueprintsSupplement.md` — 2,801 lines, 115 figure refs, 1 item ID
