@@ -24,6 +24,30 @@ The site focuses on automotive embedded software, along with personal notes on l
 | [Education](docs/education/index.md) | Mathematics and computer science |
 | [Blog](docs/blog/index.md) | Updates and technical essays |
 
+## Git Submodules
+
+This repository includes two Git submodules:
+
+| Path | Contents |
+| --- | --- |
+| `private-docs/` | Private reference documents and internal notes; requires GitHub repository access and HTTPS authentication |
+| `.agents/skills/` | Reusable agent skills used when working on this repository |
+
+Clone the repository and its submodules:
+
+```bash
+git clone --recurse-submodules https://github.com/melodypapa/melodypapa.github.io.git
+```
+
+If you already cloned the repository, synchronize the configured URLs and initialize the submodules with:
+
+```bash
+git submodule sync --recursive
+git submodule update --init --recursive
+```
+
+The public MkDocs site can be built without either submodule. If you do not have access to the private `private-docs` repository, clone the site repository without `--recurse-submodules` and skip submodule initialization.
+
 ## Local Development
 
 Prerequisite: Python 3 and either [uv](https://docs.astral.sh/uv/) (recommended) or pip.
