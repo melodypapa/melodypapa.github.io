@@ -907,7 +907,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Blueprint**
 > 这是一种模型，其他模型可以通过复制和细化从中派生。注意，与元模型及类型相对照，这一过程不是实例化。
 >
-> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）、[ECU Resource Template（ECU 资源模板）](cp/methodology_templates/tps_ecu_resource_template/index.md)（AUTOSAR_CP_TPS_ECUResourceTemplate）
 {: .glossary-source}
 
 **Bmc**
@@ -9646,7 +9646,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Variation Point**
 > 变体点。设计中在 2 个或更多变体之间给出选择的位置；必须做出选择的时间称为最晚绑定时间。
 >
-> 来源：[VFB（虚拟功能总线）](cp/general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）
+> 来源：[VFB（虚拟功能总线）](cp/general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）、[ECU Resource Template（ECU 资源模板）](cp/methodology_templates/tps_ecu_resource_template/index.md)（AUTOSAR_CP_TPS_ECUResourceTemplate）
 {: .glossary-source}
 
 **VB**

@@ -57,16 +57,18 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
-- [ ] tps_ecu_resource_template (AUTOSAR_CP_TPS_ECUResourceTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [x] tps_ecu_resource_template (AUTOSAR_CP_TPS_ECUResourceTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: ECU Resource Template（ECU 资源模板）; target `cp/methodology_templates/tps_ecu_resource_template/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type, cf. BSWMDT exemption)
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TPS_ECUResourceTemplate.md` — 1,566 lines, 68 figure refs, 62 item IDs
   - Note: related site content: none yet (rs_ecu_resource_template queued above — cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-10 run — TPS shape per the tps_standardization_template precedent: spec/constraint item IDs dropped (items = **标题**：text, constraints = 约束： prefix); 14 class tables normalized from the 4x-duplicated PDF columns to the two-table format; appendix A (Reference Material: A.1 traceability + A.2 tracing, pure ID tables) omitted per ASWS precedent — appendix lettering B/C/D/E kept from the source, not re-lettered (USER: verify); 4 content figures embedded (Figure1-1/2-1/2-2/B-1, trimmed+padding), 64 refs are page chrome; appendix B ARXML examples reassembled from page-split fences (duplicate fragments dropped, tags reflowed); appendix C glossary 37 terms in blockquote format; appendix D item history titles-only (D.3.2's garbled SWS-Item/Rationale table rendered as titles); appendix E 8 mentioned class tables translated in full (huge Subclasses lists kept verbatim); 3.1.x/3.2.1 category headings carry the 类别 qualifier (single-word HwCategory identifiers not recognized by check_heading_lang's shape test); ch.2 cross-refs linked intra-article (22 chapter-number refs applied, 0 broken — the two UNRESOLVED "2.0" hits are the UML 2.0 version string, correctly left unlinked); external URLs verified: IEEE 854 (https), omg.org SPEM (http 200); glossary: Blueprint + Variation Point sources appended
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-10)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_diagnostic_extract_template (AUTOSAR_CP_RS_DiagnosticExtractTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Diagnostic Extract Template（诊断提取模板需求）; target `cp/methodology_templates/rs_diagnostic_extract_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_RS_DiagnosticExtractTemplate.md` — 1,692 lines, 49 figure refs, 81 item IDs

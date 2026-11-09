@@ -11,6 +11,7 @@ title: "方法论与模板（Methodology and Templates）"
 * [Requirements on ECU Configuration（ECU 配置需求）](rs_ecu_configuration/index.md)
 * [Requirements on BSW Module Description Template（基础软件模块描述模板需求）](rs_bsw_module_description_template/index.md)
 * [Requirements on System Template（系统模板需求）](rs_system_template/index.md)
+* [ECU Resource Template（ECU 资源模板）](tps_ecu_resource_template/index.md)
 
 ## 相关内容
 
