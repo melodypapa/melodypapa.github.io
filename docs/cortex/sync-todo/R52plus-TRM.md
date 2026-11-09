@@ -45,7 +45,7 @@ Chapter span map (PDF pages): ch1 Introduction 24–27 (4) · ch2 The Cortex-R52
   - S3 result: Figures 4-43 … 4-93 cropped from the same PDF (89 numbered references resolve); the four pre-existing `Figure4_7…4_10.png` keep their legacy underscore names.
   - S6 result: table numbers 4-125 … 4-231 text references kept source-faithful; `PAR` F==0/F==1 split as the bold sub-blocks `3.81.1`/`3.81.2`; IFSR `Status = 0b011000` carries source footnote 59, whose footnote body is missing from the PDF text layer, so the marker is omitted rather than invented.
   - S5 result: strict build 0 WARNING; heading-language check (103/103 headings contain Chinese) and figure audit clean.
-  - S8 result: PR #356.
+  - S8 result: PR #358.
   - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] ch11 → new article (Generic Timer) — `generic_timer/index.md`, 2026-11-09
   - S1 result: ch11.1 About the Generic Timer / 11.2 Generic Timer functional description / 11.3 Generic Timer register summary (11.3.1). One figure (Figure 11-1 Architectural counter interface) and one table (Table 11-1, 15 registers).
