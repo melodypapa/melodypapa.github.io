@@ -2,7 +2,7 @@
 
 > Working file — excluded from the site build (`exclude_docs: autosar/sync-todo/` in `mkdocs.yml`). This is a verification worklist, **not** a status ledger; [`../TODO.md`](../TODO.md) remains the single source of truth for article status, doc IDs and per-article sync notes.
 > Collected: 2026-11-06 from `../TODO.md`; regenerated after the `origin/master` sync (HEAD `458e6d5`, PR #295 rte-swarch-batch).
-> Scope (user choice): every row marked ✅ Type A-compliant or 📖 Guide/topic — **166 finished articles** (162 ✅ + 4 📖), all unique and all paths resolving. Regenerated 2026-11-06 after the F1–F4 ledger cleanup and the `origin/master` sync (PR #295 added the RTE / ARTI SWS rows).
+> Scope (user choice): every row marked ✅ Type A-compliant or 📖 Guide/topic — **169 finished articles** (165 ✅ + 4 📖), all unique and all paths resolving. Regenerated 2026-11-06 after the F1–F4 ledger cleanup and the `origin/master` sync (PR #295 added the RTE / ARTI SWS rows); refreshed 2026-11-09 from `../TODO.md` — the ledger had gained 3 new ✅ Foundation articles (`tps_generic_structure_template`, `prs_e2e_protocol`, `prs_log_and_trace_protocol`), see **Batch 3**.
 > The ledger is a moving target (a parallel translation session keeps syncing) — regenerate from `../TODO.md` if the counts change again.
 > Paths below carry a `../` prefix (relative to this `sync-todo/` directory); in `../TODO.md` the same paths are relative to `docs/autosar/`.
 
@@ -235,10 +235,9 @@ Resolved in batch 2 (2026-11-07, PR #301):
 - **B2** — all 47 URLs re-probed and browser-verified: 9 transient failures recovered, anti-bot hosts confirmed reachable, genuine 404/500s are source-faithful legacy references. No links changed. See the B2 section.
 - **A5** — `check_heading_lang.py` widened to recognise C-declared function names; `--site` now reports 0 violations (regression-tested).
 
-Still open:
+Still open: **none**. All 166 original leading boxes are ticked. The two items held in the Phase B scaled pass — `e2e_transformer` (duplicated §6 block) and `cp/rte/rte` (gated ch.7 deviation) — were resolved in **Batch 3** (2026-11-09), and the worklist was refreshed to the current ledger (**169 finished articles**: 165 ✅ + 4 📖). See **Batch 3**.
 
-- **Per-article Phase B prose read-through** — scaled to all 163 remaining articles (see **Phase B scaled**); 161 more leading boxes ticked (3 pilot + 161 scaled), 2 held with documented reasons (`e2e_transformer` duplicated §6 block + `rte/rte` gated ch.7 deviation). The 25 prose-`[SWS_*]` articles were held pending a §4 decision and are now resolved — STANDARD.md §4 amended (2026-11-07) to sanction source-faithful inline requirement cross-references, those 25 boxes ticked. `check_api_sync.py` ran in batch 1 (112 pairs). Pilot: the `mcal` section — see **Phase B pilot**.
-- **`cp/rte/rte` ch.7** — documented gated deviation from PR #295; the sole `内容 [ ]` box, intentionally open.
+Historical status at the end of batch 2: Phase B prose read-through scaled to all 163 remaining articles (see **Phase B scaled**); 161 more leading boxes ticked (3 pilot + 161 scaled), 2 held. The 25 prose-`[SWS_*]` articles were held pending a §4 decision and were resolved when STANDARD.md §4 was amended (2026-11-07) to sanction source-faithful inline requirement cross-references. `check_api_sync.py` ran in batch 1 (112 pairs). Pilot: the `mcal` section — see **Phase B pilot**.
 
 ## Batch 1 — automated per-article verification (2026-11-07)
 
@@ -265,7 +264,7 @@ First per-article pass over all 166 articles. `链接 [x]` ticked for all 166; `
 - 10 ch.2 wording pending: `ieee1722tp`, `com`, `flexray_interface`, `flexray_network_management`, `flexray_state_manager`, `flexray_transceiver_driver`, `flexray_iso_transport_layer`, `time_service`, `comm`, `software_cluster_connection`.
 - 5 structural: `can_driver` (ch.6 功能规范), `flexray_ar_transport_layer` (ch.5 absent, ch.6/7 wording, numbering gap), `standard_types` (ch.5 软件架构 — faithful to its source, needs a §7-style exemption), `memory_mapping` (numbering gap), `cp/rte/rte` (ch.7 absent — documented gated deviation from PR #295).
 
-## Articles (166)
+## Articles (169)
 
 ### communication（61 篇）
 
@@ -298,7 +297,7 @@ First per-article pass over all 166 articles. `链接 [x]` ticked for all 166; `
 - [x] [CAN 收发器驱动](../cp/communication/can_transceiver_driver/) — 内容 [x] · 链接 [x]
 - [x] [COM 基转换器](../cp/communication/com_based_transformer/) — 内容 [x] · 链接 [x]
 - [x] [数据分发服务](../cp/communication/data_distribution/) — 内容 [x] · 链接 [x]
-- [ ] [E2E 转换器](../cp/communication/e2e_transformer/) — 内容 [x] · 链接 [x]
+- [x] [E2E 转换器](../cp/communication/e2e_transformer/) — 内容 [x] · 链接 [x]
 - [x] [以太网接口](../cp/communication/ethernet_interface/) — 内容 [x] · 链接 [x]
 - [x] [LIN 接口](../cp/communication/lin_interface/) — 内容 [x] · 链接 [x]
 - [x] [AUTOSAR LinSM（LIN 状态管理器）](../cp/communication/linsm/index.md) — 内容 [x] · 链接 [x]
@@ -451,7 +450,7 @@ First per-article pass over all 166 articles. `链接 [x]` ticked for all 166; `
 - [x] [Explanation of System Health Monitoring（系统健康监控说明）](../foundation/health_monitoring/exp_system_health_monitoring/) — 内容 [x] · 链接 [x]
 - [x] [Requirements on Health Monitoring（健康监控需求）](../foundation/health_monitoring/rs_health_monitoring/) — 内容 [x] · 链接 [x]
 
-### foundation/methodology_templates (Methodology and Templates)（12 篇）
+### foundation/methodology_templates (Methodology and Templates)（13 篇）
 
 - [x] [Requirements on Feature Model Exchange Format（特征模型交换格式需求）](../foundation/methodology_templates/rs_feature_model_exchange_format/) — 内容 [x] · 链接 [x]
 - [x] [Requirements on Methodology（方法论需求）](../foundation/methodology_templates/rs_methodology/) — 内容 [x] · 链接 [x]
@@ -461,14 +460,17 @@ First per-article pass over all 166 articles. `链接 [x]` ticked for all 166; `
 - [x] [ARXML Serialization Rules（ARXML 序列化规则）](../foundation/methodology_templates/tps_arxml_serialization_rules/) — 内容 [x] · 链接 [x]
 - [x] [Abstract Platform Specification（抽象平台规范）](../foundation/methodology_templates/tps_abstract_platform_specification/) — 内容 [x] · 链接 [x]
 - [x] [Feature Model Exchange Format（特征模型交换格式）](../foundation/methodology_templates/tps_feature_model_exchange_format/) — 内容 [x] · 链接 [x]
+- [x] [Generic Structure Template（通用结构模板）](../foundation/methodology_templates/tps_generic_structure_template/) — 内容 [x] · 链接 [x]
 - [x] [Log and Trace Extract Template（日志与跟踪提取模板）](../foundation/methodology_templates/tps_log_and_trace_extract/) — 内容 [x] · 链接 [x]
 - [x] [Security Extract Template（安全提取模板）](../foundation/methodology_templates/tps_security_extract_template/) — 内容 [x] · 链接 [x]
 - [x] [Standardization Template（标准化模板）](../foundation/methodology_templates/tps_standardization_template/) — 内容 [x] · 链接 [x]
 - [x] [XML Schema Production Rules（XML 模式生成规则）](../foundation/methodology_templates/tps_xml_schema_production_rules/) — 内容 [x] · 链接 [x]
 
-### foundation/protocols (Protocols)（12 篇）
+### foundation/protocols (Protocols)（14 篇）
 
+- [x] [E2E Protocol Specification（端到端协议规范）](../foundation/protocols/prs_e2e_protocol/) — 内容 [x] · 链接 [x]
 - [x] [Intrusion Detection System Protocol Specification（入侵检测系统协议规范）](../foundation/protocols/prs_intrusion_detection_system/) — 内容 [x] · 链接 [x]
+- [x] [Log and Trace Protocol Specification（日志与跟踪协议规范）](../foundation/protocols/prs_log_and_trace_protocol/) — 内容 [x] · 链接 [x]
 - [x] [Network Management Protocol Specification（网络管理协议规范）](../foundation/protocols/prs_network_management_protocol/) — 内容 [x] · 链接 [x]
 - [x] [SOME/IP Protocol Specification（SOME/IP 协议规范）](../foundation/protocols/prs_someip_protocol/) — 内容 [x] · 链接 [x]
 - [x] [SOME/IP Service Discovery Protocol Specification（SOME/IP 服务发现协议规范）](../foundation/protocols/prs_someip_service_discovery_protocol/) — 内容 [x] · 链接 [x]
@@ -502,7 +504,7 @@ First per-article pass over all 166 articles. `链接 [x]` ticked for all 166; `
 
 ### rte (RTE / SWArch)（2 篇）
 
-- [ ] [AUTOSAR RTE（运行时环境）](../cp/rte/rte/index.md) — 内容 [ ] · 链接 [x]
+- [x] [AUTOSAR RTE（运行时环境）](../cp/rte/rte/index.md) — 内容 [x] · 链接 [x]
 - [x] [AUTOSAR ARTI（运行时接口）](../cp/sw_arch/arti_sws/index.md) — 内容 [x] · 链接 [x]
 
 ## Batch 2 — A1–A3 resolution (2026-11-07)
@@ -572,13 +574,13 @@ The pilot's steps 1–6 were scripted (`/tmp/phaseb_check2.py`, session-only) an
 | Cleared of hard findings | **159** | no title/chapter/slug/hygiene/image/link defect |
 | Hard-flagged | **4** | 3 duplicate-slug articles + `cp/rte/rte` (documented gated ch.7 deviation) |
 | Leading boxes ticked | **161** | cleared + no open rule conflict (incl. 25 prose-`[SWS_*]` articles resolved by the §4 amendment) |
-| Leading boxes held | **2** | `e2e_transformer` (duplicated §6 block) + `rte/rte` (gated ch.7 deviation) |
+| Leading boxes held | **2** | `e2e_transformer` (duplicated §6 block) + `rte/rte` (gated ch.7 deviation) — **both resolved 2026-11-09 in Batch 3** |
 
 **Hard findings (4 articles):**
-- `cp/communication/e2e_transformer/index.md` — `### 6.1`/`6.2` duplicated slugs from a **genuine duplicated §6 block**: an older short translation (with Figure7-2/7-13) and a full source-faithful translation of ch.7 (§6.1–6.8) both present. Held; needs a content decision, not a mechanical fix.
+- `cp/communication/e2e_transformer/index.md` — `### 6.1`/`6.2` duplicated slugs from a **genuine duplicated §6 block**: an older short translation (with Figure7-2/7-13) and a full source-faithful translation of ch.7 (§6.1–6.8) both present. Held at the time; **resolved 2026-11-09 (Batch 3)** by removing the stale block.
 - `cp/diagnostics/diagnostic_communication_manager/index.md` — `###### 同步接口` / `###### 异步接口` each appear twice under two different `##### 7.8.2.x` API functions; unnumbered sub-headings, **0 inbound anchors**.
 - `foundation/protocols/prs_v2x_remote_access_layer/index.md` — `#### 消息载荷（Message Payload）` twice, under §5.1.1.2 and §5.1.1.3; **0 inbound anchors**.
-- `cp/rte/rte/index.md` — chapters `[1,2,3,4,5,6,8]`, the documented gated deviation from PR #295; intentionally held.
+- `cp/rte/rte/index.md` — chapters `[1,2,3,4,5,6,8]`, the documented gated deviation from PR #295; intentionally held then. **Resolved 2026-11-09 (Batch 3)** with a real `## 7. API规范` chapter.
 
 **Genuine fix (1):** `cp/libraries/mfx/index.md:1591–1635` — `#### 7.7` → `### 7.7` and `##### 7.7.1` / `7.7.2` / `7.8.1` → `####`, aligning with the sibling `### 7.6` / `### 7.8` and STANDARD.md §4 (heading level = numeric depth + 2). Slugs are text-based, so `cp/api/` anchors (`#781-mfx_getversioninfo`) are unchanged; the regenerated `cp/api/` is byte-identical.
 
@@ -592,6 +594,55 @@ The pilot's steps 1–6 were scripted (`/tmp/phaseb_check2.py`, session-only) an
 - **3 Foundation `[1,1,2,3,4]` chapter sequences** — a `## 1.1.` heading counted as chapter 1; the level-2-only regex removed the false gap.
 
 **Rule conflict — RESOLVED (2026-11-07, §4 amended):** STANDARD.md §4 said "No source requirement IDs (`[SWS_Adc_00122]` and the like)". 38 articles carry 7,637 inline `[SWS_*]` IDs, but 6,115 are inside ```C code fences (sanctioned appendix-B change-history data per §1) and 483 are in lettered appendices. The remaining **1,039 IDs in prose across 25 articles** are source-faithful cross-references, e.g. "可以在加密驱动程序规范的 [SWS_Crypto_00073] 中找到" and `[SWS_Csm_00024] 基于上述操作给出作业状态机的概览`. Per the user's decision ("keep them all"), §4 now sanctions source-faithful inline requirement cross-references (retained verbatim; only newly-introduced or non-source IDs are still forbidden). The 25 articles are now compliant and their leading boxes ticked; all 25 retain `内容 [x]` and `链接 [x]`. No article was rewritten — this is the same rule-amendment approach as the ch.2 conflict in PR #301.
+
+## Batch 3 — held items resolved + scope refresh (2026-11-09)
+
+User decisions for this pass: (1) close the two held items rather than exempt or re-hold them; (2) resolve `cp/rte/rte` by **restructuring the article** with a real `## 7. API规范` chapter (not a §7 exemption); (3) also refresh the worklist to the current ledger; (4) verify against the R23-11 source outside the repo (authorised).
+
+### e2e_transformer §6 dedup
+
+Source check: R23-11 `AUTOSAR_CP_SWS_E2ETransformer.md` ch.7 *Functional specification* (source lines 267–1271) has 7.1–7.8 plus a chapter intro. The article's full `### 6.1`–`6.8` block (former lines 216–843) is the faithful translation of that chapter; `../TODO.md:129` records it as the intended §6. The duplicate originated in commit `d79716c` (2026-10-29 realignment), which renumbered the blog-era `## 4. 功能规范` block into `### 6.1`–`6.4` (with Figure7-2/7-13) and **appended** the new translation without deleting the old one; a new source-faithful ch.1 retranslation (source lines 159–182) was also left wedged between the two blocks.
+
+Fix: removed 65 lines — the pre-realignment §6 intro + `### 6.1`–`6.4` + 2 figure refs, and the misplaced ch.1 retranslation (which duplicated `## 1.`'s content). Kept `## 6. 功能规格` + the full §6.1–6.8. Chapters now `[1..9]` + `## B.`; 0 duplicate `### 6.1`/`6.2` slugs. Figure7-2/7-13 are still referenced by §6.7.2/§6.7.3, so no image was orphaned. All 42 intra-page anchors and all `cp/api/` anchors still resolve; no inbound links pointed at the removed slugs. `../TODO.md:129` updated.
+
+### cp/rte/rte `## 7. API规范` restructure
+
+The deviation from PR #295 was that source ch.5 *RTE Reference* / ch.6 *Basic Software Scheduler Reference* material sat at `#### 7.1`/`#### 7.2` under `### 6.3. RTE 实现插件`, with no level-2 `## 7` chapter and chapters `[1,2,3,4,5,6,8]`.
+
+Fix (user chose the full restructure over a §7 exemption):
+- Inserted `## 7. API规范` immediately before `#### 7.1. RTE 参考` (line 14171). This closes the §6.3 tree and makes 7.1/7.2 proper children of chapter 7.
+- Re-levelled the **156** `7.x` headings to STANDARD.md §4 (`heading level = numeric depth + 2`, capped at h6): 2 × h4→h3, 18 × h5→h4, 131 × h6→h5; 5 depth-5/6 headings already at h6 stay. Net 151 hash-only changes, **zero text changes** (verified line-by-line against `/tmp/rte_before.md`).
+- Chapters now `[1..8]` continuous + appendices A–F. `### 7.1. RTE 参考` / `### 7.2. 基础软件调度器参考` keep their source-faithful titles — the same §2 compound-heading precedent that sanctioned the 11 ch.2 variants (PR #301); renaming them would break ~130 `cp/api/` anchors.
+- `../TODO.md:359` updated (gate deviation clause replaced).
+
+Because Material slugs derive from heading **text**, not level, no anchor re-pointing was needed. Verified against the built HTML: 130 `cp/api/` RTE anchors + 1227 intra-page anchor links all resolve; 0 duplicate slugs; `## 7. API规范` present in the built page. `gen_api_list.py` regenerated `cp/api/` **byte-identical** — no listing churn. (Note: the helper scripts' `parents[4]` ROOT resolution broke after the 2026-11-08 skill move to `.agents/skills/skills/`; a patched `/tmp` copy with the correct repo root was used, and `check_indexes.py` was given `--root`.)
+
+### Scope refresh — 3 new finished articles
+
+`../TODO.md` had grown from 166 to **169** finished rows (165 ✅ + 4 📖). The 3 new ✅ Foundation articles were added to the article list and verified (skeleton-exempt per STANDARD.md §7):
+
+| Article | Front-matter | Anchors / images / rel links | Nav | ch.1 source spot-read |
+| --- | --- | --- | --- | --- |
+| `foundation/methodology_templates/tps_generic_structure_template` | ✅ | 80 / 101 / 0 — all resolve | ✅ | faithful to TPS ch.1 (source line 510) |
+| `foundation/protocols/prs_e2e_protocol` | ✅ | 45 / 148 / 0 — all resolve | ✅ | faithful to PRS ch.1 (source line 391) |
+| `foundation/protocols/prs_log_and_trace_protocol` | ✅ | 6 / 12 / 0 — all resolve | ✅ | faithful to PRS ch.1 (source line 229) |
+
+All three carry front-matter `title`/`spec`/`release`, no `# ` h1 in body, no forbidden chapters, no tables-as-images and no `{DRAFT}` markers; the 需求可追溯性 mentions in `tps_generic_structure_template` are HTML-comment/blockqueue **omission notes**, not chapter content. Section counts updated: methodology_templates 12→13, protocols 12→14; `## Articles (169)`; header scope regenerated.
+
+### Verification gate (2026-11-09)
+
+| Check | Result |
+| --- | --- |
+| `mkdocs build --strict --site-dir /tmp/mkdocs-check` | **EXIT 0, zero WARNINGs, zero INFO link notices** |
+| RTE built-HTML anchor audit | 130 `cp/api/` + 1227 intra-page anchors resolve; 0 duplicate slugs |
+| e2e built-HTML anchor audit | 42 intra-page + all `cp/api/` anchors resolve; 0 duplicate slugs |
+| 3 new articles | anchors / images / relative links all resolve; all in nav |
+| `cp/api/` regeneration | byte-identical (no changes needed) |
+| `check_indexes.py --root …` | OK — 335 nav targets, 242 tab pages, 32 landing pages, 0 broken links |
+| `check_indexes.py --titles` | 0 violations |
+| `check_heading_lang.py --site` | OK — 235 files, all sub-headings translated |
+
+All 169 leading article boxes are ticked; **Still open: none**.
 
 ## Findings log
 
@@ -612,7 +663,11 @@ The pilot's steps 1–6 were scripted (`/tmp/phaseb_check2.py`, session-only) an
 | 43 external URLs (B2) | 2 | 403/418 anti-bot, 000 connection failures, 7×404, 5×500 | **Resolved 2026-11-07** — re-probed + browser-verified; 9 transient recovered; anti-bot confirmed reachable; 404/500 source-faithful; no links changed |
 | `cp/mcal/gpt_driver/index.md:712` | 1 | Orphan subsection number `##### 7.6.3.1. GPT 通知` under parent `#### 7.5.3` (source `8.6.3.1` after the `None.` ch.8.5 was dropped) | **Resolved 2026-11-07** — renumbered to `7.5.3.1`; no inbound anchors existed |
 | `cp/libraries/mfx/index.md:1591–1635` | 1 | `7.7`/`7.7.1`/`7.7.2`/`7.8.1` heading levels one deeper than STANDARD.md §4 | **Resolved 2026-11-07** — levels corrected; slugs unchanged, `cp/api/` byte-identical |
-| `cp/communication/e2e_transformer/index.md` | 1 | Two §6 translations merged, duplicating `### 6.1`/`6.2` slugs | **Held** — genuine content duplication; needs a decision on which block to keep |
+| `cp/communication/e2e_transformer/index.md` | 1 | Two §6 translations merged, duplicating `### 6.1`/`6.2` slugs | **Resolved 2026-11-09 (Batch 3)** — user chose the full source-faithful §6.1–6.8 (confirmed against R23-11 SWS ch.7 / TODO.md:129); removed the 65-line pre-realignment blog-era §6 block + a misplaced ch.1 retranslation. 0 duplicate slugs, 0 broken anchors, `cp/api/` unchanged |
 | `cp/diagnostics/diagnostic_communication_manager/index.md`, `foundation/protocols/prs_v2x_remote_access_layer/index.md` | 2 | Duplicate slugs from unnumbered repeated sub-headings | **Verified NOT a defect** — 0 inbound anchors, Material disambiguates; documented |
 | 25 CP articles (see Phase B scaled) | 1 | 1,039 inline `[SWS_*]` IDs in prose conflict with STANDARD.md §4 | **Resolved 2026-11-07** — STANDARD.md §4 amended to sanction source-faithful inline requirement cross-references; the 25 articles are now compliant and their leading boxes ticked; no article rewritten |
 | 10 articles / 96 parent-number mismatches, 36 articles / 751 heading-level drifts | 1 | Systematic legacy numbering and h6-capped deep headings | **Verified NOT defects** — source-faithful, no broken links or anchors; documented, not mass-renumbered |
+| `cp/rte/rte/index.md` | 1 | Missing `## 7. API规范` chapter (chapters `[1,2,3,4,5,6,8]`), 7.1/7.2 API material nested at `####` under §6.3 — gated deviation from PR #295 | **Resolved 2026-11-09 (Batch 3)** — real `## 7. API规范` inserted, 156 `7.x` headings re-levelled to §4, chapters `[1..8]` continuous; 151 hash-only changes, no text/anchor changes; 130 `cp/api/` + 1227 intra-page anchors resolve; `cp/api/` byte-identical; `../TODO.md:359` updated |
+| `cp/communication/e2e_transformer/index.md` (ch.1 retranslation) | 1 | A source-faithful ch.1 retranslation misplaced inside §6, duplicating `## 1.` content | **Resolved 2026-11-09 (Batch 3)** — removed with the stale §6 block; source-checked against SWS_E2ETransformer ch.1 (source lines 159–182) |
+| `foundation/methodology_templates/tps_generic_structure_template`, `foundation/protocols/prs_e2e_protocol`, `foundation/protocols/prs_log_and_trace_protocol` | 1/2 | 3 new ✅ articles absent from the 166-article worklist | **Resolved 2026-11-09 (Batch 3)** — added and verified (front matter, no h1/forbidden chapters/tables-as-images/`{DRAFT}`, anchors + images + rel links + nav all resolve, ch.1 faithful to R23-11 source); section counts and scope regenerated to 169 |
+| `docs/autosar/sync-todo/VerifyFinished.md` scope | 1/2 | Worklist stale: 166 articles vs `../TODO.md`'s 169 finished rows | **Resolved 2026-11-09 (Batch 3)** — scope regenerated; 2 held leading boxes ticked; still open: none |
