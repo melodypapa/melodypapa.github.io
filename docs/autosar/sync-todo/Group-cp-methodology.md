@@ -27,7 +27,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Requirements on ECU Configuration（ECU 配置需求）; target `cp/methodology_templates/rs_ecu_configuration/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_RS_ECUConfiguration.md` — 1,103 lines, 36 figure refs, 47 item IDs
   - Note: 2026-11-10 run — item-ID decision applied; 39 requirement items numbered §3.1.1–§3.6.4 across 4.1–4.6, titles translated, intra-item dependencies (00002↔00018, 00074↔00025) and cross-doc prose refs ([8][11][12][13][14]) kept as citation links; ch.2.3 abbreviations (4 rows) in blockquote format; source ch.3 Requirements Tracing omitted per ASWS precedent (4→3, 5→4); garbled cells of 14 items recovered from the R23-11 PDF; 1 content figure (Figure 1.1 methodology overview → Figure1-1.png, margin-padded), 35 refs are page chrome; change-history §4.1–§4.15 with titles-only tables (source sub-heading typo "in 4.2.1" under 5.2 translated per its R4.0.3 context); cross-article census: PORT → port_driver report-only; glossary +1 (ECU Extract of System Configuration) + EcuC source appended
-  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-10)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-10); commit 5d8eb30
   - [x] Step 1 — Source resolution + gap analysis
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
