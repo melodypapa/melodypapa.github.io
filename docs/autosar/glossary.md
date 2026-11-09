@@ -8261,7 +8261,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Software Cluster**
 > 将所有与在机器上部署软件相关的 AUTOSAR 工件归为一组（**Software Cluster**）。
 >
-> 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
+> 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）、[Requirements on System Template（系统模板需求）](cp/methodology_templates/rs_system_template/index.md)（AUTOSAR_CP_RS_SystemTemplate）
 {: .glossary-source}
 
 **Software Cluster (Adaptive Platform)**
