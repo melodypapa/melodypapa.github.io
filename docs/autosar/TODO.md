@@ -268,6 +268,7 @@
 
 - 📄 [BSW 模块描述模板](cp/methodology_templates/basic_software_module_description_template/) — TPS_BSWModuleDescriptionTemplate (exempt)
 - ✅ [Requirements on ECU Resource Template（ECU 资源模板需求）](cp/methodology_templates/rs_ecu_resource_template/) — AUTOSAR_CP_RS_ECUResourceTemplate (`cp/methodology_templates/rs_ecu_resource_template/`; R23-11; RS, skeleton-exempt; 16 requirement items numbered §3.1.1–§3.3.2 with IDs dropped per Foundation batch decision, intra-article dependency links; unnumbered pre-chapter References mirrored with ref anchors; source ch.3 Requirements Tracing omitted per ASWS precedent; garbled cells of RS_ECUR_00009/00010/00016/00018 recovered from the R23-11 PDF; 0 content figures — all 20 refs are page chrome; 2026-11-10)
+- ✅ [Requirements on ECU Configuration（ECU 配置需求）](cp/methodology_templates/rs_ecu_configuration/) — AUTOSAR_CP_RS_ECUConfiguration (`cp/methodology_templates/rs_ecu_configuration/`; R23-11; RS, skeleton-exempt; 39 requirement items numbered §3.1.1–§3.6.4 with IDs dropped per Foundation batch decision, intra-article dependency links; ch.2.3 abbreviations in blockquote format; source ch.3 Requirements Tracing omitted per ASWS precedent; garbled cells of 14 items recovered from the R23-11 PDF; 1 content figure (Figure1-1, padded); change-history tables titles-only; glossary +1 new (ECU Extract of System Configuration) + EcuC source appended; 2026-11-10)
 
 ## foundation
 

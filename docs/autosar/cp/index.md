@@ -161,6 +161,7 @@ title: "CP AUTOSAR"
 * [方法论与模板（Methodology and Templates）](methodology_templates/index.md)
   * [AUTOSAR BSWMDT（基础软件模块描述模板）](methodology_templates/basic_software_module_description_template/index.md)
   * [Requirements on ECU Resource Template（ECU 资源模板需求）](methodology_templates/rs_ecu_resource_template/index.md)
+  * [Requirements on ECU Configuration（ECU 配置需求）](methodology_templates/rs_ecu_configuration/index.md)
 
 ### 模式管理
 

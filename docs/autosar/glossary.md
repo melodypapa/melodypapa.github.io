@@ -2752,7 +2752,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **EcuC**
 > **ECU** 配置（**ECU Configuration**）
 >
-> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）
+> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[Requirements on ECU Configuration（ECU 配置需求）](cp/methodology_templates/rs_ecu_configuration/index.md)（AUTOSAR_CP_RS_ECUConfiguration）
+{: .glossary-source}
+
+**ECU Extract of System Configuration**
+> 系统配置的 ECU 提取，系统配置描述（**System Configuration Description**）中作为 **ECU** 配置输入的那一部分。
+>
+> 来源：[Requirements on ECU Configuration（ECU 配置需求）](cp/methodology_templates/rs_ecu_configuration/index.md)（AUTOSAR_CP_RS_ECUConfiguration）
 {: .glossary-source}
 
 **EcuM**
