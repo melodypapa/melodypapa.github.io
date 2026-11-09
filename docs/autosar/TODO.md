@@ -267,6 +267,7 @@
 ## methodology_templates / template
 
 - 📄 [BSW 模块描述模板](cp/methodology_templates/basic_software_module_description_template/) — TPS_BSWModuleDescriptionTemplate (exempt)
+- ✅ [Requirements on ECU Resource Template（ECU 资源模板需求）](cp/methodology_templates/rs_ecu_resource_template/) — AUTOSAR_CP_RS_ECUResourceTemplate (`cp/methodology_templates/rs_ecu_resource_template/`; R23-11; RS, skeleton-exempt; 16 requirement items numbered §3.1.1–§3.3.2 with IDs dropped per Foundation batch decision, intra-article dependency links; unnumbered pre-chapter References mirrored with ref anchors; source ch.3 Requirements Tracing omitted per ASWS precedent; garbled cells of RS_ECUR_00009/00010/00016/00018 recovered from the R23-11 PDF; 0 content figures — all 20 refs are page chrome; 2026-11-10)
 
 ## foundation
 

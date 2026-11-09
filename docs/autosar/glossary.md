@@ -2737,6 +2737,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）
 {: .glossary-source}
 
+**ECU Resource Description**
+> **ECU** 资源描述，保存用于构建 **AUTOSAR** 系统的硬件组件的相关信息，包括各 **ECU** 上可用的微控制器/处理器内核、存储器、总线通信接口以及硬件元素之间的连接。
+>
+> 来源：[Requirements on ECU Resource Template（ECU 资源模板需求）](cp/methodology_templates/rs_ecu_resource_template/index.md)（AUTOSAR_CP_RS_ECUResourceTemplate）
+{: .glossary-source}
+
 **ECU Signal Group**
 > ECU信号组（**ECU Signal Group**）是一组电信号的软件表示。
 >
@@ -2753,6 +2759,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > **ECU** 状态管理器（**ECU State Manager**）
 >
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）、[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）、[AUTOSAR J1939Tp（SAE J1939 传输层）](cp/communication/j1939tp/index.md)（AUTOSAR_CP_SWS_SAEJ1939TransportLayer）、[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）、[AUTOSAR V2X Management（V2X管理）](cp/communication/v2x_mgmt/index.md)（AUTOSAR_CP_SWS_V2XManagement）
+{: .glossary-source}
+
+**EcuR**
+> **ECU** 资源模板（**ECU Resource Template**），为 **ECU** 资源描述（**ECU Resource Description**）提供方案，涵盖处理单元、存储器段、IO 与通信外设、微控制器、**ECU** 电子部件以及传感器和执行器。
+>
+> 来源：[Requirements on ECU Resource Template（ECU 资源模板需求）](cp/methodology_templates/rs_ecu_resource_template/index.md)（AUTOSAR_CP_RS_ECUResourceTemplate）
 {: .glossary-source}
 
 **EDP**

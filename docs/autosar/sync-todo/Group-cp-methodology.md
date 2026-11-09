@@ -11,16 +11,18 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 > OPEN decision (confirm at the first run's Step 1, Foundation precedent proposed as default): item IDs are DROPPED, titles translate only — the 2026-11-03 Foundation decision (recorded in Group-foundation-rs-prs.md). These CP RS/TPS/TR documents consist of identified items just like their FO counterparts; applying the same rule keeps the corpus consistent, but it is not yet user-confirmed for CP.
 
 ## Queue
-- [ ] rs_ecu_resource_template (AUTOSAR_CP_RS_ECUResourceTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [x] rs_ecu_resource_template (AUTOSAR_CP_RS_ECUResourceTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on ECU Resource Template（ECU 资源模板需求）; target `cp/methodology_templates/rs_ecu_resource_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_RS_ECUResourceTemplate.md` — 499 lines, 20 figure refs, 25 item IDs
   - Note: related site content: none yet (TPS_ECUResourceTemplate queued below — cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-10 run — item-ID decision adopted batch-wide from the Foundation precedent (recorded as the queue header OPEN decision default per user's no-confirmation instruction); 16 requirement items numbered §3.1.1–§3.3.2, titles translated, dependencies rewritten as intra-article §x.y.z links; source ch.3 Requirements Tracing (pure ID tracing table) omitted per ASWS precedent (4→3, 5→4); unnumbered pre-chapter References kept unnumbered with `<a id="ref-n">` anchors, prose [n] citations linked (13 linked / 0 unresolved); constraint refs TPS_STDT_00078/00053 kept unbracketed; garbled cells of RS_ECUR_00009/00010/00016/00018 recovered from the R23-11 PDF; all 20 figure refs are page-decoration chrome, 0 content figures; changed-requirements history table rendered titles-only per the ID-drop decision; glossary +2 (ECU Resource Description, EcuR); nav label "ECU Resource Requirements"; link census: 0 identifier / 0 constant / 0 chapter-ref / 0 cross-article candidates
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-10: commit per row without confirmation, single confirmation at end)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_ecu_configuration (AUTOSAR_CP_RS_ECUConfiguration · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on ECU Configuration（ECU 配置需求）; target `cp/methodology_templates/rs_ecu_configuration/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_RS_ECUConfiguration.md` — 1,103 lines, 36 figure refs, 47 item IDs

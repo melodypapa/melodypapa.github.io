@@ -467,6 +467,7 @@ nav:
       - 方法论与模板:
         - autosar/cp/methodology_templates/index.md
         - "BSWMDT": autosar/cp/methodology_templates/basic_software_module_description_template/index.md
+        - "ECU Resource Requirements": autosar/cp/methodology_templates/rs_ecu_resource_template/index.md
       - 模式管理:
         - autosar/cp/mode_management/index.md
         - "BswM": autosar/cp/mode_management/basic_software_mode_manager/index.md
