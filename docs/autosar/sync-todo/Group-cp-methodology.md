@@ -69,16 +69,18 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
-- [ ] rs_diagnostic_extract_template (AUTOSAR_CP_RS_DiagnosticExtractTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [x] rs_diagnostic_extract_template (AUTOSAR_CP_RS_DiagnosticExtractTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Diagnostic Extract Template（诊断提取模板需求）; target `cp/methodology_templates/rs_diagnostic_extract_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_RS_DiagnosticExtractTemplate.md` — 1,692 lines, 49 figure refs, 81 item IDs
   - Note: related site content: none yet (tps_diagnostic_extract_template queued below — cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-10 run — item-ID decision applied; 57 items numbered §2.2.1–§2.10.1 across §2.1–§2.10 (00058's "ODB" and 00071's "ModeModes" source typos translated by their intent); {DRAFT} markers on 00080/00081 dropped with the IDs; §1.4 states tracing is not provided — kept as prose (not a placeholder table); dependencies → intra-article §x.y.z links (00030→00028, 00031→00029, 00069/00070→00068, 00075→00076); garbled cells of 20 items recovered from the R23-11 PDF; 0 content figures (all 49 refs page chrome); appendix A is the Change history of AUTOSAR traceable items (content annex, NOT the droppable NA-requirements appendix) → translated as ## A. with titles-only tables per the appendix-B precedent; no glossary additions (Dcm/Dem entries already carry many sources; appending skipped to bound effort); cross-article census: DEM → diagnostic_event_manager x8, Dcm → diagnostic_communication_manager x5 (report-only)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-10)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] rs_software_component_template (AUTOSAR_CP_RS_SoftwareComponentTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on Software Component Template（软件组件模板需求）; target `cp/methodology_templates/rs_software_component_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_RS_SoftwareComponentTemplate.md` — 1,877 lines, 60 figure refs, 107 item IDs

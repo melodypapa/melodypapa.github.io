@@ -165,6 +165,7 @@ title: "CP AUTOSAR"
   * [Requirements on BSW Module Description Template（基础软件模块描述模板需求）](methodology_templates/rs_bsw_module_description_template/index.md)
   * [Requirements on System Template（系统模板需求）](methodology_templates/rs_system_template/index.md)
   * [ECU Resource Template（ECU 资源模板）](methodology_templates/tps_ecu_resource_template/index.md)
+  * [Requirements on Diagnostic Extract Template（诊断提取模板需求）](methodology_templates/rs_diagnostic_extract_template/index.md)
 
 ### 模式管理
 
