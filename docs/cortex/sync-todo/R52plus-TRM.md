@@ -39,9 +39,14 @@ Chapter span map (PDF pages): ch1 Introduction 24–27 (4) · ch2 The Cortex-R52
   - S6 result: three fixes — 9.5 register summaries (Tables 9-8/9-9, 9 + 16 rows) were missing and are now at the head of §5 with the direct-access summary; five junk inline PNGs of register-bit names (`SCTLR.M`, `SCTLR.BR`, `HSCTLR.M`, `HSCTLR.BR`, `HCR.DC`) removed with their files (the chapter has no figures); the stale `第 3-148 页表 3-106/3-107` pointer retargeted to `第 174 页表 4-163/4-164`.
   - S8 result: PR #352.
   - [x] S1 [x] S6 [x] S7 [x] S8
-- [ ] ⏸ ch4 system_control — completion (article 233 ln, 1 `##` vs 165 pp: 4.1 About, 4.2 Register summary, 4.3 AArch32 register descriptions)
-  - Note: >1500-line rule — segment by register group (cache/MPU/EL2/timer/debug) and agree the run plan before S2.
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] ch4 system_control — completion (article 5655 ln, 3 `##` / 103 `###` vs 165 pp: 4.1 About, 4.2 Register summary, 4.3 AArch32 register descriptions)
+  - Note (S1): sections 4.3.1–4.3.50 were already present; this run added 4.3.51–4.3.103 (53 sections, 45 new figures 4-43…4-93).
+  - S1 result: source order verified against the PDF page by page — no gap between 3.50 HPRSELR and 3.103 VSCTLR; every access encoding (`MRC`/`MCR`, `MRRC`/`MCRR`, `nDIV16` direct-access forms) re-checked against the source text.
+  - S3 result: Figures 4-43 … 4-93 cropped from the same PDF (89 numbered references resolve); the four pre-existing `Figure4_7…4_10.png` keep their legacy underscore names.
+  - S6 result: table numbers 4-125 … 4-231 text references kept source-faithful; `PAR` F==0/F==1 split as the bold sub-blocks `3.81.1`/`3.81.2`; IFSR `Status = 0b011000` carries source footnote 59, whose footnote body is missing from the PDF text layer, so the marker is omitted rather than invented.
+  - S5 result: strict build 0 WARNING; heading-language check (103/103 headings contain Chinese) and figure audit clean.
+  - S8 result: PR #358.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] ch11 → new article (Generic Timer) — `generic_timer/index.md`, 2026-11-09
   - S1 result: ch11.1 About the Generic Timer / 11.2 Generic Timer functional description / 11.3 Generic Timer register summary (11.3.1). One figure (Figure 11-1 Architectural counter interface) and one table (Table 11-1, 15 registers).
   - S2/S3 result: full translation; Figure 11-1 cropped from PDF p384; Table 11-1 rebuilt as GFM with the merged CRn/Op1 cells expanded per row.
