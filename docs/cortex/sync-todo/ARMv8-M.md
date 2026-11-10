@@ -12,7 +12,7 @@ Chapter span map (parse lines): Part A L3834–4284 — A1 Introduction, 451 ln 
 | Part | Chapters | Content | Status |
 | --- | --- | --- | --- |
 | A | A1 Introduction | overview of the architecture and its profiles | A1 done |
-| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B10 done; B11–B16 queued below |
+| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B11 done; B12–B16 queued below |
 | C | C1–C2 | instruction set + alphabetical instruction specification | deferred (reference) |
 | D | D1+ | registers and payload specification | deferred (reference) |
 | E | E1–E2 | pseudocode | deferred (reference) |
@@ -139,8 +139,16 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S7 result: covered by the user-approved single-loop run.
   - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
   - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [ ] ⏸ B11 → new article (The System Timer, SysTick; e.g. `system_timer_systick/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] B11 → new article `armv8-m/system_timer_systick/` (The System Timer, SysTick; PDF pp. 290–291, 1 section, 13 rules)
+  - S1 result: B11 spans printed 290–291 (the B12 divider is on printed 292) with the single section B11.1 The system timer, SysTick. The chapter-front section list was dropped (A1 precedent). Census: 0 figures, 0 tables. Text read from the PDF layer.
+  - S2 result: `docs/cortex/armv8-m/system_timer_systick/index.md`; numbering restarts at 1 (`## 1.` ← B11.1). All 13 applicability lines are present, with `- !M && !S` / `- !M && S` / `- M && !S` / `- M && S` / `- ST` / `- ST && HDBG` kept verbatim; the four SysTick registers keep their `SYST_*` names in code spans. The chapter has no See-also block, so none was invented. No `# ` in the body.
+  - S3 result: N/A — the chapter has no figures.
+  - S4 result: nav entry `"系统定时器"` after 受保护内存系统架构 and before 术语表; landing list entry 12 (术语表 moved to 13).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (361 nav targets, 0 broken links); `check_heading_lang.py` OK; 1 `##` heading, no `# ` in the body, no `![]()` images.
+  - S6 result: 13/13 rules in source order (8 on printed 290, 5 on printed 291); 0 figures, 0 tables; numbering continuity (`## 1.` only).
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] ⏸ B12 → new article (Nested Vectored Interrupt Controller; e.g. `nested_vectored_interrupt_controller/`)
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] ⏸ B13 → new article (Debug; e.g. `debug/`)
