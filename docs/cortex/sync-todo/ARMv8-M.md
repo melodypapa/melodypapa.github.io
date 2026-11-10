@@ -12,7 +12,7 @@ Chapter span map (parse lines): Part A L3834–4284 — A1 Introduction, 451 ln 
 | Part | Chapters | Content | Status |
 | --- | --- | --- | --- |
 | A | A1 Introduction | overview of the architecture and its profiles | A1 done |
-| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B7 done; B8–B16 queued below |
+| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B8 done; B9–B16 queued below |
 | C | C1–C2 | instruction set + alphabetical instruction specification | deferred (reference) |
 | D | D1+ | registers and payload specification | deferred (reference) |
 | E | E1–E2 | pseudocode | deferred (reference) |
@@ -107,9 +107,18 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S5 result (part 2): strict build 0 WARNING; `check_indexes.py --root .` OK (357 nav targets, 0 broken links); `check_heading_lang.py` OK; 29 `##` headings, no `# ` in the body, all 4 `![]()` targets present.
   - S6 result (part 2): 344/344 applicability lines match the source's 344 `Applies to an implementation …` lines across all 29 sections, and §20–§29 are 63/63. Two format defects found by that check and fixed: the B7.12 RLJKD rule had been split into two blocks (duplicating its applicability line), and a translated sentence in B7.2.4 began with 适用于, which the counter read as an applicability line.
   - S7 result: covered by the user-approved single-loop run.
-  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
-- [ ] ⏸ B8 → new article (The System Address Map; e.g. `system_address_map/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets` (commit a1e82e4, sections 8–29; sections 1–7 in ef8ae64).
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
+- [x] B8 → new article `armv8-m/system_address_map/` (The System Address Map; PDF pp. 265–268, 3 sections, 18 rules)
+  - S1 result: B8 spans printed 265–268 (the B9 divider is on printed 269, the chapter divider on 264); B8.1 System address map (4 rules), B8.2 The System region of the system address map (10 rules), B8.3 The System Control Space (SCS) (4 rules), plus the chapter-front section list, which was dropped (A1 precedent). Census: 1 figure (the system-region address diagram on printed 266, with its †/††/††† footnote block), 1 table (the nine-row address-region table on printed 265, including the WT/RA/WBWA/XN footnote list). Text and the table grid were read from the PDF layer page by page.
+  - S2 result: `docs/cortex/armv8-m/system_address_map/index.md`; numbering restarts at 1 (`## 1.`–`## 3.` ← B8.1–B8.3). All 18 applicability lines are present with their extension requirements (`- M && !S`, `- S` kept verbatim), the RMXRW note renders as `注意，若 !M 则产生 **HardFault**。`, and the four See-also blocks are `参见：` lists (B8.1 and B8.3 block names stay English in 《…》). The address table is GFM with each 2-line address range collapsed to one row, and the WT/RA/WBWA/XN footnotes follow as a bullet list. No `# ` in the body.
+  - S3 result: `FigureB8-1.png` cropped from printed 266 at 300 dpi with a ~18 pt margin; verified visually — top `0x00000000`, the right-hand "System region of the address map" bracket and the three dagger footnotes are all inside the crop.
+  - S4 result: nav entry `"系统地址映射"` after 内存模型 and before 术语表; landing list entry 9 (术语表 moved to 10).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (358 nav targets, 0 broken links); `check_heading_lang.py` OK; 3 `##` headings, no `# ` in the body, the single `![]()` target exists.
+  - S6 result: 18/18 rules present in source order (4 / 10 / 4); 1 figure, 1 table (9 rows × 7 columns, all 9 rows carry their region, memory type, XN, cache, shareability and usage); numbering continuity 1 / 2 / 3.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] ⏸ B9 → new article (Synchronization and Semaphores; e.g. `synchronization_and_semaphores/`)
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] ⏸ B10 → new article (The Armv8-M Protected Memory System Architecture; e.g. `protected_memory_system_architecture/`)
