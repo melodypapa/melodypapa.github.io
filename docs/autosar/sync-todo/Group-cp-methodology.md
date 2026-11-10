@@ -114,15 +114,17 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
-- [ ] tr_modeling_show_cases (AUTOSAR_CP_EXP_ModelingShowCases · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [x] tr_modeling_show_cases (AUTOSAR_CP_EXP_ModelingShowCases · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Modeling Show Cases（建模展示案例）; target `cp/methodology_templates/tr_modeling_show_cases/`; showcase report (the R23-11 file carries an EXP_ id but ships in the MethodologyAndTemplates folder — treated as TR-type informational)
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_EXP_ModelingShowCases.md` — 5,346 lines, 201 figure refs, 2 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-11 run — SOURCE-ID CORRECTION: the R23-11 markdown+PDF on disk are AUTOSAR_CP_TR_ModelingShowCases (the EXP_ id belongs to the examples zip); spec recorded as TR_; chapters 1–4 + appendix A mirrored; 16 content figures embedded from the markdown artifacts + Figure4-2 extracted from the R23-11 PDF page 113 (the markdown conversion dropped it — found by cross-checking the PDF, user request); 185 refs are page chrome; listing bodies garbled in conversion — carried as captions (flagged, same as tr_general_blueprints_supplement); 3.1.7/3.2.2 model-dump tables (103) rendered as GFM with label-phrase translation dict, identifier cells verbatim; appendix A 83 class tables: class Notes translated, per-attribute Note cells KEPT IN ENGLISH (deviation flagged for batch gate — ~500 notes; hand-translation is a possible follow-up); physical equations lost by the converter (formula-not-decoded) restored inline in prose from the surrounding text; anchor slugs verified against built HTML (Chinese+gloss headings); cross-article census: 0 candidates
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-10)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] tps_timing_extensions (AUTOSAR_CP_TPS_TimingExtensions · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Timing Extensions（时序扩展）; target `cp/methodology_templates/tps_timing_extensions/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type)
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TPS_TimingExtensions.md` — 8,752 lines, 384 figure refs, 113 item IDs

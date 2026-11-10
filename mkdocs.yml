@@ -476,6 +476,7 @@ nav:
         - "Software Component Requirements": autosar/cp/methodology_templates/rs_software_component_template/index.md
         - "Franca Integration": autosar/cp/methodology_templates/tr_franca_integration/index.md
         - "General Blueprints Supplement": autosar/cp/methodology_templates/tr_general_blueprints_supplement/index.md
+        - "Modeling Show Cases": autosar/cp/methodology_templates/tr_modeling_show_cases/index.md
       - 模式管理:
         - autosar/cp/mode_management/index.md
         - "BswM": autosar/cp/mode_management/basic_software_mode_manager/index.md

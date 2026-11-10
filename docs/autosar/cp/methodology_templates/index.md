@@ -16,6 +16,7 @@ title: "方法论与模板（Methodology and Templates）"
 * [Requirements on Software Component Template（软件组件模板需求）](rs_software_component_template/index.md)
 * [Franca Integration（Franca 集成）](tr_franca_integration/index.md)
 * [General Blueprints Supplement（通用蓝图补充）](tr_general_blueprints_supplement/index.md)
+* [Modeling Show Cases Report（建模展示案例报告）](tr_modeling_show_cases/index.md)
 
 ## 相关内容
 
