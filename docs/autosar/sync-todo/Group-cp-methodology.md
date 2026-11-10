@@ -103,15 +103,17 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
   - [x] Step 6 — TODO.md row + commit/PR
-- [ ] tr_general_blueprints_supplement (AUTOSAR_CP_TR_GeneralBlueprintsSupplement · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [x] tr_general_blueprints_supplement (AUTOSAR_CP_TR_GeneralBlueprintsSupplement · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: General Blueprints Supplement（通用蓝图补充）; target `cp/methodology_templates/tr_general_blueprints_supplement/`; technical report (TR) — informational, no numbered requirement items
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TR_GeneralBlueprintsSupplement.md` — 2,801 lines, 115 figure refs, 1 item ID
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
+  - Note: 2026-11-10 run — chapters 1–5 + appendix A mirrored; 39 content figures embedded (Figure2-1 + 3-x series; 3.12/3.13 share one image per content-hash dedup; 3.16/3.32/3.34 are plain text in the source — no image), remaining 76 refs page chrome; matrix-subscript OCR spill ([1,1]-style) dropped per figure convention; appendix A 20 mentioned class tables translated in full (page-split continuation fragments merged by Class row — the caption-after-first-fragment conversion artifact); DEVIATION flagged for the batch gate: the SwRecordLayout ARXML listing bodies (清单3.1–3.16) are garbled beyond faithful reconstruction in the markdown conversion (escaped single-line + OCR interleaving) — the article carries the listing captions and the one clean listing (3.1) reconstructed, the rest left as caption-only; reconstructing them needs the raw blueprint ARXML (AUTOSAR_MOD_IFX_RecordLayouts_Blueprint.arxml) — user decision whether to source it; cross-article census: 0 candidates; matrix-subscript [n] tokens correctly NOT citation-linked (never run --apply [n] on this article)
+  - Note: Step 5 deferred to the batch-level combined gate (user instruction 2026-11-10)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
   - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 6 — TODO.md row + commit/PR
 - [ ] tr_modeling_show_cases (AUTOSAR_CP_EXP_ModelingShowCases · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Modeling Show Cases（建模展示案例）; target `cp/methodology_templates/tr_modeling_show_cases/`; showcase report (the R23-11 file carries an EXP_ id but ships in the MethodologyAndTemplates folder — treated as TR-type informational)
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_EXP_ModelingShowCases.md` — 5,346 lines, 201 figure refs, 2 item IDs

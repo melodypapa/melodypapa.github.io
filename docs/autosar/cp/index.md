@@ -168,6 +168,7 @@ title: "CP AUTOSAR"
   * [Requirements on Diagnostic Extract Template（诊断提取模板需求）](methodology_templates/rs_diagnostic_extract_template/index.md)
   * [Requirements on Software Component Template（软件组件模板需求）](methodology_templates/rs_software_component_template/index.md)
   * [Franca Integration（Franca 集成）](methodology_templates/tr_franca_integration/index.md)
+  * [General Blueprints Supplement（通用蓝图补充）](methodology_templates/tr_general_blueprints_supplement/index.md)
 
 ### 模式管理
 
