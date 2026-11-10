@@ -160,6 +160,16 @@ title: "CP AUTOSAR"
 
 * [方法论与模板（Methodology and Templates）](methodology_templates/index.md)
   * [AUTOSAR BSWMDT（基础软件模块描述模板）](methodology_templates/basic_software_module_description_template/index.md)
+  * [Requirements on ECU Resource Template（ECU 资源模板需求）](methodology_templates/rs_ecu_resource_template/index.md)
+  * [Requirements on ECU Configuration（ECU 配置需求）](methodology_templates/rs_ecu_configuration/index.md)
+  * [Requirements on BSW Module Description Template（基础软件模块描述模板需求）](methodology_templates/rs_bsw_module_description_template/index.md)
+  * [Requirements on System Template（系统模板需求）](methodology_templates/rs_system_template/index.md)
+  * [ECU Resource Template（ECU 资源模板）](methodology_templates/tps_ecu_resource_template/index.md)
+  * [Requirements on Diagnostic Extract Template（诊断提取模板需求）](methodology_templates/rs_diagnostic_extract_template/index.md)
+  * [Requirements on Software Component Template（软件组件模板需求）](methodology_templates/rs_software_component_template/index.md)
+  * [Franca Integration（Franca 集成）](methodology_templates/tr_franca_integration/index.md)
+  * [General Blueprints Supplement（通用蓝图补充）](methodology_templates/tr_general_blueprints_supplement/index.md)
+  * [Modeling Show Cases Report（建模展示案例报告）](methodology_templates/tr_modeling_show_cases/index.md)
 
 ### 模式管理
 

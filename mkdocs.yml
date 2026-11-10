@@ -470,6 +470,16 @@ nav:
       - 方法论与模板:
         - autosar/cp/methodology_templates/index.md
         - "BSWMDT": autosar/cp/methodology_templates/basic_software_module_description_template/index.md
+        - "ECU Resource Requirements": autosar/cp/methodology_templates/rs_ecu_resource_template/index.md
+        - "ECU Configuration Requirements": autosar/cp/methodology_templates/rs_ecu_configuration/index.md
+        - "BSW Module Description Requirements": autosar/cp/methodology_templates/rs_bsw_module_description_template/index.md
+        - "System Template Requirements": autosar/cp/methodology_templates/rs_system_template/index.md
+        - "ECU Resource Template": autosar/cp/methodology_templates/tps_ecu_resource_template/index.md
+        - "Diagnostic Extract Requirements": autosar/cp/methodology_templates/rs_diagnostic_extract_template/index.md
+        - "Software Component Requirements": autosar/cp/methodology_templates/rs_software_component_template/index.md
+        - "Franca Integration": autosar/cp/methodology_templates/tr_franca_integration/index.md
+        - "General Blueprints Supplement": autosar/cp/methodology_templates/tr_general_blueprints_supplement/index.md
+        - "Modeling Show Cases": autosar/cp/methodology_templates/tr_modeling_show_cases/index.md
       - 模式管理:
         - autosar/cp/mode_management/index.md
         - "BswM": autosar/cp/mode_management/basic_software_mode_manager/index.md

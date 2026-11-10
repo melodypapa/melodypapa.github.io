@@ -907,7 +907,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Blueprint**
 > 这是一种模型，其他模型可以通过复制和细化从中派生。注意，与元模型及类型相对照，这一过程不是实例化。
 >
-> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
+> 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）、[ECU Resource Template（ECU 资源模板）](cp/methodology_templates/tps_ecu_resource_template/index.md)（AUTOSAR_CP_TPS_ECUResourceTemplate）
 {: .glossary-source}
 
 **Bmc**
@@ -979,7 +979,13 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **BSWMD**
 > 基础软件模块描述（**Basic Software Module Description**）
 >
-> 来源：[AUTOSAR BSW General（基础软件模块通用规范）](cp/general/bsw_general/index.md)（SWS_BSWGeneral）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）
+> 来源：[AUTOSAR BSW General（基础软件模块通用规范）](cp/general/bsw_general/index.md)（SWS_BSWGeneral）、[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[Requirements on BSW Module Description Template（基础软件模块描述模板需求）](cp/methodology_templates/rs_bsw_module_description_template/index.md)（AUTOSAR_CP_RS_BSWModuleDescriptionTemplate）
+{: .glossary-source}
+
+**BSWMD-T**
+> 基础软件模块描述模板（**Basic Software Module Description Template**），规定实际的 basic software module description（**BSWMD**）能够提供哪些内容。
+>
+> 来源：[Requirements on BSW Module Description Template（基础软件模块描述模板需求）](cp/methodology_templates/rs_bsw_module_description_template/index.md)（AUTOSAR_CP_RS_BSWModuleDescriptionTemplate）
 {: .glossary-source}
 
 **BswSchedulableEntity activation**
@@ -2737,6 +2743,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）
 {: .glossary-source}
 
+**ECU Resource Description**
+> **ECU** 资源描述，保存用于构建 **AUTOSAR** 系统的硬件组件的相关信息，包括各 **ECU** 上可用的微控制器/处理器内核、存储器、总线通信接口以及硬件元素之间的连接。
+>
+> 来源：[Requirements on ECU Resource Template（ECU 资源模板需求）](cp/methodology_templates/rs_ecu_resource_template/index.md)（AUTOSAR_CP_RS_ECUResourceTemplate）
+{: .glossary-source}
+
 **ECU Signal Group**
 > ECU信号组（**ECU Signal Group**）是一组电信号的软件表示。
 >
@@ -2746,13 +2758,25 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **EcuC**
 > **ECU** 配置（**ECU Configuration**）
 >
-> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）
+> 来源：[AUTOSAR Communication Stack Types（通信栈类型）](cp/general/communication_stack_types/index.md)（SWS_CommunicationStackTypes）、[Requirements on ECU Configuration（ECU 配置需求）](cp/methodology_templates/rs_ecu_configuration/index.md)（AUTOSAR_CP_RS_ECUConfiguration）
+{: .glossary-source}
+
+**ECU Extract of System Configuration**
+> 系统配置的 ECU 提取，系统配置描述（**System Configuration Description**）中作为 **ECU** 配置输入的那一部分。
+>
+> 来源：[Requirements on ECU Configuration（ECU 配置需求）](cp/methodology_templates/rs_ecu_configuration/index.md)（AUTOSAR_CP_RS_ECUConfiguration）
 {: .glossary-source}
 
 **EcuM**
 > **ECU** 状态管理器（**ECU State Manager**）
 >
 > 来源：[AUTOSAR Watchdog Manager（看门狗管理器）](cp/safety/watchdog_manager/index.md)（SWS_WatchdogManager）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）、[AUTOSAR Ethernet Switch Driver（以太网交换机驱动程序）](cp/communication/ethernet_switch_driver/index.md)（AUTOSAR_CP_SWS_EthernetSwitchDriver）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[AUTOSAR Nm（网络管理接口）](cp/communication/nm/index.md)（AUTOSAR_CP_SWS_NetworkManagementInterface）、[AUTOSAR EthSM（以太网状态管理器）](cp/communication/ethsm/index.md)（AUTOSAR_CP_SWS_EthernetStateManager）、[AUTOSAR LinTrcv（LIN 收发器驱动程序）](cp/communication/lintrcv/index.md)（AUTOSAR_CP_SWS_LINTransceiverDriver）、[AUTOSAR TTCAN Interface（TTCAN 接口）](cp/communication/ttcan_interface/index.md)（AUTOSAR_CP_SWS_TTCANInterface）、[AUTOSAR J1939Tp（SAE J1939 传输层）](cp/communication/j1939tp/index.md)（AUTOSAR_CP_SWS_SAEJ1939TransportLayer）、[AUTOSAR Chinese V2X Message（中国V2X消息）](cp/communication/chinesev2x_msg/index.md)（AUTOSAR_CP_SWS_ChineseV2XMessage）、[AUTOSAR Chinese V2X Network（中国V2X网络）](cp/communication/chinesev2x_net/index.md)（AUTOSAR_CP_SWS_ChineseV2XNetwork）、[AUTOSAR Chinese V2X Security（中国V2X安全）](cp/communication/chinesev2x_sec/index.md)（AUTOSAR_CP_SWS_ChineseV2XSecurity）、[AUTOSAR V2X Data Manager（V2X数据管理器）](cp/communication/v2x_datamgr/index.md)（AUTOSAR_CP_SWS_V2XDataManager）、[AUTOSAR V2X Facilities（V2X设施层）](cp/communication/v2x_facilities/index.md)（AUTOSAR_CP_SWS_V2XFacilities）、[AUTOSAR V2X Management（V2X管理）](cp/communication/v2x_mgmt/index.md)（AUTOSAR_CP_SWS_V2XManagement）
+{: .glossary-source}
+
+**EcuR**
+> **ECU** 资源模板（**ECU Resource Template**），为 **ECU** 资源描述（**ECU Resource Description**）提供方案，涵盖处理单元、存储器段、IO 与通信外设、微控制器、**ECU** 电子部件以及传感器和执行器。
+>
+> 来源：[Requirements on ECU Resource Template（ECU 资源模板需求）](cp/methodology_templates/rs_ecu_resource_template/index.md)（AUTOSAR_CP_RS_ECUResourceTemplate）
 {: .glossary-source}
 
 **EDP**
@@ -4193,6 +4217,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 > 内部缓冲通道（**Internally buffered channels**）：包含待传输数据的缓冲区位于 SPI 处理器/驱动程序之内。
 >
 > 来源：[AUTOSAR SPI Handler/Driver（SPI 处理器/驱动程序）](cp/communication/spi_handler_driver/index.md)（SWS_SPIHandlerDriver）、[AUTOSAR CAN Transceiver Driver](cp/communication/can_transceiver_driver/index.md)（AUTOSAR_CP_SWS_CANTransceiverDriver）
+{: .glossary-source}
+
+**ICS**
+> 实现一致性声明（**Implementation Conformance Statement**），对规范所声明选项的一个实现所作的一致性陈述。
+>
+> 来源：[Requirements on BSW Module Description Template（基础软件模块描述模板需求）](cp/methodology_templates/rs_bsw_module_description_template/index.md)（AUTOSAR_CP_RS_BSWModuleDescriptionTemplate）
 {: .glossary-source}
 
 **ICC**
@@ -8231,7 +8261,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Software Cluster**
 > 将所有与在机器上部署软件相关的 AUTOSAR 工件归为一组（**Software Cluster**）。
 >
-> 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）
+> 来源：[Software Cluster Connection（软件集群连接）](cp/system_services/software_cluster_connection/index.md)（AUTOSAR_CP_SWS_SoftwareClusterConnection）、[Requirements on System Template（系统模板需求）](cp/methodology_templates/rs_system_template/index.md)（AUTOSAR_CP_RS_SystemTemplate）
 {: .glossary-source}
 
 **Software Cluster (Adaptive Platform)**
@@ -8669,9 +8699,9 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 {: .glossary-source}
 
 **SWC**
-> 软件组件（**SoftWare Component**）、[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
+> 软件组件（**SoftWare Component**）
 >
-> 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）
+> 来源：[AUTOSAR I/O Hardware Abstraction（I/O 硬件抽象）](cp/io/iohwab/index.md)（SWS_IOHardwareAbstraction）、[AUTOSAR CanSM（CAN状态管理器）](cp/communication/cansm/index.md)（AUTOSAR_CP_SWS_CANStateManager）、[Requirements on Diagnostics（诊断需求）](foundation/diagnostics/rs_diagnostics/index.md)（AUTOSAR_FO_RS_Diagnostics）
 {: .glossary-source}
 
 **SWCD**
@@ -9616,7 +9646,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Variation Point**
 > 变体点。设计中在 2 个或更多变体之间给出选择的位置；必须做出选择的时间称为最晚绑定时间。
 >
-> 来源：[VFB（虚拟功能总线）](cp/general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）
+> 来源：[VFB（虚拟功能总线）](cp/general/vfb/index.md)（AUTOSAR_CP_EXP_VFB）、[ECU Resource Template（ECU 资源模板）](cp/methodology_templates/tps_ecu_resource_template/index.md)（AUTOSAR_CP_TPS_ECUResourceTemplate）
 {: .glossary-source}
 
 **VB**
