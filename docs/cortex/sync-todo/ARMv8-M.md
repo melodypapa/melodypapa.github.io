@@ -35,8 +35,16 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S7 result: confirmed by the user (plan approval 2026-11-10).
   - S8 result: shipped with `Closes #361` in this PR; merge SHA and PR number to be recorded post-merge per the ledger convention.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [ ] ⏸ B1 → new article (Resets; body from L4288; e.g. `resets/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] B1 resets — new article (article 55 ln, 1 `##` vs 7 rules)
+  - S1 result: Part B opens at L4285; B1 body L4288–4337 with the single section B1.1 "Resets, Cold reset, and Warm reset" (seven rules), then the chapter's See also list (B13, B16). Census: 0 figures, 0 tables. The chapter-front "It contains the following section" list was dropped as a redundant section list (A1 precedent); the random rule IDs (`R_BDPL` …) are not rendered, matching the existing `armv7-m/` and `armv8-m/` articles.
+  - S2 result: `docs/cortex/armv8-m/resets/index.md`; numbering restarts at 1 (`## 1.` ← B1.1); each rule keeps its `适用于 **Armv8.0-M** 及以后架构版本的实现。` line verbatim; `TakeReset()` kept in a code span; the See also block rendered as `参见：` bullets. No `# ` in the body.
+  - S3 result: N/A — the chapter has no figures.
+  - S4 result: nav entry `"复位"` after 简介 in the Armv8-M group; landing list entry 2.
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` 0 broken links; heading-language check OK.
+  - S6 result: 7/7 rules present in source order with no dropped applicability line; 0 figures, 0 tables; numbering continuity (`## 1.` only).
+  - S7 result: PR opened, awaiting user confirmation.
+  - S8 result: PR #364 (merge SHA to be recorded post-merge).
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [ ] S7 [x] S8
 - [ ] ⏸ B2 → new article (Power Management; body from L4339; e.g. `power_management/`)
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] ⏸ B3 → new article (Programmers' Model; body from L4548; e.g. `programmers_model/`)
