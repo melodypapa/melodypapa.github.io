@@ -12,7 +12,7 @@ Chapter span map (parse lines): Part A L3834–4284 — A1 Introduction, 451 ln 
 | Part | Chapters | Content | Status |
 | --- | --- | --- | --- |
 | A | A1 Introduction | overview of the architecture and its profiles | A1 done |
-| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B9 done; B10–B16 queued below |
+| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B10 done; B11–B16 queued below |
 | C | C1–C2 | instruction set + alphabetical instruction specification | deferred (reference) |
 | D | D1+ | registers and payload specification | deferred (reference) |
 | E | E1–E2 | pseudocode | deferred (reference) |
@@ -129,8 +129,16 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S7 result: covered by the user-approved single-loop run.
   - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
   - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [ ] ⏸ B10 → new article (The Armv8-M Protected Memory System Architecture; e.g. `protected_memory_system_architecture/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] B10 → new article `armv8-m/protected_memory_system_architecture/` (The Armv8-M Protected Memory System Architecture; PDF pp. 281–288, 4 sections, 48 rules)
+  - S1 result: B10 spans printed 281–288 (the B11 divider is on printed 289); B10.1 Memory Protection Unit (26 rules), B10.2 Security attribution (11), B10.3 Security attribution unit (SAU) (9), B10.4 IMPLEMENTATION DEFINED Attribution Unit (IDAU) (2). The chapter-front section list was dropped (A1 precedent). Census: 2 figures (the security-attribution and MPU-check flowcharts for data accesses and for instruction fetches, printed 285 and 286), 1 table (the SAU region field ↔ window register mapping on printed 287). `find_tables()` on printed 281 is a false positive (the page's two-column body), not a table.
+  - S2 result: `docs/cortex/armv8-m/protected_memory_system_architecture/index.md`; numbering restarts at 1 (`## 1.`–`## 4.` ← B10.1–B10.4). All 48 applicability lines are present; the `- MPU` / `- MPU && S` / `- S && MPU` / `- S` requirements are kept verbatim; the RLDTN rule keeps its `免受安全违规检查的地址范围` lead-in and all eight address-range bullets; the network formulas (`Address >= MPU_RBAR.BASE:'00000' …`) stay in code spans; both See-also blocks are `参见：` lists. No `# ` in the body.
+  - S3 result: `FigureB10-1.png` (data accesses) and `FigureB10-2.png` (instruction fetch) cropped at 300 dpi; both verified visually — every decision diamond, both `SecureFault` boxes, the two `MemManage Fault` boxes and all Yes/No labels are inside the crops. FigureB10-2 sits directly under the running header, so its top margin is clamped to the header rather than the usual 4%.
+  - S4 result: nav entry `"受保护内存系统架构"` after 同步与信号量 and before 术语表; landing list entry 11 (术语表 moved to 12).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (360 nav targets, 0 broken links); `check_heading_lang.py` OK; 4 `##` headings, no `# ` in the body, both `![]()` targets exist.
+  - S6 result: 48/48 rules present in source order (26 / 11 / 9 / 2); 2 figures, 1 table (5 rows × 2 columns); numbering continuity 1–4.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] ⏸ B11 → new article (The System Timer, SysTick; e.g. `system_timer_systick/`)
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] ⏸ B12 → new article (Nested Vectored Interrupt Controller; e.g. `nested_vectored_interrupt_controller/`)

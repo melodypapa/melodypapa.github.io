@@ -334,6 +334,7 @@ nav:
       - "内存模型": cortex/armv8-m/memory_model/index.md
       - "系统地址映射": cortex/armv8-m/system_address_map/index.md
       - "同步与信号量": cortex/armv8-m/synchronization_and_semaphores/index.md
+      - "受保护内存系统架构": cortex/armv8-m/protected_memory_system_architecture/index.md
       - "术语表": cortex/armv8-m/glossary/index.md
   - AUTOSAR:
     - autosar/index.md
