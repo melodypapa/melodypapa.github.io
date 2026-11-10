@@ -321,6 +321,9 @@ nav:
       - "嵌入式跟踪宏单元": cortex/r52plus-trm/embedded_trace_macrocell/index.md
       - "Advanced SIMD 与浮点支持": cortex/r52plus-trm/asimd_floating_point/index.md
       - "PMC-R52+": cortex/r52plus-trm/pmc_r52plus/index.md
+    - Armv8-M 架构参考手册:
+      - cortex/armv8-m/index.md
+      - "简介": cortex/armv8-m/introduction/index.md
   - AUTOSAR:
     - autosar/index.md
     - "术语表": autosar/glossary.md
