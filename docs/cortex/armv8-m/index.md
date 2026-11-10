@@ -20,7 +20,8 @@ title: "Armv8-M 架构参考手册"
 12. [系统定时器，SysTick（The System Timer, SysTick）](system_timer_systick/index.md)
 13. [嵌套向量中断控制器（Nested Vectored Interrupt Controller）](nested_vectored_interrupt_controller/index.md)
 14. [调试（Debug）](debug/index.md)
-15. [术语表（Glossary）](glossary/index.md)
+15. [调试与跟踪组件（Debug and Trace Components）](debug_and_trace_components/index.md)
+16. [术语表（Glossary）](glossary/index.md)
 
 ## 2. 相关内容
 
