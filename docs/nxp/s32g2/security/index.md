@@ -1,5 +1,5 @@
 ---
-title: "信息安全 (**Security**)"
+title: "信息安全 (Security)"
 ---
 
 
