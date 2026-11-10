@@ -12,7 +12,7 @@ Chapter span map (parse lines): Part A L3834–4284 — A1 Introduction, 451 ln 
 | Part | Chapters | Content | Status |
 | --- | --- | --- | --- |
 | A | A1 Introduction | overview of the architecture and its profiles | A1 done |
-| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B12 done; B13–B16 queued below |
+| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B13 done; B14–B16 queued below |
 | C | C1–C2 | instruction set + alphabetical instruction specification | deferred (reference) |
 | D | D1+ | registers and payload specification | deferred (reference) |
 | E | E1–E2 | pseudocode | deferred (reference) |
@@ -159,8 +159,16 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S7 result: covered by the user-approved single-loop run.
   - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
   - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [ ] ⏸ B13 → new article (Debug; e.g. `debug/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] B13 → new article `armv8-m/debug/` (Debug; PDF pp. 297–343, 7 sections + 17 sub-sections, 242 rules)
+  - S1 result: B13 spans printed 297–343 (the B14 divider is on printed 344), 47 pages — the largest Part B chapter so far. Structure: B13.1 Debug feature overview (B13.1.1 Debug mechanisms, B13.1.2 Debug resources, B13.1.3 Trace), B13.2 Accessing debug features (B13.2.1 ROM table, B13.2.2 Debug System registers, B13.2.3 CoreSight and identification registers), B13.3 Debug authentication interface (B13.3.1 Halting debug authentication, B13.3.2 Non-invasive debug authentication, B13.3.3 DebugMonitor exception authentication, B13.3.4 DAP access permissions), B13.4 Debug event behavior (B13.4.1 About debug events, B13.4.2 Debug stepping, B13.4.3 Vector catch, B13.4.4 Breakpoint instructions, B13.4.5 External debug request), B13.5 Debug state, B13.6 Exiting Debug state, B13.7 Multiprocessor support (B13.7.1 Cross-halt event, B13.7.2 External restart request). Census: 2 figures (the DAP IDAU/SAU security check on printed 317, the UDE DAP access flow on printed 319), 17 tables (feature support matrix, debug resource addresses, ROM table map, ID-register space map, SAU-style window map, three halting-authentication mode tables, DAP access permission table, debug event/action table, DFSR bit table, DHCSR write table, vector-catch table, PAC-key and CONTROL access tables, DebugReturnAddress table). The chapter-front section list was dropped (A1 precedent).
+  - S2 result: `docs/cortex/armv8-m/debug/index.md`, 1858 ln; numbering restarts at 1 (`## 1.`–`## 7.` ← B13.1–B13.7, with `### 1.1`–`### 1.3`, `### 2.1`–`### 2.3`, `### 3.1`–`### 3.4`, `### 4.1`–`### 4.5`, `### 7.1`–`### 7.2`). The four unnumbered bold source blocks inside B13.4.1/B13.4.2 (Halting debug, DebugMonitor exception, Halting debug stepping, Debug monitor stepping) became `####` headings. All 17 source tables are GFM: the two-tier headers of the ICTR-style tables are expanded, the vector-catch table repeats the exception name for every fault bit, and the 10-column CONTROL access table keeps `P/B` / `U/U` abbreviations documented in its lead-in. Two source typos were corrected silently (`Instrumenation`, `Marcocell`); no `# ` in the body.
+  - S3 result: `FigureB13-1.png` (DAP IDAU/SAU security check, printed 317) and `FigureB13-2.png` (UDE DAP access flow, printed 319) cropped at 300 dpi and verified visually; both were renumbered so the file numbers follow document order.
+  - S4 result: nav entry `"调试"` after 嵌套向量中断控制器 and before 术语表; landing list entry 14 (术语表 moved to 15).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (363 nav targets, 0 broken links); `check_heading_lang.py` OK; 7 `##` and 17 `###` headings, no `# ` in the body, both `![]()` targets exist.
+  - S6 result: 242/242 rules present in source order; 2 figures, 17 GFM tables; numbering continuity 1–7 with every sub-section present. Three DAP rules (IDKCB, IRVWM, IMRMX) were found missing by the per-section rule count and added before the gate.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] ⏸ B14 → new article (Debug and Trace Components; e.g. `debug_and_trace_components/`)
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] ⏸ B15 → new article (The Performance Monitors Extension; e.g. `performance_monitors_extension/`)

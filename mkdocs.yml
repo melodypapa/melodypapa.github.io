@@ -337,6 +337,7 @@ nav:
       - "受保护内存系统架构": cortex/armv8-m/protected_memory_system_architecture/index.md
       - "系统定时器": cortex/armv8-m/system_timer_systick/index.md
       - "嵌套向量中断控制器": cortex/armv8-m/nested_vectored_interrupt_controller/index.md
+      - "调试": cortex/armv8-m/debug/index.md
       - "术语表": cortex/armv8-m/glossary/index.md
   - AUTOSAR:
     - autosar/index.md
@@ -638,16 +639,16 @@ nav:
       - "Extended Resource Domain Controller (XRDC)": nxp/s32g2/extended_resource_domain_controller/index.md
       - "Fault Collection and Control Unit (FCCU)": nxp/s32g2/fault_collection_and_control_unit/index.md
       - "Network-on-Chip (NoC)": nxp/s32g2/network_on_chip/index.md
-      - "周期性中断定时器 (**PIT**)": nxp/s32g2/periodic_interrupt_timer/index.md
+      - "周期性中断定时器 (PIT)": nxp/s32g2/periodic_interrupt_timer/index.md
       - "Quad Serial Peripheral Interface (QuadSPI)": nxp/s32g2/quad_serial_peripheral_interface/index.md
-      - "实时时钟 (**RTC**)": nxp/s32g2/real_time_clock/index.md
+      - "实时时钟 (RTC)": nxp/s32g2/real_time_clock/index.md
       - "复位": nxp/s32g2/reset/index.md
-      - "信息安全 (**Security**)": nxp/s32g2/security/index.md
+      - "信息安全 (Security)": nxp/s32g2/security/index.md
       - "Semaphores2 (SEMA42)": nxp/s32g2/semaphores2/index.md
-      - "系统定时器模块 (**STM**)": nxp/s32g2/system_timer_module/index.md
+      - "系统定时器模块 (STM)": nxp/s32g2/system_timer_module/index.md
     - S32G3:
       - nxp/s32g3/index.md
-      - "复位 (**Reset**)": nxp/s32g3/ch29_reset/index.md
+      - "复位 (Reset)": nxp/s32g3/ch29_reset/index.md
   - "语言":
     - languages/index.md
     - Deutsch:
