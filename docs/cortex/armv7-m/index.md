@@ -13,6 +13,7 @@ title: "Armv7-M 架构参考手册"
 5. [系统地址映射](system_address_map/index.md)
 6. [CPUID 方案（The CPUID Scheme）](cpuid_scheme/index.md)
 7. [系统指令详情（System Instruction Details）](system_instructions/index.md)
+8. [术语表（Glossary）](glossary/index.md)
 
 ## 2. 相关内容
 
