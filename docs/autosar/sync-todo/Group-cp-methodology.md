@@ -10,6 +10,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 > Slug rule: the Foundation precedent `<type>_<snake_name>` disambiguates the same-named RS/TPS pairs (BSWModuleDescriptionTemplate, DiagnosticExtractTemplate, ECUConfiguration, ECUResourceTemplate, SoftwareComponentTemplate, SystemTemplate). The existing `basic_software_module_description_template` article KEEPS its slug (no rename, no redirect churn). The slug is a proposal: an ambiguous name still goes to the user at Step 1 (mapping.md naming rule). Front-matter `spec:` = `AUTOSAR_CP_<Type>_<Name>`, `release: R23-11`.
 > OPEN decision (confirm at the first run's Step 1, Foundation precedent proposed as default): item IDs are DROPPED, titles translate only — the 2026-11-03 Foundation decision (recorded in Group-foundation-rs-prs.md). These CP RS/TPS/TR documents consist of identified items just like their FO counterparts; applying the same rule keeps the corpus consistent, but it is not yet user-confirmed for CP.
 
+> Delivery: tracked by issue #365; part 1 (rows 1–10, commits 79587d7…610ada4) pushed as PR #366 (rows 11–17 follow on the same branch)
+
 ## Queue
 - [x] rs_ecu_resource_template (AUTOSAR_CP_RS_ECUResourceTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Requirements on ECU Resource Template（ECU 资源模板需求）; target `cp/methodology_templates/rs_ecu_resource_template/`; requirements specification (RS) — numbered requirement items with Description/Rationale/Dependencies/Use-case fields
