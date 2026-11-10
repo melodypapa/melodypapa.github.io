@@ -1,5 +1,5 @@
 ---
-title: "复位（**Reset**）"
+title: "复位 (Reset)"
 ---
 
 ## 1. 介绍

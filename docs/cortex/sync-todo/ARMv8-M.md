@@ -12,14 +12,14 @@ Chapter span map (parse lines): Part A L3834–4284 — A1 Introduction, 451 ln 
 | Part | Chapters | Content | Status |
 | --- | --- | --- | --- |
 | A | A1 Introduction | overview of the architecture and its profiles | A1 done |
-| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | queued below |
+| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B14 done; B15–B16 queued below |
 | C | C1–C2 | instruction set + alphabetical instruction specification | deferred (reference) |
 | D | D1+ | registers and payload specification | deferred (reference) |
 | E | E1–E2 | pseudocode | deferred (reference) |
 | F | F1 | debug packet protocols | deferred (reference) |
-| G | — | glossary | deferred (chrome) |
+| G | — | glossary | G done — `docs/cortex/armv8-m/glossary/index.md`, 285 entries, PDF pp. 2122–2148 |
 
-Parts C/D/E/F/G are reference material (instruction encodings, register payloads, pseudocode) — queued Parts A/B chapter-by-chapter first; C–G are deliberately deferred the way [ARMv7-M](ARMv7-M.md) defers its tail.
+Parts C/D/E/F are reference material (instruction encodings, register payloads, pseudocode) — queued Parts A/B chapter-by-chapter first; they are deliberately deferred the way [ARMv7-M](ARMv7-M.md) defers its tail. Part G (glossary) is translated and registered.
 
 ## Queue
 
@@ -35,34 +35,150 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S7 result: confirmed by the user (plan approval 2026-11-10).
   - S8 result: shipped with `Closes #361` in this PR; merge SHA and PR number to be recorded post-merge per the ledger convention.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [ ] ⏸ B1 → new article (Resets; body from L4288; e.g. `resets/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] ⏸ B2 → new article (Power Management; body from L4339; e.g. `power_management/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] ⏸ B3 → new article (Programmers' Model; body from L4548; e.g. `programmers_model/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] ⏸ B4 → new article (Floating-point Support; e.g. `floating_point_support/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] ⏸ B5 → new article (Vector Extension; e.g. `vector_extension/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] ⏸ B6 → new article (Pointer Authentication and Branch Target Identification Extension; e.g. `pacbti/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] ⏸ B7 → new article (Memory Model; e.g. `memory_model/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] ⏸ B8 → new article (The System Address Map; e.g. `system_address_map/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] ⏸ B9 → new article (Synchronization and Semaphores; e.g. `synchronization_and_semaphores/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] ⏸ B10 → new article (The Armv8-M Protected Memory System Architecture; e.g. `protected_memory_system_architecture/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] ⏸ B11 → new article (The System Timer, SysTick; e.g. `system_timer_systick/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] ⏸ B12 → new article (Nested Vectored Interrupt Controller; e.g. `nested_vectored_interrupt_controller/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] ⏸ B13 → new article (Debug; e.g. `debug/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] ⏸ B14 → new article (Debug and Trace Components; e.g. `debug_and_trace_components/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] B1 resets — new article (article 55 ln, 1 `##` vs 7 rules)
+  - S1 result: Part B opens at L4285; B1 body L4288–4337 with the single section B1.1 "Resets, Cold reset, and Warm reset" (seven rules), then the chapter's See also list (B13, B16). Census: 0 figures, 0 tables. The chapter-front "It contains the following section" list was dropped as a redundant section list (A1 precedent); the random rule IDs (`R_BDPL` …) are not rendered, matching the existing `armv7-m/` and `armv8-m/` articles.
+  - S2 result: `docs/cortex/armv8-m/resets/index.md`; numbering restarts at 1 (`## 1.` ← B1.1); each rule keeps its `适用于 **Armv8.0-M** 及以后架构版本的实现。` line verbatim; `TakeReset()` kept in a code span; the See also block rendered as `参见：` bullets. No `# ` in the body.
+  - S3 result: N/A — the chapter has no figures.
+  - S4 result: nav entry `"复位"` after 简介 in the Armv8-M group; landing list entry 2.
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` 0 broken links; heading-language check OK.
+  - S6 result: 7/7 rules present in source order with no dropped applicability line; 0 figures, 0 tables; numbering continuity (`## 1.` only).
+  - S7 result: PR opened, awaiting user confirmation.
+  - S8 result: PR #364 (merge SHA to be recorded post-merge).
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [ ] S7 [x] S8
+- [x] B2 → new article `armv8-m/power_management/` (Power Management; body L4339–4546)
+  - S1 result: B2 body L4339–4546: B2.1 "Power management" (12 rules) with B2.1.1 WFE and B2.1.2 WFI, then B2.2 "Sleep on exit" (4 rules). Census: 0 figures, 0 tables. The chapter-front section list was dropped (A1/B1 precedent). Two parse OCR artifacts were checked against PDF pp. 63–66 and corrected in translation: "WFE makeup event" → "WFE wakeup event", "unprovided debug" → "unprivileged debug".
+  - S2 result: `docs/cortex/armv8-m/power_management/index.md`; numbering restarts at 1 (`## 1.` ← B2.1 with `### 1.1`/`### 1.2` ← B2.1.1/B2.1.2, `## 2.` ← B2.2); every rule keeps its applicability line, the Armv8.1-M rule keeps `扩展要求为 - DB && UDE。`, and the `DB` rule carries the source's DebugMonitor note; both See also blocks rendered as `参见：` bullets. No `# ` in the body.
+  - S3 result: N/A — the chapter has no figures.
+  - S4 result: nav entry `"电源管理"` after 复位 in the Armv8-M group; landing list entry 3.
+  - S5 result: strict build 0 WARNING; index checks 0 broken links; heading-language check OK.
+  - S6 result: 12/12 B2.1 rules and 4/4 B2.2 rules present in source order; both subsections present; 0 figures, 0 tables; numbering continuity 1–1.2/2.
+  - S7 result: covered by the user-approved single-loop run; the confirmation gate is taken once at the end of B2–B16.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets` (PR #364).
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
+- [x] B3 → new article `armv8-m/programmers_model/` (Programmers' Model; body from L4548; PDF pp. 87–158)
+  - S1 result: B3 has 37 sections (B3.1–B3.37) with sub-sections B3.27.1–B3.27.7 and B3.37.1–B3.37.3. The `.md` parse is disordered for B3 (content misplaced across the chapter), so the translation was taken from the PDF text layer page by page with the PDF page index = printed page − 1. Census: 9 content figures (B3.5 XPSR, B3.13 priority mapping, B3.16 call stack frame, B3.17 FNC_RETURN bar, B3.19 exception stack frame, B3.23 integrity signature, B3.26 three tail-chaining timing diagrams), 6 tables (B3.5 MRS/MSR mnemonics, B3.13 PRIGROUP and the 0x00–0xFE mapping, B3.14 NS attribute, B3.19/B3.21 stack-limit register sets, B3.27 EPSR.ICI, B3.28 LO_BRANCH_INFO, B3.30 vector table).
+  - S2 result: `docs/cortex/armv8-m/programmers_model/index.md`, 3423 ln; numbering restarts at 1 (`## 1.` ← B3.1 … `## 37.` ← B3.37, `### 27.1`–`### 27.7`, `### 37.1`–`### 37.3`); every rule keeps its applicability line and the source's extension requirement (`- S`, `- M`, `- FP || MVE`, `- CDE && MVE && LOB`, …) with source notes appended as `注意，…。`; all See-also blocks rendered as `参见：` bullets; the `memcpy`/BF listings kept verbatim in ```arm blocks.
+  - S3 result: 8 new figures cropped from the PDF at 300 dpi with a ~4 % margin per side — `FigureB3-5.png` (B3.19 stack frame), `FigureB3-6.png` (B3.23 integrity signature, both bars), `FigureB3-7/8/9.png` (B3.26 tail-chaining diagrams); each verified visually for clipping. No table was cropped as an image.
+  - S4 result: nav entry `"编程模型"` after 电源管理 and before 术语表 in the Armv8-M group; landing list entry 4 (术语表 moved to 5).
+  - S5 result: strict build 0 WARNING; index checks OK (353 nav targets, 0 broken links); heading-language check OK; 37 `##` headings 1–37 with no `# ` in the body, all 9 `![]()` targets present, no `![Table…]` images.
+  - S6 result: all 37 sections present in source order with their rule groups; 9/9 figures and all tables rebuilt as GFM text; numbering continuity 1–37 and 27.1–27.7 / 37.1–37.3.
+  - S7 result: covered by the user-approved single-loop run; the confirmation gate is taken once at the end of B2–B16.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets` (commit fbf7353).
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
+- [x] B4 → new article `armv8-m/floating_point_support/` (Floating-point Support; PDF pp. 160–176, 12 sections)
+  - S1 result: B4 spans PDF pages printed 160–176 (the B5 divider is on printed 177); 12 sections B4.1–B4.12 with the single sub-section B4.8.1. The `.md` parse cannot be used for body recovery here (same interleaving as B3), so the text was taken from the PDF layer page by page. Census: 4 vector diagrams (B4.1 S/D register map, B4.2–B4.4 the half/single/double encoding bit bars) and 5 tables (B4.2 two coprocessor register maps, B4.4 terminology, B4.6 interpretation, B4.10 Default NaN). The bit bars and the Default NaN table carry no `Figure B4-n` caption in this edition — the figure numbers are synthetic, per the A1 precedent.
+  - S2 result: `docs/cortex/armv8-m/floating_point_support/index.md`, 552 ln; numbering restarts at 1 (`## 1.` ← B4.1 … `## 12.` ← B4.12, `### 8.1` ← B4.8.1). 68 rule applicability lines plus the B4.8.1 section-level line match the source's `Applies to an implementation …` lines; the B4.8.1 rules keep the source's `Note, !8.0.` as `注意，不适用于 **Armv8.0-M**。`; the B4.10 spanning header ("IEEE 754-2008 interpretation" over the three format columns) is carried by the lead-in sentence rather than a merged cell; all See-also blocks render as `参见：` bullets. No `# ` in the body.
+  - S3 result: 4 figures cropped from the PDF at 300 dpi — `FigureB4-1.png` (B4.3 register map), `FigureB4-2/3/4.png` (B4.6 half/single/double encoding); each verified visually for clipping. No table was cropped as an image.
+  - S4 result: nav entry `"浮点支持"` after 编程模型 and before 术语表 in the Armv8-M group; landing list entry 5 (术语表 moved to 6).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (354 nav targets, 0 broken links); `check_heading_lang.py` OK (the `## 10. Default NaN` heading was retitled `## 10. Default NaN 值` to satisfy the check); 12 `##` headings 1–12 continuous, 4 `![]()` targets present, no `![Table…]` images.
+  - S6 result: 12/12 sections in source order; the 5 exceptions of B4.7, the 15 B4.8 rules + 5 B4.8.1 rules, the 6 B4.9 NaN rules, the B4.10 table, the 2 B4.11 combination rules and the B4.12 priority rule are all present; 4 figures, 5 tables.
+  - S7 result: covered by the user-approved single-loop run; the confirmation gate is taken once at the end of B2–B16.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets` (commit ffbd561).
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
+- [x] B5 → new article `armv8-m/vector_extension/` (Vector Extension; PDF pp. 177–191, 6 sections)
+  - S1 result: B5 spans printed 177–191 (the B6 divider is on printed 192); 6 sections B5.1–B5.6 with sub-sections B5.5.1–B5.5.4. Census: 5 vector diagrams (B5.2 vector register file, B5.3 four lane-number rows, B5.4 beat-number bar, B5.4 dual-beat overlap timing, B5.6 VLD4 de-interleave grid) and 2 tables (B5.5.2 VPT variants, B5.5.3 lane width vs VPR.P0 bits). The Q\<n\> bit assignment on p. 180 is a numbered list (rows 1, 2, 3 = …, 4), not a table. No figure captions exist in this edition — numbering is synthetic, per the A1 precedent.
+  - S2 result: `docs/cortex/armv8-m/vector_extension/index.md`, 511 ln; numbering restarts at 1 (`## 1.` ← B5.1 … `## 6.` ← B5.6, `### 5.1`–`### 5.4` ← B5.5.1–B5.5.4). 76 applicability lines match the source's 76 `Applies to an implementation …` lines exactly (12 / 4 / 2 / 16 / 38 / 4 per section); the two `Note, Debug state requires HDBG.` lines are kept as `注意，调试状态要求 **HDBG**。`; **Lanes**/**Beats** are glossed in the headings as 通道/节拍 and bolded at first use in the body; the dual-beat example keeps its two ``` blocks of three instructions. No `# ` in the body.
+  - S3 result: 5 figures cropped at 300 dpi — `FigureB5-1` (register file map, recropped wider after the S-column border clipped), `FigureB5-2` (lane numbers), `FigureB5-3` (beat number), `FigureB5-4` (dual-beat timing), `FigureB5-5` (VLD4 grid); all verified visually.
+  - S4 result: nav entry `"向量扩展"` after 浮点支持; landing list entry 6 (术语表 moved to 7).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (355 nav targets, 0 broken links); `check_heading_lang.py` OK; 6 `##` headings 1–6 continuous, 5 `![]()` targets present, no `![Table…]` images.
+  - S6 result: 6/6 sections and 4/4 sub-sections in source order; both tables rebuilt as GFM text; the B5.1 multi-access BusFault rule pair (RFBRZ/IKPFV) kept as two rules.
+  - S7 result: covered by the user-approved single-loop run; the confirmation gate is taken once at the end of B2–B16.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets` (commit 7405a36).
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
+- [x] B6 → new article `armv8-m/pacbti/` (Pointer authentication and branch target identification Extension; PDF pp. 192–200, 1 section + 2 sub-sections)
+  - S1 result: B6 spans printed 192–200 (the B7 divider is on printed 201, body from printed 202); the chapter has a single section B6.1 "Implementing PAC and BTI" with sub-sections B6.1.1 Pointer authentication and B6.1.2 Branch target identification — there is no B6.2. The text was recovered from the PDF layer page by page (the `.md` parse interleaves TOC rows and running headers). Census: 0 figures, 1 table (the four 128-bit PAC keys, rows 特权/非特权 × columns Non-secure/Secure), 2 numbered ```arm listings (the PAC example, 36 lines; the BTI example, 53 lines). The `find_tables()` hits on printed 196/199 are the code box grids, not tables. The chapter-front "It contains the following sections" list was dropped (A1/B1 precedent).
+  - S2 result: `docs/cortex/armv8-m/pacbti/index.md`; numbering restarts at 1 (`## 1.` ← B6.1, `### 1.1`/`### 1.2` ← B6.1.1/B6.1.2). 40 applicability lines match the source's 40 `Applies to an implementation …` lines (3 / 17 / 20 per section); the two `- PACBTI && S` requirements keep their Secure qualifier; **BTI setting**/**BTI clearing** are glossed as **BTI 置位指令**/**BTI 清零指令**; the 12 QARMA pseudocode function names stay in code spans; both listings keep their source line numbers 1–36 and 1–53 with the wrapped comments folded onto the owning instruction; the See-also block (B3.4) renders as `参见：`. No `# ` in the body.
+  - S3 result: N/A — the chapter has no figures.
+  - S4 result: nav entry `"指针认证与分支目标识别"` after 向量扩展 and before 术语表 in the Armv8-M group; landing list entry 7 (术语表 moved to 8).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (356 nav targets, 0 broken links); `check_heading_lang.py` OK; 1 `##` heading plus 2 `###` headings, no `# ` in the body, no `![]()` images.
+  - S6 result: 40/40 rules present in source order across the three groups; the key matrix rebuilt as GFM text under a lead-in sentence; both listings reproduced line for line (36 and 53 lines, comments preserved); 0 figures, 1 table.
+  - S7 result: covered by the user-approved single-loop run; the confirmation gate is taken once at the end of B2–B16.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets` (commit b5938c7).
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
+- [x] B7 → new article `armv8-m/memory_model/` (Memory Model; PDF pp. 202–262, 29 sections; 344 applicability lines)
+  - S1 result (part 1): B7 spans printed 202–262 (the B8 divider is on printed 263); §1–§7 occupy printed 202–229 with 167 `Applies to an implementation …` lines. Structure: B7.1 Definition of the Armv8 memory model (with B7.1.1 Locations and nine unnumbered group headings), B7.2 Atomicity (B7.2.1–B7.2.16, including B7.2.4.1 Ordering relations), B7.3 Memory accesses, B7.4 Address space, B7.5 Endianness, B7.6 Alignment behavior, B7.7 Concurrent modification and execution of instructions. Census for this span: 2 figures, 1 table (the endianness element-size table). The chapter-front section list of B7.1 was kept because it sits inside the IJRPK rule and is the chapter's only navigation aid; its source numbering (B7.1.1, B7.2.3, B7.2.5, B7.2.7, B7.2.6, B7.2.9) was reproduced verbatim.
+  - S2 result (part 1): `docs/cortex/armv8-m/memory_model/index.md`, 1132 ln; numbering restarts at 1 (`## 1.` ← B7.1 with `### 1.1` ← B7.1.1; `## 2.` ← B7.2 with `### 2.1`–`### 2.16` ← B7.2.1–B7.2.16 and `#### 2.4.1` ← B7.2.4.1; `## 3.`–`## 7.` ← B7.3–B7.7). Unnumbered source sub-heads became `####`. All 167 applicability lines are present with their extension requirements (`- M`, `- !M`, `- MVE`, `- PACBTI && S` style kept verbatim); source notes render as `注意，…。`; every See-also block is a `参见：` bullet list. Two transparent typo fixes: `RW1` duplicated in the RPXPQ bullet and `semanitcs` in the RPXQQ bullet. No `# ` in the body.
+  - S3 result (part 1): `FigureB7-1.png` (little-endian and big-endian data layout) and `FigureB7-2.png` (instruction alignment and byte ordering) cropped from printed 225 at 300 dpi; both re-cropped after visual inspection clipped the panel titles and the "Least significant bit" legends. The source has no `Figure B7-n` captions, so the numbering is synthetic (A1 precedent).
+  - S4 result (part 1): nav entry `"内存模型"` after 指针认证与分支目标识别 and before 术语表; landing list entry 8 (术语表 moved to 9).
+  - S5 result (part 1): strict build 0 WARNING; index checks OK; heading-language check OK.
+  - S6 result (part 1): 167/167 rules in source order across the seven sections; 2 figures embedded with lead-in sentences; 1 GFM table; group headings preserved; numbering continuity 1–1.1 / 2–2.16 with 2.4.1 / 3 / 4 / 5 / 6 / 7.
+  - S2 result (part 2): §8–§29 appended to the same page (§8 Access rights … §29 Branch predictor maintenance operations); B7.27's Set/Way register format embedded as `FigureB7-4.png`, and the self-modifying-code sequence kept as a ```arm listing with the source comments. B7.20/B7.21/B7.26 have no See-also block in the source, so none was invented; B7.27's See-also continues onto the next printed page (B7.10) and was joined into one list.
+  - S3 result (part 2): `FigureB7-3.png` (Shareability domains, printed 241) and `FigureB7-4.png` (Set/Way register format, printed 259) cropped at 300 dpi and verified visually.
+  - S5 result (part 2): strict build 0 WARNING; `check_indexes.py --root .` OK (357 nav targets, 0 broken links); `check_heading_lang.py` OK; 29 `##` headings, no `# ` in the body, all 4 `![]()` targets present.
+  - S6 result (part 2): 344/344 applicability lines match the source's 344 `Applies to an implementation …` lines across all 29 sections, and §20–§29 are 63/63. Two format defects found by that check and fixed: the B7.12 RLJKD rule had been split into two blocks (duplicating its applicability line), and a translated sentence in B7.2.4 began with 适用于, which the counter read as an applicability line.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets` (commit a1e82e4, sections 8–29; sections 1–7 in ef8ae64).
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
+- [x] B8 → new article `armv8-m/system_address_map/` (The System Address Map; PDF pp. 265–268, 3 sections, 18 rules)
+  - S1 result: B8 spans printed 265–268 (the B9 divider is on printed 269, the chapter divider on 264); B8.1 System address map (4 rules), B8.2 The System region of the system address map (10 rules), B8.3 The System Control Space (SCS) (4 rules), plus the chapter-front section list, which was dropped (A1 precedent). Census: 1 figure (the system-region address diagram on printed 266, with its †/††/††† footnote block), 1 table (the nine-row address-region table on printed 265, including the WT/RA/WBWA/XN footnote list). Text and the table grid were read from the PDF layer page by page.
+  - S2 result: `docs/cortex/armv8-m/system_address_map/index.md`; numbering restarts at 1 (`## 1.`–`## 3.` ← B8.1–B8.3). All 18 applicability lines are present with their extension requirements (`- M && !S`, `- S` kept verbatim), the RMXRW note renders as `注意，若 !M 则产生 **HardFault**。`, and the four See-also blocks are `参见：` lists (B8.1 and B8.3 block names stay English in 《…》). The address table is GFM with each 2-line address range collapsed to one row, and the WT/RA/WBWA/XN footnotes follow as a bullet list. No `# ` in the body.
+  - S3 result: `FigureB8-1.png` cropped from printed 266 at 300 dpi with a ~18 pt margin; verified visually — top `0x00000000`, the right-hand "System region of the address map" bracket and the three dagger footnotes are all inside the crop.
+  - S4 result: nav entry `"系统地址映射"` after 内存模型 and before 术语表; landing list entry 9 (术语表 moved to 10).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (358 nav targets, 0 broken links); `check_heading_lang.py` OK; 3 `##` headings, no `# ` in the body, the single `![]()` target exists.
+  - S6 result: 18/18 rules present in source order (4 / 10 / 4); 1 figure, 1 table (9 rows × 7 columns, all 9 rows carry their region, memory type, XN, cache, shareability and usage); numbering continuity 1 / 2 / 3.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
+- [x] B9 → new article `armv8-m/synchronization_and_semaphores/` (Synchronization and Semaphores; PDF pp. 270–279, 5 sections + 2 sub-sections, 56 rules)
+  - S1 result: B9 spans printed 270–279 (the B10 divider is on printed 280); B9.1 Exclusive access instructions (6 rules), B9.2 The local monitors (10), B9.3 The global monitor (11) with B9.3.1 Load-Exclusive and Store-Exclusive (5) and B9.3.2 Load-Exclusive and Store-Exclusive in Shareable memory (6), B9.4 Exclusive access instructions and the monitors (3), B9.5 Load-Exclusive and Store-Exclusive instruction constraints (15). The chapter-front section list was dropped (A1 precedent). Census: 2 figures (the local-monitor and global-monitor state diagrams, printed 271 and 275, each with its `*`/`‡` legend and footnote text), 1 table (the synchronization-primitive table on printed 270). Text read from the PDF layer page by page.
+  - S2 result: `docs/cortex/armv8-m/synchronization_and_semaphores/index.md`; numbering restarts at 1 (`## 1.`–`## 5.` ← B9.1–B9.5, `### 3.1`/`### 3.2` ← B9.3.1/B9.3.2). All 56 applicability lines are present; the primitive table is GFM with the merged Function column expanded per row (Load-Exclusive/Store-Exclusive × Byte/Halfword/Word, then Clear-Exclusive); the RHLHS note keeps `M && MPU` / `M` verbatim; RMFGC and RDTRN/RDFNB keep their nested status-value lists; the four See-also blocks are `参见：` lists. No `# ` in the body.
+  - S3 result: `FigureB9-1.png` (local monitor, printed 271) and `FigureB9-2.png` (global monitor for PE(n), printed 275) cropped at 300 dpi; both verified visually — the two state boxes, every transition label, the `*`/`‡` notes and the diagram legend are inside the crops.
+  - S4 result: nav entry `"同步与信号量"` after 系统地址映射 and before 术语表; landing list entry 10 (术语表 moved to 11).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (359 nav targets, 0 broken links); `check_heading_lang.py` OK; 5 `##` and 2 `###` headings, no `# ` in the body, both `![]()` targets exist.
+  - S6 result: 56/56 rules present in source order (6 / 10 / 11 + 5 + 6 / 3 / 15); 2 figures, 1 table; numbering continuity 1–5 with 3.1–3.2.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
+- [x] B10 → new article `armv8-m/protected_memory_system_architecture/` (The Armv8-M Protected Memory System Architecture; PDF pp. 281–288, 4 sections, 48 rules)
+  - S1 result: B10 spans printed 281–288 (the B11 divider is on printed 289); B10.1 Memory Protection Unit (26 rules), B10.2 Security attribution (11), B10.3 Security attribution unit (SAU) (9), B10.4 IMPLEMENTATION DEFINED Attribution Unit (IDAU) (2). The chapter-front section list was dropped (A1 precedent). Census: 2 figures (the security-attribution and MPU-check flowcharts for data accesses and for instruction fetches, printed 285 and 286), 1 table (the SAU region field ↔ window register mapping on printed 287). `find_tables()` on printed 281 is a false positive (the page's two-column body), not a table.
+  - S2 result: `docs/cortex/armv8-m/protected_memory_system_architecture/index.md`; numbering restarts at 1 (`## 1.`–`## 4.` ← B10.1–B10.4). All 48 applicability lines are present; the `- MPU` / `- MPU && S` / `- S && MPU` / `- S` requirements are kept verbatim; the RLDTN rule keeps its `免受安全违规检查的地址范围` lead-in and all eight address-range bullets; the network formulas (`Address >= MPU_RBAR.BASE:'00000' …`) stay in code spans; both See-also blocks are `参见：` lists. No `# ` in the body.
+  - S3 result: `FigureB10-1.png` (data accesses) and `FigureB10-2.png` (instruction fetch) cropped at 300 dpi; both verified visually — every decision diamond, both `SecureFault` boxes, the two `MemManage Fault` boxes and all Yes/No labels are inside the crops. FigureB10-2 sits directly under the running header, so its top margin is clamped to the header rather than the usual 4%.
+  - S4 result: nav entry `"受保护内存系统架构"` after 同步与信号量 and before 术语表; landing list entry 11 (术语表 moved to 12).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (360 nav targets, 0 broken links); `check_heading_lang.py` OK; 4 `##` headings, no `# ` in the body, both `![]()` targets exist.
+  - S6 result: 48/48 rules present in source order (26 / 11 / 9 / 2); 2 figures, 1 table (5 rows × 2 columns); numbering continuity 1–4.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
+- [x] B11 → new article `armv8-m/system_timer_systick/` (The System Timer, SysTick; PDF pp. 290–291, 1 section, 13 rules)
+  - S1 result: B11 spans printed 290–291 (the B12 divider is on printed 292) with the single section B11.1 The system timer, SysTick. The chapter-front section list was dropped (A1 precedent). Census: 0 figures, 0 tables. Text read from the PDF layer.
+  - S2 result: `docs/cortex/armv8-m/system_timer_systick/index.md`; numbering restarts at 1 (`## 1.` ← B11.1). All 13 applicability lines are present, with `- !M && !S` / `- !M && S` / `- M && !S` / `- M && S` / `- ST` / `- ST && HDBG` kept verbatim; the four SysTick registers keep their `SYST_*` names in code spans. The chapter has no See-also block, so none was invented. No `# ` in the body.
+  - S3 result: N/A — the chapter has no figures.
+  - S4 result: nav entry `"系统定时器"` after 受保护内存系统架构 and before 术语表; landing list entry 12 (术语表 moved to 13).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (361 nav targets, 0 broken links); `check_heading_lang.py` OK; 1 `##` heading, no `# ` in the body, no `![]()` images.
+  - S6 result: 13/13 rules in source order (8 on printed 290, 5 on printed 291); 0 figures, 0 tables; numbering continuity (`## 1.` only).
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
+- [x] B12 → new article `armv8-m/nested_vectored_interrupt_controller/` (Nested Vectored Interrupt Controller; PDF pp. 293–295, 2 sections, 15 rules)
+  - S1 result: B12 spans printed 293–295 (the B13 divider is on printed 296); B12.1 NVIC definition (3 rules), B12.2 NVIC operation (12). The chapter-front section list was dropped (A1 precedent). Census: 0 figures, 1 table (the `ICTR.INTLINESNUM` → interrupt count / highest `NVIC_IPRn` index / highest other NVIC index table on printed 293, 16 rows). Text and the table grid were read from the PDF layer.
+  - S2 result: `docs/cortex/armv8-m/nested_vectored_interrupt_controller/index.md`; numbering restarts at 1 (`## 1.`/`## 2.` ← B12.1/B12.2). All 15 applicability lines are present; the 16-row table is GFM with the two-tier header expanded (`已实现的最高 NVIC_IPRn 索引 n` / `其他所有 NVIC 寄存器的最高索引 n`); IDLTR keeps the source's `NVIC_ISER5 至 NVIC_IPR15` wording verbatim; both See-also blocks are `参见：` lists. No `# ` in the body.
+  - S3 result: N/A — the chapter has no figures.
+  - S4 result: nav entry `"嵌套向量中断控制器"` after 系统定时器 and before 术语表; landing list entry 13 (术语表 moved to 14).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (362 nav targets, 0 broken links); `check_heading_lang.py` OK; 2 `##` headings, no `# ` in the body, no `![]()` images.
+  - S6 result: 15/15 rules in source order (3 / 12); 0 figures, 1 table (16 data rows × 4 columns); numbering continuity 1–2.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
+- [x] B13 → new article `armv8-m/debug/` (Debug; PDF pp. 297–343, 7 sections + 17 sub-sections, 242 rules)
+  - S1 result: B13 spans printed 297–343 (the B14 divider is on printed 344), 47 pages — the largest Part B chapter so far. Structure: B13.1 Debug feature overview (B13.1.1 Debug mechanisms, B13.1.2 Debug resources, B13.1.3 Trace), B13.2 Accessing debug features (B13.2.1 ROM table, B13.2.2 Debug System registers, B13.2.3 CoreSight and identification registers), B13.3 Debug authentication interface (B13.3.1 Halting debug authentication, B13.3.2 Non-invasive debug authentication, B13.3.3 DebugMonitor exception authentication, B13.3.4 DAP access permissions), B13.4 Debug event behavior (B13.4.1 About debug events, B13.4.2 Debug stepping, B13.4.3 Vector catch, B13.4.4 Breakpoint instructions, B13.4.5 External debug request), B13.5 Debug state, B13.6 Exiting Debug state, B13.7 Multiprocessor support (B13.7.1 Cross-halt event, B13.7.2 External restart request). Census: 2 figures (the DAP IDAU/SAU security check on printed 317, the UDE DAP access flow on printed 319), 17 tables (feature support matrix, debug resource addresses, ROM table map, ID-register space map, SAU-style window map, three halting-authentication mode tables, DAP access permission table, debug event/action table, DFSR bit table, DHCSR write table, vector-catch table, PAC-key and CONTROL access tables, DebugReturnAddress table). The chapter-front section list was dropped (A1 precedent).
+  - S2 result: `docs/cortex/armv8-m/debug/index.md`, 1858 ln; numbering restarts at 1 (`## 1.`–`## 7.` ← B13.1–B13.7, with `### 1.1`–`### 1.3`, `### 2.1`–`### 2.3`, `### 3.1`–`### 3.4`, `### 4.1`–`### 4.5`, `### 7.1`–`### 7.2`). The four unnumbered bold source blocks inside B13.4.1/B13.4.2 (Halting debug, DebugMonitor exception, Halting debug stepping, Debug monitor stepping) became `####` headings. All 17 source tables are GFM: the two-tier headers of the ICTR-style tables are expanded, the vector-catch table repeats the exception name for every fault bit, and the 10-column CONTROL access table keeps `P/B` / `U/U` abbreviations documented in its lead-in. Two source typos were corrected silently (`Instrumenation`, `Marcocell`); no `# ` in the body.
+  - S3 result: `FigureB13-1.png` (DAP IDAU/SAU security check, printed 317) and `FigureB13-2.png` (UDE DAP access flow, printed 319) cropped at 300 dpi and verified visually; both were renumbered so the file numbers follow document order.
+  - S4 result: nav entry `"调试"` after 嵌套向量中断控制器 and before 术语表; landing list entry 14 (术语表 moved to 15).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (363 nav targets, 0 broken links); `check_heading_lang.py` OK; 7 `##` and 17 `###` headings, no `# ` in the body, both `![]()` targets exist.
+  - S6 result: 242/242 rules present in source order; 2 figures, 17 GFM tables; numbering continuity 1–7 with every sub-section present. Three DAP rules (IDKCB, IRVWM, IMRMX) were found missing by the per-section rule count and added before the gate.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
+- [x] B14 → new article `armv8-m/debug_and_trace_components/` (Debug and Trace Components; PDF pp. 345–384, 5 sections + 20 sub-sections, 308 rules)
+  - S1 result: B14 spans printed 345–384 (40 pages); the parse ordering is faithful here (unlike B3), so the source was dumped page by page with PDF idx = printed − 1. Structure: B14.1 Instrumentation Trace Macrocell (B14.1.1 About the ITM, B14.1.2 ITM operation, B14.1.3 Timestamping support, B14.1.4 Synchronization support, B14.1.5 Continuation bits), B14.2 Data Watchpoint and Trace unit (B14.2.1 About the DWT, B14.2.2 DWT unit operation, B14.2.3 Constraints on programming the DWT comparators, B14.2.4 CMPMATCH trigger events, B14.2.5 Detailed matching rules, B14.2.6 DWT match restrictions and relaxations, B14.2.7 DWT trace restrictions and relaxations, B14.2.8 CYCCNT cycle counter and related timers, B14.2.9 Profiling counter support, B14.2.10 Program Counter sampling support), B14.3 Embedded Trace Macrocell, B14.4 Trace Port Interface Unit, B14.5 Flash Patch and Breakpoint unit (B14.5.1 About the FPB unit, B14.5.2 FPB unit operation, B14.5.3 Cache maintenance). Census: 2 figures (ITM/component relationship diagram on printed 345, the commit-for-execution state diagram on printed 376), 6 tables (the four DWT comparator MATCH/ACTION combination tables in B14.2.3, the CYCTAP tap-bit table, the ETM version matrix). Rule total 308, equal to the source `Applies to an implementation of the architecture` line count.
+  - S2 result: `docs/cortex/armv8-m/debug_and_trace_components/index.md`, 1826 ln; numbering restarts at 1 (`## 1.`–`## 5.` ← B14.1–B14.5, `### 1.1`–`### 1.5`, `### 2.1`–`### 2.10`, `### 5.1`–`### 5.3`); the unnumbered B14 sub-blocks (local/global timestamp, the comparator constraint blocks in 2.3, the matching-detail blocks in 2.5, "Generating Overflow packets from Event counters") became `####` headings. The four B14.2.3 combination tables are 9-column GFM tables rebuilt from the flattened text; the two-level ETM version matrix header is expanded with `<br>` cell line breaks; the `See also` block at the end of B14.5.2 keeps the source's trailing bare `Applies to …` line. All 308 applicability lines carry the source extension requirement verbatim (`- DWTT`, `- ITM && PMU`, `- ETM && !M`, …); source notes became `注意，…。`; no `# ` in the body.
+  - S3 result: `FigureB14-1.png` (ITM/component relationship diagram, printed 345) and `FigureB14-2.png` (commit-for-execution state diagram, printed 376) cropped at 4× and verified visually — the second was re-cropped upward to include the top `Cancel` label.
+  - S4 result: nav entry `"调试与跟踪组件"` after 调试 and before 术语表; landing list entry 15 (术语表 moved to 16).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (364 nav targets, 0 broken links); `check_heading_lang.py` OK — the §1 heading was reworded to `## 1. 仪表化跟踪宏单元（Instrumentation Trace Macrocell）` because the English-only title tripped the check.
+  - S6 result: 308/308 rules present in source order; per-section applicability counts identical to the source (7/35/31/6/5, 11/36/15/6/36/17/14/16/16/13, 9, 14, 3/17/1); 2 figures, 6 GFM tables; numbering continuity 1–5 with every sub-section present.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] ⏸ B15 → new article (The Performance Monitors Extension; e.g. `performance_monitors_extension/`)
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] ⏸ B16 → new article (Reliability, Availability, and Serviceability (RAS) Extension; e.g. `ras_extension/`)

@@ -7,8 +7,23 @@ title: "Armv8-M 架构参考手册"
 ## 1. 章节
 
 1. [简介（Introduction）](introduction/index.md)
+2. [复位（Resets）](resets/index.md)
+3. [电源管理（Power Management）](power_management/index.md)
+4. [程序员模型（Programmers' Model）](programmers_model/index.md)
+5. [浮点支持（Floating-point Support）](floating_point_support/index.md)
+6. [向量扩展（Vector Extension）](vector_extension/index.md)
+7. [指针认证与分支目标识别扩展（Pointer authentication and branch target identification Extension）](pacbti/index.md)
+8. [内存模型（Memory Model）](memory_model/index.md)
+9. [系统地址映射（The System Address Map）](system_address_map/index.md)
+10. [同步与信号量（Synchronization and Semaphores）](synchronization_and_semaphores/index.md)
+11. [受保护内存系统架构（The Armv8-M Protected Memory System Architecture）](protected_memory_system_architecture/index.md)
+12. [系统定时器，SysTick（The System Timer, SysTick）](system_timer_systick/index.md)
+13. [嵌套向量中断控制器（Nested Vectored Interrupt Controller）](nested_vectored_interrupt_controller/index.md)
+14. [调试（Debug）](debug/index.md)
+15. [调试与跟踪组件（Debug and Trace Components）](debug_and_trace_components/index.md)
+16. [术语表（Glossary）](glossary/index.md)
 
 ## 2. 相关内容
 
 - [Armv7-M 架构参考手册（DDI0403E E.e）](../armv7-m/index.md) — 上一代 M-Profile 架构参考手册的对应译文。
-- 本手册的 Part C 指令集、Part D 寄存器与有效载荷规范、Part E 伪代码、Part F 调试包协议，以及 Part G 术语表为参考资料，暂不收录；Part B 的 B1–B16 章节清单见 `sync-todo/ARMv8-M.md` 中的队列。
+- 本手册的 Part C 指令集、Part D 寄存器与有效载荷规范、Part E 伪代码、Part F 调试包协议为参考资料，暂不收录；Part G 术语表已译入本站术语表页。Part B 的 B1–B16 章节清单见 `sync-todo/ARMv8-M.md` 中的队列。

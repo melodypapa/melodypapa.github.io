@@ -59,33 +59,26 @@ Arm 强烈建议实现者阅读本架构参考手册的所有章与节，以确�
 
 本小节列出 Arm 架构文档中使用的一些标准词汇与短语。这些词汇与短语具有 Arm 专有的定义，本节予以说明。
 
-**架构可见（Architecturally visible）**
+**Architecturally visible**
+> 架构可见（Architecturally visible）：对**控制主体**（controlling agent）可见的事物。控制主体可以是软件。
 
-对**控制主体**（controlling agent）可见的事物。控制主体可以是软件。
+**Arm recommends**
+> Arm 建议（Arm recommends）：一种可确保一致性与可用性的特定用法。遵循本手册列出的全部规则可得到符合架构的可预测结果，但可能产生非预期的输出。遵循建议可确保输出符合预期。
 
-**Arm 建议（Arm recommends）**
+**Arm strongly recommends**
+> Arm 强烈建议（Arm strongly recommends）：本质上属于强制要求、但超出本手册所述架构范围的事项。不遵循强烈建议可能破坏系统，尽管 PE 本身仍符合本手册所述的架构。
 
-一种可确保一致性与可用性的特定用法。遵循本手册列出的全部规则可得到符合架构的可预测结果，但可能产生非预期的输出。遵循建议可确保输出符合预期。
+**Finite time**
+> 有限时间（Finite time）：某个动作将在未来的某个时刻发生。有限时间不对所涉及的时间作出任何陈述。但是，将动作延迟到超过绝对必要的程度可能对性能产生不利影响。
 
-**Arm 强烈建议（Arm strongly recommends）**
+**Permitted**
+> 允许（Permitted）：被允许的行为。
 
-本质上属于强制要求、但超出本手册所述架构范围的事项。不遵循强烈建议可能破坏系统，尽管 PE 本身仍符合本手册所述的架构。
+**Required**
+> 要求（Required）：强制的行为。
 
-**有限时间（Finite time）**
-
-某个动作将在未来的某个时刻发生。有限时间不对所涉及的时间作出任何陈述。但是，将动作延迟到超过绝对必要的程度可能对性能产生不利影响。
-
-**允许（Permitted）**
-
-被允许的行为。
-
-**要求（Required）**
-
-强制的行为。
-
-**支持（Support）**
-
-该实现已实现某一特定特性。
+**Support**
+> 支持（Support）：该实现已实现某一特定特性。
 
 ### 1.5. 术语，Armv8-M 专用术语
 
