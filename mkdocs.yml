@@ -302,6 +302,7 @@ nav:
       - "系统地址映射": cortex/armv7-m/system_address_map/index.md
       - "CPUID 方案": cortex/armv7-m/cpuid_scheme/index.md
       - "系统指令详情": cortex/armv7-m/system_instructions/index.md
+      - "术语表": cortex/armv7-m/glossary/index.md
     - Cortex-R52+ TRM:
       - cortex/r52plus-trm/index.md
       - "简介": cortex/r52plus-trm/introduction/index.md
@@ -326,6 +327,11 @@ nav:
       - "简介": cortex/armv8-m/introduction/index.md
       - "复位": cortex/armv8-m/resets/index.md
       - "电源管理": cortex/armv8-m/power_management/index.md
+      - "编程模型": cortex/armv8-m/programmers_model/index.md
+      - "浮点支持": cortex/armv8-m/floating_point_support/index.md
+      - "向量扩展": cortex/armv8-m/vector_extension/index.md
+      - "指针认证与分支目标识别": cortex/armv8-m/pacbti/index.md
+      - "术语表": cortex/armv8-m/glossary/index.md
   - AUTOSAR:
     - autosar/index.md
     - "术语表": autosar/glossary.md
