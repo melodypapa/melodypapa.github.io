@@ -18,7 +18,8 @@ title: "Armv8-M 架构参考手册"
 10. [同步与信号量（Synchronization and Semaphores）](synchronization_and_semaphores/index.md)
 11. [受保护内存系统架构（The Armv8-M Protected Memory System Architecture）](protected_memory_system_architecture/index.md)
 12. [系统定时器，SysTick（The System Timer, SysTick）](system_timer_systick/index.md)
-13. [术语表（Glossary）](glossary/index.md)
+13. [嵌套向量中断控制器（Nested Vectored Interrupt Controller）](nested_vectored_interrupt_controller/index.md)
+14. [术语表（Glossary）](glossary/index.md)
 
 ## 2. 相关内容
 

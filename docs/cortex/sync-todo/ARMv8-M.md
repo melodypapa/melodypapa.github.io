@@ -12,7 +12,7 @@ Chapter span map (parse lines): Part A L3834–4284 — A1 Introduction, 451 ln 
 | Part | Chapters | Content | Status |
 | --- | --- | --- | --- |
 | A | A1 Introduction | overview of the architecture and its profiles | A1 done |
-| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B11 done; B12–B16 queued below |
+| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B12 done; B13–B16 queued below |
 | C | C1–C2 | instruction set + alphabetical instruction specification | deferred (reference) |
 | D | D1+ | registers and payload specification | deferred (reference) |
 | E | E1–E2 | pseudocode | deferred (reference) |
@@ -149,8 +149,16 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S7 result: covered by the user-approved single-loop run.
   - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
   - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [ ] ⏸ B12 → new article (Nested Vectored Interrupt Controller; e.g. `nested_vectored_interrupt_controller/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] B12 → new article `armv8-m/nested_vectored_interrupt_controller/` (Nested Vectored Interrupt Controller; PDF pp. 293–295, 2 sections, 15 rules)
+  - S1 result: B12 spans printed 293–295 (the B13 divider is on printed 296); B12.1 NVIC definition (3 rules), B12.2 NVIC operation (12). The chapter-front section list was dropped (A1 precedent). Census: 0 figures, 1 table (the `ICTR.INTLINESNUM` → interrupt count / highest `NVIC_IPRn` index / highest other NVIC index table on printed 293, 16 rows). Text and the table grid were read from the PDF layer.
+  - S2 result: `docs/cortex/armv8-m/nested_vectored_interrupt_controller/index.md`; numbering restarts at 1 (`## 1.`/`## 2.` ← B12.1/B12.2). All 15 applicability lines are present; the 16-row table is GFM with the two-tier header expanded (`已实现的最高 NVIC_IPRn 索引 n` / `其他所有 NVIC 寄存器的最高索引 n`); IDLTR keeps the source's `NVIC_ISER5 至 NVIC_IPR15` wording verbatim; both See-also blocks are `参见：` lists. No `# ` in the body.
+  - S3 result: N/A — the chapter has no figures.
+  - S4 result: nav entry `"嵌套向量中断控制器"` after 系统定时器 and before 术语表; landing list entry 13 (术语表 moved to 14).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (362 nav targets, 0 broken links); `check_heading_lang.py` OK; 2 `##` headings, no `# ` in the body, no `![]()` images.
+  - S6 result: 15/15 rules in source order (3 / 12); 0 figures, 1 table (16 data rows × 4 columns); numbering continuity 1–2.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] ⏸ B13 → new article (Debug; e.g. `debug/`)
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] ⏸ B14 → new article (Debug and Trace Components; e.g. `debug_and_trace_components/`)
