@@ -7,6 +7,7 @@ title: "Armv8-M 架构参考手册"
 ## 1. 章节
 
 1. [简介（Introduction）](introduction/index.md)
+2. [复位（Resets）](resets/index.md)
 
 ## 2. 相关内容
 
