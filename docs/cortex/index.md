@@ -24,3 +24,7 @@ title: "ARM Cortex"
 ## 3. ARM Cortex R52+ 处理器
 
 1. [Cortex-R52+ TRM（102199 r0p3）](r52plus-trm/index.md) — 逐章翻译程序员模型、系统控制、时钟复位、初始化、内存系统、内存保护单元
+
+## 4. Armv8-M 架构
+
+1. [Armv8-M 架构参考手册（DDI0553B B.y）](armv8-m/index.md) — M-profile 架构规则，独立于具体内核，收录 Part A 简介与概述

@@ -50,4 +50,4 @@ Chapter span map (parse lines, incl. running headers — re-locate by title, fir
 ## Not queued (deliberately)
 
 - Appendices A–D (Signal Descriptions, Cycle Timings and Interlock Behavior, Processor UNPREDICTABLE Behaviors, Revisions) — reference/chrome material; revisit on explicit request.
-- `R52/DDI0553B_y_armv8m_arm.md` — see [ARMv8-M](ARMv8-M.md) (deferred group).
+- `cortex-r52/DDI0553B_y_armv8m_arm.md` (Armv8-M ARM B.y) — documents the M-profile architecture, not the Armv8-R Cortex-R52+; see the active [ARMv8-M](ARMv8-M.md) series (`docs/cortex/armv8-m/`).
