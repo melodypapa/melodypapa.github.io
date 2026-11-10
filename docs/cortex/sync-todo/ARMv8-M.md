@@ -12,7 +12,7 @@ Chapter span map (parse lines): Part A L3834–4284 — A1 Introduction, 451 ln 
 | Part | Chapters | Content | Status |
 | --- | --- | --- | --- |
 | A | A1 Introduction | overview of the architecture and its profiles | A1 done |
-| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B6 done; B7–B16 queued below |
+| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B6 done; B7 in progress (§1–§7 of 29); B8–B16 queued below |
 | C | C1–C2 | instruction set + alphabetical instruction specification | deferred (reference) |
 | D | D1+ | registers and payload specification | deferred (reference) |
 | E | E1–E2 | pseudocode | deferred (reference) |
@@ -95,8 +95,15 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S7 result: covered by the user-approved single-loop run; the confirmation gate is taken once at the end of B2–B16.
   - S8 result: committed on `feature/cortex-armv8m-b1-resets` (commit b5938c7).
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
-- [ ] ⏸ B7 → new article (Memory Model; e.g. `memory_model/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] ⏸ B7 → new article `armv8-m/memory_model/` (Memory Model; PDF pp. 202–262, 29 sections) — **partial: §1–§7 of 29 translated** (PDF pp. 202–229); §8–§29 queued in the same page
+  - S1 result (part 1): B7 spans printed 202–262 (the B8 divider is on printed 263); §1–§7 occupy printed 202–229 with 167 `Applies to an implementation …` lines. Structure: B7.1 Definition of the Armv8 memory model (with B7.1.1 Locations and nine unnumbered group headings), B7.2 Atomicity (B7.2.1–B7.2.16, including B7.2.4.1 Ordering relations), B7.3 Memory accesses, B7.4 Address space, B7.5 Endianness, B7.6 Alignment behavior, B7.7 Concurrent modification and execution of instructions. Census for this span: 2 figures, 1 table (the endianness element-size table). The chapter-front section list of B7.1 was kept because it sits inside the IJRPK rule and is the chapter's only navigation aid; its source numbering (B7.1.1, B7.2.3, B7.2.5, B7.2.7, B7.2.6, B7.2.9) was reproduced verbatim.
+  - S2 result (part 1): `docs/cortex/armv8-m/memory_model/index.md`, 1132 ln; numbering restarts at 1 (`## 1.` ← B7.1 with `### 1.1` ← B7.1.1; `## 2.` ← B7.2 with `### 2.1`–`### 2.16` ← B7.2.1–B7.2.16 and `#### 2.4.1` ← B7.2.4.1; `## 3.`–`## 7.` ← B7.3–B7.7). Unnumbered source sub-heads became `####`. All 167 applicability lines are present with their extension requirements (`- M`, `- !M`, `- MVE`, `- PACBTI && S` style kept verbatim); source notes render as `注意，…。`; every See-also block is a `参见：` bullet list. Two transparent typo fixes: `RW1` duplicated in the RPXPQ bullet and `semanitcs` in the RPXQQ bullet. No `# ` in the body.
+  - S3 result (part 1): `FigureB7-1.png` (little-endian and big-endian data layout) and `FigureB7-2.png` (instruction alignment and byte ordering) cropped from printed 225 at 300 dpi; both re-cropped after visual inspection clipped the panel titles and the "Least significant bit" legends. The source has no `Figure B7-n` captions, so the numbering is synthetic (A1 precedent).
+  - S4 result (part 1): nav entry `"内存模型"` after 指针认证与分支目标识别 and before 术语表; landing list entry 8 (术语表 moved to 9).
+  - S5 result (part 1): strict build 0 WARNING; index checks OK; heading-language check OK.
+  - S6 result (part 1): 167/167 rules in source order across the seven sections; 2 figures embedded with lead-in sentences; 1 GFM table; group headings preserved; numbering continuity 1–1.1 / 2–2.16 with 2.4.1 / 3 / 4 / 5 / 6 / 7.
+  - S7 result: covered by the user-approved single-loop run.
+  - [x] plan gate [x] S1 (part 1) [x] S2 (part 1) [x] S3 (part 1) [x] S4 (part 1) [x] S5 (part 1) [x] S6 (part 1) [x] S7 [ ] S8
 - [ ] ⏸ B8 → new article (The System Address Map; e.g. `system_address_map/`)
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] ⏸ B9 → new article (Synchronization and Semaphores; e.g. `synchronization_and_semaphores/`)

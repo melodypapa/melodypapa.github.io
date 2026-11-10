@@ -331,6 +331,7 @@ nav:
       - "浮点支持": cortex/armv8-m/floating_point_support/index.md
       - "向量扩展": cortex/armv8-m/vector_extension/index.md
       - "指针认证与分支目标识别": cortex/armv8-m/pacbti/index.md
+      - "内存模型": cortex/armv8-m/memory_model/index.md
       - "术语表": cortex/armv8-m/glossary/index.md
   - AUTOSAR:
     - autosar/index.md

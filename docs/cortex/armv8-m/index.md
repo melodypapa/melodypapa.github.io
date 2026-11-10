@@ -13,7 +13,8 @@ title: "Armv8-M 架构参考手册"
 5. [浮点支持（Floating-point Support）](floating_point_support/index.md)
 6. [向量扩展（Vector Extension）](vector_extension/index.md)
 7. [指针认证与分支目标识别扩展（Pointer authentication and branch target identification Extension）](pacbti/index.md)
-8. [术语表（Glossary）](glossary/index.md)
+8. [内存模型（Memory Model）](memory_model/index.md)
+9. [术语表（Glossary）](glossary/index.md)
 
 ## 2. 相关内容
 
