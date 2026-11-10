@@ -12,7 +12,7 @@ Chapter span map (parse lines): Part A L3834–4284 — A1 Introduction, 451 ln 
 | Part | Chapters | Content | Status |
 | --- | --- | --- | --- |
 | A | A1 Introduction | overview of the architecture and its profiles | A1 done |
-| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B8 done; B9–B16 queued below |
+| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B9 done; B10–B16 queued below |
 | C | C1–C2 | instruction set + alphabetical instruction specification | deferred (reference) |
 | D | D1+ | registers and payload specification | deferred (reference) |
 | E | E1–E2 | pseudocode | deferred (reference) |
@@ -119,8 +119,16 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S7 result: covered by the user-approved single-loop run.
   - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
   - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [ ] ⏸ B9 → new article (Synchronization and Semaphores; e.g. `synchronization_and_semaphores/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] B9 → new article `armv8-m/synchronization_and_semaphores/` (Synchronization and Semaphores; PDF pp. 270–279, 5 sections + 2 sub-sections, 56 rules)
+  - S1 result: B9 spans printed 270–279 (the B10 divider is on printed 280); B9.1 Exclusive access instructions (6 rules), B9.2 The local monitors (10), B9.3 The global monitor (11) with B9.3.1 Load-Exclusive and Store-Exclusive (5) and B9.3.2 Load-Exclusive and Store-Exclusive in Shareable memory (6), B9.4 Exclusive access instructions and the monitors (3), B9.5 Load-Exclusive and Store-Exclusive instruction constraints (15). The chapter-front section list was dropped (A1 precedent). Census: 2 figures (the local-monitor and global-monitor state diagrams, printed 271 and 275, each with its `*`/`‡` legend and footnote text), 1 table (the synchronization-primitive table on printed 270). Text read from the PDF layer page by page.
+  - S2 result: `docs/cortex/armv8-m/synchronization_and_semaphores/index.md`; numbering restarts at 1 (`## 1.`–`## 5.` ← B9.1–B9.5, `### 3.1`/`### 3.2` ← B9.3.1/B9.3.2). All 56 applicability lines are present; the primitive table is GFM with the merged Function column expanded per row (Load-Exclusive/Store-Exclusive × Byte/Halfword/Word, then Clear-Exclusive); the RHLHS note keeps `M && MPU` / `M` verbatim; RMFGC and RDTRN/RDFNB keep their nested status-value lists; the four See-also blocks are `参见：` lists. No `# ` in the body.
+  - S3 result: `FigureB9-1.png` (local monitor, printed 271) and `FigureB9-2.png` (global monitor for PE(n), printed 275) cropped at 300 dpi; both verified visually — the two state boxes, every transition label, the `*`/`‡` notes and the diagram legend are inside the crops.
+  - S4 result: nav entry `"同步与信号量"` after 系统地址映射 and before 术语表; landing list entry 10 (术语表 moved to 11).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (359 nav targets, 0 broken links); `check_heading_lang.py` OK; 5 `##` and 2 `###` headings, no `# ` in the body, both `![]()` targets exist.
+  - S6 result: 56/56 rules present in source order (6 / 10 / 11 + 5 + 6 / 3 / 15); 2 figures, 1 table; numbering continuity 1–5 with 3.1–3.2.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] ⏸ B10 → new article (The Armv8-M Protected Memory System Architecture; e.g. `protected_memory_system_architecture/`)
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] ⏸ B11 → new article (The System Timer, SysTick; e.g. `system_timer_systick/`)

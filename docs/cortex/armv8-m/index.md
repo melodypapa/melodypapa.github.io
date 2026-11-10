@@ -15,7 +15,8 @@ title: "Armv8-M 架构参考手册"
 7. [指针认证与分支目标识别扩展（Pointer authentication and branch target identification Extension）](pacbti/index.md)
 8. [内存模型（Memory Model）](memory_model/index.md)
 9. [系统地址映射（The System Address Map）](system_address_map/index.md)
-10. [术语表（Glossary）](glossary/index.md)
+10. [同步与信号量（Synchronization and Semaphores）](synchronization_and_semaphores/index.md)
+11. [术语表（Glossary）](glossary/index.md)
 
 ## 2. 相关内容
 
