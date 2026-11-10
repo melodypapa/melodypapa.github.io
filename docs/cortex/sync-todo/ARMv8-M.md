@@ -45,8 +45,16 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S7 result: PR opened, awaiting user confirmation.
   - S8 result: PR #364 (merge SHA to be recorded post-merge).
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [ ] S7 [x] S8
-- [ ] ⏸ B2 → new article (Power Management; body from L4339; e.g. `power_management/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] B2 → new article `armv8-m/power_management/` (Power Management; body L4339–4546)
+  - S1 result: B2 body L4339–4546: B2.1 "Power management" (12 rules) with B2.1.1 WFE and B2.1.2 WFI, then B2.2 "Sleep on exit" (4 rules). Census: 0 figures, 0 tables. The chapter-front section list was dropped (A1/B1 precedent). Two parse OCR artifacts were checked against PDF pp. 63–66 and corrected in translation: "WFE makeup event" → "WFE wakeup event", "unprovided debug" → "unprivileged debug".
+  - S2 result: `docs/cortex/armv8-m/power_management/index.md`; numbering restarts at 1 (`## 1.` ← B2.1 with `### 1.1`/`### 1.2` ← B2.1.1/B2.1.2, `## 2.` ← B2.2); every rule keeps its applicability line, the Armv8.1-M rule keeps `扩展要求为 - DB && UDE。`, and the `DB` rule carries the source's DebugMonitor note; both See also blocks rendered as `参见：` bullets. No `# ` in the body.
+  - S3 result: N/A — the chapter has no figures.
+  - S4 result: nav entry `"电源管理"` after 复位 in the Armv8-M group; landing list entry 3.
+  - S5 result: strict build 0 WARNING; index checks 0 broken links; heading-language check OK.
+  - S6 result: 12/12 B2.1 rules and 4/4 B2.2 rules present in source order; both subsections present; 0 figures, 0 tables; numbering continuity 1–1.2/2.
+  - S7 result: covered by the user-approved single-loop run; the confirmation gate is taken once at the end of B2–B16.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets` (PR #364).
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] ⏸ B3 → new article (Programmers' Model; body from L4548; e.g. `programmers_model/`)
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] ⏸ B4 → new article (Floating-point Support; e.g. `floating_point_support/`)

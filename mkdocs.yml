@@ -325,6 +325,7 @@ nav:
       - cortex/armv8-m/index.md
       - "简介": cortex/armv8-m/introduction/index.md
       - "复位": cortex/armv8-m/resets/index.md
+      - "电源管理": cortex/armv8-m/power_management/index.md
   - AUTOSAR:
     - autosar/index.md
     - "术语表": autosar/glossary.md
