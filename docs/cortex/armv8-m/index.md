@@ -25,7 +25,8 @@ title: "Armv8-M 架构参考手册"
 17. [可靠性、可用性与可服务性扩展（Reliability, Availability, and Serviceability (RAS) Extension）](ras_extension/index.md)
 18. [指令集概览（Instruction Set Overview）](instruction_set_overview/index.md)
 19. [T32 指令编码：顶层与 16 位](instruction_encoding_16bit/index.md)
-20. [术语表（Glossary）](glossary/index.md)
+20. [32 位 T32 指令编码](instruction_encoding_32bit/index.md)
+21. [术语表（Glossary）](glossary/index.md)
 
 ## 2. 相关内容
 

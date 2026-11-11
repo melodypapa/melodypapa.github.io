@@ -13,7 +13,7 @@ Chapter span map (parse lines): Part A L3834–4284 — A1 Introduction, 451 ln 
 | --- | --- | --- | --- |
 | A | A1 Introduction | overview of the architecture and its profiles | A1 done |
 | B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B16 done (Part B complete) |
-| C | C1–C2 | instruction set + alphabetical instruction specification | C1 done; C2 in progress (C2.1–C2.2 done) |
+| C | C1–C2 | instruction set + alphabetical instruction specification | C1 done; C2 in progress (C2.1–C2.3 done) |
 | D | D1+ | registers and payload specification | deferred (reference) |
 | E | E1–E2 | pseudocode | deferred (reference) |
 | F | F1 | debug packet protocols | deferred (reference) |
@@ -212,14 +212,22 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
 - [ ] C2 → Instruction Specification (PDF pp. 477–1440, 964 pages, 0 applicability lines — Part C encoding reference)
   - Split plan: C2.1 top-level encoding (printed 478), C2.2 16-bit encoding (printed 479–488), C2.3 32-bit encoding (printed 489–526), C2.4 alphabetical instruction list (printed 527–1440, 493 entries). One article per encoding layer; C2.4 split into alphabetical bands. Every encoding diagram is a vector bit-field graphic, so each is cropped from the PDF at 4× and embedded in document order.
   - Batch 1 (C2.1 + C2.2) S1 result: 11 pages, 24 encoding diagrams, 26 decode tables (subgroup and instruction tables; the Alias column and the `Alias` cell rows are reproduced as printed). No rules, so no `适用于` lines.
-  - Batch 1 S2 result: `docs/cortex/armv8-m/instruction_encoding_16bit/index.md`, 383 ln; numbering `## 1.` (C2.1) + `## 2.` (C2.2) with `### 2.1`–`### 2.11` and `####` for C2.2.1.1–.3, C2.2.3.1–.2, C2.2.9.1–.5 and C2.2.11.1. Section names translated; instruction mnemonics, field names and decode values kept verbatim.
+  - Batch 1 S2 result: `docs/cortex/armv8-m/instruction_encoding_16bit/index.md`, 420 ln; numbering `## 1.` (C2.1) + `## 2.` (C2.2) with `### 2.1`–`### 2.11` and `####` for C2.2.1.1–.3, C2.2.3.1–.2, C2.2.9.1–.5 and C2.2.11.1. Section names translated; instruction mnemonics, field names and decode values kept verbatim.
   - Batch 1 S3 result: `FigureC2-1.png`–`FigureC2-24.png` cropped at 4× with an automated bit-number-row detector, then verified visually on samples.
   - Batch 1 S4 result: nav entry `"指令编码（顶层与 16 位）"` after 指令集概览; landing list entry 19 (术语表 moved to 20).
   - Batch 1 S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (378 nav targets, 0 broken links); `check_heading_lang.py` OK.
   - Batch 1 S6 result: all 24 diagrams referenced and present; 26 GFM tables; heading continuity 1–2 with every sub-section present.
   - Batch 1 S7 result: covered by the user-approved single-loop run.
   - Batch 1 S8 result: committed on `feature/cortex-armv8m-b1-resets`.
-  - [ ] C2.3 32-bit encoding (printed 489–526) · [ ] C2.4 alphabetical list (493 entries)
+  - [x] C2.3 32-bit encoding (printed 489–526) · [ ] C2.4 alphabetical list (493 entries)
+  - Batch 2 (C2.3) S1 result: 38 pages, 74 encoding diagrams, 77 decode tables, 62 numbered sections (C2.3–C2.3.10, depth up to four digits) plus 12 unnumbered decode sub-entries that the manual prints in italic without a section number (reproduced as unnumbered sub-headings). No rules, so no `适用于` lines.
+  - Batch 2 S2 result: `docs/cortex/armv8-m/instruction_encoding_32bit/index.md`, 1603 ln; numbering `## 1.` (C2.3) with `### 1.1`–`### 1.10`, `####` for the third level and `#####`/`######` for the fourth and fifth. Section names translated; subgroup names inside decode tables translated, while instruction mnemonics, field names and decode values stay verbatim; `Alias` rows render `Alias` in the first column; the printed "Reserved hint …" cells are translated.
+  - Batch 2 S3 result: `FigureC2-25.png`–`FigureC2-98.png` (74 diagrams) cropped at 4×; numbering continues Batch 1 so chapter C2 keeps a single figure sequence.
+  - Batch 2 S4 result: nav entry `"指令编码（32 位）"` after 指令编码（顶层与 16 位）; landing list entry 20 (术语表 moved to 21).
+  - Batch 2 S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (379 nav targets, 0 broken links); `check_heading_lang.py` OK.
+  - Batch 2 S6 result: 74 diagrams referenced and present; 77 GFM tables, each preceded by its lead-in sentence and carrying a translated header; tables split across page breaks joined back into one; no untranslated English paragraph outside table cells; no `# ` in the body.
+  - Batch 2 S7 result: covered by the user-approved single-loop run.
+  - Batch 2 S8 result: committed on `feature/cortex-armv8m-b1-resets`.
 
 ## Not queued (deliberately deferred)
 
