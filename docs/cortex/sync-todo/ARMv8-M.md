@@ -13,7 +13,7 @@ Chapter span map (parse lines): Part A L3834–4284 — A1 Introduction, 451 ln 
 | --- | --- | --- | --- |
 | A | A1 Introduction | overview of the architecture and its profiles | A1 done |
 | B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B16 done (Part B complete) |
-| C | C1–C2 | instruction set + alphabetical instruction specification | deferred (reference) |
+| C | C1–C2 | instruction set + alphabetical instruction specification | C1 done; C2 queued below |
 | D | D1+ | registers and payload specification | deferred (reference) |
 | E | E1–E2 | pseudocode | deferred (reference) |
 | F | F1 | debug packet protocols | deferred (reference) |
@@ -196,6 +196,16 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S4 result: nav entry `"RAS 扩展"` after 性能监视扩展 and before 术语表; landing list entry 17 (术语表 moved to 18).
   - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (376 nav targets, 0 broken links); `check_heading_lang.py` OK.
   - S6 result: 111/111 applicability lines present; per-section counts identical to the source (1 + 8/10/23/18/10/16/17/4/4); 2 figures, 1 GFM table; numbering continuity 1–9 with every sub-section present.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
+- [x] C1 → new article `armv8-m/instruction_set_overview/` (Instruction Set Overview; PDF pp. 451–476, 6 sections + 22 sub-sections, 123 applicability lines)
+  - S1 result: C1 spans printed 451–476 (26 pages; Part B ends on printed 450). Structure: C1.1 Instruction set, C1.2 Format of instruction descriptions (C1.2.1 The title, C1.2.2 A short description, C1.2.3 The instruction encoding or encodings, C1.2.4 Any alias conditions, C1.2.5 Standard assembler syntax fields, C1.2.6 Pseudocode describing how the instruction operates, C1.2.7 Use of labels in UAL instruction syntax, C1.2.8 Using syntax information), C1.3 Conditional execution (C1.3.1–C1.3.8), C1.4 Instruction set encoding information (C1.4.1–C1.4.7, with two unnumbered blocks inside C1.4.4), C1.5 Modified immediate constants (C1.5.1–C1.5.3), C1.6 NOP-compatible hint instructions. Census: 1 figure (the T32 modified-immediate encoding diagram on printed 473), 7 tables (data-type admissibility on printed 458, the 16-row condition-code table, the ITSTATE example, the IT-bit state machine, the branch summary, the T32 modified-immediate table, the MVE immediate table with notes a–f, the FP immediate table). The chapter-front section list was dropped (A1 precedent); the chapter has no applicability line of its own.
+  - S2 result: `docs/cortex/armv8-m/instruction_set_overview/index.md`, 1,039 ln; numbering restarts at 1 (`## 1.`–`## 6.` ← C1.1–C1.6, `### 2.1`–`### 2.8`, `### 3.1`–`### 3.8`, `### 4.1`–`### 4.7`, `### 5.1`–`### 5.3`); the two bold blocks inside C1.4.4 (`SP[1:0] definition`, `32-bit T32 instruction support for SP`) became `####`. All Part C rules use the bare `适用于 **Armv8.0-M** 及以后架构版本的实现。` form plus the source extension requirement where present (`- MVE`, `- FP || MVE`, `- S`, `- !M`, `- M`); the trailing bare applicability line after the C1.2.5 `参见` list is kept, as are the two code excerpts (the IT block example and the SP-address forms); no `# ` in the body.
+  - S3 result: `FigureC1-1.png` (T32 modified-immediate encoding diagram, printed 473) cropped at 4× and verified visually.
+  - S4 result: nav entry `"指令集概览"` after RAS 扩展 and before 术语表; landing list entry 18 (术语表 moved to 19).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (377 nav targets, 0 broken links); `check_heading_lang.py` OK.
+  - S6 result: 123/123 applicability lines present; per-section counts identical to the source (1 / 1+3+1+9+3+12+7+3+2 / 4+4+2+2+1+7+2+2+11 / 4+3+11+1+2+1+8+5 / 2+1+1 / 4); 1 figure, 7 GFM tables; numbering continuity 1–6 with every sub-section present.
   - S7 result: covered by the user-approved single-loop run.
   - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
   - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
