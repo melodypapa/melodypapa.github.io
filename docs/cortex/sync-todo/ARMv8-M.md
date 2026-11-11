@@ -12,7 +12,7 @@ Chapter span map (parse lines): Part A L3834–4284 — A1 Introduction, 451 ln 
 | Part | Chapters | Content | Status |
 | --- | --- | --- | --- |
 | A | A1 Introduction | overview of the architecture and its profiles | A1 done |
-| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B14 done; B15–B16 queued below |
+| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B15 done; B16 queued below |
 | C | C1–C2 | instruction set + alphabetical instruction specification | deferred (reference) |
 | D | D1+ | registers and payload specification | deferred (reference) |
 | E | E1–E2 | pseudocode | deferred (reference) |
@@ -179,8 +179,16 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S7 result: covered by the user-approved single-loop run.
   - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
   - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [ ] ⏸ B15 → new article (The Performance Monitors Extension; e.g. `performance_monitors_extension/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] B15 → new article `armv8-m/performance_monitors_extension/` (The Performance Monitors Extension; PDF pp. 385–431, 12 sections + 10 sub-sections, 203 rules)
+  - S1 result: B15 spans printed 385–431 (47 pages). Structure: B15.1 Counters, B15.2 Accuracy of the performance counters, B15.3 Security, access, and modes, B15.4 Attributability, B15.5 Coexistence with the DWT Performance Monitors, B15.6 Interrupts and Debug events, B15.7 Performance Monitors and Debug state, B15.8 List of supported architectural and microarchitectural events, B15.9 Generic architectural and microarchitectural events (B15.9.1–B15.9.10), B15.10 Common event descriptions, B15.11 Required PMU events, B15.12 IMPLEMENTATION DEFINED event numbers. Census: 0 figures, 1 table (the 140-row event table in B15.8, parsed row by row from the flattened page text), 141 unnumbered event entries in B15.10 sharing the same 140 events. The chapter-front section list was dropped (A1 precedent).
+  - S2 result: `docs/cortex/armv8-m/performance_monitors_extension/index.md`, 1,642 ln; numbering restarts at 1 (`## 1.`–`## 12.` ← B15.1–B15.12, `### 9.1`–`### 9.10` ← B15.9.1–B15.9.10). The unnumbered definition list in B15.8 (Architecturally executed, Condition code check pass, instruction memory access, memory-read/write operations, micro-op, operations speculatively executed, slot, software change of the PC, speculatively executed) and the 140 event entries in B15.10 are rendered as bold run-in terms instead of `####` headings — 150 headings would swamp the page TOC, and the source styles them as a definition list. All 203 applicability lines carry the source extension requirement (`- PMU`, `- PMU && DWTT`, `- PMU && DSPDE`, `- MVE`, …); source notes became `注意，…。`; no `# ` in the body.
+  - S3 result: N/A — the chapter has no figures.
+  - S4 result: nav entry `"性能监视扩展"` after 调试与跟踪组件 and before 术语表; landing list entry 16 (术语表 moved to 17).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (375 nav targets, 0 broken links); `check_heading_lang.py` OK.
+  - S6 result: 203/203 applicability lines present; per-section counts identical to the source (1 intro, 12/3/5/6/7/5/3/6/10/141/1/3); 1 GFM table of 140 rows; numbering continuity 1–12 with every sub-section present.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] ⏸ B16 → new article (Reliability, Availability, and Serviceability (RAS) Extension; e.g. `ras_extension/`)
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 
