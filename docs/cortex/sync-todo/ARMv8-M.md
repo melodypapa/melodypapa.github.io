@@ -219,7 +219,7 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - Batch 1 S6 result: all 24 diagrams referenced and present; 26 GFM tables; heading continuity 1–2 with every sub-section present.
   - Batch 1 S7 result: covered by the user-approved single-loop run.
   - Batch 1 S8 result: committed on `feature/cortex-armv8m-b1-resets`.
-  - [x] C2.3 32-bit encoding (printed 489–526) · [ ] C2.4 alphabetical list (493 entries)
+  - [x] C2.3 32-bit encoding (printed 489–526) · [ ] C2.4 alphabetical list (A–C done: 56 of 493 entries)
   - Batch 2 (C2.3) S1 result: 38 pages, 74 encoding diagrams, 77 decode tables, 62 numbered sections (C2.3–C2.3.10, depth up to four digits) plus 12 unnumbered decode sub-entries that the manual prints in italic without a section number (reproduced as unnumbered sub-headings). No rules, so no `适用于` lines.
   - Batch 2 S2 result: `docs/cortex/armv8-m/instruction_encoding_32bit/index.md`, 1603 ln; numbering `## 1.` (C2.3) with `### 1.1`–`### 1.10`, `####` for the third level and `#####`/`######` for the fourth and fifth. Section names translated; subgroup names inside decode tables translated, while instruction mnemonics, field names and decode values stay verbatim; `Alias` rows render `Alias` in the first column; the printed "Reserved hint …" cells are translated.
   - Batch 2 S3 result: `FigureC2-25.png`–`FigureC2-98.png` (74 diagrams) cropped at 4×; numbering continues Batch 1 so chapter C2 keeps a single figure sequence.
@@ -228,12 +228,20 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - Batch 2 S6 result: 74 diagrams referenced and present; 77 GFM tables, each preceded by its lead-in sentence and carrying a translated header; tables split across page breaks joined back into one; no untranslated English paragraph outside table cells; no `# ` in the body.
   - Batch 2 S7 result: covered by the user-approved single-loop run.
   - Batch 2 S8 result: committed on `feature/cortex-armv8m-b1-resets`.
-- [ ] C2.4 A–C band → new article `armv8-m/instruction_list_a_c/` (C2.4.1–C2.4.56, printed 528–629, 56 entries)
-  - Split decision (user, 2026-11-12): C2.4 was un-deferred and split into alphabetical bands; this run takes A–C. The chapter is split only on the user's request, so the split is stated in the PR per `mapping.md`. Later runs extend this page in place to the full A band, then B–C, D–L, M–S, T–Z.
+- [x] C2.4 A–C band → landing `armv8-m/instruction_list/` with one page per band (C2.4.1–C2.4.56, printed 528–630, 56 entries)
+  - Split decision (user, 2026-11-12): C2.4 was un-deferred and split into alphabetical bands; this run takes A–C. The chapter is split only on the user's request, so the split is stated in the PR per `mapping.md`. Each band gets its own page under `instruction_list/`; later runs add D–L, M–S and T–Z.
   - Source-resolution note: the ima `.md` parse ends at printed p.500 (L37381) and contains no C2.4 body — only its 493-entry TOC (L875–1879). The body must be read from the PDF text layer page by page (precedent: B3, C2.3, where the parse was unusable). `source-resolution.md` §Constraints forbids PDF-text translation "when a `.md` exists"; here no `.md` body exists for this span, so the PDF is the only source. This deviation is recorded here and in the PR.
   - Figure plan: encoding bit-field diagrams cropped from the PDF at 4× with the standard margin; numbering continues the C2 sequence from `FigureC2-99`. Synthetic numbers — the source has no `Figure C2.4-n` captions.
-  - [x] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+  - S1 result: printed 528–630 holds 56 entries (C2.4.1–C2.4.56) and 88 encoding diagrams. Each entry is self-contained: variant labels with an architecture-scope line, encoding diagrams, per-variant assembler syntax with `Applies when …` guards, `Decode`/`Operation` pseudocode, an assembler-symbol list, and `Restricted behavior` / `Data Independent Timing behavior`, plus a `CONSTRAINED UNPREDICTABLE behavior` block where the source has one.
+  - S2 result: `instruction_list/` landing plus one page per band — `a/index.md` (18 entries, 1695 ln), `b/index.md` (12, 991), `c/index.md` (26, 1814). Numbering restarts per band (`## 1.` per instruction, `### N.M` for encodings and the symbol/operation/behaviour blocks). Instruction names stay in the heading as the source prints them with a Chinese gloss after `：`; pseudocode, syntax and register names verbatim; comments inside syntax blocks translated.
+  - S3 result: `FigureC2-99.png`–`FigureC2-186.png` (88 diagrams) cropped at 4× with a bit-number-row detector and a ≥1 % white border per the arm-translate rule; numbering continues the C2 sequence from Batch 2.
+  - S4 result: nav group `"指令列表"` under Part C with `A 段` / `B 段` / `C 段`; Part C landing entry 4; landing list entry 21 (术语表 stays at 22).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (391 nav targets, 0 broken links); `check_heading_lang.py` OK on the landing and all three bands.
+  - S6 result: 88 diagrams referenced and present; every entry carries its architecture-scope line and, where the source has one, its constrained-unpredictable block; no bare `<…>` placeholders in prose (symbol names are code spans).
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 
 ## Not queued (deliberately deferred)
 
-- Part D Armv8-M Registers and Payload Specification, Part E Armv8-M Pseudocode, Part F Debug Packet Protocols — reference material, start on explicit request only. A1.1.1 notes that architectural rules in these parts are not identified by a rule prefix and random subscript letters. Part C's C1–C2.3 and Part G Glossary are translated and registered. C2.4 (alphabetical instruction specification, 493 entries) was un-deferred by user decision on 2026-11-12 and is now queued in alphabetical bands below; the first band is A–C.
+- Part D Armv8-M Registers and Payload Specification, Part E Armv8-M Pseudocode, Part F Debug Packet Protocols — reference material, start on explicit request only. A1.1.1 notes that architectural rules in these parts are not identified by a rule prefix and random subscript letters. Part C's C1–C2.3 and Part G Glossary are translated and registered. C2.4 (alphabetical instruction specification, 493 entries) was un-deferred by user decision on 2026-11-12; bands A–C are translated, D–Z follow in later runs.

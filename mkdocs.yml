@@ -360,6 +360,7 @@ nav:
             - cortex/armv8-m/instruction_list/index.md
             - "A 段": cortex/armv8-m/instruction_list/a/index.md
             - "B 段": cortex/armv8-m/instruction_list/b/index.md
+            - "C 段": cortex/armv8-m/instruction_list/c/index.md
       - "Part G 术语表":
         - cortex/armv8-m/part-g/index.md
         - "术语表": cortex/armv8-m/glossary/index.md
