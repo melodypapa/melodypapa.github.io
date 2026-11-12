@@ -9,6 +9,7 @@ title: "指令列表（Alphabetical list of instructions）"
 ## 1. 分段
 
 - [A 段（C2.4.1–C2.4.18）](a/index.md) — ADC (immediate) … AUTG
+- [B 段（C2.4.19–C2.4.30）](b/index.md) — B … BXAUT
 
 ## 2. 相关内容
 
