@@ -2,6 +2,8 @@
 title: "CPUID 方案（The CPUID Scheme）"
 ---
 
+本文译自 Part B《系统级架构》（System level architecture） Chapter B4《CPUID 方案》（The CPUID Scheme）。
+
 **CPUID** 方案描述 Arm 处理器实现所具备的特性。本章定义所有 **Armv7** 体系结构配置文件的通用寄存器集合，并给出 **Armv7-M** 中这些寄存器的字段定义。
 
 ## 1. 关于 CPUID 方案
