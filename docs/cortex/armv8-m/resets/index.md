@@ -2,6 +2,8 @@
 title: "复位（Resets）"
 ---
 
+本文译自 Part B《Armv8-M 架构规则》（Armv8-M Architecture Rules） Chapter B1《复位》（Resets）。
+
 本章规定 **Armv8-M** 的复位规则。
 
 ## 1. 复位、冷复位与热复位

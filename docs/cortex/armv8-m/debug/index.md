@@ -2,6 +2,8 @@
 title: "调试（Debug）"
 ---
 
+本文译自 Part B《Armv8-M 架构规则》（Armv8-M Architecture Rules） Chapter B13《调试》（Debug）。
+
 本章规定 **Armv8-M** 调试规则。
 
 ## 1. 调试特性概览

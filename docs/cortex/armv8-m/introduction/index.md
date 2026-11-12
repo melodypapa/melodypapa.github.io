@@ -2,6 +2,8 @@
 title: "简介（Introduction）"
 ---
 
+本文译自 Part A《Armv8-M 架构简介与概述》（Armv8-M Architecture Introduction and Overview） Chapter A1《简介》（Introduction）。
+
 本章介绍 **Armv8** 架构、其定义的各**架构 Profile**（architecture profile），以及本手册所定义的 **Armv8-M** 架构 Profile。
 
 ## 1. 架构参考手册的布局与术语

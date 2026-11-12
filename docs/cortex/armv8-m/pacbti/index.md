@@ -2,6 +2,8 @@
 title: "指针认证与分支目标识别扩展（Pointer authentication and branch target identification Extension）"
 ---
 
+本文译自 Part B《Armv8-M 架构规则》（Armv8-M Architecture Rules） Chapter B6《指针认证与分支目标识别扩展》（Pointer authentication and branch target identification Extension）。
+
 本章规定可选的 **Armv8.1-M** 指针认证扩展与分支目标识别扩展规则。
 
 ## 1. 实现 PAC 与 BTI

@@ -2,6 +2,8 @@
 title: "程序员模型（Programmers' Model）"
 ---
 
+本文译自 Part B《Armv8-M 架构规则》（Armv8-M Architecture Rules） Chapter B3《程序员模型》（Programmers' Model）。
+
 本章规定 **Armv8-M** 程序员模型的架构规则。
 
 ## 1. PE 模式：Thread 模式与 Handler 模式
@@ -525,7 +527,7 @@ Arm 建议将 **Secure** 栈放置在 **Secure** 存储器中。
 
 适用于 **Armv8.0-M** 及以后架构版本的实现。扩展要求为 - !M。
 
-所有其他可配置异常可使用 **NVIC_IPRn.PRI_<n>** 寄存器字段配置。
+所有其他可配置异常可使用 **NVIC_IPRn.PRI_&lt;n&gt;** 寄存器字段配置。
 
 适用于 **Armv8.0-M** 及以后架构版本的实现。
 

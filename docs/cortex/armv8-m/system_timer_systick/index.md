@@ -2,6 +2,8 @@
 title: "系统定时器，SysTick（The System Timer, SysTick）"
 ---
 
+本文译自 Part B《Armv8-M 架构规则》（Armv8-M Architecture Rules） Chapter B11《系统定时器，SysTick》（The System Timer, SysTick）。
+
 本章规定 **Armv8-M** 系统定时器规则。
 
 ## 1. 系统定时器，SysTick

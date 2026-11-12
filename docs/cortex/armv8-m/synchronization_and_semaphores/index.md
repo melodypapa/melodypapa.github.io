@@ -2,6 +2,8 @@
 title: "同步与信号量（Synchronization and Semaphores）"
 ---
 
+本文译自 Part B《Armv8-M 架构规则》（Armv8-M Architecture Rules） Chapter B9《同步与信号量》（Synchronization and Semaphores）。
+
 本章规定 **Armv8-M** 架构中独占访问指令与非阻塞同步的规则。
 
 ## 1. 独占访问指令

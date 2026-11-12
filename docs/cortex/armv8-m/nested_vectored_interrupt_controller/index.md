@@ -2,6 +2,8 @@
 title: "嵌套向量中断控制器（Nested Vectored Interrupt Controller）"
 ---
 
+本文译自 Part B《Armv8-M 架构规则》（Armv8-M Architecture Rules） Chapter B12《嵌套向量中断控制器》（Nested Vectored Interrupt Controller）。
+
 本章规定 **Armv8-M** 嵌套向量中断控制器（NVIC）规则。
 
 ## 1. NVIC 定义

@@ -2,6 +2,8 @@
 title: "受保护内存系统架构（The Armv8-M Protected Memory System Architecture）"
 ---
 
+本文译自 Part B《Armv8-M 架构规则》（Armv8-M Architecture Rules） Chapter B10《受保护内存系统架构》（The Armv8-M Protected Memory System Architecture）。
+
 本章规定 **Armv8-M** 受保护内存系统架构（PMSAv8-M）规则，特别是可选的**内存保护单元**（MPU）与可选的**安全归属单元**（SAU）的规则。
 
 ## 1. 内存保护单元

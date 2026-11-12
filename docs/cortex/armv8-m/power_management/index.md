@@ -2,6 +2,8 @@
 title: "电源管理（Power Management）"
 ---
 
+本文译自 Part B《Armv8-M 架构规则》（Armv8-M Architecture Rules） Chapter B2《电源管理》（Power Management）。
+
 本章规定 **Armv8-M** 的电源管理规则。
 
 ## 1. 电源管理

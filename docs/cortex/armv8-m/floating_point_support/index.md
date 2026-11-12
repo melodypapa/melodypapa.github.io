@@ -2,6 +2,8 @@
 title: "浮点支持（Floating-point Support）"
 ---
 
+本文译自 Part B《Armv8-M 架构规则》（Armv8-M Architecture Rules） Chapter B4《浮点支持》（Floating-point Support）。
+
 本章规定 **Armv8-M** 的浮点支持规则。
 
 ## 1. 可选的 Floating-point Extension，FPv5
