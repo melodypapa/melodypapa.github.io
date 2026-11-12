@@ -21,9 +21,14 @@ title: "Armv8-M 架构参考手册"
 13. [嵌套向量中断控制器（Nested Vectored Interrupt Controller）](nested_vectored_interrupt_controller/index.md)
 14. [调试（Debug）](debug/index.md)
 15. [调试与跟踪组件（Debug and Trace Components）](debug_and_trace_components/index.md)
-16. [术语表（Glossary）](glossary/index.md)
+16. [性能监视扩展（The Performance Monitors Extension）](performance_monitors_extension/index.md)
+17. [可靠性、可用性与可服务性扩展（Reliability, Availability, and Serviceability (RAS) Extension）](ras_extension/index.md)
+18. [指令集概览（Instruction Set Overview）](instruction_set_overview/index.md)
+19. [T32 指令编码：顶层与 16 位](instruction_encoding_16bit/index.md)
+20. [32 位 T32 指令编码](instruction_encoding_32bit/index.md)
+21. [术语表（Glossary）](glossary/index.md)
 
 ## 2. 相关内容
 
 - [Armv7-M 架构参考手册（DDI0403E E.e）](../armv7-m/index.md) — 上一代 M-Profile 架构参考手册的对应译文。
-- 本手册的 Part C 指令集、Part D 寄存器与有效载荷规范、Part E 伪代码、Part F 调试包协议为参考资料，暂不收录；Part G 术语表已译入本站术语表页。Part B 的 B1–B16 章节清单见 `sync-todo/ARMv8-M.md` 中的队列。
+- 本手册 Part C 的指令集概览（C1）与 T32 指令编码（C2.1–C2.3）已译入；C2.4 按字母顺序的指令列表、Part D 寄存器与有效载荷规范、Part E 伪代码、Part F 调试包协议为参考资料，暂不收录；Part G 术语表已译入本站术语表页。Part B 的 B1–B16 章节清单见 `sync-todo/ARMv8-M.md` 中的队列。

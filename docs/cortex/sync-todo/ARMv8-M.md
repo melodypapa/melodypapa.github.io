@@ -12,8 +12,8 @@ Chapter span map (parse lines): Part A L3834–4284 — A1 Introduction, 451 ln 
 | Part | Chapters | Content | Status |
 | --- | --- | --- | --- |
 | A | A1 Introduction | overview of the architecture and its profiles | A1 done |
-| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B14 done; B15–B16 queued below |
-| C | C1–C2 | instruction set + alphabetical instruction specification | deferred (reference) |
+| B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B16 done (Part B complete) |
+| C | C1–C2 | instruction set + alphabetical instruction specification | C1 done; C2 in progress (C2.1–C2.3 done) |
 | D | D1+ | registers and payload specification | deferred (reference) |
 | E | E1–E2 | pseudocode | deferred (reference) |
 | F | F1 | debug packet protocols | deferred (reference) |
@@ -179,11 +179,56 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S7 result: covered by the user-approved single-loop run.
   - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
   - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [ ] ⏸ B15 → new article (The Performance Monitors Extension; e.g. `performance_monitors_extension/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] ⏸ B16 → new article (Reliability, Availability, and Serviceability (RAS) Extension; e.g. `ras_extension/`)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [x] B15 → new article `armv8-m/performance_monitors_extension/` (The Performance Monitors Extension; PDF pp. 385–431, 12 sections + 10 sub-sections, 203 rules)
+  - S1 result: B15 spans printed 385–431 (47 pages). Structure: B15.1 Counters, B15.2 Accuracy of the performance counters, B15.3 Security, access, and modes, B15.4 Attributability, B15.5 Coexistence with the DWT Performance Monitors, B15.6 Interrupts and Debug events, B15.7 Performance Monitors and Debug state, B15.8 List of supported architectural and microarchitectural events, B15.9 Generic architectural and microarchitectural events (B15.9.1–B15.9.10), B15.10 Common event descriptions, B15.11 Required PMU events, B15.12 IMPLEMENTATION DEFINED event numbers. Census: 0 figures, 1 table (the 140-row event table in B15.8, parsed row by row from the flattened page text), 141 unnumbered event entries in B15.10 sharing the same 140 events. The chapter-front section list was dropped (A1 precedent).
+  - S2 result: `docs/cortex/armv8-m/performance_monitors_extension/index.md`, 1,642 ln; numbering restarts at 1 (`## 1.`–`## 12.` ← B15.1–B15.12, `### 9.1`–`### 9.10` ← B15.9.1–B15.9.10). The unnumbered definition list in B15.8 (Architecturally executed, Condition code check pass, instruction memory access, memory-read/write operations, micro-op, operations speculatively executed, slot, software change of the PC, speculatively executed) and the 140 event entries in B15.10 are rendered as bold run-in terms instead of `####` headings — 150 headings would swamp the page TOC, and the source styles them as a definition list. All 203 applicability lines carry the source extension requirement (`- PMU`, `- PMU && DWTT`, `- PMU && DSPDE`, `- MVE`, …); source notes became `注意，…。`; no `# ` in the body.
+  - S3 result: N/A — the chapter has no figures.
+  - S4 result: nav entry `"性能监视扩展"` after 调试与跟踪组件 and before 术语表; landing list entry 16 (术语表 moved to 17).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (375 nav targets, 0 broken links); `check_heading_lang.py` OK.
+  - S6 result: 203/203 applicability lines present; per-section counts identical to the source (1 intro, 12/3/5/6/7/5/3/6/10/141/1/3); 1 GFM table of 140 rows; numbering continuity 1–12 with every sub-section present.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
+- [x] B16 → new article `armv8-m/ras_extension/` (Reliability, Availability, and Serviceability (RAS) Extension; PDF pp. 432–450, 9 sections + 8 sub-sections, 111 rules)
+  - S1 result: B16 spans printed 432–450 (18 pages; Part C starts on printed 450). Structure: B16.1 Overview, B16.2 Taxonomy of errors (B16.2.1 Architectural error propagation, B16.2.2 Architecturally infected/contained/uncontained, B16.2.3 Architecturally consumed errors, B16.2.4 Other errors), B16.3 Generating error exceptions (B16.3.1 Error correction and deferment), B16.4 Error Synchronization Barrier (ESB) (B16.4.1–B16.4.3), B16.5 Implicit Error Synchronization (IESB), B16.6 Fault handling, B16.7 RAS error records, B16.8 Multiple BusFault exceptions, B16.9 Minimal RAS implementation. Census: 2 uncaptioned figures (the consumed-error taxonomy flowchart on printed 436, the node/record ownership diagram on printed 445), 1 table (the 7×6 overwrite matrix on printed 447). The chapter-front section list was dropped (A1 precedent).
+  - S2 result: `docs/cortex/armv8-m/ras_extension/index.md`, 681 ln; numbering restarts at 1 (`## 1.`–`## 9.` ← B16.1–B16.9, `### 2.1`–`### 2.4`, `### 3.1`, `### 4.1`–`### 4.3`). The overwrite matrix keeps the source's unlabelled first row (a new error with no previous record), which is how the PDF prints it; the two-tier header is expanded into 7 columns. All 111 applicability lines carry `- RAS` (the IESB lazy-stacking rule keeps `- RAS && (FP || MVE)`); no `# ` in the body.
+  - S3 result: `FigureB16-1.png` (consumed-error taxonomy, printed 436) and `FigureB16-2.png` (node/record ownership, printed 445) cropped at 4× and verified visually — the first was re-cropped downward to include the four outcome boxes.
+  - S4 result: nav entry `"RAS 扩展"` after 性能监视扩展 and before 术语表; landing list entry 17 (术语表 moved to 18).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (376 nav targets, 0 broken links); `check_heading_lang.py` OK.
+  - S6 result: 111/111 applicability lines present; per-section counts identical to the source (1 + 8/10/23/18/10/16/17/4/4); 2 figures, 1 GFM table; numbering continuity 1–9 with every sub-section present.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
+- [x] C1 → new article `armv8-m/instruction_set_overview/` (Instruction Set Overview; PDF pp. 451–476, 6 sections + 22 sub-sections, 123 applicability lines)
+  - S1 result: C1 spans printed 451–476 (26 pages; Part B ends on printed 450). Structure: C1.1 Instruction set, C1.2 Format of instruction descriptions (C1.2.1 The title, C1.2.2 A short description, C1.2.3 The instruction encoding or encodings, C1.2.4 Any alias conditions, C1.2.5 Standard assembler syntax fields, C1.2.6 Pseudocode describing how the instruction operates, C1.2.7 Use of labels in UAL instruction syntax, C1.2.8 Using syntax information), C1.3 Conditional execution (C1.3.1–C1.3.8), C1.4 Instruction set encoding information (C1.4.1–C1.4.7, with two unnumbered blocks inside C1.4.4), C1.5 Modified immediate constants (C1.5.1–C1.5.3), C1.6 NOP-compatible hint instructions. Census: 1 figure (the T32 modified-immediate encoding diagram on printed 473), 7 tables (data-type admissibility on printed 458, the 16-row condition-code table, the ITSTATE example, the IT-bit state machine, the branch summary, the T32 modified-immediate table, the MVE immediate table with notes a–f, the FP immediate table). The chapter-front section list was dropped (A1 precedent); the chapter has no applicability line of its own.
+  - S2 result: `docs/cortex/armv8-m/instruction_set_overview/index.md`, 1,039 ln; numbering restarts at 1 (`## 1.`–`## 6.` ← C1.1–C1.6, `### 2.1`–`### 2.8`, `### 3.1`–`### 3.8`, `### 4.1`–`### 4.7`, `### 5.1`–`### 5.3`); the two bold blocks inside C1.4.4 (`SP[1:0] definition`, `32-bit T32 instruction support for SP`) became `####`. All Part C rules use the bare `适用于 **Armv8.0-M** 及以后架构版本的实现。` form plus the source extension requirement where present (`- MVE`, `- FP || MVE`, `- S`, `- !M`, `- M`); the trailing bare applicability line after the C1.2.5 `参见` list is kept, as are the two code excerpts (the IT block example and the SP-address forms); no `# ` in the body.
+  - S3 result: `FigureC1-1.png` (T32 modified-immediate encoding diagram, printed 473) cropped at 4× and verified visually.
+  - S4 result: nav entry `"指令集概览"` after RAS 扩展 and before 术语表; landing list entry 18 (术语表 moved to 19).
+  - S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (377 nav targets, 0 broken links); `check_heading_lang.py` OK.
+  - S6 result: 123/123 applicability lines present; per-section counts identical to the source (1 / 1+3+1+9+3+12+7+3+2 / 4+4+2+2+1+7+2+2+11 / 4+3+11+1+2+1+8+5 / 2+1+1 / 4); 1 figure, 7 GFM tables; numbering continuity 1–6 with every sub-section present.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
+- [ ] C2 → Instruction Specification (PDF pp. 477–1440, 964 pages, 0 applicability lines — Part C encoding reference)
+  - Split plan: C2.1 top-level encoding (printed 478), C2.2 16-bit encoding (printed 479–488), C2.3 32-bit encoding (printed 489–526), C2.4 alphabetical instruction list (printed 527–1440, 493 entries). One article per encoding layer; C2.4 split into alphabetical bands. Every encoding diagram is a vector bit-field graphic, so each is cropped from the PDF at 4× and embedded in document order.
+  - Batch 1 (C2.1 + C2.2) S1 result: 11 pages, 24 encoding diagrams, 26 decode tables (subgroup and instruction tables; the Alias column and the `Alias` cell rows are reproduced as printed). No rules, so no `适用于` lines.
+  - Batch 1 S2 result: `docs/cortex/armv8-m/instruction_encoding_16bit/index.md`, 420 ln; numbering `## 1.` (C2.1) + `## 2.` (C2.2) with `### 2.1`–`### 2.11` and `####` for C2.2.1.1–.3, C2.2.3.1–.2, C2.2.9.1–.5 and C2.2.11.1. Section names translated; instruction mnemonics, field names and decode values kept verbatim.
+  - Batch 1 S3 result: `FigureC2-1.png`–`FigureC2-24.png` cropped at 4× with an automated bit-number-row detector, then verified visually on samples.
+  - Batch 1 S4 result: nav entry `"指令编码（顶层与 16 位）"` after 指令集概览; landing list entry 19 (术语表 moved to 20).
+  - Batch 1 S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (378 nav targets, 0 broken links); `check_heading_lang.py` OK.
+  - Batch 1 S6 result: all 24 diagrams referenced and present; 26 GFM tables; heading continuity 1–2 with every sub-section present.
+  - Batch 1 S7 result: covered by the user-approved single-loop run.
+  - Batch 1 S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+  - [x] C2.3 32-bit encoding (printed 489–526) · [ ] C2.4 alphabetical list (493 entries)
+  - Batch 2 (C2.3) S1 result: 38 pages, 74 encoding diagrams, 77 decode tables, 62 numbered sections (C2.3–C2.3.10, depth up to four digits) plus 12 unnumbered decode sub-entries that the manual prints in italic without a section number (reproduced as unnumbered sub-headings). No rules, so no `适用于` lines.
+  - Batch 2 S2 result: `docs/cortex/armv8-m/instruction_encoding_32bit/index.md`, 1603 ln; numbering `## 1.` (C2.3) with `### 1.1`–`### 1.10`, `####` for the third level and `#####`/`######` for the fourth and fifth. Section names translated; subgroup names inside decode tables translated, while instruction mnemonics, field names and decode values stay verbatim; `Alias` rows render `Alias` in the first column; the printed "Reserved hint …" cells are translated.
+  - Batch 2 S3 result: `FigureC2-25.png`–`FigureC2-98.png` (74 diagrams) cropped at 4×; numbering continues Batch 1 so chapter C2 keeps a single figure sequence.
+  - Batch 2 S4 result: nav entry `"指令编码（32 位）"` after 指令编码（顶层与 16 位）; landing list entry 20 (术语表 moved to 21).
+  - Batch 2 S5 result: strict build 0 WARNING; `check_indexes.py --root .` OK (379 nav targets, 0 broken links); `check_heading_lang.py` OK.
+  - Batch 2 S6 result: 74 diagrams referenced and present; 77 GFM tables, each preceded by its lead-in sentence and carrying a translated header; tables split across page breaks joined back into one; no untranslated English paragraph outside table cells; no `# ` in the body.
+  - Batch 2 S7 result: covered by the user-approved single-loop run.
+  - Batch 2 S8 result: committed on `feature/cortex-armv8m-b1-resets`.
 
 ## Not queued (deliberately deferred)
 
-- Part C Armv8-M Instruction Set (C1–C2, instruction encodings and alphabetical instruction specification), Part D Armv8-M Registers and Payload Specification, Part E Armv8-M Pseudocode, Part F Debug Packet Protocols, Part G Glossary — reference/chrome material, start on explicit request only. A1.1.1 notes that architectural rules in these parts are not identified by a rule prefix and random subscript letters.
+- C2.4 Armv8-M instruction list (alphabetical instruction specification, 493 entries), Part D Armv8-M Registers and Payload Specification, Part E Armv8-M Pseudocode, Part F Debug Packet Protocols — reference material, start on explicit request only. A1.1.1 notes that architectural rules in these parts are not identified by a rule prefix and random subscript letters. Part C's C1–C2.3 and Part G Glossary are translated and registered.

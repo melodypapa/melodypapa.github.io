@@ -339,6 +339,11 @@ nav:
       - "嵌套向量中断控制器": cortex/armv8-m/nested_vectored_interrupt_controller/index.md
       - "调试": cortex/armv8-m/debug/index.md
       - "调试与跟踪组件": cortex/armv8-m/debug_and_trace_components/index.md
+      - "性能监视扩展": cortex/armv8-m/performance_monitors_extension/index.md
+      - "RAS 扩展": cortex/armv8-m/ras_extension/index.md
+      - "指令集概览": cortex/armv8-m/instruction_set_overview/index.md
+      - "指令编码（顶层与 16 位）": cortex/armv8-m/instruction_encoding_16bit/index.md
+      - "指令编码（32 位）": cortex/armv8-m/instruction_encoding_32bit/index.md
       - "术语表": cortex/armv8-m/glossary/index.md
   - AUTOSAR:
     - autosar/index.md
