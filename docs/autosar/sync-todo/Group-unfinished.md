@@ -36,15 +36,20 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 5 — User confirmation gate (batch gate at end of rows 11–17, per user instruction 2026-11-12)
   - [x] Step 6 — TODO.md row + commit/PR (2026-11-12: commit 8f06413 on feature/cp-methodology-rows-11-17, PR at batch end)
 
-- [ ] tps_ecu_configuration (AUTOSAR_CP_TPS_ECUConfiguration · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [x] tps_ecu_configuration (AUTOSAR_CP_TPS_ECUConfiguration · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: ECU Configuration（ECU 配置）; target `cp/methodology_templates/tps_ecu_configuration/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type)
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TPS_ECUConfiguration.md` — 9,579 lines, 408 figure refs, 296 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - Note: Step 1-4+6 (2026-11-13): source confirmed 9,579 ln; 72 content figures extracted via content-chrome-aware mapper (2 logo-contaminated picks corrected: 2.2/4.3), annex B/C figures (B.1-B.6, C.1) recovered separately; 55 listings regenerated deterministically from source (per-example region scan, prose/table dropped, XML reflowed); item IDs of config-table SWS-Item column dropped per ID-drop decision (sanctioned inline refs like [TPS_SYST_01003] retained); example-2.38 listing in markdown repeats 2.35 (converter defect) — corrected against PDF/prose semantics with in-place note
+  - Note: Step 3 evidence (2026-11-13): strict build exit 0 / 0 WARNING; 0 broken anchors (12 stale forward anchors fixed to build-derived slugs); check_indexes OK (376 nav targets, 0 broken); check_heading_lang OK after 3.4.1 gloss (Handle IDs = non-identifier noun); hygiene 0 × ^# / \< / {DRAFT}; link census: 46 chapter refs resolved (1 UNRESOLVED: 例2.34-vs-2.32 cross-ref is a source typo, left prose), 53/62 citations linked after apply (idempotent), 9 unlinked = figure-caption [n] report-only; cross-article mentions report-only (CanIf ×27 no article, Mcu ×11 no article, Dem/SoAd/EcuM/BswM/NvM/Dcm/Port SITE candidates)
+  - Note: 2026-11-13 mid-run defect recovery: incremental fence repairs corrupted code-fence pairing in ch.2-4; article rebuilt deterministically (prose skeleton extracted intact + 55 listings regenerated from source with prose/table stripping + references registry restored); full fence audit clean (0 CJK-in-fence, 0 prose-leak, 0 empty, 0 bare-XML)
+  - Note: Step 5 = batch gate at end of rows 11-17 per user instruction 2026-11-12 (this commit ships without per-article user confirmation)
+  - [ ] Step 5 — User confirmation gate (batch gate at end of rows 11-17, per user instruction 2026-11-12)
+
+  - [x] Step 6 — TODO.md row + commit/PR (2026-11-13: commit at batch end; PR with rows 11-17)
 
 - [ ] basic_software_module_description_template (AUTOSAR_CP_TPS_BSWModuleDescriptionTemplate · MethodologyAndTemplates · R23-11 markdown · 🔶 existing article · 📖 skeleton-exempt)
   - Note: BSW Module Description Template（基础软件模块描述模板）; target = the existing `cp/methodology_templates/basic_software_module_description_template/` (row name = the actual article dir so the index resolves it; a type-prefixed slug is NOT adopted — no rename, no redirect churn); template specification (TPS) — meta-model class tables, constraints and ARXML examples
