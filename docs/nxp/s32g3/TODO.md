@@ -8,9 +8,9 @@
 
 | Status | Chapters |
 | --- | --- |
-| ✅ | 5 |
-| ⚠️ | 5 |
-| ❌ | 70 |
+| ✅ | 6 |
+| ⚠️ | 4 |
+| ❌ | 69 |
 | Total | 81 |
 
 ## Chapters
@@ -43,7 +43,7 @@
 | 24 | Clocking | ✅ | [时钟（Clocking）](ch24_clocking/index.md) |
 | 25 | Clock Generation Module (MC_CGM) | ✅ | [时钟生成模块（MC_CGM）](ch25_clock_generation_module_mc_cgm/index.md) |
 | 26 | Digital Frequency Synthesizer (DFS) | ✅ | [数字频率合成器（DFS）](ch26_digital_frequency_synthesizer_dfs/index.md) |
-| 27 | PLL Digital Interface (PLLDIG) | ⚠️ | [占位页（未翻译）](ch27_pll_digital_interface_plldig/index.md) |
+| 27 | PLL Digital Interface (PLLDIG) | ✅ | [PLL 数字接口（PLLDIG）](ch27_pll_digital_interface_plldig/index.md) |
 | 28 | Fast Crystal Oscillator Digital Controller (FXOSC) | ⚠️ | [占位页（未翻译）](ch28_fast_crystal_oscillator_digital_controller_fxosc/index.md) |
 | 29 | Reset | ✅ | [复位（Reset）](ch29_reset/index.md) |
 | 30 | Reset Generation Module (MC_RGM) | ✅ | [复位生成模块（MC_RGM）](ch30_reset_generation_module_mc_rgm/index.md) |
