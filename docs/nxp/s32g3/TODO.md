@@ -8,9 +8,9 @@
 
 | Status | Chapters |
 | --- | --- |
-| ✅ | 3 |
-| ⚠️ | 6 |
-| ❌ | 72 |
+| ✅ | 4 |
+| ⚠️ | 5 |
+| ❌ | 71 |
 | Total | 81 |
 
 ## Chapters
@@ -41,7 +41,7 @@
 | 22 | Register Protection (REG_PROT) | ❌ | — |
 | 23 | Wakeup Unit (WKPU) | ❌ | — |
 | 24 | Clocking | ✅ | [时钟（Clocking）](ch24_clocking/index.md) |
-| 25 | Clock Generation Module (MC_CGM) | ❌ | — |
+| 25 | Clock Generation Module (MC_CGM) | ✅ | [时钟生成模块（MC_CGM）](ch25_clock_generation_module_mc_cgm/index.md) |
 | 26 | Digital Frequency Synthesizer (DFS) | ❌ | — |
 | 27 | PLL Digital Interface (PLLDIG) | ⚠️ | [占位页（未翻译）](ch27_pll_digital_interface_plldig/index.md) |
 | 28 | Fast Crystal Oscillator Digital Controller (FXOSC) | ⚠️ | [占位页（未翻译）](ch28_fast_crystal_oscillator_digital_controller_fxosc/index.md) |

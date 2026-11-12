@@ -9,6 +9,7 @@ NXP S32G3 参考手册（**S32G3RM** Rev. 5, 2025-09-17）章节的中文翻译�
 ### Chapter 24-28: Clocking
 
 - [时钟（**Clocking**）](ch24_clocking/index.md)
+- [时钟生成模块（**MC_CGM**）](ch25_clock_generation_module_mc_cgm/index.md)
 - [PLL 数字接口（**PLLDIG**）](ch27_pll_digital_interface_plldig/index.md)（占位页，待翻译）
 - [快速晶体振荡器数字控制器（**FXOSC**）](ch28_fast_crystal_oscillator_digital_controller_fxosc/index.md)（占位页，待翻译）
 
