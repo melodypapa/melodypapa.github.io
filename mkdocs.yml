@@ -295,14 +295,20 @@ nav:
       - "术语表": cortex/m7-trm/glossary/index.md
     - Armv7-M 架构参考手册:
       - cortex/armv7-m/index.md
-      - "ARM架构的内存模式": cortex/armv7-m/arm_architecture_memory_mode/index.md
-      - "Thumb 指令集编码": cortex/armv7-m/thumb_instruction_set_encoding/index.md
-      - "浮点指令集编码": cortex/armv7-m/fp_instruction_set_encoding/index.md
-      - "系统内存模型": cortex/armv7-m/system_memory_model/index.md
-      - "系统地址映射": cortex/armv7-m/system_address_map/index.md
-      - "CPUID 方案": cortex/armv7-m/cpuid_scheme/index.md
-      - "系统指令详情": cortex/armv7-m/system_instructions/index.md
-      - "术语表": cortex/armv7-m/glossary/index.md
+      - "Part A 应用程序级架构":
+        - cortex/armv7-m/part-a/index.md
+        - "ARM架构的内存模式": cortex/armv7-m/arm_architecture_memory_mode/index.md
+        - "Thumb 指令集编码": cortex/armv7-m/thumb_instruction_set_encoding/index.md
+        - "浮点指令集编码": cortex/armv7-m/fp_instruction_set_encoding/index.md
+      - "Part B 系统级架构":
+        - cortex/armv7-m/part-b/index.md
+        - "系统内存模型": cortex/armv7-m/system_memory_model/index.md
+        - "系统地址映射": cortex/armv7-m/system_address_map/index.md
+        - "CPUID 方案": cortex/armv7-m/cpuid_scheme/index.md
+        - "系统指令详情": cortex/armv7-m/system_instructions/index.md
+      - "Part D 附录":
+        - cortex/armv7-m/part-d/index.md
+        - "术语表": cortex/armv7-m/glossary/index.md
     - Cortex-R52+ TRM:
       - cortex/r52plus-trm/index.md
       - "简介": cortex/r52plus-trm/introduction/index.md
@@ -324,27 +330,35 @@ nav:
       - "PMC-R52+": cortex/r52plus-trm/pmc_r52plus/index.md
     - Armv8-M 架构参考手册:
       - cortex/armv8-m/index.md
-      - "简介": cortex/armv8-m/introduction/index.md
-      - "复位": cortex/armv8-m/resets/index.md
-      - "电源管理": cortex/armv8-m/power_management/index.md
-      - "编程模型": cortex/armv8-m/programmers_model/index.md
-      - "浮点支持": cortex/armv8-m/floating_point_support/index.md
-      - "向量扩展": cortex/armv8-m/vector_extension/index.md
-      - "指针认证与分支目标识别": cortex/armv8-m/pacbti/index.md
-      - "内存模型": cortex/armv8-m/memory_model/index.md
-      - "系统地址映射": cortex/armv8-m/system_address_map/index.md
-      - "同步与信号量": cortex/armv8-m/synchronization_and_semaphores/index.md
-      - "受保护内存系统架构": cortex/armv8-m/protected_memory_system_architecture/index.md
-      - "系统定时器": cortex/armv8-m/system_timer_systick/index.md
-      - "嵌套向量中断控制器": cortex/armv8-m/nested_vectored_interrupt_controller/index.md
-      - "调试": cortex/armv8-m/debug/index.md
-      - "调试与跟踪组件": cortex/armv8-m/debug_and_trace_components/index.md
-      - "性能监视扩展": cortex/armv8-m/performance_monitors_extension/index.md
-      - "RAS 扩展": cortex/armv8-m/ras_extension/index.md
-      - "指令集概览": cortex/armv8-m/instruction_set_overview/index.md
-      - "指令编码（顶层与 16 位）": cortex/armv8-m/instruction_encoding_16bit/index.md
-      - "指令编码（32 位）": cortex/armv8-m/instruction_encoding_32bit/index.md
-      - "术语表": cortex/armv8-m/glossary/index.md
+      - "Part A 架构简介与概述":
+        - cortex/armv8-m/part-a/index.md
+        - "简介": cortex/armv8-m/introduction/index.md
+      - "Part B 架构规则":
+        - cortex/armv8-m/part-b/index.md
+        - "复位": cortex/armv8-m/resets/index.md
+        - "电源管理": cortex/armv8-m/power_management/index.md
+        - "编程模型": cortex/armv8-m/programmers_model/index.md
+        - "浮点支持": cortex/armv8-m/floating_point_support/index.md
+        - "向量扩展": cortex/armv8-m/vector_extension/index.md
+        - "指针认证与分支目标识别": cortex/armv8-m/pacbti/index.md
+        - "内存模型": cortex/armv8-m/memory_model/index.md
+        - "系统地址映射": cortex/armv8-m/system_address_map/index.md
+        - "同步与信号量": cortex/armv8-m/synchronization_and_semaphores/index.md
+        - "受保护内存系统架构": cortex/armv8-m/protected_memory_system_architecture/index.md
+        - "系统定时器": cortex/armv8-m/system_timer_systick/index.md
+        - "嵌套向量中断控制器": cortex/armv8-m/nested_vectored_interrupt_controller/index.md
+        - "调试": cortex/armv8-m/debug/index.md
+        - "调试与跟踪组件": cortex/armv8-m/debug_and_trace_components/index.md
+        - "性能监视扩展": cortex/armv8-m/performance_monitors_extension/index.md
+        - "RAS 扩展": cortex/armv8-m/ras_extension/index.md
+      - "Part C 指令集":
+        - cortex/armv8-m/part-c/index.md
+        - "指令集概览": cortex/armv8-m/instruction_set_overview/index.md
+        - "指令编码（顶层与 16 位）": cortex/armv8-m/instruction_encoding_16bit/index.md
+        - "指令编码（32 位）": cortex/armv8-m/instruction_encoding_32bit/index.md
+      - "Part G 术语表":
+        - cortex/armv8-m/part-g/index.md
+        - "术语表": cortex/armv8-m/glossary/index.md
   - AUTOSAR:
     - autosar/index.md
     - "术语表": autosar/glossary.md
@@ -655,6 +669,8 @@ nav:
     - S32G3:
       - nxp/s32g3/index.md
       - "复位 (Reset)": nxp/s32g3/ch29_reset/index.md
+      - "复位生成模块 (MC_RGM)": nxp/s32g3/ch30_reset_generation_module_mc_rgm/index.md
+      - "模式进入模块 (MC_ME)": nxp/s32g3/ch33_mode_entry_module_mc_me/index.md
   - "语言":
     - languages/index.md
     - Deutsch:

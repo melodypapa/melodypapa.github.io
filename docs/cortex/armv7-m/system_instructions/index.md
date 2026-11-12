@@ -2,6 +2,8 @@
 title: "系统指令详情（System Instruction Details）"
 ---
 
+本文译自 Part B《系统级架构》（System level architecture） Chapter B5《系统指令详情》（System Instruction Details）。
+
 本章描述 **Armv7-M** 的系统指令 **CPS**、**MRS** 和 **MSR**，以及这些指令所用的特殊寄存器编码。
 
 ## 1. 关于 Armv7-M 系统指令

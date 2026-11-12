@@ -2,6 +2,8 @@
 title: "调试与跟踪组件（Debug and Trace Components）"
 ---
 
+本文译自 Part B《Armv8-M 架构规则》（Armv8-M Architecture Rules） Chapter B14《调试与跟踪组件》（Debug and Trace Components）。
+
 本章规定 **Armv8-M** 调试与跟踪组件规则。
 
 ## 1. 仪表化跟踪宏单元（Instrumentation Trace Macrocell）

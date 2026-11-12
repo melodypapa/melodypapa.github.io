@@ -2,6 +2,8 @@
 title: "系统地址映射（The System Address Map）"
 ---
 
+本文译自 Part B《Armv8-M 架构规则》（Armv8-M Architecture Rules） Chapter B8《系统地址映射》（The System Address Map）。
+
 本章规定 **Armv8-M** 系统地址映射规则。
 
 ## 1. 系统地址映射

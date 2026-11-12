@@ -2,6 +2,8 @@
 title: "指令集概览（Instruction Set Overview）"
 ---
 
+本文译自 Part C《Armv8-M 指令》（Armv8-M Instructions） Chapter C1《指令集概览》（Instruction Set Overview）。
+
 本章给出第 C2 章《指令规范》中各项指令描述的组成定义。
 
 ## 1. 指令集

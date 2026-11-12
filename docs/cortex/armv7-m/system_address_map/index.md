@@ -2,8 +2,7 @@
 title: "系统地址映射"
 ---
 
-
-
+本文译自 Part B《系统级架构》（System level architecture） Chapter B3《系统地址映射》（System Address Map，B3.1–B3.4）。
 
 ## 1. 系统地址映射
 
