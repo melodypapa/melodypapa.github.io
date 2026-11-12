@@ -2,6 +2,8 @@
 title: "Thumb 指令集编码（Thumb Instruction Set Encoding）"
 ---
 
+本文译自 Part A《应用程序级架构》（Application level architecture） Chapter A5《Thumb 指令集编码》（The Thumb Instruction Set Encoding）。
+
 本章介绍 **Thumb** 指令集，并说明它如何使用 Arm 程序员模型。本章包含以下小节：
 
 * 第 A5-126 页的 **Thumb 指令集编码**。

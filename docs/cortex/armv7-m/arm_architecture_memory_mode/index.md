@@ -2,8 +2,7 @@
 title: "ARM架构的内存模式（Arm Architecture Memory Model）"
 ---
 
-
-
+本文译自 Part A《应用程序级架构》（Application level architecture） Chapter A3《ARM 架构内存模型》（Arm Architecture Memory Model）。
 
 ## 1. Arm架构内存模式介绍
 

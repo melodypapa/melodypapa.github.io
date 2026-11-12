@@ -2,6 +2,8 @@
 title: "系统内存模型（System Memory Model）"
 ---
 
+本文译自 Part B《系统级架构》（System level architecture） Chapter B2《系统内存模型》（System Memory Model）。
+
 本章描述与从内存取指以及加载或存储数据访问相关的伪代码，并给出 **Armv7-M** 的缓存与分支预测器模型，以及通用内存系统操作的伪代码细节。
 
 ## 1. 关于系统内存模型

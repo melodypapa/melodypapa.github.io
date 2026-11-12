@@ -2,6 +2,8 @@
 title: "浮点指令集编码（Floating-point Instruction Set Encoding）"
 ---
 
+本文译自 Part A《应用程序级架构》（Application level architecture） Chapter A6《浮点指令集编码》（The Floating-point Instruction Set Encoding）。
+
 本章介绍 **Armv7-M** 浮点扩展向 **Thumb** 指令集添加的浮点（FP）指令，并说明这些指令的编码。以下小节给出关于浮点指令的一般信息，然后按类别描述 FP 扩展添加的指令。
 
 ## 1. 概述
