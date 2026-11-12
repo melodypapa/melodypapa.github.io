@@ -228,7 +228,12 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - Batch 2 S6 result: 74 diagrams referenced and present; 77 GFM tables, each preceded by its lead-in sentence and carrying a translated header; tables split across page breaks joined back into one; no untranslated English paragraph outside table cells; no `# ` in the body.
   - Batch 2 S7 result: covered by the user-approved single-loop run.
   - Batch 2 S8 result: committed on `feature/cortex-armv8m-b1-resets`.
+- [ ] C2.4 A–C band → new article `armv8-m/instruction_list_a_c/` (C2.4.1–C2.4.56, printed 528–629, 56 entries)
+  - Split decision (user, 2026-11-12): C2.4 was un-deferred and split into alphabetical bands; this run takes A–C. The chapter is split only on the user's request, so the split is stated in the PR per `mapping.md`. Later runs extend this page in place to the full A band, then B–C, D–L, M–S, T–Z.
+  - Source-resolution note: the ima `.md` parse ends at printed p.500 (L37381) and contains no C2.4 body — only its 493-entry TOC (L875–1879). The body must be read from the PDF text layer page by page (precedent: B3, C2.3, where the parse was unusable). `source-resolution.md` §Constraints forbids PDF-text translation "when a `.md` exists"; here no `.md` body exists for this span, so the PDF is the only source. This deviation is recorded here and in the PR.
+  - Figure plan: encoding bit-field diagrams cropped from the PDF at 4× with the standard margin; numbering continues the C2 sequence from `FigureC2-99`. Synthetic numbers — the source has no `Figure C2.4-n` captions.
+  - [x] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 
 ## Not queued (deliberately deferred)
 
-- C2.4 Armv8-M instruction list (alphabetical instruction specification, 493 entries), Part D Armv8-M Registers and Payload Specification, Part E Armv8-M Pseudocode, Part F Debug Packet Protocols — reference material, start on explicit request only. A1.1.1 notes that architectural rules in these parts are not identified by a rule prefix and random subscript letters. Part C's C1–C2.3 and Part G Glossary are translated and registered.
+- Part D Armv8-M Registers and Payload Specification, Part E Armv8-M Pseudocode, Part F Debug Packet Protocols — reference material, start on explicit request only. A1.1.1 notes that architectural rules in these parts are not identified by a rule prefix and random subscript letters. Part C's C1–C2.3 and Part G Glossary are translated and registered. C2.4 (alphabetical instruction specification, 493 entries) was un-deferred by user decision on 2026-11-12 and is now queued in alphabetical bands below; the first band is A–C.

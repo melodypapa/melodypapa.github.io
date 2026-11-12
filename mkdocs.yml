@@ -356,6 +356,9 @@ nav:
         - "指令集概览": cortex/armv8-m/instruction_set_overview/index.md
         - "指令编码（顶层与 16 位）": cortex/armv8-m/instruction_encoding_16bit/index.md
         - "指令编码（32 位）": cortex/armv8-m/instruction_encoding_32bit/index.md
+        - "指令列表":
+            - cortex/armv8-m/instruction_list/index.md
+            - "A 段": cortex/armv8-m/instruction_list/a/index.md
       - "Part G 术语表":
         - cortex/armv8-m/part-g/index.md
         - "术语表": cortex/armv8-m/glossary/index.md
