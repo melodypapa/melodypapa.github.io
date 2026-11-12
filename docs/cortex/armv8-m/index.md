@@ -31,4 +31,4 @@ title: "Armv8-M 架构参考手册"
 ## 2. 相关内容
 
 - [Armv7-M 架构参考手册（DDI0403E E.e）](../armv7-m/index.md) — 上一代 M-Profile 架构参考手册的对应译文。
-- 本手册的 Part C 指令集、Part D 寄存器与有效载荷规范、Part E 伪代码、Part F 调试包协议为参考资料，暂不收录；Part G 术语表已译入本站术语表页。Part B 的 B1–B16 章节清单见 `sync-todo/ARMv8-M.md` 中的队列。
+- 本手册 Part C 的指令集概览（C1）与 T32 指令编码（C2.1–C2.3）已译入；C2.4 按字母顺序的指令列表、Part D 寄存器与有效载荷规范、Part E 伪代码、Part F 调试包协议为参考资料，暂不收录；Part G 术语表已译入本站术语表页。Part B 的 B1–B16 章节清单见 `sync-todo/ARMv8-M.md` 中的队列。

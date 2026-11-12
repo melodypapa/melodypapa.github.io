@@ -231,4 +231,4 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
 
 ## Not queued (deliberately deferred)
 
-- Part C Armv8-M Instruction Set (C1–C2, instruction encodings and alphabetical instruction specification), Part D Armv8-M Registers and Payload Specification, Part E Armv8-M Pseudocode, Part F Debug Packet Protocols, Part G Glossary — reference/chrome material, start on explicit request only. A1.1.1 notes that architectural rules in these parts are not identified by a rule prefix and random subscript letters.
+- C2.4 Armv8-M instruction list (alphabetical instruction specification, 493 entries), Part D Armv8-M Registers and Payload Specification, Part E Armv8-M Pseudocode, Part F Debug Packet Protocols — reference material, start on explicit request only. A1.1.1 notes that architectural rules in these parts are not identified by a rule prefix and random subscript letters. Part C's C1–C2.3 and Part G Glossary are translated and registered.
