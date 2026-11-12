@@ -658,9 +658,15 @@ nav:
       - "系统定时器模块 (STM)": nxp/s32g2/system_timer_module/index.md
     - S32G3:
       - nxp/s32g3/index.md
+      - "时钟 (Clocking)": nxp/s32g3/ch24_clocking/index.md
+      - "PLL 数字接口 (PLLDIG)": nxp/s32g3/ch27_pll_digital_interface_plldig/index.md
+      - "快速晶体振荡器数字控制器 (FXOSC)": nxp/s32g3/ch28_fast_crystal_oscillator_digital_controller_fxosc/index.md
       - "复位 (Reset)": nxp/s32g3/ch29_reset/index.md
       - "复位生成模块 (MC_RGM)": nxp/s32g3/ch30_reset_generation_module_mc_rgm/index.md
       - "模式进入模块 (MC_ME)": nxp/s32g3/ch33_mode_entry_module_mc_me/index.md
+      - "错误报告模块 (ERM)": nxp/s32g3/ch067_error_reporting_module_erm/index.md
+      - "调试 (Debug)": nxp/s32g3/ch078_debug/index.md
+      - "Aurora 踪迹端口 (ATP) 子系统": nxp/s32g3/ch081_aurora_trace_port_atp_subsystem/index.md
   - "语言":
     - languages/index.md
     - Deutsch:
