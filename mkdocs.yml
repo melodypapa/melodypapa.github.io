@@ -655,6 +655,8 @@ nav:
     - S32G3:
       - nxp/s32g3/index.md
       - "复位 (Reset)": nxp/s32g3/ch29_reset/index.md
+      - "复位生成模块 (MC_RGM)": nxp/s32g3/ch30_reset_generation_module_mc_rgm/index.md
+      - "模式进入模块 (MC_ME)": nxp/s32g3/ch33_mode_entry_module_mc_me/index.md
   - "语言":
     - languages/index.md
     - Deutsch:

@@ -20,5 +20,7 @@ the row's Notes.
 | 11 | 66-77 (Safety) | `Group-safety.md` |
 | 12 | 78-81 (Debug) | `Group-debug.md` |
 
-Batches 1-3 and 5-12 have no queue file yet; create one when its first chapter
-is picked up. Baseline: S32G3RM Rev. 5, 2025-09-17.
+All 12 batch queue files exist; each lists one row per chapter. A row gets a
+6-step sub-checklist when its chapter is picked up. Full queue created
+2026-11-12 (earlier runs created files lazily). Baseline: S32G3RM Rev. 5,
+2025-09-17.
