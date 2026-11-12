@@ -2,15 +2,15 @@
 
 > Maintained by the `nxp-translate` skill; update the touched row after every sync.
 > Status: ✅ complete · ⚠️ partial · ❌ missing
-> Baseline: S32G3RM Rev. 5, 2025-09-17 · Last updated: 2026-11-08
+> Baseline: S32G3RM Rev. 5, 2025-09-17 · Last updated: 2026-11-12
 
 ## Overview
 
 | Status | Chapters |
 | --- | --- |
-| ✅ | 1 |
-| ⚠️ | 0 |
-| ❌ | 80 |
+| ✅ | 2 |
+| ⚠️ | 1 |
+| ❌ | 78 |
 | Total | 81 |
 
 ## Chapters
@@ -46,10 +46,10 @@
 | 27 | PLL Digital Interface (PLLDIG) | ❌ | — |
 | 28 | Fast Crystal Oscillator Digital Controller (FXOSC) | ❌ | — |
 | 29 | Reset | ✅ | [复位（Reset）](ch29_reset/index.md) |
-| 30 | Reset Generation Module (MC_RGM) | ❌ | — |
+| 30 | Reset Generation Module (MC_RGM) | ✅ | [复位生成模块（MC_RGM）](ch30_reset_generation_module_mc_rgm/index.md) |
 | 31 | Boot | ❌ | — |
 | 32 | Power Management | ❌ | — |
-| 33 | Mode Entry Module (MC_ME) | ❌ | — |
+| 33 | Mode Entry Module (MC_ME) | ⚠️ | [占位页（未翻译）](ch33_mode_entry_module_mc_me/index.md) |
 | 34 | Power Control Unit (MC_PCU) | ❌ | — |
 | 35 | Power Management Controller (PMC) | ❌ | — |
 | 36 | System RAM Controller (SRAMC) | ❌ | — |
@@ -98,3 +98,7 @@
 | 79 | JTAG Controller (JTAGC) | ❌ | — |
 | 80 | JTAG Data Communication (JDC) | ❌ | — |
 | 81 | Aurora Trace Port (ATP) Subsystem | ❌ | — |
+
+> Note: ch33 holds a registered placeholder page (not a translation) so the
+> ch30 → ch33 cross-reference resolves under `--strict`; its status is ⚠️
+> partial until the full chapter is translated.
