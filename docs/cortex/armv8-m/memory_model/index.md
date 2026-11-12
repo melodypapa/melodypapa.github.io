@@ -2,6 +2,8 @@
 title: "内存模型（Memory Model）"
 ---
 
+本文译自 Part B《Armv8-M 架构规则》（Armv8-M Architecture Rules） Chapter B7《内存模型》（Memory Model）。
+
 本章规定 **Armv8-M** 内存模型架构规则。
 
 ## 1. Armv8 内存模型的定义

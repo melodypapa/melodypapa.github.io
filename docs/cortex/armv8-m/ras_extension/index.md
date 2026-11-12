@@ -2,6 +2,8 @@
 title: "可靠性、可用性与可服务性扩展（Reliability, Availability, and Serviceability (RAS) Extension）"
 ---
 
+本文译自 Part B《Armv8-M 架构规则》（Armv8-M Architecture Rules） Chapter B16《RAS 扩展》（Reliability, Availability, and Serviceability (RAS) Extension）。
+
 本章规定 **Armv8.1-M** 可靠性、可用性与可服务性（RAS）扩展。该扩展的最小实现对于任何 **Armv8.1-M** 架构实现都是强制的，但任何附加 RAS 特性都是可选的。
 
 适用于 **Armv8.1-M** 及以后架构版本的实现。扩展要求为 - RAS。

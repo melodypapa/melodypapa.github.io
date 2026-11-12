@@ -2,6 +2,8 @@
 title: "T32 指令编码：顶层与 16 位（Top level and 16-bit T32 instruction encoding）"
 ---
 
+本文译自 Part C《Armv8-M 指令》（Armv8-M Instructions） Chapter C2《指令规范》（Instruction Specification，C2.1–C2.2）。
+
 本章给出第 C2 章《指令规范》中 T32 指令集编码的顶层划分与 16 位编码分配。各小节给出解码字段取值与所对应子分组、指令的关系；指令名保持原样。
 
 ## 1. 顶层 T32 指令集编码

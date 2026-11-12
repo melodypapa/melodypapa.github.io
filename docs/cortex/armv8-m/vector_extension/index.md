@@ -2,6 +2,8 @@
 title: "向量扩展（Vector Extension）"
 ---
 
+本文译自 Part B《Armv8-M 架构规则》（Armv8-M Architecture Rules） Chapter B5《向量扩展》（Vector Extension）。
+
 本章规定可选的 **Armv8.1-M** 向量扩展规则。
 
 ## 1. Vector Extension 操作

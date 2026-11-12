@@ -2,6 +2,8 @@
 title: "程序员模型（Programmers' Model）"
 ---
 
+本文译自 Part B《Armv8-M 架构规则》（Armv8-M Architecture Rules） Chapter B3《程序员模型》（Programmers' Model）。
+
 本章规定 **Armv8-M** 程序员模型的架构规则。
 
 ## 1. PE 模式：Thread 模式与 Handler 模式

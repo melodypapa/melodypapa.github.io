@@ -2,6 +2,8 @@
 title: "性能监视扩展（The Performance Monitors Extension）"
 ---
 
+本文译自 Part B《Armv8-M 架构规则》（Armv8-M Architecture Rules） Chapter B15《性能监视扩展》（The Performance Monitors Extension）。
+
 本章规定可选的 **Armv8.1-M** 性能监视扩展规则。
 
 适用于 **Armv8.1-M** 及以后架构版本的实现。
