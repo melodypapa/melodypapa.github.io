@@ -331,8 +331,10 @@ nav:
     - Armv8-M 架构参考手册:
       - cortex/armv8-m/index.md
       - "Part A 架构简介与概述":
+        - cortex/armv8-m/part-a/index.md
         - "简介": cortex/armv8-m/introduction/index.md
       - "Part B 架构规则":
+        - cortex/armv8-m/part-b/index.md
         - "复位": cortex/armv8-m/resets/index.md
         - "电源管理": cortex/armv8-m/power_management/index.md
         - "编程模型": cortex/armv8-m/programmers_model/index.md
@@ -350,10 +352,12 @@ nav:
         - "性能监视扩展": cortex/armv8-m/performance_monitors_extension/index.md
         - "RAS 扩展": cortex/armv8-m/ras_extension/index.md
       - "Part C 指令集":
+        - cortex/armv8-m/part-c/index.md
         - "指令集概览": cortex/armv8-m/instruction_set_overview/index.md
         - "指令编码（顶层与 16 位）": cortex/armv8-m/instruction_encoding_16bit/index.md
         - "指令编码（32 位）": cortex/armv8-m/instruction_encoding_32bit/index.md
       - "Part G 术语表":
+        - cortex/armv8-m/part-g/index.md
         - "术语表": cortex/armv8-m/glossary/index.md
   - AUTOSAR:
     - autosar/index.md
