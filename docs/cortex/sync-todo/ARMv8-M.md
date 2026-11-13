@@ -7,6 +7,39 @@ Pairing note: the file lives under `cortex-r52/` in the mirror but documents the
 
 Chapter span map (parse lines): Part A L3834–4284 — A1 Introduction, 451 ln (translated). Part B L4285–~33105 — B1 Resets from L4288, B2 Power Management from L4339, B3 Programmers' Model from L4548; B4–B16 body boundaries are located by title at S1 because the parse interleaves TOC entries, running page headers and `# Bn.y`/`Chapter Bn` headings. The TOC at L225–L715 is the authoritative B1–B16 chapter list. Part C body begins ~L33106, followed by Parts D/E/F/G. Front matter L1–3833 (cover, proprietary notice, document history, contents, preface, feedback) is droppable chrome.
 
+## Layout migration (2026-11-13, issue #389 / PR #390)
+
+The source document is organised into Parts containing Chapters, so every
+chapter article (glossary included) now lives in its Part subfolder `part-<designator>/<topic>/index.md`, with the Part index page at `part-<designator>/index.md`. This is the arm-translate rule from uncertainty#119 / #120. Old flat URLs are kept alive by `redirect_maps` entries in `mkdocs.yml`.
+
+| Old article path | New article path |
+| --- | --- |
+| `armv8-m/introduction/index.md` | `armv8-m/part-a/introduction/index.md` |
+| `armv8-m/debug/index.md` | `armv8-m/part-b/debug/index.md` |
+| `armv8-m/debug_and_trace_components/index.md` | `armv8-m/part-b/debug_and_trace_components/index.md` |
+| `armv8-m/floating_point_support/index.md` | `armv8-m/part-b/floating_point_support/index.md` |
+| `armv8-m/memory_model/index.md` | `armv8-m/part-b/memory_model/index.md` |
+| `armv8-m/nested_vectored_interrupt_controller/index.md` | `armv8-m/part-b/nested_vectored_interrupt_controller/index.md` |
+| `armv8-m/pacbti/index.md` | `armv8-m/part-b/pacbti/index.md` |
+| `armv8-m/performance_monitors_extension/index.md` | `armv8-m/part-b/performance_monitors_extension/index.md` |
+| `armv8-m/power_management/index.md` | `armv8-m/part-b/power_management/index.md` |
+| `armv8-m/programmers_model/index.md` | `armv8-m/part-b/programmers_model/index.md` |
+| `armv8-m/protected_memory_system_architecture/index.md` | `armv8-m/part-b/protected_memory_system_architecture/index.md` |
+| `armv8-m/ras_extension/index.md` | `armv8-m/part-b/ras_extension/index.md` |
+| `armv8-m/resets/index.md` | `armv8-m/part-b/resets/index.md` |
+| `armv8-m/synchronization_and_semaphores/index.md` | `armv8-m/part-b/synchronization_and_semaphores/index.md` |
+| `armv8-m/system_address_map/index.md` | `armv8-m/part-b/system_address_map/index.md` |
+| `armv8-m/system_timer_systick/index.md` | `armv8-m/part-b/system_timer_systick/index.md` |
+| `armv8-m/vector_extension/index.md` | `armv8-m/part-b/vector_extension/index.md` |
+| `armv8-m/instruction_encoding_16bit/index.md` | `armv8-m/part-c/instruction_encoding_16bit/index.md` |
+| `armv8-m/instruction_encoding_32bit/index.md` | `armv8-m/part-c/instruction_encoding_32bit/index.md` |
+| `armv8-m/instruction_list/index.md` | `armv8-m/part-c/instruction_list/index.md` |
+| `armv8-m/instruction_list/a/index.md` | `armv8-m/part-c/instruction_list/a/index.md` |
+| `armv8-m/instruction_list/b/index.md` | `armv8-m/part-c/instruction_list/b/index.md` |
+| `armv8-m/instruction_list/c/index.md` | `armv8-m/part-c/instruction_list/c/index.md` |
+| `armv8-m/instruction_set_overview/index.md` | `armv8-m/part-c/instruction_set_overview/index.md` |
+| `armv8-m/glossary/index.md` | `armv8-m/part-g/glossary/index.md` |
+
 ## Inventory (TOC = authoritative chapter list)
 
 | Part | Chapters | Content | Status |

@@ -384,7 +384,7 @@ nav:
         - "调试与跟踪组件": cortex/armv8-m/part-b/debug_and_trace_components/index.md
         - "性能监视扩展": cortex/armv8-m/part-b/performance_monitors_extension/index.md
         - "RAS 扩展": cortex/armv8-m/part-b/ras_extension/index.md
-      - "Part C 指令集":
+      - "Part C 指令":
         - cortex/armv8-m/part-c/index.md
         - "指令集概览": cortex/armv8-m/part-c/instruction_set_overview/index.md
         - "指令编码（顶层与 16 位）": cortex/armv8-m/part-c/instruction_encoding_16bit/index.md

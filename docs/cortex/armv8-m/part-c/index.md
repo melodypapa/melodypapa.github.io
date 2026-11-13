@@ -1,5 +1,5 @@
 ---
-title: "Part C Armv8-M 指令集（Armv8-M Instruction Set）"
+title: "Part C Armv8-M 指令（Armv8-M Instructions）"
 ---
 
 Part C 描述各条指令。它包含以下章节：

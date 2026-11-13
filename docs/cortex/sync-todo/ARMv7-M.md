@@ -7,6 +7,22 @@ Chapter span map (parse lines): Part A L739 — A1 Introduction L743–880 (137)
 
 Existing-article mappings (mapping.md, evidence re-checked at census): `arm_architecture_memory_mode` ← A3 · `programmers_model` ← B1.5 (evidence `Figure2-*` unverified — confirm at S1) · `mpu` ← B3.5 (`TableB3-1…11`) · `system_address_map` ← B3.1–B3.4 (article sections SCS/SysTick/NVIC = B3.2/B3.3/B3.4) · `instruction_set` ← A4 (completed 2026-11-08, appended to the TRM summary); A5 and A6 are separate articles, queued below.
 
+## Layout migration (2026-11-13, issue #389 / PR #390)
+
+The source document is organised into Parts containing Chapters, so every
+chapter article (glossary included) now lives in its Part subfolder `part-<designator>/<topic>/index.md`, with the Part index page at `part-<designator>/index.md`. This is the arm-translate rule from uncertainty#119 / #120. Old flat URLs are kept alive by `redirect_maps` entries in `mkdocs.yml`.
+
+| Old article path | New article path |
+| --- | --- |
+| `armv7-m/arm_architecture_memory_mode/index.md` | `armv7-m/part-a/arm_architecture_memory_mode/index.md` |
+| `armv7-m/fp_instruction_set_encoding/index.md` | `armv7-m/part-a/fp_instruction_set_encoding/index.md` |
+| `armv7-m/thumb_instruction_set_encoding/index.md` | `armv7-m/part-a/thumb_instruction_set_encoding/index.md` |
+| `armv7-m/cpuid_scheme/index.md` | `armv7-m/part-b/cpuid_scheme/index.md` |
+| `armv7-m/system_address_map/index.md` | `armv7-m/part-b/system_address_map/index.md` |
+| `armv7-m/system_instructions/index.md` | `armv7-m/part-b/system_instructions/index.md` |
+| `armv7-m/system_memory_model/index.md` | `armv7-m/part-b/system_memory_model/index.md` |
+| `armv7-m/glossary/index.md` | `armv7-m/part-d/glossary/index.md` |
+
 ## Queue
 
 - [x] exception_model — completed (article `m7-trm/programmers_model/index.md`, 1,834 ln, 5 imgs vs B1.5 of the 4,344-ln chapter B1)
