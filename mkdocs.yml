@@ -61,12 +61,12 @@ plugins:
         cortex/armv8-m/debug_and_trace_components/index.md: cortex/armv8-m/part-b/debug_and_trace_components/index.md
         cortex/armv8-m/floating_point_support/index.md: cortex/armv8-m/part-b/floating_point_support/index.md
         cortex/armv8-m/glossary/index.md: cortex/armv8-m/part-g/glossary/index.md
-        cortex/armv8-m/instruction_encoding_16bit/index.md: cortex/armv8-m/part-c/instruction_encoding_16bit/index.md
-        cortex/armv8-m/instruction_encoding_32bit/index.md: cortex/armv8-m/part-c/instruction_encoding_32bit/index.md
-        cortex/armv8-m/instruction_list/a/index.md: cortex/armv8-m/part-c/instruction_list/a/index.md
-        cortex/armv8-m/instruction_list/b/index.md: cortex/armv8-m/part-c/instruction_list/b/index.md
-        cortex/armv8-m/instruction_list/c/index.md: cortex/armv8-m/part-c/instruction_list/c/index.md
-        cortex/armv8-m/instruction_list/index.md: cortex/armv8-m/part-c/instruction_list/index.md
+        cortex/armv8-m/instruction_encoding_16bit/index.md: cortex/armv8-m/part-c/instruction_specification/index.md
+        cortex/armv8-m/instruction_encoding_32bit/index.md: cortex/armv8-m/part-c/instruction_specification/index.md
+        cortex/armv8-m/instruction_list/a/index.md: cortex/armv8-m/part-c/instruction_specification/index.md
+        cortex/armv8-m/instruction_list/b/index.md: cortex/armv8-m/part-c/instruction_specification/index.md
+        cortex/armv8-m/instruction_list/c/index.md: cortex/armv8-m/part-c/instruction_specification/index.md
+        cortex/armv8-m/instruction_list/index.md: cortex/armv8-m/part-c/instruction_specification/index.md
         cortex/armv8-m/instruction_set_overview/index.md: cortex/armv8-m/part-c/instruction_set_overview/index.md
         cortex/armv8-m/introduction/index.md: cortex/armv8-m/part-a/introduction/index.md
         cortex/armv8-m/memory_model/index.md: cortex/armv8-m/part-b/memory_model/index.md
@@ -387,13 +387,7 @@ nav:
       - "Part C 指令":
         - cortex/armv8-m/part-c/index.md
         - "指令集概览": cortex/armv8-m/part-c/instruction_set_overview/index.md
-        - "指令编码（顶层与 16 位）": cortex/armv8-m/part-c/instruction_encoding_16bit/index.md
-        - "指令编码（32 位）": cortex/armv8-m/part-c/instruction_encoding_32bit/index.md
-        - "指令列表":
-            - cortex/armv8-m/part-c/instruction_list/index.md
-            - "A 段": cortex/armv8-m/part-c/instruction_list/a/index.md
-            - "B 段": cortex/armv8-m/part-c/instruction_list/b/index.md
-            - "C 段": cortex/armv8-m/part-c/instruction_list/c/index.md
+        - "指令规范（C2）": cortex/armv8-m/part-c/instruction_specification/index.md
       - "Part G 术语表":
         - cortex/armv8-m/part-g/index.md
         - "术语表": cortex/armv8-m/part-g/glossary/index.md
