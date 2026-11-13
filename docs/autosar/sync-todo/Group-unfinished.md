@@ -34,7 +34,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
   - [x] Step 5 — User confirmation gate (2026-11-13: user confirmed rows 11-12 — "confirmed and push to github with pr and issue")
-  - [x] Step 6 — TODO.md row + commit/PR (2026-11-12: commit 8f06413 on feature/cp-methodology-rows-11-17, PR at batch end)
+  - [x] Step 6 — TODO.md row + commit/PR (2026-11-13: commits 8f06413+56e94a8 on feature/cp-methodology-rows-11-17; PR #387 (Closes #386))
 
 - [x] tps_ecu_configuration (AUTOSAR_CP_TPS_ECUConfiguration · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: ECU Configuration（ECU 配置）; target `cp/methodology_templates/tps_ecu_configuration/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type)
@@ -49,7 +49,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Step 5 = batch gate at end of rows 11-17 per user instruction 2026-11-12 (this commit ships without per-article user confirmation)
   - [x] Step 5 — User confirmation gate (2026-11-13: user confirmed rows 11-12 — "confirmed and push to github with pr and issue")
 
-  - [x] Step 6 — TODO.md row + commit/PR (2026-11-13: commit at batch end; PR with rows 11-17)
+  - [x] Step 6 — TODO.md row + commit/PR (2026-11-13: commit 26b3f37 on feature/cp-methodology-rows-11-17; PR #387 (Closes #386))
 
 - [ ] basic_software_module_description_template (AUTOSAR_CP_TPS_BSWModuleDescriptionTemplate · MethodologyAndTemplates · R23-11 markdown · 🔶 existing article · 📖 skeleton-exempt)
   - Note: BSW Module Description Template（基础软件模块描述模板）; target = the existing `cp/methodology_templates/basic_software_module_description_template/` (row name = the actual article dir so the index resolves it; a type-prefixed slug is NOT adopted — no rename, no redirect churn); template specification (TPS) — meta-model class tables, constraints and ARXML examples
@@ -103,7 +103,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 
-> Delivery: rows 1–10 (rs_ecu_resource_template … tr_modeling_show_cases) done 2026-11-10/11 and merged via PR #366 (issue #365, commits 79587d7…d1f2094) — condensed records in [Group-finished.md](Group-finished.md). Resume = row 11 (tps_timing_extensions).
+> Delivery: rows 1–10 (rs_ecu_resource_template … tr_modeling_show_cases) done 2026-11-10/11 and merged via PR #366 (issue #365, commits 79587d7…d1f2094); rows 11–12 (tps_timing_extensions, tps_ecu_configuration) done 2026-11-12/13, pushed as PR #387 (issue #386, commits 8f06413…01fd0d7) — condensed records in [Group-finished.md](Group-finished.md). Resume = row 13 (basic_software_module_description_template).
 
 ---
 
