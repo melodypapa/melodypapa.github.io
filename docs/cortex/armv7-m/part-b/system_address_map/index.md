@@ -84,7 +84,7 @@ title: "系统地址映射"
 
 **PPB**的一般规则，地址范围从**0xE0000000**到**0xE0100000**：
 
-* 该区域被定义为强秩序内存，请参阅[强秩序内存](../arm_architecture_memory_mode/index.md#156-强秩序内存strongly-ordered-memory)和[内存访问限制](../arm_architecture_memory_mode/index.md#157-内存访问限制)。
+* 该区域被定义为强秩序内存，请参阅[强秩序内存](../../part-a/arm_architecture_memory_mode/index.md#156-强秩序内存strongly-ordered-memory)和[内存访问限制](../../part-a/arm_architecture_memory_mode/index.md#157-内存访问限制)。
 * 无论处理器的字节序状态如何，寄存器访问总是小端字节序（**little endian**）。
 * 一般来说，除非另有说明，寄存器仅支持字访问，字节和半字访问不可预测。优先级和故障状态寄存器是影响不同资源的字节对齐位字段的串联。这样的寄存器可以作为字节或半字寄存器访问，具有适当的相对于 32 位寄存器基地址的地址偏移量。
 
@@ -140,7 +140,7 @@ title: "系统地址映射"
 
 * 系统定时器 **SysTick**，参见第 3 节。
 * 嵌套向量中断控制器 **NVIC**，参见第 4 节。
-* 在 **SCS** 中注册对 **PMSAv7** 的支持，参见[受保护的内存系统架构 PMSAv7](../../m7-trm/mpu/index.md)。
+* 在 **SCS** 中注册对 **PMSAv7** 的支持，参见[受保护的内存系统架构 PMSAv7](../../../m7-trm/mpu/index.md)。
 
 ### 2.1. 关于系统控制块
 

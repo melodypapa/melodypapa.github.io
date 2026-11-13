@@ -8,20 +8,20 @@ title: "Armv7-M 架构参考手册"
 
 ### Part A — 应用程序级架构（Application level architecture）
 
-1. [ARM架构的内存模式（Arm Architecture Memory Model）](arm_architecture_memory_mode/index.md)
-2. [Thumb 指令集编码（Thumb Instruction Set Encoding）](thumb_instruction_set_encoding/index.md)
-3. [浮点指令集编码（Floating-point Instruction Set Encoding）](fp_instruction_set_encoding/index.md)
+1. [ARM架构的内存模式（Arm Architecture Memory Model）](part-a/arm_architecture_memory_mode/index.md)
+2. [Thumb 指令集编码（Thumb Instruction Set Encoding）](part-a/thumb_instruction_set_encoding/index.md)
+3. [浮点指令集编码（Floating-point Instruction Set Encoding）](part-a/fp_instruction_set_encoding/index.md)
 
 ### Part B — 系统级架构（System level architecture）
 
-4. [系统内存模型（System Memory Model）](system_memory_model/index.md)
-5. [系统地址映射](system_address_map/index.md)
-6. [CPUID 方案（The CPUID Scheme）](cpuid_scheme/index.md)
-7. [系统指令详情（System Instruction Details）](system_instructions/index.md)
+4. [系统内存模型（System Memory Model）](part-b/system_memory_model/index.md)
+5. [系统地址映射](part-b/system_address_map/index.md)
+6. [CPUID 方案（The CPUID Scheme）](part-b/cpuid_scheme/index.md)
+7. [系统指令详情（System Instruction Details）](part-b/system_instructions/index.md)
 
 ### Part D — 附录（Appendices）
 
-8. [术语表（Glossary）](glossary/index.md)
+8. [术语表（Glossary）](part-d/glossary/index.md)
 
 ## 2. 相关内容
 

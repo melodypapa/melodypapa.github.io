@@ -6,7 +6,7 @@ Part A 给出 **Armv8-M** 架构 Profile 的概述，包括它与其他 Arm **�
 
 ## 1. 章节
 
-1. [简介（Introduction）](../introduction/index.md) — Chapter A1，**Armv8-M** 架构的介绍。
+1. [简介（Introduction）](introduction/index.md) — Chapter A1，**Armv8-M** 架构的介绍。
 
 ## 2. 相关内容
 

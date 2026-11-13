@@ -49,6 +49,39 @@ plugins:
       blog_dir: blog
   - redirects:
       redirect_maps:
+        cortex/armv7-m/arm_architecture_memory_mode/index.md: cortex/armv7-m/part-a/arm_architecture_memory_mode/index.md
+        cortex/armv7-m/cpuid_scheme/index.md: cortex/armv7-m/part-b/cpuid_scheme/index.md
+        cortex/armv7-m/fp_instruction_set_encoding/index.md: cortex/armv7-m/part-a/fp_instruction_set_encoding/index.md
+        cortex/armv7-m/glossary/index.md: cortex/armv7-m/part-d/glossary/index.md
+        cortex/armv7-m/system_address_map/index.md: cortex/armv7-m/part-b/system_address_map/index.md
+        cortex/armv7-m/system_instructions/index.md: cortex/armv7-m/part-b/system_instructions/index.md
+        cortex/armv7-m/system_memory_model/index.md: cortex/armv7-m/part-b/system_memory_model/index.md
+        cortex/armv7-m/thumb_instruction_set_encoding/index.md: cortex/armv7-m/part-a/thumb_instruction_set_encoding/index.md
+        cortex/armv8-m/debug/index.md: cortex/armv8-m/part-b/debug/index.md
+        cortex/armv8-m/debug_and_trace_components/index.md: cortex/armv8-m/part-b/debug_and_trace_components/index.md
+        cortex/armv8-m/floating_point_support/index.md: cortex/armv8-m/part-b/floating_point_support/index.md
+        cortex/armv8-m/glossary/index.md: cortex/armv8-m/part-g/glossary/index.md
+        cortex/armv8-m/instruction_encoding_16bit/index.md: cortex/armv8-m/part-c/instruction_encoding_16bit/index.md
+        cortex/armv8-m/instruction_encoding_32bit/index.md: cortex/armv8-m/part-c/instruction_encoding_32bit/index.md
+        cortex/armv8-m/instruction_list/a/index.md: cortex/armv8-m/part-c/instruction_list/a/index.md
+        cortex/armv8-m/instruction_list/b/index.md: cortex/armv8-m/part-c/instruction_list/b/index.md
+        cortex/armv8-m/instruction_list/c/index.md: cortex/armv8-m/part-c/instruction_list/c/index.md
+        cortex/armv8-m/instruction_list/index.md: cortex/armv8-m/part-c/instruction_list/index.md
+        cortex/armv8-m/instruction_set_overview/index.md: cortex/armv8-m/part-c/instruction_set_overview/index.md
+        cortex/armv8-m/introduction/index.md: cortex/armv8-m/part-a/introduction/index.md
+        cortex/armv8-m/memory_model/index.md: cortex/armv8-m/part-b/memory_model/index.md
+        cortex/armv8-m/nested_vectored_interrupt_controller/index.md: cortex/armv8-m/part-b/nested_vectored_interrupt_controller/index.md
+        cortex/armv8-m/pacbti/index.md: cortex/armv8-m/part-b/pacbti/index.md
+        cortex/armv8-m/performance_monitors_extension/index.md: cortex/armv8-m/part-b/performance_monitors_extension/index.md
+        cortex/armv8-m/power_management/index.md: cortex/armv8-m/part-b/power_management/index.md
+        cortex/armv8-m/programmers_model/index.md: cortex/armv8-m/part-b/programmers_model/index.md
+        cortex/armv8-m/protected_memory_system_architecture/index.md: cortex/armv8-m/part-b/protected_memory_system_architecture/index.md
+        cortex/armv8-m/ras_extension/index.md: cortex/armv8-m/part-b/ras_extension/index.md
+        cortex/armv8-m/resets/index.md: cortex/armv8-m/part-b/resets/index.md
+        cortex/armv8-m/synchronization_and_semaphores/index.md: cortex/armv8-m/part-b/synchronization_and_semaphores/index.md
+        cortex/armv8-m/system_address_map/index.md: cortex/armv8-m/part-b/system_address_map/index.md
+        cortex/armv8-m/system_timer_systick/index.md: cortex/armv8-m/part-b/system_timer_systick/index.md
+        cortex/armv8-m/vector_extension/index.md: cortex/armv8-m/part-b/vector_extension/index.md
         autosar/api/functions.md: autosar/cp/api/functions.md
         autosar/api/functions_by_module.md: autosar/cp/api/functions_by_module.md
         autosar/api/index.md: autosar/cp/api/index.md
@@ -190,13 +223,13 @@ plugins:
         cortex/m7_processor/program_status_register/index.md: cortex/m7-trm/programmers_model/index.md
         cortex/m7_processor/exception_model/index.md: cortex/m7-trm/programmers_model/index.md
         cortex/m7_processor/protected_memory_system_archi_pmsav7/index.md: cortex/m7-trm/mpu/index.md
-        cortex/m7_processor/arm_architecture_memory_mode/index.md: cortex/armv7-m/arm_architecture_memory_mode/index.md
-        cortex/m7_processor/cpuid_scheme/index.md: cortex/armv7-m/cpuid_scheme/index.md
+        cortex/m7_processor/arm_architecture_memory_mode/index.md: cortex/armv7-m/part-a/arm_architecture_memory_mode/index.md
+        cortex/m7_processor/cpuid_scheme/index.md: cortex/armv7-m/part-b/cpuid_scheme/index.md
         cortex/m7_processor/cti/index.md: cortex/m7-trm/cti/index.md
         cortex/m7_processor/debug/index.md: cortex/m7-trm/debug/index.md
         cortex/m7_processor/dwt/index.md: cortex/m7-trm/dwt/index.md
         cortex/m7_processor/fault_detection/index.md: cortex/m7-trm/fault_detection/index.md
-        cortex/m7_processor/fp_instruction_set_encoding/index.md: cortex/armv7-m/fp_instruction_set_encoding/index.md
+        cortex/m7_processor/fp_instruction_set_encoding/index.md: cortex/armv7-m/part-a/fp_instruction_set_encoding/index.md
         cortex/m7_processor/fpu/index.md: cortex/m7-trm/fpu/index.md
         cortex/m7_processor/glossary/index.md: cortex/m7-trm/glossary/index.md
         cortex/m7_processor/initialization/index.md: cortex/m7-trm/initialization/index.md
@@ -207,11 +240,11 @@ plugins:
         cortex/m7_processor/mpu/index.md: cortex/m7-trm/mpu/index.md
         cortex/m7_processor/nested_vectored_interrupt_controller/index.md: cortex/m7-trm/nested_vectored_interrupt_controller/index.md
         cortex/m7_processor/programmers_model/index.md: cortex/m7-trm/programmers_model/index.md
-        cortex/m7_processor/system_address_map/index.md: cortex/armv7-m/system_address_map/index.md
+        cortex/m7_processor/system_address_map/index.md: cortex/armv7-m/part-b/system_address_map/index.md
         cortex/m7_processor/system_control/index.md: cortex/m7-trm/system_control/index.md
-        cortex/m7_processor/system_instructions/index.md: cortex/armv7-m/system_instructions/index.md
-        cortex/m7_processor/system_memory_model/index.md: cortex/armv7-m/system_memory_model/index.md
-        cortex/m7_processor/thumb_instruction_set_encoding/index.md: cortex/armv7-m/thumb_instruction_set_encoding/index.md
+        cortex/m7_processor/system_instructions/index.md: cortex/armv7-m/part-b/system_instructions/index.md
+        cortex/m7_processor/system_memory_model/index.md: cortex/armv7-m/part-b/system_memory_model/index.md
+        cortex/m7_processor/thumb_instruction_set_encoding/index.md: cortex/armv7-m/part-a/thumb_instruction_set_encoding/index.md
         cortex/m7_processor/tpiu/index.md: cortex/m7-trm/tpiu/index.md
         cortex/r52p_processor/clocking_and_resets/index.md: cortex/r52plus-trm/clocking_and_resets/index.md
         cortex/r52p_processor/initialization/index.md: cortex/r52plus-trm/initialization/index.md
@@ -297,18 +330,18 @@ nav:
       - cortex/armv7-m/index.md
       - "Part A 应用程序级架构":
         - cortex/armv7-m/part-a/index.md
-        - "ARM架构的内存模式": cortex/armv7-m/arm_architecture_memory_mode/index.md
-        - "Thumb 指令集编码": cortex/armv7-m/thumb_instruction_set_encoding/index.md
-        - "浮点指令集编码": cortex/armv7-m/fp_instruction_set_encoding/index.md
+        - "ARM架构的内存模式": cortex/armv7-m/part-a/arm_architecture_memory_mode/index.md
+        - "Thumb 指令集编码": cortex/armv7-m/part-a/thumb_instruction_set_encoding/index.md
+        - "浮点指令集编码": cortex/armv7-m/part-a/fp_instruction_set_encoding/index.md
       - "Part B 系统级架构":
         - cortex/armv7-m/part-b/index.md
-        - "系统内存模型": cortex/armv7-m/system_memory_model/index.md
-        - "系统地址映射": cortex/armv7-m/system_address_map/index.md
-        - "CPUID 方案": cortex/armv7-m/cpuid_scheme/index.md
-        - "系统指令详情": cortex/armv7-m/system_instructions/index.md
+        - "系统内存模型": cortex/armv7-m/part-b/system_memory_model/index.md
+        - "系统地址映射": cortex/armv7-m/part-b/system_address_map/index.md
+        - "CPUID 方案": cortex/armv7-m/part-b/cpuid_scheme/index.md
+        - "系统指令详情": cortex/armv7-m/part-b/system_instructions/index.md
       - "Part D 附录":
         - cortex/armv7-m/part-d/index.md
-        - "术语表": cortex/armv7-m/glossary/index.md
+        - "术语表": cortex/armv7-m/part-d/glossary/index.md
     - Cortex-R52+ TRM:
       - cortex/r52plus-trm/index.md
       - "简介": cortex/r52plus-trm/introduction/index.md
@@ -332,38 +365,38 @@ nav:
       - cortex/armv8-m/index.md
       - "Part A 架构简介与概述":
         - cortex/armv8-m/part-a/index.md
-        - "简介": cortex/armv8-m/introduction/index.md
+        - "简介": cortex/armv8-m/part-a/introduction/index.md
       - "Part B 架构规则":
         - cortex/armv8-m/part-b/index.md
-        - "复位": cortex/armv8-m/resets/index.md
-        - "电源管理": cortex/armv8-m/power_management/index.md
-        - "编程模型": cortex/armv8-m/programmers_model/index.md
-        - "浮点支持": cortex/armv8-m/floating_point_support/index.md
-        - "向量扩展": cortex/armv8-m/vector_extension/index.md
-        - "指针认证与分支目标识别": cortex/armv8-m/pacbti/index.md
-        - "内存模型": cortex/armv8-m/memory_model/index.md
-        - "系统地址映射": cortex/armv8-m/system_address_map/index.md
-        - "同步与信号量": cortex/armv8-m/synchronization_and_semaphores/index.md
-        - "受保护内存系统架构": cortex/armv8-m/protected_memory_system_architecture/index.md
-        - "系统定时器": cortex/armv8-m/system_timer_systick/index.md
-        - "嵌套向量中断控制器": cortex/armv8-m/nested_vectored_interrupt_controller/index.md
-        - "调试": cortex/armv8-m/debug/index.md
-        - "调试与跟踪组件": cortex/armv8-m/debug_and_trace_components/index.md
-        - "性能监视扩展": cortex/armv8-m/performance_monitors_extension/index.md
-        - "RAS 扩展": cortex/armv8-m/ras_extension/index.md
-      - "Part C 指令集":
+        - "复位": cortex/armv8-m/part-b/resets/index.md
+        - "电源管理": cortex/armv8-m/part-b/power_management/index.md
+        - "编程模型": cortex/armv8-m/part-b/programmers_model/index.md
+        - "浮点支持": cortex/armv8-m/part-b/floating_point_support/index.md
+        - "向量扩展": cortex/armv8-m/part-b/vector_extension/index.md
+        - "指针认证与分支目标识别": cortex/armv8-m/part-b/pacbti/index.md
+        - "内存模型": cortex/armv8-m/part-b/memory_model/index.md
+        - "系统地址映射": cortex/armv8-m/part-b/system_address_map/index.md
+        - "同步与信号量": cortex/armv8-m/part-b/synchronization_and_semaphores/index.md
+        - "受保护内存系统架构": cortex/armv8-m/part-b/protected_memory_system_architecture/index.md
+        - "系统定时器": cortex/armv8-m/part-b/system_timer_systick/index.md
+        - "嵌套向量中断控制器": cortex/armv8-m/part-b/nested_vectored_interrupt_controller/index.md
+        - "调试": cortex/armv8-m/part-b/debug/index.md
+        - "调试与跟踪组件": cortex/armv8-m/part-b/debug_and_trace_components/index.md
+        - "性能监视扩展": cortex/armv8-m/part-b/performance_monitors_extension/index.md
+        - "RAS 扩展": cortex/armv8-m/part-b/ras_extension/index.md
+      - "Part C 指令":
         - cortex/armv8-m/part-c/index.md
-        - "指令集概览": cortex/armv8-m/instruction_set_overview/index.md
-        - "指令编码（顶层与 16 位）": cortex/armv8-m/instruction_encoding_16bit/index.md
-        - "指令编码（32 位）": cortex/armv8-m/instruction_encoding_32bit/index.md
+        - "指令集概览": cortex/armv8-m/part-c/instruction_set_overview/index.md
+        - "指令编码（顶层与 16 位）": cortex/armv8-m/part-c/instruction_encoding_16bit/index.md
+        - "指令编码（32 位）": cortex/armv8-m/part-c/instruction_encoding_32bit/index.md
         - "指令列表":
-            - cortex/armv8-m/instruction_list/index.md
-            - "A 段": cortex/armv8-m/instruction_list/a/index.md
-            - "B 段": cortex/armv8-m/instruction_list/b/index.md
-            - "C 段": cortex/armv8-m/instruction_list/c/index.md
+            - cortex/armv8-m/part-c/instruction_list/index.md
+            - "A 段": cortex/armv8-m/part-c/instruction_list/a/index.md
+            - "B 段": cortex/armv8-m/part-c/instruction_list/b/index.md
+            - "C 段": cortex/armv8-m/part-c/instruction_list/c/index.md
       - "Part G 术语表":
         - cortex/armv8-m/part-g/index.md
-        - "术语表": cortex/armv8-m/glossary/index.md
+        - "术语表": cortex/armv8-m/part-g/glossary/index.md
   - AUTOSAR:
     - autosar/index.md
     - "术语表": autosar/glossary.md
