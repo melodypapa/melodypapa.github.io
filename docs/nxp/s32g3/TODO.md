@@ -2,15 +2,15 @@
 
 > Maintained by the `nxp-translate` skill; update the touched row after every sync.
 > Status: ✅ complete · ⚠️ partial · ❌ missing
-> Baseline: S32G3RM Rev. 5, 2025-09-17 · Last updated: 2026-11-12
+> Baseline: S32G3RM Rev. 5, 2025-09-17 · Last updated: 2026-11-13
 
 ## Overview
 
 | Status | Chapters |
 | --- | --- |
-| ✅ | 2 |
-| ⚠️ | 1 |
-| ❌ | 78 |
+| ✅ | 7 |
+| ⚠️ | 4 |
+| ❌ | 70 |
 | Total | 81 |
 
 ## Chapters
@@ -40,11 +40,11 @@
 | 21 | Standby General Purpose Registers (STDBY GPR) | ❌ | — |
 | 22 | Register Protection (REG_PROT) | ❌ | — |
 | 23 | Wakeup Unit (WKPU) | ❌ | — |
-| 24 | Clocking | ❌ | — |
-| 25 | Clock Generation Module (MC_CGM) | ❌ | — |
-| 26 | Digital Frequency Synthesizer (DFS) | ❌ | — |
-| 27 | PLL Digital Interface (PLLDIG) | ❌ | — |
-| 28 | Fast Crystal Oscillator Digital Controller (FXOSC) | ❌ | — |
+| 24 | Clocking | ✅ | [时钟（Clocking）](ch24_clocking/index.md) |
+| 25 | Clock Generation Module (MC_CGM) | ✅ | [时钟生成模块（MC_CGM）](ch25_clock_generation_module_mc_cgm/index.md) |
+| 26 | Digital Frequency Synthesizer (DFS) | ✅ | [数字频率合成器（DFS）](ch26_digital_frequency_synthesizer_dfs/index.md) |
+| 27 | PLL Digital Interface (PLLDIG) | ✅ | [PLL 数字接口（PLLDIG）](ch27_pll_digital_interface_plldig/index.md) |
+| 28 | Fast Crystal Oscillator Digital Controller (FXOSC) | ✅ | [快速晶体振荡器数字控制器（FXOSC）](ch28_fast_crystal_oscillator_digital_controller_fxosc/index.md) |
 | 29 | Reset | ✅ | [复位（Reset）](ch29_reset/index.md) |
 | 30 | Reset Generation Module (MC_RGM) | ✅ | [复位生成模块（MC_RGM）](ch30_reset_generation_module_mc_rgm/index.md) |
 | 31 | Boot | ❌ | — |
@@ -83,7 +83,7 @@
 | 64 | On-Chip One Time Programmable (OCOTP) Controller | ❌ | — |
 | 65 | Fusebox Controller (FBXC) | ❌ | — |
 | 66 | Safety | ❌ | — |
-| 67 | Error Reporting Module (ERM) | ❌ | — |
+| 67 | Error Reporting Module (ERM) | ⚠️ | [占位页（未翻译）](ch067_error_reporting_module_erm/index.md) |
 | 68 | Fault Collection and Control Unit (FCCU) | ❌ | — |
 | 69 | RCCU Debug Unit (RDU) | ❌ | — |
 | 70 | Clock Monitoring Unit-Frequency Check (CMU_FC) | ❌ | — |
@@ -94,10 +94,10 @@
 | 75 | Safety by Software (SBSW) | ❌ | — |
 | 76 | Error Injection Module (EIM) | ❌ | — |
 | 77 | Cyclic Redundancy Check (CRC) Unit | ❌ | — |
-| 78 | Debug | ❌ | — |
+| 78 | Debug | ⚠️ | [占位页（未翻译）](ch078_debug/index.md) |
 | 79 | JTAG Controller (JTAGC) | ❌ | — |
 | 80 | JTAG Data Communication (JDC) | ❌ | — |
-| 81 | Aurora Trace Port (ATP) Subsystem | ❌ | — |
+| 81 | Aurora Trace Port (ATP) Subsystem | ⚠️ | [占位页（未翻译）](ch081_aurora_trace_port_atp_subsystem/index.md) |
 
 > Note: ch33 holds a registered placeholder page (not a translation) so the
 > ch30 → ch33 cross-reference resolves under `--strict`; its status is ⚠️
