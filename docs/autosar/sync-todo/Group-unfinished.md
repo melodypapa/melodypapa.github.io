@@ -20,7 +20,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 
 ## Queue
 
-- [ ] tps_timing_extensions (AUTOSAR_CP_TPS_TimingExtensions · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [x] tps_timing_extensions (AUTOSAR_CP_TPS_TimingExtensions · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Timing Extensions（时序扩展）; target `cp/methodology_templates/tps_timing_extensions/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type)
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TPS_TimingExtensions.md` — 8,752 lines, 384 figure refs, 113 item IDs
   - Note: related site content: none (the Foundation RS_TimingExtensions counterpart is queued in Group-foundation-rs-prs.md — cross-link candidates, report-only until the run decides)
@@ -33,7 +33,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [x] Step 2 — In-place translation/completion
   - [x] Step 3 — Phase A mechanical checks
   - [x] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate (batch gate at end of rows 11–17, per user instruction 2026-11-12)
+  - [x] Step 5 — User confirmation gate (2026-11-13: user confirmed rows 11-12 — "confirmed and push to github with pr and issue")
   - [x] Step 6 — TODO.md row + commit/PR (2026-11-12: commit 8f06413 on feature/cp-methodology-rows-11-17, PR at batch end)
 
 - [x] tps_ecu_configuration (AUTOSAR_CP_TPS_ECUConfiguration · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
@@ -47,7 +47,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Step 3 evidence (2026-11-13): strict build exit 0 / 0 WARNING; 0 broken anchors (12 stale forward anchors fixed to build-derived slugs); check_indexes OK (376 nav targets, 0 broken); check_heading_lang OK after 3.4.1 gloss (Handle IDs = non-identifier noun); hygiene 0 × ^# / \< / {DRAFT}; link census: 46 chapter refs resolved (1 UNRESOLVED: 例2.34-vs-2.32 cross-ref is a source typo, left prose), 53/62 citations linked after apply (idempotent), 9 unlinked = figure-caption [n] report-only; cross-article mentions report-only (CanIf ×27 no article, Mcu ×11 no article, Dem/SoAd/EcuM/BswM/NvM/Dcm/Port SITE candidates)
   - Note: 2026-11-13 mid-run defect recovery: incremental fence repairs corrupted code-fence pairing in ch.2-4; article rebuilt deterministically (prose skeleton extracted intact + 55 listings regenerated from source with prose/table stripping + references registry restored); full fence audit clean (0 CJK-in-fence, 0 prose-leak, 0 empty, 0 bare-XML)
   - Note: Step 5 = batch gate at end of rows 11-17 per user instruction 2026-11-12 (this commit ships without per-article user confirmation)
-  - [ ] Step 5 — User confirmation gate (batch gate at end of rows 11-17, per user instruction 2026-11-12)
+  - [x] Step 5 — User confirmation gate (2026-11-13: user confirmed rows 11-12 — "confirmed and push to github with pr and issue")
 
   - [x] Step 6 — TODO.md row + commit/PR (2026-11-13: commit at batch end; PR with rows 11-17)
 
