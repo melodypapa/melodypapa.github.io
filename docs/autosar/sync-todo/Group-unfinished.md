@@ -20,26 +20,36 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 
 ## Queue
 
-- [ ] tps_timing_extensions (AUTOSAR_CP_TPS_TimingExtensions · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [x] tps_timing_extensions (AUTOSAR_CP_TPS_TimingExtensions · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Timing Extensions（时序扩展）; target `cp/methodology_templates/tps_timing_extensions/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type)
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TPS_TimingExtensions.md` — 8,752 lines, 384 figure refs, 113 item IDs
   - Note: related site content: none (the Foundation RS_TimingExtensions counterpart is queued in Group-foundation-rs-prs.md — cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - Note: Step 1 (2026-11-12): resumed from the preserved partial (参考文献 + §1–§3.2 prose); gap = 表3.7–3.12 caption-only placeholders + src §3.3–§3.4/ch.4/annexes A–G untranslated
+  - Note: figure forensics (2026-11-12): prior extraction had 10 logo-contaminated/missing figure files (3.5/3.28/3.41/3.46/3.53/3.54/3.55/3.56/4.19/4.22 — pairs 3.41/3.42 and 3.55/3.56 were cross-assigned) and never extracted the 9 annex figures (B.1–B.7, C.1) + 4 listing renders (C.2/C.3/C.6/C.9 rasterized listings); all 93 figures now extracted, content-verified, margin-padded
+  - Note: Step 2 (2026-11-12): full translation ch.1–4 + annexes A–G (6,546 lines); annex C listings mechanically reconstructed (C.13/C.15 hand-formatted; C.19 truncated at source, noted in place); annex D = 65 mentioned class tables, class notes translated, attribute Note cells verbatim English (tr_modeling_show_cases precedent, batch-gate decision pending); annex G change histories per TPS_APSD precedent (titles-only, Number column dropped); annex A.3 tracing omitted per ASWS precedent; item IDs dropped per 2026-11-03 Foundation decision (OPEN CP decision adopted as proposed default — flag at batch gate); [TPS_SYST_01003] inline in §4.3 and [RS_ECUC_00079] inside a verbatim annex-D attribute cell retained per the 2026-11-07 sanctioned-variant rule
+  - Note: Step 3 (2026-11-12): strict build exit 0 / 0 WARNING; 4 stale forward anchors fixed to build-derived slugs, all 26 intra-page links resolve; check_indexes OK (375 nav targets, 0 broken); check_heading_lang OK; hygiene 0 × ^# / \< / {DRAFT}; link census: 22 chapter refs (21 pre-linked during translation + 1 applied, idempotent re-run 0 lines), 18/18 citations linked, census UNRESOLVED: B.2.2 annex ref (letter-prefixed number not in the tool's numeric grammar — left prose, user decision); cross-article mentions report-only (PORT ×20, BswM ×1, ComM/Nm no article)
+  - Note: Step 5 replaced by the 2026-11-12 batch instruction: user asked for one-by-one commits WITHOUT per-article confirmation and a single combined confirmation gate at the end of the batch — deviations to verify at that gate: item-ID drop adopted for CP, annex-D attribute notes verbatim English, annex D table numbering renumbered sequentially, Response glossary term NOT added (SOME/IP meaning differs — second-definition needs user decision), annex B/C figure gaps recovered from prior partial
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [x] Step 5 — User confirmation gate (2026-11-13: user confirmed rows 11-12 — "confirmed and push to github with pr and issue")
+  - [x] Step 6 — TODO.md row + commit/PR (2026-11-13: commits 8f06413+56e94a8 on feature/cp-methodology-rows-11-17; PR #387 (Closes #386))
 
-- [ ] tps_ecu_configuration (AUTOSAR_CP_TPS_ECUConfiguration · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
+- [x] tps_ecu_configuration (AUTOSAR_CP_TPS_ECUConfiguration · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: ECU Configuration（ECU 配置）; target `cp/methodology_templates/tps_ecu_configuration/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type)
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TPS_ECUConfiguration.md` — 9,579 lines, 408 figure refs, 296 item IDs
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
-  - [ ] Step 6 — TODO.md row + commit/PR
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - Note: Step 1-4+6 (2026-11-13): source confirmed 9,579 ln; 72 content figures extracted via content-chrome-aware mapper (2 logo-contaminated picks corrected: 2.2/4.3), annex B/C figures (B.1-B.6, C.1) recovered separately; 55 listings regenerated deterministically from source (per-example region scan, prose/table dropped, XML reflowed); item IDs of config-table SWS-Item column dropped per ID-drop decision (sanctioned inline refs like [TPS_SYST_01003] retained); example-2.38 listing in markdown repeats 2.35 (converter defect) — corrected against PDF/prose semantics with in-place note
+  - Note: Step 3 evidence (2026-11-13): strict build exit 0 / 0 WARNING; 0 broken anchors (12 stale forward anchors fixed to build-derived slugs); check_indexes OK (376 nav targets, 0 broken); check_heading_lang OK after 3.4.1 gloss (Handle IDs = non-identifier noun); hygiene 0 × ^# / \< / {DRAFT}; link census: 46 chapter refs resolved (1 UNRESOLVED: 例2.34-vs-2.32 cross-ref is a source typo, left prose), 53/62 citations linked after apply (idempotent), 9 unlinked = figure-caption [n] report-only; cross-article mentions report-only (CanIf ×27 no article, Mcu ×11 no article, Dem/SoAd/EcuM/BswM/NvM/Dcm/Port SITE candidates)
+  - Note: 2026-11-13 mid-run defect recovery: incremental fence repairs corrupted code-fence pairing in ch.2-4; article rebuilt deterministically (prose skeleton extracted intact + 55 listings regenerated from source with prose/table stripping + references registry restored); full fence audit clean (0 CJK-in-fence, 0 prose-leak, 0 empty, 0 bare-XML)
+  - Note: Step 5 = batch gate at end of rows 11-17 per user instruction 2026-11-12 (this commit ships without per-article user confirmation)
+  - [x] Step 5 — User confirmation gate (2026-11-13: user confirmed rows 11-12 — "confirmed and push to github with pr and issue")
+
+  - [x] Step 6 — TODO.md row + commit/PR (2026-11-13: commit 26b3f37 on feature/cp-methodology-rows-11-17; PR #387 (Closes #386))
 
 - [ ] basic_software_module_description_template (AUTOSAR_CP_TPS_BSWModuleDescriptionTemplate · MethodologyAndTemplates · R23-11 markdown · 🔶 existing article · 📖 skeleton-exempt)
   - Note: BSW Module Description Template（基础软件模块描述模板）; target = the existing `cp/methodology_templates/basic_software_module_description_template/` (row name = the actual article dir so the index resolves it; a type-prefixed slug is NOT adopted — no rename, no redirect churn); template specification (TPS) — meta-model class tables, constraints and ARXML examples
@@ -93,7 +103,7 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - [ ] Step 5 — User confirmation gate
   - [ ] Step 6 — TODO.md row + commit/PR
 
-> Delivery: rows 1–10 (rs_ecu_resource_template … tr_modeling_show_cases) done 2026-11-10/11 and merged via PR #366 (issue #365, commits 79587d7…d1f2094) — condensed records in [Group-finished.md](Group-finished.md). Resume = row 11 (tps_timing_extensions).
+> Delivery: rows 1–10 (rs_ecu_resource_template … tr_modeling_show_cases) done 2026-11-10/11 and merged via PR #366 (issue #365, commits 79587d7…d1f2094); rows 11–12 (tps_timing_extensions, tps_ecu_configuration) done 2026-11-12/13, pushed as PR #387 (issue #386, commits 8f06413…01fd0d7) — condensed records in [Group-finished.md](Group-finished.md). Resume = row 13 (basic_software_module_description_template).
 
 ---
 

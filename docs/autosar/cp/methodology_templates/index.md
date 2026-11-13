@@ -17,6 +17,8 @@ title: "方法论与模板（Methodology and Templates）"
 * [Franca Integration（Franca 集成）](tr_franca_integration/index.md)
 * [General Blueprints Supplement（通用蓝图补充）](tr_general_blueprints_supplement/index.md)
 * [Modeling Show Cases Report（建模展示案例报告）](tr_modeling_show_cases/index.md)
+* [Timing Extensions（时序扩展）](tps_timing_extensions/index.md)
+* [ECU Configuration（ECU 配置）](tps_ecu_configuration/index.md)
 
 ## 相关内容
 

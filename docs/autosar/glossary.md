@@ -2376,6 +2376,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 >
 > 来源：[AUTOSAR Synchronized Time-Base Manager（同步时基管理器）](cp/globaltime/stbm/index.md)（AUTOSAR_CP_SWS_SynchronizedTimeBaseManager）
 {: .glossary-source}
+**Dispatcher**
+> 目标系统中发生的、用于激活一组可执行实体执行的系统事件的抽象；软件集群的可运行实体所需的执行上下文。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
 
 **Displacement**
 > 用需要存储的更重要的事件内存条目替换最不重要的条目。
@@ -2869,6 +2875,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 >
 > 来源：[TR Glossary（AUTOSAR 术语表）](foundation/general/tr_glossary/index.md)（AUTOSAR_FO_TR_Glossary）
 {: .glossary-source}
+**EOC**
+> 执行顺序约束（**Execution Order Constraint**）——规定若干可执行实体执行顺序的时序约束。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
 
 **EPB**
 > 电子驻车制动（**Electronic Parking Brake**）
@@ -2987,7 +2999,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Event Chain**
 > 事件链——具有功能依赖关系的两个可观测事件（激励 **Stimulus** 与响应 **Response**）之间的时间关联，用作附加时序约束的主体。
 >
-> 来源：[Requirements on Timing Extensions（时序扩展需求）](foundation/methodology_templates/rs_timing_extensions/index.md)（AUTOSAR_FO_RS_TimingExtensions）
+> 来源：[Requirements on Timing Extensions（时序扩展需求）](foundation/methodology_templates/rs_timing_extensions/index.md)（AUTOSAR_FO_RS_TimingExtensions）、[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
 {: .glossary-source}
 
 **Event combination**
@@ -4808,7 +4820,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **Jitter**
 > 最长延迟和最短延迟之间的差异（例如，最坏情况执行时间 - 最佳情况执行时间）。
 >
-> 来源：[AUTOSAR LinIf (LIN Interface)](cp/communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）
+> 来源：[AUTOSAR LinIf (LIN Interface)](cp/communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）、[AUTOSAR LinSM（LIN 状态管理器）](cp/communication/linsm/index.md)（AUTOSAR_CP_SWS_LINStateManager）、[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
 {: .glossary-source}
 
 **JLEF**
@@ -4958,6 +4970,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 >
 > 来源：[AUTOSAR COM（COM模块）](cp/communication/com/index.md)（AUTOSAR_CP_SWS_COM）
 {: .glossary-source}
+**Latency**
+> 时序事件链的延迟描述激励发生与相应响应发生之间的持续时间。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
 
 **LB**
 > 近光功能（德语「Abblendlicht」）（**Low Beam**）
@@ -4986,8 +5004,14 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **LET**
 > 逻辑执行时间——通过抽象物理执行来确保稳定软件行为的概念（**Logical Execution Time**）
 >
-> 来源：[Software Cluster Design and Integration Guideline for Classic Platform（经典平台软件集群设计与集成指南）](cp/system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline）
+> 来源：[Software Cluster Design and Integration Guideline for Classic Platform（经典平台软件集群设计与集成指南）](cp/system_services/sw_cluster_design_and_integration/index.md)（AUTOSAR_CP_EXP_SwClusterDesignAndIntegrationGuideline）、[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
 {: .glossary-source}
+**LET Zone**
+> **SL-LET** 中按层次组织的时区，其时基（**LET Zone Clock**）可具有有界的同步精度。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
 
 **Life Cycle**
 > 模型元素在其生存期内的发展/演化阶段历程。
@@ -5323,6 +5347,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 >
 > 来源：[AUTOSAR LinIf (LIN Interface)](cp/communication/lin_interface/index.md)（AUTOSAR_CP_SWS_LINInterface）
 {: .glossary-source}
+**Maximum interarrival time**
+> 描述两次连续事件发生之间的最大时间区间。在更一般的情形下，该属性是两次、三次、四次……事件发生之间最大延迟的数组。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
 
 **MCAL**
 > 微机抽象层（**Microcomputer Abstraction Layer**）
@@ -5491,6 +5521,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 >
 > 来源：[AUTOSAR BSW General（基础软件模块通用规范）](cp/general/bsw_general/index.md)（SWS_BSWGeneral）
 {: .glossary-source}
+**Minimum interarrival time**
+> 描述两次连续事件发生之间的最小时间区间。在更一般的情形下，该属性是两次、三次、四次……事件发生之间最小延迟的数组。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
 
 **MISO**
 > Master Input Slave Output（主入从出）。
@@ -6611,6 +6647,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 >
 > 来源：[Specification of Health Monitoring（健康监控规范）](foundation/health_monitoring/asws_health_monitoring/index.md)（AUTOSAR_FO_ASWS_HealthMonitoring）
 {: .glossary-source}
+**Period**
+> 描述两次连续事件发生之间的预期时间区间，忽略变化（抖动）。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
 
 **periodic transmission rate**
 > 周期数据标识符传输的两次调用之间的时间间隔；快速、中速和慢速周期传输分别配置速率，且配置值始终是 **Dcm** 主任务时间的整数倍。
@@ -8195,7 +8237,7 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 **SL-LET**
 > 系统级逻辑执行时间（**System Level Logical Execution Time**）——跨平台描述时间确定性数据流的 **LET** 扩展，指向被交换的数据类型。
 >
-> 来源：[Requirements on Timing Extensions（时序扩展需求）](foundation/methodology_templates/rs_timing_extensions/index.md)（AUTOSAR_FO_RS_TimingExtensions）
+> 来源：[Requirements on Timing Extensions（时序扩展需求）](foundation/methodology_templates/rs_timing_extensions/index.md)（AUTOSAR_FO_RS_TimingExtensions）、[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
 {: .glossary-source}
 
 **Slave Switch**
@@ -8606,6 +8648,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 >
 > 来源：[AUTOSAR XCP（通用测量与校准协议）](cp/communication/xcp/index.md)（SWS_XCP）
 {: .glossary-source}
+**Stimulus**
+> 事件链的起点。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
 
 **STmin**
 > 发送方在两次CF传输之间需等待的最短时间（见ISO 15765-2 [1]）
@@ -8757,6 +8805,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 >
 > 来源：[AUTOSAR Time Synchronization over CAN（CAN 时间同步）](cp/globaltime/can_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverCAN）、[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
+**Synchronization**
+> 同步关注不同时序事件的发生。时序事件的同步意味着它们应在某个容差区间内同时发生。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
 
 **Synchronization Points**
 > 用于同步在同一 LET 区间内执行的不同任务的 EE 的执行。同步点（**Synchronization Point**）实现属于不同 EEC 的 EE 的执行顺序。
@@ -8925,6 +8979,12 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 >
 > 来源：[Explanation of Application Interfaces of the Chassis Domain（底盘域应用接口说明）](cp/application_interfaces/chassis/index.md)（AUTOSAR_CP_EXP_AIChassis）
 {: .glossary-source}
+**TD**
+> 时序描述（**Timing Description**）。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
 
 **Technical Signal**
 > 技术信号（**Technical Signal**）是与 AUTOSAR 系统耦合的外部事件的物理值。技术信号以 SI 单位表示（例如压力以 Pa 表示）。
@@ -9071,12 +9131,84 @@ title: "AUTOSAR 术语表（缩略语与缩写）"
 >
 > 来源：[AUTOSAR Time Synchronization over FlexRay（FlexRay 时间同步）](cp/globaltime/fr_tsyn/index.md)（AUTOSAR_CP_SWS_TimeSyncOverFlexRay）
 {: .glossary-source}
+**Timing analysis**
+> 时序分析是确定系统时序行为的一种方法。这包括对与时序相关的系统行为的考虑，例如任务抢占、中断处理、资源阻塞等。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
+**Timing constraint**
+> 时序约束可以有两种不同的解释：一方面定义系统时序行为的一种限制（例如某个事件序列的最小/最大延迟界限），此时它是系统应满足的需求；另一方面定义对系统时序行为的一种保证，此时系统开发者保证系统在时序方面具有某种行为。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
+**Timing description**
+> 系统、子系统或软件组件的时序描述由事件和事件链组成。前者描述可观察的事件，后者描述它们的因果关系。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
+**Timing event**
+> 时序事件是 **AUTOSAR** 规范中对可以在运行时观察到的特定系统行为的抽象表示。时序事件用于定义时序约束的作用范围。依据具体的作用范围、对系统的视图和抽象层级，定义了不同类型的事件。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
+**Timing event occurrence**
+> 当可以观察到由时序事件表示的特定系统行为时，称该时序事件「发生」。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
+**Timing guarantee**
+> 参见 Timing constraint（时序约束）——此时序约束定义对系统时序行为的一种保证而非限制。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
+**Timing information**
+> 时序属性与时序约束的上位概念。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
 
 **Timing Measurement**
 > 时序测量（**Timing Measurement**）指捕获时序信息：通过插桩（例如经由 Pre-/PostTaskHooks 或其他钩子或调出）或通过专用的硬件支持（例如硬件性能计数器）；不停止执行。
 >
 > 来源：[AUTOSAR ARTI（运行时接口）](cp/sw_arch/arti_sws/index.md)（AUTOSAR_CP_SWS_ARTI）
 {: .glossary-source}
+**Timing path**
+> 时序路径定义系统的一系列通信或计算活动，其时序行为应被检验。时序路径可以由事件链表达。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
+**Timing property**
+> 时序属性定义系统内与时序相关方面的状态或取值。因此，属性不代表对系统的一种约束，而是系统的某种收集到的（例如测量、估计或确定的）或定义的属性。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
+**Timing requirement**
+> 时序需求定义为确保系统正确运行而应满足的时序限制。时序需求可以通过使用时序约束来表达。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
+**Timing validation**
+> 时序验证将时序分析的结果与时序约束所定义的预期行为进行比较。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
+**Timing View**
+> TIMEX 中按特定目的组织的时序信息（时序描述与时序约束）的集合，对应一个 **AUTOSAR** 平台视图（**VFB**、**SW-C**、系统、**BSW**、**ECU**）。
+>
+> 来源：[Timing Extensions（时序扩展）](cp/methodology_templates/tps_timing_extensions/index.md)（AUTOSAR_CP_TPS_TimingExtensions）
+{: .glossary-source}
+
 **TLM**
 > 交通灯操控（**Traffic Light Maneuver**）。
 >
