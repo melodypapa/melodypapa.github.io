@@ -6005,3 +6005,352 @@ if ConditionPassed() then
 ```
 
 **异常**：UsageFault、MemManage、BusFault。
+
+### 7.100. PSSBB：物理推测旁路屏障
+
+物理推测旁路屏障（Physical Speculative Bypass Barrier）是一种存储器屏障，它阻止推测性加载绕过对同一物理地址的更早存储。物理推测旁路屏障的语义是：
+
+* 当对某位置的加载在程序顺序上出现在 `PSSBB` 之后时，该加载不会推测性地读取该位置一致性顺序中早于满足下列全部条件的最新存储所生成的条目的条目：
+  * 该存储与加载访问同一位置。
+  * 该存储在程序顺序上出现在 `PSSBB` 之前。
+* 当对某位置的加载在程序顺序上出现在 `PSSBB` 之前时，该加载不会推测性地从任何满足下列全部条件的存储读取数据：
+  * 该存储与加载访问同一位置。
+  * 该存储在程序顺序上出现在 `PSSBB` 之后。
+
+**编码专用伪代码**
+
+```arm
+if InITBlock() then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`PSSBB{<q>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | 1 | 0 | 1 | 1 | (1) | (1) | (1) | (1) |
+| [31:16] | 1 | 0 | (0) | 0 | (1) | (1) | (1) | (1) | 0 | 1 | 0 | 0 | 0 | 1 | 0 | 0 |
+
+**汇编语法**
+
+```arm
+PSSBB{<q>}
+```
+
+where：
+
+* `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    SpecualtiveSynchronizationBarrierToPA();
+```
+
+**异常**：无。
+
+### 7.101. PUSH：压入多个寄存器
+
+压入多个寄存器（Push Multiple Registers）把通用寄存器 R0-R12 的一个子集（也可能是全部）以及 LR 存储到堆栈。
+
+**编码专用伪代码**
+
+```arm
+registers = '0':M:'000000':register_list;  UnalignedAllowed = FALSE;
+if BitCount(registers) < 1 then UNPREDICTABLE;
+
+registers = '0':M:'0':register_list;  UnalignedAllowed = FALSE;
+if BitCount(registers) < 2 then UNPREDICTABLE;
+
+t = UInt(Rt);  registers = Zeros(16);  registers<t> = '1';  UnalignedAllowed = TRUE;
+if t IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`PUSH<c> <registers>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 0 | 1 | 1 | 0 | 1 | 0 | M | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list |
+
+**编码 T2**（Armv7-M）：`PUSH<c>.W <registers>`（`<registers>` 含多个寄存器）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 1 | 1 | 0 | 1 |
+| [31:16] | (0) | M | (0) | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list |
+
+**编码 T3**（Armv7-M）：`PUSH<c>.W <registers>`（`<registers>` 只含一个寄存器 `<Rt>`）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 1 |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |
+
+**汇编语法**
+
+```arm
+PUSH<c><q>
+  <registers>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<registers>`：由一个或多个寄存器组成的列表，寄存器之间用逗号分隔并用 `{` 与 `}` 包围。它指定要存储的寄存器集合。寄存器按顺序存储：编号最低的寄存器存到最低的存储器地址，直到编号最高的寄存器存到最高的存储器地址。
+
+  如果列表包含不止一个寄存器，该指令汇编为编码 T1 或 T2。如果列表恰好包含一个寄存器，该指令汇编为编码 T1 或 T3。
+
+  SP 与 PC 不能在列表中。
+
+**等效 STM 语法**
+
+```arm
+STMDB<c><q>
+  SP!, <registers>
+```
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    address = SP - 4*BitCount(registers);
+    for i = 0 to 14
+        if registers<i> == '1' then
+            MemA[address,4] = R[i];
+            address = address + 4;
+    SP = SP - 4*BitCount(registers);
+```
+
+**异常**：UsageFault、MemManage、BusFault。
+
+### 7.102. QADD：饱和加
+
+饱和加（Saturating Add）把两个寄存器值相加，把结果饱和到 32 位有符号整数范围 –2^31 ≤ x ≤ 2^31 – 1，并把结果写入目的寄存器。如果发生饱和，它置位 APSR 中的 Q 标志。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`QADD<c> <Rd>,<Rm>,<Rn>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 1 | 0 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+QADD{<c>}{<q>}
+  {<Rd>,} <Rm>, <Rn>
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rm>`：第一个操作数寄存器。
+* `<Rn>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    (R[d], sat) = SignedSatQ(SInt(R[m]) + SInt(R[n]), 32);
+    if sat then
+        APSR.Q = '1';
+```
+
+**异常**：无。
+
+### 7.103. QADD16：16 位饱和加
+
+16 位饱和加（Saturating Add 16）执行两个 16 位整数加法，把结果饱和到 16 位有符号整数范围 –2^15 ≤ x ≤ 2^15 – 1，并把结果写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`QADD16<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 0 | 1 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+QADD16{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    sum1 = SInt(R[n]<15:0>) + SInt(R[m]<15:0>);
+    sum2 = SInt(R[n]<31:16>) + SInt(R[m]<31:16>);
+    R[d]<15:0>  = SignedSat(sum1, 16);
+    R[d]<31:16> = SignedSat(sum2, 16);
+```
+
+**异常**：无。
+
+### 7.104. QADD8：8 位饱和加
+
+8 位饱和加（Saturating Add 8）执行四个 8 位整数加法，把结果饱和到 8 位有符号整数范围 –2^7 ≤ x ≤ 2^7 – 1，并把结果写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`QADD8<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 0 | 1 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+QADD8{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    sum1 = SInt(R[n]<7:0>) + SInt(R[m]<7:0>);
+    sum2 = SInt(R[n]<15:8>) + SInt(R[m]<15:8>);
+    sum3 = SInt(R[n]<23:16>) + SInt(R[m]<23:16>);
+    sum4 = SInt(R[n]<31:24>) + SInt(R[m]<31:24>);
+    R[d]<7:0>   = SignedSat(sum1, 8);
+    R[d]<15:8>  = SignedSat(sum2, 8);
+    R[d]<23:16> = SignedSat(sum3, 8);
+    R[d]<31:24> = SignedSat(sum4, 8);
+```
+
+**异常**：无。
+
+### 7.105. QASX：交换操作数的饱和加与减
+
+交换操作数的饱和加与减（Saturating Add and Subtract with Exchange）交换第二个操作数的两个半字，执行一个 16 位整数加法与一个 16 位减法，把结果饱和到 16 位有符号整数范围 –2^15 ≤ x ≤ 2^15 – 1，并把结果写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`QASX<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 0 | 1 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+QASX{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+pre-UAL 语法 `QADDSUBX<c>` 等价于 `QASX<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    diff = SInt(R[n]<15:0>) - SInt(R[m]<31:16>);
+    sum  = SInt(R[n]<31:16>) + SInt(R[m]<15:0>);
+    R[d]<15:0>  = SignedSat(diff, 16);
+    R[d]<31:16> = SignedSat(sum, 16);
+```
+
+**异常**：无。
+
+### 7.106. QDADD：饱和双倍加
+
+饱和双倍加（Saturating Double and Add）把一个寄存器的双倍值加到另一个寄存器值上，并把结果写入目的寄存器。双倍运算与加法运算的结果都饱和到 32 位有符号整数范围 –2^31 ≤ x ≤ 2^31 – 1。如果任一运算发生饱和，它置位 APSR 中的 Q 标志。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`QDADD<c> <Rd>,<Rm>,<Rn>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 1 | 0 | 0 | 1 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+QDADD{<c>}{<q>}
+  {<Rd>,} <Rm>, <Rn>
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rm>`：第一个操作数寄存器。
+* `<Rn>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    (doubled, sat1) = SignedSatQ(2 * SInt(R[n]), 32);
+    (R[d], sat2)  = SignedSatQ(SInt(R[m]) + SInt(doubled), 32);
+    if sat1 || sat2 then
+        APSR.Q = '1';
+```
+
+**异常**：无。
