@@ -9834,3 +9834,371 @@ if ConditionPassed() then
 ```
 
 **异常**：UsageFault、MemManage、BusFault。
+
+### 7.173. STRT：非特权存储寄存器
+
+非特权存储寄存器（Store Register Unprivileged）由基址寄存器值与立即数偏移计算出地址，把一个字从寄存器存储到存储器。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。特权软件使用 `STRT` 指令时，存储器访问受到限制，如同该软件是非特权的一样。另见第 B3-637 页的「MPU_CTRL 设置对非特权指令的影响」。
+
+**编码专用伪代码**
+
+```arm
+if Rn == '1111' then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);  postindex = FALSE;  add = TRUE;
+register_form = FALSE;  imm32 = ZeroExtend(imm8, 32);
+if t IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`STRT<c> <Rt>,[<Rn>,#<imm8>]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | 1 | 1 | 0 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+STRT<c><q>
+  <Rt>, [<Rn> {, #<imm>}]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：源寄存器。
+* `<Rn>`：基址寄存器。该寄存器允许是 SP。
+* `<imm>`：加到 `<Rn>` 值上以形成地址的立即数偏移。允许范围为 0-255。`<imm>` 可以省略，表示偏移 0。
+
+pre-UAL 语法 `STR<c>T` 等价于 `STRT<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    address = R[n] + imm32;
+    data = R[t];
+    MemU_unpriv[address,4] = data;
+```
+
+**异常**：UsageFault、MemManage、BusFault。
+
+### 7.174. SUB (immediate)：立即数减法
+
+立即数减法（Subtract (immediate)）把一个立即数从一个寄存器值中减去，并把结果写入目的寄存器；它可以选择根据结果更新条件标志。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  setflags = !InITBlock();  imm32 = ZeroExtend(imm3, 32);
+d = UInt(Rdn);  n = UInt(Rdn);  setflags = !InITBlock();  imm32 = ZeroExtend(imm8, 32);
+if Rd == '1111' && S == '1' then SEE CMP (immediate);
+if Rn == '1101' then SEE SUB (SP minus immediate);
+d = UInt(Rd);  n = UInt(Rn);  setflags = (S == '1');  imm32 = ThumbExpandImm(i:imm3:imm8);
+if d == 13 || (d == 15 && S == '0') || n == 15 then UNPREDICTABLE;
+if Rn == '1111' then SEE ADR;
+if Rn == '1101' then SEE SUB (SP minus immediate);
+d = UInt(Rd);  n = UInt(Rn);  setflags = FALSE;  imm32 = ZeroExtend(i:imm3:imm8, 32);
+if d IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`SUBS <Rd>,<Rn>,#<imm3>`（IT 块外）、`SUB<c> <Rd>,<Rn>,#<imm3>`（IT 块内）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 0 | 0 | 1 | 1 | 1 | 1 | imm3 | imm3 | imm3 | Rn | Rn | Rn | Rd | Rd | Rd |
+
+**编码 T2**（Thumb 指令集的所有版本）：`SUBS <Rdn>,#<imm8>`（IT 块外）、`SUB<c> <Rdn>,#<imm8>`（IT 块内）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 0 | 1 | 1 | 1 | Rdn | Rdn | Rdn | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**编码 T3**（Armv7-M）：`SUB{S}<c>.W <Rd>,<Rn>,#<const>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | i | 0 | 1 | 1 | 0 | 1 | S | Rn | Rn | Rn | Rn |
+| [31:16] | 0 | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**编码 T4**（Armv7-M）：`SUBW<c> <Rd>,<Rn>,#<imm12>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | i | 1 | 0 | 1 | 0 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 0 | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+SUB{S}<c><q>
+  {<Rd>,} <Rn>, #<const>       // 允许所有编码
+SUBW<c><q>
+  {<Rd>,} <Rn>, #<const>       // 只允许编码 T4
+```
+
+where：
+
+* `S`：如果出现，表示指令更新标志；否则不更新标志。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。如果省略 `<Rd>`，该寄存器与 `<Rn>` 相同。
+* `<Rn>`：指定包含第一个操作数的寄存器。如果为 `<Rn>` 指定 SP，参见第 A7-406 页的「SUB (SP minus immediate)」；如果为 `<Rn>` 指定 PC，参见第 A7-198 页的「ADR」。
+* `<const>`：指定要从由 `<Rn>` 得到的值中减去的立即数。允许的取值范围为：编码 T1 为 0-7，编码 T2 为 0-255，编码 T4 为 0-4095；编码 T3 的允许取值范围参见第 A5-139 页的「Thumb 指令中的修改立即数常量」。
+
+当同一长度的多种编码可用时，编码 T3 优先于编码 T4（如需编码 T4，使用 `SUBW` 语法）。如果指定了 `<Rd>`，编码 T1 优先于编码 T2；如果省略 `<Rd>`，编码 T2 优先于编码 T1。
+
+pre-UAL 语法 `SUB<c>S` 等价于 `SUBS<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    (result, carry, overflow) = AddWithCarry(R[n], NOT(imm32), '1');
+    R[d] = result;
+    if setflags then
+        APSR.N = result<31>;
+        APSR.Z = IsZeroBit(result);
+        APSR.C = carry;
+        APSR.V = overflow;
+```
+
+**异常**：无。
+
+### 7.175. SUB (register)：寄存器减法
+
+寄存器减法（Subtract (register)）从一个寄存器值中减去一个可选移位的寄存器值，并把结果写入目的寄存器；它可以选择根据结果更新条件标志。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  setflags = !InITBlock();
+(shift_t, shift_n) = (SRType_LSL, 0);
+if Rd == '1111' && S == '1' then SEE CMP (register);
+if Rn == '1101' then SEE SUB (SP minus register);
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  setflags = (S == '1');
+(shift_t, shift_n) = DecodeImmShift(type, imm3:imm2);
+if d == 13 || (d == 15 && S == '0') || n == 15 || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`SUBS <Rd>,<Rn>,<Rm>`（IT 块外）、`SUB<c> <Rd>,<Rn>,<Rm>`（IT 块内）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 0 | 0 | 1 | 1 | 0 | 1 | Rm | Rm | Rm | Rn | Rn | Rn | Rd | Rd | Rd |
+
+**编码 T2**（Armv7-M）：`SUB{S}<c>.W <Rd>,<Rn>,<Rm>{,<shift>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 1 | 1 | 0 | S | Rn | Rn | Rn | Rn |
+| [31:16] | (0) | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm2 | imm2 | type | type | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SUB{S}<c><q>
+  {<Rd>,} <Rn>, <Rm> {,<shift>}
+```
+
+where：
+
+* `S`：如果出现，表示指令更新标志；否则不更新标志。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。如果省略 `<Rd>`，该寄存器与 `<Rn>` 相同。
+* `<Rn>`：指定包含第一个操作数的寄存器。如果为 `<Rn>` 指定 SP，参见第 A7-408 页的「SUB (SP minus register)」。
+* `<Rm>`：指定可选移位并用作第二个操作数的寄存器。
+* `<shift>`：指定施加于从 `<Rm>` 读取的值的移位。如果省略 `<shift>`，不施加移位，且两种编码都允许；如果指定 `<shift>`，只允许编码 T2。可能的移位及其编码方式参见第 A7-182 页的「施加于寄存器的移位」。
+
+pre-UAL 语法 `SUB<c>S` 等价于 `SUBS<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    shifted = Shift(R[m], shift_t, shift_n, APSR.C);
+    (result, carry, overflow) = AddWithCarry(R[n], NOT(shifted), '1');
+    R[d] = result;
+    if setflags then
+        APSR.N = result<31>;
+        APSR.Z = IsZeroBit(result);
+        APSR.C = carry;
+        APSR.V = overflow;
+```
+
+**异常**：无。
+
+### 7.176. SUB (SP minus immediate)：SP 减立即数
+
+SP 减立即数（Subtract (SP minus immediate)）从 SP 值中减去一个立即数，并把结果写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = 13;  setflags = FALSE;  imm32 = ZeroExtend(imm7:'00', 32);
+if Rd == '1111' && S == '1' then SEE CMP (immediate);
+d = UInt(Rd);  setflags = (S == '1');  imm32 = ThumbExpandImm(i:imm3:imm8);
+if d == 15 && S == '0' then UNPREDICTABLE;
+d = UInt(Rd);  setflags = FALSE;  imm32 = ZeroExtend(i:imm3:imm8, 32);
+if d == 15 then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`SUB<c> SP,SP,#<imm7>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 1 | imm7 | imm7 | imm7 | imm7 | imm7 | imm7 | imm7 |
+
+**编码 T2**（Armv7-M）：`SUB{S}<c>.W <Rd>,SP,#<const>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | i | 0 | 1 | 1 | 0 | 1 | S | 1 | 1 | 0 | 1 |
+| [31:16] | 0 | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**编码 T3**（Armv7-M）：`SUBW<c> <Rd>,SP,#<imm12>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | i | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 1 | 0 | 1 |
+| [31:16] | 0 | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+SUB{S}<c><q>
+  {<Rd>,} SP, #<const>        // 允许所有编码
+SUBW<c><q>
+  {<Rd>,} SP, #<const>        // 只允许编码 T3
+```
+
+where：
+
+* `S`：如果出现，表示指令更新标志；否则不更新标志。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。如果省略 `<Rd>`，该寄存器为 SP。
+* `<const>`：指定要从 SP 值中减去的立即数。允许的取值为：编码 T1 为 0-508 范围内 4 的倍数，编码 T3 为 0-4095 范围内的任意值；编码 T2 的允许取值范围参见第 A5-139 页的「Thumb 指令中的修改立即数常量」。
+
+当两个 32 位编码都可用时，编码 T2 优先于编码 T3（如需编码 T3，使用 `SUBW` 语法）。
+
+pre-UAL 语法 `SUB<c>S` 等价于 `SUBS<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    (result, carry, overflow) = AddWithCarry(SP, NOT(imm32), '1');
+    R[d] = result;
+    if setflags then
+        APSR.N = result<31>;
+        APSR.Z = IsZeroBit(result);
+        APSR.C = carry;
+        APSR.V = overflow;
+```
+
+**异常**：无。
+
+### 7.177. SUB (SP minus register)：SP 减寄存器
+
+SP 减寄存器（Subtract (SP minus register)）从 SP 值中减去一个可选移位的寄存器值，并把结果写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+if Rd == '1111' && S == '1' then SEE CMP (register);
+d = UInt(Rd);  m = UInt(Rm);  setflags = (S == '1');
+(shift_t, shift_n) = DecodeImmShift(type, imm3:imm2);
+if d == 13 && (shift_t != SRType_LSL || shift_n > 3) then UNPREDICTABLE;
+if (d == 15 && S == '0') || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`SUB{S}<c> <Rd>,SP,<Rm>{,<shift>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | S | 1 | 1 | 0 | 1 |
+| [31:16] | (0) | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm2 | imm2 | type | type | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SUB{S}<c><q>
+  {<Rd>,} SP, <Rm> {,<shift>}
+```
+
+where：
+
+* `S`：如果出现，表示指令更新标志；否则不更新标志。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。如果省略 `<Rd>`，该寄存器为 SP。
+* `<Rm>`：指定可选移位并用作第二个操作数的寄存器。
+* `<shift>`：指定施加于从 `<Rm>` 读取的值的移位。如果省略 `<shift>`，不施加移位。可能的移位及其编码方式参见第 A7-182 页的「施加于寄存器的移位」。
+
+如果 `<Rd>` 为 SP 或被省略，`<shift>` 只允许为 `LSL #0`、`LSL #1`、`LSL #2` 或 `LSL #3`。
+
+pre-UAL 语法 `SUB<c>S` 等价于 `SUBS<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    shifted = Shift(R[m], shift_t, shift_n, APSR.C);
+    (result, carry, overflow) = AddWithCarry(SP, NOT(shifted), '1');
+    R[d] = result;
+    if setflags then
+        APSR.N = result<31>;
+        APSR.Z = IsZeroBit(result);
+        APSR.C = carry;
+        APSR.V = overflow;
+```
+
+**异常**：无。
+
+### 7.178. SVC：管理员调用
+
+管理员调用（Supervisor Call）。`SVC` 指令生成对系统管理程序（supervisor）的调用。更多信息参见第 B1-523 页的「Armv7-M 异常模型」。
+
+可用它作为对操作系统的调用，以提供服务。
+
+**注意：** 在较早版本的 Arm 架构中，`SVC` 称为 `SWI`，即软件中断（Software Interrupt）。
+
+**编码专用伪代码**
+
+```arm
+imm32 = ZeroExtend(imm8, 32);
+// imm32 用于汇编/反汇编。某些系统中的 SVC 处理程序
+// 在软件中解释 imm8，例如用于确定所请求的服务。
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`SVC<c> #<imm8>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 0 | 1 | 1 | 1 | 1 | 1 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+SVC<c><q>
+  #<imm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<imm>`：8 位立即数常量。
+
+pre-UAL 语法 `SWI<c>` 等价于 `SVC<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    CallSupervisor();
+```
+
+**异常**：SVCall。
