@@ -11342,3 +11342,282 @@ if ConditionPassed() then
 ```
 
 **异常**：无。
+
+### 7.202. UMAAL：无符号乘法累加累加长
+
+无符号乘法累加累加长（Unsigned Multiply Accumulate Accumulate Long）把两个无符号 32 位值相乘产生一个 64 位值，再加上两个无符号 32 位值，并把 64 位结果写入两个寄存器。
+
+**编码专用伪代码**
+
+```arm
+dLo = UInt(RdLo);  dHi = UInt(RdHi);  n = UInt(Rn);  m = UInt(Rm);
+if dLo IN {13,15} || dHi IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+if dHi == dLo then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`UMAAL<c> <RdLo>,<RdHi>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 1 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | RdLo | RdLo | RdLo | RdLo | RdHi | RdHi | RdHi | RdHi | 0 | 1 | 1 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UMAAL<c><q>
+  <RdLo>, <RdHi>, <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<RdLo>`：提供待相加的一个 32 位值，并作为结果低 32 位的目的寄存器。
+* `<RdHi>`：提供待相加的另一个 32 位值，并作为结果高 32 位的目的寄存器。
+* `<Rn>`：包含第一个乘法操作数的寄存器。
+* `<Rm>`：包含第二个乘法操作数的寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    result = UInt(R[n]) * UInt(R[m]) + UInt(R[dHi]) + UInt(R[dLo]);
+    R[dHi] = result<63:32>;
+    R[dLo] = result<31:0>;
+```
+
+**异常**：无。
+
+### 7.203. UMLAL：无符号乘法累加长
+
+无符号乘法累加长（Unsigned Multiply Accumulate Long）把两个无符号 32 位值相乘产生一个 64 位值，并把该值与一个 64 位值累加。
+
+**编码专用伪代码**
+
+```arm
+dLo = UInt(RdLo);  dHi = UInt(RdHi);  n = UInt(Rn);  m = UInt(Rm);  setflags = FALSE;
+if dLo IN {13,15} || dHi IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+if dHi == dLo then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`UMLAL<c> <RdLo>,<RdHi>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 1 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | RdLo | RdLo | RdLo | RdLo | RdHi | RdHi | RdHi | RdHi | 0 | 0 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UMLAL<c><q>
+  <RdLo>, <RdHi>, <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<RdLo>`：提供累加值的低 32 位，并作为结果低 32 位的目的寄存器。
+* `<RdHi>`：提供累加值的高 32 位，并作为结果高 32 位的目的寄存器。
+* `<Rn>`：包含第一个操作数的寄存器。
+* `<Rm>`：包含第二个操作数的寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    result = UInt(R[n]) * UInt(R[m]) + UInt(R[dHi]:R[dLo]);
+    R[dHi] = result<63:32>;
+    R[dLo] = result<31:0>;
+```
+
+**异常**：无。
+
+### 7.204. UMULL：无符号乘法长
+
+无符号乘法长（Unsigned Multiply Long）把两个 32 位无符号值相乘，产生一个 64 位结果。
+
+**编码专用伪代码**
+
+```arm
+dLo = UInt(RdLo);  dHi = UInt(RdHi);  n = UInt(Rn);  m = UInt(Rm);  setflags = FALSE;
+if dLo IN {13,15} || dHi IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+if dHi == dLo then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`UMULL<c> <RdLo>,<RdHi>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | RdLo | RdLo | RdLo | RdLo | RdHi | RdHi | RdHi | RdHi | 0 | 0 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UMULL<c><q>
+  <RdLo>, <RdHi>, <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<RdLo>`：存放结果的低 32 位。
+* `<RdHi>`：存放结果的高 32 位。
+* `<Rn>`：包含第一个操作数的寄存器。
+* `<Rm>`：包含第二个操作数的寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    result = UInt(R[n]) * UInt(R[m]);
+    R[dHi] = result<63:32>;
+    R[dLo] = result<31:0>;
+```
+
+**异常**：无。
+
+### 7.205. UQADD16：无符号饱和 16 位加法
+
+无符号饱和 16 位加法（Unsigned Saturating Add 16）执行两个 16 位无符号整数加法，把结果饱和到 16 位无符号整数范围 0 ≤ x ≤ 2^16^ – 1，并把结果写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`UQADD16<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 1 | 0 | 1 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UQADD16<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    sum1 = UInt(R[n]<15:0>) + UInt(R[m]<15:0>);
+    sum2 = UInt(R[n]<31:16>) + UInt(R[m]<31:16>);
+    R[d]<15:0>  = UnsignedSat(sum1, 16);
+    R[d]<31:16> = UnsignedSat(sum2, 16);
+```
+
+**异常**：无。
+
+### 7.206. UQADD8：无符号饱和 8 位加法
+
+无符号饱和 8 位加法（Unsigned Saturating Add 8）执行四个 8 位无符号整数加法，把结果饱和到 8 位无符号整数范围 0 ≤ x ≤ 2^8^ – 1，并把结果写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`UQADD8<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 1 | 0 | 1 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UQADD8<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    sum1 = UInt(R[n]<7:0>) + UInt(R[m]<7:0>);
+    sum2 = UInt(R[n]<15:8>) + UInt(R[m]<15:8>);
+    sum3 = UInt(R[n]<23:16>) + UInt(R[m]<23:16>);
+    sum4 = UInt(R[n]<31:24>) + UInt(R[m]<31:24>);
+    R[d]<7:0>   = UnsignedSat(sum1, 8);
+    R[d]<15:8>  = UnsignedSat(sum2, 8);
+    R[d]<23:16> = UnsignedSat(sum3, 8);
+    R[d]<31:24> = UnsignedSat(sum4, 8);
+```
+
+**异常**：无。
+
+### 7.207. UQASX：无符号饱和带交换的加法与减法
+
+无符号饱和带交换的加法与减法（Unsigned Saturating Add and Subtract with Exchange）交换第二个操作数的两个半字，执行一个 16 位无符号整数加法和一个 16 位无符号整数减法，把结果饱和到 16 位无符号整数范围 0 ≤ x ≤ 2^16^ – 1，并把结果写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`UQASX<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 1 | 0 | 1 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UQASX<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+pre-UAL 语法 `UQADDSUBX<c>` 等价于 `UQASX<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    diff = UInt(R[n]<15:0>) - UInt(R[m]<31:16>);
+    sum  = UInt(R[n]<31:16>) + UInt(R[m]<15:0>);
+    R[d]<15:0>  = UnsignedSat(diff, 16);
+    R[d]<31:16> = UnsignedSat(sum, 16);
+```
+
+**异常**：无。
