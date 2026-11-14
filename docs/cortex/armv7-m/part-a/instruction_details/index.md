@@ -13290,3 +13290,174 @@ if ConditionPassed() then
 ```
 
 **异常**：未定义指令、UsageFault、MemManage、BusFault。
+
+### 7.237. VMAXNM、VMINNM：浮点最大数、浮点最小数
+
+`VMAXNM` 与 `VMINNM` 分别确定浮点最大数与浮点最小数。NaN 的处理由 IEEE754-2008 规定。
+
+**编码专用伪代码**
+
+```arm
+if InITBlock() then UNPREDICTABLE
+dp_operation = (sz == '1');  maximum = (op == '0');
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+n = if dp_operation then UInt(N:Vn) else UInt(Vn:N);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+**编码 T1**（FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VMAXNM.F32 <Sd>,<Sn>,<Sm>`、`VMAXNM.F64 <Dd>,<Dn>,<Dm>`（`op = 0`）、`VMINNM.F32 <Sd>,<Sn>,<Sm>`、`VMINNM.F64 <Dd>,<Dn>,<Dm>`（`op = 1`）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 1 | D | 0 | 0 | Vn | Vn | Vn | Vn |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | N | op | M | 0 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+V<op>NM<q>.F32
+  <Sd>, <Sn>, <Sm>             // 编码为 sz = 0
+V<op>NM<q>.F64
+  <Dd>, <Dn>, <Dm>             // 编码为 sz = 1
+```
+
+where：
+
+* `<op>`：运算类型，必须为以下之一：
+  * `MAXNM`：最大数（Maximum Number），编码为 `op = 0`。
+  * `MINNM`：最小数（Minimum Number），编码为 `op = 1`。
+* `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Dd>`、`<Dn>`、`<Dm>`：双字运算时的目的双精度寄存器与操作数双精度寄存器。
+* `<Sd>`、`<Sn>`、`<Sm>`：单字运算时的目的单精度寄存器与操作数单精度寄存器。
+
+**操作**
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+if dp_operation then
+    if maximum then
+        D[d] = FPMaxNum(D[n], D[m], TRUE);
+    else
+        D[d] = FPMinNum(D[n], D[m], TRUE);
+else
+    if maximum then
+        S[d] = FPMaxNum(S[n], S[m], TRUE);
+    else
+        S[d] = FPMinNum(S[n], S[m], TRUE);
+```
+
+**异常**：未定义指令。
+
+浮点异常：无效运算、不精确。
+
+### 7.238. VMLA、VMLS：浮点乘法累加、浮点乘法减
+
+浮点乘法累加（Floating-point Multiply Accumulate）把两个浮点寄存器相乘，并把结果累加到目的浮点寄存器中。
+
+浮点乘法减（Floating-point Multiply Subtract）把两个浮点寄存器相乘，从目的浮点寄存器中减去该乘积，并把结果放入目的浮点寄存器。
+
+**注意：** Arm 建议软件不要在向正无穷舍入与向负无穷舍入模式下使用 `VMLS` 指令，因为乘积与和的舍入可能以相反方向改变该指令的结果，从而使这些舍入模式失去意义。
+
+**编码专用伪代码**
+
+```arm
+dp_operation = (sz == '1');  add = (op == '0');
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+n = if dp_operation then UInt(N:Vn) else UInt(Vn:N);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+**编码 T1**（FPv4-SP、FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VMLA<c>.F32 <Sd>,<Sn>,<Sm>`（`op = 0`）、`VMLS<c>.F32 <Sd>,<Sn>,<Sm>`（`op = 1`）、`VMLA<c>.F64 <Dd>,<Dn>,<Dm>`（`op = 0`）、`VMLS<c>.F64 <Dd>,<Dn>,<Dm>`（`op = 1`）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 0 | D | 0 | 0 | Vn | Vn | Vn | Vn |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | N | op | M | 0 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VML<y><c><q>.F32
+  <Sd>, <Sn>, <Sm>             // 编码为 sz = 0
+VML<y><c><q>.F64
+  <Dd>, <Dn>, <Dm>             // 编码为 sz = 1
+```
+
+where：
+
+* `<y>`：以下之一：
+  * `A`：指定 `VMLA`，编码为 `op = 0`。
+  * `S`：指定 `VMLS`，编码为 `op = 1`。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Sd>`、`<Sn>`、`<Sm>`：目的单精度寄存器与操作数单精度寄存器。
+* `<Dd>`、`<Dn>`、`<Dm>`：目的双精度寄存器与操作数双精度寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    if dp_operation then
+        addend64 = if add then FPMul(D[n], D[m], TRUE) else FPNeg(FPMul(D[n], D[m], TRUE));
+        D[d] = FPAdd(D[d], addend64, TRUE);
+    else
+        addend32 = if add then FPMul(S[n], S[m], TRUE) else FPNeg(FPMul(S[n], S[m], TRUE));
+        S[d] = FPAdd(S[d], addend32, TRUE);
+```
+
+**异常**：未定义指令。
+
+浮点异常：输入非规格化、无效运算、溢出、下溢、不精确。
+
+### 7.239. VMOV (immediate)：立即数浮点移动
+
+立即数浮点移动（VMOV (immediate)）把一个立即数常量放入目的浮点寄存器。
+
+**编码专用伪代码**
+
+```arm
+dp_operation = (sz == '1');
+if dp_operation then
+    d = UInt(D:Vd);  imm64 = VFPExpandImm(imm4H:imm4L, 64);
+else
+    d = UInt(Vd:D);  imm32 = VFPExpandImm(imm4H:imm4L, 32);
+```
+
+**编码 T1**（FPv4-SP、FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VMOV<c>.F32 <Sd>,#<imm>`、`VMOV<c>.F64 <Dd>,#<imm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | D | 1 | 1 | imm4H | imm4H | imm4H | imm4H |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | (0) | 0 | (0) | 0 | imm4L | imm4L | imm4L | imm4L |
+
+**汇编语法**
+
+```arm
+VMOV<c><q>.F32
+  <Sd>, #<imm>                 // 编码为 sz = 0
+VMOV<c><q>.F64
+  <Dd>, #<imm>                 // 编码为 sz = 1
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Sd>`：单字运算时的目的寄存器。
+* `<Dd>`：双字运算时的目的寄存器。
+* `<imm>`：浮点常量。单精度运算中 `<imm>` 的编码参见第 A6-166 页的「浮点指令中修改立即数常量的操作」。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    if dp_operation then
+        D[d] = imm64;
+    else
+        S[d] = imm32;
+```
+
+**异常**：未定义指令。
