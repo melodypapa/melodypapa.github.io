@@ -12,9 +12,9 @@ Part A 描述本架构的应用程序级视图，共 7 章（A1–A7）。下列
 4. [Cortex-M7 指令集](../../m7-trm/instruction_set/index.md) — Chapter A4，已译，归在 Cortex-M7 TRM 专题。该章与 TRM 的实现章节合为一篇。
 5. [Thumb 指令集编码（Thumb Instruction Set Encoding）](thumb_instruction_set_encoding/index.md) — Chapter A5，已译。描述 Thumb 指令集的编码。
 6. [浮点指令集编码（Floating-point Instruction Set Encoding）](fp_instruction_set_encoding/index.md) — Chapter A6，已译。描述 Thumb 指令集的浮点编码扩展；可选的 **Armv7-M** 浮点架构扩展提供这些附加指令。
-7. [指令详情（Instruction Details）](instruction_details/index.md) — Chapter A7，进行中。按字母顺序给出每条 Thumb 指令的编码、汇编语法、操作伪代码与异常信息；A7.1–A7.6 与 A–ADR 段已译。
+7. [指令详情（Instruction Details）](instruction_details/index.md) — Chapter A7，已译。按字母顺序给出每条 Thumb 指令的编码、汇编语法、操作伪代码与异常信息；A7.1–A7.6 与全部 263 条指令（7.1–7.263）均已译出。
 
-已译 6 章（A1、A2、A3、A4、A5、A6），A7 正在逐条推进，进度见 `sync-todo/ARMv7-M.md` 队列。
+已译 7 章（A1、A2、A3、A4、A5、A6、A7）。
 
 ## 2. 相关内容
 
