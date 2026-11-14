@@ -14445,3 +14445,345 @@ if ConditionPassed() then
 **异常**：未定义指令。
 
 浮点异常：无效运算、不精确、输入非规格化。
+
+### 7.258. VSTM：浮点存储多个
+
+浮点存储多个（Floating-point Store Multiple）使用来自 Arm 核心寄存器的地址，把多个扩展寄存器存储到连续的存储器位置。
+
+**编码专用伪代码**
+
+```arm
+if P == '0' && U == '0' && W == '0' then SEE "Related encodings";
+if P == '1' && U == '0' && W == '1' && Rn == '1101' then SEE VPUSH;
+if P == '1' && W == '0' then SEE VSTR;
+if imm8<0> == '1' then SEE "FSTMX";
+if P == U && W == '1' then UNDEFINED;
+// 其余组合为 PUW = 010（IA 不带 !）、011（IA 带 !）、101（DB 带 !）
+single_regs = FALSE;  add = (U == '1');  wback = (W == '1');
+d = UInt(D:Vd);  n = UInt(Rn);  imm32 = ZeroExtend(imm8:'00', 32);
+regs = UInt(imm8) DIV 2;
+if n == 15 then UNPREDICTABLE;
+if regs == 0 || regs > 16 || (d+regs) > 32 then UNPREDICTABLE;
+if VFPSmallRegisterBank() && (d+regs) > 16 then UNPREDICTABLE;
+
+if P == '0' && U == '0' && W == '0' then SEE "Related encodings";
+if P == '1' && U == '0' && W == '1' && Rn == '1101' then SEE VPUSH;
+if P == '1' && W == '0' then SEE VSTR;
+if P == U && W == '1' then UNDEFINED;
+// 其余组合为 PUW = 010（IA 不带 !）、011（IA 带 !）、101（DB 带 !）
+single_regs = TRUE;  add = (U == '1');  wback = (W == '1');  d = UInt(Vd:D);  n = UInt(Rn);
+imm32 = ZeroExtend(imm8:'00', 32);  regs = UInt(imm8);
+if n == 15 then UNPREDICTABLE;
+if regs == 0 || (d+regs) > 32 then UNPREDICTABLE;
+```
+
+**编码 T1**（FPv4-SP）：`VSTM{mode}<c> <Rn>{!},<list>`（`<list>` 为连续的 64 位寄存器）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 0 | P | U | D | W | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | 1 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**编码 T2**（FPv4-SP）：`VSTM{mode}<c> <Rn>{!},<list>`（`<list>` 为连续的 32 位寄存器）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 0 | P | U | D | W | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | 0 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+VSTM<mode><c><q><.size>
+  <Rn>{!}, <list>
+```
+
+where：
+
+* `<mode>`：寻址模式：
+  * `IA`：之后递增（Increment After）。连续地址从 `<Rn>` 中指定的地址开始。这是默认值，可以省略，编码为 `P = 0`、`U = 1`。
+  * `DB`：之前递减（Decrement Before）。连续地址刚好在 `<Rn>` 中指定的地址之前结束，编码为 `P = 1`、`U = 0`。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<size>`：可选的数据大小说明符。如果出现，必须等于 `<list>` 中寄存器的大小（按位计），即 32 或 64。
+* `<Rn>`：基址寄存器。可以使用 SP。
+* `!`：使指令把修改后的值写回 `<Rn>`。当 `<mode> == DB` 时这是必需的，编码为 `W = 1`。如果省略 `!`，指令不会以这种方式改变 `<Rn>`，编码为 `W = 0`。
+* `<list>`：要存储的浮点寄存器，为以逗号分隔并用方括号括起的连续编号的双字（编码 T1）或单字（编码 T2）浮点寄存器列表。它通过把 D 与 Vd 设为列表中第一个浮点寄存器、把 `imm8` 设为列表中浮点寄存器个数的两倍（编码 T1）或浮点寄存器个数（编码 T2）来编码。`<list>` 必须至少包含一个浮点寄存器。如果它包含双字浮点寄存器，则不得超过 16 个浮点寄存器。
+
+**相关编码**：参见第 A6-169 页的「Arm 核心与扩展寄存器之间的 64 位传输」。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    address = if add then R[n] else R[n]-imm32;
+    if wback then R[n] = if add then R[n]+imm32 else R[n]-imm32;
+    for r = 0 to regs-1
+        if single_regs then
+            MemA[address,4] = S[d+r];  address = address+4;
+        else
+            // 按当前字节序把数据存储为两个字对齐的字。
+            MemA[address,4] = if BigEndian() then D[d+r]<63:32> else D[d+r]<31:0>;
+            MemA[address+4,4] = if BigEndian() then D[d+r]<31:0> else D[d+r]<63:32>;
+            address = address+8;
+```
+
+**异常**：未定义指令、UsageFault、MemManage、BusFault。
+
+### 7.259. VSTR：浮点存储寄存器
+
+浮点存储寄存器（Floating-point Store Register）使用来自 Arm 核心寄存器的地址，把单个扩展寄存器存储到存储器，可选带偏移。
+
+**编码专用伪代码**
+
+```arm
+single_reg = FALSE;  add = (U == '1');  imm32 = ZeroExtend(imm8:'00', 32);
+d = UInt(D:Vd);  n = UInt(Rn);
+if n == 15 then UNPREDICTABLE;
+
+single_reg = TRUE;  add = (U == '1');  imm32 = ZeroExtend(imm8:'00', 32);
+d = UInt(Vd:D);  n = UInt(Rn);
+if n == 15 then UNPREDICTABLE;
+```
+
+**编码 T1**（FPv4-SP）：`VSTR<c> <Dd>,[<Rn>{,#+/-<imm>}]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 0 | 1 | U | D | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | 1 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**编码 T2**（FPv4-SP）：`VSTR<c> <Sd>,[<Rn>{,#+/-<imm>}]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 0 | 1 | U | D | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | 0 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+VSTR<c><q>.64
+  <Dd>, [<Rn>{, #+/-<imm>}]
+VSTR<c><q>.32
+  <Sd>, [<Rn>{, #+/-<imm>}]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `.32`、`.64`：可选的数据大小说明符。
+* `<Dd>`：双字存储的源浮点寄存器。
+* `<Sd>`：单字存储的源浮点寄存器。
+* `<Rn>`：基址寄存器。可以使用 SP。
+* `+/-`：如果立即数偏移要加到基址寄存器值上（`add == TRUE`）则写 `+` 或省略，如果要相减（`add == FALSE`）则写 `-`。`#0` 与 `#-0` 生成不同的指令。
+* `<imm>`：用于形成地址的立即数偏移。取值为 4 的倍数，范围 0-1020。`<imm>` 可以省略，表示偏移 +0。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    address = if add then (R[n] + imm32) else (R[n] - imm32);
+    if single_reg then
+        MemA[address,4] = S[d];
+    else
+        // 按当前字节序把数据存储为两个字对齐的字。
+        MemA[address,4] = if BigEndian() then D[d]<63:32> else D[d]<31:0>;
+        MemA[address+4,4] = if BigEndian() then D[d]<31:0> else D[d]<63:32>;
+```
+
+**异常**：未定义指令、UsageFault、MemManage、BusFault。
+
+### 7.260. VSUB：浮点减法
+
+浮点减法（Floating-point Subtract）把一个浮点寄存器值从另一个浮点寄存器值中减去，并把结果放入目的浮点寄存器。
+
+**编码专用伪代码**
+
+```arm
+dp_operation = (sz == '1');
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+n = if dp_operation then UInt(N:Vn) else UInt(Vn:N);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+**编码 T1**（FPv4-SP、FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VSUB<c>.F32 <Sd>,<Sn>,<Sm>`、`VSUB<c>.F64 <Dd>,<Dn>,<Dm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 0 | D | 1 | 1 | Vn | Vn | Vn | Vn |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | N | 1 | M | 0 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VSUB<c><q>.F32
+  {<Sd>,} <Sn>, <Sm>           // 编码为 sz = 0
+VSUB<c><q>.F64
+  {<Dd>,} <Dn>, <Dm>           // 编码为 sz = 1
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Sd>`、`<Sn>`、`<Sm>`：目的单精度寄存器与操作数单精度寄存器。
+* `<Dd>`、`<Dn>`、`<Dm>`：目的浮点寄存器与操作数浮点寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    if dp_operation then
+        D[d] = FPSub(D[n], D[m], TRUE);
+    else
+        S[d] = FPSub(S[n], S[m], TRUE);
+```
+
+**异常**：未定义指令。
+
+浮点异常：输入非规格化、无效运算、溢出、下溢、不精确。
+
+### 7.261. WFE：等待事件
+
+等待事件（Wait For Event）是一条提示指令。如果事件寄存器为空，它使执行挂起在可快速唤醒且无需软件恢复的最低功耗状态，直到发生复位、异常或其他事件。详情参见第 B1-560 页的「等待事件与发送事件」（Wait For Event and Send Event）。
+
+关于一般提示行为，参见第 A7-185 页的「与 NOP 兼容的提示」。
+
+**编码专用伪代码**
+
+```arm
+// 无需附加译码
+```
+
+**编码 T1**（Armv6-M、Armv7-M）：`WFE<c>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 |
+
+**编码 T2**（Armv7-M）：`WFE<c>.W`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | 1 | 0 | 1 | 0 | (1) | (1) | (1) | (1) |
+| [31:16] | 1 | 0 | (0) | 0 | (0) | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 |
+
+**汇编语法**
+
+```arm
+WFE<c><q>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    if EventRegistered() then
+        ClearEventRegister();
+    else
+        WaitForEvent();
+```
+
+**异常**：无。
+
+### 7.262. WFI：等待中断
+
+等待中断（Wait For Interrupt）是一条提示指令。它使执行挂起在可快速唤醒且无需软件恢复的最低功耗状态，直到发生复位、异步异常或其他事件。详情参见第 B1-562 页的「等待中断」。
+
+关于一般提示行为，参见第 A7-185 页的「与 NOP 兼容的提示」。
+
+**编码专用伪代码**
+
+```arm
+// 无需附加译码
+```
+
+**编码 T1**（Armv6-M、Armv7-M）：`WFI<c>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 |
+
+**编码 T2**（Armv7-M）：`WFI<c>.W`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | 1 | 0 | 1 | 0 | (1) | (1) | (1) | (1) |
+| [31:16] | 1 | 0 | (0) | 0 | (0) | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 |
+
+**汇编语法**
+
+```arm
+WFI<c><q>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    WaitForInterrupt();
+```
+
+**异常**：无。
+
+**注意：** 关于 `PRIMASK` 对 `WFI` 的影响，参见第 B1-562 页的「等待中断」。
+
+### 7.263. YIELD：让出
+
+`YIELD` 是一条提示指令。它使具有多线程能力的软件能够向硬件表明正在执行某项任务（例如自旋锁），该任务可以被换出以改善系统整体性能。如果硬件支持该能力，它可以利用该提示挂起和恢复多个代码线程。
+
+关于一般提示行为，参见第 A7-185 页的「与 NOP 兼容的提示」。
+
+**编码专用伪代码**
+
+```arm
+// 无需附加译码
+```
+
+**编码 T1**（Armv6-M、Armv7-M）：`YIELD<c>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 |
+
+**编码 T2**（Armv7-M）：`YIELD<c>.W`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | 1 | 0 | 1 | 0 | (1) | (1) | (1) | (1) |
+| [31:16] | 1 | 0 | (0) | 0 | (0) | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
+
+**汇编语法**
+
+```arm
+YIELD<c><q>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    Hint_Yield();
+```
+
+**异常**：无。
