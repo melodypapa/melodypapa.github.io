@@ -2086,3 +2086,360 @@ where：
 * `<iflags>`：指定要修改的中断标志，由下列字符的任意组合构成：`a`（异步中止）、`i`（IRQ）、`f`（FIQ）。
 
 该指令的完整语义（包括 `im`、`I`、`F` 三个编码位的含义）参见第 B5-673 页的「CPS」。
+
+### 7.30. CPY：复制
+
+复制（Copy）。`CPY` 是 `MOV (register)` 的 pre-UAL 同义词。
+
+**汇编语法**
+
+```arm
+CPY
+  <Rd>, <Rn>
+```
+
+它等价于：
+
+```arm
+MOV
+  <Rd>, <Rn>
+```
+
+**异常**：无。
+
+### 7.31. CSDB：推测数据消费屏障
+
+推测数据消费屏障（Consumption of Speculative Data Barrier）。`CSDB` 是一个内存屏障，用于控制推测执行与数据值预测。
+
+在程序顺序中出现在 `CSDB` 之后的非分支指令、以及写 PC 的指令，不得使用以下任一结果进行推测执行：
+
+* 任何指令的数据值预测。
+* 在 `CSDB` 之前按程序顺序出现、且尚未在架构上解析的条件分支指令与写 PC 的条件指令的 `APSR.{N,Z,C,V}` 预测。
+
+`APSR.{N,Z,C,V}` 不被视为数据值。该定义允许：
+
+* 在 `CSDB` 之前与之后进行控制流推测。
+* 在 `CSDB` 之后推测执行条件数据处理指令，除非它们使用了在 `CSDB` 之前按程序顺序出现、且尚未在架构上执行的指令的数据值预测或 `APSR.{N,Z,C,V}` 预测结果。
+
+**编码专用伪代码**
+
+```arm
+if InITBlock() then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`CSDB<c>.W`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | 1 | 0 | 1 | 0 | (1) | (1) | (1) | (1) |
+| [31:16] | 1 | 0 | (0) | 0 | (0) | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 0 |
+
+**汇编语法**
+
+```arm
+CSDB{<c>}.W
+```
+
+where：
+
+* `<c>`：参见第 A7-177 页的「标准汇编语法字段」。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ConsumptionOfSpeculativeDataBarrier();
+```
+
+**异常**：无。
+
+### 7.32. DBG：调试提示
+
+调试提示（Debug Hint）。`DBG` 向调试跟踪支持及相关调试系统提供提示。该指令的实际用途（如果有）参见调试架构文档。
+
+这是与 NOP 兼容的提示。关于一般提示行为的说明参见第 A7-185 页的「与 NOP 兼容的提示」。
+
+**编码专用伪代码**
+
+```arm
+// 对 'option' 的任何译码都由调试系统规定
+```
+
+**编码 T1**（Armv7-M）：`DBG<c> #<option>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | 1 | 0 | 1 | 0 | (1) | (1) | (1) | (1) |
+| [31:16] | 1 | 0 | (0) | 0 | (0) | 0 | 0 | 0 | 1 | 1 | 1 | 1 | option | option | option | option |
+
+**汇编语法**
+
+```arm
+DBG<c><q>
+  #<option>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<option>`：提供关于该提示的附加信息，取值范围为 0-15。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    Hint_Debug(option);
+```
+
+**异常**：无。
+
+### 7.33. DMB：数据内存屏障
+
+数据内存屏障（Data Memory Barrier）。`DMB` 充当内存屏障。它确保按程序顺序出现在 `DMB` 指令之前的所有显式内存访问，都在按程序顺序出现在 `DMB` 指令之后的任何显式内存访问之前被观察到。它不影响处理器上执行的其他指令的顺序。
+
+**编码专用伪代码**
+
+```arm
+// 无需附加译码
+```
+
+**编码 T1**（Armv6-M、Armv7-M）：`DMB<c> #<option>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | 1 | 0 | 1 | 1 | (1) | (1) | (1) | (1) |
+| [31:16] | 1 | 0 | (0) | 0 | (1) | (1) | (1) | (1) | 0 | 1 | 0 | 1 | option | option | option | option |
+
+**汇编语法**
+
+```arm
+DMB<c><q>
+  {<opt>}
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<opt>`：指定对 `DMB` 操作的可选限制。
+  * `SY`：`DMB` 操作确保所有访问的顺序，编码为 `option == '1111'`。可以省略。
+  * `option` 的其他所有编码均为保留。相应指令作为系统（SY）`DMB` 操作执行，但软件不得依赖该行为。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    DataMemoryBarrier(option);
+```
+
+**异常**：无。
+
+### 7.34. DSB：数据同步屏障
+
+数据同步屏障（Data Synchronization Barrier）。`DSB` 是一种特殊的内存屏障。按程序顺序位于该指令之后的指令，必须等到该指令完成才能执行。该指令仅在以下两个条件都满足时才算完成：
+
+* 在该指令之前进行的所有显式内存访问都已完成。
+* 执行改变上下文操作的任何 SCS 访问的副作用都已可见。
+
+**注意：** 关于 SCS 更新同步的更多信息，参见第 A3-96 页的「系统控制空间更新的同步要求」。
+
+**编码专用伪代码**
+
+```arm
+// 无需附加译码
+```
+
+**编码 T1**（Armv6-M、Armv7-M）：`DSB<c> #<option>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | 1 | 0 | 1 | 1 | (1) | (1) | (1) | (1) |
+| [31:16] | 1 | 0 | (0) | 0 | (1) | (1) | (1) | (1) | 0 | 1 | 0 | 0 | option | option | option | option |
+
+**汇编语法**
+
+```arm
+DSB<c><q>
+  {<opt>}
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<opt>`：指定对 `DSB` 操作的可选限制。取值为：
+  * `SY`：`DSB` 操作确保所有访问的完成，编码为 `option == '1111'`。可以省略。
+  * `option` 的其他所有编码均为保留。相应指令作为系统（SY）`DSB` 操作执行，但软件不得依赖该行为。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    DataSynchronizationBarrier(option);
+```
+
+**异常**：无。
+
+### 7.35. EOR (immediate)：立即数异或
+
+立即数异或（Exclusive OR (immediate)）。该指令把一个寄存器值与一个立即数进行按位异或，并把结果写入目的寄存器；它可以选择根据结果更新条件标志。
+
+**编码专用伪代码**
+
+```arm
+if Rd == '1111' && S == '1' then SEE TEQ (immediate);
+d = UInt(Rd);  n = UInt(Rn);  setflags = (S == '1');
+(imm32, carry) = ThumbExpandImm_C(i:imm3:imm8, APSR.C);
+if d == 13 || (d == 15 && S == '0') || n IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`EOR{S}<c> <Rd>,<Rn>,#<const>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | i | 0 | 0 | 1 | 0 | 0 | S | Rn | Rn | Rn | Rn |
+| [31:16] | 0 | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+EOR{S}<c><q>
+  {<Rd>,} <Rn>, #<const>
+```
+
+where：
+
+* `S`：如果出现，表示指令更新标志；否则不更新标志。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。如果省略 `<Rd>`，该寄存器与 `<Rn>` 相同。
+* `<Rn>`：指定包含操作数的寄存器。
+* `<const>`：指定要与由 `<Rn>` 得到的值进行异或的立即数。允许的取值范围参见第 A5-139 页的「Thumb 指令中的修改立即数常量」。
+
+pre-UAL 语法 `EOR<c>S` 等价于 `EORS<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    result = R[n] EOR imm32;
+    R[d] = result;
+    if setflags then
+        APSR.N = result<31>;
+        APSR.Z = IsZeroBit(result);
+        APSR.C = carry;
+        // APSR.V unchanged
+```
+
+**异常**：无。
+
+### 7.36. EOR (register)：寄存器异或
+
+寄存器异或（Exclusive OR (register)）。该指令把一个寄存器值与一个可选移位的寄存器值进行按位异或，并把结果写入目的寄存器；它可以选择根据结果更新条件标志。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rdn);  n = UInt(Rdn);  m = UInt(Rm);  setflags = !InITBlock();
+(shift_t, shift_n) = (SRType_LSL, 0);
+if Rd == '1111' && S == '1' then SEE TEQ (register);
+
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  setflags = (S == '1');
+(shift_t, shift_n) = DecodeImmShift(type, imm3:imm2);
+if d == 13 || (d == 15 && S == '0') || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`EORS <Rdn>,<Rm>`（IT 块外）、`EOR<c> <Rdn>,<Rm>`（IT 块内）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | Rm | Rm | Rm | Rdn | Rdn | Rdn |
+
+**编码 T2**（Armv7-M）：`EOR{S}<c>.W <Rd>,<Rn>,<Rm>{,<shift>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | S | Rn | Rn | Rn | Rn |
+| [31:16] | (0) | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm2 | imm2 | type | type | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+EOR{S}<c><q>
+  {<Rd>,} <Rn>, <Rm> {,<shift>}
+```
+
+where：
+
+* `S`：如果出现，表示指令更新标志；否则不更新标志。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。如果省略 `<Rd>`，该寄存器与 `<Rn>` 相同。
+* `<Rn>`：指定包含第一个操作数的寄存器。
+* `<Rm>`：指定可选移位并用作第二个操作数的寄存器。
+* `<shift>`：指定施加于从 `<Rm>` 读取的值的移位。如果省略 `<shift>`，不施加移位，且两种编码都允许；如果指定 `<shift>`，只允许编码 T2。可能的移位及其编码方式参见第 A7-182 页的「施加于寄存器的移位」。
+
+pre-UAL 语法 `EOR<c>S` 等价于 `EORS<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    (shifted, carry) = Shift_C(R[m], shift_t, shift_n, APSR.C);
+    result = R[n] EOR shifted;
+    R[d] = result;
+    if setflags then
+        APSR.N = result<31>;
+        APSR.Z = IsZeroBit(result);
+        APSR.C = carry;
+        // APSR.V unchanged
+```
+
+**异常**：无。
+
+### 7.37. ISB：指令同步屏障
+
+指令同步屏障（Instruction Synchronization Barrier）。`ISB` 冲刷处理器流水线，使 `ISB` 之后的所有指令都在该指令完成后从缓存或存储器取指。它确保在该 `ISB` 指令之前完成的上下文改变操作（如对系统控制空间（SCS）的读写访问所产生的结果）对 `ISB` 之后取指的指令可见。
+
+**注意：** 关于 SCS 更新同步的更多信息，参见第 A3-96 页的「系统控制空间更新的同步要求」。
+
+此外，`ISB` 指令确保按程序顺序位于其后的任何分支都总是以 `ISB` 指令之后可见的上下文写入分支预测逻辑。这是确保指令流正确执行所必需的。
+
+**编码专用伪代码**
+
+```arm
+if InITBlock() then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv6-M、Armv7-M）：`ISB<c> {#<option>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | 1 | 0 | 1 | 1 | (1) | (1) | (1) | (1) |
+| [31:16] | 1 | 0 | (0) | 0 | (1) | (1) | (1) | (1) | 0 | 1 | 1 | 0 | option | option | option | option |
+
+**汇编语法**
+
+```arm
+ISB<c><q>
+  {<opt>}
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<opt>`：指定对 `ISB` 操作的可选限制。
+  * `SY`：`ISB` 操作确保完成所有访问，编码为 `option == '1111'`。可以省略。
+  * `option` 的其他所有编码均为保留。相应指令作为系统（SY）`ISB` 操作执行，但软件不得依赖该行为。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    InstructionSynchronizationBarrier(option);
+```
+
+**异常**：无。
