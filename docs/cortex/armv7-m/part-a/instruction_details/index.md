@@ -12431,3 +12431,175 @@ if ConditionPassed() then
 ```
 
 **异常**：无。
+
+### 7.224. VABS：浮点绝对值
+
+浮点绝对值（Floating-point Absolute）取一个单精度寄存器的绝对值，并把结果放入第二个寄存器。
+
+**编码专用伪代码**
+
+```arm
+dp_operation = (sz == '1');
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+**编码 T1**（FPv4-SP、FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VABS<c>.F32 <Sd>,<Sm>`、`VABS<c>.F64 <Dd>,<Dm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | D | 1 | 1 | 0 | 0 | 0 | 0 |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | 1 | 1 | M | 0 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VABS<c><q>.F32
+  <Sd>, <Sm>                   // 编码为 sz = 0
+VABS<c><q>.F64
+  <Dd>, <Dm>                   // 编码为 sz = 1
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Sd>`、`<Sm>`：目的单精度寄存器与操作数单精度寄存器。
+* `<Dd>`、`<Dm>`：双精度运算的目的双精度寄存器与操作数双精度寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    if dp_operation then
+        D[d] = FPAbs(D[m]);
+    else
+        S[d] = FPAbs(S[m]);
+```
+
+**异常**：未定义指令。
+
+### 7.225. VADD：浮点加法
+
+浮点加法（Floating-point Add）把两个单精度或双精度寄存器相加，并把结果放入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+dp_operation = (sz == '1');
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+n = if dp_operation then UInt(N:Vn) else UInt(Vn:N);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+**编码 T1**（FPv4-SP、FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VADD<c>.F32 <Sd>,<Sn>,<Sm>`、`VADD<c>.F64 <Dd>,<Dn>,<Dm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 0 | D | 1 | 1 | Vn | Vn | Vn | Vn |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | N | 0 | M | 0 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VADD<c><q>.F32
+  {<Sd>,} <Sn>, <Sm>           // 编码为 sz = 0
+VADD<c><q>.F64
+  {<Dd>,} <Dn>, <Dm>           // 编码为 sz = 1
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Sd>`、`<Sn>`、`<Sm>`：目的单精度寄存器与操作数单精度寄存器。
+* `<Dd>`、`<Dn>`、`<Dm>`：双精度运算的目的双精度寄存器与操作数双精度寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    if dp_operation then
+        D[d] = FPAdd(D[n], D[m], TRUE);
+    else
+        S[d] = FPAdd(S[n], S[m], TRUE);
+```
+
+**异常**：未定义指令。
+
+浮点异常：输入非规格化（Input Denormal）、无效运算（Invalid Operation）、溢出（Overflow）、下溢（Underflow）、不精确（Inexact）。
+
+### 7.226. VCMP、VCMPE：浮点比较
+
+浮点比较（Floating-point Compare）比较两个寄存器，或一个寄存器与零，并把结果写入 FPSCR 标志。这些标志通常由随后的 `VMRS` 指令传送到 Arm 标志。
+
+若任一操作数为任意类型的 NaN，它可以选择产生无效运算异常。若任一操作数为信号 NaN，它总是产生无效运算异常。
+
+**编码专用伪代码**
+
+```arm
+dp_operation = (sz == '1');  quiet_nan_exc = (E == '1');  with_zero = FALSE;
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+
+dp_operation = (sz == '1');  quiet_nan_exc = (E == '1');  with_zero = TRUE;
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+```
+
+**编码 T1**（FPv4-SP、FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VCMP{E}<c>.F32 <Sd>,<Sm>`、`VCMP{E}<c>.F64 <Dd>,<Dm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | D | 1 | 1 | 0 | 1 | 0 | 0 |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | E | 1 | M | 0 | Vm | Vm | Vm | Vm |
+
+**编码 T2**（FPv4-SP、FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VCMP{E}<c>.F32 <Sd>,#0.0`、`VCMP{E}<c>.F64 <Dd>,#0.0`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | D | 1 | 1 | 0 | 1 | 0 | 1 |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | E | 1 | (0) | 0 | (0) | (0) | (0) | (0) |
+
+**汇编语法**
+
+```arm
+VCMP{E}<c><q>.F32
+  <Sd>, <Sm>                   // 编码 T1，编码为 sz = 0
+VCMP{E}<c><q>.F64
+  <Dd>, <Dm>                   // 编码 T1，编码为 sz = 1
+VCMP{E}<c><q>.F32
+  <Sd>, #0.0                   // 编码 T2，编码为 sz = 0
+VCMP{E}<c><q>.F64
+  <Dd>, #0.0                   // 编码 T2，编码为 sz = 1
+```
+
+where：
+
+* `E`：如果出现，任一 NaN 操作数都会引起无效运算异常，编码为 `E = 1`。否则只有信号 NaN 才引起异常，编码为 `E = 0`。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Sd>`、`<Sm>`：操作数单精度寄存器。
+* `<Dd>`、`<Dm>`：操作数双精度寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    if dp_operation then
+        op64 = if with_zero then FPZero('0',64) else D[m];
+        (FPSCR.N, FPSCR.Z, FPSCR.C, FPSCR.V) = FPCompare(D[d], op64, quiet_nan_exc, TRUE);
+    else
+        op32 = if with_zero then FPZero('0',32) else S[m];
+        (FPSCR.N, FPSCR.Z, FPSCR.C, FPSCR.V) = FPCompare(S[d], op32, quiet_nan_exc, TRUE);
+```
+
+**异常**：未定义指令。
+
+浮点异常：无效运算、输入非规格化。
+
+**NaN**：IEEE 754 标准规定比较的结果精确地是 <、==、> 或无序（unordered）之一。如果任一或两个操作数为 NaN，它们是无序的，并且 (Operand1 < Operand2)、(Operand1 == Operand2) 与 (Operand1 > Operand2) 三者都为假。这导致 FPSCR 标志被设置为 N=0、Z=0、C=1、V=1。参见第 A2-37 页的「浮点状态与控制寄存器 FPSCR」。
+
+如果任一操作数为任意类型的 NaN，`VCMPE` 会引起无效运算异常。软件可以使用 `VCMPE` 来测试 <、<=、>、>= 等操作数无序时会引发异常的谓词。
