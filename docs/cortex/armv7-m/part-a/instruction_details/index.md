@@ -2443,3 +2443,218 @@ if ConditionPassed() then
 ```
 
 **异常**：无。
+
+### 7.38. IT：条件执行
+
+If-Then。`IT` 使随后的最多四条指令（IT 块）成为条件执行的指令。IT 块中各指令的条件可以相同，也可以部分互为反条件。
+
+`IT` 不影响条件标志。除异常返回所执行的分支外，不允许分支到 IT 块中的任何指令。
+
+IT 块中除 `CMP`、`CMN` 与 `TST` 之外的 16 位指令不设置条件标志。可以指定 AL 条件，以便在不进行条件执行的情况下获得这种改变后的行为。
+
+**编码专用伪代码**
+
+```arm
+if mask == '0000' then SEE "Related encodings";
+if firstcond == '1111' || (firstcond == '1110' && BitCount(mask) != 1) then UNPREDICTABLE;
+if InITBlock() then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`IT{x{y{z}}}<q> <firstcond>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | firstcond | firstcond | firstcond | firstcond | mask | mask | mask | mask |
+
+**汇编语法**
+
+```arm
+IT{x{y{z}}}<q>
+  <firstcond>
+```
+
+where：
+
+* `<x>`：指定 IT 块中第二条指令的条件。
+* `<y>`：指定 IT 块中第三条指令的条件。
+* `<z>`：指定 IT 块中第四条指令的条件。
+* `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<firstcond>`：指定 IT 块中第一条指令的条件。
+
+`<x>`、`<y>`、`<z>` 的取值为 `T`（Then，与第一条指令条件相同）或 `E`（Else，与第一条指令条件相反）；省略时表示 IT 块在该处结束。表 A7-3 给出 `mask` 字段的确定方式。
+
+表 A7-3 `mask` 字段的确定 ^a^
+
+| `<x>` | `<y>` | `<z>` | mask[3] | mask[2] | mask[1] | mask[0] |
+| --- | --- | --- | --- | --- | --- | --- |
+| 省略 | 省略 | 省略 | 0 | 0 | 0 | 1 |
+| T | 省略 | 省略 | 0 | 0 | 1 | firstcond[0] |
+| E | 省略 | 省略 | 0 | 0 | 1 | NOT firstcond[0] |
+| T | T | 省略 | 0 | 1 | firstcond[0] | firstcond[0] |
+| T | E | 省略 | 0 | 1 | firstcond[0] | NOT firstcond[0] |
+| E | T | 省略 | 0 | 1 | NOT firstcond[0] | firstcond[0] |
+| E | E | 省略 | 0 | 1 | NOT firstcond[0] | NOT firstcond[0] |
+| T | T | T | 1 | firstcond[0] | firstcond[0] | firstcond[0] |
+| T | T | E | 1 | firstcond[0] | firstcond[0] | NOT firstcond[0] |
+| T | E | T | 1 | firstcond[0] | NOT firstcond[0] | firstcond[0] |
+| T | E | E | 1 | firstcond[0] | NOT firstcond[0] | NOT firstcond[0] |
+| E | T | T | 1 | NOT firstcond[0] | firstcond[0] | firstcond[0] |
+| E | T | E | 1 | NOT firstcond[0] | firstcond[0] | NOT firstcond[0] |
+| E | E | T | 1 | NOT firstcond[0] | NOT firstcond[0] | firstcond[0] |
+| E | E | E | 1 | NOT firstcond[0] | NOT firstcond[0] | NOT firstcond[0] |
+
+a. 任何掩码中至少要有一位为 1。
+
+参见第 A7-179 页的「ITSTATE」。
+
+**操作**
+
+```arm
+EncodingSpecificOperations();
+ITSTATE.IT<7:0> = firstcond:mask;
+```
+
+**异常**：无。
+
+### 7.39. LDC、LDC2 (immediate)：立即数加载协处理器
+
+加载协处理器（Load Coprocessor）。`LDC (immediate)` 把一串连续内存地址上的数据加载到协处理器。如果没有协处理器能执行该指令，则产生 UsageFault 异常。
+
+这是通用协处理器指令。某些字段没有架构定义的功能，可供协处理器指令集设计者自由使用。这些字段是 `D` 位、`CRd` 字段，以及仅在非索引寻址模式下的 `imm8` 字段。
+
+**编码专用伪代码**
+
+```arm
+if Rn == '1111' then SEE LDC (literal);
+if P == '0' && U == '0' && D == '0' && W == '0' then UNDEFINED;
+if P == '0' && U == '0' && D == '1' && W == '0' then SEE MRRC, MRRC2;
+n = UInt(Rn);  cp = UInt(coproc);  imm32 = ZeroExtend(imm8:'00', 32);
+index = (P == '1');  add = (U == '1');  wback = (W == '1');
+
+if Rn == '1111' then SEE LDC (literal);
+if P == '0' && U == '0' && D == '0' && W == '0' then UNDEFINED;
+if P == '0' && U == '0' && D == '1' && W == '0' then SEE MRRC, MRRC2;
+n = UInt(Rn);  cp = UInt(coproc);  imm32 = ZeroExtend(imm8:'00', 32);
+index = (P == '1');  add = (U == '1');  wback = (W == '1');
+```
+
+**编码 T1**（Armv7-M）：`LDC<c> <coproc>,<CRd>,[<Rn>{,#<imm>}]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 0 | P | U | D | W | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | CRd | CRd | CRd | CRd | coproc | coproc | coproc | coproc | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**编码 T2**（Armv7-M）：`LDC2<c> <coproc>,<CRd>,[<Rn>{,#<imm>}]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 1 | 0 | P | U | D | W | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | CRd | CRd | CRd | CRd | coproc | coproc | coproc | coproc | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+LDC{2}{<c>}{<q>} <coproc>, <CRd>, [<Rn>{, #<imm>}]
+LDC{2}{<c>}{<q>} <coproc>, <CRd>, [<Rn>, #<imm>]!
+LDC{2}{<c>}{<q>} <coproc>, <CRd>, [<Rn>], #<imm>
+LDC{2}{<c>}{<q>} <coproc>, <CRd>, [<Rn>], {#<option>}
+```
+
+where：
+
+* `2`：如果指定，选择 `opc0 == 1` 形式的编码；如果省略，选择 `opc0 == 0` 形式。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<coproc>`：指定协处理器名称，取值范围为 p0-p15。
+* `<CRd>`：指定目的协处理器寄存器。
+* `<Rn>`：指定基址寄存器。如果为 `<Rn>` 指定 PC，参见第 A7-248 页的「LDC, LDC2 (literal)」。
+* `!`：如果出现，表示回写基址寄存器。
+* `<imm>`：施加到 `<Rn>` 值上以形成地址的立即数偏移。允许值为 0-1020 范围内 4 的倍数。在偏移寻址语法中 `<imm>` 可以省略，表示偏移 +0。
+* `<option>`：给协处理器的附加指令选项，取值范围为 0-255，用 `{ }` 括起来，编码在 `imm8` 中。
+
+pre-UAL 语法 `LDC<c>L` 等价于 `LDCL<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    if !Coproc_Accepted(cp, ThisInstr()) then
+        GenerateCoprocessorException();
+    else
+        offset_addr = if add then (R[n] + imm32) else (R[n] - imm32);
+        address = if index then offset_addr else R[n];
+        repeat
+            Coproc_SendLoadedWord(MemA[address,4], cp, ThisInstr());  address = address + 4;
+        until Coproc_DoneLoading(cp, ThisInstr());
+        if wback then R[n] = offset_addr;
+```
+
+**异常**：UsageFault、MemManage、BusFault。
+
+### 7.40. LDC、LDC2 (literal)：文字加载协处理器
+
+文字加载协处理器（Load Coprocessor (literal)）。该指令把一串连续内存地址上的数据加载到协处理器。如果没有协处理器能执行该指令，则产生 UsageFault 异常。
+
+这是通用协处理器指令。`D` 位与 `CRd` 字段没有架构定义的功能，可供协处理器指令集设计者自由使用。
+
+**编码专用伪代码**
+
+```arm
+if P == '0' && U == '0' && D == '0' && W == '0' then UNDEFINED;
+if P == '0' && U == '0' && D == '1' && W == '0' then SEE MRRC, MRRC2;
+index = (P == '1');     // 在 Thumb 指令集中始终为 TRUE
+add = (U == '1');  cp = UInt(coproc);  imm32 = ZeroExtend(imm8:'00', 32);
+if W == '1' || P == '0' then UNPREDICTABLE;
+
+if P == '0' && U == '0' && D == '0' && W == '0' then UNDEFINED;
+if P == '0' && U == '0' && D == '1' && W == '0' then SEE MRRC, MRRC2;
+index = (P == '1');     // 在 Thumb 指令集中始终为 TRUE
+add = (U == '1');  cp = UInt(coproc);  imm32 = ZeroExtend(imm8:'00', 32);
+if W == '1' || P == '0' then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`LDC<c> <coproc>,<CRd>,<label>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 0 | P | U | D | W | 1 | 1 | 1 | 1 | 1 |
+| [31:16] | CRd | CRd | CRd | CRd | coproc | coproc | coproc | coproc | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**编码 T2**（Armv7-M）：`LDC2<c> <coproc>,<CRd>,<label>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 1 | 0 | P | U | D | W | 1 | 1 | 1 | 1 | 1 |
+| [31:16] | CRd | CRd | CRd | CRd | coproc | coproc | coproc | coproc | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+LDC{2}{<c>}{<q>} <coproc>, <CRd>, <label>
+```
+
+where：
+
+* `2`：如果指定，选择 `opc0 == 1` 形式的编码；如果省略，选择 `opc0 == 0` 形式。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<coproc>`：指定协处理器名称，取值范围为 p0-p15。
+* `<CRd>`：指定目的协处理器寄存器。
+* `<label>`：指定该指令要加载其地址处的数据项的标签。汇编器从 `Align(PC,4)` 到该标签计算所需偏移量，并选择能把 `imm32` 设为该偏移量的编码。允许的偏移为 0-1020 范围内 4 的倍数。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    if !Coproc_Accepted(cp, ThisInstr()) then
+        GenerateCoprocessorException();
+    else
+        offset_addr = if add then (Align(PC,4) + imm32) else (Align(PC,4) - imm32);
+        address = if index then offset_addr else Align(PC,4);
+        repeat
+            Coproc_SendLoadedWord(MemA[address,4], cp, ThisInstr());  address = address + 4;
+        until Coproc_DoneLoading(cp, ThisInstr());
+```
+
+**异常**：UsageFault、MemManage、BusFault。
