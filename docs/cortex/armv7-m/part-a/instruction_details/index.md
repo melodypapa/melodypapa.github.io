@@ -12603,3 +12603,232 @@ if ConditionPassed() then
 **NaN**：IEEE 754 标准规定比较的结果精确地是 <、==、> 或无序（unordered）之一。如果任一或两个操作数为 NaN，它们是无序的，并且 (Operand1 < Operand2)、(Operand1 == Operand2) 与 (Operand1 > Operand2) 三者都为假。这导致 FPSCR 标志被设置为 N=0、Z=0、C=1、V=1。参见第 A2-37 页的「浮点状态与控制寄存器 FPSCR」。
 
 如果任一操作数为任意类型的 NaN，`VCMPE` 会引起无效运算异常。软件可以使用 `VCMPE` 来测试 <、<=、>、>= 等操作数无序时会引发异常的谓词。
+
+### 7.227. VCVTA、VCVTN、VCVTP、VCVTM：浮点转换（定向舍入）
+
+这些指令把一个寄存器中的值从浮点转换为 32 位整数，或从 32 位整数转换为浮点，并把结果放入第二个寄存器。
+
+这些指令使用以下舍入模式：
+
+* `VCVTA`：舍入到最近，并列时远离零（Round to Nearest with Ties to Away）。
+* `VCVTN`：舍入到最近，并列时取偶（Round to Nearest with Ties to Even）。
+* `VCVTP`：向正无穷舍入（Round towards Plus Infinity）。
+* `VCVTM`：向负无穷舍入（Round towards Minus Infinity）。
+
+**编码专用伪代码**
+
+```arm
+if InITBlock() then UNPREDICTABLE;
+dp_operation = (sz == '1');  unsigned = (op == '0');
+round_mode = RM;
+d = UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+**编码 T1**（FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VCVT{A,N,P,M}.S32.F64 <Sd>,<Dm>`、`VCVT{A,N,P,M}.S32.F32 <Sd>,<Sm>`、`VCVT{A,N,P,M}.U32.F64 <Sd>,<Dm>`、`VCVT{A,N,P,M}.U32.F32 <Sd>,<Sm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 1 | D | 1 | 1 | 1 | opc2 | opc2 | opc2 |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | op | 1 | M | 0 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VCVT<r><q>.S32.F64
+  <Sd>, <Dm>                   // 编码为 sz = 1
+VCVT<r><q>.S32.F32
+  <Sd>, <Sm>                   // 编码为 sz = 0
+VCVT<r><q>.U32.F64
+  <Sd>, <Dm>                   // 编码为 sz = 1
+VCVT<r><q>.U32.F32
+  <Sd>, <Sm>                   // 编码为 sz = 0
+```
+
+where：
+
+* `<r>`：选择舍入模式，必须为以下之一：
+  * `A`：编码为 `RM = 00`。
+  * `N`：编码为 `RM = 01`。
+  * `P`：编码为 `RM = 10`。
+  * `M`：编码为 `RM = 11`。
+* `<Tm>`：选择数据类型，必须为以下之一：
+  * `S32`：编码为 `op = 1`。
+  * `U32`：编码为 `op = 0`。
+* `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Sd>`、`<Dm>`：双精度操作数时的目的寄存器与操作数寄存器。
+* `<Sd>`、`<Sm>`：单精度操作数或结果时的目的寄存器与操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    if dp_operation
+        S[d] = FPToFixedDirected(D[m],32,0,unsigned,round_mode,TRUE);
+    else
+        S[d] = FPToFixedDirected(S[m],32,0,unsigned,round_mode,TRUE);
+```
+
+**异常**：未定义指令。
+
+浮点异常：无效运算、输入非规格化、不精确。
+
+### 7.228. VCVT、VCVTR（浮点与整数之间）：浮点转换
+
+浮点转整数（Floating-point Convert (between floating-point and integer)）把一个寄存器中的值从浮点转换为 32 位整数，或从 32 位整数转换为浮点，并把结果放入第二个寄存器。
+
+浮点转整数的运算通常使用向零舍入（Round towards Zero）模式，但也可以选择使用 FPSCR 指定的舍入模式。整数转浮点的运算使用 FPSCR 指定的舍入模式。
+
+浮点与定点之间的转换参见第 A7-463 页的「VCVT（浮点与定点之间）」。
+
+**编码专用伪代码**
+
+```arm
+if opc2 != '000' && !(opc2 IN "10x") then SEE "Related encodings";
+to_integer = (opc2<2> == '1');  dp_operation = (sz == 1);
+if to_integer then
+    unsigned = (opc2<0> == '0');  round_zero = (op == '1');
+    d = UInt(Vd:D);  m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+else
+    unsigned = (op == '0');  round_nearest = FALSE;  // FALSE 表示采用 FPSCR 舍入
+    m = UInt(Vm:M);  d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+```
+
+**编码 T1**（FPv4-SP、FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VCVT{R}<c>.S32.F32 <Sd>,<Sm>`（`opc2 = b101`、`sz = 0`）、`VCVT{R}<c>.S32.F64 <Sd>,<Dm>`（`opc2 = b101`、`sz = 1`）、`VCVT{R}<c>.U32.F32 <Sd>,<Sm>`（`opc2 = b100`、`sz = 0`）、`VCVT{R}<c>.U32.F64 <Sd>,<Dm>`（`opc2 = b100`、`sz = 1`）、`VCVT<c>.F32.<Tm> <Sd>,<Sm>`（`opc2 = b000`、`sz = 0`）、`VCVT<c>.F64.<Tm> <Dd>,<Sm>`（`opc2 = b000`、`sz = 1`）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | D | 1 | 1 | 1 | opc2 | opc2 | opc2 |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | op | 1 | M | 0 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VCVT{R}<c><q>.S32.F32
+  <Sd>, <Sm>                   // 编码为 opc2 = b101、sz = 0
+VCVT{R}<c><q>.S32.F64
+  <Sd>, <Dm>                   // 编码为 opc2 = b101、sz = 1
+VCVT{R}<c><q>.U32.F32
+  <Sd>, <Sm>                   // 编码为 opc2 = b100、sz = 0
+VCVT{R}<c><q>.U32.F64
+  <Sd>, <Dm>                   // 编码为 opc2 = b100、sz = 1
+VCVT<c><q>.F32.<Tm>
+  <Sd>, <Sm>                   // 编码为 opc2 = b000、sz = 0
+VCVT<c><q>.F64.<Tm>
+  <Dd>, <Sm>                   // 编码为 opc2 = b000、sz = 1
+```
+
+where：
+
+* `R`：如果指定 `R`，该运算使用 FPSCR 指定的舍入模式，编码为 `op = 0`。如果省略 `R`，该运算使用向零舍入模式；对于 `R` 可选的语法，省略 `R` 时 `op` 编码为 1。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Tm>`：操作数的数据类型，必须为以下之一：
+  * `S32`：编码为 `op = 1`。
+  * `U32`：编码为 `op = 0`。
+* `<Sd>`、`<Sm>`：单精度操作数或结果时的目的寄存器与操作数寄存器。
+* `<Sd>`、`<Dm>`：双精度操作数时的目的寄存器与操作数寄存器。
+* `<Dd>`、`<Sm>`：双精度结果时的目的寄存器与操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    if to_integer then
+        if dp_operation then
+            S[d] = FPToFixed(D[m], 32, 0, unsigned, round_zero, TRUE);
+        else
+            S[d] = FPToFixed(S[m], 32, 0, unsigned, round_zero, TRUE);
+    else
+        if dp_operation then
+            D[d] = FixedToFP(S[m], 64, 0, unsigned, round_nearest, TRUE);
+        else
+            S[d] = FixedToFP(S[m], 32, 0, unsigned, round_nearest, TRUE);
+```
+
+**异常**：未定义指令。
+
+浮点异常：输入非规格化、无效运算、不精确。
+
+### 7.229. VCVT（浮点与定点之间）：浮点转换
+
+浮点定点转换（Floating-point Convert (between floating-point and fixed-point)）把一个寄存器中的值从浮点转换为定点，或从定点转换为浮点，并把结果放入第二个寄存器。可以把定点值指定为有符号或无符号。
+
+定点值可以是 16 位或 32 位。从定点值转换时，从源寄存器的低位取操作数，并忽略其余位。转换到定点值的有符号转换把结果值符号扩展到目的寄存器宽度。转换到定点值的无符号转换把结果值零扩展到目的寄存器宽度。
+
+浮点转定点的运算使用向零舍入（Round towards Zero）模式。定点转浮点的运算使用舍入到最近（Round to Nearest）模式。
+
+**编码专用伪代码**
+
+```arm
+to_fixed = (op == '1');  dp_operation = (sf == '1');  unsigned = (U == '1');
+size = if sx == '0' then 16 else 32;
+frac_bits = size - UInt(imm4:i);
+if to_fixed then
+    round_zero = TRUE;
+else
+    round_nearest = TRUE;
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+if frac_bits < 0 then UNPREDICTABLE;
+```
+
+**编码 T1**（FPv4-SP、FPv5；在仅单精度变体中 `sf = 1` 为未定义）：`VCVT<c>.<Td>.F64 <Dd>,<Dd>,#<fbits>`（`op = 1`、`sf = 1`）、`VCVT<c>.<Td>.F32 <Sd>,<Sd>,#<fbits>`（`op = 1`、`sf = 0`）、`VCVT<c>.F64.<Td> <Dd>,<Dd>,#<fbits>`（`op = 0`、`sf = 1`）、`VCVT<c>.F32.<Td> <Sd>,<Sd>,#<fbits>`（`op = 0`、`sf = 0`）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | D | 1 | 1 | 1 | op | 1 | U |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sf | sx | 1 | i | 0 | imm4 | imm4 | imm4 | imm4 |
+
+**汇编语法**
+
+```arm
+VCVT<c><q>.<Td>.F64
+  <Dd>, <Dd>, #<fbits>         // 编码为 op = 1、sf = 1
+VCVT<c><q>.<Td>.F32
+  <Sd>, <Sd>, #<fbits>         // 编码为 op = 1、sf = 0
+VCVT<c><q>.F64.<Td>
+  <Dd>, <Dd>, #<fbits>         // 编码为 op = 0、sf = 1
+VCVT<c><q>.F32.<Td>
+  <Sd>, <Sd>, #<fbits>         // 编码为 op = 0、sf = 0
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Td>`：定点数的数据类型，必须为以下之一：
+  * `S16`：编码为 `U = 0`、`sx = 0`。
+  * `U16`：编码为 `U = 1`、`sx = 0`。
+  * `S32`：编码为 `U = 0`、`sx = 1`。
+  * `U32`：编码为 `U = 1`、`sx = 1`。
+* `<Sd>`：单精度操作数时的目的兼操作数寄存器。
+* `<Dd>`：双精度操作数时的目的兼操作数寄存器。
+* `<fbits>`：定点数中小数部分的位数：
+  * 如果 `<Td>` 为 `S16` 或 `U16`，`<fbits>` 必须在 0-16 范围内，(16 - `<fbits>`) 编码在 `[imm4,i]` 中。
+  * 如果 `<Td>` 为 `S32` 或 `U32`，`<fbits>` 必须在 1-32 范围内，(32 - `<fbits>`) 编码在 `[imm4,i]` 中。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    if to_fixed then
+        if dp_operation then
+            result = FPToFixed(D[d], size, frac_bits, unsigned, round_zero, TRUE);
+            D[d] = if unsigned then ZeroExtend(result, 64) else SignExtend(result, 64);
+        else
+            result = FPToFixed(S[d], size, frac_bits, unsigned, round_zero, TRUE);
+            S[d] = if unsigned then ZeroExtend(result, 32) else SignExtend(result, 32);
+    else
+        if dp_operation then
+            D[d] = FixedToFP(D[d]<size-1:0>, 64, frac_bits, unsigned, round_nearest, TRUE);
+        else
+            S[d] = FixedToFP(S[d]<size-1:0>, 32, frac_bits, unsigned, round_nearest, TRUE);
+```
+
+**异常**：未定义指令。
+
+浮点异常：输入非规格化、无效运算、不精确。
