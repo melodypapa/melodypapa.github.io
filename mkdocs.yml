@@ -331,6 +331,7 @@ nav:
       - "Part A 应用程序级架构":
         - cortex/armv7-m/part-a/index.md
         - "简介": cortex/armv7-m/part-a/introduction/index.md
+        - "应用程序级程序员模型": cortex/armv7-m/part-a/application_level_model/index.md
         - "ARM架构的内存模式": cortex/armv7-m/part-a/arm_architecture_memory_mode/index.md
         - "Thumb 指令集编码": cortex/armv7-m/part-a/thumb_instruction_set_encoding/index.md
         - "浮点指令集编码": cortex/armv7-m/part-a/fp_instruction_set_encoding/index.md
