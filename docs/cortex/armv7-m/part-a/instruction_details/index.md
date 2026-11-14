@@ -4119,3 +4119,460 @@ if ConditionPassed() then
 如果编码 T1 中的 `Rt` 字段为 `'1111'`，则该指令是未分配存储器提示（unallocated memory hint）。
 
 未分配存储器提示必须实现为 NOP。软件不得使用它们，因此它们没有 UAL 汇编语法。
+
+### 7.65. LDRSH (register)：寄存器加载有符号半字
+
+寄存器加载有符号半字（Load Register Signed Halfword (register)）由基址寄存器值与偏移寄存器值计算出地址，从存储器加载一个半字，将其符号扩展形成 32 位字，并写入寄存器。偏移寄存器值可以左移 0、1、2 或 3 位。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。
+
+**编码专用伪代码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);  m = UInt(Rm);
+index = TRUE;  add = TRUE;  wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, 0);
+
+if Rn == '1111' then SEE LDRSH (literal);
+if Rt == '1111' then SEE "Related instructions";
+t = UInt(Rt);  n = UInt(Rn);  m = UInt(Rm);
+index = TRUE;  add = TRUE;  wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, UInt(imm2));
+if t == 13 || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`LDRSH<c> <Rt>,[<Rn>,<Rm>]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 1 | 0 | 1 | 1 | 1 | 1 | Rm | Rm | Rm | Rn | Rn | Rn | Rt | Rt | Rt |
+
+**编码 T2**（Armv7-M）：`LDRSH<c>.W <Rt>,[<Rn>,<Rm>{,LSL #<imm2>}]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | 0 | 0 | 0 | 0 | 0 | 0 | imm2 | imm2 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+LDRSH<c><q>
+  <Rt>, [<Rn>, <Rm> {, LSL #<shift>}]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：目的寄存器。
+* `<Rn>`：包含基值的寄存器。该寄存器允许是 SP。
+* `<Rm>`：包含左移后加到 `<Rn>` 值以形成地址的偏移。
+* `<shift>`：`<Rm>` 值左移的位数，范围为 0-3。如果省略该选项，假定移位 0 且两种编码都允许；如果指定该选项，只允许编码 T2。
+
+pre-UAL 语法 `LDR<c>SH` 等价于 `LDRSH<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    offset = Shift(R[m], shift_t, shift_n, APSR.C);
+    offset_addr = if add then (R[n] + offset) else (R[n] - offset);
+    address = if index then offset_addr else R[n];
+    data = MemU[address,2];
+    if wback then R[n] = offset_addr;
+    R[t] = SignExtend(data, 32);
+```
+
+**异常**：UsageFault、MemManage、BusFault。
+
+### 7.66. LDRSHT：非特权加载有符号半字
+
+非特权加载有符号半字（Load Register Signed Halfword Unprivileged）由基址寄存器值与立即数偏移计算出地址，从存储器加载一个半字，将其符号扩展形成 32 位字，并写入寄存器。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。当特权软件使用 `LDRSHT` 指令时，存储器访问受到限制，如同该软件是非特权的一样。另参见第 B3-637 页的「MPU_CTRL 设置对非特权指令的影响」。
+
+**编码专用伪代码**
+
+```arm
+if Rn == '1111' then SEE LDRSH (literal);
+t = UInt(Rt);  n = UInt(Rn);  postindex = FALSE;  add = TRUE;
+register_form = FALSE;  imm32 = ZeroExtend(imm8, 32);
+if t IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`LDRSHT<c> <Rt>,[<Rn>,#<imm8>]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | 1 | 1 | 0 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+LDRSHT<c><q>
+  <Rt>, [<Rn>, {, #<imm>}]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：目的寄存器。
+* `<Rn>`：基址寄存器。该寄存器允许是 SP。
+* `<imm>`：加到 `<Rm>` 值上以形成地址的立即数偏移。允许范围：0-255。`<imm>` 可以省略，表示偏移 0。
+
+pre-UAL 语法 `LDR<c>SH` 等价于 `LDRSH<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    address = R[n] + imm32;
+    data = MemU_unpriv[address,2];
+    R[t] = SignExtend(data, 32);
+```
+
+**异常**：UsageFault、MemManage、BusFault。
+
+### 7.67. LDRT：非特权加载寄存器
+
+非特权加载寄存器（Load Register Unprivileged）由基址寄存器值与立即数偏移计算出地址，从存储器加载一个字，并写入寄存器。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。当特权软件使用 `LDRT` 指令时，存储器访问受到限制，如同该软件是非特权的一样。另参见第 B3-637 页的「MPU_CTRL 设置对非特权指令的影响」。
+
+**编码专用伪代码**
+
+```arm
+if Rn == '1111' then SEE LDR (literal);
+t = UInt(Rt);  n = UInt(Rn);  postindex = FALSE;  add = TRUE;
+register_form = FALSE;  imm32 = ZeroExtend(imm8, 32);
+if t IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`LDRT<c> <Rt>,[<Rn>,#<imm8>]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | 1 | 1 | 0 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+LDRT<c><q>
+  <Rt>, [<Rn> {, #<imm>}]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：目的寄存器。
+* `<Rn>`：基址寄存器。该寄存器允许是 SP。
+* `<imm>`：加到 `<Rn>` 值上以形成地址的立即数偏移。允许范围：0-255。`<imm>` 可以省略，表示偏移 0。
+
+pre-UAL 语法 `LDR<c>T` 等价于 `LDRT<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    address = R[n] + imm32;
+    data = MemU_unpriv[address,4];
+    R[t] = data;
+```
+
+**异常**：UsageFault、MemManage、BusFault。
+
+### 7.68. LSL (immediate)：立即数逻辑左移
+
+立即数逻辑左移（Logical Shift Left (immediate)）把一个寄存器值左移一个立即数位数，移入零，并把结果写入目的寄存器；它可以选择根据结果更新条件标志。
+
+**编码专用伪代码**
+
+```arm
+if imm5 == '00000' then SEE MOV (register);
+d = UInt(Rd);  m = UInt(Rm);  setflags = !InITBlock();
+(-, shift_n) = DecodeImmShift('00', imm5);
+
+if (imm3:imm2) == '00000' then SEE MOV (register);
+d = UInt(Rd);  m = UInt(Rm);  setflags = (S == '1');
+(-, shift_n) = DecodeImmShift('00', imm3:imm2);
+if d IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`LSLS <Rd>,<Rm>,#<imm5>`（IT 块外）、`LSL<c> <Rd>,<Rm>,#<imm5>`（IT 块内）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 0 | 0 | 0 | 0 | imm5 | imm5 | imm5 | imm5 | imm5 | Rm | Rm | Rm | Rd | Rd | Rd |
+
+**编码 T2**（Armv7-M）：`LSL{S}<c>.W <Rd>,<Rm>,#<imm5>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 1 | 0 | S | 1 | 1 | 1 | 1 |
+| [31:16] | (0) | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm2 | imm2 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+LSL{S}<c><q>
+  <Rd>, <Rm>, #<imm5>
+```
+
+where：
+
+* `S`：如果出现，表示指令更新标志；否则不更新标志。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。
+* `<Rm>`：指定包含第一个操作数的寄存器。
+* `<imm5>`：指定移位量，取值范围为 0 到 31。参见第 A7-182 页的「施加于寄存器的移位」。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    (result, carry) = Shift_C(R[m], SRType_LSL, shift_n, APSR.C);
+    R[d] = result;
+    if setflags then
+        APSR.N = result<31>;
+        APSR.Z = IsZeroBit(result);
+        APSR.C = carry;
+        // APSR.V unchanged
+```
+
+**异常**：无。
+
+### 7.69. LSL (register)：寄存器逻辑左移
+
+寄存器逻辑左移（Logical Shift Left (register)）把一个寄存器值左移一个可变位数，移入零，并把结果写入目的寄存器。该可变位数取自另一个寄存器的低字节。它可以选择根据结果更新条件标志。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rdn);  n = UInt(Rdn);  m = UInt(Rm);  setflags = !InITBlock();
+
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  setflags = (S == '1');
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`LSLS <Rdn>,<Rm>`（IT 块外）、`LSL<c> <Rdn>,<Rm>`（IT 块内）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | Rm | Rm | Rm | Rdn | Rdn | Rdn |
+
+**编码 T2**（Armv7-M）：`LSL{S}<c>.W <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | S | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+LSL{S}<c><q>
+  <Rd>, <Rn>, <Rm>
+```
+
+where：
+
+* `S`：如果出现，表示指令更新标志；否则不更新标志。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。
+* `<Rn>`：指定包含第一个操作数的寄存器。
+* `<Rm>`：指定其低字节包含移位量的寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    shift_n = UInt(R[m]<7:0>);
+    (result, carry) = Shift_C(R[n], SRType_LSL, shift_n, APSR.C);
+    R[d] = result;
+    if setflags then
+        APSR.N = result<31>;
+        APSR.Z = IsZeroBit(result);
+        APSR.C = carry;
+        // APSR.V unchanged
+```
+
+**异常**：无。
+
+### 7.70. LSR (immediate)：立即数逻辑右移
+
+立即数逻辑右移（Logical Shift Right (immediate)）把一个寄存器值右移一个立即数位数，移入零，并把结果写入目的寄存器；它可以选择根据结果更新条件标志。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  m = UInt(Rm);  setflags = !InITBlock();
+(-, shift_n) = DecodeImmShift('01', imm5);
+
+d = UInt(Rd);  m = UInt(Rm);  setflags = (S == '1');
+(-, shift_n) = DecodeImmShift('01', imm3:imm2);
+if d IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`LSRS <Rd>,<Rm>,#<imm5>`（IT 块外）、`LSR<c> <Rd>,<Rm>,#<imm5>`（IT 块内）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 0 | 0 | 0 | 1 | imm5 | imm5 | imm5 | imm5 | imm5 | Rm | Rm | Rm | Rd | Rd | Rd |
+
+**编码 T2**（Armv7-M）：`LSR{S}<c>.W <Rd>,<Rm>,#<imm5>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 1 | 0 | S | 1 | 1 | 1 | 1 |
+| [31:16] | (0) | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm2 | imm2 | 0 | 1 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+LSR{S}<c><q>
+  <Rd>, <Rm>, #<imm5>
+```
+
+where：
+
+* `S`：如果出现，表示指令更新标志；否则不更新标志。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。
+* `<Rm>`：指定包含第一个操作数的寄存器。
+* `<imm5>`：指定移位量，取值范围为 1 到 32。参见第 A7-182 页的「施加于寄存器的移位」。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    (result, carry) = Shift_C(R[m], SRType_LSR, shift_n, APSR.C);
+    R[d] = result;
+    if setflags then
+        APSR.N = result<31>;
+        APSR.Z = IsZeroBit(result);
+        APSR.C = carry;
+        // APSR.V unchanged
+```
+
+**异常**：无。
+
+### 7.71. LSR (register)：寄存器逻辑右移
+
+寄存器逻辑右移（Logical Shift Right (register)）把一个寄存器值右移一个可变位数，移入零，并把结果写入目的寄存器。该可变位数取自另一个寄存器的低字节。它可以选择根据结果更新条件标志。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rdn);  n = UInt(Rdn);  m = UInt(Rm);  setflags = !InITBlock();
+
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  setflags = (S == '1');
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`LSRS <Rdn>,<Rm>`（IT 块外）、`LSR<c> <Rdn>,<Rm>`（IT 块内）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | Rm | Rm | Rm | Rdn | Rdn | Rdn |
+
+**编码 T2**（Armv7-M）：`LSR{S}<c>.W <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 1 | S | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+LSR{S}<c><q>
+  <Rd>, <Rn>, <Rm>
+```
+
+where：
+
+* `S`：如果出现，表示指令更新标志；否则不更新标志。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。
+* `<Rn>`：指定包含第一个操作数的寄存器。
+* `<Rm>`：指定其低字节包含移位量的寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    shift_n = UInt(R[m]<7:0>);
+    (result, carry) = Shift_C(R[n], SRType_LSR, shift_n, APSR.C);
+    R[d] = result;
+    if setflags then
+        APSR.N = result<31>;
+        APSR.Z = IsZeroBit(result);
+        APSR.C = carry;
+        // APSR.V unchanged
+```
+
+**异常**：无。
+
+### 7.72. MCR、MCR2：Arm 寄存器移到协处理器
+
+从 Arm 寄存器移到协处理器（Move to Coprocessor from Arm Register）把某个 Arm 寄存器的值传给协处理器。
+
+如果没有协处理器可以执行该指令，则产生 UsageFault 异常。
+
+**编码专用伪代码**
+
+```arm
+t = UInt(Rt);  cp = UInt(coproc);
+if t == 15 || t == 13 then UNPREDICTABLE;
+
+t = UInt(Rt);  cp = UInt(coproc);
+if t == 15 || t == 13 then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`MCR<c> <coproc>,<opc1>,<Rt>,<CRn>,<CRm>{,<opc2>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | opc1 | opc1 | opc1 | 0 | CRn | CRn | CRn | CRn |
+| [31:16] | Rt | Rt | Rt | Rt | coproc | coproc | coproc | coproc | opc2 | opc2 | opc2 | 1 | CRm | CRm | CRm | CRm |
+
+**编码 T2**（Armv7-M）：`MCR2<c> <coproc>,<opc1>,<Rt>,<CRn>,<CRm>{,<opc2>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | opc1 | opc1 | opc1 | 0 | CRn | CRn | CRn | CRn |
+| [31:16] | Rt | Rt | Rt | Rt | coproc | coproc | coproc | coproc | opc2 | opc2 | opc2 | 1 | CRm | CRm | CRm | CRm |
+
+**汇编语法**
+
+```arm
+MCR{2}<c><q>
+  <coproc>, #<opc1>, <Rt>, <CRn>, <CRm>{, #<opc2>}
+```
+
+where：
+
+* `2`：如果指定，选择 `C == 1` 形式的编码；如果省略，选择 `C == 0` 形式。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<coproc>`：指定协处理器的名称。标准的通用协处理器名为 `p0`-`p15`。
+* `<opc1>`：是协处理器专用的操作码，范围为 0-7。
+* `<Rt>`：是值被传送给协处理器的 Arm 寄存器。
+* `<CRn>`：是目的协处理器寄存器。
+* `<CRm>`：是附加的目的协处理器寄存器。
+* `<opc2>`：是协处理器专用的操作码，范围为 0-7。如果省略，假定 `<opc2>` 为 0。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    if !Coproc_Accepted(cp, ThisInstr()) then
+        GenerateCoprocessorException();
+    else
+        Coproc_SendOneWord(R[t], cp, ThisInstr());
+```
+
+**异常**：UsageFault。
