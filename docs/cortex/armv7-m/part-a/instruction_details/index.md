@@ -10202,3 +10202,319 @@ if ConditionPassed() then
 ```
 
 **异常**：SVCall。
+
+### 7.179. SXTAB：有符号扩展并加字节
+
+有符号扩展并加字节（Signed Extend and Add Byte）从一个寄存器中提取一个 8 位值，把它符号扩展到 32 位，将结果加到另一个寄存器中的值上，并把最终结果写入目的寄存器。在提取 8 位值之前，可以指定 0、8、16 或 24 位的旋转。
+
+**编码专用伪代码**
+
+```arm
+if Rn == '1111' then SEE SXTB;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  rotation = UInt(rotate:'000');
+if d IN {13,15} || n == 13 || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SXTAB<c> <Rd>,<Rn>,<Rm>{,<rotation>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 1 | (0) | rotate | rotate | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SXTAB<c><q>
+  {<Rd>,} <Rn>, <Rm> {, <rotation>}
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+* `<rotation>`：可以是以下之一：
+  * 省略：编码为 `rotate = '00'`。
+  * `ROR #8`：编码为 `rotate = '01'`。
+  * `ROR #16`：编码为 `rotate = '10'`。
+  * `ROR #24`：编码为 `rotate = '11'`。
+
+**注意：** 汇编器可以把 `ROR #0` 视为与省略旋转相同（可能对允许的编码有限制），但这不是标准 UAL，不得用于反汇编。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    rotated = ROR(R[m], rotation);
+    R[d] = R[n] + SignExtend(rotated<7:0>, 32);
+```
+
+**异常**：无。
+
+### 7.180. SXTAB16：有符号扩展并加字节 16
+
+有符号扩展并加字节 16（Signed Extend and Add Byte 16）从一个寄存器中提取两个 8 位值，把它们各自符号扩展到 16 位，将结果加到另一个寄存器的两个 16 位值上，并把最终结果写入目的寄存器。在提取 8 位值之前，可以指定 0、8、16 或 24 位的旋转。
+
+**编码专用伪代码**
+
+```arm
+if Rn == '1111' then SEE SXTB16;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  rotation = UInt(rotate:'000');
+if d IN {13,15} || n == 13 || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SXTAB16<c> <Rd>,<Rn>,<Rm>{,<rotation>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 1 | (0) | rotate | rotate | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SXTAB16<c><q>
+  {<Rd>,} <Rn>, <Rm> {, <rotation>}
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+* `<rotation>`：可以是以下之一：
+  * 省略：编码为 `rotate = '00'`。
+  * `ROR #8`：编码为 `rotate = '01'`。
+  * `ROR #16`：编码为 `rotate = '10'`。
+  * `ROR #24`：编码为 `rotate = '11'`。
+
+**注意：** 汇编器可以把 `ROR #0` 视为与省略旋转相同（可能对允许的编码有限制），但这不是标准 UAL，不得用于反汇编。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    rotated = ROR(R[m], rotation);
+    R[d]<15:0>  = R[n]<15:0> + SignExtend(rotated<7:0>, 16);
+    R[d]<31:16> = R[n]<31:16> + SignExtend(rotated<23:16>, 16);
+```
+
+**异常**：无。
+
+### 7.181. SXTAH：有符号扩展并加半字
+
+有符号扩展并加半字（Signed Extend and Add Halfword）从一个寄存器中提取一个 16 位值，把它符号扩展到 32 位，将结果加到另一个寄存器中的值上，并把最终结果写入目的寄存器。在提取 16 位值之前，可以指定 0、8、16 或 24 位的旋转。
+
+**编码专用伪代码**
+
+```arm
+if Rn == '1111' then SEE SXTH;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  rotation = UInt(rotate:'000');
+if d IN {13,15} || n == 13 || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SXTAH<c> <Rd>,<Rn>,<Rm>{,<rotation>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 1 | (0) | rotate | rotate | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SXTAH<c><q>
+  {<Rd>,} <Rn>, <Rm> {, <rotation>}
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+* `<rotation>`：可以是以下之一：
+  * 省略：编码为 `rotate = '00'`。
+  * `ROR #8`：编码为 `rotate = '01'`。
+  * `ROR #16`：编码为 `rotate = '10'`。
+  * `ROR #24`：编码为 `rotate = '11'`。
+
+**注意：** 汇编器可以把 `ROR #0` 视为与省略旋转相同（可能对允许的编码有限制），但这不是标准 UAL，不得用于反汇编。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    rotated = ROR(R[m], rotation);
+    R[d] = R[n] + SignExtend(rotated<15:0>, 32);
+```
+
+**异常**：无。
+
+### 7.182. SXTB：有符号扩展字节
+
+有符号扩展字节（Signed Extend Byte）从一个寄存器中提取一个 8 位值，把它符号扩展到 32 位，并把结果写入目的寄存器。在提取 8 位值之前，可以指定 0、8、16 或 24 位的旋转。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  m = UInt(Rm);  rotation = 0;
+d = UInt(Rd);  m = UInt(Rm);  rotation = UInt(rotate:'000');
+if d IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv6-M、Armv7-M）：`SXTB<c> <Rd>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | Rm | Rm | Rm | Rd | Rd | Rd |
+
+**编码 T2**（Armv7-M）：`SXTB<c>.W <Rd>,<Rm>{,<rotation>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | 1 | 1 | 1 |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 1 | (0) | rotate | rotate | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SXTB<c><q>
+  <Rd>, <Rm> {, <rotation>}
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rm>`：包含操作数的寄存器。
+* `<rotation>`：可以是以下之一：
+  * 省略：编码为 `rotate = '00'`。
+  * `ROR #8`：编码为 `rotate = '01'`。
+  * `ROR #16`：编码为 `rotate = '10'`。
+  * `ROR #24`：编码为 `rotate = '11'`。
+
+**注意：** 如果你的汇编器接受移位 `#0` 并将其视为等同于无移位或 `LSL #0`，那么它必须在此处接受 `ROR #0`。它等价于省略 `<rotation>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    rotated = ROR(R[m], rotation);
+    R[d] = SignExtend(rotated<7:0>, 32);
+```
+
+**异常**：无。
+
+### 7.183. SXTB16：有符号扩展字节 16
+
+有符号扩展字节 16（Signed Extend Byte 16）从一个寄存器中提取两个 8 位值，把它们各自符号扩展到 16 位，并把结果写入目的寄存器。在提取 8 位值之前，可以指定 0、8、16 或 24 位的旋转。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  m = UInt(Rm);  rotation = UInt(rotate:'000');
+if d IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SXTB16<c> <Rd>,<Rm>{,<rotation>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 1 | 0 | 1 | 1 | 1 | 1 |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 1 | (0) | rotate | rotate | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SXTB16<c><q>
+  {<Rd>,} <Rm> {, <rotation>}
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rm>`：包含操作数的寄存器。
+* `<rotation>`：可以是以下之一：
+  * 省略：编码为 `rotate = '00'`。
+  * `ROR #8`：编码为 `rotate = '01'`。
+  * `ROR #16`：编码为 `rotate = '10'`。
+  * `ROR #24`：编码为 `rotate = '11'`。
+
+**注意：** 汇编器可以把 `ROR #0` 视为与省略旋转相同（可能对允许的编码有限制），但这不是标准 UAL，不得用于反汇编。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    rotated = ROR(R[m], rotation);
+    R[d]<15:0>  = SignExtend(rotated<7:0>, 16);
+    R[d]<31:16> = SignExtend(rotated<23:16>, 16);
+```
+
+**异常**：无。
+
+### 7.184. SXTH：有符号扩展半字
+
+有符号扩展半字（Signed Extend Halfword）从一个寄存器中提取一个 16 位值，把它符号扩展到 32 位，并把结果写入目的寄存器。在提取 16 位值之前，可以指定 0、8、16 或 24 位的旋转。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  m = UInt(Rm);  rotation = 0;
+d = UInt(Rd);  m = UInt(Rm);  rotation = UInt(rotate:'000');
+if d IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv6-M、Armv7-M）：`SXTH<c> <Rd>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | Rm | Rm | Rm | Rd | Rd | Rd |
+
+**编码 T2**（Armv7-M）：`SXTH<c>.W <Rd>,<Rm>{,<rotation>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 1 | 1 |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 1 | (0) | rotate | rotate | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SXTH<c><q>
+  <Rd>, <Rm> {, <rotation>}
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rm>`：包含操作数的寄存器。
+* `<rotation>`：可以是以下之一：
+  * 省略：编码为 `rotate = '00'`。
+  * `ROR #8`：编码为 `rotate = '01'`。
+  * `ROR #16`：编码为 `rotate = '10'`。
+  * `ROR #24`：编码为 `rotate = '11'`。
+
+**注意：** 如果你的汇编器接受移位 `#0` 并将其视为等同于无移位或 `LSL #0`，那么它必须在此处接受 `ROR #0`。它等价于省略 `<rotation>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    rotated = ROR(R[m], rotation);
+    R[d] = SignExtend(rotated<15:0>, 32);
+```
+
+**异常**：无。
