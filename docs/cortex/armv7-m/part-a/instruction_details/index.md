@@ -9443,3 +9443,394 @@ if ConditionPassed() then
 ```
 
 **异常**：MemManage、BusFault。
+
+### 7.166. STRD (immediate)：立即数存储双寄存器
+
+立即数存储双寄存器（Store Register Dual (immediate)）由基址寄存器值与立即数偏移计算出地址，把两个字从两个寄存器存储到存储器。它可以使用偏移、后索引或前索引寻址。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。
+
+**编码专用伪代码**
+
+```arm
+if P == '0' && W == '0' then SEE "Related encodings";
+t = UInt(Rt);  t2 = UInt(Rt2);  n = UInt(Rn);  imm32 = ZeroExtend(imm8:'00', 32);
+index = (P == '1');  add = (U == '1');  wback = (W == '1');
+if wback && (n == t || n == t2) then UNPREDICTABLE;
+if n == 15 || t IN {13,15} || t2 IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`STRD<c> <Rt>,<Rt2>,[<Rn>{,#+/-<imm8>}]`（偏移：`index == TRUE`、`wback == FALSE`）、`STRD<c> <Rt>,<Rt2>,[<Rn>,#+/-<imm8>]!`（前索引：`index == TRUE`、`wback == TRUE`）、`STRD<c> <Rt>,<Rt2>,[<Rn>],#+/-<imm8>`（后索引：`index == FALSE`、`wback == TRUE`）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 0 | P | U | 1 | W | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | Rt2 | Rt2 | Rt2 | Rt2 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+STRD<c><q>
+  <Rt>, <Rt2>, [<Rn> {, #+/-<imm>}]
+STRD<c><q>
+  <Rt>, <Rt2>, [<Rn>, #+/-<imm>]!
+STRD<c><q>
+  <Rt>, <Rt2>, [<Rn>], #+/-<imm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：第一个源寄存器。
+* `<Rt2>`：第二个源寄存器。
+* `<Rn>`：基址寄存器。该寄存器允许是 SP。
+* `+/-`：`+` 或省略表示立即数偏移加到基址寄存器值上（`add == TRUE`），`-` 表示减去该偏移（`add == FALSE`）。`#0` 与 `#-0` 生成不同的指令。
+* `<imm>`：加到 `<Rn>` 值上或从中减去以形成地址的立即数偏移。允许范围为 0-1020 范围内 4 的倍数。在偏移寻址语法中 `<imm>` 可以省略，表示偏移 0。
+
+pre-UAL 语法 `STR<c>D` 等价于 `STRD<c>`。
+
+**相关编码**：参见第 A5-145 页的「加载/存储双字或独占、表分支」。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    offset_addr = if add then (R[n] + imm32) else (R[n] - imm32);
+    address = if index then offset_addr else R[n];
+    MemA[address,4] = R[t];
+    MemA[address+4,4] = R[t2];
+    if wback then R[n] = offset_addr;
+```
+
+**异常**：UsageFault、MemManage、BusFault。
+
+### 7.167. STREX：存储寄存器独占
+
+存储寄存器独占（Store Register Exclusive）由基址寄存器值与立即数偏移计算出地址，若执行处理器对被寻址的存储器具有独占访问权，则把一个字从寄存器存储到存储器。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  t = UInt(Rt);  n = UInt(Rn);  imm32 = ZeroExtend(imm8:'00', 32);
+if d IN {13,15} || t IN {13,15} || n == 15 then UNPREDICTABLE;
+if d == n || d == t then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`STREX<c> <Rd>,<Rt>,[<Rn>{,#<imm8>}]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | Rd | Rd | Rd | Rd | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+STREX<c><q>
+  <Rd>, <Rt>, [<Rn> {, #<imm>}]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：返回状态值的目的寄存器。返回值为：
+  * `0`：如果操作更新了存储器。
+  * `1`：如果操作未能更新存储器。
+* `<Rt>`：源寄存器。
+* `<Rn>`：基址寄存器。该寄存器允许是 SP。
+* `<imm>`：加到 `<Rn>` 值上以形成地址的立即数偏移。允许范围为 0-1020 范围内 4 的倍数。`<imm>` 可以省略，表示偏移 0。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    address = R[n] + imm32;
+    if ExclusiveMonitorsPass(address,4) then
+        MemA[address,4] = R[t];
+        R[d] = ZeroExtend('0', 32);
+    else
+        R[d] = ZeroExtend('1', 32);
+```
+
+**异常**：UsageFault、MemManage、BusFault。
+
+### 7.168. STREXB：存储寄存器独占字节
+
+存储寄存器独占字节（Store Register Exclusive Byte）由基址寄存器值推导出地址，若执行处理器对被寻址的存储器具有独占访问权，则把一个字节从寄存器存储到存储器。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  t = UInt(Rt);  n = UInt(Rn);
+if d IN {13,15} || t IN {13,15} || n == 15 then UNPREDICTABLE;
+if d == n || d == t then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`STREXB<c> <Rd>,<Rt>,[<Rn>]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | (1) | (1) | (1) | (1) | 0 | 1 | 0 | 0 | Rd | Rd | Rd | Rd |
+
+**汇编语法**
+
+```arm
+STREXB<c><q>
+  <Rd>, <Rt>, [<Rn>]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：返回状态值的目的寄存器。返回值为：
+  * `0`：如果操作更新了存储器。
+  * `1`：如果操作未能更新存储器。
+* `<Rt>`：源寄存器。
+* `<Rn>`：基址寄存器。该寄存器允许是 SP。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    address = R[n];
+    if ExclusiveMonitorsPass(address,1) then
+        MemA[address,1] = R[t]<7:0>;
+        R[d] = ZeroExtend('0', 32);
+    else
+        R[d] = ZeroExtend('1', 32);
+```
+
+**异常**：MemManage、BusFault。
+
+### 7.169. STREXH：存储寄存器独占半字
+
+存储寄存器独占半字（Store Register Exclusive Halfword）由基址寄存器值推导出地址，若执行处理器对被寻址的存储器具有独占访问权，则把一个半字从寄存器存储到存储器。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  t = UInt(Rt);  n = UInt(Rn);
+if d IN {13,15} || t IN {13,15} || n == 15 then UNPREDICTABLE;
+if d == n || d == t then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`STREXH<c> <Rd>,<Rt>,[<Rn>]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | (1) | (1) | (1) | (1) | 0 | 1 | 0 | 1 | Rd | Rd | Rd | Rd |
+
+**汇编语法**
+
+```arm
+STREXH<c><q>
+  <Rd>, <Rt>, [<Rn>]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：返回状态值的目的寄存器。返回值为：
+  * `0`：如果操作更新了存储器。
+  * `1`：如果操作未能更新存储器。
+* `<Rt>`：源寄存器。
+* `<Rn>`：基址寄存器。该寄存器允许是 SP。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    address = R[n];
+    if ExclusiveMonitorsPass(address,2) then
+        MemA[address,2] = R[t]<15:0>;
+        R[d] = ZeroExtend('0', 32);
+    else
+        R[d] = ZeroExtend('1', 32);
+```
+
+**异常**：UsageFault、MemManage、BusFault。
+
+### 7.170. STRH (immediate)：立即数存储寄存器半字
+
+立即数存储寄存器半字（Store Register Halfword (immediate)）由基址寄存器值与立即数偏移计算出地址，把一个半字从寄存器存储到存储器。它可以使用偏移、后索引或前索引寻址。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。
+
+**编码专用伪代码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);  imm32 = ZeroExtend(imm5:'0', 32);
+index = TRUE;  add = TRUE;  wback = FALSE;
+if Rn == '1111' then UNDEFINED;
+
+t = UInt(Rt);  n = UInt(Rn);  imm32 = ZeroExtend(imm12, 32);
+index = TRUE;  add = TRUE;  wback = FALSE;
+if t IN {13,15} then UNPREDICTABLE;
+
+if P == '1' && U == '1' && W == '0' then SEE STRHT;
+if Rn == '1111' || (P == '0' && W == '0') then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);  imm32 = ZeroExtend(imm8, 32);
+index = (P == '1');  add = (U == '1');  wback = (W == '1');
+if t IN {13,15} || (wback && n == t) then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`STRH<c> <Rt>,[<Rn>{,#<imm5>}]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 0 | 0 | 0 | 0 | imm5 | imm5 | imm5 | imm5 | imm5 | Rn | Rn | Rn | Rt | Rt | Rt |
+
+**编码 T2**（Armv7-M）：`STRH<c>.W <Rt>,[<Rn>{,#<imm12>}]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 |
+
+**编码 T3**（Armv7-M）：`STRH<c> <Rt>,[<Rn>,#-<imm8>]`（偏移：`index == TRUE`、`wback == FALSE`）、`STRH<c> <Rt>,[<Rn>],#+/-<imm8>`（后索引：`index == FALSE`、`wback == TRUE`）、`STRH<c> <Rt>,[<Rn>,#+/-<imm8>]!`（前索引：`index == TRUE`、`wback == TRUE`）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | P | U | W | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+STRH<c><q>
+  <Rt>, [<Rn> {, #+/-<imm>}]
+STRH<c><q>
+  <Rt>, [<Rn>, #+/-<imm>]!
+STRH<c><q>
+  <Rt>, [<Rn>], #+/-<imm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：源寄存器。
+* `<Rn>`：基址寄存器。该寄存器允许是 SP。
+* `+/-`：`+` 或省略表示立即数偏移加到基址寄存器值上（`add == TRUE`），`-` 表示减去该偏移（`add == FALSE`）。`#0` 与 `#-0` 生成不同的指令。
+* `<imm>`：加到 `<Rn>` 值上或从中减去以形成地址的立即数偏移。编码 T1 允许 0-62 范围内 2 的倍数，编码 T2 允许 0-4095 范围内的任意值，编码 T3 允许 0-255 范围内的任意值。在偏移寻址语法中 `<imm>` 可以省略，表示偏移 0。
+
+pre-UAL 语法 `STR<c>H` 等价于 `STRH<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    offset_addr = if add then (R[n] + imm32) else (R[n] - imm32);
+    address = if index then offset_addr else R[n];
+    MemU[address,2] = R[t]<15:0>;
+    if wback then R[n] = offset_addr;
+```
+
+**异常**：UsageFault、MemManage、BusFault。
+
+### 7.171. STRH (register)：寄存器存储寄存器半字
+
+寄存器存储寄存器半字（Store Register Halfword (register)）由基址寄存器值与偏移寄存器值计算出地址，把一个半字从寄存器存储到存储器。偏移寄存器值可以被左移 0、1、2 或 3 位。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。
+
+**编码专用伪代码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);  m = UInt(Rm);
+index = TRUE;  add = TRUE;  wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, 0);
+if Rn == '1111' then UNDEFINED;
+
+t = UInt(Rt);  n = UInt(Rn);  m = UInt(Rm);
+index = TRUE;  add = TRUE;  wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, UInt(imm2));
+if t IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`STRH<c> <Rt>,[<Rn>,<Rm>]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 1 | 0 | 1 | 0 | 0 | 1 | Rm | Rm | Rm | Rn | Rn | Rn | Rt | Rt | Rt |
+
+**编码 T2**（Armv7-M）：`STRH<c>.W <Rt>,[<Rn>,<Rm>{,LSL #<imm2>}]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | 0 | 0 | 0 | 0 | 0 | 0 | imm2 | imm2 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+STRH<c><q>
+  <Rt>, [<Rn>, <Rm> {, LSL #<shift>}]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：源寄存器。
+* `<Rn>`：包含基址值的寄存器。该寄存器允许是 SP。
+* `<Rm>`：包含偏移的寄存器，该偏移左移后加到 `<Rn>` 值上以形成地址。
+* `<shift>`：`<Rm>` 中值左移的位数，范围为 0-3。如果省略该选项，则假定移位 0，且两种编码都允许；如果指定该选项，则只允许编码 T2。
+
+pre-UAL 语法 `STR<c>H` 等价于 `STRH<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    offset = Shift(R[m], shift_t, shift_n, APSR.C);
+    address = R[n] + offset;
+    MemU[address,2] = R[t]<15:0>;
+```
+
+**异常**：UsageFault、MemManage、BusFault。
+
+### 7.172. STRHT：非特权存储寄存器半字
+
+非特权存储寄存器半字（Store Register Halfword Unprivileged）由基址寄存器值与立即数偏移计算出地址，把一个半字从寄存器存储到存储器。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。特权软件使用 `STRHT` 指令时，存储器访问受到限制，如同该软件是非特权的一样。另见第 B3-637 页的「MPU_CTRL 设置对非特权指令的影响」。
+
+**编码专用伪代码**
+
+```arm
+if Rn == '1111' then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);  postindex = FALSE;  add = TRUE;
+register_form = FALSE;  imm32 = ZeroExtend(imm8, 32);
+if t IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`STRHT<c> <Rt>,[<Rn>,#<imm8>]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | 1 | 1 | 0 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+STRHT<c><q>
+  <Rt>, [<Rn> {, #<imm>}]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：源寄存器。
+* `<Rn>`：基址寄存器。该寄存器允许是 SP。
+* `<imm>`：加到 `<Rn>` 值上以形成地址的立即数偏移。允许范围为 0-255。`<imm>` 可以省略，表示偏移 0。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    address = R[n] + imm32;
+    MemU_unpriv[address,2] = R[t]<15:0>;
+```
+
+**异常**：UsageFault、MemManage、BusFault。
