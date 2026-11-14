@@ -8516,3 +8516,402 @@ if ConditionPassed() then
 ```
 
 **异常**：无。
+
+### 7.150. SMULWB、SMULWT：有符号字乘半字
+
+有符号字乘半字（Signed Multiply (word by halfword)）把一个有符号 32 位量与一个有符号 16 位量相乘。该有符号 16 位量取自其源寄存器的低半字或高半字。第二个源寄存器的另一半被忽略。48 位乘积的高 32 位被写入目的寄存器。48 位乘积的低 16 位被忽略。该指令过程中不会发生溢出。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  m_high = (M == '1');
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SMULW<y><c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 0 | M | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SMULW<y>{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<y>`：指定源寄存器 `<Rm>` 的哪一半用作第二个乘数操作数。如果 `<y>` 为 `B`，则使用 `<Rm>` 的低半字（位[15:0]）。如果 `<y>` 为 `T`，则使用 `<Rm>` 的高半字（位[31:16]）。
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：其低半字或高半字（由 `<y>` 选择）作为第二个乘数操作数的源寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    operand2 = if m_high then R[m]<31:16> else R[m]<15:0>;
+    product = SInt(R[n]) * SInt(operand2);
+    R[d] = product<47:16>;
+    // Signed overflow cannot occur
+```
+
+**异常**：无。
+
+### 7.151. SMUSD、SMUSDX：有符号双半字乘减
+
+有符号双半字乘减（Signed Dual Multiply Subtract）执行两次有符号 16 × 16 位乘法。它把其中一个乘积从另一个中减去，并把结果写入目的寄存器。
+
+可选地，可以在执行算术运算前交换第二个操作数的半字。这样产生高 × 低与低 × 高的乘法。
+
+不会发生溢出。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  m_swap = (M == '1');
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SMUSD{X}<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 1 | 0 | 1 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 0 | M | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SMUSD{X}{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `X`：如果存在 `X`，则乘法为低 × 高与高 × 低。如果省略 `X`，则乘法为低 × 低与高 × 高。
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    operand2 = if m_swap then ROR(R[m],16) else R[m];
+    product1 = SInt(R[n]<15:0>) * SInt(operand2<15:0>);
+    product2 = SInt(R[n]<31:16>) * SInt(operand2<31:16>);
+    result = product1 - product2;
+    R[d] = result<31:0>;
+    // Signed overflow cannot occur
+```
+
+**异常**：无。
+
+### 7.152. SSAT：有符号饱和
+
+有符号饱和（Signed Saturate）把可选移位的带符号值饱和到一个可选的带符号范围。
+
+如果该运算发生饱和，Q 标志被置为 1。
+
+**编码专用伪代码**
+
+```arm
+if sh == '1' && (imm3:imm2) == '00000' then
+    if HaveDSPExt() then
+        SEE SSAT16;
+    else
+        UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  saturate_to = UInt(sat_imm)+1;
+(shift_t, shift_n) = DecodeImmShift(sh:'0', imm3:imm2);
+if d IN {13,15} || n IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`SSAT<c> <Rd>,#<imm5>,<Rn>{,<shift>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | (0) | 1 | 1 | 0 | 0 | sh | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 0 | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm2 | imm2 | (0) | sat_imm | sat_imm | sat_imm | sat_imm | sat_imm |
+
+**汇编语法**
+
+```arm
+SSAT<c><q>
+  <Rd>, #<imm>, <Rn> {,<shift>}
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。
+* `<imm>`：指定用于饱和的位位置，范围为 1-32。
+* `<Rn>`：指定包含待饱和值的寄存器。
+* `<shift>`：指定可选移位。如果省略 `<shift>`，则使用 `LSL #0`。如果存在，它必须是以下之一：
+  * `LSL #N`：`N` 必须在 0-31 范围内。
+  * `ASR #N`：`N` 必须在 1-31 范围内。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    operand = Shift(R[n], shift_t, shift_n, APSR.C);  // APSR.C ignored
+    (result, sat) = SignedSatQ(SInt(operand), saturate_to);
+    R[d] = SignExtend(result, 32);
+    if sat then
+        APSR.Q = '1';
+```
+
+**异常**：无。
+
+### 7.153. SSAT16：有符号 16 饱和
+
+有符号 16 饱和（Signed Saturate 16）把两个有符号 16 位值饱和到一个选定的带符号范围。
+
+如果该运算发生饱和，Q 标志被置为 1。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  saturate_to = UInt(sat_imm)+1;
+if d IN {13,15} || n IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SSAT16<c> <Rd>,#<imm>,<Rn>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | (0) | 1 | 1 | 0 | 0 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 0 | 0 | 0 | 0 | Rd | Rd | Rd | Rd | 0 | 0 | (0) | (0) | sat_imm | sat_imm | sat_imm | sat_imm |
+
+**汇编语法**
+
+```arm
+SSAT16{<c>}{<q>}
+  <Rd>, #<imm>, <Rn>
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<imm>`：用于饱和的位位置，范围为 1-16。
+* `<Rn>`：包含待饱和值的寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    (result1, sat1) = SignedSatQ(SInt(R[n]<15:0>), saturate_to);
+    (result2, sat2) = SignedSatQ(SInt(R[n]<31:16>), saturate_to);
+    R[d]<15:0> = SignExtend(result1, 16);
+    R[d]<31:16> = SignExtend(result2, 16);
+    if sat1 || sat2 then
+        APSR.Q = '1';
+```
+
+**异常**：无。
+
+### 7.154. SSAX：有符号交换加减
+
+有符号交换加减（Signed Subtract and Add with Exchange）交换第二个操作数的两个半字，执行一次 16 位整数减法与一次 16 位加法，并把结果写入目的寄存器。它根据结果设置 APSR.GE 位。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SSAX<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SSAX{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+pre-UAL 语法 `SSUBADDX<c>` 等价于 `SSAX<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    sum  = SInt(R[n]<15:0>) + SInt(R[m]<31:16>);
+    diff = SInt(R[n]<31:16>) - SInt(R[m]<15:0>);
+    R[d]<15:0>  = sum<15:0>;
+    R[d]<31:16> = diff<15:0>;
+    APSR.GE<1:0> = if sum  >= 0 then '11' else '00';
+    APSR.GE<3:2> = if diff >= 0 then '11' else '00';
+```
+
+**异常**：无。
+
+### 7.155. SSBB：推测存储绕过屏障
+
+推测存储绕过屏障（Speculative Store Bypass Barrier）是一种内存屏障，它在特定条件下阻止推测性加载绕过对同一虚拟地址的更早存储。推测存储绕过屏障的语义如下：
+
+* 当对某个位置的加载在程序顺序上位于 `SSBB` 之后时，该加载不会推测性地读取该位置一致性顺序中、早于满足以下所有条件的最新存储所生成的条目的条目：
+  * 该存储与加载访问同一位置。
+  * 该存储使用与加载相同的虚拟地址。
+  * 该存储在程序顺序上位于 `SSBB` 之前。
+* 当对某个位置的加载在程序顺序上位于 `SSBB` 之前时，该加载不会推测性地读取来自满足以下所有条件的任何存储的数据：
+  * 该存储与加载访问同一位置。
+  * 该存储使用与加载相同的虚拟地址。
+  * 该存储在程序顺序上位于 `SSBB` 之后。
+
+**编码专用伪代码**
+
+```arm
+if InITBlock() then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`SSBB<q>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | 1 | 0 | 1 | 1 | (1) | (1) | (1) | (1) |
+| [31:16] | 1 | 0 | (0) | 0 | (1) | (1) | (1) | (1) | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+**汇编语法**
+
+```arm
+SSBB{<q>}
+```
+
+where：
+
+* `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    SpeculativeSynchronizationBarrierToVA();
+```
+
+**异常**：无。
+
+### 7.156. SSUB16：有符号 16 位减
+
+有符号 16 位减（Signed Subtract 16）执行两次 16 位有符号整数减法，并把结果写入目的寄存器。它根据减法结果设置 APSR.GE 位。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SSUB16<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SSUB16{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    diff1 = SInt(R[n]<15:0>) - SInt(R[m]<15:0>);
+    diff2 = SInt(R[n]<31:16>) - SInt(R[m]<31:16>);
+    R[d]<15:0>  = diff1<15:0>;
+    R[d]<31:16> = diff2<15:0>;
+    APSR.GE<1:0> = if diff1 >= 0 then '11' else '00';
+    APSR.GE<3:2> = if diff2 >= 0 then '11' else '00';
+```
+
+**异常**：无。
+
+### 7.157. SSUB8：有符号 8 位减
+
+有符号 8 位减（Signed Subtract 8）执行四次 8 位有符号整数减法，并把结果写入目的寄存器。它根据减法结果设置 APSR.GE 位。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SSUB8<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SSUB8{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    diff1 = SInt(R[n]<7:0>) - SInt(R[m]<7:0>);
+    diff2 = SInt(R[n]<15:8>) - SInt(R[m]<15:8>);
+    diff3 = SInt(R[n]<23:16>) - SInt(R[m]<23:16>);
+    diff4 = SInt(R[n]<31:24>) - SInt(R[m]<31:24>);
+    R[d]<7:0>   = diff1<7:0>;
+    R[d]<15:8>  = diff2<7:0>;
+    R[d]<23:16> = diff3<7:0>;
+    R[d]<31:24> = diff4<7:0>;
+    APSR.GE<0>  = if diff1 >= 0 then '1' else '0';
+    APSR.GE<1>  = if diff2 >= 0 then '1' else '0';
+    APSR.GE<2>  = if diff3 >= 0 then '1' else '0';
+    APSR.GE<3>  = if diff4 >= 0 then '1' else '0';
+```
+
+**异常**：无。
