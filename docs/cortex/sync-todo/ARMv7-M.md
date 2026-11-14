@@ -58,7 +58,7 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
   - S8 result: merged as `2d7e17f` (PR #324).
   - 2026-11-15 extraction: A4 moved out of the TRM page into a standalone Part A article `armv7-m/part-a/instruction_set/index.md` with front matter, the chapter intro as page intro, and A4.1–A4.13 renumbered to `## 1.`–`## 13.` (subsections `1.1`–`4.8`, `6.1`–`6.5`, `7.1`). Fidelity re-checked section by section against PDF pp. 102–124 (13 sections, 22 tables, all rows and page references). The TRM page keeps its 200-row summary as `## 1.` plus a pointer link. Nav entry inserted before 指令集编码; `part-a/index.md` and `armv7-m/index.md` lists renumbered.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [x] A5 → new article (The Thumb Instruction Set Encoding, 1,190 ln; e.g. `armv7-m/part-a/thumb_instruction_set_encoding/`)
+- [x] A5 → new article (The Thumb Instruction Set Encoding, 916 ln; e.g. `armv7-m/part-a/thumb_instruction_set_encoding/`)
   - Note: encoding tables are textual — GFM by default; raw HTML only when the structure qualifies (see .agents/skills/arm-translate/references/article-format.md §Tables). A7 instruction-by-instruction details are NOT in this row (deferred tail).
   - S1 result: A5 = PDF pp. 125–158; structure fixed to 3 chapters — §1 Thumb 指令集编码 (1.1 UNDEFINED/UNPREDICTABLE 空间, 1.2 0b1111 寄存器说明符, 1.3 0b1101/SP 支持 1.3.1–1.3.3), §2 16 位编码 (2.1–2.6, 2.5.1 If-Then 与提示), §3 32 位编码 (3.1–3.18, 3.4.1 提示, 3.4.2 杂项控制, 3.11.1 移动寄存器和立即数移位).
   - S2 result: article `armv7-m/part-a/thumb_instruction_set_encoding/index.md` written in place; numbering restarts at 1; source typos preserved.
@@ -67,6 +67,7 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
   - S5 result: `--strict` build 0 WARNINGs; `check_indexes.py` OK (324 nav targets, 0 broken links); `check_heading_lang.py` OK.
   - S6 result: all 30 tables (A5-1 … A5-30) rendered as GFM with merged cells expanded by repeating the spanning value; footnotes as `a.` / `b.` lines; cross-references phrased as `MOV（立即数）（第 A7-291 页）`.
   - S8 result: merged as `de13acc` (PR #327).
+  - Verify result (2026-11-15): re-checked against PDF pp. 125–158 section by section — 3 chapters, 27 subsections (1.1–1.3.3, 2.1–2.6 + 2.5.1, 3.1–3.18 + 3.4.1/3.4.2/3.11.1) and tables A5-1 … A5-30 all match the source row for row. Fixed: p126 Note re-rendered as `**注意：**`; the two "deprecated" sentences reworded to the series form `**Arm** 不推荐使用`; Table A5-11 rows `01001`–`01011` restored to 8-bit groups.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] A6 → new article (The Floating-point Instruction Set Encoding, 362 ln; `armv7-m/part-a/fp_instruction_set_encoding/`)
   - S1 result: A6 = PDF pp. 160–170; structure fixed to 7 chapters — §1 概述, §2 浮点指令语法 (2.1 数据类型说明符, 2.2 寄存器说明符, 2.3 寄存器列表), §3 寄存器编码, §4 浮点数据处理指令 (4.1 修改立即数常量的运算), §5 扩展寄存器加载或存储指令, §6 32 位传送, §7 64 位传送. Census: 9 tables (A6-1 … A6-9) + 5 unnumbered encoding bars.
