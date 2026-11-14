@@ -12832,3 +12832,183 @@ if ConditionPassed() then
 **异常**：未定义指令。
 
 浮点异常：输入非规格化、无效运算、不精确。
+
+### 7.230. VCVT（双精度与单精度之间）：浮点转换
+
+该指令执行以下操作之一：
+
+* 把双精度寄存器中的值转换为单精度，并把结果写入单精度寄存器。
+* 把单精度寄存器中的值转换为双精度，并把结果写入双精度寄存器。
+
+**编码专用伪代码**
+
+```arm
+double_to_single = (sz == '1');
+d = if double_to_single then UInt(Vd:D) else UInt(D:Vd);
+m = if double_to_single then UInt(M:Vm) else UInt(Vm:M);
+```
+
+**编码 T1**（FPv5；在仅单精度变体中为未定义）：`VCVT<c>.F64.F32 <Dd>,<Sm>`（`sz = 0`）、`VCVT<c>.F32.F64 <Sd>,<Dm>`（`sz = 1`）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | D | 1 | 1 | 0 | 1 | 1 | 1 |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | 1 | 1 | M | 0 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VCVT<c><q>.F64.F32
+  <Dd>, <Sm>                   // 编码为 sz = 0
+VCVT<c><q>.F32.F64
+  <Sd>, <Dm>                   // 编码为 sz = 1
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Dd>`、`<Sm>`：单精度操作数时的目的寄存器与操作数寄存器。
+* `<Sd>`、`<Dm>`：双精度操作数时的目的寄存器与操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();  ExecuteFPCheck();
+    if double_to_single then
+        S[d] = FPDoubleToSingle(D[m], TRUE);
+    else
+        D[d] = FPSingleToDouble(S[m], TRUE);
+```
+
+**异常**：未定义指令。
+
+浮点异常：输入非规格化、无效运算、溢出、下溢、不精确。
+
+### 7.231. VCVTB、VCVTT：浮点转换底部、浮点转换顶部
+
+浮点转换底部与浮点转换顶部（Floating-point Convert Bottom、Floating-point Convert Top）执行以下操作之一：
+
+* 把单精度寄存器顶部或底部半字中的半精度值转换为单精度，并把结果写入单精度寄存器。
+* 把单精度寄存器中的值转换为半精度，并把结果写入单精度寄存器的顶部或底部半字，同时保持目标寄存器的另一半不变。
+* 把单精度寄存器顶部或底部半字中的半精度值转换为双精度，并把结果写入双精度寄存器，且没有中间舍入。
+* 把双精度寄存器中的值转换为半精度，并把结果写入双精度寄存器的顶部或底部半字，同时保持目标寄存器的另一半不变，且没有中间舍入。
+
+**编码专用伪代码**
+
+```arm
+dp_operation = (sz == '1');
+convert_from_half = (op == '0');
+lowbit = if T == '1' then 16 else 0;
+if dp_operation then
+    if convert_from_half then
+        d=UInt(D:Vd);m = UInt(Vm:M);
+    else
+        d=UInt(Vd:D);m = UInt(M:Vm);
+else
+    d=UInt(Vd:D);m = UInt(Vm:M);
+```
+
+**编码 T1**（FPv4-SP、FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VCVTB<c>.F32.F16 <Sd>,<Sm>`、`VCVTT<c>.F32.F16 <Sd>,<Sm>`（`op = 0`、`sz = 0`）、`VCVTB<c>.F16.F32 <Sd>,<Sm>`、`VCVTT<c>.F16.F32 <Sd>,<Sm>`（`op = 1`、`sz = 0`）、`VCVTB<c>.F64.F16 <Dd>,<Sm>`、`VCVTT<c>.F64.F16 <Dd>,<Sm>`（`op = 0`、`sz = 1`）、`VCVTB<c>.F16.F64 <Sd>,<Dm>`、`VCVTT<c>.F16.F64 <Sd>,<Dm>`（`op = 1`、`sz = 1`）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | D | 1 | 1 | 0 | 0 | 1 | op |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | T | 1 | M | 0 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VCVT<y><c><q>.F32.F16
+  <Sd>, <Sm>                   // 编码为 op = 0、sz = 0
+VCVT<y><c><q>.F16.F32
+  <Sd>, <Sm>                   // 编码为 op = 1、sz = 0
+VCVT<y><c><q>.F64.F16
+  <Dd>, <Sm>                   // 编码为 op = 0、sz = 1
+VCVT<y><c><q>.F16.F64
+  <Sd>, <Dm>                   // 编码为 op = 1、sz = 1
+```
+
+where：
+
+* `<y>`：指定操作数寄存器 `<Sm>` 或目的寄存器 `<Sd>` 使用哪一半作为操作数或目的：
+  * `B`：`VCVTB`，编码为 `T = 0`；指令使用寄存器的底部半字，即位 [15:0]。
+  * `T`：`VCVTT`，编码为 `T = 1`；指令使用寄存器的顶部半字，即位 [31:16]。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Sd>`：单精度目的寄存器。
+* `<Sm>`：单精度操作数寄存器。
+* `<Dd>`：双精度目的寄存器。
+* `<Dm>`：双精度操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    if convert_from_half then
+        if dp_operation then
+            D[d] = FPHalfToDouble(S[m]<lowbit+15:lowbit>, TRUE);
+        else
+            S[d] = FPHalfToSingle(S[m]<lowbit+15:lowbit>, TRUE);
+    else
+        if dp_operation then
+            S[d]<lowbit+15:lowbit> = FPDoubleToHalf(D[m], TRUE);
+        else
+            S[d]<lowbit+15:lowbit> = FPSingleToHalf(S[m], TRUE);
+```
+
+**异常**：未定义指令。
+
+浮点异常：无效运算、输入非规格化、溢出、下溢、不精确。
+
+### 7.232. VDIV：浮点除法
+
+浮点除法（Floating-point Divide）把一个浮点值除以另一个浮点值，并把结果写入第三个浮点寄存器。
+
+**编码专用伪代码**
+
+```arm
+dp_operation = (sz == '1');
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+n = if dp_operation then UInt(N:Vn) else UInt(Vn:N);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+**编码 T1**（FPv4-SP、FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VDIV<c>.F32 <Sd>,<Sn>,<Sm>`、`VDIV<c>.F64 <Dd>,<Dn>,<Dm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | D | 0 | 0 | Vn | Vn | Vn | Vn |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | N | 0 | M | 0 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VDIV<c><q>.F32
+  {<Sd>,} <Sn>, <Sm>           // 编码为 sz = 0
+VDIV<c><q>.F64
+  {<Dd>,} <Dn>, <Dm>           // 编码为 sz = 1
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Sd>`、`<Sn>`、`<Sm>`：单精度运算时的目的寄存器与操作数寄存器。
+* `<Dd>`、`<Dn>`、`<Dm>`：双精度运算时的目的寄存器与操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    if dp_operation then
+        D[d] = FPDiv(D[n], D[m], TRUE);
+    else
+        S[d] = FPDiv(S[n], S[m], TRUE);
+```
+
+**异常**：未定义指令。
+
+浮点异常：无效运算、除零、溢出、下溢、不精确、输入非规格化。
