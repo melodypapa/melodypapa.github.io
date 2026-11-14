@@ -11917,3 +11917,304 @@ if ConditionPassed() then
 ```
 
 **异常**：无。
+
+### 7.214. USAT16：无符号饱和 16
+
+无符号饱和 16（Unsigned Saturate 16）把两个有符号 16 位值饱和到一个选定的无符号范围。
+
+如果操作发生饱和，Q 标志置 1。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  saturate_to = UInt(sat_imm);
+if d IN {13,15} || n IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`USAT16<c> <Rd>,#<imm4>,<Rn>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | (0) | 1 | 1 | 1 | 0 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 0 | 0 | 0 | 0 | Rd | Rd | Rd | Rd | 0 | 0 | (0) | (0) | sat_imm | sat_imm | sat_imm | sat_imm |
+
+**汇编语法**
+
+```arm
+USAT16<c><q>
+  <Rd>, #<imm>, <Rn>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<imm>`：饱和的位位置，范围为 0-15。
+* `<Rn>`：包含待饱和值的寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    (result1, sat1) = UnsignedSatQ(SInt(R[n]<15:0>), saturate_to);
+    (result2, sat2) = UnsignedSatQ(SInt(R[n]<31:16>), saturate_to);
+    R[d]<15:0> = ZeroExtend(result1, 16);
+    R[d]<31:16> = ZeroExtend(result2, 16);
+    if sat1 || sat2 then
+        APSR.Q = '1';
+```
+
+**异常**：无。
+
+### 7.215. USAX：无符号带交换的减法与加法
+
+无符号带交换的减法与加法（Unsigned Subtract and Add with Exchange）交换第二个操作数的两个半字，执行一个 16 位无符号整数减法和一个 16 位无符号整数加法，并把结果写入目的寄存器。它根据结果设置 APSR.GE 位。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`USAX<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 1 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+USAX<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+pre-UAL 语法 `USUBADDX<c>` 等价于 `USAX<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    sum  = UInt(R[n]<15:0>) + UInt(R[m]<31:16>);
+    diff = UInt(R[n]<31:16>) - UInt(R[m]<15:0>);
+    R[d]<15:0>  = sum<15:0>;
+    R[d]<31:16> = diff<15:0>;
+    APSR.GE<1:0> = if sum  >= 0x10000 then '11' else '00';
+    APSR.GE<3:2> = if diff >= 0 then '11' else '00';
+```
+
+**异常**：无。
+
+### 7.216. USUB16：无符号 16 位减法
+
+无符号 16 位减法（Unsigned Subtract 16）执行两个 16 位无符号整数减法，并把结果写入目的寄存器。它根据减法结果设置 APSR.GE 位。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`USUB16<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 1 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+USUB16<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    diff1 = UInt(R[n]<15:0>) - UInt(R[m]<15:0>);
+    diff2 = UInt(R[n]<31:16>) - UInt(R[m]<31:16>);
+    R[d]<15:0>  = diff1<15:0>;
+    R[d]<31:16> = diff2<15:0>;
+    APSR.GE<1:0> = if diff1 >= 0 then '11' else '00';
+    APSR.GE<3:2> = if diff2 >= 0 then '11' else '00';
+```
+
+**异常**：无。
+
+### 7.217. USUB8：无符号 8 位减法
+
+无符号 8 位减法（Unsigned Subtract 8）执行四个 8 位无符号整数减法，并把结果写入目的寄存器。它根据减法结果设置 APSR.GE 位。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`USUB8<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 1 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+USUB8<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    diff1 = UInt(R[n]<7:0>) - UInt(R[m]<7:0>);
+    diff2 = UInt(R[n]<15:8>) - UInt(R[m]<15:8>);
+    diff3 = UInt(R[n]<23:16>) - UInt(R[m]<23:16>);
+    diff4 = UInt(R[n]<31:24>) - UInt(R[m]<31:24>);
+    R[d]<7:0>   = diff1<7:0>;
+    R[d]<15:8>  = diff2<7:0>;
+    R[d]<23:16> = diff3<7:0>;
+    R[d]<31:24> = diff4<7:0>;
+    APSR.GE<0>  = if diff1 >= 0 then '1' else '0';
+    APSR.GE<1>  = if diff2 >= 0 then '1' else '0';
+    APSR.GE<2>  = if diff3 >= 0 then '1' else '0';
+    APSR.GE<3>  = if diff4 >= 0 then '1' else '0';
+```
+
+**异常**：无。
+
+### 7.218. UXTAB：无符号扩展并加字节
+
+无符号扩展并加字节（Unsigned Extend and Add Byte）从一个寄存器中提取一个 8 位值，把它零扩展到 32 位，将结果加到另一个寄存器中的值上，并把最终结果写入目的寄存器。在提取 8 位值之前，可以指定 0、8、16 或 24 位的旋转。
+
+**编码专用伪代码**
+
+```arm
+if Rn == '1111' then SEE UXTB;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  rotation = UInt(rotate:'000');
+if d IN {13,15} || n == 13 || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`UXTAB<c> <Rd>,<Rn>,<Rm>{,<rotation>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 1 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 1 | (0) | rotate | rotate | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UXTAB<c><q>
+  {<Rd>,} <Rn>, <Rm> {, <rotation>}
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+* `<rotation>`：可以是以下之一：
+  * 省略：编码为 `rotate = '00'`。
+  * `ROR #8`：编码为 `rotate = '01'`。
+  * `ROR #16`：编码为 `rotate = '10'`。
+  * `ROR #24`：编码为 `rotate = '11'`。
+
+**注意：** 汇编器可以把 `ROR #0` 视为与省略旋转相同（可能对允许的编码有限制），但这不是标准 UAL，不得用于反汇编。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    rotated = ROR(R[m], rotation);
+    R[d] = R[n] + ZeroExtend(rotated<7:0>, 32);
+```
+
+**异常**：无。
+
+### 7.219. UXTAB16：无符号扩展并加字节 16
+
+无符号扩展并加字节 16（Unsigned Extend and Add Byte 16）从一个寄存器中提取两个 8 位值，把它们各自零扩展到 16 位，将结果加到另一个寄存器的两个 16 位值上，并把最终结果写入目的寄存器。在提取 8 位值之前，可以指定 0、8、16 或 24 位的旋转。
+
+**编码专用伪代码**
+
+```arm
+if Rn == '1111' then SEE UXTB16;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  rotation = UInt(rotate:'000');
+if d IN {13,15} || n == 13 || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`UXTAB16<c> <Rd>,<Rn>,<Rm>{,<rotation>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 1 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 1 | (0) | rotate | rotate | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UXTAB16<c><q>
+  {<Rd>,} <Rn>, <Rm> {, <rotation>}
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+* `<rotation>`：可以是以下之一：
+  * 省略：编码为 `rotate = '00'`。
+  * `ROR #8`：编码为 `rotate = '01'`。
+  * `ROR #16`：编码为 `rotate = '10'`。
+  * `ROR #24`：编码为 `rotate = '11'`。
+
+**注意：** 汇编器可以把 `ROR #0` 视为与省略旋转相同（可能对允许的编码有限制），但这不是标准 UAL，不得用于反汇编。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    rotated = ROR(R[m], rotation);
+    R[d]<15:0>  = R[n]<15:0> + ZeroExtend(rotated<7:0>, 16);
+    R[d]<31:16> = R[n]<31:16> + ZeroExtend(rotated<23:16>, 16);
+```
+
+**异常**：无。
