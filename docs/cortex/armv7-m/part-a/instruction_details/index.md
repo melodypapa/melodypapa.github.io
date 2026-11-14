@@ -14028,3 +14028,420 @@ if ConditionPassed() then
 **异常**：未定义指令。
 
 浮点异常：无效运算、溢出、下溢、不精确、输入非规格化。
+
+### 7.251. VPOP：浮点出栈
+
+浮点出栈（Floating-point Pop Registers）从栈中加载多个连续的浮点寄存器。
+
+**编码专用伪代码**
+
+```arm
+single_regs = FALSE;  d = UInt(D:Vd);  imm32 = ZeroExtend(imm8:'00', 32);
+regs = UInt(imm8) DIV 2;
+if regs == 0 || regs > 16 || (d+regs) > 32 then UNPREDICTABLE;
+if VFPSmallRegisterBank() && (d+regs) > 16 then UNPREDICTABLE;
+
+single_regs = TRUE;  d = UInt(Vd:D);  imm32 = ZeroExtend(imm8:'00', 32);
+regs = UInt(imm8);
+if regs == 0 || (d+regs) > 32 then UNPREDICTABLE;
+```
+
+**编码 T1**（FPv4-SP）：`VPOP <list>`（`<list>` 为连续的 64 位寄存器）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | D | 1 | 1 | 1 | 1 | 0 | 1 |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | 1 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**编码 T2**（FPv4-SP）：`VPOP <list>`（`<list>` 为连续的 32 位寄存器）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | D | 1 | 1 | 1 | 1 | 0 | 1 |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | 0 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+VPOP<c><q><.size>
+  <list>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<size>`：可选的数据大小说明符。如果出现，必须等于 `<list>` 中浮点寄存器的大小（按位计），即 32 或 64。
+* `<list>`：要加载的扩展寄存器，为以逗号分隔并用方括号括起的连续编号的双字或单精度浮点寄存器列表。`<list>` 必须至少包含一个浮点寄存器，且不超过十六个。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    address = SP;
+    SP = SP + imm32;
+    if single_regs then
+        for r = 0 to regs-1
+            S[d+r] = MemA[address,4];  address = address+4;
+    else
+        for r = 0 to regs-1
+            word1 = MemA[address,4];  word2 = MemA[address+4,4];  address = address+8;
+            // 按当前字节序把字对齐的字按正确顺序组合。
+            D[d+r] = if BigEndian() then word1:word2 else word2:word1;
+```
+
+**异常**：未定义指令、UsageFault、MemManage、BusFault。
+
+### 7.252. VPUSH：浮点入栈
+
+浮点入栈（Floating-point Push Registers）把多个连续的浮点寄存器存储到栈中。
+
+**编码专用伪代码**
+
+```arm
+single_regs = FALSE;  d = UInt(D:Vd);  imm32 = ZeroExtend(imm8:'00', 32);
+regs = UInt(imm8) DIV 2;
+if regs == 0 || regs > 16 || (d+regs) > 32 then UNPREDICTABLE;
+if VFPSmallRegisterBank() && (d+regs) > 16 then UNPREDICTABLE;
+
+single_regs = TRUE;  d = UInt(Vd:D);
+imm32 = ZeroExtend(imm8:'00', 32);  regs = UInt(imm8);
+if regs == 0 || (d+regs) > 32 then UNPREDICTABLE;
+```
+
+**编码 T1**（FPv4-SP）：`VPUSH<c> <list>`（`<list>` 为连续的 64 位寄存器）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 0 | 1 | 0 | D | 1 | 0 | 1 | 1 | 0 | 1 |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | 1 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**编码 T2**（FPv4-SP）：`VPUSH<c> <list>`（`<list>` 为连续的 32 位寄存器）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 0 | 1 | 0 | D | 1 | 0 | 1 | 1 | 0 | 1 |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | 0 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+VPUSH<c><q><.size>
+  <list>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<size>`：可选的数据大小说明符。如果出现，必须等于 `<list>` 中寄存器的大小（按位计），即 32 或 64。
+* `<list>`：要存储的扩展寄存器，为以逗号分隔并用方括号括起的连续编号的双精度或单精度浮点寄存器列表。`<list>` 必须至少包含一个浮点寄存器，且不超过十六个。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    address = SP - imm32;
+    SP = SP - imm32;
+    if single_regs then
+        for r = 0 to regs-1
+            MemA[address,4] = S[d+r];  address = address+4;
+    else
+        for r = 0 to regs-1
+            // 按当前字节序把数据存储为两个字对齐的字。
+            MemA[address,4] = if BigEndian() then D[d+r]<63:32> else D[d+r]<31:0>;
+            MemA[address+4,4] = if BigEndian() then D[d+r]<31:0> else D[d+r]<63:32>;
+            address = address+8;
+```
+
+**异常**：未定义指令、UsageFault、MemManage、BusFault。
+
+### 7.253. VRINTA、VRINTN、VRINTP、VRINTM：浮点取整（定向舍入）
+
+这些指令把一个浮点值舍入为同尺寸的积分浮点值。输入为零时结果为零且符号相同，输入为无穷时结果为同符号的无穷，NaN 则按正常算术传播。
+
+这些指令使用以下舍入模式：
+
+* `VRINTA`：向最近舍入，平局远离零（Round to Nearest with Ties to Away）。
+* `VRINTN`：向最近舍入，平局取偶（Round to Nearest with Ties to Even）。
+* `VRINTP`：向正无穷舍入（Round toward +Infinity）。
+* `VRINTM`：向负无穷舍入（Round toward -Infinity）。
+
+**编码专用伪代码**
+
+```arm
+if InITBlock() then UNPREDICTABLE;
+dp_operation = (sz == '1');
+case RM
+    when '00'  // 向最近舍入，平局远离零
+        rmode = '01';  away = TRUE;
+    when '01'  // 向最近舍入，平局取偶
+        rmode = '00';  away = FALSE;
+    when '10'  // 向正无穷舍入
+        rmode = '01';  away = FALSE;
+    when '11'  // 向负无穷舍入
+        rmode = '10';  away = FALSE;
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+**编码 T1**（FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VRINT{A,N,P,M}.F64 <Dd>,<Dm>`、`VRINT{A,N,P,M}.F32 <Sd>,<Sm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 1 | D | 1 | 1 | 1 | 0 | RM | RM |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | 0 | 1 | M | 0 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VRINT<r><q>.F64
+  <Dd>, <Dm>                   // 编码为 sz = 1
+VRINT<r><q>.F32
+  <Sd>, <Sm>                   // 编码为 sz = 0
+```
+
+where：
+
+* `<r>`：选择舍入模式，必须为以下之一：
+  * `A`：编码为 `RM = 00`。
+  * `N`：编码为 `RM = 01`。
+  * `P`：编码为 `RM = 10`。
+  * `M`：编码为 `RM = 11`。
+* `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Dd>`、`<Dm>`：双字运算的目的双精度寄存器与操作数双精度寄存器。
+* `<Sd>`、`<Sm>`：单精度操作数或结果的目的寄存器与操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    exact = FALSE;
+    if dp_operation then
+        D[d] = FPRoundInt(D[m], FPSCR, rmode, away, exact);
+    else
+        S[d] = FPRoundInt(S[m], FPSCR, rmode, away, exact);
+```
+
+**异常**：未定义指令。
+
+浮点异常：无效运算、溢出、下溢。
+
+### 7.254. VRINTX：浮点取整（使用 FPSCR 舍入模式）
+
+该指令把一个浮点值舍入为同尺寸的积分浮点值。输入为零时结果为零且符号相同，输入为无穷时结果为同符号的无穷，NaN 则按正常算术传播。
+
+`VRINTX` 使用 FPSCR 中指定的舍入模式，并在结果值与输入值数值不相等时产生不精确（Inexact）异常。
+
+**编码专用伪代码**
+
+```arm
+dp_operation = (sz == '1');
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+**编码 T1**（FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VRINTX<c>.F64 <Dd>,<Dm>`、`VRINTX<c>.F32 <Sd>,<Sm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | D | 1 | 1 | 0 | 1 | 1 | 1 |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | 0 | 1 | M | 0 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VRINTX<c><q>.F64
+  <Dd>, <Dm>                   // 编码为 sz = 1
+VRINTX<c><q>.F32
+  <Sd>, <Sm>                   // 编码为 sz = 0
+```
+
+where：
+
+* `<c>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Dd>`、`<Dm>`：双精度运算的目的寄存器与操作数寄存器。
+* `<Sd>`、`<Sm>`：单精度运算的目的寄存器与操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    rmode = FPSCR<23:22>;
+    away = FALSE;
+    exact = TRUE;
+    if dp_operation then
+        D[d] = FPRoundInt(D[m], FPSCR, rmode, away, exact);
+    else
+        S[d] = FPRoundInt(S[m], FPSCR, rmode, away, exact);
+```
+
+**异常**：未定义指令。
+
+浮点异常：无效运算、溢出、下溢。
+
+### 7.255. VRINTZ、VRINTR：浮点取整（向零或 FPSCR 模式）
+
+这些指令把一个浮点值舍入为同尺寸的积分浮点值。输入为零时结果为零且符号相同，输入为无穷时结果为同符号的无穷，NaN 则按正常算术传播。
+
+这些指令使用以下舍入模式：
+
+* `VRINTZ`：向零舍入（Round toward Zero）。
+* `VRINTR`：向 FPSCR 中指定的舍入模式舍入。
+
+**编码专用伪代码**
+
+```arm
+dp_operation = (sz == '1');
+rmode = if op == '1' then '11' else FPSCR<23:22>;
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+**编码 T1**（FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VRINTZ<c>.F64 <Dd>,<Dm>`、`VRINTZ<c>.F32 <Sd>,<Sm>`、`VRINTR<c>.F64 <Dd>,<Dm>`、`VRINTR<c>.F32 <Sd>,<Sm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | D | 1 | 1 | 0 | 1 | 1 | 0 |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | op | 1 | M | 0 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VRINT<r><c><q>.F64
+  <Dd>, <Dm>                   // 编码为 sz = 1
+VRINT<r><c><q>.F32
+  <Sd>, <Sm>                   // 编码为 sz = 0
+```
+
+where：
+
+* `<r>`：选择舍入模式，必须为以下之一：
+  * `Z`：编码为 `op = 1`。
+  * `R`：编码为 `op = 0`。
+* `<c>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Dd>`、`<Dm>`：双精度运算的目的寄存器与操作数寄存器。
+* `<Sd>`、`<Sm>`：单精度运算的目的寄存器与操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    exact = FALSE;
+    away = FALSE;
+    if dp_operation then
+        D[d] = FPRoundInt(D[m], FPSCR, rmode, away, exact);
+    else
+        S[d] = FPRoundInt(S[m], FPSCR, rmode, away, exact);
+```
+
+**异常**：未定义指令。
+
+浮点异常：无效运算、溢出、下溢。
+
+### 7.256. VSEL：浮点选择
+
+浮点选择（Floating-point selection）使目的寄存器根据 APSR 中的条件码从两个源寄存器之一取值，参见第 A2-31 页的「应用程序状态寄存器（APSR）」与第 A7-178 页的「条件执行」。`VSEL` 的条件码仅限于 GE、GT、EQ 与 VS，LT、LE、NE 与 VC 的效果可以通过交换源操作数实现。
+
+**编码专用伪代码**
+
+```arm
+if InITBlock() then UNPREDICTABLE;
+dp_operation = (sz == '1');  cond = cc:(cc<1> XOR cc<0>):'0';
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+n = if dp_operation then UInt(N:Vn) else UInt(Vn:N);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+**编码 T1**（FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VSEL<cond>.F32 <Sd>,<Sn>,<Sm>`、`VSEL<cond>.F64 <Dd>,<Dn>,<Dm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 0 | D | cc | cc | Vn | Vn | Vn | Vn |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | N | 0 | M | 0 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VSEL<c><q>.F32
+  <Sd>, <Sn>, <Sm>             // 编码为 sz = 0
+VSEL<c><q>.F64
+  <Dd>, <Dn>, <Dm>             // 编码为 sz = 1
+```
+
+where：
+
+* `<c>`：参见第 A7-177 页的「标准汇编语法字段」；条件码仅限于 GE、GT、EQ 或 VS。
+* `<Dd>`、`<Dn>`、`<Dm>`：双字运算的目的双精度寄存器与操作数双精度寄存器。
+* `<Sd>`、`<Sn>`、`<Sm>`：单字运算的目的单精度寄存器与操作数单精度寄存器。
+
+**操作**
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+if dp_operation then
+    D[d] = if ConditionHolds(cond) then D[n] else D[m];
+else
+    S[d] = if ConditionHolds(cond) then S[n] else S[m];
+```
+
+**异常**：未定义指令。
+
+### 7.257. VSQRT：浮点平方根
+
+浮点平方根（Floating-point Square Root）计算浮点寄存器值的平方根，并把结果写入另一个浮点寄存器。
+
+**编码专用伪代码**
+
+```arm
+dp_operation = (sz == '1');
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+**编码 T1**（FPv4-SP、FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VSQRT<c>.F32 <Sd>,<Sm>`、`VSQRT<c>.F64 <Dd>,<Dm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | D | 1 | 1 | 0 | 0 | 0 | 1 |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | 1 | 1 | M | 0 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VSQRT<c><q>.F32
+  <Sd>, <Sm>                   // 编码为 sz = 0
+VSQRT<c><q>.F64
+  <Dd>, <Dm>                   // 编码为 sz = 1
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Sd>`、`<Sm>`：目的单精度寄存器与操作数单精度寄存器。
+* `<Dd>`、`<Dm>`：双精度运算的目的寄存器与操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    if dp_operation then
+        D[d] = FPSqrt(D[m]);
+    else
+        S[d] = FPSqrt(S[m]);
+```
+
+**异常**：未定义指令。
+
+浮点异常：无效运算、不精确、输入非规格化。
