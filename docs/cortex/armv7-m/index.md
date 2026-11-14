@@ -4,7 +4,7 @@ title: "Armv7-M 架构参考手册"
 
 本专题收录《Armv7-M Architecture Reference Manual》(DDI0403E E.e) 中与 Cortex-M7 相关的架构章节中文翻译，按手册原章节顺序排列（Part A 应用程序级模型在前，Part B 系统级程序员模型在后）。
 
-手册共 Part A 7 章（A1–A7）、Part B 5 章（B1–B5）、Part C 1 章（C1）与 Part D 附录 D1–D8。当前收录 Part A 的 A1、A3、A5、A6，Part B 的 B2–B5，以及 Part D 的术语表，共 9 篇；A4、B1.5、B3.5 的译文并入 Cortex-M7 TRM 专题（见下文）；A2、A7、C1 与其余附录尚未翻译。
+手册共 Part A 7 章（A1–A7）、Part B 5 章（B1–B5）、Part C 1 章（C1）与 Part D 附录 D1–D8。当前收录 Part A 的 A1、A3、A5、A6，Part B 的 B1–B5，以及 Part D 的术语表，共 9 篇；A4 的译文并入 Cortex-M7 TRM 专题（见下文）；A2、A7、C1 与其余附录尚未翻译。
 
 ## 1. 章节
 

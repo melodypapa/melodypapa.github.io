@@ -110,4 +110,13 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
 
 ## Not queued (deliberately deferred)
 
-- A1 Introduction (137 ln), A2 The Application Level Model (3,180 ln), A7 Instruction Details (19,982 ln), C1 Armv7-M Debug (5,752 ln — overlaps the M7 TRM debug chapters; prefer the TRM for implementation), D1–D8 appendixes (pseudocode/register indexes) — start on explicit request only.
+- A2 The Application Level Model (3,180 ln), A7 Instruction Details (19,982 ln), C1 Armv7-M Debug (5,752 ln — overlaps the M7 TRM debug chapters; prefer the TRM for implementation), D1–D8 appendixes (pseudocode/register indexes) — start on explicit request only.
+
+## Part A / Part B completion batch (2026-11-14)
+
+Source is the PDF text layer only: `reference-docs/arm/cortex-m7/DDI0403E_e_armv7m_arm.pdf`
+(858 pp) — the ima-parsed `.md` listed in the span map is no longer on disk.
+
+- [x] **A1 Introduction** — article `armv7-m/part-a/introduction/index.md` (A1.1–A1.3, Table A1-1, 0 figures); nav + both landing pages updated.
+- [x] **B1 System Level Programmers' Model (remaining sections)** — completed in place on `m7-trm/programmers_model/index.md`, the merged chapter page. New §2 系统级简介 (B1.1), §3 关于 Armv7-M 内存映射架构 (B1.2), §4 系统级术语与操作概述 (B1.3, §4.1–§4.4: 模式/特权/栈 Table B1-1, 异常类别与状态, 执行状态, 调试状态), §5 寄存器 (B1.4, §5.1–§5.7: 核心寄存器, xPSR with Figure B1-1 + Tables B1-2/B1-3, 掩码寄存器 with Figure B1-2, CONTROL, 保留位, 内存顺序模型, 伪代码定义 with LookUpSP), §30 浮点支持 (B1.6, Table B1-10, ExecuteFPCheck/CheckVFPEnabled/PreserveFPState/TakePreserveFPException). The old condensed TRM §2 操作模式与执行状态 was dropped (subsumed by B1.3); §3–§27 renumbered to §6–§31. Figures `FigureB1-1.png` (p517) and `FigureB1-2.png` (p519) cropped at 4×.
+- [ ] A2, A7 — still open.
