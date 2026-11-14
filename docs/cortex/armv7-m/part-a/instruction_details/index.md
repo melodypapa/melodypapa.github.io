@@ -2658,3 +2658,440 @@ if ConditionPassed() then
 ```
 
 **异常**：UsageFault、MemManage、BusFault。
+
+### 7.41. LDM、LDMIA、LDMFD：多寄存器加载
+
+多寄存器加载（Load Multiple）使用基址寄存器中的地址，从连续的内存位置加载多个寄存器。连续的存储位置从该地址开始，并可选择把最后一个位置之后的地址写回基址寄存器。
+
+被加载的寄存器可以包含 PC。若包含，则为 PC 加载的字被当作分支地址或异常返回值。位[0]遵循 Arm 架构对分支到 Thumb 状态执行的互工作规则，必须为 1。如果位[0]为 0，则产生 UsageFault 异常。
+
+**编码专用伪代码**
+
+```arm
+n = UInt(Rn);  registers = '00000000':register_list;  wback = (registers<n> == '0');
+if BitCount(registers) < 1 then UNPREDICTABLE;
+if W == '1' && Rn == '1101' then SEE POP (Thumb);
+
+n = UInt(Rn);  registers = P:M:'0':register_list;  wback = (W == '1');
+if n == 15 || BitCount(registers) < 2 || (P == '1' && M == '1') then UNPREDICTABLE;
+if registers<15> == '1' && InITBlock() && !LastInITBlock() then UNPREDICTABLE;
+if wback && registers<n> == '1' then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`LDM<c> <Rn>!,<registers>`（`<Rn>` 不在 `<registers>` 中）、`LDM<c> <Rn>,<registers>`（`<Rn>` 在 `<registers>` 中）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 0 | 0 | 1 | Rn | Rn | Rn | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list |
+
+**编码 T2**（Armv7-M）：`LDM<c>.W <Rn>{!},<registers>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 1 | 0 | W | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | P | M | (0) | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list |
+
+**汇编语法**
+
+```arm
+LDM<c><q>
+  <Rn>{!}, <registers>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rn>`：基址寄存器。如果它是 SP 且指定了 `!`，该指令按第 A7-319 页的「POP」中所述处理。
+* `!`：使指令把修改后的值写回 `<Rn>`。如果省略 `!`，指令不会以这种方式改变 `<Rn>`。
+* `<registers>`：要加载的一个或多个寄存器列表，用逗号分隔并用 `{` 与 `}` 包围。编号最小的寄存器从最低的内存地址加载，直到编号最大的寄存器从最高的内存地址加载。如果寄存器列表中指定了 PC，该指令分支到加载进 PC 的地址（数据）。
+  * 编码 T2 不支持只含一个寄存器的列表。如果只有一个寄存器 `<Rt>` 的 `LDMIA` 指令汇编为 Thumb，且编码 T1 不可用，则汇编为等价的 `LDR<c><q> <Rt>,[<Rn>]{,#4}` 指令。
+  * SP 不能在列表中。
+  * 如果列表中包含 PC，则 LR 不能在列表中，且该指令必须位于 IT 块之外，或是 IT 块中的最后一条指令。
+
+`LDMIA` 与 `LDMFD` 是 `LDM` 的伪指令。`LDMFD` 指其用于从满递减栈（Full Descending stack）弹出数据的用法。
+
+pre-UAL 语法 `LDM<c>IA` 与 `LDM<c>FD` 等价于 `LDM<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    address = R[n];
+    for i = 0 to 14
+        if registers<i> == '1' then
+            R[i] = MemA[address,4];  address = address + 4;
+    if registers<15> == '1' then
+        LoadWritePC(MemA[address,4]);
+    if wback && registers<n> == '0' then R[n] = R[n] + 4*BitCount(registers);
+```
+
+**异常**：UsageFault、MemManage、BusFault。
+
+### 7.42. LDMDB、LDMEA：递减前多寄存器加载
+
+递减前多寄存器加载（Load Multiple Decrement Before）——又称空递增栈多寄存器加载（Load Multiple Empty Ascending）——使用基址寄存器中的地址，从连续的内存位置加载多个寄存器。连续的存储位置结束于该地址正下方，并可选择把第一个位置的地址写回基址寄存器。
+
+被加载的寄存器可以包含 PC。若包含，则为 PC 加载的字被当作分支地址或异常返回值。位<0>遵循 Arm 架构对分支到 Thumb 状态执行的互工作规则，必须为 1。如果位<0>为 0，则产生 UsageFault 异常。
+
+**编码专用伪代码**
+
+```arm
+n = UInt(Rn);  registers = P:M:'0':register_list;  wback = (W == '1');
+if n == 15 || BitCount(registers) < 2 || (P == '1' && M == '1') then UNPREDICTABLE;
+if registers<15> == '1' && InITBlock() && !LastInITBlock() then UNPREDICTABLE;
+if wback && registers<n> == '1' then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`LDMDB<c> <Rn>{!},<registers>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | W | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | P | M | (0) | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list |
+
+**汇编语法**
+
+```arm
+LDMDB<c><q>
+  <Rn>{!}, <registers>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rn>`：基址寄存器。可以使用 SP。
+* `!`：使指令把修改后的值写回 `<Rn>`，编码为 `W = 1`。如果省略 `!`，指令不会以这种方式改变 `<Rn>`，编码为 `W = 0`。
+* `<registers>`：一个或多个寄存器的列表，用逗号分隔并用 `{` 与 `}` 包围。它指定要加载的寄存器集合。编号最小的寄存器从最低的内存地址加载，直到编号最大的寄存器从最高的内存地址加载。如果寄存器列表中指定了 PC，该指令分支到加载进 PC 的地址（数据）。
+  * 编码 T1 不支持只含一个寄存器的列表。如果只有一个寄存器 `<Rt>` 的 `LDMDB` 指令汇编为 Thumb，则汇编为等价的 `LDR<c><q> <Rt>,[<Rn>,#-4]{!}` 指令。
+  * SP 不能在列表中。
+  * 如果列表中包含 PC，则 LR 不能在列表中，且该指令必须位于 IT 块之外，或是 IT 块中的最后一条指令。
+
+`LDMEA` 是 `LDMDB` 的伪指令，指其用于从空递增栈（Empty Ascending stack）弹出数据的用法。
+
+pre-UAL 语法 `LDM<c>DB` 与 `LDM<c>EA` 等价于 `LDMDB<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    address = R[n] - 4*BitCount(registers);
+    for i = 0 to 14
+        if registers<i> == '1' then
+            R[i] = MemA[address,4];  address = address + 4;
+    if registers<15> == '1' then
+        LoadWritePC(MemA[address,4]);
+    if wback && registers<n> == '0' then R[n] = R[n] - 4*BitCount(registers);
+```
+
+**异常**：UsageFault、MemManage、BusFault。
+
+### 7.43. LDR (immediate)：立即数加载寄存器
+
+立即数加载寄存器（Load Register (immediate)）由基址寄存器值与立即数偏移计算出地址，从存储器加载一个字并写入寄存器。它可以使用偏移、后索引或前索引寻址。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。
+
+被加载的寄存器可以是 PC。若是，则为 PC 加载的字被当作分支地址或异常返回值。位<0>遵循 Arm 架构对分支到 Thumb 状态执行的互工作规则，必须为 1。如果位<0>为 0，则产生 UsageFault 异常。
+
+**编码专用伪代码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);  imm32 = ZeroExtend(imm5:'00', 32);
+index = TRUE;  add = TRUE;  wback = FALSE;
+
+t = UInt(Rt);  n = 13;  imm32 = ZeroExtend(imm8:'00', 32);
+index = TRUE;  add = TRUE;  wback = FALSE;
+
+if Rn == '1111' then SEE LDR (literal);
+t = UInt(Rt);  n = UInt(Rn);  imm32 = ZeroExtend(imm12, 32);  index = TRUE;  add = TRUE;
+wback = FALSE;
+if t == 15 && InITBlock() && !LastInITBlock() then UNPREDICTABLE;
+
+if Rn == '1111' then SEE LDR (literal);
+if P == '1' && U == '1' && W == '0' then SEE LDRT;
+if Rn == '1101' && P == '0' && U == '1' && W == '1' && imm8 == '00000100' then SEE POP;
+if P == '0' && W == '0' then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);
+imm32 = ZeroExtend(imm8, 32);  index = (P == '1');  add = (U == '1');  wback = (W == '1');
+if (wback && n == t) || (t == 15 && InITBlock() && !LastInITBlock()) then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`LDR<c> <Rt>, [<Rn>{,#<imm5>}]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 1 | 1 | 0 | 1 | imm5 | imm5 | imm5 | imm5 | imm5 | Rn | Rn | Rn | Rt | Rt | Rt |
+
+**编码 T2**（Thumb 指令集的所有版本）：`LDR<c> <Rt>,[SP{,#<imm8>}]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 0 | 0 | 1 | 1 | Rt | Rt | Rt | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**编码 T3**（Armv7-M）：`LDR<c>.W <Rt>,[<Rn>{,#<imm12>}]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 1 | 1 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 |
+
+**编码 T4**（Armv7-M）：`LDR<c> <Rt>,[<Rn>,#-<imm8>]`、`LDR<c> <Rt>,[<Rn>],#+/-<imm8>`、`LDR<c> <Rt>,[<Rn>,#+/-<imm8>]!`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | P | U | W | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+LDR<c><q>
+  <Rt>, [<Rn> {, #+/-<imm>}]
+LDR<c><q>
+  <Rt>, [<Rn>, #+/-<imm>]!
+LDR<c><q>
+  <Rt>, [<Rn>], #+/-<imm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：目的寄存器。该寄存器允许是 SP；也允许是 PC，前提是指令位于 IT 块之外或是 IT 块的最后一条指令。如果是 PC，则分支到加载进 PC 的地址（数据）。
+* `<Rn>`：基址寄存器。该寄存器允许是 SP。如果该寄存器是 PC，参见第 A7-248 页的「LDR (literal)」。
+* `+/-`：`+` 或省略表示立即数偏移加到基址寄存器值上（`add == TRUE`），`-` 表示减去该偏移（`add == FALSE`）。`#0` 与 `#-0` 生成不同的指令。
+* `<imm>`：加到 `<Rn>` 值上或从中减去以形成地址的立即数偏移。编码 T1 允许 0-124 范围内 4 的倍数，编码 T2 允许 0-1020 范围内 4 的倍数，编码 T3 允许 0-4095 范围内的任意值，编码 T4 允许 0-255 范围内的任意值。在偏移寻址语法中 `<imm>` 可以省略，表示偏移 0。
+
+三种寻址形式：
+
+* 偏移（Offset）：`index==TRUE`、`wback==FALSE`。
+* 前索引（Pre-indexed）：`index==TRUE`、`wback==TRUE`。
+* 后索引（Post-indexed）：`index==FALSE`、`wback==TRUE`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    offset_addr = if add then (R[n] + imm32) else (R[n] - imm32);
+    address = if index then offset_addr else R[n];
+    data = MemU[address,4];
+    if wback then R[n] = offset_addr;
+    if t == 15 then
+        if address<1:0> == '00' then LoadWritePC(data);  else UNPREDICTABLE;
+    else
+        R[t] = data;
+```
+
+**异常**：UsageFault、MemManage、BusFault。
+
+### 7.44. LDR (literal)：文字加载寄存器
+
+文字加载寄存器（Load Register (literal)）由 PC 值与立即数偏移计算出地址，从存储器加载一个字并写入寄存器。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。
+
+被加载的寄存器可以是 PC。若是，则为 PC 加载的字被当作分支地址或异常返回值。位[0]遵循 Arm 架构对分支到 Thumb 状态执行的互工作规则，必须为 1。如果位[0]为 0，则产生 UsageFault 异常。
+
+**编码专用伪代码**
+
+```arm
+t = UInt(Rt);  imm32 = ZeroExtend(imm8:'00', 32);  add = TRUE;
+
+t = UInt(Rt);  imm32 = ZeroExtend(imm12, 32);  add = (U == '1');
+if t == 15 && InITBlock() && !LastInITBlock() then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`LDR<c> <Rt>,<label>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 1 | 0 | 0 | 1 | Rt | Rt | Rt | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**编码 T2**（Armv7-M）：`LDR<c>.W <Rt>,<label>`（普通形式）、`LDR<c>.W <Rt>,[PC,#-0]`（特殊情况）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | U | 1 | 0 | 1 | 1 | 1 | 1 | 1 |
+| [31:16] | Rt | Rt | Rt | Rt | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 |
+
+**汇编语法**
+
+```arm
+LDR<c><q>
+  <Rt>, <label>
+LDR<c><q>
+  <Rt>, [PC, #+/-<imm>]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：目的寄存器。可以使用 SP。可以使用 PC，前提是指令位于 IT 块之外或是 IT 块的最后一条指令。如果使用 PC，指令分支到加载进 PC 的地址（数据）。
+* `<label>`：要加载进 `<Rt>` 的文字数据项的标签。汇编器计算从该指令的 PC 值到该标签所需的偏移值。允许的偏移值为：
+  * 编码 T1：0 到 1020 范围内 4 的倍数。
+  * 编码 T2：-4095 到 4095 范围内的任意值。
+  如果偏移为零或正数，`imm32` 等于该偏移且 `add == TRUE`。如果偏移为负数，`imm32` 等于该偏移的相反数且 `add == FALSE`。编码 T1 不支持负偏移。
+
+**注意：** 在本手册的代码示例中，语法 `=<value>` 用于内容为常量且等于 `<value>` 的内存字的标签。这类标签的实际语法取决于汇编器。
+
+替代语法允许分别指定偏移的加与减以及立即数偏移，包括允许指定无法用普通语法表达的减去 0。更多信息参见第 A4-104 页的「在 UAL 指令语法中使用标签」。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    base = Align(PC,4);
+    address = if add then (base + imm32) else (base - imm32);
+    data = MemU[address,4];
+    if t == 15 then
+        if address<1:0> == '00' then LoadWritePC(data);  else UNPREDICTABLE;
+    else
+        R[t] = data;
+```
+
+**异常**：UsageFault、MemManage、BusFault。
+
+### 7.45. LDR (register)：寄存器加载寄存器
+
+寄存器加载寄存器（Load Register (register)）由基址寄存器值与偏移寄存器值计算出地址，从存储器加载一个字并写入寄存器。偏移寄存器值可以左移 0、1、2 或 3 位。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。
+
+被加载的寄存器可以是 PC。若是，则为 PC 加载的字被当作分支地址或异常返回值。位[0]遵循 Arm 架构对分支到 Thumb 状态执行的互工作规则，必须为 1。如果位[0]为 0，则产生 UsageFault 异常。
+
+**编码专用伪代码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);  m = UInt(Rm);
+index = TRUE;  add = TRUE;  wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, 0);
+
+if Rn == '1111' then SEE LDR (literal);
+t = UInt(Rt);  n = UInt(Rn);  m = UInt(Rm);
+(shift_t, shift_n) = (SRType_LSL, UInt(imm2));
+if m IN {13,15} then UNPREDICTABLE;
+if t == 15 && InITBlock() && !LastInITBlock() then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`LDR<c> <Rt>,[<Rn>,<Rm>]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 1 | 0 | 1 | 1 | 0 | 0 | Rm | Rm | Rm | Rn | Rn | Rn | Rt | Rt | Rt |
+
+**编码 T2**（Armv7-M）：`LDR<c>.W <Rt>,[<Rn>,<Rm>{,LSL #<imm2>}]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | 0 | 0 | 0 | 0 | 0 | 0 | imm2 | imm2 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+LDR<c><q>
+  <Rt>, [<Rn>, <Rm> {, LSL #<shift>}]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：目的寄存器。该寄存器允许是 SP；也允许是 PC，前提是指令位于 IT 块之外或是 IT 块的最后一条指令。如果是 PC，则分支到加载进 PC 的地址（数据）。
+* `<Rn>`：包含基值的寄存器。该寄存器允许是 SP。
+* `<Rm>`：包含左移后加到 `<Rn>` 值以形成地址的偏移。
+* `<shift>`：`<Rm>` 值左移的位数，范围为 0-3。如果省略该选项，假定移位 0 且两种编码都允许；如果指定该选项，只允许编码 T2。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    offset = Shift(R[m], shift_t, shift_n, APSR.C);
+    offset_addr = if add then (R[n] + offset) else (R[n] - offset);
+    address = if index then offset_addr else R[n];
+    data = MemU[address,4];
+    if wback then R[n] = offset_addr;
+    if t == 15 then
+        if address<1:0> == '00' then LoadWritePC(data);  else UNPREDICTABLE;
+    else
+        R[t] = data;
+```
+
+**异常**：UsageFault、MemManage、BusFault。
+
+### 7.46. LDRB (immediate)：立即数加载寄存器字节
+
+立即数加载寄存器字节（Load Register Byte (immediate)）由基址寄存器值与立即数偏移计算出地址，从存储器加载一个字节，将其零扩展为 32 位字后写入寄存器。它可以使用偏移、后索引或前索引寻址。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。
+
+**编码专用伪代码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);  imm32 = ZeroExtend(imm5, 32);
+index = TRUE;  add = TRUE;  wback = FALSE;
+
+if Rt == '1111' then SEE PLD;
+if Rn == '1111' then SEE LDRB (literal);
+t = UInt(Rt);  n = UInt(Rn);  imm32 = ZeroExtend(imm12, 32);
+index = TRUE;  add = TRUE;  wback = FALSE;
+if t == 13 then UNPREDICTABLE;
+
+if Rt == '1111' && P == '1' && U == '0' && W == '0' then SEE PLD (immediate);
+if Rn == '1111' then SEE LDRB (literal);
+if P == '1' && U == '1' && W == '0' then SEE LDRBT;
+if P == '0' && W == '0' then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);  imm32 = ZeroExtend(imm8, 32);
+index = (P == '1');  add = (U == '1');  wback = (W == '1');
+if t == 13 || (wback && n == t) then UNPREDICTABLE;
+if t == 15 && (P == '0' || U == '1' || W == '1') then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`LDRB<c> <Rt>,[<Rn>{,#<imm5>}]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 1 | 1 | 1 | 1 | imm5 | imm5 | imm5 | imm5 | imm5 | Rn | Rn | Rn | Rt | Rt | Rt |
+
+**编码 T2**（Armv7-M）：`LDRB<c>.W <Rt>,[<Rn>{,#<imm12>}]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 |
+
+**编码 T3**（Armv7-M）：`LDRB<c> <Rt>,[<Rn>,#-<imm8>]`、`LDRB<c> <Rt>,[<Rn>],#+/-<imm8>`、`LDRB<c> <Rt>,[<Rn>,#+/-<imm8>]!`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | P | U | W | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+LDRB<c><q>
+  <Rt>, [<Rn> {, #+/-<imm>}]
+LDRB<c><q>
+  <Rt>, [<Rn>, #+/-<imm>]!
+LDRB<c><q>
+  <Rt>, [<Rn>], #+/-<imm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：目的寄存器。
+* `<Rn>`：基址寄存器。该寄存器允许是 SP。如果该寄存器是 PC，参见第 A7-254 页的「LDRB (literal)」。
+* `+/-`：`+` 或省略表示立即数偏移加到基址寄存器值上（`add == TRUE`），`-` 表示减去该偏移（`add == FALSE`）。`#0` 与 `#-0` 生成不同的指令。
+* `<imm>`：加到 `<Rn>` 值上或从中减去以形成地址的立即数偏移。允许范围：编码 T1 为 0-31，编码 T2 为 0-4095，编码 T3 为 0-255。在偏移寻址语法中 `<imm>` 可以省略，表示偏移 0。
+
+pre-UAL 语法 `LDR<c>B` 等价于 `LDRB<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    offset_addr = if add then (R[n] + imm32) else (R[n] - imm32);
+    address = if index then offset_addr else R[n];
+    R[t] = ZeroExtend(MemU[address,1], 32);
+    if wback then R[n] = offset_addr;
+```
+
+**异常**：MemManage、BusFault。
