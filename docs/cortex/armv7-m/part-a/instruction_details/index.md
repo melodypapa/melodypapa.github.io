@@ -6843,3 +6843,373 @@ if ConditionPassed() then
 ```
 
 **异常**：无。
+
+### 7.117. ROR (register)：寄存器循环右移
+
+寄存器循环右移（Rotate Right (register)）给出寄存器内容按可变位数循环右移后的值。从右端移出的位被插入到左侧空出的位。该可变位数取自另一个寄存器的低字节。它可以选择根据结果更新条件标志。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rdn);  n = UInt(Rdn);  m = UInt(Rm);  setflags = !InITBlock();
+
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  setflags = (S == '1');
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`RORS <Rdn>,<Rm>`（IT 块外）、`ROR<c> <Rdn>,<Rm>`（IT 块内）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 1 | Rm | Rm | Rm | Rdn | Rdn | Rdn |
+
+**编码 T2**（Armv7-M）：`ROR{S}<c>.W <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 1 | 1 | S | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+ROR{S}<c><q>
+  <Rd>, <Rn>, <Rm>
+```
+
+where：
+
+* `S`：如果出现，表示指令更新标志；否则不更新标志。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。
+* `<Rn>`：指定包含第一个操作数的寄存器。
+* `<Rm>`：指定其低字节包含循环移位量的寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    shift_n = UInt(R[m]<7:0>);
+    (result, carry) = Shift_C(R[n], SRType_ROR, shift_n, APSR.C);
+    R[d] = result;
+    if setflags then
+        APSR.N = result<31>;
+        APSR.Z = IsZeroBit(result);
+        APSR.C = carry;
+        // APSR.V unchanged
+```
+
+**异常**：无。
+
+### 7.118. RRX：带扩展循环右移
+
+带扩展循环右移（Rotate Right with Extend）给出寄存器内容右移一位、并把进位标志移入位[31] 后的值。
+
+`RRX` 可以选择根据结果更新条件标志。在这种情况下，位[0] 被移入进位标志。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  m = UInt(Rm);  setflags = (S == '1');
+if d IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`RRX{S}<c> <Rd>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 1 | 0 | S | 1 | 1 | 1 | 1 |
+| [31:16] | (0) | 0 | 0 | 0 | Rd | Rd | Rd | Rd | 0 | 0 | 1 | 1 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+RRX{S}<c><q>
+  <Rd>, <Rm>
+```
+
+where：
+
+* `S`：如果出现，表示指令更新标志；否则不更新标志。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。
+* `<Rm>`：指定包含操作数的寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    (result, carry) = Shift_C(R[m], SRType_RRX, 1, APSR.C);
+    R[d] = result;
+    if setflags then
+        APSR.N = result<31>;
+        APSR.Z = IsZeroBit(result);
+        APSR.C = carry;
+        // APSR.V unchanged
+```
+
+**异常**：无。
+
+### 7.119. RSB (immediate)：立即数反向减
+
+立即数反向减（Reverse Subtract (immediate)）从一个立即数值中减去一个寄存器值，并把结果写入目的寄存器。它可以选择根据结果更新条件标志。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  setflags = !InITBlock();  imm32 = Zeros(32); // immediate = #0
+
+d = UInt(Rd);  n = UInt(Rn);  setflags = (S == '1');  imm32 = ThumbExpandImm(i:imm3:imm8);
+if d IN {13,15} || n IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`RSBS <Rd>,<Rn>,#0`（IT 块外）、`RSB<c> <Rd>,<Rn>,#0`（IT 块内）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | Rn | Rn | Rn | Rd | Rd | Rd |
+
+**编码 T2**（Armv7-M）：`RSB{S}<c>.W <Rd>,<Rn>,#<const>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | i | 0 | 1 | 1 | 1 | 0 | S | Rn | Rn | Rn | Rn |
+| [31:16] | 0 | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+RSB{S}<c><q>
+  {<Rd>,} <Rn>, #<const>
+```
+
+where：
+
+* `S`：如果出现，表示指令更新标志；否则不更新标志。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。如果省略 `<Rd>`，该寄存器与 `<Rn>` 相同。
+* `<Rn>`：指定包含第一个操作数的寄存器。
+* `<const>`：指定加到从 `<Rn>` 得到的值上的立即数值。编码 T1 只允许取值 0。编码 T2 的允许值范围参见第 A5-139 页的「Thumb 指令中的修改立即数常量」。
+
+pre-UAL 语法 `RSB<c>S` 等价于 `RSBS<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    (result, carry, overflow) = AddWithCarry(NOT(R[n]), imm32, '1');
+    R[d] = result;
+    if setflags then
+        APSR.N = result<31>;
+        APSR.Z = IsZeroBit(result);
+        APSR.C = carry;
+        APSR.V = overflow;
+```
+
+**异常**：无。
+
+### 7.120. RSB (register)：寄存器反向减
+
+寄存器反向减（Reverse Subtract (register)）从一个可选移位的寄存器值中减去一个寄存器值，并把结果写入目的寄存器。它可以选择根据结果更新条件标志。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  setflags = (S == '1');
+(shift_t, shift_n) = DecodeImmShift(type, imm3:imm2);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`RSB{S}<c> <Rd>,<Rn>,<Rm>{,<shift>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 1 | 1 | 0 | S | Rn | Rn | Rn | Rn |
+| [31:16] | (0) | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm2 | imm2 | type | type | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+RSB{S}<c><q>
+  {<Rd>,} <Rn>, <Rm> {,<shift>}
+```
+
+where：
+
+* `S`：如果出现，表示指令更新标志；否则不更新标志。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。如果省略 `<Rd>`，该寄存器与 `<Rn>` 相同。
+* `<Rn>`：指定包含第一个操作数的寄存器。
+* `<Rm>`：指定可选地移位并用作第二个操作数的寄存器。
+* `<shift>`：指定施加于从 `<Rm>` 读出的值的移位。如果省略 `<shift>`，不施加移位。可能的移位及其编码方式参见第 A7-182 页的「施加于寄存器的移位」。
+
+pre-UAL 语法 `RSB<c>S` 等价于 `RSBS<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    shifted = Shift(R[m], shift_t, shift_n, APSR.C);
+    (result, carry, overflow) = AddWithCarry(NOT(R[n]), shifted, '1');
+    R[d] = result;
+    if setflags then
+        APSR.N = result<31>;
+        APSR.Z = IsZeroBit(result);
+        APSR.C = carry;
+        APSR.V = overflow;
+```
+
+**异常**：无。
+
+### 7.121. SADD16：有符号 16 位加
+
+有符号 16 位加（Signed Add 16）执行两个 16 位有符号整数加法，并把结果写入目的寄存器。它根据加法的结果置位 APSR.GE 位。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SADD16<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SADD16{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    sum1 = SInt(R[n]<15:0>) + SInt(R[m]<15:0>);
+    sum2 = SInt(R[n]<31:16>) + SInt(R[m]<31:16>);
+    R[d]<15:0>  = sum1<15:0>;
+    R[d]<31:16> = sum2<15:0>;
+    APSR.GE<1:0> = if sum1 >= 0 then '11' else '00';
+    APSR.GE<3:2> = if sum2 >= 0 then '11' else '00';
+```
+
+**异常**：无。
+
+### 7.122. SADD8：有符号 8 位加
+
+有符号 8 位加（Signed Add 8）执行四个 8 位有符号整数加法，并把结果写入目的寄存器。它根据加法的结果置位 APSR.GE 位。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SADD8<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SADD8{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    sum1 = SInt(R[n]<7:0>) + SInt(R[m]<7:0>);
+    sum2 = SInt(R[n]<15:8>) + SInt(R[m]<15:8>);
+    sum3 = SInt(R[n]<23:16>) + SInt(R[m]<23:16>);
+    sum4 = SInt(R[n]<31:24>) + SInt(R[m]<31:24>);
+    R[d]<7:0>   = sum1<7:0>;
+    R[d]<15:8>  = sum2<7:0>;
+    R[d]<23:16> = sum3<7:0>;
+    R[d]<31:24> = sum4<7:0>;
+    APSR.GE<0>  = if sum1 >= 0 then '1' else '0';
+    APSR.GE<1>  = if sum2 >= 0 then '1' else '0';
+    APSR.GE<2>  = if sum3 >= 0 then '1' else '0';
+    APSR.GE<3>  = if sum4 >= 0 then '1' else '0';
+```
+
+**异常**：无。
+
+### 7.123. SASX：交换操作数的有符号加与减
+
+交换操作数的有符号加与减（Signed Add and Subtract with Exchange）交换第二个操作数的两个半字，执行一个 16 位整数加法与一个 16 位减法，并把结果写入目的寄存器。它根据结果置位 APSR.GE 位。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SASX<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SASX{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+pre-UAL 语法 `SADDSUBX<c>` 等价于 `SASX<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    diff = SInt(R[n]<15:0>) - SInt(R[m]<31:16>);
+    sum  = SInt(R[n]<31:16>) + SInt(R[m]<15:0>);
+    R[d]<15:0>  = diff<15:0>;
+    R[d]<31:16> = sum<15:0>;
+    APSR.GE<1:0> = if diff >= 0 then '11' else '00';
+    APSR.GE<3:2> = if sum  >= 0 then '11' else '00';
+```
+
+**异常**：无。
