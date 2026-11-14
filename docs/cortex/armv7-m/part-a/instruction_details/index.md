@@ -4937,3 +4937,314 @@ if ConditionPassed() then
 反汇编时产生该指令的规范形式。
 
 **异常**：无。
+
+### 7.79. MOVT：搬移高半字
+
+搬移高半字（Move Top）把立即数值写入目的寄存器的高半字。它不影响低半字的内容。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  imm16 = imm4:i:imm3:imm8;
+if d IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`MOVT<c> <Rd>,#<imm16>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | i | 1 | 0 | 1 | 1 | 0 | 0 | imm4 | imm4 | imm4 | imm4 |
+| [31:16] | 0 | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+MOVT<c><q>
+  <Rd>, #<imm16>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。
+* `<imm16>`：指定要写入 `<Rd>` 的立即数值。该值必须在 0-65535 范围内。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    R[d]<31:16> = imm16;
+    // R[d]<15:0> unchanged
+```
+
+**异常**：无。
+
+### 7.80. MRC、MRC2：协处理器移到 Arm 寄存器
+
+从协处理器移到 Arm 寄存器（Move to Arm Register from Coprocessor）使协处理器把一个值传送到 Arm 寄存器或条件标志。
+
+如果没有协处理器可以执行该指令，则产生 UsageFault 异常。
+
+**编码专用伪代码**
+
+```arm
+t = UInt(Rt);  cp = UInt(coproc);
+if t == 13 then UNPREDICTABLE;
+
+t = UInt(Rt);  cp = UInt(coproc);
+if t == 13 then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`MRC<c> <coproc>,<opc1>,<Rt>,<CRn>,<CRm>{,<opc2>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | opc1 | opc1 | opc1 | 1 | CRn | CRn | CRn | CRn |
+| [31:16] | Rt | Rt | Rt | Rt | coproc | coproc | coproc | coproc | opc2 | opc2 | opc2 | 1 | CRm | CRm | CRm | CRm |
+
+**编码 T2**（Armv7-M）：`MRC2<c> <coproc>,<opc1>,<Rt>,<CRn>,<CRm>{,<opc2>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | opc1 | opc1 | opc1 | 1 | CRn | CRn | CRn | CRn |
+| [31:16] | Rt | Rt | Rt | Rt | coproc | coproc | coproc | coproc | opc2 | opc2 | opc2 | 1 | CRm | CRm | CRm | CRm |
+
+**汇编语法**
+
+```arm
+MRC{2}<c><q>
+  <coproc>, #<opc1>, <Rt>, <CRn>, <CRm>{, #<opc2>}
+```
+
+where：
+
+* `2`：如果指定，选择 `C == 1` 形式的编码；如果省略，选择 `C == 0` 形式。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<coproc>`：指定协处理器的名称。标准的通用协处理器名为 `p0`-`p15`。
+* `<opc1>`：是协处理器专用的操作码，范围为 0-7。
+* `<Rt>`：是目的 Arm 寄存器。该寄存器允许为 R0-R14 或 `APSR_nzcv`。后一种形式把传送值的位[31:28] 写入 N、Z、C 与 V 条件标志，其指定方式是把编码中的 `Rt` 字段置为 `0b1111`。在 pre-UAL 汇编语法中，该形式用 PC 而不是 `APSR_nzcv` 书写。
+* `<CRn>`：是包含第一个操作数的协处理器寄存器。
+* `<CRm>`：是附加的源或目的协处理器寄存器。
+* `<opc2>`：是协处理器专用的操作码，范围为 0-7。如果省略，假定 `<opc2>` 为 0。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    if !Coproc_Accepted(cp, ThisInstr()) then
+        GenerateCoprocessorException();
+    else
+        value = Coproc_GetOneWord(cp, ThisInstr());
+        if t != 15 then
+            R[t] = value;
+        else
+            APSR.N = value<31>;
+            APSR.Z = value<30>;
+            APSR.C = value<29>;
+            APSR.V = value<28>;
+            // value<27:0> are not used.
+```
+
+**异常**：UsageFault。
+
+### 7.81. MRRC、MRRC2：协处理器移到两个 Arm 寄存器
+
+从协处理器移到两个 Arm 寄存器（Move to two Arm Registers from Coprocessor）使协处理器把值传送到两个 Arm 寄存器。
+
+如果没有协处理器可以执行该指令，则产生 UsageFault 异常。
+
+**编码专用伪代码**
+
+```arm
+t = UInt(Rt);  t2 = UInt(Rt2);  cp = UInt(coproc);
+if t == 15 || t2 == 15 || t == t2 then UNPREDICTABLE;
+if t == 13 || t2 == 13 then UNPREDICTABLE;
+
+t = UInt(Rt);  t2 = UInt(Rt2);  cp = UInt(coproc);
+if t == 15 || t2 == 15 || t == t2 then UNPREDICTABLE;
+if t == 13 || t2 == 13 then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`MRRC<c> <coproc>,<opc>,<Rt>,<Rt2>,<CRm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 1 | Rt2 | Rt2 | Rt2 | Rt2 |
+| [31:16] | Rt | Rt | Rt | Rt | coproc | coproc | coproc | coproc | opc1 | opc1 | opc1 | opc1 | CRm | CRm | CRm | CRm |
+
+**编码 T2**（Armv7-M）：`MRRC2<c> <coproc>,<opc>,<Rt>,<Rt2>,<CRm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 1 | Rt2 | Rt2 | Rt2 | Rt2 |
+| [31:16] | Rt | Rt | Rt | Rt | coproc | coproc | coproc | coproc | opc1 | opc1 | opc1 | opc1 | CRm | CRm | CRm | CRm |
+
+**汇编语法**
+
+```arm
+MRRC{2}<c><q>
+  <coproc>, #<opc1>, <Rt>, <Rt2>, <CRm>
+```
+
+where：
+
+* `2`：如果指定，选择 `C == 1` 形式的编码；如果省略，选择 `C == 0` 形式。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<coproc>`：指定协处理器的名称。标准的通用协处理器名为 `p0`-`p15`。
+* `<opc1>`：是协处理器专用的操作码，范围为 0-15。
+* `<Rt>`：是第一个目的 Arm 寄存器。
+* `<Rt2>`：是第二个目的 Arm 寄存器。
+* `<CRm>`：是提供要传送数据的协处理器寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    if !Coproc_Accepted(cp, ThisInstr()) then
+        GenerateCoprocessorException();
+    else
+        (R[t2], R[t]) = Coproc_GetTwoWords(cp, ThisInstr());
+```
+
+**异常**：UsageFault。
+
+### 7.82. MRS：从特殊寄存器移到寄存器
+
+从特殊寄存器移到寄存器（Move to Register from Special register）把选定的专用寄存器的值移入通用 Arm 寄存器。
+
+除访问 APSR 或 CONTROL 寄存器之外，`MRS` 是系统级指令。该指令的完整描述（包括其应用级用法）参见第 B5-675 页的「MRS」。
+
+**编码 T1**（Armv6-M、Armv7-M；Armv7-M 中功能增强）：`MRS<c> <Rd>,<spec_reg>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | 1 | 1 | 1 | (0) | (1) | (1) | (1) | (1) |
+| [31:16] | 1 | 0 | (0) | 0 | Rd | Rd | Rd | Rd | SYSm | SYSm | SYSm | SYSm | SYSm | SYSm | SYSm | SYSm |
+
+### 7.83. MSR：从寄存器移到特殊寄存器
+
+从寄存器移到特殊寄存器（Move to Special Register from Arm Register）把通用 Arm 寄存器的值移到指定的专用寄存器。
+
+除访问 APSR 之外，`MSR` 是系统级指令。该指令的完整描述（包括其应用级用法）参见第 B5-677 页的「MSR」。
+
+**编码 T1**（Armv6-M、Armv7-M；Armv7-M 中功能增强）：`MSR<c> <spec_reg>,<Rn>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | 1 | 0 | 0 | (0) | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 0 | (0) | 0 | mask | mask | (0) | (0) | SYSm | SYSm | SYSm | SYSm | SYSm | SYSm | SYSm | SYSm |
+
+### 7.84. MUL：乘法
+
+乘法（Multiply）把两个寄存器值相乘。结果的低 32 位写入目的寄存器。这些 32 位与执行的是有符号还是无符号计算无关。
+
+它可以选择根据结果更新条件标志。该选项在 Thumb 指令集中仅限于少数几种指令形式，并且在许多处理器实现上使用它会损害性能。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rdm);  n = UInt(Rn);  m = UInt(Rdm);  setflags = !InITBlock();
+
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  setflags = FALSE;
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`MULS <Rdm>,<Rn>,<Rdm>`（IT 块外）、`MUL<c> <Rdm>,<Rn>,<Rdm>`（IT 块内）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 1 | Rn | Rn | Rn | Rdm | Rdm | Rdm |
+
+**编码 T2**（Armv7-M）：`MUL<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+MUL{S}<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `S`：如果出现，表示指令更新标志；否则不更新标志。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。如果省略 `<Rd>`，该寄存器与 `<Rn>` 相同。
+* `<Rn>`：指定包含第一个操作数的寄存器。
+* `<Rm>`：指定包含第二个操作数的寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    operand1 = SInt(R[n]);  // operand1 = UInt(R[n]) produces the same final results
+    operand2 = SInt(R[m]);  // operand2 = UInt(R[m]) produces the same final results
+    result = operand1 * operand2;
+    R[d] = result<31:0>;
+    if setflags then
+        APSR.N = result<31>;
+        APSR.Z = IsZeroBit(result<31:0>);
+        // APSR.C unchanged
+        // APSR.V unchanged
+```
+
+**异常**：无。
+
+### 7.85. MVN (immediate)：立即数按位取反
+
+立即数按位取反（Bitwise NOT (immediate)）把立即数值的按位取反结果写入目的寄存器。它可以选择根据该值更新条件标志。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  setflags = (S == '1');
+(imm32, carry) = ThumbExpandImm_C(i:imm3:imm8, APSR.C);
+if d IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`MVN{S}<c> <Rd>,#<const>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | i | 0 | 0 | 0 | 1 | 1 | S | 1 | 1 | 1 | 1 |
+| [31:16] | 0 | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+MVN{S}<c><q>
+  <Rd>, #<const>
+```
+
+where：
+
+* `S`：如果出现，表示指令更新标志；否则不更新标志。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。
+* `<const>`：指定加到从 `<Rn>` 得到的值上的立即数值。允许值范围参见第 A5-139 页的「Thumb 指令中的修改立即数常量」。
+
+pre-UAL 语法 `MVN<c>S` 等价于 `MVNS<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    result = NOT(imm32);
+    R[d] = result;
+    if setflags then
+        APSR.N = result<31>;
+        APSR.Z = IsZeroBit(result);
+        APSR.C = carry;
+        // APSR.V unchanged
+```
+
+**异常**：无。
