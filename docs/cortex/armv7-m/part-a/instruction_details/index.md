@@ -10766,3 +10766,297 @@ if ConditionPassed() then
 ```
 
 **异常**：无。
+
+### 7.190. UADD16：无符号 16 位加法
+
+无符号 16 位加法（Unsigned Add 16）执行两个 16 位无符号整数加法，并把结果写入目的寄存器。它根据加法的结果设置 APSR.GE 位。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`UADD16<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 1 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UADD16<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    sum1 = UInt(R[n]<15:0>) + UInt(R[m]<15:0>);
+    sum2 = UInt(R[n]<31:16>) + UInt(R[m]<31:16>);
+    R[d]<15:0>  = sum1<15:0>;
+    R[d]<31:16> = sum2<15:0>;
+    APSR.GE<1:0> = if sum1 >= 0x10000 then '11' else '00';
+    APSR.GE<3:2> = if sum2 >= 0x10000 then '11' else '00';
+```
+
+**异常**：无。
+
+### 7.191. UADD8：无符号 8 位加法
+
+无符号 8 位加法（Unsigned Add 8）执行四个 8 位无符号整数加法，并把结果写入目的寄存器。它根据加法的结果设置 APSR.GE 位。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`UADD8<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 1 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UADD8<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    sum1 = UInt(R[n]<7:0>) + UInt(R[m]<7:0>);
+    sum2 = UInt(R[n]<15:8>) + UInt(R[m]<15:8>);
+    sum3 = UInt(R[n]<23:16>) + UInt(R[m]<23:16>);
+    sum4 = UInt(R[n]<31:24>) + UInt(R[m]<31:24>);
+    R[d]<7:0>   = sum1<7:0>;
+    R[d]<15:8>  = sum2<7:0>;
+    R[d]<23:16> = sum3<7:0>;
+    R[d]<31:24> = sum4<7:0>;
+    APSR.GE<0>  = if sum1 >= 0x100 then '1' else '0';
+    APSR.GE<1>  = if sum2 >= 0x100 then '1' else '0';
+    APSR.GE<2>  = if sum3 >= 0x100 then '1' else '0';
+    APSR.GE<3>  = if sum4 >= 0x100 then '1' else '0';
+```
+
+**异常**：无。
+
+### 7.192. UASX：无符号带交换的加法与减法
+
+无符号带交换的加法与减法（Unsigned Add and Subtract with Exchange）交换第二个操作数的两个半字，执行一个 16 位无符号整数加法和一个 16 位无符号整数减法，并把结果写入目的寄存器。它根据结果设置 APSR.GE 位。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`UASX<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 1 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UASX<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+pre-UAL 语法 `UADDSUBX<c>` 等价于 `UASX<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    diff = UInt(R[n]<15:0>) - UInt(R[m]<31:16>);
+    sum  = UInt(R[n]<31:16>) + UInt(R[m]<15:0>);
+    R[d]<15:0>  = diff<15:0>;
+    R[d]<31:16> = sum<15:0>;
+    APSR.GE<1:0> = if diff >= 0 then '11' else '00';
+    APSR.GE<3:2> = if sum  >= 0x10000 then '11' else '00';
+```
+
+**异常**：无。
+
+### 7.193. UBFX：无符号位域提取
+
+无符号位域提取（Unsigned Bit Field Extract）从一个寄存器中提取任意位置的任意数量的相邻位，把它们零扩展到 32 位，并把结果写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);
+lsbit = UInt(imm3:imm2);  widthminus1 = UInt(widthm1);
+if d IN {13,15} || n IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`UBFX<c> <Rd>,<Rn>,#<lsb>,#<width>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | (0) | 1 | 1 | 1 | 1 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 0 | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm2 | imm2 | (0) | widthm1 | widthm1 | widthm1 | widthm1 | widthm1 |
+
+**汇编语法**
+
+```arm
+UBFX<c><q>
+  <Rd>, <Rn>, #<lsb>, #<width>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：包含第一个操作数的寄存器。
+* `<lsb>`：位域中最低有效位的位号，范围为 0-31。它决定 `lsbit` 的取值。
+* `<width>`：位域的宽度，范围为 1 到 32-`<lsb>`。`widthminus1` 的取值为 `<width>`-1。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    msbit = lsbit + widthminus1;
+    if msbit <= 31 then
+        R[d] = ZeroExtend(R[n]<msbit:lsbit>, 32);
+    else
+        UNPREDICTABLE;
+```
+
+**异常**：无。
+
+### 7.194. UDF：永久未定义
+
+永久未定义（Permanently Undefined）产生未定义指令异常。
+
+**编码专用伪代码**
+
+```arm
+imm32 = ZeroExtend(imm8, 32);
+// imm32 仅用于汇编与反汇编，硬件忽略它。
+imm32 = ZeroExtend(imm4:imm12, 32);
+// imm32 仅用于汇编与反汇编，硬件忽略它。
+```
+
+**编码 T1**（Armv7-M）：`UDF<c> #<imm8>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 0 | 1 | 1 | 1 | 1 | 0 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**编码 T2**（Armv7-M）：`UDF<c>.W #<imm16>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | imm4 | imm4 | imm4 | imm4 |
+| [31:16] | 1 | 0 | 1 | 0 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 |
+
+**汇编语法**
+
+```arm
+UDF<c><q>
+  {#}<imm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<imm>`：立即数常量，编码 T1 中为 8 位，编码 T2 中为 16 位。处理器忽略该常量的值。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    UNDEFINED;
+```
+
+**异常**：未定义指令（Undefined Instruction）。
+
+### 7.195. UDIV：无符号除法
+
+无符号除法（Unsigned Divide）把一个 32 位无符号整数寄存器值除以另一个 32 位无符号整数寄存器值，并把结果写入目的寄存器。条件标志不受影响。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`UDIV<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | (1) | (1) | (1) | (1) | Rd | Rd | Rd | Rd | 1 | 1 | 1 | 1 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UDIV<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。如果省略 `<Rd>`，该寄存器与 `<Rn>` 相同。
+* `<Rn>`：包含被除数的寄存器。
+* `<Rm>`：包含除数的寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    if UInt(R[m]) == 0 then
+        if IntegerZeroDivideTrappingEnabled() then
+            GenerateIntegerZeroDivide();
+        else
+            result = 0;
+    else
+        result = RoundTowardsZero(UInt(R[n]) / UInt(R[m]));
+    R[d] = result<31:0>;
+```
+
+**异常**：UsageFault。
