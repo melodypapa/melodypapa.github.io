@@ -11621,3 +11621,299 @@ if ConditionPassed() then
 ```
 
 **异常**：无。
+
+### 7.208. UQSAX：无符号饱和带交换的减法与加法
+
+无符号饱和带交换的减法与加法（Unsigned Saturating Subtract and Add with Exchange）交换第二个操作数的两个半字，执行一个 16 位无符号整数减法和一个 16 位无符号整数加法，把结果饱和到 16 位无符号整数范围 0 ≤ x ≤ 2^16^ – 1，并把结果写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`UQSAX<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 1 | 0 | 1 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UQSAX<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+pre-UAL 语法 `UQSUBADDX<c>` 等价于 `UQSAX<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    sum  = UInt(R[n]<15:0>) + UInt(R[m]<31:16>);
+    diff = UInt(R[n]<31:16>) - UInt(R[m]<15:0>);
+    R[d]<15:0>  = UnsignedSat(sum, 16);
+    R[d]<31:16> = UnsignedSat(diff, 16);
+```
+
+**异常**：无。
+
+### 7.209. UQSUB16：无符号饱和 16 位减法
+
+无符号饱和 16 位减法（Unsigned Saturating Subtract 16）执行两个 16 位无符号整数减法，把结果饱和到 16 位无符号整数范围 0 ≤ x ≤ 2^16^ – 1，并把结果写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`UQSUB16<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 1 | 0 | 1 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UQSUB16<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    diff1 = UInt(R[n]<15:0>) - UInt(R[m]<15:0>);
+    diff2 = UInt(R[n]<31:16>) - UInt(R[m]<31:16>);
+    R[d]<15:0>  = UnsignedSat(diff1, 16);
+    R[d]<31:16> = UnsignedSat(diff2, 16);
+```
+
+**异常**：无。
+
+### 7.210. UQSUB8：无符号饱和 8 位减法
+
+无符号饱和 8 位减法（Unsigned Saturating Subtract 8）执行四个 8 位无符号整数减法，把结果饱和到 8 位无符号整数范围 0 ≤ x ≤ 2^8^ – 1，并把结果写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`UQSUB8<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 1 | 0 | 1 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UQSUB8<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    diff1 = UInt(R[n]<7:0>) - UInt(R[m]<7:0>);
+    diff2 = UInt(R[n]<15:8>) - UInt(R[m]<15:8>);
+    diff3 = UInt(R[n]<23:16>) - UInt(R[m]<23:16>);
+    diff4 = UInt(R[n]<31:24>) - UInt(R[m]<31:24>);
+    R[d]<7:0>   = UnsignedSat(diff1, 8);
+    R[d]<15:8>  = UnsignedSat(diff2, 8);
+    R[d]<23:16> = UnsignedSat(diff3, 8);
+    R[d]<31:24> = UnsignedSat(diff4, 8);
+```
+
+**异常**：无。
+
+### 7.211. USAD8：无符号绝对差之和
+
+无符号绝对差之和（Unsigned Sum of Absolute Differences）执行四个 8 位无符号减法，并把各差值的绝对值相加。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`USAD8<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 1 | 0 | 1 | 1 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+USAD8<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    absdiff1 = Abs(UInt(R[n]<7:0>)   - UInt(R[m]<7:0>));
+    absdiff2 = Abs(UInt(R[n]<15:8>)  - UInt(R[m]<15:8>));
+    absdiff3 = Abs(UInt(R[n]<23:16>) - UInt(R[m]<23:16>));
+    absdiff4 = Abs(UInt(R[n]<31:24>) - UInt(R[m]<31:24>));
+    result = absdiff1 + absdiff2 + absdiff3 + absdiff4;
+    R[d] = result<31:0>;
+```
+
+**异常**：无。
+
+### 7.212. USADA8：无符号绝对差之和并累加
+
+无符号绝对差之和并累加（Unsigned Sum of Absolute Differences and Accumulate）执行四个 8 位无符号减法，并把各差值的绝对值加到一个 32 位累加操作数上。
+
+**编码专用伪代码**
+
+```arm
+if Ra == '1111' then SEE USAD8;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  a = UInt(Ra);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} || a == 13 then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`USADA8<c> <Rd>,<Rn>,<Rm>,<Ra>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 1 | 0 | 1 | 1 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | Ra | Ra | Ra | Ra | Rd | Rd | Rd | Rd | 0 | 0 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+USADA8<c><q>
+  <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+* `<Ra>`：包含累加值的寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    absdiff1 = Abs(UInt(R[n]<7:0>)   - UInt(R[m]<7:0>));
+    absdiff2 = Abs(UInt(R[n]<15:8>)  - UInt(R[m]<15:8>));
+    absdiff3 = Abs(UInt(R[n]<23:16>) - UInt(R[m]<23:16>));
+    absdiff4 = Abs(UInt(R[n]<31:24>) - UInt(R[m]<31:24>));
+    result = UInt(R[a]) + absdiff1 + absdiff2 + absdiff3 + absdiff4;
+    R[d] = result<31:0>;
+```
+
+**异常**：无。
+
+### 7.213. USAT：无符号饱和
+
+无符号饱和（Unsigned Saturate）把一个可选移位的符号值饱和到一个选定的无符号范围。
+
+如果操作发生饱和，Q 标志置 1。
+
+**编码专用伪代码**
+
+```arm
+if sh == '1' && (imm3:imm2) == '00000' then
+    if HaveDSPExt() then
+        SEE USAT16;
+    else
+        UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  saturate_to = UInt(sat_imm);
+(shift_t, shift_n) = DecodeImmShift(sh:'0', imm3:imm2);
+if d IN {13,15} || n IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`USAT<c> <Rd>,#<imm5>,<Rn>{,<shift>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | (0) | 1 | 1 | 1 | 0 | sh | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 0 | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm2 | imm2 | (0) | sat_imm | sat_imm | sat_imm | sat_imm | sat_imm |
+
+**汇编语法**
+
+```arm
+USAT<c><q>
+  <Rd>, #<imm>, <Rn> {,<shift>}
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<imm>`：饱和的位位置，范围为 0-31。
+* `<Rn>`：包含待饱和值的寄存器。
+* `<shift>`：可选移位。如果出现，必须为以下之一：
+  * `LSL #N`：N 必须在 0-31 范围内。
+  * `ASR #N`：N 必须在 1-31 范围内。
+
+如果省略 `<shift>`，则使用 `LSL #0`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    operand = Shift(R[n], shift_t, shift_n, APSR.C);  // 忽略 APSR.C
+    (result, sat) = UnsignedSatQ(SInt(operand), saturate_to);
+    R[d] = ZeroExtend(result, 32);
+    if sat then
+        APSR.Q = '1';
+```
+
+**异常**：无。
