@@ -10518,3 +10518,251 @@ if ConditionPassed() then
 ```
 
 **异常**：无。
+
+### 7.185. TBB、TBH：表分支字节、表分支半字
+
+表分支字节（Table Branch Byte）使用一张单字节偏移表实现 PC 相对的前向分支。基址寄存器提供指向该表的指针，第二个寄存器提供表内索引。分支长度为表中返回字节值的两倍。
+
+表分支半字（Table Branch Halfword）使用一张单半字偏移表实现 PC 相对的前向分支。基址寄存器提供指向该表的指针，第二个寄存器提供表内索引。分支长度为表中返回半字值的两倍。
+
+**编码专用伪代码**
+
+```arm
+n = UInt(Rn);  m = UInt(Rm);  is_tbh = (H == '1');
+if n == 13 || m IN {13,15} then UNPREDICTABLE;
+if InITBlock() && !LastInITBlock() then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`TBB<c> [<Rn>,<Rm>]`（IT 块外或作为 IT 块的最后一条）、`TBH<c> [<Rn>,<Rm>,LSL #1]`（IT 块外或作为 IT 块的最后一条）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 1 | 1 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | (1) | (1) | (1) | (1) | (0) | (0) | (0) | (0) | 0 | 0 | 0 | H | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+TBB<c><q>
+  [<Rn>, <Rm>]
+TBH<c><q>
+  [<Rn>, <Rm>, LSL #1]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rn>`：基址寄存器。它包含分支长度表的地址。该寄存器可以是 PC；如果为 PC，则表紧接在该指令之后。
+* `<Rm>`：索引寄存器。
+  * 对于 `TBB`，它包含指向表中单个字节的整数。表内偏移就是该索引的值。
+  * 对于 `TBH`，它包含指向表中单个半字的整数。表内偏移是该索引值的两倍。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    if is_tbh then
+        halfwords = UInt(MemU[R[n]+LSL(R[m],1), 2]);
+    else
+        halfwords = UInt(MemU[R[n]+R[m], 1]);
+    BranchWritePC(PC + 2*halfwords);
+```
+
+**异常**：MemManage、BusFault、UsageFault。
+
+### 7.186. TEQ (immediate)：立即数等价测试
+
+立即数等价测试（Test Equivalence (immediate)）对一个寄存器值与一个立即数执行异或运算。它根据结果更新条件标志，并丢弃该结果。
+
+**编码专用伪代码**
+
+```arm
+n = UInt(Rn);
+(imm32, carry) = ThumbExpandImm_C(i:imm3:imm8, APSR.C);
+if n IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`TEQ<c> <Rn>,#<const>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | i | 0 | 0 | 1 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 0 | imm3 | imm3 | imm3 | 1 | 1 | 1 | 1 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+TEQ<c><q>
+  <Rn>, #<const>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rn>`：包含操作数的寄存器。
+* `<const>`：要与由 `<Rn>` 得到的值进行比较的立即数。允许的取值范围参见第 A5-139 页的「Thumb 指令中的修改立即数常量」。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    result = R[n] EOR imm32;
+    APSR.N = result<31>;
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    // APSR.V 不变
+```
+
+**异常**：无。
+
+### 7.187. TEQ (register)：寄存器等价测试
+
+寄存器等价测试（Test Equivalence (register)）对一个寄存器值与一个可选移位的寄存器值执行异或运算。它根据结果更新条件标志，并丢弃该结果。
+
+**编码专用伪代码**
+
+```arm
+n = UInt(Rn);  m = UInt(Rm);
+(shift_t, shift_n) = DecodeImmShift(type, imm3:imm2);
+if n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`TEQ<c> <Rn>,<Rm>{,<shift>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | (0) | imm3 | imm3 | imm3 | 1 | 1 | 1 | 1 | imm2 | imm2 | type | type | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+TEQ<c><q>
+  <Rn>, <Rm> {,<shift>}
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rn>`：包含第一个操作数的寄存器。
+* `<Rm>`：可选移位并用作第二个操作数的寄存器。
+* `<shift>`：施加于从 `<Rm>` 读取的值的移位。如果省略 `<shift>`，不施加移位。可能的移位及其编码方式参见第 A7-182 页的「施加于寄存器的移位」。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    (shifted, carry) = Shift_C(R[m], shift_t, shift_n, APSR.C);
+    result = R[n] EOR shifted;
+    APSR.N = result<31>;
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    // APSR.V 不变
+```
+
+**异常**：无。
+
+### 7.188. TST (immediate)：立即数测试
+
+立即数测试（Test (immediate)）对一个寄存器值与一个立即数执行逻辑与运算。它根据结果更新条件标志，并丢弃该结果。
+
+**编码专用伪代码**
+
+```arm
+n = UInt(Rn);
+(imm32, carry) = ThumbExpandImm_C(i:imm3:imm8, APSR.C);
+if n IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`TST<c> <Rn>,#<const>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | i | 0 | 0 | 0 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 0 | imm3 | imm3 | imm3 | 1 | 1 | 1 | 1 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+TST<c><q>
+  <Rn>, #<const>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rn>`：包含操作数的寄存器。
+* `<const>`：要与由 `<Rn>` 得到的值进行比较的立即数。允许的取值范围参见第 A5-139 页的「Thumb 指令中的修改立即数常量」。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    result = R[n] AND imm32;
+    APSR.N = result<31>;
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    // APSR.V 不变
+```
+
+**异常**：无。
+
+### 7.189. TST (register)：寄存器测试
+
+寄存器测试（Test (register)）对一个寄存器值与一个可选移位的寄存器值执行逻辑与运算。它根据结果更新条件标志，并丢弃该结果。
+
+**编码专用伪代码**
+
+```arm
+n = UInt(Rn);  m = UInt(Rm);
+(shift_t, shift_n) = (SRType_LSL, 0);
+n = UInt(Rn);  m = UInt(Rm);
+(shift_t, shift_n) = DecodeImmShift(type, imm3:imm2);
+if n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`TST<c> <Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | Rm | Rm | Rm | Rn | Rn | Rn |
+
+**编码 T2**（Armv7-M）：`TST<c>.W <Rn>,<Rm>{,<shift>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | (0) | imm3 | imm3 | imm3 | 1 | 1 | 1 | 1 | imm2 | imm2 | type | type | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+TST<c><q>
+  <Rn>, <Rm> {,<shift>}
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rn>`：包含第一个操作数的寄存器。
+* `<Rm>`：可选移位并用作第二个操作数的寄存器。
+* `<shift>`：施加于从 `<Rm>` 读取的值的移位。如果省略 `<shift>`，不施加移位，且两种编码都允许；如果指定 `<shift>`，只允许编码 T2。可能的移位及其编码方式参见第 A7-182 页的「施加于寄存器的移位」。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    (shifted, carry) = Shift_C(R[m], shift_t, shift_n, APSR.C);
+    result = R[n] AND shifted;
+    APSR.N = result<31>;
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    // APSR.V 不变
+```
+
+**异常**：无。
