@@ -13461,3 +13461,241 @@ if ConditionPassed() then
 ```
 
 **异常**：未定义指令。
+
+### 7.240. VMOV (register)：寄存器浮点移动
+
+寄存器浮点移动（VMOV (register)）把一个寄存器的内容复制到另一个寄存器。
+
+**编码专用伪代码**
+
+```arm
+dp_operation = (sz == '1');
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+**编码 T1**（FPv4-SP、FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VMOV<c>.F32 <Sd>,<Sm>`、`VMOV<c>.F64 <Dd>,<Dm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | D | 1 | 1 | 0 | 0 | 0 | 0 |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | 0 | 1 | M | 0 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VMOV<c><q>.F32
+  <Sd>, <Sm>                   // 编码为 sz = 0
+VMOV<c><q>.F64
+  <Dd>, <Dm>                   // 编码为 sz = 1
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Sd>`、`<Sm>`：单字运算时的目的寄存器与源寄存器。
+* `<Dd>`、`<Dm>`：双字运算时的目的寄存器与源寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    if dp_operation then
+        D[d] = D[m];
+    else
+        S[d] = S[m];
+```
+
+**异常**：未定义指令。
+
+### 7.241. VMOV (Arm core register to scalar)：Arm 核心寄存器到标量的浮点移动
+
+Arm 核心寄存器到标量（VMOV (Arm core register to scalar)）把一个字从 Arm 核心寄存器传送到双字寄存器的上半或下半部分。
+
+**注意：** 指令操作的伪代码描述把双字寄存器描述转换为对应的单精度寄存器，因此表示 D3 上半字的 `D3[1]` 变为 `S7`。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(D:Vd:H);  t = UInt(Rt);
+if t == 15 || t == 13 then UNPREDICTABLE;
+```
+
+**编码 T1**（FPv4-SP）：`VMOV<c>.<size> <Dd[x]>,<Rt>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 0 | 0 | H | 0 | Vd | Vd | Vd | Vd |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | 0 | 1 | 1 | D | 0 | 0 | 1 | (0) | (0) | (0) | (0) |
+
+**汇编语法**
+
+```arm
+VMOV<c><q><size>
+  <Dd[x]>, <Rt>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<size>`：数据大小，必须为 32 或省略。
+* `<Dd[x]>`：双字寄存器及所需的字。`x` 为 1 表示寄存器上半部分，为 0 表示下半部分，编码在 `H` 中。
+* `<Rt>`：源 Arm 核心寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    S[d] = R[t];
+```
+
+**异常**：未定义指令。
+
+### 7.242. VMOV (scalar to Arm core register)：标量到 Arm 核心寄存器的浮点移动
+
+标量到 Arm 核心寄存器（VMOV (scalar to Arm core register)）把一个字从双字寄存器的上半或下半部分传送到 Arm 核心寄存器。
+
+**注意：** 指令操作的伪代码描述把双字寄存器描述转换为对应的单精度寄存器，因此表示 D3 上半字的 `D3[1]` 变为 `S7`。
+
+**编码专用伪代码**
+
+```arm
+t = UInt(Rt);  n = UInt(N:Vn:H);
+if t == 15 || t == 13 then UNPREDICTABLE;
+```
+
+**编码 T1**（FPv4-SP）：`VMOV<c>.<dt> <Rt>,<Dn[x]>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 0 | 0 | H | 1 | Vn | Vn | Vn | Vn |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | 0 | 1 | 1 | N | 0 | 0 | 1 | (0) | (0) | (0) | (0) |
+
+**汇编语法**
+
+```arm
+VMOV<c><q><.dt>
+  <Rt>, <Dn[x]>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<dt>`：数据大小，必须为 32 或省略。
+* `<Dn[x]>`：双字寄存器及所需的字。`x` 为 1 表示寄存器上半部分，为 0 表示下半部分，编码在 `H` 中。
+* `<Rt>`：目的 Arm 核心寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    R[t] = S[n];
+```
+
+**异常**：未定义指令。
+
+### 7.243. VMOV (between Arm core register and single-precision register)：Arm 核心寄存器与单精度寄存器之间的浮点移动
+
+Arm 核心寄存器与单精度寄存器之间的浮点移动（VMOV (between Arm core register and single-precision register)）把单精度寄存器的内容传送到 Arm 核心寄存器，或把 Arm 核心寄存器的内容传送到单精度寄存器。
+
+**编码专用伪代码**
+
+```arm
+to_arm_register = (op == '1');  t = UInt(Rt);  n = UInt(Vn:N);
+if t == 15 || t == 13 then UNPREDICTABLE;
+```
+
+**编码 T1**（FPv4-SP）：`VMOV<c> <Sn>,<Rt>`（`op = 0`）、`VMOV<c> <Rt>,<Sn>`（`op = 1`）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | op | Vn | Vn | Vn | Vn |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | 0 | 1 | 0 | N | (0) | (0) | 1 | (0) | (0) | (0) | (0) |
+
+**汇编语法**
+
+```arm
+VMOV<c><q>
+  <Sn>, <Rt>
+VMOV<c><q>
+  <Rt>, <Sn>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Sn>`：单精度寄存器。
+* `<Rt>`：Arm 核心寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    if to_arm_register then
+        R[t] = S[n];
+    else
+        S[n] = R[t];
+```
+
+**异常**：未定义指令。
+
+### 7.244. VMOV (between two Arm core registers and two single-precision registers)：两个 Arm 核心寄存器与两个单精度寄存器之间的浮点移动
+
+两个 Arm 核心寄存器与两个单精度寄存器之间的浮点移动（VMOV (between two Arm core registers and two single-precision registers)）把两个连续编号的单精度寄存器的内容传送到两个 Arm 核心寄存器，或把两个 Arm 核心寄存器的内容传送到一对单精度寄存器。两个 Arm 核心寄存器不必连续。
+
+**编码专用伪代码**
+
+```arm
+to_arm_registers = (op == '1');  t = UInt(Rt);  t2 = UInt(Rt2);  m = UInt(Vm:M);
+if t == 15 || t2 == 15 || m == 31 then UNPREDICTABLE;
+if t == 13 || t2 == 13 then UNPREDICTABLE;
+if to_arm_registers && t == t2 then UNPREDICTABLE;
+```
+
+**编码 T1**（FPv4-SP）：`VMOV<c> <Sm>,<Sm1>,<Rt>,<Rt2>`（`op = 0`）、`VMOV<c> <Rt>,<Rt2>,<Sm>,<Sm1>`（`op = 1`）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 0 | 0 | 0 | 1 | 0 | op | Rt2 | Rt2 | Rt2 | Rt2 |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | 0 | 1 | 0 | 0 | 0 | M | 1 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VMOV<c><q>
+  <Sm>, <Sm1>, <Rt>, <Rt2>
+VMOV<c><q>
+  <Rt>, <Rt2>, <Sm>, <Sm1>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Sm>`：第一个单精度寄存器。
+* `<Sm1>`：第二个单精度寄存器，即 `<Sm>` 之后的下一个单精度寄存器。
+* `<Rt>`：与 `<Sm>` 相互传送的 Arm 核心寄存器。
+* `<Rt2>`：与 `<Sm1>` 相互传送的 Arm 核心寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    if to_arm_registers then
+        R[t] = S[m];
+        R[t2] = S[m+1];
+    else
+        S[m] = R[t];
+        S[m+1] = R[t2];
+```
+
+**异常**：未定义指令。
