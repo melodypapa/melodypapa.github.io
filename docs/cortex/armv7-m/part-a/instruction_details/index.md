@@ -7213,3 +7213,403 @@ if ConditionPassed() then
 ```
 
 **异常**：无。
+
+### 7.124. SBC (immediate)：立即数带进位减
+
+立即数带进位减（Subtract with Carry (immediate)）从一个寄存器值中减去一个立即数值与 NOT(进位标志) 的值，并把结果写入目的寄存器。它可以选择根据结果更新条件标志。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  setflags = (S == '1');  imm32 = ThumbExpandImm(i:imm3:imm8);
+if d IN {13,15} || n IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`SBC{S}<c> <Rd>,<Rn>,#<const>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 0 | 1 | 1 | S | Rn | Rn | Rn | Rn |
+| [31:16] | 0 | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+SBC{S}<c><q>
+  {<Rd>,} <Rn>, #<const>
+```
+
+where：
+
+* `S`：如果出现，表示指令更新标志；否则不更新标志。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。如果省略 `<Rd>`，该寄存器与 `<Rn>` 相同。
+* `<Rn>`：指定包含第一个操作数的寄存器。
+* `<const>`：指定加到从 `<Rn>` 得到的值上的立即数值。允许值范围参见第 A5-139 页的「Thumb 指令中的修改立即数常量」。
+
+pre-UAL 语法 `SBC<c>S` 等价于 `SBCS<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    (result, carry, overflow) = AddWithCarry(R[n], NOT(imm32), APSR.C);
+    R[d] = result;
+    if setflags then
+        APSR.N = result<31>;
+        APSR.Z = IsZeroBit(result);
+        APSR.C = carry;
+        APSR.V = overflow;
+```
+
+**异常**：无。
+
+### 7.125. SBC (register)：寄存器带进位减
+
+寄存器带进位减（Subtract with Carry (register)）从一个寄存器值中减去一个可选移位的寄存器值与 NOT(进位标志) 的值，并把结果写入目的寄存器。它可以选择根据结果更新条件标志。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rdn);  n = UInt(Rdn);  m = UInt(Rm);  setflags = !InITBlock();
+(shift_t, shift_n) = (SRType_LSL, 0);
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  setflags = (S == '1');
+(shift_t, shift_n) = DecodeImmShift(type, imm3:imm2);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`SBCS <Rdn>,<Rm>`（IT 块外）、`SBC<c> <Rdn>,<Rm>`（IT 块内）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | Rm | Rm | Rm | Rdn | Rdn | Rdn |
+
+**编码 T2**（Armv7-M）：`SBC{S}<c>.W <Rd>,<Rn>,<Rm>{,<shift>}`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 0 | 1 | 1 | S | Rn | Rn | Rn | Rn |
+| [31:16] | (0) | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm2 | imm2 | type | type | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SBC{S}<c><q>
+  {<Rd>,} <Rn>, <Rm> {,<shift>}
+```
+
+where：
+
+* `S`：如果出现，表示指令更新标志；否则不更新标志。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。如果省略 `<Rd>`，该寄存器与 `<Rn>` 相同。
+* `<Rn>`：指定包含第一个操作数的寄存器。
+* `<Rm>`：指定可选地移位并用作第二个操作数的寄存器。
+* `<shift>`：指定施加于从 `<Rm>` 读出的值的移位。如果省略 `<shift>`，不施加移位且两种编码都允许；如果指定 `<shift>`，只允许编码 T2。可能的移位及其编码方式参见第 A7-182 页的「施加于寄存器的移位」。
+
+pre-UAL 语法 `SBC<c>S` 等价于 `SBCS<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    shifted = Shift(R[m], shift_t, shift_n, APSR.C);
+    (result, carry, overflow) = AddWithCarry(R[n], NOT(shifted), APSR.C);
+    R[d] = result;
+    if setflags then
+        APSR.N = result<31>;
+        APSR.Z = IsZeroBit(result);
+        APSR.C = carry;
+        APSR.V = overflow;
+```
+
+**异常**：无。
+
+### 7.126. SBFX：有符号位段提取
+
+有符号位段提取（Signed Bit Field Extract）从某个寄存器中提取任意位置的任意数量相邻位，把它们符号扩展为 32 位，并把结果写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);
+lsbit = UInt(imm3:imm2);  widthminus1 = UInt(widthm1);
+if d IN {13,15} || n IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`SBFX<c> <Rd>,<Rn>,#<lsb>,#<width>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | (0) | 1 | 1 | 0 | 1 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 0 | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm2 | imm2 | (0) | widthm1 | widthm1 | widthm1 | widthm1 | widthm1 |
+
+**汇编语法**
+
+```arm
+SBFX<c><q>
+  <Rd>, <Rn>, #<lsb>, #<width>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。
+* `<Rn>`：指定包含第一个操作数的寄存器。
+* `<lsb>`：位段中最低有效位的位编号，范围为 0-31。这决定 `lsbit` 所需的取值。
+* `<width>`：位段的宽度，范围为 1-32-`<lsb>`。`widthminus1` 所需的取值为 `<width>`-1。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    msbit = lsbit + widthminus1;
+    if msbit <= 31 then
+        R[d] = SignExtend(R[n]<msbit:lsbit>, 32);
+    else
+        UNPREDICTABLE;
+```
+
+**异常**：无。
+
+### 7.127. SDIV：有符号除法
+
+有符号除法（Signed Divide）用一个 32 位有符号整数寄存器值除以另一个 32 位有符号整数寄存器值，并把结果写入目的寄存器。条件标志不受影响。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`SDIV<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | (1) | (1) | (1) | (1) | Rd | Rd | Rd | Rd | 1 | 1 | 1 | 1 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SDIV<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：指定目的寄存器。如果省略 `<Rd>`，该寄存器与 `<Rn>` 相同。
+* `<Rn>`：指定包含被除数的寄存器。
+* `<Rm>`：指定包含除数的寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    if SInt(R[m]) == 0 then
+        if IntegerZeroDivideTrappingEnabled() then
+            GenerateIntegerZeroDivide();
+        else
+            result = 0;
+    else
+        result = RoundTowardsZero(SInt(R[n]) / SInt(R[m]));
+    R[d] = result<31:0>;
+```
+
+**异常**：UsageFault。
+
+**注意：溢出**
+
+如果执行的是有符号整数除法 0x80000000 / 0xFFFFFFFF，伪代码会产生中间整数结果 +2^31，这超出了 32 位有符号整数范围。不产生任何该溢出情况的指示，而写入 R[d] 的 32 位结果要求是 +2^31 的二进制表示的低 32 位。因此该除法的结果是 0x80000000。
+
+### 7.128. SEL：按字节选择
+
+按字节选择（Select Bytes）根据 GE 标志的取值，从第一个操作数或第二个操作数中选择结果的每个字节。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SEL<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 1 | 0 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SEL{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    R[d]<7:0>   = if APSR.GE<0> == '1' then R[n]<7:0>   else R[m]<7:0>;
+    R[d]<15:8>  = if APSR.GE<1> == '1' then R[n]<15:8>  else R[m]<15:8>;
+    R[d]<23:16> = if APSR.GE<2> == '1' then R[n]<23:16> else R[m]<23:16>;
+    R[d]<31:24> = if APSR.GE<3> == '1' then R[n]<31:24> else R[m]<31:24>;
+```
+
+**异常**：无。
+
+### 7.129. SEV：发送事件
+
+发送事件（Send Event）是提示指令。它向多处理器系统中的所有 CPU 发出事件信号。更多细节参见第 B1-560 页的「等待事件与发送事件」。
+
+这是 NOP 兼容提示，参见第 A7-185 页的「NOP 兼容提示」。
+
+**编码专用伪代码**
+
+```arm
+// No additional decoding required
+
+// No additional decoding required
+```
+
+**编码 T1**（Armv6-M、Armv7-M）：`SEV<c>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+**编码 T2**（Armv7-M）：`SEV<c>.W`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | 1 | 0 | 1 | 0 | (1) | (1) | (1) | (1) |
+| [31:16] | 1 | 0 | (0) | 0 | (0) | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |
+
+**汇编语法**
+
+```arm
+SEV<c><q>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    Hint_SendEvent();
+```
+
+**异常**：无。
+
+### 7.130. SHADD16：有符号 16 位折半加
+
+有符号 16 位折半加（Signed Halving Add 16）执行两个 16 位有符号整数加法，把结果折半，并写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SHADD16<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 1 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SHADD16{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    sum1 = SInt(R[n]<15:0>) + SInt(R[m]<15:0>);
+    sum2 = SInt(R[n]<31:16>) + SInt(R[m]<31:16>);
+    R[d]<15:0>  = sum1<16:1>;
+    R[d]<31:16> = sum2<16:1>;
+```
+
+**异常**：无。
+
+### 7.131. SHADD8：有符号 8 位折半加
+
+有符号 8 位折半加（Signed Halving Add 8）执行四个 8 位有符号整数加法，把结果折半，并写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SHADD8<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 1 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SHADD8{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    sum1 = SInt(R[n]<7:0>) + SInt(R[m]<7:0>);
+    sum2 = SInt(R[n]<15:8>) + SInt(R[m]<15:8>);
+    sum3 = SInt(R[n]<23:16>) + SInt(R[m]<23:16>);
+    sum4 = SInt(R[n]<31:24>) + SInt(R[m]<31:24>);
+    R[d]<7:0>   = sum1<8:1>;
+    R[d]<15:8>  = sum2<8:1>;
+    R[d]<23:16> = sum3<8:1>;
+    R[d]<31:24> = sum4<8:1>;
+```
+
+**异常**：无。
