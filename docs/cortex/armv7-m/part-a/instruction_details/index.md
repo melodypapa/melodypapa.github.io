@@ -13699,3 +13699,332 @@ if ConditionPassed() then
 ```
 
 **异常**：未定义指令。
+
+### 7.245. VMOV (between two Arm core registers and a doubleword register)：两个 Arm 核心寄存器与双字寄存器之间的浮点移动
+
+两个 Arm 核心寄存器与双字寄存器之间的浮点移动（Floating-point Move (between two Arm core registers and a doubleword register)）把两个字从两个 Arm 核心寄存器传送到双字寄存器，或从双字寄存器传送到两个 Arm 核心寄存器。
+
+**编码专用伪代码**
+
+```arm
+to_arm_registers = (op == '1');  t = UInt(Rt);  t2 = UInt(Rt2);  m = UInt(M:Vm);
+if t == 15 || t2 == 15 then UNPREDICTABLE;
+if t == 13 || t2 == 13 then UNPREDICTABLE;
+if to_arm_registers && t == t2 then UNPREDICTABLE;
+```
+
+**编码 T1**（FPv4-SP）：`VMOV<c> <Dm>,<Rt>,<Rt2>`（`op = 0`）、`VMOV<c> <Rt>,<Rt2>,<Dm>`（`op = 1`）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 0 | 0 | 0 | 1 | 0 | op | Rt2 | Rt2 | Rt2 | Rt2 |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | 0 | 1 | 1 | 0 | 0 | M | 1 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VMOV<c><q>
+  <Dm>, <Rt>, <Rt2>
+VMOV<c><q>
+  <Rt>, <Rt2>, <Dm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Dm>`：双精度寄存器。
+* `<Rt>`、`<Rt2>`：两个 Arm 核心寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    if to_arm_registers then
+        R[t] = D[m]<31:0>;
+        R[t2] = D[m]<63:32>;
+    else
+        D[m]<31:0> = R[t];
+        D[m]<63:32> = R[t2];
+```
+
+**异常**：未定义指令。
+
+### 7.246. VMRS：浮点特殊寄存器移到 Arm 核心寄存器
+
+浮点特殊寄存器移到 Arm 核心寄存器（Move to Arm core register from floating-point Special Register）把 FPSCR 的值传送到通用寄存器，或把 FCSR 标志的值传送到 APSR。
+
+**编码专用伪代码**
+
+```arm
+t = UInt(Rt);
+if t == 13 then UNPREDICTABLE;
+```
+
+**编码 T1**（FPv4-SP）：`VMRS<c> <Rt>,FPSCR`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 1 | (0) | (0) | (0) | (1) |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | 0 | 1 | 0 | (0) | (0) | (0) | 1 | (0) | (0) | (0) | (0) |
+
+**汇编语法**
+
+```arm
+VMRS<c><q>
+  <Rt>, FPSCR
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：目的 Arm 核心寄存器。该寄存器可以为 R0-R14 或 APSR_nzcv。APSR_nzcv 编码为 `<Rt>` = `'1111'`，此时指令把 FPSCR 的 N、Z、C、V 标志传送到 APSR 的 N、Z、C、V 标志。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    SerializeVFP();
+    VFPExcBarrier();
+    if t == 15 then
+        APSR.N = FPSCR.N;
+        APSR.Z = FPSCR.Z;
+        APSR.C = FPSCR.C;
+        APSR.V = FPSCR.V;
+    else
+        R[t] = FPSCR;
+```
+
+**异常**：未定义指令。
+
+### 7.247. VMSR：Arm 核心寄存器移到浮点特殊寄存器
+
+Arm 核心寄存器移到浮点特殊寄存器（Move to floating-point Special Register from Arm core register）把通用寄存器的值传送到 FPSCR。
+
+**编码专用伪代码**
+
+```arm
+t = UInt(Rt);
+if t == 15 || t == 13 then UNPREDICTABLE;
+```
+
+**编码 T1**（FPv4-SP）：`VMSR<c> FPSCR,<Rt>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | (0) | (0) | (0) | (1) |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | 0 | 1 | 0 | (0) | (0) | (0) | 1 | (0) | (0) | (0) | (0) |
+
+**汇编语法**
+
+```arm
+VMSR<c><q>
+  FPSCR, <Rt>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：要传送到 FPSCR 的通用寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    SerializeVFP();
+    VFPExcBarrier();
+    FPSCR = R[t];
+```
+
+**异常**：未定义指令。
+
+### 7.248. VMUL：浮点乘法
+
+浮点乘法（Floating-point Multiply）把两个浮点寄存器值相乘，并把结果放入目的浮点寄存器。
+
+**编码专用伪代码**
+
+```arm
+dp_operation = (sz == '1');
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+n = if dp_operation then UInt(N:Vn) else UInt(Vn:N);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+**编码 T1**（FPv4-SP、FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VMUL<c>.F32 <Sd>,<Sn>,<Sm>`、`VMUL<c>.F64 <Dd>,<Dn>,<Dm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 0 | D | 1 | 0 | Vn | Vn | Vn | Vn |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | N | 0 | M | 0 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VMUL<c><q>.F32
+  {<Sd>,} <Sn>, <Sm>           // 编码为 sz = 0
+VMUL<c><q>.F64
+  {<Dd>,} <Dn>, <Dm>           // 编码为 sz = 1
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Sd>`、`<Sn>`、`<Sm>`：目的单精度寄存器与操作数单精度寄存器。
+* `<Dd>`、`<Dn>`、`<Dm>`：目的双精度寄存器与操作数双精度寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    if dp_operation then
+        D[d] = FPMul(D[n], D[m], TRUE);
+    else
+        S[d] = FPMul(S[n], S[m], TRUE);
+```
+
+**异常**：未定义指令。
+
+浮点异常：输入非规格化、无效运算、溢出、下溢、不精确。
+
+### 7.249. VNEG：浮点取负
+
+浮点取负（Floating-point Negate）把单精度寄存器的符号位取反，并把结果放入第二个单精度寄存器。
+
+**编码专用伪代码**
+
+```arm
+dp_operation = (sz == '1');
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+**编码 T1**（FPv4-SP、FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VNEG<c>.F32 <Sd>,<Sm>`、`VNEG<c>.F64 <Dd>,<Dm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 1 | D | 1 | 1 | 0 | 0 | 0 | 1 |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | 0 | 1 | M | 0 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VNEG<c><q>.F32
+  <Sd>, <Sm>                   // 编码为 sz = 0
+VNEG<c><q>.F64
+  <Dd>, <Dm>                   // 编码为 sz = 1
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Sd>`、`<Sm>`：目的单精度寄存器与操作数单精度寄存器。
+* `<Dd>`、`<Dm>`：目的双精度寄存器与操作数双精度寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    if dp_operation then
+        D[d] = FPNeg(D[m]);
+    else
+        S[d] = FPNeg(S[m]);
+```
+
+**异常**：未定义指令。
+
+### 7.250. VNMLA、VNMLS、VNMUL：浮点乘加取负、浮点乘减取负、浮点乘法取负
+
+浮点乘加取负（Floating-point Multiply Accumulate and Negate）把两个浮点寄存器值相乘，把目的寄存器中浮点值的相反数加到乘积的相反数上，并把结果写回目的寄存器。
+
+浮点乘减取负（Floating-point Multiply Subtract and Negate）把两个浮点寄存器值相乘，把目的寄存器中浮点值的相反数加到乘积上，并把结果写回目的寄存器。
+
+浮点乘法取负（Floating-point Multiply and Negate）把两个浮点寄存器值相乘，并把结果的相反数写入目的寄存器。
+
+**注意：** Arm 建议软件不要在向正无穷舍入与向负无穷舍入模式下使用 `VNMLA` 指令，因为乘积与和的舍入可能朝相反方向改变指令结果，从而使这些舍入模式失去意义。
+
+**编码专用伪代码**
+
+```arm
+type = if op == '1' then VFPNegMul_VNMLA else VFPNegMul_VNMLS;
+dp_operation = (sz == '1');
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+n = if dp_operation then UInt(N:Vn) else UInt(Vn:N);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+
+type = VFPNegMul_VNMUL;
+dp_operation = (sz == '1');
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+n = if dp_operation then UInt(N:Vn) else UInt(Vn:N);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+**编码 T1**（FPv4-SP、FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VNMLA<c>.F32 <Sd>,<Sn>,<Sm>`（`op = 1`）、`VNMLS<c>.F32 <Sd>,<Sn>,<Sm>`（`op = 0`）、`VNMLA<c>.F64 <Dd>,<Dn>,<Dm>`（`op = 1`）、`VNMLS<c>.F64 <Dd>,<Dn>,<Dm>`（`op = 0`）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 0 | D | 0 | 1 | Vn | Vn | Vn | Vn |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | N | op | M | 0 | Vm | Vm | Vm | Vm |
+
+**编码 T2**（FPv4-SP、FPv5；在仅单精度变体中 `sz = 1` 为未定义）：`VNMUL<c>.F32 <Sd>,<Sn>,<Sm>`、`VNMUL<c>.F64 <Dd>,<Dn>,<Dm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 0 | 0 | D | 1 | 0 | Vn | Vn | Vn | Vn |
+| [31:16] | Vd | Vd | Vd | Vd | 1 | 0 | 1 | sz | N | 1 | M | 0 | Vm | Vm | Vm | Vm |
+
+**汇编语法**
+
+```arm
+VNML<y><c><q>.F32
+  <Sd>, <Sn>, <Sm>             // 编码 T1，编码为 sz = 0
+VNMUL<c><q>.F32
+  {<Sd>,} <Sn>, <Sm>           // 编码 T2，编码为 sz = 0
+VNML<y><c><q>.F64
+  <Dd>, <Dn>, <Dm>             // 编码 T1，编码为 sz = 1
+VNMUL<c><q>.F64
+  {<Dd>,} <Dn>, <Dm>           // 编码 T2，编码为 sz = 1
+```
+
+where：
+
+* `<y>`：运算，必须为以下之一：
+  * `A`：取负乘加（Vector Negate Multiply Accumulate），编码为 `op = 1`。
+  * `S`：取负乘减（Vector Negate Multiply Subtract），编码为 `op = 0`。
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Sd>`、`<Sn>`、`<Sm>`：目的单精度寄存器与操作数单精度寄存器。
+* `<Dd>`、`<Dn>`、`<Dm>`：目的双精度寄存器与操作数双精度寄存器。
+
+**操作**
+
+```arm
+enumeration VFPNegMul {VFPNegMul_VNMLA, VFPNegMul_VNMLS, VFPNegMul_VNMUL};
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    ExecuteFPCheck();
+    if dp_operation then
+        product64 = FPMul(D[n], D[m], TRUE);
+        case type of
+            when VFPNegMul_VNMLA  D[d] = FPAdd(FPNeg(D[d]), FPNeg(product64), TRUE);
+            when VFPNegMul_VNMLS  D[d] = FPAdd(FPNeg(D[d]), product64, TRUE);
+            when VFPNegMul_VNMUL  D[d] = FPNeg(product64);
+    else
+        product32 = FPMul(S[n], S[m], TRUE);
+        case type of
+            when VFPNegMul_VNMLA  S[d] = FPAdd(FPNeg(S[d]), FPNeg(product32), TRUE);
+            when VFPNegMul_VNMLS  S[d] = FPAdd(FPNeg(S[d]), product32, TRUE);
+            when VFPNegMul_VNMUL  S[d] = FPNeg(product32);
+```
+
+**异常**：未定义指令。
+
+浮点异常：无效运算、溢出、下溢、不精确、输入非规格化。
