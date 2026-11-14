@@ -5600,3 +5600,408 @@ if ConditionPassed() then
 ```
 
 **异常**：无。
+
+### 7.93. PKHBT、PKHTB：半字打包
+
+打包半字（Pack Halfword）指令把一个操作数的一个半字与另一个经过移位的操作数的另一个半字组合起来。
+
+**编码专用伪代码**
+
+```arm
+if S == '1' || T == '1' then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  tbform = (tb == '1');
+(shift_t, shift_n) = DecodeImmShift(tb:'0', imm3:imm2);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`PKHBT<c> <Rd>,<Rn>,<Rm>{,LSL #<imm>}`（`tb == 0`）、`PKHTB<c> <Rd>,<Rn>,<Rm>{,ASR #<imm>}`（`tb == 1`）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 1 | 0 | S | Rn | Rn | Rn | Rn |
+| [31:16] | (0) | imm3 | imm3 | imm3 | Rd | Rd | Rd | Rd | imm2 | imm2 | tb | T | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+PKHBT{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm> {, LSL #<imm>}
+PKHTB{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm> {, ASR #<imm>}
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：可选地移位并用作第二个操作数的寄存器。
+* `<imm>`：施加于从 `<Rm>` 读出的值的移位，编码在 `imm3:imm2` 中。
+
+对 `PKHBT`，取值是：
+
+* 省略：不移位，编码为 `0b00000`。
+* 1-31：左移指定位数，编码为二进制数。
+
+对 `PKHTB`，取值是：
+
+* 省略：该指令是伪指令，汇编时如同写的是 `PKHBT{<c>}{<q>} <Rd>,<Rm>,<Rn>`。
+* 1-32：算术右移指定位数。移 32 位编码为 `0b00000`。其他移位量编码为二进制数。
+
+**注意：** 汇编器可以允许 `<imm> = 0` 表示与省略移位相同的含义，但这不是标准 UAL，不得用于反汇编。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    operand2 = Shift(R[m], shift_t, shift_n, APSR.C);  // APSR.C ignored
+    R[d]<15:0>  = if tbform then operand2<15:0> else R[n]<15:0>;
+    R[d]<31:16> = if tbform then R[n]<31:16>    else operand2<31:16>;
+```
+
+**异常**：无。
+
+### 7.94. PLD (immediate)：立即数预加载数据
+
+预加载数据（Preload Data）向存储器系统指示：来自指定地址的数据存储器访问很可能在不久的将来发生。存储器系统可以作出响应，采取措施以加快这些访问真正发生时的速度，例如把包含指定地址的缓存行预加载到数据缓存中。更多信息参见第 A3-99 页的「预加载缓存」与第 A7-185 页的「存储器提示」。
+
+**编码专用伪代码**
+
+```arm
+if Rn == '1111' then SEE PLD (literal);
+n = UInt(Rn);  imm32 = ZeroExtend(imm12, 32);  add = TRUE;
+
+if Rn == '1111' then SEE PLD (literal);
+n = UInt(Rn);  imm32 = ZeroExtend(imm8, 32);  add = FALSE;
+```
+
+**编码 T1**（Armv7-M）：`PLD<c> [<Rn>,#<imm12>]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 |
+
+**编码 T2**（Armv7-M）：`PLD<c> [<Rn>,#-<imm8>]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 0 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+PLD<c><q>
+  [<Rn> {, #+/-<imm>}]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rn>`：基址寄存器。该寄存器允许是 SP。关于 `PLD` 指令中 PC 的用法，参见第 A7-314 页的「PLD (literal)」。
+* `+/-`：`+` 或省略表示立即数偏移加到基址寄存器值上（`add == TRUE`），`-` 表示减去该偏移（`add == FALSE`）。`#0` 与 `#-0` 生成不同的指令。
+* `<imm>`：用于形成地址的立即数偏移。该偏移可以省略，表示偏移 0。取值是：
+  * 编码 T1：0-4095 范围内的任意值。
+  * 编码 T2：0-255 范围内的任意值。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    address = if add then (R[n] + imm32) else (R[n] - imm32);
+    Hint_PreloadData(address);
+```
+
+**异常**：无。
+
+### 7.95. PLD (literal)：文字预加载数据
+
+预加载数据（Preload Data）向存储器系统指示：来自指定地址的数据存储器访问很可能在不久的将来发生。存储器系统可以作出响应，采取措施以加快这些访问真正发生时的速度，例如把包含指定地址的缓存行预加载到数据缓存中。更多信息参见第 A3-99 页的「预加载缓存」与第 A7-185 页的「存储器提示」。
+
+**编码专用伪代码**
+
+```arm
+imm32 = ZeroExtend(imm12, 32);  add = (U == '1');
+```
+
+**编码 T1**（Armv7-M）：`PLD<c> <label>`（普通形式）、`PLD<c><q> [PC, #+/-<imm>]`（替代形式）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | U | 0 | 0 | 1 | 1 | 1 | 1 | 1 |
+| [31:16] | 1 | 1 | 1 | 1 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 |
+
+**汇编语法**
+
+```arm
+PLD<c><q>
+  <label>
+PLD<c><q>
+  [PC, #+/-<imm>]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<label>`：很可能在不久的将来被访问的文字数据项的标签。汇编器计算从该指令的 PC 值到该标签所需的偏移值。该偏移必须在 -4095 到 4095 范围内。
+  * 如果偏移为零或正数，`imm32` 等于该偏移且 `add == TRUE`。
+  * 如果偏移为负数，`imm32` 等于该偏移的相反数且 `add == FALSE`。
+* `+/-`：`+` 或省略表示立即数偏移加到基址寄存器值上（`add == TRUE`），`-` 表示减去该偏移（`add == FALSE`）。`#0` 与 `#-0` 生成不同的指令。
+* `<imm>`：用于形成地址的立即数偏移。取值在 0-4095 范围内。
+
+替代语法允许分别指定偏移的加与减以及立即数偏移，包括允许指定无法用普通语法表达的减去 0。更多信息参见第 A4-104 页的「在 UAL 指令语法中使用标签」。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    address = if add then (Align(PC,4) + imm32) else (Align(PC,4) - imm32);
+    Hint_PreloadData(address);
+```
+
+**异常**：无。
+
+### 7.96. PLD (register)：寄存器预加载数据
+
+预加载数据（Preload Data）是存储器提示指令，可以向存储器系统指示：来自指定地址的数据存储器访问很可能在不久的将来发生。存储器系统可以作出响应，采取措施以加快这些访问真正发生时的速度，例如把包含指定地址的缓存行预加载到数据缓存中。更多信息参见第 A3-99 页的「预加载缓存」与第 A7-185 页的「存储器提示」。
+
+**编码专用伪代码**
+
+```arm
+if Rn == '1111' then SEE PLD (literal);
+n = UInt(Rn);  m = UInt(Rm);  add = TRUE;
+(shift_t, shift_n) = (SRType_LSL, UInt(shift));
+if m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`PLD<c> [<Rn>,<Rm>{,LSL #<imm2>}]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | imm2 | imm2 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+PLD<c><q>
+  [<Rn>, <Rm> {, LSL #<shift>}]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rn>`：基址寄存器。该寄存器允许是 SP。
+* `<Rm>`：可选移位的偏移寄存器。
+* `<shift>`：施加于从 `<Rm>` 读出的值的移位，范围为 0-3。如果省略该选项，假定移位 0。`<shift>` 编码在 `<imm2>` 中。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    offset = Shift(R[m], shift_t, shift_n, APSR.C);
+    address = if add then (R[n] + offset) else (R[n] - offset);
+    Hint_PreloadData(address);
+```
+
+**异常**：无。
+
+### 7.97. PLI (immediate, literal)：立即数与文字预加载指令
+
+预加载指令（Preload Instruction）是存储器提示指令，可以向存储器系统指示：来自指定地址的指令存储器访问很可能在不久的将来发生。存储器系统可以作出响应，采取措施以加快这些访问真正发生时的速度，例如把包含指定地址的缓存行预加载到指令缓存中。更多信息参见第 A3-99 页的「预加载缓存」与第 A7-185 页的「存储器提示」。
+
+**编码专用伪代码**
+
+```arm
+if Rn == '1111' then SEE encoding T3;
+n = UInt(Rn);  imm32 = ZeroExtend(imm12, 32);  add = TRUE;
+
+if Rn == '1111' then SEE encoding T3;
+n = UInt(Rn);  imm32 = ZeroExtend(imm8, 32);  add = FALSE;
+
+n = 15;  imm32 = ZeroExtend(imm12, 32);  add = (U == '1');
+```
+
+**编码 T1**（Armv7）：`PLI<c> [<Rn>,#<imm12>]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 |
+
+**编码 T2**（Armv7）：`PLI<c> [<Rn>,#-<imm8>]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 0 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**编码 T3**（Armv7）：`PLI<c> <label>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 1 | U | 0 | 0 | 1 | 1 | 1 | 1 | 1 |
+| [31:16] | 1 | 1 | 1 | 1 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 |
+
+**汇编语法**
+
+```arm
+PLI<c><q>
+  [<Rn>, #+/-<imm>]
+PLI<c><q>
+  [PC, #+/-<imm>]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rn>`：基址寄存器。该寄存器允许是 SP。
+* `+/-`：`+` 或省略表示立即数偏移加到基址寄存器值上（`add == TRUE`），`-` 表示减去该偏移（`add == FALSE`）。`#0` 与 `#-0` 生成不同的指令。
+* `<imm>`：指定相对基址寄存器的偏移。该值必须在下列范围内：
+  * 如果基址寄存器是 PC，则为 -4095-4095。
+  * 否则为 -255-4095。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    base = if n == 15 then Align(PC,4) else R[n];
+    address = if add then (base + imm32) else (base - imm32);
+    Hint_PreloadInstr(address);
+```
+
+**异常**：无。
+
+### 7.98. PLI (register)：寄存器预加载指令
+
+预加载指令（Preload Instruction）是存储器提示指令，可以向存储器系统指示：来自指定地址的指令存储器访问很可能在不久的将来发生。存储器系统可以作出响应，采取措施以加快这些访问真正发生时的速度，例如把包含指定地址的缓存行预加载到指令缓存中。更多信息参见第 A3-99 页的「预加载缓存」与第 A7-185 页的「存储器提示」。
+
+**编码专用伪代码**
+
+```arm
+if Rn == '1111' then SEE PLI (immediate, literal);
+n = UInt(Rn);  m = UInt(Rm);  add = TRUE;
+(shift_t, shift_n) = (SRType_LSL, UInt(imm2));
+if m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7）：`PLI<c> [<Rn>,<Rm>{,LSL #<imm2>}]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | imm2 | imm2 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+PLI<c><q>
+  [<Rn>, <Rm> {, LSL #<shift>}]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rn>`：基址寄存器。该寄存器允许是 SP。
+* `<Rm>`：可选移位的偏移寄存器。
+* `<shift>`：施加于从 `<Rm>` 读出的值的移位，范围为 0-3。如果省略该选项，假定移位 0。`<shift>` 编码在 `<imm2>` 中。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    offset = Shift(R[m], shift_t, shift_n, APSR.C);
+    address = if add then (R[n] + offset) else (R[n] - offset);
+    Hint_PreloadInstr(address);
+```
+
+**异常**：无。
+
+### 7.99. POP：弹出多个寄存器
+
+弹出多个寄存器（Pop Multiple Registers）从堆栈加载通用寄存器 R0-R12 的一个子集（也可能是全部）以及 PC 或 LR。
+
+如果被加载的寄存器包含 PC，则加载到 PC 的字被视作分支地址或异常返回值。位[0] 遵循 Arm 架构关于分支到 Thumb 状态执行的互操作规则，必须为 1。如果位[0] 为 0，则产生 UsageFault 异常。
+
+**编码专用伪代码**
+
+```arm
+registers = P:'0000000':register_list;   UnalignedAllowed = FALSE;
+if BitCount(registers) < 1 then UNPREDICTABLE;
+if registers<15> == '1' && InITBlock() && !LastInITBlock() then UNPREDICTABLE;
+
+registers = P:M:'0':register_list;  UnalignedAllowed = FALSE;
+if BitCount(registers) < 2 || (P == '1' && M == '1') then UNPREDICTABLE;
+if registers<15> == '1' && InITBlock() && !LastInITBlock() then UNPREDICTABLE;
+
+t = UInt(Rt);  registers = Zeros(16);  registers<t> = '1';  UnalignedAllowed = TRUE;
+if t == 13 || (t == 15 && InITBlock() && !LastInITBlock()) then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`POP<c> <registers>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 0 | 1 | 1 | 1 | 1 | 0 | P | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list |
+
+**编码 T2**（Armv7-M）：`POP<c>.W <registers>`（`<registers>` 含多个寄存器）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 1 | 0 | 1 | 1 | 1 | 1 | 0 | 1 |
+| [31:16] | P | M | (0) | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list | register_list |
+
+**编码 T3**（Armv7-M）：`POP<c>.W <registers>`（`<registers>` 只含一个寄存器 `<Rt>`）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 1 | 1 | 0 | 1 |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |
+
+**汇编语法**
+
+```arm
+POP<c><q>
+  <registers>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<registers>`：由一个或多个寄存器组成的列表，寄存器之间用逗号分隔并用 `{` 与 `}` 包围。它指定要加载的寄存器集合。寄存器按顺序加载：编号最低的寄存器从最低的存储器地址加载，直到编号最高的寄存器从最高的存储器地址加载。如果寄存器列表中指定了 PC，则该指令分支到加载进 PC 的地址（数据）。
+
+  如果列表包含不止一个寄存器，该指令汇编为编码 T1 或 T2。如果列表恰好包含一个寄存器，该指令汇编为编码 T1 或 T3。
+
+  SP 不能在列表中。
+
+  如果列表中有 PC，则列表中不得有 LR。
+
+**等效 LDM 语法**
+
+```arm
+LDMIA<c><q>
+  SP!, <registers>
+```
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    address = SP;
+    SP = SP + 4*BitCount(registers);
+    for i = 0 to 14
+        if registers<i> == '1' then
+            R[i] = MemA[address,4];  address = address + 4;
+    if registers<15> == '1' then
+        LoadWritePC(MemA[address,4]);
+```
+
+**异常**：UsageFault、MemManage、BusFault。
