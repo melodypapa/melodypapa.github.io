@@ -335,6 +335,7 @@ nav:
         - "ARM架构的内存模式": cortex/armv7-m/part-a/arm_architecture_memory_mode/index.md
         - "Thumb 指令集编码": cortex/armv7-m/part-a/thumb_instruction_set_encoding/index.md
         - "浮点指令集编码": cortex/armv7-m/part-a/fp_instruction_set_encoding/index.md
+        - "指令详情": cortex/armv7-m/part-a/instruction_details/index.md
       - "Part B 系统级架构":
         - cortex/armv7-m/part-b/index.md
         - "系统内存模型": cortex/armv7-m/part-b/system_memory_model/index.md
