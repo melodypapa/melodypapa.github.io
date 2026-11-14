@@ -7613,3 +7613,400 @@ if ConditionPassed() then
 ```
 
 **异常**：无。
+
+### 7.132. SHASX：交换操作数的有符号折半加与减
+
+交换操作数的有符号折半加与减（Signed Halving Add and Subtract with Exchange）交换第二个操作数的两个半字，执行一个有符号 16 位整数加法与一个有符号 16 位减法，把结果折半，并写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SHASX<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 1 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SHASX{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+pre-UAL 语法 `SHADDSUBX<c>` 等价于 `SHASX<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    diff = SInt(R[n]<15:0>) - SInt(R[m]<31:16>);
+    sum  = SInt(R[n]<31:16>) + SInt(R[m]<15:0>);
+    R[d]<15:0>  = diff<16:1>;
+    R[d]<31:16> = sum<16:1>;
+```
+
+**异常**：无。
+
+### 7.133. SHSAX：交换操作数的有符号折半减与加
+
+交换操作数的有符号折半减与加（Signed Halving Subtract and Add with Exchange）交换第二个操作数的两个半字，执行一个有符号 16 位整数减法与一个有符号 16 位加法，把结果折半，并写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SHSAX<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 1 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SHSAX{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+pre-UAL 语法 `SHSUBADDX<c>` 等价于 `SHSAX<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    sum  = SInt(R[n]<15:0>) + SInt(R[m]<31:16>);
+    diff = SInt(R[n]<31:16>) - SInt(R[m]<15:0>);
+    R[d]<15:0>  = sum<16:1>;
+    R[d]<31:16> = diff<16:1>;
+```
+
+**异常**：无。
+
+### 7.134. SHSUB16：有符号 16 位折半减
+
+有符号 16 位折半减（Signed Halving Subtract 16）执行两个有符号 16 位整数减法，把结果折半，并写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SHSUB16<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 1 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SHSUB16{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    diff1 = SInt(R[n]<15:0>) - SInt(R[m]<15:0>);
+    diff2 = SInt(R[n]<31:16>) - SInt(R[m]<31:16>);
+    R[d]<15:0>  = diff1<16:1>;
+    R[d]<31:16> = diff2<16:1>;
+```
+
+**异常**：无。
+
+### 7.135. SHSUB8：有符号 8 位折半减
+
+有符号 8 位折半减（Signed Halving Subtract 8）执行四个有符号 8 位整数减法，把结果折半，并写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SHSUB8<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 0 | 1 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SHSUB8{<c>}{<q>}
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    diff1 = SInt(R[n]<7:0>) - SInt(R[m]<7:0>);
+    diff2 = SInt(R[n]<15:8>) - SInt(R[m]<15:8>);
+    diff3 = SInt(R[n]<23:16>) - SInt(R[m]<23:16>);
+    diff4 = SInt(R[n]<31:24>) - SInt(R[m]<31:24>);
+    R[d]<7:0>   = diff1<8:1>;
+    R[d]<15:8>  = diff2<8:1>;
+    R[d]<23:16> = diff3<8:1>;
+    R[d]<31:24> = diff4<8:1>;
+```
+
+**异常**：无。
+
+### 7.136. SMLABB、SMLABT、SMLATB、SMLATT：有符号半字乘加
+
+有符号半字乘加（Signed Multiply Accumulate (halfwords)）执行有符号乘加运算。乘法作用于两个有符号 16 位量，它们分别取自各自源寄存器的低半字或高半字。这些源寄存器的另一半被忽略。32 位乘积与 32 位累加值相加，结果写入目的寄存器。
+
+如果在累加值相加过程中发生溢出，该指令置位 APSR 中的 Q 标志。乘法过程中不可能发生溢出。
+
+**编码专用伪代码**
+
+```arm
+if Ra == '1111' then SEE SMULBB, SMULBT, SMULTB, SMULTT;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  a = UInt(Ra);
+n_high = (N == '1');  m_high = (M == '1');
+if d IN {13,15} || n IN {13,15} || m IN {13,15} || a == 13 then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SMLA<x><y><c> <Rd>,<Rn>,<Rm>,<Ra>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 1 | 0 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | Ra | Ra | Ra | Ra | Rd | Rd | Rd | Rd | 0 | 0 | N | M | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SMLA<x><y>{<c>}{<q>}
+  <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+where：
+
+* `<x>`：指定源寄存器 `<Rn>` 的哪一半用作第一个乘数操作数。如果 `<x>` 为 `B`，则使用 `<Rn>` 的低半字（位[15:0]）。如果 `<x>` 为 `T`，则使用 `<Rn>` 的高半字（位[31:16]）。
+* `<y>`：指定源寄存器 `<Rm>` 的哪一半用作第二个乘数操作数。如果 `<y>` 为 `B`，则使用 `<Rm>` 的低半字（位[15:0]）。如果 `<y>` 为 `T`，则使用 `<Rm>` 的高半字（位[31:16]）。
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：其低半字或高半字（由 `<x>` 选择）作为第一个乘数操作数的源寄存器。
+* `<Rm>`：其低半字或高半字（由 `<y>` 选择）作为第二个乘数操作数的源寄存器。
+* `<Ra>`：包含累加值的寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    operand1 = if n_high then R[n]<31:16> else R[n]<15:0>;
+    operand2 = if m_high then R[m]<31:16> else R[m]<15:0>;
+    result = SInt(operand1) * SInt(operand2) + SInt(R[a]);
+    R[d] = result<31:0>;
+    if result != SInt(result<31:0>) then  // Signed overflow
+        APSR.Q = '1';
+```
+
+**异常**：无。
+
+### 7.137. SMLAD、SMLADX：有符号双乘加
+
+有符号双乘加（Signed Multiply Accumulate Dual）执行两次有符号 16 × 16 位乘法。它把乘积加到一个 32 位累加操作数上。
+
+可以选择在执行运算之前交换第二个操作数的两个半字。这产生高 × 低与低 × 高的乘法。
+
+如果累加运算溢出，该指令置位 Q 标志。乘法过程中不可能发生溢出。
+
+**编码专用伪代码**
+
+```arm
+if Ra == '1111' then SEE SMUAD;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  a = UInt(Ra);
+m_swap = (M == '1');
+if d IN {13,15} || n IN {13,15} || m IN {13,15} || a == 13 then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SMLAD{X}<c> <Rd>,<Rn>,<Rm>,<Ra>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | Ra | Ra | Ra | Ra | Rd | Rd | Rd | Rd | 0 | 0 | 0 | M | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SMLAD{X}{<c>}{<q>}
+  <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+where：
+
+* `X`：如果出现 `X`（编码为 `M == 1`），乘法为低 × 高与高 × 低。如果省略 `X`（编码为 `M == 0`），乘法为低 × 低与高 × 高。
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+* `<Ra>`：包含累加值的寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    operand2 = if m_swap then ROR(R[m],16) else R[m];
+    product1 = SInt(R[n]<15:0>) * SInt(operand2<15:0>);
+    product2 = SInt(R[n]<31:16>) * SInt(operand2<31:16>);
+    result = product1 + product2 + SInt(R[a]);
+    R[d] = result<31:0>;
+    if result != SInt(result<31:0>) then  // Signed overflow
+        APSR.Q = '1';
+```
+
+**异常**：无。
+
+### 7.138. SMLAL：有符号长乘加
+
+有符号长乘加（Signed Multiply Accumulate Long）把两个有符号 32 位值相乘得到 64 位值，并与一个 64 位值累加。
+
+**编码专用伪代码**
+
+```arm
+dLo = UInt(RdLo);  dHi = UInt(RdHi);  n = UInt(Rn);  m = UInt(Rm);  setflags = FALSE;
+if dLo IN {13,15} || dHi IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+if dHi == dLo then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`SMLAL<c> <RdLo>,<RdHi>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 1 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | RdLo | RdLo | RdLo | RdLo | RdHi | RdHi | RdHi | RdHi | 0 | 0 | 0 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SMLAL<c><q>
+  <RdLo>, <RdHi>, <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<RdLo>`：提供累加值的低 32 位，并且是结果低 32 位的目的寄存器。
+* `<RdHi>`：提供累加值的高 32 位，并且是结果高 32 位的目的寄存器。
+* `<Rn>`：指定包含第一个操作数的寄存器。
+* `<Rm>`：指定包含第二个操作数的寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    result = SInt(R[n]) * SInt(R[m]) + SInt(R[dHi]:R[dLo]);
+    R[dHi] = result<63:32>;
+    R[dLo] = result<31:0>;
+```
+
+**异常**：无。
+
+### 7.139. SMLALBB、SMLALBT、SMLALTB、SMLALTT：有符号半字长乘加
+
+有符号半字长乘加（Signed Multiply Accumulate Long (halfwords)）把两个有符号 16 位值相乘得到 32 位值，并与一个 64 位值累加。乘法作用于两个有符号 16 位量，它们分别取自各自源寄存器的低半字或高半字。这些源寄存器的另一半被忽略。32 位乘积被符号扩展，并与 64 位累加值相加。
+
+该指令过程中可能发生溢出，但只是作为 64 位加法的结果。如果发生这种溢出，则不被检测，结果改为按模 2^64 回绕。
+
+**编码专用伪代码**
+
+```arm
+dLo = UInt(RdLo);  dHi = UInt(RdHi);  n = UInt(Rn);  m = UInt(Rm);
+n_high = (N == '1');  m_high = (M == '1');
+if dLo IN {13,15} || dHi IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+if dHi == dLo then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`SMLAL<x><y><c> <RdLo>,<RdHi>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 1 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | RdLo | RdLo | RdLo | RdLo | RdHi | RdHi | RdHi | RdHi | 1 | 0 | N | M | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+SMLAL<x><y>{<c>}{<q>}
+  <RdLo>, <RdHi>, <Rn>, <Rm>
+```
+
+where：
+
+* `<x>`：指定源寄存器 `<Rn>` 的哪一半用作第一个乘数操作数。如果 `<x>` 为 `B`，则使用 `<Rn>` 的低半字（位[15:0]）。如果 `<x>` 为 `T`，则使用 `<Rn>` 的高半字（位[31:16]）。
+* `<y>`：指定源寄存器 `<Rm>` 的哪一半用作第二个乘数操作数。如果 `<y>` 为 `B`，则使用 `<Rm>` 的低半字（位[15:0]）。如果 `<y>` 为 `T`，则使用 `<Rm>` 的高半字（位[31:16]）。
+* `<c>`, `<q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<RdLo>`：提供累加值的低 32 位，并且是结果低 32 位的目的寄存器。
+* `<RdHi>`：提供累加值的高 32 位，并且是结果高 32 位的目的寄存器。
+* `<Rn>`：其低半字或高半字（由 `<x>` 选择）作为第一个乘数操作数的源寄存器。
+* `<Rm>`：其低半字或高半字（由 `<y>` 选择）作为第二个乘数操作数的源寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    operand1 = if n_high then R[n]<31:16> else R[n]<15:0>;
+    operand2 = if m_high then R[m]<31:16> else R[m]<15:0>;
+    result = SInt(operand1) * SInt(operand2) + SInt(R[dHi]:R[dLo]);
+    R[dHi] = result<63:32>;
+    R[dLo] = result<31:0>;
+```
+
+**异常**：无。
