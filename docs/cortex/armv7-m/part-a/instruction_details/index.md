@@ -11060,3 +11060,285 @@ if ConditionPassed() then
 ```
 
 **异常**：UsageFault。
+
+### 7.196. UHADD16：无符号折半 16 位加法
+
+无符号折半 16 位加法（Unsigned Halving Add 16）执行两个 16 位无符号整数加法，把结果折半后写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`UHADD16<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 1 | 1 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UHADD16<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    sum1 = UInt(R[n]<15:0>) + UInt(R[m]<15:0>);
+    sum2 = UInt(R[n]<31:16>) + UInt(R[m]<31:16>);
+    R[d]<15:0>  = sum1<16:1>;
+    R[d]<31:16> = sum2<16:1>;
+```
+
+**异常**：无。
+
+### 7.197. UHADD8：无符号折半 8 位加法
+
+无符号折半 8 位加法（Unsigned Halving Add 8）执行四个 8 位无符号整数加法，把结果折半后写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`UHADD8<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 1 | 1 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UHADD8<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    sum1 = UInt(R[n]<7:0>) + UInt(R[m]<7:0>);
+    sum2 = UInt(R[n]<15:8>) + UInt(R[m]<15:8>);
+    sum3 = UInt(R[n]<23:16>) + UInt(R[m]<23:16>);
+    sum4 = UInt(R[n]<31:24>) + UInt(R[m]<31:24>);
+    R[d]<7:0>   = sum1<8:1>;
+    R[d]<15:8>  = sum2<8:1>;
+    R[d]<23:16> = sum3<8:1>;
+    R[d]<31:24> = sum4<8:1>;
+```
+
+**异常**：无。
+
+### 7.198. UHASX：无符号折半带交换的加法与减法
+
+无符号折半带交换的加法与减法（Unsigned Halving Add and Subtract with Exchange）交换第二个操作数的两个半字，执行一个 16 位无符号整数加法和一个 16 位无符号整数减法，把结果折半后写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`UHASX<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 1 | 1 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UHASX<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+pre-UAL 语法 `UHADDSUBX<c>` 等价于 `UHASX<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    diff = UInt(R[n]<15:0>) - UInt(R[m]<31:16>);
+    sum  = UInt(R[n]<31:16>) + UInt(R[m]<15:0>);
+    R[d]<15:0>  = diff<16:1>;
+    R[d]<31:16> = sum<16:1>;
+```
+
+**异常**：无。
+
+### 7.199. UHSAX：无符号折半带交换的减法与加法
+
+无符号折半带交换的减法与加法（Unsigned Halving Subtract and Add with Exchange）交换第二个操作数的两个半字，执行一个 16 位无符号整数减法和一个 16 位无符号整数加法，把结果折半后写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`UHSAX<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 1 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 1 | 1 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UHSAX<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+pre-UAL 语法 `UHSUBADDX<c>` 等价于 `UHSAX<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    sum  = UInt(R[n]<15:0>) + UInt(R[m]<31:16>);
+    diff = UInt(R[n]<31:16>) - UInt(R[m]<15:0>);
+    R[d]<15:0>  = sum<16:1>;
+    R[d]<31:16> = diff<16:1>;
+```
+
+**异常**：无。
+
+### 7.200. UHSUB16：无符号折半 16 位减法
+
+无符号折半 16 位减法（Unsigned Halving Subtract 16）执行两个 16 位无符号整数减法，把结果折半后写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`UHSUB16<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 1 | 1 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UHSUB16<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    diff1 = UInt(R[n]<15:0>) - UInt(R[m]<15:0>);
+    diff2 = UInt(R[n]<31:16>) - UInt(R[m]<31:16>);
+    R[d]<15:0>  = diff1<16:1>;
+    R[d]<31:16> = diff2<16:1>;
+```
+
+**异常**：无。
+
+### 7.201. UHSUB8：无符号折半 8 位减法
+
+无符号折半 8 位减法（Unsigned Halving Subtract 8）执行四个 8 位无符号整数减法，把结果折半后写入目的寄存器。
+
+**编码专用伪代码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7E-M）：`UHSUB8<c> <Rd>,<Rn>,<Rm>`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 1 | 0 | 0 | Rn | Rn | Rn | Rn |
+| [31:16] | 1 | 1 | 1 | 1 | Rd | Rd | Rd | Rd | 0 | 1 | 1 | 0 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+UHSUB8<c><q>
+  {<Rd>,} <Rn>, <Rm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rd>`：目的寄存器。
+* `<Rn>`：第一个操作数寄存器。
+* `<Rm>`：第二个操作数寄存器。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    diff1 = UInt(R[n]<7:0>) - UInt(R[m]<7:0>);
+    diff2 = UInt(R[n]<15:8>) - UInt(R[m]<15:8>);
+    diff3 = UInt(R[n]<23:16>) - UInt(R[m]<23:16>);
+    diff4 = UInt(R[n]<31:24>) - UInt(R[m]<31:24>);
+    R[d]<7:0>   = diff1<8:1>;
+    R[d]<15:8>  = diff2<8:1>;
+    R[d]<23:16> = diff3<8:1>;
+    R[d]<31:24> = diff4<8:1>;
+```
+
+**异常**：无。
