@@ -3718,3 +3718,404 @@ if ConditionPassed() then
 ```
 
 **异常**：UsageFault、MemManage、BusFault。
+
+### 7.58. LDRHT：非特权加载半字
+
+非特权加载半字（Load Register Halfword Unprivileged）由基址寄存器值与立即数偏移计算出地址，从存储器加载一个半字，将其零扩展形成 32 位字，并写入寄存器。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。当特权软件使用 `LDRHT` 指令时，存储器访问受到限制，如同该软件是非特权的一样。另参见第 B3-637 页的「MPU_CTRL 设置对非特权指令的影响」。
+
+**编码专用伪代码**
+
+```arm
+if Rn == '1111' then SEE LDRH (literal);
+t = UInt(Rt);  n = UInt(Rn);  postindex = FALSE;  add = TRUE;
+register_form = FALSE;  imm32 = ZeroExtend(imm8, 32);
+if t IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`LDRHT<c> <Rt>,[<Rn>,#<imm8>]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | 1 | 1 | 0 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+LDRHT<c><q>
+  <Rt>, [<Rn> {, #<imm>}]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：目的寄存器。
+* `<Rn>`：基址寄存器。该寄存器允许是 SP。
+* `<imm>`：加到 `<Rn>` 值上以形成地址的立即数偏移。允许范围：0-255。`<imm>` 可以省略，表示偏移 0。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    address = R[n] + imm32;
+    data = MemU_unpriv[address,2];
+    R[t] = ZeroExtend(data, 32);
+```
+
+**异常**：UsageFault、MemManage、BusFault。
+
+### 7.59. LDRSB (immediate)：立即数加载有符号字节
+
+立即数加载有符号字节（Load Register Signed Byte (immediate)）由基址寄存器值与立即数偏移计算出地址，从存储器加载一个字节，将其符号扩展形成 32 位字，并写入寄存器。它可以使用偏移、后索引或前索引寻址。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。
+
+**编码专用伪代码**
+
+```arm
+if Rt == '1111' then SEE PLI;
+if Rn == '1111' then SEE LDRSB (literal);
+t = UInt(Rt);  n = UInt(Rn);  imm32 = ZeroExtend(imm12, 32);
+index = TRUE;  add = TRUE;  wback = FALSE;
+if t == 13 then UNPREDICTABLE;
+
+if Rt == '1111' && P == '1' && U == '0' && W == '0' then SEE PLI;
+if Rn == '1111' then SEE LDRSB (literal);
+if P == '1' && U == '1' && W == '0' then SEE LDRSBT;
+if P == '0' && W == '0' then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);  imm32 = ZeroExtend(imm8, 32);
+index = (P == '1');  add = (U == '1');  wback = (W == '1');
+if t == 13 || (t == 15 && W == '1') || (wback && n == t) then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`LDRSB<c> <Rt>,[<Rn>,#<imm12>]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 |
+
+**编码 T2**（Armv7-M）：`LDRSB<c> <Rt>,[<Rn>,#-<imm8>]`、`LDRSB<c> <Rt>,[<Rn>],#+/-<imm8>`、`LDRSB<c> <Rt>,[<Rn>,#+/-<imm8>]!`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | P | U | W | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+LDRSB<c><q>
+  <Rt>, [<Rn> {, #+/-<imm>}]
+LDRSB<c><q>
+  <Rt>, [<Rn>, #+/-<imm>]!
+LDRSB<c><q>
+  <Rt>, [<Rn>], #+/-<imm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：目的寄存器。
+* `<Rn>`：基址寄存器。该寄存器允许是 SP。如果该寄存器是 PC，参见第 A7-272 页的「LDRSB (literal)」。
+* `+/-`：`+` 或省略表示立即数偏移加到基址寄存器值上（`add == TRUE`），`-` 表示减去该偏移（`add == FALSE`）。`#0` 与 `#-0` 生成不同的指令。
+* `<imm>`：加到 `<Rn>` 值上或从中减去以形成地址的立即数偏移。允许范围：编码 T1 为 0-4095，编码 T2 为 0-255。在偏移寻址语法中 `<imm>` 可以省略，表示偏移 0。
+
+pre-UAL 语法 `LDR<c>SB` 等价于 `LDRSB<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    offset_addr = if add then (R[n] + imm32) else (R[n] - imm32);
+    address = if index then offset_addr else R[n];
+    R[t] = SignExtend(MemU[address,1], 32);
+    if wback then R[n] = offset_addr;
+```
+
+**异常**：MemManage、BusFault。
+
+### 7.60. LDRSB (literal)：文字加载有符号字节
+
+文字加载有符号字节（Load Register Signed Byte (literal)）由 PC 值与立即数偏移计算出地址，从存储器加载一个字节，将其符号扩展形成 32 位字，并写入寄存器。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。
+
+**编码专用伪代码**
+
+```arm
+if Rt == '1111' then SEE PLI;
+t = UInt(Rt);  imm32 = ZeroExtend(imm12, 32);  add = (U == '1');
+if t == 13 then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`LDRSB<c> <Rt>,<label>`（普通形式）、`LDRSB<c> <Rt>,[PC,#-0]`（特殊情况）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 1 | U | 0 | 0 | 1 | 1 | 1 | 1 | 1 |
+| [31:16] | Rt | Rt | Rt | Rt | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 |
+
+**汇编语法**
+
+```arm
+LDRSB<c><q>
+  <Rt>, <label>
+LDRSB<c><q>
+  <Rt>, [PC, #+/-<imm>]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：目的寄存器。
+* `<label>`：要加载进 `<Rt>` 的文字数据项的标签。汇编器计算从 `ADR` 指令的 PC 值到该标签所需的偏移值。允许的偏移值为 -4095-4095。如果偏移为零或正数，`imm32` 等于该偏移且 `add == TRUE`。如果偏移为负数，`imm32` 等于该偏移的相反数且 `add == FALSE`。
+
+替代语法允许分别指定偏移的加与减以及立即数偏移，包括允许指定无法用普通语法表达的减去 0。更多信息参见第 A4-104 页的「在 UAL 指令语法中使用标签」。
+
+pre-UAL 语法 `LDR<c>SB` 等价于 `LDRSB<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    base = Align(PC,4);
+    address = if add then (base + imm32) else (base - imm32);
+    R[t] = SignExtend(MemU[address,1], 32);
+```
+
+**异常**：MemManage、BusFault。
+
+### 7.61. LDRSB (register)：寄存器加载有符号字节
+
+寄存器加载有符号字节（Load Register Signed Byte (register)）由基址寄存器值与偏移寄存器值计算出地址，从存储器加载一个字节，将其符号扩展形成 32 位字，并写入寄存器。偏移寄存器值可以左移 0、1、2 或 3 位。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。
+
+**编码专用伪代码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);  m = UInt(Rm);
+index = TRUE;  add = TRUE;  wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, 0);
+
+if Rt == '1111' then SEE PLI;
+if Rn == '1111' then SEE LDRSB (literal);
+t = UInt(Rt);  n = UInt(Rn);  m = UInt(Rm);
+index = TRUE;  add = TRUE;  wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, UInt(imm2));
+if t == 13 || m IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Thumb 指令集的所有版本）：`LDRSB<c> <Rt>,[<Rn>,<Rm>]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 0 | 1 | 0 | 1 | 0 | 1 | 1 | Rm | Rm | Rm | Rn | Rn | Rn | Rt | Rt | Rt |
+
+**编码 T2**（Armv7-M）：`LDRSB<c>.W <Rt>,[<Rn>,<Rm>{,LSL #<imm2>}]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | 0 | 0 | 0 | 0 | 0 | 0 | imm2 | imm2 | Rm | Rm | Rm | Rm |
+
+**汇编语法**
+
+```arm
+LDRSB<c><q>
+  <Rt>, [<Rn>, <Rm> {, LSL #<shift>}]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：目的寄存器。
+* `<Rn>`：包含基值的寄存器。该寄存器允许是 SP。
+* `<Rm>`：包含左移后加到 `<Rn>` 值以形成地址的偏移。
+* `<shift>`：`<Rm>` 值左移的位数，范围为 0-3。如果省略该选项，假定移位 0 且两种编码都允许；如果指定该选项，只允许编码 T2。
+
+pre-UAL 语法 `LDR<c>SB` 等价于 `LDRSB<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    offset = Shift(R[m], shift_t, shift_n, APSR.C);
+    offset_addr = if add then (R[n] + offset) else (R[n] - offset);
+    address = if index then offset_addr else R[n];
+    R[t] = SignExtend(MemU[address,1], 32);
+```
+
+**异常**：MemManage、BusFault。
+
+### 7.62. LDRSBT：非特权加载有符号字节
+
+非特权加载有符号字节（Load Register Signed Byte Unprivileged）由基址寄存器值与立即数偏移计算出地址，从存储器加载一个字节，将其符号扩展形成 32 位字，并写入寄存器。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。当特权软件使用 `LDRSBT` 指令时，存储器访问受到限制，如同该软件是非特权的一样。另参见第 B3-637 页的「MPU_CTRL 设置对非特权指令的影响」。
+
+**编码专用伪代码**
+
+```arm
+if Rn == '1111' then SEE LDRSB (literal);
+t = UInt(Rt);  n = UInt(Rn);  postindex = FALSE;  add = TRUE;
+register_form = FALSE;  imm32 = ZeroExtend(imm8, 32);
+if t IN {13,15} then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`LDRSBT<c> <Rt>,[<Rn>,#<imm8>]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | 1 | 1 | 0 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+LDRSBT<c><q>
+  <Rt>, [<Rn> {, #<imm>}]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：目的寄存器。
+* `<Rn>`：基址寄存器。该寄存器允许是 SP。
+* `<imm>`：加到 `<Rn>` 值上以形成地址的立即数偏移。允许范围：0-255。`<imm>` 可以省略，表示偏移 0。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    address = R[n] + imm32;
+    R[t] = SignExtend(MemU_unpriv[address,1], 32);
+```
+
+**异常**：MemManage、BusFault。
+
+### 7.63. LDRSH (immediate)：立即数加载有符号半字
+
+立即数加载有符号半字（Load Register Signed Halfword (immediate)）由基址寄存器值与立即数偏移计算出地址，从存储器加载一个半字，将其符号扩展形成 32 位字，并写入寄存器。它可以使用偏移、后索引或前索引寻址。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。
+
+**编码专用伪代码**
+
+```arm
+if Rn == '1111' then SEE LDRSH (literal);
+if Rt == '1111' then SEE "Related instructions";
+t = UInt(Rt);  n = UInt(Rn);  imm32 = ZeroExtend(imm12, 32);
+index = TRUE;  add = TRUE;  wback = FALSE;
+if t == 13 then UNPREDICTABLE;
+
+if Rn == '1111' then SEE LDRSH (literal);
+if Rt == '1111' && P == '1' && U == '0' && W == '0' then SEE "Related instructions";
+if P == '1' && U == '1' && W == '0' then SEE LDRSHT;
+if P == '0' && W == '0' then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);  imm32 = ZeroExtend(imm8, 32);
+index = (P == '1');  add = (U == '1');  wback = (W == '1');
+if t == 13 || (t == 15 && W == '1') || (wback && n == t) then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`LDRSH<c> <Rt>,[<Rn>,#<imm12>]`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 1 | 0 | 1 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 |
+
+**编码 T2**（Armv7-M）：`LDRSH<c> <Rt>,[<Rn>,#-<imm8>]`、`LDRSH<c> <Rt>,[<Rn>],#+/-<imm8>`、`LDRSH<c> <Rt>,[<Rn>,#+/-<imm8>]!`
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | 1 | Rn | Rn | Rn | Rn |
+| [31:16] | Rt | Rt | Rt | Rt | 1 | P | U | W | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 | imm8 |
+
+**汇编语法**
+
+```arm
+LDRSH<c><q>
+  <Rt>, [<Rn> {, #+/-<imm>}]
+LDRSH<c><q>
+  <Rt>, [<Rn>, #+/-<imm>]!
+LDRSH<c><q>
+  <Rt>, [<Rn>], #+/-<imm>
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：目的寄存器。
+* `<Rn>`：基址寄存器。该寄存器允许是 SP。如果该寄存器是 PC，参见第 A7-277 页的「LDRSH (literal)」。
+* `+/-`：`+` 或省略表示立即数偏移加到基址寄存器值上（`add == TRUE`），`-` 表示减去该偏移（`add == FALSE`）。`#0` 与 `#-0` 生成不同的指令。
+* `<imm>`：加到 `<Rn>` 值上或从中减去以形成地址的立即数偏移。允许范围：编码 T1 为 0-4095，编码 T2 为 0-255。在偏移寻址语法中 `<imm>` 可以省略，表示偏移 0。
+
+pre-UAL 语法 `LDR<c>SH` 等价于 `LDRSH<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    offset_addr = if add then (R[n] + imm32) else (R[n] - imm32);
+    address = if index then offset_addr else R[n];
+    data = MemU[address,2];
+    if wback then R[n] = offset_addr;
+    R[t] = SignExtend(data, 32);
+```
+
+**异常**：UsageFault、MemManage、BusFault。
+
+### 7.64. LDRSH (literal)：文字加载有符号半字
+
+文字加载有符号半字（Load Register Signed Halfword (literal)）由 PC 值与立即数偏移计算出地址，从存储器加载一个半字，将其符号扩展形成 32 位字，并写入寄存器。关于存储器访问的信息，参见第 A7-184 页的「存储器访问」。
+
+**编码专用伪代码**
+
+```arm
+if Rt == '1111' then SEE "Related instructions";
+t = UInt(Rt);  imm32 = ZeroExtend(imm12, 32);  add = (U == '1');
+if t == 13 then UNPREDICTABLE;
+```
+
+**编码 T1**（Armv7-M）：`LDRSH<c> <Rt>,<label>`（普通形式）、`LDRSH<c> <Rt>,[PC,#-0]`（特殊情况）
+
+| 位段 | 15 | 14 | 13 | 12 | 11 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| [15:0] | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 1 | U | 0 | 1 | 1 | 1 | 1 | 1 | 1 |
+| [31:16] | Rt | Rt | Rt | Rt | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 | imm12 |
+
+**汇编语法**
+
+```arm
+LDRSH<c><q>
+  <Rt>, <label>
+LDRSH<c><q>
+  <Rt>, [PC, #+/-<imm>]
+```
+
+where：
+
+* `<c><q>`：参见第 A7-177 页的「标准汇编语法字段」。
+* `<Rt>`：目的寄存器。
+* `<label>`：要加载进 `<Rt>` 的文字数据项的标签。汇编器计算从 `ADR` 指令的 PC 值到该标签所需的偏移值。允许的偏移值为 -4095-4095。如果偏移为零或正数，`imm32` 等于该偏移且 `add == TRUE`。如果偏移为负数，`imm32` 等于该偏移的相反数且 `add == FALSE`。
+
+替代语法允许分别指定偏移的加与减以及立即数偏移，包括允许指定无法用普通语法表达的减去 0。更多信息参见第 A4-104 页的「在 UAL 指令语法中使用标签」。
+
+pre-UAL 语法 `LDR<c>SH` 等价于 `LDRSH<c>`。
+
+**操作**
+
+```arm
+if ConditionPassed() then
+    EncodingSpecificOperations();
+    base = Align(PC,4);
+    address = if add then (base + imm32) else (base - imm32);
+    data = MemU[address,2];
+    R[t] = SignExtend(data, 32);
+```
+
+**异常**：UsageFault、MemManage、BusFault。
+
+**未分配存储器提示**
+
+如果编码 T1 中的 `Rt` 字段为 `'1111'`，则该指令是未分配存储器提示（unallocated memory hint）。
+
+未分配存储器提示必须实现为 NOP。软件不得使用它们，因此它们没有 UAL 汇编语法。
