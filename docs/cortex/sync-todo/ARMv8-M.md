@@ -31,12 +31,15 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
 | `armv8-m/system_address_map/index.md` | `armv8-m/part-b/system_address_map/index.md` |
 | `armv8-m/system_timer_systick/index.md` | `armv8-m/part-b/system_timer_systick/index.md` |
 | `armv8-m/vector_extension/index.md` | `armv8-m/part-b/vector_extension/index.md` |
-| `armv8-m/instruction_encoding_16bit/index.md` | `armv8-m/part-c/instruction_encoding_16bit/index.md` |
-| `armv8-m/instruction_encoding_32bit/index.md` | `armv8-m/part-c/instruction_encoding_32bit/index.md` |
-| `armv8-m/instruction_list/index.md` | `armv8-m/part-c/instruction_list/index.md` |
-| `armv8-m/instruction_list/a/index.md` | `armv8-m/part-c/instruction_list/a/index.md` |
-| `armv8-m/instruction_list/b/index.md` | `armv8-m/part-c/instruction_list/b/index.md` |
-| `armv8-m/instruction_list/c/index.md` | `armv8-m/part-c/instruction_list/c/index.md` |
+| `armv8-m/instruction_encoding_16bit/index.md` | `armv8-m/part-c/instruction_specification/index.md` |
+| `armv8-m/instruction_encoding_32bit/index.md` | `armv8-m/part-c/instruction_specification/index.md` |
+| `armv8-m/instruction_list/index.md` | `armv8-m/part-c/instruction_specification/index.md` |
+| `armv8-m/instruction_list/a/index.md` | `armv8-m/part-c/instruction_specification/index.md` |
+| `armv8-m/instruction_list/b/index.md` | `armv8-m/part-c/instruction_specification/index.md` |
+| `armv8-m/instruction_list/c/index.md` | `armv8-m/part-c/instruction_specification/index.md` |
+| `armv8-m/part-c/instruction_encoding_16bit/index.md` | `armv8-m/part-c/instruction_specification/index.md` |
+| `armv8-m/part-c/instruction_encoding_32bit/index.md` | `armv8-m/part-c/instruction_specification/index.md` |
+| `armv8-m/part-c/instruction_list/index.md` | `armv8-m/part-c/instruction_specification/index.md` |
 | `armv8-m/instruction_set_overview/index.md` | `armv8-m/part-c/instruction_set_overview/index.md` |
 | `armv8-m/glossary/index.md` | `armv8-m/part-g/glossary/index.md` |
 
@@ -262,7 +265,8 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - Batch 2 S7 result: covered by the user-approved single-loop run.
   - Batch 2 S8 result: committed on `feature/cortex-armv8m-b1-resets`.
 - [x] C2.4 A–C band → landing `armv8-m/part-c/instruction_list/` with one page per band (C2.4.1–C2.4.56, printed 528–630, 56 entries)
-  - Split decision (user, 2026-11-12): C2.4 was un-deferred and split into alphabetical bands; this run takes A–C. The chapter is split only on the user's request, so the split is stated in the PR per `mapping.md`. Each band gets its own page under `instruction_list/`; later runs add D–L, M–S and T–Z.
+  - Split decision (user, 2026-11-12): C2.4 was un-deferred and split into alphabetical bands; this run takes A–C.
+  - Consolidation (user, 2026-11-13): one source chapter maps to one article, so the three C2 pages (C2.1–C2.2, C2.3, C2.4 A–C) were merged into `part-c/instruction_specification/index.md` and renumbered `## 1.`–`## 4.`; the old URLs are kept alive through `redirect_maps`. Later bands append `### 4.57.` onward to the same page.
   - Source-resolution note: the ima `.md` parse ends at printed p.500 (L37381) and contains no C2.4 body — only its 493-entry TOC (L875–1879). The body must be read from the PDF text layer page by page (precedent: B3, C2.3, where the parse was unusable). `source-resolution.md` §Constraints forbids PDF-text translation "when a `.md` exists"; here no `.md` body exists for this span, so the PDF is the only source. This deviation is recorded here and in the PR.
   - Figure plan: encoding bit-field diagrams cropped from the PDF at 4× with the standard margin; numbering continues the C2 sequence from `FigureC2-99`. Synthetic numbers — the source has no `Figure C2.4-n` captions.
   - S1 result: printed 528–630 holds 56 entries (C2.4.1–C2.4.56) and 88 encoding diagrams. Each entry is self-contained: variant labels with an architecture-scope line, encoding diagrams, per-variant assembler syntax with `Applies when …` guards, `Decode`/`Operation` pseudocode, an assembler-symbol list, and `Restricted behavior` / `Data Independent Timing behavior`, plus a `CONSTRAINED UNPREDICTABLE behavior` block where the source has one.

@@ -32,13 +32,11 @@ title: "Armv8-M 架构参考手册"
 ### Part C — Armv8-M 指令（Armv8-M Instructions）
 
 18. [指令集概览（Instruction Set Overview）](part-c/instruction_set_overview/index.md)
-19. [T32 指令编码：顶层与 16 位](part-c/instruction_encoding_16bit/index.md)
-20. [32 位 T32 指令编码](part-c/instruction_encoding_32bit/index.md)
-21. [指令列表（A–C 段）](part-c/instruction_list/index.md)
+19. [指令规范（Instruction Specification）](part-c/instruction_specification/index.md)
 
 ### Part G — 术语表（Glossary）
 
-22. [术语表（Glossary）](part-g/glossary/index.md)
+20. [术语表（Glossary）](part-g/glossary/index.md)
 
 ## 2. 相关内容
 
