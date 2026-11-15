@@ -112,7 +112,7 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
 
 ## Not queued (deliberately deferred)
 
-- A7 Instruction Details (19,982 ln), C1 Armv7-M Debug (5,752 ln — overlaps the M7 TRM debug chapters; prefer the TRM for implementation), D1–D8 appendixes (pseudocode/register indexes) — start on explicit request only.
+- A7 Instruction Details (19,982 ln), C1 Armv7-M Debug (5,752 ln — overlaps the M7 TRM debug chapters; prefer the TRM for implementation), D1–D8 appendixes (pseudocode/register indexes) — start on explicit request only. The C1 and D1–D8 trees are scaffolded (see below); scaffold is not translation.
 
 ## Part A / Part B completion batch (2026-11-14)
 
@@ -123,3 +123,12 @@ Source is the PDF text layer only: `reference-docs/arm/cortex-m7/DDI0403E_e_armv
 - [x] **B1 System Level Programmers' Model (remaining sections)** — completed in place on `m7-trm/programmers_model/index.md`, the merged chapter page. New §2 系统级简介 (B1.1), §3 关于 Armv7-M 内存映射架构 (B1.2), §4 系统级术语与操作概述 (B1.3, §4.1–§4.4: 模式/特权/栈 Table B1-1, 异常类别与状态, 执行状态, 调试状态), §5 寄存器 (B1.4, §5.1–§5.7: 核心寄存器, xPSR with Figure B1-1 + Tables B1-2/B1-3, 掩码寄存器 with Figure B1-2, CONTROL, 保留位, 内存顺序模型, 伪代码定义 with LookUpSP), §30 浮点支持 (B1.6, Table B1-10, ExecuteFPCheck/CheckVFPEnabled/PreserveFPState/TakePreserveFPException). The old condensed TRM §2 操作模式与执行状态 was dropped (subsumed by B1.3); §3–§27 renumbered to §6–§31. Figures `FigureB1-1.png` (p517) and `FigureB1-2.png` (p519) cropped at 4×.
 - [x] **A2 The Application Level Programmers' Model** — article `armv7-m/part-a/application_level_model/index.md` (§1 关于应用程序级程序员模型 + 1.1; §2 数据类型与运算 incl. LSL/LSR/ASR/ROR/RRX, AddWithCarry, SignedSatQ/UnsignedSatQ/SatQ; §3 寄存器与执行状态 + 3.1–3.4 with APSR; §4 异常、故障与中断 + 4.1; §5 可选的浮点扩展 with 5.1–5.4 and 5.4.1–5.4.21 covering the full FP pseudocode set; §6 协处理器支持). 6 figures cropped at 4×: `FigureA2-1.png` (p35, FP 寄存器双视图), `FigureA2-2.png` (p31, APSR), `FigureA2-3.png` (p37, FPSCR), `FigureA2-4.png` (p39, 单精度), `FigureA2-5.png` (p40, 双精度), `FigureA2-6.png` (p42, 半精度); Tables A2-1…A2-4 as GFM.
 - [x] **A7 Instruction Details** — article `cortex/armv7-m/part-a/instruction_details/index.md`, **completed** (single-page decision: the whole chapter as one article; encoding bit grids rendered as GFM bit tables instead of image crops, per requester). Done: §1–§6 (A7.1 指令描述格式, A7.2 标准汇编语法字段, A7.3 条件执行 + Table A7-1/A7-2, A7.4 施加于寄存器的移位, A7.5 存储器访问, A7.6 提示指令) and all 263 entries 7.1–7.263 (A–Y 段，ADC … YIELD), with encoding-specific pseudocode, T1/T2… bit tables, assembler syntax, `where：` fields, operation pseudocode and exception lines per entry.
+
+## Part C / Part D scaffold (2026-11-15)
+
+The remaining Parts now have their tree: one Part index page plus one title-only stub per chapter (arm-translate Step 3.5), all registered in nav, `armv7-m/index.md` and their Part index in the same change. Chapter titles and order were read from the PDF contents (pp. 7–8) and the "Using this manual" Part overview (p. 12).
+
+- `part-c/index.md` → Part C Debug Architecture; stub `part-c/debug/` (Chapter C1 Armv7-M Debug).
+- `part-d/index.md` → Part D Appendices, now listing D1–D8 followed by the glossary in source order; stubs `part-d/coresight_infrastructure_ids/` (D1), `part-d/legacy_instruction_mnemonics/` (D2), `part-d/deprecated_features/` (D3), `part-d/debug_itm_and_dwt_packet_protocol/` (D4), `part-d/armv7r_differences/` (D5), `part-d/pseudocode_definition/` (D6), `part-d/pseudocode_index/` (D7), `part-d/register_index/` (D8). `part-d/glossary/` was already translated.
+
+The stubs carry front-matter `title` only — no body, no placeholder sentence. A later run detects them as `Partial / stub` at S1 and writes the translation in place (same directory), never opening a second page.
