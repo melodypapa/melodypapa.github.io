@@ -19,7 +19,7 @@ title: "ARM Cortex"
 本内核的译文按**源文档 → 章节**组织，分为两份文档：
 
 1. [Cortex-M7 TRM（DDI0489F r1p2）](m7-trm/index.md) — 实现手册，逐章翻译 15 章 + 术语表
-2. [Armv7-M 架构参考手册（DDI0403E E.e）](armv7-m/index.md) — 该内核实现的架构规则，收录 A3–A6、B2–B5
+2. [Armv7-M 架构参考手册（DDI0403E E.e）](armv7-m/index.md) — 该内核实现的架构规则，收录 Part A 的 A1–A7、Part B 的 B1–B5 与术语表，Part C/D 已建目录
 
 ## 3. ARM Cortex R52+ 处理器
 
@@ -27,4 +27,4 @@ title: "ARM Cortex"
 
 ## 4. Armv8-M 架构
 
-1. [Armv8-M 架构参考手册（DDI0553B B.y）](armv8-m/index.md) — M-profile 架构规则，独立于具体内核，收录 Part A 简介与概述
+1. [Armv8-M 架构参考手册（DDI0553B B.y）](armv8-m/index.md) — M-profile 架构规则，独立于具体内核，收录 Part A/B/C 译文与 Part G 术语表，Part D/E/F 已建目录

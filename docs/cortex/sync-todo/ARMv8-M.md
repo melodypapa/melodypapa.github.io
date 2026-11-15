@@ -50,12 +50,22 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
 | A | A1 Introduction | overview of the architecture and its profiles | A1 done |
 | B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B16 done (Part B complete) |
 | C | C1–C2 | instruction set + alphabetical instruction specification | C1 done; C2 in progress (C2.1–C2.3 done) |
-| D | D1+ | registers and payload specification | deferred (reference) |
-| E | E1–E2 | pseudocode | deferred (reference) |
-| F | F1 | debug packet protocols | deferred (reference) |
+| D | D1 Register and Payload Specification | registers and payload specification | scaffolded (Part index + D1 stub) — translation deferred (reference) |
+| E | E1 Arm Pseudocode Definition · E2 Pseudocode Specification | pseudocode | scaffolded (Part index + E1/E2 stubs) — translation deferred (reference) |
+| F | F1 ITM and DWT Packet Protocol Specification | debug packet protocols | scaffolded (Part index + F1 stub) — translation deferred (reference) |
 | G | — | glossary | G done — `docs/cortex/armv8-m/part-g/glossary/index.md`, 285 entries, PDF pp. 2122–2148 |
 
-Parts C/D/E/F are reference material (instruction encodings, register payloads, pseudocode) — queued Parts A/B chapter-by-chapter first; they are deliberately deferred the way [ARMv7-M](ARMv7-M.md) defers its tail. Part G (glossary) is translated and registered.
+Parts D/E/F are reference material (register payloads, pseudocode, packet protocols) — queued Parts A/B chapter-by-chapter first; their trees are scaffolded but the translation is deliberately deferred the way [ARMv7-M](ARMv7-M.md) defers its appendixes. Part G (glossary) is translated and registered.
+
+## Scaffold (2026-11-15)
+
+Every Part of the source TOC now has its index page and one title-only stub per chapter (arm-translate Step 3.5), registered in nav, the landing list and its Part index in the same change:
+
+- `part-d/index.md` → Part D Armv8-M Registers and Payload Specification; stub `part-d/registers_and_payload_specification/` (Chapter D1).
+- `part-e/index.md` → Part E Armv8-M Pseudocode; stubs `part-e/arm_pseudocode_definition/` (E1) and `part-e/pseudocode_specification/` (E2).
+- `part-f/index.md` → Part F Debug Packet Protocols; stub `part-f/itm_and_dwt_packet_protocol/` (F1).
+
+Existing Parts A/B/C/G were already scaffolded; Part C's C2 is split by encoding (C2.1–C2.3) plus the C2.4 instruction list, so no stub is missing there. Stubs are filled in place by a later run (Step 5), never replaced by a second directory.
 
 ## Queue
 
