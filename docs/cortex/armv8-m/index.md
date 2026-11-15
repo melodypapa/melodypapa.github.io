@@ -2,7 +2,7 @@
 title: "Armv8-M 架构参考手册"
 ---
 
-本专题收录《Armv8-M Architecture Reference Manual》(DDI0553B B.y) 中与 M-Profile 架构相关的章节中文翻译，按手册原章节顺序排列（Part A 简介与概述在前，Part B 架构规则在后）。
+本专题收录《Armv8-M Architecture Reference Manual》(DDI0553B B.y) 的章节中文翻译，按手册原章节顺序排列（Part A 简介与概述、Part B 架构规则、Part C 指令，其后为 Part D–F 参考资料与 Part G 术语表）。
 
 ## 1. 章节
 
@@ -34,11 +34,24 @@ title: "Armv8-M 架构参考手册"
 18. [指令集概览（Instruction Set Overview）](part-c/instruction_set_overview/index.md)
 19. [指令规范（Instruction Specification）](part-c/instruction_specification/index.md)
 
+### Part D — Armv8-M 寄存器与有效载荷规范（Armv8-M Registers and Payload Specification）
+
+20. [寄存器与有效载荷规范（Register and Payload Specification）](part-d/registers_and_payload_specification/index.md)
+
+### Part E — Armv8-M 伪代码（Armv8-M Pseudocode）
+
+21. [Arm 伪代码定义（Arm Pseudocode Definition）](part-e/arm_pseudocode_definition/index.md)
+22. [伪代码规范（Pseudocode Specification）](part-e/pseudocode_specification/index.md)
+
+### Part F — 调试包协议（Debug Packet Protocols）
+
+23. [ITM 与 DWT 包协议规范（ITM and DWT Packet Protocol Specification）](part-f/itm_and_dwt_packet_protocol/index.md)
+
 ### Part G — 术语表（Glossary）
 
-20. [术语表（Glossary）](part-g/glossary/index.md)
+24. [术语表（Glossary）](part-g/glossary/index.md)
 
 ## 2. 相关内容
 
 - [Armv7-M 架构参考手册（DDI0403E E.e）](../armv7-m/index.md) — 上一代 M-Profile 架构参考手册的对应译文。
-- 本手册 Part C 的指令集概览（C1）与 T32 指令编码（C2.1–C2.3）已译入；C2.4 按字母顺序的指令列表、Part D 寄存器与有效载荷规范、Part E 伪代码、Part F 调试包协议为参考资料，暂不收录；Part G 术语表已译入本站术语表页。Part B 的 B1–B16 章节清单见 `sync-todo/ARMv8-M.md` 中的队列。
+- 本手册 Part C 的指令集概览（C1）已译入，指令规范（C2）已译入 C2.1–C2.3；Part D 寄存器与有效载荷规范、Part E 伪代码、Part F 调试包协议为参考资料，目录与章节标题页已建、译文待后续同步；Part G 术语表已译入本站术语表页。各章进度见 `sync-todo/ARMv8-M.md` 中的队列。
