@@ -1,6 +1,7 @@
-# Sync todo: Group R52-TRM — Cortex-R52 TRM r1p0 (`R52/cortex_r52_trm_100026_0100_00_en.md`, 44,511 ln, PDF ✅)
+# Sync todo: Group R52-TRM — Cortex-R52 TRM r1p0 (`reference-docs/arm/cortex-r52/cortex_r52_trm_100026_0100_00_en.md`, 44,511 ln, PDF ✅ 610 pp)
 
 Generated: 2026-11-04 · Queue order = row order (resume = the first row still `[ ]`)
+Last refresh: 2026-11-18 — line count and every chapter boundary re-checked against the parse (spot-checked L694 ch1, L1850 ch3, L12962 ch4, L17183 ch8, L35485 ch13, L37043 ch14 — all unchanged); this ledger stays provenance-only for the `r52plus-trm/` articles, so unfinished chapters are queued in [R52plus-TRM](R52plus-TRM.md), not here.
 Steps: S1 source resolution + gap analysis · S2 in-place translation · S3 figures (PyMuPDF crop from the TRM PDF) · S4 nav + landing · S5 Phase A · S6 Phase B · S7 user gate · S8 commit/PR
 
 Chapter span map (parse lines, incl. running headers — re-locate by title, first occurrence wins): ch1 Introduction L694–1370 (677) · ch2 Programmers Model L1371–1849 (479) · ch3 System Control L1850–12962 (~11.1k, ⏸) · ch4 Clocking and Resets L12963–13326 (364) · ch5 Power Management L13327–13946 (620) · ch6 Initialization L13947–14250 (304) · ch7 Memory System L14251–17182 (2,932, ⏸) · ch8 MPU L17183–17952 (770) · ch9 GIC L17953–27056 (9,104, ⏸) · ch10 Generic Timer L27057–27400 (344) · ch11 Debug L27401–32260 (4,860, ⏸) · ch12 PMU L32261–35485 (3,225, ⏸) · ch13 Cross Trigger L35486–37043 (1,558) · ch14 ETM L37044–… (⏸) · ch15 Advanced SIMD and floating-point support (tail; no reliable marker — locate by title) · Appendices A–D (Signal Descriptions / Cycle Timings / UNPREDICTABLE / Revisions — tail).

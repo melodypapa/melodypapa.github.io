@@ -1,9 +1,10 @@
-# Sync todo: Group ARMv7-M — DDI0403E Armv7-M ARM E.e (`M7/DDI0403E_e_armv7m_arm.md`, 51,102 ln, PDF ✅)
+# Sync todo: Group ARMv7-M — DDI0403E Armv7-M ARM E.e (`reference-docs/arm/cortex-m7/DDI0403E_e_armv7m_arm.md`, 36,478 ln, PDF ✅)
 
 Generated: 2026-11-04 · Queue order = row order (resume = the first row still `[ ]`)
+Last refresh: 2026-11-18 — the `.md` was re-parsed (51,102 → 36,478 ln; every section is now a real `## A3.x` / `## B1.x` / `## C1.x` h2), so the span map below was recomputed and the Part C/D tail was turned into executable queue rows.
 Steps: S1 source resolution + gap analysis · S2 in-place translation · S3 figures (PyMuPDF crop from the ARM PDF) · S4 nav + landing · S5 Phase A · S6 Phase B · S7 user gate · S8 commit/PR
 
-Chapter span map (parse lines): Part A L739 — A1 Introduction L743–880 (137) · A2 The Application Level Model L880–4060 (3,180, ⏸) · A3 The Memory Model L4060–6099 (2,039, ⏸) · A4 The Armv7-M Instruction Set L6099–7082 (983) · A5 The Thumb Instruction Set Encoding L7082–8272 (1,190) · A6 The Floating-point Instruction Set Encoding L8272–8634 (362) · A7 Instruction Details L8634–28616 (19,982, ⏸ deferred). Part B L28620 — B1 System Level Programmers' Model L28620–32964 (4,344, ⏸; B1.5 = Armv7-M exception model) · B2 System Memory Model L32964–34504 (1,540) · B3 System Address Map L34504–38282 (3,778, ⏸; B3.5 = PMSAv7) · B4 The CPUID Scheme L38282–39914 (1,632) · B5 System Instruction Details L39914–40432 (518). Part C Debug Architecture — C1 Armv7-M Debug L40436–46188 (5,752, ⏸ deferred). Part D Appendixes — D1 CoreSight Infrastructure IDs … D8 Register Index, L46192–end (deferred).
+Chapter span map (re-parsed 2026-11-18, 36,478 ln; spans are exact because every section carries a numbered heading): Part A L471 — A1 Introduction L473–560 (88) · A2 The Application Level Programmers' Model L561–1707 (1,147) · A3 The Memory Model L1708–3023 (1,316) · A4 The Armv7-M Instruction Set L3024–3765 (742) · A5 The Thumb Instruction Set Encoding L3766–4760 (995) · A6 The Floating-point Instruction Set Encoding L4761–5058 (298) · A7 Instruction Details L5059–21470 (16,412). Part B L21471 — B1 System Level Programmers' Model L21475–23805 (2,331; B1.5 = Armv7-M exception model) · B2 System Memory Model L23806–24501 (696) · B3 System Address Map L24502–27448 (2,947; B3.5 = PMSAv7) · B4 The CPUID Scheme L27449–28948 (1,500) · B5 System Instruction Details L28949–29237 (289). Part C L29238 — C1 Armv7-M Debug L29240–33316 (4,077). Part D L33317 — D1 Armv7-M CoreSight Infrastructure IDs L33321–33390 (70) · D2 Legacy Instruction Mnemonics L33391–33574 (184) · D3 Deprecated Features in Armv7-M L33575–33626 (52) · D4 Debug ITM and DWT Packet Protocol L33627–34402 (776) · D5 Armv7-R Differences L34403–34491 (89) · D6 Pseudocode Definition L34492–35328 (837) · D7 Pseudocode Index L35329–35648 (320) · D8 Register Index L35649–35833 (185) · Glossary L35834–36054 (221); the trailing alphabetical Index L36055–36478 is chrome and never translates.
 
 Existing-article mappings (mapping.md, evidence re-checked at census): `arm_architecture_memory_mode` ← A3 · `programmers_model` ← B1.5 (evidence `Figure2-*` unverified — confirm at S1) · `mpu` ← B3.5 (`TableB3-1…11`) · `system_address_map` ← B3.1–B3.4 (article sections SCS/SysTick/NVIC = B3.2/B3.3/B3.4) · `instruction_set` ← A4 (completed 2026-11-08; extracted 2026-11-15 to `armv7-m/part-a/instruction_set/index.md`, the TRM page keeps only its implementation summary); A5 and A6 are separate articles, queued below.
 
@@ -109,15 +110,43 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
   - S7 result: confirmed by the user; shipped as PR #334 (issue #333).
   - S8 result: merged as `6c283e6` (PR #334).
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
+- [ ] ⏸ C1 → new article `armv7-m/part-c/debug/` (Armv7-M Debug; parse L29240–33316, 4,077 ln; PDF pp. 682–765; Step 3.5 stub exists — fill it in place)
+  - Note: 11 sections C1.1–C1.11 with 49 numbered subsections. Census: 1 figure (`Figure C1-1` ITM/component relationship, parse L30815) and 23 numbered tables (`Table C1-1` … `Table C1-23`). Content: DAP rules + ROM table, debug authentication (halting/non-invasive, DAP permission tables C1-4…C1-7), debug/reset, debug events + stepping + vector catch + prioritisation (C1-8/C1-9), debug system registers DFSR/DHCSR/DCRSR/DCRDR/DEMCR (C1-10), ITM (C1.7, 6 register sections C1-11/C1-12), DWT (C1.8, 17 register sections C1-21), ETM support (C1.9), TPIU (C1.10, C1-22), FPB (C1.11, C1-23). >1500-line rule: present the run plan before S2.
+  - Overlap rule: the ITM/DWT/TPIU/FPB register descriptions restate the M7 TRM ch9 (Debug, incl. FPB), ch10 (TPIU), ch12 (ITM) and ch13 (DWT) pages; translate this chapter as the architectural reference and cross-link the TRM implementation pages — never copy sections between them.
+  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] D1 → `armv7-m/part-d/coresight_infrastructure_ids/` (CoreSight Infrastructure IDs; L33321–33390, 70 ln; PDF pp. 766–769; 1 section, 2 tables, 0 figures; stub exists)
+  - Note: the CoreSight ID-register set (component/part IDs) as two tables; text-only run.
+  - [ ] S1 [ ] S2 [ ] S3 (N/A: no figures) [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] D2 → `armv7-m/part-d/legacy_instruction_mnemonics/` (Legacy Instruction Mnemonics; L33391–33574, 184 ln; PDF pp. 770–777; 4 sections, 2 tables, 0 figures; stub exists)
+  - Note: pre-UAL mnemonics mapped to their UAL equivalents; the two tables are the mapping reference, GFM by default.
+  - [ ] S1 [ ] S2 [ ] S3 (N/A: no figures) [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] D3 → `armv7-m/part-d/deprecated_features/` (Deprecated Features in Armv7-M; L33575–33626, 52 ln; PDF pp. 778–779; 3 sections, 0 tables, 0 figures; stub exists)
+  - Note: a cross-reference appendix pointing at the Part A–C sections that carry each deprecated feature — translate the list and resolve every pointer to the site article that now covers it.
+  - [ ] S1 [ ] S2 [ ] S3 (N/A: no figures) [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] D4 → `armv7-m/part-d/debug_itm_and_dwt_packet_protocol/` (Debug ITM and DWT Packet Protocol; L33627–34402, 776 ln; PDF pp. 780–797; 19 sections, 7 tables, 20 figure captions; stub exists)
+  - Note: packet-format reference — 20 captions numbered D4-1 … D4-22 (D4-4 and D4-10 are missing from the parse; locate and crop them from the PDF at S3). Protocol byte/bit layouts are figures only when they are drawn as packet diagrams; any row/column grid becomes a GFM table.
+  - [ ] S1 [ ] S2 [ ] S3 [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] D5 → `armv7-m/part-d/armv7r_differences/` (Armv7-R Differences; L34403–34491, 89 ln; PDF pp. 798–803; 5 sections, 0 tables, 0 figures; stub exists)
+  - Note: profile-difference summary (A/R vs M); text-only run.
+  - [ ] S1 [ ] S2 [ ] S3 (N/A: no figures) [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] D6 → `armv7-m/part-d/pseudocode_definition/` (Pseudocode Definition; L34492–35328, 837 ln; PDF pp. 804–827; 64 sections, 1 table, 0 figures; stub exists)
+  - Note: the formal pseudocode language definition (operators, statements, functions); keep every grammar production and `arm`-fenced sample verbatim, translate only the surrounding prose.
+  - [ ] S1 [ ] S2 [ ] S3 (N/A: no figures) [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] D7 → `armv7-m/part-d/pseudocode_index/` (Pseudocode Index; L35329–35648, 320 ln; PDF pp. 828–841; 2 sections, 2 index tables, 0 figures; stub exists)
+  - Note: the operator/keyword/function index — two long tables whose entries stay verbatim while the headers translate.
+  - [ ] S1 [ ] S2 [ ] S3 (N/A: no figures) [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] D8 → `armv7-m/part-d/register_index/` (Register Index; L35649–35833, 185 ln; PDF pp. 842–846; 6 sections, 3 index tables, 0 figures; stub exists)
+  - Note: the register index as three tables; every entry links the register to the article section that describes it.
+  - [ ] S1 [ ] S2 [ ] S3 (N/A: no figures) [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
 
-## Not queued (deliberately deferred)
+## Tail status
 
-- A7 Instruction Details (19,982 ln), C1 Armv7-M Debug (5,752 ln — overlaps the M7 TRM debug chapters; prefer the TRM for implementation), D1–D8 appendixes (pseudocode/register indexes) — start on explicit request only. The C1 and D1–D8 trees are scaffolded (see below); scaffold is not translation.
+- Every chapter of Part A and Part B is translated and registered. The remaining rows above are the Part C chapter C1 and the Part D appendices D1–D8 — queued and executable, but reference-heavy and lowest priority; resume order is row order, so C1 comes first.
+- A7 Instruction Details (16,412 ln) was completed on 2026-11-14 and is not queued again; the part-D index tables (D7/D8) describe its pseudocode and registers.
 
 ## Part A / Part B completion batch (2026-11-14)
 
-Source is the PDF text layer only: `reference-docs/arm/cortex-m7/DDI0403E_e_armv7m_arm.pdf`
-(858 pp) — the ima-parsed `.md` listed in the span map is no longer on disk.
+That batch was translated from the PDF text layer (`reference-docs/arm/cortex-m7/DDI0403E_e_armv7m_arm.pdf`, 858 pp) because the ima-parsed `.md` was missing from disk at the time. The `.md` was re-parsed on 2026-11-18 (36,478 ln) and is the primary source again for every run from C1 onwards.
 
 - [x] **A1 Introduction** — article `armv7-m/part-a/introduction/index.md` (A1.1–A1.3, Table A1-1, 0 figures); nav + both landing pages updated.
 - [x] **B1 System Level Programmers' Model (remaining sections)** — completed in place on `m7-trm/programmers_model/index.md`, the merged chapter page. New §2 系统级简介 (B1.1), §3 关于 Armv7-M 内存映射架构 (B1.2), §4 系统级术语与操作概述 (B1.3, §4.1–§4.4: 模式/特权/栈 Table B1-1, 异常类别与状态, 执行状态, 调试状态), §5 寄存器 (B1.4, §5.1–§5.7: 核心寄存器, xPSR with Figure B1-1 + Tables B1-2/B1-3, 掩码寄存器 with Figure B1-2, CONTROL, 保留位, 内存顺序模型, 伪代码定义 with LookUpSP), §30 浮点支持 (B1.6, Table B1-10, ExecuteFPCheck/CheckVFPEnabled/PreserveFPState/TakePreserveFPException). The old condensed TRM §2 操作模式与执行状态 was dropped (subsumed by B1.3); §3–§27 renumbered to §6–§31. Figures `FigureB1-1.png` (p517) and `FigureB1-2.png` (p519) cropped at 4×.

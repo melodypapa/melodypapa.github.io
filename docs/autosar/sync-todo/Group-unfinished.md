@@ -55,7 +55,8 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: BSW Module Description Template（基础软件模块描述模板）; target = the existing `cp/methodology_templates/basic_software_module_description_template/` (row name = the actual article dir so the index resolves it; a type-prefixed slug is NOT adopted — no rename, no redirect churn); template specification (TPS) — meta-model class tables, constraints and ARXML examples
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TPS_BSWModuleDescriptionTemplate.md` — 10,999 lines, 480 figure refs, 237 item IDs
   - Note: pre-queue translation (Group-exp.md formerly carried the exempt 📄 line) — this row is an ALIGNMENT pass: verify the article against the R23-11 source and fill any drift; prior exempt note "methodology_templates/basic_software_mode_manager template" carried a name typo
-  - [ ] Step 1 — Source resolution + gap analysis
+  - Note: 2026-11-17 gap analysis — article covers ONLY source ch.1-2 (197 lines) while the R23-11 source has 12 numbered chapters (10,999 lines). Missing: ch.3-12. The user confirmed a full ch.3-12 translation in one run. Skeleton-exempt TPS: mirror source numbering; no Type A 7-chapter skeleton. Figures omitted (480 refs); `[TPS_BSWMDT_*]` / `[constr_*]` requirement IDs dropped per STANDARD.md §4; source-faithful inline cross-refs retained.
+  - [x] Step 1 — Source resolution + gap analysis
   - [ ] Step 2 — In-place translation/completion
   - [ ] Step 3 — Phase A mechanical checks
   - [ ] Step 4 — Phase B coverage map + fidelity
