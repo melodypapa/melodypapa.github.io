@@ -131,7 +131,7 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
   - S4 result: N/A — page already registered by the Step 3.5 scaffold.
   - S5 result: `--strict` build 0 WARNINGs; `check_indexes.py --root .` OK (417 nav targets); `check_heading_lang.py` OK.
   - S6 result: 2/2 tables present and complete; every ID row and the LSR/LAR fields were verified cell-by-cell against PDF pp. 766–768.
-  - [x] S1 [x] S2 [x] S3 (N/A: no figures) [x] S4 (N/A: page already registered) [x] S5 [x] S6 [ ] S7 [ ] S8
+  - [x] S1 [x] S2 [x] S3 (N/A: no figures) [x] S4 (N/A: page already registered) [x] S5 [x] S6 [x] S7 [ ] S8
 - [ ] D2 → `armv7-m/part-d/legacy_instruction_mnemonics/` (Legacy Instruction Mnemonics; L33391–33574, 184 ln; PDF pp. 770–777; 4 sections, 2 tables, 0 figures; stub exists)
   - Note: pre-UAL mnemonics mapped to their UAL equivalents; the two tables are the mapping reference, GFM by default.
   - S1 result: source resolved to the re-parsed `.md` (L33391–33574, 184 ln) with PDF pp. 770–777 as fallback; census = 4 sections (D2.1–D2.3 + D2.3.1), 2 tables, 0 figures. Stub held front matter only → full translation in place.
@@ -140,7 +140,7 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
   - S4 result: N/A — page already registered by the Step 3.5 scaffold.
   - S5 result: `--strict` build 0 WARNINGs; `check_indexes.py --root .` OK (417 nav targets); `check_heading_lang.py` OK.
   - S6 result: both tables complete; the mnemonic/operand row set matches the source one-to-one (no row added, dropped or merged).
-  - [x] S1 [x] S2 [x] S3 (N/A: no figures) [x] S4 (N/A: page already registered) [x] S5 [x] S6 [ ] S7 [ ] S8
+  - [x] S1 [x] S2 [x] S3 (N/A: no figures) [x] S4 (N/A: page already registered) [x] S5 [x] S6 [x] S7 [ ] S8
 - [ ] D3 → `armv7-m/part-d/deprecated_features/` (Deprecated Features in Armv7-M; L33575–33626, 52 ln; PDF pp. 778–779; 3 sections, 0 tables, 0 figures; stub exists)
   - Note: a cross-reference appendix pointing at the Part A–C sections that carry each deprecated feature — translate the list and resolve every pointer to the site article that now covers it.
   - S1 result: source resolved to the re-parsed `.md` (L33575–33626, 52 ln) with PDF pp. 778–779 as fallback; census = 3 sections (D3.1 + D3.1.1–D3.1.3 + D3.2), 0 tables, 0 figures. Stub held front matter only → full translation in place.
@@ -149,7 +149,7 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
   - S4 result: N/A — page already registered by the Step 3.5 scaffold.
   - S5 result: `--strict` build 0 WARNINGs; `check_indexes.py --root .` OK (417 nav targets); `check_heading_lang.py` OK.
   - S6 result: no table or figure; the deprecated-item set matches the source (3 architecture items + the Thumb instruction-set list).
-  - [x] S1 [x] S2 [x] S3 (N/A: no figures) [x] S4 (N/A: page already registered) [x] S5 [x] S6 [ ] S7 [ ] S8
+  - [x] S1 [x] S2 [x] S3 (N/A: no figures) [x] S4 (N/A: page already registered) [x] S5 [x] S6 [x] S7 [ ] S8
 - [ ] D4 → `armv7-m/part-d/debug_itm_and_dwt_packet_protocol/` (Debug ITM and DWT Packet Protocol; L33627–34402, 776 ln; PDF pp. 780–797; 3 chapters / 19 subsections, 7 tables, 22 figures; stub exists)
   - Note: packet-format reference — 22 figures numbered D4-1 … D4-22. `Figure D4-4` and `Figure D4-10` are present in the re-parsed `.md` as `## Figure …` headings, so no caption is missing at this revision. Protocol byte/bit layouts are figures only when drawn as packet diagrams; a row/column grid becomes a GFM table.
   - S1 result: source resolved to the re-parsed `.md` (L33627–34402, 776 ln) with PDF pp. 780–797 as fallback; census = 3 chapters / 19 subsections, 7 tables (D4-1 … D4-7), 22 figures (D4-1 … D4-22). Stub held front matter only → full translation in place.
@@ -159,7 +159,7 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
   - S5 result: `--strict` build 0 WARNINGs; `check_indexes.py --root .` OK (417 nav targets); `check_heading_lang.py` OK.
   - S6 result: figure/table numbering reconciled with the source — 22 figures + 7 tables, every label unique and in source order; Figure D4-19 sits after its introducing sentence and before the header field list, as in the source; bit assignments re-read from the PDF word coordinates.
   - PDF fallback: the parse merged or misaligned the bit grids of Figures D4-8, D4-9, D4-10, D4-11, D4-16, D4-19 and D4-21; their cell rows were rebuilt from the PDF text coordinates.
-  - [x] S1 [x] S2 [x] S3 [x] S4 (N/A: page already registered) [x] S5 [x] S6 [ ] S7 [ ] S8
+  - [x] S1 [x] S2 [x] S3 [x] S4 (N/A: page already registered) [x] S5 [x] S6 [x] S7 [ ] S8
 - [ ] D5 → `armv7-m/part-d/armv7r_differences/` (Armv7-R Differences; L34403–34491, 89 ln; PDF pp. 798–803; 5 sections, 0 tables, 0 figures; stub exists)
   - Note: profile-difference summary (A/R vs M); text-only run.
   - S1 result: source resolved to the re-parsed `.md` (L34403–34491, 89 ln) with PDF pp. 798–803 as fallback; census = 5 sections, 0 tables, 0 figures. Stub held front matter only → full translation in place.
@@ -168,7 +168,7 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
   - S4 result: N/A — page already registered by the Step 3.5 scaffold.
   - S5 result: `--strict` build 0 WARNINGs; `check_indexes.py --root .` OK (417 nav targets); `check_heading_lang.py` OK.
   - S6 result: no table or figure; the five profile-difference sections match the source scope and order.
-  - [x] S1 [x] S2 [x] S3 (N/A: no figures) [x] S4 (N/A: page already registered) [x] S5 [x] S6 [ ] S7 [ ] S8
+  - [x] S1 [x] S2 [x] S3 (N/A: no figures) [x] S4 (N/A: page already registered) [x] S5 [x] S6 [x] S7 [ ] S8
 - [ ] D6 → `armv7-m/part-d/pseudocode_definition/` (Pseudocode Definition; L34492–35328, 837 ln; PDF pp. 804–827; 64 sections, 1 table, 0 figures; stub exists)
   - Note: the formal pseudocode language definition (operators, statements, functions); keep every grammar production and `arm`-fenced sample verbatim, translate only the surrounding prose.
   - S1 result: source resolved to the re-parsed `.md` (L34492–35328, 837 ln) with PDF pp. 804–827 as fallback; census = 7 chapters / 96 subsections, 1 table (D6-1), 0 figures. Stub held front matter only → full translation in place.
@@ -177,7 +177,7 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
   - S4 result: N/A — page already registered by the Step 3.5 scaffold.
   - S5 result: `--strict` build 0 WARNINGs; `check_indexes.py --root .` OK (417 nav targets); `check_heading_lang.py` OK after the five pseudocode-construct headings took a Chinese prefix (`#### 6.2.1. 条件语句 if ... then ... else ...` etc.).
   - S6 result: Table D6-1 complete; §7 carries all 38 helper functions in source order, and every grammar production / sample block is character-identical to the source.
-  - [x] S1 [x] S2 [x] S3 (N/A: no figures) [x] S4 (N/A: page already registered) [x] S5 [x] S6 [ ] S7 [ ] S8
+  - [x] S1 [x] S2 [x] S3 (N/A: no figures) [x] S4 (N/A: page already registered) [x] S5 [x] S6 [x] S7 [ ] S8
 - [ ] D7 → `armv7-m/part-d/pseudocode_index/` (Pseudocode Index; L35329–35648, 320 ln; PDF pp. 828–841; 2 sections, 2 index tables, 0 figures; stub exists)
   - Note: the operator/keyword/function index — two long tables whose entries stay verbatim while the headers translate.
   - S1 result: source resolved to the re-parsed `.md` (L35329–35648, 320 ln) with PDF pp. 828–841 as fallback; census = 2 sections, 2 index tables (D7-1, D7-2), 0 figures. Stub held front matter only → full translation in place.
@@ -186,7 +186,7 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
   - S4 result: N/A — page already registered by the Step 3.5 scaffold.
   - S5 result: `--strict` build 0 WARNINGs; `check_indexes.py --root .` OK (417 nav targets); `check_heading_lang.py` OK.
   - S6 result: both index tables complete against the source — every operator/keyword row and every function/procedure entry present, entry order preserved, entry text and the *See* references untranslated.
-  - [x] S1 [x] S2 [x] S3 (N/A: no figures) [x] S4 (N/A: page already registered) [x] S5 [x] S6 [ ] S7 [ ] S8
+  - [x] S1 [x] S2 [x] S3 (N/A: no figures) [x] S4 (N/A: page already registered) [x] S5 [x] S6 [x] S7 [ ] S8
 - [ ] D8 → `armv7-m/part-d/register_index/` (Register Index; L35649–35833, 185 ln; PDF pp. 842–846; 6 sections, 3 index tables, 0 figures; stub exists)
   - Note: the register index as three tables; every entry links the register to the article section that describes it.
   - S1 result: source resolved to the re-parsed `.md` (L35649–35833, 185 ln) with PDF pp. 842–848 as fallback; census = 4 sections (D8.1–D8.4, with D8.2.1/D8.2.2), 3 index tables (D8-1 … D8-3), 0 figures. Stub held front matter only → full translation in place.
@@ -195,11 +195,11 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
   - S4 result: N/A — page already registered by the Step 3.5 scaffold.
   - S5 result: `--strict` build 0 WARNINGs; `check_indexes.py --root .` OK (417 nav targets); `check_heading_lang.py` OK.
   - S6 result: 3/3 tables complete and every in-site link resolves; Table D8-3 footnote a re-read from PDF p. 848 ("除表中列出的寄存器外，调试支持还包括 ICSR 中的若干位…"); the MPU registers stay plain text because no article section describes them.
-  - [x] S1 [x] S2 [x] S3 (N/A: no figures) [x] S4 (N/A: page already registered) [x] S5 [x] S6 [ ] S7 [ ] S8
+  - [x] S1 [x] S2 [x] S3 (N/A: no figures) [x] S4 (N/A: page already registered) [x] S5 [x] S6 [x] S7 [ ] S8
 
 ## Tail status
 
-- Every chapter of Part A and Part B is translated and registered. C1 is translated in place and sits at the S7 user gate. The Part D appendices D1–D8 are all translated in place and sit at the S7 user gate together with C1; the three gates pass for the whole batch (`--strict` 0 WARNINGs, `check_indexes.py` 417 nav targets / 0 broken links, `check_heading_lang.py` OK). Nothing under Part C/Part D is committed yet — S8 starts only after the user confirms.
+- Every chapter of Part A and Part B is translated and registered. C1 and the Part D appendices D1–D8 are translated in place and passed the S7 user gate on 2026-11-18; all three gates pass for the batch (`--strict` 0 WARNINGs, `check_indexes.py` 417 nav targets / 0 broken links, `check_heading_lang.py` OK). The batch is shipped in PR #406 on `feature/docs-bsw-template-cortex-m7-corpus`, so only S8 (merge) remains.
 - A7 Instruction Details (16,412 ln) was completed on 2026-11-14 and is not queued again; the part-D index tables (D7/D8) describe its pseudocode and registers.
 
 ## Part A / Part B completion batch (2026-11-14)
