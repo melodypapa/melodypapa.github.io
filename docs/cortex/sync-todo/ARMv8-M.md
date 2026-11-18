@@ -1,11 +1,12 @@
 # Sync todo: Group ARMv8-M — DDI0553B Armv8-M ARM B.y (`reference-docs/arm/cortex-r52/DDI0553B_y_armv8m_arm.md`, 37,382 ln, PDF ✅)
 
 Generated: 2026-11-04 · Opened: 2026-11-10 · **Status: ACTIVE** — the M-profile architecture series `docs/cortex/armv8-m/` is open; Part A chapter A1 is translated and registered. Queue order = row order (resume = the first row still `[ ]`).
+Last refresh: 2026-11-18 — parse coverage re-verified (37,382 ln, unchanged); the span map below now records where the parse ends, and the deferred Part D/E/F chapters carry executable queue rows.
 Steps: S1 source resolution + gap analysis · S2 in-place translation · S3 figures (PyMuPDF crop from the ARM PDF) · S4 nav + landing · S5 Phase A · S6 Phase B · S7 user gate · S8 commit/PR
 
 Pairing note: the file lives under `cortex-r52/` in the mirror but documents the **Armv8-M (M-profile)** architecture. The Cortex-R52+ is **Armv8-R AArch32**, so DDI0553B is NOT the R52+ architecture manual; it is a separate M-profile series. The PDF is complete (9,561,121 B = ima media_size — the README "⏳ retrying" row is stale; there is no README on disk, the pairing ledger is the `sync-todo/index.md` Sources table).
 
-Chapter span map (parse lines): Part A L3834–4284 — A1 Introduction, 451 ln (translated). Part B L4285–~33105 — B1 Resets from L4288, B2 Power Management from L4339, B3 Programmers' Model from L4548; B4–B16 body boundaries are located by title at S1 because the parse interleaves TOC entries, running page headers and `# Bn.y`/`Chapter Bn` headings. The TOC at L225–L715 is the authoritative B1–B16 chapter list. Part C body begins ~L33106, followed by Parts D/E/F/G. Front matter L1–3833 (cover, proprietary notice, document history, contents, preface, feedback) is droppable chrome.
+Chapter span map (parse lines, refreshed 2026-11-18): Part A L3834–4284 — A1 Introduction, 451 ln (translated). Part B L4285–33105 — B1 Resets from L4288, B2 Power Management from L4339, B3 Programmers' Model from L4548; B4–B16 body boundaries are located by title at S1 because the parse interleaves TOC entries, running page headers and `# Bn.y`/`Chapter Bn` headings. The TOC at L225–L715 is the authoritative B1–B16 chapter list. **Part C L33106** (plain-text divider, no `#`) — Chapter C1 L33110, Chapter C2 L35188. The parse **ends at L37381, printed p.500**: the C2.4 alphabetical body (printed 527–1440) and the **Part D/E/F/G bodies do not exist in the parse** (their headings appear only as TOC rows at L3481–3683), so those pages translate from the PDF text layer. Front matter L1–3833 (cover, proprietary notice, document history, contents, preface, feedback) is droppable chrome.
 
 ## Layout migration (2026-11-13, issue #389 / PR #390)
 
@@ -50,12 +51,12 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
 | A | A1 Introduction | overview of the architecture and its profiles | A1 done |
 | B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B16 done (Part B complete) |
 | C | C1–C2 | instruction set + alphabetical instruction specification | C1 done; C2 in progress (C2.1–C2.3 done) |
-| D | D1 Register and Payload Specification | registers and payload specification | scaffolded (Part index + D1 stub) — translation deferred (reference) |
-| E | E1 Arm Pseudocode Definition · E2 Pseudocode Specification | pseudocode | scaffolded (Part index + E1/E2 stubs) — translation deferred (reference) |
-| F | F1 ITM and DWT Packet Protocol Specification | debug packet protocols | scaffolded (Part index + F1 stub) — translation deferred (reference) |
-| G | — | glossary | G done — `docs/cortex/armv8-m/part-g/glossary/index.md`, 285 entries, PDF pp. 2122–2148 |
+| D | D1 Register and Payload Specification | registers and payload specification | scaffolded (Part index + D1 stub) — queued in the deferred tail (PDF pp. 1442–1904) |
+| E | E1 Arm Pseudocode Definition · E2 Pseudocode Specification | pseudocode | scaffolded (Part index + E1/E2 stubs) — queued in the deferred tail (PDF pp. 1906–2094) |
+| F | F1 ITM and DWT Packet Protocol Specification | debug packet protocols | scaffolded (Part index + F1 stub) — queued in the deferred tail (PDF pp. 2096–2120) |
+| G | — | glossary | G done — `docs/cortex/armv8-m/part-g/glossary/index.md`, 285 entries, PDF pp. 2121–2148 |
 
-Parts D/E/F are reference material (register payloads, pseudocode, packet protocols) — queued Parts A/B chapter-by-chapter first; their trees are scaffolded but the translation is deliberately deferred the way [ARMv7-M](ARMv7-M.md) defers its appendixes. Part G (glossary) is translated and registered.
+Parts D/E/F are reference material (register payloads, pseudocode, packet protocols) — they sit at the end of the queue as the deferred tail; their trees are scaffolded and the translation is deliberately last, the way [ARMv7-M](ARMv7-M.md) defers its appendixes. Part G (glossary) is translated and registered.
 
 ## Scaffold (2026-11-15)
 
@@ -288,7 +289,39 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S7 result: covered by the user-approved single-loop run.
   - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
   - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
+- [ ] C2.4 D–F band → `armv8-m/part-c/instruction_list/d/` and `e/`·`f/` (8 entries: D 3, E 3, F 2; printed from 631, band end measured at S1)
+  - Source note: same PDF-only rule as A–C — the parse has no C2.4 body. Entry counts are taken from the 493-entry TOC (L875–1879), which also indexes the remaining bands: I 2, L 48, M 15, N 1, O 4, P 14, Q 10, R 12, S 78, T 6, U 40, V 195, W 3, Y 1 (437 entries in total for D–Z).
+  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] C2.4 I–O band → `instruction_list/` pages `i/`…`o/` (70 entries: I 2, L 48, M 15, N 1, O 4)
+  - Note: `L` dominates this band (48 entries — the load/store family), so S1 may re-split it into `l1/`…`l3/`; that split is the run's decision, recorded in the row at S1.
+  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] C2.4 P–S band → `instruction_list/` pages `p/`…`s/` (114 entries: P 14, Q 10, R 12, S 78)
+  - Note: `S` carries 78 entries (store + saturating + shift families); split as needed at S1.
+  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] C2.4 T–U band → `instruction_list/t/` and `u/` (46 entries: T 6, U 40)
+  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] C2.4 V band → `instruction_list/v/` (195 entries — the largest band; vector operations)
+  - Note: expect several runs; split by mnemonic family (`vadd`–`vdup`, `veor`–`vmov`, `vmul`–`vq*`, `vr*`, `vs*`, `vu*`/`vz*`) and record the split at S1.
+  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] C2.4 W–Y band → `instruction_list/w/` and `y/` (4 entries: W 3, Y 1; closes C2.4 and Part C)
+  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] D1 → `armv8-m/part-d/registers_and_payload_specification/` (Register and Payload Specification; PDF pp. 1442–1904, 463 pp; stub exists)
+  - Source note: PDF-only — the parse contains no Part D body (its headings exist only as TOC rows). Bookmark-confirmed span: Part D p.1441, D1 p.1442, Part E p.1905.
+  - Structure: D1.1 register index in 31 component sections (general-purpose, payloads, ITM, DWT, FPB, PMU, RAS FSR, ICB, SysTick, NVIC, SCB, MPU, SAU, DCB, software-interrupt generation, FP, cache maintenance, DIB, TPIU + their NS aliases) and D1.2 the alphabetical register list (~330 entries, `ACTLR` … `VTOR`). Every entry keeps the site register pattern: name, description, `**使用限制**`, access table, field table.
+  - Planning: 463 pages is far beyond one run — split D1.2 into alphabetical bands (`A`–`D`, `E`–`P`, `Q`–`Z`) at S1, one run per band, appending to the same page.
+  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] E1 → `armv8-m/part-e/arm_pseudocode_definition/` (Arm Pseudocode Definition; PDF pp. 1906–1928, 23 pp; stub exists)
+  - Note: the pseudocode language definition (E1.1 limitations, E1.2 data types, operators/statements, functions). Grammar productions, type names and operator definitions stay verbatim; translate only the prose. ~1 run.
+  - [ ] S1 [ ] S2 [ ] S3 (N/A: no figures) [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] E2 → `armv8-m/part-e/pseudocode_specification/` (Pseudocode Specification; PDF pp. 1929–2094, 166 pp; stub exists)
+  - Note: E2.1 holds 438 function entries in alphabetical order (`AArch32.CheckForBTIUpdate` … `Zeros`, TOC E2.1.1–E2.1.438). Each entry is a pseudocode block plus a short description — translate the description, keep every block verbatim in `arm`-tagged fences, and link each entry to the architecture article that cites it. Split into alphabetical bands (4–6 runs) at S1.
+  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 (N/A: no figures) [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] F1 → `armv8-m/part-f/itm_and_dwt_packet_protocol/` (ITM and DWT Packet Protocol Specification; PDF pp. 2096–2120, 25 pp; stub exists)
+  - Structure: F1.1 (uses, headers, transmission by the trace sink) + F1.2.1–F1.2.16 the packet types (data trace address/value/match/PC, event counter, exception trace, extension, global/local timestamp 1/2, instrumentation, overflow, periodic PC sample, PMU overflow, synchronization). Packet diagrams are cropped from the PDF; packet bit/byte layouts that the source prints as column grids become GFM tables.
+  - [ ] S1 [ ] S2 [ ] S3 [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
 
-## Not queued (deliberately deferred)
+## Deferred tail
 
-- Part D Armv8-M Registers and Payload Specification, Part E Armv8-M Pseudocode, Part F Debug Packet Protocols — reference material, start on explicit request only. A1.1.1 notes that architectural rules in these parts are not identified by a rule prefix and random subscript letters. Part C's C1–C2.3 and Part G Glossary are translated and registered. C2.4 (alphabetical instruction specification, 493 entries) was un-deferred by user decision on 2026-11-12; bands A–C are translated, D–Z follow in later runs.
+- The rows above ending the queue are the deferred tail: C2.4 D–Z (437 instruction entries) and Part D/E/F (D1 registers, E1/E2 pseudocode, F1 packet protocols). They are reference material and run after the rule chapters, but they are now queued and executable — resume order is still row order.
+- A1.1.1 notes that architectural rules in Parts D/E/F are not identified by a rule prefix but by random subscript letters; D1/E1/E2/F1 therefore carry no `适用于` applicability lines.
+- Part G Glossary is translated (`armv8-m/part-g/glossary/`, 285 entries, PDF pp. 2121–2148) and is not queued.

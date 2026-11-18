@@ -1,10 +1,10 @@
-# Sync todo: Group M7-TRM — DDI0489F Cortex-M7 TRM r1p2 (`M7/DDI0489F_cortex_m7_trm_r1p2.md`, 8,778 ln, PDF ✅)
+# Sync todo: Group M7-TRM — DDI0489F Cortex-M7 TRM r1p2 (`reference-docs/arm/cortex-m7/DDI0489F_cortex_m7_trm.md`, 4,934 ln, PDF ✅)
 
 Generated: 2026-11-04 · Queue order = row order (resume = the first row still `[ ]`)
-Last run: 2026-11-06 — ch5, ch14, ch13 done. Queue complete.
+Last run: 2026-11-18 — full-document verification against the refreshed parse (queue already complete).
 Steps: S1 source resolution + gap analysis · S2 in-place translation · S3 figures (PyMuPDF crop from the TRM PDF) · S4 nav + landing · S5 Phase A · S6 Phase B · S7 user gate · S8 commit/PR
 
-Chapter span map (parse lines, incl. running headers): ch1 Introduction L482–1104 (623) · ch2 Programmers Model L1105–1343 (239) · ch3 System Control L1344–2008 (665) · ch4 Initialization L2009–2271 (263) · ch5 Memory System L2272–4197 (1,926) · ch6 MPU L4198–4403 (206) · ch7 NVIC L4404–4645 (242) · ch8 FPU L4646–4897 (252) · ch9 Debug L4898–5586 (689) · ch10 CTI L5587–6068 (482) · ch11 DWT L6069–6450 (382) · ch12 ITM L6451–6738 (288) · ch13 TPIU L6739–7878 (1,140) · ch14 Fault detection L7879–8778 (900; tail includes Appendix A Revisions + glossary). Chapters 6–14 have NO `# Chapter` markers — plain-text lines; re-locate by title at run time.
+Chapter span map (refreshed parse, 2026-11-18): ch1 Introduction L364–835 (472) · ch2 Programmers Model L836–1027 (192) · ch3 System Control L1028–1766 (739) · ch4 Initialization L1767–1927 (161) · ch5 Memory System L1928–3318 (1,391) · ch6 MPU L3319–3386 (68) · ch7 NVIC L3387–3488 (102) · ch8 FPU L3489–3592 (104) · ch9 Debug L3593–3837 (245) · ch10 CTI L3838–3953 (116) · ch11 DWT L3954–4056 (103) · ch12 ITM L4057–4168 (112) · ch13 TPIU L4169–4672 (504) · ch14 Fault detection L4673–4821 (149) · Appendix A Revisions L4822–4935 (114). All chapters carry a `## Chapter <n>` marker in this parse (ch7, ch10, ch14 without a trailing title); the older 8,778-line parse was replaced and its spans are obsolete.
 
 ## Queue
 
@@ -64,3 +64,28 @@ Chapter span map (parse lines, incl. running headers): ch1 Introduction L482–1
 
 - ch7 NVIC as a NEW article — covered by the `nvic` completion row above (same chapter).
 - Appendix A Revisions + glossary tail (after ch14) — document chrome per skill Step 3.
+
+## Verification (2026-11-18, refreshed parse)
+
+Full-document check against `reference-docs/arm/cortex-m7/DDI0489F_cortex_m7_trm.md` after the corpus re-parse. Section counts and figure/table sets align; no article change was needed.
+
+| Chapter | Source sections | Article headings | Source fig / table | Article img / GFM table |
+| --- | --- | --- | --- | --- |
+| ch1 Introduction | 37 | 7 `##` + 30 `###` | 3 / 1 | 3 / 1 |
+| ch2 Programmers Model | 14 | 31 `##` + 60 `###` | 1 / 1 | 7 / 18 |
+| ch3 System Control | 15 | 3 `##` + 12 `###` | 12 / 15 | 12 / 15 |
+| ch4 Initialization | 9 | 1 `##` + 8 `###` | 0 / 0 | 0 / 0 |
+| ch5 Memory System | 36 | 9 `##` + 27 `###` | 0 / 38 | 0 / 38 |
+| ch6 MPU | 2 | 14 `##` + 18 `###` | 0 / 1 | 5 / 7 |
+| ch7 NVIC | 6 | 3 `##` + 3 `###` | 1 / 2 | 1 / 2 |
+| ch8 FPU | 6 | 3 `##` + 3 `###` | 0 / 2 | 0 / 2 |
+| ch9 Debug | 9 | 3 `##` + 6 `###` | 1 / 7 | 1 / 7 |
+| ch10 CTI | 3 | 3 `##` | 1 / 3 | 1 / 3 |
+| ch11 DWT | 3 | 3 `##` | 0 / 1 | 0 / 1 |
+| ch12 ITM | 4 | 3 `##` + 1 `###` | 1 / 2 | 1 / 2 |
+| ch13 TPIU | 16 | 3 `##` + 14 `###` | 12 / 12 | 12 / 12 |
+| ch14 Fault detection | 10 | 3 `##` + 7 `###` | 0 / 2 | 0 / 2 |
+
+- ch6 MPU and ch2 Programmers Model exceed the source counts by design: the merged PMSAv7 and Armv7-M material recorded in the rows above.
+- ch9 table count matches after de-duplicating the source's `Table 9-7 (continued)` repeat.
+- The source glossary chapter is a pointer to the Arm Glossary only (no local term rows), so `m7-trm/glossary/` correctly stays a link-only page.

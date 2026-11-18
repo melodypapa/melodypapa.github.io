@@ -1,6 +1,7 @@
-# Sync todo: Group R52plus-TRM — Cortex-R52+ TRM 102199_0001_03 (`arm_cortex_r52plus_processor_trm_102199_0001_03_en.pdf`, 719 pp, PDF only)
+# Sync todo: Group R52plus-TRM — Cortex-R52+ TRM 102199_0001_03 (`reference-docs/arm/cortex-r52/arm_cortex_r52plus_processor_trm_102199_0001_03_en.pdf`, 719 pp, PDF only)
 
 Generated: 2026-11-07 · Queue order = row order (resume = the first row still `[ ]`)
+Last refresh: 2026-11-18 — PDF re-open verified 719 pp; the chapter page spans below are unchanged; appendices A–C were turned into executable successor rows.
 Steps: S1 source resolution + gap analysis · S2 in-place translation · S3 figures (PyMuPDF crop from the same PDF) · S4 nav + landing · S5 Phase A · S6 Phase B · S7 user gate · S8 commit/PR
 
 **Source shape:** this document has **no ima Markdown parse** — the PDF text layer is the only source, so the "never translate from the PDF when a `.md` exists" rule does not apply here. Crops and table cells come from the same PDF. Section numbers below are the R52+ ones; the older [R52-TRM](R52-TRM.md) group follows `100026` and numbers the same chapters two lower (Programmers Model ch2, System Control ch3, Clocking ch4, Initialization ch6, Memory System ch7, MPU ch8).
@@ -129,8 +130,18 @@ Chapter span map (PDF pages): ch1 Introduction 24–27 (4) · ch2 The Cortex-R52
   - Source defects (written as in the source, since they are self-consistent labelling quirks): Table 15-6 gives TRCIDR0 a reset value of 0x08000EFF while 15.7.27 gives 0x0C000EFF (the register section value is used); TRCIDR3 describes a 5-bit `NUMPROC` value for the 2-bit `[13:12]` field while `[30:28]` carries the same field name; TRCOSLSR places `OSLM[1]` on bits `[3,0]` and `OSLM[0]` on bit `[0]`; 15.7.50 TRCDEVAFF0 has no usage constraints, bit assignment or access table (offset and reset appear only in Table 15-6); 15.7.41 repeats the TRCACATR1 figure caption twice.
   - S8 result: PR #352.
   - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
+- [ ] A Signal Descriptions → `r52plus-trm/signal_descriptions/` (PDF pp. 576–615, 40 pp; signal-group tables)
+  - Note: one signal table per interface group (clock/reset, AXIM, AXIS, LLPP, Flash, debug/trace); every table is GFM; signal names, directions and widths stay verbatim. Count the groups at S1 (the chapter's own section list is the authority).
+  - [ ] S1 [ ] S2 [ ] S3 (N/A: no figures) [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] B Cycle Timings and Interlock Behavior → `r52plus-trm/cycle_timings/` (PDF pp. 616–638, 23 pp)
+  - Note: timing tables per interface/path; measure the table and figure census at S1 before writing.
+  - [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+- [ ] C Processor UNPREDICTABLE Behaviors → `r52plus-trm/unpredictable_behaviors/` (PDF pp. 639–652, 14 pp)
+  - Note: the UNPREDICTABLE case list, one entry per instruction/feature; translate the case text, keep instruction names and encodings verbatim.
+  - [ ] S1 [ ] S2 [ ] S3 (N/A: no figures) [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 
-## Not queued (deliberately)
+## Tail notes
 
-- A Signal Descriptions (40 pp signal tables), B Cycle Timings and Interlock Behavior, C Processor UNPREDICTABLE Behaviors, E Revisions — reference/chrome material per skill Step 3; revisit on explicit request. Appendix A overlaps `clocking_and_resets` (clock/reset signals) and the interface chapters (AXIM/AXIS/LLPP/Flash signal groups).
-- The document glossary and cover/proprietary notice — chrome.
+- Appendices A–C are queued above as the deferred reference tail; they run after any remaining chapter work.
+- E Revisions, the document glossary and the cover/proprietary notice — chrome per skill Step 3, never translated.
+- Appendix A overlaps `clocking_and_resets` (clock/reset signals) and the interface chapters (AXIM/AXIS/LLPP/Flash signal groups) — cross-link those pages rather than duplicating prose.
