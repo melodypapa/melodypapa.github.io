@@ -72,11 +72,16 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
   - Note: Methodology（方法论）; target `cp/methodology_templates/tr_methodology/`; technical report (TR) — informational, no numbered requirement items
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TR_Methodology.md` — 13,206 lines, 751 figure refs, 208 item IDs
   - Note: related site content: foundation Methodology articles (rs_methodology etc. in Group-foundation-rs-prs.md — cross-link candidates, report-only until the run decides)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: Step 1 (2026-11-19): source confirmed 13,206 ln (chrome = Disclaimer/Contents; References + ch.1-3 + annexes A-B); article is skeleton-exempt TR → mirror source numbering; figures OMITTED per the row-13 batch decision (751 refs — recorded for the batch gate to decide on backfill); item IDs dropped, titles translate only (2026-11-03 Foundation decision adopted for CP per row 13 precedent); nominal [TR_METH_*] inline refs retained
+  - Note: Step 2 (2026-11-19): article built 8,675 ln; 参考文献 = 19-entry registry (ref-1..19 anchors, EXP-guide flow); ch.1-2 prose hand-translated (specification items rendered as bold-lead paragraphs per BSWMDT precedent); 323 definition tables (Task/Activity/Artifact/Role/Work-Product-Kind) converted deterministically to | 属性 | 值 | 多重性 | tables with translated labels, Description/Brief cells verbatim English (annex-D precedent, gate decision); annex A = 30 mentioned-class tables (说明 translated via row-13 note map where available, attribute notes verbatim English); annex B = title-only change-history tables (Number dropped); diagram-spill chrome and garbled figure text dropped
+  - Note: anomalies for the batch gate: (a) figures omitted (751 refs) — workflow diagrams not embedded, prose figure references kept ("见图 2.9" style); (b) definition-table Description/Brief cells verbatim English (~450 tables' cells) — batch-gate decision on full translation; (c) source typos preserved (e.g. "Adifferent", "Seen chapter 1.6.1.1", "the the model transformation"); (d) heading "###### 3.3.4.2.9. ECU Flat Map" kept (artifact proper-noun, check_heading_lang false positive); (e) ch.2.16 binding-time sections' "Output Artifacts:" values rendered as short lines per source layout
+  - Note: Step 3 (2026-11-19): strict build exit 0 / 0 WARNING; check_indexes OK (418 nav targets, 0 broken; nav + landing page + CP overview updated in same change); check_heading_lang 1 false positive (ECU Flat Map proper-noun heading); hygiene 0 × ^# / \< / {DRAFT}; link census: identifier mentions 0 (no API chapter), 61 chapter refs → 40 applied (idempotent re-run 0 lines), 30/30 prose citations linked to the ref-1..19 registry (Hop-1 applied class, idempotent), 0 UNRESOLVED; cross-article mentions report-only (PORT ×38, NvM ×18, BswM ×12, DEM ×12, Dcm ×11 SITE candidates)
+  - Note: Step 4 (2026-11-19): coverage map — References registry + ch.1 (1.1-1.7) + ch.2 (2.1-2.17 use cases incl. 2.7 integration, 2.7.9 configuration classes, 2.14 diagnostics, 2.15 variants, 2.16 binding times, 2.17 data exchange points) + ch.3 methodology library (3.1 common, 3.2 VFB, 3.3 system, 3.4 SWC, 3.5 ECU/BSW, 3.6 artifacts incl. safety/data-exchange points) + annex A + annex B all rendered; droppable = none beyond chrome (Disclaimer/Contents/figure captions)
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate (2026-11-12/19 batch instruction: single combined gate at end of rows 13-17)
   - [ ] Step 6 — TODO.md row + commit/PR
 
 - [ ] tps_diagnostic_extract_template (AUTOSAR_CP_TPS_DiagnosticExtractTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
