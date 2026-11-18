@@ -113,7 +113,16 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
 - [ ] ⏸ C1 → new article `armv7-m/part-c/debug/` (Armv7-M Debug; parse L29240–33316, 4,077 ln; PDF pp. 682–765; Step 3.5 stub exists — fill it in place)
   - Note: 11 sections C1.1–C1.11 with 49 numbered subsections. Census: 1 figure (`Figure C1-1` ITM/component relationship, parse L30815) and 23 numbered tables (`Table C1-1` … `Table C1-23`). Content: DAP rules + ROM table, debug authentication (halting/non-invasive, DAP permission tables C1-4…C1-7), debug/reset, debug events + stepping + vector catch + prioritisation (C1-8/C1-9), debug system registers DFSR/DHCSR/DCRSR/DCRDR/DEMCR (C1-10), ITM (C1.7, 6 register sections C1-11/C1-12), DWT (C1.8, 17 register sections C1-21), ETM support (C1.9), TPIU (C1.10, C1-22), FPB (C1.11, C1-23). >1500-line rule: present the run plan before S2.
   - Overlap rule: the ITM/DWT/TPIU/FPB register descriptions restate the M7 TRM ch9 (Debug, incl. FPB), ch10 (TPIU), ch12 (ITM) and ch13 (DWT) pages; translate this chapter as the architectural reference and cross-link the TRM implementation pages — never copy sections between them.
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
+  - S1 result: source resolved to the re-parsed `.md` (L29240–33316, 4,077 ln) with the PDF (pp. 682–765) as fallback; census confirmed 11 sections C1.1–C1.11 with 49 numbered subsections, 23 tables (C1-1 … C1-23) and 1 figure (C1-1). Gap analysis: the Step 3.5 stub held only front matter → full translation in place, no split (the TRM ch9/ch10/ch12/ch13 pages are cross-linked, never copied).
+  - S2 result: article written in place (3,888 ln) — §1 引言 (1.1 PPB 调试区域 + C1-1/C1-2, 1.2 推荐的调试级别) · §2 调试访问端口 (2.1 一般规则, 2.2 ROM 表 C1-3) · §3 调试特性 (3.1 调试认证 C1-4…C1-7 + 3.1.1/3.1.2, 3.2 调试功能 3.2.1 SCS / 3.2.2 DWT / 3.2.3 ITM / 3.2.4 ETM, 3.3 多处理器支持 3.3.1–3.3.3) · §4 调试与复位 · §5 调试事件行为 (C1-8; 5.1 单步 C1-9 + 5.1.1/5.1.2, 5.2 向量捕获, 5.3 优先级, 5.4 退出) · §6 调试系统寄存器 (C1-10; 6.1–6.5, 6.3.1, 6.4.1) · §7 ITM (C1-11; 7.1.1–7.1.8, 7.2 汇总, 7.3–7.6 + 7.6.1) · §8 DWT (8.1 比较器 8.1.1–8.1.13, 8.2, 8.3 + 8.3.1/8.3.2, 8.4 + 8.4.1, 8.5, 8.6 汇总 C1-21, 8.7–8.17) · §9 ETM · §10 TPIU (C1-22; 10.1–10.6) · §11 FPB (11.1–11.5, C1-23). Pseudocode (InstructionAddressMatch / DataAddressMatch / CycCountMatch / DataValueMatch) kept verbatim in `arm` fences.
+  - S3 result: `FigureC1-1.png` cropped from PDF p. 713 at 300 dpi (4 % margin); the chapter's register bit bars are vector-only and carry no raster image, so they stay text + GFM.
+  - S4 result: N/A — `armv7-m/part-c/debug/` was already registered by the Step 3.5 scaffold.
+  - S5 result: `--strict` build 0 WARNINGs; `check_indexes.py --root .` OK (417 nav targets); `check_heading_lang.py` OK.
+  - S6 result: all 23 tables rendered as GFM — multi-level headers flattened, merged cells expanded per row (C1-3/C1-4/C1-5/C1-18), multi-item cells joined with `<br>•` (C1-2); no HTML table needed.
+  - PDF fallback: Table C1-4/C1-5 lost cells, Table C1-14/C1-16 lost footnotes, the DCRSR REGSEL list was scrambled, and DEMCR / DFSR / DHCSR / DWT_CTRL / DWT_FUNCTIONn bit order was displaced; the POSTCNT ICNT formula came through as `formula-not-decoded` — all re-read from PDF pp. 689–690, 700, 707, 722, 726, 734.
+  - Parse quirk: the source splices C1.3.2 Multi-processor support between the DWT and ITM passages; the article restores the logical order (3.2.1–3.2.4) and numbers the unnumbered h2s in parent order.
+  - S7 result: confirmed by the user.
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 (N/A: page already registered) [x] S5 [x] S6 [x] S7 [ ] S8
 - [ ] D1 → `armv7-m/part-d/coresight_infrastructure_ids/` (CoreSight Infrastructure IDs; L33321–33390, 70 ln; PDF pp. 766–769; 1 section, 2 tables, 0 figures; stub exists)
   - Note: the CoreSight ID-register set (component/part IDs) as two tables; text-only run.
   - [ ] S1 [ ] S2 [ ] S3 (N/A: no figures) [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
@@ -141,7 +150,7 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
 
 ## Tail status
 
-- Every chapter of Part A and Part B is translated and registered. The remaining rows above are the Part C chapter C1 and the Part D appendices D1–D8 — queued and executable, but reference-heavy and lowest priority; resume order is row order, so C1 comes first.
+- Every chapter of Part A and Part B is translated and registered. C1 is translated in place and sits at the S7 user gate; the Part D appendices D1–D8 are queued and executable but reference-heavy and lowest priority — resume order is row order, so D1 comes next once C1 closes.
 - A7 Instruction Details (16,412 ln) was completed on 2026-11-14 and is not queued again; the part-D index tables (D7/D8) describe its pseudocode and registers.
 
 ## Part A / Part B completion batch (2026-11-14)
