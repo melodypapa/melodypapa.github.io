@@ -140,8 +140,8 @@ Chapter span map (PDF pages): ch1 Introduction 24–27 (4) · ch2 The Cortex-R52
   - Note: the UNPREDICTABLE case list, one entry per instruction/feature; translate the case text, keep instruction names and encodings verbatim.
   - [ ] S1 [ ] S2 [ ] S3 (N/A: no figures) [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 
-## Not queued (deliberately)
+## Tail notes
 
-- Appendices A–C are queued above as the deferred reference tail; they still run after any remaining chapter work.
+- Appendices A–C are queued above as the deferred reference tail; they run after any remaining chapter work.
 - E Revisions, the document glossary and the cover/proprietary notice — chrome per skill Step 3, never translated.
 - Appendix A overlaps `clocking_and_resets` (clock/reset signals) and the interface chapters (AXIM/AXIS/LLPP/Flash signal groups) — cross-link those pages rather than duplicating prose.

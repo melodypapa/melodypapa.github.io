@@ -31,8 +31,8 @@ There is no `README.md` on disk; this table is the pairing ledger and supersedes
 | Group | Doc | Articles | Mapped chapters | New-article chapters | Defects found at census |
 | --- | --- | ---: | ---: | ---: | --- |
 | [M7-TRM](M7-TRM.md) | DDI0489F r1p2 | 22 (all registered) | 3 (ch2, ch7, ch13) | 12 — all translated | none open (nvic stub fixed; batch shipped 2026-11-06; full verification 2026-11-18) |
-| [R52-TRM](R52-TRM.md) | 100026 r1p0 | provenance only | ch2/ch7/ch8 verify-only pending; ch6 done | 11 + appendices — built from the R52+ pages | system_control article 236 ln vs ~11k-ln chapter; no new queue in this ledger |
-| [R52plus-TRM](R52plus-TRM.md) | 102199 r0p3 | 18 (all registered) | ch3/ch5/ch7/ch8/ch9 verified; ch4 completion done | 16 chapters + appendix D translated 2026-11-09 | appendices A–C queued as the deferred tail; system_control 233 ln vs 165 pp |
+| [R52-TRM](R52-TRM.md) | 100026 r1p0 | provenance only | all rows closed 2026-11-18 | 11 + appendices — built from the R52+ pages | superseded by the R52+ articles; span map re-verified, no new queue |
+| [R52plus-TRM](R52plus-TRM.md) | 102199 r0p3 | 18 (all registered) | ch3/ch5/ch7/ch8/ch9 verified; ch4 completion done (5,655 ln) | 16 chapters + appendix D translated 2026-11-09 | appendices A–C queued as the deferred tail |
 | [ARMv7-M](ARMv7-M.md) | DDI0403E E.e | 12 translated + 9 chapter stubs | A1–A7 (incl. the 263-entry instruction details), B1–B5, glossary | A1–A7, B1–B5, glossary done | none open; C1 (4,077 ln) + D1–D8 queued (spans rebuilt 2026-11-18) |
 | [SDEN](SDEN.md) | SDEN-1068427 v11.0 | 0 | — | 1 (errata notice) | ⛔ both `.md` and PDF on disk are the M7 TRM — re-download the genuine notice before S1 |
 | [ARMv8-M](ARMv8-M.md) | DDI0553B B.y | 1 A + 16 B + 8 C + 1 G | A1, B1–B16, C1, C2.1–C2.3, C2.4 A–C, G done | C2.4 D–Z (437 entries) + D1/E1/E2/F1 queued | none open; parse stops at printed p.500, so the deferred tail is PDF-sourced |
@@ -41,7 +41,7 @@ There is no `README.md` on disk; this table is the pairing ledger and supersedes
 
 1. [M7-TRM](M7-TRM.md) — complete (all rows `[x]`, batch finished 2026-11-06; verified 2026-11-18)
 2. [R52plus-TRM](R52plus-TRM.md) — **authoritative for `r52plus-trm/`**; all chapters and appendix D done, resume at appendix A (deferred reference tail)
-3. [R52-TRM](R52-TRM.md) — older 100026 revision; keep as the provenance ledger for pages built before 2026-11-07, do not queue new work from it
+3. [R52-TRM](R52-TRM.md) — older 100026 revision; provenance ledger for pages built before 2026-11-07 — every row closed 2026-11-18, do not resume work from it
 4. [ARMv7-M](ARMv7-M.md) — Parts A and B complete (A7 shipped 2026-11-14); resume at **C1 Armv7-M Debug**, then the D1–D8 appendix tail
 5. [SDEN](SDEN.md) — ⛔ blocked: no genuine source on disk (both the parse and the PDF are the M7 TRM)
 6. [ARMv8-M](ARMv8-M.md) — **ACTIVE** (opened 2026-11-10): B1–B16, C1–C2.3, C2.4 A–C and G shipped; resume at **C2.4 D–F**, then the remaining bands and the D/E/F deferred tail
