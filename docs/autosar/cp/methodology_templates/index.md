@@ -20,6 +20,7 @@ title: "方法论与模板（Methodology and Templates）"
 * [Timing Extensions（时序扩展）](tps_timing_extensions/index.md)
 * [ECU Configuration（ECU 配置）](tps_ecu_configuration/index.md)
 * [Methodology（方法论）](tr_methodology/index.md)
+* [Diagnostic Extract Template（诊断提取模板）](tps_diagnostic_extract_template/index.md)
 
 ## 相关内容
 

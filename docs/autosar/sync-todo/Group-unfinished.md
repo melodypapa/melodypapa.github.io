@@ -87,11 +87,16 @@ Steps: ① source resolution + gap analysis · ② in-place translation/completi
 - [ ] tps_diagnostic_extract_template (AUTOSAR_CP_TPS_DiagnosticExtractTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
   - Note: Diagnostic Extract Template（诊断提取模板）; target `cp/methodology_templates/tps_diagnostic_extract_template/`; template specification (TPS) — meta-model class tables, constraints and ARXML examples (template-type)
   - Note: source `MethodologyAndTemplates/AUTOSAR_CP_TPS_DiagnosticExtractTemplate.md` — 29,451 lines, 1,150 figure refs, 296 item IDs (giant)
-  - [ ] Step 1 — Source resolution + gap analysis
-  - [ ] Step 2 — In-place translation/completion
-  - [ ] Step 3 — Phase A mechanical checks
-  - [ ] Step 4 — Phase B coverage map + fidelity
-  - [ ] Step 5 — User confirmation gate
+  - Note: Step 1 (2026-11-19): source confirmed 29,451 ln (References + ch.1-5 + annexes A-F, G Upstream Mapping 18k ln, H/I lists); article is skeleton-exempt TPS → mirror source numbering; figures OMITTED per the row-13 batch decision (1,150 refs — recorded for the batch gate); item IDs dropped / titles translate only; {DRAFT} markers on R23-11-added items dropped per STANDARD §4; nominal [TPS_DEXT_*]/[constr_*] inline refs retained; source References chapter replaced by a hand-written 26-entry `## 参考文献` registry (ref-1..26 anchors) for the citation-link class
+  - Note: Step 2 (2026-11-19): article built 20,190 ln; ch.1-5 prose hand-translated (~1,400 prose lines incl. all 277 TPS/constr item bodies' lead sentences); 375 class tables converted deterministically (| 属性 | 值 | … layout, Note cells verbatim English per annex-D precedent); constraint/spec-item titles translated via pattern rules (Existence of … 属性的存在性 / Semantics of … 的语义) + a 252-entry hand map; annex A.2 Requirements Tracing dropped (droppable set — gate to verify), A.1 abbreviations + B examples (XML listings wrapped in fences) + C mentioned classes + D glossary + E change history (title-only tables, Number dropped) + F InstanceRef + G upstream mapping (71 entry tables, translated labels, cells verbatim English) + H/I splitable/variation lists all rendered; diagram-spill chrome and garbled figure text dropped
+  - Note: anomalies for the batch gate: (a) figures omitted (1,150 refs) — prose figure references kept; (b) class-table Note cells + annex-G cells verbatim English — batch-gate decision on full translation; (c) source typos preserved (e.g. "at lest once", "the aggregation ion the role", "AUTOSARclassic", "OBD Mode 0x0A" vs "OBDMode0x0A" caption variants, [constr_1352]-window item titled with stray leading comma after converter split, "OBD mode"/"ODB mode" in one mapping title); (d) §1.1 intro sentence-order anomaly where source splits one sentence across pages — merged with an in-place 注; (e) annex G.2/G.3 section headings are bare module names (source-faithful, check_heading_lang false positives)
+  - Note: Step 3 (2026-11-19): strict build exit 0 / 0 WARNING; check_indexes OK (419 nav targets, 0 broken; nav + landing page + CP overview updated in same change); check_heading_lang 7 false positives (bare module-name headings Dcm/Dem/FiM/J1939Dcm in annexes, source-faithful); hygiene 0 × ^# / \< / {DRAFT}; link census: 50 chapter refs + 71/71 prose citations applied to the ref-1..26 registry (idempotent re-run 0 lines, all anchors resolve), 0 UNRESOLVED; cross-article mentions report-only
+  - Note: Step 4 (2026-11-19): coverage map — ch.1 (1.1-1.5) + ch.2 use cases (2.1-2.5) + ch.3 concept background + ch.4 diagnostic resources (4.1-4.6: common elements, services incl. all UDS/OBD service sub-chapters, event handling, Fim, J1939) + ch.5 diagnostic mapping (5.1-5.6) + annexes A/B/C/D/E/F/G/H/I all rendered; droppable = A.2 traceability only beyond chrome
+  - [x] Step 1 — Source resolution + gap analysis
+  - [x] Step 2 — In-place translation/completion
+  - [x] Step 3 — Phase A mechanical checks
+  - [x] Step 4 — Phase B coverage map + fidelity
+  - [ ] Step 5 — User confirmation gate (2026-11-12/19 batch instruction: single combined gate at end of rows 13-17)
   - [ ] Step 6 — TODO.md row + commit/PR
 
 - [ ] tps_software_component_template (AUTOSAR_CP_TPS_SoftwareComponentTemplate · MethodologyAndTemplates · R23-11 markdown · ❌ new article · 📖 skeleton-exempt)
