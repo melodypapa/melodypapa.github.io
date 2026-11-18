@@ -4,6 +4,27 @@ title: "CP AUTOSAR"
 
 **AUTOSAR** Classic Platform（**CP**）R23-11 规范的中文翻译笔记：按通信、全局时间、加密、网络安全、诊断、通用、I/O、MCAL、存储、方法论与模板、模式管理、系统服务、功能安全等类别组织，覆盖各基础软件模块（**BSW**）的功能、API、配置参数与集成约束，并收录 **RTE**、应用接口、**SW** 架构、库与模板等平台级内容，以及不属于特定模块的「其他」专题文章。跨平台的 **Foundation** 标准另见[基础标准（Foundation）](../foundation/index.md)。下列按导航结构列出本节全部文章，便于快速跳转。
 
+## 分区
+
+* [通信](communication/index.md)
+* [全局时间](globaltime/index.md)
+* [加密](crypto/index.md)
+* [网络安全](security/index.md)
+* [诊断](diagnostics/index.md)
+* [通用](general/index.md)
+* [I/O](io/index.md)
+* [MCAL](mcal/index.md)
+* [存储](memory/index.md)
+* [方法论与模板](methodology_templates/index.md)
+* [模式管理](mode_management/index.md)
+* [系统服务](system_services/index.md)
+* [功能安全](safety/index.md)
+* [RTE](rte/index.md)
+* [SW 架构](sw_arch/index.md)
+* [应用接口](application_interfaces/index.md)
+* [库](libraries/index.md)
+* [其他](others/index.md)
+
 ## 文章
 
 ### 通信
