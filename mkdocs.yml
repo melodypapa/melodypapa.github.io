@@ -574,6 +574,8 @@ nav:
         - "Modeling Show Cases": autosar/cp/methodology_templates/tr_modeling_show_cases/index.md
         - "Timing Extensions": autosar/cp/methodology_templates/tps_timing_extensions/index.md
         - "ECU Configuration": autosar/cp/methodology_templates/tps_ecu_configuration/index.md
+        - "Methodology": autosar/cp/methodology_templates/tr_methodology/index.md
+        - "Diagnostic Extract Template": autosar/cp/methodology_templates/tps_diagnostic_extract_template/index.md
       - 模式管理:
         - autosar/cp/mode_management/index.md
         - "BswM": autosar/cp/mode_management/basic_software_mode_manager/index.md

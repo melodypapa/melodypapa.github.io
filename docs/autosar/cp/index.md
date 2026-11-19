@@ -162,6 +162,8 @@ title: "CP AUTOSAR"
 * [Modeling Show Cases Report（建模展示案例报告）](methodology_templates/tr_modeling_show_cases/index.md)
 * [Timing Extensions（时序扩展）](methodology_templates/tps_timing_extensions/index.md)
 * [ECU Configuration（ECU 配置）](methodology_templates/tps_ecu_configuration/index.md)
+* [Methodology（方法论）](methodology_templates/tr_methodology/index.md)
+* [Diagnostic Extract Template（诊断提取模板）](methodology_templates/tps_diagnostic_extract_template/index.md)
 
 ### 模式管理
 
