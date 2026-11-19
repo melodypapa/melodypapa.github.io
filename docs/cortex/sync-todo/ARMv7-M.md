@@ -119,6 +119,7 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
   - S4 result: N/A — `armv7-m/part-c/debug/` was already registered by the Step 3.5 scaffold.
   - S5 result: `--strict` build 0 WARNINGs; `check_indexes.py --root .` OK (417 nav targets); `check_heading_lang.py` OK.
   - S6 result: all 23 tables rendered as GFM — multi-level headers flattened, merged cells expanded per row (C1-3/C1-4/C1-5/C1-18), multi-item cells joined with `<br>•` (C1-2); no HTML table needed.
+  - S6 re-check (2026-11-18, source-to-article audit): all 60 numbered sections, 23 tables and the single figure present; the only token differences are source errata kept corrected in the article (`DGBEN`→`DBGEN`, `S_HALTH`→`S_HALT`, `BASEBRI`→`BASEPRI`, `DATVMATCH`→`DATAVMATCH`, `DWT_CRTRL`→`DWT_CTRL`, `DWT_PSCR`/`DWT_PSCSR`→`DWT_PCSR`) and the self-contradictory `Bits[31:26] Reserved` row of DHCSR (DBGKEY already occupies [31:16]) left out. The 41 source-unnumbered subheadings stay numbered: the committed `part-b/system_address_map` article does the same.
   - PDF fallback: Table C1-4/C1-5 lost cells, Table C1-14/C1-16 lost footnotes, the DCRSR REGSEL list was scrambled, and DEMCR / DFSR / DHCSR / DWT_CTRL / DWT_FUNCTIONn bit order was displaced; the POSTCNT ICNT formula came through as `formula-not-decoded` — all re-read from PDF pp. 689–690, 700, 707, 722, 726, 734.
   - Parse quirk: the source splices C1.3.2 Multi-processor support between the DWT and ITM passages; the article restores the logical order (3.2.1–3.2.4) and numbers the unnumbered h2s in parent order.
   - S7 result: confirmed by the user.
@@ -158,6 +159,7 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
   - S4 result: N/A — page already registered by the Step 3.5 scaffold.
   - S5 result: `--strict` build 0 WARNINGs; `check_indexes.py --root .` OK (417 nav targets); `check_heading_lang.py` OK.
   - S6 result: figure/table numbering reconciled with the source — 22 figures + 7 tables, every label unique and in source order; Figure D4-19 sits after its introducing sentence and before the header field list, as in the source; bit assignments re-read from the PDF word coordinates.
+  - S6 re-check (2026-11-18, source-to-article audit): two structural deviations found and fixed — Table D4-7 restored to the source's seven columns (位[7] | 位[6] | 位[5] | 位[4] | 位[3] | 判别符 ID | 载荷, dropping the inferred packet-type column and the merged 位[5:4] cell), and the LTS1 encoding table expanded to the source's four separate `00`/`01`/`10`/`11` rows instead of one joined cell. All 19 source subsections, 7 tables and 22 figures verified present.
   - PDF fallback: the parse merged or misaligned the bit grids of Figures D4-8, D4-9, D4-10, D4-11, D4-16, D4-19 and D4-21; their cell rows were rebuilt from the PDF text coordinates.
   - [x] S1 [x] S2 [x] S3 [x] S4 (N/A: page already registered) [x] S5 [x] S6 [x] S7 [ ] S8
 - [ ] D5 → `armv7-m/part-d/armv7r_differences/` (Armv7-R Differences; L34403–34491, 89 ln; PDF pp. 798–803; 5 sections, 0 tables, 0 figures; stub exists)
