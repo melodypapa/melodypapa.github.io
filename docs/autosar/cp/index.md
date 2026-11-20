@@ -185,6 +185,7 @@ title: "CP AUTOSAR"
 * [ECU Configuration（ECU 配置）](methodology_templates/tps_ecu_configuration/index.md)
 * [Methodology（方法论）](methodology_templates/tr_methodology/index.md)
 * [Diagnostic Extract Template（诊断提取模板）](methodology_templates/tps_diagnostic_extract_template/index.md)
+* [Software Component Template（软件组件模板）](methodology_templates/tps_software_component_template/index.md)
 
 ### 模式管理
 
