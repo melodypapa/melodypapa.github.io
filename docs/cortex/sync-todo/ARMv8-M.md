@@ -343,9 +343,18 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S5 result: strict build 0 WARNINGs; `check_indexes.py --root .` OK (0 broken links); `check_heading_lang.py` OK on the article.
   - S6 result: 61 diagrams referenced and present; every entry carries its architecture-scope line (`仅适用于 Armv8.1-M MVE。` / `仅适用于 Armv8.1-M MVE 的半精度与单精度浮点扩展。` / `仅适用于 Armv8-M 浮点扩展。`); `受限行为` appears only where the source has a restricted-behaviour block; FP-side effects (FPSCR.C carry, FPSCR rounding) preserved verbatim.
   - S7 result: covered by the user-approved single-loop run.
-  - S8 result: uncommitted — awaiting the user's commit instruction (repo rule: commit only when asked).
-  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
-  - [ ] V2 4.345–4.389 (VDIV … VMOV (two GP registers and a doubleword register)) — printed 1119–1222
+  - S8 result: committed on `feature/armv8m-c2-4-v1` (`docs: translate Armv8-M C2.4 instructions A–V1 (C2.4.1–4.344)`, 382 files, PR #417).
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
+  - [x] V2 done (4.345–4.389): 45 entries, 73 encoding diagrams (FigureC2-567–639).
+  - S1 result: printed 1119–1222 holds C2.4.345 VDIV … C2.4.389 VMOV (between GP and half-precision register) with 73 encoding diagrams. Shape variance recorded: VLD2/VLD4/VLDRB…/VLDRB,H,W,D (vector) are not VPT compatible; VLDM/VLDR/VLDM-family carry the stack-limit note and `interrupt-continuable`; VLLDM/VLSTM print a per-encoding `bit[7]` note; VMLALV/VMLAV are VMLALDAV/VMLADAV aliases in the `**等价于**` form; VLDR (System Register) lists its register values in the `<reg>` table.
+  - S2 result: appended in place as `### 4.345.`–`### 4.389.`; the §4 lead-in now reads A–V 段 V1–V2 子段 (C2.4.1–C2.4.389). Pseudocode, syntax and field names verbatim with comments translated; no `# ` in the body.
+  - S3 result: `FigureC2-567.png`–`FigureC2-639.png` (73 diagrams) cropped at 4×; the label/bit-field header pairs that straddle a page break (592, 604) re-cropped against the following page.
+  - S4 result: no nav change needed — C2.4 is a single page.
+  - S5 result: strict build 0 WARNINGs; `check_indexes.py --root .` OK; `check_heading_lang.py` OK on the article.
+  - S6 result: 639 diagrams referenced exactly once and all present; entry and subsection numbering continuous 4.1–4.389; every entry carries its architecture-scope line; `受限行为` appears only where the source has a restricted-behaviour block.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/armv8m-c2-4-v2` (PR #420).
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
   - [ ] V3 4.390–4.433 (VMOV (GP/half, single) … VQABS) — printed 1223–1306
   - [ ] V4 4.434–4.470 (VQADD … VSCCLRM) — printed 1307–1384
   - [ ] V5 4.471–4.489 (VSEL … VSUB (vector)) — printed 1385–1434
