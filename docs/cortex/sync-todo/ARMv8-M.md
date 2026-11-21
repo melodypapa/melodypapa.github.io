@@ -1,7 +1,7 @@
 # Sync todo: Group ARMv8-M — DDI0553B Armv8-M ARM B.y (`reference-docs/arm/cortex-r52/DDI0553B_y_armv8m_arm.md`, 37,382 ln, PDF ✅)
 
-Generated: 2026-11-04 · Opened: 2026-11-10 · **Status: ACTIVE** — the M-profile architecture series `docs/cortex/armv8-m/` is open; Part A chapter A1 is translated and registered. Queue order = row order (resume = the first row still `[ ]`).
-Last refresh: 2026-11-18 — parse coverage re-verified (37,382 ln, unchanged); the span map below now records where the parse ends, and the deferred Part D/E/F chapters carry executable queue rows.
+Generated: 2026-11-04 · Opened: 2026-11-10 · **Status: ACTIVE** — Parts A–B, C1 and the glossary are translated and registered; C2 is in progress (C2.1–C2.3 done, C2.4 A–U done = 294 of 493 entries) and the C2.4 V–Z bands plus Parts D/E/F are the deferred tail. Queue order = row order (resume = the first row still `[ ]`).
+Last refresh: 2026-11-18 — parse coverage re-verified (37,382 ln, unchanged); the span map below now records where the parse ends, and the deferred Part D/E/F chapters carry executable queue rows. Status refresh: 2026-11-19 — chapter plan re-checked against `armv8-m/index.md`: every finished row's checklist is fully ticked and every open chapter row carries its own S1–S8 list.
 Steps: S1 source resolution + gap analysis · S2 in-place translation · S3 figures (PyMuPDF crop from the ARM PDF) · S4 nav + landing · S5 Phase A · S6 Phase B · S7 user gate · S8 commit/PR
 
 Pairing note: the file lives under `cortex-r52/` in the mirror but documents the **Armv8-M (M-profile)** architecture. The Cortex-R52+ is **Armv8-R AArch32**, so DDI0553B is NOT the R52+ architecture manual; it is a separate M-profile series. The PDF is complete (9,561,121 B = ima media_size — the README "⏳ retrying" row is stale; there is no README on disk, the pairing ledger is the `sync-todo/index.md` Sources table).
@@ -50,13 +50,13 @@ chapter article (glossary included) now lives in its Part subfolder `part-<desig
 | --- | --- | --- | --- |
 | A | A1 Introduction | overview of the architecture and its profiles | A1 done |
 | B | B1 Resets · B2 Power Management · B3 Programmers' Model · B4 Floating-point Support · B5 Vector Extension · B6 Pointer Authentication / BTI Extension · B7 Memory Model · B8 The System Address Map · B9 Synchronization and Semaphores · B10 The Armv8-M Protected Memory System Architecture · B11 The System Timer, SysTick · B12 Nested Vectored Interrupt Controller · B13 Debug · B14 Debug and Trace Components · B15 The Performance Monitors Extension · B16 RAS Extension | architecture rules | B1–B16 done (Part B complete) |
-| C | C1–C2 | instruction set + alphabetical instruction specification | C1 done; C2 in progress (C2.1–C2.3 done) |
+| C | C1–C2 | instruction set + alphabetical instruction specification | C1 done; C2 in progress (C2.1–C2.3 done, C2.4 A–U = 294 of 493 entries) |
 | D | D1 Register and Payload Specification | registers and payload specification | scaffolded (Part index + D1 stub) — queued in the deferred tail (PDF pp. 1442–1904) |
 | E | E1 Arm Pseudocode Definition · E2 Pseudocode Specification | pseudocode | scaffolded (Part index + E1/E2 stubs) — queued in the deferred tail (PDF pp. 1906–2094) |
 | F | F1 ITM and DWT Packet Protocol Specification | debug packet protocols | scaffolded (Part index + F1 stub) — queued in the deferred tail (PDF pp. 2096–2120) |
 | G | — | glossary | G done — `docs/cortex/armv8-m/part-g/glossary/index.md`, 285 entries, PDF pp. 2121–2148 |
 
-Parts D/E/F are reference material (register payloads, pseudocode, packet protocols) — they sit at the end of the queue as the deferred tail; their trees are scaffolded and the translation is deliberately last, the way [ARMv7-M](ARMv7-M.md) defers its appendixes. Part G (glossary) is translated and registered.
+Parts D/E/F are reference material (register payloads, pseudocode, packet protocols) — they sit at the end of the queue as the deferred tail; their trees are scaffolded and the translation is deliberately last, the way [ARMv7-M](finished/ARMv7-M.md) defers its appendixes. Part G (glossary) is translated and registered.
 
 ## Scaffold (2026-11-15)
 
@@ -91,7 +91,7 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S6 result: 7/7 rules present in source order with no dropped applicability line; 0 figures, 0 tables; numbering continuity (`## 1.` only).
   - S7 result: PR opened, awaiting user confirmation.
   - S8 result: PR #364 (merge SHA to be recorded post-merge).
-  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [ ] S7 [x] S8
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] B2 → new article `armv8-m/part-b/power_management/` (Power Management; body L4339–4546)
   - S1 result: B2 body L4339–4546: B2.1 "Power management" (12 rules) with B2.1.1 WFE and B2.1.2 WFI, then B2.2 "Sleep on exit" (4 rules). Census: 0 figures, 0 tables. The chapter-front section list was dropped (A1/B1 precedent). Two parse OCR artifacts were checked against PDF pp. 63–66 and corrected in translation: "WFE makeup event" → "WFE wakeup event", "unprovided debug" → "unprivileged debug".
   - S2 result: `docs/cortex/armv8-m/part-b/power_management/index.md`; numbering restarts at 1 (`## 1.` ← B2.1 with `### 1.1`/`### 1.2` ← B2.1.1/B2.1.2, `## 2.` ← B2.2); every rule keeps its applicability line, the Armv8.1-M rule keeps `扩展要求为 - DB && UDE。`, and the `DB` rule carries the source's DebugMonitor note; both See also blocks rendered as `参见：` bullets. No `# ` in the body.
@@ -111,7 +111,7 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S6 result: all 37 sections present in source order with their rule groups; 9/9 figures and all tables rebuilt as GFM text; numbering continuity 1–37 and 27.1–27.7 / 37.1–37.3.
   - S7 result: covered by the user-approved single-loop run; the confirmation gate is taken once at the end of B2–B16.
   - S8 result: committed on `feature/cortex-armv8m-b1-resets` (commit fbf7353).
-  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] B4 → new article `armv8-m/part-b/floating_point_support/` (Floating-point Support; PDF pp. 160–176, 12 sections)
   - S1 result: B4 spans PDF pages printed 160–176 (the B5 divider is on printed 177); 12 sections B4.1–B4.12 with the single sub-section B4.8.1. The `.md` parse cannot be used for body recovery here (same interleaving as B3), so the text was taken from the PDF layer page by page. Census: 4 vector diagrams (B4.1 S/D register map, B4.2–B4.4 the half/single/double encoding bit bars) and 5 tables (B4.2 two coprocessor register maps, B4.4 terminology, B4.6 interpretation, B4.10 Default NaN). The bit bars and the Default NaN table carry no `Figure B4-n` caption in this edition — the figure numbers are synthetic, per the A1 precedent.
   - S2 result: `docs/cortex/armv8-m/part-b/floating_point_support/index.md`, 552 ln; numbering restarts at 1 (`## 1.` ← B4.1 … `## 12.` ← B4.12, `### 8.1` ← B4.8.1). 68 rule applicability lines plus the B4.8.1 section-level line match the source's `Applies to an implementation …` lines; the B4.8.1 rules keep the source's `Note, !8.0.` as `注意，不适用于 **Armv8.0-M**。`; the B4.10 spanning header ("IEEE 754-2008 interpretation" over the three format columns) is carried by the lead-in sentence rather than a merged cell; all See-also blocks render as `参见：` bullets. No `# ` in the body.
@@ -121,7 +121,7 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S6 result: 12/12 sections in source order; the 5 exceptions of B4.7, the 15 B4.8 rules + 5 B4.8.1 rules, the 6 B4.9 NaN rules, the B4.10 table, the 2 B4.11 combination rules and the B4.12 priority rule are all present; 4 figures, 5 tables.
   - S7 result: covered by the user-approved single-loop run; the confirmation gate is taken once at the end of B2–B16.
   - S8 result: committed on `feature/cortex-armv8m-b1-resets` (commit ffbd561).
-  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] B5 → new article `armv8-m/part-b/vector_extension/` (Vector Extension; PDF pp. 177–191, 6 sections)
   - S1 result: B5 spans printed 177–191 (the B6 divider is on printed 192); 6 sections B5.1–B5.6 with sub-sections B5.5.1–B5.5.4. Census: 5 vector diagrams (B5.2 vector register file, B5.3 four lane-number rows, B5.4 beat-number bar, B5.4 dual-beat overlap timing, B5.6 VLD4 de-interleave grid) and 2 tables (B5.5.2 VPT variants, B5.5.3 lane width vs VPR.P0 bits). The Q\<n\> bit assignment on p. 180 is a numbered list (rows 1, 2, 3 = …, 4), not a table. No figure captions exist in this edition — numbering is synthetic, per the A1 precedent.
   - S2 result: `docs/cortex/armv8-m/part-b/vector_extension/index.md`, 511 ln; numbering restarts at 1 (`## 1.` ← B5.1 … `## 6.` ← B5.6, `### 5.1`–`### 5.4` ← B5.5.1–B5.5.4). 76 applicability lines match the source's 76 `Applies to an implementation …` lines exactly (12 / 4 / 2 / 16 / 38 / 4 per section); the two `Note, Debug state requires HDBG.` lines are kept as `注意，调试状态要求 **HDBG**。`; **Lanes**/**Beats** are glossed in the headings as 通道/节拍 and bolded at first use in the body; the dual-beat example keeps its two ``` blocks of three instructions. No `# ` in the body.
@@ -131,7 +131,7 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S6 result: 6/6 sections and 4/4 sub-sections in source order; both tables rebuilt as GFM text; the B5.1 multi-access BusFault rule pair (RFBRZ/IKPFV) kept as two rules.
   - S7 result: covered by the user-approved single-loop run; the confirmation gate is taken once at the end of B2–B16.
   - S8 result: committed on `feature/cortex-armv8m-b1-resets` (commit 7405a36).
-  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] B6 → new article `armv8-m/part-b/pacbti/` (Pointer authentication and branch target identification Extension; PDF pp. 192–200, 1 section + 2 sub-sections)
   - S1 result: B6 spans printed 192–200 (the B7 divider is on printed 201, body from printed 202); the chapter has a single section B6.1 "Implementing PAC and BTI" with sub-sections B6.1.1 Pointer authentication and B6.1.2 Branch target identification — there is no B6.2. The text was recovered from the PDF layer page by page (the `.md` parse interleaves TOC rows and running headers). Census: 0 figures, 1 table (the four 128-bit PAC keys, rows 特权/非特权 × columns Non-secure/Secure), 2 numbered ```arm listings (the PAC example, 36 lines; the BTI example, 53 lines). The `find_tables()` hits on printed 196/199 are the code box grids, not tables. The chapter-front "It contains the following sections" list was dropped (A1/B1 precedent).
   - S2 result: `docs/cortex/armv8-m/part-b/pacbti/index.md`; numbering restarts at 1 (`## 1.` ← B6.1, `### 1.1`/`### 1.2` ← B6.1.1/B6.1.2). 40 applicability lines match the source's 40 `Applies to an implementation …` lines (3 / 17 / 20 per section); the two `- PACBTI && S` requirements keep their Secure qualifier; **BTI setting**/**BTI clearing** are glossed as **BTI 置位指令**/**BTI 清零指令**; the 12 QARMA pseudocode function names stay in code spans; both listings keep their source line numbers 1–36 and 1–53 with the wrapped comments folded onto the owning instruction; the See-also block (B3.4) renders as `参见：`. No `# ` in the body.
@@ -141,7 +141,7 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S6 result: 40/40 rules present in source order across the three groups; the key matrix rebuilt as GFM text under a lead-in sentence; both listings reproduced line for line (36 and 53 lines, comments preserved); 0 figures, 1 table.
   - S7 result: covered by the user-approved single-loop run; the confirmation gate is taken once at the end of B2–B16.
   - S8 result: committed on `feature/cortex-armv8m-b1-resets` (commit b5938c7).
-  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
+  - [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [x] B7 → new article `armv8-m/part-b/memory_model/` (Memory Model; PDF pp. 202–262, 29 sections; 344 applicability lines)
   - S1 result (part 1): B7 spans printed 202–262 (the B8 divider is on printed 263); §1–§7 occupy printed 202–229 with 167 `Applies to an implementation …` lines. Structure: B7.1 Definition of the Armv8 memory model (with B7.1.1 Locations and nine unnumbered group headings), B7.2 Atomicity (B7.2.1–B7.2.16, including B7.2.4.1 Ordering relations), B7.3 Memory accesses, B7.4 Address space, B7.5 Endianness, B7.6 Alignment behavior, B7.7 Concurrent modification and execution of instructions. Census for this span: 2 figures, 1 table (the endianness element-size table). The chapter-front section list of B7.1 was kept because it sits inside the IJRPK rule and is the chapter's only navigation aid; its source numbering (B7.1.1, B7.2.3, B7.2.5, B7.2.7, B7.2.6, B7.2.9) was reproduced verbatim.
   - S2 result (part 1): `docs/cortex/armv8-m/part-b/memory_model/index.md`, 1132 ln; numbering restarts at 1 (`## 1.` ← B7.1 with `### 1.1` ← B7.1.1; `## 2.` ← B7.2 with `### 2.1`–`### 2.16` ← B7.2.1–B7.2.16 and `#### 2.4.1` ← B7.2.4.1; `## 3.`–`## 7.` ← B7.3–B7.7). Unnumbered source sub-heads became `####`. All 167 applicability lines are present with their extension requirements (`- M`, `- !M`, `- MVE`, `- PACBTI && S` style kept verbatim); source notes render as `注意，…。`; every See-also block is a `参见：` bullet list. Two transparent typo fixes: `RW1` duplicated in the RPXPQ bullet and `semanitcs` in the RPXQQ bullet. No `# ` in the body.
@@ -258,6 +258,7 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] C2 → Instruction Specification (PDF pp. 477–1440, 964 pages, 0 applicability lines — Part C encoding reference)
   - Split plan: C2.1 top-level encoding (printed 478), C2.2 16-bit encoding (printed 479–488), C2.3 32-bit encoding (printed 489–526), C2.4 alphabetical instruction list (printed 527–1440, 493 entries). One article per encoding layer; C2.4 split into alphabetical bands. Every encoding diagram is a vector bit-field graphic, so each is cropped from the PDF at 4× and embedded in document order.
+  - Chapter checklist: [x] C2.1 + C2.2 batch · [x] C2.3 batch · [x] C2.4 A–C band (56 of 493 entries) · [x] C2.4 D–F band (64 of 493) · [x] C2.4 I–O band (134 of 493) · [x] C2.4 P–S band (248 of 493) · [x] C2.4 T–U band (294 of 493) · [ ] C2.4 V–Z bands (199 entries, rows below)
   - Batch 1 (C2.1 + C2.2) S1 result: 11 pages, 24 encoding diagrams, 26 decode tables (subgroup and instruction tables; the Alias column and the `Alias` cell rows are reproduced as printed). No rules, so no `适用于` lines.
   - Batch 1 S2 result: `docs/cortex/armv8-m/part-c/instruction_encoding_16bit/index.md`, 420 ln; numbering `## 1.` (C2.1) + `## 2.` (C2.2) with `### 2.1`–`### 2.11` and `####` for C2.2.1.1–.3, C2.2.3.1–.2, C2.2.9.1–.5 and C2.2.11.1. Section names translated; instruction mnemonics, field names and decode values kept verbatim.
   - Batch 1 S3 result: `FigureC2-1.png`–`FigureC2-24.png` cropped at 4× with an automated bit-number-row detector, then verified visually on samples.
@@ -266,7 +267,6 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - Batch 1 S6 result: all 24 diagrams referenced and present; 26 GFM tables; heading continuity 1–2 with every sub-section present.
   - Batch 1 S7 result: covered by the user-approved single-loop run.
   - Batch 1 S8 result: committed on `feature/cortex-armv8m-b1-resets`.
-  - [x] C2.3 32-bit encoding (printed 489–526) · [ ] C2.4 alphabetical list (A–C done: 56 of 493 entries)
   - Batch 2 (C2.3) S1 result: 38 pages, 74 encoding diagrams, 77 decode tables, 62 numbered sections (C2.3–C2.3.10, depth up to four digits) plus 12 unnumbered decode sub-entries that the manual prints in italic without a section number (reproduced as unnumbered sub-headings). No rules, so no `适用于` lines.
   - Batch 2 S2 result: `docs/cortex/armv8-m/part-c/instruction_encoding_32bit/index.md`, 1603 ln; numbering `## 1.` (C2.3) with `### 1.1`–`### 1.10`, `####` for the third level and `#####`/`######` for the fourth and fifth. Section names translated; subgroup names inside decode tables translated, while instruction mnemonics, field names and decode values stay verbatim; `Alias` rows render `Alias` in the first column; the printed "Reserved hint …" cells are translated.
   - Batch 2 S3 result: `FigureC2-25.png`–`FigureC2-98.png` (74 diagrams) cropped at 4×; numbering continues Batch 1 so chapter C2 keeps a single figure sequence.
@@ -289,20 +289,66 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S7 result: covered by the user-approved single-loop run.
   - S8 result: committed on `feature/cortex-armv8m-b1-resets`.
   - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-- [ ] C2.4 D–F band → `armv8-m/part-c/instruction_list/d/` and `e/`·`f/` (8 entries: D 3, E 3, F 2; printed from 631, band end measured at S1)
+- [x] C2.4 D–F band → appended to `armv8-m/part-c/instruction_specification/index.md` as `### 4.57.`–`### 4.64.` (8 entries: D 3, E 3, F 2; printed 631–641)
+  - Path note: this row's original `instruction_list/d/`, `e/`, `f/` targets are superseded by the 2026-11-13 consolidation — one source chapter, one article; later bands append to the same page.
   - Source note: same PDF-only rule as A–C — the parse has no C2.4 body. Entry counts are taken from the 493-entry TOC (L875–1879), which also indexes the remaining bands: I 2, L 48, M 15, N 1, O 4, P 14, Q 10, R 12, S 78, T 6, U 40, V 195, W 3, Y 1 (437 entries in total for D–Z).
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] C2.4 I–O band → `instruction_list/` pages `i/`…`o/` (70 entries: I 2, L 48, M 15, N 1, O 4)
-  - Note: `L` dominates this band (48 entries — the load/store family), so S1 may re-split it into `l1/`…`l3/`; that split is the run's decision, recorded in the row at S1.
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] C2.4 P–S band → `instruction_list/` pages `p/`…`s/` (114 entries: P 14, Q 10, R 12, S 78)
-  - Note: `S` carries 78 entries (store + saturating + shift families); split as needed at S1.
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] C2.4 T–U band → `instruction_list/t/` and `u/` (46 entries: T 6, U 40)
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
-- [ ] C2.4 V band → `instruction_list/v/` (195 entries — the largest band; vector operations)
-  - Note: expect several runs; split by mnemonic family (`vadd`–`vdup`, `veor`–`vmov`, `vmul`–`vq*`, `vr*`, `vs*`, `vu*`/`vz*`) and record the split at S1.
-  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
+  - S1 result: printed 631–641 holds 8 entries — C2.4.57 DBG, .58 DMB, .59 DSB, .60 EOR (immediate), .61 EOR (register), .62 ESB, .63 FLDMDBX/FLDMIAX and .64 FSTMDBX/FSTMIAX — with 9 encoding diagrams; the band ends before C2.4.65 ISB at printed 642. DBG/DMB/DSB/ESB carry no `Restricted behavior` section, the EOR pair adds `Restricted behavior` + `Data Independent Timing behavior`, and the two floating-point multiple-transfer entries place a `CONSTRAINED UNPREDICTABLE behavior` block (two `must be one of` rule sets) before the assembler-symbol list.
+  - S2 result: appended in place as `### 4.57.`–`### 4.64.` (+676 ln), sub-numbering `4.57.1` … `4.64.4`; variant labels keep the source's `Applies when …` guards; pseudocode, syntax and field names verbatim with comments translated; ESB keeps the long DSB-rationale comment block; the §4 lead-in now reads A–F (C2.4.1–C2.4.64).
+  - S3 result: `FigureC2-187.png`–`FigureC2-195.png` (9 diagrams) cropped at 4× from the PDF text layer (printed 631–641) with a ≥1 % white border; numbering continues the C2 sequence from 186.
+  - S4 result: no nav change needed — C2.4 is a single page, so nothing new to register.
+  - S5 result: strict build 0 WARNINGs; `check_indexes.py --root .` OK (419 nav targets, 0 broken links); `check_heading_lang.py` OK on the article.
+  - S6 result: 9 diagrams referenced and present; every entry carries its architecture-scope line; no `# ` in the body; symbol placeholders are code spans, not bare `<…>` prose.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: uncommitted — awaiting the user's commit instruction (repo rule: commit only when asked).
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
+- [x] C2.4 I–O band → appended to `armv8-m/part-c/instruction_specification/index.md` as `### 4.65.`–`### 4.134.` (70 entries: I 2, L 48, M 15, N 1, O 4; printed 642–777)
+  - Path note: like D–F, the original `instruction_list/i/`…`o/` targets are superseded by the 2026-11-13 consolidation — the band appends to the same C2.4 page.
+  - S1 result: printed 642–777 holds C2.4.65 ISB … C2.4.134 ORR (register) with 112 encoding diagrams. `L` (4.65–4.114) is ISB, IT plus the 48 load/store entries, so the band needed no further split; `M` runs MCR/MCR2 → MVN (register) (15), `N` is NOP, `O` is the four ORN/ORR entries. Shape variance recorded: MCR/MCRR, MOVT, MRC/MRRC, MVN×2 and NOP carry no `Restricted behavior` block; MRS/MSR end with `Data Independent Timing behavior and the PACBTI extension`; MRRC repeats its `CONSTRAINED UNPREDICTABLE behavior` under both encodings; MOV (register) carries a 16-row alias table and MSR a three-row `_<bits>` encoding-condition table.
+  - S2 result: appended in place as `### 4.65.`–`### 4.134.`; the §4 lead-in now reads A–O (C2.4.1–C2.4.134). Variant guards keep the source's `Applies when …`; the MRS/MSR `SYSm` tables and the MSR encoding-condition table are markdown tables; pseudocode, syntax and field names verbatim with comments translated; no `# ` in the body.
+  - S3 result: `FigureC2-196.png`–`FigureC2-307.png` (112 diagrams) cropped at 4× from the PDF text layer; numbering continues the C2 sequence from 195.
+  - S4 result: no nav change needed — C2.4 is a single page.
+  - S5 result: strict build 0 WARNINGs; `check_indexes.py --root .` OK (419 nav targets, 0 broken links); `check_heading_lang.py` OK on the article.
+  - S6 result: 112 diagrams referenced and present; every entry carries its architecture-scope line; `受限行为` appears only where the source has a restricted-behaviour block (81 of the 134 translated entries); symbol placeholders are code spans, not bare `<…>` prose.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: uncommitted — awaiting the user's commit instruction (repo rule: commit only when asked).
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
+- [x] C2.4 P–S band → appended to `armv8-m/part-c/instruction_specification/index.md` as `### 4.135.`–`### 4.248.` (114 entries: P 14, Q 10, R 12, S 78; printed 779–958)
+  - Note: `S` carries 78 entries (store + saturating + shift families); kept as one run — no split needed.
+  - S1 result: printed 779–958 holds C2.4.135 PAC … C2.4.248 SXTH with 76 encoding diagrams (FigureC2-380–455). Shape variance recorded: the `SQ*`/`SR*`/`SS*` scalar entries (4.203–4.208) are Armv8.1-M MVE-only and carry no restricted-behaviour block; SSBB (4.212) uses a `SpeculativeSynchronizationBarrier()` operation with no `ConditionPassed()` guard, like CLREX; STC/STC2 (4.215) and STM/STMDB (4.222–4.223) carry the stack-limit-check resumable form; STR (immediate) (4.224) carries a one-row alias-conditions table for `PUSH (single register)`; SUB (immediate, from PC) (4.240) is an ADR alias written in the `**等价于**` form.
+  - S2 result: appended in place as `### 4.135.`–`### 4.248.`; the §4 lead-in now reads A–S (C2.4.1–C2.4.248). Variant guards keep the source's `Applies when …`; pseudocode, syntax and field names verbatim with comments translated; no `# ` in the body.
+  - S3 result: `FigureC2-380.png`–`FigureC2-455.png` (76 diagrams) already cropped at 4× from the PDF text layer; numbering continues the C2 sequence from 379.
+  - S4 result: no nav change needed — C2.4 is a single page.
+  - S5 result: strict build 0 WARNINGs; `check_indexes.py --root .` OK (419 nav targets, 0 broken links); `check_heading_lang.py` OK on the article.
+  - S6 result: 76 diagrams referenced and present; every entry carries its architecture-scope line; `受限行为` appears only where the source has a restricted-behaviour block; symbol placeholders are code spans, not bare `<…>` prose.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: uncommitted — awaiting the user's commit instruction (repo rule: commit only when asked).
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
+- [x] C2.4 T–U band → appended to `armv8-m/part-c/instruction_specification/index.md` as `### 4.249.`–`### 4.294.` (46 entries: T 6, U 40; printed 957–1012)
+  - S1 result: printed 957–1012 holds C2.4.249 TBB … C2.4.294 UXTH with 50 encoding diagrams (FigureC2-456–505). Shape variance recorded: the `UQRSHL`/`UQRSHLL`/`UQSHL`/`UQSHLL`/`URSHR`/`URSHRL` entries (4.273–4.277, 4.280–4.281) are Armv8.1-M MVE-only, use the bare `UQRSHL<c><q> Rda, Rm` syntax form (no placeholder braces) and have no restricted-behaviour block; UQRSHLL/UQSHLL/URSHRL carry a `<saturate>`/register-pair symbol list; UDF (4.259) and UXTB/UXTH (4.292/4.294) each have two encodings; TST (register) (4.253) also has T1+T2.
+  - S2 result: appended in place as `### 4.249.`–`### 4.294.`; the §4 lead-in now reads A–U (C2.4.1–C2.4.294). Variant guards keep the source's `Applies when …`; pseudocode, syntax and field names verbatim with comments translated; no `# ` in the body.
+  - S3 result: `FigureC2-456.png`–`FigureC2-505.png` (50 diagrams) cropped at 4× from the PDF text layer, with the narrow-16-bit and wide-32-bit cases detected separately; `FigureC2-450.png`–`FigureC2-455.png` (SXTAH/SXTB/SXTB16/SXTH, left over from the P–S band) cropped in the same pass.
+  - S4 result: no nav change needed — C2.4 is a single page.
+  - S5 result: strict build 0 WARNINGs; `check_indexes.py --root .` OK (419 nav targets, 0 broken links); `check_heading_lang.py` OK on the article.
+  - S6 result: 50 diagrams referenced and present; every entry carries its architecture-scope line (`适用于 Armv8-M。` / Main / DSP / `仅适用于 Armv8.1-M MVE。`); `受限行为` appears only where the source has a restricted-behaviour block; DIT wording follows the integer (UHADD/UHASX/USAX/USUB) versus DSP-data (UQ*/USAD8/USADA8/UXT*) split.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: uncommitted — awaiting the user's commit instruction (repo rule: commit only when asked).
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
+- [ ] C2.4 V band → appended to `armv8-m/part-c/instruction_specification/index.md` (195 entries C2.4.295–C2.4.489; printed 1013–1434)
+  - Split plan (S1): five sub-runs recorded below — V1 4.295–4.344 (50 entries, printed 1013–1118, FigureC2-506–566); V2 4.345–4.389 (45 entries, printed 1119–1222); V3 4.390–4.433 (44 entries, printed 1223–1306); V4 4.434–4.470 (37 entries, printed 1307–1384); V5 4.471–4.489 (19 entries, printed 1385–1434).
+  - [x] V1 done (4.295–4.344): 50 entries, 61 encoding diagrams.
+  - S1 result: printed 1013–1118 holds C2.4.295 VABAV … C2.4.344 VDDUP/VDWDUP with 61 encoding diagrams (FigureC2-506–566). Shape variance recorded: the MVE-only entries carry the three-line `beat-wise`/`VPT compatible`/`not permitted in an IT block` preamble; VABS (4.298) prints only its T2 encoding; VAND (immediate) (4.308) is a VBIC alias written in the `**等价于**` form; VCMP (4.319) carries six encodings with per-encoding symbol groups; VCTP/VBRSR print `<dt>` values without a type prefix (`8`/`16`/`32`/`64`) exactly as the source does; VCX1–VCX3 (4.338–4.343) place a `CONSTRAINED UNPREDICTABLE behavior` block before the symbol list.
+  - S2 result: appended in place as `### 4.295.`–`### 4.344.`; the §4 lead-in now reads A–V 段 V1 子段 (C2.4.1–C2.4.344). Variant guards keep the source's `Applies when …`; pseudocode, syntax and field names verbatim with comments translated; no `# ` in the body.
+  - S3 result: `FigureC2-506.png`–`FigureC2-566.png` (61 diagrams) cropped at 4× from the PDF text layer, grid-only bounds with a ≥1% white margin; the multi-row `E = 0` sub-row diagrams and the 6-encoding VCMP variants verified.
+  - S4 result: no nav change needed — C2.4 is a single page.
+  - S5 result: strict build 0 WARNINGs; `check_indexes.py --root .` OK (0 broken links); `check_heading_lang.py` OK on the article.
+  - S6 result: 61 diagrams referenced and present; every entry carries its architecture-scope line (`仅适用于 Armv8.1-M MVE。` / `仅适用于 Armv8.1-M MVE 的半精度与单精度浮点扩展。` / `仅适用于 Armv8-M 浮点扩展。`); `受限行为` appears only where the source has a restricted-behaviour block; FP-side effects (FPSCR.C carry, FPSCR rounding) preserved verbatim.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: uncommitted — awaiting the user's commit instruction (repo rule: commit only when asked).
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [ ] S8
+  - [ ] V2 4.345–4.389 (VDIV … VMOV (two GP registers and a doubleword register)) — printed 1119–1222
+  - [ ] V3 4.390–4.433 (VMOV (GP/half, single) … VQABS) — printed 1223–1306
+  - [ ] V4 4.434–4.470 (VQADD … VSCCLRM) — printed 1307–1384
+  - [ ] V5 4.471–4.489 (VSEL … VSUB (vector)) — printed 1385–1434
 - [ ] C2.4 W–Y band → `instruction_list/w/` and `y/` (4 entries: W 3, Y 1; closes C2.4 and Part C)
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] D1 → `armv8-m/part-d/registers_and_payload_specification/` (Register and Payload Specification; PDF pp. 1442–1904, 463 pp; stub exists)
@@ -312,13 +358,13 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] E1 → `armv8-m/part-e/arm_pseudocode_definition/` (Arm Pseudocode Definition; PDF pp. 1906–1928, 23 pp; stub exists)
   - Note: the pseudocode language definition (E1.1 limitations, E1.2 data types, operators/statements, functions). Grammar productions, type names and operator definitions stay verbatim; translate only the prose. ~1 run.
-  - [ ] S1 [ ] S2 [ ] S3 (N/A: no figures) [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
+  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 (N/A: no figures) [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] E2 → `armv8-m/part-e/pseudocode_specification/` (Pseudocode Specification; PDF pp. 1929–2094, 166 pp; stub exists)
   - Note: E2.1 holds 438 function entries in alphabetical order (`AArch32.CheckForBTIUpdate` … `Zeros`, TOC E2.1.1–E2.1.438). Each entry is a pseudocode block plus a short description — translate the description, keep every block verbatim in `arm`-tagged fences, and link each entry to the architecture article that cites it. Split into alphabetical bands (4–6 runs) at S1.
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 (N/A: no figures) [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] F1 → `armv8-m/part-f/itm_and_dwt_packet_protocol/` (ITM and DWT Packet Protocol Specification; PDF pp. 2096–2120, 25 pp; stub exists)
   - Structure: F1.1 (uses, headers, transmission by the trace sink) + F1.2.1–F1.2.16 the packet types (data trace address/value/match/PC, event counter, exception trace, extension, global/local timestamp 1/2, instrumentation, overflow, periodic PC sample, PMU overflow, synchronization). Packet diagrams are cropped from the PDF; packet bit/byte layouts that the source prints as column grids become GFM tables.
-  - [ ] S1 [ ] S2 [ ] S3 [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
+  - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 (N/A: page already registered) [ ] S5 [ ] S6 [ ] S7 [ ] S8
 
 ## Deferred tail
 

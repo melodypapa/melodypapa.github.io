@@ -1998,7 +1998,7 @@ T32 指令流是一串半字对齐的半字。每条 T32 指令要么是该流�
 
 ## 4. 按字母顺序的指令列表
 
-本节按指令助记符的字母顺序逐条列出各指令。手册原文共 493 条（C2.4.1–C2.4.493，印刷 528–1440）；当前已译 A–C 段（C2.4.1–C2.4.56），其余字母段随后续批次补充。
+本节按指令助记符的字母顺序逐条列出各指令。手册原文共 493 条（C2.4.1–C2.4.493，印刷 528–1440）；当前已译 A–V 段的 V1 子段（C2.4.1–C2.4.344），V 段其余部分与 W–Y 段随后续批次补充。
 
 ### 4.1. ADC (immediate)：立即数带进位加
 
@@ -6479,4 +6479,22206 @@ if ConditionPassed() then
     RFD[d] = CX_op3(ThisInstr(), RFD[d], RF[n], RF[m], 64);
   else
     RFD[d] = CX_op2(ThisInstr(), RF[n], RF[m], 64);
+```
+
+### 4.57. DBG：调试提示
+
+调试提示。DBG 向调试跟踪支持及相关调试系统提供提示；具体如何使用（如有）由调试架构文档规定。
+
+DBG 是一条兼容 NOP 的提示。
+
+#### 4.57.1. 编码 T1
+
+适用于 Armv8-M Main 扩展。
+
+![FigureC2-187](FigureC2-187.png)
+
+**T1 变体**
+
+```arm
+DBG{<c>}{<q>} #<option>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+// 'option' 的任何解码均由调试系统规定
+```
+
+#### 4.57.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<option>`**：4 位无符号立即数，取值 0–15，编码在 `option` 字段中。
+
+#### 4.57.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  Hint_Debug(option);
+```
+
+### 4.58. DMB：数据内存屏障
+
+数据内存屏障。DMB 充当内存屏障：它确保按程序顺序出现在 DMB 之前的全部显式内存访问，都在按程序顺序出现在 DMB 之后的任何显式内存访问之前被观察到。它不影响 PE 上执行的其他任何指令的顺序。
+
+#### 4.58.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-188](FigureC2-188.png)
+
+**T1 变体**
+
+```arm
+DMB{<c>}{<q>} {<option>}
+```
+
+**解码**
+
+```arm
+// 无需额外解码
+```
+
+#### 4.58.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<option>`**：指定对屏障操作的可选限制。取值为：
+  - `SY`：全系统屏障操作，编码为 `option = 0b1111`。可省略。
+  - 其他所有 `option` 编码均保留；相应指令按全系统屏障操作执行，但软件不得依赖这一点。
+
+#### 4.58.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  DataMemoryBarrier(option);
+```
+
+### 4.59. DSB：数据同步屏障
+
+数据同步屏障。DSB 是一种特殊的内存屏障：按程序顺序出现在本指令之后的任何指令，在本指令完成之前都不得执行。本指令仅在以下两个条件同时满足时才完成：
+
+- 本指令之前做出的任何显式内存访问均已完成。
+- 任何执行上下文更改操作的 SCS 访问的副作用均可见。
+
+#### 4.59.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-189](FigureC2-189.png)
+
+**T1 变体**
+
+```arm
+DSB{<c>}{<q>} {<option>}
+```
+
+**解码**
+
+```arm
+if option == '0000' then SEE "SSBB";
+if option == '0100' then SEE "PSSBB";
+```
+
+#### 4.59.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<option>`**：指定对屏障操作的可选限制。取值为：
+  - `option`：在指令编码的 bits[3:0] 中编码为 `0b1111`。
+  - `SY`：全系统屏障操作，编码为 `option = 0b1111`。可省略。
+
+  当 `option = 0b0000` 时，该指令编码对应 SSBB；当 `option = 0b0100` 时对应 PSSBB。其他所有 `option` 编码均保留，并按全系统屏障操作执行，但软件不得依赖这一点。
+
+#### 4.59.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  // SY 编码为 option == '1111'
+  DataSynchronizationBarrier('1111');
+```
+
+### 4.60. EOR (immediate)：立即数异或
+
+异或（立即数）。EOR (immediate) 对一个寄存器值和一个立即数执行按位异或，并把结果写入目标寄存器；它可以选择根据结果更新条件标志。
+
+#### 4.60.1. 编码 T1
+
+适用于 Armv8-M Main 扩展。
+
+![FigureC2-190](FigureC2-190.png)
+
+**EOR 变体**（当 `S == 0` 时适用）
+
+```arm
+EOR{<c>}{<q>} {<Rd>,} <Rn>, #<const>
+```
+
+**EORS 变体**（当 `S == 1 && Rd != 1111` 时适用）
+
+```arm
+EORS{<c>}{<q>} {<Rd>,} <Rn>, #<const>
+```
+
+**解码**
+
+```arm
+if Rd == '1111' && S == '1' then SEE "TEQ (immediate)";
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  setflags = (S == '1');
+(imm32, carry) = T32ExpandImm_C(i:imm3:imm8, APSR.C);
+if d == 13 || (d == 15 && S == '0') || n IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.60.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。若省略，则该寄存器与 `<Rn>` 相同。
+- **`<Rn>`**：通用源寄存器，编码在 `Rn` 字段中。
+- **`<const>`**：由编码在 `i:imm3:imm8` 字段中的 12 位立即数导出的立即数。取值范围见 C1.5 修改立即数常量。
+
+#### 4.60.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  result = R[n] EOR imm32;
+  R[d] = result;
+  if setflags then
+    APSR.N = result[31];
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    // APSR.V 不变
+```
+
+#### 4.60.4. 受限行为
+
+无额外限制。
+
+#### 4.60.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与以下各项无关：
+  - 其任一寄存器中提供的数据值。
+  - N、Z、C、V 标志的值。
+- 异步异常的接受时刻不因以下各项而变化：
+  - 本指令所使用的任一寄存器中提供的数据值。
+  - N、Z、C、V 标志的值。
+
+### 4.61. EOR (register)：寄存器异或
+
+异或（寄存器）。EOR (register) 对一个寄存器值和一个可选移位的寄存器值执行按位异或，并把结果写入目标寄存器；它可以选择根据结果更新条件标志。
+
+#### 4.61.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-191](FigureC2-191.png)
+
+**T1 变体**
+
+```arm
+EOR<c>{<q>} {<Rdn>,} <Rdn>, <Rm>
+  // IT 块内
+EORS{<q>} {<Rdn>,} <Rdn>, <Rm>
+  // IT 块外
+```
+
+**解码**
+
+```arm
+d = UInt(Rdn);  n = UInt(Rdn);  m = UInt(Rm);  setflags = !InITBlock();
+(shift_t, shift_n) = (SRType_LSL, 0);
+```
+
+#### 4.61.2. 编码 T2
+
+适用于 Armv8-M Main 扩展。
+
+![FigureC2-192](FigureC2-192.png)
+
+**EOR，带扩展的循环右移变体**（当 `S == 0 && imm3 == 000 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+EOR{<c>}{<q>} {<Rd>,} <Rn>, <Rm>, RRX
+```
+
+**EOR，按值移位或循环移位变体**（当 `S == 0 && !(imm3 == 000 && imm2 == 00 && sr_type == 11)` 时适用）
+
+```arm
+EOR<c>.W {<Rd>,} <Rn>, <Rm>
+  // IT 块内，且 <Rd>、<Rn>、<Rm> 可用 T1 表示
+EOR{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, <shift> #<amount>}
+```
+
+**EORS，带扩展的循环右移变体**（当 `S == 1 && imm3 == 000 && Rd != 1111 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+EORS{<c>}{<q>} {<Rd>,} <Rn>, <Rm>, RRX
+```
+
+**EORS，按值移位或循环移位变体**（当 `S == 1 && !(imm3 == 000 && imm2 == 00 && sr_type == 11) && Rd != 1111` 时适用）
+
+```arm
+EORS.W {<Rd>,} <Rn>, <Rm>
+  // IT 块外，且 <Rd>、<Rn>、<Rm> 可用 T1 表示
+EORS{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, <shift> #<amount>}
+```
+
+**解码**
+
+```arm
+if Rd == '1111' && S == '1' then SEE "TEQ (register)";
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  setflags = (S == '1');
+(shift_t, shift_n) = DecodeImmShift(sr_type, imm3:imm2);
+if d == 13 || (d == 15 && S == '0') || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.61.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rdn>`**：第一个通用源寄存器兼目标寄存器，编码在 `Rdn` 字段中。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。若省略，则该寄存器与 `<Rn>` 相同。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<shift>`**：施加于第二个源寄存器的移位类型，编码在 `sr_type` 字段中，可取以下值：
+  - `LSL`：当 `sr_type = 00` 时。
+  - `LSR`：当 `sr_type = 01` 时。
+  - `ASR`：当 `sr_type = 10` 时。
+  - `ROR`：当 `sr_type = 11` 时。
+- **`<amount>`**：移位量，取值 1–31（`<shift>` 为 `LSL` 或 `ROR` 时）或 1–32（`<shift>` 为 `LSR` 或 `ASR` 时），以 `<amount>` 对 32 取模后编码在 `imm3:imm2` 字段中。
+
+#### 4.61.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  (shifted, carry) = Shift_C(R[m], shift_t, shift_n, APSR.C);
+  result = R[n] EOR shifted;
+  R[d] = result;
+  if setflags then
+    APSR.N = result[31];
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    // APSR.V 不变
+```
+
+#### 4.61.5. 受限行为
+
+无额外限制。
+
+#### 4.61.6. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与以下各项无关：
+  - 其任一寄存器中提供的数据值。
+  - N、Z、C、V 标志的值。
+- 异步异常的接受时刻不因以下各项而变化：
+  - 本指令所使用的任一寄存器中提供的数据值。
+  - N、Z、C、V 标志的值。
+
+### 4.62. ESB：错误同步屏障
+
+错误同步屏障。用于同步任何异步 RAS 异常，即通知给 PE 的 RAS 错误不会静默越过本指令继续传播。本指令是一条兼容 NOP 的提示。
+
+#### 4.62.1. 编码 T1
+
+适用于 Armv8.1-M Main 扩展。
+
+![FigureC2-193](FigureC2-193.png)
+
+**T1：ESB 变体**
+
+```arm
+ESB<c><q>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+```
+
+#### 4.62.2. 汇编符号（所有编码）
+
+- **`<c, q>`**：见 C1.2.5 标准汇编语法字段。
+
+#### 4.62.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+
+  supported = boolean IMPLEMENTATION_DEFINED "Detection of Unrecoverable errors supported";
+  if HasArchVersion(Armv8p1) && supported then
+    exc = SynchronizeBusFault();
+    // 执行 ESB 时，任何由此产生的异常的返回地址都是这条 ESB 指令。
+    // 这是通过指示任何将被抢占的异常都应终止 ESB 的执行来实现的。
+    if exc.fault != NoFault then
+      if ExceptionPriority(exc.fault, exc.isSecure, TRUE) < ExecutionPriority() then
+        exc.termInst = TRUE;
+      HandleException(exc);
+  // 在以下任一情况下，ESB 充当数据同步屏障：
+  //
+  // - 存在挂起的 BusFault（它可能因上述 SynchronizeBusFault() 调用而被强制识别）。
+  // - 存在挂起的 HardFault（它可能由异步 BusFault 因 BusFault 异常被禁用而升级所致）。
+  //
+  // 该行为保证后续加载内存映射的 syndrome 寄存器和挂起位（BFSR、RFSR 和 SHCSR）时返回正确的值。
+  //
+  // 若因 ESB 指令而识别或升级的 BusFault 异常影响当前安全状态，
+  // 则 syndrome 寄存器中的值必须与当前安全状态一致。
+  // 在确定 ESB 指令是否同时充当隐式 DSB 时，只需检查与当前安全状态相关的对应异常位。
+  if SHCSR.BUSFAULTPENDED == '1' || SHCSR.HARDFAULTPENDED == '1' then
+    DataSynchronizationBarrier('1111');
+```
+
+### 4.63. FLDMDBX、FLDMIAX：浮点扩展寄存器多加载（前递减、后递增）
+
+FLDMX（前递减、后递增）。FLDMX（Decrement Before, Increment After）使用通用寄存器中的地址，从连续内存位置加载多个扩展寄存器。
+
+Arm 已弃用 FLDMDBX 与 FLDMIAX，仅在反汇编以及重新汇编反汇编代码时使用。
+
+本指令受栈限检查（stack limit checking）约束。
+
+#### 4.63.1. 编码 T1
+
+适用于 Armv8-M 浮点扩展、Armv8.1-M 浮点扩展或 Armv8.1-M MVE。
+
+![FigureC2-194](FigureC2-194.png)
+
+**前递减变体**（当 `P == 1 && U == 0 && W == 1` 时适用）
+
+```arm
+FLDMDBX{<c>}{<q>} <Rn>{!}, <dreglist>
+```
+
+**后递增变体**（当 `P == 0 && U == 1` 时适用）
+
+```arm
+FLDMIAX{<c>}{<q>} <Rn>{!}, <dreglist>
+```
+
+**解码**
+
+```arm
+if P == '0' && U == '0' && W == '0' then SEE "Related encodings";
+if P == '0' && U == '1' && W == '0' && Rn == '1111' then SEE "VSCCLRM";
+if P == '1' && W == '0' then SEE VLDR;
+CheckDecodeFaults(ExtType_MveOrFp);
+if P == U && W == '1' then UNDEFINED;
+// 其余组合为 PUW = 010（IA 不带 !）、011（IA 带 !）、101（DB 带 !）
+single_regs = FALSE;  add = (U == '1');  wback = (W == '1');  imm8 = imm7 : imm1;
+d = UInt(D:Vd);  n = UInt(Rn);  imm32 = ZeroExtend(imm8:'00', 32);
+regs = UInt(imm8) DIV 2;
+if n == 15 then UNPREDICTABLE;
+if regs == 0 || (d+regs) > 32 then UNPREDICTABLE;
+if !HasArchVersion(Armv8p1) then
+  if VFPSmallRegisterBank() && (d+regs) > 16 then UNPREDICTABLE;
+```
+
+#### 4.63.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `regs == 0`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令按相同寻址模式作为 FLDMX 执行，但不加载任何寄存器。
+
+若 `(d + regs) > 32`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 一个或多个浮点寄存器为 UNKNOWN。若指令指定写回，则基址寄存器变为 UNKNOWN。该行为不影响任何通用寄存器。
+
+#### 4.63.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`!`**：指定基址寄存器写回。存在时在 `W` 字段中编码为 1，否则为 0。
+- **`<dreglist>`**：要传输的连续编号的 64 位浮点寄存器列表。列表中的第一个寄存器编码在 `D:Vd` 中，`imm8` 设为其寄存器数量的两倍加一。列表必须至少包含一个寄存器。
+
+#### 4.63.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  ExecuteFPCheck();
+  address = if add then R[n] else R[n]-imm32;
+  regval = if add then R[n]+imm32 else R[n]-imm32;
+
+  // 判断是否必须检查栈指针限值
+  if n == 13 && wback then
+    // 若因违反栈限而未执行内存操作，且 SP 自身的写回不引发栈限违例，
+    // 则是否引发 SPLIM 异常由 IMPLEMENTATION_DEFINED 规定。
+    // Arm 建议：任何因栈限违例而丢弃内存访问、且 SP 自身的写回不引发
+    // 栈限违例的指令，都应产生 SPLIM 异常。
+    if boolean IMPLEMENTATION_DEFINED "SPLIM exception on invalid memory access" then
+      if ViolatesSPLim(LookUpSP(), address) then
+        if HaveMainExt() then
+          UFSR.STKOF = '1';
+          // 若未实现 Main 扩展，该故障总是升级为 HardFault
+        excInfo = CreateException(UsageFault);
+        HandleException(excInfo);
+        applylimit = TRUE;
+    else
+      applylimit = FALSE;
+
+  // 仅在未违反限值时才执行内存操作
+  if !(applylimit && ViolatesSPLim(LookUpSP(), regval)) then
+    for r = 0 to regs-1
+      if single_regs then
+        if (d+r) < 32 || !VFPSmallRegisterBank() then
+          S[d+r] = MemA[address, 4];
+          address = address+4;
+      else
+        if (d+r) < 16 || !VFPSmallRegisterBank() then
+          word1 = MemA[address, 4];  word2 = MemA[address+4, 4];
+          // 按当前端序把字对齐的字组合成正确顺序。
+          D[d+r] = if BigEndian(address, 8) then word1:word2 else word2:word1;
+        elsif boolean UNKNOWN then
+          - = MemA[address, 4];  - = MemA[address+4, 4];
+        address = address+8;
+
+  // 若更新栈指针，违反限值将引发故障
+  if wback then RSPCheck[n] = regval;
+```
+
+### 4.64. FSTMDBX、FSTMIAX：浮点扩展寄存器多存储（前递减、后递增）
+
+FSTMX（前递减、后递增）。FSTMX（Decrement Before, Increment After）使用通用寄存器中的地址，把多个扩展寄存器存储到连续内存位置。
+
+Arm 已弃用 FSTMDBX 与 FSTMIAX，仅在反汇编以及重新汇编反汇编代码时使用。
+
+本指令受栈限检查（stack limit checking）约束。
+
+#### 4.64.1. 编码 T1
+
+适用于 Armv8-M 浮点扩展、Armv8.1-M 浮点扩展或 Armv8.1-M MVE。
+
+![FigureC2-195](FigureC2-195.png)
+
+**前递减变体**（当 `P == 1 && U == 0 && W == 1` 时适用）
+
+```arm
+FSTMDBX{<c>}{<q>} <Rn>{!}, <dreglist>
+```
+
+**后递增变体**（当 `P == 0 && U == 1` 时适用）
+
+```arm
+FSTMIAX{<c>}{<q>} <Rn>{!}, <dreglist>
+```
+
+**解码**
+
+```arm
+if P == '0' && U == '0' && W == '0' then SEE "Related encodings";
+if P == '1' && W == '0' then SEE VSTR;
+CheckDecodeFaults(ExtType_MveOrFp);
+if P == U && W == '1' then UNDEFINED;
+// 其余组合为 PUW = 010（IA 不带 !）、011（IA 带 !）、101（DB 带 !）
+single_regs = FALSE;  add = (U == '1');  wback = (W == '1');  imm8 = imm7 : imm1;
+d = UInt(D:Vd);  n = UInt(Rn);  imm32 = ZeroExtend(imm8:'00', 32);
+regs = UInt(imm8) DIV 2;
+if n == 15 then UNPREDICTABLE;
+if regs == 0 || (d+regs) > 32 then UNPREDICTABLE;
+if !HasArchVersion(Armv8p1) then
+  if VFPSmallRegisterBank() && (d+regs) > 16 then UNPREDICTABLE;
+```
+
+#### 4.64.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `regs == 0`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令按相同寻址模式作为 FSTMX 执行，但不存储任何寄存器。
+
+若 `(d + regs) > 32`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令所指定的内存位置以及（若寄存器列表未越界时）该指令所指定的寄存器数量变为 UNKNOWN。若指令指定写回，则该寄存器变为 UNKNOWN。该行为不影响任何其他内存位置。
+
+#### 4.64.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`!`**：指定基址寄存器写回。存在时在 `W` 字段中编码为 1，否则为 0。
+- **`<dreglist>`**：要传输的连续编号的 64 位浮点寄存器列表。列表中的第一个寄存器编码在 `D:Vd` 中，`imm8` 设为其寄存器数量的两倍加一。列表必须至少包含一个寄存器。
+
+#### 4.64.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  ExecuteFPCheck();
+  address = if add then R[n] else R[n]-imm32;
+  regval = if add then R[n]+imm32 else R[n]-imm32;
+
+  // 判断是否应检查栈指针限值
+  if n == 13 && wback then
+    violatesLimit = ViolatesSPLim(LookUpSP(), regval);
+  else
+    violatesLimit = FALSE;
+
+  // 仅在未违反限值时才执行内存操作
+  if !violatesLimit then
+    for r = 0 to regs-1
+      if single_regs then
+        if (d+r) < 32 || !VFPSmallRegisterBank() then
+          MemA[address, 4] = S[d+r];
+          address = address+4;
+      else
+        // 按当前端序存储为两个字对齐的字。
+        if (d+r) < 16 || !VFPSmallRegisterBank() then
+          bigEndian = BigEndian(address, 8);
+          MemA[address, 4] = if bigEndian then D[d+r][63:32] else D[d+r][31:0];
+          MemA[address+4, 4] = if bigEndian then D[d+r][31:0] else D[d+r][63:32];
+        elsif boolean UNKNOWN then
+          MemA[address, 4] = bits(32) UNKNOWN;
+          MemA[address+4, 4] = bits(32) UNKNOWN;
+        address = address+8;
+
+  // 若更新栈指针，违反限值将引发故障
+  if wback then RSPCheck[n] = regval;
+```
+
+### 4.65. ISB：指令同步屏障
+
+**指令同步屏障**（Instruction Synchronization Barrier）。ISB 冲刷 PE 中的流水线，是一个上下文同步事件（context synchronization event）。
+
+#### 4.65.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-196](FigureC2-196.png)
+
+**T1 变体**
+
+```arm
+ISB{<c>}{<q>} {<option>}
+```
+
+**解码**
+
+```arm
+// 无需额外解码
+```
+
+#### 4.65.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<option>`**：指定屏障操作的可选限制。取值为：
+  - `SY`：完整系统屏障操作，编码为 `option = 0b1111`。可以省略。
+  - `option` 的所有其他编码均为保留。相应指令按完整系统屏障操作执行，但软件不得依赖该行为。
+
+#### 4.65.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  InstructionSynchronizationBarrier(option);
+```
+
+### 4.66. IT：If-Then
+
+**If-Then**。IT 使后续最多四条指令（即 IT 块）成为条件执行。IT 块中各指令的条件可以相同，其中一些也可以是另一些的反（inverse）。
+
+IT 不影响条件码标志。不允许分支到 IT 块中的任何指令，由异常返回执行的分支除外。
+
+IT 块中的 16 位指令（`CMP (register)`、`CMN (register)` 与 `TST (register)` 除外）不设置条件码标志。可以指定 `AL` 条件，从而在不进行条件执行的前提下获得这种改变后的行为。
+
+#### 4.66.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-197](FigureC2-197.png)
+
+**T1 变体**
+
+```arm
+IT{<x>{<y>{<z>}}}{<q>} <cond>
+```
+
+**解码**
+
+```arm
+if mask == '0000' then SEE "Related encodings";
+if !HaveMainExt() then UNDEFINED;
+if firstcond == '1111' || (firstcond == '1110' && BitCount(mask) != 1) then UNPREDICTABLE;
+if InITBlock() then UNPREDICTABLE;
+```
+
+#### 4.66.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `firstcond == '1111'`，或 `firstcond == '1110'` 且 `BitCount(mask) != 1`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 将 `'1111'` 条件视为与 `'1110'` 条件相同（即恒成立），并按处理任何其他 `cond_base` 值的方式推进 ITSTATE 状态机。
+
+#### 4.66.3. 汇编符号（所有编码）
+
+- **`<x>`**：IT 块中第二条指令的条件。若省略，`mask` 字段置为 `0b1000`。若存在，则编码在 `mask[3]` 字段中：
+  - `E`：`NOT firstcond[0]`。
+  - `T`：`firstcond[0]`。
+- **`<y>`**：IT 块中第三条指令的条件。若省略且 `<x>` 存在，则 `mask[2:0]` 字段置为 `0b100`。若 `<y>` 存在，则编码在 `mask[2]` 字段中：
+  - `E`：`NOT firstcond[0]`。
+  - `T`：`firstcond[0]`。
+- **`<z>`**：IT 块中第四条指令的条件。若省略且 `<y>` 存在，则 `mask[1:0]` 字段置为 `0b10`。若 `<z>` 存在，则 `mask[0]` 字段置为 1，并编码在 `mask[1]` 字段中：
+  - `E`：`NOT firstcond[0]`。
+  - `T`：`firstcond[0]`。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<cond>`**：IT 块中第一条指令的条件，编码在 `firstcond` 字段中。可用条件范围及其编码见 C1.3 条件执行。
+
+#### 4.66.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  ITSTATE[7:0] = firstcond:mask;
+```
+
+### 4.67. LCTP：带尾谓词的循环清除
+
+**带尾谓词的循环清除**（Loop Clear with Tail Predication）。LCTP 通过使 `LO_BRANCH_INFO` 无效来退出循环模式，并清除当前应用的任何尾谓词（tail predication）。
+
+#### 4.67.1. 编码 T1
+
+适用于 Armv8.1-M MVE。
+
+![FigureC2-198](FigureC2-198.png)
+
+**T1 变体**
+
+```arm
+LCTP<c><q>
+```
+
+**解码**
+
+```arm
+if !HaveLOBExt() then UNDEFINED;
+if !HaveMve() then UNDEFINED;
+HandleException(CheckCPEnabled(10));
+```
+
+#### 4.67.2. 汇编符号（所有编码）
+
+- **`<c, q>`**：见 C1.2.5 标准汇编语法字段。
+
+#### 4.67.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  ExecuteFPCheck();
+  FPSCR.LTPSIZE = 4[2:0];  // 禁用循环谓词
+  if LO_BRANCH_INFO.BF == '0' then
+    LO_BRANCH_INFO.VALID = '0';
+```
+
+### 4.68. LDA：加载-获取字
+
+**加载-获取字**（Load-Acquire Word）。LDA 从内存加载一个字并写入寄存器。该指令还具有内存排序（memory ordering）语义。
+
+#### 4.68.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-199](FigureC2-199.png)
+
+**T1 变体**
+
+```arm
+LDA{<c>}{<q>} <Rt>, [<Rn>]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);
+if t IN {13,15} || n == 15 then UNPREDICTABLE;
+```
+
+#### 4.68.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+
+#### 4.68.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n];
+  R[t] = MemO[address, 4];
+```
+
+#### 4.68.4. 受限行为
+
+无额外限制。
+
+#### 4.68.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.69. LDAB：加载-获取字节
+
+**加载-获取字节**（Load-Acquire Byte）。LDAB 从内存加载一个字节，将其零扩展为 32 位字并写入寄存器。该指令还具有内存排序语义。
+
+#### 4.69.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-200](FigureC2-200.png)
+
+**T1 变体**
+
+```arm
+LDAB{<c>}{<q>} <Rt>, [<Rn>]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);
+if t IN {13,15} || n == 15 then UNPREDICTABLE;
+```
+
+#### 4.69.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+
+#### 4.69.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n];
+  R[t] = ZeroExtend(MemO[address, 1], 32);
+```
+
+#### 4.69.4. 受限行为
+
+无额外限制。
+
+#### 4.69.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.70. LDAEX：加载-获取独占字
+
+**加载-获取独占字**（Load-Acquire Exclusive Word）。LDAEX 从内存加载一个字，写入寄存器，并：
+
+- 若该地址具有 Shareable 内存属性，则在全局监视器（global monitor）中为执行 PE 将该物理地址标记为独占访问。
+- 使执行 PE 在本地监视器（local monitor）中指示存在活动的独占访问。
+
+该指令还具有内存排序语义。
+
+#### 4.70.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-201](FigureC2-201.png)
+
+**T1 变体**
+
+```arm
+LDAEX{<c>}{<q>} <Rt>, [<Rn>]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);
+if t IN {13,15} || n == 15 then UNPREDICTABLE;
+```
+
+#### 4.70.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+
+#### 4.70.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n];
+  SetExclusiveMonitors(address, 4);
+  R[t] = MemO[address, 4];
+```
+
+#### 4.70.4. 受限行为
+
+无额外限制。
+
+#### 4.70.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.71. LDAEXB：加载-获取独占字节
+
+**加载-获取独占字节**（Load-Acquire Exclusive Byte）。LDAEXB 从内存加载一个字节，将其零扩展为 32 位字，写入寄存器，并：
+
+- 若该地址具有 Shareable 内存属性，则在全局监视器中为执行 PE 将该物理地址标记为独占访问。
+- 使执行 PE 在本地监视器中指示存在活动的独占访问。
+
+该指令还具有内存排序语义。
+
+#### 4.71.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-202](FigureC2-202.png)
+
+**T1 变体**
+
+```arm
+LDAEXB{<c>}{<q>} <Rt>, [<Rn>]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);
+if t IN {13,15} || n == 15 then UNPREDICTABLE;
+```
+
+#### 4.71.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+
+#### 4.71.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n];
+  SetExclusiveMonitors(address, 1);
+  R[t] = ZeroExtend(MemO[address, 1], 32);
+```
+
+#### 4.71.4. 受限行为
+
+无额外限制。
+
+#### 4.71.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.72. LDAEXH：加载-获取独占半字
+
+**加载-获取独占半字**（Load-Acquire Exclusive Halfword）。LDAEXH 从内存加载一个半字，将其零扩展为 32 位字，写入寄存器，并：
+
+- 若该地址具有 Shareable 内存属性，则在全局监视器中为执行 PE 将该物理地址标记为独占访问。
+- 使执行 PE 在本地监视器中指示存在活动的独占访问。
+
+该指令还具有内存排序语义。
+
+#### 4.72.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-203](FigureC2-203.png)
+
+**T1 变体**
+
+```arm
+LDAEXH{<c>}{<q>} <Rt>, [<Rn>]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);
+if t IN {13,15} || n == 15 then UNPREDICTABLE;
+```
+
+#### 4.72.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+
+#### 4.72.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n];
+  SetExclusiveMonitors(address, 2);
+  R[t] = ZeroExtend(MemO[address, 2], 32);
+```
+
+#### 4.72.4. 受限行为
+
+无额外限制。
+
+#### 4.72.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.73. LDAH：加载-获取半字
+
+**加载-获取半字**（Load-Acquire Halfword）。LDAH 从内存加载一个半字，将其零扩展为 32 位字并写入寄存器。该指令还具有内存排序语义。
+
+#### 4.73.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-204](FigureC2-204.png)
+
+**T1 变体**
+
+```arm
+LDAH{<c>}{<q>} <Rt>, [<Rn>]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);
+if t IN {13,15} || n == 15 then UNPREDICTABLE;
+```
+
+#### 4.73.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+
+#### 4.73.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n];
+  R[t] = ZeroExtend(MemO[address, 2], 32);
+```
+
+#### 4.73.4. 受限行为
+
+无额外限制。
+
+#### 4.73.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.74. LDC、LDC2 (immediate)：协处理器加载（立即数）
+
+**协处理器加载（立即数）**（Load Coprocessor (immediate)）。LDC 从一串连续的内存地址把内存数据加载到协处理器。若没有协处理器能执行该指令，则产生 UsageFault 异常。
+
+这是一条通用协处理器指令。部分字段没有架构定义的功能，可由协处理器指令集设计者自由使用。这些字段是 `D` 位、`CRd` 字段，以及（仅在无索引寻址模式下）`imm8` 字段。
+
+Arm 保留协处理器 CP8 至 CP15，本手册定义了 `coproc` 处于该范围时的有效指令。
+
+本指令受栈限检查（stack limit checking）约束。
+
+#### 4.74.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-205](FigureC2-205.png)
+
+**偏移变体**（当 `P == 1 && W == 0` 时适用）
+
+```arm
+LDC{L}{<c>}{<q>} <coproc>, <CRd>, [<Rn>{, #{+/-}<imm>}]
+```
+
+**后索引变体**（当 `P == 0 && W == 1` 时适用）
+
+```arm
+LDC{L}{<c>}{<q>} <coproc>, <CRd>, [<Rn>], #{+/-}<imm>
+```
+
+**前索引变体**（当 `P == 1 && W == 1` 时适用）
+
+```arm
+LDC{L}{<c>}{<q>} <coproc>, <CRd>, [<Rn>, #{+/-}<imm>]!
+```
+
+**无索引变体**（当 `P == 0 && U == 1 && W == 0` 时适用）
+
+```arm
+LDC{L}{<c>}{<q>} <coproc>, <CRd>, [<Rn>], <option>
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "LDC (literal)";
+if coproc IN {'100x', '101x', '111x'} then SEE "Floating-point and MVE";
+if CoprocType(UInt(coproc)) == CP_CDEv1 then SEE "CDE instructions";
+if P == '0' && U == '0' && D == '1' && W == '0' then SEE "MRRC, MRRC2";
+cp = UInt(coproc);
+CheckCPDecodeFaults(cp);
+if P == '0' && U == '0' && D == '0' && W == '0' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+n = UInt(Rn);
+imm32 = ZeroExtend(imm8:'00', 32);
+index = (P == '1');  add = (U == '1');  wback = (W == '1');
+```
+
+#### 4.74.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-206](FigureC2-206.png)
+
+**偏移变体**（当 `P == 1 && W == 0` 时适用）
+
+```arm
+LDC2{L}{<c>}{<q>} <coproc>, <CRd>, [<Rn>{, #{+/-}<imm>}]
+```
+
+**后索引变体**（当 `P == 0 && W == 1` 时适用）
+
+```arm
+LDC2{L}{<c>}{<q>} <coproc>, <CRd>, [<Rn>], #{+/-}<imm>
+```
+
+**前索引变体**（当 `P == 1 && W == 1` 时适用）
+
+```arm
+LDC2{L}{<c>}{<q>} <coproc>, <CRd>, [<Rn>, #{+/-}<imm>]!
+```
+
+**无索引变体**（当 `P == 0 && U == 1 && W == 0` 时适用）
+
+```arm
+LDC2{L}{<c>}{<q>} <coproc>, <CRd>, [<Rn>], <option>
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "LDC (literal)";
+if coproc IN {'100x', '101x', '111x'} then SEE "Floating-point and MVE";
+if CoprocType(UInt(coproc)) == CP_CDEv1 then SEE "CDE instructions";
+if P == '0' && U == '0' && D == '1' && W == '0' then SEE "MRRC, MRRC2";
+cp = UInt(coproc);
+CheckCPDecodeFaults(cp);
+if P == '0' && U == '0' && D == '0' && W == '0' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+n = UInt(Rn);
+imm32 = ZeroExtend(imm8:'00', 32);
+index = (P == '1');  add = (U == '1');  wback = (W == '1');
+```
+
+#### 4.74.3. 汇编符号（所有编码）
+
+- **`L`**：若指定，选择 `D == 1` 形式的编码。若省略，选择 `D == 0` 形式。
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<coproc>`**：协处理器名称，编码在 `coproc` 字段中。通用协处理器名称为 `p0` 到 `p15`。
+- **`<CRd>`**：要传输的协处理器寄存器，编码在 `CRd` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。若使用 PC，见 C2.4.75 LDC、LDC2 (literal)。
+- **`<option>`**：协处理器选项，取值范围 0 到 255，用 `{}` 括起，编码在 `imm8` 字段中。
+- **`+/-`**：指定偏移是加到基址寄存器还是从基址寄存器中减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - `-`：当 `U = 0` 时。
+  - `+`：当 `U = 1` 时。
+- **`<imm>`**：用于形成地址的立即数偏移，为 0–1020 范围内 4 的倍数，默认为 0，以 `<imm>/4` 编码在 `imm8` 字段中。
+
+#### 4.74.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+
+  thisInstr = ThisInstr();
+  if !Coproc_Accepted(cp, thisInstr) then
+    GenerateCoprocessorException();
+  else
+    offset_addr = if add then (R[n] + imm32) else (R[n] - imm32);
+    address = if index then offset_addr else R[n];
+
+    // 判断是否应执行栈指针限值检查
+    if wback && n == 13 then
+      violatesLimit = ViolatesSPLim(LookUpSP(), offset_addr);
+    else
+      violatesLimit = FALSE;
+
+    // 仅在未违反限值时才执行内存操作
+    if !violatesLimit then
+      repeat
+        Coproc_SendLoadedWord(MemA[address, 4], cp, thisInstr);
+        address = address + 4;
+      until Coproc_DoneLoading(cp, thisInstr);
+
+  // 若更新栈指针，违反限值将引发故障
+  if wback then RSPCheck[n] = offset_addr;
+```
+
+#### 4.74.5. 受限行为
+
+无额外限制。
+
+#### 4.74.6. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.75. LDC、LDC2 (literal)：协处理器加载（字面量）
+
+**协处理器加载（字面量）**（Load Coprocessor (literal)）。LDC 从一串连续的内存地址把内存数据加载到协处理器。若没有协处理器能执行该指令，则产生 UsageFault 异常。
+
+这是一条通用协处理器指令。`D` 位与 `CRd` 字段没有架构定义的功能，可由协处理器指令集设计者自由使用。
+
+Arm 保留协处理器 CP8 至 CP15，本手册定义了 `coproc` 处于该范围时的有效指令。
+
+#### 4.75.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-207](FigureC2-207.png)
+
+**T1 变体**
+
+```arm
+LDC{L}{<c>}{<q>} <coproc>, <CRd>, <label>
+LDC{L}{<c>}{<q>} <coproc>, <CRd>, [PC, #{+/-}<imm>]
+```
+
+**解码**
+
+```arm
+if coproc IN {'100x', '101x', '111x'} then SEE "Floating-point and MVE";
+if CoprocType(UInt(coproc)) == CP_CDEv1 then SEE "CDE instructions";
+if P == '0' && U == '0' && D == '1' && W == '0' then SEE "MRRC, MRRC2";
+cp = UInt(coproc);
+CheckCPDecodeFaults(cp);
+if P == '0' && U == '0' && D == '0' && W == '0' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+index = (P == '1');  // 在 T32 指令集中恒为 TRUE
+add = (U == '1');
+imm32 = ZeroExtend(imm8:'00', 32);
+if W == '1' || P == '0' then UNPREDICTABLE;
+```
+
+#### 4.75.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-208](FigureC2-208.png)
+
+**T2 变体**
+
+```arm
+LDC2{L}{<c>}{<q>} <coproc>, <CRd>, <label>
+LDC2{L}{<c>}{<q>} <coproc>, <CRd>, [PC, #{+/-}<imm>]
+```
+
+**解码**
+
+```arm
+if coproc IN {'100x', '101x', '111x'} then SEE "Floating-point and MVE";
+if CoprocType(UInt(coproc)) == CP_CDEv1 then SEE "CDE instructions";
+if P == '0' && U == '0' && D == '1' && W == '0' then SEE "MRRC, MRRC2";
+cp = UInt(coproc);
+CheckCPDecodeFaults(cp);
+if P == '0' && U == '0' && D == '0' && W == '0' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+index = (P == '1');  // 在 T32 指令集中恒为 TRUE
+add = (U == '1');
+imm32 = ZeroExtend(imm8:'00', 32);
+if W == '1' || P == '0' then UNPREDICTABLE;
+```
+
+#### 4.75.3. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+下列行为对 T1 与 T2 两种编码均适用。若 `W == '1'` 或 `P == '0'`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令执行时不写回基址。
+- 该指令按带 PC 写回的 LDC 执行。
+
+#### 4.75.4. 汇编符号（所有编码）
+
+- **`L`**：若指定，选择 `D == 1` 形式的编码。若省略，选择 `D == 0` 形式。
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<coproc>`**：协处理器名称，编码在 `coproc` 字段中。通用协处理器名称为 `p0` 到 `p15`。
+- **`<CRd>`**：要传输的协处理器寄存器，编码在 `CRd` 字段中。
+- **`<label>`**：要加载到 `<Rt>` 中的字面量数据项的标签。汇编器根据该指令的 `Align(PC, 4)` 值到该标签的距离算出所需的偏移值。允许的偏移值为 -1020 到 1020 范围内 4 的倍数。若偏移为零或正，则 `imm32` 等于该偏移且 `add == TRUE`（编码为 `U == 1`）。若偏移为负，则 `imm32` 等于该偏移的负值且 `add == FALSE`（编码为 `U == 0`）。
+- **`+/-`**：指定偏移是加到基址寄存器还是从基址寄存器中减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - `-`：当 `U = 0` 时。
+  - `+`：当 `U = 1` 时。
+- **`<imm>`**：用于形成地址的立即数偏移，为 0–1020 范围内 4 的倍数，默认为 0，以 `<imm>/4` 编码在 `imm8` 字段中。
+
+#### 4.75.5. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+
+  thisInstr = ThisInstr();
+  if !Coproc_Accepted(cp, thisInstr) then
+    GenerateCoprocessorException();
+  else
+    offset_addr = if add then (Align(PC,4) + imm32) else (Align(PC,4) - imm32);
+    address = if index then offset_addr else Align(PC,4);
+    repeat
+      Coproc_SendLoadedWord(MemA[address, 4], cp, thisInstr);
+      address = address + 4;
+    until Coproc_DoneLoading(cp, thisInstr);
+```
+
+#### 4.75.6. 受限行为
+
+无额外限制。
+
+#### 4.75.7. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.76. LDM、LDMIA、LDMFD：多加载（后递增、满递减）
+
+**多加载（后递增、满递减）**（Load Multiple (Increment After, Full Descending)）。LDM 使用基址寄存器中的地址，从连续的内存位置加载多个寄存器。这些连续的内存位置从该地址开始，最后一个位置之上的地址可以选择写回基址寄存器。
+
+被加载的寄存器可以包含 PC。若包含 PC，则为 PC 加载的字被视作分支地址、函数返回值或异常返回值。PC 中地址的 bit[0] 遵循 Arm 架构在 A32 与 T32 指令集之间切换的互操作（interworking）规则。然而 Armv8-M 仅支持 T32 指令集，因此 bit[0] 必须为 1。若目标地址的 bit[0] 为 0，且目标地址不是 `FNC_RETURN` 或 `EXC_RETURN`，则 PE 在目标地址处的指令上产生 INVSTATE UsageFault 异常。
+
+该指令被别名 `POP (multiple registers)` 使用。
+
+当下列条件全部成立时，该指令是一条 BTI 设置（BTI setting）指令：
+
+- 实现了 PACBTI 扩展。
+- 对目标安全状态与特权状态启用了 BTI。
+- 该操作不是 `FNC_RETURN` 或 `EXC_RETURN`。
+- 使用了 PC。
+- 基址寄存器为：
+  - 不是 SP。
+  - 是 SP 且不发生写回。
+
+该指令可被中断续行（interrupt-continuable）。
+
+本指令受栈限检查约束。
+
+#### 4.76.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-209](FigureC2-209.png)
+
+**T1 变体**
+
+```arm
+LDM{IA}{<c>}{<q>} <Rn>{!}, <registers>
+  // 首选语法
+LDMFD{<c>}{<q>} <Rn>{!}, <registers>
+  // 备用语法，满递减栈
+```
+
+**解码**
+
+```arm
+n = UInt(Rn);
+registers = '00000000':register_list;
+wback = (registers[n] == '0');
+if BitCount(registers) < 1 then UNPREDICTABLE;
+```
+
+#### 4.76.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-210](FigureC2-210.png)
+
+**T2 变体**
+
+```arm
+LDM{IA}{<c>}.W <Rn>{!}, <registers>
+  // 首选语法
+  // 若 <Rn>、'!' 与 <registers> 可用 T1 表示
+LDMFD{<c>}.W <Rn>{!}, <registers>
+  // 备用语法
+  // 满递减栈；若 <Rn>、'!' 与 <registers> 可用 T1 表示
+LDM{IA}{<c>}{<q>} <Rn>{!}, <registers>
+  // 首选语法
+LDMFD{<c>}{<q>} <Rn>{!}, <registers>
+  // 备用语法，满递减栈
+```
+
+**解码**
+
+```arm
+if Rn == '1111' && HasArchVersion(Armv8p1) then SEE "CLRM";
+if !HaveMainExt() then UNDEFINED;
+n = UInt(Rn);
+registers = P:M:'0':register_list;
+wback = (W == '1');
+if n == 15 || BitCount(registers) < 2 || (P == '1' && M == '1') then UNPREDICTABLE;
+if registers[15] == '1' && InITBlock() && !LastInITBlock() then UNPREDICTABLE;
+if wback && registers[n] == '1' then UNPREDICTABLE;
+```
+
+#### 4.76.3. 编码 T3
+
+适用于 Armv8-M。
+
+![FigureC2-211](FigureC2-211.png)
+
+**T3 变体**
+
+```arm
+LDM{<c>}{<q>} SP!, <registers>
+```
+
+**解码**
+
+```arm
+n = 13;  wback = TRUE;
+registers = P:'0000000':register_list;
+if BitCount(registers) < 1 then UNPREDICTABLE;
+if registers[15] == '1' && InITBlock() && !LastInITBlock() then UNPREDICTABLE;
+```
+
+#### 4.76.4. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `BitCount(registers) < 1`（对 T1、T2 与 T3 编码均适用），则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令按相同寻址模式作为 LDM 执行，但目标寄存器集合未指定。这些寄存器可能包含 R15。若指令指定写回，则写回时对基址的修改可能与加载的寄存器数量不同。
+
+若 `wback && registers<n> == '1'`（T2 编码），则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令使用指定寻址模式执行全部加载，且被写回的寄存器内容为 UNKNOWN。此外，若在此类指令执行期间发生异常，基址可能被破坏，以致该指令无法重复执行。
+
+若 `BitCount(registers) == 1`（T2 编码），则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令使用指定寻址模式加载单个寄存器。
+- 该指令按相同寻址模式作为 LDM 执行，但目标寄存器集合未指定。这些寄存器可能包含 R15。
+
+若 `P == '1' && M == '1'`（T2 编码），则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令加载寄存器列表，以及 R14 或 R15、同时包含 R14 与 R15，或这两者都不包含。
+
+#### 4.76.5. 汇编符号（所有编码）
+
+- **`IA`**：后递增（Increment After）形式的可选后缀。
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`!`**：
+  - 对 T1 编码：按所加载数据大小调整后的地址写回基址寄存器。若 `<Rn>` 包含在 `<registers>` 中则省略，否则必须存在。
+  - 对 T2 编码：按所加载数据大小调整后的地址写回基址寄存器。若指定，则编码在 `W` 字段中为 1，否则该字段默认为 0。
+- **`<registers>`**：
+  - 对 T1 编码：要加载的一个或多个寄存器列表，用逗号分隔并用 `{` 与 `}` 括起。列表中的寄存器必须在 R0–R7 范围内，编码在 `register_list` 字段中。
+  - 对 T2 编码：要加载的一个或多个寄存器列表，用逗号分隔并用 `{` 与 `}` 括起。列表中的寄存器必须在 R0–R12 范围内，编码在 `register_list` 字段中，并可选包含 LR 或 PC 之一。若列表中有 LR，则 `M` 字段置为 1，否则默认为 0。若列表中有 PC，则 `P` 字段置为 1，否则默认为 0。若列表中有 PC：
+    - 列表中不得有 LR。
+    - 该指令必须位于任何 IT 块之外，或为 IT 块中的最后一条指令。
+  - 对 T3 编码：要加载的一个或多个寄存器列表，用逗号分隔并用 `{` 与 `}` 括起。列表中的寄存器必须在 R0–R7 范围内，编码在 `register_list` 字段中，并可可选包含 PC。若列表中有 PC，则 `P` 字段置为 1，否则该字段默认为 0。若列表中有 PC，该指令必须位于任何 IT 块之外，或为 IT 块中的最后一条指令。
+
+#### 4.76.6. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n];
+
+  if n == 13 && wback then
+    // 若因栈限违例而未执行内存操作，且 SP 自身的写回不引发栈限违例，
+    // 则是否引发 SPLIM 异常由 IMPLEMENTATION_DEFINED 规定。
+    // Arm 建议：任何因栈限违例而丢弃内存访问、且 SP 自身的写回不引发
+    // 栈限违例的指令，都应产生 SPLIM 异常。
+    if boolean IMPLEMENTATION_DEFINED "SPLIM exception on invalid memory access" then
+      if ViolatesSPLim(LookUpSP(), address) then
+        if HaveMainExt() then
+          UFSR.STKOF = '1';
+          // 若未实现 Main 扩展，该故障总是升级为 HardFault
+        excInfo = CreateException(UsageFault);
+        HandleException(excInfo);
+        applylimit = TRUE;
+    else
+      applylimit = FALSE;
+
+  for i = 0 to 14
+    // 若 R[n] 为 SP，则仅在未违反限值时才执行内存操作
+    if registers[i] == '1' && !(applylimit && ViolatesSPLim(LookUpSP(), address)) then
+      if i != n then
+        R[i] = MemA[address, 4];
+      else
+        newBaseVal = MemA[address, 4];
+      address = address + 4;
+
+  setPC = registers[15] == '1' && !(applylimit && ViolatesSPLim(LookUpSP(), address));
+  if setPC then
+    newPCVal = MemA[address, 4];
+
+  // 若寄存器列表包含保存基址的寄存器，则必须在完成所有内存读取之后再更新它。
+  // 这样可以避免在某次内存读取引发故障时基址被覆盖。
+  if registers[n] == '1' then
+    wback = TRUE;
+  else
+    newBaseVal = R[n] + 4*BitCount(registers);
+
+  // 若寄存器列表包含 PC，则在此更新 PC，这可能引发故障；
+  // 同样，若 R[n] 为 SP，则写回可能因 SP 限值违例而引发故障
+  if setPC then
+    // 若启用了 BTI，该分支设置 EPSR.B 标志，以确保目标指令为 BTI 清除（BTI clearing）。
+    setBti = BTIEnabled() && (n != 13 || (n == 13 && !wback));
+    LoadWritePC(newPCVal, n, newBaseVal, wback, FALSE, setBti);
+  elsif wback then
+    RSPCheck[n] = newBaseVal;
+```
+
+#### 4.76.7. 受限行为
+
+无额外限制。
+
+#### 4.76.8. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于加载到 R15 的值，但对加载到任何其他指定寄存器的所有值均适用，即使正在使用 R15。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.77. LDMDB、LDMEA：多加载（前递减、空递增）
+
+**多加载前递减（空递增）**（Load Multiple Decrement Before (Empty Ascending)）。LDMDB（LDMEA）使用基址寄存器中的地址，从顺序的内存位置加载多个寄存器。这些顺序的内存位置在该地址之下结束，第一个位置的地址可以选择写回基址寄存器。
+
+被加载的寄存器可以包含 PC。若包含 PC，则为 PC 加载的字被视作分支地址或异常返回值。bit[0] 遵循 Arm 架构在 A32 与 T32 指令集之间切换的互操作规则。然而 Armv8-M 仅支持 T32 指令集，因此 bit[0] 必须为 1。若 bit[0] 为 0，则 PE 在目标地址处的指令上产生 INVSTATE UsageFault 异常。
+
+当下列条件全部成立时，该指令是一条 BTI 设置指令：
+
+- 实现了 PACBTI 扩展。
+- 对目标安全状态与特权状态启用了 BTI。
+- 该操作不是 `FNC_RETURN` 或 `EXC_RETURN`。
+- 使用了 PC。
+- 基址寄存器为：
+  - 不是 SP。
+  - 是 SP 且不发生写回。
+
+该指令可被中断续行。
+
+本指令受栈限检查约束。
+
+#### 4.77.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-212](FigureC2-212.png)
+
+**T1 变体**
+
+```arm
+LDMDB{<c>}{<q>} <Rn>{!}, <registers>
+  // 首选语法
+LDMEA{<c>}{<q>} <Rn>{!}, <registers>
+  // 备用语法，空递增栈
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+n = UInt(Rn);
+registers = P:M:'0':register_list;
+wback = (W == '1');
+if n == 15 || BitCount(registers) < 2 || (P == '1' && M == '1') then UNPREDICTABLE;
+if registers[15] == '1' && InITBlock() && !LastInITBlock() then UNPREDICTABLE;
+if wback && registers[n] == '1' then UNPREDICTABLE;
+```
+
+#### 4.77.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `wback && registers<n> == '1'`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令使用指定寻址模式执行全部加载，且被写回的寄存器内容为 UNKNOWN。此外，若在此类指令执行期间发生异常，基址可能被破坏，以致该指令无法重复执行。
+
+若 `BitCount(registers) < 1`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令按相同寻址模式作为 LDM 执行，但目标寄存器集合未指定。这些寄存器可能包含 R15。若指令指定写回，则写回时对基址的修改可能与加载的寄存器数量不同。
+
+若 `BitCount(registers) == 1`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令使用指定寻址模式加载单个寄存器。
+- 该指令按相同寻址模式作为 LDM 执行，但目标寄存器集合未指定。这些寄存器可能包含 R15。
+
+若 `P == '1' && M == '1'`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令加载寄存器列表，以及 R14 或 R15、同时包含 R14 与 R15，或这两者都不包含。
+
+#### 4.77.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`!`**：按所加载数据大小调整后的地址写回基址寄存器。若指定，则编码在 `W` 字段中为 1，否则该字段默认为 0。
+- **`<registers>`**：要加载的一个或多个寄存器列表，用逗号分隔并用 `{` 与 `}` 括起。列表中的寄存器必须在 R0–R12 范围内，编码在 `register_list` 字段中，并可选包含 LR 或 PC 之一。若列表中有 LR，则 `M` 字段置为 1，否则默认为 0。若列表中有 PC，则 `P` 字段置为 1，否则默认为 0。若列表中有 PC：
+  - 列表中不得有 LR。
+  - 该指令必须位于任何 IT 块之外，或为 IT 块中的最后一条指令。
+
+#### 4.77.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n] - 4*BitCount(registers);
+
+  // 判断是否应执行栈指针限值检查
+  if n == 13 && wback && registers[n] == '0' then
+    violatesLimit = ViolatesSPLim(LookUpSP(), address);
+  else
+    violatesLimit = FALSE;
+
+  for i = 0 to 15
+    // 仅在未违反限值时才执行内存操作
+    if registers[i] == '1' && !violatesLimit then
+      data = MemA[address, 4];
+      address = address + 4;
+      if i == 15 then
+        newPCVal = data;
+        setPC = TRUE;
+      elsif i == n then
+        newBaseVal = data;
+      else
+        R[i] = data;
+
+  // 若寄存器列表包含保存基址的寄存器，则必须在完成所有内存读取之后再更新它。
+  // 这样可以避免在某次内存读取引发故障时基址被覆盖。
+  if registers[n] == '1' then
+    wback = TRUE;
+  else
+    newBaseVal = R[n] - 4*BitCount(registers);
+
+  // 若寄存器列表包含 PC，则在此更新 PC，这可能引发故障
+  if setPC then
+    // 若启用了 BTI，该分支设置 EPSR.B 标志，以确保目标指令为 BTI 清除。
+    setBti = BTIEnabled() && (n != 13 || (n == 13 && !wback));
+    LoadWritePC(newPCVal, n, newBaseVal, wback, TRUE, setBti);
+  elsif wback then
+    RSPCheck[n] = newBaseVal;
+```
+
+#### 4.77.5. 受限行为
+
+无额外限制。
+
+#### 4.77.6. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于加载到 R15 的值，但对加载到任何其他指定寄存器的所有值均适用，即使正在使用 R15。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.78. LDR (immediate)：加载寄存器（立即数）
+
+**加载寄存器（立即数）**（Load Register (immediate)）。LDR 由基址寄存器值与立即数偏移算出地址，从内存加载一个字并写入寄存器。它可以使用偏移、后索引或前索引寻址。
+
+被加载的寄存器可以是 PC。若是，则为 PC 加载的字被视作分支地址或异常返回值。bit[0] 遵循 Arm 架构在 A32 与 T32 指令集之间切换的互操作规则。然而 Armv8-M 仅支持 T32 指令集，因此 bit[0] 必须为 1。若 bit[0] 为 0，则 PE 在目标地址处的指令上产生 INVSTATE UsageFault 异常。
+
+该指令被别名 `POP (single register)` 使用。
+
+当下列条件全部成立时，该指令是一条 BTI 设置指令：
+
+- 实现了 PACBTI 扩展。
+- 对目标安全状态与特权状态启用了 BTI。
+- 该操作不是 `FNC_RETURN` 或 `EXC_RETURN`。
+- 使用了 PC。
+- 基址寄存器为：
+  - 不是 SP。
+  - 是 SP 且不发生写回。
+
+本指令受栈限检查约束。
+
+#### 4.78.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-213](FigureC2-213.png)
+
+**T1 变体**
+
+```arm
+LDR{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);
+n = UInt(Rn);
+imm32 = ZeroExtend(imm5:'00', 32);
+index = TRUE;  add = TRUE;  wback = FALSE;
+```
+
+#### 4.78.2. 编码 T2
+
+适用于 Armv8-M。
+
+![FigureC2-214](FigureC2-214.png)
+
+**T2 变体**
+
+```arm
+LDR{<c>}{<q>} <Rt>, [SP{, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);
+n = 13;
+imm32 = ZeroExtend(imm8:'00', 32);
+index = TRUE;  add = TRUE;  wback = FALSE;
+```
+
+#### 4.78.3. 编码 T3
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-215](FigureC2-215.png)
+
+**T3 变体**
+
+```arm
+LDR{<c>}.W <Rt>, [<Rn> {, #{+}<imm>}]
+  // 若 <Rt>、<Rn>、<imm> 可用 T1 或 T2 表示
+LDR{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "LDR (literal)";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);
+imm32 = ZeroExtend(imm12, 32);
+index = TRUE;  add = TRUE;
+wback = FALSE;
+if t == 15 && InITBlock() && !LastInITBlock() then UNPREDICTABLE;
+```
+
+#### 4.78.4. 编码 T4
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-216](FigureC2-216.png)
+
+**偏移变体**（当 `P == 1 && U == 0 && W == 0` 时适用）
+
+```arm
+LDR{<c>}{<q>} <Rt>, [<Rn> {, #-<imm>}]
+```
+
+**后索引变体**（当 `P == 0 && W == 1` 时适用）
+
+```arm
+LDR{<c>}{<q>} <Rt>, [<Rn>], #{+/-}<imm>
+```
+
+**前索引变体**（当 `P == 1 && W == 1` 时适用）
+
+```arm
+LDR{<c>}{<q>} <Rt>, [<Rn>, #{+/-}<imm>]!
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "LDR (literal)";
+if P == '1' && U == '1' && W == '0' then SEE LDRT;
+if P == '0' && W == '0' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);
+imm32 = ZeroExtend(imm8, 32);
+index = (P == '1');  add = (U == '1');  wback = (W == '1');
+if (wback && n == t) || (t == 15 && InITBlock() && !LastInITBlock()) then UNPREDICTABLE;
+```
+
+#### 4.78.5. 别名条件
+
+| 别名或伪指令 | 优先使用条件 |
+| --- | --- |
+| POP (single register) | `Rn == '1101' && P == '0' && U == '1' && W == '1' && imm8 == '00000100'` |
+
+#### 4.78.6. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `wback && n == t`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令使用指定寻址模式执行全部加载，且被写回的寄存器内容为 UNKNOWN。此外，若在此类指令执行期间发生异常，基址可能被破坏，以致该指令无法重复执行。
+
+若 `t == 15 && address<1:0> != '00'`，则必须出现下列行为之一：
+
+- 该指令按所述方式执行，行为不变且无额外副作用。
+- 该指令产生 UNALIGNED UsageFault。
+
+#### 4.78.7. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：
+  - 对 T1 与 T2 编码：要传输的通用寄存器，编码在 `Rt` 字段中。
+  - 对 T3 编码：要传输的通用寄存器，编码在 `Rt` 字段中。可使用 SP。若该指令位于 IT 块之外或为 IT 块中的最后一条指令，则可使用 PC。若使用 PC，该指令分支到加载到 PC 的地址（数据）。
+  - 对 T4 编码：要传输的通用寄存器，编码在 `Rt` 字段中。若该指令位于 IT 块之外或为 IT 块中的最后一条指令，则可使用 PC。若使用 PC，该指令分支到加载到 PC 的地址（数据）。
+- **`<Rn>`**：
+  - 对 T1 编码：通用基址寄存器，编码在 `Rn` 字段中。
+  - 对 T3 与 T4 编码：通用基址寄存器，编码在 `Rn` 字段中。PC 的使用见 C2.4.79 LDR (literal)。
+- **`+/-`**：指定偏移是加到基址寄存器还是从基址寄存器中减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - `-`：当 `U = 0` 时。
+  - `+`：当 `U = 1` 时。
+- **`+`**：指定偏移加到基址寄存器。
+- **`<imm>`**：
+  - 对后索引或前索引变体：8 位无符号立即数字节偏移，范围 0 到 255，编码在 `imm8` 字段中。
+  - 对 T1 编码：可选的正无符号立即数字节偏移，为 0 到 124 范围内 4 的倍数，默认为 0，以 `<imm>/4` 编码在 `imm5` 字段中。
+  - 对 T2 编码：可选的正无符号立即数字节偏移，为 0 到 1020 范围内 4 的倍数，默认为 0，以 `<imm>/4` 编码在 `imm8` 字段中。
+  - 对 T3 编码：可选的 12 位无符号立即数字节偏移，范围 0 到 4095，默认为 0，编码在 `imm12` 字段中。
+  - 对 T4 编码：可选的 8 位无符号立即数字节偏移，范围 0 到 255，默认为 0，编码在 `imm8` 字段中。
+
+#### 4.78.8. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset_addr = if add then (R[n] + imm32) else (R[n] - imm32);
+  address = if index then offset_addr else R[n];
+
+  // 判断是否应执行栈指针限值检查
+  if n == 13 && wback then
+    violatesLimit = ViolatesSPLim(LookUpSP(), offset_addr);
+  else
+    violatesLimit = FALSE;
+  // 仅在未违反限值时才执行内存操作
+  if !violatesLimit then
+    data = MemU[address, 4];
+
+  // 若更新栈指针，违反限值将引发故障
+  if t == 15 then
+    if address[1:0] == '00' then
+      // 若启用了 BTI，该分支设置 EPSR.B 标志，以确保目标指令为 BTI 清除。
+      setBti = BTIEnabled() && (n != 13 || (n == 13 && !wback));
+      LoadWritePC(data, n, offset_addr, wback, TRUE, setBti);
+    else
+      UNPREDICTABLE;
+  else
+    if wback then RSPCheck[n] = offset_addr;
+    R[t] = data;
+```
+
+#### 4.78.9. 受限行为
+
+无额外限制。
+
+#### 4.78.10. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1，且未使用 R15 作为目标寄存器：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.79. LDR (literal)：加载寄存器（字面量）
+
+**加载寄存器（字面量）**（Load Register (literal)）。LDR 由 PC 值与立即数偏移算出地址，从内存加载一个字并写入寄存器。
+
+被加载的寄存器可以是 PC。若是，则为 PC 加载的字被视作分支地址或异常返回值。bit[0] 遵循 Arm 架构在 A32 与 T32 指令集之间切换的互操作规则。然而 Armv8-M 仅支持 T32 指令集，因此 bit[0] 必须为 1。若 bit[0] 为 0，则 PE 在目标地址处的指令上产生 INVSTATE UsageFault 异常。
+
+若实现了 PACBTI 扩展、对目标安全状态与特权状态启用了 BTI、该操作不是 `FNC_RETURN` 或 `EXC_RETURN`，且目标寄存器为 PC，则该指令是一条 BTI 设置指令；执行该指令时将把 EPSR.B 置为 1。
+
+本指令受栈限检查约束。
+
+#### 4.79.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-217](FigureC2-217.png)
+
+**T1 变体**
+
+```arm
+LDR{<c>}{<q>} <Rt>, <label>
+  // 常规形式
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);
+imm32 = ZeroExtend(imm8:'00', 32);
+add = TRUE;
+```
+
+#### 4.79.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-218](FigureC2-218.png)
+
+**T2 变体**
+
+```arm
+LDR{<c>}.W <Rt>, <label>
+  // 首选语法；若 <Rt>、<label> 可用 T1 表示
+LDR{<c>}{<q>} <Rt>, <label>
+  // 首选语法
+LDR{<c>}{<q>} <Rt>, [PC, #{+/-}<imm>]
+  // 备用语法
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+imm32 = ZeroExtend(imm12, 32);
+add = (U == '1');
+if t == 15 && InITBlock() && !LastInITBlock() then UNPREDICTABLE;
+```
+
+#### 4.79.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：
+  - 对 T1 编码：要传输的通用寄存器，编码在 `Rt` 字段中。
+  - 对 T2 编码：要传输的通用寄存器，编码在 `Rt` 字段中。可使用 SP。若该指令位于 IT 块之外或为 IT 块中的最后一条指令，则可使用 PC。若使用 PC，该指令分支到加载到 PC 的地址（数据）。
+- **`<label>`**：
+  - 对 T1 编码：要加载到 `<Rt>` 中的字面量数据项的标签。汇编器根据该指令的 `Align(PC, 4)` 值到该标签的距离算出所需的偏移值。允许的偏移值为 0 到 1020 范围内 4 的倍数。
+  - 对 T2 编码：要加载到 `<Rt>` 中的字面量数据项的标签。汇编器根据该指令的 `Align(PC, 4)` 值到该标签的距离算出所需的偏移值。允许的偏移值为 -4095 到 4095。若偏移为零或正，则 `imm32` 等于该偏移且 `add == TRUE`（编码为 `U == 1`）。若偏移为负，则 `imm32` 等于该偏移的负值且 `add == FALSE`（编码为 `U == 0`）。
+- **`+/-`**：指定偏移是加到基址寄存器还是从基址寄存器中减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - `-`：当 `U = 0` 时。
+  - `+`：当 `U = 1` 时。
+- **`<imm>`**：12 位无符号立即数字节偏移，范围 0 到 4095，编码在 `imm12` 字段中。
+
+#### 4.79.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  base = Align(PC,4);
+  address = if add then (base + imm32) else (base - imm32);
+  data = MemU[address, 4];
+  if t == 15 then
+    if address[1:0] == '00' then
+      // 若启用了 BTI，该分支设置 EPSR.B 标志，以确保目标指令为 BTI 清除。
+      LoadWritePC(data, 0, Zeros(32), FALSE, FALSE, BTIEnabled());
+    else
+      UNPREDICTABLE;
+  else
+    R[t] = data;
+```
+
+#### 4.79.5. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `t == 15 && address<1:0> != '00'`，则必须出现下列行为之一：
+
+- 该指令按所述方式执行，行为不变且无额外副作用。
+- 该指令产生 UNALIGNED UsageFault。
+
+#### 4.79.6. 受限行为
+
+无额外限制。
+
+#### 4.79.7. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1，且未使用 R15 作为目标寄存器：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.80. LDR (register)：加载寄存器（寄存器）
+
+**加载寄存器（寄存器）**（Load Register (register)）。LDR 由基址寄存器值与偏移寄存器值算出地址，从内存加载一个字并写入寄存器。偏移寄存器值可以左移 0、1、2 或 3 位。
+
+被加载的寄存器可以是 PC。若是，则为 PC 加载的字被视作分支地址或异常返回值。bit[0] 遵循 Arm 架构在 A32 与 T32 指令集之间切换的互操作规则。然而 Armv8-M 仅支持 T32 指令集，因此 bit[0] 必须为 1。若 bit[0] 为 0，则 PE 在目标地址处的指令上产生 INVSTATE UsageFault 异常。
+
+若实现了 PACBTI 扩展、对目标安全状态与特权状态启用了 BTI、该操作不是 `FNC_RETURN` 或 `EXC_RETURN`，且目标寄存器为 PC，则该指令是一条 BTI 设置指令；执行该指令时将把 EPSR.B 置为 1。
+
+本指令受栈限检查约束。
+
+#### 4.80.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-219](FigureC2-219.png)
+
+**T1 变体**
+
+```arm
+LDR{<c>}{<q>} <Rt>, [<Rn>, {+}<Rm>]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);  m = UInt(Rm);
+index = TRUE;  add = TRUE;  wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, 0);
+```
+
+#### 4.80.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-220](FigureC2-220.png)
+
+**T2 变体**
+
+```arm
+LDR{<c>}.W <Rt>, [<Rn>, {+}<Rm>]
+  // 若 <Rt>、<Rn>、<Rm> 可用 T1 表示
+LDR{<c>}{<q>} <Rt>, [<Rn>, {+}<Rm>{, LSL #<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "LDR (literal)";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);  m = UInt(Rm);
+index = TRUE;  add = TRUE;  wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, UInt(imm2));
+if m IN {13,15} then UNPREDICTABLE;
+if t == 15 && InITBlock() && !LastInITBlock() then UNPREDICTABLE;
+```
+
+#### 4.80.3. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `t == 15 && address<1:0> != '00'`，则必须出现下列行为之一：
+
+- 该指令按所述方式执行，行为不变且无额外副作用。
+- 该指令产生 UNALIGNED UsageFault。
+
+#### 4.80.4. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：
+  - 对 T1 编码：要传输的通用寄存器，编码在 `Rt` 字段中。
+  - 对 T2 编码：要传输的通用寄存器，编码在 `Rt` 字段中。可使用 SP。若该指令位于 IT 块之外或为 IT 块中的最后一条指令，则可使用 PC。若使用 PC，该指令分支到加载到 PC 的地址（数据）。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+`**：指定索引寄存器加到基址寄存器。
+- **`<Rm>`**：通用索引寄存器，编码在 `Rm` 字段中。
+- **`<imm>`**：若存在，为对 `<Rm>` 的值施加的左移位数，范围 1–3，编码在 `imm2` 中。若不存在，则不指定移位，`imm2` 编码为 `0b00`。
+
+#### 4.80.5. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset = Shift(R[m], shift_t, shift_n, APSR.C);
+  offset_addr = if add then (R[n] + offset) else (R[n] - offset);
+  address = if index then offset_addr else R[n];
+
+  // 判断是否应执行栈指针限值检查
+  if n == 13 && wback then
+    violatesLimit = ViolatesSPLim(LookUpSP(), offset_addr);
+  else
+    violatesLimit = FALSE;
+  // 仅在未违反限值时才执行内存操作
+  if !violatesLimit then
+    data = MemU[address, 4];
+
+  // 若更新栈指针，违反限值将引发故障
+  if t == 15 then
+    if address[1:0] == '00' then
+      // 若启用了 BTI，该分支设置 EPSR.B 标志，以确保目标指令为 BTI 清除。
+      LoadWritePC(data, n, offset_addr, wback, TRUE, BTIEnabled());
+    else
+      UNPREDICTABLE;
+  else
+    if wback then RSPCheck[n] = offset_addr;
+    R[t] = data;
+```
+
+#### 4.80.6. 受限行为
+
+无额外限制。
+
+#### 4.80.7. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1，且未使用 R15 作为目标寄存器：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.81. LDRB (immediate)：加载寄存器字节（立即数）
+
+**加载寄存器字节（立即数）**（Load Register Byte (immediate)）。LDRB 由基址寄存器值与立即数偏移算出地址，从内存加载一个字节，将其零扩展为 32 位字并写入寄存器。它可以使用偏移、后索引或前索引寻址。
+
+本指令受栈限检查约束。
+
+#### 4.81.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-221](FigureC2-221.png)
+
+**T1 变体**
+
+```arm
+LDRB{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);
+n = UInt(Rn);
+imm32 = ZeroExtend(imm5, 32);
+index = TRUE;  add = TRUE;  wback = FALSE;
+```
+
+#### 4.81.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-222](FigureC2-222.png)
+
+**T2 变体**
+
+```arm
+LDRB{<c>}.W <Rt>, [<Rn> {, #{+}<imm>}]
+  // 若 <Rt>、<Rn>、<imm> 可用 T1 表示
+LDRB{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+if Rt == '1111' then SEE "PLD (immediate)";
+if Rn == '1111' then SEE "LDRB (literal)";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);
+imm32 = ZeroExtend(imm12, 32);
+index = TRUE;  add = TRUE;  wback = FALSE;
+if t == 13 then UNPREDICTABLE;
+```
+
+#### 4.81.3. 编码 T3
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-223](FigureC2-223.png)
+
+**偏移变体**（当 `Rt != 1111 && P == 1 && U == 0 && W == 0` 时适用）
+
+```arm
+LDRB{<c>}{<q>} <Rt>, [<Rn> {, #-<imm>}]
+```
+
+**后索引变体**（当 `P == 0 && W == 1` 时适用）
+
+```arm
+LDRB{<c>}{<q>} <Rt>, [<Rn>], #{+/-}<imm>
+```
+
+**前索引变体**（当 `P == 1 && W == 1` 时适用）
+
+```arm
+LDRB{<c>}{<q>} <Rt>, [<Rn>, #{+/-}<imm>]!
+```
+
+**解码**
+
+```arm
+if Rt == '1111' && P == '1' && U == '0' && W == '0' then SEE "PLD (immediate)";
+if Rn == '1111' then SEE "LDRB (literal)";
+if P == '1' && U == '1' && W == '0' then SEE LDRBT;
+if P == '0' && W == '0' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);
+imm32 = ZeroExtend(imm8, 32);
+index = (P == '1');  add = (U == '1');  wback = (W == '1');
+if t == 13 || (wback && n == t) then UNPREDICTABLE;
+if t == 15 && W == '1' then UNPREDICTABLE;
+```
+
+#### 4.81.4. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `wback && n == t`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令使用指定寻址模式执行全部加载，且被写回的寄存器内容为 UNKNOWN。此外，若在此类指令执行期间发生异常，基址可能被破坏，以致该指令无法重复执行。
+
+#### 4.81.5. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：
+  - 对 T1 编码：通用基址寄存器，编码在 `Rn` 字段中。
+  - 对 T2 与 T3 编码：通用基址寄存器，编码在 `Rn` 字段中。PC 的使用见 C2.4.82 LDRB (literal)。
+- **`+/-`**：指定偏移是加到基址寄存器还是从基址寄存器中减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - `-`：当 `U = 0` 时。
+  - `+`：当 `U = 1` 时。
+- **`+`**：指定偏移加到基址寄存器。
+- **`<imm>`**：
+  - 对后索引或前索引变体：8 位无符号立即数字节偏移，范围 0 到 255，编码在 `imm8` 字段中。
+  - 对 T1 编码：可选的 5 位无符号立即数字节偏移，范围 0 到 31，默认为 0，编码在 `imm5` 字段中。
+  - 对 T2 编码：可选的 12 位无符号立即数字节偏移，范围 0 到 4095，默认为 0，编码在 `imm12` 字段中。
+  - 对 T3 编码：可选的 8 位无符号立即数字节偏移，范围 0 到 255，默认为 0，编码在 `imm8` 字段中。
+
+#### 4.81.6. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset_addr = if add then (R[n] + imm32) else (R[n] - imm32);
+  address = if index then offset_addr else R[n];
+
+  // 判断是否应执行栈指针限值检查
+  if n == 13 && wback then
+    violatesLimit = ViolatesSPLim(LookUpSP(), offset_addr);
+  else
+    violatesLimit = FALSE;
+
+  // 仅在未违反限值时才执行内存操作
+  if !violatesLimit then
+    R[t] = ZeroExtend(MemU[address, 1], 32);
+
+  // 若更新栈指针，违反限值将引发故障
+  if wback then RSPCheck[n] = offset_addr;
+```
+
+#### 4.81.7. 受限行为
+
+无额外限制。
+
+#### 4.81.8. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1，且未使用 R15 作为目标寄存器：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.82. LDRB (literal)：加载寄存器字节（字面量）
+
+**加载寄存器字节（字面量）**（Load Register Byte (literal)）。LDRB 由 PC 值与立即数偏移算出地址，从内存加载一个字节，将其零扩展为 32 位字并写入寄存器。
+
+#### 4.82.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-224](FigureC2-224.png)
+
+**T1 变体**
+
+```arm
+LDRB{<c>}{<q>} <Rt>, <label>
+  // 首选语法
+LDRB{<c>}{<q>} <Rt>, [PC, #{+/-}<imm>]
+  // 备用语法
+```
+
+**解码**
+
+```arm
+if Rt == '1111' then SEE "PLD (literal)";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+imm32 = ZeroExtend(imm12, 32);
+add = (U == '1');
+if t == 13 then UNPREDICTABLE;
+```
+
+#### 4.82.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<label>`**：要加载到 `<Rt>` 中的字面量数据项的标签。汇编器根据该指令的 `Align(PC, 4)` 值到该标签的距离算出所需的偏移值。允许的偏移值为 -4095 到 4095。若偏移为零或正，则 `imm32` 等于该偏移且 `add == TRUE`（编码为 `U == 1`）。若偏移为负，则 `imm32` 等于该偏移的负值且 `add == FALSE`（编码为 `U == 0`）。
+- **`+/-`**：指定偏移是加到基址寄存器还是从基址寄存器中减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - `-`：当 `U = 0` 时。
+  - `+`：当 `U = 1` 时。
+- **`<imm>`**：12 位无符号立即数字节偏移，范围 0 到 4095，编码在 `imm12` 字段中。
+
+#### 4.82.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  base = Align(PC,4);
+  address = if add then (base + imm32) else (base - imm32);
+  R[t] = ZeroExtend(MemU[address, 1], 32);
+```
+
+#### 4.82.4. 受限行为
+
+无额外限制。
+
+#### 4.82.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.83. LDRB (register)：加载寄存器字节（寄存器）
+
+**加载寄存器字节（寄存器）**（Load Register Byte (register)）。LDRB 由基址寄存器值与偏移寄存器值算出地址，从内存加载一个字节，将其零扩展为 32 位字并写入寄存器。偏移寄存器值可以左移 0、1、2 或 3 位。
+
+#### 4.83.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-225](FigureC2-225.png)
+
+**T1 变体**
+
+```arm
+LDRB{<c>}{<q>} <Rt>, [<Rn>, {+}<Rm>]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);  m = UInt(Rm);
+index = TRUE;  add = TRUE;  wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, 0);
+```
+
+#### 4.83.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-226](FigureC2-226.png)
+
+**T2 变体**
+
+```arm
+LDRB{<c>}.W <Rt>, [<Rn>, {+}<Rm>]
+  // 若 <Rt>、<Rn>、<Rm> 可用 T1 表示
+LDRB{<c>}{<q>} <Rt>, [<Rn>, {+}<Rm>{, LSL #<imm>}]
+```
+
+**解码**
+
+```arm
+if Rt == '1111' then SEE "PLD (register)";
+if Rn == '1111' then SEE "LDRB (literal)";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);  m = UInt(Rm);
+index = TRUE;  add = TRUE;  wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, UInt(imm2));
+if t == 13 || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.83.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+`**：指定索引寄存器加到基址寄存器。
+- **`<Rm>`**：通用索引寄存器，编码在 `Rm` 字段中。
+- **`<imm>`**：若存在，为对 `<Rm>` 的值施加的左移位数，范围 1–3，编码在 `imm2` 中。若不存在，则不指定移位，`imm2` 编码为 `0b00`。
+
+#### 4.83.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset = Shift(R[m], shift_t, shift_n, APSR.C);
+  offset_addr = if add then (R[n] + offset) else (R[n] - offset);
+  address = if index then offset_addr else R[n];
+  R[t] = ZeroExtend(MemU[address, 1], 32);
+```
+
+#### 4.83.5. 受限行为
+
+无额外限制。
+
+#### 4.83.6. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.84. LDRBT：非特权加载寄存器字节
+
+**非特权加载寄存器字节**（Load Register Byte Unprivileged）。LDRBT 由基址寄存器值与立即数偏移算出地址，从内存加载一个字节，将其零扩展为 32 位字并写入寄存器。
+
+当特权软件使用 LDRBT 指令时，内存访问受到限制，如同该软件处于非特权状态。
+
+#### 4.84.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-227](FigureC2-227.png)
+
+**T1 变体**
+
+```arm
+LDRBT{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "LDRB (literal)";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+n = UInt(Rn);
+postindex = FALSE;
+add = TRUE;
+register_form = FALSE;
+imm32 = ZeroExtend(imm8, 32);
+if t IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.84.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+`**：指定偏移加到基址寄存器。
+- **`<imm>`**：可选的 8 位无符号立即数字节偏移，范围 0 到 255，默认为 0，编码在 `imm8` 字段中。
+
+#### 4.84.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n] + imm32;
+  R[t] = ZeroExtend(MemU_unpriv[address, 1], 32);
+```
+
+#### 4.84.4. 受限行为
+
+无额外限制。
+
+#### 4.84.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.85. LDRD (immediate)：加载寄存器双字（立即数）
+
+**加载寄存器双字（立即数）**（Load Register Dual (immediate)）。LDRD 由基址寄存器值与立即数偏移算出地址，从内存加载两个字并写入两个寄存器。它可以使用偏移、后索引或前索引寻址。
+
+本指令受栈限检查约束。
+
+#### 4.85.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-228](FigureC2-228.png)
+
+**偏移变体**（当 `P == 1 && W == 0` 时适用）
+
+```arm
+LDRD{<c>}{<q>} <Rt>, <Rt2>, [<Rn> {, #{+/-}<imm>}]
+```
+
+**后索引变体**（当 `P == 0 && W == 1` 时适用）
+
+```arm
+LDRD{<c>}{<q>} <Rt>, <Rt2>, [<Rn>], #{+/-}<imm>
+```
+
+**前索引变体**（当 `P == 1 && W == 1` 时适用）
+
+```arm
+LDRD{<c>}{<q>} <Rt>, <Rt2>, [<Rn>, #{+/-}<imm>]!
+```
+
+**解码**
+
+```arm
+if P == '0' && W == '0' then SEE "Related encodings";
+if Rn == '1111' then SEE "LDRD (literal)";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);  t2 = UInt(Rt2);  n = UInt(Rn);
+imm32 = ZeroExtend(imm8:'00', 32);
+index = (P == '1');  add = (U == '1');  wback = (W == '1');
+if wback && (n == t || n == t2) then UNPREDICTABLE;
+if t IN {13,15} || t2 IN {13,15} || t == t2 then UNPREDICTABLE;
+```
+
+#### 4.85.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `wback && (n == t || n == t2)`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令使用指定寻址模式执行全部加载，且被写回的寄存器内容为 UNKNOWN。此外，若在此类指令执行期间发生异常，基址可能被破坏，以致该指令无法重复执行。
+
+若 `t == t2`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该加载指令执行，但目标寄存器取值 UNKNOWN。
+
+#### 4.85.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的第一个通用寄存器，编码在 `Rt` 字段中。
+- **`<Rt2>`**：要传输的第二个通用寄存器，编码在 `Rt2` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。PC 的使用见 C2.4.86 LDRD (literal)。
+- **`+/-`**：指定偏移是加到基址寄存器还是从基址寄存器中减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - `-`：当 `U = 0` 时。
+  - `+`：当 `U = 1` 时。
+- **`<imm>`**：
+  - 对偏移变体：可选的无符号立即数字节偏移，为 0 到 1020 范围内 4 的倍数，默认为 0，以 `<imm>/4` 编码在 `imm8` 字段中。
+  - 对后索引与前索引变体：无符号立即数字节偏移，为 0 到 1020 范围内 4 的倍数，以 `<imm>/4` 编码在 `imm8` 字段中。
+
+#### 4.85.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset_addr = if add then (R[n] + imm32) else (R[n] - imm32);
+  address = if index then offset_addr else R[n];
+
+  // 判断是否应执行栈指针限值检查
+  if n == 13 && wback then
+    violatesLimit = ViolatesSPLim(LookUpSP(), offset_addr);
+  else
+    violatesLimit = FALSE;
+  // 仅在未违反限值时才执行内存操作
+  if !violatesLimit then
+    R[t] = MemA[address, 4];
+    R[t2] = MemA[address+4, 4];
+
+  // 若更新栈指针，违反限值将引发故障
+  if wback then RSPCheck[n] = offset_addr;
+```
+
+#### 4.85.5. 受限行为
+
+无额外限制。
+
+#### 4.85.6. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.86. LDRD (literal)：加载寄存器双字（字面量）
+
+**加载寄存器双字（字面量）**（Load Register Dual (literal)）。LDRD 由 PC 值与立即数偏移算出地址，从内存加载两个字并写入两个寄存器。
+
+对 M profile，PC 值必须字对齐，否则该指令的行为为 UNPREDICTABLE。
+
+#### 4.86.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-229](FigureC2-229.png)
+
+**T1 变体**
+
+```arm
+LDRD{<c>}{<q>} <Rt>, <Rt2>, <label>
+  // 常规形式
+LDRD{<c>}{<q>} <Rt>, <Rt2>, [PC, #{+/-}<imm>]
+  // 备用形式
+```
+
+**解码**
+
+```arm
+if P == '0' && W == '0' then SEE "Related encodings";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);  t2 = UInt(Rt2);
+imm32 = ZeroExtend(imm8:'00', 32);
+add = (U == '1');
+if t IN {13,15} || t2 IN {13,15} || t == t2 then UNPREDICTABLE;
+if W == '1' then UNPREDICTABLE;
+```
+
+#### 4.86.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `t == t2`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该加载指令执行，但目标寄存器取值 UNKNOWN。
+
+若 `W == '1'`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令执行，但不写回基址。
+- 当 `P == '0'` 时该指令使用后索引寻址，否则使用前索引寻址。
+
+#### 4.86.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的第一个通用寄存器，编码在 `Rt` 字段中。
+- **`<Rt2>`**：要传输的第二个通用寄存器，编码在 `Rt2` 字段中。
+- **`<label>`**：要加载到 `<Rt>` 中的字面量数据项的标签。汇编器根据该指令的 `Align(PC, 4)` 值到该标签的距离算出所需的偏移值。允许的偏移值为 -1020 到 1020 范围内 4 的倍数。若偏移为零或正，则 `imm32` 等于该偏移且 `add == TRUE`（编码为 `U == 1`）。若偏移为负，则 `imm32` 等于该偏移的负值且 `add == FALSE`（编码为 `U == 0`）。
+- **`+/-`**：指定偏移是加到基址寄存器还是从基址寄存器中减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - `-`：当 `U = 0` 时。
+  - `+`：当 `U = 1` 时。
+- **`<imm>`**：可选的 8 位无符号立即数字节偏移，范围 0 到 255，默认为 0，编码在 `imm8` 字段中。
+
+#### 4.86.4. 操作（所有编码）
+
+```arm
+// 由于 SG 指令不受 IT 条件约束，对该指令的 SEE 检查必须在条件码检查之前完成，
+// 而不是放在（由 EncodingSpecificOperations() 调用的）解码伪代码内。
+if P == '1' && W == '1' && U == '0' then SEE SG;
+
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  if PC[1:0] != '00' then UNPREDICTABLE;
+  address = if add then (PC + imm32) else (PC - imm32);
+  R[t] = MemA[address, 4];
+  R[t2] = MemA[address+4, 4];
+```
+
+#### 4.86.5. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为：PC 对齐
+
+若 `PC<1:0> != '00'`，则必须出现下列行为之一：
+
+- 该指令按所述方式执行，行为不变且无额外副作用。
+- 该指令产生 UNALIGNED UsageFault。
+
+#### 4.86.6. 受限行为
+
+无额外限制。
+
+#### 4.86.7. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.87. LDREX：加载寄存器独占
+
+**加载寄存器独占**（Load Register Exclusive）。LDREX 由基址寄存器值与立即数偏移算出地址，从内存加载一个字并写入寄存器，并且：
+
+- 若该地址具有 Shareable 内存属性，则在全局监视器中为执行 PE 将该物理地址标记为独占访问。
+- 使执行 PE 在本地监视器中指示存在活动的独占访问。
+
+#### 4.87.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-230](FigureC2-230.png)
+
+**T1 变体**
+
+```arm
+LDREX{<c>}{<q>} <Rt>, [<Rn> {, #<imm>}]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);
+imm32 = ZeroExtend(imm8:'00', 32);
+if t IN {13,15} || n == 15 then UNPREDICTABLE;
+```
+
+#### 4.87.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`<imm>`**：加到 `<Rn>` 值上以计算地址的立即数偏移。`<imm>` 可省略，表示偏移为 0。取值为 0–1020 范围内 4 的倍数。
+
+#### 4.87.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n] + imm32;
+  SetExclusiveMonitors(address, 4);
+  R[t] = MemA[address, 4];
+```
+
+#### 4.87.4. 受限行为
+
+无额外限制。
+
+#### 4.87.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.88. LDREXB：加载寄存器独占字节
+
+**加载寄存器独占字节**（Load Register Exclusive Byte）。LDREXB 由基址寄存器值推导出地址，从内存加载一个字节，将其零扩展为 32 位字，写入寄存器，并且：
+
+- 若该地址具有 Shareable 内存属性，则在全局监视器中为执行 PE 将该物理地址标记为独占访问。
+- 使执行 PE 在本地监视器中指示存在活动的独占访问。
+
+#### 4.88.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-231](FigureC2-231.png)
+
+**T1 变体**
+
+```arm
+LDREXB{<c>}{<q>} <Rt>, [<Rn>]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);
+if t IN {13,15} || n == 15 then UNPREDICTABLE;
+```
+
+#### 4.88.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+
+#### 4.88.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n];
+  SetExclusiveMonitors(address, 1);
+  R[t] = ZeroExtend(MemA[address, 1], 32);
+```
+
+#### 4.88.4. 受限行为
+
+无额外限制。
+
+#### 4.88.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.89. LDREXH：加载寄存器独占半字
+
+**加载寄存器独占半字**（Load Register Exclusive Halfword）。LDREXH 由基址寄存器值推导出地址，从内存加载一个半字，将其零扩展为 32 位字，写入寄存器，并且：
+
+- 若该地址具有 Shareable 内存属性，则在全局监视器中为执行 PE 将该物理地址标记为独占访问。
+- 使执行 PE 在本地监视器中指示存在活动的独占访问。
+
+#### 4.89.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-232](FigureC2-232.png)
+
+**T1 变体**
+
+```arm
+LDREXH{<c>}{<q>} <Rt>, [<Rn>]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);
+if t IN {13,15} || n == 15 then UNPREDICTABLE;
+```
+
+#### 4.89.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+
+#### 4.89.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n];
+  SetExclusiveMonitors(address, 2);
+  R[t] = ZeroExtend(MemA[address, 2], 32);
+```
+
+#### 4.89.4. 受限行为
+
+无额外限制。
+
+#### 4.89.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.90. LDRH (immediate)：加载寄存器半字（立即数）
+
+**加载寄存器半字（立即数）**（Load Register Halfword (immediate)）。LDRH 由基址寄存器值与立即数偏移算出地址，从内存加载一个半字，将其零扩展为 32 位字并写入寄存器。它可以使用偏移、后索引或前索引寻址。
+
+本指令受栈限检查约束。
+
+#### 4.90.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-233](FigureC2-233.png)
+
+**T1 变体**
+
+```arm
+LDRH{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);
+n = UInt(Rn);
+imm32 = ZeroExtend(imm5:'0', 32);
+index = TRUE;  add = TRUE;  wback = FALSE;
+```
+
+#### 4.90.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-234](FigureC2-234.png)
+
+**T2 变体**
+
+```arm
+LDRH{<c>}.W <Rt>, [<Rn> {, #{+}<imm>}]
+  // 若 <Rt>、<Rn>、<imm> 可用 T1 表示
+LDRH{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+if Rt == '1111' then SEE "Related encodings";
+if Rn == '1111' then SEE "LDRH (literal)";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);
+imm32 = ZeroExtend(imm12, 32);
+index = TRUE;  add = TRUE;  wback = FALSE;
+if t == 13 then UNPREDICTABLE;
+```
+
+#### 4.90.3. 编码 T3
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-235](FigureC2-235.png)
+
+**偏移变体**（当 `Rt != 1111 && P == 1 && U == 0 && W == 0` 时适用）
+
+```arm
+LDRH{<c>}{<q>} <Rt>, [<Rn> {, #-<imm>}]
+```
+
+**后索引变体**（当 `P == 0 && W == 1` 时适用）
+
+```arm
+LDRH{<c>}{<q>} <Rt>, [<Rn>], #{+/-}<imm>
+```
+
+**前索引变体**（当 `P == 1 && W == 1` 时适用）
+
+```arm
+LDRH{<c>}{<q>} <Rt>, [<Rn>, #{+/-}<imm>]!
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "LDRH (literal)";
+if Rt == '1111' && P == '1' && U == '0' && W == '0' then SEE "Related encodings";
+if P == '1' && U == '1' && W == '0' then SEE LDRHT;
+if P == '0' && W == '0' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);
+imm32 = ZeroExtend(imm8, 32);
+index = (P == '1');  add = (U == '1');  wback = (W == '1');
+if t == 13 || (t == 15 && W == '1') || (wback && n == t) then UNPREDICTABLE;
+```
+
+#### 4.90.4. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `wback && n == t`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令使用指定寻址模式执行全部加载，且被写回的寄存器内容为 UNKNOWN。此外，若在此类指令执行期间发生异常，基址可能被破坏，以致该指令无法重复执行。
+
+#### 4.90.5. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：
+  - 对 T1 编码：通用基址寄存器，编码在 `Rn` 字段中。
+  - 对 T2 与 T3 编码：通用基址寄存器，编码在 `Rn` 字段中。PC 的使用见 C2.4.91 LDRH (literal)。
+- **`+/-`**：指定偏移是加到基址寄存器还是从基址寄存器中减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - `-`：当 `U = 0` 时。
+  - `+`：当 `U = 1` 时。
+- **`+`**：指定偏移加到基址寄存器。
+- **`<imm>`**：
+  - 对后索引或前索引变体：8 位无符号立即数字节偏移，范围 0 到 255，编码在 `imm8` 字段中。
+  - 对 T1 编码：可选的正无符号立即数字节偏移，为 0 到 62 范围内 2 的倍数，默认为 0，以 `<imm>/2` 编码在 `imm5` 字段中。
+  - 对 T2 编码：可选的 12 位无符号立即数字节偏移，范围 0 到 4095，默认为 0，编码在 `imm12` 字段中。
+  - 对 T3 编码：可选的 8 位无符号立即数字节偏移，范围 0 到 255，默认为 0，编码在 `imm8` 字段中。
+
+#### 4.90.6. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset_addr = if add then (R[n] + imm32) else (R[n] - imm32);
+  address = if index then offset_addr else R[n];
+
+  // 判断是否应执行栈指针限值检查
+  if n == 13 && wback then
+    violatesLimit = ViolatesSPLim(LookUpSP(), offset_addr);
+  else
+    violatesLimit = FALSE;
+  // 仅在未违反限值时才执行内存操作
+  if !violatesLimit then
+    R[t] = ZeroExtend(MemU[address, 2], 32);
+
+  // 若更新栈指针，违反限值将引发故障
+  if wback then RSPCheck[n] = offset_addr;
+```
+
+#### 4.90.7. 受限行为
+
+无额外限制。
+
+#### 4.90.8. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1，且未使用 R15 作为目标寄存器：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.91. LDRH (literal)：加载寄存器半字（字面量）
+
+**加载寄存器半字（字面量）**（Load Register Halfword (literal)）。LDRH 由 PC 值与立即数偏移算出地址，从内存加载一个半字，将其零扩展为 32 位字并写入寄存器。
+
+#### 4.91.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-236](FigureC2-236.png)
+
+**T1 变体**
+
+```arm
+LDRH{<c>}{<q>} <Rt>, <label>
+  // 首选语法
+LDRH{<c>}{<q>} <Rt>, [PC, #{+/-}<imm>]
+  // 备用语法
+```
+
+**解码**
+
+```arm
+if Rt == '1111' then SEE "PLD (literal)";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+imm32 = ZeroExtend(imm12, 32);
+add = (U == '1');
+if t == 13 then UNPREDICTABLE;
+```
+
+#### 4.91.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<label>`**：要加载到 `<Rt>` 中的字面量数据项的标签。汇编器根据该指令的 `Align(PC, 4)` 值到该标签的距离算出所需的偏移值。允许的偏移值为 -4095 到 4095。若偏移为零或正，则 `imm32` 等于该偏移且 `add == TRUE`（编码为 `U == 1`）。若偏移为负，则 `imm32` 等于该偏移的负值且 `add == FALSE`（编码为 `U == 0`）。
+- **`+/-`**：指定偏移是加到基址寄存器还是从基址寄存器中减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - `-`：当 `U = 0` 时。
+  - `+`：当 `U = 1` 时。
+- **`<imm>`**：12 位无符号立即数字节偏移，范围 0 到 4095，编码在 `imm12` 字段中。
+
+#### 4.91.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  base = Align(PC,4);
+  address = if add then (base + imm32) else (base - imm32);
+  data = MemU[address, 2];
+  R[t] = ZeroExtend(data, 32);
+```
+
+#### 4.91.4. 受限行为
+
+无额外限制。
+
+#### 4.91.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.92. LDRH (register)：加载寄存器半字（寄存器）
+
+**加载寄存器半字（寄存器）**（Load Register Halfword (register)）。LDRH 由基址寄存器值与偏移寄存器值算出地址，从内存加载一个半字，将其零扩展为 32 位字并写入寄存器。偏移寄存器值可以左移 0、1、2 或 3 位。
+
+#### 4.92.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-237](FigureC2-237.png)
+
+**T1 变体**
+
+```arm
+LDRH{<c>}{<q>} <Rt>, [<Rn>, {+}<Rm>]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);  m = UInt(Rm);
+index = TRUE;  add = TRUE;  wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, 0);
+```
+
+#### 4.92.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-238](FigureC2-238.png)
+
+**T2 变体**
+
+```arm
+LDRH{<c>}.W <Rt>, [<Rn>, {+}<Rm>]
+  // 若 <Rt>、<Rn>、<Rm> 可用 T1 表示
+LDRH{<c>}{<q>} <Rt>, [<Rn>, {+}<Rm>{, LSL #<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "LDRH (literal)";
+if Rt == '1111' then SEE "Related encodings";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);  m = UInt(Rm);
+index = TRUE;  add = TRUE;  wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, UInt(imm2));
+if t == 13 || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.92.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+`**：指定索引寄存器加到基址寄存器。
+- **`<Rm>`**：通用索引寄存器，编码在 `Rm` 字段中。
+- **`<imm>`**：若存在，为对 `<Rm>` 的值施加的左移位数，范围 1–3，编码在 `imm2` 中。若不存在，则不指定移位，`imm2` 编码为 `0b00`。
+
+#### 4.92.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset = Shift(R[m], shift_t, shift_n, APSR.C);
+  offset_addr = if add then (R[n] + offset) else (R[n] - offset);
+  address = if index then offset_addr else R[n];
+  data = MemU[address, 2];
+  if wback then R[n] = offset_addr;
+  R[t] = ZeroExtend(data, 32);
+```
+
+#### 4.92.5. 受限行为
+
+无额外限制。
+
+#### 4.92.6. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.93. LDRHT：非特权加载寄存器半字
+
+**非特权加载寄存器半字**（Load Register Halfword Unprivileged）。LDRHT 由基址寄存器值与立即数偏移算出地址，从内存加载一个半字，将其零扩展为 32 位字并写入寄存器。
+
+当特权软件使用 LDRHT 指令时，内存访问受到限制，如同该软件处于非特权状态。
+
+#### 4.93.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-239](FigureC2-239.png)
+
+**T1 变体**
+
+```arm
+LDRHT{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "LDRH (literal)";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+n = UInt(Rn);
+postindex = FALSE;
+add = TRUE;
+register_form = FALSE;
+imm32 = ZeroExtend(imm8, 32);
+if t IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.93.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+`**：指定偏移加到基址寄存器。
+- **`<imm>`**：可选的 8 位无符号立即数字节偏移，范围 0 到 255，默认为 0，编码在 `imm8` 字段中。
+
+#### 4.93.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n] + imm32;
+  data = MemU_unpriv[address, 2];
+  R[t] = ZeroExtend(data, 32);
+```
+
+#### 4.93.4. 受限行为
+
+无额外限制。
+
+#### 4.93.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.94. LDRSB (immediate)：加载寄存器有符号字节（立即数）
+
+**加载寄存器有符号字节（立即数）**（Load Register Signed Byte (immediate)）。LDRSB 由基址寄存器值与立即数偏移算出地址，从内存加载一个字节，将其符号扩展为 32 位字并写入寄存器。它可以使用偏移、后索引或前索引寻址。
+
+本指令受栈限检查约束。
+
+#### 4.94.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-240](FigureC2-240.png)
+
+**T1 变体**
+
+```arm
+LDRSB{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+if Rt == '1111' then SEE "PLI (immediate, literal)";
+if Rn == '1111' then SEE "LDRSB (literal)";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+n = UInt(Rn);
+imm32 = ZeroExtend(imm12, 32);
+index = TRUE;  add = TRUE;  wback = FALSE;
+if t == 13 then UNPREDICTABLE;
+```
+
+#### 4.94.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-241](FigureC2-241.png)
+
+**偏移变体**（当 `P == 1 && U == 0 && W == 0` 时适用）
+
+```arm
+LDRSB{<c>}{<q>} <Rt>, [<Rn> {, #-<imm>}]
+```
+
+**后索引变体**（当 `P == 0 && W == 1` 时适用）
+
+```arm
+LDRSB{<c>}{<q>} <Rt>, [<Rn>], #{+/-}<imm>
+```
+
+**前索引变体**（当 `P == 1 && W == 1` 时适用）
+
+```arm
+LDRSB{<c>}{<q>} <Rt>, [<Rn>, #{+/-}<imm>]!
+```
+
+**解码**
+
+```arm
+if Rt == '1111' && P == '1' && U == '0' && W == '0' then SEE "PLI (immediate, literal)";
+if Rn == '1111' then SEE "LDRSB (literal)";
+if P == '1' && U == '1' && W == '0' then SEE LDRSBT;
+if P == '0' && W == '0' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);
+imm32 = ZeroExtend(imm8, 32);
+index = (P == '1');  add = (U == '1');  wback = (W == '1');
+if t == 13 || (t == 15 && W == '1') || (wback && n == t) then UNPREDICTABLE;
+```
+
+#### 4.94.3. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `wback && n == t`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令使用指定寻址模式执行全部加载，且被写回的寄存器内容为 UNKNOWN。此外，若在此类指令执行期间发生异常，基址可能被破坏，以致该指令无法重复执行。
+
+#### 4.94.4. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。PC 的使用见 C2.4.95 LDRSB (literal)。
+- **`+/-`**：指定偏移是加到基址寄存器还是从基址寄存器中减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - `-`：当 `U = 0` 时。
+  - `+`：当 `U = 1` 时。
+- **`+`**：指定偏移加到基址寄存器。
+- **`<imm>`**：
+  - 对后索引或前索引变体：8 位无符号立即数字节偏移，范围 0 到 255，编码在 `imm8` 字段中。
+  - 对 T1 编码：可选的 12 位无符号立即数字节偏移，范围 0 到 4095，默认为 0，编码在 `imm12` 字段中。
+  - 对 T2 编码：可选的 8 位无符号立即数字节偏移，范围 0 到 255，默认为 0，编码在 `imm8` 字段中。
+
+#### 4.94.5. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset_addr = if add then (R[n] + imm32) else (R[n] - imm32);
+  address = if index then offset_addr else R[n];
+
+  // 判断是否应执行栈指针限值检查
+  if n == 13 && wback then
+    violatesLimit = ViolatesSPLim(LookUpSP(), offset_addr);
+  else
+    violatesLimit = FALSE;
+  // 仅在未违反限值时才执行内存操作
+  if !violatesLimit then
+    R[t] = SignExtend(MemU[address, 1], 32);
+
+  // 若更新栈指针，违反限值将引发故障
+  if wback then RSPCheck[n] = offset_addr;
+```
+
+#### 4.94.6. 受限行为
+
+无额外限制。
+
+#### 4.94.7. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1，且未使用 R15 作为目标寄存器：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.95. LDRSB (literal)：加载寄存器有符号字节（字面量）
+
+**加载寄存器有符号字节（字面量）**（Load Register Signed Byte (literal)）。LDRSB 由 PC 值与立即数偏移算出地址，从内存加载一个字节，将其符号扩展为 32 位字并写入寄存器。
+
+#### 4.95.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-242](FigureC2-242.png)
+
+**T1 变体**
+
+```arm
+LDRSB{<c>}{<q>} <Rt>, <label>
+  // 首选语法
+LDRSB{<c>}{<q>} <Rt>, [PC, #{+/-}<imm>]
+  // 备用语法
+```
+
+**解码**
+
+```arm
+if Rt == '1111' then SEE "PLI (immediate, literal)";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+imm32 = ZeroExtend(imm12, 32);
+add = (U == '1');
+if t == 13 then UNPREDICTABLE;
+```
+
+#### 4.95.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<label>`**：要加载到 `<Rt>` 中的字面量数据项的标签。汇编器根据该指令的 `Align(PC, 4)` 值到该标签的距离算出所需的偏移值。允许的偏移值为 -4095 到 4095。若偏移为零或正，则 `imm32` 等于该偏移且 `add == TRUE`（编码为 `U == 1`）。若偏移为负，则 `imm32` 等于该偏移的负值且 `add == FALSE`（编码为 `U == 0`）。
+- **`+/-`**：指定偏移是加到基址寄存器还是从基址寄存器中减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - `-`：当 `U = 0` 时。
+  - `+`：当 `U = 1` 时。
+- **`<imm>`**：12 位无符号立即数字节偏移，范围 0 到 4095，编码在 `imm12` 字段中。
+
+#### 4.95.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  base = Align(PC,4);
+  address = if add then (base + imm32) else (base - imm32);
+  R[t] = SignExtend(MemU[address, 1], 32);
+```
+
+#### 4.95.4. 受限行为
+
+无额外限制。
+
+#### 4.95.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.96. LDRSB (register)：加载寄存器有符号字节（寄存器）
+
+**加载寄存器有符号字节（寄存器）**（Load Register Signed Byte (register)）。LDRSB 由基址寄存器值与偏移寄存器值算出地址，从内存加载一个字节，将其符号扩展为 32 位字并写入寄存器。偏移寄存器值可以左移 0、1、2 或 3 位。
+
+#### 4.96.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-243](FigureC2-243.png)
+
+**T1 变体**
+
+```arm
+LDRSB{<c>}{<q>} <Rt>, [<Rn>, {+}<Rm>]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);  m = UInt(Rm);
+index = TRUE;  add = TRUE;  wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, 0);
+```
+
+#### 4.96.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-244](FigureC2-244.png)
+
+**T2 变体**
+
+```arm
+LDRSB{<c>}.W <Rt>, [<Rn>, {+}<Rm>]
+  // 若 <Rt>、<Rn>、<Rm> 可用 T1 表示
+LDRSB{<c>}{<q>} <Rt>, [<Rn>, {+}<Rm>{, LSL #<imm>}]
+```
+
+**解码**
+
+```arm
+if Rt == '1111' then SEE "PLI (register)";
+if Rn == '1111' then SEE "LDRSB (literal)";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);  m = UInt(Rm);
+index = TRUE;  add = TRUE;  wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, UInt(imm2));
+if t == 13 || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.96.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+`**：指定索引寄存器加到基址寄存器。
+- **`<Rm>`**：通用索引寄存器，编码在 `Rm` 字段中。
+- **`<imm>`**：若存在，为对 `<Rm>` 的值施加的左移位数，范围 1–3，编码在 `imm2` 中。若不存在，则不指定移位，`imm2` 编码为 `0b00`。
+
+#### 4.96.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset = Shift(R[m], shift_t, shift_n, APSR.C);
+  offset_addr = if add then (R[n] + offset) else (R[n] - offset);
+  address = if index then offset_addr else R[n];
+  data = MemU[address, 1];
+  if wback then R[n] = offset_addr;
+  R[t] = SignExtend(data, 32);
+```
+
+#### 4.96.5. 受限行为
+
+无额外限制。
+
+#### 4.96.6. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.97. LDRSBT：非特权加载寄存器有符号字节
+
+**非特权加载寄存器有符号字节**（Load Register Signed Byte Unprivileged）。LDRSBT 由基址寄存器值与立即数偏移算出地址，从内存加载一个字节，将其符号扩展为 32 位字并写入寄存器。
+
+当特权软件使用 LDRSBT 指令时，内存访问受到限制，如同该软件处于非特权状态。
+
+#### 4.97.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-245](FigureC2-245.png)
+
+**T1 变体**
+
+```arm
+LDRSBT{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "LDRSB (literal)";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+n = UInt(Rn);
+postindex = FALSE;
+add = TRUE;
+register_form = FALSE;
+imm32 = ZeroExtend(imm8, 32);
+if t IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.97.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+`**：指定偏移加到基址寄存器。
+- **`<imm>`**：可选的 8 位无符号立即数字节偏移，范围 0 到 255，默认为 0，编码在 `imm8` 字段中。
+
+#### 4.97.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n] + imm32;
+  R[t] = SignExtend(MemU_unpriv[address, 1], 32);
+```
+
+#### 4.97.4. 受限行为
+
+无额外限制。
+
+#### 4.97.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.98. LDRSH (immediate)：加载寄存器有符号半字（立即数）
+
+**加载寄存器有符号半字（立即数）**（Load Register Signed Halfword (immediate)）。LDRSH 由基址寄存器值与立即数偏移算出地址，从内存加载一个半字，将其符号扩展为 32 位字并写入寄存器。它可以使用偏移、后索引或前索引寻址。
+
+本指令受栈限检查约束。
+
+#### 4.98.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-246](FigureC2-246.png)
+
+**T1 变体**
+
+```arm
+LDRSH{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "LDRSH (literal)";
+if Rt == '1111' then SEE "Related encodings";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+n = UInt(Rn);
+imm32 = ZeroExtend(imm12, 32);
+index = TRUE;  add = TRUE;  wback = FALSE;
+if t == 13 then UNPREDICTABLE;
+```
+
+#### 4.98.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-247](FigureC2-247.png)
+
+**偏移变体**（当 `Rt != 1111 && P == 1 && U == 0 && W == 0` 时适用）
+
+```arm
+LDRSH{<c>}{<q>} <Rt>, [<Rn> {, #-<imm>}]
+```
+
+**后索引变体**（当 `P == 0 && W == 1` 时适用）
+
+```arm
+LDRSH{<c>}{<q>} <Rt>, [<Rn>], #{+/-}<imm>
+```
+
+**前索引变体**（当 `P == 1 && W == 1` 时适用）
+
+```arm
+LDRSH{<c>}{<q>} <Rt>, [<Rn>, #{+/-}<imm>]!
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "LDRSH (literal)";
+if Rt == '1111' && P == '1' && U == '0' && W == '0' then SEE "Related encodings";
+if P == '1' && U == '1' && W == '0' then SEE LDRSHT;
+if P == '0' && W == '0' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);
+imm32 = ZeroExtend(imm8, 32);
+index = (P == '1');  add = (U == '1');  wback = (W == '1');
+if t == 13 || (t == 15 && W == '1') || (wback && n == t) then UNPREDICTABLE;
+```
+
+#### 4.98.3. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `wback && n == t`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令使用指定寻址模式执行全部加载，且被写回的寄存器内容为 UNKNOWN。此外，若在此类指令执行期间发生异常，基址可能被破坏，以致该指令无法重复执行。
+
+#### 4.98.4. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。PC 的使用见 C2.4.99 LDRSH (literal)。
+- **`+/-`**：指定偏移是加到基址寄存器还是从基址寄存器中减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - `-`：当 `U = 0` 时。
+  - `+`：当 `U = 1` 时。
+- **`+`**：指定偏移加到基址寄存器。
+- **`<imm>`**：
+  - 对后索引或前索引变体：8 位无符号立即数字节偏移，范围 0 到 255，编码在 `imm8` 字段中。
+  - 对 T1 编码：可选的 12 位无符号立即数字节偏移，范围 0 到 4095，默认为 0，编码在 `imm12` 字段中。
+  - 对 T2 编码：可选的 8 位无符号立即数字节偏移，范围 0 到 255，默认为 0，编码在 `imm8` 字段中。
+
+#### 4.98.5. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset_addr = if add then (R[n] + imm32) else (R[n] - imm32);
+  address = if index then offset_addr else R[n];
+
+  // 判断是否应执行栈指针限值检查
+  if n == 13 && wback then
+    violatesLimit = ViolatesSPLim(LookUpSP(), offset_addr);
+  else
+    violatesLimit = FALSE;
+  // 仅在未违反限值时才执行内存操作
+  if !violatesLimit then
+    R[t] = SignExtend(MemU[address, 2], 32);
+
+  // 若更新栈指针，违反限值将引发故障
+  if wback then RSPCheck[n] = offset_addr;
+```
+
+#### 4.98.6. 受限行为
+
+无额外限制。
+
+#### 4.98.7. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1，且未使用 R15 作为目标寄存器：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.99. LDRSH (literal)：加载寄存器有符号半字（字面量）
+
+**加载寄存器有符号半字（字面量）**（Load Register Signed Halfword (literal)）。LDRSH 由 PC 值与立即数偏移算出地址，从内存加载一个半字，将其符号扩展为 32 位字并写入寄存器。
+
+#### 4.99.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-248](FigureC2-248.png)
+
+**T1 变体**
+
+```arm
+LDRSH{<c>}{<q>} <Rt>, <label>
+  // 首选语法
+LDRSH{<c>}{<q>} <Rt>, [PC, #{+/-}<imm>]
+  // 备用语法
+```
+
+**解码**
+
+```arm
+if Rt == '1111' then SEE "Related encodings";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+imm32 = ZeroExtend(imm12, 32);
+add = (U == '1');
+if t == 13 then UNPREDICTABLE;
+```
+
+#### 4.99.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<label>`**：要加载到 `<Rt>` 中的字面量数据项的标签。汇编器根据该指令的 `Align(PC, 4)` 值到该标签的距离算出所需的偏移值。允许的偏移值为 -4095 到 4095。若偏移为零或正，则 `imm32` 等于该偏移且 `add == TRUE`（编码为 `U == 1`）。若偏移为负，则 `imm32` 等于该偏移的负值且 `add == FALSE`（编码为 `U == 0`）。
+- **`+/-`**：指定偏移是加到基址寄存器还是从基址寄存器中减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - `-`：当 `U = 0` 时。
+  - `+`：当 `U = 1` 时。
+- **`<imm>`**：12 位无符号立即数字节偏移，范围 0 到 4095，编码在 `imm12` 字段中。
+
+#### 4.99.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  base = Align(PC,4);
+  address = if add then (base + imm32) else (base - imm32);
+  data = MemU[address, 2];
+  R[t] = SignExtend(data, 32);
+```
+
+#### 4.99.4. 受限行为
+
+无额外限制。
+
+#### 4.99.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.100. LDRSH (register)：加载寄存器有符号半字（寄存器）
+
+**加载寄存器有符号半字（寄存器）**（Load Register Signed Halfword (register)）。LDRSH 由基址寄存器值与偏移寄存器值算出地址，从内存加载一个半字，将其符号扩展为 32 位字并写入寄存器。偏移寄存器值可以左移 0、1、2 或 3 位。
+
+#### 4.100.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-249](FigureC2-249.png)
+
+**T1 变体**
+
+```arm
+LDRSH{<c>}{<q>} <Rt>, [<Rn>, {+}<Rm>]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);  m = UInt(Rm);
+index = TRUE;  add = TRUE;  wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, 0);
+```
+
+#### 4.100.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-250](FigureC2-250.png)
+
+**T2 变体**
+
+```arm
+LDRSH{<c>}.W <Rt>, [<Rn>, {+}<Rm>]
+  // 若 <Rt>、<Rn>、<Rm> 可用 T1 表示
+LDRSH{<c>}{<q>} <Rt>, [<Rn>, {+}<Rm>{, LSL #<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "LDRSH (literal)";
+if Rt == '1111' then SEE "Related encodings";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);  n = UInt(Rn);  m = UInt(Rm);
+index = TRUE;  add = TRUE;  wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, UInt(imm2));
+if t == 13 || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.100.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+`**：指定索引寄存器加到基址寄存器。
+- **`<Rm>`**：通用索引寄存器，编码在 `Rm` 字段中。
+- **`<imm>`**：若存在，为对 `<Rm>` 的值施加的左移位数，范围 1–3，编码在 `imm2` 中。若不存在，则不指定移位，`imm2` 编码为 `0b00`。
+
+#### 4.100.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset = Shift(R[m], shift_t, shift_n, APSR.C);
+  offset_addr = if add then (R[n] + offset) else (R[n] - offset);
+  address = if index then offset_addr else R[n];
+  data = MemU[address, 2];
+  if wback then R[n] = offset_addr;
+  R[t] = SignExtend(data, 32);
+```
+
+#### 4.100.5. 受限行为
+
+无额外限制。
+
+#### 4.100.6. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.101. LDRSHT：非特权加载寄存器有符号半字
+
+**非特权加载寄存器有符号半字**（Load Register Signed Halfword Unprivileged）。LDRSHT 由基址寄存器值与立即数偏移算出地址，从内存加载一个半字，将其符号扩展为 32 位字并写入寄存器。
+
+当特权软件使用 LDRSHT 指令时，内存访问受到限制，如同该软件处于非特权状态。
+
+#### 4.101.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-251](FigureC2-251.png)
+
+**T1 变体**
+
+```arm
+LDRSHT{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "LDRSH (literal)";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+n = UInt(Rn);
+postindex = FALSE;
+add = TRUE;
+register_form = FALSE;
+imm32 = ZeroExtend(imm8, 32);
+if t IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.101.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+`**：指定偏移加到基址寄存器。
+- **`<imm>`**：可选的 8 位无符号立即数字节偏移，范围 0 到 255，默认为 0，编码在 `imm8` 字段中。
+
+#### 4.101.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n] + imm32;
+  data = MemU_unpriv[address, 2];
+  R[t] = SignExtend(data, 32);
+```
+
+#### 4.101.4. 受限行为
+
+无额外限制。
+
+#### 4.101.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.102. LDRT：非特权加载寄存器
+
+**非特权加载寄存器**（Load Register Unprivileged）。LDRT 由基址寄存器值与立即数偏移算出地址，从内存加载一个字并写入寄存器。
+
+当特权软件使用 LDRT 指令时，内存访问受到限制，如同该软件处于非特权状态。
+
+#### 4.102.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-252](FigureC2-252.png)
+
+**T1 变体**
+
+```arm
+LDRT{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "LDR (literal)";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+n = UInt(Rn);
+postindex = FALSE;
+add = TRUE;
+register_form = FALSE;
+imm32 = ZeroExtend(imm8, 32);
+if t IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.102.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+`**：指定偏移加到基址寄存器。
+- **`<imm>`**：可选的 8 位无符号立即数字节偏移，范围 0 到 255，默认为 0，编码在 `imm8` 字段中。
+
+#### 4.102.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n] + imm32;
+  data = MemU_unpriv[address, 4];
+  R[t] = data;
+```
+
+#### 4.102.4. 受限行为
+
+无额外限制。
+
+#### 4.102.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.103. LE、LETP：循环结束
+
+**循环结束、带尾谓词的循环结束**（Loop End, Loop End with Tail Predication）。若循环还需要更多迭代，该指令分支回 `<label>`。它还把循环信息存入循环信息缓存，使该循环后续的迭代在遇到 LE 指令之前就分支回循环起始处。该指令的第一个变体检查循环迭代计数器（存放在 LR 中）以确定是否需要更多迭代，同时递减计数器以备下一次迭代。
+
+第二个变体不使用迭代计数，总是触发循环的下一次迭代。
+
+第三个（TP）变体也检查循环迭代计数器以确定是否需要更多迭代。但计数器递减的量是一个向量的元素个数（由 `FPSCR.LTPSIZE` 字段指示）。在循环的最后一次迭代中，该变体禁用尾谓词。
+
+该指令不允许出现在 IT 块中。
+
+#### 4.103.1. 编码 T1
+
+适用于 Armv8.1-M Low Overhead Branch 扩展。
+
+![FigureC2-253](FigureC2-253.png)
+
+**T1：LE 变体**
+
+```arm
+LE<q> LR, <label>
+```
+
+**解码**
+
+```arm
+if !HaveLOBExt() then UNDEFINED;
+forever = FALSE;
+tp = FALSE;
+imm32 = ZeroExtend(immh:imml:'0', 32);
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.103.2. 编码 T2
+
+适用于 Armv8.1-M Low Overhead Branch 扩展。
+
+![FigureC2-254](FigureC2-254.png)
+
+**T2：LE 变体**
+
+```arm
+LE<q> <label>
+```
+
+**解码**
+
+```arm
+if !HaveLOBExt() then UNDEFINED;
+forever = TRUE;
+tp = FALSE;
+imm32 = ZeroExtend(immh:imml:'0', 32);
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.103.3. 编码 T3
+
+适用于 Armv8.1-M Low Overhead Branch 扩展与 MVE。
+
+![FigureC2-255](FigureC2-255.png)
+
+**T3：LETP 变体**
+
+```arm
+LETP<q> LR, <label>
+```
+
+**解码**
+
+```arm
+if !HaveLOBExt() then UNDEFINED;
+if !HaveMve() then UNDEFINED;
+HandleException(CheckCPEnabled(10));
+forever = FALSE;
+tp = TRUE;
+imm32 = ZeroExtend(immh:imml:'0', 32);
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.103.4. 汇编符号（所有编码）
+
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<LR>`**：LR 用于保存循环的迭代计数器，该指令必须始终使用该寄存器。
+- **`<label>`**：指定循环体中第一条指令的标签。
+
+#### 4.103.5. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+if tp then
+  ExecuteFPCheck();
+elsif LTPSIZE != 4 then
+  // 尾谓词循环的开始必须与 LETP 循环结束配对。
+  // 在这种情况下使用 LE 指令属于编程错误。
+  UFSR.INVSTATE = '1';
+  HandleException(CreateException(UsageFault));
+
+if !forever && IsLastLowOverheadLoop() then
+  if tp then
+    FPSCR.LTPSIZE = 4[2:0];  // 禁用循环谓词
+  else
+    // 递减循环计数器
+    if !forever then
+      LR = LR - (1 << (4 - LTPSIZE))[31:0];
+
+// 设置分支缓存信息
+jumpAddr = PC - imm32;
+if CCR.LOB == '1' then
+  LO_BRANCH_INFO.VALID     = '1';
+  LO_BRANCH_INFO.BF        = '0';
+  LO_BRANCH_INFO.LF        = if forever then '1' else '0';
+  LO_BRANCH_INFO.T16IND    = '0';
+  LO_BRANCH_INFO.BTI       = '0';
+  LO_BRANCH_INFO.JUMP_ADDR = jumpAddr[31:1];
+  LO_BRANCH_INFO.END_ADDR  = ThisInstrAddr()[31:1];
+
+// 分支到循环起始处
+BranchTo(jumpAddr);
+```
+
+### 4.104. LSL (immediate)：逻辑左移（立即数）
+
+**逻辑左移（立即数）**（Logical Shift Left (immediate)）。LSL 将寄存器值左移一个立即数位数，空出的低位补零，并把结果写入目标寄存器。
+
+该指令是 `MOV (register)` 指令的别名。这意味着：
+
+- 本说明中的编码命名与 `MOV (register)` 的编码保持一致。
+- `MOV (register)` 的说明给出了本指令的操作伪代码。
+
+#### 4.104.1. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-256](FigureC2-256.png)
+
+**T2 变体**（位于 IT 块内）
+
+```arm
+LSL<c>{<q>} {<Rd>,} <Rm>, #<imm>
+```
+
+位于 IT 块内时等价于：
+
+```arm
+MOV<c>{<q>} <Rd>, <Rm>, LSL #<imm>
+```
+
+并且当 `InITBlock()` 时，这是首选的反汇编形式。
+
+#### 4.104.2. 编码 T3
+
+仅适用于 Armv8-M Main 扩展。
+
+- 在 Armv8.0-M 中，bit[15]（编码低 16 位的 [0]）表示 (0)。
+- 在 Armv8.1-M 中，bit[15]（编码低 16 位的 [0]）表示 0。
+
+![FigureC2-257](FigureC2-257.png)
+
+**MOV、按值移位或循环变体**
+
+```arm
+LSL<c>.W {<Rd>,} <Rm>, #<imm>
+  // 位于 IT 块内，且 <Rd>、<Rm>、<imm> 可用 T2 表示
+  // 等价于 MOV{<c>}{<q>} <Rd>, <Rm>, LSL #<imm>，且始终是首选反汇编
+LSL{<c>}{<q>} {<Rd>,} <Rm>, #<imm>
+  // 等价于 MOV{<c>}{<q>} <Rd>, <Rm>, LSL #<imm>，且始终是首选反汇编
+```
+
+#### 4.104.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：通用源寄存器，编码在 `Rm` 字段中。
+- **`<imm>`**：
+  - 对 T2 编码：移位量，范围 1 到 31，编码在 `imm5` 字段中。
+  - 对 T3 编码：移位量，范围 1 到 31，编码在 `imm3:imm2` 字段中。
+
+#### 4.104.4. 操作（所有编码）
+
+`MOV (register)` 的说明给出了本指令的操作伪代码。
+
+#### 4.104.5. 受限行为
+
+无额外限制。
+
+#### 4.104.6. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.105. LSL (register)：逻辑左移（寄存器）
+
+**逻辑左移（寄存器）**（Logical Shift Left (register)）。LSL 将寄存器值左移由一个寄存器低位字节给出的可变位数，空出的低位补零，并把结果写入目标寄存器。
+
+该指令是 `MOV, MOVS (register-shifted register)` 指令的别名。这意味着：
+
+- 本说明中的编码命名与 `MOV, MOVS (register-shifted register)` 的编码保持一致。
+- `MOV, MOVS (register-shifted register)` 的说明给出了本指令的操作伪代码。
+
+#### 4.105.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-258](FigureC2-258.png)
+
+**逻辑左移变体**
+
+```arm
+LSL<c>{<q>} {<Rdm>,} <Rdm>, <Rs>
+```
+
+位于 IT 块内时等价于：
+
+```arm
+MOV<c>{<q>} <Rdm>, <Rdm>, LSL <Rs>
+```
+
+并且当 `InITBlock()` 时，这是首选的反汇编形式。
+
+#### 4.105.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-259](FigureC2-259.png)
+
+**不设置标志变体**
+
+```arm
+LSL<c>.W {<Rd>,} <Rm>, <Rs>
+  // 位于 IT 块内，且 <Rd>、<Rm>、<sr_type>、<Rs> 可用 T1 表示
+  // 等价于 MOV{<c>}{<q>} <Rd>, <Rm>, LSL <Rs>，且始终是首选反汇编
+LSL{<c>}{<q>} {<Rd>,} <Rm>, <Rs>
+  // 等价于 MOV{<c>}{<q>} <Rd>, <Rm>, LSL <Rs>，且始终是首选反汇编
+```
+
+#### 4.105.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rdm>`**：第一个通用源寄存器兼目标寄存器，编码在 `Rdm` 字段中。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：第一个通用源寄存器，编码在 `Rm` 字段中。
+- **`<Rs>`**：第二个通用源寄存器，其低 8 位存放移位量，编码在 `Rs` 字段中。
+
+#### 4.105.4. 操作（所有编码）
+
+`MOV, MOVS (register-shifted register)` 的说明给出了本指令的操作伪代码。
+
+#### 4.105.5. 受限行为
+
+无额外限制。
+
+#### 4.105.6. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.106. LSLL (immediate)：长字逻辑左移（立即数）
+
+**长字逻辑左移**（Logical Shift Left Long）。LSLL 对存放在两个通用寄存器中的 64 位值左移 1 到 32 位。
+
+#### 4.106.1. 编码 T1
+
+适用于 Armv8.1-M MVE。
+
+![FigureC2-260](FigureC2-260.png)
+
+**T1：LSLL 变体**
+
+```arm
+LSLL<c><q> RdaLo, RdaHi, #<imm>
+```
+
+**解码**
+
+```arm
+if RdaHi == '111' then SEE "UQSHL (immediate)";
+if !HaveMainExt() then UNDEFINED;
+if !HasArchVersion(Armv8p1) then SEE "Related encodings";
+if !HaveMve() then UNDEFINED;
+dah = UInt(RdaHi:'1');
+dal = UInt(RdaLo:'0');
+(-, amount) = DecodeImmShift('10', immh:imml);
+if RdaHi == '110' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.106.2. 汇编符号（所有编码）
+
+- **`<c, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<RdaLo>`**：64 位源与目标的低半部分所用的通用寄存器，存放要移位的值。必须为偶数编号寄存器。
+- **`<RdaHi>`**：64 位源与目标的高半部分所用的通用寄存器，存放要移位的值。必须为奇数编号寄存器。
+- **`<imm>`**：要移位的位数，范围 1–32。
+
+#### 4.106.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  op1 = UInt(R[dah]:R[dal]);
+  result = (op1 << amount)[63:0];
+  R[dah] = result[63:32];
+  R[dal] = result[31:0];
+```
+
+#### 4.106.4. 受限行为
+
+无额外限制。
+
+#### 4.106.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所作用的数据值无关。
+- 异步异常的接受时刻不因本指令所使用的数据值而变化。
+
+### 4.107. LSLL (register)：长字逻辑左移（寄存器）
+
+**长字逻辑左移**（Logical Shift Left Long）。LSLL 对存放在两个通用寄存器中的 64 位值左移 0 到 64 位。移位量从 `Rm` 的低位字节读入。若移位量为负，则移位方向反转。
+
+#### 4.107.1. 编码 T1
+
+适用于 Armv8.1-M MVE。
+
+![FigureC2-261](FigureC2-261.png)
+
+**T1：LSLL 变体**
+
+```arm
+LSLL<c><q> RdaLo, RdaHi, Rm
+```
+
+**解码**
+
+```arm
+if RdaHi == '111' then SEE "UQRSHL (register)";
+if !HaveMainExt() then UNDEFINED;
+if !HasArchVersion(Armv8p1) then SEE "Related encodings";
+if !HaveMve() then UNDEFINED;
+dah = UInt(RdaHi:'1');
+dal = UInt(RdaLo:'0');
+m = UInt(Rm);
+if RdaHi == '110' || Rm == '11x1' || Rm == RdaHi:'1' then CONSTRAINED_UNPREDICTABLE;
+if Rm == RdaLo:'0' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.107.2. 汇编符号（所有编码）
+
+- **`<c, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<RdaLo>`**：64 位源与目标的低半部分所用的通用寄存器，存放要移位的值。必须为偶数编号寄存器。
+- **`<RdaHi>`**：64 位源与目标的高半部分所用的通用寄存器，存放要移位的值。必须为奇数编号寄存器。
+- **`<Rm>`**：通用源寄存器，其低位字节存放移位量。
+
+#### 4.107.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  amount = SInt(R[m][7:0]);
+  op1 = UInt(R[dah]:R[dal]);
+  result = (op1 << amount)[63:0];
+  R[dah] = result[63:32];
+  R[dal] = result[31:0];
+```
+
+#### 4.107.4. 受限行为
+
+无额外限制。
+
+#### 4.107.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所作用的数据值无关。
+- 异步异常的接受时刻不因本指令所使用的数据值而变化。
+
+### 4.108. LSLS (immediate)：逻辑左移并设置标志（立即数）
+
+**逻辑左移并设置标志（立即数）**（Logical Shift Left, Setting flags (immediate)）。LSLS 将寄存器值左移一个立即数位数，空出的低位补零，把结果写入目标寄存器，并根据结果更新条件标志。
+
+该指令是 `MOV (register)` 指令的别名。这意味着：
+
+- 本说明中的编码命名与 `MOV (register)` 的编码保持一致。
+- `MOV (register)` 的说明给出了本指令的操作伪代码。
+
+#### 4.108.1. 编码 T2
+
+适用于 Armv8-M。
+
+![FigureC2-262](FigureC2-262.png)
+
+**T2 变体**（位于 IT 块之外）
+
+```arm
+LSLS{<q>} {<Rd>,} <Rm>, #<imm>
+```
+
+位于 IT 块之外时等价于：
+
+```arm
+MOVS{<q>} <Rd>, <Rm>, LSL #<imm>
+```
+
+并且当 `!InITBlock()` 时，这是首选的反汇编形式。
+
+#### 4.108.2. 编码 T3
+
+仅适用于 Armv8-M Main 扩展。
+
+- 在 Armv8.0-M 中，bit[15]（编码低 16 位的 [0]）表示 (0)。
+- 在 Armv8.1-M 中，bit[15]（编码低 16 位的 [0]）表示 0。
+
+![FigureC2-263](FigureC2-263.png)
+
+**MOVS、按值移位或循环变体**
+
+```arm
+LSLS.W {<Rd>,} <Rm>, #<imm>
+  // 位于 IT 块之外，且 <Rd>、<Rm>、<imm> 可用 T2 表示
+  // 等价于 MOVS{<c>}{<q>} <Rd>, <Rm>, LSL #<imm>，且始终是首选反汇编
+LSLS{<c>}{<q>} {<Rd>,} <Rm>, #<imm>
+  // 等价于 MOVS{<c>}{<q>} <Rd>, <Rm>, LSL #<imm>，且始终是首选反汇编
+```
+
+#### 4.108.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：通用源寄存器，编码在 `Rm` 字段中。
+- **`<imm>`**：
+  - 对 T2 编码：移位量，范围 1 到 31，编码在 `imm5` 字段中。
+  - 对 T3 编码：移位量，范围 1 到 31，编码在 `imm3:imm2` 字段中。
+
+#### 4.108.4. 操作（所有编码）
+
+`MOV (register)` 的说明给出了本指令的操作伪代码。
+
+#### 4.108.5. 受限行为
+
+无额外限制。
+
+#### 4.108.6. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.109. LSLS (register)：逻辑左移并设置标志（寄存器）
+
+**逻辑左移并设置标志（寄存器）**（Logical Shift Left, Setting flags (register)）。LSLS 将寄存器值左移由一个寄存器低位字节给出的可变位数，空出的低位补零，把结果写入目标寄存器，并根据结果更新条件标志。
+
+该指令是 `MOV, MOVS (register-shifted register)` 指令的别名。这意味着：
+
+- 本说明中的编码命名与 `MOV, MOVS (register-shifted register)` 的编码保持一致。
+- `MOV, MOVS (register-shifted register)` 的说明给出了本指令的操作伪代码。
+
+#### 4.109.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-264](FigureC2-264.png)
+
+**逻辑左移变体**（位于 IT 块之外）
+
+```arm
+LSLS{<q>} {<Rdm>,} <Rdm>, <Rs>
+```
+
+位于 IT 块之外时等价于：
+
+```arm
+MOVS{<q>} <Rdm>, <Rdm>, LSL <Rs>
+```
+
+并且当 `!InITBlock()` 时，这是首选的反汇编形式。
+
+#### 4.109.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-265](FigureC2-265.png)
+
+**设置标志变体**
+
+```arm
+LSLS.W {<Rd>,} <Rm>, <Rs>
+  // 位于 IT 块之外，且 <Rd>、<Rm>、<sr_type>、<Rs> 可用 T1 表示
+  // 等价于 MOVS{<c>}{<q>} <Rd>, <Rm>, LSL <Rs>，且始终是首选反汇编
+LSLS{<c>}{<q>} {<Rd>,} <Rm>, <Rs>
+  // 等价于 MOVS{<c>}{<q>} <Rd>, <Rm>, LSL <Rs>，且始终是首选反汇编
+```
+
+#### 4.109.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rdm>`**：第一个通用源寄存器兼目标寄存器，编码在 `Rdm` 字段中。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：第一个通用源寄存器，编码在 `Rm` 字段中。
+- **`<Rs>`**：第二个通用源寄存器，其低 8 位存放移位量，编码在 `Rs` 字段中。
+
+#### 4.109.4. 操作（所有编码）
+
+`MOV, MOVS (register-shifted register)` 的说明给出了本指令的操作伪代码。
+
+#### 4.109.5. 受限行为
+
+无额外限制。
+
+#### 4.109.6. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.110. LSR (immediate)：逻辑右移（立即数）
+
+**逻辑右移（立即数）**（Logical Shift Right (immediate)）。LSR 将寄存器值右移一个立即数位数，空出的高位补零，并把结果写入目标寄存器。
+
+该指令是 `MOV (register)` 指令的别名。这意味着：
+
+- 本说明中的编码命名与 `MOV (register)` 的编码保持一致。
+- `MOV (register)` 的说明给出了本指令的操作伪代码。
+
+#### 4.110.1. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-266](FigureC2-266.png)
+
+**T2 变体**（位于 IT 块内）
+
+```arm
+LSR<c>{<q>} {<Rd>,} <Rm>, #<imm>
+```
+
+位于 IT 块内时等价于：
+
+```arm
+MOV<c>{<q>} <Rd>, <Rm>, LSR #<imm>
+```
+
+并且当 `InITBlock()` 时，这是首选的反汇编形式。
+
+#### 4.110.2. 编码 T3
+
+仅适用于 Armv8-M Main 扩展。
+
+- 在 Armv8.0-M 中，bit[15]（编码低 16 位的 [0]）表示 (0)。
+- 在 Armv8.1-M 中，bit[15]（编码低 16 位的 [0]）表示 0。
+
+![FigureC2-267](FigureC2-267.png)
+
+**MOV、按值移位或循环变体**
+
+```arm
+LSR<c>.W {<Rd>,} <Rm>, #<imm>
+  // 位于 IT 块内，且 <Rd>、<Rm>、<imm> 可用 T2 表示
+  // 等价于 MOV{<c>}{<q>} <Rd>, <Rm>, LSR #<imm>，且始终是首选反汇编
+LSR{<c>}{<q>} {<Rd>,} <Rm>, #<imm>
+  // 等价于 MOV{<c>}{<q>} <Rd>, <Rm>, LSR #<imm>，且始终是首选反汇编
+```
+
+#### 4.110.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：通用源寄存器，编码在 `Rm` 字段中。
+- **`<imm>`**：
+  - 对 T2 编码：移位量，范围 1 到 32，以 `<imm>` 对 32 取模的形式编码在 `imm5` 字段中。
+  - 对 T3 编码：移位量，范围 1 到 32，以 `<imm>` 对 32 取模的形式编码在 `imm3:imm2` 字段中。
+
+#### 4.110.4. 操作（所有编码）
+
+`MOV (register)` 的说明给出了本指令的操作伪代码。
+
+#### 4.110.5. 受限行为
+
+无额外限制。
+
+#### 4.110.6. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.111. LSR (register)：逻辑右移（寄存器）
+
+**逻辑右移（寄存器）**（Logical Shift Right (register)）。LSR 将寄存器值右移由一个寄存器低位字节给出的可变位数，空出的高位补零，把结果写入目标寄存器。
+
+该指令是 `MOV, MOVS (register-shifted register)` 指令的别名。这意味着：
+
+- 本说明中的编码命名与 `MOV, MOVS (register-shifted register)` 的编码保持一致。
+- `MOV, MOVS (register-shifted register)` 的说明给出了本指令的操作伪代码。
+
+#### 4.111.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-268](FigureC2-268.png)
+
+**逻辑右移变体**（位于 IT 块之外）
+
+```arm
+LSR<c>{<q>} {<Rdm>,} <Rdm>, <Rs>
+```
+
+位于 IT 块之外时等价于：
+
+```arm
+MOV<c>{<q>} <Rdm>, <Rdm>, LSR <Rs>
+```
+
+并且当 `!InITBlock()` 时，这是首选的反汇编形式。
+
+#### 4.111.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-269](FigureC2-269.png)
+
+**不设置标志变体**
+
+```arm
+LSR<c>.W {<Rd>,} <Rm>, <Rs>
+  // 位于 IT 块内，且 <Rd>、<Rm>、<sr_type>、<Rs> 可用 T1 表示
+  // 等价于 MOV{<c>}{<q>} <Rd>, <Rm>, LSR <Rs>，且始终是首选反汇编
+LSR{<c>}{<q>} {<Rd>,} <Rm>, <Rs>
+  // 等价于 MOV{<c>}{<q>} <Rd>, <Rm>, LSR <Rs>，且始终是首选反汇编
+```
+
+#### 4.111.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rdm>`**：第一个通用源寄存器兼目标寄存器，编码在 `Rdm` 字段中。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：第一个通用源寄存器，编码在 `Rm` 字段中。
+- **`<Rs>`**：第二个通用源寄存器，其低 8 位存放移位量，编码在 `Rs` 字段中。
+
+#### 4.111.4. 操作（所有编码）
+
+`MOV, MOVS (register-shifted register)` 的说明给出了本指令的操作伪代码。
+
+#### 4.111.5. 受限行为
+
+无额外限制。
+
+#### 4.111.6. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.112. LSRL (immediate)：立即数长逻辑右移
+
+**立即数长逻辑右移**（Logical Shift Right Long）。把存放在两个通用寄存器中的 64 位值逻辑右移 1–32 位。
+
+#### 4.112.1. 编码 T1
+
+适用于 Armv8.1-M MVE。
+
+![FigureC2-270](FigureC2-270.png)
+
+**T1：LSRL 变体**
+
+```arm
+LSRL<c><q> RdaLo, RdaHi, #<imm>
+```
+
+**解码**
+
+```arm
+if RdaHi == '111'  then SEE "URSHR (immediate)";
+if !HaveMainExt()  then UNDEFINED;
+if !HasArchVersion(Armv8p1) then SEE "Related encodings";
+if !HaveMve()  then UNDEFINED;
+dah = UInt(RdaHi:'1');
+dal = UInt(RdaLo:'0');
+(-, amount) = DecodeImmShift('10', immh:imml);
+if RdaHi == '110' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.112.2. 汇编符号（所有编码）
+
+- **`<c, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<RdaLo>`**：64 位源兼目标值低半部分所用的通用寄存器，其中存放待移位的值。该寄存器必须是偶数编号寄存器。
+- **`<RdaHi>`**：64 位源兼目标值高半部分所用的通用寄存器，其中存放待移位的值。该寄存器必须是奇数编号寄存器。
+- **`<imm>`**：移位位数，取值 1–32。
+
+#### 4.112.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  op1  = UInt(R[dah]:R[dal]);
+  result = (op1 >> amount)[63:0];
+  R[dah] = result[63:32];
+  R[dal] = result[31:0];
+```
+
+#### 4.112.4. 受限行为
+
+无额外限制。
+
+#### 4.112.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.113. LSRS (immediate)：逻辑右移并设置标志（立即数）
+
+**逻辑右移并设置标志（立即数）**（Logical Shift Right, Setting flags (immediate)）。LSRS 将寄存器值右移一个立即数位数，空出的高位补零，把结果写入目标寄存器，并根据结果更新条件标志。
+
+该指令是 `MOV (register)` 指令的别名。这意味着：
+
+- 本说明中的编码命名与 `MOV (register)` 的编码保持一致。
+- `MOV (register)` 的说明给出了本指令的操作伪代码。
+
+#### 4.113.1. 编码 T2
+
+适用于 Armv8-M。
+
+![FigureC2-271](FigureC2-271.png)
+
+**T2 变体**（位于 IT 块之外）
+
+```arm
+LSRS{<q>} {<Rd>,} <Rm>, #<imm>
+```
+
+位于 IT 块之外时等价于：
+
+```arm
+MOVS{<q>} <Rd>, <Rm>, LSR #<imm>
+```
+
+并且当 `!InITBlock()` 时，这是首选的反汇编形式。
+
+#### 4.113.2. 编码 T3
+
+仅适用于 Armv8-M Main 扩展。
+
+- 在 Armv8.0-M 中，bit[15]（编码低 16 位的 [0]）表示 (0)。
+- 在 Armv8.1-M 中，bit[15]（编码低 16 位的 [0]）表示 0。
+
+![FigureC2-272](FigureC2-272.png)
+
+**MOVS、按值移位或循环变体**
+
+```arm
+LSRS.W {<Rd>,} <Rm>, #<imm>
+  // 位于 IT 块之外，且 <Rd>、<Rm>、<imm> 可用 T2 表示
+  // 等价于 MOVS{<c>}{<q>} <Rd>, <Rm>, LSR #<imm>，且始终是首选反汇编
+LSRS{<c>}{<q>} {<Rd>,} <Rm>, #<imm>
+  // 等价于 MOVS{<c>}{<q>} <Rd>, <Rm>, LSR #<imm>，且始终是首选反汇编
+```
+
+#### 4.113.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：通用源寄存器，编码在 `Rm` 字段中。
+- **`<imm>`**：
+  - 对 T2 编码：移位量，范围 1 到 32，以 `<imm>` 对 32 取模的形式编码在 `imm5` 字段中。
+  - 对 T3 编码：移位量，范围 1 到 32，以 `<imm>` 对 32 取模的形式编码在 `imm3:imm2` 字段中。
+
+#### 4.113.4. 操作（所有编码）
+
+`MOV (register)` 的说明给出了本指令的操作伪代码。
+
+#### 4.113.5. 受限行为
+
+无额外限制。
+
+#### 4.113.6. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.114. LSRS (register)：逻辑右移并设置标志（寄存器）
+
+**逻辑右移并设置标志（寄存器）**（Logical Shift Right, Setting flags (register)）。LSRS 将寄存器值右移由一个寄存器低位字节给出的可变位数，空出的高位补零，把结果写入目标寄存器，并根据结果更新条件标志。
+
+该指令是 `MOV, MOVS (register-shifted register)` 指令的别名。这意味着：
+
+- 本说明中的编码命名与 `MOV, MOVS (register-shifted register)` 的编码保持一致。
+- `MOV, MOVS (register-shifted register)` 的说明给出了本指令的操作伪代码。
+
+#### 4.114.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-273](FigureC2-273.png)
+
+**逻辑右移变体**（位于 IT 块之外）
+
+```arm
+LSRS{<q>} {<Rdm>,} <Rdm>, <Rs>
+```
+
+位于 IT 块之外时等价于：
+
+```arm
+MOVS{<q>} <Rdm>, <Rdm>, LSR <Rs>
+```
+
+并且当 `!InITBlock()` 时，这是首选的反汇编形式。
+
+#### 4.114.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-274](FigureC2-274.png)
+
+**设置标志变体**
+
+```arm
+LSRS.W {<Rd>,} <Rm>, <Rs>
+  // 位于 IT 块之外，且 <Rd>、<Rm>、<sr_type>、<Rs> 可用 T1 表示
+  // 等价于 MOVS{<c>}{<q>} <Rd>, <Rm>, LSR <Rs>，且始终是首选反汇编
+LSRS{<c>}{<q>} {<Rd>,} <Rm>, <Rs>
+  // 等价于 MOVS{<c>}{<q>} <Rd>, <Rm>, LSR <Rs>，且始终是首选反汇编
+```
+
+#### 4.114.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rdm>`**：第一个通用源寄存器兼目标寄存器，编码在 `Rdm` 字段中。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：第一个通用源寄存器，编码在 `Rm` 字段中。
+- **`<Rs>`**：第二个通用源寄存器，其低 8 位存放移位量，编码在 `Rs` 字段中。
+
+#### 4.114.4. 操作（所有编码）
+
+`MOV, MOVS (register-shifted register)` 的说明给出了本指令的操作伪代码。
+
+#### 4.114.5. 受限行为
+
+无额外限制。
+
+#### 4.114.6. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.115. MCR, MCR2：从寄存器移入协处理器
+
+**从寄存器移入协处理器**（Move to Coprocessor from Register）。该指令把通用寄存器的值传给协处理器。
+
+若没有协处理器能执行该指令，则产生 UsageFault 异常。
+
+Arm 保留协处理器 CP8 至 CP15，本手册定义 `coproc` 处于该范围时的有效指令。
+
+#### 4.115.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-275](FigureC2-275.png)
+
+**T1 变体**
+
+```arm
+MCR{<c>}{<q>} <coproc>, {#}<opc1>, <Rt>, <CRn>, <CRm>{, {#}<opc2>}
+```
+
+**解码**
+
+```arm
+if coproc IN {'100x', '101x', '111x'} then SEE "Floating-point and MVE";
+if CoprocType(UInt(coproc)) == CP_CDEv1 then SEE "CDE instructions";
+cp = UInt(coproc);
+CheckCPDecodeFaults(cp);
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+if t == 15 || t == 13 then UNPREDICTABLE;
+```
+
+#### 4.115.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-276](FigureC2-276.png)
+
+**T2 变体**
+
+```arm
+MCR2{<c>}{<q>} <coproc>, {#}<opc1>, <Rt>, <CRn>, <CRm>{, {#}<opc2>}
+```
+
+**解码**
+
+```arm
+if coproc IN {'100x', '101x', '111x'} then SEE "Floating-point and MVE";
+if CoprocType(UInt(coproc)) == CP_CDEv1 then SEE "CDE instructions";
+cp = UInt(coproc);
+CheckCPDecodeFaults(cp);
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+if t == 15 || t == 13 then UNPREDICTABLE;
+```
+
+#### 4.115.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<coproc>`**：协处理器名称，编码在 `coproc` 字段中。通用协处理器名称取 `p0` 到 `p15`。
+- **`<opc1>`**：协处理器专用操作码，范围 0 到 7，编码在 `opc1` 字段中。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<CRn>`**：第一个协处理器寄存器，编码在 `CRn` 字段中。
+- **`<CRm>`**：第二个协处理器寄存器，编码在 `CRm` 字段中。
+- **`<opc2>`**：协处理器专用操作码，范围 0 到 7，默认为 0，编码在 `opc2` 字段中。
+
+#### 4.115.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  if !Coproc_Accepted(cp, ThisInstr()) then
+    GenerateCoprocessorException();
+  else
+    Coproc_SendOneWord(R[t], cp, ThisInstr());
+```
+
+### 4.116. MCRR, MCRR2：从两个寄存器移入协处理器
+
+**从两个寄存器移入协处理器**（Move to Coprocessor from two Registers）。该指令把两个通用寄存器的值传给协处理器。
+
+若没有协处理器能执行该指令，则产生 UsageFault 异常。
+
+Arm 保留协处理器 CP8 至 CP15，本手册定义 `coproc` 处于该范围时的有效指令。
+
+#### 4.116.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-277](FigureC2-277.png)
+
+**T1 变体**
+
+```arm
+MCRR{<c>}{<q>} <coproc>, {#}<opc1>, <Rt>, <Rt2>, <CRm>
+```
+
+**解码**
+
+```arm
+if coproc IN {'100x', '101x', '111x'} then SEE "Floating-point and MVE";
+if CoprocType(UInt(coproc)) == CP_CDEv1 then SEE "CDE instructions";
+cp = UInt(coproc);
+CheckCPDecodeFaults(cp);
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);  t2 = UInt(Rt2);
+if t == 15 || t2 == 15 then UNPREDICTABLE;
+if t == 13 || t2 == 13 then UNPREDICTABLE;
+```
+
+#### 4.116.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-278](FigureC2-278.png)
+
+**T2 变体**
+
+```arm
+MCRR2{<c>}{<q>} <coproc>, {#}<opc1>, <Rt>, <Rt2>, <CRm>
+```
+
+**解码**
+
+```arm
+if coproc IN {'100x', '101x', '111x'} then SEE "Floating-point and MVE";
+if CoprocType(UInt(coproc)) == CP_CDEv1 then SEE "CDE instructions";
+cp = UInt(coproc);
+CheckCPDecodeFaults(cp);
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);  t2 = UInt(Rt2);
+if t == 15 || t2 == 15 then UNPREDICTABLE;
+if t == 13 || t2 == 13 then UNPREDICTABLE;
+```
+
+#### 4.116.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<coproc>`**：协处理器名称，编码在 `coproc` 字段中。通用协处理器名称取 `p0` 到 `p15`。
+- **`<opc1>`**：协处理器专用操作码，范围 0 到 15，编码在 `opc1` 字段中。
+- **`<Rt>`**：要传输的第一个通用寄存器，编码在 `Rt` 字段中。
+- **`<Rt2>`**：要传输的第二个通用寄存器，编码在 `Rt2` 字段中。
+- **`<CRm>`**：协处理器寄存器，编码在 `CRm` 字段中。
+
+#### 4.116.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  if !Coproc_Accepted(cp, ThisInstr()) then
+    GenerateCoprocessorException();
+  else
+    Coproc_SendTwoWords(R[t2], R[t], cp, ThisInstr());
+```
+
+### 4.117. MLA：乘加
+
+**乘加**（Multiply Accumulate）。MLA 把两个寄存器值相乘，再加上第三个寄存器值。结果的最低有效 32 位写入目标寄存器。这 32 位与执行有符号计算还是无符号计算无关。
+
+#### 4.117.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-279](FigureC2-279.png)
+
+**T1 变体**
+
+```arm
+MLA{<c>}{<q>} <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+**解码**
+
+```arm
+if Ra == '1111' then SEE MUL;
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  a = UInt(Ra);
+setflags = FALSE;
+if d IN {13,15} || n IN {13,15} || m IN {13,15} || a == 13 then UNPREDICTABLE;
+```
+
+#### 4.117.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：保存被乘数的第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：保存乘数的第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<Ra>`**：保存加数的第三个通用源寄存器，编码在 `Ra` 字段中。
+
+#### 4.117.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  operand1 = SInt(R[n]);          // operand1 = UInt(R[n]) produces the same final results
+  operand2 = SInt(R[m]);          // operand2 = UInt(R[m]) produces the same final results
+  addend   = SInt(R[a]);          // addend   = UInt(R[a]) produces the same final results
+  result = operand1 * operand2 + addend;
+  R[d] = result[31:0];
+  if setflags then
+    APSR.N = result[31];
+    APSR.Z = IsZeroBit(result[31:0]);
+    // APSR.C unchanged
+    // APSR.V unchanged
+```
+
+#### 4.117.4. 受限行为
+
+无额外限制。
+
+#### 4.117.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.118. MLS：乘减
+
+**乘减**（Multiply and Subtract）。MLS 把两个寄存器值相乘，并从第三个寄存器值中减去结果的最低有效 32 位。这 32 位与执行有符号计算还是无符号计算无关。结果写入目标寄存器。
+
+#### 4.118.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-280](FigureC2-280.png)
+
+**T1 变体**
+
+```arm
+MLS{<c>}{<q>} <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  a = UInt(Ra);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} || a IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.118.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：保存被乘数的第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：保存乘数的第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<Ra>`**：保存被减数的第三个通用源寄存器，编码在 `Ra` 字段中。
+
+#### 4.118.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  operand1 = SInt(R[n]);          // operand1 = UInt(R[n]) produces the same final results
+  operand2 = SInt(R[m]);          // operand2 = UInt(R[m]) produces the same final results
+  addend   = SInt(R[a]);          // addend   = UInt(R[a]) produces the same final results
+  result = addend - operand1 * operand2;
+  R[d] = result[31:0];
+```
+
+#### 4.118.4. 受限行为
+
+无额外限制。
+
+#### 4.118.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.119. MOV (immediate)：移动（立即数）
+
+**移动（立即数）**（Move (immediate)）。MOV (immediate) 把一个立即数写入目标寄存器。它可以选择根据该值更新条件标志。
+
+#### 4.119.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-281](FigureC2-281.png)
+
+**T1 变体**
+
+```arm
+MOV<c>{<q>} <Rd>, #<imm8>
+  // 位于 IT 块内
+MOVS{<q>} <Rd>, #<imm8>
+  // 位于 IT 块之外
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);  setflags = !InITBlock();  imm32 = ZeroExtend(imm8, 32);  carry = APSR.C;
+```
+
+#### 4.119.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-282](FigureC2-282.png)
+
+**MOV 变体**（当 `S == 0` 时适用）
+
+```arm
+MOV<c>.W <Rd>, #<const>
+  // 位于 IT 块内，且 <Rd>、<const> 可用 T1 表示
+MOV{<c>}{<q>} <Rd>, #<const>
+```
+
+**MOVS 变体**（当 `S == 1` 时适用）
+
+```arm
+MOVS.W <Rd>, #<const>
+  // 位于 IT 块之外，且 <Rd>、<const> 可用 T1 表示
+MOVS{<c>}{<q>} <Rd>, #<const>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);  setflags = (S == '1');  (imm32, carry) = T32ExpandImm_C(i:imm3:imm8, APSR.C);
+if d IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.119.3. 编码 T3
+
+适用于 Armv8-M。
+
+![FigureC2-283](FigureC2-283.png)
+
+**T3 变体**
+
+```arm
+MOV{<c>}{<q>} <Rd>, #<imm16>
+  // <imm16> 无法用 T1 或 T2 表示
+MOVW{<c>}{<q>} <Rd>, #<imm16>
+  // <imm16> 可用 T1 或 T2 表示
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);  setflags = FALSE;  imm32 = ZeroExtend(imm4:i:imm3:imm8, 32);
+carry = bit UNKNOWN;
+if d IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.119.4. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<imm8>`**：8 位无符号立即数，范围 0 到 255，编码在 `imm8` 字段中。
+- **`<imm16>`**：16 位无符号立即数，范围 0 到 65535，编码在 `imm4:i:imm3:imm8` 字段中。
+- **`<const>`**：由编码在 `i:imm3:imm8` 字段中的 12 位立即数派生出的立即数值。取值范围见 C1.5 修改型立即数常量。
+
+#### 4.119.5. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  result = imm32;
+  R[d] = result;
+  if setflags then
+    APSR.N = result[31];
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    // APSR.V unchanged
+```
+
+#### 4.119.6. 受限行为
+
+无额外限制。
+
+#### 4.119.7. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.120. MOV (register)：移动（寄存器）
+
+**移动（寄存器）**（Move (register)）。MOV (register) 把寄存器中的值复制到目标寄存器。它可以选择根据该值更新条件标志。
+
+本指令受栈限检查约束。
+
+该指令被别名 `ASRS (immediate)`、`ASR (immediate)`、`LSLS (immediate)`、`LSL (immediate)`、`LSRS (immediate)`、`LSR (immediate)`、`RORS (immediate)`、`ROR (immediate)`、`RRXS`、`RRX` 使用。
+
+#### 4.120.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-284](FigureC2-284.png)
+
+**T1 变体**
+
+```arm
+MOV{<c>}{<q>} <Rd>, <Rm>
+```
+
+**解码**
+
+```arm
+d = UInt(D:Rd);  m = UInt(Rm);  setflags = FALSE;
+(shift_t, shift_n) = (SRType_LSL, 0);
+if HaveMainExt() then
+  if d == 15 && InITBlock() && !LastInITBlock() then UNPREDICTABLE;
+```
+
+#### 4.120.2. 编码 T2
+
+适用于 Armv8-M。
+
+![FigureC2-285](FigureC2-285.png)
+
+**T2 变体**
+
+```arm
+MOV<c>{<q>} <Rd>, <Rm> {, <shift> #<amount>}
+  // 位于 IT 块内
+MOVS{<q>} <Rd>, <Rm> {, <shift> #<amount>}
+  // 位于 IT 块之外
+```
+
+**解码**
+
+```arm
+if op == '11' then SEE "Related encodings";
+d = UInt(Rd);  m = UInt(Rm);  setflags = !InITBlock();
+(shift_t, shift_n) = DecodeImmShift(op, imm5);
+if op == '00' && imm5 == '00000' && InITBlock() then UNPREDICTABLE;
+```
+
+#### 4.120.3. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `op == '00' && imm5 == '00000' && InITBlock()`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令视作通过其条件码检查而执行。
+- 该指令按 NOP 执行，视作未通过其条件码检查。
+- 该指令按 `MOV Rd, Rm` 执行。
+
+#### 4.120.4. 编码 T3
+
+仅适用于 Armv8-M Main 扩展。
+
+- 在 Armv8.0-M 中，bit[15]（编码低 16 位的 [0]）表示 (0)。
+- 在 Armv8.1-M 中，bit[15]（编码低 16 位的 [0]）表示 0。
+
+![FigureC2-286](FigureC2-286.png)
+
+**MOV, 带扩展的循环右移变体**（当 `S == 0 && imm3 == 000 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+MOV{<c>}{<q>} <Rd>, <Rm>, RRX
+```
+
+**MOV, 按值移位或循环变体**（当 `S == 0 && !(imm3 == 000 && imm2 == 00 && sr_type == 11)` 时适用）
+
+```arm
+MOV<c>.W <Rd>, <Rm> {, <shift> #<amount>}
+  // 位于 IT 块内
+  // 且 <Rd>、<Rm>、<shift>、<amount> 可用 T1 或 T2 表示
+MOV{<c>}{<q>} <Rd>, <Rm> {, <shift> #<amount>}
+```
+
+**MOVS, 带扩展的循环右移变体**（当 `S == 1 && imm3 == 000 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+MOVS{<c>}{<q>} <Rd>, <Rm>, RRX
+```
+
+**MOVS, 按值移位或循环变体**（当 `S == 1 && !(imm3 == 000 && imm2 == 00 && sr_type == 11)` 时适用）
+
+```arm
+MOVS.W <Rd>, <Rm> {, <shift> #<amount>}
+  // 位于 IT 块之外
+  // 且 <Rd>、<Rm>、<shift>、<amount> 可用 T1 或 T2 表示
+MOVS{<c>}{<q>} <Rd>, <Rm> {, <shift> #<amount>}
+```
+
+**解码**
+
+```arm
+if HasArchVersion(Armv8p1) then
+  if S == '1' && Rm == '11x1' then SEE "Wide shift instructions";
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);  m = UInt(Rm);  setflags = (S == '1');
+(shift_t, shift_n) = DecodeImmShift(sr_type, imm3:imm2);
+if !setflags && (imm3:imm2:sr_type == '0000000') then
+  if (d == 15 || m == 15 || (d == 13 && m == 13)) then UNPREDICTABLE;
+else
+  if (d IN {13,15} || m IN {13,15}) then UNPREDICTABLE;
+```
+
+#### 4.120.5. 别名条件
+
+| 别名 | 变体 | 优先使用条件 |
+| --- | --- | --- |
+| ASRS (immediate) | T3 | `S == '1' && sr_type == '10'` |
+| ASRS (immediate) | T2 | `op == '10' && !InITBlock()` |
+| ASR (immediate) | T3 | `S == '0' && sr_type == '10'` |
+| ASR (immediate) | T2 | `op == '10' && InITBlock()` |
+| LSLS (immediate) | T3 | `S == '1' && imm3:Rd:imm2 != '000xxxx00' && sr_type == '00'` |
+| LSLS (immediate) | T2 | `op == '00' && imm5 != '00000' && !InITBlock()` |
+| LSL (immediate) | T3 | `S == '0' && imm3:Rd:imm2 != '000xxxx00' && sr_type == '00'` |
+| LSL (immediate) | T2 | `op == '00' && imm5 != '00000' && InITBlock()` |
+| LSRS (immediate) | T3 | `S == '1' && sr_type == '01'` |
+| LSRS (immediate) | T2 | `op == '01' && !InITBlock` |
+| LSR (immediate) | T3 | `S == '0' && sr_type == '01'` |
+| LSR (immediate) | T2 | `op == '01' && InITBlock()` |
+| RORS (immediate) | - | `S == '1' && imm3:Rd:imm2 != '000xxxx00' && sr_type == '11'` |
+| ROR (immediate) | - | `S == '0' && imm3:Rd:imm2 != '000xxxx00' && sr_type == '11'` |
+| RRXS | - | `S == '1' && imm3 == '000' && imm2 == '00' && sr_type == '11'` |
+| RRX | - | `S == '0' && imm3 == '000' && imm2 == '00' && sr_type == '11'` |
+
+#### 4.120.6. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：
+  - 对 T1 编码：通用目标寄存器，编码在 `D:Rd` 字段中。若使用 PC：
+    - 该指令会产生一次简单分支，跳转到移入 PC 的地址。
+    - 该指令必须位于 IT 块之外，或为 IT 块中的最后一条指令。
+  - 对 T2 与 T3 编码：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：
+  - 对 T1 编码：通用源寄存器，编码在 `Rm` 字段中。可使用 PC。
+  - 对 T2 与 T3 编码：通用源寄存器，编码在 `Rm` 字段中。
+- **`<shift>`**：
+  - 对 T2 编码：施加到源寄存器上的移位类型，编码在 `op` 字段中。取值如下：
+    - `LSL`：当 `sr_type = 00` 时。
+    - `LSR`：当 `sr_type = 01` 时。
+    - `ASR`：当 `sr_type = 10` 时。
+  - 对 T3 编码：施加到源寄存器上的移位类型，编码在 `sr_type` 字段中。取值如下：
+    - `LSL`：当 `sr_type = 00` 时。
+    - `LSR`：当 `sr_type = 01` 时。
+    - `ASR`：当 `sr_type = 10` 时。
+    - `ROR`：当 `sr_type = 11` 时。
+- **`<amount>`**：
+  - 对 T2 编码：移位量，当 `<shift>` = `LSL` 或 `ROR` 时范围 1 到 31，当 `<shift>` = `LSR` 或 `ASR` 时范围 1 到 32，以 `<amount>` 对 32 取模的形式编码在 `imm5` 字段中。
+  - 对 T3 编码：移位量，当 `<shift>` = `LSL` 或 `ROR` 时范围 1 到 31，当 `<shift>` = `LSR` 或 `ASR` 时范围 1 到 32，以 `<amount>` 对 32 取模的形式编码在 `imm3:imm2` 字段中。
+
+#### 4.120.7. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  (result, carry) = Shift_C(R[m], shift_t, shift_n, APSR.C);
+  if d == 15 then
+    BranchTo(result);
+    // setflags is always FALSE here
+  else
+    RSPCheck[d] = result;
+    if setflags then
+      APSR.N = result[31];
+      APSR.Z = IsZeroBit(result);
+      APSR.C = carry;
+      // APSR.V unchanged
+```
+
+#### 4.120.8. 受限行为
+
+无额外限制。
+
+#### 4.120.9. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.121. MOV, MOVS (register-shifted register)：移动（寄存器移位寄存器）
+
+**移动（寄存器移位寄存器）**（Move (register-shifted register)）。该指令把一个经寄存器移位的寄存器值复制到目标寄存器。它可以选择根据该值更新条件标志。
+
+该指令被别名 `ASRS (register)`、`ASR (register)`、`LSLS (register)`、`LSL (register)`、`LSRS (register)`、`LSR (register)`、`RORS (register)`、`ROR (register)` 使用。
+
+#### 4.121.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-287](FigureC2-287.png)
+
+**算术右移变体**（当 `op == 0100` 时适用）
+
+```arm
+MOV<c>{<q>} <Rdm>, <Rdm>, ASR <Rs>
+  // 位于 IT 块内
+MOVS{<q>} <Rdm>, <Rdm>, ASR <Rs>
+  // 位于 IT 块之外
+```
+
+**逻辑左移变体**（当 `op == 0010` 时适用）
+
+```arm
+MOV<c>{<q>} <Rdm>, <Rdm>, LSL <Rs>
+  // 位于 IT 块内
+MOVS{<q>} <Rdm>, <Rdm>, LSL <Rs>
+  // 位于 IT 块之外
+```
+
+**逻辑右移变体**（当 `op == 0011` 时适用）
+
+```arm
+MOV<c>{<q>} <Rdm>, <Rdm>, LSR <Rs>
+  // 位于 IT 块内
+MOVS{<q>} <Rdm>, <Rdm>, LSR <Rs>
+  // 位于 IT 块之外
+```
+
+**循环右移变体**（当 `op == 0111` 时适用）
+
+```arm
+MOV<c>{<q>} <Rdm>, <Rdm>, ROR <Rs>
+  // 位于 IT 块内
+MOVS{<q>} <Rdm>, <Rdm>, ROR <Rs>
+  // 位于 IT 块之外
+```
+
+**解码**
+
+```arm
+if !(op IN {'0010', '0011', '0100', '0111'}) then SEE "Related encodings";
+d = UInt(Rdm);  m = UInt(Rdm);  s = UInt(Rs);
+setflags = !InITBlock();
+shift_t = DecodeRegShift(op[2]:op[0]);
+```
+
+#### 4.121.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-288](FigureC2-288.png)
+
+**设置标志变体**（当 `S == 1` 时适用）
+
+```arm
+MOVS.W <Rd>, <Rm>, <sr_type> <Rs>
+  // 位于 IT 块之外，且 <Rd>、<Rm>、<sr_type>、<Rs> 可用 T1 表示
+MOVS{<c>}{<q>} <Rd>, <Rm>, <sr_type> <Rs>
+```
+
+**不设置标志变体**（当 `S == 0` 时适用）
+
+```arm
+MOV<c>.W <Rd>, <Rm>, <sr_type> <Rs>
+  // 位于 IT 块内，且 <Rd>、<Rm>、<sr_type>、<Rs> 可用 T1 表示
+MOV{<c>}{<q>} <Rd>, <Rm>, <sr_type> <Rs>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);  m = UInt(Rm);  s = UInt(Rs);
+setflags = (S == '1');
+shift_t = DecodeRegShift(sr_type);
+if d IN {13,15} || m IN {13,15} || s IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.121.3. 别名条件
+
+| 别名 | 变体 | 优先使用条件 |
+| --- | --- | --- |
+| ASRS (register) | T1（算术右移） | `op == '0100' && !InITBlock()` |
+| ASRS (register) | T2（设置标志） | `sr_type == '10' && S == '1'` |
+| ASR (register) | T1（算术右移） | `op == '0100' && InITBlock()` |
+| ASR (register) | T2（不设置标志） | `sr_type == '10' && S == '0'` |
+| LSLS (register) | T1（逻辑左移） | `op == '0010' && !InITBlock()` |
+| LSLS (register) | T2（设置标志） | `sr_type == '00' && S == '1'` |
+| LSL (register) | T1（逻辑左移） | `op == '0010' && InITBlock()` |
+| LSL (register) | T2（不设置标志） | `sr_type == '00' && S == '0'` |
+| LSRS (register) | T1（逻辑右移） | `op == '0011' && !InITBlock()` |
+| LSRS (register) | T2（设置标志） | `sr_type == '01' && S == '1'` |
+| LSR (register) | T1（逻辑右移） | `op == '0011' && InITBlock()` |
+| LSR (register) | T2（不设置标志） | `sr_type == '01' && S == '0'` |
+| RORS (register) | T1（循环右移） | `op == '0111' && !InITBlock()` |
+| RORS (register) | T2（设置标志） | `sr_type == '11' && S == '1'` |
+| ROR (register) | T1（循环右移） | `op == '0111' && InITBlock()` |
+| ROR (register) | T2（不设置标志） | `sr_type == '11' && S == '0'` |
+
+#### 4.121.4. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rdm>`**：通用源寄存器兼目标寄存器，编码在 `Rdm` 字段中。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：通用源寄存器，编码在 `Rm` 字段中。
+- **`<sr_type>`**：施加到第二个源寄存器上的移位类型，编码在 `sr_type` 字段中。取值如下：
+  - `LSL`：当 `sr_type = 00` 时。
+  - `LSR`：当 `sr_type = 01` 时。
+  - `ASR`：当 `sr_type = 10` 时。
+  - `ROR`：当 `sr_type = 11` 时。
+- **`<Rs>`**：通用源寄存器，其低 8 位存放移位量，编码在 `Rs` 字段中。
+
+#### 4.121.5. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  shift_n = UInt(R[s][7:0]);
+  (result, carry) = Shift_C(R[m], shift_t, shift_n, APSR.C);
+  R[d] = result;
+  if setflags then
+    APSR.N = result[31];
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    // APSR.V unchanged
+```
+
+#### 4.121.6. 受限行为
+
+无额外限制。
+
+#### 4.121.7. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.122. MOVT：移动高半字
+
+**移动高半字**（Move Top）。MOVT 把一个立即数写入目标寄存器的高半字。它不影响低半字的内容。
+
+#### 4.122.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-289](FigureC2-289.png)
+
+**T1 变体**
+
+```arm
+MOVT{<c>}{<q>} <Rd>, #<imm16>
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);  imm16 = imm4:i:imm3:imm8;
+if d IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.122.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<imm16>`**：16 位无符号立即数，范围 0 到 65535，编码在 `imm4:i:imm3:imm8` 字段中。
+
+#### 4.122.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  R[d][31:16] = imm16;
+  // R[d][15:0] unchanged
+```
+
+### 4.123. MRC, MRC2：从协处理器移入寄存器
+
+**从协处理器移入寄存器**（Move to Register from Coprocessor）。该指令使协处理器把一个值传输到通用寄存器或条件标志。
+
+Arm 保留协处理器 CP8 至 CP15，本手册定义 `coproc` 处于该范围时的有效指令。
+
+#### 4.123.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-290](FigureC2-290.png)
+
+**T1 变体**
+
+```arm
+MRC{<c>}{<q>} <coproc>, {#}<opc1>, <Rt>, <CRn>, <CRm>{, {#}<opc2>}
+```
+
+**解码**
+
+```arm
+if coproc IN {'100x', '101x', '111x'} then SEE "Floating-point and MVE";
+if CoprocType(UInt(coproc)) == CP_CDEv1 then SEE "CDE instructions";
+cp = UInt(coproc);
+CheckCPDecodeFaults(cp);
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+if t == 13 then UNPREDICTABLE;
+```
+
+#### 4.123.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-291](FigureC2-291.png)
+
+**T2 变体**
+
+```arm
+MRC2{<c>}{<q>} <coproc>, {#}<opc1>, <Rt>, <CRn>, <CRm>{, {#}<opc2>}
+```
+
+**解码**
+
+```arm
+if coproc IN {'100x', '101x', '111x'} then SEE "Floating-point and MVE";
+if CoprocType(UInt(coproc)) == CP_CDEv1 then SEE "CDE instructions";
+cp = UInt(coproc);
+CheckCPDecodeFaults(cp);
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+if t == 13 then UNPREDICTABLE;
+```
+
+#### 4.123.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<coproc>`**：协处理器名称，编码在 `coproc` 字段中。通用协处理器名称取 `p0` 到 `p15`。
+- **`<opc1>`**：协处理器专用操作码，范围 0 到 7，编码在 `opc1` 字段中。
+- **`<Rt>`**：要传输的通用寄存器或 APSR_nzcv（编码为 `0b1111`），编码在 `Rt` 字段中。若使用 APSR_nzcv，则传输值的 bits [31:28] 写入 APSR 条件标志。
+- **`<CRn>`**：第一个协处理器寄存器，编码在 `CRn` 字段中。
+- **`<CRm>`**：第二个协处理器寄存器，编码在 `CRm` 字段中。
+- **`<opc2>`**：协处理器专用操作码，范围 0 到 7，默认为 0，编码在 `opc2` 字段中。
+
+#### 4.123.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  if !Coproc_Accepted(cp, ThisInstr()) then
+    GenerateCoprocessorException();
+  else
+    value = Coproc_GetOneWord(cp, ThisInstr());
+    if t != 15 then
+      R[t] = value;
+    else
+      APSR.N = value[31];
+      APSR.Z = value[30];
+      APSR.C = value[29];
+      APSR.V = value[28];
+      // value[27:0] are not used.
+```
+
+### 4.124. MRRC, MRRC2：从协处理器移入两个寄存器
+
+**从协处理器移入两个寄存器**（Move to two Registers from Coprocessor）。该指令使协处理器把值传输到两个通用寄存器。
+
+若没有协处理器能执行该指令，则产生 UsageFault 异常。
+
+Arm 保留协处理器 CP8 至 CP15，本手册定义 `coproc` 处于该范围时的有效指令。
+
+#### 4.124.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-292](FigureC2-292.png)
+
+**T1 变体**
+
+```arm
+MRRC{<c>}{<q>} <coproc>, {#}<opc1>, <Rt>, <Rt2>, <CRm>
+```
+
+**解码**
+
+```arm
+if coproc IN {'100x', '101x', '111x'} then SEE "Floating-point and MVE";
+if CoprocType(UInt(coproc)) == CP_CDEv1 then SEE "CDE instructions";
+cp = UInt(coproc);
+CheckCPDecodeFaults(cp);
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);  t2 = UInt(Rt2);
+if t == 15 || t2 == 15 || t == t2 then UNPREDICTABLE;
+if t == 13 || t2 == 13 then UNPREDICTABLE;
+```
+
+#### 4.124.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `t == t2`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 目标寄存器中的取值为 UNKNOWN。
+
+#### 4.124.3. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-293](FigureC2-293.png)
+
+**T2 变体**
+
+```arm
+MRRC2{<c>}{<q>} <coproc>, {#}<opc1>, <Rt>, <Rt2>, <CRm>
+```
+
+**解码**
+
+```arm
+if coproc IN {'100x', '101x', '111x'} then SEE "Floating-point and MVE";
+if CoprocType(UInt(coproc)) == CP_CDEv1 then SEE "CDE instructions";
+cp = UInt(coproc);
+CheckCPDecodeFaults(cp);
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);  t2 = UInt(Rt2);
+if t == 15 || t2 == 15 || t == t2 then UNPREDICTABLE;
+if t == 13 || t2 == 13 then UNPREDICTABLE;
+```
+
+#### 4.124.4. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `t == t2`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 目标寄存器中的取值为 UNKNOWN。
+
+#### 4.124.5. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<coproc>`**：协处理器名称，编码在 `coproc` 字段中。通用协处理器名称取 `p0` 到 `p15`。
+- **`<opc1>`**：协处理器专用操作码，范围 0 到 15，编码在 `opc1` 字段中。
+- **`<Rt>`**：要传输的第一个通用寄存器，编码在 `Rt` 字段中。
+- **`<Rt2>`**：要传输的第二个通用寄存器，编码在 `Rt2` 字段中。
+- **`<CRm>`**：协处理器寄存器，编码在 `CRm` 字段中。
+
+#### 4.124.6. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  if !Coproc_Accepted(cp, ThisInstr()) then
+    GenerateCoprocessorException();
+  else
+    (R[t2], R[t]) = Coproc_GetTwoWords(cp, ThisInstr());
+```
+
+### 4.125. MRS：从特殊寄存器移入寄存器
+
+**从特殊寄存器移入寄存器**（Move to Register from Special register）。MRS 把所选特殊用途寄存器的值移入通用寄存器。
+
+#### 4.125.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-294](FigureC2-294.png)
+
+**T1 变体**
+
+```arm
+MRS{<c>}{<q>} <Rd>, <spec_reg>
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);
+if d IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.125.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<spec_reg>`**：要访问的特殊寄存器，编码在 `SYSm` 字段中。取值如下：
+
+| `<spec_reg>` | `SYSm` |
+| --- | --- |
+| `APSR` | `00000000` |
+| `IAPSR` | `00000001` |
+| `EAPSR` | `00000010` |
+| `XPSR` | `00000011` |
+| `IPSR` | `00000101` |
+| `EPSR` | `00000110` |
+| `IEPSR` | `00000111` |
+| `MSP` | `00001000` |
+| `PSP` | `00001001` |
+| `MSPLIM` | `00001010` |
+| `PSPLIM` | `00001011` |
+| `PRIMASK` | `00010000` |
+| `BASEPRI` | `00010001` |
+| `BASEPRI_MAX` | `00010010` |
+| `FAULTMASK` | `00010011` |
+| `CONTROL` | `00010100` |
+| `PAC_KEY_P_0` | `00100000` |
+| `PAC_KEY_P_1` | `00100001` |
+| `PAC_KEY_P_2` | `00100010` |
+| `PAC_KEY_P_3` | `00100011` |
+| `PAC_KEY_U_0` | `00100100` |
+| `PAC_KEY_U_1` | `00100101` |
+| `PAC_KEY_U_2` | `00100110` |
+| `PAC_KEY_U_3` | `00100111` |
+| `MSP_NS` | `10001000` |
+| `PSP_NS` | `10001001` |
+| `MSPLIM_NS` | `10001010` |
+| `PSPLIM_NS` | `10001011` |
+| `PRIMASK_NS` | `10010000` |
+| `BASEPRI_NS` | `10010001` |
+| `FAULTMASK_NS` | `10010011` |
+| `CONTROL_NS` | `10010100` |
+| `SP_NS` | `10011000` |
+| `PAC_KEY_P_0_NS` | `10100000` |
+| `PAC_KEY_P_1_NS` | `10100001` |
+| `PAC_KEY_P_2_NS` | `10100010` |
+| `PAC_KEY_P_3_NS` | `10100011` |
+| `PAC_KEY_U_0_NS` | `10100100` |
+| `PAC_KEY_U_1_NS` | `10100101` |
+| `PAC_KEY_U_2_NS` | `10100110` |
+| `PAC_KEY_U_3_NS` | `10100111` |
+
+下列编码为 UNPREDICTABLE：
+
+- `SYSm = 00000100`
+- `SYSm = 000011xx`
+- `SYSm = 00010101`
+- `SYSm = 0001011x`
+- `SYSm = 00011xxx`
+- `SYSm = 00101xxx`
+- `SYSm = 0011xxxx`
+- `SYSm = 01xxxxxx`
+- `SYSm = 10000xxx`
+- `SYSm = 100011xx`
+- `SYSm = 10010010`
+- `SYSm = 10010101`
+- `SYSm = 1001011x`
+- `SYSm = 10011001`
+- `SYSm = 1001101x`
+- `SYSm = 100111xx`
+- `SYSm = 10101xxx`
+- `SYSm = 1011xxxx`
+- `SYSm = 11xxxxxx`
+
+对不以 `_NS` 结尾的寄存器的访问返回当前安全状态关联的寄存器。在安全状态下访问以 `_NS` 结尾的寄存器返回非安全寄存器。在非安全状态下访问以 `_NS` 结尾的寄存器为 RAZ/WI。访问 `BASEPRI_MAX` 返回 `BASEPRI` 的内容。
+
+#### 4.125.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  R[d] = Zeros(32);
+
+  // 注意：SYSm 的最高位用于在寄存器当前域视图与其他域视图之间进行选择。
+  // 这是为了让安全状态能够访问分组寄存器的非安全版本所必需的。
+  // 出于安全原因，寄存器的安全版本不能从非安全状态访问。
+  case SYSm[7:3] of
+    when '00000'    // XPSR 访问
+      if UInt(SYSm) == 4 then UNPREDICTABLE;
+      if CurrentModeIsPrivileged() && SYSm[0] == '1' then
+        R[d][8:0] = IPSR.Exception;
+      if SYSm[1] == '1' then
+        R[d][26:24] = '000';          // EPSR 读出为零
+        R[d][21]    = '0';            // EPSR.B 读出为零
+        R[d][15:10] = '000000';
+      if SYSm[2] == '0' then
+        R[d][31:27] = APSR[31:27];
+        if HaveDSPExt() then
+          R[d][19:16] = APSR[19:16];
+    when '00001'    // SP 访问
+      if CurrentModeIsPrivileged() then
+        case SYSm[2:0] of
+          when '000'
+            R[d] = SP_Main;
+          when '001'
+            R[d] = SP_Process;
+          when '010'
+            if IsSecure() then
+              R[d] = MSPLIM_S.LIMIT:'000';
+            else
+              if HaveMainExt() then
+                R[d] = MSPLIM_NS.LIMIT:'000';
+              else
+                UNPREDICTABLE;
+          when '011'
+            if IsSecure() then
+              R[d] = PSPLIM_S.LIMIT:'000';
+            else
+              if HaveMainExt() then
+                R[d] = PSPLIM_NS.LIMIT:'000';
+              else
+                UNPREDICTABLE;
+          otherwise
+            UNPREDICTABLE;
+    when '10001'    // SP 访问 - 备用域
+      if !HaveSecurityExt() then UNPREDICTABLE;
+      if CurrentModeIsPrivileged() && CurrentState == SecurityState_Secure then
+        case SYSm[2:0] of
+          when '000'
+            R[d] = SP_Main_NonSecure;
+          when '001'
+            R[d] = SP_Process_NonSecure;
+          when '010'
+            if HaveMainExt() then
+              R[d] = MSPLIM_NS.LIMIT:'000';
+            else
+              UNPREDICTABLE;
+          when '011'
+            if HaveMainExt() then
+              R[d] = PSPLIM_NS.LIMIT:'000';
+            else
+              UNPREDICTABLE;
+          otherwise
+            UNPREDICTABLE;
+    when '00010'    // 优先级掩码或 CONTROL 访问
+      case SYSm[2:0] of
+        when '000'
+          if CurrentModeIsPrivileged() then
+            R[d][0] = PRIMASK.PM;
+        when '001'
+          if HaveMainExt() then
+            if CurrentModeIsPrivileged() then
+              R[d][7:0] = BASEPRI[7:0];
+            else
+              UNPREDICTABLE;
+        when '010'
+          if HaveMainExt() then
+            if CurrentModeIsPrivileged() then
+              R[d][7:0] = BASEPRI[7:0];
+            else
+              UNPREDICTABLE;
+        when '011'
+          if HaveMainExt() then
+            if CurrentModeIsPrivileged() then
+              R[d][0] = FAULTMASK.FM;
+            else
+              UNPREDICTABLE;
+        when '100'
+          if HaveMveOrFPExt() && IsSecure() then
+            R[d][3:0] = CONTROL[3:0];
+          elsif HaveMveOrFPExt() then
+            R[d][2:0] = CONTROL[2:0];
+          else
+            R[d][1:0] = CONTROL[1:0];
+          // 访问 PAC 与 BTI 使能位需要 PACBTI 扩展
+          if HavePACBTIExt() then
+            if CurrentModeIsPrivileged() then
+              R[d][7:4] = CONTROL[7:4];   // UPAC_EN、PAC_EN、UBTI_EN、BTI_EN
+            else
+              R[d][7]   = CONTROL[7];     // UPAC_EN
+              R[d][5]   = CONTROL[5];     // UBTI_EN
+        otherwise
+          UNPREDICTABLE;
+    when '00100'    // 访问 PAC 密钥
+      if !HavePACBTIExt() then UNPREDICTABLE;   // 需要 PACBTI 扩展
+      if CurrentModeIsPrivileged() then
+        R[d] = PACKeyReg[SYSm[2:0], IsSecure()];
+    when '10010'    // 优先级掩码或 CONTROL 访问 - 备用域
+      if !HaveSecurityExt() then UNPREDICTABLE;
+      if CurrentState == SecurityState_Secure then
+        case SYSm[2:0] of
+          when '000'
+            if CurrentModeIsPrivileged() then
+              R[d][0] = PRIMASK_NS.PM;
+          when '001'
+            if HaveMainExt() then
+              if CurrentModeIsPrivileged() then
+                R[d][7:0] = BASEPRI_NS[7:0];
+              else
+                UNPREDICTABLE;
+          when '011'
+            if HaveMainExt() then
+              if CurrentModeIsPrivileged() then
+                R[d][0] = FAULTMASK_NS.FM;
+              else
+                UNPREDICTABLE;
+          when '100'
+            if HaveMveOrFPExt() then
+              R[d][2:0] = CONTROL_NS[2:0];
+            else
+              R[d][1:0] = CONTROL_NS[1:0];
+            // 访问 PAC 与 BTI 使能位需要 PACBTI 扩展
+            if HavePACBTIExt() then
+              if CurrentModeIsPrivileged() then
+                R[d][7:4] = CONTROL_NS[7:4];  // UPAC_EN、PAC_EN、
+                                              // UBTI_EN、BTI_EN
+              else
+                R[d][7]   = CONTROL_NS[7];    // UPAC_EN
+                R[d][5]   = CONTROL_NS[5];    // UBTI_EN
+          otherwise
+            UNPREDICTABLE;
+    when '10011'    // SP_NS - 非安全栈指针
+      if !HaveSecurityExt() then UNPREDICTABLE;
+      if CurrentState == SecurityState_Secure then
+        case SYSm[2:0] of
+          when '000'
+            R[d] = _SP(LookUpSP_with_security_mode(FALSE, CurrentMode()));
+          otherwise
+            UNPREDICTABLE;
+    when '10100'    // 访问非安全 PAC 密钥
+      if !HaveSecurityExt() || !HavePACBTIExt() then UNPREDICTABLE;
+      if CurrentModeIsPrivileged() && CurrentState == SecurityState_Secure then
+        R[d] = PACKeyReg[SYSm[2:0], FALSE];
+    otherwise
+      UNPREDICTABLE;
+```
+
+#### 4.125.4. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `SYSm` 不是有效的特殊寄存器，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 目标寄存器中的取值为 UNKNOWN。
+
+#### 4.125.5. 受限行为
+
+无额外限制。
+
+#### 4.125.6. 数据独立时序行为与 PACBTI 扩展
+
+若实现了 PACBTI 扩展，则无论 `AIRCR.DIT` 取何值，本指令在访问下列任一内容时，其时序都不随所加载或存储的数据值变化：
+
+- `PAC_KEY_P_n`。
+- `PAC_KEY_U_n`。
+
+### 4.126. MSR (register)：从寄存器移入特殊寄存器
+
+**从寄存器移入特殊寄存器**（Move to Special register from Register）。MSR (register) 把通用寄存器的值移入指定的特殊用途寄存器。
+
+#### 4.126.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-295](FigureC2-295.png)
+
+**T1 变体**
+
+```arm
+MSR{<c>}{<q>} <spec_reg>, <Rn>
+```
+
+**解码**
+
+```arm
+n = UInt(Rn);
+if HaveMainExt() then
+  if mask == '00' || (mask != '10' && !(UInt(SYSm) IN {0..3})) then UNPREDICTABLE;
+else
+  if mask != '10' then UNPREDICTABLE;
+if n IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.126.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `SYSm` 与 `mask` 的组合不受支持，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令把 `mask` 与 `SYSm` 视为 UNKNOWN。
+
+#### 4.126.3. 编码条件
+
+| `_<bits>` | 效果 | mask 编码 | 说明 |
+| --- | --- | --- | --- |
+| `_nzcvq` | 写入 N、Z、C、V、Q 位，APSR[31:27] | `0b10` | 始终支持 |
+| `_g` | 写入 GE[3:0] 位，APSR[19:16] | `0b01` | 仅当 PE 实现 DSP 扩展时支持。 |
+| `_nzcvqg` | 写入 N、Z、C、V、Q、GE[3:0] 位 | `0b11` | 仅当 PE 实现 DSP 扩展时支持。 |
+
+#### 4.126.4. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<spec_reg>`**：要访问的特殊寄存器，编码在 `SYSm` 字段中。取值如下：
+
+| `<spec_reg>` | `SYSm` |
+| --- | --- |
+| `APSR` | `00000000` |
+| `IAPSR` | `00000001` |
+| `EAPSR` | `00000010` |
+| `XPSR` | `00000011` |
+| `IPSR` | `00000101` |
+| `EPSR` | `00000110` |
+| `IEPSR` | `00000111` |
+| `MSP` | `00001000` |
+| `PSP` | `00001001` |
+| `MSPLIM` | `00001010` |
+| `PSPLIM` | `00001011` |
+| `PRIMASK` | `00010000` |
+| `BASEPRI` | `00010001` |
+| `BASEPRI_MAX` | `00010010` |
+| `FAULTMASK` | `00010011` |
+| `CONTROL` | `00010100` |
+| `PAC_KEY_P_0` | `00100000` |
+| `PAC_KEY_P_1` | `00100001` |
+| `PAC_KEY_P_2` | `00100010` |
+| `PAC_KEY_P_3` | `00100011` |
+| `PAC_KEY_U_0` | `00100100` |
+| `PAC_KEY_U_1` | `00100101` |
+| `PAC_KEY_U_2` | `00100110` |
+| `PAC_KEY_U_3` | `00100111` |
+| `MSP_NS` | `10001000` |
+| `PSP_NS` | `10001001` |
+| `MSPLIM_NS` | `10001010` |
+| `PSPLIM_NS` | `10001011` |
+| `PRIMASK_NS` | `10010000` |
+| `BASEPRI_NS` | `10010001` |
+| `FAULTMASK_NS` | `10010011` |
+| `CONTROL_NS` | `10010100` |
+| `SP_NS` | `10011000` |
+| `PAC_KEY_P_0_NS` | `10100000` |
+| `PAC_KEY_P_1_NS` | `10100001` |
+| `PAC_KEY_P_2_NS` | `10100010` |
+| `PAC_KEY_P_3_NS` | `10100011` |
+| `PAC_KEY_U_0_NS` | `10100100` |
+| `PAC_KEY_U_1_NS` | `10100101` |
+| `PAC_KEY_U_2_NS` | `10100110` |
+| `PAC_KEY_U_3_NS` | `10100111` |
+
+下列编码为 UNPREDICTABLE：
+
+- `SYSm = 00000100`
+- `SYSm = 000011xx`
+- `SYSm = 00010101`
+- `SYSm = 0001011x`
+- `SYSm = 00011xxx`
+- `SYSm = 00101xxx`
+- `SYSm = 0011xxxx`
+- `SYSm = 01xxxxxx`
+- `SYSm = 10000xxx`
+- `SYSm = 100011xx`
+- `SYSm = 10010010`
+- `SYSm = 10010101`
+- `SYSm = 1001011x`
+- `SYSm = 10011001`
+- `SYSm = 1001101x`
+- `SYSm = 100111xx`
+- `SYSm = 10101xxx`
+- `SYSm = 1011xxxx`
+- `SYSm = 11xxxxxx`
+
+对不以 `_NS` 结尾的寄存器的访问返回当前安全状态关联的寄存器。在安全状态下访问以 `_NS` 结尾的寄存器返回非安全寄存器。在非安全状态下访问以 `_NS` 结尾的寄存器为 RAZ/WI。若所写入的优先级高于 `BASEPRI` 中已有的优先级，则访问 `BASEPRI_MAX` 会写入 `BASEPRI`。否则忽略该访问。
+
+- **`<Rn>`**：通用源寄存器，编码在 `Rn` 字段中。
+
+#### 4.126.5. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+
+  // 注意：SYSm 的最高位用于在寄存器当前域视图与其他域视图之间进行选择。
+  // 这是为了让安全状态能够访问分组寄存器的非安全版本所必需的。
+  // 出于安全原因，寄存器的安全版本不能从非安全状态访问。
+  case SYSm[7:3] of
+    when '00000'    // XPSR 访问
+      if UInt(SYSm) == 4 then UNPREDICTABLE;
+      if SYSm[2] == '0' then                  // 包含 APSR
+        if mask[0] == '1' then                // GE[3:0] 位
+          if !HaveDSPExt() then
+            UNPREDICTABLE;
+          else
+            APSR[19:16] = R[n][19:16];
+        if mask[1] == '1' then                // N、Z、C、V、Q 位
+          APSR[31:27] = R[n][31:27];
+    when '00001'    // SP 访问
+      if CurrentModeIsPrivileged() then
+        case SYSm[2:0] of
+          when '000'
+            // MSR 不受 SP 限值约束，直接写入寄存器。
+            if IsSecure() then
+              exc = _SP(RNamesSP_Main_Secure, FALSE, TRUE, R[n][31:2]:'00');
+            else
+              exc = _SP(RNamesSP_Main_NonSecure, FALSE, TRUE, R[n][31:2]:'00');
+            assert exc.fault == NoFault;
+          when '001'
+            // MSR 不受 SP 限值约束，直接写入寄存器。
+            if IsSecure() then
+              exc = _SP(RNamesSP_Process_Secure, FALSE, TRUE, R[n][31:2]:'00');
+            else
+              exc = _SP(RNamesSP_Process_NonSecure, FALSE, TRUE,
+                        R[n][31:2]:'00');
+            assert exc.fault == NoFault;
+          when '010'
+            if IsSecure() then
+              MSPLIM_S.LIMIT = R[n][31:3];
+            else
+              if HaveMainExt() then
+                MSPLIM_NS.LIMIT = R[n][31:3];
+              else
+                UNPREDICTABLE;
+          when '011'
+            if IsSecure() then
+              PSPLIM_S.LIMIT = R[n][31:3];
+            else
+              if HaveMainExt() then
+                PSPLIM_NS.LIMIT = R[n][31:3];
+              else
+                UNPREDICTABLE;
+          otherwise
+            UNPREDICTABLE;
+    when '10001'    // SP 访问 - 备用域
+      if !HaveSecurityExt() then UNPREDICTABLE;
+      if CurrentModeIsPrivileged() && CurrentState == SecurityState_Secure then
+        case SYSm[2:0] of
+          when '000'
+            // MSR 不受 SP 限值约束，直接写入寄存器。
+            exc = _SP(RNamesSP_Main_NonSecure, FALSE, TRUE, R[n][31:2]:'00');
+            assert exc.fault == NoFault;
+          when '001'
+            // MSR 不受 SP 限值约束，直接写入寄存器。
+            exc = _SP(RNamesSP_Process_NonSecure, FALSE, TRUE, R[n][31:2]:'00');
+            assert exc.fault == NoFault;
+          when '010'
+            if HaveMainExt() then
+              MSPLIM_NS.LIMIT = R[n][31:3];
+            else
+              UNPREDICTABLE;
+          when '011'
+            if HaveMainExt() then
+              PSPLIM_NS.LIMIT = R[n][31:3];
+            else
+              UNPREDICTABLE;
+          otherwise
+            UNPREDICTABLE;
+    when '00010'    // 优先级掩码或 CONTROL 访问
+      case SYSm[2:0] of
+        when '000'
+          if CurrentModeIsPrivileged() then
+            PRIMASK.PM = R[n][0];
+        when '001'
+          if CurrentModeIsPrivileged() then
+            if HaveMainExt() then
+              BASEPRI[7:0] = R[n][7:0];
+            else
+              UNPREDICTABLE;
+        when '010'
+          if CurrentModeIsPrivileged() then
+            if HaveMainExt() then
+              if ((R[n][7:0] != '00000000') &&
+                  (UInt(R[n][7:0]) < UInt(BASEPRI[7:0]) ||
+                   BASEPRI[7:0] == '00000000')) then
+                BASEPRI[7:0] = R[n][7:0];
+            else
+              UNPREDICTABLE;
+        when '011'
+          if CurrentModeIsPrivileged() then
+            if HaveMainExt() then
+              if ExecutionPriority() > -1 || R[n][0] == '0' then
+                FAULTMASK.FM = R[n][0];
+            else
+              UNPREDICTABLE;
+        when '100'
+          if CurrentModeIsPrivileged() then
+            CONTROL.nPRIV = R[n][0];
+            CONTROL.SPSEL = R[n][1];
+            if HaveMveOrFPExt() && (IsSecure() || NSACR.CP10 == '1') then
+              CONTROL.FPCA = R[n][2];
+            // 访问 PAC 与 BTI 使能位需要 PACBTI 扩展
+            if HavePACBTIExt() then
+              CONTROL[7:4] = R[n][7:4];    // UPAC_EN、PAC_EN、UBTI_EN、BTI_EN
+            if HaveMveOrFPExt() && IsSecure() then
+              CONTROL_S.SFPA = R[n][3];
+          otherwise
+            UNPREDICTABLE;
+    when '00100'    // 访问 PAC 密钥
+      if !HavePACBTIExt() then UNPREDICTABLE;   // 需要 PACBTI 扩展
+      if CurrentModeIsPrivileged() then
+        PACKeyReg[SYSm[2:0], IsSecure()] = R[n];
+    when '10010'    // 优先级掩码或 CONTROL 访问 - 备用域
+      if !HaveSecurityExt() then UNPREDICTABLE;
+      if CurrentModeIsPrivileged() && CurrentState == SecurityState_Secure then
+        case SYSm[2:0] of
+          when '000'
+            PRIMASK_NS.PM = R[n][0];
+          when '001'
+            if HaveMainExt() then
+              BASEPRI_NS[7:0] = R[n][7:0];
+            else
+              UNPREDICTABLE;
+          when '011'
+            if HaveMainExt() then
+              if ExecutionPriority() > -1 || R[n][0] == '0' then
+                FAULTMASK_NS.FM = R[n][0];
+            else
+              UNPREDICTABLE;
+          when '100'
+            CONTROL_NS.nPRIV = R[n][0];
+            CONTROL_NS.SPSEL = R[n][1];
+            if HaveMveOrFPExt() then CONTROL_NS.FPCA = R[n][2];
+            // 访问 PAC 与 BTI 使能位需要 PACBTI 扩展
+            if HavePACBTIExt() then
+              CONTROL_NS[7:4] = R[n][7:4];   // UPAC_EN、PAC_EN、UBTI_EN、BTI_EN
+          otherwise
+            UNPREDICTABLE;
+    when '10011'    // SP_NS - 非安全栈指针
+      if !HaveSecurityExt() then UNPREDICTABLE;
+      if CurrentState == SecurityState_Secure then
+        case SYSm[2:0] of
+          when '000'
+            spName = LookUpSP_with_security_mode(FALSE, CurrentMode());
+            // MSR SP_NS 受 SP 限值检查约束。若产生 STKOF UsageFault，
+            // 则可指向安全状态或非安全状态
+            - = _SP(spName, FALSE, FALSE, R[n]);
+          otherwise
+            UNPREDICTABLE;
+    when '10100'    // 访问非安全 PAC 密钥
+      if !HaveSecurityExt() || !HavePACBTIExt() then UNPREDICTABLE;
+      if CurrentModeIsPrivileged() && CurrentState == SecurityState_Secure then
+        PACKeyReg[SYSm[2:0], FALSE] = R[n];
+    otherwise
+      UNPREDICTABLE;
+```
+
+#### 4.126.6. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `SYSm` 不是有效的特殊寄存器，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令把 `SYSm` 视为 UNKNOWN。
+
+#### 4.126.7. 受限行为
+
+无额外限制。
+
+#### 4.126.8. 数据独立时序行为与 PACBTI 扩展
+
+若实现了 PACBTI 扩展，则无论 `AIRCR.DIT` 取何值，本指令在访问下列任一内容时，其时序都不随所加载或存储的数据值变化：
+
+- `PAC_KEY_P_n`。
+- `PAC_KEY_U_n`。
+
+### 4.127. MUL：乘法
+
+**乘法**（Multiply）。MUL 把两个寄存器值相乘。结果的最低有效 32 位写入目标寄存器。这 32 位与执行有符号计算还是无符号计算无关。它可以选择根据结果更新条件标志。在 T32 指令集中，该选项仅限于少数几种指令形式。使用该选项在许多实现上会损害性能。
+
+#### 4.127.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-296](FigureC2-296.png)
+
+**T1 变体**
+
+```arm
+MUL<c>{<q>} <Rdm>, <Rn>{, <Rdm>}
+  // 位于 IT 块内
+MULS{<q>} <Rdm>, <Rn>{, <Rdm>}
+  // 位于 IT 块之外
+```
+
+**解码**
+
+```arm
+d = UInt(Rdm);  n = UInt(Rn);  m = UInt(Rdm);  setflags = !InITBlock();
+```
+
+#### 4.127.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-297](FigureC2-297.png)
+
+**T2 变体**
+
+```arm
+MUL<c>.W <Rd>, <Rn>{, <Rm>}
+  // 位于 IT 块内，且 <Rd>、<Rn>、<Rm> 可用 T1 表示
+MUL{<c>}{<q>} <Rd>, <Rn>{, <Rm>}
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  setflags = FALSE;
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.127.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rdm>`**：保存乘数的第二个通用源寄存器兼目标寄存器，编码在 `Rdm` 字段中。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：保存被乘数的第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：保存乘数的第二个通用源寄存器，编码在 `Rm` 字段中。若省略，则使用 `<Rd>`。
+
+#### 4.127.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  operand1 = SInt(R[n]);          // operand1 = UInt(R[n]) produces the same final results
+  operand2 = SInt(R[m]);          // operand2 = UInt(R[m]) produces the same final results
+  result = operand1 * operand2;
+  R[d] = result[31:0];
+  if setflags then
+    APSR.N = result[31];
+    APSR.Z = IsZeroBit(result[31:0]);
+    // APSR.C unchanged
+    // APSR.V unchanged
+```
+
+#### 4.127.5. 受限行为
+
+无额外限制。
+
+#### 4.127.6. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.128. MVN (immediate)：按位非（立即数）
+
+**按位非（立即数）**（Bitwise NOT (immediate)）。MVN (immediate) 把一个立即数值的按位反码写入目标寄存器。它可以选择根据该值更新条件标志。
+
+#### 4.128.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-298](FigureC2-298.png)
+
+**MVN 变体**（当 `S == 0` 时适用）
+
+```arm
+MVN{<c>}{<q>} <Rd>, #<const>
+```
+
+**MVNS 变体**（当 `S == 1` 时适用）
+
+```arm
+MVNS{<c>}{<q>} <Rd>, #<const>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);  setflags = (S == '1');
+(imm32, carry) = T32ExpandImm_C(i:imm3:imm8, APSR.C);
+if d IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.128.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<const>`**：由编码在 `i:imm3:imm8` 字段中的 12 位立即数派生出的立即数值。取值范围见 C1.5 修改型立即数常量。
+
+#### 4.128.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  result = NOT(imm32);
+  R[d] = result;
+  if setflags then
+    APSR.N = result[31];
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    // APSR.V unchanged
+```
+
+### 4.129. MVN (register)：按位非（寄存器）
+
+**按位非（寄存器）**（Bitwise NOT (register)）。MVN (register) 把一个寄存器值的按位反码写入目标寄存器。它可以选择根据结果更新条件标志。
+
+#### 4.129.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-299](FigureC2-299.png)
+
+**T1 变体**
+
+```arm
+MVN<c>{<q>} <Rd>, <Rm>
+  // 位于 IT 块内
+MVNS{<q>} <Rd>, <Rm>
+  // 位于 IT 块之外
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);  m = UInt(Rm);  setflags = !InITBlock();
+(shift_t, shift_n) = (SRType_LSL, 0);
+```
+
+#### 4.129.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-300](FigureC2-300.png)
+
+**MVN，带扩展的循环右移变体**（当 `S == 0 && imm3 == 000 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+MVN{<c>}{<q>} <Rd>, <Rm>, RRX
+```
+
+**MVN，按值移位或循环变体**（当 `S == 0 && !(imm3 == 000 && imm2 == 00 && sr_type == 11)` 时适用）
+
+```arm
+MVN<c>.W <Rd>, <Rm>
+  // 位于 IT 块内，且 <Rd>、<Rm> 可用 T1 表示
+MVN{<c>}{<q>} <Rd>, <Rm> {, <shift> #<amount>}
+```
+
+**MVNS，带扩展的循环右移变体**（当 `S == 1 && imm3 == 000 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+MVNS{<c>}{<q>} <Rd>, <Rm>, RRX
+```
+
+**MVNS，按值移位或循环变体**（当 `S == 1 && !(imm3 == 000 && imm2 == 00 && sr_type == 11)` 时适用）
+
+```arm
+MVNS.W <Rd>, <Rm>
+  // 位于 IT 块之外，且 <Rd>、<Rm> 可用 T1 表示
+MVNS{<c>}{<q>} <Rd>, <Rm> {, <shift> #<amount>}
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);  m = UInt(Rm);  setflags = (S == '1');
+(shift_t, shift_n) = DecodeImmShift(sr_type, imm3:imm2);
+if d IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.129.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：通用源寄存器，编码在 `Rm` 字段中。
+- **`<shift>`**：施加到源寄存器上的移位类型，编码在 `sr_type` 字段中。取值如下：
+  - `LSL`：当 `sr_type = 00` 时。
+  - `LSR`：当 `sr_type = 01` 时。
+  - `ASR`：当 `sr_type = 10` 时。
+  - `ROR`：当 `sr_type = 11` 时。
+- **`<amount>`**：移位量，当 `<shift>` = `LSL` 或 `ROR` 时范围 1 到 31，当 `<shift>` = `LSR` 或 `ASR` 时范围 1 到 32，以 `<amount>` 对 32 取模的形式编码在 `imm3:imm2` 字段中。
+
+#### 4.129.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  (shifted, carry) = Shift_C(R[m], shift_t, shift_n, APSR.C);
+  result = NOT(shifted);
+  R[d] = result;
+  if setflags then
+    APSR.N = result[31];
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    // APSR.V unchanged
+```
+
+### 4.130. NOP：空操作
+
+**空操作**（No Operation）。NOP 不做任何事。
+
+架构对包含 NOP 指令的任何时序影响不作任何保证。
+
+这是一条 NOP 兼容提示。
+
+#### 4.130.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-301](FigureC2-301.png)
+
+**T1 变体**
+
+```arm
+NOP{<c>}{<q>}
+```
+
+**解码**
+
+```arm
+// 无需额外解码
+```
+
+#### 4.130.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-302](FigureC2-302.png)
+
+**T2 变体**
+
+```arm
+NOP{<c>}.W
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+// 无需额外解码
+```
+
+#### 4.130.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+
+#### 4.130.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  // 不做任何事
+```
+
+### 4.131. ORN (immediate)：逻辑或非（立即数）
+
+**逻辑或非（立即数）**（Logical OR NOT (immediate)）。ORN (immediate) 对一个寄存器值与一个立即数值的补码执行按位（包含）或，并把结果写入目标寄存器。它可以选择根据结果更新条件标志。
+
+#### 4.131.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-303](FigureC2-303.png)
+
+**设置标志变体**（当 `S == 1` 时适用）
+
+```arm
+ORNS{<c>}{<q>} {<Rd>,} <Rn>, #<const>
+```
+
+**不设置标志变体**（当 `S == 0` 时适用）
+
+```arm
+ORN{<c>}{<q>} {<Rd>,} <Rn>, #<const>
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "MVN (immediate)";
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  setflags = (S == '1');
+(imm32, carry) = T32ExpandImm_C(i:imm3:imm8, APSR.C);
+if d IN {13,15} || n == 13 then UNPREDICTABLE;
+```
+
+#### 4.131.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。若省略，则该寄存器与 `<Rn>` 相同。
+- **`<Rn>`**：通用源寄存器，编码在 `Rn` 字段中。
+- **`<const>`**：由编码在 `i:imm3:imm8` 字段中的 12 位立即数派生出的立即数值。取值范围见 C1.5 修改型立即数常量。
+
+#### 4.131.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  result = R[n] OR NOT(imm32);
+  R[d] = result;
+  if setflags then
+    APSR.N = result[31];
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    // APSR.V unchanged
+```
+
+#### 4.131.4. 受限行为
+
+无额外限制。
+
+#### 4.131.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.132. ORN (register)：逻辑或非（寄存器）
+
+**逻辑或非（寄存器）**（Logical OR NOT (register)）。ORN (register) 对一个寄存器值与一个可选移位的寄存器值的补码执行按位（包含）或，并把结果写入目标寄存器。它可以选择根据结果更新条件标志。
+
+#### 4.132.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-304](FigureC2-304.png)
+
+**ORN，带扩展的循环右移变体**（当 `S == 0 && imm3 == 000 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+ORN{<c>}{<q>} {<Rd>,} <Rn>, <Rm>, RRX
+```
+
+**ORN，按值移位或循环变体**（当 `S == 0 && !(imm3 == 000 && imm2 == 00 && sr_type == 11)` 时适用）
+
+```arm
+ORN{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, <shift> #<amount>}
+```
+
+**ORNS，带扩展的循环右移变体**（当 `S == 1 && imm3 == 000 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+ORNS{<c>}{<q>} {<Rd>,} <Rn>, <Rm>, RRX
+```
+
+**ORNS，按值移位或循环变体**（当 `S == 1 && !(imm3 == 000 && imm2 == 00 && sr_type == 11)` 时适用）
+
+```arm
+ORNS{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, <shift> #<amount>}
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "MVN (register)";
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  setflags = (S == '1');
+(shift_t, shift_n) = DecodeImmShift(sr_type, imm3:imm2);
+if d IN {13,15} || n == 13 || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.132.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<shift>`**：施加到第二个源寄存器上的移位类型，编码在 `sr_type` 字段中。取值如下：
+  - `LSL`：当 `sr_type = 00` 时。
+  - `LSR`：当 `sr_type = 01` 时。
+  - `ASR`：当 `sr_type = 10` 时。
+  - `ROR`：当 `sr_type = 11` 时。
+- **`<amount>`**：移位量，当 `<shift>` = `LSL` 或 `ROR` 时范围 1 到 31，当 `<shift>` = `LSR` 或 `ASR` 时范围 1 到 32，以 `<amount>` 对 32 取模的形式编码在 `imm3:imm2` 字段中。
+
+#### 4.132.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  (shifted, carry) = Shift_C(R[m], shift_t, shift_n, APSR.C);
+  result = R[n] OR NOT(shifted);
+  R[d] = result;
+  if setflags then
+    APSR.N = result[31];
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    // APSR.V unchanged
+```
+
+#### 4.132.4. 受限行为
+
+无额外限制。
+
+#### 4.132.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.133. ORR (immediate)：逻辑或（立即数）
+
+**逻辑或（立即数）**（Logical OR (immediate)）。ORR (immediate) 对一个寄存器值与一个立即数值执行按位（包含）或，并把结果写入目标寄存器。它可以选择根据结果更新条件标志。
+
+#### 4.133.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-305](FigureC2-305.png)
+
+**ORR 变体**（当 `S == 0` 时适用）
+
+```arm
+ORR{<c>}{<q>} {<Rd>,} <Rn>, #<const>
+```
+
+**ORRS 变体**（当 `S == 1` 时适用）
+
+```arm
+ORRS{<c>}{<q>} {<Rd>,} <Rn>, #<const>
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "MOV (immediate)";
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  setflags = (S == '1');
+(imm32, carry) = T32ExpandImm_C(i:imm3:imm8, APSR.C);
+if d IN {13,15} || n == 13 then UNPREDICTABLE;
+```
+
+#### 4.133.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。若省略，则该寄存器与 `<Rn>` 相同。
+- **`<Rn>`**：通用源寄存器，编码在 `Rn` 字段中。
+- **`<const>`**：由编码在 `i:imm3:imm8` 字段中的 12 位立即数派生出的立即数值。取值范围见 C1.5 修改型立即数常量。
+
+#### 4.133.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  result = R[n] OR imm32;
+  R[d] = result;
+  if setflags then
+    APSR.N = result[31];
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    // APSR.V unchanged
+```
+
+#### 4.133.4. 受限行为
+
+无额外限制。
+
+#### 4.133.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.134. ORR (register)：逻辑或（寄存器）
+
+**逻辑或（寄存器）**（Logical OR (register)）。ORR (register) 对一个寄存器值与一个可选移位的寄存器值执行按位（包含）或，并把结果写入目标寄存器。它可以选择根据结果更新条件标志。
+
+#### 4.134.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-306](FigureC2-306.png)
+
+**T1 变体**
+
+```arm
+ORR<c>{<q>} {<Rdn>,} <Rdn>, <Rm>
+  // 位于 IT 块内
+ORRS{<q>} {<Rdn>,} <Rdn>, <Rm>
+  // 位于 IT 块之外
+```
+
+**解码**
+
+```arm
+d = UInt(Rdn);  n = UInt(Rdn);  m = UInt(Rm);  setflags = !InITBlock();
+(shift_t, shift_n) = (SRType_LSL, 0);
+```
+
+#### 4.134.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+- 在 Armv8.0-M 中，bit[15]（编码低 16 位的 [0]）表示 (0)。
+- 在 Armv8.1-M 中，bit[15]（编码低 16 位的 [0]）表示 0。
+
+![FigureC2-307](FigureC2-307.png)
+
+**ORR，带扩展的循环右移变体**（当 `S == 0 && imm3 == 000 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+ORR{<c>}{<q>} {<Rd>,} <Rn>, <Rm>, RRX
+```
+
+**ORR，按值移位或循环变体**（当 `S == 0 && !(imm3 == 000 && imm2 == 00 && sr_type == 11)` 时适用）
+
+```arm
+ORR<c>.W {<Rd>,} <Rn>, <Rm>
+  // 位于 IT 块内，且 <Rd>、<Rn>、<Rm> 可用 T1 表示
+ORR{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, <shift> #<amount>}
+```
+
+**ORRS，带扩展的循环右移变体**（当 `S == 1 && imm3 == 000 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+ORRS{<c>}{<q>} {<Rd>,} <Rn>, <Rm>, RRX
+```
+
+**ORRS，按值移位或循环变体**（当 `S == 1 && !(imm3 == 000 && imm2 == 00 && sr_type == 11)` 时适用）
+
+```arm
+ORRS.W {<Rd>,} <Rn>, <Rm>
+  // 位于 IT 块之外，且 <Rd>、<Rn>、<Rm> 可用 T1 表示
+ORRS{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, <shift> #<amount>}
+```
+
+**解码**
+
+```arm
+if HasArchVersion(Armv8p1) then
+  if S == '1' && Rm == '11x1' then SEE "Wide shift instructions";
+if Rn == '1111' then SEE "MOV (register)";
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  setflags = (S == '1');
+(shift_t, shift_n) = DecodeImmShift(sr_type, imm3:imm2);
+if d IN {13,15} || n == 13 || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.134.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rdn>`**：第一个通用源寄存器兼目标寄存器，编码在 `Rdn` 字段中。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。若省略，则该寄存器与 `<Rn>` 相同。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<shift>`**：施加到第二个源寄存器上的移位类型，编码在 `sr_type` 字段中。取值如下：
+  - `LSL`：当 `sr_type = 00` 时。
+  - `LSR`：当 `sr_type = 01` 时。
+  - `ASR`：当 `sr_type = 10` 时。
+  - `ROR`：当 `sr_type = 11` 时。
+- **`<amount>`**：移位量，当 `<shift>` = `LSL` 或 `ROR` 时范围 1 到 31，当 `<shift>` = `LSR` 或 `ASR` 时范围 1 到 32，以 `<amount>` 对 32 取模的形式编码在 `imm3:imm2` 字段中。
+
+#### 4.134.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  (shifted, carry) = Shift_C(R[m], shift_t, shift_n, APSR.C);
+  result = R[n] OR shifted;
+  R[d] = result;
+  if setflags then
+    APSR.N = result[31];
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    // APSR.V unchanged
+```
+
+#### 4.134.5. 受限行为
+
+无额外限制。
+
+#### 4.134.6. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.135. PAC：使用密钥为链接寄存器计算指针认证码
+
+使用密钥为链接寄存器计算指针认证码（Pointer Authentication Code for the link register, using key）。本指令以 LR 作为地址、SP 作为修饰符并配合密钥计算指针认证码，把计算出的 PAC 写入 R12。该指令的预期用途是对返回地址进行签名，此时链接寄存器取值应匹配函数返回所用的地址。
+
+本指令不允许出现在 IT 块中。
+
+本指令是兼容 NOP 的提示（NOP-compatible hint）。
+
+#### 4.135.1. 编码 T1
+
+适用于 Armv8.1-M PACBTI。
+
+![FigureC2-308](FigureC2-308.png)
+
+**T1 变体**
+
+```arm
+PAC R12, LR, SP
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+if InITBlock()  then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.135.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `InITBlock()` 为真，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令无条件执行。
+- 该指令条件执行。
+
+#### 4.135.3. 汇编符号（所有编码）
+
+- **`LR`**：`LR` 寄存器，本指令必须使用该寄存器；该寄存器存放地址。
+- **`SP`**：`SP` 寄存器，本指令必须使用该寄存器；该寄存器存放生成 PAC 码期间施加的修饰符。
+- **`R12`**：`R12` 寄存器，本指令必须使用该寄存器；该寄存器存放用于比较的 PAC。
+
+#### 4.135.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+
+if PACEnabled() then
+  R[12] = CreatePAC(LR, SP);
+```
+
+#### 4.135.5. 受限行为
+
+**数据独立时序行为与 PACBTI 扩展**
+
+无论 `AIRCR.DIT` 取何值，本指令在访问以下各项时的时序都对所加载或所存储数据的取值不敏感：
+
+- `PAC_KEY_P_n`。
+- `PAC_KEY_U_n`。
+- 指针值。
+- 修饰符值。
+- PAC 值。
+
+异步异常的接受时刻不因以下各项而变化：
+
+- `PAC_KEY_P_n`。
+- `PAC_KEY_U_n`。
+- 指针值。
+- 修饰符值。
+- PAC 值。
+
+### 4.136. PACBTI：在 BTI 清除下使用密钥为链接寄存器计算指针认证码
+
+在 BTI 清除下使用密钥为链接寄存器计算指针认证码（Pointer Authentication Code for the link register with BTI clearing, using key）。本指令以 LR 作为地址、SP 作为修饰符并配合密钥计算指针认证码，把计算出的 PAC 写入 R12。该指令的预期用途是对返回地址进行签名，此时链接寄存器取值应匹配函数返回所用的地址。
+
+当实现了 PACBTI 扩展且 `EPSR.B` 为 1 时，本指令是有效的 BTI 着陆垫（landing pad）。
+
+本指令不允许出现在 IT 块中。
+
+本指令是兼容 NOP 的提示（NOP-compatible hint）。
+
+#### 4.136.1. 编码 T1
+
+适用于 Armv8.1-M PACBTI。
+
+![FigureC2-309](FigureC2-309.png)
+
+**T1 变体**
+
+```arm
+PACBTI R12, LR, SP
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+if InITBlock()  then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.136.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `InITBlock()` 为真，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令无条件执行。
+- 该指令条件执行。
+
+#### 4.136.3. 汇编符号（所有编码）
+
+- **`LR`**：`LR` 寄存器，本指令必须使用该寄存器；该寄存器存放地址。
+- **`SP`**：`SP` 寄存器，本指令必须使用该寄存器；该寄存器存放生成 PAC 码期间施加的修饰符。
+- **`R12`**：`R12` 寄存器，本指令必须使用该寄存器；该寄存器存放用于比较的 PAC。
+
+#### 4.136.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+
+// 本指令可用作 BTI 着陆垫。
+// EPSR.B 位被复位为 0。
+EPSR.B = '0';
+
+if PACEnabled() then
+  R[12] = CreatePAC(LR, SP);
+```
+
+#### 4.136.5. 受限行为
+
+**数据独立时序行为与 PACBTI 扩展**
+
+无论 `AIRCR.DIT` 取何值，本指令在访问以下各项时的时序都对所加载或所存储数据的取值不敏感：
+
+- `PAC_KEY_P_n`。
+- `PAC_KEY_U_n`。
+- 指针值。
+- 修饰符值。
+- PAC 值。
+
+异步异常的接受时刻不因以下各项而变化：
+
+- `PAC_KEY_P_n`。
+- `PAC_KEY_U_n`。
+- 指针值。
+- 修饰符值。
+- PAC 值。
+
+### 4.137. PACG：使用密钥为通用值计算指针认证码
+
+使用密钥为通用值计算指针认证码（Pointer Authentication Code for a general value, using key）。本指令使用两个输入寄存器和一把密钥计算指针认证码，把计算出的 PAC 写入指定的寄存器。
+
+#### 4.137.1. 编码 T1
+
+适用于 Armv8.1-M PACBTI。
+
+![FigureC2-310](FigureC2-310.png)
+
+**T1 变体**
+
+```arm
+PACG{<c>} <Rd>, <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HavePACBTIExt() then
+  if HaveDSPExt() then UNPREDICTABLE; else UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if n == 15 || m == 15 || d IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.137.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rn>`**：存放待加密值的通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：存放加密操作所用修饰符的通用源寄存器，编码在 `Rm` 字段中。
+- **`<Rd>`**：将存放加密值的通用目标寄存器，编码在 `Rd` 字段中。
+
+#### 4.137.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  // 创建 PAC 并存入所选寄存器。
+  if PACEnabled() then
+    R[d] = CreatePAC(R[n], R[m]);
+```
+
+#### 4.137.4. 受限行为
+
+**数据独立时序行为与 PACBTI 扩展**
+
+无论 `AIRCR.DIT` 取何值，本指令在访问以下各项时的时序都对所加载或所存储数据的取值不敏感：
+
+- `PAC_KEY_P_n`。
+- `PAC_KEY_U_n`。
+- 指针值。
+- 修饰符值。
+- PAC 值。
+
+异步异常的接受时刻不因以下各项而变化：
+
+- `PAC_KEY_P_n`。
+- `PAC_KEY_U_n`。
+- 指针值。
+- 修饰符值。
+- PAC 值。
+
+### 4.138. PKHBT, PKHTB：打包半字
+
+打包半字（Pack Halfword）。打包半字把第一个操作数的一个半字与第二个操作数移位后的另一个半字组合在一起。
+
+#### 4.138.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-311](FigureC2-311.png)
+
+**PKHBT 变体**（当 `tb == 0` 时适用）
+
+```arm
+PKHBT{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, LSL #<imm>}
+  // tbform == FALSE
+```
+
+**PKHTB 变体**（当 `tb == 1` 时适用）
+
+```arm
+PKHTB{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, ASR #<imm>}
+  // tbform == TRUE
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+tbform = (tb == '1');
+(shift_t, shift_n) = DecodeImmShift(tb:'0', imm3:imm2);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.138.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<imm>`**：施加到从 `<Rm>` 读取的值上的移位量，编码在 `imm3:imm2` 字段中。对于 PKHBT，取值为：
+  - `1-31`：左移指定位数，以二进制数编码。
+  - 省略：不移位，编码为 `0b00000`。
+- **`<imm>`**：施加到从 `<Rm>` 读取的值上的移位量，编码在 `imm3:imm2` 字段中。对于 PKHTB，取值为：
+  - `1-32`：算术右移指定位数。32 位移位编码为 `0b00000`，其他移位量以二进制数编码。
+  - 省略：该指令是伪指令，按书写成 PKHBT<c><q> <Rd>, <Rm>, <Rn> 的方式汇编。
+
+对两种变体，汇编器都可以允许 `<imm> = 0` 表示与省略移位相同的含义，但这不是标准 UAL，不得用于反汇编。
+
+#### 4.138.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  operand2 = Shift(R[m], shift_t, shift_n, APSR.C);
+  // APSR.C 被忽略
+  bits(32) result;
+  result[15:0]  = if tbform then operand2[15:0] else R[n][15:0];
+  result[31:16] = if tbform then R[n][31:16] else operand2[31:16];
+  R[d] = result;
+```
+
+#### 4.138.4. 受限行为
+
+无额外限制。
+
+#### 4.138.5. 数据独立时序行为
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.139. PLD (literal)：预加载数据（字面量）
+
+预加载数据（字面量）（Preload Data (literal)）。预加载数据向存储系统发出信号，表明从指定地址进行的数据存储器访问很可能在近期发生。存储系统可以通过采取预期能加快这些访问（当其确实发生时）的动作来响应，例如把包含指定地址的缓存行预加载到数据缓存中。
+
+#### 4.139.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-312](FigureC2-312.png)
+
+**T1 变体**
+
+```arm
+PLD{<c>}{<q>} <label>
+  // 首选语法
+PLD{<c>}{<q>} [PC, #{+/-}<imm>]
+  // 替代语法
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+imm32 = ZeroExtend(imm12, 32);  add = (U == '1');
+```
+
+#### 4.139.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<label>`**：很可能在近期被访问的字面量数据项的标号。汇编器根据本指令的 `Align(PC, 4)` 值计算到该标号所需的偏移值。偏移量必须在 -4095 到 4095 范围内。若偏移量为零或正数，则 `imm32` 等于该偏移量且 `add == TRUE`；若偏移量为负数，则 `imm32` 等于偏移量的相反数且 `add == FALSE`。
+- **`+/-`**：指定偏移量从基址寄存器加上或减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - `-`：当 `U = 0` 时。
+  - `+`：当 `U = 1` 时。
+- **`<imm>`**：12 位无符号立即数字节偏移，范围 0 到 4095，编码在 `imm12` 字段中。
+
+#### 4.139.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = if add then (Align(PC,4) + imm32) else (Align(PC,4) - imm32);
+  Hint_PreloadData(address);
+```
+
+### 4.140. PLD, PLDW (immediate)：预加载数据（立即数）
+
+预加载数据（立即数）（Preload Data (immediate)）。预加载数据向存储系统发出信号，表明从指定地址进行的数据存储器访问很可能在近期发生。存储系统可以通过采取预期能加快这些访问（当其确实发生时）的动作来响应，例如把包含指定地址的缓存行预加载到数据缓存中。
+
+PLD 指令表明可能的存储器访问是读取，PLDW 指令表明是写入。
+
+PLD 或 PLDW 的效果是 IMPLEMENTATION DEFINED。
+
+#### 4.140.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-313](FigureC2-313.png)
+
+**预加载读取变体**（当 `W == 0` 时适用）
+
+```arm
+PLD{<c>}{<q>} [<Rn> {, #{+}<imm>}]
+```
+
+**预加载写入变体**（当 `W == 1` 时适用）
+
+```arm
+PLDW{<c>}{<q>} [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "PLD (literal)";
+if !HaveMainExt() then UNDEFINED;
+n = UInt(Rn);  imm32 = ZeroExtend(imm12, 32);  add = TRUE;
+is_pldw = (W == '1');
+```
+
+#### 4.140.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-314](FigureC2-314.png)
+
+**预加载读取变体**（当 `W == 0` 时适用）
+
+```arm
+PLD{<c>}{<q>} [<Rn> {, #-<imm>}]
+```
+
+**预加载写入变体**（当 `W == 1` 时适用）
+
+```arm
+PLDW{<c>}{<q>} [<Rn> {, #-<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "PLD (literal)";
+if !HaveMainExt() then UNDEFINED;
+n = UInt(Rn);  imm32 = ZeroExtend(imm8, 32);  add = FALSE;
+is_pldw = (W == '1');
+```
+
+#### 4.140.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。若使用 PC，参见 C2.4.139 PLD (literal)。
+- **`+`**：指定偏移量加到基址寄存器上。
+- **`<imm>`**：对于编码 T1，是可选的 12 位无符号立即数字节偏移，范围 0 到 4095，默认为 0，编码在 `imm12` 字段中。对于编码 T2，是可选的 8 位无符号立即数字节偏移，范围 0 到 255，默认为 0，编码在 `imm8` 字段中。
+
+#### 4.140.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = if add then (R[n] + imm32) else (R[n] - imm32);
+  if is_pldw then
+    Hint_PreloadDataForWrite(address);
+  else
+    Hint_PreloadData(address);
+```
+
+### 4.141. PLD, PLDW (register)：预加载数据（寄存器）
+
+预加载数据（寄存器）（Preload Data (register)）。预加载数据是一条存储器提示指令，它可向存储系统发出信号，表明从指定地址进行的数据存储器访问很可能在近期发生。存储系统可以通过采取预期能加快这些访问（当其确实发生时）的动作来响应，例如把包含指定地址的缓存行预加载到数据缓存中。
+
+PLD 指令表明可能的存储器访问是读取，PLDW 指令表明是写入。
+
+PLD 或 PLDW 的效果是 IMPLEMENTATION DEFINED。
+
+#### 4.141.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-315](FigureC2-315.png)
+
+**预加载读取变体**（当 `W == 0` 时适用）
+
+```arm
+PLD{<c>}{<q>} [<Rn>, {+}<Rm> {, LSL #<amount>}]
+```
+
+**预加载写入变体**（当 `W == 1` 时适用）
+
+```arm
+PLDW{<c>}{<q>} [<Rn>, {+}<Rm> {, LSL #<amount>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "PLD (literal)";
+if !HaveMainExt() then UNDEFINED;
+n = UInt(Rn);  m = UInt(Rm);  add = TRUE;
+is_pldw = (W == '1');
+(shift_t, shift_n) = (SRType_LSL, UInt(shift));
+if m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.141.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+`**：指定加到基址寄存器上的索引寄存器。
+- **`<Rm>`**：通用索引寄存器，编码在 `Rm` 字段中。
+- **`<amount>`**：移位量，范围 0-3，默认为 0，编码在 `imm2` 字段中。
+
+#### 4.141.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset = Shift(R[m], shift_t, shift_n, APSR.C);
+  address = if add then (R[n] + offset) else (R[n] - offset);
+  if is_pldw then
+    Hint_PreloadDataForWrite(address);
+  else
+    Hint_PreloadData(address);
+```
+
+### 4.142. PLI (immediate, literal)：预加载指令（立即数、字面量）
+
+预加载指令（立即数、字面量）（Preload Instruction (immediate, literal)）。预加载指令是一条存储器提示指令，它可向存储系统发出信号，表明从指定地址进行的指令存储器访问很可能在近期发生。存储系统可以通过采取预期能加快这些访问（当其确实发生时）的动作来响应，例如把包含指定地址的缓存行预加载到指令缓存中。
+
+#### 4.142.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-316](FigureC2-316.png)
+
+**T1 变体**
+
+```arm
+PLI{<c>}{<q>} [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "encoding T3";
+if !HaveMainExt() then UNDEFINED;
+n = UInt(Rn);  imm32 = ZeroExtend(imm12, 32);  add = TRUE;
+```
+
+#### 4.142.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-317](FigureC2-317.png)
+
+**T2 变体**
+
+```arm
+PLI{<c>}{<q>} [<Rn> {, #-<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "encoding T3";
+if !HaveMainExt() then UNDEFINED;
+n = UInt(Rn);  imm32 = ZeroExtend(imm8, 32);  add = FALSE;
+```
+
+#### 4.142.3. 编码 T3
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-318](FigureC2-318.png)
+
+**T3 变体**
+
+```arm
+PLI{<c>}{<q>} <label>
+  // 首选语法
+PLI{<c>}{<q>} [PC, #{+/-}<imm>]
+  // 替代语法
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+n = 15;
+imm32 = ZeroExtend(imm12, 32);  add = (U == '1');
+```
+
+#### 4.142.4. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<label>`**：很可能在近期被访问的指令的标号。汇编器根据本指令的 `Align(PC, 4)` 值计算到该标号所需的偏移值。偏移量必须在 -4095 到 4095 范围内。若偏移量为零或正数，则 `imm32` 等于该偏移量且 `add == TRUE`；若偏移量为负数，则 `imm32` 等于偏移量的相反数且 `add == FALSE`。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+`**：指定偏移量加到基址寄存器上。
+- **`+/-`**：指定偏移量从基址寄存器加上或减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - `-`：当 `U = 0` 时。
+  - `+`：当 `U = 1` 时。
+- **`<imm>`**：对于编码 T1，是可选的 12 位无符号立即数字节偏移，范围 0 到 4095，默认为 0，编码在 `imm12` 字段中。对于编码 T2，是可选的 8 位无符号立即数字节偏移，范围 0 到 255，默认为 0，编码在 `imm8` 字段中。对于编码 T3，是 12 位无符号立即数字节偏移，范围 0 到 4095，编码在 `imm12` 字段中。
+
+#### 4.142.5. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  base = if n == 15 then Align(PC,4) else R[n];
+  address = if add then (base + imm32) else (base - imm32);
+  Hint_PreloadInstr(address);
+```
+
+### 4.143. PLI (register)：预加载指令（寄存器）
+
+预加载指令（寄存器）（Preload Instruction (register)）。预加载指令是一条存储器提示指令，它可向存储系统发出信号，表明从指定地址进行的指令存储器访问很可能在近期发生。存储系统可以通过采取预期能加快这些访问（当其确实发生时）的动作来响应，例如把包含指定地址的缓存行预加载到指令缓存中。
+
+#### 4.143.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-319](FigureC2-319.png)
+
+**T1 变体**
+
+```arm
+PLI{<c>}{<q>} [<Rn>, {+}<Rm> {, LSL #<amount>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "PLI (immediate, literal)";
+if !HaveMainExt() then UNDEFINED;
+n = UInt(Rn);  m = UInt(Rm);  add = TRUE;
+(shift_t, shift_n) = (SRType_LSL, UInt(imm2));
+if m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.143.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+`**：指定索引寄存器加到基址寄存器上。
+- **`<Rm>`**：通用索引寄存器，编码在 `Rm` 字段中。
+- **`<amount>`**：移位量，范围 0 到 3，默认为 0，编码在 `imm2` 字段中。
+
+#### 4.143.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset = Shift(R[m], shift_t, shift_n, APSR.C);
+  address = if add then (R[n] + offset) else (R[n] - offset);
+  Hint_PreloadInstr(address);
+```
+
+### 4.144. POP (multiple registers)：多寄存器出栈
+
+多寄存器出栈（Pop multiple registers from stack）。多寄存器出栈从栈中加载多个通用寄存器，从 `SP` 中的地址开始、从连续的内存位置加载，并把 `SP` 更新为指向所加载数据之上。
+
+若所加载的寄存器包含 PC，则为 PC 加载的字被视作分支地址或异常返回值。bit[0] 遵循 Arm 架构在 A32 与 T32 指令集之间切换的互操作规则。然而 Armv8-M 仅支持 T32 指令集，因此 bit[0] 必须为 1。若 bit[0] 为 0，则 PE 在目标地址处的指令上产生 INVSTATE UsageFault 异常。
+
+本指令可被中断继续。
+
+本指令受栈限值检查约束。
+
+本指令是 LDM, LDMIA, LDMFD 指令的别名。这意味着：
+
+- 本说明中的编码名称与 LDM, LDMIA, LDMFD 的编码名称一致。
+- LDM, LDMIA, LDMFD 的说明给出了本指令的操作伪代码。
+
+#### 4.144.1. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-320](FigureC2-320.png)
+
+**T2 变体**
+
+```arm
+POP{<c>}{<q>} <registers>
+```
+
+**等价于**
+
+```arm
+LDM{<c>}{<q>} SP!, <registers>
+```
+
+**当 `BitCount(register_list) > 1` 时为首选的反汇编形式。**
+
+#### 4.144.2. 编码 T3
+
+适用于 Armv8-M。
+
+![FigureC2-321](FigureC2-321.png)
+
+**T3 变体**
+
+```arm
+POP{<c>}{<q>} <registers>
+```
+
+**等价于**
+
+```arm
+LDM{<c>}{<q>} SP!, <registers>
+```
+
+**且始终是首选的反汇编形式。**
+
+#### 4.144.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<registers>`**：
+  - 对 T2 编码：要加载的两个或更多寄存器的列表，以逗号分隔，并用 `{` 和 `}` 括起。编号最低的寄存器从最低的内存地址加载，直到编号最高的寄存器从最高的内存地址加载。列表中的寄存器必须在 R0-R12 范围内，编码在 `register_list` 字段中，并且可以选择性地包含 LR 或 PC 之一。若列表中包含 LR，则 `M` 字段置为 1，否则默认为 0。若列表中包含 PC，则 `P` 字段置为 1，否则默认为 0。PC 可以出现在列表中。若出现，该指令分支到加载到 PC 的地址，并且：若列表中包含 PC：
+    - 列表中不得包含 LR。
+    - 该指令必须位于任何 IT 块之外，或者是 IT 块中的最后一条指令。
+  - 对 T3 编码：要加载的一个或更多寄存器的列表，以逗号分隔，并用 `{` 和 `}` 括起。列表中的寄存器必须在 R0-R7 范围内，编码在 `register_list` 字段中，并且可以选择性地包含 PC。若列表中包含 PC，则 `P` 字段置为 1，否则该字段默认为 0。若列表中包含 PC，则该指令必须位于任何 IT 块之外，或者是 IT 块中的最后一条指令。
+
+#### 4.144.4. 操作（所有编码）
+
+LDM, LDMIA, LDMFD 的说明给出了本指令的操作伪代码。
+
+#### 4.144.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于加载到 R15 的值，但对加载到任何其他指定寄存器的所有值均适用，即使正在使用 R15。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.145. POP (single register)：单寄存器出栈
+
+单寄存器出栈（Pop single register from stack）。单寄存器出栈从栈中加载一个通用寄存器，从 `SP` 中的地址加载，并把 `SP` 更新为指向所加载数据之上。
+
+本指令是 LDR (immediate) 指令的别名。这意味着：
+
+- 本说明中的编码名称与 LDR (immediate) 的编码名称一致。
+- LDR (immediate) 的说明给出了本指令的操作伪代码。
+
+#### 4.145.1. 编码 T4
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-322](FigureC2-322.png)
+
+**后索引变体**
+
+```arm
+POP{<c>}{<q>} <register>
+```
+
+**等价于**
+
+```arm
+LDR{<c>}{<q>} <Rt>, [SP], #4
+```
+
+**且始终是首选的反汇编形式。**
+
+#### 4.145.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<register>`**：要加载的通用寄存器 `<Rt>`，用 `{` 和 `}` 括起。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。可使用 PC，前提是该指令位于 IT 块之外或为 IT 块中的最后一条指令。若使用 PC，该指令分支到加载到 PC 的地址（数据）。
+
+#### 4.145.3. 操作（所有编码）
+
+LDR (immediate) 的说明给出了本指令的操作伪代码。
+
+#### 4.145.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所加载的数据值无关。
+- 异步异常的接受时刻不因本指令所加载的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.146. PSSBB：物理推测存储旁路屏障
+
+物理推测存储旁路屏障（Physical Speculative Store Bypass Barrier）。物理推测存储旁路屏障是一种内存屏障，它阻止推测加载绕过对同一物理地址的较早存储。
+
+物理推测存储旁路屏障的语义为：
+
+- 当对某位置的加载在程序顺序上出现在 PSSBB 之后时，该加载不会推测性地读取该位置一致性顺序中早于满足下列全部条件的最新存储所生成的条目：
+  - 该存储与加载位于同一位置。
+  - 该存储在程序顺序上出现在 PSSBB 之前。
+  - 该存储的内存属性与加载的内存属性相同。
+- 当对某位置的加载在程序顺序上出现在 PSSBB 之前时，该加载不会推测性地读取满足下列全部条件的任何存储的数据：
+  - 该存储与加载位于同一位置。
+  - 该存储在程序顺序上出现在 PSSBB 之后。
+  - 该存储的内存属性与加载的内存属性相同。
+
+PSSBB 对属性不匹配相关的规则没有任何影响。
+
+#### 4.146.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-323](FigureC2-323.png)
+
+**T1 变体**
+
+```arm
+PSSBB{<q>}
+```
+
+**解码**
+
+```arm
+if InITBlock() then UNPREDICTABLE;
+```
+
+#### 4.146.2. 汇编符号（所有编码）
+
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+
+#### 4.146.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+SpeculativeSynchronizationBarrier();
+```
+
+### 4.147. PUSH (multiple registers)：多寄存器入栈
+
+多寄存器入栈（Push multiple registers to stack）。多寄存器入栈把多个通用寄存器存储到栈中，存储到结束于 `SP` 中的地址之下的连续内存位置，并把 `SP` 更新为指向所存储数据的起始处。
+
+本指令可被中断继续。
+
+本指令受栈限值检查约束。
+
+本指令是 STMDB, STMFD 指令的别名。这意味着：
+
+- 本说明中的编码名称与 STMDB, STMFD 的编码名称一致。
+- STMDB, STMFD 的说明给出了本指令的操作伪代码。
+
+#### 4.147.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-324](FigureC2-324.png)
+
+**T1 变体**
+
+```arm
+PUSH{<c>}{<q>} <registers>
+```
+
+**等价于**
+
+```arm
+STMDB{<c>}{<q>} SP!, <registers>
+```
+
+**当 `BitCount(register_list) > 1` 时为首选的反汇编形式。**
+
+#### 4.147.2. 编码 T2
+
+适用于 Armv8-M。
+
+![FigureC2-325](FigureC2-325.png)
+
+**T2 变体**
+
+```arm
+PUSH{<c>}{<q>} <registers>
+```
+
+**等价于**
+
+```arm
+STMDB{<c>}{<q>} SP!, <registers>
+```
+
+**且始终是首选的反汇编形式。**
+
+#### 4.147.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<registers>`**：
+  - 对 T1 编码：要存储的一个或更多寄存器的列表，以逗号分隔，并用 `{` 和 `}` 括起。编号最低的寄存器存储到最低的内存地址，直到编号最高的寄存器存储到最高的内存地址。列表中的寄存器必须在 R0-R12 范围内，编码在 `register_list` 字段中，并且可以选择性地包含 LR。若列表中包含 LR，则 `M` 字段置为 1，否则默认为 0。
+  - 对 T2 编码：要存储的一个或更多寄存器的列表，以逗号分隔，并用 `{` 和 `}` 括起。列表中的寄存器必须在 R0-R7 范围内，编码在 `register_list` 字段中，并且可以选择性地包含 LR。若列表中包含 LR，则 `M` 字段置为 1，否则该字段默认为 0。
+
+#### 4.147.4. 操作（所有编码）
+
+STMDB, STMFD 的说明给出了本指令的操作伪代码。
+
+#### 4.147.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储的数据值无关。
+- 异步异常的接受时刻不因本指令所存储的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.148. PUSH (single register)：单寄存器入栈
+
+单寄存器入栈（Push single register to stack）。单寄存器入栈把一个通用寄存器存储到栈中，存储到 `SP` 中的地址之下的 32 位字，并把 `SP` 更新为指向所存储数据的起始处。
+
+本指令是 STR (immediate) 指令的别名。这意味着：
+
+- 本说明中的编码名称与 STR (immediate) 的编码名称一致。
+- STR (immediate) 的说明给出了本指令的操作伪代码。
+
+#### 4.148.1. 编码 T4
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-326](FigureC2-326.png)
+
+**前索引变体**
+
+```arm
+PUSH{<c>}{<q>} <register>
+  // 标准语法
+```
+
+**等价于**
+
+```arm
+STR{<c>}{<q>} <Rt>, [SP, #-4]!
+```
+
+**且始终是首选的反汇编形式。**
+
+#### 4.148.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<register>`**：要存储的通用寄存器 `<Rt>`，用 `{` 和 `}` 括起。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+
+#### 4.148.3. 操作（所有编码）
+
+STR (immediate) 的说明给出了本指令的操作伪代码。
+
+#### 4.148.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储的数据值无关。
+- 异步异常的接受时刻不因本指令所存储的数据值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.149. QADD：饱和加
+
+饱和加（Saturating Add）。饱和加把两个寄存器值相加，把结果饱和到 32 位有符号整数范围 -2³¹ 到 2³¹-1，并把结果写入目标寄存器。若发生饱和，则置位 APSR 中的 Q 标志。
+
+#### 4.149.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-327](FigureC2-327.png)
+
+**T1 变体**
+
+```arm
+QADD{<c>}{<q>} {<Rd>,} <Rm>, <Rn>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.149.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：第一个通用源寄存器，编码在 `Rm` 字段中。
+- **`<Rn>`**：第二个通用源寄存器，编码在 `Rn` 字段中。
+
+#### 4.149.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  (R[d], sat) = SignedSatQ(SInt(R[m]) + SInt(R[n]), 32);
+  if sat then
+    APSR.Q = '1';
+```
+
+### 4.150. QADD16：16 位饱和加
+
+16 位饱和加（Saturating Add 16）。16 位饱和加执行两个 16 位整数加法，把结果饱和到 16 位有符号整数范围 -2¹⁵ 到 2¹⁵-1，并把结果写入目标寄存器。
+
+#### 4.150.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-328](FigureC2-328.png)
+
+**T1 变体**
+
+```arm
+QADD16{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.150.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.150.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  sum1 = SInt(R[n][15:0]) + SInt(R[m][15:0]);
+  sum2 = SInt(R[n][31:16]) + SInt(R[m][31:16]);
+  bits(32) result;
+  result[15:0]  = SignedSat(sum1, 16);
+  result[31:16] = SignedSat(sum2, 16);
+  R[d] = result;
+```
+
+### 4.151. QADD8：8 位饱和加
+
+8 位饱和加（Saturating Add 8）。8 位饱和加执行四个 8 位整数加法，把结果饱和到 8 位有符号整数范围 -2⁷ 到 2⁷-1，并把结果写入目标寄存器。
+
+#### 4.151.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-329](FigureC2-329.png)
+
+**T1 变体**
+
+```arm
+QADD8{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.151.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.151.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  sum1 = SInt(R[n][7:0]) + SInt(R[m][7:0]);
+  sum2 = SInt(R[n][15:8]) + SInt(R[m][15:8]);
+  sum3 = SInt(R[n][23:16]) + SInt(R[m][23:16]);
+  sum4 = SInt(R[n][31:24]) + SInt(R[m][31:24]);
+  bits(32) result;
+  result[7:0]   = SignedSat(sum1, 8);
+  result[15:8]  = SignedSat(sum2, 8);
+  result[23:16] = SignedSat(sum3, 8);
+  result[31:24] = SignedSat(sum4, 8);
+  R[d] = result;
+```
+
+### 4.152. QASX：带交换的饱和加和减
+
+带交换的饱和加和减（Saturating Add and Subtract with Exchange）。带交换的饱和加和减交换第二个操作数的两个半字，执行一个 16 位整数加法和一个 16 位减法，把结果饱和到 16 位有符号整数范围 -2¹⁵ 到 2¹⁵-1，并把结果写入目标寄存器。
+
+#### 4.152.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-330](FigureC2-330.png)
+
+**T1 变体**
+
+```arm
+QASX{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.152.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.152.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  diff = SInt(R[n][15:0]) - SInt(R[m][31:16]);
+  sum  = SInt(R[n][31:16]) + SInt(R[m][15:0]);
+  bits(32) result;
+  result[15:0]  = SignedSat(diff, 16);
+  result[31:16] = SignedSat(sum, 16);
+  R[d] = result;
+```
+
+### 4.153. QDADD：饱和双倍加
+
+饱和双倍加（Saturating Double and Add）。饱和双倍加把一个双倍后的寄存器值加到另一个寄存器值上，并把结果写入目标寄存器。双倍运算和加法运算的结果都被饱和到 32 位有符号整数范围 -2³¹ 到 2³¹-1。若任一运算发生饱和，则置位 APSR 中的 Q 标志。
+
+#### 4.153.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-331](FigureC2-331.png)
+
+**T1 变体**
+
+```arm
+QDADD{<c>}{<q>} {<Rd>,} <Rm>, <Rn>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.153.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：第一个通用源寄存器，编码在 `Rm` 字段中。
+- **`<Rn>`**：第二个通用源寄存器，编码在 `Rn` 字段中。
+
+#### 4.153.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  (doubled, sat1) = SignedSatQ(2 * SInt(R[n]), 32);
+  (R[d], sat2)    = SignedSatQ(SInt(R[m]) + SInt(doubled), 32);
+  if sat1 || sat2 then
+    APSR.Q = '1';
+```
+
+### 4.154. QDSUB：饱和双倍减
+
+饱和双倍减（Saturating Double and Subtract）。饱和双倍减从另一个寄存器值中减去一个双倍后的寄存器值，并把结果写入目标寄存器。双倍运算和减法运算的结果都被饱和到 32 位有符号整数范围 -2³¹ 到 2³¹-1。若任一运算发生饱和，则置位 APSR 中的 Q 标志。
+
+#### 4.154.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-332](FigureC2-332.png)
+
+**T1 变体**
+
+```arm
+QDSUB{<c>}{<q>} {<Rd>,} <Rm>, <Rn>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.154.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：第一个通用源寄存器，编码在 `Rm` 字段中。
+- **`<Rn>`**：第二个通用源寄存器，编码在 `Rn` 字段中。
+
+#### 4.154.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  (doubled, sat1) = SignedSatQ(2 * SInt(R[n]), 32);
+  (R[d], sat2)    = SignedSatQ(SInt(R[m]) - SInt(doubled), 32);
+  if sat1 || sat2 then
+    APSR.Q = '1';
+```
+
+### 4.155. QSAX：带交换的饱和减和加
+
+带交换的饱和减和加（Saturating Subtract and Add with Exchange）。带交换的饱和减和加交换第二个操作数的两个半字，执行一个 16 位整数减法和一个 16 位加法，把结果饱和到 16 位有符号整数范围 -2¹⁵ 到 2¹⁵-1，并把结果写入目标寄存器。
+
+#### 4.155.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-333](FigureC2-333.png)
+
+**T1 变体**
+
+```arm
+QSAX{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.155.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.155.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  sum  = SInt(R[n][15:0]) + SInt(R[m][31:16]);
+  diff = SInt(R[n][31:16]) - SInt(R[m][15:0]);
+  bits(32) result;
+  result[15:0]  = SignedSat(sum,  16);
+  result[31:16] = SignedSat(diff, 16);
+  R[d] = result;
+```
+
+### 4.156. QSUB：饱和减
+
+饱和减（Saturating Subtract）。饱和减从一个寄存器值中减去另一个寄存器值，把结果饱和到 32 位有符号整数范围 -2³¹ 到 2³¹-1，并把结果写入目标寄存器。若发生饱和，则置位 APSR 中的 Q 标志。
+
+#### 4.156.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-334](FigureC2-334.png)
+
+**T1 变体**
+
+```arm
+QSUB{<c>}{<q>} {<Rd>,} <Rm>, <Rn>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.156.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：第一个通用源寄存器，编码在 `Rm` 字段中。
+- **`<Rn>`**：第二个通用源寄存器，编码在 `Rn` 字段中。
+
+#### 4.156.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  (R[d], sat) = SignedSatQ(SInt(R[m]) - SInt(R[n]), 32);
+  if sat then
+    APSR.Q = '1';
+```
+
+### 4.157. QSUB16：16 位饱和减
+
+16 位饱和减（Saturating Subtract 16）。16 位饱和减执行两个 16 位整数减法，把结果饱和到 16 位有符号整数范围 -2¹⁵ 到 2¹⁵-1，并把结果写入目标寄存器。
+
+#### 4.157.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-335](FigureC2-335.png)
+
+**T1 变体**
+
+```arm
+QSUB16{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.157.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.157.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  diff1 = SInt(R[n][15:0]) - SInt(R[m][15:0]);
+  diff2 = SInt(R[n][31:16]) - SInt(R[m][31:16]);
+  bits(32) result;
+  result[15:0]  = SignedSat(diff1, 16);
+  result[31:16] = SignedSat(diff2, 16);
+  R[d] = result;
+```
+
+### 4.158. QSUB8：8 位饱和减
+
+8 位饱和减（Saturating Subtract 8）。8 位饱和减执行四个 8 位整数减法，把结果饱和到 8 位有符号整数范围 -2⁷ 到 2⁷-1，并把结果写入目标寄存器。
+
+#### 4.158.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-336](FigureC2-336.png)
+
+**T1 变体**
+
+```arm
+QSUB8{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.158.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.158.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  diff1 = SInt(R[n][7:0]) - SInt(R[m][7:0]);
+  diff2 = SInt(R[n][15:8]) - SInt(R[m][15:8]);
+  diff3 = SInt(R[n][23:16]) - SInt(R[m][23:16]);
+  diff4 = SInt(R[n][31:24]) - SInt(R[m][31:24]);
+  R[d][7:0]   = SignedSat(diff1, 8);
+  R[d][15:8]  = SignedSat(diff2, 8);
+  R[d][23:16] = SignedSat(diff3, 8);
+  R[d][31:24] = SignedSat(diff4, 8);
+```
+
+### 4.159. RBIT：位反转
+
+位反转（Reverse Bits）。位反转反转 32 位寄存器中的位顺序。
+
+#### 4.159.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-337](FigureC2-337.png)
+
+**T1 变体**
+
+```arm
+RBIT{<c>}{<q>} <Rd>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+if Rm != Rm2 then UNPREDICTABLE;
+d = UInt(Rd);  m = UInt(Rm); m2 = UInt(Rm2);
+if d IN {13,15} || m IN {13,15} || m2 IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.159.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `Rm != Rm2`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令按所述方式执行，行为不变且无额外副作用。
+- 目标寄存器中的值为 UNKNOWN。
+
+#### 4.159.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：通用源寄存器，编码在 `Rm` 字段中。其编号必须编码两次。
+
+#### 4.159.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  bits(32) result;
+  for i = 0 to 31
+    result[31-i] = R[m][i];
+  R[d] = result;
+```
+
+#### 4.159.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.160. REV：字节反转字
+
+字节反转字（Byte-Reverse Word）。字节反转字反转 32 位寄存器中的字节顺序。
+
+#### 4.160.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-338](FigureC2-338.png)
+
+**T1 变体**
+
+```arm
+REV{<c>}{<q>} <Rd>, <Rm>
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);  m = UInt(Rm);
+```
+
+#### 4.160.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-339](FigureC2-339.png)
+
+**T2 变体**
+
+```arm
+REV{<c>}.W <Rd>, <Rm>
+  // <Rd>、<Rm> 可用 T1 表示
+REV{<c>}{<q>} <Rd>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+if Rm != Rm2 then UNPREDICTABLE;
+d = UInt(Rd);  m = UInt(Rm); m2 = UInt(Rm2);
+if d IN {13,15} || m IN {13,15} || m2 IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.160.3. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `Rm != Rm2`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令按所述方式执行，行为不变且无额外副作用。
+- 目标寄存器中的值为 UNKNOWN。
+
+#### 4.160.4. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：对 T1 编码：通用源寄存器，编码在 `Rm` 字段中。对 T2 编码：通用源寄存器，编码在 `Rm` 字段中。其编号必须编码两次。
+
+#### 4.160.5. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  bits(32) result;
+  result[31:24] = R[m][7:0];
+  result[23:16] = R[m][15:8];
+  result[15:8]  = R[m][23:16];
+  result[7:0]   = R[m][31:24];
+  R[d] = result;
+```
+
+#### 4.160.6. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.161. REV16：字节反转打包半字
+
+字节反转打包半字（Byte-Reverse Packed Halfword）。字节反转打包半字反转 32 位寄存器中每个 16 位半字的字节顺序。
+
+#### 4.161.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-340](FigureC2-340.png)
+
+**T1 变体**
+
+```arm
+REV16{<c>}{<q>} <Rd>, <Rm>
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);  m = UInt(Rm);
+```
+
+#### 4.161.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-341](FigureC2-341.png)
+
+**T2 变体**
+
+```arm
+REV16{<c>}.W <Rd>, <Rm>
+  // <Rd>、<Rm> 可用 T1 表示
+REV16{<c>}{<q>} <Rd>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+if Rm != Rm2 then UNPREDICTABLE;
+d = UInt(Rd);  m = UInt(Rm); m2 = UInt(Rm2);
+if d IN {13,15} || m IN {13,15} || m2 IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.161.3. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `Rm != Rm2`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令按所述方式执行，行为不变且无额外副作用。
+- 目标寄存器中的值为 UNKNOWN。
+
+#### 4.161.4. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：对 T1 编码：通用源寄存器，编码在 `Rm` 字段中。对 T2 编码：通用源寄存器，编码在 `Rm` 字段中。其编号必须编码两次。
+
+#### 4.161.5. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  bits(32) result;
+  result[31:24] = R[m][23:16];
+  result[23:16] = R[m][31:24];
+  result[15:8]  = R[m][7:0];
+  result[7:0]   = R[m][15:8];
+  R[d] = result;
+```
+
+#### 4.161.6. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.162. REVSH：字节反转有符号半字
+
+字节反转有符号半字（Byte-Reverse Signed Halfword）。字节反转有符号半字反转 32 位寄存器低 16 位半字中的字节顺序，并把结果符号扩展到 32 位。
+
+#### 4.162.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-342](FigureC2-342.png)
+
+**T1 变体**
+
+```arm
+REVSH{<c>}{<q>} <Rd>, <Rm>
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);  m = UInt(Rm);
+```
+
+#### 4.162.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-343](FigureC2-343.png)
+
+**T2 变体**
+
+```arm
+REVSH{<c>}.W <Rd>, <Rm>
+  // <Rd>、<Rm> 可用 T1 表示
+REVSH{<c>}{<q>} <Rd>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+if Rm != Rm2 then UNPREDICTABLE;
+d = UInt(Rd);  m = UInt(Rm); m2 = UInt(Rm2);
+if d IN {13,15} || m IN {13,15} || m2 IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.162.3. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `Rm != Rm2`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令按所述方式执行，行为不变且无额外副作用。
+- 目标寄存器中的值为 UNKNOWN。
+
+#### 4.162.4. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：对 T1 编码：通用源寄存器，编码在 `Rm` 字段中。对 T2 编码：通用源寄存器，编码在 `Rm` 字段中。其编号必须编码两次。
+
+#### 4.162.5. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  bits(32) result;
+  result[31:8] = SignExtend(R[m][7:0], 24);
+  result[7:0]  = R[m][15:8];
+  R[d] = result;
+```
+
+#### 4.162.6. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.163. ROR (immediate)：循环右移（立即数）
+
+循环右移（立即数）（Rotate Right (immediate)）。循环右移（立即数）把寄存器值循环右移常量个位，把从右端移出的位插入左端的空出位，并把结果写入目标寄存器。
+
+本指令是 MOV (register) 指令的别名。这意味着：
+
+- 本说明中的编码名称与 MOV (register) 的编码名称一致。
+- MOV (register) 的说明给出了本指令的操作伪代码。
+
+#### 4.163.1. 编码 T3
+
+仅适用于 Armv8-M Main 扩展。
+
+- 在 Armv8.0-M 中，bit[15]（编码的低 16 位）[0] 表示 (0)。
+- 在 Armv8.1-M 中，bit[15]（编码的低 16 位）[0] 表示 0。
+
+![FigureC2-344](FigureC2-344.png)
+
+**MOV，按值移位或循环移位变体**（当 `!(imm3 == 000 && imm2 == 00)` 时适用）
+
+```arm
+ROR{<c>}{<q>} {<Rd>,} <Rm>, #<imm>
+```
+
+**等价于**
+
+```arm
+MOV{<c>}{<q>} <Rd>, <Rm>, ROR #<imm>
+```
+
+**且始终是首选的反汇编形式。**
+
+#### 4.163.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：通用源寄存器，编码在 `Rm` 字段中。
+- **`<imm>`**：移位量，范围 1 到 31，编码在 `imm3:imm2` 字段中。
+
+#### 4.163.3. 操作（所有编码）
+
+MOV (register) 的说明给出了本指令的操作伪代码。
+
+#### 4.163.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.164. ROR (register)：循环右移（寄存器）
+
+循环右移（寄存器）（Rotate Right (register)）。循环右移（寄存器）把寄存器值循环右移可变个位，把从右端移出的位插入左端的空出位，并把结果写入目标寄存器。可变位数从某个寄存器的最低字节读取。
+
+本指令是 MOV, MOVS (register-shifted register) 指令的别名。这意味着：
+
+- 本说明中的编码名称与 MOV, MOVS (register-shifted register) 的编码名称一致。
+- MOV, MOVS (register-shifted register) 的说明给出了本指令的操作伪代码。
+
+#### 4.164.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-345](FigureC2-345.png)
+
+**循环右移变体**
+
+```arm
+ROR<c>{<q>} {<Rdm>,} <Rdm>, <Rs>
+  // IT 块内
+```
+
+**等价于**
+
+```arm
+MOV<c>{<q>} <Rdm>, <Rdm>, ROR <Rs>
+```
+
+**当 `InITBlock()` 时为首选的反汇编形式。**
+
+#### 4.164.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-346](FigureC2-346.png)
+
+**非标志设置变体**
+
+```arm
+ROR<c>.W {<Rd>,} <Rm>, <Rs>
+  // IT 块内，且 <Rd>、<Rm>、<sr_type>、<Rs> 可用 T1 表示
+```
+
+**等价于**
+
+```arm
+MOV{<c>}{<q>} <Rd>, <Rm>, ROR <Rs>
+```
+
+**且始终是首选的反汇编形式。**
+
+**非标志设置变体**
+
+```arm
+ROR{<c>}{<q>} {<Rd>,} <Rm>, <Rs>
+```
+
+**等价于**
+
+```arm
+MOV{<c>}{<q>} <Rd>, <Rm>, ROR <Rs>
+```
+
+**且始终是首选的反汇编形式。**
+
+#### 4.164.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rdm>`**：第一个通用源寄存器，同时是目标寄存器，编码在 `Rdm` 字段中。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：第一个通用源寄存器，编码在 `Rm` 字段中。
+- **`<Rs>`**：第二个通用源寄存器，其最低 8 位存放循环移位量，编码在 `Rs` 字段中。
+
+#### 4.164.4. 操作（所有编码）
+
+MOV, MOVS (register-shifted register) 的说明给出了本指令的操作伪代码。
+
+#### 4.164.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.165. RORS (immediate)：循环右移并置标志（立即数）
+
+循环右移并置标志（立即数）（Rotate Right, Setting flags (immediate)）。循环右移并置标志（立即数）把寄存器值循环右移常量个位，把从右端移出的位插入左端的空出位，把结果写入目标寄存器，并根据结果更新条件标志。
+
+本指令是 MOV (register) 指令的别名。这意味着：
+
+- 本说明中的编码名称与 MOV (register) 的编码名称一致。
+- MOV (register) 的说明给出了本指令的操作伪代码。
+
+#### 4.165.1. 编码 T3
+
+仅适用于 Armv8-M Main 扩展。
+
+- 在 Armv8.0-M 中，bit[15]（编码的低 16 位）[0] 表示 (0)。
+- 在 Armv8.1-M 中，bit[15]（编码的低 16 位）[0] 表示 0。
+
+![FigureC2-347](FigureC2-347.png)
+
+**MOVS，按值移位或循环移位变体**（当 `!(imm3 == 000 && imm2 == 00)` 时适用）
+
+```arm
+RORS{<c>}{<q>} {<Rd>,} <Rm>, #<imm>
+```
+
+**等价于**
+
+```arm
+MOVS{<c>}{<q>} <Rd>, <Rm>, ROR #<imm>
+```
+
+**且始终是首选的反汇编形式。**
+
+#### 4.165.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：通用源寄存器，编码在 `Rm` 字段中。
+- **`<imm>`**：移位量，范围 1 到 31，编码在 `imm3:imm2` 字段中。
+
+#### 4.165.3. 操作（所有编码）
+
+MOV (register) 的说明给出了本指令的操作伪代码。
+
+#### 4.165.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.166. RORS (register)：循环右移并置标志（寄存器）
+
+循环右移并置标志（寄存器）（Rotate Right, Setting flags (register)）。循环右移并置标志（寄存器）把寄存器值循环右移可变个位，把从右端移出的位插入左端的空出位，把结果写入目标寄存器，并根据结果更新条件标志。可变位数从某个寄存器的最低字节读取。
+
+本指令是 MOV, MOVS (register-shifted register) 指令的别名。这意味着：
+
+- 本说明中的编码名称与 MOV, MOVS (register-shifted register) 的编码名称一致。
+- MOV, MOVS (register-shifted register) 的说明给出了本指令的操作伪代码。
+
+#### 4.166.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-348](FigureC2-348.png)
+
+**循环右移变体**
+
+```arm
+RORS{<q>} {<Rdm>,} <Rdm>, <Rs>
+  // IT 块外
+```
+
+**等价于**
+
+```arm
+MOVS{<q>} <Rdm>, <Rdm>, ROR <Rs>
+```
+
+**当 `!InITBlock()` 时为首选的反汇编形式。**
+
+#### 4.166.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-349](FigureC2-349.png)
+
+**标志设置变体**
+
+```arm
+RORS.W {<Rd>,} <Rm>, <Rs>
+  // IT 块外，且 <Rd>、<Rm>、<sr_type>、<Rs> 可用 T1 表示
+```
+
+**等价于**
+
+```arm
+MOVS{<c>}{<q>} <Rd>, <Rm>, ROR <Rs>
+```
+
+**且始终是首选的反汇编形式。**
+
+**标志设置变体**
+
+```arm
+RORS{<c>}{<q>} {<Rd>,} <Rm>, <Rs>
+```
+
+**等价于**
+
+```arm
+MOVS{<c>}{<q>} <Rd>, <Rm>, ROR <Rs>
+```
+
+**且始终是首选的反汇编形式。**
+
+#### 4.166.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rdm>`**：第一个通用源寄存器，同时是目标寄存器，编码在 `Rdm` 字段中。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：第一个通用源寄存器，编码在 `Rm` 字段中。
+- **`<Rs>`**：第二个通用源寄存器，其最低 8 位存放循环移位量，编码在 `Rs` 字段中。
+
+#### 4.166.4. 操作（所有编码）
+
+MOV, MOVS (register-shifted register) 的说明给出了本指令的操作伪代码。
+
+#### 4.166.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.167. RRX：带扩展的循环右移
+
+带扩展的循环右移（Rotate Right with Extend）。带扩展的循环右移把寄存器值右移一位，把进位标志移入 bit[31]，并把结果写入目标寄存器。
+
+本指令是 MOV (register) 指令的别名。这意味着：
+
+- 本说明中的编码名称与 MOV (register) 的编码名称一致。
+- MOV (register) 的说明给出了本指令的操作伪代码。
+
+#### 4.167.1. 编码 T3
+
+仅适用于 Armv8-M Main 扩展。
+
+- 在 Armv8.0-M 中，bit[15]（编码的低 16 位）[0] 表示 (0)。
+- 在 Armv8.1-M 中，bit[15]（编码的低 16 位）[0] 表示 0。
+
+![FigureC2-350](FigureC2-350.png)
+
+**MOV，循环右移并扩展变体**
+
+```arm
+RRX{<c>}{<q>} {<Rd>,} <Rm>
+```
+
+**等价于**
+
+```arm
+MOV{<c>}{<q>} <Rd>, <Rm>, RRX
+```
+
+**且始终是首选的反汇编形式。**
+
+#### 4.167.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.167.3. 操作（所有编码）
+
+MOV (register) 的说明给出了本指令的操作伪代码。
+
+#### 4.167.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.168. RRXS：带扩展的循环右移并置标志
+
+带扩展的循环右移并置标志（Rotate Right with Extend, Setting flags）。带扩展的循环右移并置标志把寄存器值右移一位，把进位标志移入 bit[31]，把 bit[0] 移入进位标志，把结果写入目标寄存器，并根据结果更新条件标志（进位标志除外）。
+
+本指令是 MOV (register) 指令的别名。这意味着：
+
+- 本说明中的编码名称与 MOV (register) 的编码名称一致。
+- MOV (register) 的说明给出了本指令的操作伪代码。
+
+#### 4.168.1. 编码 T3
+
+仅适用于 Armv8-M Main 扩展。
+
+- 在 Armv8.0-M 中，bit[15]（编码的低 16 位）[0] 表示 (0)。
+- 在 Armv8.1-M 中，bit[15]（编码的低 16 位）[0] 表示 0。
+
+![FigureC2-351](FigureC2-351.png)
+
+**MOVS，循环右移并扩展变体**
+
+```arm
+RRXS{<c>}{<q>} {<Rd>,} <Rm>
+```
+
+**等价于**
+
+```arm
+MOVS{<c>}{<q>} <Rd>, <Rm>, RRX
+```
+
+**且始终是首选的反汇编形式。**
+
+#### 4.168.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.168.3. 操作（所有编码）
+
+MOV (register) 的说明给出了本指令的操作伪代码。
+
+#### 4.168.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.169. RSB (immediate)：反向减（立即数）
+
+反向减（立即数）（Reverse Subtract (immediate)）。反向减（立即数）用立即数减去寄存器值，并把结果写入目标寄存器。它可以选择性地根据结果更新条件标志。
+
+#### 4.169.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-352](FigureC2-352.png)
+
+**T1 变体**
+
+```arm
+RSB<c>{<q>} {<Rd>, }<Rn>, #0
+  // IT 块内
+RSBS{<q>} {<Rd>, }<Rn>, #0
+  // IT 块外
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);
+setflags = !InITBlock();
+imm32 = Zeros(32);  // immediate = #0
+```
+
+#### 4.169.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-353](FigureC2-353.png)
+
+**RSB 变体**（当 `S == 0` 时适用）
+
+```arm
+RSB<c>.W {<Rd>,} <Rn>, #0
+  // IT 块内
+RSB{<c>}{<q>} {<Rd>,} <Rn>, #<const>
+```
+
+**RSBS 变体**（当 `S == 1` 时适用）
+
+```arm
+RSBS.W {<Rd>,} <Rn>, #0
+  // IT 块外
+RSBS{<c>}{<q>} {<Rd>,} <Rn>, #<const>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);
+setflags = (S == '1');
+imm32 = T32ExpandImm(i:imm3:imm8);
+if d IN {13,15} || n IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.169.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。若省略，该寄存器与 `<Rn>` 相同。
+- **`<Rn>`**：通用源寄存器，编码在 `Rn` 字段中。
+- **`<const>`**：由编码在 `i:imm3:imm8` 字段中的 12 位立即数导出的立即数。取值范围见 C1.5 修改的立即数常量。
+
+#### 4.169.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  (result, carry, overflow) = AddWithCarry(NOT(R[n]), imm32, '1');
+  R[d] = result;
+  if setflags then
+    APSR.N = result[31];
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    APSR.V = overflow;
+```
+
+#### 4.169.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.170. RSB (register)：反向减（寄存器）
+
+反向减（寄存器）（Reverse Subtract (register)）。反向减（寄存器）用可选择性移位的寄存器值减去寄存器值，并把结果写入目标寄存器。它可以选择性地根据结果更新条件标志。
+
+#### 4.170.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-354](FigureC2-354.png)
+
+**RSB，循环右移并扩展变体**（当 `S == 0 && imm3 == 000 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+RSB{<c>}{<q>} {<Rd>,} <Rn>, <Rm>, RRX
+```
+
+**RSB，按值移位或循环移位变体**（当 `S == 0 && !(imm3 == 000 && imm2 == 00 && sr_type == 11)` 时适用）
+
+```arm
+RSB{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, <shift> #<amount>}
+```
+
+**RSBS，循环右移并扩展变体**（当 `S == 1 && imm3 == 000 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+RSBS{<c>}{<q>} {<Rd>,} <Rn>, <Rm>, RRX
+```
+
+**RSBS，按值移位或循环移位变体**（当 `S == 1 && !(imm3 == 000 && imm2 == 00 && sr_type == 11)` 时适用）
+
+```arm
+RSBS{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, <shift> #<amount>}
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+setflags = (S == '1');
+(shift_t, shift_n) = DecodeImmShift(sr_type, imm3:imm2);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.170.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。若省略，该寄存器与 `<Rn>` 相同。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<shift>`**：施加到第二个源寄存器上的移位类型，编码在 `sr_type` 字段中。取值如下：
+  - `LSL`：当 `sr_type = 00` 时。
+  - `LSR`：当 `sr_type = 01` 时。
+  - `ASR`：当 `sr_type = 10` 时。
+  - `ROR`：当 `sr_type = 11` 时。
+- **`<amount>`**：移位量，范围 1 到 31（当 `<shift> = LSL` 或 `ROR` 时）或 1 到 32（当 `<shift> = LSR` 或 `ASR` 时），以 `<amount> modulo 32` 的形式编码在 `imm3:imm2` 字段中。
+
+#### 4.170.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  shifted = Shift(R[m], shift_t, shift_n, APSR.C);
+  (result, carry, overflow) = AddWithCarry(NOT(R[n]), shifted, '1');
+  R[d] = result;
+  if setflags then
+    APSR.Z = IsZeroBit(result);
+    APSR.N = result[31];
+    APSR.C = carry;
+    APSR.V = overflow;
+```
+
+#### 4.170.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.171. SADD16：有符号加 16
+
+有符号加 16（Signed Add 16）。有符号加 16 执行两个 16 位有符号整数加法，并把结果写入目标寄存器。它根据加法的结果设置 APSR.GE 位。
+
+#### 4.171.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-355](FigureC2-355.png)
+
+**T1 变体**
+
+```arm
+SADD16{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.171.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.171.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  sum1 = SInt(R[n][15:0]) + SInt(R[m][15:0]);
+  sum2 = SInt(R[n][31:16]) + SInt(R[m][31:16]);
+  R[d] = sum2[15:0] : sum1[15:0];
+  APSR.GE[1:0] = if sum1 >= 0 then '11' else '00';
+  APSR.GE[3:2] = if sum2 >= 0 then '11' else '00';
+```
+
+#### 4.171.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.172. SADD8：有符号加 8
+
+有符号加 8（Signed Add 8）。有符号加 8 执行四个 8 位有符号整数加法，并把结果写入目标寄存器。它根据加法的结果设置 APSR.GE 位。
+
+#### 4.172.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-356](FigureC2-356.png)
+
+**T1 变体**
+
+```arm
+SADD8{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.172.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.172.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  sum1 = SInt(R[n][7:0]) + SInt(R[m][7:0]);
+  sum2 = SInt(R[n][15:8]) + SInt(R[m][15:8]);
+  sum3 = SInt(R[n][23:16]) + SInt(R[m][23:16]);
+  sum4 = SInt(R[n][31:24]) + SInt(R[m][31:24]);
+  R[d] = sum4[7:0] : sum3[7:0] : sum2[7:0] : sum1[7:0];
+  APSR.GE[0] = if sum1 >= 0 then '1' else '0';
+  APSR.GE[1] = if sum2 >= 0 then '1' else '0';
+  APSR.GE[2] = if sum3 >= 0 then '1' else '0';
+  APSR.GE[3] = if sum4 >= 0 then '1' else '0';
+```
+
+#### 4.172.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.173. SASX：带交换的有符号加和减
+
+带交换的有符号加和减（Signed Add and Subtract with Exchange）。带交换的有符号加和减交换第二个操作数的两个半字，执行一个 16 位整数加法和一个 16 位减法，并把结果写入目标寄存器。它根据结果设置 APSR.GE 位。
+
+#### 4.173.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-357](FigureC2-357.png)
+
+**T1 变体**
+
+```arm
+SASX{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.173.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.173.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  diff = SInt(R[n][15:0]) - SInt(R[m][31:16]);
+  sum  = SInt(R[n][31:16]) + SInt(R[m][15:0]);
+  R[d] = sum[15:0] : diff[15:0];
+  APSR.GE[1:0] = if diff >= 0 then '11' else '00';
+  APSR.GE[3:2] = if sum  >= 0 then '11' else '00';
+```
+
+#### 4.173.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.174. SBC (immediate)：带进位减（立即数）
+
+带进位减（立即数）（Subtract with Carry (immediate)）。带进位减（立即数）从寄存器值中减去立即数和 `NOT(Carry flag)` 的值，并把结果写入目标寄存器。它可以选择性地根据结果更新条件标志。
+
+#### 4.174.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-358](FigureC2-358.png)
+
+**SBC 变体**（当 `S == 0` 时适用）
+
+```arm
+SBC{<c>}{<q>} {<Rd>,} <Rn>, #<const>
+```
+
+**SBCS 变体**（当 `S == 1` 时适用）
+
+```arm
+SBCS{<c>}{<q>} {<Rd>,} <Rn>, #<const>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);
+setflags = (S == '1');
+imm32 = T32ExpandImm(i:imm3:imm8);
+if d IN {13,15} || n IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.174.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。若省略，该寄存器与 `<Rn>` 相同。
+- **`<Rn>`**：通用源寄存器，编码在 `Rn` 字段中。
+- **`<const>`**：由编码在 `i:imm3:imm8` 字段中的 12 位立即数导出的立即数。取值范围见 C1.5 修改的立即数常量。
+
+#### 4.174.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  (result, carry, overflow) = AddWithCarry(R[n], NOT(imm32), APSR.C);
+  R[d] = result;
+  if setflags then
+    APSR.N = result[31];
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    APSR.V = overflow;
+```
+
+#### 4.174.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.175. SBC (register)：带进位减（寄存器）
+
+带进位减（寄存器）（Subtract with Carry (register)）。带进位减（寄存器）从寄存器值中减去可选择性移位的寄存器值和 `NOT(Carry flag)` 的值，并把结果写入目标寄存器。它可以选择性地根据结果更新条件标志。
+
+#### 4.175.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-359](FigureC2-359.png)
+
+**T1 变体**
+
+```arm
+SBC<c>{<q>} {<Rdn>,} <Rdn>, <Rm>
+  // IT 块内
+SBCS{<q>} {<Rdn>,} <Rdn>, <Rm>
+  // IT 块外
+```
+
+**解码**
+
+```arm
+d = UInt(Rdn);  n = UInt(Rdn);  m = UInt(Rm);
+setflags = !InITBlock();
+(shift_t, shift_n) = (SRType_LSL, 0);
+```
+
+#### 4.175.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-360](FigureC2-360.png)
+
+**SBC，循环右移并扩展变体**（当 `S == 0 && imm3 == 000 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+SBC{<c>}{<q>} {<Rd>,} <Rn>, <Rm>, RRX
+```
+
+**SBC，按值移位或循环移位变体**（当 `S == 0 && !(imm3 == 000 && imm2 == 00 && sr_type == 11)` 时适用）
+
+```arm
+SBC<c>.W {<Rd>,} <Rn>, <Rm>
+  // IT 块内，且 <Rd>、<Rn>、<Rm> 可用 T1 表示
+SBC{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, <shift> #<amount>}
+```
+
+**SBCS，循环右移并扩展变体**（当 `S == 1 && imm3 == 000 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+SBCS{<c>}{<q>} {<Rd>,} <Rn>, <Rm>, RRX
+```
+
+**SBCS，按值移位或循环移位变体**（当 `S == 1 && !(imm3 == 000 && imm2 == 00 && sr_type == 11)` 时适用）
+
+```arm
+SBCS.W {<Rd>,} <Rn>, <Rm>
+  // IT 块外，且 <Rd>、<Rn>、<Rm> 可用 T1 表示
+SBCS{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, <shift> #<amount>}
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+setflags = (S == '1');
+(shift_t, shift_n) = DecodeImmShift(sr_type, imm3:imm2);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.175.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rdn>`**：第一个通用源寄存器，同时是目标寄存器，编码在 `Rdn` 字段中。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。若省略，该寄存器与 `<Rn>` 相同。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<shift>`**：施加到第二个源寄存器上的移位类型，编码在 `sr_type` 字段中。取值如下：
+  - `LSL`：当 `sr_type = 00` 时。
+  - `LSR`：当 `sr_type = 01` 时。
+  - `ASR`：当 `sr_type = 10` 时。
+  - `ROR`：当 `sr_type = 11` 时。
+- **`<amount>`**：移位量，范围 1 到 31（当 `<shift> = LSL` 或 `ROR` 时）或 1 到 32（当 `<shift> = LSR` 或 `ASR` 时），以 `<amount> modulo 32` 的形式编码在 `imm3:imm2` 字段中。
+
+#### 4.175.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  shifted = Shift(R[m], shift_t, shift_n, APSR.C);
+  (result, carry, overflow) = AddWithCarry(R[n], NOT(shifted), APSR.C);
+  R[d] = result;
+  if setflags then
+    APSR.N = result[31];
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    APSR.V = overflow;
+```
+
+#### 4.175.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.176. SBFX：有符号位域提取
+
+有符号位域提取（Signed Bit Field Extract）。有符号位域提取从寄存器中任意位置提取任意数量的相邻位，把它们符号扩展到 32 位，并把结果写入目标寄存器。
+
+#### 4.176.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-361](FigureC2-361.png)
+
+**T1 变体**
+
+```arm
+SBFX{<c>}{<q>} <Rd>, <Rn>, #<lsb>, #<width>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);
+lsbit = UInt(imm3:imm2);
+widthminus1 = UInt(widthm1);
+msbit = lsbit + widthminus1;
+if msbit > 31 then UNPREDICTABLE;
+if d IN {13,15} || n IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.176.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `msbit > 31`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 目标寄存器中的值为 UNKNOWN。
+
+#### 4.176.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：通用源寄存器，编码在 `Rn` 字段中。
+- **`<lsb>`**：位域中最低有效位的位号，范围 0 到 31，编码在 `imm3:imm2` 字段中。
+- **`<width>`**：位域宽度，范围 1 到 32-`<lsb>`，以 `<width>-1` 的形式编码在 `widthm1` 字段中。
+
+#### 4.176.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  if msbit <= 31 then
+    R[d] = SignExtend(R[n][msbit:lsbit], 32);
+  else
+    R[d] = bits(32) UNKNOWN;
+```
+
+#### 4.176.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.177. SDIV：有符号除法
+
+有符号除法（Signed Divide）。有符号除法用 32 位有符号整数寄存器值除以 32 位有符号整数寄存器值，并把结果写入目标寄存器。条件码标志不受影响。
+
+若 `R[n] == 0x80000000`（-2³¹）且 `R[m] == 0xFFFFFFFF`（-1），则除法结果为 `0x80000000`。
+
+#### 4.177.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-362](FigureC2-362.png)
+
+**T1 变体**
+
+```arm
+SDIV{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.177.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，存放被除数，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，存放除数，编码在 `Rm` 字段中。
+
+#### 4.177.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  if SInt(R[m]) == 0 then
+    if IntegerZeroDivideTrappingEnabled() then
+      GenerateIntegerZeroDivide();
+    else
+      result = 0;
+  else
+    result = RoundTowardsZero(Real(SInt(R[n])) / Real(SInt(R[m])));
+  R[d] = result[31:0];
+```
+
+### 4.178. SEL：选择字节
+
+选择字节（Select Bytes）。选择字节根据 GE 标志的取值，从第一个操作数或第二个操作数中选择结果的每个字节。
+
+#### 4.178.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-363](FigureC2-363.png)
+
+**T1 变体**
+
+```arm
+SEL{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.178.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.178.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  bits(32) result;
+  result[7:0]   = if APSR.GE[0] == '1' then R[n][7:0]   else R[m][7:0];
+  result[15:8]  = if APSR.GE[1] == '1' then R[n][15:8]  else R[m][15:8];
+  result[23:16] = if APSR.GE[2] == '1' then R[n][23:16] else R[m][23:16];
+  result[31:24] = if APSR.GE[3] == '1' then R[n][31:24] else R[m][31:24];
+  R[d] = result;
+```
+
+### 4.179. SEV：发送事件
+
+发送事件（Send Event）。发送事件是一条提示指令。它向多处理器系统内的所有 PE 发出事件信号。
+
+本指令是兼容 NOP 的提示（NOP-compatible hint）。
+
+#### 4.179.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-364](FigureC2-364.png)
+
+**T1 变体**
+
+```arm
+SEV{<c>}{<q>}
+```
+
+**解码**
+
+```arm
+// 无需额外解码
+```
+
+#### 4.179.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-365](FigureC2-365.png)
+
+**T2 变体**
+
+```arm
+SEV{<c>}.W
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+// 无需额外解码
+```
+
+#### 4.179.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+
+#### 4.179.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  SendEvent();
+```
+
+### 4.180. SG：安全网关
+
+安全网关（Secure Gateway）。安全网关为从 Non-secure 代码调用 Secure 代码的分支标记有效的分支目标。
+
+若本指令的地址位于 Secure 内存中，则本指令把安全状态设置为 Secure。若本指令的地址位于 Non-secure 内存中，则本指令的行为等同于 NOP。
+
+若实现了 PACBTI 扩展，则无论本指令的行为是否等同于 NOP，本指令始终是有效的 BTI 着陆垫。
+
+若 PE 此前处于 Non-secure 状态：
+
+- 本指令把 `LR` 的 bit[0] 设置为 0，以指示该返回地址将导致从 Secure 状态切换到 Non-secure 状态。
+- 若实现了浮点扩展，则本指令把 `CONTROL_S.SFPA` 设置为 0，从而把 Secure 浮点状态标记为非活动。这表示浮点寄存器中不包含属于 Secure 状态的活动状态。
+
+若 PE 在 `CCR_S.TRD` 设置为 1 时尝试重新进入 Thread 模式，并且下列任一条件或两个条件均成立，则产生 INVEP SecureFault：
+
+- `CONTROL_S.SPSEL` 为 0。
+- Secure 状态的当前栈指针指向的地址包含值 `0xFEFA125A[31:1]`。
+
+SG 是无条件指令，在 IT 指令块内和块外均按无条件方式执行。Arm 建议软件不要将 SG 放在 IT 指令块内。
+
+#### 4.180.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-366](FigureC2-366.png)
+
+**T1 变体**
+
+```arm
+SG{<q>}
+```
+
+**解码**
+
+```arm
+// 无编码特定操作
+```
+
+#### 4.180.2. 汇编符号（所有编码）
+
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+
+#### 4.180.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+
+if HaveSecurityExt() then
+  sAttributes = SecurityCheck(ThisInstrAddr(), TRUE, IsSecure());
+  if !sAttributes.ns then
+    if !IsSecure() then
+      if HasArchVersion(Armv8p1) && CurrentMode() == PEMode_Thread then
+        // 对 Secure 栈的访问应使用 Secure 状态下当前模式的
+        // 特权级别，而不是当前状态。
+        // 注意：即使线程模式重入检查被禁用，下面的加载仍会执行，
+        // 并且任何故障都会被处理。
+        secIsPriv = CurrentModeIsPrivileged(TRUE);
+        secSp = LookUpSP_with_security_mode(TRUE, PEMode_Thread);
+        (exc, spData) = MemA_with_priv_security(_SP(secSp), 4, AccType_NORMAL,
+                                                FindMemPriv(secIsPriv), TRUE, TRUE);
+        HandleException(exc);
+        // 若线程模式重入被禁用，则检查是否存在异常栈帧。
+        if CCR_S.TRD == '1' && (spData[31:1] == 0xFEFA125A[31:1] ||
+                                secSp == RNamesSP_Main_Secure) then
+          SFSR.INVEP = '1';
+          HandleException(CreateException(SecureFault));
+
+      // 建立安全元数据标志并切换到 Secure 状态
+      LR[0] = '0';
+      if HaveMveOrFPExt() then
+        CONTROL_S.SFPA = '0';
+      // 清除 LOB 数据，以防止 Non-secure 代码干扰 Secure 执行
+      if HaveLOBExt() then
+        LO_BRANCH_INFO.VALID = '0';
+      CurrentState = SecurityState_Secure;
+      // 清除 IT/ICI/ECI 数据，以防止 Non-secure 代码干扰 Secure 执行
+      if HaveMainExt() then
+        ITSTATE = Zeros(8);
+
+// 本指令可用作 BTI 着陆垫。
+// EPSR.B 位被复位为 0。
+EPSR.B = '0';
+```
+
+### 4.181. SHADD16：有符号减半加 16
+
+有符号减半加 16（Signed Halving Add 16）。有符号减半加 16 执行两个有符号 16 位整数加法，把结果减半，并把结果写入目标寄存器。
+
+#### 4.181.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-367](FigureC2-367.png)
+
+**T1 变体**
+
+```arm
+SHADD16{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.181.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.181.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  sum1 = SInt(R[n][15:0]) + SInt(R[m][15:0]);
+  sum2 = SInt(R[n][31:16]) + SInt(R[m][31:16]);
+  R[d] = sum2[16:1] : sum1[16:1];
+```
+
+#### 4.181.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.182. SHADD8：有符号减半加 8
+
+有符号减半加 8（Signed Halving Add 8）。有符号减半加 8 执行四个有符号 8 位整数加法，把结果减半，并把结果写入目标寄存器。
+
+#### 4.182.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-368](FigureC2-368.png)
+
+**T1 变体**
+
+```arm
+SHADD8{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.182.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.182.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  sum1 = SInt(R[n][7:0]) + SInt(R[m][7:0]);
+  sum2 = SInt(R[n][15:8]) + SInt(R[m][15:8]);
+  sum3 = SInt(R[n][23:16]) + SInt(R[m][23:16]);
+  sum4 = SInt(R[n][31:24]) + SInt(R[m][31:24]);
+  R[d] = sum4[8:1] : sum3[8:1] : sum2[8:1] : sum1[8:1];
+```
+
+#### 4.182.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.183. SHASX：带交换的有符号减半加和减
+
+带交换的有符号减半加和减（Signed Halving Add and Subtract with Exchange）。带交换的有符号减半加和减交换第二个操作数的两个半字，执行一个有符号 16 位整数加法、一个有符号 16 位减法，把结果减半，并把结果写入目标寄存器。
+
+#### 4.183.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-369](FigureC2-369.png)
+
+**T1 变体**
+
+```arm
+SHASX{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.183.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.183.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  diff = SInt(R[n][15:0]) - SInt(R[m][31:16]);
+  sum  = SInt(R[n][31:16]) + SInt(R[m][15:0]);
+  R[d] = sum[16:1] : diff[16:1];
+```
+
+#### 4.183.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.184. SHSAX：带交换的有符号减半减和加
+
+带交换的有符号减半减和加（Signed Halving Subtract and Add with Exchange）。带交换的有符号减半减和加交换第二个操作数的两个半字，执行一个有符号 16 位整数减法、一个有符号 16 位加法，把结果减半，并把结果写入目标寄存器。
+
+#### 4.184.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-370](FigureC2-370.png)
+
+**T1 变体**
+
+```arm
+SHSAX{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.184.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.184.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  sum  = SInt(R[n][15:0]) + SInt(R[m][31:16]);
+  diff = SInt(R[n][31:16]) - SInt(R[m][15:0]);
+  R[d] = diff[16:1] : sum[16:1];
+```
+
+#### 4.184.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.185. SHSUB16：有符号减半减 16
+
+有符号减半减 16（Signed Halving Subtract 16）。有符号减半减 16 执行两个有符号 16 位整数减法，把结果减半，并把结果写入目标寄存器。
+
+#### 4.185.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-371](FigureC2-371.png)
+
+**T1 变体**
+
+```arm
+SHSUB16{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.185.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.185.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  diff1 = SInt(R[n][15:0]) - SInt(R[m][15:0]);
+  diff2 = SInt(R[n][31:16]) - SInt(R[m][31:16]);
+  R[d] = diff2[16:1] : diff1[16:1];
+```
+
+#### 4.185.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.186. SHSUB8：有符号减半减 8
+
+有符号减半减 8（Signed Halving Subtract 8）。有符号减半减 8 执行四个有符号 8 位整数减法，把结果减半，并把结果写入目标寄存器。
+
+#### 4.186.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-372](FigureC2-372.png)
+
+**T1 变体**
+
+```arm
+SHSUB8{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.186.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.186.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  diff1 = SInt(R[n][7:0]) - SInt(R[m][7:0]);
+  diff2 = SInt(R[n][15:8]) - SInt(R[m][15:8]);
+  diff3 = SInt(R[n][23:16]) - SInt(R[m][23:16]);
+  diff4 = SInt(R[n][31:24]) - SInt(R[m][31:24]);
+  R[d] = diff4[8:1] : diff3[8:1] : diff2[8:1] : diff1[8:1];
+```
+
+#### 4.186.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.187. SMLABB, SMLABT, SMLATB, SMLATT：有符号乘累加（半字）
+
+有符号乘累加（半字）（Signed Multiply Accumulate (halfwords)）。有符号乘累加（半字）执行有符号乘累加操作。乘法作用于两个有符号 16 位量，它们分别取自各自源寄存器的低位或高位半字。这些源寄存器的另一半被忽略。32 位乘积与 32 位累加值相加，结果写入目标寄存器。
+
+若累加值相加过程中发生溢出，则本指令置位 APSR 中的 Q 标志。乘法过程中不可能发生溢出。
+
+#### 4.187.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-373](FigureC2-373.png)
+
+**SMLABB 变体**（当 `N == 0 && M == 0` 时适用）
+
+```arm
+SMLABB{<c>}{<q>} <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+**SMLABT 变体**（当 `N == 0 && M == 1` 时适用）
+
+```arm
+SMLABT{<c>}{<q>} <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+**SMLATB 变体**（当 `N == 1 && M == 0` 时适用）
+
+```arm
+SMLATB{<c>}{<q>} <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+**SMLATT 变体**（当 `N == 1 && M == 1` 时适用）
+
+```arm
+SMLATT{<c>}{<q>} <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+**解码**
+
+```arm
+if Ra == '1111' then SEE "SMULBB, SMULBT, SMULTB, SMULTT";
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  a = UInt(Ra);
+n_high = (N == '1');
+m_high = (M == '1');
+if d IN {13,15} || n IN {13,15} || m IN {13,15} || a == 13 then UNPREDICTABLE;
+```
+
+#### 4.187.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，其低位或高位半字（由 `<x>` 选择）存放被乘数，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，其低位或高位半字（由 `<y>` 选择）存放乘数，编码在 `Rm` 字段中。
+- **`<Ra>`**：第三个通用源寄存器，存放加数，编码在 `Ra` 字段中。
+
+#### 4.187.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  operand1 = if n_high then R[n][31:16] else R[n][15:0];
+  operand2 = if m_high then R[m][31:16] else R[m][15:0];
+  result = SInt(operand1) * SInt(operand2) + SInt(R[a]);
+  R[d] = result[31:0];
+  if result != SInt(result[31:0]) then
+    // 有符号溢出
+    APSR.Q = '1';
+```
+
+#### 4.187.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.188. SMLAD, SMLADX：有符号双乘累加
+
+有符号双乘累加（Signed Multiply Accumulate Dual）。有符号双乘累加执行两个有符号 16 位乘 16 位乘法，并把乘积加到 32 位累加操作数上。
+
+本指令可以选择在算术运算之前交换第二个操作数的半字。
+
+若累加操作溢出，则本指令置位 Q 标志。乘法过程中不会发生溢出。
+
+#### 4.188.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-374](FigureC2-374.png)
+
+**SMLAD 变体**（当 `M == 0` 时适用）
+
+```arm
+SMLAD{<c>}{<q>} <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+**SMLADX 变体**（当 `M == 1` 时适用）
+
+```arm
+SMLADX{<c>}{<q>} <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+**解码**
+
+```arm
+if Ra == '1111' then SEE SMUAD;
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  a = UInt(Ra);
+m_swap = (M == '1');
+if d IN {13,15} || n IN {13,15} || m IN {13,15} || a == 13 then UNPREDICTABLE;
+```
+
+#### 4.188.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<Ra>`**：第三个通用源寄存器，存放加数，编码在 `Ra` 字段中。
+
+#### 4.188.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  operand2 = if m_swap then ROR(R[m],16) else R[m];
+  product1 = SInt(R[n][15:0]) * SInt(operand2[15:0]);
+  product2 = SInt(R[n][31:16]) * SInt(operand2[31:16]);
+  result = product1 + product2 + SInt(R[a]);
+  R[d] = result[31:0];
+  if result != SInt(result[31:0]) then
+    // 有符号溢出
+    APSR.Q = '1';
+```
+
+#### 4.188.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.189. SMLAL：有符号长乘累加
+
+有符号长乘累加（Signed Multiply Accumulate Long）。有符号长乘累加把两个有符号 32 位值相乘得到 64 位值，并与一个 64 位值累加。
+
+#### 4.189.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-375](FigureC2-375.png)
+
+**T1 变体**
+
+```arm
+SMLAL{<c>}{<q>} <RdLo>, <RdHi>, <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+dLo = UInt(RdLo);  dHi = UInt(RdHi);  n = UInt(Rn);  m = UInt(Rm);
+setflags = FALSE;
+if dLo IN {13,15} || dHi IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+if dHi == dLo then UNPREDICTABLE;
+```
+
+#### 4.189.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `dHi == dLo`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 目标寄存器中的值为 UNKNOWN。
+
+#### 4.189.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<RdLo>`**：通用源寄存器，存放加数的低 32 位，同时是结果低 32 位的目标寄存器，编码在 `RdLo` 字段中。
+- **`<RdHi>`**：通用源寄存器，存放加数的高 32 位，同时是结果高 32 位的目标寄存器，编码在 `RdHi` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，存放被乘数，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，存放乘数，编码在 `Rm` 字段中。
+
+#### 4.189.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  result = SInt(R[n]) * SInt(R[m]) + SInt(R[dHi]:R[dLo]);
+  R[dHi] = result[63:32];
+  R[dLo] = result[31:0];
+```
+
+#### 4.189.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.190. SMLALBB, SMLALBT, SMLALTB, SMLALTT：有符号长乘累加（半字）
+
+有符号长乘累加（半字）（Signed Multiply Accumulate Long (halfwords)）。有符号长乘累加（半字）把两个有符号 16 位值相乘得到 32 位值，并与一个 64 位值累加。乘法作用于两个有符号 16 位量，它们分别取自各自源寄存器的低位或高位半字。这些源寄存器的另一半被忽略。32 位乘积经符号扩展后与 64 位累加值累加。
+
+本指令执行过程中可能发生溢出，但只可能由 64 位加法导致。这种溢出不会被检测，结果按 2⁶⁴ 取模回绕。
+
+#### 4.190.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-376](FigureC2-376.png)
+
+**SMLALBB 变体**（当 `N == 0 && M == 0` 时适用）
+
+```arm
+SMLALBB{<c>}{<q>} <RdLo>, <RdHi>, <Rn>, <Rm>
+```
+
+**SMLALBT 变体**（当 `N == 0 && M == 1` 时适用）
+
+```arm
+SMLALBT{<c>}{<q>} <RdLo>, <RdHi>, <Rn>, <Rm>
+```
+
+**SMLALTB 变体**（当 `N == 1 && M == 0` 时适用）
+
+```arm
+SMLALTB{<c>}{<q>} <RdLo>, <RdHi>, <Rn>, <Rm>
+```
+
+**SMLALTT 变体**（当 `N == 1 && M == 1` 时适用）
+
+```arm
+SMLALTT{<c>}{<q>} <RdLo>, <RdHi>, <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+dLo = UInt(RdLo);  dHi = UInt(RdHi);  n = UInt(Rn);  m = UInt(Rm);
+n_high = (N == '1');
+m_high = (M == '1');
+if dLo IN {13,15} || dHi IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+if dHi == dLo then UNPREDICTABLE;
+```
+
+#### 4.190.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `dHi == dLo`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 目标寄存器中的值为 UNKNOWN。
+
+#### 4.190.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<RdLo>`**：通用源寄存器，存放加数的低 32 位，同时是结果低 32 位的目标寄存器，编码在 `RdLo` 字段中。
+- **`<RdHi>`**：通用源寄存器，存放加数的高 32 位，同时是结果高 32 位的目标寄存器，编码在 `RdHi` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，其低位或高位半字（由 `<x>` 选择）存放被乘数，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，其低位或高位半字（由 `<x>` 选择）存放乘数，编码在 `Rm` 字段中。
+
+#### 4.190.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  operand1 = if n_high then R[n][31:16] else R[n][15:0];
+  operand2 = if m_high then R[m][31:16] else R[m][15:0];
+  result = SInt(operand1) * SInt(operand2) + SInt(R[dHi]:R[dLo]);
+  R[dHi] = result[63:32];
+  R[dLo] = result[31:0];
+```
+
+#### 4.190.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.191. SMLALD, SMLALDX：有符号长双乘累加
+
+有符号长双乘累加（Signed Multiply Accumulate Long Dual）。有符号长双乘累加执行两个有符号 16 位乘 16 位乘法，并把乘积加到一个 64 位累加操作数上。
+
+本指令可以选择在算术运算之前交换第二个操作数的半字。
+
+本指令执行过程中可能发生溢出，但只可能由 64 位加法导致。这种溢出不会被检测，结果按 2⁶⁴ 取模回绕。
+
+#### 4.191.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-377](FigureC2-377.png)
+
+**SMLALD 变体**（当 `M == 0` 时适用）
+
+```arm
+SMLALD{<c>}{<q>} <RdLo>, <RdHi>, <Rn>, <Rm>
+```
+
+**SMLALDX 变体**（当 `M == 1` 时适用）
+
+```arm
+SMLALDX{<c>}{<q>} <RdLo>, <RdHi>, <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+dLo = UInt(RdLo);  dHi = UInt(RdHi);  n = UInt(Rn);  m = UInt(Rm);
+m_swap = (M == '1');
+if dLo IN {13,15} || dHi IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+if dHi == dLo then UNPREDICTABLE;
+```
+
+#### 4.191.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `dHi == dLo`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 目标寄存器中的值为 UNKNOWN。
+
+#### 4.191.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<RdLo>`**：通用源寄存器，存放加数的低 32 位，同时是结果低 32 位的目标寄存器，编码在 `RdLo` 字段中。
+- **`<RdHi>`**：通用源寄存器，存放加数的高 32 位，同时是结果高 32 位的目标寄存器，编码在 `RdHi` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.191.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  operand2 = if m_swap then ROR(R[m],16) else R[m];
+  product1 = SInt(R[n][15:0]) * SInt(operand2[15:0]);
+  product2 = SInt(R[n][31:16]) * SInt(operand2[31:16]);
+  result = product1 + product2 + SInt(R[dHi]:R[dLo]);
+  R[dHi] = result[63:32];
+  R[dLo] = result[31:0];
+```
+
+#### 4.191.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.192. SMLAWB, SMLAWT：有符号乘累加（字乘半字）
+
+有符号乘累加（字乘半字）（Signed Multiply Accumulate (word by halfword)）。有符号乘累加（字乘半字）执行有符号乘累加操作。乘法作用于一个有符号 32 位量和一个有符号 16 位量。有符号 16 位量取自其源寄存器的低位或高位半字。第二个源寄存器的另一半被忽略。48 位乘积的高 32 位与 32 位累加值相加，结果写入目标寄存器。48 位乘积的低 16 位被忽略。
+
+若累加值相加过程中发生溢出，则本指令置位 APSR 中的 Q 标志。乘法过程中不会发生溢出。
+
+#### 4.192.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-378](FigureC2-378.png)
+
+**SMLAWB 变体**（当 `M == 0` 时适用）
+
+```arm
+SMLAWB{<c>}{<q>} <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+**SMLAWT 变体**（当 `M == 1` 时适用）
+
+```arm
+SMLAWT{<c>}{<q>} <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+**解码**
+
+```arm
+if Ra == '1111' then SEE "SMULWB, SMULWT";
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  a = UInt(Ra);
+m_high = (M == '1');
+if d IN {13,15} || n IN {13,15} || m IN {13,15} || a == 13 then UNPREDICTABLE;
+```
+
+#### 4.192.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，存放被乘数，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，其低位或高位半字（由 `<y>` 选择）存放乘数，编码在 `Rm` 字段中。
+- **`<Ra>`**：第三个通用源寄存器，存放加数，编码在 `Ra` 字段中。
+
+#### 4.192.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  operand2 = if m_high then R[m][31:16] else R[m][15:0];
+  result = SInt(R[n]) * SInt(operand2) + (SInt(R[a]) << 16);
+  R[d] = result[47:16];
+  if (result >> 16) != SInt(R[d]) then
+    // 有符号溢出
+    APSR.Q = '1';
+```
+
+#### 4.192.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.193. SMLSD, SMLSDX：有符号双乘减
+
+有符号双乘减（Signed Multiply Subtract Dual）。有符号双乘减执行两个有符号 16 位乘 16 位乘法，并把乘积之差加到 32 位累加操作数上。
+
+本指令可以选择在算术运算之前交换第二个操作数的半字。
+
+若累加操作溢出，则本指令置位 Q 标志。乘法或减法过程中不会发生溢出。
+
+#### 4.193.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-379](FigureC2-379.png)
+
+**SMLSD 变体**（当 `M == 0` 时适用）
+
+```arm
+SMLSD{<c>}{<q>} <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+**SMLSDX 变体**（当 `M == 1` 时适用）
+
+```arm
+SMLSDX{<c>}{<q>} <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+**解码**
+
+```arm
+if Ra == '1111' then SEE SMUSD;
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  a = UInt(Ra);
+m_swap = (M == '1');
+if d IN {13,15} || n IN {13,15} || m IN {13,15} || a == 13 then UNPREDICTABLE;
+```
+
+#### 4.193.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<Ra>`**：第三个通用源寄存器，存放加数，编码在 `Ra` 字段中。
+
+#### 4.193.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  operand2 = if m_swap then ROR(R[m],16) else R[m];
+  product1 = SInt(R[n][15:0]) * SInt(operand2[15:0]);
+  product2 = SInt(R[n][31:16]) * SInt(operand2[31:16]);
+  result = product1 - product2 + SInt(R[a]);
+  R[d] = result[31:0];
+  if result != SInt(result[31:0]) then
+    // 有符号溢出
+    APSR.Q = '1';
+```
+
+#### 4.193.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.194. SMLSLD, SMLSLDX：有符号双乘减长
+
+有符号双乘减长（Signed Multiply Subtract Long Dual）。有符号双乘减长执行两个有符号 16 位乘 16 位乘法。它把乘积之差加到一个 64 位累加操作数上。
+
+本指令可以选择在算术运算之前交换第二个操作数的半字。
+
+本指令执行期间可能发生溢出，但这只是 64 位加法的结果。该溢出不会被检测。结果按模 2⁶⁴ 回绕。
+
+#### 4.194.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-380](FigureC2-380.png)
+
+**SMLSLD 变体**（当 `M == 0` 时适用）
+
+```arm
+SMLSLD{<c>}{<q>} <RdLo>, <RdHi>, <Rn>, <Rm>
+```
+
+**SMLSLDX 变体**（当 `M == 1` 时适用）
+
+```arm
+SMLSLDX{<c>}{<q>} <RdLo>, <RdHi>, <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+dLo = UInt(RdLo);  dHi = UInt(RdHi);
+n = UInt(Rn);  m = UInt(Rm);
+m_swap = (M == '1');
+if dLo IN {13,15} || dHi IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+if dHi == dLo then UNPREDICTABLE;
+```
+
+#### 4.194.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `dHi == dLo`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 目标寄存器中的值为 UNKNOWN。
+
+#### 4.194.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<RdLo>`**：通用源寄存器，存放加数的低 32 位，同时是结果低 32 位的目标寄存器，编码在 `RdLo` 字段中。
+- **`<RdHi>`**：通用源寄存器，存放加数的高 32 位，同时是结果高 32 位的目标寄存器，编码在 `RdHi` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.194.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  operand2 = if m_swap then ROR(R[m],16) else R[m];
+  product1 = SInt(R[n][15:0]) * SInt(operand2[15:0]);
+  product2 = SInt(R[n][31:16]) * SInt(operand2[31:16]);
+  result = product1 - product2 + SInt(R[dHi]:R[dLo]);
+  R[dHi] = result[63:32];
+  R[dLo] = result[31:0];
+```
+
+#### 4.194.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.195. SMMLA, SMMLAR：有符号最高有效字乘加
+
+有符号最高有效字乘加（Signed Most Significant Word Multiply Accumulate）。有符号最高有效字乘加把两个有符号 32 位值相乘，提取结果的最高有效 32 位，并加上一个累加值。
+
+本指令可以选择指定对结果进行舍入而不是截断。此时在提取高字之前把常量 `0x80000000` 加到乘积上。
+
+#### 4.195.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-381](FigureC2-381.png)
+
+**SMMLA 变体**（当 `R == 0` 时适用）
+
+```arm
+SMMLA{<c>}{<q>} <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+**SMMLAR 变体**（当 `R == 1` 时适用）
+
+```arm
+SMMLAR{<c>}{<q>} <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+**解码**
+
+```arm
+if Ra == '1111' then SEE SMMUL;
+if Rd == '1111' then SEE "AUTG and BXAUT";
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  a = UInt(Ra);
+round = (R == '1');
+if d == 13 || n IN {13,15} || m IN {13,15} || a == 13 then UNPREDICTABLE;
+```
+
+#### 4.195.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，存放被乘数，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，存放乘数，编码在 `Rm` 字段中。
+- **`<Ra>`**：第三个通用源寄存器，存放加数，编码在 `Ra` 字段中。
+
+#### 4.195.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  result = (SInt(R[a]) << 32) + SInt(R[n]) * SInt(R[m]);
+  if round then result = result + 0x80000000;
+  R[d] = result[63:32];
+```
+
+#### 4.195.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.196. SMMLS, SMMLSR：有符号最高有效字乘减
+
+有符号最高有效字乘减（Signed Most Significant Word Multiply Subtract）。有符号最高有效字乘减把两个有符号 32 位值相乘，从向左移 32 位的 32 位累加值中减去该乘积，并提取该减法结果的最高有效 32 位。
+
+本指令可以选择指定对本指令的结果进行舍入而不是截断。此时在提取高字之前把常量 `0x80000000` 加到减法结果上。
+
+#### 4.196.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-382](FigureC2-382.png)
+
+**SMMLS 变体**（当 `R == 0` 时适用）
+
+```arm
+SMMLS{<c>}{<q>} <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+**SMMLSR 变体**（当 `R == 1` 时适用）
+
+```arm
+SMMLSR{<c>}{<q>} <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+**解码**
+
+```arm
+if Ra == '1111' && R == '0' then SEE PACG;
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);  a = UInt(Ra);
+round = (R == '1');
+if d IN {13,15} || n IN {13,15} || m IN {13,15} || a IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.196.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，存放被乘数，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，存放乘数，编码在 `Rm` 字段中。
+- **`<Ra>`**：第三个通用源寄存器，存放加数，编码在 `Ra` 字段中。
+
+#### 4.196.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  result = (SInt(R[a]) << 32) - SInt(R[n]) * SInt(R[m]);
+  if round then result = result + 0x80000000;
+  R[d] = result[63:32];
+```
+
+#### 4.196.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.197. SMMUL, SMMULR：有符号最高有效字乘法
+
+有符号最高有效字乘法（Signed Most Significant Word Multiply）。有符号最高有效字乘法把两个有符号 32 位值相乘，提取结果的最高有效 32 位，并把这些位写入目标寄存器。
+
+本指令可以选择指定对结果进行舍入而不是截断。此时在提取高字之前把常量 `0x80000000` 加到乘积上。
+
+#### 4.197.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-383](FigureC2-383.png)
+
+**SMMUL 变体**（当 `R == 0` 时适用）
+
+```arm
+SMMUL{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**SMMULR 变体**（当 `R == 1` 时适用）
+
+```arm
+SMMULR{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+round = (R == '1');
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.197.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.197.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  result = SInt(R[n]) * SInt(R[m]);
+  if round then result = result + 0x80000000;
+  R[d] = result[63:32];
+```
+
+#### 4.197.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.198. SMUAD, SMUADX：有符号双乘加
+
+有符号双乘加（Signed Dual Multiply Add）。有符号双乘加执行两个有符号 16 位乘 16 位乘法。它把乘积相加，并把结果写入目标寄存器。
+
+本指令可以选择在算术运算之前交换第二个操作数的半字。
+
+若加法溢出，则本指令置位 Q 标志。乘法不会溢出。
+
+#### 4.198.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-384](FigureC2-384.png)
+
+**SMUAD 变体**（当 `M == 0` 时适用）
+
+```arm
+SMUAD{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**SMUADX 变体**（当 `M == 1` 时适用）
+
+```arm
+SMUADX{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+m_swap = (M == '1');
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.198.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.198.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  operand2 = if m_swap then ROR(R[m],16) else R[m];
+  product1 = SInt(R[n][15:0]) * SInt(operand2[15:0]);
+  product2 = SInt(R[n][31:16]) * SInt(operand2[31:16]);
+  result = product1 + product2;
+  R[d] = result[31:0];
+  if result != SInt(result[31:0]) then
+    // 有符号溢出
+    APSR.Q = '1';
+```
+
+#### 4.198.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.199. SMULBB, SMULBT, SMULTB, SMULTT：有符号乘法（半字）
+
+有符号乘法（半字）（Signed Multiply (halfwords)）。有符号乘法（半字）把两个有符号 16 位量相乘，这两个量分别取自其源寄存器的低位或高位半字。这些源寄存器的其余半字被忽略。32 位乘积写入目标寄存器。本指令执行期间不会发生溢出。
+
+#### 4.199.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-385](FigureC2-385.png)
+
+**SMULBB 变体**（当 `N == 0 && M == 0` 时适用）
+
+```arm
+SMULBB{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**SMULBT 变体**（当 `N == 0 && M == 1` 时适用）
+
+```arm
+SMULBT{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**SMULTB 变体**（当 `N == 1 && M == 0` 时适用）
+
+```arm
+SMULTB{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**SMULTT 变体**（当 `N == 1 && M == 1` 时适用）
+
+```arm
+SMULTT{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+n_high = (N == '1');
+m_high = (M == '1');
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.199.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，其低位或高位半字（由 `<x>` 选择）存放被乘数，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，其低位或高位半字（由 `<y>` 选择）存放乘数，编码在 `Rm` 字段中。
+
+#### 4.199.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  operand1 = if n_high then R[n][31:16] else R[n][15:0];
+  operand2 = if m_high then R[m][31:16] else R[m][15:0];
+  result = SInt(operand1) * SInt(operand2);
+  R[d] = result[31:0];
+  // 不会发生有符号溢出
+```
+
+#### 4.199.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.200. SMULL：有符号长乘法
+
+有符号长乘法（Signed Multiply Long）。有符号长乘法把两个有符号 32 位值相乘，产生 64 位结果。
+
+#### 4.200.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-386](FigureC2-386.png)
+
+**T1 变体**
+
+```arm
+SMULL{<c>}{<q>} <RdLo>, <RdHi>, <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+dLo = UInt(RdLo);  dHi = UInt(RdHi);
+n = UInt(Rn);  m = UInt(Rm);
+setflags = FALSE;
+if dLo IN {13,15} || dHi IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+if dHi == dLo then UNPREDICTABLE;
+```
+
+#### 4.200.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `dHi == dLo`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 目标寄存器中的值为 UNKNOWN。
+
+#### 4.200.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<RdLo>`**：通用目标寄存器，存放结果的低 32 位，编码在 `RdLo` 字段中。
+- **`<RdHi>`**：通用目标寄存器，存放结果的高 32 位，编码在 `RdHi` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，存放被乘数，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，存放乘数，编码在 `Rm` 字段中。
+
+#### 4.200.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  result = SInt(R[n]) * SInt(R[m]);
+  R[dHi] = result[63:32];
+  R[dLo] = result[31:0];
+```
+
+#### 4.200.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.201. SMULWB, SMULWT：有符号乘法（字乘半字）
+
+有符号乘法（字乘半字）（Signed Multiply (word by halfword)）。有符号乘法（字乘半字）把一个有符号 32 位量与一个有符号 16 位量相乘。该有符号 16 位量取自其源寄存器的低位或高位半字。第二个源寄存器的其余半字被忽略。48 位乘积的高 32 位写入目标寄存器。48 位乘积的低 16 位被忽略。本指令执行期间不会发生溢出。
+
+#### 4.201.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-387](FigureC2-387.png)
+
+**SMULWB 变体**（当 `M == 0` 时适用）
+
+```arm
+SMULWB{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**SMULWT 变体**（当 `M == 1` 时适用）
+
+```arm
+SMULWT{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+m_high = (M == '1');
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.201.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，存放被乘数，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，其低位或高位半字（由 `<y>` 选择）存放乘数，编码在 `Rm` 字段中。
+
+#### 4.201.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  operand2 = if m_high then R[m][31:16] else R[m][15:0];
+  product = SInt(R[n]) * SInt(operand2);
+  R[d] = product[47:16];
+  // 不会发生有符号溢出
+```
+
+#### 4.201.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.202. SMUSD, SMUSDX：有符号双乘减
+
+有符号双乘减（Signed Dual Multiply Subtract）。有符号双乘减执行两个有符号 16 位乘 16 位乘法。它从一个乘积中减去另一个乘积，并把结果写入目标寄存器。
+
+本指令可以选择在算术运算之前交换第二个操作数的半字。
+
+不会发生溢出。
+
+#### 4.202.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-388](FigureC2-388.png)
+
+**SMUSD 变体**（当 `M == 0` 时适用）
+
+```arm
+SMUSD{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**SMUSDX 变体**（当 `M == 1` 时适用）
+
+```arm
+SMUSDX{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);  n = UInt(Rn);  m = UInt(Rm);
+m_swap = (M == '1');
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.202.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.202.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  operand2 = if m_swap then ROR(R[m],16) else R[m];
+  product1 = SInt(R[n][15:0]) * SInt(operand2[15:0]);
+  product2 = SInt(R[n][31:16]) * SInt(operand2[31:16]);
+  result = product1 - product2;
+  R[d] = result[31:0];
+  // 不会发生有符号溢出
+```
+
+#### 4.202.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.203. SQRSHR (register)：有符号饱和舍入右移（寄存器）
+
+有符号饱和舍入右移（Signed Saturating Rounding Shift Right）。对存放在通用寄存器中的 32 位值执行 0 到 32 位的有符号饱和舍入右移。移位量从 `Rm` 的最低字节读入。若移位量为负，则移位方向反转。
+
+#### 4.203.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-389](FigureC2-389.png)
+
+**T1 变体**
+
+```arm
+SQRSHR<c><q> Rda, Rm
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+if !HasArchVersion(Armv8p1) then SEE "Related encodings";
+if !HaveMve() then UNDEFINED;
+da = UInt(Rda);
+m = UInt(Rm);
+if Rda == '11x1' || Rm == '11x1' || Rm == Rda then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.203.2. 汇编符号（所有编码）
+
+- **`<c, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rda>`**：通用源兼目标寄存器，存放待移位的值。
+- **`<Rm>`**：通用源寄存器，其最低 8 位存放移位量。
+
+#### 4.203.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  amount = SInt(R[m][7:0]);
+  op1 = SInt(R[da]);
+  op1 = op1 + (1 << (amount - 1));
+  (result, sat) = SignedSatQ((op1 >> amount), 32);
+  if sat then APSR.Q = '1';
+  R[da] = result[31:0];
+```
+
+### 4.204. SQRSHRL (register)：有符号饱和舍入右移长（寄存器）
+
+有符号饱和舍入右移长（Signed Saturating Rounding Shift Right Long）。对存放在两个通用寄存器中的 64 位值执行 0 到 64 位的有符号饱和舍入右移。移位量从 `Rm` 的最低字节读入。若移位量为负，则移位方向反转。
+
+#### 4.204.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-390](FigureC2-390.png)
+
+**T1 变体**
+
+```arm
+SQRSHRL<c><q> RdaLo, RdaHi, #<saturate>, Rm
+```
+
+**解码**
+
+```arm
+if RdaHi == '111' then SEE "SQRSHR (register)";
+if !HaveMainExt() then UNDEFINED;
+if !HasArchVersion(Armv8p1) then SEE "Related encodings";
+if !HaveMve() then UNDEFINED;
+dah = UInt(RdaHi:'1');
+dal = UInt(RdaLo:'0');
+m = UInt(Rm);
+saturateTo = if sat == '0' then 64 else 48;
+if RdaHi == '110' || Rm == '11x1' || Rm == RdaHi:'1' then CONSTRAINED_UNPREDICTABLE;
+if Rm == RdaLo:'0' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.204.2. 汇编符号（所有编码）
+
+- **`<c, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<RdaLo>`**：64 位源兼目标的低半部分所用通用寄存器，存放待移位的值。该寄存器必须是偶数编号寄存器。
+- **`<RdaHi>`**：64 位源兼目标的高半部分所用通用寄存器，存放待移位的值。该寄存器必须是奇数编号寄存器。
+- **`<saturate>`**：饱和的位位置。该参数必须是下列值之一：
+  - **`#64`**：编码为 `sat = 0`。
+  - **`#48`**：编码为 `sat = 1`。
+- **`<Rm>`**：通用源寄存器，其最低 8 位存放移位量。
+
+#### 4.204.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  amount = SInt(R[m][7:0]);
+  op1 = SInt(R[dah]:R[dal]);
+  op1 = op1 + (1 << (amount - 1));
+  (shiftedOp, didSat) = SignedSatQ((op1 >> amount), saturateTo);
+  result = SignExtend(shiftedOp, 64);
+  if didSat then APSR.Q = '1';
+  R[dah] = result[63:32];
+  R[dal] = result[31:0];
+```
+
+### 4.205. SQSHL (immediate)：有符号饱和左移（立即数）
+
+有符号饱和左移（Signed Saturating Shift Left）。对存放在通用寄存器中的 32 位值执行 1 到 32 位的有符号饱和左移。
+
+#### 4.205.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-391](FigureC2-391.png)
+
+**T1 变体**
+
+```arm
+SQSHL<c><q> Rda, #<imm>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+if !HasArchVersion(Armv8p1) then SEE "Related encodings";
+if !HaveMve() then UNDEFINED;
+da = UInt(Rda);
+(-, amount) = DecodeImmShift('10', immh:imml);
+if Rda == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.205.2. 汇编符号（所有编码）
+
+- **`<c, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rda>`**：通用源兼目标寄存器，存放待移位的值。
+- **`<imm>`**：移位的位数，范围为 1-32。
+
+#### 4.205.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  op1 = SInt(R[da]);
+  (result, sat) = SignedSatQ((op1 << amount), 32);
+  if sat then APSR.Q = '1';
+  R[da] = result[31:0];
+```
+
+### 4.206. SQSHLL (immediate)：有符号饱和左移长（立即数）
+
+有符号饱和左移长（Signed Saturating Shift Left Long）。对存放在两个通用寄存器中的 64 位值执行 1 到 32 位的有符号饱和左移。
+
+#### 4.206.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-392](FigureC2-392.png)
+
+**T1 变体**
+
+```arm
+SQSHLL<c><q> RdaLo, RdaHi, #<imm>
+```
+
+**解码**
+
+```arm
+if RdaHi == '111' then SEE "SQSHL (immediate)";
+if !HaveMainExt() then UNDEFINED;
+if !HasArchVersion(Armv8p1) then SEE "Related encodings";
+if !HaveMve() then UNDEFINED;
+dah = UInt(RdaHi:'1');
+dal = UInt(RdaLo:'0');
+(-, amount) = DecodeImmShift('10', immh:imml);
+if RdaHi == '110' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.206.2. 汇编符号（所有编码）
+
+- **`<c, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<RdaLo>`**：64 位源兼目标的低半部分所用通用寄存器，存放待移位的值。该寄存器必须是偶数编号寄存器。
+- **`<RdaHi>`**：64 位源兼目标的高半部分所用通用寄存器，存放待移位的值。该寄存器必须是奇数编号寄存器。
+- **`<imm>`**：移位的位数，范围为 1-32。
+
+#### 4.206.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  op1 = SInt(R[dah]:R[dal]);
+  (result, sat) = SignedSatQ((op1 << amount), 64);
+  if sat then APSR.Q = '1';
+  R[dah] = result[63:32];
+  R[dal] = result[31:0];
+```
+
+### 4.207. SRSHR (immediate)：有符号舍入右移（立即数）
+
+有符号舍入右移（Signed Rounding Shift Right）。对存放在通用寄存器中的 32 位值执行 1 到 32 位的有符号舍入右移。
+
+#### 4.207.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-393](FigureC2-393.png)
+
+**T1 变体**
+
+```arm
+SRSHR<c><q> Rda, #<imm>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+if !HasArchVersion(Armv8p1) then SEE "Related encodings";
+if !HaveMve() then UNDEFINED;
+da = UInt(Rda);
+(-, amount) = DecodeImmShift('10', immh:imml);
+if Rda == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.207.2. 汇编符号（所有编码）
+
+- **`<c, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rda>`**：通用源兼目标寄存器，存放待移位的值。
+- **`<imm>`**：移位的位数，范围为 1-32。
+
+#### 4.207.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  op1 = SInt(R[da]);
+  op1 = op1 + (1 << (amount - 1));
+  result = (op1 >> amount)[31:0];
+  R[da] = result[31:0];
+```
+
+### 4.208. SRSHRL (immediate)：有符号舍入右移长（立即数）
+
+有符号舍入右移长（Signed Rounding Shift Right Long）。对存放在两个通用寄存器中的 64 位值执行 1 到 32 位的有符号舍入右移。
+
+#### 4.208.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-394](FigureC2-394.png)
+
+**T1 变体**
+
+```arm
+SRSHRL<c><q> RdaLo, RdaHi, #<imm>
+```
+
+**解码**
+
+```arm
+if RdaHi == '111' then SEE "SRSHR (immediate)";
+if !HaveMainExt() then UNDEFINED;
+if !HasArchVersion(Armv8p1) then SEE "Related encodings";
+if !HaveMve() then UNDEFINED;
+dah = UInt(RdaHi:'1');
+dal = UInt(RdaLo:'0');
+(-, amount) = DecodeImmShift('10', immh:imml);
+if RdaHi == '110' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.208.2. 汇编符号（所有编码）
+
+- **`<c, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<RdaLo>`**：64 位源兼目标的低半部分所用通用寄存器，存放待移位的值。该寄存器必须是偶数编号寄存器。
+- **`<RdaHi>`**：64 位源兼目标的高半部分所用通用寄存器，存放待移位的值。该寄存器必须是奇数编号寄存器。
+- **`<imm>`**：移位的位数，范围为 1-32。
+
+#### 4.208.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  op1 = SInt(R[dah]:R[dal]);
+  op1 = op1 + (1 << (amount - 1));
+  result = (op1 >> amount)[63:0];
+  R[dah] = result[63:32];
+  R[dal] = result[31:0];
+```
+
+### 4.209. SSAT：有符号饱和
+
+有符号饱和（Signed Saturate）。有符号饱和把一个可选移位的带符号值饱和到一个可选的带符号范围。若运算发生饱和，则把 APSR.Q 标志置为 1。
+
+#### 4.209.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-395](FigureC2-395.png)
+
+**算术右移变体**（当 `sh == 1 && !(imm3 == 000 && imm2 == 00)` 时适用）
+
+```arm
+SSAT{<c>}{<q>} <Rd>, #<imm>, <Rn>, ASR #<amount>
+```
+
+**逻辑左移变体**（当 `sh == 0` 时适用）
+
+```arm
+SSAT{<c>}{<q>} <Rd>, #<imm>, <Rn> {, LSL #<amount>}
+```
+
+**解码**
+
+```arm
+if sh == '1' && (imm3:imm2) == '00000' then
+  if HaveDSPExt() then
+    SEE SSAT16;
+  else
+    UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+saturate_to = UInt(sat_imm)+1;
+(shift_t, shift_n) = DecodeImmShift(sh:'0', imm3:imm2);
+if d IN {13,15} || n IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.209.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<imm>`**：饱和的位位置，范围为 1 到 32，在 `sat_imm` 字段中编码为 `<imm>-1`。
+- **`<Rn>`**：通用源寄存器，编码在 `Rn` 字段中。
+- **`<amount>`**：对算术右移变体，是移位量，范围为 1 到 31，在 `imm3:imm2` 字段中编码为 `<amount>`；对逻辑左移变体，是可选的移位量，范围为 0 到 31，默认为 0，在 `imm3:imm2` 字段中编码。
+
+#### 4.209.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  operand = Shift(R[n], shift_t, shift_n, APSR.C);
+  // 忽略 APSR.C
+  (result, sat) = SignedSatQ(SInt(operand), saturate_to);
+  R[d] = SignExtend(result, 32);
+  if sat then
+    APSR.Q = '1';
+```
+
+### 4.210. SSAT16：有符号饱和 16
+
+有符号饱和 16（Signed Saturate 16）。有符号饱和 16 把两个带符号 16 位值饱和到一个选定的带符号范围。若运算发生饱和，则把 APSR.Q 标志置为 1。
+
+#### 4.210.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-396](FigureC2-396.png)
+
+**T1 变体**
+
+```arm
+SSAT16{<c>}{<q>} <Rd>, #<imm>, <Rn>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+saturate_to = UInt(sat_imm)+1;
+if d IN {13,15} || n IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.210.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<imm>`**：饱和的位位置，范围为 1 到 16，在 `sat_imm` 字段中编码为 `<imm>-1`。
+- **`<Rn>`**：通用源寄存器，编码在 `Rn` 字段中。
+
+#### 4.210.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  (result1, sat1) = SignedSatQ(SInt(R[n][15:0]), saturate_to);
+  (result2, sat2) = SignedSatQ(SInt(R[n][31:16]), saturate_to);
+  bits(32) result;
+  result[15:0] = SignExtend(result1, 16);
+  result[31:16] = SignExtend(result2, 16);
+  R[d] = result;
+  if sat1 || sat2 then
+    APSR.Q = '1';
+```
+
+### 4.211. SSAX：有符号交换减加
+
+有符号交换减加（Signed Subtract and Add with Exchange）。有符号交换减加交换第二个操作数的两个半字，执行一次 16 位整数减法和一次 16 位加法，并把结果写入目标寄存器。它根据结果设置 APSR.GE 位。
+
+#### 4.211.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-397](FigureC2-397.png)
+
+**T1 变体**
+
+```arm
+SSAX{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.211.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.211.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  sum = SInt(R[n][15:0]) + SInt(R[m][31:16]);
+  diff = SInt(R[n][31:16]) - SInt(R[m][15:0]);
+  R[d] = diff[15:0] : sum[15:0];
+  APSR.GE[1:0] = if sum >= 0 then '11' else '00';
+  APSR.GE[3:2] = if diff >= 0 then '11' else '00';
+```
+
+#### 4.211.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.212. SSBB：推测存储绕过屏障
+
+推测存储绕过屏障（Speculative Store Bypass Barrier）。推测存储绕过屏障是一种内存屏障，它在特定条件下阻止推测加载绕过对同一地址的较早存储。
+
+推测存储绕过屏障的语义为：
+
+- 当对某位置的加载按程序顺序出现在 SSBB 之后时，该加载不会推测性地读取该位置一致性顺序中早于满足下列全部条件的最新存储所生成条目的条目：
+  - 该存储与加载的目标位置相同。
+  - 该存储按程序顺序出现在 SSBB 之前。
+- 当对某位置的加载按程序顺序出现在 SSBB 之前时，该加载不会推测性地读取满足下列全部条件的任何存储的数据：
+  - 该存储与加载的目标位置相同。
+  - 该存储按程序顺序出现在 SSBB 之后。
+
+#### 4.212.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-398](FigureC2-398.png)
+
+**T1 变体**
+
+```arm
+SSBB{<q>}
+```
+
+**解码**
+
+```arm
+if InITBlock() then UNPREDICTABLE;
+```
+
+#### 4.212.2. 汇编符号（所有编码）
+
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+
+#### 4.212.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+SpeculativeSynchronizationBarrier();
+```
+
+### 4.213. SSUB16：有符号减 16
+
+有符号减 16（Signed Subtract 16）。有符号减 16 执行两次 16 位带符号整数减法，并把结果写入目标寄存器。它根据减法结果设置 APSR.GE 位。
+
+#### 4.213.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-399](FigureC2-399.png)
+
+**T1 变体**
+
+```arm
+SSUB16{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.213.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.213.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  diff1 = SInt(R[n][15:0]) - SInt(R[m][15:0]);
+  diff2 = SInt(R[n][31:16]) - SInt(R[m][31:16]);
+  R[d] = diff2[15:0] : diff1[15:0];
+  APSR.GE[1:0] = if diff1 >= 0 then '11' else '00';
+  APSR.GE[3:2] = if diff2 >= 0 then '11' else '00';
+```
+
+#### 4.213.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.214. SSUB8：有符号减 8
+
+有符号减 8（Signed Subtract 8）。有符号减 8 执行四次 8 位带符号整数减法，并把结果写入目标寄存器。它根据减法结果设置 APSR.GE 位。
+
+#### 4.214.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-400](FigureC2-400.png)
+
+**T1 变体**
+
+```arm
+SSUB8{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.214.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.214.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  diff1 = SInt(R[n][7:0]) - SInt(R[m][7:0]);
+  diff2 = SInt(R[n][15:8]) - SInt(R[m][15:8]);
+  diff3 = SInt(R[n][23:16]) - SInt(R[m][23:16]);
+  diff4 = SInt(R[n][31:24]) - SInt(R[m][31:24]);
+  R[d] = diff4[7:0] : diff3[7:0] : diff2[7:0] : diff1[7:0];
+  APSR.GE[0] = if diff1 >= 0 then '1' else '0';
+  APSR.GE[1] = if diff2 >= 0 then '1' else '0';
+  APSR.GE[2] = if diff3 >= 0 then '1' else '0';
+  APSR.GE[3] = if diff4 >= 0 then '1' else '0';
+```
+
+#### 4.214.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的取值无关。
+- 异步异常的接受时刻不因本指令所使用的取值而变化。
+
+### 4.215. STC, STC2：存储协处理器
+
+存储协处理器（Store Coprocessor）。存储协处理器把数据从协处理器存储到一串连续的内存地址。
+
+若没有协处理器能执行该指令，则产生 UsageFault 异常。
+
+Arm 保留协处理器 CP8 到 CP15，本手册定义了 `coproc` 处于该范围时的有效指令。
+
+本指令受堆栈限值检查约束。
+
+#### 4.215.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-401](FigureC2-401.png)
+
+**偏移变体**（当 `P == 1 && W == 0` 时适用）
+
+```arm
+STC{L}{<c>}{<q>} <coproc>, <CRd>, [<Rn>{, #{+/-}<imm>}]
+```
+
+**后索引变体**（当 `P == 0 && W == 1` 时适用）
+
+```arm
+STC{L}{<c>}{<q>} <coproc>, <CRd>, [<Rn>], #{+/-}<imm>
+```
+
+**前索引变体**（当 `P == 1 && W == 1` 时适用）
+
+```arm
+STC{L}{<c>}{<q>} <coproc>, <CRd>, [<Rn>, #{+/-}<imm>]!
+```
+
+**未索引变体**（当 `P == 0 && U == 1 && W == 0` 时适用）
+
+```arm
+STC{L}{<c>}{<q>} <coproc>, <CRd>, [<Rn>], <option>
+```
+
+**解码**
+
+```arm
+if coproc IN {'100x', '101x', '111x'} then SEE "Floating-point and MVE";
+if CoprocType(UInt(coproc)) == CP_CDEv1 then SEE "CDE instructions";
+if P == '0' && U == '0' && D == '1' && W == '0' then SEE "MCRR, MCRR2";
+cp = UInt(coproc);
+CheckCPDecodeFaults(cp);
+if P == '0' && U == '0' && D == '0' && W == '0' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+n = UInt(Rn);
+imm32 = ZeroExtend(imm8:'00', 32);
+index = (P == '1');
+add = (U == '1');
+wback = (W == '1');
+if n == 15 then UNPREDICTABLE;
+```
+
+#### 4.215.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-402](FigureC2-402.png)
+
+**偏移变体**（当 `P == 1 && W == 0` 时适用）
+
+```arm
+STC2{L}{<c>}{<q>} <coproc>, <CRd>, [<Rn>{, #{+/-}<imm>}]
+```
+
+**后索引变体**（当 `P == 0 && W == 1` 时适用）
+
+```arm
+STC2{L}{<c>}{<q>} <coproc>, <CRd>, [<Rn>], #{+/-}<imm>
+```
+
+**前索引变体**（当 `P == 1 && W == 1` 时适用）
+
+```arm
+STC2{L}{<c>}{<q>} <coproc>, <CRd>, [<Rn>, #{+/-}<imm>]!
+```
+
+**未索引变体**（当 `P == 0 && U == 1 && W == 0` 时适用）
+
+```arm
+STC2{L}{<c>}{<q>} <coproc>, <CRd>, [<Rn>], <option>
+```
+
+**解码**
+
+```arm
+if coproc IN {'100x', '101x', '111x'} then SEE "Floating-point and MVE";
+if CoprocType(UInt(coproc)) == CP_CDEv1 then SEE "CDE instructions";
+if P == '0' && U == '0' && D == '1' && W == '0' then SEE "MCRR, MCRR2";
+cp = UInt(coproc);
+CheckCPDecodeFaults(cp);
+if P == '0' && U == '0' && D == '0' && W == '0' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+n = UInt(Rn);  imm32 = ZeroExtend(imm8:'00', 32);
+index = (P == '1');
+add = (U == '1');
+wback = (W == '1');
+if n == 15 then UNPREDICTABLE;
+```
+
+#### 4.215.3. 汇编符号（所有编码）
+
+- **`L`**：若指定，则选择编码的 `D == 1` 形式。若省略，则选择 `D == 0` 形式。
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<coproc>`**：协处理器的名称，编码在 `coproc` 字段中。通用协处理器名称为 p0 到 p15。
+- **`<CRd>`**：要传输的协处理器寄存器，编码在 `CRd` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`<option>`**：协处理器选项，范围为 0 到 255，用 { } 括起，编码在 `imm8` 字段中。
+- **`+/-`**：指定偏移是加到基址寄存器还是从基址寄存器减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - **`-`**：当 `U = 0` 时。
+  - **`+`**：当 `U = 1` 时。
+- **`<imm>`**：用于形成地址的立即数偏移，为 4 的倍数，范围 0-1020，默认为 0，在 `imm8` 字段中编码为 `<imm>/4`。
+
+#### 4.215.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  if !Coproc_Accepted(cp, ThisInstr()) then
+    GenerateCoprocessorException();
+  else
+    offset_addr = if add then (R[n] + imm32) else (R[n] - imm32);
+    address = if index then offset_addr else R[n];
+    // 判断是否应执行堆栈指针限值检查
+    if wback && n == 13 then
+      violatesLimit = ViolatesSPLim(LookUpSP(), offset_addr);
+    else
+      violatesLimit = FALSE;
+    // 仅在未违反限值时才执行内存操作
+    if !violatesLimit then
+      repeat
+        MemA[address, 4] = Coproc_GetWordToStore(cp, ThisInstr());
+        address = address + 4;
+      until Coproc_DoneStoring(cp, ThisInstr());
+    // 若正在更新堆栈指针，则违反限值时会引发故障
+    if wback then RSPCheck[n] = offset_addr;
+```
+
+#### 4.215.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.216. STL：存储-释放字
+
+存储-释放字（Store-Release Word）。存储-释放字把一个字从寄存器存储到内存。该指令还具有内存排序语义。
+
+#### 4.216.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-403](FigureC2-403.png)
+
+**T1 变体**
+
+```arm
+STL{<c>}{<q>} <Rt>, [<Rn>]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);
+if t IN {13,15} || n == 15 then UNPREDICTABLE;
+```
+
+#### 4.216.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+
+#### 4.216.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n];
+  MemO[address, 4] = R[t];
+```
+
+#### 4.216.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.217. STLB：存储-释放字节
+
+存储-释放字节（Store-Release Byte）。存储-释放字节把一个字节从寄存器存储到内存。该指令还具有内存排序语义。
+
+#### 4.217.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-404](FigureC2-404.png)
+
+**T1 变体**
+
+```arm
+STLB{<c>}{<q>} <Rt>, [<Rn>]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);
+if t IN {13,15} || n == 15 then UNPREDICTABLE;
+```
+
+#### 4.217.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+
+#### 4.217.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n];
+  MemO[address, 1] = R[t][7:0];
+```
+
+#### 4.217.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.218. STLEX：存储-释放独占字
+
+存储-释放独占字（Store-Release Exclusive Word）。若执行 PE 对所寻址的内存具有独占访问权，则存储-释放独占字把一个字从寄存器存储到内存。该指令还具有内存排序语义。
+
+#### 4.218.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-405](FigureC2-405.png)
+
+**T1 变体**
+
+```arm
+STLEX{<c>}{<q>} <Rd>, <Rt>, [<Rn>]
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);
+t = UInt(Rt);
+n = UInt(Rn);
+if d IN {13,15} || t IN {13,15} || n == 15 then UNPREDICTABLE;
+if d == n || d == t then UNPREDICTABLE;
+```
+
+#### 4.218.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `d == t`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该存储指令执行，但所存储的值为 UNKNOWN。
+
+若 `d == n`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令向一个 UNKNOWN 地址执行存储。
+
+#### 4.218.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：目标通用寄存器，存储-独占的状态结果写入其中，编码在 `Rd` 字段中。返回的值为：
+  - `1`：若操作未能更新内存。
+  - `0`：若操作更新了内存。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+
+#### 4.218.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n];
+  if ExclusiveMonitorsPass(address,4) then
+    MemO[address, 4] = R[t];
+    R[d] = ZeroExtend('0');
+  else
+    R[d] = ZeroExtend('1');
+```
+
+#### 4.218.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.219. STLEXB：存储-释放独占字节
+
+存储-释放独占字节（Store-Release Exclusive Byte）。若执行 PE 对所寻址的内存具有独占访问权，则存储-释放独占字节把一个字节从寄存器存储到内存。该指令还具有内存排序语义。
+
+#### 4.219.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-406](FigureC2-406.png)
+
+**T1 变体**
+
+```arm
+STLEXB{<c>}{<q>} <Rd>, <Rt>, [<Rn>]
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);
+t = UInt(Rt);
+n = UInt(Rn);
+if d IN {13,15} || t IN {13,15} || n == 15 then UNPREDICTABLE;
+if d == n || d == t then UNPREDICTABLE;
+```
+
+#### 4.219.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `d == t`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该存储指令执行，但所存储的值为 UNKNOWN。
+
+若 `d == n`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令向一个 UNKNOWN 地址执行存储。
+
+#### 4.219.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：目标通用寄存器，存储-独占的状态结果写入其中，编码在 `Rd` 字段中。返回的值为：
+  - `1`：若操作未能更新内存。
+  - `0`：若操作更新了内存。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+
+#### 4.219.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n];
+  if ExclusiveMonitorsPass(address,1) then
+    MemO[address, 1] = R[t][7:0];
+    R[d] = ZeroExtend('0');
+  else
+    R[d] = ZeroExtend('1');
+```
+
+#### 4.219.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.220. STLEXH：存储-释放独占半字
+
+存储-释放独占半字（Store-Release Exclusive Halfword）。若执行 PE 对所寻址的内存具有独占访问权，则存储-释放独占半字把一个半字从寄存器存储到内存。该指令还具有内存排序语义。
+
+#### 4.220.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-407](FigureC2-407.png)
+
+**T1 变体**
+
+```arm
+STLEXH{<c>}{<q>} <Rd>, <Rt>, [<Rn>]
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);
+t = UInt(Rt);
+n = UInt(Rn);
+if d IN {13,15} || t IN {13,15} || n == 15 then UNPREDICTABLE;
+if d == n || d == t then UNPREDICTABLE;
+```
+
+#### 4.220.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `d == t`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该存储指令执行，但所存储的值为 UNKNOWN。
+
+若 `d == n`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令向一个 UNKNOWN 地址执行存储。
+
+#### 4.220.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：目标通用寄存器，存储-独占的状态结果写入其中，编码在 `Rd` 字段中。返回的值为：
+  - `1`：若操作未能更新内存。
+  - `0`：若操作更新了内存。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+
+#### 4.220.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n];
+  if ExclusiveMonitorsPass(address,2) then
+    MemO[address, 2] = R[t][15:0];
+    R[d] = ZeroExtend('0');
+  else
+    R[d] = ZeroExtend('1');
+```
+
+#### 4.220.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.221. STLH：存储-释放半字
+
+存储-释放半字（Store-Release Halfword）。存储-释放半字把一个半字从寄存器存储到内存。该指令还具有内存排序语义。
+
+#### 4.221.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-408](FigureC2-408.png)
+
+**T1 变体**
+
+```arm
+STLH{<c>}{<q>} <Rt>, [<Rn>]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);  n = UInt(Rn);
+if t IN {13,15} || n == 15 then UNPREDICTABLE;
+```
+
+#### 4.221.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+
+#### 4.221.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n];
+  MemO[address, 2] = R[t][15:0];
+```
+
+#### 4.221.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.222. STM, STMIA, STMEA：存储多个
+
+存储多个（Store Multiple）。存储多个使用基址寄存器中的地址把多个寄存器存储到连续的内存单元。这些连续内存单元从该地址开始，并且可选地把这些单元中最后一个单元之上的地址写回基址寄存器。
+
+本指令可被中断续行。
+
+本指令受堆栈限值检查约束。
+
+#### 4.222.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-409](FigureC2-409.png)
+
+**T1 变体**
+
+```arm
+STM{IA}{<c>}{<q>} <Rn>!, <registers>
+// 首选语法
+STMEA{<c>}{<q>} <Rn>!, <registers>
+// 备选语法，空递增堆栈
+```
+
+**解码**
+
+```arm
+n = UInt(Rn);
+registers = '00000000':register_list;
+wback = TRUE;
+if BitCount(registers) < 1 then UNPREDICTABLE;
+```
+
+#### 4.222.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-410](FigureC2-410.png)
+
+**T2 变体**
+
+```arm
+STM{IA}{<c>}.W <Rn>{!}, <registers>
+// 首选语法
+// 若 <Rn>、'!' 和 <registers> 可用 T1 表示
+STMEA{<c>}.W <Rn>{!}, <registers>
+// 备选语法
+// 空递增堆栈
+// 若 <Rn>、'!' 和 <registers> 可用 T1 表示
+STM{IA}{<c>}{<q>} <Rn>{!}, <registers>
+// 首选语法
+STMEA{<c>}{<q>} <Rn>{!}, <registers>
+// 备选语法，空递增堆栈
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+n = UInt(Rn);
+registers = '0':M:'0':register_list;
+wback = (W == '1');
+if n == 15 || BitCount(registers) < 2 then UNPREDICTABLE;
+if wback && registers[n] == '1' then UNPREDICTABLE;
+```
+
+#### 4.222.3. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+**编码 T1**
+
+若 `BitCount(registers) < 1`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令按具有相同寻址模式的 STM 操作，但目标是一组未指定的寄存器。这些寄存器可能包含 R15。若该指令指定写回，则写回时对基址的修改可能与所存储的寄存器个数不同。
+
+**编码 T2**
+
+若 `BitCount(registers) < 1`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令按具有相同寻址模式的 STM 操作，但目标是一组未指定的寄存器。这些寄存器可能包含 R15。若该指令指定写回，则写回时对基址的修改可能与所存储的寄存器个数不同。
+
+若 `BitCount(registers) == 1`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令按所述方式执行，行为不变且无额外副作用。
+- 该指令按具有相同寻址模式的 STM 操作，但目标是一组未指定的寄存器。这些寄存器可能包含 R15。
+
+若 `wback && registers<n> == '1'`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该存储指令执行，但为基址寄存器存储的值为 UNKNOWN。
+
+#### 4.222.4. 汇编符号（所有编码）
+
+- **`IA`**：递增后形式（Increment After）的可选后缀。
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`!`**：把按所加载数据大小调整后的地址写回基址寄存器。若指定，则在 `W` 字段中编码为 1，否则该字段默认为 0。
+- **`<registers>`**：对编码 T1，是要存储的一个或多个寄存器的列表，用逗号分隔并用 { 和 } 括起。列表中的寄存器必须在 R0-R7 范围内，编码在 `register_list` 字段中。若基址寄存器不是列表中的最小编号寄存器，则该指令为基址寄存器存储 UNKNOWN 值。对编码 T2，是要存储的一个或多个寄存器的列表，用逗号分隔并用 { 和 } 括起。列表中的寄存器必须在 R0-R12 范围内，编码在 `register_list` 字段中，并且可以选择包含 LR。若 LR 在列表中，则 `M` 字段置为 1，否则默认为 0。
+
+#### 4.222.5. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n];
+  endAddress = R[n] + 4*BitCount(registers);
+  // 判断是否应执行堆栈指针限值检查
+  if n == 13 && wback && registers[n] == '0' then
+    violatesLimit = ViolatesSPLim(LookUpSP(), endAddress);
+  else
+    violatesLimit = FALSE;
+  for i = 0 to 14
+    // 仅在未违反限值时才执行内存操作
+    if registers[i] == '1' && !violatesLimit then
+      if i == n && wback && i != LowestSetBit(registers) then
+        MemA[address, 4] = bits(32) UNKNOWN;  // 仅编码 T1
+      else
+        MemA[address, 4] = R[i];
+      address = address + 4;
+  // 若正在更新堆栈指针，则违反限值时会引发故障
+  if wback then RSPCheck[n] = endAddress;
+```
+
+#### 4.222.6. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所存储的值或取值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.223. STMDB, STMFD：存储多个递减前
+
+存储多个递减前（Store Multiple Decrement Before (Full Descending)）。存储多个递减前使用基址寄存器中的地址把多个寄存器存储到连续的内存单元。这些连续内存单元恰好结束于该地址之下，并且可选地把这些单元中第一个单元的地址写回基址寄存器。
+
+本指令是别名 PUSH (multiple registers) 所使用的形式。
+
+本指令可被中断续行。
+
+本指令受堆栈限值检查约束。
+
+#### 4.223.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-411](FigureC2-411.png)
+
+**T1 变体**
+
+```arm
+STMDB{<c>}{<q>} <Rn>{!}, <registers>
+// 首选语法
+STMFD{<c>}{<q>} <Rn>{!}, <registers>
+// 备选语法，满递减堆栈
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+n = UInt(Rn);
+registers = '0':M:'0':register_list;
+wback = (W == '1');
+if n == 15 || BitCount(registers) < 2 then UNPREDICTABLE;
+if wback && registers[n] == '1' then UNPREDICTABLE;
+```
+
+#### 4.223.2. 编码 T2
+
+适用于 Armv8-M。
+
+![FigureC2-412](FigureC2-412.png)
+
+**T2 变体**
+
+```arm
+STMDB{<c>}{<q>} SP!, <registers>
+```
+
+**解码**
+
+```arm
+n = 13;  wback = TRUE;
+registers = '0':M:'000000':register_list;
+if BitCount(registers) < 1 then UNPREDICTABLE;
+```
+
+#### 4.223.3. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+**编码 T1**
+
+若 `BitCount(registers) < 1`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令按具有相同寻址模式的 STM 操作，但目标是一组未指定的寄存器。这些寄存器可能包含 R15。若该指令指定写回，则写回时对基址的修改可能与所存储的寄存器个数不同。
+
+若 `wback && registers<n> == '1'`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该存储指令执行，但为基址寄存器存储的值为 UNKNOWN。
+
+若 `BitCount(registers) == 1`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令按所述方式执行，行为不变且无额外副作用。
+- 该指令按具有相同寻址模式的 STM 操作，但目标是一组未指定的寄存器。这些寄存器可能包含 R15。
+
+**编码 T2**
+
+若 `BitCount(registers) < 1`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令按具有相同寻址模式的 STM 操作，但目标是一组未指定的寄存器。这些寄存器可能包含 R15。若该指令指定写回，则写回时对基址的修改可能与所存储的寄存器个数不同。
+
+#### 4.223.4. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`!`**：把按所加载数据大小调整后的地址写回基址寄存器。若指定，则在 `W` 字段中编码为 1，否则该字段默认为 0。
+- **`<registers>`**：对编码 T1，是要存储的一个或多个寄存器的列表，用逗号分隔并用 { 和 } 括起。列表中的寄存器必须在 R0-R12 范围内，编码在 `register_list` 字段中，并且可以选择包含 LR。若 LR 在列表中，则 `M` 字段置为 1，否则默认为 0。对编码 T2，是要存储的一个或多个寄存器的列表，用逗号分隔并用 { 和 } 括起。列表中的寄存器必须在 R0-R7 范围内，编码在 `register_list` 字段中，并且可以选择包含 LR。若 LR 在列表中，则 `M` 字段置为 1，否则该字段默认为 0。
+
+#### 4.223.5. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n] - 4*BitCount(registers);
+  applyLimit = n == 13 && wback;
+  for i = 0 to 14
+    // 若 R[n] 为 SP，则仅在未违反限值时才执行内存操作
+    if registers[i] == '1' && !(applyLimit && ViolatesSPLim(LookUpSP(), address)) then
+      MemA[address, 4] = R[i];
+      address = address + 4;
+  // 若 R[n] 为 SP，则更新堆栈指针时若违反限值将引发故障
+  if wback then RSPCheck[n] = R[n] - 4*BitCount(registers);
+```
+
+#### 4.223.6. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所存储的值或取值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.224. STR (immediate)：存储寄存器（立即数）
+
+存储寄存器（立即数）（Store Register (immediate)）。存储寄存器（立即数）由基址寄存器值和立即数偏移计算地址，并把寄存器中的一个字存储到内存。它可以使用偏移、后索引或前索引寻址。
+
+本指令受堆栈限值检查约束。
+
+本指令是别名 PUSH (single register) 所使用的形式。
+
+#### 4.224.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-413](FigureC2-413.png)
+
+**T1 变体**
+
+```arm
+STR{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);
+n = UInt(Rn);
+imm32 = ZeroExtend(imm5:'00', 32);
+index = TRUE;
+add = TRUE;
+wback = FALSE;
+```
+
+#### 4.224.2. 编码 T2
+
+适用于 Armv8-M。
+
+![FigureC2-414](FigureC2-414.png)
+
+**T2 变体**
+
+```arm
+STR{<c>}{<q>} <Rt>, [SP{, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);
+n = 13;
+imm32 = ZeroExtend(imm8:'00', 32);
+index = TRUE;
+add = TRUE;
+wback = FALSE;
+```
+
+#### 4.224.3. 编码 T3
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-415](FigureC2-415.png)
+
+**T3 变体**
+
+```arm
+STR{<c>}.W <Rt>, [<Rn> {, #{+}<imm>}]
+// <Rt>、<Rn>、<imm> 可用 T1 或 T2 表示
+STR{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+n = UInt(Rn);
+imm32 = ZeroExtend(imm12, 32);
+index = TRUE;
+add = TRUE;
+wback = FALSE;
+if t == 15 then UNPREDICTABLE;
+```
+
+#### 4.224.4. 编码 T4
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-416](FigureC2-416.png)
+
+**偏移变体**（当 `P == 1 && U == 0 && W == 0` 时适用）
+
+```arm
+STR{<c>}{<q>} <Rt>, [<Rn> {, #-<imm>}]
+```
+
+**后索引变体**（当 `P == 0 && W == 1` 时适用）
+
+```arm
+STR{<c>}{<q>} <Rt>, [<Rn>], #{+/-}<imm>
+```
+
+**前索引变体**（当 `P == 1 && W == 1` 时适用）
+
+```arm
+STR{<c>}{<q>} <Rt>, [<Rn>, #{+/-}<imm>]!
+```
+
+**解码**
+
+```arm
+if P == '1' && U == '1' && W == '0' then SEE STRT;
+if Rn == '1111' || (P == '0' && W == '0') then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+n = UInt(Rn);
+imm32 = ZeroExtend(imm8, 32);
+index = (P == '1');
+add = (U == '1');
+wback = (W == '1');
+if t == 15 || (wback && n == t) then UNPREDICTABLE;
+```
+
+#### 4.224.5. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `wback && n == t`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该存储指令执行，但所存储的值为 UNKNOWN。
+
+#### 4.224.6. 别名条件
+
+| 别名 | 变体 | 优先使用条件 |
+| --- | --- | --- |
+| PUSH (single register) | T4（前索引） | `Rn == '1101' && P == '1' && U == '0' && W == '1' && imm8 == '00000100'` |
+
+#### 4.224.7. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+/-`**：指定偏移是加到基址寄存器还是从基址寄存器减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - **`-`**：当 `U = 0` 时。
+  - **`+`**：当 `U = 1` 时。
+- **`+`**：指定偏移加到基址寄存器。
+- **`<imm>`**：对后索引或前索引变体，是 8 位无符号立即数字节偏移，范围 0 到 255，编码在 `imm8` 字段中。对编码 T1，是可选的正无符号立即数字节偏移，为 4 的倍数，范围 0 到 124，默认为 0，在 `imm5` 字段中编码为 `<imm>/4`。对编码 T2，是可选的正无符号立即数字节偏移，为 4 的倍数，范围 0 到 1020，默认为 0，在 `imm8` 字段中编码为 `<imm>/4`。对编码 T3，是可选的 12 位无符号立即数字节偏移，范围 0 到 4095，默认为 0，编码在 `imm12` 字段中。对编码 T4，是可选的 8 位无符号立即数字节偏移，范围 0 到 255，默认为 0，编码在 `imm8` 字段中。
+
+#### 4.224.8. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset_addr = if add then (R[n] + imm32) else (R[n] - imm32);
+  address = if index then offset_addr else R[n];
+  // 判断是否应执行堆栈指针限值检查
+  if n == 13 && wback then
+    violatesLimit = ViolatesSPLim(LookUpSP(), offset_addr);
+  else
+    violatesLimit = FALSE;
+  // 仅在未违反限值时才执行内存操作
+  if !violatesLimit then
+    MemU[address, 4] = R[t];
+  // 若正在更新堆栈指针，则违反限值时会引发故障
+  if wback then RSPCheck[n] = offset_addr;
+```
+
+#### 4.224.9. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.225. STR (register)：存储寄存器（寄存器）
+
+存储寄存器（寄存器）（Store Register (register)）。存储寄存器（寄存器）由基址寄存器值和偏移寄存器值计算地址，并把寄存器中的一个字存储到内存。偏移寄存器值可以左移 0、1、2 或 3 位。
+
+#### 4.225.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-417](FigureC2-417.png)
+
+**T1 变体**
+
+```arm
+STR{<c>}{<q>} <Rt>, [<Rn>, {+}<Rm>]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);
+n = UInt(Rn);
+m = UInt(Rm);
+index = TRUE;
+add = TRUE;
+wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, 0);
+```
+
+#### 4.225.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-418](FigureC2-418.png)
+
+**T2 变体**
+
+```arm
+STR{<c>}.W <Rt>, [<Rn>, {+}<Rm>]
+// <Rt>、<Rn>、<Rm> 可用 T1 表示
+STR{<c>}{<q>} <Rt>, [<Rn>, {+}<Rm>{, LSL #<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+n = UInt(Rn);
+m = UInt(Rm);
+index = TRUE;
+add = TRUE;
+wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, UInt(imm2));
+if t == 15 || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.225.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+`**：指定索引寄存器加到基址寄存器上。
+- **`<Rm>`**：通用索引寄存器，编码在 `Rm` 字段中。
+- **`<imm>`**：若存在，则是对来自 `<Rm>` 的值所施加的左移量，范围为 1-3。`<imm>` 编码在 `imm2` 中。若省略，则未指定移位，`imm2` 编码为 `0b00`。
+
+#### 4.225.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset = Shift(R[m], shift_t, shift_n, APSR.C);
+  address = R[n] + offset;
+  MemU[address, 4] = R[t];
+```
+
+#### 4.225.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.226. STRB (immediate)：存储寄存器字节（立即数）
+
+存储寄存器字节（立即数）（Store Register Byte (immediate)）。存储寄存器字节（立即数）由基址寄存器值和立即数偏移计算地址，并把寄存器中的一个字节存储到内存。它可以使用偏移、后索引或前索引寻址。
+
+本指令受堆栈限值检查约束。
+
+#### 4.226.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-419](FigureC2-419.png)
+
+**T1 变体**
+
+```arm
+STRB{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);
+n = UInt(Rn);
+imm32 = ZeroExtend(imm5, 32);
+index = TRUE;
+add = TRUE;
+wback = FALSE;
+```
+
+#### 4.226.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-420](FigureC2-420.png)
+
+**T2 变体**
+
+```arm
+STRB{<c>}.W <Rt>, [<Rn> {, #{+}<imm>}]
+// <Rt>、<Rn>、<imm> 可用 T1 表示
+STRB{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+n = UInt(Rn);
+imm32 = ZeroExtend(imm12, 32);
+index = TRUE;
+add = TRUE;
+wback = FALSE;
+if t IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.226.3. 编码 T3
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-421](FigureC2-421.png)
+
+**偏移变体**（当 `P == 1 && U == 0 && W == 0` 时适用）
+
+```arm
+STRB{<c>}{<q>} <Rt>, [<Rn> {, #-<imm>}]
+```
+
+**后索引变体**（当 `P == 0 && W == 1` 时适用）
+
+```arm
+STRB{<c>}{<q>} <Rt>, [<Rn>], #{+/-}<imm>
+```
+
+**前索引变体**（当 `P == 1 && W == 1` 时适用）
+
+```arm
+STRB{<c>}{<q>} <Rt>, [<Rn>, #{+/-}<imm>]!
+```
+
+**解码**
+
+```arm
+if P == '1' && U == '1' && W == '0' then SEE STRBT;
+if Rn == '1111' || (P == '0' && W == '0') then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+n = UInt(Rn);
+imm32 = ZeroExtend(imm8, 32);
+index = (P == '1');
+add = (U == '1');
+wback = (W == '1');
+if t IN {13,15} || (wback && n == t) then UNPREDICTABLE;
+```
+
+#### 4.226.4. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `wback && n == t`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该存储指令执行，但所存储的值为 UNKNOWN。
+
+#### 4.226.5. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+/-`**：指定偏移是加到基址寄存器还是从基址寄存器减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - **`-`**：当 `U = 0` 时。
+  - **`+`**：当 `U = 1` 时。
+- **`+`**：指定偏移加到基址寄存器。
+- **`<imm>`**：对后索引或前索引变体，是 8 位无符号立即数字节偏移，范围 0 到 255，编码在 `imm8` 字段中。对编码 T1，是 5 位无符号立即数字节偏移，范围 0 到 31，默认为 0，编码在 `imm5` 字段中。对编码 T2，是 12 位无符号立即数字节偏移，范围 0 到 4095，默认为 0，编码在 `imm12` 字段中。对编码 T3，是 8 位无符号立即数字节偏移，范围 0 到 255，默认为 0，编码在 `imm8` 字段中。
+
+#### 4.226.6. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset_addr = if add then (R[n] + imm32) else (R[n] - imm32);
+  address = if index then offset_addr else R[n];
+  // 判断是否应执行堆栈指针限值检查
+  if n == 13 && wback then
+    violatesLimit = ViolatesSPLim(LookUpSP(), offset_addr);
+  else
+    violatesLimit = FALSE;
+  // 仅在未违反限值时才执行内存操作
+  if !violatesLimit then
+    MemU[address, 1] = R[t][7:0];
+  // 若正在更新堆栈指针，则违反限值时会引发故障
+  if wback then RSPCheck[n] = offset_addr;
+```
+
+#### 4.226.7. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.227. STRB (register)：存储寄存器字节（寄存器）
+
+存储寄存器字节（寄存器）（Store Register Byte (register)）。存储寄存器字节（寄存器）由基址寄存器值和偏移寄存器值计算地址，并把寄存器中的一个字节存储到内存。偏移寄存器值可以左移 0、1、2 或 3 位。
+
+#### 4.227.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-422](FigureC2-422.png)
+
+**T1 变体**
+
+```arm
+STRB{<c>}{<q>} <Rt>, [<Rn>, {+}<Rm>]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);
+n = UInt(Rn);
+m = UInt(Rm);
+index = TRUE;
+add = TRUE;
+wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, 0);
+```
+
+#### 4.227.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-423](FigureC2-423.png)
+
+**T2 变体**
+
+```arm
+STRB{<c>}.W <Rt>, [<Rn>, {+}<Rm>]
+// <Rt>、<Rn>、<Rm> 可用 T1 表示
+STRB{<c>}{<q>} <Rt>, [<Rn>, {+}<Rm>{, LSL #<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+n = UInt(Rn);
+m = UInt(Rm);
+index = TRUE;
+add = TRUE;
+wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, UInt(imm2));
+if t IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.227.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+`**：指定索引寄存器加到基址寄存器上。
+- **`<Rm>`**：通用索引寄存器，编码在 `Rm` 字段中。
+- **`<imm>`**：若存在，则是对来自 `<Rm>` 的值所施加的左移量，范围为 1-3。`<imm>` 编码在 `imm2` 中。若省略，则未指定移位，`imm2` 编码为 `0b00`。
+
+#### 4.227.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset = Shift(R[m], shift_t, shift_n, APSR.C);
+  address = R[n] + offset;
+  MemU[address, 1] = R[t][7:0];
+```
+
+#### 4.227.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.228. STRBT：非特权存储寄存器字节
+
+非特权存储寄存器字节（Store Register Byte Unprivileged）。非特权存储寄存器字节由基址寄存器值和立即数偏移计算地址，并把寄存器中的一个字节存储到内存。当特权软件使用 STRBT 指令时，内存访问会像该软件是非特权的一样受到限制。
+
+#### 4.228.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-424](FigureC2-424.png)
+
+**T1 变体**
+
+```arm
+STRBT{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+n = UInt(Rn);
+postindex = FALSE;
+add = TRUE;
+register_form = FALSE;
+imm32 = ZeroExtend(imm8, 32);
+if t IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.228.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+`**：指定偏移加到基址寄存器。
+- **`<imm>`**：可选的 8 位无符号立即数字节偏移，范围 0 到 255，默认为 0，编码在 `imm8` 字段中。
+
+#### 4.228.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n] + imm32;
+  MemU_unpriv[address, 1] = R[t][7:0];
+```
+
+#### 4.228.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.229. STRD (immediate)：存储寄存器双字（立即数）
+
+存储寄存器双字（立即数）（Store Register Dual (immediate)）。存储寄存器双字（立即数）由基址寄存器值和立即数偏移计算地址，并把两个寄存器中的两个字存储到内存。它可以使用偏移、后索引或前索引寻址。
+
+本指令受堆栈限值检查约束。
+
+#### 4.229.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-425](FigureC2-425.png)
+
+**偏移变体**（当 `P == 1 && W == 0` 时适用）
+
+```arm
+STRD{<c>}{<q>} <Rt>, <Rt2>, [<Rn> {, #{+/-}<imm>}]
+```
+
+**后索引变体**（当 `P == 0 && W == 1` 时适用）
+
+```arm
+STRD{<c>}{<q>} <Rt>, <Rt2>, [<Rn>], #{+/-}<imm>
+```
+
+**前索引变体**（当 `P == 1 && W == 1` 时适用）
+
+```arm
+STRD{<c>}{<q>} <Rt>, <Rt2>, [<Rn>, #{+/-}<imm>]!
+```
+
+**解码**
+
+```arm
+if P == '0' && W == '0' then SEE "Related encodings";
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+t2 = UInt(Rt2);
+n = UInt(Rn);
+imm32 = ZeroExtend(imm8:'00', 32);
+index = (P == '1');
+add = (U == '1');
+wback = (W == '1');
+if wback && (n == t || n == t2) then UNPREDICTABLE;
+if n == 15 || t IN {13,15} || t2 IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.229.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `wback && (n == t || n == t2)`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该存储指令执行，但所存储的值为 UNKNOWN。
+
+#### 4.229.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的第一个通用寄存器，编码在 `Rt` 字段中。
+- **`<Rt2>`**：要传输的第二个通用寄存器，编码在 `Rt2` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+/-`**：指定偏移是加到基址寄存器还是从基址寄存器减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - **`-`**：当 `U = 0` 时。
+  - **`+`**：当 `U = 1` 时。
+- **`<imm>`**：对偏移变体，是可选的无符号立即数字节偏移，为 4 的倍数，范围 0 到 1020，默认为 0，在 `imm8` 字段中编码为 `<imm>/4`。对后索引和前索引变体，是无符号立即数字节偏移，为 4 的倍数，范围 0 到 1020，在 `imm8` 字段中编码为 `<imm>/4`。
+
+#### 4.229.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset_addr = if add then (R[n] + imm32) else (R[n] - imm32);
+  address = if index then offset_addr else R[n];
+  // 判断是否应执行堆栈指针限值检查
+  if n == 13 && wback then
+    violatesLimit = ViolatesSPLim(LookUpSP(), offset_addr);
+  else
+    violatesLimit = FALSE;
+  // 仅在未违反限值时才执行内存操作
+  if !violatesLimit then
+    MemA[address, 4] = R[t];
+    MemA[address+4, 4] = R[t2];
+  // 若正在更新堆栈指针，则违反限值时会引发故障
+  if wback then RSPCheck[n] = offset_addr;
+```
+
+#### 4.229.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.230. STREX：存储-独占寄存器
+
+存储-独占寄存器（Store Register Exclusive）。存储-独占寄存器由基址寄存器值和立即数偏移计算地址，若执行 PE 对所寻址的内存具有独占访问权，则把一个字从寄存器存储到内存。
+
+#### 4.230.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-426](FigureC2-426.png)
+
+**T1 变体**
+
+```arm
+STREX{<c>}{<q>} <Rd>, <Rt>, [<Rn> {, #<imm>}]
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);
+t = UInt(Rt);
+n = UInt(Rn);
+imm32 = ZeroExtend(imm8:'00', 32);
+if t == 15 then SEE "TT";
+if d IN {13,15} || t == 13 || n == 15 then UNPREDICTABLE;
+if d == n || d == t then UNPREDICTABLE;
+```
+
+#### 4.230.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `d == t`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该存储指令执行，但所存储的值为 UNKNOWN。
+
+若 `d == n`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令向一个 UNKNOWN 地址执行存储。
+
+#### 4.230.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：目标通用寄存器，存储-独占的状态结果写入其中，编码在 `Rd` 字段中。返回的值为：
+  - `1`：若操作未能更新内存。
+  - `0`：若操作更新了内存。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`<imm>`**：加到 `<Rn>` 的值上以计算地址的立即数偏移。`<imm>` 可以省略，表示偏移为 0。取值是 4 的倍数，范围 0-1020。
+
+#### 4.230.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n] + imm32;
+  if ExclusiveMonitorsPass(address,4) then
+    MemA[address, 4] = R[t];
+    R[d] = ZeroExtend('0');
+  else
+    R[d] = ZeroExtend('1');
+```
+
+#### 4.230.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.231. STREXB：存储-独占字节
+
+存储-独占字节（Store Register Exclusive Byte）。存储-独占字节由基址寄存器值推导地址，若执行 PE 对所寻址的内存具有独占访问权，则把一个字节从寄存器存储到内存。
+
+#### 4.231.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-427](FigureC2-427.png)
+
+**T1 变体**
+
+```arm
+STREXB{<c>}{<q>} <Rd>, <Rt>, [<Rn>]
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);
+t = UInt(Rt);
+n = UInt(Rn);
+if d IN {13,15} || t IN {13,15} || n == 15 then UNPREDICTABLE;
+if d == n || d == t then UNPREDICTABLE;
+```
+
+#### 4.231.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `d == t`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该存储指令执行，但所存储的值为 UNKNOWN。
+
+若 `d == n`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令向一个 UNKNOWN 地址执行存储。
+
+#### 4.231.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：目标通用寄存器，存储-独占的状态结果写入其中，编码在 `Rd` 字段中。返回的值为：
+  - `1`：若操作未能更新内存。
+  - `0`：若操作更新了内存。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+
+#### 4.231.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n];
+  if ExclusiveMonitorsPass(address,1) then
+    MemA[address, 1] = R[t][7:0];
+    R[d] = ZeroExtend('0');
+  else
+    R[d] = ZeroExtend('1');
+```
+
+#### 4.231.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.232. STREXH：存储-独占半字
+
+存储-独占半字（Store Register Exclusive Halfword）。存储-独占半字由基址寄存器值推导地址，若执行 PE 对所寻址的内存具有独占访问权，则把一个半字从寄存器存储到内存。
+
+#### 4.232.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-428](FigureC2-428.png)
+
+**T1 变体**
+
+```arm
+STREXH{<c>}{<q>} <Rd>, <Rt>, [<Rn>]
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);
+t = UInt(Rt);
+n = UInt(Rn);
+if d IN {13,15} || t IN {13,15} || n == 15 then UNPREDICTABLE;
+if d == n || d == t then UNPREDICTABLE;
+```
+
+#### 4.232.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `d == t`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该存储指令执行，但所存储的值为 UNKNOWN。
+
+若 `d == n`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该指令向一个 UNKNOWN 地址执行存储。
+
+#### 4.232.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：目标通用寄存器，存储-独占的状态结果写入其中，编码在 `Rd` 字段中。返回的值为：
+  - `1`：若操作未能更新内存。
+  - `0`：若操作更新了内存。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+
+#### 4.232.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n];
+  if ExclusiveMonitorsPass(address,2) then
+    MemA[address, 2] = R[t][15:0];
+    R[d] = ZeroExtend('0');
+  else
+    R[d] = ZeroExtend('1');
+```
+
+#### 4.232.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.233. STRH (immediate)：存储寄存器半字（立即数）
+
+存储寄存器半字（立即数）（Store Register Halfword (immediate)）。存储寄存器半字（立即数）由基址寄存器值和立即数偏移计算地址，并把寄存器中的一个半字存储到内存。它可以使用偏移、后索引或前索引寻址。
+
+本指令受堆栈限值检查约束。
+
+#### 4.233.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-429](FigureC2-429.png)
+
+**T1 变体**
+
+```arm
+STRH{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);
+n = UInt(Rn);
+imm32 = ZeroExtend(imm5:'0', 32);
+index = TRUE;
+add = TRUE;
+wback = FALSE;
+```
+
+#### 4.233.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-430](FigureC2-430.png)
+
+**T2 变体**
+
+```arm
+STRH{<c>}.W <Rt>, [<Rn> {, #{+}<imm>}]
+// <Rt>、<Rn>、<imm> 可用 T1 表示
+STRH{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+n = UInt(Rn);
+imm32 = ZeroExtend(imm12, 32);
+index = TRUE;
+add = TRUE;
+wback = FALSE;
+if t IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.233.3. 编码 T3
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-431](FigureC2-431.png)
+
+**偏移变体**（当 `P == 1 && U == 0 && W == 0` 时适用）
+
+```arm
+STRH{<c>}{<q>} <Rt>, [<Rn> {, #-<imm>}]
+```
+
+**后索引变体**（当 `P == 0 && W == 1` 时适用）
+
+```arm
+STRH{<c>}{<q>} <Rt>, [<Rn>], #{+/-}<imm>
+```
+
+**前索引变体**（当 `P == 1 && W == 1` 时适用）
+
+```arm
+STRH{<c>}{<q>} <Rt>, [<Rn>, #{+/-}<imm>]!
+```
+
+**解码**
+
+```arm
+if P == '1' && U == '1' && W == '0' then SEE STRHT;
+if Rn == '1111' || (P == '0' && W == '0') then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+n = UInt(Rn);
+imm32 = ZeroExtend(imm8, 32);
+index = (P == '1');
+add = (U == '1');
+wback = (W == '1');
+if t IN {13,15} || (wback && n == t) then UNPREDICTABLE;
+```
+
+#### 4.233.4. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `wback && n == t`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 该存储指令执行，但所存储的值为 UNKNOWN。
+
+#### 4.233.5. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+/-`**：指定偏移是加到基址寄存器还是从基址寄存器减去，省略时默认为 `+`，编码在 `U` 字段中。取值如下：
+  - **`-`**：当 `U = 0` 时。
+  - **`+`**：当 `U = 1` 时。
+- **`+`**：指定偏移加到基址寄存器。
+- **`<imm>`**：对后索引或前索引变体，是 8 位无符号立即数字节偏移，范围 0 到 255，编码在 `imm8` 字段中。对编码 T1，是可选的正无符号立即数字节偏移，为 2 的倍数，范围 0 到 62，默认为 0，在 `imm5` 字段中编码为 `<imm>/2`。对编码 T2，是 12 位无符号立即数字节偏移，范围 0 到 4095，默认为 0，编码在 `imm12` 字段中。对编码 T3，是 8 位无符号立即数字节偏移，范围 0 到 255，默认为 0，编码在 `imm8` 字段中。
+
+#### 4.233.6. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset_addr = if add then (R[n] + imm32) else (R[n] - imm32);
+  address = if index then offset_addr else R[n];
+  // 判断是否应执行堆栈指针限值检查
+  if n == 13 && wback then
+    violatesLimit = ViolatesSPLim(LookUpSP(), offset_addr);
+  else
+    violatesLimit = FALSE;
+  // 仅在未违反限值时才执行内存操作
+  if !violatesLimit then
+    MemU[address, 2] = R[t][15:0];
+  // 若正在更新堆栈指针，则违反限值时会引发故障
+  if wback then RSPCheck[n] = offset_addr;
+```
+
+#### 4.233.7. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.234. STRH (register)：存储寄存器半字（寄存器）
+
+存储寄存器半字（寄存器）（Store Register Halfword (register)）。存储寄存器半字（寄存器）由基址寄存器值和偏移寄存器值计算地址，并把寄存器中的一个半字存储到内存。偏移寄存器值可以左移 0、1、2 或 3 位。
+
+#### 4.234.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-432](FigureC2-432.png)
+
+**T1 变体**
+
+```arm
+STRH{<c>}{<q>} <Rt>, [<Rn>, {+}<Rm>]
+```
+
+**解码**
+
+```arm
+t = UInt(Rt);
+n = UInt(Rn);
+m = UInt(Rm);
+index = TRUE;
+add = TRUE;
+wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, 0);
+```
+
+#### 4.234.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-433](FigureC2-433.png)
+
+**T2 变体**
+
+```arm
+STRH{<c>}.W <Rt>, [<Rn>, {+}<Rm>]
+// <Rt>、<Rn>、<Rm> 可用 T1 表示
+STRH{<c>}{<q>} <Rt>, [<Rn>, {+}<Rm>{, LSL #<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+n = UInt(Rn);
+m = UInt(Rm);
+index = TRUE;
+add = TRUE;
+wback = FALSE;
+(shift_t, shift_n) = (SRType_LSL, UInt(imm2));
+if t IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.234.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+`**：指定索引寄存器加到基址寄存器上。
+- **`<Rm>`**：通用索引寄存器，编码在 `Rm` 字段中。
+- **`<imm>`**：若存在，则是对来自 `<Rm>` 的值所施加的左移量，范围为 1-3。`<imm>` 编码在 `imm2` 中。若省略，则未指定移位，`imm2` 编码为 `0b00`。
+
+#### 4.234.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  offset = Shift(R[m], shift_t, shift_n, APSR.C);
+  address = R[n] + offset;
+  MemU[address, 2] = R[t][15:0];
+```
+
+#### 4.234.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.235. STRHT：非特权存储寄存器半字
+
+非特权存储寄存器半字（Store Register Halfword Unprivileged）。非特权存储寄存器半字由基址寄存器值和立即数偏移计算地址，并把寄存器中的一个半字存储到内存。
+
+当特权软件使用 STRHT 指令时，内存访问会像该软件是非特权的一样受到限制。
+
+#### 4.235.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-434](FigureC2-434.png)
+
+**T1 变体**
+
+```arm
+STRHT{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+n = UInt(Rn);
+postindex = FALSE;
+add = TRUE;
+register_form = FALSE;
+imm32 = ZeroExtend(imm8, 32);
+if t IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.235.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+`**：指定偏移加到基址寄存器。
+- **`<imm>`**：可选的 8 位无符号立即数字节偏移，范围 0 到 255，默认为 0，编码在 `imm8` 字段中。
+
+#### 4.235.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n] + imm32;
+  MemU_unpriv[address, 2] = R[t][15:0];
+```
+
+#### 4.235.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.236. STRT：非特权存储寄存器
+
+非特权存储寄存器（Store Register Unprivileged）。非特权存储寄存器由基址寄存器值和立即数偏移计算地址，并把寄存器中的一个字存储到内存。
+
+当特权软件使用 STRT 指令时，内存访问会像该软件是非特权的一样受到限制。
+
+#### 4.236.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-435](FigureC2-435.png)
+
+**T1 变体**
+
+```arm
+STRT{<c>}{<q>} <Rt>, [<Rn> {, #{+}<imm>}]
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+t = UInt(Rt);
+n = UInt(Rn);
+postindex = FALSE;
+add = TRUE;
+register_form = FALSE;
+imm32 = ZeroExtend(imm8, 32);
+if t IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.236.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rt>`**：要传输的通用寄存器，编码在 `Rt` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+- **`+`**：指定偏移加到基址寄存器。
+- **`<imm>`**：可选的 8 位无符号立即数字节偏移，范围 0 到 255，默认为 0，编码在 `imm8` 字段中。
+
+#### 4.236.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  address = R[n] + imm32;
+  data = R[t];
+  MemU_unpriv[address, 4] = data;
+```
+
+#### 4.236.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与所存储数据的值无关。
+- 异步异常的接受时刻不因本指令所存储的值而变化。
+
+该时序不变性不适用于所访问的地址。
+
+### 4.237. SUB (SP minus immediate)：减法（SP 减立即数）
+
+从 SP 减法（立即数）（Subtract from SP (immediate)）。减法（SP 减立即数）从 SP 值中减去一个立即数，并把结果写入目标寄存器。
+
+本指令受堆栈限值检查约束。
+
+#### 4.237.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-436](FigureC2-436.png)
+
+**T1 变体**
+
+```arm
+SUB{<c>}{<q>} {SP,} SP, #<imm7>
+```
+
+**解码**
+
+```arm
+d = 13;
+setflags = FALSE;
+imm32 = ZeroExtend(imm7:'00', 32);
+```
+
+#### 4.237.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-437](FigureC2-437.png)
+
+**SUB 变体**（当 `S == 0` 时适用）
+
+```arm
+SUB{<c>}.W {<Rd>,} SP, #<const>
+// <Rd>、<const> 可用 T1 表示
+SUB{<c>}{<q>} {<Rd>,} SP, #<const>
+```
+
+**SUBS 变体**（当 `S == 1 && Rd != 1111` 时适用）
+
+```arm
+SUBS{<c>}{<q>} {<Rd>,} SP, #<const>
+```
+
+**解码**
+
+```arm
+if Rd == '1111' && S == '1' then SEE "CMP (immediate)";
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);
+setflags = (S == '1');
+imm32 = T32ExpandImm(i:imm3:imm8);
+if d == 15 && S == '0' then UNPREDICTABLE;
+```
+
+#### 4.237.3. 编码 T3
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-438](FigureC2-438.png)
+
+**T3 变体**
+
+```arm
+SUB{<c>}{<q>} {<Rd>,} SP, #<imm12>
+// <imm12> 不能用 T1、T2 或 T3 表示
+SUBW{<c>}{<q>} {<Rd>,} SP, #<imm12>
+// <imm12> 可用 T1、T2 或 T3 表示
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);
+setflags = FALSE;
+imm32 = ZeroExtend(i:imm3:imm8, 32);
+if d == 15 then UNPREDICTABLE;
+```
+
+#### 4.237.4. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<imm7>`**：无符号立即数，为 4 的倍数，范围 0 到 508，在 `imm7` 字段中编码为 `<imm7>/4`。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。若省略，则该寄存器为 SP。
+- **`<imm12>`**：12 位无符号立即数，范围 0 到 4095，编码在 `i:imm3:imm8` 字段中。
+- **`<const>`**：由编码在 `i:imm3:imm8` 字段中的 12 位立即数推导出的立即数值。取值范围见 C1.5 修改的立即数常量。
+
+#### 4.237.5. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  (result, carry, overflow) = AddWithCarry(SP, NOT(imm32), '1');
+  RSPCheck[d] = result;
+  if setflags then
+    APSR.N = result[31];
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    APSR.V = overflow;
+```
+
+#### 4.237.6. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.238. SUB (SP minus register)：减法（SP 减寄存器）
+
+从 SP 减法（寄存器）（Subtract from SP (register)）。减法（SP 减寄存器）从 SP 值中减去一个可选移位的寄存器值，并把结果写入目标寄存器。
+
+本指令受堆栈限值检查约束。
+
+#### 4.238.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-439](FigureC2-439.png)
+
+**SUB，带扩展的循环右移变体**（当 `S == 0 && imm3 == 000 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+SUB{<c>}{<q>} {<Rd>,} SP, <Rm>, RRX
+```
+
+**SUB，移位或循环移位变体**（当 `S == 0 && !(imm3 == 000 && imm2 == 00 && sr_type == 11)` 时适用）
+
+```arm
+SUB{<c>}.W {<Rd>,} SP, <Rm>
+// <Rd>、<Rm> 可用 T1 或 T2 表示
+SUB{<c>}{<q>} {<Rd>,} SP, <Rm> {, <shift> #<amount>}
+```
+
+**SUBS，带扩展的循环右移变体**（当 `S == 1 && imm3 == 000 && Rd != 1111 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+SUBS{<c>}{<q>} {<Rd>,} SP, <Rm>, RRX
+```
+
+**SUBS，移位或循环移位变体**（当 `S == 1 && !(imm3 == 000 && imm2 == 00 && sr_type == 11) && Rd != 1111` 时适用）
+
+```arm
+SUBS{<c>}{<q>} {<Rd>,} SP, <Rm> {, <shift> #<amount>}
+```
+
+**解码**
+
+```arm
+if Rd == '1111' && S == '1' then SEE "CMP (register)";
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);
+m = UInt(Rm);
+setflags = (S == '1');
+(shift_t, shift_n) = DecodeImmShift(sr_type, imm3:imm2);
+if d == 13 && (shift_t != SRType_LSL || shift_n > 3) then UNPREDICTABLE;
+if (d == 15 && S == '0') || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.238.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。若省略，则该寄存器为 SP。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<shift>`**：要对第二个源寄存器施加的移位类型，编码在 `sr_type` 字段中。取值如下：
+  - `LSL`：当 `sr_type = 00` 时。
+  - `LSR`：当 `sr_type = 01` 时。
+  - `ASR`：当 `sr_type = 10` 时。
+  - `ROR`：当 `sr_type = 11` 时。
+- **`<amount>`**：移位量，范围为 1 到 31（当 `<shift>` 为 `LSL` 或 `ROR` 时）或 1 到 32（当 `<shift>` 为 `LSR` 或 `ASR` 时），在 `imm3:imm2` 字段中编码为 `<amount>` 对 32 取模。
+
+#### 4.238.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  shifted = Shift(R[m], shift_t, shift_n, APSR.C);
+  (result, carry, overflow) = AddWithCarry(SP, NOT(shifted), '1');
+  RSPCheck[d] = result;
+  if setflags then
+    APSR.N = result[31];
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    APSR.V = overflow;
+```
+
+### 4.239. SUB (immediate)：减法（立即数）
+
+减法（立即数）（Subtract (immediate)）。减法（立即数）从一个寄存器值中减去一个立即数，并把结果写入目标寄存器。它可以选择根据结果更新条件标志。
+
+#### 4.239.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-440](FigureC2-440.png)
+
+**T1 变体**
+
+```arm
+SUB<c>{<q>} <Rd>, <Rn>, #<imm3>
+// IT 块内
+SUBS{<q>} <Rd>, <Rn>, #<imm3>
+// IT 块外
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);
+n = UInt(Rn);
+setflags = !InITBlock();
+imm32 = ZeroExtend(imm3, 32);
+```
+
+#### 4.239.2. 编码 T2
+
+适用于 Armv8-M。
+
+![FigureC2-441](FigureC2-441.png)
+
+**T2 变体**
+
+```arm
+SUB<c>{<q>} <Rdn>, #<imm8>
+// IT 块内，且 <Rdn>、<imm8> 可用 T1 表示
+SUB<c>{<q>} {<Rdn>,} <Rdn>, #<imm8>
+// IT 块内，且 <Rdn>、<imm8> 不能用 T1 表示
+SUBS{<q>} <Rdn>, #<imm8>
+// IT 块外，且 <Rdn>、<imm8> 可用 T1 表示
+SUBS{<q>} {<Rdn>,} <Rdn>, #<imm8>
+// IT 块外，且 <Rdn>、<imm8> 不能用 T1 表示
+```
+
+**解码**
+
+```arm
+d = UInt(Rdn);
+n = UInt(Rdn);
+setflags = !InITBlock();
+imm32 = ZeroExtend(imm8, 32);
+```
+
+#### 4.239.3. 编码 T3
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-442](FigureC2-442.png)
+
+**SUB 变体**（当 `S == 0` 时适用）
+
+```arm
+SUB<c>.W {<Rd>,} <Rn>, #<const>
+// IT 块内，且 <Rd>、<Rn>、<const> 可用 T1 或 T2 表示
+SUB{<c>}{<q>} {<Rd>,} <Rn>, #<const>
+```
+
+**SUBS 变体**（当 `S == 1 && Rd != 1111` 时适用）
+
+```arm
+SUBS.W {<Rd>,} <Rn>, #<const>
+// IT 块外，且 <Rd>、<Rn>、<const> 可用 T1 或 T2 表示
+SUBS{<c>}{<q>} {<Rd>,} <Rn>, #<const>
+```
+
+**解码**
+
+```arm
+if Rd == '1111' && S == '1' then SEE "CMP (immediate)";
+if Rn == '1101' then SEE "SUB (SP minus immediate)";
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+setflags = (S == '1');
+imm32 = T32ExpandImm(i:imm3:imm8);
+if d == 13 || (d == 15 && S == '0') || n == 15 then UNPREDICTABLE;
+```
+
+#### 4.239.4. 编码 T4
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-443](FigureC2-443.png)
+
+**T4 变体**
+
+```arm
+SUB{<c>}{<q>} {<Rd>,} <Rn>, #<imm12>
+// <imm12> 不能用 T1、T2 或 T3 表示
+SUBW{<c>}{<q>} {<Rd>,} <Rn>, #<imm12>
+// <imm12> 可用 T1、T2 或 T3 表示
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE ADR;
+if Rn == '1101' then SEE "SUB (SP minus immediate)";
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+setflags = FALSE;
+imm32 = ZeroExtend(i:imm3:imm8, 32);
+if d IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.239.5. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rdn>`**：通用源兼目标寄存器，编码在 `Rdn` 字段中。
+- **`<imm8>`**：8 位无符号立即数，范围 0 到 255，编码在 `imm8` 字段中。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。若省略，则该寄存器与 `<Rn>` 相同。
+- **`<Rn>`**：对编码 T1，是通用源寄存器，编码在 `Rn` 字段中。对编码 T3，是通用源寄存器，编码在 `Rn` 字段中。若使用 SP，见 C2.4.237 SUB (SP minus immediate)。对编码 T4，是通用源寄存器，编码在 `Rn` 字段中。若使用 SP，见 C2.4.237 SUB (SP minus immediate)。若使用 PC，见 C2.4.8 ADR。
+- **`<imm3>`**：3 位无符号立即数，范围 0 到 7，编码在 `imm3` 字段中。
+- **`<imm12>`**：12 位无符号立即数，范围 0 到 4095，编码在 `i:imm3:imm8` 字段中。
+- **`<const>`**：由编码在 `i:imm3:imm8` 字段中的 12 位立即数推导出的立即数值。取值范围见 C1.5 修改的立即数常量。
+
+#### 4.239.6. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  (result, carry, overflow) = AddWithCarry(R[n], NOT(imm32), '1');
+  R[d] = result;
+  if setflags then
+    APSR.N = result[31];
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    APSR.V = overflow;
+```
+
+#### 4.239.7. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.240. SUB (immediate, from PC)：从 PC 减法
+
+从 PC 减法（Subtract from PC）。从 PC 减法从 Align(PC, 4) 值中减去一个立即数，形成 PC 相对地址，并把结果写入目标寄存器。Arm 建议软件尽可能避免使用该别名。
+
+本指令是 ADR 指令的别名。这意味着：
+
+- 本说明中的编码按与 ADR 的编码相匹配的方式命名。
+- ADR 的说明给出了本指令的操作伪代码。
+
+#### 4.240.1. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-444](FigureC2-444.png)
+
+**T2 变体**
+
+```arm
+SUB{<c>}{<q>} <Rd>, PC, #<imm12>
+```
+
+**等价于**
+
+```arm
+ADR{<c>}{<q>} <Rd>, <label>
+```
+
+**当 `i:imm3:imm8 == '000000000000'` 时为首选的反汇编形式。**
+
+#### 4.240.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<label>`**：对编码 T1，是其地址要加载到 `<Rd>` 中的指令或字面量数据项的标号。汇编器从 ADR 指令的 Align(PC, 4) 值计算到该标号所需偏移的值。偏移大小允许的值为 4 的倍数，范围 0 到 1020。对编码 T2 和 T3，是其地址要加载到 `<Rd>` 中的指令或字面量数据项的标号。汇编器从 ADR 指令的 Align(PC, 4) 值计算到该标号所需偏移的值。若偏移为零或正数，则使用编码 T3，`imm32` 等于该偏移。若偏移为负数，则使用编码 T2，`imm32` 等于偏移的大小。也就是说，使用编码 T2 表示所需偏移为 `imm32` 的负值。偏移大小允许的值为 0-4095。
+- **`<imm12>`**：12 位无符号立即数，范围 0 到 4095，编码在 `i:imm3:imm8` 字段中。
+
+#### 4.240.3. 操作（所有编码）
+
+ADR 的说明给出了本指令的操作伪代码。
+
+### 4.241. SUB (register)：减法（寄存器）
+
+减法（寄存器）（Subtract (register)）。减法（寄存器）从一个寄存器值中减去一个可选移位的寄存器值，并把结果写入目标寄存器。它可以选择根据结果更新条件标志。
+
+#### 4.241.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-445](FigureC2-445.png)
+
+**T1 变体**
+
+```arm
+SUB<c>{<q>} <Rd>, <Rn>, <Rm>
+// IT 块内
+SUBS{<q>} {<Rd>,} <Rn>, <Rm>
+// IT 块外
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+setflags = !InITBlock();
+(shift_t, shift_n) = (SRType_LSL, 0);
+```
+
+#### 4.241.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-446](FigureC2-446.png)
+
+**SUB，带扩展的循环右移变体**（当 `S == 0 && imm3 == 000 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+SUB{<c>}{<q>} {<Rd>,} <Rn>, <Rm>, RRX
+```
+
+**SUB，移位或循环移位变体**（当 `S == 0 && !(imm3 == 000 && imm2 == 00 && sr_type == 11)` 时适用）
+
+```arm
+SUB<c>.W {<Rd>,} <Rn>, <Rm>
+// IT 块内，且 <Rd>、<Rn>、<Rm> 可用 T1 表示
+SUB{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, <shift> #<amount>}
+```
+
+**SUBS，带扩展的循环右移变体**（当 `S == 1 && imm3 == 000 && Rd != 1111 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+SUBS{<c>}{<q>} {<Rd>,} <Rn>, <Rm>, RRX
+```
+
+**SUBS，移位或循环移位变体**（当 `S == 1 && !(imm3 == 000 && imm2 == 00 && sr_type == 11) && Rd != 1111` 时适用）
+
+```arm
+SUBS.W {<Rd>,} <Rn>, <Rm>
+// IT 块外，且 <Rd>、<Rn>、<Rm> 可用 T1 表示
+SUBS{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, <shift> #<amount>}
+```
+
+**解码**
+
+```arm
+if Rd == '1111' && S == '1' then SEE "CMP (register)";
+if Rn == '1101' then SEE "SUB (SP minus register)";
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+setflags = (S == '1');
+(shift_t, shift_n) = DecodeImmShift(sr_type, imm3:imm2);
+if d == 13 || (d == 15 && S == '0') || n == 15 || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.241.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。若省略，则该寄存器与 `<Rn>` 相同。
+- **`<Rn>`**：对编码 T1，是第一个通用源寄存器，编码在 `Rn` 字段中。对编码 T2，是第一个通用源寄存器，编码在 `Rn` 字段中。若使用 SP，见 C2.4.238 SUB (SP minus register)。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<shift>`**：要对第二个源寄存器施加的移位类型，编码在 `sr_type` 字段中。取值如下：
+  - `LSL`：当 `sr_type = 00` 时。
+  - `LSR`：当 `sr_type = 01` 时。
+  - `ASR`：当 `sr_type = 10` 时。
+  - `ROR`：当 `sr_type = 11` 时。
+- **`<amount>`**：移位量，范围为 1 到 31（当 `<shift>` 为 `LSL` 或 `ROR` 时）或 1 到 32（当 `<shift>` 为 `LSR` 或 `ASR` 时），在 `imm3:imm2` 字段中编码为 `<amount>` 对 32 取模。
+
+#### 4.241.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  shifted = Shift(R[m], shift_t, shift_n, APSR.C);
+  (result, carry, overflow) = AddWithCarry(R[n], NOT(shifted), '1');
+  R[d] = result;
+  if setflags then
+    APSR.N = result[31];
+    APSR.Z = IsZeroBit(result);
+    APSR.C = carry;
+    APSR.V = overflow;
+```
+
+#### 4.241.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.242. SVC：超级用户调用
+
+超级用户调用（Supervisor Call）。超级用户调用指令生成对系统超级用户的调用。
+
+它用作对操作系统的调用，以提供某种服务。
+
+在较早版本的 Arm 架构中，SVC 称为 SWI（软件中断，Software Interrupt）。
+
+#### 4.242.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-447](FigureC2-447.png)
+
+**T1 变体**
+
+```arm
+SVC{<c>}{<q>} {#}<imm>
+```
+
+**解码**
+
+```arm
+imm32 = ZeroExtend(imm8, 32);
+// imm32 用于汇编/反汇编。某些系统中的 SVC 处理程序在软件中解释 imm8，
+// 例如用于确定所需的服务。
+```
+
+#### 4.242.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<imm>`**：8 位无符号立即数，范围 0 到 255，编码在 `imm8` 字段中。
+
+#### 4.242.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  CallSupervisor();
+```
+
+### 4.243. SXTAB：有符号扩展并加字节
+
+有符号扩展并加字节（Signed Extend and Add Byte）。有符号扩展并加字节从一个寄存器中提取 8 位值，将其符号扩展为 32 位，把结果加到另一个寄存器中的值上，并把最终结果写入目标寄存器。本指令可以指定在提取该 8 位值之前进行 0、8、16 或 24 位的循环移位。
+
+#### 4.243.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-448](FigureC2-448.png)
+
+**T1 变体**
+
+```arm
+SXTAB{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, ROR #<amount>}
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE SXTB;
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+rotation = UInt(rotate:'000');
+if d IN {13,15} || n == 13 || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.243.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<amount>`**：循环移位量，编码在 `rotate` 字段中。取值如下：
+  - `0`：当 `rotate = 00` 时。
+  - `8`：当 `rotate = 01` 时。
+  - `16`：当 `rotate = 10` 时。
+  - `24`：当 `rotate = 11` 时。
+
+`ROR #<amount>` 可以省略，表示循环移位量为 0。当 `rotate == 0b00` 时为首选的反汇编形式。
+
+#### 4.243.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  rotated = ROR(R[m], rotation);
+  R[d] = R[n] + SignExtend(rotated[7:0], 32);
+```
+
+#### 4.243.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.244. SXTAB16：有符号扩展并加字节 16
+
+有符号扩展并加字节 16（Signed Extend and Add Byte 16）。有符号扩展并加字节 16 从一个寄存器中提取两个 8 位值，将二者分别符号扩展为 16 位，把结果加到另一个寄存器中的两个 16 位值上，并把最终结果写入目标寄存器。本指令可以指定在提取这些 8 位值之前进行 0、8、16 或 24 位的循环移位。
+
+#### 4.244.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-449](FigureC2-449.png)
+
+**T1 变体**
+
+```arm
+SXTAB16{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, ROR #<amount>}
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE SXTB16;
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+rotation = UInt(rotate:'000');
+if d IN {13,15} || n == 13 || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.244.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<amount>`**：循环移位量，编码在 `rotate` 字段中。取值如下：
+  - `0`：当 `rotate = 00` 时。
+  - `8`：当 `rotate = 01` 时。
+  - `16`：当 `rotate = 10` 时。
+  - `24`：当 `rotate = 11` 时。
+
+`ROR #<amount>` 可以省略，表示循环移位量为 0。当 `rotate == 0b00` 时为首选的反汇编形式。
+
+#### 4.244.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  rotated = ROR(R[m], rotation);
+  bits(32) result;
+  result[15:0] = R[n][15:0] + SignExtend(rotated[7:0], 16);
+  result[31:16] = R[n][31:16] + SignExtend(rotated[23:16], 16);
+  R[d] = result;
+```
+
+#### 4.244.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.245. SXTAH：有符号扩展并加半字
+
+有符号扩展并加半字（Signed Extend and Add Halfword）。有符号扩展并加半字从一个寄存器中提取 16 位值，将其符号扩展为 32 位，把结果加到另一个寄存器中的值上，并把最终结果写入目标寄存器。本指令可以指定在提取该 16 位值之前进行 0、8、16 或 24 位的循环移位。
+
+#### 4.245.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-450](FigureC2-450.png)
+
+**T1 变体**
+
+```arm
+SXTAH{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, ROR #<amount>}
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE SXTH;
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+rotation = UInt(rotate:'000');
+if d IN {13,15} || n == 13 || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.245.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<amount>`**：循环移位量，编码在 `rotate` 字段中。取值如下：
+  - `0`：当 `rotate = 00` 时。
+  - `8`：当 `rotate = 01` 时。
+  - `16`：当 `rotate = 10` 时。
+  - `24`：当 `rotate = 11` 时。
+
+`ROR #<amount>` 可以省略，表示循环移位量为 0。当 `rotate == 0b00` 时为首选的反汇编形式。
+
+#### 4.245.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  rotated = ROR(R[m], rotation);
+  R[d] = R[n] + SignExtend(rotated[15:0], 32);
+```
+
+#### 4.245.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.246. SXTB：有符号扩展字节
+
+有符号扩展字节（Signed Extend Byte）。有符号扩展字节从一个寄存器中提取 8 位值，将其符号扩展为 32 位，并把结果写入目标寄存器。本指令可以指定在提取该 8 位值之前进行 0、8、16 或 24 位的循环移位。
+
+#### 4.246.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-451](FigureC2-451.png)
+
+**T1 变体**
+
+```arm
+SXTB{<c>}{<q>} {<Rd>,} <Rm>
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);
+m = UInt(Rm);
+rotation = 0;
+```
+
+#### 4.246.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-452](FigureC2-452.png)
+
+**T2 变体**
+
+```arm
+SXTB{<c>}.W {<Rd>,} <Rm>
+// <Rd>、<Rm> 可用 T1 表示
+SXTB{<c>}{<q>} {<Rd>,} <Rm> {, ROR #<amount>}
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);
+m = UInt(Rm);
+rotation = UInt(rotate:'000');
+if d IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.246.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：通用源寄存器，编码在 `Rm` 字段中。
+- **`<amount>`**：循环移位量，编码在 `rotate` 字段中。取值如下：
+  - `0`：当 `rotate = 00` 时。
+  - `8`：当 `rotate = 01` 时。
+  - `16`：当 `rotate = 10` 时。
+  - `24`：当 `rotate = 11` 时。
+
+`ROR #<amount>` 可以省略，表示循环移位量为 0。当 `rotate == 0b00` 时为首选的反汇编形式。
+
+#### 4.246.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  rotated = ROR(R[m], rotation);
+  R[d] = SignExtend(rotated[7:0], 32);
+```
+
+#### 4.246.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.247. SXTB16：有符号扩展字节 16
+
+有符号扩展字节 16（Signed Extend Byte 16）。有符号扩展字节 16 从一个寄存器中提取两个 8 位值，将二者分别符号扩展为 16 位，并把结果写入目标寄存器。本指令可以指定在提取这些 8 位值之前进行 0、8、16 或 24 位的循环移位。
+
+#### 4.247.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-453](FigureC2-453.png)
+
+**T1 变体**
+
+```arm
+SXTB16{<c>}{<q>} {<Rd>,} <Rm> {, ROR #<amount>}
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+m = UInt(Rm);
+rotation = UInt(rotate:'000');
+if d IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.247.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：通用源寄存器，编码在 `Rm` 字段中。
+- **`<amount>`**：循环移位量，编码在 `rotate` 字段中。取值如下：
+  - `0`：当 `rotate = 00` 时。
+  - `8`：当 `rotate = 01` 时。
+  - `16`：当 `rotate = 10` 时。
+  - `24`：当 `rotate = 11` 时。
+
+`ROR #<amount>` 可以省略，表示循环移位量为 0。当 `rotate == 0b00` 时为首选的反汇编形式。
+
+#### 4.247.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  rotated = ROR(R[m], rotation);
+  bits(32) result;
+  result[15:0] = SignExtend(rotated[7:0], 16);
+  result[31:16] = SignExtend(rotated[23:16], 16);
+  R[d] = result;
+```
+
+#### 4.247.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.248. SXTH：有符号扩展半字
+
+有符号扩展半字（Signed Extend Halfword）。有符号扩展半字从一个寄存器中提取 16 位值，将其符号扩展为 32 位，并把结果写入目标寄存器。本指令可以指定在提取该 16 位值之前进行 0、8、16 或 24 位的循环移位。
+
+#### 4.248.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-454](FigureC2-454.png)
+
+**T1 变体**
+
+```arm
+SXTH{<c>}{<q>} {<Rd>,} <Rm>
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);
+m = UInt(Rm);
+rotation = 0;
+```
+
+#### 4.248.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-455](FigureC2-455.png)
+
+**T2 变体**
+
+```arm
+SXTH{<c>}.W {<Rd>,} <Rm>
+// <Rd>、<Rm> 可用 T1 表示
+SXTH{<c>}{<q>} {<Rd>,} <Rm> {, ROR #<amount>}
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);
+m = UInt(Rm);
+rotation = UInt(rotate:'000');
+if d IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.248.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：通用源寄存器，编码在 `Rm` 字段中。
+- **`<amount>`**：循环移位量，编码在 `rotate` 字段中。取值如下：
+  - `0`：当 `rotate = 00` 时。
+  - `8`：当 `rotate = 01` 时。
+  - `16`：当 `rotate = 10` 时。
+  - `24`：当 `rotate = 11` 时。
+
+`ROR #<amount>` 可以省略，表示循环移位量为 0。当 `rotate == 0b00` 时为首选的反汇编形式。
+
+#### 4.248.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  rotated = ROR(R[m], rotation);
+  R[d] = SignExtend(rotated[15:0], 32);
+```
+
+#### 4.248.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.249. TBB, TBH：表分支字节或半字
+
+表分支字节或半字（Table Branch Byte or Halfword）。表分支字节使用由单字节偏移组成的表，执行 PC 相对的向前分支。基址寄存器提供指向该表的指针，第二个寄存器提供进入该表的索引。分支长度为从表中取回的字节值的两倍。
+
+表分支半字使用由单半字偏移组成的表，执行 PC 相对的向前分支。基址寄存器提供指向该表的指针，第二个寄存器提供进入该表的索引。分支长度为从表中取回的半字值的两倍。
+
+#### 4.249.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-456](FigureC2-456.png)
+
+**字节变体**（当 `H == 0` 时适用）
+
+```arm
+TBB{<c>}{<q>} [<Rn>, <Rm>]
+// IT 块外或 IT 块内最后一条
+```
+
+**半字变体**（当 `H == 1` 时适用）
+
+```arm
+TBH{<c>}{<q>} [<Rn>, <Rm>, LSL #1]
+// IT 块外或 IT 块内最后一条
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+n = UInt(Rn);  m = UInt(Rm);
+is_tbh = (H == '1');
+if n == 13 || m IN {13,15} then UNPREDICTABLE;
+if InITBlock() && !LastInITBlock() then UNPREDICTABLE;
+```
+
+#### 4.249.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rn>`**：存放分支长度表的地址的通用基址寄存器，编码在 `Rn` 字段中。可以使用 PC。若使用 PC，则该表紧接在本指令之后。
+- **`<Rm>`**：对字节变体，是通用索引寄存器，编码在 `Rm` 字段中。该寄存器含有一个指向表中单个字节的整数。该表内的偏移为该索引的值。对半字变体，是通用索引寄存器，编码在 `Rm` 字段中。该寄存器含有一个指向表中某个半字的整数。该表内的偏移为该索引值的两倍。
+
+#### 4.249.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  if is_tbh then
+    halfwords = UInt(MemU[R[n]+LSL(R[m],1), 2]);
+  else
+    halfwords = UInt(MemU[R[n]+R[m], 1]);
+  BranchTo(PC + 2*halfwords);
+```
+
+### 4.250. TEQ (immediate)：测试等价（立即数）
+
+测试等价（立即数）（Test Equivalence (immediate)）。测试等价（立即数）对一个寄存器值与一个立即数值执行异或运算。它根据结果更新条件标志，并丢弃结果。
+
+#### 4.250.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-457](FigureC2-457.png)
+
+**T1 变体**
+
+```arm
+TEQ{<c>}{<q>} <Rn>, #<const>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+n = UInt(Rn);
+(imm32, carry) = T32ExpandImm_C(i:imm3:imm8, APSR.C);
+if n IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.250.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rn>`**：通用源寄存器，编码在 `Rn` 字段中。
+- **`<const>`**：由编码在 `i:imm3:imm8` 字段中的 12 位立即数推导出的立即数值。取值范围见 C1.5 修改的立即数常量。
+
+#### 4.250.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  result = R[n] EOR imm32;
+  APSR.N = result[31];
+  APSR.Z = IsZeroBit(result);
+  APSR.C = carry;
+  // APSR.V 不变
+```
+
+#### 4.250.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.251. TEQ (register)：测试等价（寄存器）
+
+测试等价（寄存器）（Test Equivalence (register)）。测试等价（寄存器）对一个寄存器值与一个可选移位的寄存器值执行异或运算。它根据结果更新条件标志，并丢弃结果。
+
+#### 4.251.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-458](FigureC2-458.png)
+
+**带扩展的循环右移变体**（当 `imm3 == 000 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+TEQ{<c>}{<q>} <Rn>, <Rm>, RRX
+```
+
+**按值移位或循环移位变体**（当 `!(imm3 == 000 && imm2 == 00 && sr_type == 11)` 时适用）
+
+```arm
+TEQ{<c>}{<q>} <Rn>, <Rm> {, <shift> #<amount>}
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+n = UInt(Rn);  m = UInt(Rm);
+(shift_t, shift_n) = DecodeImmShift(sr_type, imm3:imm2);
+if n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.251.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<shift>`**：要对第二个源寄存器施加的移位类型，编码在 `sr_type` 字段中。取值如下：
+  - `LSL`：当 `sr_type = 00` 时。
+  - `LSR`：当 `sr_type = 01` 时。
+  - `ASR`：当 `sr_type = 10` 时。
+  - `ROR`：当 `sr_type = 11` 时。
+- **`<amount>`**：移位量，范围为 1 到 31（当 `<shift>` 为 `LSL` 或 `ROR` 时）或 1 到 32（当 `<shift>` 为 `LSR` 或 `ASR` 时），在 `imm3:imm2` 字段中编码为 `<amount>` 对 32 取模。
+
+#### 4.251.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  (shifted, carry) = Shift_C(R[m], shift_t, shift_n, APSR.C);
+  result = R[n] EOR shifted;
+  APSR.N = result[31];
+  APSR.Z = IsZeroBit(result);
+  APSR.C = carry;
+  // APSR.V 不变
+```
+
+#### 4.251.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.252. TST (immediate)：测试（立即数）
+
+测试（立即数）（Test (immediate)）。测试（立即数）对一个寄存器值与一个立即数值执行按位与运算。它根据结果更新条件标志，并丢弃结果。
+
+#### 4.252.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-459](FigureC2-459.png)
+
+**T1 变体**
+
+```arm
+TST{<c>}{<q>} <Rn>, #<const>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+n = UInt(Rn);
+(imm32, carry) = T32ExpandImm_C(i:imm3:imm8, APSR.C);
+if n IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.252.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rn>`**：通用源寄存器，编码在 `Rn` 字段中。
+- **`<const>`**：由编码在 `i:imm3:imm8` 字段中的 12 位立即数推导出的立即数值。取值范围见 C1.5 修改的立即数常量。
+
+#### 4.252.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  result = R[n] AND imm32;
+  APSR.N = result[31];
+  APSR.Z = IsZeroBit(result);
+  APSR.C = carry;
+  // APSR.V 不变
+```
+
+#### 4.252.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.253. TST (register)：测试（寄存器）
+
+测试（寄存器）（Test (register)）。测试（寄存器）对一个寄存器值与一个可选移位的寄存器值执行按位与运算。它根据结果更新条件标志，并丢弃结果。
+
+#### 4.253.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-460](FigureC2-460.png)
+
+**T1 变体**
+
+```arm
+TST{<c>}{<q>} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+n = UInt(Rn);  m = UInt(Rm);
+(shift_t, shift_n) = (SRType_LSL, 0);
+```
+
+#### 4.253.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-461](FigureC2-461.png)
+
+**带扩展的循环右移变体**（当 `imm3 == 000 && imm2 == 00 && sr_type == 11` 时适用）
+
+```arm
+TST{<c>}{<q>} <Rn>, <Rm>, RRX
+```
+
+**按值移位或循环移位变体**（当 `!(imm3 == 000 && imm2 == 00 && sr_type == 11)` 时适用）
+
+```arm
+TST{<c>}.W <Rn>, <Rm>
+// <Rn>、<Rm> 可用 T1 表示
+TST{<c>}{<q>} <Rn>, <Rm> {, <shift> #<amount>}
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+n = UInt(Rn);  m = UInt(Rm);
+(shift_t, shift_n) = DecodeImmShift(sr_type, imm3:imm2);
+if n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.253.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<shift>`**：要对第二个源寄存器施加的移位类型，编码在 `sr_type` 字段中。取值如下：
+  - `LSL`：当 `sr_type = 00` 时。
+  - `LSR`：当 `sr_type = 01` 时。
+  - `ASR`：当 `sr_type = 10` 时。
+  - `ROR`：当 `sr_type = 11` 时。
+- **`<amount>`**：移位量，范围为 1 到 31（当 `<shift>` 为 `LSL` 或 `ROR` 时）或 1 到 32（当 `<shift>` 为 `LSR` 或 `ASR` 时），在 `imm3:imm2` 字段中编码为 `<amount>` 对 32 取模。
+
+#### 4.253.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  (shifted, carry) = Shift_C(R[m], shift_t, shift_n, APSR.C);
+  result = R[n] AND shifted;
+  APSR.N = result[31];
+  APSR.Z = IsZeroBit(result);
+  APSR.C = carry;
+  // APSR.V 不变
+```
+
+#### 4.253.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与下列各项无关：
+  - 其任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+- 异步异常的接受时刻不因下列任何一项而变化：
+  - 本指令所用任何寄存器中所提供的数据值。
+  - N、Z、C、V 标志的取值。
+
+### 4.254. TT, TTT, TTA, TTAT：测试目标
+
+测试目标（Test Target, Test Target Unprivileged, Test Target Alternate Domain, Test Target Alternate Domain Unprivileged）。测试目标（TT）查询某内存位置的安全状态与访问权限。
+
+测试目标非特权（TTT）针对对该位置的未特权访问，查询某内存位置的安全状态与访问权限。
+
+测试目标备用域（TTA）与测试目标备用域非特权（TTAT）针对对该位置的非安全访问，查询某内存位置的安全状态与访问权限。这些指令仅在安全状态下执行时有效，若从非安全状态使用则为 UNDEFINED。
+
+这些指令在目标寄存器中返回安全状态与访问权限。目标寄存器的格式见 TT_RESP。
+
+#### 4.254.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-462](FigureC2-462.png)
+
+**TT 变体**（当 `A == 0 && T == 0` 时适用）
+
+```arm
+TT{<c>}{<q>} <Rd>, <Rn>
+```
+
+**TTA 变体**（当 `A == 1 && T == 0` 时适用）
+
+```arm
+TTA{<c>}{<q>} <Rd>, <Rn>
+```
+
+**TTAT 变体**（当 `A == 1 && T == 1` 时适用）
+
+```arm
+TTAT{<c>}{<q>} <Rd>, <Rn>
+```
+
+**TTT 变体**（当 `A == 0 && T == 1` 时适用）
+
+```arm
+TTT{<c>}{<q>} <Rd>, <Rn>
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);  n = UInt(Rn);  alt = (A == '1');  forceunpriv = (T == '1');
+if d IN {13,15} || n == 15 then UNPREDICTABLE;
+if alt && !IsSecure() then UNDEFINED;
+```
+
+#### 4.254.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：目标通用寄存器，目标测试的状态结果写入其中，编码在 `Rd` 字段中。
+- **`<Rn>`**：通用基址寄存器，编码在 `Rn` 字段中。
+
+#### 4.254.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  addr = R[n];
+  R[d] = TTResp(addr, alt, forceunpriv);
+```
+
+### 4.255. UADD16：无符号加 16
+
+无符号加 16（Unsigned Add 16）。无符号加 16 执行两次 16 位无符号整数加法，并把结果写入目标寄存器。它根据加法结果设置 APSR.GE 位。
+
+#### 4.255.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-463](FigureC2-463.png)
+
+**T1 变体**
+
+```arm
+UADD16{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.255.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.255.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  sum1 = UInt(R[n][15:0]) + UInt(R[m][15:0]);
+  sum2 = UInt(R[n][31:16]) + UInt(R[m][31:16]);
+  R[d] = sum2[15:0] : sum1[15:0];
+  APSR.GE[1:0] = if sum1 >= 0x10000 then '11' else '00';
+  APSR.GE[3:2] = if sum2 >= 0x10000 then '11' else '00';
+```
+
+#### 4.255.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.256. UADD8：无符号加 8
+
+无符号加 8（Unsigned Add 8）。无符号加 8 执行四次 8 位无符号整数加法，并把结果写入目标寄存器。它根据加法结果设置 APSR.GE 位。
+
+#### 4.256.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-464](FigureC2-464.png)
+
+**T1 变体**
+
+```arm
+UADD8{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.256.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.256.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  sum1 = UInt(R[n][7:0]) + UInt(R[m][7:0]);
+  sum2 = UInt(R[n][15:8]) + UInt(R[m][15:8]);
+  sum3 = UInt(R[n][23:16]) + UInt(R[m][23:16]);
+  sum4 = UInt(R[n][31:24]) + UInt(R[m][31:24]);
+  R[d] = sum4[7:0] : sum3[7:0] : sum2[7:0] : sum1[7:0];
+  APSR.GE[0] = if sum1 >= 0x100 then '1' else '0';
+  APSR.GE[1] = if sum2 >= 0x100 then '1' else '0';
+  APSR.GE[2] = if sum3 >= 0x100 then '1' else '0';
+  APSR.GE[3] = if sum4 >= 0x100 then '1' else '0';
+```
+
+#### 4.256.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.257. UASX：无符号加减交换
+
+无符号加减交换（Unsigned Add and Subtract with Exchange）。无符号加减交换交换第二个操作数的两个半字，执行一次无符号 16 位整数加法和一次无符号 16 位减法，并把结果写入目标寄存器。它根据结果设置 APSR.GE 位。
+
+#### 4.257.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-465](FigureC2-465.png)
+
+**T1 变体**
+
+```arm
+UASX{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.257.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.257.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  diff = UInt(R[n][15:0]) - UInt(R[m][31:16]);
+  sum  = UInt(R[n][31:16]) + UInt(R[m][15:0]);
+  R[d] = sum[15:0] : diff[15:0];
+  APSR.GE[1:0] = if diff >= 0 then '11' else '00';
+  APSR.GE[3:2] = if sum >= 0x10000 then '11' else '00';
+```
+
+#### 4.257.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.258. UBFX：无符号位段提取
+
+无符号位段提取（Unsigned Bit Field Extract）。无符号位段提取从某个寄存器中任意位置提取任意数量的相邻位，把它们零扩展到 32 位，并把结果写入目标寄存器。
+
+#### 4.258.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-466](FigureC2-466.png)
+
+**T1 变体**
+
+```arm
+UBFX{<c>}{<q>} <Rd>, <Rn>, #<lsb>, #<width>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+lsbit = UInt(imm3:imm2);
+widthminus1 = UInt(widthm1);
+msbit = lsbit + widthminus1;
+if msbit > 31 then UNPREDICTABLE;
+if d IN {13,15} || n IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.258.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `msbit > 31`，则必须出现以下行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 目标寄存器中的值为 UNKNOWN。
+
+#### 4.258.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：通用源寄存器，编码在 `Rn` 字段中。
+- **`<lsb>`**：位段中最低有效位的位号，取值范围为 0 至 31，编码在 `imm3:imm2` 字段中。
+- **`<width>`**：位段的宽度，取值范围为 1 至 32-`<lsb>`，以 `<width>`-1 的形式编码在 `widthm1` 字段中。
+
+#### 4.258.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  if msbit <= 31 then
+    R[d] = ZeroExtend(R[n][msbit:lsbit], 32);
+  else
+    R[d] = bits(32) UNKNOWN;
+```
+
+#### 4.258.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.259. UDF：永久未定义
+
+永久未定义（Permanently Undefined）。永久未定义产生未定义指令异常。
+
+#### 4.259.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-467](FigureC2-467.png)
+
+**T1 变体**
+
+```arm
+UDF{<c>}{<q>} {#}<imm>
+```
+
+**解码**
+
+```arm
+imm32 = ZeroExtend(imm8, 32);
+// imm32 仅用于汇编与反汇编，硬件忽略它。
+```
+
+#### 4.259.2. 编码 T2
+
+适用于 Armv8-M。
+
+![FigureC2-468](FigureC2-468.png)
+
+**T2 变体**
+
+```arm
+UDF{<c>}.W {#}<imm>
+// <imm> 可在 T1 中表示
+UDF{<c>}{<q>} {#}<imm>
+```
+
+**解码**
+
+```arm
+imm32 = ZeroExtend(imm4:imm12, 32);
+// imm32 仅用于汇编与反汇编，硬件忽略它。
+```
+
+#### 4.259.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。Arm 不推荐使用 AL 以外的任何 `<c>` 取值。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<imm>`**：对编码 T1 而言，是取值 0 至 255 的 8 位无符号立即数，编码在 `imm8` 字段中。PE 忽略该常量的值。对编码 T2 而言，是取值 0 至 65535 的 16 位无符号立即数，编码在 `imm4:imm12` 字段中。PE 忽略该常量的值。
+
+#### 4.259.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  UNDEFINED;
+```
+
+### 4.260. UDIV：无符号除法
+
+无符号除法（Unsigned Divide）。无符号除法用一个 32 位无符号整数寄存器值除以另一个 32 位无符号整数寄存器值，并把结果写入目标寄存器。条件标志不受影响。
+
+#### 4.260.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-469](FigureC2-469.png)
+
+**T1 变体**
+
+```arm
+UDIV{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.260.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：保存被除数的第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：保存除数的第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.260.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  if UInt(R[m]) == 0 then
+    if IntegerZeroDivideTrappingEnabled() then
+      GenerateIntegerZeroDivide();
+    else
+      result = 0;
+  else
+    result = RoundTowardsZero(Real(UInt(R[n])) / Real(UInt(R[m])));
+  R[d] = result[31:0];
+```
+
+### 4.261. UHADD16：无符号折半加 16
+
+无符号折半加 16（Unsigned Halving Add 16）。无符号折半加 16 执行两次无符号 16 位整数加法，把结果折半，并写入目标寄存器。
+
+#### 4.261.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-470](FigureC2-470.png)
+
+**T1 变体**
+
+```arm
+UHADD16{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.261.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.261.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  sum1 = UInt(R[n][15:0]) + UInt(R[m][15:0]);
+  sum2 = UInt(R[n][31:16]) + UInt(R[m][31:16]);
+  R[d] = sum2[16:1] : sum1[16:1];
+```
+
+#### 4.261.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.262. UHADD8：无符号折半加 8
+
+无符号折半加 8（Unsigned Halving Add 8）。无符号折半加 8 执行四次无符号 8 位整数加法，把结果折半，并写入目标寄存器。
+
+#### 4.262.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-471](FigureC2-471.png)
+
+**T1 变体**
+
+```arm
+UHADD8{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.262.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.262.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  sum1 = UInt(R[n][7:0]) + UInt(R[m][7:0]);
+  sum2 = UInt(R[n][15:8]) + UInt(R[m][15:8]);
+  sum3 = UInt(R[n][23:16]) + UInt(R[m][23:16]);
+  sum4 = UInt(R[n][31:24]) + UInt(R[m][31:24]);
+  R[d] = sum4[8:1] : sum3[8:1] : sum2[8:1] : sum1[8:1];
+```
+
+#### 4.262.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.263. UHASX：无符号折半加减交换
+
+无符号折半加减交换（Unsigned Halving Add and Subtract with Exchange）。无符号折半加减交换交换第二个操作数的两个半字，执行一次无符号 16 位整数加法和一次无符号 16 位减法，把结果折半，并写入目标寄存器。
+
+#### 4.263.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-472](FigureC2-472.png)
+
+**T1 变体**
+
+```arm
+UHASX{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.263.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.263.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  diff = UInt(R[n][15:0]) - UInt(R[m][31:16]);
+  sum  = UInt(R[n][31:16]) + UInt(R[m][15:0]);
+  R[d] = sum[16:1] : diff[16:1];
+```
+
+#### 4.263.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.264. UHSAX：无符号折半减加交换
+
+无符号折半减加交换（Unsigned Halving Subtract and Add with Exchange）。无符号折半减加交换交换第二个操作数的两个半字，执行一次无符号 16 位整数减法和一次无符号 16 位加法，把结果折半，并写入目标寄存器。
+
+#### 4.264.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-473](FigureC2-473.png)
+
+**T1 变体**
+
+```arm
+UHSAX{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.264.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.264.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  sum  = UInt(R[n][15:0]) + UInt(R[m][31:16]);
+  diff = UInt(R[n][31:16]) - UInt(R[m][15:0]);
+  R[d] = diff[16:1] : sum[16:1];
+```
+
+#### 4.264.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.265. UHSUB16：无符号折半减 16
+
+无符号折半减 16（Unsigned Halving Subtract 16）。无符号折半减 16 执行两次无符号 16 位整数减法，把结果折半，并写入目标寄存器。
+
+#### 4.265.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-474](FigureC2-474.png)
+
+**T1 变体**
+
+```arm
+UHSUB16{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.265.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.265.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  diff1 = UInt(R[n][15:0]) - UInt(R[m][15:0]);
+  diff2 = UInt(R[n][31:16]) - UInt(R[m][31:16]);
+  R[d]  = diff2[16:1] : diff1[16:1];
+```
+
+#### 4.265.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.266. UHSUB8：无符号折半减 8
+
+无符号折半减 8（Unsigned Halving Subtract 8）。无符号折半减 8 执行四次无符号 8 位整数减法，把结果折半，并写入目标寄存器。
+
+#### 4.266.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-475](FigureC2-475.png)
+
+**T1 变体**
+
+```arm
+UHSUB8{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.266.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.266.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  diff1 = UInt(R[n][7:0]) - UInt(R[m][7:0]);
+  diff2 = UInt(R[n][15:8]) - UInt(R[m][15:8]);
+  diff3 = UInt(R[n][23:16]) - UInt(R[m][23:16]);
+  diff4 = UInt(R[n][31:24]) - UInt(R[m][31:24]);
+  R[d]  = diff4[8:1] : diff3[8:1] : diff2[8:1] : diff1[8:1];
+```
+
+#### 4.266.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.267. UMAAL：无符号乘加累加长
+
+无符号乘加累加长（Unsigned Multiply Accumulate Accumulate Long）。无符号乘加累加长把两个无符号 32 位值相乘得到一个 64 位值，加上两个无符号 32 位值，并把 64 位结果写入两个寄存器。
+
+#### 4.267.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-476](FigureC2-476.png)
+
+**T1 变体**
+
+```arm
+UMAAL{<c>}{<q>} <RdLo>, <RdHi>, <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+dLo = UInt(RdLo);
+dHi = UInt(RdHi);
+n = UInt(Rn);
+m = UInt(Rm);
+if dLo IN {13,15} || dHi IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+if dHi == dLo then UNPREDICTABLE;
+```
+
+#### 4.267.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `dHi == dLo`，则必须出现以下行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 目标寄存器中的值为 UNKNOWN。
+
+#### 4.267.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<RdLo>`**：保存第一个加数、并作为结果低 32 位目标寄存器的通用源寄存器，编码在 `RdLo` 字段中。
+- **`<RdHi>`**：保存第二个加数、并作为结果高 32 位目标寄存器的通用源寄存器，编码在 `RdHi` 字段中。
+- **`<Rn>`**：保存被乘数的第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：保存乘数的第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.267.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  result = UInt(R[n]) * UInt(R[m]) + UInt(R[dHi]) + UInt(R[dLo]);
+  R[dHi] = result[63:32];
+  R[dLo] = result[31:0];
+```
+
+#### 4.267.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.268. UMLAL：无符号乘加长
+
+无符号乘加长（Unsigned Multiply Accumulate Long）。无符号乘加长把两个无符号 32 位值相乘得到一个 64 位值，并把该值与一个 64 位值累加。
+
+#### 4.268.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-477](FigureC2-477.png)
+
+**T1 变体**
+
+```arm
+UMLAL{<c>}{<q>} <RdLo>, <RdHi>, <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+dLo = UInt(RdLo);
+dHi = UInt(RdHi);
+n = UInt(Rn);
+m = UInt(Rm);
+setflags = FALSE;
+if dLo IN {13,15} || dHi IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+if dHi == dLo then UNPREDICTABLE;
+```
+
+#### 4.268.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `dHi == dLo`，则必须出现以下行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 目标寄存器中的值为 UNKNOWN。
+
+#### 4.268.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<RdLo>`**：保存加数低 32 位、并作为结果低 32 位目标寄存器的通用源寄存器，编码在 `RdLo` 字段中。
+- **`<RdHi>`**：保存加数高 32 位、并作为结果高 32 位目标寄存器的通用源寄存器，编码在 `RdHi` 字段中。
+- **`<Rn>`**：保存被乘数的第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：保存乘数的第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.268.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  result = UInt(R[n]) * UInt(R[m]) + UInt(R[dHi]:R[dLo]);
+  R[dHi] = result[63:32];
+  R[dLo] = result[31:0];
+```
+
+#### 4.268.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.269. UMULL：无符号乘长
+
+无符号乘长（Unsigned Multiply Long）。无符号乘长把两个 32 位无符号值相乘得到一个 64 位结果。
+
+#### 4.269.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-478](FigureC2-478.png)
+
+**T1 变体**
+
+```arm
+UMULL{<c>}{<q>} <RdLo>, <RdHi>, <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+dLo = UInt(RdLo);
+dHi = UInt(RdHi);
+n = UInt(Rn);
+m = UInt(Rm);
+setflags = FALSE;
+if dLo IN {13,15} || dHi IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+if dHi == dLo then UNPREDICTABLE;
+```
+
+#### 4.269.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `dHi == dLo`，则必须出现以下行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 目标寄存器中的值为 UNKNOWN。
+
+#### 4.269.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<RdLo>`**：结果低 32 位的通用目标寄存器，编码在 `RdLo` 字段中。
+- **`<RdHi>`**：结果高 32 位的通用目标寄存器，编码在 `RdHi` 字段中。
+- **`<Rn>`**：保存被乘数的第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：保存乘数的第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.269.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  result = UInt(R[n]) * UInt(R[m]);
+  R[dHi] = result[63:32];
+  R[dLo] = result[31:0];
+```
+
+#### 4.269.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.270. UQADD16：无符号饱和加 16
+
+无符号饱和加 16（Unsigned Saturating Add 16）。无符号饱和加 16 执行两次无符号 16 位整数加法，把结果饱和到 16 位无符号整数范围 0 至 2¹⁶-1，并写入目标寄存器。
+
+#### 4.270.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-479](FigureC2-479.png)
+
+**T1 变体**
+
+```arm
+UQADD16{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.270.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.270.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  sum1 = UInt(R[n][15:0]) + UInt(R[m][15:0]);
+  sum2 = UInt(R[n][31:16]) + UInt(R[m][31:16]);
+  bits(32) result;
+  result[15:0]  = UnsignedSat(sum1, 16);
+  result[31:16] = UnsignedSat(sum2, 16);
+  R[d] = result;
+```
+
+### 4.271. UQADD8：无符号饱和加 8
+
+无符号饱和加 8（Unsigned Saturating Add 8）。无符号饱和加 8 执行四次无符号 8 位整数加法，把结果饱和到 8 位无符号整数范围 0 至 2⁸-1，并写入目标寄存器。
+
+#### 4.271.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-480](FigureC2-480.png)
+
+**T1 变体**
+
+```arm
+UQADD8{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.271.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.271.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  sum1 = UInt(R[n][7:0]) + UInt(R[m][7:0]);
+  sum2 = UInt(R[n][15:8]) + UInt(R[m][15:8]);
+  sum3 = UInt(R[n][23:16]) + UInt(R[m][23:16]);
+  sum4 = UInt(R[n][31:24]) + UInt(R[m][31:24]);
+  bits(32) result;
+  result[7:0]   = UnsignedSat(sum1, 8);
+  result[15:8]  = UnsignedSat(sum2, 8);
+  result[23:16] = UnsignedSat(sum3, 8);
+  result[31:24] = UnsignedSat(sum4, 8);
+  R[d] = result;
+```
+
+### 4.272. UQASX：无符号饱和加减交换
+
+无符号饱和加减交换（Unsigned Saturating Add and Subtract with Exchange）。无符号饱和加减交换交换第二个操作数的两个半字，执行一次无符号 16 位整数加法和一次无符号 16 位减法，把结果饱和到 16 位无符号整数范围 0 至 2¹⁶-1，并写入目标寄存器。
+
+#### 4.272.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-481](FigureC2-481.png)
+
+**T1 变体**
+
+```arm
+UQASX{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.272.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.272.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  diff = UInt(R[n][15:0]) - UInt(R[m][31:16]);
+  sum  = UInt(R[n][31:16]) + UInt(R[m][15:0]);
+  bits(32) result;
+  result[15:0]  = UnsignedSat(diff, 16);
+  result[31:16] = UnsignedSat(sum,  16);
+  R[d] = result;
+```
+
+### 4.273. UQRSHL (register)：无符号饱和舍入左移（寄存器）
+
+无符号饱和舍入左移（Unsigned Saturating Rounding Shift Left）。对通用寄存器中保存的 32 位值执行 0 至 32 位的无符号饱和舍入左移。移位量以 `Rm` 的最低字节读出。若移位量为负，则移位方向反转。
+
+#### 4.273.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-482](FigureC2-482.png)
+
+**T1: UQRSHL 变体**
+
+```arm
+UQRSHL<c><q> Rda, Rm
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+if !HasArchVersion(Armv8p1) then SEE "Related encodings";
+if !HaveMve() then UNDEFINED;
+da = UInt(Rda);
+m  = UInt(Rm);
+if Rda == '11x1' || Rm == '11x1' || Rm == Rda then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.273.2. 汇编符号（所有编码）
+
+- **`<c, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rda>`**：保存待移位值的通用源兼目标寄存器。
+- **`<Rm>`**：其最低 8 位保存移位量的通用源寄存器。
+
+#### 4.273.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  amount = SInt(R[m][7:0]);
+  op1    = UInt(R[da]);
+  op1    = op1 + (1 << (- 1 - amount));
+  (result, sat) = UnsignedSatQ((op1 << amount), 32);
+  if sat then APSR.Q = '1';
+  R[da] = result[31:0];
+```
+
+### 4.274. UQRSHLL (register)：无符号饱和舍入左移长（寄存器）
+
+无符号饱和舍入左移长（Unsigned Saturating Rounding Shift Left Long）。对保存在两个通用寄存器中的 64 位值执行 0 至 64 位的无符号饱和舍入左移。移位量以 `Rm` 的最低字节读出。若移位量为负，则移位方向反转。
+
+#### 4.274.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-483](FigureC2-483.png)
+
+**T1: UQRSHLL 变体**
+
+```arm
+UQRSHLL<c><q> RdaLo, RdaHi, #<saturate>, Rm
+```
+
+**解码**
+
+```arm
+if RdaHi == '111' then SEE "UQRSHL (register)";
+if !HaveMainExt() then UNDEFINED;
+if !HasArchVersion(Armv8p1) then SEE "Related encodings";
+if !HaveMve() then UNDEFINED;
+dah = UInt(RdaHi:'1');
+dal = UInt(RdaLo:'0');
+m   = UInt(Rm);
+saturateTo = if sat == '0' then 64 else 48;
+if RdaHi == '110' || Rm == '11x1' || Rm == RdaHi:'1' then CONSTRAINED_UNPREDICTABLE;
+if Rm == RdaLo:'0' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.274.2. 汇编符号（所有编码）
+
+- **`<c, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<RdaLo>`**：64 位源兼目标低半部分的通用寄存器，保存待移位的值。该寄存器必须是偶数号寄存器。
+- **`<RdaHi>`**：64 位源兼目标高半部分的通用寄存器，保存待移位的值。该寄存器必须是奇数号寄存器。
+- **`<saturate>`**：饱和所用的位位置。该参数必须是以下取值之一：
+  - `#64`，编码为 `sat = 0`。
+  - `#48`，编码为 `sat = 1`。
+- **`<Rm>`**：其最低 8 位保存移位量的通用源寄存器。
+
+#### 4.274.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  amount = SInt(R[m][7:0]);
+  op1    = UInt(R[dah]:R[dal]);
+  op1    = op1 + (1 << (- 1 - amount));
+  (shiftedOp, didSat) = UnsignedSatQ((op1 << amount), saturateTo);
+  result = ZeroExtend(shiftedOp, 64);
+  if didSat then APSR.Q = '1';
+  R[dah] = result[63:32];
+  R[dal] = result[31:0];
+```
+
+### 4.275. UQSAX：无符号饱和减加交换
+
+无符号饱和减加交换（Unsigned Saturating Subtract and Add with Exchange）。无符号饱和减加交换交换第二个操作数的两个半字，执行一次无符号 16 位整数减法和一次无符号 16 位加法，把结果饱和到 16 位无符号整数范围 0 至 2¹⁶-1，并写入目标寄存器。
+
+#### 4.275.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-484](FigureC2-484.png)
+
+**T1 变体**
+
+```arm
+UQSAX{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.275.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.275.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  sum  = UInt(R[n][15:0]) + UInt(R[m][31:16]);
+  diff = UInt(R[n][31:16]) - UInt(R[m][15:0]);
+  bits(32) result;
+  result[15:0]  = UnsignedSat(sum,  16);
+  result[31:16] = UnsignedSat(diff, 16);
+  R[d] = result;
+```
+
+### 4.276. UQSHL (immediate)：无符号饱和左移（立即数）
+
+无符号饱和左移（Unsigned Saturating Shift Left）。对通用寄存器中保存的 32 位值执行 1 至 32 位的无符号饱和左移。
+
+#### 4.276.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-485](FigureC2-485.png)
+
+**T1: UQSHL 变体**
+
+```arm
+UQSHL<c><q> Rda, #<imm>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+if !HasArchVersion(Armv8p1) then SEE "Related encodings";
+if !HaveMve() then UNDEFINED;
+da = UInt(Rda);
+(-, amount) = DecodeImmShift('10', immh:imml);
+if Rda == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.276.2. 汇编符号（所有编码）
+
+- **`<c, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rda>`**：保存待移位值的通用源兼目标寄存器。
+- **`<imm>`**：移位的位数，取值范围为 1-32。
+
+#### 4.276.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  op1 = UInt(R[da]);
+  (result, sat) = UnsignedSatQ((op1 << amount), 32);
+  if sat then APSR.Q = '1';
+  R[da] = result[31:0];
+```
+
+### 4.277. UQSHLL (immediate)：无符号饱和左移长（立即数）
+
+无符号饱和左移长（Unsigned Saturating Shift Left Long）。对保存在两个通用寄存器中的 64 位值执行 1 至 32 位的无符号饱和左移。
+
+#### 4.277.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-486](FigureC2-486.png)
+
+**T1: UQSHLL 变体**
+
+```arm
+UQSHLL<c><q> RdaLo, RdaHi, #<imm>
+```
+
+**解码**
+
+```arm
+if RdaHi == '111' then SEE "UQSHL (immediate)";
+if !HaveMainExt() then UNDEFINED;
+if !HasArchVersion(Armv8p1) then SEE "Related encodings";
+if !HaveMve() then UNDEFINED;
+dah = UInt(RdaHi:'1');
+dal = UInt(RdaLo:'0');
+(-, amount) = DecodeImmShift('10', immh:imml);
+if RdaHi == '110' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.277.2. 汇编符号（所有编码）
+
+- **`<c, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<RdaLo>`**：64 位源兼目标低半部分的通用寄存器，保存待移位的值。该寄存器必须是偶数号寄存器。
+- **`<RdaHi>`**：64 位源兼目标高半部分的通用寄存器，保存待移位的值。该寄存器必须是奇数号寄存器。
+- **`<imm>`**：移位的位数，取值范围为 1-32。
+
+#### 4.277.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  op1 = UInt(R[dah]:R[dal]);
+  (result, sat) = UnsignedSatQ((op1 << amount), 64);
+  if sat then APSR.Q = '1';
+  R[dah] = result[63:32];
+  R[dal] = result[31:0];
+```
+
+### 4.278. UQSUB16：无符号饱和减 16
+
+无符号饱和减 16（Unsigned Saturating Subtract 16）。无符号饱和减 16 执行两次无符号 16 位整数减法，把结果饱和到 16 位无符号整数范围 0 至 2¹⁶-1，并写入目标寄存器。
+
+#### 4.278.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-487](FigureC2-487.png)
+
+**T1 变体**
+
+```arm
+UQSUB16{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.278.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.278.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  diff1 = UInt(R[n][15:0]) - UInt(R[m][15:0]);
+  diff2 = UInt(R[n][31:16]) - UInt(R[m][31:16]);
+  bits(32) result;
+  result[15:0]  = UnsignedSat(diff1, 16);
+  result[31:16] = UnsignedSat(diff2, 16);
+  R[d] = result;
+```
+
+### 4.279. UQSUB8：无符号饱和减 8
+
+无符号饱和减 8（Unsigned Saturating Subtract 8）。无符号饱和减 8 执行四次无符号 8 位整数减法，把结果饱和到 8 位无符号整数范围 0 至 2⁸-1，并写入目标寄存器。
+
+#### 4.279.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-488](FigureC2-488.png)
+
+**T1 变体**
+
+```arm
+UQSUB8{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.279.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.279.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  diff1 = UInt(R[n][7:0]) - UInt(R[m][7:0]);
+  diff2 = UInt(R[n][15:8]) - UInt(R[m][15:8]);
+  diff3 = UInt(R[n][23:16]) - UInt(R[m][23:16]);
+  diff4 = UInt(R[n][31:24]) - UInt(R[m][31:24]);
+  bits(32) result;
+  result[7:0]   = UnsignedSat(diff1, 8);
+  result[15:8]  = UnsignedSat(diff2, 8);
+  result[23:16] = UnsignedSat(diff3, 8);
+  result[31:24] = UnsignedSat(diff4, 8);
+  R[d] = result;
+```
+
+### 4.280. URSHR (immediate)：无符号舍入右移（立即数）
+
+无符号舍入右移（Unsigned Rounding Shift Right）。对通用寄存器中保存的 32 位值执行 1 至 32 位的无符号舍入右移。
+
+#### 4.280.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-489](FigureC2-489.png)
+
+**T1: URSHR 变体**
+
+```arm
+URSHR<c><q> Rda, #<imm>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+if !HasArchVersion(Armv8p1) then SEE "Related encodings";
+if !HaveMve() then UNDEFINED;
+da = UInt(Rda);
+(-, amount) = DecodeImmShift('10', immh:imml);
+if Rda == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.280.2. 汇编符号（所有编码）
+
+- **`<c, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rda>`**：保存待移位值的通用源兼目标寄存器。
+- **`<imm>`**：移位的位数，取值范围为 1-32。
+
+#### 4.280.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  op1    = UInt(R[da]);
+  op1    = op1 + (1 << (amount - 1));
+  result = (op1 >> amount)[31:0];
+  R[da]  = result[31:0];
+```
+
+### 4.281. URSHRL (immediate)：无符号舍入右移长（立即数）
+
+无符号舍入右移长（Unsigned Rounding Shift Right Long）。对保存在两个通用寄存器中的 64 位值执行 1 至 32 位的无符号舍入右移。
+
+#### 4.281.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-490](FigureC2-490.png)
+
+**T1: URSHRL 变体**
+
+```arm
+URSHRL<c><q> RdaLo, RdaHi, #<imm>
+```
+
+**解码**
+
+```arm
+if RdaHi == '111' then SEE "URSHR (immediate)";
+if !HaveMainExt() then UNDEFINED;
+if !HasArchVersion(Armv8p1) then SEE "Related encodings";
+if !HaveMve() then UNDEFINED;
+dah = UInt(RdaHi:'1');
+dal = UInt(RdaLo:'0');
+(-, amount) = DecodeImmShift('10', immh:imml);
+if RdaHi == '110' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.281.2. 汇编符号（所有编码）
+
+- **`<c, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<RdaLo>`**：64 位源兼目标低半部分的通用寄存器，保存待移位的值。该寄存器必须是偶数号寄存器。
+- **`<RdaHi>`**：64 位源兼目标高半部分的通用寄存器，保存待移位的值。该寄存器必须是奇数号寄存器。
+- **`<imm>`**：移位的位数，取值范围为 1-32。
+
+#### 4.281.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  op1    = UInt(R[dah]:R[dal]);
+  op1    = op1 + (1 << (amount - 1));
+  result = (op1 >> amount)[63:0];
+  R[dah] = result[63:32];
+  R[dal] = result[31:0];
+```
+
+### 4.282. USAD8：无符号绝对差之和
+
+无符号绝对差之和（Unsigned Sum of Absolute Differences）。无符号绝对差之和执行四次无符号 8 位减法，并把各差值的绝对值相加。
+
+#### 4.282.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-491](FigureC2-491.png)
+
+**T1 变体**
+
+```arm
+USAD8{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.282.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.282.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  absdiff1 = Abs(UInt(R[n][7:0]) - UInt(R[m][7:0]));
+  absdiff2 = Abs(UInt(R[n][15:8]) - UInt(R[m][15:8]));
+  absdiff3 = Abs(UInt(R[n][23:16]) - UInt(R[m][23:16]));
+  absdiff4 = Abs(UInt(R[n][31:24]) - UInt(R[m][31:24]));
+  result = absdiff1 + absdiff2 + absdiff3 + absdiff4;
+  R[d] = result[31:0];
+```
+
+### 4.283. USADA8：无符号绝对差之和并累加
+
+无符号绝对差之和并累加（Unsigned Sum of Absolute Differences and Accumulate）。无符号绝对差之和并累加执行四次无符号 8 位减法，并把各差值的绝对值加到一个 32 位累加操作数上。
+
+#### 4.283.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-492](FigureC2-492.png)
+
+**T1 变体**
+
+```arm
+USADA8{<c>}{<q>} <Rd>, <Rn>, <Rm>, <Ra>
+```
+
+**解码**
+
+```arm
+if Ra == '1111' then SEE USAD8;
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+a = UInt(Ra);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} || a == 13 then UNPREDICTABLE;
+```
+
+#### 4.283.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<Ra>`**：保存加数的第三个通用源寄存器，编码在 `Ra` 字段中。
+
+#### 4.283.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  absdiff1 = Abs(UInt(R[n][7:0]) - UInt(R[m][7:0]));
+  absdiff2 = Abs(UInt(R[n][15:8]) - UInt(R[m][15:8]));
+  absdiff3 = Abs(UInt(R[n][23:16]) - UInt(R[m][23:16]));
+  absdiff4 = Abs(UInt(R[n][31:24]) - UInt(R[m][31:24]));
+  result = UInt(R[a]) + absdiff1 + absdiff2 + absdiff3 + absdiff4;
+  R[d] = result[31:0];
+```
+
+#### 4.283.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.284. USAT：无符号饱和
+
+无符号饱和（Unsigned Saturate）。无符号饱和把一个可选移位的带符号值饱和到选定的无符号范围。若操作发生饱和，则 Q 标志置 1。
+
+#### 4.284.1. 编码 T1
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-493](FigureC2-493.png)
+
+**算术右移变体**（当 `sh == 1 && !(imm3 == 000 && imm2 == 00)` 时适用）
+
+```arm
+USAT{<c>}{<q>} <Rd>, #<imm>, <Rn>, ASR #<amount>
+```
+
+**逻辑左移变体**（当 `sh == 0` 时适用）
+
+```arm
+USAT{<c>}{<q>} <Rd>, #<imm>, <Rn> {, LSL #<amount>}
+```
+
+**解码**
+
+```arm
+if sh == '1' && (imm3:imm2) == '00000' then
+  if HaveDSPExt() then
+    SEE USAT16;
+  else
+    UNDEFINED;
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+saturate_to = UInt(sat_imm);
+(shift_t, shift_n) = DecodeImmShift(sh:'0', imm3:imm2);
+if d IN {13,15} || n IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.284.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<imm>`**：饱和所用的位位置，取值范围为 0 至 31，编码在 `sat_imm` 字段中。
+- **`<Rn>`**：通用源寄存器，编码在 `Rn` 字段中。
+- **`<amount>`**：对算术右移变体而言，是移位量，取值范围为 1 至 31，以 `<amount>` 的形式编码在 `imm3:imm2` 字段中。对逻辑左移变体而言，是可选的移位量，取值范围为 0 至 31，默认为 0，编码在 `imm3:imm2` 字段中。
+
+#### 4.284.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  operand = Shift(R[n], shift_t, shift_n, APSR.C);
+  // 忽略 APSR.C
+  (result, sat) = UnsignedSatQ(SInt(operand), saturate_to);
+  R[d] = ZeroExtend(result, 32);
+  if sat then
+    APSR.Q = '1';
+```
+
+### 4.285. USAT16：无符号饱和 16
+
+无符号饱和 16（Unsigned Saturate 16）。无符号饱和 16 把两个带符号 16 位值饱和到选定的无符号范围。若操作发生饱和，则 Q 标志置 1。
+
+#### 4.285.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-494](FigureC2-494.png)
+
+**T1 变体**
+
+```arm
+USAT16{<c>}{<q>} <Rd>, #<imm>, <Rn>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+saturate_to = UInt(sat_imm);
+if d IN {13,15} || n IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.285.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<imm>`**：饱和所用的位位置，取值范围为 0 至 15，编码在 `sat_imm` 字段中。
+- **`<Rn>`**：通用源寄存器，编码在 `Rn` 字段中。
+
+#### 4.285.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  (result1, sat1) = UnsignedSatQ(SInt(R[n][15:0]), saturate_to);
+  (result2, sat2) = UnsignedSatQ(SInt(R[n][31:16]), saturate_to);
+  bits(32) result;
+  result[15:0]  = ZeroExtend(result1, 16);
+  result[31:16] = ZeroExtend(result2, 16);
+  R[d] = result;
+  if sat1 || sat2 then
+    APSR.Q = '1';
+```
+
+### 4.286. USAX：无符号减加交换
+
+无符号减加交换（Unsigned Subtract and Add with Exchange）。无符号减加交换交换第二个操作数的两个半字，执行一次无符号 16 位整数减法和一次无符号 16 位加法，并把结果写入目标寄存器。它根据结果设置 APSR.GE 位。
+
+#### 4.286.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-495](FigureC2-495.png)
+
+**T1 变体**
+
+```arm
+USAX{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.286.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.286.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  sum  = UInt(R[n][15:0]) + UInt(R[m][31:16]);
+  diff = UInt(R[n][31:16]) - UInt(R[m][15:0]);
+  R[d] = diff[15:0] : sum[15:0];
+  APSR.GE[1:0] = if sum >= 0x10000 then '11' else '00';
+  APSR.GE[3:2] = if diff >= 0 then '11' else '00';
+```
+
+#### 4.286.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.287. USUB16：无符号减 16
+
+无符号减 16（Unsigned Subtract 16）。无符号减 16 执行两次 16 位无符号整数减法，并把结果写入目标寄存器。它根据减法结果设置 APSR.GE 位。
+
+#### 4.287.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-496](FigureC2-496.png)
+
+**T1 变体**
+
+```arm
+USUB16{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.287.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.287.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  diff1 = UInt(R[n][15:0]) - UInt(R[m][15:0]);
+  diff2 = UInt(R[n][31:16]) - UInt(R[m][31:16]);
+  R[d]  = diff2[15:0] : diff1[15:0];
+  APSR.GE[1:0] = if diff1 >= 0 then '11' else '00';
+  APSR.GE[3:2] = if diff2 >= 0 then '11' else '00';
+```
+
+#### 4.287.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.288. USUB8：无符号减 8
+
+无符号减 8（Unsigned Subtract 8）。无符号减 8 执行四次 8 位无符号整数减法，并把结果写入目标寄存器。它根据减法结果设置 APSR.GE 位。
+
+#### 4.288.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-497](FigureC2-497.png)
+
+**T1 变体**
+
+```arm
+USUB8{<c>}{<q>} {<Rd>,} <Rn>, <Rm>
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+if d IN {13,15} || n IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.288.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+
+#### 4.288.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  diff1 = UInt(R[n][7:0]) - UInt(R[m][7:0]);
+  diff2 = UInt(R[n][15:8]) - UInt(R[m][15:8]);
+  diff3 = UInt(R[n][23:16]) - UInt(R[m][23:16]);
+  diff4 = UInt(R[n][31:24]) - UInt(R[m][31:24]);
+  R[d]  = diff4[7:0] : diff3[7:0] : diff2[7:0] : diff1[7:0];
+  APSR.GE[0] = if diff1 >= 0 then '1' else '0';
+  APSR.GE[1] = if diff2 >= 0 then '1' else '0';
+  APSR.GE[2] = if diff3 >= 0 then '1' else '0';
+  APSR.GE[3] = if diff4 >= 0 then '1' else '0';
+```
+
+#### 4.288.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.289. UXTAB：无符号扩展并加字节
+
+无符号扩展并加字节（Unsigned Extend and Add Byte）。无符号扩展并加字节从某个寄存器中提取一个 8 位值，把它零扩展到 32 位，把结果加到另一个寄存器中的值上，并把最终结果写入目标寄存器。该指令可以指定在提取 8 位值之前先旋转 0、8、16 或 24 位。
+
+#### 4.289.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-498](FigureC2-498.png)
+
+**T1 变体**
+
+```arm
+UXTAB{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, ROR #<amount>}
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE UXTB;
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+rotation = UInt(rotate:'000');
+if d IN {13,15} || n == 13 || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.289.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<amount>`**：旋转量，编码在 `rotate` 字段中，可取以下值：
+  - `0`（当 `rotate = 00` 时）。
+  - `8`（当 `rotate = 01` 时）。
+  - `16`（当 `rotate = 10` 时）。
+  - `24`（当 `rotate = 11` 时）。
+
+`ROR #<amount>` 可以省略，表示旋转量为 0。当 `rotate == 0b00` 时，这是首选的反汇编形式。
+
+#### 4.289.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  rotated = ROR(R[m], rotation);
+  R[d] = R[n] + ZeroExtend(rotated[7:0], 32);
+```
+
+#### 4.289.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.290. UXTAB16：无符号扩展并加字节 16
+
+无符号扩展并加字节 16（Unsigned Extend and Add Byte 16）。无符号扩展并加字节 16 从某个寄存器中提取两个 8 位值，把它们分别零扩展到 16 位，把结果加到另一个寄存器中的两个 16 位值上，并把最终结果写入目标寄存器。该指令可以指定在提取 8 位值之前先旋转 0、8、16 或 24 位。
+
+#### 4.290.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-499](FigureC2-499.png)
+
+**T1 变体**
+
+```arm
+UXTAB16{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, ROR #<amount>}
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE UXTB16;
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+rotation = UInt(rotate:'000');
+if d IN {13,15} || n == 13 || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.290.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<amount>`**：旋转量，编码在 `rotate` 字段中，可取以下值：
+  - `0`（当 `rotate = 00` 时）。
+  - `8`（当 `rotate = 01` 时）。
+  - `16`（当 `rotate = 10` 时）。
+  - `24`（当 `rotate = 11` 时）。
+
+`ROR #<amount>` 可以省略，表示旋转量为 0。当 `rotate == 0b00` 时，这是首选的反汇编形式。
+
+#### 4.290.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  rotated = ROR(R[m], rotation);
+  bits(32) result;
+  result[15:0]  = R[n][15:0]  + ZeroExtend(rotated[7:0],   16);
+  result[31:16] = R[n][31:16] + ZeroExtend(rotated[23:16], 16);
+  R[d] = result;
+```
+
+#### 4.290.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.291. UXTAH：无符号扩展并加半字
+
+无符号扩展并加半字（Unsigned Extend and Add Halfword）。无符号扩展并加半字从某个寄存器中提取一个 16 位值，把它零扩展到 32 位，把结果加到另一个寄存器中的值上，并把最终结果写入目标寄存器。该指令可以指定在提取 16 位值之前先旋转 0、8、16 或 24 位。
+
+#### 4.291.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-500](FigureC2-500.png)
+
+**T1 变体**
+
+```arm
+UXTAH{<c>}{<q>} {<Rd>,} <Rn>, <Rm> {, ROR #<amount>}
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE UXTH;
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+n = UInt(Rn);
+m = UInt(Rm);
+rotation = UInt(rotate:'000');
+if d IN {13,15} || n == 13 || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.291.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rn>`**：第一个通用源寄存器，编码在 `Rn` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<amount>`**：旋转量，编码在 `rotate` 字段中，可取以下值：
+  - `0`（当 `rotate = 00` 时）。
+  - `8`（当 `rotate = 01` 时）。
+  - `16`（当 `rotate = 10` 时）。
+  - `24`（当 `rotate = 11` 时）。
+
+`ROR #<amount>` 可以省略，表示旋转量为 0。当 `rotate == 0b00` 时，这是首选的反汇编形式。
+
+#### 4.291.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  rotated = ROR(R[m], rotation);
+  R[d] = R[n] + ZeroExtend(rotated[15:0], 32);
+```
+
+#### 4.291.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.292. UXTB：无符号扩展字节
+
+无符号扩展字节（Unsigned Extend Byte）。无符号扩展字节从某个寄存器中提取一个 8 位值，把它零扩展到 32 位，并把结果写入目标寄存器。该指令可以指定在提取 8 位值之前先旋转 0、8、16 或 24 位。
+
+#### 4.292.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-501](FigureC2-501.png)
+
+**T1 变体**
+
+```arm
+UXTB{<c>}{<q>} {<Rd>,} <Rm>
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);
+m = UInt(Rm);
+rotation = 0;
+```
+
+#### 4.292.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-502](FigureC2-502.png)
+
+**T2 变体**
+
+```arm
+UXTB{<c>}.W {<Rd>,} <Rm>
+// <Rd>, <Rm> 可在 T1 中表示
+UXTB{<c>}{<q>} {<Rd>,} <Rm> {, ROR #<amount>}
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);
+m = UInt(Rm);
+rotation = UInt(rotate:'000');
+if d IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.292.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：通用源寄存器，编码在 `Rm` 字段中。
+- **`<amount>`**：旋转量，编码在 `rotate` 字段中，可取以下值：
+  - `0`（当 `rotate = 00` 时）。
+  - `8`（当 `rotate = 01` 时）。
+  - `16`（当 `rotate = 10` 时）。
+  - `24`（当 `rotate = 11` 时）。
+
+`ROR #<amount>` 可以省略，表示旋转量为 0。当 `rotate == 0b00` 时，这是首选的反汇编形式。
+
+#### 4.292.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  rotated = ROR(R[m], rotation);
+  R[d] = ZeroExtend(rotated[7:0], 32);
+```
+
+#### 4.292.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.293. UXTB16：无符号扩展字节 16
+
+无符号扩展字节 16（Unsigned Extend Byte 16）。无符号扩展字节 16 从某个寄存器中提取两个 8 位值，把它们分别零扩展到 16 位，并把结果写入目标寄存器。该指令可以指定在提取 8 位值之前先旋转 0、8、16 或 24 位。
+
+#### 4.293.1. 编码 T1
+
+仅适用于 Armv8-M DSP 扩展。
+
+![FigureC2-503](FigureC2-503.png)
+
+**T1 变体**
+
+```arm
+UXTB16{<c>}{<q>} {<Rd>,} <Rm> {, ROR #<amount>}
+```
+
+**解码**
+
+```arm
+if !HaveDSPExt() then UNDEFINED;
+d = UInt(Rd);
+m = UInt(Rm);
+rotation = UInt(rotate:'000');
+if d IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.293.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：第二个通用源寄存器，编码在 `Rm` 字段中。
+- **`<amount>`**：旋转量，编码在 `rotate` 字段中，可取以下值：
+  - `0`（当 `rotate = 00` 时）。
+  - `8`（当 `rotate = 01` 时）。
+  - `16`（当 `rotate = 10` 时）。
+  - `24`（当 `rotate = 11` 时）。
+
+`ROR #<amount>` 可以省略，表示旋转量为 0。当 `rotate == 0b00` 时，这是首选的反汇编形式。
+
+#### 4.293.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  rotated = ROR(R[m], rotation);
+  bits(32) result;
+  result[15:0]  = ZeroExtend(rotated[7:0],   16);
+  result[31:16] = ZeroExtend(rotated[23:16], 16);
+  R[d] = result;
+```
+
+#### 4.293.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.294. UXTH：无符号扩展半字
+
+无符号扩展半字（Unsigned Extend Halfword）。无符号扩展半字从某个寄存器中提取一个 16 位值，把它零扩展到 32 位，并把结果写入目标寄存器。该指令可以指定在提取 16 位值之前先旋转 0、8、16 或 24 位。
+
+#### 4.294.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-504](FigureC2-504.png)
+
+**T1 变体**
+
+```arm
+UXTH{<c>}{<q>} {<Rd>,} <Rm>
+```
+
+**解码**
+
+```arm
+d = UInt(Rd);
+m = UInt(Rm);
+rotation = 0;
+```
+
+#### 4.294.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-505](FigureC2-505.png)
+
+**T2 变体**
+
+```arm
+UXTH{<c>}.W {<Rd>,} <Rm>
+// <Rd>, <Rm> 可在 T1 中表示
+UXTH{<c>}{<q>} {<Rd>,} <Rm> {, ROR #<amount>}
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+d = UInt(Rd);
+m = UInt(Rm);
+rotation = UInt(rotate:'000');
+if d IN {13,15} || m IN {13,15} then UNPREDICTABLE;
+```
+
+#### 4.294.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Rd>`**：通用目标寄存器，编码在 `Rd` 字段中。
+- **`<Rm>`**：通用源寄存器，编码在 `Rm` 字段中。
+- **`<amount>`**：旋转量，编码在 `rotate` 字段中，可取以下值：
+  - `0`（当 `rotate = 00` 时）。
+  - `8`（当 `rotate = 01` 时）。
+  - `16`（当 `rotate = 10` 时）。
+  - `24`（当 `rotate = 11` 时）。
+
+`ROR #<amount>` 可以省略，表示旋转量为 0。当 `rotate == 0b00` 时，这是首选的反汇编形式。
+
+#### 4.294.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  rotated = ROR(R[m], rotation);
+  R[d] = ZeroExtend(rotated[15:0], 32);
+```
+
+#### 4.294.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+
+### 4.295. VABAV：向量绝对差之和累加
+
+向量绝对差之和累加（Vector Absolute Difference and Accumulate Across Vector）。从第一个源向量寄存器的对应元素中减去第二个源向量寄存器的元素，并把各结果绝对值累加到结果中；通用目标寄存器的初始值也加到结果中。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.295.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-506](FigureC2-506.png)
+
+**T1: VABAV 变体**
+
+```arm
+VABAV<v><q>.<dt> Rda, Qn, Qm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if M == '1' || N == '1' then UNDEFINED;
+da = UInt(Rda);
+m  = UInt(M:Qm);
+n  = UInt(N:Qn);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+unsigned = (U == '1');
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if Rda == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.295.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：该参数确定以下取值：
+  - **无符号标志**：`S` 表示有符号，`U` 表示无符号。
+  - **大小**：表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`、`U = 0`。
+  - `U8`，编码为 `size = 00`、`U = 1`。
+  - `S16`，编码为 `size = 01`、`U = 0`。
+  - `U16`，编码为 `size = 01`、`U = 1`。
+  - `S32`，编码为 `size = 10`、`U = 0`。
+  - `U32`，编码为 `size = 10`、`U = 1`。
+- **`<Rda>`**：通用源兼目标寄存器。
+- **`<Qn>`**：第一个源向量寄存器。
+- **`<Qm>`**：第二个源向量寄存器。
+
+#### 4.295.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+op1 = Q[n, curBeat];
+op2 = Q[m, curBeat];
+result = UInt(R[da]);
+for e = 0 to elements-1
+  if elmtMask[e*(esize>>3)] == '1' then
+    result = result + Abs(Int(Elem[op1, e, esize], unsigned) -
+                          Int(Elem[op2, e, esize], unsigned));
+
+R[da] = result[31:0];
+```
+
+### 4.296. VABD：向量绝对差
+
+向量绝对差（Vector Absolute Difference）。从第一个源向量寄存器的对应元素中减去第二个源向量寄存器的元素，并把各结果绝对值放入目标向量寄存器的元素中。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.296.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-507](FigureC2-507.png)
+
+**T1: VABD 变体**
+
+```arm
+VABD<v><q>.<dt> Qd, Qn, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+if size == '11' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+unsigned = (U == '1');
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.296.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：该参数确定以下取值：
+  - **无符号标志**：`S` 表示有符号，`U` 表示无符号。
+  - **大小**：表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`、`U = 0`。
+  - `U8`，编码为 `size = 00`、`U = 1`。
+  - `S16`，编码为 `size = 01`、`U = 0`。
+  - `U16`，编码为 `size = 01`、`U = 1`。
+  - `S32`，编码为 `size = 10`、`U = 0`。
+  - `U32`，编码为 `size = 10`、`U = 1`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qn>`**：第一个源向量寄存器。
+- **`<Qm>`**：第二个源向量寄存器。
+
+#### 4.296.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[n, curBeat];
+op2 = Q[m, curBeat];
+for e = 0 to elements-1
+  value = Abs(Int(Elem[op1, e, esize], unsigned) - Int(Elem[op2, e, esize], unsigned));
+  Elem[result, e, esize] = value[esize-1:0];
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.296.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.297. VABD (floating-point)：向量绝对差（浮点）
+
+向量绝对差（Vector Absolute Difference）。从第一个源向量的对应元素中减去第二个源向量的元素，并把各结果绝对值放入目标向量寄存器的元素中。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.297.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE 的半精度与单精度浮点扩展。
+
+![FigureC2-508](FigureC2-508.png)
+
+**T1: VABD 变体**
+
+```arm
+VABD<v><q>.<dt> Qd, Qn, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_MveFp);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+esize = if sz == '1' then 16 else 32;
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.297.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示所用的浮点格式。
+  该参数必须是以下取值之一：
+  - `F32`，编码为 `sz = 0`。
+  - `F16`，编码为 `sz = 1`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qn>`**：第一个源向量寄存器。
+- **`<Qm>`**：第二个源向量寄存器。
+
+#### 4.297.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[n, curBeat];
+op2 = Q[m, curBeat];
+for e = 0 to elements-1
+  // 通过检查元素掩码，避免在被谓词化（predicated）的通道上产生浮点异常
+  pred = (elmtMask[e*(esize>>3)] == '0');
+  value = FPAbs(FPSub(Elem[op1, e, esize], Elem[op2, e, esize], FALSE, pred));
+  Elem[result, e, esize] = value;
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.297.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.298. VABS：浮点绝对值
+
+浮点绝对值（Floating-point Absolute）。浮点绝对值取某个半精度、单精度或双精度寄存器的绝对值，并把结果放入目标寄存器。
+
+#### 4.298.1. 编码 T2
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-509](FigureC2-509.png)
+
+**半精度标量变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `size == 01` 时适用。
+
+```arm
+VABS{<c>}{<q>}.F16 <Sd>, <Sm>
+```
+
+**单精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 10` 时适用。
+
+```arm
+VABS{<c>}{<q>}.F32 <Sd>, <Sm>
+```
+
+**双精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 11` 时适用。
+
+```arm
+VABS{<c>}{<q>}.F64 <Dd>, <Dm>
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (M == '1' || D == '1') then UNDEFINED;
+if size == '01' && InITBlock() then UNPREDICTABLE;
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+#### 4.298.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+- **`<Dd>`**：浮点目标寄存器的 64 位名称，编码在 `D:Vd` 字段中。
+- **`<Dm>`**：浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+
+#### 4.298.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  ExecuteFPCheck();
+  case size of
+    when '01' S[d] = Zeros(16) : FPAbs(S[m][15:0]);
+    when '10' S[d] = FPAbs(S[m]);
+    when '11' D[d] = FPAbs(D[m]);
+```
+
+#### 4.298.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.299. VABS (floating-point)：向量绝对值（浮点）
+
+向量绝对值（Vector Absolute）。计算向量寄存器中每个元素的绝对值。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.299.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE 的半精度与单精度浮点扩展。
+
+![FigureC2-510](FigureC2-510.png)
+
+**T1: VABS 变体**
+
+```arm
+VABS<v><q>.<dt> Qd, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_MveFp);
+if D == '1' || M == '1' then UNDEFINED;
+if size IN {'11', '00'} then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.299.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示所用的浮点格式。
+  该参数必须是以下取值之一：
+  - `F16`，编码为 `size = 01`。
+  - `F32`，编码为 `size = 10`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+
+#### 4.299.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[m, curBeat];
+for e = 0 to elements-1
+  value = FPAbs(Elem[op1, e, esize]);
+  Elem[result, e, esize] = value;
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.299.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.300. VABS (vector)：向量绝对值（向量）
+
+向量绝对值（Vector Absolute）。计算向量寄存器中每个元素的绝对值。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.300.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-511](FigureC2-511.png)
+
+**T1: VABS 变体**
+
+```arm
+VABS<v><q>.<dt> Qd, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' then UNDEFINED;
+if size == '11' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.300.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`。
+  - `S16`，编码为 `size = 01`。
+  - `S32`，编码为 `size = 10`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+
+#### 4.300.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[m, curBeat];
+for e = 0 to elements-1
+  value = Abs(SInt(Elem[op1, e, esize]));
+  Elem[result, e, esize] = value[esize-1:0];
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.300.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.301. VADC：全向量带进位加
+
+全向量带进位加（Whole Vector Add With Carry）。跨节拍执行带进位加法，进位从 `FPSCR.C` 输入并输出到 `FPSCR.C`。使用 `I` 变体可覆盖 `FPSCR.C` 的初始值。因谓词化而被禁用的节拍不会更新 `FPSCR.C`。每当 `FPSCR.C` 被更新时，`FPSCR.N`、`.V` 和 `.Z` 均被清零。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.301.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-512](FigureC2-512.png)
+
+**T1: VADC 变体**
+
+```arm
+VADC{I}<v><q>.I32 Qd, Qn, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+carryInit = (I == '1');
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.301.2. 汇编符号（所有编码）
+
+- **`<I>`**：指定宽算术的初始进位来自何处。
+  该参数必须是以下取值之一：
+  - `-`，编码为 `I = 0`，表示进位输入来自 `FPSCR.C`。
+  - `I`，编码为 `I = 1`，表示进位输入为 0。
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qn>`**：源向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+
+#### 4.301.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+op1 = Q[n, curBeat];
+op2 = Q[m, curBeat];
+if carryInit && IsFirstBeat() then
+  (FPSCR.N, FPSCR.Z, FPSCR.C, FPSCR.V) = ('0', '0', '0', '0');
+(result, carryOut, -) = AddWithCarry(op1, op2, FPSCR.C);
+if elmtMask[0] == '1' then
+  (FPSCR.N, FPSCR.Z, FPSCR.C, FPSCR.V) = ('0', '0', carryOut, '0');
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.301.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.302. VADD：浮点加
+
+浮点加（Floating-point Add）。浮点加把两个半精度、单精度或双精度寄存器相加，并把结果放入目标寄存器。
+
+#### 4.302.1. 编码 T2
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-513](FigureC2-513.png)
+
+**半精度标量变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `size == 01` 时适用。
+
+```arm
+VADD{<c>}{<q>}.F16 {<Sd>,} <Sn>, <Sm>
+```
+
+**单精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 10` 时适用。
+
+```arm
+VADD{<c>}{<q>}.F32 {<Sd>,} <Sn>, <Sm>
+```
+
+**双精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 11` 时适用。
+
+```arm
+VADD{<c>}{<q>}.F64 {<Dd>,} <Dn>, <Dm>
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (M == '1' || N == '1' || D == '1') then UNDEFINED;
+if size == '01' && InITBlock() then UNPREDICTABLE;
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+n = if dp_operation then UInt(N:Vn) else UInt(Vn:N);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+#### 4.302.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Sn>`**：第一个浮点源寄存器的 32 位名称，编码在 `Vn:N` 字段中。
+- **`<Sm>`**：第二个浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+- **`<Dd>`**：浮点目标寄存器的 64 位名称，编码在 `D:Vd` 字段中。
+- **`<Dn>`**：第一个浮点源寄存器的 64 位名称，编码在 `N:Vn` 字段中。
+- **`<Dm>`**：第二个浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+
+#### 4.302.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  ExecuteFPCheck();
+  case size of
+    when '01' S[d] = Zeros(16) : FPAdd(S[n][15:0], S[m][15:0], TRUE);
+    when '10' S[d] = FPAdd(S[n], S[m], TRUE);
+    when '11' D[d] = FPAdd(D[n], D[m], TRUE);
+```
+
+### 4.303. VADD (floating-point)：向量加（浮点）
+
+向量加（Vector Add）。把第一个源向量寄存器中各元素的值加到第二个源向量寄存器的对应元素或某个通用寄存器上。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.303.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE 的半精度与单精度浮点扩展。
+
+![FigureC2-514](FigureC2-514.png)
+
+**T1: VADD 变体**
+
+```arm
+VADD<v><q>.<dt> Qd, Qn, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_MveFp);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+esize = if sz == '1' then 16 else 32;
+elements = 32 DIV esize;
+withScalar = FALSE;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.303.2. 编码 T2
+
+仅适用于 Armv8.1-M MVE 的半精度与单精度浮点扩展。
+
+![FigureC2-515](FigureC2-515.png)
+
+**T2: VADD 变体**
+
+```arm
+VADD<v><q>.<dt> Qd, Qn, Rm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_MveFp);
+if D == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(Rm);
+n = UInt(N:Qn);
+esize = if sz == '1' then 16 else 32;
+elements = 32 DIV esize;
+withScalar = TRUE;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if Rm == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.303.3. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示所用的浮点格式。
+  该参数必须是以下取值之一：
+  - `F32`，编码为 `sz = 0`。
+  - `F16`，编码为 `sz = 1`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qn>`**：第一个源向量寄存器。
+- **`<Qm>`**：第二个源向量寄存器。
+- **`<Rm>`**：源通用寄存器。
+
+#### 4.303.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[n, curBeat];
+if withScalar then
+  for e = 0 to elements-1
+    // 通过检查元素掩码，避免在被谓词化的通道上产生浮点异常
+    pred = (elmtMask[e*(esize>>3)] == '0');
+    value = FPAdd(Elem[op1, e, esize], R[m][esize-1:0], FALSE, pred);
+    Elem[result, e, esize] = value;
+else
+  for e = 0 to elements-1
+    // 通过检查元素掩码，避免在被谓词化的通道上产生浮点异常
+    pred = (elmtMask[e*(esize>>3)] == '0');
+    op2 = Q[m, curBeat];
+    value = FPAdd(Elem[op1, e, esize], Elem[op2, e, esize], FALSE, pred);
+    Elem[result, e, esize] = value;
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.303.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.304. VADD (vector)：向量加（向量）
+
+向量加（Vector Add）。把第一个源向量寄存器中各元素的值加到第二个源向量寄存器的对应元素或某个通用寄存器上，然后把结果写入目标向量寄存器。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.304.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-516](FigureC2-516.png)
+
+**T1: VADD 变体**
+
+```arm
+VADD<v><q>.<dt> Qd, Qn, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+if size == '11' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+withScalar = FALSE;
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.304.2. 编码 T2
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-517](FigureC2-517.png)
+
+**T2: VADD 变体**
+
+```arm
+VADD<v><q>.<dt> Qd, Qn, Rm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(Rm);
+n = UInt(N:Qn);
+withScalar = TRUE;
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if Rm == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.304.3. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `I8`，编码为 `size = 00`。
+  - `I16`，编码为 `size = 01`。
+  - `I32`，编码为 `size = 10`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qn>`**：第一个源向量寄存器。
+- **`<Qm>`**：第二个源向量寄存器。
+- **`<Rm>`**：源通用寄存器。
+
+#### 4.304.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[n, curBeat];
+if withScalar then
+  for e = 0 to elements-1
+    value = Elem[op1, e, esize] + R[m][esize-1:0];
+    Elem[result, e, esize] = value;
+else
+  op2 = Q[m, curBeat];
+  for e = 0 to elements-1
+    value = Elem[op1, e, esize] + Elem[op2, e, esize];
+    Elem[result, e, esize] = value;
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.304.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.305. VADDLV：向量加长累加
+
+向量加长累加（Vector Add Long Across Vector）。对向量的各元素进行累加，把结果累加到一个标量中。64 位结果跨两个寄存器存放：高半部分存放在奇数号寄存器中，低半部分存放在偶数号寄存器中。可选择把通用目标寄存器的初始值加到结果中。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.305.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-518](FigureC2-518.png)
+
+**T1: VADDLV 变体**
+
+```arm
+VADDLV{A}<v><q>.<dt> RdaLo, RdaHi, Qm
+```
+
+**解码**
+
+```arm
+if RdaHi == '111' then SEE "VADDV";
+CheckDecodeFaults(ExtType_Mve);
+dah = UInt(RdaHi:'1');
+dal = UInt(RdaLo:'0');
+m = UInt(Qm);
+accumulate = (A == '1');
+esize = 32;
+elements = 32 DIV esize;
+unsigned = (U == '1');
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if RdaHi == '110' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.305.2. 汇编符号（所有编码）
+
+- **`<A>`**：与寄存器现有内容累加。
+  该参数必须是以下取值之一：
+  - `-`，编码为 `A = 0`。
+  - `A`，编码为 `A = 1`。
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：无符号标志：`S` 表示有符号，`U` 表示无符号。
+  该参数必须是以下取值之一：
+  - `S32`，编码为 `U = 0`。
+  - `U32`，编码为 `U = 1`。
+- **`<RdaLo>`**：64 位源兼目标低半部分的通用寄存器。该寄存器必须是偶数号寄存器。值 `RdaLo » 1` 编码在 `RdaLo` 字段中。
+- **`<RdaHi>`**：64 位源兼目标高半部分的通用寄存器。该寄存器必须是奇数号寄存器。值 `RdaHi » 1` 编码在 `RdaHi` 字段中。
+- **`<Qm>`**：源向量寄存器。
+
+#### 4.305.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = if accumulate || !IsFirstBeat() then Int(R[dah]:R[dal], unsigned) else 0;
+op = Q[m, curBeat];
+for e = 0 to elements-1
+  if elmtMask[e*(esize>>3)] == '1' then
+    result = result + Int(Elem[op, e, esize], unsigned);
+
+R[dah] = result[63:32];
+R[dal] = result[31:0];
+```
+
+### 4.306. VADDV：向量累加
+
+向量累加（Vector Add Across Vector）。对向量的各元素进行累加，把结果累加到一个标量中。可选择把通用目标寄存器的初始值加到结果中。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.306.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-519](FigureC2-519.png)
+
+**T1: VADDV 变体**
+
+```arm
+VADDV{A}<v><q>.<dt> Rda, Qm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+da = UInt(Rda:'0');
+m = UInt(Qm);
+accumulate = (A == '1');
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+unsigned = (U == '1');
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.306.2. 汇编符号（所有编码）
+
+- **`<A>`**：与寄存器现有内容累加。
+  该参数必须是以下取值之一：
+  - `-`，编码为 `A = 0`。
+  - `A`，编码为 `A = 1`。
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：该参数确定以下取值：
+  - **无符号标志**：`S` 表示有符号，`U` 表示无符号。
+  - **大小**：表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`、`U = 0`。
+  - `U8`，编码为 `size = 00`、`U = 1`。
+  - `S16`，编码为 `size = 01`、`U = 0`。
+  - `U16`，编码为 `size = 01`、`U = 1`。
+  - `S32`，编码为 `size = 10`、`U = 0`。
+  - `U32`，编码为 `size = 10`、`U = 1`。
+- **`<Rda>`**：通用源兼目标寄存器。该寄存器必须是偶数号寄存器。
+- **`<Qm>`**：源向量寄存器。
+
+#### 4.306.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = if accumulate || !IsFirstBeat() then Int(R[da], unsigned) else 0;
+op = Q[m, curBeat];
+for e = 0 to elements-1
+  if elmtMask[e*(esize>>3)] == '1' then
+    result = result + Int(Elem[op, e, esize], unsigned);
+
+R[da] = result[31:0];
+```
+
+### 4.307. VAND：向量按位与
+
+向量按位与（Vector Bitwise And）。计算某个向量寄存器与另一个向量寄存器的按位与，结果写入目标向量寄存器。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.307.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-520](FigureC2-520.png)
+
+**T1: VAND 变体**
+
+```arm
+VAND<v><q>{.<dt>} Qd, Qn, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.307.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：可选的数据类型。它被汇编器忽略，且不影响编码。取值可以是以下之一：`S8`、`S16`、`S32`、`U8`、`U16`、`U32`、`I8`、`I16`、`I32`、`F16`、`F32`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qn>`**：源向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+
+#### 4.307.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Q[n, curBeat] AND Q[m, curBeat];
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.307.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.308. VAND (immediate)：向量按位与（立即数）
+
+向量按位与（Vector Bitwise And）。本指令是伪指令，等价于把立即数按位取反后的 VBIC (immediate) 指令。
+
+本指令是 VBIC (immediate) 的别名。
+
+#### 4.308.1. 编码 T1
+
+![FigureC2-521](FigureC2-521.png)
+
+**VAND 变体**
+
+```arm
+VAND<v><q>.<dt> Qda, #<imm>
+```
+
+**等价于**
+
+```arm
+VBIC<v><q>.<dt> Qda, #~<imm>
+```
+
+且永不为首选反汇编形式。
+
+### 4.309. VBIC (immediate)：向量按位清零（立即数）
+
+向量按位清零（Vector Bitwise Clear）。计算某个向量寄存器与某个立即数取反后的按位与。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.309.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-522](FigureC2-522.png)
+
+**T1: VBIC 变体**
+
+```arm
+VBIC<v><q>.<dt> Qda, #<imm>
+```
+
+**解码**
+
+```arm
+if cmode == '111x' then SEE "VMOV (immediate) (vector)";
+if cmode IN {'0xx0', '110x', '10x0'} then SEE "VMVN (immediate)";
+CheckDecodeFaults(ExtType_Mve);
+if Da == '1' then UNDEFINED;
+da = UInt(Da:Qda);
+imm64 = AdvSIMDExpandImm('1', cmode, i:imm3:imm4);
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.309.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示向量中各元素的大小，供 `AdvSIMDExpandImm()` 函数使用。
+  该参数必须是以下取值之一：
+  - `I32`，编码为：`cmode = 0001`、`cmode = 0011`、`cmode = 0101`、`cmode = 0111`。
+  - `I16`，编码为：`cmode = 1001`、`cmode = 1011`。
+- **`<Qda>`**：源兼目标向量寄存器。
+- **`<imm>`**：要加载到每个元素中的立即数值。该值必须是可供 `AdvSIMDExpandImm()` 函数编码的立即数。
+
+#### 4.309.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+opd = Q[da, curBeat];
+imm32 = if curBeat[0] == '0' then imm64[31:0] else imm64[63:32];
+result = opd AND NOT(imm32);
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[da, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.309.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.310. VBIC (register)：向量按位清零（寄存器）
+
+向量按位清零（Vector Bitwise Clear）。计算某个向量寄存器与另一个向量寄存器取反后的按位与。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.310.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-523](FigureC2-523.png)
+
+**T1: VBIC 变体**
+
+```arm
+VBIC<v><q>{.<dt>} Qd, Qn, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.310.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：可选的数据类型。它被汇编器忽略，且不影响编码。取值可以是以下之一：`S8`、`S16`、`S32`、`U8`、`U16`、`U32`、`I8`、`I16`、`I32`、`F16`、`F32`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qn>`**：源向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+
+#### 4.310.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+opm = Q[m, curBeat];
+opn = Q[n, curBeat];
+result = opn AND NOT(opm);
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.310.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.311. VBRSR：向量位反转并右移
+
+向量位反转并右移（Vector Bit Reverse and Shift Right）。把向量寄存器中各元素指定数目的最低有效位（LSB）反转，并把其余位清零。要反转的位数从 `Rm` 的最低字节读入，并被钳位到 `[0, <dt>]` 范围内。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.311.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-524](FigureC2-524.png)
+
+**T1: VBRSR 变体**
+
+```arm
+VBRSR<v><q>.<dt> Qd, Qn, Rm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(Rm);
+n = UInt(N:Qn);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if Rm == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.311.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `8`，编码为 `size = 00`。
+  - `16`，编码为 `size = 01`。
+  - `32`，编码为 `size = 10`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qn>`**：源向量寄存器。
+- **`<Rm>`**：通用寄存器，其最低 8 位给出要反转的 LSB 位数。
+
+#### 4.311.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[n, curBeat];
+revBit = UInt(R[m][7:0]);
+for e = 0 to elements-1
+  Elem[result, e, esize] = BitReverseShiftRight(Elem[op1, e, esize], revBit);
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.311.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.312. VCADD：向量复数加（带旋转）
+
+向量复数加（Vector Complex Add with Rotate）。本指令把第一个操作数与在复平面上按指定角度旋转后的第二个操作数相加。该操作数旋转 90 度相当于乘以正虚数单位，旋转 270 度相当于乘以负虚数单位。源向量的偶数元素和奇数元素分别被解释为复数的实部和虚部。结果随后写入目标向量寄存器。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.312.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-525](FigureC2-525.png)
+
+**T1: VCADD 变体**
+
+```arm
+VCADD<v><q>.<dt> Qd, Qn, Qm, #<rotate>
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if D:Qd == M:Qm && size == '10' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.312.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `I8`，编码为 `size = 00`。
+  - `I16`，编码为 `size = 01`。
+  - `I32`，编码为 `size = 10`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qn>`**：第一个源向量寄存器。
+- **`<Qm>`**：第二个源向量寄存器。
+- **`<rotate>`**：旋转量。
+  该参数必须是以下取值之一：
+  - `#90`，编码为 `rot = 0`。
+  - `#270`，编码为 `rot = 1`。
+
+#### 4.312.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+// 32 位运算的处理方式不同，因为它们会跨节拍访问寄存器
+if esize == 32 then
+  case rot:curBeat[0] of
+    when '00' result = (Q[n, curBeat] - Q[m, curBeat+1])[31:0];
+    when '01' result = (Q[n, curBeat] + Q[m, curBeat-1])[31:0];
+    when '10' result = (Q[n, curBeat] + Q[m, curBeat+1])[31:0];
+    when '11' result = (Q[n, curBeat] - Q[m, curBeat-1])[31:0];
+else
+  op1 = Q[n, curBeat];
+  op2 = Q[m, curBeat];
+  for e = 0 to elements-1
+    case rot:e[0] of
+      when '00' value = Elem[op1, e, esize] - Elem[op2, e+1, esize];
+      when '01' value = Elem[op1, e, esize] + Elem[op2, e-1, esize];
+      when '10' value = Elem[op1, e, esize] + Elem[op2, e+1, esize];
+      when '11' value = Elem[op1, e, esize] - Elem[op2, e-1, esize];
+    Elem[result, e, esize] = value[esize-1:0];
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.312.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.313. VCADD (floating-point)：向量复数加（浮点，带旋转）
+
+向量复数加（Vector Complex Add with Rotate）。本指令把第一个操作数与在复平面上按指定角度旋转后的第二个操作数相加。该操作数旋转 90 度相当于乘以正虚数单位，旋转 270 度相当于乘以负虚数单位。源向量的偶数元素和奇数元素分别被解释为复数的实部和虚部。结果写入目标向量寄存器。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.313.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE 的半精度与单精度浮点扩展。
+
+![FigureC2-526](FigureC2-526.png)
+
+**T1: VCADD 变体**
+
+```arm
+VCADD<v><q>.<dt> Qd, Qn, Qm, #<rotate>
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_MveFp);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+esize = if sz == '0' then 16 else 32;
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if D:Qd == M:Qm && sz == '1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.313.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示所用的浮点格式。
+  该参数必须是以下取值之一：
+  - `F16`，编码为 `sz = 0`。
+  - `F32`，编码为 `sz = 1`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qn>`**：第一个源向量寄存器。
+- **`<Qm>`**：第二个源向量寄存器。
+- **`<rotate>`**：旋转量。
+  该参数必须是以下取值之一：
+  - `#90`，编码为 `rot = 0`。
+  - `#270`，编码为 `rot = 1`。
+
+#### 4.313.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+if esize == 32 then
+  // 通过检查元素掩码，避免在被谓词化的通道上产生浮点异常
+  pred = (elmtMask[0*(esize>>3)] == '0');
+  case rot:curBeat[0] of
+    when '00' result = FPSub(Q[n, curBeat], Q[m, curBeat+1], FALSE, pred);
+    when '01' result = FPAdd(Q[n, curBeat], Q[m, curBeat-1], FALSE, pred);
+    when '10' result = FPAdd(Q[n, curBeat], Q[m, curBeat+1], FALSE, pred);
+    when '11' result = FPSub(Q[n, curBeat], Q[m, curBeat-1], FALSE, pred);
+else
+  op1 = Q[n, curBeat];
+  op2 = Q[m, curBeat];
+  for e = 0 to elements-1
+    // 通过检查元素掩码，避免在被谓词化的通道上产生浮点异常
+    pred = (elmtMask[e*(esize>>3)] == '0');
+    case rot:e[0] of
+      when '00' value = FPSub(Elem[op1, e, esize], Elem[op2, e+1, esize], FALSE, pred);
+      when '01' value = FPAdd(Elem[op1, e, esize], Elem[op2, e-1, esize], FALSE, pred);
+      when '10' value = FPAdd(Elem[op1, e, esize], Elem[op2, e+1, esize], FALSE, pred);
+      when '11' value = FPSub(Elem[op1, e, esize], Elem[op2, e-1, esize], FALSE, pred);
+    Elem[result, e, esize] = value;
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.314. VCLS：向量前导符号位数统计
+
+向量前导符号位数统计（Vector Count Leading Sign-bits）。统计向量寄存器中各元素的前导符号位数。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.314.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-527](FigureC2-527.png)
+
+**T1: VCLS 变体**
+
+```arm
+VCLS<v><q>.<dt> Qd, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' then UNDEFINED;
+if size == '11' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.314.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`。
+  - `S16`，编码为 `size = 01`。
+  - `S32`，编码为 `size = 10`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+
+#### 4.314.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[m, curBeat];
+for e = 0 to elements-1
+  value = CountLeadingSignBits(Elem[op1, e, esize]);
+  Elem[result, e, esize] = value[esize-1:0];
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.314.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.315. VCLZ：向量前导零位数统计
+
+向量前导零位数统计（Vector Count Leading Zeros）。统计向量寄存器中各元素的前导零位数。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.315.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-528](FigureC2-528.png)
+
+**T1: VCLZ 变体**
+
+```arm
+VCLZ<v><q>.<dt> Qd, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' then UNDEFINED;
+if size == '11' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.315.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `I8`，编码为 `size = 00`。
+  - `I16`，编码为 `size = 01`。
+  - `I32`，编码为 `size = 10`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+
+#### 4.315.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[m, curBeat];
+for e = 0 to elements-1
+  value = CountLeadingZeroBits(Elem[op1, e, esize]);
+  Elem[result, e, esize] = value[esize-1:0];
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.315.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.316. VCMLA (floating-point)：向量复数乘加（浮点）
+
+向量复数乘加（Vector Complex Multiply Accumulate）。本指令处理以元素对形式表示在寄存器中的复数。每个元素存放一个浮点值：奇数元素存放该数的虚部，偶数元素存放该数的实部。本指令对两个源寄存器与目标寄存器中对应的复数元素对执行运算。把第二个源寄存器中的复数放在 Argand 图上考虑时，该数逆时针旋转 0、90、180 或 270 度。若变换为旋转 0 度或 180 度，则变换后复数的两个元素与第一个源寄存器的实部元素相乘。若变换为旋转 90 度或 270 度，则这两个元素与第一个源寄存器中该复数的虚部元素相乘。乘法的结果加到目标向量寄存器中的现有值上。乘法和加法运算相互融合，结果不进行舍入。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.316.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE 的半精度与单精度浮点扩展。
+
+![FigureC2-529](FigureC2-529.png)
+
+**T1: VCMLA 变体**
+
+```arm
+VCMLA<v><q>.<dt> Qda, Qn, Qm, #<rotate>
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_MveFp);
+if Da == '1' || M == '1' || N == '1' then UNDEFINED;
+da = UInt(Da:Qda);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+esize = if sz == '0' then 16 else 32;
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if sz == '1' && (Da:Qda == M:Qm || Da:Qda == N:Qn) then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.316.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示所用的浮点格式。
+  该参数必须是以下取值之一：
+  - `F16`，编码为 `sz = 0`。
+  - `F32`，编码为 `sz = 1`。
+- **`<Qda>`**：源兼目标向量寄存器。
+- **`<Qn>`**：第一个源向量寄存器。
+- **`<Qm>`**：第二个源向量寄存器。
+- **`<rotate>`**：旋转量。
+  该参数必须是以下取值之一：
+  - `#0`，编码为 `rot = 00`。
+  - `#90`，编码为 `rot = 01`。
+  - `#180`，编码为 `rot = 10`。
+  - `#270`，编码为 `rot = 11`。
+
+#### 4.316.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+dest = Q[da, curBeat];
+if esize == 32 then
+  // 通过检查元素掩码，避免在被谓词化的通道上产生浮点异常
+  pred = (elmtMask[0*(esize>>3)] == '0');
+  if (curBeat[0] == '0') then
+    case rot of
+      when '00'
+        element1 = Q[m, curBeat];
+        element2 = Q[n, curBeat];
+      when '01'
+        element1 = FPNeg(Q[m, curBeat+1]);
+        element2 = Q[n, curBeat+1];
+      when '10'
+        element1 = FPNeg(Q[m, curBeat]);
+        element2 = Q[n, curBeat];
+      when '11'
+        element1 = Q[m, curBeat+1];
+        element2 = Q[n, curBeat+1];
+  else
+    case rot of
+      when '00'
+        element1 = Q[m, curBeat];
+        element2 = Q[n, curBeat-1];
+      when '01'
+        element1 = Q[m, curBeat-1];
+        element2 = Q[n, curBeat];
+      when '10'
+        element1 = FPNeg(Q[m, curBeat]);
+        element2 = Q[n, curBeat-1];
+      when '11'
+        element1 = FPNeg(Q[m, curBeat-1]);
+        element2 = Q[n, curBeat];
+  result = FPMulAdd(dest, element2, element1, FALSE, pred);
+else
+  // 通过检查元素掩码，避免在被谓词化的通道上产生浮点异常
+  pred0 = (elmtMask[0*(esize>>3)] == '0');
+  pred1 = (elmtMask[1*(esize>>3)] == '0');
+  op1 = Q[m, curBeat];
+  op2 = Q[n, curBeat];
+  case rot of
+    when '00'
+      elem1 = Elem[op1, 0, esize];
+      elem2 = Elem[op2, 0, esize];
+      elem3 = Elem[op1, 1, esize];
+      elem4 = Elem[op2, 0, esize];
+    when '01'
+      elem1 = FPNeg(Elem[op1, 1, esize]);
+      elem2 = Elem[op2, 1, esize];
+      elem3 = Elem[op1, 0, esize];
+      elem4 = Elem[op2, 1, esize];
+    when '10'
+      elem1 = FPNeg(Elem[op1, 0, esize]);
+      elem2 = Elem[op2, 0, esize];
+      elem3 = FPNeg(Elem[op1, 1, esize]);
+      elem4 = Elem[op2, 0, esize];
+    when '11'
+      elem1 = Elem[op1, 1, esize];
+      elem2 = Elem[op2, 1, esize];
+      elem3 = FPNeg(Elem[op1, 0, esize]);
+      elem4 = Elem[op2, 1, esize];
+  Elem[result, 0, esize] = FPMulAdd(Elem[dest, 0, esize], elem2, elem1, FALSE, pred0);
+  Elem[result, 1, esize] = FPMulAdd(Elem[dest, 1, esize], elem4, elem3, FALSE, pred1);
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[da, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.317. VCMP：浮点比较
+
+浮点比较（Floating-point Compare）。浮点比较比较两个寄存器，或一个寄存器与零，并把结果写入 `FPSCR` 条件标志。这些标志通常由后续的 `VMRS` 指令传送到 `APSR` 条件标志。
+
+仅当任一操作数为信号 NaN 时，本指令才产生无效操作异常。
+
+#### 4.317.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-530](FigureC2-530.png)
+
+**半精度标量变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `size == 01` 时适用。
+
+```arm
+VCMP{<c>}{<q>}.F16 <Sd>, <Sm>
+```
+
+**单精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 10` 时适用。
+
+```arm
+VCMP{<c>}{<q>}.F32 <Sd>, <Sm>
+```
+
+**双精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 11` 时适用。
+
+```arm
+VCMP{<c>}{<q>}.F64 <Dd>, <Dm>
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (M == '1' || D == '1') then UNDEFINED;
+if size == '01' && InITBlock() then UNPREDICTABLE;
+quiet_nan_exc = (E == '1');
+with_zero = FALSE;
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+#### 4.317.2. 编码 T2
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-531](FigureC2-531.png)
+
+**半精度标量变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `size == 01` 时适用。
+
+```arm
+VCMP{<c>}{<q>}.F16 <Sd>, #0.0
+```
+
+**单精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 10` 时适用。
+
+```arm
+VCMP{<c>}{<q>}.F32 <Sd>, #0.0
+```
+
+**双精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 11` 时适用。
+
+```arm
+VCMP{<c>}{<q>}.F64 <Dd>, #0.0
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (D == '1') then UNDEFINED;
+if size == '01' && InITBlock() then UNPREDICTABLE;
+quiet_nan_exc = (E == '1');
+with_zero = TRUE;
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = integer UNKNOWN;
+```
+
+#### 4.317.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+- **`<Dd>`**：浮点目标寄存器的 64 位名称，编码在 `D:Vd` 字段中。
+- **`<Dm>`**：浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+
+#### 4.317.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  ExecuteFPCheck();
+  case size of
+    when '01'
+      op16 = if with_zero then FPZero('0',16) else S[m][15:0];
+      (FPSCR.N, FPSCR.Z, FPSCR.C, FPSCR.V) = FPCompare(S[d][15:0], op16, quiet_nan_exc, TRUE);
+    when '10'
+      op32 = if with_zero then FPZero('0',32) else S[m];
+      (FPSCR.N, FPSCR.Z, FPSCR.C, FPSCR.V) = FPCompare(S[d], op32, quiet_nan_exc, TRUE);
+    when '11'
+      op64 = if with_zero then FPZero('0',64) else D[m];
+      (FPSCR.N, FPSCR.Z, FPSCR.C, FPSCR.V) = FPCompare(D[d], op64, quiet_nan_exc, TRUE);
+```
+
+#### 4.317.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.318. VCMP (floating-point)：向量比较（浮点）
+
+向量比较（Vector Compare）。在第一个源向量寄存器的每个元素与第二个源向量寄存器的对应元素或某个通用寄存器的值之间逐通道进行比较。比较得到的布尔条件放入 `VPR.P0`。被谓词化通道的 `VPR.P0` 标志被清零。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.318.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE 的半精度与单精度浮点扩展。
+
+![FigureC2-532](FigureC2-532.png)
+
+**T1: VCMP 变体**
+
+```arm
+VCMP<v><q>.<dt> <fc>, Qn, Qm
+```
+
+**解码**
+
+```arm
+if fcA == '0' && fcB == '1' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_MveFp);
+if M == '1' then UNDEFINED;
+m = UInt(M:Qm);
+n = UInt(Qn);
+f_cond = fcA:fcB:fcC;
+withScalar = FALSE;
+esize = 8 << UInt(if sz == '1' then '01' else '10');
+elements = 32 DIV esize;
+ebytes = esize DIV 8;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.318.2. 编码 T2
+
+仅适用于 Armv8.1-M MVE 的半精度与单精度浮点扩展。
+
+![FigureC2-533](FigureC2-533.png)
+
+**T2: VCMP 变体**
+
+```arm
+VCMP<v><q>.<dt> <fc>, Qn, Rm
+```
+
+**解码**
+
+```arm
+if Rm == '1101' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_MveFp);
+m = UInt(Rm);
+n = UInt(Qn);
+f_cond = fcA:fcB:fcC;
+withScalar = TRUE;
+esize = 8 << UInt(if sz == '1' then '01' else '10');
+elements = 32 DIV esize;
+ebytes = esize DIV 8;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if fcA == '0' && fcB == '1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.318.3. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示所用的浮点格式。
+  该参数必须是以下取值之一：
+  - `F32`，编码为 `sz = 0`。
+  - `F16`，编码为 `sz = 1`。
+- **`<fc>`**：所使用的比较条件。
+  该参数必须是以下取值之一：
+  - `EQ`，编码为 `fcA = 0`、`fcB = 0`、`fcC = 0`。
+  - `NE`，编码为 `fcA = 0`、`fcB = 0`、`fcC = 1`。
+  - `GE`，编码为 `fcA = 1`、`fcB = 0`、`fcC = 0`。
+  - `LT`，编码为 `fcA = 1`、`fcB = 0`、`fcC = 1`。
+  - `GT`，编码为 `fcA = 1`、`fcB = 1`、`fcC = 0`。
+  - `LE`，编码为 `fcA = 1`、`fcB = 1`、`fcC = 1`。
+- **`<Qn>`**：第一个源向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+- **`<Rm>`**：源通用寄存器（允许使用 ZR，不允许使用 PC）。
+
+#### 4.318.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+op1 = Q[n, curBeat];
+beatPred = Zeros(4);
+if withScalar then
+  op2 = RZ[m][esize-1:0];
+else
+  opm = Q[m, curBeat];
+
+for e = 0 to elements-1
+  if !withScalar then
+    op2 = Elem[opm, e, esize];
+  // 通过检查元素掩码，避免在被谓词化的通道上产生浮点异常
+  predicated = (elmtMask[e*(esize>>3)] == '0');
+  (flN, flZ, flC, flV) = FPCompare(Elem[op1, e, esize], op2, TRUE, FALSE, predicated);
+  pred = ConditionHolds(f_cond, flN, flZ, flC, flV);
+  Elem[beatPred, e, ebytes] = Replicate(if pred then '1' else '0');
+
+Elem[VPR.P0, curBeat, 4] = beatPred AND elmtMask;
+```
+
+#### 4.318.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.319. VCMP (vector)：向量比较（向量）
+
+向量比较（Vector Compare）。在第一个源向量寄存器的每个元素与第二个源向量寄存器的对应元素或某个通用寄存器的值之间逐通道进行比较。比较得到的布尔条件放入 `VPR.P0`。被谓词化通道的 `VPR.P0` 标志被清零。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.319.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-534](FigureC2-534.png)
+
+**T1: VCMP 变体**
+
+```arm
+VCMP<v><q>.<dt> <fc>, Qn, Qm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if M == '1' then UNDEFINED;
+m = UInt(M:Qm);
+n = UInt(Qn);
+f_cond = '00':fc;
+withScalar = FALSE;
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+ebytes = esize DIV 8;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.319.2. 编码 T2
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-535](FigureC2-535.png)
+
+**T2: VCMP 变体**
+
+```arm
+VCMP<v><q>.<dt> <fc>, Qn, Qm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if M == '1' then UNDEFINED;
+m = UInt(M:Qm);
+n = UInt(Qn);
+f_cond = '01':fc;
+withScalar = FALSE;
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+ebytes = esize DIV 8;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.319.3. 编码 T3
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-536](FigureC2-536.png)
+
+**T3: VCMP 变体**
+
+```arm
+VCMP<v><q>.<dt> <fc>, Qn, Qm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if M == '1' then UNDEFINED;
+m = UInt(M:Qm);
+n = UInt(Qn);
+f_cond = '1':fch:fcl;
+withScalar = FALSE;
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+ebytes = esize DIV 8;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.319.4. 编码 T4
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-537](FigureC2-537.png)
+
+**T4: VCMP 变体**
+
+```arm
+VCMP<v><q>.<dt> <fc>, Qn, Rm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+m = UInt(Rm);
+n = UInt(Qn);
+f_cond = '00':fc;
+withScalar = TRUE;
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+ebytes = esize DIV 8;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if Rm == '1101' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.319.5. 编码 T5
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-538](FigureC2-538.png)
+
+**T5: VCMP 变体**
+
+```arm
+VCMP<v><q>.<dt> <fc>, Qn, Rm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+m = UInt(Rm);
+n = UInt(Qn);
+f_cond = '01':fc;
+withScalar = TRUE;
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+ebytes = esize DIV 8;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if Rm == '1101' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.319.6. 编码 T6
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-539](FigureC2-539.png)
+
+**T6: VCMP 变体**
+
+```arm
+VCMP<v><q>.<dt> <fc>, Qn, Rm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+m = UInt(Rm);
+n = UInt(Qn);
+f_cond = '1':fch:fcl;
+withScalar = TRUE;
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+ebytes = esize DIV 8;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if Rm == '1101' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.319.7. 汇编符号（T1 编码）
+
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `I8`，编码为 `size = 00`。
+  - `I16`，编码为 `size = 01`。
+  - `I32`，编码为 `size = 10`。
+- **`<fc>`**：所使用的比较条件。
+  该参数必须是以下取值之一：
+  - `EQ`，编码为 `fc = 0`。
+  - `NE`，编码为 `fc = 1`。
+
+#### 4.319.8. 汇编符号（T2 编码）
+
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `U8`，编码为 `size = 00`。
+  - `U16`，编码为 `size = 01`。
+  - `U32`，编码为 `size = 10`。
+- **`<fc>`**：所使用的比较条件。
+  该参数必须是以下取值之一：
+  - `CS`，编码为 `fc = 0`。
+  - `HI`，编码为 `fc = 1`。
+
+#### 4.319.9. 汇编符号（T3 编码）
+
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`。
+  - `S16`，编码为 `size = 01`。
+  - `S32`，编码为 `size = 10`。
+- **`<fc>`**：所使用的比较条件。
+  该参数必须是以下取值之一：
+  - `GE`，编码为 `fch = 0`、`fcl = 0`。
+  - `LT`，编码为 `fch = 0`、`fcl = 1`。
+  - `GT`，编码为 `fch = 1`、`fcl = 0`。
+  - `LE`，编码为 `fch = 1`、`fcl = 1`。
+
+#### 4.319.10. 汇编符号（T4 编码）
+
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `I8`，编码为 `size = 00`。
+  - `I16`，编码为 `size = 01`。
+  - `I32`，编码为 `size = 10`。
+- **`<fc>`**：所使用的比较条件。
+  该参数必须是以下取值之一：
+  - `EQ`，编码为 `fc = 0`。
+  - `NE`，编码为 `fc = 1`。
+
+#### 4.319.11. 汇编符号（T5 编码）
+
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `U8`，编码为 `size = 00`。
+  - `U16`，编码为 `size = 01`。
+  - `U32`，编码为 `size = 10`。
+- **`<fc>`**：所使用的比较条件。
+  该参数必须是以下取值之一：
+  - `CS`，编码为 `fc = 0`。
+  - `HI`，编码为 `fc = 1`。
+
+#### 4.319.12. 汇编符号（T6 编码）
+
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`。
+  - `S16`，编码为 `size = 01`。
+  - `S32`，编码为 `size = 10`。
+- **`<fc>`**：所使用的比较条件。
+  该参数必须是以下取值之一：
+  - `GE`，编码为 `fch = 0`、`fcl = 0`。
+  - `LT`，编码为 `fch = 0`、`fcl = 1`。
+  - `GT`，编码为 `fch = 1`、`fcl = 0`。
+  - `LE`，编码为 `fch = 1`、`fcl = 1`。
+
+#### 4.319.13. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Qn>`**：第一个源向量寄存器。
+- **`<Qm>`**：第二个源向量寄存器。
+- **`<Rm>`**：源通用寄存器（允许使用 ZR，不允许使用 PC）。
+
+#### 4.319.14. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+op1 = Q[n, curBeat];
+beatPred = Zeros(4);
+if withScalar then
+  op2 = RZ[m][esize-1:0];
+else
+  opm = Q[m, curBeat];
+
+for e = 0 to elements-1
+  if !withScalar then
+    op2 = Elem[opm, e, esize];
+  (result, flC, flV) = AddWithCarry(Elem[op1, e, esize], NOT(op2), '1');
+  flN = result[esize-1];
+  flZ = IsZeroBit(result);
+  pred = ConditionHolds(f_cond, flN, flZ, flC, flV);
+  Elem[beatPred, e, ebytes] = Replicate(if pred then '1' else '0');
+
+Elem[VPR.P0, curBeat, 4] = beatPred AND elmtMask;
+```
+
+#### 4.319.15. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.320. VCMPE：浮点比较（NaN 时产生无效操作）
+
+浮点比较（NaN 时产生无效操作）（Floating-point Compare, raising Invalid Operation on NaN）。本指令比较两个寄存器，或一个寄存器与零，并把结果写入 `FPSCR` 条件标志。这些标志通常由后续的 `VMRS` 指令传送到 `APSR` 条件标志。
+
+若任一操作数为任意类型的 NaN，本指令产生无效操作异常。
+
+#### 4.320.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-540](FigureC2-540.png)
+
+**半精度标量变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `size == 01` 时适用。
+
+```arm
+VCMPE{<c>}{<q>}.F16 <Sd>, <Sm>
+```
+
+**单精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 10` 时适用。
+
+```arm
+VCMPE{<c>}{<q>}.F32 <Sd>, <Sm>
+```
+
+**双精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 11` 时适用。
+
+```arm
+VCMPE{<c>}{<q>}.F64 <Dd>, <Dm>
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (M == '1' || D == '1') then UNDEFINED;
+if size == '01' && InITBlock() then UNPREDICTABLE;
+quiet_nan_exc = (E == '1');
+with_zero = FALSE;
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+#### 4.320.2. 编码 T2
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-541](FigureC2-541.png)
+
+**半精度标量变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `size == 01` 时适用。
+
+```arm
+VCMPE{<c>}{<q>}.F16 <Sd>, #0.0
+```
+
+**单精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 10` 时适用。
+
+```arm
+VCMPE{<c>}{<q>}.F32 <Sd>, #0.0
+```
+
+**双精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 11` 时适用。
+
+```arm
+VCMPE{<c>}{<q>}.F64 <Dd>, #0.0
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (D == '1') then UNDEFINED;
+if size == '01' && InITBlock() then UNPREDICTABLE;
+quiet_nan_exc = (E == '1');
+with_zero = TRUE;
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = integer UNKNOWN;
+```
+
+#### 4.320.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+- **`<Dd>`**：浮点目标寄存器的 64 位名称，编码在 `D:Vd` 字段中。
+- **`<Dm>`**：浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+
+#### 4.320.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  ExecuteFPCheck();
+  case size of
+    when '01'
+      op16 = if with_zero then FPZero('0',16) else S[m][15:0];
+      (FPSCR.N, FPSCR.Z, FPSCR.C, FPSCR.V) = FPCompare(S[d][15:0], op16, quiet_nan_exc, TRUE);
+    when '10'
+      op32 = if with_zero then FPZero('0',32) else S[m];
+      (FPSCR.N, FPSCR.Z, FPSCR.C, FPSCR.V) = FPCompare(S[d], op32, quiet_nan_exc, TRUE);
+    when '11'
+      op64 = if with_zero then FPZero('0',64) else D[m];
+      (FPSCR.N, FPSCR.Z, FPSCR.C, FPSCR.V) = FPCompare(D[d], op64, quiet_nan_exc, TRUE);
+```
+
+#### 4.320.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.321. VCMUL (floating-point)：向量复数乘（浮点）
+
+向量复数乘（Vector Complex Multiply）。本指令处理以元素对形式表示在寄存器中的复数。每个元素存放一个浮点值：奇数元素存放该数的虚部，偶数元素存放该数的实部。本指令对两个源寄存器与目标寄存器中对应的复数元素对执行运算。把第二个源寄存器中的复数放在 Argand 图上考虑时，该数逆时针旋转 0、90、180 或 270 度。若变换为旋转 0 度或 180 度，则变换后复数的两个元素与第一个源寄存器的实部元素相乘。若变换为旋转 90 度或 270 度，则这两个元素与第一个源寄存器中该复数的虚部元素相乘。结果写入目标向量寄存器。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.321.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE 的半精度与单精度浮点扩展。
+
+![FigureC2-542](FigureC2-542.png)
+
+**T1: VCMUL 变体**
+
+```arm
+VCMUL<v><q>.<dt> Qd, Qn, Qm, #<rotate>
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_MveFp);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+esize = if sz == '0' then 16 else 32;
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if sz == '1' && (D:Qd == M:Qm || D:Qd == N:Qn) then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.321.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示所用的浮点格式。
+  该参数必须是以下取值之一：
+  - `F16`，编码为 `sz = 0`。
+  - `F32`，编码为 `sz = 1`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qn>`**：第一个源向量寄存器。
+- **`<Qm>`**：第二个源向量寄存器。
+- **`<rotate>`**：旋转量。
+  该参数必须是以下取值之一：
+  - `#0`，编码为 `roth = 0`、`rotl = 0`。
+  - `#90`，编码为 `roth = 0`、`rotl = 1`。
+  - `#180`，编码为 `roth = 1`、`rotl = 0`。
+  - `#270`，编码为 `roth = 1`、`rotl = 1`。
+
+#### 4.321.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+if esize == 32 then
+  // 通过检查元素掩码，避免在被谓词化的通道上产生浮点异常
+  pred = (elmtMask[0*(esize>>3)] == '0');
+  if (curBeat[0] == '0') then
+    case roth:rotl of
+      when '00'
+        element1 = Q[m, curBeat];
+        element2 = Q[n, curBeat];
+      when '01'
+        element1 = FPNeg(Q[m, curBeat+1]);
+        element2 = Q[n, curBeat+1];
+      when '10'
+        element1 = FPNeg(Q[m, curBeat]);
+        element2 = Q[n, curBeat];
+      when '11'
+        element1 = Q[m, curBeat+1];
+        element2 = Q[n, curBeat+1];
+  else
+    case roth:rotl of
+      when '00'
+        element1 = Q[m, curBeat];
+        element2 = Q[n, curBeat-1];
+      when '01'
+        element1 = Q[m, curBeat-1];
+        element2 = Q[n, curBeat];
+      when '10'
+        element1 = FPNeg(Q[m, curBeat]);
+        element2 = Q[n, curBeat-1];
+      when '11'
+        element1 = FPNeg(Q[m, curBeat-1]);
+        element2 = Q[n, curBeat];
+  result = FPMul(element2, element1, FALSE, pred);
+else
+  // 通过检查元素掩码，避免在被谓词化的通道上产生浮点异常
+  pred0 = (elmtMask[0*(esize>>3)] == '0');
+  pred1 = (elmtMask[1*(esize>>3)] == '0');
+  op1 = Q[m, curBeat];
+  op2 = Q[n, curBeat];
+  case roth:rotl of
+    when '00'
+      elem1 = Elem[op1, 0, esize];
+      elem2 = Elem[op2, 0, esize];
+      elem3 = Elem[op1, 1, esize];
+      elem4 = Elem[op2, 0, esize];
+    when '01'
+      elem1 = FPNeg(Elem[op1, 1, esize]);
+      elem2 = Elem[op2, 1, esize];
+      elem3 = Elem[op1, 0, esize];
+      elem4 = Elem[op2, 1, esize];
+    when '10'
+      elem1 = FPNeg(Elem[op1, 0, esize]);
+      elem2 = Elem[op2, 0, esize];
+      elem3 = FPNeg(Elem[op1, 1, esize]);
+      elem4 = Elem[op2, 0, esize];
+    when '11'
+      elem1 = Elem[op1, 1, esize];
+      elem2 = Elem[op2, 1, esize];
+      elem3 = FPNeg(Elem[op1, 0, esize]);
+      elem4 = Elem[op2, 1, esize];
+  Elem[result, 0, esize] = FPMul(elem2, elem1, FALSE, pred0);
+  Elem[result, 1, esize] = FPMul(elem4, elem3, FALSE, pred1);
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.322. VCTP：创建向量尾部谓词
+
+创建向量尾部谓词（Create Vector Tail Predicate）。在 `VPR.P0` 中创建谓词模式，使得编号大于或等于 `Rn` 值的任何元素都被谓词化，而编号小于 `Rn` 值的任何元素都不被谓词化。若本指令位于 VPT 块中且某个通道被谓词化，则相应的 `VPR.P0` 模式也会被谓词化。生成的 `VPR.P0` 模式可供后续的谓词化指令使用，以便对某个向量寄存器施加尾部谓词化。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.322.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-543](FigureC2-543.png)
+
+**T1: VCTP 变体**
+
+```arm
+VCTP<v><q>.<dt> Rn
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "Related encodings";
+if !HaveMve() then UNDEFINED;
+HandleException(CheckCPEnabled(10));
+n = UInt(Rn);
+predSize = UInt(size);
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if Rn == '1101' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.322.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：要处理的向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `8`，编码为 `size = 00`。
+  - `16`，编码为 `size = 01`。
+  - `32`，编码为 `size = 10`。
+  - `64`，编码为 `size = 11`。
+- **`<Rn>`**：存放需要处理的元素个数的寄存器。
+
+#### 4.322.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+loopCount = R[n];
+if UInt(loopCount) <= (1 << (4 - predSize)) then
+  fullMask = ZeroExtend(Ones(UInt(loopCount[4-predSize:0] : Zeros(predSize))), 16);
+else
+  fullMask = Ones(16);
+
+Elem[VPR.P0, curBeat, 4] = elmtMask AND Elem[fullMask, curBeat, 4];
+```
+
+### 4.323. VCVT (between double-precision and single-precision)：精度转换（双精度与单精度之间）
+
+双精度与单精度之间的转换（Convert between double-precision and single-precision）。本指令执行以下操作之一：
+
+- 把双精度寄存器中的值转换为单精度，并把结果写入单精度寄存器。
+- 把单精度寄存器中的值转换为双精度，并把结果写入双精度寄存器。
+
+#### 4.323.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展。
+
+![FigureC2-544](FigureC2-544.png)
+
+**单精度到双精度变体**
+
+当 `sz == 0` 时适用。
+
+```arm
+VCVT{<c>}{<q>}.F64.F32 <Dd>, <Sm>
+```
+
+**双精度到单精度变体**
+
+当 `sz == 1` 时适用。
+
+```arm
+VCVT{<c>}{<q>}.F32.F64 <Sd>, <Dm>
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_DpFp);
+double_to_single = (sz == '1');
+if double_to_single then
+  if VFPSmallRegisterBank() && (M == '1') then UNDEFINED;
+  d = UInt(Vd:D);
+  m = UInt(M:Vm);
+else
+  if VFPSmallRegisterBank() && (D == '1') then UNDEFINED;
+  d = UInt(D:Vd);
+  m = UInt(Vm:M);
+```
+
+#### 4.323.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Dm>`**：浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+- **`<Dd>`**：浮点目标寄存器的 64 位名称，编码在 `D:Vd` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+
+#### 4.323.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  ExecuteFPCheck();
+  if double_to_single then
+    S[d] = FPDoubleToSingle(D[m], TRUE);
+  else
+    D[d] = FPSingleToDouble(S[m], TRUE);
+```
+
+### 4.324. VCVT (between floating-point and fixed-point)：转换（浮点与定点之间）
+
+浮点与定点之间的转换（Floating-point Convert (between floating-point and fixed-point)）。本指令把寄存器中的值从浮点转换为定点，或从定点转换为浮点，并把结果放入目标寄存器。软件可以把定点的值指定为有符号或无符号。
+
+定点的值可以是 16 位或 32 位。从定点值转换时，操作数取自源寄存器的低位，其余位被忽略。向定点值的有符号转换把结果值符号扩展到目标寄存器的宽度。向定点值的无符号转换把结果值零扩展到目标寄存器的宽度。
+
+浮点到定点的运算使用向零舍入（Round towards Zero）模式。定点到浮点的运算使用就近舍入（Round to Nearest）模式。
+
+#### 4.324.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`sf == 11` 为 UNDEFINED。
+
+![FigureC2-545](FigureC2-545.png)
+
+**定点到半精度变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `op == 0 && sf == 01` 时适用。
+
+```arm
+VCVT{<c>}{<q>}.F16.<dt> <Sdm>, <Sdm>, #<fbits>
+```
+
+**半精度到定点变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `op == 1 && sf == 01` 时适用。
+
+```arm
+VCVT{<c>}{<q>}.<dt>.F16 <Sdm>, <Sdm>, #<fbits>
+```
+
+**定点到单精度变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `op == 0 && sf == 10` 时适用。
+
+```arm
+VCVT{<c>}{<q>}.F32.<dt> <Sdm>, <Sdm>, #<fbits>
+```
+
+**单精度到定点变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `op == 1 && sf == 10` 时适用。
+
+```arm
+VCVT{<c>}{<q>}.<dt>.F32 <Sdm>, <Sdm>, #<fbits>
+```
+
+**定点到双精度变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `op == 0 && sf == 11` 时适用。
+
+```arm
+VCVT{<c>}{<q>}.F64.<dt> <Ddm>, <Ddm>, #<fbits>
+```
+
+**双精度到定点变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `op == 1 && sf == 11` 时适用。
+
+```arm
+VCVT{<c>}{<q>}.<dt>.F64 <Ddm>, <Ddm>, #<fbits>
+```
+
+**解码**
+
+```arm
+dp_operation = (sf == '11');
+CheckFPDecodeFaults(sf);
+if VFPSmallRegisterBank() && dp_operation && (D == '1') then UNDEFINED;
+if sf == '01' && InITBlock() then UNPREDICTABLE;
+to_fixed = (op == '1');
+unsigned = (U == '1');
+esize = if sx == '0' then 16 else 32;
+fract = esize - UInt(imm4:i);
+if to_fixed then
+  round_zero = TRUE;
+else
+  round_nearest = TRUE;
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+if fract < 0 then UNPREDICTABLE;
+```
+
+#### 4.324.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `fract < 0`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按 NOP 执行。
+- 目标寄存器中的值为 UNKNOWN。
+
+#### 4.324.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：定点数的数据类型，编码在 `U:sx` 字段中。它可以取以下值：
+  - `S16`，当 `U = 0`、`sx = 0` 时。
+  - `S32`，当 `U = 0`、`sx = 1` 时。
+  - `U16`，当 `U = 1`、`sx = 0` 时。
+  - `U32`，当 `U = 1`、`sx = 1` 时。
+- **`<Sdm>`**：浮点目标兼源寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Ddm>`**：浮点目标兼源寄存器的 64 位名称，编码在 `D:Vd` 字段中。
+- **`<fbits>`**：定点数中的小数位数：
+  - 若 `<dt>` 为 `S16` 或 `U16`，`<fbits>` 必须在 0-16 范围内。`(16 - <fbits>)` 编码在 `[imm4, i]` 中。
+  - 若 `<dt>` 为 `S32` 或 `U32`，`<fbits>` 必须在 1-32 范围内。`(32 - <fbits>)` 编码在 `[imm4, i]` 中。
+
+#### 4.324.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  ExecuteFPCheck();
+  if to_fixed then
+    case sf of
+      when '01'
+        result = FPToFixed(S[d][15:0], esize, fract, unsigned, round_zero, TRUE);
+        S[d] = if unsigned then ZeroExtend(result, 32) else SignExtend(result, 32);
+      when '10'
+        result = FPToFixed(S[d], esize, fract, unsigned, round_zero, TRUE);
+        S[d] = if unsigned then ZeroExtend(result, 32) else SignExtend(result, 32);
+      when '11'
+        result = FPToFixed(D[d], esize, fract, unsigned, round_zero, TRUE);
+        D[d] = if unsigned then ZeroExtend(result, 64) else SignExtend(result, 64);
+  else
+    case sf of
+      when '01'
+        fp16 = FixedToFP(S[d][esize-1:0], 16, fract, unsigned, round_nearest, TRUE);
+        S[d] = Zeros(16):fp16;
+      when '10'
+        S[d] = FixedToFP(S[d][esize-1:0], 32, fract, unsigned, round_nearest, TRUE);
+      when '11'
+        D[d] = FixedToFP(D[d][esize-1:0], 64, fract, unsigned, round_nearest, TRUE);
+```
+
+### 4.325. VCVT (between floating-point and fixed-point) (vector)：转换（浮点与定点之间，向量）
+
+向量浮点与定点之间的转换（Vector Convert between floating-point and fixed-point）。在向量寄存器的各元素中执行浮点值与定点值之间的转换。定点值的小数位数由立即数指定。定点的值可以指定为有符号或无符号。浮点到定点的运算使用向零舍入（Round towards Zero）模式。定点到浮点的运算使用就近舍入（Round to Nearest）模式。对于浮点到定点的运算，若源值超出目标定点类型的范围，则结果饱和。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.325.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE 的半精度与单精度浮点扩展。
+
+![FigureC2-546](FigureC2-546.png)
+
+**T1: VCVT 变体**
+
+```arm
+VCVT<v><q>.<dt> Qd, Qm, #<fbits>
+```
+
+**解码**
+
+```arm
+if imm6 == '000xxx' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_MveFp);
+if D == '1' || M == '1' then UNDEFINED;
+if imm6 == '0xxxxx' || (fsi == '0' && imm6 == '10xxxx') then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+esize = 16 << UInt(fsi);
+elements = 32 DIV esize;
+toFixed = (op == '1');
+unsigned = (U == '1');
+fracBits = 64 - UInt(imm6);
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.325.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：该参数必须是以下取值之一：
+  - `F16.S16`，编码为 `fsi = 0`、`op = 0`、`U = 0`：把有符号 16 位整数转换为半精度浮点。
+  - `F16.U16`，编码为 `fsi = 0`、`op = 0`、`U = 1`：把无符号 16 位整数转换为半精度浮点。
+  - `S16.F16`，编码为 `fsi = 0`、`op = 1`、`U = 0`：把半精度浮点转换为有符号 16 位整数。
+  - `U16.F16`，编码为 `fsi = 0`、`op = 1`、`U = 1`：把半精度浮点转换为无符号 16 位整数。
+  - `F32.S32`，编码为 `fsi = 1`、`op = 0`、`U = 0`：把有符号 32 位整数转换为单精度浮点。
+  - `F32.U32`，编码为 `fsi = 1`、`op = 0`、`U = 1`：把无符号 32 位整数转换为单精度浮点。
+  - `S32.F32`，编码为 `fsi = 1`、`op = 1`、`U = 0`：把单精度浮点转换为有符号 32 位整数。
+  - `U32.F32`，编码为 `fsi = 1`、`op = 1`、`U = 1`：把单精度浮点转换为无符号 32 位整数。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+- **`<fbits>`**：定点数中的小数位数。对于 16 位定点，该数必须在 1-16 范围内。对于 32 位定点，该数必须在 1-32 范围内。`(64 - <fbits>)` 的值编码在 `imm6` 中。
+
+#### 4.325.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[m, curBeat];
+for e = 0 to elements-1
+  // 通过检查元素掩码，避免在被谓词化的通道上产生浮点异常
+  pred = (elmtMask[e*(esize>>3)] == '0');
+  if toFixed then
+    // 向零舍入
+    value = FPToFixed(Elem[op1, e, esize], esize, fracBits, unsigned, TRUE, FALSE, pred);
+  else
+    // 就近舍入
+    value = FixedToFP(Elem[op1, e, esize], esize, fracBits, unsigned, TRUE, FALSE, pred);
+  Elem[result, e, esize] = value[esize-1:0];
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.326. VCVT (between floating-point and integer)：转换（浮点与整数之间，向量）
+
+向量浮点与整数之间的转换（Vector Convert between floating-point and integer）。在向量寄存器的各元素中执行浮点值与整数值之间的转换。转换为整数时，值向零舍入；转换为浮点时，值就近舍入。对于浮点到整数的运算，若源值超出目标整数类型的范围，则结果饱和。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.326.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE 的半精度与单精度浮点扩展。
+
+![FigureC2-547](FigureC2-547.png)
+
+**T1: VCVT 变体**
+
+```arm
+VCVT<v><q>.<dt> Qd, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_MveFp);
+if D == '1' || M == '1' then UNDEFINED;
+if size IN {'11', '00'} then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+toInteger = (op[1] == '1');
+unsigned = (op[0] == '1');
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.326.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：该参数必须是以下取值之一：
+  - `F16.S16`，编码为 `op = 00`、`size = 01`：把有符号 16 位整数转换为半精度浮点。
+  - `F32.S32`，编码为 `op = 00`、`size = 10`：把有符号 32 位整数转换为单精度浮点。
+  - `F16.U16`，编码为 `op = 01`、`size = 01`：把无符号 16 位整数转换为半精度浮点。
+  - `F32.U32`，编码为 `op = 01`、`size = 10`：把无符号 32 位整数转换为单精度浮点。
+  - `S16.F16`，编码为 `op = 10`、`size = 01`：把半精度浮点转换为有符号 16 位整数。
+  - `S32.F32`，编码为 `op = 10`、`size = 10`：把单精度浮点转换为有符号 32 位整数。
+  - `U16.F16`，编码为 `op = 11`、`size = 01`：把半精度浮点转换为无符号 16 位整数。
+  - `U32.F32`，编码为 `op = 11`、`size = 10`：把单精度浮点转换为无符号 32 位整数。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+
+#### 4.326.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[m, curBeat];
+for e = 0 to elements-1
+  // 通过检查元素掩码，避免在被谓词化的通道上产生浮点异常
+  pred = (elmtMask[e*(esize>>3)] == '0');
+  if toInteger then
+    // 向零舍入
+    value = FPToFixed(Elem[op1, e, esize], esize, 0, unsigned, TRUE, FALSE, pred);
+  else
+    // 就近舍入
+    value = FixedToFP(Elem[op1, e, esize], esize, 0, unsigned, TRUE, FALSE, pred);
+  Elem[result, e, esize] = value[esize-1:0];
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.327. VCVT (between single and half-precision floating-point)：转换（单精度与半精度之间，向量）
+
+半精度与单精度之间的转换（Vector Convert between half-precision and single-precision）。在向量寄存器的各元素中执行半精度与单精度浮点值之间的转换。对于半精度到单精度的运算，选择源向量寄存器的上半部分（`T` 变体）或下半部分（`B` 变体）。对于单精度到半精度的运算，选择目标向量寄存器的上半部分（`T` 变体）或下半部分（`B` 变体），另一半保留其先前的值。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.327.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE 的半精度与单精度浮点扩展。
+
+![FigureC2-548](FigureC2-548.png)
+
+**T1: VCVT 变体**
+
+```arm
+VCVT<T><v><q>.<dt> Qd, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_MveFp);
+if D == '1' || M == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+elements = 4;
+halfToSingle = (op == '1');
+esize = if halfToSingle then 16 else 32;
+top = UInt(T);
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.327.2. 汇编符号（所有编码）
+
+- **`<T>`**：指定从 FP32 向量寄存器元素的顶部（`T`）或底部（`B`）半部分读取或写入 FP16 值。
+  该参数必须是以下取值之一：
+  - `B`，编码为 `T = 0`，表示底部半部分。
+  - `T`，编码为 `T = 1`，表示顶部半部分。
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：该参数必须是以下取值之一：
+  - `F16.F32`，编码为 `op = 0`：把单精度转换为半精度。
+  - `F32.F16`，编码为 `op = 1`：把半精度转换为单精度。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+
+#### 4.327.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[m, curBeat];
+if halfToSingle then
+  // 通过检查元素掩码，避免在被谓词化的通道上产生浮点异常
+  pred = (elmtMask[top*(esize>>3)] == '0');
+  result = FPHalfToSingle(Elem[op1, top, 16], FALSE, pred);
+else
+  // 通过检查元素掩码，避免在被谓词化的通道上产生浮点异常
+  pred = (elmtMask[0*(esize>>3)] == '0');
+  // 写入目标元素所选的半部分
+  Elem[result, top, 16] = FPSingleToHalf(op1, FALSE, pred);
+  // 不覆盖另一半
+  Elem[result, 1-top, 16] = Elem[Q[d, curBeat], 1-top, 16];
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.328. VCVT (floating-point to integer)：浮点转换为整数
+
+向零舍入的浮点转换为整数（Convert floating-point to integer with Round towards Zero）。本指令使用向零舍入（Round towards Zero）模式把寄存器中的值从浮点转换为 32 位整数，并把结果放入目标寄存器。
+
+#### 4.328.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-549](FigureC2-549.png)
+
+**半精度到无符号单精度变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `opc2 == 0 && size == 01` 时适用。
+
+```arm
+VCVT{<c>}{<q>}.U32.F16 <Sd>, <Sm>
+```
+
+**半精度到有符号单精度变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `opc2 == 1 && size == 01` 时适用。
+
+```arm
+VCVT{<c>}{<q>}.S32.F16 <Sd>, <Sm>
+```
+
+**单精度到无符号单精度变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `opc2 == 0 && size == 10` 时适用。
+
+```arm
+VCVT{<c>}{<q>}.U32.F32 <Sd>, <Sm>
+```
+
+**单精度到有符号单精度变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `opc2 == 1 && size == 10` 时适用。
+
+```arm
+VCVT{<c>}{<q>}.S32.F32 <Sd>, <Sm>
+```
+
+**双精度到无符号单精度变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `opc2 == 0 && size == 11` 时适用。
+
+```arm
+VCVT{<c>}{<q>}.U32.F64 <Sd>, <Dm>
+```
+
+**双精度到有符号单精度变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `opc2 == 1 && size == 11` 时适用。
+
+```arm
+VCVT{<c>}{<q>}.S32.F64 <Sd>, <Dm>
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (M == '1') then UNDEFINED;
+unsigned = (opc2 == '0');
+round_zero = (op == '1');
+d = UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+if size == '01' && InITBlock() then UNPREDICTABLE;
+```
+
+#### 4.328.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+- **`<Dm>`**：浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+
+#### 4.328.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  ExecuteFPCheck();
+  case size of
+    when '01'
+      S[d] = FPToFixed(S[m][15:0], 32, 0, unsigned, round_zero, TRUE);
+    when '10'
+      S[d] = FPToFixed(S[m], 32, 0, unsigned, round_zero, TRUE);
+    when '11'
+      S[d] = FPToFixed(D[m], 32, 0, unsigned, round_zero, TRUE);
+```
+
+### 4.329. VCVT (from floating-point to integer)：浮点转换为整数（指定舍入模式，向量）
+
+向量浮点转换为整数（Vector Convert from floating-point to integer）。使用指定的舍入模式把向量中的每个元素从浮点转换为整数，并把结果放入第二个向量。若源元素超出目标整数类型的范围，则结果元素饱和。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.329.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE 的半精度与单精度浮点扩展。
+
+![FigureC2-550](FigureC2-550.png)
+
+**T1: VCVT 变体**
+
+```arm
+VCVT<ANPM><v><q>.<dt> Qd, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_MveFp);
+if D == '1' || M == '1' then UNDEFINED;
+if size IN {'11', '00'} then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+unsigned = (op == '1');
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.329.2. 汇编符号（所有编码）
+
+- **`<ANPM>`**：舍入模式。
+  该参数必须是以下取值之一：
+  - `A`，编码为 `RM = 00`：就近舍入，中间值远离零。
+  - `N`，编码为 `RM = 01`：就近舍入，中间值取偶。
+  - `P`，编码为 `RM = 10`：向正无穷舍入。
+  - `M`，编码为 `RM = 11`：向负无穷舍入。
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：该参数必须是以下取值之一：
+  - `S16.F16`，编码为 `op = 0`、`size = 01`：把半精度浮点转换为有符号 16 位整数。
+  - `S32.F32`，编码为 `op = 0`、`size = 10`：把单精度浮点转换为有符号 32 位整数。
+  - `U16.F16`，编码为 `op = 1`、`size = 01`：把半精度浮点转换为无符号 16 位整数。
+  - `U32.F32`，编码为 `op = 1`、`size = 10`：把单精度浮点转换为无符号 32 位整数。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+
+#### 4.329.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[m, curBeat];
+for e = 0 to elements-1
+  // 通过检查元素掩码，避免在被谓词化的通道上产生浮点异常
+  pred = (elmtMask[e*(esize>>3)] == '0');
+  U = unsigned;
+  Elem[result, e, esize] = FPToFixedDirected(Elem[op1, e, esize], 0, U, RM, FALSE, pred);
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.330. VCVT (integer to floating-point)：整数转换为浮点
+
+整数转换为浮点（Convert integer to floating-point）。本指令使用 `FPSCR` 指定的舍入模式把寄存器中的值从 32 位整数转换为浮点，并把结果放入目标寄存器。
+
+#### 4.330.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-551](FigureC2-551.png)
+
+**半精度标量变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `size == 01` 时适用。
+
+```arm
+VCVT{<c>}{<q>}.F16.<dt> <Sd>, <Sm>
+```
+
+**单精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 10` 时适用。
+
+```arm
+VCVT{<c>}{<q>}.F32.<dt> <Sd>, <Sm>
+```
+
+**双精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 11` 时适用。
+
+```arm
+VCVT{<c>}{<q>}.F64.<dt> <Dd>, <Sm>
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (D == '1') then UNDEFINED;
+unsigned = (op == '0');
+round_nearest = FALSE;
+// FALSE 表示选择 FPSCR 的舍入方式
+m = UInt(Vm:M);
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+if size == '01' && InITBlock() then UNPREDICTABLE;
+```
+
+#### 4.330.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：操作数的数据类型，编码在 `op` 字段中。它可以取以下值：
+  - `U32`，当 `op = 0` 时。
+  - `S32`，当 `op = 1` 时。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Dd>`**：浮点目标寄存器的 64 位名称，编码在 `D:Vd` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+
+#### 4.330.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  ExecuteFPCheck();
+  case size of
+    when '01'
+      fp16 = FixedToFP(S[m], 16, 0, unsigned, round_nearest, TRUE);
+      S[d] = Zeros(16):fp16;
+    when '10'
+      S[d] = FixedToFP(S[m], 32, 0, unsigned, round_nearest, TRUE);
+    when '11'
+      D[d] = FixedToFP(S[m], 64, 0, unsigned, round_nearest, TRUE);
+```
+
+### 4.331. VCVTA：浮点转换为整数（就近舍入，中间值远离零）
+
+就近舍入（中间值远离零）的浮点转换为整数（Convert floating-point to integer with Round to Nearest with Ties to Away）。本指令使用就近舍入、中间值远离零（Round to Nearest with Ties to Away）的舍入模式把寄存器中的值从浮点转换为 32 位整数，并把结果放入目标寄存器。
+
+#### 4.331.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-552](FigureC2-552.png)
+
+**半精度标量变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `size == 01` 时适用。
+
+```arm
+VCVTA{<q>}.<dt>.F16 <Sd>, <Sm>
+```
+
+**单精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 10` 时适用。
+
+```arm
+VCVTA{<q>}.<dt>.F32 <Sd>, <Sm>
+```
+
+**双精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 11` 时适用。
+
+```arm
+VCVTA{<q>}.<dt>.F64 <Sd>, <Dm>
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (M == '1') then UNDEFINED;
+if InITBlock() then UNPREDICTABLE;
+unsigned = (op == '0');
+round_mode = RM;
+d = UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+#### 4.331.2. 汇编符号（所有编码）
+
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：目标元素的数据类型，编码在 `op` 字段中。它可以取以下值：
+  - `U32`，当 `op = 0` 时。
+  - `S32`，当 `op = 1` 时。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+- **`<Dm>`**：浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+
+#### 4.331.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+case size of
+  when '01'
+    S[d] = FPToFixedDirected(S[m][15:0], 0, unsigned, round_mode, TRUE);
+  when '10'
+    S[d] = FPToFixedDirected(S[m], 0, unsigned, round_mode, TRUE);
+  when '11'
+    S[d] = FPToFixedDirected(D[m], 0, unsigned, round_mode, TRUE);
+```
+
+### 4.332. VCVTB：浮点转换（取底部半部分）
+
+浮点转换（取底部半部分）（Floating-point Convert Bottom）。本指令执行以下操作之一：
+
+- 把单精度寄存器底部半部分中的半精度值转换为单精度，并把结果写入单精度寄存器。
+- 把单精度寄存器中的值转换为半精度，并把结果写入单精度寄存器的底部半部分，同时保留目标寄存器的另一半。
+- 把单精度寄存器底部半部分中的半精度值转换为双精度（不进行中间舍入），并把结果写入双精度寄存器。
+- 把双精度寄存器中的值转换为半精度（不进行中间舍入），并把结果写入单精度寄存器的底部半部分，同时保留目标寄存器的另一半。
+
+#### 4.332.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`sz == 1` 为 UNDEFINED。
+
+![FigureC2-553](FigureC2-553.png)
+
+**半精度到单精度变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `op == 0 && sz == 0` 时适用。
+
+```arm
+VCVTB{<c>}{<q>}.F32.F16 <Sd>, <Sm>
+```
+
+**单精度到半精度变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `op == 1 && sz == 0` 时适用。
+
+```arm
+VCVTB{<c>}{<q>}.F16.F32 <Sd>, <Sm>
+```
+
+**半精度到双精度变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `op == 0 && sz == 1` 时适用。
+
+```arm
+VCVTB{<c>}{<q>}.F64.F16 <Dd>, <Sm>
+```
+
+**双精度到半精度变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `op == 1 && sz == 1` 时适用。
+
+```arm
+VCVTB{<c>}{<q>}.F16.F64 <Sd>, <Dm>
+```
+
+**解码**
+
+```arm
+dp_operation = (sz == '1');
+CheckDecodeFaults(if dp_operation then ExtType_DpFp else ExtType_SpFp);
+if (VFPSmallRegisterBank() && dp_operation &&
+    ((M == '1' && op == '1') || (D == '1' && op == '0'))) then
+  UNDEFINED;
+convert_from_half = (op == '0');
+lowbit = if T == '1' then 16 else 0;
+if dp_operation then
+  if convert_from_half then
+    d = UInt(D:Vd);
+    m = UInt(Vm:M);
+  else
+    d = UInt(Vd:D);
+    m = UInt(M:Vm);
+else
+  d = UInt(Vd:D);
+  m = UInt(Vm:M);
+```
+
+#### 4.332.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Dm>`**：浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+- **`<Dd>`**：浮点目标寄存器的 64 位名称，编码在 `D:Vd` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+
+#### 4.332.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  ExecuteFPCheck();
+  if convert_from_half then
+    if dp_operation then
+      D[d] = FPHalfToDouble(S[m][lowbit+15:lowbit], TRUE);
+    else
+      S[d] = FPHalfToSingle(S[m][lowbit+15:lowbit], TRUE);
+  else
+    if dp_operation then
+      S[d][lowbit+15:lowbit] = FPDoubleToHalf(D[m], TRUE);
+    else
+      S[d][lowbit+15:lowbit] = FPSingleToHalf(S[m], TRUE);
+```
+
+### 4.333. VCVTM：浮点转换为整数（向负无穷舍入）
+
+向负无穷舍入的浮点转换为整数（Convert floating-point to integer with Round towards -Infinity）。本指令使用向负无穷舍入（Round towards -Infinity）的舍入模式把寄存器中的值从浮点转换为 32 位整数，并把结果放入目标寄存器。
+
+#### 4.333.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-554](FigureC2-554.png)
+
+**半精度标量变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `size == 01` 时适用。
+
+```arm
+VCVTM{<q>}.<dt>.F16 <Sd>, <Sm>
+```
+
+**单精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 10` 时适用。
+
+```arm
+VCVTM{<q>}.<dt>.F32 <Sd>, <Sm>
+```
+
+**双精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 11` 时适用。
+
+```arm
+VCVTM{<q>}.<dt>.F64 <Sd>, <Dm>
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (M == '1') then UNDEFINED;
+if InITBlock() then UNPREDICTABLE;
+unsigned = (op == '0');
+round_mode = RM;
+d = UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+#### 4.333.2. 汇编符号（所有编码）
+
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：目标元素的数据类型，编码在 `op` 字段中。它可以取以下值：
+  - `U32`，当 `op = 0` 时。
+  - `S32`，当 `op = 1` 时。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+- **`<Dm>`**：浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+
+#### 4.333.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+case size of
+  when '01'
+    S[d] = FPToFixedDirected(S[m][15:0], 0, unsigned, round_mode, TRUE);
+  when '10'
+    S[d] = FPToFixedDirected(S[m], 0, unsigned, round_mode, TRUE);
+  when '11'
+    S[d] = FPToFixedDirected(D[m], 0, unsigned, round_mode, TRUE);
+```
+
+### 4.334. VCVTN：浮点转换为整数（就近舍入）
+
+就近舍入的浮点转换为整数（Convert floating-point to integer with Round to Nearest）。本指令使用就近舍入（Round to Nearest）的舍入模式把寄存器中的值从浮点转换为 32 位整数，并把结果放入目标寄存器。
+
+#### 4.334.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-555](FigureC2-555.png)
+
+**半精度标量变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `size == 01` 时适用。
+
+```arm
+VCVTN{<q>}.<dt>.F16 <Sd>, <Sm>
+```
+
+**单精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 10` 时适用。
+
+```arm
+VCVTN{<q>}.<dt>.F32 <Sd>, <Sm>
+```
+
+**双精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 11` 时适用。
+
+```arm
+VCVTN{<q>}.<dt>.F64 <Sd>, <Dm>
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (M == '1') then UNDEFINED;
+if InITBlock() then UNPREDICTABLE;
+unsigned = (op == '0');
+round_mode = RM;
+d = UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+#### 4.334.2. 汇编符号（所有编码）
+
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：目标元素的数据类型，编码在 `op` 字段中。它可以取以下值：
+  - `U32`，当 `op = 0` 时。
+  - `S32`，当 `op = 1` 时。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+- **`<Dm>`**：浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+
+#### 4.334.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+case size of
+  when '01'
+    S[d] = FPToFixedDirected(S[m][15:0], 0, unsigned, round_mode, TRUE);
+  when '10'
+    S[d] = FPToFixedDirected(S[m], 0, unsigned, round_mode, TRUE);
+  when '11'
+    S[d] = FPToFixedDirected(D[m], 0, unsigned, round_mode, TRUE);
+```
+
+### 4.335. VCVTP：浮点转换为整数（向正无穷舍入）
+
+向正无穷舍入的浮点转换为整数（Convert floating-point to integer with Round towards +Infinity）。本指令使用向正无穷舍入（Round towards +Infinity）的舍入模式把寄存器中的值从浮点转换为 32 位整数，并把结果放入目标寄存器。
+
+#### 4.335.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-556](FigureC2-556.png)
+
+**半精度标量变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `size == 01` 时适用。
+
+```arm
+VCVTP{<q>}.<dt>.F16 <Sd>, <Sm>
+```
+
+**单精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 10` 时适用。
+
+```arm
+VCVTP{<q>}.<dt>.F32 <Sd>, <Sm>
+```
+
+**双精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 11` 时适用。
+
+```arm
+VCVTP{<q>}.<dt>.F64 <Sd>, <Dm>
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (M == '1') then UNDEFINED;
+if InITBlock() then UNPREDICTABLE;
+unsigned = (op == '0');
+round_mode = RM;
+d = UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+#### 4.335.2. 汇编符号（所有编码）
+
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：目标元素的数据类型，编码在 `op` 字段中。它可以取以下值：
+  - `U32`，当 `op = 0` 时。
+  - `S32`，当 `op = 1` 时。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+- **`<Dm>`**：浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+
+#### 4.335.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+case size of
+  when '01'
+    S[d] = FPToFixedDirected(S[m][15:0], 0, unsigned, round_mode, TRUE);
+  when '10'
+    S[d] = FPToFixedDirected(S[m], 0, unsigned, round_mode, TRUE);
+  when '11'
+    S[d] = FPToFixedDirected(D[m], 0, unsigned, round_mode, TRUE);
+```
+
+### 4.336. VCVTR：浮点转换为整数（使用 FPSCR 舍入模式）
+
+浮点转换为整数（Convert floating-point to integer）。本指令使用 `FPSCR` 指定的舍入模式把寄存器中的值从浮点转换为 32 位整数，并把结果放入目标寄存器。
+
+#### 4.336.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-557](FigureC2-557.png)
+
+**半精度到无符号单精度变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `opc2 == 0 && size == 01` 时适用。
+
+```arm
+VCVTR{<c>}{<q>}.U32.F16 <Sd>, <Sm>
+```
+
+**半精度到有符号单精度变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `opc2 == 1 && size == 01` 时适用。
+
+```arm
+VCVTR{<c>}{<q>}.S32.F16 <Sd>, <Sm>
+```
+
+**单精度到无符号单精度变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `opc2 == 0 && size == 10` 时适用。
+
+```arm
+VCVTR{<c>}{<q>}.U32.F32 <Sd>, <Sm>
+```
+
+**单精度到有符号单精度变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `opc2 == 1 && size == 10` 时适用。
+
+```arm
+VCVTR{<c>}{<q>}.S32.F32 <Sd>, <Sm>
+```
+
+**双精度到无符号单精度变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `opc2 == 0 && size == 11` 时适用。
+
+```arm
+VCVTR{<c>}{<q>}.U32.F64 <Sd>, <Dm>
+```
+
+**双精度到有符号单精度变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `opc2 == 1 && size == 11` 时适用。
+
+```arm
+VCVTR{<c>}{<q>}.S32.F64 <Sd>, <Dm>
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (M == '1') then UNDEFINED;
+unsigned = (opc2 == '0');
+round_zero = (op == '1');
+d = UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+if size == '01' && InITBlock() then UNPREDICTABLE;
+```
+
+#### 4.336.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+- **`<Dm>`**：浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+
+#### 4.336.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  ExecuteFPCheck();
+  case size of
+    when '01'
+      S[d] = FPToFixed(S[m][15:0], 32, 0, unsigned, round_zero, TRUE);
+    when '10'
+      S[d] = FPToFixed(S[m], 32, 0, unsigned, round_zero, TRUE);
+    when '11'
+      S[d] = FPToFixed(D[m], 32, 0, unsigned, round_zero, TRUE);
+```
+
+### 4.337. VCVTT：浮点转换（取顶部半部分）
+
+浮点转换（取顶部半部分）（Floating-point Convert Top）。本指令执行以下操作之一：
+
+- 把单精度寄存器顶部半部分中的半精度值转换为单精度，并把结果写入单精度寄存器。
+- 把单精度寄存器中的值转换为半精度，并把结果写入单精度寄存器的顶部半部分，同时保留目标寄存器的另一半。
+- 把单精度寄存器顶部半部分中的半精度值转换为双精度（不进行中间舍入），并把结果写入双精度寄存器。
+- 把双精度寄存器中的值转换为半精度（不进行中间舍入），并把结果写入双精度寄存器的顶部半部分，同时保留目标寄存器的另一半。
+
+#### 4.337.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`sz == 1` 为 UNDEFINED。
+
+![FigureC2-558](FigureC2-558.png)
+
+**半精度到单精度变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `op == 0 && sz == 0` 时适用。
+
+```arm
+VCVTT{<c>}{<q>}.F32.F16 <Sd>, <Sm>
+```
+
+**单精度到半精度变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `op == 1 && sz == 0` 时适用。
+
+```arm
+VCVTT{<c>}{<q>}.F16.F32 <Sd>, <Sm>
+```
+
+**半精度到双精度变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `op == 0 && sz == 1` 时适用。
+
+```arm
+VCVTT{<c>}{<q>}.F64.F16 <Dd>, <Sm>
+```
+
+**双精度到半精度变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `op == 1 && sz == 1` 时适用。
+
+```arm
+VCVTT{<c>}{<q>}.F16.F64 <Sd>, <Dm>
+```
+
+**解码**
+
+```arm
+dp_operation = (sz == '1');
+CheckDecodeFaults(if dp_operation then ExtType_DpFp else ExtType_SpFp);
+if (VFPSmallRegisterBank() && dp_operation &&
+    ((M == '1' && op == '1') || (D == '1' && op == '0'))) then
+  UNDEFINED;
+convert_from_half = (op == '0');
+lowbit = if T == '1' then 16 else 0;
+if dp_operation then
+  if convert_from_half then
+    d = UInt(D:Vd);
+    m = UInt(Vm:M);
+  else
+    d = UInt(Vd:D);
+    m = UInt(M:Vm);
+else
+  d = UInt(Vd:D);
+  m = UInt(Vm:M);
+```
+
+#### 4.337.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Dm>`**：浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+- **`<Dd>`**：浮点目标寄存器的 64 位名称，编码在 `D:Vd` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+
+#### 4.337.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  ExecuteFPCheck();
+  if convert_from_half then
+    if dp_operation then
+      D[d] = FPHalfToDouble(S[m][lowbit+15:lowbit], TRUE);
+    else
+      S[d] = FPHalfToSingle(S[m][lowbit+15:lowbit], TRUE);
+  else
+    if dp_operation then
+      S[d][lowbit+15:lowbit] = FPDoubleToHalf(D[m], TRUE);
+    else
+      S[d][lowbit+15:lowbit] = FPSingleToHalf(S[m], TRUE);
+```
+
+### 4.338. VCX1：自定义扩展指令类 1
+
+自定义扩展指令类 1（Custom Extension Instruction Class 1）。自定义扩展寄存器指令类 1 根据立即数（可选择再结合目标寄存器的现有值）计算出一个值，并把结果写入目标寄存器。源寄存器与目标寄存器位于浮点寄存器组中，且要求当前执行状态能够访问这些寄存器。
+
+#### 4.338.1. 编码 T1
+
+适用于 Armv8-M 自定义数据通路扩展，并配合 Armv8.1-M MVE 或 Armv8-M 浮点扩展。
+
+![FigureC2-559](FigureC2-559.png)
+
+**单寄存器累加变体**
+
+当 `A == 1` 且 `sz == 0` 时适用。
+
+```arm
+VCX1A <coproc>, <Sd>, #<imm>
+```
+
+**双寄存器累加变体**
+
+当 `A == 1` 且 `sz == 1` 时适用。
+
+```arm
+VCX1A <coproc>, <Dd>, #<imm>
+```
+
+**单寄存器非累加变体**
+
+当 `A == 0 && sz == 0` 时适用。
+
+```arm
+VCX1 <coproc>, <Sd>, #<imm>
+```
+
+**双寄存器非累加变体**
+
+当 `A == 0 && sz == 1` 时适用。
+
+```arm
+VCX1 <coproc>, <Dd>, #<imm>
+```
+
+**解码**
+
+```arm
+if CoprocType(UInt(coproc)) != CP_CDEv1 then SEE "Coprocessor instructions";
+cp = UInt(coproc);
+CheckCDEDecodeFaults(cp, FALSE);
+dp_operation = (sz == '1');
+imm = op1:op2:op3;
+acc = (A == '1');
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+if VFPSmallRegisterBank() && dp_operation && D == '1' then UNDEFINED;
+if InITBlock() then UNPREDICTABLE;
+```
+
+#### 4.338.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `InITBlock()`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按通过条件码检查的方式执行。
+- 该指令按 NOP 执行。
+
+#### 4.338.3. 汇编符号（所有编码）
+
+- **`<A>`**：与寄存器现有内容累加。
+  该参数必须是以下取值之一：
+  - `-`，编码为 `A = 0`。
+  - `A`，编码为 `A = 1`。
+- **`<coproc>`**：协处理器的名称，编码在 `coproc` 字段中。有效名称为 `p0` 到 `p7`（含）。
+- **`<Dd>`**：浮点源兼目标寄存器 `D0` - `D15` 的 64 位名称，编码在 `D:Vd` 字段中。
+- **`<Sd>`**：浮点源兼目标寄存器 `S0` - `S31` 的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<imm>`**：编码在 `op1:op2:op3` 中的立即数。
+
+#### 4.338.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+if (!Coproc_Accepted(cp, ThisInstr())) then
+  GenerateCoprocessorException();
+elsif dp_operation then
+  if acc then
+    D[d] = VCX_op1(ThisInstr(), D[d], 64);
+  else
+    D[d] = VCX_op0(ThisInstr(), 64);
+else
+  if acc then
+    S[d] = VCX_op1(ThisInstr(), S[d], 32);
+  else
+    S[d] = VCX_op0(ThisInstr(), 32);
+```
+
+### 4.339. VCX1 (vector)：自定义扩展指令类 1（向量）
+
+自定义扩展指令类 1（向量）（Custom Extension Instruction Class 1 Vector）。自定义扩展寄存器指令类 1 向量根据立即数（可选择再结合目标寄存器的现有值）计算出一个值，并把结果写入目标寄存器。源寄存器与目标寄存器位于浮点与 SIMD 寄存器组中，且要求当前执行状态能够访问这些寄存器。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.339.1. 编码 T1
+
+适用于 Armv8-M 自定义数据通路扩展，并配合 Armv8.1-M MVE。
+
+![FigureC2-560](FigureC2-560.png)
+
+**累加变体**
+
+当 `A == 1` 时适用。
+
+```arm
+VCX1A<v> <coproc>, <Qd>, #<imm>
+```
+
+**非累加变体**
+
+当 `A == 0` 时适用。
+
+```arm
+VCX1<v> <coproc>, <Qd>, #<imm>
+```
+
+**解码**
+
+```arm
+if CoprocType(UInt(coproc)) != CP_CDEv1 then SEE "Coprocessor instructions";
+cp = UInt(coproc);
+CheckCDEDecodeFaults(cp, TRUE);
+if D == '1' || Vd[0] == '1' then UNDEFINED;
+imm = op1:op2:op3:op4;
+acc = (A == '1');
+d = UInt(D:Vd[3:1]);
+if InITBlock() then UNPREDICTABLE;
+```
+
+#### 4.339.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `InITBlock()`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按通过条件码检查的方式执行。
+- 该指令按 NOP 执行。
+
+#### 4.339.3. 汇编符号（所有编码）
+
+- **`<A>`**：与寄存器现有内容累加。
+  该参数必须是以下取值之一：
+  - `-`，编码为 `A = 0`。
+  - `A`，编码为 `A = 1`。
+- **`<v>`**：见 C1.2.5 标准汇编语法字段。
+- **`<coproc>`**：协处理器的名称，编码在 `coproc` 字段中。有效名称为 `p0` 到 `p7`（含）。
+- **`<Qd>`**：源兼目标向量寄存器 `Q0` - `Q7`，在 `D:Vd` 字段中按 `<Qd>*2` 编码。
+- **`<imm>`**：编码在 `op1:op2:op3:op4` 中的立即数。
+
+#### 4.339.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+if (!Coproc_Accepted(cp, ThisInstr())) then GenerateCoprocessorException();
+
+// 获取当前节拍编号与谓词化掩码
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+if acc then
+  // 若使用累加变体，则把向量源兼目标寄存器中的 32 位值作为自定义运算的输入
+  result = VCX_op1(ThisInstr(), Q[d, curBeat], 32, TRUE, curBeat, elmtMask);
+else
+  result = VCX_op0(ThisInstr(), 32, TRUE, curBeat, elmtMask);
+
+for e = 0 to 3
+  // 若该向量通道未被谓词化
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.340. VCX2：自定义扩展指令类 2
+
+自定义扩展指令类 2（Custom Extension Instruction Class 2）。自定义扩展寄存器指令类 2 根据源寄存器、立即数（可选择再结合目标寄存器的现有值）计算出一个值，并把结果写入目标寄存器。源寄存器与目标寄存器位于浮点寄存器组中，且要求当前执行状态能够访问这些寄存器。
+
+#### 4.340.1. 编码 T1
+
+适用于 Armv8-M 自定义数据通路扩展，并配合 Armv8.1-M MVE 或 Armv8-M 浮点扩展。
+
+![FigureC2-561](FigureC2-561.png)
+
+**单寄存器累加变体**
+
+当 `A == 1 && sz == 0` 时适用。
+
+```arm
+VCX2A <coproc>, <Sd>, <Sm>, #<imm>
+```
+
+**双寄存器累加变体**
+
+当 `A == 1 && sz == 1` 时适用。
+
+```arm
+VCX2A <coproc>, <Dd>, <Dm>, #<imm>
+```
+
+**单寄存器非累加变体**
+
+当 `A == 0` 且 `sz == 0` 时适用。
+
+```arm
+VCX2 <coproc>, <Sd>, <Sm>, #<imm>
+```
+
+**双寄存器非累加变体**
+
+当 `A == 0` 且 `sz == 1` 时适用。
+
+```arm
+VCX2 <coproc>, <Dd>, <Dm>, #<imm>
+```
+
+**解码**
+
+```arm
+if CoprocType(UInt(coproc)) != CP_CDEv1 then SEE "Coprocessor instructions";
+cp = UInt(coproc);
+CheckCDEDecodeFaults(cp, FALSE);
+dp_operation = (sz == '1');
+imm = op1:op2:op3;
+acc = (A == '1');
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+if VFPSmallRegisterBank() && dp_operation && (D == '1' || M == '1') then UNDEFINED;
+if InITBlock() then UNPREDICTABLE;
+```
+
+#### 4.340.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `InITBlock()`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按通过条件码检查的方式执行。
+- 该指令按 NOP 执行。
+
+#### 4.340.3. 汇编符号（所有编码）
+
+- **`<A>`**：与寄存器现有内容累加。
+  该参数必须是以下取值之一：
+  - `-`，编码为 `A = 0`。
+  - `A`，编码为 `A = 1`。
+- **`<coproc>`**：协处理器的名称，编码在 `coproc` 字段中。有效名称为 `p0` 到 `p7`（含）。
+- **`<Dd>`**：浮点源兼目标寄存器 `D0` - `D15` 的 64 位名称，编码在 `D:Vd` 字段中。
+- **`<Dm>`**：浮点源寄存器 `D0` - `D15` 的 64 位名称，编码在 `M:Vm` 字段中。
+- **`<Sd>`**：浮点源兼目标寄存器 `S0` - `S31` 的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Sm>`**：浮点源寄存器 `S0` - `S31` 的 32 位名称，编码在 `Vm:M` 字段中。
+- **`<imm>`**：编码在 `op1:op2:op3` 中的立即数。
+
+#### 4.340.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+if (!Coproc_Accepted(cp, ThisInstr())) then
+  GenerateCoprocessorException();
+elsif dp_operation then
+  if acc then
+    D[d] = VCX_op2(ThisInstr(), D[d], D[m], 64);
+  else
+    D[d] = VCX_op1(ThisInstr(), D[m], 64);
+else
+  if acc then
+    S[d] = VCX_op2(ThisInstr(), S[d], S[m], 32);
+  else
+    S[d] = VCX_op1(ThisInstr(), S[m], 32);
+```
+
+### 4.341. VCX2 (vector)：自定义扩展指令类 2（向量）
+
+自定义扩展指令类 2（向量）（Custom Extension Instruction Class 2 Vector）。自定义扩展寄存器指令类 2 向量根据源寄存器、立即数（可选择再结合目标寄存器的现有值）计算出一个值，并把结果写入目标寄存器。源寄存器与目标寄存器位于浮点与 SIMD 寄存器组中，且要求当前执行状态能够访问这些寄存器。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.341.1. 编码 T1
+
+适用于 Armv8-M 自定义数据通路扩展，并配合 Armv8.1-M MVE。
+
+![FigureC2-562](FigureC2-562.png)
+
+**累加变体**
+
+当 `A == 1` 时适用。
+
+```arm
+VCX2A<v> <coproc>, <Qd>, <Qm>, #<imm>
+```
+
+**非累加变体**
+
+当 `A == 0` 时适用。
+
+```arm
+VCX2<v> <coproc>, <Qd>, <Qm>, #<imm>
+```
+
+**解码**
+
+```arm
+if CoprocType(UInt(coproc)) != CP_CDEv1 then SEE "Coprocessor instructions";
+cp = UInt(coproc);
+CheckCDEDecodeFaults(cp, TRUE);
+if D == '1' || M == '1' || Vd[0] == '1' || Vm[0] == '1' then UNDEFINED;
+imm = op1:op2:op3:op4;
+acc = (A == '1');
+d = UInt(D:Vd[3:1]);
+m = UInt(M:Vm[3:1]);
+if InITBlock() then UNPREDICTABLE;
+```
+
+#### 4.341.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `InITBlock()`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按通过条件码检查的方式执行。
+- 该指令按 NOP 执行。
+
+#### 4.341.3. 汇编符号（所有编码）
+
+- **`<A>`**：与寄存器现有内容累加。
+  该参数必须是以下取值之一：
+  - `-`，编码为 `A = 0`。
+  - `A`，编码为 `A = 1`。
+- **`<v>`**：见 C1.2.5 标准汇编语法字段。
+- **`<coproc>`**：协处理器的名称，编码在 `coproc` 字段中。有效名称为 `p0` 到 `p7`（含）。
+- **`<Qd>`**：源兼目标向量寄存器 `Q0` - `Q7`，在 `D:Vd` 字段中按 `<Qd>*2` 编码。
+- **`<Qm>`**：源向量寄存器 `Q0` - `Q7`，在 `M:Vm` 字段中按 `<Qm>*2` 编码。
+- **`<imm>`**：编码在 `op1:op2:op3:op4` 中的立即数。
+
+#### 4.341.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+if (!Coproc_Accepted(cp, ThisInstr())) then GenerateCoprocessorException();
+
+// 获取当前节拍编号与谓词化掩码
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+if acc then
+  // 若使用累加变体，则把向量源兼目标寄存器中的 32 位值作为自定义运算的输入
+  result = VCX_op2(ThisInstr(), Q[d, curBeat], Q[m, curBeat], 32, TRUE,
+                   curBeat, elmtMask);
+else
+  result = VCX_op1(ThisInstr(), Q[m, curBeat], 32, TRUE, curBeat, elmtMask);
+
+for e = 0 to 3
+  // 若该向量通道未被谓词化
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.342. VCX3：自定义扩展指令类 3
+
+自定义扩展指令类 3（Custom Extension Instruction Class 3）。自定义扩展寄存器指令类 3 根据两个源寄存器、立即数（可选择再结合目标寄存器的现有值）计算出一个值，并把结果写入目标寄存器。源寄存器与目标寄存器位于浮点寄存器组中，且要求当前执行状态能够访问这些寄存器。
+
+#### 4.342.1. 编码 T1
+
+适用于 Armv8-M 自定义数据通路扩展，并配合 Armv8.1-M MVE 或 Armv8-M 浮点扩展。
+
+![FigureC2-563](FigureC2-563.png)
+
+**单寄存器累加变体**
+
+当 `A == 1 && sz == 0` 时适用。
+
+```arm
+VCX3A <coproc>, <Sd>, <Sn>, <Sm>, #<imm>
+```
+
+**双寄存器累加变体**
+
+当 `A == 1 && sz == 1` 时适用。
+
+```arm
+VCX3A <coproc>, <Dd>, <Dn>, <Dm>, #<imm>
+```
+
+**单寄存器非累加变体**
+
+当 `A == 0` 且 `sz == 0` 时适用。
+
+```arm
+VCX3 <coproc>, <Sd>, <Sn>, <Sm>, #<imm>
+```
+
+**双寄存器非累加变体**
+
+当 `A == 0` 且 `sz == 1` 时适用。
+
+```arm
+VCX3 <coproc>, <Dd>, <Dn>, <Dm>, #<imm>
+```
+
+**解码**
+
+```arm
+if CoprocType(UInt(coproc)) != CP_CDEv1 then SEE "Coprocessor instructions";
+cp = UInt(coproc);
+CheckCDEDecodeFaults(cp, FALSE);
+dp_operation = (sz == '1');
+imm = op1:op2;
+acc = (A == '1');
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+n = if dp_operation then UInt(N:Vn) else UInt(Vn:N);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+if VFPSmallRegisterBank() && dp_operation && (D == '1' || M == '1' || N == '1') then
+  UNDEFINED;
+if InITBlock() then UNPREDICTABLE;
+```
+
+#### 4.342.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `InITBlock()`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按通过条件码检查的方式执行。
+- 该指令按 NOP 执行。
+
+#### 4.342.3. 汇编符号（所有编码）
+
+- **`<A>`**：与寄存器现有内容累加。
+  该参数必须是以下取值之一：
+  - `-`，编码为 `A = 0`。
+  - `A`，编码为 `A = 1`。
+- **`<coproc>`**：协处理器的名称，编码在 `coproc` 字段中。有效名称为 `p0` 到 `p7`（含）。
+- **`<Dd>`**：浮点源兼目标寄存器 `D0` - `D15` 的 64 位名称，编码在 `D:Vd` 字段中。
+- **`<Dm>`**：浮点源寄存器 `D0` - `D15` 的 64 位名称，编码在 `M:Vm` 字段中。
+- **`<Dn>`**：浮点源寄存器 `D0` - `D15` 的 64 位名称，编码在 `N:Vn` 字段中。
+- **`<Sd>`**：浮点源兼目标寄存器 `S0` - `S31` 的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Sm>`**：浮点源寄存器 `S0` - `S31` 的 32 位名称，编码在 `Vm:M` 字段中。
+- **`<Sn>`**：浮点源寄存器 `S0` - `S31` 的 32 位名称，编码在 `Vn:N` 字段中。
+- **`<imm>`**：编码在 `op1:op2` 中的立即数。
+
+#### 4.342.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+if (!Coproc_Accepted(cp, ThisInstr())) then
+  GenerateCoprocessorException();
+elsif dp_operation then
+  if acc then
+    D[d] = VCX_op3(ThisInstr(), D[d], D[n], D[m], 64);
+  else
+    D[d] = VCX_op2(ThisInstr(), D[n], D[m], 64);
+else
+  if acc then
+    S[d] = VCX_op3(ThisInstr(), S[d], S[n], S[m], 32);
+  else
+    S[d] = VCX_op2(ThisInstr(), S[n], S[m], 32);
+```
+
+### 4.343. VCX3 (vector)：自定义扩展指令类 3（向量）
+
+自定义扩展指令类 3（向量）（Custom Extension Instruction Class 3 Vector）。自定义扩展寄存器指令类 3 向量根据两个源寄存器、立即数（可选择再结合目标寄存器的现有值）计算出一个值，并把结果写入目标寄存器。源寄存器与目标寄存器位于浮点与 SIMD 寄存器组中，且要求当前执行状态能够访问这些寄存器。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.343.1. 编码 T1
+
+适用于 Armv8-M 自定义数据通路扩展，并配合 Armv8.1-M MVE。
+
+![FigureC2-564](FigureC2-564.png)
+
+**累加变体**
+
+当 `A == 1` 时适用。
+
+```arm
+VCX3A<v> <coproc>, <Qd>, <Qn>, <Qm>, #<imm>
+```
+
+**非累加变体**
+
+当 `A == 0` 时适用。
+
+```arm
+VCX3<v> <coproc>, <Qd>, <Qn>, <Qm>, #<imm>
+```
+
+**解码**
+
+```arm
+if CoprocType(UInt(coproc)) != CP_CDEv1 then SEE "Coprocessor instructions";
+cp = UInt(coproc);
+CheckCDEDecodeFaults(cp, TRUE);
+if D == '1' || M == '1' || N == '1' || Vd[0] == '1' || Vm[0] == '1' || Vn[0] == '1' then
+  UNDEFINED;
+imm = op1:op2:op3;
+acc = (A == '1');
+d = UInt(D:Vd[3:1]);
+n = UInt(N:Vn[3:1]);
+m = UInt(M:Vm[3:1]);
+if InITBlock() then UNPREDICTABLE;
+```
+
+#### 4.343.2. 受限不可预测（CONSTRAINED UNPREDICTABLE）行为
+
+若 `InITBlock()`，则必须出现下列行为之一：
+
+- 该指令为 UNDEFINED。
+- 该指令按通过条件码检查的方式执行。
+- 该指令按 NOP 执行。
+
+#### 4.343.3. 汇编符号（所有编码）
+
+- **`<A>`**：与寄存器现有内容累加。
+  该参数必须是以下取值之一：
+  - `-`，编码为 `A = 0`。
+  - `A`，编码为 `A = 1`。
+- **`<v>`**：见 C1.2.5 标准汇编语法字段。
+- **`<coproc>`**：协处理器的名称，编码在 `coproc` 字段中。有效名称为 `p0` 到 `p7`（含）。
+- **`<Qm>`**：源向量寄存器 `Q0` - `Q7`，在 `M:Vm` 字段中按 `<Qm>*2` 编码。
+- **`<Qd>`**：源兼目标向量寄存器 `Q0` - `Q7`，在 `D:Vd` 字段中按 `<Qd>*2` 编码。
+- **`<Qn>`**：源向量寄存器 `Q0` - `Q7`，在 `N:Vn` 字段中按 `<Qn>*2` 编码。
+- **`<imm>`**：编码在 `op1:op2:op3` 中的立即数。
+
+#### 4.343.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+if (!Coproc_Accepted(cp, ThisInstr())) then GenerateCoprocessorException();
+
+// 获取当前节拍编号与谓词化掩码
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+if acc then
+  // 若使用累加变体，则把向量源兼目标寄存器中的 32 位值作为自定义运算的输入
+  result = VCX_op3(ThisInstr(), Q[d, curBeat], Q[n, curBeat], Q[m, curBeat], 32,
+                   TRUE, curBeat, elmtMask);
+else
+  result = VCX_op2(ThisInstr(), Q[n, curBeat], Q[m, curBeat], 32,
+                   TRUE, curBeat, elmtMask);
+
+for e = 0 to 3
+  // 若该向量通道未被谓词化
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.344. VDDUP、VDWDUP：向量递减复制、向量递减回绕复制
+
+向量递减复制（Vector Decrement and Duplicate）、向量递减回绕复制（Vector Decrement with Wrap and Duplicate）。创建一个元素值依次递减的向量，起始值由 `Rn` 指定。每次递减的量为指定的立即数，该立即数可以取以下值：1、2、4、8。对于所有变体，更新后的起始偏移都会写回 `Rn`。对于回绕变体，运算会回绕，使写入向量寄存器各元素的值位于 `[0, Rm)` 范围内。但是，若 `Rn` 和 `Rm` 不是 `imm` 的整数倍，或 `Rn >= Rm`，则该运算为 CONSTRAINED UNPREDICTABLE，此时 `Rn` 和 `Qd` 的结果值为 UNKNOWN。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.344.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-565](FigureC2-565.png)
+
+**T1: VDWDUP 变体**
+
+```arm
+VDWDUP<v><q>.<dt> Qd, Rn, Rm, #<imm>
+```
+
+**解码**
+
+```arm
+if Rm == '111' then SEE "VDDUP";
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(Rm:'1');
+n = UInt(Rn:'0');
+wrap = TRUE;
+imm2i = 1 << UInt(immh:imml);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if Rm == '110' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.344.2. 编码 T2
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-566](FigureC2-566.png)
+
+**T2: VDDUP 变体**
+
+```arm
+VDDUP<v><q>.<dt> Qd, Rn, #<imm>
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' then UNDEFINED;
+d = UInt(D:Qd);
+n = UInt(Rn:'0');
+m = integer UNKNOWN;
+wrap = FALSE;
+imm2i = 1 << UInt(immh:imml);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.344.3. 汇编符号（T1 编码）
+
+- **`<Rn>`**：向 `Qd` 开始写入的当前偏移。必须是 `imm` 的整数倍，且必须是偶数号寄存器。
+
+#### 4.344.4. 汇编符号（T2 编码）
+
+- **`<Rn>`**：向 `Qd` 开始写入的当前偏移。必须是偶数号寄存器。
+
+#### 4.344.5. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `U8`，编码为 `size = 00`。
+  - `U16`，编码为 `size = 01`。
+  - `U32`，编码为 `size = 10`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Rm>`**：范围的大小。必须是 `imm` 的整数倍，且必须是奇数号寄存器。
+- **`<imm>`**：相邻元素值之间的增量。
+  该参数必须是以下取值之一：
+  - `#1`，编码为 `immh = 0`、`imml = 0`。
+  - `#2`，编码为 `immh = 0`、`imml = 1`。
+  - `#4`，编码为 `immh = 1`、`imml = 0`。
+  - `#8`，编码为 `immh = 1`、`imml = 1`。
+
+#### 4.344.6. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+curOffset = UInt(R[n]);
+if wrap then
+  bufSize = UInt(R[m]);
+  if bufSize MOD imm2i != 0 then CONSTRAINED_UNPREDICTABLE;
+  if curOffset MOD imm2i != 0 then CONSTRAINED_UNPREDICTABLE;
+  if curOffset >= bufSize then CONSTRAINED_UNPREDICTABLE;
+
+for e = 0 to elements - 1
+  Elem[result, e, esize] = curOffset[esize-1:0];
+  if wrap && curOffset == 0 then
+    curOffset = bufSize - imm2i;
+  else
+    curOffset = curOffset - imm2i;
+
+R[n] = curOffset[31:0];
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
 ```
