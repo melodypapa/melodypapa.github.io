@@ -383,7 +383,7 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S5 result: strict build 0 WARNINGs; `check_indexes.py --root .` OK; `check_heading_lang.py` OK on the article.
   - S6 result: 783 diagrams referenced exactly once and all present; entry and subsection numbering continuous 4.1–4.489; `受限行为` present only where the source has a restricted-behaviour block.
   - S7 result: covered by the user-approved single-loop run.
-  - S8 result: committed on `feature/armv8m-c2-4-v5` (issue #424; PR number recorded in the follow-up ledger commit, stacked on PR #423 and retargeted to `master` after the upstream PRs merge).
+  - S8 result: committed on `feature/armv8m-c2-4-v5` (issue #424; PR #425, stacked on PR #423 and retargeted to `master` after the upstream PRs merge).
   - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] C2.4 W–Y band → `instruction_list/w/` and `y/` (4 entries: W 3, Y 1; closes C2.4 and Part C)
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
