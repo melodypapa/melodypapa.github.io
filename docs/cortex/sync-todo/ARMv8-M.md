@@ -1,6 +1,6 @@
 # Sync todo: Group ARMv8-M — DDI0553B Armv8-M ARM B.y (`reference-docs/arm/cortex-r52/DDI0553B_y_armv8m_arm.md`, 37,382 ln, PDF ✅)
 
-Generated: 2026-11-04 · Opened: 2026-11-10 · **Status: ACTIVE** — Parts A–B, C1 and the glossary are translated and registered; C2 is in progress (C2.1–C2.3 done, C2.4 A–V4 done = 470 of 493 entries) and the C2.4 V5 plus W–Y bands plus Parts D/E/F are the deferred tail. Queue order = row order (resume = the first row still `[ ]`).
+Generated: 2026-11-04 · Opened: 2026-11-10 · **Status: ACTIVE** — Parts A–B, C1 and the glossary are translated and registered; C2 is in progress (C2.1–C2.3 done, C2.4 A–V5 done = 489 of 493 entries) and the C2.4 W–Y band plus Parts D/E/F are the deferred tail. Queue order = row order (resume = the first row still `[ ]`).
 Last refresh: 2026-11-18 — parse coverage re-verified (37,382 ln, unchanged); the span map below now records where the parse ends, and the deferred Part D/E/F chapters carry executable queue rows. Status refresh: 2026-11-19 — chapter plan re-checked against `armv8-m/index.md`: every finished row's checklist is fully ticked and every open chapter row carries its own S1–S8 list.
 Steps: S1 source resolution + gap analysis · S2 in-place translation · S3 figures (PyMuPDF crop from the ARM PDF) · S4 nav + landing · S5 Phase A · S6 Phase B · S7 user gate · S8 commit/PR
 
@@ -375,7 +375,16 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S7 result: covered by the user-approved single-loop run.
   - S8 result: committed on `feature/armv8m-c2-4-v4` (issue #422; PR #423, stacked on PR #421 and retargeted to `master` after the upstream PRs merge).
   - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
-  - [ ] V5 4.471–4.489 (VSEL … VSUB (vector)) — printed 1385–1434
+  - [x] V5 done (4.471–4.489): 19 entries, 36 encoding diagrams (FigureC2-748–783).
+  - S1 result: printed 1385–1434 holds C2.4.471 VSEL … C2.4.489 VSUB (vector) with 36 encoding diagrams; the `VPUSH` alias appears as a condition table inside 4.482 VSTM, not as its own C2.4 entry. Shape variance recorded: VSEL prints a single T1 with 12 condition/size variants; VSTR carries T1–T3, then the `System Register` entry, the byte/halfword/word group (`T1`/`T2`/`T5`–`T7`) and the scatter group (`T1`–`T6`); VSUB appears three times (scalar FP `T2`, FP vector `T1`/`T2`, integer vector `T1`/`T2`).
+  - S2 result: appended in place as `### 4.471.`–`### 4.489.`; the §4 lead-in now reads A–V 段 (C2.4.1–C2.4.489) with only W–Y 段 deferred. Pseudocode, syntax and field names verbatim with comments translated; no `# ` in the body.
+  - S3 result: `FigureC2-748.png`–`FigureC2-783.png` (36 diagrams) cropped at 4×; stroke-only grid detection keeps the shaded decode boxes out and extends the bottom for sub-cell labels such as `imm1 = 0` and `regh`.
+  - S4 result: no nav change needed — C2.4 is a single page.
+  - S5 result: strict build 0 WARNINGs; `check_indexes.py --root .` OK; `check_heading_lang.py` OK on the article.
+  - S6 result: 783 diagrams referenced exactly once and all present; entry and subsection numbering continuous 4.1–4.489; `受限行为` present only where the source has a restricted-behaviour block.
+  - S7 result: covered by the user-approved single-loop run.
+  - S8 result: committed on `feature/armv8m-c2-4-v5` (issue #424; PR number recorded in the follow-up ledger commit, stacked on PR #423 and retargeted to `master` after the upstream PRs merge).
+  - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] C2.4 W–Y band → `instruction_list/w/` and `y/` (4 entries: W 3, Y 1; closes C2.4 and Part C)
   - [ ] plan gate [ ] S1 [ ] S2 [ ] S3 [ ] S4 [ ] S5 [ ] S6 [ ] S7 [ ] S8
 - [ ] D1 → `armv8-m/part-d/registers_and_payload_specification/` (Register and Payload Specification; PDF pp. 1442–1904, 463 pp; stub exists)
