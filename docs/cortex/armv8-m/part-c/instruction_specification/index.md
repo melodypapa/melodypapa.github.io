@@ -1998,7 +1998,7 @@ T32 指令流是一串半字对齐的半字。每条 T32 指令要么是该流�
 
 ## 4. 按字母顺序的指令列表
 
-本节按指令助记符的字母顺序逐条列出各指令。手册原文共 493 条（C2.4.1–C2.4.493，印刷 528–1440）；当前已译 A–V 段的 V1、V2、V3 子段（C2.4.1–C2.4.433），V 段其余部分与 W–Y 段随后续批次补充。
+本节按指令助记符的字母顺序逐条列出各指令。手册原文共 493 条（C2.4.1–C2.4.493，印刷 528–1440）；当前已译 A–V 段的 V1–V4 子段（C2.4.1–C2.4.470），V 段其余部分与 W–Y 段随后续批次补充。
 
 ### 4.1. ADC (immediate)：立即数带进位加
 
@@ -37439,4 +37439,3649 @@ for e = 0 to elements-1
 for e = 0 to 3
   if elmtMask[e] == '1' then
     Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+### 4.434. VQADD：向量饱和加法
+
+向量饱和加法（Vector Saturating Add）。把第一源向量寄存器中元素的值加到第二源向量寄存器中的相应元素或某个通用寄存器上。结果在写入目标向量寄存器之前进行饱和。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.434.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-695](FigureC2-695.png)
+
+**T1: VQADD 变体**
+
+```arm
+VQADD<v><q>.<dt> Qd, Qn, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+if size == '11' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+unsigned = (U == '1');
+withScalar = FALSE;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.434.2. 编码 T2
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-696](FigureC2-696.png)
+
+**T2: VQADD 变体**
+
+```arm
+VQADD<v><q>.<dt> Qd, Qn, Rm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(Rm);
+n = UInt(N:Qn);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+unsigned = (U == '1');
+withScalar = TRUE;
+if InITBlock()
+  then CONSTRAINED_UNPREDICTABLE;
+if Rm == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.434.3. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：该参数确定以下取值：
+  - **大小**：表示向量中各元素的大小。
+  - **无符号标志**：`S` 表示有符号，`U` 表示无符号。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`、`U = 0`。
+  - `U8`，编码为 `size = 00`、`U = 1`。
+  - `S16`，编码为 `size = 01`、`U = 0`。
+  - `U16`，编码为 `size = 01`、`U = 1`。
+  - `S32`，编码为 `size = 10`、`U = 0`。
+  - `U32`，编码为 `size = 10`、`U = 1`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qn>`**：第一源向量寄存器。
+- **`<Qm>`**：第二源向量寄存器。
+- **`<Rm>`**：源通用寄存器。
+
+#### 4.434.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[n, curBeat];
+if !withScalar then
+  op2 = Q[m, curBeat];
+for e = 0 to elements-1
+  if withScalar then
+    value = Int(Elem[op1, e, esize], unsigned) + Int(R[m][esize-1:0], unsigned);
+  else
+    value = Int(Elem[op1, e, esize], unsigned) + Int(Elem[op2, e, esize], unsigned);
+  (Elem[result, e, esize], sat) = SatQ(value, esize, unsigned);
+  if sat && elmtMask[e*(esize>>3)] == '1' then
+    FPSCR.QC = '1';
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.435. VQDMLADH, VQRDMLADH：向量饱和加倍乘加对返回高半
+
+向量饱和加倍乘加对返回高半（Vector Saturating Doubling Multiply Add Dual Returning High Half）、向量饱和舍入加倍乘加对返回高半（Vector Saturating Rounding Doubling Multiply Add Dual Returning High Half）。向量寄存器的元素按对处理。在基础变体中，两个源寄存器中的对应元素相乘；而在交换变体中，先把从第一源寄存器读出的每对值中的两个值互换，再把它们与第二源寄存器中的值相乘。各对乘法运算的结果通过相加并加倍来合并。所得值的高半被选为最终结果。基础变体把结果写入目标寄存器中每对元素的低元素，而交换变体写入每对元素中的高元素。结果在选择高半并进行饱和之前可选地进行舍入。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.435.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-697](FigureC2-697.png)
+
+**T1: VQDMLADH 变体**
+
+```arm
+VQDMLADH{X}<v><q>.<dt> Qd, Qn, Qm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+exchange = (X == '1');
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+round = FALSE;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.435.2. 编码 T2
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-698](FigureC2-698.png)
+
+**T2: VQRDMLADH 变体**
+
+```arm
+VQRDMLADH{X}<v><q>.<dt> Qd, Qn, Qm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+exchange = (X == '1');
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+round = TRUE;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.435.3. 汇编符号（所有编码）
+
+- **`<X>`**：交换 `Qm` 中相邻的值对。
+  该参数必须是以下取值之一：
+  - `-`，编码为 `X = 0`。
+  - `X`，编码为 `X = 1`。
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`。
+  - `S16`，编码为 `size = 01`。
+  - `S32`，编码为 `size = 10`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qn>`**：第一源向量寄存器。
+- **`<Qm>`**：第二源向量寄存器。
+
+#### 4.435.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+rVal = if round then 1 << (esize-1) else 0;
+// 32 位运算的处理方式不同，因为它们执行跨节拍
+// 寄存器访问
+if esize == 32 then
+  if (curBeat[0] == '1') == exchange then
+    if exchange then
+      mul1 = SInt(Q[n, curBeat]) * SInt(Q[m, curBeat-1]);
+      mul2 = SInt(Q[n, curBeat-1]) * SInt(Q[m, curBeat]);
+    else
+      mul1 = SInt(Q[n, curBeat]) * SInt(Q[m, curBeat]);
+      mul2 = SInt(Q[n, curBeat+1]) * SInt(Q[m, curBeat+1]);
+    (value, sat) = SignedSatQ(2 * (mul1 + mul2) + rVal, esize*2);
+    result = value[63:32];
+    if sat && elmtMask[0] == '1' then
+      FPSCR.QC = '1';
+  else
+    // 本拍不进行计算，因此不写入目标寄存器。
+    elmtMask = Zeros();
+else
+  op1 = Q[n, curBeat];
+  op2 = Q[m, curBeat];
+  for e = 0 to elements-1
+    if (e[0] == '1') == exchange then
+      if exchange then
+        mul1 = SInt(Elem[op1, e, esize]) * SInt(Elem[op2, e-1, esize]);
+        mul2 = SInt(Elem[op1, e-1, esize]) * SInt(Elem[op2, e, esize]);
+      else
+        mul1 = SInt(Elem[op1, e, esize]) * SInt(Elem[op2, e, esize]);
+        mul2 = SInt(Elem[op1, e+1, esize]) * SInt(Elem[op2, e+1, esize]);
+      (value, sat) = SignedSatQ(2 * (mul1 + mul2) + rVal, esize*2);
+      Elem[result, e, esize] = value[esize+esize-1:esize];
+      if sat && elmtMask[e*(esize>>3)] == '1' then
+        FPSCR.QC = '1';
+    else
+      // 本通道不进行计算，因此沿用原值。
+      Elem[result, e, esize] = Elem[Q[d, curBeat], e, esize];
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.436. VQDMLAH, VQRDMLAH (vector by scalar plus vector)：向量饱和加倍乘累加
+
+向量饱和加倍乘累加（Vector Saturating Doubling Multiply Accumulate）、向量饱和舍入加倍乘累加（Vector Saturating Rounding Doubling Multiply Accumulate）。把源向量中的每个元素乘以一个标量值，将结果加倍并加到目标向量中的相应元素上。把每个结果的高半存入目标寄存器。结果在选择高半并进行饱和之前可选地进行舍入。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.436.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-699](FigureC2-699.png)
+
+**T1: VQDMLAH 变体**
+
+```arm
+VQDMLAH<v><q>.<dt> Qda, Qn, Rm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if Da == '1' || N == '1' then UNDEFINED;
+da = UInt(Da:Qda);
+m = UInt(Rm);
+n = UInt(N:Qn);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+round = FALSE;
+if InITBlock()
+  then CONSTRAINED_UNPREDICTABLE;
+if Rm == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.436.2. 编码 T2
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-700](FigureC2-700.png)
+
+**T2: VQRDMLAH 变体**
+
+```arm
+VQRDMLAH<v><q>.<dt> Qda, Qn, Rm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if Da == '1' || N == '1' then UNDEFINED;
+da = UInt(Da:Qda);
+m = UInt(Rm);
+n = UInt(N:Qn);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+round = TRUE;
+if InITBlock()
+  then CONSTRAINED_UNPREDICTABLE;
+if Rm == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.436.3. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`。
+  - `S16`，编码为 `size = 01`。
+  - `S32`，编码为 `size = 10`。
+- **`<Qda>`**：累加向量寄存器。
+- **`<Qn>`**：源向量寄存器。
+- **`<Rm>`**：源通用寄存器。
+
+#### 4.436.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[n, curBeat];
+element2 = SInt(R[m][esize-1:0]);
+op3 = Q[da, curBeat];
+rVal = if round then 1 << (esize-1) else 0;
+for e = 0 to elements-1
+  element1 = SInt(Elem[op1, e, esize]);
+  element3 = SInt(Elem[op3, e, esize]) << esize;
+  (value, sat) = SignedSatQ((2 * element1 * element2) + element3 + rVal, esize*2);
+  Elem[result, e, esize] = value[esize+esize-1:esize];
+  if sat && elmtMask[e*(esize>>3)] == '1' then
+    FPSCR.QC = '1';
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[da, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.436.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1 且本指令设置 `FPSCR.N`、`Z`、`C`、`V`、`Q` 标志或 `VPR.P0`：
+
+- 本指令的执行时间与以下各项无关：
+  - 其任一寄存器中提供的数据值。
+  - `FPSCR.N`、`Z`、`C`、`V`、`Q` 标志或 `VPR.P0` 的值。
+- 异步异常的接受时刻不因以下各项中的任何一项而变化：
+  - 其任一寄存器中提供的数据值。
+  - `FPSCR.N`、`Z`、`C`、`V`、`Q` 标志或 `VPR.P0` 的值。
+
+### 4.437. VQDMLASH, VQRDMLASH (vector by vector plus scalar)：向量饱和加倍乘累加标量高半
+
+向量饱和加倍乘累加标量高半（Vector Saturating Doubling Multiply Accumulate Scalar High Half）、向量饱和舍入加倍乘累加标量高半（Vector Saturating Rounding Doubling Multiply Accumulate Scalar High Half）。把源向量中的每个元素乘以目标向量中的相应元素，将结果加倍并加到一个标量值上。把每个结果的高半存入目标寄存器。结果在选择高半并进行饱和之前可选地进行舍入。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.437.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-701](FigureC2-701.png)
+
+**T1: VQDMLASH 变体**
+
+```arm
+VQDMLASH<v><q>.<dt> Qda, Qn, Rm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if Da == '1' || N == '1' then UNDEFINED;
+da = UInt(Da:Qda);
+m = UInt(Rm);
+n = UInt(N:Qn);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+round = FALSE;
+if InITBlock()
+  then CONSTRAINED_UNPREDICTABLE;
+if Rm == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.437.2. 编码 T2
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-702](FigureC2-702.png)
+
+**T2: VQRDMLASH 变体**
+
+```arm
+VQRDMLASH<v><q>.<dt> Qda, Qn, Rm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if Da == '1' || N == '1' then UNDEFINED;
+da = UInt(Da:Qda);
+m = UInt(Rm);
+n = UInt(N:Qn);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+round = TRUE;
+if InITBlock()
+  then CONSTRAINED_UNPREDICTABLE;
+if Rm == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.437.3. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`。
+  - `S16`，编码为 `size = 01`。
+  - `S32`，编码为 `size = 10`。
+- **`<Qda>`**：源兼目标向量寄存器。
+- **`<Qn>`**：源向量寄存器。
+- **`<Rm>`**：源通用寄存器。
+
+#### 4.437.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[n, curBeat];
+op2 = Q[da, curBeat];
+element3 = SInt(R[m][esize-1:0]) << esize;
+rVal = if round then 1 << (esize-1) else 0;
+for e = 0 to elements-1
+  element1 = SInt(Elem[op1, e, esize]);
+  element2 = SInt(Elem[op2, e, esize]);
+  (value, sat) = SignedSatQ((2 * element1 * element2) + element3 + rVal, esize*2);
+  Elem[result, e, esize] = value[esize+esize-1:esize];
+  if sat && elmtMask[e*(esize>>3)] == '1' then
+    FPSCR.QC = '1';
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[da, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.438. VQDMLSDH, VQRDMLSDH：向量饱和加倍乘减对返回高半
+
+向量饱和加倍乘减对返回高半（Vector Saturating Doubling Multiply Subtract Dual Returning High Half）、向量饱和舍入加倍乘减对返回高半（Vector Saturating Rounding Doubling Multiply Subtract Dual Returning High Half）。向量寄存器的元素按对处理。在基础变体中，两个源寄存器中的对应元素相乘；而在交换变体中，先把从第一源寄存器读出的每对值中的两个值互换，再把它们与第二源寄存器中的值相乘。各对乘法运算的结果通过把一个从另一个中减去并加倍来合并。所得值的高半被选为最终结果。基础变体把结果写入目标寄存器中每对元素的低元素，而交换变体写入每对元素中的高元素。结果在选择高半并进行饱和之前可选地进行舍入。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.438.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-703](FigureC2-703.png)
+
+**T1: VQDMLSDH 变体**
+
+```arm
+VQDMLSDH{X}<v><q>.<dt> Qd, Qn, Qm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+exchange = (X == '1');
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+round = FALSE;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.438.2. 编码 T2
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-704](FigureC2-704.png)
+
+**T2: VQRDMLSDH 变体**
+
+```arm
+VQRDMLSDH{X}<v><q>.<dt> Qd, Qn, Qm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+exchange = (X == '1');
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+round = TRUE;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.438.3. 汇编符号（所有编码）
+
+- **`<X>`**：交换 `Qm` 中相邻的值对。
+  该参数必须是以下取值之一：
+  - `-`，编码为 `X = 0`。
+  - `X`，编码为 `X = 1`。
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`。
+  - `S16`，编码为 `size = 01`。
+  - `S32`，编码为 `size = 10`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qn>`**：第一源向量寄存器。
+- **`<Qm>`**：第二源向量寄存器。
+
+#### 4.438.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+rVal = if round then 1 << (esize-1) else 0;
+// 32 位运算的处理方式不同，因为它们执行跨节拍
+// 寄存器访问
+if esize == 32 then
+  if (curBeat[0] == '1') == exchange then
+    if exchange then
+      mul1 = SInt(Q[n, curBeat]) * SInt(Q[m, curBeat-1]);
+      mul2 = SInt(Q[n, curBeat-1]) * SInt(Q[m, curBeat]);
+    else
+      mul1 = SInt(Q[n, curBeat]) * SInt(Q[m, curBeat]);
+      mul2 = SInt(Q[n, curBeat+1]) * SInt(Q[m, curBeat+1]);
+    (value, sat) = SignedSatQ(2 * (mul1 - mul2) + rVal, esize*2);
+    result = value[63:32];
+    if sat && elmtMask[0] == '1' then
+      FPSCR.QC = '1';
+  else
+    // 本拍不进行计算，因此不写入目标寄存器。
+    elmtMask = Zeros();
+else
+  op1 = Q[n, curBeat];
+  op2 = Q[m, curBeat];
+  for e = 0 to elements-1
+    if (e[0] == '1') == exchange then
+      if exchange then
+        mul1 = SInt(Elem[op1, e, esize]) * SInt(Elem[op2, e-1, esize]);
+        mul2 = SInt(Elem[op1, e-1, esize]) * SInt(Elem[op2, e, esize]);
+      else
+        mul1 = SInt(Elem[op1, e, esize]) * SInt(Elem[op2, e, esize]);
+        mul2 = SInt(Elem[op1, e+1, esize]) * SInt(Elem[op2, e+1, esize]);
+      (value, sat) = SignedSatQ(2 * (mul1 - mul2) + rVal, esize*2);
+      Elem[result, e, esize] = value[esize+esize-1:esize];
+      if sat && elmtMask[e*(esize>>3)] == '1' then
+        FPSCR.QC = '1';
+    else
+      // 本通道不进行计算，因此沿用原值。
+      Elem[result, e, esize] = Elem[Q[d, curBeat], e, esize];
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+### 4.439. VQDMULH, VQRDMULH：向量饱和加倍乘法返回高半
+
+向量饱和加倍乘法返回高半（Vector Saturating Doubling Multiply Returning High Half）、向量饱和舍入加倍乘法返回高半（Vector Saturating Rounding Doubling Multiply Returning High Half）。把一个通用寄存器的值乘以向量寄存器中的每个元素以产生一个结果向量，或者把一个向量寄存器中的每个元素乘以另一个向量寄存器中的对应元素，将结果加倍，并把最终结果的最高半部分放入目标向量。结果在饱和之前可选地进行舍入。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.439.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-705](FigureC2-705.png)
+
+**T1: VQDMULH 变体**
+
+```arm
+VQDMULH<v><q>.<dt> Qd, Qn, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+if size == '11' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+withScalar = FALSE;
+round = FALSE;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.439.2. 编码 T2
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-706](FigureC2-706.png)
+
+**T2: VQRDMULH 变体**
+
+```arm
+VQRDMULH<v><q>.<dt> Qd, Qn, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+if size == '11' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+withScalar = FALSE;
+round = TRUE;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.439.3. 编码 T3
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-707](FigureC2-707.png)
+
+**T3: VQDMULH 变体**
+
+```arm
+VQDMULH<v><q>.<dt> Qd, Qn, Rm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(Rm);
+n = UInt(N:Qn);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+withScalar = TRUE;
+round = FALSE;
+if InITBlock()
+  then CONSTRAINED_UNPREDICTABLE;
+if Rm == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.439.4. 编码 T4
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-708](FigureC2-708.png)
+
+**T4: VQRDMULH 变体**
+
+```arm
+VQRDMULH<v><q>.<dt> Qd, Qn, Rm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(Rm);
+n = UInt(N:Qn);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+withScalar = TRUE;
+round = TRUE;
+if InITBlock()
+  then CONSTRAINED_UNPREDICTABLE;
+if Rm == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.439.5. 汇编符号（T1 编码）
+
+- **`<Qn>`**：第一源向量寄存器。
+
+#### 4.439.6. 汇编符号（T2 编码）
+
+- **`<Qn>`**：第一源向量寄存器。
+
+#### 4.439.7. 汇编符号（T3 编码）
+
+- **`<Qn>`**：源向量寄存器。
+
+#### 4.439.8. 汇编符号（T4 编码）
+
+- **`<Qn>`**：源向量寄存器。
+
+#### 4.439.9. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`。
+  - `S16`，编码为 `size = 01`。
+  - `S32`，编码为 `size = 10`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：第二源向量寄存器。
+- **`<Rm>`**：源通用寄存器。
+
+#### 4.439.10. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[n, curBeat];
+op2 = if withScalar then R[m] else Q[m, curBeat];
+rVal = if round then 1 << (esize-1) else 0;
+for e = 0 to elements-1
+  opm = if withScalar then op2[esize-1:0] else Elem[op2, e, esize];
+  value = ((2 * SInt(Elem[op1, e, esize]) * SInt(opm)) + rVal) >> esize;
+  (Elem[result, e, esize], sat) = SignedSatQ(value, esize);
+  if sat && elmtMask[e*(esize>>3)] == '1' then
+    FPSCR.QC = '1';
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.439.11. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1 且本指令设置 `FPSCR.N`、`Z`、`C`、`V`、`Q` 标志或 `VPR.P0`：
+
+- 本指令的执行时间与以下各项无关：
+  - 其任一寄存器中提供的数据值。
+  - `FPSCR.N`、`Z`、`C`、`V`、`Q` 标志或 `VPR.P0` 的值。
+- 异步异常的接受时刻不因以下各项中的任何一项而变化：
+  - 其任一寄存器中提供的数据值。
+  - `FPSCR.N`、`Z`、`C`、`V`、`Q` 标志或 `VPR.P0` 的值。
+
+### 4.440. VQDMULL：向量乘法长
+
+向量乘法长（Vector Multiply Long）。对两个单宽度源操作数元素执行逐元素整数乘法。这些元素分别选自双宽度源向量寄存器元素的高半（T 变体）或低半（B 变体），或者选自通用寄存器的低位单宽度部分。乘积被加倍并饱和，产生一个双宽度乘积，写回目标向量寄存器。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.440.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-709](FigureC2-709.png)
+
+**T1: VQDMULL 变体**
+
+```arm
+VQDMULL<T><v><q>.<dt> Qd, Qn, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+esize = 16 << UInt(sz);
+top = UInt(T);
+withScalar = FALSE;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if sz == '1' && (D:Qd == M:Qm || D:Qd == N:Qn) then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.440.2. 编码 T2
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-710](FigureC2-710.png)
+
+**T2: VQDMULL 变体**
+
+```arm
+VQDMULL<T><v><q>.<dt> Qd, Qn, Rm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(Rm);
+n = UInt(N:Qn);
+esize = 16 << UInt(sz);
+top = UInt(T);
+withScalar = TRUE;
+if InITBlock()
+  then CONSTRAINED_UNPREDICTABLE;
+if D:Qd == N:Qn && sz == '1' then CONSTRAINED_UNPREDICTABLE;
+if Rm == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.440.3. 汇编符号（所有编码）
+
+- **`<T>`**：指定使用源元素的哪一半。
+  该参数必须是以下取值之一：
+  - `B`，编码为 `T = 0`，表示低半。
+  - `T`，编码为 `T = 1`，表示高半。
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S16`，编码为 `sz = 0`。
+  - `S32`，编码为 `sz = 1`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qn>`**：源向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+- **`<Rm>`**：源通用寄存器。
+
+#### 4.440.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+if esize == 32 then
+  op1 = Q[n, UInt(curBeat[1]:T)];
+  if withScalar then
+    op2 = R[m];
+  else
+    op2 = Q[m, UInt(curBeat[1]:T)];
+  (mul, sat) = SignedSatQ(2 * SInt(op1) * SInt(op2), 64);
+  result = if curBeat[0] == '1' then mul[63:32] else mul[31:0];
+  if sat && elmtMask[0] == '1' then
+    FPSCR.QC = '1';
+else
+  op1 = Q[n, curBeat];
+  if withScalar then
+    op2 = R[m];
+  else
+    op2 = Q[m, curBeat];
+  elements = 16 DIV esize;
+  for e = 0 to elements-1
+    element1 = Elem[op1, e * 2 + top, esize];
+    if withScalar then
+      element2 = Elem[op2, 0, esize];
+    else
+      element2 = Elem[op2, e * 2 + top, esize];
+    value = 2 * SInt(element1) * SInt(element2);
+    (Elem[result, e, esize * 2], sat) = SignedSatQ(value, 2 * esize);
+    if sat && elmtMask[(e*2 + top) * (esize>>3)] == '1' then
+      FPSCR.QC = '1';
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.441. VQMOVN：向量饱和移动并变窄
+
+向量饱和移动并变窄（Vector Saturating Move and Narrow）。对每个元素执行到半宽度的饱和，把结果写入结果元素的高半（T 变体）或低半（B 变体）。目标向量元素的另一半保持其原值。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.441.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-711](FigureC2-711.png)
+
+**T1: VQMOVN 变体**
+
+```arm
+VQMOVN<T><v><q>.<dt> Qd, Qm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' then UNDEFINED;
+if size == '10' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+unsigned = (U == '1');
+esize = 8 << UInt(size);
+elements = 16 DIV esize;
+top = UInt(T);
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.441.2. 汇编符号（所有编码）
+
+- **`<T>`**：指定结果写入结果元素的哪一半。
+  该参数必须是以下取值之一：
+  - `B`，编码为 `T = 0`，表示低半。
+  - `T`，编码为 `T = 1`，表示高半。
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：该参数确定以下取值：
+  - **无符号标志**：`S` 表示有符号，`U` 表示无符号。
+  - **大小**：表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S16`，编码为 `size = 00`、`U = 0`。
+  - `U16`，编码为 `size = 00`、`U = 1`。
+  - `S32`，编码为 `size = 01`、`U = 0`。
+  - `U32`，编码为 `size = 01`、`U = 1`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+
+#### 4.441.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+op1 = Q[m, curBeat];
+result = Q[d, curBeat];
+for e = 0 to elements-1
+  operand = Int(Elem[op1, e, 2*esize], unsigned);
+  (value, sat) = SatQ(operand, esize, unsigned);
+  Elem[result, 2*e + top, esize] = value;
+  if sat && elmtMask[(e*2 + top) * (esize>>3)] == '1' then
+    FPSCR.QC = '1';
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.442. VQMOVUN：向量饱和移动无符号并变窄
+
+向量饱和移动无符号并变窄（Vector Saturating Move Unsigned and Narrow）。对每个元素执行到半宽度的饱和，把结果写入结果元素的高半（T 变体）或低半（B 变体）。目标向量元素的另一半保持其原值。结果始终饱和为无符号值。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.442.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-712](FigureC2-712.png)
+
+**T1: VQMOVUN 变体**
+
+```arm
+VQMOVUN<T><v><q>.<dt> Qd, Qm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' then UNDEFINED;
+if size == '10' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+unsigned = FALSE;
+destUnsigned = TRUE;
+esize = 8 << UInt(size);
+elements = 16 DIV esize;
+top = UInt(T);
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.442.2. 汇编符号（所有编码）
+
+- **`<T>`**：指定结果写入结果元素的哪一半。
+  该参数必须是以下取值之一：
+  - `B`，编码为 `T = 0`，表示低半。
+  - `T`，编码为 `T = 1`，表示高半。
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S16`，编码为 `size = 00`。
+  - `S32`，编码为 `size = 01`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+
+#### 4.442.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+op1 = Q[m, curBeat];
+result = Q[d, curBeat];
+for e = 0 to elements-1
+  operand = Int(Elem[op1, e, 2*esize], unsigned);
+  (value, sat) = SatQ(operand, esize, destUnsigned);
+  Elem[result, 2*e + top, esize] = value;
+  if sat && elmtMask[(e*2 + top) * (esize>>3)] == '1' then
+    FPSCR.QC = '1';
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.443. VQNEG：向量饱和取负
+
+向量饱和取负（Vector Saturating Negate）。对向量寄存器中的每个元素取负并饱和。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.443.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-713](FigureC2-713.png)
+
+**T1: VQNEG 变体**
+
+```arm
+VQNEG<v><q>.<dt> Qd, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' then UNDEFINED;
+if size == '11' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.443.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`。
+  - `S16`，编码为 `size = 01`。
+  - `S32`，编码为 `size = 10`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+
+#### 4.443.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[m, curBeat];
+for e = 0 to elements-1
+  value = -SInt(Elem[op1, e, esize]);
+  (Elem[result, e, esize], sat) = SignedSatQ(value, esize);
+  if sat && elmtMask[e*(esize>>3)] == '1' then
+    FPSCR.QC = '1';
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+### 4.444. VQRSHL：向量饱和舍入移位左
+
+向量饱和舍入移位左（Vector Saturating Rounding Shift Left）。向量变体按第二向量中对应元素的最低有效字节所给出的值，对第一向量的每个元素进行移位，并把结果放入目标向量。寄存器变体按源寄存器中指定的值，对向量寄存器的每个元素进行移位。移位的方向取决于第二向量寄存器中该元素的符号。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.444.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-714](FigureC2-714.png)
+
+**T1: VQRSHL 变体**
+
+```arm
+VQRSHL<v><q>.<dt> Qd, Qm, Qn
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+unsigned = (U == '1');
+withScalar = FALSE;
+withVector = TRUE;
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.444.2. 编码 T2
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-715](FigureC2-715.png)
+
+**T2: VQRSHL 变体**
+
+```arm
+VQRSHL<v><q>.<dt> Qda, Rm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if Da == '1' then UNDEFINED;
+da = UInt(Da:Qda);
+m = UInt(Rm);
+d = da;
+n = m;
+m = da;
+unsigned = (U == '1');
+withScalar = TRUE;
+withVector = FALSE;
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock()
+  then CONSTRAINED_UNPREDICTABLE;
+if Rm == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.444.3. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：该参数确定以下取值：
+  - **无符号标志**：`S` 表示有符号，`U` 表示无符号。
+  - **大小**：表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`、`U = 0`。
+  - `U8`，编码为 `size = 00`、`U = 1`。
+  - `S16`，编码为 `size = 01`、`U = 0`。
+  - `U16`，编码为 `size = 01`、`U = 1`。
+  - `S32`，编码为 `size = 10`、`U = 0`。
+  - `U32`，编码为 `size = 10`、`U = 1`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qda>`**：源兼目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+- **`<Qn>`**：源向量寄存器，其元素中包含要移位的位数。
+- **`<Rm>`**：源通用寄存器，其中包含要移位的位数。
+
+#### 4.444.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[m, curBeat];
+if withVector then
+  op2 = Q[n, curBeat];
+if withScalar then
+  shiftAmount = SInt(R[n][7:0]);
+for e = 0 to elements-1
+  if withVector then
+    shiftAmount = SInt(Elem[op2, e, esize][7:0]);
+  // 左移时为 0，右移时为 2^(n-1)
+  roundConst = 1 << (-1-shiftAmount);
+  operand = Int(Elem[op1, e, esize], unsigned);
+  (value, sat) = SatQ((operand + roundConst) << shiftAmount, esize, unsigned);
+  Elem[result, e, esize] = value;
+  if sat && elmtMask[e*(esize>>3)] == '1' then
+    FPSCR.QC = '1';
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.445. VQRSHRN：向量饱和舍入右移并变窄
+
+向量饱和舍入右移并变窄（Vector Saturating Rounding Shift Right and Narrow）。执行带移位的、逐元素到半宽度的饱和，把舍入后的结果写入结果元素的高半（T 变体）或低半（B 变体）。目标向量元素的另一半保持其原值。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.445.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-716](FigureC2-716.png)
+
+**T1: VQRSHRN 变体**
+
+```arm
+VQRSHRN<T><v><q>.<dt> Qd, Qm, #<imm>
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+unsigned = (U == '1');
+imm5 = sz:imm;
+case sz of
+  when '01' size = '00'; shiftAmount = 16 - UInt(imm5);
+  when '1x' size = '01'; shiftAmount = 32 - UInt(imm5);
+  otherwise UNDEFINED;
+esize = 8 << UInt(size);
+elements = 16 DIV esize;
+top = UInt(T);
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.445.2. 汇编符号（所有编码）
+
+- **`<T>`**：指定结果写入结果元素的哪一半。
+  该参数必须是以下取值之一：
+  - `B`，编码为 `T = 0`，表示低半。
+  - `T`，编码为 `T = 1`，表示高半。
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：该参数确定以下取值：
+  - **无符号标志**：`S` 表示有符号，`U` 表示无符号。
+  - **大小**：表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S16`，编码为 `sz = 01`、`U = 0`。
+  - `U16`，编码为 `sz = 01`、`U = 1`。
+  - `S32`，编码为 `sz = 1x`、`U = 0`。
+  - `U32`，编码为 `sz = 1x`、`U = 1`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+- **`<imm>`**：要移位的位数，范围为 1 到 `<dt>`/2。该字段的编码是 `imm` 参数的最高有效位与 `size` 字段（`sz`）的最低有效位的逻辑或。
+
+#### 4.445.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+op1 = Q[m, curBeat];
+result = Q[d, curBeat];
+for e = 0 to elements-1
+  operand = Int(Elem[op1, e, 2*esize], unsigned);
+  // 左移时为 0，右移时为 2^(n-1)
+  operand = operand + (1 << (shiftAmount-1));
+  operand = operand >> shiftAmount;
+  (value, sat) = SatQ(operand, esize, unsigned);
+  Elem[result, 2*e + top, esize] = value;
+  if sat && elmtMask[(e*2 + top) * (esize>>3)] == '1' then
+    FPSCR.QC = '1';
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.446. VQRSHRUN：向量饱和舍入右移无符号并变窄
+
+向量饱和舍入右移无符号并变窄（Vector Saturating Rounding Shift Right Unsigned and Narrow）。执行带移位的、逐元素到半宽度的饱和，把舍入后的结果写入结果元素的高半（T 变体）或低半（B 变体）。目标向量元素的另一半保持其原值。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.446.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-717](FigureC2-717.png)
+
+**T1: VQRSHRUN 变体**
+
+```arm
+VQRSHRUN<T><v><q>.<dt> Qd, Qm, #<imm>
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+unsigned = FALSE;
+destUnsigned = TRUE;
+imm5 = sz:imm;
+case sz of
+  when '01' size = '00'; shiftAmount = 16 - UInt(imm5);
+  when '1x' size = '01'; shiftAmount = 32 - UInt(imm5);
+  otherwise UNDEFINED;
+esize = 8 << UInt(size);
+elements = 16 DIV esize;
+top = UInt(T);
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.446.2. 汇编符号（所有编码）
+
+- **`<T>`**：指定结果写入结果元素的哪一半。
+  该参数必须是以下取值之一：
+  - `B`，编码为 `T = 0`，表示低半。
+  - `T`，编码为 `T = 1`，表示高半。
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S16`，编码为 `sz = 01`。
+  - `S32`，编码为 `sz = 1x`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+- **`<imm>`**：要移位的位数，范围为 1 到 `<dt>`/2。该字段的编码是 `imm` 参数的最高有效位与 `size` 字段（`sz`）的最低有效位的逻辑或。
+
+#### 4.446.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+op1 = Q[m, curBeat];
+result = Q[d, curBeat];
+for e = 0 to elements-1
+  operand = Int(Elem[op1, e, 2*esize], unsigned);
+  // 左移时为 0，右移时为 2^(n-1)
+  operand = operand + (1 << (shiftAmount-1));
+  operand = operand >> shiftAmount;
+  (value, sat) = SatQ(operand, esize, destUnsigned);
+  Elem[result, 2*e + top, esize] = value;
+  if sat && elmtMask[(e*2 + top) * (esize>>3)] == '1' then
+    FPSCR.QC = '1';
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.447. VQSHL, VQSHLU：向量饱和移位左、向量饱和移位左无符号
+
+向量饱和移位左（Vector Saturating Shift Left）、向量饱和移位左无符号（Vector Saturating Shift Left Unsigned）。寄存器变体按源寄存器中指定的值，对向量寄存器的每个元素进行移位。移位的方向取决于第二向量寄存器中该元素的符号。立即数变体把向量寄存器的每个元素向左移立即数值。向量变体按第二向量中对应元素的最低有效字节所给出的值，对第一向量的每个元素进行移位，并把结果放入目标向量。无符号变体产生无符号结果，尽管操作数是有符号的。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.447.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-718](FigureC2-718.png)
+
+**T1: VQSHL 变体**
+
+```arm
+VQSHL<v><q>.<dt> Qda, Rm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if Da == '1' then UNDEFINED;
+da = UInt(Da:Qda);
+m = UInt(Rm);
+d = da;
+n = m;
+m = da;
+unsigned = (U == '1');
+destUnsigned = unsigned;
+withScalar = TRUE;
+withVector = FALSE;
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock()
+  then CONSTRAINED_UNPREDICTABLE;
+if Rm == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.447.2. 编码 T2
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-719](FigureC2-719.png)
+
+**T2: VQSHL 变体**
+
+```arm
+VQSHL<v><q>.<dt> Qd, Qm, #<imm>
+```
+
+**解码**
+
+```arm
+if sz == '000' then SEE "VMOV";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+unsigned = (U == '1');
+destUnsigned = unsigned;
+n = integer UNKNOWN;
+imm6 = sz:imm;
+case sz of
+  when '001' size = '00'; shiftAmount = UInt(imm6) - 8;
+  when '01x' size = '01'; shiftAmount = UInt(imm6) - 16;
+  when '1xx' size = '10'; shiftAmount = UInt(imm6) - 32;
+  otherwise UNDEFINED;
+withScalar = FALSE;
+withVector = FALSE;
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.447.3. 编码 T3
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-720](FigureC2-720.png)
+
+**T3: VQSHLU 变体**
+
+```arm
+VQSHLU<v><q>.<dt> Qd, Qm, #<imm>
+```
+
+**解码**
+
+```arm
+if sz == '000' then SEE "VMOV";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+unsigned = FALSE;
+destUnsigned = TRUE;
+n = integer UNKNOWN;
+imm6 = sz:imm;
+case sz of
+  when '001' size = '00'; shiftAmount = UInt(imm6) - 8;
+  when '01x' size = '01'; shiftAmount = UInt(imm6) - 16;
+  when '1xx' size = '10'; shiftAmount = UInt(imm6) - 32;
+  otherwise UNDEFINED;
+withScalar = FALSE;
+withVector = FALSE;
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.447.4. 编码 T4
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-721](FigureC2-721.png)
+
+**T4: VQSHL 变体**
+
+```arm
+VQSHL<v><q>.<dt> Qd, Qm, Qn
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+unsigned = (U == '1');
+destUnsigned = unsigned;
+withScalar = FALSE;
+withVector = TRUE;
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.447.5. 汇编符号（T1 编码）
+
+- **`<dt>`**：该参数确定以下取值：
+  - **无符号标志**：`S` 表示有符号，`U` 表示无符号。
+  - **大小**：表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`、`U = 0`。
+  - `U8`，编码为 `size = 00`、`U = 1`。
+  - `S16`，编码为 `size = 01`、`U = 0`。
+  - `U16`，编码为 `size = 01`、`U = 1`。
+  - `S32`，编码为 `size = 10`、`U = 0`。
+  - `U32`，编码为 `size = 10`、`U = 1`。
+
+#### 4.447.6. 汇编符号（T2 编码）
+
+- **`<dt>`**：该参数确定以下取值：
+  - **无符号标志**：`S` 表示有符号，`U` 表示无符号。
+  - **大小**：表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `sz = 001`、`U = 0`。
+  - `U8`，编码为 `sz = 001`、`U = 1`。
+  - `S16`，编码为 `sz = 01x`、`U = 0`。
+  - `U16`，编码为 `sz = 01x`、`U = 1`。
+  - `S32`，编码为 `sz = 1xx`、`U = 0`。
+  - `U32`，编码为 `sz = 1xx`、`U = 1`。
+
+#### 4.447.7. 汇编符号（T3 编码）
+
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `sz = 001`。
+  - `S16`，编码为 `sz = 01x`。
+  - `S32`，编码为 `sz = 1xx`。
+
+#### 4.447.8. 汇编符号（T4 编码）
+
+- **`<dt>`**：该参数确定以下取值：
+  - **无符号标志**：`S` 表示有符号，`U` 表示无符号。
+  - **大小**：表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`、`U = 0`。
+  - `U8`，编码为 `size = 00`、`U = 1`。
+  - `S16`，编码为 `size = 01`、`U = 0`。
+  - `U16`，编码为 `size = 01`、`U = 1`。
+  - `S32`，编码为 `size = 10`、`U = 0`。
+  - `U32`，编码为 `size = 10`、`U = 1`。
+
+#### 4.447.9. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qda>`**：源兼目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+- **`<Qn>`**：源向量寄存器，其元素中包含要移位的位数。
+- **`<Rm>`**：源通用寄存器，其中包含要移位的位数。
+- **`<imm>`**：要移位的位数，范围为 0 到 `<dt>`-1。该字段的编码是 `imm` 参数的最高有效位与 `size` 字段（`sz`）的最低有效位的逻辑或。
+
+#### 4.447.10. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[m, curBeat];
+if withVector then
+  op2 = Q[n, curBeat];
+if withScalar then
+  shiftAmount = SInt(R[n][7:0]);
+for e = 0 to elements-1
+  if withVector then
+    shiftAmount = SInt(Elem[op2, e, esize][7:0]);
+  operand = Int(Elem[op1, e, esize], unsigned);
+  (value, sat) = SatQ(operand << shiftAmount, esize, destUnsigned);
+  Elem[result, e, esize] = value;
+  if sat && elmtMask[e*(esize>>3)] == '1' then
+    FPSCR.QC = '1';
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+### 4.448. VQSHRN：向量饱和右移并变窄
+
+向量饱和右移并变窄（Vector Saturating Shift Right and Narrow）。执行带移位的、逐元素到半宽度的饱和，把结果写入结果元素的高半（T 变体）或低半（B 变体）。目标向量元素的另一半保持其原值。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.448.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-722](FigureC2-722.png)
+
+**T1: VQSHRN 变体**
+
+```arm
+VQSHRN<T><v><q>.<dt> Qd, Qm, #<imm>
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+unsigned = (U == '1');
+imm5 = sz:imm;
+case sz of
+  when '01' size = '00'; shiftAmount = 16 - UInt(imm5);
+  when '1x' size = '01'; shiftAmount = 32 - UInt(imm5);
+  otherwise UNDEFINED;
+esize = 8 << UInt(size);
+elements = 16 DIV esize;
+top = UInt(T);
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.448.2. 汇编符号（所有编码）
+
+- **`<T>`**：指定结果写入结果元素的哪一半。
+  该参数必须是以下取值之一：
+  - `B`，编码为 `T = 0`，表示低半。
+  - `T`，编码为 `T = 1`，表示高半。
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：该参数确定以下取值：
+  - **无符号标志**：`S` 表示有符号，`U` 表示无符号。
+  - **大小**：表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S16`，编码为 `sz = 01`、`U = 0`。
+  - `U16`，编码为 `sz = 01`、`U = 1`。
+  - `S32`，编码为 `sz = 1x`、`U = 0`。
+  - `U32`，编码为 `sz = 1x`、`U = 1`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+- **`<imm>`**：要移位的位数，范围为 1 到 `<dt>`/2。该字段的编码是 `imm` 参数的最高有效位与 `size` 字段（`sz`）的最低有效位的逻辑或。
+
+#### 4.448.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+op1 = Q[m, curBeat];
+result = Q[d, curBeat];
+for e = 0 to elements-1
+  operand = Int(Elem[op1, e, 2*esize], unsigned);
+  operand = operand >> shiftAmount;
+  (value, sat) = SatQ(operand, esize, unsigned);
+  Elem[result, 2*e + top, esize] = value;
+  if sat && elmtMask[(e*2 + top) * (esize>>3)] == '1' then
+    FPSCR.QC = '1';
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.449. VQSHRUN：向量饱和右移无符号并变窄
+
+向量饱和右移无符号并变窄（Vector Saturating Shift Right Unsigned and Narrow）。执行带移位的、逐元素到半宽度的饱和，把结果写入结果元素的高半（T 变体）或低半（B 变体）。目标向量元素的另一半保持其原值。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.449.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-723](FigureC2-723.png)
+
+**T1: VQSHRUN 变体**
+
+```arm
+VQSHRUN<T><v><q>.<dt> Qd, Qm, #<imm>
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+unsigned = FALSE;
+destUnsigned = TRUE;
+imm5 = sz:imm;
+case sz of
+  when '01' size = '00'; shiftAmount = 16 - UInt(imm5);
+  when '1x' size = '01'; shiftAmount = 32 - UInt(imm5);
+  otherwise UNDEFINED;
+esize = 8 << UInt(size);
+elements = 16 DIV esize;
+top = UInt(T);
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.449.2. 汇编符号（所有编码）
+
+- **`<T>`**：指定结果写入结果元素的哪一半。
+  该参数必须是以下取值之一：
+  - `B`，编码为 `T = 0`，表示低半。
+  - `T`，编码为 `T = 1`，表示高半。
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S16`，编码为 `sz = 01`。
+  - `S32`，编码为 `sz = 1x`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+- **`<imm>`**：要移位的位数，范围为 1 到 `<dt>`/2。该字段的编码是 `imm` 参数的最高有效位与 `size` 字段（`sz`）的最低有效位的逻辑或。
+
+#### 4.449.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+op1 = Q[m, curBeat];
+result = Q[d, curBeat];
+for e = 0 to elements-1
+  operand = Int(Elem[op1, e, 2*esize], unsigned);
+  operand = operand >> shiftAmount;
+  (value, sat) = SatQ(operand, esize, destUnsigned);
+  Elem[result, 2*e + top, esize] = value;
+  if sat && elmtMask[(e*2 + top) * (esize>>3)] == '1' then
+    FPSCR.QC = '1';
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.450. VQSUB：向量饱和减法
+
+向量饱和减法（Vector Saturating Subtract）。从第一源向量寄存器中的相应元素或某个通用寄存器中减去第二源向量寄存器中元素的值。结果在写入目标向量寄存器之前进行饱和。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.450.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-724](FigureC2-724.png)
+
+**T1: VQSUB 变体**
+
+```arm
+VQSUB<v><q>.<dt> Qd, Qn, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+if size == '11' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+unsigned = (U == '1');
+withScalar = FALSE;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.450.2. 编码 T2
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-725](FigureC2-725.png)
+
+**T2: VQSUB 变体**
+
+```arm
+VQSUB<v><q>.<dt> Qd, Qn, Rm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(Rm);
+n = UInt(N:Qn);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+unsigned = (U == '1');
+withScalar = TRUE;
+if InITBlock()
+  then CONSTRAINED_UNPREDICTABLE;
+if Rm == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.450.3. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：该参数确定以下取值：
+  - **大小**：表示向量中各元素的大小。
+  - **无符号标志**：`S` 表示有符号，`U` 表示无符号。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`、`U = 0`。
+  - `U8`，编码为 `size = 00`、`U = 1`。
+  - `S16`，编码为 `size = 01`、`U = 0`。
+  - `U16`，编码为 `size = 01`、`U = 1`。
+  - `S32`，编码为 `size = 10`、`U = 0`。
+  - `U32`，编码为 `size = 10`、`U = 1`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qn>`**：第一源向量寄存器。
+- **`<Qm>`**：第二源向量寄存器。
+- **`<Rm>`**：源通用寄存器。
+
+#### 4.450.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[n, curBeat];
+if !withScalar then
+  op2 = Q[m, curBeat];
+for e = 0 to elements-1
+  if withScalar then
+    value = Int(Elem[op1, e, esize], unsigned) - Int(R[m][esize-1:0], unsigned);
+  else
+    value = Int(Elem[op1, e, esize], unsigned) - Int(Elem[op2, e, esize], unsigned);
+  (Elem[result, e, esize], sat) = SatQ(value, esize, unsigned);
+  if sat && elmtMask[e*(esize>>3)] == '1' then
+    FPSCR.QC = '1';
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.451. VREV16：向量反转
+
+向量反转（Vector Reverse）。把源向量寄存器中每个半字内的 8 位元素顺序反转，并把结果放入目标向量寄存器。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.451.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-726](FigureC2-726.png)
+
+**T1: VREV16 变体**
+
+```arm
+VREV16<v><q>.<size> Qd, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' then UNDEFINED;
+if size != '00'
+  then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+esize = 8 << UInt(size);
+elements = 64 DIV esize;
+width = 2;
+groupsize = (1 << (3-width-UInt(size))); // 每个反转组中的元素数：2
+reverse_mask
+  = (groupsize-1)[esize-1:0];
+  // 用于索引计算的 EOR 掩码
+groups_per_beat = width;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.451.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<size>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值：
+  - `8`，编码为 `size = 00`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+
+#### 4.451.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+// 64 位宽运算的处理方式不同，因为它们执行跨节拍
+// 寄存器访问
+if width == 0 then
+  op1 = Q[m, UInt(curBeat[1:0] EOR 1[1:0])];
+  for e = 0 to (groupsize >> 1)-1
+    // 通过对源元素索引进行按位 EOR 计算目标元素索引：
+    elemIdx = UInt((e[esize-1:0] EOR (UInt(reverse_mask) >> 1)[esize-1:0]));
+    Elem[result, elemIdx, esize] = Elem[op1, e, esize];
+else
+  op1 = Q[m, curBeat];
+  for g = 0 to groups_per_beat-1
+    for e = 0 to groupsize -1
+      elemIdx = (g*groupsize) + UInt(e[esize-1:0] EOR (reverse_mask));
+      Elem[result, elemIdx, esize] = Elem[op1, (g*groupsize)+e, esize];
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.451.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.452. VREV32：向量反转
+
+向量反转（Vector Reverse）。把源向量寄存器中每个字内的 8 位或 16 位元素顺序反转，并把结果放入目标向量寄存器。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.452.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-727](FigureC2-727.png)
+
+**T1: VREV32 变体**
+
+```arm
+VREV32<v><q>.<size> Qd, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' then UNDEFINED;
+if size == '1x'
+  then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+esize = 8 << UInt(size);
+elements = 64 DIV esize;
+width = 1;
+groupsize = (1 << (3-width-UInt(size))); // 每个反转组中的元素数：2 或 4
+reverse_mask
+  = (groupsize-1)[esize-1:0];
+  // 用于索引计算的 EOR 掩码
+groups_per_beat = width;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.452.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<size>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `8`，编码为 `size = 00`。
+  - `16`，编码为 `size = 01`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+
+#### 4.452.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+// 64 位宽运算的处理方式不同，因为它们执行跨节拍
+// 寄存器访问
+if width == 0 then
+  op1 = Q[m, UInt(curBeat[1:0] EOR 1[1:0])];
+  for e = 0 to (groupsize >> 1)-1
+    // 通过对源元素索引进行按位 EOR 计算目标元素索引：
+    elemIdx = UInt((e[esize-1:0] EOR (UInt(reverse_mask) >> 1)[esize-1:0]));
+    Elem[result, elemIdx, esize] = Elem[op1, e, esize];
+else
+  op1 = Q[m, curBeat];
+  for g = 0 to groups_per_beat-1
+    for e = 0 to groupsize -1
+      elemIdx = (g*groupsize) + UInt(e[esize-1:0] EOR (reverse_mask));
+      Elem[result, elemIdx, esize] = Elem[op1, (g*groupsize)+e, esize];
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.452.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.453. VREV64：向量反转
+
+向量反转（Vector Reverse）。把源向量寄存器中每个双字内的 8 位、16 位或 32 位元素顺序反转，并把结果放入目标向量寄存器。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.453.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-728](FigureC2-728.png)
+
+**T1: VREV64 变体**
+
+```arm
+VREV64<v><q>.<size> Qd, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' then UNDEFINED;
+if size == '11'
+  then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+esize = 8 << UInt(size);
+elements = 64 DIV esize;
+width = 0;
+groupsize = (1 << (3-width-UInt(size))); // 每个反转组中的元素数：2、4 或 8
+reverse_mask
+  = (groupsize-1)[esize-1:0];
+  // 用于索引计算的 EOR 掩码
+groups_per_beat = width;
+if InITBlock()
+  then CONSTRAINED_UNPREDICTABLE;
+if D:Qd == M:Qm then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.453.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<size>`**：大小，表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `8`，编码为 `size = 00`。
+  - `16`，编码为 `size = 01`。
+  - `32`，编码为 `size = 10`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+
+#### 4.453.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+// 64 位宽运算的处理方式不同，因为它们执行跨节拍
+// 寄存器访问
+if width == 0 then
+  op1 = Q[m, UInt(curBeat[1:0] EOR 1[1:0])];
+  for e = 0 to (groupsize >> 1)-1
+    // 通过对源元素索引进行按位 EOR 计算目标元素索引：
+    elemIdx = UInt((e[esize-1:0] EOR (UInt(reverse_mask) >> 1)[esize-1:0]));
+    Elem[result, elemIdx, esize] = Elem[op1, e, esize];
+else
+  op1 = Q[m, curBeat];
+  for g = 0 to groups_per_beat-1
+    for e = 0 to groupsize -1
+      elemIdx = (g*groupsize) + UInt(e[esize-1:0] EOR (reverse_mask));
+      Elem[result, elemIdx, esize] = Elem[op1, (g*groupsize)+e, esize];
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.453.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+### 4.454. VRHADD：向量舍入减半加法
+
+向量舍入减半加法（Vector Rounding Halving Add）。把第一源向量寄存器中元素的值加到第二源向量寄存器中的相应元素上。结果在写入目标向量寄存器之前减半并舍入。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.454.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-729](FigureC2-729.png)
+
+**T1: VRHADD 变体**
+
+```arm
+VRHADD<v><q>.<dt> Qd, Qn, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+if size == '11'
+  then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+unsigned = (U == '1');
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.454.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：该参数确定以下取值：
+  - **无符号标志**：`S` 表示有符号，`U` 表示无符号。
+  - **大小**：表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`、`U = 0`。
+  - `U8`，编码为 `size = 00`、`U = 1`。
+  - `S16`，编码为 `size = 01`、`U = 0`。
+  - `U16`，编码为 `size = 01`、`U = 1`。
+  - `S32`，编码为 `size = 10`、`U = 0`。
+  - `U32`，编码为 `size = 10`、`U = 1`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qn>`**：第一源向量寄存器。
+- **`<Qm>`**：第二源向量寄存器。
+
+#### 4.454.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[n, curBeat];
+op2 = Q[m, curBeat];
+for e = 0 to elements-1
+  value = Int(Elem[op1, e, esize], unsigned) + Int(Elem[op2, e, esize], unsigned);
+  Elem[result, e, esize] = (value + 1)[esize:1];
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.454.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.455. VRINT (floating-point)：向量舍入为整数（浮点）
+
+向量舍入为整数（Vector Round Integer）。把浮点值舍入为整数值。结果保持浮点格式，不会转换为整数。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.455.1. 编码 T1
+
+仅适用于带半精度与单精度浮点扩展的 Armv8.1-M MVE。
+
+![FigureC2-730](FigureC2-730.png)
+
+**T1: VRINT 变体**
+
+```arm
+VRINT<op><v><q>.<dt> Qd, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_MveFp);
+if D == '1' || M == '1' then UNDEFINED;
+if op == '1x0'
+  then UNDEFINED;
+if size IN {'11', '00'}
+  then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+case op of
+  when '010' // A，就近舍入，平局远离
+    rmode = '01'; away = TRUE;
+    exact = FALSE;
+  when '000' // N，就近舍入，平局取偶
+    rmode = '00'; away = FALSE; exact = FALSE;
+  when '111' // P，向正无穷舍入
+    rmode = '01'; away = FALSE; exact = FALSE;
+  when '101' // M，向负无穷舍入
+    rmode = '10'; away = FALSE; exact = FALSE;
+  when '001' // X，就近舍入平局取偶，且当结果与输入在数值上不相等时
+    // 产生不精确异常
+    rmode = '00'; away = FALSE; exact = TRUE;
+  when '011' // Z，向零舍入
+    rmode = '11'; away = FALSE; exact = FALSE;
+  otherwise
+    UNDEFINED;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.455.2. 汇编符号（所有编码）
+
+- **`<op>`**：舍入模式。
+  该参数必须是以下取值之一：
+  - `N`，编码为 `op = 000`，就近舍入，平局取偶。
+  - `X`，编码为 `op = 001`，就近舍入，平局取偶，并在结果与输入在数值上不相等时产生不精确异常。
+  - `A`，编码为 `op = 010`，就近舍入，平局远离。
+  - `Z`，编码为 `op = 011`，向零舍入。
+  - `M`，编码为 `op = 101`，向负无穷舍入。
+  - `P`，编码为 `op = 111`，向正无穷舍入。
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：大小，表示所用的浮点格式。
+  该参数必须是以下取值之一：
+  - `F16`，编码为 `size = 01`。
+  - `F32`，编码为 `size = 10`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+
+#### 4.455.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[m, curBeat];
+for e = 0 to elements-1
+  // 通过检查元素掩码来避免被谓词化的通道上出现浮点异常
+  pred = (elmtMask[e*(esize>>3)] == '0');
+  conv = FPRoundInt(Elem[op1, e, esize], rmode, away, exact, FALSE, pred);
+  Elem[result, e, esize] = conv;
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+### 4.456. VRINTA：浮点就近舍入为整数（平局远离）
+
+浮点就近舍入为整数（平局远离）（Floating-point Round to Nearest Integer with Ties to Away）。浮点就近舍入为整数（平局远离）使用就近舍入平局远离的舍入模式，把浮点值舍入为同尺寸的整数浮点值。零输入给出同符号的零结果，无穷输入给出同符号的无穷结果，NaN 按常规算术的方式传播。
+
+#### 4.456.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-731](FigureC2-731.png)
+
+**半精度标量变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `size == 01` 时适用。
+
+```arm
+VRINTA{<q>}.F16.F16 <Sd>, <Sm>
+```
+
+**单精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 10` 时适用。
+
+```arm
+VRINTA{<q>}.F32.F32 <Sd>, <Sm>
+```
+
+**双精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 11` 时适用。
+
+```arm
+VRINTA{<q>}.F64.F64 <Dd>, <Dm>
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (M == '1' || D == '1') then UNDEFINED;
+case RM of
+  when '00'
+    // 就近舍入，平局远离
+    rmode = '01'; away = TRUE;
+  when '01'
+    // 就近舍入，平局取偶
+    rmode = '00'; away = FALSE;
+  when '10'
+    // 向正无穷舍入
+    rmode = '01'; away = FALSE;
+  when '11'
+    // 向负无穷舍入
+    rmode = '10'; away = FALSE;
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+if InITBlock() then UNPREDICTABLE;
+```
+
+#### 4.456.2. 汇编符号（所有编码）
+
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+- **`<Dd>`**：浮点目标寄存器的 64 位名称，编码在 `D:Vd` 字段中。
+- **`<Dm>`**：浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+
+#### 4.456.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+exact = FALSE;
+
+case size of
+  when '01'
+    S[d] = Zeros(16) : FPRoundInt(S[m][15:0], rmode, away, exact, TRUE);
+  when '10'
+    S[d] = FPRoundInt(S[m], rmode, away, exact, TRUE);
+  when '11'
+    D[d] = FPRoundInt(D[m], rmode, away, exact, TRUE);
+```
+
+### 4.457. VRINTM：浮点向负无穷舍入为整数
+
+浮点向负无穷舍入为整数（Floating-point Round to Integer towards -Infinity）。浮点向负无穷舍入为整数使用向负无穷舍入的舍入模式，把浮点值舍入为同尺寸的整数浮点值。零输入给出同符号的零结果，无穷输入给出同符号的无穷结果，NaN 按常规算术的方式传播。
+
+#### 4.457.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-732](FigureC2-732.png)
+
+**半精度标量变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `size == 01` 时适用。
+
+```arm
+VRINTM{<q>}.F16.F16 <Sd>, <Sm>
+```
+
+**单精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 10` 时适用。
+
+```arm
+VRINTM{<q>}.F32.F32 <Sd>, <Sm>
+```
+
+**双精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 11` 时适用。
+
+```arm
+VRINTM{<q>}.F64.F64 <Dd>, <Dm>
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (M == '1' || D == '1') then UNDEFINED;
+case RM of
+  when '00'
+    // 就近舍入，平局远离
+    rmode = '01'; away = TRUE;
+  when '01'
+    // 就近舍入，平局取偶
+    rmode = '00'; away = FALSE;
+  when '10'
+    // 向正无穷舍入
+    rmode = '01'; away = FALSE;
+  when '11'
+    // 向负无穷舍入
+    rmode = '10'; away = FALSE;
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+if InITBlock() then UNPREDICTABLE;
+```
+
+#### 4.457.2. 汇编符号（所有编码）
+
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+- **`<Dd>`**：浮点目标寄存器的 64 位名称，编码在 `D:Vd` 字段中。
+- **`<Dm>`**：浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+
+#### 4.457.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+exact = FALSE;
+
+case size of
+  when '01'
+    S[d] = Zeros(16) : FPRoundInt(S[m][15:0], rmode, away, exact, TRUE);
+  when '10'
+    S[d] = FPRoundInt(S[m], rmode, away, exact, TRUE);
+  when '11'
+    D[d] = FPRoundInt(D[m], rmode, away, exact, TRUE);
+```
+
+### 4.458. VRINTN：浮点就近舍入为整数（平局取偶）
+
+浮点就近舍入为整数（平局取偶）（Floating-point Round to Nearest Integer with Ties to Even）。浮点就近舍入为整数（平局取偶）使用就近舍入模式，把浮点值舍入为同尺寸的整数浮点值。零输入给出同符号的零结果，无穷输入给出同符号的无穷结果，NaN 按常规算术的方式传播。
+
+#### 4.458.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-733](FigureC2-733.png)
+
+**半精度标量变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `size == 01` 时适用。
+
+```arm
+VRINTN{<q>}.F16.F16 <Sd>, <Sm>
+```
+
+**单精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 10` 时适用。
+
+```arm
+VRINTN{<q>}.F32.F32 <Sd>, <Sm>
+```
+
+**双精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 11` 时适用。
+
+```arm
+VRINTN{<q>}.F64.F64 <Dd>, <Dm>
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (M == '1' || D == '1') then UNDEFINED;
+case RM of
+  when '00'
+    // 就近舍入，平局远离
+    rmode = '01'; away = TRUE;
+  when '01'
+    // 就近舍入，平局取偶
+    rmode = '00'; away = FALSE;
+  when '10'
+    // 向正无穷舍入
+    rmode = '01'; away = FALSE;
+  when '11'
+    // 向负无穷舍入
+    rmode = '10'; away = FALSE;
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+if InITBlock() then UNPREDICTABLE;
+```
+
+#### 4.458.2. 汇编符号（所有编码）
+
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+- **`<Dd>`**：浮点目标寄存器的 64 位名称，编码在 `D:Vd` 字段中。
+- **`<Dm>`**：浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+
+#### 4.458.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+exact = FALSE;
+
+case size of
+  when '01'
+    S[d] = Zeros(16) : FPRoundInt(S[m][15:0], rmode, away, exact, TRUE);
+  when '10'
+    S[d] = FPRoundInt(S[m], rmode, away, exact, TRUE);
+  when '11'
+    D[d] = FPRoundInt(D[m], rmode, away, exact, TRUE);
+```
+
+### 4.459. VRINTP：浮点向正无穷舍入为整数
+
+浮点向正无穷舍入为整数（Floating-point Round to Integer towards +Infinity）。浮点向正无穷舍入为整数使用向正无穷舍入的舍入模式，把浮点值舍入为同尺寸的整数浮点值。零输入给出同符号的零结果，无穷输入给出同符号的无穷结果，NaN 按常规算术的方式传播。
+
+#### 4.459.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-734](FigureC2-734.png)
+
+**半精度标量变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `size == 01` 时适用。
+
+```arm
+VRINTP{<q>}.F16.F16 <Sd>, <Sm>
+```
+
+**单精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 10` 时适用。
+
+```arm
+VRINTP{<q>}.F32.F32 <Sd>, <Sm>
+```
+
+**双精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 11` 时适用。
+
+```arm
+VRINTP{<q>}.F64.F64 <Dd>, <Dm>
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (M == '1' || D == '1') then UNDEFINED;
+case RM of
+  when '00'
+    // 就近舍入，平局远离
+    rmode = '01'; away = TRUE;
+  when '01'
+    // 就近舍入，平局取偶
+    rmode = '00'; away = FALSE;
+  when '10'
+    // 向正无穷舍入
+    rmode = '01'; away = FALSE;
+  when '11'
+    // 向负无穷舍入
+    rmode = '10'; away = FALSE;
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+if InITBlock() then UNPREDICTABLE;
+```
+
+#### 4.459.2. 汇编符号（所有编码）
+
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+- **`<Dd>`**：浮点目标寄存器的 64 位名称，编码在 `D:Vd` 字段中。
+- **`<Dm>`**：浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+
+#### 4.459.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+exact = FALSE;
+
+case size of
+  when '01'
+    S[d] = Zeros(16) : FPRoundInt(S[m][15:0], rmode, away, exact, TRUE);
+  when '10'
+    S[d] = FPRoundInt(S[m], rmode, away, exact, TRUE);
+  when '11'
+    D[d] = FPRoundInt(D[m], rmode, away, exact, TRUE);
+```
+
+### 4.460. VRINTR：浮点舍入为整数
+
+浮点舍入为整数（Floating-point Round to Integer）。浮点舍入为整数使用 `FPSCR` 中指定的舍入模式，把浮点值舍入为同尺寸的整数浮点值。零输入给出同符号的零结果，无穷输入给出同符号的无穷结果，NaN 按常规算术的方式传播。
+
+#### 4.460.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-735](FigureC2-735.png)
+
+**半精度标量变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `size == 01` 时适用。
+
+```arm
+VRINTR{<c>}{<q>}.F16.F16 <Sd>, <Sm>
+```
+
+**单精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 10` 时适用。
+
+```arm
+VRINTR{<c>}{<q>}.F32.F32 <Sd>, <Sm>
+```
+
+**双精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 11` 时适用。
+
+```arm
+VRINTR{<c>}{<q>}.F64.F64 <Dd>, <Dm>
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (M == '1' || D == '1') then UNDEFINED;
+if size == '01' && InITBlock() then UNPREDICTABLE;
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+#### 4.460.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+- **`<Dd>`**：浮点目标寄存器的 64 位名称，编码在 `D:Vd` 字段中。
+- **`<Dm>`**：浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+
+#### 4.460.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  ExecuteFPCheck();
+
+  rmode = if op == '1' then '11' else FPSCR.RMode;
+  exact = FALSE;
+  away = FALSE;
+
+  case size of
+    when '01'
+      S[d] = Zeros(16) : FPRoundInt(S[m][15:0], rmode, away, exact, TRUE);
+    when '10'
+      S[d] = FPRoundInt(S[m], rmode, away, exact, TRUE);
+    when '11'
+      D[d] = FPRoundInt(D[m], rmode, away, exact, TRUE);
+```
+
+### 4.461. VRINTX：浮点舍入为整数并产生不精确异常
+
+浮点舍入为整数并产生不精确异常（Floating-point Round to Integer, raising Inexact exception）。本指令把浮点值舍入为同尺寸的整数浮点值。零输入给出同符号的零结果，无穷输入给出同符号的无穷结果，NaN 按常规算术的方式传播。VRINTX 使用 `FPSCR` 中指定的舍入模式，并在结果值与输入值在数值上不相等时产生 Inexact 异常。
+
+#### 4.461.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-736](FigureC2-736.png)
+
+**半精度标量变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `size == 01` 时适用。
+
+```arm
+VRINTX{<c>}{<q>}.F16.F16 <Sd>, <Sm>
+```
+
+**单精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 10` 时适用。
+
+```arm
+VRINTX{<c>}{<q>}.F32.F32 <Sd>, <Sm>
+```
+
+**双精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 11` 时适用。
+
+```arm
+VRINTX{<c>}{<q>}.F64.F64 <Dd>, <Dm>
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (M == '1' || D == '1') then UNDEFINED;
+if size == '01' && InITBlock() then UNPREDICTABLE;
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+#### 4.461.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+- **`<Dd>`**：浮点目标寄存器的 64 位名称，编码在 `D:Vd` 字段中。
+- **`<Dm>`**：浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+
+#### 4.461.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  ExecuteFPCheck();
+
+  rmode = FPSCR[23:22];
+  away = FALSE;
+  exact = TRUE;
+
+  case size of
+    when '01'
+      S[d] = Zeros(16) : FPRoundInt(S[m][15:0], rmode, away, exact, TRUE);
+    when '10'
+      S[d] = FPRoundInt(S[m], rmode, away, exact, TRUE);
+    when '11'
+      D[d] = FPRoundInt(D[m], rmode, away, exact, TRUE);
+```
+
+### 4.462. VRINTZ：浮点向零舍入为整数
+
+浮点向零舍入为整数（Floating-point Round to Integer towards Zero）。浮点向零舍入为整数使用向零舍入的舍入模式，把浮点值舍入为同尺寸的整数浮点值。零输入给出同符号的零结果，无穷输入给出同符号的无穷结果，NaN 按常规算术的方式传播。
+
+#### 4.462.1. 编码 T1
+
+仅适用于 Armv8-M 浮点扩展；对于仅实现单精度的实现，`size == 11` 为 UNDEFINED。
+
+![FigureC2-737](FigureC2-737.png)
+
+**半精度标量变体**
+
+仅适用于 Armv8.1-M 浮点扩展。
+
+当 `size == 01` 时适用。
+
+```arm
+VRINTZ{<c>}{<q>}.F16.F16 <Sd>, <Sm>
+```
+
+**单精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 10` 时适用。
+
+```arm
+VRINTZ{<c>}{<q>}.F32.F32 <Sd>, <Sm>
+```
+
+**双精度标量变体**
+
+仅适用于 Armv8-M 浮点扩展。
+
+当 `size == 11` 时适用。
+
+```arm
+VRINTZ{<c>}{<q>}.F64.F64 <Dd>, <Dm>
+```
+
+**解码**
+
+```arm
+dp_operation = (size == '11');
+CheckFPDecodeFaults(size);
+if VFPSmallRegisterBank() && dp_operation && (M == '1' || D == '1') then UNDEFINED;
+if size == '01' && InITBlock() then UNPREDICTABLE;
+d = if dp_operation then UInt(D:Vd) else UInt(Vd:D);
+m = if dp_operation then UInt(M:Vm) else UInt(Vm:M);
+```
+
+#### 4.462.2. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Sd>`**：浮点目标寄存器的 32 位名称，编码在 `Vd:D` 字段中。
+- **`<Sm>`**：浮点源寄存器的 32 位名称，编码在 `Vm:M` 字段中。
+- **`<Dd>`**：浮点目标寄存器的 64 位名称，编码在 `D:Vd` 字段中。
+- **`<Dm>`**：浮点源寄存器的 64 位名称，编码在 `M:Vm` 字段中。
+
+#### 4.462.3. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  ExecuteFPCheck();
+
+  rmode = if op == '1' then '11' else FPSCR.RMode;
+  exact = FALSE;
+  away = FALSE;
+
+  case size of
+    when '01'
+      S[d] = Zeros(16) : FPRoundInt(S[m][15:0], rmode, away, exact, TRUE);
+    when '10'
+      S[d] = FPRoundInt(S[m], rmode, away, exact, TRUE);
+    when '11'
+      D[d] = FPRoundInt(D[m], rmode, away, exact, TRUE);
+```
+### 4.463. VRMLALDAVH：向量舍入乘加长对累加跨向量返回高 64 位
+
+向量舍入乘加长对累加跨向量返回高 64 位（Vector Rounding Multiply Add Long Dual Accumulate Across Vector Returning High 64 bits）。向量寄存器的元素按对处理。在基础变体中，两个源寄存器中的对应元素相乘；而在交换变体中，先把从第一源寄存器读出的每对值中的两个值互换，再把它们与第二源寄存器中的值相乘。各对乘法运算的结果通过相加来合并。在每个节拍结束时，这些结果被累加。从 72 位累加值中选择高 64 位并存储到两个寄存器中：高 32 位存入奇数号寄存器，低 32 位存入偶数号寄存器。通用目标寄存器的初始值可选地向上移 8 位后加到结果中。在选择高 64 位之前对结果进行舍入。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.463.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-738](FigureC2-738.png)
+
+**T1: VRMLALDAVH 变体**
+
+```arm
+VRMLALDAVH{A}{X}<v><q>.<dt> RdaLo, RdaHi, Qn, Qm
+```
+
+**解码**
+
+```arm
+if RdaHi == '11x' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if N == '1'
+  then UNDEFINED;
+if U == '1' && X == '1' then UNDEFINED;
+dah = UInt(RdaHi:'1');
+dal = UInt(RdaLo:'0');
+m = UInt(Qm);
+n = UInt(N:Qn);
+exchange = (X == '1');
+accumulate = (A == '1');
+esize = 32;
+elements = 32 DIV esize;
+unsigned = (U == '1');
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.463.2. 汇编符号（所有编码）
+
+- **`<A>`**：与寄存器原内容累加。
+  该参数必须是以下取值之一：
+  - `-`，编码为 `A = 0`。
+  - `A`，编码为 `A = 1`。
+- **`<X>`**：交换 `Qm` 中相邻的值对。
+  该参数必须是以下取值之一：
+  - `-`，编码为 `X = 0`。
+  - `X`，编码为 `X = 1`。
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：无符号标志，`S` 表示有符号，`U` 表示无符号。
+  该参数必须是以下取值之一：
+  - `S32`，编码为 `U = 0`。
+  - `U32`，编码为 `U = 1`。
+- **`<RdaLo>`**：64 位源兼目标低半部分所用的通用寄存器。它必须是偶数号寄存器。值 `RdaLo >> 1` 编码在 `RdaLo` 字段中。
+- **`<RdaHi>`**：64 位源兼目标高半部分所用的通用寄存器。它必须是奇数号寄存器。值 `RdaHi >> 1` 编码在 `RdaHi` 字段中。
+- **`<Qn>`**：第一源向量寄存器。
+- **`<Qm>`**：第二源向量寄存器。
+
+#### 4.463.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = if accumulate || !IsFirstBeat() then Int(R[dah]:R[dal], unsigned) << 8 else 0;
+if elmtMask[0] == '1' then
+  if exchange then
+    if curBeat[0] == '0' then
+      mul = Int(Q[n, curBeat+1], unsigned) * Int(Q[m, curBeat], unsigned);
+    else
+      mul = Int(Q[n, curBeat-1], unsigned) * Int(Q[m, curBeat], unsigned);
+  else
+    mul = Int(Q[n, curBeat], unsigned) * Int(Q[m, curBeat], unsigned);
+  result = result + mul + (1 << 7);
+  R[dah] = result[71:40];
+  R[dal] = result[39:8];
+```
+
+### 4.464. VRMLALVH：向量乘累加长跨向量返回高 64 位
+
+向量乘累加长跨向量返回高 64 位（Vector Multiply Accumulate Long Across Vector Returning High 64 bits）。这是不带交换的 VRMLALDAVH 的别名。
+
+这是在满足以下条件时 VRMLALDAVH 的别名：`X == 0`。
+
+该别名是首选的反汇编形式。
+
+#### 4.464.1. 编码 T1
+
+![FigureC2-739](FigureC2-739.png)
+
+**VRMLALVH 变体**
+
+```arm
+VRMLALVH{A}<v><q>.<dt> RdaLo, RdaHi, Qn, Qm
+```
+
+**等价于**
+
+```arm
+VRMLALDAVH{A}{X}<v><q>.<dt> RdaLo, RdaHi, Qn, Qm
+```
+
+其中 `X == 0`。
+
+#### 4.464.2. 操作（所有编码）
+
+VRMLALDAVH 的说明给出了本指令的操作伪代码。
+
+### 4.465. VRMLSLDAVH：向量舍入乘减长对累加跨向量返回高 64 位
+
+向量舍入乘减长对累加跨向量返回高 64 位（Vector Rounding Multiply Subtract Long Dual Accumulate Across Vector Returning High 64 bits）。向量寄存器的元素按对处理。在基础变体中，两个源寄存器中的对应元素相乘；而在交换变体中，先把从第一源寄存器读出的每对值中的两个值互换，再把它们与第二源寄存器中的值相乘。各对乘法运算的结果通过把一个从另一个中减去来合并。在每个节拍结束时，这些结果被累加。从 72 位累加值中选择高 64 位并存储到两个寄存器中：高 32 位存入奇数号寄存器，低 32 位存入偶数号寄存器。通用目标寄存器的初始值可选地向上移 8 位后加到结果中。在选择高 64 位之前对结果进行舍入。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.465.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-740](FigureC2-740.png)
+
+**T1: VRMLSLDAVH 变体**
+
+```arm
+VRMLSLDAVH{A}{X}<v><q>.S32 RdaLo, RdaHi, Qn, Qm
+```
+
+**解码**
+
+```arm
+if RdaHi == '111' then SEE "VMLSDAV";
+CheckDecodeFaults(ExtType_Mve);
+if N == '1' then UNDEFINED;
+dah = UInt(RdaHi:'1');
+dal = UInt(RdaLo:'0');
+m = UInt(Qm);
+n = UInt(N:Qn);
+exchange = (X == '1');
+accumulate = (A == '1');
+esize = 32;
+elements = 32 DIV esize;
+if InITBlock()
+  then CONSTRAINED_UNPREDICTABLE;
+if RdaHi == '110' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.465.2. 汇编符号（所有编码）
+
+- **`<A>`**：与寄存器原内容累加。
+  该参数必须是以下取值之一：
+  - `-`，编码为 `A = 0`。
+  - `A`，编码为 `A = 1`。
+- **`<X>`**：交换 `Qm` 中相邻的值对。
+  该参数必须是以下取值之一：
+  - `-`，编码为 `X = 0`。
+  - `X`，编码为 `X = 1`。
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<RdaLo>`**：64 位源兼目标低半部分所用的通用寄存器。它必须是偶数号寄存器。值 `RdaLo >> 1` 编码在 `RdaLo` 字段中。
+- **`<RdaHi>`**：64 位源兼目标高半部分所用的通用寄存器。它必须是奇数号寄存器。值 `RdaHi >> 1` 编码在 `RdaHi` 字段中。
+- **`<Qn>`**：第一源向量寄存器。
+- **`<Qm>`**：第二源向量寄存器。
+
+#### 4.465.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = if accumulate || !IsFirstBeat() then SInt(R[dah]:R[dal]) << 8 else 0;
+if elmtMask[0] == '1' then
+  if exchange then
+    if curBeat[0] == '0' then
+      mul = SInt(Q[n, curBeat+1]) * SInt(Q[m, curBeat]);
+    else
+      mul = SInt(Q[n, curBeat-1]) * SInt(Q[m, curBeat]);
+  else
+    mul = SInt(Q[n, curBeat]) * SInt(Q[m, curBeat]);
+  if curBeat[0] == '0' then
+    result = result + mul + (1 << 7);
+  else
+    result = result - mul + (1 << 7);
+  R[dah] = result[71:40];
+  R[dal] = result[39:8];
+```
+
+### 4.466. VRSHL：向量舍入移位左
+
+向量舍入移位左（Vector Rounding Shift Left）。向量变体按第二向量中对应元素的最低有效字节所给出的值，对第一向量的每个元素进行移位，并把结果放入目标向量。寄存器变体按源寄存器中指定的值，对向量寄存器的每个元素进行移位。移位的方向取决于第二向量寄存器中该元素的符号。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.466.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-741](FigureC2-741.png)
+
+**T1: VRSHL 变体**
+
+```arm
+VRSHL<v><q>.<dt> Qd, Qm, Qn
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+unsigned = (U == '1');
+withScalar = FALSE;
+withVector = TRUE;
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.466.2. 编码 T2
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-742](FigureC2-742.png)
+
+**T2: VRSHL 变体**
+
+```arm
+VRSHL<v><q>.<dt> Qda, Rm
+```
+
+**解码**
+
+```arm
+if size == '11' then SEE "Related encodings";
+CheckDecodeFaults(ExtType_Mve);
+if Da == '1' then UNDEFINED;
+da = UInt(Da:Qda);
+m = UInt(Rm);
+d = da;
+n = m;
+m = da;
+unsigned = (U == '1');
+withScalar = TRUE;
+withVector = FALSE;
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock()
+  then CONSTRAINED_UNPREDICTABLE;
+if Rm == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.466.3. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：该参数确定以下取值：
+  - **无符号标志**：`S` 表示有符号，`U` 表示无符号。
+  - **大小**：表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `size = 00`、`U = 0`。
+  - `U8`，编码为 `size = 00`、`U = 1`。
+  - `S16`，编码为 `size = 01`、`U = 0`。
+  - `U16`，编码为 `size = 01`、`U = 1`。
+  - `S32`，编码为 `size = 10`、`U = 0`。
+  - `U32`，编码为 `size = 10`、`U = 1`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qda>`**：源兼目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+- **`<Qn>`**：源向量寄存器，其元素中包含要移位的位数。
+- **`<Rm>`**：源通用寄存器，其中包含要移位的位数。
+
+#### 4.466.4. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[m, curBeat];
+if withVector then
+  op2 = Q[n, curBeat];
+if withScalar then
+  shiftAmount = SInt(R[n][7:0]);
+for e = 0 to elements-1
+  if withVector then
+    shiftAmount = SInt(Elem[op2, e, esize][7:0]);
+  // 左移时为 0，右移时为 2^(n-1)
+  roundConst = 1 << (-1-shiftAmount);
+  operand = Int(Elem[op1, e, esize], unsigned);
+  Elem[result, e, esize] = ((operand + roundConst) << shiftAmount)[esize-1:0];
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.466.5. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.467. VRSHR：向量舍入右移
+
+向量舍入右移（Vector Rounding Shift Right）。立即数变体把向量寄存器的每个元素向右移立即数值。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.467.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-743](FigureC2-743.png)
+
+**T1: VRSHR 变体**
+
+```arm
+VRSHR<v><q>.<dt> Qd, Qm, #<imm>
+```
+
+**解码**
+
+```arm
+if sz == '000' then SEE "VMOV";
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+unsigned = (U == '1');
+n = integer UNKNOWN;
+imm6 = sz:imm;
+case sz of
+  when '001' size = '00'; shiftAmount = 16 - UInt(imm6);
+  when '01x' size = '01'; shiftAmount = 32 - UInt(imm6);
+  when '1xx' size = '10'; shiftAmount = 64 - UInt(imm6);
+  otherwise UNDEFINED;
+withScalar = FALSE;
+withVector = FALSE;
+esize = 8 << UInt(size);
+elements = 32 DIV esize;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.467.2. 汇编符号（所有编码）
+
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：该参数确定以下取值：
+  - **无符号标志**：`S` 表示有符号，`U` 表示无符号。
+  - **大小**：表示向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `S8`，编码为 `sz = 001`、`U = 0`。
+  - `U8`，编码为 `sz = 001`、`U = 1`。
+  - `S16`，编码为 `sz = 01x`、`U = 0`。
+  - `U16`，编码为 `sz = 01x`、`U = 1`。
+  - `S32`，编码为 `sz = 1xx`、`U = 0`。
+  - `U32`，编码为 `sz = 1xx`、`U = 1`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+- **`<imm>`**：要移位的位数，范围为 1 到 `<dt>`。该字段的编码是 `imm` 参数的最高有效位与 `size` 字段（`sz`）的最低有效位的逻辑或。
+
+#### 4.467.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+result = Zeros(32);
+op1 = Q[m, curBeat];
+if withVector then
+  op2 = Q[n, curBeat];
+if withScalar then
+  shiftAmount = SInt(R[n][7:0]);
+for e = 0 to elements-1
+  if withVector then
+    shiftAmount = SInt(Elem[op2, e, esize][7:0]);
+  // 左移时为 0，右移时为 2^(n-1)
+  roundConst = 1 << (shiftAmount-1);
+  operand = Int(Elem[op1, e, esize], unsigned);
+  Elem[result, e, esize] = ((operand + roundConst) >> shiftAmount)[esize-1:0];
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.467.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.468. VRSHRN：向量舍入右移并变窄
+
+向量舍入右移并变窄（Vector Rounding Shift Right and Narrow）。执行带移位的、逐元素到半宽度的变窄，把舍入后的结果写入结果元素的高半（T 变体）或低半（B 变体）。目标向量元素的另一半保持其原值。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.468.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-744](FigureC2-744.png)
+
+**T1: VRSHRN 变体**
+
+```arm
+VRSHRN<T><v><q>.<dt> Qd, Qm, #<imm>
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+imm5 = sz:imm;
+case sz of
+  when '01'
+    size = '00'; shiftAmount = 16 - UInt(imm5);
+  when '1x'
+    size = '01'; shiftAmount = 32 - UInt(imm5);
+  otherwise UNDEFINED;
+esize = 8 << UInt(size);
+elements = 16 DIV esize;
+top = UInt(T);
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.468.2. 汇编符号（所有编码）
+
+- **`<T>`**：指定结果写入结果元素的哪一半。
+  该参数必须是以下取值之一：
+  - `B`，编码为 `T = 0`，表示低半。
+  - `T`，编码为 `T = 1`，表示高半。
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dt>`**：向量中各元素的大小。
+  该参数必须是以下取值之一：
+  - `I16`，编码为 `sz = 01`。
+  - `I32`，编码为 `sz = 1x`。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qm>`**：源向量寄存器。
+- **`<imm>`**：要移位的位数，范围为 1 到 `<dt>`/2。该字段的编码是 `imm` 参数的最高有效位与 `size` 字段（`sz`）的最低有效位的逻辑或。
+
+#### 4.468.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+op1 = Q[m, curBeat];
+result = Q[d, curBeat];
+for e = 0 to elements-1
+  operand = UInt(Elem[op1, e, 2*esize]);
+  // 左移时为 0，右移时为 2^(n-1)
+  operand = operand + (1 << (shiftAmount-1));
+  operand = operand >> shiftAmount;
+  Elem[result, 2*e + top, esize] = operand[esize-1:0];
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.468.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.469. VSBC：全向量带借位减法
+
+全向量带借位减法（Whole Vector Subtract With Carry）。按节拍从第一源向量寄存器中的相应元素中减去第二源向量寄存器中元素的值以及 `NOT(Carry 标志)` 的值，其中进位标志为 `FPSCR.C`。使用 `I` 变体可以覆盖 `FPSCR.C` 的初始值。对于因谓词化而被禁用的节拍，不更新 `FPSCR.C`。每当更新 `FPSCR.C` 时，`FPSCR.N`、`.V` 与 `.Z` 都被清零。
+
+本指令以节拍（beat）为单位逐拍执行。
+
+本指令与 VPT 兼容。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.469.1. 编码 T1
+
+仅适用于 Armv8.1-M MVE。
+
+![FigureC2-745](FigureC2-745.png)
+
+**T1: VSBC 变体**
+
+```arm
+VSBC{I}<v><q>.I32 Qd, Qn, Qm
+```
+
+**解码**
+
+```arm
+CheckDecodeFaults(ExtType_Mve);
+if D == '1' || M == '1' || N == '1' then UNDEFINED;
+d = UInt(D:Qd);
+m = UInt(M:Qm);
+n = UInt(N:Qn);
+carryInit = (I == '1');
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.469.2. 汇编符号（所有编码）
+
+- **`<I>`**：指定宽算术的初始进位输入来源。
+  该参数必须是以下取值之一：
+  - `-`，编码为 `I = 0`，表示进位输入来自 `FPSCR.C`。
+  - `I`，编码为 `I = 1`，表示进位输入为 1。
+- **`<v, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<Qd>`**：目标向量寄存器。
+- **`<Qn>`**：第一源向量寄存器。
+- **`<Qm>`**：第二源向量寄存器。
+
+#### 4.469.3. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+ExecuteFPCheck();
+
+(curBeat, elmtMask) = GetCurInstrBeat();
+
+op1 = Q[n, curBeat];
+op2 = NOT(Q[m, curBeat]);
+if carryInit && IsFirstBeat() then
+  (FPSCR.N, FPSCR.Z, FPSCR.C, FPSCR.V) = ('0', '0', '1', '0');
+(result, carryOut, -) = AddWithCarry(op1, op2, FPSCR.C);
+if elmtMask[0] == '1' then
+  (FPSCR.N, FPSCR.Z, FPSCR.C, FPSCR.V) = ('0', '0', carryOut, '0');
+
+for e = 0 to 3
+  if elmtMask[e] == '1' then
+    Elem[Q[d, curBeat], e, 8] = Elem[result, e, 8];
+```
+
+#### 4.469.4. 受限行为
+
+**数据独立时序行为**
+
+若 `AIRCR.DIT` 为 1：
+
+- 本指令的执行时间与本指令所处理数据的值或取值无关。
+- 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.470. VSCCLRM：浮点安全上下文清除多寄存器
+
+浮点安全上下文清除多寄存器（Floating-point Secure Context Clear Multiple）。若存在活动的浮点上下文，则把 `VPR` 以及指定的浮点寄存器清零。若在非安全状态下执行，本指令为 UNDEFINED。所有实现 Armv8.1-M 架构的 PE 都提供本指令，即使未实现浮点扩展或 MVE 整数变体。本指令是否可被中断后继续由实现定义（IMPLEMENTATION DEFINED）。见 `EPSR.ICI`。若异常返回到本指令时 `EPSR.ICI` 位非零，且 PE 不支持中断可继续行为，则本指令从头重新开始。允许指定任意个或零个要清除的浮点寄存器，但必须始终指定 `VPR`。若未实现浮点与 MVE，本指令在安全状态下可用，但表现为 NOP。
+
+#### 4.470.1. 编码 T1
+
+仅适用于 Armv8-M 安全扩展与 Armv8.1-M 主扩展。
+
+![FigureC2-746](FigureC2-746.png)
+
+**T1: VSCCLRM 变体**
+
+```arm
+VSCCLRM<c><q> <dreglist>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt()
+  then UNDEFINED;
+if !HasArchVersion(Armv8p1) then UNPREDICTABLE;
+if !IsSecure()
+  then UNDEFINED;
+if HaveMveOrFPExt() && (FPCCR.ASPEN == '0' || CONTROL_S.SFPA == '1') then
+  HandleException(CheckCPEnabled(10));
+singleRegs = FALSE;
+d = UInt(D:Vd);
+regs = UInt(imm7);
+topReg = d+regs-1;
+if topReg > 31 then UNPREDICTABLE;
+```
+
+#### 4.470.2. 编码 T2
+
+仅适用于 Armv8-M 安全扩展与 Armv8.1-M 主扩展。
+
+![FigureC2-747](FigureC2-747.png)
+
+**T2: VSCCLRM 变体**
+
+```arm
+VSCCLRM<c><q> <sreglist>
+```
+
+**解码**
+
+```arm
+if !HaveMainExt()
+  then UNDEFINED;
+if !HasArchVersion(Armv8p1) then UNPREDICTABLE;
+if !IsSecure()
+  then UNDEFINED;
+if HaveMveOrFPExt() && (FPCCR.ASPEN == '0' || CONTROL_S.SFPA == '1') then
+  HandleException(CheckCPEnabled(10));
+singleRegs = TRUE;
+d = UInt(Vd:D);
+regs = UInt(imm8);
+topReg = d+regs-1;
+if topReg > 63
+  then UNPREDICTABLE;
+if topReg > 31 && topReg[0] == '0' then UNPREDICTABLE;
+```
+
+#### 4.470.3. 汇编符号（所有编码）
+
+- **`<c, q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<dreglist>`**：要清除的连续编号的 64 位浮点寄存器列表，以逗号分隔并用 `{` 与 `}` 括起。列表中的第一个寄存器编码在 `D:Vd` 中，`imm7` 设置为列表中的寄存器个数。由于本指令总是清除 `VPR` 寄存器，因此寄存器列表中必须包含 `VPR`。
+- **`<sreglist>`**：要清除的连续编号的 32 位浮点寄存器列表，以逗号分隔并用 `{` 与 `}` 括起。列表中的第一个寄存器编码在 `Vd:D` 中，`imm8` 设置为列表中的寄存器个数。`S31` 以上的寄存器通过在寄存器列表中使用 `D` 寄存器来指定。由于本指令总是清除 `VPR` 寄存器，因此寄存器列表中必须包含 `VPR`。
+
+#### 4.470.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+
+  if HaveMveOrFPExt() && (FPCCR.ASPEN == '0' || CONTROL_S.SFPA == '1') then
+    ExecuteFPCheck();
+
+  for r = 0 to regs-1
+    if singleRegs then
+      if (d+r) < 32 || !VFPSmallRegisterBank() then
+        S[d+r] = Zeros();
+    else
+      if (d+r) < 16 || !VFPSmallRegisterBank() then
+        D[d+r] = Zeros();
+  VPR = Zeros(32);
 ```
