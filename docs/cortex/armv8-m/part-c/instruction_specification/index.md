@@ -1998,7 +1998,7 @@ T32 指令流是一串半字对齐的半字。每条 T32 指令要么是该流�
 
 ## 4. 按字母顺序的指令列表
 
-本节按指令助记符的字母顺序逐条列出各指令。手册原文共 493 条（C2.4.1–C2.4.493，印刷 528–1440）；当前已译 A–V 段（C2.4.1–C2.4.489），W–Y 段随后续批次补充。
+本节按指令助记符的字母顺序逐条列出各指令。手册原文共 493 条（C2.4.1–C2.4.493，印刷 528–1440），已全部译完。
 
 ### 4.1. ADC (immediate)：立即数带进位加
 
@@ -43663,3 +43663,332 @@ for e = 0 to 3
 
 - 本指令的执行时间与本指令所处理数据的值或取值无关。
 - 异步异常的接受时刻不因本指令所使用的值或取值而变化。
+
+### 4.490. WFE：等待事件
+
+**等待事件**（Wait For Event）。等待事件是一条提示指令。若事件寄存器为清零状态，则本指令使执行挂起于与快速唤醒相符的最低功耗状态，且无需软件恢复，直到复位、异常或其他事件发生。
+
+这是一条 NOP 兼容提示。
+
+#### 4.490.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-784](FigureC2-784.png)
+
+**T1 变体**
+
+```arm
+WFE{<c>}{<q>}
+```
+
+**解码**
+
+```arm
+// 无需额外解码
+```
+
+#### 4.490.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-785](FigureC2-785.png)
+
+**T2 变体**
+
+```arm
+WFE{<c>}.W
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+// 无需额外解码
+```
+
+#### 4.490.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+
+#### 4.490.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  if EventRegistered() then
+    ClearEventRegister();
+  else
+    WaitForEvent();
+```
+
+### 4.491. WFI：等待中断
+
+**等待中断**（Wait For Interrupt）。等待中断是一条提示指令。它使执行挂起于与快速唤醒相符的最低功耗状态，且无需软件恢复，直到复位、异步异常或其他事件发生。
+
+这是一条 NOP 兼容提示。
+
+#### 4.491.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-786](FigureC2-786.png)
+
+**T1 变体**
+
+```arm
+WFI{<c>}{<q>}
+```
+
+**解码**
+
+```arm
+// 无需额外解码
+```
+
+#### 4.491.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-787](FigureC2-787.png)
+
+**T2 变体**
+
+```arm
+WFI{<c>}.W
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+// 无需额外解码
+```
+
+#### 4.491.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+
+#### 4.491.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  WaitForInterrupt();
+```
+
+### 4.492. WLS, DLS, WLSTP, DLSTP：循环启动
+
+**While 循环启动、Do 循环启动、带尾谓词的 While 循环启动、带尾谓词的 Do 循环启动**（While Loop Start, Do Loop Start, While Loop Start with Tail Predication, Do Loop Start with Tail Predication）。本指令部分地建立循环。LE 或 LETP（Loop End，循环结束）指令完成建立。本指令的基础变体（WLS 与 DLS）把 LR 设置为要执行的循环迭代次数，而 TP 变体把 LR 设置为必须处理的向量元素个数。对于 TP 变体，若所需的元素个数不是向量长度的倍数，则在循环的最后一次迭代上对适当数量的向量元素施加谓词。使用 WLS 或 WLSTP 时，若所需的迭代次数为零，则这些指令分支到指定的标号。每个循环启动指令通常与匹配的 LE 或 LETP 指令配合使用。
+
+本指令不允许出现在 IT 块中。
+
+#### 4.492.1. 编码 T1
+
+仅适用于 Armv8.1-M 低开销分支扩展。
+
+![FigureC2-788](FigureC2-788.png)
+
+**T1: WLS 变体**
+
+```arm
+WLS<q> LR, Rn, <label>
+```
+
+**解码**
+
+```arm
+if !HaveLOBExt() then UNDEFINED;
+n = UInt(Rn);
+tSize = 4[2:0]; // 不截断。把大小设为完整向量长度
+imm32 = ZeroExtend(immh:imml:'0', 32);
+isWhileLoop = TRUE;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if Rn == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.492.2. 编码 T2
+
+仅适用于 Armv8.1-M 低开销分支扩展。
+
+![FigureC2-789](FigureC2-789.png)
+
+**T2: DLS 变体**
+
+```arm
+DLS<q> LR, Rn
+```
+
+**解码**
+
+```arm
+if !HaveLOBExt() then UNDEFINED;
+n = UInt(Rn);
+tSize = 4[2:0]; // 不截断。把大小设为完整向量长度
+imm32 = Zeros(32);
+isWhileLoop = FALSE;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if Rn == '11x1' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.492.3. 编码 T3
+
+仅适用于 Armv8.1-M 低开销分支扩展与 MVE。
+
+![FigureC2-790](FigureC2-790.png)
+
+**T3: WLSTP 变体**
+
+```arm
+WLSTP<q>.<size> LR, Rn, <label>
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "Related encodings";
+if !HaveLOBExt() then UNDEFINED;
+if !HaveMve() then UNDEFINED;
+HandleException(CheckCPEnabled(10));
+n = UInt(Rn);
+tSize = '0':size;
+imm32 = ZeroExtend(immh:imml:'0', 32);
+isWhileLoop = TRUE;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if Rn == '1101' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.492.4. 编码 T4
+
+仅适用于 Armv8.1-M 低开销分支扩展与 MVE。
+
+![FigureC2-791](FigureC2-791.png)
+
+**T4: DLSTP 变体**
+
+```arm
+DLSTP<q>.<size> LR, Rn
+```
+
+**解码**
+
+```arm
+if Rn == '1111' then SEE "Related encodings";
+if !HaveLOBExt() then UNDEFINED;
+if !HaveMve() then UNDEFINED;
+HandleException(CheckCPEnabled(10));
+n = UInt(Rn);
+tSize = '0':size;
+imm32 = Zeros(32);
+isWhileLoop = FALSE;
+if InITBlock() then CONSTRAINED_UNPREDICTABLE;
+if Rn == '1101' then CONSTRAINED_UNPREDICTABLE;
+```
+
+#### 4.492.5. 汇编符号（T1 编码）
+
+- **`<LR>`**：LR 用于保存循环的迭代计数器，本指令必须始终使用该寄存器。
+- **`<Rn>`**：保存要执行的循环迭代次数的寄存器。
+- **`<label>`**：指定在不需要任何循环迭代时要分支到的指令标号。
+
+#### 4.492.6. 汇编符号（T2 编码）
+
+- **`<LR>`**：LR 用于保存循环的迭代计数器，本指令必须始终使用该寄存器。
+- **`<Rn>`**：保存要执行的循环迭代次数的寄存器。
+
+#### 4.492.7. 汇编符号（T3 编码）
+
+- **`<LR>`**：LR 用于保存要处理的元素个数，本指令必须始终使用该寄存器。
+- **`<Rn>`**：保存要处理的元素个数的寄存器。
+- **`<label>`**：指定循环之后指令（LE 之后的第一条指令）的标号。
+
+#### 4.492.8. 汇编符号（T4 编码）
+
+- **`<LR>`**：LR 用于保存要处理的元素个数，本指令必须始终使用该寄存器。
+- **`<Rn>`**：保存要处理的元素个数的寄存器。
+
+#### 4.492.9. 汇编符号（所有编码）
+
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+- **`<size>`**：要处理的向量中各元素的大小。该值存储在 `FPSCR.LTPSIZE` 字段中，并使尾谓词在循环的最后一次迭代上生效。
+  该参数必须是以下取值之一：
+  - `8`，编码为 `size = 00`。
+  - `16`，编码为 `size = 01`。
+  - `32`，编码为 `size = 10`。
+  - `64`，编码为 `size = 11`。
+
+#### 4.492.10. 操作（所有编码）
+
+```arm
+EncodingSpecificOperations();
+
+count = R[n];
+if isWhileLoop && count == Zeros(32) then
+  BranchTo(PC + imm32);
+else
+  // 为避免创建不必要的浮点上下文，
+  // 仅在正在使用尾谓词时才设置 LTPSIZE。
+  if tSize != 4[2:0] then
+    ExecuteFPCheck();
+  FPSCR.LTPSIZE = tSize;
+  // 建立新的迭代计数
+  LR = count;
+```
+
+### 4.493. YIELD：让出提示
+
+**让出提示**（Yield hint）。让出是一条提示指令。它使具有多线程能力的软件能够向硬件表明：它正在执行一项任务（例如自旋锁），该任务可被换出以改善整体系统性能。若硬件支持该能力，则可以使用本提示挂起与恢复多个代码线程。
+
+这是一条 NOP 兼容提示。
+
+#### 4.493.1. 编码 T1
+
+适用于 Armv8-M。
+
+![FigureC2-792](FigureC2-792.png)
+
+**T1 变体**
+
+```arm
+YIELD{<c>}{<q>}
+```
+
+**解码**
+
+```arm
+// 无需额外解码
+```
+
+#### 4.493.2. 编码 T2
+
+仅适用于 Armv8-M Main 扩展。
+
+![FigureC2-793](FigureC2-793.png)
+
+**T2 变体**
+
+```arm
+YIELD{<c>}.W
+```
+
+**解码**
+
+```arm
+if !HaveMainExt() then UNDEFINED;
+// 无需额外解码
+```
+
+#### 4.493.3. 汇编符号（所有编码）
+
+- **`<c>`**：见 C1.2.5 标准汇编语法字段。
+- **`<q>`**：见 C1.2.5 标准汇编语法字段。
+
+#### 4.493.4. 操作（所有编码）
+
+```arm
+if ConditionPassed() then
+  EncodingSpecificOperations();
+  Hint_Yield();
+```
