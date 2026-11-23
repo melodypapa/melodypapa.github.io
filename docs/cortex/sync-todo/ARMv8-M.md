@@ -393,7 +393,7 @@ All Part B rows carry ⏸: measure the parse span at S1, and any chapter over ~1
   - S5 result: strict build 0 WARNINGs; `check_indexes.py --root .` OK; `check_heading_lang.py` OK on the article.
   - S6 result: 793 diagrams referenced exactly once and all present; entry numbering continuous 4.1–4.493 (493 entries); C2.4 and Part C are complete.
   - S7 result: covered by the user-approved single-loop run.
-  - S8 result: committed on `feature/armv8m-c2-4-wy` (issue #426; PR number recorded in the follow-up ledger commit, stacked on PR #425 and retargeted to `master` after the upstream PRs merge).
+  - S8 result: committed on `feature/armv8m-c2-4-wy` (issue #426; PR #427, stacked on PR #425 and retargeted to `master` after the upstream PRs merge).
   - [x] plan gate [x] S1 [x] S2 [x] S3 [x] S4 [x] S5 [x] S6 [x] S7 [x] S8
 - [ ] D1 → `armv8-m/part-d/registers_and_payload_specification/` (Register and Payload Specification; PDF pp. 1442–1904, 463 pp; stub exists)
   - Source note: PDF-only — the parse contains no Part D body (its headings exist only as TOC rows). Bookmark-confirmed span: Part D p.1441, D1 p.1442, Part E p.1905.
