@@ -13,7 +13,7 @@ Part B 描述本架构的系统级视图，共 5 章（B1–B5）。下列清单
 5. [CPUID 方案（The CPUID Scheme）](cpuid_scheme/index.md) — Chapter B4，已译。描述 CPUID 方案，它提供标识架构版本与处理器实现诸多特性的寄存器。
 6. [系统指令详情（System Instruction Details）](system_instructions/index.md) — Chapter B5，已译。提供系统级指令的详细参考材料。
 
-B1 全章已译。Part B 的章级进度见 `sync-todo/ARMv7-M.md` 台账。
+B1 全章已译。Part B 的章级进度见 `sync-todo/finished/ARMv7-M.md` 台账。
 
 ## 2. 相关内容
 
