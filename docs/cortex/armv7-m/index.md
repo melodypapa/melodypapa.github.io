@@ -4,7 +4,7 @@ title: "Armv7-M 架构参考手册"
 
 本专题收录《Armv7-M Architecture Reference Manual》(DDI0403E E.e) 中与 Cortex-M7 相关的架构章节中文翻译，按手册原章节顺序排列（Part A 应用程序级模型在前，Part B 系统级程序员模型在后）。
 
-手册共 Part A 7 章（A1–A7）、Part B 5 章（B1–B5）、Part C 1 章（C1）与 Part D 附录 D1–D8。当前收录 Part A 的 A1–A7、Part B 的 B1–B5，以及 Part D 的术语表，共 12 篇；C1 与附录 D1–D8 的目录与章节标题页已建，译文待后续同步。
+手册共 Part A 7 章（A1–A7）、Part B 5 章（B1–B5）、Part C 1 章（C1）与 Part D 附录 D1–D8，全部章节均已译出。本专题收录 21 篇（B1 与 Cortex-M7 TRM 的实现章节合为一篇，见下方相关内容）；整份手册的翻译台账已随全部章节完成归档到 `sync-todo/finished/ARMv7-M.md`。
 
 ## 1. 章节
 
@@ -27,19 +27,19 @@ title: "Armv7-M 架构参考手册"
 
 ### Part C — 调试架构（Debug Architecture）
 
-13. [Armv7-M 调试（Armv7-M Debug）](part-c/debug/index.md)
+12. [Armv7-M 调试（Armv7-M Debug）](part-c/debug/index.md)
 
 ### Part D — 附录（Appendices）
 
-14. [Armv7-M CoreSight 基础设施 ID（Armv7-M CoreSight Infrastructure IDs）](part-d/coresight_infrastructure_ids/index.md)
-15. [遗留指令助记符（Legacy Instruction Mnemonics）](part-d/legacy_instruction_mnemonics/index.md)
-16. [Armv7-M 中的已弃用特性（Deprecated Features in Armv7-M）](part-d/deprecated_features/index.md)
-17. [调试 ITM 与 DWT 包协议（Debug ITM and DWT Packet Protocol）](part-d/debug_itm_and_dwt_packet_protocol/index.md)
-18. [Armv7-R 差异（Armv7-R Differences）](part-d/armv7r_differences/index.md)
-19. [伪代码定义（Pseudocode Definition）](part-d/pseudocode_definition/index.md)
-20. [伪代码索引（Pseudocode Index）](part-d/pseudocode_index/index.md)
-21. [寄存器索引（Register Index）](part-d/register_index/index.md)
-22. [术语表（Glossary）](part-d/glossary/index.md)
+13. [Armv7-M CoreSight 基础设施 ID（Armv7-M CoreSight Infrastructure IDs）](part-d/coresight_infrastructure_ids/index.md)
+14. [遗留指令助记符（Legacy Instruction Mnemonics）](part-d/legacy_instruction_mnemonics/index.md)
+15. [Armv7-M 中的已弃用特性（Deprecated Features in Armv7-M）](part-d/deprecated_features/index.md)
+16. [调试 ITM 与 DWT 包协议（Debug ITM and DWT Packet Protocol）](part-d/debug_itm_and_dwt_packet_protocol/index.md)
+17. [Armv7-R 差异（Armv7-R Differences）](part-d/armv7r_differences/index.md)
+18. [伪代码定义（Pseudocode Definition）](part-d/pseudocode_definition/index.md)
+19. [伪代码索引（Pseudocode Index）](part-d/pseudocode_index/index.md)
+20. [寄存器索引（Register Index）](part-d/register_index/index.md)
+21. [术语表（Glossary）](part-d/glossary/index.md)
 
 ## 2. 相关内容
 
@@ -49,4 +49,4 @@ title: "Armv7-M 架构参考手册"
 - [Cortex-M7 指令集](../m7-trm/instruction_set/index.md) — 实现相关的指令集总结
 - [内存保护单元（Memory Protection Unit）](../m7-trm/mpu/index.md) — 含 B3.5 PMSAv7
 
-未收录的 C1 与附录 D1–D8 的进度见 `sync-todo/ARMv7-M.md` 中的队列。
+全部章节均已译出；整份手册的翻译台账见 `sync-todo/finished/ARMv7-M.md`。
