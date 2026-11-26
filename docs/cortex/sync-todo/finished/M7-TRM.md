@@ -1,4 +1,4 @@
-# Sync todo: Group M7-TRM — DDI0489F Cortex-M7 TRM r1p2 (`reference-docs/arm/cortex-m7/DDI0489F_cortex_m7_trm.md`, 4,934 ln, PDF ✅)
+# Finished: Group M7-TRM — DDI0489F Cortex-M7 TRM r1p2 (`reference-docs/arm/cortex-m7/DDI0489F_cortex_m7_trm.md`, 4,934 ln, PDF ✅)
 
 Generated: 2026-11-04 · Queue order = row order (resume = the first row still `[ ]`)
 Last run: 2026-11-18 — full-document verification against the refreshed parse (queue already complete).

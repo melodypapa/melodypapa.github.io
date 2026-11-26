@@ -16,7 +16,7 @@ Part D 为附录：本手册在此包含一个术语表与下列附录。
 8. [寄存器索引（Register Index）](register_index/index.md) — Appendix D8，按索引列出本手册中的寄存器描述。
 9. [术语表（Glossary）](glossary/index.md) — 本手册所用术语的术语表；不含与伪代码相关的术语。
 
-附录 D1–D8 为参考资料，暂未翻译，见 `sync-todo/ARMv7-M.md` 队列。
+附录 D1–D8 已全部译出；章节进度见 `sync-todo/finished/ARMv7-M.md` 台账。
 
 ## 2. 相关内容
 
